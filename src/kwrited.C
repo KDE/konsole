@@ -1,7 +1,9 @@
 // [kwrited.C] A write(1) receiver for kde.
 
 #include <kapp.h>
+#include <kglobal.h>
 #include <kwrited.h>
+
 #include <TEPty.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -25,6 +27,9 @@
 KWrited::KWrited() : QObject()
 {
   wid = new QMultiLineEdit(NULL,"kwrited");
+  wid->setFont(KGlobal::fixedFont());
+  wid->setMinimumWidth(wid->fontMetrics().maxWidth()*80 + 
+      wid->minimumSizeHint().width());
   wid->setReadOnly(TRUE);
   wid->setFocusPolicy(QWidget::NoFocus);
   pty = new TEPty();
