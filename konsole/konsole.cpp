@@ -1170,9 +1170,9 @@ void Konsole::bookmarks_menu_check()
 
   KAction *addBookmark = actionCollection()->action( "add_bookmark" );
   if ( !addBookmark )
+  {
       return;
-
-  addBookmark->setShortcut( KShortcut() );
+  }
   addBookmark->setEnabled( state );
 }
 

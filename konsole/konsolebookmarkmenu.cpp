@@ -25,6 +25,7 @@ KonsoleBookmarkMenu::KonsoleBookmarkMenu( KBookmarkManager* mgr,
                  parentAddress),
   m_kOwner(_owner)
 {
+    m_bAddShortcuts = false;
     /*
      * First, we disconnect KBookmarkMenu::slotAboutToShow()
      * Then,  we connect    KonsoleBookmarkMenu::slotAboutToShow().
@@ -59,7 +60,6 @@ void KonsoleBookmarkMenu::slotAboutToShow2()
 
 void KonsoleBookmarkMenu::refill()
 {
-  //kdDebug(1203) << "KBookmarkMenu::refill()" << endl;
   m_lstSubMenus.clear();
   QPtrListIterator<KAction> it( m_actions );
   for (; it.current(); ++it )
