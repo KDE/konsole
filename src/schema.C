@@ -509,7 +509,7 @@ bool ColorSchemaList::updateAllSchemaTimes(const QDateTime& now)
 
 		if (!sc)
 		{
-			KONSOLEDEBUG << "Found new schema " << *it << endl;
+//			KONSOLEDEBUG << "Found new schema " << *it << endl;
 
 			ColorSchema *newSchema = new ColorSchema(*it);
 			if (newSchema) 

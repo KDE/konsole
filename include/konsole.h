@@ -184,6 +184,7 @@ private:
   QSize       defaultSize;
 
   const char* pgm;
+  const char* myPgm;
   QStrList    args;
   QRect       _saveGeometry;
 

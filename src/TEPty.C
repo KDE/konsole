@@ -583,8 +583,8 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
      }
 //  for (i = 1; i<args.count(); i++) argv[i-1] = strdup(args.at(i));
 //   kdDebug() << "pgm WAS = " << pgm << endl;
-// //  pgm = strdup(args.at(0));
-//   kdDebug() << "pgm WAS CHANGED TO = " << pgm << endl;
+   //pgm = strdup(args.at(0));
+//  kdDebug() << "pgm WAS CHANGED TO = " << pgm << endl;
 //  kdDebug() << "In TEPty.  first arg is " << argv[0] << endl;
 //  kdDebug() << "In TEPty.  i is " << i << endl;
 //  kdDebug() << "In TEPty.  pgm  is " << pgm << endl;

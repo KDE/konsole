@@ -212,7 +212,8 @@ Konsole::Konsole(const char* name, const char* _pgm,
 ,m_histSize(1000)
 ,b_histEnabled(true)
 {
-  kdDebug() << "pgm = " << pgm << " at startup" << endl;
+  const char * myPgm = pgm;
+  //kdDebug() << "pgm = " << pgm << " at startup" << endl;
   //QTime time;
   //time.start();
   isRestored = b_inRestore;
@@ -737,7 +738,6 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("scrollbar",n_scroll);
   config->writeEntry("keytab",n_keytab);
   config->writeEntry("WarnQuit", b_warnQuit);
-  config->writeEntry("Program", pgm);
 
   if (se) {
     config->writeEntry("history", se->history().getSize());
@@ -819,7 +819,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    // History
    m_histSize = config->readNumEntry("history",1000);
    b_histEnabled = config->readBoolEntry("historyenabled",true);
-   KONSOLEDEBUG << "Hist size : " << m_histSize << endl;
+   //KONSOLEDEBUG << "Hist size : " << m_histSize << endl;
 
    if (m_menuCreated)
    {
@@ -1428,6 +1428,8 @@ TESession *Konsole::newSession(KSimpleConfig *co)
   if (!schema) 
       schema=(ColorSchema*)colors->at(0);  //the default one
   int schmno = schema->numb();
+
+//  if (isRestored) pgm = myPgm;
 
   TESession* s = new TESession(this,te,co ? shell : pgm,cmdArgs,emu);
 //  TESession* s = new TESession(this,te,pgm,cmdArgs,emu);

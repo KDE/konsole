@@ -254,11 +254,18 @@ int main(int argc, char* argv[])
         //wname = sessionconfig->readEntry("class",wname).latin1();
         //shell = "";
         //FIXME If we can just restore the command to a char *, we'd be golden.
-        //shell = sessionconfig->readEntry("Program", shell).latin1();
-        kdDebug() << "shell set to " << shell << endl;
+        sPgm = sessionconfig->readEntry("Pgm0", "failed").latin1();
+        //*cTitle = sPgm;
+        //cTitle+=" : ";
+        const char * myCmd = strdup(sPgm.latin1());
+        //cTitle+=myCmd;
+        //cTitle+=" : ";
+        //kdDebug() << "sPgm equals " << sPgm << endl;
+        //shell = sPgm.latin1();
+        //kdDebug() << "shell set to " << shell << endl;
         sessionconfig->readListEntry("Args0", eargs);
         cTitle+=(sessionconfig->readEntry("Title0", title)).latin1();
-        Konsole *m = new Konsole(wname,shell,eargs,histon,toolbaron,cTitle,type,true);
+        Konsole *m = new Konsole(wname,myCmd,eargs,histon,toolbaron,cTitle,type,true);
         m->restore(n);
         for (int i=1; i < 10000 ; i++) {}
         m->makeGUI();
@@ -278,7 +285,7 @@ int main(int argc, char* argv[])
           sessionconfig->readListEntry(tmpArgs, eargs);
           tmpPgm="Pgm";
           tmpPgm+= (char) (n2+49);
-          sPgm=sTitle=sessionconfig->readEntry(tmpPgm, shell);
+          sPgm=sessionconfig->readEntry(tmpPgm, shell);
           m->setArgs(eargs);
           m->setPgm(sPgm);
 //          QTimer::singleShot(5000,m,SLOT(newSession()));
@@ -292,6 +299,7 @@ int main(int argc, char* argv[])
         //put original args back in place from session 1
         sessionconfig->readListEntry("Args0", eargs);
         m->setArgs(eargs);
+        m->setPgm(myCmd);
         ksm->konsole = m;
         ksm->konsole->initFullScreen();
         // works only for the first one, but there won't be more.
