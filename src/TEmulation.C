@@ -130,7 +130,11 @@ void Emulation::onKeyPress( QKeyEvent* ev )
   if (!connected) return; // someone else gets the keys
   if (scr->getHistCursor() != scr->getHistLines());
     scr->setHistCursor(scr->getHistLines());
-  if (ev->ascii()>0)
+  if (!ev->text().isEmpty())
+  { // A block of text
+    emit sndBlock(ev->text().ascii(),ev->text().length());
+  }
+  else if (ev->ascii()>0)
   { unsigned char c[1]; 
     c[0] = ev->ascii(); 
     emit sndBlock((char*)c,1);

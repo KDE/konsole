@@ -794,7 +794,11 @@ void VT102Emulation::onKeyPress( QKeyEvent* ev )
   {
     reportAnswerBack(); return;
   }
-  if (ev->ascii()>0)
+  if (!ev->text().isEmpty())
+  { // A block of text
+    emit sndBlock(ev->text().ascii(), ev->text().length());
+  }
+  else if (ev->ascii()>0)
   { unsigned char c[1];
     c[0] = ev->ascii();
 //printf("ansi key: "); hexdump(c,1); printf("\n");

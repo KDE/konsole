@@ -710,11 +710,8 @@ void TEWidget::emitSelection()
 { 
     QString text = QApplication::clipboard()->text();
     if ( ! text.isNull() ) {
-	int index = 0;
-	while (text.at(index)) {
-	    QKeyEvent e(QEvent::KeyPress, 0,0,text.at(index++));
-	    emit keyPressedSignal(&e); // expose as keypress event
-	}
+	QKeyEvent e(QEvent::KeyPress, 0,0,0, text);
+	emit keyPressedSignal(&e); // expose as a big fat keypress event
     }
 }
 
