@@ -33,7 +33,7 @@ OTHDIR = $(TOPDIR)/other
 INCLUDES =  -I$(INCDIR) $(all_includes)
 
 # you can add here more. This one gets installed 
-bin_PROGRAMS = 	konsole
+bin_PROGRAMS = 	konsole kcmkonsole
 
 lib_LTLIBRARIES = libkonsole.la
 
@@ -46,12 +46,14 @@ konsole_SOURCES	= main.C
 konsole_LDADD   = libkonsole.la $(LIB_KIMGIO) $(LIB_KDEUI) 
 konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
-#LIBOBJS = TEWidget.lo TEmuVt102.lo TEScreen.lo TEmulation.lo TEShell.lo
+kcmkonsole_SOURCES	= kcmkonsole.C
+kcmkonsole_LDADD   = $(LIB_KIMGIO) $(LIB_KDEUI) 
+kcmkonsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 # the library search path. 
 
 # just to make sure, automake makes them 
-BUILTSOURCES =TEWidget.moc TEmuVt102.moc session.moc main.moc TEmulation.moc TEShell.moc
+BUILTSOURCES =TEWidget.moc TEmuVt102.moc session.moc main.moc TEmulation.moc TEShell.moc kcmkonsole.moc
 
 # use DISTCLEANFILES to remove these only when doing a make distclean.
 CLEANFILES = $(BUILTSOURCES)
@@ -90,3 +92,10 @@ session.C: session.moc
 
 session.moc: $(INCDIR)/session.h
 	$(MOC) $(INCDIR)/session.h -o session.moc
+
+# ---
+
+kcmkonsole.C: kcmkonsole.moc
+
+kcmkonsole.moc: $(INCDIR)/kcmkonsole.h
+	$(MOC) $(INCDIR)/kcmkonsole.h -o kcmkonsole.moc
