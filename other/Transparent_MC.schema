@@ -1,6 +1,6 @@
 # linux color schema for konsole
 
-title Transparent, light background
+title Transparent for MC
 
 transparency 0.35 0 0 0
 
