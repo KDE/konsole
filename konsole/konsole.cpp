@@ -1136,7 +1136,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
    if (config==KGlobal::config())
    {
      b_warnQuit=config->readBoolEntry( "WarnQuit", true );
-     b_allowResize=config->readBoolEntry( "AllowResize", true);
+     b_allowResize=config->readBoolEntry( "AllowResize", false);
 
      s_word_seps= config->readEntry("wordseps",":@-./_~");
      te->setWordCharacters(s_word_seps);
@@ -1147,7 +1147,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
      te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
 
      te->setBlinkingCursor(config->readBoolEntry("BlinkingCursor",false));
-     te->setCtrlDrag(config->readBoolEntry("CtrlDrag",false));
+     te->setCtrlDrag(config->readBoolEntry("CtrlDrag",true));
      te->setCutToBeginningOfLine(config->readBoolEntry("CutToBeginningOfLine",false));
      te->setLineSpacing( config->readUnsignedNumEntry( "LineSpacing", 0 ) );
 
