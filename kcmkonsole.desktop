@@ -1,0 +1,52 @@
+[Desktop Entry]
+Exec=kcmkonsole
+Icon=konsole
+Type=Application
+DocPath=kcontrol/kdmconfig/index.html
+
+X-KDE-ControlModuleType=User
+X-KDE-HideFromPanel=true
+
+Name=Console
+Name[ca]=Consola
+Name[cs]=Konsole
+Name[de]=Konsole
+Name[eo]=Konzolo
+Name[fi]=Konsoli
+Name[hu]=Konzol
+Name[ja]=コンソール
+Name[no]=Konsoll
+Name[no_NY]=Konsoll
+Name[pt]=Consola
+Name[ro]=Consolă
+Name[sl]=Konzola
+Name[sv]=Konsolen
+Name[ta]=¸ðÎôÀ¡ðÎ Ó¨ÉÂõ
+
+Comment=All Konsole Settings
+Comment[ca]=Tot l'arranjament de la consola
+Comment[cs]=Všechna nastavení programu Konsole
+Comment[de]=Alle Einstellungen für die Konsole
+Comment[eo]=Agordaĵo de la Konzolo
+Comment[fi]=Kaikki konsolin asetukset
+Comment[fr]=Configuration de Konsole
+Comment[he]=Konsole לש תורדגהה לכ
+Comment[hu]=Konzol beállítások
+Comment[it]=Tutte le impostazioni di Konsole
+Comment[ja]=Konsoleの全ての設定です
+Comment[no]=Alle Konsoll-instillinger
+Comment[no_NY]=Alle konsoll-innstillingar
+Comment[pt]=Configuração da consola
+Comment[ro]=Configurează programul Consolă
+Comment[sl]=Vse nastavitve konzole
+Comment[sv]=Alla Konsolens inställningar
+Comment[ta]=«¨ÉòÐ Konsole «¨ÁôÒ¸û
+
+Keywords=konsole,console,terminal
+Keywords[ca]=konsole,consola,terminal
+Keywords[hu]=konzol,konsole,terminál
+Keywords[no]=konsole,konsoll,terminal
+Keywords[no_NY]=konsole,konsoll,terminal
+Keywords[pt]=konsole,consola,terminal
+Keywords[ro]=konsole,consolă,consola,terminal
+Keywords[sl]=konsole,konzola,terminal
