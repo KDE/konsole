@@ -55,6 +55,7 @@ public:
   void setFullScreen(bool on);
   void initFullScreen();
   void initSessionSchema(int schemaNo);
+  void initSessionFont(int fontNo);
   void initSessionTitle(const QString &_title);
   void initRenameSession(const QString &_title);
   void newSession(const QString &program, const QStrList &args);
