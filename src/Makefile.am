@@ -46,6 +46,7 @@ kwrited_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 # konsole kdeinit module
 konsole_la_SOURCES = main.C konsole.C
+konsole_la_LIBADD  = libkonsolepart.la
 konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
 
 # konsole executable - has all the sources, doesn't link kparts, saves startup time
