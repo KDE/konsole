@@ -66,7 +66,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
 
   term = _term;
   winId = _winId;
-  iconName = "openterm";
+  iconName = "konsole";
 
   //kdDebug(1211)<<"TESession ctor() sh->setSize()"<<endl;
   sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary

@@ -484,7 +484,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         sessionconfig->readListEntry("Args0", eargs);
         sTitle = sessionconfig->readEntry("Title0", title);
         sTerm = sessionconfig->readEntry("Term0");
-        sIcon = sessionconfig->readEntry("Icon0","openterm");
+        sIcon = sessionconfig->readEntry("Icon0","konsole");
         sCwd = sessionconfig->readPathEntry("Cwd0");
         workDir = sessionconfig->readPathEntry("workdir");
 	n_tabbar = QMIN(sessionconfig->readUnsignedNumEntry("tabbar",Konsole::TabBottom),2);
@@ -525,7 +525,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
           key = QString("Term%1").arg(counter);
           sTerm = sessionconfig->readEntry(key);
           key = QString("Icon%1").arg(counter);
-          sIcon = sessionconfig->readEntry(key,"openterm");
+          sIcon = sessionconfig->readEntry(key,"konsole");
           key = QString("Cwd%1").arg(counter);
           sCwd = sessionconfig->readPathEntry(key);
           m->newSession(sPgm, eargs, sTerm, sIcon, sTitle, sCwd);

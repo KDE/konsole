@@ -2507,7 +2507,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
                             const QString &_title, const QString &_cwd)
 {
   QString emu = "xterm";
-  QString icon = "openterm";
+  QString icon = "konsole";
   QString key;
   QString sch = s_kconfigSchema;
   QString txt;
@@ -3096,7 +3096,7 @@ void Konsole::createSessionMenus()
 {
   KSimpleConfig *cfg = no2command[SESSION_NEW_SHELL_ID];
   QString txt = cfg->readEntry("Name");
-  QString icon = cfg->readEntry("Icon", "openterm");
+  QString icon = cfg->readEntry("Icon", "konsole");
   insertItemSorted(m_tabbarSessionsCommands, SmallIconSet(icon),
                    txt.replace('&',"&&"), SESSION_NEW_SHELL_ID );
 
@@ -3118,7 +3118,7 @@ void Konsole::createSessionMenus()
       continue;
 
     QString txt = (*it).readEntry("Name");
-    QString icon = (*it).readEntry("Icon", "openterm");
+    QString icon = (*it).readEntry("Icon", "konsole");
     insertItemSorted(m_tabbarSessionsCommands, SmallIconSet(icon),
                      txt.replace('&',"&&"), it.currentKey() );
     QString comment = (*it).readEntry("Comment");
@@ -3150,7 +3150,7 @@ void Konsole::addScreenSession(const QString &path, const QString &socket)
   co->writeEntry("Comment", txt);
   co->writePathEntry("Exec", QString::fromLatin1("SCREENDIR=%1 screen -r %2")
     .arg(path).arg(socket));
-  QString icon = "openterm"; // FIXME use another icon (malte)
+  QString icon = "konsole";
   cmd_serial++;
   m_session->insertItem( SmallIconSet( icon ), txt, cmd_serial, cmd_serial - 1 );
   m_tabbarSessionsCommands->insertItem( SmallIconSet( icon ), txt, cmd_serial );
