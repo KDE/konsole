@@ -2586,7 +2586,6 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
      if (co) {
         co->setDesktopGroup();
         QString cmd = co->readPathEntry("Exec");
-
         if (!cmd.isEmpty()) {
           cmdArgs.append("-c");
           cmdArgs.append(QFile::encodeName(cmd));
@@ -3068,6 +3067,7 @@ void Konsole::addSessionCommand(const QString &path)
      exec = exec.mid(7,exec.length()-8);
   }
 
+  exec = exec.replace( "~", QDir::homeDirPath() );
   exec = KRun::binaryName(exec, false);
   QString pexec = KGlobal::dirs()->findExe(exec);
   if (typ.isEmpty() || txt.isEmpty() || typ != "KonsoleApplication"
