@@ -76,6 +76,7 @@ public:
   void setAutoClose(bool on);
   void initFullScreen();
   void initSessionFont(int fontNo);
+  void initSessionFont(QFont f);
   void initSessionKeyTab(const QString &keyTab);
   void initMonitorActivity(bool on);
   void initMonitorSilence(bool on);
@@ -181,7 +182,7 @@ private slots:
   void slotSaveHistory();
   void slotSelectBell();
   void slotSelectSize();
-  void slotSelectFont();
+  void slotSelectFont(int);
   void slotSelectScrollbar();
   void loadScreenSessions();
   void updateFullScreen(bool on);
@@ -203,7 +204,6 @@ private slots:
   void slotFindNext();
   void slotFindPrevious();
 
-  void fontNotFound();
   void showTip();
 
   void slotSetSelectionEnd() { te->setSelectionEnd(); }
@@ -253,7 +253,6 @@ private:
   void renameSession(TESession* ses);
 
   void setSchema(ColorSchema* s, TEWidget* tewidget=0);
-  void setFont(int fontno=-1);
   void setMasterMode(bool _state, TESession* _se=0);
 
   void buildSessionMenus();

@@ -99,6 +99,7 @@ public:
     void setSelection(const QString &t);
 
     virtual void setFont(const QFont &);
+    QFont getVTFont() { return font(); }
     void setVTFont(const QFont &);
 
     void setMouseMarks(bool on);
@@ -301,7 +302,7 @@ private:
     bool m_isIMSel;
 
     QRgb blend_color;
-    
+ 
 private slots:
     void drop_menu_activated(int item);
     void swapColorTable();

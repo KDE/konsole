@@ -29,6 +29,7 @@
 #include <kimageio.h>
 #include <kdebug.h>
 #include <kstandarddirs.h>
+#include <kglobalsettings.h>
 
 #include <config.h>
 
@@ -500,7 +501,9 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         m->makeGUI();
         m->setEncoding(sessionconfig->readNumEntry("Encoding0"));
         m->setSchema(sessionconfig->readEntry("Schema0"));
-        m->initSessionFont(sessionconfig->readNumEntry("Font0", -1));
+        // Use konsolerc default as tmpFont instead?
+        QFont tmpFont = KGlobalSettings::fixedFont();
+        m->initSessionFont(sessionconfig->readFontEntry("SessionFont0", &tmpFont));
         m->initSessionKeyTab(sessionconfig->readEntry("KeyTab0"));
         m->initMonitorActivity(sessionconfig->readBoolEntry("MonitorActivity0",false));
         m->initMonitorSilence(sessionconfig->readBoolEntry("MonitorSilence0",false));
@@ -530,8 +533,9 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
           m->setSchema(sessionconfig->readEntry(key));
           key = QString("Encoding%1").arg(counter);
           m->setEncoding(sessionconfig->readNumEntry(key));
-          key = QString("Font%1").arg(counter);
-          m->initSessionFont(sessionconfig->readNumEntry(key, -1));
+          key = QString("SessionFont%1").arg(counter);
+          QFont tmpFont = KGlobalSettings::fixedFont();
+          m->initSessionFont(sessionconfig->readFontEntry(key, &tmpFont));
           key = QString("KeyTab%1").arg(counter);
           m->initSessionKeyTab(sessionconfig->readEntry(key));
           key = QString("MonitorActivity%1").arg(counter);

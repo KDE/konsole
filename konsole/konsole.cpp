@@ -171,20 +171,6 @@ template class QPtrDict<TESession>;
 template class QIntDict<KSimpleConfig>;
 template class QPtrDict<KRadioAction>;
 
-
-static const char * const fonts[] = {
- "13",
- "7",   // tiny font, never used
- "10",  // small font
- "13",  // medium
- "15",  // large
- "20", // huge
- "-misc-console-medium-r-normal--16-160-72-72-c-80-iso10646-1", // "Linux"
- "-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1",    // "Unicode"
- };
-#define TOPFONT (sizeof(fonts)/sizeof(char*))
-#define DEFAULTFONT TOPFONT
-
 #define DEFAULT_HISTORY_SIZE 1000
 
 Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bool frameon, bool scrollbaron,
@@ -346,7 +332,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
   }
 
   //KONSOLEDEBUG<<"Konsole ctor() ends "<<time.elapsed()<<" msecs elapsed"<<endl;
-  connect(kapp, SIGNAL(kdisplayFontChanged()), this, SLOT(slotFontChanged()));
+//  connect(kapp, SIGNAL(kdisplayFontChanged()), this, SLOT(slotFontChanged()));
 
   kapp->dcopClient()->setDefaultObject( "konsole" );
 }
@@ -616,23 +602,15 @@ void Konsole::makeGUI()
       selectBell->setItems(bellitems);
       selectBell->plug(m_options);
 
-      // Select font
-      selectFont = new KonsoleFontSelectAction( i18n( "&Font" ),
-          SmallIconSet( "text" ), 0, this, SLOT(slotSelectFont()), actions, "font");
-      QStringList it;
-      it << i18n("&Normal")
-         << i18n("&Tiny")
-         << i18n("&Small")
-         << i18n("&Medium")
-         << i18n("&Large")
-         << i18n("&Huge")
-         << ""
-         << i18n("L&inux")
-         << i18n("&Unicode")
-         << ""
-         << i18n("&Custom...");
-      selectFont->setItems(it);
-      selectFont->plug(m_options);
+
+      KPopupMenu* m_fontsizes = new KPopupMenu(this);
+      m_fontsizes->insertItem( SmallIconSet( "viewmag+" ), i18n( "&Enlarge Font" ), 0 );
+      m_fontsizes->insertItem( SmallIconSet( "viewmag-" ), i18n( "&Shrink Font" ), 1 );
+      m_fontsizes->insertSeparator( );
+      m_fontsizes->insertItem( SmallIconSet( "font" ), i18n( "Se&lect..." ), 3 );
+      m_options->insertItem( SmallIconSet( "text" ), i18n("Font"), m_fontsizes );
+      connect(m_fontsizes, SIGNAL(activated(int)), SLOT(slotSelectFont(int)));
+
 
       // encoding menu, start with default checked !
       selectSetEncoding = new KSelectAction( i18n( "&Encoding" ), SmallIconSet( "charset" ), 0, this, SLOT(slotSetEncoding()), actions, "set_encoding" );
@@ -1111,8 +1089,8 @@ void Konsole::makeBasicGUI()
      new KAction(i18n("Switch to Session %1").arg(i), 0, this, SLOT(switchToSession()), m_shortcuts, QString().sprintf("switch_to_session_%02d", i).latin1());
   }
 
-  new KAction(i18n("Bigger Font"), 0, this, SLOT(biggerFont()), m_shortcuts, "bigger_font");
-  new KAction(i18n("Smaller Font"), 0, this, SLOT(smallerFont()), m_shortcuts, "smaller_font");
+  new KAction(i18n("Enlarge Font"), 0, this, SLOT(biggerFont()), m_shortcuts, "bigger_font");
+  new KAction(i18n("Shrink Font"), 0, this, SLOT(smallerFont()), m_shortcuts, "smaller_font");
 
   new KAction(i18n("Toggle Bidi"), Qt::CTRL+Qt::ALT+Qt::Key_B, this, SLOT(toggleBidi()), m_shortcuts, "toggle_bidi");
 
@@ -1414,8 +1392,8 @@ void Konsole::saveProperties(KConfig* config) {
         config->writeEntry(key, sessions.current()->getArgs());
         key = QString("Pgm%1").arg(counter);
         config->writeEntry(key, sessions.current()->getPgm());
-        key = QString("Font%1").arg(counter);
-        config->writeEntry(key, sessions.current()->fontNo());
+        key = QString("SessionFont%1").arg(counter);
+        config->writeEntry(key, (sessions.current()->widget())->getVTFont());
         key = QString("Term%1").arg(counter);
         config->writeEntry(key, sessions.current()->Term());
         key = QString("KeyTab%1").arg(counter);
@@ -1446,8 +1424,7 @@ void Konsole::saveProperties(KConfig* config) {
      config->setDesktopGroup();
   }
   config->writeEntry("Fullscreen",b_fullscreen);
-  config->writeEntry("font",n_defaultFont);
-  config->writeEntry("defaultfont", defaultFont);
+  config->writeEntry("defaultfont", (se->widget())->getVTFont());
   config->writeEntry("schema",s_kconfigSchema);
   config->writeEntry("scrollbar",n_scroll);
   config->writeEntry("tabbar",n_tabbar);
@@ -1526,7 +1503,6 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
    {
       n_defaultKeytab=KeyTrans::find(config->readEntry("keytab","default"))->numb(); // act. the keytab for this session
       b_fullscreen = config->readBoolEntry("Fullscreen",false);
-      n_defaultFont = n_font = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
       n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
       n_tabbar   = QMIN(config->readUnsignedNumEntry("tabbar",TabBottom),2);
       n_bell = QMIN(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),3);
@@ -1534,7 +1510,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       // Options that should be applied to all sessions /////////////
 
       // (1) set menu items and Konsole members
-      // TODO: Use font size in fixedFont()
+
       QFont tmpFont = KGlobalSettings::fixedFont();
       defaultFont = config->readFontEntry("defaultfont", &tmpFont);
 
@@ -1569,7 +1545,6 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
            pixmap_menu_activated(sch->alignment());
         }
 
-        setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT));
         te->setColorTable(sch->table()); //FIXME: set twice here to work around a bug
         te->setColorTable(sch->table());
         te->setScrollbarLocation(n_scroll);
@@ -1599,7 +1574,7 @@ void Konsole::applySettingsToGUI()
    if (!m_menuCreated) return;
    if (m_options)
    {
-      setFont();
+//      setFont();
       notifySize(te->Lines(),te->Columns());
       selectTabbar->setCurrentItem(n_tabbar);
       showMenubar->setChecked(!menuBar()->isHidden());
@@ -1692,25 +1667,22 @@ void Konsole::slotSelectScrollbar() {
    activateSession(); // maybe helps in bg
 }
 
-void Konsole::slotSelectFont() {
-  assert(se);
-  int item = selectFont->currentItem();
-  if( item > 9 ) // compensate for the two separators
-      --item;
-  if( item > 6 )
-      --item;
-  // KONSOLEDEBUG << "slotSelectFont " << item << endl;
-  if (item == DEFAULTFONT)
-  {
-    if ( KFontDialog::getFont(defaultFont, true) == QDialog::Rejected )
-    {
-      setFont();
-      return;
-    }
-  }
-  setFont(item);
-  n_defaultFont = n_font; // This is the new default
-  activateSession(); // activates the current
+void Konsole::slotSelectFont( int option ) {
+   if ( !se ) return;
+
+   if ( option == 0 )            // Enlarge
+      biggerFont();
+   else if ( option == 1 )       // Shrink
+      smallerFont();
+   else {                        // Select Font...
+
+      QFont font = se->widget()->getVTFont();
+      if ( KFontDialog::getFont( font, true ) != QDialog::Accepted )
+         return;
+
+      se->widget()->setVTFont( font );
+   }
+//  activateSession(); // activates the current
 }
 
 void Konsole::schema_menu_activated(int item)
@@ -1774,66 +1746,6 @@ void Konsole::keytab_menu_activated(int item)
   se->setKeymapNo(item);
   n_defaultKeytab = item;
   updateKeytabMenu();
-}
-
-void Konsole::setFont(int fontno)
-{
-  if (fontno == -1)
-  {
-    fontno = n_font;
-  }
-  else if (fontno == DEFAULTFONT)
-  {
-    te->setVTFont(defaultFont);
-  }
-  else if (fonts[fontno][0] == '-')
-  {
-    QFont f;
-    f.setRawName( fonts[fontno] );
-    f.setFixedPitch(true);
-    f.setStyleHint(QFont::TypeWriter);
-    if ( !f.exactMatch() && fontno != DEFAULTFONT)
-    {
-      // Ugly hack to prevent bug #20487
-      fontNotFound_par=fonts[fontno];
-      QTimer::singleShot(1,this,SLOT(fontNotFound()));
-      return;
-    }
-    te->setVTFont(f);
-  }
-  else
-  {
-    QFont f = KGlobalSettings::fixedFont();
-    f.setPixelSize(QString(fonts[fontno]).toInt());
-    te->setVTFont(f);
-  }
-
-  if (se) se->setFontNo(fontno);
-
-  if (selectFont)
-  {
-     QStringList items = selectFont->items();
-     int i = fontno;
-     int j = 0;
-     for(;j < (int)items.count();j++)
-     {
-       if (!items[j].isEmpty())
-          if (!i--)
-             break;
-     }
-     selectFont->setCurrentItem(j);
-  }
-
-  n_font = fontno;
-}
-
-void Konsole::fontNotFound()
-{
-  static bool showMessage = true;
-  if (!showMessage) return;
-  showMessage = false;
-  QString msg = i18n("Font `%1' not found.\nCheck README.linux.console for help.").arg(fontNotFound_par);
-  KMessageBox::error(this,  msg);
 }
 
 /**
@@ -2117,9 +2029,8 @@ void Konsole::updateTitle()
     ra->setIcon(icon);
 }
 
-void Konsole::initSessionFont(int fontNo) {
-  if (fontNo == -1) return; // Don't change
-  setFont(fontNo);
+void Konsole::initSessionFont(QFont font) {
+  te->setVTFont( font );
 }
 
 void Konsole::initSessionKeyTab(const QString &keyTab) {
@@ -2465,7 +2376,6 @@ void Konsole::activateSession(TESession *s)
   te = se->widget();
   if (m_menuCreated) {
     selectBell->setCurrentItem(te->bellMode());
-    setFont(se->fontNo());
     updateSchemaMenu();
   }
 
@@ -2641,7 +2551,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
   QString sch = s_kconfigSchema;
   QString txt;
   QString cwd;
-  unsigned int     fno = n_defaultFont;
+  QFont font = KGlobalSettings::fixedFont(); // Use defaultfont instead?
   QStrList cmdArgs;
 
   if (co) {
@@ -2650,7 +2560,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
      key = co->readEntry("KeyTab", key);
      sch = co->readEntry("Schema", sch);
      txt = co->readEntry("Name");
-     fno = co->readUnsignedNumEntry("Font", fno);
+     font = co->readFontEntry("SessionFont", &font);
      icon = co->readEntry("Icon", icon);
      cwd = co->readPathEntry("Cwd");
   }
@@ -2707,7 +2617,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
   }
   else {
     readProperties(KGlobal::config(), "", true);
-    setFont(QMIN(fno, TOPFONT));
+    te->setVTFont(font);
     te->setScrollbarLocation(n_scroll);
     te->setBellMode(n_bell);
   }
@@ -2748,7 +2658,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
   connect( s, SIGNAL(setSessionSchema(TESession*, const QString &)),
            this, SLOT(slotSetSessionSchema(TESession*, const QString &)));
 
-  s->setFontNo(QMIN(fno, TOPFONT));
+  s->widget()->setVTFont(defaultFont);// Hack to set font again after newSession
   s->setSchemaNo(schmno);
   if (key.isEmpty())
     s->setKeymapNo(n_defaultKeytab);
@@ -4016,38 +3926,37 @@ bool KonsoleFind::reg_exp() const
 }
 
 ///////////////////////////////////////////////////////////
-
+// This was to apply changes made to KControl fixed font to all TEs...
+//  kvh - 03/10/2005 - We don't do this anymore...
 void Konsole::slotFontChanged()
 {
   TEWidget *oldTe = te;
   QPtrList<TEWidget> tes = activeTEs();
   for (TEWidget *_te = tes.first(); _te; _te = tes.next()) {
     te = _te;
-    setFont(n_font);
+//    setFont(n_font);
   }
   te = oldTe;
 }
 
 void Konsole::biggerFont(void) {
-    assert(se);
-    if (defaultFont.pixelSize() == -1)
-        defaultFont.setPointSize( defaultFont.pointSize() + 1);
-    else
-        defaultFont.setPixelSize( defaultFont.pixelSize() + 2 );
-    setFont( DEFAULTFONT );
+    if ( !se ) return;
+
+    QFont f = te->getVTFont();
+    f.setPointSize( f.pointSize() + 1 );
+    te->setVTFont( f );
     activateSession();
 }
 
 void Konsole::smallerFont(void) {
-    assert(se);
-    if (defaultFont.pixelSize() == -1)
-        defaultFont.setPointSize( defaultFont.pointSize() - 1);
-    else
-        defaultFont.setPixelSize( defaultFont.pixelSize() - 2 );
-    setFont( DEFAULTFONT );
+    if ( !se ) return;
+
+    QFont f = te->getVTFont();
+    if ( f.pointSize() < 6 ) return;      // A minimum size
+    f.setPointSize( f.pointSize() - 1 );
+    te->setVTFont( f );
     activateSession();
 }
-
 
 bool Konsole::processDynamic(const QCString &fun, const QByteArray &data, QCString& replyType, QByteArray &replyData)
 {
