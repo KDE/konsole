@@ -15,10 +15,8 @@ OTHDIR = $(TOPDIR)/other
 INCLUDES =  -I$(INCDIR) $(all_includes)
 
 # you can add here more. This one gets installed
-bin_PROGRAMS = 	konsole
-#bin_PROGRAMS = 	konsole konsole_grantpty kwrited #kcmkonsole
-lib_LTLIBRARIES = libkonsolepart.la konsole.la
-#lib_LTLIBRARIES = libkonsolepart.la kwrited.la konsole.la
+bin_PROGRAMS = 	konsole konsole_grantpty kwrited #kcmkonsole
+lib_LTLIBRARIES = libkonsolepart.la kwrited.la konsole.la
 # libkonsolepart is a part, but konsole.la links directly to it, so we can't
 # install it under kde_module
 
@@ -38,13 +36,13 @@ libkonsolepart_la_LIBADD = $(LIB_KPARTS) $(LIBUTEMPTER) $(LIBUTIL)
 
 # Which sources should be compiled for konsole.
 
-#kwrited_la_SOURCES = kwrited.C
-#kwrited_la_LIBADD  = libkonsolepart.la
-#kwrited_la_LDFLAGS = $(all_libraries) -module -avoid-version
+kwrited_la_SOURCES = kwrited.C
+kwrited_la_LIBADD  = libkonsolepart.la
+kwrited_la_LDFLAGS = $(all_libraries) -module -avoid-version
 
-#kwrited_SOURCES	= dummy.C
-#kwrited_LDADD   = kwrited.la 
-#kwrited_LDFLAGS = $(all_libraries) $(KDE_RPATH)
+kwrited_SOURCES	= dummy.C
+kwrited_LDADD   = kwrited.la 
+kwrited_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 konsole_la_SOURCES = main.C konsole.C
 konsole_la_LIBADD  = libkonsolepart.la
@@ -58,8 +56,8 @@ konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 # kcmkonsole_LDADD   = $(LIB_KDEUI)
 # kcmkonsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
-#konsole_grantpty_SOURCES = konsole_grantpty.c
-#konsole_grantpty_LDFLAGS = $(KDE_RPATH)
+konsole_grantpty_SOURCES = konsole_grantpty.c
+konsole_grantpty_LDFLAGS = $(KDE_RPATH)
 
 install-data-local:
 	@echo ""
