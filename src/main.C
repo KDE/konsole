@@ -180,10 +180,10 @@ int main(int argc, char* argv[])
     title=args->getOption("title");
     }
 
-  QCString type = NULL;
+  QCString type = "";
 
-  if(args->isSet("type") {
-    args->getOption("type");
+  if(args->isSet("type")) {
+    type = args->getOption("type");
   }
 
   //FIXME: more: font, menu, scrollbar, schema, session ...
