@@ -16,8 +16,6 @@
     along with this library; see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
     Boston, MA 02111-1307, USA.
-
-    gofai.cpp - Good Old Fashioned Artificial Intelligence With a Modern Twist
  */
 
 #ifndef __KONSOLE_PART_H__
@@ -25,13 +23,20 @@
 
 #include <kparts/browserextension.h>
 #include <kparts/factory.h>
+
+#include <qcheckbox.h>
+#include <qspinbox.h>
+
 #include <kaction.h>
-#include <konsole.h>
+#include <kconfig.h>
+#include <kdialogbase.h>
+#include <kpopupmenu.h>
+#include <krootpixmap.h>
+
+#include "schema.h"
+#include "session.h"
 
 class KInstance;
-class konsoleBrowserExtension;
-class QLabel;
-class TESession;
 
 class konsoleFactory : public KParts::Factory
 {
@@ -52,6 +57,8 @@ public:
     static KAboutData *s_aboutData;
 };
 
+//////////////////////////////////////////////////////////////////////
+
 class konsolePart: public KParts::ReadOnlyPart
 {
     Q_OBJECT
@@ -62,40 +69,106 @@ class konsolePart: public KParts::ReadOnlyPart
  protected:
     virtual bool openURL( const KURL & url );
     virtual bool openFile() {return false;} // never used
-    virtual bool closeURL();
+    virtual bool closeURL() {return true;}
 
  protected slots:
-      void slotNew();
-      void slotSaveFile();
-      void slotLoadFile();
+    void doneSession(TESession*,int);
+    void sessionDestroyed();
+    void configureRequest(TEWidget*,int,int x,int y);
 
-      void doneSession(TESession*,int);
-      void sessionDestroyed();
-      void configureRequest(TEWidget*,int,int x,int y);
+ private slots:
+    void readProperties();
+    void saveProperties();
+
+    void slotSendRMBclick();
+    void sendSignal(int n);
+    void closeCurrentSession();
+
+    void slotToggleFrame();
+    void slotSelectScrollbar();
+    void slotSelectFont();
+    void schema_menu_check();
+    void keytab_menu_activated(int item);
+    void updateSchemaMenu();
+    void setSchema(int n);
+    void pixmap_menu_activated(int item);
+    void schema_menu_activated(int item);
+    void slotHistoryType();
+    void slotSelectBell();
+    void slotSelectLineSpacing();
+    void slotBlinkingCursor();
+    void slotWordSeps();
 
  private:
-    QLabel *widget;
-    //    Konsole *kons;
-    TEWidget *te;
-    TESession *initial;
-    konsoleBrowserExtension *m_extension;
-    /*
-    KAction *m_NewAction;
-    KAction *m_SaveAction;
-    KAction *m_LoadAction;
-    KAction *m_TestDialogAction;
-    KAction *m_ZoomInAction;
-    KAction *m_ZoomOutAction;
-    */
+    void makeGUI();
+    void applySettingsToGUI();
+
+    void setFont(int fontno);
+    void setSchema(ColorSchema* s);
+    void updateKeytabMenu();
+
+    QWidget* parentWidget;
+    TEWidget* te;
+    TESession* se;
+    ColorSchemaList* colors;
+    KRootPixmap* rootxpm;
+
+    KToggleAction* blinkingCursor;
+    KToggleAction* showFrame;
+
+    KSelectAction* selectBell;
+    KSelectAction* selectFont;
+    KSelectAction* selectLineSpacing;
+    KSelectAction* selectScrollbar;
+
+    KPopupMenu* m_keytab;
+    KPopupMenu* m_schema;
+    KPopupMenu* m_signals;
+    KPopupMenu* m_options;
+    KPopupMenu* m_popupMenu;
+
+    QFont       defaultFont;
+
+    QString     pmPath; // pixmap path
+    QString     s_schema;
+    QString     s_kconfigSchema;
+    QString     s_word_seps;			// characters that are considered part of a word
+
+    bool        b_framevis:1;
+    bool        b_histEnabled:1;
+
+    int         curr_schema; // current schema no
+    int         n_bell;
+    int         n_font;
+    int         n_keytab;
+    int         n_render;
+    int         n_scroll;
+    unsigned    m_histSize;
+
+    int         sendRMBclickAtX;
+    int         sendRMBclickAtY;
 };
 
-class konsoleBrowserExtension : public KParts::BrowserExtension
+//////////////////////////////////////////////////////////////////////
+
+class HistoryTypeDialog : public KDialogBase
 {
     Q_OBJECT
-	friend class konsolePart;
- public:
-    konsoleBrowserExtension(konsolePart *parent);
-    virtual ~konsoleBrowserExtension();
+public:
+  HistoryTypeDialog(const HistoryType& histType,
+                    unsigned int histSize,
+                    QWidget *parent);
+
+public slots:
+  void slotDefault();
+  void slotHistEnable(bool);
+
+  unsigned int nbLines() const;
+  bool isOn() const;
+
+protected:
+  QCheckBox* m_btnEnable;
+  QSpinBox*  m_size;
 };
 
 #endif
