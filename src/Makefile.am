@@ -20,9 +20,7 @@ INCLUDES =  -I$(INCDIR) $(all_includes)
 
 # you can add here more. This one gets installed
 bin_PROGRAMS = 	konsole konsole_grantpty kwrited #kcmkonsole
-lib_LTLIBRARIES = kwrited.la konsole.la
-
-noinst_LTLIBRARIES = libkonsolepart.la
+lib_LTLIBRARIES = kwrited.la konsole.la libkonsolepart.la
 
 libkonsolepart_la_SOURCES =konsole.C \
 	schema.C \
@@ -36,15 +34,13 @@ libkonsolepart_la_SOURCES =konsole.C \
 	keytrans.C \
         konsole_part.C
 
-libkonsolepart_la_LDFLAGS = -no-undefined $(all_libraries) -version-info 1:0:0 
-# -version-info `expr $(VERSION) + $(SUBVERS)`:$(RELEASE):$(SUBVERS)
-
+libkonsolepart_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN)
 libkonsolepart_la_LIBADD = $(LIB_KDEUI) $(LIBUTEMPTER) -lkparts
 
 # Which sources should be compiled for konsole.
 
 kwrited_la_SOURCES = kwrited.C
-kwrited_la_LIBADD  = libkonsole.la
+kwrited_la_LIBADD  = libkonsolepart.la
 kwrited_la_LDFLAGS = $(all_libraries) -module -avoid-version
 
 kwrited_SOURCES	= dummy.C
@@ -55,8 +51,8 @@ konsole_la_SOURCES = main.C
 konsole_la_LIBADD  = libkonsolepart.la
 konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
 
-konsole_SOURCES	= main.C 
-konsole_LDADD   = libkonsolepart.la
+konsole_SOURCES	= dummy.C 
+konsole_LDADD   = konsole.la
 konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 # kcmkonsole_SOURCES = kcmkonsole.C schema.C
