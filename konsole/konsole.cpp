@@ -2756,10 +2756,8 @@ void Konsole::setMasterMode(bool _state, TESession* _se)
     return;
 
   _se->setMasterMode(_state);
-  if (se) {
-    _se = se;
+  if (_se == se)
     masterMode->setChecked(_state);
-  }
 
   if(_state)
     for (TESession *ses = sessions.first(); ses; ses = sessions.next())
