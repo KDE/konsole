@@ -191,8 +191,8 @@ private slots:
   void switchToSession11() { activateSession(11); }
   void switchToSession12() { activateSession(12); }
 
-  void biggerFonts();
-  void smallerFonts();
+  void biggerFont();
+  void smallerFont();
 
 private:
   KSimpleConfig *defaultSession();

@@ -644,8 +644,8 @@ void Konsole::makeGUI()
    new KAction(i18n("Switch to Session 11"), 0, this, SLOT(switchToSession11()), m_shortcuts, "switch_to_session_11");
    new KAction(i18n("Switch to Session 12"), 0, this, SLOT(switchToSession12()), m_shortcuts, "switch_to_session_12");
 
-   new KAction(i18n("Bigger Fonts"), 0, this, SLOT(biggerFonts()), m_shortcuts, "bigger_fonts");
-   new KAction(i18n("Smaller Fonts"), 0, this, SLOT(smallerFonts()), m_shortcuts, "smaller_fonts");
+   new KAction(i18n("Bigger Font"), 0, this, SLOT(biggerFont()), m_shortcuts, "bigger_font");
+   new KAction(i18n("Smaller Font"), 0, this, SLOT(smallerFont()), m_shortcuts, "smaller_font");
 
    m_shortcuts->readShortcutSettings();
 };
@@ -667,11 +667,10 @@ void Konsole::makeBasicGUI()
   m_view = new KPopupMenu(this);
   bookmarkHandler = new KonsoleBookmarkHandler( this, true );
   m_bookmarks = bookmarkHandler->menu();
-
   // call manually to disable accelerator c-b for add-bookmark initially.
   bookmarks_menu_check();
-
-  m_options = new KPopupMenu(this,"attack");
+  
+  m_options = new KPopupMenu(this);
   m_help =  helpMenu(0, false);
 
   m_rightButton = new KPopupMenu(this);
@@ -884,7 +883,7 @@ void Konsole::configureRequest(TEWidget* te, int state, int x, int y)
 
 void Konsole::slotSaveSessionsProfile()
 {
-  KLineEditDlg dlg(i18n("Enter name under which the profile should be saved:"),"", this);
+  KLineEditDlg dlg(i18n("Enter name under which the profile should be saved:"), QString::null, this);
   dlg.setCaption(i18n("Save Sessions Profile"));
   if (dlg.exec()) {
     QString path = locateLocal( "data", QString::fromLatin1( "konsole/profiles/" ) +
@@ -2491,7 +2490,7 @@ void Konsole::slotRenameSession() {
 //  KONSOLEDEBUG << "slotRenameSession\n";
   KRadioAction *ra = session2action.find(se);
   QString name = se->Title();
-  KLineEditDlg dlg(i18n("Session name"),name, this);
+  KLineEditDlg dlg(i18n("Session name:"),name, this);
   dlg.setCaption(i18n("Rename Session"));
   if (dlg.exec()) {
     se->setTitle(dlg.text());
@@ -2925,7 +2924,7 @@ void Konsole::currentDesktopChanged(int desk) {
 
 ///////////////////////////////////////////////////////////
 
-void Konsole::biggerFonts(void) {
+void Konsole::biggerFont(void) {
     assert(se);
     if (defaultFont.pixelSize() == -1)
         defaultFont.setPointSize( defaultFont.pointSize() + 1);
@@ -2935,7 +2934,7 @@ void Konsole::biggerFonts(void) {
     activateSession();
 }
 
-void Konsole::smallerFonts(void) {
+void Konsole::smallerFont(void) {
     assert(se);
     if (defaultFont.pixelSize() == -1)
         defaultFont.setPointSize( defaultFont.pointSize() - 1);
