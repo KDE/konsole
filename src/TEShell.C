@@ -84,6 +84,7 @@
 #include <signal.h>
 #include <qintdict.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
 
 #include "TEShell.h"
 #include "TEShell.moc"
