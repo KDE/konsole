@@ -180,6 +180,7 @@ private:
   int         n_scroll;
   int         n_render;
   int         curr_schema; // current schema no
+  int         noticedBackgroundChangeOnDesktop;
   QString     s_schema;
   QString     s_kconfigSchema;
   QString     s_word_seps;			// characters that are considered part of a word
@@ -196,7 +197,6 @@ private:
   bool        m_menuCreated:1;
   bool        skip_exit_query:1;
   bool        b_warnQuit:1;
-  bool        alreadyNoticedBackgroundChange_:1;
   bool        isRestored;
   bool        wasRestored;
 
