@@ -305,7 +305,6 @@ Konsole::Konsole(const char* name, const char* _pgm,
   connect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
   connect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
 
-  isRestored = false;
   //KONSOLEDEBUG<<"Konsole ctor() ends "<<time.elapsed()<<" msecs elapsed"<<endl;
   //KONSOLEDEBUG<<"Konsole ctor(): done"<<endl;
 }
@@ -540,6 +539,7 @@ void Konsole::makeGUI()
       m_keytab->insertItem(ktr->hdr(),ktr->numb());
    }
    applySettingsToGUI();
+   isRestored = false;
 };
 
 void Konsole::makeBasicGUI()
