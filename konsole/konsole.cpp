@@ -240,6 +240,7 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 ,monitorSilenceSeconds(10)
 ,s_kconfigSchema("")
 ,m_tabViewMode(ShowIconAndText)
+,b_dynamicTabHide(false)
 ,b_fullscreen(false)
 ,m_menuCreated(false)
 ,skip_exit_query(false) // used to skip the query when closed by the session management
@@ -301,10 +302,6 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
   if (n_tabbar!=TabNone) {
     makeTabWidget();
     setCentralWidget(tabwidget);
-    if (n_tabbar==TabTop)
-      tabwidget->setTabPosition(QTabWidget::Top);
-    else
-      tabwidget->setTabPosition(QTabWidget::Bottom);
   }
   else {
     // create terminal emulation framework ////////////////////////////////////
@@ -849,12 +846,22 @@ void Konsole::makeGUI()
    viewOptions->plug(m_tabbarPopupMenu);
    connect(viewOptions, SIGNAL(activated(int)), this, SLOT(slotTabSetViewOptions(int)));
    slotTabSetViewOptions(m_tabViewMode);
+
+   KToggleAction *dynamicTabHideOption = new KToggleAction ( i18n( "Dynamic Hide" ), 0, this,
+                                       SLOT( slotTabbarToggleDynamicHide() ), this);
+   dynamicTabHideOption->setChecked(b_dynamicTabHide);
+   dynamicTabHideOption->plug(m_tabbarPopupMenu);
  }
 
 void Konsole::makeTabWidget()
 {
   tabwidget = new KTabWidget(this);
   tabwidget->setTabReorderingEnabled(true);
+  if (n_tabbar==TabTop)
+    tabwidget->setTabPosition(QTabWidget::Top);
+  else
+    tabwidget->setTabPosition(QTabWidget::Bottom);
+
   connect(tabwidget, SIGNAL(movedTab(int,int)), SLOT(slotMovedTab(int,int)));
   connect(tabwidget, SIGNAL(mouseDoubleClick(QWidget*)), SLOT(slotRenameSession()));
   connect(tabwidget, SIGNAL(currentChanged(QWidget*)), SLOT(activateSession(QWidget*)));
@@ -865,6 +872,7 @@ void Konsole::makeTabWidget()
 
   if (kapp->authorize("shell_access")) {
     QToolButton* newsession = new QToolButton( tabwidget );
+//    // Looks kind of broken with most styles?
 //    newsession->setTextLabel("New");
 //    newsession->setTextPosition(QToolButton::Right);
 //    newsession->setUsesTextLabel(true);
@@ -1241,6 +1249,13 @@ void Konsole::slotTabSetViewOptions(int mode)
   }
 }
 
+void Konsole::slotTabbarToggleDynamicHide()
+{
+  b_dynamicTabHide=!b_dynamicTabHide;
+  if (tabwidget->count()==1)
+    switchToFlat();
+}
+
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /* Configuration                                                             */
@@ -1329,6 +1344,7 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("ActiveSession", active);
   config->writeEntry("DefaultSession", m_defaultSessionFilename);
   config->writeEntry("TabViewMode", int(m_tabViewMode));
+  config->writeEntry("DynamicTabHide", int(b_dynamicTabHide));
 
   if (se) {
     config->writeEntry("history", se->history().getSize());
@@ -1453,6 +1469,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
 
       // Tab View Mode
       m_tabViewMode = TabViewModes(config->readNumEntry("TabViewMode", ShowIconAndText));
+      b_dynamicTabHide = config->readBoolEntry("DynamicTabHide", false);
    }
 
    if (m_menuCreated)
@@ -1744,6 +1761,8 @@ void Konsole::initTEWidget(TEWidget* new_te, TEWidget* default_te)
 
 void Konsole::switchToTabWidget()
 {
+  if (tabwidget) return;
+
   TEWidget* se_widget = se->widget();
   makeTabWidget();
 
@@ -1779,6 +1798,8 @@ void Konsole::switchToTabWidget()
 
 void Konsole::switchToFlat()
 {
+  if (!tabwidget) return;
+
   TEWidget* se_widget = se->widget();
 
   te=new TEWidget(this);
@@ -1843,15 +1864,19 @@ void Konsole::slotSelectTabbar() {
       n_tabbar = selectTabbar->currentItem();
 
   if (n_tabbar!=TabNone) {
-    if (!tabwidget)
-      switchToTabWidget();
-    if (n_tabbar==TabTop)
-      tabwidget->setTabPosition(QTabWidget::Top);
-    else
-      tabwidget->setTabPosition(QTabWidget::Bottom);
-    QPtrDictIterator<KRootPixmap> it(rootxpms);
-    for (;it.current();++it)
-      it.current()->repaint(true);
+    if (!tabwidget) {
+      if (!(sessions.count()==1 && b_dynamicTabHide))
+        switchToTabWidget();
+    }
+    else {
+      if (n_tabbar==TabTop)
+        tabwidget->setTabPosition(QTabWidget::Top);
+      else
+        tabwidget->setTabPosition(QTabWidget::Bottom);
+      QPtrDictIterator<KRootPixmap> it(rootxpms);
+      for (;it.current();++it)
+        it.current()->repaint(true);
+    }
   }
   else if (tabwidget)
     switchToFlat();
@@ -2507,6 +2532,9 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
       schema=(ColorSchema*)colors->at(0);  //the default one
   int schmno = schema->numb();
 
+  if (sessions.count()==1 && !tabwidget && n_tabbar!=TabNone)
+    switchToTabWidget();
+
   if (tabwidget) {
     TEWidget* te_old = te;
     te=new TEWidget(tabwidget);
@@ -2702,8 +2730,11 @@ void Konsole::doneSession(TESession* s)
     m_moveSessionLeft->setEnabled(position>0);
     m_moveSessionRight->setEnabled(position<sessions.count()-1);
   }
-  if (sessions.count()==1)
+  if (sessions.count()==1) {
     m_detachSession->setEnabled(false);
+    if (tabwidget && b_dynamicTabHide)
+      switchToFlat();
+  }
 }
 
 /*! Cycle to previous session (if any) */
@@ -3236,12 +3267,18 @@ void Konsole::detachSession(TESession* _se) {
       rootxpms.remove(se_widget);
     }
     delete se_widget;
+    if (tabwidget->count()==1 && b_dynamicTabHide)
+      switchToFlat();
   }
 }
 
 void Konsole::attachSession(TESession* session)
 {
+  if (sessions.count()==1 && !tabwidget && n_tabbar!=TabNone)
+    switchToTabWidget();
+
   TEWidget* se_widget = se->widget();
+
   if (tabwidget) {
     te=new TEWidget(tabwidget);
 

@@ -237,6 +237,7 @@ private slots:
   void slotTabToggleMasterMode();
   void slotTabbarContextMenu(const QPoint &);
   void slotTabSetViewOptions(int);
+  void slotTabbarToggleDynamicHide();
 
 private:
   KSimpleConfig *defaultSession();
@@ -386,6 +387,7 @@ private:
   QTimer      m_closeTimeout;
 
   TabViewModes m_tabViewMode;
+  bool        b_dynamicTabHide;
 
   bool        b_framevis:1;
   bool        b_fullscreen:1;
