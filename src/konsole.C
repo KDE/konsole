@@ -259,7 +259,7 @@ void Konsole::makeMenu()
   m_sessions->setCheckable(TRUE);
   m_sessions->insertItem( i18n("Send Signal"), m_signals );
 
-  KAction *renameSession = new KAction(i18n("Rename session..."), 0, this,
+  KAction *renameSession = new KAction(i18n("R&ename session..."), 0, this,
                              SLOT(slotRenameSession()), this);
   renameSession->plug(m_sessions);
 
@@ -290,7 +290,7 @@ void Konsole::makeMenu()
   showToolbar = KStdAction::showToolbar(this, SLOT(slotToggleToolbar()));
   showToolbar->plug(m_options);
   // Frame on/off
-  showFrame = new KToggleAction(i18n("Show &frame"), 0,
+  showFrame = new KToggleAction(i18n("Show &Frame"), 0,
 				this, SLOT(slotToggleFrame()), this);
   showFrame->plug(m_options);
 
@@ -303,7 +303,7 @@ void Konsole::makeMenu()
   selectScrollbar->plug(m_options);
   // Fullscreen
   m_options->insertSeparator();
-  m_options->insertItem( i18n("&Fullscreen"), 5);
+  m_options->insertItem( i18n("F&ullscreen"), 5);
   m_options->setItemChecked(5,b_fullscreen);
   m_options->insertSeparator();
   // Select size
@@ -342,7 +342,7 @@ void Konsole::makeMenu()
   m_options->insertItem( i18n("&Codec"), m_codec);
   m_options->insertItem( i18n("&Keyboard"), m_keytab);
   m_options->insertSeparator();
-  m_options->insertItem( i18n("&Save Options"), 8);
+  m_options->insertItem( i18n("Save &Options"), 8);
   connect(m_options, SIGNAL(activated(int)), SLOT(opt_menu_activated(int)));
   // Help and about menu
   QString aboutAuthor = i18n("%1 version %2 - an X terminal\n"
@@ -354,7 +354,7 @@ void Konsole::makeMenu()
                              "and comes WITHOUT ANY WARRANTY.\n"
                              "See 'LICENSE.readme' for details.").arg(PACKAGE).arg(VERSION);
   QPopupMenu* m_help =  helpMenu(aboutAuthor, false);
-  m_help->insertItem( i18n("&Technical Reference ..."), this, SLOT(tecRef()),
+  m_help->insertItem( i18n("&Technical Reference"), this, SLOT(tecRef()),
                       0, -1, 1);
   m_options->installEventFilter( this );
 

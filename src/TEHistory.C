@@ -35,12 +35,10 @@
    at constant costs.
 
 FIXME: some complain about the history buffer comsuming the
-       memory of their machines. Fulfilled need busily spawn
-       children ... sigh.
-
-       Note that wrapping a scroll like this one is not
-       precisely simple, but we'll meditate on it...
-
+       memory of their machines. This problem is critical
+       since the history does not behave gracefully in cases
+       where the memory is used up completely. I have some
+       problems to reproduce this event in my installation.
 */
 
 
