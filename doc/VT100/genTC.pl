@@ -32,17 +32,12 @@ my $test = 0;
 #   <"|"-separated head line>
 #   <"|"-separated data rows>
 #
+# Section.html
+#   <html-text>
+#
 # TABs
 # - .XPS, used for instructions with subcodes
 #   Subcode|Emulation|Scope|Operation|Parameter|Meaning
-# - .XEX, used for individual codes
-#   Instruction|Scope|Operation|Parameter
-#
-# Alternative
-# - .impl Scope|Operation|Parameters
-# - .subc.SUBCODE.impl
-# - .subc.SUBCODE.attr
-# - .subc.SUBCODE.head
 
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
@@ -321,6 +316,14 @@ sub sortTest
   print "</table>\n";
 }
 
+sub htmlsect
+{
+  my ($h) = @_;
+  $_ = $all->{"$h.html"};
+  s/\n  \.\n/\n  <p>\n/g;
+  print "$_\n";
+}
+
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
 # MAIN ------------------------------------------------------------------------
@@ -332,7 +335,16 @@ my $p;
 my $table = 0;
 
 # -------------------------------
+htmlsect("Introduction");
+# -------------------------------
+secthead("Control Sequences");
+htmlsect("Sequences");
+# -------------------------------
+secthead("Host to Terminal (Instructions by Code)");
+sortTest($t);
+# -------------------------------
 secthead("Host to Terminal (Instructions by Group)");
+htmlsect("Operations");
 print "<table>\n";
 layoutTable("Commands (Character Display Operation)",$t,"Command\.Display");
 layoutTable("Commands (Rendition related status)",$t,"Command\.RenderMode");
@@ -348,9 +360,6 @@ layoutTable("Commands (Ignored)",$t,"Command\.Ignored");
 layoutTable("Commands (Requests)",$t,"Command\.Request");
 print "</table>\n";
 # -------------------------------
-secthead("Host to Terminal (Instructions by Code)");
-sortTest($t);
-# -------------------------------
 secthead("Terminal to Host");
 print "<table>\n";
 layoutTable("Replies",$t,"Reply");
@@ -364,6 +373,7 @@ layoutTable("Modes",$t,"Mode");
 print "</table>\n";
 # -------------------------------
 secthead("Appendix A - Notion Details");
+htmlsect("ConceptDB");
 # -------------------------------
 
 head();
