@@ -1,3 +1,5 @@
+19 Jan 2000
+- fixed a size problem with OSF/1 v3.2
 16 Jan 2000
 - added privacy code 1049.
 - reverted to TERM=xterm.

@@ -1,6 +1,4 @@
 CONTRIBUTORS. See ChangeLog also
-- Dan Pilone <pilone@slac.com>
-  - SGI Port
 - Warwick Allison <warwick@troll.no>
   - 16 color SGR codes (xterm-83)
   - schema files seeked also in ~/.kde/share/apps/konsole
@@ -25,10 +23,12 @@ CONTRIBUTORS. See ChangeLog also
   - bug fixing
 - Antonio Larrosa <larrosa@kde.org>
   - transparency/tint
+- Dan Pilone <pilone@slac.com>
+  - SGI Port
 - Peter Silva <peter.silva@videotron.ca>
   - bug fixing
   - decent marking
 - Kevin Street <street@iname.com>
   - FreeBSD port
 - Lotzi Boloni <boloni@cs.purdue.edu>
-  -Fast switch between sessions with the same schema.
+  - Fast switch between sessions with the same schema.

@@ -16,6 +16,7 @@
 #ifndef SHELL_H
 #define SHELL_H
 
+#include <config.h>
 #include <sys/types.h>
 #include <sys/ioctl.h>
 
@@ -84,6 +85,8 @@ Q_OBJECT
 
   private:
 
+    struct winsize wsize;
+
     int              fd;
     pid_t            comm_pid;
     QSocketNotifier* mn;
@@ -91,8 +94,6 @@ Q_OBJECT
     bool             needGrantPty;
     char ptynam[50]; // "/dev/ptyxx" | "/dev/ptmx"
     char ttynam[50]; // "/dev/ttyxx" | "/dev/pts/########..."
-    
-    winsize wsize;
 };
 
 #endif
