@@ -38,13 +38,13 @@ class konsoleFactory : public KLibFactory
 	public:
     konsoleFactory();
     virtual ~konsoleFactory();
-    
+
     virtual QObject* create(QObject* parent = 0, const char* name = 0,
 			    const char* classname = "QObject",
 			    const QStringList &args = QStringList());
-    
+
     static KInstance *instance();
-    
+
  private:
     static KInstance *s_instance;
 };
@@ -55,10 +55,12 @@ class konsolePart: public KParts::ReadOnlyPart
 	public:
     konsolePart(QWidget *parent, const char *name);
     virtual ~konsolePart();
-    
+
  protected:
-    virtual bool openFile();
-    
+    virtual bool openURL( const KURL & url );
+    virtual bool openFile() {}
+    virtual bool closeURL();
+
  protected slots:
       void slotNew();
       void slotSaveFile();
@@ -68,6 +70,7 @@ class konsolePart: public KParts::ReadOnlyPart
     QLabel *widget;
     //    Konsole *kons;
     TEWidget *te;
+    TESession *initial;
     konsoleBrowserExtension *m_extension;
     /*
     KAction *m_NewAction;

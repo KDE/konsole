@@ -106,9 +106,9 @@ TEmulation::TEmulation(TEWidget* gui)
   QObject::connect(&bulk_timer, SIGNAL(timeout()), this, SLOT(showBulk()) );
   QObject::connect(gui,SIGNAL(changedImageSizeSignal(int,int)),
                    this,SLOT(onImageSizeChange(int,int)));
-  QObject::connect(gui,SIGNAL(changedHistoryCursor(int)), 
+  QObject::connect(gui,SIGNAL(changedHistoryCursor(int)),
                    this,SLOT(onHistoryCursorChange(int)));
-  QObject::connect(gui,SIGNAL(keyPressedSignal(QKeyEvent*)), 
+  QObject::connect(gui,SIGNAL(keyPressedSignal(QKeyEvent*)),
                    this,SLOT(onKeyPress(QKeyEvent*)));
   QObject::connect(gui,SIGNAL(beginSelectionSignal(const int,const int)),
 		   this,SLOT(onSelectionBegin(const int,const int)) );
@@ -127,6 +127,7 @@ TEmulation::~TEmulation()
 {
   delete screen[0];
   delete screen[1];
+  bulk_timer.stop();
 }
 
 /*! change between primary and alternate screen
@@ -178,7 +179,7 @@ void TEmulation::setKeytrans(int no)
 void TEmulation::onRcvChar(int c)
 // process application unicode input to terminal
 // this is a trivial scanner
-{ 
+{
   c &= 0xff;
   switch (c)
   {
@@ -213,8 +214,8 @@ void TEmulation::onKeyPress( QKeyEvent* ev )
     emit sndBlock(ev->text().ascii(),ev->text().length());
   }
   else if (ev->ascii()>0)
-  { unsigned char c[1]; 
-    c[0] = ev->ascii(); 
+  { unsigned char c[1];
+    c[0] = ev->ascii();
     emit sndBlock((char*)c,1);
   }
 }
@@ -262,7 +263,7 @@ void TEmulation::setSelection(const BOOL preserve_line_breaks) {
 
 void TEmulation::clearSelection() {
   if (!connected) return;
-  scr->clearSelection(); 
+  scr->clearSelection();
   showBulk();
 }
 

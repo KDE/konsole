@@ -63,7 +63,7 @@ konsoleFactory::~konsoleFactory()
 {
   if (s_instance)
     delete s_instance;
-  
+
   s_instance = 0;
 }
 
@@ -89,11 +89,11 @@ konsolePart::konsolePart(QWidget *parent, const char *name)
   : KParts::ReadOnlyPart(parent, name)
 {
   setInstance(konsoleFactory::instance());
-  
+
   // create a canvas to insert our widget
-  
+
   m_extension = new konsoleBrowserExtension(this);
-  
+
   //bool login_shell = false;
   //bool welcome = true;
   bool histon = true;
@@ -109,7 +109,6 @@ konsolePart::konsolePart(QWidget *parent, const char *name)
 
   const char* shell = getenv("SHELL");
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
-  //shell = "/usr/bin/mc";
   eargs.append(shell);
   te = new TEWidget(parent);
   te->setFocusPolicy(QWidget::ClickFocus);
@@ -117,14 +116,14 @@ konsolePart::konsolePart(QWidget *parent, const char *name)
   setWidget(te);
   // faking a KTMainwindow - i dont know why it has it this way
   kdDebug() << "The shell is:" << shell << "\n";
-  TESession* initial = new TESession((KTMainWindow*)parent,
-				     te,shell,eargs,"xterm");
+  initial = new TESession((KTMainWindow*)parent,
+                          te,shell,eargs,"xterm");
   //  initial->run();
   initial->setConnect(TRUE);
-  QTimer::singleShot(100,initial,SLOT(run()));
- 
+  QTimer::singleShot(0/*100*/,initial,SLOT(run()));
+
   // setXMLFile("konsole_part.rc");
-  
+
   // kDebugInfo("Loading successful");
   // kDebugInfo("XML file set");
 
@@ -149,19 +148,16 @@ void konsolePart::slotLoadFile() {
 
 konsolePart::~konsolePart()
 {
-  closeURL();
+  delete initial;
+  //te is deleted by the framework
 }
 
-bool konsolePart::openFile()
+bool konsolePart::openURL( const KURL & url )
 {
-  // This is a horrible hack
-    /*
-    QTimer *delayedLoadTimer = new QTimer(this);    
-    delayedLoadTimer->start(3,true);
-    connect(delayedLoadTimer, SIGNAL(timeout()),
-             this, SLOT(slotDelayedLoad()) );    
-    */
-    return true;
+  emit setWindowCaption( url.decodedURL() );
+  return true;
+
+  // TODO: follow directory m_file
 
   //  widget->setText(m_file);
   /*
@@ -173,22 +169,20 @@ bool konsolePart::openFile()
 
   /*
   if (!gofw->ds->loadXML(m_file))
-      return false;  
+      return false;
   gofw->dv.center = NULL; // FIXME: this is a hack
   gofw->refresh();
     gofw->detail->setValues(gofw->dv.center->val);
-  //  return true;  
+  //  return true;
   kDebugInfo("Loading successful");
   */
   return true;
 }
 
-/*
 bool konsolePart::closeURL()
 {
   return true;
 }
-*/
 
 konsoleBrowserExtension::konsoleBrowserExtension(konsolePart *parent)
   : KParts::BrowserExtension(parent, "konsoleBrowserExtension")
