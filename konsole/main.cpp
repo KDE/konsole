@@ -34,8 +34,12 @@
 
 #include "konsole.h"
 
+// COMPOSITE disabled by default because the QApplication constructor
+// needed to enable the ARGB32 visual has undesired side effects.
+#if 0
 #if defined(Q_WS_X11) && defined(HAVE_XRENDER) && QT_VERSION >= 0x030300
 # define COMPOSITE
+#endif
 #endif
 
 #ifdef COMPOSITE
@@ -63,7 +67,9 @@ static KCmdLineOptions options[] =
    { "noframe",         I18N_NOOP("Do not display frame"), 0 },
    { "noscrollbar",     I18N_NOOP("Do not display scrollbar"), 0 },
    { "noxft",           I18N_NOOP("Do not use Xft (Anti-Aliasing)"), 0 },
+#ifdef COMPOSITE
    { "noargb",          I18N_NOOP("Do not use the ARGB32 visual (Transparency)"), 0 },
+#endif
    { "vt_sz CCxLL",     I18N_NOOP("Terminal size in columns x lines"), 0 },
    { "noresize",        I18N_NOOP("Terminal size is fixed"), 0 },
    { "type <type>",     I18N_NOOP("Open the given session type instead of the default shell"), 0 },
