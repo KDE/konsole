@@ -446,6 +446,8 @@ void TEmuVt102::tau( int token, int p, int q )
     case TY_CSI_PS('i',    0) : /* IGNORE: attached printer          */ break; //VT100
     case TY_CSI_PS('l',    4) : scr->  resetMode      (MODE_Insert   ); break;
     case TY_CSI_PS('l',   20) :        resetMode      (MODE_NewLine  ); break;
+    case TY_CSI_PS('s',    0) :      saveCursor           (          ); break;
+    case TY_CSI_PS('u',    0) :      restoreCursor        (          ); break;
 
     case TY_CSI_PS('m',    0) : scr->setDefaultRendition  (          ); break;
     case TY_CSI_PS('m',    1) : scr->  setRendition     (RE_BOLD     ); break; //VT100
