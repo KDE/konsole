@@ -78,7 +78,6 @@
 #include <qmessagebox.h>
 
 #include <klocale.h>
-#include <kwm.h>
 #include <sys/wait.h>
 #include <assert.h>
 
@@ -450,14 +449,12 @@ void Konsole::drop_menu_activated(int item)
   {
     case 0: // paste
       se->getEmulation()->sendString(dropText);
-//    KWM::activate((Window)this->winId());
       break;
     case 1: // cd ...
       se->getEmulation()->sendString("cd ");
       KURL url( dropText );
       se->getEmulation()->sendString(url.directory());
       se->getEmulation()->sendString("\n");
-//    KWM::activate((Window)this->winId());
       break;
   }
 }

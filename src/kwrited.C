@@ -8,7 +8,7 @@
 #include <TEPty.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <kwm.h>
+#include <X11/Xlib.h>
 
 /* TODO
    for anyone who likes to do improvements here, go ahead.
@@ -29,7 +29,7 @@ KWrited::KWrited() : QObject()
 {
   wid = new QMultiLineEdit(NULL,"kwrited");
   wid->setFont(KGlobalSettings::fixedFont());
-  wid->setMinimumWidth(wid->fontMetrics().maxWidth()*80 + 
+  wid->setMinimumWidth(wid->fontMetrics().maxWidth()*80 +
       wid->minimumSizeHint().width());
   wid->setReadOnly(TRUE);
   wid->setFocusPolicy(QWidget::NoFocus);
@@ -57,11 +57,12 @@ KWrited::~KWrited()
 void KWrited::block_in(const char* txt, int len)
 {
   if (len < 0) len = 0;
-  char *_text = new char[len+1]; 
-  strncpy(_text,txt,len); 
-  _text[len] = 0; 
+  char *_text = new char[len+1];
+  strncpy(_text,txt,len);
+  _text[len] = 0;
   wid->insert(_text);
-  wid->show(); KWM::raise(wid->winId());
+  wid->show(); 
+  XRaiseWindow( wid->x11Display(), wid->winId());
   delete _text;
 }
 
