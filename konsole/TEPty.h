@@ -79,6 +79,7 @@ Q_OBJECT
   
   protected slots:
       void DataReceived(int, int& len);
+  public slots:
       void donePty();
       
   private:
