@@ -143,6 +143,7 @@ void konsolePart::doneSession(TESession*,int)
 
 void konsolePart::sessionDestroyed()
 {
+  disconnect( initial, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
   initial = 0;
   delete this;
 }
@@ -166,7 +167,13 @@ void konsolePart::slotLoadFile() {
 
 konsolePart::~konsolePart()
 {
-  delete initial;
+  kdDebug() << "konsolePart::~konsolePart() this=" << this << endl;
+  if ( initial )
+  {
+    disconnect( initial, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
+    kdDebug() << "Deleting initial session" << endl;
+    delete initial;
+  }
   //te is deleted by the framework
 }
 
