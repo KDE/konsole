@@ -23,8 +23,6 @@
 #include <kimageio.h>
 #include "konsole.h"
 
-#include <stdlib.h>
-
 static const char *description =
   I18N_NOOP("X terminal for use with KDE.");
 
