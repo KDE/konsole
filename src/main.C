@@ -395,6 +395,7 @@ void TEDemo::saveProperties(KConfig* config)
   config->writeEntry("schema",s_schema);
   config->writeEntry("scrollbar",n_scroll);
   if (args.count() > 0) config->writeEntry("konsolearguments", args);
+  config->writeEntry("class",name());
   config->writeEntry("defaultheight", height()); // for "save options". Not used by SM.
   config->writeEntry("defaultwidth", width()); // for "save options". Not used by SM.
   config->writeEntry("kmenubar", //FIXME:Float
