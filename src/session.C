@@ -30,6 +30,7 @@ TESession::TESession(KMainWindow* main, TEWidget* te, const QString &_pgm, QStrL
   em = new TEmuVt102(te);
 
   term = _term;
+  iconText = kapp->caption();
 
   //kdDebug(1211)<<"TESession ctor() sh->setSize()"<<endl;
   sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
@@ -60,9 +61,13 @@ void TESession::run()
   sh->run(QFile::encodeName(pgm),args,term.data(),FALSE);
 }
 
-void TESession::setUserTitle( int, const QString &caption )
+void TESession::setUserTitle( int what, const QString &caption )
 {
-    userTitle = caption;
+    // (btw: what=0 changes title and icon, what=1 only icon, what=2 only title
+    if ((what == 0) || (what == 2))
+       userTitle = caption;
+    if ((what == 0) || (what == 1))
+       iconText = caption;
     emit updateTitle();
 }
 
@@ -156,6 +161,17 @@ void TESession::setTitle(const QString& _title)
 const QString& TESession::Title()
 {
   return title;
+}
+
+void TESession::setIconText(const QString& _iconText)
+{
+  iconText = _iconText;
+  //kdDebug(1211)<<"Session setIconText " <<  iconText <<endl;
+}
+
+const QString& TESession::IconText()
+{
+  return iconText;
 }
 
 void TESession::setHistory(const HistoryType &hType)
