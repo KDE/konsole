@@ -18,7 +18,7 @@
 
 
 #include <ktmainwindow.h>
-//#include <ktopwidget.h>
+//#include <ktmainwindow.h>
 #include <ksimpleconfig.h>
 #include <kwmmapp.h>
 #include <qstrlist.h>
