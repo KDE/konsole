@@ -123,6 +123,7 @@ public:
 };
 
 
+extern void TEPtyInit();
 
 /* --| main |------------------------------------------------------ */
 int main(int argc, char* argv[])
@@ -135,8 +136,9 @@ int main(int argc, char* argv[])
   bool toolbaron = true;
   bool frameon = true;
   bool scrollbaron = true;
-  const char* wname = PACKAGE;
+  QCString wname = PACKAGE;
 
+  TEPtyInit();
 
   KAboutData aboutData( PACKAGE, I18N_NOOP("Konsole"),
     VERSION, description, KAboutData::License_GPL_V2,
@@ -343,7 +345,7 @@ int main(int argc, char* argv[])
         sTitle = sessionconfig->readEntry("Title0", title);
         sTerm = sessionconfig->readEntry("Term0");
         sIcon = sessionconfig->readEntry("Icon0","openterm");
-        sCwd = sessionconfig->readEntry("Cwd0");
+        sCwd = sessionconfig->readPathEntry("Cwd0");
         Konsole *m = new Konsole(wname,sPgm,eargs,histon,menubaron,toolbaron,frameon,scrollbaron,sIcon,sTitle,0/*type*/,sTerm,true,sCwd);
         m->enableFullScripting(full_script);
 	m->restore(n);
@@ -370,7 +372,7 @@ int main(int argc, char* argv[])
           key = QString("Icon%1").arg(counter);
           sIcon = sessionconfig->readEntry(key,"openterm");
           key = QString("Cwd%1").arg(counter);
-          sCwd = sessionconfig->readEntry(key);
+          sCwd = sessionconfig->readPathEntry(key);
           m->newSession(sPgm, eargs, sTerm, sIcon, sCwd);
           m->initSessionTitle(sTitle);
           key = QString("Schema%1").arg(counter);
@@ -392,8 +394,7 @@ int main(int argc, char* argv[])
         ksm->konsole = m;
         ksm->konsole->initFullScreen();
         if ( !profile.isEmpty() ) {
-          ksm->konsole->setName( "konsole-mainwindow#1" );
-          ksm->konsole->applyMainWindowSettings(sessionconfig);
+          ksm->konsole->callReadPropertiesInternal(sessionconfig,1);
           profile = "";
           // Hack to work-around sessions initialized with minimum size
           for (int i=1;i<=counter;i++)

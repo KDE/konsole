@@ -436,4 +436,9 @@ QCStringList TESession::functionsDynamic()
 }
 
 
+void TESession::print( QPainter &paint, bool friendly, bool exact )
+{
+    te->print(paint, friendly, exact);
+}
+
 #include "session.moc"

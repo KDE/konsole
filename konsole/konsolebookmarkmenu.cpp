@@ -109,7 +109,11 @@ void KonsoleBookmarkMenu::fillBookmarkMenu()
         bm = parentBookmark.next(bm) )
   {
     QString text = bm.text();
-    text.replace( QRegExp( "&" ), "&&" );
+#if QT_VERSION >= 0x030200
+    text.replace( '&', "&&" );
+#else
+    text.replace( QRegExp("^&|([^&])&"), "\\1&&" );
+#endif
     if ( !separatorInserted && m_bIsRoot) { // inserted before the first konq bookmark, to avoid the separator if no konq bookmark
       m_parentMenu->insertSeparator();
       separatorInserted = true;
@@ -151,7 +155,8 @@ void KonsoleBookmarkMenu::fillBookmarkMenu()
 
   if ( !m_bIsRoot && m_bAddBookmark )
   {
-    m_parentMenu->insertSeparator();
+      if ( m_parentMenu->count() > 0 )
+          m_parentMenu->insertSeparator();
     addAddBookmark();
     addNewFolder();
   }

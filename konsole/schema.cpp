@@ -132,10 +132,9 @@ ColorSchema::ColorSchema(const QString& pathname)
 {
   //start with a valid time, aleXXX
   *lastRead = QDateTime::currentDateTime();
-  fPath = locate("data", "konsole/"+pathname);
+  QString fPath = locate("data", "konsole/"+pathname);
   if (fPath.isEmpty() || !QFile::exists(fPath))
   {
-    fPath = QString::null;
     fRelPath = QString::null;
     setDefaultSchema();
   }
@@ -152,7 +151,6 @@ ColorSchema::ColorSchema(const QString& pathname)
 
 ColorSchema::ColorSchema()
 :m_fileRead(false)
-,fPath(QString::null)
 ,fRelPath(QString::null)
 ,lastRead(0L)
 {
@@ -162,7 +160,6 @@ ColorSchema::ColorSchema()
 
 ColorSchema::ColorSchema(KConfig& c)
 :m_fileRead(false)
-,fPath(QString::null)
 ,fRelPath(QString::null)
 ,lastRead(0L)
 {
@@ -269,7 +266,7 @@ void ColorSchema::readConfigColor(KConfig& c,
 
 void ColorSchema::writeConfig(const QString& path) const
 {
-//  KONSOLEDEBUG << "Writing schema " << fPath << " to file " << path << endl;
+//  KONSOLEDEBUG << "Writing schema " << relPath << " to file " << path << endl;
 
   KConfig c(path,false,false);
 
@@ -292,6 +289,7 @@ void ColorSchema::writeConfig(const QString& path) const
 
 bool ColorSchema::rereadSchemaFile()
 {
+  QString fPath = fRelPath.isEmpty() ? "" : locate("data", "konsole/"+fRelPath);
   if (fPath.isEmpty()) return false;
 
   //KONSOLEDEBUG << "Rereading schema file " << fPath << endl;
@@ -332,7 +330,8 @@ bool ColorSchema::rereadSchemaFile()
         if (!strcmp(rend,"full"  )) attr = 4; else
           continue;
 
-        m_imagePath = locate("wallpaper", path);
+        QString qline(line);
+        m_imagePath = locate("wallpaper", qline.mid( qline.find(" ",7)+1 ) );
         m_alignment = attr;
       }
       if (!strncmp(line,"transparency",12))
@@ -409,6 +408,8 @@ bool ColorSchema::rereadSchemaFile()
 
 bool ColorSchema::hasSchemaFileChanged() const
 {
+  QString fPath = fRelPath.isEmpty() ? "" : locate("data", "konsole/"+fRelPath);
+
   //KONSOLEDEBUG << "Checking schema file " << fPath << endl;
 
   // The default color schema never changes.
@@ -422,7 +423,7 @@ bool ColorSchema::hasSchemaFileChanged() const
   {
     QDateTime written = i.lastModified();
 
-    if (written > (*lastRead))
+    if (written != (*lastRead))
     {
 //      KONSOLEDEBUG << "Schema file was modified " << written.toString() << endl;
 
@@ -466,7 +467,6 @@ ColorSchemaList::~ColorSchemaList()
 }
 
 
-//now it works also if you give only the filename without path
 ColorSchema *ColorSchemaList::find(const QString& path)
 {
    if (path.isEmpty())
@@ -475,13 +475,10 @@ ColorSchema *ColorSchemaList::find(const QString& path)
    //kdDebug(1211)<<"ColorSchema::find() count()=="<<count()<<endl;
    ColorSchemaListIterator it(*this);
    ColorSchema *c;
-   bool pathIsOnlyFileName=(!path.contains("/"));
 
    while ((c=it.current()))
    {
-      if ((pathIsOnlyFileName) && ((*it)->path().endsWith(path)))
-        return *it;
-      else if ((*it)->path() == path)
+      if ((*it)->relPath() == path)
         return *it;
       ++it;
    }
@@ -573,7 +570,7 @@ bool ColorSchemaList::deleteOldSchemas(const QDateTime& now)
     if ((p->getLastRead()) && (*(p->getLastRead())) < now)
     {
       KONSOLEDEBUG << "Found deleted schema "
-        << p->path()
+        << p->relPath()
         << endl;
       ++it;
       remove(p);
@@ -618,6 +615,6 @@ int ColorSchemaList::compareItems(QPtrCollection::Item item1, QPtrCollection::It
    ColorSchema* schema1=(ColorSchema*)item1;
    ColorSchema* schema2=(ColorSchema*)item2;
    return -1*QString::compare(schema1->title(),schema2->title());
-};
+}
 
 
