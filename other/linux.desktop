@@ -36,11 +36,13 @@ Comment[ro]=Consolă Linux
 Comment[ru]=Консоль Linux
 Comment[sk]=Linuxová konzola
 Comment[sl]=Konzola z Linuxu
+Comment[sr]=Linux Konzola
 Comment[sv]=Linux konsol
 Comment[ta]=Ä¢Éì Ó¨ÉÂõ
 Comment[tr]=Linux Konsolu
 Comment[uk]=Консоль Linux
 Comment[zh_CN.GB2312]=Linux 控制台
+Comment[zh_TW.Big5]=Linux 操控台
 Exec=bash
 Schema=Linux.schema
 #VGA
