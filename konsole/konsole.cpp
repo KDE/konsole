@@ -108,7 +108,7 @@ Time to start a requirement list.
 #include <kiconloader.h>
 
 #include "konsole.h"
-
+#include <netwm.h>
 
 #define KONSOLEDEBUG    kdDebug(1211)
 
@@ -169,6 +169,7 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 ,m_initialSession(0)
 ,colors(0)
 ,rootxpm(0)
+,kWinModule(0)
 ,menubar(0)
 ,statusbar(0)
 ,m_session(0)
@@ -203,7 +204,7 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 ,n_defaultKeytab(0)
 ,n_render(0)
 ,curr_schema(0)
-,noticedBackgroundChangeOnDesktop(0)
+,wallpaperSource(0)
 ,s_kconfigSchema("")
 ,b_scroll(histon)
 ,b_fullscreen(false)
@@ -216,7 +217,6 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 {
   isRestored = b_inRestore;
   wasRestored = false;
-  kapp->addKipcEventMask(KIPC::BackgroundChanged);
   connect( kapp,SIGNAL(backgroundChanged(int)),this, SLOT(slotBackgroundChanged(int)));
 
   no2command.setAutoDelete(true);
@@ -326,6 +326,15 @@ Konsole::~Konsole()
 
     delete colors;
     colors=0;
+
+    if( kWinModule )
+       delete kWinModule;
+    kWinModule = 0;
+}
+
+void Konsole::run() {
+   kWinModule = new KWinModule();
+   connect( kWinModule,SIGNAL(currentDesktopChanged(int)), this,SLOT(currentDesktopChanged(int)) );
 }
 
 /* ------------------------------------------------------------------------- */
@@ -2162,13 +2171,57 @@ void Konsole::slotBackgroundChanged(int desk)
   ColorSchema* s = colors->find(curr_schema);
   if (s==0) return;
 
-  // We only do this once, because KRootPixmap should handle it later.
+  // Only update rootxpm if window is visible on current desktop
+  NETWinInfo info( qt_xdisplay(), winId(), qt_xrootwin(), NET::WMDesktop );
 
-  if (s->useTransparency() && noticedBackgroundChangeOnDesktop!=desk && (0 != rootxpm))
-  {
-    noticedBackgroundChangeOnDesktop = desk;
-    rootxpm->repaint(true);
+  if (s->useTransparency() && info.desktop()==desk && (0 != rootxpm)) {
+    //KONSOLEDEBUG << "Wallpaper changed on my desktop, " << desk << ", repainting..." << endl;
+    //Check to see if we are on the current desktop. If not, delay the repaint
+    //by setting wallpaperSource to 0. Next time our desktop is selected, we will
+    //automatically update because we are saying "I don't have the current wallpaper"
+    NETRootInfo rootInfo( qt_xdisplay(), NET::CurrentDesktop );
+    rootInfo.activate();
+    if( rootInfo.currentDesktop() == info.desktop() ) {
+       //We are on the current desktop, go ahead and update
+       //KONSOLEDEBUG << "My desktop is current, updating..." << endl;
+       wallpaperSource = desk;
+       rootxpm->repaint(true);
+    }
+    else {
+       //We are not on the current desktop, mark our wallpaper source 'stale'
+       //KONSOLEDEBUG << "My desktop is NOT current, delaying update..." << endl;
+       wallpaperSource = 0;
+    }
   }
+}
+
+void Konsole::currentDesktopChanged(int desk) {
+   //Get window info
+   NETWinInfo info( qt_xdisplay(), winId(), qt_xrootwin(), NET::WMDesktop );
+   bool bNeedUpdate = false;
+ 
+   if( info.desktop()==NETWinInfo::OnAllDesktops ) {
+      //This is a sticky window so it will always need updating
+      bNeedUpdate = true;
+   }
+   else if( (info.desktop() == desk) && (wallpaperSource != desk) ) {
+      bNeedUpdate = true;
+   }
+   else {
+      //We are not sticky and already have the wallpaper for our desktop
+      return;
+   }
+
+   //Check to see if we are transparent too
+   ColorSchema* s = colors->find(curr_schema);
+   if (s==0) 
+      return;
+
+   //This window is transparent, update the root pixmap
+   if( bNeedUpdate && s->useTransparency() ) {
+      wallpaperSource = desk;
+      rootxpm->repaint(true);
+   }
 }
 
 #include "konsole.moc"
