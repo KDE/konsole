@@ -367,4 +367,43 @@ void TESession::setAddToUtmp(bool set)
   add_to_utmp = set;
 }
 
+bool TESession::processDynamic(const QCString &fun, const QByteArray &data, QCString& replyType, QByteArray &replyData)
+{
+    if (fullScripting)
+    {
+      if (fun == "feedSession(QString)")
+      {
+        QString arg0;
+        QDataStream arg( data, IO_ReadOnly );
+        arg >> arg0;
+        feedSession(arg0);         
+        replyType = "void";
+        return true;
+      }
+      else if (fun == "sendSession(QString)")
+      {
+        QString arg0;
+        QDataStream arg( data, IO_ReadOnly );
+        arg >> arg0;
+        sendSession(arg0);         
+        replyType = "void";
+        return true;
+      }
+    }
+    return SessionIface::processDynamic(fun, data, replyType, replyData);
+
+}
+
+QCStringList TESession::functionsDynamic()
+{
+    QCStringList funcs = SessionIface::functionsDynamic();
+    if (fullScripting)
+    {
+       funcs << "void feedSession(QString text)";
+       funcs << "void sendSession(QString text)";
+    }
+    return funcs;
+}
+
+
 #include "session.moc"

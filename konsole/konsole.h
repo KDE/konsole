@@ -75,6 +75,8 @@ public:
   void initMasterMode(bool on);
   void newSession(const QString &program, const QStrList &args, const QString &term, const QString &icon, const QString &cwd);
   void setSchema(const QString & path);
+  
+  void enableFullScripting(bool b);
 
   void run();
   void setDefaultSession(const QString &filename);
@@ -93,6 +95,9 @@ public:
 
   KURL baseURL() const;
 
+  virtual bool processDynamic(const QCString &fun, const QByteArray &data, QCString& replyType, QByteArray &replyData);
+  virtual QCStringList functionsDynamic();
+
 public slots:
   void activateSession(int position);
 
@@ -104,6 +109,8 @@ protected:
  bool queryClose();
  void saveProperties(KConfig* config);
  void readProperties(KConfig* config);
+
+ 
 
 private slots:
   void currentDesktopChanged(int desk);
@@ -329,7 +336,8 @@ private:
   bool        b_allowResize:1;
   bool        b_addToUtmp:1;
 
-  bool         b_histEnabled:1;
+  bool        b_histEnabled:1;
+  bool        b_fullScripting:1;
   unsigned int m_histSize;
 };
 

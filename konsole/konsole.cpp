@@ -235,6 +235,7 @@ DCOPObject( "konsole" )
 ,b_warnQuit(false)
 ,b_allowResize(true)
 ,b_addToUtmp(true)
+,b_fullScripting(false)
 ,m_histSize(DEFAULT_HISTORY_SIZE)
 {
   isRestored = b_inRestore;
@@ -1905,6 +1906,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
   QString sessionId="session-"+QString::number(++sessionIdCounter);
   TESession* s = new TESession(te, QFile::encodeName(program),cmdArgs,emu,sessionId,cwd);
   s->setMonitorSilenceSeconds(monitorSilenceSeconds);
+  s->enableFullScripting(b_fullScripting);
   // If you add any new signal-slot connection below, think about doing it in konsolePart too
   connect( s,SIGNAL(done(TESession*,int)),
            this,SLOT(doneSession(TESession*,int)) );
@@ -2965,6 +2967,50 @@ void Konsole::smallerFont(void) {
         defaultFont.setPixelSize( defaultFont.pixelSize() - 2 );
     setFont( DEFAULTFONT );
     activateSession();
+}
+
+bool Konsole::processDynamic(const QCString &fun, const QByteArray &data, QCString& replyType, QByteArray &replyData)
+{
+    if (b_fullScripting)
+    {
+      if (fun == "feedAllSessions(QString)")
+      {
+        QString arg0;
+        QDataStream arg( data, IO_ReadOnly );
+        arg >> arg0;
+        feedAllSessions(arg0);         
+        replyType = "void";
+        return true;
+      }
+      else if (fun == "sendAllSessions(QString)")
+      {
+        QString arg0;
+        QDataStream arg( data, IO_ReadOnly );
+        arg >> arg0;
+        sendAllSessions(arg0);         
+        replyType = "void";
+        return true;
+      }
+    }
+    return KonsoleIface::processDynamic(fun, data, replyType, replyData);
+}
+
+QCStringList Konsole::functionsDynamic()
+{
+    QCStringList funcs = KonsoleIface::functionsDynamic();
+    if (b_fullScripting)
+    {
+      funcs << "void feedAllSessions(QString text)";
+      funcs << "void sendAllSessions(QString text)";
+    }
+    return funcs;
+}
+
+void Konsole::enableFullScripting(bool b)
+{
+    b_fullScripting = b;
+    for (TESession *se = sessions.first(); se; se = sessions.next())
+       se->enableFullScripting(b);
 }
 
 #include "konsole.moc"

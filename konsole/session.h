@@ -81,6 +81,10 @@ public:
   void sendSession(const QString &text);
   void renameSession(const QString &name);
 
+  virtual bool processDynamic(const QCString &fun, const QByteArray &data, QCString& replyType, QByteArray &replyData);
+  virtual QCStringList functionsDynamic();
+  void enableFullScripting(bool b) { fullScripting = b; }
+
 public slots:
 
   void run();
@@ -127,6 +131,7 @@ private:
   QString        iconName;
   QString        iconText; // as set by: echo -en '\033]1;IconText\007
   bool           add_to_utmp;
+  bool           fullScripting;
 
   QString	 stateIconName;
 

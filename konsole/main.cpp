@@ -52,6 +52,7 @@ static KCmdLineOptions options[] =
    { "keytab <name>",   I18N_NOOP("Use given .keytab file"), 0 },
    { "profile <name>",  I18N_NOOP("Start with given sessions profile"), 0 },
    { "schema <name>",   I18N_NOOP("Use given .schema file"), 0 },
+   { "script",          I18N_NOOP("Enable extended DCOP functions"), 0 },
    { "workdir <dir>",   I18N_NOOP("Change working directory of the konsole to 'dir'"), 0 },
    { "url <url>",       I18N_NOOP("Open 'URL' instead of shell"), 0 },
    { "!e <command>",    I18N_NOOP("Execute 'command' instead of shell"), 0 },
@@ -62,6 +63,7 @@ static KCmdLineOptions options[] =
 
 static bool has_noxft = false;
 static bool login_shell = false;
+static bool full_script = false;
 
 const char *konsole_shell(QStrList &args)
 {
@@ -108,6 +110,8 @@ public:
             restartCommand.append("--noxft");
         if (login_shell) 
             restartCommand.append("--ls");
+        if (full_script) 
+            restartCommand.append("--script");
         sm.setRestartCommand(restartCommand);
         return true;
     }
@@ -254,6 +258,7 @@ int main(int argc, char* argv[])
   frameon = args->isSet("frame");
   scrollbaron = args->isSet("scrollbar");
   wname = qtargs->getOption("name");
+  full_script = args->isSet("script");
 
   QCString type = "";
 
@@ -343,6 +348,7 @@ int main(int argc, char* argv[])
         sIcon = sessionconfig->readEntry("Icon0","openterm");
         sCwd = sessionconfig->readEntry("Cwd0");
         Konsole *m = new Konsole(wname,sPgm,eargs,histon,menubaron,toolbaron,frameon,scrollbaron,sIcon,sTitle,QString::null,0/*type*/,sTerm,true,sCwd);
+        m->enableFullScripting(full_script);
 	m->restore(n);
         m->makeGUI();
         m->setSchema(sessionconfig->readEntry("Schema0"));
@@ -402,6 +408,7 @@ int main(int argc, char* argv[])
   else
   {
     Konsole*  m = new Konsole(wname,(shell ? QFile::decodeName(shell) : QString::null),eargs,histon,menubaron,toolbaron,frameon,scrollbaron,QString::null,title,url,type,term);
+    m->enableFullScripting(full_script);
     //3.8 :-(
     //exit(0);
 
