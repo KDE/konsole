@@ -120,7 +120,7 @@ protected:
     void dropEvent(QDropEvent* event);
 
 
-    virtual int charClass(char) const;
+    virtual int charClass(UINT16) const;
 
     void clearImage();
 
