@@ -160,6 +160,7 @@ private:
     QPoint pntSel; // current selection point
     int    actSel; // selection state
     bool    word_selection_mode;
+    bool    line_selection_mode;
     bool    preserve_line_breaks;
 
     QClipboard*    cb;
@@ -173,12 +174,17 @@ private:
     QTimer* blinkT;  // active when hasBlinker
     KPopupMenu* m_drop;
     QString dropText;
+    bool possibleTripleClick;  // is set in mouseDoubleClickEvent and deleted
+                               // after QApplication::doubleClickInterval() delay
+    void mouseTripleClickEvent(QMouseEvent* ev);
+
  public:
     // current session in this widget
     TESession *currentSession;
 private slots:
     void drop_menu_activated(int item);
     void swapColorTable();
+    void tripleClickTimeout();  // resets possibleTripleClick
 };
 
 #endif // TE_WIDGET_H
