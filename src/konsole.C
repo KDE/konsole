@@ -76,7 +76,6 @@
 #include <klineeditdlg.h>
 #include <kdebug.h>
 
-//#include <qmessagebox.h>
 #include <qfontmetrics.h>
 
 #include <klocale.h>
@@ -141,6 +140,7 @@ Konsole::Konsole(const char* name,
   setDockEnabled( toolBar(), QMainWindow::Left, FALSE );
   setDockEnabled( toolBar(), QMainWindow::Right, FALSE );
   toolBar()->setFullSize( TRUE );
+  toolBar()->setIconText( KToolBar::IconTextRight);
 
   // load session commands ///////////////////////////////////////////////////
 
@@ -224,7 +224,7 @@ void Konsole::makeMenu()
 {
   // options (taken from kvt) //////////////////////////////////////
 
-  m_file = new QPopupMenu;
+  m_file = new QPopupMenu(this);
   connect(m_file, SIGNAL(activated(int)), SLOT(newSession(int)));
 
   KAction *newsession = KStdAction::openNew(this , SLOT(newSessionSelect()));
@@ -239,7 +239,7 @@ void Konsole::makeMenu()
   delete l;
   toolBar()->insertLineSeparator();
 
-  QPopupMenu* m_signals = new QPopupMenu;
+  QPopupMenu* m_signals = new QPopupMenu(this);
   m_signals->insertItem( i18n("STOP"), 17); // FIXME: comes with 3 values
   m_signals->insertItem( i18n("CONT"), 18); // FIXME: comes with 3 values
   m_signals->insertItem( i18n("HUP" ),  1);
@@ -248,7 +248,7 @@ void Konsole::makeMenu()
   m_signals->insertItem( i18n("KILL"),  9);
   connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
 
-  m_sessions = new QPopupMenu;
+  m_sessions = new QPopupMenu(this);
   m_sessions->setCheckable(TRUE);
   m_sessions->insertItem( i18n("Send Signal"), m_signals );
 
@@ -258,7 +258,7 @@ void Konsole::makeMenu()
 
   m_sessions->insertSeparator();
 
-  m_schema = new QPopupMenu;
+  m_schema = new QPopupMenu(this);
   m_schema->setCheckable(TRUE);
   connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
 
@@ -271,7 +271,7 @@ void Konsole::makeMenu()
   m_codec->insertItem( i18n("&locale"), 1 );
   m_codec->setItemChecked(1,TRUE);
 
-  m_options = new QPopupMenu;
+  m_options = new QPopupMenu(this);
   // Menubar on/off
   showMenubar = KStdAction::showMenubar(this, SLOT(slotToggleMenubar()));
   showMenubar->plug(m_options);
