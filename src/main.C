@@ -99,11 +99,7 @@ TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
   menubar = menuBar();
   setMinimumSize(200,100);
   
-  // get the default values
-  readProperties(kapp->getConfig());
-
   // session management
-
   setUnsavedData( true ); // terminals cannot store their contents
 
   // a KTMainWindow supports session management as default, but we
@@ -146,19 +142,9 @@ TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
 
 //FIXME: we should build a complete session before running it.
 
-  // set global options ///////////////////////////////////////////////////////
-
-  if (b_menuvis) menubar->show(); else menubar->hide();
-  te->setFrameStyle( b_framevis
-                     ? QFrame::WinPanel | QFrame::Sunken
-                     : QFrame::NoFrame );
-  te->setScrollbarLocation(n_scroll);
-
   // construct initial session ///////////////////////////////////////////////
 
   TESession* initial = new TESession(this,te,args,"xterm",login_shell);
-  initial->setFontNo(n_font);
-  initial->setSchemaNo(ColorSchema::find(s_schema)->numb);
 
   title = (args.count() && !strcmp(kapp->getCaption(),PACKAGE))
         ? args.at(0)           // program executed in the title bar
@@ -168,6 +154,11 @@ TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
   // start first session /////////////////////////////////////////////////////
 
   addSession(initial);
+
+  // read and apply default values ///////////////////////////////////////////
+
+  readProperties(kapp->getConfig());
+
 }
 
 /*!
@@ -334,7 +325,6 @@ void TEDemo::makeMenu()
   m_scrollbar->insertItem( i18n("&Hide"), SCRNONE);
   m_scrollbar->insertItem( i18n("&Left"), SCRLEFT);
   m_scrollbar->insertItem( i18n("&Right"), SCRRIGHT);
-  m_scrollbar->setItemChecked(n_scroll,TRUE);
   connect(m_scrollbar, SIGNAL(activated(int)), SLOT(scrollbar_menu_activated(int)));
 
   m_size = new QPopupMenu;
@@ -353,13 +343,10 @@ void TEDemo::makeMenu()
   m_options = new QPopupMenu;
   m_options->setCheckable(TRUE);
   m_options->insertItem( i18n("&Menubar"), 1 );
-  m_options->setItemChecked(1,b_menuvis);
   m_options->insertItem( i18n("&Frame"), 2 );
-  m_options->setItemChecked(2,b_framevis);
   m_options->insertItem( i18n("Scroll&bar"), m_scrollbar);
   m_options->insertSeparator();
   m_options->insertItem( i18n("BS sends &DEL"), 4 );
-  m_options->setItemChecked(4,b_bshack);
   m_options->insertSeparator();
   m_options->insertItem( i18n("&Font"), m_font);
   m_options->insertItem( i18n("&Size"), m_size);
@@ -397,14 +384,9 @@ void TEDemo::makeMenu()
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
+/* Configuration                                                             */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
-
-//void TEDemo::saveYourself()
-//{
-//    KConfig* config = kapp->getSessionConfig();
-//    config->sync();
-//}
 
 void TEDemo::saveProperties(KConfig* config)
 {
@@ -424,15 +406,21 @@ void TEDemo::saveProperties(KConfig* config)
   config->sync();
 }
 
+// Called by constructor (with config = kapp->getConfig())
+// and by session-management (with config = sessionconfig).
+// So it has to apply the settings when reading them.
 void TEDemo::readProperties(KConfig* config)
 {
   config->setGroup("options"); // bad! will no allow us to support multi windows
-  b_menuvis  = config->readBoolEntry("menubar visible",TRUE);
-  b_framevis = config->readBoolEntry("has frame",TRUE);
-  b_bshack   = config->readBoolEntry("BS hack",TRUE);
-  n_font     = MIN(config->readUnsignedNumEntry("font",3),7);
-  n_scroll   = MIN(config->readUnsignedNumEntry("scrollbar",SCRRIGHT),2);
-  s_schema   = config->readEntry("schema","");
+
+  // Global options ///////////////////////
+
+  setMenuVisible(config->readBoolEntry("menubar visible",TRUE));
+  setFrameVisible(config->readBoolEntry("has frame",TRUE));
+  
+  scrollbar_menu_activated(MIN(config->readUnsignedNumEntry("scrollbar",SCRRIGHT),2));
+
+  // not necessary for SM (KTMainWindow does it after), but useful for default settings
   if (menubar->menuBarPos() != KMenuBar::Floating)
   { QString entry = config->readEntry("kmenubar");
     if (!entry.isEmpty() && entry == "floating")
@@ -444,7 +432,20 @@ void TEDemo::readProperties(KConfig* config)
     else if (!entry.isEmpty() && entry == "top") menubar->setMenuBarPos(KMenuBar::Top);
     else if (!entry.isEmpty() && entry == "bottom") menubar->setMenuBarPos(KMenuBar::Bottom);
   }
-  // (stuff removed) geometry done by KTMainWindow
+  // (geometry stuff removed) done by KTMainWindow for SM, and not needed otherwise
+
+  // Options that should be applied to all sessions /////////////
+  // (applied only to first one currently)
+  
+  setBsHack(config->readBoolEntry("BS hack",TRUE));
+  setFont(MIN(config->readUnsignedNumEntry("font",3),7)); // sets n_font and menu item
+  setSchema(config->readEntry("schema",""));
+
+  TESession* s = no2session.find(1);
+  if (s) {
+    s->setFontNo(n_font);
+    s->setSchemaNo(ColorSchema::find(s_schema)->numb);
+  } else { fprintf(stderr,"session 1 not found\n"); } // oops
 
   // Default values for startup, changed by "save options". Not used by SM.
   defaultSize.setWidth ( config->readNumEntry("defaultwidth", 0) );
@@ -539,33 +540,48 @@ void TEDemo::setFont(int fontno)
   n_font = fontno;
 }
 
+void TEDemo::setMenuVisible(bool visible)
+{
+  b_menuvis = visible;
+  m_options->setItemChecked(1,b_menuvis);
+  if (b_menuvis) menubar->show(); else menubar->hide();
+  updateRects();
+}
+
+void TEDemo::setFrameVisible(bool visible)
+{
+  b_framevis = visible;
+  m_options->setItemChecked(2,b_framevis);
+  te->setFrameStyle( b_framevis
+                     ? QFrame::WinPanel | QFrame::Sunken
+                     : QFrame::NoFrame );
+}
+
+void TEDemo::setBsHack(bool bshack)
+{
+  b_bshack = bshack;
+  m_options->setItemChecked(4,b_bshack);
+  //FIXME: somewhat fuzzy...
+  if (b_bshack)
+    ((VT102Emulation*)se->getEmulation())->setMode(MODE_BsHack);
+  else
+    ((VT102Emulation*)se->getEmulation())->resetMode(MODE_BsHack);
+}
+
 void TEDemo::opt_menu_activated(int item)
 {
   switch( item )
   {
-    case 1: b_menuvis = !b_menuvis;
-            m_options->setItemChecked(1,b_menuvis);
-            if (b_menuvis) menubar->show(); else menubar->hide();
-            updateRects();
+    case 1: setMenuVisible(!b_menuvis);
             if (!b_menuvis)
             {
               setCaption("Use the right mouse button to bring back the menu");
               QTimer::singleShot(5000,this,SLOT(setHeader()));
             }
             break;
-    case 2: b_framevis = !b_framevis;
-            m_options->setItemChecked(2,b_framevis);
-            te->setFrameStyle( b_framevis
-                               ? QFrame::WinPanel | QFrame::Sunken
-                               : QFrame::NoFrame );
+    case 2: setFrameVisible(!b_framevis);
             break;
-    case 4: b_bshack = !b_bshack;
-            m_options->setItemChecked(4,b_bshack);
-            //FIXME: somewhat fuzzy...
-            if (b_bshack)
-              ((VT102Emulation*)se->getEmulation())->setMode(MODE_BsHack);
-            else
-              ((VT102Emulation*)se->getEmulation())->resetMode(MODE_BsHack);
+    case 4: setBsHack(!b_bshack);
             break;
     case 8: saveProperties(kapp->getConfig());
             break;
@@ -689,12 +705,6 @@ void TEDemo::activateSession(int sn)
 
 void TEDemo::addSession(TESession* s)
 {
-  //FIXME: not quite the right place ...
-  if (b_bshack)
-    ((VT102Emulation*)s->getEmulation())->setMode(MODE_BsHack);
-  else
-    ((VT102Emulation*)s->getEmulation())->resetMode(MODE_BsHack);
-
   session_no += 1;
   no2session.insert(session_no,s);
   session2no.insert(s,(void*)session_no);
