@@ -173,11 +173,7 @@ Konsole::Konsole(const char* name,
 
   // set global options ///////////////////////////////////////////////////////
 
-  if (b_menuvis) menubar->show(); else menubar->hide();
-  te->setFrameStyle( b_framevis
-		     ? (QFrame::WinPanel | QFrame::Sunken)
-                     : QFrame::NoFrame );
-  te->setScrollbarLocation(n_scroll);
+  menubar->show();
 
   // construct initial session ///////////////////////////////////////////////
 //FIXME: call newSession here, somehow, instead the stuff below.
@@ -195,10 +191,9 @@ Konsole::Konsole(const char* name,
         : kapp->caption();  // `konsole' or -caption
   initial->setTitle(title);
   //initial->setHistory(b_scroll); //FIXME: take from schema
-  setHistory(b_scroll); //FIXME: take from schema
+//  setHistory(b_scroll); //FIXME: take from schema
 
   addSession(initial);
-
 
   // read and apply default values ///////////////////////////////////////////
 
@@ -209,6 +204,7 @@ Konsole::Konsole(const char* name,
   runSession(initial);
   // apply keytab
   keytab_menu_activated(n_keytab);
+
   setColLin(0,0);
 }
 
@@ -374,18 +370,22 @@ void Konsole::makeMenu()
  */
 QSize Konsole::calcSize(int columns, int lines) {
     QSize size = te->calcSize(columns, lines);
-    if (toolBar()->isVisible()) {
-	if ((toolBar()->barPos()==KToolBar::Top) ||
+    if (b_toolbarvis) {
+ 	if ((toolBar()->barPos()==KToolBar::Top) ||
 	    (toolBar()->barPos()==KToolBar::Bottom)) {
-	    size += QSize(0, toolBar()->size().height());
+            int height = toolBar()->size().height();
+            // The height of the toolbar is 1 during startup.
+            if (height == 1)
+               height = n_toolbarheight;
+	    size += QSize(0, height);
 	}
 	if ((toolBar()->barPos()==KToolBar::Left) ||
 	    (toolBar()->barPos()==KToolBar::Right)) {
 	    size += QSize(toolBar()->size().width(), 0);
 	}
     }
-    if (menuBar()->isVisible()) {
-	size += QSize(0,toolBar()->size().height());	
+    if (b_menuvis) {
+	size += QSize(0,menuBar()->size().height());	
     }
     return size;
 }
@@ -446,10 +446,12 @@ void Konsole::readGlobalProperties(KConfig* config)
 
 void Konsole::saveProperties(KConfig* config)
 {
+  n_toolbarheight = toolBar()->size().height();
   config->setGroup("options");
   // bad! will no allow us to support multi windows
   config->writeEntry("menubar visible",b_menuvis);
   config->writeEntry("toolbar visible", b_toolbarvis);
+  config->writeEntry("toolbar height", n_toolbarheight);
   config->writeEntry("history",b_scroll);
   config->writeEntry("has frame",b_framevis);
   config->writeEntry("Fullscreen",b_fullscreen);
@@ -482,6 +484,7 @@ void Konsole::readProperties(KConfig* config)
 /*FIXME: (merging) state of material below unclear.*/
   b_menuvis  = config->readBoolEntry("menubar visible",TRUE);
   b_toolbarvis  = config->readBoolEntry("toolbar visible",TRUE);
+  n_toolbarheight = config->readNumEntry("toolbar height",32); // Hack on hack...
 
   b_scroll = config->readBoolEntry("history",TRUE);
   setHistory(b_scroll);

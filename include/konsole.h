@@ -136,6 +136,7 @@ private:
 
   KToggleAction *showToolbar;
   bool        b_toolbarvis;
+  int         n_toolbarheight;
   KToggleAction *showMenubar;
   bool        b_menuvis;
   KToggleAction *showScrollbar;
