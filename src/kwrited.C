@@ -7,6 +7,7 @@
 #include <kglobalsettings.h>
 #include <kwrited.h>
 #include <kdebug.h>
+#include <dcopclient.h>
 
 #include <TEPty.h>
 #include <stdlib.h>
@@ -98,6 +99,7 @@ int main(int argc, char* argv[])
   KCrash::setEmergencySaveFunction(signal_handler);
 
   KUniqueApplication app;
+  app.dcopClient()->setDaemonMode( true );
 
   pro = new KWrited;
   int r = app.exec();
