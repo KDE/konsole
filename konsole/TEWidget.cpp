@@ -1796,17 +1796,19 @@ void TEWidget::dragEnterEvent(QDragEnterEvent* e)
       KURLDrag::canDecode(e));
 }
 
+enum dropPopupOptions { paste, cd, cp, ln, mv };
+
 void TEWidget::dropEvent(QDropEvent* event)
 {
    if (m_drop==0)
    {
       m_drop = new KPopupMenu(this);
-      m_drop->insertItem( i18n("Paste"), 0);
+      m_drop->insertItem( i18n("Paste"), paste );
       m_drop->insertSeparator();
-      m_drop->insertItem( "cd", 1);
-      m_drop->insertItem( "cp", 2);
-      m_drop->insertItem( "ln", 3);
-      m_drop->insertItem( "mv", 4);
+      m_drop->insertItem( "cd", cd );
+      m_drop->insertItem( "cp", cp );
+      m_drop->insertItem( "ln", ln );
+      m_drop->insertItem( "mv", mv );
       connect(m_drop, SIGNAL(activated(int)), SLOT(drop_menu_activated(int)));
    };
     // The current behaviour when url(s) are dropped is
@@ -1817,44 +1819,42 @@ void TEWidget::dropEvent(QDropEvent* event)
   KURL::List urllist;
   m_dnd_file_count = 0;
   dropText = "";
-  bool bPopup = true;
-  m_drop->setItemEnabled(1,true);
+  bool justPaste = true;
 
   if(KURLDrag::decode(event, urllist)) {
+    justPaste =false;
     if (!urllist.isEmpty()) {
       KURL::List::Iterator it;
+      
+      m_drop->setItemEnabled( cd, true );
+      m_drop->setItemEnabled( ln, true ); 
+      
       for ( it = urllist.begin(); it != urllist.end(); ++it ) {
         if(m_dnd_file_count++ > 0) {
           dropText += " ";
-	  m_drop->setItemEnabled(1,false);
+	  m_drop->setItemEnabled(cd,false);
         }
         KURL url = *it;
         QString tmp;
         if (url.isLocalFile()) {
-          tmp = url.path(); // local URL : remove protocol
-        }
-        else {
+          tmp = url.path(); // local URL : remove protocol. This helps "ln" & "cd" and doesn't harm the others
+        } else if ( url.protocol() == QString::fromLatin1( "mailto" ) ) {
+	  justPaste = true;
+	  break;
+	} else {
           tmp = url.url();
-          bPopup = false; // a non-local file, don't popup
+	  m_drop->setItemEnabled( cd, false );
+	  m_drop->setItemEnabled( ln, false );
         }
         if (urllist.count()>1)
           KRun::shellQuote(tmp);
         dropText += tmp;
       }
 
-      if (bPopup)
-        // m_drop->popup(pos() + event->pos());
-         m_drop->popup(mapToGlobal(event->pos()));
-      else
-	{
-	  if (m_dnd_file_count==1)
-	    KRun::shellQuote(dropText);
-	  emit sendStringToEmu ( dropText.local8Bit() );
-	  kdDebug(1211) << "Drop:" << dropText.local8Bit() << "\n";
-	}
+      if (!justPaste) m_drop->popup(mapToGlobal(event->pos()));
     }
   }
-  else if(QTextDrag::decode(event, dropText)) {
+  if(justPaste && QTextDrag::decode(event, dropText)) {
     kdDebug(1211) << "Drop:" << dropText.local8Bit() << "\n";
     emit sendStringToEmu(dropText.local8Bit());
     // Paste it
@@ -1872,14 +1872,14 @@ void TEWidget::doDrag()
 void TEWidget::drop_menu_activated(int item)
 {
    switch (item)
-   {
-   case 0: // paste
+  {
+   case paste:
       if (m_dnd_file_count==1)
         KRun::shellQuote(dropText);
       emit sendStringToEmu(dropText.local8Bit());
       setActiveWindow();
       break;
-   case 1: // cd ...
+   case cd:
      emit sendStringToEmu("cd ");
       struct stat statbuf;
       if ( ::stat( QFile::encodeName( dropText ), &statbuf ) == 0 )
@@ -1896,17 +1896,17 @@ void TEWidget::drop_menu_activated(int item)
       emit sendStringToEmu("\n");
       setActiveWindow();
       break;
-   case 2: // copy
-     emit sendStringToEmu("cp -ri ");
+   case cp:
+     emit sendStringToEmu("kfmclient copy " );
      break;
-   case 3: // link
+   case ln:
      emit sendStringToEmu("ln -s ");
      break;
-   case 4: // move
-     emit sendStringToEmu("mv -i ");
+   case mv:
+     emit sendStringToEmu("kfmclient move " );
      break;
    }
-   if (item>1 && item<5) {
+   if (item>cd && item<=mv) {
       if (m_dnd_file_count==1)
         KRun::shellQuote(dropText);
       emit sendStringToEmu(dropText.local8Bit());
