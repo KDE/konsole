@@ -13,6 +13,7 @@ X-KDE-BrowserView-LinkedView=true
 
 Name=Terminal Emulator
 Name[af]=Terminaal Emulasie
+Name[ar]=محاكي الطرفيات
 Name[az]=Terminal Emulyasiyası
 Name[bg]=Конзолна програма
 Name[bn]=টার্মিনাল এমুলেটর
@@ -57,7 +58,6 @@ Name[pt]=Emulador de Terminal
 Name[pt_BR]=Emulador de Terminal
 Name[ro]=Emulator de terminal
 Name[ru]=Эмулятор терминала
-Name[se]=Terminálemuláhtor
 Name[sk]=Emulátor terminálu
 Name[sl]=Terminalski emulator
 Name[sr]=Емулатор терминала
