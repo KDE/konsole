@@ -2315,14 +2315,14 @@ void Konsole::buildSessionMenus()
    loadSessionCommands();
    loadScreenSessions();
 
-   m_session->insertSeparator();
-   m_closeSession->plug(m_session);
-
    if (kapp->authorizeKAction("file_print"))
    {
       m_session->insertSeparator();
       m_print->plug(m_session);
    }
+
+   m_session->insertSeparator();
+   m_closeSession->plug(m_session);
 
    m_session->insertSeparator();
    m_quit->plug(m_session);
