@@ -158,20 +158,21 @@ void TEScreen::clearSelection()
 void TEScreen::setSelBeginXY(const int x, const int y) 
 {
   sel_begin = loc( (x==columns)?(x-1):x,y+histCursor) ;
-/*  printf( "SetSelBeginXY( %d, %d, --> %d ) histCursor=%d \n", 
+/*
+  printf( "SetSelBeginXY( %d, %d, --> %d ) histCursor=%d \n", 
         x, y, sel_begin, histCursor );
-*/
+ */
   sel_BR = sel_begin;
   sel_TL = sel_begin;
 }
 
 void TEScreen::setSelExtentXY(const int x, const int y) 
 {
-  int l =  loc( (x==columns)?(x-1):x,y + histCursor);
+  int l =  loc( ((x==columns)||(x==0))?(x-1):x,y + histCursor);
 
   if (l < sel_begin)
   { 
-    sel_TL = l; 
+    sel_TL = (x==0)?l+1:l; 
     sel_BR = sel_begin;
   } 
   else
@@ -182,7 +183,7 @@ void TEScreen::setSelExtentXY(const int x, const int y)
 /*
   printf( "SetSelExtentXY( %d, %d, TL=%d, BR=%d ) histCursor=%d \n", 
         x, y, sel_TL, sel_BR, histCursor );
- */
+ */ 
 }
 
 char *TEScreen::getSelText(const BOOL preserve_line_breaks) 
