@@ -674,6 +674,7 @@ void Konsole::saveProperties(KConfig* config) {
     uint counter=0;
     QString tmpTitle;
     QString tmpTwo;
+    QString tmpSchema;
     config->setGroup("options");
 
     if (config != KGlobal::config()) {
@@ -687,6 +688,9 @@ void Konsole::saveProperties(KConfig* config) {
         tmpTitle+= (char) (counter+48);
         tmpTwo=sessions.current()->Title();
         config->writeEntry(tmpTitle,tmpTwo);
+        tmpSchema="Schema";
+        tmpSchema+= (char) (counter+48);
+        config->writeEntry(tmpSchema,sessions.current()->schemaNo());
 //        kdDebug() << "Writing " << tmpTitle << " -- " << sessions.current()->Title().latin1() << endl;
         sessions.next();
         counter++;
@@ -1115,15 +1119,18 @@ void Konsole::initFullScreen()
 {
   //This function is to be called from main.C to initialize the state of the Konsole (fullscreen or not).  It doesn't appear to work 
   //from inside the Konsole constructor
+  if (b_fullscreen) {
+   setColLin(0,0);
+   }
   setFullScreen(b_fullscreen);
+}
+
+void Konsole::initSessionSchema(int schemaNo) {
+  setSchema(schemaNo);
 }
 
 void Konsole::initSessionTitle(QString title) {
   sessions.current()->setTitle(title);
-}
-
-void Konsole::initSessionTitles(QStrList titles) {
-
 }
 
 void Konsole::newRestoredSession(QString title) {

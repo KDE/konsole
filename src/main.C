@@ -242,6 +242,7 @@ int main(int argc, char* argv[])
     n3=tmp_n3.toInt();
     QString tmpTitle;
     QString sTitle;
+    QString tmpSchema;
     QStrList titles = new QStrList();
 
     while (KMainWindow::canBeRestored(n)){
@@ -258,14 +259,16 @@ int main(int argc, char* argv[])
           sessionconfig->setGroup("options");
           sTitle=sessionconfig->readEntry(tmpTitle, "Failed");
           titles.append(sTitle.latin1());
+          tmpSchema="Schema";
+          tmpSchema+= (char) (n2+49);
 //          QTimer::singleShot(5000,m,SLOT(newSession()));
           m->newSession();
 //          kdDebug() << "Adding title tmpTitle = " << sessionconfig->readEntry(tmpTitle, m->title);
 
           m->initRenameSession(sTitle);
+          m->initSessionSchema(sessionconfig->readEntry(tmpSchema,"0").toInt());
           n2++;
           }
-        m->initSessionTitles(titles);
         ksm->konsole = m;
         ksm->konsole->initFullScreen();
         // works only for the first one, but there won't be more.
