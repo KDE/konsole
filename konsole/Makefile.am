@@ -80,9 +80,7 @@ METASOURCES = TEWidget.moc TEmuVt102.moc session.moc konsole.moc \
 messages: rc.cpp
 	rm -f schemas.cpp
 	rm -f tips.cpp
-	cp ../tips .
-	$(PREPARETIPS) > tips.cpp
-	rm -rf tips
+	(cd .. && $(PREPARETIPS) > konsole/tips.cpp)
 	for i in ../other/*.schema; do \
 	  grep "^title" $$i | cut -d':' -f2- | sed -e 's#^title \(.*\)$$#i18n(\"\1\")#' >> schemas.cpp ;\
 	done
