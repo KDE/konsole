@@ -663,12 +663,17 @@ void konsolePart::slotSelectFont() {
 void konsolePart::setFont(int fontno)
 {
   if ( ! se ) return;
-  QFont f;
-  if (fontno == DEFAULTFONT)
-    f = defaultFont;
-  else
-    if (fonts[fontno][0] == '-')
-    {
+  if (fontno == -1)
+  {
+    fontno = n_font;
+  } 
+  else if (fontno == DEFAULTFONT)
+  {
+    te->setVTFont(defaultFont);
+  }
+  else if (fonts[fontno][0] == '-')
+  {
+      QFont f;
       f.setRawName( fonts[fontno] );
       f.setFixedPitch(true);
       f.setStyleHint( QFont::TypeWriter );
@@ -679,18 +684,34 @@ void konsolePart::setFont(int fontno)
         QTimer::singleShot(1,this,SLOT(fontNotFound()));
         return;
       }
-    }
-    else
-    {
-      f.setFamily("fixed");
-      f.setFixedPitch(true);
-      f.setStyleHint(QFont::TypeWriter);
-      f.setPixelSize(QString(fonts[fontno]).toInt());
-    }
-
+      te->setVTFont(f);
+  }
+  else
+  {
+    QFont f;
+    f.setFamily("fixed");
+    f.setFixedPitch(true);
+    f.setStyleHint(QFont::TypeWriter);
+    f.setPixelSize(QString(fonts[fontno]).toInt());
+    te->setVTFont(f);
+  }
 
   se->setFontNo(fontno);
-  te->setVTFont(f);
+
+  if (selectFont)
+  {
+     QStringList items = selectFont->items();
+     int i = fontno;
+     int j = 0;
+     for(;j < (int)items.count();j++)
+     {
+       if (!items[j].isEmpty())
+          if (!i--)
+             break;
+     }
+     selectFont->setCurrentItem(j);
+  }
+
   n_font = fontno;
 }
 
