@@ -93,6 +93,8 @@
 #include "main.h"
 #include "keytrans.h"
 
+template class QPtrDict<TESession>;
+
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
 #undef PACKAGE

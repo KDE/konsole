@@ -24,6 +24,9 @@ static int schema_serial = 0; //FIXME: remove,localize
 static QIntDict<ColorSchema> numb2schema;
 static QDict<ColorSchema>    path2schema;
 
+template class QIntDict<ColorSchema>;
+template class QDict<ColorSchema>;
+
 ColorSchema* ColorSchema::readSchema(const char* path)
 { FILE* sysin = fopen(path,"r");
   char line[100]; int i;
