@@ -155,7 +155,7 @@ const char *fonts[] = {
 
 Konsole::Konsole(const char* name,
                  const char* _pgm, QStrList & _args,
-                 int histon, bool toolbaron) : KMainWindow(0, name), pgm(_pgm), args(_args),
+                 int histon, bool toolbaron, QCString mytitle) : KMainWindow(0, name), pgm(_pgm), args(_args),
                  alreadyNoticedBackgroundChange_(false)
 {
   kapp->addKipcEventMask(KIPC::BackgroundChanged);
@@ -242,11 +242,21 @@ Konsole::Konsole(const char* name,
   connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
            this, SLOT(configureRequest(TEWidget*,int,int,int)) );
 
-  title = (args.count() && (kapp->caption() == PACKAGE))
-        ? QString(args.at(0))  // program executed in the title bar
-        : kapp->caption();  // `konsole' or -caption
+
+  if (mytitle.isEmpty()) {
+   title = (args.count() && (kapp->caption() == PACKAGE))
+         ? QString(args.at(0))  // program executed in the title bar
+         : kapp->caption();  // `konsole' or -caption
+         }
+  else {
+        title = mytitle;
+         }
   initial->setTitle(title);
-  //initial->setHistory(b_scroll); //FIXME: take from schema
+
+  int myCount = args.count();
+     KONSOLEDEBUG << (char)myCount << " is the count of items in args.\n";
+
+//initial->setHistory(b_scroll); //FIXME: take from schema
 //  setHistory(b_scroll); //FIXME: take from schema
 
   addSession(initial);

@@ -45,7 +45,7 @@ class Konsole : public KMainWindow
     friend class KonsoleSessionManaged;
 public:
 
-  Konsole(const char * name, const char* pgm, QStrList & _args, int histon, bool);
+  Konsole(const char * name, const char* pgm, QStrList & _args, int histon, bool, QCString mytitle);
   ~Konsole();
   void setColLin(int columns, int lines);
   void setFullScreen(bool on);
