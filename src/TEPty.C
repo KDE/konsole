@@ -64,7 +64,7 @@
 #include <config.h>
 #endif
 
-#if defined(HAVE_GRANTPT) && defined(HAVE_PTSNAME) && defined(HAVE_UNLOCKPT) && !defined(_XOPEN_SOURCE) && !defined(__sun__)
+#if defined(HAVE_GRANTPT) && defined(HAVE_PTSNAME) && defined(HAVE_UNLOCKPT) && !defined(_XOPEN_SOURCE) && !defined(__svr4__)
 #define _XOPEN_SOURCE // make stdlib.h offer the above fcts
 #endif
 
@@ -141,7 +141,7 @@ extern "C" {
 #endif
 
 #ifdef __sgi__
-#define SVR4
+#define __svr4__
 #endif
 
 #include <qintdict.h>
@@ -281,7 +281,7 @@ int TEPty::openPty()
   }
 #endif
 
-//#if defined(__sgi__) || defined(__osf__) || defined(SVR4) || defined(__SVR4)
+//#if defined(__sgi__) || defined(__osf__) || defined(__svr4__)
 #if defined(HAVE_GRANTPT) && defined(HAVE_PTSNAME)
   if (ptyfd < 0)
   {
@@ -400,7 +400,7 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   //exit(1);
   }
 
-#if (defined(SVR4) || defined(__SVR4)) && (defined(i386) || defined(__i386__) || defined(__sgi__))
+#if (defined(__svr4__) || defined(__sgi__))
   // Solaris x86
   ioctl(tt, I_PUSH, "ptem");
   ioctl(tt, I_PUSH, "ldterm");
@@ -477,7 +477,7 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
 #undef CTRL
 #define CTRL(c) ((c) - '@')
 
-// #ifdef SVR4
+// #ifdef __svr4__
 // #define CINTR 0177
 // #define CQUIT CTRL('U')
 // #define CERASE CTRL('H')
@@ -526,7 +526,7 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   ioctl(0,TIOCSWINSZ,(char *)&wsize);  // set screen size
 
   // finally, pass to the new program
-  //  kdDebug() << "We are ready to run the program " << pgm << "\n";
+  //  kdDebug() << "We are ready to run the program " << pgm << endl;
   execvp(pgm, argv);
   perror("exec failed");
   exit(1);                             // control should never come here.
