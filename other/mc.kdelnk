@@ -5,5 +5,6 @@ Name=MC
 Comment=Midnight Commander
 Comment[ca]=Gestor de fitxers Midnight Commander
 Comment[is]=mc:  Skráastjóri fyrir textaham
+Comment[ja]=¥ß¥Ã¥É¥Ê¥¤¥È ¥³¥ó¥½¡¼¥ë
 Comment[ro]=Midnite Commander
 Exec=mc -c
