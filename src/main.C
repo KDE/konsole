@@ -600,11 +600,11 @@ void TEDemo::newSession(int i)
 void TEDemo::doneSession(TESession* s, int status)
 {
 //printf("%s(%d): Exited:%d ExitStatus:%d\n",__FILE__,__LINE__,WIFEXITED(status),WEXITSTATUS(status));
-  if (!WIFEXITED(status) || WEXITSTATUS(status))
+  if (!WIFEXITED((status)) || WEXITSTATUS((status)))
   {
     QString str = QString("`") + QString(s->Title()) + "' terminated abnormally.";
-    if (WIFEXITED(status))
-    { char rcs[100]; sprintf(rcs,"%d.\n",WEXITSTATUS(status));
+    if (WIFEXITED((status)))
+    { char rcs[100]; sprintf(rcs,"%d.\n",WEXITSTATUS((status)));
       str = str + "\nReturn code = " + rcs;
     }
     KMsgBox::message( this, "Error", str, KMsgBox::EXCLAMATION );
