@@ -35,9 +35,8 @@ static KCmdLineOptions options[] =
    { "xwin",            I18N_NOOP("ignored"), 0 },	
    { "nohist",          I18N_NOOP("Do not save lines in scroll-back buffer"), 0 },
    { "vt_sz CCxLL",  I18N_NOOP("Terminal size in columns x lines"), 0 },
-   { "e <command>",  I18N_NOOP("Execute 'command' instead of shell"), 0 },
-//FIXME: WABA: We need a way to say that all options after -e
-   // should be treated as arguments.
+   { "!e <command>",  I18N_NOOP("Execute 'command' instead of shell"), 0 },
+   // WABA: All options after -e are treated as arguments.
    { "+[args]",  	I18N_NOOP("Arguments for 'command'"), 0 },
    { 0, 0, 0 }
 };
