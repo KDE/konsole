@@ -95,6 +95,7 @@ TEmulation::TEmulation(TEWidget* w)
 : gui(w),
   scr(0),
   connected(false),
+  listenToKeyPress(false),
   codec(0),
   decoder(0),
   keytrans(0),
@@ -229,7 +230,7 @@ void TEmulation::onRcvChar(int c)
 
 void TEmulation::onKeyPress( QKeyEvent* ev )
 {
-  if (!connected) return; // someone else gets the keys
+  if (!listenToKeyPress) return; // someone else gets the keys
   emit notifySessionState(NOTIFYNORMAL);
   if (scr->getHistCursor() != scr->getHistLines());
     scr->setHistCursor(scr->getHistLines());
@@ -362,6 +363,11 @@ void TEmulation::setConnect(bool c)
   {
     scr->clearSelection();
   }
+}
+
+void TEmulation::setListenToKeyPress(bool l)
+{
+  listenToKeyPress=l;
 }
 
 // ---------------------------------------------------------------------------

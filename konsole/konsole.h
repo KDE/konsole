@@ -133,6 +133,7 @@ private slots:
   void slotRenameSession();
   void slotRenameSession(int);
   void slotToggleMonitor();
+  void slotToggleMasterMode();
   void slotClearAllSessionHistories();
   void slotHistoryType();
   void slotClearHistory();
@@ -199,6 +200,7 @@ private:
 
   KToggleAction *monitorActivity;
   KToggleAction *monitorSilence;
+  KToggleAction *masterMode;
   KToggleAction *showToolbar;
   KToggleAction *showMenubar;
   KToggleAction *showScrollbar;

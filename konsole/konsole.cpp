@@ -186,6 +186,7 @@ DCOPObject( "konsole" )
 ,m_rightButton(0)
 ,monitorActivity(0)
 ,monitorSilence(0)
+,masterMode(0)
 ,showToolbar(0)
 ,showMenubar(0)
 ,showScrollbar(0)
@@ -422,6 +423,10 @@ void Konsole::makeGUI()
    monitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ), "ktip", 0, this,
                                      SLOT( slotToggleMonitor() ), this );
    monitorSilence->plug ( m_view );
+
+   masterMode = new KToggleAction ( i18n( "Send &Input to all Sessions" ), 0, this,
+                                     SLOT( slotToggleMasterMode() ), this );
+   masterMode->plug ( m_view );
 
    m_view->insertSeparator();
    m_moveSessionLeft = new KAction(i18n("&Move Session Left"), "back", 0, this,
@@ -1470,6 +1475,10 @@ void Konsole::activateSession(TESession *s)
   if (se)
   {
      se->setConnect(FALSE);
+     if(se->isMasterMode())
+       for (TESession *se = sessions.first(); se; se = sessions.next())
+         se->setListenToKeyPress(FALSE);
+
      QObject::disconnect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
      QObject::disconnect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
      QObject::disconnect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
@@ -1496,6 +1505,9 @@ void Konsole::activateSession(TESession *s)
       setFont(s->fontNo());
   }
   s->setConnect(TRUE);
+  if(se->isMasterMode())
+    for (TESession *se = sessions.first(); se; se = sessions.next())
+      se->setListenToKeyPress(TRUE);
   updateTitle();
   if (!m_menuCreated)
     makeGUI();
@@ -1504,6 +1516,7 @@ void Konsole::activateSession(TESession *s)
   m_saveHistory->setEnabled( se->history().isOn() );
   monitorActivity->setChecked( se->isMonitorActivity() );
   monitorSilence->setChecked( se->isMonitorSilence() );
+  masterMode->setChecked( se->isMasterMode() );
   sessions.find(se);
   uint position=sessions.at();
   m_moveSessionLeft->setEnabled(position>0);
@@ -1677,6 +1690,9 @@ void Konsole::doneSession(TESession* s, int )
   delete ra; // will the toolbar die?
 
   s->setConnect(FALSE);
+  if(s->isMasterMode())
+    for (TESession *se = sessions.first(); se; se = sessions.next())
+      se->setListenToKeyPress(FALSE);
 
   // This slot (doneSession) is activated from the TEPty when receiving a
   // SIGCHLD. A lot is done during the signal handler. Apparently deleting
@@ -1787,6 +1803,20 @@ void Konsole::slotToggleMonitor()
   se->setMonitorActivity( monitorActivity->isChecked() );
   se->setMonitorSilence( monitorSilence->isChecked() );
   notifySessionState(se,NOTIFYNORMAL);
+}
+
+void Konsole::slotToggleMasterMode()
+{
+  bool _masterMode=masterMode->isChecked();
+  se->setMasterMode( _masterMode );
+  if(_masterMode)
+    for (TESession *se = sessions.first(); se; se = sessions.next())
+      se->setListenToKeyPress(TRUE);
+  else {
+    for (TESession *se = sessions.first(); se; se = sessions.next())
+      se->setListenToKeyPress(FALSE);
+    se->setListenToKeyPress(TRUE);
+  }
 }
 
 void Konsole::notifySessionState(TESession* session, int state)

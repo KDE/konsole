@@ -68,6 +68,7 @@ public:
   virtual void sendString(const char*) = 0;
 
   virtual void setConnect(bool r);
+  virtual void setListenToKeyPress(bool l);
   void setColumns(int columns);
 
   void setKeymap(int no);
@@ -83,6 +84,7 @@ protected:
   void setScreen(int n); // set `scr' to `screen[n]'
 
   bool   connected;    // communicate with widget
+  bool   listenToKeyPress;  // listen to input
 
   void setCodec(int c); // codec number, 0 = locale, 1=utf8
 

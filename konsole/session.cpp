@@ -23,6 +23,7 @@
 TESession::TESession(KMainWindow* main, TEWidget* te, const QString &_pgm, QStrList & _args, const QString &_term)
    : monitorActivity(false)
    , monitorSilence(false)
+   , masterMode(false)
    , schema_no(0)
    , font_no(3)
    , pgm(_pgm)
@@ -126,6 +127,12 @@ TESession::~TESession()
 void TESession::setConnect(bool c)
 {
   em->setConnect(c);
+  setListenToKeyPress(c);
+}
+
+void TESession::setListenToKeyPress(bool l)
+{
+  em->setListenToKeyPress(l);
 }
 
 void TESession::done(int status)
@@ -234,6 +241,7 @@ QString TESession::getPgm()
 
 bool TESession::isMonitorActivity() { return monitorActivity; }
 bool TESession::isMonitorSilence() { return monitorSilence; }
+bool TESession::isMasterMode() { return masterMode; }
 
 void TESession::setMonitorActivity(bool _monitor) { monitorActivity=_monitor; }
 void TESession::setMonitorSilence(bool _monitor) 
@@ -249,3 +257,8 @@ void TESession::setMonitorSilence(bool _monitor)
 }
 
 #include "session.moc"
+
+void TESession::setMasterMode(bool _master)
+{
+  masterMode=_master;
+}

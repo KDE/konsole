@@ -33,11 +33,13 @@ public:
 
 public:
 
-  void        setConnect(bool r);
+  void        setConnect(bool r);  // calls setListenToKeyPress(r)
+  void        setListenToKeyPress(bool l);
   TEmulation* getEmulation();      // to control emulation
   bool        isSecure();
   bool        isMonitorActivity();
   bool        isMonitorSilence();
+  bool        isMasterMode();
   int schemaNo();
   int fontNo();
   const QString& Term();
@@ -54,6 +56,7 @@ public:
 
   void setMonitorActivity(bool);
   void setMonitorSilence(bool);
+  void setMasterMode(bool);
   void setSchemaNo(int sn);
   void setKeymapNo(int kn);
   void setKeymap(const QString& _id);
@@ -87,6 +90,7 @@ private:
 
   bool           monitorActivity;
   bool           monitorSilence;
+  bool           masterMode;
   QTimer*        monitorTimer;
 
   //FIXME: using the indices here
