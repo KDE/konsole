@@ -1436,6 +1436,22 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
   return QFrame::eventFilter( obj, e );
 }
 
+// Override any accelerator with shortcut = Ctrl+D when pressed with the keyboard
+// focus in TEWidget, so that Ctrl+D will still work as 'exit'.
+bool TEWidget::event( QEvent *e )
+{
+  if ( e->type() == QEvent::AccelOverride )
+  {
+    QKeyEvent *ke = static_cast<QKeyEvent *>( e );
+    if ( ke->key() == Qt::Key_D && ke->state() == Qt::ControlButton )
+    {
+      ke->accept();
+      return true;
+    }
+  }
+  return QFrame::event( e );
+}
+
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /*                                  Frame                                    */

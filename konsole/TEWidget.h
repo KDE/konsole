@@ -128,7 +128,8 @@ protected:
 
     virtual void styleChange( QStyle& );
 
-    bool eventFilter( QObject *, QEvent * );
+    bool eventFilter( QObject *, QEvent * );    
+    bool event( QEvent * );
 
     void drawAttrStr(QPainter &paint, QRect rect,
                      QString& str, ca attr, bool pm, bool clear);
