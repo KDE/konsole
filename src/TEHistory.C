@@ -164,17 +164,20 @@ bool HistoryScroll::hasScroll()
 
 int HistoryScroll::getLines()
 {
+  if (!hasScroll()) return 0;
   return index.len() / sizeof(int);
 }
 
 int HistoryScroll::getLineLen(int lineno)
 {
+  if (!hasScroll()) return 0;
   return (startOfLine(lineno+1) - startOfLine(lineno)) / sizeof(ca);
 }
 
 int HistoryScroll::startOfLine(int lineno)
 {
   if (lineno <= 0) return 0;
+  if (!hasScroll()) return 0;
   if (lineno <= getLines())
   { int res;
     index.get((unsigned char*)&res,sizeof(int),(lineno-1)*sizeof(int));
@@ -183,17 +186,16 @@ int HistoryScroll::startOfLine(int lineno)
   return cells.len();
 }
 
-ca HistoryScroll::getCell(int lineno, int colno)
-{ ca res;
-  if (hasScroll())
-    cells.get((unsigned char*)&res,sizeof(ca),startOfLine(lineno)+colno*sizeof(ca));
-  return res;
+void HistoryScroll::getCells(int lineno, int colno, int count, ca res[])
+{
+  assert(hasScroll());
+  cells.get((unsigned char*)res,count*sizeof(ca),startOfLine(lineno)+colno*sizeof(ca));
 }
 
-void HistoryScroll::addCell(ca text)
+void HistoryScroll::addCells(ca text[], int count)
 {
   if (!hasScroll()) return;
-  cells.add((unsigned char*)&text,sizeof(ca));
+  cells.add((unsigned char*)text,count*sizeof(ca));
 }
 
 void HistoryScroll::addLine()

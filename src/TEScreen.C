@@ -497,18 +497,13 @@ ca* TEScreen::getCookedImage()
   for (y = 0; (y < lines) && (y < (hist.getLines()-histCursor)); y++)
   {
     int len = QMIN(columns,hist.getLineLen(y+histCursor));
+    int yp  = y*columns;
+    int yq  = (y+histCursor)*columns;
 
-    for (x = 0; x < len; x++)
-    {   int p=x + y*columns;
-        int q=x + (y+histCursor)*columns;
-        merged[p] = hist.getCell(y+histCursor,x);
-        if ( ( q >= sel_TL ) && ( q <= sel_BR ) )
-          reverseRendition(&merged[p]); // for selection
-    }
-    for (; x < columns; x++)
-    {   int p=x + y*columns;
-        int q=x + (y+histCursor)*columns;
-        merged[p] = dft;
+    hist.getCells(y+histCursor,0,len,merged+yp);
+    for (x = len; x < columns; x++) merged[yp+x] = dft;
+    for (x = 0; x < columns; x++)
+    {   int p=x + yp; int q=x + yq;
         if ( ( q >= sel_TL ) && ( q <= sel_BR ) )
           reverseRendition(&merged[p]); // for selection
     }
@@ -517,10 +512,11 @@ ca* TEScreen::getCookedImage()
   {
     for (y = (hist.getLines()-histCursor); y < lines ; y++)
     {
+       int yp  = y*columns;
+       int yq  = (y+histCursor)*columns;
+       int yr =  (y-hist.getLines()+histCursor)*columns;
        for (x = 0; x < columns; x++)
-       { int p = x + y * columns;
-         int q = x + (y+histCursor)*columns;
-         int r = x + (y-hist.getLines()+histCursor)*columns;
+       { int p = x + yp; int q = x + yq; int r = x + yr;
          merged[p] = image[r];
          if ( q >= sel_TL && q <= sel_BR )
            reverseRendition(&merged[p]); // for selection
@@ -1155,8 +1151,7 @@ void TEScreen::addHistLine()
     while (end >= 0 && image[end] == dft)
       end -= 1;
 
-    for (int i = 0; i <= end; i++)
-      hist.addCell(image[i]);
+    hist.addCells(image,end+1);
     hist.addLine();
 
     // adjust history cursor

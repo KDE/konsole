@@ -51,10 +51,13 @@ public:
 public: // access to history
   int  getLines();
   int  getLineLen(int lineno);
-  ca   getCell(int lineno, int colno);
+  void getCells(int lineno, int colno, int count, ca res[]);
+
+public: // backward compatibility (obsolete)
+  ca   getCell(int lineno, int colno) { ca res; getCells(lineno,colno,1,&res); return res; }
 
 public: // adding lines.
-  void addCell(ca a);
+  void addCells(ca a[], int count);
   void addLine();
 
 private:
