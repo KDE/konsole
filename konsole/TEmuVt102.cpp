@@ -852,7 +852,7 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
     scr->setHistCursor(scr->getHistLines());
 
   if (cmd==CMD_send) {
-//  if (ev->state() & AltButton) sendString("\033")
+    if (ev->state() & AltButton) sendString("\033");
     emit sndBlock(txt,len);
     return;
   }
