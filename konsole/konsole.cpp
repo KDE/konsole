@@ -565,7 +565,7 @@ void Konsole::makeGUI()
    selectFont->setItems(it);
    selectFont->plug(m_options);
 
-   
+
    if (kapp->authorizeKAction("keyboard"))
       m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
 
@@ -1055,6 +1055,10 @@ void Konsole::saveProperties(KConfig* config) {
   }
 
   config->writeEntry("class",name());
+  if (config != KGlobal::config())
+  {
+      saveMainWindowSettings(config);
+  }
 }
 
 
