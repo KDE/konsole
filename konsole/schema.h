@@ -42,7 +42,7 @@
 #define SCHEMA_include
 
 #include <qstring.h>
-#include <qlist.h>
+#include <qptrlist.h>
 #include "TECommon.h"
 
 #ifndef KONSOLEDEBUG
@@ -174,18 +174,18 @@ protected:
       // ColorSchema has a unique number.
 };
 
-class ColorSchemaList : protected QList<ColorSchema>
+class ColorSchemaList : protected QPtrList<ColorSchema>
 {
 public:
 	/**
 	* The following functions are redeclared public since
 	* they're needed, but we still want to inherit proteccted
-	* from QList to prevent unsightly -- and perhaps dangerous --
+	* from QPtrList to prevent unsightly -- and perhaps dangerous --
 	* tampering with the ColorSchemaList.
 	*/
-	uint count() const { return QList<ColorSchema>::count(); } ;
+	uint count() const { return QPtrList<ColorSchema>::count(); } ;
 	const ColorSchema *at(unsigned int i) 
-		{ return QList<ColorSchema>::at(i); } ;
+		{ return QPtrList<ColorSchema>::at(i); } ;
 
 public:
 	ColorSchemaList();

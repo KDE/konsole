@@ -14,7 +14,7 @@
 #define KEYTRANS_H
 
 #include <qstring.h>
-#include <qlist.h>
+#include <qptrlist.h>
 #include <qiodevice.h>
 
 #define BITS_NewLine    0
@@ -78,7 +78,7 @@ class KeyTrans
       KeyEntry* addEntry(int ref, int key, int bits, int mask, int cmd, QString txt);
       void addKeyTrans();
       void readConfig();
-      QList<KeyEntry> tableX;
+      QPtrList<KeyEntry> tableX;
       QString m_hdr;
       QString m_path;
       QString m_id;

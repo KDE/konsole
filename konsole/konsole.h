@@ -145,7 +145,7 @@ private:
 
   QPtrDict<TESession> action2session;
   QPtrDict<KRadioAction> session2action;
-  QList<TESession> sessions;
+  QPtrList<TESession> sessions;
   QIntDict<KSimpleConfig> no2command;
 
   TEWidget*      te;
