@@ -163,8 +163,11 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   resizing = FALSE;
   actSel   = 0;
   image    = 0;
-  lines    = 0;
-  columns  = 0;
+  lines    = 1;
+  columns  = 1;
+  font_w   = 1;
+  font_h   = 1;
+  font_a   = 1;
 
   setMouseMarks(TRUE);
   setFont( QFont("fixed") );
