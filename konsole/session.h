@@ -145,6 +145,7 @@ private:
 
   bool           connected;
   bool           monitorActivity;
+  bool           notifiedActivity;
   bool           monitorSilence;
   bool           masterMode;
   bool           autoClose;

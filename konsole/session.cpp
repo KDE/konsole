@@ -33,6 +33,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
    , connected(true)
    , monitorActivity(false)
    , monitorSilence(false)
+   , notifiedActivity(false)
    , masterMode(false)
    , autoClose(true)
    , wantedClose(false)
@@ -158,9 +159,11 @@ QString TESession::fullTitle() const
 
 void TESession::monitorTimerDone()
 {
-  KNotifyClient::event("Silence", i18n("Silence in session '%1'").arg(title));
-  emit notifySessionState(this,NOTIFYSILENCE);
-  monitorTimer->start(silence_seconds*1000,true);
+  if (monitorSilence) {
+    KNotifyClient::event("Silence", i18n("Silence in session '%1'").arg(title));
+    emit notifySessionState(this,NOTIFYSILENCE);
+  }
+  notifiedActivity=false;
 }
 
 void TESession::notifySessionState(int state)
@@ -169,12 +172,15 @@ void TESession::notifySessionState(int state)
     te->Bell(em->isConnected(),i18n("Bell in session '%1'").arg(title));
   } else if (state==NOTIFYACTIVITY) {
     if (monitorSilence) {
-      monitorTimer->stop();
       monitorTimer->start(silence_seconds*1000,true);
     }
     if (!monitorActivity)
       return;
-    KNotifyClient::event("Activity", i18n("Activity in session '%1'").arg(title));
+    if (!notifiedActivity) {
+      KNotifyClient::event("Activity", i18n("Activity in session '%1'").arg(title));
+      notifiedActivity=true;
+      monitorTimer->start(silence_seconds*1000,true);
+    }
   }
 
   emit notifySessionState(this, state);
@@ -419,7 +425,12 @@ bool TESession::isMonitorActivity() { return monitorActivity; }
 bool TESession::isMonitorSilence() { return monitorSilence; }
 bool TESession::isMasterMode() { return masterMode; }
 
-void TESession::setMonitorActivity(bool _monitor) { monitorActivity=_monitor; }
+void TESession::setMonitorActivity(bool _monitor)
+{
+  monitorActivity=_monitor;
+  notifiedActivity=false;
+}
+
 void TESession::setMonitorSilence(bool _monitor)
 {
   if (monitorSilence==_monitor)
@@ -436,7 +447,6 @@ void TESession::setMonitorSilenceSeconds(int seconds)
 {
   silence_seconds=seconds;
   if (monitorSilence) {
-    monitorTimer->stop();
     monitorTimer->start(silence_seconds*1000,true);
   }
 }
