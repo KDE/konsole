@@ -1793,7 +1793,7 @@ void TEWidget::styleChange(QStyle &)
 void TEWidget::dragEnterEvent(QDragEnterEvent* e)
 {
   e->accept(QTextDrag::canDecode(e) ||
-      QUriDrag::canDecode(e));
+      KURLDrag::canDecode(e));
 }
 
 void TEWidget::dropEvent(QDropEvent* event)
