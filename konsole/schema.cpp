@@ -77,26 +77,26 @@ int ColorSchema::serial = 1;
 //
 static const char *colornames[TABLE_COLORS] =
 {
-	"fgnormal",
-	"bgnormal",
-	"bg0",
-	"bg1",
-	"bg2",
-	"bg3",
-	"bg4",
-	"bg5",
-	"bg6",
-	"bg7",
-	"fgintense",
-	"bgintense",
-	"bg0i",
-	"bg1i",
-	"bg2i",
-	"bg3i",
-	"bg4i",
-	"bg5i",
-	"bg6i",
-	"bg7i"
+  "fgnormal",
+  "bgnormal",
+  "bg0",
+  "bg1",
+  "bg2",
+  "bg3",
+  "bg4",
+  "bg5",
+  "bg6",
+  "bg7",
+  "fgintense",
+  "bgintense",
+  "bg0i",
+  "bg1i",
+  "bg2i",
+  "bg3i",
+  "bg4i",
+  "bg5i",
+  "bg6i",
+  "bg7i"
 } ;
 
 
@@ -132,77 +132,81 @@ ColorSchema::ColorSchema(const QString& pathname)
 :m_fileRead(false)
 ,lastRead(new QDateTime())
 {
-    fPath = locate("appdata", pathname);
-	if (fPath.isEmpty() || !QFile::exists(fPath))
-	{
-		fPath = QString::null;
-		setDefaultSchema();
-	}
-	else
-	{
-		clearSchema();
-		(void) rereadSchemaFile();
-	}
+  fPath = locate("appdata", pathname);
+  if (fPath.isEmpty() || !QFile::exists(fPath))
+  {
+    fPath = QString::null;
+    fRelPath = QString::null;
+    setDefaultSchema();
+  }
+  else
+  {
+    fRelPath = pathname;
+    clearSchema();
+    (void) rereadSchemaFile();
+  }
 
-	m_numb = serial++;
+  m_numb = serial++;
 }
 
 ColorSchema::ColorSchema()
 :m_fileRead(false)
 ,fPath(QString::null)
+,fRelPath(QString::null)
 ,lastRead(0L)
 {
-	setDefaultSchema();
-	m_numb = 0;
+  setDefaultSchema();
+  m_numb = 0;
 }
 
 ColorSchema::ColorSchema(KConfig& c)
 :m_fileRead(false)
 ,fPath(QString::null)
+,fRelPath(QString::null)
 ,lastRead(0L)
 {
-	clearSchema();
+  clearSchema();
 
-	c.setGroup("SchemaGeneral");
+  c.setGroup("SchemaGeneral");
 
-	m_title = c.readEntry("Title",i18n("[no title]"));
-	m_imagePath = c.readEntry("ImagePath",QString::null);
-	m_alignment = c.readNumEntry("ImageAlignment",1);
-	m_useTransparency = c.readBoolEntry("UseTransparency",false);
+  m_title = c.readEntry("Title",i18n("[no title]"));
+  m_imagePath = c.readEntry("ImagePath",QString::null);
+  m_alignment = c.readNumEntry("ImageAlignment",1);
+  m_useTransparency = c.readBoolEntry("UseTransparency",false);
 
-	m_tr_r = c.readNumEntry("TransparentR",0);
-	m_tr_g = c.readNumEntry("TransparentG",0);
-	m_tr_b = c.readNumEntry("TransparentB",0);
-	m_tr_x = c.readDoubleNumEntry("TransparentX",0.0);
+  m_tr_r = c.readNumEntry("TransparentR",0);
+  m_tr_g = c.readNumEntry("TransparentG",0);
+  m_tr_b = c.readNumEntry("TransparentB",0);
+  m_tr_x = c.readDoubleNumEntry("TransparentX",0.0);
 
-	for (int i=0; i < TABLE_COLORS; i++)
-	{
-		readConfigColor(c,colorName(i),m_table[i]);
-	}
+  for (int i=0; i < TABLE_COLORS; i++)
+  {
+    readConfigColor(c,colorName(i),m_table[i]);
+  }
 
-	m_numb = serial++;
+  m_numb = serial++;
 }
 
 
 
 void ColorSchema::clearSchema()
 {
-	int i;
+  int i;
 
-	for (i = 0; i < TABLE_COLORS; i++)
-	{
-		m_table[i].color       = QColor(0,0,0);
-		m_table[i].transparent = 0;
-		m_table[i].bold        = 0;
-	}
-	m_title     = i18n("[no title]");
-	m_imagePath = "";
-	m_alignment = 1;
-	m_useTransparency = false;
-	m_tr_x = 0.0;
-	m_tr_r = 0;
-	m_tr_g = 0;
-	m_tr_b = 0;
+  for (i = 0; i < TABLE_COLORS; i++)
+  {
+    m_table[i].color       = QColor(0,0,0);
+    m_table[i].transparent = 0;
+    m_table[i].bold        = 0;
+  }
+  m_title     = i18n("[no title]");
+  m_imagePath = "";
+  m_alignment = 1;
+  m_useTransparency = false;
+  m_tr_x = 0.0;
+  m_tr_r = 0;
+  m_tr_g = 0;
+  m_tr_b = 0;
 }
 
 void ColorSchema::setDefaultSchema()
@@ -222,89 +226,89 @@ void ColorSchema::setDefaultSchema()
 
 /* static */ QString ColorSchema::colorName(int i)
 {
-	if ((i<0) || (i>=TABLE_COLORS))
-	{
-		kdWarning() << "Request for color name "
-			<< i
-			<< " out of range."
-			<< endl;
-		return QString::null;
-	}
+  if ((i<0) || (i>=TABLE_COLORS))
+  {
+    kdWarning() << "Request for color name "
+      << i
+      << " out of range."
+      << endl;
+    return QString::null;
+  }
 
-	return QString(colornames[i]);
+  return QString(colornames[i]);
 }
 
 void ColorSchema::writeConfigColor(KConfig& c,
-	const QString& name,
-	const ColorEntry& e) const
+  const QString& name,
+  const ColorEntry& e) const
 {
-	KConfigGroupSaver(&c,name);
-	c.setGroup(name);
-	c.writeEntry("Color",e.color);
-	c.writeEntry("Transparency",(bool) e.transparent);
-	c.writeEntry("Bold",(bool) e.bold);
+  KConfigGroupSaver(&c,name);
+  c.setGroup(name);
+  c.writeEntry("Color",e.color);
+  c.writeEntry("Transparency",(bool) e.transparent);
+  c.writeEntry("Bold",(bool) e.bold);
 }
 
 void ColorSchema::readConfigColor(KConfig& c,
-	const QString& name,
-	ColorEntry& e)
+  const QString& name,
+  ColorEntry& e)
 {
-	KConfigGroupSaver(&c,name);
-	c.setGroup(name);
+  KConfigGroupSaver(&c,name);
+  c.setGroup(name);
 
-	e.color = c.readColorEntry("Color");
-	e.transparent = c.readBoolEntry("Transparent",false);
-	e.bold = c.readBoolEntry("Bold",false);
+  e.color = c.readColorEntry("Color");
+  e.transparent = c.readBoolEntry("Transparent",false);
+  e.bold = c.readBoolEntry("Bold",false);
 }
 
 
 void ColorSchema::writeConfig(const QString& path) const
 {
-//	KONSOLEDEBUG << "Writing schema " << fPath << " to file " << path << endl;
-		
-	KConfig c(path,false,false);
+//  KONSOLEDEBUG << "Writing schema " << fPath << " to file " << path << endl;
+    
+  KConfig c(path,false,false);
 
-	c.setGroup("SchemaGeneral");
-	c.writeEntry("Title",m_title);
-	c.writeEntry("ImagePath",m_imagePath);
-	c.writeEntry("ImageAlignment",m_alignment);
-	c.writeEntry("UseTransparency",m_useTransparency);
+  c.setGroup("SchemaGeneral");
+  c.writeEntry("Title",m_title);
+  c.writeEntry("ImagePath",m_imagePath);
+  c.writeEntry("ImageAlignment",m_alignment);
+  c.writeEntry("UseTransparency",m_useTransparency);
 
-	c.writeEntry("TransparentR",m_tr_r);
-	c.writeEntry("TransparentG",m_tr_g);
-	c.writeEntry("TransparentB",m_tr_b);
-	c.writeEntry("TransparentX",m_tr_x);
+  c.writeEntry("TransparentR",m_tr_r);
+  c.writeEntry("TransparentG",m_tr_g);
+  c.writeEntry("TransparentB",m_tr_b);
+  c.writeEntry("TransparentX",m_tr_x);
 
-	for (int i=0; i < TABLE_COLORS; i++)
-	{
-		writeConfigColor(c,colorName(i),m_table[i]);
-	}
+  for (int i=0; i < TABLE_COLORS; i++)
+  {
+    writeConfigColor(c,colorName(i),m_table[i]);
+  }
 }
 
 bool ColorSchema::rereadSchemaFile()
 {
-	if (fPath.isEmpty()) return false;
+  if (fPath.isEmpty()) return false;
 
-	//KONSOLEDEBUG << "Rereading schema file " << fPath << endl;
+  //KONSOLEDEBUG << "Rereading schema file " << fPath << endl;
 
 
-	FILE *sysin = fopen(QFile::encodeName(fPath),"r");
-	if (!sysin)
-	{
-		int e = errno;
+  FILE *sysin = fopen(QFile::encodeName(fPath),"r");
+  if (!sysin)
+  {
+    int e = errno;
 
-		kdWarning() << "Schema file "
-			<< fPath
-			<< " could not be opened ("
-			<< strerror(e)
-			<< ")"
-			<< endl;
-		return false;
-	}
+    kdWarning() << "Schema file "
+      << fPath
+      << " could not be opened ("
+      << strerror(e)
+      << ")"
+      << endl;
+    return false;
+  }
 
-	char line[100];
+  char line[100];
 
-	*lastRead = QDateTime::currentDateTime();
+  *lastRead = QDateTime::currentDateTime();
 
   while (fscanf(sysin,"%80[^\n]\n",line) > 0)
   {
@@ -330,15 +334,15 @@ bool ColorSchema::rereadSchemaFile()
       { float rx;
         int rr, rg, rb;
 
-	// Transparency needs 4 parameters: fade strength and the 3
-	// components of the fade color.
+  // Transparency needs 4 parameters: fade strength and the 3
+  // components of the fade color.
         if (sscanf(line,"transparency %g %d %d %d",&rx,&rr,&rg,&rb) != 4)
           continue;
-	m_useTransparency=true;
-	m_tr_x=rx;
-	m_tr_r=rr;
-	m_tr_g=rg;
-	m_tr_b=rb;
+  m_useTransparency=true;
+  m_tr_x=rx;
+  m_tr_r=rr;
+  m_tr_g=rg;
+  m_tr_b=rb;
       }
       if (!strncmp(line,"color",5))
       { int fi,cr,cg,cb,tr,bo;
@@ -380,60 +384,60 @@ bool ColorSchema::rereadSchemaFile()
   }
   fclose(sysin);
   m_fileRead=true;
-	return true;
+  return true;
 }
 
 bool ColorSchema::hasSchemaFileChanged() const
 {
-	//KONSOLEDEBUG << "Checking schema file " << fPath << endl;
+  //KONSOLEDEBUG << "Checking schema file " << fPath << endl;
 
-	// The default color schema never changes.
-	//
-	//
-	if (fPath.isEmpty()) return false;
+  // The default color schema never changes.
+  //
+  //
+  if (fPath.isEmpty()) return false;
 
-	QFileInfo i(fPath);
+  QFileInfo i(fPath);
 
-	if (i.exists())
-	{
-		QDateTime written = i.lastModified();
+  if (i.exists())
+  {
+    QDateTime written = i.lastModified();
 
-		if (written > (*lastRead))
-		{
-//			KONSOLEDEBUG << "Schema file was modified " << written.toString() << endl;
+    if (written > (*lastRead))
+    {
+//      KONSOLEDEBUG << "Schema file was modified " << written.toString() << endl;
 
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	else
-	{
-		kdWarning() << "Schema file no longer exists."
-			<< endl;
-		return false;
-	}
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+  else
+  {
+    kdWarning() << "Schema file no longer exists."
+      << endl;
+    return false;
+  }
 }
 
 void ColorSchema::updateLastRead(const QDateTime& dt)
 {
-	if (lastRead)
-	{
-		*lastRead=dt;
-	}
+  if (lastRead)
+  {
+    *lastRead=dt;
+  }
 }
 
 
 ColorSchemaList::ColorSchemaList() :
-	QList<ColorSchema> ()
+  QList<ColorSchema> ()
 {
-//	KONSOLEDEBUG << "Got new color list" << endl;
+//  KONSOLEDEBUG << "Got new color list" << endl;
 
-	defaultSchema = new ColorSchema();
-	append(defaultSchema);
-	setAutoDelete(true);
+  defaultSchema = new ColorSchema();
+  append(defaultSchema);
+  setAutoDelete(true);
 }
 
 ColorSchemaList::~ColorSchemaList()
@@ -447,18 +451,20 @@ ColorSchema *ColorSchemaList::find(const QString& path)
 {
    if (path.isEmpty()) 
       return find(0);
-	//KONSOLEDEBUG << "Looking for schema " << path << endl;
+   //KONSOLEDEBUG << "Looking for schema " << path << endl;
    //kdDebug(1211)<<"ColorSchema::find() count()=="<<count()<<endl;
-	ColorSchemaListIterator it(*this);
-	ColorSchema *c;
+   ColorSchemaListIterator it(*this);
+   ColorSchema *c;
    bool pathIsOnlyFileName=(!path.contains("/"));
 
-	while ((c=it.current()))
-	{
-      if ((pathIsOnlyFileName) && ((*it)->path().contains(path))) return *it;
-      else if ((*it)->path() == path) return *it;
-		++it;
-	}
+   while ((c=it.current()))
+   {
+      if ((pathIsOnlyFileName) && ((*it)->path().endsWith(path))) 
+        return *it;
+      else if ((*it)->path() == path) 
+        return *it;
+      ++it;
+   }
 
    //list is empty except the default schema
    if (count()==1)
@@ -474,111 +480,111 @@ ColorSchema *ColorSchemaList::find(const QString& path)
 
 ColorSchema *ColorSchemaList::find(int i)
 {
-	//KONSOLEDEBUG << "Looking for schema m_number " << i << endl;
+  //KONSOLEDEBUG << "Looking for schema m_number " << i << endl;
 
-	ColorSchemaListIterator it(*this);
-	ColorSchema *c;
+  ColorSchemaListIterator it(*this);
+  ColorSchema *c;
 
-	while ((c=it.current()))
-	{
-		if ((*it)->numb() == i) return *it;
-		++it;
-	}
+  while ((c=it.current()))
+  {
+    if ((*it)->numb() == i) return *it;
+    ++it;
+  }
 
-	return 0;
+  return 0;
 }
 
 bool ColorSchemaList::updateAllSchemaTimes(const QDateTime& now)
 {
-//	KONSOLEDEBUG << "Updating time stamps" << endl;
+//  KONSOLEDEBUG << "Updating time stamps" << endl;
 
-	QStringList list = KGlobal::dirs()->
-		findAllResources("appdata", "*.schema");
-	QStringList::ConstIterator it;
-	bool r = false;
+  QStringList list;
+  KGlobal::dirs()->findAllResources("appdata", "*.schema", false, true, list);
+  QStringList::ConstIterator it;
+  bool r = false;
 
-	for (it=list.begin(); it!=list.end(); ++it)
-	{
-		ColorSchema *sc = find(*it);
+  for (it=list.begin(); it!=list.end(); ++it)
+  {
+    ColorSchema *sc = find(*it);
 
-		if (!sc)
-		{
-//			KONSOLEDEBUG << "Found new schema " << *it << endl;
+    if (!sc)
+    {
+//      KONSOLEDEBUG << "Found new schema " << *it << endl;
 
-			ColorSchema *newSchema = new ColorSchema(*it);
-			if (newSchema) 
-			{
-				append(newSchema);
-				r=true;
-			}
-		}
-		else
-		{
-			if (sc->hasSchemaFileChanged())
-			{
-				sc->rereadSchemaFile();
-			}
-			else
-			{
-				sc->updateLastRead(now);
-			}
-		}
-	}
+      ColorSchema *newSchema = new ColorSchema(*it);
+      if (newSchema) 
+      {
+        append(newSchema);
+        r=true;
+      }
+    }
+    else
+    {
+      if (sc->hasSchemaFileChanged())
+      {
+        sc->rereadSchemaFile();
+      }
+      else
+      {
+        sc->updateLastRead(now);
+      }
+    }
+  }
    sort();
-	return r;
+  return r;
 }
 
 bool ColorSchemaList::deleteOldSchemas(const QDateTime& now)
 {
-//	KONSOLEDEBUG << "Checking for vanished schemas" << endl;
+//  KONSOLEDEBUG << "Checking for vanished schemas" << endl;
 
-	ColorSchemaListIterator it(*this);
-	ColorSchema *p ;
-	bool r = false;
+  ColorSchemaListIterator it(*this);
+  ColorSchema *p ;
+  bool r = false;
 
-	while ((p=it.current()))
-	{
-		if ((p->getLastRead()) && (*(p->getLastRead())) < now)
-		{
-			KONSOLEDEBUG << "Found deleted schema "
-				<< p->path()
-				<< endl;
-			++it;
-			remove(p);
-			r=true;
-			if (!it.current())
-			{
-				break;
-			}
-		}
-		else
-		{
-			++it;
-		}
-	}
+  while ((p=it.current()))
+  {
+    if ((p->getLastRead()) && (*(p->getLastRead())) < now)
+    {
+      KONSOLEDEBUG << "Found deleted schema "
+        << p->path()
+        << endl;
+      ++it;
+      remove(p);
+      r=true;
+      if (!it.current())
+      {
+        break;
+      }
+    }
+    else
+    {
+      ++it;
+    }
+  }
 
-	return r;
+  return r;
 }
 
 
 bool ColorSchemaList::checkSchemas()
 {
-//	KONSOLEDEBUG << "Checking for new schemas" << endl;
+//  KONSOLEDEBUG << "Checking for new schemas" << endl;
 
-	bool r = false;	// Any new schema's found?
+  bool r = false;  // Any new schema's found?
 
-	// All schemas whose schema files can still be found
-	// will have their lastRead timestamps updated to
-	// now.
-	// 
-	//
-	QDateTime now = QDateTime::currentDateTime();
-	
+  // All schemas whose schema files can still be found
+  // will have their lastRead timestamps updated to
+  // now.
+  // 
+  //
+  QDateTime now = QDateTime::currentDateTime();
+  
 
-	r = updateAllSchemaTimes(now);
-	r = r || deleteOldSchemas(now);
+  r = updateAllSchemaTimes(now);
+  r = r || deleteOldSchemas(now);
 
-	return r;
+  return r;
 }
 
 int ColorSchemaList::compareItems(QCollection::Item item1, QCollection::Item item2)

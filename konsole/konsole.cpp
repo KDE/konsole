@@ -902,7 +902,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
       sch=(ColorSchema*)colors->at(0);  //the default one
    }
    if (sch->hasSchemaFileChanged()) sch->rereadSchemaFile();
-   s_schema = sch->path();
+   s_schema = sch->relPath();
    curr_schema = sch->numb();
    pmPath = sch->imagePath();
    te->setColorTable(sch->table()); //FIXME: set twice here to work around a bug
@@ -1876,7 +1876,7 @@ void Konsole::setSchema(ColorSchema* s)
   }
 //        KONSOLEDEBUG << "Remembering schema data" << endl;
 
-  s_schema = s->path();
+  s_schema = s->relPath();
   curr_schema = s->numb();
   pmPath = s->imagePath();
   te->setColorTable(s->table()); //FIXME: set twice here to work around a bug
