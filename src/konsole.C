@@ -698,7 +698,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    b_warnQuit=config->readBoolEntry( "WarnQuit", TRUE );
    n_oldkeytab=n_keytab;
    n_keytab=config->readNumEntry("keytab",0); // act. the keytab for this session
-   b_fullscreen = FALSE; // config->readBoolEntry("Fullscreen",FALSE);
+   b_fullscreen = config->readBoolEntry("Fullscreen",FALSE);
    n_defaultFont = n_font = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
    n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
    s_word_seps= config->readEntry("wordseps",":@-./_~");
