@@ -1,10 +1,6 @@
 SUBDIRS = konsole other doc fonts
 
-data_DATA = konsole.desktop 
-datadir = $(kde_appsdir)/System
-
-sudata_DATA = konsolesu.desktop
-sudatadir = $(kde_appsdir)/System/More
+xdg_apps_DATA = konsole.desktop konsolesu.desktop
 
 install-data-local: uninstall.desktop
 	$(mkinstalldirs) $(DESTDIR)$(kde_appsdir)/System
@@ -29,7 +25,7 @@ misc_DATA = eventsrc tips
 miscdir = $(kde_datadir)/konsole
 
 EXTRA_DIST = CONTRIBUTORS LICENSE.readme README.bugs \
-	README.linux.console tests $(data_DATA)
+	README.linux.console tests $(xdg_apps_DATA)
 
 kwritedrc: $(top_builddir)/config.h
 	echo "[General]" >kwritedrc
