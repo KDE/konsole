@@ -186,8 +186,9 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 ,rootxpm(0)
 ,menubar(0)
 ,statusbar(0)
-,m_file(0)
-,m_sessions(0)
+,m_session(0)
+,m_edit(0)
+,m_view(0)
 ,m_options(0)
 ,m_schema(0)
 ,m_keytab(0)
@@ -351,13 +352,14 @@ void Konsole::makeGUI()
    if (m_menuCreated) return;
    //not longer needed
    disconnect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
-   disconnect(m_file,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+   disconnect(m_session,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_options,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_help,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
-   disconnect(m_sessions,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+   disconnect(m_edit,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+   disconnect(m_view,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    //KONSOLEDEBUG<<"Konsole::makeGUI()"<<endl;
    connect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
-   connect(m_file,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
+   connect(m_session,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
    m_menuCreated=true;
 
    // Remove the empty separator Qt inserts if the menu is empty on popup,
@@ -377,54 +379,55 @@ void Konsole::makeGUI()
    m_signals->insertItem( i18n( "&Kill Task" )      + " (KILL)",  9);
    connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
 
-   // Sessions Menu ----------------------------------------------------------------
-   m_sessions->setCheckable(TRUE);
-   m_sessions->insertItem( i18n("&Send Signal"), m_signals );
-   KAction *renameSession = new KAction(i18n("&Rename Session..."), 0, this,
-                                        SLOT(slotRenameSession()), this);
-   renameSession->plug(m_sessions);
+   // Edit Menu ----------------------------------------------------------------
+   m_edit->setCheckable(TRUE);
+   m_edit->insertItem( i18n("&Send Signal"), m_signals );
 
-   monitorActivity = new KToggleAction ( i18n( "Monitor for Activity" ), "idea", 0, this,
-                                     SLOT( slotToggleMonitor() ), this );
-   monitorActivity->plug ( m_sessions );
-
-   monitorSilence = new KToggleAction ( i18n( "Monitor for Silence" ), "ktip", 0, this,
-                                     SLOT( slotToggleMonitor() ), this );
-   monitorSilence->plug ( m_sessions );
+   m_edit->insertSeparator();
+   m_saveHistory = new KAction(i18n("S&ave History As..."), "filesaveas", 0, this,
+                                       SLOT(slotSaveHistory()), this);
+   m_saveHistory->setEnabled( se->history().isOn() );
+   m_saveHistory->plug(m_edit);
 
    m_clearHistory = new KAction(i18n("Clear &History"), "history_clear", 0, this,
                                        SLOT(slotClearHistory()), this);
    m_clearHistory->setEnabled( se->history().isOn() );
-   m_clearHistory->plug(m_sessions);
+   m_clearHistory->plug(m_edit);
 
-   m_saveHistory = new KAction(i18n("S&ave History As..."), "filesaveas", 0, this,
-                                       SLOT(slotSaveHistory()), this);
-   m_saveHistory->setEnabled( se->history().isOn() );
-   m_saveHistory->plug(m_sessions);
+   m_edit->insertSeparator();
+   KAction *clearAllSessionHistories = new KAction(i18n("Clear all H&istories"), "history_clear", 0,
+     this, SLOT(slotClearAllSessionHistories()), this);
+   clearAllSessionHistories->plug(m_edit);
 
+   // View Menu
+   KAction *renameSession = new KAction(i18n("&Rename Session..."), 0, this,
+                                        SLOT(slotRenameSession()), this);
+   renameSession->plug(m_view);
+
+   m_view->insertSeparator();
+   monitorActivity = new KToggleAction ( i18n( "Monitor for Activity" ), "idea", 0, this,
+                                     SLOT( slotToggleMonitor() ), this );
+   monitorActivity->plug ( m_view );
+
+   monitorSilence = new KToggleAction ( i18n( "Monitor for Silence" ), "ktip", 0, this,
+                                     SLOT( slotToggleMonitor() ), this );
+   monitorSilence->plug ( m_view );
+
+   m_view->insertSeparator();
    m_moveSessionLeft = new KAction(i18n("&Move Session Left"), "back", 0, this,
                                         SLOT(moveSessionLeft()), this);
    m_moveSessionLeft->setEnabled( false );
-   m_moveSessionLeft->plug(m_sessions);
+   m_moveSessionLeft->plug(m_view);
 
    m_moveSessionRight = new KAction(i18n("M&ove Session Right"), "forward", 0, this,
                                         SLOT(moveSessionRight()), this);
    m_moveSessionRight->setEnabled( false );
-   m_moveSessionRight->plug(m_sessions);
+   m_moveSessionRight->plug(m_view);
 
-   KAction *closeSession = new KAction(i18n("&Close Session"), "fileclose", 0, this,
-                                        SLOT(closeCurrentSession()), this);
-   closeSession->plug(m_sessions);
-
-   m_sessions->insertSeparator();
-   KAction *clearAllSessionHistories = new KAction(i18n("Clear all H&istories"), "history_clear", 0,
-     this, SLOT(slotClearAllSessionHistories()), this);
-   clearAllSessionHistories->plug(m_sessions);
-   m_sessions->insertSeparator();
+   m_view->insertSeparator();
 //   KRadioAction *ra = session2action.find(m_initialSession);
    KRadioAction *ra = session2action.find(se);
-   if (ra!=0) ra->plug(m_sessions);
-
+   if (ra!=0) ra->plug(m_view);
 
    // Schema Options Menu -----------------------------------------------------
    m_schema = new KPopupMenu(this);
@@ -444,10 +447,6 @@ void Konsole::makeGUI()
    m_codec->setItemChecked(1,TRUE);
 
    //options menu
-   // insert 'Rename Session' here too, because they will not find it on right click
-   renameSession->plug(m_options);
-   m_options->insertSeparator();
-
    // Menubar on/off
    showMenubar = new KToggleAction ( i18n( "Show &Menubar" ), "showmenu", 0, this,
                                      SLOT( slotToggleMenubar() ), this );
@@ -607,11 +606,17 @@ void Konsole::makeGUI()
    //the different session types
    loadSessionCommands();
    loadScreenSessions();
-   m_file->insertSeparator();
-   m_file->insertItem( SmallIconSet( "exit" ), i18n("&Quit"), this, SLOT( close() ) );
+
+   m_session->insertSeparator();
+   KAction *closeSession = new KAction(i18n("&Close Session"), "fileclose", 0, this,
+                                        SLOT(closeCurrentSession()), this);
+   closeSession->plug(m_session);
+  
+   m_session->insertSeparator();
+   m_session->insertItem( SmallIconSet( "exit" ), i18n("&Quit"), this, SLOT( close() ) );
 
 
-   connect(m_file, SIGNAL(activated(int)), SLOT(newSession(int)));
+   connect(m_session, SIGNAL(activated(int)), SLOT(newSession(int)));
 
    delete colors;
    colors = new ColorSchemaList();
@@ -660,8 +665,9 @@ void Konsole::makeBasicGUI()
   toolBar()->setFullSize( TRUE );
 
 
-  m_file = new KPopupMenu(this);
-  m_sessions = new KPopupMenu(this);
+  m_session = new KPopupMenu(this);
+  m_edit = new KPopupMenu(this);
+  m_view = new KPopupMenu(this);
   m_options = new KPopupMenu(this);
   m_help =  helpMenu(0, FALSE);
 
@@ -671,13 +677,15 @@ void Konsole::makeBasicGUI()
   // programs.
 
   connect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
-  connect(m_file,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+  connect(m_session,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_options,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_help,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
-  connect(m_sessions,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+  connect(m_edit,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+  connect(m_view,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
 
-  menubar->insertItem(i18n("File") , m_file);
-  menubar->insertItem(i18n("Sessions"), m_sessions);
+  menubar->insertItem(i18n("Session") , m_session);
+  menubar->insertItem(i18n("Edit"), m_edit);
+  menubar->insertItem(i18n("View"), m_view);
   menubar->insertItem(i18n("Settings"), m_options);
   menubar->insertItem(i18n("Help"), m_help);
 };
@@ -796,8 +804,8 @@ void Konsole::configureRequest(TEWidget* te, int state, int x, int y)
 //printf("Konsole::configureRequest(_,%d,%d)\n",x,y);
    if (!m_menuCreated)
       makeGUI();
-  ( (state & ShiftButton  ) ? m_sessions :
-    (state & ControlButton) ? m_file :
+  ( (state & ShiftButton  ) ? m_edit :
+    (state & ControlButton) ? m_session :
                               m_options  )
   ->popup(te->mapToGlobal(QPoint(x,y)));
 }
@@ -1416,7 +1424,7 @@ void Konsole::addSession(TESession* s)
   session2action.insert(s,ra);
   sessions.append(s);
   if (m_menuCreated)
-     ra->plug(m_sessions);
+     ra->plug(m_view);
 
   int button_id=ra->itemId( ra->plug(toolBar()) );
   KToolBarButton* ktb=toolBar()->getButton(button_id);  
@@ -1640,7 +1648,7 @@ void Konsole::doneSession(TESession* s, int )
   }
 #endif
   KRadioAction *ra = session2action.find(s);
-  ra->unplug(m_sessions);
+  ra->unplug(m_view);
   ra->unplug(toolBar());
   session2action.remove(s);
   session2button.remove(s);
@@ -1710,8 +1718,8 @@ void Konsole::moveSessionLeft()
   sessions.insert(position-1,se);
 
   KRadioAction *ra = session2action.find(se);
-  ra->unplug(m_sessions);
-  ra->plug(m_sessions,(m_sessions->count()-sessions.count()+1)+position-1);
+  ra->unplug(m_view);
+  ra->plug(m_view,(m_view->count()-sessions.count()+1)+position-1);
 
   ra->unplug(toolBar());
   session2button.remove(se);
@@ -1739,8 +1747,8 @@ void Konsole::moveSessionRight()
   sessions.insert(position+1,se);
 
   KRadioAction *ra = session2action.find(se);
-  ra->unplug(m_sessions);
-  ra->plug(m_sessions,(m_sessions->count()-sessions.count()+1)+position+1);
+  ra->unplug(m_view);
+  ra->plug(m_view,(m_view->count()-sessions.count()+1)+position+1);
 
   ra->unplug(toolBar());
   session2button.remove(se);
@@ -1809,7 +1817,7 @@ void Konsole::addSessionCommand(const QString &path)
     return; // ignore
   }
   QString icon = co->readEntry("Icon", "openterm");
-  m_file->insertItem( SmallIconSet( icon ), txt, ++cmd_serial );
+  m_session->insertItem( SmallIconSet( icon ), txt, ++cmd_serial );
   m_toolbarSessionsCommands->insertItem( SmallIconSet( icon ), txt, cmd_serial );
   no2command.insert(cmd_serial,co);
 }
@@ -1817,7 +1825,7 @@ void Konsole::addSessionCommand(const QString &path)
 void Konsole::loadSessionCommands()
 {
   addSessionCommand(QString::null);
-  m_file->insertSeparator();
+  m_session->insertSeparator();
   QStringList lst = KGlobal::dirs()->findAllResources("appdata", "*.desktop", false, true);
 
   for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it )
@@ -1836,7 +1844,7 @@ void Konsole::addScreenSession(const QString &socket)
   co->writeEntry("Exec", QString::fromLatin1("screen -r %1").arg(socket));
   QString icon = "openterm"; // FIXME use another icon (malte)
   cmd_serial++;
-  m_file->insertItem( SmallIconSet( icon ), txt, cmd_serial, cmd_serial - 1 );
+  m_session->insertItem( SmallIconSet( icon ), txt, cmd_serial, cmd_serial - 1 );
   m_toolbarSessionsCommands->insertItem( SmallIconSet( icon ), txt, cmd_serial );
   no2command.insert(cmd_serial,co);
 }
@@ -1875,7 +1883,7 @@ void Konsole::loadScreenSessions()
   {
     for (int i = cmd_first_screen; i <= cmd_serial; ++i)
     {
-      m_file->removeItem(i);
+      m_session->removeItem(i);
       m_toolbarSessionsCommands->removeItem(i);
       no2command.remove(i);
     }

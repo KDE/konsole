@@ -169,8 +169,9 @@ private:
   KMenuBar*   menubar;
   KStatusBar* statusbar;
 
-  KPopupMenu* m_file;
-  KPopupMenu* m_sessions;
+  KPopupMenu* m_session;
+  KPopupMenu* m_edit;
+  KPopupMenu* m_view;
   KPopupMenu* m_options;
   KPopupMenu* m_schema;
   KPopupMenu* m_keytab;
