@@ -20,7 +20,6 @@
 
 #include <kprocess.h>
 #include <qsocketnotifier.h>
-#include <qtimer.h>
 #include <qstrlist.h>
 #include <qvaluelist.h>
 #include <qmemarray.h>
@@ -93,15 +92,12 @@ Q_OBJECT
       SendJob() {}
       SendJob(const char* b, int len) {
         buffer.duplicate(b,len);
-        start = 0;
         length = len;
       }
       QMemArray<char> buffer;
-      int start;
       int length;
     };
     QValueList<SendJob> pendingSendJobs;
-    QTimer* pSendJobTimer;
 
 };
 

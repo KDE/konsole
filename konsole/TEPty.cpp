@@ -110,7 +110,7 @@ int TEPty::run(const char* _pgm, QStrList & _args, const char* _term, bool _addu
 
   setUsePty(true, _addutmp);
 
-  if (!start(NotifyOnExit, (Communication) (Stdout | NoRead)))
+  if (!start(NotifyOnExit, (Communication) (Stdin | Stdout | NoRead)))
      return -1;
 
   resume(); // Start...
@@ -131,18 +131,18 @@ void TEPty::setWriteable(bool writeable)
 /*!
     Create an instance.
 */
-TEPty::TEPty() : pSendJobTimer(NULL)
+TEPty::TEPty()
 {
   connect(this, SIGNAL(receivedStdout(int, int &)),
 	  this, SLOT(DataReceived(int, int&)));
   connect(this, SIGNAL(processExited(KProcess *)),
           this, SLOT(donePty()));
+  connect(this, SIGNAL(wroteStdin(KProcess *)),
+          this, SLOT(doSendJobs()));
 }
 
 /*!
     Destructor.
-    Note that the related client program is not killed
-    (yet) when a instance is deleted.
 */
 TEPty::~TEPty()
 {
@@ -161,55 +161,30 @@ void TEPty::send_string(const char* s)
 }
 
 void TEPty::doSendJobs() {
-  int written;
-  int fd = ptyMasterFd();
+  if(pendingSendJobs.isEmpty())
+     return;
   
-  while(!pendingSendJobs.isEmpty()) {
-    SendJob& job = pendingSendJobs.first();
-    written = write(fd, job.buffer.data() + job.start, job.length);
-    if (written==-1) {
-      if ( errno!=EAGAIN && errno!=EINTR )
-        pendingSendJobs.remove(pendingSendJobs.begin());
-      return;
-    }else {
-      job.start += written;
-      job.length -= written;
-      if ( job.length == 0 )
-        pendingSendJobs.remove(pendingSendJobs.begin());
-    }
+  SendJob& job = pendingSendJobs.first();
+  if (!writeStdin(job.buffer.data(), job.length))
+  {
+    qWarning("Uh oh.. can't write data..");
+    return;
   }
-  if (pSendJobTimer)
-    pSendJobTimer->stop();
+  pendingSendJobs.remove(pendingSendJobs.begin());
 }
 
 void TEPty::appendSendJob(const char* s, int len)
 {
   pendingSendJobs.append(SendJob(s,len));
-  if (!pSendJobTimer) {
-    pSendJobTimer = new QTimer(this);
-    connect(pSendJobTimer, SIGNAL(timeout()), this, SLOT(doSendJobs()) );
-  }
-  pSendJobTimer->start(0);
 }
 
 /*! sends len bytes through the line */
 void TEPty::send_bytes(const char* s, int len)
 {
-  if (!pendingSendJobs.isEmpty()) {
+  bool sent = writeStdin(s, len);
+  if (!sent)
+  {
     appendSendJob(s,len);
-  }else {
-    int written;
-    int fd = ptyMasterFd();
-    do {
-      written = write(fd,s,len);
-      if (written==-1) {
-        if ( errno==EAGAIN || errno==EINTR )
-          appendSendJob(s,len);
-        return;
-      }
-      s += written;
-      len -= written;
-    } while(len>0);
   }
 }
 
