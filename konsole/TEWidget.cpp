@@ -85,8 +85,6 @@
 #define loc(X,Y) ((Y)*columns+(X))
 #endif
 
-#define round(a) ((a)>0 ? (int)((a)+0.5) : -(int)(0.5-(a)))
-
 //FIXME: the rim should normally be 1, 0 only when running in full screen mode.
 #define rimX 0      // left/right rim width
 #define rimY 0      // top/bottom rim high
@@ -244,7 +242,7 @@ void TEWidget::fontChange(const QFont &)
   //  characters in the presence of double wide (e.g. Japanese) characters."
   int fw;
   // Get the width from representative normal width characters
-  font_w = (int) round((double)fm.width(REPCHAR)/(double)strlen(REPCHAR));
+  font_w = qRound((double)fm.width(REPCHAR)/(double)strlen(REPCHAR));
 
   fixed_font = true;
   fw = fm.width(REPCHAR[0]);
