@@ -3239,7 +3239,7 @@ void Konsole::addSessionCommand(const QString &path)
   no2filename.insert(cmd_serial,new QString(filename));
 
   // Add shortcuts only once and not for 'New Shell'.
-  if ( ( b_sessionShortcutsMapped == true ) or ( cmd_serial == SESSION_NEW_SHELL_ID ) ) return;
+  if ( ( b_sessionShortcutsMapped == true ) || ( cmd_serial == SESSION_NEW_SHELL_ID ) ) return;
 
   // Add an empty shortcut for each Session.
   QString comment = co->readEntry("Comment");
