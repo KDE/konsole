@@ -527,14 +527,9 @@ bool HistoryTypeBuffer::isOn() const
   return true;
 }
 
-unsigned int HistoryTypeBuffer::getNbLines() const
-{
-  return m_nbLines;
-}
-
 unsigned int HistoryTypeBuffer::getSize() const
 {
-  return getNbLines();
+  return m_nbLines;
 }
 
 HistoryScroll* HistoryTypeBuffer::getScroll(HistoryScroll *old) const

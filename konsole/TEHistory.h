@@ -257,7 +257,6 @@ public:
   HistoryTypeBuffer(unsigned int nbLines);
   
   virtual bool isOn() const;
-  virtual unsigned int getNbLines() const;
   virtual unsigned int getSize() const;
 
   virtual HistoryScroll* getScroll(HistoryScroll *) const;
