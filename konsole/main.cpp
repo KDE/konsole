@@ -31,7 +31,7 @@
 #include <kstandarddirs.h>
 #include "konsole.h"
 
-static const char *description =
+static const char description[] =
   I18N_NOOP("X terminal for use with KDE.");
 
 //   { "T <title>",       0, 0 },
