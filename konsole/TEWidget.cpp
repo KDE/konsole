@@ -283,7 +283,8 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,word_characters(":@-./_~")
 ,bellMode(BELLSYSTEM)
 ,blinking(false)
-,m_blinkingCursor(false)
+,cursorBlinking(false)
+,hasBlinkingCursor(false)
 ,m_drop(0)
 ,possibleTripleClick(false)
 ,mResizeWidget(0)
@@ -306,6 +307,8 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 
   blinkT   = new QTimer(this);
   connect(blinkT, SIGNAL(timeout()), this, SLOT(blinkEvent()));
+  blinkCursorT   = new QTimer(this);
+  connect(blinkCursorT, SIGNAL(timeout()), this, SLOT(blinkCursorEvent()));
 
   setMouseMarks(TRUE);
   setVTFont( QFont("fixed") );
@@ -345,8 +348,8 @@ TEWidget::~TEWidget()
 void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
                            QString& str, ca attr, bool pm, bool clear)
 {
-  QColor fColor=(((attr.r & RE_CURSOR) && hasFocus() && (!m_blinkingCursor || !blinking)) ? color_table[attr.b].color : color_table[attr.f].color);
-  QColor bColor=(((attr.r & RE_CURSOR) && hasFocus() && (!m_blinkingCursor || !blinking)) ? color_table[attr.f].color : color_table[attr.b].color);
+  QColor fColor=(((attr.r & RE_CURSOR) && hasFocus() && (!hasBlinkingCursor || !cursorBlinking)) ? color_table[attr.b].color : color_table[attr.f].color);
+  QColor bColor=(((attr.r & RE_CURSOR) && hasFocus() && (!hasBlinkingCursor || !cursorBlinking)) ? color_table[attr.f].color : color_table[attr.b].color);
 
   if (pm && color_table[attr.b].transparent)
   {
@@ -367,11 +370,9 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
   {
     paint.setPen(fColor);
     paint.drawText(rect.x(),rect.y()+font_a, str);
-    if ((attr.r & RE_UNDERLINE) || color_table[attr.f].bold || (attr.r & RE_CURSOR))
+    if ((attr.r & RE_UNDERLINE) || color_table[attr.f].bold)
     {
       paint.setClipRect(rect);
-      if ((attr.r & RE_CURSOR) && !hasFocus())
-        paint.drawRect(rect.x(),rect.y(),rect.width(),rect.height()-m_lineSpacing);
       if (color_table[attr.f].bold)
       {
         paint.setBackgroundMode( TransparentMode );
@@ -382,6 +383,11 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
                        rect.right(),rect.y()+font_a+1 );
       paint.setClipping(FALSE);
     }
+  }
+  if ((attr.r & RE_CURSOR) && !hasFocus()) {
+    paint.setClipRect(rect);
+    paint.drawRect(rect.x(),rect.y(),rect.width(),rect.height()-m_lineSpacing);
+    paint.setClipping(FALSE);
   }
 }
 
@@ -449,7 +455,7 @@ HCNT("setImage");
   paint.end();
   setUpdatesEnabled(TRUE);
   if ( hasBlinker && !blinkT->isActive()) blinkT->start(1000); // 1000 ms
-  if (!hasBlinker && !m_blinkingCursor && blinkT->isActive()) { blinkT->stop(); blinking = FALSE; }
+  if (!hasBlinker && blinkT->isActive()) { blinkT->stop(); blinking = FALSE; }
   delete [] disstrU;
 
   if (resizing)
@@ -482,9 +488,9 @@ HCNT("setImage");
 
 void TEWidget::setBlinkingCursor(bool blink)
 {
-  m_blinkingCursor=blink;
-  if (blink && !blinkT->isActive()) blinkT->start(1000);
-  if (!blink && !hasBlinker && blinkT->isActive()) { blinkT->stop(); blinking = FALSE; }
+  hasBlinkingCursor=blink;
+  if (blink && !blinkCursorT->isActive()) blinkCursorT->start(1000);
+  if (!blink && blinkCursorT->isActive()) { blinkCursorT->stop(); cursorBlinking = FALSE; }
 }
 
 // paint Event ////////////////////////////////////////////////////
@@ -565,6 +571,12 @@ HCNT("paintEvent");
 void TEWidget::blinkEvent()
 {
   blinking = !blinking;
+  repaint(FALSE);
+}
+
+void TEWidget::blinkCursorEvent()
+{
+  cursorBlinking = !cursorBlinking;
   repaint(FALSE);
 }
 
@@ -1143,6 +1155,11 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
 
     actSel=0; // Key stroke implies a screen update, so TEWidget won't
               // know where the current selection is.
+
+    if (hasBlinkingCursor) {
+      blinkCursorT->start(1000);
+      cursorBlinking = FALSE;
+    }
 
     emit keyPressedSignal(ke); // expose
 #if QT_VERSION < 300

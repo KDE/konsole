@@ -51,7 +51,7 @@ public:
     void setScroll(int cursor, int lines);
     void doScroll(int lines);
 
-    bool blinkingCursor() { return m_blinkingCursor; }
+    bool blinkingCursor() { return hasBlinkingCursor; }
     void setBlinkingCursor(bool blink);
 
     void setLineSpacing(uint);
@@ -146,6 +146,7 @@ protected slots:
 
     void scrollChanged(int value);
     void blinkEvent();
+    void blinkCursorEvent();
 
 private:
 
@@ -186,8 +187,10 @@ private:
 
     bool blinking;   // hide text in paintEvent
     bool hasBlinker; // has characters to blink
-    bool m_blinkingCursor;
+    bool cursorBlinking;     // hide cursor in paintEvent
+    bool hasBlinkingCursor;  // has blinking cursor enabled
     QTimer* blinkT;  // active when hasBlinker
+    QTimer* blinkCursorT;  // active when hasBlinkingCursor
     KPopupMenu* m_drop;
     QString dropText;
     bool possibleTripleClick;  // is set in mouseDoubleClickEvent and deleted
