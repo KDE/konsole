@@ -248,7 +248,7 @@ void TEWidget::fontChange(const QFont &)
     } else
       fw = fm.width(REPCHAR[i]);
   }
-  
+
   if (font_w>200) // don't trust unrealistic value, fallback to QFontMetrics::maxWidth()
     font_w=fm.maxWidth();
   if (font_w<1)
@@ -387,7 +387,7 @@ TEWidget::~TEWidget()
 
 void TEWidget::drawTextFixed(QPainter &paint, int x, int y,
                              QString& str, const ca *attr)
-{                             
+{
   QString drawstr;
   unsigned int nc=0;
   int w;
@@ -421,7 +421,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
   int a = font_a + m_lineSpacing / 2;
   QColor fColor = printerFriendly ? Qt::black : color_table[attr->f].color;
   QString drawstr;
-  
+
   if ((attr->r & RE_CURSOR) && !isPrinting)
     cursorRect = rect;
 
@@ -476,12 +476,12 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
       f.setBold(true);
       paint.setFont(f);
     }
-    
+
     if(!fixed_font)
     {
       // The meaning of y differs between different versions of QPainter::drawText!!
       int y = rect.y(); // top of rect
-      
+
       drawTextFixed(paint, x, y, str, attr);
     }
     else
@@ -501,7 +501,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
       // When printing we use a bold font for bold
       paint.restore();
     }
-    
+
     if ((attr->r & RE_UNDERLINE) || color_table[attr->f].bold)
     {
       paint.setClipRect(rect);
@@ -558,7 +558,7 @@ void TEWidget::setCursorPos(const int curx, const int cury)
 */
 
 void TEWidget::setImage(const ca* const newimg, int lines, int columns)
-{ 
+{
   if (!image)
      updateImageSize(); // Create image
 
@@ -581,18 +581,18 @@ HCNT("setImage");
   int lins = QMIN(this->lines,  QMAX(0,lines  ));
   int cols = QMIN(this->columns,QMAX(0,columns));
   QChar *disstrU = new QChar[cols];
-  char *dirtyMask = (char *) malloc(cols+2); 
+  char *dirtyMask = (char *) malloc(cols+2);
 
 //{ static int cnt = 0; printf("setImage %d\n",cnt++); }
   for (y = 0; y < lins; y++)
   {
     const ca*       lcl = &image[y*this->columns];
     const ca* const ext = &newimg[y*columns];
-    
-    // The dirty mask indicates which characters need repainting. We also 
+
+    // The dirty mask indicates which characters need repainting. We also
     // mark surrounding neighbours dirty, in case the character exceeds
     // its cell boundaries
-    memset(dirtyMask, 0, cols+2); 
+    memset(dirtyMask, 0, cols+2);
     // Two extra so that we don't have to have to care about start and end conditions
     for (x = 0; x < cols; x++)
     {
@@ -602,7 +602,7 @@ HCNT("setImage");
       }
     }
     dirtyMask++; // Position correctly
-    
+
     if (!resizing) // not while resizing, we're expecting a paintEvent
     for (x = 0; x < cols; x++)
     {
@@ -644,9 +644,9 @@ HCNT("setImage");
         x += len - 1;
       }
     }
-    
+
     dirtyMask--; // Set back
-    
+
     // finally, make `image' become `newimg'.
     memcpy((void*)lcl,(const void*)ext,cols*sizeof(ca));
   }
@@ -755,7 +755,7 @@ void TEWidget::print(QPainter &paint, bool friendly, bool exact)
    {
      QPixmap pm(contentsRect().right(), contentsRect().bottom());
      pm.fill();
-     
+
      QPainter pm_paint;
      pm_paint.begin(&pm, this);
      paintContents(pm_paint, contentsRect(), true);
@@ -770,7 +770,7 @@ void TEWidget::print(QPainter &paint, bool friendly, bool exact)
    printerFriendly = false;
    isPrinting = false;
    printerBold = false;
-   
+
    fixed_font = save_fixed_font;
    blinking = save_blinking;
 }
@@ -1709,9 +1709,9 @@ void TEWidget::Bell(bool visibleSession, QString message)
     KNotifyClient::beep();
   } else if (bellMode==BELLNOTIFY) {
     if (visibleSession)
-      KNotifyClient::event("BellVisible", message);
+      KNotifyClient::event(winId(), "BellVisible", message);
     else
-      KNotifyClient::event("BellInvisible", message);
+      KNotifyClient::event(winId(), "BellInvisible", message);
   } else if (bellMode==BELLVISUAL) {
     swapColorTable();
     QTimer::singleShot(200,this,SLOT(swapColorTable()));
@@ -1870,10 +1870,10 @@ void TEWidget::dropEvent(QDropEvent* event)
     justPaste =false;
     if (!urllist.isEmpty()) {
       KURL::List::Iterator it;
-      
+
       m_drop->setItemEnabled( cd, true );
-      m_drop->setItemEnabled( ln, true ); 
-      
+      m_drop->setItemEnabled( ln, true );
+
       for ( it = urllist.begin(); it != urllist.end(); ++it ) {
         if(m_dnd_file_count++ > 0) {
           dropText += " ";
