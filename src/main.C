@@ -73,6 +73,7 @@
 #include <kmenubar.h>
 #include <kmessagebox.h>
 #include <krootpixmap.h>
+#include <kcmdlineargs.h>
 
 #include <kimgio.h>
 
@@ -94,6 +95,22 @@
 #undef VERSION
 #define PACKAGE "konsole"
 #define VERSION "0.9.12"
+
+static const char *description = 
+	I18N_NOOP("X terminal for use with KDE.");
+
+static KCmdLineOptions options[] =
+{
+   { "name <name>",	I18N_NOOP("Set Window Class"), 0 },
+   { "ls",		I18N_NOOP("Start login shell"), 0 },
+   { "nowelcome",       I18N_NOOP("Suppress greeting"), 0 },
+   { "nohist",          I18N_NOOP("Do not save lines in scroll-back buffer"), 0 },
+   { "vt_sz CCxLL",	I18N_NOOP("Terminal size in columns x lines"), 0 },
+   { "e <command>",	I18N_NOOP("Execute 'command' instead of shell"), 0 },
+#warning WABA: We need a way to say that all options after -e should be treated as arguments.
+   { "+[args]",		I18N_NOOP("Arguments for 'command'"), 0 },
+   { 0, 0, 0 }
+};
 
 template class QIntDict<TESession>;
 template class QIntDict<KSimpleConfig>;
@@ -980,88 +997,71 @@ void TEDemo::setSchema(const ColorSchema* s)
 
 /* --| main |---------------------------------------------------------------- */
 
-static void usage()
-{
-  fprintf
-  (stderr,
-   "usage: %s [option ...]\n"
-   "%s version %s, an X terminal for KDE.\n"
-   "\n"
-   " -e Command Parameter ... Execute command instead of shell\n"
-   " -name .................. Set Window Class\n"
-   " -h ..................... This text\n"
-   " -ls .................... Start login shell\n"
-   " -nowelcome ............. Suppress greeting\n"
-   " -nohist ................ Do not save lines in scroll-back buffer\n"
-   " -vt_sz CCxLL ........... terminal size in columns x lines \n"
-   "\n"
-   "Other options due to man:X(1x), Qt and KDE, among them:\n"
-   "\n"
-   " -caption 'Text'......... Set title\n"
-   " -display <display> ..... Set the X-Display\n"
-  ,PACKAGE,PACKAGE,VERSION
-  );
-}
-
 int main(int argc, char* argv[])
 {
   setuid(getuid()); setgid(getgid()); // drop privileges
 
   // deal with shell/command ////////////////////////////
-  int login_shell=0;
-  int welcome=1;
-  int histon=1;
+  bool login_shell = false;
+  bool welcome = true;
+  bool histon = true;
   const char* shell = getenv("SHELL");
   const char* wname = PACKAGE;
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
 
-  QString sz = "";
+  QCString sz = "";
 
   QStrList eargs;
   eargs.append(shell);
 
+  KCmdLineArgs::init(argc, argv, PACKAGE, description, VERSION);
+
+  KCmdLineArgs::addCmdLineOptions( options );
+
   setlocale( LC_ALL, "" );
-  KApplication a(argc, argv, PACKAGE);
+  KApplication a;
   kimgioRegister(); // add io for additional image formats
 
-  for (int i = 1; i < argc; i++)
+  KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+
+  if (!args->getOption("e").isEmpty())
   {
-    if (!strcmp(argv[i],"-e") && i+1 < argc) // handle command
-    {
-      if (login_shell) fprintf(stderr,"-e excludes -ls.\n");
-      login_shell = 0; // does not make sense here.
-      eargs.clear();
-      int j;
-      for (j = 0; j+i+1 < argc; j++) eargs.append( argv[i+j+1] );
-      break;
-    }
-    if (!strcmp(argv[i],"-vt_sz") && i+1 < argc) sz = argv[++i];
-    if (!strcmp(argv[i],"-sl") && i+1 < argc)
-    {
-      fprintf(stderr, "konsole: -sl <lines> is obsolete.\n"
-                      "konsole: use -nohist for -sl 0.\n");
-      QString a(argv[++i]);
-      if (!a.toInt()) histon = FALSE;
-    }
-    if (!strcmp(argv[i],"-nohist")) histon = FALSE;
-    if (!strcmp(argv[i],"-name") && i+1 < argc) wname = argv[++i];
-    if (!strcmp(argv[i],"-ls") ) login_shell=1;
-    if (!strcmp(argv[i],"-nowelcome")) welcome=0;
-    if (!strcmp(argv[i],"-h")) { usage(); exit(0); }
-    if (!strcmp(argv[i],"-help")) { usage(); exit(0); }
-    if (!strcmp(argv[i],"--help")) { usage(); exit(0); }
-    //FIXME: more: font, menu, scrollbar, schema, session ...
+     if (args->isSet("ls"))
+        KCmdLineArgs::usage(i18n("You can't use BOTH -ls and -e.\n"));
+     eargs.clear();
+     eargs.append( args->getOption("e"));
+     for(int i=0; i < args->count(); i++)
+        eargs.append( args->arg(i) );
   }
-  // ///////////////////////////////////////////////
+
+  sz = args->getOption("vt_sz");
+
+  histon = args->isSet("hist");
+  wname = args->getOption("name");
+  login_shell = args->isSet("ls");
+  welcome = args->isSet("welcome");
+
+  //FIXME: more: font, menu, scrollbar, schema, session ...
+
+  args->clear();
 
   int c = 0, l = 0;
-  if ( (strcmp("", sz) != 0) )
-  { char *ls = (char*)strchr( sz, 'x' );
+  if ( !sz.isEmpty() )
+  { 
+    char *ls = (char*)strchr( sz.data(), 'x' );
     if ( ls != NULL )
-    { *ls='\0'; ls++; c=atoi(sz); l=atoi(ls); }
+    { 
+       *ls='\0'; 
+       ls++; 
+       c=atoi(sz.data()); 
+       l=atoi(ls); 
+    }
     else
-    { fprintf(stderr, "expected -vt_sz <#columns>x<#lines> ie. 80x40\n" ); }
+    { 
+       KCmdLineArgs::usage(i18n("expected --vt_sz <#columns>x<#lines> ie. 80x40\n")); 
+    }
   }
+
   if (a.isRestored())
   {
     KConfig * sessionconfig = a.sessionConfig();
@@ -1072,6 +1072,7 @@ int main(int argc, char* argv[])
   }
   else
   {  
+printf("EARGS[0] = %s\n", eargs.at(0));
     TEDemo*  m = new TEDemo(wname,eargs,login_shell,histon);
     m->setColLin(c,l); // will use default height and width if called with (0,0)
 
