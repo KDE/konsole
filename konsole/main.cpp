@@ -135,7 +135,7 @@ int main(int argc, char* argv[])
   bool toolbaron = true;
   bool frameon = true;
   bool scrollbaron = true;
-  const char* wname = PACKAGE;
+  QCString wname = PACKAGE;
 
 
   KAboutData aboutData( PACKAGE, I18N_NOOP("Konsole"),
