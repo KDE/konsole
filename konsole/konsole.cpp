@@ -1814,6 +1814,7 @@ void Konsole::activateSession(TESession *s)
   {
       setFont(s->fontNo());
   }
+  notifySize(te->Lines(), te->Columns());  // set menu items (strange arg order !)
   s->setConnect(true);
   if(se->isMasterMode())
     for (TESession *se = sessions.first(); se; se = sessions.next())

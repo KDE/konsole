@@ -29,6 +29,7 @@
 
 TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args, const QString &_term,const QString &_sessionId, const QString &_initial_cwd)
    : DCOPObject( _sessionId.latin1() )
+   , connected(true)
    , monitorActivity(false)
    , monitorSilence(false)
    , masterMode(false)
@@ -52,8 +53,12 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
   te = _te;
   //kdDebug(1211)<<"TESession ctor() new TEmuVt102"<<endl;
   em = new TEmuVt102(te);
-  QObject::connect(te,SIGNAL(changedImageSizeSignal(int,int)),
-                   this,SLOT(onImageSizeChange(int,int)));
+  font_h = te-> fontHeight();
+  font_w = te-> fontWidth();
+  QObject::connect(te,SIGNAL(changedContentSizeSignal(int,int)),
+                   this,SLOT(onContentSizeChange(int,int)));
+  QObject::connect(te,SIGNAL(changedFontMetricSignal(int,int)),
+                   this,SLOT(onFontMetricChange(int,int)));
 
   term = _term;
   iconName = "openterm";
@@ -91,12 +96,16 @@ void TESession::ptyError()
 
 void TESession::changeWidget(TEWidget* w)
 {
-  QObject::disconnect(te,SIGNAL(changedImageSizeSignal(int,int)),
-                     this,SLOT(onImageSizeChange(int,int)));
+  QObject::disconnect(te,SIGNAL(changedContentSizeSignal(int,int)),
+                     this,SLOT(onContentSizeChange(int,int)));
+  QObject::disconnect(te,SIGNAL(changedFontMetricSignal(int,int)),
+                     this,SLOT(onFontMetricChange(int,int)));
   te=w;
   em->changeGUI(w);
-  QObject::connect(te,SIGNAL(changedImageSizeSignal(int,int)),
-                   this,SLOT(onImageSizeChange(int,int)));
+  QObject::connect(te,SIGNAL(changedContentSizeSignal(int,int)),
+                   this,SLOT(onContentSizeChange(int,int)));
+  QObject::connect(te,SIGNAL(changedFontMetricSignal(int,int)),
+                   this,SLOT(onFontMetricChange(int,int)));
 }
 
 void TESession::run()
@@ -165,11 +174,20 @@ void TESession::notifySessionState(int state)
   emit notifySessionState(this, state);
 }
 
-void TESession::onImageSizeChange(int lines, int columns) // TEWidget has to send pixel sizes
+void TESession::onContentSizeChange(int height, int width)
 {
-  // Individual calculation based on session font following later
-  em->onImageSizeChange(lines,columns);
-  sh->setSize(lines,columns);
+  //kdDebug(1211)<<"TESession::onContentSizeChange " << height << " " << width << endl;
+  em->onImageSizeChange( height/font_h, width/font_w );
+  sh->setSize( height/font_h, width/font_w );
+}
+
+void TESession::onFontMetricChange(int height, int width)
+{
+  //kdDebug(1211)<<"TESession::onFontMetricChange " << height << " " << width << endl;
+  if (connected) {
+    font_h = height;
+    font_w = width;
+  }
 }
 
 bool TESession::sendSignal(int signal)
@@ -223,6 +241,7 @@ TESession::~TESession()
 
 void TESession::setConnect(bool c)
 {
+  connected=c;
   em->setConnect(c);
   setListenToKeyPress(c);
 }

@@ -133,7 +133,8 @@ private slots:
   void onRcvBlock( const char* buf, int len );
   void monitorTimerDone();
   void notifySessionState(int state);
-  void onImageSizeChange(int lines, int columns);
+  void onContentSizeChange(int height, int width);
+  void onFontMetricChange(int height, int width);
 
 private:
 
@@ -141,6 +142,7 @@ private:
   TEWidget*      te;
   TEmulation*    em;
 
+  bool           connected;
   bool           monitorActivity;
   bool           monitorSilence;
   bool           masterMode;
@@ -153,6 +155,9 @@ private:
   int            schema_no;
   int            font_no;
   int            silence_seconds;
+  
+  int            font_h;
+  int            font_w;
 
   QString        title;
   QString        userTitle;

@@ -264,6 +264,7 @@ void TEWidget::fontChange(const QFont &)
 #endif
   fontMap = identicalMap;
 #endif
+  emit changedFontMetricSignal( font_h, font_w );
   propagateSize();
   update();
 }
@@ -295,6 +296,8 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,font_a(1)
 ,lines(1)
 ,columns(1)
+,contentHeight(1)
+,contentWidth(1)
 ,image(0)
 ,resizing(false)
 ,terminalSizeHint(false)
@@ -713,7 +716,7 @@ void TEWidget::propagateSize()
   //      `emu' will call back via `setImage'.
 
   resizing = true;
-  emit changedImageSizeSignal(lines, columns); // expose resizeEvent
+  emit changedContentSizeSignal(contentHeight, contentWidth); // expose resizeEvent
   resizing = false;
 }
 
@@ -1539,29 +1542,32 @@ void TEWidget::calcGeometry()
   {
     case SCRNONE :
      bX = 1;
-     columns = ( contentsRect().width() - 2 * rimX ) / font_w;
+     contentWidth = contentsRect().width() - 2 * rimX;
      scrollbar->hide();
      break;
     case SCRLEFT :
      bX = 1+scrollbar->width();
-     columns = ( contentsRect().width() - 2 * rimX - scrollbar->width()) / font_w;
+     contentWidth = contentsRect().width() - 2 * rimX - scrollbar->width();
      scrollbar->move(contentsRect().topLeft());
      scrollbar->show();
      break;
     case SCRRIGHT:
      bX = 1;
-     columns = ( contentsRect().width()  - 2 * rimX - scrollbar->width()) / font_w;
+     contentWidth = contentsRect().width()  - 2 * rimX - scrollbar->width();
      scrollbar->move(contentsRect().topRight() - QPoint(scrollbar->width()-1,0));
      scrollbar->show();
      break;
   }
+  columns = contentWidth / font_w;
+  
   if (columns<1) {
     kdDebug(1211) << "TEWidget::calcGeometry: columns=" << columns << endl;
     columns=1;
   }
 
   //FIXME: support 'rounding' styles
-  lines   = ( contentsRect().height() - 2 * rimY  ) / font_h;
+  contentHeight = contentsRect().height() - 2 * rimY;
+  lines = contentHeight / font_h;
 }
 
 void TEWidget::makeImage()

@@ -75,6 +75,9 @@ public:
     int  Lines()   { return lines;   }
     int  Columns() { return columns; }
 
+    int  fontHeight()   { return font_h;   }
+    int  fontWidth()    { return font_w; }
+    
     void calcGeometry();
     void propagateSize();
     QSize calcSize(int cols, int lins) const;
@@ -112,7 +115,8 @@ signals:
 
     void keyPressedSignal(QKeyEvent *e);
     void mouseSignal(int cb, int cx, int cy);
-    void changedImageSizeSignal(int lines, int columns);
+    void changedFontMetricSignal(int height, int width);
+    void changedContentSizeSignal(int height, int width);
     void changedHistoryCursor(int value);
     void configureRequest( TEWidget*, int state, int x, int y );
 
@@ -188,6 +192,8 @@ private:
 
     int lines;
     int columns;
+    int contentHeight;
+    int contentWidth;
     ca *image; // [lines][columns]
     int image_size;
     QBitArray m_line_wrapped;
