@@ -66,8 +66,9 @@
 
 #define loc(X,Y) ((Y)*columns+(X))
 
-#define rimX 1      // left/right rim width
-#define rimY 1      // top/bottom rim high
+//FIXME: the rim should normally be 1, 0 only when running in full screen mode.
+#define rimX 0      // left/right rim width
+#define rimY 0      // top/bottom rim high
 
 #define SCRWIDTH 16 // width of the scrollbar
 
@@ -943,7 +944,8 @@ void TEWidget::clearImage()
 // Create Image ///////////////////////////////////////////////////////
 
 void TEWidget::calcGeometry()
-{
+{ 
+  //FIXME: set rimX == rimY == 0 when running in full screen mode.
 
   scrollbar->resize(QApplication::style().scrollBarExtent().width(),
                     contentsRect().height());

@@ -4,6 +4,8 @@ CONTRIBUTORS. See ChangeLog also
   - schema files seeked also in ~/.kde/share/apps/konsole
   - vim.schema
   - improved/fixed selections
+- Lotzi Boloni <boloni@cs.purdue.edu>
+  - Fast switch between sessions with the same schema.
 - Matthias Ettrich <ettrich@kde.org>
   - most of main.C donated via kvt.
   - rework of the session management
@@ -30,5 +32,3 @@ CONTRIBUTORS. See ChangeLog also
   - decent marking
 - Kevin Street <street@iname.com>
   - FreeBSD port
-- Lotzi Boloni <boloni@cs.purdue.edu>
-  - Fast switch between sessions with the same schema.
