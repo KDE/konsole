@@ -376,6 +376,7 @@ void Konsole::makeMenu()
   m_options->insertItem( i18n("&Schema"), m_schema);
   m_options->insertSeparator();
   m_options->insertItem( i18n("&History"), 3 );
+  m_options->setItemEnabled(3, false);
   m_options->insertSeparator();
   m_options->insertItem( i18n("&Codec"), m_codec);
   m_options->insertItem( i18n("&Keyboard"), m_keytab);
