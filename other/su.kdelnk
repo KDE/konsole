@@ -2,7 +2,7 @@
 [KDE Desktop Entry]
 Type=KonsoleApplication
 Name=Administrator
-Name[af]=administrateur
+Name[af]=Administrateur
 Name[ar]=مدير النظام
 Name[az]=İdarəçi
 Name[be]=Адміністратар
@@ -50,7 +50,7 @@ Name[zh_CN]=管理员
 Name[zh_TW]=管理者
 Name[zu]=Umphathi zindaba zangaphakathi
 Comment=Root Console
-Comment[af]=root konsole
+Comment[af]=Root Konsole
 Comment[ar]=لوحة أوامر المستخدم الجذري
 Comment[az]=Root Konsolu
 Comment[bg]=Root-Конзола

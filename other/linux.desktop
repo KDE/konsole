@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Type=KonsoleApplication
 Name=Linux Console
-Name[af]=linux konsole
+Name[af]=Linux Konsole
 Name[ar]=لوحة أوامر لينكس
 Name[az]=Linuks Konsolu
 Name[be]=Кансоля Linux
@@ -44,7 +44,7 @@ Name[zh_CN]=Linux 控制台
 Name[zh_TW]=Linux 主控台
 Name[zu]=Linux Khonsole
 Comment=New Linux Console
-Comment[af]=nuwe linux konsole
+Comment[af]=Nuwe Linux Konsole
 Comment[ar]=كونسول لينكس جديد
 Comment[be]=Новая кансоля Linux
 Comment[bg]=Нова Конзола на Linux

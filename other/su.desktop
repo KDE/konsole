@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Type=KonsoleApplication
 Name=Root Console
-Name[af]=root konsole
+Name[af]=Root Konsole
 Name[ar]=لوحة المستخدم الجذري
 Name[az]=Ali İstifadəçi Konsolu
 Name[bg]=Root Конзола
@@ -43,7 +43,7 @@ Name[zh_CN]=Root 控制台
 Name[zh_TW]=Root 主控台
 Name[zu]=I Khonsole Yempande
 Comment=New Root Console
-Comment[af]=nuwe root konsole
+Comment[af]=Nuwe Root Konsole
 Comment[ar]=كونسول جذري جديد
 Comment[bg]=Нова Root-Конзола
 Comment[bs]=Nova administratorska konzola

@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Type=KonsoleApplication
 Name=Screen Session
-Name[af]=skerm sessie
+Name[af]=Skerm Sessie
 Name[ar]=جلسة الشاشة
 Name[az]=Ekran İclası
 Name[bg]=Сесия за екрана
@@ -45,7 +45,7 @@ Name[zh_CN]=屏幕绘画
 Name[zh_TW]=螢幕工作階段
 Name[zu]=Isigaba Sesikrini
 Comment=New Screen Session
-Comment[af]=nuwe skerm sessie
+Comment[af]=Nuwe Skerm Sessie
 Comment[ar]=جلسة شاشة جديدة
 Comment[bg]=Нова Сесия за Екрана
 Comment[bs]=Nova sesija ekrana

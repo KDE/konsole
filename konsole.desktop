@@ -8,7 +8,6 @@ Terminal=0
 X-KDE-StartupNotify=true
 
 Name=Konsole
-Name[af]=konsole
 Name[ar]=سطر الأوامر
 Name[az]=Konsol
 Name[be]=Кансоля
@@ -38,7 +37,7 @@ Name[xx]=xx
 Name[zu]=iKonsole
 
 GenericName=Terminal Program
-GenericName[af]=terminaal program
+GenericName[af]=Terminaal Program
 GenericName[ar]=برنامج تيرمينال
 GenericName[be]=Тэрмінал
 GenericName[bg]=Терминална програма

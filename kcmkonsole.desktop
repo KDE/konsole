@@ -8,7 +8,7 @@ X-KDE-ControlModuleType=User
 X-KDE-HideFromPanel=true
 
 Name=Console
-Name[af]=konsole
+Name[af]=Konsole
 Name[ar]=لوحة الأوامر
 Name[az]=Konsol
 Name[be]=Кансоля
@@ -58,7 +58,7 @@ Name[zh_TW]=主控台
 Name[zu]=I Khonsole
 
 GenericName=All Konsole Settings
-GenericName[af]=alle konsole instellings
+GenericName[af]=Alle Konsole Instellings
 GenericName[ar]=كل اعدادات Konsole
 GenericName[az]=Bütün Konsol Qurğuları
 GenericName[be]=Усе настройкі кансолі

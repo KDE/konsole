@@ -8,7 +8,7 @@ MimeType=application/x-konsole
 Terminal=0
 
 Name=Konsole - Super User Mode
-Name[af]=konsole - super gebruiker modus
+Name[af]=Konsole - Super Gebruiker Modus
 Name[ar]=Konsole - وضعية المستخدم الجذري
 Name[bg]=Конзола - Root-терминал
 Name[bs]=Konzola (Samo za administratora)
@@ -53,7 +53,7 @@ Name[zh_TW]=終端機 - 超級使用者模式
 Name[zu]=Konsole - Imodi Ephezulu Yomsebenzisi
 
 GenericName=Terminal Program
-GenericName[af]=terminaal program
+GenericName[af]=Terminaal Program
 GenericName[ar]=برنامج تيرمينال
 GenericName[be]=Тэрмінал
 GenericName[bg]=Терминална програма
