@@ -4,15 +4,14 @@ keyboard "default"
 
 # --------------------------------------------------------------
 #
-# This configuration table allows to customize the
-# meaning of the keys.
+# This configuration table allows to customize the keyboard.
 #
-# The syntax of each entry has the form 
+# The syntax of each entry has the form
 #
 #   "key" Keyname { ("+"|"-") Modename } ":" (String|Operation)
 #
-# Keynames are those defined in <qnamespace.h> with the
-# "Qt::Key_" removed. (We'd better insert the list here)
+# Keynames are those defined in <qnamespace.h>
+# with the "Qt::Key_" prefix removed.
 #
 # Mode names are: Shift, Alt, Control.
 #
@@ -28,43 +27,50 @@ keyboard "default"
 #
 # --------------------------------------------------------------
 
-key Escape     : "\E"
-key Tab        : "\t"
+# common keys
 
-key Enter      : "\r"  # Keypad-Enter.
-key Return-Alt : "\r"  
-key Return+Alt : "\E\r"  
+key Escape         : "\E"
+key Tab            : "\t"
+
+key Return-Alt     : "\r"
+key Return+Alt     : "\E\r"
 
 # Backspace and Delete codes are preserving CTRL-H.
 
-key Backspace : "\x7f"
-key Delete    : "\E[3~"
+key Backspace      : "\x7f"
+
+# cursor keys
+
+key Up    -Shift   : "\EOA"
+key Down  -Shift   : "\EOB"
+key Right          : "\EOC"
+key Left           : "\EOD"
+
+# other grey PC keys
+
+key Enter          : "\r"
+
+key Home           : "\E[1~"
+key Insert-Shift   : "\E[2~"
+key Delete         : "\E[3~"
+key End            : "\E[4~"
+key Prior -Shift   : "\E[5~"
+key Next  -Shift   : "\E[6~"
 
 # function keys
 
-key F1  : "\E[11~"
-key F2  : "\E[12~"
-key F3  : "\E[13~"
-key F4  : "\E[14~"
-key F5  : "\E[15~"
-key F6  : "\E[17~" 
-key F7  : "\E[18~" 
-key F8  : "\E[19~" 
-key F9  : "\E[20~" 
-key F10 : "\E[21~" 
-key F11 : "\E[23~" 
-key F12 : "\E[24~" 
-
-key Up    -Shift : "\EOA"
-key Down  -Shift : "\EOB"
-key Right        : "\EOC"
-key Left         : "\EOD"
-
-key Home         : "\E[1~"  
-key End          : "\E[4~"  
-key Prior -Shift : "\E[5~"  
-key Next  -Shift : "\E[6~"  
-key Insert-Shift : "\E[2~"  
+key F1             : "\E[11~"
+key F2             : "\E[12~"
+key F3             : "\E[13~"
+key F4             : "\E[14~"
+key F5             : "\E[15~"
+key F6             : "\E[17~"
+key F7             : "\E[18~"
+key F8             : "\E[19~"
+key F9             : "\E[20~"
+key F10            : "\E[21~"
+key F11            : "\E[23~"
+key F12            : "\E[24~"
 
 # Work around dead keys
 
@@ -78,11 +84,4 @@ key Down  +Shift   : scrollLineDown
 key Next  +Shift   : scrollPageDown
 key Insert+Shift   : emitSelection
 
-#----------------------------------------------------------
-
-# keypad characters as offered by Qt
-# cannot be recognized as such.
-
-#----------------------------------------------------------
-#   
-# Following other strings as emitted by konsole.
+# keypad characters are not offered differently by Qt.
