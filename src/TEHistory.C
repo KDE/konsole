@@ -17,6 +17,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <errno.h>
+#include <kdebug.h>
 
 #ifndef HERE
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
@@ -58,6 +59,8 @@ FIXME: There is noticable decrease in speed, also. Perhaps,
 
 //#define tmpfile xTmpFile
 
+#if 0
+
 FILE* xTmpFile()
 {
   static int fid = 0;
@@ -67,72 +70,72 @@ FILE* xTmpFile()
 }
 
 
-// History Buffer ///////////////////////////////////////////
+// History File ///////////////////////////////////////////
 
 /*
-   A Row(X) data type which allows adding elements to the end.
+  A Row(X) data type which allows adding elements to the end.
 */
 
-HistoryBuffer::HistoryBuffer()
+HistoryFile::HistoryFile()
+  : ion(-1),
+    length(0)
 {
-  ion    = -1;
-  length = 0;
+  FILE* tmp = tmpfile(); if (!tmp) { perror("konsole: cannot open temp file.\n"); return; }
+  ion = dup(fileno(tmp)); if (ion<0) perror("konsole: cannot dup temp file.\n");
+  fclose(tmp);
 }
 
-HistoryBuffer::~HistoryBuffer()
+HistoryFile::~HistoryFile()
 {
-  setScroll(FALSE);
+  close(ion);
 }
 
-void HistoryBuffer::setScroll(bool on)
+void HistoryFile::add(const unsigned char* bytes, int len)
 {
-  if (on == hasScroll()) return;
+  int rc = 0;
 
-  if (on)
-  {
-    assert( ion < 0 );
-    assert( length == 0);
-    FILE* tmp = tmpfile(); if (!tmp) { perror("konsole: cannot open temp file.\n"); return; }
-    ion = dup(fileno(tmp)); if (ion<0) perror("konsole: cannot dup temp file.\n");
-    fclose(tmp);
-  }
-  else
-  {
-    assert( ion >= 0 );
-    close(ion);
-    ion    = -1;
-    length = 0;
-  }
-}
-
-bool HistoryBuffer::hasScroll()
-{
-  return ion >= 0;
-}
-
-void HistoryBuffer::add(const unsigned char* bytes, int len)
-{ int rc;
-  assert(hasScroll());
-  rc = lseek(ion,length,SEEK_SET); if (rc < 0) { perror("HistoryBuffer::add.seek"); setScroll(FALSE); return; }
-  rc = write(ion,bytes,len);       if (rc < 0) { perror("HistoryBuffer::add.write"); setScroll(FALSE); return; }
+  rc = lseek(ion,length,SEEK_SET); if (rc < 0) { perror("HistoryFile::add.seek"); return; }
+  rc = write(ion,bytes,len);       if (rc < 0) { perror("HistoryFile::add.write"); return; }
   length += rc;
 }
 
-void HistoryBuffer::get(unsigned char* bytes, int len, int loc)
-{ int rc;
-  assert(hasScroll());
+void HistoryFile::get(unsigned char* bytes, int len, int loc)
+{
+  int rc = 0;
+
   if (loc < 0 || len < 0 || loc + len > length)
     fprintf(stderr,"getHist(...,%d,%d): invalid args.\n",len,loc);
-  rc = lseek(ion,loc,SEEK_SET); if (rc < 0) { perror("HistoryBuffer::get.seek"); setScroll(FALSE); return; }
-  rc = read(ion,bytes,len);     if (rc < 0) { perror("HistoryBuffer::get.read"); setScroll(FALSE); return; }
+  rc = lseek(ion,loc,SEEK_SET); if (rc < 0) { perror("HistoryFile::get.seek"); return; }
+  rc = read(ion,bytes,len);     if (rc < 0) { perror("HistoryFile::get.read"); return; }
 }
 
-int HistoryBuffer::len()
+int HistoryFile::len()
 {
   return length;
 }
 
-// History Scroll //////////////////////////////////////
+#endif
+
+// History Scroll abstract base class //////////////////////////////////////
+
+
+HistoryScroll::HistoryScroll(HistoryType* t)
+  : m_histType(t)
+{
+}
+
+HistoryScroll::~HistoryScroll()
+{
+  delete m_histType;
+}
+
+bool HistoryScroll::hasScroll()
+{
+  return true;
+}
+
+#if 0
+// History Scroll File //////////////////////////////////////
 
 /* 
    The history scroll makes a Row(Row(Cell)) from
@@ -145,64 +148,343 @@ int HistoryBuffer::len()
    at 0 in cells.
 */
 
-HistoryScroll::HistoryScroll()
+HistoryScrollFile::HistoryScrollFile(const QString &logFileName)
+  : HistoryScroll(new HistoryTypeFile(logFileName)),
+  m_logFileName(logFileName)
 {
 }
 
-HistoryScroll::~HistoryScroll()
+HistoryScrollFile::~HistoryScrollFile()
 {
 }
  
-void HistoryScroll::setScroll(bool on)
+int HistoryScrollFile::getLines()
 {
-  index.setScroll(on);
-  cells.setScroll(on);
-}
- 
-bool HistoryScroll::hasScroll()
-{
-  return index.hasScroll() && cells.hasScroll();
-}
-
-int HistoryScroll::getLines()
-{
-  if (!hasScroll()) return 0;
   return index.len() / sizeof(int);
 }
 
-int HistoryScroll::getLineLen(int lineno)
+int HistoryScrollFile::getLineLen(int lineno)
 {
-  if (!hasScroll()) return 0;
   return (startOfLine(lineno+1) - startOfLine(lineno)) / sizeof(ca);
 }
 
-int HistoryScroll::startOfLine(int lineno)
+int HistoryScrollFile::startOfLine(int lineno)
 {
   if (lineno <= 0) return 0;
-  if (!hasScroll()) return 0;
   if (lineno <= getLines())
-  { int res;
+    { int res;
     index.get((unsigned char*)&res,sizeof(int),(lineno-1)*sizeof(int));
     return res;
-  }
+    }
   return cells.len();
 }
 
-void HistoryScroll::getCells(int lineno, int colno, int count, ca res[])
+void HistoryScrollFile::getCells(int lineno, int colno, int count, ca res[])
 {
-  assert(hasScroll());
   cells.get((unsigned char*)res,count*sizeof(ca),startOfLine(lineno)+colno*sizeof(ca));
 }
 
-void HistoryScroll::addCells(ca text[], int count)
+void HistoryScrollFile::addCells(ca text[], int count)
 {
-  if (!hasScroll()) return;
   cells.add((unsigned char*)text,count*sizeof(ca));
 }
 
-void HistoryScroll::addLine()
+void HistoryScrollFile::addLine()
 {
-  if (!hasScroll()) return;
   int locn = cells.len();
   index.add((unsigned char*)&locn,sizeof(int));
 }
+
+
+// History Scroll Buffer //////////////////////////////////////
+HistoryScrollBuffer::HistoryScrollBuffer(unsigned int maxNbLines)
+  : HistoryScroll(new HistoryTypeBuffer(maxNbLines)),
+    m_maxNbLines(maxNbLines),
+    m_nbLines(0),
+    m_arrayIndex(0)
+{
+  m_histBuffer.setAutoDelete(true);
+  m_histBuffer.resize(maxNbLines);
+}
+
+HistoryScrollBuffer::~HistoryScrollBuffer()
+{
+}
+
+void HistoryScrollBuffer::addCells(ca a[], int count)
+{
+  //unsigned int nbLines = countLines(bytes, len);
+
+  histline* newLine = new histline;
+
+  newLine->duplicate(a, count);
+  
+  ++m_arrayIndex;
+  if (m_arrayIndex >= m_maxNbLines) m_arrayIndex = 0;
+
+  if (m_nbLines < m_maxNbLines - 1) ++m_nbLines;
+
+  // m_histBuffer.remove(m_arrayIndex); // not necessary
+  m_histBuffer.insert(m_arrayIndex, newLine);
+}
+
+void HistoryScrollBuffer::addLine()
+{
+  // ? Do nothing
+}
+
+int HistoryScrollBuffer::getLines()
+{
+  return m_nbLines; // m_histBuffer.size();
+}
+
+int HistoryScrollBuffer::getLineLen(int lineno)
+{
+  if (lineno >= m_maxNbLines) return 0;
+  
+  histline *l = m_histBuffer[lineno];
+
+  return l ? l->size() : 0;
+}
+
+
+void HistoryScrollBuffer::getCells(int lineno, int colno, int count, ca res[])
+{
+  if (!count) return;
+
+  assert (lineno < m_maxNbLines);
+  
+  histline *l = m_histBuffer[lineno];
+
+  if (!l) {
+    memset(res, 0, count * sizeof(ca));
+    return;
+  }
+
+  assert(colno < l->size() || count == 0);
+    
+  memcpy(res, l->data() + colno, count * sizeof(ca));
+}
+
+void HistoryScrollBuffer::setMaxNbLines(unsigned int nbLines)
+{
+  m_maxNbLines = nbLines;
+  m_histBuffer.resize(m_maxNbLines);
+}
+
+#endif
+
+// History Scroll None //////////////////////////////////////
+
+HistoryScrollNone::HistoryScrollNone()
+  : HistoryScroll(new HistoryTypeNone())
+{
+}
+
+HistoryScrollNone::~HistoryScrollNone()
+{
+}
+
+bool HistoryScrollNone::hasScroll()
+{
+  return false;
+}
+
+int  HistoryScrollNone::getLines()
+{
+  return 0;
+}
+
+int  HistoryScrollNone::getLineLen(int lineno)
+{
+  return 0;
+}
+
+void HistoryScrollNone::getCells(int lineno, int colno, int count, ca res[])
+{
+}
+
+void HistoryScrollNone::addCells(ca a[], int count)
+{
+}
+
+void HistoryScrollNone::addLine()
+{
+}
+
+// History Scroll BlockArray //////////////////////////////////////
+
+HistoryScrollBlockArray::HistoryScrollBlockArray(size_t size)
+  : HistoryScroll(new HistoryTypeBlockArray(size))
+{
+  m_lineLengths.setAutoDelete(true);
+  m_blockArray.setHistorySize(size); // nb. of lines.
+}
+
+HistoryScrollBlockArray::~HistoryScrollBlockArray()
+{
+}
+
+int  HistoryScrollBlockArray::getLines()
+{
+//   kdDebug() << "HistoryScrollBlockArray::getLines() : "
+//             << m_lineLengths.count() << endl;
+
+  return m_lineLengths.count();
+}
+
+int  HistoryScrollBlockArray::getLineLen(int lineno)
+{
+  size_t *pLen = m_lineLengths[lineno];
+  size_t res = pLen ? *pLen : 0;
+
+  return res;
+}
+
+void HistoryScrollBlockArray::getCells(int lineno, int colno, int count, ca res[])
+{
+  if (!count) return;
+
+  const Block *b = m_blockArray.at(lineno);
+
+  if (!b) {
+    memset(res, 0, count * sizeof(ca)); // still better than random data
+    return;
+  }
+
+  assert(((colno + count) * sizeof(ca)) < ENTRIES);
+  memcpy(res, b->data + (colno * sizeof(ca)), count * sizeof(ca));
+}
+
+void HistoryScrollBlockArray::addCells(ca a[], int count)
+{
+  Block *b = m_blockArray.lastBlock();
+  
+  if (!b) return;
+
+  // put cells in block's data
+  assert((count * sizeof(ca)) < ENTRIES);
+
+  memset(b->data, 0, ENTRIES);
+
+  memcpy(b->data, a, count * sizeof(ca));
+  b->size = count * sizeof(ca);
+
+  size_t res = m_blockArray.newBlock();
+  assert (res > 0);
+
+  // store line length
+  size_t *pLen = new size_t;
+  *pLen = count;
+  
+  m_lineLengths.replace(m_blockArray.getCurrent(), pLen);
+
+}
+
+void HistoryScrollBlockArray::addLine()
+{
+}
+
+//////////////////////////////////////////////////////////////////////
+// History Types
+//////////////////////////////////////////////////////////////////////
+
+HistoryType::HistoryType()
+{
+}
+
+HistoryType::~HistoryType()
+{
+}
+
+//////////////////////////////
+
+HistoryTypeNone::HistoryTypeNone()
+{
+}
+
+bool HistoryTypeNone::isOn() const
+{
+  return false;
+}
+
+HistoryScroll* HistoryTypeNone::getScroll() const
+{
+  return new HistoryScrollNone();
+}
+
+unsigned int HistoryTypeNone::getSize() const
+{
+  return 0;
+}
+
+//////////////////////////////
+
+HistoryTypeBlockArray::HistoryTypeBlockArray(size_t size)
+  : m_size(size)
+{
+}
+
+bool HistoryTypeBlockArray::isOn() const
+{
+  return true;
+}
+
+unsigned int HistoryTypeBlockArray::getSize() const
+{
+  return m_size;
+}
+
+HistoryScroll* HistoryTypeBlockArray::getScroll() const
+{
+  return new HistoryScrollBlockArray(m_size);
+}
+
+
+#if 0 // Disabled for now 
+
+//////////////////////////////
+
+HistoryTypeBuffer::HistoryTypeBuffer(unsigned int nbLines)
+  : m_nbLines(nbLines)
+{
+}
+
+bool HistoryTypeBuffer::isOn() const
+{
+  return true;
+}
+
+unsigned int HistoryTypeBuffer::getNbLines() const
+{
+  return m_nbLines;
+}
+
+HistoryScroll* HistoryTypeBuffer::getScroll() const
+{
+  return new HistoryScrollBuffer(m_nbLines);
+}
+
+//////////////////////////////
+
+HistoryTypeFile::HistoryTypeFile(const QString& fileName)
+  : m_fileName(fileName)
+{
+}
+
+bool HistoryTypeFile::isOn() const
+{
+  return true;
+}
+
+const QString& HistoryTypeFile::getFileName() const
+{
+  return m_fileName;
+}
+
+HistoryScroll* HistoryTypeFile::getScroll() const
+{
+  return new HistoryScrollFile(m_fileName);
+}
+
+#endif

@@ -101,6 +101,7 @@ private slots:
   void slotToggleMenubar();
   void slotToggleFrame();
   void slotRenameSession();
+  void slotHistoryType();
   void slotWordSeps();
   void slotSelectSize();
   void slotSelectFont();
@@ -116,8 +117,6 @@ private:
   void runSession(TESession* s);
   void addSession(TESession* s);
   void setColorPixmaps();
-
-  void setHistory(bool);
 
   void setSchema(const QString & path);
   void setSchema(ColorSchema* s);
@@ -196,9 +195,38 @@ private:
   bool        isRestored;
   bool        wasRestored;
 
+  unsigned int m_histSize;
+  bool         b_histEnabled:1;
+
 public:
 
   QString     title;
 };
+
+class QSpinBox;
+#include <kdialogbase.h>
+
+class HistoryTypeDialog : public KDialogBase 
+{
+    Q_OBJECT
+public:
+  HistoryTypeDialog(const HistoryType& histType,
+                    unsigned int histSize,
+                    QWidget *parent);
+
+public slots:
+
+  void slotHistEnable(bool);
+
+  unsigned int nbLines() const;
+
+  bool isOn()         { return m_isOn; }
+
+protected:
+  QSpinBox*  m_size;
+  bool m_isOn;
+};
+
+
 
 #endif

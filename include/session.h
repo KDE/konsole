@@ -40,10 +40,11 @@ public:
   int fontNo();
   const char* emuName();
   const QString& Title();
-  bool history();
   int keymap();
 
-  void setHistory(bool on);
+  void setHistory(const HistoryType&);
+  const HistoryType& history();
+
   void setSchemaNo(int sn);
   void setKeymapNo(int kn);
   void setFontNo(int fn);

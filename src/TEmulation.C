@@ -92,18 +92,20 @@
 /*!
 */
 
-TEmulation::TEmulation(TEWidget* gui)
-: decoder(0)
+TEmulation::TEmulation(TEWidget* w)
+: gui(w),
+  scr(0),
+  connected(false),
+  codec(0),
+  decoder(0),
+  keytrans(0),
+  bulk_nlcnt(0),
+  bulk_incnt(0)
 {
-  this->gui = gui;
 
   screen[0] = new TEScreen(gui->Lines(),gui->Columns());
   screen[1] = new TEScreen(gui->Lines(),gui->Columns());
   scr = screen[0];
-
-  bulk_nlcnt = 0; // reset bulk newline counter
-  bulk_incnt = 0; // reset bulk counter
-  connected  = FALSE;
 
   QObject::connect(&bulk_timer, SIGNAL(timeout()), this, SLOT(showBulk()) );
   QObject::connect(gui,SIGNAL(changedImageSizeSignal(int,int)),
@@ -141,16 +143,17 @@ void TEmulation::setScreen(int n)
   scr = screen[n&1];
 }
 
-void TEmulation::setHistory(bool on)
+void TEmulation::setHistory(const HistoryType& t)
 {
-  screen[0]->setScroll(on);
+  screen[0]->setScroll(t);
+
   if (!connected) return;
   showBulk();
 }
 
-bool TEmulation::history()
+const HistoryType& TEmulation::history()
 {
-  return screen[0]->hasScroll();
+  return screen[0]->getScroll();
 }
 
 void TEmulation::setCodec(int c)

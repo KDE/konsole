@@ -146,12 +146,12 @@ const QString& TESession::Title()
   return title;
 }
 
-void TESession::setHistory(bool on)
+void TESession::setHistory(const HistoryType &hType)
 {
-  em->setHistory( on );
+  em->setHistory(hType);
 }
 
-bool TESession::history()
+const HistoryType& TESession::history()
 {
   return em->history();
 }

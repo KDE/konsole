@@ -29,8 +29,8 @@ public:
   ~TEmulation();
 
 public:
-  virtual void setHistory(bool on);
-  virtual bool history();
+  virtual void setHistory(const HistoryType&);
+  virtual const HistoryType& history();
 
 public slots: // signals incoming from TEWidget
 
@@ -80,7 +80,6 @@ protected:
   void setCodec(int c); // codec number, 0 = locale, 1=utf8
 
   QTextCodec* codec;
-  QTextCodec* localeCodec;
   QTextDecoder* decoder;
 
   KeyTrans* keytrans;
@@ -101,7 +100,6 @@ private:
 
   QTimer bulk_timer;
   int    bulk_nlcnt;   // bulk newline counter
-  char*  SelectedText;
   int    bulk_incnt;   // bulk counter
 
 

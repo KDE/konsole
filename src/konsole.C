@@ -80,6 +80,11 @@ Time to start a requirement list.
 #include <qobjectlist.h>
 #include <ktoolbarbutton.h>
 
+#include <qspinbox.h>
+#include <qcheckbox.h>
+#include <qlayout.h>
+#include <qbuttongroup.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -204,6 +209,8 @@ Konsole::Konsole(const char* name, const char* _pgm,
 ,skip_exit_query(false) // used to skip the query when closed by the session management
 ,b_warnQuit(false)
 ,alreadyNoticedBackgroundChange_(false)
+,m_histSize(0)
+,b_histEnabled(false)
 {
   //QTime time;
   //time.start();
@@ -275,6 +282,12 @@ Konsole::Konsole(const char* name, const char* _pgm,
   // activate and run first session //////////////////////////////////////////
   // FIXME: this slows it down if --type is given, but prevents a crash (malte)
   se = newSession(co);
+  if (b_histEnabled && m_histSize)
+    se->setHistory(HistoryTypeBlockArray(m_histSize));
+  else
+    se->setHistory(HistoryTypeNone());
+
+
   delete co;
   //kdDebug()<<"Konsole ctor(): runSession()"<<endl;
   te->currentSession = se;
@@ -438,8 +451,11 @@ void Konsole::makeGUI()
    // Schema
    m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Schema" ), m_schema);
    m_options->insertSeparator();
-   m_options->insertItem( i18n("&History"), 3 );
-   m_options->setItemEnabled(3, false);
+
+   KAction *historyType = new KAction(i18n("History..."), 0, this,
+                                      SLOT(slotHistoryType()), this);
+   historyType->plug(m_options);
+   
    m_options->insertSeparator();
    m_options->insertItem( SmallIconSet( "charset" ), i18n( "&Codec" ), m_codec);
    m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
@@ -709,6 +725,10 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("scrollbar",n_scroll);
   config->writeEntry("keytab",n_keytab);
   config->writeEntry("WarnQuit", b_warnQuit);
+  if (se) {
+    config->writeEntry("history", se->history().getSize());
+    config->writeEntry("historyenabled", b_histEnabled);
+  }
 
   if (args.count() > 0) config->writeEntry("konsolearguments", args);
   config->writeEntry("class",name());
@@ -782,6 +802,10 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
    te->setColorTable(sch->table());
 
+   // History
+   m_histSize = config->readNumEntry("history",0);
+   b_histEnabled = config->readBoolEntry("historyenabled",false);
+   KONSOLEDEBUG << "Hist size : " << m_histSize << endl;
 
    if (m_menuCreated)
    {
@@ -998,18 +1022,10 @@ void Konsole::slotToggleFrame() {
                      : QFrame::NoFrame );
 }
 
-void Konsole::setHistory(bool on)
-{
-  b_scroll = on;
-  m_options->setItemChecked(3,b_scroll);
-  if (se) se->setHistory( b_scroll );
-}
 
 void Konsole::opt_menu_activated(int item)
 {
   switch( item )  {
-    case 3: setHistory(!b_scroll);
-            break;
     case 5: setFullScreen(!b_fullscreen);
             break;
     case 8:
@@ -1384,7 +1400,8 @@ TESession *Konsole::newSession(KSimpleConfig *co)
   s->setSchemaNo(schmno);
 //kdDebug()<<"setTitle Konsole 1319 "<< txt << endl;
   s->setTitle(txt);
-  s->setHistory(b_scroll); //FIXME: take from schema
+
+  //s->setHistory(b_scroll); //FIXME: take from schema
 
   addSession(s);
   runSession(s); // activate and run
@@ -1660,6 +1677,95 @@ void Konsole::initRenameSession(QString sTitle) {
     toolBar()->updateRects();
 //  }
 }
+
+
+//////////////////////////////////////////////////////////////////////
+
+HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
+                                     unsigned int histSize,
+                                     QWidget *parent)
+  : KDialogBase(Plain, i18n("History Configuration"),
+                Help | Default | Ok | Cancel, Ok,
+                parent),
+    m_size(0),
+    m_isOn(true)
+{
+  QFrame *mainFrame = plainPage();
+  
+  QHBoxLayout *hb = new QHBoxLayout(mainFrame);
+
+  QCheckBox *btnEnable    = new QCheckBox(i18n("Enable"), mainFrame);
+
+  QObject::connect(btnEnable, SIGNAL(toggled(bool)),
+                   this,      SLOT(slotHistEnable(bool)));
+
+  m_size = new QSpinBox(0, 10 * 1000 * 1000, 1, mainFrame);
+  m_size->setValue(histSize);
+
+  hb->addWidget(btnEnable);
+  hb->addWidget(new QLabel(i18n("Number of lines : "), mainFrame));
+  hb->addWidget(m_size);
+
+  if ( ! histType.isOn()) {
+
+    kdDebug() << "HistoryTypeDialog() : hist type off \n";
+
+    btnEnable->setChecked(false);
+    slotHistEnable(false);
+
+  } else {
+
+    kdDebug() << "HistoryTypeDialog() : hist type true : " << histType.getSize() << endl;
+
+    btnEnable->setChecked(true);
+    m_size->setValue(histType.getSize());
+    slotHistEnable(true);
+  }
+  
+}
+
+void HistoryTypeDialog::slotHistEnable(bool b)
+{
+  kdDebug() << "Konsole::slotHistEnable(" << b << ")\n";
+
+  m_isOn = b;
+  m_size->setEnabled(b);
+  if (b) m_size->setFocus();
+}
+
+unsigned int HistoryTypeDialog::nbLines() const
+{
+  return m_size->value();
+}
+
+
+
+
+void Konsole::slotHistoryType()
+{
+  kdDebug() << "Konsole::slotHistoryType()\n";
+  if (!se) return;
+  
+  HistoryTypeDialog dlg(se->history(), m_histSize, this);
+  if (dlg.exec()) {
+
+    if (dlg.isOn() && dlg.nbLines() > 0) {
+
+      se->setHistory(HistoryTypeBlockArray(dlg.nbLines()));
+      m_histSize = dlg.nbLines();
+      b_histEnabled = true;
+
+    } else {
+
+      se->setHistory(HistoryTypeNone());
+      m_histSize = dlg.nbLines();
+      b_histEnabled = false;
+
+    }
+  }
+}
+
+//////////////////////////////////////////////////////////////////////
 
 
 void Konsole::slotWordSeps() {

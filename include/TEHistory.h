@@ -13,57 +13,240 @@
 #ifndef TEHISTORY_H
 #define TEHISTORY_H
 
+#include <qcstring.h>
+#include <qvector.h>
+
 #include "TECommon.h"
 
+#if 0
 /*
    An extendable tmpfile(1) based buffer.
 */
-class HistoryBuffer
+
+class HistoryFile
 {
 public:
-  HistoryBuffer();
- ~HistoryBuffer();
+  HistoryFile();
+  virtual ~HistoryFile();
 
-public:
-  void setScroll(bool on);
-  bool hasScroll();
-
-public:
-  void add(const unsigned char* bytes, int len);
-  void get(unsigned char* bytes, int len, int loc);
-  int  len();
+  virtual void add(const unsigned char* bytes, int len);
+  virtual void get(unsigned char* bytes, int len, int loc);
+  virtual int  len();
 
 private:
   int  ion;
   int  length;
 };
+#endif
+
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+// Abstract base class for file and buffer versions
+//////////////////////////////////////////////////////////////////////
+class HistoryType;
 
 class HistoryScroll
 {
 public:
-  HistoryScroll();
- ~HistoryScroll();
+  HistoryScroll(HistoryType*);
+ virtual ~HistoryScroll();
 
-public:
-  void setScroll(bool on);
-  bool hasScroll();
+  virtual bool hasScroll();
 
-public: // access to history
-  int  getLines();
-  int  getLineLen(int lineno);
-  void getCells(int lineno, int colno, int count, ca res[]);
+  // access to history
+  virtual int  getLines() = 0;
+  virtual int  getLineLen(int lineno) = 0;
+  virtual void getCells(int lineno, int colno, int count, ca res[]) = 0;
 
-public: // backward compatibility (obsolete)
+  // backward compatibility (obsolete)
   ca   getCell(int lineno, int colno) { ca res; getCells(lineno,colno,1,&res); return res; }
 
-public: // adding lines.
-  void addCells(ca a[], int count);
-  void addLine();
+  // adding lines.
+  virtual void addCells(ca a[], int count) = 0;
+  virtual void addLine() = 0;
+
+  const HistoryType& getType() { return *m_histType; }
+
+protected:
+  HistoryType* m_histType;
+
+};
+
+#if 0
+
+//////////////////////////////////////////////////////////////////////
+// File-based history (e.g. file log, no limitation in length)
+//////////////////////////////////////////////////////////////////////
+
+class HistoryScrollFile : public HistoryScroll
+{
+public:
+  HistoryScrollFile(const QString &logFileName);
+  virtual ~HistoryScrollFile();
+
+  virtual int  getLines();
+  virtual int  getLineLen(int lineno);
+  virtual void getCells(int lineno, int colno, int count, ca res[]);
+
+  virtual void addCells(ca a[], int count);
+  virtual void addLine();
 
 private:
   int startOfLine(int lineno);
-  HistoryBuffer index; // lines Row(int)
-  HistoryBuffer cells; // text  Row(ca)
+
+  QString m_logFileName;
+  HistoryFile index; // lines Row(int)
+  HistoryFile cells; // text  Row(ca)
 };
+
+
+//////////////////////////////////////////////////////////////////////
+// Buffer-based history (limited to a fixed nb of lines)
+//////////////////////////////////////////////////////////////////////
+class HistoryScrollBuffer : public HistoryScroll
+{
+public:
+  typedef QArray<ca> histline;
+
+  HistoryScrollBuffer(unsigned int maxNbLines = 1000);
+  virtual ~HistoryScrollBuffer();
+
+  virtual int  getLines();
+  virtual int  getLineLen(int lineno);
+  virtual void getCells(int lineno, int colno, int count, ca res[]);
+
+  virtual void addCells(ca a[], int count);
+  virtual void addLine();
+
+  void setMaxNbLines(unsigned int nbLines);
+  unsigned int maxNbLines() { return m_maxNbLines; }
+
+private:
+
+  bool m_hasScroll;
+  QVector<histline> m_histBuffer;
+  unsigned int m_maxNbLines;
+  unsigned int m_nbLines;
+  unsigned int m_arrayIndex;
+  
+};
+
+#endif
+
+//////////////////////////////////////////////////////////////////////
+// Nothing-based history (no history :-)
+//////////////////////////////////////////////////////////////////////
+class HistoryScrollNone : public HistoryScroll
+{
+public:
+  HistoryScrollNone();
+  virtual ~HistoryScrollNone();
+
+  virtual bool hasScroll();
+
+  virtual int  getLines();
+  virtual int  getLineLen(int lineno);
+  virtual void getCells(int lineno, int colno, int count, ca res[]);
+
+  virtual void addCells(ca a[], int count);
+  virtual void addLine();
+};
+
+//////////////////////////////////////////////////////////////////////
+// BlockArray-based history
+//////////////////////////////////////////////////////////////////////
+#include "BlockArray.h"
+#include <qintdict.h>
+class HistoryScrollBlockArray : public HistoryScroll
+{
+public:
+  HistoryScrollBlockArray(size_t size);
+  virtual ~HistoryScrollBlockArray();
+
+  virtual int  getLines();
+  virtual int  getLineLen(int lineno);
+  virtual void getCells(int lineno, int colno, int count, ca res[]);
+
+  virtual void addCells(ca a[], int count);
+  virtual void addLine();
+
+protected:
+  BlockArray m_blockArray;
+  QIntDict<size_t> m_lineLengths;
+};
+
+//////////////////////////////////////////////////////////////////////
+// History type
+//////////////////////////////////////////////////////////////////////
+
+class HistoryType
+{
+public:
+  HistoryType();
+  virtual ~HistoryType();
+
+  virtual bool isOn()                const = 0;
+  virtual unsigned int getSize()     const = 0;
+
+  virtual HistoryScroll* getScroll() const = 0;
+};
+
+class HistoryTypeNone : public HistoryType
+{
+public:
+  HistoryTypeNone();
+
+  virtual bool isOn() const;
+  virtual unsigned int getSize() const;
+
+  virtual HistoryScroll* getScroll() const;
+};
+
+class HistoryTypeBlockArray : public HistoryType
+{
+public:
+  HistoryTypeBlockArray(size_t size);
+  
+  virtual bool isOn() const;
+  virtual unsigned int getSize() const;
+
+  virtual HistoryScroll* getScroll() const;
+
+protected:
+  size_t m_size;
+};
+
+#if 0 // Disabled for now 
+class HistoryTypeFile : public HistoryType
+{
+public:
+  HistoryTypeFile(const QString& fileName);
+
+  virtual bool isOn() const;
+  virtual const QString& getFileName() const;
+
+  virtual HistoryScroll* getScroll() const;
+
+protected:
+  QString m_fileName;
+};
+
+
+class HistoryTypeBuffer : public HistoryType
+{
+public:
+  HistoryTypeBuffer(unsigned int nbLines);
+  
+  virtual bool isOn() const;
+  virtual unsigned int getNbLines() const;
+
+  virtual HistoryScroll* getScroll() const;
+
+protected:
+  unsigned int m_nbLines;
+};
+
+#endif
 
 #endif // TEHISTORY_H

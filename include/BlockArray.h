@@ -3,7 +3,7 @@
 
 #include <unistd.h>
 
-#error Dont use in KDE 2.1
+//#error Dont use in KDE 2.1
 
 #define BlockSize (1 << 12)
 #define ENTRIES   ((BlockSize - sizeof(size_t) ) / sizeof(unsigned char))
@@ -73,6 +73,8 @@ public:
     size_t len() const { return length; }
 
     bool has(size_t index) const;
+
+    size_t getCurrent() const { return current; }
 
 private:
     void unmap();

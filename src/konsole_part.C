@@ -141,7 +141,7 @@ konsolePart::konsolePart(QWidget *parentWidget, const char *widgetName, QObject 
       te->setColorTable(ctable); 
     }
   
-  initial->setHistory(true);
+  initial->setHistory(HistoryTypeBlockArray(1000));
 
   // setXMLFile("konsole_part.rc");
 

@@ -143,7 +143,8 @@ public: // these are all `Screen' operations
     int  getHistCursor();
 
     int  getHistLines ();
-    void setScroll(bool on);
+    void setScroll(const HistoryType&);
+    const HistoryType& getScroll();
     bool hasScroll();
 
     //
@@ -192,7 +193,7 @@ private:
     // history buffer ---------------
 
     int histCursor;   // display position relative to start of the history buffer
-    HistoryScroll hist;
+    HistoryScroll *hist;
     
     // cursor location
 

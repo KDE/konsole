@@ -9,14 +9,18 @@
 static int blocksize = 0;
 
 BlockArray::BlockArray()
-    : size(0), lastmap(0), lastblock(0), ion(-1), length(0)
+    : size(0),
+      current(-1),
+      index(-1),
+      lastmap(0),
+      lastmap_index(-1),
+      lastblock(0), ion(-1),
+      length(0)
 {
-    lastmap_index = index = current = size_t(-1);
+    // lastmap_index = index = current = size_t(-1);
     if (blocksize == 0)
         blocksize = ((sizeof(Block) / getpagesize()) + 1) * getpagesize();
 
-    if (!size)
-        return;
 }
 
 BlockArray::~BlockArray()
@@ -30,14 +34,18 @@ size_t BlockArray::append(Block *block)
     if (!size)
         return size_t(-1);
 
-    current = ++current % size;
+    ++current;
+    if (current >= size) current = 0;
+
     int rc;
     rc = lseek(ion, current * blocksize, SEEK_SET); if (rc < 0) { perror("HistoryBuffer::add.seek"); setHistorySize(0); return size_t(-1); }
     rc = write(ion, block, blocksize); if (rc < 0) { perror("HistoryBuffer::add.write"); setHistorySize(0); return size_t(-1); }
+
     length++;
-    if (length>size)
-        length=size;
-    index++;
+    if (length > size) length = size;
+
+    ++index;
+
     delete block;
     return current;
 }
@@ -69,7 +77,7 @@ bool BlockArray::has(size_t i) const
     return true;
 }
 
-const Block *BlockArray::at(size_t i)
+const Block* BlockArray::at(size_t i)
 {
     if (i == index + 1)
         return lastblock;
@@ -77,11 +85,17 @@ const Block *BlockArray::at(size_t i)
     if (i == lastmap_index)
         return lastmap;
 
-    if (i > index)
+    if (i > index) {
+        kdDebug() << "BlockArray::at() i > index\n";
         return 0;
-    if (index - i >= length)
-        return 0;
-    size_t j = (current - (index - i) + (index/size+1)*size) % size;
+    }
+    
+//     if (index - i >= length) {
+//         kdDebug() << "BlockArray::at() index - i >= length\n";
+//         return 0;
+//     }
+
+    size_t j = i; // (current - (index - i) + (index/size+1)*size) % size ;
 
     assert(j < size);
     unmap();
@@ -89,8 +103,10 @@ const Block *BlockArray::at(size_t i)
     Block *block = (Block*)mmap(0, blocksize, PROT_READ, MAP_PRIVATE, ion, j * blocksize);
 
     if (block == (Block*)-1) { perror("mmap"); return 0; }
+
     lastmap = block;
     lastmap_index = i;
+
     return block;
 }
 
@@ -176,7 +192,7 @@ void moveBlock(FILE *fion, int cursor, int newpos, char *buffer2)
     res = fwrite(buffer2, blocksize, 1, fion);
     if (res != 1)
         perror("fwrite");
-    printf("moving block %d to %d\n", cursor, newpos);
+    //    printf("moving block %d to %d\n", cursor, newpos);
 }
 
 void BlockArray::decreaseBuffer(size_t newsize)
