@@ -868,7 +868,7 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("schema",s_kconfigSchema);
   config->writeEntry("scrollbar",n_scroll);
   config->writeEntry("bellmode",n_bell);
-  config->writeEntry("keytab",n_defaultKeytab);
+  config->writeEntry("keytab",KeyTrans::find(n_defaultKeytab)->id());
   config->writeEntry("ActiveSession", active);
   config->writeEntry("DefaultSession", m_defaultSessionFilename);
 
@@ -923,7 +923,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
    ColorSchema* sch = 0;
    if (!globalConfigOnly)
    {
-      n_defaultKeytab=config->readNumEntry("keytab",0); // act. the keytab for this session
+      n_defaultKeytab=KeyTrans::find(config->readEntry("keytab","default"))->numb(); // act. the keytab for this session
       b_fullscreen = config->readBoolEntry("Fullscreen",FALSE);
       n_defaultFont = n_font = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
       n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
