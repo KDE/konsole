@@ -68,6 +68,7 @@
 #include <kdebug.h>
 #include <klocale.h>
 #include <knotifyclient.h>
+#include <kglobalsettings.h>
 
 #ifndef HERE
 #define HERE printf("%s(%d): %s\n",__FILE__,__LINE__,__FUNCTION__)
@@ -746,7 +747,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       // The user clicked inside selected text
 
       dragInfo.state = diPending;
-      dragInfo.start = pos;
+      dragInfo.start = ev->pos();
 
     }else
     {
@@ -794,8 +795,9 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     // we had a mouse down, but haven't confirmed a drag yet
     // if the mouse has moved sufficiently, we will confirm
 
-   if ( ev->x() > dragInfo.start.x() + 4 || ev->x() < dragInfo.start.x() - 4 ||
-        ev->y() > dragInfo.start.y() + 4 || ev->y() < dragInfo.start.y() - 4) {
+   int distance = KGlobalSettings::dndEventDelay();
+   if ( ev->x() > dragInfo.start.x() + distance || ev->x() < dragInfo.start.x() - distance ||
+        ev->y() > dragInfo.start.y() + distance || ev->y() < dragInfo.start.y() - distance) {
       // we've left the drag square, we can start a real drag operation now
       emit clearSelectionSignal();
       selBound.start.setX(-1);
