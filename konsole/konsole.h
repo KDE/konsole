@@ -414,6 +414,7 @@ private:
   TESession*  m_contextMenuSession;
   
   QToolButton* m_newSessionButton;
+  QToolButton* m_removeSessionButton;
   QPoint      m_newSessionButtonMousePressPos;
 };
 

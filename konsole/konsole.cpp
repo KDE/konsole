@@ -258,6 +258,7 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 ,m_histSize(DEFAULT_HISTORY_SIZE)
 ,m_separator_id(-1)
 ,m_newSessionButton(0)
+,m_removeSessionButton(0)
 {
   isRestored = b_inRestore;
   connect( kapp,SIGNAL(backgroundChanged(int)),this, SLOT(slotBackgroundChanged(int)));
@@ -913,6 +914,14 @@ void Konsole::makeTabWidget()
     connect(m_newSessionButton, SIGNAL(clicked()), SLOT(newSession()));
     tabwidget->setCornerWidget( m_newSessionButton, BottomLeft );
     m_newSessionButton->installEventFilter(this);
+
+    m_removeSessionButton = new QToolButton( tabwidget );
+    QToolTip::add(m_removeSessionButton,i18n("Close the current session"));
+    m_removeSessionButton->setIconSet( SmallIcon( "tab_remove" ) );
+    m_removeSessionButton->adjustSize();
+    connect(m_removeSessionButton, SIGNAL(clicked()), SLOT(closeCurrentSession()));
+    tabwidget->setCornerWidget( m_removeSessionButton, BottomRight );
+
   }
 }
 
