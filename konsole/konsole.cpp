@@ -724,7 +724,11 @@ void Konsole::makeBasicGUI()
   }
 
   m_options = new KPopupMenu(this);
-  m_help =  helpMenu(0, false);
+
+  if (kapp->authorizeKAction("help"))
+  {
+    m_help = helpMenu(0, false);
+  }
 
   m_rightButton = new KPopupMenu(this);
 
