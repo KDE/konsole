@@ -469,7 +469,10 @@ void TEScreen::effectiveRendition()
   }
   if (cu_re & RE_BOLD)
   {
-    ef_fg += BASE_COLORS;
+    if (ef_fg < BASE_COLORS)
+      ef_fg += BASE_COLORS;
+    else
+      ef_fg -= BASE_COLORS;
   }
 }
 
