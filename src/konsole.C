@@ -237,8 +237,7 @@ Konsole::Konsole(const char* name,
   // read and apply default values ///////////////////////////////////////////
   resize(321, 321); // Dummy.
   QSize currentSize = size();
-  KConfig *config = KGlobal::config();
-  config->setGroup("options");
+  KConfig * config = KGlobal::config();
   applyMainWindowSettings(config);
   if (currentSize != size())
      defaultSize = size();
