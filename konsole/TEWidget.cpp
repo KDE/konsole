@@ -229,12 +229,21 @@ void TEWidget::fontChange(const QFont &)
 {
   QFontMetrics fm(font());
   font_h = fm.height() + m_lineSpacing;
+
+  // waba TEWidget 1.123:
+  // "Base character width on widest ASCII character. This prevents too wide
+  //  characters in the presence of double wide (e.g. Japanese) characters."
   int fw;
   font_w = 1;
   for(int i=0;i<128;i++) {
     if( isprint(i) && font_w < (fw = fm.width(i)))
       font_w = fw;
   }
+  if (font_w>200) // don't trust unrealistic value, fallback to QFontMetrics::maxWidth()
+    font_w=fm.maxWidth();
+  if (font_w<1)
+    font_w=1;
+
   font_a = fm.ascent();
 //printf("font: %s\n", font().toString().latin1());
 //printf("fixed: %s\n", font().fixedPitch() ? "yes" : "no");
