@@ -457,10 +457,10 @@ HCNT("paintEvent");
   //  erase(rect);
   // BL: I have no idea why we need this, and it breaks the refresh.
 
+  QChar *disstrU = new QChar[columns];
   for (int y = luy; y <= rly; y++)
   for (int x = lux; x <= rlx; x++)
   {
-    QChar *disstrU = new QChar[columns];
     int len = 1;
     disstrU[0] = fontMap(image[loc(x,y)].c);
     int cf = image[loc(x,y)].f;
@@ -479,8 +479,8 @@ HCNT("paintEvent");
                 QRect(blX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
                 unistr, image[loc(x,y)], pm != NULL, false);
     x += len - 1;
-    delete [] disstrU;
   }
+  delete [] disstrU;
   drawFrame( &paint );
   paint.end();
   setUpdatesEnabled(TRUE);
@@ -1078,7 +1078,6 @@ void TEWidget::dropEvent(QDropEvent* event)
     // * in all other cases, just paste
     //   (for non-local ones, or for a list of URLs, 'cd' is nonsense)
   QStrList strlist;
-  KURL *url;
   int file_count = 0;
   dropText = "";
   bool bPopup = true;
@@ -1090,15 +1089,14 @@ void TEWidget::dropEvent(QDropEvent* event)
           dropText += " ";
           bPopup = false; // more than one file, don't popup
         }
-        url = new KURL( p );
-        if (url->isLocalFile()) {
-          dropText += url->path(); // local URL : remove protocol
+        KURL url(p);
+        if (url.isLocalFile()) {
+          dropText += url.path(); // local URL : remove protocol
         }
         else {
-          dropText += url->prettyURL();
+          dropText += url.prettyURL();
           bPopup = false; // a non-local file, don't popup
         }
-        delete url;
       }
 
       if (bPopup)
