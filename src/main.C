@@ -171,9 +171,6 @@ int main(int argc, char* argv[])
   login_shell = args->isSet("ls");
   welcome = args->isSet("welcome");
   title = args->getOption("T");
-  if (title.isEmpty()) {
-    title = args->getOption("title");
-  }
 
 
   //FIXME: more: font, menu, scrollbar, schema, session ...
