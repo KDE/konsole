@@ -838,7 +838,8 @@ void TEScreen::scrollUp(int from, int n)
   moveImage(loc(0,from),loc(0,from+n),loc(columns-1,bmargin));
   clearImage(loc(0,bmargin-n+1),loc(columns-1,bmargin),' ');
   
-  if ( from == 0 ) //FIXME: && lines scroll into the history buffer
+  if ( from == 0 && sel_begin >= 0) //FIXME: && lines scroll into the history buffer
+                                    //FIXME: condition is not ok.
   {
       sel_TL -= (n-from)*columns;
       sel_BR -= (n-from)*columns;
@@ -861,8 +862,7 @@ void TEScreen::scrollDown(int from, int n)
   if (from + n > bmargin) n = bmargin - from;
   moveImage(loc(0,from+n),loc(0,from),loc(columns-1,bmargin-n));
   clearImage(loc(0,from),loc(columns-1,from+n-1),' ');
-
-  if (from == 0) 
+  if (from == 0 && sel_begin >= 0) //FIXME: condition is not ok
   {
      sel_TL += (n-from)*columns;
      sel_BR += (n-from)*columns;
