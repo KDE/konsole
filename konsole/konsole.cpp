@@ -100,6 +100,7 @@ Time to start a requirement list.
 #include <kdebug.h>
 #include <kipc.h>
 #include <dcopclient.h>
+#include <kglobalsettings.h>
 
 #include <klocale.h>
 #include <sys/wait.h>
@@ -598,7 +599,8 @@ void Konsole::makeGUI()
    KAction *configure = KStdAction::preferences(this, SLOT(slotConfigure()), actions);
    configure->plug(m_options);
 
-   m_options->insertTearOffHandle();
+   if (KGlobalSettings::insertTearOffHandle())
+     m_options->insertTearOffHandle();
 
    //help menu
    m_help->setAccel(QKeySequence(),m_help->idAt(0));
@@ -637,7 +639,8 @@ void Konsole::makeGUI()
    m_rightButton->insertItem(i18n("S&ettings"), m_options);
    m_rightButton->insertSeparator();
    closeSession->plug(m_rightButton );
-   m_rightButton->insertTearOffHandle();
+   if (KGlobalSettings::insertTearOffHandle())
+     m_rightButton->insertTearOffHandle();
 
    
    delete colors;

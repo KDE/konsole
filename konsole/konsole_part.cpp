@@ -424,7 +424,8 @@ void konsolePart::makeGUI()
   m_options->insertSeparator();
   KAction *saveSettings = KStdAction::saveOptions(this, SLOT(saveProperties()), actions);
   saveSettings->plug(m_options);
-  m_options->insertTearOffHandle();
+  if (KGlobalSettings::insertTearOffHandle())
+    m_options->insertTearOffHandle();
 
   // Popup Menu -------------------------------------------------------------------
   m_popupMenu = new KPopupMenu((KMainWindow*)parentWidget);
@@ -441,7 +442,8 @@ void konsolePart::makeGUI()
   KAction *closeSession = new KAction(i18n("&Close Terminal Emulator"), "fileclose", 0, this,
                                       SLOT(closeCurrentSession()), actions);
   closeSession->plug(m_popupMenu);
-  m_popupMenu->insertTearOffHandle();
+  if (KGlobalSettings::insertTearOffHandle())
+    m_popupMenu->insertTearOffHandle();
 }
 
 void konsolePart::applySettingsToGUI()

@@ -111,7 +111,8 @@ KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar
   KAction *closeSession = new KAction(i18n("&Close Session"), "fileclose", 0, this,
                                       SLOT(closeSession()), actions);
   closeSession->plug(m_rightButton );
-  m_rightButton->insertTearOffHandle();
+  if (KGlobalSettings::insertTearOffHandle())
+    m_rightButton->insertTearOffHandle();
 }
 
 void KonsoleChild::run() {
