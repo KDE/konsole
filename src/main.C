@@ -129,6 +129,7 @@ const char *fonts[] = {
  "7x13",  // medium
  "9x15",  // large
  "10x20", // huge
+     //     "", // placeholder for the separator
  "-misc-console-medium-r-normal--16-160-72-72-c-160-iso10646-1", // "Linux"
  "-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1",    // "Unicode"
  };
@@ -380,43 +381,18 @@ void Konsole::makeMenu()
   KAction *act = new KAction(i18n("Rename session..."), 0, this, 
                              SLOT(slotRenameSession()), this);
   act->plug(m_sessions);
-  // act->plug(toolBar());
 
   m_sessions->insertSeparator();
-  // probably don't need this one
-  //  connect(m_sessions, SIGNAL(activated(int)), SLOT(activateSession(int)));
 
   m_file = new QPopupMenu;
   connect(m_file, SIGNAL(activated(int)), SLOT(newSession(int)));
 
-  /*
-  m_font = new QPopupMenu;
-  m_font->setCheckable(TRUE);
-  m_font->insertItem( i18n("&Normal"), 0);
-  m_font->insertSeparator();
-  */
-
-  /*
-//m_font->insertItem( i18n("&Tiny"),   1);
-  m_font->insertItem( i18n("&Small"),  2);
-  m_font->insertItem( i18n("&Medium"), 3);
-  m_font->insertItem( i18n("&Large"),  4);
-  m_font->insertItem( i18n("&Huge"),   5);
-  m_font->insertSeparator();
-  m_font->insertItem( i18n("&Linux"),  6);
-  m_font->insertItem( i18n("&Unicode"),7);
-  m_font->insertSeparator();
-  m_font->insertItem( i18n("&Custom ..."), 1000); // for other fonts
-  connect(m_font, SIGNAL(activated(int)), SLOT(font_menu_activated(int)));
-  */
-
-  
   selectFont = new KSelectAction("Fonts", 0, this, 
 			    SLOT(slotSelectFont()), this);
   QStringList it;
   // TODO: make separators in KSelectAction items
   it << "&Normal" << "&Tiny" << "&Small" << "&Medium" << "&Large" << "&Huge" 
-     << "&Linux" << "&Unicode" << "&Custom...";
+     << "" << "&Linux" << "&Unicode" << "" << "&Custom...";
   selectFont->setItems(it);
 
   selectScrollbar = new KSelectAction("Scrollbar", 0, this, 
@@ -660,10 +636,10 @@ void Konsole::slotSelectScrollbar() {
 
 
 void Konsole::slotSelectFont() {
-    kDebugInfo("slotSelectFont");
   assert(se);
   int item = selectFont->currentItem();
-  if (item == selectFont->items().count()-1) // the last one is the custom
+  kDebugInfo("slotSelectFont %d", item);
+  if (item == 8) // this is the default
   {
     KFontDialog::getFont(defaultFont, true);
     item = 0;
@@ -671,21 +647,6 @@ void Konsole::slotSelectFont() {
   setFont(item);
   activateSession(); // activates the current    
 }
-
-/*
-void Konsole::font_menu_activated(int item)
-{
-  assert(se);
-
-  if (item == 1000)
-  {
-    KFontDialog::getFont(defaultFont, true);
-    item = 0;
-  }
-  setFont(item);
-  activateSession(); // activates the current
-}
-*/
 
 void Konsole::schema_menu_activated(int item)
 {
@@ -810,20 +771,6 @@ void Konsole::changeColumns(int columns)
   te->update();
 }
 
-/*
-void Konsole::size_menu_activated(int item)
-{
-  switch (item)
-  {
-    case 0: setColLin(40,15); break;
-    case 1: setColLin(80,24); break;
-    case 2: setColLin(80,25); break;
-    case 3: setColLin(80,40); break;
-    case 4: setColLin(80,52); break;
-  }
-}
-*/
-
 void Konsole::slotSelectSize() {
     int item = selectSize->currentItem();
     switch (item) {
@@ -838,15 +785,20 @@ void Konsole::slotSelectSize() {
 
 void Konsole::notifySize(int lines, int columns)
 {
-    /*
-  m_size->setItemChecked(0,columns==40&&lines==15);
-  m_size->setItemChecked(1,columns==80&&lines==24);
-  m_size->setItemChecked(2,columns==80&&lines==25);
-  m_size->setItemChecked(3,columns==80&&lines==40);
-  m_size->setItemChecked(4,columns==80&&lines==52);
-    */  
-    // FIXME: I cannot do this with actions: infinite loop
-  if (n_render >= 3) pixmap_menu_activated(n_render);
+    selectSize->blockSignals(true);
+    selectSize->setCurrentItem(-1);
+    if (columns==40&&lines==15) 
+	selectSize->setCurrentItem(0);
+    if (columns==80&&lines==24) 
+	selectSize->setCurrentItem(1);	
+    if (columns==80&&lines==25) 
+	selectSize->setCurrentItem(2);	
+    if (columns==80&&lines==40) 
+	selectSize->setCurrentItem(3);	
+    if (columns==80&&lines==52) 
+	selectSize->setCurrentItem(4);	
+    selectSize->blockSignals(false);
+    if (n_render >= 3) pixmap_menu_activated(n_render);
 }
 
 void Konsole::setHeader()
