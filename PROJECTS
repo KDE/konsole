@@ -1,4 +1,23 @@
-Here is a list of open issues:
+* current issues -------------------------------------------------
+
+* configuration related:
+
+  - command line options
+    font, menu, scrollbar, schema, kdelnk, codec, keytrans, ...
+
+* improve/complete documentation
+
+  - include README.* into doc.
+  - explain configuration files
+
+
+* currently working on
+  add configuration for function keys
+  document broken keypad (It's a QT issue really)
+  document VT100 keypad codes (doc/missing.keys)
+
+
+* future stuff, perhaps ------------------------------------------
 
 - when manipulating binary files, sometimes one
   screws up ones terminal settings.  xterm has
@@ -9,6 +28,13 @@ Here is a list of open issues:
 - keep session open after client program termination.
   Useful for things like 'konsole -e ls'.
 
+- deflicker, setting all the attributes separately
+  both when creating and changing to a session
+  creates 3 setimage and 1 paint events. (This may
+  have improved, lately).
+
+* write configuration utility for config (*.schema,*.kdelnk) files.
+
 * stuff centered around resizing and text vs. matrix:
 
   - make resizing more clever
@@ -18,23 +44,3 @@ Here is a list of open issues:
     cut'n'paste.
   - selecting lines that wraps insert a '\n' in the middle of the
     line when pasting. A related problem occures with resizing.
-
-* configuration related:
-
-  - command line options
-    - font, menu, scrollbar, schema, kdelnk ... other configs
-  - write configuration utility for config (*.schema,*.kdelnk) files.
-
-  - add configuration for function keys. <<< currently working on (LD)
-
-* improve/complete documentation
-
-  - document broken keypad (It's a QT issue really)
-    see VT100 keypad codes (doc/missing.keys)
-  - include README.* into doc.
-  - explain configuration files
-
-- deflicker, setting all the attributes separately
-  both when creating and changing to a session
-  creates 3 setimage and 1 paint events. (This may
-  have improved, lately).
