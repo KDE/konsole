@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec=kdesu konsole
+Exec=konsole --type su
 Icon=konsole
 DocPath=konsole/index.html
 MimeType=application/x-konsole
