@@ -162,6 +162,7 @@ private:
   int         n_keytab;
   int         n_oldkeytab;
   int         n_font;
+  int         n_defaultFont; // font as set in config to use as default for new sessions
   int         n_scroll;
   int         n_render;
   int         curr_schema; // current schema no

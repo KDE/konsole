@@ -693,7 +693,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    n_oldkeytab=n_keytab;
    n_keytab=config->readNumEntry("keytab",0); // act. the keytab for this session
    b_fullscreen = FALSE; // config->readBoolEntry("Fullscreen",FALSE);
-   n_font     = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
+   n_defaultFont = n_font = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
    n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
    s_word_seps= config->readEntry("wordseps",":@-./_~");
    b_framevis = config->readBoolEntry("has frame",TRUE);
@@ -1234,14 +1234,14 @@ TESession *Konsole::newSession(KSimpleConfig *co)
   QCString emu = "xterm";
   QString sch = s_kconfigSchema;
   QString txt = title;
-  unsigned int     fno = 0;
+  unsigned int     fno = n_defaultFont;
   if (co)
   {
       cmd = co->readEntry("Exec");
       emu = co->readEntry("Term", emu).ascii();
       sch = co->readEntry("Schema", sch);
       txt = co->readEntry("Comment", txt);
-      fno = co->readUnsignedNumEntry("Font");
+      fno = co->readUnsignedNumEntry("Font", fno);
   }
   ColorSchema* schema = sch.isEmpty()
                       ? colors->find(s_schema)
@@ -1391,7 +1391,8 @@ void Konsole::addScreenSession(const QString &socket)
   co->writeEntry("Comment", txt);
   co->writeEntry("Exec", QString::fromLatin1("screen -r %1").arg(socket));
   QString icon = "openterm"; // FIXME use another icon (malte)
-  m_file->insertItem( SmallIconSet( icon ), txt, ++cmd_serial );
+  cmd_serial++;
+  m_file->insertItem( SmallIconSet( icon ), txt, cmd_serial, cmd_serial );
   m_toolbarSessionsCommands->insertItem( SmallIconSet( icon ), txt, cmd_serial );
   no2command.insert(cmd_serial,co);
 }
