@@ -205,3 +205,12 @@ int konsole_wcwidth_cjk(Q_UINT16 ucs)
   return konsole_wcwidth(ucs);
 }
 #endif
+
+// single byte char: +1, multi byte char: +2
+int string_width( const QString &txt )
+{
+  int w = 0;
+  for ( uint i = 0; i < txt.length(); ++i )
+     w += konsole_wcwidth( txt[ i ].unicode() );
+ return w;
+}

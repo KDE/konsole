@@ -45,6 +45,7 @@
 
 #include "config.h"
 #include "TEWidget.h"
+#include "konsole_wcwidth.h"
 
 #include <qapplication.h>
 #include <qpainter.h>
@@ -336,6 +337,17 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,colorsSwapped(false)
 ,rimX(1)
 ,rimY(1)
+,m_imPreeditText(QString::null)
+,m_imPreeditLength(0)
+,m_imStart(0)
+,m_imStartLine(0)
+,m_imEnd(0)
+,m_imSelStart(0)
+,m_imSelEnd(0)
+,m_cursorLine(0)
+,m_cursorCol(0)
+,m_isIMEdit(false)
+,m_isIMSel(false)
 {
   // The offsets are not yet calculated.
   // Do not calculate these too often to be more smoothly when resizing
@@ -441,6 +453,32 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
       if (pm || color_table[attr->b].color != color_table[ colorsSwapped ? DEFAULT_FORE_COLOR : DEFAULT_BACK_COLOR ].color
           || clear || (blinking && (attr->r & RE_BLINK)))
         paint.fillRect(rect, color_table[attr->b].color);
+    }
+
+    QString tmpStr = str.simplifyWhiteSpace();
+    if ( m_isIMEdit && !tmpStr.isEmpty() ) { // imput method edit area background color
+      QRect tmpRect = rect;
+      if ( str != m_imPreeditText ) {  // ugly hack
+        tmpRect.setLeft( tmpRect.left() + font_w );
+        tmpRect.setWidth( tmpRect.width() + font_w );
+      }
+
+      paint.fillRect( tmpRect, Qt::darkCyan );  // currently use hard code color
+    }
+
+    if ( m_isIMSel && !tmpStr.isEmpty() ) { // imput method selection background color
+      int x = rect.left() + ( font_w * (m_imSelStart - m_imStart) );
+      int y = rect.top();
+      int w = font_w * (m_imSelEnd - m_imSelStart);
+      int h = font_h;
+
+      QRect tmpRect = QRect( x, y, w, h ); 
+      if ( str != m_imPreeditText ) {  // ugly hack
+        tmpRect.setLeft( tmpRect.left() + font_w );
+        tmpRect.setWidth( tmpRect.width() + font_w );
+      }
+
+      paint.fillRect( tmpRect, Qt::darkGray );   // currently use hard code color
     }
   }
 
@@ -550,6 +588,8 @@ void TEWidget::setCursorPos(const int curx, const int cury)
     xpos = bX + tLx + font_w*curx;
     setMicroFocusHint(xpos, ypos, 0, font_h);
     // fprintf(stderr, "x/y = %d/%d\txpos/ypos = %d/%d\n", curx, cury, xpos, ypos);
+    m_cursorLine = cury;
+    m_cursorCol = curx;
 }
 
 /*!
@@ -597,7 +637,10 @@ HCNT("setImage");
     // Two extra so that we don't have to have to care about start and end conditions
     for (x = 0; x < cols; x++)
     {
-      if (ext[x] != lcl[x])
+	if ( ( (m_imPreeditLength > 0) && ( ( m_imStartLine == y )
+	      && ( ( m_imStart < m_imEnd ) && ( ( x > m_imStart ) ) && ( x < m_imEnd ) )
+              || ( ( m_imSelStart < m_imSelEnd ) && ( ( x > m_imSelStart ) ) ) ) )
+            || ext[x] != lcl[x])
       {
          dirtyMask[x] = dirtyMask[x+1] = dirtyMask[x+2] = 1;
       }
@@ -639,6 +682,24 @@ HCNT("setImage");
         }
 
         QString unistr(disstrU, p);
+
+        // for XIM on the spot input style
+        m_isIMEdit = m_isIMSel = false;
+        if ( m_imStartLine == y ) {
+          if ( ( m_imStart < m_imEnd ) && ( x >= m_imStart-1 ) && ( x + int( unistr.length() ) <= m_imEnd ) )
+            m_isIMEdit = true;
+
+          if ( ( m_imSelStart < m_imSelEnd ) && ( x >= m_imStart-1 ) && ( x + int( unistr.length() ) <= m_imEnd ) )
+            m_isIMSel = true;
+	}
+        else if ( m_imStartLine < y ) {  // for word worp
+          if ( ( m_imStart < m_imEnd ) )
+            m_isIMEdit = true;
+
+          if ( ( m_imSelStart < m_imSelEnd ) )
+            m_isIMSel = true;
+	}
+        
         drawAttrStr(paint,
                     QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
                     unistr, &ext[x], pm != NULL, true);
@@ -1588,56 +1649,6 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
     // here.
     return true;
   }
-  static int composeLength = 0;
-  if ( e->type() == QEvent::IMStart )
-  {
-    QIMEvent *qime = (QIMEvent *)e;
-    composeLength = 0;
-    qime->accept();
-    return false;
-  }
-  if ( e->type() == QEvent::IMCompose )
-  {
-    QString text;
-    if (composeLength)
-    {
-      text.setLength(composeLength);
-      for(int i = 0; i < composeLength; i++)
-         text[i] = '\010';
-    }
-
-    QIMEvent *qime = (QIMEvent *)e;
-    composeLength = qime->text().length();
-
-    text += qime->text();
-    if (!text.isEmpty())
-    {
-      QKeyEvent ke(QEvent::KeyPress, 0,-1,0, text);
-      emit keyPressedSignal(&ke);
-    }
-    qime->accept();
-    return false;
-  }
-  if ( e->type() == QEvent::IMEnd )
-  {
-    QString text;
-    if (composeLength)
-    {
-      text.setLength(composeLength);
-      for(int i = 0; i < composeLength; i++)
-         text[i] = '\010';
-    }
-
-    QIMEvent *qime = (QIMEvent *)e;
-    text += qime->text();
-    if (!text.isEmpty())
-    {
-      QKeyEvent ke(QEvent::KeyPress, 0,-1,0, text);
-      emit keyPressedSignal(&ke);
-    }
-    qime->accept();
-    return false;
-  }
   if ( e->type() == QEvent::Enter )
   {
     QObject::disconnect( (QObject*)cb, SIGNAL(dataChanged()),
@@ -1649,6 +1660,67 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
       this, SLOT(onClearSelection()) );
   }
   return QFrame::eventFilter( obj, e );
+}
+
+void TEWidget::imStartEvent( QIMEvent */*e*/ )
+{
+  m_imStart = m_cursorCol;
+  m_imStartLine = m_cursorLine;
+  m_imPreeditLength = 0;
+
+  m_imEnd = m_imSelStart = m_imSelEnd = 0;
+  m_isIMEdit = m_isIMSel = false;
+}
+
+void TEWidget::imComposeEvent( QIMEvent *e )
+{
+  QString text = QString::null;
+  if ( m_imPreeditLength > 0 ) {
+    text.fill( '\010', m_imPreeditLength );
+  }
+
+  m_imEnd = m_imStart + string_width( e->text() );
+
+  QString tmpStr = e->text().left( e->cursorPos() );
+  m_imSelStart = m_imStart + string_width( tmpStr );
+
+  tmpStr = e->text().mid( e->cursorPos(), e->selectionLength() );
+  m_imSelEnd = m_imSelStart + string_width( tmpStr );
+  m_imPreeditLength = e->text().length();
+  m_imPreeditText = e->text();
+  text += e->text();
+
+  if ( text.length() > 0 ) {
+    QKeyEvent ke( QEvent::KeyPress, 0, -1, 0, text );
+    emit keyPressedSignal( &ke );
+  }
+}
+
+void TEWidget::imEndEvent( QIMEvent *e )
+{
+  QString text = QString::null;
+  if ( m_imPreeditLength > 0 ) {
+      text.fill( '\010', m_imPreeditLength );
+  }
+
+  m_imEnd = m_imSelStart = m_imSelEnd = 0;
+  text += e->text();
+  if ( text.length() > 0 ) {
+    QKeyEvent ke( QEvent::KeyPress, 0, -1, 0, text );
+    emit keyPressedSignal( &ke );
+  }
+
+  QPoint tL  = contentsRect().topLeft();
+  int tLx = tL.x();
+  int tLy = tL.y();
+
+  QRect repaintRect = QRect( bX+tLx, bY+tLy+font_h*m_imStartLine,
+                             contentsRect().width(), contentsRect().height() );
+  m_imStart = 0;
+  m_imPreeditLength = 0;
+ 
+  m_isIMEdit = m_isIMSel = false;
+  repaint( repaintRect, true );
 }
 
 // Override any Ctrl+<key> accelerator when pressed with the keyboard

@@ -188,6 +188,10 @@ protected:
 
     void mouseTripleClickEvent(QMouseEvent* ev);
 
+    void imStartEvent( QIMEvent *e );
+    void imComposeEvent( QIMEvent *e );
+    void imEndEvent( QIMEvent *e );
+
 protected slots:
 
     void scrollChanged(int value);
@@ -276,6 +280,18 @@ private:
     int rimX;      // left/right rim width
     int rimY;      // top/bottom rim high
     QSize m_size;
+
+    QString m_imPreeditText;
+    int m_imPreeditLength;
+    int m_imStart;
+    int m_imStartLine;
+    int m_imEnd;
+    int m_imSelStart;
+    int m_imSelEnd;
+    int m_cursorLine;
+    int m_cursorCol;
+    bool m_isIMEdit;
+    bool m_isIMSel;
     
 private slots:
     void drop_menu_activated(int item);

@@ -7,10 +7,13 @@
 #define	_KONSOLE_WCWIDTH_H_
 
 #include <qglobal.h>
+#include <qstring.h>
 
 int konsole_wcwidth(Q_UINT16 ucs);
 #if 0
 int konsole_wcwidth_cjk(Q_UINT16 ucs);
 #endif
+
+int string_width( const QString &txt );
 
 #endif
