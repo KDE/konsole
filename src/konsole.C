@@ -527,6 +527,7 @@ void Konsole::readProperties(KConfig* config)
   n_font     = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
   n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
   selectScrollbar->setCurrentItem(n_scroll);
+  slotSelectScrollbar();
   s_schema   = config->readEntry("schema","");
 
   // Global options ///////////////////////
