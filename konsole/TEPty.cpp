@@ -146,7 +146,7 @@ TEPty::TEPty()
   connect(this, SIGNAL(processExited(KProcess *)),
           this, SLOT(donePty()));
   connect(this, SIGNAL(wroteStdin(KProcess *)),
-          this, SLOT(doSendJobs()));
+          this, SLOT(writeReady()));
 
   setUsePty(All, false); // utmp will be overridden later
 }
@@ -170,14 +170,17 @@ void TEPty::send_string(const char* s)
   send_bytes(s,strlen(s));
 }
 
+void TEPty::writeReady()
+{
+  pendingSendJobs.remove(pendingSendJobs.begin());
+  m_bufferFull = false;
+  doSendJobs();
+}
+
 void TEPty::doSendJobs() {
   if(pendingSendJobs.isEmpty())
   {
-     if (m_bufferFull)
-     {
-        m_bufferFull = false;
-        emit buffer_empty();
-     }
+     emit buffer_empty();
      return;
   }
   
@@ -187,7 +190,7 @@ void TEPty::doSendJobs() {
     qWarning("Uh oh.. can't write data..");
     return;
   }
-  pendingSendJobs.remove(pendingSendJobs.begin());
+  m_bufferFull = true;
 }
 
 void TEPty::appendSendJob(const char* s, int len)
@@ -198,12 +201,9 @@ void TEPty::appendSendJob(const char* s, int len)
 /*! sends len bytes through the line */
 void TEPty::send_bytes(const char* s, int len)
 {
-  bool sent = writeStdin(s, len);
-  if (!sent)
-  {
-    appendSendJob(s,len);
-    m_bufferFull = true;
-  }
+  appendSendJob(s,len);
+  if (!m_bufferFull)
+     doSendJobs();
 }
 
 /*! indicates that a block of data is received */
