@@ -61,7 +61,7 @@
 
 #define HERE fprintf(stdout,"%s(%d): here\n",__FILE__,__LINE__)
 
-FILE* syslog = NULL; //stdout;
+FILE* syslog_file = NULL; //stdout;
 
 /* -------------------------------------------------------------------------- */
 
@@ -251,11 +251,11 @@ void Shell::DataReceived(int)
 { char buf[4096];
   int n = read(fd, buf, 4096);
   emit block_in(buf,n);
-  if (syslog) // if (debugging) ...
+  if (syslog_file) // if (debugging) ...
   {
     int i;
-    for (i = 0; i < n; i++) fputc(buf[i],syslog);
-    fflush(syslog);
+    for (i = 0; i < n; i++) fputc(buf[i],syslog_file);
+    fflush(syslog_file);
   }
 }
 
