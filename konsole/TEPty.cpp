@@ -177,7 +177,7 @@ extern "C" {
 
 // Small hack to keep it still compiling with KDE 3.0
 #include "kdeversion.h"
-#if KDE_VERSION <305
+#if KDE_VERSION <306
   #undef HAVE_OPENPTY
 #endif
 
@@ -282,7 +282,7 @@ void TEPty::commClose()
   }
 #endif
   if (m_bNeedGrantPty) chownpty(m_MasterFd, false);
- 
+
   KProcess::commClose();
 }
 
@@ -343,11 +343,11 @@ void TEPty::setWriteable(bool writeable)
 }
 
 void TEPty::openPty()
-{ 
+{
   m_bNeedGrantPty = true;
 
 #include <kdeversion.h>
-#if KDE_VERSION <305
+#if KDE_VERSION <306
   #undef HAVE_OPENPTY  // Hack to make it compile for binner
 #endif
 
@@ -372,7 +372,7 @@ void TEPty::openPty()
       strncpy(ttynam, ttyname(slave_fd), 50);
 
       m_bNeedGrantPty = false;
-       
+
       /* Get the group ID of the special `tty' group.  */
       struct group* p = getgrnam(TTY_GROUP);    /* posix */
       gid_t gid = p ? p->gr_gid : getgid ();    /* posix */
@@ -380,13 +380,13 @@ void TEPty::openPty()
       if (fchown(slave_fd, (uid_t) -1, gid) < 0)
       {
          m_bNeedGrantPty = true;
-         fprintf(stderr,"konsole: cannot chown %s.\n",ttynam); 
+         fprintf(stderr,"konsole: cannot chown %s.\n",ttynam);
          perror("Reason");
       }
       else if (chmod(ttynam, S_IRUSR|S_IWUSR|S_IWGRP) < 0)
       {
          m_bNeedGrantPty = true;
-         fprintf(stderr,"konsole: cannot chmod %s.\n",ttynam); 
+         fprintf(stderr,"konsole: cannot chmod %s.\n",ttynam);
          perror("Reason");
       }
     }
@@ -448,7 +448,7 @@ void TEPty::openPty()
 
   if (m_MasterFd < 0)
   {
-    fprintf(stderr,"Can't open a pseudo teletype\n"); 
+    fprintf(stderr,"Can't open a pseudo teletype\n");
     m_strError = i18n("Unable to open a suitable terminal device.");
     return;
   }
@@ -487,7 +487,7 @@ int TEPty::makePty(bool _addutmp)
   int tt = m_SlaveFd; // Already opened?
 
   if (tt < 0)
-    tt = open(ttynam, O_RDWR); 
+    tt = open(ttynam, O_RDWR);
 
   if (tt < 0) // the slave pty could be opened
   {
@@ -536,7 +536,7 @@ int TEPty::makePty(bool _addutmp)
   if (strncmp(str_ptr, "/dev/", 5) == 0)
        str_ptr += 5;
   strncpy(l_struct.ut_line, str_ptr, UT_LINESIZE);
-  time(&l_struct.ut_time); 
+  time(&l_struct.ut_time);
 
   login(&l_struct);
 #endif
@@ -545,7 +545,7 @@ int TEPty::makePty(bool _addutmp)
 
 //! only used internally. See `run' for interface
 void TEPty::startPgm(const char* pgm, QValueList<QCString> & args, const char* term)
-{ 
+{
   int sig;
   int tt = makePty(m_bAddUtmp);
 
@@ -634,7 +634,7 @@ void TEPty::startPgm(const char* pgm, QValueList<QCString> & args, const char* t
   close(m_MasterFd);
 
   // drop privileges
-  setgid(getgid()); setuid(getuid()); 
+  setgid(getgid()); setuid(getuid());
 
   // propagate emulation
   if (term && term[0]) setenv("TERM",term,1);
@@ -663,13 +663,13 @@ void TEPty::startPgm(const char* pgm, QValueList<QCString> & args, const char* t
     Create an instance.
 */
 TEPty::TEPty() : pSendJobTimer(NULL)
-{ 
+{
   m_bXonXoff = false;
   memset(&m_WSize, 0, sizeof(struct winsize));
   m_SlaveFd = -1;
   m_MasterFd = -1;
   openPty();
-  connect(this, SIGNAL(receivedStdout(int, int &)), 
+  connect(this, SIGNAL(receivedStdout(int, int &)),
 	  this, SLOT(DataReceived(int, int&)));
   connect(this, SIGNAL(processExited(KProcess *)),
           this, SLOT(donePty()));
@@ -741,7 +741,7 @@ void TEPty::appendSendJob(const char* s, int len)
     connect(pSendJobTimer, SIGNAL(timeout()), this, SLOT(doSendJobs()) );
   }
   pSendJobTimer->start(0);
-}  
+}
 
 /*! sends len bytes through the line */
 void TEPty::send_bytes(const char* s, int len)
@@ -767,7 +767,7 @@ void TEPty::send_bytes(const char* s, int len)
 
 /*! indicates that a block of data is received */
 void TEPty::DataReceived(int,int &len)
-{ 
+{
   char buf[4096];
   len = read(m_MasterFd, buf, 4096);
   if (len < 0)
