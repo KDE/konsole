@@ -74,9 +74,9 @@ VT102Emulation::VT102Emulation(TEWidget* gui, const char* term) : Emulation(gui)
   emulation = term;
   decoder = (QTextDecoder*)NULL;
 
-  localeCodec = (!strcmp(term,"linux"))
-              ? QTextCodec::loadCharmapFile("cp437.charmap") :
-              QTextCodec::codecForLocale();
+  localeCodec = //(!strcmp(term,"linux"))
+                //? QTextCodec::loadCharmapFile("cp437.charmap") :
+                QTextCodec::codecForLocale();
   setCodec(0);
 }
 
