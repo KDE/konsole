@@ -79,7 +79,8 @@ int main(int argc, char* argv[])
   KAboutData aboutData( PACKAGE, I18N_NOOP("Konsole"),
     VERSION, description, KAboutData::License_GPL_V2,
     "(c) 1997-2000, Lars Doelle");
-  aboutData.addAuthor("Lars Doelle",0, "lars.doelle@on-line.de");
+  aboutData.addAuthor("Chris Machemer","Maintainer", "machey@ptd.net");
+  aboutData.addAuthor("Lars Doelle","Author", "lars.doelle@on-line.de");
   aboutData.addCredit("Peter Silva",
     I18N_NOOP("decent marking"),
     "peter.silva@videotron.ca");
