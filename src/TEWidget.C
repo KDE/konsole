@@ -1090,8 +1090,9 @@ void TEWidget::drop_menu_activated(int item)
       break;
     case 1: // cd ...
       currentSession->getEmulation()->sendString("cd ");
-      KURL url( dropText );
-      currentSession->getEmulation()->sendString(url.directory());
+      QString text = KURL( dropText ).directory( true, false );
+      text.replace(QRegExp(" "), "\\ "); // escape spaces
+      currentSession->getEmulation()->sendString(text);
       currentSession->getEmulation()->sendString("\n");
 //    KWM::activate((Window)this->winId());
       break;

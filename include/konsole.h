@@ -60,7 +60,7 @@ private slots:
   void opt_menu_activated(int item);
   void schema_menu_activated(int item);
   void pixmap_menu_activated(int item);
-  void drop_menu_activated(int item);
+  // void drop_menu_activated(int item);
   void keytab_menu_activated(int item);
   void tecRef();
   void newSession(int kind);

@@ -443,6 +443,8 @@ void Konsole::dropEvent(QDropEvent* event)
     se->getEmulation()->sendString(dropText.latin1()); // Paste it
 }
 
+/*
+  unused apparently (David)
 void Konsole::drop_menu_activated(int item)
 {
   switch (item)
@@ -451,13 +453,17 @@ void Konsole::drop_menu_activated(int item)
       se->getEmulation()->sendString(dropText);
       break;
     case 1: // cd ...
+    {
       se->getEmulation()->sendString("cd ");
-      KURL url( dropText );
-      se->getEmulation()->sendString(url.directory());
+      QString text = KURL( dropText ).directory( true, false );
+      text.replace(QRegExp(" "), "\\ "); // escape spaces
+      se->getEmulation()->sendString(text);
       se->getEmulation()->sendString("\n");
-      break;
+    }
+    break;
   }
 }
+*/
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
