@@ -97,7 +97,7 @@ const Block *BlockArray::at(size_t i)
 void BlockArray::unmap()
 {
     if (lastmap) {
-        int res = munmap(lastmap, blocksize);
+        int res = munmap((char*)lastmap, blocksize);
         if (res < 0) perror("munmap");
     }
     lastmap = 0;
