@@ -325,6 +325,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 
   // Init DnD ////////////////////////////////////////////////////////////////
   setAcceptDrops(true); // attempt
+  dragInfo.state = diNone;
 /*  m_drop = new KPopupMenu(this);
   m_drop->insertItem( i18n("Paste"), 0);
   m_drop->insertItem( i18n("cd"),    1);
@@ -735,23 +736,35 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   line_selection_mode = FALSE;
   word_selection_mode = FALSE;
 
+  QPoint pos = QPoint((ev->x()-tLx-blX)/font_w,(ev->y()-tLy-bY)/font_h);
+
 //printf("press top left [%d,%d] by=%d\n",tLx,tLy, bY);
   if ( ev->button() == LeftButton)
   {
-    QPoint pos = QPoint((ev->x()-tLx-blX)/font_w,(ev->y()-tLy-bY)/font_h);
+    if (isTargetSelected(pos.x(), pos.y())){
+      // The user clicked inside selected text
 
-    preserve_line_breaks = !( ev->state() & ControlButton ); 
+      dragInfo.state = diPending;
 
-    if (mouse_marks || (ev->state() & ShiftButton))
+    }else
     {
-      emit clearSelectionSignal();
-      iPntSel = pntSel = pos;
-      actSel = 1; // left mouse button pressed but nothing selected yet.
-      grabMouse(   /*crossCursor*/  ); // handle with care!	
-    }
-    else
-    {
-      emit mouseSignal( 0, pos.x() + 1, pos.y() + 1 ); // left button
+      // No reason to ever start a drag event
+      dragInfo.state = diNone;
+
+      preserve_line_breaks = !( ev->state() & ControlButton );
+
+      if (mouse_marks || (ev->state() & ShiftButton))
+      {
+        emit clearSelectionSignal();
+        iPntSel = pntSel = pos;
+        selBound.start = selBound.end = pos;
+        actSel = 1; // left mouse button pressed but nothing selected yet.
+        grabMouse(   /*crossCursor*/  ); // handle with care!	
+      }
+      else
+      {
+        emit mouseSignal( 0, pos.x() + 1, pos.y() + 1 ); // left button
+      }
     }
   }
   if ( ev->button() == MidButton )
@@ -774,6 +787,27 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
 {
   // for auto-hiding the cursor, we need mouseTracking
   if (ev->state() == NoButton ) return;
+
+  if (dragInfo.state == diPending) {
+    // we had a mouse down, but haven't confirmed a drag yet
+    // if the mouse has moved sufficiently, we will confirm
+
+   if (ev->x() > dragInfo.start.x() + 4 || ev->x() < dragInfo.start.x() - 4 ||
+        ev->y() > dragInfo.start.y() + 4 || ev->y() < dragInfo.start.y() - 4) {
+      // we've left the drag square, we can start a real drag operation now
+      dragInfo.state = diNone;
+      selBound.start = selBound.end;  // If these are the same isTargetInSelection retruns false
+                                      // just in case they click again where the old selection
+                                      // used to be
+      emit clearSelectionSignal();
+      doDrag();
+    }
+    return;
+  } else if (dragInfo.state == diDragging) {
+    // this isn't technically needed because mouseMoveEvent is suppressed during
+    // Qt drag operations, replaced by dragMoveEvent
+    return;
+  }
 
   if (actSel == 0) return;
 
@@ -915,14 +949,17 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
 
   if ( word_selection_mode || line_selection_mode ) {
     if ( actSel < 2 || swapping ) {
+      selBound.start = ohere;
       emit beginSelectionSignal( ohere.x(), ohere.y() );
     }
   } else if ( actSel < 2 ) {
+    selBound.start = pntSel;
     emit beginSelectionSignal( pntSel.x(), pntSel.y() );
   }
 
   actSel = 2; // within selection
   pntSel = here;
+  selBound.end = here;
   emit extendSelectionSignal( here.x(), here.y() );
 }
 
@@ -931,22 +968,33 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
 //printf("release [%d,%d] %d\n",ev->x()/font_w,ev->y()/font_h,ev->button());
   if ( ev->button() == LeftButton)
   {
-    if ( actSel > 1 ) emit endSelectionSignal(preserve_line_breaks);
-    actSel = 0;
+    if(dragInfo.state == diPending)
+    {
+      // We had a drag event pending but never confirmed.  Kill selection
+      emit clearSelectionSignal();
+      selBound.start = selBound.end;  // If these are the same isTargetInSelection retruns false
+                                      // just in case they click again where the old selection
+                                      // used to be
+    }else
+    {
+     if ( actSel > 1 ) emit endSelectionSignal(preserve_line_breaks);
+      actSel = 0;
 
-    //FIXME: emits a release event even if the mouse is
-    //       outside the range. The procedure used in `mouseMoveEvent'
-    //       applies here, too.
+      //FIXME: emits a release event even if the mouse is
+      //       outside the range. The procedure used in `mouseMoveEvent'
+      //       applies here, too.
 
-    QPoint tL  = contentsRect().topLeft();
-    int    tLx = tL.x();
-    int    tLy = tL.y();
+      QPoint tL  = contentsRect().topLeft();
+      int    tLx = tL.x();
+      int    tLy = tL.y();
 
-    if (!mouse_marks && !(ev->state() & ShiftButton))
-      emit mouseSignal( 3, // release
+      if (!mouse_marks && !(ev->state() & ShiftButton))
+        emit mouseSignal( 3, // release
                         (ev->x()-tLx-blX)/font_w + 1,
                         (ev->y()-tLy-bY)/font_h + 1 );
-    releaseMouse();
+      releaseMouse();
+    }
+    dragInfo.state = diNone;
   }
   if ( !mouse_marks && ((ev->button() == RightButton && !(ev->state() & ShiftButton))
                         || ev->button() == MidButton) ) {
@@ -995,6 +1043,7 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
      { i--; x--; }
      bgnSel.setX(x);
      emit beginSelectionSignal( bgnSel.x(), bgnSel.y() );
+     selBound.start = bgnSel;
 
      // set the end...
      i = loc( endSel.x(), endSel.y() );
@@ -1004,6 +1053,7 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
      endSel.setX(x);
      actSel = 2; // within selection
      emit extendSelectionSignal( endSel.x(), endSel.y() );
+     selBound.end = endSel;
      emit endSelectionSignal(preserve_line_breaks);
    }
 
@@ -1031,7 +1081,9 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
   actSel = 2; // within selection
 
   emit beginSelectionSignal( 0, iPntSel.y() );
+  selBound.start.setX(0); selBound.start.setY(iPntSel.y());
   emit extendSelectionSignal( 0, iPntSel.y()+1 );
+  selBound.end.setX(0); selBound.end.setY(iPntSel.y() + 1);
   emit endSelectionSignal(preserve_line_breaks);
 }
 
@@ -1418,6 +1470,47 @@ void TEWidget::dropEvent(QDropEvent* event)
   }
 }
 
+// Given coordinates, is the target in a selection?
+bool TEWidget::isTargetSelected(int x, int y){
+
+  QPoint pos(x,y);
+  QPoint tempPoint;
+
+  //fprintf( stderr, "Start: (%d,%d)\n", selBound.start.x(), selBound.start.y());
+  //fprintf( stderr, "Pos: (%d,%d)\n", pos.x(), pos.y());
+  //fprintf( stderr, "End: (%d,%d)\n\n", selBound.end.x(), selBound.end.y());
+
+  // Why in the world doesn't Qt let you say if(point1 > point2) ?
+  if( selBound.start.manhattanLength() > selBound.end.manhattanLength())
+  {
+    //  If the selected manually from the bottom right to the top left
+    //  the start will actually be the end and vice versa.  Switch them now
+    //  to make for an easier if statement below
+    tempPoint = selBound.start;
+    selBound.start = selBound.end;
+    selBound.end = tempPoint;
+  }
+
+  //  The given point is in the selection if:
+  //  1.  The point is in the same row as the selection
+  //  2.  The point is in the same column as the selection
+  //  3.  The start and end points of the selection are not the same
+
+  if( ((selBound.start.x() <= pos.x()) || (selBound.start.y() <= pos.y())  // Check row
+    && (selBound.end.x() >= pos.x()) && (selBound.end.y() >= pos.y())) // Check column
+    && (selBound.start != selBound.end))
+      return true;
+  else
+    return false;
+}
+
+void TEWidget::doDrag()
+{
+  dragInfo.state = diDragging;
+  dragInfo.dragObject = new QTextDrag(QApplication::clipboard()->text(), this);
+  dragInfo.dragObject->dragCopy();
+  // Don't delete the QTextDrag object.  Qt will delete it when it's done with it.
+}
 
 void TEWidget::drop_menu_activated(int item)
 {

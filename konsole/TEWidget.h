@@ -136,7 +136,20 @@ protected:
     // Dnd
     void dragEnterEvent(QDragEnterEvent* event);
     void dropEvent(QDropEvent* event);
+    bool isTargetSelected(int x, int y);
+    void doDrag();
+    enum DragState { diNone, diPending, diDragging };
 
+    struct _dragInfo {
+      DragState       state;
+      QPoint          start;
+      QTextDrag       *dragObject;
+    } dragInfo;
+
+    struct selectionBounds {
+      QPoint start;
+      QPoint end;
+    } selBound;
 
     virtual int charClass(UINT16) const;
 
