@@ -1458,15 +1458,15 @@ void Konsole::activateSession(TESession *s)
   }
   s->setConnect(TRUE);
   updateTitle();
+  if (!m_menuCreated)
+    makeGUI();
   updateKeytabMenu(); // act. the keytab for this session
-  if (m_clearHistory) {
-     m_clearHistory->setEnabled( se->history().isOn() );
-     m_saveHistory->setEnabled( se->history().isOn() );
-     sessions.find(se);
-     int position=sessions.at();
-     m_moveSessionLeft->setEnabled(position>0);
-     m_moveSessionRight->setEnabled(position<sessions.count()-1);
-  }
+  m_clearHistory->setEnabled( se->history().isOn() );
+  m_saveHistory->setEnabled( se->history().isOn() );
+  sessions.find(se);
+  uint position=sessions.at();
+  m_moveSessionLeft->setEnabled(position>0);
+  m_moveSessionRight->setEnabled(position<sessions.count()-1);
 }
 
 void Konsole::allowPrevNext()
@@ -1674,7 +1674,7 @@ void Konsole::nextSession()
 void Konsole::moveSessionLeft()
 {
   sessions.find(se);
-  int position=sessions.at();
+  uint position=sessions.at();
   if (position==0)
     return;
 
@@ -1690,6 +1690,8 @@ void Konsole::moveSessionLeft()
   KToolBarButton* ktb=toolBar()->getButton(button_id);
   connect(ktb,SIGNAL(doubleClicked(int)), this,SLOT(slotRenameSession(int)));
 
+  if (!m_menuCreated)
+    makeGUI();
   m_moveSessionLeft->setEnabled(position-1>0);
   m_moveSessionRight->setEnabled(true);
 }
@@ -1698,7 +1700,7 @@ void Konsole::moveSessionLeft()
 void Konsole::moveSessionRight()
 {
   sessions.find(se);
-  int position=sessions.at();
+  uint position=sessions.at();
 
   if (position==sessions.count()-1)
     return;
@@ -1715,6 +1717,8 @@ void Konsole::moveSessionRight()
   KToolBarButton* ktb=toolBar()->getButton(button_id);
   connect(ktb,SIGNAL(doubleClicked(int)), this,SLOT(slotRenameSession(int)));
 
+  if (!m_menuCreated)
+    makeGUI();
   m_moveSessionLeft->setEnabled(true);
   m_moveSessionRight->setEnabled(position+1<sessions.count()-1);
 }
