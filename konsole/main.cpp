@@ -79,7 +79,8 @@ static KCmdLineOptions options[] =
    { "profile <name>",  I18N_NOOP("Start with given sessions profile"), 0 },
    { "profiles",        I18N_NOOP("List available profiles"), 0 },
    { "schema <name>",   I18N_NOOP("Use given .schema file"), 0 },
-   { "schemas",         I18N_NOOP("List available schemas"), 0 },
+   { "schemas",         0, 0 },
+   { "schemata",        I18N_NOOP("List available schemata"), 0 },
    { "script",          I18N_NOOP("Enable extended DCOP functions"), 0 },
    { "workdir <dir>",   I18N_NOOP("Change working directory of the konsole to 'dir'"), 0 },
    { "!e <command>",    I18N_NOOP("Execute 'command' instead of shell"), 0 },
@@ -340,7 +341,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
     }
     return 0;
   }
-  if(args->isSet("schemas")) {
+  if(args->isSet("schemas") || args->isSet("schemata")) {
     ColorSchemaList colors;
     colors.checkSchemas();
     for(int i = 0; i < (int) colors.count(); i++)
