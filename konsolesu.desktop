@@ -8,6 +8,7 @@ MimeType=application/x-konsole
 Terminal=0
 
 Name=Terminal Program - Super User Mode
+Name[ar]=برنامج الشاشة الطرفيَة - نمط المستخدم الجذري
 Name[be]=Тэрмінал - рэжым адміністратара
 Name[bg]=Конзола с админ. права
 Name[bn]=টার্মিনাল প্রোগ্রাম - অ্যাডমিনস্ট্রেটর মোড
@@ -23,6 +24,8 @@ Name[et]=Terminali rakendus (administraator)
 Name[fi]=Komentotulkki - pääkäyttäjätila
 Name[fr]=Programme terminal - mode superutilisateur
 Name[gl]=Programa de Terminal - Modo Super-Usuario
+Name[hi]=टर्मिनल प्रबंधक- सुपर यूज़र मोड
+Name[hr]=Terminalski program —  super  korisnički način rada
 Name[hu]=Konsole (rendszergazdai mód)
 Name[is]=Skjáhermir (sem kerfisstjóri)
 Name[it]=Programma emulazione terminale - modalità super utente
