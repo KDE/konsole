@@ -69,6 +69,7 @@
 #include <klocale.h>
 #include <knotifyclient.h>
 #include <kglobalsettings.h>
+#include <kurldrag.h>
 
 #ifndef HERE
 #define HERE printf("%s(%d): %s\n",__FILE__,__LINE__,__FUNCTION__)
@@ -1456,19 +1457,20 @@ void TEWidget::dropEvent(QDropEvent* event)
     // * if there is only ONE url and if it's a LOCAL one, ask for paste or cd
     // * in all other cases, just paste
     //   (for non-local ones, or for a list of URLs, 'cd' is nonsense)
-  QStrList strlist;
+  KURL::List urllist;
   int file_count = 0;
   dropText = "";
   bool bPopup = true;
 
-  if(QUriDrag::decode(event, strlist)) {
-    if (strlist.count()) {
-      for(const char* p = strlist.first(); p; p = strlist.next()) {
+  if(KURLDrag::decode(event, urllist)) {
+    if (!urllist.isEmpty()) {
+      KURL::List::Iterator it;
+      for ( it = urllist.begin(); it != urllist.end(); ++it ) {
         if(file_count++ > 0) {
           dropText += " ";
           bPopup = false; // more than one file, don't popup
         }
-        KURL url(QUriDrag::uriToUnicodeUri(p));
+        KURL url = *it;
         QString tmp;
         if (url.isLocalFile()) {
           tmp = url.path(); // local URL : remove protocol
@@ -1477,7 +1479,7 @@ void TEWidget::dropEvent(QDropEvent* event)
           tmp = url.url();
           bPopup = false; // a non-local file, don't popup
         }
-        if (strlist.count()>1)
+        if (urllist.count()>1)
           KRun::shellQuote(tmp);
         dropText += tmp;
       }
