@@ -70,11 +70,16 @@ public:
 
   void run();
 
-  // DCOP functions
+  // Additional functions for DCOP
   int currentSession();
 
   int sessionCount() { return sessions.count(); }
-  void setCurrentSession(int sessionNo);
+  void setCurrentSession(const int session);
+
+  void newSession(const QString &type);
+  void renameCurrentSession(const QString &name);
+  void feedCurrentSession(const QString &text);
+  void sendCurrentSession(const QString &text);
 
 public slots:
 
@@ -121,7 +126,7 @@ private slots:
   void moveSessionRight();
   void allowPrevNext();
   void setSchema(int n);
-  void sendSignal(int n);
+  void sendCurrentSessionSignal(int n);
   void slotToggleToolbar();
   void slotToggleMenubar();
   void slotToggleFrame();

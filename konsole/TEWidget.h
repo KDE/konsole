@@ -57,6 +57,7 @@ public:
     uint lineSpacing() const;
 
     void emitSelection(bool useXselection);
+    void emitText(QString text);
 
     void setImage(const ca* const newimg, int lines, int columns);
 

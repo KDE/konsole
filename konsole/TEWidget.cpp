@@ -1018,6 +1018,14 @@ void TEWidget::setMouseMarks(bool on)
 
 #undef KeyPress
 
+void TEWidget::emitText(QString text)
+{
+  if (!text.isEmpty()) {
+    QKeyEvent e(QEvent::KeyPress, 0,-1,0, text);
+    emit keyPressedSignal(&e); // expose as a big fat keypress event
+  }
+}
+
 void TEWidget::emitSelection(bool useXselection)
 // Paste Clipboard by simulating keypress events
 {

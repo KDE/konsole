@@ -163,7 +163,7 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
                  bool menubaron, bool toolbaron, bool frameon, bool scrollbaron,
                  const QString &_title, QCString type, const QString &_term, bool b_inRestore)
 :KMainWindow(0, name),
-DCOPObject( "KonsoleIface" )
+DCOPObject( "konsole" )
 ,m_defaultSession(0)
 ,te(0)
 ,se(0)
@@ -379,7 +379,7 @@ void Konsole::makeGUI()
    m_signals->insertItem( i18n( "&Interrupt Task" ) + " (INT)",   2);
    m_signals->insertItem( i18n( "&Terminate Task" ) + " (TERM)", 15);
    m_signals->insertItem( i18n( "&Kill Task" )      + " (KILL)",  9);
-   connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
+   connect(m_signals, SIGNAL(activated(int)), SLOT(sendCurrentSessionSignal(int)));
 
    // Edit Menu ----------------------------------------------------------------
    KAction *copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0,
@@ -1344,11 +1344,22 @@ void Konsole::setFullScreen(bool on)
 //         make the drawEvent.
 //       - font, background image and color palette should be set in one go.
 
-void Konsole::sendSignal(int sn)
+void Konsole::feedCurrentSession(const QString &text)
+{
+  if (te) te->emitText(text);
+}
+
+void Konsole::sendCurrentSession(const QString &text)
+{
+  QString newtext=text;
+  newtext.append("\r");
+  feedCurrentSession(newtext);
+}
+
+void Konsole::sendCurrentSessionSignal(int sn)
 {
   if (se) se->kill(sn);
 }
-
 
 void Konsole::runSession(TESession* s)
 {
@@ -1430,9 +1441,9 @@ int Konsole::currentSession()
   return active+1;
 }
 
-void Konsole::setCurrentSession(int sessionNo)
+void Konsole::setCurrentSession(const int sessionNo)
 {
-  if (sessionNo>sessions.count())
+  if (sessionNo<=0 || sessionNo>sessions.count())
     return;
   activateSession( sessions.at(sessionNo-1) );
 }
@@ -1535,6 +1546,16 @@ void Konsole::newSession(int i)
 {
   KSimpleConfig* co = no2command.find(i);
   if (co) newSession(co);
+}
+
+void Konsole::newSession(const QString &type)
+{
+  KSimpleConfig *co;
+  if (type.isEmpty())
+     co = defaultSession();
+  else
+     co = new KSimpleConfig(locate("appdata", type + ".desktop"), true /* read only */);
+  newSession(co);
 }
 
 TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &args, const QString &_term)
@@ -1979,6 +2000,15 @@ void Konsole::slotRenameSession(int) {
   slotRenameSession();
 }
 
+void Konsole::renameCurrentSession(const QString &name)
+{
+  KRadioAction *ra = session2action.find(se);
+  se->setTitle(name);
+  ra->setText(name);
+  ra->setIcon("openterm"); // I don't know why it is needed here
+  toolBar()->updateRects();
+  updateTitle();
+}
 
 void Konsole::initSessionTitle(const QString &_title) {
   KRadioAction *ra = session2action.find(se);
