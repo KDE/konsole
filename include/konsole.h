@@ -63,6 +63,7 @@ private slots:
   void pixmap_menu_activated(int item);
   void keytab_menu_activated(int item);
   void tecRef();
+  void newSession();
   void newSession(int kind);
   void newSessionSelect();
 

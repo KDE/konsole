@@ -242,7 +242,11 @@ void Konsole::makeMenu()
   newsession->plug(toolBar());
   QObjectList *l = toolBar()->queryList( "KToolBarButton" );
   if ( l && l->first() )
-      ( (KToolBarButton*)l->first() )->setPopup( m_file );
+  {
+      ( (KToolBarButton*)l->first() )->setDelayedPopup( m_file );
+      connect( (KToolBarButton*)l->first() , SIGNAL(clicked()), this, SLOT(newSession()));
+      
+  }
   delete l;
   toolBar()->insertLineSeparator();
 
@@ -853,6 +857,11 @@ void Konsole::activateSession()
 
 void Konsole::newSessionSelect()
 {
+}
+
+void Konsole::newSession()
+{
+  newSession(1);
 }
 
 void Konsole::newSession(int i)
