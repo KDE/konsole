@@ -430,15 +430,17 @@ void Konsole::makeMenu()
   // where is going to put it?
   
   showMenubar = KStdAction::showMenubar(this, SLOT(slotToggleMenubar()));
-  showMenubar->setText(i18n("&Menubar"));
+  //  showMenubar->setText(i18n("&Menubar"));
   showMenubar->plug(m_options);
 
   showToolbar = KStdAction::showToolbar(this, SLOT(slotToggleToolbar()));
-  showToolbar->setText(i18n("&Toolbar"));
+  //  showToolbar->setText(i18n("&Toolbar"));
   showToolbar->plug(m_options);
 
+  showFrame = new KToggleAction("Show &frame", 0, 
+				this, SLOT(slotToggleFrame()), this);
+  showFrame->plug(m_options);;
 
-  m_options->insertItem( i18n("&Frame"), 2 );
   selectScrollbar->plug(m_options);
   m_options->insertSeparator();
   m_options->insertItem( i18n("&Fullscreen"), 5);
@@ -544,8 +546,10 @@ void Konsole::readProperties(KConfig* config)
 
   // Global options ///////////////////////
 
-  //  setMenuVisible(config->readBoolEntry("menubar visible",TRUE));
-  setFrameVisible(config->readBoolEntry("has frame",TRUE));
+  //  setFrameVisible(config->readBoolEntry("has frame",TRUE));
+  b_framevis = config->readBoolEntry("has frame",TRUE);
+  slotToggleFrame();
+
   showToolbar->setChecked(b_toolbarvis);
   slotToggleToolbar();
   showMenubar->setChecked(b_menuvis);
@@ -707,6 +711,15 @@ void Konsole::slotToggleToolbar() {
   enableToolBar(b_toolbarvis ? KToolBar::Show : KToolBar::Hide);
 }
 
+void Konsole::slotToggleFrame() {
+  kDebugInfo("Changing the frame style");
+  b_framevis = showFrame->isChecked();
+  te->setFrameStyle( b_framevis
+                     ? QFrame::WinPanel | QFrame::Sunken
+                     : QFrame::NoFrame );
+}
+
+/*
 void Konsole::setFrameVisible(bool visible)
 {
   b_framevis = visible;
@@ -715,6 +728,9 @@ void Konsole::setFrameVisible(bool visible)
                      ? QFrame::WinPanel | QFrame::Sunken
                      : QFrame::NoFrame );
 }
+*/
+
+
 
 void Konsole::setHistory(bool on)
 {
@@ -728,8 +744,10 @@ void Konsole::opt_menu_activated(int item)
 {
   switch( item )
   {
+    /*
     case 2: setFrameVisible(!b_framevis);
             break;
+    */
     case 3: setHistory(!b_scroll);
             break;
     case 5: setFullScreen(!b_fullscreen);

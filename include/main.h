@@ -51,9 +51,7 @@ private slots:
 
   void doneSession(TESession*,int);
   void opt_menu_activated(int item);
-  //  void font_menu_activated(int item);
   void schema_menu_activated(int item);
-  //  void size_menu_activated(int item);
   void pixmap_menu_activated(int item);
   void drop_menu_activated(int item);
   void keytab_menu_activated(int item);
@@ -81,6 +79,7 @@ private slots:
   void sendSignal(int n);
   void slotToggleToolbar();
   void slotToggleMenubar();  
+  void slotToggleFrame();
   void slotRenameSession();
   void slotSelectSize();
   void slotSelectFont();
@@ -93,8 +92,7 @@ private:
   void addSession(TESession* s);
   void setColorPixmaps();
 
-  //  void setMenuVisible(bool);
-  void setFrameVisible(bool);
+  //  void setFrameVisible(bool);
   void setHistory(bool);
   
   void setSchema(const char* path);
