@@ -786,7 +786,7 @@ void TEWidget::emitSelection()
     QString text = QApplication::clipboard()->text();
     if ( ! text.isNull() ) {
         text.replace(QRegExp("\n"), "\r");
-        QKeyEvent e(QEvent::KeyPress, 0,0,0, text);
+        QKeyEvent e(QEvent::KeyPress, 0,-1,0, text);
         emit keyPressedSignal(&e); // expose as a big fat keypress event
 	emit clearSelectionSignal();
     }
