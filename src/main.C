@@ -248,7 +248,7 @@ int main(int argc, char* argv[])
           m->newSession();
           kdDebug() << "Adding title tmpTitle = " << sessionconfig->readEntry(tmpTitle, m->title);
 //          m->initSessionTitle(sessionconfig->readEntry(tmpTitle, m->title));
-          m->initSessionTitle("m->title");
+          m->initSessionTitle(m->title);
           n2++;
           }
         ksm->konsole = m;
