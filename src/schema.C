@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include "kapp.h"
 #include <qdir.h>
+#include <qfile.h>
 
 static int schema_serial = 0; //FIXME: remove,localize
 
@@ -56,8 +57,16 @@ ColorSchema* ColorSchema::readSchema(const char* path)
           continue;
 
         // if this is not an absolute filename, prepend the wallpaper dir
-        if (path[0] != '/') res->imagepath = kapp->kde_wallpaperdir() + '/';
+        if (path[0] != '/') res->imagepath = kapp->localkdedir() + "/share/wallpapers/";
         res->imagepath += path;
+        if (QFile::exists(res->imagepath) == false)
+        {
+          // search for a global wallpaper
+          res->imagepath = kapp->kde_wallpaperdir() + '/';
+          res->imagepath += path;
+          if (QFile::exists(res->imagepath) == false)
+            res->imagepath = "";
+        }
         res->alignment = attr;
       }
       if (!strncmp(line,"color",5))
@@ -110,7 +119,20 @@ ColorSchema* ColorSchema::find(int numb)
 
 ColorSchema* ColorSchema::find(const char* path)
 {
-  ColorSchema* res = path2schema.find(path);
+  ColorSchema* res = 0;
+  QString temp_path;
+
+  // search for a local schema first
+  if (path[0] != '/') temp_path = kapp->localkdedir() + "/share/apps/konsole/";
+  temp_path += path;
+  if (QFile::exists(temp_path) == true)
+    res = path2schema.find(temp_path.data());
+  else
+  {
+    temp_path = kapp->kde_datadir() + "/konsole/";
+    if (QFile::exists(temp_path) == true)
+      res = path2schema.find(temp_path.data());
+  }
   return res ? res : numb2schema.find(0);
 }
 
