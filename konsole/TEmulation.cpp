@@ -373,6 +373,7 @@ void TEmulation::showBulk()
                   scr->getColumns());     // actual refresh
     free(image);
     //FIXME: check that we do not trigger other draw event here.
+    gui->setLineWrapped( scr->getCookedLineWrapped() );
     //kdDebug(1211)<<"TEmulation::showBulk(): setScroll()"<<endl;
     gui->setScroll(scr->getHistCursor(),scr->getHistLines());
     //kdDebug(1211)<<"TEmulation::showBulk(): setScroll() done"<<endl;

@@ -131,7 +131,8 @@ public: // these are all `Screen' operations
     void resizeImage(int new_lines, int new_columns);
     //
     ca*  getCookedImage();
-    
+    QBitArray getCookedLineWrapped();
+
     /*! return the number of lines. */
     int  getLines()   { return lines; }
     /*! return the number of columns. */
@@ -191,6 +192,7 @@ private:
     int lines;
     int columns;
     ca *image; // [lines][columns]
+    QBitArray line_wrapped; // [lines]
 
     // history buffer ---------------
 

@@ -862,15 +862,15 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     QPoint left = left_not_right ? here : iPntSel;
     i = loc(left.x(),left.y());
     selClass = charClass(image[i].c);
-    while ( left.x() > 0 && charClass(image[i-1].c) == selClass )
-    { i--; left.rx()--; }
+    while ( ((left.x()>0) || (left.y()>0 && m_line_wrapped[left.y()-1])) && charClass(image[i-1].c) == selClass )
+    { i--; if (left.x()>0) left.rx()--; else {left.rx()=columns-1; left.ry()--;} }
 
     // Find left (left_not_right ? from start : from here)
     QPoint right = left_not_right ? iPntSel : here;
     i = loc(right.x(),right.y());
     selClass = charClass(image[i].c);
-    while ( right.x() < columns-1 && charClass(image[i+1].c) == selClass )
-    { i++; right.rx()++; }
+    while( ((right.x()<columns-1) || (right.y()<lines-1 && m_line_wrapped[right.y()])) && charClass(image[i+1].c) == selClass )
+    { i++; if (right.x()<columns-1) right.rx()++; else {right.rx()=0; right.ry()++; } }
 
     // Pick which is start (ohere) and which is extension (here)
     if ( left_not_right )
@@ -893,6 +893,11 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     QPoint above = above_not_below ? here : iPntSel;
     QPoint below = above_not_below ? iPntSel : here;
     
+    while (above.y()>0 && m_line_wrapped[above.y()-1])
+      above.ry()--;
+    while (below.y()<lines-1 && m_line_wrapped[below.y()])
+      below.ry()++;
+
     above.setX(0);
     below.setX(columns-1);
 
@@ -909,7 +914,6 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
 
   if ( !word_selection_mode && !line_selection_mode )
   {
-    // Extend to word boundaries
     int i;
     int selClass;
 
@@ -928,7 +932,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     selClass = charClass(image[i].c);
     if (selClass == ' ')
     {
-       while ( right.x() < columns-1 && charClass(image[i+1].c) == selClass )
+       while ( right.x() < columns-1 && charClass(image[i+1].c) == selClass && !m_line_wrapped[right.y()])
        { i++; right.rx()++; }
        if (right.x() < columns-1) right = left_not_right ? iPntSel : here;
     }
@@ -1039,8 +1043,8 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
   {
     // set the start...
      int x = bgnSel.x();
-     while ( x > 0 && charClass(image[i-1].c) == selClass )
-     { i--; x--; }
+     while ( ((x>0) || (bgnSel.y()>0 && m_line_wrapped[bgnSel.y()-1])) && charClass(image[i-1].c) == selClass )
+     { i--; if (x>0) x--; else {x=columns-1; bgnSel.ry()--;} }
      bgnSel.setX(x);
      emit beginSelectionSignal( bgnSel.x(), bgnSel.y() );
      selBound.start = bgnSel;
@@ -1048,8 +1052,8 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
      // set the end...
      i = loc( endSel.x(), endSel.y() );
      x = endSel.x();
-     while( x < columns-1 && charClass(image[i+1].c) == selClass )
-     { i++; x++ ; }
+     while( ((x<columns-1) || (endSel.y()<lines-1 && m_line_wrapped[endSel.y()])) && charClass(image[i+1].c) == selClass )
+     { i++; if (x<columns-1) x++; else {x=0; endSel.ry()++; } }
      endSel.setX(x);
      actSel = 2; // within selection
      emit extendSelectionSignal( endSel.x(), endSel.y() );
@@ -1080,10 +1084,16 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
 
   actSel = 2; // within selection
 
+  while (iPntSel.y()>0 && m_line_wrapped[iPntSel.y()-1])
+    iPntSel.ry()--;
   emit beginSelectionSignal( 0, iPntSel.y() );
   selBound.start.setX(0); selBound.start.setY(iPntSel.y());
+
+  while (iPntSel.y()<lines-1 && m_line_wrapped[iPntSel.y()])
+    iPntSel.ry()++;
   emit extendSelectionSignal( 0, iPntSel.y()+1 );
   selBound.end.setX(0); selBound.end.setY(iPntSel.y() + 1);
+
   emit endSelectionSignal(preserve_line_breaks);
 }
 

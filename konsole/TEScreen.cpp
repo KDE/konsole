@@ -58,6 +58,8 @@
 #define loc(X,Y) ((Y)*columns+(X))
 #endif
 
+//#define REVERSE_WRAPPED_LINES  // for wrapped line debug
+
 /*! creates a `TEScreen' of `lines' lines and `columns' columns.
 */
 
@@ -89,6 +91,7 @@ TEScreen::TEScreen(int l, int c)
 
     histCursor = 0;
   */
+  line_wrapped.resize(lines+1);
   initTabStops();
   clearSelection();
   reset();
@@ -415,30 +418,36 @@ void TEScreen::resizeImage(int new_lines, int new_columns)
   // make new image
 
   ca* newimg = new ca[(new_lines+1)*new_columns];
+  QBitArray newwrapped(new_lines+1);
   clearSelection();
 
   // clear new image
-  for (int y = 0; y < new_lines; y++)
-  for (int x = 0; x < new_columns; x++)
-  {
-    newimg[y*new_columns+x].c = ' ';
-    newimg[y*new_columns+x].f = DEFAULT_FORE_COLOR;
-    newimg[y*new_columns+x].b = DEFAULT_BACK_COLOR;
-    newimg[y*new_columns+x].r = DEFAULT_RENDITION;
+  for (int y = 0; y < new_lines; y++) {
+    for (int x = 0; x < new_columns; x++)
+    {
+      newimg[y*new_columns+x].c = ' ';
+      newimg[y*new_columns+x].f = DEFAULT_FORE_COLOR;
+      newimg[y*new_columns+x].b = DEFAULT_BACK_COLOR;
+      newimg[y*new_columns+x].r = DEFAULT_RENDITION;
+    }
+    newwrapped[y]=false;
   }
   int cpy_lines   = QMIN(new_lines,  lines);
   int cpy_columns = QMIN(new_columns,columns);
   // copy to new image
-  for (int y = 0; y < cpy_lines; y++)
-  for (int x = 0; x < cpy_columns; x++)
-  {
-    newimg[y*new_columns+x].c = image[loc(x,y)].c;
-    newimg[y*new_columns+x].f = image[loc(x,y)].f;
-    newimg[y*new_columns+x].b = image[loc(x,y)].b;
-    newimg[y*new_columns+x].r = image[loc(x,y)].r;
+  for (int y = 0; y < cpy_lines; y++) {
+    for (int x = 0; x < cpy_columns; x++)
+    {
+      newimg[y*new_columns+x].c = image[loc(x,y)].c;
+      newimg[y*new_columns+x].f = image[loc(x,y)].f;
+      newimg[y*new_columns+x].b = image[loc(x,y)].b;
+      newimg[y*new_columns+x].r = image[loc(x,y)].r;
+    }
+    newwrapped[y]=line_wrapped[y];
   }
   delete[] image;
   image = newimg;
+  line_wrapped = newwrapped;
   lines = new_lines;
   columns = new_columns;
   cuX = QMIN(cuX,columns-1);
@@ -540,6 +549,10 @@ ca* TEScreen::getCookedImage()
     for (x = len; x < columns; x++) merged[yp+x] = dft;
     for (x = 0; x < columns; x++)
     {   int p=x + yp; int q=x + yq;
+#ifdef REVERSE_WRAPPED_LINES
+        if (hist->isWrappedLine(y+histCursor))
+          reverseRendition(&merged[p]);
+#endif
         if ( ( q >= sel_TL ) && ( q <= sel_BR ) )
           reverseRendition(&merged[p]); // for selection
     }
@@ -555,6 +568,10 @@ ca* TEScreen::getCookedImage()
        for (x = 0; x < columns; x++)
        { int p = x + yp; int q = x + yq; int r = x + yr;
          merged[p] = image[r];
+#ifdef REVERSE_WRAPPED_LINES
+         if (line_wrapped[y- hist->getLines() +histCursor])
+           reverseRendition(&merged[p]);
+#endif
          if ( q >= sel_TL && q <= sel_BR )
            reverseRendition(&merged[p]); // for selection
        }
@@ -575,6 +592,19 @@ ca* TEScreen::getCookedImage()
   return merged;
 }
 
+QBitArray TEScreen::getCookedLineWrapped()
+{
+  QBitArray result(lines);
+
+  for (int y = 0; (y < lines) && (y < (hist->getLines()-histCursor)); y++)
+    result[y]=hist->isWrappedLine(y+histCursor);
+
+  if (lines >= hist->getLines()-histCursor)
+    for (int y = (hist->getLines()-histCursor); y < lines ; y++)
+      result[y]=line_wrapped[y- hist->getLines() +histCursor];
+
+  return result;
+}
 
 /*!
 */
@@ -682,9 +712,13 @@ void TEScreen::ShowCharacter(unsigned short c)
   // We indicate the fact that a newline has to be triggered by
   // putting the cursor one right to the last column of the screen.
 
-  if (cuX >= columns)
-  {
-    if (getMode(MODE_Wrap)) NextLine(); else cuX = columns-1;
+  if (cuX >= columns) {
+    if (getMode(MODE_Wrap)) { 
+      line_wrapped[cuY]=true;
+      NextLine();
+    } 
+    else 
+      cuX = columns-1;
   }
 
   if (getMode(MODE_Insert)) insertChars(1);
@@ -826,6 +860,9 @@ void TEScreen::clearImage(int loca, int loce, char c)
     image[i].b = ef_bg; //DEFAULT_BACK_COLOR; //       many have different
     image[i].r = ef_re; //DEFAULT_RENDITION;  //       ideas here.
   }
+
+  for (i = loca/columns; i<=loce/columns; i++)
+    line_wrapped[i]=false;
 }
 
 /*! move image between (including) `loca' and `loce' to 'dst'.
@@ -844,6 +881,8 @@ void TEScreen::moveImage(int dst, int loca, int loce)
   }
   //kdDebug(1211) << "Using memmove to scroll up" << endl;
   memmove(&image[dst],&image[loca],(loce-loca+1)*sizeof(ca));
+  for (int i=0;i<=(loce-loca+1)/columns;i++)
+    line_wrapped[(dst/columns)+i]=line_wrapped[(loca/columns)+i];
   if (sel_begin != -1)
   {
      // Adjust selection to follow scroll.
@@ -1059,7 +1098,6 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
   int hY = sel_TL / columns;
   int hX = sel_TL % columns;
   int eol;			// end of line
-  int lines = 0;
 
   s = sel_TL;			// tracks copy in source.
 
@@ -1072,8 +1110,7 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
   while (s <= sel_BR)
     {
       if (s < hist_BR)
-	{			// get lines from hist->history
-				// buffer.
+	{			// get lines from hist->history buffer.
 	  eol = hist->getLineLen(hY);
 
 	  if ((hY == (sel_BR / columns)) &&
@@ -1089,37 +1126,30 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
 	    }
 
 	  if (s <= sel_BR)
-	    {
-				// The line break handling
-				// It's different from the screen
-				// image case!
+	    { 			// The line break handling
 	      if (eol % columns == 0)
-		{
-				// That's either a completely filled
-				// line or an empty line
+		{ 	        // That's either a full or empty line
 		  if (eol == 0)
-		    {
-		      m[d++] = '\n';
+		    {           // empty line, not wrapped
+		      m[d++] = preserve_line_breaks ? '\n' : ' ';
 		    }
 		  else
-		    {
-				// We have a full line.
-				// FIXME: How can we handle newlines
-				// at this position?!
+		    {		// We have a full line.
+  		      if (!hist->isWrappedLine(hY))
+			{       // line is not wrapped
+			  m[d++] = preserve_line_breaks ? '\n' : ' ';
+			}
 		    }
 		}
 	      else if ((eol + 1) % columns == 0)
 		{
-				// FIXME: We don't know if this was a
-				// space at the last position or a
-				// short line!!
-		  m[d++] = ' ';
+                  if (!hist->isWrappedLine(hY))
+                    {
+	  	       m[d++] = preserve_line_breaks ? '\n' : ' ';
+                    }
 		}
 	      else
-		{
-				// We have a short line here. Put a
-				// newline or a space into the
-				// buffer.
+		{       	// We have a short line here.
 		  m[d++] = preserve_line_breaks ? '\n' : ' ';
 		}
 	    }
@@ -1127,7 +1157,6 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
 	  hY++;
 	  hX = 0;
 	  s = hY * columns;
-          lines++;
 	}
     else
       {				// or from screen image.
@@ -1138,7 +1167,8 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
 	if (eol < sel_BR)
 	  {
 	    while ((eol > s) &&
-		   isspace(image[eol - hist_BR].c))
+		   isspace(image[eol - hist_BR].c) &&
+                   !line_wrapped[(eol-hist_BR)/columns])
 	      {
 		eol--;
 	      }
@@ -1158,20 +1188,17 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
 	  }
 
 	if (eol < sel_BR)
-	  {
-				// eol processing see below ...
+	  {			// eol processing
 	    if ((eol + 1) % columns == 0)
-	      {
-		if (image[eol - hist_BR].c == ' ')
-		  {
-		    m[d++] = ' ';
+	      {                 // the whole line is filled
+		if (!line_wrapped[(eol - hist_BR)/columns])
+        	  {             // line is not wrapped
+		    m[d++] = preserve_line_breaks ? '\n' : ' ';
 		  }
 	      }
 	    else
-	      {
-		m[d++] = ((preserve_line_breaks ||
-			   ((eol % columns) == 0)) ?
-			  '\n' : ' ');
+	      {                 // blank/partial line, not wrapped
+		m[d++] = preserve_line_breaks ? '\n' : ' ';
 	      }
 	  }
         else if (addNewLine && preserve_line_breaks)
@@ -1180,7 +1207,6 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
           }
 
 	s = (eol / columns + 1) * columns;
-        lines++;
       }
     }
 
@@ -1221,30 +1247,6 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
 
   return res;
 }
-/* above ... end of line processing for selection -- psilva
-cases:
-
-1)    (eol+1)%columns == 0 --> the whole line is filled.
-   If the last char is a space, insert (preserve) space. otherwise
-   leave the text alone, so that words that are broken by linewrap
-   are preserved.
-
-FIXME:
-	* this suppresses \n for command output that is
-	  sized to the exact column width of the screen.
-
-2)    eol%columns == 0     --> blank line.
-   insert a \n unconditionally.
-   Do it either you would because you are in preserve_line_break mode,
-   or because it's an ASCII paragraph delimiter, so even when
-   not preserving line_breaks, you want to preserve paragraph breaks.
-
-3)    else		 --> partially filled line
-   insert a \n in preserve line break mode, else a space
-   The space prevents concatenation of the last word of one
-   line with the first of the next.
-
-*/
 
 QString TEScreen::getHistory() {
   sel_begin = 0;
@@ -1276,13 +1278,13 @@ void TEScreen::addHistLine()
   { ca dft;
 
     int end = columns-1;
-    while (end >= 0 && image[end] == dft)
+    while (end >= 0 && image[end] == dft && !line_wrapped[0])
       end -= 1;
 
     int oldHistLines = hist->getLines();
 
     hist->addCells(image,end+1);
-    hist->addLine();
+    hist->addLine(line_wrapped[0]);
 
     int newHistLines = hist->getLines();
 

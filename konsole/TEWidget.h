@@ -13,6 +13,7 @@
 #ifndef TE_WIDGET_H
 #define TE_WIDGET_H
 
+#include <qbitarray.h>
 #include <qwidget.h>
 #include <qlabel.h>
 #include <qtimer.h>
@@ -61,6 +62,7 @@ public:
     void emitText(QString text);
 
     void setImage(const ca* const newimg, int lines, int columns);
+    void setLineWrapped(QBitArray line_wrapped) { m_line_wrapped=line_wrapped; }
 
     int  Lines()   { return lines;   }
     int  Columns() { return columns; }
@@ -179,6 +181,7 @@ private:
     int lines;
     int columns;
     ca *image; // [lines][columns]
+    QBitArray m_line_wrapped;
 
     ColorEntry color_table[TABLE_COLORS];
 

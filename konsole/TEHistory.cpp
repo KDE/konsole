@@ -62,8 +62,6 @@ FIXME: There is noticable decrease in speed, also. Perhaps,
 
 //#define tmpfile xTmpFile
 
-#if 1
-
 // History File ///////////////////////////////////////////
 
 /*
@@ -109,7 +107,6 @@ int HistoryFile::len()
   return length;
 }
 
-#endif
 
 // History Scroll abstract base class //////////////////////////////////////
 
@@ -129,7 +126,6 @@ bool HistoryScroll::hasScroll()
   return true;
 }
 
-#if 1
 // History Scroll File //////////////////////////////////////
 
 /* 
@@ -163,6 +159,16 @@ int HistoryScrollFile::getLineLen(int lineno)
   return (startOfLine(lineno+1) - startOfLine(lineno)) / sizeof(ca);
 }
 
+bool HistoryScrollFile::isWrappedLine(int lineno)
+{
+  if (lineno>=0 && lineno <= getLines()) {
+    unsigned char flag;
+    lineflags.get((unsigned char*)&flag,sizeof(unsigned char),(lineno)*sizeof(unsigned char));
+    return flag;
+  }
+  return false;
+}
+
 int HistoryScrollFile::startOfLine(int lineno)
 {
   if (lineno <= 0) return 0;
@@ -184,10 +190,12 @@ void HistoryScrollFile::addCells(ca text[], int count)
   cells.add((unsigned char*)text,count*sizeof(ca));
 }
 
-void HistoryScrollFile::addLine()
+void HistoryScrollFile::addLine(bool previousWrapped)
 {
   int locn = cells.len();
   index.add((unsigned char*)&locn,sizeof(int));
+  unsigned char flags = previousWrapped ? 0x01 : 0x00;
+  lineflags.add((unsigned char*)&flags,sizeof(unsigned char));
 }
 
 
@@ -201,6 +209,7 @@ HistoryScrollBuffer::HistoryScrollBuffer(unsigned int maxNbLines)
 {
   m_histBuffer.setAutoDelete(true);
   m_histBuffer.resize(maxNbLines);
+  m_wrappedLine.resize(maxNbLines);
 }
 
 HistoryScrollBuffer::~HistoryScrollBuffer()
@@ -225,6 +234,7 @@ void HistoryScrollBuffer::addCells(ca a[], int count)
 
   // m_histBuffer.remove(m_arrayIndex); // not necessary
   m_histBuffer.insert(m_arrayIndex, newLine);
+  m_wrappedLine.clearBit(m_arrayIndex);
 }
 
 void HistoryScrollBuffer::normalize()
@@ -232,10 +242,13 @@ void HistoryScrollBuffer::normalize()
   if (!m_buffFilled || !m_arrayIndex) return;
   QPtrVector<histline> newHistBuffer;
   newHistBuffer.resize(m_maxNbLines);
+  QBitArray newWrappedLine;
+  newWrappedLine.resize(m_maxNbLines);
   for(int i = 0; i < (int) m_maxNbLines-2; i++)
   {
      int lineno = adjustLineNb(i);
      newHistBuffer.insert(i+1, m_histBuffer[lineno]);
+     newWrappedLine.setBit(i+1, m_wrappedLine[lineno]);
   }
   m_histBuffer.setAutoDelete(false);
   // Qt 2.3: QVector copy assignment is buggy :-(
@@ -243,6 +256,7 @@ void HistoryScrollBuffer::normalize()
   for(int i = 0; i < (int) m_maxNbLines; i++)
   {
      m_histBuffer.insert(i, newHistBuffer[i]);
+     m_wrappedLine.setBit(i, newWrappedLine[i]);
   }
   m_histBuffer.setAutoDelete(true);
 
@@ -251,9 +265,9 @@ void HistoryScrollBuffer::normalize()
   m_nbLines = m_maxNbLines-2;
 }
 
-void HistoryScrollBuffer::addLine()
+void HistoryScrollBuffer::addLine(bool previousWrapped)
 {
-  // ? Do nothing
+  m_wrappedLine.setBit(m_arrayIndex,previousWrapped);
 }
 
 int HistoryScrollBuffer::getLines()
@@ -272,6 +286,13 @@ int HistoryScrollBuffer::getLineLen(int lineno)
   return l ? l->size() : 0;
 }
 
+bool HistoryScrollBuffer::isWrappedLine(int lineno)
+{
+  if (lineno >= (int) m_maxNbLines)
+    return 0;
+
+  return m_wrappedLine[adjustLineNb(lineno)];
+}
 
 void HistoryScrollBuffer::getCells(int lineno, int colno, int count, ca res[])
 {
@@ -298,6 +319,7 @@ void HistoryScrollBuffer::setMaxNbLines(unsigned int nbLines)
   normalize();
   m_maxNbLines = nbLines;
   m_histBuffer.resize(m_maxNbLines);
+  m_wrappedLine.resize(m_maxNbLines);
   if (m_nbLines > m_maxNbLines - 2)
      m_nbLines = m_maxNbLines -2;
 
@@ -313,8 +335,6 @@ int HistoryScrollBuffer::adjustLineNb(int lineno)
       return lineno + 1;
 }
 
-
-#endif
 
 // History Scroll None //////////////////////////////////////
 
@@ -342,6 +362,11 @@ int  HistoryScrollNone::getLineLen(int)
   return 0;
 }
 
+bool HistoryScrollNone::isWrappedLine(int lineno)
+{
+  return false;
+}
+
 void HistoryScrollNone::getCells(int, int, int, ca [])
 {
 }
@@ -350,7 +375,7 @@ void HistoryScrollNone::addCells(ca [], int)
 {
 }
 
-void HistoryScrollNone::addLine()
+void HistoryScrollNone::addLine(bool)
 {
 }
 
@@ -381,6 +406,11 @@ int  HistoryScrollBlockArray::getLineLen(int lineno)
   size_t res = pLen ? *pLen : 0;
 
   return res;
+}
+
+bool HistoryScrollBlockArray::isWrappedLine(int lineno)
+{
+  return false;
 }
 
 void HistoryScrollBlockArray::getCells(int lineno, int colno,
@@ -423,7 +453,7 @@ void HistoryScrollBlockArray::addCells(ca a[], int count)
   m_lineLengths.replace(m_blockArray.getCurrent(), pLen);
 }
 
-void HistoryScrollBlockArray::addLine()
+void HistoryScrollBlockArray::addLine(bool)
 {
 }
 
@@ -485,8 +515,6 @@ HistoryScroll* HistoryTypeBlockArray::getScroll(HistoryScroll *old) const
 }
 
 
-#if 1 // Disabled for now 
-
 //////////////////////////////
 
 HistoryTypeBuffer::HistoryTypeBuffer(unsigned int nbLines)
@@ -535,14 +563,14 @@ HistoryScroll* HistoryTypeBuffer::getScroll(HistoryScroll *old) const
           ca *tmp_line = new ca[size];
           old->getCells(i, 0, size, tmp_line);
           newScroll->addCells(tmp_line, size);
-          newScroll->addLine();
+          newScroll->addLine(old->isWrappedLine(i));
           delete tmp_line;
        }
        else
        {
           old->getCells(i, 0, size, line);
           newScroll->addCells(line, size);
-          newScroll->addLine();
+          newScroll->addLine(old->isWrappedLine(i));
        }
     }
     delete old;
@@ -585,14 +613,14 @@ HistoryScroll* HistoryTypeFile::getScroll(HistoryScroll *old) const
         ca *tmp_line = new ca[size];
         old->getCells(i, 0, size, tmp_line);
         newScroll->addCells(tmp_line, size);
-        newScroll->addLine();
+        newScroll->addLine(old->isWrappedLine(i));
         delete tmp_line;
      }
      else
      {
         old->getCells(i, 0, size, line);
         newScroll->addCells(line, size);
-        newScroll->addLine();
+        newScroll->addLine(old->isWrappedLine(i));
      }
   }
 
@@ -604,5 +632,3 @@ unsigned int HistoryTypeFile::getSize() const
 {
   return 0;
 }
-
-#endif

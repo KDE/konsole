@@ -15,6 +15,7 @@
 
 #include <qcstring.h>
 #include <qptrvector.h>
+#include <qbitarray.h>
 
 #include <ktempfile.h>
 
@@ -61,13 +62,14 @@ public:
   virtual int  getLines() = 0;
   virtual int  getLineLen(int lineno) = 0;
   virtual void getCells(int lineno, int colno, int count, ca res[]) = 0;
+  virtual bool isWrappedLine(int lineno) = 0;
 
   // backward compatibility (obsolete)
   ca   getCell(int lineno, int colno) { ca res; getCells(lineno,colno,1,&res); return res; }
 
   // adding lines.
   virtual void addCells(ca a[], int count) = 0;
-  virtual void addLine() = 0;
+  virtual void addLine(bool previousWrapped=false) = 0;
 
   const HistoryType& getType() { return *m_histType; }
 
@@ -91,9 +93,10 @@ public:
   virtual int  getLines();
   virtual int  getLineLen(int lineno);
   virtual void getCells(int lineno, int colno, int count, ca res[]);
+  virtual bool isWrappedLine(int lineno);
 
   virtual void addCells(ca a[], int count);
-  virtual void addLine();
+  virtual void addLine(bool previousWrapped=false);
 
 private:
   int startOfLine(int lineno);
@@ -101,6 +104,7 @@ private:
   QString m_logFileName;
   HistoryFile index; // lines Row(int)
   HistoryFile cells; // text  Row(ca)
+  HistoryFile lineflags; // flags Row(unsigned char)
 };
 
 
@@ -118,9 +122,10 @@ public:
   virtual int  getLines();
   virtual int  getLineLen(int lineno);
   virtual void getCells(int lineno, int colno, int count, ca res[]);
+  virtual bool isWrappedLine(int lineno);
 
   virtual void addCells(ca a[], int count);
-  virtual void addLine();
+  virtual void addLine(bool previousWrapped=false);
 
   void setMaxNbLines(unsigned int nbLines);
   unsigned int maxNbLines() { return m_maxNbLines; }
@@ -134,6 +139,7 @@ private:
 
   bool m_hasScroll;
   QPtrVector<histline> m_histBuffer;
+  QBitArray m_wrappedLine;
   unsigned int m_maxNbLines;
   unsigned int m_nbLines;
   unsigned int m_arrayIndex;
@@ -157,9 +163,10 @@ public:
   virtual int  getLines();
   virtual int  getLineLen(int lineno);
   virtual void getCells(int lineno, int colno, int count, ca res[]);
+  virtual bool isWrappedLine(int lineno);
 
   virtual void addCells(ca a[], int count);
-  virtual void addLine();
+  virtual void addLine(bool previousWrapped=false);
 };
 
 //////////////////////////////////////////////////////////////////////
@@ -176,9 +183,10 @@ public:
   virtual int  getLines();
   virtual int  getLineLen(int lineno);
   virtual void getCells(int lineno, int colno, int count, ca res[]);
+  virtual bool isWrappedLine(int lineno);
 
   virtual void addCells(ca a[], int count);
-  virtual void addLine();
+  virtual void addLine(bool previousWrapped=false);
 
 protected:
   BlockArray m_blockArray;
