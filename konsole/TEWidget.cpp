@@ -745,6 +745,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       // The user clicked inside selected text
 
       dragInfo.state = diPending;
+      dragInfo.start = pos;
 
     }else
     {
@@ -792,13 +793,9 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     // we had a mouse down, but haven't confirmed a drag yet
     // if the mouse has moved sufficiently, we will confirm
 
-   if (ev->x() > dragInfo.start.x() + 4 || ev->x() < dragInfo.start.x() - 4 ||
+   if ( ev->x() > dragInfo.start.x() + 4 || ev->x() < dragInfo.start.x() - 4 ||
         ev->y() > dragInfo.start.y() + 4 || ev->y() < dragInfo.start.y() - 4) {
       // we've left the drag square, we can start a real drag operation now
-      dragInfo.state = diNone;
-      selBound.start = selBound.end;  // If these are the same isTargetInSelection retruns false
-                                      // just in case they click again where the old selection
-                                      // used to be
       emit clearSelectionSignal();
       doDrag();
     }
@@ -976,9 +973,6 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
     {
       // We had a drag event pending but never confirmed.  Kill selection
       emit clearSelectionSignal();
-      selBound.start = selBound.end;  // If these are the same isTargetInSelection retruns false
-                                      // just in case they click again where the old selection
-                                      // used to be
     }else
     {
      if ( actSel > 1 ) emit endSelectionSignal(preserve_line_breaks);
@@ -1032,7 +1026,7 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
 
   emit clearSelectionSignal();
   QPoint bgnSel = pos;
-  QPoint endSel = QPoint((ev->x()-tLx-blX)/font_w,(ev->y()-tLy-bY)/font_h);
+  QPoint endSel = pos;
   int i = loc(bgnSel.x(),bgnSel.y());
   iPntSel = bgnSel;
 
@@ -1481,37 +1475,27 @@ void TEWidget::dropEvent(QDropEvent* event)
 }
 
 // Given coordinates, is the target in a selection?
-bool TEWidget::isTargetSelected(int x, int y){
-
-  QPoint pos(x,y);
-  QPoint tempPoint;
-
+bool TEWidget::isTargetSelected(int x, int y)
+{
   //fprintf( stderr, "Start: (%d,%d)\n", selBound.start.x(), selBound.start.y());
-  //fprintf( stderr, "Pos: (%d,%d)\n", pos.x(), pos.y());
+  //fprintf( stderr, "Pos: (%d,%d)\n", x, y);
   //fprintf( stderr, "End: (%d,%d)\n\n", selBound.end.x(), selBound.end.y());
 
-  // Why in the world doesn't Qt let you say if(point1 > point2) ?
-  if( selBound.start.manhattanLength() > selBound.end.manhattanLength())
-  {
+  if( (selBound.start.y()>selBound.end.y()) || 
+      (selBound.start.y()==selBound.end.y() && selBound.start.x()>selBound.end.x()) ) {
     //  If the selected manually from the bottom right to the top left
     //  the start will actually be the end and vice versa.  Switch them now
     //  to make for an easier if statement below
-    tempPoint = selBound.start;
+    QPoint tempPoint = selBound.start;
     selBound.start = selBound.end;
     selBound.end = tempPoint;
   }
 
-  //  The given point is in the selection if:
-  //  1.  The point is in the same row as the selection
-  //  2.  The point is in the same column as the selection
-  //  3.  The start and end points of the selection are not the same
-
-  if( ((selBound.start.x() <= pos.x()) || (selBound.start.y() <= pos.y())  // Check row
-    && (selBound.end.x() >= pos.x()) && (selBound.end.y() >= pos.y())) // Check column
-    && (selBound.start != selBound.end))
-      return true;
-  else
+  if ( ((y<selBound.start.y()) || (y==selBound.start.y() && x<selBound.start.x())) ||
+       ((y>selBound.end.y())   || (y==selBound.end.y()   && x>selBound.end.x())) )
     return false;
+
+  return true;
 }
 
 void TEWidget::doDrag()
