@@ -1,3 +1,4 @@
+SUBDIRS= icons
 
 konsole_other_datadir = $(kde_datadir)/konsole
 konsole_other_data_DATA = BlackOnLightColor.schema BlackOnLightYellow.schema BlackOnWhite.schema \
@@ -14,6 +15,6 @@ konsole_other_data_DATA = BlackOnLightColor.schema BlackOnLightYellow.schema Bla
 profiledir = $(kde_datadir)/konsole/profiles
 profile_DATA = 2shells 3shells 4shells 5shells
 
-KDE_ICON = konsole opentermblue opentermred
+KDE_ICON = AUTO
 
 EXTRA_DIST = $(konsole_other_data_DATA)
