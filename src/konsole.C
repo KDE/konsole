@@ -137,9 +137,6 @@ Konsole::Konsole(const char* name,
 
   setCentralWidget(te);
   makeMenu();
-  // temporary default: show
-  toolBar()->setIconText(KToolBar::IconTextRight);
-  toolBar()->show();
 
   setDockEnabled( toolBar(), QMainWindow::Left, FALSE );
   setDockEnabled( toolBar(), QMainWindow::Right, FALSE );
@@ -237,7 +234,7 @@ void Konsole::makeMenu()
   {
       ( (KToolBarButton*)l->first() )->setDelayedPopup( m_file );
       connect( (KToolBarButton*)l->first() , SIGNAL(clicked()), this, SLOT(newSession()));
-      
+
   }
   delete l;
   toolBar()->insertLineSeparator();
@@ -467,8 +464,8 @@ void Konsole::readProperties(KConfig* config)
 /*FIXME: (merging) state of material below unclear.*/
   b_menuvis  = config->readBoolEntry("menubar visible",TRUE);
   b_toolbarvis  = config->readBoolEntry("toolbar visible",TRUE);
-  n_toolbarpos  = config->readUnsignedNumEntry("toolbar position",
-  		     (unsigned int) KToolBar::Bottom);
+  //  n_toolbarpos  = config->readUnsignedNumEntry("toolbar position",
+  //  		     (unsigned int) KToolBar::Bottom);
 
   b_scroll = config->readBoolEntry("history",TRUE);
   int n2_keytab = config->readNumEntry("keytab",0);
@@ -517,7 +514,9 @@ void Konsole::readProperties(KConfig* config)
   showMenubar->setChecked(b_menuvis);
   slotToggleMenubar();
 
-  toolBar()->setBarPos((KToolBar::BarPosition)n_toolbarpos);
+  // n_toolbarpos is nowhere saved, so it always defaults to Bottom
+  // for now, don't do anything and let KToolBar handle that internally
+  // toolBar()->setBarPos((KToolBar::BarPosition)n_toolbarpos);
 }
 
 /* ------------------------------------------------------------------------- */
@@ -613,10 +612,10 @@ void Konsole::setFont(int fontno)
 {
     int lines = te->Lines();
     int cols = te->Columns();
-    
+
     QFontMetrics fm(te->font());
     int pointSize = fm.height();
-    
+
   QFont f;
   if (fontno == 0)
     f = defaultFont;
@@ -863,12 +862,12 @@ void Konsole::newSession()
 {
   int i=1;
   int session=0;
-  while ( (session==0) && (i<=no2command.count()) ) 
+  while ( (session==0) && (i<=no2command.count()) )
   // antlarr: Why is first session session number 1 instead of number 0 ?
   {
     KSimpleConfig* co = no2command.find(i);
- 
-    if ( co && co->readEntry("Exec").isEmpty() ) session=i; 
+
+    if ( co && co->readEntry("Exec").isEmpty() ) session=i;
     i++;
   }
 
