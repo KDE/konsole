@@ -3284,7 +3284,7 @@ void Konsole::attachSession(TESession* session)
   if (sessions.count()==1 && !tabwidget && n_tabbar!=TabNone)
     switchToTabWidget();
 
-  TEWidget* se_widget = se->widget();
+  TEWidget* se_widget = session->widget();
 
   if (tabwidget) {
     te=new TEWidget(tabwidget);
