@@ -80,7 +80,6 @@
 
 void TEPty::donePty()
 {
-  normalExit();
   emit done(exitStatus());
 }
 
