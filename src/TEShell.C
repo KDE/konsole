@@ -29,36 +29,41 @@
     nessesary to make everything work as it should. (/sa makeShell)
 */
 
+#include "../../config.h"
+
+#include <sys/types.h>
+#include <sys/ioctl.h>
+#ifdef TIME_WITH_SYS_TIME
+  #include <sys/time.h>
+#endif
+#include <sys/resource.h>
+#ifdef HAVE_SYS_STROPTS_H
+#include <sys/stropts.h>
+#define _NEW_TTY_CTRL
+#endif
+#include <sys/wait.h>
+
+
+#include <assert.h>
+#include <fcntl.h>
+#include <grp.h>
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
-
 #include <termios.h>
-#include <fcntl.h>
+#include <time.h>
 #include <unistd.h>
-#include <sys/ioctl.h>
-#include <sys/resource.h>
-#include <grp.h>
-#include "../../config.h"
 
 #if defined (_HPUX_SOURCE)
 #define _TERMIOS_INCLUDED
 #include <bsdtty.h>
 #endif
 
-#ifdef HAVE_SYS_STROPTS_H
-#include <sys/stropts.h>
-#define _NEW_TTY_CTRL
-#endif
-
-#include <assert.h>
-#include <time.h>
-#include <signal.h>
 #include <qintdict.h>
-#include <sys/wait.h>
+#include <qstring.h>
 
 #include "TEShell.h"
 #include "TEShell.moc"
-#include <qstring.h>
 
 #define HERE fprintf(stdout,"%s(%d): here\n",__FILE__,__LINE__)
 
