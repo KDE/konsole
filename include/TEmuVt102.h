@@ -33,9 +33,6 @@ struct DECpar
   BOOL mode[MODE_total];
 };
 
-//FIXME: this is a first step to move the encoding
-//       material from the screen to the emulation
-//       layer. It is far from being done.
 struct CharCodes
 {
   // coding info
@@ -43,10 +40,8 @@ struct CharCodes
   int  cu_cs;      // actual charset.
   bool graphic;    // Some VT100 tricks
   bool pound  ;    // Some VT100 tricks
-  bool sa_graphic; // now in emulation
-  bool sa_pound;   // now in emulation
-  bool useUTF8;    // With some care, this might be handled
-                   // by QTextCodec allone.
+  bool sa_graphic; // saved graphic
+  bool sa_pound;   // saved pound
 };
 
 class VT102Emulation : public Emulation // QObject
@@ -128,7 +123,7 @@ protected:
   TEScreen* screen[2];   // 0 = primary, 1 = alternate
   void setScreen(int n); // set `scr' to `screen[n]'
 
-  CharCodes charset[2];    //FIXME: not used, yet.
+  CharCodes charset[2];
   void setCharsetX(int n, int cs);
   void setAndUseCharset(int n, int cs);
   void useCharset(int n);

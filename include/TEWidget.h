@@ -38,6 +38,8 @@ public:
     void              setColorTable(const ColorEntry table[]);
     
     void setScrollbarLocation(int loc);
+    enum { SCRNONE=0, SCRLEFT=1, SCRRIGHT=2 };
+
     void setScroll(int cursor, int lines);
 
 public:
@@ -94,10 +96,10 @@ protected:
     void emitSelection();
     virtual int charClass(char) const;
 
-public:
+    void clearImage();
 
-    void clearImage(); //FIXME: public for special purpose only (see vt102emu)
-    void setSelection(const char *t);
+public:
+    void setSelection(const QString &t);
 
     virtual void setFont(const QFont &);
     void setVTFont(const QFont &);
@@ -145,10 +147,10 @@ private:
     QClipboard*    cb;
     QScrollBar* scrollbar;
     int         scrollLoc;
-//FIXME::enum
-#define SCRNONE  0
-#define SCRLEFT  1
-#define SCRRIGHT 2
+
+//#define SCRNONE  0
+//#define SCRLEFT  1
+//#define SCRRIGHT 2
 
     BOOL blinking;   // hide text in paintEvent
     BOOL hasBlinker; // has characters to blink

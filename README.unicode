@@ -62,6 +62,15 @@ enabled.
 Utf-8 code is enabled and disabled by sending <ESC>%G or <ESC>%@.
 The utf8.sh utility in the test directory does this.
 
+Though utf8 properly contains ascii-7 note that the length of a
+utf8 encoded string differs from the length of the string itself.
+This confuses many length aware programs as soon as proper (non-
+ascii-7 characters) are used, this may result in deviating cursor
+positions, corruption of the utf8 encoding by newlines inserted
+in the middle of a multibyte character, etc. This cannot be
+handled within konsole, but requieres those applications to
+become utf8 extended. Examples are readline, vi.
+
 ---
 TODO: Example of non-locale client code.
 (Discontining Linux Console Support)

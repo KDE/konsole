@@ -959,28 +959,6 @@ void VT102Emulation::onKeyPress( QKeyEvent* ev )
 
 //printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().length(),ev->text().length()?ev->text().ascii()[0]:0);
 
-  // Note: there 3 ways in rxvt to handle the Meta (Alt) key
-  //       1) ignore it
-  //       2) preceed the keycode by ESC (what we do here)
-  //       3) set the 8th bit of each char in string
-  //          (which may fail for 8bit (european) characters.
-
-  if (!ev->text().isEmpty())
-  {
-    if (ev->text().length() == 1 && (ev->state() & AltButton))
-      sendString("\033"); // ESC, this is the ALT prefix
-    QCString s = codec->fromUnicode(ev->text());
-    emit sndBlock(s.data(),s.length());
-    return;
-  }
-
-  if (0 < ev->ascii() && ev->ascii() < 32)
-  { char c[1];
-    c[0] = ev->ascii();
-    emit sndBlock((char*)c,1);
-    return;
-  }
-
   key = ev->key();
   if (0x1000 <= key && key <= 0x10ff)
   switch (key)
@@ -1026,5 +1004,27 @@ void VT102Emulation::onKeyPress( QKeyEvent* ev )
   if (KeyComb(ControlButton,Key_Print)) // ctrl-print == sys-req
   {
     reportAnswerBack(); return;
+  }
+
+  if (!ev->text().isEmpty())
+  {
+    // Note: there 3 ways in rxvt to handle the Meta (Alt) key
+    //       1) ignore it
+    //       2) preceed the keycode by ESC (what we do here)
+    //       3) set the 8th bit of each char in string
+    //          (which may fail for 8bit (european) characters.
+    if (ev->text().length() == 1 && (ev->state() & AltButton))
+      sendString("\033"); // ESC, this is the ALT prefix
+    QCString s = codec->fromUnicode(ev->text()); // encode for application
+    emit sndBlock(s.data(),s.length());          // we may well have s.length() > 1 
+    return;
+  }
+
+  if (0 < ev->ascii() && ev->ascii() < 32)
+  { char c[1];
+    c[0] = ev->ascii();
+printf("control: %d\n",ev->ascii());
+    emit sndBlock((char*)c,1);
+    return;
   }
 }

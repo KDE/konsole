@@ -152,7 +152,7 @@ public: // these are all `Screen' operations
     void setSelBeginXY(const int x, const int y);
     void setSelExtentXY(const int x, const int y);
     void clearSelection();
-    char *getSelText(const BOOL preserve_line_breaks);
+    QString getSelText(const BOOL preserve_line_breaks);
 
     void checkSelection(int from, int to);
 
@@ -206,7 +206,7 @@ private:
     int tmargin;
 
     // states ----------------
-    // FIXME: this is a first try
+
     ScreenParm currParm;
     ScreenParm saveParm;
 
