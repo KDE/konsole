@@ -3,4 +3,5 @@
 Type=KonsoleApplication
 Name=MC
 Comment=Midnight Commander
+Comment[is]=mc:  Skráarstjóri fyrir textaham
 Exec=mc -c

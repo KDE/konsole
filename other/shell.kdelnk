@@ -2,7 +2,11 @@
 [KDE Desktop Entry]
 Type=KonsoleApplication
 Name=Shell
+Name[fi]=Komentotulkki
+Name[is]=Skel
 Name[no]=Skall
 Comment=Shell
+Comment[fi]=Komentotulkki
+Comment[is]=Skel
 Comment[no]=Skall
 Exec=sh
