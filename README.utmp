@@ -1,5 +1,7 @@
 [README.utmp]
 
+The following only applies to non FreeBSD/OpenBSD boxes.
+
 The utmp support provided with konsole is established
 by a separate program, kwrited. This program is expected
 to be started in startkde and runs as a demon.
