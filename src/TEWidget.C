@@ -20,13 +20,15 @@
    emulation, it simply work within the terminal emulation framework by exposing
    size and key events and by being ordered to show a new image.
 
-   - The internal image has the size of the widget (evtl. rounded up)
-   - The external image used in setImage can have any size.
-   - (internally) the external image is simply copied to the internal
-     when a setImage happens. During a resizeEvent no painting is done
-     a paintEvent is expected to follow anyway.
+   <ul>
+   <li> The internal image has the size of the widget (evtl. rounded up)
+   <li> The external image used in setImage can have any size.
+   <li> (internally) the external image is simply copied to the internal
+        when a setImage happens. During a resizeEvent no painting is done
+        a paintEvent is expected to follow anyway.
+   </ul>
 
-   \sa framework.txt \sa TEScreen \sa Emulation
+   \sa TEScreen \sa Emulation
 */
 
 /* FIXME:

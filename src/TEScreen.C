@@ -10,6 +10,9 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
+/*! \file
+*/
+
 /*! \class TEScreen
 
     \brief The image manipulated by the emulation.
@@ -96,6 +99,12 @@ TEScreen::~TEScreen()
     `columns-1' and `lines-1'.
 */
 
+/*!
+    Move the cursor up.
+
+    The cursor will not be moved beyond the top margin.
+*/
+
 void TEScreen::cursorUp(int n)
 //=CUU
 {
@@ -104,6 +113,12 @@ void TEScreen::cursorUp(int n)
   cuX = MIN(columns-1,cuX); // nowrap!
   cuY = MAX(stop,cuY-n);
 }
+
+/*!
+    Move the cursor down.
+
+    The cursor will not be moved beyond the bottom margin.
+*/
 
 void TEScreen::cursorDown(int n)
 //=CUD
@@ -114,6 +129,12 @@ void TEScreen::cursorDown(int n)
   cuY = MIN(stop,cuY+n);
 }
 
+/*!
+    Move the cursor left.
+
+    The cursor will not move beyond the first column.
+*/
+
 void TEScreen::cursorLeft(int n)
 //=CUB
 {
@@ -121,6 +142,12 @@ void TEScreen::cursorLeft(int n)
   cuX = MIN(columns-1,cuX); // nowrap!
   cuX = MAX(0,cuX-n);
 }
+
+/*!
+    Move the cursor left.
+
+    The cursor will not move beyond the rightmost column.
+*/
 
 void TEScreen::cursorRight(int n)
 //=CUF
@@ -130,6 +157,7 @@ void TEScreen::cursorRight(int n)
 }
 
 /*!
+    Set top and bottom margin.
 */
 
 void TEScreen::setMargins(int top, int bot)
@@ -150,6 +178,13 @@ void TEScreen::setMargins(int top, int bot)
   cuY = getMode(MODE_Origin) ? top : 0;
 }
 
+/*!
+    Move the cursor down one line.
+
+    If cursor is on bottom margin, the region between the
+    actual top and bottom margin is scrolled up instead.
+*/
+
 void TEScreen::index()
 //=IND
 {
@@ -163,13 +198,26 @@ void TEScreen::index()
     cuY += 1;
 }
 
-void TEScreen::reverseIndex()
+/*!
+    Move the cursor up one line.
 
+    If cursor is on to margin, the region between the
+    actual top and bottom margin is scrolled down instead.
+*/
+
+void TEScreen::reverseIndex()
 //=RI
 {
   //FIXME: above tmargin?
   if (cuY <= tmargin) scrollDown(tmargin,1); else cuY -= 1;
 }
+
+/*!
+    Move the cursor to the begin of the next line.
+
+    If cursor is on bottom margin, the region between the
+    actual top and bottom margin is scrolled up.
+*/
 
 void TEScreen::NextLine()
 //=NEL
@@ -245,6 +293,8 @@ void TEScreen::insertLines(int n)
 
 // Mode Operations -----------------------------------------------------------
 
+/*! Set a specific mode. */
+
 void TEScreen::setMode(int m)
 {
   currParm.mode[m] = TRUE;
@@ -253,6 +303,8 @@ void TEScreen::setMode(int m)
     case MODE_Origin : cuX = 0; cuY = tmargin; break; //FIXME: home
   }
 }
+
+/*! Reset a specific mode. */
 
 void TEScreen::resetMode(int m)
 {
@@ -263,10 +315,14 @@ void TEScreen::resetMode(int m)
   }
 }
 
+/*! Save a specific mode. */
+
 void TEScreen::saveMode(int m)
 {
   saveParm.mode[m] = currParm.mode[m];
 }
+
+/*! Restore a specific mode. */
 
 void TEScreen::restoreMode(int m)
 {
@@ -274,10 +330,13 @@ void TEScreen::restoreMode(int m)
 }
 
 //NOTE: this is a helper function
+/*! Return the setting  a specific mode. */
 BOOL TEScreen::getMode(int m)
 {
   return currParm.mode[m];
 }
+
+/*! Save the cursor position and the rendition attribute settings. */
 
 void TEScreen::saveCursor()
 {
@@ -291,6 +350,8 @@ void TEScreen::saveCursor()
   // FIXME: Character set info: sa_charset = charsets[cScreen->charset];
   //                            sa_charset_num = cScreen->charset;
 }
+
+/*! Restore the cursor position and the rendition attribute settings. */
 
 void TEScreen::restoreCursor()
 {
@@ -312,7 +373,14 @@ void TEScreen::restoreCursor()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-/*!
+/*! Assing a new size to the screen.
+
+    The topmost left position is maintained, while lower lines
+    or right hand side columns might be removed or filled with
+    spaces to fit the new size.
+
+    The region setting is reset to the whole screen and the
+    tab positions reinitialized.
 */
 
 void TEScreen::resizeImage(int new_lines, int new_columns)
@@ -420,7 +488,7 @@ void TEScreen::effectiveRendition()
 /*!
     returns the image.
 
-    Get the size of the image by /sa getLines and /sa getColumns.
+    Get the size of the image by \sa getLines and \sa getColumns.
 
     NOTE that the image returned by this function must later be
     freed.
@@ -505,7 +573,7 @@ void TEScreen::reset()
   clear();
 }
 
-/*!
+/*! Clear the entire screen and home the cursor.
 */
 
 void TEScreen::clear()
@@ -514,7 +582,7 @@ void TEScreen::clear()
   home();
 }
 
-/*!
+/*! Moves the cursor left one column.
 */
 
 void TEScreen::BackSpace()
@@ -554,14 +622,13 @@ void TEScreen::initTabStops()
 }
 
 /*!
+   This behaves either as IND (Screen::Index) or as NEL (Screen::NextLine)
+   depending on the NewLine Mode (LNM). This mode also
+   affects the key sequence returned for newline ([CR]LF).
 */
 
 void TEScreen::NewLine()
 {
-// This behaves either as IND (index) or as NEL (NextLine)
-// depending on the NewLine Mode (LNM). This mode also
-// affects the key sequence returned for newline ([CR]LF).
-
   if (getMode(MODE_NewLine)) Return();
   index();
 }
@@ -694,26 +761,31 @@ void TEScreen::scrollDown(int from, int n)
      clearSelection();
 }
 
+/*! position the cursor to a specific line and column. */
 void TEScreen::setCursorYX(int y, int x)
 {
   setCursorY(y); setCursorX(x);
 }
 
+/*! Set the cursor to x-th line. */
+
 void TEScreen::setCursorX(int x)
 {
   if (x == 0) x = 1; // Default
   x -= 1; // Adjust
-  cuX = MIN(columns-1, x);
+  cuX = MAX(0,MIN(columns-1, x));
 }
+
+/*! Set the cursor to y-th line. */
 
 void TEScreen::setCursorY(int y)
 {
   if (y == 0) y = 1; // Default
   y -= 1; // Adjust
-  cuY = MIN(lines  -1, y + (getMode(MODE_Origin) ? tmargin : 0) );
+  cuY = MAX(0,MIN(lines  -1, y + (getMode(MODE_Origin) ? tmargin : 0) ));
 }
 
-/*! set cursor to the `left upper' corner of the screen.
+/*! set cursor to the `left upper' corner of the screen (1,1).
 */
 
 void TEScreen::home()
