@@ -29,6 +29,7 @@
 #include <qfileinfo.h>
 #include <qpainter.h>
 #include <kpixmap.h>
+#include <kpixmapeffect.h>
 #include <qimage.h>
 #include <stdlib.h>
 #include <qnamespace.h>
@@ -246,12 +247,15 @@ void RootPixmap::generateBackground(bool shade, double r, double g, double b)
 	if ( orMode == Portrait ) {
 
 	  pmDesktop.resize( 20, QApplication::desktop()->height() );
-	  pmDesktop.gradientFill( color2, color1, true, numColors );
+	  KPixmapEffect::gradient(pmDesktop, color2, color1, 
+				  KPixmapEffect::VerticalGradient, numColors );
 
 	} else {
 
 	  pmDesktop.resize( QApplication::desktop()->width(), 20 );
-	  pmDesktop.gradientFill( color2, color1, false, numColors );
+	  KPixmapEffect::gradient(pmDesktop, color2, color1, 
+				  KPixmapEffect::HorizontalGradient, 
+				  numColors);
 		
 	}
         if (shade) shadePixmap(&pmDesktop,r,g,b); 
