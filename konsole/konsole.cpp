@@ -1879,10 +1879,11 @@ void Konsole::switchToTabWidget()
     delete rootxpms[se_widget];
     rootxpms.remove(se_widget);
   }
-  delete se_widget;
   setCentralWidget(tabwidget);
   tabwidget->showPage(se->widget());
   tabwidget->show();
+  
+  delete se_widget;
 
   if (se->isMasterMode())
     enableMasterModeConnections();
