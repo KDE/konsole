@@ -416,9 +416,7 @@ void Konsole::makeMenu()
                                 SLOT(slotToggleQuitWarning()), this);
 */
 
-  warnQuit = new KToggleAction (i18n("&Warn for Open Sessions on Quit"),
-                                0, this,
-                                NULL, this);
+  warnQuit = new KToggleAction (i18n("&Warn for Open Sessions on Quit"), 0, this);
 
   warnQuit->plug (m_options);
   //m_options->insertSeparator();
@@ -615,7 +613,7 @@ void Konsole::readProperties(KConfig* config)
   QFont tmpFont("fixed");
   defaultFont = config->readFontEntry("defaultfont", &tmpFont);
   setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT)); // sets n_font and menu item
-  setSchema(config->readEntry("schema", ""));
+  setSchema(s_schema);
 
   // (2) apply to sessions (currently only the 1st one)
   //  TESession* s = no2session.find(1);
@@ -1263,7 +1261,8 @@ void Konsole::setSchema(const QString & path)
   const ColorSchema* s = colors->find(path);
   if (!s)
   {
-        kdWarning() << "Could not find schema named " << path << endl;
+        if(!path.isEmpty())
+              kdWarning() << "Could not find schema named " << path << endl;
         s=colors->at(0);
   }
   if (s->hasSchemaFileChanged())
