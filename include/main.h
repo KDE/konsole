@@ -74,6 +74,7 @@ private:
 
   void makeMenu();
   void makeStatusbar();
+  void runSession(TESession* s);
   void addSession(TESession* s);
   void setColorPixmaps();
 

@@ -102,11 +102,6 @@ TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
   // session management
   setUnsavedData( true ); // terminals cannot store their contents
 
-  // a KTMainWindow supports session management as default, but we
-  // want something extra for the arguments. So just connect to the
-  // saveYourself() signal.
-  connect(kapp, SIGNAL(saveYourself()), SLOT(saveYourself()));
-
   // create terminal emulation framework ////////////////////////////////////
 
   te = new TEWidget(this);
@@ -151,13 +146,15 @@ TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
         : kapp->getCaption();  // `konsole' or -caption
   initial->setTitle(title);
 
-  // start first session /////////////////////////////////////////////////////
-
   addSession(initial);
 
   // read and apply default values ///////////////////////////////////////////
 
   readProperties(kapp->getConfig());
+
+  // activate and run first session //////////////////////////////////////////
+
+  runSession(initial);
 
 }
 
@@ -435,12 +432,11 @@ void TEDemo::readProperties(KConfig* config)
   // (geometry stuff removed) done by KTMainWindow for SM, and not needed otherwise
 
   // Options that should be applied to all sessions /////////////
-  // (applied only to first one currently)
-  
+  // (1) set menu items and TEDemo members
   setBsHack(config->readBoolEntry("BS hack",TRUE));
   setFont(MIN(config->readUnsignedNumEntry("font",3),7)); // sets n_font and menu item
   setSchema(config->readEntry("schema",""));
-
+  // (2) apply to sessions (currently only the 1st one)
   TESession* s = no2session.find(1);
   if (s) {
     s->setFontNo(n_font);
@@ -508,6 +504,7 @@ void TEDemo::font_menu_activated(int item)
   assert(se);
   se->setFontNo(item);
   activateSession((int)session2no.find(se)); // for attribute change
+  // setFont(item) is probably enough
 }
 
 void TEDemo::schema_menu_activated(int item)
@@ -516,6 +513,7 @@ void TEDemo::schema_menu_activated(int item)
   //FIXME: save schema name
   se->setSchemaNo(item);
   activateSession((int)session2no.find(se)); // for attribute change
+  // setSchema(item) is probably enough
 }
 
 void TEDemo::setFont(int fontno)
@@ -561,11 +559,12 @@ void TEDemo::setBsHack(bool bshack)
 {
   b_bshack = bshack;
   m_options->setItemChecked(4,b_bshack);
-  //FIXME: somewhat fuzzy...
-  if (b_bshack)
-    ((VT102Emulation*)se->getEmulation())->setMode(MODE_BsHack);
-  else
-    ((VT102Emulation*)se->getEmulation())->resetMode(MODE_BsHack);
+  //FIXME: somewhat fuzzy...  - should be done for all sessions ?
+  if (se)
+    if (b_bshack)
+      ((VT102Emulation*)se->getEmulation())->setMode(MODE_BsHack);
+    else
+      ((VT102Emulation*)se->getEmulation())->resetMode(MODE_BsHack);
 }
 
 void TEDemo::opt_menu_activated(int item)
@@ -703,16 +702,20 @@ void TEDemo::activateSession(int sn)
   setHeader();
 }
 
+void TEDemo::runSession(TESession* s)
+{
+  int session_no = (int)session2no.find(s);
+  activateSession(session_no);
+
+  s->run();
+}
+
 void TEDemo::addSession(TESession* s)
 {
   session_no += 1;
   no2session.insert(session_no,s);
   session2no.insert(s,(void*)session_no);
   m_sessions->insertItem(s->Title(), session_no);
-
-  activateSession(session_no);
-
-  s->run();
 }
 
 void TEDemo::newSession(int i)
@@ -753,7 +756,8 @@ void TEDemo::newSession(int i)
   s->setSchemaNo(schmno);
   s->setTitle(txt.data());
 
-  addSession(s); // runs session
+  addSession(s);
+  runSession(s); // activate and run
 }
 
 //FIXME: If a child dies during session swap,
