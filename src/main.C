@@ -882,8 +882,7 @@ void Konsole::addSession(TESession* s)
   //  m_sessions->insertItem(s->Title(), session_no);
 
   // create an action for the session
-  QString title;
-  title.sprintf("%s No %d", s->Title().data(), session_no);
+  QString title = i18n("%1 No %2").arg(s->Title()).arg(session_no);
   char buffer[30];
   sprintf(buffer,"%d",session_no);
   KRadioAction *ra = new KRadioAction(title, 0, this, SLOT(activateSession()), this, buffer);
