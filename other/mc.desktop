@@ -6,5 +6,5 @@ Comment=Midnight Commander
 Comment[ca]=Gestor de fitxers Midnight Commander
 Comment[eo]=Dosieradministrilo "Meznokta komandanto"
 Comment[is]=mc:  Skráastjóri fyrir textaham
-Comment[mk]=Клон на NC (Norton Commander)
+Comment[mk]=Midnight Commander - клон на NC (Norton Commander)
 Exec=mc -c
