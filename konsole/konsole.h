@@ -66,6 +66,7 @@ public:
   ~Konsole();
   void setColLin(int columns, int lines);
   void setFullScreen(bool on);
+  void setAutoClose(bool on);
   void initFullScreen();
   void initSessionFont(int fontNo);
   void initSessionTitle(const QString &_title);
@@ -120,7 +121,7 @@ private slots:
   void activateSession(TESession*);
   void closeCurrentSession();
   void doneChild(KonsoleChild*, TESession*);
-  void doneSession(TESession*,int);
+  void doneSession(TESession*);
   void slotCouldNotClose();
   void slotToggleFullscreen();
   void schema_menu_activated(int item);

@@ -320,6 +320,7 @@ DCOPObject( "konsole" )
   kapp->dcopClient()->setDefaultObject( "konsole" );
 }
 
+
 Konsole::~Konsole()
 {
     while (detached.count()) {
@@ -331,7 +332,7 @@ Konsole::~Konsole()
     sessions.first();
     while(sessions.current())
     {
-      sessions.current()->sendSignal(SIGHUP);
+      sessions.current()->closeSession();
       sessions.next();
     }
 
@@ -360,6 +361,12 @@ Konsole::~Konsole()
 void Konsole::run() {
    kWinModule = new KWinModule();
    connect( kWinModule,SIGNAL(currentDesktopChanged(int)), this,SLOT(currentDesktopChanged(int)) );
+}
+
+void Konsole::setAutoClose(bool on)
+{
+    if (sessions.first())
+       sessions.first()->setAutoClose(on);
 }
 
 void Konsole::showTip()
@@ -851,7 +858,7 @@ bool Konsole::queryClose()
     bool allOK=true;
     while(sessions.current())
     {
-      if (!sessions.current()->sendSignal(SIGHUP))
+      if (!sessions.current()->closeSession())
         allOK=false;
       sessions.next();
     }
@@ -880,7 +887,7 @@ void Konsole::slotCouldNotClose()
     {
         while(sessions.first())
         {
-            doneSession(sessions.current(), 0);
+            doneSession(sessions.current());
         }
     }
 }
@@ -1915,8 +1922,8 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
   s->setMonitorSilenceSeconds(monitorSilenceSeconds);
   s->enableFullScripting(b_fullScripting);
   // If you add any new signal-slot connection below, think about doing it in konsolePart too
-  connect( s,SIGNAL(done(TESession*,int)),
-           this,SLOT(doneSession(TESession*,int)) );
+  connect( s,SIGNAL(done(TESession*)),
+           this,SLOT(doneSession(TESession*)) );
   connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
            this, SLOT(configureRequest(TEWidget*,int,int,int)) );
   connect( s, SIGNAL( updateTitle() ),
@@ -1995,7 +2002,7 @@ void Konsole::newSession(const QString& sURL, const QString& title)
 
 void Konsole::closeCurrentSession()
 {
-  se->sendSignal(SIGHUP);
+  se->closeSession();
 }
 
 void Konsole::doneChild(KonsoleChild* child, TESession* session)
@@ -2009,7 +2016,7 @@ void Konsole::doneChild(KonsoleChild* child, TESession* session)
 //       this routine might be called before
 //       session swap is completed.
 
-void Konsole::doneSession(TESession* s, int)
+void Konsole::doneSession(TESession* s)
 {
 // qWarning("Konsole::doneSession(): Exited:%d ExitStatus:%d\n", WIFEXITED(status),WEXITSTATUS(status));
 #if 0 // die silently
@@ -2440,8 +2447,8 @@ void Konsole::detachSession() {
   sessions.remove(se);
   delete ra;
 
-  disconnect( se,SIGNAL(done(TESession*,int)),
-              this,SLOT(doneSession(TESession*,int)) );
+  disconnect( se,SIGNAL(done(TESession*)),
+              this,SLOT(doneSession(TESession*)) );
 
   disconnect( se->getEmulation(),SIGNAL(ImageSizeChanged(int,int)), this,SLOT(notifySize(int,int)));
   disconnect( se->getEmulation(),SIGNAL(changeColumns(int)), this,SLOT(changeColumns(int)) );
@@ -2502,8 +2509,8 @@ void Konsole::attachSession(TESession* session)
   connect(ktb,SIGNAL(doubleClicked(int)), this,SLOT(slotRenameSession(int)));
   session2button.insert(session,ktb);
 
-  connect( session,SIGNAL(done(TESession*,int)),
-           this,SLOT(doneSession(TESession*,int)) );
+  connect( session,SIGNAL(done(TESession*)),
+           this,SLOT(doneSession(TESession*)) );
 
   connect( session,SIGNAL(updateTitle()), this,SLOT(updateTitle()) );
   connect( session,SIGNAL(notifySessionState(TESession*,int)), this,SLOT(notifySessionState(TESession*,int)) );

@@ -166,8 +166,8 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
 
   setWidget(te);
   se = new TESession(te,shell,eargs,"xterm");
-  connect( se,SIGNAL(done(TESession*,int)),
-           this,SLOT(doneSession(TESession*,int)) );
+  connect( se,SIGNAL(done(TESession*)),
+           this,SLOT(doneSession(TESession*)) );
   connect( se,SIGNAL(openURLRequest(const QString &)),
            this,SLOT(emitOpenURLRequest(const QString &)) );
   connect( te,SIGNAL(configureRequest(TEWidget*,int,int,int)),
@@ -222,14 +222,14 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   connect( se, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
 }
 
-void konsolePart::doneSession(TESession*,int)
+void konsolePart::doneSession(TESession*)
 {
   // see doneSession in konsole.cpp
   if (se)
   {
     kdDebug(1211) << "doneSession - disconnecting done" << endl;;
-    disconnect( se,SIGNAL(done(TESession*,int)),
-                this,SLOT(doneSession(TESession*,int)) );
+    disconnect( se,SIGNAL(done(TESession*)),
+                this,SLOT(doneSession(TESession*)) );
     se->setConnect(false);
     //QTimer::singleShot(100,se,SLOT(terminate()));
     kdDebug(1211) << "se->terminate()" << endl;;
@@ -558,7 +558,7 @@ void konsolePart::sendSignal(int sn)
 
 void konsolePart::closeCurrentSession()
 {
-  sendSignal(SIGHUP);
+  se->closeSession();
 }
 
 void konsolePart::slotToggleFrame()

@@ -69,8 +69,8 @@ KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar
 
   updateTitle();
 
-  connect( se,SIGNAL(done(TESession*,int)),
-           this,SLOT(doneSession(TESession*,int)) );
+  connect( se,SIGNAL(done(TESession*)),
+           this,SLOT(doneSession(TESession*)) );
   connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
            this, SLOT(configureRequest(TEWidget*, int, int, int)) );
 
@@ -181,7 +181,7 @@ void KonsoleChild::configureRequest(TEWidget* te, int, int x, int y)
   m_rightButton->popup(te->mapToGlobal(QPoint(x,y)));
 }
 
-void KonsoleChild::doneSession(TESession*,int)
+void KonsoleChild::doneSession(TESession*)
 {
   se->setConnect(false);
   session_terminated=true;
@@ -210,7 +210,7 @@ void KonsoleChild::renameSession() {
 
 void KonsoleChild::closeSession()
 {
-  se->sendSignal(SIGHUP);
+  se->closeSession();
 }
 
 void KonsoleChild::pixmap_menu_activated(int item,QString pmPath)

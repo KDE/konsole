@@ -44,7 +44,7 @@ signals:
 
 private slots:
   void configureRequest(TEWidget*,int,int,int);
-  void doneSession(TESession*,int);
+  void doneSession(TESession*);
   void updateTitle();
   void slotRenameSession(TESession* ses, const QString &name);
   void restoreAllListenToKeyPress();

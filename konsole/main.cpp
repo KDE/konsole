@@ -42,6 +42,7 @@ static KCmdLineOptions options[] =
    { "T <title>",       I18N_NOOP("Set the window title"), 0 },
    { "tn <terminal>",   I18N_NOOP("Specify terminal type as set in the TERM\nenvironment variable"), "xterm" },
    { "xwin",            I18N_NOOP("ignored"), 0 },
+   { "noclose",         I18N_NOOP("Do not close konsole when command exits"), 0 },
    { "nohist",          I18N_NOOP("Do not save lines in history"), 0 },
    { "nomenubar",       I18N_NOOP("Do not display menubar"), 0 },
    { "notoolbar",       I18N_NOOP("Do not display toolbar"), 0 },
@@ -64,6 +65,7 @@ static KCmdLineOptions options[] =
 static bool has_noxft = false;
 static bool login_shell = false;
 static bool full_script = false;
+static bool auto_close = true;
 
 const char *konsole_shell(QStrList &args)
 {
@@ -112,6 +114,8 @@ public:
             restartCommand.append("--ls");
         if (full_script) 
             restartCommand.append("--script");
+        if (!auto_close) 
+            restartCommand.append("--noclose");
         sm.setRestartCommand(restartCommand);
         return true;
     }
@@ -250,6 +254,7 @@ int main(int argc, char* argv[])
   scrollbaron = args->isSet("scrollbar");
   wname = qtargs->getOption("name");
   full_script = args->isSet("script");
+  auto_close = args->isSet("close");
 
   QCString type = "";
 
@@ -394,6 +399,7 @@ int main(int argc, char* argv[])
 	// works only for the first one, but there won't be more.
         n++;
 	m->run();
+        m->setAutoClose(auto_close);
     }
   }
   else
@@ -419,6 +425,7 @@ int main(int argc, char* argv[])
     m->show();
     m->run();
     m->showTipOnStart();
+    m->setAutoClose(auto_close);
   }
 
   int ret = a.exec();

@@ -76,6 +76,8 @@ public:
   bool testAndSetStateIconName (const QString& newname);
   bool sendSignal(int signal);
 
+  void setAutoClose(bool b) { autoClose = b; }
+
   // Additional functions for DCOP
   bool closeSession();
   void feedSession(const QString &text);
@@ -89,14 +91,14 @@ public:
 public slots:
 
   void run();
-  void done(int status);
+  void done();
   void terminate();
   void setUserTitle( int, const QString &caption );
   void ptyError();
 
 signals:
 
-  void done(TESession*, int);
+  void done(TESession*);
   void updateTitle();
   void notifySessionState(TESession* session, int state);
 
@@ -119,6 +121,7 @@ private:
   bool           monitorActivity;
   bool           monitorSilence;
   bool           masterMode;
+  bool           autoClose;
   QTimer*        monitorTimer;
 
   //FIXME: using the indices here

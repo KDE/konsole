@@ -2,6 +2,7 @@
 #include <kdebug.h>
 #include <dcopclient.h>
 #include <kmessagebox.h>
+#include <klocale.h>
 
 #include <stdlib.h>
 #include <qfile.h>
@@ -27,6 +28,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, QStrList & _args, const
    , monitorActivity(false)
    , monitorSilence(false)
    , masterMode(false)
+   , autoClose(true)
    , schema_no(0)
    , font_no(3)
    , silence_seconds(10)
@@ -64,7 +66,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, QStrList & _args, const
   monitorTimer = new QTimer(this);
   connect(monitorTimer, SIGNAL(timeout()), this, SLOT(monitorTimerDone()));
 
-  connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
+  connect( sh,SIGNAL(done(int)), this,SLOT(done()) );
   //kdDebug(1211)<<"TESession ctor() done"<<endl;
   if (!sh->error().isEmpty())
      QTimer::singleShot(0, this, SLOT(ptyError()));
@@ -73,7 +75,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, QStrList & _args, const
 void TESession::ptyError()
 {
   KMessageBox::error(te->topLevelWidget(), sh->error());
-  emit done(this, 0);
+  emit done(this);
 }
 
 void TESession::changeWidget(TEWidget* w)
@@ -154,6 +156,12 @@ bool TESession::sendSignal(int signal)
 
 bool TESession::closeSession()
 {
+  autoClose = true;
+  if (!sh->isRunning())
+  {
+     QTimer::singleShot(0, this, SLOT(done()));
+     return true;
+  }
   return sendSignal(SIGHUP);
 }
 
@@ -182,8 +190,8 @@ void TESession::renameSession(const QString &name)
 TESession::~TESession()
 {
  //kdDebug(1211) << "disconnnecting..." << endl;
- QObject::disconnect( sh, SIGNAL( done( int ) ),
-		      this, SLOT( done( int ) ) );
+  QObject::disconnect( sh, SIGNAL( done(int) ),
+                       this, SLOT( done() ) );
   delete em;
   delete sh;
 }
@@ -199,9 +207,15 @@ void TESession::setListenToKeyPress(bool l)
   em->setListenToKeyPress(l);
 }
 
-void TESession::done(int status)
+void TESession::done()
 {
-  emit done(this,status);
+  if (!autoClose)
+  {
+    userTitle = i18n("<Finished>");
+    emit updateTitle();
+    return;
+  }
+  emit done(this);
 }
 
 void TESession::terminate()

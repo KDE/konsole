@@ -77,7 +77,7 @@ class konsolePart: public KParts::ReadOnlyPart
     virtual void guiActivateEvent( KParts::GUIActivateEvent * event );
 
  protected slots:
-    void doneSession(TESession*,int);
+    void doneSession(TESession*);
     void sessionDestroyed();
     void configureRequest(TEWidget*,int,int x,int y);
     void updateTitle();
