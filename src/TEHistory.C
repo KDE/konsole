@@ -23,6 +23,9 @@
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 #endif
 
+// Reasonable line size
+#define LINE_SIZE	1024
+
 /*
    An arbitrary long scroll.
 
@@ -61,15 +64,6 @@ FIXME: There is noticable decrease in speed, also. Perhaps,
 
 #if 1
 
-FILE* xTmpFile()
-{
-  static int fid = 0;
-  char fname[80];
-  sprintf(fname,"TmpFile.%d",fid++);
-  return fopen(fname,"w");
-}
-
-
 // History File ///////////////////////////////////////////
 
 /*
@@ -80,14 +74,15 @@ HistoryFile::HistoryFile()
   : ion(-1),
     length(0)
 {
-  FILE* tmp = tmpfile(); if (!tmp) { perror("konsole: cannot open temp file.\n"); return; }
-  ion = dup(fileno(tmp)); if (ion<0) perror("konsole: cannot dup temp file.\n");
-  fclose(tmp);
+  if (tmpFile.status() == 0)
+  { 
+    tmpFile.unlink();
+    ion = tmpFile.handle();
+  }
 }
 
 HistoryFile::~HistoryFile()
 {
-  close(ion);
 }
 
 void HistoryFile::add(const unsigned char* bytes, int len)
@@ -237,7 +232,7 @@ void HistoryScrollBuffer::normalize()
   if (!m_buffFilled || !m_arrayIndex) return;
   QVector<histline> newHistBuffer;
   newHistBuffer.resize(m_maxNbLines);
-  for(int i = 0; i < m_maxNbLines-2; i++)
+  for(int i = 0; i < (int) m_maxNbLines-2; i++)
   {
      int lineno = adjustLineNb(i);
      newHistBuffer.insert(i+1, m_histBuffer[lineno]);
@@ -245,7 +240,7 @@ void HistoryScrollBuffer::normalize()
   m_histBuffer.setAutoDelete(false);
   // Qt 2.3: QVector copy assignment is buggy :-(
   //  m_histBuffer = newHistBuffer;
-  for(int i = 0; i < m_maxNbLines; i++)
+  for(int i = 0; i < (int) m_maxNbLines; i++)
   {
      m_histBuffer.insert(i, newHistBuffer[i]);
   }
@@ -268,7 +263,7 @@ int HistoryScrollBuffer::getLines()
 
 int HistoryScrollBuffer::getLineLen(int lineno)
 {
-  if (lineno >= m_maxNbLines) return 0;
+  if (lineno >= (int) m_maxNbLines) return 0;
 
   lineno = adjustLineNb(lineno);
 
@@ -282,7 +277,7 @@ void HistoryScrollBuffer::getCells(int lineno, int colno, int count, ca res[])
 {
   if (!count) return;
 
-  assert (lineno < m_maxNbLines);
+  assert (lineno < (int) m_maxNbLines);
 
   lineno = adjustLineNb(lineno);
   
@@ -293,7 +288,7 @@ void HistoryScrollBuffer::getCells(int lineno, int colno, int count, ca res[])
     return;
   }
 
-  assert(colno < l->size() || count == 0);
+  assert((colno < (int) l->size()) || (count == 0));
     
   memcpy(res, l->data() + colno, count * sizeof(ca));
 }
@@ -342,16 +337,16 @@ int  HistoryScrollNone::getLines()
   return 0;
 }
 
-int  HistoryScrollNone::getLineLen(int lineno)
+int  HistoryScrollNone::getLineLen(int)
 {
   return 0;
 }
 
-void HistoryScrollNone::getCells(int lineno, int colno, int count, ca res[])
+void HistoryScrollNone::getCells(int, int, int, ca [])
 {
 }
 
-void HistoryScrollNone::addCells(ca a[], int count)
+void HistoryScrollNone::addCells(ca [], int)
 {
 }
 
@@ -426,7 +421,6 @@ void HistoryScrollBlockArray::addCells(ca a[], int count)
   *pLen = count;
   
   m_lineLengths.replace(m_blockArray.getCurrent(), pLen);
-
 }
 
 void HistoryScrollBlockArray::addLine()
@@ -525,7 +519,34 @@ HistoryScroll* HistoryTypeBuffer::getScroll(HistoryScroll *old) const
        oldBuffer->setMaxNbLines(m_nbLines);
        return oldBuffer;
     }
+
+    HistoryScroll *newScroll = new HistoryScrollBuffer(m_nbLines);
+    int lines = old->getLines();
+    int startLine = 0;
+    if (lines > (int) m_nbLines)
+       startLine = lines - m_nbLines;
+
+    ca line[LINE_SIZE];
+    for(int i = startLine; i < lines; i++)
+    {
+       int size = old->getLineLen(i);
+       if (size > LINE_SIZE)
+       {
+          ca *tmp_line = new ca[size];
+          old->getCells(i, 0, size, tmp_line);
+          newScroll->addCells(tmp_line, size);
+          newScroll->addLine();
+          delete tmp_line;
+       }
+       else
+       {
+          old->getCells(i, 0, size, line);
+          newScroll->addCells(line, size);
+          newScroll->addLine();
+       }
+    }
     delete old;
+    return newScroll;
   }
   return new HistoryScrollBuffer(m_nbLines);
 }
@@ -549,8 +570,34 @@ const QString& HistoryTypeFile::getFileName() const
 
 HistoryScroll* HistoryTypeFile::getScroll(HistoryScroll *old) const
 {
+  if (dynamic_cast<HistoryFile *>(old)) 
+     return old; // Unchanged.
+
+  HistoryScroll *newScroll = new HistoryScrollFile(m_fileName);
+
+  ca line[LINE_SIZE];
+  int lines = old->getLines();
+  for(int i = 0; i < lines; i++)
+  {
+     int size = old->getLineLen(i);
+     if (size > LINE_SIZE)
+     {
+        ca *tmp_line = new ca[size];
+        old->getCells(i, 0, size, tmp_line);
+        newScroll->addCells(tmp_line, size);
+        newScroll->addLine();
+        delete tmp_line;
+     }
+     else
+     {
+        old->getCells(i, 0, size, line);
+        newScroll->addCells(line, size);
+        newScroll->addLine();
+     }
+  }
+
   delete old;
-  return new HistoryScrollFile(m_fileName);
+  return newScroll; 
 }
 
 unsigned int HistoryTypeFile::getSize() const

@@ -16,6 +16,8 @@
 #include <qcstring.h>
 #include <qvector.h>
 
+#include <ktempfile.h>
+
 #include "TECommon.h"
 
 #if 1
@@ -36,6 +38,7 @@ public:
 private:
   int  ion;
   int  length;
+  KTempFile tmpFile;
 };
 #endif
 
@@ -227,7 +230,7 @@ protected:
 class HistoryTypeFile : public HistoryType
 {
 public:
-  HistoryTypeFile(const QString& fileName);
+  HistoryTypeFile(const QString& fileName=QString::null);
 
   virtual bool isOn() const;
   virtual const QString& getFileName() const;

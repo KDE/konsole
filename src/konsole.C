@@ -288,9 +288,10 @@ Konsole::Konsole(const char* name, const char* _pgm,
   se = newSession(co);
   if (b_histEnabled && m_histSize)
     se->setHistory(HistoryTypeBuffer(m_histSize));
+  else if (b_histEnabled && !m_histSize)
+    se->setHistory(HistoryTypeFile());
   else
     se->setHistory(HistoryTypeNone());
-
 
   delete co;
   //KONSOLEDEBUG<<"Konsole ctor(): runSession()"<<endl;
@@ -1433,10 +1434,12 @@ TESession *Konsole::newSession(KSimpleConfig *co)
   s->setSchemaNo(schmno);
   s->setTitle(txt);
 
-  if (b_histEnabled)
-      s->setHistory(HistoryTypeBuffer(m_histSize));
+  if (b_histEnabled && m_histSize)
+    s->setHistory(HistoryTypeBuffer(m_histSize));
+  else if (b_histEnabled && !m_histSize)
+    s->setHistory(HistoryTypeFile());
   else
-      s->setHistory(HistoryTypeNone());
+    s->setHistory(HistoryTypeNone());
 
   addSession(s);
   runSession(s); // activate and run
@@ -1730,6 +1733,7 @@ HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
 
   m_size = new QSpinBox(0, 10 * 1000 * 1000, 100, mainFrame);
   m_size->setValue(histSize);
+  m_size->setSpecialValueText(i18n("Unlimited (number of lines)", "Unlimited"));
 
   hb->addWidget(m_btnEnable);
   hb->addWidget(new QLabel(i18n("Number of lines : "), mainFrame));
@@ -1743,6 +1747,7 @@ HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
     m_size->setValue(histType.getSize());
     slotHistEnable(true);
   }
+  setHelp("configure-history");
 }
 
 void HistoryTypeDialog::slotDefault()
@@ -1779,11 +1784,19 @@ void Konsole::slotHistoryType()
   HistoryTypeDialog dlg(se->history(), m_histSize, this);
   if (dlg.exec()) {
 
-    if (dlg.isOn() && dlg.nbLines() > 0) {
+    if (dlg.isOn()) {
+      if (dlg.nbLines() > 0) {
+         se->setHistory(HistoryTypeBuffer(dlg.nbLines()));
+         m_histSize = dlg.nbLines();
+         b_histEnabled = true;
 
-      se->setHistory(HistoryTypeBuffer(dlg.nbLines()));
-      m_histSize = dlg.nbLines();
-      b_histEnabled = true;
+      } else {
+
+         se->setHistory(HistoryTypeFile());
+         m_histSize = 0;
+         b_histEnabled = true;
+      
+      }
 
     } else {
 
