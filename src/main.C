@@ -49,6 +49,8 @@
 #endif
 
 #include <qdir.h>
+#include <qevent.h>
+#include <qdragobject.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -74,7 +76,6 @@
 #include <assert.h>
 
 #include <locale.h>
-#include <drag.h>
 #include <klocale.h>
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
@@ -124,12 +125,9 @@ TEDemo::TEDemo(const QString& name, QStrList & _args, int login_shell) : KTMainW
   makeMenu();
   makeStatusbar();
 
-  // Init DnD: Set up drop zone and drop handler /////////////////////////////
-
-  dropZone = new KDNDDropZone( this, DndURL );
-  connect( dropZone, SIGNAL( dropAction( KDNDDropZone* )),
-                     SLOT( onDrop( KDNDDropZone*)));
-
+  // Init DnD ////////////////////////////////////////////////////////////////
+  setAcceptDrops(true);
+  
   // load session commands ///////////////////////////////////////////////////
 
   loadSessionCommands();
@@ -209,11 +207,16 @@ TEDemo::~TEDemo()
 }
 
 /* ------------------------------------------------------------------------- */
-/*                                                                           */
+/* Drag & Drop                                                                          */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TEDemo::onDrop( KDNDDropZone* _zone )
+void TEDemo::dragEnterEvent(QDragEnterEvent* e) 
+{
+  e->accept(QTextDrag::canDecode(e) || QUrlDrag::canDecode(e));
+}
+
+void TEDemo::dropEvent(QDropEvent* event)
 {
     // The current behaviour when url(s) are dropped is
     // * if there is only ONE url and if it's a LOCAL one, ask for paste or cd
@@ -222,39 +225,35 @@ void TEDemo::onDrop( KDNDDropZone* _zone )
   QStrList strlist;
   KURL *url;
   int file_count = 0;
-  char *p;
   dropText = "";
   bool bPopup = true;
 
-  strlist = _zone->getURLList();
-  if (strlist.count())
-  {
-    p = strlist.first();
-    while(p != 0)
-    {
-      if(file_count++ > 0)
-      {
-        dropText += " ";
-        bPopup = false; // more than one file, don't popup
+  if(QUrlDrag::decode(event, strlist)) {
+    if (strlist.count()) {
+      for(const char* p = strlist.first(); p; p = strlist.next()) {
+        if(file_count++ > 0) {
+          dropText += " ";
+          bPopup = false; // more than one file, don't popup
+        }
+        url = new KURL( QString(p) );
+        if (url->isLocalFile()) {
+          dropText += url->path(); // local URL : remove protocol
+        }
+        else {
+          dropText += p;
+          bPopup = false; // a non-local file, don't popup
+        }
+        delete url;
+        p = strlist.next();
       }
-      url = new KURL( p );
-      if (!strcmp(url->protocol(),"file"))
-      {
-        dropText += url->path(); // local URL : remove protocol
-      }
+      if (bPopup)
+        m_drop->popup(pos() + event->pos());
       else
-      {
-        dropText += p;
-        bPopup = false; // a non-local file, don't popup
-      }
-      delete url;
-      p = strlist.next();
+        se->getEmulation()->sendString(dropText.latin1());
     }
-    if (bPopup)
-        m_drop->popup(QPoint(_zone->getMouseX(),_zone->getMouseY()));
-    else
-        se->getEmulation()->sendString(dropText.data());
   }
+  else if(QTextDrag::decode(event, dropText))
+    se->getEmulation()->sendString(dropText.latin1()); // Paste it
 }
 
 void TEDemo::drop_menu_activated(int item)

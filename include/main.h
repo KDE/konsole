@@ -18,7 +18,6 @@
 
 #include <kwmmapp.h>
 #include <ktmainwindow.h>
-//#include <ktopwidget.h>
 #include <ksimpleconfig.h>
 #include <qstrlist.h>
 
@@ -28,6 +27,10 @@
 #include "session.h"
 #include "schema.h"
 #include "rootBg.h"
+
+
+class QDragEnterEvent;
+class QDropEvent;
 
 class RootPixmap;
 
@@ -62,8 +65,6 @@ private slots:
   void teChangedSize(int, int);
   void setHeader();
   void changeTitle(int, const char*s);
-  void onDrop( KDNDDropZone* _zone );
-
   void desktopChange(int);
     
 protected:
@@ -72,6 +73,10 @@ protected:
 
  void saveProperties(KConfig* config);
  void readProperties(KConfig* config);
+
+ // Dnd
+ void dragEnterEvent(QDragEnterEvent* event);
+ void dropEvent(QDropEvent* event);
 
 private slots:
 
@@ -106,7 +111,6 @@ private:
 
   KMenuBar*   menubar;
   KStatusBar* statusbar;
-  KDNDDropZone  *dropZone;
 
   QPopupMenu* m_file;
   QPopupMenu* m_sessions;
