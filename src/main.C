@@ -875,7 +875,9 @@ int main(int argc, char* argv[])
     if (!strcmp(argv[i],"-e") && i+1 < argc) // handle command
     { free(eargs);
       eargs = (const char**)malloc((argc-i+1)*sizeof(char*));
-      for (int j = 0; j+i < argc; j++) eargs[j] = argv[i+j+1];
+      int j;
+      for (j = 0; j+i+1 < argc; j++) eargs[j] = argv[i+j+1];
+      eargs[j]=NULL;
       break;
     }
     if (!strcmp(argv[i],"-vt_fg") && i+1 < argc) fg = argv[++i];
