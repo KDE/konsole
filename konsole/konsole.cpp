@@ -107,6 +107,7 @@ Time to start a requirement list.
 
 #include <kiconloader.h>
 #include <kstringhandler.h>
+#include <ktip.h>
 
 #include "konsole.h"
 #include <netwm.h>
@@ -326,6 +327,16 @@ Konsole::~Konsole()
 void Konsole::run() {
    kWinModule = new KWinModule();
    connect( kWinModule,SIGNAL(currentDesktopChanged(int)), this,SLOT(currentDesktopChanged(int)) );
+}
+
+void Konsole::showTip()
+{
+   KTipDialog::showTip(this,QString::null,true);
+}
+
+void Konsole::showTipOnStart()
+{
+   KTipDialog::showTip(this);
 }
 
 /* ------------------------------------------------------------------------- */
@@ -572,6 +583,10 @@ void Konsole::makeGUI()
 
    connect(m_options, SIGNAL(activated(int)), SLOT(opt_menu_activated(int)));
    m_options->installEventFilter( this );
+
+   //help menu
+   m_help->insertSeparator(1);
+   m_help->insertItem(i18n("&Tip of the Day..."), this, SLOT(showTip()), 0, -1, 2);
 
    //the different session types
    loadSessionCommands();

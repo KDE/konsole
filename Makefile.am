@@ -14,6 +14,9 @@ autostartdir = $(prefix)/share/autostart
 rc_DATA = kwritedrc
 rcdir = $(kde_confdir)
 
+tip_DATA = tips
+tipdir = $(kde_datadir)/konsole
+
 EXTRA_DIST = CONTRIBUTORS LICENSE.readme README.bugs \
 	README.linux.console tests $(data_DATA)
 
@@ -25,3 +28,8 @@ kwritedrc: $(top_builddir)/config.h
 	else \
 	    echo Autostart=true >>kwritedrc ; \
 	fi
+
+messages: rc.cpp
+	$(PREPARETIPS) > tips.cc
+	$(XGETTEXT) konsole/*.cpp tips.cc -o $(podir)/konsole.pot
+	rm -f tips.cc

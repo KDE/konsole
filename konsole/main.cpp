@@ -348,6 +348,7 @@ int main(int argc, char* argv[])
     m->initFullScreen();
     m->show();
     m->run();
+    m->showTipOnStart();
   }
   //2.6 sec
   

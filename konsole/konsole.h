@@ -72,6 +72,7 @@ public:
   void run();
   void activateSession(const int position);
   void setDefaultSession(const QString &filename);
+  void showTipOnStart();
 
   // Additional functions for DCOP
   int sessionCount() { return sessions.count(); }
@@ -157,6 +158,7 @@ private slots:
   void slotFindDone();
 
   void fontNotFound();
+  void showTip();
 
 private:
   KSimpleConfig *defaultSession();
