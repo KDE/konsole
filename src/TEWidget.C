@@ -1094,12 +1094,12 @@ void TEWidget::dropEvent(QDropEvent* event)
           dropText += " ";
           bPopup = false; // more than one file, don't popup
         }
-        url = new KURL( QString(p) );
+        url = new KURL( p );
         if (url->isLocalFile()) {
           dropText += url->path(); // local URL : remove protocol
         }
         else {
-          dropText += p;
+          dropText += url->prettyURL();
           bPopup = false; // a non-local file, don't popup
         }
         delete url;
@@ -1111,16 +1111,16 @@ void TEWidget::dropEvent(QDropEvent* event)
       else
 	{
 	  if (currentSession) {
-	    currentSession->getEmulation()->sendString(dropText.latin1());
+	    currentSession->getEmulation()->sendString(dropText.local8Bit());
 	  }
-	  kdDebug() << "Drop:" << dropText.latin1() << "\n";
+	  kdDebug() << "Drop:" << dropText.local8Bit() << "\n";
 	}
     }
   }
   else if(QTextDrag::decode(event, dropText)) {
-    kdDebug() << "Drop:" << dropText.latin1() << "\n";
+    kdDebug() << "Drop:" << dropText.local8Bit() << "\n";
     if (currentSession) {
-      currentSession->getEmulation()->sendString(dropText.latin1());
+      currentSession->getEmulation()->sendString(dropText.local8Bit());
     }
     // Paste it
   }
