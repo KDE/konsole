@@ -102,18 +102,18 @@
 #define VERSION "0.9.12"
 
 static const char *description =
-	I18N_NOOP("X terminal for use with KDE.");
+  I18N_NOOP("X terminal for use with KDE.");
 
 static KCmdLineOptions options[] =
 {
-   { "name <name>",	I18N_NOOP("Set Window Class"), 0 },
-   { "ls",		I18N_NOOP("Start login shell"), 0 },
+   { "name <name>",  I18N_NOOP("Set Window Class"), 0 },
+   { "ls",  	I18N_NOOP("Start login shell"), 0 },
    { "nowelcome",       I18N_NOOP("Suppress greeting"), 0 },
    { "nohist",          I18N_NOOP("Do not save lines in scroll-back buffer"), 0 },
-   { "vt_sz CCxLL",	I18N_NOOP("Terminal size in columns x lines"), 0 },
-   { "e <command>",	I18N_NOOP("Execute 'command' instead of shell"), 0 },
+   { "vt_sz CCxLL",  I18N_NOOP("Terminal size in columns x lines"), 0 },
+   { "e <command>",  I18N_NOOP("Execute 'command' instead of shell"), 0 },
 //FIXME: WABA: We need a way to say that all options after -e should be treated as arguments.
-   { "+[args]",		I18N_NOOP("Arguments for 'command'"), 0 },
+   { "+[args]",  	I18N_NOOP("Arguments for 'command'"), 0 },
    { 0, 0, 0 }
 };
 
@@ -276,7 +276,7 @@ Konsole::~Konsole()
 void Konsole::dragEnterEvent(QDragEnterEvent* e)
 {
   e->accept(QTextDrag::canDecode(e) ||
-	    QUriDrag::canDecode(e));
+      QUriDrag::canDecode(e));
 }
 
 void Konsole::dropEvent(QDropEvent* event)
@@ -437,9 +437,11 @@ void Konsole::makeMenu()
   // where is going to put it?
   
   showMenubar = KStdAction::showMenubar(this, SLOT(slotToggleMenubar()));
+  showMenubar->setText(i18n("&Menubar"));
   showMenubar->plug(m_options);
 
   showToolbar = KStdAction::showToolbar(this, SLOT(slotToggleToolbar()));
+  showToolbar->setText(i18n("&Toolbar"));
   showToolbar->plug(m_options);
 
 
@@ -536,7 +538,7 @@ void Konsole::readProperties(KConfig* config)
   b_menuvis  = config->readBoolEntry("menubar visible",TRUE);
   b_toolbarvis  = config->readBoolEntry("toolbar visible",TRUE);
   n_toolbarpos  = config->readUnsignedNumEntry("toolbar position", 
-			     (unsigned int) KToolBar::Bottom);
+  		     (unsigned int) KToolBar::Bottom);
 
   b_framevis = config->readBoolEntry("has frame",TRUE);
   b_scroll = config->readBoolEntry("history",TRUE);
@@ -892,50 +894,50 @@ void Konsole::addSession(TESession* s)
 }
 
 /*
-   Activate session for the 
+   Activate session
  */
-void Konsole::activateSession() {
-    TESession* s = NULL;
-    QPtrDictIterator<TESession> it( action2session ); // iterator for dict
-    while ( it.current() ) {
-	KRadioAction *ra = (KRadioAction*)it.currentKey();
-	if (ra->isChecked()) {
-	    s = it.current();
-	    break;
-	}
-	++it;
-    }
-    if (s==NULL) {
-	return;
-    }
-    if (se)
-	{
-	    se->setConnect(FALSE);
-	}
-    se = s;
-    if (!s) { fprintf(stderr,"session not found\n"); return; } // oops
-    if (s->schemaNo()!=curr_schema) {
-	setSchema(s->schemaNo());             //FIXME: creates flicker? Do only if differs
-	//Set Font. Now setConnect should do the appropriate action.
-	//if the size has changed, a resize event (noticable to the application)
-	//should happen. Else, we  could even start the application
-	s->setConnect(TRUE);                  // does a bulkShow (setImage)
-	setFont(s->fontNo());                 //FIXME: creates flicker?
+void Konsole::activateSession()
+{
+  TESession* s = NULL;
+  QPtrDictIterator<TESession> it( action2session ); // iterator for dict
+  while ( it.current() )
+  {
+    KRadioAction *ra = (KRadioAction*)it.currentKey();
+    if (ra->isChecked()) { s = it.current(); break; }
+    ++it;
+  }
+  if (s==NULL) { return; }
+  if (se) { se->setConnect(FALSE); }
+  se = s;
+  if (!s) { fprintf(stderr,"session not found\n"); return; } // oops
+  if (s->schemaNo()!=curr_schema)
+  {
+    setSchema(s->schemaNo());             //FIXME: creates flicker? Do only if differs
+    //Set Font. Now setConnect should do the appropriate action.
+    //if the size has changed, a resize event (noticable to the application)
+    //should happen. Else, we  could even start the application
+    s->setConnect(TRUE);                  // does a bulkShow (setImage)
+    setFont(s->fontNo());                 //FIXME: creates flicker?
                                           //FIXME: check here if we're still alife.
                                           //       if not, quit, otherwise,
                                           //       start propagating quit.
     title = s->Title(); // take title from current session
-  } else {
-      //    setSchema(s->schemaNo());  // hmm.. now it is needed, I guess
+  }
+  else
+  {
+    // setSchema(s->schemaNo());  // hmm.. now it is needed, I guess
     // only if transparent
-      rootxpm->repaint(true);  
+    rootxpm->repaint(true);  
     s->setConnect(TRUE);
   }
   setHeader();
 }
 
-void Konsole::newDefaultSession() {
-  // for some funny reason, this is the third in the list
+void Konsole::newDefaultSession()
+{
+  // (Lotzi says) for some funny reason, this is the third in the list
+  // (Lars says)  it's random, really. The list is read in, and should
+  //              best be presented.
   newSession(3);
 }
 
@@ -1026,8 +1028,8 @@ void Konsole::doneSession(TESession* s, int )
     //    QIntDictIterator<TESession> it( no2session );
     QPtrDictIterator<KRadioAction> it( session2action);
     if ( it.current() ) {
-	//      activateSession(it.currentKey());
-	it.current()->setChecked(true);
+  //      activateSession(it.currentKey());
+  it.current()->setChecked(true);
         activateSession();
     } else
       kapp->quit();
@@ -1190,7 +1192,7 @@ int main(int argc, char* argv[])
 
   // ///////////////////////////////////////////////
 
-  putenv("COLORTERM="); // to trigger mc's color detection
+  putenv((char*)"COLORTERM="); // to trigger mc's color detection
 
   if (a.isRestored())
   {
