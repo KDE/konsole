@@ -254,6 +254,7 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 ,b_fullScripting(false)
 ,b_showstartuptip(true)
 ,m_histSize(DEFAULT_HISTORY_SIZE)
+,m_separator_id(-1)
 ,m_newSessionButton(0)
 {
   isRestored = b_inRestore;
@@ -430,7 +431,8 @@ void Konsole::updateRMBMenu()
       }
       index = 2;
       m_rightButton->setItemVisible(POPUP_NEW_SESSION_ID,true);
-      m_rightButton->setItemVisible(m_separator_id,true);
+      if (m_separator_id != -1)
+         m_rightButton->setItemVisible(m_separator_id,true);
       m_rightButton->setItemVisible(POPUP_SETTINGS_ID,true);
    }
    else
