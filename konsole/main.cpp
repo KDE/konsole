@@ -187,6 +187,7 @@ int main(int argc, char* argv[])
   KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
   //1.53 sec
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+  KCmdLineArgs *qtargs = KCmdLineArgs::parsedArgs("qt");
   has_noxft = !args->isSet("xft");
   TEWidget::setAntialias( !has_noxft );
   
@@ -198,6 +199,9 @@ int main(int argc, char* argv[])
   QString title;
   if(args->isSet("T")) {
     title = QFile::decodeName(args->getOption("T"));
+  }
+  if(qtargs->isSet("title")) {
+    title = QFile::decodeName(qtargs->getOption("title"));
   }
 
   QString term = "";
@@ -232,7 +236,7 @@ int main(int argc, char* argv[])
   toolbaron = args->isSet("toolbar");
   frameon = args->isSet("frame");
   scrollbaron = args->isSet("scrollbar");
-  wname = args->getOption("name");
+  wname = qtargs->getOption("name");
 
   QCString type = "";
 
