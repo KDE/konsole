@@ -108,13 +108,12 @@ konsolePart::konsolePart(QWidget *parent, const char *name)
   te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
   te->setScrollbarLocation(TEWidget::SCRRIGHT);
   setWidget(te);
-  // faking a KTMainwindow - i dont know why it has it this way
-  kdDebug() << "The shell is:" << shell << "\n";
+  // faking a KTMainwindow - TESession assumes that (wrong design!)
   initial = new TESession((KTMainWindow*)parent,
                           te,shell,eargs,"xterm");
-  //  initial->run();
+  QObject::connect( initial,SIGNAL(done(TESession*,int)),
+                    this,SLOT(doneSession(TESession*,int)) );
   initial->setConnect(TRUE);
-  QTimer::singleShot(0/*100*/,initial,SLOT(run()));
   initial->getEmulation()->setKeytrans(0);
   te->currentSession = initial;
 
@@ -124,8 +123,26 @@ konsolePart::konsolePart(QWidget *parent, const char *name)
 
   // kDebugInfo("Loading successful");
   // kDebugInfo("XML file set");
+
+  // (David): re-enabled the direct call to run, it seems to work too !?
+  initial->run();
+  //QTimer::singleShot(0,initial,SLOT(run()));
+
+  connect( initial, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
 }
 
+void konsolePart::doneSession(TESession*,int)
+{
+  // see doneSession in konsole.C
+  initial->setConnect(FALSE);
+  QTimer::singleShot(100,initial,SLOT(terminate()));
+}
+
+void konsolePart::sessionDestroyed()
+{
+  initial = 0;
+  delete this;
+}
 
 void konsolePart::slotNew() {
   kDebugInfo("slotNew called");

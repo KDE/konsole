@@ -19,8 +19,8 @@ public:
   double     tr_x;
   int	     tr_r, tr_g, tr_b;
 public:
-  static ColorSchema* readSchema(const char* path);
-  static ColorSchema* find(const char* path);
+  static ColorSchema* readSchema(const QString & path);
+  static ColorSchema* find(const QString & path);
   static ColorSchema* find(int num);
   static ColorSchema* defaultSchema();
   static void         loadAllSchemas();

@@ -104,7 +104,7 @@ private:
   //  void setFrameVisible(bool);
   void setHistory(bool);
 
-  void setSchema(const char* path);
+  void setSchema(const QString & path);
   void setSchema(const ColorSchema* s);
   void setFont(int fontno);
 

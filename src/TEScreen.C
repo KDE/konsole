@@ -18,7 +18,7 @@
     \brief The image manipulated by the emulation.
 
     This class implements the operations of the terminal emulation framework.
-    It is a complete passive device, driven by the emulation decoder 
+    It is a complete passive device, driven by the emulation decoder
     (TEmuVT102). By this it forms in fact an ADT, that defines operations
     on a rectangular image.
 
@@ -38,6 +38,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <kdebug.h>
 
 #include <assert.h>
 #include <string.h>
@@ -189,7 +190,7 @@ void TEScreen::index()
   {
     if (tmargin == 0 && bmargin == lines-1) addHistLine(); // hist.history
     scrollUp(tmargin,1);
-  } 
+  }
   else
     cuY += 1;
 }
@@ -226,24 +227,24 @@ void TEScreen::NextLine()
 */
 
 /*! erase `n' characters starting from (including) the cursor position.
-   
+
     The line is filled in from the right with spaces.
 */
 
 void TEScreen::eraseChars(int n)
-{ 
+{
   if (n == 0) n = 1; // Default
   int p = QMAX(0,QMIN(cuX+n-1,columns-1));
   clearImage(loc(cuX,cuY),loc(p,cuY),' ');
 }
 
 /*! delete `n' characters starting from (including) the cursor position.
-   
+
     The line is filled in from the right with spaces.
 */
 
 void TEScreen::deleteChars(int n)
-{ 
+{
   if (n == 0) n = 1; // Default
   int p = QMAX(0,QMIN(cuX+n,columns-1));
   moveImage(loc(cuX,cuY),loc(p,cuY),loc(columns-1,cuY));
@@ -251,12 +252,12 @@ void TEScreen::deleteChars(int n)
 }
 
 /*! insert `n' spaces at the cursor position.
-   
+
     The cursor is not moved by the operation.
 */
 
 void TEScreen::insertChars(int n)
-{ 
+{
   if (n == 0) n = 1; // Default
   int p = QMAX(0,QMIN(columns-1-n,columns-1));
   int q = QMAX(0,QMIN(cuX+n,columns-1));
@@ -270,18 +271,18 @@ void TEScreen::insertChars(int n)
 */
 
 void TEScreen::deleteLines(int n)
-{ 
+{
   if (n == 0) n = 1; // Default
   scrollUp(cuY,n);
 }
 
 /*! insert `n' lines at the cursor position.
-   
+
     The cursor is not moved by the operation.
 */
 
 void TEScreen::insertLines(int n)
-{ 
+{
   if (n == 0) n = 1; // Default
   scrollDown(cuY,n);
 }
@@ -456,7 +457,7 @@ void TEScreen::effectiveRendition()
 // calculate rendition
 {
   ef_re = cu_re & (RE_UNDERLINE | RE_BLINK);
-  if (cu_re & RE_REVERSE) 
+  if (cu_re & RE_REVERSE)
   {
     ef_fg = cu_bg;
     ef_bg = cu_fg;
@@ -490,16 +491,16 @@ ca* TEScreen::getCookedImage()
   for (y = 0; (y < lines) && (y < (hist.getLines()-histCursor)); y++)
   {
     int len = QMIN(columns,hist.getLineLen(y+histCursor));
-    
-    for (x = 0; x < len; x++) 
+
+    for (x = 0; x < len; x++)
     {   int p=x + y*columns;
         int q=x + (y+histCursor)*columns;
         merged[p] = hist.getCell(y+histCursor,x);
         if ( ( q >= sel_TL ) && ( q <= sel_BR ) )
           reverseRendition(&merged[p]); // for selection
     }
-    for (; x < columns; x++) 
-    {   int p=x + y*columns; 
+    for (; x < columns; x++)
+    {   int p=x + y*columns;
         int q=x + (y+histCursor)*columns;
         merged[p] = dft;
         if ( ( q >= sel_TL ) && ( q <= sel_BR ) )
@@ -510,7 +511,7 @@ ca* TEScreen::getCookedImage()
   {
     for (y = (hist.getLines()-histCursor); y < lines ; y++)
     {
-       for (x = 0; x < columns; x++) 
+       for (x = 0; x < columns; x++)
        { int p = x + y * columns;
          int q = x + (y+histCursor)*columns;
          int r = x + (y-hist.getLines()+histCursor)*columns;
@@ -518,7 +519,7 @@ ca* TEScreen::getCookedImage()
          if ( q >= sel_TL && q <= sel_BR )
            reverseRendition(&merged[p]); // for selection
        }
-        
+
     }
   }
   // evtl. inverse display
@@ -558,7 +559,7 @@ void TEScreen::reset()
 */
 
 void TEScreen::clear()
-{ 
+{
   clearEntireScreen();
   home();
 }
@@ -666,15 +667,15 @@ void TEScreen::scrollUp(int from, int n)
   //FIXME: make sure `tmargin', `bmargin', `from', `n' is in bounds.
   moveImage(loc(0,from),loc(0,from+n),loc(columns-1,bmargin));
   clearImage(loc(0,bmargin-n+1),loc(columns-1,bmargin),' ');
-  
+
   if ( from == 0 && sel_begin >= 0) //FIXME: && lines scroll into the hist.history buffer
                                     //FIXME: condition is not ok.
   {
       sel_TL -= (n-from)*columns;
       sel_BR -= (n-from)*columns;
-  } else 
+  } else
       clearSelection();
-        
+
 }
 
 /*! scroll down `n' lines within current region.
@@ -694,7 +695,7 @@ void TEScreen::scrollDown(int from, int n)
   {
      sel_TL += (n-from)*columns;
      sel_BR += (n-from)*columns;
-  } 
+  }
   else
      clearSelection();
 }
@@ -858,7 +859,7 @@ void TEScreen::clearToBeginOfLine()
 {
   clearImage(loc(0,cuY),loc(cuX,cuY),' ');
 }
-      
+
 /*! clears entire current cursor line
 */
 
@@ -869,7 +870,7 @@ void TEScreen::clearEntireLine()
 
 // Rendition ------------------------------------------------------------------
 
-/*! 
+/*!
     set rendition mode
 */
 
@@ -879,7 +880,7 @@ void TEScreen::setRendition(int re)
   effectiveRendition();
 }
 
-/*! 
+/*!
     reset rendition mode
 */
 
@@ -942,40 +943,40 @@ void TEScreen::setForeColorToDefault()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TEScreen::clearSelection() 
+void TEScreen::clearSelection()
 {
   sel_BR = -1;
   sel_TL = -1;
   sel_begin = -1;
 }
 
-void TEScreen::setSelBeginXY(const int x, const int y) 
+void TEScreen::setSelBeginXY(const int x, const int y)
 {
   sel_begin = loc(x,y+histCursor) ;
   sel_BR = sel_begin;
   sel_TL = sel_begin;
 }
 
-void TEScreen::setSelExtentXY(const int x, const int y) 
+void TEScreen::setSelExtentXY(const int x, const int y)
 {
   int l =  loc(x,y + histCursor);
 
   if (l < sel_begin)
-  { 
-    sel_TL = l; 
+  {
+    sel_TL = l;
     sel_BR = sel_begin;
-  } 
+  }
   else
-  { 
+  {
     /* FIXME, HACK to correct for x too far to the right... */
     if (( x == columns )|| (x == 0)) l--;
 
     sel_TL = sel_begin;
-    sel_BR = l; 
+    sel_BR = l;
   }
 }
 
-QString TEScreen::getSelText(const BOOL preserve_line_breaks) 
+QString TEScreen::getSelText(const BOOL preserve_line_breaks)
 {
   int *m;  	// buffer to fill.
   int s,d; 	// source index, dest. index.
@@ -983,9 +984,9 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
   int hY = sel_TL / columns ;
   int hX = sel_TL % columns;
   int eol;	// end of line
-  s = sel_TL;   // tracks copy in source. 
+  s = sel_TL;   // tracks copy in source.
   d = 0;
-  
+
   // allocate buffer for maximum possible size...
   d = (sel_BR - sel_TL)/columns + 1 ;
   m = new int[ d * (columns+1) + 2 ];
@@ -998,8 +999,8 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
       eol=hist.getLineLen(hY);
       if  ((hY == (sel_BR/columns)) && (eol >= (sel_BR%columns)) ) eol=sel_BR%columns+1;
       while ( hX < eol )
-      { 
-         m[d++] = hist.getCell(hY,hX++).c; 
+      {
+         m[d++] = hist.getCell(hY,hX++).c;
          s++;
       }
 
@@ -1007,14 +1008,14 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
       if ( s <= sel_BR ) {
 	if ( (eol+1)%columns == 0) {
 	    if (hist.getCell(hY,columns-1).c == ' ') { m[d++]=' '; }
-	} 
+	}
         else {
-		m[d++]=((preserve_line_breaks||(eol%columns==0))?'\n':' ');   
+		m[d++]=((preserve_line_breaks||(eol%columns==0))?'\n':' ');
                 s = ((s+1)/columns + 1)*columns;
         }
       }
-      hY++; 
-      hX=0; 
+      hY++;
+      hX=0;
     }
     else // or from screen image.
     {
@@ -1032,8 +1033,8 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
       if (eol < sel_BR) {
 	if ( (eol+1)%columns == 0) {
 	    if (image[eol-hist_BR-columns].c == ' ') m[d++]=' ';
-	} 
-        else m[d++]=((preserve_line_breaks||((eol%columns)==0))?'\n':' ');   
+	}
+        else m[d++]=((preserve_line_breaks||((eol%columns)==0))?'\n':' ');
       }
       s = ( eol/columns + 1)*columns;
     }
@@ -1051,7 +1052,7 @@ cases:
 
 1)    (eol+1)%columns == 0 --> the whole line is filled.
    If the last char is a space, insert (preserve) space. otherwise
-   leave the text alone, so that words that are broken by linewrap 
+   leave the text alone, so that words that are broken by linewrap
    are preserved.
 
 FIXME:
@@ -1065,7 +1066,7 @@ FIXME:
    not preserving line_breaks, you want to preserve paragraph breaks.
 
 3)    else		 --> partially filled line
-   insert a \n in preserve line break mode, else a space 
+   insert a \n in preserve line break mode, else a space
    The space prevents concatenation of the last word of one
    line with the first of the next.
 
@@ -1089,11 +1090,11 @@ void TEScreen::addHistLine()
       hist.addCell(image[i]);
     hist.addLine();
 
-    // adjust history cursor 
+    // adjust history cursor
     histCursor += (hist.getLines()-1 == histCursor);
 
-    // adjust selection 
-    if (sel_TL > 0 ) 
+    // adjust selection
+    if (sel_TL > 0 )
     {
       sel_TL    += columns;
       sel_BR    += columns;
@@ -1103,7 +1104,7 @@ void TEScreen::addHistLine()
 }
 
 void TEScreen::setHistCursor(int cursor)
-{ 
+{
   histCursor = cursor; //FIXME:rangecheck
 }
 

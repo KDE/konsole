@@ -12,7 +12,10 @@
 #include "schema.h"
 #include <stdio.h>
 #include "kapp.h"
+#include <kdebug.h>
+#include <qfile.h>
 #include <qdir.h>
+#include <stdlib.h>
 #include <kstddirs.h>
 #include <kglobal.h>
 #include <klocale.h>
@@ -27,8 +30,8 @@ static QDict<ColorSchema>   * path2schema = 0L;
 template class QIntDict<ColorSchema>;
 template class QDict<ColorSchema>;
 
-ColorSchema* ColorSchema::readSchema(const char* path)
-{ FILE* sysin = fopen(path,"r");
+ColorSchema* ColorSchema::readSchema(const QString & path)
+{ FILE* sysin = fopen(QFile::encodeName(path),"r");
   char line[100]; int i;
 
   if (!sysin) return NULL;
@@ -133,12 +136,12 @@ ColorSchema* ColorSchema::find(int numb)
   return res ? res : numb2schema->find(0);
 }
 
-ColorSchema* ColorSchema::find(const char* path)
+ColorSchema* ColorSchema::find(const QString & path)
 {
   QString real_loc(path);
-  if ( real_loc[0] != '/' ) {
+  if ( !path.isEmpty() && path[0] != '/' ) {
     real_loc = locate("appdata", path);
-    if ( real_loc.isNull() )
+    if ( real_loc.isEmpty() )
       real_loc = path;
   }
   ColorSchema* res = path2schema->find(real_loc.latin1());

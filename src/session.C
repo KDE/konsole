@@ -26,6 +26,10 @@ TESession::TESession(KTMainWindow* main, TEWidget* te, const char* _pgm, QStrLis
                     em,SLOT(onRcvBlock(const char*,int)) );
   QObject::connect( em,SIGNAL(ImageSizeChanged(int,int)),
                     sh,SLOT(setSize(int,int)));
+
+  // 'main' should do those connects itself, somehow.
+  // These aren't KTMW's slots, but konsole's.(David)
+
   QObject::connect( em,SIGNAL(ImageSizeChanged(int,int)),
                     main,SLOT(notifySize(int,int)));
   QObject::connect( em,SIGNAL(sndBlock(const char*,int)),
@@ -34,8 +38,6 @@ TESession::TESession(KTMainWindow* main, TEWidget* te, const char* _pgm, QStrLis
                     main,SLOT(changeColumns(int)) );
   QObject::connect( em,SIGNAL(changeTitle(int, const QString&)),
                     main,SLOT(changeTitle(int, const QString&)) );
-  QObject::connect( this,SIGNAL(done(TESession*,int)),
-                    main,SLOT(doneSession(TESession*,int)) );
   QObject::connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
   //FIXME: note the right place
   QObject::connect( te,SIGNAL(configureRequest(TEWidget*,int,int,int)),

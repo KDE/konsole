@@ -184,8 +184,12 @@ Konsole::Konsole(const QString& name,
 
   // construct initial session ///////////////////////////////////////////////
 //FIXME: call newSession here, somehow, instead the stuff below.
+  // Please do it ! It forces to duplicate code... (David)
 
   TESession* initial = new TESession(this,te,pgm,args,"xterm");
+
+  QObject::connect( initial,SIGNAL(done(TESession*,int)),
+                    this,SLOT(doneSession(TESession*,int)) );
 
   title = (args.count() && (kapp->caption() == PACKAGE))
         ? QString(args.at(0))  // program executed in the title bar
@@ -491,7 +495,7 @@ void Konsole::readGlobalProperties(KConfig* config)
 
 void Konsole::saveProperties(KConfig* config)
 {
-  config->setGroup("options"); 
+  config->setGroup("options");
   // bad! will no allow us to support multi windows
   config->writeEntry("menubar visible",b_menuvis);
   config->writeEntry("toolbar visible", b_toolbarvis);
@@ -507,9 +511,9 @@ void Konsole::saveProperties(KConfig* config)
 
   if (args.count() > 0) config->writeEntry("konsolearguments", args);
   config->writeEntry("class",name());
-  config->writeEntry("defaultheight", te->height()); 
+  config->writeEntry("defaultheight", te->height());
   // for "save options". Not used by SM.
-  config->writeEntry("defaultwidth", te->width());   
+  config->writeEntry("defaultwidth", te->width());
   // for "save options". Not used by SM.
   //config->writeEntry("kmenubar",                 //FIXME:Float
   //                   menubar->menuBarPos() == KMenuBar::Bottom ? "bottom" : "top");
@@ -884,7 +888,7 @@ void Konsole::activateSession()
   if (!s) { fprintf(stderr,"session not found\n"); return; } // oops
   if (s->schemaNo()!=curr_schema)
   {
-    setSchema(s->schemaNo()); 
+    setSchema(s->schemaNo());
     //Set Font. Now setConnect should do the appropriate action.
     //if the size has changed, a resize event (noticable to the application)
     //should happen. Else, we  could even start the application
@@ -952,6 +956,9 @@ void Konsole::newSession(int i)
   }
 
   TESession* s = new TESession(this,te,shell,args,emu);
+  QObject::connect( s,SIGNAL(done(TESession*,int)),
+                    this,SLOT(doneSession(TESession*,int)) );
+
   s->setFontNo(fno);
   s->setSchemaNo(schmno);
   s->setTitle(txt);
@@ -1047,7 +1054,7 @@ void Konsole::setSchema(int numb)
   if (s) setSchema(s);
 }
 
-void Konsole::setSchema(const char* path)
+void Konsole::setSchema(const QString & path)
 {
   ColorSchema* s = ColorSchema::find(path);
   if (s) setSchema(s);

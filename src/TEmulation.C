@@ -67,7 +67,7 @@
 #include "TEmulation.h"
 #include "TEWidget.h"
 #include "TEScreen.h"
-
+#include <kdebug.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

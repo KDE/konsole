@@ -31,6 +31,7 @@
 class KInstance;
 class konsoleBrowserExtension;
 class QLabel;
+class TESession;
 
 class konsoleFactory : public KLibFactory
 {
@@ -65,6 +66,9 @@ class konsolePart: public KParts::ReadOnlyPart
       void slotNew();
       void slotSaveFile();
       void slotLoadFile();
+
+      void doneSession(TESession*,int);
+      void sessionDestroyed();
 
  private:
     QLabel *widget;
