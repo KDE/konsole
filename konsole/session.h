@@ -92,6 +92,7 @@ public slots:
   void done(int status);
   void terminate();
   void setUserTitle( int, const QString &caption );
+  void ptyError();
 
 signals:
 

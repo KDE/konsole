@@ -158,6 +158,7 @@ extern "C" {
 #define TTY_GROUP "tty"
 
 #include <kstandarddirs.h>
+#include <klocale.h>
 #include <kdebug.h>
 
 #ifndef HERE
@@ -304,6 +305,8 @@ int TEPty::run(const char* _pgm, QStrList & _args, const char* _term, bool _addu
   konsole_dcop = _konsole_dcop;
   konsole_dcop_session = _konsole_dcop_session;
   addutmp = _addutmp;
+  if (fd < 0)
+     return -1;
 
   if (!start(NotifyOnExit, (Communication) (Stdout | NoRead)))
      return -1;
@@ -428,8 +431,9 @@ int TEPty::openPty()
 
   if (ptyfd < 0)
   {
-    //FIXME: handle more gracefully.
-    fprintf(stderr,"Can't open a pseudo teletype\n"); exit(1);
+    fprintf(stderr,"Can't open a pseudo teletype\n"); 
+    _error = i18n("Unable to open a suitable terminal device.");
+    return -1;
   }
 
   if (needGrantPty && !chownpty(ptyfd, true))
@@ -741,6 +745,8 @@ void TEPty::appendSendJob(const char* s, int len)
 /*! sends len bytes through the line */
 void TEPty::send_bytes(const char* s, int len)
 {
+  if (fd < 0)
+    return;
   if (!pendingSendJobs.isEmpty()) {
     appendSendJob(s,len);
   }else {

@@ -49,6 +49,7 @@ Q_OBJECT
     void setWriteable(bool writeable);
     int makePty(bool _addutmp);
     int masterFd() { return fd; }
+    QString error() { return _error; }
 
   public slots:
     void lockPty(bool lock);
@@ -105,6 +106,7 @@ Q_OBJECT
     char ttynam[50]; // "/dev/ttyxx" | "/dev/pts/########..."
     const char *pgm;
     bool addutmp;
+    QString _error;
 
     // environment variables
     const char *term;

@@ -1,6 +1,7 @@
 #include "session.h"
 #include <kdebug.h>
 #include <dcopclient.h>
+#include <kmessagebox.h>
 
 #include <stdlib.h>
 #include <qfile.h>
@@ -65,6 +66,14 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, QStrList & _args, const
 
   connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
   //kdDebug(1211)<<"TESession ctor() done"<<endl;
+  if (!sh->error().isEmpty())
+     QTimer::singleShot(0, this, SLOT(ptyError()));
+}
+
+void TESession::ptyError()
+{
+  KMessageBox::error(te->topLevelWidget(), sh->error());
+  emit done(this, 0);
 }
 
 void TESession::changeWidget(TEWidget* w)
