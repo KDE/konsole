@@ -86,6 +86,7 @@ Q_OBJECT
 
   private slots:
     void doSendJobs();
+    void writeReady();
 
   private:
 

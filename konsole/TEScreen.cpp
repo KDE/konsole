@@ -220,8 +220,7 @@ void TEScreen::index()
 {
   if (cuY == bmargin)
   {
-    if (tmargin == 0) addHistLine(); // hist.history
-    scrollUp(tmargin,1);
+    scrollUp(1);
   }
   else if (cuY < lines-1)
     cuY += 1;
@@ -792,6 +791,12 @@ void TEScreen::compose(QString compose)
 
 // Region commands -------------------------------------------------------------
 
+void TEScreen::scrollUp(int n)
+{
+   if (n == 0) n = 1; // Default
+   if (tmargin == 0) addHistLine(); // hist.history
+   scrollUp(tmargin, n);
+}
 
 /*! scroll up `n' lines within current region.
     The `n' new lines are cleared.
@@ -804,6 +809,12 @@ void TEScreen::scrollUp(int from, int n)
   //FIXME: make sure `tmargin', `bmargin', `from', `n' is in bounds.
   moveImage(loc(0,from),loc(0,from+n),loc(columns-1,bmargin));
   clearImage(loc(0,bmargin-n+1),loc(columns-1,bmargin),' ');
+}
+
+void TEScreen::scrollDown(int n)
+{
+   if (n == 0) n = 1; // Default
+   scrollDown(tmargin, n);
 }
 
 /*! scroll down `n' lines within current region.
@@ -906,12 +917,15 @@ void TEScreen::clearImage(int loca, int loce, char c)
   {
     clearSelection();
   }
+  
   for (i = loca; i <= loce; i++)
   {
+    // Use the current colors but the default rendition
+    // Check with: echo -e '\033[41;33;07m\033[2Khello world\033[00m'
     image[i].c = c;
-    image[i].f = ef_fg; //DEFAULT_FORE_COLOR; //FIXME: xterm and linux/ansi
-    image[i].b = ef_bg; //DEFAULT_BACK_COLOR; //       many have different
-    image[i].r = ef_re; //DEFAULT_RENDITION;  //       ideas here.
+    image[i].f = cu_fg;
+    image[i].b = cu_bg;
+    image[i].r = DEFAULT_RENDITION;
   }
 
   for (i = loca/columns; i<=loce/columns; i++)
@@ -1216,6 +1230,8 @@ QString TEScreen::getSelText(const bool preserve_line_breaks)
       if (s < hist_BR) {		// get lines from hist->history buffer.
           hX = sel_Left % columns;
 	  eol = hist->getLineLen(hY);
+          if (eol > columns)
+              eol = columns;
 	  if ((hY == (sel_BR / columns)) &&
               (eol > (sel_BR % columns)))
           {
@@ -1261,7 +1277,9 @@ QString TEScreen::getSelText(const bool preserve_line_breaks)
       if (s < hist_BR)
       {				// get lines from hist->history buffer.
           eol = hist->getLineLen(hY);
-
+          if (eol > columns)
+              eol = columns;
+          
           if ((hY == (sel_BR / columns)) &&
               (eol > (sel_BR % columns)))
           {

@@ -63,6 +63,11 @@ public: // these are all `Screen' operations
     void index       ();
     void reverseIndex();
     //
+    // Scrolling
+    //
+    void scrollUp(int n);
+    void scrollDown(int n);
+    //
     void Return      ();
     void BackSpace   ();
     void Tabulate    (int n = 1);
