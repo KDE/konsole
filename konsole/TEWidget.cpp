@@ -388,7 +388,11 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
   }
   if ((attr.r & RE_CURSOR) && !hasFocus()) {
     if (pm && color_table[attr.b].transparent)
+    {
       erase(rect);
+      paint.setBackgroundMode( TransparentMode );
+      paint.drawText(rect.x(),rect.y()+font_a, str);
+    }
     paint.setClipRect(rect);
     paint.drawRect(rect.x(),rect.y(),rect.width(),rect.height()-m_lineSpacing);
     paint.setClipping(FALSE);
