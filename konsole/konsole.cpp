@@ -1803,6 +1803,9 @@ void Konsole::setFont(int fontno)
 
 void Konsole::fontNotFound()
 {
+  static bool showMessage = true;
+  if (!showMessage) return;
+  showMessage = false;
   QString msg = i18n("Font `%1' not found.\nCheck README.linux.console for help.").arg(fontNotFound_par);
   KMessageBox::error(this,  msg);
 }
