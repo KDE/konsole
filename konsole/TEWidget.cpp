@@ -888,7 +888,7 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect, bool pm)
          QString unistr(disstrU,p);
          drawAttrStr(paint,
                 QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
-                unistr, &image[loc(x,y)], pm, false);
+                unistr, &image[loc(x,y)], pm, !(isBlinkEvent || isPrinting));
       }
       x += len - 1;
     }
