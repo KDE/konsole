@@ -1,0 +1,506 @@
+NOTE: do not try to apply this patch. It is internal material
+
+diff -ur konsole-latest/CVS/Entries konsole-xxx/CVS/Entries
+--- konsole-latest/CVS/Entries	Sun Dec 20 12:35:22 1998
++++ konsole-xxx/CVS/Entries	Wed Dec  9 13:27:06 1998
+@@ -10,4 +10,9 @@
+ /README.color.schema/1.1/Sat Nov  7 08:12:45 1998//
+ /README.linux.console/1.8/Thu Nov  5 06:21:33 1998//
+ /TODO/1.6/Mon Nov 23 12:11:42 1998//
+-D
++D/config////
++D/doc////
++D/include////
++D/other////
++D/src////
++D/tests////
+Only in konsole-latest/CVS: Entries.Log
+Only in konsole-xxx: Makefile
+Only in konsole-xxx: Makefile.in
+diff -ur konsole-latest/config/CVS/Entries konsole-xxx/config/CVS/Entries
+--- konsole-latest/config/CVS/Entries	Sun Dec 20 12:35:22 1998
++++ konsole-xxx/config/CVS/Entries	Wed Dec  9 13:11:28 1998
+@@ -1 +1,2 @@
+-D
++D/static////
++D/var////
+Only in konsole-latest/config/CVS: Entries.Log
+diff -ur konsole-latest/doc/CVS/Entries konsole-xxx/doc/CVS/Entries
+--- konsole-latest/doc/CVS/Entries	Sun Dec 20 12:35:24 1998
++++ konsole-xxx/doc/CVS/Entries	Wed Dec  9 13:11:28 1998
+@@ -5,4 +5,6 @@
+ /histBuffer/1.1.1.1/Wed Oct 28 05:22:37 1998//
+ /missing.codes/1.1.1.1/Wed Oct 28 05:22:37 1998//
+ /missing.keys/1.1.1.1/Wed Oct 28 05:22:37 1998//
+-D
++D/More////
++D/VT100////
++D/sgml////
+Only in konsole-latest/doc/CVS: Entries.Log
+Only in konsole-xxx/doc: Makefile
+Only in konsole-xxx/doc: Makefile.in
+diff -ur konsole-latest/doc/More/CVS/Entries konsole-xxx/doc/More/CVS/Entries
+--- konsole-latest/doc/More/CVS/Entries	Sun Dec 20 12:35:58 1998
++++ konsole-xxx/doc/More/CVS/Entries	Mon Dec 14 04:52:45 1998
+@@ -5,7 +5,6 @@
+ /dec_vt100_codes.txt/1.1.1.1/Wed Oct 28 05:22:37 1998//
+ /iowa_vt100_news.txt/1.1.1.1/Wed Oct 28 05:22:37 1998//
+ /k95vtnttn.html/1.1.1.1/Wed Oct 28 05:22:37 1998//
+-/rxvt-ref.html/1.1/Mon Dec 14 03:48:10 1998//
+ /swedish_vt102_codes.txt/1.1.1.1/Wed Oct 28 05:22:37 1998//
+ /villanova-vt100-esc-codes.txt/1.1.1.1/Wed Oct 28 05:22:37 1998//
+ /vt100_codes_news.txt/1.1.1.1/Wed Oct 28 05:22:37 1998//
+@@ -16,4 +15,5 @@
+ /vt100_setup.txt/1.1.1.1/Wed Oct 28 05:22:37 1998//
+ /vttest.html/1.1.1.1/Wed Oct 28 05:22:37 1998//
+ /xterm.codes/1.1.1.1/Wed Oct 28 05:22:37 1998//
++/rxvt-ref.html/1.1/Fri Dec 11 21:49:44 1998//
+ D
+diff -ur konsole-latest/doc/VT100/CVS/Entries konsole-xxx/doc/VT100/CVS/Entries
+--- konsole-latest/doc/VT100/CVS/Entries	Sun Dec 20 12:36:32 1998
++++ konsole-xxx/doc/VT100/CVS/Entries	Mon Dec 14 04:39:53 1998
+@@ -9,6 +9,6 @@
+ /genDocument/1.5/Thu Dec  3 23:01:24 1998//
+ /genTC.pl/1.6/Fri Dec  4 15:37:32 1998//
+ /t.pl/1.1.1.1/Wed Oct 28 05:22:38 1998//
+-/techref.html/1.7/Fri Dec  4 15:37:33 1998//
+ /vt100.gif/1.2/Thu Nov 26 07:56:13 1998//
++/techref.html/1.7/Thu Dec 10 00:30:03 1998//
+ D
+Only in konsole-xxx/doc/VT100: Makefile
+Only in konsole-xxx/doc/VT100: Makefile.in
+Only in konsole-xxx/doc/sgml: Makefile
+Only in konsole-xxx/doc/sgml: Makefile.in
+diff -ur konsole-latest/include/CVS/Entries konsole-xxx/include/CVS/Entries
+--- konsole-latest/include/CVS/Entries	Sun Dec 20 12:36:41 1998
++++ konsole-xxx/include/CVS/Entries	Mon Dec 14 05:09:15 1998
+@@ -7,7 +7,7 @@
+ /TEmuVt102.h/1.5/Mon Nov 30 12:12:50 1998//
+ /TEmulation.h/1.4/Mon Nov 30 12:12:52 1998//
+ /kcmkonsole.h/1.6/Tue Nov 10 10:35:06 1998//
+-/main.h/1.11/Mon Dec 14 03:59:24 1998//
+ /schema.h/1.1/Fri Nov  6 04:35:48 1998//
+ /session.h/1.5/Mon Nov  9 08:55:38 1998//
++/main.h/1.11/Mon Dec 14 04:07:42 1998//
+ D
+Only in konsole-xxx/include: Makefile
+Only in konsole-xxx/include: Makefile.in
+diff -ur konsole-latest/include/TEShell.h konsole-xxx/include/TEShell.h
+--- konsole-latest/include/TEShell.h	Sun Nov  1 19:47:42 1998
++++ konsole-xxx/include/TEShell.h	Mon Dec 14 13:18:42 1998
+@@ -30,9 +30,11 @@
+   public:
+     Shell(int login_shell);
+     ~Shell();
++    static void killall();
+ 
+   public:
+     int run(char* argv[], const char* term);
++    void kill();
+ 
+   signals:
+     void done(int status);
+@@ -63,9 +65,13 @@
+   private:
+ 
+     void makeShell(const char* dev, char* argv[], const char* term);
++    int  openShell();
+ 
+   private:
+ 
++    char ptynam[11]; // "/dev/pty??";
++    char ttynam[11]; // "/dev/tty??";
++    pid_t processid;
+     int              fd;
+     struct termios   tp;
+     int		     login_shell;
+diff -ur konsole-latest/include/main.h konsole-xxx/include/main.h
+--- konsole-latest/include/main.h	Mon Dec 14 04:59:24 1998
++++ konsole-xxx/include/main.h	Mon Dec 14 14:05:27 1998
+@@ -32,7 +32,7 @@
+ 
+ public:
+ 
+-  TEDemo(const char* args[], int login_shell);
++  TEDemo(const char* args[], int login_shell, int sec);
+   ~TEDemo();
+   void setColLin(int columns, int lines);
+ 
+@@ -58,6 +58,8 @@
+   void setHeader();
+   void changeTitle(int,char*s);
+   void onDrop( KDNDDropZone* _zone );
++
++  void massacre();
+     
+ protected:
+ 
+@@ -67,6 +69,7 @@
+ private slots:
+ 
+   void setSchema(int n);
++  virtual bool queryExit();
+ 
+ private:
+ 
+diff -ur konsole-latest/other/CVS/Entries konsole-xxx/other/CVS/Entries
+--- konsole-latest/other/CVS/Entries	Sun Dec 20 12:36:51 1998
++++ konsole-xxx/other/CVS/Entries	Mon Dec 14 04:50:27 1998
+@@ -6,7 +6,6 @@
+ /GreenOnBlack.schema/1.1.1.1/Wed Oct 28 05:22:38 1998//
+ /LightPicture.schema/1.1/Sat Dec  5 22:42:41 1998//
+ /Linux.schema/1.1/Thu Nov  5 02:04:44 1998//
+-/Makefile.am/1.9/Mon Dec 14 03:45:47 1998//
+ /WhiteOnBlack.schema/1.1.1.1/Wed Oct 28 05:22:38 1998//
+ /XTerm.schema/1.1/Thu Nov  5 02:04:47 1998//
+ /brightness.xpm/1.1/Tue Nov 10 08:50:05 1998//
+@@ -15,15 +14,16 @@
+ /default.Schema/1.1.1.1/Wed Oct 28 05:22:38 1998//
+ /konsole-mini.xpm/1.2/Wed Nov 25 21:59:00 1998//
+ /konsole.xpm/1.2/Wed Nov 25 21:59:02 1998//
+-/linux.kdelnk/1.7/Thu Dec 17 13:22:48 1998//
+ /linux8x16.pcf.gz/1.1/Thu Oct 29 04:40:27 1998//
+ /linux8x8.pcf.gz/1.1/Thu Nov  5 06:21:45 1998//
+ /makefont.c/1.2/Thu Nov  5 06:21:45 1998//
+-/mc.kdelnk/1.5/Sun Dec 13 14:25:47 1998//
+ /patch-anyfont/1.1.1.1/Wed Oct 28 05:22:39 1998//
+-/shell.kdelnk/1.5/Sun Dec 13 14:25:48 1998//
+ /syscolor.schema/1.1/Thu Oct 29 16:49:19 1998//
+ /vga.pcf.gz/1.1.1.1/Wed Oct 28 05:22:39 1998//
+ /vim.schema/1.1/Fri Nov 27 18:10:47 1998//
+ /xterm.ti/1.1.1.1/Wed Oct 28 05:22:39 1998//
++/linux.kdelnk/1.6/Mon Dec 14 03:39:53 1998//
++/mc.kdelnk/1.5/Mon Dec 14 03:39:53 1998//
++/shell.kdelnk/1.5/Mon Dec 14 03:39:53 1998//
++/Makefile.am/1.9/Mon Dec 14 03:48:41 1998//
+ D
+Only in konsole-xxx/other: Makefile
+Only in konsole-xxx/other: Makefile.in
+diff -ur konsole-latest/other/linux.kdelnk konsole-xxx/other/linux.kdelnk
+--- konsole-latest/other/linux.kdelnk	Thu Dec 17 14:22:48 1998
++++ konsole-xxx/other/linux.kdelnk	Mon Dec 14 04:39:53 1998
+@@ -3,7 +3,6 @@
+ Type=KonsoleApplication
+ Name=Linux
+ Comment=Linux Console
+-Comment[cs]=Linuxová konzole
+ Comment[es]=Consola Linux
+ Comment[no]=Linux-konsoll
+ Comment[pt_BR]=Console do Linux
+Only in konsole-xxx/src: .deps
+diff -ur konsole-latest/src/CVS/Entries konsole-xxx/src/CVS/Entries
+--- konsole-latest/src/CVS/Entries	Sun Dec 20 12:37:14 1998
++++ konsole-xxx/src/CVS/Entries	Mon Dec 14 05:09:15 1998
+@@ -6,7 +6,7 @@
+ /TEmuVt102.C/1.7/Fri Dec  4 00:43:23 1998//
+ /TEmulation.C/1.3/Sat Nov 14 21:54:32 1998//
+ /kcmkonsole.C/1.15/Mon Nov 30 12:12:54 1998//
+-/main.C/1.32/Mon Dec 14 04:00:46 1998//
+ /schema.C/1.2/Fri Nov 27 18:10:49 1998//
+ /session.C/1.6/Mon Nov  9 08:55:46 1998//
++/main.C/1.32/Mon Dec 14 04:07:55 1998//
+ D
+Only in konsole-xxx/src: Makefile
+Only in konsole-xxx/src: Makefile.in
+Only in konsole-xxx/src: TEScreen.o
+diff -ur konsole-latest/src/TEShell.C konsole-xxx/src/TEShell.C
+--- konsole-latest/src/TEShell.C	Thu Nov 26 08:56:38 1998
++++ konsole-xxx/src/TEShell.C	Mon Dec 14 15:34:23 1998
+@@ -36,6 +36,7 @@
+ #include <fcntl.h>
+ #include <unistd.h>
+ #include <sys/ioctl.h>
++#include <sys/stat.h>
+ #include <grp.h>
+ #include "../../config.h"
+ 
+@@ -60,6 +61,93 @@
+ 
+ /* -------------------------------------------------------------------------- */
+ 
++// Following class has a single instance.
++// It forms a trivial client/server pair connected via pipes.
++// The server is responsible to claim and release the rights on the tty line.
++// It has been separated for security reasons, since this is the only part of
++// the program running root.
++
++class Helper
++{
++  int toserver[2]; // 0 reading, 1 writing.
++  int toclient[2]; // 0 reading, 1 writing.
++
++public:
++
++  Helper()
++  {
++    assert(!pipe(toserver));
++    assert(!pipe(toclient));
++    int pid = fork();
++    if (pid == 0)
++    {
++      // This part of the program stays root/suid.
++      while(1)
++      { char buffer[100]; char ttynam[] = "/dev/tty??";
++        // we assume to receive everything in on piece
++        int len = read(toserver[0],buffer,sizeof(buffer)-1);
++        buffer[len] = 0;
++        if (sscanf(buffer,"get /dev/tty%c%c\n",ttynam+8,ttynam+9) == 2)
++        {
++          chown(ttynam,getuid(),getgid()); chmod(ttynam,0600);
++        }
++        else
++        if (sscanf(buffer,"drop /dev/tty%c%c\n",ttynam+8,ttynam+9) == 2)
++        {
++          chown(ttynam,0,0); chmod(ttynam,0666);
++        }
++        else
++        if (!strcmp(buffer,"quit\n"))
++        {
++printf("quitting\n");
++          exit(1);
++        }
++        else
++          printf("konsole: Helper does not understand '%s'.\n",buffer);
++        write(toclient[1],"\n",1); // sync
++      }
++    }
++  }
++
++  ~Helper()
++  {
++  }
++
++  // client
++
++  void getTty(char* dev)
++  // called after finding a usable pty.
++  {
++    assert(strlen(dev) == 10);
++    char buffer[100];
++    sprintf(buffer,"get %s\n",dev);
++    write(toserver[1],buffer,strlen(buffer)+1);
++    read(toclient[0],buffer,1); // wait for sync
++  }
++  
++  void dropTty(char* dev)
++  // called when done.
++  {
++    assert(strlen(dev) == 10);
++    char buffer[100];
++    sprintf(buffer,"drop %s\n",dev);
++    write(toserver[1],buffer,strlen(buffer)+1);
++    read(toclient[0],buffer,1); // wait for sync
++  }
++  
++  void quit()
++  // called to terminate helper
++  { char buffer[100];
++    sprintf(buffer,"quit\n");
++    write(toserver[1],buffer,strlen(buffer)+1);
++    read(toclient[0],buffer,1); // wait for sync
++  }
++};
++
++static Helper helper;
++
++/* -------------------------------------------------------------------------- */
++
+ void Shell::setSize(int lines, int columns)
+ // Tell the teletype handler what size the window is.
+ // Called after a window size change.
+@@ -70,21 +158,21 @@
+   ioctl(fd,TIOCSWINSZ,(char *)&wsize);
+ }
+ 
+-static char ptynam[] = "/dev/ptyxx";
+-static char ttynam[] = "/dev/ttyxx";
+-
+ static QIntDict<Shell> shells;
++static int forgetit = 0;
+ 
+ static void catchChild(int)
+ // Catch a SIGCHLD signal and propagate that the child died.
+ { int status;
+   pid_t pid = wait(&status);
+   Shell* sh = shells.find(pid);
+-  if (sh) { shells.remove(pid); sh->doneShell(status); }
++  if (sh) { shells.remove(pid); sh->doneShell(forgetit?0:status); }
+ }
+ 
+ void Shell::doneShell(int status)
+ {
++  helper.dropTty(ttynam);
++printf("died %d\n",processid);
+   emit done(status);
+ }
+ 
+@@ -93,7 +181,7 @@
+   pid_t comm_pid = fork();
+   if (comm_pid <  0) { fprintf(stderr,"Can't fork\n"); return -1; }
+   if (comm_pid == 0) makeShell(ttynam,argv,term);
+-  if (comm_pid >  0) shells.insert(comm_pid,this);
++  if (comm_pid >  0) { shells.insert(comm_pid,this); processid = comm_pid; }
+   return 0;
+ }
+ 
+@@ -156,7 +244,7 @@
+   exit(1);                             // control should never come here.
+ }
+ 
+-int openShell()
++int Shell::openShell()
+ { int ptyfd; char *s3, *s4;
+   static char ptyc3[] = "pqrstuvwxyzabcde";
+   static char ptyc4[] = "0123456789abcdef";
+@@ -180,7 +268,7 @@
+   }
+   if (ptyfd < 0) { fprintf(stderr,"Can't open a pseudo teletype\n"); exit(1); }
+   fcntl(ptyfd,F_SETFL,O_NDELAY);
+-
++  helper.getTty(ttynam);
+   return ptyfd;
+ }
+ 
+@@ -189,6 +277,9 @@
+ {
+   login_shell=ls;
+ 
++  ptynam = "/dev/ptyxx";
++  ttynam = "/dev/ttyxx";
++
+   fd = openShell();
+ 
+   signal(SIGCHLD,catchChild);
+@@ -204,6 +295,24 @@
+   delete mn;
+   delete mw;
+   close(fd);
++}
++
++void Shell::killall()
++{
++  forgetit = 1;
++  QIntDictIterator<Shell> it( shells ); // iterator for dict
++  while ( it.current() )
++  {
++    it.current()->kill();
++    ++it;
++  }
++  helper.quit();
++}
++
++void Shell::kill()
++{
++printf("kill %d\n",processid);
++  ::kill(processid,SIGHUP);
+ }
+ 
+ void Shell::send_byte(char c)
+Only in konsole-xxx/src: TEShell.moc
+Only in konsole-xxx/src: TEShell.o
+Only in konsole-xxx/src: TEWidget.moc
+Only in konsole-xxx/src: TEWidget.o
+Only in konsole-xxx/src: TEmuVt102.moc
+Only in konsole-xxx/src: TEmuVt102.o
+Only in konsole-xxx/src: TEmulation.moc
+Only in konsole-xxx/src: TEmulation.o
+Only in konsole-xxx/src: kcmkonsole
+Only in konsole-xxx/src: kcmkonsole.moc
+Only in konsole-xxx/src: kcmkonsole.o
+Only in konsole-xxx/src: konsole
+Only in konsole-xxx/src: kwrite
+Only in konsole-xxx/src: libkonsole.a
+diff -ur konsole-latest/src/main.C konsole-xxx/src/main.C
+--- konsole-latest/src/main.C	Mon Dec 14 05:00:46 1998
++++ konsole-xxx/src/main.C	Mon Dec 14 15:08:03 1998
+@@ -72,7 +72,7 @@
+ static QIntDict<KSimpleConfig> no2command;
+ static int cmd_serial = 0;
+ 
+-TEDemo::TEDemo(const char* args[], int login_shell) : KTMainWindow()
++TEDemo::TEDemo(const char* args[], int login_shell, int sec) : KTMainWindow()
+ {
+   se = NULL;
+   title = PACKAGE;
+@@ -104,7 +104,7 @@
+ 
+   loadSessionCommands();
+   m_file->insertSeparator();
+-  m_file->insertItem( i18n("E&xit"), kapp, SLOT(quit()));
++  m_file->insertItem( i18n("E&xit"), this, SLOT(massacre()));
+ 
+   // load schema /////////////////////////////////////////////////////////////
+ 
+@@ -138,6 +138,16 @@
+   addSession(initial);
+ 
+   setColLin(lincol0.width(),lincol0.height());
++
++  if (sec)
++    KMsgBox::message
++    ( this,
++      i18n("Security Warning"), 
++      QString(i18n("Konsole is not properly installed root/suid.")) +
++      "\n" +
++      i18n("This means you terminal line(s) cannot be secured."),
++      KMsgBox::EXCLAMATION );
++
+ }
+ 
+ /*!
+@@ -560,7 +570,7 @@
+ void TEDemo::about()
+ //FIXME: make this a little nicer
+ {
+-  QString title, msg;
++  QString title = "", msg = "";
+ 
+   title.sprintf(i18n("About %s"), PACKAGE);
+   msg.sprintf(i18n(
+@@ -811,6 +821,8 @@
+ 
+ int main(int argc, char* argv[])
+ {
++  int sec = (geteuid() != 0);
++
+   setuid(getuid()); setgid(getgid()); // drop privileges
+ 
+   kimgioRegister(); // add io for additional image formats
+@@ -875,9 +887,9 @@
+              }
+   }
+   if (a.isRestored())
+-      RESTORE( TEDemo(eargs,login_shell) )
++      RESTORE( TEDemo(eargs,login_shell,sec) )
+   else {	
+-      TEDemo*  m = new TEDemo(eargs,login_shell);
++      TEDemo*  m = new TEDemo(eargs,login_shell,sec);
+       m->title = a.getCaption();
+       if (strcmp("",sz) !=0) m->setColLin(c,l);
+       if (welcome) m->setCaption(i18n("Welcome to the console"));
+@@ -886,6 +898,20 @@
+   }
+ 
+   return a.exec();
++}
++
++void TEDemo::massacre()
++{
++HERE;
++  Shell::killall();
++HERE;
++  QTimer::singleShot(1000,kapp,SLOT(quit())); // just in case some child refused to die
++}
++
++bool TEDemo::queryExit()
++{
++  massacre();
++  return 0;
+ }
+ 
+ #include "main.moc"
+Only in konsole-xxx/src: main.moc
+Only in konsole-xxx/src: main.o
+Only in konsole-xxx/src: schema.o
+Only in konsole-xxx/src: session.moc
+Only in konsole-xxx/src: session.o
