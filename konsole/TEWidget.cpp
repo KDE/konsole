@@ -914,16 +914,20 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     // Find left (left_not_right ? from here : from start)
     QPoint left = left_not_right ? here : iPntSelCorr;
     i = loc(left.x(),left.y());
-    selClass = charClass(image[i].c);
-    while ( ((left.x()>0) || (left.y()>0 && m_line_wrapped[left.y()-1])) && charClass(image[i-1].c) == selClass )
-    { i--; if (left.x()>0) left.rx()--; else {left.rx()=columns-1; left.ry()--;} }
+    if (i>=0 && i<=image_size) {
+      selClass = charClass(image[i].c);
+      while ( ((left.x()>0) || (left.y()>0 && m_line_wrapped[left.y()-1])) && charClass(image[i-1].c) == selClass )
+      { i--; if (left.x()>0) left.rx()--; else {left.rx()=columns-1; left.ry()--;} }
+    }
 
     // Find left (left_not_right ? from start : from here)
     QPoint right = left_not_right ? iPntSelCorr : here;
     i = loc(right.x(),right.y());
-    selClass = charClass(image[i].c);
-    while( ((right.x()<columns-1) || (right.y()<lines-1 && m_line_wrapped[right.y()])) && charClass(image[i+1].c) == selClass )
-    { i++; if (right.x()<columns-1) right.rx()++; else {right.rx()=0; right.ry()++; } }
+    if (i>=0 && i<=image_size) {
+      selClass = charClass(image[i].c);
+      while( ((right.x()<columns-1) || (right.y()<lines-1 && m_line_wrapped[right.y()])) && charClass(image[i+1].c) == selClass )
+      { i++; if (right.x()<columns-1) right.rx()++; else {right.rx()=0; right.ry()++; } }
+    }
 
     // Pick which is start (ohere) and which is extension (here)
     if ( left_not_right )
@@ -987,15 +991,17 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     if (right.x() > 0)
     {
       i = loc(right.x(),right.y());
-      selClass = charClass(image[i-1].c);
-      if (selClass == ' ')
-      {
-        while ( right.x() < columns-1 && charClass(image[i+1].c) == selClass && (right.y()<lines-1) && !m_line_wrapped[right.y()])
-        { i++; right.rx()++; }
-        if (right.x() < columns-1)
-          right = left_not_right ? iPntSelCorr : here;
-        else
-          right.rx()++;  // will be balanced later because of offset=-1;
+      if (i>=0 && i<=image_size) {
+        selClass = charClass(image[i-1].c);
+        if (selClass == ' ')
+        {
+          while ( right.x() < columns-1 && charClass(image[i+1].c) == selClass && (right.y()<lines-1) && !m_line_wrapped[right.y()])
+          { i++; right.rx()++; }
+          if (right.x() < columns-1)
+            right = left_not_right ? iPntSelCorr : here;
+          else
+            right.rx()++;  // will be balanced later because of offset=-1;
+        }
       }
     }
 
@@ -1485,6 +1491,7 @@ void TEWidget::makeImage()
 {
   calcGeometry();
   image = (ca*) malloc(lines*columns*sizeof(ca));
+  image_size = lines*columns;
   clearImage();
 }
 
