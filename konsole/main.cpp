@@ -54,7 +54,6 @@ static KCmdLineOptions options[] =
    { "schema <name>",   I18N_NOOP("Use given .schema file"), 0 },
    { "script",          I18N_NOOP("Enable extended DCOP functions"), 0 },
    { "workdir <dir>",   I18N_NOOP("Change working directory of the konsole to 'dir'"), 0 },
-   { "url <url>",       I18N_NOOP("Open 'URL' instead of shell"), 0 },
    { "!e <command>",    I18N_NOOP("Execute 'command' instead of shell"), 0 },
    // WABA: All options after -e are treated as arguments.
    { "+[args]",         I18N_NOOP("Arguments for 'command'"), 0 },
@@ -241,15 +240,6 @@ int main(int argc, char* argv[])
      }
   }
 
-  QString url;
-  if(args->isSet("url")) {
-      if (args->isSet("ls") || args->isSet("e"))
-          KCmdLineArgs::usage(i18n("You cannot use -url and -ls or -e.\n"));
-      url = QString::fromLatin1(args->getOption("url"));
-      if (title.isEmpty())
-          title = url;
-  }
-
   QCString sz = "";
   sz = args->getOption("vt_sz");
   histon = args->isSet("hist");
@@ -347,7 +337,7 @@ int main(int argc, char* argv[])
         sTerm = sessionconfig->readEntry("Term0");
         sIcon = sessionconfig->readEntry("Icon0","openterm");
         sCwd = sessionconfig->readEntry("Cwd0");
-        Konsole *m = new Konsole(wname,sPgm,eargs,histon,menubaron,toolbaron,frameon,scrollbaron,sIcon,sTitle,QString::null,0/*type*/,sTerm,true,sCwd);
+        Konsole *m = new Konsole(wname,sPgm,eargs,histon,menubaron,toolbaron,frameon,scrollbaron,sIcon,sTitle,0/*type*/,sTerm,true,sCwd);
         m->enableFullScripting(full_script);
 	m->restore(n);
         m->makeGUI();
@@ -407,7 +397,7 @@ int main(int argc, char* argv[])
   }
   else
   {
-    Konsole*  m = new Konsole(wname,(shell ? QFile::decodeName(shell) : QString::null),eargs,histon,menubaron,toolbaron,frameon,scrollbaron,QString::null,title,url,type,term);
+    Konsole*  m = new Konsole(wname,(shell ? QFile::decodeName(shell) : QString::null),eargs,histon,menubaron,toolbaron,frameon,scrollbaron,QString::null,title,type,term);
     m->enableFullScripting(full_script);
     //3.8 :-(
     //exit(0);

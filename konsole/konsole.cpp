@@ -171,7 +171,7 @@ const char * const fonts[] = {
 
 Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, int histon,
                  bool menubaron, bool toolbaron, bool frameon, bool scrollbaron, const QString &_icon,
-                 const QString &_title, const QString &_url, QCString type, const QString &_term, bool b_inRestore,
+                 const QString &_title, QCString type, const QString &_term, bool b_inRestore,
                  const QString &_cwd)
 :KMainWindow(0, name),
 DCOPObject( "konsole" )
@@ -314,10 +314,7 @@ DCOPObject( "konsole" )
   // activate and run first session //////////////////////////////////////////
   // FIXME: this slows it down if --type is given, but prevents a crash (malte)
   //KONSOLEDEBUG << "Konsole pgm: " << _program << endl;
-  if (_url.isEmpty())
-    newSession(co, _program, _args, _term, _icon, _title, _cwd);
-  else
-    newSession(_url, _title);
+  newSession(co, _program, _args, _term, _icon, _title, _cwd);
 
   //KONSOLEDEBUG<<"Konsole ctor() ends "<<time.elapsed()<<" msecs elapsed"<<endl;
 
