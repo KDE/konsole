@@ -249,6 +249,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 ,b_showstartuptip(true)
 ,b_sessionShortcutsEnabled(false)
 ,b_sessionShortcutsMapped(false)
+,b_matchTabWinTitle(false)
 ,m_histSize(DEFAULT_HISTORY_SIZE)
 ,m_separator_id(-1)
 ,m_newSessionButton(0)
@@ -1308,7 +1309,11 @@ void Konsole::slotTabSetViewOptions(int mode)
 
     QWidget *page = tabwidget->page(i);
     QIconSet icon = iconSetForSession(sessions.at(i));
-    QString title = sessions.at(i)->Title();
+    QString title;
+    if (b_matchTabWinTitle)
+      title = sessions.at(i)->fullTitle();
+    else
+      title = sessions.at(i)->Title();
 
     switch(mode) {
       case ShowIconAndText:
@@ -1494,6 +1499,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
        ses->setMonitorSilenceSeconds(monitorSilenceSeconds);
 
      b_xonXoff = config->readBoolEntry("XonXoff",false);
+     b_matchTabWinTitle = config->readBoolEntry("MatchTabWinTitle",false);
      config->setGroup("UTMP");
      b_addToUtmp = config->readBoolEntry("AddToUtmp",true);
      config->setDesktopGroup();
@@ -2023,6 +2029,8 @@ void Konsole::updateTitle()
   KRadioAction *ra = session2action.find(se);
   if (ra && (ra->icon() != icon))
     ra->setIcon(icon);
+  if (b_matchTabWinTitle && m_tabViewMode != ShowIconOnly)
+    tabwidget->changeTab( se->widget(), se->fullTitle() );
 }
 
 void Konsole::initSessionFont(QFont font) {

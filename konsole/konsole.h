@@ -406,6 +406,7 @@ private:
   bool        b_showstartuptip:1;
   bool        b_sessionShortcutsEnabled:1;
   bool        b_sessionShortcutsMapped:1;
+  bool        b_matchTabWinTitle:1;
 
   unsigned int m_histSize;
   int m_separator_id;
