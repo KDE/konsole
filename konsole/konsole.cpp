@@ -374,6 +374,7 @@ void Konsole::makeGUI()
    //KONSOLEDEBUG<<"Konsole::makeGUI()"<<endl;
    connect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
    connect(m_session,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
+   connect(m_rightSession,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
    m_menuCreated=true;
 
    // Remove the empty separator Qt inserts if the menu is empty on popup,
@@ -394,8 +395,8 @@ void Konsole::makeGUI()
    m_signals->insertItem( i18n( "&Interrupt Task" ) + " (INT)", SIGINT);
    m_signals->insertItem( i18n( "&Terminate Task" ) + " (TERM)", SIGTERM);
    m_signals->insertItem( i18n( "&Kill Task" )      + " (KILL)", SIGKILL);
-   m_signals->insertItem( i18n( "User signal &1")   + " (USR1)", SIGUSR1);
-   m_signals->insertItem( i18n( "User signal &2")   + " (USR2)", SIGUSR2);
+   m_signals->insertItem( i18n( "User Signal &1")   + " (USR1)", SIGUSR1);
+   m_signals->insertItem( i18n( "User Signal &2")   + " (USR2)", SIGUSR2);
    connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
 
    // Edit Menu ----------------------------------------------------------------
@@ -576,13 +577,15 @@ void Konsole::makeGUI()
    // Right mouse button menu
    showMenubar->plug ( m_rightButton );
    m_rightButton->insertSeparator();
+
    m_pasteClipboard->plug(m_rightButton);
    m_rightButton->insertItem(i18n("&Send Signal"), m_signals);
 
    m_rightButton->insertSeparator();
+   m_rightButton->insertItem( i18n("Sess&ion"), m_rightSession );
    m_detachSession->plug(m_rightButton);
    m_renameSession->plug(m_rightButton);
-   
+
    m_rightButton->insertSeparator();
    m_rightButton->insertItem(i18n("&Bookmarks"), m_bookmarks);
 
@@ -666,13 +669,11 @@ void Konsole::makeBasicGUI()
   m_view = new KPopupMenu(this);
   bookmarkHandler = new KonsoleBookmarkHandler( this, true );
   m_bookmarks = bookmarkHandler->menu();
-  m_options = new KPopupMenu(this);
+  m_options = new KPopupMenu(this,"attack");
   m_help =  helpMenu(0, false);
+
   m_rightButton = new KPopupMenu(this);
-  
   m_rightSession = new KPopupMenu( m_rightButton );
-  m_rightButton->insertItem( i18n("Sess&ion"), m_rightSession );
-  m_rightButton->insertSeparator();
 
   // Bookmarks that open new sessions.
   bookmarkHandlerSession = new KonsoleBookmarkHandler( this, false );

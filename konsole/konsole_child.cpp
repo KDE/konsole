@@ -90,8 +90,8 @@ KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar
   m_signals->insertItem( i18n( "&Interrupt Task" ) + " (INT)", SIGINT);
   m_signals->insertItem( i18n( "&Terminate Task" ) + " (TERM)", SIGTERM);
   m_signals->insertItem( i18n( "&Kill Task" )      + " (KILL)", SIGKILL);
-  m_signals->insertItem( i18n( "User signal &1")   + " (USR1)", SIGUSR1);
-  m_signals->insertItem( i18n( "User signal &2")   + " (USR2)", SIGUSR2);
+  m_signals->insertItem( i18n( "User Signal &1")   + " (USR1)", SIGUSR1);
+  m_signals->insertItem( i18n( "User Signal &2")   + " (USR2)", SIGUSR2);
   connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
 
   m_rightButton = new KPopupMenu(this);
