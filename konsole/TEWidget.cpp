@@ -815,7 +815,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       }
       else
       {
-        emit mouseSignal( 1, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
+        emit mouseSignal( 0, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
       }
     }
   }
@@ -932,6 +932,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     {
       here = right; ohere = left;
     }
+    ohere.rx()++;
   }
 
   if ( line_selection_mode )
@@ -961,6 +962,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     {
       here = below; ohere = above;
     }
+    ohere.rx()++;
   }
 
   int offset = 0;
@@ -998,17 +1000,13 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     // Pick which is start (ohere) and which is extension (here)
     if ( left_not_right )
     {
-      here = left; ohere = right;
+      here = left; ohere = right; offset = 0;
+
     }
     else
     {
-      here = right; ohere = left;
+      here = right; ohere = left; offset = -1;
     }
-
-    if (left_not_right)
-       offset = 0;
-    else 
-       offset = -1;
   }
 
   if ((here == pntSel) && (scroll == scrollbar->value())) return; // not moved
