@@ -6,9 +6,9 @@
 #include <kpopupmenu.h>
 #include <ktoolbar.h>
 
-NewSessionAction::NewSessionAction(const QObject *recvr, const char *slot): 
+NewSessionAction::NewSessionAction(const QObject *recvr, const char *slot, QObject *parent): 
 		KAction(i18n("&New"), "filenew",
-                KStdAccel::key(KStdAccel::New), recvr, slot, 0L,
+                KStdAccel::key(KStdAccel::New), recvr, slot, parent,
                 KStdAction::stdName(KStdAction::New))
 {
   m_popup = 0;

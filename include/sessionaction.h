@@ -8,7 +8,7 @@ class NewSessionAction : public KAction
   Q_OBJECT
 
 public:
-  NewSessionAction(const QObject *recvr = 0, const char *slot = 0);
+  NewSessionAction(const QObject *recvr = 0, const char *slot = 0, QObject *parent = 0);
 
   int plug( QWidget *w, int index = -1 );
 

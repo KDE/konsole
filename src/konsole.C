@@ -275,7 +275,7 @@ void Konsole::makeMenu()
   m_toolbarSessionsCommands = new KPopupMenu(this);
   connect(m_toolbarSessionsCommands, SIGNAL(activated(int)), SLOT(newSession(int)));
 
-  NewSessionAction *newsession = new NewSessionAction(this, SLOT(newSession()));
+  NewSessionAction *newsession = new NewSessionAction(this, SLOT(newSession()), this);
   newsession->setPopup(m_toolbarSessionsCommands);
   newsession->plug(toolBar());
   toolBar()->insertLineSeparator();
@@ -318,10 +318,10 @@ void Konsole::makeMenu()
   renameSession->plug(m_options);
   m_options->insertSeparator();
   // Menubar on/off
-  showMenubar = KStdAction::showMenubar(this, SLOT(slotToggleMenubar()));
+  showMenubar = KStdAction::showMenubar(this, SLOT(slotToggleMenubar()), this);
   showMenubar->plug(m_options);
   // Toolbar on/off
-  showToolbar = KStdAction::showToolbar(this, SLOT(slotToggleToolbar()));
+  showToolbar = KStdAction::showToolbar(this, SLOT(slotToggleToolbar()), this);
   showToolbar->plug(m_options);
   // Frame on/off
   showFrame = new KToggleAction(i18n("Show &Frame"), 0,
