@@ -14,7 +14,7 @@ class KonsoleBookmarkHandler : public QObject, public KBookmarkOwner
     Q_OBJECT
 
 public:
-    KonsoleBookmarkHandler( Konsole *konsole );
+    KonsoleBookmarkHandler( Konsole *konsole, bool toplevel );
 
     QPopupMenu * popupMenu();
 

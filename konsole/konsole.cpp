@@ -189,6 +189,7 @@ DCOPObject( "konsole" )
 ,m_edit(0)
 ,m_view(0)
 ,m_bookmarks(0)
+,m_bookmarksSession(0)
 ,m_options(0)
 ,m_schema(0)
 ,m_keytab(0)
@@ -214,6 +215,7 @@ DCOPObject( "konsole" )
 ,m_moveSessionLeft(0)
 ,m_moveSessionRight(0)
 ,bookmarkHandler(0)
+,bookmarkHandlerSession(0)
 ,m_finddialog(0)
 ,m_find_pattern("")
 ,cmd_serial(0)
@@ -364,6 +366,7 @@ void Konsole::makeGUI()
    disconnect(m_edit,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_view,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_bookmarks,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+   disconnect(m_bookmarksSession,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    //KONSOLEDEBUG<<"Konsole::makeGUI()"<<endl;
    connect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
    connect(m_session,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
@@ -482,9 +485,12 @@ void Konsole::makeGUI()
    //bookmarks menu
    connect( bookmarkHandler, SIGNAL( openURL( const QString& )),
             SLOT( enterURL( const QString& )));
+   connect( bookmarkHandlerSession, SIGNAL( openURL( const QString& )),
+            SLOT( newURLSession( const QString& )));
    connect(m_bookmarks, SIGNAL(aboutToShow()), SLOT(bookmarks_menu_check()));
+   connect(m_bookmarksSession, SIGNAL(aboutToShow()), SLOT(bookmarks_menu_check()));
    // call manually to disable accelerator c-b for add-bookmark initially.
-   bookmarks_menu_check(); 
+   bookmarks_menu_check();
 
    // Schema Options Menu -----------------------------------------------------
    m_schema = new KPopupMenu(this);
@@ -705,11 +711,19 @@ void Konsole::makeBasicGUI()
   m_session = new KPopupMenu(this);
   m_edit = new KPopupMenu(this);
   m_view = new KPopupMenu(this);
-  bookmarkHandler = new KonsoleBookmarkHandler( this );
+  bookmarkHandler = new KonsoleBookmarkHandler( this, true );
   m_bookmarks = bookmarkHandler->menu();
   m_options = new KPopupMenu(this);
   m_help =  helpMenu(0, FALSE);
   m_rightButton = new KPopupMenu(this);
+
+  // Bookmarks that open new sessions.
+  bookmarkHandlerSession = new KonsoleBookmarkHandler( this, false );
+  m_bookmarksSession = bookmarkHandlerSession->menu();
+  m_toolbarSessionsCommands->insertItem(SmallIconSet("keditbookmarks"),
+                                        i18n("Shell at Bookmark"),
+                                        m_bookmarksSession);
+  m_toolbarSessionsCommands->insertSeparator();
 
   // For those who would like to add shortcuts here, be aware that
   // ALT-key combinations are heavily used by many programs. Thus,
@@ -724,6 +738,7 @@ void Konsole::makeBasicGUI()
   connect(m_edit,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_view,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_bookmarks,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+  connect(m_bookmarksSession,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
 
   menubar->insertItem(i18n("Session") , m_session);
   menubar->insertItem(i18n("Edit"), m_edit);
@@ -1432,19 +1447,44 @@ KURL Konsole::baseURL() const
 
 void Konsole::enterURL(const QString& URL)
 {
+  QString path, login, host, newtext;
+  int i;
+
   if (se->isMasterMode()) {
     clearAllListenToKeyPress();
     se->setListenToKeyPress(true);
   }
   if (URL.startsWith("file:")) {
-    QString newtext=URL.mid(5);   
+    newtext=URL.mid(5);
     KRun::shellQuote(newtext);
     te->emitText("cd "+newtext+"\r");
   }
-  else if (URL.startsWith("ssh://")) {
-    QString newtext=URL.mid(6);   
-    se->setUserTitle(31,"");           // we don't know remote cwd
-    te->emitText("ssh "+newtext+"\r");
+  else if (URL.contains("://", true)) {
+    i = URL.find("://", 0);
+    newtext = URL.left(i);
+    path = URL.mid(i + 3);
+    /*
+     * Is it protocol://user@host, or protocol://host ?
+     */
+    if (path.contains("@", true)) {
+      i = path.find("@", 0);
+      login = path.left(i);
+      host = path.mid(i + 1);
+      if (!login.isEmpty()) {
+	newtext = newtext + " -l " + login;
+      }
+    } else {
+      host = path;
+    }
+
+    /*
+     * If we have a host, connect.
+     */
+    if (!host.isEmpty()) {
+      newtext = newtext + " " + host;
+      se->setUserTitle(31,"");           // we don't know remote cwd
+      te->emitText(newtext + "\r");
+    }
   }
   else
     te->emitText(URL);
@@ -1822,8 +1862,61 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
 
   addSession(s);
   runSession(s); // activate and run
-
   return sessionId;
+}
+
+/*
+ * Starts a new session based on URL.
+ */
+void Konsole::newURLSession(const QString& URL)
+{
+  QStrList args;
+  QString protocol, path, login, host;
+  int i;
+
+
+  if (URL.startsWith("file:")) {
+    KSimpleConfig *co = defaultSession();
+    path = URL.mid(5);
+    newSession(co, QString::null, QStrList(), QString::null, QString::null,
+               QString::null, path);
+    return;
+  }
+  else if (URL.contains("://", true)) {
+    i = URL.find("://", 0);
+    protocol = URL.left(i);
+    args.append( protocol.latin1() ); /* argv[0] == command to run. */
+    path = URL.mid(i + 3);
+    /*
+     * Is it protocol://user@host, or protocol://host ?
+     */
+    if (path.contains("@", true)) {
+      i = path.find("@", 0);
+      login = path.left(i);
+      host = path.mid(i + 1);
+      if (!login.isEmpty()) {
+        args.append("-l");
+	args.append(login.latin1());
+      }
+    } else {
+      host = path;
+    }
+
+    /*
+     * If we have a host, connect.
+     */
+    if (!host.isEmpty()) {
+      args.append(host.latin1());
+      newSession(NULL, protocol.latin1() /* protocol */, args /* arguments */,
+	         QString::null /*term*/, QString::null /*icon*/,
+	         path /*title*/, QString::null /*cwd*/);
+      return;
+    }
+  }
+  /*
+   * We can't create a session without a protocol.
+   * We should ideally popup a warning.
+   */
 }
 
 void Konsole::closeCurrentSession()
@@ -1833,7 +1926,7 @@ void Konsole::closeCurrentSession()
 
 void Konsole::doneChild(KonsoleChild* child, TESession* session)
 {
-  if (session) 
+  if (session)
     attachSession(session);
   detached.remove(child);
 }
@@ -2113,6 +2206,10 @@ void Konsole::loadSessionCommands()
   for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it )
     if (!(*it).endsWith("/shell.desktop"))
        addSessionCommand(*it);
+
+  m_session->insertSeparator();
+  m_session->insertItem(SmallIconSet("keditbookmarks"),
+                        i18n("New Shell at Bookmark"), m_bookmarksSession);
 }
 
 void Konsole::addScreenSession(const QString &socket)

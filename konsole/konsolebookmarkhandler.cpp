@@ -14,7 +14,7 @@
 #include "konsole.h"
 #include "konsolebookmarkhandler.h"
 
-KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole )
+KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel )
     : QObject( konsole, "KonsoleBookmarkHandler" ),
       KBookmarkOwner(),
       m_konsole( konsole ),
@@ -37,8 +37,14 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole )
     manager->setUpdate( true );
     manager->setShowNSBookmarks( false );
 
-    m_bookmarkMenu = new KBookmarkMenu( manager, this, m_menu,
-                                        konsole->actionCollection(), true );
+    if (toplevel) {
+        m_bookmarkMenu = new KBookmarkMenu( manager, this, m_menu,
+                                            konsole->actionCollection(), true );
+    } else {
+        m_bookmarkMenu = new KBookmarkMenu( manager, this, m_menu,
+                                            NULL, false /* Not toplevel */
+					    ,false      /* No 'Add Bookmark' */);
+    }
 }
 
 QString KonsoleBookmarkHandler::currentURL() const
@@ -52,7 +58,7 @@ void KonsoleBookmarkHandler::importOldBookmarks( const QString& path,
     KSaveFile file( destinationPath );
     if ( file.status() != 0 )
         return;
-    
+
     m_importStream = file.textStream();
     *m_importStream << "<!DOCTYPE xbel>\n<xbel>\n";
 

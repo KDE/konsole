@@ -167,6 +167,7 @@ private slots:
   void clearAllListenToKeyPress();
   void restoreAllListenToKeyPress();
   void enterURL( const QString& );
+  void newURLSession( const QString& );
 
   void slotFind();
   void slotFindDone();
@@ -236,6 +237,7 @@ private:
   KPopupMenu* m_edit;
   KPopupMenu* m_view;
   KPopupMenu* m_bookmarks;
+  KPopupMenu* m_bookmarksSession;
   KPopupMenu* m_options;
   KPopupMenu* m_schema;
   KPopupMenu* m_keytab;
@@ -269,6 +271,7 @@ private:
   KActionCollection *m_shortcuts;
 
   KonsoleBookmarkHandler *bookmarkHandler;
+  KonsoleBookmarkHandler *bookmarkHandlerSession;
 
   KonsoleFind* m_finddialog;
   bool         m_find_first;
