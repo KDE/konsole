@@ -53,11 +53,12 @@ static KCmdLineOptions options[] =
    { "vt_sz CCxLL",     I18N_NOOP("Terminal size in columns x lines"), 0 },
    { "noresize",        I18N_NOOP("Terminal size is fixed"), 0 },
    { "type <type>",     I18N_NOOP("Open the given session type instead of the default shell"), 0 },
-   { "types",           I18N_NOOP("List available session types."), 0 },
+   { "types",           I18N_NOOP("List available session types"), 0 },
    { "keytab <name>",   I18N_NOOP("Use given .keytab file"), 0 },
    { "profile <name>",  I18N_NOOP("Start with given sessions profile"), 0 },
-   { "profiles",        I18N_NOOP("List available profiles."), 0 },
+   { "profiles",        I18N_NOOP("List available profiles"), 0 },
    { "schema <name>",   I18N_NOOP("Use given .schema file"), 0 },
+   { "schemas",         I18N_NOOP("List available schemas"), 0 },
    { "script",          I18N_NOOP("Enable extended DCOP functions"), 0 },
    { "workdir <dir>",   I18N_NOOP("Change working directory of the konsole to 'dir'"), 0 },
    { "!e <command>",    I18N_NOOP("Execute 'command' instead of shell"), 0 },
@@ -283,6 +284,18 @@ extern "C" int kdemain(int argc, char* argv[])
        if (file.endsWith(".desktop"))
           file = file.left(file.length()-8);
        printf("%s\n", QFile::encodeName(file).data());
+    }
+    return 0;
+  }
+  if(args->isSet("schemas")) {
+    ColorSchemaList colors;
+    colors.checkSchemas();
+    for(int i = 0; i < (int) colors.count(); i++) 
+    {
+       ColorSchema *schema = colors.find(i);
+       QString relPath = schema->relPath();
+       if (!relPath.isEmpty())
+          printf("%s\n", QFile::encodeName(relPath).data());
     }
     return 0;
   }
