@@ -18,9 +18,11 @@
 
 
 #include <kmainwindow.h>
+#include <kdialogbase.h>
 #include <ksimpleconfig.h>
 #include <kaction.h>
 #include <kpopupmenu.h>
+
 #include <qstrlist.h>
 #include <qintdict.h>
 #include <qptrdict.h>
@@ -37,6 +39,7 @@
 #define VERSION "1.0.2"
 
 class KRootPixmap;
+class QCheckBox; 
 
 class Konsole : public KMainWindow
 {
@@ -208,7 +211,6 @@ public:
 };
 
 class QSpinBox;
-#include <kdialogbase.h>
 
 class HistoryTypeDialog : public KDialogBase 
 {
@@ -221,14 +223,14 @@ public:
 public slots:
 
   void slotHistEnable(bool);
+  void slotDefault();
 
   unsigned int nbLines() const;
-
-  bool isOn()         { return m_isOn; }
+  bool isOn() const;
 
 protected:
   QSpinBox*  m_size;
-  bool m_isOn;
+  QCheckBox* m_btnEnable;
 };
 
 

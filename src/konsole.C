@@ -163,6 +163,8 @@ const char *fonts[] = {
  };
 #define TOPFONT ((sizeof(fonts)/sizeof(char*))-1)
 
+#define DEFAULT_HISTORY_SIZE 1000
+
 #include <qdatetime.h>
 
 Konsole::Konsole(const char* name, const char* _pgm,
@@ -209,10 +211,9 @@ Konsole::Konsole(const char* name, const char* _pgm,
 ,skip_exit_query(false) // used to skip the query when closed by the session management
 ,b_warnQuit(false)
 ,alreadyNoticedBackgroundChange_(false)
-,m_histSize(1000)
+,m_histSize(DEFAULT_HISTORY_SIZE)
 ,b_histEnabled(true)
 {
-  const char * myPgm = pgm;
   //kdDebug() << "pgm = " << pgm << " at startup" << endl;
   //QTime time;
   //time.start();
@@ -817,7 +818,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    te->setColorTable(sch->table());
 
    // History
-   m_histSize = config->readNumEntry("history",1000);
+   m_histSize = config->readNumEntry("history",DEFAULT_HISTORY_SIZE);
    b_histEnabled = config->readBoolEntry("historyenabled",true);
    //KONSOLEDEBUG << "Hist size : " << m_histSize << endl;
 
@@ -1349,7 +1350,6 @@ void Konsole::newSession()
   if (session==0) session=1;
 
   newSession(session);
-  for (int i=1; i < 10000 ; i++) {}
   bIsBlankNewSession = false;
 }
 
@@ -1729,49 +1729,43 @@ HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
                                      QWidget *parent)
   : KDialogBase(Plain, i18n("History Configuration"),
                 Help | Default | Ok | Cancel, Ok,
-                parent),
-    m_size(0),
-    m_isOn(true)
+                parent)
 {
   QFrame *mainFrame = plainPage();
   
   QHBoxLayout *hb = new QHBoxLayout(mainFrame);
 
-  QCheckBox *btnEnable    = new QCheckBox(i18n("Enable"), mainFrame);
+  m_btnEnable    = new QCheckBox(i18n("Enable"), mainFrame);
 
-  QObject::connect(btnEnable, SIGNAL(toggled(bool)),
+  QObject::connect(m_btnEnable, SIGNAL(toggled(bool)),
                    this,      SLOT(slotHistEnable(bool)));
 
-  m_size = new QSpinBox(0, 10 * 1000 * 1000, 1, mainFrame);
+  m_size = new QSpinBox(0, 10 * 1000 * 1000, 100, mainFrame);
   m_size->setValue(histSize);
 
-  hb->addWidget(btnEnable);
+  hb->addWidget(m_btnEnable);
   hb->addWidget(new QLabel(i18n("Number of lines : "), mainFrame));
   hb->addWidget(m_size);
 
   if ( ! histType.isOn()) {
-
-    KONSOLEDEBUG << "HistoryTypeDialog() : hist type off \n";
-
-    btnEnable->setChecked(false);
+    m_btnEnable->setChecked(false);
     slotHistEnable(false);
-
   } else {
-
-    KONSOLEDEBUG << "HistoryTypeDialog() : hist type true : " << histType.getSize() << endl;
-
-    btnEnable->setChecked(true);
+    m_btnEnable->setChecked(true);
     m_size->setValue(histType.getSize());
     slotHistEnable(true);
   }
-  
+}
+
+void HistoryTypeDialog::slotDefault()
+{
+  m_btnEnable->setChecked(true);
+  m_size->setValue(DEFAULT_HISTORY_SIZE);
+  slotHistEnable(true);
 }
 
 void HistoryTypeDialog::slotHistEnable(bool b)
 {
-  KONSOLEDEBUG << "Konsole::slotHistEnable(" << b << ")\n";
-
-  m_isOn = b;
   m_size->setEnabled(b);
   if (b) m_size->setFocus();
 }
@@ -1779,6 +1773,11 @@ void HistoryTypeDialog::slotHistEnable(bool b)
 unsigned int HistoryTypeDialog::nbLines() const
 {
   return m_size->value();
+}
+
+bool HistoryTypeDialog::isOn() const
+{
+  return m_btnEnable->isChecked();
 }
 
 
