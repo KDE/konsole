@@ -23,3 +23,15 @@ if test "$ac_use_openpty" = "yes"; then
 else
 	AC_MSG_RESULT(no)
 fi
+
+dnl Set preprocessor variable of how to get cwd from a process
+AC_MSG_CHECKING(how cwd can be be found by seperate process)
+case "$host" in 
+  *-*-linux*) cwd_method='proc' ;;
+	*) cwd_method='no' ;;
+esac
+AC_MSG_RESULT($cwd_method)
+
+case "$cwd_method" in
+	proc) AC_DEFINE(HAVE_PROC_CWD, 1, [Defines whether /proc/`pid`/cwd exists]) ;;
+esac

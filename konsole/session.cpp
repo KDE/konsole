@@ -317,6 +317,16 @@ QString TESession::getPgm()
   return pgm;
 }
 
+QString TESession::getCwd()
+{
+#ifdef HAVE_PROC_CWD
+	QFileInfo Cwd(QString("/proc/%1/cwd").arg(sh->pid()));
+	if(Cwd.isSymLink())
+		cwd = Cwd.readLink();
+#endif /* HAVE_PROC_CWD */
+  return cwd;
+}
+
 bool TESession::isMonitorActivity() { return monitorActivity; }
 bool TESession::isMonitorSilence() { return monitorSilence; }
 bool TESession::isMasterMode() { return masterMode; }

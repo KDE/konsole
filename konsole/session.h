@@ -54,7 +54,7 @@ public:
   QString keymap();
   QStrList getArgs();
   QString getPgm();
-  QString getCwd() { return cwd; }
+  QString getCwd();
   QString getInitial_cwd() { return initial_cwd; }
 
   void setHistory(const HistoryType&);
