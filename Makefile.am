@@ -19,9 +19,6 @@ install-data-local: uninstall.desktop
 konsolehere_DATA = konsolehere.desktop
 konsoleheredir = $(kde_datadir)/konqueror/servicemenus
 
-rc_DATA = kwritedrc
-rcdir = $(kde_confdir)
-
 misc_DATA = eventsrc tips
 miscdir = $(kde_datadir)/konsole
 
