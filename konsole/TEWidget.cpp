@@ -53,6 +53,7 @@
 #include <qfile.h>
 #include <qdragobject.h>
 #include <qlayout.h>
+#include <qregexp.h>
 
 #include <math.h>
 #include <stdio.h>
