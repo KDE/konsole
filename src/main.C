@@ -38,8 +38,7 @@ static KCmdLineOptions options[] =
    { "name <name>",  I18N_NOOP("Set Window Class"), 0 },
    { "ls",    I18N_NOOP("Start login shell"), 0 },
    { "nowelcome",       I18N_NOOP("Suppress greeting"), 0 },
-   { "T", 0, 0 },
-   { "title <title>",           I18N_NOOP("Set the window title"), 0 },
+   { "T <title>",       I18N_NOOP("Set the window title"), 0 },
    { "xwin",            I18N_NOOP("ignored"), 0 },
    { "nohist",          I18N_NOOP("Do not save lines in scroll-back buffer"), 0 },
    { "notoolbar",       I18N_NOOP("Do not display toolbar"), 0 },
@@ -194,7 +193,7 @@ int main(int argc, char* argv[])
 
   QString title;
   if(args->isSet("T")) {
-    title = QFile::decodeName(args->getOption("title"));
+    title = QFile::decodeName(args->getOption("T"));
 
   }
   login_shell = args->isSet("ls");
