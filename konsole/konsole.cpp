@@ -174,8 +174,8 @@ const char *fonts[] = {
 
 #include <qdatetime.h>
 
-Konsole::Konsole(const char* name, const QString& _program,
-                 QStrList & _args, int histon, bool toolbaron,
+Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, int histon,
+                 bool menubaron, bool toolbaron, bool frameon, bool scrollbaron,
                  const QString &_title, QCString type, const QString &_term, bool b_inRestore)
 :KMainWindow(0, name)
 ,m_defaultSession(0)
@@ -283,8 +283,19 @@ Konsole::Konsole(const char* name, const QString& _program,
   readProperties(config, schema);
   //KONSOLEDEBUG<<"Konsole ctor() after readProps "<<time.elapsed()<<" msecs elapsed"<<endl;
   //KONSOLEDEBUG<<"Konsole ctor(): toolbar"<<endl;
+
+  if (!menubaron)
+    menubar->hide();
   if (!toolbaron)
     toolBar()->hide();
+  if (!frameon) {
+    b_framevis=false;
+    te->setFrameStyle( QFrame::NoFrame );
+  }
+  if (!scrollbaron) {
+    n_scroll = TEWidget::SCRNONE;
+    te->setScrollbarLocation(TEWidget::SCRNONE);
+  }
 
   // activate and run first session //////////////////////////////////////////
   // FIXME: this slows it down if --type is given, but prevents a crash (malte)

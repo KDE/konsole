@@ -37,12 +37,14 @@ static KCmdLineOptions options[] =
 {
    { "name <name>",  I18N_NOOP("Set Window Class"), 0 },
    { "ls",    I18N_NOOP("Start login shell"), 0 },
-   { "nowelcome",       I18N_NOOP("Suppress greeting"), 0 },
    { "T <title>",       I18N_NOOP("Set the window title"), 0 },
    { "tn <terminal>",   I18N_NOOP("Specify terminal type as set in the TERM\nenvironment variable"), "xterm" },
    { "xwin",            I18N_NOOP("ignored"), 0 },
    { "nohist",          I18N_NOOP("Do not save lines in scroll-back buffer"), 0 },
+   { "nomenubar",       I18N_NOOP("Do not display menubar"), 0 },
    { "notoolbar",       I18N_NOOP("Do not display toolbar"), 0 },
+   { "noframe",         I18N_NOOP("Do not display frame"), 0 },
+   { "noscrollbar",     I18N_NOOP("Do not display scrollbar"), 0 },
    { "noxft",           I18N_NOOP("Do not use XFT (Anti-Aliasing)"), 0 },
    { "vt_sz CCxLL",  I18N_NOOP("Terminal size in columns x lines"), 0 },
    { "type <type>", I18N_NOOP("Open the given session type instead of the default shell"), 0 },
@@ -115,9 +117,11 @@ int main(int argc, char* argv[])
   setgid(getgid()); setuid(getuid()); // drop privileges
 
   // deal with shell/command ////////////////////////////
-  bool welcome = true;
   bool histon = true;
+  bool menubaron = true;
   bool toolbaron = true;
+  bool frameon = true;
+  bool scrollbaron = true;
   const char* wname = PACKAGE;
 
 
@@ -230,9 +234,11 @@ int main(int argc, char* argv[])
   QCString sz = "";
   sz = args->getOption("vt_sz");
   histon = args->isSet("hist");
+  menubaron = args->isSet("menubar");
   toolbaron = args->isSet("toolbar");
+  frameon = args->isSet("frame");
+  scrollbaron = args->isSet("scrollbar");
   wname = args->getOption("name");
-  welcome = args->isSet("welcome");
 
   QCString type = "";
 
@@ -301,7 +307,7 @@ int main(int argc, char* argv[])
         sessionconfig->readListEntry("Args0", eargs);
         sTitle = sessionconfig->readEntry("Title0", title);
         sTerm = sessionconfig->readEntry("Term0");
-        Konsole *m = new Konsole(wname,sPgm,eargs,histon,toolbaron,sTitle,0/*type*/,sTerm,true);
+        Konsole *m = new Konsole(wname,sPgm,eargs,histon,menubaron,toolbaron,frameon,scrollbaron,sTitle,0/*type*/,sTerm,true);
         m->restore(n);
         m->makeGUI();
         m->initSessionSchema(sessionconfig->readNumEntry("Schema0"));
@@ -340,16 +346,11 @@ int main(int argc, char* argv[])
   else
   {
     //2.1 sec
-    Konsole*  m = new Konsole(wname,(shell ? QFile::decodeName(shell) : QString::null),eargs,histon,toolbaron,title,type,term);
+    Konsole*  m = new Konsole(wname,(shell ? QFile::decodeName(shell) : QString::null),eargs,histon,menubaron,toolbaron,frameon,scrollbaron,title,type,term);
     //2.5 sec
     ksm->konsole = m;
     m->setColLin(c,l); // will use default height and width if called with (0,0)
 
-    if (welcome && false) // ME: disable the greeting, it mixes up the taskbar
-    {
-      m->setCaption(i18n("Welcome to the console"));
-      QTimer::singleShot(5000,m,SLOT(updateTitle()));
-    }
     //2.5 sec
     m->initFullScreen();
     m->show();
