@@ -2250,7 +2250,8 @@ void Konsole::clearSessionHistory(TESession & session)
 void Konsole::buildSessionMenus()
 {
    m_session->clear();
-   m_toolbarSessionsCommands->clear();
+   if (m_toolbarSessionsCommands)
+      m_toolbarSessionsCommands->clear();
 
    no2command.clear();
    no2tempFile.clear();
