@@ -39,6 +39,7 @@ static KCmdLineOptions options[] =
    { "ls",    I18N_NOOP("Start login shell"), 0 },
    { "nowelcome",       I18N_NOOP("Suppress greeting"), 0 },
    { "T <title>",       I18N_NOOP("Set the window title"), 0 },
+   { "tn <terminal>",   I18N_NOOP("Specify terminal type as set in the TERM\nenvironment variable"), "xterm" },
    { "xwin",            I18N_NOOP("ignored"), 0 },
    { "nohist",          I18N_NOOP("Do not save lines in scroll-back buffer"), 0 },
    { "notoolbar",       I18N_NOOP("Do not display toolbar"), 0 },
@@ -196,6 +197,7 @@ int main(int argc, char* argv[])
     title = QFile::decodeName(args->getOption("T"));
 
   }
+  QString term = QString::fromLatin1(args->getOption("tn"));
   login_shell = args->isSet("ls");
  
   QStrList eargs;
@@ -335,7 +337,7 @@ int main(int argc, char* argv[])
   else
   {
     //2.1 sec
-    Konsole*  m = new Konsole(wname,(shell ? QFile::decodeName(shell) : QString::null),eargs,histon,toolbaron,title,type);
+    Konsole*  m = new Konsole(wname,(shell ? QFile::decodeName(shell) : QString::null),eargs,histon,toolbaron,title,type,term);
     //2.5 sec
     ksm->konsole = m;
     m->setColLin(c,l); // will use default height and width if called with (0,0)
