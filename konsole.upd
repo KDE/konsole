@@ -7,3 +7,7 @@ Key=schema
 Key=defaultfont
 Key=MenuBar
 Key=scrollbar
+Id=kde3.0/r1
+File=konsolerc
+Options=overwrite
+Script=schemaStrip.pl,perl

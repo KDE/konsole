@@ -5,7 +5,7 @@ datadir = $(kde_appsdir)/System
 
 kde_services_DATA = konsolepart.desktop
 
-update_DATA = konsole.upd
+update_DATA = konsole.upd schemaStrip.pl
 updatedir = $(kde_datadir)/kconf_update
 
 autostart_DATA = kwrited.desktop
