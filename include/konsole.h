@@ -168,7 +168,6 @@ private:
 
   int cmd_serial;
   int cmd_first_screen;
-  int session_no;
   int         n_keytab;
   int         n_oldkeytab;
   int         n_font;

@@ -198,7 +198,6 @@ Konsole::Konsole(const char* name, const QString& _program,
 ,warnQuit(0)
 ,cmd_serial(0)
 ,cmd_first_screen(-1)
-,session_no(0)
 ,n_keytab(0)
 ,n_oldkeytab(0)
 ,n_render(0)
@@ -1186,14 +1185,34 @@ void Konsole::runSession(TESession* s)
 
 void Konsole::addSession(TESession* s)
 {
-  session_no += 1;
+  QString newTitle = s->Title();
 
-  QString title = i18n("%1 No %2").arg(s->Title()).arg(session_no);
+  bool nameOk;
+  int count = 1;
+  do {
+     nameOk = true;
+     for (TESession *se = sessions.first(); se; se = sessions.next())
+     {
+        if (newTitle == se->Title())
+        {
+           nameOk = false;
+           break;
+        }
+     }
+     if (!nameOk)
+     {
+       count++;
+       newTitle = i18n("%1 No %2").arg(s->Title()).arg(count);
+     }
+  }
+  while (!nameOk);
+
+  s->setTitle(newTitle);
 
   // create an action for the session
   //  char buffer[30];
   //  int acc = CTRL+SHIFT+Key_0+session_no; // Lars: keys stolen by kwin.
-  KRadioAction *ra = new KRadioAction(title,
+  KRadioAction *ra = new KRadioAction(newTitle,
                                      "openterm",
                                       0,
                                       this,
@@ -1615,7 +1634,7 @@ void Konsole::setSchema(ColorSchema* s)
 void Konsole::slotRenameSession() {
 //  KONSOLEDEBUG << "slotRenameSession\n";
   KRadioAction *ra = session2action.find(se);
-  QString name = ra->text();
+  QString name = se->Title();
   KLineEditDlg dlg(i18n("Session name"),name, this);
   if (dlg.exec()) {
     se->setTitle(dlg.text());
