@@ -2,7 +2,6 @@
 Exec=kcmkonsole
 Icon=konsole
 Type=Application
-DocPath=konsole/index.html
 
 X-KDE-ControlModuleType=User
 X-KDE-HideFromPanel=true
