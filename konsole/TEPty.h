@@ -67,11 +67,17 @@ Q_OBJECT
         \param len - the length of the block
     */
     void block_in(const char* s, int len);
+    
+    /*!
+        emitted when buffer_full becomes false
+    */
+    void buffer_empty();
 
   public:
 
     void send_byte(char s);
     void send_string(const char* s);
+    bool buffer_full() { return m_bufferFull; }
 
   protected slots:
       void dataReceived(KProcess *, char *buf, int len);
@@ -98,7 +104,7 @@ Q_OBJECT
       int length;
     };
     QValueList<SendJob> pendingSendJobs;
-
+    bool m_bufferFull;
 };
 
 #endif

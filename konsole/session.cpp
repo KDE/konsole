@@ -457,6 +457,7 @@ void TESession::startZModem(const QString &zmodem, const QString &dir, const QSt
 
   disconnect( sh,SIGNAL(block_in(const char*,int)), this, SLOT(onRcvBlock(const char*,int)) );
   connect( sh,SIGNAL(block_in(const char*,int)), this, SLOT(zmodemRcvBlock(const char*,int)) );
+  connect( sh,SIGNAL(buffer_empty()), this, SLOT(zmodemContinue()));
 
   zmodemProgress = new ZModemDialog(te->topLevelWidget(), false,
                                     i18n("ZModem Progress"));
@@ -470,6 +471,18 @@ void TESession::startZModem(const QString &zmodem, const QString &dir, const QSt
 void TESession::zmodemSendBlock(KProcess *, char *data, int len)
 {
   sh->send_bytes(data, len);
+//  qWarning("<-- %d bytes", len);
+  if (sh->buffer_full())
+  {
+    zmodemProc->suspend();
+//    qWarning("ZModem suspend");
+  }
+}
+
+void TESession::zmodemContinue()
+{
+  zmodemProc->resume();
+//  qWarning("ZModem resume");
 }
 
 void TESession::zmodemStatus(KProcess *, char *data, int len)
@@ -504,6 +517,7 @@ void TESession::zmodemRcvBlock(const char *data, int len)
   QByteArray ba;
   ba.duplicate(data, len);
   zmodemProc->writeStdin(ba);
+//  qWarning("--> %d bytes", len);
 }
 
 void TESession::zmodemDone()
@@ -515,6 +529,7 @@ void TESession::zmodemDone()
     zmodemBusy = false;
 
     disconnect( sh,SIGNAL(block_in(const char*,int)), this ,SLOT(zmodemRcvBlock(const char*,int)) );
+    disconnect( sh,SIGNAL(buffer_empty()), this, SLOT(zmodemContinue()));
     connect( sh,SIGNAL(block_in(const char*,int)), this, SLOT(onRcvBlock(const char*,int)) );
 
     sh->send_bytes("\030\030\030\030", 4); // Abort

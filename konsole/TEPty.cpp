@@ -133,6 +133,7 @@ void TEPty::setWriteable(bool writeable)
 */
 TEPty::TEPty()
 {
+  m_bufferFull = false;
   connect(this, SIGNAL(receivedStdout(KProcess *, char *, int )),
 	  this, SLOT(dataReceived(KProcess *,char *, int)));
   connect(this, SIGNAL(processExited(KProcess *)),
@@ -162,7 +163,14 @@ void TEPty::send_string(const char* s)
 
 void TEPty::doSendJobs() {
   if(pendingSendJobs.isEmpty())
+  {
+     if (m_bufferFull)
+     {
+        m_bufferFull = false;
+        emit buffer_empty();
+     }
      return;
+  }
   
   SendJob& job = pendingSendJobs.first();
   if (!writeStdin(job.buffer.data(), job.length))
@@ -185,6 +193,7 @@ void TEPty::send_bytes(const char* s, int len)
   if (!sent)
   {
     appendSendJob(s,len);
+    m_bufferFull = true;
   }
 }
 

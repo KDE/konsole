@@ -111,6 +111,7 @@ public slots:
   void zmodemSendBlock(KProcess *, char *data, int len);
   void zmodemRcvBlock(const char *data, int len);
   void zmodemDone();
+  void zmodemContinue();
 
 signals:
 
