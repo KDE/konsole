@@ -381,7 +381,7 @@ Konsole::~Konsole()
 }
 
 void Konsole::run() {
-   kWinModule = new KWinModule();
+   kWinModule = new KWinModule(0, KWinModule::INFO_DESKTOP);
    connect( kWinModule,SIGNAL(currentDesktopChanged(int)), this,SLOT(currentDesktopChanged(int)) );
 }
 
