@@ -400,7 +400,7 @@ void Konsole::makeGUI()
 
    // Fullscreen
    m_options->insertSeparator();
-   m_options->insertItem( SmallIconSet( "window_fullscreen" ), i18n("F&ull Screen"), 5);
+   m_options->insertItem( SmallIconSet( "window_fullscreen" ), i18n("F&ull-Screen"), 5);
    m_options->setItemChecked(5,b_fullscreen);
    m_options->insertSeparator();
 
