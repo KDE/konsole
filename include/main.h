@@ -91,7 +91,7 @@ private:
   KStatusBar* statusbar;
   KDNDDropZone  *dropZone;
 
-  QPopupMenu* m_commands;
+  QPopupMenu* m_file;
   QPopupMenu* m_sessions;
   QPopupMenu* m_options;
   QPopupMenu* m_scrollbar;

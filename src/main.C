@@ -103,6 +103,8 @@ TEDemo::TEDemo(const char* args[], int login_shell) : KTMainWindow()
   // load session commands ///////////////////////////////////////////////////
 
   loadSessionCommands();
+  m_file->insertSeparator();
+  m_file->insertItem( i18n("E&xit"), kapp, SLOT(quit()));
 
   // load schema /////////////////////////////////////////////////////////////
 
@@ -219,7 +221,7 @@ void TEDemo::configureRequest(TEWidget* te, int state, int x, int y)
 {
 //printf("TEDemo::configureRequest(_,%d,%d)\n",x,y);
   ( (state & ShiftButton  ) ? m_sessions :
-    (state & ControlButton) ? m_commands :
+    (state & ControlButton) ? m_file :
                               m_options  )
   ->popup(te->mapToGlobal(QPoint(x,y)));
 }
@@ -244,16 +246,15 @@ void TEDemo::makeMenu()
 {
   // options (taken from kvt) //////////////////////////////////////
 
-  m_commands = new QPopupMenu;
-  connect(m_commands, SIGNAL(activated(int)), SLOT(newSession(int)));
+//m_commands = new QPopupMenu;
+//connect(m_commands, SIGNAL(activated(int)), SLOT(newSession(int)));
 
   m_sessions = new QPopupMenu;
   m_sessions->setCheckable(TRUE);
   connect(m_sessions, SIGNAL(activated(int)), SLOT(activateSession(int)));
 
-  QPopupMenu* m_file = new QPopupMenu;
-  m_file->insertSeparator();
-  m_file->insertItem( i18n("E&xit"), kapp, SLOT(quit()));
+  m_file = new QPopupMenu;
+  connect(m_file, SIGNAL(activated(int)), SLOT(newSession(int)));
 
   m_font = new QPopupMenu;
   m_font->setCheckable(TRUE);
@@ -331,7 +332,7 @@ void TEDemo::makeMenu()
 
   menubar->insertItem(i18n("File") , m_file);
 
-  menubar->insertItem(i18n("New"), m_commands);
+//menubar->insertItem(i18n("New"), m_commands);
   menubar->insertItem(i18n("Sessions"), m_sessions);
 
   menubar->insertItem(i18n("Options"), m_options);
@@ -527,12 +528,14 @@ void TEDemo::size_menu_activated(int item)
 void TEDemo::notifySize(int lines, int columns)
 {
 // printf("notifySize(%d,%d)\n",lines,columns);
+/*
   if (lines != lincol.height() || columns != lincol.width())
   { char buf[100];
     sprintf(buf,i18n("(%d columns x %d lines)"),columns,lines);
     setCaption(buf);
     QTimer::singleShot(2000,this,SLOT(setHeader()));
   }
+*/
   lincol = QSize(columns,lines);
   m_size->setItemChecked(0,columns==40&&lines==15);
   m_size->setItemChecked(1,columns==80&&lines==24);
@@ -732,7 +735,7 @@ void TEDemo::addSessionCommand(const char* path)
   {
     delete co; return; // ignore
   }
-  m_commands->insertItem(txt, ++cmd_serial);
+  m_file->insertItem(txt, ++cmd_serial);
   no2command.insert(cmd_serial,co);
 }
 
