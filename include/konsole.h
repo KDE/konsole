@@ -34,7 +34,7 @@
 #undef PACKAGE
 #undef VERSION
 #define PACKAGE "konsole"
-#define VERSION "1.0.1"
+#define VERSION "1.0.2"
 
 class KRootPixmap;
 
