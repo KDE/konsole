@@ -2867,7 +2867,7 @@ KonsoleFind::KonsoleFind( QWidget *parent, const char *name, bool /*modal*/ )
   m_asRegExp = new QCheckBox( i18n("As &regular expression"), row, "asRegexp" );
 
   if (!KTrader::self()->query("KRegExpEditor/KRegExpEditor").isEmpty()) {
-    m_editRegExp = new QPushButton( i18n("&Edit"), row, "editRegExp" );
+    m_editRegExp = new QPushButton( i18n("&Edit..."), row, "editRegExp" );
     connect( m_asRegExp, SIGNAL( toggled(bool) ), m_editRegExp, SLOT( setEnabled(bool) ) );
     connect( m_editRegExp, SIGNAL( clicked() ), this, SLOT( slotEditRegExp() ) );
     m_editRegExp->setEnabled( false );
