@@ -69,8 +69,4 @@ messages: rc.cpp
 mimedir = $(kde_mimedir)/application
 mime_DATA = x-konsole.desktop
 
-# default toolbar configuration
-konsole_datadir = $(kde_confdir)
-konsole_data_DATA =konsolerc
-
-EXTRA_DIST = $(mime_DATA) $(konsole_data_DATA)
+EXTRA_DIST = $(mime_DATA)

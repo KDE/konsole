@@ -42,7 +42,7 @@
 #undef PACKAGE
 #undef VERSION
 #define PACKAGE "konsole"
-#define VERSION "1.2 post"
+#define VERSION "1.3 Beta"
 
 class KRootPixmap;
 class QLabel;
@@ -53,6 +53,7 @@ class KAction;
 class KToggleAction;
 class KSelectAction;
 class KRadioAction;
+class KTabWidget;
 
 // Defined in main.C
 const char *konsole_shell(QStrList &args);
@@ -65,8 +66,9 @@ class Konsole : public KMainWindow, virtual public KonsoleIface
 public:
 
   Konsole(const char * name, const QString &_program, QStrList & _args, int histon,
-    bool menubaron, bool toolbaron, bool frameon, bool scrollbaron, const QString &icon, const QString &_title,
-    QCString type = 0, const QString &_term=QString::null, bool b_inRestore = false, const QString &workdir=QString::null);
+    bool menubaron, bool tabbaron, bool frameon, bool scrollbaron, const QString &icon, const QString &_title,
+    QCString type = 0, const QString &_term=QString::null, bool b_inRestore = false, const int wanted_tabbar = 0,
+    const QString &workdir=QString::null);
   ~Konsole();
   void setColLin(int columns, int lines);
   void setFullScreen(bool on);
@@ -106,8 +108,11 @@ public:
 
   void callReadPropertiesInternal(KConfig *config, int number) { readPropertiesInternal(config,number); }
 
+  enum TabPosition { TabNone, TabTop, TabBottom };
+
 public slots:
   void activateSession(int position);
+  void activateSession(QWidget*);
 
   void makeGUI();
   QString newSession();
@@ -133,14 +138,14 @@ private slots:
   void slotCouldNotClose();
   void slotToggleFullscreen();
   void schema_menu_activated(int item);
-  void pixmap_menu_activated(int item);
+  void pixmap_menu_activated(int item, TEWidget* tewidget=0);
   void keytab_menu_activated(int item);
   void schema_menu_check();
   void attachSession(TESession*);
   void detachSession();
   void bookmarks_menu_check();
   void newSession(int kind);
-  void newSessionToolbar(int kind);
+  void newSessionTabbar(int kind);
   void updateSchemaMenu();
   void updateKeytabMenu();
   void updateRMBMenu();
@@ -155,14 +160,13 @@ private slots:
   void moveSessionLeft();
   void moveSessionRight();
   void allowPrevNext();
-  void setSchema(int n);
+  void setSchema(int n, TEWidget* tewidget=0);   // no slot necessary?
   void sendSignal(int n);
   void slotClearTerminal();
   void slotResetClearTerminal();
-  void slotToggleToolbar();
+  void slotSelectTabbar();
   void slotToggleMenubar();
   void slotRenameSession();
-  void slotRenameSession(int);
   void slotRenameSession(TESession* ses, const QString &name);
   void slotToggleMonitor();
   void slotToggleMasterMode();
@@ -197,6 +201,11 @@ private slots:
   void fontNotFound();
   void showTip();
 
+  void slotSetSelectionEnd() { te->setSelectionEnd(); }
+  void slotCopyClipboard() { te->copyClipboard(); }
+  void slotPasteClipboard() { te->pasteClipboard(); }
+  void slotPasteSelection() { te->pasteSelection(); }
+
   void listSessions();
   void switchToSession1() { activateSession(0); }
   void switchToSession2() { activateSession(1); }
@@ -226,13 +235,14 @@ private:
   QString newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(), const QString &_term = QString::null, const QString &_icon = QString::null, const QString &_title = QString::null, const QString &_cwd = QString::null);
   void readProperties(KConfig *config, const QString &schema, bool globalConfigOnly);
   void applySettingsToGUI();
+  void makeTabWidget();
   void makeBasicGUI();
   void runSession(TESession* s);
   void addSession(TESession* s);
   void setColorPixmaps();
   void updateFullScreen();
 
-  void setSchema(ColorSchema* s);
+  void setSchema(ColorSchema* s, TEWidget* tewidget=0);
   void setFont(int fontno=-1);
 
   void buildSessionMenus();
@@ -241,9 +251,14 @@ private:
   void addScreenSession(const QString & path, const QString & socket);
   void resetScreenSessions();
 
+  void initTEWidget(TEWidget* new_te, TEWidget* default_te);
+  void switchToTabWidget();
+  void switchToFlat();
+
+  QPtrList<TEWidget> activeTEs();
+
   QPtrDict<TESession> action2session;
   QPtrDict<KRadioAction> session2action;
-  QPtrDict<KToolBarButton> session2button;
   QPtrList<TESession> sessions;
   QPtrList<KonsoleChild> detached;
   QIntDict<KSimpleConfig> no2command;
@@ -252,13 +267,14 @@ private:
   KSimpleConfig* m_defaultSession;
   QString m_defaultSessionFilename;
 
-  TEWidget*      te;
+  KTabWidget* tabwidget; // if null then there is only one TEWidget in system
+  TEWidget*      te;     // the visible TEWidget, either sole one or one of many
   TESession*     se;
   TESession*     se_previous;
   TESession*     m_initialSession;
   ColorSchemaList* colors;
 
-  KRootPixmap*   rootxpm;
+  QPtrDict<KRootPixmap> rootxpms;
   KWinModule*    kWinModule;
 
   KMenuBar*   menubar;
@@ -272,7 +288,7 @@ private:
   KPopupMenu* m_options;
   KPopupMenu* m_schema;
   KPopupMenu* m_keytab;
-  KPopupMenu* m_toolbarSessionsCommands;
+  KPopupMenu* m_tabbarSessionsCommands;
   KPopupMenu* m_signals;
   KPopupMenu* m_help;
   KPopupMenu* m_rightButton;
@@ -281,14 +297,13 @@ private:
   KToggleAction *monitorActivity;
   KToggleAction *monitorSilence;
   KToggleAction *masterMode;
-  KToggleAction *showToolbar;
   KToggleAction *showMenubar;
-  KToggleAction *showScrollbar;
   KToggleAction *m_fullscreen;
 
   KSelectAction *selectSize;
   KSelectAction *selectFont;
   KSelectAction *selectScrollbar;
+  KSelectAction *selectTabbar;
   KSelectAction *selectBell;
 
   KAction       *m_clearHistory;
@@ -329,6 +344,7 @@ private:
   int         n_font;
   int         n_defaultFont; // font as set in config to use as default for new sessions
   int         n_scroll;
+  int         n_tabbar;
   int         n_bell;
   int         n_render;
   int         curr_schema; // current schema no

@@ -74,13 +74,13 @@ Time to start a requirement list.
 
 #include <config.h>
 
-#include <ktoolbarbutton.h>
-
 #include <qspinbox.h>
 #include <qcheckbox.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
 #include <qhbox.h>
+#include <qtoolbutton.h>
+#include <qtooltip.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -120,7 +120,7 @@ Time to start a requirement list.
 #include <kstringhandler.h>
 #include <ktip.h>
 #include <kprocctrl.h>
-
+#include <ktabwidget.h>
 #include <kregexpeditorinterface.h>
 #include <kparts/componentfactory.h>
 
@@ -177,19 +177,19 @@ static const char * const fonts[] = {
 #define DEFAULT_HISTORY_SIZE 1000
 
 Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, int histon,
-                 bool menubaron, bool toolbaron, bool frameon, bool scrollbaron, const QString &_icon,
+                 bool menubaron, bool tabbaron, bool frameon, bool scrollbaron, const QString &_icon,
                  const QString &_title, QCString type, const QString &_term, bool b_inRestore,
-                 const QString &_cwd)
+                 const int wanted_tabbar, const QString &_cwd)
 :DCOPObject( "konsole" )
 ,KMainWindow(0, name)
 ,m_defaultSession(0)
 ,m_defaultSessionFilename("")
+,tabwidget(0)
 ,te(0)
 ,se(0)
 ,se_previous(0)
 ,m_initialSession(0)
 ,colors(0)
-,rootxpm(0)
 ,kWinModule(0)
 ,menubar(0)
 ,statusbar(0)
@@ -201,7 +201,7 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 ,m_options(0)
 ,m_schema(0)
 ,m_keytab(0)
-,m_toolbarSessionsCommands(0)
+,m_tabbarSessionsCommands(0)
 ,m_signals(0)
 ,m_help(0)
 ,m_rightButton(0)
@@ -209,13 +209,12 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 ,monitorActivity(0)
 ,monitorSilence(0)
 ,masterMode(0)
-,showToolbar(0)
 ,showMenubar(0)
-,showScrollbar(0)
 ,m_fullscreen(0)
 ,selectSize(0)
 ,selectFont(0)
 ,selectScrollbar(0)
+,selectTabbar(0)
 ,selectBell(0)
 ,m_clearHistory(0)
 ,m_findHistory(0)
@@ -258,34 +257,13 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
   no2filename.setAutoDelete(true);
   menubar = menuBar();
 
-  // create terminal emulation framework ////////////////////////////////////
-
-  te = new TEWidget(this);
-  connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
-           this, SLOT(configureRequest(TEWidget*,int,int,int)) );
-
-  //KONSOLEDEBUG<<"Konsole ctor() after new TEWidget() "<<time.elapsed()<<" msecs elapsed"<<endl;
-  te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
-  // we need focus so that the auto-hide cursor feature works (Carsten)
-  // but a part shouldn't force that it receives the focus, so we do it here (David)
-  te->setFocus();
-
-  // create applications /////////////////////////////////////////////////////
-
-  setCentralWidget(te);
-
-  toolBar()->setText(i18n("Session Toolbar"));
-
-  b_histEnabled=histon;
-  makeBasicGUI();
-  //KONSOLEDEBUG<<"Konsole ctor() after makeBasicGUI "<<time.elapsed()<<" msecs elapsed"<<endl;
-
   colors = new ColorSchemaList();
   colors->checkSchemas();
 
   KeyTrans::loadAll();
   //KONSOLEDEBUG<<"Konsole ctor() after KeyTrans::loadAll() "<<time.elapsed()<<" msecs elapsed"<<endl;
 
+  // create applications /////////////////////////////////////////////////////
   // read and apply default values ///////////////////////////////////////////
   resize(321, 321); // Dummy.
   QSize currentSize = size();
@@ -306,12 +284,45 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
   //KONSOLEDEBUG << "my Looking for schema " << schema << endl;
   readProperties(config, schema, false);
   //KONSOLEDEBUG<<"Konsole ctor() after readProps "<<time.elapsed()<<" msecs elapsed"<<endl;
-  te->setBidiEnabled(b_bidiEnabled);
+
+  makeBasicGUI();
+  //KONSOLEDEBUG<<"Konsole ctor() after makeBasicGUI "<<time.elapsed()<<" msecs elapsed"<<endl;
+
+  if (isRestored)
+    n_tabbar = wanted_tabbar;
+
+  if (!tabbaron)
+    n_tabbar = TabNone;
+
+  if (n_tabbar!=TabNone) {
+    makeTabWidget();
+    setCentralWidget(tabwidget);
+    if (n_tabbar==TabTop)
+      tabwidget->setTabPosition(QTabWidget::Top);
+    else
+      tabwidget->setTabPosition(QTabWidget::Bottom);
+  }
+  else {
+    // create terminal emulation framework ////////////////////////////////////
+    te = new TEWidget(this);
+    connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
+             this, SLOT(configureRequest(TEWidget*,int,int,int)) );
+
+    //KONSOLEDEBUG<<"Konsole ctor() after new TEWidget() "<<time.elapsed()<<" msecs elapsed"<<endl;
+    te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
+    // we need focus so that the auto-hide cursor feature works (Carsten)
+    // but a part shouldn't force that it receives the focus, so we do it here (David)
+    te->setFocus();
+
+    readProperties(config, schema, false);
+    n_tabbar = TabNone;
+    setCentralWidget(te);
+  }
+
+  b_histEnabled=histon;
 
   if (!menubaron)
     menubar->hide();
-  if (!toolbaron)
-    toolBar()->hide();
   if (!frameon) {
     b_framevis=false;
     te->setFrameStyle( QFrame::NoFrame );
@@ -446,8 +457,8 @@ void Konsole::makeGUI()
 {
    if (m_menuCreated) return;
    //not longer needed
-   if (m_toolbarSessionsCommands)
-      disconnect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+   if (m_tabbarSessionsCommands)
+      disconnect(m_tabbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_session,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    if (m_options)
       disconnect(m_options,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
@@ -462,8 +473,8 @@ void Konsole::makeGUI()
    if (m_bookmarksSession)
       disconnect(m_bookmarksSession,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    //KONSOLEDEBUG<<"Konsole::makeGUI()"<<endl;
-   if (m_toolbarSessionsCommands)
-      connect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
+   if (m_tabbarSessionsCommands)
+      connect(m_tabbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
    connect(m_session,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
    m_menuCreated=true;
 
@@ -573,8 +584,13 @@ void Konsole::makeGUI()
       // Menubar on/off
       showMenubar->plug ( m_options );
 
-      // Toolbar on/off
-      showToolbar->plug(m_options);
+      // Tabbar
+      selectTabbar = new KSelectAction(i18n("&Tabbar"), 0, this,
+                                       SLOT(slotSelectTabbar()), actions, "tabbar" );
+      QStringList tabbaritems;
+      tabbaritems << i18n("&Hide") << i18n("&Top") << i18n("&Bottom");
+      selectTabbar->setItems(tabbaritems);
+      selectTabbar->plug(m_options);
 
       // Scrollbar
       selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), 0, this,
@@ -688,8 +704,8 @@ void Konsole::makeGUI()
    {
       updateRMBMenu(); // show menubar / exit fullscreen
 
-      KAction* selectionEnd = new KAction(i18n("Set Selection End"), 0, te,
-                               SLOT(setSelectionEnd()), actions, "selection_end");
+      KAction* selectionEnd = new KAction(i18n("Set Selection End"), 0, this,
+                               SLOT(slotSetSelectionEnd()), actions, "selection_end");
       selectionEnd->plug(m_rightButton);
 
       m_copyClipboard->plug(m_rightButton);
@@ -698,8 +714,8 @@ void Konsole::makeGUI()
          m_rightButton->insertItem(i18n("&Send Signal"), m_signals);
 
       m_rightButton->insertSeparator();
-      if (m_toolbarSessionsCommands)
-         m_rightButton->insertItem( i18n("New Sess&ion"), m_toolbarSessionsCommands );
+      if (m_tabbarSessionsCommands)
+         m_rightButton->insertItem( i18n("New Sess&ion"), m_tabbarSessionsCommands );
       m_detachSession->plug(m_rightButton);
       m_renameSession->plug(m_rightButton);
 
@@ -778,20 +794,32 @@ void Konsole::makeGUI()
    m_shortcuts->readShortcutSettings();
 }
 
+void Konsole::makeTabWidget()
+{
+  tabwidget = new KTabWidget(this);
+  connect(tabwidget, SIGNAL(mouseDoubleClick(QWidget*)), SLOT(slotRenameSession()));
+  connect(tabwidget, SIGNAL(currentChanged(QWidget*)), SLOT(activateSession(QWidget*)));
+  if (kapp->authorize("shell_access")) {
+    QToolButton* newsession = new QToolButton( tabwidget );
+//    newsession->setTextLabel("New");
+//    newsession->setTextPosition(QToolButton::Right);
+//    newsession->setUsesTextLabel(true);
+    QToolTip::add(newsession,i18n("Click for new standard session\nClick and hold for session menu"));
+    newsession->setIconSet( SmallIcon( "tab_new" ) );
+    newsession->adjustSize();
+    newsession->setPopup( m_tabbarSessionsCommands );
+    connect(newsession, SIGNAL(clicked()), SLOT(newSession()));
+    tabwidget->setCornerWidget( newsession, BottomLeft );
+  }
+}
+
 void Konsole::makeBasicGUI()
 {
   //KONSOLEDEBUG<<"Konsole::makeBasicGUI()"<<endl;
-  if (kapp->authorize("shell_access"))
-  {
-     KToolBarPopupAction *newsession = new KToolBarPopupAction(i18n("&New"), "filenew",
-                0 , this, SLOT(newSession()),this, KStdAction::stdName(KStdAction::New));
-    newsession->plug(toolBar());
-    toolBar()->insertLineSeparator();
-    m_toolbarSessionsCommands = newsession->popupMenu();
-    connect(m_toolbarSessionsCommands, SIGNAL(activated(int)), SLOT(newSessionToolbar(int)));
+  if (kapp->authorize("shell_access")) {
+    m_tabbarSessionsCommands = new KPopupMenu( this );
+    connect(m_tabbarSessionsCommands, SIGNAL(activated(int)), SLOT(newSessionTabbar(int)));
   }
-
-  toolBar()->setFullSize( true );
 
   m_session = new KPopupMenu(this);
   m_edit = new KPopupMenu(this);
@@ -825,8 +853,8 @@ void Konsole::makeBasicGUI()
   // activating shortcuts here means deactivating them in the other
   // programs.
 
-  if (m_toolbarSessionsCommands)
-     connect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+  if (m_tabbarSessionsCommands)
+     connect(m_tabbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_session,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   if (m_options)
      connect(m_options,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
@@ -853,12 +881,12 @@ void Konsole::makeBasicGUI()
 
   m_shortcuts = new KActionCollection(this);
 
-  m_copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0, te,
-                                 SLOT(copyClipboard()), m_shortcuts, "edit_copy");
-  m_pasteClipboard = new KAction(i18n("&Paste"), "editpaste", Qt::SHIFT+Qt::Key_Insert, te,
-                                 SLOT(pasteClipboard()), m_shortcuts, "edit_paste");
-  m_pasteSelection = new KAction(i18n("Paste Selection"), Qt::CTRL+Qt::SHIFT+Qt::Key_Insert, te,
-                                 SLOT(pasteSelection()), m_shortcuts, "pasteselection");
+  m_copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0, this,
+                                 SLOT(slotCopyClipboard()), m_shortcuts, "edit_copy");
+  m_pasteClipboard = new KAction(i18n("&Paste"), "editpaste", Qt::SHIFT+Qt::Key_Insert, this,
+                                 SLOT(slotPasteClipboard()), m_shortcuts, "edit_paste");
+  m_pasteSelection = new KAction(i18n("Paste Selection"), Qt::CTRL+Qt::SHIFT+Qt::Key_Insert, this,
+                                 SLOT(slotPasteSelection()), m_shortcuts, "pasteselection");
 
   m_clearTerminal = new KAction(i18n("C&lear Terminal"), 0, this,
                                 SLOT(slotClearTerminal()), m_shortcuts, "clear_terminal");
@@ -904,8 +932,6 @@ void Konsole::makeBasicGUI()
 
   showMenubar = new KToggleAction ( i18n( "Show &Menubar" ), "showmenu", 0, this,
                                     SLOT( slotToggleMenubar() ), m_shortcuts, "show_menubar" );
-  showToolbar = new KToggleAction ( i18n( "Show &Toolbar" ), 0, this,
-                                    SLOT( slotToggleToolbar() ), m_shortcuts, "show_toolbar" );
   m_fullscreen = KStdAction::fullScreen(this, SLOT(slotToggleFullscreen()), m_shortcuts );
   m_fullscreen->setChecked(b_fullscreen);
 
@@ -1138,6 +1164,7 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("defaultfont", defaultFont);
   config->writeEntry("schema",s_kconfigSchema);
   config->writeEntry("scrollbar",n_scroll);
+  config->writeEntry("tabbar",n_tabbar);
   config->writeEntry("bellmode",n_bell);
   config->writeEntry("keytab",KeyTrans::find(n_defaultKeytab)->id());
   config->writeEntry("ActiveSession", active);
@@ -1178,51 +1205,50 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
    {
      b_warnQuit=config->readBoolEntry( "WarnQuit", true );
      b_allowResize=config->readBoolEntry( "AllowResize", false);
-
+     b_bidiEnabled = config->readBoolEntry("EnableBidi",false);
      s_word_seps= config->readEntry("wordseps",":@-./_~");
-     te->setWordCharacters(s_word_seps);
-
-     te->setTerminalSizeHint( config->readBoolEntry("TerminalSizeHint",false) );
-
      b_framevis = config->readBoolEntry("has frame",true);
-     te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
-
-     te->setBlinkingCursor(config->readBoolEntry("BlinkingCursor",false));
-     te->setCtrlDrag(config->readBoolEntry("CtrlDrag",true));
-     te->setCutToBeginningOfLine(config->readBoolEntry("CutToBeginningOfLine",false));
-     te->setLineSpacing( config->readUnsignedNumEntry( "LineSpacing", 0 ) );
+     QPtrList<TEWidget> tes = activeTEs();
+     for (TEWidget *_te = tes.first(); _te; _te = tes.next()) {
+       _te->setWordCharacters(s_word_seps);
+       _te->setTerminalSizeHint( config->readBoolEntry("TerminalSizeHint",false) );
+       _te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
+       _te->setBlinkingCursor(config->readBoolEntry("BlinkingCursor",false));
+       _te->setCtrlDrag(config->readBoolEntry("CtrlDrag",true));
+       _te->setCutToBeginningOfLine(config->readBoolEntry("CutToBeginningOfLine",false));
+       _te->setLineSpacing( config->readUnsignedNumEntry( "LineSpacing", 0 ) );
+       _te->setBidiEnabled(b_bidiEnabled);
+     }
 
      monitorSilenceSeconds=config->readUnsignedNumEntry("SilenceSeconds", 10);
      for (TESession *ses = sessions.first(); ses; ses = sessions.next())
        ses->setMonitorSilenceSeconds(monitorSilenceSeconds);
 
      b_xonXoff = config->readBoolEntry("XonXoff",false);
-     b_bidiEnabled = config->readBoolEntry("EnableBidi",false);
      config->setGroup("UTMP");
      b_addToUtmp = config->readBoolEntry("AddToUtmp",true);
      config->setDesktopGroup();
    }
 
-   ColorSchema* sch = 0;
    if (!globalConfigOnly)
    {
       n_defaultKeytab=KeyTrans::find(config->readEntry("keytab","default"))->numb(); // act. the keytab for this session
       b_fullscreen = config->readBoolEntry("Fullscreen",false);
       n_defaultFont = n_font = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
       n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
+      n_tabbar   = QMIN(config->readUnsignedNumEntry("tabbar",TabBottom),2);
       n_bell = QMIN(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),2);
-
       // Options that should be applied to all sessions /////////////
+
       // (1) set menu items and Konsole members
       QFont tmpFont("fixed");
       tmpFont.setFixedPitch(true);
       tmpFont.setStyleHint(QFont::TypeWriter);
       defaultFont = config->readFontEntry("defaultfont", &tmpFont);
-      setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT));
 
       //set the schema
       s_kconfigSchema=config->readEntry("schema");
-      sch = colors->find(schema.isEmpty() ? s_kconfigSchema : schema);
+      ColorSchema* sch = colors->find(schema.isEmpty() ? s_kconfigSchema : schema);
       if (!sch)
       {
          kdWarning() << "Could not find schema named " <<s_kconfigSchema<< endl;
@@ -1232,31 +1258,34 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       s_schema = sch->relPath();
       curr_schema = sch->numb();
       pmPath = sch->imagePath();
-      te->setColorTable(sch->table()); //FIXME: set twice here to work around a bug
 
-      if (sch->useTransparency())
-      {
-         //KONSOLEDEBUG << "Setting up transparency" << endl;
-         if (!rootxpm)
-           rootxpm = new KRootPixmap(te);
-         rootxpm->setFadeEffect(sch->tr_x(), QColor(sch->tr_r(), sch->tr_g(), sch->tr_b()));
-         rootxpm->start();
-         rootxpm->repaint(true);
-      }
-      else
-      {
-         //KONSOLEDEBUG << "Stopping transparency" << endl;
-         if (rootxpm) {
-           rootxpm->stop();
-           delete rootxpm;
-           rootxpm=0;
-         }
-         pixmap_menu_activated(sch->alignment());
-      }
+      if (te) {
+        if (sch->useTransparency())
+        {
+           //KONSOLEDEBUG << "Setting up transparency" << endl;
+           if (!rootxpms[te])
+             rootxpms.insert( te, new KRootPixmap(te) );
+           rootxpms[te]->setFadeEffect(sch->tr_x(), QColor(sch->tr_r(), sch->tr_g(), sch->tr_b()));
+           rootxpms[te]->start();
+           rootxpms[te]->repaint(true);
+        }
+        else
+        {
+           //KONSOLEDEBUG << "Stopping transparency" << endl
+           if (rootxpms[te]) {
+             rootxpms[te]->stop();
+             delete rootxpms[te];
+             rootxpms.remove(te);
+           }
+           pixmap_menu_activated(sch->alignment());
+        }
 
-      te->setColorTable(sch->table());
-      te->setScrollbarLocation(n_scroll);
-      te->setBellMode(n_bell);
+        setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT));
+        te->setColorTable(sch->table()); //FIXME: set twice here to work around a bug
+        te->setColorTable(sch->table());
+        te->setScrollbarLocation(n_scroll);
+        te->setBellMode(n_bell);
+      }
 
       // History
       m_histSize = config->readNumEntry("history",DEFAULT_HISTORY_SIZE);
@@ -1278,7 +1307,7 @@ void Konsole::applySettingsToGUI()
    {
       setFont();
       notifySize(te->Lines(),te->Columns());
-      showToolbar->setChecked(!toolBar()->isHidden());
+      selectTabbar->setCurrentItem(n_tabbar);
       showMenubar->setChecked(!menuBar()->isHidden());
       selectScrollbar->setCurrentItem(n_scroll);
       selectBell->setCurrentItem(n_bell);
@@ -1307,14 +1336,16 @@ void Konsole::bookmarks_menu_check()
   addBookmark->setEnabled( state );
 }
 
-void Konsole::pixmap_menu_activated(int item)
+void Konsole::pixmap_menu_activated(int item, TEWidget* tewidget)
 {
+  if (!tewidget)
+    tewidget=te;
   if (item <= 1) pmPath = "";
   QPixmap pm(pmPath);
   if (pm.isNull()) {
     pmPath = "";
     item = 1;
-    te->setBackgroundColor(te->getDefaultBackColor());
+    tewidget->setBackgroundColor(tewidget->getDefaultBackColor());
     return;
   }
   // FIXME: respect scrollbar (instead of te->size)
@@ -1323,27 +1354,27 @@ void Konsole::pixmap_menu_activated(int item)
   {
     case 1: // none
     case 2: // tile
-            te->setBackgroundPixmap(pm);
+            tewidget->setBackgroundPixmap(pm);
     break;
     case 3: // center
             { QPixmap bgPixmap;
-              bgPixmap.resize(te->size());
-              bgPixmap.fill(te->getDefaultBackColor());
-              bitBlt( &bgPixmap, ( te->size().width() - pm.width() ) / 2,
-                                ( te->size().height() - pm.height() ) / 2,
+              bgPixmap.resize(tewidget->size());
+              bgPixmap.fill(tewidget->getDefaultBackColor());
+              bitBlt( &bgPixmap, ( tewidget->size().width() - pm.width() ) / 2,
+                                ( tewidget->size().height() - pm.height() ) / 2,
                       &pm, 0, 0,
                       pm.width(), pm.height() );
 
-              te->setBackgroundPixmap(bgPixmap);
+              tewidget->setBackgroundPixmap(bgPixmap);
             }
     break;
     case 4: // full
             {
-              float sx = (float)te->size().width() / pm.width();
-              float sy = (float)te->size().height() / pm.height();
+              float sx = (float)tewidget->size().width() / pm.width();
+              float sy = (float)tewidget->size().height() / pm.height();
               QWMatrix matrix;
               matrix.scale( sx, sy );
-              te->setBackgroundPixmap(pm.xForm( matrix ));
+              tewidget->setBackgroundPixmap(pm.xForm( matrix ));
             }
     break;
     default: // oops
@@ -1359,7 +1390,10 @@ void Konsole::slotSelectBell() {
 void Konsole::slotSelectScrollbar() {
    if (m_menuCreated)
       n_scroll = selectScrollbar->currentItem();
-   te->setScrollbarLocation(n_scroll);
+
+   QPtrList<TEWidget> tes = activeTEs();
+   for (TEWidget *_te = tes.first(); _te; _te = tes.next())
+     _te->setScrollbarLocation(n_scroll);
    activateSession(); // maybe helps in bg
 }
 
@@ -1527,14 +1561,98 @@ void Konsole::slotToggleMenubar() {
   updateRMBMenu();
 }
 
+void Konsole::initTEWidget(TEWidget* new_te, TEWidget* default_te)
+{
+  new_te->setWordCharacters(default_te->wordCharacters());
+  new_te->setTerminalSizeHint(default_te->isTerminalSizeHint());
+  new_te->setTerminalSizeStartup(false);
+  new_te->setFrameStyle(b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame);
+  new_te->setBlinkingCursor(default_te->blinkingCursor());
+  new_te->setCtrlDrag(default_te->ctrlDrag());
+  new_te->setCutToBeginningOfLine(default_te->cutToBeginningOfLine());
+  new_te->setLineSpacing(default_te->lineSpacing());
+  new_te->setBidiEnabled(b_bidiEnabled);
+
+  new_te->setVTFont(default_te->font());
+  new_te->setScrollbarLocation(n_scroll);
+  new_te->setBellMode(default_te->bellMode());
+
+  new_te->setMinimumSize(150,70);
+}
+
+void Konsole::switchToTabWidget()
+{
+  TEWidget* se_widget = se->widget();
+  makeTabWidget();
+
+  sessions.first();
+  while(sessions.current()) {
+    TEWidget* new_te=new TEWidget(tabwidget);
+
+    connect( new_te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
+             this, SLOT(configureRequest(TEWidget*,int,int,int)) );
+    initTEWidget(new_te, se_widget);
+    setSchema(sessions.current()->schemaNo(),new_te);
+
+    tabwidget->insertTab(new_te,SmallIconSet(sessions.current()->IconName()),sessions.current()->Title());
+    new_te->calcGeometry();
+    sessions.current()->changeWidget(new_te);
+
+    sessions.next();
+  }
+
+//  delete se_widget;
+  setCentralWidget(tabwidget);
+  tabwidget->show();
+}
+
+void Konsole::switchToFlat()
+{
+  TEWidget* se_widget = se->widget();
+
+  te=new TEWidget(this);
+
+  connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
+           this, SLOT(configureRequest(TEWidget*,int,int,int)) );
+
+  initTEWidget(te, se_widget);
+  te->setFocus();
+
+  setSchema(se->schemaNo());
+
+  setCentralWidget(te);
+  te->show();
+
+  te->calcGeometry();
+
+  sessions.first();
+  while(sessions.current())
+  {
+    sessions.current()->changeWidget(te);
+    sessions.next();
+  }
+  delete tabwidget;
+  tabwidget = 0L;
+}
+
 /**
-    Toggle the Toolbar visibility
+    Toggle the Tabbar visibility
  */
-void Konsole::slotToggleToolbar() {
-  if (showToolbar->isChecked())
-     toolBar()->show();
-  else
-     toolBar()->hide();
+void Konsole::slotSelectTabbar() {
+   if (m_menuCreated)
+      n_tabbar = selectTabbar->currentItem();
+
+  if (n_tabbar!=TabNone) {
+    if (!tabwidget)
+      switchToTabWidget();
+    if (n_tabbar==TabTop)
+      tabwidget->setTabPosition(QTabWidget::Top);
+    else
+      tabwidget->setTabPosition(QTabWidget::Bottom);
+  }
+  else if (tabwidget)
+    switchToFlat();
+
   if (b_fixedSize)
   {
      adjustSize();
@@ -1575,7 +1693,18 @@ void Konsole::reparseConfiguration()
   readProperties(KGlobal::config(), QString::null, true);
   buildSessionMenus();
 
-  setSchema(curr_schema);
+  if (tabwidget) {
+    for (TESession *_se = sessions.first(); _se; _se = sessions.next()) {
+       ColorSchema* s = colors->find( _se->schemaNo() );
+       if (s) {
+         if (s->hasSchemaFileChanged())
+           s->rereadSchemaFile();
+         setSchema(s,_se->widget());
+       }
+    }
+  }
+  else
+    setSchema(curr_schema);
   for (KonsoleChild *child = detached.first(); child; child = detached.next()) {
      int numb = child->session()->schemaNo();
      ColorSchema* s = colors->find(numb);
@@ -1895,12 +2024,18 @@ void Konsole::addSession(TESession* s)
   if (m_menuCreated)
      ra->plug(m_view);
 
-  int button_id=ra->itemId( ra->plug(toolBar()) );
+  if (tabwidget) {
+  //KONSOLEDEBUG<<"Konsole ctor() after new TEWidget() "<<time.elapsed()<<" msecs elapsed"<<endl;
+    tabwidget->insertTab(te,SmallIconSet(s->IconName()),newTitle);
+    tabwidget->setCurrentPage(tabwidget->count()-1);
+/*
+    KSimpleConfig *co = defaultSession();
+    co->setDesktopGroup();
+    QString schema = co->readEntry("Schema");
+    //KONSOLEDEBUG << "my Looking for schema " << schema << endl;
 
-  KToolBarButton* ktb=toolBar()->getButton(button_id);
-  connect(ktb,SIGNAL(doubleClicked(int)), this,SLOT(slotRenameSession(int)));
-
-  session2button.insert(s,ktb);
+    readProperties(KGlobal::config(), schema, false);*/
+  }
 }
 
 QString Konsole::currentSession()
@@ -1940,6 +2075,12 @@ void Konsole::activateSession(int position)
   activateSession( sessions.at(position) );
 }
 
+void Konsole::activateSession(QWidget* w)
+{
+  activateSession(tabwidget->indexOf(w));
+  w->setFocus();
+}
+
 void Konsole::activateSession(const QString &sessionId)
 {
   TESession* activate=NULL;
@@ -1957,7 +2098,7 @@ void Konsole::activateSession(const QString &sessionId)
 }
 
 /**
-   Activates a session (from the menu or by pressing a button)
+   Activates a session from the menu
  */
 void Konsole::activateSession()
 {
@@ -1991,16 +2132,29 @@ void Konsole::activateSession(TESession *s)
   se = s;
   session2action.find(se)->setChecked(true);
   QTimer::singleShot(1,this,SLOT(allowPrevNext())); // hack, hack, hack
-  if (s->schemaNo()!=curr_schema)
-  {
-     // the current schema has changed
-     setSchema(s->schemaNo());
+
+  if (tabwidget) {
+    tabwidget->showPage( se->widget() );
+    te = se->widget();
+    if (m_menuCreated) {
+      selectBell->setCurrentItem(te->bellMode());
+      selectFont->setCurrentItem(se->fontNo());
+      updateSchemaMenu();
+    }
+  }
+  else {
+    if (s->schemaNo()!=curr_schema)
+    {
+       // the current schema has changed
+       setSchema(s->schemaNo());
+    }
+    
+    if (s->fontNo() != n_font)
+    {
+        setFont(s->fontNo());
+    }
   }
 
-  if (s->fontNo() != n_font)
-  {
-      setFont(s->fontNo());
-  }
   notifySize(te->Lines(), te->Columns());  // set menu items (strange arg order !)
   s->setConnect(true);
   if(se->isMasterMode())
@@ -2067,7 +2221,7 @@ void Konsole::newSession(int i)
   }
 }
 
-void Konsole::newSessionToolbar(int i)
+void Konsole::newSessionTabbar(int i)
 {
   KSimpleConfig* co = no2command.find(i);
   if (co) {
@@ -2141,6 +2295,26 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
   if (!schema)
       schema=(ColorSchema*)colors->at(0);  //the default one
   int schmno = schema->numb();
+
+  if (tabwidget) {
+    TEWidget* te_old = te;
+    te=new TEWidget(tabwidget);
+
+    connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
+             this, SLOT(configureRequest(TEWidget*,int,int,int)) );
+    if (te_old) {
+      initTEWidget(te, te_old);
+    }
+    else {
+      readProperties(KGlobal::config(), "", true);
+      setFont(QMIN(fno, TOPFONT));
+      te->setScrollbarLocation(n_scroll);
+      te->setBellMode(n_bell);
+    }
+
+    setSchema(schmno);
+    te->setMinimumSize(150,70);
+  }
 
   QString sessionId="session-"+QString::number(++sessionIdCounter);
   TESession* s = new TESession(te, QFile::encodeName(program),cmdArgs,emu,winId(),sessionId,cwd);
@@ -2260,9 +2434,11 @@ void Konsole::doneSession(TESession* s)
 #endif
   KRadioAction *ra = session2action.find(s);
   ra->unplug(m_view);
-  ra->unplug(toolBar());
+  if (tabwidget) {
+    tabwidget->removePage( s->widget() );
+    delete s->widget();
+  }
   session2action.remove(s);
-  session2button.remove(s);
   action2session.remove(ra);
   int sessionIndex = sessions.findRef(s);
   sessions.remove(s);
@@ -2349,14 +2525,13 @@ void Konsole::moveSessionLeft()
   ra->unplug(m_view);
   ra->plug(m_view,(m_view->count()-sessions.count()+1)+position-1);
 
-  ra->unplug(toolBar());
-  session2button.remove(se);
-  int button_id=ra->itemId( ra->plug(toolBar(),position-1+2 ));  // +2 because of "New" and separator
-  KToolBarButton* ktb=toolBar()->getButton(button_id);
-  if(se->isMasterMode())
-    ktb->setIcon("remote");
-  connect(ktb,SIGNAL(doubleClicked(int)), this,SLOT(slotRenameSession(int)));
-  session2button.insert(se,ktb);
+  if (tabwidget) {
+    tabwidget->blockSignals(true);
+    tabwidget->removePage(se->widget());
+    tabwidget->blockSignals(false);
+    tabwidget->insertTab(se->widget(), SmallIconSet( se->isMasterMode()?"remote":se->IconName() ), se->Title(), position-1 );
+    tabwidget->showPage(se->widget());
+  }
 
   if (!m_menuCreated)
     makeGUI();
@@ -2380,14 +2555,13 @@ void Konsole::moveSessionRight()
   ra->unplug(m_view);
   ra->plug(m_view,(m_view->count()-sessions.count()+1)+position+1);
 
-  ra->unplug(toolBar());
-  session2button.remove(se);
-  int button_id=ra->itemId( ra->plug(toolBar(),position+1+2) );  // +2 because of "New" and separator
-  KToolBarButton* ktb=toolBar()->getButton(button_id);
-  if(se->isMasterMode())
-    ktb->setIcon("remote");
-  connect(ktb,SIGNAL(doubleClicked(int)), this,SLOT(slotRenameSession(int)));
-  session2button.insert(se,ktb);
+  if (tabwidget) {
+    tabwidget->blockSignals(true);
+    tabwidget->removePage(se->widget());
+    tabwidget->blockSignals(false);
+    tabwidget->insertTab(se->widget(), SmallIconSet( se->isMasterMode()?"remote":se->IconName() ), se->Title(), position+1 );
+    tabwidget->showPage(se->widget());
+  }
 
   if (!m_menuCreated)
     makeGUI();
@@ -2437,7 +2611,11 @@ void Konsole::slotToggleMasterMode()
 
 void Konsole::notifySessionState(TESession* session, int state)
 {
-  KToolBarButton* ktb=session2button.find(session);
+  if (!tabwidget) {
+    session->testAndSetStateIconName("noneset");
+    return;
+  }
+
   QString state_iconname;
   switch(state)
   {
@@ -2455,7 +2633,7 @@ void Konsole::notifySessionState(TESession* session, int state)
   }
   if (!state_iconname.isEmpty()
       && session->testAndSetStateIconName(state_iconname))
-    ktb->setIcon (state_iconname);
+    tabwidget->setTabIconSet(session->widget(), SmallIconSet(state_iconname));
 }
 
 // --| Session support |-------------------------------------------------------
@@ -2463,8 +2641,8 @@ void Konsole::notifySessionState(TESession* session, int state)
 void Konsole::buildSessionMenus()
 {
    m_session->clear();
-   if (m_toolbarSessionsCommands)
-      m_toolbarSessionsCommands->clear();
+   if (m_tabbarSessionsCommands)
+      m_tabbarSessionsCommands->clear();
 
    no2command.clear();
    no2tempFile.clear();
@@ -2544,7 +2722,7 @@ void Konsole::addSessionCommand(const QString &path)
   }
 
   QString icon = co->readEntry("Icon", "openterm");
-  insertItemSorted(m_toolbarSessionsCommands, SmallIconSet( icon ), txt.replace('&',"&&"), ++cmd_serial );
+  insertItemSorted(m_tabbarSessionsCommands, SmallIconSet( icon ), txt.replace('&',"&&"), ++cmd_serial );
   QString comment = co->readEntry("Comment");
   if (comment.isEmpty())
     comment=txt.prepend(i18n("New "));
@@ -2564,7 +2742,7 @@ void Konsole::loadSessionCommands()
      return;
   addSessionCommand(QString::null);
   m_session->insertSeparator();
-  m_toolbarSessionsCommands->insertSeparator();
+  m_tabbarSessionsCommands->insertSeparator();
 
   QStringList lst = KGlobal::dirs()->findAllResources("appdata", "*.desktop", false, true);
 
@@ -2577,8 +2755,8 @@ void Konsole::loadSessionCommands()
     m_session->insertSeparator();
     m_session->insertItem(SmallIconSet("keditbookmarks"),
                           i18n("New Shell at Bookmark"), m_bookmarksSession);
-    m_toolbarSessionsCommands->insertSeparator();
-    m_toolbarSessionsCommands->insertItem(SmallIconSet("keditbookmarks"),
+    m_tabbarSessionsCommands->insertSeparator();
+    m_tabbarSessionsCommands->insertItem(SmallIconSet("keditbookmarks"),
                           i18n("Shell at Bookmark"), m_bookmarksSession);
   }
 }
@@ -2597,7 +2775,7 @@ void Konsole::addScreenSession(const QString &path, const QString &socket)
   QString icon = "openterm"; // FIXME use another icon (malte)
   cmd_serial++;
   m_session->insertItem( SmallIconSet( icon ), txt, cmd_serial, cmd_serial - 1 );
-  m_toolbarSessionsCommands->insertItem( SmallIconSet( icon ), txt, cmd_serial );
+  m_tabbarSessionsCommands->insertItem( SmallIconSet( icon ), txt, cmd_serial );
   no2command.insert(cmd_serial,co);
   no2tempFile.insert(cmd_serial,tmpFile);
   no2filename.insert(cmd_serial,new QString(""));
@@ -2651,8 +2829,8 @@ void Konsole::resetScreenSessions()
     for (int i = cmd_first_screen; i <= cmd_serial; ++i)
     {
       m_session->removeItem(i);
-      if (m_toolbarSessionsCommands)
-         m_toolbarSessionsCommands->removeItem(i);
+      if (m_tabbarSessionsCommands)
+         m_tabbarSessionsCommands->removeItem(i);
       no2command.remove(i);
       no2tempFile.remove(i);
       no2filename.remove(i);
@@ -2663,7 +2841,7 @@ void Konsole::resetScreenSessions()
 
 // --| Schema support |-------------------------------------------------------
 
-void Konsole::setSchema(int numb)
+void Konsole::setSchema(int numb, TEWidget* tewidget)
 {
   ColorSchema* s = colors->find(numb);
   if (!s)
@@ -2680,7 +2858,7 @@ void Konsole::setSchema(int numb)
   {
         const_cast<ColorSchema *>(s)->rereadSchemaFile();
   }
-  if (s) setSchema(s);
+  if (s) setSchema(s, tewidget);
 }
 
 void Konsole::setSchema(const QString & path)
@@ -2698,9 +2876,10 @@ void Konsole::setSchema(const QString & path)
   if (s) setSchema(s);
 }
 
-void Konsole::setSchema(ColorSchema* s)
+void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
 {
   if (!s) return;
+  if (!tewidget) tewidget=te;
 
 //        KONSOLEDEBUG << "Checking menu items" << endl;
   if (m_schema)
@@ -2713,35 +2892,35 @@ void Konsole::setSchema(ColorSchema* s)
   s_schema = s->relPath();
   curr_schema = s->numb();
   pmPath = s->imagePath();
-  te->setColorTable(s->table()); //FIXME: set twice here to work around a bug
+  tewidget->setColorTable(s->table()); //FIXME: set twice here to work around a bug
 
   if (s->useTransparency()) {
 //        KONSOLEDEBUG << "Setting up transparency" << endl;
-    if (!rootxpm)
-      rootxpm = new KRootPixmap(te);
-    rootxpm->setFadeEffect(s->tr_x(), QColor(s->tr_r(), s->tr_g(), s->tr_b()));
-    rootxpm->start();
-    rootxpm->repaint(true);    
+    if (!rootxpms[tewidget])
+      rootxpms.insert( tewidget, new KRootPixmap(tewidget) );
+    rootxpms[tewidget]->setFadeEffect(s->tr_x(), QColor(s->tr_r(), s->tr_g(), s->tr_b()));
+    rootxpms[tewidget]->start();
+    rootxpms[tewidget]->repaint(true);
   } else {
 //        KONSOLEDEBUG << "Stopping transparency" << endl;
-    if (rootxpm) {
-      rootxpm->stop();
-      delete rootxpm;
-      rootxpm=0;
-    }
-    pixmap_menu_activated(s->alignment());
+      if (rootxpms[tewidget]) {
+        rootxpms[tewidget]->stop();
+        delete rootxpms[tewidget];
+        rootxpms.remove(tewidget);
+      }
+       pixmap_menu_activated(s->alignment(), tewidget);
   }
 
-  te->setColorTable(s->table());
-  if (se) se->setSchemaNo(s->numb());
+  tewidget->setColorTable(s->table());
+  if (tabwidget && se)
+    se->setSchemaNo(s->numb());
 }
 
 void Konsole::detachSession() {
   KRadioAction *ra = session2action.find(se);
   ra->unplug(m_view);
-  ra->unplug(toolBar());
+  TEWidget* se_widget = se->widget();
   session2action.remove(se);
-  session2button.remove(se);
   action2session.remove(ra);
   int sessionIndex = sessions.findRef(se);
   sessions.remove(se);
@@ -2784,10 +2963,26 @@ void Konsole::detachSession() {
   QTimer::singleShot(1,this,SLOT(activateSession()));
   if (sessions.count()==1)
     m_detachSession->setEnabled(false);
+
+  if (tabwidget) {
+    tabwidget->removePage( se_widget );
+    delete se_widget;
+  }
 }
 
 void Konsole::attachSession(TESession* session)
 {
+  TEWidget* se_widget = se->widget();
+  if (tabwidget) {
+    te=new TEWidget(tabwidget);
+
+    connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
+             this, SLOT(configureRequest(TEWidget*,int,int,int)) );
+
+    initTEWidget(te, se_widget);
+    setSchema(session->schemaNo());
+    tabwidget->insertTab(te,SmallIconSet(session->IconName()),session->Title());
+  }
   session->changeWidget(te);
 
   QString title=session->Title();
@@ -2806,11 +3001,6 @@ void Konsole::attachSession(TESession* session)
   if (m_menuCreated)
     ra->plug(m_view);
 
-  int button_id=ra->itemId( ra->plug(toolBar()) );
-  KToolBarButton* ktb=toolBar()->getButton(button_id);
-  connect(ktb,SIGNAL(doubleClicked(int)), this,SLOT(slotRenameSession(int)));
-  session2button.insert(session,ktb);
-
   connect( session,SIGNAL(done(TESession*)),
            this,SLOT(doneSession(TESession*)) );
 
@@ -2828,49 +3018,31 @@ void Konsole::attachSession(TESession* session)
 
 void Konsole::slotRenameSession() {
 //  KONSOLEDEBUG << "slotRenameSession\n";
-  KRadioAction *ra = session2action.find(se);
   QString name = se->Title();
   bool ok;
 
   name = KInputDialog::getText( i18n( "Rename Session" ),
       i18n( "Session name:" ), name, &ok, this );
 
-  if (ok) {
-    se->setTitle(name);
-    ra->setText(name.replace('&',"&&"));
-    ra->setIcon( se->IconName() ); // I don't know why it is needed here
-    if(se->isMasterMode())
-      session2button.find(se)->setIcon("remote");
-    toolBar()->updateRects();
-    updateTitle();
-  }
-}
-
-void Konsole::slotRenameSession(int) {
-  slotRenameSession();
+  if (ok)
+    initSessionTitle(name);
 }
 
 void Konsole::slotRenameSession(TESession* ses, const QString &name)
 {
   KRadioAction *ra = session2action.find(ses);
   QString title=name;
-  ra->setText(title.replace('&',"&&"));
+  title=title.replace('&',"&&");
+  ra->setText(title);
   ra->setIcon( ses->IconName() ); // I don't know why it is needed here
-  if(ses->isMasterMode())
-    session2button.find(ses)->setIcon("remote");
-  toolBar()->updateRects();
+  if (tabwidget)
+    tabwidget->changeTab( ses->widget(), title );
   updateTitle();
 }
 
 void Konsole::initSessionTitle(const QString &_title) {
-  KRadioAction *ra = session2action.find(se);
-
   se->setTitle(_title);
-  QString title=_title;
-  ra->setText(title.replace('&',"&&"));
-  ra->setIcon( se->IconName() ); // I don't know why it is needed here
-  toolBar()->updateRects();
-  updateTitle();
+  slotRenameSession(se,_title);
 }
 
 void Konsole::slotClearAllSessionHistories() {
@@ -3208,8 +3380,11 @@ void Konsole::slotPrint()
 void Konsole::toggleBidi()
 {
   b_bidiEnabled=!b_bidiEnabled;
-  te->setBidiEnabled(b_bidiEnabled);
-  te->repaint();
+  QPtrList<TEWidget> tes = activeTEs();
+  for (TEWidget *_te = tes.first(); _te; _te = tes.next()) {
+    _te->setBidiEnabled(b_bidiEnabled);
+    _te->repaint();
+  }
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -3303,18 +3478,18 @@ void Konsole::slotBackgroundChanged(int desk)
   // Only update rootxpm if window is visible on current desktop
   NETWinInfo info( qt_xdisplay(), winId(), qt_xrootwin(), NET::WMDesktop );
 
-  if (s->useTransparency() && info.desktop()==desk && (0 != rootxpm)) {
+  if (s->useTransparency() && info.desktop()==desk && (0 != rootxpms[te])) {
     //KONSOLEDEBUG << "Wallpaper changed on my desktop, " << desk << ", repainting..." << endl;
     //Check to see if we are on the current desktop. If not, delay the repaint
     //by setting wallpaperSource to 0. Next time our desktop is selected, we will
     //automatically update because we are saying "I don't have the current wallpaper"
     NETRootInfo rootInfo( qt_xdisplay(), NET::CurrentDesktop );
     rootInfo.activate();
-    if( rootInfo.currentDesktop() == info.desktop() && rootxpm) {
+    if( rootInfo.currentDesktop() == info.desktop() && rootxpms[te]) {
        //We are on the current desktop, go ahead and update
        //KONSOLEDEBUG << "My desktop is current, updating..." << endl;
        wallpaperSource = desk;
-       rootxpm->repaint(true);
+       rootxpms[te]->repaint(true);
     }
     else {
        //We are not on the current desktop, mark our wallpaper source 'stale'
@@ -3347,9 +3522,9 @@ void Konsole::currentDesktopChanged(int desk) {
       return;
 
    //This window is transparent, update the root pixmap
-   if( bNeedUpdate && s->useTransparency() && rootxpm) {
+   if( bNeedUpdate && s->useTransparency() && rootxpms[te]) {
       wallpaperSource = desk;
-      rootxpm->repaint(true);
+      rootxpms[te]->repaint(true);
    }
 }
 
@@ -3428,6 +3603,25 @@ void Konsole::enableFixedSize(bool b)
       delete m_fullscreen;
       m_fullscreen = 0;
     }
+}
+
+QPtrList<TEWidget> Konsole::activeTEs()
+{
+   QPtrList<TEWidget> ret;
+   if (tabwidget) {
+     if (sessions.count()>0)
+       for (TESession *_se = sessions.first(); _se; _se = sessions.next())
+          ret.append(_se->widget());
+     else if (te)  // check for startup initalization case in newSession()
+       ret.append(te);
+   }
+   else
+     if (te) {
+       ret.append(te);
+       for (KonsoleChild *_child = detached.first(); _child; _child = detached.next())
+         ret.append(_child->session()->widget());
+     }
+   return ret;
 }
 
 #include "konsole.moc"

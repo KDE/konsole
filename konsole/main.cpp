@@ -45,7 +45,7 @@ static KCmdLineOptions options[] =
    { "noclose",         I18N_NOOP("Do not close Konsole when command exits"), 0 },
    { "nohist",          I18N_NOOP("Do not save lines in history"), 0 },
    { "nomenubar",       I18N_NOOP("Do not display menubar"), 0 },
-   { "notoolbar",       I18N_NOOP("Do not display toolbar"), 0 },
+   { "notabbar",        I18N_NOOP("Do not display tabbar"), 0 },
    { "noframe",         I18N_NOOP("Do not display frame"), 0 },
    { "noscrollbar",     I18N_NOOP("Do not display scrollbar"), 0 },
    { "noxft",           I18N_NOOP("Do not use XFT (Anti-Aliasing)"), 0 },
@@ -136,7 +136,7 @@ extern "C" int kdemain(int argc, char* argv[])
   // deal with shell/command ////////////////////////////
   bool histon = true;
   bool menubaron = true;
-  bool toolbaron = true;
+  bool tabbaron = true;
   bool frameon = true;
   bool scrollbaron = true;
   QCString wname = PACKAGE;
@@ -251,7 +251,7 @@ extern "C" int kdemain(int argc, char* argv[])
   sz = args->getOption("vt_sz");
   histon = args->isSet("hist");
   menubaron = args->isSet("menubar");
-  toolbaron = args->isSet("toolbar");
+  tabbaron = args->isSet("tabbar");
   frameon = args->isSet("frame");
   scrollbaron = args->isSet("scrollbar");
   wname = qtargs->getOption("name");
@@ -331,7 +331,7 @@ extern "C" int kdemain(int argc, char* argv[])
       sessionconfig = a.sessionConfig();
     sessionconfig->setDesktopGroup();
     wname = sessionconfig->readEntry("class",wname).latin1();
-//    RESTORE( Konsole(wname,shell,eargs,histon,toolbaron) )
+//    RESTORE( Konsole(wname,shell,eargs,histon,tabbaron) )
     int n = 1;
 
     int session_count = sessionconfig->readNumEntry("numSes");
@@ -342,6 +342,7 @@ extern "C" int kdemain(int argc, char* argv[])
     QString sTerm;
     QString sIcon;
     QString sCwd;
+    int     n_tabbar;
 
     while (KMainWindow::canBeRestored(n) || !profile.isEmpty())
     {
@@ -352,7 +353,8 @@ extern "C" int kdemain(int argc, char* argv[])
         sTerm = sessionconfig->readEntry("Term0");
         sIcon = sessionconfig->readEntry("Icon0","openterm");
         sCwd = sessionconfig->readPathEntry("Cwd0");
-        Konsole *m = new Konsole(wname,sPgm,eargs,histon,menubaron,toolbaron,frameon,scrollbaron,sIcon,sTitle,0/*type*/,sTerm,true,sCwd);
+	n_tabbar = QMIN(sessionconfig->readUnsignedNumEntry("tabbar",Konsole::TabBottom),2);
+        Konsole *m = new Konsole(wname,sPgm,eargs,histon,menubaron,tabbaron,frameon,scrollbaron,sIcon,sTitle,0/*type*/,sTerm,true,n_tabbar,sCwd);
         m->enableFullScripting(full_script);
         m->enableFixedSize(fixed_size);
 	m->restore(n);
@@ -418,7 +420,7 @@ extern "C" int kdemain(int argc, char* argv[])
   }
   else
   {
-    Konsole*  m = new Konsole(wname,(shell ? QFile::decodeName(shell) : QString::null),eargs,histon,menubaron,toolbaron,frameon,scrollbaron,QString::null,title,type,term);
+    Konsole*  m = new Konsole(wname,(shell ? QFile::decodeName(shell) : QString::null),eargs,histon,menubaron,tabbaron,frameon,scrollbaron,QString::null,title,type,term);
     m->enableFullScripting(full_script);
     m->enableFixedSize(fixed_size);
     //3.8 :-(
