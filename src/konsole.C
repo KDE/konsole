@@ -367,7 +367,7 @@ void Konsole::makeGUI()
    // Codec Options Menu ------------------------------------------------------
    m_codec  = new KPopupMenu(this);
    m_codec->setCheckable(TRUE);
-   m_codec->insertItem( i18n("&locale"), 1 );
+   m_codec->insertItem( i18n("&Locale"), 1 );
    m_codec->setItemChecked(1,TRUE);
 
    //options menu
@@ -400,7 +400,7 @@ void Konsole::makeGUI()
 
    // Fullscreen
    m_options->insertSeparator();
-   m_options->insertItem( SmallIconSet( "window_fullscreen" ), i18n("F&ullscreen"), 5);
+   m_options->insertItem( SmallIconSet( "window_fullscreen" ), i18n("F&ull Screen"), 5);
    m_options->setItemChecked(5,b_fullscreen);
    m_options->insertSeparator();
 
@@ -408,11 +408,11 @@ void Konsole::makeGUI()
    selectSize = new KSelectAction(i18n("Size"), 0, this,
                                   SLOT(slotSelectSize()), this);
    QStringList sizeitems;
-   sizeitems << i18n("40x15 (&small)")
-      << i18n("80x24 (&vt100)")
-      << i18n("80x25 (&ibmpc)")
-      << i18n("80x40 (&xterm)")
-      << i18n("80x52 (ibmv&ga)");
+   sizeitems << i18n("40x15 (&Small)")
+      << i18n("80x24 (&VT100)")
+      << i18n("80x25 (&IBM PC)")
+      << i18n("80x40 (&XTerm)")
+      << i18n("80x52 (IBM V&GA)");
    selectSize->setItems(sizeitems);
    selectSize->plug(m_options);
 

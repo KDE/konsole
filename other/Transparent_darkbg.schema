@@ -1,6 +1,6 @@
 # linux color schema for konsole
 
-title Transparent, dark background
+title Transparent, Dark Background
 
 transparency 0.75 0 0 0
 

@@ -135,7 +135,7 @@ int main(int argc, char* argv[])
     "neundorf@kde.org");
   aboutData.addCredit("",I18N_NOOP("Thanks to many others.\n"
     "The above list only reflects the contributors\n"
-    "I managed to keep track for."));
+    "I managed to keep track of."));
 
   KCmdLineArgs::init( argc, argv, &aboutData );
   KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
