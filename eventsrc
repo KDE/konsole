@@ -2,13 +2,16 @@
 IconName=konsole
 Comment=Konsole
 Comment[be]=Кансоля
+Comment[da]=Konsol
 
 [BellVisible]
 Name=Bell in visible session
+Name[da]=Klokke i synlig session
 Name[es]=Timbre en sesión visible
 Name[hu]=Csengetés egy látható munkafolyamatban
 Name[sv]=Ljudsignal i synlig session
 Comment=Bell emitted within a visible session
+Comment[da]=Klokke brugt indenfor en synlig session
 Comment[es]=Suena el timbre incluso en un sesión visible
 Comment[hu]=Csengetés egy látható munkafolyamatban
 Comment[sv]=Ljudsignal inne i en synlig session
@@ -17,18 +20,24 @@ default_presentation=1
 
 [BellInvisible]
 Name=Bell in non-visible session
+Name[da]=Klokke i ikke-synlig session
+Name[hu]=Csengetés egy nem látható munkafolyamatban
 Name[sv]=Ljudsignal i osynlig session
 Comment=Bell emitted within a non-visible session
+Comment[da]=Klokke brugt indenfor en ikke-synlig session
+Comment[hu]=Csengetés egy nem látható munkafolyamatban
 Comment[sv]=Ljudsignal inne i en osynlig session
 default_sound=KDE_Beep_Beep.wav
 default_presentation=16
 
 [Activity]
 Name=Activity in monitored session
+Name[da]=Aktivitet i overvåget session
 Name[es]=Actividad en sesión monitorizada
 Name[hu]=Aktivitás egy monitorozott munkafolyamatban
 Name[sv]=Aktivitet i bevakad session
 Comment=Activity detected in a monitored session
+Comment[da]=Aktivitet detekteret i en overvåget session
 Comment[es]=Detectada actividad en una sesión monitorizada
 Comment[hu]=Aktivitás észlelve egy monitorozott munkafolyamatban
 Comment[sv]=Aktivitet funnen i en bevakad session
@@ -36,10 +45,12 @@ default_presentation=16
 
 [Silence]
 Name=Silence in monitored session
+Name[da]=Stilhed i overvåget session
 Name[es]=Silencio en sesión monitorizada
 Name[hu]=Üresjárat egy monitorozott munkafolyamatban
 Name[sv]=Tystnad i bevakad session
 Comment=Silence detected in a monitored session
+Comment[da]=Stilhed detekteret i en overvåget session
 Comment[es]=Silencio detectado en una sesión monitorizada
 Comment[hu]=Üresjárat észlelve egy monitorozott munkafolyamatban
 Comment[sv]=Tystnad funnen i en bevakad session
@@ -47,7 +58,11 @@ default_presentation=16
 
 [Finished]
 Name=Session finished with non-zero status
+Name[da]=Session afsluttet med ikke-nul status
+Name[hu]=Egy munkafolyamat nem nulla értékkel fejeződött be
 Name[sv]=Sessionen klar med status skild från noll
 Comment=A session has exited with non-zero status
+Comment[da]=En session er gået ud med ikke-nul status
+Comment[hu]=Egy munkafolyamat nem nulla értékkel fejeződött be
 Comment[sv]=En session har avslutats med status skild från noll
 default_presentation=16
