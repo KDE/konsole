@@ -21,7 +21,7 @@ color  0  50  50  50  0 0  # regular   foreground color (DarkGray)
 color  1  200 200 200  1 0  # regular   background color (White)
 
 # color  2   0   0   0  0 0  # regular   color 0 Black
-color  1  200 200 200  1 0  # regular   background color (White)
+color  2  200 200 200  1 0  # regular   background color (White)
 color  3 178  24  24  0 0  # regular   color 1 Red
 color  4  24 178  24  0 0  # regular   color 2 Green
 color  5 178 104  24  0 0  # regular   color 3 Yellow
