@@ -183,6 +183,7 @@ void TEmuVt102::reset()
    - CSI_PN     - Escape codes of the form <ESC>'['     {Pn} ';' {Pn} C
    - CSI_PS     - Escape codes of the form <ESC>'['     {Pn} ';' ...  C
    - CSI_PR     - Escape codes of the form <ESC>'[' '?' {Pn} ';' ...  C
+   - CSI_PE     - Escape codes of the form <ESC>'[' '!' {Pn} ';' ...  C
    - VT52       - VT52 escape codes
                   - <ESC><Chr>
                   - <ESC>'Y'{Pc}{Pc}
@@ -211,6 +212,8 @@ void TEmuVt102::reset()
 #define TY_VT52__(A  )  TY_CONSTR(8,A,0)
 
 #define TY_CSI_PG(A  )  TY_CONSTR(9,A,0)
+
+#define TY_CSI_PE(A  )  TY_CONSTR(10,A,0)
 
 // Tokenizer --------------------------------------------------------------- --
 
@@ -284,8 +287,9 @@ void TEmuVt102::initTokenizer()
 #define les(P,L,C) (p == (P) && s[L] < 256  && (tbl[s[(L)]] & (C)) == (C))
 #define eec(C)     (p >=  3  &&        cc                          == (C))
 #define ees(C)     (p >=  3  && cc < 256 &&    (tbl[  cc  ] & (C)) == (C))
-#define eps(C)     (p >=  3  && s[2] != '?' && s[2] != '>' && cc < 256 && (tbl[  cc  ] & (C)) == (C))
+#define eps(C)     (p >=  3  && s[2] != '?' && s[2] != '!' && s[2] != '>' && cc < 256 && (tbl[  cc  ] & (C)) == (C))
 #define epp( )     (p >=  3  && s[2] == '?'                              )
+#define epe( )     (p >=  3  && s[2] == '!'                              )
 #define egt(     ) (p >=  3  && s[2] == '>'                              )
 #define Xpe        (ppos>=2  && pbuf[1] == ']'                           )
 #define Xte        (Xpe                        &&     cc           ==  7 )
@@ -322,11 +326,13 @@ void TEmuVt102::onRcvChar(int cc)
     if (Xpe         ) {                                                       return; }
     if (lec(3,2,'?')) {                                                       return; }
     if (lec(3,2,'>')) {                                                       return; }
+    if (lec(3,2,'!')) {                                                       return; }
     if (lun(       )) { tau( TY_CHR___(), applyCharset(cc), 0); resetToken(); return; }
     if (lec(2,0,ESC)) { tau( TY_ESC___(s[1]),    0,   0);       resetToken(); return; }
     if (les(3,1,SCS)) { tau( TY_ESC_CS(s[1],s[2]),    0,   0);  resetToken(); return; }
     if (lec(3,1,'#')) { tau( TY_ESC_DE(s[2]),    0,   0);       resetToken(); return; }
     if (eps(    CPN)) { tau( TY_CSI_PN(cc), argv[0],argv[1]);   resetToken(); return; }
+    if (epe(       )) { tau( TY_CSI_PE(cc),      0,   0);       resetToken(); return; }
     if (ees(    DIG)) { addDigit(cc-'0');                                     return; }
     if (eec(    ';')) { addArgument();                                        return; }
     for (i=0;i<=argc;i++)
@@ -570,8 +576,8 @@ void TEmuVt102::tau( int token, int p, int q )
 
     case TY_CSI_PR('l',    2) :        resetMode      (MODE_Ansi     ); break; //VT100
 
-    case TY_CSI_PR('h',    3) :      setColumns           (       132); break; //VT100
-    case TY_CSI_PR('l',    3) :      setColumns           (        80); break; //VT100
+    case TY_CSI_PR('h',    3) : /* IGNORED:  setColumns (       132) */ break; //VT100
+    case TY_CSI_PR('l',    3) : /* IGNORED:  setColumns (        80) */ break; //VT100
 
     case TY_CSI_PR('h',    4) : /* IGNORED: soft scrolling           */ break; //VT100
     case TY_CSI_PR('l',    4) : /* IGNORED: soft scrolling           */ break; //VT100
@@ -607,6 +613,11 @@ void TEmuVt102::tau( int token, int p, int q )
     case TY_CSI_PR('l',   47) :        resetMode      (MODE_AppScreen); break; //VT100
     case TY_CSI_PR('s',   47) :         saveMode      (MODE_AppScreen); break; //XTERM
     case TY_CSI_PR('r',   47) :      restoreMode      (MODE_AppScreen); break; //XTERM
+
+    case TY_CSI_PR('h',   67) : /* IGNORED: DECBKM                   */ break; //XTERM
+    case TY_CSI_PR('l',   67) : /* IGNORED: DECBKM                   */ break; //XTERM
+    case TY_CSI_PR('s',   67) : /* IGNORED: DECBKM                   */ break; //XTERM
+    case TY_CSI_PR('r',   67) : /* IGNORED: DECBKM                   */ break; //XTERM
 
     // XTerm defines the following modes:
     // SET_VT200_MOUSE             1000
@@ -652,6 +663,9 @@ void TEmuVt102::tau( int token, int p, int q )
     //       Here's a guess of what they could mean.
     case TY_CSI_PR('h', 1049) : saveCursor(); screen[1]->clearEntireScreen(); setMode(MODE_AppScreen); break; //XTERM
     case TY_CSI_PR('l', 1049) : resetMode(MODE_AppScreen); restoreCursor(); break; //XTERM
+
+    //FIXME: weird DEC reset sequence
+    case TY_CSI_PE('p'      ) : /* IGNORED: reset         (        ) */ break;
 
     //FIXME: when changing between vt52 and ansi mode evtl do some resetting.
     case TY_VT52__('A'      ) : scr->cursorUp             (         1); break; //VT52
