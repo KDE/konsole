@@ -1300,6 +1300,7 @@ void Konsole::doneSession(TESession* s, int )
   ra->unplug(toolBar());
   session2action.remove(s);
   action2session.remove(ra);
+  int sessionIndex = sessions.findRef(s);
   sessions.remove(s);
   delete ra; // will the toolbar die?
 
@@ -1315,9 +1316,9 @@ void Konsole::doneSession(TESession* s, int )
 
   if (s == se)
   { // pick a new session
-    se = sessions.first();
-    if ( se )
+    if (sessions.count())
     {
+      se = sessions.at(sessionIndex ? sessionIndex - 1 : 0);
       session2action.find(se)->setChecked(true);
       //FIXME: this Timer stupidity originated from the connected
       //       design of Emulations. By this the newly activated
