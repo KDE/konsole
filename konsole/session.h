@@ -37,6 +37,7 @@ public:
 	    const QString &term, ulong winId, const QString &sessionId="session-1",
 	    const QString &initial_cwd = QString::null);
   void changeWidget(TEWidget* w);
+  TEWidget* widget() { return te; }
   ~TESession();
 
   void        setConnect(bool r);  // calls setListenToKeyPress(r)
