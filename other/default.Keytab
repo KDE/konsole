@@ -1,6 +1,10 @@
 # [KeyTab] Konsole Keyboard Table
 #
 # --------------------------------------------------------------
+
+hdr "xterm keys"
+
+# --------------------------------------------------------------
 #
 # This configuration table allows to customize the
 # meaning of the keys.

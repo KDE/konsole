@@ -413,6 +413,16 @@ void Konsole::makeMenu()
   m_schema->setCheckable(TRUE);
   connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
 
+  QPopupMenu* m_keytab = new QPopupMenu;
+  m_keytab->setCheckable(TRUE);
+  m_keytab->insertItem( i18n("&xterm"), 1 );
+  m_keytab->setItemChecked(1,TRUE);
+
+  QPopupMenu* m_codec  = new QPopupMenu;
+  m_codec->setCheckable(TRUE);
+  m_codec->insertItem( i18n("&locale"), 1 );
+  m_codec->setItemChecked(1,TRUE);
+
   m_options = new QPopupMenu;
   m_options->setCheckable(TRUE);
   m_options->insertItem( i18n("&Menubar"), 1 );
@@ -429,6 +439,8 @@ void Konsole::makeMenu()
   m_options->insertItem( i18n("&Font"), m_font);
   m_options->insertItem( i18n("&Size"), m_size);
   m_options->insertItem( i18n("&Schema"), m_schema);
+  m_options->insertItem( i18n("&Codec"), m_codec);
+  m_options->insertItem( i18n("&Keyboard"), m_keytab);
   m_options->insertSeparator();
   m_options->insertItem( i18n("&Save Options"), 8);
   connect(m_options, SIGNAL(activated(int)), SLOT(opt_menu_activated(int)));
@@ -1042,7 +1054,6 @@ int main(int argc, char* argv[])
   setlocale( LC_ALL, "" );
   KApplication a;
   kimgioRegister(); // add io for additional image formats
-  initKeyTrans();   // keyboard translation
 
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
   QStrList eargs;

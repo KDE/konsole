@@ -10,14 +10,16 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-// This module is work in progress.
-
-/*
-   State is that we're pretty much done.
-   TODO:
-   - read in from file, too.
+/* This module is work in progress.
+   State is "almost done".
+   Still TODO:
    - handle errors more gracefully.
    - put into configuration
+*/
+
+/*
+   The keyboard translation table allows to configure konsoles behavior
+   on key strokes.
 */
 
 #include "keytrans.h"
@@ -25,6 +27,7 @@
 #include <qbuffer.h>
 #include <qobject.h>
 #include <qdict.h>
+#include <qfile.h>
 
 #include <stdio.h>
 
@@ -121,7 +124,7 @@ static int     cc;
 static int     lineno;
 
 
-static bool getSymbol(QBuffer &buf)
+static bool getSymbol(QIODevice &buf)
 {
   res = ""; len = 0;
   while (cc == ' ')
@@ -235,32 +238,30 @@ static void ReportToken() // diagnostic
   printf("\n");
 }
 
-QDict<QObject> keysyms;
-QDict<QObject> modsyms;
-QDict<QObject> oprsyms;
+// local symbol tables ---------------------------------------------------------------------
 
-void defKeySym(const char* key, int val)
+class KeyTransSymbols
 {
-  keysyms.insert(key,(QObject*)(val+1));
-}
+public:
+  KeyTransSymbols();
+public:
+  QDict<QObject> keysyms;
+  QDict<QObject> modsyms;
+  QDict<QObject> oprsyms;
+};
 
-void defOprSym(const char* key, int val)
-{
-  oprsyms.insert(key,(QObject*)(val+1));
-}
+static KeyTransSymbols syms;
 
-void defModSym(const char* key, int val)
-{
-  modsyms.insert(key,(QObject*)(val+1));
-}
-
+// parser ----------------------------------------------------------------------------------
 /* Syntax
    - Line :: [KeyName { ("+" | "-") ModeName } ":" (String|CommandName)] "\n"
    - Comment :: '#' (any but \n)*
 */
 
-void KeyTrans::scanTable(QBuffer &buf)
+KeyTrans* KeyTrans::fromDevice(QIODevice &buf)
 {
+  KeyTrans* kt = new KeyTrans;
+
   // Opening sequence
 
   buf.open(IO_ReadOnly);
@@ -271,14 +272,24 @@ void KeyTrans::scanTable(QBuffer &buf)
   // Test tokenizer
 Loop:
   // syntax: ["key" KeyName { ("+" | "-") ModeName } ":" String/CommandName] ["#" Comment]
+  if (sym == SYMName && !strcmp(res.ascii(),"hdr"))
+  {
+    getSymbol(buf); 
+    if (sym != SYMString) goto ERROR; // header expected
+    kt->hdr = res;
+    getSymbol(buf);
+    if (sym != SYMEol)    goto ERROR; // unexpected text
+    getSymbol(buf);                   // eoln
+    goto Loop;
+  }
   if (sym == SYMName && !strcmp(res.ascii(),"key"))
   {
 //printf("line %3d: ",startofsym);
     getSymbol(buf); 
     // keyname
     if (sym != SYMName) goto ERROR; // mode name expected
-    if (!keysyms[res]) goto ERROR; // unknown key
-    int key = (int)keysyms[res]-1;
+    if (!syms.keysyms[res]) goto ERROR; // unknown key
+    int key = (int)syms.keysyms[res]-1;
 //printf(" key %s (%04x)",res.ascii(),(int)keysyms[res]-1);
     getSymbol(buf); // + - : 
     int mode = 0;
@@ -289,8 +300,8 @@ Loop:
       getSymbol(buf);
       // mode name
       if (sym != SYMName) goto ERROR; // mode name expected
-      if (!modsyms[res]) goto ERROR; // unknown mod
-      int bits = (int)modsyms[res]-1;
+      if (!syms.modsyms[res]) goto ERROR; // unknown mod
+      int bits = (int)syms.modsyms[res]-1;
       mode |= (on << bits);
       mask |= (1 << bits);
 //printf(", mode %s(%d) %s",res.ascii(),(int)modsyms[res]-1,on?"on":"off");
@@ -302,8 +313,8 @@ Loop:
     int cmd = 0;
     if (sym == SYMName)
     {
-      if (!oprsyms[res]) goto ERROR; // unknown opr
-      cmd = (int)oprsyms[res]-1;
+      if (!syms.oprsyms[res]) goto ERROR; // unknown opr
+      cmd = (int)syms.oprsyms[res]-1;
 //printf(": do %s(%d)",res.ascii(),(int)oprsyms[res]-1);
     }
     else
@@ -317,11 +328,10 @@ Loop:
     else
       goto ERROR; // command or string expected
 //printf(". summary %04x,%02x,%02x,%d\n",key,mode,mask,cmd);
-    addEntry(key,mode,mask,cmd,res);
+    kt->addEntry(key,mode,mask,cmd,res);
     getSymbol(buf);
     if (sym != SYMEol) goto ERROR; // unexpected text
-    getSymbol(buf);
-    // eoln
+    getSymbol(buf); // eoln
     goto Loop;
   }
   else
@@ -337,10 +347,44 @@ ERROR: printf("ERROR:"); printf("symbol: "); ReportToken();
   }
 
   buf.close();
+
+  return kt;
 }
 
+
+KeyTrans* KeyTrans::defaultKeyTrans()
+{
+  QCString txt =
+#include "default.keytab.h"
+  ;
+  QBuffer buf(txt);
+  return fromDevice(buf);
+}
+
+KeyTrans* KeyTrans::fromFile(const char* path)
+{
+  QFile file(path);
+  return fromDevice(file);
+}
+
+// local symbol tables ---------------------------------------------------------------------
 // material needed for parsing the config file.
 // This is incomplete work.
+
+void defKeySym(const char* key, int val)
+{
+  syms.keysyms.insert(key,(QObject*)(val+1));
+}
+
+void defOprSym(const char* key, int val)
+{
+  syms.oprsyms.insert(key,(QObject*)(val+1));
+}
+
+void defModSym(const char* key, int val)
+{
+  syms.modsyms.insert(key,(QObject*)(val+1));
+}
 
 static void defOprSyms()
 {
@@ -437,21 +481,14 @@ static void defKeySyms()
   defKeySym("Hyper_R",    Qt::Key_Hyper_R   );
 }
 
-void initKeyTrans()
+KeyTransSymbols::KeyTransSymbols()
 {
   defModSyms();
   defOprSyms();
   defKeySyms();
 }
 
-void KeyTrans::addInternalTable()
-{
-  QCString txt =
-#include "default.keytab.h"
-  ;
-  QBuffer buf(txt);
-  scanTable(buf);
-}
+// Debugging material -----------------------------------------------------------
 
 /*
 void TestTokenizer(QBuffer &buf)
@@ -471,8 +508,6 @@ void TestTokenizer(QBuffer &buf)
 
 void test()
 {
-  initKeyTrans();
-
   // Opening sequence
 
   QCString txt =

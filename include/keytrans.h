@@ -15,6 +15,7 @@
 
 #include <qstring.h>
 #include <qlist.h>
+#include <qiodevice.h>
 
 #define BITS_NewLine    0
 #define BITS_BsHack     1
@@ -34,19 +35,19 @@
 
 #define BITS(x,v) ((((v)!=0)<<(x)))
 
-void initKeyTrans();
 
 class KeyTrans
 {
 public:
   KeyTrans();
   ~KeyTrans();
-public: // put somewhere else
-  void addInternalTable();
-  void scanTable(QBuffer &buf);
+  static KeyTrans* defaultKeyTrans();
+  static KeyTrans* fromFile(const char* path);
 public:
-  void addEntry(int key, int bits, int mask, int cmd, QString txt);
   bool findEntry(int key, int bits, int* cmd, const char** txt, int* len);
+private:
+  static KeyTrans* fromDevice(QIODevice &buf);
+  void addEntry(int key, int bits, int mask, int cmd, QString txt);
 private:
   class KeyEntry
   {
@@ -65,6 +66,7 @@ private:
     QString txt;
   };
 private:
+  QString         hdr;
   QList<KeyEntry> table;
 };
 

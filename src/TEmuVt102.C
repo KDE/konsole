@@ -68,7 +68,9 @@ TEmuVt102::TEmuVt102(TEWidget* gui)
 {
   QObject::connect(gui,SIGNAL(mouseSignal(int,int,int)),
                    this,SLOT(onMouse(int,int,int)));
-  keytrans.addInternalTable(); // set default keytrans
+  keytrans = KeyTrans::defaultKeyTrans();
+//FIXME: allow to set another keyboard translator
+//keytrans = KeyTrans::fromFile("../other/default.KeyMap");
   initTokenizer();
   reset();
 }
@@ -744,14 +746,14 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
 
   // lookup in keyboard translation table ...
   int cmd; const char* txt; int len;
-  if (keytrans.findEntry(ev->key(), encodeMode(MODE_NewLine  , BITS_NewLine   ) +
-                                    encodeMode(MODE_BsHack   , BITS_BsHack    ) + //FIXME: deprecated
-                                    encodeMode(MODE_Ansi     , BITS_Ansi      ) +
-                                    encodeMode(MODE_AppCuKeys, BITS_AppCuKeys ) +
-                                    encodeStat(ControlButton , BITS_Control   ) +
-                                    encodeStat(ShiftButton   , BITS_Shift     ) +
-                                    encodeStat(AltButton     , BITS_Alt       ),
-                         &cmd, &txt, &len ))
+  if (keytrans->findEntry(ev->key(), encodeMode(MODE_NewLine  , BITS_NewLine   ) +
+                                     encodeMode(MODE_BsHack   , BITS_BsHack    ) + //FIXME: deprecated
+                                     encodeMode(MODE_Ansi     , BITS_Ansi      ) +
+                                     encodeMode(MODE_AppCuKeys, BITS_AppCuKeys ) +
+                                     encodeStat(ControlButton , BITS_Control   ) +
+                                     encodeStat(ShiftButton   , BITS_Shift     ) +
+                                     encodeStat(AltButton     , BITS_Alt       ),
+                          &cmd, &txt, &len ))
   switch(cmd) // ... and execute if found.
   {
     case CMD_emitSelection  : gui->emitSelection();           return;

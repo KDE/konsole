@@ -133,7 +133,7 @@ protected:
   QTextCodec* localeCodec;
   QTextDecoder* decoder;
 
-  KeyTrans keytrans;
+  KeyTrans* keytrans;
 };
 
 #endif // ifndef ANSIEMU_H
