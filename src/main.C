@@ -106,7 +106,9 @@ TEDemo::TEDemo(const QString& name, QStrList & _args, int login_shell) : KTMainW
   setMinimumSize(200,100);
   
   // session management
-  setUnsavedData( true ); // terminals cannot store their contents
+
+// WABA: Removed old session management call
+//  setUnsavedData( true ); // terminals cannot store their contents
 
   // create terminal emulation framework ////////////////////////////////////
 
