@@ -151,7 +151,6 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
                     this, SLOT(onClearSelection()) );
 
   scrollbar = new QScrollBar(this);
-  scrollbar->setFocusPolicy(QWidget::WheelFocus);
   scrollbar->setCursor( arrowCursor );
   connect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
   scrollLoc = SCRNONE;
