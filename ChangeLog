@@ -1,6 +1,7 @@
  9 Sep 2000
 - license restricted to GPLv2
 - added Konsole2.Requierements
+- changes version to 1.0.1 meaning there will be a version 2
 - removed AUTHORS and CONTRIBUTORS in favor of DEVELOPERS
  8 Sep 2000
 - fixed a history-related crash.
