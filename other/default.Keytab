@@ -77,6 +77,7 @@ key F12            : "\E[24~"
 key Space +Control : "\x00"
 
 # Some keys are used by konsole to cause operations.
+# The scroll* operations refere to the history buffer.
 
 key Up    +Shift   : scrollLineUp
 key Prior +Shift   : scrollPageUp
