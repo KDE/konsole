@@ -37,14 +37,32 @@
 FIXME: some complain about the history buffer comsuming the
        memory of their machines. This problem is critical
        since the history does not behave gracefully in cases
-       where the memory is used up completely. I have some
-       problems to reproduce this event in my installation.
+       where the memory is used up completely.
+
+       I put in a workaround that should handle it problem
+       now gracefully. I'm not satisfied with the solution.
+
+FIXME: Terminating the history is not properly indicated
+       in the menu. We should throw a signal.
 
 FIXME: There is noticable decrease in speed, also. Perhaps,
        there whole feature needs to be revisited therefore.
-       Disadvantage of a more elaborated say block-oriented
+       Disadvantage of a more elaborated, say block-oriented
        scheme with wrap around would be it's complexity.
 */
+
+//FIXME: tempory replacement for tmpfile
+//       this is here one for debugging purpose.
+
+//#define tmpfile xTmpFile
+
+FILE* xTmpFile()
+{
+  static int fid = 0;
+  char fname[80];
+  sprintf(fname,"TmpFile.%d",fid++);
+  return fopen(fname,"w");
+}
 
 
 // History Buffer ///////////////////////////////////////////
@@ -93,8 +111,8 @@ bool HistoryBuffer::hasScroll()
 void HistoryBuffer::add(const unsigned char* bytes, int len)
 { int rc;
   assert(hasScroll());
-  rc = lseek(ion,length,SEEK_SET); if (rc < 0) perror("HistoryBuffer::add.seek");
-  rc = write(ion,bytes,len);       if (rc < 0) perror("HistoryBuffer::add.write");
+  rc = lseek(ion,length,SEEK_SET); if (rc < 0) { perror("HistoryBuffer::add.seek"); setScroll(FALSE); return; }
+  rc = write(ion,bytes,len);       if (rc < 0) { perror("HistoryBuffer::add.write"); setScroll(FALSE); return; }
   length += rc;
 }
 
@@ -103,8 +121,8 @@ void HistoryBuffer::get(unsigned char* bytes, int len, int loc)
   assert(hasScroll());
   if (loc < 0 || len < 0 || loc + len > length)
     fprintf(stderr,"getHist(...,%d,%d): invalid args.\n",len,loc);
-  rc = lseek(ion,loc,SEEK_SET); if (rc < 0) perror("HistoryBuffer::get.seek");
-  rc = read(ion,bytes,len);     if (rc < 0) perror("HistoryBuffer::get.read");
+  rc = lseek(ion,loc,SEEK_SET); if (rc < 0) { perror("HistoryBuffer::get.seek"); setScroll(FALSE); return; }
+  rc = read(ion,bytes,len);     if (rc < 0) { perror("HistoryBuffer::get.read"); setScroll(FALSE); return; }
 }
 
 int HistoryBuffer::len()

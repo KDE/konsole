@@ -1107,6 +1107,8 @@ void TEScreen::addHistLine()
       sel_begin += columns;
     }
   }
+
+  if (!hasScroll()) histCursor = 0; //FIXME: a poor workaround
 }
 
 void TEScreen::setHistCursor(int cursor)
