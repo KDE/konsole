@@ -201,12 +201,8 @@ int main(int argc, char* argv[])
  
   QStrList eargs;
 
-  const char* shell;
-  if (args->getOption("e").isEmpty())
-  {
-    shell = konsole_shell(eargs);     
-  }
-  else
+  const char* shell = 0;
+  if (!args->getOption("e").isEmpty())
   {
      if (args->isSet("ls"))
         KCmdLineArgs::usage(i18n("You can't use BOTH -ls and -e.\n"));
@@ -278,6 +274,9 @@ int main(int argc, char* argv[])
 
   if (a.isRestored())
   {
+    if (!shell)
+       shell = konsole_shell(eargs);     
+
     KConfig * sessionconfig = a.sessionConfig();
     sessionconfig->setDesktopGroup();
     wname = sessionconfig->readEntry("class",wname).latin1();
@@ -336,7 +335,7 @@ int main(int argc, char* argv[])
   else
   {
     //2.1 sec
-    Konsole*  m = new Konsole(wname,QFile::decodeName(shell),eargs,histon,toolbaron,title,type);
+    Konsole*  m = new Konsole(wname,(shell ? QFile::decodeName(shell) : QString::null),eargs,histon,toolbaron,title,type);
     //2.5 sec
     ksm->konsole = m;
     m->setColLin(c,l); // will use default height and width if called with (0,0)
