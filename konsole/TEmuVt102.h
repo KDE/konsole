@@ -117,7 +117,7 @@ private:
   void reportTerminalParms(int p);
 
   void onScrollLock();
-  void scrollLock(bool lock);
+  void scrollLock(const bool lock);
  
 protected:
 

@@ -2291,8 +2291,8 @@ void Konsole::slotSaveHistory()
 
 //////////////////////////////////////////////////////////////////////
 
-SizeDialog::SizeDialog(unsigned int columns,
-                       unsigned int lines,
+SizeDialog::SizeDialog(const unsigned int columns,
+                       const unsigned int lines,
                        QWidget *parent)
   : KDialogBase(Plain, i18n("Size Configuration"),
                 Help | Default | Ok | Cancel, Ok,
