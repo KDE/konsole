@@ -94,7 +94,7 @@ TEmulation::TEmulation(TEWidget* w)
   scr(0),
   connected(false),
   listenToKeyPress(false),
-  codec(0),
+  m_codec(0),
   decoder(0),
   keytrans(0),
   m_findPos(-1)
@@ -202,18 +202,18 @@ const HistoryType& TEmulation::history()
 
 void TEmulation::setCodec(const QTextCodec * qtc)
 {
-  codec = qtc;
+  m_codec = qtc;
   delete decoder;
-  decoder = codec->makeDecoder();
+  decoder = m_codec->makeDecoder();
 }
 
 void TEmulation::setCodec(int c)
 {
-  //FIXME: check whether we have to free codec
-  codec = c ? QTextCodec::codecForName("utf8")
+  //FIXME: check whether we have to free m_codec
+  m_codec = c ? QTextCodec::codecForName("utf8")
             : QTextCodec::codecForLocale();
   delete decoder;
-  decoder = codec->makeDecoder();
+  decoder = m_codec->makeDecoder();
 }
 
 void TEmulation::setKeymap(int no)
@@ -493,6 +493,11 @@ void TEmulation::onImageSizeChange(int lines, int columns)
    //kdDebug(1211)<<"TEmulation::onImageSizeChange() showBulk() done"<<endl;
   emit ImageSizeChanged(lines,columns);   // propagate event
    //kdDebug(1211)<<"TEmulation::onImageSizeChange() done"<<endl;
+}
+
+QSize TEmulation::imageSize()
+{
+  return QSize(scr->getColumns(), scr->getLines());
 }
 
 void TEmulation::onHistoryCursorChange(int cursor)

@@ -700,4 +700,50 @@ void TESession::print( QPainter &paint, bool friendly, bool exact )
     te->print(paint, friendly, exact);
 }
 
+QString TESession::schema()
+{
+  QString currentSchema;
+  emit getSessionSchema(this, currentSchema);
+  return currentSchema;
+}
+
+void TESession::setSchema(const QString &schema)
+{
+  emit setSessionSchema(this, schema);
+}
+
+QString TESession::encoding()
+{
+  return em->codec()->name();
+}
+
+void TESession::setEncoding(const QString &encoding)
+{
+  emit setSessionEncoding(this, encoding);
+}
+
+QString TESession::keytab()
+{
+   return keymap();
+}
+
+void TESession::setKeytab(const QString &keytab)
+{
+   setKeymap(keytab);
+   emit updateSessionConfig(this);
+}
+
+QSize TESession::size()
+{
+  return em->imageSize();
+}
+
+void TESession::setSize(QSize size)
+{
+  if ((size.width() <= 1) || (size.height() <= 1))
+     return;
+  
+  emit resizeSession(this, size);
+}
+
 #include "session.moc"

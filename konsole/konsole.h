@@ -114,6 +114,11 @@ public:
 public slots:
   void activateSession(int position);
   void activateSession(QWidget*);
+  void slotUpdateSessionConfig(TESession *session);
+  void slotResizeSession(TESession*, QSize);
+  void slotSetSessionEncoding(TESession *session, const QString &encoding);
+  void slotGetSessionSchema(TESession *session, QString &schema);
+  void slotSetSessionSchema(TESession *session, const QString &schema);
 
   void makeGUI();
   QString newSession();
@@ -134,6 +139,7 @@ private slots:
   void doneSession(TESession*);
   void slotCouldNotClose();
   void toggleFullScreen();
+  bool fullScreen();
   void setFullScreen(bool on);
   void schema_menu_activated(int item);
   void pixmap_menu_activated(int item, TEWidget* tewidget=0);

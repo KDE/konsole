@@ -952,7 +952,7 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
   if (!ev->text().isEmpty())
   {
     if (ev->state() & AltButton) sendString("\033"); // ESC, this is the ALT prefix
-    QCString s = codec->fromUnicode(ev->text());     // encode for application
+    QCString s = m_codec->fromUnicode(ev->text());     // encode for application
     // FIXME: In Qt 2, QKeyEvent::text() would return "\003" for Ctrl-C etc.
     //        while in Qt 3 it returns the actual key ("c" or "C") which caused
     //        the ControlButton to be ignored. This hack seems to work for

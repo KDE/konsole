@@ -33,7 +33,9 @@ public:
   ~TEmulation();
 
 public:
+  QSize imageSize();
   virtual void setHistory(const HistoryType&);
+  const QTextCodec *codec() { return m_codec; }
   void setCodec(const QTextCodec *);
   virtual const HistoryType& history();
   virtual void streamHistory(QTextStream*);
@@ -104,7 +106,7 @@ protected:
 
   void setCodec(int c); // codec number, 0 = locale, 1=utf8
 
-  const QTextCodec* codec;
+  const QTextCodec* m_codec;
   QTextDecoder* decoder;
 
   KeyTrans* keytrans;

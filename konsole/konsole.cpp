@@ -270,6 +270,7 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 
   colors = new ColorSchemaList();
   colors->checkSchemas();
+  colors->sort();
 
   KeyTrans::loadAll();
   //KONSOLEDEBUG<<"Konsole ctor() after KeyTrans::loadAll() "<<time.elapsed()<<" msecs elapsed"<<endl;
@@ -2185,6 +2186,11 @@ void Konsole::toggleFullScreen()
   setFullScreen(!b_fullscreen);
 }
 
+bool Konsole::fullScreen()
+{
+  return b_fullscreen;
+}
+
 void Konsole::setFullScreen(bool on)
 {
   if( on )
@@ -2581,6 +2587,66 @@ void Konsole::activateSession(TESession *s)
   m_moveSessionRight->setEnabled(position<sessions.count()-1);
 }
 
+void Konsole::slotUpdateSessionConfig(TESession *session)
+{
+  if (session == se)
+     activateSession(se);
+}
+
+void Konsole::slotResizeSession(TESession *session, QSize size)
+{
+  TESession *oldSession = se;
+  if (se != session)
+     activateSession(session);
+  setColLin(size.width(), size.height());
+  activateSession(oldSession);
+}
+
+void Konsole::slotSetSessionEncoding(TESession *session, const QString &encoding)
+{
+  if (!selectSetEncoding)
+     makeGUI();
+  QStringList items = selectSetEncoding->items();
+  
+  QString enc;
+  unsigned int i = 0;
+  for(QStringList::ConstIterator it = items.begin();
+      it != items.end(); ++it, ++i)
+  {
+     if ((*it).find(encoding) != -1)
+     {
+        enc = *it;
+        break;
+     }
+  }
+  if (i >= items.count())
+     return;
+     
+  bool found = false;
+  enc = KGlobal::charsets()->encodingForName(enc);
+  QTextCodec * qtc = KGlobal::charsets()->codecForName(enc, found);
+  if(!found)
+     return;
+
+  session->setEncodingNo(i);
+  session->getEmulation()->setCodec(qtc);
+  if (se == session)
+     activateSession(se);
+}
+
+void Konsole::slotGetSessionSchema(TESession *session, QString &schema)
+{
+  int no = session->schemaNo();
+  ColorSchema* s = colors->find( no );
+  schema = s->relPath();
+}
+
+void Konsole::slotSetSessionSchema(TESession *session, const QString &schema)
+{
+  ColorSchema* s = colors->find( schema );
+  setSchema(s, session->widget());
+}
+
 void Konsole::allowPrevNext()
 {
   if (!se) return;
@@ -2747,6 +2813,16 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
            this, SLOT(notifySize(int,int)));
   connect( s, SIGNAL(zmodemDetected(TESession*)),
            this, SLOT(slotZModemDetected(TESession*)));
+  connect( s, SIGNAL(updateSessionConfig(TESession*)),
+           this, SLOT(slotUpdateSessionConfig(TESession*)));
+  connect( s, SIGNAL(resizeSession(TESession*, QSize)),
+           this, SLOT(slotResizeSession(TESession*, QSize)));
+  connect( s, SIGNAL(setSessionEncoding(TESession*, const QString &)),
+           this, SLOT(slotSetSessionEncoding(TESession*, const QString &)));
+  connect( s, SIGNAL(getSessionSchema(TESession*, QString &)),
+           this, SLOT(slotGetSessionSchema(TESession*, QString &)));
+  connect( s, SIGNAL(setSessionSchema(TESession*, const QString &)),
+           this, SLOT(slotSetSessionSchema(TESession*, const QString &)));
 
   s->setFontNo(QMIN(fno, TOPFONT));
   s->setSchemaNo(schmno);
@@ -3352,7 +3428,7 @@ void Konsole::setSchema(int numb, TEWidget* tewidget)
   {
         const_cast<ColorSchema *>(s)->rereadSchemaFile();
   }
-	  if (s) setSchema(s, tewidget);
+  if (s) setSchema(s, tewidget);
 }
 
 void Konsole::setSchema(const QString & path)

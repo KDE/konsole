@@ -105,6 +105,15 @@ public:
 
   void print(QPainter &paint, bool friendly, bool exact);
 
+  QString schema();
+  void setSchema(const QString &schema);
+  QString encoding();
+  void setEncoding(const QString &encoding);
+  QString keytab();
+  void setKeytab(const QString &keytab);
+  QSize size();
+  void setSize(QSize size);
+
 public slots:
 
   void run();
@@ -137,6 +146,11 @@ signals:
   void openURLRequest(const QString &cwd);
 
   void zmodemDetected(TESession *);
+  void updateSessionConfig(TESession *);
+  void resizeSession(TESession *session, QSize size);
+  void setSessionEncoding(TESession *session, const QString &encoding);
+  void getSessionSchema(TESession *session, QString &schema);
+  void setSessionSchema(TESession *session, const QString &schema);
 
 private slots:
   void onRcvBlock( const char* buf, int len );
