@@ -320,7 +320,7 @@ void TEmulation::onRcvBlock(const char *s, int len)
     if (s[i] == '\n') bulkNewline();
     if (s[i] == '\030')
     {
-      if ((len-i-1 > 9) && (strncmp(s+i+1, "B00000000", 9) == 0))
+      if ((len-i-1 > 3) && (strncmp(s+i+1, "B00", 3) == 0))
       	emit zmodemDetected();
     }
   }
