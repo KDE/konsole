@@ -854,11 +854,9 @@ bool Konsole::queryClose()
     {
         // Wait a bit for all childs to clean themselves up.
 #if KDE_VERSION >=305
-	while(sessions.count() && KProcessController::theKProcessController->waitForProcessExit(1));
-#else
-        while(sessions.count());
+        while(sessions.count() && KProcessController::theKProcessController->waitForProcessExit(1));
 #endif
-	return true; // Ready or not, here I come...
+        return true; // Ready or not, here I come...
     }
     else
     {
@@ -871,14 +869,14 @@ bool Konsole::queryClose()
         else
         {
           m_closeTimeout.start(1500, true);
-        }                                               
+        }
         return false;
     }
 }
 
 void Konsole::slotCouldNotClose()
 {
-    int result = KMessageBox::warningContinueCancel(this, 
+    int result = KMessageBox::warningContinueCancel(this,
              i18n("The application running in Konsole does not respond to the close request. "
                   "Do you want Konsole to close anyway?"), 
              i18n("Application Does Not Respond"),

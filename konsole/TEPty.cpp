@@ -327,6 +327,11 @@ int TEPty::openPty()
 { int ptyfd = -1;
   needGrantPty = true;
 
+#include <kdeversion.h>
+#if KDE_VERSION <305
+  #undef HAVE_OPENPTY  // Hack to make it compile for binner
+#endif
+
   // Find a master pty that we can open ////////////////////////////////
 
   // Because not all the pty animals are created equal, they want to
