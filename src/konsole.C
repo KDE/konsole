@@ -667,7 +667,7 @@ void Konsole::readGlobalProperties(KConfig* config)
 
 void Konsole::saveProperties(KConfig* config) {
     kdDebug() << "Save properties called\n";
-    int counter=0;
+    uint counter=0;
     QString tmpTitle;
     QString tmpTwo;
     config->setGroup("options");
