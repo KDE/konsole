@@ -372,7 +372,7 @@ Loop:
 //printf("line %3d: ",startofsym);
     getSymbol(); assertSyntax(sym == SYMName, "Name expected")
     assertSyntax(syms->keysyms[res], "Unknown key name")
-    int key = (int)syms->keysyms[res]-1;
+    int key = (long)( syms->keysyms[res] ) -1;
 //printf(" key %s (%04x)",res.latin1(),(int)syms->keysyms[res]-1);
     getSymbol(); // + - :
     int mode = 0;
@@ -384,7 +384,7 @@ Loop:
       // mode name
       assertSyntax(sym == SYMName, "Name expected")
       assertSyntax(syms->modsyms[res], "Unknown mode name")
-      int bits = (int)syms->modsyms[res]-1;
+      int bits = (long)syms->modsyms[res]-1;
       if (mask & (1 << bits))
       {
         fprintf(stderr,"%s(%d,%d): mode name used multible times.\n",path.ascii(),slinno,scolno);
@@ -405,7 +405,7 @@ Loop:
     if (sym == SYMName)
     {
       assertSyntax(syms->oprsyms[res], "Unknown operator name")
-      cmd = (int)syms->oprsyms[res]-1;
+      cmd = (long)syms->oprsyms[res]-1;
 //printf(": do %s(%d)",res.latin1(),(int)syms->oprsyms[res]-1);
     }
     if (sym == SYMString)
