@@ -96,6 +96,7 @@ static int cmd_serial = 0;
 TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
 {
   se = 0L;
+  rootxpm = 0L;
   menubar = menuBar();
   setMinimumSize(200,100);
   
@@ -115,6 +116,13 @@ TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
 
   te = new TEWidget(this);
   te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
+
+  // Transparency routines want to know when te change size ...
+  connect ( te, SIGNAL( changedImageSizeSignal(int,int)),
+		SLOT( teChangedSize(int,int)) );
+
+  // ... and when user change desktop (Antonio) 
+  connect((KWMModuleApplication *)kapp, SIGNAL(desktopChange(int)), SLOT(desktopChange(int)));
 
   // create applications /////////////////////////////////////////////////////
 
@@ -456,6 +464,37 @@ void TEDemo::readProperties(KConfig* config)
   defaultSize.setHeight( config->readNumEntry("defaultheight", 0) );
 }
 
+/* --| *Event |------------------------------------------------------------ */
+
+void TEDemo::moveEvent (QMoveEvent *qme)
+{
+  // Get another area of the background 
+  if ((useTransparency)&&(rootxpm)) rootxpm->setBackgroundPixmap(te);	
+}
+
+void TEDemo::teChangedSize(int, int)
+{
+  // Get another area of the background 
+  if ((useTransparency)&&(rootxpm)) rootxpm->setBackgroundPixmap(te);	
+}
+
+void TEDemo::desktopChange(int d)
+{
+  if ((useTransparency)&&(d==KWM::desktop(winId()))&&(d!=rootxpm->desktopNum()+1))
+	{
+	// The user has changed desktop, it probably has another background,
+	// so we have to re-read it
+	// TODO : This should be optimized for oneDesktopMode (Antonio)
+
+	ColorSchema *s=ColorSchema::find(curr_schema);
+	if (rootxpm) delete rootxpm;
+ 	rootxpm=new RootPixmap;
+	rootxpm->prepareBackground(s->tr_r,s->tr_g,s->tr_b);
+	rootxpm->setBackgroundPixmap(te);	
+	return;
+	};
+}
+
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /*                                                                           */
@@ -463,6 +502,22 @@ void TEDemo::readProperties(KConfig* config)
 
 void TEDemo::pixmap_menu_activated(int item)
 {
+  if (useTransparency)
+	{
+	// If we want a transparent window, let's get it.
+	ColorSchema *s=ColorSchema::find(curr_schema);
+	if (rootxpm) delete rootxpm;
+ 	rootxpm=new RootPixmap;
+	// This is a new schema, so we should prepare the background 
+	// and (perhaps) tint it
+	rootxpm->prepareBackground(s->tr_r,s->tr_g,s->tr_b);
+	// Now, assign an area of the background to the te widget's background pixmap
+	// but we'll let RootPixmap do the dirty work of guessing which part and
+	// copy it
+	rootxpm->setBackgroundPixmap(te);
+	return;
+	};
+
   if (item <= 1) pmPath = "";
   QPixmap pm(pmPath.data());
   if (pm.isNull()) { pmPath = ""; item = 1; }
@@ -482,6 +537,7 @@ void TEDemo::pixmap_menu_activated(int item)
                                 ( te->size().height() - pm.height() ) / 2,
                       &pm, 0, 0,
                       pm.width(), pm.height() );
+
               te->setBackgroundPixmap(bgPixmap);
             }
     break;
@@ -853,6 +909,14 @@ void TEDemo::setSchema(const ColorSchema* s)
   curr_schema = s->numb;
   pmPath = s->imagepath;
   te->setColorTable(s->table); //FIXME: set twice here to work around a bug
+
+  useTransparency=s->usetransparency;
+  if (useTransparency)
+  {
+      // we want to be notified when the user changes desktop, so let's connect to KWM
+      while (!KWM::isKWMInitialized()) sleep(1);
+      if (!KWM::isKWMModule(winId())) ((KWMModuleApplication *)kapp)->connectToKWM();   
+  }
   pixmap_menu_activated(s->alignment);
   te->setColorTable(s->table);
   if (se) se->setSchemaNo(s->numb);
@@ -902,7 +966,7 @@ int main(int argc, char* argv[])
   eargs.append(shell);
 
   setlocale( LC_ALL, "" );
-  KApplication a(argc, argv, PACKAGE);
+  KWMModuleApplication a(argc, argv, PACKAGE);
 
   for (int i = 1; i < argc; i++)
   {

@@ -17,7 +17,7 @@
 #define MAIN_H
 
 #include <kfm.h>
-#include <kapp.h>
+#include <kwmmapp.h>
 #include <ktmainwindow.h>
 //#include <ktopwidget.h>
 #include <ksimpleconfig.h>
@@ -28,6 +28,9 @@
 #include "TEmuVt102.h"
 #include "session.h"
 #include "schema.h"
+#include "rootBg.h"
+
+class RootPixmap;
 
 class TEDemo : public KTMainWindow
 { Q_OBJECT
@@ -57,11 +60,16 @@ private slots:
 
   void changeColumns(int);
   void notifySize(int,int);
+  void teChangedSize(int, int);
   void setHeader();
   void changeTitle(int, const char*s);
   void onDrop( KDNDDropZone* _zone );
+
+  void desktopChange(int);
     
 protected:
+
+ virtual void moveEvent ( QMoveEvent * );
 
  void saveProperties(KConfig* config);
  void readProperties(KConfig* config);
@@ -89,6 +97,9 @@ private:
 
   TEWidget*      te;
   TESession*     se;
+
+  RootPixmap*    rootxpm;
+  bool useTransparency;
 
   KMenuBar*   menubar;
   KStatusBar* statusbar;

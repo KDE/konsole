@@ -37,6 +37,10 @@ ColorSchema* ColorSchema::readSchema(const char* path)
   res->title     = "[missing title]";
   res->imagepath = "";
   res->alignment = 1;
+  res->usetransparency = false;
+  res->tr_r = 0.0;
+  res->tr_g = 0.0;
+  res->tr_b = 0.0;
   //
   while (fscanf(sysin,"%80[^\n]\n",line) > 0)
   {
@@ -59,6 +63,18 @@ ColorSchema* ColorSchema::readSchema(const char* path)
         if (path[0] != '/') res->imagepath = kapp->kde_wallpaperdir() + '/';
         res->imagepath += path;
         res->alignment = attr;
+      }
+      if (!strncmp(line,"transparency",12))
+      { float rr, rg, rb;
+
+	// transparency needs 3 parameters, the ratio with which the original pixel
+	// color component is multiplied
+        if (sscanf(line,"transparency %g %g %g",&rr,&rg,&rb) != 3)
+          continue;
+	res->usetransparency=true;
+	res->tr_r=rr;
+	res->tr_g=rg;
+	res->tr_b=rb;
       }
       if (!strncmp(line,"color",5))
       { int fi,cr,cg,cb,tr,bo;
@@ -151,6 +167,8 @@ ColorSchema* ColorSchema::defaultSchema()
   res->title = "Konsole Default";
   res->imagepath = ""; // background pixmap
   res->alignment = 1;  // none
+  res->usetransparency = false; // not use pseudo-transparency by default
+  res->tr_r = res->tr_g = res->tr_b = 0.0; // just to be on the safe side
   for (int i = 0; i < TABLE_COLORS; i++)
     res->table[i] = default_table[i];
   return res;

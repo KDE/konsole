@@ -42,7 +42,7 @@ libkonsole_a_SOURCES = TEWidget.C TEmuVt102.C TEScreen.C TEmulation.C TEShell.C
                        
 # Which sources should be compiled for konsole.
 
-konsole_SOURCES	= main.C schema.C session.C
+konsole_SOURCES	= main.C schema.C session.C rootBg.C
 konsole_LDADD   = libkonsole.a $(LIB_KIMGIO) $(LIB_KDEUI) 
 konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
