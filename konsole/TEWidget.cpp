@@ -916,10 +916,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     // Find left (left_not_right ? from here : from start)
     QPoint left = left_not_right ? here : iPntSelCorr;
     i = loc(left.x(),left.y());
-    if (i>image_size)
-      kdDebug(1211) << "TEWidget::mouseMoveEvent: (1) i=" << i << ", imagesize=" << image_size << endl;
-    else
-    {
+    if (i>=0 && i<=image_size) {
       selClass = charClass(image[i].c);
       while ( ((left.x()>0) || (left.y()>0 && m_line_wrapped[left.y()-1])) && charClass(image[i-1].c) == selClass )
       { i--; if (left.x()>0) left.rx()--; else {left.rx()=columns-1; left.ry()--;} }
@@ -928,10 +925,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     // Find left (left_not_right ? from start : from here)
     QPoint right = left_not_right ? iPntSelCorr : here;
     i = loc(right.x(),right.y());
-    if (i>image_size)
-      kdDebug(1211) << "TEWidget::mouseMoveEvent: (2) i=" << i << ", imagesize=" << image_size << endl;
-    else
-    {
+    if (i>=0 && i<=image_size) {
       selClass = charClass(image[i].c);
       while( ((right.x()<columns-1) || (right.y()<lines-1 && m_line_wrapped[right.y()])) && charClass(image[i+1].c) == selClass )
       { i++; if (right.x()<columns-1) right.rx()++; else {right.rx()=0; right.ry()++; } }
@@ -999,10 +993,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     if (right.x() > 0)
     {
       i = loc(right.x(),right.y());
-      if (i>image_size)
-        kdDebug(1211) << "TEWidget::mouseMoveEvent: (3) i=" << i << ", imagesize=" << image_size << endl;
-      else
-      {
+      if (i>=0 && i<=image_size) {
         selClass = charClass(image[i-1].c);
         if (selClass == ' ')
         {
@@ -1520,8 +1511,8 @@ void TEWidget::makeImage()
 //FIXME: rename 'calcGeometry?
 {
   calcGeometry();
-  image_size=lines*columns*sizeof(ca);
-  image = (ca*) malloc(image_size);
+  image = (ca*) malloc(lines*columns*sizeof(ca));
+  image_size=lines*columns;
   clearImage();
 }
 
