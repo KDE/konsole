@@ -1241,6 +1241,7 @@ TESession *Konsole::newSession(KSimpleConfig *co)
   QString sch = s_kconfigSchema;
   QString txt = title;
   unsigned int     fno = n_defaultFont;
+  QStrList cmdArgs;
   if (co)
   {
       cmd = co->readEntry("Exec");
@@ -1248,21 +1249,21 @@ TESession *Konsole::newSession(KSimpleConfig *co)
       sch = co->readEntry("Schema", sch);
       txt = co->readEntry("Comment", txt);
       fno = co->readUnsignedNumEntry("Font", fno);
+      cmdArgs.append(shell);
+      if (!cmd.isEmpty())
+      {
+        cmdArgs.append("-c");
+        cmdArgs.append(QFile::encodeName(cmd));
+      }
   }
+  else
+      cmdArgs = args;
   ColorSchema* schema = sch.isEmpty()
                       ? colors->find(s_schema)
                       : colors->find(sch);
   int schmno = schema->numb();
 
-  QStrList args;
-  args.append(shell);
-  if (!cmd.isEmpty())
-  {
-    args.append("-c");
-    args.append(QFile::encodeName(cmd));
-  }
-
-  TESession* s = new TESession(this,te,shell,args,emu);
+  TESession* s = new TESession(this,te,co ? shell : pgm,cmdArgs,emu);
   connect( s,SIGNAL(done(TESession*,int)),
            this,SLOT(doneSession(TESession*,int)) );
   connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
