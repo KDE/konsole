@@ -50,3 +50,8 @@ Anyway, try
   make menuconfig
 
 for a pleasing view.
+
+
+I found lately, that konsole does pretty well when running
+dosemu, too: Fire up the linux console emulation as above,
+set the size to 80x25 (ibmpc) and start "dos".
