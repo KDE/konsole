@@ -162,7 +162,9 @@ void TESession::monitorTimerDone()
 
 void TESession::notifySessionState(int state)
 {
-  if (state==NOTIFYACTIVITY) {
+  if (state==NOTIFYBELL) {
+    te->Bell(em->isConnected(),"Bell in session '"+title+"'");
+  } else if (state==NOTIFYACTIVITY) {
     if (monitorSilence) {
       monitorTimer->stop();
       monitorTimer->start(silence_seconds*1000,true);

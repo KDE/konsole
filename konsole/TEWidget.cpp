@@ -1491,11 +1491,14 @@ void TEWidget::setBellMode(int mode)
   bellMode=mode;
 }
 
-void TEWidget::Bell()
+void TEWidget::Bell(bool visibleSession, QString message)
 {
-  if (bellMode==BELLSYSTEM)
-    KNotifyClient::beep();
-  if (bellMode==BELLVISUAL) {
+  if (bellMode==BELLSYSTEM) {
+    if (visibleSession)
+      KNotifyClient::event("BellVisible", message);
+    else
+      KNotifyClient::event("BellInvisible", message);
+  } else if (bellMode==BELLVISUAL) {
     swapColorTable();
     QTimer::singleShot(200,this,SLOT(swapColorTable()));
   }

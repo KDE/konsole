@@ -1,0 +1,15 @@
+[!Global!]
+IconName=konsole
+Comment=Konsole
+
+[BellVisible]
+Name=Bell in visible session
+Comment=Bell emitted within a visible session
+default_sound=KDE_Beep_Beep.wav
+default_presentation=1
+
+[BellInvisible]
+Name=Bell in invisible session
+Comment=Bell emitted within an invisible session
+default_sound=KDE_Beep_Beep.wav
+default_presentation=0

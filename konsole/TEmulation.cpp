@@ -258,9 +258,7 @@ void TEmulation::onRcvChar(int c)
     case '\t'      : scr->Tabulate();                  break;
     case '\n'      : scr->NewLine();                   break;
     case '\r'      : scr->Return();                    break;
-    case 0x07      : if (connected)
-                       gui->Bell();
-                     emit notifySessionState(NOTIFYBELL);
+    case 0x07      : emit notifySessionState(NOTIFYBELL);
                      break;
     default        : scr->ShowCharacter(c);            break;
   };

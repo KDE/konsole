@@ -175,6 +175,7 @@ private slots:
 
   void slotSaveSettings();
   void slotSaveSessionsProfile();
+  void slotConfigureNotifications();
   void slotConfigureKeys();
   void slotConfigure();
   void reparseConfiguration();

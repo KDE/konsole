@@ -25,8 +25,8 @@ konsoleheredir = $(kde_datadir)/konqueror/servicemenus
 rc_DATA = kwritedrc
 rcdir = $(kde_confdir)
 
-tip_DATA = tips
-tipdir = $(kde_datadir)/konsole
+misc_DATA = eventsrc tips
+miscdir = $(kde_datadir)/konsole
 
 EXTRA_DIST = CONTRIBUTORS LICENSE.readme README.bugs \
 	README.linux.console tests $(data_DATA)

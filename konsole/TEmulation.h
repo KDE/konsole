@@ -78,6 +78,8 @@ public:
   virtual void sendString(const char*) = 0;
 
   virtual void setConnect(bool r);
+  bool isConnected() { return connected; }
+
   virtual void setListenToKeyPress(bool l);
   void setColumns(int columns);
 

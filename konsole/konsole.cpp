@@ -102,6 +102,7 @@ Time to start a requirement list.
 #include <kipc.h>
 #include <dcopclient.h>
 #include <kglobalsettings.h>
+#include <knotifydialog.h>
 
 #include <kaction.h>
 #include <qlabel.h>
@@ -596,6 +597,7 @@ void Konsole::makeGUI()
 
    m_options->insertSeparator();
 
+   KStdAction::configureNotifications(this, SLOT(slotConfigureNotifications()), actionCollection())->plug(m_options);
    KStdAction::keyBindings(this, SLOT(slotConfigureKeys()), actionCollection())->plug(m_options);
    KAction *configure = KStdAction::preferences(this, SLOT(slotConfigure()), actions);
    configure->plug(m_options);
@@ -1402,6 +1404,11 @@ void Konsole::slotSaveSettings()
   saveProperties(config);
   saveMainWindowSettings(config);
   config->sync();
+}
+
+void Konsole::slotConfigureNotifications()
+{
+   KNotifyDialog::configure(this, "Notification Configuration Dialog");
 }
 
 void Konsole::slotConfigureKeys()

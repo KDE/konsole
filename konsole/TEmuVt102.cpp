@@ -406,9 +406,7 @@ void TEmuVt102::tau( int token, int p, int q )
     case TY_CTL___('D'      ) : /* EOT: ignored                      */ break;
     case TY_CTL___('E'      ) :      reportAnswerBack     (          ); break; //VT100
     case TY_CTL___('F'      ) : /* ACK: ignored                      */ break;
-    case TY_CTL___('G'      ) : if (connected)
-                                  gui->Bell  (          );
-                                emit notifySessionState(NOTIFYBELL);
+    case TY_CTL___('G'      ) : emit notifySessionState(NOTIFYBELL);
                                 break; //VT100
     case TY_CTL___('H'      ) : scr->BackSpace            (          ); break; //VT100
     case TY_CTL___('I'      ) : scr->Tabulate             (          ); break; //VT100
