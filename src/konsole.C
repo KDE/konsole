@@ -1373,7 +1373,6 @@ void Konsole::newSession(int i)
 
 TESession *Konsole::newSession(KSimpleConfig *co)
 {
-//  KONSOLEDEBUG << "In *Konsole::newSession(KSimpleConfig *co)" << endl;
   const char* shell = getenv("SHELL");
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
 
@@ -1385,13 +1384,12 @@ TESession *Konsole::newSession(KSimpleConfig *co)
   QStrList cmdArgs;
   if (co)
   {
-//      KONSOLEDEBUG << "We NEVER get there" << endl;
+      //KONSOLEDEBUG << "This session was started with a .desktop file" << endl;
       co->setDesktopGroup();
       cmd = co->readEntry("Exec");
       emu = co->readEntry("Term", emu).ascii();
       sch = co->readEntry("Schema", sch);
       txt = co->readEntry("Comment", txt);
-//      KONSOLEDEBUG<<"Restored txt "<< txt << endl;
       fno = co->readUnsignedNumEntry("Font", fno);
 
       if (!(bIsBlankNewSession)) {
@@ -1405,19 +1403,13 @@ TESession *Konsole::newSession(KSimpleConfig *co)
       }
   }
   else  {
-//      KONSOLEDEBUG << "We get here" << endl;
       cmdArgs = args;
-//      pgm="pine";
       }
 
   if (bIsBlankNewSession) {
+    //This session was started with the New button or the newSession key combo
+    shell = pgm;
     if(!(args.isEmpty())) {
-      //pgm = strdup(args.at(0));
-
-//      KONSOLEDEBUG << "pgm set to " << pgm << endl;
-//      KONSOLEDEBUG << "args.count() = " << args.count() << endl;
-//      KONSOLEDEBUG << "We DO get here.  It is a blank session and the args aren't empty." << endl;
-//      KONSOLEDEBUG << "Count of args is " << args.count() << endl;
       cmdArgs = args;
       }
     }
@@ -1429,10 +1421,7 @@ TESession *Konsole::newSession(KSimpleConfig *co)
       schema=(ColorSchema*)colors->at(0);  //the default one
   int schmno = schema->numb();
 
-//  if (isRestored) pgm = myPgm;
-
   TESession* s = new TESession(this,te,co ? shell : pgm,cmdArgs,emu);
-//  TESession* s = new TESession(this,te,pgm,cmdArgs,emu);
   connect( s,SIGNAL(done(TESession*,int)),
            this,SLOT(doneSession(TESession*,int)) );
   connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
@@ -1442,7 +1431,6 @@ TESession *Konsole::newSession(KSimpleConfig *co)
 
   s->setFontNo(QMIN(fno, TOPFONT));
   s->setSchemaNo(schmno);
-//KONSOLEDEBUG<<"setTitle Konsole 1319 "<< txt << endl;
   s->setTitle(txt);
 
   if (b_histEnabled)
