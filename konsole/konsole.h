@@ -57,7 +57,7 @@ class Konsole : public KMainWindow, virtual public KonsoleIface
 public:
 
   Konsole(const char * name, const QString &_program, QStrList & _args, int histon,
-    bool menubaron, bool toolbaron, bool frameon, bool scrollbaron, const QString & _title,
+    bool menubaron, bool toolbaron, bool frameon, bool scrollbaron, const QString &icon, const QString &_title,
     QCString type = 0, const QString &_term=QString::null, bool b_inRestore = false);
   ~Konsole();
   void setColLin(int columns, int lines);
