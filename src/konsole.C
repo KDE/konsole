@@ -1066,7 +1066,10 @@ void Konsole::showFullScreen()
 void Konsole::setFullScreen(bool on)
 {
   if (on == b_fullscreen) return;
-  if (on) showFullScreen(); else showNormal();
+  if (on) showFullScreen(); else {
+    showNormal();
+    setCaption(title); // restore caption of window
+  }
   b_fullscreen = on;
   m_options->setItemChecked(5,b_fullscreen);
 }

@@ -1,3 +1,7 @@
+26 Apr 2001
+- Applied patches from bug reports 11353 and 16321, session title is now
+  passed to window title and going back and forth from fullscreen mode no
+  longer appends extra data to the window title.
 20 Dec 2000
 - Made ColorSchema a class instead of a struct.
 - Added hasSchemaFileChanged() to detect changed .schema files if needed.
