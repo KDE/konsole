@@ -264,10 +264,15 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   setVTFont( QFont("fixed") );
   setColorTable(base_color_table); // init color table
 
-  if ( parent ) parent->installEventFilter( this ); //FIXME: see below
+  qApp->installEventFilter( this ); //FIXME: see below
 }
 
 //FIXME: make proper destructor
+// Here's a start (David)
+TEWidget::~TEWidget()
+{
+  qApp->removeEventFilter( this );
+}
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
@@ -866,7 +871,8 @@ bool TEWidget::eventFilter( QObject *, QEvent *e )
     QApplication::sendEvent(scrollbar, e);
   }
   if ( e->type() == QEvent::KeyPress )
-  { QKeyEvent* ke = (QKeyEvent*)e;
+  { 
+    QKeyEvent* ke = (QKeyEvent*)e;
 
     actSel=0; // Key stroke implies a screen update, so TEWidget won't
               // know where the current selection is.

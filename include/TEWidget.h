@@ -31,6 +31,7 @@ class TEWidget : public QFrame
 public:
 
     TEWidget(QWidget *parent=0, const char *name=0);
+    virtual ~TEWidget();
 
 public:
 

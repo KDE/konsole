@@ -98,7 +98,6 @@ konsolePart::konsolePart(QWidget *parent, const char *name)
   //bool welcome = true;
   bool histon = true;
   const char* wname = PACKAGE;
-  const char* shell = getenv("SHELL");
 
   //  QCString sz = "";
   //sz = args->getOption("vt_sz");
@@ -108,10 +107,10 @@ konsolePart::konsolePart(QWidget *parent, const char *name)
   QStrList eargs;
   //  welcome = args->isSet("welcome");
 
+  const char* shell = getenv("SHELL");
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
-  //   shell = "/bin/ls";
-  shell = "/usr/bin/mc";
-   eargs.append(shell);
+  //shell = "/usr/bin/mc";
+  eargs.append(shell);
   te = new TEWidget(parent);
   te->setFocusPolicy(QWidget::ClickFocus);
   te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
@@ -128,6 +127,11 @@ konsolePart::konsolePart(QWidget *parent, const char *name)
   
   // kDebugInfo("Loading successful");
   // kDebugInfo("XML file set");
+
+  // This is needed since only konsole.C does it
+  // Without those two -> crash on keypress... (David)
+  KeyTrans::loadAll();
+  initial->getEmulation()->setKeytrans(0);
 }
 
 
