@@ -92,9 +92,6 @@ dummy.cpp:
 	echo > dummy.cpp
 
 
-rcdir = $(kde_datadir)/konsole
-rc_DATA = konsole_part.rc
-
 # setting up x-application/konsole as a special mimetype
 mimedir = $(kde_mimedir)/application
 mime_DATA = x-konsole.desktop
