@@ -238,7 +238,7 @@ Konsole::~Konsole()
 //FIXME: close all session properly and clean up
     // Delete the session if isn't in the session list any longer.
     if (sessions.find(se) == -1)
-       delete se; 
+       delete se;
     sessions.setAutoDelete(true);
 }
 
@@ -391,7 +391,7 @@ void Konsole::makeMenu()
 
 /**
    This function calculates the size of the external widget
-   needed for the internal widget to be 
+   needed for the internal widget to be
  */
 QSize Konsole::calcSize(int columns, int lines) {
     QSize size = te->calcSize(columns, lines);
@@ -410,7 +410,7 @@ QSize Konsole::calcSize(int columns, int lines) {
 	}
     }
     if (!menuBar()->isHidden()) {
-	size += QSize(0,menuBar()->size().height());	
+	size += QSize(0,menuBar()->size().height());
     }
     return size;
 }
@@ -429,7 +429,7 @@ void Konsole::setColLin(int columns, int lines)
       defaultSize = calcSize(80,24);
       notifySize(24,80); // set menu items (strange arg order !)
     }
-    resize(defaultSize);    
+    resize(defaultSize);
   } else {
     resize(calcSize(columns, lines));
     notifySize(lines,columns); // set menu items (strange arg order !)
@@ -655,9 +655,9 @@ void Konsole::setFont(int fontno)
 
 void Konsole::slotToggleMenubar() {
   bool b_menuvis = showMenubar->isChecked();
-  if (b_menuvis) 
-     menubar->show(); 
-  else 
+  if (b_menuvis)
+     menubar->show();
+  else
      menubar->hide();
   if (!b_menuvis) {
     setCaption(i18n("Use the right mouse button to bring back the menu"));
@@ -694,7 +694,7 @@ void Konsole::opt_menu_activated(int item)
             break;
     case 5: setFullScreen(!b_fullscreen);
             break;
-    case 8: 
+    case 8:
             KConfig *config = KGlobal::config();
             config->setGroup("options");
             saveProperties(config);
@@ -832,12 +832,12 @@ void Konsole::addSession(TESession* s)
   QString title = i18n("%1 No %2").arg(s->Title()).arg(session_no);
   //  char buffer[30];
   //  int acc = CTRL+SHIFT+Key_0+session_no; // Lars: keys stolen by kwin.
-  KRadioAction *ra = new KRadioAction(title, 
-                                     "openterm", 
+  KRadioAction *ra = new KRadioAction(title,
+                                     "openterm",
 				      0,
-				      this, 
-				      SLOT(activateSession()), 
-				      this); 
+				      this,
+				      SLOT(activateSession()),
+				      this);
 				      //				      buffer);
   ra->setExclusiveGroup("sessions");
   ra->setChecked(true);
@@ -876,7 +876,7 @@ void Konsole::activateSession(TESession *s)
     QObject::disconnect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
     // Delete the session if isn't in the session list any longer.
     if (sessions.find(se) == -1)
-       delete se; 
+       delete se;
   }
   se = s;
   session2action.find(se)->setChecked(true);
@@ -1072,7 +1072,8 @@ void Konsole::addSessionCommand(const QString &path)
   co->setDesktopGroup();
   QString typ = co->readEntry("Type");
   QString txt = co->readEntry("Comment");
-  QString cmd = co->readEntry("Exec");
+  // not used ??!
+  //  QString cmd = co->readEntry("Exec");
   QString nam = co->readEntry("Name");
   if (typ.isEmpty() || txt.isEmpty() || nam.isEmpty() ||
       typ != "KonsoleApplication")
