@@ -899,9 +899,9 @@ void Konsole::newSession(int i)
   s->setSchemaNo(schmno);
   s->setTitle(txt);
   s->setHistory(b_scroll); //FIXME: take from schema
- 
+
   // Lotzi B: I don't know why it was here, but commenting it out
-  // fixes the annoying bug of the jumping of the scrollbar when 
+  // fixes the annoying bug of the jumping of the scrollbar when
   // creating a new menu
   //setHistory(b_scroll); //FIXME: take from schema
 
