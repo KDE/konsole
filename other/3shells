@@ -1,0 +1,9 @@
+[Desktop Entry]
+numSes=3
+Title0=Shell
+Title1=Shell No. 2
+Title2=Shell No. 3
+
+[konsole-mainwindow#1 Toolbar style]
+IconText=IconTextRight
+Position=Bottom

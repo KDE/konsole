@@ -1,0 +1,11 @@
+[Desktop Entry]
+numSes=5
+Title0=Shell
+Title1=Shell No. 2
+Title2=Shell No. 3
+Title3=Shell No. 4
+Title4=Shell No. 5
+
+[konsole-mainwindow#1 Toolbar style]
+IconText=IconTextRight
+Position=Bottom

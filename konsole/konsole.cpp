@@ -495,7 +495,7 @@ void Konsole::makeGUI()
    scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
    selectScrollbar->setItems(scrollitems);
    selectScrollbar->plug(m_options);
-
+   
    // Fullscreen
    m_options->insertSeparator();
    m_fullscreen = new KToggleAction(i18n("F&ull-Screen"), "window_fullscreen", 0, this,
@@ -559,6 +559,12 @@ void Konsole::makeGUI()
 
    KAction *save_settings = KStdAction::saveOptions(this, SLOT(slotSaveSettings()), actions);
    save_settings->plug(m_options);
+
+   m_options->insertSeparator();
+
+   KAction *saveProfile = new KAction( i18n( "Save Sessions &Profile..." ), 0, this,
+                          SLOT( slotSaveSessionsProfile() ), m_shortcuts, "save_sessions_profile" );
+   saveProfile->plug(m_options);
 
    m_options->insertSeparator();
 
@@ -811,6 +817,24 @@ void Konsole::configureRequest(TEWidget* te, int state, int x, int y)
 /* Configuration                                                             */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
+
+void Konsole::slotSaveSessionsProfile()
+{
+  KLineEditDlg dlg(i18n("Enter name under which the profile should be saved:"),"", this);
+  dlg.setCaption(i18n("Save Sessions Profile"));
+  if (dlg.exec()) {
+    QString path = locateLocal( "data", QString::fromLatin1( "konsole/profiles/" ) +
+                                dlg.text(), KGlobal::instance() );
+
+    if ( QFile::exists( path ) )
+      QFile::remove( path );
+
+    KSimpleConfig cfg( path );
+    saveProperties(&cfg);
+    cfg.setGroup("WindowProperties1");
+    saveMainWindowSettings(&cfg);
+  }
+}
 
 void Konsole::saveProperties(KConfig* config) {
   uint counter=0;

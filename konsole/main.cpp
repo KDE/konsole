@@ -25,6 +25,7 @@
 #include <kcmdlineargs.h>
 #include <kimageio.h>
 #include <kdebug.h>
+#include <kstandarddirs.h>
 #include "konsole.h"
 
 static const char *description =
@@ -47,6 +48,7 @@ static KCmdLineOptions options[] =
    { "vt_sz CCxLL",  I18N_NOOP("Terminal size in columns x lines"), 0 },
    { "type <type>", I18N_NOOP("Open the given session type instead of the default shell"), 0 },
    { "keytab <name>", I18N_NOOP("Use given .keytab file"), 0 },
+   { "profile <name>", I18N_NOOP("Start with given sessions profile"), 0 },
    { "schema <name>", I18N_NOOP("Use given .schema file"), 0 },
    { "workdir <dir>", I18N_NOOP("Change working directory of the konsole to 'dir'"), 0 },
    { "!e <command>",  I18N_NOOP("Execute 'command' instead of shell"), 0 },
@@ -67,7 +69,7 @@ const char *konsole_shell(QStrList &args)
     char* t = (char*)strrchr(shell,'/');
     if (t) // see sh(1)
     {
-      t = strdup(t); 
+      t = strdup(t);
       *t = '-';
       args.append(t);
       free(t);
@@ -87,7 +89,7 @@ const char *konsole_shell(QStrList &args)
    It must be here, because this has to be called before
    the KMainWindow's manager.
 
-   It is also used to add "--noxft" and "--ls" to the restoreCommand 
+   It is also used to add "--noxft" and "--ls" to the restoreCommand
    if konsole was started with any of those options.
  */
 class KonsoleSessionManaged: public KSessionManaged {
@@ -256,6 +258,17 @@ int main(int argc, char* argv[])
   if (args->isSet("schema"))
     schema = args->getOption("schema");
 
+  KConfig * sessionconfig;
+  QString profile = "";
+  if (args->isSet("profile")) {
+    profile = args->getOption("profile");
+    QString path = locate( "data", "konsole/profiles/" + profile );
+    if ( QFile::exists( path ) )
+      sessionconfig=new KConfig( path, true );
+    else
+      profile = "";
+  }
+
   //FIXME: more: font
 
   args->clear();
@@ -281,17 +294,18 @@ int main(int argc, char* argv[])
 
   // Ignore SIGHUP so that we don't get killed when
   // our parent-shell gets closed.
-  signal(SIGHUP, SIG_IGN); 
+  signal(SIGHUP, SIG_IGN);
 
   putenv((char*)"COLORTERM="); // to trigger mc's color detection
   KonsoleSessionManaged *ksm = new KonsoleSessionManaged();
 
-  if (a.isRestored())
+  if (a.isRestored() || !profile.isEmpty())
   {
     if (!shell)
-       shell = konsole_shell(eargs);     
+       shell = konsole_shell(eargs);
 
-    KConfig * sessionconfig = a.sessionConfig();
+    if (profile.isEmpty())
+      sessionconfig = a.sessionConfig();
     sessionconfig->setDesktopGroup();
     wname = sessionconfig->readEntry("class",wname).latin1();
 //    RESTORE( Konsole(wname,shell,eargs,histon,toolbaron) )
@@ -306,9 +320,9 @@ int main(int argc, char* argv[])
     QString sIcon;
     QString sCwd;
 
-    while (KMainWindow::canBeRestored(n))
+    while (KMainWindow::canBeRestored(n) || !profile.isEmpty())
     {
-        sessionconfig->setDesktopGroup();
+	sessionconfig->setDesktopGroup();
         sPgm = sessionconfig->readEntry("Pgm0", shell);
         sessionconfig->readListEntry("Args0", eargs);
         sTitle = sessionconfig->readEntry("Title0", title);
@@ -316,7 +330,7 @@ int main(int argc, char* argv[])
         sIcon = sessionconfig->readEntry("Icon0","openterm");
         sCwd = sessionconfig->readEntry("Cwd0");
         Konsole *m = new Konsole(wname,sPgm,eargs,histon,menubaron,toolbaron,frameon,scrollbaron,sIcon,sTitle,0/*type*/,sTerm,true,sCwd);
-        m->restore(n);
+	m->restore(n);
         m->makeGUI();
         m->setSchema(sessionconfig->readEntry("Schema0"));
         m->initSessionFont(sessionconfig->readNumEntry("Font0", -1));
@@ -361,10 +375,15 @@ int main(int argc, char* argv[])
         m->setDefaultSession( sessionconfig->readEntry("DefaultSession","shell.desktop") );
 
         ksm->konsole = m;
-        ksm->konsole->initFullScreen();
-        // works only for the first one, but there won't be more.
+        if ( !profile.isEmpty() ) {
+          ksm->konsole->setName( "konsole-mainwindow#1" );
+          ksm->konsole->applyMainWindowSettings(sessionconfig);
+          profile = "";
+        }
+	ksm->konsole->initFullScreen();
+	// works only for the first one, but there won't be more.
         n++;
-        m->run();
+	m->run();
     }
   }
   else

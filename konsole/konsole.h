@@ -43,7 +43,7 @@
 #undef PACKAGE
 #undef VERSION
 #define PACKAGE "konsole"
-#define VERSION "1.1"
+#define VERSION "1.2 Preview"
 
 class KRootPixmap;
 class QCheckBox;
@@ -157,6 +157,7 @@ private slots:
   void loadScreenSessions();
 
   void slotSaveSettings();
+  void slotSaveSessionsProfile();
   void slotConfigureKeys();
   void slotConfigure();
   void reparseConfiguration();

@@ -11,6 +11,9 @@ data_DATA = BlackOnLightColor.schema BlackOnLightYellow.schema BlackOnWhite.sche
   default.Keytab linux.keytab vt100.keytab vt420pc.keytab x11r5.keytab \
   README.Schema README.KeyTab screen.desktop
 
+profiledir = $(kde_datadir)/konsole/profiles
+profile_DATA = 2shells 3shells 4shells 5shells
+
 KDE_ICON = konsole
 
 EXTRA_DIST = $(data_DATA)
