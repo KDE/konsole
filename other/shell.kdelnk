@@ -2,9 +2,11 @@
 [KDE Desktop Entry]
 Type=KonsoleApplication
 Name=Shell
+Name[pt_BR]=Shell
 Name[es]=Shell
 Name[no]=Skall
 Comment=Shell
+Comment[pt_BR]=Shell
 Comment[es]=Shell
 Comment[no]=Skall
 Exec=sh

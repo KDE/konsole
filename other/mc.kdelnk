@@ -2,9 +2,11 @@
 [KDE Desktop Entry]
 Type=KonsoleApplication
 Name=MC
+Name[pt_BR]=MC
 Name[es]=MC
 Name[no]=MC
 Comment=Midnight Commander
+Comment[pt_BR]=Midnight Commander
 Comment[es]=Midnight Commander
 Comment[no]=Midnight Commander
 Exec=mc -c
