@@ -677,7 +677,7 @@ void KeyTrans::loadAll()
   KeyTrans* sc = new KeyTrans("[buildin]");
   sc->addKeyTrans();
 
-  QStringList lst = KGlobal::dirs()->findAllResources("appdata", "*.keytab");
+  QStringList lst = KGlobal::dirs()->findAllResources("data", "konsole/*.keytab");
 
   for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it )
   {

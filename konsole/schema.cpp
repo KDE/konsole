@@ -130,7 +130,7 @@ ColorSchema::ColorSchema(const QString& pathname)
 :m_fileRead(false)
 ,lastRead(new QDateTime())
 {
-  fPath = locate("appdata", pathname);
+  fPath = locate("data", "konsole/"+pathname);
   if (fPath.isEmpty() || !QFile::exists(fPath))
   {
     fPath = QString::null;
@@ -497,19 +497,24 @@ bool ColorSchemaList::updateAllSchemaTimes(const QDateTime& now)
 //  KONSOLEDEBUG << "Updating time stamps" << endl;
 
   QStringList list;
-  KGlobal::dirs()->findAllResources("appdata", "*.schema", false, true, list);
+  KGlobal::dirs()->findAllResources("data", "konsole/*.schema", false, true, list);
   QStringList::ConstIterator it;
   bool r = false;
 
   for (it=list.begin(); it!=list.end(); ++it)
   {
-    ColorSchema *sc = find(*it);
+    QString filename=*it;
+    int j=filename.findRev('/');
+    if (j>-1)
+      filename = filename.mid(8);
+
+    ColorSchema *sc = find(filename);
 
     if (!sc)
     {
-//      KONSOLEDEBUG << "Found new schema " << *it << endl;
+//      KONSOLEDEBUG << "Found new schema " << filename << endl;
 
-      ColorSchema *newSchema = new ColorSchema(*it);
+      ColorSchema *newSchema = new ColorSchema(filename);
       if (newSchema) 
       {
         append(newSchema);
