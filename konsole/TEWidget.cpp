@@ -372,7 +372,7 @@ TEWidget::~TEWidget()
 void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
                            QString& str, ca attr, bool pm, bool clear)
 {
-  int a = (font_h+font_a)/2;
+  int a = font_a + m_lineSpacing / 2;
   QColor fColor = color_table[attr.f].color;
 
   if (attr.r & RE_CURSOR)
@@ -394,7 +394,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
   if ((attr.r & RE_CURSOR)) {
     paint.setBackgroundMode( TransparentMode );
     int h = font_h - m_lineSpacing;
-    QRect r(rect.x(),rect.y()+a-font_a,rect.width(),h);
+    QRect r(rect.x(),rect.y()+m_lineSpacing/2,rect.width(),h);
     if (hasFocus())
     {
        if (!cursorBlinking)
