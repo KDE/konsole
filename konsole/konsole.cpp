@@ -180,7 +180,6 @@ DCOPObject( "konsole" )
 ,m_options(0)
 ,m_schema(0)
 ,m_keytab(0)
-//,m_codec(0)
 ,m_toolbarSessionsCommands(0)
 ,m_signals(0)
 ,m_help(0)
@@ -433,12 +432,6 @@ void Konsole::makeGUI()
    m_keytab->setCheckable(TRUE);
    connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
 
-   // Codec Options Menu ------------------------------------------------------
-/*   m_codec  = new KPopupMenu(this);
-   m_codec->setCheckable(TRUE);
-   m_codec->insertItem( i18n("&Locale"), 1 );
-   m_codec->setItemChecked(1,TRUE); */
-
    //options menu
    // Menubar on/off
    showMenubar = new KToggleAction ( i18n( "Show &Menubar" ), "showmenu", 0, this,
@@ -469,30 +462,6 @@ void Konsole::makeGUI()
    m_options->setItemChecked(5,b_fullscreen);
    m_options->insertSeparator();
 
-   // Select size
-   selectSize = new KonsoleFontSelectAction(i18n("S&ize"), 0, this,
-                                  SLOT(slotSelectSize()), this);
-   QStringList sizeitems;
-   sizeitems << i18n("40x15 (&Small)")
-      << i18n("80x24 (&VT100)")
-      << i18n("80x25 (&IBM PC)")
-      << i18n("80x40 (&XTerm)")
-      << i18n("80x52 (IBM V&GA)")
-      << ""
-      << i18n("&Custom...");
-   selectSize->setItems(sizeitems);
-   selectSize->plug(m_options);
-
-   // Select Bell
-   selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), 0 , this,
-                                  SLOT(slotSelectBell()), this);
-   QStringList bellitems;
-   bellitems << i18n("&None")
-             << i18n("&System Notification")
-             << i18n("&Visible Bell");
-   selectBell->setItems(bellitems);
-   selectBell->plug(m_options);
-
    // Select font
    selectFont = new KonsoleFontSelectAction( i18n( "F&ont" ),
           SmallIconSet( "text" ), 0, this, SLOT(slotSelectFont()), this);
@@ -510,6 +479,43 @@ void Konsole::makeGUI()
       << i18n("&Custom...");
    selectFont->setItems(it);
    selectFont->plug(m_options);
+
+   m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
+
+   // Schema
+   m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Sch&ema" ), m_schema);
+
+   // Select size
+   selectSize = new KonsoleFontSelectAction(i18n("S&ize"), 0, this,
+                                  SLOT(slotSelectSize()), this);
+   QStringList sizeitems;
+   sizeitems << i18n("40x15 (&Small)")
+      << i18n("80x24 (&VT100)")
+      << i18n("80x25 (&IBM PC)")
+      << i18n("80x40 (&XTerm)")
+      << i18n("80x52 (IBM V&GA)")
+      << ""
+      << i18n("&Custom...");
+   selectSize->setItems(sizeitems);
+   selectSize->plug(m_options);
+
+   m_options->insertSeparator();
+
+   KAction *historyType = new KAction(i18n("&History..."), "history", 0, this,
+                                      SLOT(slotHistoryType()), this);
+   historyType->plug(m_options);
+
+   m_options->insertSeparator();
+
+   // Select Bell
+   selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), 0 , this,
+                                  SLOT(slotSelectBell()), this);
+   QStringList bellitems;
+   bellitems << i18n("&None")
+             << i18n("&System Notification")
+             << i18n("&Visible Bell");
+   selectBell->setItems(bellitems);
+   selectBell->plug(m_options);
 
    // Select line spacing.
    selectLineSpacing =
@@ -539,22 +545,6 @@ void Konsole::makeGUI()
    selectLineSpacing->setItems(lineSpacingList);
    selectLineSpacing->plug(m_options);
 
-   // Schema
-   m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Sch&ema" ), m_schema);
-   m_options->insertSeparator();
-
-   KAction *historyType = new KAction(i18n("&History..."), "history", 0, this,
-                                      SLOT(slotHistoryType()), this);
-   historyType->plug(m_options);
-
-   m_options->insertSeparator();
-//   m_options->insertItem( SmallIconSet( "charset" ), i18n( "&Codec" ), m_codec);
-   m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
-
-   KAction *WordSeps = new KAction(i18n("Wor&d Connectors..."), 0, this,
-                                   SLOT(slotWordSeps()), this);
-   WordSeps->plug(m_options);
-
    blinkingCursor = new KToggleAction (i18n("Blinking &Cursor"),
                                  0, this,SLOT(slotBlinkingCursor()), this);
    blinkingCursor->plug(m_options);
@@ -564,10 +554,12 @@ void Konsole::makeGUI()
                                  0, this,SLOT(slotWarnQuit()), this);
 
    warnQuit->plug (m_options);
-   //m_options->insertSeparator();
+
+   KAction *WordSeps = new KAction(i18n("Wor&d Connectors..."), 0, this,
+                                   SLOT(slotWordSeps()), this);
+   WordSeps->plug(m_options);
 
    m_options->insertSeparator();
-   // The 'filesave' icon is useable, but it might be confusing. I don't use it for now - Martijn
    m_options->insertItem( SmallIconSet( "filesave" ), i18n("Save &Settings"), 8);
    m_options->insertTearOffHandle();
 
@@ -594,12 +586,13 @@ void Konsole::makeGUI()
    m_rightButton->insertSeparator();
    pasteClipboard->plug(m_rightButton);
    m_rightButton->insertSeparator();
-   m_rightButton->insertItem(i18n("&Send Signal"), m_signals);
    KAction *sendRMBclick = new KAction(i18n("Send R&ight Click"), 0, this,
                                         SLOT(slotSendRMBclick()), this);
    sendRMBclick->plug(m_rightButton);
-   renameSession->plug(m_rightButton);
+   m_rightButton->insertItem(i18n("&Send Signal"), m_signals);
+
    m_rightButton->insertSeparator();
+   renameSession->plug(m_rightButton);
    m_rightButton->insertItem(i18n("S&ettings"), m_options);
    m_rightButton->insertSeparator();
    KAction *closeSessionRMB = new KAction(i18n("C&lose Session"), "fileclose", 0, this,
