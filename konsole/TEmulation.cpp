@@ -49,15 +49,11 @@
    As soon as no more data arrive for `BULK_TIMEOUT' milliseconds, we trigger
    refresh. This rule suits both bulk display operation as done by curses as
    well as individual characters typed.
-   (BULK_TIMEOUT < 1000 / max characters received from keyboard per second).
 
-   Additionally, we trigger refreshing by newlines comming in to make visual
-   snapshots of lists as produced by `cat', `ls' and likely programs, thereby
-   producing the illusion of a permanent and immediate display operation.
-
-   As a sort of catch-all needed for cases where none of the above
-   conditions catch, the screen refresh is also triggered by a count
-   of incoming bulks (`bulk_incnt').
+   We start also a second time which is never restarted. If repeatedly
+   restarting of the first timer could delay continous output indefinitly,
+   the second timer guarantees that the output is refreshed with at least
+   a fixed rate.
 */
 
 /* FIXME
@@ -101,8 +97,6 @@ TEmulation::TEmulation(TEWidget* w)
   codec(0),
   decoder(0),
   keytrans(0),
-  bulk_nlcnt(0),
-  bulk_incnt(0),
   m_findPos(-1)
 {
 
@@ -110,7 +104,8 @@ TEmulation::TEmulation(TEWidget* w)
   screen[1] = new TEScreen(gui->Lines(),gui->Columns());
   scr = screen[0];
 
-  QObject::connect(&bulk_timer, SIGNAL(timeout()), this, SLOT(showBulk()) );
+  QObject::connect(&bulk_timer1, SIGNAL(timeout()), this, SLOT(showBulk()) );
+  QObject::connect(&bulk_timer2, SIGNAL(timeout()), this, SLOT(showBulk()) );
   connectGUI();
   setKeymap(0); // Default keymap
 }
@@ -179,7 +174,6 @@ TEmulation::~TEmulation()
   delete screen[0];
   delete screen[1];
   delete decoder;
-  bulk_timer.stop();
 }
 
 /*! change between primary and alternate screen
@@ -304,21 +298,18 @@ void TEmulation::onRcvBlock(const char *s, int len)
   emit notifySessionState(NOTIFYACTIVITY);
 
   bulkStart();
-  bulk_incnt += 1;
   for (int i = 0; i < len; i++)
   {
     QString result = decoder->toUnicode(&s[i],1);
     int reslen = result.length();
     for (int j = 0; j < reslen; j++)
       onRcvChar(result[j].unicode());
-    if (s[i] == '\n') bulkNewline();
     if (s[i] == '\030')
     {
       if ((len-i-1 > 3) && (strncmp(s+i+1, "B00", 3) == 0))
       	emit zmodemDetected();
     }
   }
-  bulkEnd();
 }
 
 // Selection --------------------------------------------------------------- --
@@ -421,25 +412,17 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool caseSensit
 
 // Refreshing -------------------------------------------------------------- --
 
-#define BULK_TIMEOUT 10
-
-/*!
-   called when \n comes in. Evtl. triggers showBulk at endBulk
-*/
-
-void TEmulation::bulkNewline()
-{
-  bulk_nlcnt += 1;
-  bulk_incnt = 0;  // reset bulk counter since `nl' rule applies
-}
+#define BULK_TIMEOUT1 10
+#define BULK_TIMEOUT2 40
 
 /*!
 */
 
 void TEmulation::showBulk()
 {
-  bulk_nlcnt = 0;                       // reset bulk newline counter
-  bulk_incnt = 0;                       // reset bulk counter
+  bulk_timer1.stop();
+  bulk_timer2.stop();
+
   if (connected)
   {
     ca* image = scr->getCookedImage();    // get the image
@@ -458,15 +441,9 @@ void TEmulation::showBulk()
 
 void TEmulation::bulkStart()
 {
-  if (bulk_timer.isActive()) bulk_timer.stop();
-}
-
-void TEmulation::bulkEnd()
-{
-  if ( bulk_nlcnt > gui->Lines() || bulk_incnt > 20 )
-    showBulk();                         // resets bulk_??cnt to 0, too.
-  else
-    bulk_timer.start(BULK_TIMEOUT,true);
+   bulk_timer1.start(BULK_TIMEOUT1,true);
+   if (!bulk_timer2.isActive())
+      bulk_timer2.start(BULK_TIMEOUT2, true);
 }
 
 void TEmulation::setConnect(bool c)
@@ -510,7 +487,8 @@ void TEmulation::onHistoryCursorChange(int cursor)
 {
   if (!connected) return;
   scr->setHistCursor(cursor);
-  showBulk();
+
+  bulkStart();
 }
 
 void TEmulation::setColumns(int columns)
