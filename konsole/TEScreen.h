@@ -126,8 +126,12 @@ public: // these are all `Screen' operations
     void clear();
     void home();
     void reset();
-    //
+    // Show character
     void ShowCharacter(unsigned short c);
+    
+    // Do composition with last shown character
+    void compose(QString compose);
+    
     //
     void resizeImage(int new_lines, int new_columns);
     //
@@ -253,6 +257,9 @@ private: // helper
     UINT8 sa_cu_re;
     UINT8 sa_cu_fg;
     UINT8 sa_cu_bg;
+    
+    // last position where we added a character
+    int lastPos;
 
     // modes
 

@@ -395,7 +395,7 @@ void TEWidget::drawTextFixed(QPainter &paint, int x, int y,
   {
     drawstr = str.at(i);
     // Add double of the width if next c is 0;
-    if ((attr+nc+1)->c)
+    if ((attr+nc+1)->c) // This may access image[image_size] See makeImage()
     {
       w = font_w;
       nc++;
@@ -889,8 +889,6 @@ void TEWidget::updateImageSize()
              (void*)&oldimg[oldcol*lin],cols*sizeof(ca));
     free(oldimg); //FIXME: try new,delete
   }
-  else
-    clearImage();
 
   //NOTE: control flows from the back through the chest right into the eye.
   //      `emu' will call back via `setImage'.
@@ -1737,13 +1735,13 @@ void TEWidget::clearImage()
 // initialize the image
 // for internal use only
 {
-  for (int y = 0; y < lines; y++)
-  for (int x = 0; x < columns; x++)
+  // We initialize image[image_size] too. See makeImage()
+  for (int i = 0; i <= image_size; i++)
   {
-    image[loc(x,y)].c = 0xff; //' ';
-    image[loc(x,y)].f = 0xff; //DEFAULT_FORE_COLOR;
-    image[loc(x,y)].b = 0xff; //DEFAULT_BACK_COLOR;
-    image[loc(x,y)].r = 0xff; //DEFAULT_RENDITION;
+    image[i].c = 0xff; //' ';
+    image[i].f = 0xff; //DEFAULT_FORE_COLOR;
+    image[i].b = 0xff; //DEFAULT_BACK_COLOR;
+    image[i].r = 0xff; //DEFAULT_RENDITION;
   }
 }
 
@@ -1791,11 +1789,12 @@ void TEWidget::calcGeometry()
 }
 
 void TEWidget::makeImage()
-//FIXME: rename 'calcGeometry?
 {
   calcGeometry();
-  image = (ca*) malloc(lines*columns*sizeof(ca));
   image_size=lines*columns;
+  // We over-commit 1 character so that we can be more relaxed in dealing with
+  // certain boundary conditions: image[image_size] is a valid but unused position
+  image = (ca*) malloc((image_size+1)*sizeof(ca));
   clearImage();
 }
 

@@ -79,7 +79,8 @@ TEScreen::TEScreen(int l, int c)
     columnmode(false),
     ef_fg(0), ef_bg(0), ef_re(0),
     sa_cuX(0), sa_cuY(0),
-    sa_cu_re(0), sa_cu_fg(0), sa_cu_bg(0)
+    sa_cu_re(0), sa_cu_fg(0), sa_cu_bg(0),
+    lastPos(-1)
 {
   /*
     this->lines   = lines;
@@ -762,6 +763,8 @@ void TEScreen::ShowCharacter(unsigned short c)
   image[i].f = ef_fg;
   image[i].b = ef_bg;
   image[i].r = ef_re;
+  
+  lastPos = i;
 
   cuX += w--;
 
@@ -774,6 +777,17 @@ void TEScreen::ShowCharacter(unsigned short c)
      image[i].r = ef_re;
      w--;
   }
+}
+
+void TEScreen::compose(QString compose)
+{
+  if (lastPos == -1)
+     return;
+     
+  QChar c(image[lastPos].c);
+  compose.prepend(c);
+  compose.compose();
+  image[lastPos].c = compose[0].unicode();
 }
 
 // Region commands -------------------------------------------------------------
@@ -922,6 +936,13 @@ void TEScreen::moveImage(int dst, int loca, int loce)
   memmove(&image[dst],&image[loca],(loce-loca+1)*sizeof(ca));
   for (int i=0;i<=(loce-loca+1)/columns;i++)
     line_wrapped[(dst/columns)+i]=line_wrapped[(loca/columns)+i];
+  if (lastPos != -1)
+  {
+     int diff = dst - loca; // Scroll by this amount
+     lastPos += diff;
+     if ((lastPos < 0) || (lastPos >= (lines*columns)))
+        lastPos = -1;
+  }
   if (sel_begin != -1)
   {
      // Adjust selection to follow scroll.
