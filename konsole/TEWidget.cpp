@@ -784,7 +784,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   line_selection_mode = FALSE;
   word_selection_mode = FALSE;
 
-  QPoint pos = QPoint((ev->x()-tLx-bX)/font_w,(ev->y()-tLy-bY)/font_h);
+  QPoint pos = QPoint((ev->x()-tLx-bX+(font_w/2))/font_w,(ev->y()-tLy-bY)/font_h);
 
 //printf("press top left [%d,%d] by=%d\n",tLx,tLy, bY);
   if ( ev->button() == LeftButton)
@@ -815,7 +815,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       }
       else
       {
-        emit mouseSignal( 0, pos.x() + 1, pos.y() + 1 ); // left button
+        emit mouseSignal( 1, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
       }
     }
   }
@@ -880,6 +880,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
   if ( pos.x() > tLx+bX+columns*font_w-1 ) pos.setX( tLx+bX+columns*font_w );
   if ( pos.y() < tLy+bY )                   pos.setY( tLy+bY );
   if ( pos.y() > tLy+bY+lines*font_h-1 )    pos.setY( tLy+bY+lines*font_h-1 );
+
   // check if we produce a mouse move event by this
   if ( pos != ev->pos() ) cursor().setPos(mapToGlobal(pos));
 
@@ -892,7 +893,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     scrollbar->setValue(scrollbar->value()-yMouseScroll); // scrollback
   }
 
-  QPoint here = QPoint((pos.x()-tLx-bX)/font_w,(pos.y()-tLy-bY)/font_h);
+  QPoint here = QPoint((pos.x()-tLx-bX+(font_w/2))/font_w,(pos.y()-tLy-bY)/font_h);
   QPoint ohere;
   bool swapping = FALSE;
 
@@ -962,6 +963,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     }
   }
 
+  int offset = 0;
   if ( !word_selection_mode && !line_selection_mode )
   {
     int i;
@@ -978,16 +980,19 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
 
     // Find left (left_not_right ? from start : from here)
     QPoint right = left_not_right ? iPntSel : here;
-    i = loc(right.x(),right.y());
-    selClass = charClass(image[i-1].c);
-    if (selClass == ' ')
+    if (right.x() > 0)
     {
-       while ( right.x() < columns-1 && charClass(image[i+1].c) == selClass && !m_line_wrapped[right.y()])
-       { i++; right.rx()++; }
-       if (right.x() < columns-1)
-         right = left_not_right ? iPntSel : here;
-       else
-         right.rx()++;  // will be balanced later because of offset=-1;
+      i = loc(right.x(),right.y());
+      selClass = charClass(image[i-1].c);
+      if (selClass == ' ')
+      {
+        while ( right.x() < columns-1 && charClass(image[i+1].c) == selClass && !m_line_wrapped[right.y()])
+        { i++; right.rx()++; }
+        if (right.x() < columns-1)
+          right = left_not_right ? iPntSel : here;
+        else
+          right.rx()++;  // will be balanced later because of offset=-1;
+      }
     }
 
     // Pick which is start (ohere) and which is extension (here)
@@ -1000,35 +1005,22 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
       here = right; ohere = left;
     }
 
+    if (left_not_right)
+       offset = 0;
+    else 
+       offset = -1;
   }
 
-  if (here == pntSel && (pos.x()-tLx-bX)!=0 /*allow selecting up to first character of line*/
-      && scroll == scrollbar->value()) return; // not moved
+  if ((here == pntSel) && (scroll == scrollbar->value())) return; // not moved
 
-  if ( word_selection_mode || line_selection_mode ) {
-    if ( actSel < 2 || swapping ) {
-      emit beginSelectionSignal( ohere.x(), ohere.y() );
-    }
-  } else if ( actSel < 2 ) {
-    emit beginSelectionSignal( pntSel.x(), pntSel.y() );
-  }
+  if (here == ohere) return; // It's not left, it's not right.
+
+  if ( actSel < 2 || swapping )
+    emit beginSelectionSignal( ohere.x()-1-offset, ohere.y() );
 
   actSel = 2; // within selection
   pntSel = here;
-  bool left_not_right = ( here.y() < iPntSel.y() ||
-	                  here.y() == iPntSel.y() && here.x() < iPntSel.x() );
 
-  int offset = 0;
-  if ( !word_selection_mode && !line_selection_mode ) {
-    if (left_not_right) {
-      if ( (pos.x()-tLx-bX)>0 && here.x()+1<columns)  // allow selecting up to first character of line
-        offset=1;
-    }
-    else
-      if (here.x()>0) // don't select last character of previous line
-        offset=-1;
-  }
-//  kdDebug(1211) << "tlX=" << tLx << "  bX=" << bX << "  offset=" << offset <<endl;
   emit extendSelectionSignal( here.x() + offset, here.y() );
 }
 
