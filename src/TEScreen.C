@@ -468,8 +468,8 @@ void TEScreen::saveCursor()
 
 void TEScreen::restoreCursor()
 {
-  cuX     = sa_cuX;
-  cuY     = sa_cuY;
+  cuX     = MIN(sa_cuX,columns-1);
+  cuY     = MIN(sa_cuY,lines-1);
   graphic = sa_graphic;
   pound   = sa_pound;
   cu_re   = sa_cu_re;
@@ -491,9 +491,8 @@ void TEScreen::restoreCursor()
 
 void TEScreen::resizeImage(int new_lines, int new_columns)
 {
-/*printf( "resize image(new_lines=%d, new_columns=%d)\n", 
-        new_lines, new_columns );
- */
+//printf( "resize image(new_lines=%d, new_columns=%d)\n", new_lines, new_columns );
+//FIXME: evtl. transfer from/to history buffer
 
   // make new image
   ca* newimg = (ca*)malloc(new_lines*new_columns*sizeof(ca));
@@ -527,10 +526,11 @@ void TEScreen::resizeImage(int new_lines, int new_columns)
   cuX = MIN(cuX,columns-1);
   cuY = MIN(cuY,lines-1);
 
-  // FIXME: evtl. keep values
+  // FIXME: try to keep values, evtl.
   tmargin=0;
   bmargin=lines-1;
   initTabStops();
+  clearSelection();
 }
 
 /*

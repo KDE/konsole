@@ -20,6 +20,25 @@
     and from the user. It hardly does anything interesting.
 */
 
+/*FIXME:
+  - All the material in here badly sufferes from the fact that the
+    configuration can originate from many places, so all is duplicated
+    and falls out of service. The sources are:
+    - command line
+    - menu
+    - configuration files
+    - other events (e.g. resizing)
+    We have to find a single place method to maintain this.
+  - Moving geometry management from char to pixel is half done.
+    Means that setColLin is used in unappropriate places.
+    Likely the configuration is still char based.
+  - Controling the widget is currently done by individual attributes.
+    This lead to quite some amount of flicker when a whole bunch of
+    attributes has to be set, e.g. in session swapping.
+  - The schema file name in session config files is not location
+    transparent.
+*/
+
 /* TODO
 - don't reread the pixmap every time
 */
