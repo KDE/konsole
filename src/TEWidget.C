@@ -1181,7 +1181,8 @@ void TEWidget::dropEvent(QDropEvent* event)
           tmp = url.url();
           bPopup = false; // a non-local file, don't popup
         }
-        KRun::shellQuote(tmp);
+        if (strlist.count()>1)
+          KRun::shellQuote(tmp);
         dropText += tmp;
       }
 
@@ -1212,6 +1213,7 @@ void TEWidget::drop_menu_activated(int item)
    switch (item)
    {
    case 0: // paste
+      KRun::shellQuote(dropText);
       currentSession->getEmulation()->sendString(dropText.local8Bit());
 //    KWM::activate((Window)this->winId());
       break;
@@ -1227,6 +1229,7 @@ void TEWidget::drop_menu_activated(int item)
             dropText = url.directory( true, false ); // remove filename
          }
       }
+      KRun::shellQuote(dropText); 
       currentSession->getEmulation()->sendString(dropText.local8Bit());
       currentSession->getEmulation()->sendString("\n");
       //    KWM::activate((Window)this->winId());
