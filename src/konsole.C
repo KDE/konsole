@@ -110,7 +110,7 @@ const char *fonts[] = {
 
 Konsole::Konsole(const char* name,
                  const char* _pgm, QStrList & _args,
-                 int histon) : KTMainWindow(name), pgm(_pgm), args(_args)
+                 int histon) : KMainWindow(0, name), pgm(_pgm), args(_args)
 {
 
   session_no = 0;
@@ -133,8 +133,7 @@ Konsole::Konsole(const char* name,
 
   // create applications /////////////////////////////////////////////////////
 
-  //  setCentralWidget(te);
-  setView(te);
+  setCentralWidget(te);
 
   makeMenu();
 
@@ -469,7 +468,7 @@ void Konsole::saveProperties(KConfig* config)
   // for "save options". Not used by SM.
   //config->writeEntry("kmenubar",                 //FIXME:Float
   //                   menubar->menuBarPos() == KMenuBar::Bottom ? "bottom" : "top");
-  // geometry (placement) done by KTMainWindow
+  // geometry (placement) done by KMainWindow
   config->sync();
 }
 
@@ -680,7 +679,7 @@ void Konsole::slotToggleMenubar() {
 
 void Konsole::slotToggleToolbar() {
   b_toolbarvis = showToolbar->isChecked();
-  enableToolBar(b_toolbarvis ? KToolBar::Show : KToolBar::Hide);
+  toolBar()->enable(b_toolbarvis ? KToolBar::Show : KToolBar::Hide);
 }
 
 void Konsole::slotToggleFrame() {

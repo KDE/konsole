@@ -114,8 +114,8 @@ konsolePart::konsolePart(QWidget *parentWidget, const char *widgetName, QObject 
   te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
   te->setScrollbarLocation(TEWidget::SCRRIGHT);
   setWidget(te);
-  // faking a KTMainwindow - TESession assumes that (wrong design!)
-  initial = new TESession((KTMainWindow*)parentWidget,
+  // faking a KMainwindow - TESession assumes that (wrong design!)
+  initial = new TESession((KMainWindow*)parentWidget,
                           te,shell,eargs,"xterm");
   connect( initial,SIGNAL(done(TESession*,int)),
            this,SLOT(doneSession(TESession*,int)) );

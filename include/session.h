@@ -14,7 +14,7 @@
 #define SESSION_H
 
 #include <kapp.h>
-#include <ktmainwindow.h>
+#include <kmainwindow.h>
 #include <qstrlist.h>
 
 #include "TEPty.h"
@@ -26,7 +26,7 @@ class TESession : public QObject
 
 public:
 
-  TESession(KTMainWindow* main, TEWidget* w,
+  TESession(KMainWindow* main, TEWidget* w,
             const char* pgm, QStrList & _args,
 	    const char* term);
   ~TESession();

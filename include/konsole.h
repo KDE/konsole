@@ -17,7 +17,7 @@
 #define KONSOLE_H
 
 
-#include <ktmainwindow.h>
+#include <kmainwindow.h>
 #include <ksimpleconfig.h>
 #include <kaction.h>
 #include <qstrlist.h>
@@ -37,7 +37,7 @@
 
 class KRootPixmap;
 
-class Konsole : public KTMainWindow
+class Konsole : public KMainWindow
 { Q_OBJECT
 
 public:
