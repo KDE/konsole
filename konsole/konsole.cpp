@@ -1325,7 +1325,7 @@ void Konsole::addSession(TESession* s)
      if (!nameOk)
      {
        count++;
-       newTitle = i18n("%1 No %2").arg(s->Title()).arg(count);
+       newTitle = i18n("%1 No. %2").arg(s->Title()).arg(count);
      }
   }
   while (!nameOk);
