@@ -2002,7 +2002,13 @@ void Konsole::newSession(const QString& sURL, const QString& title)
 
 void Konsole::closeCurrentSession()
 {
-  se->closeSession();
+  if (!se->closeSession())
+  {
+      KMessageBox::information( this, i18n("The session could not be closed. "
+                                           "If the session runs under another user ID you will "
+                                           "have to close it manually.\n"
+                                           "In most cases typing 'exit' at the prompt will close it.") );
+  }
 }
 
 void Konsole::doneChild(KonsoleChild* child, TESession* session)
