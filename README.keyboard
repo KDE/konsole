@@ -1,10 +1,48 @@
 [README.keyboard]
 
-some keyboard configuration stuff is
-currently work in progress.
+Some keyboard configuration stuff is currently work in progress.
+to be completed, very soon. Here is preliminary information.
 
-See file other/*.[Kk]eytab for
-the keyboard tables.
 
-Files like these can be used to
-configure konsole, very soon.
+The *.keytab files (located in $KDEDIR/share/apps/konsole) allow
+to configure the keyboard due to your specific environment.
+
+Beside that you can use them to make the keyboard emit virtually
+any escape sequence you want, here a probe of more typical problems
+related to keyboards, that can be coped with this way:
+
+- BS Hack
+
+  While one would expect, that the Backspace key send Ascii
+  Backspace, this is not the case in many Linux installations.
+
+  The idea behind this hack is to preserve the CTRL-H.
+
+  So the mapping is:
+
+    CTRL-H    -> 0x08
+    Backspace -> 0x7f
+    Delete    -> \E[3~
+
+- Home/End Keys
+
+    Home     -> \E[1~
+    End      -> \E[4~
+
+  or
+
+    Home     -> \E[H
+    End      -> \E[F
+
+Quite a lot of those key sequences are floating around.
+
+Consult your terminfo or termcap database for the expected values.
+Note that your system is not unlikely to have other keyboard databases
+which have to be in sync, too (e.g. /etc/inputrc for readline(3)).
+
+If you want to adjust things to your needs, copy one of the
+*.keytab files and edit it. When restarted, konsole offeres
+you this new entry on it's menu.
+
+In case your new keytab is likely to suit common needs,
+please contribute to konsole by sending me the file.

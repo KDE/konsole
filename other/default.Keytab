@@ -109,8 +109,8 @@ key F10    : "\E[21~"
 key F11    : "\E[23~" 
 key F12    : "\E[24~" 
 
-key Home   : "\E[H"  
-key End    : "\E[F"  
+key Home   : "\E[1~"  
+key End    : "\E[4~"  
 
 key Prior -Shift : "\E[5~"  
 key Next  -Shift : "\E[6~"  
