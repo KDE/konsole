@@ -59,7 +59,7 @@ static KCmdLineOptions options[] =
    { "!e <command>",    I18N_NOOP("Execute 'command' instead of shell"), 0 },
    // WABA: All options after -e are treated as arguments.
    { "+[args]",         I18N_NOOP("Arguments for 'command'"), 0 },
-   { 0, 0, 0 }
+   KCmdLineLastOption
 };
 
 static bool has_noxft = false;
@@ -108,13 +108,13 @@ public:
 
     bool saveState( QSessionManager&sm) {
         QStringList restartCommand = sm.restartCommand();
-        if (has_noxft) 
+        if (has_noxft)
             restartCommand.append("--noxft");
-        if (login_shell) 
+        if (login_shell)
             restartCommand.append("--ls");
-        if (full_script) 
+        if (full_script)
             restartCommand.append("--script");
-        if (!auto_close) 
+        if (!auto_close)
             restartCommand.append("--noclose");
         sm.setRestartCommand(restartCommand);
         return true;
