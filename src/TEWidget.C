@@ -520,6 +520,9 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
 void TEWidget::mouseMoveEvent(QMouseEvent* ev)
 {
   if (actSel == 0) return;
+  if (ev->state() & MidButton)
+    return; // don't extend selection while pasting
+
   //if ( !contentsRect().contains(ev->pos()) ) return;
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
@@ -715,6 +718,7 @@ void TEWidget::emitSelection()
         text.replace(QRegExp("\n"), "\r");
         QKeyEvent e(QEvent::KeyPress, 0,0,0, text);
         emit keyPressedSignal(&e); // expose as a big fat keypress event
+	emit clearSelectionSignal();
     }
 }
 
