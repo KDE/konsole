@@ -4,7 +4,7 @@ data_DATA = BlackOnLightYellow.schema BlackOnWhite.schema \
 	Example.Schema GreenOnBlack.schema WhiteOnBlack.schema \
 	default.Schema linux.kdelnk mc.kdelnk shell.kdelnk \
   syscolor.schema Linux.schema XTerm.schema vim.schema \
-  DarkPicture.schema LightPicture.schema
+  DarkPicture.schema LightPicture.schema su.kdelnk
 
 kde_icon_DATA = konsole.xpm colourness.xpm brightness.xpm contrast.xpm
 
