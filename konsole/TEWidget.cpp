@@ -1134,7 +1134,8 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
 
 void TEWidget::focusInEvent( QFocusEvent * )
 {
-  repaint(cursorRect, false);  // don't erase area
+  repaint(cursorRect, true);  // *do* erase area, to get rid of the
+                              // hollow cursor rectangle.
 }
 
 
