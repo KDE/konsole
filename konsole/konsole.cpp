@@ -867,6 +867,7 @@ void Konsole::makeTabWidget()
 {
   tabwidget = new KTabWidget(this);
   tabwidget->setTabReorderingEnabled(true);
+  tabwidget->setAutomaticResizeTabs(true);
   if (n_tabbar==TabTop)
     tabwidget->setTabPosition(QTabWidget::Top);
   else
@@ -1321,12 +1322,18 @@ void Konsole::slotTabSetViewOptions(int mode)
 
       switch(mode) {
         case ShowIconAndText:
+//          tabwidget->setTabLabel(page, title);
+//          tabwidget->setTabIconSet(page, icon);
           tabwidget->changeTab(page, icon, title);
           break;
         case ShowTextOnly:
+//          tabwidget->setTabLabel(page, title);
+//          tabwidget->setTabIconSet(page, QIconSet());
           tabwidget->changeTab(page, QIconSet(), title);
           break;
         case ShowIconOnly:
+//          tabwidget->setTabLabel(page, QString::null);
+//          tabwidget->setTabIconSet(page, icon);
           tabwidget->changeTab(page, icon, QString::null);
           break;
       }
