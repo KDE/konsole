@@ -796,7 +796,7 @@ HCNT("setImage");
      QString sizeStr = i18n("Size: %1 x %2").arg(columns).arg(lines);
      mResizeLabel->setText(sizeStr);
      mResizeWidget->move((width()-mResizeWidget->width())/2,
-                         (height()-mResizeWidget->height())/2);
+                         (height()-mResizeWidget->height())/2+20);
      mResizeWidget->show();
      mResizeTimer->start(1000, true);
   }
