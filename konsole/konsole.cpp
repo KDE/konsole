@@ -2770,7 +2770,7 @@ void Konsole::slotFindDone()
 
 void Konsole::slotSaveHistory()
 {
-  KURL url = KFileDialog::getSaveURL(QString::null, QString::null, 0L, i18n("Save History..."));
+  KURL url = KFileDialog::getSaveURL(QString::null, QString::null, 0L, i18n("Save History"));
   if( url.isEmpty())
       return;
   if( !url.isLocalFile() ) {
