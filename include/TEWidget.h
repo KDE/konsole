@@ -25,11 +25,13 @@
 extern unsigned short vt100_graphics[32];
 
 class TESession;
+class Konsole;
 
 class TEWidget : public QFrame
 // a widget representing attributed text
 { Q_OBJECT
 
+  friend class Konsole;
 public:
 
     TEWidget(QWidget *parent=0, const char *name=0);
@@ -94,13 +96,15 @@ protected:
     void resizeEvent(QResizeEvent*);
 
     void fontChange(const QFont &font);
+    void setFontMetrics(const QFont &f);
+
     void frameChanged();
 
     void mouseDoubleClickEvent(QMouseEvent* ev);
     void mousePressEvent( QMouseEvent* );
     void mouseReleaseEvent( QMouseEvent* );
     void mouseMoveEvent( QMouseEvent* );
-    
+
     void focusInEvent( QFocusEvent * );
     void focusOutEvent( QFocusEvent * );
     // Dnd

@@ -78,6 +78,7 @@
 #include <kdebug.h>
 
 #include <qmessagebox.h>
+#include <qfontmetrics.h>
 
 #include <klocale.h>
 #include <sys/wait.h>
@@ -141,10 +142,10 @@ Konsole::Konsole(const char* name,
   toolBar()->setIconText(KToolBar::IconTextRight);
   toolBar()->show();
 
-  setDockEnabled( toolBar(), QMainWindow::Left, FALSE ); 
-  setDockEnabled( toolBar(), QMainWindow::Right, FALSE ); 
+  setDockEnabled( toolBar(), QMainWindow::Left, FALSE );
+  setDockEnabled( toolBar(), QMainWindow::Right, FALSE );
   toolBar()->setFullSize( TRUE );
-  
+
   // Init DnD ////////////////////////////////////////////////////////////////
 
   //  setAcceptDrops(true);
@@ -393,15 +394,15 @@ void Konsole::setColLin(int columns, int lines)
       defaultSize = te->calcSize(80,24);
       notifySize(24,80); // set menu items (strange arg order !)
     }
-    te->resize(defaultSize);
+    resize(defaultSize);
   }
   else
   {
     QSize size = te->calcSize(columns, lines);
-    te->resize(size);
+    resize(size);
     notifySize(lines,columns); // set menu items (strange arg order !)
   }
-  adjustSize();
+  //adjustSize();
 }
 
 /* ------------------------------------------------------------------------- */
@@ -588,7 +589,7 @@ void Konsole::slotSelectScrollbar() {
 void Konsole::slotSelectFont() {
   assert(se);
   int item = selectFont->currentItem();
-  kdDebug() << "slotSelectFont " << item << endl;
+  //kdDebug() << "slotSelectFont " << item << endl;
   if (item == 8) // this is the default
   {
     KFontDialog::getFont(defaultFont, true);
@@ -620,6 +621,12 @@ void Konsole::keytab_menu_activated(int item)
 
 void Konsole::setFont(int fontno)
 {
+    int lines = te->Lines();
+    int cols = te->Columns();
+    
+    QFontMetrics fm(te->font());
+    int pointSize = fm.height();
+    
   QFont f;
   if (fontno == 0)
     f = defaultFont;
@@ -635,13 +642,24 @@ void Konsole::setFont(int fontno)
   {
     QString msg = i18n("Font `%1' not found.\nCheck README.linux.console for help.").arg(fonts[fontno]);
     KMessageBox::error(this,  msg);
+    return;
   }
-  else
-  {
-    te->setVTFont(f);
+
+  QFontMetrics fm2(f);
+  //kdDebug(0) << "pointSizeOld=" << pointSize << " new=" << fm2.height() << endl;
+  if(fm2.height() > pointSize) {
+      //kdDebug(0) << "enlarging" << endl;
+      te->setFontMetrics(f);
+      setColLin(cols, lines);
+      te->setVTFont(f);
+      if (se) se->setFontNo(fontno);
+  } else {
+      te->setFontMetrics(f);
+      te->setVTFont(f);
+      setColLin(cols, lines);
+      if (se) se->setFontNo(fontno);
   }
   n_font = fontno;
-  if (se) se->setFontNo(fontno);
 }
 
 void Konsole::slotToggleMenubar() {
