@@ -75,6 +75,7 @@ Name[sv]=Tystnad i bevakad session
 Comment=Silence detected in a monitored session
 Comment[da]=Stilhed detekteret i en overvåget session
 Comment[es]=Silencio detectado en una sesión monitorizada
+Comment[fa]=یافتن سکوت در نشست تحت نظارت
 Comment[hu]=Üresjárat észlelve egy monitorozott munkafolyamatban
 Comment[pt_BR]=Silêncio detectado em uma sessão monitorada
 Comment[sv]=Tystnad funnen i en bevakad session
