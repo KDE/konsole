@@ -63,6 +63,7 @@ noinst_HEADERS = TEWidget.h TEPty.h TEmulation.h TEmuVt102.h \
 
 konsole_grantpty_SOURCES = konsole_grantpty.c
 konsole_grantpty_LDFLAGS = $(KDE_RPATH)
+konsole_grantpty_LDADD = $(LIBUTIL)
 
 install-data-local:
 	@echo ""
