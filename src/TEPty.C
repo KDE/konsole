@@ -112,6 +112,8 @@ extern "C" {
 #include <kapp.h>
 #include <kglobal.h>
 #include <kstddirs.h>
+#include <kdebug.h>
+#include "iostream.h"
 
 #ifndef HERE
 #define HERE fprintf(stdout,"%s(%d): here\n",__FILE__,__LINE__)
@@ -207,6 +209,7 @@ const char* TEPty::deviceName()
 */
 int TEPty::run(const char* pgm, QStrList & args, const char* term, int addutmp)
 {
+  
   comm_pid = fork();
   if (comm_pid <  0) { fprintf(stderr,"Can't fork\n"); return -1; }
   if (comm_pid == 0) makePty(ttynam,pgm,args,term,addutmp);
@@ -307,12 +310,12 @@ int TEPty::openPty()
 //! only used internally. See `run' for interface
 void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const char* term, int addutmp)
 { int sig;
-
+// kdDebug() << "Making new terminal " << pgm << "\n";
   if (fd < 0) // no master pty could be opened
   {
   //FIXME:
-  //fprintf(stderr,"opening master pty failed.\n");
-  //exit(1);
+    fprintf(stderr,"opening master pty failed.\n");
+    exit(1);
   }
 
 #ifdef TIOCSPTLCK
@@ -426,6 +429,7 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   ioctl(0,TIOCSWINSZ,(char *)&wsize);  // set screen size
 
   // finally, pass to the new program
+  // kdDebug() << "We are ready to run the program " << pgm << "\n";
   execvp(pgm, argv);
   perror("exec failed");
   exit(1);                             // control should never come here.

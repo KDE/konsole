@@ -1,5 +1,6 @@
 #include "session.h"
 #include <qpushbutton.h>
+#include <kdebug.h>
 
 #define HERE fprintf(stderr,"%s(%d): here\n",__FILE__,__LINE__)
 
@@ -41,8 +42,11 @@ TESession::TESession(KTMainWindow* main, TEWidget* te, const char* _pgm, QStrLis
                     main,SLOT(configureRequest(TEWidget*,int,int,int)) );
 }
 
+
+
 void TESession::run()
 {
+  kdDebug() << "Running the session!" << pgm << "\n";
   sh->run(pgm,args,term,FALSE);
 }
 

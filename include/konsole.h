@@ -28,6 +28,10 @@
 #include "session.h"
 #include "schema.h"
 
+#undef PACKAGE
+#undef VERSION
+#define PACKAGE "konsole"
+#define VERSION "0.9.15"
 
 class QDragEnterEvent;
 class QDropEvent;

@@ -93,11 +93,12 @@
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
+/*
 #undef PACKAGE
 #undef VERSION
 #define PACKAGE "konsole"
 #define VERSION "0.9.12"
-
+*/
 
 
 template class QPtrDict<TESession>;

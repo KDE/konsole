@@ -14,18 +14,21 @@
 /* ---------------------------------------------------------------------- */
 
 #include <unistd.h>
+#include <stdio.h>
 #include <locale.h>
 #include <kapp.h>
 #include <klocale.h>
 #include <kaboutdata.h>
 #include <kcmdlineargs.h>
 #include <kimgio.h>
-#include "main.h"
+#include "konsole.h"
 
+/*
 #undef PACKAGE
 #undef VERSION
 #define PACKAGE "konsole"
 #define VERSION "0.9.12"
+*/
 
 static const char *description =
   I18N_NOOP("X terminal for use with KDE.");

@@ -44,7 +44,7 @@ extern "C"
    */
   void *init_libkonsole()
   {
-    //    printf(" \n\n\nKonsole in actions!!! \n\n\n");
+      printf(" \n\n\nKonsole in actions!!! \n\n\n");
     return new konsoleFactory;
   }
 };
@@ -91,34 +91,43 @@ konsolePart::konsolePart(QWidget *parent, const char *name)
   setInstance(konsoleFactory::instance());
   
   // create a canvas to insert our widget
+  
   m_extension = new konsoleBrowserExtension(this);
-    
-  QSplitter *splitter = new QSplitter(parent);
-  splitter->setFocusPolicy(QWidget::ClickFocus);
-  splitter->setOrientation( QSplitter::Vertical );  
-  setWidget(splitter);
-
   
-  gofw = new konsoleWidget(splitter);
+  //bool login_shell = false;
+  //bool welcome = true;
+  bool histon = true;
+  const char* wname = PACKAGE;
+  const char* shell = getenv("SHELL");
 
-  konsoleDetailWidget *detail = new konsoleDetailWidget(splitter);
-  gofw->detail = detail;
-   
-  gofw->ds = new konsoleDataSource_Memory();
-  konsoleDataQuery gq;
-  gq.getView(*(gofw->ds), gofw->dv);
-  gofw->dv.createVisuals(200,200,150);
+  //  QCString sz = "";
+  //sz = args->getOption("vt_sz");
+  //histon = args->isSet("hist");
+  //wname = args->getOption("name");
+  //login_shell = args->isSet("ls");
+  QStrList eargs;
+  //  welcome = args->isSet("welcome");
 
-  QValueList<int> splitinit;
-  splitinit.append(80);
-  splitinit.append(20);
-  splitter->setSizes(splitinit);
-  splitter->show();
+  if (shell == NULL || *shell == '\0') shell = "/bin/sh";
+  //   shell = "/bin/ls";
+  shell = "/usr/bin/mc";
+   eargs.append(shell);
+  te = new TEWidget(parent);
+  te->setFocusPolicy(QWidget::ClickFocus);
+  te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
+  setWidget(te);
+  // faking a KTMainwindow - i dont know why it has it this way
+  kdDebug() << "The shell is:" << shell << "\n";
+  TESession* initial = new TESession((KTMainWindow*)parent,
+				     te,shell,eargs,"xterm");
+  //  initial->run();
+  initial->setConnect(TRUE);
+  QTimer::singleShot(100,initial,SLOT(run()));
+ 
+  // setXMLFile("konsole_part.rc");
   
-  setXMLFile("konsole_part.rc");
-
-  kDebugInfo("Loading successful");
-  kDebugInfo("XML file set");
+  // kDebugInfo("Loading successful");
+  // kDebugInfo("XML file set");
 }
 
 
@@ -134,19 +143,6 @@ void konsolePart::slotLoadFile() {
   kDebugInfo("slotLoadFile called");
 }
 
-void konsolePart::slotTestDialog() {
-  kDebugInfo("slotTestDialog called");
-}
-
-void konsolePart::slotDelayedLoad() {
-  if (!gofw->ds->open(m_file)) {
-    return;
-  }
-  gofw->dv.center = NULL; 
-  gofw->refresh();
-  gofw->detail->setValues(gofw->dv.center->val);
-}
-
 konsolePart::~konsolePart()
 {
   closeURL();
@@ -155,10 +151,12 @@ konsolePart::~konsolePart()
 bool konsolePart::openFile()
 {
   // This is a horrible hack
+    /*
     QTimer *delayedLoadTimer = new QTimer(this);    
     delayedLoadTimer->start(3,true);
     connect(delayedLoadTimer, SIGNAL(timeout()),
              this, SLOT(slotDelayedLoad()) );    
+    */
     return true;
 
   //  widget->setText(m_file);
@@ -196,3 +194,5 @@ konsoleBrowserExtension::konsoleBrowserExtension(konsolePart *parent)
 konsoleBrowserExtension::~konsoleBrowserExtension()
 {
 }
+
+#include "konsole_part.moc"

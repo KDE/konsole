@@ -1,8 +1,8 @@
 # This file is part of Konsole - an X terminal for KDE
 
-VERSION=0
-SUBVERS=9
-RELEASE=1
+#VERSION=1
+#SUBVERS=9
+#RELEASE=1
 
 # just set the variable
 APPSDIR = $(kde_appsdir)/Utilities
@@ -33,9 +33,11 @@ libkonsole_la_SOURCES =konsole.C \
 	TEmulation.C \
 	TEPty.C \
 	TEHistory.C \
-	keytrans.C
+	keytrans.C \
+        konsole_part.C
 
-libkonsole_la_LDFLAGS = -no-undefined $(all_libraries) # -version-info `expr $(VERSION) + $(SUBVERS)`:$(RELEASE):$(SUBVERS)
+libkonsole_la_LDFLAGS = -no-undefined $(all_libraries) -version-info 1:0:0 -module 
+# -version-info `expr $(VERSION) + $(SUBVERS)`:$(RELEASE):$(SUBVERS)
 
 libkonsole_la_LIBADD = $(LIB_KDEUI) $(LIBUTEMPTER) -lkparts
 
@@ -72,7 +74,7 @@ install-exec-local: install-binPROGRAMS
 
 # just to make sure, automake makes them
 METASOURCES = TEWidget.moc TEmuVt102.moc session.moc konsole.moc \
-	TEmulation.moc TEPty.moc kwrited.moc
+	TEmulation.moc TEPty.moc kwrited.moc konsole_part.moc
 
 META_INCLUDES = $(srcdir)/../include
 
@@ -89,3 +91,19 @@ messages:
 
 dummy.C:
 	echo > dummy.C
+
+
+rcdir = $(kde_datadir)/konsole
+rc_DATA = konsole_part.rc
+
+# setting up x-application/konsole as a special mimetype
+mimedir = $(kde_mimedir)/application
+mime_DATA = x-konsole.desktop
+
+# specifying gofai as a handler for the above mimetype
+# also specifies the icon, and position in the kicker menus
+kdelnkdir = $(kde_appsdir)/Utilities
+kdelnk_DATA = konsole.desktop
+
+# ??? no need to specify kdelnk_DATA here?
+EXTRA_DIST = $(mime_DATA)                                             

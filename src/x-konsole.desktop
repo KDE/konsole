@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=MimeType
+MimeType=x-application/konsole
+X-KDE-AutoEmbed=true
+Icon=konsole
+Patterns=*.shell;
+Comment=File to open a shell
