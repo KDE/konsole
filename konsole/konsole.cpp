@@ -2784,7 +2784,7 @@ KonsoleFind::KonsoleFind( QWidget *parent, const char *name, bool /*modal*/ )
   : KEdFind( parent, name, false ), m_editorDialog(0), m_editRegExp(0)
 {
   QHBox* row = new QHBox( (QWidget*)group );
-  m_asRegExp = new QCheckBox( i18n("As &Regular Expression"), row, "asRegexp" );
+  m_asRegExp = new QCheckBox( i18n("As &regular expression"), row, "asRegexp" );
 
   if (!KTrader::self()->query("KRegExpEditor/KRegExpEditor").isEmpty()) {
     m_editRegExp = new QPushButton( i18n("&Edit"), row, "editRegExp" );
