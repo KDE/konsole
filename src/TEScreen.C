@@ -1039,8 +1039,9 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
 				// buffer.
 	  eol = hist->getLineLen(hY);
 
+          // This causes a crash
 	  if ((hY == (sel_BR / columns)) &&
-	      (eol >= (sel_BR % columns)))
+	      (eol > (sel_BR % columns)))
 	    {
 	      eol = sel_BR % columns + 1;
 	    }
