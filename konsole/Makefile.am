@@ -57,7 +57,7 @@ konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 # kcmkonsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 noinst_HEADERS = TEWidget.h TEPty.h TEmulation.h TEmuVt102.h \
-	TECommon.h TEScreen.h kcmkonsole.h konsole.h schema.h session.h \
+	TECommon.h TEScreen.h konsole.h schema.h session.h \
 	kwrited.h TEHistory.h keytrans.h default.keytab.h BlockArray.h
 
 konsole_grantpty_SOURCES = konsole_grantpty.c
