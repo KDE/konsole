@@ -56,6 +56,7 @@ typedef unsigned short UINT16;
 #define RE_UNDERLINE       (1 << 2)
 #define RE_REVERSE         (1 << 3) // Screen only
 #define RE_INTENSIVE       (1 << 3) // Widget only
+#define RE_CURSOR          (1 << 4)
 
 /*! \class ca
  *  \brief a character with rendition attributes.

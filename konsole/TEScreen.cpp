@@ -571,7 +571,7 @@ ca* TEScreen::getCookedImage()
 
   int loc_ = loc(cuX, cuY+hist->getLines()-histCursor);
   if(getMode(MODE_Cursor) && loc_ < columns*lines)
-    reverseRendition(&merged[loc(cuX,cuY+(hist->getLines()-histCursor))]);
+    merged[loc(cuX,cuY+(hist->getLines()-histCursor))].r|=RE_CURSOR;
   return merged;
 }
 

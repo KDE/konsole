@@ -344,6 +344,9 @@ TEWidget::~TEWidget()
 void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
                            QString& str, ca attr, bool pm, bool clear)
 {
+  QColor fColor=((attr.r & RE_CURSOR) && hasFocus() ? color_table[attr.b].color : color_table[attr.f].color);
+  QColor bColor=((attr.r & RE_CURSOR) && hasFocus() ? color_table[attr.f].color : color_table[attr.b].color);
+
   if (pm && color_table[attr.b].transparent)
   {
     paint.setBackgroundMode( TransparentMode );
@@ -352,20 +355,22 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
   else
   {
     if (blinking)
-      paint.fillRect(rect, color_table[attr.b].color);
+      paint.fillRect(rect, bColor);
     else
     {
       paint.setBackgroundMode( OpaqueMode );
-      paint.setBackgroundColor( color_table[attr.b].color );
+      paint.setBackgroundColor( bColor );
     }
   }
   if (!(blinking && (attr.r & RE_BLINK)))
   {
-    paint.setPen(color_table[attr.f].color);
+    paint.setPen(fColor);
     paint.drawText(rect.x(),rect.y()+font_a, str);
-    if ((attr.r & RE_UNDERLINE) || color_table[attr.f].bold)
+    if ((attr.r & RE_UNDERLINE) || color_table[attr.f].bold || (attr.r & RE_CURSOR))
     {
       paint.setClipRect(rect);
+      if ((attr.r & RE_CURSOR) && !hasFocus())
+        paint.drawRect(rect.x(),rect.y(),rect.width(),rect.height()-m_lineSpacing);
       if (color_table[attr.f].bold)
       {
         paint.setBackgroundMode( TransparentMode );
@@ -981,13 +986,13 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
 
 void TEWidget::focusInEvent( QFocusEvent * )
 {
-    // do nothing, to prevent repainting
+  repaint(false);  // don't erase area
 }
 
 
 void TEWidget::focusOutEvent( QFocusEvent * )
 {
-    // do nothing, to prevent repainting
+  repaint(false);  // don't erase area
 }
 
 bool TEWidget::focusNextPrevChild( bool next )
