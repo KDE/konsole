@@ -778,8 +778,8 @@ void VT102Emulation::onKeyPress( QKeyEvent* ev )
     case Key_F11       : sendString("\033[23~" ); return;
     case Key_F12       : sendString("\033[24~" ); return;
 
-    case Key_Home      : sendString("\033[7~"  ); return;
-    case Key_End       : sendString("\033[8~"  ); return;
+    case Key_Home      : sendString("\033[H"  ); return;
+    case Key_End       : sendString("\033[F"  ); return;
     case Key_Prior     : sendString("\033[5~"  ); return;
     case Key_Next      : sendString("\033[6~"  ); return;
     case Key_Insert    : sendString("\033[2~"  ); return;

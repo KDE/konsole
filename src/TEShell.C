@@ -102,7 +102,7 @@ void Shell::makeShell(const char* dev, QStrList & args,
 // only used internally. See `run' for interface
 { int sig; char* t;
   // open and set all standard files to master/slave tty
-  int tt = open(dev, O_RDWR);
+  int tt = open(dev, O_RDWR | O_EXCL);
    
   //reset signal handlers for child process
   for (sig = 1; sig < NSIG; sig++) signal(sig,SIG_DFL);
@@ -134,11 +134,13 @@ void Shell::makeShell(const char* dev, QStrList & args,
   close(open(dev, O_WRONLY, 0));       // clients (bash,vi). Because bash
   setpgid(0,0);                        // heals this, use '-e' to test it.
 
+/*
 #if defined(TIOCSPTLCK)
   int flag = 1;                        // Linux-only security solution:
   if (ioctl(fd,TIOCSPTLCK,&flag))      // prohibit opening tty from now on
 #endif
     perror("Warning: The session is insecure.");
+*/
   close(fd);
   
   // drop privileges
