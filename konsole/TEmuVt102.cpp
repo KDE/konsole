@@ -256,6 +256,7 @@ void TEmuVt102::pushToToken(int cc)
 #define DIG  8
 #define SCS 16
 #define GRP 32
+#define CPS 64
 
 void TEmuVt102::initTokenizer()
 { int i; UINT8* s;
@@ -263,6 +264,8 @@ void TEmuVt102::initTokenizer()
   for(i =  0;                      i <  32; i++) tbl[ i] |= CTL;
   for(i = 32;                      i < 256; i++) tbl[ i] |= CHR;
   for(s = (UINT8*)"@ABCDGHILMPSTXZcdfry"; *s; s++) tbl[*s] |= CPN;
+// resize = \e[8;<row>;<col>t
+  for(s = (UINT8*)"t"; *s; s++) tbl[*s] |= CPS;
   for(s = (UINT8*)"0123456789"        ; *s; s++) tbl[*s] |= DIG;
   for(s = (UINT8*)"()+*%"             ; *s; s++) tbl[*s] |= SCS;
   for(s = (UINT8*)"()+*#[]%"          ; *s; s++) tbl[*s] |= GRP;
@@ -335,6 +338,10 @@ void TEmuVt102::onRcvChar(int cc)
     if (les(3,1,SCS)) { tau( TY_ESC_CS(s[1],s[2]),    0,   0);  resetToken(); return; }
     if (lec(3,1,'#')) { tau( TY_ESC_DE(s[2]),    0,   0);       resetToken(); return; }
     if (eps(    CPN)) { tau( TY_CSI_PN(cc), argv[0],argv[1]);   resetToken(); return; }
+
+// resize = \e[8;<row>;<col>t
+    if (eps(    CPS)) { tau( TY_CSI_PS(cc, argv[0]), argv[1], argv[2]);   resetToken(); return; }
+
     if (epe(       )) { tau( TY_CSI_PE(cc),      0,   0);       resetToken(); return; }
     if (ees(    DIG)) { addDigit(cc-'0');                                     return; }
     if (eec(    ';')) { addArgument();                                        return; }
@@ -504,6 +511,9 @@ switch( N )
     case TY_ESC_DE('5'      ) : /* IGNORED: single width, single high*/ break;
     case TY_ESC_DE('6'      ) : /* IGNORED: double width, single high*/ break;
     case TY_ESC_DE('8'      ) : scr->helpAlign            (          ); break;
+
+// resize = \e[8;<row>;<col>t
+    case TY_CSI_PS('t',    8) : changeColLin( q /* col */, p /* lin */ ); break;
 
     case TY_CSI_PS('K',    0) : scr->clearToEndOfLine     (          ); break;
     case TY_CSI_PS('K',    1) : scr->clearToBeginOfLine   (          ); break;

@@ -2061,8 +2061,16 @@ void Konsole::reparseConfiguration()
 
 }
 
-// --| color selection |-------------------------------------------------------
+// Called from emulation
+void Konsole::changeColLin(int columns, int lines)
+{
+  if (b_allowResize && !b_fixedSize) {
+    setColLin(columns, lines);
+    te->update();
+  }
+}
 
+// Called from emulation
 void Konsole::changeColumns(int columns)
 {
   if (b_allowResize) {
@@ -2783,6 +2791,8 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
            this, SLOT(slotRenameSession(TESession*, const QString&)) );
   connect( s->getEmulation(), SIGNAL(changeColumns(int)),
            this, SLOT(changeColumns(int)) );
+  connect( s->getEmulation(), SIGNAL(changeColLin(int,int)),
+           this, SLOT(changeColLin(int,int)) );
   connect( s->getEmulation(), SIGNAL(ImageSizeChanged(int,int)),
            this, SLOT(notifySize(int,int)));
   connect( s, SIGNAL(zmodemDetected(TESession*)),
@@ -3535,6 +3545,7 @@ void Konsole::detachSession(TESession* _se) {
 
   disconnect( _se->getEmulation(),SIGNAL(ImageSizeChanged(int,int)), this,SLOT(notifySize(int,int)));
   disconnect( _se->getEmulation(),SIGNAL(changeColumns(int)), this,SLOT(changeColumns(int)) );
+  disconnect( _se->getEmulation(),SIGNAL(changeColLin(int, int)), this,SLOT(changeColLin(int,int)) );
 
   disconnect( _se,SIGNAL(updateTitle()), this,SLOT(updateTitle()) );
   disconnect( _se,SIGNAL(notifySessionState(TESession*,int)), this,SLOT(notifySessionState(TESession*,int)) );
@@ -3636,6 +3647,7 @@ void Konsole::attachSession(TESession* session)
   connect( session,SIGNAL(renameSession(TESession*,const QString&)), this,SLOT(slotRenameSession(TESession*,const QString&)) );
   connect( session->getEmulation(),SIGNAL(ImageSizeChanged(int,int)), this,SLOT(notifySize(int,int)));
   connect( session->getEmulation(),SIGNAL(changeColumns(int)), this,SLOT(changeColumns(int)) );
+  connect( session->getEmulation(),SIGNAL(changeColLin(int, int)), this,SLOT(changeColLin(int,int)) );
 
   activateSession(session);
 }

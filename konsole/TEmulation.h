@@ -68,6 +68,7 @@ signals:
   void sndBlock(const char* txt,int len);
   void ImageSizeChanged(int lines, int columns);
   void changeColumns(int columns);
+  void changeColLin(int columns, int lines);
   void changeTitle(int arg, const char* str);
   void notifySessionState(int state);
   void zmodemDetected();

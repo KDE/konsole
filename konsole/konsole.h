@@ -154,6 +154,7 @@ private slots:
   void updateRMBMenu();
 
   void changeColumns(int);
+  void changeColLin(int columns, int lines);
   void notifySessionState(TESession* session,int state);
   void notifySize(int,int);
   void updateTitle();
