@@ -58,7 +58,7 @@ int main (int argc, char *argv[])
   {
     printf("usage: %s (--grant|--revoke)\n",argv[0]);
     printf("%s is a helper for\n",argv[0]);
-    printf("konsole and not intented to\n");
+    printf("konsole and not intended to\n");
     printf("be called from the command\n");
     printf("line. It needs to be installed\n");
     printf("root setuid to function.\n");
