@@ -1,6 +1,6 @@
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* [main.h]                         Konsole                                   */
+/* [konsole.h]                      Konsole                                   */
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
@@ -13,12 +13,13 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef KONSOLE_H
+#define KONSOLE_H
 
 
 #include <ktmainwindow.h>
 #include <ksimpleconfig.h>
+#include <kaction.h>
 #include <qstrlist.h>
 
 #include "TEPty.h"

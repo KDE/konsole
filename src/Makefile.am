@@ -20,13 +20,24 @@ INCLUDES =  -I$(INCDIR) $(all_includes)
 
 # you can add here more. This one gets installed
 bin_PROGRAMS = 	konsole konsole_grantpty kwrited #kcmkonsole
-lib_LTLIBRARIES = kwrited.la
+lib_LTLIBRARIES = libkonsole.la kwrited.la
 
-noinst_LTLIBRARIES = libkonsole.la
+#noinst_LTLIBRARIES = libkonsole.la
 
-libkonsole_la_SOURCES = TEWidget.C TEmuVt102.C TEScreen.C TEmulation.C TEPty.C TEHistory.C keytrans.C
+libkonsole_la_SOURCES =konsole.C \
+	schema.C \
+	session.C \
+	TEWidget.C \
+	TEmuVt102.C \
+	TEScreen.C \
+	TEmulation.C \
+	TEPty.C \
+	TEHistory.C \
+	keytrans.C
+
 libkonsole_la_LDFLAGS = -no-undefined $(all_libraries) # -version-info `expr $(VERSION) + $(SUBVERS)`:$(RELEASE):$(SUBVERS)
-libkonsole_la_LIBADD = $(LIB_KDEUI) $(LIBUTEMPTER)
+
+libkonsole_la_LIBADD = $(LIB_KDEUI) $(LIBUTEMPTER) -lkparts
 
 # Which sources should be compiled for konsole.
 
@@ -38,7 +49,7 @@ kwrited_SOURCES	= dummy.C
 kwrited_LDADD   = kwrited.la 
 kwrited_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
-konsole_SOURCES	= main.C schema.C session.C 
+konsole_SOURCES	= main.C 
 konsole_LDADD   = libkonsole.la $(LIB_KIMGIO)
 konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
@@ -60,7 +71,7 @@ install-exec-local: install-binPROGRAMS
 	@(chown root $(bindir)/konsole_grantpty && chmod 4755 $(bindir)/konsole_grantpty) || echo "Please make konsole_grandpty setuid root"
 
 # just to make sure, automake makes them
-METASOURCES = TEWidget.moc TEmuVt102.moc session.moc main.moc \
+METASOURCES = TEWidget.moc TEmuVt102.moc session.moc konsole.moc \
 	TEmulation.moc TEPty.moc kwrited.moc
 
 META_INCLUDES = $(srcdir)/../include
