@@ -1,4 +1,4 @@
-SUBDIRS = konsle other doc fonts
+SUBDIRS = konsole other doc fonts
 
 data_DATA = konsole.desktop konsolesu.desktop
 datadir = $(kde_appsdir)/System
