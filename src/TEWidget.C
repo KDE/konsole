@@ -49,12 +49,14 @@
 #include <qpainter.h>
 #include <qclipboard.h>
 #include <qstyle.h>
+#include <qfile.h>
 #include <qdragobject.h>
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <ctype.h>
+#include <sys/stat.h>
 
 #include <assert.h>
 
@@ -1131,9 +1133,18 @@ void TEWidget::drop_menu_activated(int item)
       break;
     case 1: // cd ...
       currentSession->getEmulation()->sendString("cd ");
-      QString text = KURL( dropText ).directory( true, false );
-      text.replace(QRegExp(" "), "\\ "); // escape spaces
-      currentSession->getEmulation()->sendString(text.local8Bit());
+      struct stat statbuf;
+      if ( ::stat( QFile::encodeName( dropText ), &statbuf ) == 0 )
+      {
+        if ( !S_ISDIR(statbuf.st_mode) )
+        {
+          KURL url;
+          url.setPath( dropText );
+          dropText = url.directory( true, false ); // remove filename
+        }
+      }
+      dropText.replace(QRegExp(" "), "\\ "); // escape spaces
+      currentSession->getEmulation()->sendString(dropText.local8Bit());
       currentSession->getEmulation()->sendString("\n");
 //    KWM::activate((Window)this->winId());
       break;
