@@ -863,7 +863,7 @@ void TEWidget::calcGeometry()
 
 #if QT_VERSION ==  210
 #warning Using Qt2.1.0 CVS scrollbar extents (mosfet).
-    scrollbar->resize(QApplication::style().scrollBarExtent(),
+    scrollbar->resize(QApplication::style().scrollBarExtent().width(),
                       contentsRect().height());
 #else
     scrollbar->resize(16, contentsRect().height());
