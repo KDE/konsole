@@ -24,6 +24,7 @@
  * GPL applies.
  */
 
+#include <sys/types.h>
 #include <errno.h>
 #include <grp.h>
 #include <stdio.h>
@@ -31,6 +32,13 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <unistd.h>
+
+#include <sys/param.h>
+#ifdef BSD
+#  define BSD_PTY_HACK
+#  include <paths.h>
+#  include <dirent.h>
+#endif
 
 #define PTY_FILENO 3    /* keep in sync with grantpty */
 #define TTY_GROUP "tty"
@@ -81,8 +89,53 @@ int main (int argc, char *argv[])
 
   /* get slave pty name from master pty file handle in PTY_FILENO *********/
 
+#if defined(BSD_PTY_HACK)
+  /*
+    Hack to make konsole_grantpty work on *BSD.  ttyname(3) does not work
+    on BSD based systems with a file descriptor opened on a /dev/pty?? device.
+
+    Instead, this code looks through all the devices in /dev for a device
+    which has the same inode as our PTY_FILENO descriptor... if found, we
+    have the name for our pty.
+  */
+
+  if (uid == 0) {
+    p = getgrnam("wheel");
+    gid = p ? p->gr_gid : getgid();
+  }
+
+  pty = NULL;
+  {
+    struct dirent *dirp;
+    DIR *dp;
+    struct stat dsb;
+
+    if (fstat(PTY_FILENO, &dsb) != -1) {
+      if ((dp = opendir(_PATH_DEV)) != NULL) {
+        while ((dirp = readdir(dp))) {
+          if (dirp->d_fileno != dsb.st_ino)
+            continue;
+
+          {
+            int pdlen = strlen(_PATH_DEV), namelen = strlen(dirp->d_name);
+            pty = malloc(pdlen + namelen + 1);
+            if (pty) {
+              *pty = 0;
+              strcat(pty, _PATH_DEV);
+              strcat(pty, dirp->d_name);
+            }
+          }
+        }
+
+        (void) closedir(dp);
+      }
+    }
+  }
+#else
   /* Check that PTY_FILENO is a valid master pseudo terminal.  */
   pty = ttyname(PTY_FILENO);          /* posix */
+#endif
+
   if (pty == NULL)
   {
     fprintf(stderr,"%s: cannot determine the name of device.\n",argv[0]);
@@ -115,6 +168,7 @@ int main (int argc, char *argv[])
     fprintf(stderr,"%s: cannot chown %s.\n",argv[0],tty); perror("Reason");
     return 1; /* FAIL */
   }
+
   if (chmod(tty, mod) < 0)
   {
     fprintf(stderr,"%s: cannot chmod %s.\n",argv[0],tty); perror("Reason");

@@ -192,14 +192,28 @@ int chownpty(int fd, int grant)
     execle(path.ascii(), BASE_CHOWN, grant?"--grant":"--revoke", NULL, NULL);
     exit(1); // should not be reached
   }
-  if (pid > 0)
-  { int w;
-  retry:
+
+  if (pid > 0) {
+    // ### FreeBSD seems to need the SIGCHLD sighandler resett to default for
+    // waitpid() to work. - Brad
+    struct sigaction newsa, oldsa;
+    newsa.sa_handler = SIG_DFL;
+    newsa.sa_mask = sigset_t();
+    newsa.sa_flags = 0;
+    sigaction(SIGCHLD, &newsa, &oldsa);
+
+    int w;
+retry:
     int rc = waitpid (pid, &w, 0);
     if ((rc == -1) && (errno == EINTR))
       goto retry;
+
+    // restore previous SIGCHLD handler
+    sigaction(SIGCHLD, &oldsa, NULL);
+
     return (rc != -1 && WIFEXITED(w) && WEXITSTATUS(w) == 0);
   }
+
   return 0; //dummy.
 }
 
@@ -457,7 +471,8 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
 #endif
 
   //reset signal handlers for child process
-  for (sig = 1; sig < NSIG; sig++) signal(sig,SIG_DFL);
+  for (sig = 1; sig < NSIG; sig++)
+      signal(sig,SIG_DFL);
 
   // Don't know why, but his is vital for SIGHUP to find the child.
   // Could be, we get rid of the controling terminal by this.
