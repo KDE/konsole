@@ -1,3 +1,11 @@
+8 Jun 2001
+-Increased version to 1.0.2
+-Added Control-Alt-N shortcut key to create new sessions
+-Other new items for 1.0.2 added in recent months are session
+ management, restoring fullscreen mode, improved startup speed,
+ and other fixes and improvemetns I wish I had remembered to add
+ here as they were made.  My thanks to all who have, and continue to,
+ contribute.
 26 Apr 2001
 - Applied patches from bug reports 11353 and 16321, session title is now
   passed to window title and going back and forth from fullscreen mode no
@@ -20,7 +28,7 @@
 - *.keytab not sending \0 fixed.
  9 Sep 2000
 - license restricted to GPLv2
-- added Konsole2.Requierements
+- added Konsole2.Requirements
 - changes version to 1.0.1 meaning there will be a version 2
 - removed AUTHORS and CONTRIBUTORS in favor of DEVELOPERS
  8 Sep 2000
