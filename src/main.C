@@ -992,10 +992,9 @@ int main(int argc, char* argv[])
   eargs.append(shell);
 
   KAboutData aboutData( PACKAGE, I18N_NOOP("Konsole"), 
-    VERSION, description, KAboutData::License_GPL, 
+    VERSION, description, KAboutData::GPL, 
     "(c) 1997-2000, Lars Doelle");
   aboutData.addAuthor("Lars Doelle",0, "lars.doelle@on-line.de");
-  aboutData.addAuthor("Matthias Ettrich",0, "ettrich@kde.org");
   KCmdLineArgs::init( argc, argv, &aboutData );
   KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
   
