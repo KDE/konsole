@@ -1579,11 +1579,11 @@ void Konsole::addSession(TESession* s)
   session2action.insert(s,ra);
   sessions.append(s);
 
-  if (!m_menuCreated)
-    makeGUI();
-
-  if (sessions.count()>1) 
+  if (sessions.count()>1) {
+    if (!m_menuCreated)
+      makeGUI();
     m_detachSession->setEnabled(true);
+  }
 
   if (m_menuCreated)
      ra->plug(m_view);
