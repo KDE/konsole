@@ -34,7 +34,6 @@
 #include "TEmuVt102.h"
 #include "session.h"
 #include "schema.h"
-#include "konsole_child.h"
 #include "konsolebookmarkmenu.h"
 #include "konsolebookmarkhandler.h"
 
@@ -67,21 +66,20 @@ class Konsole : public KMainWindow, virtual public KonsoleIface
     friend class KonsoleSessionManaged;
 public:
 
-  Konsole(const char * name, const QString &_program, QStrList & _args, int histon,
-    bool menubaron, bool tabbaron, bool frameon, bool scrollbaron, const QString &icon, const QString &_title,
-    QCString type = 0, const QString &_term=QString::null, bool b_inRestore = false, const int wanted_tabbar = 0,
-    const QString &workdir=QString::null);
+  Konsole(const char * name, int histon, bool menubaron, bool tabbaron,
+    bool frameon, bool scrollbaron,
+    QCString type = 0, bool b_inRestore = false, const int wanted_tabbar = 0);
+
   ~Konsole();
   void setColLin(int columns, int lines);
   void setAutoClose(bool on);
   void initFullScreen();
   void initSessionFont(int fontNo);
-  void initSessionTitle(const QString &_title, TESession* _se=0);
   void initSessionKeyTab(const QString &keyTab);
   void initMonitorActivity(bool on);
   void initMonitorSilence(bool on);
   void initMasterMode(bool on);
-  void newSession(const QString &program, const QStrList &args, const QString &term, const QString &icon, const QString &cwd);
+  void newSession(const QString &program, const QStrList &args, const QString &term, const QString &icon, const QString &title, const QString &cwd);
   void setSchema(const QString & path);
   void setEncoding(int);
 
@@ -136,7 +134,6 @@ private slots:
   void activateSession(TESession*);
   void closeCurrentSession();
   void confirmCloseCurrentSession();
-  void doneChild(KonsoleChild*, TESession*);
   void doneSession(TESession*);
   void slotCouldNotClose();
   void toggleFullScreen();
@@ -250,6 +247,7 @@ private:
   void addSession(TESession* s);
   void detachSession(TESession* _se=0);
   void setColorPixmaps();
+  void renameSession(TESession* ses);
 
   void setSchema(ColorSchema* s, TEWidget* tewidget=0);
   void setFont(int fontno=-1);
@@ -277,7 +275,6 @@ private:
   QPtrDict<TESession> action2session;
   QPtrDict<KRadioAction> session2action;
   QPtrList<TESession> sessions;
-  QPtrList<KonsoleChild> detached;
   QIntDict<KSimpleConfig> no2command;
   QIntDict<KTempFile> no2tempFile;
   QIntDict<QString> no2filename;

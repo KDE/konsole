@@ -135,6 +135,9 @@ Time to start a requirement list.
 #define POPUP_NEW_SESSION_ID 121
 #define POPUP_SETTINGS_ID 212
 
+#define SESSION_NEW_WINDOW_ID 1
+#define SESSION_NEW_SHELL_ID 100
+
 extern bool argb_visual; // declared in main.cpp and konsole_part.cpp
 
 // KonsoleFontSelectAction is now also used for selectSize!
@@ -183,10 +186,8 @@ static const char * const fonts[] = {
 
 #define DEFAULT_HISTORY_SIZE 1000
 
-Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, int histon,
-                 bool menubaron, bool tabbaron, bool frameon, bool scrollbaron, const QString &_icon,
-                 const QString &_title, QCString type, const QString &_term, bool b_inRestore,
-                 const int wanted_tabbar, const QString &_cwd)
+Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bool frameon, bool scrollbaron,
+                 QCString type, bool b_inRestore, const int wanted_tabbar )
 :DCOPObject( "konsole" )
 ,KMainWindow(0, name)
 ,m_defaultSession(0)
@@ -356,9 +357,6 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
     if (te) te->setScrollbarLocation(TEWidget::SCRNONE);
   }
 
-  // activate and run first session //////////////////////////////////////////
-  newSession(co, _program, _args, _term, _icon, _title, _cwd);
-
   //KONSOLEDEBUG<<"Konsole ctor() ends "<<time.elapsed()<<" msecs elapsed"<<endl;
 
   kapp->dcopClient()->setDefaultObject( "konsole" );
@@ -367,12 +365,6 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 
 Konsole::~Konsole()
 {
-    while (detached.count()) {
-        KonsoleChild* child=detached.first();
-        delete child;
-        detached.remove(child);
-    }
-
     sessions.first();
     while(sessions.current())
     {
@@ -381,13 +373,8 @@ Konsole::~Konsole()
     }
 
     // Wait a bit for all childs to clean themselves up.
-#if KDE_VERSION >=306
     while(sessions.count() && KProcessController::theKProcessController->waitForProcessExit(1))
         ;
-//#else
-//    while(sessions.count())
-//        ;
-#endif
 
     sessions.setAutoDelete(true);
 
@@ -1157,12 +1144,6 @@ bool Konsole::queryClose()
      // saving session - do not even think about doing any kind of cleanup here
        return true;
 
-   while (detached.count()) {
-     KonsoleChild* child=detached.first();
-     delete child;
-     detached.remove(child);
-   }
-
    if (sessions.count() == 0)
        return true;
 
@@ -1298,15 +1279,7 @@ void Konsole::slotTabDetachSession() {
 }
 
 void Konsole::slotTabRenameSession() {
-//  KONSOLEDEBUG << "slotTabRenameSession\n";
-  QString name = m_contextMenuSession->Title();
-  bool ok;
-
-  name = KInputDialog::getText( i18n( "Rename Session" ),
-      i18n( "Session name:" ), name, &ok, this );
-
-  if (ok)
-    initSessionTitle(name,m_contextMenuSession);
+  renameSession(m_contextMenuSession);
 }
 
 void Konsole::slotTabToggleMonitor()
@@ -1402,7 +1375,6 @@ void Konsole::saveProperties(KConfig* config) {
   uint counter=0;
   uint active=0;
   QString key;
-  config->setDesktopGroup();
 
   if (config != KGlobal::config())
   {
@@ -1412,6 +1384,7 @@ void Konsole::saveProperties(KConfig* config) {
      while(counter < sessions.count())
      {
         key = QString("Title%1").arg(counter);
+
         config->writeEntry(key, sessions.current()->Title());
         key = QString("Schema%1").arg(counter);
         config->writeEntry(key, colors->find( sessions.current()->schemaNo() )->relPath());
@@ -1448,7 +1421,10 @@ void Konsole::saveProperties(KConfig* config) {
         counter++;
      }
   }
-  config->setDesktopGroup();
+  else
+  {
+     config->setDesktopGroup();
+  }
   config->writeEntry("Fullscreen",b_fullscreen);
   config->writeEntry("font",n_defaultFont);
   config->writeEntry("defaultfont", defaultFont);
@@ -1490,11 +1466,11 @@ void Konsole::readProperties(KConfig* config)
 // konsoles are being read.
 void Konsole::readProperties(KConfig* config, const QString &schema, bool globalConfigOnly)
 {
-   config->setDesktopGroup();
    //KONSOLEDEBUG<<"Konsole::readProps()"<<endl;
 
    if (config==KGlobal::config())
    {
+     config->setDesktopGroup();
      b_warnQuit=config->readBoolEntry( "WarnQuit", true );
      b_allowResize=config->readBoolEntry( "AllowResize", false);
      b_bidiEnabled = config->readBoolEntry("EnableBidi",false);
@@ -2135,15 +2111,7 @@ void Konsole::reparseConfiguration()
   }
   else
     setSchema(curr_schema);
-  for (KonsoleChild *child = detached.first(); child; child = detached.next()) {
-     int numb = child->session()->schemaNo();
-     ColorSchema* s = colors->find(numb);
-     if (s) {
-       if (s->hasSchemaFileChanged())
-         s->rereadSchemaFile();
-       child->setSchema(s);
-     }
-  }
+
 }
 
 // --| color selection |-------------------------------------------------------
@@ -2433,14 +2401,6 @@ void Konsole::addSession(TESession* s)
            break;
         }
      }
-     for (KonsoleChild *child = detached.first(); child; child = detached.next())
-     {
-        if (newTitle == child->session()->Title())
-        {
-           nameOk = false;
-           break;
-        }
-     }
      if (!nameOk)
      {
        count++;
@@ -2478,11 +2438,11 @@ void Konsole::addSession(TESession* s)
     createSessionTab(te, SmallIconSet(s->IconName()), newTitle);
     setSchema(s->schemaNo());
     tabwidget->setCurrentPage(tabwidget->count()-1);
-      disableMasterModeConnections(); // no duplicate connections, remove old
-      enableMasterModeConnections();
-    }
-    if( tabwidget )
-        m_removeSessionButton->setEnabled(tabwidget->count()>1);
+    disableMasterModeConnections(); // no duplicate connections, remove old
+    enableMasterModeConnections();
+    if( m_removeSessionButton )
+      m_removeSessionButton->setEnabled(tabwidget->count()>1);
+  }
 }
 
 QString Konsole::currentSession()
@@ -2503,9 +2463,7 @@ void Konsole::listSessions()
   int counter=0;
   m_sessionList->clear();
   m_sessionList->insertTitle(i18n("Session List"));
-#if KDE_VERSION >=306
   m_sessionList->setKeyboardShortcutsEnabled(true);
-#endif
   for (TESession *ses = sessions.first(); ses; ses = sessions.next()) {
     QString title=ses->Title();
     m_sessionList->insertItem(SmallIcon(ses->IconName()),title.replace('&',"&&"),counter++);
@@ -2720,10 +2678,10 @@ void Konsole::setDefaultSession(const QString &filename)
   m_defaultSessionFilename=filename;
 }
 
-void Konsole::newSession(const QString &pgm, const QStrList &args, const QString &term, const QString &icon, const QString &cwd)
+void Konsole::newSession(const QString &pgm, const QStrList &args, const QString &term, const QString &icon, const QString &title, const QString &cwd)
 {
   KSimpleConfig *co = defaultSession();
-  newSession(co, pgm, args, term, icon, QString::null, cwd);
+  newSession(co, pgm, args, term, icon, title, cwd);
 }
 
 QString Konsole::newSession()
@@ -2734,6 +2692,20 @@ QString Konsole::newSession()
 
 void Konsole::newSession(int i)
 {
+  if (i == SESSION_NEW_WINDOW_ID)
+  {
+    // TODO: "type" isn't passed properly
+    Konsole* konsole = new Konsole(name(), b_histEnabled, !menubar->isHidden(), n_tabbar != TabNone, b_framevis,
+                                   n_scroll != TEWidget::SCRNONE, 0, false, 0);
+    konsole->newSession();
+    konsole->enableFullScripting(b_fullScripting);
+    konsole->enableFixedSize(b_fixedSize);
+    konsole->setColLin(0,0); // Use defaults
+    konsole->initFullScreen();
+    konsole->show();
+    return;
+  }
+
   KSimpleConfig* co = no2command.find(i);
   if (co) {
     newSession(co);
@@ -2960,13 +2932,6 @@ void Konsole::closeCurrentSession()
   se->closeSession();
 }
 
-void Konsole::doneChild(KonsoleChild* child, TESession* session)
-{
-  if (session)
-    attachSession(session);
-  detached.remove(child);
-}
-
 //FIXME: If a child dies during session swap,
 //       this routine might be called before
 //       session swap is completed.
@@ -2974,19 +2939,6 @@ void Konsole::doneChild(KonsoleChild* child, TESession* session)
 void Konsole::doneSession(TESession* s)
 {
 // qWarning("Konsole::doneSession(): Exited:%d ExitStatus:%d\n", WIFEXITED(status),WEXITSTATUS(status));
-#if 0 // die silently
-  if (!WIFEXITED((status)) || WEXITSTATUS((status)))
-  {
-//FIXME: "Title" is not a precise locator for the message.
-//       The command would be better.
-    QString str = i18n("`%1' terminated abnormally.").arg(s->Title());
-    if (WIFEXITED((status)))
-    {char rcs[100]; sprintf(rcs,"%d.\n",WEXITSTATUS((status)));
-      str = str + i18n("\nReturn code = ") + rcs;
-    }
-    KMessageBox::sorry(this, str);
-  }
-#endif
 
   if (s == se_previous)
     se_previous = 0;
@@ -3003,7 +2955,7 @@ void Konsole::doneSession(TESession* s)
       rootxpms.remove(s->widget());
     }
     delete s->widget();
-    if( tabwidget )
+    if( tabwidget && m_removeSessionButton )
         m_removeSessionButton->setEnabled(tabwidget->count()>1);
   }
   session2action.remove(s);
@@ -3025,27 +2977,20 @@ void Konsole::doneSession(TESession* s)
   if (s == se)
   { // pick a new session
     se = 0;
-    if (sessions.count() || detached.count())
+    if (sessions.count())
     {
-      if (sessions.count()) {
-        se = sessions.at(sessionIndex ? sessionIndex - 1 : 0);
+      se = sessions.at(sessionIndex ? sessionIndex - 1 : 0);
 
-        session2action.find(se)->setChecked(true);
-        //FIXME: this Timer stupidity originated from the connected
-        //       design of Emulations. By this the newly activated
-        //       session might get a Ctrl(D) if the session has be
-        //       terminated by this keypress. A likely problem
-        //       can be found in the CMD_prev/nextSession processing.
-        //       Since the timer approach only works at good weather,
-        //       the whole construction is not suited to what it
-        //       should do. Affected is the TEEmulation::setConnect.
-        QTimer::singleShot(1,this,SLOT(activateSession()));
-      }
-      else {
-        KonsoleChild* child=detached.first();
-        delete child;
-        detached.remove(child);
-      }
+      session2action.find(se)->setChecked(true);
+      //FIXME: this Timer stupidity originated from the connected
+      //       design of Emulations. By this the newly activated
+      //       session might get a Ctrl(D) if the session has be
+      //       terminated by this keypress. A likely problem
+      //       can be found in the CMD_prev/nextSession processing.
+      //       Since the timer approach only works at good weather,
+      //       the whole construction is not suited to what it
+      //       should do. Affected is the TEEmulation::setConnect.
+      QTimer::singleShot(1,this,SLOT(activateSession()));
     }
     else
       close();
@@ -3284,11 +3229,12 @@ void Konsole::buildSessionMenus()
 
 static void insertItemSorted(KPopupMenu *menu, const QIconSet &iconSet, const QString &txt, int id)
 {
-  const int defaultId = 1; // The id of the 'new' item.
+  const int defaultId = SESSION_NEW_SHELL_ID; // The id of the 'new' item.
   int index = menu->indexOf(defaultId);
   int count = menu->count();
   if (index >= 0)
   {
+     index++; // Skip New Window
      index++; // Skip separator
      while(true)
      {
@@ -3343,8 +3289,8 @@ void Konsole::addSessionCommand(const QString &path)
     filename = filename.mid(j+1);
   no2filename.insert(cmd_serial,new QString(filename));
 
-  // Add shortcuts only once and not for 'New Shell (cmd_serial=1)'.
-  if ( ( b_sessionShortcutsMapped == true ) or ( cmd_serial == 1 ) ) return;
+  // Add shortcuts only once and not for 'New Shell'.
+  if ( ( b_sessionShortcutsMapped == true ) or ( cmd_serial == SESSION_NEW_SHELL_ID ) ) return;
 
   // Add an empty shortcut for each Session.
   QString comment = co->readEntry("Comment");
@@ -3375,7 +3321,7 @@ void Konsole::loadSessionCommands()
   no2tempFile.clear();
   no2filename.clear();
 
-  cmd_serial = 0;
+  cmd_serial = 99;
   cmd_first_screen = -1;
 
   if (!kapp->authorize("shell_access"))
@@ -3394,15 +3340,30 @@ void Konsole::loadSessionCommands()
 
 void Konsole::createSessionMenus()
 {
+  KSimpleConfig *cfg = no2command[SESSION_NEW_SHELL_ID];
+  QString txt = cfg->readEntry("Name");
+  QString icon = cfg->readEntry("Icon", "openterm");
+  insertItemSorted(m_tabbarSessionsCommands, SmallIconSet(icon), 
+                   txt.replace('&',"&&"), SESSION_NEW_SHELL_ID );
+
+  QString comment = cfg->readEntry("Comment");
+  if (comment.isEmpty())
+    comment=txt.prepend(i18n("New "));
+  insertItemSorted(m_session, SmallIconSet(icon), 
+                   comment.replace('&',"&&"), SESSION_NEW_SHELL_ID);
+  m_session->insertItem(SmallIconSet("window_new"),
+                        i18n("New &Window"), SESSION_NEW_WINDOW_ID);
+  m_tabbarSessionsCommands->insertItem(SmallIconSet("window_new"),
+                        i18n("New &Window"), SESSION_NEW_WINDOW_ID);
+  m_session->insertSeparator();
+  m_tabbarSessionsCommands->insertSeparator();
+
   QIntDictIterator<KSimpleConfig> it( no2command );
   for ( ; it.current(); ++it ) {
-    if ( it.currentKey() == 2 ) {   // Add Separator afer New Shell
-      m_session->insertSeparator();
-      m_tabbarSessionsCommands->insertSeparator();
-    }
-    QString txt = (*it).readEntry("Name");
-//    kdDebug()<< it.currentKey() << ": " << txt.latin1() << endl;
+    if ( it.currentKey() == SESSION_NEW_SHELL_ID )
+      continue;
 
+    QString txt = (*it).readEntry("Name");
     QString icon = (*it).readEntry("Icon", "openterm");
     insertItemSorted(m_tabbarSessionsCommands, SmallIconSet(icon), 
                      txt.replace('&',"&&"), it.currentKey() );
@@ -3628,17 +3589,16 @@ void Konsole::detachSession(TESession* _se) {
   disconnect( _se,SIGNAL(renameSession(TESession*,const QString&)), this,SLOT(slotRenameSession(TESession*,const QString&)) );
 
   ColorSchema* schema = colors->find(_se->schemaNo());
-  KonsoleChild* konsolechild = new KonsoleChild(this,_se,se_widget->Columns(),se_widget->Lines(),n_scroll,
-                                                b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame,
-                                                schema,se_widget->font(),se_widget->bellMode(),se_widget->wordCharacters(),
-                                                se_widget->blinkingCursor(),se_widget->ctrlDrag(),se_widget->isTerminalSizeHint(),
-                                                se_widget->lineSpacing(),se_widget->cutToBeginningOfLine(),b_allowResize, b_fixedSize);
-  detached.append(konsolechild);
-  konsolechild->show();
-  konsolechild->run();
 
-  connect( konsolechild,SIGNAL(doneChild(KonsoleChild*, TESession*)),
-           this,SLOT(doneChild(KonsoleChild*, TESession*)) );
+  // TODO: "type" isn't passed properly
+  Konsole* konsole = new Konsole(name(), b_histEnabled, !menubar->isHidden(), n_tabbar != TabNone, b_framevis,
+                                 n_scroll != TEWidget::SCRNONE, 0, false, 0);
+  konsole->enableFullScripting(b_fullScripting);
+  // TODO; Make this work: konsole->enableFixedSize(b_fixedSize);
+  konsole->resize(size());
+  konsole->show();
+  konsole->attachSession(_se);
+  konsole->activateSession(_se);
 
   if (_se==se) {
     if (se == se_previous)
@@ -3681,8 +3641,11 @@ void Konsole::attachSession(TESession* session)
     connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
              this, SLOT(configureRequest(TEWidget*,int,int,int)) );
 
+    te->resize(se_widget->size());
+    te->setSize(se_widget->Columns(), se_widget->Lines());
     initTEWidget(te, se_widget);
     session->changeWidget(te);
+    te->setFocus();
     createSessionTab(te, SmallIconSet(session->IconName()), session->Title());
     setSchema(session->schemaNo());
     if (session->isMasterMode()) {
@@ -3724,16 +3687,22 @@ void Konsole::attachSession(TESession* session)
   activateSession(session);
 }
 
-void Konsole::slotRenameSession() {
-//  KONSOLEDEBUG << "slotRenameSession\n";
-  QString name = se->Title();
+void Konsole::renameSession(TESession* ses) {
+//  KONSOLEDEBUG << "renameSession\n";
+  QString title = ses->Title();
   bool ok;
 
-  name = KInputDialog::getText( i18n( "Rename Session" ),
-      i18n( "Session name:" ), name, &ok, this );
+  title = KInputDialog::getText( i18n( "Rename Session" ),
+      i18n( "Session name:" ), title, &ok, this );
 
-  if (ok)
-    initSessionTitle(name);
+  if (!ok) return;
+
+  ses->setTitle(title);
+  slotRenameSession(ses,title);
+}
+
+void Konsole::slotRenameSession() {
+  renameSession(se);
 }
 
 void Konsole::slotRenameSession(TESession* ses, const QString &name)
@@ -3748,12 +3717,6 @@ void Konsole::slotRenameSession(TESession* ses, const QString &name)
   updateTitle();
 }
 
-void Konsole::initSessionTitle(const QString &_title, TESession* _se) {
-  if (!_se) _se=se;
-
-  _se->setTitle(_title);
-  slotRenameSession(_se,_title);
-}
 
 void Konsole::slotClearAllSessionHistories() {
   for (TESession *_se = sessions.first(); _se; _se = sessions.next())
@@ -4268,8 +4231,6 @@ QPtrList<TEWidget> Konsole::activeTEs()
    else
      if (te) {
        ret.append(te);
-       for (KonsoleChild *_child = detached.first(); _child; _child = detached.next())
-         ret.append(_child->session()->widget());
      }
    return ret;
 }

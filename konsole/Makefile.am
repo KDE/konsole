@@ -34,7 +34,7 @@ kded_kwrited_la_LDFLAGS = $(all_libraries) -module -avoid-version
 # konsole kdeinit module
 konsole_la_SOURCES = TEPty.cpp BlockArray.cpp main.cpp konsole.cpp schema.cpp session.cpp TEWidget.cpp TEmuVt102.cpp \
      TEScreen.cpp TEmulation.cpp TEHistory.cpp keytrans.cpp konsoleiface.skel sessioniface.skel \
-     konsole_wcwidth.cpp konsolebookmarkhandler.cpp konsolebookmarkmenu.cpp konsole_child.cpp \
+     konsole_wcwidth.cpp konsolebookmarkhandler.cpp konsolebookmarkmenu.cpp \
      zmodem_dialog.cpp printsettings.cpp
 konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
 konsole_la_LIBADD = $(LIB_KDEUI) $(LIB_KIO) $(LIB_KDEPRINT) $(LIBUTIL) $(XTESTLIB) $(LIB_XRENDER)
@@ -43,7 +43,7 @@ konsole_la_LIBADD = $(LIB_KDEUI) $(LIB_KIO) $(LIB_KDEPRINT) $(LIBUTIL) $(XTESTLI
 # kcmkonsole_LDADD   = $(LIB_KDEUI)
 # kcmkonsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
-noinst_HEADERS = TEWidget.h TEPty.h TEmulation.h TEmuVt102.h konsole_child.h \
+noinst_HEADERS = TEWidget.h TEPty.h TEmulation.h TEmuVt102.h \
 	TECommon.h TEScreen.h konsole.h schema.h session.h konsole_wcwidth.h \
 	kwrited.h TEHistory.h keytrans.h default.keytab.h BlockArray.h \
         konsolebookmarkhandler.h konsolebookmarkmenu.h zmodem_dialog.h \

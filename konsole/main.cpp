@@ -444,7 +444,6 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
       sessionconfig = a.sessionConfig();
     sessionconfig->setDesktopGroup();
     wname = sessionconfig->readEntry("class",wname).latin1();
-//    RESTORE( Konsole(wname,shell,eargs,histon,tabbaron) )
     int n = 1;
 
     int session_count = sessionconfig->readNumEntry("numSes");
@@ -457,9 +456,14 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
     QString sCwd;
     int     n_tabbar;
 
+    // TODO: Session management stores everything in same group,
+    // should use one group / mainwindow
     while (KMainWindow::canBeRestored(n) || !profile.isEmpty())
     {
-	sessionconfig->setDesktopGroup();
+        sessionconfig->setGroup("foo");
+        if (!sessionconfig->hasKey("Pgm0"))
+            sessionconfig->setDesktopGroup(); // Backwards compatible
+
         sPgm = sessionconfig->readEntry("Pgm0", shell);
         sessionconfig->readListEntry("Args0", eargs);
         sTitle = sessionconfig->readEntry("Title0", title);
@@ -467,7 +471,10 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         sIcon = sessionconfig->readEntry("Icon0","openterm");
         sCwd = sessionconfig->readPathEntry("Cwd0");
 	n_tabbar = QMIN(sessionconfig->readUnsignedNumEntry("tabbar",Konsole::TabBottom),2);
-        Konsole *m = new Konsole(wname,sPgm,eargs,histon,menubaron,tabbaron,frameon,scrollbaron,sIcon,sTitle,0/*type*/,sTerm,true,n_tabbar,sCwd);
+        Konsole *m = new Konsole(wname,histon,menubaron,tabbaron,frameon,scrollbaron,0/*type*/,true,n_tabbar);
+
+        m->newSession(sPgm, eargs, sTerm, sIcon, sTitle, sCwd);
+
         m->enableFullScripting(full_script);
         m->enableFixedSize(fixed_size);
 	m->restore(n);
@@ -496,8 +503,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
           sIcon = sessionconfig->readEntry(key,"openterm");
           key = QString("Cwd%1").arg(counter);
           sCwd = sessionconfig->readPathEntry(key);
-          m->newSession(sPgm, eargs, sTerm, sIcon, sCwd);
-          m->initSessionTitle(sTitle);
+          m->newSession(sPgm, eargs, sTerm, sIcon, sTitle, sCwd);
           key = QString("Schema%1").arg(counter);
           m->setSchema(sessionconfig->readEntry(key));
           key = QString("Encoding%1").arg(counter);
@@ -534,7 +540,8 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   }
   else
   {
-    Konsole*  m = new Konsole(wname,(shell ? QFile::decodeName(shell) : QString::null),eargs,histon,menubaron,tabbaron,frameon,scrollbaron,QString::null,title,type,term, false, 0, workDir);
+    Konsole*  m = new Konsole(wname,histon,menubaron,tabbaron,frameon,scrollbaron,type, false, 0);
+    m->newSession((shell ? QFile::decodeName(shell) : QString::null), eargs, term, QString::null, title, workDir);
     m->enableFullScripting(full_script);
     m->enableFixedSize(fixed_size);
     //3.8 :-(
