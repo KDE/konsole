@@ -401,6 +401,9 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
   dragInfo.state = diNone;
 
   setFocusPolicy( WheelFocus );
+
+  // im
+  setInputMethodEnabled(true);  
   
   if (!argb_visual)
   {
