@@ -494,6 +494,9 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         m->enableFullScripting(full_script);
         m->enableFixedSize(fixed_size);
 	m->restore(n);
+        sessionconfig->setGroup(QString("%1").arg(n));
+        if (!sessionconfig->hasKey("Pgm0"))
+            sessionconfig->setDesktopGroup(); // Backwards compatible
         m->makeGUI();
         m->setEncoding(sessionconfig->readNumEntry("Encoding0"));
         m->setSchema(sessionconfig->readEntry("Schema0"));
