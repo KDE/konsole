@@ -256,7 +256,7 @@ Konsole::Konsole(const char* name, const QString& _program,
   colors->checkSchemas();
 
   KeyTrans::loadAll();
-  //KONSOLEDEBUG<<"Konsole ctor() after KeyTrans::loadAll() "<<time.elapsed()<<" msecs elapsed"<<endl; 
+  //KONSOLEDEBUG<<"Konsole ctor() after KeyTrans::loadAll() "<<time.elapsed()<<" msecs elapsed"<<endl;
 
   // read and apply default values ///////////////////////////////////////////
   resize(321, 321); // Dummy.
@@ -297,7 +297,7 @@ Konsole::Konsole(const char* name, const QString& _program,
   //KONSOLEDEBUG<<"Konsole ctor(): runSession()"<<endl;
   te->currentSession = se;
   se->setConnect(TRUE);
-  
+
   updateTitle();
 
   //QTimer::singleShot(1,this,SLOT(allowPrevNext())); // hack, hack, hack
@@ -390,7 +390,7 @@ void Konsole::makeGUI()
    KAction *closeSession = new KAction(i18n("&Close Session"), "fileclose", 0, this,
                                         SLOT(closeCurrentSession()), this);
    closeSession->plug(m_sessions);
-   
+
    m_sessions->insertSeparator();
    KAction *clearAllSessionHistories = new KAction(i18n("Clear all H&istories"), "history_clear", 0,
      this, SLOT(slotClearAllSessionHistories()), this);
@@ -529,7 +529,7 @@ void Konsole::makeGUI()
    KAction *historyType = new KAction(i18n("&History..."), "history", 0, this,
                                       SLOT(slotHistoryType()), this);
    historyType->plug(m_options);
-   
+
    m_options->insertSeparator();
    m_options->insertItem( SmallIconSet( "charset" ), i18n( "&Codec" ), m_codec);
    m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
@@ -688,12 +688,12 @@ bool Konsole::queryClose()
             return false;
         }
     }
-    // WABA: Don't close if there are any sessions left. 
+    // WABA: Don't close if there are any sessions left.
     // Tell them to go away.
     if (!skip_exit_query && sessions.count())
     {
         sessions.first();
-        while(sessions.current()) 
+        while(sessions.current())
         {
             sessions.current()->kill(SIGHUP);
             sessions.next();
@@ -802,13 +802,13 @@ void Konsole::saveProperties(KConfig* config) {
   QString key;
   config->setDesktopGroup();
 
-  if (config != KGlobal::config()) 
+  if (config != KGlobal::config())
   {
      // called by the session manager
      skip_exit_query = true;
      config->writeEntry("numSes",sessions.count());
      sessions.first();
-     while(counter < sessions.count()) 
+     while(counter < sessions.count())
      {
         key = QString("Title%1").arg(counter);
         config->writeEntry(key, sessions.current()->Title());
@@ -876,7 +876,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    n_defaultKeytab=config->readNumEntry("keytab",0); // act. the keytab for this session
    b_fullscreen = config->readBoolEntry("Fullscreen",FALSE);
    // +1 because we have on more...a custom selected font
-   n_defaultFont = n_font = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT+1); 
+   n_defaultFont = n_font = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT+1);
    n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
    n_bell = QMIN(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),2);
    s_word_seps= config->readEntry("wordseps",":@-./_~");
@@ -940,7 +940,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    };
 
 //   setFullScreen(b_fullscreen);
-   
+
 }
 
 void Konsole::applySettingsToGUI()
@@ -1272,7 +1272,7 @@ void Konsole::showFullScreen()
 
 void Konsole::initFullScreen()
 {
-  //This function is to be called from main.C to initialize the state of the Konsole (fullscreen or not).  It doesn't appear to work 
+  //This function is to be called from main.C to initialize the state of the Konsole (fullscreen or not).  It doesn't appear to work
   //from inside the Konsole constructor
   if (b_fullscreen) {
    setColLin(0,0);
@@ -1299,7 +1299,7 @@ void Konsole::setFullScreen(bool on)
 //    KONSOLEDEBUG << "On and b_Fullscreen both equal " << b_fullscreen << "." << endl;
 //    }
     if (on) {
-      showFullScreen(); 
+      showFullScreen();
       b_fullscreen = on;
       }
     else {
@@ -1398,7 +1398,7 @@ void Konsole::addSession(TESession* s)
   int button_id=ra->itemId( ra->plug(toolBar()) );
   KToolBarButton* ktb=toolBar()->getButton(button_id);
   connect(ktb,SIGNAL(doubleClicked(int)), this,SLOT(slotRenameSession(int)));
-  
+
 }
 
 /**
@@ -1472,7 +1472,7 @@ void Konsole::allowPrevNext()
   QObject::connect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
   QObject::connect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
   QObject::connect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
-  QObject::connect( se->getEmulation(),SIGNAL(activateMenu()), this,SLOT(activateMenu()) ); 
+  QObject::connect( se->getEmulation(),SIGNAL(activateMenu()), this,SLOT(activateMenu()) );
   QObject::connect( se->getEmulation(),SIGNAL(moveSessionLeft()), this,SLOT(moveSessionLeft()) );
   QObject::connect( se->getEmulation(),SIGNAL(moveSessionRight()), this,SLOT(moveSessionRight()) );
 }
@@ -1489,7 +1489,7 @@ KSimpleConfig *Konsole::defaultSession()
 
   while( it.current()) {
      KSimpleConfig *co = it.current();
-     if ( co && co->readEntry("Exec").isEmpty() ) 
+     if ( co && co->readEntry("Exec").isEmpty() )
         return co;
      ++it;
   }
@@ -1499,13 +1499,13 @@ KSimpleConfig *Konsole::defaultSession()
 void Konsole::newSession(const QString &pgm, const QStrList &args, const QString &term)
 {
   KSimpleConfig *co = defaultSession();
-  newSession(co, pgm, args, term);  
+  newSession(co, pgm, args, term);
 }
 
 void Konsole::newSession()
 {
   KSimpleConfig *co = defaultSession();
-  newSession(co, QString::null, QStrList());  
+  newSession(co, QString::null, QStrList());
 }
 
 void Konsole::newSession(int i)
@@ -1517,7 +1517,7 @@ void Konsole::newSession(int i)
 TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &args, const QString &_term)
 {
   QString emu = "xterm";
-  QString key; 
+  QString key;
   QString sch = s_kconfigSchema;
   QString txt = s_title;
   unsigned int     fno = n_defaultFont;
@@ -1536,7 +1536,7 @@ TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrLis
   if (!_term.isEmpty())
      emu = _term;
 
-  if (!program.isEmpty()) 
+  if (!program.isEmpty())
   {
      cmdArgs = args;
   }
@@ -1560,7 +1560,7 @@ TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrLis
   ColorSchema* schema = sch.isEmpty()
                       ? colors->find(s_schema)
                       : colors->find(sch);
-  if (!schema) 
+  if (!schema)
       schema=(ColorSchema*)colors->at(0);  //the default one
   int schmno = schema->numb();
 
@@ -1941,7 +1941,7 @@ HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
                 parent)
 {
   QFrame *mainFrame = plainPage();
-  
+
   QHBoxLayout *hb = new QHBoxLayout(mainFrame);
 
   m_btnEnable    = new QCheckBox(i18n("&Enable"), mainFrame);
@@ -1998,7 +1998,7 @@ void Konsole::slotHistoryType()
 {
 //  KONSOLEDEBUG << "Konsole::slotHistoryType()\n";
   if (!se) return;
-  
+
   HistoryTypeDialog dlg(se->history(), m_histSize, this);
   if (dlg.exec()) {
     m_clearHistory->setEnabled( dlg.isOn() );
@@ -2014,7 +2014,7 @@ void Konsole::slotHistoryType()
          se->setHistory(HistoryTypeFile());
          m_histSize = 0;
          b_histEnabled = true;
-      
+
       }
 
     } else {
@@ -2035,8 +2035,9 @@ void Konsole::slotClearHistory()
 void Konsole::slotSaveHistory()
 {
   KURL url = KFileDialog::getSaveURL(QString::null, QString::null, 0L, i18n("Save History..."));
-
-  if ( !url.isLocalFile() ) {
+  if( url.isEmpty())
+      return;
+  if( !url.isLocalFile() ) {
     KMessageBox::sorry(this, i18n("This is not a local file.\n"));
     return;
   }
@@ -2077,7 +2078,7 @@ SizeDialog::SizeDialog(unsigned int columns,
                 parent)
 {
   QFrame *mainFrame = plainPage();
-  
+
   QHBoxLayout *hb = new QHBoxLayout(mainFrame);
 
   m_columns = new QSpinBox(20,1000,1,mainFrame);
