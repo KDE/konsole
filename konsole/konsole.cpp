@@ -358,7 +358,7 @@ void Konsole::makeGUI()
                                         SLOT(slotRenameSession()), this);
    renameSession->plug(m_sessions);
 
-   clearHistory = new KAction(i18n("Clear &History"), "editdelete", 0, this,
+   clearHistory = new KAction(i18n("Clear &History"), "history_clear", 0, this,
                                        SLOT(slotClearHistory()), this);
    clearHistory->setEnabled( se->history().isOn() );
    clearHistory->plug(m_sessions);
@@ -368,7 +368,7 @@ void Konsole::makeGUI()
    closeSession->plug(m_sessions);
    
    m_sessions->insertSeparator();
-   KAction *clearAllSessionHistories = new KAction(i18n("Clear all H&istories"), "editdelete", 0,
+   KAction *clearAllSessionHistories = new KAction(i18n("Clear all H&istories"), "history_clear", 0,
      this, SLOT(slotClearAllSessionHistories()), this);
    clearAllSessionHistories->plug(m_sessions);
    m_sessions->insertSeparator();
