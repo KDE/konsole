@@ -90,6 +90,7 @@
 #include <kaboutdata.h>
 
 #include "main.h"
+#include "keytrans.h"
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
@@ -765,6 +766,22 @@ void Konsole::changeTitle(int, const QString& s)
   title = s; setHeader();
 }
 
+void Konsole::setFullScreen(bool on)
+{
+  if (on == b_fullscreen) return;
+  if (on)
+  {
+    _saveGeometry = geometry();
+    setGeometry(kapp->desktop()->geometry());
+  }
+  else
+  {
+    setGeometry(_saveGeometry);
+  }
+  b_fullscreen = on;
+  m_options->setItemChecked(5,b_fullscreen);
+}
+
 // --| help |------------------------------------------------------------------
 
 void Konsole::tecRef()
@@ -1009,6 +1026,7 @@ int main(int argc, char* argv[])
   setlocale( LC_ALL, "" );
   KApplication a;
   kimgioRegister(); // add io for additional image formats
+  initKeyTrans();   // keyboard translation
 
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
   QStrList eargs;
@@ -1092,22 +1110,6 @@ int main(int argc, char* argv[])
   }
   
   return a.exec();
-}
-
-void Konsole::setFullScreen(bool on)
-{
-  if (on == b_fullscreen) return;
-  if (on)
-  {
-    _saveGeometry = geometry();
-    setGeometry(kapp->desktop()->geometry());
-  }
-  else
-  {
-    setGeometry(_saveGeometry);
-  }
-  b_fullscreen = on;
-  m_options->setItemChecked(5,b_fullscreen);
 }
 
 #include "main.moc"

@@ -68,7 +68,7 @@ TEmuVt102::TEmuVt102(TEWidget* gui)
 {
   QObject::connect(gui,SIGNAL(mouseSignal(int,int,int)),
                    this,SLOT(onMouse(int,int,int)));
-  keytrans.addXtermKeys();
+  keytrans.addInternalTable(); // set default keytrans
   initTokenizer();
   reset();
 }
@@ -759,7 +759,7 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
     case CMD_scrollPageDown : gui->doScroll(+gui->Lines()/2); return;
     case CMD_scrollLineUp   : gui->doScroll(-1             ); return;
     case CMD_scrollLineDown : gui->doScroll(+1             ); return;
-    case CMD_send           : emit sndBlock(txt,len);         return;
+    case CMD_send           : printf("emit %d\n",len); emit sndBlock(txt,len);         return;
   }
 
   // fall back handling

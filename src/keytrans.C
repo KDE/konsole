@@ -1,23 +1,39 @@
+/* -------------------------------------------------------------------------- */
+/*                                                                            */
+/* [keytrans.C]             Keyboard Translation                              */
+/*                                                                            */
+/* -------------------------------------------------------------------------- */
+/*                                                                            */
+/* Copyright (c) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>            */
+/*                                                                            */
+/* This file is part of Konsole - an X terminal for KDE                       */
+/*                                                                            */
+/* -------------------------------------------------------------------------- */
+
 // This module is work in progress.
 
 /*
-   State is that TEMuVt102 already gets it's entries from
-   the table in here. Following section is pretty complete,
-   to. What is left to do is, to create the table from a file,
-   and to put things more straight. The remainder of the
-   file contains yet incomplete work towards this.
+   State is that we're pretty much done.
+   TODO:
+   - read in from file, too.
+   - handle errors more gracefully.
+   - put into configuration
 */
 
 #include "keytrans.h"
 #include <qnamespace.h>
 #include <qbuffer.h>
+#include <qobject.h>
+#include <qdict.h>
 
 #include <stdio.h>
 
+#define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
+
 // KeyEntry -
 
-KeyTrans::KeyEntry::KeyEntry(int _key, int _bits, int _mask, int _cmd, const char* _txt, int _len)
-: key(_key), bits(_bits), mask(_mask), cmd(_cmd), txt(_txt), len(_len)
+KeyTrans::KeyEntry::KeyEntry(int _key, int _bits, int _mask, int _cmd, QString _txt)
+: key(_key), bits(_bits), mask(_mask), cmd(_cmd), txt(_txt)
 {
 }
 
@@ -45,7 +61,7 @@ KeyTrans::~KeyTrans()
 {
 }
 
-void KeyTrans::addEntry(int key, int bits, int mask, int cmd, const char* txt, int len)
+void KeyTrans::addEntry(int key, int bits, int mask, int cmd, QString txt)
 {
   for (QListIterator<KeyEntry> it(table); it.current(); ++it)
   {
@@ -56,23 +72,7 @@ void KeyTrans::addEntry(int key, int bits, int mask, int cmd, const char* txt, i
       return;
     }
   }
-  table.append(new KeyEntry(key,bits,mask,cmd,txt,len));
-}
-
-void KeyTrans::addEntry(int key, int maskedbits, int cmd, const char* txt, int len)
-{
-  // we come in with tristate encoded bits here and
-  // separate a mask and a value from it.
-  // FIXME: this routine is of temporary use only.
-  int mask = 0;
-  int bits = 0;
-  for (int bit = 0; bit < BITS_COUNT; bit++)
-  {
-    mask |= (((maskedbits&(1 << (2*bit+1))) != 0) << bit);
-    bits |= (((maskedbits&(1 << (2*bit+0))) != 0) << bit);
-  }
-//printf("KEY: %d, bits:0x%02x, mask:0x%02x (masked bits:0x%02x)\n",key,bits,mask,maskedbits);
-  addEntry(key,bits,mask,cmd,txt,len);
+  table.append(new KeyEntry(key,bits,mask,cmd,txt));
 }
 
 bool KeyTrans::findEntry(int key, int bits, int* cmd, const char** txt, int* len)
@@ -81,128 +81,11 @@ bool KeyTrans::findEntry(int key, int bits, int* cmd, const char** txt, int* len
     if (it.current()->matches(key,bits,0xffff))
     {
       *cmd = it.current()->cmd;
-      *txt = it.current()->txt;
-      *len = it.current()->len;
+      *txt = it.current()->txt.ascii();
+      *len = it.current()->txt.length();
       return TRUE;
     }
   return FALSE;
-}
-
-// ----------------------------------------
-// ----------------------------------------
-// ----------------------------------------
-
-// The following is supposed to be read in from a file.
-
-// [KeyTab] Konsole Keyboard Table
-//
-// This configuration table allows to customize the
-// meaning of function (gray) keys.
-//
-// The regular keys are considered to represent
-// regular characters, though things are a little
-// more complicate with them. Especially, Shift,
-// Ctrl and Alt modifies these keys to exhibit
-// function codes.
-//
-
-#define bOn(X)  ((3<<(2*X)))
-#define bOff(X) ((2<<(2*X)))
-
-void KeyTrans::addXtermKeys()
-{
-  addEntry(Qt::Key_Escape, 0, CMD_send, "\033", 1);
-  addEntry(Qt::Key_Tab   , 0, CMD_send, "\t", 1);
-
-// VT100 can add an extra \n after return.
-// The NewLine mode is set by an escape sequence.
-
-  addEntry(Qt::Key_Return, bOff(BITS_Alt)|bOff(BITS_NewLine), CMD_send, "\r", 1);
-  addEntry(Qt::Key_Return, bOff(BITS_Alt)|bOn(BITS_NewLine), CMD_send, "\r\n", 2);
-
-  addEntry(Qt::Key_Return, bOn(BITS_Alt)|bOff(BITS_NewLine), CMD_send, "\033\r", 2);
-  addEntry(Qt::Key_Return, bOn(BITS_Alt)|bOn(BITS_NewLine), CMD_send, "\033\r\n", 3);
-
-// Some desperately try to save the ^H.
-// The BsHack mode is set by regular
-// configurations means for convenience.
-
-  addEntry(Qt::Key_Backspace, bOff(BITS_BsHack), CMD_send, "\x08", 1);
-  addEntry(Qt::Key_Delete   , bOff(BITS_BsHack), CMD_send, "\x7f", 1);
-
-  addEntry(Qt::Key_Backspace, bOn(BITS_BsHack), CMD_send, "\x7f", 1);
-  addEntry(Qt::Key_Delete   , bOn(BITS_BsHack), CMD_send, "\033[3~", 4);
-
-// These codes are for the VT52 mode of VT100
-// The Ansi mode (i.e. VT100 mode) is set by
-// an escape sequence
-
-  addEntry(Qt::Key_Up   , bOff(BITS_Shift) | bOff(BITS_Ansi), CMD_send, "\033A", 2);
-  addEntry(Qt::Key_Down , bOff(BITS_Shift) | bOff(BITS_Ansi), CMD_send, "\033B", 2);
-  addEntry(Qt::Key_Right, bOff(BITS_Ansi), CMD_send, "\033C", 2);
-  addEntry(Qt::Key_Left , bOff(BITS_Ansi), CMD_send, "\033D", 2);
-
-// VT100 emits a mode bit together
-// with the arrow keys.The AppCuKeys
-// mode is set by an escape sequence.
-
-  addEntry(Qt::Key_Up   , bOff(BITS_Shift) | bOn(BITS_Ansi) | bOn(BITS_AppCuKeys), CMD_send, "\033OA", 3);
-  addEntry(Qt::Key_Down , bOff(BITS_Shift) | bOn(BITS_Ansi) | bOn(BITS_AppCuKeys), CMD_send, "\033OB", 3);
-  addEntry(Qt::Key_Right, bOn(BITS_Ansi) | bOn(BITS_AppCuKeys), CMD_send, "\033OC", 3);
-  addEntry(Qt::Key_Left , bOn(BITS_Ansi) | bOn(BITS_AppCuKeys), CMD_send, "\033OD", 3);
-
-  addEntry(Qt::Key_Up   , bOff(BITS_Shift) | bOn(BITS_Ansi) | bOff(BITS_AppCuKeys), CMD_send, "\033[A", 3);
-  addEntry(Qt::Key_Down , bOff(BITS_Shift) | bOn(BITS_Ansi) | bOff(BITS_AppCuKeys), CMD_send, "\033[B", 3);
-  addEntry(Qt::Key_Right, bOn(BITS_Ansi) | bOff(BITS_AppCuKeys), CMD_send, "\033[C", 3);
-  addEntry(Qt::Key_Left , bOn(BITS_Ansi) | bOff(BITS_AppCuKeys), CMD_send, "\033[D", 3);
-
-// linux functions keys F1 bOff(BITS_F5 differ from xterm
-//
-// F1, CMD_send, "\033[[A" 
-// F2, CMD_send, "\033[[B" 
-// F3, CMD_send, "\033[[C" 
-// F4, CMD_send, "\033[[D" 
-// F5, CMD_send, "\033[[E" 
-
-// function keys
-
-  addEntry(Qt::Key_F1    , 0, CMD_send, "\033[11~", 5);
-  addEntry(Qt::Key_F2    , 0, CMD_send, "\033[12~", 5);
-  addEntry(Qt::Key_F3    , 0, CMD_send, "\033[13~", 5);
-  addEntry(Qt::Key_F4    , 0, CMD_send, "\033[14~", 5);
-  addEntry(Qt::Key_F5    , 0, CMD_send, "\033[15~", 5);
-  addEntry(Qt::Key_F6    , 0, CMD_send, "\033[17~", 5);
-  addEntry(Qt::Key_F7    , 0, CMD_send, "\033[18~", 5);
-  addEntry(Qt::Key_F8    , 0, CMD_send, "\033[19~", 5);
-  addEntry(Qt::Key_F9    , 0, CMD_send, "\033[20~", 5);
-  addEntry(Qt::Key_F10   , 0, CMD_send, "\033[21~", 5);
-  addEntry(Qt::Key_F11   , 0, CMD_send, "\033[23~", 5);
-  addEntry(Qt::Key_F12   , 0, CMD_send, "\033[24~", 5);
-
-  addEntry(Qt::Key_Home  , 0, CMD_send, "\033[H", 3);
-  addEntry(Qt::Key_End   , 0, CMD_send, "\033[F", 3);
-  addEntry(Qt::Key_Insert, bOff(BITS_Shift), CMD_send, "\033[2~", 4);
-
-  addEntry(Qt::Key_Prior , bOff(BITS_Shift), CMD_send, "\033[5~", 4);
-  addEntry(Qt::Key_Next  , bOff(BITS_Shift), CMD_send, "\033[6~", 4);
-
-// Keypad bOff(BITS_Enter. See comment on Return above.
-
-  addEntry(Qt::Key_Enter,  bOn(BITS_NewLine), CMD_send, "\r\n", 2);
-  addEntry(Qt::Key_Enter,  bOff(BITS_NewLine), CMD_send, "\r", 1);
-
-// Experimental: add commands
-  addEntry(Qt::Key_Up,     bOn(BITS_Shift), CMD_scrollLineUp, "", 0);
-  addEntry(Qt::Key_Down,   bOn(BITS_Shift), CMD_scrollLineDown, "", 0);
-  addEntry(Qt::Key_Prior,  bOn(BITS_Shift), CMD_scrollPageUp, "", 0);
-  addEntry(Qt::Key_Next,   bOn(BITS_Shift), CMD_scrollPageDown, "", 0);
-  addEntry(Qt::Key_Insert, bOn(BITS_Shift), CMD_emitSelection, "", 0);
-
-  addEntry(Qt::Key_Space,  bOn(BITS_Control), CMD_send, "\x00", 1); // ctrl-@ =^= ctrl-space
-
-// FIXME: QT keypad stuff is broken.
-
-// Other strings are emitted by konsole, too.
 }
 
 /* ------------------------------------------------------------------------- */
@@ -211,24 +94,270 @@ void KeyTrans::addXtermKeys()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
+// Ok, we have a regular tokenizer here.
+/* Tokens
+   - Spaces
+   - Name
+   - String
+   - Opr     +-:
+*/
+
+#define SYMName    0
+#define SYMString  1
+#define SYMEol     2
+#define SYMEof     3
+#define SYMOpr     4
+
+#define inRange(L,X,H) ((L <= X) && (X <= H))
+#define isNibble(X) (inRange('A',X,'F')||inRange('a',X,'f')||inRange('0',X,'9'))
+#define convNibble(X) (inRange('0',X,'9')?X-'0':X+10-(inRange('A',X,'F')?'A':'a'))
+
+//FIXME: we might give these variables a prefix.
+static int     startofsym;
+static int     sym;
+static QString res;
+static int     len;
+static int     cc;
+static int     lineno;
+
+
+static bool getSymbol(QBuffer &buf)
+{
+  res = ""; len = 0;
+  while (cc == ' ')
+    cc = buf.getch(); // skip spaces
+  if (cc == '#')      // skip comment
+  {
+    while (cc != '\n' && cc > 0)
+      cc = buf.getch();
+  }
+  startofsym = lineno;
+  if (cc <= 0)
+  {
+    sym = SYMEof;
+    return FALSE; // eos
+  }
+  if (cc == '\n')
+  {
+    lineno += 1;
+    sym = SYMEol;
+    cc = buf.getch();
+    return TRUE; // eol
+  }
+  if (inRange('A',cc,'Z')||inRange('a',cc,'z'))
+  {
+    sym = SYMName;
+    while (inRange('A',cc,'Z') || inRange('a',cc,'z') || inRange('0',cc,'9')) 
+    {
+      res = res + (char)cc;
+      cc = buf.getch();
+    }
+    return TRUE;
+  }
+  if (strchr("+-:",cc))
+  {
+    sym = SYMOpr;
+    res = (char)cc;
+    cc = buf.getch();
+    return TRUE;
+  }
+  // must be string
+  // we keep things simple here
+  if (cc == '"')
+  {
+    cc = buf.getch();
+    while (cc >= ' ' && cc != '"')
+    { int sc;
+      if (cc == '\\') // handle quotation
+      {
+        cc = buf.getch();
+        switch (cc)
+        {
+          case 'E'  : sc = 27; cc = buf.getch(); break;
+          case 'b'  : sc =  8; cc = buf.getch(); break;
+          case 'f'  : sc = 12; cc = buf.getch(); break;
+          case 't'  : sc =  9; cc = buf.getch(); break;
+          case 'r'  : sc = 13; cc = buf.getch(); break;
+          case 'n'  : sc = 10; cc = buf.getch(); break;
+          case '\\' : // fall thru
+          case '"'  : sc = cc; cc = buf.getch(); break;
+          case 'x'  : cc = buf.getch();
+                      sc = 0;
+                      if (isNibble(cc)) { sc = 16*sc + convNibble(cc); cc = buf.getch(); } else goto ERROR;
+                      if (isNibble(cc)) { sc = 16*sc + convNibble(cc); cc = buf.getch(); } else goto ERROR;
+                      break;
+          default   : goto ERROR;
+        }
+      }
+      else
+      {
+        // regular char
+        sc = cc; cc = buf.getch();
+      }
+      res = res + (char)sc;
+      len = len + 1;
+    }
+    if (cc != '"') goto ERROR;
+    cc = buf.getch();
+    sym = SYMString;
+    return TRUE;
+  }
+  ERROR:
+  /* Error processing is so, that we skip all errorness lines.
+     This is stable, since no errors can follow from this behavior.
+  */
+    //FIXME: not done right, yet.
+    fprintf(stderr,"error reading keytab line %d.\n",startofsym);
+    fprintf(stderr,"text following: ");
+    while (cc != '\n' && cc > 0)
+    {
+      fprintf(stderr,"%c",cc);
+      cc = buf.getch();
+    }
+    fprintf(stderr,"\n");
+    return FALSE;
+}
+
+static void ReportToken() // diagnostic
+{
+  printf("sym(%d): ",startofsym);
+  switch(sym)
+  {
+    case SYMEol    : printf("End of line"); break;
+    case SYMEof    : printf("End of file"); break;
+    case SYMName   : printf("Name: %s",res.ascii()); break;
+    case SYMOpr    : printf("Opr : %s",res.ascii()); break;
+    case SYMString : printf("String len %d,%d ",res.length(),len);
+                     for (unsigned i = 0; i < res.length(); i++)
+                       printf(" %02x(%c)",res.ascii()[i],res.ascii()[i]>=' '?res.ascii()[i]:'?');
+                     break;
+  }
+  printf("\n");
+}
+
+QDict<QObject> keysyms;
+QDict<QObject> modsyms;
+QDict<QObject> oprsyms;
+
+void defKeySym(const char* key, int val)
+{
+  keysyms.insert(key,(QObject*)(val+1));
+}
+
+void defOprSym(const char* key, int val)
+{
+  oprsyms.insert(key,(QObject*)(val+1));
+}
+
+void defModSym(const char* key, int val)
+{
+  modsyms.insert(key,(QObject*)(val+1));
+}
+
+/* Syntax
+   - Line :: [KeyName { ("+" | "-") ModeName } ":" (String|CommandName)] "\n"
+   - Comment :: '#' (any but \n)*
+*/
+
+void KeyTrans::scanTable(QBuffer &buf)
+{
+  // Opening sequence
+
+  buf.open(IO_ReadOnly);
+  cc = buf.getch();
+  lineno = 1;
+  getSymbol(buf);
+
+  // Test tokenizer
+Loop:
+  // syntax: ["key" KeyName { ("+" | "-") ModeName } ":" String/CommandName] ["#" Comment]
+  if (sym == SYMName && !strcmp(res.ascii(),"key"))
+  {
+//printf("line %3d: ",startofsym);
+    getSymbol(buf); 
+    // keyname
+    if (sym != SYMName) goto ERROR; // mode name expected
+    if (!keysyms[res]) goto ERROR; // unknown key
+    int key = (int)keysyms[res]-1;
+//printf(" key %s (%04x)",res.ascii(),(int)keysyms[res]-1);
+    getSymbol(buf); // + - : 
+    int mode = 0;
+    int mask = 0;
+    while (sym == SYMOpr && (!strcmp(res.ascii(),"+") || !strcmp(res.ascii(),"-")))
+    {
+      bool on = !strcmp(res.ascii(),"+");
+      getSymbol(buf);
+      // mode name
+      if (sym != SYMName) goto ERROR; // mode name expected
+      if (!modsyms[res]) goto ERROR; // unknown mod
+      int bits = (int)modsyms[res]-1;
+      mode |= (on << bits);
+      mask |= (1 << bits);
+//printf(", mode %s(%d) %s",res.ascii(),(int)modsyms[res]-1,on?"on":"off");
+      getSymbol(buf);
+    }
+    if (sym != SYMOpr || strcmp(res.ascii(),":")) goto ERROR; // ":" expected
+    getSymbol(buf);
+    // string or command
+    int cmd = 0;
+    if (sym == SYMName)
+    {
+      if (!oprsyms[res]) goto ERROR; // unknown opr
+      cmd = (int)oprsyms[res]-1;
+//printf(": do %s(%d)",res.ascii(),(int)oprsyms[res]-1);
+    }
+    else
+    if (sym == SYMString)
+    {
+      cmd = CMD_send;
+//printf(": send");
+//for (unsigned i = 0; i < res.length(); i++)
+//printf(" %02x(%c)",res.ascii()[i],res.ascii()[i]>=' '?res.ascii()[i]:'?');
+    }
+    else
+      goto ERROR; // command or string expected
+//printf(". summary %04x,%02x,%02x,%d\n",key,mode,mask,cmd);
+    addEntry(key,mode,mask,cmd,res);
+    getSymbol(buf);
+    if (sym != SYMEol) goto ERROR; // unexpected text
+    getSymbol(buf);
+    // eoln
+    goto Loop;
+  }
+  else
+  if (sym == SYMEol)
+  {
+    getSymbol(buf);
+    goto Loop;
+  }
+
+  if (sym != SYMEof)
+  {
+ERROR: printf("ERROR:"); printf("symbol: "); ReportToken();
+  }
+
+  buf.close();
+}
+
 // material needed for parsing the config file.
 // This is incomplete work.
 
-
-void defKeySym(const char*, int)
-{
-}
-
-void defModSym(const char*, int)
-{
-}
-
-void defModSyms()
+static void defOprSyms()
 {
   // Modifier
-  defModSym("Shift",      Qt::SHIFT         );
-  defModSym("Ctrl",       Qt::CTRL          );
-  defModSym("Alt",        Qt::ALT           );
+  defOprSym("scrollLineUp",  CMD_scrollLineUp  );
+  defOprSym("scrollLineDown",CMD_scrollLineDown);
+  defOprSym("scrollPageUp",  CMD_scrollPageUp  );
+  defOprSym("scrollPageDown",CMD_scrollPageDown);
+  defOprSym("emitSelection", CMD_emitSelection );
+}
+
+static void defModSyms()
+{
+  // Modifier
+  defModSym("Shift",      BITS_Shift        );
+  defModSym("Control",    BITS_Control      );
+  defModSym("Alt",        BITS_Alt          );
   // Modes
   defModSym("BsHack",     BITS_BsHack       ); // deprecated
   defModSym("Ansi",       BITS_Ansi         );
@@ -236,8 +365,10 @@ void defModSyms()
   defModSym("AppCuKeys",  BITS_AppCuKeys    );
 }
 
-void defKeySyms()
+static void defKeySyms()
 {
+  defKeySym("Space",      Qt::Key_Space     );
+
   defKeySym("Escape",     Qt::Key_Escape    );
   defKeySym("Tab",        Qt::Key_Tab       );
   defKeySym("Backtab",    Qt::Key_Backtab   );
@@ -306,315 +437,49 @@ void defKeySyms()
   defKeySym("Hyper_R",    Qt::Key_Hyper_R   );
 }
 
-// [scant.c]
-
-#include <stdio.h>
-
-// We define a very poor scanner, here.
-/* Syntax
-   - Line :: [KeyName { ("+" | "-") ModeName } ":" (String|CommandName)] "\n"
-   - Comment :: '#' (any but \n)*
-   Tokens
-   - Spaces
-   - Name
-   - String
-   - Opr ("+","-",":","#","\n").
-*/
-
-// Ok, we have a regular tokenizer here.
-
-#define SYMName    0
-#define SYMString  1
-#define SYMEol     2
-#define SYMEof     3
-#define SYMOpr     4
-
-#define inRange(L,X,H) ((L <= X) && (X <= H))
-#define isNibble(X) (inRange('A',X,'F')||inRange('a',X,'f')||inRange('0',X,'9'))
-#define convNibble(X) (inRange('0',X,'9')?X-'9':X+10-(inRange('A',X,'F')?'A':'a'))
-
-int sym;
-QString res;
-int len;
-
-int cc;
-QBuffer buf;
-
-bool getSymbol()
+void initKeyTrans()
 {
-  while (cc == ' ')
-    cc = buf.getch(); // skip spaces
-  if (cc == '#')      // skip comment
-  {
-    while (cc != '\n' && cc > 0)
-      cc = buf.getch();
-  }
-  if (cc <= 0)
-  {
-    sym = SYMEof;
-    return FALSE; // eos
-  }
-  if (cc == '\n')
-  {
-    sym = SYMEol;
-    return TRUE; // eol
-  }
-  if (inRange('A',cc,'Z'))
-  {
-    sym = SYMName;
-    res = "";
-    while (inRange('A',cc,'Z') || inRange('a',cc,'z')) 
-      cc = buf.getch();
-    res = res + (char)cc;
-    //NOW, we have a preread!
-    return TRUE;
-  }
-  if (strchr("+-:",cc))
-  {
-    sym = SYMOpr;
-    return TRUE;
-  }
-  // must be string
-  // we keep things simple here
-  if (cc == '"')
-  {
-    cc = buf.getch();
-    res = "";
-    len = 0;
-    while (cc >= ' ' && cc != '"')
-    { int sc;
-      if (cc == '\\') // handle quotation
-      {
-        cc = buf.getch();
-        switch (cc)
-        {
-          case 'b'  : sc =  8; break;
-          case 'f'  : sc = 12; break;
-          case 't'  : sc =  9; break;
-          case 'r'  : sc = 13; break;
-          case 'n'  : sc = 10; break;
-          case '\\' : // fall thru
-          case '"'  : sc = cc; break;
-          case 'x'  : cc = buf.getch();
-                      sc = 0;
-                      if (isNibble(cc)) { sc = 16*sc + convNibble(cc); cc = buf.getch(); } else goto ERROR;
-                      if (isNibble(cc)) { sc = 16*sc + convNibble(cc); cc = buf.getch(); } else goto ERROR;
-                      break;
-          default   : goto ERROR;
-        }
-      }
-      else
-      {
-        // regular char
-        sc = cc; cc = buf.getch();
-      }
-      res = res + (char)sc;
-      len = len + 1;
-    }
-    if (cc != '"') goto ERROR;
-    cc = buf.getch();
-    sym = SYMString;
-    return TRUE;
-  }
-  ERROR:
-  /* Error processing is so, that we skip all errorness lines.
-     This is stable, since no errors can follow from this behavior.
-  */
-  return TRUE;
+  defModSyms();
+  defOprSyms();
+  defKeySyms();
 }
 
-#define skipspaces while (*cc == ' ') cc++
-
-#define skipname \
-    id = cc; \
-    while ('A' <= *cc && *cc <= 'Z' || \
-           'a' <= *cc && *cc <= 'z' || \
-           '0' <= *cc && *cc <= '9') cc++
-
-#define skipchar(C) if (*cc == (C)) cc++; else { printf("error: expecting '%c' at %s.\n",C,cc); return; }
-
-#define skiphex() cc++
-
-#define FALSE 0
-#define TRUE 1
-
-#define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
-
-static void scanline(char* cc)
-{ char* id;
-Loop:
-  // syntax: [KeyName { ("+" | "-") ModeName } ":" String/CommandName] ["#" Comment]
-  skipspaces;
-  if ('A' <= *cc && *cc <= 'Z')
-  {
-    skipname;
-    printf("key: >%.*s<\n",cc-id,id);
-    skipspaces;
-    while (*cc == '+' || *cc == '-')
-    { bool opt_on = (*cc++ == '+');
-      skipspaces;
-      skipname;
-      printf("mode: >%.*s< %s\n",cc-id,id,opt_on?"on":"off");
-      skipspaces;
-    }
-    skipchar(':')
-    skipspaces;
-    // scanstring
-    skipchar('"')
-    while (*cc)
-    {
-      if (*cc < ' ') break;
-      if (*cc == '"') break;
-      if (*cc != '\\') { cc++; continue; }
-      cc++;
-      if (!*cc)  { printf("error: unexpected end of string.\n"); return; }
-      switch (*cc)
-      {
-        case '\\' :
-        case 'n'  :
-        case 'r'  :
-        case 'f'  :
-        case 'b'  :
-        case 't'  :
-        case '"'  :
-        case 'E'  : cc++; break;
-        case 'u'  : cc++; skiphex(); skiphex(); skiphex(); skiphex(); break;
-        case 'x'  : cc++; skiphex(); skiphex(); break;
-        default   : printf("error: invalid char '%c' after \\.\n",*cc); return;
-      }
-    }
-    skipchar('"')
-    skipspaces;
-  }
-  if (*cc == '#')
-  {
-    // Skip Comment
-    while (*cc && *cc != '\n') cc++;
-  }
-  if (*cc == '\n') { cc++; goto Loop; }
-  if (*cc)
-  {
-    printf("error: invalid character '%c' at %s.\n",*cc,cc); return;
-  }
-
+void KeyTrans::addInternalTable()
+{
+  QCString txt =
+#include "default.keytab.h"
+  ;
+  QBuffer buf(txt);
+  scanTable(buf);
 }
 
 /*
+void TestTokenizer(QBuffer &buf)
+{
+  // opening sequence
+
+  buf.open(IO_ReadOnly);
+  cc = buf.getch();
+  lineno = 1;
+
+  // Test tokenizer
+
+  while (getSymbol(buf)) ReportToken();
+
+  buf.close();
+}
+
 void test()
 {
+  initKeyTrans();
+
+  // Opening sequence
+
   QCString txt =
-#include "KeyTab.sys"
+#include "default.keytab.h"
   ;
-  buf(txt);
-  cc = buf.getch();
+  QBuffer buf(txt);
+  if (0) TestTokenizer(buf);
+  if (1) { KeyTrans kt; kt.scanTable(buf); }
 }
-*/
-
-/*Here the file as it is supposed to be
-
-# [KeyTab] Konsole Keyboard Table
-#
-# This configuration table allows to customize the
-# meaning of the keys.
-#
-# If the key is not found here, the text of the
-# key event as provided by QT is emitted, possibly
-# preceeded by ESC if the Alt key is pressed.
-
-key Escape:"\E"
-key Tab   :"\t"
-
-# VT100 can add an extra \n after return.
-# The NewLine mode is set by an escape sequence.
-
-key Return-NewLine:"\r"  
-key Return+NewLine:"\r\n"
-
-# Some desperately try to save the ^H.
-# The BsHack mode is set by regular
-# configurations means for convenience.
-
-key Backspace-BsHack:"\x08"
-key Delete   -BsHack:"\x7f"
-
-key Backspace+BsHack:"\x7f"
-key Delete   +BsHack:"\E[3~"
-
-# These codes are for the VT52 mode of VT100
-# The Ansi mode (i.e. VT100 mode) is set by
-# an escape sequence
-
-key Up   -Shift-Ansi:"\EA"
-key Down -Shift-Ansi:"\EB"
-key Right-Ansi:"\EC"
-key Left -Ansi:"\ED"
-
-# VT100 emits a mode bit together
-# with the arrow keys.The AppCuKeys
-# mode is set by an escape sequence.
-
-key Up   -Shift+Ansi+AppCuKeys:"\EOA"
-key Down -Shift+Ansi+AppCuKeys:"\EOB"
-key Right+Ansi+AppCuKeys:"\EOC"
-key Left +Ansi+AppCuKeys:"\EOD"
-
-key Up   -Shift+Ansi-AppCuKeys:"\E[A"
-key Down -Shift+Ansi-AppCuKeys:"\E[B"
-key Right+Ansi-AppCuKeys:"\E[C"
-key Left +Ansi-AppCuKeys:"\E[D"
-
-# linux functions keys F1-F5 differ from xterm
-#
-# F1:"\E[[A" 
-# F2:"\E[[B" 
-# F3:"\E[[C" 
-# F4:"\E[[D" 
-# F5:"\E[[E" 
-
-# function keys
-
-key F1    :"\E[11~"
-key F2    :"\E[12~"
-key F3    :"\E[13~"
-key F4    :"\E[14~"
-key F5    :"\E[15~"
-key F6    :"\E[17~" 
-key F7    :"\E[18~" 
-key F8    :"\E[19~" 
-key F9    :"\E[20~" 
-key F10   :"\E[21~" 
-key F11   :"\E[23~" 
-key F12   :"\E[24~" 
-
-key Home  :"\E[H"  
-key End   :"\E[F"  
-key Prior -Shift:"\E[5~"  
-key Next  -Shift:"\E[6~"  
-key Insert-Shift:"\E[2~"  
-
-# Keypad-Enter. See comment on Return above.
-
-key Enter+NewLine:"\r\n"
-key Enter-NewLine:"\r"  
-
-key Space +Control:"\x00"
-
-# some of keys are used by konsole.
-
-key Up    +Shift  : scrollUpLine
-key Prior +Shift  : scrollUpPage
-key Down  +Shift  : scrollDownLine
-key Next  +Shift  : scrollDownPage
-key Insert+Shift  : emitSelection
-key Print +Control: answerBack
-
-#----------------------------------------------------------
-
-# keypad characters as offered by Qt
-# cannot be recognized as such.
-
-#----------------------------------------------------------
-
-# Following other strings as emitted by konsole.
-
 */

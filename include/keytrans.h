@@ -1,3 +1,15 @@
+/* -------------------------------------------------------------------------- */
+/*                                                                            */
+/* [keytrans.h]             X Terminal Emulation                              */
+/*                                                                            */
+/* -------------------------------------------------------------------------- */
+/*                                                                            */
+/* Copyright (c) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>            */
+/*                                                                            */
+/* This file is part of Konsole - an X terminal for KDE                       */
+/*                                                                            */
+/* -------------------------------------------------------------------------- */
+
 #ifndef KEYTRANS_H
 #define KEYTRANS_H
 
@@ -22,22 +34,24 @@
 
 #define BITS(x,v) ((((v)!=0)<<(x)))
 
+void initKeyTrans();
+
 class KeyTrans
 {
 public:
   KeyTrans();
   ~KeyTrans();
 public: // put somewhere else
-  void addXtermKeys();
+  void addInternalTable();
+  void scanTable(QBuffer &buf);
 public:
-  void addEntry(int key, int maskedbits, int cmd, const char* txt, int len);
+  void addEntry(int key, int bits, int mask, int cmd, QString txt);
   bool findEntry(int key, int bits, int* cmd, const char** txt, int* len);
 private:
-  void addEntry(int key, int bits, int mask, int cmd, const char* txt, int len);
   class KeyEntry
   {
   public:
-    KeyEntry(int key, int bits, int mask, int cmd, const char* txt, int len);
+    KeyEntry(int key, int bits, int mask, int cmd, QString txt);
     ~KeyEntry();
   public:
     bool matches(int key, int bits, int mask);
@@ -48,8 +62,7 @@ private:
     int     mask;
   public:
     int cmd;
-    const char* txt;
-    int len;
+    QString txt;
   };
 private:
   QList<KeyEntry> table;
