@@ -45,11 +45,11 @@ kwrited_LDADD   = kwrited.la
 kwrited_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 konsole_la_SOURCES = main.C konsole.C
-konsole_la_LIBADD  = libkonsolepart.la
 konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
 
-konsole_SOURCES	= dummy.C 
-konsole_LDADD   = konsole.la
+konsole_SOURCES	= dummy.C main.C konsole.C TEPty.C schema.C session.C TEWidget.C TEmuVt102.C \
+                  TEScreen.C TEmulation.C TEHistory.C keytrans.C 
+konsole_LDADD = $(LIB_KDEUI) $(LIB_KSYCOCA)
 konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 # kcmkonsole_SOURCES = kcmkonsole.C schema.C
