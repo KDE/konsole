@@ -2,9 +2,9 @@
 
 #include <qpushbutton.h>
 
-TESession::TESession(KTMainWindow* main, TEWidget* te, const char* args[], const char* term)
+TESession::TESession(KTMainWindow* main, TEWidget* te, const char* args[], const char* term, int login_session)
 {
-  sh = new Shell();
+  sh = new Shell(login_session);
   em = new VT102Emulation(te,term);
 
   this->term = strdup(term);

@@ -64,7 +64,7 @@ static int cmd_serial = 0;
 
 static int schema_serial = 1;
 
-TEDemo::TEDemo(const char* args[]) : KTMainWindow()
+TEDemo::TEDemo(const char* args[], int login_shell) : KTMainWindow()
 {
   se = NULL;
   title = PACKAGE;
@@ -107,7 +107,7 @@ TEDemo::TEDemo(const char* args[]) : KTMainWindow()
 
   // construct initial session ///////////////////////////////////////////////
 
-  TESession* initial = new TESession(this,te,args,"xterm");
+  TESession* initial = new TESession(this,te,args,"xterm",login_shell);
   initial->setFontNo(n_font);
   initial->setSchemaNo(path2schema.find(s_schema)->numb);
   initial->setTitle(args[0]);
@@ -583,7 +583,7 @@ void TEDemo::newSession(int i)
   args[2] = cmd.data();
   args[3] = NULL;
 
-  TESession* s = new TESession(this,te,args,emu.data());
+  TESession* s = new TESession(this,te,args,emu.data(),0);
   s->setFontNo(fno);
   s->setSchemaNo(schmno);
   s->setTitle(txt.data());
@@ -889,14 +889,6 @@ int main(int argc, char* argv[])
     if (!strcmp(argv[i],"--help")) { usage(); exit(0); }
 //FIXME: more: font, menu, scrollbar, pixmap, ....
   }
-  if ( login_shell ) {
-    char * base= strrchr(shell,'/');
-    base++;
-    char * p = (char*)malloc((strlen(base)+2)*sizeof(char));
-    p [0] = '-';
-    strcpy (&p [1], base);
-    eargs[1]=p; eargs[2]=NULL;
-  }
   // ///////////////////////////////////////////////
 
   putenv("COLORTERM="); //FIXME: for mc, which cannot detect color terminals
@@ -904,9 +896,9 @@ int main(int argc, char* argv[])
   //FIXME: free(eargs) or keep global.
 
   if (a.isRestored())
-      RESTORE( TEDemo(eargs) )
+      RESTORE( TEDemo(eargs,login_shell) )
   else {	
-      TEDemo*  m = new TEDemo(eargs);
+      TEDemo*  m = new TEDemo(eargs,login_shell);
       m->title = a.getCaption();
       if (welcome) m->setCaption(i18n("Welcome to the console"));
       QTimer::singleShot(5000,m,SLOT(setHeader()));

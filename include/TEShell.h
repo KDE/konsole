@@ -28,7 +28,7 @@ class Shell: public QObject
 Q_OBJECT
 
   public:
-    Shell();
+    Shell(int login_shell);
     ~Shell();
 
   public:
@@ -68,7 +68,7 @@ Q_OBJECT
 
     int              fd;
     struct termios   tp;
-
+    int		     login_shell;
     QSocketNotifier* mn;
     QSocketNotifier* mw;
 };

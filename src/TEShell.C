@@ -84,12 +84,13 @@ int Shell::run(char* argv[], const char* term)
   return 0;
 }
 
-void Shell::makeShell(const char* dev, char* argv[], const char* term)
+void Shell::makeShell(const char* dev, char* argv[], 
+	const char* term)
 // only used internally. See `run' for interface
-{ int sig; char* t;
+{ int sig; char* t; char *f;
   // open and set all standard files to master/slave tty
   int tt = open(dev, O_RDWR);
-
+   
   //reset signal handlers for child process
   for (sig = 1; sig < NSIG; sig++)
       signal(sig,SIG_DFL);
@@ -126,7 +127,14 @@ void Shell::makeShell(const char* dev, char* argv[], const char* term)
     free(t);
   }
 
-  execvp (argv[0], argv);
+  f = argv[0];
+  if ( login_shell ) {
+      t = strrchr( argv[0], '/' );
+      t = strdup(t);
+      *t = '-';
+      argv[0] = t;
+  }
+  execvp (f, argv);
   perror("exec failed");
   exit(1);                             // control should never come here.
 }
@@ -159,11 +167,12 @@ int openShell()
   return ptyfd;
 }
 
-Shell::Shell()
+Shell::Shell(int ls)
 /* setup shell */
 {
   fd = openShell();
 
+  login_shell=ls;
   //for (int i = 1; i <= 15; i++) if (i!=SIGCHLD) signal(i,catch_sig);
   signal(SIGCHLD,catchChild);
 

@@ -25,7 +25,8 @@ class TESession : QObject
 
 public:
 
-  TESession(KTMainWindow* main, TEWidget* w, const char* args[], const char* term);
+  TESession(KTMainWindow* main, TEWidget* w, const char* args[], 
+	const char* term, int login_session);
   ~TESession();
 
 public:

@@ -41,7 +41,7 @@ class TEDemo : public KTMainWindow
 
 public:
 
-  TEDemo(const char* args[]);
+  TEDemo(const char* args[], int login_shell);
   ~TEDemo();
 
 private slots:
