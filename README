@@ -1,8 +1,4 @@
-Konsole is an X terminal to replace kvt when it becomes mature enough.
-
-I appeal for serious beta testing of this program. Please try your favorite
-programs with it, and, if you are able to afford running beta software, use
-it in your daily work, too.
+Konsole is an X terminal designed to replace kvt.
 
 Note that many KDE applications directly execute kvt. Since this is not
 configurable, you might (cd $KDEDIR; mv kvt kvt.ori; ln -s konsole kvt)
