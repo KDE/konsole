@@ -368,38 +368,18 @@ Some programs have flaws when run under a X console.
 
 <sect1>Security
 <p>
-  Although konsole is prepared to be installed root-suid, it is not
-  intented to be used so. Don't do it. Konsole drops privileges
-  immediately after being started. Secure keyboard (X11) is not
-  implemented which means that other X11 applications can get the
-  keyevents from konsole, if they want. Beware of trojan horses.
+  Konsole is not intented to be installed root-suid. Don't do it.
+  Konsole drops privileges immediately after being started.
 <p>
-  konsole does not fchown(2) the pseudo tty. This means, that in a
-  multiuser environment someone may eavesdrop your (root) session.
-  For newer Linux kernels (2.1/2.2), konsole will deny such attempts.
-  To validate whether this is possible or not, try the following within
-  konsole:
+  Secure keyboard (X11) is not implemented which means that other
+  X11 applications can get the keyevents from konsole, if they want.
+  Beware of trojan horses.
 <p>
-<verb>
-    $ tty
-    /dev/ttyp3
-</verb>
-<p>
-  As another (non-root) user, try:
-<p>
-<verb>
-    $ echo 'test' > /dev/ttyp3
-</verb>
-<p>  
-  If you receive the string within the konsole's session, the session
-  is insecure.
-<p>  
-  For other UNIXes, this hole will be closed in a bit,
-  but the solution will require konsole being installed root/suid.
-  I'm aware, that this might not be possible in every installation,
-  but i cannot help that.
+  konsole uses the X/Open routine grantpt to chown the slave tty to
+  prevent eavesdroping your sessions in a multiuser environment. This
+  means, you need at least glibc2.1 to compile konsole.
 
-<sect1>Known Bugs (konsole-0.8.6)
+<sect1>Known Bugs
 <p>
 <itemize>
 <item> keys on the keypad does not cause any effect when numlock is not

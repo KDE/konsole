@@ -34,6 +34,7 @@ public:
 
   void       setConnect(bool r);
   Emulation* getEmulation();      // to control emulation
+  bool       isSecure();
 
 public:
 

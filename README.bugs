@@ -165,32 +165,15 @@ Known bugs (konsole-0.8.6) in order of importance
 
 Security
 
-  Although konsole is prepared to be installed root-suid, it is not
-  intented to be used so. Don't do it. Konsole drops privileges
-  immediately after being started. Secure keyboard (X11) is not
-  implemented which means that other X11 applications may get the
-  key events from konsole, too, if they want. Beware of trojan
-  horses.
-
-  konsole does not fchown(2) the pseudo tty. This means, that in a
-  multiuser environment someone may eavesdrop your (root) session.
-  For newer Linux kernels (2.1/2.2), konsole will deny such attempts.
-  To validate whether this is possible or not, try the following within
-  konsole:
-
-    $ tty
-    /dev/ttyp3
-
-  As another (non-root) user, try:
-
-    $ echo 'test' > /dev/ttyp3
+  konsole it is not intented to be installed root-suid. Don't do it.
+  Konsole drops privileges immediately after being started.
   
-  If you receive the string within the konsole's session, the session
-  is insecure.
-  
-  For other UNIXes, this hole will be closed in a bit, but the solution
-  will require konsole being installed root/suid. I'm aware, that this
-  might not be possible in every installation, but i cannot help that.
+  Secure keyboard (X11) is not implemented which means that other X11
+  applications may get the key events from konsole, too, if they want.
+  Beware of trojan horses.
+
+  konsole does chown the pseudo tty to prevent eavesdroping your session
+  via the pseudo tty devices.
 
 Features that will not be implemented.
 

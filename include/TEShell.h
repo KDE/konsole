@@ -81,6 +81,7 @@ Q_OBJECT
     pid_t            comm_pid;
     int		           login_shell;
     QSocketNotifier* mn;
+    bool             save_session;
 };
 
 #endif

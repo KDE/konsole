@@ -29,6 +29,8 @@
     
     \par FIXME
 
+    [NOTE: much of the technical stuff below will be replaced by forkpty.]
+
     publish the SIGCHLD signal if not related to an instance.
 
     clearify Shell::done vs. Shell::~Shell semantics.
@@ -51,8 +53,10 @@
     nessesary to make everything work as it should.
 */
 
-#include <stdio.h>
+#define _GNU_SOURCE // for grantpt
+#include <error.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include <termios.h>
 #include <fcntl.h>
@@ -81,6 +85,9 @@
 #include "TEShell.h"
 #include "TEShell.moc"
 #include <qstring.h>
+
+#include <kapp.h>
+#include <kmsgbox.h>
 
 #define HERE fprintf(stdout,"%s(%d): here\n",__FILE__,__LINE__)
 
@@ -135,6 +142,7 @@ int Shell::run(QStrList & args, const char* term)
 void Shell::makeShell(const char* dev, QStrList & args, 
 	const char* term)
 { int sig; char* t;
+
   // open and set all standard files to master/slave tty
   int tt = open(dev, O_RDWR | O_EXCL);
   
@@ -237,6 +245,13 @@ int openShell()
     if (ptyfd >= 0) break;
   }
   if (ptyfd < 0) { fprintf(stderr,"Can't open a pseudo teletype\n"); exit(1); }
+  if (grantpt(ptyfd))
+  {
+    perror("konsole");
+    fprintf(stderr,"konsole: grantpt failed for device %s.\n",ptynam);
+    fprintf(stderr,"konsole: this means the session can be eavesdroped.\n");
+    exit(1);
+  }
   fcntl(ptyfd,F_SETFL,O_NDELAY);
 
   return ptyfd;
