@@ -25,7 +25,7 @@ PICSDIR = $(DATADIR)/pics
 TOOLBARDIR = $(DATADIR)/toolbar
 MIMEDIR = $(kde_mimedir)/text
 
-TOPDIR = $(top_srcdir)/konsole
+TOPDIR = $(srcdir)/..
 INCDIR = $(TOPDIR)/include
 OTHDIR = $(TOPDIR)/other
 
@@ -46,56 +46,18 @@ konsole_SOURCES	= main.C schema.C session.C
 konsole_LDADD   = libkonsole.a $(LIB_KIMGIO) $(LIB_KDEUI) 
 konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
-kcmkonsole_SOURCES	= kcmkonsole.C schema.C
+kcmkonsole_SOURCES = kcmkonsole.C schema.C
 kcmkonsole_LDADD   = $(LIB_KIMGIO) $(LIB_KDEUI) 
 kcmkonsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 # the library search path. 
 
 # just to make sure, automake makes them 
-BUILTSOURCES =TEWidget.moc TEmuVt102.moc session.moc main.moc TEmulation.moc TEShell.moc kcmkonsole.moc
+METASOURCES =TEWidget.moc TEmuVt102.moc session.moc main.moc \
+	TEmulation.moc TEShell.moc kcmkonsole.moc
 
-# use DISTCLEANFILES to remove these only when doing a make distclean.
-CLEANFILES = $(BUILTSOURCES)
+META_INCLUDES = $(srcdir)/../include
 
 messages:
 	$(XGETTEXT) -C -ktranslate -ki18n -x $(includedir)/kde.pot $(konsole_SOURCES) && mv messages.po ../../po/konsole.pot
 
-# add a dependency for every moc file to be full portable
-
-TEWidget.C: TEWidget.moc
-
-TEWidget.moc: $(INCDIR)/TEWidget.h
-	$(MOC) $(INCDIR)/TEWidget.h -o TEWidget.moc
-
-TEShell.C: TEShell.moc
-
-TEShell.moc: $(INCDIR)/TEShell.h
-	$(MOC) $(INCDIR)/TEShell.h -o TEShell.moc
-
-TEmulation.C: TEmulation.moc
-
-TEmulation.moc: $(INCDIR)/TEmulation.h
-	$(MOC) $(INCDIR)/TEmulation.h -o TEmulation.moc
-
-TEmuVt102.C: TEmuVt102.moc
-
-TEmuVt102.moc: $(INCDIR)/TEmuVt102.h
-	$(MOC) $(INCDIR)/TEmuVt102.h -o TEmuVt102.moc
-
-main.C: main.moc
-
-main.moc: $(INCDIR)/main.h
-	$(MOC) $(INCDIR)/main.h -o main.moc
-
-session.C: session.moc
-
-session.moc: $(INCDIR)/session.h
-	$(MOC) $(INCDIR)/session.h -o session.moc
-
-# ---
-
-kcmkonsole.C: kcmkonsole.moc
-
-kcmkonsole.moc: $(INCDIR)/kcmkonsole.h
-	$(MOC) $(INCDIR)/kcmkonsole.h -o kcmkonsole.moc
