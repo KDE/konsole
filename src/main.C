@@ -15,20 +15,12 @@
 
 #include <unistd.h>
 #include <stdio.h>
-#include <locale.h>
 #include <kapp.h>
 #include <klocale.h>
 #include <kaboutdata.h>
 #include <kcmdlineargs.h>
 #include <kimageio.h>
 #include "konsole.h"
-
-/*
-#undef PACKAGE
-#undef VERSION
-#define PACKAGE "konsole"
-#define VERSION "0.9.12"
-*/
 
 static const char *description =
   I18N_NOOP("X terminal for use with KDE.");
@@ -66,8 +58,6 @@ int main(int argc, char* argv[])
   KCmdLineArgs::init( argc, argv, &aboutData );
   KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
 
-
-  setlocale( LC_ALL, "" );
   KApplication a;
   KImageIO::registerFormats(); // add io for additional image formats
 
@@ -154,4 +144,3 @@ int main(int argc, char* argv[])
 
   return a.exec();
 }
-
