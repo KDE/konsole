@@ -1,3 +1,6 @@
+25 Jan 2000
+- improved console8x16. This merged from the iso[01..10].f16.pcf
+  as distributed in the console fonts package.
 19 Jan 2000
 - fixed a size problem with OSF/1 v3.2
 16 Jan 2000
