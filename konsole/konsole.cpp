@@ -126,6 +126,7 @@ Time to start a requirement list.
 #include <kregexpeditorinterface.h>
 #include <kparts/componentfactory.h>
 #include <kcharsets.h>
+#include <kcolordialog.h>
 
 #include "konsole.h"
 #include <netwm.h>
@@ -765,6 +766,10 @@ void Konsole::makeGUI()
                          SLOT(slotTabRenameSession()) );
    m_tabPopupMenu->insertSeparator();
 
+   m_tabPopupMenu->insertItem( i18n("&Select Text Color..."), this,
+                         SLOT(slotTabSelectColor()) );
+   m_tabPopupMenu->insertSeparator();
+
    m_tabMonitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ), "idea", 0, this,
                                         SLOT( slotTabToggleMonitor() ), this);
    m_tabMonitorActivity->plug(m_tabPopupMenu);
@@ -1249,6 +1254,15 @@ void Konsole::slotTabDetachSession() {
 
 void Konsole::slotTabRenameSession() {
   renameSession(m_contextMenuSession);
+}
+
+void Konsole::slotTabSelectColor()
+{
+  QColor color = tabwidget->tabColor( m_contextMenuSession->widget() );
+  int result = KColorDialog::getColor( color );
+
+  if ( result == KColorDialog::Accepted )
+    tabwidget->setTabColor(m_contextMenuSession->widget(), color);
 }
 
 void Konsole::slotTabToggleMonitor()
@@ -1765,6 +1779,8 @@ void Konsole::createSessionTab(TEWidget *widget, const QIconSet &iconSet,
     tabwidget->insertTab(widget, iconSet, QString::null, index);
     break;
   }
+  QColor c= QColor(0, 0, 0);
+  tabwidget->setTabColor(widget, c);
 }
 
 QIconSet Konsole::iconSetForSession(TESession *session) const

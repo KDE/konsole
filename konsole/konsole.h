@@ -227,6 +227,7 @@ private slots:
   void slotTabContextMenu(QWidget*, const QPoint &);
   void slotTabDetachSession();
   void slotTabRenameSession();
+  void slotTabSelectColor();
   void slotTabCloseSession();
   void slotTabToggleMonitor();
   void slotTabToggleMasterMode();
