@@ -16,7 +16,7 @@
 #
 # --------------------------------------------------------------
 
-keyboard "xterm (default)"
+keyboard "xterm (X11 R6)"
 
 # --------------------------------------------------------------
 #
@@ -29,47 +29,69 @@ keyboard "xterm (default)"
 # common keys
 
 key Escape         : "\E"
-key Tab            : "\t"
+key Tab   -Shift   : "\t"
+key Tab   +Shift   : "\E[Z"
 
-key Return-Alt     : "\r"
-key Return+Alt     : "\E\r"
+key Return-Shift-Alt : "\r"
+key Return+Shift     : "\EOM"
+key Return      +Alt : "\E\r"
 
 # Backspace and Delete codes are preserving CTRL-H.
 
-key Backspace      : "\x7f"
+key Backspace      : "\b"
 
 # cursor keys
 
 key Up    -Shift   : "\EOA"
 key Down  -Shift   : "\EOB"
 key Right -Shift   : "\EOC"
+key Right +Shift   : "\EO5C"
 key Left  -Shift   : "\EOD"
+key Left  +Shift   : "\EO5D"
 
 # other grey PC keys
 
 key Enter          : "\r"
 
-key Home           : "\E[1~"
+key Home  -Shift   : "\EOH"
+key Home  +Shift   : "\EO5H"
 key Insert-Shift   : "\E[2~"
-key Delete         : "\E[3~"
-key End            : "\E[4~"
+key Insert+Shift   : "\E[2;5~"
+key Delete-Shift   : "\E[3~"
+key Delete+Shift   : "\E[3;5~"
+key End   -Shift   : "\EOF"
+key End   +Shift   : "\EO5F"
 key Prior -Shift   : "\E[5~"
+key Prior +Shift   : "\E[5;5~"
 key Next  -Shift   : "\E[6~"
+key Next  +Shift   : "\E[6;5~"
 
 # function keys
 
-key F1             : "\E[11~"
-key F2             : "\E[12~"
-key F3             : "\E[13~"
-key F4             : "\E[14~"
-key F5             : "\E[15~"
-key F6             : "\E[17~"
-key F7             : "\E[18~"
-key F8             : "\E[19~"
-key F9             : "\E[20~"
-key F10            : "\E[21~"
-key F11            : "\E[23~"
-key F12            : "\E[24~"
+key F1    -Shift   : "\EOP"
+key F2    -Shift   : "\EOQ"
+key F3    -Shift   : "\EOR"
+key F4    -Shift   : "\EOS"
+key F5    -Shift   : "\E[15~"
+key F6    -Shift   : "\E[17~"
+key F7    -Shift   : "\E[18~"
+key F8    -Shift   : "\E[19~"
+key F9    -Shift   : "\E[20~"
+key F10   -Shift   : "\E[21~"
+key F11   -Shift   : "\E[23~"
+key F12   -Shift   : "\E[24~"
+key F1    +Shift   : "\EO2P"
+key F2    +Shift   : "\EO2Q"
+key F3    +Shift   : "\EO2R"
+key F4    +Shift   : "\EO2S"
+key F5    +Shift   : "\E[15;2~"
+key F6    +Shift   : "\E[17;2~"
+key F7    +Shift   : "\E[18;2~"
+key F8    +Shift   : "\E[19;2~"
+key F9    +Shift   : "\E[20;2~"
+key F10   +Shift   : "\E[21;2~"
+key F11   +Shift   : "\E[23;2~"
+key F12   +Shift   : "\E[24;2~"
 
 # Work around dead keys
 
