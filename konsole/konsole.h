@@ -234,6 +234,7 @@ private slots:
   void slotTabCloseSession();
   void slotTabToggleMonitor();
   void slotTabToggleMasterMode();
+  void slotTabSetViewOptions(int);
 
 private:
   KSimpleConfig *defaultSession();
@@ -260,6 +261,8 @@ private:
   void initTEWidget(TEWidget* new_te, TEWidget* default_te);
   void switchToTabWidget();
   void switchToFlat();
+
+  QIconSet iconSetForSession(TESession *session) const;
 
   QPtrList<TEWidget> activeTEs();
 

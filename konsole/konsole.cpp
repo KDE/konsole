@@ -830,6 +830,14 @@ void Konsole::makeGUI()
    connect( m_tabPopupTabsMenu, SIGNAL( activated ( int ) ),
             SLOT( activateSession( int ) ) );
 
+   KSelectAction *viewOptions = new KSelectAction(this);
+   viewOptions->setText(i18n("Tab View Options"));
+   QStringList options;
+   options << i18n("Text &and Icons") << i18n("&Text Only") << i18n("&Icons Only");
+   viewOptions->setItems(options);
+   viewOptions->plug(m_tabPopupMenu);
+   connect(viewOptions, SIGNAL(activated(int)), this, SLOT(slotTabSetViewOptions(int)));   
+
    m_tabPopupMenu->insertSeparator();
    m_tabPopupMenu->insertItem( SmallIcon("fileclose"), i18n("C&lose Session"), this,
                           SLOT(slotTabCloseSession()) );
@@ -1189,6 +1197,28 @@ void Konsole::slotTabToggleMasterMode()
 void Konsole::slotTabCloseSession()
 {
   m_contextMenuSession->closeSession();
+}
+
+void Konsole::slotTabSetViewOptions(int mode)
+{
+  for(int i = 0; i < tabwidget->count(); i++) {
+
+    QWidget *page = tabwidget->page(i);
+    QIconSet icon = iconSetForSession(sessions.at(i));
+    QString title = sessions.at(i)->Title();
+
+    switch(mode) {
+    case 0:
+      tabwidget->changeTab(page, icon, title);
+      break;
+    case 1:
+      tabwidget->changeTab(page, QIconSet(), title);
+      break;
+    case 2:
+      tabwidget->changeTab(page, icon, QString::null);
+      break;
+    }
+  }
 }
 
 /* ------------------------------------------------------------------------- */
@@ -1753,6 +1783,12 @@ void Konsole::switchToFlat()
   delete tabwidget;
   tabwidget = 0L;
 }
+
+QIconSet Konsole::iconSetForSession(TESession *session) const
+{
+  return SmallIconSet(session->isMasterMode() ? "remote" : session->IconName());
+}
+
 
 /**
     Toggle the Tabbar visibility
@@ -2642,7 +2678,7 @@ void Konsole::moveSessionLeft()
     tabwidget->blockSignals(true);
     tabwidget->removePage(se->widget());
     tabwidget->blockSignals(false);
-    tabwidget->insertTab(se->widget(), SmallIconSet( se->isMasterMode()?"remote":se->IconName() ), se->Title(), position-1 );
+    tabwidget->insertTab(se->widget(), iconSetForSession(se), se->Title(), position-1 );
     tabwidget->showPage(se->widget());
   }
 
@@ -2672,7 +2708,7 @@ void Konsole::moveSessionRight()
     tabwidget->blockSignals(true);
     tabwidget->removePage(se->widget());
     tabwidget->blockSignals(false);
-    tabwidget->insertTab(se->widget(), SmallIconSet( se->isMasterMode()?"remote":se->IconName() ), se->Title(), position+1 );
+    tabwidget->insertTab(se->widget(), iconSetForSession(se), se->Title(), position+1 );
     tabwidget->showPage(se->widget());
   }
 
@@ -2718,7 +2754,7 @@ void Konsole::setMasterMode(bool _state, TESession* _se)
   if (_se->isMasterMode()==_state) return;
 
   _se->setMasterMode( _state );
-  if (_se==se)
+  if (_se=se)
     masterMode->setChecked( _state );
 
   if(_state)
