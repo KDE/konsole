@@ -56,8 +56,6 @@
     nessesary to make everything work as it should.
 */
 
-#define _GNU_SOURCE // for grantpt
-#include <error.h>
 #include <stdlib.h>
 #include <stdio.h>
 
