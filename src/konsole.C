@@ -836,8 +836,7 @@ void Konsole::addSession(TESession* s)
   ra->setExclusiveGroup("sessions");
   ra->setChecked(true);
 
-  KIconLoader *ldr = KGlobal::iconLoader();
-  ra->setIconSet(ldr->loadIcon("konsole", KIconLoader::Small));
+  ra->setIconSet(SmallIcon("konsole"));
   action2session.insert(ra, s);
   session2action.insert(s,ra);
   ra->plug(m_sessions);
