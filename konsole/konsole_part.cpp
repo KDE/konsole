@@ -140,7 +140,7 @@ static const char * const fonts[] = {
  "13",  // medium
  "15",  // large
  "20", // huge
- "-misc-console-medium-r-normal--16-160-72-72-c-160-iso10646-1", // "Linux"
+ "-misc-console-medium-r-normal--16-160-72-72-c-80-iso10646-1", // "Linux"
  "-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1",    // "Unicode"
  };
 
