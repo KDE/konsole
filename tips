@@ -73,6 +73,13 @@ which you can find under "Settings->Configure Konsole..."?
 </html>
 </tip>
 
+<tip category="Konsole">
+<html>
+<p>...that you can move a session by holding down the middle mouse button over the tab?
+</p>
+</html>
+</tip>
+
 <tip category="Konsole|Keyboard">
 <html>
 <p>...that you can reorder the session tabs with "View->Move Session Left/Right" menu
