@@ -412,9 +412,8 @@ void TEScreen::resizeImage(int new_lines, int new_columns)
   }
 
   // make new image
-  ca* newimg = (ca*)malloc(new_lines*new_columns*sizeof(ca));
-  memset(newimg, 0, new_lines*new_columns*sizeof(ca));
 
+  ca* newimg = new ca[(new_lines+1)*new_columns];
   clearSelection();
 
   // clear new image
