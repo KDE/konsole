@@ -446,8 +446,6 @@ void Konsole::makeMenu()
   m_options->insertSeparator();
   m_options->insertItem( i18n("&Codec"), m_codec);
   m_options->insertItem( i18n("&Keyboard"), m_keytab);
-  m_options->insertItem( i18n("BS sends &DEL"), 4 );
-  m_options->setItemChecked(4,b_bshack);
   m_options->insertSeparator();
   m_options->insertItem( i18n("&Save Options"), 8);
   connect(m_options, SIGNAL(activated(int)), SLOT(opt_menu_activated(int)));
@@ -557,7 +555,7 @@ void Konsole::readProperties(KConfig* config)
 
   // Options that should be applied to all sessions /////////////
   // (1) set menu items and Konsole members
-  setBsHack(config->readBoolEntry("BS hack",TRUE));
+  setBsHack(config->readBoolEntry("BS hack",TRUE)); //FIXME: dead dog
   QFont tmpFont("fixed");
   defaultFont = config->readFontEntry("defaultfont", &tmpFont);
   setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT)); // sets n_font and menu item
@@ -569,10 +567,10 @@ void Konsole::readProperties(KConfig* config)
     s->setFontNo(n_font);
     s->setSchemaNo(ColorSchema::find(s_schema)->numb);
     s->setHistory(b_scroll);
-    if (b_bshack)
-      s->getEmulation()->setMode(MODE_BsHack);
+    if (b_bshack) //FIXME: dead dog
+      s->getEmulation()->setMode(MODE_BsHack); //FIXME: dead dog
     else
-      s->getEmulation()->resetMode(MODE_BsHack);      
+      s->getEmulation()->resetMode(MODE_BsHack);       //FIXME: dead dog
   } else { fprintf(stderr,"session 1 not found\n"); } // oops
 
   // Default values for startup, changed by "save options". Not used by SM.
@@ -711,7 +709,7 @@ HERE; printf("setHistory: %s, having%s session.\n",on?"on":"off",se?"":" no");
   if (se) se->setHistory( b_scroll );
 }
 
-void Konsole::setBsHack(bool bshack)
+void Konsole::setBsHack(bool bshack) //FIXME: dead dog
 {
   b_bshack = bshack;
   m_options->setItemChecked(4,b_bshack);
@@ -738,7 +736,7 @@ void Konsole::opt_menu_activated(int item)
             break;
     case 3: setHistory(!b_scroll);
             break;
-    case 4: setBsHack(!b_bshack);
+    case 4: setBsHack(!b_bshack); //FIXME: dead dog
             break;
     case 5: setFullScreen(!b_fullscreen);
             break;

@@ -30,12 +30,6 @@ hdr "(NOT FUNCTIONAL, YET) BS sends BS"
 # - Application : effects Up and Down key.
 # - Ansi        : effects Up and Down key.
 #
-#   konsole provides another mode that allows to configure
-#   the keyboard to do a backspace related trick. This mode
-#   can be changed by konsole's configuration menu.
-#
-# - BsHack      : effects Backspace and Delete key.
-#
 # Operations are
 #
 # - scrollUpLine
@@ -63,15 +57,11 @@ key Return-Alt+NewLine : "\r\n"
 key Return+Alt-NewLine : "\E\r"  
 key Return+Alt+NewLine : "\E\r\n"
 
-# Some desperately try to save the ^H.
-# The BsHack mode is set by regular
-# configurations means for convenience.
+# Regular Backspace and Delete codes.
+# This might not work on *ix systems.
 
-key Backspace-BsHack : "\x08"
-key Delete   -BsHack : "\x7f"
-
-key Backspace+BsHack : "\x7f"
-key Delete   +BsHack : "\E[3~"
+key Backspace : "\x08"
+key Delete    : "\x7f"
 
 # These codes are for the VT52 mode of VT100
 # The Ansi mode (i.e. VT100 mode) is set by

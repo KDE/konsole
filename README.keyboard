@@ -3,8 +3,8 @@
 some keyboard configuration stuff is
 currently work in progress.
 
-See file other/default.Keytab for
-the build-in keyboard table.
+See file other/*.[Kk]eytab for
+the keyboard tables.
 
 Files like these can be used to
-configure konsole, soon.
+configure konsole, very soon.
