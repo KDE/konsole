@@ -19,7 +19,7 @@ TESession::TESession(KTMainWindow* main, TEWidget* te, const char* _pgm, QStrLis
   sh = new TEPty();
   em = new TEmuVt102(te);
 
-  this->term = strdup(term);
+  this->term = term;
 
   sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
   QObject::connect( sh,SIGNAL(block_in(const char*,int)),
@@ -46,7 +46,7 @@ TESession::TESession(KTMainWindow* main, TEWidget* te, const char* _pgm, QStrLis
 void TESession::run()
 {
   //kdDebug() << "Running the session!" << pgm << "\n";
-  sh->run(pgm,args,term,FALSE);
+  sh->run(pgm,args,term.data(),FALSE);
 }
 
 void TESession::kill(int signal)
@@ -58,7 +58,6 @@ TESession::~TESession()
 {
  QObject::disconnect( sh, SIGNAL( done( int ) ),
 		      this, SLOT( done( int ) ) );
-  free(term);
   delete em;
   delete sh;
 }
@@ -102,7 +101,7 @@ int TESession::fontNo()
 
 const char* TESession::emuName()
 {
-  return term;
+  return term.data();
 }
 
 void TESession::setSchemaNo(int sn)

@@ -80,7 +80,7 @@ private:
   const char*    pgm;
   QStrList       args;
 
-  char*          term;
+  QCString       term;
 };
 
 #endif

@@ -15,6 +15,7 @@
 
 #include <unistd.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <kapp.h>
 #include <klocale.h>
 #include <kaboutdata.h>
