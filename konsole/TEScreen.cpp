@@ -1264,7 +1264,7 @@ void TEScreen::getSelText(bool preserve_line_breaks, QTextStream *stream)
                         } while(false)
 #define LINE_WRAP	do { \
                           assert(d <= columns); \
-                          *stream << makeString(m, d, true); \
+                          *stream << makeString(m, d, false); \
                           d = 0; \
                         } while(false)
 #define LINE_FLUSH	do { \
