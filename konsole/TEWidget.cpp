@@ -222,11 +222,16 @@ void TEWidget::fontChange(const QFont &)
   QFontMetrics fm(font());
   font_h = fm.height() + m_lineSpacing;
   font_w = fm.maxWidth();
+  if (!font_w)
+     font_w = fm.width('W');
+  if (!font_w)
+     font_w = 1;
   font_a = fm.ascent();
+//printf("font: %s\n", font().toString().latin1());
+//printf("fixed: %s\n", font().fixedPitch() ? "yes" : "no");
 //printf("font_h: %d\n",font_h);
 //printf("font_w: %d\n",font_w);
 //printf("font_a: %d\n",font_a);
-//printf("charset: %s\n",QFont::encodingName(font().charSet()).ascii());
 //printf("rawname: %s\n",font().rawName().ascii());
     
 #if QT_VERSION < 300

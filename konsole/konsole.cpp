@@ -144,12 +144,12 @@ template class QPtrDict<KRadioAction>;
 
 
 const char *fonts[] = {
- "6x13",  // FIXME: "fixed" used in favor of this
- "5x7",   // tiny font, never used
- "6x10",  // small font
- "7x13",  // medium
- "9x15",  // large
- "10x20", // huge
+ "13", 
+ "7",   // tiny font, never used
+ "10",  // small font
+ "13",  // medium
+ "15",  // large
+ "20", // huge
  "-misc-console-medium-r-normal--16-160-72-72-c-160-iso10646-1", // "Linux"
  "-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1",    // "Unicode"
  };
@@ -325,8 +325,6 @@ Konsole::~Konsole()
 {
 //FIXME: close all session properly and clean up
     // Delete the session if isn't in the session list any longer.
-    if (sessions.find(se) == -1)
-       delete se;
     sessions.setAutoDelete(true);
 
     if (no2command.isEmpty())
@@ -1140,8 +1138,9 @@ void Konsole::setFont(int fontno)
     f.setRawName( fonts[fontno] );
   else
   {
-    f.setFamily(fonts[fontno]);
-    f.setRawMode( TRUE );
+    f.setFamily("fixed");
+    f.setFixedPitch(true);
+    f.setPixelSize(QString(fonts[fontno]).toInt());
   }
   if ( !f.exactMatch() && fontno != DEFAULTFONT)
   {
@@ -1405,9 +1404,9 @@ void Konsole::addSession(TESession* s)
   int count = 1;
   do {
      nameOk = true;
-     for (TESession *se = sessions.first(); se; se = sessions.next())
+     for (TESession *ses = sessions.first(); ses; ses = sessions.next())
      {
-        if (newTitle == se->Title())
+        if (newTitle == ses->Title())
         {
            nameOk = false;
            break;
@@ -1714,16 +1713,10 @@ void Konsole::doneSession(TESession* s, int )
     for (TESession *se = sessions.first(); se; se = sessions.next())
       se->setListenToKeyPress(FALSE);
 
-  // This slot (doneSession) is activated from the TEPty when receiving a
-  // SIGCHLD. A lot is done during the signal handler. Apparently deleting
-  // the TEPty additionally is sometimes too much, causing something
-  // to get messed up in rare cases. The following causes delete not to
-  // be called from within the signal handler.
-
-  QTimer::singleShot(1,s,SLOT(terminate()));
-
+  delete s;
   if (s == se)
   { // pick a new session
+    se = 0;
     if (sessions.count())
     {
       se = sessions.at(sessionIndex ? sessionIndex - 1 : 0);
