@@ -260,6 +260,8 @@ DCOPObject( "konsole" )
 
   setCentralWidget(te);
 
+  toolBar()->setText(i18n("Session Toolbar"));
+
   b_histEnabled=histon;
   makeBasicGUI();
   //KONSOLEDEBUG<<"Konsole ctor() after makeBasicGUI "<<time.elapsed()<<" msecs elapsed"<<endl;
@@ -295,7 +297,6 @@ DCOPObject( "konsole" )
     menubar->hide();
   if (!toolbaron)
     toolBar()->hide();
-  toolBar()->setText(i18n("Session Toolbar"));
   if (!frameon) {
     b_framevis=false;
     te->setFrameStyle( QFrame::NoFrame );
