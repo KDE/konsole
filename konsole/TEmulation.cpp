@@ -232,7 +232,7 @@ void TEmulation::onKeyPress( QKeyEvent* ev )
 {
   if (!listenToKeyPress) return; // someone else gets the keys
   emit notifySessionState(NOTIFYNORMAL);
-  if (scr->getHistCursor() != scr->getHistLines());
+  if (scr->getHistCursor() != scr->getHistLines() && !ev->text().isEmpty())
     scr->setHistCursor(scr->getHistLines());
   if (!ev->text().isEmpty())
   { // A block of text

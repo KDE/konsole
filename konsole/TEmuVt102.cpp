@@ -806,10 +806,6 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
 
 //printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().length(),ev->text().length()?ev->text().ascii()[0]:0);
 
-  // revert to non-history when typing
-  if (scr->getHistCursor() != scr->getHistLines());
-    scr->setHistCursor(scr->getHistLines());
-
   // lookup in keyboard translation table ...
   int cmd; const char* txt; int len;
   if (keytrans->findEntry(ev->key(), encodeMode(MODE_NewLine  , BITS_NewLine   ) + // OLD,
@@ -828,11 +824,6 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
     case CMD_scrollPageDown : gui->doScroll(+gui->Lines()/2); return;
     case CMD_scrollLineUp   : gui->doScroll(-1             ); return;
     case CMD_scrollLineDown : gui->doScroll(+1             ); return;
-    case CMD_send           :
-                 emit sndBlock(txt,len);         return;
-    //            if (ev->state() & AltButton) sendString("\033");
-    //            emit sndBlock(txt,len);
-    //            return;
     case CMD_prevSession    : emit prevSession();             return;
     case CMD_nextSession    : emit nextSession();             return;
     case CMD_newSession     : emit newSession();              return;
@@ -850,6 +841,16 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
       if ( ev->key()  == Key_Q ) { scrollLock(false); return; }
       if ( ev->key()  == Key_S ) { scrollLock(true);  return; }
     }
+  }
+
+  // revert to non-history when typing
+  if (scr->getHistCursor() != scr->getHistLines() && !ev->text().isEmpty())
+    scr->setHistCursor(scr->getHistLines());
+
+  if (cmd==CMD_send) {
+//  if (ev->state() & AltButton) sendString("\033")
+    emit sndBlock(txt,len);
+    return;
   }
 
   // fall back handling
