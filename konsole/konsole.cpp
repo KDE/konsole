@@ -178,6 +178,7 @@ Konsole::Konsole(const char* name, const QString& _program,
                  QStrList & _args, int histon, bool toolbaron,
                  const QString &_title, QCString type, const QString &_term, bool b_inRestore)
 :KMainWindow(0, name)
+,m_defaultSession(0)
 ,te(0)
 ,se(0)
 ,m_initialSession(0)
@@ -268,14 +269,14 @@ Konsole::Konsole(const char* name, const QString& _program,
   if (currentSize != size())
      defaultSize = size();
   //KONSOLEDEBUG<<"Konsole ctor(): readProps() type="<<type<<endl;
-  QString schema;
-  KSimpleConfig *co = type.isEmpty() ?
-     0 : new KSimpleConfig(locate("appdata", type + ".desktop"), true /* read only */);
-  if (co)
-  {
-      co->setDesktopGroup();
-      schema = co->readEntry("Schema");
-  }
+
+  KSimpleConfig *co;
+  if (type.isEmpty())
+     co = defaultSession();
+  else
+     co = new KSimpleConfig(locate("appdata", type + ".desktop"), true /* read only */);
+  co->setDesktopGroup();
+  QString schema = co->readEntry("Schema");
   //KONSOLEDEBUG << "my Looking for schema " << schema << endl;
   readProperties(config, schema);
   //KONSOLEDEBUG<<"Konsole ctor() after readProps "<<time.elapsed()<<" msecs elapsed"<<endl;
@@ -294,7 +295,6 @@ Konsole::Konsole(const char* name, const QString& _program,
   else
     se->setHistory(HistoryTypeNone());
 
-  delete co;
   //KONSOLEDEBUG<<"Konsole ctor(): runSession()"<<endl;
   te->currentSession = se;
   se->setConnect(TRUE);
@@ -321,6 +321,9 @@ Konsole::~Konsole()
     if (sessions.find(se) == -1)
        delete se;
     sessions.setAutoDelete(true);
+
+    if (no2command.isEmpty())
+       delete m_defaultSession;
 
     delete colors;
     colors=0;
@@ -1478,21 +1481,11 @@ void Konsole::allowPrevNext()
 
 KSimpleConfig *Konsole::defaultSession()
 {
-  if (!m_menuCreated) {
-    if (!isRestored) {
-       makeGUI();
-    }
+  if (!m_defaultSession)
+  {
+    m_defaultSession = new KSimpleConfig(locate("appdata", "shell.desktop"), true /* read only */);
   }
-
-  QIntDictIterator<KSimpleConfig> it( no2command);
-
-  while( it.current()) {
-     KSimpleConfig *co = it.current();
-     if ( co && co->readEntry("Exec").isEmpty() )
-        return co;
-     ++it;
-  }
-  return 0;
+  return m_defaultSession;
 }
 
 void Konsole::newSession(const QString &pgm, const QStrList &args, const QString &term)
@@ -1741,7 +1734,11 @@ void Konsole::clearSessionHistory(TESession & session)
 
 void Konsole::addSessionCommand(const QString &path)
 {
-  KSimpleConfig* co = new KSimpleConfig(path,TRUE);
+  KSimpleConfig* co;
+  if (path.isEmpty())
+    co = defaultSession();
+  else
+    co = new KSimpleConfig(path,TRUE);
   co->setDesktopGroup();
   QString typ = co->readEntry("Type");
   QString txt = co->readEntry("Comment");
@@ -1749,7 +1746,9 @@ void Konsole::addSessionCommand(const QString &path)
   if (typ.isEmpty() || txt.isEmpty() || nam.isEmpty() ||
       typ != "KonsoleApplication")
   {
-    delete co; return; // ignore
+    if (!path.isEmpty())
+       delete co; 
+    return; // ignore
   }
   QString icon = co->readEntry("Icon", "openterm");
   m_file->insertItem( SmallIconSet( icon ), txt, ++cmd_serial );
@@ -1759,10 +1758,13 @@ void Konsole::addSessionCommand(const QString &path)
 
 void Konsole::loadSessionCommands()
 {
+  addSessionCommand(QString::null);
+  m_file->insertSeparator();
   QStringList lst = KGlobal::dirs()->findAllResources("appdata", "*.desktop", false, true);
 
   for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it )
-    addSessionCommand(*it);
+    if (!(*it).endsWith("/shell.desktop"))
+       addSessionCommand(*it);
 }
 
 void Konsole::addScreenSession(const QString &socket)

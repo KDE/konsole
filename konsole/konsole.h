@@ -153,6 +153,7 @@ private:
   QPtrDict<KRadioAction> session2action;
   QPtrList<TESession> sessions;
   QIntDict<KSimpleConfig> no2command;
+  KSimpleConfig* m_defaultSession;
 
   TEWidget*      te;
   TESession*     se;

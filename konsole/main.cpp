@@ -298,7 +298,7 @@ int main(int argc, char* argv[])
         sessionconfig->readListEntry("Args0", eargs);
         sTitle = sessionconfig->readEntry("Title0", title);
         sTerm = sessionconfig->readEntry("Term0");
-        Konsole *m = new Konsole(wname,sPgm,eargs,histon,toolbaron,sTitle,type,sTerm,true);
+        Konsole *m = new Konsole(wname,sPgm,eargs,histon,toolbaron,sTitle,0/*type*/,sTerm,true);
         m->restore(n);
         m->makeGUI();
         m->initSessionSchema(sessionconfig->readNumEntry("Schema0"));
