@@ -8,7 +8,7 @@
  * THIS IS A ROOT SUID PROGRAM
  *
  * Things work as following:
- * 
+ *
  * In konsole we open a master pty. This can be opened
  * done by at most one process. Prior to opening the
  * master pty, the slave pty cannot be opened. Then, in
@@ -18,7 +18,7 @@
  * with this program.
  *
  * We have to chown/chmod the slave pty to prevent eavesdroping.
- * 
+ *
  * Contributed by Zack Weinberg <zack@rabi.phys.columbia.edu>, 1998.
  * Copyright (c) 1999 by Lars Doelle <lars.doelle@on-line.de>.
  * GPL applies.
@@ -34,7 +34,7 @@
 #include <unistd.h>
 
 #include <sys/param.h>
-#ifdef BSD
+#if defined(__FreeBSD__)
 #  define BSD_PTY_HACK
 #  include <paths.h>
 #  include <dirent.h>
@@ -74,7 +74,7 @@ int main (int argc, char *argv[])
   /* setup parameters for the operation ***********************************/
 
   if (!strcmp(argv[1],"--grant"))
-  { 
+  {
     uid = getuid(); /* current user id */
     mod = S_IRUSR|S_IWUSR|S_IWGRP;
   }
@@ -91,8 +91,9 @@ int main (int argc, char *argv[])
 
 #if defined(BSD_PTY_HACK)
   /*
-    Hack to make konsole_grantpty work on *BSD.  ttyname(3) does not work
-    on BSD based systems with a file descriptor opened on a /dev/pty?? device.
+    Hack to make konsole_grantpty work on FreeBSD (and possibly other systems).
+    ttyname(3) does not work on FreeBSD with a file descriptor opened on a
+    /dev/pty?? device.
 
     Instead, this code looks through all the devices in /dev for a device
     which has the same inode as our PTY_FILENO descriptor... if found, we
