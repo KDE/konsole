@@ -1077,13 +1077,19 @@ void TEScreen::clearSelection()
 
 void TEScreen::setSelBeginXY(const int x, const int y)
 {
+//  kdDebug(1211) << "setSelBeginXY(" << x << "," << y << ")" << endl;
   sel_begin = loc(x,y+histCursor) ;
+
+  /* FIXME, HACK to correct for x too far to the right... */
+  if (x == columns) sel_begin--;
+
   sel_BR = sel_begin;
   sel_TL = sel_begin;
 }
 
 void TEScreen::setSelExtentXY(const int x, const int y)
 {
+//  kdDebug(1211) << "setSelExtentXY(" << x << "," << y << ")" << endl;
   if (sel_begin == -1) return;
   int l =  loc(x,y + histCursor);
 
@@ -1095,7 +1101,7 @@ void TEScreen::setSelExtentXY(const int x, const int y)
   else
   {
     /* FIXME, HACK to correct for x too far to the right... */
-    if (( x == columns )|| (x == 0)) l--;
+    if (x == columns) l--;
 
     sel_TL = sel_begin;
     sel_BR = l;
@@ -1110,7 +1116,7 @@ bool TEScreen::testIsSelected(const int x,const int y)
 
 QString TEScreen::getSelText(const BOOL preserve_line_breaks)
 {
-  if (sel_begin == -1) 
+  if (sel_begin == -1)
      return QString::null; // Selection got clear while selecting.
 
   int *m;			// buffer to fill.
@@ -1139,7 +1145,7 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
           {
               eol = sel_BR % columns + 1;
           }
-          
+
           while (hX < eol)
           {
               Q_UINT16 c = hist->getCell(hY, hX++).c;
@@ -1198,7 +1204,8 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
         }
         else if (eol == sel_BR)
         {
-            addNewLine = true;
+            if (!line_wrapped[(eol - hist_BR)/columns])
+	        addNewLine = true;
         }
         else
         {
