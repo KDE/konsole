@@ -1109,8 +1109,8 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
   
   QString res(qc, d);
 
-  delete m;
-  delete qc;
+  delete [] m;
+  delete [] qc;
 
   return res;
 }
