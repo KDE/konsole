@@ -48,6 +48,7 @@
 #include <qpainter.h>
 #include <qkeycode.h>
 #include <qclipboard.h>
+#include <qstyle.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -859,7 +860,15 @@ void TEWidget::clearImage()
 
 void TEWidget::calcGeometry()
 {
-  scrollbar->resize(SCRWIDTH, contentsRect().height());
+
+#if QT_VERSION ==  210
+#warning Using Qt2.1.0 CVS scrollbar extents (mosfet).
+    scrollbar->resize(QApplication::style().scrollBarExtent(),
+                      contentsRect().height());
+#else
+    scrollbar->resize(16, contentsRect().height());
+#endif
+
   switch(scrollLoc)
   {
     case SCRNONE : 
@@ -869,17 +878,17 @@ void TEWidget::calcGeometry()
      scrollbar->hide();
      break;
     case SCRLEFT : 
-     columns = ( contentsRect().width() - 2 * rimX - SCRWIDTH) / font_w;
-     brX = (contentsRect().width() - (columns*font_w) - SCRWIDTH ) / 2;
-     blX = brX + SCRWIDTH;
+     columns = ( contentsRect().width() - 2 * rimX - scrollbar->width()) / font_w;
+     brX = (contentsRect().width() - (columns*font_w) - scrollbar->width() ) / 2;
+     blX = brX + scrollbar->width();
      scrollbar->move(contentsRect().topLeft());
      scrollbar->show();
      break;
     case SCRRIGHT:
-     columns = ( contentsRect().width()  - 2 * rimX - SCRWIDTH) / font_w;
-     blX = (contentsRect().width() - (columns*font_w) - SCRWIDTH ) / 2;
+     columns = ( contentsRect().width()  - 2 * rimX - scrollbar->width()) / font_w;
+     blX = (contentsRect().width() - (columns*font_w) - scrollbar->width() ) / 2;
      brX = blX;
-     scrollbar->move(contentsRect().topRight() - QPoint(SCRWIDTH-1,0));
+     scrollbar->move(contentsRect().topRight() - QPoint(scrollbar->width()-1,0));
      scrollbar->show();
      break;
   }
@@ -900,6 +909,6 @@ void TEWidget::makeImage()
 QSize TEWidget::calcSize(int cols, int lins)
 { int frw = width() - contentsRect().width();
   int frh = height() - contentsRect().height();
-  int scw = (scrollLoc==SCRNONE?0:SCRWIDTH);
+  int scw = (scrollLoc==SCRNONE?0:scrollbar->width());
   return QSize( font_w*cols + 2*rimX + frw + scw, font_h*lins + 2*rimY + frh );
 }
