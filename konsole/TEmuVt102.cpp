@@ -1,6 +1,6 @@
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
-/* [TEmuVt102.C]            VT102 Terminal Emulation                         */
+/* [TEmuVt102.cpp]          VT102 Terminal Emulation                         */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
@@ -82,6 +82,20 @@ TEmuVt102::TEmuVt102(TEWidget* gui) : TEmulation(gui)
   //kdDebug(1211)<<"TEmuVt102 ctor() reset()"<<endl;
   reset();
   //kdDebug(1211)<<"TEmuVt102 ctor() ctor done"<<endl;
+}
+
+/*!
+*/
+
+void TEmuVt102::changeGUI(TEWidget* newgui)
+{
+  if (gui==newgui) return;
+
+  QObject::disconnect(gui,SIGNAL(mouseSignal(int,int,int)),
+                      this,SLOT(onMouse(int,int,int)));
+  TEmulation::changeGUI(newgui);
+  QObject::connect(gui,SIGNAL(mouseSignal(int,int,int)),
+                   this,SLOT(onMouse(int,int,int)));  
 }
 
 /*!

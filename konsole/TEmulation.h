@@ -28,6 +28,7 @@ class TEmulation : public QObject
 public:
 
   TEmulation(TEWidget* gui);
+  void changeGUI(TEWidget* newgui);
   ~TEmulation();
 
 public:
@@ -105,6 +106,8 @@ private slots: // triggered by timer
   void showBulk();
 
 private:
+
+  void connectGUI();
 
   void bulkNewline();
   void bulkStart();

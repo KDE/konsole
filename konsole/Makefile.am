@@ -49,7 +49,8 @@ konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
 # konsole executable - has all the sources, doesn't link kparts, saves startup time
 konsole_SOURCES	= TEPty.cpp BlockArray.cpp main.cpp konsole.cpp schema.cpp session.cpp TEWidget.cpp TEmuVt102.cpp \
                   TEScreen.cpp TEmulation.cpp TEHistory.cpp keytrans.cpp konsoleiface.skel sessioniface.skel \
-                  konsole_wcwidth.cpp konsolebookmarkhandler.cpp
+                  konsole_wcwidth.cpp konsolebookmarkhandler.cpp konsole_child.cpp
+
 konsole_LDADD = $(LIB_KDEUI) $(LIB_KSYCOCA) $(LIBUTIL) $(LIB_KFILE) @XTESTLIB@
 konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
@@ -57,7 +58,7 @@ konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 # kcmkonsole_LDADD   = $(LIB_KDEUI)
 # kcmkonsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
-noinst_HEADERS = TEWidget.h TEPty.h TEmulation.h TEmuVt102.h \
+noinst_HEADERS = TEWidget.h TEPty.h TEmulation.h TEmuVt102.h konsole_child.h \
 	TECommon.h TEScreen.h konsole.h schema.h session.h konsole_wcwidth.h \
 	kwrited.h TEHistory.h keytrans.h default.keytab.h BlockArray.h \
         konsolebookmarkhandler.h
@@ -76,8 +77,8 @@ install-exec-local: install-binPROGRAMS
 	@(chown root $(bindir)/konsole_grantpty && chmod 4755 $(bindir)/konsole_grantpty) || echo "Please make konsole_grandpty setuid root"
 
 # Not AUTO here, because there are some unused files
-METASOURCES = TEWidget.moc TEmuVt102.moc session.moc konsole.moc \
-       TEmulation.moc TEPty.moc kwrited.moc konsole_part.moc konsolebookmarkhandler.moc
+METASOURCES = TEWidget.moc TEmuVt102.moc session.moc konsole.moc konsole_child.moc \
+              TEmulation.moc TEPty.moc kwrited.moc konsole_part.moc konsolebookmarkhandler.moc
 
 messages: rc.cpp
 	rm -f schemas.cpp

@@ -32,6 +32,7 @@ public:
             const QString &pgm, QStrList & _args,
 	    const QString &term, const QString &sessionId="session-1",
 	    const QString &initial_cwd = QString::null);
+  void changeWidget(TEWidget* w);
   ~TESession();
 
   void        setConnect(bool r);  // calls setListenToKeyPress(r)

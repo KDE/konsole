@@ -50,6 +50,7 @@ class TEmuVt102 : public TEmulation
 public:
 
   TEmuVt102(TEWidget* gui);
+  void changeGUI(TEWidget* newgui);
   ~TEmuVt102();
 
 public slots: // signals incoming from TEWidget

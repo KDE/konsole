@@ -35,6 +35,7 @@
 #include "TEmuVt102.h"
 #include "session.h"
 #include "schema.h"
+#include "konsole_child.h"
 #include "konsolebookmarkhandler.h"
 
 #include "konsoleiface.h"
@@ -109,12 +110,15 @@ private slots:
   void activateSession();
   void activateSession(TESession*);
   void closeCurrentSession();
+  void doneChild(KonsoleChild*, TESession*);
   void doneSession(TESession*,int);
   void opt_menu_activated(int item);
   void schema_menu_activated(int item);
   void pixmap_menu_activated(int item);
   void keytab_menu_activated(int item);
   void schema_menu_check();
+  void attachSession(TESession*);
+  void detachSession();
   void bookmarks_menu_check();
   void newSession(int kind);
   void newSessionToolbar(int kind);
@@ -188,6 +192,7 @@ private:
   QPtrDict<KRadioAction> session2action;
   QPtrDict<KToolBarButton> session2button;
   QPtrList<TESession> sessions;
+  QPtrList<KonsoleChild> detached;
   QIntDict<KSimpleConfig> no2command;
   QIntDict<QString> no2filename;
   KSimpleConfig* m_defaultSession;
@@ -232,6 +237,7 @@ private:
   KAction       *m_clearHistory;
   KAction       *m_findHistory;
   KAction       *m_saveHistory;
+  KAction       *m_detachSession;
   KAction       *m_moveSessionLeft;
   KAction       *m_moveSessionRight;
 

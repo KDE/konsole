@@ -109,6 +109,15 @@ TEmulation::TEmulation(TEWidget* w)
   scr = screen[0];
 
   QObject::connect(&bulk_timer, SIGNAL(timeout()), this, SLOT(showBulk()) );
+  connectGUI();
+  setKeymap(0); // Default keymap
+}
+
+/*!
+*/
+
+void TEmulation::connectGUI()
+{
   QObject::connect(gui,SIGNAL(changedImageSizeSignal(int,int)),
                    this,SLOT(onImageSizeChange(int,int)));
   QObject::connect(gui,SIGNAL(changedHistoryCursor(int)),
@@ -127,7 +136,35 @@ TEmulation::TEmulation(TEWidget* w)
 		   this,SLOT(isBusySelecting(bool)) );
   QObject::connect(gui,SIGNAL(testIsSelected(const int, const int, bool &)),
 		   this,SLOT(testIsSelected(const int, const int, bool &)) );
-  setKeymap(0); // Default keymap
+}
+
+/*!
+*/
+
+void TEmulation::changeGUI(TEWidget* newgui)
+{
+  if (gui==newgui) return;
+
+  QObject::disconnect(gui,SIGNAL(changedImageSizeSignal(int,int)),
+                   this,SLOT(onImageSizeChange(int,int)));
+  QObject::disconnect(gui,SIGNAL(changedHistoryCursor(int)),
+                   this,SLOT(onHistoryCursorChange(int)));
+  QObject::disconnect(gui,SIGNAL(keyPressedSignal(QKeyEvent*)),
+                   this,SLOT(onKeyPress(QKeyEvent*)));
+  QObject::disconnect(gui,SIGNAL(beginSelectionSignal(const int,const int)),
+		   this,SLOT(onSelectionBegin(const int,const int)) );
+  QObject::disconnect(gui,SIGNAL(extendSelectionSignal(const int,const int)),
+		   this,SLOT(onSelectionExtend(const int,const int)) );
+  QObject::disconnect(gui,SIGNAL(endSelectionSignal(const bool)),
+		   this,SLOT(setSelection(const bool)) );
+  QObject::disconnect(gui,SIGNAL(clearSelectionSignal()),
+		   this,SLOT(clearSelection()) );
+  QObject::disconnect(gui,SIGNAL(isBusySelecting(bool)),
+		   this,SLOT(isBusySelecting(bool)) );
+  QObject::disconnect(gui,SIGNAL(testIsSelected(const int, const int, bool &)),
+		   this,SLOT(testIsSelected(const int, const int, bool &)) );
+  gui=newgui;
+  connectGUI();
 }
 
 /*!

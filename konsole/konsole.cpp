@@ -202,6 +202,7 @@ DCOPObject( "konsole" )
 ,m_clearHistory(0)
 ,m_findHistory(0)
 ,m_saveHistory(0)
+,m_detachSession(0)
 ,m_moveSessionLeft(0)
 ,m_moveSessionRight(0)
 ,bookmarkHandler(0)
@@ -406,6 +407,11 @@ void Konsole::makeGUI()
    clearAllSessionHistories->plug(m_edit);
 
    // View Menu
+   m_detachSession = new KAction(i18n("&Detach Session"), 0, this,
+                                        SLOT(detachSession()), actions);
+   m_detachSession->setEnabled(false);
+   m_detachSession->plug(m_view);
+
    KAction *renameSession = new KAction(i18n("&Rename Session..."), 0, this,
                                         SLOT(slotRenameSession()), actions);
    renameSession->plug(m_view);
@@ -572,7 +578,10 @@ void Konsole::makeGUI()
    m_rightButton->insertItem(i18n("&Send Signal"), m_signals);
 
    m_rightButton->insertSeparator();
+   m_detachSession->plug(m_rightButton);
    renameSession->plug(m_rightButton);
+   
+   m_rightButton->insertSeparator();
    m_rightButton->insertItem(i18n("S&ettings"), m_options);
    m_rightButton->insertSeparator();
    closeSession->plug(m_rightButton );
@@ -674,6 +683,12 @@ void Konsole::activateMenu()
  */
 bool Konsole::queryClose()
 {
+   while (detached.count()) {
+     KonsoleChild* child=detached.first();
+     delete child;
+     detached.remove(child);
+   }
+
    if ( (!skip_exit_query) && b_warnQuit)
    {
         if( (sessions.count()>1) &&
@@ -1388,6 +1403,9 @@ void Konsole::addSession(TESession* s)
   action2session.insert(ra, s);
   session2action.insert(s,ra);
   sessions.append(s);
+  if (sessions.count()>1)
+    m_detachSession->setEnabled(true);
+
   if (m_menuCreated)
      ra->plug(m_view);
 
@@ -1509,6 +1527,7 @@ void Konsole::activateSession(TESession *s)
 
 void Konsole::allowPrevNext()
 {
+  if (!se) return;
   QObject::connect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
   QObject::connect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
   QObject::connect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
@@ -1672,10 +1691,14 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
 
 void Konsole::closeCurrentSession()
 {
-  if( sessions.count()>1 )
-    se->sendSignal(SIGHUP);
-  else
-    emit close();
+  se->sendSignal(SIGHUP);
+}
+
+void Konsole::doneChild(KonsoleChild* child, TESession* session)
+{
+  if (session) 
+    attachSession(session);
+  detached.remove(child);
 }
 
 //FIXME: If a child dies during session swap,
@@ -1719,22 +1742,29 @@ void Konsole::doneSession(TESession* s, int )
   if (s == se)
   { // pick a new session
     se = 0;
-    if (sessions.count())
+    if (sessions.count() || detached.count())
     {
-      if (se_previous)
-        se = se_previous;
-      else
-        se = sessions.at(sessionIndex ? sessionIndex - 1 : 0);
-      session2action.find(se)->setChecked(true);
-      //FIXME: this Timer stupidity originated from the connected
-      //       design of Emulations. By this the newly activated
-      //       session might get a Ctrl(D) if the session has be
-      //       terminated by this keypress. A likely problem
-      //       can be found in the CMD_prev/nextSession processing.
-      //       Since the timer approach only works at good weather,
-      //       the whole construction is not suited to what it
-      //       should do. Affected is the TEEmulation::setConnect.
-      QTimer::singleShot(1,this,SLOT(activateSession()));
+      if (sessions.count()) {
+        if (se_previous)
+          se = se_previous;
+        else
+          se = sessions.at(sessionIndex ? sessionIndex - 1 : 0);
+        session2action.find(se)->setChecked(true);
+        //FIXME: this Timer stupidity originated from the connected
+        //       design of Emulations. By this the newly activated
+        //       session might get a Ctrl(D) if the session has be
+        //       terminated by this keypress. A likely problem
+        //       can be found in the CMD_prev/nextSession processing.
+        //       Since the timer approach only works at good weather,
+        //       the whole construction is not suited to what it
+        //       should do. Affected is the TEEmulation::setConnect.
+        QTimer::singleShot(1,this,SLOT(activateSession()));
+      }
+      else {
+        KonsoleChild* child=detached.first();
+        delete child;
+        detached.remove(child);
+      }
     }
     else
       close();
@@ -1745,6 +1775,8 @@ void Konsole::doneSession(TESession* s, int )
     m_moveSessionLeft->setEnabled(position>0);
     m_moveSessionRight->setEnabled(position<sessions.count()-1);
   }
+  if (sessions.count()==1)
+    m_detachSession->setEnabled(false);
 }
 
 /*! Cycle to previous session (if any) */
@@ -2077,6 +2109,101 @@ void Konsole::setSchema(ColorSchema* s)
   if (se) se->setSchemaNo(s->numb());
 }
 
+void Konsole::detachSession() {
+  KRadioAction *ra = session2action.find(se);
+  ra->unplug(m_view);
+  ra->unplug(toolBar());
+  session2action.remove(se);
+  session2button.remove(se);
+  action2session.remove(ra);
+  int sessionIndex = sessions.findRef(se);
+  sessions.remove(se);
+  delete ra;
+
+  disconnect( se,SIGNAL(done(TESession*,int)),
+              this,SLOT(doneSession(TESession*,int)) );
+
+  disconnect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
+  disconnect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
+  disconnect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
+  disconnect( se->getEmulation(),SIGNAL(renameSession()), this,SLOT(slotRenameSession()) );
+  disconnect( se->getEmulation(),SIGNAL(activateMenu()), this,SLOT(activateMenu()) );
+  disconnect( se->getEmulation(),SIGNAL(moveSessionLeft()), this,SLOT(moveSessionLeft()) );
+  disconnect( se->getEmulation(),SIGNAL(moveSessionRight()), this,SLOT(moveSessionRight()) );
+  disconnect( se->getEmulation(),SIGNAL(ImageSizeChanged(int,int)), this,SLOT(notifySize(int,int)));
+  disconnect( se->getEmulation(),SIGNAL(changeColumns(int)), this,SLOT(changeColumns(int)) );
+
+  disconnect( se,SIGNAL(updateTitle()), this,SLOT(updateTitle()) );
+  disconnect( se,SIGNAL(notifySessionState(TESession*,int)), this,SLOT(notifySessionState(TESession*,int)) );
+  disconnect( se,SIGNAL(clearAllListenToKeyPress()), this,SLOT(clearAllListenToKeyPress()) );
+  disconnect( se,SIGNAL(restoreAllListenToKeyPress()), this,SLOT(restoreAllListenToKeyPress()) );
+  disconnect( se,SIGNAL(renameSession(TESession*,const QString&)), this,SLOT(slotRenameSession(TESession*,const QString&)) );
+
+  ColorSchema* schema = colors->find(curr_schema);
+  KonsoleChild* konsolechild = new KonsoleChild(se,te->Columns(),te->Lines(),n_scroll,
+                                                b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame,
+                                                schema,te->font(),te->isBellMode(),te->wordCharacters(),
+                                                te->blinkingCursor(),te->ctrlDrag(),te->isTerminalSizeHint(),
+                                                te->lineSpacing());
+  detached.append(konsolechild);
+  konsolechild->show();
+  konsolechild->run();
+
+  connect( konsolechild,SIGNAL(doneChild(KonsoleChild*, TESession*)),
+           this,SLOT(doneChild(KonsoleChild*, TESession*)) );
+
+  if (se == se_previous)
+    se_previous=NULL;
+
+  // pick a new session
+  if (se_previous)
+    se = se_previous;
+  else
+    se = sessions.at(sessionIndex ? sessionIndex - 1 : 0);
+  session2action.find(se)->setChecked(true);
+  QTimer::singleShot(1,this,SLOT(activateSession()));
+  if (sessions.count()==1)
+    m_detachSession->setEnabled(false);
+}
+
+void Konsole::attachSession(TESession* session)
+{
+  session->changeWidget(te);
+  KRadioAction *ra = new KRadioAction(session->Title(), session->IconName(),
+                                      0, this, SLOT(activateSession()), this);
+
+  ra->setExclusiveGroup("sessions");
+  ra->setChecked(true);
+
+  action2session.insert(ra, session);
+  session2action.insert(session,ra);
+  sessions.append(session);
+  if (sessions.count()>1)
+    m_detachSession->setEnabled(true);
+
+  if (m_menuCreated)
+    ra->plug(m_view);
+
+  int button_id=ra->itemId( ra->plug(toolBar()) );
+  KToolBarButton* ktb=toolBar()->getButton(button_id);  
+  connect(ktb,SIGNAL(doubleClicked(int)), this,SLOT(slotRenameSession(int)));
+  session2button.insert(session,ktb);
+
+  connect( session,SIGNAL(done(TESession*,int)),
+           this,SLOT(doneSession(TESession*,int)) );
+
+  connect( session,SIGNAL(updateTitle()), this,SLOT(updateTitle()) );
+  connect( session,SIGNAL(notifySessionState(TESession*,int)), this,SLOT(notifySessionState(TESession*,int)) );
+
+  connect( session,SIGNAL(clearAllListenToKeyPress()), this,SLOT(clearAllListenToKeyPress()) );
+  connect( session,SIGNAL(restoreAllListenToKeyPress()), this,SLOT(restoreAllListenToKeyPress()) );
+  connect( session,SIGNAL(renameSession(TESession*,const QString&)), this,SLOT(slotRenameSession(TESession*,const QString&)) );
+  connect( session->getEmulation(),SIGNAL(ImageSizeChanged(int,int)), this,SLOT(notifySize(int,int)));
+  connect( session->getEmulation(),SIGNAL(changeColumns(int)), this,SLOT(changeColumns(int)) );
+
+  activateSession(session);
+}
+
 void Konsole::slotRenameSession() {
 //  KONSOLEDEBUG << "slotRenameSession\n";
   KRadioAction *ra = session2action.find(se);
@@ -2101,7 +2228,6 @@ void Konsole::slotRenameSession(int) {
 void Konsole::slotRenameSession(TESession* ses, const QString &name)
 {
   KRadioAction *ra = session2action.find(ses);
-  ses->setTitle(name);
   ra->setText(name);
   ra->setIcon( ses->IconName() ); // I don't know why it is needed here
   if(ses->isMasterMode())

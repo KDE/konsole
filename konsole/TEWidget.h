@@ -54,7 +54,10 @@ public:
 
     bool blinkingCursor() { return hasBlinkingCursor; }
     void setBlinkingCursor(bool blink);
+
     void setCtrlDrag(bool enable) { ctrldrag=enable; }
+    bool ctrlDrag() { return ctrldrag; }
+
     void setLineSpacing(uint);
     uint lineSpacing() const;
 
@@ -76,8 +79,10 @@ public:
     QSize sizeHint() const;
 
     void setWordCharacters(QString wc);
+    QString wordCharacters() { return word_characters; }
 
     void setBellMode(int mode);
+    int isBellMode() { return bellMode; }
     enum { BELLNONE=0, BELLSYSTEM=1, BELLVISUAL=2 };
     void Bell();
 
@@ -94,6 +99,7 @@ public:
     TESession *currentSession;
 
     void setTerminalSizeHint(bool on) { terminalSizeHint=on; }
+    bool isTerminalSizeHint() { return terminalSizeHint; }
 
 public slots:
 

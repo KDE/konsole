@@ -18,7 +18,7 @@
     Sessions are combinations of TEPTy and Emulations.
 
     The stuff in here does not belong to the terminal emulation framework,
-    but to main.C. It serves it's duty by providing a single reference
+    but to main.cpp. It serves it's duty by providing a single reference
     to TEPTy/Emulation pairs. In fact, it is only there to demonstrate one
     of the abilities of the framework - multible sessions.
 */
@@ -50,6 +50,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, QStrList & _args, const
   sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
   //kdDebug(1211)<<"TESession ctor() connecting"<<endl;
   connect( sh,SIGNAL(block_in(const char*,int)),em,SLOT(onRcvBlock(const char*,int)) );
+
   connect( em,SIGNAL(ImageSizeChanged(int,int)),sh,SLOT(setSize(int,int)));
   connect( em,SIGNAL(sndBlock(const char*,int)),sh,SLOT(send_bytes(const char*,int)) );
 
@@ -65,7 +66,11 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, QStrList & _args, const
   //kdDebug(1211)<<"TESession ctor() done"<<endl;
 }
 
-
+void TESession::changeWidget(TEWidget* w)
+{
+  te=w;
+  em->changeGUI(w);
+}
 
 void TESession::run()
 {
@@ -160,6 +165,7 @@ void TESession::sendSession(const QString &text)
 
 void TESession::renameSession(const QString &name)
 {
+  title=name;
   emit renameSession(this,name);
 }
 
