@@ -130,7 +130,6 @@ private slots:
   void sendSignal(int n);
   void slotToggleToolbar();
   void slotToggleMenubar();
-  void slotToggleFrame();
   void slotRenameSession();
   void slotRenameSession(int);
   void slotRenameSession(TESession* ses, const QString &name);
@@ -141,15 +140,15 @@ private slots:
   void slotClearHistory();
   void slotFindHistory();
   void slotSaveHistory();
-  void slotWordSeps();
   void slotSelectBell();
   void slotSelectSize();
   void slotSelectFont();
   void slotSelectScrollbar();
-  void slotSelectLineSpacing();
-  void slotBlinkingCursor();
-  void slotWarnQuit();
   void loadScreenSessions();
+  
+  void slotSaveSettings();
+  void slotConfigure();
+  void reparseConfiguration();
 
   void clearAllListenToKeyPress();
   void restoreAllListenToKeyPress();
@@ -163,7 +162,7 @@ private slots:
 private:
   KSimpleConfig *defaultSession();
   QString newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(), const QString &_term = QString::null, const QString &_icon = QString::null, const QString &_title = QString::null);
-  void readProperties(KConfig *config, const QString &schema);
+  void readProperties(KConfig *config, const QString &schema, bool globalConfigOnly);
   void applySettingsToGUI();
   void makeBasicGUI();
   void runSession(TESession* s);
@@ -217,22 +216,17 @@ private:
   KToggleAction *showToolbar;
   KToggleAction *showMenubar;
   KToggleAction *showScrollbar;
-  KToggleAction *showFrame;
 
   KSelectAction *selectSize;
   KSelectAction *selectFont;
   KSelectAction *selectScrollbar;
   KSelectAction *selectBell;
-  KSelectAction *selectLineSpacing;
 
   KAction       *m_clearHistory;
   KAction       *m_findHistory;
   KAction       *m_saveHistory;
   KAction       *m_moveSessionLeft;
   KAction       *m_moveSessionRight;
-
-  KToggleAction *blinkingCursor;
-  KToggleAction *warnQuit;                      // Warn when closing this session on quit
 
   KEdFind* m_finddialog;
   bool     m_find_first;
@@ -269,10 +263,10 @@ private:
   bool        m_menuCreated:1;
   bool        skip_exit_query:1;
   bool        b_warnQuit:1;
-  bool        isRestored;
+  bool        isRestored:1;
 
-  unsigned int m_histSize;
   bool         b_histEnabled:1;
+  unsigned int m_histSize;
 };
 
 class QSpinBox;

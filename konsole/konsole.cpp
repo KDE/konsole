@@ -193,7 +193,6 @@ DCOPObject( "konsole" )
 ,showToolbar(0)
 ,showMenubar(0)
 ,showScrollbar(0)
-,showFrame(0)
 ,selectSize(0)
 ,selectFont(0)
 ,selectScrollbar(0)
@@ -203,8 +202,6 @@ DCOPObject( "konsole" )
 ,m_saveHistory(0)
 ,m_moveSessionLeft(0)
 ,m_moveSessionRight(0)
-,blinkingCursor(0)
-,warnQuit(0)
 ,m_finddialog(0)
 ,m_find_pattern("")
 ,cmd_serial(0)
@@ -221,8 +218,8 @@ DCOPObject( "konsole" )
 ,m_menuCreated(false)
 ,skip_exit_query(false) // used to skip the query when closed by the session management
 ,b_warnQuit(false)
-,m_histSize(DEFAULT_HISTORY_SIZE)
 ,b_histEnabled(true)
+,m_histSize(DEFAULT_HISTORY_SIZE)
 {
   isRestored = b_inRestore;
   connect( kapp,SIGNAL(backgroundChanged(int)),this, SLOT(slotBackgroundChanged(int)));
@@ -275,7 +272,7 @@ DCOPObject( "konsole" )
   co->setDesktopGroup();
   QString schema = co->readEntry("Schema");
   //KONSOLEDEBUG << "my Looking for schema " << schema << endl;
-  readProperties(config, schema);
+  readProperties(config, schema, false);
   //KONSOLEDEBUG<<"Konsole ctor() after readProps "<<time.elapsed()<<" msecs elapsed"<<endl;
   //KONSOLEDEBUG<<"Konsole ctor(): toolbar"<<endl;
 
@@ -457,11 +454,6 @@ void Konsole::makeGUI()
                                      SLOT( slotToggleToolbar() ), this );
    showToolbar->plug(m_options);
 
-   // Frame on/off
-   showFrame = new KToggleAction(i18n("Show &Frame"), 0,
-                                 this, SLOT(slotToggleFrame()), this);
-   showFrame->plug(m_options);
-
    // Scrollbar
    selectScrollbar = new KSelectAction(i18n("Scro&llbar"), 0, this,
                                        SLOT(slotSelectScrollbar()), this);
@@ -471,7 +463,6 @@ void Konsole::makeGUI()
    selectScrollbar->plug(m_options);
 
    // Fullscreen
-   m_options->insertSeparator();
    m_options->insertItem( SmallIconSet( "window_fullscreen" ), i18n("F&ull-Screen"), 5);
    m_options->setItemChecked(5,b_fullscreen);
    m_options->insertSeparator();
@@ -513,14 +504,6 @@ void Konsole::makeGUI()
    selectSize->setItems(sizeitems);
    selectSize->plug(m_options);
 
-   m_options->insertSeparator();
-
-   KAction *historyType = new KAction(i18n("&History..."), "history", 0, this,
-                                      SLOT(slotHistoryType()), this);
-   historyType->plug(m_options);
-
-   m_options->insertSeparator();
-
    // Select Bell
    selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), 0 , this,
                                   SLOT(slotSelectBell()), this);
@@ -531,50 +514,20 @@ void Konsole::makeGUI()
    selectBell->setItems(bellitems);
    selectBell->plug(m_options);
 
-   // Select line spacing.
-   selectLineSpacing =
-     new KSelectAction
-     (
-      i18n("Li&ne Spacing"),
-      SmallIconSet("leftjust"), // Non-code hack.
-      0,
-      this,
-      SLOT(slotSelectLineSpacing()),
-      this
-     );
-
-   QStringList lineSpacingList;
-
-   lineSpacingList
-     << i18n("&0")
-     << i18n("&1")
-     << i18n("&2")
-     << i18n("&3")
-     << i18n("&4")
-     << i18n("&5")
-     << i18n("&6")
-     << i18n("&7")
-     << i18n("&8");
-
-   selectLineSpacing->setItems(lineSpacingList);
-   selectLineSpacing->plug(m_options);
-
-   blinkingCursor = new KToggleAction (i18n("Blinking &Cursor"),
-                                 0, this,SLOT(slotBlinkingCursor()), this);
-   blinkingCursor->plug(m_options);
-
-   // Open Session Warning on Quit
-   warnQuit = new KToggleAction (i18n("&Warn for Open Sessions on Quit"),
-                                 0, this,SLOT(slotWarnQuit()), this);
-
-   warnQuit->plug (m_options);
-
-   KAction *WordSeps = new KAction(i18n("Wor&d Connectors..."), 0, this,
-                                   SLOT(slotWordSeps()), this);
-   WordSeps->plug(m_options);
+   KAction *historyType = new KAction(i18n("&History..."), "history", 0, this,
+                                      SLOT(slotHistoryType()), this);
+   historyType->plug(m_options);
 
    m_options->insertSeparator();
-   m_options->insertItem( SmallIconSet( "filesave" ), i18n("Save &Settings"), 8);
+
+   KAction *save_settings = KStdAction::saveOptions(this, SLOT(slotSaveSettings()), this);
+   save_settings->plug(m_options);
+
+   m_options->insertSeparator();
+   
+   KAction *configure = KStdAction::preferences(this, SLOT(slotConfigure()), this);
+   configure->plug(m_options);
+   
    m_options->insertTearOffHandle();
 
    connect(m_options, SIGNAL(activated(int)), SLOT(opt_menu_activated(int)));
@@ -741,16 +694,6 @@ bool Konsole::queryClose()
     return true;
 }
 
-void Konsole::slotBlinkingCursor()
-{
-  te->setBlinkingCursor(blinkingCursor->isChecked());
-}
-
-void Konsole::slotWarnQuit()
-{
-   b_warnQuit=warnQuit->isChecked();
-};
-
 /**
     sets application window to a size based on columns X lines of the te
     guest widget. Call with (0,0) for setting default size.
@@ -843,20 +786,15 @@ void Konsole::saveProperties(KConfig* config) {
   }
   config->setDesktopGroup();
   config->writeEntry("history",b_scroll);
-  config->writeEntry("has frame",b_framevis);
   config->writeEntry("Fullscreen",b_fullscreen);
   config->writeEntry("font",n_defaultFont);
   config->writeEntry("defaultfont", defaultFont);
   config->writeEntry("schema",s_kconfigSchema);
-  config->writeEntry("wordseps",s_word_seps);
   config->writeEntry("scrollbar",n_scroll);
   config->writeEntry("bellmode",n_bell);
   config->writeEntry("keytab",n_defaultKeytab);
-  config->writeEntry("BlinkingCursor", te->blinkingCursor());
-  config->writeEntry("WarnQuit", b_warnQuit);
   config->writeEntry("ActiveSession", active);
   config->writeEntry("DefaultSession", m_defaultSessionFilename);
-  config->writeEntry("LineSpacing", te->lineSpacing());
 
   if (se) {
     config->writeEntry("history", se->history().getSize());
@@ -872,95 +810,104 @@ void Konsole::saveProperties(KConfig* config) {
 // So it has to apply the settings when reading them.
 void Konsole::readProperties(KConfig* config)
 {
-    readProperties(config, QString::null);
+    readProperties(config, QString::null, false);
 }
 
 // If --type option was given, load the corresponding schema instead of
 // default
-void Konsole::readProperties(KConfig* config, const QString &schema)
+//
+// When globalConfigOnly is true only the options that are shared among all 
+// konsoles are being read.
+void Konsole::readProperties(KConfig* config, const QString &schema, bool globalConfigOnly)
 {
    config->setDesktopGroup();
    //KONSOLEDEBUG<<"Konsole::readProps()"<<endl;
-   /*FIXME: (merging) state of material below unclear.*/
-   b_scroll = config->readBoolEntry("history",TRUE);
-   te->setBlinkingCursor(config->readBoolEntry("BlinkingCursor",FALSE));
+
+   if (!globalConfigOnly)
+   {
+      b_scroll = config->readBoolEntry("history",TRUE);
+      n_defaultKeytab=config->readNumEntry("keytab",0); // act. the keytab for this session
+      b_fullscreen = config->readBoolEntry("Fullscreen",FALSE);
+      n_defaultFont = n_font = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
+      n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
+      n_bell = QMIN(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),2);
+   }
+
    b_warnQuit=config->readBoolEntry( "WarnQuit", TRUE );
-   n_defaultKeytab=config->readNumEntry("keytab",0); // act. the keytab for this session
-   b_fullscreen = config->readBoolEntry("Fullscreen",FALSE);
-   n_defaultFont = n_font = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
-   n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
-   n_bell = QMIN(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),2);
    s_word_seps= config->readEntry("wordseps",":@-./_~");
    b_framevis = config->readBoolEntry("has frame",TRUE);
+   te->setBlinkingCursor(config->readBoolEntry("BlinkingCursor",FALSE));
 
-   // Global options ///////////////////////
+   ColorSchema* sch = 0;
 
-   // Options that should be applied to all sessions /////////////
-   // (1) set menu items and Konsole members
-   QFont tmpFont("fixed");
-   defaultFont = config->readFontEntry("defaultfont", &tmpFont);
-   setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT));
-
-   //set the schema
-   s_kconfigSchema=config->readEntry("schema", "");
-   ColorSchema* sch = colors->find(schema.isEmpty() ? s_kconfigSchema : schema);
-   if (!sch)
+   if (!globalConfigOnly)
    {
-      kdWarning() << "Could not find schema named " <<s_kconfigSchema<< endl;
-      sch=(ColorSchema*)colors->at(0);  //the default one
-   }
-   if (sch->hasSchemaFileChanged()) sch->rereadSchemaFile();
-   s_schema = sch->relPath();
-   curr_schema = sch->numb();
-   pmPath = sch->imagePath();
-   te->setColorTable(sch->table()); //FIXME: set twice here to work around a bug
+      // Options that should be applied to all sessions /////////////
+      // (1) set menu items and Konsole members
+      QFont tmpFont("fixed");
+      defaultFont = config->readFontEntry("defaultfont", &tmpFont);
+      setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT));
 
-   if (sch->useTransparency())
-   {
-      //KONSOLEDEBUG << "Setting up transparency" << endl;
-      rootxpm->setFadeEffect(sch->tr_x(), QColor(sch->tr_r(), sch->tr_g(), sch->tr_b()));
-      rootxpm->start();
-      rootxpm->repaint(true);
+      //set the schema
+      s_kconfigSchema=config->readEntry("schema", "");
+      sch = colors->find(schema.isEmpty() ? s_kconfigSchema : schema);
+      if (!sch)
+      {
+         kdWarning() << "Could not find schema named " <<s_kconfigSchema<< endl;
+         sch=(ColorSchema*)colors->at(0);  //the default one
+      }
+      if (sch->hasSchemaFileChanged()) sch->rereadSchemaFile();
+      s_schema = sch->relPath();
+      curr_schema = sch->numb();
+      pmPath = sch->imagePath();
+      te->setColorTable(sch->table()); //FIXME: set twice here to work around a bug
+
+      if (sch->useTransparency())
+      {
+         //KONSOLEDEBUG << "Setting up transparency" << endl;
+         rootxpm->setFadeEffect(sch->tr_x(), QColor(sch->tr_r(), sch->tr_g(), sch->tr_b()));
+         rootxpm->start();
+         rootxpm->repaint(true);
+      }
+      else
+      {
+         //KONSOLEDEBUG << "Stopping transparency" << endl;
+         rootxpm->stop();
+         pixmap_menu_activated(sch->alignment());
+      }
    }
-   else
-   {
-      //KONSOLEDEBUG << "Stopping transparency" << endl;
-      rootxpm->stop();
-      pixmap_menu_activated(sch->alignment());
-   }
+   
    //KONSOLEDEBUG << "Doing the rest" << endl;
 
    te->setTerminalSizeHint( config->readBoolEntry("TerminalSizeHint",true) );
    te->setLineSpacing( config->readUnsignedNumEntry( "LineSpacing", 0 ) );
-   te->setScrollbarLocation(n_scroll);
-   te->setBellMode(n_bell);
    te->setWordCharacters(s_word_seps);
    te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
-   te->setColorTable(sch->table());
 
-   // History
-   m_histSize = config->readNumEntry("history",DEFAULT_HISTORY_SIZE);
-   b_histEnabled = config->readBoolEntry("historyenabled",true);
-   //KONSOLEDEBUG << "Hist size : " << m_histSize << endl;
+   if (!globalConfigOnly)
+   {
+      te->setColorTable(sch->table());
+      te->setScrollbarLocation(n_scroll);
+      te->setBellMode(n_bell);
+
+      // History
+      m_histSize = config->readNumEntry("history",DEFAULT_HISTORY_SIZE);
+      b_histEnabled = config->readBoolEntry("historyenabled",true);
+      //KONSOLEDEBUG << "Hist size : " << m_histSize << endl;
+   }
 
    if (m_menuCreated)
    {
       applySettingsToGUI();
       activateSession();
    };
-
 //   setFullScreen(b_fullscreen);
-
 }
 
 void Konsole::applySettingsToGUI()
 {
    if (!m_menuCreated) return;
-   blinkingCursor->setChecked(te->blinkingCursor());
-   warnQuit->setChecked ( b_warnQuit );
-   showFrame->setChecked( b_framevis );
    selectFont->setCurrentItem(n_font);
-   selectLineSpacing->setCurrentItem(te->lineSpacing());
    notifySize(te->Lines(),te->Columns());
    showToolbar->setChecked(!toolBar()->isHidden());
    showMenubar->setChecked(!menuBar()->isHidden());
@@ -1029,12 +976,6 @@ void Konsole::slotSelectScrollbar() {
       n_scroll = selectScrollbar->currentItem();
    te->setScrollbarLocation(n_scroll);
    activateSession(); // maybe helps in bg
-}
-
-
-void Konsole::slotSelectLineSpacing()
-{
-  te->setLineSpacing( selectLineSpacing->currentItem() );
 }
 
 void Konsole::slotSelectFont() {
@@ -1174,30 +1115,34 @@ void Konsole::slotToggleToolbar() {
      toolBar()->hide();
 }
 
-/**
-    Toggle the Frame visibility
- */
-void Konsole::slotToggleFrame() {
-  b_framevis = showFrame->isChecked();
-  te->setFrameStyle( b_framevis
-                     ? ( QFrame::WinPanel | QFrame::Sunken )
-                     : QFrame::NoFrame );
-}
-
-
 void Konsole::opt_menu_activated(int item)
 {
   switch( item )  {
     case 5: setFullScreen(!b_fullscreen);
             break;
-    case 8:
-            KConfig *config = KGlobal::config();
-            config->setDesktopGroup();
-            saveProperties(config);
-            saveMainWindowSettings(config);
-            config->sync();
-            break;
   }
+}
+
+void Konsole::slotSaveSettings()
+{
+  KConfig *config = KGlobal::config();
+  config->setDesktopGroup();
+  saveProperties(config);
+  saveMainWindowSettings(config);
+  config->sync();
+}
+
+void Konsole::slotConfigure()
+{
+  QStringList args;
+  args << "kcmkonsole";
+  KApplication::kdeinitExec( "kcmshell", args );
+}
+
+void Konsole::reparseConfiguration()
+{
+  KGlobal::config()->reparseConfiguration();
+  readProperties(KGlobal::config(), QString::null, true);
 }
 
 // --| color selection |-------------------------------------------------------
@@ -2341,17 +2286,6 @@ unsigned int SizeDialog::lines() const
 }
 
 //////////////////////////////////////////////////////////////////////
-
-
-void Konsole::slotWordSeps() {
-//  KONSOLEDEBUG << "Konsole::slotWordSeps\n";
-  KLineEditDlg dlg(i18n("Characters other than alphanumerics considered part of a word when double clicking"),s_word_seps, this);
-  dlg.setCaption(i18n("Word Connectors"));
-  if (dlg.exec()) {
-    s_word_seps = dlg.text();
-    te->setWordCharacters(s_word_seps);
-  }
-}
 
 void Konsole::slotBackgroundChanged(int desk)
 {

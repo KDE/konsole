@@ -23,7 +23,8 @@ class KonsoleIface : virtual public DCOPObject
     virtual void prevSession() = 0;
     virtual void moveSessionLeft() = 0;
     virtual void moveSessionRight() = 0;
-    virtual void setFullScreen(bool on) =0;
+    virtual void setFullScreen(bool on) = 0;
+    virtual ASYNC reparseConfiguration() = 0;
 };
 
 #endif // KONSOLEIFACE_H
