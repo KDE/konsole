@@ -372,57 +372,62 @@ TEWidget::~TEWidget()
 void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
                            QString& str, ca attr, bool pm, bool clear)
 {
-  QColor fColor=(((attr.r & RE_CURSOR) && hasFocus() && (!hasBlinkingCursor || !cursorBlinking)) ? color_table[attr.b].color : color_table[attr.f].color);
-  QColor bColor=(((attr.r & RE_CURSOR) && hasFocus() && (!hasBlinkingCursor || !cursorBlinking)) ? color_table[attr.f].color : color_table[attr.b].color);
+  int a = (font_h+font_a)/2;
+  QColor fColor = color_table[attr.f].color;
 
   if (attr.r & RE_CURSOR)
     cursorRect = rect;
 
-  if (pm && color_table[attr.b].transparent && (!(attr.r & RE_CURSOR) || cursorBlinking))
+  // Paint background
+  if (color_table[attr.b].transparent)
   {
-    paint.setBackgroundMode( TransparentMode );
+    if (pm)
+       paint.setBackgroundMode( TransparentMode );
     if (clear) erase(rect);
   }
   else
   {
-    if (blinking)
-      paint.fillRect(rect, bColor);
+    paint.fillRect(rect, color_table[attr.b].color);
+  }
+
+  // Paint cursor
+  if ((attr.r & RE_CURSOR)) {
+    paint.setBackgroundMode( TransparentMode );
+    int h = font_h - m_lineSpacing;
+    QRect r(rect.x(),rect.y()+a-font_a,rect.width(),h);
+    if (hasFocus())
+    {
+       if (!cursorBlinking)
+       {
+          paint.fillRect(r, color_table[attr.f].color);
+          fColor = color_table[attr.b].color;
+       }
+    }
     else
     {
-      paint.setBackgroundMode( OpaqueMode );
-      paint.setBackgroundColor( bColor );
+       paint.setPen(fColor);
+       paint.drawRect(r);
     }
   }
+
+  // Paint text
   if (!(blinking && (attr.r & RE_BLINK)))
   {
-    if ((attr.r && RE_CURSOR) && cursorBlinking)
-      erase(rect);
     paint.setPen(fColor);
-    paint.drawText(rect.x(),rect.y()+font_a, str, -1, QPainter::LTR);
+    paint.drawText(rect.x(),rect.y()+a, str, -1, QPainter::LTR);
     if ((attr.r & RE_UNDERLINE) || color_table[attr.f].bold)
     {
       paint.setClipRect(rect);
       if (color_table[attr.f].bold)
       {
         paint.setBackgroundMode( TransparentMode );
-        paint.drawText(rect.x()+1,rect.y()+font_a, str, -1, QPainter::LTR); // second stroke
+        paint.drawText(rect.x()+1,rect.y()+a, str, -1, QPainter::LTR); // second stroke
       }
       if (attr.r & RE_UNDERLINE)
-        paint.drawLine(rect.left(), rect.y()+font_a+1,
-                       rect.right(),rect.y()+font_a+1 );
+        paint.drawLine(rect.left(), rect.y()+a+1,
+                       rect.right(),rect.y()+a+1 );
       paint.setClipping(false);
     }
-  }
-  if ((attr.r & RE_CURSOR) && !hasFocus()) {
-    if (pm && color_table[attr.b].transparent)
-    {
-      erase(rect);
-      paint.setBackgroundMode( TransparentMode );
-      paint.drawText(rect.x(),rect.y()+font_a, str, -1, QPainter::LTR);
-    }
-    paint.setClipRect(rect);
-    paint.drawRect(rect.x(),rect.y(),rect.width(),rect.height()-m_lineSpacing);
-    paint.setClipping(false);
   }
 }
 
@@ -657,7 +662,7 @@ void TEWidget::blinkEvent()
 void TEWidget::blinkCursorEvent()
 {
   cursorBlinking = !cursorBlinking;
-  repaint(cursorRect, false);
+  repaint(cursorRect, true);
 }
 
 /* ------------------------------------------------------------------------- */
@@ -1191,7 +1196,7 @@ void TEWidget::focusInEvent( QFocusEvent * )
 
 void TEWidget::focusOutEvent( QFocusEvent * )
 {
-  repaint(cursorRect, false);  // don't erase area
+  repaint(cursorRect, true);  // don't erase area
 }
 
 bool TEWidget::focusNextPrevChild( bool next )
