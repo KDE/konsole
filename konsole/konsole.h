@@ -44,7 +44,7 @@
 #undef PACKAGE
 #undef VERSION
 #define PACKAGE "konsole"
-#define VERSION "1.2.1"
+#define VERSION "1.2.2"
 
 class KRootPixmap;
 class QCheckBox;
