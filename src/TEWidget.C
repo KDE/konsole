@@ -342,8 +342,7 @@ HCNT("paintEvent");
 
   for (int y = luy; y <= rly; y++)
   for (int x = lux; x <= rlx; x++)
-  char *disstr = 0;
-  { disstr = char char[columns]; int len = 1;
+  { char *disstr = new char[columns]; int len = 1;
     disstr[0] = image[loc(x,y)].c; 
     int cf = image[loc(x,y)].f;
     int cb = image[loc(x,y)].b;
@@ -359,8 +358,8 @@ HCNT("paintEvent");
                 QRect(blX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
                 disstr, len, image[loc(x,y)], pm != NULL);
     x += len - 1;
+    delete disstr;
   }
-  delete disstr;
   drawFrame( &paint );
   paint.end();
   setUpdatesEnabled(TRUE);
