@@ -79,7 +79,7 @@ Q_OBJECT
   protected slots:
       void dataReceived(KProcess *, char *buf, int len);
   public slots:
-      void donePty(KProcess *);
+      void donePty();
       
   private:
     void appendSendJob(const char* s, int len);
