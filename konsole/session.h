@@ -34,7 +34,7 @@ public:
 
   TESession(TEWidget* w,
             const QString &pgm, const QStrList & _args,
-	    const QString &term, const QString &sessionId="session-1",
+	    const QString &term, ulong winId, const QString &sessionId="session-1",
 	    const QString &initial_cwd = QString::null);
   void changeWidget(TEWidget* w);
   ~TESession();
@@ -179,6 +179,7 @@ private:
   QStrList       args;
 
   QString        term;
+  ulong          winId;
   QString        sessionId;
 
   QString        cwd;

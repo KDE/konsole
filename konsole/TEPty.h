@@ -40,7 +40,7 @@ Q_OBJECT
      * the necessary connections to the signals and slots of the
      * instance before starting the execution of the client.
      */
-    int run( const char* pgm, QStrList & args, const char* term, bool _addutmp,
+    int run( const char* pgm, QStrList & args, const char* term, ulong winid, bool _addutmp,
              const char* konsole_dcop = "", const char* konsole_dcop_session = "" );
     void setWriteable(bool writeable);
     QString error() { return m_strError; }

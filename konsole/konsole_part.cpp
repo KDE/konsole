@@ -987,7 +987,7 @@ void konsolePart::startProgram( const QString& program,
                                 const QStrList& args )
 {
   if ( se ) delete se;
-  se = new TESession(te, program, args, "xterm");
+  se = new TESession(te, program, args, "xterm", parentWidget->winId());
   connect( se,SIGNAL(done(TESession*)),
            this,SLOT(doneSession(TESession*)) );
   connect( se,SIGNAL(openURLRequest(const QString &)),

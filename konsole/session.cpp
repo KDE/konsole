@@ -28,7 +28,7 @@
     of the abilities of the framework - multible sessions.
 */
 
-TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args, const QString &_term,const QString &_sessionId, const QString &_initial_cwd)
+TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args, const QString &_term, ulong _winId, const QString &_sessionId, const QString &_initial_cwd)
    : DCOPObject( _sessionId.latin1() )
    , connected(true)
    , monitorActivity(false)
@@ -64,6 +64,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
                    this,SLOT(onFontMetricChange(int,int)));
 
   term = _term;
+  winId = _winId;
   iconName = "openterm";
   iconText = kapp->caption();
 
@@ -121,7 +122,7 @@ void TESession::run()
   if (!initial_cwd.isEmpty())
      QDir::setCurrent(initial_cwd);
   sh->setXonXoff(xon_xoff);
-  sh->run(QFile::encodeName(pgm),args,term.latin1(), add_to_utmp,
+  sh->run(QFile::encodeName(pgm), args, term.latin1(), winId, add_to_utmp,
           ("DCOPRef("+appId+",konsole)").latin1(),
           ("DCOPRef("+appId+","+sessionId+")").latin1());
   if (!initial_cwd.isEmpty())

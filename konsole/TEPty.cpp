@@ -96,7 +96,7 @@ void TEPty::setXonXoff(bool on)
 /*!
     start the client program.
 */
-int TEPty::run(const char* _pgm, QStrList & _args, const char* _term, bool _addutmp,
+int TEPty::run(const char* _pgm, QStrList & _args, const char* _term, ulong winid, bool _addutmp,
                const char* _konsole_dcop, const char* _konsole_dcop_session)
 {
   clearArguments();
@@ -107,12 +107,13 @@ int TEPty::run(const char* _pgm, QStrList & _args, const char* _term, bool _addu
   for (; it.current(); ++it )
     arguments.append(it.current());
 
-  if (_term && _term[0]) 
+  if (_term && _term[0])
      setEnvironment("TERM",_term);
-  if (_konsole_dcop && _konsole_dcop[0]) 
+  if (_konsole_dcop && _konsole_dcop[0])
      setEnvironment("KONSOLE_DCOP",_konsole_dcop);
-  if (_konsole_dcop_session && _konsole_dcop_session[0]) 
+  if (_konsole_dcop_session && _konsole_dcop_session[0])
      setEnvironment("KONSOLE_DCOP_SESSION", _konsole_dcop_session);
+  setEnvironment("WINDOWID", QString::number(winid));
 
   setUsePty(All, _addutmp);
 
