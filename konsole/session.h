@@ -67,10 +67,10 @@ public:
   void setTitle(const QString& _title);
   void setIconName(const QString& _iconName);
   void setIconText(const QString& _iconText);
-  void sendSignal(int signal);
+  bool sendSignal(int signal);
 
   // Additional functions for DCOP
-  void closeSession();
+  bool closeSession();
   void feedSession(const QString &text);
   void sendSession(const QString &text);
   void renameSession(const QString &name);

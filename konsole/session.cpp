@@ -131,14 +131,14 @@ void TESession::notifySessionState(int state)
   emit notifySessionState(this, state);
 }
 
-void TESession::sendSignal(int signal)
+bool TESession::sendSignal(int signal)
 {
-  sh->kill(signal);
+  return sh->kill(signal);
 }
 
-void TESession::closeSession()
+bool TESession::closeSession()
 {
-  sendSignal(SIGHUP);
+  return sendSignal(SIGHUP);
 }
 
 void TESession::feedSession(const QString &text)

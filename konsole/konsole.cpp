@@ -712,11 +712,17 @@ bool Konsole::queryClose()
     if (!skip_exit_query && sessions.count())
     {
         sessions.first();
+        bool allOK=true;
         while(sessions.current())
         {
-            sessions.current()->sendSignal(SIGHUP);
+ 	    if (!sessions.current()->sendSignal(SIGHUP))
+              allOK=false;
             sessions.next();
         }
+        if (!allOK)
+          KMessageBox::information( this, i18n("Not all sessions could be closed. "
+                                               "Please end all sessions running under other user IDs. "
+                                               "In most cases typing 'exit' at the prompt will end them.") );
         return false;
     }
     // If there is no warning requested or required or if warnQuit is a NULL
