@@ -2,6 +2,7 @@
 - minor bug fixes integrated
 - xterm color schema added
 - linux color schema added
+- linux8x8.pcf.gz added
 01 Nov 1998
 - minor bugs fixed to handle unexpected or incomplete installations
   and broken configuration scrips better.

@@ -53,7 +53,8 @@
 
 #define WITH_VGA
 
-char *fonts[] = {"6x13", "5x7", "6x10", "7x13", "9x15", "10x20", "linux8x16"}; //"vga"};
+char *fonts[] = {"6x13", "5x7", "6x10", "7x13", "9x15", "10x20", 
+                 "linux8x16", "linux8x8" };
 
 static QIntDict<TESession> no2session;
 static QPtrDict<void>      session2no;
@@ -194,10 +195,9 @@ void TEDemo::makeMenu()
   m_font->insertItem( i18n("&Medium"), 3);
   m_font->insertItem( i18n("&Large"),  4);
   m_font->insertItem( i18n("&Huge"),   5);
-#ifdef WITH_VGA
   m_font->insertSeparator();
   m_font->insertItem( i18n("&Linux"),  6);
-#endif
+  m_font->insertItem( i18n("Linux (small)"),7);
 #ifdef ANY_FONT
   m_font->insertSeparator();
   m_font->insertItem( i18n("&More ..."), 1000); // for other fonts
@@ -292,7 +292,7 @@ void TEDemo::readProperties(KConfig* config)
   b_menuvis  = config->readBoolEntry("menubar visible",TRUE);
   b_framevis = config->readBoolEntry("has frame",TRUE);
   b_bshack   = config->readBoolEntry("BS hack",TRUE);
-  n_font     = MIN(config->readUnsignedNumEntry("font",3),6);
+  n_font     = MIN(config->readUnsignedNumEntry("font",3),7);
   n_scroll   = MIN(config->readUnsignedNumEntry("scrollbar",SCRRIGHT),2);
   s_schema   = config->readEntry("schema","");
   lincol0    = config->readSizeEntry("size",&dftSize); //FIXME: to be replaced by window size
@@ -571,7 +571,7 @@ void TEDemo::newSession(int i)
   QString emu = co->readEntry("Term");
   QString sch = co->readEntry("Schema");
   QString txt = co->readEntry("Comment"); // not null
-  int     fno = MIN(co->readUnsignedNumEntry("Font",se->fontNo()),6);
+  int     fno = MIN(co->readUnsignedNumEntry("Font",se->fontNo()),7);
 
   ColorSchema* schema = sch.isEmpty()
                       ? (ColorSchema*)NULL

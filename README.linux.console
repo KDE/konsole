@@ -12,7 +12,7 @@ To get proper support of graphic characters, you need a linux console
 font being installed. Proceed as follows:
 
 |
-|     cp konsole/other/linux8x16.pcf.gz /usr/X11R6/lib/X11/fonts/misc
+|     cp konsole/other/linux*.pcf.gz /usr/X11R6/lib/X11/fonts/misc
 |     mkfontdir /usr/X11R6/lib/X11/fonts/misc
 |     xset fp rehash
 |
