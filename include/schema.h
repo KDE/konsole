@@ -59,7 +59,7 @@ class KConfig;
 
 class ColorSchema
 {
-friend class ColorSchemaList;
+friend class ColorSchemaList; //only for resetting serial to one when deleting the list
 
 public:
 	/**
@@ -110,6 +110,13 @@ public:
 	*/
 	static QString colorName(int i);
 
+	/**
+	* Update the timestamp in the color schema indicating
+	* when the schema's file whas last checked and read.
+	*/
+	void updateLastRead(const QDateTime& dt);
+
+
 protected:
 	/**
 	* Clear a schema. Used by constructors to clean up the
@@ -123,11 +130,6 @@ protected:
 	*/
 	void setDefaultSchema();
 
-	/**
-	* Update the timestamp in the color schema indicating
-	* when the schema's file whas last checked and read.
-	*/
-	void updateLastRead(const QDateTime& dt);
 
 	/**
 	* Write a single ColorEntry to the config file
@@ -143,26 +145,33 @@ protected:
 		const QString& name,
 		ColorEntry& e) ;
 
-private:
-	QString		fPath;		// Pathname to schema or config file
-	QDateTime	*lastRead;	// Time last checked for updates
-	static int	serial;		// Serial number so that every 
-					// ColorSchema has a unique number.
+   public:
+      int numb()                       {if (!m_fileRead) rereadSchemaFile();return m_numb;};
+      const QString& title()           {if (!m_fileRead) rereadSchemaFile();return m_title;};
+      const QString& imagePath()       {if (!m_fileRead) rereadSchemaFile();return m_imagePath;};
+      int alignment()                  {if (!m_fileRead) rereadSchemaFile();return m_alignment;};
+      const ColorEntry* table()        {if (!m_fileRead) rereadSchemaFile();return m_table;};
+      bool useTransparency()           {if (!m_fileRead) rereadSchemaFile();return m_useTransparency;};
+      double tr_x()                    {if (!m_fileRead) rereadSchemaFile();return m_tr_x;};
+      int tr_r()                       {if (!m_fileRead) rereadSchemaFile();return m_tr_r;};
+      int tr_g()                       {if (!m_fileRead) rereadSchemaFile();return m_tr_g;};
+      int tr_b()                       {if (!m_fileRead) rereadSchemaFile();return m_tr_b;};
+      QDateTime* getLastRead()   {return lastRead;};	// Time last checked for updates
 
-// All these members are (still) public because
-// ColorSchema started life as a struct instead
-// of a class.
-//
-//
-public:
-  int        numb;
-  QString    title;
-  QString    imagepath;
-  int        alignment;
-  ColorEntry table[TABLE_COLORS];
-  bool       usetransparency;
-  double     tr_x;
-  int	     tr_r, tr_g, tr_b;
+   private:
+      int        m_numb;
+      int	     m_tr_r, m_tr_g, m_tr_b;
+      int        m_alignment;
+      QString    m_title;
+      QString    m_imagePath;
+      ColorEntry m_table[TABLE_COLORS];
+      bool       m_useTransparency:1;
+      bool       m_fileRead:1;
+      double     m_tr_x;
+      QString		fPath;		// Pathname to schema or config file
+      QDateTime	*lastRead;	// Time last checked for updates
+      static int	serial;		// Serial number so that every
+      // ColorSchema has a unique number.
 };
 
 class ColorSchemaList : protected QList<ColorSchema>
@@ -180,7 +189,7 @@ public:
 
 public:
 	ColorSchemaList();
-
+   virtual ~ColorSchemaList();
 	/**
 	* Check if any new color schema files have been added since
 	* the last time checkSchemas() was called. Any new files

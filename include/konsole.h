@@ -50,6 +50,16 @@ public:
   void setColLin(int columns, int lines);
   void setFullScreen(bool on);
 
+protected:
+
+ bool queryClose();
+ void saveProperties(KConfig* config);
+ void readProperties(KConfig* config);
+ void saveGlobalProperties(KConfig* config);
+ void readGlobalProperties(KConfig* config);
+
+ void showFullScreen();
+
 private slots:
   void slotBackgroundChanged(int desk);
   void configureRequest(TEWidget*,int,int,int);
@@ -63,7 +73,8 @@ private slots:
   void schema_menu_check();
   void tecRef();
   void newSession();
-  void newSessionSelect();
+  //what's this intended for ? aleXXX
+  //void newSessionSelect();
   void newSession(int kind);
   void updateSchemaMenu();
 
@@ -74,20 +85,6 @@ private slots:
   void prevSession();
   void nextSession();
   void allowPrevNext();
-
-protected:
-
- bool queryClose();
- void saveProperties(KConfig* config);
- void readProperties(KConfig* config);
- void saveGlobalProperties(KConfig* config);
- void readGlobalProperties(KConfig* config);
-
- void showFullScreen();
- bool skip_exit_query;
-
-private slots:
-
   void setSchema(int n);
   void sendSignal(int n);
   void slotToggleToolbar();
@@ -98,10 +95,13 @@ private slots:
   void slotSelectSize();
   void slotSelectFont();
   void slotSelectScrollbar();
+  void slotWarnQuit();
+  void makeGUI();
 
 private:
 
-  void makeMenu();
+  void applySettingsToGUI();
+  void makeBasicGUI();
   void runSession(TESession* s);
   void addSession(TESession* s);
   void setColorPixmaps();
@@ -109,25 +109,22 @@ private:
   void setHistory(bool);
 
   void setSchema(const QString & path);
-  void setSchema(const ColorSchema* s);
+  void setSchema(ColorSchema* s);
   void setFont(int fontno);
 
   void addSessionCommand(const QString & path);
   void loadSessionCommands();
   QSize calcSize(int columns, int lines);
 
-private:
 
-  int session_no;
   QPtrDict<TESession> action2session;
   QPtrDict<KRadioAction> session2action;
   QList<TESession> sessions;
   QIntDict<KSimpleConfig> no2command;
-  int cmd_serial;
 
   TEWidget*      te;
   TESession*     se;
-
+  TESession*     m_initialSession;
   ColorSchemaList* colors;
 
   KRootPixmap*   rootxpm;
@@ -142,38 +139,45 @@ private:
   KPopupMenu* m_keytab;
   KPopupMenu* m_codec;
   KPopupMenu* m_toolbarSessionsCommands;
+  KPopupMenu* m_signals;
+  KPopupMenu* m_help;
 
   KToggleAction *showToolbar;
   KToggleAction *showMenubar;
   KToggleAction *showScrollbar;
-  bool        b_scroll;
   KToggleAction *showFrame;
-  bool        b_framevis;
   KSelectAction *selectSize;
   KSelectAction *selectFont;
   KSelectAction *selectScrollbar;
 
   KToggleAction *warnQuit;                      // Warn when closing this session on quit
 
+  int cmd_serial;
+  int session_no;
   int         n_keytab;
+  int         n_oldkeytab;
   int         n_font;
   int         n_scroll;
+  int         n_render;
+  int         curr_schema; // current schema no
   QString     s_schema;
   QString     s_word_seps;			// characters that are considered part of a word
-  int         n_render;
   QString     pmPath; // pixmap path
   QString     dropText;
-  int         curr_schema; // current schema no
   QFont       defaultFont;
   QSize       defaultSize;
 
   const char* pgm;
   QStrList    args;
-
-  bool        b_fullscreen;
   QRect       _saveGeometry;
 
-  bool        alreadyNoticedBackgroundChange_;
+  bool        b_scroll:1;
+  bool        b_framevis:1;
+  bool        b_fullscreen:1;
+  bool        m_menuCreated:1;
+  bool        skip_exit_query:1;
+  bool        b_warnQuit:1;
+  bool        alreadyNoticedBackgroundChange_:1;
 
 public:
 
