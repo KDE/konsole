@@ -207,7 +207,7 @@ Tripel Tripel::togray(float f)
 ColorTable::ColorTable(QWidget* parent) : QLabel(parent)
 {
   //setFrameStyle( QFrame::Panel | QFrame::Sunken );
-  setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
+  //setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
   setAlignment(AlignCenter);
   setBackgroundMode(PaletteBase);
   schema = (ColorSchema*)NULL;
@@ -260,7 +260,7 @@ void ColorTable::paintEvent(QPaintEvent* e)
     }
 */
   }
-  drawFrame(&paint);
+//drawFrame(&paint);
   paint.end();
 }
 
