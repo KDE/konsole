@@ -37,7 +37,7 @@
 
 KWrited::KWrited() : QObject()
 {
-  wid = new QTextEdit(NULL,"kwrited");
+  wid = new QTextEdit(0, "messages");
   wid->setFont(KGlobalSettings::fixedFont());
   wid->setMinimumWidth(wid->fontMetrics().maxWidth()*80 +
       wid->minimumSizeHint().width());

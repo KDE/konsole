@@ -10,7 +10,7 @@ install-data-local: uninstall.desktop
 	$(mkinstalldirs) $(DESTDIR)$(kde_appsdir)/System
 	$(INSTALL_DATA) $(srcdir)/uninstall.desktop $(DESTDIR)$(kde_appsdir)/System/konsolesu.desktop 
 
-kde_services_DATA = konsolepart.desktop
+kde_services_DATA = konsolepart.desktop kwrited.desktop
 
 update_DATA = konsole.upd schemaStrip.pl
 updatedir = $(kde_datadir)/kconf_update
