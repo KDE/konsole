@@ -135,7 +135,13 @@ ColorSchema* ColorSchema::find(int numb)
 
 ColorSchema* ColorSchema::find(const char* path)
 {
-  ColorSchema* res = path2schema->find(path);
+  QString real_loc(path);
+  if ( real_loc[0] != '/' ) {
+    real_loc = locate("appdata", path);
+    if ( real_loc.isNull() )
+      real_loc = path;
+  }
+  ColorSchema* res = path2schema->find(real_loc.latin1());
   return res ? res : numb2schema->find(0);
 }
 
