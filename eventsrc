@@ -117,7 +117,7 @@ Comment[vi]=Chuông phát ra trong một session nhìn thấy
 Comment[xx]=xxBell emitted within a visible sessionxx
 Comment[zh_CN]=在可见会话中省略的响铃
 Comment[zh_TW]=在可見的工作階段使用響鈴
-default_sound=KDE_Beep_Beep.wav
+default_sound=KDE_Beep.ogg
 default_presentation=1
 
 [BellInvisible]
@@ -213,7 +213,7 @@ Comment[vi]=Chuông phát ra trong một session không nhìn thấy
 Comment[xx]=xxBell emitted within a non-visible sessionxx
 Comment[zh_CN]=在不可见会话中省略的响铃
 Comment[zh_TW]=在不可見的工作階段使用響鈴
-default_sound=KDE_Beep_Beep.wav
+default_sound=KDE_Beep.ogg
 default_presentation=16
 
 [Activity]
