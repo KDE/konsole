@@ -1,6 +1,6 @@
 // [schema.C]
 
-/*! /class ColorSchema
+/*! \class ColorSchema
 
     This is new stuff, so no docs yet.
 

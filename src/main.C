@@ -82,7 +82,7 @@
 #undef PACKAGE
 #undef VERSION
 #define PACKAGE "konsole"
-#define VERSION "0.9.9"
+#define VERSION "0.9.11"
 
 #define WITH_VGA
 
@@ -96,24 +96,15 @@ static int session_no = 0;
 static QIntDict<KSimpleConfig> no2command;
 static int cmd_serial = 0;
 
-TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
+TEDemo::TEDemo(const QString& name, QStrList & _args, int login_shell) : KTMainWindow(name), args(_args)
 {
   se = 0L;
   rootxpm = 0L;
   menubar = menuBar();
   setMinimumSize(200,100);
   
-  // get the default values
-  readProperties(kapp->getConfig());
-
   // session management
-
   setUnsavedData( true ); // terminals cannot store their contents
-
-  // a KTMainWindow supports session management as default, but we
-  // want something extra for the arguments. So just connect to the
-  // saveYourself() signal.
-  connect(kapp, SIGNAL(saveYourself()), SLOT(saveYourself()));
 
   // create terminal emulation framework ////////////////////////////////////
 
@@ -169,17 +160,22 @@ TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
   // construct initial session ///////////////////////////////////////////////
 
   TESession* initial = new TESession(this,te,args,"xterm",login_shell);
-  initial->setFontNo(n_font);
-  initial->setSchemaNo(ColorSchema::find(s_schema)->numb);
 
   title = (args.count() && (kapp->getCaption() == PACKAGE))
         ? QString(args.at(0))  // program executed in the title bar
         : kapp->getCaption();  // `konsole' or -caption
   initial->setTitle(title);
 
-  // start first session /////////////////////////////////////////////////////
-
   addSession(initial);
+
+  // read and apply default values ///////////////////////////////////////////
+
+  readProperties(kapp->getConfig());
+
+  // activate and run first session //////////////////////////////////////////
+
+  runSession(initial);
+
 }
 
 /*!
@@ -346,7 +342,6 @@ void TEDemo::makeMenu()
   m_scrollbar->insertItem( i18n("&Hide"), SCRNONE);
   m_scrollbar->insertItem( i18n("&Left"), SCRLEFT);
   m_scrollbar->insertItem( i18n("&Right"), SCRRIGHT);
-  m_scrollbar->setItemChecked(n_scroll,TRUE);
   connect(m_scrollbar, SIGNAL(activated(int)), SLOT(scrollbar_menu_activated(int)));
 
   m_size = new QPopupMenu;
@@ -365,15 +360,14 @@ void TEDemo::makeMenu()
   m_options = new QPopupMenu;
   m_options->setCheckable(TRUE);
   m_options->insertItem( i18n("&Menubar"), 1 );
-  m_options->setItemChecked(1,b_menuvis);
   m_options->insertItem( i18n("&Frame"), 2 );
-  m_options->setItemChecked(2,b_framevis);
   m_options->insertItem( i18n("Scroll&bar"), m_scrollbar);
   m_options->insertSeparator();
   m_options->insertItem( i18n("BS sends &DEL"), 4 );
   m_options->setItemChecked(4,b_bshack);
   m_options->insertItem( i18n("&Insert pastes"), 5 );
   m_options->setItemChecked(5,b_inspaste);
+
   m_options->insertSeparator();
   m_options->insertItem( i18n("&Font"), m_font);
   m_options->insertItem( i18n("&Size"), m_size);
@@ -411,14 +405,9 @@ void TEDemo::makeMenu()
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
+/* Configuration                                                             */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
-
-//void TEDemo::saveYourself()
-//{
-//    KConfig* config = kapp->getSessionConfig();
-//    config->sync();
-//}
 
 void TEDemo::saveProperties(KConfig* config)
 {
@@ -430,7 +419,9 @@ void TEDemo::saveProperties(KConfig* config)
   config->writeEntry("font",n_font);
   config->writeEntry("schema",s_schema);
   config->writeEntry("scrollbar",n_scroll);
+
   if (args.count() > 0) config->writeEntry("konsolearguments", args);
+  config->writeEntry("class",name());
   config->writeEntry("defaultheight", height()); // for "save options". Not used by SM.
   config->writeEntry("defaultwidth", width()); // for "save options". Not used by SM.
   config->writeEntry("kmenubar", //FIXME:Float
@@ -439,6 +430,9 @@ void TEDemo::saveProperties(KConfig* config)
   config->sync();
 }
 
+// Called by constructor (with config = kapp->getConfig())
+// and by session-management (with config = sessionconfig).
+// So it has to apply the settings when reading them.
 void TEDemo::readProperties(KConfig* config)
 {
   config->setGroup("options"); // bad! will no allow us to support multi windows
@@ -449,18 +443,29 @@ void TEDemo::readProperties(KConfig* config)
   n_font     = QMIN(config->readUnsignedNumEntry("font",3),7);
   n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",SCRRIGHT),2);
   s_schema   = config->readEntry("schema","");
-  if (menubar->menuBarPos() != KMenuBar::Floating)
-  { QString entry = config->readEntry("kmenubar");
-    if (!entry.isEmpty() && entry == "floating")
-    {
-      menubar->setMenuBarPos(KMenuBar::Floating);
-      QString geo = config->readEntry("kmenubargeometry");
-      if (!geo.isEmpty()) menubar->setGeometry(KWM::setProperties(menubar->winId(), geo));
-    }
-    else if (!entry.isEmpty() && entry == "top") menubar->setMenuBarPos(KMenuBar::Top);
-    else if (!entry.isEmpty() && entry == "bottom") menubar->setMenuBarPos(KMenuBar::Bottom);
-  }
-  // (stuff removed) geometry done by KTMainWindow
+
+  // Global options ///////////////////////
+
+  setMenuVisible(config->readBoolEntry("menubar visible",TRUE));
+  setFrameVisible(config->readBoolEntry("has frame",TRUE));
+  
+  scrollbar_menu_activated(QMIN(config->readUnsignedNumEntry("scrollbar",SCRRIGHT),2));
+
+  // not necessary for SM (KTMainWindow does it after), but useful for default settings
+
+  // (geometry stuff removed) done by KTMainWindow for SM, and not needed otherwise
+
+  // Options that should be applied to all sessions /////////////
+  // (1) set menu items and TEDemo members
+  setBsHack(config->readBoolEntry("BS hack",TRUE));
+  setFont(QMIN(config->readUnsignedNumEntry("font",3),7)); // sets n_font and menu item
+  setSchema(config->readEntry("schema",""));
+  // (2) apply to sessions (currently only the 1st one)
+  TESession* s = no2session.find(1);
+  if (s) {
+    s->setFontNo(n_font);
+    s->setSchemaNo(ColorSchema::find(s_schema)->numb);
+  } else { fprintf(stderr,"session 1 not found\n"); } // oops
 
   // Default values for startup, changed by "save options". Not used by SM.
   defaultSize.setWidth ( config->readNumEntry("defaultwidth", 0) );
@@ -571,6 +576,7 @@ void TEDemo::font_menu_activated(int item)
   assert(se);
   se->setFontNo(item);
   activateSession((int)session2no.find(se)); // for attribute change
+  // setFont(item) is probably enough
 }
 
 void TEDemo::schema_menu_activated(int item)
@@ -579,6 +585,7 @@ void TEDemo::schema_menu_activated(int item)
   //FIXME: save schema name
   se->setSchemaNo(item);
   activateSession((int)session2no.find(se)); // for attribute change
+  // setSchema(item) is probably enough
 }
 
 void TEDemo::setFont(int fontno)
@@ -599,38 +606,53 @@ void TEDemo::setFont(int fontno)
   n_font = fontno;
 }
 
+void TEDemo::setMenuVisible(bool visible)
+{
+  b_menuvis = visible;
+  m_options->setItemChecked(1,b_menuvis);
+  if (b_menuvis) menubar->show(); else menubar->hide();
+  updateRects();
+}
+
+void TEDemo::setFrameVisible(bool visible)
+{
+  b_framevis = visible;
+  m_options->setItemChecked(2,b_framevis);
+  te->setFrameStyle( b_framevis
+                     ? QFrame::WinPanel | QFrame::Sunken
+                     : QFrame::NoFrame );
+}
+
+void TEDemo::setBsHack(bool bshack)
+{
+  b_bshack = bshack;
+  m_options->setItemChecked(4,b_bshack);
+  //FIXME: solve typing issue below
+  if (se)
+    if (b_bshack)
+      ((VT102Emulation*)se->getEmulation())->setMode(MODE_BsHack);
+    else
+      ((VT102Emulation*)se->getEmulation())->resetMode(MODE_BsHack);
+}
+
 void TEDemo::opt_menu_activated(int item)
 {
   switch( item )
   {
-    case 1: b_menuvis = !b_menuvis;
-            m_options->setItemChecked(1,b_menuvis);
-            if (b_menuvis) menubar->show(); else menubar->hide();
-            updateRects();
+    case 1: setMenuVisible(!b_menuvis);
             if (!b_menuvis)
             {
               setCaption("Use the right mouse button to bring back the menu");
               QTimer::singleShot(5000,this,SLOT(setHeader()));
             }
             break;
-    case 2: b_framevis = !b_framevis;
-            m_options->setItemChecked(2,b_framevis);
-            te->setFrameStyle( b_framevis
-                               ? QFrame::WinPanel | QFrame::Sunken
-                               : QFrame::NoFrame );
+    case 2: setFrameVisible(!b_framevis);
             break;
-    case 4: b_bshack = !b_bshack;
-            m_options->setItemChecked(4,b_bshack);
-            //FIXME: somewhat fuzzy...
-            if (b_bshack)
-              ((VT102Emulation*)se->getEmulation())->setMode(MODE_BsHack);
-            else
-              ((VT102Emulation*)se->getEmulation())->resetMode(MODE_BsHack);
+  case 4: setBsHack(!b_bshack);
             break;
     case 5: b_inspaste = !b_inspaste;
             m_options->setItemChecked(5,b_inspaste);
             te->setInsertToPaste( b_inspaste );
-            break;
     case 8: saveProperties(kapp->getConfig());
             break;
   }
@@ -749,22 +771,22 @@ void TEDemo::activateSession(int sn)
   setHeader();
 }
 
+void TEDemo::runSession(TESession* s)
+{
+  int session_no = (int)session2no.find(s);
+  activateSession(session_no);
+
+  // give some time to get through the
+  // resize events before starting up.
+  QTimer::singleShot(100,s,SLOT(run()));
+}
+
 void TEDemo::addSession(TESession* s)
 {
-  //FIXME: not quite the right place ...
-  if (b_bshack)
-    ((VT102Emulation*)s->getEmulation())->setMode(MODE_BsHack);
-  else
-    ((VT102Emulation*)s->getEmulation())->resetMode(MODE_BsHack);
-
   session_no += 1;
   no2session.insert(session_no,s);
   session2no.insert(s,(void*)session_no);
   m_sessions->insertItem(s->Title(), session_no);
-
-  activateSession(session_no);
-
-  s->run();
 }
 
 void TEDemo::newSession(int i)
@@ -805,7 +827,8 @@ void TEDemo::newSession(int i)
   s->setSchemaNo(schmno);
   s->setTitle(txt.data());
 
-  addSession(s); // runs session
+  addSession(s);
+  runSession(s); // activate and run
 }
 
 //FIXME: If a child dies during session swap,
@@ -815,9 +838,11 @@ void TEDemo::newSession(int i)
 void TEDemo::doneSession(TESession* s, int status)
 {
 //printf("%s(%d): Exited:%d ExitStatus:%d\n",__FILE__,__LINE__,WIFEXITED(status),WEXITSTATUS(status));
-#if 0
+#if 0 // die silently
   if (!WIFEXITED((status)) || WEXITSTATUS((status)))
   {
+//FIXME: "Title" is not a precise locator for the message.
+//       The command would be better.
     QString str = i18n("`%1' terminated abnormally.").arg(s->Title());
     if (WIFEXITED((status)))
     {char rcs[100]; sprintf(rcs,"%d.\n",WEXITSTATUS((status)));
@@ -875,21 +900,20 @@ void TEDemo::addSessionCommand(const char* path)
 
 void TEDemo::loadSessionCommands()
 {
-  QString path = locate("data", "/konsole");
-  QDir d( path );
-  if(!d.exists()) return;
-  d.setFilter( QDir::Files | QDir::Readable );
-  d.setNameFilter( "*.desktop" );
-  const QFileInfoList *list = d.entryInfoList();
-  QFileInfoListIterator it( *list );
-  for(QFileInfo *fi; (fi=it.current()); ++it )
-    addSessionCommand(fi->filePath());
-
-  d.setNameFilter( "*.kdelnk" );
-  list = d.entryInfoList();
-  it = *list;
-  for(QFileInfo *fi; (fi=it.current()); ++it )
-    addSessionCommand(fi->filePath());
+    for (int local=0; local<=1; local++) {
+	// KApplication could support this technique better
+	QString path = local
+	    ? kapp->localkdedir() + "/share/apps/konsole"
+	    : kapp->kde_datadir() + "/konsole";
+	QDir d( path );
+	if(!d.exists()) return;
+	d.setFilter( QDir::Files | QDir::Readable );
+	d.setNameFilter( "*.kdelnk" );
+	const QFileInfoList *list = d.entryInfoList();
+	QFileInfoListIterator it( *list );
+	for(QFileInfo *fi; (fi=it.current()); ++it )
+	    addSessionCommand(fi->filePath());
+    }
 }
 
 // --| Schema support |-------------------------------------------------------
@@ -938,6 +962,7 @@ static void usage()
    "%s version %s, an X terminal for KDE.\n"
    "\n"
    " -e Command Parameter ... Execute command instead of shell\n"
+   " -name .................. Set Window Class\n"
    " -h ..................... This text\n"
    " -ls .................... Start login shell\n"
    " -nowelcome ............. Suppress greeting\n"
@@ -964,6 +989,7 @@ int main(int argc, char* argv[])
   int login_shell=0;
   int welcome=1;
   char* shell = getenv("SHELL");
+  char* wname = PACKAGE;
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
 
   QString sz = "";
@@ -978,6 +1004,8 @@ int main(int argc, char* argv[])
   {
     if (!strcmp(argv[i],"-e") && i+1 < argc) // handle command
     {
+      if (login_shell) fprintf(stderr,"-e excludes -ls.\n");
+      login_shell = 0; // does not make sense here.
       eargs.clear();
       int j;
       for (j = 0; j+i+1 < argc; j++) eargs.append( argv[i+j+1] );
@@ -988,6 +1016,7 @@ int main(int argc, char* argv[])
       QString a(argv[++i]);
       maxHistLines = a.toInt();
     }
+    if (!strcmp(argv[i],"-name") && i+1 < argc) wname = argv[++i];
     if (!strcmp(argv[i],"-ls") ) login_shell=1;
     if (!strcmp(argv[i],"-nowelcome")) welcome=0;
     if (!strcmp(argv[i],"-h")) { usage(); exit(0); }
@@ -1012,11 +1041,12 @@ int main(int argc, char* argv[])
     KConfig * sessionconfig = a.getSessionConfig();
     sessionconfig->setGroup("options");
     sessionconfig->readListEntry("konsolearguments", eargs);
-    RESTORE( TEDemo(eargs,login_shell) )
+    wname = sessionconfig->readEntry("class",wname).data();
+    RESTORE( TEDemo(wname,eargs,login_shell) )
   }
   else
   {  
-    TEDemo*  m = new TEDemo(eargs,login_shell);
+    TEDemo*  m = new TEDemo(wname,eargs,login_shell);
     m->setColLin(c,l); // will use default height and width if called with (0,0)
 
     if (welcome)

@@ -10,11 +10,16 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
+/*! \file
+*/
+
 /*! \class TEScreen
+
+    \brief The image manipulated by the emulation.
 
     This class implements the operations of the terminal emulation framework.
     It is a complete passive device, driven by the emulation decoder 
-    (AnsiEmulation). By this it forms infact an ADT, that mainly defines
+    (VT102Emulation). By this it forms infact an ADT, that mainly defines
     operations on a rectangular image.
 
     It does neither know how to display its image nor about escape sequences.
@@ -26,7 +31,7 @@
 
     The state manipulated by the operations is mainly kept in `image'.
 
-    \sa TEWidget \sa AnsiEmulation
+    \sa TEWidget \sa VT102Emulation
 */
 
 #include <stdio.h>
@@ -91,6 +96,12 @@ TEScreen::~TEScreen()
     `columns-1' and `lines-1'.
 */
 
+/*!
+    Move the cursor up.
+
+    The cursor will not be moved beyond the top margin.
+*/
+
 void TEScreen::cursorUp(int n)
 //=CUU
 {
@@ -99,6 +110,12 @@ void TEScreen::cursorUp(int n)
   cuX = QMIN(columns-1,cuX); // nowrap!
   cuY = QMAX(stop,cuY-n);
 }
+
+/*!
+    Move the cursor down.
+
+    The cursor will not be moved beyond the bottom margin.
+*/
 
 void TEScreen::cursorDown(int n)
 //=CUD
@@ -109,6 +126,12 @@ void TEScreen::cursorDown(int n)
   cuY = QMIN(stop,cuY+n);
 }
 
+/*!
+    Move the cursor left.
+
+    The cursor will not move beyond the first column.
+*/
+
 void TEScreen::cursorLeft(int n)
 //=CUB
 {
@@ -116,6 +139,12 @@ void TEScreen::cursorLeft(int n)
   cuX = QMIN(columns-1,cuX); // nowrap!
   cuX = QMAX(0,cuX-n);
 }
+
+/*!
+    Move the cursor left.
+
+    The cursor will not move beyond the rightmost column.
+*/
 
 void TEScreen::cursorRight(int n)
 //=CUF
@@ -125,6 +154,7 @@ void TEScreen::cursorRight(int n)
 }
 
 /*!
+    Set top and bottom margin.
 */
 
 void TEScreen::setMargins(int top, int bot)
@@ -145,176 +175,12 @@ void TEScreen::setMargins(int top, int bot)
   cuY = getMode(MODE_Origin) ? top : 0;
 }
 
-void TEScreen::clearSelection() 
-{
-  sel_BR = -1;
-  sel_TL = -1;
-  sel_begin = -1;
-}
+/*!
+    Move the cursor down one line.
 
-void TEScreen::setSelBeginXY(const int x, const int y) 
-{
-  sel_begin = loc(x,y+histCursor) ;
-  sel_BR = sel_begin;
-  sel_TL = sel_begin;
-}
-
-void TEScreen::setSelExtentXY(const int x, const int y) 
-{
-  int l =  loc(x,y + histCursor);
-
-  if (l < sel_begin)
-  { 
-    sel_TL = l; 
-    sel_BR = sel_begin;
-  } 
-  else
-  { 
-    /* FIXME, HACK to correct for x too far to the right... */
-    if (( x == columns )|| (x == 0)) l--;
- 
-    sel_TL = sel_begin;
-    sel_BR = l; 
-  }
-}
-
-char *TEScreen::getSelText(const BOOL preserve_line_breaks) 
-{
-  char *m;  	// buffer to fill.
-  int s,d; 	// source index, dest. index.
-  int hist_BR=loc(0,histLines-1);
-  int hY = sel_TL / columns ;
-  int hX = sel_TL % columns;
-  int eol;	// end of line
-  s = sel_TL;   // tracks copy in source. 
-  d = 0;
-  
-  // allocate buffer for maximum possible size...
-  d = (sel_BR - sel_TL)/columns + 1 ;
-  m = (char*) malloc(  sizeof(char) * d * (columns+1) + 2 );
-  d = 0;
-
-  while ( s <= sel_BR )
-  {
-    if ( s < hist_BR )
-    { 	// get lines from history buffer.
-      eol=histBuffer[hY]->len;
-      if  ((hY == (sel_BR/columns)) && (eol >= (sel_BR%columns)) ) eol=sel_BR%columns+1;
-      while ( hX < eol )
-      { 
-         m[d++] = histBuffer[hY]->line[hX++].c; 
-         s++;
-      }
-
-      // see below for end of line processing...
-      if ( s <= sel_BR ) {
-	if ( (eol+1)%columns == 0) {
-	    if (histBuffer[hY]->line[columns-1].c == ' ') { m[d++]=' '; }
-	} 
-        else {
-		m[d++]=((preserve_line_breaks||(eol%columns==0))?'\n':' ');   
-                s = ((s+1)/columns + 1)*columns;
-        }
-      }
-      hY++; 
-      hX=0; 
-    }
-    else // or from screen image.
-    {
-      eol = (s/columns + 1)*columns - 1 ;
-      if ( eol < sel_BR )
-      {
-        while ((eol > s) && isspace(image[eol-hist_BR-columns].c)) eol--  ;
-      }
-      else
-      {
-        eol = sel_BR ;
-      }
-      while (s <= eol)  m[d++] = image[s++-hist_BR-columns].c;
-
-/* end of line processing for selection -- psilva
-cases:
-
-1)    (eol+1)%columns == 0 --> the whole line is filled.
-   If the last char is a space, insert (preserve) space. otherwise
-   leave the text alone, so that words that are broken by linewrap 
-   are preserved.
-
-FIXME:
-	* this suppresses \n for command output that is
-	  sized to the exact column width of the screen.
-
-2)    eol%columns == 0     --> blank line.
-   insert a \n unconditionally.
-   Do it either you would because you are in preserve_line_break mode,
-   or because it's an ASCII paragraph delimiter, so even when
-   not preserving line_breaks, you want to preserve paragraph breaks.
-
-3)    else		 --> partially filled line
-   insert a \n in preserve line break mode, else a space 
-   The space prevents concatenation of the last word of one
-   line with the first of the next.
-
+    If cursor is on bottom margin, the region between the
+    actual top and bottom margin is scrolled up instead.
 */
-      if (eol < sel_BR) {
-	if ( (eol+1)%columns == 0) {
-	    if (image[eol-hist_BR-columns].c == ' ') m[d++]=' ';
-	} 
-        else m[d++]=(preserve_line_breaks||((eol%columns)==0)?'\n':' ');   
-      }
-      s = ( eol/columns + 1)*columns;
-    }
-  }
-
-  // trim buffer size to actual size needed.
-  m=(char*)realloc( m ,  sizeof(char)*(d+1) );
-  m[d]= '\0';
-  return(m);
-}
- 
-void TEScreen::setHistMaxLines(int maxlines)
-// set history buffer size
-{
-  if (maxlines < histMaxLines) return; //FIXME: handle decrease
-  histMaxLines = maxlines;
-}
-
-void TEScreen::addHistLine()
-{ int x; histLine* line; int end = columns-1;
-  ca dft(' ',DEFAULT_FORE_COLOR,DEFAULT_BACK_COLOR,DEFAULT_RENDITION);
-
-  if (histMaxLines == 0) return; // no buffer
-
-  // extract 1st line
-  while (end >= 0 && image[end] == dft) end -= 1;
-  line = (histLine*) malloc(sizeof(histLine)+sizeof(ca)*(end+1-1));
-  for (x = 0; x <= end; x++) line->line[x] = image[loc(x,0)];
-  line->len = end+1;
-
-  // add to hist buffer
-  if (histLines >= histMaxLines) 
-  { int i;
-    free(histBuffer[0]);
-    for (i = 1; i < histLines; i++) histBuffer[i-1] = histBuffer[i];
-    if (histCursor == 0) histCursor = histLines; // revert to non-hist.
-    histCursor -= (histLines != histCursor);
-  }
-  else
-  {
-    histCursor += (histLines == histCursor);
-    histLines  += 1;
-    histBuffer  = (histLine**)realloc(histBuffer,sizeof(histLine*)*histLines);
-
-    // correct selection 
-    if (sel_TL > 0 ) 
-    {
-      sel_TL += columns;
-      sel_BR += columns;
-      sel_begin += columns;
-    }
-  }
-  histBuffer[histLines-1] = line;
-}
 
 void TEScreen::index()
 //=IND
@@ -329,13 +195,26 @@ void TEScreen::index()
     cuY += 1;
 }
 
-void TEScreen::reverseIndex()
+/*!
+    Move the cursor up one line.
 
+    If cursor is on to margin, the region between the
+    actual top and bottom margin is scrolled down instead.
+*/
+
+void TEScreen::reverseIndex()
 //=RI
 {
   //FIXME: above tmargin?
   if (cuY <= tmargin) scrollDown(tmargin,1); else cuY -= 1;
 }
+
+/*!
+    Move the cursor to the begin of the next line.
+
+    If cursor is on bottom margin, the region between the
+    actual top and bottom margin is scrolled up.
+*/
 
 void TEScreen::NextLine()
 //=NEL
@@ -411,6 +290,8 @@ void TEScreen::insertLines(int n)
 
 // Mode Operations -----------------------------------------------------------
 
+/*! Set a specific mode. */
+
 void TEScreen::setMode(int m)
 {
   currParm.mode[m] = TRUE;
@@ -419,6 +300,8 @@ void TEScreen::setMode(int m)
     case MODE_Origin : cuX = 0; cuY = tmargin; break; //FIXME: home
   }
 }
+
+/*! Reset a specific mode. */
 
 void TEScreen::resetMode(int m)
 {
@@ -429,10 +312,14 @@ void TEScreen::resetMode(int m)
   }
 }
 
+/*! Save a specific mode. */
+
 void TEScreen::saveMode(int m)
 {
   saveParm.mode[m] = currParm.mode[m];
 }
+
+/*! Restore a specific mode. */
 
 void TEScreen::restoreMode(int m)
 {
@@ -440,10 +327,13 @@ void TEScreen::restoreMode(int m)
 }
 
 //NOTE: this is a helper function
+/*! Return the setting  a specific mode. */
 BOOL TEScreen::getMode(int m)
 {
   return currParm.mode[m];
 }
+
+/*! Save the cursor position and the rendition attribute settings. */
 
 void TEScreen::saveCursor()
 {
@@ -457,6 +347,8 @@ void TEScreen::saveCursor()
   // FIXME: Character set info: sa_charset = charsets[cScreen->charset];
   //                            sa_charset_num = cScreen->charset;
 }
+
+/*! Restore the cursor position and the rendition attribute settings. */
 
 void TEScreen::restoreCursor()
 {
@@ -478,7 +370,14 @@ void TEScreen::restoreCursor()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-/*!
+/*! Assing a new size to the screen.
+
+    The topmost left position is maintained, while lower lines
+    or right hand side columns might be removed or filled with
+    spaces to fit the new size.
+
+    The region setting is reset to the whole screen and the
+    tab positions reinitialized.
 */
 
 void TEScreen::resizeImage(int new_lines, int new_columns)
@@ -586,7 +485,7 @@ void TEScreen::effectiveRendition()
 /*!
     returns the image.
 
-    Get the size of the image by /sa getLines and /sa getColumns.
+    Get the size of the image by \sa getLines and \sa getColumns.
 
     NOTE that the image returned by this function must later be
     freed.
@@ -671,7 +570,7 @@ void TEScreen::reset()
   clear();
 }
 
-/*!
+/*! Clear the entire screen and home the cursor.
 */
 
 void TEScreen::clear()
@@ -680,7 +579,7 @@ void TEScreen::clear()
   home();
 }
 
-/*!
+/*! Moves the cursor left one column.
 */
 
 void TEScreen::BackSpace()
@@ -720,14 +619,13 @@ void TEScreen::initTabStops()
 }
 
 /*!
+   This behaves either as IND (Screen::Index) or as NEL (Screen::NextLine)
+   depending on the NewLine Mode (LNM). This mode also
+   affects the key sequence returned for newline ([CR]LF).
 */
 
 void TEScreen::NewLine()
 {
-// This behaves either as IND (index) or as NEL (NextLine)
-// depending on the NewLine Mode (LNM). This mode also
-// affects the key sequence returned for newline ([CR]LF).
-
   if (getMode(MODE_NewLine)) Return();
   index();
 }
@@ -860,26 +758,31 @@ void TEScreen::scrollDown(int from, int n)
      clearSelection();
 }
 
+/*! position the cursor to a specific line and column. */
 void TEScreen::setCursorYX(int y, int x)
 {
   setCursorY(y); setCursorX(x);
 }
 
+/*! Set the cursor to x-th line. */
+
 void TEScreen::setCursorX(int x)
 {
   if (x == 0) x = 1; // Default
   x -= 1; // Adjust
-  cuX = QMIN(columns-1, x);
+  cuX = QMAX(0,QMIN(columns-1, x));
 }
+
+/*! Set the cursor to y-th line. */
 
 void TEScreen::setCursorY(int y)
 {
   if (y == 0) y = 1; // Default
   y -= 1; // Adjust
-  cuY = QMIN(lines  -1, y + (getMode(MODE_Origin) ? tmargin : 0) );
+  cuY = QMAX(0,QMIN(lines  -1, y + (getMode(MODE_Origin) ? tmargin : 0) ));
 }
 
-/*! set cursor to the `left upper' corner of the screen.
+/*! set cursor to the `left upper' corner of the screen (1,1).
 */
 
 void TEScreen::home()
@@ -1086,4 +989,187 @@ void TEScreen::setForeColorToDefault()
 {
   cu_fg = DEFAULT_FORE_COLOR;
   effectiveRendition();
+}
+
+/* ------------------------------------------------------------------------- */
+/*                                                                           */
+/*                            Marking & Selection                            */
+/*                                                                           */
+/* ------------------------------------------------------------------------- */
+
+void TEScreen::clearSelection() 
+{
+  sel_BR = -1;
+  sel_TL = -1;
+  sel_begin = -1;
+}
+
+void TEScreen::setSelBeginXY(const int x, const int y) 
+{
+  sel_begin = loc(x,y+histCursor) ;
+  sel_BR = sel_begin;
+  sel_TL = sel_begin;
+}
+
+void TEScreen::setSelExtentXY(const int x, const int y) 
+{
+  int l =  loc(x,y + histCursor);
+
+  if (l < sel_begin)
+  { 
+    sel_TL = l; 
+    sel_BR = sel_begin;
+  } 
+  else
+  { 
+    /* FIXME, HACK to correct for x too far to the right... */
+    if (( x == columns )|| (x == 0)) l--;
+
+    sel_TL = sel_begin;
+    sel_BR = l; 
+  }
+}
+
+char *TEScreen::getSelText(const BOOL preserve_line_breaks) 
+{
+  char *m;  	// buffer to fill.
+  int s,d; 	// source index, dest. index.
+  int hist_BR=loc(0,histLines-1);
+  int hY = sel_TL / columns ;
+  int hX = sel_TL % columns;
+  int eol;	// end of line
+  s = sel_TL;   // tracks copy in source. 
+  d = 0;
+  
+  // allocate buffer for maximum possible size...
+  d = (sel_BR - sel_TL)/columns + 1 ;
+  m = (char*) malloc(  sizeof(char) * d * (columns+1) + 2 );
+  d = 0;
+
+  while ( s <= sel_BR )
+  {
+    if ( s < hist_BR )
+    { 	// get lines from history buffer.
+      eol=histBuffer[hY]->len;
+      if  ((hY == (sel_BR/columns)) && (eol >= (sel_BR%columns)) ) eol=sel_BR%columns+1;
+      while ( hX < eol )
+      { 
+         m[d++] = histBuffer[hY]->line[hX++].c; 
+         s++;
+      }
+
+      // see below for end of line processing...
+      if ( s <= sel_BR ) {
+	if ( (eol+1)%columns == 0) {
+	    if (histBuffer[hY]->line[columns-1].c == ' ') { m[d++]=' '; }
+	} 
+        else {
+		m[d++]=((preserve_line_breaks||(eol%columns==0))?'\n':' ');   
+                s = ((s+1)/columns + 1)*columns;
+        }
+      }
+      hY++; 
+      hX=0; 
+    }
+    else // or from screen image.
+    {
+      eol = (s/columns + 1)*columns - 1 ;
+      if ( eol < sel_BR )
+      {
+        while ((eol > s) && isspace(image[eol-hist_BR-columns].c)) eol--  ;
+      }
+      else
+      {
+        eol = sel_BR ;
+      }
+      while (s <= eol)  m[d++] = image[s++-hist_BR-columns].c;
+
+      if (eol < sel_BR) {
+	if ( (eol+1)%columns == 0) {
+	    if (image[eol-hist_BR-columns].c == ' ') m[d++]=' ';
+	} 
+        else m[d++]=(preserve_line_breaks||((eol%columns)==0)?'\n':' ');   
+      }
+      s = ( eol/columns + 1)*columns;
+    }
+  }
+
+  // trim buffer size to actual size needed.
+  m=(char*)realloc( m ,  sizeof(char)*(d+1) );
+  m[d]= '\0';
+  return(m);
+}
+/* above ... end of line processing for selection -- psilva
+cases:
+
+1)    (eol+1)%columns == 0 --> the whole line is filled.
+   If the last char is a space, insert (preserve) space. otherwise
+   leave the text alone, so that words that are broken by linewrap 
+   are preserved.
+
+FIXME:
+	* this suppresses \n for command output that is
+	  sized to the exact column width of the screen.
+
+2)    eol%columns == 0     --> blank line.
+   insert a \n unconditionally.
+   Do it either you would because you are in preserve_line_break mode,
+   or because it's an ASCII paragraph delimiter, so even when
+   not preserving line_breaks, you want to preserve paragraph breaks.
+
+3)    else		 --> partially filled line
+   insert a \n in preserve line break mode, else a space 
+   The space prevents concatenation of the last word of one
+   line with the first of the next.
+
+*/
+
+/* ------------------------------------------------------------------------- */
+/*                                                                           */
+/*                                History Buffer                             */
+/*                                                                           */
+/* ------------------------------------------------------------------------- */
+ 
+void TEScreen::setHistMaxLines(int maxlines)
+// set history buffer size
+{
+  if (maxlines < histMaxLines) return; //FIXME: handle decrease
+  histMaxLines = maxlines;
+}
+
+void TEScreen::addHistLine()
+{ int x; histLine* line; int end = columns-1;
+  ca dft(' ',DEFAULT_FORE_COLOR,DEFAULT_BACK_COLOR,DEFAULT_RENDITION);
+
+  if (histMaxLines == 0) return; // no buffer
+
+  // extract 1st line
+  while (end >= 0 && image[end] == dft) end -= 1;
+  line = (histLine*) malloc(sizeof(histLine)+sizeof(ca)*(end+1-1));
+  for (x = 0; x <= end; x++) line->line[x] = image[loc(x,0)];
+  line->len = end+1;
+
+  // add to hist buffer
+  if (histLines >= histMaxLines) 
+  { int i;
+    free(histBuffer[0]);
+    for (i = 1; i < histLines; i++) histBuffer[i-1] = histBuffer[i];
+    if (histCursor == 0) histCursor = histLines; // revert to non-hist.
+    histCursor -= (histLines != histCursor);
+  }
+  else
+  {
+    histCursor += (histLines == histCursor);
+    histLines  += 1;
+    histBuffer  = (histLine**)realloc(histBuffer,sizeof(histLine*)*histLines);
+
+    // correct selection 
+    if (sel_TL > 0 ) 
+    {
+      sel_TL += columns;
+      sel_BR += columns;
+      sel_begin += columns;
+    }
+  }
+  histBuffer[histLines-1] = line;
 }

@@ -10,7 +10,9 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-/*! \class
+/*! \class TEWidget
+
+    \brief Visible screen contents
  
    This class is responsible to map the `image' of a terminal emulation to the
    display. All the dependency of the emulation to a specific GUI or toolkit is
@@ -18,13 +20,15 @@
    emulation, it simply work within the terminal emulation framework by exposing
    size and key events and by being ordered to show a new image.
 
-   - The internal image has the size of the widget (evtl. rounded up)
-   - The external image used in setImage can have any size.
-   - (internally) the external image is simply copied to the internal
-     when a setImage happens. During a resizeEvent no painting is done
-     a paintEvent is expected to follow anyway.
+   <ul>
+   <li> The internal image has the size of the widget (evtl. rounded up)
+   <li> The external image used in setImage can have any size.
+   <li> (internally) the external image is simply copied to the internal
+        when a setImage happens. During a resizeEvent no painting is done
+        a paintEvent is expected to follow anyway.
+   </ul>
 
-   /sa TEScreen /sa TEmulation
+   \sa TEScreen \sa Emulation
 */
 
 /* FIXME:
@@ -58,7 +62,7 @@
 #include <X11/Xlib.h>
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
-#define HCNT(Name) //{ static int cnt = 1; printf("%s(%d): %s %d\n",__FILE__,__LINE__,Name,cnt++); }
+#define HCNT(Name) // { static int cnt = 1; printf("%s(%d): %s %d\n",__FILE__,__LINE__,Name,cnt++); }
 
 #define loc(X,Y) ((Y)*columns+(X))
 

@@ -1,3 +1,5 @@
+12 June 1999 Stephan Kulow <coolo@kde.org>
+- merged the below changes back into HEAD
 28 May 1999 Dan Pilone <pilone@slac.com>
 - Ported konsole to SGI (well, hopefully all SVR4 machines.)
 22 May 1999
@@ -7,6 +9,25 @@
 - set version to 0.9.10
 06 Feb 1999
 - adjusting geometry save/restore
+05 Apr 1999
+- made sessions die silently.
+24 Mar 1999
+- added Unix98 pty support.
+22 Mar 1999
+- made a non-glibc2.1 version of the fix below.
+- fixed a signal/wait problems related with it.
+- changed version number to 0.9.10 thereby disappointing
+  all those who desperately hoped, 0.9.9 will be followed
+  by 1.0.0 ;)
+15 Mar 1999 David Faure <David.Faure@insa-lyon.fr>
+- fixed some bugs.
+18 Mar 1999
+- added grantpt to prevent eavesdroping the slave tty.
+  konsole now depends on at least glibc2.1
+03 Mar 1999
+- added -name
+- Shift-Insert pastes
+- added *.kdelnk to be seeked in ~./kde/apps/konsole, too.
 03 Feb 1999
 - fixed -caption
 - some adjustments in geometry management

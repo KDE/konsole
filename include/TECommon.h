@@ -10,6 +10,10 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
+/*! \file TECommon.h
+    \brief Definitions shared between TEScreen and TEWidget.
+*/
+
 #ifndef TECOMMON_H
 #define TECOMMON_H
 
@@ -53,6 +57,10 @@ typedef unsigned short UINT16;
 #define RE_REVERSE         (1 << 3) // Screen only
 #define RE_INTENSIVE       (1 << 3) // Widget only
 
+/*! \class ca
+ *  \brief a character with rendition attributes.
+*/
+
 class ca
 {
 public:
@@ -78,6 +86,8 @@ inline BOOL operator != (ca a, ca b)
   return a.c != b.c || a.f != b.f || a.b != b.b || a.r != b.r;
 }
 
+/*!
+*/
 struct ColorEntry
 {
   QColor color;

@@ -10,7 +10,9 @@
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-/* \class
+/*! \class VT102Emulation
+
+   \brief Actual Emulation for Konsole
 
    This class is responsible to scan the escapes sequences of the terminal
    emulation and to map it to their corresponding semantic complements.

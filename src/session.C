@@ -2,7 +2,7 @@
 
 #include <qpushbutton.h>
 
-/*! /class
+/*! \class TESession
 
     Sessions are combinations of Shells and Emulations.
 
@@ -12,7 +12,7 @@
     of the abilities of the framework - multible sessions.
 */
 
-TESession::TESession(KTMainWindow* main, TEWidget* te, QStrList & _args, const char* term, int login_session) : args(_args)
+TESession::TESession(KTMainWindow* main, TEWidget* te, QStrList & _args, const char* term, int login_session) : schema_no(0), font_no(3), args(_args)
 {
   sh = new Shell(login_session);
   em = new VT102Emulation(te,term);
@@ -43,6 +43,11 @@ TESession::TESession(KTMainWindow* main, TEWidget* te, QStrList & _args, const c
 void TESession::run()
 {
   sh->run(args,term);
+}
+
+void TESession::kill(int signal)
+{
+  sh->kill(signal);
 }
 
 TESession::~TESession()

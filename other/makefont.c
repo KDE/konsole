@@ -13,7 +13,7 @@
       8 16 4 font_8x16.c
 */
 
-//insert font file here
+/* insert font file here */
 
 #define X 6
 #define Y 11

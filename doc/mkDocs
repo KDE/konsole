@@ -1,0 +1,4 @@
+export PATH=$PATH:/opt/doxygen-0.4/bin
+# doxytag -t qt.tag $QTDIR/html
+doxygen konsole.Doxyfile
+./konsole/html/installdox -l qt.tag@$QTDIR/html ./konsole/html/*.html

@@ -33,7 +33,7 @@ OTHDIR = $(TOPDIR)/other
 INCLUDES =  -I$(INCDIR) $(all_includes)
 
 # you can add here more. This one gets installed 
-bin_PROGRAMS = 	konsole kcmkonsole
+bin_PROGRAMS = 	konsole kcmkonsole konsole_grantpty
 
 noinst_LIBRARIES = libkonsole.a
 
@@ -49,6 +49,18 @@ konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 kcmkonsole_SOURCES = kcmkonsole.C schema.C
 kcmkonsole_LDADD   = $(LIB_KIMGIO) $(LIB_KDEUI) 
 kcmkonsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
+
+konsole_grantpty_SOURCES = konsole_grantpty.c
+
+install-data-local:
+	@echo ""
+	@echo "konsole_grantpty is by default installed with SETUID root bit!"
+	@echo "This is needed for konsole to ensure that it can't be eavesdroped."
+	@echo ""
+
+# konsole_grantpty needs to be installed setuid root
+install-exec-local:
+	@(chown root $(bindir)/konsole_grantpty && chmod 4755 $(bindir)/konsole_grantpty) || echo "Please make konsole_grandpty setuid root"  
 
 # the library search path. 
 

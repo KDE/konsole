@@ -1,10 +1,10 @@
-
 datadir = $(kde_datadir)/konsole
 data_DATA = BlackOnLightYellow.schema BlackOnWhite.schema \
 	Example.Schema GreenOnBlack.schema WhiteOnBlack.schema \
 	default.Schema linux.kdelnk mc.kdelnk shell.kdelnk \
   syscolor.schema Linux.schema XTerm.schema vim.schema \
-  DarkPicture.schema LightPicture.schema Transparent.schema GreenTint.schema
+  DarkPicture.schema LightPicture.schema Transparent.schema GreenTint.schema \
+  su.kdelnk
 
 kde_icon_DATA = konsole.xpm 
 
