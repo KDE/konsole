@@ -129,7 +129,7 @@ public:
 
 
 /* --| main |------------------------------------------------------ */
-int main(int argc, char* argv[])
+extern "C" int kdemain(int argc, char* argv[])
 {
   setgid(getgid()); setuid(getuid()); // drop privileges
 

@@ -83,7 +83,7 @@ void signal_handler(int) {
     ::exit(0);
 }
 
-int main(int argc, char* argv[])
+extern "C" int kdemain(int argc, char* argv[])
 {
   KLocale::setMainCatalogue("konsole");
   KCmdLineArgs::init(argc, argv, "kwrited",

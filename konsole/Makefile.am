@@ -4,8 +4,8 @@
 INCLUDES = -I. $(all_includes)
 
 # you can add here more. This one gets installed
-bin_PROGRAMS = 	konsole kwrited #kcmkonsole
-lib_LTLIBRARIES = kwrited.la konsole.la
+# bin_PROGRAMS = kcmkonsole
+kdeinit_LTLIBRARIES = kwrited.la konsole.la
 
 kde_module_LTLIBRARIES = libkonsolepart.la
 libkonsolepart_la_SOURCES = TEPty.cpp BlockArray.cpp konsole_part.cpp \
@@ -29,12 +29,6 @@ kwrited_la_SOURCES = kwrited.cpp TEPty.cpp
 kwrited_la_LIBADD  = $(LIB_KDECORE) 
 kwrited_la_LDFLAGS = $(all_libraries) -module -avoid-version
 
-# kwrited executable
-kwrited_SOURCES	= dummy.cpp
-kwrited_LDADD   = kwrited.la 
-kwrited_LDFLAGS = $(all_libraries) $(KDE_RPATH)
-
-
 # konsole kdeinit module
 konsole_la_SOURCES = TEPty.cpp BlockArray.cpp main.cpp konsole.cpp schema.cpp session.cpp TEWidget.cpp TEmuVt102.cpp \
      TEScreen.cpp TEmulation.cpp TEHistory.cpp keytrans.cpp konsoleiface.skel sessioniface.skel \
@@ -42,11 +36,6 @@ konsole_la_SOURCES = TEPty.cpp BlockArray.cpp main.cpp konsole.cpp schema.cpp se
      zmodem_dialog.cpp printsettings.cpp
 konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
 konsole_la_LIBADD = $(LIB_KDEUI) $(LIB_KIO) $(LIB_KDEPRINT) $(LIBUTIL) $(XTESTLIB)
-
-# konsole executable
-konsole_SOURCES = dummy.cpp
-konsole_LDADD = konsole.la $(LIB_KDEPRINT)
-konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 # kcmkonsole_SOURCES = kcmkonsole.cpp schema.cpp
 # kcmkonsole_LDADD   = $(LIB_KDEUI)
@@ -76,9 +65,6 @@ messages: rc.cpp
 	$(XGETTEXT) rc.cpp *.cpp -o $(podir)/konsole.pot
 	rm -f schemas.cpp
 	rm -f tips.cpp
-
-dummy.cpp:
-	echo > dummy.cpp
 
 # setting up x-application/konsole as a special mimetype
 mimedir = $(kde_mimedir)/application
