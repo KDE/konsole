@@ -187,11 +187,9 @@ int main(int argc, char* argv[])
   KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
   //1.53 sec
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-  if (!args->isSet("xft"))
-  {
-     putenv(qstrdup("QT_XFT=0"));
-     has_noxft = true;
-  }
+  has_noxft = !args->isSet("xft");
+  TEWidget::setAntialias( !has_noxft );
+  
 
   KApplication a;
   KImageIO::registerFormats(); // add io for additional image formats

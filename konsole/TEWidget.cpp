@@ -89,6 +89,9 @@
 #define yMouseScroll 1
 // scroll increment used when dragging selection at top/bottom of window.
 
+// static
+bool TEWidget::s_antialias = true;
+
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /*                                Colors                                     */
@@ -250,8 +253,11 @@ void TEWidget::fontChange(const QFont &)
 
 void TEWidget::setVTFont(const QFont& f)
 {
-  QFrame::setFont(f);
-  fontChange(f);
+  QFont font = f;
+  if (!s_antialias)
+    font.setStyleStrategy( QFont::NoAntialias );
+  QFrame::setFont(font);
+  fontChange(font);
 }
 
 void TEWidget::setFont(const QFont &)

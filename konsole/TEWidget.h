@@ -84,6 +84,8 @@ public:
     void setVTFont(const QFont &);
 
     void setMouseMarks(bool on);
+    static void setAntialias( bool enable ) { s_antialias = enable; }
+    static bool antialias()                 { return s_antialias;   }
 
     // current session in this widget
     TESession *currentSession;
@@ -197,6 +199,8 @@ private:
     QString dropText;
     bool possibleTripleClick;  // is set in mouseDoubleClickEvent and deleted
                                // after QApplication::doubleClickInterval() delay
+
+    static bool s_antialias; // do we antialias or not
                                
     QFrame *mResizeWidget;                               
     QLabel *mResizeLabel;                               
