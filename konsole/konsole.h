@@ -35,6 +35,7 @@
 #include "TEmuVt102.h"
 #include "session.h"
 #include "schema.h"
+#include "konsolebookmarkhandler.h"
 
 #include "konsoleiface.h"
 
@@ -58,7 +59,7 @@ public:
 
   Konsole(const char * name, const QString &_program, QStrList & _args, int histon,
     bool menubaron, bool toolbaron, bool frameon, bool scrollbaron, const QString &icon, const QString &_title,
-    QCString type = 0, const QString &_term=QString::null, bool b_inRestore = false);
+    QCString type = 0, const QString &_term=QString::null, bool b_inRestore = false, const QString &workdir=QString::null);
   ~Konsole();
   void setColLin(int columns, int lines);
   void setFullScreen(bool on);
@@ -70,7 +71,7 @@ public:
   void initMonitorActivity(bool on);
   void initMonitorSilence(bool on);
   void initMasterMode(bool on);
-  void newSession(const QString &program, const QStrList &args, const QString &term, const QString &icon);
+  void newSession(const QString &program, const QStrList &args, const QString &term, const QString &icon, const QString &cwd);
 
   void run();
   void activateSession(const int position);
@@ -88,6 +89,8 @@ public:
   void feedAllSessions(const QString &text);
   void sendAllSessions(const QString &text);
 
+  KURL baseURL() const;
+
 public slots:
 
   void makeGUI();
@@ -98,8 +101,6 @@ protected:
  bool queryClose();
  void saveProperties(KConfig* config);
  void readProperties(KConfig* config);
- void saveGlobalProperties(KConfig* config);
- void readGlobalProperties(KConfig* config);
 
 private slots:
   void currentDesktopChanged(int desk);
@@ -114,6 +115,7 @@ private slots:
   void pixmap_menu_activated(int item);
   void keytab_menu_activated(int item);
   void schema_menu_check();
+  void bookmarks_menu_check();
   void newSession(int kind);
   void newSessionToolbar(int kind);
   void updateSchemaMenu();
@@ -155,6 +157,7 @@ private slots:
 
   void clearAllListenToKeyPress();
   void restoreAllListenToKeyPress();
+  void enterURL( const QString& );
 
   void slotFind();
   void slotFindDone();
@@ -164,7 +167,7 @@ private slots:
 
 private:
   KSimpleConfig *defaultSession();
-  QString newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(), const QString &_term = QString::null, const QString &_icon = QString::null, const QString &_title = QString::null);
+  QString newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(), const QString &_term = QString::null, const QString &_icon = QString::null, const QString &_title = QString::null, const QString &_cwd = QString::null);
   void readProperties(KConfig *config, const QString &schema, bool globalConfigOnly);
   void applySettingsToGUI();
   void makeBasicGUI();
@@ -205,6 +208,7 @@ private:
   KPopupMenu* m_session;
   KPopupMenu* m_edit;
   KPopupMenu* m_view;
+  KPopupMenu* m_bookmarks;
   KPopupMenu* m_options;
   KPopupMenu* m_schema;
   KPopupMenu* m_keytab;
@@ -230,6 +234,8 @@ private:
   KAction       *m_saveHistory;
   KAction       *m_moveSessionLeft;
   KAction       *m_moveSessionRight;
+
+  KonsoleBookmarkHandler *bookmarkHandler;
 
   KEdFind* m_finddialog;
   bool     m_find_first;

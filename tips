@@ -128,7 +128,7 @@ Ctrl keys and pressing the Insert key?
 <tip category="Konsole">
 <html>
 <p>...that pressing Ctrl while pasting the selection with the middle mouse
-button will send the selection buffer instead of pasting it?
+button will append a carriage return after pasting the selection buffer?
 </html>
 </tip>
 
@@ -161,7 +161,15 @@ text while pressing the Shift key?
 <tip category="Konsole">
 <html>
 <p>...that you can let Konsole set the current directory as the window title?
-For Bash, put 'export PS1=$PS1"\[\e]0;\H:\w\a\]' in your ~/.bashrc .
+For Bash, put 'export PS1=$PS1"\[\e]0;\H:\w\a\]"' in your ~/.bashrc .
+</html>
+</tip>
+
+<tip category="Konsole">
+<html>
+<p>...that if you let your shell tell Konsole the current directory within the prompt
+variable, eg for Bash with 'export PS1=$PS1"\[\e]31;\w\a\]"' in your ~/.bashrc, then
+Konsole can bookmark and session management will remember your current working directory?
 </html>
 </tip>
 

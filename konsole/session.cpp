@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <qfile.h>
 #include <qdir.h>
+#include <qregexp.h>
 
 #ifndef HERE
 #define HERE fprintf(stderr,"%s(%d): here\n",__FILE__,__LINE__)
@@ -22,7 +23,7 @@
     of the abilities of the framework - multible sessions.
 */
 
-TESession::TESession(TEWidget* _te, const QString &_pgm, QStrList & _args, const QString &_term,const QString &_sessionId, const QString &_cwd)
+TESession::TESession(TEWidget* _te, const QString &_pgm, QStrList & _args, const QString &_term,const QString &_sessionId, const QString &_initial_cwd)
    : DCOPObject( _sessionId.latin1() )
    , monitorActivity(false)
    , monitorSilence(false)
@@ -32,7 +33,8 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, QStrList & _args, const
    , pgm(_pgm)
    , args(_args)
    , sessionId(_sessionId)
-   , cwd(_cwd)
+   , cwd("")
+   , initial_cwd(_initial_cwd)
 {
   //kdDebug(1211)<<"TESession ctor() new TEPty"<<endl;
   sh = new TEPty();
@@ -72,13 +74,15 @@ void TESession::run()
   QString appId=kapp->dcopClient()->appId();
 
   QString cwd_save = QDir::currentDirPath();
-  if (!cwd.isEmpty())
-     QDir::setCurrent(cwd);
+  if (!initial_cwd.isEmpty())
+     QDir::setCurrent(initial_cwd);
   sh->run(QFile::encodeName(pgm),args,term.latin1(),true,
           ("DCOPRef("+appId+",konsole)").latin1(),
           ("DCOPRef("+appId+","+sessionId+")").latin1());
-  if (!cwd.isEmpty())
+  if (!initial_cwd.isEmpty())
      QDir::setCurrent(cwd_save);
+  else
+     initial_cwd=cwd_save;
 
   sh->setWriteable(false);  // We are reachable via kwrited.
 }
@@ -92,6 +96,11 @@ void TESession::setUserTitle( int what, const QString &caption )
        iconText = caption;
     if (what == 30)
        renameSession(caption);
+    if (what == 31) {
+       cwd=caption;
+       cwd=cwd.replace( QRegExp("^~"), QDir::homeDirPath() );
+       emit openURLRequest(cwd);
+    }
     emit updateTitle();
 }
 

@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------- */
 /*                                                                        */
-/* [main.C]                        Konsole                                */
+/* [main.cpp]                      Konsole                                */
 /*                                                                        */
 /* ---------------------------------------------------------------------- */
 /*                                                                        */
@@ -294,6 +294,7 @@ int main(int argc, char* argv[])
     QString sPgm;
     QString sTerm;
     QString sIcon;
+    QString sCwd;
 
     while (KMainWindow::canBeRestored(n))
     {
@@ -303,7 +304,8 @@ int main(int argc, char* argv[])
         sTitle = sessionconfig->readEntry("Title0", title);
         sTerm = sessionconfig->readEntry("Term0");
         sIcon = sessionconfig->readEntry("Icon0","openterm");
-        Konsole *m = new Konsole(wname,sPgm,eargs,histon,menubaron,toolbaron,frameon,scrollbaron,sIcon,sTitle,0/*type*/,sTerm,true);
+        sCwd = sessionconfig->readEntry("Cwd0");
+        Konsole *m = new Konsole(wname,sPgm,eargs,histon,menubaron,toolbaron,frameon,scrollbaron,sIcon,sTitle,0/*type*/,sTerm,true,sCwd);
         m->restore(n);
         m->makeGUI();
         m->initSessionSchema(sessionconfig->readNumEntry("Schema0"));
@@ -327,7 +329,9 @@ int main(int argc, char* argv[])
           sTerm = sessionconfig->readEntry(key);
           key = QString("Icon%1").arg(counter);
           sIcon = sessionconfig->readEntry(key,"openterm");
-          m->newSession(sPgm, eargs, sTerm, sIcon);
+          key = QString("Cwd%1").arg(counter);
+          sCwd = sessionconfig->readEntry(key);
+          m->newSession(sPgm, eargs, sTerm, sIcon, sCwd);
           m->initSessionTitle(sTitle);
           key = QString("Schema%1").arg(counter);
           m->initSessionSchema(sessionconfig->readNumEntry(key));

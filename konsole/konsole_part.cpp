@@ -17,7 +17,7 @@
     the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
     Boston, MA 02111-1307, USA.
 
-    konsole_part.h
+    konsole_part.cpp
  */
 
 #include "konsole_part.h"
@@ -150,6 +150,8 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   parentWidget=_parentWidget;
   setInstance(konsoleFactory::instance());
 
+  m_extension = new konsoleBrowserExtension(this);
+
   // This is needed since only konsole.cpp does it
   // Without this -> crash on keypress... (David)
   KeyTrans::loadAll();
@@ -166,6 +168,8 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   se = new TESession(te,shell,eargs,"xterm");
   connect( se,SIGNAL(done(TESession*,int)),
            this,SLOT(doneSession(TESession*,int)) );
+  connect( se,SIGNAL(openURLRequest(const QString &)),
+           this,SLOT(emitOpenURLRequest(const QString &)) );
   connect( te,SIGNAL(configureRequest(TEWidget*,int,int,int)),
            this,SLOT(configureRequest(TEWidget*,int,int,int)) );
   connect( se, SIGNAL( updateTitle() ),
@@ -266,6 +270,12 @@ konsolePart::~konsolePart()
 bool konsolePart::openURL( const KURL & url )
 {
   //kdDebug(1211) << "konsolePart::openURL " << url.prettyURL() << endl;
+
+  if (currentURL==url) {
+    emit completed();
+    return true;
+  }
+
   m_url = url;
   emit setWindowCaption( url.prettyURL() );
   kdDebug(1211) << "Set Window Caption to " << url.prettyURL() << "\n";
@@ -283,6 +293,17 @@ bool konsolePart::openURL( const KURL & url )
   emit completed();
   return true;
 }
+
+void konsolePart::emitOpenURLRequest(const QString &cwd)
+{
+  KURL url;
+  url.setPath(cwd);
+  if (url==currentURL)
+    return; 
+  currentURL=url;
+  m_extension->emitOpenURLRequest(url);
+}
+
 
 void konsolePart::makeGUI()
 {
@@ -830,5 +851,18 @@ bool HistoryTypeDialog::isOn() const
   return m_btnEnable->isChecked();
 }
 
+konsoleBrowserExtension::konsoleBrowserExtension(konsolePart *parent)
+  : KParts::BrowserExtension(parent, "konsoleBrowserExtension")
+{
+}
+
+konsoleBrowserExtension::~konsoleBrowserExtension()
+{
+}
+
+void konsoleBrowserExtension::emitOpenURLRequest(const KURL &url)
+{
+  emit openURLRequest(url);
+}
 
 #include "konsole_part.moc"

@@ -31,7 +31,7 @@ public:
   TESession(TEWidget* w,
             const QString &pgm, QStrList & _args,
 	    const QString &term, const QString &sessionId="session-1",
-	    const QString &cwd = QString::null);
+	    const QString &initial_cwd = QString::null);
   ~TESession();
 
   void        setConnect(bool r);  // calls setListenToKeyPress(r)
@@ -53,6 +53,8 @@ public:
   QString keymap();
   QStrList getArgs();
   QString getPgm();
+  QString getCwd() { return cwd; }
+  QString getInitial_cwd() { return initial_cwd; }
 
   void setHistory(const HistoryType&);
   const HistoryType& history();
@@ -92,6 +94,8 @@ signals:
   void restoreAllListenToKeyPress();
   void renameSession(TESession* ses, const QString &name);
 
+  void openURLRequest(const QString &cwd);
+
 private slots:
   void setUserTitle( int, const QString &caption );
   void monitorTimerDone();
@@ -126,7 +130,9 @@ private:
 
   QString        term;
   QString        sessionId;
+
   QString        cwd;
+  QString        initial_cwd;
 };
 
 #endif

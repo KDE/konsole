@@ -163,7 +163,8 @@ const char *fonts[] = {
 
 Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, int histon,
                  bool menubaron, bool toolbaron, bool frameon, bool scrollbaron, const QString &_icon,
-                 const QString &_title, QCString type, const QString &_term, bool b_inRestore)
+                 const QString &_title, QCString type, const QString &_term, bool b_inRestore,
+                 const QString &_cwd)
 :KMainWindow(0, name),
 DCOPObject( "konsole" )
 ,m_defaultSession(0)
@@ -180,6 +181,7 @@ DCOPObject( "konsole" )
 ,m_session(0)
 ,m_edit(0)
 ,m_view(0)
+,m_bookmarks(0)
 ,m_options(0)
 ,m_schema(0)
 ,m_keytab(0)
@@ -202,6 +204,7 @@ DCOPObject( "konsole" )
 ,m_saveHistory(0)
 ,m_moveSessionLeft(0)
 ,m_moveSessionRight(0)
+,bookmarkHandler(0)
 ,m_finddialog(0)
 ,m_find_pattern("")
 ,cmd_serial(0)
@@ -293,7 +296,7 @@ DCOPObject( "konsole" )
   // activate and run first session //////////////////////////////////////////
   // FIXME: this slows it down if --type is given, but prevents a crash (malte)
   //KONSOLEDEBUG << "Konsole pgm: " << _program << endl;
-  newSession(co, _program, _args, _term, _icon, _title);
+  newSession(co, _program, _args, _term, _icon, _title, _cwd);
 
   //KONSOLEDEBUG<<"Konsole ctor() ends "<<time.elapsed()<<" msecs elapsed"<<endl;
   //KONSOLEDEBUG<<"Konsole ctor(): done"<<endl;
@@ -347,6 +350,7 @@ void Konsole::makeGUI()
    disconnect(m_rightButton,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_edit,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_view,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+   disconnect(m_bookmarks,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    //KONSOLEDEBUG<<"Konsole::makeGUI()"<<endl;
    connect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
    connect(m_session,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
@@ -434,6 +438,11 @@ void Konsole::makeGUI()
 //   KRadioAction *ra = session2action.find(m_initialSession);
    KRadioAction *ra = session2action.find(se);
    if (ra!=0) ra->plug(m_view);
+
+   //bookmarks menu
+   connect( bookmarkHandler, SIGNAL( openURL( const QString& )),
+            SLOT( enterURL( const QString& )));
+   connect(m_bookmarks, SIGNAL(aboutToShow()), SLOT(bookmarks_menu_check()));
 
    // Schema Options Menu -----------------------------------------------------
    m_schema = new KPopupMenu(this);
@@ -618,6 +627,8 @@ void Konsole::makeBasicGUI()
   m_session = new KPopupMenu(this);
   m_edit = new KPopupMenu(this);
   m_view = new KPopupMenu(this);
+  bookmarkHandler = new KonsoleBookmarkHandler( this );
+  m_bookmarks = bookmarkHandler->menu();
   m_options = new KPopupMenu(this);
   m_help =  helpMenu(0, FALSE);
   m_rightButton = new KPopupMenu(this);
@@ -634,10 +645,12 @@ void Konsole::makeBasicGUI()
   connect(m_rightButton,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_edit,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_view,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+  connect(m_bookmarks,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
 
   menubar->insertItem(i18n("Session") , m_session);
   menubar->insertItem(i18n("Edit"), m_edit);
   menubar->insertItem(i18n("View"), m_view);
+  menubar->insertItem(i18n("Bookmarks"), m_bookmarks);
   menubar->insertItem(i18n("Settings"), m_options);
   menubar->insertItem(i18n("Help"), m_help);
 };
@@ -668,8 +681,8 @@ bool Konsole::queryClose()
                                          i18n( "You have open sessions (besides the current one). "
                                                "These will be killed if you continue.\n"
                                                "Are you sure you want to quit?" ),
-					 i18n("Are you sure you want to quit?"),
-					 i18n("Quit"), i18n("Cancel") )
+					 i18n("Really Quit?"),
+					 i18n("&Quit"), i18n("&Cancel") )
 
               == KMessageBox::No )
             ) {
@@ -741,18 +754,6 @@ void Konsole::configureRequest(TEWidget* te, int state, int x, int y)
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void Konsole::saveGlobalProperties(KConfig* config)
-{
-  config->setGroup("global options");
-  config->writeEntry("working directory", QDir::currentDirPath());
-}
-
-void Konsole::readGlobalProperties(KConfig* config)
-{
-  config->setGroup("global options");
-  QDir::setCurrent(config->readEntry("working directory", QDir::currentDirPath()));
-}
-
 void Konsole::saveProperties(KConfig* config) {
   uint counter=0;
   uint active=0;
@@ -789,6 +790,13 @@ void Konsole::saveProperties(KConfig* config) {
         config->writeEntry(key, sessions.current()->isMonitorSilence());
         key = QString("MasterMode%1").arg(counter);
         config->writeEntry(key, sessions.current()->isMasterMode());
+
+        QString cwd=sessions.current()->getCwd();
+        if (cwd.isEmpty()) 
+          cwd=sessions.current()->getInitial_cwd();
+        key = QString("Cwd%1").arg(counter);
+        config->writeEntry(key, cwd);
+
         if (sessions.current()==se)
 	  active=counter;
         sessions.next();
@@ -926,6 +934,11 @@ void Konsole::applySettingsToGUI()
 /*                                                                           */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
+
+void Konsole::bookmarks_menu_check()
+{
+  bookmarkHandler->setAddEnabled( !(se->getCwd().isEmpty()) );
+}
 
 void Konsole::pixmap_menu_activated(int item)
 {
@@ -1293,6 +1306,28 @@ void Konsole::sendAllSessions(const QString &text)
   feedAllSessions(newtext);
 }
 
+KURL Konsole::baseURL() const
+{
+   KURL url;
+   url.setPath(se->getCwd()+"/");
+   return url;
+}
+
+void Konsole::enterURL(const QString& URL)
+{
+  if (se->isMasterMode()) {
+    clearAllListenToKeyPress();
+    se->setListenToKeyPress(true);
+  }
+  if (URL.startsWith("file:")) {
+    QString newtext=URL.mid(5);   
+    te->emitText("cd "+newtext+"\r");
+  }
+  else
+    te->emitText(URL);
+  restoreAllListenToKeyPress();  
+}
+
 void Konsole::sendSignal(int sn)
 {
   if (se) se->sendSignal(sn);
@@ -1498,10 +1533,10 @@ void Konsole::setDefaultSession(const QString &filename)
   m_defaultSessionFilename=filename;
 }
 
-void Konsole::newSession(const QString &pgm, const QStrList &args, const QString &term, const QString &icon)
+void Konsole::newSession(const QString &pgm, const QStrList &args, const QString &term, const QString &icon, const QString &cwd)
 {
   KSimpleConfig *co = defaultSession();
-  newSession(co, pgm, args, term, icon);
+  newSession(co, pgm, args, term, icon, QString::null, cwd);
 }
 
 QString Konsole::newSession()
@@ -1535,7 +1570,7 @@ QString Konsole::newSession(const QString &type)
   return newSession(co);
 }
 
-QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &args, const QString &_term,const QString &_icon,const QString &_title)
+QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &args, const QString &_term,const QString &_icon,const QString &_title, const QString &_cwd)
 {
   QString emu = "xterm";
   QString icon = "openterm";
@@ -1565,6 +1600,9 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
 
   if (!_title.isEmpty())
      txt = _title;
+
+  if (!_cwd.isEmpty())
+     cwd = _cwd;
 
   if (!program.isEmpty()) {
      cmdArgs = args;

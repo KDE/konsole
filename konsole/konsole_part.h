@@ -37,6 +37,8 @@
 #include "session.h"
 
 class KInstance;
+class konsoleBrowserExtension;
+
 namespace KParts { class GUIActivateEvent; }
 
 class konsoleFactory : public KParts::Factory
@@ -81,6 +83,8 @@ class konsolePart: public KParts::ReadOnlyPart
     void restoreAllListenToKeyPress();
 
  private slots:
+    void emitOpenURLRequest(const QString &url);
+
     void readProperties();
     void saveProperties();
 
@@ -103,6 +107,9 @@ class konsolePart: public KParts::ReadOnlyPart
     void slotWordSeps();
 
  private:
+    konsoleBrowserExtension *m_extension;
+    KURL currentURL;
+
     void makeGUI();
     void applySettingsToGUI();
 
@@ -169,6 +176,19 @@ public slots:
 protected:
   QCheckBox* m_btnEnable;
   QSpinBox*  m_size;
+};
+
+//////////////////////////////////////////////////////////////////////
+
+class konsoleBrowserExtension : public KParts::BrowserExtension
+{
+    Q_OBJECT
+	friend class konsolePart;
+ public:
+    konsoleBrowserExtension(konsolePart *parent);
+    virtual ~konsoleBrowserExtension();
+
+    void emitOpenURLRequest(const KURL &url);
 };
 
 #endif
