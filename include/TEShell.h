@@ -17,6 +17,7 @@
 #define SHELL_H
 
 #include <sys/types.h>
+#include <sys/ioctl.h>
 
 #include <qobject.h>
 #include <termios.h>
@@ -90,6 +91,8 @@ Q_OBJECT
     bool             needGrantPty;
     char ptynam[50]; // "/dev/ptyxx" | "/dev/ptmx"
     char ttynam[50]; // "/dev/ttyxx" | "/dev/pts/########..."
+    
+    winsize wsize;
 };
 
 #endif
