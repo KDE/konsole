@@ -192,7 +192,6 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   setWidget(te);
   connect( te,SIGNAL(configureRequest(TEWidget*,int,int,int)),
            this,SLOT(configureRequest(TEWidget*,int,int,int)) );
-  rootxpm = new KRootPixmap(te);
 
   colors = new ColorSchemaList();
   colors->checkSchemas();
@@ -543,11 +542,18 @@ void konsolePart::readProperties()
 
   if (sch->useTransparency()) {
     //KONSOLEDEBUG << "Setting up transparency" << endl;
+    if (!rootxpm)
+      rootxpm = new KRootPixmap(te);
     rootxpm->setFadeEffect(sch->tr_x(), QColor(sch->tr_r(), sch->tr_g(), sch->tr_b()));
     rootxpm->start();
+    rootxpm->repaint(true);
   }
   else {
-    rootxpm->stop();
+    if (rootxpm) {
+      rootxpm->stop();
+      delete rootxpm;
+      rootxpm=0;
+    }
     pixmap_menu_activated(sch->alignment());
   }
 
@@ -745,11 +751,18 @@ void konsolePart::setSchema(ColorSchema* s)
   te->setColorTable(s->table()); //FIXME: set twice here to work around a bug
 
   if (s->useTransparency()) {
+    if (!rootxpm)
+      rootxpm = new KRootPixmap(te);
     rootxpm->setFadeEffect(s->tr_x(), QColor(s->tr_r(), s->tr_g(), s->tr_b()));
     rootxpm->start();
+    rootxpm->repaint(true);
   }
   else {
-    rootxpm->stop();
+    if (rootxpm) {
+      rootxpm->stop();
+      delete rootxpm;
+      rootxpm=0;
+    }
     pixmap_menu_activated(s->alignment());
   }
 

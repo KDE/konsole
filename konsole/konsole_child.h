@@ -65,7 +65,6 @@ private:
   void pixmap_menu_activated(int item,QString pmPath);
 
   bool session_terminated;
-  bool session_transparent;
   int  wallpaperSource;
 
   TESession*     se;

@@ -270,10 +270,6 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
   // but a part shouldn't force that it receives the focus, so we do it here (David)
   te->setFocus();
 
-  // Transparency handler ///////////////////////////////////////////////////
-  rootxpm = new KRootPixmap(te);
-  //KONSOLEDEBUG<<"Konsole ctor() after new RootPixmap() "<<time.elapsed()<<" msecs elapsed"<<endl;
-
   // create applications /////////////////////////////////////////////////////
 
   setCentralWidget(te);
@@ -1241,13 +1237,20 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       if (sch->useTransparency())
       {
          //KONSOLEDEBUG << "Setting up transparency" << endl;
+         if (!rootxpm)
+           rootxpm = new KRootPixmap(te);
          rootxpm->setFadeEffect(sch->tr_x(), QColor(sch->tr_r(), sch->tr_g(), sch->tr_b()));
          rootxpm->start();
+         rootxpm->repaint(true);
       }
       else
       {
          //KONSOLEDEBUG << "Stopping transparency" << endl;
-         rootxpm->stop();
+         if (rootxpm) {
+           rootxpm->stop();
+           delete rootxpm;
+           rootxpm=0;
+         }
          pixmap_menu_activated(sch->alignment());
       }
 
@@ -2714,11 +2717,18 @@ void Konsole::setSchema(ColorSchema* s)
 
   if (s->useTransparency()) {
 //        KONSOLEDEBUG << "Setting up transparency" << endl;
+    if (!rootxpm)
+      rootxpm = new KRootPixmap(te);
     rootxpm->setFadeEffect(s->tr_x(), QColor(s->tr_r(), s->tr_g(), s->tr_b()));
     rootxpm->start();
+    rootxpm->repaint(true);    
   } else {
 //        KONSOLEDEBUG << "Stopping transparency" << endl;
-    rootxpm->stop();
+    if (rootxpm) {
+      rootxpm->stop();
+      delete rootxpm;
+      rootxpm=0;
+    }
     pixmap_menu_activated(s->alignment());
   }
 
@@ -3300,7 +3310,7 @@ void Konsole::slotBackgroundChanged(int desk)
     //automatically update because we are saying "I don't have the current wallpaper"
     NETRootInfo rootInfo( qt_xdisplay(), NET::CurrentDesktop );
     rootInfo.activate();
-    if( rootInfo.currentDesktop() == info.desktop() ) {
+    if( rootInfo.currentDesktop() == info.desktop() && rootxpm) {
        //We are on the current desktop, go ahead and update
        //KONSOLEDEBUG << "My desktop is current, updating..." << endl;
        wallpaperSource = desk;
@@ -3337,7 +3347,7 @@ void Konsole::currentDesktopChanged(int desk) {
       return;
 
    //This window is transparent, update the root pixmap
-   if( bNeedUpdate && s->useTransparency() ) {
+   if( bNeedUpdate && s->useTransparency() && rootxpm) {
       wallpaperSource = desk;
       rootxpm->repaint(true);
    }

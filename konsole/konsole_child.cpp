@@ -30,12 +30,12 @@ KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar
 ,schema(_schema)
 ,allowResize(_allowResize)
 ,b_fixedSize(_fixedSize)
+,rootxpm(0)
 {
   te = new TEWidget(this);
   te->setVTFont(font);
 
   setCentralWidget(te);
-  rootxpm = new KRootPixmap(te);
 
   te->setFocus();
 
@@ -50,8 +50,6 @@ KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar
   te->setCutToBeginningOfLine(cutToBeginningOfLine);
   te->setScrollbarLocation(scrollbar_location);
   te->setFrameStyle(frame_style);
-
-  toolBar()->hide();
 
   setColLin(columns, lines);
 
@@ -132,15 +130,19 @@ void KonsoleChild::run() {
 
 void KonsoleChild::setSchema(ColorSchema* _schema) {
   schema=_schema;
-  session_transparent=false;
   if (schema) {
     te->setColorTable(schema->table()); //FIXME: set twice here to work around a bug
     if (schema->useTransparency()) {
+      if (!rootxpm)
+        rootxpm = new KRootPixmap(te);
       rootxpm->setFadeEffect(schema->tr_x(), QColor(schema->tr_r(), schema->tr_g(), schema->tr_b()));
       rootxpm->start();
-      session_transparent=true;
     } else {
-      rootxpm->stop();
+      if (rootxpm) {
+        rootxpm->stop();
+        delete rootxpm;
+        rootxpm=0;
+      }
       pixmap_menu_activated(schema->alignment(),schema->imagePath());
     }
     te->setColorTable(schema->table());
@@ -299,7 +301,7 @@ void KonsoleChild::slotBackgroundChanged(int desk)
   // Only update rootxpm if window is visible on current desktop
   NETWinInfo info( qt_xdisplay(), winId(), qt_xrootwin(), NET::WMDesktop );
 
-  if (session_transparent && info.desktop()==desk && (0 != rootxpm)) {
+  if (rootxpm && info.desktop()==desk) {
     //KONSOLEDEBUG << "Wallpaper changed on my desktop, " << desk << ", repainting..." << endl;
     //Check to see if we are on the current desktop. If not, delay the repaint
     //by setting wallpaperSource to 0. Next time our desktop is selected, we will
@@ -338,7 +340,7 @@ void KonsoleChild::currentDesktopChanged(int desk) {
    }
 
    //This window is transparent, update the root pixmap
-   if( bNeedUpdate && session_transparent ) {
+   if( bNeedUpdate && rootxpm ) {
       wallpaperSource = desk;
       rootxpm->repaint(true);
    }
