@@ -143,6 +143,7 @@ private slots:
   void newSessionToolbar(int kind);
   void updateSchemaMenu();
   void updateKeytabMenu();
+  void updateRMBMenu();
 
   void changeColumns(int);
   void notifySessionState(TESession* session,int state);

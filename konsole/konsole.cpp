@@ -396,6 +396,50 @@ void Konsole::showTipOnStart()
 /*  Make menu                                                                */
 /* ------------------------------------------------------------------------- */
 
+void Konsole::updateRMBMenu()
+{
+   if (!m_rightButton) return;
+   int index = 0;
+   if (!showMenubar->isChecked())
+   {
+      // Only show when menubar is hidden
+      if (!showMenubar->isPlugged( m_rightButton ))
+      {
+         showMenubar->plug ( m_rightButton, index );
+         m_rightButton->insertSeparator( index+1 );
+      }
+      index = 2;
+   }
+   else
+   {
+      if (showMenubar->isPlugged( m_rightButton ))
+      {
+         showMenubar->unplug ( m_rightButton );
+         m_rightButton->removeItemAt(index);
+      }
+      index = 0;
+   }
+
+   if (!m_fullscreen)
+      return;
+   if (b_fullscreen)
+   {
+      if (!m_fullscreen->isPlugged( m_rightButton ))
+      {
+         m_fullscreen->plug ( m_rightButton, index );
+         m_rightButton->insertSeparator( index+1 );
+      }
+   }
+   else
+   {
+      if (m_fullscreen->isPlugged( m_rightButton ))
+      {
+         m_fullscreen->unplug ( m_rightButton );
+         m_rightButton->removeItemAt(index);
+      }
+   }
+}
+
 // Be carefull !!
 // This function consumes a lot of time, that's why it is called delayed on demand.
 // Be careful not to introduce function calls which lead to the execution of this
@@ -547,8 +591,10 @@ void Konsole::makeGUI()
       // Fullscreen
       m_options->insertSeparator();
       if (m_fullscreen)
+      {
         m_fullscreen->plug(m_options);
-      m_options->insertSeparator();
+        m_options->insertSeparator();
+      }
 
       // Select Bell
       selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), 0 , this,
@@ -644,11 +690,7 @@ void Konsole::makeGUI()
    // Right mouse button menu
    if (m_rightButton)
    {
-      showMenubar->plug ( m_rightButton );
-      m_rightButton->insertSeparator();
-      if (m_fullscreen)
-        m_fullscreen->plug(m_rightButton);
-      m_rightButton->insertSeparator();
+      updateRMBMenu(); // show menubar / exit fullscreen
 
       KAction* selectionEnd = new KAction(i18n("Set Selection End"), 0, te,
                                SLOT(setSelectionEnd()), actions, "selection_end");
@@ -1237,6 +1279,7 @@ void Konsole::applySettingsToGUI()
       showMenubar->setChecked(!menuBar()->isHidden());
       selectScrollbar->setCurrentItem(n_scroll);
       selectBell->setCurrentItem(n_bell);
+      updateRMBMenu();
    }
    updateKeytabMenu();
 }
@@ -1478,6 +1521,7 @@ void Konsole::slotToggleMenubar() {
     setCaption(i18n("Use the right mouse button to bring back the menu"));
     QTimer::singleShot(5000,this,SLOT(updateTitle()));
   }
+  updateRMBMenu();
 }
 
 /**
@@ -1649,6 +1693,8 @@ void Konsole::updateFullScreen()
   }
   if (m_fullscreen)
     m_fullscreen->setChecked(b_fullscreen);
+    
+  updateRMBMenu();
 }
 
 bool Konsole::event( QEvent* e )
