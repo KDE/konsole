@@ -44,6 +44,7 @@
 #include <string.h>
 #include <ctype.h>
 
+#include "konsole_wcwidth.h"
 #include "TEScreen.h"
 
 #ifndef HERE
@@ -713,16 +714,18 @@ void TEScreen::ShowCharacter(unsigned short c)
   // We indicate the fact that a newline has to be triggered by
   // putting the cursor one right to the last column of the screen.
 
-  if (cuX >= columns) {
+  int w = konsole_wcwidth(c);
+
+  if (cuX+w > columns) {
     if (getMode(MODE_Wrap)) { 
       line_wrapped[cuY]=true;
       NextLine();
     } 
     else 
-      cuX = columns-1;
+      cuX = columns-1; // 1? or w?
   }
 
-  if (getMode(MODE_Insert)) insertChars(1);
+  if (getMode(MODE_Insert)) insertChars(w);
 
   int i = loc(cuX,cuY);
 
@@ -733,9 +736,17 @@ void TEScreen::ShowCharacter(unsigned short c)
   image[i].b = ef_bg;
   image[i].r = ef_re;
 
-  cuX += 1;
-
-
+  cuX += w--;
+  
+  while(w)
+  {
+     i++;
+     image[i].c = 0;
+     image[i].f = ef_fg;
+     image[i].b = ef_bg;
+     image[i].r = ef_re;
+     w--;
+  }
 }
 
 // Region commands -------------------------------------------------------------

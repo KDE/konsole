@@ -21,7 +21,7 @@ libkonsolepart_la_SOURCES = TEPty.cpp BlockArray.cpp konsole_part.cpp \
 	session.cpp \
 	TEWidget.cpp \
 	TEmuVt102.cpp \
-	TEScreen.cpp \
+	TEScreen.cpp konsole_wcwidth.cpp \
 	TEmulation.cpp \
 	TEHistory.cpp \
 	keytrans.cpp \
@@ -48,7 +48,8 @@ konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
 
 # konsole executable - has all the sources, doesn't link kparts, saves startup time
 konsole_SOURCES	= TEPty.cpp BlockArray.cpp main.cpp konsole.cpp schema.cpp session.cpp TEWidget.cpp TEmuVt102.cpp \
-                  TEScreen.cpp TEmulation.cpp TEHistory.cpp keytrans.cpp konsoleiface.skel sessioniface.skel
+                  TEScreen.cpp TEmulation.cpp TEHistory.cpp keytrans.cpp konsoleiface.skel sessioniface.skel \
+                  konsole_wcwidth.cpp
 konsole_LDADD = $(LIB_KDEUI) $(LIB_KSYCOCA) $(LIBUTIL) $(LIB_KFILE) @XTESTLIB@
 konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
@@ -57,7 +58,7 @@ konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 # kcmkonsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 noinst_HEADERS = TEWidget.h TEPty.h TEmulation.h TEmuVt102.h \
-	TECommon.h TEScreen.h konsole.h schema.h session.h \
+	TECommon.h TEScreen.h konsole.h schema.h session.h konsole_wcwidth.h \
 	kwrited.h TEHistory.h keytrans.h default.keytab.h BlockArray.h
 
 konsole_grantpty_SOURCES = konsole_grantpty.c
