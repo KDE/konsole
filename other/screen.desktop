@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=KonsoleApplication
+Name=New Screen Session
+Comment=Open a new screen session
+Exec=screen 
