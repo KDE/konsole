@@ -231,7 +231,7 @@ Konsole::Konsole(const QString& name,
   // activate and run first session //////////////////////////////////////////
 
   // WABA: Make sure all the xxxBars are in place so that
-  //       we can resize our mainWidget to its target size.
+  //       we can resize ou configuration filesr mainWidget to its target size.
   updateRects();
 
   runSession(initial);
@@ -485,7 +485,6 @@ void Konsole::makeMenu()
 
   menubar->insertItem(i18n("File") , m_file);
 
-//menubar->insertItem(i18n("New"), m_commands);
   menubar->insertItem(i18n("Sessions"), m_sessions);
 
   menubar->insertItem(i18n("Options"), m_options);
@@ -515,8 +514,8 @@ void Konsole::saveProperties(KConfig* config)
 
   if (args.count() > 0) config->writeEntry("konsolearguments", args);
   config->writeEntry("class",name());
-  config->writeEntry("defaultheight", height()); // for "save options". Not used by SM.
-  config->writeEntry("defaultwidth", width());   // for "save options". Not used by SM.
+  config->writeEntry("defaultheight", te->height()); // for "save options". Not used by SM.
+  config->writeEntry("defaultwidth", te->width());   // for "save options". Not used by SM.
   //config->writeEntry("kmenubar",                 //FIXME:Float
   //                   menubar->menuBarPos() == KMenuBar::Bottom ? "bottom" : "top");
   // geometry (placement) done by KTMainWindow
@@ -689,23 +688,9 @@ void Konsole::setFont(int fontno)
   {
     te->setVTFont(f);
   }
-  /*
-  m_font->setItemChecked(n_font,FALSE);
-  m_font->setItemChecked(fontno, TRUE);
-  */
   n_font = fontno;
   if (se) se->setFontNo(fontno);
 }
-
-/*
-void Konsole::setMenuVisible(bool visible)
-{
-  b_menuvis = visible;
-  m_options->setItemChecked(1,b_menuvis);
-  if (b_menuvis) menubar->show(); else menubar->hide();
-  updateRects();
-}
-*/
 
 void Konsole::slotToggleMenubar() {
   b_menuvis = showMenubar->isChecked();
@@ -743,15 +728,6 @@ void Konsole::opt_menu_activated(int item)
 {
   switch( item )
   {
-    /*
-    case 1: setMenuVisible(!b_menuvis);
-            if (!b_menuvis)
-            {
-              setCaption(i18n("Use the right mouse button to bring back the menu"));
-              QTimer::singleShot(5000,this,SLOT(setHeader()));
-            }
-            break;
-    */
     case 2: setFrameVisible(!b_framevis);
             break;
     case 3: setHistory(!b_scroll);
