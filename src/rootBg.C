@@ -81,70 +81,55 @@ void RootPixmap::readSettings(int num)
   dsk = num;
 
   QString tmpf;
-  tmpf.sprintf("/desktop%drc", num);
+  tmpf.sprintf("desktop%drc", num);
 
-  bool first_time = false;
-
-  QFileInfo fi( KApplication::localconfigdir() + tmpf );
-  if ( ! fi.exists() ){
-    tmpf = "/kcmdisplayrc";
-    first_time = true;
-  }
-
-  KConfig config(locate("config", tmpf),
-		 KApplication::localconfigdir() + tmpf);
+  KConfig config(tmpf);
 
   bool randomMode = false;
   int randomDesk=0;
 
-  if ( !first_time ) {
-    config.setGroup( "Common" );
-    randomMode = config.readBoolEntry( "RandomMode", false );
-
-    if ( randomMode ) {
-      int count = config.readNumEntry( "Count", 1 );
-      bool inorder = config.readBoolEntry( "InOrder", true);
-      bool useDir = config.readBoolEntry( "UseDir", true );
-
-      if ( useDir ) {
-	  
-	  QStringList list = KGlobal::dirs()->findAllResources("wallpaper");
-
-	  count = list.count();
-	if ( inorder ) {
-	  randomDesk = config.readNumEntry( "Item", 0 );
-	  randomDesk++;
-	  if ( randomDesk >= count ) randomDesk = 0;
-	} else if ( count > 0 )
-	  randomDesk = random() % count;
-
-	color1 = QColor(DEFAULT_COLOR_1);
-	gfMode = DEFAULT_COLOR_MODE;
-	orMode = DEFAULT_ORIENTATION_MODE;
-	wpMode = DEFAULT_WALLPAPER_MODE;
-	bUseWallpaper = true;
-
-	hasPm = true;
-
-	return;
-      }
-      else if ( inorder ) {
-	randomDesk = config.readNumEntry( "Item", DEFAULT_DESKTOP );
+  config.setGroup( "Common" );
+  randomMode = config.readBoolEntry( "RandomMode", false );
+  
+  if ( randomMode ) {
+    int count = config.readNumEntry( "Count", 1 );
+    bool inorder = config.readBoolEntry( "InOrder", true);
+    bool useDir = config.readBoolEntry( "UseDir", true );
+    
+    if ( useDir ) {
+      
+      QStringList list = KGlobal::dirs()->findAllResources("wallpaper");
+      
+      count = list.count();
+      if ( inorder ) {
+	randomDesk = config.readNumEntry( "Item", 0 );
 	randomDesk++;
-	if ( randomDesk >= count ) randomDesk = DEFAULT_DESKTOP;
-      }
-      else if ( count > 0 )
+	if ( randomDesk >= count ) randomDesk = 0;
+      } else if ( count > 0 )
 	randomDesk = random() % count;
+      
+      color1 = QColor(DEFAULT_COLOR_1);
+      gfMode = DEFAULT_COLOR_MODE;
+      orMode = DEFAULT_ORIENTATION_MODE;
+      wpMode = DEFAULT_WALLPAPER_MODE;
+      bUseWallpaper = true;
 
+      hasPm = true;
+      
+      return;
     }
-    else
-      randomDesk = DEFAULT_DESKTOP;
-
+    else if ( inorder ) {
+      randomDesk = config.readNumEntry( "Item", DEFAULT_DESKTOP );
+      randomDesk++;
+      if ( randomDesk >= count ) randomDesk = DEFAULT_DESKTOP;
+    }
+    else if ( count > 0 )
+      randomDesk = random() % count;
+    
   }
   else
-    randomDesk = num + 1;
-
-
+    randomDesk = DEFAULT_DESKTOP;
+  
   tmpf.sprintf("Desktop%d", randomDesk);
   config.setGroup( tmpf );
 
