@@ -193,7 +193,8 @@ void KeytabReader::getSymbol()
   }
   if (strchr("+-:",cc))
   {
-    res = (char)cc;
+    res = "";
+    res = res + (char)cc;
     getCc();
     sym = SYMOpr; return;
   }
