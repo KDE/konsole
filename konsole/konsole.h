@@ -221,8 +221,6 @@ private:
   unsigned int m_histSize;
   bool         b_histEnabled:1;
 
-  uint         lineSpacing;
-
 public:
 
   QString     s_title;

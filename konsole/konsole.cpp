@@ -358,7 +358,7 @@ void Konsole::makeGUI()
    // Sessions Menu ----------------------------------------------------------------
    m_sessions->setCheckable(TRUE);
    m_sessions->insertItem( i18n("&Send Signal"), m_signals );
-   KAction *renameSession = new KAction(i18n("&Rename session..."), 0, this,
+   KAction *renameSession = new KAction(i18n("&Rename Session..."), 0, this,
                                         SLOT(slotRenameSession()), this);
    renameSession->plug(m_sessions);
 
@@ -367,17 +367,17 @@ void Konsole::makeGUI()
    m_clearHistory->setEnabled( se->history().isOn() );
    m_clearHistory->plug(m_sessions);
 
-   m_moveSessionLeft = new KAction(i18n("&Move session left"), "back", 0, this,
+   m_moveSessionLeft = new KAction(i18n("&Move Session Left"), "back", 0, this,
                                         SLOT(moveSessionLeft()), this);
    m_moveSessionLeft->setEnabled( false );
    m_moveSessionLeft->plug(m_sessions);
 
-   m_moveSessionRight = new KAction(i18n("M&ove session right"), "forward", 0, this,
+   m_moveSessionRight = new KAction(i18n("M&ove Session Right"), "forward", 0, this,
                                         SLOT(moveSessionRight()), this);
    m_moveSessionRight->setEnabled( false );
    m_moveSessionRight->plug(m_sessions);
 
-   KAction *closeSession = new KAction(i18n("&Close session"), "fileclose", 0, this,
+   KAction *closeSession = new KAction(i18n("&Close Session"), "fileclose", 0, this,
                                         SLOT(closeCurrentSession()), this);
    closeSession->plug(m_sessions);
    
@@ -488,7 +488,7 @@ void Konsole::makeGUI()
    selectLineSpacing =
      new KSelectAction
      (
-      i18n("&Line spacing"),
+      i18n("Li&ne Spacing"),
       SmallIconSet("leftjust"), // Non-code hack.
       0,
       this,
@@ -822,7 +822,7 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("keytab",n_defaultKeytab);
   config->writeEntry("WarnQuit", b_warnQuit);
   config->writeEntry("ActiveSession", active);
-  config->writeEntry("LineSpacing", lineSpacing);
+  config->writeEntry("LineSpacing", te->lineSpacing());
 
   if (se) {
     config->writeEntry("history", se->history().getSize());
@@ -858,8 +858,6 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    n_bell = QMIN(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),2);
    s_word_seps= config->readEntry("wordseps",":@-./_~");
    b_framevis = config->readBoolEntry("has frame",TRUE);
-
-   lineSpacing=config->readUnsignedNumEntry( "LineSpacing", 0 );
 
    // Global options ///////////////////////
 
@@ -899,7 +897,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    }
    //KONSOLEDEBUG << "Doing the rest" << endl;
 
-   te->setLineSpacing(lineSpacing);
+   te->setLineSpacing( config->readUnsignedNumEntry( "LineSpacing", 0 ) );
    te->setScrollbarLocation(n_scroll);
    te->setBellMode(n_bell);
    te->setWordCharacters(s_word_seps);
@@ -927,6 +925,7 @@ void Konsole::applySettingsToGUI()
    warnQuit->setChecked ( b_warnQuit);
    showFrame->setChecked( b_framevis );
    selectFont->setCurrentItem(n_font);
+   selectLineSpacing->setCurrentItem(te->lineSpacing());
    notifySize(te->Lines(),te->Columns());
    showToolbar->setChecked(!toolBar()->isHidden());
    showMenubar->setChecked(!menuBar()->isHidden());
@@ -1000,8 +999,7 @@ void Konsole::slotSelectScrollbar() {
 
 void Konsole::slotSelectLineSpacing()
 {
-  lineSpacing = selectLineSpacing->currentItem();
-  te->setLineSpacing(lineSpacing);
+  te->setLineSpacing( selectLineSpacing->currentItem() );
 }
 
 void Konsole::slotSelectFont() {
@@ -1877,6 +1875,7 @@ void Konsole::slotRenameSession() {
   KRadioAction *ra = session2action.find(se);
   QString name = se->Title();
   KLineEditDlg dlg(i18n("Session name"),name, this);
+  dlg.setCaption(i18n("Rename Session"));
   if (dlg.exec()) {
     se->setTitle(dlg.text());
     ra->setText(dlg.text());
@@ -2056,6 +2055,7 @@ unsigned int SizeDialog::lines() const
 void Konsole::slotWordSeps() {
 //  KONSOLEDEBUG << "Konsole::slotWordSeps\n";
   KLineEditDlg dlg(i18n("Characters other than alphanumerics considered part of a word when double clicking"),s_word_seps, this);
+  dlg.setCaption(i18n("Word Separators"));
   if (dlg.exec()) {
     s_word_seps = dlg.text();
     te->setWordCharacters(s_word_seps);
