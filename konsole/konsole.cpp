@@ -95,7 +95,6 @@ Time to start a requirement list.
 #include <klineeditdlg.h>
 #include <kdebug.h>
 #include <kipc.h>
-#include <kglobalsettings.h>
 #include <dcopclient.h>
 
 #include <klocale.h>
@@ -861,7 +860,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
 
       // Options that should be applied to all sessions /////////////
       // (1) set menu items and Konsole members
-      QFont tmpFont( KGlobalSettings::fixedFont() );
+      QFont tmpFont("fixed");
       defaultFont = config->readFontEntry("defaultfont", &tmpFont);
       setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT));
 
@@ -1082,7 +1081,7 @@ void Konsole::setFont(int fontno)
   }
   else
   {
-    f = KGlobalSettings::fixedFont();
+    f.setFamily("fixed");
     f.setFixedPitch(true);
     f.setPixelSize(QString(fonts[fontno]).toInt());
   }
