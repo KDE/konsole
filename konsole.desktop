@@ -1,0 +1,41 @@
+[Desktop Entry]
+Type=Application
+Exec=konsole %i %m -caption "%c"
+Icon=konsole
+DocPath=konsole/index.html
+ServiceTypes=KParts/ReadOnlyPart,Browser/View,inode/directory
+MimeType=application/x-konsole
+Terminal=0
+
+X-KDE-Library=libkonsole
+X-KDE-LibraryName=konsole
+X-KDE-FactoryName=visual
+X-KDE-BrowserView-AllowAsDefault=false
+X-KDE-BrowserView-Builtin=true
+
+Name=Terminal
+Name[cs]=Terminál
+Name[eo]=Terminalo
+Name[fi]=Pääteikkuna
+Name[hu]=Terminál
+Name[it]=Terminale
+Name[ja]=ターミナル
+Name[ta]=Ó¨ÉÂõ
+
+Comment=Terminal emulator window
+Comment[ca]=Finestra d'emulació de terminal
+Comment[cs]=Emulátor terminálu
+Comment[de]=Terminal-Emulation
+Comment[eo]=Terminalimitaĵo
+Comment[fi]=Pääte-emulaattori
+Comment[fr]=konsole : Emulateur de terminal
+Comment[hu]=Terminál emulátor
+Comment[it]=Finestra emulazione terminale
+Comment[ja]=ターミナルエミュレータウィンドウ
+Comment[no]=Vindu for terminalemulering
+Comment[no_NY]=Terminal-emuleringsvindauge
+Comment[pt]=Emulador de Terminal
+Comment[ro]=Fereastră de emulator de terminal
+Comment[sl]=Okno s terminalskim emulatorjem
+Comment[sv]=Terminalemuleringsfönster
+Comment[ta]=Ó¨ÉÂ º¡ÇÃõ
