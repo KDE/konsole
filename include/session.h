@@ -36,9 +36,6 @@ public:
   void        setConnect(bool r);
   TEmulation* getEmulation();      // to control emulation
   bool        isSecure();
-
-public:
-
   int schemaNo();
   int fontNo();
   const char* emuName();
@@ -62,6 +59,8 @@ public slots:
 signals:
 
   void done(TESession*, int);
+private slots:
+  void saveChangedTitle(int, const QString& s);
 
 private:
 
