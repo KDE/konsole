@@ -35,6 +35,8 @@
 #include "session.h"
 #include "schema.h"
 
+#include "konsoleiface.h"
+
 #undef PACKAGE
 #undef VERSION
 #define PACKAGE "konsole"
@@ -46,7 +48,7 @@ class QCheckBox;
 // Defined in main.C
 const char *konsole_shell(QStrList &args);
 
-class Konsole : public KMainWindow
+class Konsole : public KMainWindow, virtual public KonsoleIface
 {
     Q_OBJECT
 
@@ -57,7 +59,6 @@ public:
     bool menubaron, bool toolbaron, bool frameon, bool scrollbaron, const QString & _title,
     QCString type = 0, const QString &_term=QString::null, bool b_inRestore = false);
   ~Konsole();
-  void setActiveSession(uint sessionNo);
   void setColLin(int columns, int lines);
   void setFullScreen(bool on);
   void initFullScreen();
@@ -68,6 +69,12 @@ public:
   void newSession(const QString &program, const QStrList &args, const QString &term);
 
   void run();
+
+  // DCOP functions
+  int currentSession();
+
+  int sessionCount() { return sessions.count(); }
+  void setCurrentSession(int sessionNo);
 
 public slots:
 

@@ -25,7 +25,6 @@
 #include <kcmdlineargs.h>
 #include <kimageio.h>
 #include <kdebug.h>
-#include <dcopclient.h>
 #include "konsole.h"
 
 static const char *description =
@@ -270,10 +269,6 @@ int main(int argc, char* argv[])
 
   // ///////////////////////////////////////////////
 
-  // a.dcopClient()->registerAs(a.name()); //FIXME: Experimental
-
-  // ///////////////////////////////////////////////
-
   // Ignore SIGHUP so that we don't get killed when 
   // our parent-shell gets closed.
   signal(SIGHUP, SIG_IGN); 
@@ -335,7 +330,7 @@ int main(int argc, char* argv[])
           m->initSessionKeyTab(sessionconfig->readEntry(key));
           counter++;
         }
-        m->setActiveSession( sessionconfig->readNumEntry("ActiveSession",0) );
+        m->setCurrentSession( sessionconfig->readNumEntry("ActiveSession",0)+1 );
         ksm->konsole = m;
         ksm->konsole->initFullScreen();
         // works only for the first one, but there won't be more.

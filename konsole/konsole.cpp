@@ -95,7 +95,7 @@ Time to start a requirement list.
 #include <klineeditdlg.h>
 #include <kdebug.h>
 #include <kipc.h>
-
+#include <dcopclient.h>
 
 #include <klocale.h>
 #include <sys/wait.h>
@@ -162,7 +162,8 @@ const char *fonts[] = {
 Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, int histon,
                  bool menubaron, bool toolbaron, bool frameon, bool scrollbaron,
                  const QString &_title, QCString type, const QString &_term, bool b_inRestore)
-:KMainWindow(0, name)
+:KMainWindow(0, name),
+DCOPObject( "KonsoleIface" )
 ,m_defaultSession(0)
 ,te(0)
 ,se(0)
@@ -311,6 +312,12 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 
   //KONSOLEDEBUG<<"Konsole ctor() ends "<<time.elapsed()<<" msecs elapsed"<<endl;
   //KONSOLEDEBUG<<"Konsole ctor(): done"<<endl;
+
+  // Register with DCOP
+  if ( !kapp->dcopClient()->isRegistered() ) {
+    kapp->dcopClient()->registerAs( "konsole" );
+    kapp->dcopClient()->setDefaultObject( objId() );
+  }
 }
 
 Konsole::~Konsole()
@@ -1407,16 +1414,32 @@ void Konsole::addSession(TESession* s)
   session2button.insert(s,ktb);
 }
 
+int Konsole::currentSession()
+{
+  uint counter=0;
+  uint active=0;
+
+  sessions.first();
+  while(counter < sessions.count())
+  {
+    if (sessions.current()==se)
+      active=counter;
+      sessions.next();
+      counter++;
+  }
+  return active+1;
+}
+
+void Konsole::setCurrentSession(int sessionNo)
+{
+  if (sessionNo>sessions.count())
+    return;
+  activateSession( sessions.at(sessionNo-1) );
+}
+
 /**
    Activates a session (from the menu or by pressing a button)
  */
-void Konsole::setActiveSession(uint sessionNo)
-{
-  if (sessionNo>=sessions.count())
-    return;
-  activateSession( sessions.at(sessionNo) );
-}
-
 void Konsole::activateSession()
 {
   TESession* s = NULL;
