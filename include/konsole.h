@@ -72,6 +72,8 @@ protected:
  void saveGlobalProperties(KConfig* config);
  void readGlobalProperties(KConfig* config);
 
+ void showFullScreen();
+
 private slots:
 
   void setSchema(int n);
