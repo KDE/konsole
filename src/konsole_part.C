@@ -217,6 +217,8 @@ bool konsolePart::openURL( const KURL & url )
       stat( QFile::encodeName( url.path() ), &buff );
       QString text = ( S_ISDIR( buff.st_mode ) ? url.path() : url.directory() );
       text.replace(QRegExp(" "), "\\ "); // escape spaces
+      text.replace(QRegExp("("), "\\("); // and '('
+      text.replace(QRegExp(")"), "\\)"); // and ')'
       text = QString::fromLatin1("cd ") + text + '\n';
       QKeyEvent e(QEvent::KeyPress, 0,-1,0, text);
       initial->getEmulation()->onKeyPress(&e);
