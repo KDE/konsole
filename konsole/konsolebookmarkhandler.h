@@ -33,6 +33,7 @@ private slots:
                           const QString& additionalInfo );
     void slotNewFolder( const QString& text, bool open,
                         const QString& additionalInfo );
+    void slotBookmarksChanged( const QString &, const QString & caller );
     void newSeparator();
     void endFolder();
 

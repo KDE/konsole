@@ -36,6 +36,9 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel 
     KBookmarkManager *manager = KBookmarkManager::managerForFile( file, false);
     manager->setUpdate( true );
     manager->setShowNSBookmarks( false );
+    
+    connect( manager, SIGNAL( changed(const QString &, const QString &) ),
+             SLOT( slotBookmarksChanged(const QString &, const QString &) ) );
 
     if (toplevel) {
         m_bookmarkMenu = new KBookmarkMenu( manager, this, m_menu,
@@ -94,6 +97,13 @@ void KonsoleBookmarkHandler::slotNewFolder( const QString& text, bool /*open*/,
 {
     *m_importStream << "<folder icon=\"bookmark_folder\">\n<title=\"";
     *m_importStream << text << "\">\n";
+}
+
+void KonsoleBookmarkHandler::slotBookmarksChanged( const QString &,
+                                                   const QString & caller )
+{
+    // This is called when someone changes bookmarks in konsole....
+    m_bookmarkMenu->slotBookmarksChanged("");
 }
 
 void KonsoleBookmarkHandler::newSeparator()
