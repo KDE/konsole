@@ -1227,7 +1227,6 @@ void TEWidget::drop_menu_activated(int item)
             dropText = url.directory( true, false ); // remove filename
          }
       }
-      dropText.replace(QRegExp(" "), "\\ "); // escape spaces
       currentSession->getEmulation()->sendString(dropText.local8Bit());
       currentSession->getEmulation()->sendString("\n");
       //    KWM::activate((Window)this->winId());
