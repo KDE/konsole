@@ -33,6 +33,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, QStrList & _args, const
    , font_no(3)
    , silence_seconds(10)
    , add_to_utmp(true)
+   , xon_xoff(false)
    , pgm(_pgm)
    , args(_args)
    , sessionId(_sessionId)
@@ -93,6 +94,7 @@ void TESession::run()
   QString cwd_save = QDir::currentDirPath();
   if (!initial_cwd.isEmpty())
      QDir::setCurrent(initial_cwd);
+  sh->setXonXoff(xon_xoff);
   sh->run(QFile::encodeName(pgm),args,term.latin1(), add_to_utmp,
           ("DCOPRef("+appId+",konsole)").latin1(),
           ("DCOPRef("+appId+","+sessionId+")").latin1());
@@ -388,6 +390,11 @@ void TESession::setMasterMode(bool _master)
 void TESession::setAddToUtmp(bool set)
 {
   add_to_utmp = set;
+}
+
+void TESession::setXonXoff(bool set)
+{
+  xon_xoff = set;
 }
 
 bool TESession::processDynamic(const QCString &fun, const QByteArray &data, QCString& replyType, QByteArray &replyData)

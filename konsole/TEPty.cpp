@@ -598,7 +598,8 @@ void TEPty::startPgm(const char* pgm, QValueList<QCString> & args, const char* t
       ioctl(0,TCGETS,(char *)&ttmode);
 #   endif
 #endif
-      ttmode.c_iflag &= ~(IXOFF | IXON);
+      if (!xonxoff)
+         ttmode.c_iflag &= ~(IXOFF | IXON);
       ttmode.c_cc[VINTR] = CTRL('C');
       ttmode.c_cc[VQUIT] = CTRL('\\');
       ttmode.c_cc[VERASE] = 0177;
@@ -622,32 +623,12 @@ void TEPty::startPgm(const char* pgm, QValueList<QCString> & args, const char* t
   if (konsole_dcop && konsole_dcop[0]) setenv("KONSOLE_DCOP",konsole_dcop,1);
   if (konsole_dcop_session && konsole_dcop_session[0]) setenv("KONSOLE_DCOP_SESSION",konsole_dcop_session,1);
 
-//  kdDebug() << "In TEPty.  args.count() is  " << args.count() << endl;
-//  kdDebug() << "In TEPty.  i is " << i << endl;
-//  kdDebug() << "In TEPty.  pgm  is " << pgm << endl;
-
-//  for (int k=1; k < 500000 ; k++) {
-//    for (int j=1; j < 5000 ; j++) {}
-//    }
-
   // convert QStrList into char*[]
   unsigned int i;
   char **argv = (char**)malloc(sizeof(char*)*(args.count()+1));
-//  char **argv = (char**)malloc(sizeof(char*)*(args.count()+0));
   for (i = 0; i<args.count(); i++) {
      argv[i] = strdup(args[i]);
-//      kdDebug() << "argv[" << i << "]=" << argv[i] << endl;
      }
-//  for (i = 1; i<args.count(); i++) argv[i-1] = strdup(args.at(i));
-//   kdDebug() << "pgm WAS = " << pgm << endl;
-   //pgm = strdup(args.at(0));
-//  kdDebug() << "pgm WAS CHANGED TO = " << pgm << endl;
-//  kdDebug() << "In TEPty.  first arg is " << argv[0] << endl;
-//  kdDebug() << "In TEPty.  i is " << i << endl;
-//  kdDebug() << "In TEPty.  pgm  is " << pgm << endl;
-//   for (int k=1; k < 500000 ; k++) {
-//     for (int j=1; j < 8000 ; j++) {}
-//   }
 
   argv[i] = 0L;
 
@@ -656,7 +637,6 @@ void TEPty::startPgm(const char* pgm, QValueList<QCString> & args, const char* t
   // finally, pass to the new program
   //  kdDebug(1211) << "We are ready to run the program " << pgm << endl;
   execvp(pgm, argv);
-  //execvp("/bin/bash", argv);
   perror("exec failed");
   exit(1);                             // control should never come here.
 }
@@ -666,6 +646,7 @@ void TEPty::startPgm(const char* pgm, QValueList<QCString> & args, const char* t
 */
 TEPty::TEPty() : pSendJobTimer(NULL)
 { 
+  xonxoff = false;
   memset(&wsize, 0, sizeof(struct winsize));
   fd = openPty();
   connect(this, SIGNAL(receivedStdout(int, int &)), 
@@ -788,3 +769,4 @@ void TEPty::lockPty(bool lock)
   else
     resume();
 }
+

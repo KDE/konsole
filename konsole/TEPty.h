@@ -47,6 +47,7 @@ Q_OBJECT
     int run( const char* pgm, QStrList & args, const char* term, bool addutmp,
              const char* konsole_dcop = "", const char* konsole_dcop_session = "" );
     void setWriteable(bool writeable);
+    void setXonXoff(bool _xonxoff) { xonxoff = _xonxoff; }
     int makePty(bool _addutmp);
     int masterFd() { return fd; }
     QString error() { return _error; }
@@ -102,6 +103,7 @@ Q_OBJECT
     struct winsize wsize;
     int fd;
     bool             needGrantPty;
+    bool             xonxoff;
     char ptynam[50]; // "/dev/ptyxx" | "/dev/ptmx"
     char ttynam[50]; // "/dev/ttyxx" | "/dev/pts/########..."
     const char *pgm;

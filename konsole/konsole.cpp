@@ -235,6 +235,7 @@ DCOPObject( "konsole" )
 ,b_warnQuit(false)
 ,b_allowResize(true)
 ,b_addToUtmp(true)
+,b_xonXoff(false)
 ,b_fullScripting(false)
 ,m_histSize(DEFAULT_HISTORY_SIZE)
 {
@@ -1060,6 +1061,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
      for (TESession *ses = sessions.first(); ses; ses = sessions.next())
        ses->setMonitorSilenceSeconds(monitorSilenceSeconds);
        
+     b_xonXoff = config->readBoolEntry("XonXoff",false);
      config->setGroup("UTMP");
      b_addToUtmp = config->readBoolEntry("AddToUtmp",true);
      config->setDesktopGroup();
@@ -1950,6 +1952,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
   s->setTitle(txt);
   s->setIconName(icon);
   s->setAddToUtmp(b_addToUtmp);
+  s->setXonXoff(b_xonXoff);
 
   if (b_histEnabled && m_histSize)
     s->setHistory(HistoryTypeBuffer(m_histSize));
