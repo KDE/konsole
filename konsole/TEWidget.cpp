@@ -401,6 +401,12 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
   dragInfo.state = diNone;
 
   setFocusPolicy( WheelFocus );
+  
+  if (!argb_visual)
+  {
+    // Looks better at startup with KRootPixmap based pseudo-transparancy
+    setBackgroundMode(NoBackground);
+  }
 }
 
 //FIXME: make proper destructor

@@ -880,7 +880,6 @@ void Konsole::makeGUI()
 void Konsole::makeTabWidget()
 {
   tabwidget = new KTabWidget(this);
-  tabwidget->installEventFilter(this);
   tabwidget->setTabReorderingEnabled(true);
   if (n_tabbar==TabTop)
     tabwidget->setTabPosition(QTabWidget::Top);
@@ -940,21 +939,6 @@ bool Konsole::eventFilter( QObject *o, QEvent *ev )
       {
         m_newSessionButton->openPopup();
         return true;
-      }
-    }
-  }
-  else if (o == tabwidget)
-  {
-    // There is probably a bug in KRootPixmap which makes this workaround
-    // neccesary:
-    // Mark the background of invisible TEWidgets dirty so they can be
-    // repainted when they are displayed next.
-    if (tabwidget && ev->type() == QEvent::Resize) {
-      for(int i = 0; i < tabwidget->count(); i++) {
-        QWidget *page = tabwidget->page(i);
-        if (page != tabwidget->currentPage()) {
-          rootxpmsDirty[page] = true;
-        }
       }
     }
   }
@@ -1533,8 +1517,6 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
            if (!rootxpms[te])
              rootxpms.insert( te, new KRootPixmap(te) );
            rootxpms[te]->setFadeEffect(sch->tr_x(), QColor(sch->tr_r(), sch->tr_g(), sch->tr_b()));
-           rootxpms[te]->start();
-           rootxpms[te]->repaint(true);
         }
         else
         {
@@ -2441,11 +2423,6 @@ void Konsole::activateSession(QWidget* w)
 {
   activateSession(tabwidget->indexOf(w));
   w->setFocus();
-  if( rootxpmsDirty[w] ) {
-    // force repaint!
-    rootxpms[w]->repaint(true);
-    rootxpmsDirty.remove(w);
-  }
 }
 
 void Konsole::activateSession(const QString &sessionId)
@@ -2524,6 +2501,8 @@ void Konsole::activateSession(TESession *s)
     }
   }
 
+  if (rootxpms[te])
+    rootxpms[te]->start();
   notifySize(te->Lines(), te->Columns());  // set menu items (strange arg order !)
   s->setConnect(true);
   if(!tabwidget && se->isMasterMode())
@@ -3341,8 +3320,6 @@ void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
       if (!rootxpms[tewidget])
         rootxpms.insert( tewidget, new KRootPixmap(tewidget) );
       rootxpms[tewidget]->setFadeEffect(s->tr_x(), QColor(s->tr_r(), s->tr_g(), s->tr_b()));
-      rootxpms[tewidget]->start();
-      rootxpms[tewidget]->repaint(true);
     } else {
       tewidget->setBlendColor(qRgba(s->tr_r(), s->tr_g(), s->tr_b(), int(s->tr_x() * 255)));
       tewidget->setErasePixmap( QPixmap() ); // make sure any background pixmap is unset
