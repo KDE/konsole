@@ -46,7 +46,7 @@ KWrited::KWrited() : QObject()
   pty = new TEPty();
   QObject::connect(pty, SIGNAL(block_in(const char*,int)), this, SLOT(block_in(const char*,int)));
 
-  pty->makePty();
+  pty->makePty(true);
   int fd = pty->masterFd();
   QSocketNotifier *sn = new QSocketNotifier(fd, QSocketNotifier::Read, this);
   connect(sn, SIGNAL(activated(int)), this, SLOT(block_in(int)));

@@ -435,7 +435,7 @@ int TEPty::openPty()
   return ptyfd;
 }
 
-int TEPty::makePty()
+int TEPty::makePty(bool _addutmp)
 {
   if (fd < 0) // no master pty could be opened
   {
@@ -470,7 +470,7 @@ int TEPty::makePty()
 
   // Stamp utmp/wtmp if we have and want them
 #ifdef HAVE_UTEMPTER
-  if (addutmp)
+  if (_addutmp)
   {
      KUtmpProcess utmp;
      utmp.cmdFd = fd;
@@ -513,7 +513,7 @@ int TEPty::makePty()
 void TEPty::startPgm(const char* pgm, QValueList<QCString> & args, const char* term)
 { 
   int sig;
-  int tt = makePty();
+  int tt = makePty(addutmp);
 
   //reset signal handlers for child process
   for (sig = 1; sig < NSIG; sig++)

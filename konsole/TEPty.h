@@ -47,7 +47,7 @@ Q_OBJECT
     int run(const char* pgm, QStrList & args, const char* term, int addutmp,
             const char* konsole_dcop = "", const char* konsole_dcop_session = "");
     void setWriteable(bool writeable);
-    int makePty();
+    int makePty(bool _addutmp);
     int masterFd() { return fd; }
 
   public slots:
