@@ -1045,10 +1045,11 @@ void Konsole::changeTitle(int, const QString& s)
 //  KONSOLEDEBUG << "changeTitle title = " << s << endl;
 //  title = s; setHeader();
   title = te->currentSession->Title();
+  QString tmpTitle = title;
   title += " - ";
   title += s;
   setHeader();
-
+  title=tmpTitle;
 }
 
 /*
