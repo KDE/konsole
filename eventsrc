@@ -1,6 +1,7 @@
 [!Global!]
 IconName=konsole
 Comment=Konsole
+Comment[be]=Кансоля
 
 [BellVisible]
 Name=Bell in visible session
