@@ -69,6 +69,7 @@ public:
   void newSession(const QString &program, const QStrList &args, const QString &term, const QString &icon);
 
   void run();
+  void setDefaultSession(const QString &filename);
 
   // Additional functions for DCOP
   int currentSession();
@@ -111,9 +112,8 @@ private slots:
   void pixmap_menu_activated(int item);
   void keytab_menu_activated(int item);
   void schema_menu_check();
-  //what's this intended for ? aleXXX
-  //void newSessionSelect();
   void newSession(int kind);
+  void newSessionToolbar(int kind);
   void updateSchemaMenu();
   void updateKeytabMenu();
 
@@ -175,7 +175,9 @@ private:
   QPtrDict<KToolBarButton> session2button;
   QPtrList<TESession> sessions;
   QIntDict<KSimpleConfig> no2command;
+  QIntDict<QString> no2filename;
   KSimpleConfig* m_defaultSession;
+  QString m_defaultSessionFilename;
 
   TEWidget*      te;
   TESession*     se;
@@ -249,7 +251,6 @@ private:
   bool        skip_exit_query:1;
   bool        b_warnQuit:1;
   bool        isRestored;
-  bool        wasRestored;
 
   unsigned int m_histSize;
   bool         b_histEnabled:1;

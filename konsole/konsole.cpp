@@ -165,6 +165,7 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 :KMainWindow(0, name),
 DCOPObject( "konsole" )
 ,m_defaultSession(0)
+,m_defaultSessionFilename("")
 ,te(0)
 ,se(0)
 ,m_initialSession(0)
@@ -217,10 +218,10 @@ DCOPObject( "konsole" )
 ,b_histEnabled(true)
 {
   isRestored = b_inRestore;
-  wasRestored = false;
   connect( kapp,SIGNAL(backgroundChanged(int)),this, SLOT(slotBackgroundChanged(int)));
 
   no2command.setAutoDelete(true);
+  no2filename.setAutoDelete(true);
   menubar = menuBar();
 
   // create terminal emulation framework ////////////////////////////////////
@@ -260,10 +261,10 @@ DCOPObject( "konsole" )
   //KONSOLEDEBUG<<"Konsole ctor(): readProps() type="<<type<<endl;
 
   KSimpleConfig *co;
-  if (type.isEmpty())
-     co = defaultSession();
-  else
-     co = new KSimpleConfig(locate("appdata", type + ".desktop"), true /* read only */);
+  if (!type.isEmpty())
+    setDefaultSession(type+".desktop");
+  co = defaultSession();
+
   co->setDesktopGroup();
   QString schema = co->readEntry("Schema");
   //KONSOLEDEBUG << "my Looking for schema " << schema << endl;
@@ -665,7 +666,7 @@ void Konsole::makeBasicGUI()
   newsession->plug(toolBar());
   toolBar()->insertLineSeparator();
   m_toolbarSessionsCommands = newsession->popupMenu();
-  connect(m_toolbarSessionsCommands, SIGNAL(activated(int)), SLOT(newSession(int)));
+  connect(m_toolbarSessionsCommands, SIGNAL(activated(int)), SLOT(newSessionToolbar(int)));
 
   toolBar()->setFullSize( TRUE );
 
@@ -878,6 +879,7 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("keytab",n_defaultKeytab);
   config->writeEntry("WarnQuit", b_warnQuit);
   config->writeEntry("ActiveSession", active);
+  config->writeEntry("DefaultSession", m_defaultSessionFilename);
   config->writeEntry("LineSpacing", te->lineSpacing());
 
   if (se) {
@@ -1562,10 +1564,16 @@ void Konsole::allowPrevNext()
 KSimpleConfig *Konsole::defaultSession()
 {
   if (!m_defaultSession)
-  {
-    m_defaultSession = new KSimpleConfig(locate("appdata", "shell.desktop"), true /* read only */);
-  }
+    setDefaultSession("shell.desktop");
   return m_defaultSession;
+}
+
+void Konsole::setDefaultSession(const QString &filename)
+{
+  if (m_defaultSession)
+    delete m_defaultSession;
+  m_defaultSession = new KSimpleConfig(locate("appdata", filename), true /* read only */);
+  m_defaultSessionFilename=filename;
 }
 
 void Konsole::newSession(const QString &pgm, const QStrList &args, const QString &term, const QString &icon)
@@ -1584,6 +1592,15 @@ void Konsole::newSession(int i)
 {
   KSimpleConfig* co = no2command.find(i);
   if (co) newSession(co);
+}
+
+void Konsole::newSessionToolbar(int i)
+{
+  KSimpleConfig* co = no2command.find(i);
+  if (co) {
+    setDefaultSession(*no2filename.find(i));
+    newSession(co);
+  }
 }
 
 void Konsole::newSession(const QString &type)
@@ -1881,8 +1898,11 @@ void Konsole::clearSessionHistory(TESession & session)
 void Konsole::addSessionCommand(const QString &path)
 {
   KSimpleConfig* co;
-  if (path.isEmpty())
-    co = defaultSession();
+  QString filename=path;
+  if (path.isEmpty()) {
+    co = new KSimpleConfig(locate("appdata", "shell.desktop"), true /* read only */);
+    filename="shell.desktop";
+  }
   else
     co = new KSimpleConfig(path,TRUE);
   co->setDesktopGroup();
@@ -1898,6 +1918,11 @@ void Konsole::addSessionCommand(const QString &path)
   m_toolbarSessionsCommands->insertItem( SmallIconSet( icon ), txt, ++cmd_serial );
   m_session->insertItem( SmallIconSet( icon ), txt.prepend(i18n("New ")), cmd_serial );
   no2command.insert(cmd_serial,co);
+
+  int j = filename.findRev('/');
+  if (j > -1)
+    filename = filename.mid(j+1);
+  no2filename.insert(cmd_serial,new QString(filename));
 }
 
 void Konsole::loadSessionCommands()
@@ -1925,6 +1950,7 @@ void Konsole::addScreenSession(const QString &socket)
   m_session->insertItem( SmallIconSet( icon ), txt, cmd_serial, cmd_serial - 1 );
   m_toolbarSessionsCommands->insertItem( SmallIconSet( icon ), txt, cmd_serial );
   no2command.insert(cmd_serial,co);
+  no2filename.insert(cmd_serial,new QString(""));
 }
 
 void Konsole::loadScreenSessions()
@@ -1964,6 +1990,7 @@ void Konsole::loadScreenSessions()
       m_session->removeItem(i);
       m_toolbarSessionsCommands->removeItem(i);
       no2command.remove(i);
+      no2filename.remove(i);
     }
     cmd_serial = cmd_first_screen - 1;
   }
