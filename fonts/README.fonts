@@ -1,0 +1,123 @@
+[README.fonts]
+
+This directory contains terminal fonts converted
+from different sources to suit both the needs of
+X11, QT and konsole. These are:
+
+
+* the font has to be fixed width.
+
+  This requierement originate both from X11 and
+  the way QT and konsole uses it together with
+  the very idea of what a terminal emulation is
+  about.
+
+  Basically, a terminal emulation is to display
+  a character cell oriented screen, meaning that
+  all characters in the same column line up
+  properly under each other.
+
+  Though one could make this with a variable
+  width font (which are preferably used in text
+  processing) the outcome would look very poor,
+  since the glyphs would have to be placed into
+  a cell fitting the widest character in the
+  font, which is typically more then two times
+  wider then the narrowest glyph. Imagine a text
+  with  l  o  t  s     o  f     s  p  a  c  e  s
+  inserted between each character to get the idea.
+
+  Further, doing this with a variable width font
+  means to do some operations that slow down the
+  whole display refreshing dramatically. X11/QT
+  performs very poor when one draws characters
+  individually while additionally clearing
+  background regions instead of drawing a complete
+  string (as konsole does). If one draws a string
+  with a variable width font, it is of course 
+  typeset by X11 variable width, not longer
+  conforming to the character cell model of a
+  terminal emulation.
+
+  So from both perspectives, variable width fonts
+  are unsuited for terminal emulation purposes.
+
+
+* the font has to contain some graphical characters
+
+  Many full screen applications make use of these
+  characters to draw boxes, scroll bars and likely
+  pseudo graphical entities.
+
+  Using fonts without this capabilities means to
+  break the visual apearence of these products.
+
+  As a minimum the following glyphs have to be
+  included within a font to become usable:
+
+  - 0x0b U+2518 : BOX DRAWINGS LIGHT UP AND LEFT
+  - 0x0c U+2510 : BOX DRAWINGS LIGHT DOWN AND LEFT
+  - 0x0d U+250c : BOX DRAWINGS LIGHT DOWN AND RIGHT
+  - 0x0e U+2514 : BOX DRAWINGS LIGHT UP AND RIGHT
+  - 0x0f U+253c : BOX DRAWINGS LIGHT VERTICAL AND HORIZONTAL
+  - 0x12 U+2500 : BOX DRAWINGS LIGHT HORIZONTAL (scan line 5)
+  - 0x15 U+251c : BOX DRAWINGS LIGHT VERTICAL AND RIGHT
+  - 0x16 U+2524 : BOX DRAWINGS LIGHT VERTICAL AND LEFT
+  - 0x17 U+2534 : BOX DRAWINGS LIGHT UP AND HORIZONTAL
+  - 0x18 U+252c : BOX DRAWINGS LIGHT DOWN AND HORIZONTAL
+  - 0x19 U+2502 : BOX DRAWINGS LIGHT VERTICAL
+
+  - 0x01 U+25c6 : BLACK DIAMOND
+  - 0x02 U+2592 : MEDIUM SHADE
+  - 0x1F U+00b7 : MIDDLE DOT
+
+  The following graphical glyphs are defined in
+  VT100 fonts, too, but are not used in any program
+  i know about. Codes for them have been assigned
+  in the private unicode page. See the linux kernel
+  documentation file [unicode.txt] about this assignment.
+
+  - 0x10 U+f800 : DEC VT GRAPHICS HORIZONTAL LINE SCAN 1
+  - 0x11 U+f801 : DEC VT GRAPHICS HORIZONTAL LINE SCAN 3
+  - 0x13 U+f803 : DEC VT GRAPHICS HORIZONTAL LINE SCAN 7
+  - 0x14 U+f804 : DEC VT GRAPHICS HORIZONTAL LINE SCAN 9
+
+  Also, the VT100 knows about the following glyphs,
+  though omitting them is unlikely to break anything.
+
+  - 0x07 U+00b0 : DEGREE SIGN
+  - 0x08 U+00b1 : PLUS-MINUS SIGN
+  - 0x1a U+2264 : LESS THAN OR EQUAL TO
+  - 0x1b U+2265 : GREATER THAN OR EQUAL TO
+  - 0x1c U+03c0 : GREEK SMALL LETTER PI
+  - 0x1d U+2260 : NOT EQUAL TO
+  - 0x1e U+00a3 : POUND SIGN
+
+  Additionally, digraphs are provided for some
+  of the control characters by VT100, too.
+
+  - 0x03 U+2409 : DIGRAPH HT
+  - 0x04 U+240c : DIGRAPH FF
+  - 0x05 U+240d : DIGRAPH CR
+  - 0x06 U+240a : DIGRAPH LF
+  - 0x09 U+240d : DIGRAPH NL
+  - 0x0a U+240b : DIGRAPH VT
+
+  The mapping of non-iso10646 fonts is extended by konsole
+  with the regular xterm fixed font placement of these
+  glyphs to 0x00-0x1f.
+
+
+* Iso10646 fonts needs to have a fall back character
+  to be properly assigned.
+
+  Use the "DEFAULT_CHAR" property with bdf fonts
+  to do so. Other font representations provide
+  likely means. The unicode assignment is U+fffd.
+
+  If such a character isn't defined, X11 might
+  choose to void the character completely, causing
+  inconsistent appearence when refreshing the screen.
+
+  One may choose the space glyph to hide the flaw
+  or a box like one to exhibit it.
