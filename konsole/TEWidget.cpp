@@ -1011,7 +1011,7 @@ void TEWidget::updateImageSize()
   //NOTE: control flows from the back through the chest right into the eye.
   //      `emu' will call back via `setImage'.
 
-  resizing = true;
+  resizing = (oldlin!=lines) || (oldcol!=columns);
   emit changedContentSizeSignal(contentHeight, contentWidth); // expose resizeEvent
   resizing = false;
 }
