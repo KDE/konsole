@@ -43,9 +43,8 @@ KWrited::KWrited() : QObject()
       wid->minimumSizeHint().width());
   wid->setReadOnly(TRUE);
   wid->setFocusPolicy(QWidget::NoFocus);
-  pty = new TEPty();
-  QObject::connect(pty, SIGNAL(block_in(const char*,int)), this, SLOT(block_in(const char*,int)));
 
+  pty = new TEPty();
   pty->makePty(true);
   int fd = pty->masterFd();
   QSocketNotifier *sn = new QSocketNotifier(fd, QSocketNotifier::Read, this);
