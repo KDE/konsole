@@ -29,7 +29,7 @@ class TEmulation : public QObject
 public:
 
   TEmulation(TEWidget* gui);
-  void changeGUI(TEWidget* newgui);
+  virtual void changeGUI(TEWidget* newgui);
   ~TEmulation();
 
 public:
@@ -115,15 +115,12 @@ private:
 
   void connectGUI();
 
-  void bulkNewline();
   void bulkStart();
-  void bulkEnd();
 
 private:
 
-  QTimer bulk_timer;
-  int    bulk_nlcnt;   // bulk newline counter
-  int    bulk_incnt;   // bulk counter
+  QTimer bulk_timer1;
+  QTimer bulk_timer2;
   
   int    m_findPos;
 };

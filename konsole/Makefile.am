@@ -12,11 +12,12 @@ INCLUDES = -I. $(all_includes)
 
 # you can add here more. This one gets installed
 bin_PROGRAMS = 	konsole konsole_grantpty kwrited #kcmkonsole
-lib_LTLIBRARIES = libkonsolepart.la kwrited.la konsole.la
+lib_LTLIBRARIES = kwrited.la konsole.la
 
 # libkonsolepart is a part, but konsole.la links directly to it, so we can't
 # install it under kde_module
 
+kde_module_LTLIBRARIES = libkonsolepart.la
 libkonsolepart_la_SOURCES = TEPty.cpp BlockArray.cpp konsole_part.cpp \
 	schema.cpp \
 	session.cpp \
@@ -48,11 +49,11 @@ konsole_la_SOURCES = TEPty.cpp BlockArray.cpp main.cpp konsole.cpp schema.cpp se
      TEScreen.cpp TEmulation.cpp TEHistory.cpp keytrans.cpp konsoleiface.skel sessioniface.skel \
      konsole_wcwidth.cpp konsolebookmarkhandler.cpp konsolebookmarkmenu.cpp konsole_child.cpp
 konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
-konsole_la_LIBADD = $(LIB_KDEUI) $(LIB_KIO) $(LIBUTIL) $(XTESTLIB)
+konsole_la_LIBADD = $(LIB_KDEPRINT) $(LIBUTIL) $(XTESTLIB)
 
 # konsole executable
 konsole_SOURCES = dummy.cpp
-konsole_LDADD = konsole.la $(LIB_KIO)
+konsole_LDADD = konsole.la $(LIB_KDEPRINT)
 konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 # kcmkonsole_SOURCES = kcmkonsole.cpp schema.cpp

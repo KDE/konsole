@@ -89,6 +89,8 @@ public:
   virtual QCStringList functionsDynamic();
   void enableFullScripting(bool b) { fullScripting = b; }
 
+  void print(QPainter &paint, bool friendly, bool exact);
+
 public slots:
 
   void run();

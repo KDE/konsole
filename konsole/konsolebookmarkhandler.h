@@ -23,6 +23,7 @@ public:
     virtual void openBookmarkURL( const QString& url, const QString& title )
                                 { emit openURL( url, title ); }
     virtual QString currentURL() const;
+    virtual QString currentTitle() const;
 
     KPopupMenu *menu() const { return m_menu; }
 

@@ -36,6 +36,7 @@ public:
                bool blinkingCursor, bool ctrlDrag, bool terminalSizeHint, int lineSpacing,
 	       bool cutToBeginningOfLine, bool allowResize);
   void run();
+  void setSchema(ColorSchema* s);
   ~KonsoleChild();
   TESession*  session() { return se; }
 

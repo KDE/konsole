@@ -83,7 +83,6 @@ public:
 	*/
 	ColorSchema();
 
-	QString path() const { return fPath; } ;
 	QString relPath() const { return fRelPath; } ;
 
 	/**
@@ -170,8 +169,7 @@ protected:
       bool       m_useTransparency:1;
       bool       m_fileRead:1;
       double     m_tr_x;
-      QString	 fPath;		// Pathname to schema or config file
-      QString    fRelPath;
+      QString    fRelPath;	// File name of schema file
       QDateTime	*lastRead;	// Time last checked for updates
       static int	serial;		// Serial number so that every
       // ColorSchema has a unique number.

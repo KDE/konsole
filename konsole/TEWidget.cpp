@@ -55,6 +55,7 @@
 #include <qregexp.h>
 #include <qlayout.h>
 
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -91,6 +92,11 @@
 #define SCRWIDTH 16 // width of the scrollbar
 
 #define yMouseScroll 1
+
+#define REPCHAR   "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
+                  "abcdefgjijklmnopqrstuvwxyz" \
+                  "0123456789./+@"
+
 // scroll increment used when dragging selection at top/bottom of window.
 
 // static
@@ -234,12 +240,19 @@ void TEWidget::fontChange(const QFont &)
   // waba TEWidget 1.123:
   // "Base character width on widest ASCII character. This prevents too wide
   //  characters in the presence of double wide (e.g. Japanese) characters."
-  int fw;
-  font_w = 1;
-  for(int i=0;i<128;i++) {
-    if( isprint(i) && font_w < (fw = fm.width(i)))
-      font_w = fw;
+  // Get the width from representative normal width characters
+  font_w = qRound((double)fm.width(REPCHAR)/(double)strlen(REPCHAR));
+
+  fixed_font = true;
+  int fw = fm.width(REPCHAR[0]);
+  for(unsigned int i=1; i< strlen(REPCHAR); i++){
+    if (fw != fm.width(REPCHAR[i])){
+      fixed_font = false;
+      break;
+    } else
+      fw = fm.width(REPCHAR[i]);
   }
+  
   if (font_w>200) // don't trust unrealistic value, fallback to QFontMetrics::maxWidth()
     font_w=fm.maxWidth();
   if (font_w<1)
@@ -248,8 +261,10 @@ void TEWidget::fontChange(const QFont &)
   font_a = fm.ascent();
 //printf("font: %s\n", font().toString().latin1());
 //printf("fixed: %s\n", font().fixedPitch() ? "yes" : "no");
+//printf("fixed_font: %d\n", fixed_font);
 //printf("font_h: %d\n",font_h);
 //printf("font_w: %d\n",font_w);
+//printf("fw: %d\n",fw);
 //printf("font_a: %d\n",font_a);
 //printf("rawname: %s\n",font().rawName().ascii());
 
@@ -311,6 +326,9 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,ctrldrag(false)
 ,cuttobeginningofline(false)
 ,isBlinkEvent(false)
+,isPrinting(false)
+,printerFriendly(false)
+,printerBold(false)
 ,m_drop(0)
 ,possibleTripleClick(false)
 ,mResizeWidget(0)
@@ -372,29 +390,33 @@ TEWidget::~TEWidget()
 */
 
 void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
-                           QString& str, ca attr, bool pm, bool clear)
+                           QString& str, const ca *attr, bool pm, bool clear)
 {
   int a = font_a + m_lineSpacing / 2;
-  QColor fColor = color_table[attr.f].color;
-
-  if (attr.r & RE_CURSOR)
+  QColor fColor = printerFriendly ? Qt::black : color_table[attr->f].color;
+  QString drawstr;
+  
+  if ((attr->r & RE_CURSOR) && !isPrinting)
     cursorRect = rect;
 
   // Paint background
-  if (color_table[attr.b].transparent)
+  if (!printerFriendly)
   {
-    if (pm)
-       paint.setBackgroundMode( TransparentMode );
-    if (clear || (blinking && (attr.r & RE_BLINK)))
-       erase(rect);
-  }
-  else
-  {
-    paint.fillRect(rect, color_table[attr.b].color);
+    if (color_table[attr->b].transparent)
+    {
+      if (pm)
+        paint.setBackgroundMode( TransparentMode );
+      if (clear || (blinking && (attr->r & RE_BLINK)))
+        erase(rect);
+    }
+    else
+    {
+      paint.fillRect(rect, color_table[attr->b].color);
+    }
   }
 
   // Paint cursor
-  if ((attr.r & RE_CURSOR)) {
+  if ((attr->r & RE_CURSOR) && !isPrinting) {
     paint.setBackgroundMode( TransparentMode );
     int h = font_h - m_lineSpacing;
     QRect r(rect.x(),rect.y()+m_lineSpacing/2,rect.width(),h);
@@ -402,8 +424,8 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
     {
        if (!cursorBlinking)
        {
-          paint.fillRect(r, color_table[attr.f].color);
-          fColor = color_table[attr.b].color;
+          paint.fillRect(r, color_table[attr->f].color);
+          fColor = color_table[attr->b].color;
        }
     }
     else
@@ -414,19 +436,96 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
   }
 
   // Paint text
-  if (!(blinking && (attr.r & RE_BLINK)))
+  if (!(blinking && (attr->r & RE_BLINK)))
   {
     paint.setPen(fColor);
-    paint.drawText(rect.x(),rect.y()+a, str, -1, QPainter::LTR);
-    if ((attr.r & RE_UNDERLINE) || color_table[attr.f].bold)
+    int x = rect.x();
+    if (color_table[attr->f].bold && printerBold)
+    {
+      // When printing we use a bold font for bold
+      paint.save();
+      QFont f = font();
+      f.setBold(true);
+      paint.setFont(f);
+    }
+    
+    if(!fixed_font)
+    {
+      // The meaning of y differs between different versions of QPainter::drawText!!
+      int y = rect.y(); // top of rect
+      unsigned int nc=0;
+      int w;
+      for(unsigned int i=0;i<str.length();i++)
+      {
+        drawstr = str.at(i);
+        // Add double of the width if next c is 0;
+        if ((attr+nc+1)->c)
+        {
+          w = font_w;
+          nc++;
+        }
+        else
+        {
+          w = font_w*2;
+          nc+=2;
+        }
+        paint.drawText(x,y, w, font_h, Qt::AlignHCenter | Qt::DontClip, drawstr, -1);
+        x += w;
+      }
+    }
+    else
+    {
+      // The meaning of y differs between different versions of QPainter::drawText!!
+      int y = rect.y()+a; // baseline
+      paint.drawText(x,y, str, -1, QPainter::LTR);
+    }
+
+    if (color_table[attr->f].bold && isPrinting)
+    {
+      // When printing we use a bold font for bold
+      paint.restore();
+    }
+    
+    if ((attr->r & RE_UNDERLINE) || color_table[attr->f].bold)
     {
       paint.setClipRect(rect);
-      if (color_table[attr.f].bold)
+      if (color_table[attr->f].bold && !printerBold)
       {
+        // On screen we use overstrike for bold
         paint.setBackgroundMode( TransparentMode );
-        paint.drawText(rect.x()+1,rect.y()+a, str, -1, QPainter::LTR); // second stroke
+        int x = rect.x()+1;
+        if(!fixed_font)
+        {
+          // The meaning of y differs between different versions of QPainter::drawText!!
+          int y = rect.y(); // top of rect
+          unsigned int nc=0;
+          int w;
+          for(unsigned int i=0;i<str.length();i++)
+          {
+            drawstr = str.at(i);
+            // Add double of the width if next c is 0;
+            if ((attr+nc+1)->c)
+            {
+              w = font_w;
+              nc++;
+            }
+            else
+            {
+              w = font_w*2;
+              nc+=2;
+            }
+            paint.drawText(x,y, w, font_h, Qt::AlignHCenter | Qt::DontClip, drawstr, -1);
+            x += w;
+          }
+        }
+        else
+        {
+          // The meaning of y differs between different versions of QPainter::drawText!!
+          int y = rect.y()+a; // baseline
+          paint.drawText(x,y, str, -1, QPainter::LTR);
+        }
       }
-      if (attr.r & RE_UNDERLINE)
+      if (attr->r & RE_UNDERLINE)
         paint.drawLine(rect.left(), rect.y()+a+1,
                        rect.right(),rect.y()+a+1 );
       paint.setClipping(false);
@@ -476,17 +575,36 @@ HCNT("setImage");
   int lins = QMIN(this->lines,  QMAX(0,lines  ));
   int cols = QMIN(this->columns,QMAX(0,columns));
   QChar *disstrU = new QChar[cols];
+  char *dirtyMask = (char *) malloc(cols+2); 
 
 //{ static int cnt = 0; printf("setImage %d\n",cnt++); }
   for (y = 0; y < lins; y++)
   {
     const ca*       lcl = &image[y*this->columns];
     const ca* const ext = &newimg[y*columns];
+    
+    // The dirty mask indicates which characters need repainting. We also 
+    // mark surrounding neighbours dirty, in case the character exceeds
+    // its cell boundaries
+    memset(dirtyMask, 0, cols+2); 
+    // Two extra so that we don't have to have to care about start and end conditions
+    for (x = 0; x < cols; x++)
+    {
+      if (ext[x] != lcl[x])
+      {
+         dirtyMask[x] = dirtyMask[x+1] = dirtyMask[x+2] = 1;
+      }
+    }
+    dirtyMask++; // Position correctly
+    
     if (!resizing) // not while resizing, we're expecting a paintEvent
     for (x = 0; x < cols; x++)
     {
       hasBlinker |= (ext[x].r & RE_BLINK);
-      if (ext[x] != lcl[x])
+      // Start drawing if this character or the next one differs.
+      // We also take the next one into account to handle the situation
+      // where characters exceed their cell width.
+      if (dirtyMask[x])
       {
         Q_UINT16 c = ext[x+0].c;
         if ( !c )
@@ -501,10 +619,13 @@ HCNT("setImage");
         {
           c = ext[x+len].c;
           if (!c)
+          {
+            fixed_font = false;
             continue; // Skip trailing part of multi-col chars.
+          }
 
           if (ext[x+len].f != cf || ext[x+len].b != cb || ext[x+len].r != cr ||
-              ext[x+len] == lcl[x+len] )
+              !dirtyMask[x+len] )
             break;
 
           disstrU[p++] = fontMap(c);
@@ -513,10 +634,13 @@ HCNT("setImage");
         QString unistr(disstrU, p);
         drawAttrStr(paint,
                     QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
-                    unistr, ext[x], pm != NULL, true);
+                    unistr, &ext[x], pm != NULL, true);
         x += len - 1;
       }
     }
+    
+    dirtyMask--; // Set back
+    
     // finally, make `image' become `newimg'.
     memcpy((void*)lcl,(const void*)ext,cols*sizeof(ca));
   }
@@ -525,6 +649,7 @@ HCNT("setImage");
   setUpdatesEnabled(true);
   if ( hasBlinker && !blinkT->isActive()) blinkT->start(1000); // 1000 ms
   if (!hasBlinker && blinkT->isActive()) { blinkT->stop(); blinking = false; }
+  free(dirtyMask);
   delete [] disstrU;
 
   if (resizing && terminalSizeHint)
@@ -598,6 +723,51 @@ HCNT("paintEvent");
 
   QRect rect = pe->rect().intersect(contentsRect());
 
+  paintContents(paint, rect, pm != 0);
+
+  drawFrame( &paint );
+  paint.end();
+  setUpdatesEnabled(true);
+}
+
+void TEWidget::print(QPainter &paint, bool friendly, bool exact)
+{
+   bool save_fixed_font = fixed_font;
+   bool save_blinking = blinking;
+   fixed_font = false;
+   blinking = false;
+   paint.setFont(font());
+
+   isPrinting = true;
+   printerFriendly = friendly;
+   printerBold = !exact;
+
+   if (exact)
+   {
+     QPixmap pm(contentsRect().right(), contentsRect().bottom());
+     pm.fill();
+     
+     QPainter pm_paint;
+     pm_paint.begin(&pm, this);
+     paintContents(pm_paint, contentsRect(), true);
+     pm_paint.end();
+     paint.drawPixmap(0, 0, pm);
+   }
+   else
+   {
+     paintContents(paint, contentsRect(), true);
+   }
+
+   printerFriendly = false;
+   isPrinting = false;
+   printerBold = false;
+   
+   fixed_font = save_fixed_font;
+   blinking = save_blinking;
+}
+
+void TEWidget::paintContents(QPainter &paint, const QRect &rect, bool pm)
+{
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
   int    tLy = tL.y();
@@ -632,25 +802,27 @@ HCNT("paintEvent");
         c = image[loc(x+len,y)].c;
         if (c)
           disstrU[p++] = fontMap(c);
+        else
+          fixed_font = false;
         len++;
       }
       if ((x+len < columns) && (!image[loc(x+len,y)].c))
+      {
+        fixed_font = false;
         len++; // Adjust for trailing part of multi-column char
+      }
 
       if (!isBlinkEvent || (cr & RE_BLINK))
       {
          QString unistr(disstrU,p);
          drawAttrStr(paint,
                 QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
-                unistr, image[loc(x,y)], pm != NULL, false);
+                unistr, &image[loc(x,y)], pm, false);
       }
       x += len - 1;
     }
   }
   delete [] disstrU;
-  drawFrame( &paint );
-  paint.end();
-  setUpdatesEnabled(true);
 }
 
 void TEWidget::blinkEvent()
@@ -831,7 +1003,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       }
       else
       {
-        emit mouseSignal( 0, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
+        emit mouseSignal( 0, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maxValue() );
       }
     }
   }
@@ -840,14 +1012,14 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
     if ( mouse_marks || (!mouse_marks && (ev->state() & ShiftButton)) )
       emitSelection(true,ev->state() & ControlButton);
     else
-      emit mouseSignal( 1, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
+      emit mouseSignal( 1, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maxValue() );
   }
   else if ( ev->button() == RightButton )
   {
     if (mouse_marks || (ev->state() & ShiftButton))
       emit configureRequest( this, ev->state()&(ShiftButton|ControlButton), ev->x(), ev->y() );
     else
-      emit mouseSignal( 2, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
+      emit mouseSignal( 2, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maxValue() );
   }
 }
 
@@ -963,8 +1135,6 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
   {
     // Extend to complete line
     bool above_not_below = ( here.y() < iPntSelCorr.y() );
-//    bool old_above_not_below = ( pntSelCorr.y() < iPntSelCorr.y() );
-    swapping = true; // triple click maybe selected a wrapped line
 
     QPoint above = above_not_below ? here : iPntSelCorr;
     QPoint below = above_not_below ? iPntSelCorr : here;
@@ -986,6 +1156,11 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     {
       here = below; ohere = above;
     }
+
+    QPoint newSelBegin = QPoint( ohere.x(), ohere.y() );
+    swapping = !(tripleSelBegin==newSelBegin);
+    tripleSelBegin = newSelBegin;
+
     ohere.rx()++;
   }
 
@@ -1077,7 +1252,7 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
       if (!mouse_marks && !(ev->state() & ShiftButton))
         emit mouseSignal( 3, // release
                         (ev->x()-tLx-bX)/font_w + 1,
-                        (ev->y()-tLy-bY)/font_h + 1 );
+                        (ev->y()-tLy-bY)/font_h + 1 +scrollbar->value() -scrollbar->maxValue());
       releaseMouse();
     }
     dragInfo.state = diNone;
@@ -1088,7 +1263,7 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
     int    tLx = tL.x();
     int    tLy = tL.y();
 
-    emit mouseSignal( 3, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
+    emit mouseSignal( 3, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maxValue() );
     releaseMouse();
   }
 }
@@ -1107,7 +1282,7 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
   {
     // Send just _ONE_ click event, since the first click of the double click
     // was already sent by the click handler!
-    emit mouseSignal( 0, pos.x()+1, pos.y()+1 ); // left button
+    emit mouseSignal( 0, pos.x()+1, pos.y()+1 +scrollbar->value() -scrollbar->maxValue() ); // left button
     return;
   }
 
@@ -1148,13 +1323,18 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
 
 void TEWidget::wheelEvent( QWheelEvent* ev )
 {
-  if (!mouse_marks)
+  if (ev->orientation() != Qt::Vertical)
+    return;
+
+  if ( mouse_marks )
+    QApplication::sendEvent(scrollbar, ev);
+  else
   {
     QPoint tL  = contentsRect().topLeft();
     int    tLx = tL.x();
     int    tLy = tL.y();
     QPoint pos = QPoint((ev->x()-tLx-bX)/font_w,(ev->y()-tLy-bY)/font_h);
-    emit mouseSignal( ev->delta() > 0 ? 4 : 5, pos.x() + 1, pos.y() + 1 );
+    emit mouseSignal( ev->delta() > 0 ? 4 : 5, pos.x() + 1, pos.y() + 1 +scrollbar->value() -scrollbar->maxValue() );
   }
 }
 
@@ -1176,6 +1356,7 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
   word_selection_mode = false;
 
   actSel = 2; // within selection
+  emit isBusySelecting(true); // Keep it steady...
 
   while (iPntSel.y()>0 && m_line_wrapped[iPntSel.y()-1])
     iPntSel.ry()--;
@@ -1188,9 +1369,12 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
     { i--; if (x>0) x--; else {x=columns-1; iPntSel.ry()--;} }
 
     emit beginSelectionSignal( x, iPntSel.y() );
+    tripleSelBegin = QPoint( x, iPntSel.y() );
   }
-  else
+  else {
     emit beginSelectionSignal( 0, iPntSel.y() );
+    tripleSelBegin = QPoint( 0, iPntSel.y() );
+  }
 
   while (iPntSel.y()<lines-1 && m_line_wrapped[iPntSel.y()])
     iPntSel.ry()++;
@@ -1343,11 +1527,6 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
   }
   if ( obj != this /* when embedded */ && obj != parent() /* when standalone */ )
       return false; // not us
-  if ( e->type() == QEvent::Wheel)
-  {
-    if ( ((QWheelEvent *)e)->orientation() == Qt::Vertical )
-      QApplication::sendEvent(scrollbar, e);
-  }
   if ( e->type() == QEvent::KeyPress )
   {
     QKeyEvent* ke = (QKeyEvent*)e;
@@ -1672,7 +1851,7 @@ void TEWidget::dropEvent(QDropEvent* event)
 void TEWidget::doDrag()
 {
   dragInfo.state = diDragging;
-  dragInfo.dragObject = new QTextDrag(QApplication::clipboard()->text(), this);
+  dragInfo.dragObject = new QTextDrag(QApplication::clipboard()->text(QClipboard::Selection), this);
   dragInfo.dragObject->dragCopy();
   // Don't delete the QTextDrag object.  Qt will delete it when it's done with it.
 }
@@ -1688,7 +1867,7 @@ void TEWidget::drop_menu_activated(int item)
       setActiveWindow();
       break;
    case 1: // cd ...
-     emit sendStringToEmu("\001\013cd ");
+     emit sendStringToEmu("cd ");
       struct stat statbuf;
       if ( ::stat( QFile::encodeName( dropText ), &statbuf ) == 0 )
       {
@@ -1705,13 +1884,13 @@ void TEWidget::drop_menu_activated(int item)
       setActiveWindow();
       break;
    case 2: // copy
-     emit sendStringToEmu("\001\013cp -ri ");
+     emit sendStringToEmu("cp -ri ");
      break;
    case 3: // link
-     emit sendStringToEmu("\001\013ln -s ");
+     emit sendStringToEmu("ln -s ");
      break;
    case 4: // move
-     emit sendStringToEmu("\001\013mv -i ");
+     emit sendStringToEmu("mv -i ");
      break;
    }
    if (item>1 && item<5) {
