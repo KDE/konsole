@@ -33,8 +33,8 @@
 
 /* VT102 Terminal Emulation
 
-   This class puts together the screens, the shell (pty line) and the widget
-   to a complete terminal emulation. Beside combining it's componentes, it
+   This class puts together the screens, the pty and the widget to a
+   complete terminal emulation. Beside combining it's componentes, it
    handles the emulations's protocol.
 
    This module consists of the following sections:

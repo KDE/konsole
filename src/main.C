@@ -419,7 +419,7 @@ void TEDemo::makeMenu()
   connect(m_options, SIGNAL(activated(int)), SLOT(opt_menu_activated(int)));
 
   QString aboutAuthor = i18n("%1 version %2 - an X terminal\n"
-                             "Copyright (c) 1997-1999 by\n"
+                             "Copyright (c) 1997-2000 by\n"
                              "Lars Doelle <lars.doelle@on-line.de>\n"
                              "\n"
                              "This program is free software under the\n"
@@ -899,9 +899,9 @@ void TEDemo::doneSession(TESession* s, int )
 
   s->setConnect(FALSE);
 
-  // This slot (doneSession) is activated from the Shell when receiving a
+  // This slot (doneSession) is activated from the TEPty when receiving a
   // SIGCHLD. A lot is done during the signal handler. Apparently deleting
-  // the Shell additionally is sometimes too much, causing something
+  // the TEPty additionally is sometimes too much, causing something
   // to get messed up in rare cases. The following causes delete not to
   // be called from within the signal handler.
 

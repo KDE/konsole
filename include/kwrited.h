@@ -1,7 +1,7 @@
 #ifndef KWRITED_H
 #define KWRITED_H
 
-#include <TEShell.h>
+#include <TEPty.h>
 #include <qmultilineedit.h>
 
 class KWrited : public QObject
@@ -13,7 +13,7 @@ private slots:
   void block_in(const char* bytes, int len);
 private:
   QMultiLineEdit* wid;
-  Shell* shell;
+  TEPty* pty;
 };
 
 #endif

@@ -1,6 +1,6 @@
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* [shell.cpp]                       Shell                                    */
+/* [TEPty.C]               Pseudo Terminal Device                             */
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
@@ -12,9 +12,9 @@
 /*! \file
 */
 
-/*! \class Shell
+/*! \class TEPty
 
-    \brief Shells provide a pseudo terminal connection to a program.
+    \brief Ptys provide a pseudo terminal connection to a program.
     
     Although closely related to pipes, these pseudo terminal connections have
     some ability, that makes it nessesary to uses them. Most importent, they
@@ -33,10 +33,10 @@
 
     publish the SIGCHLD signal if not related to an instance.
 
-    clearify Shell::done vs. Shell::~Shell semantics.
+    clearify TEPty::done vs. TEPty::~TEPty semantics.
 
-    remove the `login_shell' parameter from the Shell::Shell.
-    Move parameters from Shell::run to Shell::Shell.
+    remove the `login_shell' parameter from the TEPty::TEPty.
+    Move parameters from TEPty::run to TEPty::TEPty.
 
     \par Pseudo terminals
 
@@ -46,8 +46,6 @@
     linked by a null-modem cable. Being based on devices the number of
     simultanous instances of this class is (globally) limited by the number of
     those device pairs, which is 256.
-
-    The pty is for the Shell while the program gets the tty.
 
     Another technic are UNIX 98 PTY's. These are supported also, and prefered
     over the (obsolete) predecessor.
@@ -109,8 +107,8 @@ extern "C" {
 #include <sys/wait.h>
 #include <sys/stat.h>
 
-#include "TEShell.h"
-#include "TEShell.moc"
+#include "TEPty.h"
+#include "TEPty.moc"
 
 
 #include <kapp.h>
@@ -121,16 +119,16 @@ extern "C" {
 #define HERE fprintf(stdout,"%s(%d): here\n",__FILE__,__LINE__)
 #endif
 
-template class QIntDict<Shell>;
+template class QIntDict<TEPty>;
 
 FILE* syslog_file = NULL; //stdout;
 
-static QIntDict<Shell> shells;
+static QIntDict<TEPty> ptys;
 
 #define PTY_FILENO 3
 #define BASE_CHOWN "konsole_grantpty"
 
-static int chownpty(int fd, int grant)
+int chownpty(int fd, int grant)
 // param fd: the fd of a master pty.
 // param grant: 1 to grant, 0 to revoke
 // returns 1 on success 0 on fail
@@ -157,8 +155,8 @@ static int chownpty(int fd, int grant)
     if (rc != pid)
     { // signal from other child, behave like catchChild.
       // guess this gives quite some control chaos...
-      Shell* sh = shells.find(rc);
-      if (sh) { shells.remove(rc); sh->doneShell(w); }
+      TEPty* sh = ptys.find(rc);
+      if (sh) { ptys.remove(rc); sh->donePty(w); }
       goto retry;
     }
     signal(SIGCHLD,tmp);
@@ -175,7 +173,7 @@ static int chownpty(int fd, int grant)
    actual size of the window.
 */
 
-void Shell::setSize(int lines, int columns)
+void TEPty::setSize(int lines, int columns)
 {
   wsize.ws_row = (unsigned short)lines;
   wsize.ws_col = (unsigned short)columns;
@@ -184,14 +182,14 @@ void Shell::setSize(int lines, int columns)
 }
 
 //! Catch a SIGCHLD signal and propagate that the child died.
-static void catchChild(int)
+void catchChild(int)
 { int status;
   pid_t pid = waitpid(-1,&status,WNOHANG);
-  Shell* sh = shells.find(pid);
-  if (sh) { shells.remove(pid); sh->doneShell(status); }
+  TEPty* sh = ptys.find(pid);
+  if (sh) { ptys.remove(pid); sh->donePty(status); }
 }
 
-void Shell::doneShell(int status)
+void TEPty::donePty(int status)
 {
 #ifdef HAVE_UTEMPTER
   removeLineFromUtmp(ttynam, fd);
@@ -201,7 +199,7 @@ void Shell::doneShell(int status)
 }
 
 
-const char* Shell::deviceName()
+const char* TEPty::deviceName()
 {
   return ttynam;
 }
@@ -209,16 +207,16 @@ const char* Shell::deviceName()
 /*!
     start the client program.
 */
-int Shell::run(QStrList & args, const char* term, int login_shell, int addutmp)
+int TEPty::run(QStrList & args, const char* term, int login_shell, int addutmp)
 {
   comm_pid = fork();
   if (comm_pid <  0) { fprintf(stderr,"Can't fork\n"); return -1; }
-  if (comm_pid == 0) makeShell(ttynam,args,term,login_shell,addutmp);
-  if (comm_pid >  0) shells.insert(comm_pid,this);
+  if (comm_pid == 0) makePty(ttynam,args,term,login_shell,addutmp);
+  if (comm_pid >  0) ptys.insert(comm_pid,this);
   return 0;
 }
 
-int Shell::openShell()
+int TEPty::openPty()
 { int ptyfd = -1;
   needGrantPty = TRUE;
 
@@ -309,7 +307,7 @@ int Shell::openShell()
 }
 
 //! only used internally. See `run' for interface
-void Shell::makeShell(const char* dev, QStrList & args, const char* term, int login_shell, int addutmp)
+void TEPty::makePty(const char* dev, QStrList & args, const char* term, int login_shell, int addutmp)
 { int sig; char* t;
 
   if (fd < 0) // no master pty could be opened
@@ -446,12 +444,12 @@ void Shell::makeShell(const char* dev, QStrList & args, const char* term, int lo
 }
 
 /*! 
-    Create a shell.
+    Create an instance.
     \param _login_shell is a hack. FIXME: remove.
 */
-Shell::Shell()
+TEPty::TEPty()
 {
-  fd = openShell();
+  fd = openPty();
 
   signal(SIGCHLD,catchChild);
 
@@ -462,40 +460,40 @@ Shell::Shell()
 /*!
     Destructor.
     Note that the related client program is not killed
-    (yet) when a shell is deleted.
+    (yet) when a instance is deleted.
 */
-Shell::~Shell()
+TEPty::~TEPty()
 {
   delete mn;
   close(fd);
 }
 
 /*! send signal to child */
-void Shell::kill(int signal)
+void TEPty::kill(int signal)
 {
   ::kill(comm_pid,signal);
 }
 
 /*! sends a character through the line */
-void Shell::send_byte(char c)
+void TEPty::send_byte(char c)
 { 
   write(fd,&c,1);
 }
 
 /*! sends a 0 terminated string through the line */
-void Shell::send_string(const char* s)
+void TEPty::send_string(const char* s)
 {
   write(fd,s,strlen(s));
 }
 
 /*! sends len bytes through the line */
-void Shell::send_bytes(const char* s, int len)
+void TEPty::send_bytes(const char* s, int len)
 {
   write(fd,s,len);
 }
 
 /*! indicates that a block of data is received */
-void Shell::DataReceived(int)
+void TEPty::DataReceived(int)
 { char buf[4096];
   int n = read(fd, buf, 4096);
   emit block_in(buf,n);

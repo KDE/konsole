@@ -17,7 +17,7 @@
 #include <ktmainwindow.h>
 #include <qstrlist.h>
 
-#include "TEShell.h"
+#include "TEPty.h"
 #include "TEWidget.h"
 #include "TEmuVt102.h"
 
@@ -62,7 +62,7 @@ signals:
 
 private:
 
-  Shell*         sh;
+  TEPty*         sh;
   TEWidget*      te;
   Emulation*     em;
 

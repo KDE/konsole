@@ -1,6 +1,6 @@
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* [Shell.h]                        Shell                                     */
+/* [TEPty.h]                 Pseudo Terminal Device                           */
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
@@ -13,8 +13,8 @@
 /*! \file
 */
 
-#ifndef SHELL_H
-#define SHELL_H
+#ifndef TE_PTY_H
+#define TE_PTY_H
 
 #include <config.h>
 #include <sys/types.h>
@@ -26,40 +26,33 @@
 #include <qtimer.h>
 #include <qstrlist.h>
 
-/* ---| Shell Parameters |--------------------------------------------------- */
-
-//FIXME: clean this up!
-
-class Shell: public QObject
+class TEPty: public QObject
 {
 Q_OBJECT
 
   public:
-    Shell();
-    ~Shell();
+
+    TEPty();
+    ~TEPty();
 
   public:
-    const char* deviceName();
 
-  public:
     int run(QStrList & args, const char* term, int login_shell, int addutmp);
-
-  public:
-    /*! this is of internal use only. FIXME: make private */
-    void doneShell(int status);
     void kill(int signal);
 
   public:
+
     void send_byte(char s);
     void send_string(const char* s);
 
   public slots:
+
     void send_bytes(const char* s, int len);
 
   signals:
     /*!
-        emitted when the shell instance terminates.
-        \param status the wait(2) status code of the terminated child program.
+        emitted when the client program terminates.
+        \param status the wait(2) status code of the terminated client program.
     */
     void done(int status);
 
@@ -78,10 +71,15 @@ Q_OBJECT
 
     void setSize(int lines, int columns);
 
+  public:
+
+    const char* deviceName();
+
   private:
 
-    void makeShell(const char* dev, QStrList & args, const char* term, int login_shell, int addutmp);
-    int  openShell();
+    void makePty(const char* dev, QStrList & args, const char* term, int login_shell, int addutmp);
+    int  openPty();
+    void donePty(int status);
 
   private:
 
@@ -94,6 +92,9 @@ Q_OBJECT
     bool             needGrantPty;
     char ptynam[50]; // "/dev/ptyxx" | "/dev/ptmx"
     char ttynam[50]; // "/dev/ttyxx" | "/dev/pts/########..."
+
+friend int chownpty(int,int);
+friend void catchChild(int);
 };
 
 #endif

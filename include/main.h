@@ -21,7 +21,7 @@
 #include <ksimpleconfig.h>
 #include <qstrlist.h>
 
-#include "TEShell.h"
+#include "TEPty.h"
 #include "TEWidget.h"
 #include "TEmuVt102.h"
 #include "session.h"

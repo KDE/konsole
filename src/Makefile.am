@@ -23,7 +23,7 @@ bin_PROGRAMS = 	konsole konsole_grantpty kwrited #kcmkonsole
 
 noinst_LIBRARIES = libkonsole.a
 
-libkonsole_a_SOURCES = TEWidget.C TEmuVt102.C TEScreen.C TEmulation.C TEShell.C TEHistory.C keytrans.C
+libkonsole_a_SOURCES = TEWidget.C TEmuVt102.C TEScreen.C TEmulation.C TEPty.C TEHistory.C keytrans.C
 # libkonsole_a_LDFLAGS =  -version-info `expr $(VERSION) + $(SUBVERS)`:$(RELEASE):$(SUBVERS)
                        
 # Which sources should be compiled for konsole.
@@ -55,7 +55,7 @@ install-exec-local: install-binPROGRAMS
 
 # just to make sure, automake makes them 
 METASOURCES = TEWidget.moc TEmuVt102.moc session.moc main.moc \
-	TEmulation.moc TEShell.moc kwrited.moc \
+	TEmulation.moc TEPty.moc kwrited.moc \
 	krootpixmap.moc 
 
 META_INCLUDES = $(srcdir)/../include

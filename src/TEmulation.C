@@ -25,14 +25,16 @@
 
    \par A note on refreshing
 
-   Allthough the modifications to the current screen image could immediately
+   Although the modifications to the current screen image could immediately
    be propagated via `TEWidget' to the graphical surface, we have chosen
    another way here.
 
    The reason for doing so is twofold.
+
    First, experiments show that directly displaying the operation results
-   in slowing down the overall performance of emulations. First,
-   displaying individual characters using X11 creates a lot of overhead.
+   in slowing down the overall performance of emulations. Displaying
+   individual characters using X11 creates a lot of overhead.
+
    Second, by using the following refreshing method, the screen operations
    can be completely separated from the displaying. This greatly simplifies
    the programmer's task of coding and maintaining the screen operations,
@@ -213,7 +215,8 @@ void Emulation::onRcvBlock(const char *s, int len)
   bulk_incnt += 1;
   for (int i = 0; i < len; i++)
   {
-    onRcvByte(s[i]); if (s[i] == '\n') bulkNewline();
+    onRcvByte(s[i]);
+    if (s[i] == '\n') bulkNewline();
   }
   bulkEnd();
 }
@@ -272,6 +275,7 @@ void Emulation::showBulk()
                   scr->getLines(),
                   scr->getColumns());     // actual refresh
     free(image);
+    //FIXME: check that we do not trigger other draw event here.
     gui->setScroll(scr->getHistCursor(),scr->getHistLines());
   }
 }

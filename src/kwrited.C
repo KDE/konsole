@@ -2,7 +2,7 @@
 
 #include <kapp.h>
 #include <kwrited.h>
-#include <TEShell.h>
+#include <TEPty.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <kwm.h>
@@ -27,8 +27,8 @@ KWrited::KWrited() : QObject()
   wid = new QMultiLineEdit(NULL,"kwrited");
   wid->setReadOnly(TRUE);
   wid->setFocusPolicy(QWidget::NoFocus);
-  shell = new Shell();
-  QObject::connect(shell, SIGNAL(block_in(const char*,int)), this, SLOT(block_in(const char*,int)));
+  pty = new TEPty();
+  QObject::connect(pty, SIGNAL(block_in(const char*,int)), this, SLOT(block_in(const char*,int)));
 
 #if 1
   //FIXME: here we have to do some improvements.
@@ -36,10 +36,10 @@ KWrited::KWrited() : QObject()
   //       program running on the device.
   //       Have to make a new run, i guess.
   QStrList cmd; cmd.append("/bin/cat"); // dummy
-  shell->run(cmd,"dump",FALSE,TRUE);
+  pty->run(cmd,"dump",FALSE,TRUE);
 #endif
 
-  wid->setCaption(QString("KWrited - listening on device ") + shell->deviceName());
+  wid->setCaption(QString("KWrited - listening on device ") + pty->deviceName());
 }
 
 KWrited::~KWrited()

@@ -497,6 +497,7 @@ void TEWidget::propagateSize()
 
 void TEWidget::scrollChanged(int)
 {
+HERE; printf("TEWidget::scrollChanged\n");
   emit changedHistoryCursor(scrollbar->value()); //expose
 }
 

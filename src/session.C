@@ -5,17 +5,17 @@
 
 /*! \class TESession
 
-    Sessions are combinations of Shells and Emulations.
+    Sessions are combinations of TEPTy and Emulations.
 
     The stuff in here does not belong to the terminal emulation framework,
     but to main.C. It serves it's duty by providing a single reference
-    to Shell/Emulation pairs. In fact, it is only there to demonstrate one
+    to TEPTy/Emulation pairs. In fact, it is only there to demonstrate one
     of the abilities of the framework - multible sessions.
 */
 
 TESession::TESession(KTMainWindow* main, TEWidget* te, QStrList & _args, const char* term, int login_session) : schema_no(0), font_no(3), args(_args), login_shell(login_session)
 {
-  sh = new Shell();
+  sh = new TEPty();
   em = new VT102Emulation(te);
 
   this->term = strdup(term);

@@ -75,14 +75,6 @@ protected:
 
 // refreshing related material.
 // this is localized in the class.
-
-private:
-
-  QTimer bulk_timer;
-  int    bulk_nlcnt;   // bulk newline counter
-  char*  SelectedText;
-  int    bulk_incnt;   // bulk counter
-
 private slots: // triggered by timer
 
   void showBulk();
@@ -92,6 +84,14 @@ private:
   void bulkNewline();
   void bulkStart();
   void bulkEnd();
+
+private:
+
+  QTimer bulk_timer;
+  int    bulk_nlcnt;   // bulk newline counter
+  char*  SelectedText;
+  int    bulk_incnt;   // bulk counter
+
 
 };
 
