@@ -1198,6 +1198,9 @@ static int xkb_init()
 			       &xkb_lmaj, &xkb_lmin );
 }
     
+#if 0
+// This method doesn't work in all cases. The atom "ScrollLock" doesn't seem
+// to exist on all XFree versions (at least it's not here with my 3.3.6) - DF
 static unsigned int xkb_mask_modifier( XkbDescPtr xkb, const char *name )
 {
     int i;
@@ -1207,7 +1210,7 @@ static unsigned int xkb_mask_modifier( XkbDescPtr xkb, const char *name )
     Atom atom = XInternAtom( xkb->dpy, name, TRUE );
     if (atom == None)
         return 0;
-	
+
     for( i = 0;
          i < XkbNumVirtualMods;
 	 i++ )
@@ -1233,6 +1236,27 @@ static unsigned int xkb_scrolllock_mask()
     }
     return 0;
 }
+
+#else
+static unsigned int xkb_scrolllock_mask()
+{
+    int scrolllock_mask = 0;
+    XModifierKeymap* map = XGetModifierMapping( qt_xdisplay() );
+    KeyCode scrolllock_keycode = XKeysymToKeycode( qt_xdisplay(), XK_Scroll_Lock );
+    if( scrolllock_keycode == NoSymbol )
+        return 0;
+    for( int i = 0;
+         i < 8;
+         ++i )
+        {
+       if( map->modifiermap[ map->max_keypermod * i ] == scrolllock_keycode )
+               scrolllock_mask += 1 << i;
+       }
+
+    return scrolllock_mask;
+}
+#endif
+
 
 static unsigned int scrolllock_mask = 0;
         
