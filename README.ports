@@ -19,4 +19,8 @@ Lars Doelle <lars.doelle@on-line.de>
 Platform Experts
 ----------------
 
-- Tru64 - Thomas Leitner <tom@radar.tu-graz.ac.at>
+- Tru64   - Thomas Leitner <tom@radar.tu-graz.ac.at>
+- Solaris - Stephan Kulow <coolo@kde.org>
+- FreeBSD - ?
+- HP-UX   - ?
+- AIX     - ?

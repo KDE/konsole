@@ -634,8 +634,13 @@ void TEScreen::NewLine()
 
 void TEScreen::checkSelection(int from, int to)
 {
-  if ( from+histCursor*columns <= sel_BR && to+histCursor*columns >= sel_TL)
+  if (sel_begin == -1) return;
+  int scr_TL = loc(0, hist.getLines());
+  //Clear entire selection if it overlaps region [from, to]
+  if ( (sel_BR > (from+scr_TL) )&&(sel_TL < (to+scr_TL)) )
+  {
     clearSelection();
+  }
 }
 
 void TEScreen::ShowCharacter(unsigned short c)
@@ -678,15 +683,6 @@ void TEScreen::scrollUp(int from, int n)
   //FIXME: make sure `tmargin', `bmargin', `from', `n' is in bounds.
   moveImage(loc(0,from),loc(0,from+n),loc(columns-1,bmargin));
   clearImage(loc(0,bmargin-n+1),loc(columns-1,bmargin),' ');
-
-  if ( from == 0 && sel_begin >= 0) //FIXME: && lines scroll into the hist.history buffer
-                                    //FIXME: condition is not ok.
-  {
-      sel_TL -= (n-from)*columns;
-      sel_BR -= (n-from)*columns;
-  } else
-      clearSelection();
-
 }
 
 /*! scroll down `n' lines within current region.
@@ -702,13 +698,6 @@ void TEScreen::scrollDown(int from, int n)
   if (from + n > bmargin) n = bmargin - from;
   moveImage(loc(0,from+n),loc(0,from),loc(columns-1,bmargin-n));
   clearImage(loc(0,from),loc(columns-1,from+n-1),' ');
-  if (from == 0 && sel_begin >= 0) //FIXME: condition is not ok
-  {
-     sel_TL += (n-from)*columns;
-     sel_BR += (n-from)*columns;
-  }
-  else
-     clearSelection();
 }
 
 /*! position the cursor to a specific line and column. */
@@ -788,7 +777,7 @@ int TEScreen::getCursorY()
 
 void TEScreen::clearImage(int loca, int loce, char c)
 { int i;
-  int scr_TL=loc(0,histCursor);
+  int scr_TL=loc(0,hist.getLines());
   //FIXME: check positions
 
   //Clear entire selection if it overlaps region to be moved...
@@ -970,6 +959,7 @@ void TEScreen::setSelBeginXY(const int x, const int y)
 
 void TEScreen::setSelExtentXY(const int x, const int y)
 {
+  if (sel_begin == -1) return;
   int l =  loc(x,y + histCursor);
 
   if (l < sel_begin)
@@ -989,6 +979,9 @@ void TEScreen::setSelExtentXY(const int x, const int y)
 
 QString TEScreen::getSelText(const BOOL preserve_line_breaks)
 {
+  if (sel_begin == -1) 
+     return QString::null; // Selection got clear while selecting.
+
   int *m;			// buffer to fill.
   int s, d;			// source index, dest. index.
   int hist_BR = loc(0, hist.getLines());
@@ -1165,14 +1158,6 @@ void TEScreen::addHistLine()
 
     // adjust history cursor
     histCursor += (hist.getLines()-1 == histCursor);
-
-    // adjust selection
-    if (sel_TL > 0 )
-    {
-      sel_TL    += columns;
-      sel_BR    += columns;
-      sel_begin += columns;
-    }
   }
 
   if (!hasScroll()) histCursor = 0; //FIXME: a poor workaround

@@ -76,8 +76,8 @@ key Delete    : "\x7f"
 
 key Up   -Shift-Ansi : "\EA"
 key Down -Shift-Ansi : "\EB"
-key Right-Ansi : "\EC"
-key Left -Ansi : "\ED"
+key Right-Shift-Ansi : "\EC"
+key Left -Shift-Ansi : "\ED"
 
 # VT100 emits a mode bit together
 # with the arrow keys.The AppCuKeys
@@ -85,13 +85,13 @@ key Left -Ansi : "\ED"
 
 key Up   -Shift+Ansi+AppCuKeys : "\EOA"
 key Down -Shift+Ansi+AppCuKeys : "\EOB"
-key Right+Ansi+AppCuKeys : "\EOC"
-key Left +Ansi+AppCuKeys : "\EOD"
+key Right-Shift+Ansi+AppCuKeys : "\EOC"
+key Left -Shift+Ansi+AppCuKeys : "\EOD"
 
 key Up   -Shift+Ansi-AppCuKeys : "\E[A"
 key Down -Shift+Ansi-AppCuKeys : "\E[B"
-key Right+Ansi-AppCuKeys : "\E[C"
-key Left +Ansi-AppCuKeys : "\E[D"
+key Right-Shift+Ansi-AppCuKeys : "\E[C"
+key Left -Shift+Ansi-AppCuKeys : "\E[D"
 
 # function keys 
 

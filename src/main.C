@@ -88,6 +88,9 @@ int main(int argc, char* argv[])
   aboutData.addCredit("Sven Fischer",
     "bug fixing",
     "herpes@kawo2.rwth-aachen.de");
+  aboutData.addCredit("Waldo Bastian",
+    "bug fixing",
+    "bastian@kde.org");
   aboutData.addCredit("Dale M. Flaven",
     "bug fixing",
     "dflaven@netport.com");
