@@ -3,6 +3,7 @@
 Type=KonsoleApplication
 Name=MC
 Comment=Midnight Commander
+Comment[br]=Komandant Hanternoz
 Comment[ca]=Gestor de fitxers Midnight Commander
 Comment[is]=mc:  Skráarstjóri fyrir textaham
 Comment[ro]=Midnite Commander
