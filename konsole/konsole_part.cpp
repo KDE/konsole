@@ -448,6 +448,7 @@ void konsolePart::makeGUI()
      // Frame on/off
      showFrame = new KToggleAction(i18n("Show Fr&ame"), 0,
                                 this, SLOT(slotToggleFrame()), actions);
+     showFrame->setCheckedState(i18n("Hide Fr&ame"));
      showFrame->plug(m_options);
 
      // Word Connectors
