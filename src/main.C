@@ -634,6 +634,28 @@ ColorSchema* TEDemo::readSchema(const char* path)
         res->table[fi].transparent = tr;
         res->table[fi].bold        = bo;
       }
+      if (!strncmp(line,"sysfg",5))
+      { int fi,tr,bo;
+        if(sscanf(line,"sysfg %d %d %d",&fi,&tr,&bo) != 3)
+          continue;
+        if (!(0 <= fi && fi <= TABLE_COLORS)) continue;
+        if (!(0 <= tr && tr <= 1           )) continue;
+        if (!(0 <= bo && bo <= 1           )) continue;
+        res->table[fi].color       = kapp->textColor;
+        res->table[fi].transparent = tr;
+        res->table[fi].bold        = bo;
+      }
+      if (!strncmp(line,"sysbg",5))
+      { int fi,tr,bo;
+        if(sscanf(line,"sysbg %d %d %d",&fi,&tr,&bo) != 3)
+          continue;
+        if (!(0 <= fi && fi <= TABLE_COLORS)) continue;
+        if (!(0 <= tr && tr <= 1           )) continue;
+        if (!(0 <= bo && bo <= 1           )) continue;
+        res->table[fi].color       = kapp->backgroundColor;
+        res->table[fi].transparent = tr;
+        res->table[fi].bold        = bo;
+      }
     }
   }
   fclose(sysin);
