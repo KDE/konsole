@@ -907,3 +907,8 @@ QSize TEWidget::calcSize(int cols, int lins)
   int scw = (scrollLoc==SCRNONE?0:scrollbar->width());
   return QSize( font_w*cols + 2*rimX + frw + scw, font_h*lins + 2*rimY + frh );
 }
+
+void TEWidget::styleChange(QStyle &)
+{
+    propagateSize();
+}
