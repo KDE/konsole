@@ -30,7 +30,7 @@ libkonsolepart_la_SOURCES = TEPty.cpp BlockArray.cpp konsole_part.cpp \
         sessioniface.skel
 
 libkonsolepart_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN)
-libkonsolepart_la_LIBADD = $(LIB_KPARTS) $(LIBUTIL) $(XTESTLIB)
+libkonsolepart_la_LIBADD = $(LIBUTIL) $(XTESTLIB) $(LIB_KPARTS)
 
 # kwrited kdeinit module
 kwrited_la_SOURCES = kwrited.cpp
