@@ -318,7 +318,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,mResizeTimer(0)
 ,m_lineSpacing(0)
 {
-  // The offsets are not yet calculated. 
+  // The offsets are not yet calculated.
   // Do not calculate these too often to be more smoothly when resizing
   // konsole in opaque mode.
   bY = bX = 1;
@@ -348,7 +348,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 
   setFocusPolicy( WheelFocus );
 
-  // We're just a big pixmap, no need to have a background 
+  // We're just a big pixmap, no need to have a background
   // Speeds up redraws
   setBackgroundMode(NoBackground);
 }
@@ -385,7 +385,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
   {
     if (pm)
        paint.setBackgroundMode( TransparentMode );
-    if (clear || (blinking && (attr.r & RE_BLINK))) 
+    if (clear || (blinking && (attr.r & RE_BLINK)))
        erase(rect);
   }
   else
@@ -807,14 +807,14 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
     emit isBusySelecting(true); // Keep it steady...
     // Drag only when the Control key is hold
     bool selected = false;
-    // The receiver of the testIsSelected() signal will adjust 
+    // The receiver of the testIsSelected() signal will adjust
     // 'selected' accordingly.
     emit testIsSelected(pos.x(), pos.y(), selected);
     if ((!ctrldrag || ev->state() & ControlButton) && selected ) {
       // The user clicked inside selected text
       dragInfo.state = diPending;
       dragInfo.start = ev->pos();
-    } 
+    }
     else {
       // No reason to ever start a drag event
       dragInfo.state = diNone;
@@ -1266,7 +1266,7 @@ void TEWidget::emitSelection(bool useXselection,bool appendReturn)
 {
   QApplication::clipboard()->setSelectionMode( useXselection );
   QString text = QApplication::clipboard()->text();
-  if(appendReturn)  
+  if(appendReturn)
     text.append("\r");
   if ( ! text.isEmpty() )
   {
@@ -1452,7 +1452,7 @@ bool TEWidget::event( QEvent *e )
       ke->accept();
       return true;
     }
-    
+
     // Override any of the following accelerators:
     switch ( keyCodeQt )
     {
@@ -1705,7 +1705,7 @@ void TEWidget::drop_menu_activated(int item)
       setActiveWindow();
       break;
    case 2: // copy
-     emit sendStringToEmu("\001\013cp -i ");
+     emit sendStringToEmu("\001\013cp -ri ");
      break;
    case 3: // link
      emit sendStringToEmu("\001\013ln -s ");
