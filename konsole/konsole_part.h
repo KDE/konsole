@@ -73,7 +73,7 @@ class konsolePart: public KParts::ReadOnlyPart, public TerminalInterface
     virtual ~konsolePart();
 
 signals:
-    void processExited( int status );
+    void processExited();
     void receivedData( const QString& s );
  protected:
     virtual bool openURL( const KURL & url );
@@ -83,7 +83,7 @@ signals:
 
  protected slots:
     void showShell();
-    void slotProcessExited( int status );
+    void slotProcessExited();
     void slotReceivedData( const QString& s );
 
     void doneSession(TESession*);

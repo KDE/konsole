@@ -1,20 +1,22 @@
 // [kwrited.C] A write(1) receiver for kde.
 
+#include <dcopclient.h>
+#include <qsocketnotifier.h>
+
 #include <kuniqueapplication.h>
 #include <kcmdlineargs.h>
 #include <klocale.h>
 #include <kglobalsettings.h>
 #include <kwrited.h>
 #include <kdebug.h>
-#include <dcopclient.h>
-#include <qsocketnotifier.h>
+#include <kcrash.h>
 
-#include <TEPty.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <X11/Xlib.h>
 #include <config.h>
-#include <kcrash.h>
+
+#include "TEPty.h"
 
 /* TODO
    for anyone who likes to do improvements here, go ahead.
@@ -31,10 +33,6 @@
      see ../Makefile.am - kwrited doesn't seem to work well without utempter
 */
 
-#ifndef HERE
-#define HERE fprintf(stderr,"%s(%d): here\n",__FILE__,__LINE__)
-#endif
-
 KWrited::KWrited() : QObject()
 {
   wid = new QTextEdit(0, "messages");
@@ -45,12 +43,13 @@ KWrited::KWrited() : QObject()
   wid->setFocusPolicy(QWidget::NoFocus);
 
   pty = new TEPty();
-  pty->makePty(true);
-  int fd = pty->masterFd();
+  pty->setUsePty(true, true); // Enable utmp
+  pty->openMasterPty();
+  int fd = pty->ptyMasterFd();
   QSocketNotifier *sn = new QSocketNotifier(fd, QSocketNotifier::Read, this);
   connect(sn, SIGNAL(activated(int)), this, SLOT(block_in(int)));
 
-  wid->setCaption(QString("KWrited - Listening on Device ") + pty->deviceName());
+  wid->setCaption(QString("KWrited - Listening on Device ") + pty->ptyMasterName());
 }
 
 KWrited::~KWrited()

@@ -58,7 +58,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
   iconText = kapp->caption();
 
   //kdDebug(1211)<<"TESession ctor() sh->setSize()"<<endl;
-  sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
+  sh->setPtySize(te->Lines(),te->Columns()); // not absolutely nessesary
   //kdDebug(1211)<<"TESession ctor() connecting"<<endl;
   connect( sh,SIGNAL(block_in(const char*,int)),this,SLOT(onRcvBlock(const char*,int)) );
 
@@ -76,7 +76,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
 
   connect( em, SIGNAL( zmodemDetected() ), this, SLOT(slotZModemDetected()));
 
-  connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
+  connect( sh,SIGNAL(done()), this,SLOT(done()) );
   //kdDebug(1211)<<"TESession ctor() done"<<endl;
   if (!sh->error().isEmpty())
      QTimer::singleShot(0, this, SLOT(ptyError()));
@@ -103,7 +103,7 @@ void TESession::run()
   QString cwd_save = QDir::currentDirPath();
   if (!initial_cwd.isEmpty())
      QDir::setCurrent(initial_cwd);
-  sh->setXonXoff(xon_xoff);
+  sh->setPtyXonXoff(xon_xoff);
   sh->run(QFile::encodeName(pgm),args,term.latin1(), add_to_utmp,
           ("DCOPRef("+appId+",konsole)").latin1(),
           ("DCOPRef("+appId+","+sessionId+")").latin1());
@@ -171,7 +171,7 @@ bool TESession::closeSession()
   if (!sh->isRunning() || !sendSignal(SIGHUP))
   {
      // Forced close.
-     QTimer::singleShot(0, this, SLOT(done( 1 )));
+     QTimer::singleShot(1, this, SLOT(done()));
   }
   return true;
 }
@@ -201,8 +201,8 @@ void TESession::renameSession(const QString &name)
 TESession::~TESession()
 {
  //kdDebug(1211) << "disconnnecting..." << endl;
-  QObject::disconnect( sh, SIGNAL( done(int) ),
-                       this, SLOT( done( int ) ) );
+  QObject::disconnect( sh, SIGNAL( done() ),
+                       this, SLOT( done() ) );
   delete em;
   delete sh;
 
@@ -220,7 +220,7 @@ void TESession::setListenToKeyPress(bool l)
   em->setListenToKeyPress(l);
 }
 
-void TESession::done( int status )
+void TESession::done()
 {
   if (!autoClose)
   {
@@ -228,7 +228,7 @@ void TESession::done( int status )
     emit updateTitle();
     return;
   }
-  emit processExited( status );
+  emit processExited();
   emit done(this);
 }
 

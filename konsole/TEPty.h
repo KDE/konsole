@@ -17,11 +17,8 @@
 #define TE_PTY_H
 
 #include <config.h>
-#include <sys/types.h>
-#include <sys/ioctl.h>
 
 #include <kprocess.h>
-#include <termios.h>
 #include <qsocketnotifier.h>
 #include <qtimer.h>
 #include <qstrlist.h>
@@ -47,23 +44,23 @@ Q_OBJECT
     int run( const char* pgm, QStrList & args, const char* term, bool _addutmp,
              const char* konsole_dcop = "", const char* konsole_dcop_session = "" );
     void setWriteable(bool writeable);
-    void setXonXoff(bool _xonxoff) { m_bXonXoff = _xonxoff; }
-    int makePty(bool _addutmp);
-    int masterFd() { return m_MasterFd; }
     QString error() { return m_strError; }
+
+    // Make public
+    void commClose() { KProcess::commClose(); }
+    void openMasterPty() { KProcess::openMasterPty(); }
 
   public slots:
     void lockPty(bool lock);
     void send_bytes(const char* s, int len);
-    void setSize(int lines, int columns);
+    void setSize(int lines, int cols);
 
   signals:
 
     /*!
         emitted when the client program terminates.
-        \param status the wait(2) status code of the terminated client program.
     */
-    void done(int status);
+    void done();
 
     /*!
         emitted when a new block of data comes in.
@@ -77,22 +74,12 @@ Q_OBJECT
     void send_byte(char s);
     void send_string(const char* s);
 
-    const char* deviceName();
-
-    virtual void commClose();
-    
-  protected:
-      virtual int commSetupDoneC();
-      virtual int setupCommunication(Communication comm);
-  
   protected slots:
       void DataReceived(int, int& len);
   public slots:
       void donePty();
       
   private:
-    void startPgm(const char* pgm, QValueList<QCString> & args, const char* term);
-    void openPty();
     void appendSendJob(const char* s, int len);
 
   private slots:
@@ -100,21 +87,7 @@ Q_OBJECT
 
   private:
 
-    struct winsize m_WSize;
-    int m_MasterFd;
-    int m_SlaveFd;
-    bool             m_bNeedGrantPty;
-    bool             m_bXonXoff;
-    bool             m_bAddUtmp;
-    char ptynam[50]; // "/dev/ptyxx" | "/dev/ptmx"
-    char ttynam[50]; // "/dev/ttyxx" | "/dev/pts/########..."
-    const char *pgm;
     QString m_strError;
-
-    // environment variables
-    const char *term;
-    const char *konsole_dcop;
-    const char *konsole_dcop_session;
 
     struct SendJob {
       SendJob() {}
@@ -130,7 +103,6 @@ Q_OBJECT
     QValueList<SendJob> pendingSendJobs;
     QTimer* pSendJobTimer;
 
-  friend int chownpty(int, bool);
 };
 
 #endif

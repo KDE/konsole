@@ -943,8 +943,8 @@ void konsolePart::startProgram( const QString& program,
            this, SLOT( updateTitle() ) );
   connect( se, SIGNAL(restoreAllListenToKeyPress()),
            this, SLOT(restoreAllListenToKeyPress()) );
-  connect( se, SIGNAL( processExited( int ) ),
-           this, SLOT( slotProcessExited( int ) ) );
+  connect( se, SIGNAL( processExited() ),
+           this, SLOT( slotProcessExited() ) );
   connect( se, SIGNAL( receivedData( const QString& ) ),
            this, SLOT( slotReceivedData( const QString& ) ) );
 
@@ -995,9 +995,9 @@ void konsolePart::sendInput( const QString& text )
     te->emitText( text );
 }
 
-void konsolePart::slotProcessExited( int status )
+void konsolePart::slotProcessExited()
 {
-    emit processExited( status );
+    emit processExited();
 }
 void konsolePart::slotReceivedData( const QString& s )
 {

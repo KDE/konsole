@@ -1,8 +1,9 @@
 #ifndef KWRITED_H
 #define KWRITED_H
 
-#include <TEPty.h>
 #include <qtextedit.h>
+
+class TEPty;
 
 class KWrited : public QObject
 { Q_OBJECT

@@ -100,7 +100,7 @@ public:
 public slots:
 
   void run();
-  void done( int status );
+  void done();
   void terminate();
   void setUserTitle( int, const QString &caption );
   void ptyError();
@@ -114,7 +114,7 @@ public slots:
 
 signals:
 
-  void processExited( int status );
+  void processExited();
   void receivedData( const QString& text );
   void done(TESession*);
   void updateTitle();
