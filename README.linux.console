@@ -54,11 +54,11 @@ emulation, too (BUT THERE SHOULD BE NO NEED TO DO SO):
 
 - export TERM=linux to trigger ncurses aware applications
   to expect a linux console.
-- set the appropriate charmap (this is cp437 on my installation)
+- set the appropriate codec (this is cp437 on my installation)
   to get graphical and international characters properly.
-- set the Linux keymap for the F1-F5 function keys.
+- set the Linux keyboard to get the F1-F5 function keys right.
 [TODO: to control the the above two points via menu settings
- is work in progress, meaning not available in user space yet.]
+ is work in progress, meaning not available yet.]
 
 Please note that these applications then may not react properly
 on changing the window size anymore. Often they ignore it
