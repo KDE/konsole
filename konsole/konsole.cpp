@@ -1037,13 +1037,14 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
      s_word_seps= config->readEntry("wordseps",":@-./_~");
      te->setWordCharacters(s_word_seps);
 
+     te->setTerminalSizeHint( config->readBoolEntry("TerminalSizeHint",true) );
+     
      b_framevis = config->readBoolEntry("has frame",true);
      te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
 
      te->setBlinkingCursor(config->readBoolEntry("BlinkingCursor",false));
      te->setCtrlDrag(config->readBoolEntry("CtrlDrag",false));
-     te->setCutToBeginningOfLine(config->readBoolEntry("CutToBeginningOfLine",false));
-     te->setTerminalSizeHint( config->readBoolEntry("TerminalSizeHint",true) );
+     te->setCutToBeginningOfLine(config->readBoolEntry("CutToBeginningOfLine",false));     
      te->setLineSpacing( config->readUnsignedNumEntry( "LineSpacing", 0 ) );
 
      monitorSilenceSeconds=config->readUnsignedNumEntry("SilenceSeconds", 10);
