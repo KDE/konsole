@@ -124,7 +124,7 @@ void Shell::doneShell(int status)
 */
 int Shell::run(QStrList & args, const char* term)
 {
-  pid_t comm_pid = fork();
+  comm_pid = fork();
   if (comm_pid <  0) { fprintf(stderr,"Can't fork\n"); return -1; }
   if (comm_pid == 0) makeShell(ttynam,args,term);
   if (comm_pid >  0) shells.insert(comm_pid,this);
@@ -267,6 +267,12 @@ Shell::~Shell()
 {
   delete mn;
   close(fd);
+}
+
+/*! send signal to child */
+void Shell::kill(int signal)
+{
+  ::kill(comm_pid,signal);
 }
 
 /*! sends a character through the line */

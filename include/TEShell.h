@@ -40,6 +40,7 @@ Q_OBJECT
   public:
     /*! this is of internal use only. FIXME: make private */
     void doneShell(int status);
+    void kill(int signal);
 
   public:
     void send_byte(char s);
@@ -77,6 +78,7 @@ Q_OBJECT
   private:
 
     int              fd;
+    pid_t            comm_pid;
     int		           login_shell;
     QSocketNotifier* mn;
 };

@@ -560,7 +560,7 @@ void TEDemo::setBsHack(bool bshack)
 {
   b_bshack = bshack;
   m_options->setItemChecked(4,b_bshack);
-  //FIXME: somewhat fuzzy...  - should be done for all sessions ?
+  //FIXME: solve typing issue below
   if (se)
     if (b_bshack)
       ((VT102Emulation*)se->getEmulation())->setMode(MODE_BsHack);

@@ -45,6 +45,7 @@ public:
   void setSchemaNo(int sn);
   void setFontNo(int fn);
   void setTitle(const char* title);
+  void kill(int signal);
 
 public slots:
 

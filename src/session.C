@@ -45,6 +45,11 @@ void TESession::run()
   sh->run(args,term);
 }
 
+void TESession::kill(int signal)
+{
+  sh->kill(signal);
+}
+
 TESession::~TESession()
 {
   free(term);
