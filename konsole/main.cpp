@@ -46,6 +46,8 @@ static KCmdLineOptions options[] =
    { "noxft",           I18N_NOOP("Do not use XFT (Anti-Aliasing)"), 0 },
    { "vt_sz CCxLL",  I18N_NOOP("Terminal size in columns x lines"), 0 },
    { "type <type>", I18N_NOOP("Open the given session type instead of the default shell"), 0 },
+   { "keytab <name>", I18N_NOOP("Use given .keytab file"), 0 },
+   { "schema <name>", I18N_NOOP("Use given .schema file"), 0 },
    { "workdir <dir>", I18N_NOOP("Change working directory of the konsole to 'dir'"), 0 },
    { "!e <command>",  I18N_NOOP("Execute 'command' instead of shell"), 0 },
    // WABA: All options after -e are treated as arguments.
@@ -190,7 +192,7 @@ int main(int argc, char* argv[])
   KCmdLineArgs *qtargs = KCmdLineArgs::parsedArgs("qt");
   has_noxft = !args->isSet("xft");
   TEWidget::setAntialias( !has_noxft );
-  
+
 
   KApplication a;
   KImageIO::registerFormats(); // add io for additional image formats
@@ -209,7 +211,7 @@ int main(int argc, char* argv[])
     term=QString::fromLatin1(args->getOption("tn"));
   }
   login_shell = args->isSet("ls");
- 
+
   QStrList eargs;
 
   const char* shell = 0;
@@ -222,7 +224,7 @@ int main(int argc, char* argv[])
      for(int i=0; i < args->count(); i++)
        eargs.append( args->arg(i) );
 
-     if (title.isEmpty() && 
+     if (title.isEmpty() &&
          (kapp->caption() == kapp->aboutData()->programName()))
      {
         title = QFile::decodeName(shell);  // program executed in the title bar
@@ -245,8 +247,16 @@ int main(int argc, char* argv[])
   }
   if(args->isSet("workdir"))
      QDir::setCurrent( args->getOption("workdir") );
- 
-  //FIXME: more: font, menu, scrollbar, schema, session ...
+
+  QString keytab = "";
+  if (args->isSet("keytab"))
+    keytab = args->getOption("keytab");
+
+  QString schema = "";
+  if (args->isSet("schema"))
+    schema = args->getOption("schema");
+
+  //FIXME: more: font
 
   args->clear();
 
@@ -269,7 +279,7 @@ int main(int argc, char* argv[])
 
   // ///////////////////////////////////////////////
 
-  // Ignore SIGHUP so that we don't get killed when 
+  // Ignore SIGHUP so that we don't get killed when
   // our parent-shell gets closed.
   signal(SIGHUP, SIG_IGN); 
 
@@ -362,6 +372,16 @@ int main(int argc, char* argv[])
     //2.1 sec
     Konsole*  m = new Konsole(wname,(shell ? QFile::decodeName(shell) : QString::null),eargs,histon,menubaron,toolbaron,frameon,scrollbaron,QString::null,title,type,term);
     //2.5 sec
+
+    if (!keytab.isEmpty())
+      m->initSessionKeyTab(keytab);
+
+    if (!schema.isEmpty()) {
+      if (schema.right(7)!=".schema")
+        schema+=".schema";
+      m->setSchema(schema);
+    }
+
     ksm->konsole = m;
     m->setColLin(c,l); // will use default height and width if called with (0,0)
 
@@ -372,6 +392,6 @@ int main(int argc, char* argv[])
     m->showTipOnStart();
   }
   //2.6 sec
-  
+
   return a.exec();
 }

@@ -1307,6 +1307,7 @@ void Konsole::initSessionFont(int fontNo) {
 
 void Konsole::initSessionKeyTab(const QString &keyTab) {
   se->setKeymap(keyTab);
+  updateKeytabMenu();
 }
 
 void Konsole::setFullScreen(bool on)
