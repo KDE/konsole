@@ -59,7 +59,7 @@
 #include <config.h>
 #endif
 
-#if HAVE_GRANTPT && HAVE_PTSNAME && HAVE_UNLOCKPT && !defined(_GNU_SOURCE)
+#if defined(HAVE_GRANTPT) && defined(HAVE_PTSNAME) && defined(HAVE_UNLOCKPT) && !defined(_GNU_SOURCE)
 #define _GNU_SOURCE // make stdlib.h offer the above fcts
 #endif
 
@@ -248,7 +248,7 @@ int TEPty::openPty()
 
   // We try, as we know them, one by one.
 
-#if HAVE_OPENPTY && 0 //FIXME: some work needed.
+#if defined(HAVE_OPENPTY) && 0 //FIXME: some work needed.
 #warning wheee
   if (ptyfd < 0)
   {
@@ -267,7 +267,7 @@ int TEPty::openPty()
 #endif
 
 //#if defined(__sgi__) || defined(__osf__) || defined(SVR4) || defined(__SVR4)
-#if HAVE_GRANTPT && HAVE_PTSNAME
+#if defined(HAVE_GRANTPT) && defined(HAVE_PTSNAME)
   if (ptyfd < 0)
   {
     ptyfd = open("/dev/ptmx",O_RDWR);
@@ -367,7 +367,7 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
     exit(1);
   }
 
-#if HAVE_UNLOCKPT
+#ifdef HAVE_UNLOCKPT
   unlockpt(fd);
 #endif
 
