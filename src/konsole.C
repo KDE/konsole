@@ -313,6 +313,12 @@ void Konsole::makeGUI()
    connect(m_file,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
    m_menuCreated=true;
 
+   // Remove the empty separator Qt inserts if the menu is empty on popup,
+   // not sure if this will be "fixed" in Qt, for now use this hack (malte)
+   if (sender()->inherits("QPopupMenu") &&
+       static_cast<const QPopupMenu *>(sender())->count() == 1)
+       const_cast<QPopupMenu *>(static_cast<const QPopupMenu *>(sender()))->removeItemAt(0);
+
    // Send Signal Menu -------------------------------------------------------------
    m_signals = new KPopupMenu(this);
    m_signals->insertItem( i18n( "Suspend Task" )   + " (STOP)", 17);     // FIXME: comes with 3 values
@@ -1392,7 +1398,7 @@ void Konsole::addScreenSession(const QString &socket)
   co->writeEntry("Exec", QString::fromLatin1("screen -r %1").arg(socket));
   QString icon = "openterm"; // FIXME use another icon (malte)
   cmd_serial++;
-  m_file->insertItem( SmallIconSet( icon ), txt, cmd_serial, cmd_serial );
+  m_file->insertItem( SmallIconSet( icon ), txt, cmd_serial, cmd_serial - 1 );
   m_toolbarSessionsCommands->insertItem( SmallIconSet( icon ), txt, cmd_serial );
   no2command.insert(cmd_serial,co);
 }
@@ -1421,13 +1427,15 @@ void Konsole::loadScreenSessions()
   if (cmd_first_screen == -1)
     cmd_first_screen = cmd_serial + 1;
   else
+  {
     for (int i = cmd_first_screen; i <= cmd_serial; ++i)
     {
       m_file->removeItem(i);
       m_toolbarSessionsCommands->removeItem(i);
       no2command.remove(i);
-      cmd_serial = cmd_first_screen - 1;
     }
+    cmd_serial = cmd_first_screen - 1;
+  }
   for (QStringList::ConstIterator it = sessions.begin(); it != sessions.end(); ++it)
     addScreenSession(*it);
 }
