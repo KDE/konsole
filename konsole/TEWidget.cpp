@@ -309,6 +309,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,hasBlinkingCursor(false)
 ,ctrldrag(false)
 ,cuttobeginningofline(false)
+,isBlinkEvent(false)
 ,m_drop(0)
 ,possibleTripleClick(false)
 ,mResizeWidget(0)
@@ -383,7 +384,8 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
   {
     if (pm)
        paint.setBackgroundMode( TransparentMode );
-    if (clear) erase(rect);
+    if (clear || (blinking && (attr.r & RE_BLINK))) 
+       erase(rect);
   }
   else
   {
@@ -580,8 +582,6 @@ void TEWidget::setBlinkingCursor(bool blink)
 
 void TEWidget::paintEvent( QPaintEvent* pe )
 {
-
-//{ static int cnt = 0; printf("paint %d\n",cnt++); }
   const QPixmap* pm = backgroundPixmap();
   QPainter paint;
   setUpdatesEnabled(false);
@@ -605,10 +605,6 @@ HCNT("paintEvent");
   int luy = QMIN(lines-1,   QMAX(0,(rect.top()    - tLy - bY  ) / font_h));
   int rlx = QMIN(columns-1, QMAX(0,(rect.right()  - tLx - bX ) / font_w));
   int rly = QMIN(lines-1,   QMAX(0,(rect.bottom() - tLy - bY  ) / font_h));
-
-  //  if (pm != NULL && color_table[image->b].transparent)
-  //  erase(rect);
-  // BL: I have no idea why we need this, and it breaks the refresh.
 
   QChar *disstrU = new QChar[columns];
   for (int y = luy; y <= rly; y++)
@@ -640,10 +636,13 @@ HCNT("paintEvent");
       if ((x+len < columns) && (!image[loc(x+len,y)].c))
         len++; // Adjust for trailing part of multi-column char
 
-      QString unistr(disstrU,p);
-      drawAttrStr(paint,
+      if (!isBlinkEvent || (cr & RE_BLINK))
+      {
+         QString unistr(disstrU,p);
+         drawAttrStr(paint,
                 QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
                 unistr, image[loc(x,y)], pm != NULL, false);
+      }
       x += len - 1;
     }
   }
@@ -656,7 +655,9 @@ HCNT("paintEvent");
 void TEWidget::blinkEvent()
 {
   blinking = !blinking;
+  isBlinkEvent = true;
   repaint(false);
+  isBlinkEvent = false;
 }
 
 void TEWidget::blinkCursorEvent()

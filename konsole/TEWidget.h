@@ -216,6 +216,7 @@ private:
     bool hasBlinkingCursor;  // has blinking cursor enabled
     bool ctrldrag;           // require Ctrl key for drag
     bool cuttobeginningofline; // triple click only selects forward
+    bool isBlinkEvent; // paintEvent due to blinking.
     QTimer* blinkT;  // active when hasBlinker
     QTimer* blinkCursorT;  // active when hasBlinkingCursor
     
