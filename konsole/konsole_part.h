@@ -105,7 +105,8 @@ class konsolePart: public KParts::ReadOnlyPart
     void slotSelectLineSpacing();
     void slotBlinkingCursor();
     void slotWordSeps();
-
+    void fontNotFound();
+  
  private:
     konsoleBrowserExtension *m_extension;
     KURL currentURL;
@@ -143,6 +144,7 @@ class konsolePart: public KParts::ReadOnlyPart
     QString     s_schema;
     QString     s_kconfigSchema;
     QString     s_word_seps;			// characters that are considered part of a word
+    QString     fontNotFound_par;
 
     bool        b_framevis:1;
     bool        b_histEnabled:1;
