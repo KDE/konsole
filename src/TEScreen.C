@@ -44,9 +44,6 @@
 
 #include "TEScreen.h"
 
-#define MIN(a,b) ((a)<(b)?(a):(b))
-#define MAX(a,b) ((a)>(b)?(a):(b))
-
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
 //FIXME: this is emulation specific. Use FALSE for xterm, TRUE for ANSI.
@@ -110,8 +107,8 @@ void TEScreen::cursorUp(int n)
 {
   if (n == 0) n = 1; // Default
   int stop = cuY < tmargin ? 0 : tmargin;
-  cuX = MIN(columns-1,cuX); // nowrap!
-  cuY = MAX(stop,cuY-n);
+  cuX = QMIN(columns-1,cuX); // nowrap!
+  cuY = QMAX(stop,cuY-n);
 }
 
 /*!
@@ -125,8 +122,8 @@ void TEScreen::cursorDown(int n)
 {
   if (n == 0) n = 1; // Default
   int stop = cuY > bmargin ? lines-1 : bmargin;
-  cuX = MIN(columns-1,cuX); // nowrap!
-  cuY = MIN(stop,cuY+n);
+  cuX = QMIN(columns-1,cuX); // nowrap!
+  cuY = QMIN(stop,cuY+n);
 }
 
 /*!
@@ -139,8 +136,8 @@ void TEScreen::cursorLeft(int n)
 //=CUB
 {
   if (n == 0) n = 1; // Default
-  cuX = MIN(columns-1,cuX); // nowrap!
-  cuX = MAX(0,cuX-n);
+  cuX = QMIN(columns-1,cuX); // nowrap!
+  cuX = QMAX(0,cuX-n);
 }
 
 /*!
@@ -153,7 +150,7 @@ void TEScreen::cursorRight(int n)
 //=CUF
 {
   if (n == 0) n = 1; // Default
-  cuX = MIN(columns-1,cuX+n);
+  cuX = QMIN(columns-1,cuX+n);
 }
 
 /*!
@@ -238,7 +235,7 @@ void TEScreen::NextLine()
 void TEScreen::eraseChars(int n)
 { 
   if (n == 0) n = 1; // Default
-  int p = MAX(0,MIN(cuX+n-1,columns-1));
+  int p = QMAX(0,QMIN(cuX+n-1,columns-1));
   clearImage(loc(cuX,cuY),loc(p,cuY),' ');
 }
 
@@ -250,7 +247,7 @@ void TEScreen::eraseChars(int n)
 void TEScreen::deleteChars(int n)
 { 
   if (n == 0) n = 1; // Default
-  int p = MAX(0,MIN(cuX+n,columns-1));
+  int p = QMAX(0,QMIN(cuX+n,columns-1));
   moveImage(loc(cuX,cuY),loc(p,cuY),loc(columns-1,cuY));
   clearImage(loc(columns-n,cuY),loc(columns-1,cuY),' ');
 }
@@ -263,8 +260,8 @@ void TEScreen::deleteChars(int n)
 void TEScreen::insertChars(int n)
 { 
   if (n == 0) n = 1; // Default
-  int p = MAX(0,MIN(columns-1-n,columns-1));
-  int q = MAX(0,MIN(cuX+n,columns-1));
+  int p = QMAX(0,QMIN(columns-1-n,columns-1));
+  int q = QMAX(0,QMIN(cuX+n,columns-1));
   moveImage(loc(q,cuY),loc(cuX,cuY),loc(p,cuY));
   clearImage(loc(cuX,cuY),loc(q-1,cuY),' ');
 }
@@ -355,8 +352,8 @@ void TEScreen::saveCursor()
 
 void TEScreen::restoreCursor()
 {
-  cuX     = MIN(sa_cuX,columns-1);
-  cuY     = MIN(sa_cuY,lines-1);
+  cuX     = QMIN(sa_cuX,columns-1);
+  cuY     = QMIN(sa_cuY,lines-1);
   graphic = sa_graphic;
   pound   = sa_pound;
   cu_re   = sa_cu_re;
@@ -401,8 +398,8 @@ void TEScreen::resizeImage(int new_lines, int new_columns)
     newimg[y*new_columns+x].b = DEFAULT_BACK_COLOR;
     newimg[y*new_columns+x].r = DEFAULT_RENDITION;
   }
-  int cpy_lines   = MIN(new_lines,  lines);
-  int cpy_columns = MIN(new_columns,columns);
+  int cpy_lines   = QMIN(new_lines,  lines);
+  int cpy_columns = QMIN(new_columns,columns);
   // copy to new image
   for (int y = 0; y < cpy_lines; y++)
   for (int x = 0; x < cpy_columns; x++)
@@ -416,8 +413,8 @@ void TEScreen::resizeImage(int new_lines, int new_columns)
   image = newimg;
   lines = new_lines;
   columns = new_columns;
-  cuX = MIN(cuX,columns-1);
-  cuY = MIN(cuY,lines-1);
+  cuX = QMIN(cuX,columns-1);
+  cuY = QMIN(cuY,lines-1);
 
   // FIXME: try to keep values, evtl.
   tmargin=0;
@@ -502,7 +499,7 @@ ca* TEScreen::getCookedImage()
 
   for (y = 0; (y < lines) && (y < (histLines-histCursor)); y++)
   {
-    int len = MIN(columns,histBuffer[y+histCursor]->len);
+    int len = QMIN(columns,histBuffer[y+histCursor]->len);
     ca* img = histBuffer[y+histCursor]->line;
     
     for (x = 0; x < len; x++) 
@@ -587,7 +584,7 @@ void TEScreen::clear()
 
 void TEScreen::BackSpace()
 {
-  cuX = MAX(0,cuX-1);
+  cuX = QMAX(0,cuX-1);
   if (BS_CLEARS) image[loc(cuX,cuY)].c = ' ';
 }
 
@@ -773,7 +770,7 @@ void TEScreen::setCursorX(int x)
 {
   if (x == 0) x = 1; // Default
   x -= 1; // Adjust
-  cuX = MAX(0,MIN(columns-1, x));
+  cuX = QMAX(0,QMIN(columns-1, x));
 }
 
 /*! Set the cursor to y-th line. */
@@ -782,7 +779,7 @@ void TEScreen::setCursorY(int y)
 {
   if (y == 0) y = 1; // Default
   y -= 1; // Adjust
-  cuY = MAX(0,MIN(lines  -1, y + (getMode(MODE_Origin) ? tmargin : 0) ));
+  cuY = QMAX(0,QMIN(lines  -1, y + (getMode(MODE_Origin) ? tmargin : 0) ));
 }
 
 /*! set cursor to the `left upper' corner of the screen (1,1).

@@ -45,8 +45,6 @@
 #include "TEmuVt102.moc"
 
 #define ESC 27
-#define MIN(a,b) ((a)<(b)?(a):(b))
-#define MAX(a,b) ((a)>(b)?(a):(b))
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
@@ -442,7 +440,7 @@ void VT102Emulation::tableInit()
 #define Xte        (Xpe                        &&     cc           ==  7 )
 #define ces(C)     (                           (tbl[  cc  ] & (C)) == (C) && !Xte)
 #define Dig        a[n] = 10*a[n] + cc - '0';
-#define Arg        argc = MIN(argc+1,MAXARGS-1); argv[argc] = 0;
+#define Arg        argc = QMIN(argc+1,MAXARGS-1); argv[argc] = 0;
 
 //FIXME: introduce real states.
 //
@@ -457,7 +455,7 @@ void VT102Emulation::onRcvByte(int c)
     if (cc == CNTL('X') || cc == CNTL('Z') || cc == ESC) reset(); //VT100: CAN or SUB
     if (cc != ESC)    { tau( TY_CTL___(cc     ),    0,   0);          return; }
   }
-  pbuf[ppos] = cc; ppos = MIN(ppos+1,MAXPBUF-1);
+  pbuf[ppos] = cc; ppos = QMIN(ppos+1,MAXPBUF-1);
   unsigned char* s = pbuf;
   int            p = ppos;
   int *          a = argv;

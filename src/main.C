@@ -74,8 +74,6 @@
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
-inline int MIN(int A, int B) { return ((A>B) ? B : A); }
-
 #undef PACKAGE
 #undef VERSION
 #define PACKAGE "konsole"
@@ -416,7 +414,7 @@ void TEDemo::readProperties(KConfig* config)
   setMenuVisible(config->readBoolEntry("menubar visible",TRUE));
   setFrameVisible(config->readBoolEntry("has frame",TRUE));
   
-  scrollbar_menu_activated(MIN(config->readUnsignedNumEntry("scrollbar",SCRRIGHT),2));
+  scrollbar_menu_activated(QMIN(config->readUnsignedNumEntry("scrollbar",SCRRIGHT),2));
 
   // not necessary for SM (KTMainWindow does it after), but useful for default settings
   if (menubar->menuBarPos() != KMenuBar::Floating)
@@ -435,7 +433,7 @@ void TEDemo::readProperties(KConfig* config)
   // Options that should be applied to all sessions /////////////
   // (1) set menu items and TEDemo members
   setBsHack(config->readBoolEntry("BS hack",TRUE));
-  setFont(MIN(config->readUnsignedNumEntry("font",3),7)); // sets n_font and menu item
+  setFont(QMIN(config->readUnsignedNumEntry("font",3),7)); // sets n_font and menu item
   setSchema(config->readEntry("schema",""));
   // (2) apply to sessions (currently only the 1st one)
   TESession* s = no2session.find(1);
@@ -736,7 +734,7 @@ void TEDemo::newSession(int i)
   QString emu = co->readEntry("Term");
   QString sch = co->readEntry("Schema");
   QString txt = co->readEntry("Comment"); // not null
-  int     fno = MIN(co->readUnsignedNumEntry("Font",se->fontNo()),7);
+  int     fno = QMIN(co->readUnsignedNumEntry("Font",se->fontNo()),7);
 
   ColorSchema* schema = sch.isEmpty()
                       ? (ColorSchema*)NULL
