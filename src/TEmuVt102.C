@@ -59,7 +59,7 @@
 /*!
 */
 
-int maxHistLines = 100;
+int maxHistLines = 2000;
 //#define MAXHISTLINES 100 // natural constant for now.
 
 VT102Emulation::VT102Emulation(TEWidget* gui, const char* term) : Emulation(gui)

@@ -4,6 +4,7 @@ CONTRIBUTORS
   - 16 color SGR codes (xterm-83)
   - schema files seeked also in ~/.kde/share/apps/konsole
   - vim.schema
+  - improved/fixed selections
 - Matthias Ettrich <ettrich@kde.org>
   - most of main.C donated via kvt.
   - rework of the session management

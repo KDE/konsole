@@ -1,3 +1,9 @@
+30 Jan 1998 Warwick Allison <warwick@troll.no>
+- character classes (removing word_characters code)
+- "word" selection based on character classes
+- "word" selection during selection Extend (double-click-and-drag)
+- fixed bug to so that selection stays highlighted
+- fixed another, more obscure selection bug 
 05 Jan 1998
 - improved handling of atypical or moved installations (Martin,Sven,Lars)
 - a QString::printf issue resolved (Sven,Lars)

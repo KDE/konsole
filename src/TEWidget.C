@@ -171,10 +171,6 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   setMouseMarks(TRUE);
   setVTFont( QFont("fixed") );
   
-  //make an empty string as default to avoid having to test for NULL
-  word_characters = NULL;
-  setWordClass("");
-
   setColorTable(base_color_table); // init color table
 
   if ( parent ) parent->installEventFilter( this ); //FIXME: see below
@@ -488,6 +484,8 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   int    tLx = tL.x();
   int    tLy = tL.y();
 
+  word_selection_mode = FALSE;
+
 // printf("press top left [%d,%d] by=%d\n",tLx,tLy, bY);
   if ( ev->button() == LeftButton)
   {
@@ -498,7 +496,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
     if (mouse_marks || (ev->state() & ShiftButton))
     {
       emit clearSelectionSignal();
-      pntSel = pos;
+      iPntSel = pntSel = pos;
       actSel = 1; // left mouse button pressed but nothing selected yet.
       grabMouse(   /*crossCursor*/  ); // handle with care!	
     }
@@ -549,11 +547,55 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
   }
 
   QPoint here = QPoint((pos.x()-tLx-blX)/font_w,(pos.y()-tLy-bY)/font_h);
+  QPoint ohere;
+  bool swapping = FALSE;
+
+  if ( word_selection_mode ) {
+      // Extend to word boundaries
+      int i;
+      int selClass;
+
+      bool left_not_right = ( here.y() < iPntSel.y() ||
+	   here.y() == iPntSel.y() && here.x() < iPntSel.x() );
+      bool old_left_not_right = ( pntSel.y() < iPntSel.y() ||
+	   pntSel.y() == iPntSel.y() && pntSel.x() < iPntSel.x() );
+      swapping = left_not_right != old_left_not_right;
+
+      // Find left (left_not_right ? from here : from start)
+      QPoint left = left_not_right ? here : iPntSel;
+      i = loc(left.x(),left.y());
+      selClass = charClass(image[i].c);
+      while ( left.x() > 0 && charClass(image[i-1].c) == selClass )
+	{ i--; left.rx()--; }
+
+      // Find left (left_not_right ? from start : from here)
+      QPoint right = left_not_right ? iPntSel : here;
+      i = loc(right.x(),right.y());
+      selClass = charClass(image[i].c);
+      while ( right.x() < columns-1 && charClass(image[i+1].c) == selClass )
+	{ i++; right.rx()++; }
+
+      // Pick which is start (ohere) and which is extension (here)
+      if ( left_not_right )
+      {
+	here = left;
+	ohere = right;
+      } else {
+	here = right;
+	ohere = left;
+      }
+  }
 
   if (here == pntSel && scroll == scrollbar->value()) return; // not moved
 
-  if (actSel < 2) emit beginSelectionSignal( pntSel.x(), pntSel.y() );
-  
+  if ( word_selection_mode ) {
+    if ( actSel < 2 || swapping ) {
+      emit beginSelectionSignal( ohere.x(), ohere.y() );
+    }
+  } else if ( actSel < 2 ) {
+    emit beginSelectionSignal( pntSel.x(), pntSel.y() );
+  }
+
   actSel = 2; // within selection
   pntSel = here;
   emit extendSelectionSignal( here.x(), here.y() );
@@ -583,13 +625,6 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
   }
 }
 
-void TEWidget::setWordClass(char* s) {
-    if (s) {
-	if (word_characters) free(word_characters);
-	word_characters = strdup(s);
-    }
-}
-
 void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
 {
   if ( ev->button() != LeftButton) return;
@@ -613,30 +648,46 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
   QPoint bgnSel = pos;
   QPoint endSel = QPoint((ev->x()-tLx-blX)/font_w,(ev->y()-tLy-bY)/font_h);
   int i = loc(bgnSel.x(),bgnSel.y());
+  iPntSel = bgnSel;
+
+  word_selection_mode = TRUE;
 
   // find word boundaries...
-  if (!isspace(image[i].c))
+  int selClass = charClass(image[i].c);
   {
     // set the start...
      int x = bgnSel.x();
-     while((isalnum(image[i].c)||ispunct(image[i].c)) && (x > 0)) { i--; x--; }
-     if ( x > 0 ) x++;
+     while ( x > 0 && charClass(image[i-1].c) == selClass )
+	{ i--; x--; }
      bgnSel.setX(x);
      emit beginSelectionSignal( bgnSel.x(), bgnSel.y() );
 
      // set the end...
      i = loc( endSel.x(), endSel.y() );
      x = endSel.x();
-     while((isalnum(image[i].c)||ispunct(image[i].c)||strchr(word_characters,image[i].c)) 
-		&& (x < (columns-1)))
-     { i++; x++ ; }
-     if (x < (columns-1)) x--;
+     while( x < columns-1 && charClass(image[i+1].c) == selClass )
+	{ i++; x++ ; }
      endSel.setX(x);
      emit extendSelectionSignal( endSel.x(), endSel.y() );
      emit endSelectionSignal(preserve_line_breaks);
      preserve_line_breaks = TRUE;
- 
    }
+}
+
+int TEWidget::charClass(char ch) const
+{
+    // This might seem like overkill, but imagine if ch was a Unicode
+    // character (Qt 2.0 QChar) - it might then be sensible to separate
+    // the different language ranges, etc.
+
+    if ( isspace(ch) ) return ' ';
+
+    static char *word_characters = "@-./_~";
+    if ( isalnum(ch) || strchr(word_characters, ch) )
+	return 'a';
+
+    // Everything else is weird
+    return 1;
 }
 
 void TEWidget::setMouseMarks(bool on)
@@ -662,8 +713,16 @@ void TEWidget::emitSelection()
 
 void TEWidget::setSelection(const char *t)
 {
-   QApplication::clipboard()->setText(t);
-   return;
+  // Disconnect signal while WE set the clipboard
+  QObject *cb = QApplication::clipboard();   
+  QObject::disconnect( cb, SIGNAL(dataChanged()), 
+                     this, SLOT(onClearSelection()) );
+
+  QApplication::clipboard()->setText(t);
+
+  QObject::connect( cb, SIGNAL(dataChanged()), 
+                     this, SLOT(onClearSelection()) );
+  return;
 }
 
 void TEWidget::onClearSelection()
@@ -702,6 +761,11 @@ bool TEWidget::eventFilter( QObject *, QEvent *e )
       case ShiftButton|(Key_PageDown << 8) :
            scrollbar->setValue(scrollbar->value()+lines/2);
            break;
+#if 0
+      case (Key_Insert << 8) : // Some progs use this.
+           emitSelection();
+           break;
+#endif
       default :
            emit keyPressedSignal(ke); // expose
            break;

@@ -88,6 +88,7 @@ protected:
     void mouseMoveEvent( QMouseEvent* );
 
     void emitSelection();
+    virtual int charClass(char) const;
 
 public:
 
@@ -102,7 +103,6 @@ public:
 public slots:
 
     void onClearSelection();
-    void setWordClass(char* s);
 
 protected slots:
 
@@ -131,9 +131,9 @@ private:
 
     void makeImage();
 
+    QPoint iPntSel; // initial selection point
     QPoint pntSel; // current selection point
     int    actSel; // selection state
-    char   *word_characters;  // word class characters.
     BOOL    word_selection_mode;
     BOOL    preserve_line_breaks;
 
