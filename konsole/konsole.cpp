@@ -239,6 +239,7 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 ,sessionIdCounter(0)
 ,monitorSilenceSeconds(10)
 ,s_kconfigSchema("")
+,m_tabViewMode(ShowIconAndText)
 ,b_fullscreen(false)
 ,m_menuCreated(false)
 ,skip_exit_query(false) // used to skip the query when closed by the session management
@@ -1201,6 +1202,8 @@ void Konsole::slotTabCloseSession()
 
 void Konsole::slotTabSetViewOptions(int mode)
 {
+  m_tabViewMode = TabViewModes(mode);
+
   for(int i = 0; i < tabwidget->count(); i++) {
 
     QWidget *page = tabwidget->page(i);
@@ -1731,7 +1734,7 @@ void Konsole::switchToTabWidget()
              this, SLOT(configureRequest(TEWidget*,int,int,int)) );
     initTEWidget(new_te, se_widget);
 
-    tabwidget->insertTab(new_te,SmallIconSet(_se->IconName()),_se->Title());
+    createSessionTab(new_te, SmallIconSet(_se->IconName()), _se->Title());
     setSchema(_se->schemaNo(),new_te);
 
     new_te->calcGeometry();
@@ -1787,6 +1790,22 @@ void Konsole::switchToFlat()
   tabwidget = 0L;
   if (se->isMasterMode())
     enableMasterModeConnections();
+}
+
+void Konsole::createSessionTab(TEWidget *widget, const QIconSet &iconSet,
+                               const QString &text, int index)
+{
+  switch(m_tabViewMode) {
+  case ShowIconAndText:
+    tabwidget->insertTab(widget, iconSet, text, index);
+    break;
+  case ShowTextOnly:
+    tabwidget->insertTab(widget, QIconSet(), text, index);
+    break;
+  case ShowIconOnly:
+    tabwidget->insertTab(widget, iconSet, QString::null, index);
+    break;
+  }
 }
 
 QIconSet Konsole::iconSetForSession(TESession *session) const
@@ -2191,7 +2210,7 @@ void Konsole::addSession(TESession* s)
 
   if (tabwidget) {
   //KONSOLEDEBUG<<"Konsole ctor() after new TEWidget() "<<time.elapsed()<<" msecs elapsed"<<endl;
-    tabwidget->insertTab(te,SmallIconSet(s->IconName()),newTitle);
+    createSessionTab(te, SmallIconSet(s->IconName()), newTitle);
     setSchema(s->schemaNo());
     tabwidget->setCurrentPage(tabwidget->count()-1);
     if (s->isMasterMode()) {
@@ -2716,7 +2735,7 @@ void Konsole::moveSessionLeft()
     tabwidget->blockSignals(true);
     tabwidget->removePage(se->widget());
     tabwidget->blockSignals(false);
-    tabwidget->insertTab(se->widget(), iconSetForSession(se), se->Title(), position-1 );
+    createSessionTab(se->widget(), iconSetForSession(se), se->Title(), position-1);
     tabwidget->showPage(se->widget());
   }
 
@@ -2746,7 +2765,7 @@ void Konsole::moveSessionRight()
     tabwidget->blockSignals(true);
     tabwidget->removePage(se->widget());
     tabwidget->blockSignals(false);
-    tabwidget->insertTab(se->widget(), iconSetForSession(se), se->Title(), position+1 );
+    createSessionTab(se->widget(), iconSetForSession(se), se->Title(), position+1);
     tabwidget->showPage(se->widget());
   }
 
@@ -3202,7 +3221,7 @@ void Konsole::attachSession(TESession* session)
 
     initTEWidget(te, se_widget);
     session->changeWidget(te);
-    tabwidget->insertTab(te,SmallIconSet(session->IconName()),session->Title());
+    createSessionTab(te, SmallIconSet(session->IconName()), session->Title());
     setSchema(session->schemaNo());
     if (session->isMasterMode()) {
       disableMasterModeConnections(); // no duplicate connections, remove old

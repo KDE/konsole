@@ -238,7 +238,9 @@ private slots:
 
 private:
   KSimpleConfig *defaultSession();
-  QString newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(), const QString &_term = QString::null, const QString &_icon = QString::null, const QString &_title = QString::null, const QString &_cwd = QString::null);
+  QString newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(),
+                     const QString &_term = QString::null, const QString &_icon = QString::null,
+                     const QString &_title = QString::null, const QString &_cwd = QString::null);
   void readProperties(KConfig *config, const QString &schema, bool globalConfigOnly);
   void applySettingsToGUI();
   void makeTabWidget();
@@ -262,6 +264,8 @@ private:
   void switchToTabWidget();
   void switchToFlat();
 
+  void createSessionTab(TEWidget *widget, const QIconSet& iconSet,
+                        const QString &text, int index = -1);
   QIconSet iconSetForSession(TESession *session) const;
 
   QPtrList<TEWidget> activeTEs();
@@ -377,6 +381,8 @@ private:
   QRect       _saveGeometry;
 
   QTimer      m_closeTimeout;
+
+  TabViewModes m_tabViewMode;
 
   bool        b_framevis:1;
   bool        b_fullscreen:1;
