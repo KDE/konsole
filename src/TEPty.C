@@ -577,15 +577,20 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   unsigned int i;
   char **argv = (char**)malloc(sizeof(char*)*(args.count()+1));
 //  char **argv = (char**)malloc(sizeof(char*)*(args.count()+0));
-  for (i = 0; i<args.count(); i++) argv[i] = strdup(args.at(i));
+  for (i = 0; i<args.count(); i++) {
+     argv[i] = strdup(args.at(i));
+     kdDebug() << "argv[" << i << "]=" << argv[i] << endl;
+     }
 //  for (i = 1; i<args.count(); i++) argv[i-1] = strdup(args.at(i));
-  pgm = strdup(args.at(0));
+  kdDebug() << "pgm WAS = " << pgm << endl;
+//  pgm = strdup(args.at(0));
+  kdDebug() << "pgm WAS CHANGED TO = " << pgm << endl;
 //  kdDebug() << "In TEPty.  first arg is " << argv[0] << endl;
 //  kdDebug() << "In TEPty.  i is " << i << endl;
 //  kdDebug() << "In TEPty.  pgm  is " << pgm << endl;
-//  for (int k=1; k < 500000 ; k++) {
-//    for (int j=1; j < 8000 ; j++) {}
-//  }
+  for (int k=1; k < 500000 ; k++) {
+    for (int j=1; j < 8000 ; j++) {}
+  }
 
   argv[i] = 0L;
 

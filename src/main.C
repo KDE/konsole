@@ -160,7 +160,7 @@ int main(int argc, char* argv[])
     {
       t = strdup(t); *t = '-';
       //KONSOLEDEBUG << "Appending t = " << t << " to eargs." << endl;
-      eargs.append(shell);
+      //eargs.append(shell);
       eargs.append(t);
     }
     else
@@ -246,10 +246,16 @@ int main(int argc, char* argv[])
     QString sTitle;
     QString tmpSchema;
     QString tmpArgs;
+    QString tmpPgm;
+    QString sPgm;
 
     while (KMainWindow::canBeRestored(n)){
         sessionconfig->setDesktopGroup();
-        shell = sessionconfig->readEntry("Program", shell).latin1();
+        //wname = sessionconfig->readEntry("class",wname).latin1();
+        //shell = "";
+        //FIXME If we can just restore the command to a char *, we'd be golden.
+        //shell = sessionconfig->readEntry("Program", shell).latin1();
+        kdDebug() << "shell set to " << shell << endl;
         sessionconfig->readListEntry("Args0", eargs);
         cTitle+=(sessionconfig->readEntry("Title0", title)).latin1();
         Konsole *m = new Konsole(wname,shell,eargs,histon,toolbaron,cTitle,type,true);
@@ -270,7 +276,11 @@ int main(int argc, char* argv[])
           tmpSchema="Schema";
           tmpSchema+= (char) (n2+49);
           sessionconfig->readListEntry(tmpArgs, eargs);
+          tmpPgm="Pgm";
+          tmpPgm+= (char) (n2+49);
+          sPgm=sTitle=sessionconfig->readEntry(tmpPgm, shell);
           m->setArgs(eargs);
+          m->setPgm(sPgm);
 //          QTimer::singleShot(5000,m,SLOT(newSession()));
           m->newSession();
 //          kdDebug(1211) << "Adding title tmpTitle = " << sessionconfig->readEntry(tmpTitle, m->title);

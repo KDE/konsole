@@ -24,6 +24,7 @@ TESession::TESession(KMainWindow* main, TEWidget* te, const char* _pgm, QStrList
    , pgm(_pgm)
    , args(_args)
 {
+  kdDebug() << "pgm = " << pgm << endl;
   //kdDebug(1211)<<"TESession ctor() new TEPty"<<endl;
   sh = new TEPty();
   //kdDebug(1211)<<"TESession ctor() new TEmuVt102"<<endl;
@@ -56,6 +57,7 @@ TESession::TESession(KMainWindow* main, TEWidget* te, const char* _pgm, QStrList
 void TESession::run()
 {
   //kdDebug(1211) << "Running the session!" << pgm << "\n";
+  //pgm = "pine";
   sh->run(pgm,args,term.data(),FALSE);
 }
 

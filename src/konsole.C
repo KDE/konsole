@@ -212,6 +212,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
 ,m_histSize(1000)
 ,b_histEnabled(true)
 {
+  kdDebug() << "pgm = " << pgm << " at startup" << endl;
   //QTime time;
   //time.start();
   isRestored = b_inRestore;
@@ -696,6 +697,7 @@ void Konsole::saveProperties(KConfig* config) {
     QString tmpTwo;
     QString tmpSchema;
     QString tmpArgs;
+    QString tmpPgm;
     config->setDesktopGroup();
 
     if (config != KGlobal::config()) {
@@ -715,6 +717,9 @@ void Konsole::saveProperties(KConfig* config) {
         tmpArgs="Args";
         tmpArgs+= (char) (counter+48);
         config->writeEntry(tmpArgs,sessions.current()->getArgs());
+        tmpPgm="Pgm";
+        tmpPgm+= (char) (counter+48);
+        config->writeEntry(tmpPgm, sessions.current()->getPgm());
 //        KONSOLEDEBUG << "Writing " << tmpTitle << " -- " << sessions.current()->Title().latin1() << endl;
         sessions.next();
         counter++;
@@ -1402,11 +1407,12 @@ TESession *Konsole::newSession(KSimpleConfig *co)
   else  {
 //      KONSOLEDEBUG << "We get here" << endl;
       cmdArgs = args;
+//      pgm="pine";
       }
 
   if (bIsBlankNewSession) {
     if(!(args.isEmpty())) {
-      pgm = strdup(args.at(0));
+      //pgm = strdup(args.at(0));
 
 //      KONSOLEDEBUG << "pgm set to " << pgm << endl;
 //      KONSOLEDEBUG << "args.count() = " << args.count() << endl;
@@ -1423,8 +1429,8 @@ TESession *Konsole::newSession(KSimpleConfig *co)
       schema=(ColorSchema*)colors->at(0);  //the default one
   int schmno = schema->numb();
 
-//  TESession* s = new TESession(this,te,co ? shell : pgm,cmdArgs,emu);
-  TESession* s = new TESession(this,te,pgm,cmdArgs,emu);
+  TESession* s = new TESession(this,te,co ? shell : pgm,cmdArgs,emu);
+//  TESession* s = new TESession(this,te,pgm,cmdArgs,emu);
   connect( s,SIGNAL(done(TESession*,int)),
            this,SLOT(doneSession(TESession*,int)) );
   connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
@@ -1832,4 +1838,11 @@ void Konsole::setArgs(QStrList newArgs)
 //  QStrList args = new QStrList();
   args = newArgs;
 }
+
+void Konsole::setPgm(QString newPgm)
+{
+//  QStrList args = new QStrList();
+  pgm = newPgm.latin1();
+}
+
 #include "konsole.moc"

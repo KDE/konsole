@@ -51,6 +51,7 @@ public:
   void setColLin(int columns, int lines);
   void setFullScreen(bool on);
   void setArgs(QStrList newArgs);
+  void setPgm(QString newPgm);
   void initFullScreen();
   void initSessionSchema(int schemaNo);
   void initSessionTitle(QString title);
