@@ -297,13 +297,15 @@ public slots:
 
   void slotHistEnable(bool);
   void slotDefault();
+  void slotSetUnlimited();
 
   unsigned int nbLines() const;
   bool isOn() const;
 
 protected:
-  QSpinBox*  m_size;
-  QCheckBox* m_btnEnable;
+  QSpinBox*      m_size;
+  QCheckBox*     m_btnEnable;
+  QPushButton*   m_setUnlimited;
 };
 
 class SizeDialog : public KDialogBase 

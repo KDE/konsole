@@ -120,13 +120,6 @@ Ctrl keys and pressing the Insert key?
 
 <tip category="Konsole">
 <html>
-<p>...that you can set the history length to "unlimited"? </p>
-<p>Just set it to 0 lines.
-</html>
-</tip>
-
-<tip category="Konsole">
-<html>
 <p>...that pressing Ctrl while pasting the selection with the middle mouse
 button will append a carriage return after pasting the selection buffer?
 </html>
