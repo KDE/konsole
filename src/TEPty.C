@@ -105,7 +105,11 @@ extern "C" {
 #include <termio.h>
 #endif
 #ifdef HAVE_TERMIOS_H
+/* for HP-UX (some versions) the extern C is needed, and for other
+   platforms it doesn't hurt */
+extern "C" {
 #include <termios.h>
+}
 #endif
 //#include <time.h>
 #include <unistd.h>
@@ -438,7 +442,10 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   close(open(dev, O_WRONLY, 0));       // clients (bash,vi). Because bash
   setpgid(0,0);                        // heals this, use '-e' to test it.
 
-  static struct termios ttmode;
+  /* without the '::' some version of HP-UX thinks, this declares
+     the struct in this class, in this method, and fails to find the correct
+     t[gc]etattr */
+  static struct ::termios ttmode;
 #undef CTRL
 #define CTRL(c) ((c) - '@')
 
