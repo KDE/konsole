@@ -1,8 +1,7 @@
 // [kwrited.C] A write(1) receiver for kde.
 
-#include <qapp.h>
+#include <kapp.h>
 #include <kwrited.h>
-#include <kwrited.moc>
 #include <TEShell.h>
 #include <stdio.h>
 #include <kwm.h>
@@ -61,10 +60,12 @@ void KWrited::block_in(const char* txt, int len)
 
 int main(int argc, char* argv[])
 {
-  QApplication app(argc, argv);
+  KApplication app(argc, argv, "kwrited");
   //FIXME: check if we have already have kwrited running.
   KWrited pro;
   app.exec();
   return 0;
 }
+
+#include "kwrited.moc"
 
