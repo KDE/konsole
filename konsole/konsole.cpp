@@ -212,8 +212,6 @@ DCOPObject( "konsole" )
 ,n_render(0)
 ,curr_schema(0)
 ,wallpaperSource(0)
-,sendRMBclickAtX(0)
-,sendRMBclickAtY(0)
 ,sessionIdCounter(0)
 ,s_kconfigSchema("")
 ,b_scroll(histon)
@@ -371,7 +369,6 @@ void Konsole::makeGUI()
      te, SLOT(pasteClipboard()), this);
    pasteClipboard->plug(m_edit);
 
-   m_edit->insertSeparator();
    m_edit->setCheckable(TRUE);
    m_edit->insertItem( i18n("&Send Signal"), m_signals );
 
@@ -594,10 +591,6 @@ void Konsole::makeGUI()
    showMenubar->plug ( m_rightButton );
    m_rightButton->insertSeparator();
    pasteClipboard->plug(m_rightButton);
-   m_rightButton->insertSeparator();
-   KAction *sendRMBclick = new KAction(i18n("Send R&ight Click"), 0, this,
-                                        SLOT(slotSendRMBclick()), this);
-   sendRMBclick->plug(m_rightButton);
    m_rightButton->insertItem(i18n("&Send Signal"), m_signals);
 
    m_rightButton->insertSeparator();
@@ -795,16 +788,9 @@ void Konsole::configureRequest(TEWidget* te, int state, int x, int y)
 //printf("Konsole::configureRequest(_,%d,%d)\n",x,y);
    if (!m_menuCreated)
       makeGUI();
-  sendRMBclickAtX=x;
-  sendRMBclickAtY=y;
-  ( (state & ShiftButton  ) ? m_edit :
-    (state & ControlButton) ? m_session :
+  ( (state & ControlButton) ? m_session :
                               m_rightButton  )
   ->popup(te->mapToGlobal(QPoint(x,y)));
-}
-
-void Konsole::slotSendRMBclick() {
-  te->sendRMBclick(sendRMBclickAtX,sendRMBclickAtY);
 }
 
 /* ------------------------------------------------------------------------- */

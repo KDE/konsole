@@ -133,7 +133,6 @@ private slots:
   void slotRenameSession();
   void slotRenameSession(int);
   void slotRenameSession(TESession* ses, const QString &name);
-  void slotSendRMBclick();
   void slotToggleMonitor();
   void slotToggleMasterMode();
   void slotClearAllSessionHistories();
@@ -248,8 +247,6 @@ private:
   int         n_render;
   int         curr_schema; // current schema no
   int         wallpaperSource;
-  int         sendRMBclickAtX;
-  int         sendRMBclickAtY;
   int         sessionIdCounter;
 
   QString     s_schema;

@@ -233,9 +233,6 @@ void konsolePart::sessionDestroyed()
 
 void konsolePart::configureRequest(TEWidget*te,int,int x,int y)
 {
-  sendRMBclickAtX=x;
-  sendRMBclickAtY=y;
-
   m_popupMenu->popup(te->mapToGlobal(QPoint(x,y)));
 }
 
@@ -402,11 +399,6 @@ void konsolePart::makeGUI()
   KAction *pasteClipboard = new KAction(i18n("&Paste"), "editpaste", 0,
                                         te, SLOT(pasteClipboard()), this);
   pasteClipboard->plug(m_popupMenu);
-  m_popupMenu->insertSeparator();
-
-  KAction *sendRMBclick = new KAction(i18n("Send R&ight Click"), 0, this,
-                                      SLOT(slotSendRMBclick()), this);
-  sendRMBclick->plug(m_popupMenu);
 
   m_popupMenu->insertItem(i18n("&Send Signal"), m_signals);
   m_popupMenu->insertSeparator();
@@ -522,11 +514,6 @@ void konsolePart::saveProperties()
 void konsolePart::sendSignal(int sn)
 {
   if (se) se->sendSignal(sn);
-}
-
-void konsolePart::slotSendRMBclick() 
-{
-  te->sendRMBclick(sendRMBclickAtX,sendRMBclickAtY);
 }
 
 void konsolePart::closeCurrentSession()

@@ -80,7 +80,6 @@ class konsolePart: public KParts::ReadOnlyPart
     void readProperties();
     void saveProperties();
 
-    void slotSendRMBclick();
     void sendSignal(int n);
     void closeCurrentSession();
 
@@ -144,9 +143,6 @@ class konsolePart: public KParts::ReadOnlyPart
     int         n_render;
     int         n_scroll;
     unsigned    m_histSize;
-
-    int         sendRMBclickAtX;
-    int         sendRMBclickAtY;
 };
 
 //////////////////////////////////////////////////////////////////////

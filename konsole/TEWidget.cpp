@@ -755,17 +755,13 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   {
     emitSelection(true,ev->state() & ControlButton);
   }
-  if ( ev->button() == RightButton ) // Configure
+  if ( ev->button() == RightButton )
   {
-    emit configureRequest( this, ev->state()&(ShiftButton|ControlButton), ev->x(), ev->y() );
+    if (mouse_marks || (ev->state() & ShiftButton))
+      emit configureRequest( this, ev->state()&(ShiftButton|ControlButton), ev->x(), ev->y() );
+    else
+      emit mouseSignal( 2, (ev->x()-tLx-blX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
   }
-}
-
-void TEWidget::sendRMBclick(int atX,int atY)
-{
-  QPoint tL  = contentsRect().topLeft();
-  emit mouseSignal( 2, (atX-tL.x()-blX)/font_w+1, (atY-tL.y()-bY)/font_h+1 ); // right button
-  emit mouseSignal( 3, (atX-tL.x()-blX)/font_w+1, (atY-tL.y()-bY)/font_h+1 ); // release button
 }
 
 void TEWidget::mouseMoveEvent(QMouseEvent* ev)
@@ -944,6 +940,14 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
       emit mouseSignal( 3, // release
                         (ev->x()-tLx-blX)/font_w + 1,
                         (ev->y()-tLy-bY)/font_h + 1 );
+    releaseMouse();
+  }
+  if ( !mouse_marks && ev->button() == RightButton && !(ev->state() & ShiftButton)) {
+    QPoint tL  = contentsRect().topLeft();
+    int    tLx = tL.x();
+    int    tLy = tL.y();
+
+    emit mouseSignal( 3, (ev->x()-tLx-blX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
     releaseMouse();
   }
 }
