@@ -207,6 +207,7 @@ Konsole::Konsole(const char* name,
 
   addSession(initial);
 
+
   // read and apply default values ///////////////////////////////////////////
 
   readProperties(KGlobal::config());
@@ -879,7 +880,20 @@ void Konsole::newSessionSelect()
 
 void Konsole::newSession()
 {
-  newSession(1);
+  int i=1;
+  int session=0;
+  while ( (session==0) && (i<=no2command.count()) ) 
+  // antlarr: Why is first session session number 1 instead of number 0 ?
+  {
+    KSimpleConfig* co = no2command.find(i);
+ 
+    if ( co && co->readEntry("Exec").isEmpty() ) session=i; 
+    i++;
+  }
+
+  if (session==0) session=1;
+
+  newSession(session);
 }
 
 void Konsole::newSession(int i)
