@@ -94,6 +94,18 @@
 #include <sys/types.h>
 #include <sys/ioctl.h>
 #include <time.h>
+
+#ifdef HAVE_SYS_TIME_H
+#ifdef TIME_WITH_SYS_TIME
+#include <sys/time.h>
+#include <time.h>
+#else
+#include <sys/time.h>
+#endif
+#else
+#include <time.h>
+#endif
+
 #include <sys/resource.h>
 #ifdef HAVE_SYS_STROPTS_H
 #include <sys/stropts.h>
