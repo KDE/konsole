@@ -280,14 +280,14 @@ void Konsole::makeMenu()
   showToolbar = KStdAction::showToolbar(this, SLOT(slotToggleToolbar()));
   showToolbar->plug(m_options);
   // Frame on/off
-  showFrame = new KToggleAction("Show &frame", 0,
+  showFrame = new KToggleAction(i18n("Show &frame"), 0,
 				this, SLOT(slotToggleFrame()), this);
   showFrame->plug(m_options);;
   // Scrollbar
-  selectScrollbar = new KSelectAction("Scrollbar", 0, this,
+  selectScrollbar = new KSelectAction(i18n("Scrollbar"), 0, this,
 			     SLOT(slotSelectScrollbar()), this);
   QStringList scrollitems;
-  scrollitems << "&Hide" << "&Left" << "Right";
+  scrollitems << i18n("&Hide") << i18n("&Left") << i18n("Right");
   selectScrollbar->setItems(scrollitems);
   selectScrollbar->plug(m_options);
   // Fullscreen
@@ -296,31 +296,31 @@ void Konsole::makeMenu()
   m_options->setItemChecked(5,b_fullscreen);
   m_options->insertSeparator();
   // Select size
-  selectSize = new KSelectAction("Size", 0, this,
+  selectSize = new KSelectAction(i18n("Size"), 0, this,
 			     SLOT(slotSelectSize()), this);
   QStringList sizeitems;
-  sizeitems << "40x15 (&small)"
-	    << "80x24 (&vt100)"
-	    << "80x25 (&ibmpc)"
-	    << "80x40 (&xterm)"
-	    << "80x52 (ibmv&ga)";
+  sizeitems << i18n("40x15 (&small)")
+	    << i18n("80x24 (&vt100)")
+	    << i18n("80x25 (&ibmpc)")
+	    << i18n("80x40 (&xterm)")
+	    << i18n("80x52 (ibmv&ga)");
   selectSize->setItems(sizeitems);
   selectSize->plug(m_options);
   // Select font
-  selectFont = new KSelectAction("Fonts", 0, this,
+  selectFont = new KSelectAction(i18n("Fonts"), 0, this,
 				 SLOT(slotSelectFont()), this);
   QStringList it;
-  it << "&Normal"
-     << "&Tiny"
-     << "&Small"
-     << "&Medium"
-     << "&Large"
-     << "&Huge"
+  it << i18n("&Normal")
+     << i18n("&Tiny")
+     << i18n("&Small")
+     << i18n("&Medium")
+     << i18n("&Large")
+     << i18n("&Huge")
      << ""
-     << "&Linux"
-     << "&Unicode"
+     << i18n("&Linux")
+     << i18n("&Unicode")
      << ""
-     << "&Custom...";
+     << i18n("&Custom...");
   selectFont->setItems(it);
   selectFont->plug(m_options);
   // Schema
