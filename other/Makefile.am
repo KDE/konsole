@@ -5,7 +5,7 @@ data_DATA = BlackOnLightYellow.schema BlackOnWhite.schema \
 	default.Schema linux.desktop mc.desktop shell.desktop \
   syscolor.schema Linux.schema XTerm.schema vim.schema \
   DarkPicture.schema LightPicture.schema Transparent.schema GreenTint.schema \
-  su.desktop
+  Transparent_MC.schema GreenTint_MC.schema su.desktop
 
 KDE_ICON = konsole
 

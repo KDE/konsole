@@ -778,16 +778,20 @@ void TEDemo::activateSession(int sn)
   se = s;
   if (!s) { fprintf(stderr,"session not found\n"); return; } // oops
   m_sessions->setItemChecked(sn,TRUE);
-  setSchema(s->schemaNo());               //FIXME: creates flicker? Do only if differs
-//Set Font. Now setConnect should do the appropriate action.
-//if the size has changed, a resize event (noticable to the application)
-//should happen. Else, we  could even start the application
-  s->setConnect(TRUE);                    // does a bulkShow (setImage)
-  setFont(s->fontNo());                   //FIXME: creates flicker?
+  if (s->schemaNo()!=curr_schema) {
+    setSchema(s->schemaNo());               //FIXME: creates flicker? Do only if differs
+    //Set Font. Now setConnect should do the appropriate action.
+    //if the size has changed, a resize event (noticable to the application)
+    //should happen. Else, we  could even start the application
+    s->setConnect(TRUE);                    // does a bulkShow (setImage)
+    setFont(s->fontNo());                   //FIXME: creates flicker?
                                           //FIXME: check here if we're still alife.
                                           //       if not, quit, otherwise,
                                           //       start propagating quit.
-  title = s->Title(); // take title from current session
+    title = s->Title(); // take title from current session
+  } else {
+    s->setConnect(TRUE);
+  }
   setHeader();
 }
 
