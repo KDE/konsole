@@ -15,11 +15,19 @@ enhanced fixed fonts from
    <http://www.cl.cam.ac.uk/~mgk25/ucs-fonts.html>.
 
 These fonts are expected to be distributed with the next X11
-release. Konsole distributes part of this font collection for
-your convenience. Please add the other fonts to your local
-installation to make best use of the enhancement. Also, a new
-set of linux console fonts have been converted for X11. These
-fonts have iso10646-1 encoding and the usual vga glyphs.
+release. Konsole distributes one of this fonts for your
+convenience. Please add the other fonts to your local
+installation to make best use of the enhancement.
+
+Though Asiatic supplements are also available from that
+site, it is not clear at the time of writing, whether
+the current implementation copes well with these scripts.
+Since i like to support these scripts, too, any feed back
+is appreachiated.
+
+Also, a new set of linux console fonts have been converted
+for X11. These fonts have iso10646-1 encoding and the usual
+vga glyphs.
 
 
 * A more precise anatomy of unicode support within konsole
@@ -28,19 +36,16 @@ The internal character representation is uniquely 16 bit unicode.
 
 All in- and output connections of konsole (beside the mouse)
 are filtered through three different codecs (corresponding to
-3 different codes):
+2 different codes):
 
-1) Font Code - The renderer converts from unicode to the code of
-   the font to the degree that code is supported within Qt.
-   Non-iso10646 (unicode) codes are considered to be VT100
-   enhanced, meaning that 0x00 .. 0x1f contains the VT100
-   graphical characters.
+ 1) Font Code - The renderer converts from unicode to the code of
+    the font to the degree that code is supported within Qt.
+    Non-iso10646 (unicode) codes are considered to be VT100
+    enhanced, meaning that 0x00 .. 0x1f contains the VT100
+    graphical characters.
 
-2) Keyboard Code - Characters typed on the keyboard are converted
-   from the local keyboard code to unicode.
-
-3) Client Code - This is used for bytes from and to the pty.
-   Often, the clients code is identical with the locale setting.
+ 2) Client Code - This is used for bytes from and to the pty.
+    Often, the clients code is identical with the locale setting.
 
 Thus, unicode support mainly turns out to be a potter's wheel of
 code conversions.
@@ -72,6 +77,14 @@ handled within konsole, but requieres those applications to
 become utf8 extended. Examples are readline, vi.
 
 ---
-TODO: Example of non-locale client code.
-(Discontining Linux Console Support)
+TODO: Example of non-locale client code
+    = Discontining Linux console support
+
+As a nice side effect, the Linux console support can be reduced
+to a konsole configuration example. By having the vga font
+converted to iso10646, a Linux console lookalike is possible
+simply by font selection while running xterm. The other Linux
+console specific adjustments are of no real help, so no support
+for them beside a README.linux.console that explains how to set
+them is provided.
 ---

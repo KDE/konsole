@@ -115,23 +115,15 @@ static KCmdLineOptions options[] =
 template class QIntDict<TESession>;
 template class QIntDict<KSimpleConfig>;
 
-#define UNICODE_TEST 1
-
 const char *fonts[] = {
- "6x13", // FIXME: "fixed" used in favor of this
- "5x7", // tiny font, never used
-#ifdef UNICODE_TEST
- "-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1",
-#else
- "6x10",
-#endif
- "7x13", "9x15", "10x20",
-#ifdef UNICODE_TEST
- "-misc-console-medium-r-normal--16-160-72-72-c-160-iso10646-1",
- "-misc-console-medium-r-normal--8-80-72-72-c-80-iso10646-1"
-#else
- "linux8x16", "linux8x8"
-#endif
+ "6x13",  // FIXME: "fixed" used in favor of this
+ "5x7",   // tiny font, never used
+ "6x10",  // small font
+ "7x13",  // medium
+ "9x15",  // large
+ "10x20", // huge
+ "-misc-console-medium-r-normal--16-160-72-72-c-160-iso10646-1", // "Linux"
+ "-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1",    // "Unicode"
  };
 #define TOPFONT ((sizeof(fonts)/sizeof(char*))-1)
 
@@ -377,7 +369,7 @@ void TEDemo::makeMenu()
   m_font->insertItem( i18n("&Huge"),   5);
   m_font->insertSeparator();
   m_font->insertItem( i18n("&Linux"),  6);
-  m_font->insertItem( i18n("Linux (small)"),7);
+  m_font->insertItem( i18n("&Unicode"),7);
   m_font->insertSeparator();
   m_font->insertItem( i18n("&Custom ..."), 1000); // for other fonts
   connect(m_font, SIGNAL(activated(int)), SLOT(font_menu_activated(int)));
@@ -413,7 +405,7 @@ void TEDemo::makeMenu()
   m_options->setItemChecked(4,b_bshack);
 
   m_options->insertSeparator();
-  m_options->insertItem( i18n("&Font Size"), m_font);
+  m_options->insertItem( i18n("&Font"), m_font);
   m_options->insertItem( i18n("&Size"), m_size);
   m_options->insertItem( i18n("&Schema"), m_schema);
   m_options->insertSeparator();
