@@ -1819,8 +1819,22 @@ void Konsole::slotBackgroundChanged(int desk)
 
   if (s->useTransparency() && info.desktop()==desk && (0 != rootxpm)) {
     //KONSOLEDEBUG << "Wallpaper changed on my desktop, " << desk << ", repainting..." << endl;
-    wallpaperSource = desk;
-    rootxpm->repaint(true);
+    //Check to see if we are on the current desktop. If not, delay the repaint
+    //by setting wallpaperSource to 0. Next time our desktop is selected, we will
+    //automatically update because we are saying "I don't have the current wallpaper"
+    NETRootInfo rootInfo( qt_xdisplay(), NET::CurrentDesktop );
+    rootInfo.activate();
+    if( rootInfo.currentDesktop() == info.desktop() ) {
+       //We are on the current desktop, go ahead and update
+       //KONSOLEDEBUG << "My desktop is current, updating..." << endl;
+       wallpaperSource = desk;
+       rootxpm->repaint(true);
+    }
+    else {
+       //We are not on the current desktop, mark our wallpaper source 'stale'
+       //KONSOLEDEBUG << "My desktop is NOT current, delaying update..." << endl;
+       wallpaperSource = 0;
+    }
   }
 }
 
