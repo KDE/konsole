@@ -591,7 +591,8 @@ void Konsole::makeGUI()
 
    m_options->insertSeparator();
 
-   KAction *save_settings = KStdAction::saveOptions(this, SLOT(slotSaveSettings()), actions);
+   KAction *save_settings = new KAction(i18n("&Save as Default"), "options_save_options", 0, this,
+                                        SLOT(slotSaveSettings()), actions);
    save_settings->plug(m_options);
 
    m_options->insertSeparator();
