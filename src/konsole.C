@@ -108,7 +108,7 @@ const char *fonts[] = {
  };
 #define TOPFONT ((sizeof(fonts)/sizeof(char*))-1)
 
-Konsole::Konsole(const QString& name,
+Konsole::Konsole(const char* name,
                  const char* _pgm, QStrList & _args,
                  int histon) : KTMainWindow(name), pgm(_pgm), args(_args)
 {
@@ -886,7 +886,7 @@ void Konsole::newSession(int i)
   if (!cmd.isEmpty())
   {
     args.append("-c");
-    args.append(cmd);
+    args.append(QFile::encodeName(cmd));
   }
 
   TESession* s = new TESession(this,te,shell,args,emu);
@@ -961,7 +961,7 @@ void Konsole::doneSession(TESession* s, int )
 
 // --| Session support |-------------------------------------------------------
 
-void Konsole::addSessionCommand(const char* path)
+void Konsole::addSessionCommand(const QString &path)
 {
   KSimpleConfig* co = new KSimpleConfig(path,TRUE);
   co->setDesktopGroup();

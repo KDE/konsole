@@ -258,7 +258,7 @@ void TEmulation::onSelectionExtend(const int x, const int y) {
 void TEmulation::setSelection(const BOOL preserve_line_breaks) {
   if (!connected) return;
   QString t = scr->getSelText(preserve_line_breaks);
-  if (t) gui->setSelection(t);
+  if (!t.isNull()) gui->setSelection(t);
 }
 
 void TEmulation::clearSelection() {

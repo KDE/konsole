@@ -644,7 +644,7 @@ void KeyTrans::loadAll()
   QStringList lst = KGlobal::dirs()->findAllResources("appdata", "*.keytab");
 
   for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it ) {
-    KeyTrans* sc = KeyTrans::fromFile(*it);
+    KeyTrans* sc = KeyTrans::fromFile(QFile::encodeName(*it));
     if (sc) sc->addKeyTrans();
   }
 }

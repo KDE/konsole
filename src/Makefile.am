@@ -1,8 +1,6 @@
 # This file is part of Konsole - an X terminal for KDE
 
-#VERSION=1
-#SUBVERS=9
-#RELEASE=1
+AM_CPPFLAGS = -UQT_NO_ASCII_CAST
 
 # just set the variable
 APPSDIR = $(kde_appsdir)/Utilities
