@@ -744,7 +744,7 @@ void Konsole::makeBasicGUI()
                            SLOT(slotFindNext()), m_shortcuts, "find_next");
   m_findNext->setEnabled(b_histEnabled);
 
-  m_findPrevious = new KAction(i18n("Find P&revious"), "previous", 0, this,
+  m_findPrevious = new KAction(i18n("Find Pre&vious"), "previous", 0, this,
                                SLOT(slotFindPrevious()), m_shortcuts, "find_previous");
   m_findPrevious->setEnabled( b_histEnabled );
 
