@@ -862,6 +862,10 @@ void TEScreen::clearImage(int loca, int loce, char c)
 void TEScreen::moveImage(int dst, int loca, int loce)
 {
 //FIXME: check positions
+  if (loce < loca) {
+    qDebug("WARNING!!! call to TEScreen:moveImage with loce < loca!");
+    return;
+  }
   memmove(&image[dst],&image[loca],(loce-loca+1)*sizeof(ca));
 }
 
