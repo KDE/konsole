@@ -51,7 +51,7 @@
 
 #define WITH_VGA
 
-char *fonts[] = {"6x13", "5x7", "6x10", "7x13", "9x15", "10x20", "vga"};
+char *fonts[] = {"6x13", "5x7", "6x10", "7x13", "9x15", "10x20", "linux8x16"}; //"vga"};
 
 TEDemo::TEDemo(char* args[]) : KTMainWindow()
 {
@@ -180,7 +180,7 @@ void TEDemo::makeMenu()
   m_font->insertItem( i18n("&Huge"),   5);
 #ifdef WITH_VGA
   m_font->insertSeparator();
-  m_font->insertItem( i18n("&VGA"),    6);
+  m_font->insertItem( i18n("&Linux"),  6);
 #endif
 #ifdef ANY_FONT
   m_font->insertSeparator();

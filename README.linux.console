@@ -5,43 +5,47 @@ look as pleasant as the original.
 
 Konsole has lately improved it's support for the linux console.
 Especially using the new session mechanism makes running the
-linux console under X11 being a snap.
+linux console under X11 a snap.
 
 Simple choose "Linux console" from the "New" menu (or click the
 right mouse button while holding down the control key).
 
-To get proper support of graphic characters, you need a VGA font
-being installed, too.  If a VGA font is not installed on your system,
-you may like to use the one supplied in the konsole/other directory.
+To get proper support of graphic characters, you need a linux console
+font being installed. Proceed as follows:
 
-To install the font proceed as follows:
+  cp konsole/other/linux8x16.pcf.gz /usr/X11R6/lib/X11/fonts/misc
+  mkfontdir /usr/X11R6/lib/X11/fonts/misc
 
-  cp konsole/other/vga.pcf.gz /usr/X11R6/lib/X11/fonts/misc
-  mkfontdir                   /usr/X11R6/lib/X11/fonts/misc
+(For some strange reason i had to restart my X server too, to make
+ it aware of the new font. Try "xfd -fn linux8x16" to see if the
+ font is available.)
 
 Depending on the application, you might need to switch to dark
-background, too, for the best results. (Konsole does this
-automatically for you when you select the linux console as
-suggested above).
+background, for the best results. (Konsole does this automatically
+for you when you select the linux console as suggested above).
 
 Please note that those applications may not react properly on
 changing the window size. Often they ignore it completely or
 behave strange in other ways. I even saw one application dying
 from the shock of noticing that the linux console has simply
 changed it's size (Debian's dselect). Since the Linux console
-can definitely be resized (not only when running the popular
-frame buffer console), this behavior is to be considered a bug
-within these applications.
+can be resized, this behavior is to be considered a bug of
+these applications, i cannot help it.
 
-Mouse handling in mc is known not to work when run with TERM=linux
-in an xterminal, because of a bug in mc itself. In general, mouse
-aware applications might create further trouble because the mouse
-is handled differently within the linux console (which uses gpm)
-and X11. As soon as konsole has matured a little more, i'll try
-to get in contact with the authors of the mouse handling for the
-linux console and will try to find out if making a copy/paste between
-X11 and gpm is really impossible. The mouse material in the ncurses
-is in need of some upgrade also, basically for the same reasons.
+Mouse-aware application will most probably not recognize
+mouse events (especially mc) since they might try to get
+these events from gpm instead from the console.
+
+The linux console can some funny quirks with special graphic
+characters and i haven't yet managed to teach Konsole all of
+them. In rare cases, they might display differently. Affected
+to my knowlegde are especially non-VT100 extentions taken from
+the AT&T 4410v1, these are arrow symbols, a full block and a
+checker board. Most other tricks that the linux console is
+able to do with character sets are eventually not even used
+in a single instance, so you will hardly be disturbed by 
+konsoles inability to do them. Please accept, that i've just
+started to support the linux console emulation.
 
 
 Anyway, try

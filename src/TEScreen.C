@@ -718,8 +718,8 @@ void TEScreen::ShowCharacter(unsigned char c)
 
   if (graphic) // handle graphical character set here
   {
-    // if (c == '0') c = ' '; else if (c == 'h') c = ' ';
     if (c >= 0x5f && c <= 0x7e) c = (c == 0x5f) ? 0x7f : c - 0x5f;
+    //FIXME: the linux console knows some non-VT100 chars, too.
   }
   if (pound && c == '#') c = 0xa3; // pound sign
 
