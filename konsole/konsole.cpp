@@ -427,23 +427,26 @@ void Konsole::makeGUI()
    KActionCollection* actions = actionCollection();
 
    // Send Signal Menu -------------------------------------------------------------
-   m_signals = new KPopupMenu(this);
-   m_signals->insertItem( i18n( "&Suspend Task" )   + " (STOP)", SIGSTOP);
-   m_signals->insertItem( i18n( "&Continue Task" )  + " (CONT)", SIGCONT);
-   m_signals->insertItem( i18n( "&Hangup" )         + " (HUP)", SIGHUP);
-   m_signals->insertItem( i18n( "&Interrupt Task" ) + " (INT)", SIGINT);
-   m_signals->insertItem( i18n( "&Terminate Task" ) + " (TERM)", SIGTERM);
-   m_signals->insertItem( i18n( "&Kill Task" )      + " (KILL)", SIGKILL);
-   m_signals->insertItem( i18n( "User Signal &1")   + " (USR1)", SIGUSR1);
-   m_signals->insertItem( i18n( "User Signal &2")   + " (USR2)", SIGUSR2);
-   connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
+   if (kapp->authorizeKAction("send_signal"))
+   {
+      m_signals = new KPopupMenu(this);
+      m_signals->insertItem( i18n( "&Suspend Task" )   + " (STOP)", SIGSTOP);
+      m_signals->insertItem( i18n( "&Continue Task" )  + " (CONT)", SIGCONT);
+      m_signals->insertItem( i18n( "&Hangup" )         + " (HUP)", SIGHUP);
+      m_signals->insertItem( i18n( "&Interrupt Task" ) + " (INT)", SIGINT);
+      m_signals->insertItem( i18n( "&Terminate Task" ) + " (TERM)", SIGTERM);
+      m_signals->insertItem( i18n( "&Kill Task" )      + " (KILL)", SIGKILL);
+      m_signals->insertItem( i18n( "User Signal &1")   + " (USR1)", SIGUSR1);
+      m_signals->insertItem( i18n( "User Signal &2")   + " (USR2)", SIGUSR2);
+      connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
+   }
 
    // Edit Menu ----------------------------------------------------------------
    m_copyClipboard->plug(m_edit);
    m_pasteClipboard->plug(m_edit);
 
    m_edit->setCheckable(true);
-   if (kapp->authorizeKAction("send_signal"))
+   if (m_signals)
       m_edit->insertItem( i18n("&Send Signal"), m_signals );
 
    m_edit->insertSeparator();
@@ -583,12 +586,12 @@ void Konsole::makeGUI()
       selectSize->plug(m_options);
 
       KAction *historyType = new KAction(i18n("Hist&ory..."), "history", 0, this,
-                                         SLOT(slotHistoryType()), actions);
+                                         SLOT(slotHistoryType()), actions, "history");
       historyType->plug(m_options);
 
       m_options->insertSeparator();
 
-      KAction *save_settings = KStdAction::saveOptions(this, SLOT(slotSaveSettings()), actions);
+      KAction *save_settings = KStdAction::saveOptions(this, SLOT(slotSaveSettings()), actions, "save_default");
       save_settings->plug(m_options);
 
       m_options->insertSeparator();
@@ -626,7 +629,7 @@ void Konsole::makeGUI()
 
       m_copyClipboard->plug(m_rightButton);
       m_pasteClipboard->plug(m_rightButton);
-      if (kapp->authorizeKAction("send_signal"))
+      if (m_signals)
          m_rightButton->insertItem(i18n("&Send Signal"), m_signals);
 
       m_rightButton->insertSeparator();
@@ -783,9 +786,9 @@ void Konsole::makeBasicGUI()
   m_shortcuts = new KActionCollection(this);
 
   m_copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0, te,
-                                 SLOT(copyClipboard()), m_shortcuts, "copy");
+                                 SLOT(copyClipboard()), m_shortcuts, "edit_copy");
   m_pasteClipboard = new KAction(i18n("&Paste"), "editpaste", 0, te,
-                                 SLOT(pasteClipboard()), m_shortcuts, "paste");
+                                 SLOT(pasteClipboard()), m_shortcuts, "edit_paste");
 
   m_clearTerminal = new KAction(i18n("C&lear Terminal"), 0, this,
                                 SLOT(slotClearTerminal()), m_shortcuts, "clear_terminal");
@@ -843,9 +846,9 @@ void Konsole::makeBasicGUI()
 
   m_closeSession = new KAction(i18n("C&lose Session"), "fileclose", 0, this,
                                SLOT(closeCurrentSession()), m_shortcuts, "close_session");
-  m_print = KStdAction::print(this, SLOT( slotPrint() ), m_shortcuts, "fileprint");
+  m_print = KStdAction::print(this, SLOT( slotPrint() ), m_shortcuts);
   m_print->setShortcut( KShortcut() );
-  m_quit = new KAction(i18n("&Quit"), "exit", 0, this, SLOT( close() ), m_shortcuts, "quit");
+  m_quit = new KAction(i18n("&Quit"), "exit", 0, this, SLOT( close() ), m_shortcuts, "file_quit");
 
   new KAction(i18n("New Session"), Qt::CTRL+Qt::ALT+Qt::Key_N, this, SLOT(newSession()), m_shortcuts, "new_session");
   new KAction(i18n("Activate Menu"), Qt::CTRL+Qt::ALT+Qt::Key_M, this, SLOT(activateMenu()), m_shortcuts, "activate_menu");
