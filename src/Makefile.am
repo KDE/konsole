@@ -33,7 +33,7 @@ libkonsolepart_la_SOURCES = \
         konsole_part.C
 
 libkonsolepart_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN)
-libkonsolepart_la_LIBADD = $(LIB_KPARTS) $(LIBUTEMPTER) 
+libkonsolepart_la_LIBADD = $(LIB_KPARTS) $(LIBUTEMPTER) $(LIBUTIL)
 
 # Which sources should be compiled for konsole.
 
