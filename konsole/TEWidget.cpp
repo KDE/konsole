@@ -1302,9 +1302,7 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
     }
 
     emit keyPressedSignal(ke); // expose
-#if QT_VERSION < 300
-    return false;               // accept event
-#else
+
     // in Qt2 when key events were propagated up the tree
     // (unhandled? -> parent widget) they passed the event filter only once at
     // the beginning. in qt3 this has changed, that is, the event filter is
@@ -1313,7 +1311,6 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
     // activates also the global event filter) . That's why we stop propagation
     // here.
     return true;
-#endif
   }
   static int composeLength = 0;
   if ( e->type() == QEvent::IMStart )
