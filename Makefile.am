@@ -12,9 +12,8 @@ updatedir = $(kde_datadir)/kconf_update
 servicesdir = $(kde_servicesdir)/kded
 services_DATA = kwrited.desktop
 
-install-data-local: uninstall.desktop
-	$(mkinstalldirs) $(DESTDIR)$(datadir)/autostart
-	$(INSTALL_DATA) $(srcdir)/uninstall.desktop $(DESTDIR)$(datadir)/autostart/kwrited.desktop
+install-data-local:
+	@-rm -f $(DESTDIR)$(datadir)/autostart/kwrited.desktop
 
 konsolehere_DATA = konsolehere.desktop
 konsoleheredir = $(kde_datadir)/konqueror/servicemenus
