@@ -20,6 +20,8 @@
 #include <qdir.h>
 #include <qsessionmanager.h>
 
+#include <dcopclient.h>
+
 #include <klocale.h>
 #include <kaboutdata.h>
 #include <kcmdlineargs.h>
@@ -198,6 +200,7 @@ int main(int argc, char* argv[])
 
   KApplication a;
   KImageIO::registerFormats(); // add io for additional image formats
+  a.dcopClient()->setQtBridgeEnabled(false);
   //2.1 secs
 
   QString title;
