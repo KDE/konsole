@@ -3,7 +3,7 @@
 
 #include <qtextedit.h>
 
-class TEPty;
+class KPty;
 
 class KWrited : public QObject
 { Q_OBJECT
@@ -14,7 +14,7 @@ private slots:
   void block_in(int fd);
 private:
   QTextEdit* wid;
-  TEPty* pty;
+  KPty* pty;
 };
 
 #endif

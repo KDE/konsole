@@ -10,13 +10,15 @@
 #include <kwrited.h>
 #include <kdebug.h>
 #include <kcrash.h>
+#include <kpty.h>
 
 #include <stdlib.h>
+#include <unistd.h>
 #include <stdio.h>
+#include <signal.h>
 #include <X11/Xlib.h>
-#include <config.h>
 
-#include "TEPty.h"
+#include <config.h>
 
 /* TODO
    for anyone who likes to do improvements here, go ahead.
@@ -41,20 +43,24 @@ KWrited::KWrited() : QObject()
       wid->minimumSizeHint().width());
   wid->setReadOnly(true);
   wid->setFocusPolicy(QWidget::NoFocus);
-
-  pty = new TEPty();
-  pty->setUsePty(true, true); // Enable utmp
-  pty->openMasterPty();
-  int fd = pty->ptyMasterFd();
-  QSocketNotifier *sn = new QSocketNotifier(fd, QSocketNotifier::Read, this);
+ 
+  pty = new KPty();
+  pty->open();
+  const char *user = getlogin();
+  if (!user)
+    user = getenv("LOGNAME");
+  pty->login(user, getenv("DISPLAY"));
+  QSocketNotifier *sn = new QSocketNotifier(pty->masterFd(), QSocketNotifier::Read, this);
   connect(sn, SIGNAL(activated(int)), this, SLOT(block_in(int)));
 
-  wid->setCaption(QString("KWrited - Listening on Device ") + pty->ptyMasterName());
+  QString txt = i18n("KWrited - Listening on Device %1").arg(pty->ttyName());
+  wid->setCaption(txt);
+  puts(txt.local8Bit().data());
 }
 
 KWrited::~KWrited()
 {
-    pty->commClose();
+    pty->logout();
     delete pty;
 }
 
@@ -62,28 +68,18 @@ void KWrited::block_in(int fd)
 {
   char buf[4096];
   int len = read(fd, buf, 4096);
-  if (len < 0)
+  if (len <= 0)
      return;
 
-  if (len < 0) len = 0;
-  QCString text( buf, len+1 );
-  text[len] = 0;
-  
-  QString str = QString::fromLocal8Bit( text );
-  int i;
-  // Remove CR
-  while ( (i = str.find('\r')) != -1)
-     str.remove(i,1);
-  wid->insert( str );
+  wid->insert( QString::fromLocal8Bit( buf, len ).remove('\r') );
   wid->show();
-  XRaiseWindow( wid->x11Display(), wid->winId());
+  wid->raise();
 }
 
 static KWrited *pro = 0;
 
 void signal_handler(int) {
     delete pro;
-    pro = 0;
     ::exit(0);
 }
 
@@ -98,7 +94,7 @@ int main(int argc, char* argv[])
 
   if (!KUniqueApplication::start())
   {
-     fprintf(stderr, i18n("kwrited is already running.").local8Bit());
+     fputs(i18n("kwrited is already running.\n").local8Bit().data(), stderr);
      exit(1);
   }
 
@@ -108,12 +104,10 @@ int main(int argc, char* argv[])
   KCrash::setEmergencySaveFunction(signal_handler);
 
   KUniqueApplication app;
-  app.dcopClient()->setDaemonMode( true );
-
   pro = new KWrited;
+  app.dcopClient()->setDaemonMode( true );
   int r = app.exec();
   delete pro;
-  pro = 0;
   return r;
 }
 
