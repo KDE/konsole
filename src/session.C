@@ -32,23 +32,18 @@ TESession::TESession(KMainWindow* main, TEWidget* te, const char* _pgm, QStrList
   //kdDebug()<<"TESession ctor() sh->setSize()"<<endl;
   sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
   //kdDebug()<<"TESession ctor() connecting"<<endl;
-  QObject::connect( sh,SIGNAL(block_in(const char*,int)),
-                    em,SLOT(onRcvBlock(const char*,int)) );
-  QObject::connect( em,SIGNAL(ImageSizeChanged(int,int)),
-                    sh,SLOT(setSize(int,int)));
+  connect( sh,SIGNAL(block_in(const char*,int)),em,SLOT(onRcvBlock(const char*,int)) );
+  connect( em,SIGNAL(ImageSizeChanged(int,int)),sh,SLOT(setSize(int,int)));
 
   // 'main' should do those connects itself, somehow.
   // These aren't KTMW's slots, but konsole's.(David)
 
-  QObject::connect( em,SIGNAL(ImageSizeChanged(int,int)),
-                    main,SLOT(notifySize(int,int)));
-  QObject::connect( em,SIGNAL(sndBlock(const char*,int)),
-                    sh,SLOT(send_bytes(const char*,int)) );
-  QObject::connect( em,SIGNAL(changeColumns(int)),
-                    main,SLOT(changeColumns(int)) );
-  QObject::connect( em,SIGNAL(changeTitle(int, const QString&)),
-                    main,SLOT(changeTitle(int, const QString&)) );
-  QObject::connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
+  connect( em,SIGNAL(ImageSizeChanged(int,int)),main,SLOT(notifySize(int,int)));
+  connect( em,SIGNAL(sndBlock(const char*,int)),sh,SLOT(send_bytes(const char*,int)) );
+  connect( em,SIGNAL(changeColumns(int)),main,SLOT(changeColumns(int)) );
+  connect( em,SIGNAL(changeTitle(int, const QString&)),main,SLOT(changeTitle(int, const QString&)) );
+  connect( em,SIGNAL(changeTitle(int, const QString&)),this,SLOT(saveChangedTitle(int, const QString&)) );
+  connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
   //kdDebug()<<"TESession ctor() done"<<endl;
 }
 
@@ -59,6 +54,11 @@ void TESession::run()
   //kdDebug() << "Running the session!" << pgm << "\n";
   sh->run(pgm,args,term.data(),FALSE);
 }
+
+void TESession::saveChangedTitle(int, const QString& s)
+{
+   title=s;
+};
 
 void TESession::kill(int signal)
 {
