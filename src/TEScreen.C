@@ -1232,27 +1232,37 @@ void TEScreen::addHistLine()
     while (end >= 0 && image[end] == dft)
       end -= 1;
 
+    int oldHistLines = hist->getLines();
+
     hist->addCells(image,end+1);
     hist->addLine();
+
+    int newHistLines = hist->getLines();
 
     bool beginIsTL = (sel_begin == sel_TL);
 
     // adjust history cursor
-    if (hist->getLines()-1 == histCursor)
+    if (newHistLines > oldHistLines)
     {
        histCursor++;
-       // Adjust selection for the new 
+       // Adjust selection for the new point of reference
        if (sel_begin != -1)
        {
           sel_TL += columns;
           sel_BR += columns;
        }
     }
+   
+    // Scroll up if user is looking at the history and we can scroll up
+    if ((histCursor > 0) && (histCursor != newHistLines))
+    {
+       histCursor--;
+    }
 
     if (sel_begin != -1)
     {
        // Scroll selection in history up
-       int top_BR = loc(0, 1+hist->getLines());
+       int top_BR = loc(0, 1+newHistLines);
 
        if (sel_TL < top_BR)
           sel_TL -= columns;
