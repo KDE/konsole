@@ -76,7 +76,6 @@ public:
   void newSession(const QString &program, const QStrList &args, const QString &term, const QString &icon, const QString &cwd);
 
   void run();
-  void activateSession(const int position);
   void setDefaultSession(const QString &filename);
   void showTipOnStart();
 
@@ -94,6 +93,7 @@ public:
   KURL baseURL() const;
 
 public slots:
+  void activateSession(int position);
 
   void makeGUI();
   QString newSession();
@@ -171,6 +171,7 @@ private slots:
   void fontNotFound();
   void showTip();
 
+  void listSessions();
   void switchToSession1() { activateSession(1); }
   void switchToSession2() { activateSession(2); }
   void switchToSession3() { activateSession(3); }

@@ -645,6 +645,7 @@ void Konsole::makeGUI()
    new KAction(i18n("New Session"), Qt::CTRL+Qt::ALT+Qt::Key_N, this, SLOT(newSession()), m_shortcuts, "new_session");
    new KAction(i18n("Activate Menu"), Qt::CTRL+Qt::ALT+Qt::Key_M, this, SLOT(activateMenu()), m_shortcuts, "activate_menu");
 
+   new KAction(i18n("List sessions"), 0, this, SLOT(listSessions()), m_shortcuts, "list_sessions");
    new KAction(i18n("Switch to Session 1"), 0, this, SLOT(switchToSession1()), m_shortcuts, "switch_to_session_1");
    new KAction(i18n("Switch to Session 2"), 0, this, SLOT(switchToSession2()), m_shortcuts, "switch_to_session_2");
    new KAction(i18n("Switch to Session 3"), 0, this, SLOT(switchToSession3()), m_shortcuts, "switch_to_session_3");
@@ -1488,6 +1489,18 @@ QString Konsole::sessionId(const int position)
     return "";
 
   return sessions.at(position-1)->SessionId();
+}
+
+void Konsole::listSessions()
+{
+  int counter=0;
+  KPopupMenu* m_sessionList = new KPopupMenu(this);
+  m_sessionList->insertTitle(i18n("Session List:"));
+  for (TESession *ses = sessions.first(); ses; ses = sessions.next())
+    m_sessionList->insertItem(SmallIcon(ses->IconName()),ses->Title(),++counter);
+  connect(m_sessionList, SIGNAL(activated(int)), SLOT(activateSession(int)));
+  m_sessionList->adjustSize();
+  m_sessionList->popup(mapToGlobal(QPoint((width()/2)-(m_sessionList->width()/2),(height()/2)-(m_sessionList->height()/2))));
 }
 
 void Konsole::activateSession(const int position)
