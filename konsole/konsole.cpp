@@ -607,9 +607,6 @@ void Konsole::makeGUI()
     "See 'LICENSE.readme' for details.").arg(PACKAGE).arg(VERSION);
     KPopupMenu* m_help =  helpMenu(aboutAuthor, false);
     */
-   //help menu
-   m_help->insertItem( i18n("&Technical Reference"), this, SLOT(tecRef()),
-                       0, -1, 1);
 
    //the different session types
    loadSessionCommands();
@@ -1350,13 +1347,6 @@ void Konsole::setFullScreen(bool on)
 //  return;
     m_options->setItemChecked(5,b_fullscreen);
 
-}
-
-// --| help |------------------------------------------------------------------
-
-void Konsole::tecRef()
-{
-  kapp->invokeHTMLHelp(PACKAGE "/techref.html");
 }
 
 /* --| sessions |------------------------------------------------------------ */

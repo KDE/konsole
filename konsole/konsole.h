@@ -92,7 +92,6 @@ private slots:
   void pixmap_menu_activated(int item);
   void keytab_menu_activated(int item);
   void schema_menu_check();
-  void tecRef();
   //what's this intended for ? aleXXX
   //void newSessionSelect();
   void newSession(int kind);
