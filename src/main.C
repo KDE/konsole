@@ -20,7 +20,7 @@
 #include <klocale.h>
 #include <kaboutdata.h>
 #include <kcmdlineargs.h>
-#include <kimgio.h>
+#include <kimageio.h>
 #include "konsole.h"
 
 /*
@@ -69,7 +69,7 @@ int main(int argc, char* argv[])
 
   setlocale( LC_ALL, "" );
   KApplication a;
-  kimgioRegister(); // add io for additional image formats
+  KImageIO::registerFormats(); // add io for additional image formats
 
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
   QStrList eargs;

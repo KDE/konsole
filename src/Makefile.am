@@ -44,7 +44,7 @@ libkonsole_la_LIBADD = $(LIB_KDEUI) $(LIBUTEMPTER) -lkparts
 # Which sources should be compiled for konsole.
 
 kwrited_la_SOURCES = kwrited.C
-kwrited_la_LIBADD  = libkonsole.la $(LIB_KIMGIO) 
+kwrited_la_LIBADD  = libkonsole.la
 kwrited_la_LDFLAGS = $(all_libraries) -module -avoid-version
 
 kwrited_SOURCES	= dummy.C
@@ -52,15 +52,15 @@ kwrited_LDADD   = kwrited.la
 kwrited_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 konsole_la_SOURCES = main.C 
-konsole_la_LIBADD  = libkonsole.la $(LIB_KIMGIO)
+konsole_la_LIBADD  = libkonsole.la
 konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
 
 konsole_SOURCES	= main.C 
-konsole_LDADD   = libkonsole.la $(LIB_KIMGIO)
+konsole_LDADD   = libkonsole.la
 konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 # kcmkonsole_SOURCES = kcmkonsole.C schema.C
-# kcmkonsole_LDADD   = $(LIB_KIMGIO) $(LIB_KDEUI)
+# kcmkonsole_LDADD   = $(LIB_KDEUI)
 # kcmkonsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 konsole_grantpty_SOURCES = konsole_grantpty.c
