@@ -1261,6 +1261,8 @@ TESession *Konsole::newSession(KSimpleConfig *co)
   ColorSchema* schema = sch.isEmpty()
                       ? colors->find(s_schema)
                       : colors->find(sch);
+  if (!schema) 
+      schema=(ColorSchema*)colors->at(0);  //the default one
   int schmno = schema->numb();
 
   TESession* s = new TESession(this,te,co ? shell : pgm,cmdArgs,emu);
