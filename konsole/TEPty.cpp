@@ -144,8 +144,8 @@ extern "C" {
 #include <bsdtty.h>
 #endif
 
-#if defined(HAVE_OPENPTY)
-	#include <pty.h>
+#if defined(HAVE_PTY_H)
+#include <pty.h>
 #endif
 
 #include <qintdict.h>
@@ -327,7 +327,12 @@ int TEPty::openPty()
     int master_fd, slave_fd;
     if (openpty(&master_fd, &slave_fd, NULL, NULL, NULL) == 0) {
       ptyfd = master_fd;
+#ifdef HAVE_PTSNAME
       strncpy(ptynam, ptsname(master_fd), 50);
+#else
+      // Just a guess, maybe ttyname with return nothing.
+      strncpy(ptynam, ttyname(master_fd),50);
+#endif
       strncpy(ttynam, ttyname(slave_fd), 50);
 
       needGrantPty = false;
