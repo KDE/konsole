@@ -161,16 +161,16 @@ TEDemo::TEDemo(const QString& name, QStrList & _args, int login_shell) : KTMainW
 
   TESession* initial = new TESession(this,te,args,"xterm",login_shell);
 
-  title = (args.count() && (kapp->getCaption() == PACKAGE))
+  title = (args.count() && (kapp->caption() == PACKAGE))
         ? QString(args.at(0))  // program executed in the title bar
-        : kapp->getCaption();  // `konsole' or -caption
+        : kapp->caption();  // `konsole' or -caption
   initial->setTitle(title);
 
   addSession(initial);
 
   // read and apply default values ///////////////////////////////////////////
 
-  readProperties(kapp->getConfig());
+  readProperties(kapp->config());
 
   // activate and run first session //////////////////////////////////////////
 
@@ -428,7 +428,7 @@ void TEDemo::saveProperties(KConfig* config)
   config->sync();
 }
 
-// Called by constructor (with config = kapp->getConfig())
+// Called by constructor (with config = kapp->config())
 // and by session-management (with config = sessionconfig).
 // So it has to apply the settings when reading them.
 void TEDemo::readProperties(KConfig* config)
@@ -676,7 +676,7 @@ void TEDemo::opt_menu_activated(int item)
             break;
     case 4: setBsHack(!b_bshack);
             break;
-    case 8: saveProperties(kapp->getConfig());
+    case 8: saveProperties(kapp->config());
             break;
   }
 }
@@ -1053,7 +1053,7 @@ int main(int argc, char* argv[])
   }
   if (a.isRestored())
   {
-    KConfig * sessionconfig = a.getSessionConfig();
+    KConfig * sessionconfig = a.sessionConfig();
     sessionconfig->setGroup("options");
     sessionconfig->readListEntry("konsolearguments", eargs);
     wname = sessionconfig->readEntry("class",wname).data();
