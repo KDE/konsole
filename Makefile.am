@@ -10,7 +10,7 @@ update_SCRIPTS = schemaStrip.pl
 updatedir = $(kde_datadir)/kconf_update
 
 autostart_DATA = kwrited.desktop
-autostartdir = $(prefix)/share/autostart
+autostartdir = $(datadir)/autostart
 
 konsolehere_DATA = konsolehere.desktop
 konsoleheredir = $(kde_datadir)/konqueror/servicemenus
