@@ -76,4 +76,5 @@ messages:
 	$(XGETTEXT)  $(konsole_SOURCES) schemas.C -o $(podir)/konsole.pot
 	rm -f schemas.C
 
-
+dummy.C:
+	echo > dummy.C
