@@ -16,7 +16,7 @@
 TESession::TESession(KTMainWindow* main, TEWidget* te, QStrList & _args, const char* term, int login_session) : schema_no(0), font_no(3), args(_args), login_shell(login_session)
 {
   sh = new TEPty();
-  em = new VT102Emulation(te);
+  em = new TEmuVt102(te);
 
   this->term = strdup(term);
 
@@ -73,7 +73,7 @@ void TESession::terminate()
   delete this;
 }
 
-Emulation* TESession::getEmulation()
+TEmulation* TESession::getEmulation()
 {
   return em;
 }

@@ -46,13 +46,13 @@ struct CharCodes
   bool sa_pound;   // saved pound
 };
 
-class VT102Emulation : public Emulation // QObject
+class TEmuVt102 : public TEmulation
 { Q_OBJECT
 
 public:
 
-  VT102Emulation(TEWidget* gui);
-  ~VT102Emulation();
+  TEmuVt102(TEWidget* gui);
+  ~TEmuVt102();
 
 public slots: // signals incoming from TEWidget
  

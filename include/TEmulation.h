@@ -18,13 +18,13 @@
 #include <qtimer.h>
 #include <stdio.h>
 
-class Emulation : public QObject
+class TEmulation : public QObject
 { Q_OBJECT
 
 public:
 
-  Emulation(TEWidget* gui);
-  ~Emulation();
+  TEmulation(TEWidget* gui);
+  ~TEmulation();
 
 public:
   virtual void setHistory(bool on);

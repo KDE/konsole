@@ -10,7 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-/*! \class Emulation
+/*! \class TEmulation
 
     \brief Mediator between TEWidget and TEScreen.
 
@@ -81,7 +81,7 @@
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
-/*                                Emulation                                  */
+/*                               TEmulation                                  */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
@@ -90,7 +90,7 @@
 /*!
 */
 
-Emulation::Emulation(TEWidget* gui)
+TEmulation::TEmulation(TEWidget* gui)
 {
   this->gui = gui;
 
@@ -122,7 +122,7 @@ Emulation::Emulation(TEWidget* gui)
 /*!
 */
 
-Emulation::~Emulation()
+TEmulation::~TEmulation()
 {
   delete screen[0];
   delete screen[1];
@@ -131,19 +131,19 @@ Emulation::~Emulation()
 /*! change between primary and alternate screen
 */
 
-void Emulation::setScreen(int n)
+void TEmulation::setScreen(int n)
 {
   scr = screen[n&1];
 }
 
-void Emulation::setHistory(bool on)
+void TEmulation::setHistory(bool on)
 {
   screen[0]->setScroll(on);
   if (!connected) return;
   showBulk();
 }
 
-bool Emulation::history()
+bool TEmulation::history()
 {
   return screen[0]->hasScroll();
 }
@@ -160,7 +160,7 @@ bool Emulation::history()
 /*!
 */
 
-void Emulation::onRcvByte(int c)
+void TEmulation::onRcvByte(int c)
 // process application input to terminal
 // this is a trivial scanner
 { 
@@ -185,7 +185,7 @@ void Emulation::onRcvByte(int c)
 /*!
 */
 
-void Emulation::onKeyPress( QKeyEvent* ev )
+void TEmulation::onKeyPress( QKeyEvent* ev )
 {
   if (!connected) return; // someone else gets the keys
   if (scr->getHistCursor() != scr->getHistLines());
@@ -209,7 +209,7 @@ void Emulation::onKeyPress( QKeyEvent* ev )
 /*!
 */
 
-void Emulation::onRcvBlock(const char *s, int len)
+void TEmulation::onRcvBlock(const char *s, int len)
 {
   bulkStart();
   bulk_incnt += 1;
@@ -223,25 +223,25 @@ void Emulation::onRcvBlock(const char *s, int len)
 
 // Selection --------------------------------------------------------------- --
 
-void Emulation::onSelectionBegin(const int x, const int y) {
+void TEmulation::onSelectionBegin(const int x, const int y) {
   if (!connected) return;
   scr->setSelBeginXY(x,y);
   showBulk();
 }
 
-void Emulation::onSelectionExtend(const int x, const int y) {
+void TEmulation::onSelectionExtend(const int x, const int y) {
   if (!connected) return;
   scr->setSelExtentXY(x,y);
   showBulk();
 }
 
-void Emulation::setSelection(const BOOL preserve_line_breaks) {
+void TEmulation::setSelection(const BOOL preserve_line_breaks) {
   if (!connected) return;
   QString t = scr->getSelText(preserve_line_breaks);
   if (t) gui->setSelection(t);
 }
 
-void Emulation::clearSelection() {
+void TEmulation::clearSelection() {
   if (!connected) return;
   scr->clearSelection(); 
   showBulk();
@@ -255,7 +255,7 @@ void Emulation::clearSelection() {
    called when \n comes in. Evtl. triggers showBulk at endBulk
 */
 
-void Emulation::bulkNewline()
+void TEmulation::bulkNewline()
 {
   bulk_nlcnt += 1;
   bulk_incnt = 0;  // reset bulk counter since `nl' rule applies
@@ -264,7 +264,7 @@ void Emulation::bulkNewline()
 /*!
 */
 
-void Emulation::showBulk()
+void TEmulation::showBulk()
 {
   bulk_nlcnt = 0;                       // reset bulk newline counter
   bulk_incnt = 0;                       // reset bulk counter
@@ -280,12 +280,12 @@ void Emulation::showBulk()
   }
 }
 
-void Emulation::bulkStart()
+void TEmulation::bulkStart()
 {
   if (bulk_timer.isActive()) bulk_timer.stop();
 }
 
-void Emulation::bulkEnd()
+void TEmulation::bulkEnd()
 {
   if ( bulk_nlcnt > gui->Lines() || bulk_incnt > 20 )
     showBulk();                         // resets bulk_??cnt to 0, too.
@@ -293,7 +293,7 @@ void Emulation::bulkEnd()
     bulk_timer.start(BULK_TIMEOUT,TRUE);
 }
 
-void Emulation::setConnect(bool c)
+void TEmulation::setConnect(bool c)
 {
   connected = c;
   if ( connected) showBulk();
@@ -308,7 +308,7 @@ void Emulation::setConnect(bool c)
     and to the related serial line.
 */
 
-void Emulation::onImageSizeChange(int lines, int columns)
+void TEmulation::onImageSizeChange(int lines, int columns)
 {
   if (!connected) return;
   screen[0]->resizeImage(lines,columns);
@@ -317,14 +317,14 @@ void Emulation::onImageSizeChange(int lines, int columns)
   emit ImageSizeChanged(lines,columns);   // propagate event to serial line
 }
 
-void Emulation::onHistoryCursorChange(int cursor)
+void TEmulation::onHistoryCursorChange(int cursor)
 {
   if (!connected) return;
   scr->setHistCursor(cursor);
   showBulk();
 }
 
-void Emulation::setColumns(int columns)
+void TEmulation::setColumns(int columns)
 {
   //FIXME: this goes strange ways.
   //       Can we put this straight or explain it at least?

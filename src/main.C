@@ -684,9 +684,9 @@ void TEDemo::setBsHack(bool bshack)
   //FIXME: solve typing issue below
   if (se)
     if (b_bshack)
-      ((VT102Emulation*)se->getEmulation())->setMode(MODE_BsHack);
+      ((TEmuVt102*)se->getEmulation())->setMode(MODE_BsHack);
     else
-      ((VT102Emulation*)se->getEmulation())->resetMode(MODE_BsHack);
+      ((TEmuVt102*)se->getEmulation())->resetMode(MODE_BsHack);
 }
 
 void TEDemo::opt_menu_activated(int item)

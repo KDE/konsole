@@ -1,6 +1,6 @@
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
-/* [vt102emu.cpp]              VT102 Terminal Emulation                      */
+/* [TEmuVt102.C]            VT102 Terminal Emulation                         */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
@@ -10,7 +10,7 @@
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-/*! \class VT102Emulation
+/*! \class TEmuVt102
 
    \brief Actual Emulation for Konsole
 
@@ -63,8 +63,8 @@
 /*!
 */
 
-VT102Emulation::VT102Emulation(TEWidget* gui)
-: Emulation(gui), decoder((QTextDecoder*)NULL)
+TEmuVt102::TEmuVt102(TEWidget* gui)
+: TEmulation(gui), decoder((QTextDecoder*)NULL)
 {
   QObject::connect(gui,SIGNAL(mouseSignal(int,int,int)),
                    this,SLOT(onMouse(int,int,int)));
@@ -75,14 +75,14 @@ VT102Emulation::VT102Emulation(TEWidget* gui)
 /*!
 */
 
-VT102Emulation::~VT102Emulation()
+TEmuVt102::~TEmuVt102()
 {
 }
 
 /*!
 */
 
-void VT102Emulation::reset()
+void TEmuVt102::reset()
 {
   resetToken();
   resetModes();
@@ -169,7 +169,7 @@ void VT102Emulation::reset()
    We are doing code conversion from locale to unicode first.
 */
 
-void VT102Emulation::onRcvByte(int cc)
+void TEmuVt102::onRcvByte(int cc)
 {
   char chars[1]; chars[0] = cc;
 
@@ -180,7 +180,7 @@ void VT102Emulation::onRcvByte(int cc)
     processCharacter(result[i].unicode());
 }
 
-void VT102Emulation::setCodec(int c)
+void TEmuVt102::setCodec(int c)
 {
   //FIXME: check whether we have to free codec
   codec = c ? QTextCodec::codecForName("utf8")
@@ -198,23 +198,23 @@ void VT102Emulation::setCodec(int c)
    Note that they are kept internal in the tokenizer.
 */
 
-void VT102Emulation::resetToken()
+void TEmuVt102::resetToken()
 {
   ppos = 0; argc = 0; argv[0] = 0; argv[1] = 0;
 }
 
-void VT102Emulation::addDigit(int dig)
+void TEmuVt102::addDigit(int dig)
 {
   argv[argc] = 10*argv[argc] + dig;
 }
 
-void VT102Emulation::addArgument()
+void TEmuVt102::addArgument()
 {
   argc = QMIN(argc+1,MAXARGS-1);
   argv[argc] = 0;
 }
 
-void VT102Emulation::pushToToken(int cc)
+void TEmuVt102::pushToToken(int cc)
 {
   pbuf[ppos] = cc;
   ppos = QMIN(ppos+1,MAXPBUF-1);
@@ -229,7 +229,7 @@ void VT102Emulation::pushToToken(int cc)
 #define SCS 16
 #define GRP 32
 
-void VT102Emulation::initTokenizer()
+void TEmuVt102::initTokenizer()
 { int i; UINT8* s;
   for(i =  0;                    i < 256; i++) tbl[ i]  = 0;
   for(i =  0;                    i <  32; i++) tbl[ i] |= CTL;
@@ -273,7 +273,7 @@ void VT102Emulation::initTokenizer()
 
 // process an incoming unicode character
 
-void VT102Emulation::processCharacter(int cc)
+void TEmuVt102::processCharacter(int cc)
 { int i;
 
   if (cc == 127) return; //VT100: ignore.
@@ -324,7 +324,7 @@ void VT102Emulation::processCharacter(int cc)
   }
 }
 
-void VT102Emulation::XtermHack()
+void TEmuVt102::XtermHack()
 { int i,arg = 0;
   for (i = 2; i < ppos && '0'<=pbuf[i] && pbuf[i]<'9' ; i++)
     arg = 10*arg + (pbuf[i]-'0');
@@ -354,7 +354,7 @@ void VT102Emulation::XtermHack()
    about this mapping.
 */
 
-void VT102Emulation::tau( int token, int p, int q )
+void TEmuVt102::tau( int token, int p, int q )
 {
 //scan_buffer_report();
 //if (token == TY_CHR___()) printf("%c",p); else
@@ -639,7 +639,7 @@ void VT102Emulation::tau( int token, int p, int q )
 /*!
 */
 
-void VT102Emulation::sendString(const char* s)
+void TEmuVt102::sendString(const char* s)
 {
   emit sndBlock(s,strlen(s));
 }
@@ -651,7 +651,7 @@ void VT102Emulation::sendString(const char* s)
 /*!
 */
 
-void VT102Emulation::reportCursorPosition()
+void TEmuVt102::reportCursorPosition()
 { char tmp[20];
   sprintf(tmp,"\033[%d;%dR",scr->getCursorY()+1,scr->getCursorX()+1);
   sendString(tmp);
@@ -665,7 +665,7 @@ void VT102Emulation::reportCursorPosition()
 /*!
 */
 
-void VT102Emulation::reportTerminalType()
+void TEmuVt102::reportTerminalType()
 {
 //FIXME: should change?
   if (getMode(MODE_Ansi))
@@ -675,7 +675,7 @@ void VT102Emulation::reportTerminalType()
     sendString("\033/Z");         // I'm a VT52
 }
 
-void VT102Emulation::reportTerminalParms(int p)
+void TEmuVt102::reportTerminalParms(int p)
 // DECREPTPARM
 { char tmp[100];
   sprintf(tmp,"\033[%d;1;1;112;112;1;0x",p); // not really true.
@@ -685,7 +685,7 @@ void VT102Emulation::reportTerminalParms(int p)
 /*!
 */
 
-void VT102Emulation::reportStatus()
+void TEmuVt102::reportStatus()
 {
   sendString("\033[0n"); //VT100. Device status report. 0 = Ready.
 }
@@ -695,7 +695,7 @@ void VT102Emulation::reportStatus()
 
 #define ANSWER_BACK "" // This is really obsolete VT100 stuff.
 
-void VT102Emulation::reportAnswerBack()
+void TEmuVt102::reportAnswerBack()
 {
   sendString(ANSWER_BACK);
 }
@@ -714,7 +714,7 @@ void VT102Emulation::reportAnswerBack()
                  or a general mouse release (3).
 */
 
-void VT102Emulation::onMouse( int cb, int cx, int cy )
+void TEmuVt102::onMouse( int cb, int cx, int cy )
 { char tmp[20];
   if (!connected) return;
   sprintf(tmp,"\033[M%c%c%c",cb+040,cx+040,cy+040);
@@ -728,7 +728,7 @@ void VT102Emulation::onMouse( int cb, int cx, int cy )
 /*
 */
 
-void VT102Emulation::onKeyPress( QKeyEvent* ev )
+void TEmuVt102::onKeyPress( QKeyEvent* ev )
 { int key;
 
   if (!connected) return; // someone else gets the keys
@@ -863,7 +863,7 @@ static unsigned short vt100_graphics[32] =
 
 // Apply current character map.
 
-unsigned short VT102Emulation::applyCharset(unsigned short c)
+unsigned short TEmuVt102::applyCharset(unsigned short c)
 {
   if (CHARSET.graphic && 0x5f <= c && c <= 0x7e) return vt100_graphics[c-0x5f];
   if (CHARSET.pound                && c == '#' ) return 0xa3;
@@ -896,7 +896,7 @@ unsigned short VT102Emulation::applyCharset(unsigned short c)
    the following two are different.
 */
 
-void VT102Emulation::resetCharset(int scrno)
+void TEmuVt102::resetCharset(int scrno)
 {
   charset[scrno].cu_cs   = 0;
   strncpy(charset[scrno].charset,"BBBB",4);
@@ -909,7 +909,7 @@ void VT102Emulation::resetCharset(int scrno)
 /*!
 */
 
-void VT102Emulation::setCharset(int n, int cs) // on both screens.
+void TEmuVt102::setCharset(int n, int cs) // on both screens.
 {
   charset[0].charset[n&3] = cs; useCharset(charset[0].cu_cs);
   charset[1].charset[n&3] = cs; useCharset(charset[1].cu_cs);
@@ -918,7 +918,7 @@ void VT102Emulation::setCharset(int n, int cs) // on both screens.
 /*!
 */
 
-void VT102Emulation::setAndUseCharset(int n, int cs)
+void TEmuVt102::setAndUseCharset(int n, int cs)
 {
   CHARSET.charset[n&3] = cs;
   useCharset(n&3);
@@ -927,7 +927,7 @@ void VT102Emulation::setAndUseCharset(int n, int cs)
 /*!
 */
 
-void VT102Emulation::useCharset(int n)
+void TEmuVt102::useCharset(int n)
 {
   CHARSET.cu_cs   = n&3;
   CHARSET.graphic = (CHARSET.charset[n&3] == '0');
@@ -936,7 +936,7 @@ void VT102Emulation::useCharset(int n)
 
 /*! Save the cursor position and the rendition attribute settings. */
 
-void VT102Emulation::saveCursor()
+void TEmuVt102::saveCursor()
 {
   CHARSET.sa_graphic = CHARSET.graphic;
   CHARSET.sa_pound   = CHARSET.pound;
@@ -948,7 +948,7 @@ void VT102Emulation::saveCursor()
 
 /*! Restore the cursor position and the rendition attribute settings. */
 
-void VT102Emulation::restoreCursor()
+void TEmuVt102::restoreCursor()
 {
   CHARSET.graphic = CHARSET.sa_graphic;
   CHARSET.pound   = CHARSET.sa_pound;
@@ -957,7 +957,7 @@ void VT102Emulation::restoreCursor()
 
 // "Mode" related part of the state. These are all booleans.
 
-void VT102Emulation::resetModes()
+void TEmuVt102::resetModes()
 {
   resetMode(MODE_Mouse1000); saveMode(MODE_Mouse1000);
   resetMode(MODE_AppCuKeys); saveMode(MODE_AppCuKeys);
@@ -967,7 +967,7 @@ void VT102Emulation::resetModes()
   resetMode(MODE_BsHack   );
 }
 
-void VT102Emulation::setMode(int m)
+void TEmuVt102::setMode(int m)
 {
   currParm.mode[m] = TRUE;
   switch (m)
@@ -986,7 +986,7 @@ void VT102Emulation::setMode(int m)
   }
 }
 
-void VT102Emulation::resetMode(int m)
+void TEmuVt102::resetMode(int m)
 {
   currParm.mode[m] = FALSE;
   switch (m)
@@ -1004,24 +1004,24 @@ void VT102Emulation::resetMode(int m)
   }
 }
 
-void VT102Emulation::saveMode(int m)
+void TEmuVt102::saveMode(int m)
 {
   saveParm.mode[m] = currParm.mode[m];
 }
 
-void VT102Emulation::restoreMode(int m)
+void TEmuVt102::restoreMode(int m)
 {
   if(saveParm.mode[m]) setMode(m); else resetMode(m);
 }
 
-BOOL VT102Emulation::getMode(int m)
+BOOL TEmuVt102::getMode(int m)
 {
   return currParm.mode[m];
 }
 
-void VT102Emulation::setConnect(bool c)
+void TEmuVt102::setConnect(bool c)
 {
-  Emulation::setConnect(c);
+  TEmulation::setConnect(c);
   if (c)
   { // refresh mouse mode
     if (getMode(MODE_Mouse1000))
@@ -1062,7 +1062,7 @@ static void hexdump(int* s, int len)
   }
 }
 
-void VT102Emulation::scan_buffer_report()
+void TEmuVt102::scan_buffer_report()
 {
   if (ppos == 0 || ppos == 1 && (pbuf[0] & 0xff) >= 32) return;
   printf("token: "); hexdump(pbuf,ppos); printf("\n");
@@ -1071,7 +1071,7 @@ void VT102Emulation::scan_buffer_report()
 /*!
 */
 
-void VT102Emulation::ReportErrorToken()
+void TEmuVt102::ReportErrorToken()
 {
   printf("undecodable "); scan_buffer_report();
 }

@@ -32,9 +32,9 @@ public:
 
 public:
 
-  void       setConnect(bool r);
-  Emulation* getEmulation();      // to control emulation
-  bool       isSecure();
+  void        setConnect(bool r);
+  TEmulation* getEmulation();      // to control emulation
+  bool        isSecure();
 
 public:
 
@@ -64,7 +64,7 @@ private:
 
   TEPty*         sh;
   TEWidget*      te;
-  Emulation*     em;
+  TEmulation*    em;
 
   int            schema_no; // no exactly the right place
   int            font_no;   // no exactly the right place
