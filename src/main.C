@@ -212,7 +212,8 @@ TEDemo::~TEDemo()
 
 void TEDemo::dragEnterEvent(QDragEnterEvent* e) 
 {
-  e->accept(QTextDrag::canDecode(e) || QUrlDrag::canDecode(e));
+  e->accept(QTextDrag::canDecode(e) || 
+	    QUriDrag::canDecode(e));
 }
 
 void TEDemo::dropEvent(QDropEvent* event)
@@ -227,7 +228,7 @@ void TEDemo::dropEvent(QDropEvent* event)
   dropText = "";
   bool bPopup = true;
 
-  if(QUrlDrag::decode(event, strlist)) {
+  if(QUriDrag::decode(event, strlist)) {
     if (strlist.count()) {
       for(const char* p = strlist.first(); p; p = strlist.next()) {
         if(file_count++ > 0) {
