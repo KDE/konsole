@@ -39,6 +39,8 @@
 #include <qptrdict.h>
 
 #include <kwm.h>
+#include <sys/wait.h>
+#include <assert.h>
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
@@ -53,7 +55,16 @@
 
 char *fonts[] = {"6x13", "5x7", "6x10", "7x13", "9x15", "10x20", "linux8x16"}; //"vga"};
 
-TEDemo::TEDemo(char* args[]) : KTMainWindow()
+static QIntDict<TESession> no2session;
+static QPtrDict<void>      session2no;
+static int session_no = 0;
+
+static QIntDict<KSimpleConfig> no2command;
+static int cmd_serial = 0;
+
+static int schema_serial = 1;
+
+TEDemo::TEDemo(const char* args[]) : KTMainWindow()
 {
   se = NULL;
   title = PACKAGE;
@@ -83,24 +94,29 @@ TEDemo::TEDemo(char* args[]) : KTMainWindow()
 
   curr_schema = 0;
   loadAllSchemas();
-  setSchema(s_schema);
 
-  // set options //////////////////////////////////////////////////////////////
+//FIXME: we should build a complete session before running it.
+
+  // set global options ///////////////////////////////////////////////////////
 
   if (b_menuvis) menubar->show(); else menubar->hide();
   te->setFrameStyle( b_framevis
                      ? QFrame::WinPanel | QFrame::Sunken
                      : QFrame::NoFrame );
   te->setScrollbarLocation(n_scroll);
-  m_font->setItemChecked(n_font,TRUE); //Note: font set in ::TEDemo
-  font_menu_activated(n_font);
+
+  // construct initial session ///////////////////////////////////////////////
+
+  TESession* initial = new TESession(this,te,args,"xterm");
+  initial->setFontNo(n_font);
+  initial->setSchemaNo(path2schema.find(s_schema)->numb);
+  initial->setTitle(args[0]);
 
   // start first session /////////////////////////////////////////////////////
 
-  addSession(new TESession(this,te,args,"xterm"),args[0]);
-  se->setFontNo(n_font);
-  setSchema(s_schema);
-  setColLin(lincol.width(),lincol.height());
+  addSession(initial);
+
+  setColLin(lincol0.width(),lincol0.height());
 }
 
 /*!
@@ -273,10 +289,10 @@ void TEDemo::readProperties(KConfig* config)
   b_menuvis  = config->readBoolEntry("menubar visible",TRUE);
   b_framevis = config->readBoolEntry("has frame",TRUE);
   b_bshack   = config->readBoolEntry("BS hack",TRUE);
-  n_font     = MIN(config->readUnsignedNumEntry("font",0),6);
+  n_font     = MIN(config->readUnsignedNumEntry("font",3),6);
   n_scroll   = MIN(config->readUnsignedNumEntry("scrollbar",SCRRIGHT),2);
   s_schema   = config->readEntry("schema","");
-  lincol     = config->readSizeEntry("size",&dftSize); //FIXME: to be replaced by window size
+  lincol0    = config->readSizeEntry("size",&dftSize); //FIXME: to be replaced by window size
 
   QString entry = config->readEntry("kmenubar");
   if (!entry.isEmpty() && entry == "floating")
@@ -344,21 +360,30 @@ void TEDemo::scrollbar_menu_activated(int item)
 
 void TEDemo::font_menu_activated(int item)
 {
-  QFont f( fonts[item] );
+  n_font = item;
+  if (se)
+  {
+    se->setFontNo(item);
+    activateSession((int)session2no.find(se)); // for attribute change
+  }
+}
+
+void TEDemo::setFont(int fontno)
+{
+  QFont f( fonts[fontno] );
   f.setRawMode( TRUE );
   if ( !f.exactMatch() )
     KMsgBox::message
     ( this,
-      "Error", QString("Font '") + fonts[item] + "' not found.",
+      "Error", QString("Font '") + fonts[fontno] + "' not found.",
       KMsgBox::EXCLAMATION );
   else
   {
     te->setVTFont(f);
-    if (se) se->setFontNo(item);
-    m_font->setItemChecked(n_font,FALSE);
-    m_font->setItemChecked(item,  TRUE);
-    n_font = item;
   }
+  m_font->setItemChecked(n_font,FALSE);
+  m_font->setItemChecked(fontno,  TRUE);
+  n_font = fontno;
 }
 
 void TEDemo::opt_menu_activated(int item)
@@ -472,10 +497,6 @@ void TEDemo::tecRef()
 
 /* --| sessions |------------------------------------------------------------ */
 
-static QIntDict<TESession> no2session;
-static QPtrDict<void>      session2no;
-static int session_no = 0;
-
 //FIXME: activating sessions creates a lot flicker in the moment.
 //       it comes from setting the attributes of a session individually.
 //       ONE setImage call should actually be enough to match all cases.
@@ -488,8 +509,6 @@ static int session_no = 0;
 void TEDemo::activateSession(int sn)
 {
   TESession* s = no2session.find(sn);
-  if (s == se) return; // don't bother
-  if (!s)      return; // oops
   if (se) 
   { 
     se->setConnect(FALSE); 
@@ -497,14 +516,20 @@ void TEDemo::activateSession(int sn)
     m_sessions->setItemChecked(no,FALSE);
   }
   se = s;
-  se->setConnect(TRUE); // does a bulkShow (setImage)
+  if (!s) return; // oops
   m_sessions->setItemChecked(sn,TRUE);
-/*FIXME: creates flicker*/
-  setSchema(s->schemaNo());
-  font_menu_activated(s->fontNo());
+  setSchema(s->schemaNo());               //FIXME: creates flicker? Do only if differs
+//Set Font. Now setConnect should do the appropriate action.
+//if the size has changed, a resize event (noticable to the application)
+//should happen. Else, we  could even start the application
+  s->setConnect(TRUE);                    // does a bulkShow (setImage)
+  setFont(s->fontNo());                   //FIXME: creates flicker?
+                                          //FIXME: check here if we're still alife.
+                                          //       if not, quit, otherwise, 
+                                          //       start propagating quit.
 }
 
-void TEDemo::addSession(TESession* s, char* title)
+void TEDemo::addSession(TESession* s)
 {
   //FIXME: not quite the right place ...
   if (b_bshack)
@@ -512,28 +537,78 @@ void TEDemo::addSession(TESession* s, char* title)
   else
     ((VT102Emulation*)s->getEmulation())->resetMode(MODE_BsHack);
 
-  if (se) 
-  { 
-    se->setConnect(FALSE); 
-    int no = (int)session2no.find(se); 
-    m_sessions->setItemChecked(no,FALSE);
-  }
-  se = s;
-  se->setConnect(TRUE);
   session_no += 1;
-  no2session.insert(session_no,se);
-  session2no.insert(se,(void*)session_no);
-  m_sessions->insertItem(title, session_no);
-  m_sessions->setItemChecked(session_no,TRUE);
+  no2session.insert(session_no,s);
+  session2no.insert(s,(void*)session_no);
+  m_sessions->insertItem(s->Title(), session_no);
+
+  activateSession(session_no);
+
+  s->run();
 }
 
-void TEDemo::doneSession(TESession* s)
+void TEDemo::newSession(int i)
 {
+  char* shell = getenv("SHELL");
+  if (shell == NULL || *shell == '\0') shell = "/bin/sh";
+
+  KSimpleConfig* co = no2command.find(i);
+  if (!co) return; // oops
+
+  assert( se ); //FIXME: careful here.
+
+  QString cmd = co->readEntry("Exec");    // not null
+  QString nam = co->readEntry("Name");    // not null
+  QString emu = co->readEntry("Term");
+  QString sch = co->readEntry("Schema");
+  QString txt = co->readEntry("Comment"); // not null
+  int     fno = MIN(co->readUnsignedNumEntry("Font",se->fontNo()),6);
+
+  ColorSchema* schema = sch.isNull()?numb2schema.find(se->schemaNo()):path2schema.find(sch);
+  int schmno = schema->numb;
+
+  if (emu.isEmpty()) emu = se->emuName();
+
+  const char* args[4];
+  args[0] = shell;
+  args[1] = "-c";
+  args[2] = cmd.data();
+  args[3] = NULL;
+
+  TESession* s = new TESession(this,te,args,emu.data());
+  s->setFontNo(fno);
+  s->setSchemaNo(schmno);
+  s->setTitle(txt.data());
+
+  addSession(s); // runs session
+}
+
+//FIXME: If a child dies during session swap,
+//       this routine might be called before
+//       session swap is completed.
+
+void TEDemo::doneSession(TESession* s, int status)
+{
+//printf("%s(%d): Exited:%d ExitStatus:%d\n",__FILE__,__LINE__,WIFEXITED(status),WEXITSTATUS(status));
+  if (!WIFEXITED(status) || WEXITSTATUS(status))
+  {
+    QString str = QString("`") + QString(s->Title()) + "' terminated abnormally.";
+    if (WIFEXITED(status))
+    { char rcs[100]; sprintf(rcs,"%d.\n",WEXITSTATUS(status));
+      str = str + "\nReturn code = " + rcs;
+    }
+    KMsgBox::message( this, "Error", str, KMsgBox::EXCLAMATION );
+    
+  }
   int no = (int)session2no.find(s);
   if (!no) return; // oops
   no2session.remove(no);
   session2no.remove(s);
   m_sessions->removeItem(no);
+
+  s->setConnect(FALSE);
+  delete s;
+
   if (s == se)
   { // pick a new session 
     se = NULL;
@@ -580,7 +655,6 @@ void TEDemo::setSchema(const ColorSchema* s)
   if (se) se->setSchemaNo(s->numb);
 }
 
-static int schema_serial = 1;
 
 ColorSchema* TEDemo::readSchema(const char* path)
 { FILE* sysin = fopen(path,"r");
@@ -708,9 +782,6 @@ void TEDemo::loadAllSchemas()
     addSchema(readSchema(fi->filePath()));
 }
 
-static QIntDict<KSimpleConfig> no2command;
-static int cmd_serial = 0;
-
 void TEDemo::addSessionCommand(const char* path)
 {
   KSimpleConfig* co = new KSimpleConfig(path,TRUE);
@@ -740,39 +811,6 @@ void TEDemo::loadSessionCommands()
   QFileInfoListIterator it( *list );      // create list iterator
   for(QFileInfo *fi; (fi=it.current()); ++it )
     addSessionCommand(fi->filePath());
-}
-
-// menu stuff ////////////////
-
-void TEDemo::newSession(int i)
-{
-  char* shell = getenv("SHELL");
-  if (shell == NULL || *shell == '\0') shell = "/bin/sh";
-
-  KSimpleConfig* co = no2command.find(i);
-  if (!co) return; // oops
-
-  QString cmd = co->readEntry("Exec");
-  QString nam = co->readEntry("Name");
-  QString emu = co->readEntry("Term");
-  QString sch = co->readEntry("Schema");
-
-  int fontno = MIN(co->readUnsignedNumEntry("Font",se->fontNo()),6);
-  int schmno = se->schemaNo();
-
-  if (emu.isEmpty()) emu = se->term();
-
-  char* args[4];
-  args[0] = shell;
-  args[1] = "-c";
-  args[2] = cmd.data();
-  args[3] = NULL;
-
-  addSession(new TESession(this,te,args,emu.data()),nam.data());
-
-/*FIXME: creates flicker*/
-  font_menu_activated(fontno);
-  if (sch.isEmpty()) setSchema(schmno); else setSchema(sch.data());
 }
 
 /* --| main |---------------------------------------------------------------- */
@@ -817,7 +855,7 @@ int main(int argc, char* argv[])
   QString fg = "";
   QString bg = "";
 
-  char** eargs = (char**)malloc(3*sizeof(char*));
+  const char** eargs = (const char**)malloc(3*sizeof(char*));
   eargs[0] = shell; eargs[1] = NULL;
 
   KApplication a(argc, argv, PACKAGE);
@@ -826,7 +864,7 @@ int main(int argc, char* argv[])
   {
     if (!strcmp(argv[i],"-e") && i+1 < argc) // handle command
     { free(eargs);
-      eargs = (char**)malloc((argc-i+1)*sizeof(char*));
+      eargs = (const char**)malloc((argc-i+1)*sizeof(char*));
       for (int j = 0; j+i < argc; j++) eargs[j] = argv[i+j+1];
       break;
     }

@@ -61,19 +61,18 @@ static QIntDict<Shell> shells;
 
 static void catchChild(int)
 // Catch a SIGCHLD signal and exit if the child has died.
-{ pid_t pid;
-  pid = wait((int *)NULL);
-//fprintf(stdout,"%s(%d): child %d died.\n",__FILE__,__LINE__,pid);
+{ pid_t pid; int status;
+  pid = wait(&status);
   Shell* sh = shells.find(pid);
   if (sh) 
   { 
-    shells.remove(pid); sh->doneShell();
+    shells.remove(pid); sh->doneShell(status);
   }
 }
 
-void Shell::doneShell()
+void Shell::doneShell(int status)
 {
-  emit done();
+  emit done(status);
 }
 
 int Shell::run(char* argv[], const char* term)

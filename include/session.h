@@ -25,7 +25,7 @@ class TESession : QObject
 
 public:
 
-  TESession(KTMainWindow* main, TEWidget* w, char* args[], const char* term);
+  TESession(KTMainWindow* main, TEWidget* w, const char* args[], const char* term);
   ~TESession();
 
 public:
@@ -37,18 +37,22 @@ public:
 
   int schemaNo();
   int fontNo();
-  const char* term();
+  const char* emuName();
+  const char* Title();
 
   void setSchemaNo(int sn);
   void setFontNo(int fn);
+  void setTitle(const char* title);
+
+  void run();
 
 public slots:
 
-  void done();
+  void done(int status);
 
 signals:
 
-  void done(TESession*);
+  void done(TESession*, int);
 
 private:
 
@@ -58,7 +62,10 @@ private:
 
   int            schema_no; // no exactly the right place
   int            font_no;   // no exactly the right place
-  QString        emuname;
+
+  char*          term;
+  char**         args;
+  QString        title;
 };
 
 #endif

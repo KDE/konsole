@@ -41,7 +41,7 @@ class TEDemo : public KTMainWindow
 
 public:
 
-  TEDemo(char* args[]);
+  TEDemo(const char* args[]);
   ~TEDemo();
 
 private slots:
@@ -49,7 +49,7 @@ private slots:
 
   void scrollbar_menu_activated(int item);
   void activateSession(int);
-  void doneSession(TESession*);
+  void doneSession(TESession*,int);
   void opt_menu_activated(int item);
   void font_menu_activated(int item);
   void size_menu_activated(int item);
@@ -77,7 +77,7 @@ private:
 
   void makeMenu();
   void makeStatusbar();
-  void addSession(TESession* s, char* title);
+  void addSession(TESession* s);
   void setColorPixmaps();
   void setColLin(int columns, int lines);
 
@@ -85,6 +85,7 @@ private:
   void loadAllSchemas();
   void setSchema(const char* path);
   void setSchema(const ColorSchema* s);
+  void setFont(int fontno);
   ColorSchema* readSchema(const char* path);
   ColorSchema* defaultSchema();
 
@@ -117,6 +118,7 @@ private:
   int         n_scroll;
   QString     s_schema;
   int         n_render;
+  QSize       lincol0; //FIXME: something is messed up initializing the size (event handling)
   QSize       lincol;
   QString     pmPath; // pixmap path
 

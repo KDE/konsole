@@ -35,9 +35,9 @@ Q_OBJECT
     int run(char* argv[], const char* term);
 
   signals:
-    void done();
+    void done(int status);
   public:
-    void doneShell();
+    void doneShell(int status);
 
   public:
     void send_byte(char s);
