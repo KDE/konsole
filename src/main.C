@@ -966,7 +966,7 @@ int main(int argc, char* argv[])
   eargs.append(shell);
 
   setlocale( LC_ALL, "" );
-  KWMModuleApplication a(argc, argv, PACKAGE);
+  KApplication a(argc, argv, PACKAGE);
   kimgioRegister(); // add io for additional image formats
 
   for (int i = 1; i < argc; i++)
