@@ -18,14 +18,13 @@ INCLUDES =  -I$(INCDIR) $(all_includes)
 bin_PROGRAMS = 	konsole konsole_grantpty kwrited #kcmkonsole
 lib_LTLIBRARIES = kwrited.la konsole.la libkonsolepart.la
 
-libkonsolepart_la_SOURCES = \
+libkonsolepart_la_SOURCES = TEPty.C \
 	schema.C \
 	session.C \
 	TEWidget.C \
 	TEmuVt102.C \
 	TEScreen.C \
 	TEmulation.C \
-	TEPty.C \
 	TEHistory.C \
 	keytrans.C \
         konsole_part.C
