@@ -9,7 +9,7 @@
 /* This file is part of Konsole - an X terminal for KDE                       */
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
-
+#include <iostream>
 #include "TEHistory.h"
 #include <stdlib.h>
 #include <assert.h>
@@ -201,9 +201,9 @@ HistoryScrollBuffer::HistoryScrollBuffer(unsigned int maxNbLines)
   : HistoryScroll(new HistoryTypeBuffer(maxNbLines)),
     m_maxNbLines(maxNbLines),
     m_nbLines(0),
-    m_arrayIndex(0)
+    m_arrayIndex(0),
+    m_buffFilled(false)
 {
-  buffFilled=false;
   m_histBuffer.setAutoDelete(true);
   m_histBuffer.resize(maxNbLines);
 }
@@ -223,7 +223,7 @@ void HistoryScrollBuffer::addCells(ca a[], int count)
   ++m_arrayIndex;
   if (m_arrayIndex >= m_maxNbLines) {
      m_arrayIndex = 0;
-    buffFilled = true;
+     m_buffFilled = true;
     }
 
   if (m_nbLines < m_maxNbLines - 1) ++m_nbLines;
@@ -246,13 +246,7 @@ int HistoryScrollBuffer::getLineLen(int lineno)
 {
   if (lineno >= m_maxNbLines) return 0;
 
-  kdDebug() << "HistoryScrollBuffer::getLineLen(int lineno) receives lineno = " << lineno << endl;
-
-  if (buffFilled)  lineno = (lineno + m_arrayIndex + 2) % m_maxNbLines;
-  else lineno++;
-
-  kdDebug() << "HistoryScrollBuffer::getLineLen(int lineno) gives lineno = " << lineno << ". m_arrayIndex = " << m_arrayIndex << endl;
-  kdDebug() << "HistoryScrollBuffer::getLineLen(int lineno) gives m_maxNbLines = " << m_maxNbLines << endl;
+  lineno = adjustLineNb(lineno);
 
   histline *l = m_histBuffer[lineno];
 
@@ -266,9 +260,8 @@ void HistoryScrollBuffer::getCells(int lineno, int colno, int count, ca res[])
 
   assert (lineno < m_maxNbLines);
 
-  if (buffFilled)  lineno = (lineno + m_arrayIndex + 2) % m_maxNbLines;
-  else lineno++;
-
+  lineno = adjustLineNb(lineno);
+  
   histline *l = m_histBuffer[lineno];
 
   if (!l) {
@@ -286,6 +279,15 @@ void HistoryScrollBuffer::setMaxNbLines(unsigned int nbLines)
   m_maxNbLines = nbLines;
   m_histBuffer.resize(m_maxNbLines);
 }
+
+int HistoryScrollBuffer::adjustLineNb(int lineno)
+{
+  if (m_buffFilled)
+      return (lineno + m_arrayIndex + 2) % m_maxNbLines;
+  else
+      return lineno + 1;
+}
+
 
 #endif
 

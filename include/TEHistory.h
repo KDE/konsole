@@ -123,13 +123,14 @@ public:
   unsigned int maxNbLines() { return m_maxNbLines; }
 
 private:
+  int adjustLineNb(int lineno);
 
   bool m_hasScroll;
   QVector<histline> m_histBuffer;
   unsigned int m_maxNbLines;
   unsigned int m_nbLines;
   unsigned int m_arrayIndex;
-  bool buffFilled;
+  bool         m_buffFilled;
 
 };
 
