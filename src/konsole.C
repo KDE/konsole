@@ -196,6 +196,7 @@ Konsole::Konsole(const char* name, const QString& _program,
 ,selectFont(0)
 ,selectScrollbar(0)
 ,warnQuit(0)
+,clearHistory(0)
 ,cmd_serial(0)
 ,cmd_first_screen(-1)
 ,n_keytab(0)
@@ -353,6 +354,9 @@ void Konsole::makeGUI()
    KAction *renameSession = new KAction(i18n("R&ename session..."), 0, this,
                                         SLOT(slotRenameSession()), this);
    renameSession->plug(m_sessions);
+   KAction *clearAllSessionHistories = new KAction(i18n("Clear Histories"), 0,
+     this, SLOT(slotClearAllSessionHistories()), this);
+   clearAllSessionHistories->plug(m_sessions);
    m_sessions->insertSeparator();
 //   KRadioAction *ra = session2action.find(m_initialSession);
    KRadioAction *ra = session2action.find(se);
@@ -448,6 +452,11 @@ void Konsole::makeGUI()
                                       SLOT(slotHistoryType()), this);
    historyType->plug(m_options);
    
+   clearHistory = new KAction(i18n("Clear History"), 0, this,
+                                       SLOT(slotClearHistory()), this);
+   clearHistory->plug(m_options);
+   clearHistory->setEnabled( se->history().isOn() );
+
    m_options->insertSeparator();
    m_options->insertItem( SmallIconSet( "charset" ), i18n( "&Codec" ), m_codec);
    m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
@@ -1276,6 +1285,8 @@ void Konsole::activateSession(TESession *s)
   s->setConnect(TRUE);
   updateTitle();
   keytab_menu_activated(n_keytab); // act. the keytab for this session
+  if (clearHistory)
+      clearHistory->setEnabled( se->history().isOn() );
 }
 
 void Konsole::allowPrevNext()
@@ -1476,6 +1487,17 @@ void Konsole::nextSession()
 
 // --| Session support |-------------------------------------------------------
 
+void Konsole::clearSessionHistory(TESession & session)
+{
+  if (b_histEnabled == true) {
+    session.setHistory(HistoryTypeNone());
+    if (m_histSize)
+      session.setHistory(HistoryTypeBuffer(m_histSize));
+    else
+      session.setHistory(HistoryTypeFile());
+  }
+}
+
 void Konsole::addSessionCommand(const QString &path)
 {
   KSimpleConfig* co = new KSimpleConfig(path,TRUE);
@@ -1656,6 +1678,10 @@ void Konsole::initRenameSession(const QString &_title) {
   updateTitle();
 }
 
+void Konsole::slotClearAllSessionHistories() {
+  for (TESession *se = sessions.first(); se; se = sessions.next())
+    clearSessionHistory(*se);
+}
 
 //////////////////////////////////////////////////////////////////////
 
@@ -1727,7 +1753,7 @@ void Konsole::slotHistoryType()
   
   HistoryTypeDialog dlg(se->history(), m_histSize, this);
   if (dlg.exec()) {
-
+    clearHistory->setEnabled( dlg.isOn() );
     if (dlg.isOn()) {
       if (dlg.nbLines() > 0) {
          se->setHistory(HistoryTypeBuffer(dlg.nbLines()));
@@ -1750,6 +1776,11 @@ void Konsole::slotHistoryType()
 
     }
   }
+}
+
+void Konsole::slotClearHistory()
+{
+  clearSessionHistory(*se);
 }
 
 //////////////////////////////////////////////////////////////////////

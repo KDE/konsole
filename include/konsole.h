@@ -103,7 +103,9 @@ private slots:
   void slotToggleMenubar();
   void slotToggleFrame();
   void slotRenameSession();
+  void slotClearAllSessionHistories();
   void slotHistoryType();
+  void slotClearHistory();
   void slotWordSeps();
   void slotSelectSize();
   void slotSelectFont();
@@ -125,6 +127,7 @@ private:
   void setSchema(ColorSchema* s);
   void setFont(int fontno);
 
+  void clearSessionHistory(TESession & session);
   void addSessionCommand(const QString & path);
   void loadSessionCommands();
   void addScreenSession(const QString & socket);
@@ -163,6 +166,8 @@ private:
   KSelectAction *selectSize;
   KSelectAction *selectFont;
   KSelectAction *selectScrollbar;
+
+  KAction       *clearHistory;
 
   KToggleAction *warnQuit;                      // Warn when closing this session on quit
 
