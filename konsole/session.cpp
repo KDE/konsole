@@ -277,9 +277,19 @@ void TESession::done(int exitStatus)
     emit updateTitle();
     return;
   }
-  if (!wantedClose && exitStatus)
+  if (!wantedClose && (exitStatus || sh->signalled()))
   {
-    KNotifyClient::event("Finished", i18n("Session '%1' exited with status %2.").arg(title).arg(exitStatus));
+    if (sh->normalExit())
+      KNotifyClient::event("Finished", i18n("Session '%1' exited with status %2.").arg(title).arg(exitStatus));
+    else if (sh->signalled())
+    {
+      if (sh->coreDumped())
+        KNotifyClient::event("Finished", i18n("Session '%1' exited with signal %2 and dumped core.").arg(title).arg(sh->exitSignal()));
+      else
+        KNotifyClient::event("Finished", i18n("Session '%1' exited with signal %2.").arg(title).arg(sh->exitSignal()));
+    }
+    else
+      KNotifyClient::event("Finished", i18n("Session '%1' exited unexpectedly.").arg(title));
   }
   emit processExited();
   emit done(this);
