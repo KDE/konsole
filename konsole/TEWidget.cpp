@@ -46,6 +46,7 @@
 #include "config.h"
 #include "TEWidget.h"
 
+#include <qapplication.h>
 #include <qpainter.h>
 #include <qclipboard.h>
 #include <qstyle.h>
@@ -62,7 +63,6 @@
 
 #include <assert.h>
 
-#include "TEWidget.moc"
 #include <krun.h>
 #include <kcursor.h>
 #include <kdebug.h>
@@ -1661,3 +1661,4 @@ void TEWidget::setLineSpacing(uint i)
   setVTFont(font()); // Trigger an update.
 }
 
+#include "TEWidget.moc"
