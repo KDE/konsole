@@ -277,3 +277,96 @@ void defKeySyms()
   defKeySym("Hyper_L",    Qt::Key_Hyper_L   );
   defKeySym("Hyper_R",    Qt::Key_Hyper_R   );
 }
+
+// [scant.c]
+
+#include <stdio.h>
+
+// We define a very poor scanner, here.
+
+#define skipspaces while (*cc == ' ') cc++
+
+#define skipname \
+    id = cc; \
+    while ('A' <= *cc && *cc <= 'Z' || \
+           'a' <= *cc && *cc <= 'z' || \
+           '0' <= *cc && *cc <= '9') cc++
+
+#define skipchar(C) if (*cc == (C)) cc++; else { printf("error: expecting '%c' at %s.\n",C,cc); return; }
+
+#define skiphex() cc++
+
+#define FALSE 0
+#define TRUE 1
+
+#define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
+
+static void scanline(char* cc)
+{ char* id;
+Loop:
+  // syntax: [KeyName { ("+" | "-") ModeName } ":" String] ["#" Comment]
+  skipspaces;
+  if ('A' <= *cc && *cc <= 'Z')
+  {
+    skipname;
+    printf("key: >%.*s<\n",cc-id,id);
+    skipspaces;
+    while (*cc == '+' || *cc == '-')
+    { bool opt_on = (*cc++ == '+');
+      skipspaces;
+      skipname;
+      printf("mode: >%.*s< %s\n",cc-id,id,opt_on?"on":"off");
+      skipspaces;
+    }
+    skipchar(':')
+    skipspaces;
+    // scanstring
+    skipchar('"')
+    while (*cc)
+    {
+      if (*cc < ' ') break;
+      if (*cc == '"') break;
+      if (*cc != '\\') { cc++; continue; }
+      cc++;
+      if (!*cc)  { printf("error: unexpected end of string.\n"); return; }
+      switch (*cc)
+      {
+        case '\\' :
+        case 'n'  :
+        case 'r'  :
+        case 'f'  :
+        case 'b'  :
+        case 't'  :
+        case '"'  :
+        case 'E'  : cc++; break;
+        case 'u'  : cc++; skiphex(); skiphex(); skiphex(); skiphex(); break;
+        case 'x'  : cc++; skiphex(); skiphex(); break;
+        default   : printf("error: invalid char '%c' after \\.\n",*cc); return;
+      }
+    }
+    skipchar('"')
+    skipspaces;
+  }
+  if (*cc == '#')
+  {
+    // Skip Comment
+    while (*cc && *cc != '\n') cc++;
+  }
+  if (*cc == '\n') { cc++; goto Loop; }
+  if (*cc)
+  {
+    printf("error: invalid character '%c' at %s.\n",*cc,cc); return;
+  }
+
+}
+
+/*
+int main()
+{
+  scanline
+  (
+#include "KeyTab.sys"
+  );
+  return 0;
+}
+*/
