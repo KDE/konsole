@@ -45,7 +45,7 @@ public:
   ~TEDemo();
 
 private slots:
-  void configureRequest(TEWidget*,int,int);
+  void configureRequest(TEWidget*,int,int,int);
 
   void scrollbar_menu_activated(int item);
   void activateSession(int);

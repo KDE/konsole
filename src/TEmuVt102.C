@@ -62,7 +62,7 @@
 int maxHistLines = 100;
 //#define MAXHISTLINES 100 // natural constant for now.
 
-VT102Emulation::VT102Emulation(TEWidget* gui) : Emulation(gui)
+VT102Emulation::VT102Emulation(TEWidget* gui, const char* term) : Emulation(gui)
 {
   screen[0] = scr;
   screen[0]->setHistMaxLines(maxHistLines);
@@ -75,6 +75,7 @@ VT102Emulation::VT102Emulation(TEWidget* gui) : Emulation(gui)
   tableInit();
   resetTerminal();
   setMode(MODE_BsHack);
+  emulation = term;
 }
 
 void VT102Emulation::resetTerminal()
@@ -707,6 +708,7 @@ HERE;
 #define inAnsi getMode(MODE_Ansi     )
 #define KeyComb(B,K) ((ev->state() & (B)) == (B) && ev->key() == (K))
 
+#define Xterm (!strcmp(emulation.data(),"xterm"))
 /*!
 */
 
@@ -731,31 +733,34 @@ void VT102Emulation::onKeyPress( QKeyEvent* ev )
   key = ev->key();
   switch (key)
   {
-    case Key_Return    : sendString(getMode(MODE_NewLine)?"\r\n":"\r"); return;
-    case Key_Backspace : sendString(getMode(MODE_BsHack)?"\x7f"   :"\x08"); return;
-    case Key_Delete    : sendString(getMode(MODE_BsHack)?"\033[3~":"\x7f"); return;
+    case Key_Return    : sendString(getMode(MODE_NewLine)?"\r\n"   :"\r"  ); return;
+    case Key_Backspace : sendString(getMode(MODE_BsHack )?"\x7f"   :"\x08"); return;
+    case Key_Delete    : sendString(getMode(MODE_BsHack )?"\033[3~":"\x7f"); return;
 
-    case Key_Up    : sendString(!inAnsi?"\033A":inApp?"\033OA":"\033[A"); return;
-    case Key_Down  : sendString(!inAnsi?"\033B":inApp?"\033OB":"\033[B"); return;
-    case Key_Right : sendString(!inAnsi?"\033C":inApp?"\033OC":"\033[C"); return;
-    case Key_Left  : sendString(!inAnsi?"\033D":inApp?"\033OD":"\033[D"); return;
-    case Key_F1    : sendString("\033[11~" ); return;
-    case Key_F2    : sendString("\033[12~" ); return;
-    case Key_F3    : sendString("\033[13~" ); return;
-    case Key_F4    : sendString("\033[14~" ); return;
-    case Key_F5    : sendString("\033[15~" ); return;
-    case Key_F6    : sendString("\033[17~" ); return;
-    case Key_F7    : sendString("\033[18~" ); return;
-    case Key_F8    : sendString("\033[19~" ); return;
-    case Key_F9    : sendString("\033[20~" ); return;
-    case Key_F10   : sendString("\033[21~" ); return;
-    case Key_F11   : sendString("\033[23~" ); return;
-    case Key_F12   : sendString("\033[24~" ); return;
-    case Key_Home  : sendString("\033[7~"  ); return;
-    case Key_End   : sendString("\033[8~"  ); return;
-    case Key_Prior : sendString("\033[5~"  ); return;
-    case Key_Next  : sendString("\033[6~"  ); return;
-    case Key_Insert: sendString("\033[2~"  ); return;
+    case Key_Up        : sendString(!inAnsi?"\033A":inApp?"\033OA":"\033[A"); return;
+    case Key_Down      : sendString(!inAnsi?"\033B":inApp?"\033OB":"\033[B"); return;
+    case Key_Right     : sendString(!inAnsi?"\033C":inApp?"\033OC":"\033[C"); return;
+    case Key_Left      : sendString(!inAnsi?"\033D":inApp?"\033OD":"\033[D"); return;
+
+                                    //      XTERM      LINUX
+    case Key_F1        : sendString(Xterm? "\033[11~": "\033[[A" ); return;
+    case Key_F2        : sendString(Xterm? "\033[12~": "\033[[B" ); return;
+    case Key_F3        : sendString(Xterm? "\033[13~": "\033[[C" ); return;
+    case Key_F4        : sendString(Xterm? "\033[14~": "\033[[D" ); return;
+    case Key_F5        : sendString(Xterm? "\033[15~": "\033[[E" ); return;
+    case Key_F6        : sendString("\033[17~" ); return;
+    case Key_F7        : sendString("\033[18~" ); return;
+    case Key_F8        : sendString("\033[19~" ); return;
+    case Key_F9        : sendString("\033[20~" ); return;
+    case Key_F10       : sendString("\033[21~" ); return;
+    case Key_F11       : sendString("\033[23~" ); return;
+    case Key_F12       : sendString("\033[24~" ); return;
+
+    case Key_Home      : sendString("\033[7~"  ); return;
+    case Key_End       : sendString("\033[8~"  ); return;
+    case Key_Prior     : sendString("\033[5~"  ); return;
+    case Key_Next      : sendString("\033[6~"  ); return;
+    case Key_Insert    : sendString("\033[2~"  ); return;
     //FIXME: get keypad somehow
   }
   if (KeyComb(ControlButton,Key_Space)) // ctrl-Space == ctrl-@

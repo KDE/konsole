@@ -129,10 +129,13 @@ TEDemo::~TEDemo()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TEDemo::configureRequest(TEWidget* te, int x, int y)
+void TEDemo::configureRequest(TEWidget* te, int state, int x, int y)
 {
 //printf("TEDemo::configureRequest(_,%d,%d)\n",x,y);
-  m_options->popup(te->mapToGlobal(QPoint(x,y)));
+  ( (state & ShiftButton  ) ? m_sessions :
+    (state & ControlButton) ? m_commands :
+                              m_options  )
+  ->popup(te->mapToGlobal(QPoint(x,y)));
 }
 
 /* ------------------------------------------------------------------------- */
@@ -494,7 +497,7 @@ void TEDemo::activateSession(int sn)
     m_sessions->setItemChecked(no,FALSE);
   }
   se = s;
-  se->setConnect(TRUE);
+  se->setConnect(TRUE); // does a bulkShow (setImage)
   m_sessions->setItemChecked(sn,TRUE);
 /*FIXME: creates flicker*/
   setSchema(s->schemaNo());

@@ -37,7 +37,7 @@ class VT102Emulation : public Emulation // QObject
 
 public:
 
-  VT102Emulation(TEWidget* gui);
+  VT102Emulation(TEWidget* gui, const char* term);
   ~VT102Emulation();
 
 public slots: // signals incoming from TEWidget
@@ -98,6 +98,8 @@ private:
   void reportCursorPosition();
   void reportMouseEvent(int ev, int x, int y);
   void reportTerminalParms(int p);
+
+  QString emulation;
 
 protected:
 

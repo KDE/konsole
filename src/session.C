@@ -5,7 +5,7 @@
 TESession::TESession(KTMainWindow* main, TEWidget* te, char* args[], const char* term)
 {
   sh = new Shell();
-  em = new VT102Emulation(te);
+  em = new VT102Emulation(te,term);
 
   emuname = term;
 
@@ -25,8 +25,9 @@ TESession::TESession(KTMainWindow* main, TEWidget* te, char* args[], const char*
   QObject::connect( this,SIGNAL(done(TESession*)),
                     main,SLOT(doneSession(TESession*)) );
   QObject::connect( sh,SIGNAL(done()), this,SLOT(done()) );
-  QObject::connect( te,SIGNAL(configureRequest(TEWidget*,int,int)),
-                    main,SLOT(configureRequest(TEWidget*,int,int)) );
+  //FIXME: note the right place
+  QObject::connect( te,SIGNAL(configureRequest(TEWidget*,int,int,int)),
+                    main,SLOT(configureRequest(TEWidget*,int,int,int)) );
 
   sh->run(args,term);
 }

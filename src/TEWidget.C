@@ -504,7 +504,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   }
   if ( ev->button() == RightButton ) // Configure
   {
-    emit configureRequest( this, ev->x(), ev->y() );
+    emit configureRequest( this, ev->state()&(ShiftButton|ControlButton), ev->x(), ev->y() );
   }
 }
 

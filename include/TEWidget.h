@@ -68,7 +68,7 @@ signals:
     void mouseSignal(int cb, int cx, int cy);
     void changedImageSizeSignal(int lines, int columns);
     void changedHistoryCursor(int value);
-    void configureRequest( TEWidget*, int x, int y );
+    void configureRequest( TEWidget*, int state, int x, int y );
 
     void clearSelectionSignal();
     void beginSelectionSignal( const int x, const int y );
