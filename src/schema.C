@@ -144,7 +144,7 @@ int ColorSchema::count()
 void ColorSchema::addSchema()
 {
   numb2schema.insert(numb,this);
-  path2schema.insert(path.data(),this);
+  path2schema.insert(path,this);
 }
 
 static const ColorEntry default_table[TABLE_COLORS] =

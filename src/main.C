@@ -91,7 +91,7 @@
 #define PACKAGE "konsole"
 #define VERSION "0.9.12"
 
-static const char *description = 
+static const char *description =
 	I18N_NOOP("X terminal for use with KDE.");
 
 static KCmdLineOptions options[] =
@@ -139,7 +139,7 @@ Konsole::Konsole(const QString& name,
   menubar = menuBar();
   b_scroll = histon;
   b_fullscreen = FALSE;
-  
+
   // create terminal emulation framework ////////////////////////////////////
 
   te = new TEWidget(this);
@@ -157,7 +157,7 @@ Konsole::Konsole(const QString& name,
   // Init DnD ////////////////////////////////////////////////////////////////
 
   setAcceptDrops(true);
-  
+
   // load session commands ///////////////////////////////////////////////////
 
   loadSessionCommands();
@@ -172,7 +172,7 @@ Konsole::Konsole(const QString& name,
   for (int i = 0; i < ColorSchema::count(); i++)
   { ColorSchema* s = ColorSchema::find(i);
     assert( s );
-    m_schema->insertItem(s->title.data(),s->numb);
+    m_schema->insertItem(s->title,s->numb);
   }
 
   // load schema /////////////////////////////////////////////////////////////
@@ -182,7 +182,7 @@ Konsole::Konsole(const QString& name,
   for (int i = 0; i < KeyTrans::count(); i++)
   { KeyTrans* s = KeyTrans::find(i);
     assert( s );
-    m_keytab->insertItem(s->hdr.data(),s->numb);
+    m_keytab->insertItem(s->hdr,s->numb);
   }
 
   // set global options ///////////////////////////////////////////////////////
@@ -213,9 +213,9 @@ Konsole::Konsole(const QString& name,
 
   // activate and run first session //////////////////////////////////////////
 
-  // WABA: Make sure all the xxxBars are in place so that 
-  //       we can resize our mainWidget to its target size. 
-  updateRects(); 
+  // WABA: Make sure all the xxxBars are in place so that
+  //       we can resize our mainWidget to its target size.
+  updateRects();
 
   runSession(initial);
 }
@@ -257,9 +257,9 @@ Konsole::~Konsole()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void Konsole::dragEnterEvent(QDragEnterEvent* e) 
+void Konsole::dragEnterEvent(QDragEnterEvent* e)
 {
-  e->accept(QTextDrag::canDecode(e) || 
+  e->accept(QTextDrag::canDecode(e) ||
 	    QUriDrag::canDecode(e));
 }
 
@@ -308,7 +308,7 @@ void Konsole::drop_menu_activated(int item)
   switch (item)
   {
     case 0: // paste
-      se->getEmulation()->sendString(dropText.data());
+      se->getEmulation()->sendString(dropText);
 //    KWM::activate((Window)this->winId());
       break;
     case 1: // cd ...
@@ -450,11 +450,11 @@ void Konsole::makeMenu()
                              "terms of the GNU General Public License\n"
                              "and comes WITHOUT ANY WARRANTY.\n"
                              "See 'LICENSE.readme' for details.").arg(PACKAGE).arg(VERSION);
-  
+
   QPopupMenu* m_help =  helpMenu(aboutAuthor, false);
-  m_help->insertItem( i18n("&Technical Reference ..."), this, SLOT(tecRef()), 
+  m_help->insertItem( i18n("&Technical Reference ..."), this, SLOT(tecRef()),
                       0, -1, 1);
-    
+
   m_drop = new QPopupMenu;
   m_drop->insertItem( i18n("Paste"), 0);
   m_drop->insertItem( i18n("cd"),    1);
@@ -526,7 +526,7 @@ void Konsole::readProperties(KConfig* config)
 
   setMenuVisible(config->readBoolEntry("menubar visible",TRUE));
   setFrameVisible(config->readBoolEntry("has frame",TRUE));
-  
+
   scrollbar_menu_activated(QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2));
 
   // not necessary for SM (KTMainWindow does it after), but useful for default settings
@@ -578,12 +578,12 @@ void Konsole::readProperties(KConfig* config)
 void Konsole::pixmap_menu_activated(int item)
 {
   if (item <= 1) pmPath = "";
-  QPixmap pm(pmPath.data());
-  if (pm.isNull()) { 
-    pmPath = ""; 
-    item = 1; 
+  QPixmap pm(pmPath);
+  if (pm.isNull()) {
+    pmPath = "";
+    item = 1;
     te->setBackgroundColor(te->getDefaultBackColor());
-    return; 
+    return;
   }
   // FIXME: respect scrollbar (instead of te->size)
   n_render= item;
@@ -905,10 +905,10 @@ void Konsole::newSession(int i)
   args.append("-c");
   args.append(cmd);
 
-  TESession* s = new TESession(this,te,shell,args,emu.data());
+  TESession* s = new TESession(this,te,shell,args,emu);
   s->setFontNo(fno);
   s->setSchemaNo(schmno);
-  s->setTitle(txt.data());
+  s->setTitle(txt);
   //s->setHistory(b_scroll); //FIXME: take from schema
   setHistory(b_scroll); //FIXME: take from schema
 
@@ -974,7 +974,7 @@ void Konsole::addSessionCommand(const char* path)
   QString cmd = co->readEntry("Exec");
   QString nam = co->readEntry("Name");
   if (typ.isEmpty() || txt.isEmpty() || cmd.isEmpty() || nam.isEmpty() ||
-      strcmp(typ.data(),"KonsoleApplication"))
+      typ != "KonsoleApplication")
   {
     delete co; return; // ignore
   }
@@ -985,8 +985,8 @@ void Konsole::addSessionCommand(const char* path)
 void Konsole::loadSessionCommands()
 {
   QStringList lst = KGlobal::dirs()->findAllResources("appdata", "*.desktop", false, true);
-  
-  for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it ) 
+
+  for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it )
     addSessionCommand(*it);
 }
 
@@ -1013,7 +1013,7 @@ void Konsole::setSchema(const ColorSchema* s)
   curr_schema = s->numb;
   pmPath = s->imagepath;
   te->setColorTable(s->table); //FIXME: set twice here to work around a bug
-  
+
   if (s->usetransparency) {
 //FIXME: what is this?
 //  rootxpm->checkAvailable(true);
@@ -1040,14 +1040,14 @@ int main(int argc, char* argv[])
   bool histon = true;
   const char* wname = PACKAGE;
 
-  KAboutData aboutData( PACKAGE, I18N_NOOP("Konsole"), 
-    VERSION, description, KAboutData::License_GPL, 
+  KAboutData aboutData( PACKAGE, I18N_NOOP("Konsole"),
+    VERSION, description, KAboutData::License_GPL,
     "(c) 1997-2000, Lars Doelle");
   aboutData.addAuthor("Lars Doelle",0, "lars.doelle@on-line.de");
   KCmdLineArgs::init( argc, argv, &aboutData );
   KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
-  
-  
+
+
   setlocale( LC_ALL, "" );
   KApplication a;
   kimgioRegister(); // add io for additional image formats
@@ -1093,18 +1093,18 @@ int main(int argc, char* argv[])
 
   int c = 0, l = 0;
   if ( !sz.isEmpty() )
-  { 
+  {
     char *ls = (char*)strchr( sz.data(), 'x' );
     if ( ls != NULL )
-    { 
-       *ls='\0'; 
-       ls++; 
-       c=atoi(sz.data()); 
-       l=atoi(ls); 
+    {
+       *ls='\0';
+       ls++;
+       c=atoi(sz.data());
+       l=atoi(ls);
     }
     else
-    { 
-       KCmdLineArgs::usage(i18n("expected --vt_sz <#columns>x<#lines> ie. 80x40\n")); 
+    {
+       KCmdLineArgs::usage(i18n("expected --vt_sz <#columns>x<#lines> ie. 80x40\n"));
     }
   }
 
@@ -1117,11 +1117,11 @@ int main(int argc, char* argv[])
     KConfig * sessionconfig = a.sessionConfig();
     sessionconfig->setGroup("options");
     sessionconfig->readListEntry("konsolearguments", eargs);
-    wname = sessionconfig->readEntry("class",wname).data();
+    wname = sessionconfig->readEntry("class",wname).latin1();
     RESTORE( Konsole(wname,shell,eargs,histon) )
   }
   else
-  {  
+  {
     Konsole*  m = new Konsole(wname,shell,eargs,histon);
     m->setColLin(c,l); // will use default height and width if called with (0,0)
 
@@ -1132,7 +1132,7 @@ int main(int argc, char* argv[])
     }
     m->show();
   }
-  
+
   return a.exec();
 }
 

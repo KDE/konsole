@@ -42,13 +42,13 @@ public:
   int schemaNo();
   int fontNo();
   const char* emuName();
-  const char* Title();
+  const QString& Title();
   bool history();
 
   void setHistory(bool on);
   void setSchemaNo(int sn);
   void setFontNo(int fn);
-  void setTitle(const char* title);
+  void setTitle(const QString& title);
   void kill(int signal);
 
 public slots:

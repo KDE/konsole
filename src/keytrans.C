@@ -612,7 +612,7 @@ void KeyTrans::addKeyTrans()
 {
   this->numb = keytab_serial ++;
   numb2keymap.insert(numb,this);
-  path2keymap.insert(path.data(),this);
+  path2keymap.insert(path,this);
 }
 
 void KeyTrans::loadAll()

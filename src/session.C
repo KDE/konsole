@@ -105,14 +105,14 @@ void TESession::setFontNo(int fn)
   font_no = fn;
 }
 
-void TESession::setTitle(const char* title)
+void TESession::setTitle(const QString& title)
 {
   this->title = title;
 }
 
-const char* TESession::Title()
+const QString& TESession::Title()
 {
-  return title.data();
+  return title;
 }
 
 void TESession::setHistory(bool on)
