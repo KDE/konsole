@@ -2,6 +2,8 @@
 - license restricted to GPLv2
 - added Konsole2.Requierements
 - removed AUTHORS and CONTRIBUTORS in favor of DEVELOPERS
+ 8 Sep 2000
+- fixed a history-related crash.
  5 Sep 2000
 - (partially) fixed cut&paste problems.
  4 Sep 2000
