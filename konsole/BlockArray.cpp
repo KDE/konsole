@@ -10,10 +10,10 @@ static int blocksize = 0;
 
 BlockArray::BlockArray()
     : size(0),
-      current(-1),
-      index(-1),
+      current(size_t(-1)),
+      index(size_t(-1)),
       lastmap(0),
-      lastmap_index(-1),
+      lastmap_index(size_t(-1)),
       lastblock(0), ion(-1),
       length(0)
 {
