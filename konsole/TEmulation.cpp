@@ -420,7 +420,7 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool caseSensit
 
 // Refreshing -------------------------------------------------------------- --
 
-#define BULK_TIMEOUT 20
+#define BULK_TIMEOUT 10
 
 /*!
    called when \n comes in. Evtl. triggers showBulk at endBulk
