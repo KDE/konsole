@@ -76,11 +76,11 @@ konsoleFactory::~konsoleFactory()
 }
 
 KParts::Part *konsoleFactory::createPartObject(QWidget *parentWidget, const char *widgetName,
-                                         QObject *parent, const char *name, const char*,
-                                         const QStringList& )
+                                         QObject *parent, const char *name, const char *classname,
+                                         const QStringList&)
 {
   kdDebug(1211) << "konsoleFactory::createPart parentWidget=" << parentWidget << " parent=" << parent << endl;
-  KParts::Part *obj = new konsolePart(parentWidget, widgetName, parent, name);
+  KParts::Part *obj = new konsolePart(parentWidget, widgetName, parent, name, classname);
   return obj;
 }
 
@@ -139,7 +139,7 @@ const char *fonts[] = {
 
 #define DEFAULT_HISTORY_SIZE 1000
 
-konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject *parent, const char *name)
+konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject *parent, const char *name, const char *classname)
   : KParts::ReadOnlyPart(parent, name)
 ,te(0)
 ,se(0)
@@ -155,6 +155,8 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   // This is needed since only konsole.cpp does it
   // Without this -> crash on keypress... (David)
   KeyTrans::loadAll();
+
+  m_streamEnabled = ( classname && strcmp( classname, "TerminalEmulator" ) == 0 );
 
   QStrList eargs;
 
@@ -809,6 +811,27 @@ void konsolePart::updateTitle()
 void konsolePart::guiActivateEvent( KParts::GUIActivateEvent * )
 {
     // Don't let ReadOnlyPart::guiActivateEvent reset the window caption
+}
+
+bool konsolePart::doOpenStream( const QString& )
+{
+	return m_streamEnabled;
+}
+
+bool konsolePart::doWriteStream( const QByteArray& data )
+{
+	if ( m_streamEnabled )
+	{
+		QString cmd = QString::fromLocal8Bit( data.data(), data.size() );
+		se->sendSession( cmd );
+		return true;
+	}
+	return false;
+}
+
+bool konsolePart::doCloseStream()
+{
+	return m_streamEnabled;
 }
 
 //////////////////////////////////////////////////////////////////////

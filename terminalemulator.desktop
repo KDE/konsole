@@ -1,0 +1,6 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=ServiceType
+X-KDE-ServiceType=TerminalEmulator
+X-KDE-Derived=KPart/ReadOnlyPart
+Name=Terminal Emulator

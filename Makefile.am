@@ -11,6 +11,7 @@ install-data-local: uninstall.desktop
 	$(INSTALL_DATA) $(srcdir)/uninstall.desktop $(DESTDIR)$(kde_appsdir)/System/konsolesu.desktop 
 
 kde_services_DATA = konsolepart.desktop kwrited.desktop
+kde_servicetypes_DATA = terminalemulator.desktop
 
 update_DATA = konsole.upd schemaStrip.pl
 updatedir = $(kde_datadir)/kconf_update

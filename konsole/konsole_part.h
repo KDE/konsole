@@ -67,7 +67,7 @@ class konsolePart: public KParts::ReadOnlyPart
 {
     Q_OBJECT
 	public:
-    konsolePart(QWidget *parentWidget, const char *widgetName, QObject * parent, const char *name);
+    konsolePart(QWidget *parentWidget, const char *widgetName, QObject * parent, const char *name, const char *classname = 0);
     virtual ~konsolePart();
 
  protected:
@@ -119,6 +119,10 @@ class konsolePart: public KParts::ReadOnlyPart
     void setSchema(ColorSchema* s);
     void updateKeytabMenu();
 
+	bool doOpenStream( const QString& );
+	bool doWriteStream( const QByteArray& );
+	bool doCloseStream();
+
     QWidget* parentWidget;
     TEWidget* te;
     TESession* se;
@@ -157,6 +161,7 @@ class konsolePart: public KParts::ReadOnlyPart
     int         n_render;
     int         n_scroll;
     unsigned    m_histSize;
+	bool        m_streamEnabled;
 };
 
 //////////////////////////////////////////////////////////////////////
