@@ -716,6 +716,9 @@ void TEScreen::ShowCharacter(unsigned short c)
 
   int w = konsole_wcwidth(c);
 
+  if (w <= 0)
+     return;
+
   if (cuX+w > columns) {
     if (getMode(MODE_Wrap)) { 
       line_wrapped[cuY]=true;
