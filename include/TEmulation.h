@@ -66,7 +66,10 @@ public:
   virtual void setConnect(bool r);
   void setColumns(int columns);
 
-  void setKeytrans(int no);
+  void setKeymap(int no);
+  void setKeymap(const QString &id);
+  int keymapNo();
+  QString keymap();
 
 protected:
 

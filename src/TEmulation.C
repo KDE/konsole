@@ -122,6 +122,7 @@ TEmulation::TEmulation(TEWidget* w)
 		   this,SLOT(setSelection(const bool)) );
   QObject::connect(gui,SIGNAL(clearSelectionSignal()),
 		   this,SLOT(clearSelection()) );
+  setKeymap(0); // Default keymap
 }
 
 /*!
@@ -165,9 +166,24 @@ void TEmulation::setCodec(int c)
   decoder = codec->makeDecoder();
 }
 
-void TEmulation::setKeytrans(int no)
+void TEmulation::setKeymap(int no)
 {
   keytrans = KeyTrans::find(no);
+}
+
+void TEmulation::setKeymap(const QString &id)
+{
+  keytrans = KeyTrans::find(id);
+}
+
+QString TEmulation::keymap()
+{
+  return keytrans->id();
+}
+
+int TEmulation::keymapNo()
+{
+  return keytrans->numb();
 }
 
 // Interpreting Codes ---------------------------------------------------------

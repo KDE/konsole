@@ -289,6 +289,7 @@ int main(int argc, char* argv[])
     QString key;
     QString sTitle;
     QString sPgm;
+    QString sTerm;
 
     while (KMainWindow::canBeRestored(n))
     {
@@ -296,11 +297,13 @@ int main(int argc, char* argv[])
         sPgm = sessionconfig->readEntry("Pgm0", shell);
         sessionconfig->readListEntry("Args0", eargs);
         sTitle = sessionconfig->readEntry("Title0", title);
-        Konsole *m = new Konsole(wname,sPgm,eargs,histon,toolbaron,sTitle,type,true);
+        sTerm = sessionconfig->readEntry("Term0");
+        Konsole *m = new Konsole(wname,sPgm,eargs,histon,toolbaron,sTitle,type,sTerm,true);
         m->restore(n);
         m->makeGUI();
         m->initSessionSchema(sessionconfig->readNumEntry("Schema0"));
         m->initSessionFont(sessionconfig->readNumEntry("Font0", -1));
+        m->initSessionKeyTab(sessionconfig->readEntry("KeyTab0"));
         counter++;
 
         while (counter < session_count) 
@@ -312,12 +315,16 @@ int main(int argc, char* argv[])
           sessionconfig->readListEntry(key, eargs);
           key = QString("Pgm%1").arg(counter);
           sPgm = sessionconfig->readEntry(key, shell);
-          m->newSession(sPgm, eargs);
-          m->initRenameSession(sTitle);
+          key = QString("Term%1").arg(counter);
+          sTerm = sessionconfig->readEntry(key);
+          m->newSession(sPgm, eargs, sTerm);
+          m->initSessionTitle(sTitle);
           key = QString("Schema%1").arg(counter);
           m->initSessionSchema(sessionconfig->readNumEntry(key));
           key = QString("Font%1").arg(counter);
           m->initSessionFont(sessionconfig->readNumEntry(key, -1));
+          key = QString("KeyTab%1").arg(counter);
+          m->initSessionKeyTab(sessionconfig->readEntry(key));
           counter++;
         }
         ksm->konsole = m;

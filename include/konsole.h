@@ -52,7 +52,7 @@ class Konsole : public KMainWindow
 public:
 
   Konsole(const char * name, const QString &_program, QStrList & _args,
-    int histon, bool, const QString & _title, QCString type = 0, bool b_inRestore = false);
+    int histon, bool, const QString & _title, QCString type = 0, const QString &_term=QString::null, bool b_inRestore = false);
   ~Konsole();
   void setColLin(int columns, int lines);
   void setFullScreen(bool on);
@@ -60,8 +60,8 @@ public:
   void initSessionSchema(int schemaNo);
   void initSessionFont(int fontNo);
   void initSessionTitle(const QString &_title);
-  void initRenameSession(const QString &_title);
-  void newSession(const QString &program, const QStrList &args);
+  void initSessionKeyTab(const QString &keyTab);
+  void newSession(const QString &program, const QStrList &args, const QString &term);
 
 public slots:
 
@@ -94,6 +94,7 @@ private slots:
   //void newSessionSelect();
   void newSession(int kind);
   void updateSchemaMenu();
+  void updateKeytabMenu();
 
   void changeColumns(int);
   void notifySize(int,int);
@@ -117,7 +118,7 @@ private slots:
 
 private:
   KSimpleConfig *defaultSession();
-  TESession *newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList());
+  TESession *newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(), const QString &_term = QString::null);
   void readProperties(KConfig *config, const QString &schema);
   void applySettingsToGUI();
   void makeBasicGUI();
@@ -173,7 +174,7 @@ private:
   int cmd_serial;
   int cmd_first_screen;
   int         n_keytab;
-  int         n_oldkeytab;
+  int         n_defaultKeytab;
   int         n_font;
   int         n_defaultFont; // font as set in config to use as default for new sessions
   int         n_scroll;
