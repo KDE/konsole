@@ -226,19 +226,6 @@ void Konsole::makeMenu()
 
   KAction *newsession = KStdAction::openNew(this , SLOT(newSessionSelect()));
   newsession->plug(toolBar());
-/*
-  QObjectList *l = toolBar()->queryList( "KToolBarButton" );
-  if ( l && l->first() )
-  {
-    ( (KToolBarButton*)l->first() )->setDelayedPopup( m_toolbarSessionsCommands );
-//FIXME: Lars. Someone broke toolbar opening session selection.
-//       There were very good reasons to do so, since the "first"
-//       possible session is random! Please revert to behavior
-//       i've already coded.
-connect( (KToolBarButton*)l->first() , SIGNAL(clicked()), this, SLOT(newSession()));
-  }
-  delete l;
-*/
   toolBar()->insertLineSeparator();
 
   QPopupMenu* m_signals = new QPopupMenu(this);
