@@ -162,7 +162,7 @@ const char *fonts[] = {
 
 Konsole::Konsole(const char* name, const char* _pgm,
                  QStrList & _args, int histon, bool toolbaron,
-                 QCString mytitle, QCString type)
+                 QCString mytitle, QCString type, bool b_inRestore)
 :KMainWindow(0, name)
 ,te(0)
 ,se(0)
@@ -207,6 +207,8 @@ Konsole::Konsole(const char* name, const char* _pgm,
 {
   //QTime time;
   //time.start();
+  isRestored = b_inRestore;
+  wasRestored = false;
   kapp->addKipcEventMask(KIPC::BackgroundChanged);
   connect( kapp,SIGNAL(backgroundChanged(int)),this, SLOT(slotBackgroundChanged(int)));
 
@@ -1118,6 +1120,15 @@ void Konsole::initSessionTitle(QString title) {
   sessions.current()->setTitle(title);
 }
 
+void Konsole::initSessionTitles(QStrList titles) {
+
+}
+
+void Konsole::newRestoredSession(QString title) {
+  newSession();
+  initSessionTitle(title);
+  }
+
 void Konsole::setFullScreen(bool on)
 {
 //  if (on == b_fullscreen) {
@@ -1275,7 +1286,12 @@ void Konsole::allowPrevNext()
 
 void Konsole::newSession()
 {
-  if (!m_menuCreated) makeGUI();
+  if (!m_menuCreated) {
+    if (!isRestored) {
+       makeGUI();
+       }
+     }
+
   uint i=1;
   int session=0;
   while ( (session==0) && (i<=no2command.count()) )

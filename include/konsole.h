@@ -46,17 +46,20 @@ class Konsole : public KMainWindow
 public:
 
   Konsole(const char * name, const char* pgm, QStrList & _args,
-    int histon, bool, QCString mytitle, QCString type = 0);
+    int histon, bool, QCString mytitle, QCString type = 0, bool b_inRestore = false);
   ~Konsole();
   void setColLin(int columns, int lines);
   void setFullScreen(bool on);
   void initFullScreen();
+  void initSessionTitles(QStrList titles);
   void initSessionTitle(QString title);
   void initRenameSession(QString sTitle);
 
 public slots:
 
+  void makeGUI();
   void newSession();
+  void newRestoredSession(QString title);
 
 protected:
 
@@ -103,7 +106,6 @@ private slots:
   void slotSelectFont();
   void slotSelectScrollbar();
   void slotWarnQuit();
-  void makeGUI();
   void loadScreenSessions();
 
 private:
@@ -191,6 +193,8 @@ private:
   bool        skip_exit_query:1;
   bool        b_warnQuit:1;
   bool        alreadyNoticedBackgroundChange_:1;
+  bool        isRestored;
+  bool        wasRestored;
 
 public:
 

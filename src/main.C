@@ -239,24 +239,30 @@ int main(int argc, char* argv[])
     n3=tmp_n3.toInt();
     QString tmpTitle;
     QString sTitle;
+    QStrList titles = new QStrList();
 
     while (KMainWindow::canBeRestored(n)){
         sessionconfig->setGroup("options");
         cTitle+=(sessionconfig->readEntry("Title0", title)).latin1();
-        Konsole *m = new Konsole(wname,shell,eargs,histon,toolbaron,cTitle,type);
+        Konsole *m = new Konsole(wname,shell,eargs,histon,toolbaron,cTitle,type,true);
         m->restore(n);
+        for (int i=1; i < 10000 ; i++) {}
+        m->makeGUI();
 
         while (n2 < (n3 - 1)) {
           tmpTitle = "Title";
           tmpTitle+= (char) (n2+49);
+          sessionconfig->setGroup("options");
+          sTitle=sessionconfig->readEntry(tmpTitle, "Failed");
+          titles.append(sTitle.latin1());
+//          QTimer::singleShot(5000,m,SLOT(newSession()));
           m->newSession();
 //          kdDebug() << "Adding title tmpTitle = " << sessionconfig->readEntry(tmpTitle, m->title);
 
-          sessionconfig->setGroup("options");
-          sTitle=sessionconfig->readEntry(tmpTitle, "Failed");
           m->initRenameSession(sTitle);
           n2++;
           }
+        m->initSessionTitles(titles);
         ksm->konsole = m;
         ksm->konsole->initFullScreen();
         // works only for the first one, but there won't be more.
