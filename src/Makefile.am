@@ -78,7 +78,7 @@ METASOURCES = TEWidget.moc TEmuVt102.moc session.moc konsole.moc \
 
 META_INCLUDES = $(srcdir)/../include
 
-messages:
+messages: rc.cpp
 	rm -f schemas.C
 	for i in ../other/*.schema; do \
 	  grep "^title" $$i | cut -d':' -f2- | sed -e 's#^title \(.*\)$$#i18n(\"\1\")#' >> schemas.C ;\
@@ -86,7 +86,7 @@ messages:
 	for i in ../other/*.Keytab ../other/*.keytab; do \
 	  grep "^keyboard" $$i | sed -e 's#^keyboard \"\(.*\)\"$$#i18n(\"\1\")#' >> schemas.C ;\
 	done
-	$(XGETTEXT) $(konsole_SOURCES) $(libkonsole_la_SOURCES) schemas.C -o $(podir)/konsole.pot
+	$(XGETTEXT) rc.cpp *.C -o $(podir)/konsole.pot
 	rm -f schemas.C
 
 dummy.C:
