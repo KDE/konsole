@@ -1,7 +1,18 @@
 [Desktop Entry]
 Type=KonsoleApplication
 Name=Screen Session
-Name[hu]=Új munkafolyamat
+Name[az]=Ekran İclası
+Name[da]=Skærmsession
+Name[he]=משימת מנהל מסכים
+Name[hu]=Képernyő-munkafolyamat
+Name[nl]=Schermsessie
+Name[sv]=Skärmsession
 Comment=Open a new screen session
+Comment[az]=yeni ekran iclası aç
+Comment[da]=Åbn en ny skærmsession
+Comment[he]=פותח משימת מנהל מסכים חדשה
 Comment[hu]=Megnyit egy új parancsértelmező ablakot
+Comment[nl]=open een nieuwe schermsessie
+Comment[sv]=Öppna en ny skärmsession
 Exec=screen 
+Cwd=

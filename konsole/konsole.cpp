@@ -1588,6 +1588,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
   QString key;
   QString sch = s_kconfigSchema;
   QString txt;
+  QString cwd;
   unsigned int     fno = n_defaultFont;
   QStrList cmdArgs;
 
@@ -1599,6 +1600,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
      txt = co->readEntry("Name");
      fno = co->readUnsignedNumEntry("Font", fno);
      icon = co->readEntry("Icon", icon);
+     cwd = co->readPathEntry("Cwd");
   }
 
   if (!_term.isEmpty())
@@ -1635,7 +1637,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
   int schmno = schema->numb();
 
   QString sessionId="session-"+QString::number(++sessionIdCounter);
-  TESession* s = new TESession(this,te, QFile::encodeName(program),cmdArgs,emu,sessionId);
+  TESession* s = new TESession(this,te, QFile::encodeName(program),cmdArgs,emu,sessionId,cwd);
   connect( s,SIGNAL(done(TESession*,int)),
            this,SLOT(doneSession(TESession*,int)) );
   connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),

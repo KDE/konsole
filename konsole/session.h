@@ -30,7 +30,8 @@ public:
 
   TESession(KMainWindow* main, TEWidget* w,
             const QString &pgm, QStrList & _args,
-	    const QString &term, const QString &sessionId="session-1");
+	    const QString &term, const QString &sessionId="session-1",
+	    const QString &cwd = QString::null);
   ~TESession();
 
   void        setConnect(bool r);  // calls setListenToKeyPress(r)
@@ -122,6 +123,7 @@ private:
 
   QString        term;
   QString        sessionId;
+  QString        cwd;
 };
 
 #endif

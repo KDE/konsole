@@ -4,6 +4,7 @@
 
 #include <stdlib.h>
 #include <qfile.h>
+#include <qdir.h>
 
 #ifndef HERE
 #define HERE fprintf(stderr,"%s(%d): here\n",__FILE__,__LINE__)
@@ -21,16 +22,17 @@
     of the abilities of the framework - multible sessions.
 */
 
-TESession::TESession(KMainWindow* main, TEWidget* _te, const QString &_pgm, QStrList & _args, const QString &_term,const QString &_sessionId)
+TESession::TESession(KMainWindow* main, TEWidget* _te, const QString &_pgm, QStrList & _args, const QString &_term,const QString &_sessionId, const QString &_cwd)
    : DCOPObject( _sessionId.latin1() )
    , monitorActivity(false)
    , monitorSilence(false)
    , masterMode(false)
    , schema_no(0)
    , font_no(3)
-   , sessionId(_sessionId)
    , pgm(_pgm)
    , args(_args)
+   , sessionId(_sessionId)
+   , cwd(_cwd)
 {
   //kdDebug(1211)<<"TESession ctor() new TEPty"<<endl;
   sh = new TEPty();
@@ -78,9 +80,15 @@ void TESession::run()
   //kdDebug(1211) << "Running the session!" << pgm << "\n";
   //pgm = "pine";
   QString appId=kapp->dcopClient()->appId();
+  
+  QString cwd_save = QDir::currentDirPath();
+  if (!cwd.isEmpty())
+     QDir::setCurrent(cwd);
   sh->run(QFile::encodeName(pgm),args,term.latin1(),true,
           ("DCOPRef("+appId+",konsole)").latin1(),
           ("DCOPRef("+appId+","+sessionId+")").latin1());
+  if (!cwd.isEmpty())
+     QDir::setCurrent(cwd_save);
 
   sh->setWriteable(false);  // We are reachable via kwrited.
 }
