@@ -234,7 +234,7 @@ setText(pa&&*pa?pa+1:"/* build-in schema */");
   update();
 }
 
-void ColorTable::paintEvent(QPaintEvent* e)
+void ColorTable::paintEvent(QPaintEvent* )
 {
   // in the moment we don't care and paint the whole bunch
   // we don't care about all the tricks, also.

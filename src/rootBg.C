@@ -36,6 +36,7 @@
 #include "config-kbgndwm.h"
 #include "rootBg.h"
 #include <kglobal.h>
+#include <kstddirs.h>
 
 
 // By default, when you assign a background to your widget, the pixmap has
@@ -211,15 +212,7 @@ QPixmap *RootPixmap::loadWallpaper()
 
   if( !bUseWallpaper ) return 0;
 
-  QString filename;
-
-  if ( wallpaper[0] != '/' )
-    {
-      filename = KApplication::kde_wallpaperdir().copy() + "/";
-      filename += wallpaper;
-    }
-  else
-    filename = wallpaper;
+  QString filename = locate("wallpaper", wallpaper);
 
   KPixmap *wpPixmap = new KPixmap;
 
