@@ -1597,7 +1597,8 @@ void Konsole::setFullScreen(bool on)
       }
     else {
       te->setRim(1);
-      showNormal();
+      if( isFullScreen()) // showNormal() may also do unminimize, unmaximize etc.
+        showNormal();
       updateTitle(); // restore caption of window
       b_fullscreen = false;
 //      KONSOLEDEBUG << "On is false, b_fullscreen is " << b_fullscreen << ". Set to Normal view and set caption." << endl;
