@@ -1,0 +1,21 @@
+[README.utmp]
+
+The utmp support provided with konsole is established
+by a separate program, kwrited. This program is expected
+to be started in startkde and runs as a demon.
+
+kwrited stamps the utmp and pops up when something comes
+in on the device it is lurking on.
+
+You have to have the utempter library installed prior of
+configuring the kdebase package, to make the utmp support
+work.
+
+The utempter library is available at
+ftp://ftp.redhat.com/redhat/redhat-6.0/SRPMS/SRPMS/utempter-0.5-1.src.rpm
+and has some demands. The "utempter" program must be set
+root/setuid and installed in /usr/sbin.
+
+Use who(1) or utmp (included in the utempter distribution)
+to see the entries. Try write(1) or wall(1) to see the 
+whole construction in action.

@@ -70,6 +70,8 @@ private:
   char*          term;
   QStrList       args;
   QString        title;
+
+  int            login_shell;
 };
 
 #endif

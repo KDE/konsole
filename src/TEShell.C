@@ -186,20 +186,26 @@ static void catchChild(int)
 void Shell::doneShell(int status)
 {
 #ifdef HAVE_UTEMPTER
-  removeFromUtmp();
+  removeLineFromUtmp(ttynam,fd);
 #endif   
   if (needGrantPty) chownpty(fd,FALSE);
   emit done(status);
 }
 
+
+const char* Shell::deviceName()
+{
+  return ttynam;
+}
+
 /*!
     start the client program.
 */
-int Shell::run(QStrList & args, const char* term)
+int Shell::run(QStrList & args, const char* term, int login_shell, int addutmp)
 {
   comm_pid = fork();
   if (comm_pid <  0) { fprintf(stderr,"Can't fork\n"); return -1; }
-  if (comm_pid == 0) makeShell(ttynam,args,term);
+  if (comm_pid == 0) makeShell(ttynam,args,term,login_shell,addutmp);
   if (comm_pid >  0) shells.insert(comm_pid,this);
   return 0;
 }
@@ -295,8 +301,7 @@ int Shell::openShell()
 }
 
 //! only used internally. See `run' for interface
-void Shell::makeShell(const char* dev, QStrList & args, 
-	const char* term)
+void Shell::makeShell(const char* dev, QStrList & args, const char* term, int login_shell, int addutmp)
 { int sig; char* t;
 
   if (fd < 0) // no master pty could be opened
@@ -325,9 +330,9 @@ void Shell::makeShell(const char* dev, QStrList & args,
   ioctl(tt, I_PUSH, "ldterm");
 #endif
 
-  // Stamp utmp/wtmp if we have them
+  // Stamp utmp/wtmp if we have and want them
 #ifdef HAVE_UTEMPTER
-  addToUtmp(dev, "", fd);
+  if (addutmp) addToUtmp(dev, "", fd);
 #endif   
 
   //reset signal handlers for child process
@@ -400,13 +405,6 @@ void Shell::makeShell(const char* dev, QStrList & args,
 #   endif        
 #endif
 
-/*
-#if defined(TIOCSPTLCK)
-  int flag = 1;                        // Linux-only security solution:
-  if (ioctl(fd,TIOCSPTLCK,&flag))      // prohibit opening tty from now on
-#endif
-    perror("Warning: The session is insecure.");
-*/
   close(fd);
   
   // drop privileges
@@ -441,10 +439,8 @@ void Shell::makeShell(const char* dev, QStrList & args,
     Create a shell.
     \param _login_shell is a hack. FIXME: remove.
 */
-Shell::Shell(int _login_shell)
+Shell::Shell()
 {
-  login_shell=_login_shell;
-
   fd = openShell();
 
   signal(SIGCHLD,catchChild);

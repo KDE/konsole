@@ -33,11 +33,14 @@ class Shell: public QObject
 Q_OBJECT
 
   public:
-    Shell(int login_shell);
+    Shell();
     ~Shell();
 
   public:
-    int run(QStrList & args, const char* term);
+    const char* deviceName();
+
+  public:
+    int run(QStrList & args, const char* term, int login_shell, int addutmp);
 
   public:
     /*! this is of internal use only. FIXME: make private */
@@ -75,14 +78,13 @@ Q_OBJECT
 
   private:
 
-    void makeShell(const char* dev, QStrList & args, const char* term);
+    void makeShell(const char* dev, QStrList & args, const char* term, int login_shell, int addutmp);
     int  openShell();
 
   private:
 
     int              fd;
     pid_t            comm_pid;
-    int		           login_shell;
     QSocketNotifier* mn;
 
     bool             needGrantPty;

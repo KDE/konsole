@@ -33,7 +33,7 @@ OTHDIR = $(TOPDIR)/other
 INCLUDES =  -I$(INCDIR) $(all_includes)
 
 # you can add here more. This one gets installed 
-bin_PROGRAMS = 	konsole kcmkonsole konsole_grantpty
+bin_PROGRAMS = 	konsole kcmkonsole konsole_grantpty kwrited
 
 noinst_LIBRARIES = libkonsole.a
 
@@ -41,6 +41,10 @@ libkonsole_a_SOURCES = TEWidget.C TEmuVt102.C TEScreen.C TEmulation.C TEShell.C
 # libkonsole_a_LDFLAGS =  -version-info `expr $(VERSION) + $(SUBVERS)`:$(RELEASE):$(SUBVERS)
                        
 # Which sources should be compiled for konsole.
+
+kwrited_SOURCES	= kwrited.C
+kwrited_LDADD   = libkonsole.a $(LIB_KIMGIO) $(LIB_KDEUI) $(LIBUTEMPTER)
+kwrited_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 konsole_SOURCES	= main.C schema.C session.C rootBg.C
 konsole_LDADD   = libkonsole.a $(LIB_KIMGIO) $(LIB_KDEUI) $(LIBUTEMPTER)
@@ -65,7 +69,7 @@ install-exec-local:
 
 # just to make sure, automake makes them 
 METASOURCES =TEWidget.moc TEmuVt102.moc session.moc main.moc \
-	TEmulation.moc TEShell.moc kcmkonsole.moc
+	TEmulation.moc TEShell.moc kcmkonsole.moc kwrited.moc
 
 META_INCLUDES = $(srcdir)/../include
 

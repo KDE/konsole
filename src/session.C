@@ -12,9 +12,9 @@
     of the abilities of the framework - multible sessions.
 */
 
-TESession::TESession(KTMainWindow* main, TEWidget* te, QStrList & _args, const char* term, int login_session) : schema_no(0), font_no(3), args(_args)
+TESession::TESession(KTMainWindow* main, TEWidget* te, QStrList & _args, const char* term, int login_session) : schema_no(0), font_no(3), args(_args), login_shell(login_session)
 {
-  sh = new Shell(login_session);
+  sh = new Shell();
   em = new VT102Emulation(te,term);
 
   this->term = strdup(term);
@@ -42,7 +42,7 @@ TESession::TESession(KTMainWindow* main, TEWidget* te, QStrList & _args, const c
 
 void TESession::run()
 {
-  sh->run(args,term);
+  sh->run(args,term,login_shell,FALSE);
 }
 
 void TESession::kill(int signal)
