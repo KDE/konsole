@@ -524,7 +524,7 @@ void Konsole::makeGUI()
 
    // Scrollbar
    selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), 0, this,
-                                       SLOT(slotSelectScrollbar()), actions );
+                                       SLOT(slotSelectScrollbar()), actions, "scrollbar" );
    QStringList scrollitems;
    scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
    selectScrollbar->setItems(scrollitems);
@@ -537,7 +537,7 @@ void Konsole::makeGUI()
 
    // Select Bell
    selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), 0 , this,
-                                  SLOT(slotSelectBell()), actions);
+                                  SLOT(slotSelectBell()), actions, "bell");
    QStringList bellitems;
    bellitems << i18n("&None")
              << i18n("&System Notification")
@@ -547,7 +547,7 @@ void Konsole::makeGUI()
 
    // Select font
    selectFont = new KonsoleFontSelectAction( i18n( "&Font" ),
-          SmallIconSet( "text" ), 0, this, SLOT(slotSelectFont()), actions);
+          SmallIconSet( "text" ), 0, this, SLOT(slotSelectFont()), actions, "font");
    QStringList it;
    it << i18n("&Normal")
       << i18n("&Tiny")
@@ -563,14 +563,17 @@ void Konsole::makeGUI()
    selectFont->setItems(it);
    selectFont->plug(m_options);
 
-   m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
+   
+   if (kapp->authorizeKAction("keyboard"))
+      m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
 
    // Schema
-   m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Sch&ema" ), m_schema);
+   if (kapp->authorizeKAction("schema"))
+      m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Sch&ema" ), m_schema);
 
    // Select size
    selectSize = new KonsoleFontSelectAction(i18n("S&ize"), 0, this,
-                                  SLOT(slotSelectSize()), actions);
+                                  SLOT(slotSelectSize()), actions, "size");
    QStringList sizeitems;
    sizeitems << i18n("40x15 (&Small)")
       << i18n("80x24 (&VT100)")
