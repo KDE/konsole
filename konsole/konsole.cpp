@@ -1970,7 +1970,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
 
      if (co) {
         co->setDesktopGroup();
-        QString cmd = co->readEntry("Exec");
+        QString cmd = co->readPathEntry("Exec");
 
         if (!cmd.isEmpty()) {
           cmdArgs.append("-c");
@@ -2380,7 +2380,7 @@ void Konsole::addSessionCommand(const QString &path)
   QString txt = co->readEntry("Name");
 
   // try to locate the binary
-  QString exec= co->readEntry("Exec");
+  QString exec= co->readPathEntry("Exec");
   if (exec.startsWith("su -c \'")) {
      exec = exec.mid(7,exec.length()-8);
   }
