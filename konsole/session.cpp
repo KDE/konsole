@@ -1,5 +1,6 @@
 #include "session.h"
 #include <kdebug.h>
+#include <dcopclient.h>
 
 #include <stdlib.h>
 #include <qfile.h>
@@ -20,17 +21,20 @@
     of the abilities of the framework - multible sessions.
 */
 
-TESession::TESession(KMainWindow* main, TEWidget* te, const QString &_pgm, QStrList & _args, const QString &_term)
-   : monitorActivity(false)
+TESession::TESession(KMainWindow* main, TEWidget* _te, const QString &_pgm, QStrList & _args, const QString &_term,const QString &_sessionId)
+   : DCOPObject( _sessionId.latin1() )
+   , monitorActivity(false)
    , monitorSilence(false)
    , masterMode(false)
    , schema_no(0)
    , font_no(3)
+   , sessionId(_sessionId)
    , pgm(_pgm)
    , args(_args)
 {
   //kdDebug(1211)<<"TESession ctor() new TEPty"<<endl;
   sh = new TEPty();
+  te = _te;
   //kdDebug(1211)<<"TESession ctor() new TEmuVt102"<<endl;
   em = new TEmuVt102(te);
 
@@ -51,6 +55,10 @@ TESession::TESession(KMainWindow* main, TEWidget* te, const QString &_pgm, QStrL
   connect( em,SIGNAL(sndBlock(const char*,int)),sh,SLOT(send_bytes(const char*,int)) );
   connect( em,SIGNAL(changeColumns(int)),main,SLOT(changeColumns(int)) );
 
+  connect( this, SIGNAL(clearAllListenToKeyPress()),main,SLOT(clearAllListenToKeyPress()) );
+  connect( this, SIGNAL(restoreAllListenToKeyPress()),main,SLOT(restoreAllListenToKeyPress()) );
+  connect( this, SIGNAL(renameSession(TESession*,const QString&)),main,SLOT(slotRenameSession(TESession*, const QString&)) );
+
   connect( em, SIGNAL( changeTitle( int, const QString & ) ),
            this, SLOT( setUserTitle( int, const QString & ) ) );
 
@@ -69,7 +77,11 @@ void TESession::run()
 {
   //kdDebug(1211) << "Running the session!" << pgm << "\n";
   //pgm = "pine";
-  sh->run(QFile::encodeName(pgm),args,term.latin1(),true);
+  QString appId=kapp->dcopClient()->appId();
+  sh->run(QFile::encodeName(pgm),args,term.latin1(),true,
+          ("DCOPRef("+appId+",konsole)").latin1(),
+          ("DCOPRef("+appId+","+sessionId+")").latin1());
+
   sh->setWriteable(false);  // We are reachable via kwrited.
 }
 
@@ -111,9 +123,35 @@ void TESession::notifySessionState(int state)
   emit notifySessionState(this, state);
 }
 
-void TESession::kill(int signal)
+void TESession::sendSignal(int signal)
 {
   sh->kill(signal);
+}
+
+void TESession::closeSession()
+{
+  sendSignal(SIGHUP);
+}
+
+void TESession::feedSession(const QString &text)
+{
+  emit clearAllListenToKeyPress();
+  setListenToKeyPress(true);
+  te->emitText(text);
+  setListenToKeyPress(false);
+  emit restoreAllListenToKeyPress();
+}
+
+void TESession::sendSession(const QString &text)
+{
+  QString newtext=text;
+  newtext.append("\r");
+  feedSession(newtext);
+}
+
+void TESession::renameSession(const QString &name)
+{
+  emit renameSession(this,name);
 }
 
 TESession::~TESession()
@@ -176,6 +214,11 @@ int TESession::fontNo()
 const QString & TESession::Term()
 {
   return term;
+}
+
+const QString & TESession::SessionId()
+{
+  return sessionId;
 }
 
 void TESession::setSchemaNo(int sn)
@@ -267,9 +310,9 @@ void TESession::setMonitorSilence(bool _monitor)
     monitorTimer->stop();
 }
 
-#include "session.moc"
-
 void TESession::setMasterMode(bool _master)
 {
   masterMode=_master;
 }
+
+#include "session.moc"

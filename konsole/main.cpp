@@ -328,7 +328,7 @@ int main(int argc, char* argv[])
           m->initSessionKeyTab(sessionconfig->readEntry(key));
           counter++;
         }
-        m->setCurrentSession( sessionconfig->readNumEntry("ActiveSession",0)+1 );
+        m->activateSession( sessionconfig->readNumEntry("ActiveSession",0)+1 );
         m->setDefaultSession( sessionconfig->readEntry("DefaultSession","shell.desktop") );
 
         ksm->konsole = m;

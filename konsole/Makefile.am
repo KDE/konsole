@@ -25,7 +25,8 @@ libkonsolepart_la_SOURCES = TEPty.cpp BlockArray.cpp konsole_part.cpp \
 	TEmulation.cpp \
 	TEHistory.cpp \
 	keytrans.cpp \
-	konsoleiface.skel
+	konsoleiface.skel \
+        sessioniface.skel
 
 libkonsolepart_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN)
 libkonsolepart_la_LIBADD = $(LIB_KPARTS) $(LIBUTIL) @XTESTLIB@
@@ -47,7 +48,7 @@ konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
 
 # konsole executable - has all the sources, doesn't link kparts, saves startup time
 konsole_SOURCES	= TEPty.cpp BlockArray.cpp main.cpp konsole.cpp schema.cpp session.cpp TEWidget.cpp TEmuVt102.cpp \
-                  TEScreen.cpp TEmulation.cpp TEHistory.cpp keytrans.cpp konsoleiface.skel
+                  TEScreen.cpp TEmulation.cpp TEHistory.cpp keytrans.cpp konsoleiface.skel sessioniface.skel
 konsole_LDADD = $(LIB_KDEUI) $(LIB_KSYCOCA) $(LIBUTIL) $(LIB_KFILE) @XTESTLIB@
 konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 

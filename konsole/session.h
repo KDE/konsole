@@ -21,17 +21,17 @@
 #include "TEWidget.h"
 #include "TEmuVt102.h"
 
-class TESession : public QObject
+#include "sessioniface.h"
+
+class TESession : public QObject, virtual public SessionIface
 { Q_OBJECT
 
 public:
 
   TESession(KMainWindow* main, TEWidget* w,
             const QString &pgm, QStrList & _args,
-	    const QString &term);
+	    const QString &term, const QString &sessionId="session-1");
   ~TESession();
-
-public:
 
   void        setConnect(bool r);  // calls setListenToKeyPress(r)
   void        setListenToKeyPress(bool l);
@@ -43,6 +43,7 @@ public:
   int schemaNo();
   int fontNo();
   const QString& Term();
+  const QString& SessionId();
   const QString& Title();
   const QString& IconName();
   const QString& IconText();
@@ -65,7 +66,13 @@ public:
   void setTitle(const QString& _title);
   void setIconName(const QString& _iconName);
   void setIconText(const QString& _iconText);
-  void kill(int signal);
+  void sendSignal(int signal);
+
+  // Additional functions for DCOP
+  void closeSession();
+  void feedSession(const QString &text);
+  void sendSession(const QString &text);
+  void renameSession(const QString &name);
 
 public slots:
 
@@ -78,6 +85,10 @@ signals:
   void done(TESession*, int);
   void updateTitle();
   void notifySessionState(TESession* session, int state);
+
+  void clearAllListenToKeyPress();
+  void restoreAllListenToKeyPress();
+  void renameSession(TESession* ses, const QString &name);
 
 private slots:
   void setUserTitle( int, const QString &caption );
@@ -100,6 +111,7 @@ private:
   // use a persistent reference instead.
   int            schema_no;
   int            font_no;
+
   QString        title;
   QString        userTitle;
   QString        iconName;
@@ -109,6 +121,7 @@ private:
   QStrList       args;
 
   QString        term;
+  QString        sessionId;
 };
 
 #endif

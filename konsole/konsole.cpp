@@ -211,6 +211,7 @@ DCOPObject( "konsole" )
 ,wallpaperSource(0)
 ,sendRMBclickAtX(0)
 ,sendRMBclickAtY(0)
+,sessionIdCounter(0)
 ,s_kconfigSchema("")
 ,b_scroll(histon)
 ,b_fullscreen(false)
@@ -291,28 +292,7 @@ DCOPObject( "konsole" )
   // activate and run first session //////////////////////////////////////////
   // FIXME: this slows it down if --type is given, but prevents a crash (malte)
   //KONSOLEDEBUG << "Konsole pgm: " << _program << endl;
-  se = newSession(co, _program, _args, _term, QString::null, _title);
-  if (b_histEnabled && m_histSize)
-    se->setHistory(HistoryTypeBuffer(m_histSize));
-  else if (b_histEnabled && !m_histSize)
-    se->setHistory(HistoryTypeFile());
-  else
-    se->setHistory(HistoryTypeNone());
-
-  //KONSOLEDEBUG<<"Konsole ctor(): runSession()"<<endl;
-  te->currentSession = se;
-  se->setConnect(TRUE);
-
-  updateTitle();
-
-  //QTimer::singleShot(1,this,SLOT(allowPrevNext())); // hack, hack, hack
-  //seems to work, aleXXX
-  connect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
-  connect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
-  connect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
-  connect( se->getEmulation(),SIGNAL(activateMenu()), this,SLOT(activateMenu()) );
-  connect( se->getEmulation(),SIGNAL(moveSessionLeft()), this,SLOT(moveSessionLeft()) );
-  connect( se->getEmulation(),SIGNAL(moveSessionRight()), this,SLOT(moveSessionRight()) );
+  newSession(co, _program, _args, _term, QString::null, _title);
 
   //KONSOLEDEBUG<<"Konsole ctor() ends "<<time.elapsed()<<" msecs elapsed"<<endl;
   //KONSOLEDEBUG<<"Konsole ctor(): done"<<endl;
@@ -320,8 +300,8 @@ DCOPObject( "konsole" )
   // Register with DCOP
   if ( !kapp->dcopClient()->isRegistered() ) {
     kapp->dcopClient()->registerAs( "konsole" );
-    kapp->dcopClient()->setDefaultObject( objId() );
   }
+  kapp->dcopClient()->setDefaultObject( "konsole" );
 }
 
 Konsole::~Konsole()
@@ -381,7 +361,7 @@ void Konsole::makeGUI()
    m_signals->insertItem( i18n( "&Interrupt Task" ) + " (INT)",   2);
    m_signals->insertItem( i18n( "&Terminate Task" ) + " (TERM)", 15);
    m_signals->insertItem( i18n( "&Kill Task" )      + " (KILL)",  9);
-   connect(m_signals, SIGNAL(activated(int)), SLOT(sendCurrentSessionSignal(int)));
+   connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
 
    // Edit Menu ----------------------------------------------------------------
    KAction *copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0,
@@ -739,7 +719,7 @@ bool Konsole::queryClose()
         sessions.first();
         while(sessions.current())
         {
-            sessions.current()->kill(SIGHUP);
+            sessions.current()->sendSignal(SIGHUP);
             sessions.next();
         }
         return false;
@@ -1373,6 +1353,21 @@ void Konsole::setFullScreen(bool on)
 //         make the drawEvent.
 //       - font, background image and color palette should be set in one go.
 
+void Konsole::clearAllListenToKeyPress()
+{
+  for (TESession *ses = sessions.first(); ses; ses = sessions.next())
+    ses->setListenToKeyPress(false);
+}
+ 
+void Konsole::restoreAllListenToKeyPress()
+{
+  if(se->isMasterMode())
+    for (TESession *ses = sessions.first(); ses; ses = sessions.next())
+      ses->setListenToKeyPress(TRUE);
+  else
+    se->setListenToKeyPress(TRUE);
+}
+
 void Konsole::feedAllSessions(const QString &text)
 {
   for (TESession *ses = sessions.first(); ses; ses = sessions.next())
@@ -1386,11 +1381,6 @@ void Konsole::feedAllSessions(const QString &text)
   }
 }
 
-void Konsole::feedCurrentSession(const QString &text)
-{
-  if (te) te->emitText(text);
-}
-
 void Konsole::sendAllSessions(const QString &text)
 {
   QString newtext=text;
@@ -1398,16 +1388,9 @@ void Konsole::sendAllSessions(const QString &text)
   feedAllSessions(newtext);
 }
 
-void Konsole::sendCurrentSession(const QString &text)
+void Konsole::sendSignal(int sn)
 {
-  QString newtext=text;
-  newtext.append("\r");
-  feedCurrentSession(newtext);
-}
-
-void Konsole::sendCurrentSessionSignal(int sn)
-{
-  if (se) se->kill(sn);
+  if (se) se->sendSignal(sn);
 }
 
 void Konsole::runSession(TESession* s)
@@ -1474,27 +1457,40 @@ void Konsole::addSession(TESession* s)
   session2button.insert(s,ktb);
 }
 
-int Konsole::currentSession()
+QString Konsole::currentSession()
 {
-  uint counter=0;
-  uint active=0;
-
-  sessions.first();
-  while(counter < sessions.count())
-  {
-    if (sessions.current()==se)
-      active=counter;
-      sessions.next();
-      counter++;
-  }
-  return active+1;
+  return se->SessionId();
 }
 
-void Konsole::setCurrentSession(const int sessionNo)
+QString Konsole::sessionId(const int position)
 {
-  if (sessionNo<=0 || sessionNo>sessions.count())
+  if (position<=0 || position>sessions.count())
+    return "";
+  
+  return sessions.at(position-1)->SessionId();
+}
+
+void Konsole::activateSession(const int position)
+{
+  if (position<=0 || position>sessions.count())
     return;
-  activateSession( sessions.at(sessionNo-1) );
+  activateSession( sessions.at(position-1) );
+}
+
+void Konsole::activateSession(const QString &sessionId)
+{
+  TESession* activate=NULL;
+
+  sessions.first();
+  while(sessions.current())
+  {
+    if (sessions.current()->SessionId()==sessionId)
+      activate=sessions.current();
+    sessions.next();
+  }
+
+  if (activate)
+    activateSession( activate );
 }
 
 /**
@@ -1599,10 +1595,10 @@ void Konsole::newSession(const QString &pgm, const QStrList &args, const QString
   newSession(co, pgm, args, term, icon);
 }
 
-void Konsole::newSession()
+QString Konsole::newSession()
 {
   KSimpleConfig *co = defaultSession();
-  newSession(co, QString::null, QStrList());
+  return newSession(co, QString::null, QStrList());
 }
 
 void Konsole::newSession(int i)
@@ -1620,17 +1616,17 @@ void Konsole::newSessionToolbar(int i)
   }
 }
 
-void Konsole::newSession(const QString &type)
+QString Konsole::newSession(const QString &type)
 {
   KSimpleConfig *co;
   if (type.isEmpty())
      co = defaultSession();
   else
      co = new KSimpleConfig(locate("appdata", type + ".desktop"), true /* read only */);
-  newSession(co);
+  return newSession(co);
 }
 
-TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &args, const QString &_term,const QString &_icon,const QString &_title)
+QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &args, const QString &_term,const QString &_icon,const QString &_title)
 {
   QString emu = "xterm";
   QString icon = "openterm";
@@ -1683,7 +1679,8 @@ TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrLis
       schema=(ColorSchema*)colors->at(0);  //the default one
   int schmno = schema->numb();
 
-  TESession* s = new TESession(this,te, QFile::encodeName(program),cmdArgs,emu);
+  QString sessionId="session-"+QString::number(++sessionIdCounter);
+  TESession* s = new TESession(this,te, QFile::encodeName(program),cmdArgs,emu,sessionId);
   connect( s,SIGNAL(done(TESession*,int)),
            this,SLOT(doneSession(TESession*,int)) );
   connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
@@ -1711,13 +1708,14 @@ TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrLis
 
   addSession(s);
   runSession(s); // activate and run
-  return s;
+
+  return sessionId;
 }
 
 void Konsole::closeCurrentSession()
 {
   if( sessions.count()>1 )
-    se->kill(SIGHUP);
+    se->sendSignal(SIGHUP);
   else
     emit close();
 }
@@ -2105,14 +2103,14 @@ void Konsole::slotRenameSession(int) {
   slotRenameSession();
 }
 
-void Konsole::renameCurrentSession(const QString &name)
+void Konsole::slotRenameSession(TESession* ses, const QString &name)
 {
-  KRadioAction *ra = session2action.find(se);
-  se->setTitle(name);
+  KRadioAction *ra = session2action.find(ses);
+  ses->setTitle(name);
   ra->setText(name);
-  ra->setIcon( se->IconName() ); // I don't know why it is needed here
-  if(se->isMasterMode())
-    session2button.find(se)->setIcon("remote");
+  ra->setIcon( ses->IconName() ); // I don't know why it is needed here
+  if(ses->isMasterMode())
+    session2button.find(ses)->setIcon("remote");
   toolBar()->updateRects();
   updateTitle();
 }

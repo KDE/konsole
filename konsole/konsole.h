@@ -69,25 +69,24 @@ public:
   void newSession(const QString &program, const QStrList &args, const QString &term, const QString &icon);
 
   void run();
+  void activateSession(const int position);
   void setDefaultSession(const QString &filename);
 
   // Additional functions for DCOP
-  int currentSession();
-
   int sessionCount() { return sessions.count(); }
-  void setCurrentSession(const int session);
 
-  void newSession(const QString &type);
-  void renameCurrentSession(const QString &name);
+  QString currentSession();
+  QString newSession(const QString &type);
+  QString sessionId(const int position);
+
+  void activateSession(const QString& sessionId);
   void feedAllSessions(const QString &text);
-  void feedCurrentSession(const QString &text);
   void sendAllSessions(const QString &text);
-  void sendCurrentSession(const QString &text);
 
 public slots:
 
   void makeGUI();
-  void newSession();
+  QString newSession();
 
 protected:
 
@@ -128,12 +127,13 @@ private slots:
   void moveSessionRight();
   void allowPrevNext();
   void setSchema(int n);
-  void sendCurrentSessionSignal(int n);
+  void sendSignal(int n);
   void slotToggleToolbar();
   void slotToggleMenubar();
   void slotToggleFrame();
   void slotRenameSession();
   void slotRenameSession(int);
+  void slotRenameSession(TESession* ses, const QString &name);
   void slotSendRMBclick();
   void slotToggleMonitor();
   void slotToggleMasterMode();
@@ -151,9 +151,12 @@ private slots:
   void slotWarnQuit();
   void loadScreenSessions();
 
+  void clearAllListenToKeyPress();
+  void restoreAllListenToKeyPress();
+
 private:
   KSimpleConfig *defaultSession();
-  TESession *newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(), const QString &_term = QString::null, const QString &_icon = QString::null, const QString &_title = QString::null);
+  QString newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(), const QString &_term = QString::null, const QString &_icon = QString::null, const QString &_title = QString::null);
   void readProperties(KConfig *config, const QString &schema);
   void applySettingsToGUI();
   void makeBasicGUI();
@@ -239,6 +242,8 @@ private:
   int         wallpaperSource;
   int         sendRMBclickAtX;
   int         sendRMBclickAtY;
+  int         sessionIdCounter;
+
   QString     s_schema;
   QString     s_kconfigSchema;
   QString     s_word_seps;			// characters that are considered part of a word

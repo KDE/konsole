@@ -44,7 +44,8 @@ Q_OBJECT
         the necessary connections to the signals and slots of the
         instance before starting the execution of the client.
     */
-    int run(const char* pgm, QStrList & args, const char* term, int addutmp);
+    int run(const char* pgm, QStrList & args, const char* term, int addutmp,
+            const char* konsole_dcop = "", const char* konsole_dcop_session = "");
     void setWriteable(bool writeable);
 
   public slots:
@@ -99,8 +100,12 @@ Q_OBJECT
     char ptynam[50]; // "/dev/ptyxx" | "/dev/ptmx"
     char ttynam[50]; // "/dev/ttyxx" | "/dev/pts/########..."
     const char *pgm;
-    const char *term;
     int addutmp;
+
+    // environment variables
+    const char *term;
+    const char *konsole_dcop;
+    const char *konsole_dcop_session;
 
     struct SendJob {
       SendJob() {}

@@ -272,12 +272,15 @@ const char* TEPty::deviceName()
 /*!
     start the client program.
 */
-int TEPty::run(const char* _pgm, QStrList & _args, const char* _term, int _addutmp)
+int TEPty::run(const char* _pgm, QStrList & _args, const char* _term, int _addutmp,
+               const char* _konsole_dcop, const char* _konsole_dcop_session)
 {
   arguments = _args;
   arguments.prepend(_pgm);
 //  kdDebug() << "pgm = " << _pgm << endl;
   term = _term;
+  konsole_dcop = _konsole_dcop;
+  konsole_dcop_session = _konsole_dcop_session;
   addutmp = _addutmp;
 
   if (!start(NotifyOnExit, (Communication) (Stdout | NoRead)))
@@ -590,6 +593,8 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
 
   // propagate emulation
   if (term && term[0]) setenv("TERM",term,1);
+  if (konsole_dcop && konsole_dcop[0]) setenv("KONSOLE_DCOP",konsole_dcop,1);
+  if (konsole_dcop_session && konsole_dcop_session[0]) setenv("KONSOLE_DCOP_SESSION",konsole_dcop_session,1);
 
 //  kdDebug() << "In TEPty.  args.count() is  " << args.count() << endl;
 //  kdDebug() << "In TEPty.  i is " << i << endl;
