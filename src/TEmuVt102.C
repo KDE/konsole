@@ -129,17 +129,17 @@ void VT102Emulation::setColumns(int columns)
 
    The tokens are defined below. They are:
 
-   - CHR        - Printable characters     (32..255)
-   - CTL        - Control characters       (0..31 but ESC (= 27))
-   - ESC        - Escape codes of the form <ESC><CHR but `[()+*#'>
-   - ESC_DE     - Escape codes of the form <ESC><any of `()+*#'>
+   - CHR        - Printable characters     (32..255 but DEL (=127))
+   - CTL        - Control characters       (0..31 but ESC (= 27), DEL)
+   - ESC        - Escape codes of the form <ESC><CHR but `[]()+*#'>
+   - ESC_DE     - Escape codes of the form <ESC><any of `()+*#'> C
    - CSI_PN     - Escape codes of the form <ESC>'['     {Pn} ';' {Pn} C
    - CSI_PS     - Escape codes of the form <ESC>'['     {Pn} ';' ...  C
    - CSI_PR     - Escape codes of the form <ESC>'[' '?' {Pn} ';' ...  C
    - VT52       - VT52 escape codes
                   - <ESC><Chr>
-		  - <ESC>'Y'{Pc}{Pc}
-   - XTE_HA     - Xterm hacks              <ESC>`[' {Pn} `;' {Ps} <BEL>
+                  - <ESC>'Y'{Pc}{Pc}
+   - XTE_HA     - Xterm hacks              <ESC>`]' {Pn} `;' {Text} <BEL>
                   note that this is handled differently
 
    The last two forms allow list of arguments. Since the elements of
@@ -224,8 +224,7 @@ void VT102Emulation::tau( int code, int p, int q )
     case TY_ESC___('>'      ) :        resetMode      (MODE_AppKeyPad); break;
     case TY_ESC___('<'      ) :          setMode      (MODE_Ansi     ); break; //VT100
 
-    case TY_ESC_CS(         ) : screen[0]->setCharset     (p-'(',   q);
-                                screen[1]->setCharset     (p-'(',   q); break;
+    case TY_ESC_CS(         ) :      setCharset           (p-'(',   q); break; //VT100
 
     case TY_ESC_DE('3'      ) : /* IGNORED: double high, top half    */ break;
     case TY_ESC_DE('4'      ) : /* IGNORED: double high, bottom half */ break;
@@ -349,10 +348,8 @@ void VT102Emulation::tau( int code, int p, int q )
     case TY_VT52__('B'      ) : scr->cursorDown           (         1); break; //VT52
     case TY_VT52__('C'      ) : scr->cursorRight          (         1); break; //VT52
     case TY_VT52__('D'      ) : scr->cursorLeft           (         1); break; //VT52
-    case TY_VT52__('F'      ) : scr->setCharset           (0,     '0');//FIXME
-                                scr->useCharset           (0         ); break; //VT52
-    case TY_VT52__('G'      ) : scr->setCharset           (0,     'B');//FIXME
-                                scr->useCharset           (0         ); break; //VT52
+    case TY_VT52__('F'      ) : scr->setAndUseCharset     (0,     '0'); break; //VT52
+    case TY_VT52__('G'      ) : scr->setAndUseCharset     (0,     'B'); break; //VT52
     case TY_VT52__('H'      ) : scr->setCursorYX          (1,1       ); break; //VT52
     case TY_VT52__('I'      ) : scr->reverseIndex         (          ); break; //VT52
     case TY_VT52__('J'      ) : scr->clearToEndOfScreen   (          ); break; //VT52
@@ -669,6 +666,12 @@ void VT102Emulation::setConnect(bool c)
     else
       resetMode(MODE_Mouse1000);
   }
+}
+
+void VT102Emulation::setCharset(int n, int cs)
+{
+  screen[0]->setCharset(n, cs);
+  screen[1]->setCharset(n, cs);
 }
 
 /* ------------------------------------------------------------------------- */

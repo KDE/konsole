@@ -806,6 +806,15 @@ void TEScreen::setCharset(int n, int cs)
 /*!
 */
 
+void TEScreen::setAndUseCharset(int n, int cs)
+{
+  charset[n&3] = cs;
+  useCharset(n&3);
+}
+
+/*!
+*/
+
 void TEScreen::useCharset(int n)
 {
   cu_cs   = n&3;

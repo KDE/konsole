@@ -127,8 +127,9 @@ public: // these are all `Screen' operations
     //
     void ShowCharacter(unsigned char c);
     //
-    void setCharset(int n, int cs); //FIXME: evtl. move to emulation
-    void useCharset(int n);         //FIXME: evtl. move to emulation
+    void setCharset(int n, int cs);       //FIXME: evtl. move to emulation
+    void setAndUseCharset(int n, int cs); //FIXME: evtl. move to emulation
+    void useCharset(int n);               //FIXME: evtl. move to emulation
     //
     void resizeImage(int new_lines, int new_columns);
     //

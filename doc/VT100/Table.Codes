@@ -442,21 +442,37 @@ DECCOLM.text
   causes a 132 column screen to be used.  See \ref:MODES,
   \ref:RM, and \ref:SM.
 
-DECDHL.head Double Height Line
-DECDHL.attr VT100 DEC Command
-DECDHL.code ESC # {Hn}
-DECDHL.text
-  These sequences cause the line containing the cursor to become the top
-  or bottom half of a double-height, double width line.  The sequences
-  should be used in pairs on adjacent lines with each line containing the
-  same character string.  If the line was single width single height, all
+DECDHLT.head Double Height Line (Top)
+DECDHLT.attr VT100 DEC Command
+DECDHLT.code ESC # 3
+DECDHLT.text
+  This sequence cause the line containing the cursor to become the top
+  half of a double-height, double width line.
+  If the line was single width single height, all
   characters to the right of the center of the screen will be lost.  The
   cursor remains over the same character position, unless it would be to
   the right of the right margin, in which case it is moved to the right
   margin.
-DECDHL.table.Pn
-  3|Top    Half
-  4|Bottom Half
+  .
+  \ref:DECDHLB and \ref:DECDHLT
+  should be used in pairs on adjacent lines with each line containing the
+  same character string.
+
+DECDHLB.head Double Height Line (Bottom)
+DECDHLB.attr VT100 DEC Command
+DECDHLB.code ESC # 4
+DECDHLB.text
+  This sequence cause the line containing the cursor to become the
+  bottom half of a double-height, double width line.
+  If the line was single width single height, all
+  characters to the right of the center of the screen will be lost.  The
+  cursor remains over the same character position, unless it would be to
+  the right of the right margin, in which case it is moved to the right
+  margin.
+  .
+  \ref:DECDHLB and \ref:DECDHLT
+  should be used in pairs on adjacent lines with each line containing the
+  same character string.
 
 DECDWL.head Double Width Line
 DECDWL.attr VT100 DEC Command

@@ -7,7 +7,6 @@
 /* Copyright (c) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>            */
 /*                                                                            */
 /* This file is part of Konsole - an X terminal for KDE                       */
-/*                                                                            */
 /* -------------------------------------------------------------------------- */
 
 /*! /class Shell (FIXME: rename to TEpty or so)
@@ -26,7 +25,7 @@
 
     The pty is for the Shell while the program gets the tty.
 
-    There's a lot of sinister ioctl(2), signal(2) and process group id magic
+    There's a sinister ioctl(2), signal(2) and job control stuff
     nessesary to make everything work as it should. (/sa makeShell)
 */
 
@@ -106,8 +105,7 @@ void Shell::makeShell(const char* dev, char* argv[],
   int tt = open(dev, O_RDWR);
    
   //reset signal handlers for child process
-  for (sig = 1; sig < NSIG; sig++)
-      signal(sig,SIG_DFL);
+  for (sig = 1; sig < NSIG; sig++) signal(sig,SIG_DFL);
  
   // Don't know why, but his is vital for SIGHUP to find the child.
   // Could be, we get rid of the controling terminal by this.
@@ -118,6 +116,11 @@ void Shell::makeShell(const char* dev, char* argv[],
   dup2(tt,fileno(stderr));
   
   if (tt > 2) close(tt);
+
+  // Setup job control
+
+  // "Here are dragons."
+  //   (Ancient world map)
   
   if (setsid() < 0) perror("failed to set process group"); // (vital for bash)
 
@@ -131,14 +134,13 @@ void Shell::makeShell(const char* dev, char* argv[],
   close(open(dev, O_WRONLY, 0));       // clients (bash,vi). Because bash
   setpgid(0,0);                        // heals this, use '-e' to test it.
   
-  setuid(getuid()); setgid(getgid());  // drop privileges
+  // drop privileges
+  setuid(getuid()); setgid(getgid());
 
-  if (term && term[0]) 
-  {
-//  putenv((QString("TERM=") + term).data()); // export TERM=term
-    setenv("TERM",term,1); // this is not available with Solaris
-  }
+  // propagate emulation
+  if (term && term[0]) setenv("TERM",term,1);
 
+  // setup for login shells
   f = argv[0];
   if ( login_shell )                   // see sh(1)
   {
@@ -147,6 +149,8 @@ void Shell::makeShell(const char* dev, char* argv[],
     *t = '-';
     argv[0] = t;
   }
+
+  // finally, pass to the new program
   execvp(f, argv);
   perror("exec failed");
   exit(1);                             // control should never come here.

@@ -65,11 +65,13 @@ public:
   void saveMode   (int m);
   void restoreMode(int m);
 
+  void setCharset(int n, int cs); //FIXME: experimental
+
   void setConnect(bool r);
 
-  void setColumns(int columns); //FIXME: experimental
+  void setColumns(int columns);   //FIXME: experimental
 
-  void NewLine    ();        //FIXME: evtl. move to TEmulation
+  void NewLine    ();             //FIXME: evtl. move to TEmulation
 
 private:
 

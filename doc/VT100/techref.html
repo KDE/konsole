@@ -130,30 +130,6 @@ Parts of the terminal description
 <h2>
 <table width=100%>
 <tr><td align=center bgcolor=#d0d0d0></td></tr>
-<tr><td align=center bgcolor=#d0d0d0>Control Characters</td></tr>
-<tr><td align=center bgcolor=#d0d0d0></td></tr>
-</table>
-</h2>
-
-The control characters recognized by the VT100 are listed below.  All
-other control characters cause no action to be taken.
-<p>
-Control characters (codes 0x00 - 0x1f inclusive) are specifically excluded
-from the control sequence syntax, but may be embedded within a control
-sequence.  Embedded control characters are executed as soon as they are
-encountered by the VT100.  The processing of the control sequence then
-continues with the next character recieved.  The exceptions are:
-if the <a href=#ESC>ESC</a> character occurs, the current control sequence
-is aborted, and a new one commences beginning with the <a href=#ESC>ESC</a>
-just recieved.  If the character <a href=#CAN>CAN</a> (0x0c) or the
-character <a href=#SUB>SUB</a> (0x0e) occurs,
-the current control sequence is aborted.  The ability to embed control
-characters allows the synchronization characters XON and XOFF to be
-interpreted properly without affecting the control sequence.
-<p>
-<h2>
-<table width=100%>
-<tr><td align=center bgcolor=#d0d0d0></td></tr>
 <tr><td align=center bgcolor=#d0d0d0>Control Sequences</td></tr>
 <tr><td align=center bgcolor=#d0d0d0></td></tr>
 </table>
@@ -168,36 +144,75 @@ Refering both to their origin and form, one can group the overall encoding
 schemes as follows:
 <p>
 <table>
-<tr><td bgcolor=#d0d0d0>Pattern</td><td bgcolor=#d0d0d0>Scope</td><td bgcolor=#d0d0d0>Comment</td></tr>
-<tr><td>Ascii Printable Characters</td><td>ASCII ECMA</td>
+<tr><td width=20% bgcolor=#d0d0d0>Name</td><td width=20% bgcolor=#d0d0d0>Pattern</td><td bgcolor=#d0d0d0>Scope</td><td bgcolor=#d0d0d0>Comment</td></tr>
+<tr><td>Printable Ascii Characters</td><td>32..126</td><td>ASCII ECMA</td>
   <td>This is the most original pattern of all. The characters to be
       displayed are passed over the chanel and are interpreted by the
       terminal (emulation) as instructions to display the corresponding
-      glyph of the ascii character set.</td></tr>
-<tr><td>Ascii Control Characters</td><td>ASCII ECMA</td>
+      glyph of the ascii character set. Contempory emulations include the
+      upper half (128..255) of the extentions to the national ascii character
+      sets, also.</td></tr>
+<tr><td>Ascii Control Characters</td><td>0..26,28..31,127</td><td>ASCII ECMA</td>
   <td>Ascii defines some non-printable, but format effecting characters, too.
       Depending on the emulation, at least some of them are given a meaning.
-      The typical implemented ones are those that are handled by a teletype
+      The typically implemented ones are those that are handled by a teletype
       like device.</td></tr>
-<tr><td>Simple Escape Sequence</td><td>ECMA</td>
+<tr><td>Simple Escape Sequence</td><td><b>ESC</b> <i>C</i></td><td>ECMA</td>
   <td>These sequences are made up from an <b>ESC</b> character followed by
       exactly one other character in the range ???..???.</td></tr>
-<tr><td>CSI Sequence</td><td>ECMA</td>
+<tr><td>CSI Sequence</td>
+  <td><b>ESC</b> <b>[</b> <i>Parameters</i> {<i>I</i>} <i>C</i></td>
+  <td>ECMA</td>
   <td></td></tr>
-<tr><td colspan=3>
+<tr><td colspan=4>
   <p>
-    The remaining codes are nonstandard but traditionalized hacks. Since
-    ANSI/ECMA provides proper slots for extentions, there is not much to
-    say about these inventions.
+    The remaining codes are nonstandard but traditionalized hacks.
   <p>
     </td></tr>
-<tr><td>DEC hash hack</td><td>VT100</td><td><b>ESC #</b><i>{Digit}</i></td></tr>
-<tr><td>DEC scs hack</td><td>VT100</td><td><b>ESC</b><i>{CC} {DD}</i></td></tr>
-<tr><td>XTERM title hack</td><td>XTERM</td><td><b>ESC ]</b><i>{text}</i><b>BEL</b></td></tr>
+<tr><td>DEC hacks</td>
+ <td><b>ESC</b> <i>C</i> <i>D</i></td>
+ <td>VT100</td>
+ <td></td></tr>
+<tr><td>XTERM hacks</td>
+<td><b>ESC ]</b> <i>Pn</i> <b>;</b> <i>text</i> <b>BEL</b></td>
+<td>XTERM</td>
+<td></td>
+<tr><td colspan=4>
+  <p>
+    VT52 uses a different (incompatible) set of escape codes. VT100 includes
+    the VT52 emulation as a mode.
+  <p>
+    </td></tr>
+</tr>
+<tr><td>Simple Escape Sequence</td><td><b>ESC</b> <i>C</i></td><td>VT52</td>
+  <td></td></tr>
+<tr><td>Complex Escape Sequence</td><td><b>ESC</b> <b>Y</b> <i>X</i> <i>Y</i></td><td>VT52</td>
+  <td></td></tr>
 
 </table>
 
-<h3>Definitions</h3>
+<h3>More on Control Sequences</h3>
+
+<h4>Control Characters</h4>
+
+Control characters (codes 0x00 - 0x1f inclusive) are specifically excluded
+from the control sequence syntax, but may be embedded within a control
+sequence.  Embedded control characters are executed as soon as they are
+encountered by the VT100.  The processing of the control sequence then
+continues with the next character recieved.  The exceptions are:
+if the <a href=#ESC>ESC</a> character occurs, the current control sequence
+is aborted, and a new one commences beginning with the <a href=#ESC>ESC</a>
+just recieved.  If the character <a href=#CAN>CAN</a> (0x0c) or the
+character <a href=#SUB>SUB</a> (0x0e) occurs,
+the current control sequence is aborted.  The ability to embed control
+characters allows the synchronization characters XON and XOFF to be
+interpreted properly without affecting the control sequence.
+<p>
+<b>FIXME</b>: <i>I've to check this w.r.t. the "I" component in modern
+   (EMCA) CSI sequences. Evtl. this is not compatible anymore.</i>
+<p>
+
+<h4>CSI Sequences</h4>
 
 <dl>
 <dt>Control Sequence Introducer (CSI):
@@ -268,33 +283,64 @@ Alternate sequences which will accomplish the same thing:
 <li><code>&lt;ESC&gt;[0;04;005m</code>
 </ul>
 
+<h4>DEC hacks</h4>
 
+These form two groups of commands.
+<p>
+In one first the first character is a hash (<em>#</em>) and the following a digit.
+This command group is used to denote VT100 specific instructions and can
+safely be sonsidered to be obsolete. See
+  <a href=#DECALN>DECALN</a>,
+  <a href=#DECDHLB>DECDHLB</a>,
+  <a href=#DECDHLT>DECDHLT</a>,
+  <a href=#DECDWL>DECDWL</a> and
+  <a href=#DECSWL>DECSWL</a>.
+<p>
+The second one is used to specify character set mappings (see <a
+href=#SCS>SCS</a>). A CSI instruction to do this is specified in ECMA,
+and this should be used as a replacement.
+
+<h4>XTERM hacks</h4>
+
+<h2>
+<table width=100%>
+<tr><td align=center bgcolor=#d0d0d0></td></tr>
+<tr><td align=center bgcolor=#d0d0d0>The Concept Data Base</td></tr>
+<tr><td align=center bgcolor=#d0d0d0></td></tr>
+</table>
+</h2>
+
+<i>The following text is a collection of several sorts of definitions and
+   explainations. It is incomplete in many respects and a working draft.
+   The author is well aware of the fact that this part of the document
+   is of few use without having proper indexes.
+</i>
+   
+<p>
 All of the following control sequences are transmitted from the Host to
 VT100 unless otherwise noted.  All of the control sequences are a subset of
 those defined in ANSI X 3.64 1977 and ANSI X 3.41 1974.
 <p>
 The following text conforms to these formatting conventions:
 <ul>
-<li>Control characters are designated by angle brackets (e.g.
-    the Escape character is &lt;ESC&gt;).
+<li>Individual character literals are set in bold face. Ascii representation
+    is used throughout, so <b>ESC</b> means the binary value of 27 and
+    <b>[</b> a value of 91.
 
-<li>Parameters are indicated by curly braces.
-
+<li>Parameters are indicated by italic type faces.
 <li>Parameter types usually are indicated as one of:
     <table>
-    <tr><td>{Pn} </td><td>A string of digits representing a numerical value.</td></tr>
-    <tr><td>{Ps} </td><td>A character that selects an item from a list.</td></tr>
-    <tr><td>{a-z}</td><td>Any lowercase sequence of one44 or more
-                          characters in braces represent a value to be
-                          entered (as in {Pn}), and the name in the
-                          braces will be referred to in explanatory text.</td></tr>
+    <tr><td><i>Pn </i></td><td>A string of digits representing a numerical value.</td></tr>
+    <tr><td><i>Ps </i></td><td>A character that selects an item from a list.</td></tr>
+    <tr><td><i>a-z</i></td><td>Any lowercase sequence of one or more
+                        characters represent a value to be
+                        entered (as in <i>Pn</i>), and the name in the
+                        will be referred to in explanatory text.</td></tr>
     </table>
 
-<li>Spaces in the control sequence are present for clarity and
-                        may be omitted.  Spaces which are required will be
-                        surrounded by single quotes: ' '.
+<li>Spaces are used only to improve readability, they do not occure in the
+    control sequences unless otherwise indicated.
 
-<li>All other characters are literals.
 </ul>
 
 <p>
@@ -644,31 +690,46 @@ The following attributes below have the following meaning:
 <td>  6</td><td>GPO and AVO</td></tr>
 </table>
 <tr><td><p></td></tr>
-<tr><td  bgcolor="#D0D0D0"><a name=DECDHL>DECDHL</a>
-    <td  bgcolor="#D0D0D0"><b>Double Height Line</b>
+<tr><td  bgcolor="#D0D0D0"><a name=DECDHLB>DECDHLB</a>
+    <td  bgcolor="#D0D0D0"><b>Double Height Line (Bottom)</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2><code> <b>ESC</b> <b>#</b> <em>Hn</em></code>
+    <td  colspan=2><code> <b>ESC</b> <b>#</b> <b>4</b></code>
 <tr><td><p></td>
 <tr><td></td>
     <td  colspan=2>
-  These sequences cause the line containing the cursor to become the top
-  or bottom half of a double-height, double width line.  The sequences
-  should be used in pairs on adjacent lines with each line containing the
-  same character string.  If the line was single width single height, all
+  This sequence cause the line containing the cursor to become the
+  bottom half of a double-height, double width line.
+  If the line was single width single height, all
   characters to the right of the center of the screen will be lost.  The
   cursor remains over the same character position, unless it would be to
   the right of the right margin, in which case it is moved to the right
-  margin.<p>
-<tr><td></td><td><table width=100%>
-<tr><td  bgcolor="#D0D0D0">Pn</td><td  bgcolor="#D0D0D0">Meaning</td></tr>
-<tr>
-<td>  3</td><td>Top    Half</td></tr>
-<tr>
-<td>  4</td><td>Bottom Half</td></tr>
-</table>
-<tr><td><p></td></tr>
+  margin.
+  <p>
+  <a href=#DECDHLB>DECDHLB</a> and <a href=#DECDHLT>DECDHLT</a>
+  should be used in pairs on adjacent lines with each line containing the
+  same character string.<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=DECDHLT>DECDHLT</a>
+    <td  bgcolor="#D0D0D0"><b>Double Height Line (Top)</b>
+    <td  bgcolor="#D0D0D0">VT100 DEC Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>#</b> <b>3</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  This sequence cause the line containing the cursor to become the top
+  half of a double-height, double width line.
+  If the line was single width single height, all
+  characters to the right of the center of the screen will be lost.  The
+  cursor remains over the same character position, unless it would be to
+  the right of the right margin, in which case it is moved to the right
+  margin.
+  <p>
+  <a href=#DECDHLB>DECDHLB</a> and <a href=#DECDHLT>DECDHLT</a>
+  should be used in pairs on adjacent lines with each line containing the
+  same character string.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECDWL>DECDWL</a>
     <td  bgcolor="#D0D0D0"><b>Double Width Line</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Command
