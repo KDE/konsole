@@ -231,7 +231,11 @@ void Shell::DataReceived(int)
 { char buf[4096];
   int n = read(fd, buf, 4096);
   emit block_in(buf,n);
-  if (syslog) for (int i = 0; i < n; i++) fputc(buf[i],syslog);
+  if (syslog) // if (debugging) ...
+  {
+    for (int i = 0; i < n; i++) fputc(buf[i],syslog);
+    fflush(syslog);
+  }
 }
 
 void Shell::DataWritten(int)
