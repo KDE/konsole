@@ -41,6 +41,7 @@
 #ifdef COMPOSITE
 # include <X11/Xlib.h>
 # include <X11/extensions/Xrender.h>
+# include <fixx11h.h>
 #endif
 
 static const char description[] =

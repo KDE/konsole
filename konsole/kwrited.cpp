@@ -19,6 +19,7 @@
 #include <stdio.h>
 #include <signal.h>
 #include <X11/Xlib.h>
+#include <fixx11h.h>
 
 #include <config.h>
 
