@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="Part">
+<kpartgui name="Part" version="1">
 <MenuBar>
  <Menu name="File">
   <Action name="new"/>
