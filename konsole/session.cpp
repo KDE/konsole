@@ -1,5 +1,4 @@
 #include "session.h"
-#include <qpushbutton.h>
 #include <kdebug.h>
 
 #include <stdlib.h>

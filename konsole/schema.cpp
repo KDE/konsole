@@ -53,11 +53,9 @@
 #include "schema.h"
 #include "kapplication.h"
 
-#include <qfile.h>
 #include <qdir.h>
 #include <qdatetime.h> 
 #include <kstandarddirs.h>
-#include <kglobal.h>
 #include <klocale.h>
 #include <kconfig.h>
 #include <kdebug.h>

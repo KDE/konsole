@@ -3,7 +3,6 @@
 #include <kuniqueapplication.h>
 #include <kcmdlineargs.h>
 #include <klocale.h>
-#include <kglobal.h>
 #include <kglobalsettings.h>
 #include <kwrited.h>
 #include <kdebug.h>

@@ -74,41 +74,28 @@ Time to start a requirement list.
 
 #include <config.h>
 
-#include <qdir.h>
-#include <qevent.h>
-#include <qdragobject.h>
-#include <qobjectlist.h>
 #include <ktoolbarbutton.h>
 
 #include <qspinbox.h>
 #include <qcheckbox.h>
 #include <qlayout.h>
-#include <qbuttongroup.h>
 
 #include <stdio.h>
 #include <stdlib.h>
 
 #include <kfiledialog.h>
-#include <qtextstream.h>
 
 #include <kfontdialog.h>
-#include <kglobal.h>
 #include <kstandarddirs.h>
-#include <kconfig.h>
-#include <kurl.h>
 #include <qpainter.h>
 #include <kmenubar.h>
 #include <kmessagebox.h>
 #include <krootpixmap.h>
-#include <kaction.h>
 #include <kstdaction.h>
-#include <kpopupmenu.h>
 #include <klineeditdlg.h>
 #include <kdebug.h>
-#include <kapplication.h>
 #include <kipc.h>
 
-#include <qfontmetrics.h>
 
 #include <klocale.h>
 #include <sys/wait.h>
@@ -121,7 +108,6 @@ Time to start a requirement list.
 #include <kiconloader.h>
 
 #include "konsole.h"
-#include "keytrans.h"
 
 
 #define KONSOLEDEBUG    kdDebug(1211)
@@ -172,7 +158,6 @@ const char *fonts[] = {
 
 #define DEFAULT_HISTORY_SIZE 1000
 
-#include <qdatetime.h>
 
 Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, int histon,
                  bool menubaron, bool toolbaron, bool frameon, bool scrollbaron,

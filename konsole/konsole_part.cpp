@@ -24,21 +24,13 @@
 
 #include <sys/stat.h>
 #include <stdlib.h>
-#include <kinstance.h>
 #include <klocale.h>
 #include <krun.h>
 #include <kaboutdata.h>
-#include <kaction.h>
-#include <kparts/partmanager.h>
-#include <kiconloader.h>
 #include <kdebug.h>
-#include <qlabel.h>
 #include <qfile.h>
-#include <qsplitter.h>
-#include <qregexp.h>
 #include <kglobalsettings.h>
 
-#include <qdom.h>
 
 extern "C"
 {

@@ -18,13 +18,10 @@
 */
 
 #include "keytrans.h"
-#include <qnamespace.h>
 #include <qbuffer.h>
 #include <qobject.h>
-#include <qdict.h>
 #include <qintdict.h>
 #include <qfile.h>
-#include <kglobal.h>
 #include <kstandarddirs.h>
 #include <klocale.h>
 

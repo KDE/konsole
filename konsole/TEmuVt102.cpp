@@ -21,12 +21,9 @@
 #include "TEmuVt102.h"
 #include "TEWidget.h"
 #include "TEScreen.h"
-#include "keytrans.h"
 
 #include <stdio.h>
 #include <unistd.h>
-#include <qkeycode.h>
-#include <qtextcodec.h>
 
 #include <assert.h>
 

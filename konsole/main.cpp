@@ -20,7 +20,6 @@
 #include <qdir.h>
 #include <qsessionmanager.h>
 
-#include <kapplication.h>
 #include <klocale.h>
 #include <kaboutdata.h>
 #include <kcmdlineargs.h>

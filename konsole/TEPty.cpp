@@ -151,7 +151,6 @@ extern "C" {
 #endif
 
 #include <qintdict.h>
-#include <qstring.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
 
@@ -159,8 +158,6 @@ extern "C" {
 #include "TEPty.moc"
 
 
-#include <kapplication.h>
-#include <kglobal.h>
 #include <kstandarddirs.h>
 #include <kdebug.h>
 
