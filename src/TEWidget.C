@@ -773,8 +773,8 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
   // pass on double click as two clicks.
   if (!mouse_marks && !(ev->state() & ShiftButton))
   {
-    emit mouseSignal( 0, pos.x()+1, pos.y()+1 ); // left button
-    emit mouseSignal( 3, pos.x()+1, pos.y()+1 ); // release
+    // Send just _ONE_ click event, since the first click of the double click
+    // was already sent by the click handler!
     emit mouseSignal( 0, pos.x()+1, pos.y()+1 ); // left button
     return;
   }
