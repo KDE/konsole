@@ -58,6 +58,15 @@ This file is to collect requierements and ideas for this.
   documentation is even more importent than in a
   commertial environment.
 
+- A more generic handling of different sorts of emulations.
+
+  This means to fix a long term problem in mc(1) first,
+  to allow using terminfo entries other then 'xterm'.
+
+  We could use these then to weed out obsolete material
+  and to make konsole having an ECMA compatible emulation
+  by default.
+
 ... Check through wishlist and FIXME/Notes/PROJECTS
 
 --------------------------------------------------------
