@@ -307,8 +307,22 @@ void TEmulation::onRcvBlock(const char *s, int len)
   bulkStart();
   for (int i = 0; i < len; i++)
   {
+
     QString result = decoder->toUnicode(&s[i],1);
     int reslen = result.length();
+
+    // If we get a control code halfway a multi-byte sequence
+    // we flush the decoder and continue with the control code.
+    if ((!reslen) && (s[i] < 32) && (s[i] > 0))
+    {
+       // Flush decoder
+       while(!result.length())
+          decoder->toUnicode(&s[i],1);
+       result = " ";
+       result[0] = QChar(s[i]);
+       reslen = 1;
+    }
+
     for (int j = 0; j < reslen; j++)
     {
       if (result[j].category() == QChar::Mark_NonSpacing)
