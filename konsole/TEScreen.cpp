@@ -1283,19 +1283,14 @@ void TEScreen::addHistLine()
     // adjust history cursor
     if (newHistLines > oldHistLines)
     {
-       histCursor++;
        // Adjust selection for the new point of reference
        if (sel_begin != -1)
        {
           sel_TL += columns;
           sel_BR += columns;
        }
-    }
-   
-    // Scroll up if user is looking at the history and we can scroll up
-    if ((histCursor > 0) && (histCursor != newHistLines))
-    {
-       histCursor--;
+       else
+          histCursor++;
     }
 
     if (sel_begin != -1)
