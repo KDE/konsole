@@ -1,14 +1,14 @@
-Many character oriented applications were written with the linux
+Many character oriented applications were written with the Linux
 console as the platform in mind, and although most of them do
 well when run in xterm emulation (which is konsole's default),
 they don't look as pleasant as the original.
 
-Konsole has lately improved it's support for the linux console.
+Konsole has lately improved it's support for the Linux console.
 
 Simple choose "Linux console" from the "New" menu (or click the
 right mouse button while holding down the control key).
 
-To get proper support of graphic characters, you need a linux console
+To get proper support of graphic characters, you need a Linux console
 font being installed. Proceed as follows:
 
 |
@@ -36,12 +36,12 @@ these events from gpm instead from the console.
 The linux console can some funny quirks with special graphic
 characters and i haven't yet managed to teach Konsole all of
 them. In rare cases, they might display differently. Affected
-to my knowlegde are especially non-VT100 extentions taken from
+to my knowledge are especially non-VT100 extensions taken from
 the AT&T 4410v1, these are arrow symbols, a full block and a
 checker board. Most other tricks that the linux console is
 able to do with character sets are eventually not even used
 in a single instance, so you will hardly be disturbed by 
-konsoles inability to do them.
+konsole's inability to do them.
 
 
 Anyway, try

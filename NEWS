@@ -3,14 +3,14 @@ New in 0.9.8
 - some support for linux console added (experimental)
 - multiple sessions (experimental, flickers like hell)
 - color schemes (see /opt/kde/share/apps/konsole/*.schema)
-- configurable new sesion command (see /opt/kde/share/apps/konsole/*.kdelnk)
+- configurable new session command (see /opt/kde/share/apps/konsole/*.kdelnk)
 - minor bugs fixed
-- Artistic License
-- DND support
+- changed to use the `Artistic License'
+- DnD support
 
 New in 0.8.9
 
-- marking improve (thanks to Peter Silva)
+- marking improved (thanks to Peter Silva)
   - now works in history buffer, too.
   - autoscrolling while marking.
   - word selection by double click.
@@ -18,7 +18,7 @@ New in 0.8.9
 New in 0.8.8
 
 - selection for background pixmaps (somewhat overdone)
-  You need libjpeg, libpng and libqimgio (qt-1.40/extentions) for that.
+  You need libjpeg, libpng and libqimgio (qt-1.40/extensions) for that.
 
 New in 0.8.7
 
@@ -44,7 +44,7 @@ New in 0.8.5
 - some experimental material removed
   - VGA font deactivated by default. This is stuff for a future Linux
     console and ANSI-BBS emulation.
-  - variable pitch font support moved to a patch. Result was a desaster
+  - variable pitch font support moved to a patch. Result was a disaster
     anyway, since these fonts are not prepared to be used with a terminal
     emulation.
 
