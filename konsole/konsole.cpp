@@ -280,6 +280,7 @@ DCOPObject( "konsole" )
     menubar->hide();
   if (!toolbaron)
     toolBar()->hide();
+  toolBar()->setText(i18n("Session Toolbar"));
   if (!frameon) {
     b_framevis=false;
     te->setFrameStyle( QFrame::NoFrame );
