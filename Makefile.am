@@ -1,7 +1,14 @@
 SUBDIRS = konsole other doc fonts
 
-data_DATA = konsole.desktop konsolesu.desktop
+data_DATA = konsole.desktop 
 datadir = $(kde_appsdir)/System
+
+sudata_DATA = konsolesu.desktop
+sudatadir = $(kde_appsdir)/System/More
+
+install-data-local: uninstall.desktop
+	$(mkinstalldirs) $(kde_appsdir)/System
+	$(INSTALL_DATA) $(srcdir)/uninstall.desktop $(kde_appsdir)/System/konsolesu.desktop 
 
 kde_services_DATA = konsolepart.desktop
 
