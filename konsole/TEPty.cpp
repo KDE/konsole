@@ -435,7 +435,7 @@ int TEPty::openPty()
   return ptyfd;
 }
 
-int TEPty::makePty(bool /*_addutmp*/)
+int TEPty::makePty(bool _addutmp)
 {
   if (fd < 0) // no master pty could be opened
   {
