@@ -1,4 +1,5 @@
 [Desktop Entry]
+Encoding=UTF-8
 Type=Application
 Exec=konsole --type su
 Icon=konsole
@@ -7,5 +8,37 @@ MimeType=application/x-konsole
 Terminal=0
 
 Name=Konsole - Super User Mode
+Name[da]=Konsole - Superbruger-tilstand
+Name[de]=Konsole (Systemverwaltungs-Modus)
+Name[es]=Konsole - modo superusuario
+Name[fi]=Pääteikkuna - pääkäyttäjätila
+Name[fr]=Konsole (mode super-utilisateur)
+Name[he]=מסוף - מצב משתמש-על
+Name[hu]=Konsole parancsértelmező (rendszergazdai mód)
+Name[lt]=Konsole – super vartotojo režimas
+Name[lv]=Konsole - Super Lietotāja Režīms
+Name[pt]=Konsole - Modo de Super-Utilizador
+Name[pt_BR]=Konsole - Modo de Super-Utilizador
+Name[sk]=Konsole - Super-používateľský mód
+Name[sv]=Konsole - Administratörsläge
+Name[ta]=Ó¨ÉÂõ - Á£ôÀÂÉ÷ Ó¨È¨Á
+Name[xx]=xx
 
 Comment=Terminal Program
+Comment[ar]=برنامج تيرمينال
+Comment[da]=Terminalprogram
+Comment[de]=Terminal-Programm
+Comment[es]=Programa de terminal
+Comment[fi]=Terminaaliohjelma
+Comment[fr]=Un terminal
+Comment[he]=תוכנית מסוף
+Comment[hu]=Terminálprogram
+Comment[lt]=Terminalo programa
+Comment[lv]=Termināla Programma
+Comment[pt]=Programa de Terminal
+Comment[pt_BR]=Programa de Terminal
+Comment[sk]=Terminál
+Comment[sv]=Terminalprogram
+Comment[ta]=Ó¨ÉÂ ¿¢Ãø
+Comment[tr]=Terminal Programı
+Comment[xx]=xx

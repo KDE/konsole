@@ -1,4 +1,5 @@
 [Desktop Entry]
+Encoding=UTF-8
 Type=Application
 Exec=konsole %i %m
 Icon=konsole
@@ -36,4 +37,21 @@ Name[xx]=xx
 Name[zu]=iKonsole
 
 Comment=Terminal Program
+Comment[ar]=برنامج تيرمينال
+Comment[da]=Terminalprogram
+Comment[de]=Terminal-Programm
+Comment[es]=Programa de terminal
+Comment[fi]=Terminaaliohjelma
+Comment[fr]=Un terminal
+Comment[he]=תוכנית מסוף
+Comment[hu]=Terminálprogram
+Comment[lt]=Terminalo programa
+Comment[lv]=Termināla Programma
+Comment[pt]=Programa de Terminal
+Comment[pt_BR]=Programa de Terminal
+Comment[sk]=Terminál
+Comment[sv]=Terminalprogram
+Comment[ta]=Ó¨ÉÂ ¿¢Ãø
+Comment[tr]=Terminal Programı
+Comment[xx]=xx
 X-DCOP-ServiceType=Multi
