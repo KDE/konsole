@@ -404,8 +404,10 @@ void Konsole::makeGUI()
    disconnect(m_rightButton,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_edit,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_view,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
-   disconnect(m_bookmarks,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
-   disconnect(m_bookmarksSession,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+   if (m_bookmarks)
+      disconnect(m_bookmarks,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+   if (m_bookmarksSession)
+      disconnect(m_bookmarksSession,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    //KONSOLEDEBUG<<"Konsole::makeGUI()"<<endl;
    if (m_toolbarSessionsCommands)
       connect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
@@ -486,12 +488,16 @@ void Konsole::makeGUI()
    if (ra!=0) ra->plug(m_view);
 
    //bookmarks menu
-   connect( bookmarkHandler, SIGNAL( openURL( const QString&, const QString& )),
+   if (bookmarkHandler)
+      connect( bookmarkHandler, SIGNAL( openURL( const QString&, const QString& )),
             SLOT( enterURL( const QString&, const QString& )));
-   connect( bookmarkHandlerSession, SIGNAL( openURL( const QString&, const QString& )),
+   if (bookmarkHandlerSession)            
+      connect( bookmarkHandlerSession, SIGNAL( openURL( const QString&, const QString& )),
             SLOT( newSession( const QString&, const QString& )));
-   connect(m_bookmarks, SIGNAL(aboutToShow()), SLOT(bookmarks_menu_check()));
-   connect(m_bookmarksSession, SIGNAL(aboutToShow()), SLOT(bookmarks_menu_check()));
+   if (m_bookmarks)
+      connect(m_bookmarks, SIGNAL(aboutToShow()), SLOT(bookmarks_menu_check()));
+   if (m_bookmarksSession)
+      connect(m_bookmarksSession, SIGNAL(aboutToShow()), SLOT(bookmarks_menu_check()));
 
    // Schema Options Menu -----------------------------------------------------
    m_schema = new KPopupMenu(this);
@@ -618,7 +624,8 @@ void Konsole::makeGUI()
    m_renameSession->plug(m_rightButton);
 
    m_rightButton->insertSeparator();
-   m_rightButton->insertItem(i18n("&Bookmarks"), m_bookmarks);
+   if (m_bookmarks)
+     m_rightButton->insertItem(i18n("&Bookmarks"), m_bookmarks);
 
    m_rightButton->insertSeparator();
    m_rightButton->insertItem(i18n("S&ettings"), m_options);
@@ -701,19 +708,25 @@ void Konsole::makeBasicGUI()
   m_session = new KPopupMenu(this);
   m_edit = new KPopupMenu(this);
   m_view = new KPopupMenu(this);
-  bookmarkHandler = new KonsoleBookmarkHandler( this, true );
-  m_bookmarks = bookmarkHandler->menu();
-  // call manually to disable accelerator c-b for add-bookmark initially.
-  bookmarks_menu_check();
+  if (kapp->authorizeKAction("bookmarks"))
+  {
+    bookmarkHandler = new KonsoleBookmarkHandler( this, true );
+    m_bookmarks = bookmarkHandler->menu();
+    // call manually to disable accelerator c-b for add-bookmark initially.
+    bookmarks_menu_check();
+  }
 
   m_options = new KPopupMenu(this);
   m_help =  helpMenu(0, false);
 
   m_rightButton = new KPopupMenu(this);
 
-  // Bookmarks that open new sessions.
-  bookmarkHandlerSession = new KonsoleBookmarkHandler( this, false );
-  m_bookmarksSession = bookmarkHandlerSession->menu();
+  if (kapp->authorizeKAction("bookmarks"))
+  {
+    // Bookmarks that open new sessions.
+    bookmarkHandlerSession = new KonsoleBookmarkHandler( this, false );
+    m_bookmarksSession = bookmarkHandlerSession->menu();
+  }
 
   // For those who would like to add shortcuts here, be aware that
   // ALT-key combinations are heavily used by many programs. Thus,
@@ -728,13 +741,16 @@ void Konsole::makeBasicGUI()
   connect(m_rightButton,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_edit,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_view,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
-  connect(m_bookmarks,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
-  connect(m_bookmarksSession,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+  if (m_bookmarks)
+     connect(m_bookmarks,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+  if (m_bookmarksSession)
+     connect(m_bookmarksSession,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
 
   menubar->insertItem(i18n("Session") , m_session);
   menubar->insertItem(i18n("Edit"), m_edit);
   menubar->insertItem(i18n("View"), m_view);
-  menubar->insertItem(i18n("Bookmarks"), m_bookmarks);
+  if (m_bookmarks)
+     menubar->insertItem(i18n("Bookmarks"), m_bookmarks);
   menubar->insertItem(i18n("Settings"), m_options);
   menubar->insertItem(i18n("Help"), m_help);
 
@@ -2362,12 +2378,15 @@ void Konsole::loadSessionCommands()
     if (!(*it).endsWith("/shell.desktop"))
        addSessionCommand(*it);
 
-  m_session->insertSeparator();
-  m_session->insertItem(SmallIconSet("keditbookmarks"),
-                        i18n("New Shell at Bookmark"), m_bookmarksSession);
-  m_toolbarSessionsCommands->insertSeparator();
-  m_toolbarSessionsCommands->insertItem(SmallIconSet("keditbookmarks"),
-                        i18n("Shell at Bookmark"), m_bookmarksSession);
+  if (m_bookmarksSession)
+  {
+    m_session->insertSeparator();
+    m_session->insertItem(SmallIconSet("keditbookmarks"),
+                          i18n("New Shell at Bookmark"), m_bookmarksSession);
+    m_toolbarSessionsCommands->insertSeparator();
+    m_toolbarSessionsCommands->insertItem(SmallIconSet("keditbookmarks"),
+                          i18n("Shell at Bookmark"), m_bookmarksSession);
+  }
 }
 
 void Konsole::addScreenSession(const QString &path, const QString &socket)
