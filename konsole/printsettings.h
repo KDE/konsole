@@ -1,6 +1,6 @@
 /*
  *  This file is part of the KDE libraries
- *  Copyright (c) 2002 Michael Goffioul <goffioul@imec.be>
+ *  Copyright (c) 2002 Michael Goffioul <kdeprint@swing.be>
  *  Copyright (c) 2003 Waldo Bastian <bastian@kde.org>
  *
  *  This library is free software; you can redistribute it and/or
