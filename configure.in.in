@@ -1,7 +1,9 @@
 dnl beta tests for openpty support
 AC_MSG_CHECKING(whether we can use openpty)
 ac_use_openpty="yes"
-AC_ARG_ENABLE(openpty, [  --disable-openpty       disable openpty (UNIX98 terminals) support [defaul=enabled]], [ac_use_openpty="no"])
+AC_ARG_ENABLE(openpty,
+ AC_HELP_STRING([--disable-openpty],[disable openpty (UNIX98 terminals) support [default=enabled]]),
+ [ac_use_openpty="no"])
 if test "$ac_use_openpty" = "yes"; then
 	kde_safe_LIBS=$LIBS
 	LIBS="$LIBS $LIBUTIL"
