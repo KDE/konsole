@@ -52,8 +52,9 @@ konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 # the library search path. 
 
-# extra libraries for jpeg and png image formats; kfiledialog
-EXTRALIBS = $(LIB_KIMGIO)
+# i have had troubles with the @LIB_KIMGIO@ macro.
+# if you like to put it in here, please make sure it works before commiting
+EXTRALIBS = $(KIMGIO_LIBS) -lkimgio
 
 # just to make sure, automake makes them 
 BUILTSOURCES =TEWidget.moc TEmuVt102.moc session.moc main.moc TEmulation.moc TEShell.moc

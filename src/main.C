@@ -99,11 +99,17 @@ TEDemo::TEDemo(char* args[]) : KTMainWindow()
 
   addSession(new TESession(this,te,args,"xterm"),args[0]);
   se->setFontNo(n_font);
+  setSchema(s_schema);
   setColLin(lincol.width(),lincol.height());
 }
 
+/*!
+    sets application window to a size
+    based on columns X lines of the te
+    guest widget
+*/
+
 void TEDemo::setColLin(int columns, int lines)
-// set set application to a specific size
 {
   te->setFixedSize(te->calcSize(columns,lines));
   updateRects();
@@ -229,8 +235,8 @@ void TEDemo::makeMenu()
 
 //FIXME: deactivated mainly because it flickers like crasy
 //       appears to do well otherwise
-//menubar->insertItem(i18n("New"), m_commands);
-//menubar->insertItem(i18n("Sessions"), m_sessions);
+  menubar->insertItem(i18n("New"), m_commands);
+  menubar->insertItem(i18n("Sessions"), m_sessions);
 
   menubar->insertItem(i18n("Options"), m_options);
   menubar->insertSeparator();
@@ -466,6 +472,15 @@ void TEDemo::tecRef()
 static QIntDict<TESession> no2session;
 static QPtrDict<void>      session2no;
 static int session_no = 0;
+
+//FIXME: activating sessions creates a lot flicker in the moment.
+//       it comes from setting the attributes of a session individually.
+//       ONE setImage call should actually be enough to match all cases.
+//       These can be quite different:
+//       - The screen size might have changed while the session was
+//         detached. A propagation of the resize should in this case
+//         make the drawEvent.
+//       - font, background image and color palette should be set in one go.
 
 void TEDemo::activateSession(int sn)
 {

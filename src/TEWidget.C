@@ -61,6 +61,7 @@
 #define MAX(a,b) ((a)>(b)?(a):(b))
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
+#define HCNT(Name) //{ static int cnt = 1; printf("%s(%d): %s %d\n",__FILE__,__LINE__,Name,cnt++); }
 
 #define loc(X,Y) ((Y)*columns+(X))
 
@@ -236,6 +237,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
   QPainter paint;
   setUpdatesEnabled(FALSE);
   paint.begin( this );
+HCNT("setImage");
 
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
@@ -307,6 +309,7 @@ void TEWidget::paintEvent( QPaintEvent* pe )
   setUpdatesEnabled(FALSE);
   paint.begin( this );
   paint.setBackgroundMode( TransparentMode );
+HCNT("paintEvent");
 
   // Note that the actual widget size can be slightly larger
   // that the image (the size is truncated towards the smaller
@@ -373,6 +376,7 @@ void TEWidget::resizeEvent(QResizeEvent* ev)
   //printf("approx: %d,%d\n",ev->size().width()/font_w,ev->size().height()/font_h);
   //printf("leaves: %d,%d\n",ev->size().width()%font_w,ev->size().height()%font_h);
   //printf("curren: %d,%d\n",width(),height());
+HCNT("resizeEvent");
 
   // see comment in `paintEvent' concerning the rounding.
   //FIXME: could make a routine here; check width(),height()
