@@ -576,7 +576,6 @@ void Konsole::makeBasicGUI()
   menubar->insertItem(i18n("File") , m_file);
   menubar->insertItem(i18n("Sessions"), m_sessions);
   menubar->insertItem(i18n("Settings"), m_options);
-  menubar->insertSeparator();
   menubar->insertItem(i18n("Help"), m_help);
 };
 
