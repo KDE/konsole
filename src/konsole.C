@@ -293,8 +293,8 @@ Konsole::Konsole(const char* name, const char* _pgm,
   te->currentSession = se;
   se->setConnect(TRUE);
   if (mytitle.isEmpty()) {
-    title = se->fullTitle(); // take title from current session
-//    title = se->Title(); // take title from current session
+//    title = se->fullTitle(); // take title from current session
+    title = se->Title(); // take title from current session
     }
   setHeader();
   se->setKeymapNo(n_keytab); // act. the keytab for this session
@@ -305,6 +305,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
   connect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
   connect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
 
+  isRestored = false;
   //KONSOLEDEBUG<<"Konsole ctor() ends "<<time.elapsed()<<" msecs elapsed"<<endl;
   //KONSOLEDEBUG<<"Konsole ctor(): done"<<endl;
 }
@@ -1209,13 +1210,16 @@ void Konsole::runSession(TESession* s)
 void Konsole::addSession(TESession* s)
 {
   session_no += 1;
-  // create an action for the session
+  //QString title;
+  //If restoring  via session management, don't tack on the "No 1" to the first session's title.
   if (isRestored) {
-    QString title = s->Title();
+    title = s->Title();
     }
   else {
-    QString title = i18n("%1 No %2").arg(s->Title()).arg(session_no);
+    title = i18n("%1 No %2").arg(s->Title()).arg(session_no);
     }
+
+  // create an action for the session
   //  char buffer[30];
   //  int acc = CTRL+SHIFT+Key_0+session_no; // Lars: keys stolen by kwin.
   KRadioAction *ra = new KRadioAction(title,
