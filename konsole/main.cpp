@@ -227,6 +227,16 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   TEWidget::setAntialias( !has_noxft );
   TEWidget::setStandalone( true );
 
+  // The following Qt options have no effect; warn users.
+  if( qtargs->isSet("background") )
+      kdWarning() << "The Qt option -bg, --background has no effect." << endl;
+  if( qtargs->isSet("foreground") )
+      kdWarning() << "The Qt option -fg, --foreground has no effect." << endl;
+  if( qtargs->isSet("button") )
+      kdWarning() << "The Qt option -btn, --button has no effect." << endl;
+  if( qtargs->isSet("font") )
+      kdWarning() << "The Qt option -fn, --font has no effect." << endl;
+
 #ifdef COMPOSITE
   char *display = 0;
   if ( qtargs->isSet("display"))
