@@ -530,6 +530,7 @@ HERE; printf("setting 'history' = %d in read.\n",b_scroll);
 void TEDemo::pixmap_menu_activated(int item)
 {
   if (item <= 1) pmPath = "";
+HERE; printf("pm: %s\n",pmPath.ascii());
   QPixmap pm(pmPath.data());
   if (pm.isNull()) { 
     pmPath = ""; 
@@ -962,6 +963,7 @@ void TEDemo::setSchema(const ColorSchema* s)
   s_schema = s->path;
   curr_schema = s->numb;
   pmPath = s->imagepath;
+HERE;printf("image:%s\n",s->imagepath.ascii());
   te->setColorTable(s->table); //FIXME: set twice here to work around a bug
   
   if (s->usetransparency) {

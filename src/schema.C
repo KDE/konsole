@@ -16,6 +16,8 @@
 #include <kstddirs.h>
 #include <kglobal.h>
 
+#define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
+
 static int schema_serial = 0; //FIXME: remove,localize
 
 template class QIntDict<ColorSchema>;
@@ -65,7 +67,9 @@ ColorSchema* ColorSchema::readSchema(const char* path)
         if (!strcmp(rend,"full"  )) attr = 4; else
           continue;
 
+HERE;printf("path: %s\n",path);
         res->imagepath = locate("wallpaper", path);
+HERE;printf("ipath: %s\n",res->imagepath.ascii());
         res->alignment = attr;
       }
       if (!strncmp(line,"transparency",12))
