@@ -941,6 +941,12 @@ bool Konsole::eventFilter( QObject *o, QEvent *ev )
         return true;
       }
     }
+    else if (ev->type() == QEvent::ContextMenu)
+    {
+      QMouseEvent* mev = static_cast<QMouseEvent*>(ev);
+      slotTabbarContextMenu(mev->globalPos());
+      return true;
+    }
   }
   return KMainWindow::eventFilter(o, ev);
 }
