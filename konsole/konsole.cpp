@@ -1041,7 +1041,7 @@ void Konsole::makeBasicGUI()
 
   showMenubar = new KToggleAction ( i18n( "Show &Menubar" ), "showmenu", 0, this,
                                     SLOT( slotToggleMenubar() ), m_shortcuts, "show_menubar" );
-  showMenubar->setCheckedState( KGuiItem( "Hide &Menubar", "showmenu", QString::null, QString::null ) );
+  showMenubar->setCheckedState( KGuiItem( i18n("Hide &Menubar"), "showmenu", QString::null, QString::null ) );
 
   m_fullscreen = KStdAction::fullScreen(0, 0, m_shortcuts, this );
   connect( m_fullscreen,SIGNAL(toggled(bool)), this,SLOT(updateFullScreen(bool)));
