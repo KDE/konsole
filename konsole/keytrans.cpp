@@ -321,9 +321,7 @@ void KeyTrans::readConfig()
    QIODevice* buf(0);
    if (m_path=="[buildin]")
    {
-      QCString txt =
-#include "default.keytab.h"
-;
+      QCString txt;
       buf=new QBuffer(txt);
    }
    else
@@ -711,7 +709,6 @@ void test()
   // Opening sequence
 
   QCString txt =
-#include "default.keytab.h"
   ;
   QBuffer buf(txt);
   if (0) TestTokenizer(buf);
