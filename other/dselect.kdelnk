@@ -2,13 +2,10 @@
 [KDE Desktop Entry]
 Type=KonsoleApplication
 Name=dselect
-Name[pt_BR]=dselect
-Name[es]=dselect
-Name[no]=dselect
 Comment=Debian Package Manager
-Comment[pt_BR]=Gerenciador de Pacotes Debian
 Comment[es]=Gestor de Paquetes de Debian
 Comment[no]=Debian pakkebehandler
+Comment[pt_BR]=Gerenciador de Pacotes Debian
 Exec=dselect
 Schema=/opt/kde/share/apps/konsole/Linux.schema
 #VGA

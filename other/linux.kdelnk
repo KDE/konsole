@@ -2,13 +2,10 @@
 [KDE Desktop Entry]
 Type=KonsoleApplication
 Name=Linux
-Name[pt_BR]=Linux
-Name[es]=Linux
-Name[no]=Linux
 Comment=Linux Console
-Comment[pt_BR]=Console do Linux
 Comment[es]=Consola Linux
 Comment[no]=Linux-konsoll
+Comment[pt_BR]=Console do Linux
 Exec=bash
 Schema=/opt/kde/share/apps/konsole/Linux.schema
 #VGA
