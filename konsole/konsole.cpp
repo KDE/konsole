@@ -843,6 +843,7 @@ void Konsole::makeTabWidget()
   tabwidget = new KTabWidget(this);
   tabwidget->setTabReorderingEnabled(true);
   tabwidget->setAutomaticResizeTabs( b_autoResizeTabs );
+  tabwidget->setTabCloseActivatePrevious( true );
 
   if (n_tabbar==TabTop)
     tabwidget->setTabPosition(QTabWidget::Top);
