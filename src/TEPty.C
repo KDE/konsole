@@ -77,7 +77,7 @@
 
 #ifdef HAVE_UTEMPTER
 extern "C" {
-	#include <utempter.h>
+        #include <utempter.h>
 }
 #endif
 
@@ -86,16 +86,16 @@ extern "C" {
 #include <grp.h>
 
 #ifdef HAVE_LIBUTIL_H
-	#include <libutil.h>
-	#define USE_LOGIN
+        #include <libutil.h>
+        #define USE_LOGIN
 #elif defined(HAVE_UTIL_H)
-	#include <util.h>
-	#define USE_LOGIN
+        #include <util.h>
+        #define USE_LOGIN
 #endif
 
 #ifdef USE_LOGIN
-	#include <errno.h>
-	#include <utmp.h>
+        #include <errno.h>
+        #include <utmp.h>
 #endif
 
 #include <signal.h>
@@ -215,7 +215,7 @@ void TEPty::donePty(int status)
 #elif defined(USE_LOGIN)
   char *tty_name=ttyname(0);
   if (tty_name)
-	logout(tty_name);
+        logout(tty_name);
 #endif
   if (needGrantPty) chownpty(fd,FALSE);
   emit done(status);
@@ -339,7 +339,7 @@ int TEPty::openPty()
     fprintf(stderr,"       : This means the session can be eavesdroped.\n");
     fprintf(stderr,"       : Make sure konsole_grantpty is installed in\n");
     fprintf(stderr,"       : %s and setuid root.\n",
-	    KGlobal::dirs()->findResourceDir("exe", "konsole").data());
+            KGlobal::dirs()->findResourceDir("exe", "konsole").local8Bit().data());
   }
   fcntl(ptyfd,F_SETFL,O_NDELAY);
 
