@@ -234,6 +234,7 @@ private slots:
   void slotTabCloseSession();
   void slotTabToggleMonitor();
   void slotTabToggleMasterMode();
+  void slotTabbarContextMenu(const QPoint &);
   void slotTabSetViewOptions(int);
 
 private:
@@ -308,6 +309,7 @@ private:
   KPopupMenu* m_sessionList;
   KPopupMenu* m_tabPopupMenu;
   KPopupMenu* m_tabPopupTabsMenu;
+  KPopupMenu* m_tabbarPopupMenu;
 
   KAction *m_zmodemUpload;
   KToggleAction *monitorActivity, *m_tabMonitorActivity;

@@ -831,20 +831,25 @@ void Konsole::makeGUI()
    connect( m_tabPopupTabsMenu, SIGNAL( activated ( int ) ),
             SLOT( activateSession( int ) ) );
 
-   KSelectAction *viewOptions = new KSelectAction(this);
-   viewOptions->setText(i18n("Tab View Options"));
-   QStringList options;
-   options << i18n("Text &and Icons") << i18n("&Text Only") << i18n("&Icons Only");
-   viewOptions->setItems(options);
-   viewOptions->setCurrentItem(m_tabViewMode);
-   viewOptions->plug(m_tabPopupMenu);
-   connect(viewOptions, SIGNAL(activated(int)), this, SLOT(slotTabSetViewOptions(int)));
-   slotTabSetViewOptions(m_tabViewMode);
 
    m_tabPopupMenu->insertSeparator();
    m_tabPopupMenu->insertItem( SmallIcon("fileclose"), i18n("C&lose Session"), this,
                           SLOT(slotTabCloseSession()) );
-}
+
+   // Fill tab bar context menu
+   m_tabbarPopupMenu = new KPopupMenu( this );
+   selectTabbar->plug(m_tabbarPopupMenu);
+
+   KSelectAction *viewOptions = new KSelectAction(this);
+   viewOptions->setText(i18n("Tab Options"));
+   QStringList options;
+   options << i18n("T&ext && Icons") << i18n("&Text Only") << i18n("&Icons Only");
+   viewOptions->setItems(options);
+   viewOptions->setCurrentItem(m_tabViewMode);
+   viewOptions->plug(m_tabbarPopupMenu);
+   connect(viewOptions, SIGNAL(activated(int)), this, SLOT(slotTabSetViewOptions(int)));
+   slotTabSetViewOptions(m_tabViewMode);
+ }
 
 void Konsole::makeTabWidget()
 {
@@ -855,6 +860,8 @@ void Konsole::makeTabWidget()
   connect(tabwidget, SIGNAL(currentChanged(QWidget*)), SLOT(activateSession(QWidget*)));
   connect( tabwidget, SIGNAL(contextMenu(QWidget*, const QPoint &)),
            SLOT(slotTabContextMenu(QWidget*, const QPoint &)));
+  connect( tabwidget, SIGNAL(contextMenu(const QPoint &)),
+           SLOT(slotTabbarContextMenu(const QPoint &)));
 
   if (kapp->authorize("shell_access")) {
     QToolButton* newsession = new QToolButton( tabwidget );
@@ -1200,6 +1207,14 @@ void Konsole::slotTabToggleMasterMode()
 void Konsole::slotTabCloseSession()
 {
   m_contextMenuSession->closeSession();
+}
+
+void Konsole::slotTabbarContextMenu(const QPoint & pos)
+{
+   if (!m_menuCreated)
+      makeGUI();
+
+  m_tabbarPopupMenu->popup( pos );
 }
 
 void Konsole::slotTabSetViewOptions(int mode)
