@@ -1525,8 +1525,9 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       ColorSchema* sch = colors->find(schema.isEmpty() ? s_kconfigSchema : schema);
       if (!sch)
       {
-         kdWarning() << "Could not find schema named " <<s_kconfigSchema<< endl;
-         sch=(ColorSchema*)colors->at(0);  //the default one
+         sch = (ColorSchema*)colors->at(0);  //the default one
+         kdWarning() << "Could not find schema named " <<s_kconfigSchema<<"; using "<<sch->relPath()<<endl;
+         s_kconfigSchema = sch->relPath();
       }
       if (sch->hasSchemaFileChanged()) sch->rereadSchemaFile();
       s_schema = sch->relPath();
@@ -1692,10 +1693,8 @@ void Konsole::slotSelectFont( int option ) {
 
 void Konsole::schema_menu_activated(int item)
 {
-  assert(se);
-  //FIXME: save schema name
+  if (!se) return;
   setSchema(item);
-  s_kconfigSchema = s_schema; // This is the new default
   activateSession(); // activates the current
 }
 
@@ -1949,6 +1948,20 @@ void Konsole::reparseConfiguration()
   }
 
   m_shortcuts->readShortcutSettings();
+
+  // User may have changed Schema->Set as default schema
+  s_kconfigSchema = KGlobal::config()->readEntry("schema");
+  ColorSchema* sch = colors->find(s_kconfigSchema);
+  if (!sch)
+  {
+     sch = (ColorSchema*)colors->at(0);  //the default one
+     kdWarning() << "Could not find schema named " <<s_kconfigSchema<<"; using "<<sch->relPath()<<endl;
+     s_kconfigSchema = sch->relPath();
+  }
+  if (sch->hasSchemaFileChanged()) sch->rereadSchemaFile();
+  s_schema = sch->relPath();
+  curr_schema = sch->numb();
+  pmPath = sch->imagePath();
 
   for (TESession *_se = sessions.first(); _se; _se = sessions.next()) {
      ColorSchema* s = colors->find( _se->schemaNo() );
@@ -3296,8 +3309,9 @@ void Konsole::setSchema(const QString & path)
   ColorSchema* s = colors->find(path);
   if (!s)
   {
-        kdWarning() << "Could not find schema named " << path << endl;
-        s=(ColorSchema*)colors->at(0);
+     s = (ColorSchema*)colors->at(0);  //the default one
+     kdWarning() << "Could not find schema named " <<path<<"; using "<<s->relPath()<<endl;
+     s_kconfigSchema = s->relPath();
   }
   if (s->hasSchemaFileChanged())
   {
