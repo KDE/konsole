@@ -451,19 +451,29 @@ HCNT("setImage");
       hasBlinker |= (ext[x].r & RE_BLINK);
       if (ext[x] != lcl[x])
       {
+        Q_UINT16 c = ext[x+0].c;
+        if ( !c )
+            continue;
+        int p = 0;
+        disstrU[p++] = fontMap(c);
         cr = ext[x].r;
         cb = ext[x].b;
         if (ext[x].f != cf) cf = ext[x].f;
         int lln = cols - x;
-        disstrU[0] = fontMap(ext[x+0].c);
         for (len = 1; len < lln; len++)
         {
+          c = ext[x+len].c;
+          if (!c)
+            continue; // Skip trailing part of multi-col chars.
+
           if (ext[x+len].f != cf || ext[x+len].b != cb || ext[x+len].r != cr ||
               ext[x+len] == lcl[x+len] )
             break;
-          disstrU[len] = fontMap(ext[x+len].c);
+
+          disstrU[p++] = fontMap(c);
         }
-        QString unistr(disstrU,len);
+
+        QString unistr(disstrU, p);
         drawAttrStr(paint,
                     QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
                     unistr, ext[x], pm != NULL, true);
@@ -564,26 +574,37 @@ HCNT("paintEvent");
 
   QChar *disstrU = new QChar[columns];
   for (int y = luy; y <= rly; y++)
-  for (int x = lux; x <= rlx; x++)
   {
-    int len = 1;
-    disstrU[0] = fontMap(image[loc(x,y)].c);
-    int cf = image[loc(x,y)].f;
-    int cb = image[loc(x,y)].b;
-    int cr = image[loc(x,y)].r;
-    while (x+len <= rlx &&
-           image[loc(x+len,y)].f == cf &&
-           image[loc(x+len,y)].b == cb &&
-           image[loc(x+len,y)].r == cr )
+    Q_UINT16 c = image[loc(lux,y)].c;
+    int x = lux;
+    if(!c && x)
+      x--; // Search for start of multi-col char
+    for (; x <= rlx; x++)
     {
-      disstrU[len] = fontMap(image[loc(x+len,y)].c);
-      len += 1;
-    }
-    QString unistr(disstrU,len);
-    drawAttrStr(paint,
+      int len = 1;
+      int p = 0;
+      c = image[loc(x,y)].c;
+      if (c)
+         disstrU[p++] = fontMap(c);
+      int cf = image[loc(x,y)].f;
+      int cb = image[loc(x,y)].b;
+      int cr = image[loc(x,y)].r;
+      while (x+len <= rlx &&
+             image[loc(x+len,y)].f == cf &&
+             image[loc(x+len,y)].b == cb &&
+             image[loc(x+len,y)].r == cr )
+      {
+        c = image[loc(x+len,y)].c;
+        if (c)
+          disstrU[p++] = fontMap(c);
+        len++;
+      }
+      QString unistr(disstrU,p);
+      drawAttrStr(paint,
                 QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
                 unistr, image[loc(x,y)], pm != NULL, false);
-    x += len - 1;
+      x += len - 1;
+    }
   }
   delete [] disstrU;
   drawFrame( &paint );

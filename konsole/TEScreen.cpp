@@ -1123,107 +1123,111 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
   d = 0;
 
   while (s <= sel_BR)
-    {
+  {
       if (s < hist_BR)
-	{			// get lines from hist->history buffer.
-	  eol = hist->getLineLen(hY);
+      {				// get lines from hist->history buffer.
+          eol = hist->getLineLen(hY);
 
-	  if ((hY == (sel_BR / columns)) &&
-	      (eol > (sel_BR % columns)))
-	    {
-	      eol = sel_BR % columns + 1;
-	    }
-	  
-	  while (hX < eol)
-	    {
-	      m[d++] = hist->getCell(hY, hX++).c;
-	      s++;
-	    }
+          if ((hY == (sel_BR / columns)) &&
+              (eol > (sel_BR % columns)))
+          {
+              eol = sel_BR % columns + 1;
+          }
+          
+          while (hX < eol)
+          {
+              Q_UINT16 c = hist->getCell(hY, hX++).c;
+              if (c)
+                 m[d++] = c;
+              s++;
+          }
 
-	  if (s <= sel_BR)
-	    { 			// The line break handling
-	      if (eol % columns == 0)
-		{ 	        // That's either a full or empty line
-		  if (eol == 0)
-		    {           // empty line, not wrapped
-		      m[d++] = preserve_line_breaks ? '\n' : ' ';
-		    }
-		  else
-		    {		// We have a full line.
-  		      if (!hist->isWrappedLine(hY))
-			{       // line is not wrapped
-			  m[d++] = preserve_line_breaks ? '\n' : ' ';
-			}
-		    }
-		}
-	      else if ((eol + 1) % columns == 0)
-		{
+          if (s <= sel_BR)
+          {			// The line break handling
+              if (eol % columns == 0)
+              { 	        // That's either a full or empty line
+                  if (eol == 0)
+                  {		// empty line, not wrapped
+                      m[d++] = preserve_line_breaks ? '\n' : ' ';
+                  }
+                  else
+                  {		// We have a full line.
+                      if (!hist->isWrappedLine(hY))
+                      {		// line is not wrapped
+                          m[d++] = preserve_line_breaks ? '\n' : ' ';
+                      }
+                  }
+              }
+              else if ((eol + 1) % columns == 0)
+              {
                   if (!hist->isWrappedLine(hY))
-                    {
-	  	       m[d++] = preserve_line_breaks ? '\n' : ' ';
-                    }
-		}
-	      else
-		{       	// We have a short line here.
-		  m[d++] = preserve_line_breaks ? '\n' : ' ';
-		}
-	    }
+                  {
+                         m[d++] = preserve_line_breaks ? '\n' : ' ';
+                  }
+              }
+              else
+              {			// We have a short line here.
+                  m[d++] = preserve_line_breaks ? '\n' : ' ';
+              }
+          }
 
-	  hY++;
-	  hX = 0;
-	  s = hY * columns;
-	}
-    else
+          hY++;
+          hX = 0;
+          s = hY * columns;
+      }
+      else
       {				// or from screen image.
-	eol = (s / columns + 1) * columns - 1;
+        eol = (s / columns + 1) * columns - 1;
 
         bool addNewLine = false;
 
-	if (eol < sel_BR)
-	  {
-	    while ((eol > s) &&
-		   isspace(image[eol - hist_BR].c) &&
+        if (eol < sel_BR)
+        {
+            while ((eol > s) &&
+                   (!image[eol - hist_BR].c || isspace(image[eol - hist_BR].c)) &&
                    !line_wrapped[(eol-hist_BR)/columns])
-	      {
-		eol--;
-	      }
-	  }
-	else if (eol == sel_BR)
-          {
+            {
+                eol--;
+            }
+        }
+        else if (eol == sel_BR)
+        {
             addNewLine = true;
-          }
+        }
         else
-	  {
-	    eol = sel_BR;
-	  }
+        {
+            eol = sel_BR;
+        }
 
-	while (s <= eol)
-	  {
-	    m[d++] = image[s++ - hist_BR].c;
-	  }
+        while (s <= eol)
+        {
+            Q_UINT16 c = image[s++ - hist_BR].c;
+            if (c)
+                 m[d++] = c;
+        }
 
-	if (eol < sel_BR)
-	  {			// eol processing
-	    if ((eol + 1) % columns == 0)
-	      {                 // the whole line is filled
-		if (!line_wrapped[(eol - hist_BR)/columns])
-        	  {             // line is not wrapped
-		    m[d++] = preserve_line_breaks ? '\n' : ' ';
-		  }
-	      }
-	    else
-	      {                 // blank/partial line, not wrapped
-		m[d++] = preserve_line_breaks ? '\n' : ' ';
-	      }
-	  }
+        if (eol < sel_BR)
+        {			// eol processing
+            if ((eol + 1) % columns == 0)
+            {			// the whole line is filled
+                if (!line_wrapped[(eol - hist_BR)/columns])
+                {		// line is not wrapped
+                    m[d++] = preserve_line_breaks ? '\n' : ' ';
+                }
+            }
+            else
+            {			// blank/partial line, not wrapped
+                m[d++] = preserve_line_breaks ? '\n' : ' ';
+            }
+        }
         else if (addNewLine && preserve_line_breaks)
-          {
+        {
             m[d++] = '\n';
-          }
+        }
 
-	s = (eol / columns + 1) * columns;
+        s = (eol / columns + 1) * columns;
       }
-    }
+  }
 
   QChar* qc = new QChar[d];
 
