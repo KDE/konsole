@@ -497,11 +497,14 @@ void TEDemo::setFont(int fontno)
   QFont f( fonts[fontno] );
   f.setRawMode( TRUE );
   if ( !f.exactMatch() )
+  {
+    QString msg;
+    msg.sprintf(i18n("Font `%s' not found.\nCheck README.linux.console for help."), fonts[fontno]);
     KMsgBox::message
     ( this,
-      "Error", QString("Font '") + fonts[fontno] + "' not found.\n"
-      "Check README.linux.console for help.",
+      i18n("Error"), msg,
       KMsgBox::EXCLAMATION );
+  }
   else
   {
     te->setVTFont(f);
@@ -725,12 +728,13 @@ void TEDemo::doneSession(TESession* s, int status)
 //printf("%s(%d): Exited:%d ExitStatus:%d\n",__FILE__,__LINE__,WIFEXITED(status),WEXITSTATUS(status));
   if (!WIFEXITED((status)) || WEXITSTATUS((status)))
   {
-    QString str = QString("`") + QString(s->Title()) + "' terminated abnormally.";
+    QString str;
+    str.sprintf(i18n("`%s' terminated abnormally."), s->Title());
     if (WIFEXITED((status)))
-    { char rcs[100]; sprintf(rcs,"%d.\n",WEXITSTATUS((status)));
-      str = str + "\nReturn code = " + rcs;
+    {char rcs[100]; sprintf(rcs,"%d.\n",WEXITSTATUS((status)));
+      str = str + i18n("\nReturn code = ") + rcs;
     }
-    KMsgBox::message( this, "Error", str, KMsgBox::EXCLAMATION );
+    KMsgBox::message( this, i18n("Error"), str, KMsgBox::EXCLAMATION );
 
   }
   int no = (int)session2no.find(s);
