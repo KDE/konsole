@@ -109,6 +109,7 @@ public:
 
 public slots:
 
+    void setSelectionEnd();
     void copyClipboard();
     void pasteClipboard();
     void pasteSelection();
@@ -154,6 +155,7 @@ protected:
     void mousePressEvent( QMouseEvent* );
     void mouseReleaseEvent( QMouseEvent* );
     void mouseMoveEvent( QMouseEvent* );
+    void extendSelection( QPoint pos );
     void wheelEvent( QWheelEvent* );
 
     void focusInEvent( QFocusEvent * );
@@ -255,6 +257,8 @@ private:
     uint m_lineSpacing;
 
     QRect       cursorRect; //for quick changing of cursor
+
+    QPoint configureRequestPoint;  // remember right mouse button click position
 
 private slots:
     void drop_menu_activated(int item);

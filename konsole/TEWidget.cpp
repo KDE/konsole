@@ -938,14 +938,14 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   int    tLx = tL.x();
   int    tLy = tL.y();
 
-  line_selection_mode = false;
-  word_selection_mode = false;
-
   QPoint pos = QPoint((ev->x()-tLx-bX+(font_w/2))/font_w,(ev->y()-tLy-bY)/font_h);
 
 //printf("press top left [%d,%d] by=%d\n",tLx,tLy, bY);
   if ( ev->button() == LeftButton)
   {
+    line_selection_mode = false;
+    word_selection_mode = false;
+
     emit isBusySelecting(true); // Keep it steady...
     // Drag only when the Control key is hold
     bool selected = false;
@@ -987,8 +987,10 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   }
   else if ( ev->button() == RightButton )
   {
-    if (mouse_marks || (ev->state() & ShiftButton))
+    if (mouse_marks || (ev->state() & ShiftButton)) {
+      configureRequestPoint = QPoint( ev->x(), ev->y() );
       emit configureRequest( this, ev->state()&(ShiftButton|ControlButton), ev->x(), ev->y() );
+    }
     else
       emit mouseSignal( 2, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
   }
@@ -1023,6 +1025,16 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
  // don't extend selection while pasting
   if (ev->state() & MidButton) return;
 
+  extendSelection( ev->pos() );
+}
+
+void TEWidget::setSelectionEnd()
+{
+  extendSelection( configureRequestPoint );
+}
+
+void TEWidget::extendSelection( QPoint pos )
+{
   //if ( !contentsRect().contains(ev->pos()) ) return;
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
@@ -1034,14 +1046,14 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
   // this widget.
 
   // Adjust position within text area bounds. See FIXME above.
-  QPoint pos = ev->pos();
+  QPoint oldpos = pos;
   if ( pos.x() < tLx+bX )                  pos.setX( tLx+bX );
   if ( pos.x() > tLx+bX+columns*font_w-1 ) pos.setX( tLx+bX+columns*font_w );
   if ( pos.y() < tLy+bY )                   pos.setY( tLy+bY );
   if ( pos.y() > tLy+bY+lines*font_h-1 )    pos.setY( tLy+bY+lines*font_h-1 );
 
   // check if we produce a mouse move event by this
-  if ( pos != ev->pos() ) cursor().setPos(mapToGlobal(pos));
+  if ( pos != oldpos ) cursor().setPos(mapToGlobal(pos));
 
   if ( pos.y() == tLy+bY+lines*font_h-1 )
   {

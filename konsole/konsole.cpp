@@ -628,6 +628,10 @@ void Konsole::makeGUI()
    showMenubar->plug ( m_rightButton );
    m_rightButton->insertSeparator();
 
+   KAction* selectionEnd = new KAction(i18n("Set Selection End"), 0, te,
+                               SLOT(setSelectionEnd()), actions);
+   selectionEnd->plug(m_rightButton);
+   
    m_copyClipboard->plug(m_rightButton);
    m_pasteClipboard->plug(m_rightButton);
    m_rightButton->insertItem(i18n("&Send Signal"), m_signals);
@@ -1789,7 +1793,7 @@ void Konsole::listSessions()
 {
   int counter=0;
   KPopupMenu* m_sessionList = new KPopupMenu(this);
-  m_sessionList->insertTitle(i18n("Session List:"));
+  m_sessionList->insertTitle(i18n("Session List"));
 #if KDE_VERSION >=306
   m_sessionList->setKeyboardShortcutsEnabled(true);
 #endif
