@@ -24,11 +24,10 @@
 */
 
 /*TODO:
-  - allow to set keytab
   - allow to set coded
-  - fix setting history
-  - fix resize (scroll)
-  - fix reported crash in TEScreen.C (tcsh+TERM=ansi,CTRL-A)
+  - officially declare this file to be hacked to death.
+    konsole/kwin session management, parts stuff, config, menues
+    are all in bad need for a complete rewrite.
 */
 
 /*FIXME:
@@ -214,7 +213,6 @@ Konsole::~Konsole()
 
 /* ------------------------------------------------------------------------- */
 /*  Make menu                                                                */
-/*                                                                           */
 /* ------------------------------------------------------------------------- */
 
 void Konsole::makeMenu()
@@ -228,14 +226,19 @@ void Konsole::makeMenu()
 
   KAction *newsession = KStdAction::openNew(this , SLOT(newSessionSelect()));
   newsession->plug(toolBar());
+/*
   QObjectList *l = toolBar()->queryList( "KToolBarButton" );
   if ( l && l->first() )
   {
-      ( (KToolBarButton*)l->first() )->setDelayedPopup( m_toolbarSessionsCommands );
-      connect( (KToolBarButton*)l->first() , SIGNAL(clicked()), this, SLOT(newSession()));
-
+    ( (KToolBarButton*)l->first() )->setDelayedPopup( m_toolbarSessionsCommands );
+//FIXME: Lars. Someone broke toolbar opening session selection.
+//       There were very good reasons to do so, since the "first"
+//       possible session is random! Please revert to behavior
+//       i've already coded.
+connect( (KToolBarButton*)l->first() , SIGNAL(clicked()), this, SLOT(newSession()));
   }
   delete l;
+*/
   toolBar()->insertLineSeparator();
 
   QPopupMenu* m_signals = new QPopupMenu(this);
@@ -840,7 +843,7 @@ void Konsole::addSession(TESession* s)
   // create an action for the session
   QString title = i18n("%1 No %2").arg(s->Title()).arg(session_no);
   //  char buffer[30];
-  //  int acc = CTRL+SHIFT+Key_0+session_no;
+  //  int acc = CTRL+SHIFT+Key_0+session_no; // Lars: keys stolen by kwin.
   KRadioAction *ra = new KRadioAction(title, 
                                      "openterm", 
 				      0,
@@ -855,6 +858,7 @@ void Konsole::addSession(TESession* s)
 
   action2session.insert(ra, s);
   session2action.insert(s,ra);
+  sessions.append(s);
   ra->plug(m_sessions);
   ra->plug(toolBar());
 }
@@ -873,11 +877,19 @@ void Konsole::activateSession()
     if (ra->isChecked()) { s = it.current(); break; }
     ++it;
   }
-  if (s==NULL) { // the session was not found
-    return;
+  if (s!=NULL) activateSession(s);
+}
+
+void Konsole::activateSession(TESession *s)
+{
+  if (se)
+  { se->setConnect(FALSE);
+    QObject::disconnect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
+    QObject::disconnect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
   }
-  if (se) { se->setConnect(FALSE); }
   se = s;
+  session2action.find(se)->setChecked(true);
+  QTimer::singleShot(1,this,SLOT(allowPrevNext())); // hack, hack, hack
   if (s->schemaNo()!=curr_schema)  {
     // the current schema has changed
     setSchema(s->schemaNo());
@@ -897,8 +909,10 @@ void Konsole::activateSession()
   keytab_menu_activated(n_keytab); // act. the keytab for this session
 }
 
-void Konsole::newSessionSelect()
+void Konsole::allowPrevNext()
 {
+  QObject::connect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
+  QObject::connect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
 }
 
 void Konsole::newSession()
@@ -917,6 +931,18 @@ void Konsole::newSession()
   if (session==0) session=1;
 
   newSession(session);
+}
+
+void Konsole::newSessionSelect()
+{
+  // Take into account the position of the toolBar to determine where we put the popup
+  if((toolBar()->barPos() == KToolBar::Top) || (toolBar()->barPos() == KToolBar::Left)) {
+    m_file->popup(te->mapToGlobal(QPoint(0,0)));
+  } else if(toolBar()->barPos() == KToolBar::Right) {
+    m_file->popup(te->mapToGlobal(QPoint(te->width()-m_file->sizeHint().width(), 0)));
+  } else {
+    m_file->popup(te->mapToGlobal(QPoint(0,te->height()-m_file->sizeHint().height())));
+  }
 }
 
 void Konsole::newSession(int i)
@@ -995,6 +1021,7 @@ void Konsole::doneSession(TESession* s, int )
   ra->unplug(toolBar());
   session2action.remove(s);
   action2session.remove(ra);
+  sessions.remove(s);
   delete ra; // will the toolbar die?
 
   s->setConnect(FALSE);
@@ -1018,6 +1045,25 @@ void Konsole::doneSession(TESession* s, int )
     } else
       kapp->quit();
   }
+}
+
+
+/*! Cycle to previous session (if any) */
+
+void Konsole::prevSession()
+{
+  sessions.find(se); sessions.prev();
+  if (!sessions.current()) sessions.last();
+  if (sessions.current()) activateSession(sessions.current());
+}
+
+/*! Cycle to next session (if any) */
+
+void Konsole::nextSession()
+{
+  sessions.find(se); sessions.next();
+  if (!sessions.current()) sessions.first();
+  if (sessions.current()) activateSession(sessions.current());
 }
 
 // --| Session support |-------------------------------------------------------

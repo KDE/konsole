@@ -60,6 +60,8 @@ public slots: // signals incoming from TEWidget
 signals:
 
   void changeTitle(int,const QString&);
+  void prevSession();
+  void nextSession();
 
 public:
 

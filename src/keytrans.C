@@ -13,6 +13,8 @@
 /*
    The keyboard translation table allows to configure konsoles behavior
    on key strokes.
+
+   FIXME: some bug crept in, disallowing '\0' to be emitted.
 */
 
 #include "keytrans.h"
@@ -134,7 +136,7 @@ public:
   void ReportToken(); // diagnostic
 private:
   int     sym;
-  QCString res;
+  QCString res; //FIXME: QCString syntax might have changed. Does not keep '\0' anymore. E.g. Ctrl+Space key.
   int     len;
   int     slinno;
   int     scolno;

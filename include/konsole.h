@@ -50,6 +50,7 @@ public:
 private slots:
   void configureRequest(TEWidget*,int,int,int);
   void activateSession();
+  void activateSession(TESession*);
   void doneSession(TESession*,int);
   void opt_menu_activated(int item);
   void schema_menu_activated(int item);
@@ -57,13 +58,16 @@ private slots:
   void keytab_menu_activated(int item);
   void tecRef();
   void newSession();
-  void newSession(int kind);
   void newSessionSelect();
+  void newSession(int kind);
 
   void changeColumns(int);
   void notifySize(int,int);
   void setHeader();
   void changeTitle(int, const QString&);
+  void prevSession();
+  void nextSession();
+  void allowPrevNext();
 
 protected:
 
@@ -105,16 +109,10 @@ private:
 
 private:
 
-  //////// Those used to be as static in konsole.C, leading
-  /////// to crashes on Solaris (non initialised)
-  ////// I suppose it's ok to make them class specific
-  ///// (after all, Konsole == window, and this could be different for
-  //// two windows....). Make them static pointers initialised in the
-  /// constructor if this is not ok.
-  // (David)
   int session_no;
   QPtrDict<TESession> action2session;
   QPtrDict<KRadioAction> session2action;
+  QList<TESession> sessions;
   QIntDict<KSimpleConfig> no2command;
   int cmd_serial;
 

@@ -724,6 +724,7 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
                                      encodeStat(ShiftButton   , BITS_Shift     ) +
                                      encodeStat(AltButton     , BITS_Alt       ),
                           &cmd, &txt, &len ))
+//printf("cmd: %d, %s, %d\n",cmd,txt,len);
   switch(cmd) // ... and execute if found.
   {
     case CMD_emitSelection  : gui->emitSelection();           return;
@@ -732,8 +733,8 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
     case CMD_scrollLineUp   : gui->doScroll(-1             ); return;
     case CMD_scrollLineDown : gui->doScroll(+1             ); return;
     case CMD_send           : emit sndBlock(txt,len);         return;
-    case CMD_prevSession    : /* FIXME: todo */               return;
-    case CMD_nextSession    : /* FIXME: todo */               return;
+    case CMD_prevSession    : emit prevSession();             return;
+    case CMD_nextSession    : emit nextSession();             return;
   }
 
   // fall back handling

@@ -53,8 +53,8 @@ key Backspace      : "\x7f"
 
 key Up    -Shift   : "\EOA"
 key Down  -Shift   : "\EOB"
-key Right          : "\EOC"
-key Left           : "\EOD"
+key Right -Shift   : "\EOC"
+key Left  -Shift   : "\EOD"
 
 # other grey PC keys
 
@@ -89,6 +89,8 @@ key Space +Control : "\x00"
 # Some keys are used by konsole to cause operations.
 # The scroll* operations refer to the history buffer.
 
+key Left  +Shift   : prevSession
+key Right +Shift   : nextSession
 key Up    +Shift   : scrollLineUp
 key Prior +Shift   : scrollPageUp
 key Down  +Shift   : scrollLineDown
