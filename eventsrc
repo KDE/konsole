@@ -2,6 +2,7 @@
 IconName=konsole
 Comment=Konsole
 Comment[be]=Кансоля
+Comment[bg]=Конзола
 Comment[da]=Konsol
 Comment[et]=Konsool
 Comment[fa]=کنسول
@@ -12,6 +13,7 @@ Comment[xx]=xxKonsolexx
 
 [BellVisible]
 Name=Bell in visible session
+Name[bg]=Камбана във видима сесия
 Name[ca]=Timbre a la sessió visible
 Name[cs]=Zvonek ve viditelné relaci
 Name[cy]=Cloch yn y sesiwn gweladwy
@@ -32,6 +34,7 @@ Name[th]=ออดบนเซสชันที่มองเห็น
 Name[tr]=Görünen oturumda zil
 Name[xx]=xxBell in visible sessionxx
 Comment=Bell emitted within a visible session
+Comment[bg]=Камбана във видима сесия
 Comment[ca]=Timbre emès dins d'una sessió visible
 Comment[cy]=Gollyngwyd cloch mewn sesiwn gweledig
 Comment[da]=Klokke brugt indenfor en synlig session
@@ -53,6 +56,7 @@ default_presentation=1
 
 [BellInvisible]
 Name=Bell in non-visible session
+Name[bg]=Камбана в невидима сесия
 Name[ca]=Timbre a la sessió no visible
 Name[cs]=Zvonek v neviditelné relaci
 Name[cy]=Cloch mewn sesiwn anweledig
@@ -72,6 +76,7 @@ Name[sv]=Ljudsignal i osynlig session
 Name[th]=ออดบนเซสชันที่มองไม่เห็น
 Name[xx]=xxBell in non-visible sessionxx
 Comment=Bell emitted within a non-visible session
+Comment[bg]=Камбана в невидима сесия
 Comment[ca]=Timbre emès dins d'una sessió no visible
 Comment[cy]=Gollyngwyd cloch mewn sesiwn anweledig
 Comment[da]=Klokke brugt indenfor en ikke-synlig session
@@ -92,6 +97,7 @@ default_presentation=16
 
 [Activity]
 Name=Activity in monitored session
+Name[bg]=Активност в наблюдавана сесия
 Name[ca]=Activitat a la sessió monitoritzada
 Name[cs]=Aktivita v monitorované relaci
 Name[cy]=Gweithgarwch mewn sesiwn wedi'i fonitro
@@ -113,6 +119,7 @@ Name[th]=การกระทำบนเซสชันติดตามก�
 Name[tr]=İzlenen oturumda etkinlik
 Name[xx]=xxActivity in monitored sessionxx
 Comment=Activity detected in a monitored session
+Comment[bg]=Активност в наблюдавана сесия
 Comment[ca]=Detectada activitat en una sessió monitoritzada
 Comment[cs]=Detekována aktivita v monitorované relaci
 Comment[cy]=Datgelwyd gweithgaredd mewn seswin wedi'i fonitro
@@ -135,6 +142,7 @@ default_presentation=16
 
 [Silence]
 Name=Silence in monitored session
+Name[bg]=Пасивност в наблюдавана сесия
 Name[ca]=Silenci a la sessió monitoritzada
 Name[cs]=Ticho v monitorované relaci
 Name[cy]=Distawrwydd mewn sesiwn wedi'i fonitro
@@ -154,6 +162,7 @@ Name[sv]=Tystnad i bevakad session
 Name[tr]=İzlenen oturumda sessizlik
 Name[xx]=xxSilence in monitored sessionxx
 Comment=Silence detected in a monitored session
+Comment[bg]=Пасивност в наблюдавана сесия
 Comment[ca]=Detectat silenci en una sessió monitoritzada
 Comment[cs]=Detekováno ticho v monitorované relaci
 Comment[cy]=Datgelwyd distawrwydd mewn sesiwn wedi'i fonitro
@@ -176,6 +185,7 @@ default_presentation=16
 
 [Finished]
 Name=Session finished with non-zero status
+Name[bg]=Сесия с код на изход различен от нула
 Name[ca]=Sessió finalitzada amb un estatus no zero
 Name[cs]=Relace ukončena s nenulovým stavem
 Name[cy]=Gorffenodd y sesiwn efo cyflwr di-sero
@@ -196,6 +206,7 @@ Name[th]=เซสชันจบการทำงานได้สถาน�
 Name[tr]=Oturum sıfırdan farklı bir durumla çıktı
 Name[xx]=xxSession finished with non-zero statusxx
 Comment=A session has exited with non-zero status
+Comment[bg]=Сесия с код на изход различен от нула
 Comment[ca]=Una sessió ha eixit amb un estatus no zero
 Comment[cs]=Relace byla ukončena s nenulovým stavem
 Comment[cy]=Terfynnodd sesiwn efo cyflwr di-sero
