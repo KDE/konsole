@@ -1133,6 +1133,8 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
       {				// or from screen image.
 	eol = (s / columns + 1) * columns - 1;
 
+        bool addNewLine = false;
+
 	if (eol < sel_BR)
 	  {
 	    while ((eol > s) &&
@@ -1141,7 +1143,11 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
 		eol--;
 	      }
 	  }
-	else
+	else if (eol == sel_BR)
+          {
+            addNewLine = true;
+          }
+        else
 	  {
 	    eol = sel_BR;
 	  }
@@ -1168,26 +1174,47 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
 			  '\n' : ' ');
 	      }
 	  }
+        else if (addNewLine && preserve_line_breaks)
+          {
+            m[d++] = '\n';
+          }
 
 	s = (eol / columns + 1) * columns;
         lines++;
       }
     }
 
-  if (lines > 1)
-  {
-     // Strip trailing spaces if more than one line selected.
-     while ((d>0) && isspace(m[d-1])) d--;
-  }
-
   QChar* qc = new QChar[d];
 
-  for (int i = 0; i < d; i++)
+  int last_space = -1;
+  int j = 0;
+
+  for (int i = 0; i < d; i++, j++)
     {
-      qc[i] = m[i];
+      if (m[i] == ' ')
+        {
+          if (last_space == -1)
+            last_space = j;
+        }
+      else
+        {
+          if ((m[i] == '\n') && (last_space != -1))
+            {
+              // Strip trailing spaces
+              j = last_space;
+            }
+          last_space = -1;
+        }
+      qc[j] = m[i];
     }
-  
-  QString res(qc, d);
+
+  if (last_space != -1)
+    {
+      // Strip trailing spaces
+      j = last_space;
+    }  
+
+  QString res(qc, j);
 
   delete [] m;
   delete [] qc;
