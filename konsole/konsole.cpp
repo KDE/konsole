@@ -593,7 +593,7 @@ void Konsole::makeGUI()
 
    m_options->insertSeparator();
 
-   KAction *save_settings = new KAction(i18n("&Save as Default"), "options_save_options", 0, this,
+   KAction *save_settings = new KAction(i18n("&Save as Default"), "filesave", 0, this,
                                         SLOT(slotSaveSettings()), actions);
    save_settings->plug(m_options);
 
@@ -843,7 +843,7 @@ void Konsole::makeBasicGUI()
 
   m_closeSession = new KAction(i18n("C&lose Session"), "fileclose", 0, this,
                                SLOT(closeCurrentSession()), m_shortcuts, "close_session");
-  m_print = new KAction(i18n("&Print Screen"), "file_print", 0, this, SLOT( slotPrint() ), m_shortcuts, "fileprint");
+  m_print = new KAction(i18n("&Print Screen..."), "fileprint", 0, this, SLOT( slotPrint() ), m_shortcuts, "fileprint");
   m_quit = new KAction(i18n("&Quit"), "exit", 0, this, SLOT( close() ), m_shortcuts, "quit");
 
   new KAction(i18n("New Session"), Qt::CTRL+Qt::ALT+Qt::Key_N, this, SLOT(newSession()), m_shortcuts, "new_session");
@@ -1378,7 +1378,7 @@ void Konsole::setFont(int fontno)
      QStringList items = selectFont->items();
      int i = fontno;
      int j = 0;
-     for(;j < items.count();j++)
+     for(;j < (int)items.count();j++)
      {
        if (!items[j].isEmpty())
           if (!i--)
@@ -2354,14 +2354,14 @@ void Konsole::buildSessionMenus()
    loadSessionCommands();
    loadScreenSessions();
 
-   m_session->insertSeparator();
-   m_closeSession->plug(m_session);
-
    if (kapp->authorizeKAction("file_print"))
    {
       m_session->insertSeparator();
       m_print->plug(m_session);
    }
+
+   m_session->insertSeparator();
+   m_closeSession->plug(m_session);
 
    m_session->insertSeparator();
    m_quit->plug(m_session);
