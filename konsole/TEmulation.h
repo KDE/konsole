@@ -59,6 +59,7 @@ public slots: // signals incoming from data source
 
 signals:
 
+  void lockPty(bool);
   void sndBlock(const char* txt,int len);
   void ImageSizeChanged(int lines, int columns);
   void changeColumns(int columns);

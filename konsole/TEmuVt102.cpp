@@ -803,12 +803,12 @@ void TEmuVt102::scrollLock(const bool lock)
   if (lock)
   {
     holdScreen = true;
-    emit sndBlock("\023", 1); // XOFF -> ^S
+    emit lockPty(true);
   }
   else
   {
     holdScreen = false;
-    emit sndBlock("\021", 1); // XON -> ^Q
+    emit lockPty(false);
   }
 #if defined(HAVE_XTEST) || defined(HAVE_XKB)
   if (holdScreen)
@@ -861,26 +861,6 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
     case CMD_scrollLineUp   : gui->doScroll(-1             ); return;
     case CMD_scrollLineDown : gui->doScroll(+1             ); return;
     case CMD_scrollLock     : onScrollLock(                ); return;
-  }
-
-  // Catch XOFF/XON aka ^S/^Q.  The state is used for the ScrollLock impl.
-  if ( (ev->state() & ControlButton) )
-  {
-    if ( (ev->type() & QEvent::KeyPress) )
-    {
-//      if ( ev->key()  == Key_Q ) { scrollLock(false); return; }
-      if ( ev->key()  == Key_S ) {
-//        scrollLock(true);
-        emit sndBlock("\023", 1); // XOFF -> ^S
-	KMessageBox::information(gui,
-	                         i18n("You have just sent Ctrl-S to the terminal application!\n\n"
-	                              "Some applications, like shells, will interpret this as the command to "
-	                              "suspend output (XOFF) according to the XON/XOFF flow control protocol.\n"
-				      "If an application appears to be frozen, try sending Ctrl-Q (XON)."),
-	                         i18n("Ctrl-S Sent!"),"ShowWorkflowInfo");
-	return;
-      }
-    }
   }
 
   // revert to non-history when typing

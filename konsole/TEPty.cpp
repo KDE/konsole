@@ -278,6 +278,7 @@ void TEPty::donePty()
   }
 #endif
   if (needGrantPty) chownpty(fd, false);
+
   emit done(status);
 }
 
@@ -589,6 +590,7 @@ void TEPty::startPgm(const char* pgm, QValueList<QCString> & args, const char* t
       ioctl(0,TCGETS,(char *)&ttmode);
 #   endif
 #endif
+      ttmode.c_iflag &= ~(IXOFF | IXON);
       ttmode.c_cc[VINTR] = CTRL('C');
       ttmode.c_cc[VQUIT] = CTRL('\\');
       ttmode.c_cc[VERASE] = 0177;
@@ -765,4 +767,12 @@ void TEPty::DataReceived(int,int &len)
     for (i = 0; i < len; i++) fputc(buf[i],syslog_file);
     fflush(syslog_file);
   }
+}
+
+void TEPty::lockPty(bool lock)
+{
+  if (lock)
+    suspend();
+  else
+    resume();
 }

@@ -53,6 +53,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, QStrList & _args, const
 
   connect( em,SIGNAL(ImageSizeChanged(int,int)),sh,SLOT(setSize(int,int)));
   connect( em,SIGNAL(sndBlock(const char*,int)),sh,SLOT(send_bytes(const char*,int)) );
+  connect( em,SIGNAL(lockPty(bool)),sh,SLOT(lockPty(bool)) );
 
   connect( em, SIGNAL( changeTitle( int, const QString & ) ),
            this, SLOT( setUserTitle( int, const QString & ) ) );

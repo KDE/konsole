@@ -51,7 +51,7 @@ Q_OBJECT
     int masterFd() { return fd; }
 
   public slots:
-
+    void lockPty(bool lock);
     void send_bytes(const char* s, int len);
     void setSize(int lines, int columns);
 
