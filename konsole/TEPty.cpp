@@ -275,7 +275,9 @@ const char* TEPty::deviceName()
 int TEPty::run(const char* _pgm, QStrList & _args, const char* _term, int _addutmp,
                const char* _konsole_dcop, const char* _konsole_dcop_session)
 {
-  arguments = _args;
+  QStrListIterator it( _args );
+  for (; it.current(); ++it )
+    arguments << it.current();
   arguments.prepend(_pgm);
 //  kdDebug() << "pgm = " << _pgm << endl;
   term = _term;
@@ -432,7 +434,7 @@ int TEPty::openPty()
 }
 
 //! only used internally. See `run' for interface
-void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const char* term, int addutmp)
+void TEPty::makePty(const char* dev, const char* pgm, QValueList<QCString> & args, const char* term, int addutmp)
 { 
 
   int sig;
@@ -609,7 +611,7 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   char **argv = (char**)malloc(sizeof(char*)*(args.count()+1));
 //  char **argv = (char**)malloc(sizeof(char*)*(args.count()+0));
   for (i = 0; i<args.count(); i++) {
-     argv[i] = strdup(args.at(i));
+     argv[i] = strdup(args[i]);
 //      kdDebug() << "argv[" << i << "]=" << argv[i] << endl;
      }
 //  for (i = 1; i<args.count(); i++) argv[i-1] = strdup(args.at(i));
@@ -668,7 +670,8 @@ int TEPty::setupCommunication(Communication comm)
 
 int TEPty::commSetupDoneC()
 {
-   const char *pgm = arguments.take(0);
+   QCString pgm = arguments.first();
+   arguments.pop_front();
    makePty(ttynam, pgm,arguments,term,addutmp);
    return 0; // Never reached.
 }

@@ -85,7 +85,7 @@ Q_OBJECT
       void donePty();
       
   private:
-    void makePty(const char* dev, const char* pgm, QStrList & args, const char* term, int addutmp);
+    void makePty(const char* dev, const char* pgm, QValueList<QCString> & args, const char* term, int addutmp);
     int  openPty();
     void appendSendJob(const char* s, int len);
 
