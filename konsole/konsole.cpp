@@ -407,10 +407,12 @@ void Konsole::makeGUI()
    if (m_toolbarSessionsCommands)
       disconnect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_session,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
-   disconnect(m_options,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+   if (m_options)
+      disconnect(m_options,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    if (m_help)
       disconnect(m_help,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
-   disconnect(m_rightButton,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+   if (m_rightButton)
+      disconnect(m_rightButton,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_edit,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_view,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    if (m_bookmarks)
@@ -450,7 +452,8 @@ void Konsole::makeGUI()
    m_pasteClipboard->plug(m_edit);
 
    m_edit->setCheckable(true);
-   m_edit->insertItem( i18n("&Send Signal"), m_signals );
+   if (kapp->authorizeKAction("send_signal"))
+      m_edit->insertItem( i18n("&Send Signal"), m_signals );
 
    m_edit->insertSeparator();
    m_zmodemUpload->plug( m_edit );
@@ -520,98 +523,101 @@ void Konsole::makeGUI()
    connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
 
    //options menu
-   // Menubar on/off
-   showMenubar->plug ( m_options );
+   if (m_options)
+   {
+      // Menubar on/off
+      showMenubar->plug ( m_options );
 
-   // Toolbar on/off
-   showToolbar->plug(m_options);
+      // Toolbar on/off
+      showToolbar->plug(m_options);
 
-   // Scrollbar
-   selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), 0, this,
+      // Scrollbar
+      selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), 0, this,
                                        SLOT(slotSelectScrollbar()), actions, "scrollbar" );
-   QStringList scrollitems;
-   scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
-   selectScrollbar->setItems(scrollitems);
-   selectScrollbar->plug(m_options);
+      QStringList scrollitems;
+      scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
+      selectScrollbar->setItems(scrollitems);
+      selectScrollbar->plug(m_options);
 
-   // Fullscreen
-   m_options->insertSeparator();
-   m_fullscreen->plug(m_options);
-   m_options->insertSeparator();
+      // Fullscreen
+      m_options->insertSeparator();
+      m_fullscreen->plug(m_options);
+      m_options->insertSeparator();
 
-   // Select Bell
-   selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), 0 , this,
+      // Select Bell
+      selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), 0 , this,
                                   SLOT(slotSelectBell()), actions, "bell");
-   QStringList bellitems;
-   bellitems << i18n("System &Bell")
-             << i18n("System &Notification")
-             << i18n("&Visible Bell");
-   selectBell->setItems(bellitems);
-   selectBell->plug(m_options);
+      QStringList bellitems;
+      bellitems << i18n("System &Bell")
+                << i18n("System &Notification")
+                << i18n("&Visible Bell");
+      selectBell->setItems(bellitems);
+      selectBell->plug(m_options);
 
-   // Select font
-   selectFont = new KonsoleFontSelectAction( i18n( "&Font" ),
+      // Select font
+      selectFont = new KonsoleFontSelectAction( i18n( "&Font" ),
           SmallIconSet( "text" ), 0, this, SLOT(slotSelectFont()), actions, "font");
-   QStringList it;
-   it << i18n("&Normal")
-      << i18n("&Tiny")
-      << i18n("&Small")
-      << i18n("&Medium")
-      << i18n("&Large")
-      << i18n("&Huge")
-      << ""
-      << i18n("L&inux")
-      << i18n("&Unicode")
-      << ""
-      << i18n("&Custom...");
-   selectFont->setItems(it);
-   selectFont->plug(m_options);
+      QStringList it;
+      it << i18n("&Normal")
+         << i18n("&Tiny")
+         << i18n("&Small")
+         << i18n("&Medium")
+         << i18n("&Large")
+         << i18n("&Huge")
+         << ""
+         << i18n("L&inux")
+         << i18n("&Unicode")
+         << ""
+         << i18n("&Custom...");
+      selectFont->setItems(it);
+      selectFont->plug(m_options);
 
 
-   if (kapp->authorizeKAction("keyboard"))
-      m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
+      if (kapp->authorizeKAction("keyboard"))
+         m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
 
-   // Schema
-   if (kapp->authorizeKAction("schema"))
-      m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Sch&ema" ), m_schema);
+      // Schema
+      if (kapp->authorizeKAction("schema"))
+         m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Sch&ema" ), m_schema);
 
-   // Select size
-   selectSize = new KonsoleFontSelectAction(i18n("S&ize"), 0, this,
+      // Select size
+      selectSize = new KonsoleFontSelectAction(i18n("S&ize"), 0, this,
                                   SLOT(slotSelectSize()), actions, "size");
-   QStringList sizeitems;
-   sizeitems << i18n("40x15 (&Small)")
-      << i18n("80x24 (&VT100)")
-      << i18n("80x25 (&IBM PC)")
-      << i18n("80x40 (&XTerm)")
-      << i18n("80x52 (IBM V&GA)")
-      << ""
-      << i18n("&Custom...");
-   selectSize->setItems(sizeitems);
-   selectSize->plug(m_options);
+      QStringList sizeitems;
+      sizeitems << i18n("40x15 (&Small)")
+         << i18n("80x24 (&VT100)")
+         << i18n("80x25 (&IBM PC)")
+         << i18n("80x40 (&XTerm)")
+         << i18n("80x52 (IBM V&GA)")
+         << ""
+         << i18n("&Custom...");
+      selectSize->setItems(sizeitems);
+      selectSize->plug(m_options);
 
-   KAction *historyType = new KAction(i18n("Hist&ory..."), "history", 0, this,
+      KAction *historyType = new KAction(i18n("Hist&ory..."), "history", 0, this,
                                       SLOT(slotHistoryType()), actions);
-   historyType->plug(m_options);
+      historyType->plug(m_options);
 
-   m_options->insertSeparator();
+      m_options->insertSeparator();
 
-   KAction *save_settings = new KAction(i18n("&Save as Default"), "filesave", 0, this,
+      KAction *save_settings = new KAction(i18n("&Save as Default"), "filesave", 0, this,
                                         SLOT(slotSaveSettings()), actions);
-   save_settings->plug(m_options);
+      save_settings->plug(m_options);
 
-   m_options->insertSeparator();
+      m_options->insertSeparator();
 
-   m_saveProfile->plug(m_options);
+      m_saveProfile->plug(m_options);
 
-   m_options->insertSeparator();
+      m_options->insertSeparator();
 
-   KStdAction::configureNotifications(this, SLOT(slotConfigureNotifications()), actionCollection())->plug(m_options);
-   KStdAction::keyBindings(this, SLOT(slotConfigureKeys()), actionCollection())->plug(m_options);
-   KAction *configure = KStdAction::preferences(this, SLOT(slotConfigure()), actions);
-   configure->plug(m_options);
+      KStdAction::configureNotifications(this, SLOT(slotConfigureNotifications()), actionCollection())->plug(m_options);
+      KStdAction::keyBindings(this, SLOT(slotConfigureKeys()), actionCollection())->plug(m_options);
+      KAction *configure = KStdAction::preferences(this, SLOT(slotConfigure()), actions);
+      configure->plug(m_options);
 
-   if (KGlobalSettings::insertTearOffHandle())
-     m_options->insertTearOffHandle();
+      if (KGlobalSettings::insertTearOffHandle())
+         m_options->insertTearOffHandle();
+   }
 
    //help menu
    if (m_help)
@@ -627,34 +633,41 @@ void Konsole::makeGUI()
    connect(m_session, SIGNAL(activated(int)), SLOT(newSession(int)));
 
    // Right mouse button menu
-   showMenubar->plug ( m_rightButton );
-   m_rightButton->insertSeparator();
+   if (m_rightButton)
+   {
+      showMenubar->plug ( m_rightButton );
+      m_rightButton->insertSeparator();
 
-   KAction* selectionEnd = new KAction(i18n("Set Selection End"), 0, te,
+      KAction* selectionEnd = new KAction(i18n("Set Selection End"), 0, te,
                                SLOT(setSelectionEnd()), actions);
-   selectionEnd->plug(m_rightButton);
+      selectionEnd->plug(m_rightButton);
    
-   m_copyClipboard->plug(m_rightButton);
-   m_pasteClipboard->plug(m_rightButton);
-   m_rightButton->insertItem(i18n("&Send Signal"), m_signals);
+      m_copyClipboard->plug(m_rightButton);
+      m_pasteClipboard->plug(m_rightButton);
+      m_rightButton->insertItem(i18n("&Send Signal"), m_signals);
 
-   m_rightButton->insertSeparator();
-   if (m_toolbarSessionsCommands)
-       m_rightButton->insertItem( i18n("New Sess&ion"), m_toolbarSessionsCommands );
-   m_detachSession->plug(m_rightButton);
-   m_renameSession->plug(m_rightButton);
+      m_rightButton->insertSeparator();
+      if (m_toolbarSessionsCommands)
+         m_rightButton->insertItem( i18n("New Sess&ion"), m_toolbarSessionsCommands );
+      m_detachSession->plug(m_rightButton);
+      m_renameSession->plug(m_rightButton);
 
-   m_rightButton->insertSeparator();
-   if (m_bookmarks)
-     m_rightButton->insertItem(i18n("&Bookmarks"), m_bookmarks);
+      if (m_bookmarks)
+      {
+         m_rightButton->insertSeparator();
+         m_rightButton->insertItem(i18n("&Bookmarks"), m_bookmarks);
+      }
 
-   m_rightButton->insertSeparator();
-   m_rightButton->insertItem(i18n("S&ettings"), m_options);
-   m_rightButton->insertSeparator();
-   m_closeSession->plug(m_rightButton );
-   if (KGlobalSettings::insertTearOffHandle())
-     m_rightButton->insertTearOffHandle();
-
+      if (m_options)
+      {
+         m_rightButton->insertSeparator();
+         m_rightButton->insertItem(i18n("S&ettings"), m_options);
+      }
+      m_rightButton->insertSeparator();
+      m_closeSession->plug(m_rightButton );
+      if (KGlobalSettings::insertTearOffHandle())
+         m_rightButton->insertTearOffHandle();
+   }
 
    delete colors;
    colors = new ColorSchemaList();
@@ -739,14 +752,14 @@ void Konsole::makeBasicGUI()
     bookmarks_menu_check();
   }
 
-  m_options = new KPopupMenu(this);
+  if (kapp->authorizeKAction("settings"))
+     m_options = new KPopupMenu(this);
 
   if (kapp->authorizeKAction("help"))
-  {
-    m_help = helpMenu(0, false);
-  }
+     m_help = helpMenu(0, false);
 
-  m_rightButton = new KPopupMenu(this);
+  if (kapp->authorizeKAction("konsole_rmb"))
+     m_rightButton = new KPopupMenu(this);
 
   if (kapp->authorizeKAction("bookmarks"))
   {
@@ -763,10 +776,12 @@ void Konsole::makeBasicGUI()
   if (m_toolbarSessionsCommands)
      connect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_session,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
-  connect(m_options,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+  if (m_options)
+     connect(m_options,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   if (m_help)
      connect(m_help,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
-  connect(m_rightButton,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+  if (m_rightButton)
+     connect(m_rightButton,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_edit,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_view,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   if (m_bookmarks)
@@ -779,7 +794,8 @@ void Konsole::makeBasicGUI()
   menubar->insertItem(i18n("View"), m_view);
   if (m_bookmarks)
      menubar->insertItem(i18n("Bookmarks"), m_bookmarks);
-  menubar->insertItem(i18n("Settings"), m_options);
+  if (m_options)
+     menubar->insertItem(i18n("Settings"), m_options);
   if (m_help)
      menubar->insertItem(i18n("Help"), m_help);
 
@@ -954,7 +970,10 @@ void Konsole::setColLin(int columns, int lines)
     }
     resize(defaultSize);
   } else {
-    resize(sizeForCentralWidgetSize(te->calcSize(columns, lines)));
+    QSize size = te->calcSize(columns, lines);
+    resize(sizeForCentralWidgetSize(size));
+    if (!kapp->authorizeKAction("size"))
+       te->setFixedSize(size);
     notifySize(lines,columns); // set menu items (strange arg order !)
   }
 }
@@ -969,9 +988,9 @@ void Konsole::configureRequest(TEWidget* te, int state, int x, int y)
 //printf("Konsole::configureRequest(_,%d,%d)\n",x,y);
    if (!m_menuCreated)
       makeGUI();
-  ( (state & ControlButton) ? m_session :
-                              m_rightButton  )
-  ->popup(te->mapToGlobal(QPoint(x,y)));
+  KPopupMenu *menu = (state & ControlButton) ? m_session : m_rightButton;
+  if (menu)
+     menu->popup(te->mapToGlobal(QPoint(x,y)));
 }
 
 /* ------------------------------------------------------------------------- */
@@ -1181,12 +1200,15 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
 void Konsole::applySettingsToGUI()
 {
    if (!m_menuCreated) return;
-   setFont();
-   notifySize(te->Lines(),te->Columns());
-   showToolbar->setChecked(!toolBar()->isHidden());
-   showMenubar->setChecked(!menuBar()->isHidden());
-   selectScrollbar->setCurrentItem(n_scroll);
-   selectBell->setCurrentItem(n_bell);
+   if (m_options)
+   {
+      setFont();
+      notifySize(te->Lines(),te->Columns());
+      showToolbar->setChecked(!toolBar()->isHidden());
+      showMenubar->setChecked(!menuBar()->isHidden());
+      selectScrollbar->setCurrentItem(n_scroll);
+      selectBell->setCurrentItem(n_bell);
+   }
    updateKeytabMenu();
 };
 
@@ -1386,7 +1408,7 @@ void Konsole::setFont(int fontno)
 
   if (se) se->setFontNo(fontno);
 
-  if (m_menuCreated)
+  if (selectFont)
   {
      QStringList items = selectFont->items();
      int i = fontno;
@@ -1511,7 +1533,7 @@ void Konsole::slotSelectSize() {
 
 void Konsole::notifySize(int lines, int columns)
 {
-  if (m_menuCreated)
+  if (selectSize)
   {
     selectSize->blockSignals(true);
     selectSize->setCurrentItem(-1);
