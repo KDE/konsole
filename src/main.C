@@ -362,6 +362,7 @@ void Konsole::makeMenu()
 
   KAction *newsession = KStdAction::openNew(this, SLOT(newDefaultSession()));
   newsession->plug(toolBar());
+  toolBar()->insertLineSeparator();
 
   QPopupMenu* m_signals = new QPopupMenu;
   m_signals->insertItem( i18n("STOP"), 17); // FIXME: comes with 3 values
@@ -376,7 +377,8 @@ void Konsole::makeMenu()
   m_sessions->setCheckable(TRUE);
   m_sessions->insertItem( i18n("Send Signal"), m_signals );
 
-  KAction *act = new KAction(i18n("Rename session..."), 0, this, SLOT(slotRenameSession()), this);
+  KAction *act = new KAction(i18n("Rename session..."), 0, this, 
+                             SLOT(slotRenameSession()), this);
   act->plug(m_sessions);
   // act->plug(toolBar());
 
@@ -387,10 +389,14 @@ void Konsole::makeMenu()
   m_file = new QPopupMenu;
   connect(m_file, SIGNAL(activated(int)), SLOT(newSession(int)));
 
+  /*
   m_font = new QPopupMenu;
   m_font->setCheckable(TRUE);
   m_font->insertItem( i18n("&Normal"), 0);
   m_font->insertSeparator();
+  */
+
+  /*
 //m_font->insertItem( i18n("&Tiny"),   1);
   m_font->insertItem( i18n("&Small"),  2);
   m_font->insertItem( i18n("&Medium"), 3);
@@ -402,22 +408,32 @@ void Konsole::makeMenu()
   m_font->insertSeparator();
   m_font->insertItem( i18n("&Custom ..."), 1000); // for other fonts
   connect(m_font, SIGNAL(activated(int)), SLOT(font_menu_activated(int)));
+  */
 
-  m_scrollbar = new QPopupMenu;
-  m_scrollbar->setCheckable(TRUE);
-  m_scrollbar->insertItem( i18n("&Hide"), TEWidget::SCRNONE);
-  m_scrollbar->insertItem( i18n("&Left"), TEWidget::SCRLEFT);
-  m_scrollbar->insertItem( i18n("&Right"), TEWidget::SCRRIGHT);
-  connect(m_scrollbar, SIGNAL(activated(int)), SLOT(scrollbar_menu_activated(int)));
+  
+  selectFont = new KSelectAction("Fonts", 0, this, 
+			    SLOT(slotSelectFont()), this);
+  QStringList it;
+  // TODO: make separators in KSelectAction items
+  it << "&Normal" << "&Tiny" << "&Small" << "&Medium" << "&Large" << "&Huge" 
+     << "&Linux" << "&Unicode" << "&Custom...";
+  selectFont->setItems(it);
 
-  m_size = new QPopupMenu;
-  m_size->setCheckable(TRUE);
-  m_size->insertItem( i18n("40x15 (&small)"), 0);
-  m_size->insertItem( i18n("80x24 (&vt100)"), 1);
-  m_size->insertItem( i18n("80x25 (&ibmpc)"), 2);
-  m_size->insertItem( i18n("80x40 (&xterm)"), 3);
-  m_size->insertItem( i18n("80x52 (ibmv&ga)"), 4);
-  connect(m_size, SIGNAL(activated(int)), SLOT(size_menu_activated(int)));
+  selectScrollbar = new KSelectAction("Scrollbar", 0, this, 
+			     SLOT(slotSelectScrollbar()), this);
+  QStringList scrollitems;
+  scrollitems << "&Hide" << "&Left" << "Right";
+  selectScrollbar->setItems(scrollitems);
+
+  selectSize = new KSelectAction("Size", 0, this, 
+			     SLOT(slotSelectSize()), this);
+  QStringList sizeitems;
+  sizeitems << "40x15 (&small)" 
+	    << "80x24 (&vt100)" 
+	    << "80x25 (&ibmpc)" 
+	    << "80x40 (&xterm)" 
+	    << "80x52 (ibmv&ga)";
+  selectSize->setItems(sizeitems);
 
   m_schema = new QPopupMenu;
   m_schema->setCheckable(TRUE);
@@ -447,13 +463,15 @@ void Konsole::makeMenu()
 
 
   m_options->insertItem( i18n("&Frame"), 2 );
-  m_options->insertItem( i18n("Scroll&bar"), m_scrollbar);
+  selectScrollbar->plug(m_options);
   m_options->insertSeparator();
   m_options->insertItem( i18n("&Fullscreen"), 5);
   m_options->setItemChecked(5,b_fullscreen);
   m_options->insertSeparator();
-  m_options->insertItem( i18n("&Size"), m_size);
-  m_options->insertItem( i18n("&Font"), m_font);
+  selectSize->plug(m_options);
+  
+  //  m_options->insertItem( i18n("&Font"), m_font);
+  selectFont->plug(m_options);
   m_options->insertItem( i18n("&Schema"), m_schema);
   m_options->insertSeparator();
   m_options->insertItem( i18n("&History"), 3 );
@@ -546,6 +564,7 @@ void Konsole::readProperties(KConfig* config)
   b_fullscreen = FALSE; // config->readBoolEntry("Fullscreen",FALSE);
   n_font     = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
   n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
+  selectScrollbar->setCurrentItem(n_scroll);
   s_schema   = config->readEntry("schema","");
 
   // Global options ///////////////////////
@@ -558,9 +577,6 @@ void Konsole::readProperties(KConfig* config)
   slotToggleMenubar();
   
   toolBar()->setBarPos((KToolBar::BarPosition)n_toolbarpos);
-
-  scrollbar_menu_activated(QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2));
-
   // Options that should be applied to all sessions /////////////
   // (1) set menu items and Konsole members
   QFont tmpFont("fixed");
@@ -636,14 +652,27 @@ void Konsole::pixmap_menu_activated(int item)
   }
 }
 
-void Konsole::scrollbar_menu_activated(int item)
-{
-  m_scrollbar->setItemChecked(n_scroll,FALSE);
-  m_scrollbar->setItemChecked(item,    TRUE);
-  n_scroll = item;
-  te->setScrollbarLocation(item);
+void Konsole::slotSelectScrollbar() {
+    n_scroll = selectScrollbar->currentItem();
+    te->setScrollbarLocation(n_scroll);
+    activateSession(); // maybe helps in bg
 }
 
+
+void Konsole::slotSelectFont() {
+    kDebugInfo("slotSelectFont");
+  assert(se);
+  int item = selectFont->currentItem();
+  if (item == selectFont->items().count()-1) // the last one is the custom
+  {
+    KFontDialog::getFont(defaultFont, true);
+    item = 0;
+  }  
+  setFont(item);
+  activateSession(); // activates the current    
+}
+
+/*
 void Konsole::font_menu_activated(int item)
 {
   assert(se);
@@ -656,6 +685,7 @@ void Konsole::font_menu_activated(int item)
   setFont(item);
   activateSession(); // activates the current
 }
+*/
 
 void Konsole::schema_menu_activated(int item)
 {
@@ -698,8 +728,10 @@ void Konsole::setFont(int fontno)
   {
     te->setVTFont(f);
   }
+  /*
   m_font->setItemChecked(n_font,FALSE);
   m_font->setItemChecked(fontno, TRUE);
+  */
   n_font = fontno;
   if (se) se->setFontNo(fontno);
 }
@@ -778,6 +810,7 @@ void Konsole::changeColumns(int columns)
   te->update();
 }
 
+/*
 void Konsole::size_menu_activated(int item)
 {
   switch (item)
@@ -789,23 +822,30 @@ void Konsole::size_menu_activated(int item)
     case 4: setColLin(80,52); break;
   }
 }
+*/
+
+void Konsole::slotSelectSize() {
+    int item = selectSize->currentItem();
+    switch (item) {
+    case 0: setColLin(40,15); break;
+    case 1: setColLin(80,24); break;
+    case 2: setColLin(80,25); break;
+    case 3: setColLin(80,40); break;
+    case 4: setColLin(80,52); break;
+    }    
+}
+
 
 void Konsole::notifySize(int lines, int columns)
 {
-    //  printf("notifySize(%d,%d)\n",lines,columns);
-/*
-  if (lines != lincol.height() || columns != lincol.width())
-  { char buf[100];
-    sprintf(buf,i18n("(%d columns x %d lines)"),columns,lines);
-    setCaption(buf);
-    QTimer::singleShot(2000,this,SLOT(setHeader()));
-  }
-*/
+    /*
   m_size->setItemChecked(0,columns==40&&lines==15);
   m_size->setItemChecked(1,columns==80&&lines==24);
   m_size->setItemChecked(2,columns==80&&lines==25);
   m_size->setItemChecked(3,columns==80&&lines==40);
   m_size->setItemChecked(4,columns==80&&lines==52);
+    */  
+    // FIXME: I cannot do this with actions: infinite loop
   if (n_render >= 3) pixmap_menu_activated(n_render);
 }
 
@@ -1104,6 +1144,7 @@ void Konsole::slotRenameSession() {
   KLineEditDlg dlg(i18n("Session name"),name, this);
   if (dlg.exec()) {
     ra->setText(dlg.text());
+    toolBar()->updateRects();
   }
 }
 

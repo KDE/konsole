@@ -46,14 +46,14 @@ public:
 private slots:
   void configureRequest(TEWidget*,int,int,int);
 
-  void scrollbar_menu_activated(int item);
+//  void scrollbar_menu_activated(int item);
   void activateSession();
 
   void doneSession(TESession*,int);
   void opt_menu_activated(int item);
-  void font_menu_activated(int item);
+  //  void font_menu_activated(int item);
   void schema_menu_activated(int item);
-  void size_menu_activated(int item);
+  //  void size_menu_activated(int item);
   void pixmap_menu_activated(int item);
   void drop_menu_activated(int item);
   void keytab_menu_activated(int item);
@@ -82,6 +82,9 @@ private slots:
   void slotToggleToolbar();
   void slotToggleMenubar();  
   void slotRenameSession();
+  void slotSelectSize();
+  void slotSelectFont();
+  void slotSelectScrollbar();
 
 private:
 
@@ -114,12 +117,12 @@ private:
   QPopupMenu* m_file;
   QPopupMenu* m_sessions;
   QPopupMenu* m_options;
-  QPopupMenu* m_scrollbar;
-  QPopupMenu* m_font;
+  //  QPopupMenu* m_scrollbar;
+  //  QPopupMenu* m_font;
   QPopupMenu* m_schema;
   QPopupMenu* m_keytab;
   QPopupMenu* m_codec;
-  QPopupMenu* m_size;
+  //  QPopupMenu* m_size;
   QPopupMenu* m_drop;
 //
   KToggleAction *showToolbar;
@@ -130,6 +133,10 @@ private:
   bool        b_scroll;
   KToggleAction *showFrame;
   bool        b_framevis;
+  KSelectAction *selectSize;
+  KSelectAction *selectFont;
+  KSelectAction *selectScrollbar;
+
   int         n_toolbarpos;
   int         n_keytab;
   int         n_font;
