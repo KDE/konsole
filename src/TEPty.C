@@ -86,7 +86,16 @@ extern "C" {
 #include <fcntl.h>
 #include <grp.h>
 
+#ifdef HAVE_LIBUTIL_H
+#include <libutil.h>
+#define USE_LOGIN
+#elif defined(HAVE_UTIL_H)
+#include <util.h>
+#define USE_LOGIN
+#endif
+
 #include <signal.h>
+
 #ifdef HAVE_TERMIO_H
 /* needed at least on AIX */
 #include <termio.h>
@@ -199,6 +208,10 @@ void TEPty::donePty(int status)
 {
 #ifdef HAVE_UTEMPTER
   removeLineFromUtmp(ttynam, fd);
+#elif defined(USE_LOGIN)
+  char *tty_name=ttyname(0);
+  if (tty_name)
+	logout(tty_name);
 #endif
   if (needGrantPty) chownpty(fd,FALSE);
   emit done(status);
@@ -348,6 +361,26 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   // Stamp utmp/wtmp if we have and want them
 #ifdef HAVE_UTEMPTER
   if (addutmp) addToUtmp(dev, "", fd);
+#elif defined(USE_LOGIN)
+  char *str_ptr;
+  struct utmp l_struct;
+  memset(&l_struct, 0, sizeof(struct utmp));
+
+  if (! (str_ptr=getlogin()) ) {
+    abort();
+  }
+  strncpy(l_struct.ut_name, str_ptr, UT_NAMESIZE);
+
+  if (gethostname(l_struct.ut_host, UT_HOSTSIZE) == -1) {
+    abort();
+  }
+
+  if (! (str_ptr=ttyname(0)) ) {
+    abort();
+  }
+  strncpy(l_struct.ut_line, str_ptr, UT_LINESIZE);
+
+  login(&l_struct);
 #endif
 
   //reset signal handlers for child process
