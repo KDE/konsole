@@ -345,6 +345,22 @@ bool ColorSchema::rereadSchemaFile()
   m_tr_g=rg;
   m_tr_b=rb;
       }
+      if (!strncmp(line,"hsvcl",5))
+      { int fi,cr,cg,cb,tr,bo;
+        if(sscanf(line,"hsvcl %d %d %d %d %d %d",&fi,&cr,&cg,&cb,&tr,&bo) != 6)
+          continue;
+        if (!(0 <= fi && fi <= TABLE_COLORS)) continue;
+        if (!(-1 <= cr && cr <= 359        )) continue;
+        if (cr == -1) cr = KApplication::random()%359;
+        if (!(0 <= cg && cg <= 255         )) continue;
+        if (!(0 <= cb && cb <= 255         )) continue;
+        if (!(0 <= tr && tr <= 1           )) continue;
+        if (!(0 <= bo && bo <= 1           )) continue;
+        m_table[fi].color       = QColor();
+        m_table[fi].color.setHsv(cr,cg,cb);
+        m_table[fi].transparent = tr;
+        m_table[fi].bold        = bo;
+      }
       if (!strncmp(line,"color",5))
       { int fi,cr,cg,cb,tr,bo;
         if(sscanf(line,"color %d %d %d %d %d %d",&fi,&cr,&cg,&cb,&tr,&bo) != 6)
