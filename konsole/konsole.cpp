@@ -2409,7 +2409,7 @@ void Konsole::activateSession(TESession *s)
     te = se->widget();
     if (m_menuCreated) {
       selectBell->setCurrentItem(te->bellMode());
-      selectFont->setCurrentItem(se->fontNo());
+      setFont(se->fontNo());
       updateSchemaMenu();
     }
   }
