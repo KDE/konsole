@@ -98,9 +98,13 @@ void TEmuVt102::changeGUI(TEWidget* newgui)
 
   QObject::disconnect(gui,SIGNAL(mouseSignal(int,int,int)),
                       this,SLOT(onMouse(int,int,int)));
+  QObject::disconnect(gui, SIGNAL(sendStringToEmu(const char*)),
+		   this, SLOT(sendString(const char*)));
   TEmulation::changeGUI(newgui);
   QObject::connect(gui,SIGNAL(mouseSignal(int,int,int)),
                    this,SLOT(onMouse(int,int,int)));  
+  QObject::connect(gui, SIGNAL(sendStringToEmu(const char*)),
+		   this, SLOT(sendString(const char*)));
 }
 
 /*!
@@ -1101,6 +1105,8 @@ bool TEmuVt102::getMode(int m)
 void TEmuVt102::setConnect(bool c)
 {
   TEmulation::setConnect(c);
+  QObject::disconnect(gui, SIGNAL(sendStringToEmu(const char*)),
+		      this, SLOT(sendString(const char*)));
   if (c)
   { // refresh mouse mode
     if (getMode(MODE_Mouse1000))
@@ -1113,6 +1119,8 @@ void TEmuVt102::setConnect(bool c)
     else
       scrolllock_set_off();
 #endif
+    QObject::connect(gui, SIGNAL(sendStringToEmu(const char*)),
+                     this, SLOT(sendString(const char*)));
   }
 }
 
