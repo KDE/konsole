@@ -283,7 +283,7 @@ private:
   KSimpleConfig* m_defaultSession;
   QString m_defaultSessionFilename;
 
-  KTabWidget* tabwidget; // if null then there is only one TEWidget in system
+  KTabWidget* tabwidget;
   TEWidget*      te;     // the visible TEWidget, either sole one or one of many
   TESession*     se;
   TESession*     se_previous;
@@ -363,8 +363,6 @@ private:
   int cmd_first_screen;
   int         n_keytab;
   int         n_defaultKeytab;
-  int         n_font;
-  int         n_defaultFont; // font as set in config to use as default for new sessions
   int         n_scroll;
   int         n_tabbar;
   int         n_bell;
@@ -379,7 +377,6 @@ private:
   QString     s_word_seps;			// characters that are considered part of a word
   QString     pmPath; // pixmap path
   QString     dropText;
-  QString     fontNotFound_par;
   QFont       defaultFont;
   QSize       defaultSize;
 

@@ -255,7 +255,6 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 ,sessionNumberMapper(0)
 ,sl_sessionShortCuts(0)
 ,s_workDir(workdir)
-,m_tabColor(QColor())
 {
   isRestored = b_inRestore;
   connect( &m_closeTimeout, SIGNAL(timeout()), this, SLOT(slotCouldNotClose()));
