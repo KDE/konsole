@@ -1,11 +1,12 @@
 #include <qfile.h>
 #include <qtextstream.h>
+#include <stdlib.h>
 #include <iostream>
 #include <iomanip>
 
 using namespace std;
 
-Q_UINT32 charVal(QChar val)
+static Q_UINT32 charVal(QChar val)
 {
     if (val == ' ')
         return 0;
@@ -13,7 +14,7 @@ Q_UINT32 charVal(QChar val)
         return 1;
 }
 
-Q_UINT32 readGlyphLine(QTextStream& input)
+static Q_UINT32 readGlyphLine(QTextStream& input)
 {
     QString line = input.readLine();
     while (line.length() < 5)
@@ -27,7 +28,7 @@ Q_UINT32 readGlyphLine(QTextStream& input)
     return val;
 }
 
-Q_UINT32 readGlyph(QTextStream& input)
+static Q_UINT32 readGlyph(QTextStream& input)
 {
     return readGlyphLine(input) |
             (readGlyphLine(input) << 5) |
@@ -48,7 +49,7 @@ int main(int argc, char **argv)
     {
         qFatal("Can not open %s", argv[1]);
     }
-    
+
     QTextStream input(&inFile);
 
     Q_UINT32 glyphStates[128];
