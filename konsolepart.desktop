@@ -1,0 +1,17 @@
+[Desktop Entry]
+Type=Service
+Exec=konsole %i %m -caption "%c"
+Icon=konsole
+ServiceTypes=KParts/ReadOnlyPart,Browser/View,inode/directory
+
+X-KDE-Library=libkonsolepart
+X-KDE-BrowserView-AllowAsDefault=false
+X-KDE-BrowserView-HideFromMenus=true
+X-KDE-BrowserView-Toggable=true
+X-KDE-BrowserView-ToggableView-Orientation=horizontal
+X-KDE-BrowserView-LinkedView=true
+
+Name=KonsolePart
+
+Comment=Terminal Emulator
+Comment[fr]=Émulateur de terminal
