@@ -842,13 +842,21 @@ void Konsole::slotSetEncoding()
 {
   if (!se) return;
 
-  bool found;
-  QString enc = KGlobal::charsets()->encodingForName(selectSetEncoding->currentText());
-  QTextCodec * qtc = KGlobal::charsets()->codecForName(enc, found);
-  if(!found)
+  QTextCodec * qtc;
+  if (selectSetEncoding->currentItem() == 0)
   {
-    kdDebug() << "Codec " << selectSetEncoding->currentText() << " not found!" << endl;
     qtc = QTextCodec::codecForLocale();
+  }
+  else
+  {
+    bool found;
+    QString enc = KGlobal::charsets()->encodingForName(selectSetEncoding->currentText());
+    qtc = KGlobal::charsets()->codecForName(enc, found);
+    if(!found)
+    {
+      kdDebug() << "Codec " << selectSetEncoding->currentText() << " not found!" << endl;
+      qtc = QTextCodec::codecForLocale();
+    }
   }
 
   se->setEncodingNo(selectSetEncoding->currentItem());

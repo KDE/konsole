@@ -70,11 +70,13 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
 
   //kdDebug(1211)<<"TESession ctor() sh->setSize()"<<endl;
   sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
+  sh->useUtf8(em->utf8());
   //kdDebug(1211)<<"TESession ctor() connecting"<<endl;
   connect( sh,SIGNAL(block_in(const char*,int)),this,SLOT(onRcvBlock(const char*,int)) );
 
   connect( em,SIGNAL(sndBlock(const char*,int)),sh,SLOT(send_bytes(const char*,int)) );
   connect( em,SIGNAL(lockPty(bool)),sh,SLOT(lockPty(bool)) );
+  connect( em,SIGNAL(useUtf8(bool)),sh,SLOT(useUtf8(bool)) );
 
   connect( em, SIGNAL( changeTitle( int, const QString & ) ),
            this, SLOT( setUserTitle( int, const QString & ) ) );

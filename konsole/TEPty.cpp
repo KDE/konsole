@@ -93,6 +93,11 @@ void TEPty::setXonXoff(bool on)
   pty()->setXonXoff(on);
 }
 
+void TEPty::useUtf8(bool on)
+{
+  pty()->setUtf8Mode(on);
+}
+
 /*!
     start the client program.
 */

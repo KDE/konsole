@@ -205,15 +205,13 @@ void TEmulation::setCodec(const QTextCodec * qtc)
   m_codec = qtc;
   delete decoder;
   decoder = m_codec->makeDecoder();
+  emit useUtf8(utf8());
 }
 
 void TEmulation::setCodec(int c)
 {
-  //FIXME: check whether we have to free m_codec
-  m_codec = c ? QTextCodec::codecForName("utf8")
-            : QTextCodec::codecForLocale();
-  delete decoder;
-  decoder = m_codec->makeDecoder();
+  setCodec(c ? QTextCodec::codecForName("utf8")
+           : QTextCodec::codecForLocale());
 }
 
 void TEmulation::setKeymap(int no)

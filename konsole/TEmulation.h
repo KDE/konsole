@@ -64,6 +64,7 @@ public slots: // signals incoming from data source
 signals:
 
   void lockPty(bool);
+  void useUtf8(bool);
   void sndBlock(const char* txt,int len);
   void ImageSizeChanged(int lines, int columns);
   void changeColumns(int columns);
@@ -82,6 +83,8 @@ public:
 
   virtual void setConnect(bool r);
   bool isConnected() { return connected; }
+  
+  bool utf8() { return m_codec->mibEnum() == 106; }
 
   virtual void setListenToKeyPress(bool l);
   void setColumns(int columns);

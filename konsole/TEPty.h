@@ -48,6 +48,7 @@ Q_OBJECT
     void setSize(int lines, int cols);
 
   public slots:
+    void useUtf8(bool on);
     void lockPty(bool lock);
     void send_bytes(const char* s, int len);
 
