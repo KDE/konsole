@@ -225,7 +225,7 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
      {
         KeyTrans* ktr = KeyTrans::find(i);
         QString title=ktr->hdr();
-        m_keytab->insertItem(title.replace(QRegExp("^&|([^&])&"),"\\1&&"),ktr->numb());
+        m_keytab->insertItem(title.replace('&',"&&"),ktr->numb());
      }
   }
 
@@ -704,7 +704,7 @@ void konsolePart::updateSchemaMenu()
   for (int i = 0; i < (int) colors->count(); i++)  {
     ColorSchema* s = (ColorSchema*)colors->at(i);
     QString title=s->title();
-    m_schema->insertItem(title.replace(QRegExp("^&|([^&])&"),"\\1&&"),s->numb(),0);
+    m_schema->insertItem(title.replace('&',"&&"),s->numb(),0);
   }
 
   if (te && se) {

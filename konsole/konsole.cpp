@@ -706,7 +706,7 @@ void Konsole::makeGUI()
       KeyTrans* ktr = KeyTrans::find(i);
       assert( ktr );
       QString title=ktr->hdr();
-      m_keytab->insertItem(title.replace(QRegExp("^&|([^&])&"),"\\1&&"),ktr->numb());
+      m_keytab->insertItem(title.replace('&',"&&"),ktr->numb());
    }
    applySettingsToGUI();
    isRestored = false;
@@ -1364,7 +1364,7 @@ void Konsole::updateSchemaMenu()
      ColorSchema* s = (ColorSchema*)colors->at(i);
     assert( s );
     QString title=s->title();
-    m_schema->insertItem(title.replace(QRegExp("^&|([^&])&"),"\\1&&"),s->numb(),0);
+    m_schema->insertItem(title.replace('&',"&&"),s->numb(),0);
   }
 
   if (te && se)
@@ -1805,7 +1805,7 @@ void Konsole::addSession(TESession* s)
   // create an action for the session
   //  char buffer[30];
   //  int acc = CTRL+SHIFT+Key_0+session_no; // Lars: keys stolen by kwin.
-  KRadioAction *ra = new KRadioAction(newTitle.replace(QRegExp("^&|([^&])&"),"\\1&&"),
+  KRadioAction *ra = new KRadioAction(newTitle.replace('&',"&&"),
                                       s->IconName(),
                                       0,
                                       this,
@@ -1860,7 +1860,7 @@ void Konsole::listSessions()
 #endif
   for (TESession *ses = sessions.first(); ses; ses = sessions.next()) {
     QString title=ses->Title();
-    m_sessionList->insertItem(SmallIcon(ses->IconName()),title.replace(QRegExp("^&|([^&])&"),"\\1&&"),++counter);
+    m_sessionList->insertItem(SmallIcon(ses->IconName()),title.replace('&',"&&"),++counter);
   }
   connect(m_sessionList, SIGNAL(activated(int)), SLOT(activateSession(int)));
   m_sessionList->adjustSize();
@@ -2480,11 +2480,11 @@ void Konsole::addSessionCommand(const QString &path)
   }
 
   QString icon = co->readEntry("Icon", "openterm");
-  insertItemSorted(m_toolbarSessionsCommands, SmallIconSet( icon ), txt.replace(QRegExp("^&|([^&])&"),"\\1&&"), ++cmd_serial );
+  insertItemSorted(m_toolbarSessionsCommands, SmallIconSet( icon ), txt.replace('&',"&&"), ++cmd_serial );
   QString comment = co->readEntry("Comment");
   if (comment.isEmpty())
     comment=txt.prepend(i18n("New "));
-  insertItemSorted( m_session, SmallIconSet( icon ), comment.replace(QRegExp("^&|([^&])&"),"\\1&&"), cmd_serial );
+  insertItemSorted( m_session, SmallIconSet( icon ), comment.replace('&',"&&"), cmd_serial );
   no2command.insert(cmd_serial,co);
 
   int j = filename.findRev('/');
@@ -2720,7 +2720,7 @@ void Konsole::attachSession(TESession* session)
   session->changeWidget(te);
   
   QString title=session->Title();
-  KRadioAction *ra = new KRadioAction(title.replace(QRegExp("^&|([^&])&"),"\\1&&"), session->IconName(),
+  KRadioAction *ra = new KRadioAction(title.replace('&',"&&"), session->IconName(),
                                       0, this, SLOT(activateSession()), this);
 
   ra->setExclusiveGroup("sessions");
@@ -2763,7 +2763,7 @@ void Konsole::slotRenameSession() {
   dlg.setCaption(i18n("Rename Session"));
   if (dlg.exec()) {
     se->setTitle(dlg.text());
-    ra->setText(dlg.text().replace(QRegExp("^&|([^&])&"),"\\1&&"));
+    ra->setText(dlg.text().replace('&',"&&"));
     ra->setIcon( se->IconName() ); // I don't know why it is needed here
     if(se->isMasterMode())
       session2button.find(se)->setIcon("remote");
@@ -2780,7 +2780,7 @@ void Konsole::slotRenameSession(TESession* ses, const QString &name)
 {
   KRadioAction *ra = session2action.find(ses);
   QString title=name;
-  ra->setText(title.replace(QRegExp("^&|([^&])&"),"\\1&&"));
+  ra->setText(title.replace('&',"&&"));
   ra->setIcon( ses->IconName() ); // I don't know why it is needed here
   if(ses->isMasterMode())
     session2button.find(ses)->setIcon("remote");
@@ -2793,7 +2793,7 @@ void Konsole::initSessionTitle(const QString &_title) {
 
   se->setTitle(_title);
   QString title=_title;
-  ra->setText(title.replace(QRegExp("^&|([^&])&"),"\\1&&"));
+  ra->setText(title.replace('&',"&&"));
   ra->setIcon( se->IconName() ); // I don't know why it is needed here
   toolBar()->updateRects();
   updateTitle();
