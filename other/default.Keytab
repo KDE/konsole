@@ -33,8 +33,8 @@ key Tab   -Shift   : "\t"
 key Tab   +Shift   : "\E[Z"
 
 key Return-Shift-Alt : "\r"
+key Return-Shift+Alt : "\E\r"
 key Return+Shift     : "\EOM"
-key Return      +Alt : "\E\r"
 
 # Backspace and Delete codes are preserving CTRL-H.
 
@@ -45,26 +45,18 @@ key Backspace      : "\b"
 key Up    -Shift   : "\EOA"
 key Down  -Shift   : "\EOB"
 key Right -Shift   : "\EOC"
-key Right +Shift   : "\EO5C"
 key Left  -Shift   : "\EOD"
-key Left  +Shift   : "\EO5D"
 
 # other grey PC keys
 
 key Enter          : "\r"
 
 key Home  -Shift   : "\EOH"
-key Home  +Shift   : "\EO5H"
 key Insert-Shift   : "\E[2~"
-key Insert+Shift   : "\E[2;5~"
 key Delete-Shift   : "\E[3~"
-key Delete+Shift   : "\E[3;5~"
 key End   -Shift   : "\EOF"
-key End   +Shift   : "\EO5F"
 key Prior -Shift   : "\E[5~"
-key Prior +Shift   : "\E[5;5~"
 key Next  -Shift   : "\E[6~"
-key Next  +Shift   : "\E[6;5~"
 
 # function keys
 
