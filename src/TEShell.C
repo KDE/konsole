@@ -56,6 +56,10 @@
     nessesary to make everything work as it should.
 */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -68,7 +72,6 @@
 #endif
 #include <sys/resource.h>
 #include <grp.h>
-#include "../../config.h"
 
 #if defined (_HPUX_SOURCE)
 #define _TERMIOS_INCLUDED
