@@ -7,7 +7,6 @@ data_DATA = BlackOnLightColor.schema BlackOnLightYellow.schema BlackOnWhite.sche
   Transparent_MC.schema GreenTint_MC.schema \
   Transparent_lightbg.schema \
   Transparent_darkbg.schema \
-  Paper.schema \
   linux.desktop mc.desktop shell.desktop su.desktop sumc.desktop \
   default.Keytab linux.keytab vt100.keytab vt420pc.keytab x11r5.keytab \
   README.Schema README.KeyTab screen.desktop
