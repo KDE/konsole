@@ -105,18 +105,38 @@ ColorTable::ColorTable(QWidget* parent) : QLabel(parent)
 void ColorTable::setSchema(ColorSchema* s)
 {
   schema = s;
-//paintEvent(NULL);
 setText("");
   if (!schema) return;
 char* pa = strrchr(s->path.data(),'/');
 setText(pa&&*pa?pa+1:"/* build-in schema */");
+  update();
 }
 
 void ColorTable::paintEvent(QPaintEvent* e)
-{
+{ int x,y;
   // in the moment we don't care and paint the whole bunch
-  //if (!schema) return;
-  QFrame::paintEvent(e);
+  // we don't care about all the tricks, also.
+  QPainter paint;
+  paint.begin( this );
+  if (schema)
+  for (y = 0; y < TABLE_COLORS; y++)
+  {
+    QRect base = contentsRect();
+    int top = base.height()*(y+0)/TABLE_COLORS;
+    int bot = base.height()*(y+1)/TABLE_COLORS;
+    QRect rect(QPoint(base.left(),top),QPoint(base.right(),bot));
+    paint.fillRect(rect, schema->table[y].color );
+    for (x = 0; x < TABLE_COLORS; x++)
+    {
+      int bgn = base.width()*(x+0)/TABLE_COLORS;
+      int end = base.width()*(x+1)/TABLE_COLORS;
+      QRect rect(QPoint((3*bgn+end)/4,(3*top+bot)/4),
+                 QPoint((3*end+bgn)/4,(3*bot+top)/4));
+      paint.fillRect(rect, schema->table[x].color );
+    }
+  }
+  drawFrame(&paint);
+  paint.end();
 }
 
 SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
