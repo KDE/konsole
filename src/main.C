@@ -250,9 +250,10 @@ void TEDemo::makeMenu()
 
   m_options->installEventFilter( this );
 
-  // For those how like to add shortcuts here, be aware that ALT-Key
-  // combinations might be uses heavily by many programs. Thus activating
-  // shortcuts here means to deactivate them in many other programs.
+  // For those who would like to add shortcuts here, be aware that
+  // ALT-key combinations are heavily used by many programs. Thus,
+  // activating shortcuts here means deactivating them in the other
+  // programs.
 
   menubar->insertItem(i18n("File") , m_file);
 
