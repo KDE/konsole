@@ -120,8 +120,6 @@ key Up    +Shift   : scrollLineUp
 key Prior +Shift   : scrollPageUp
 key Down  +Shift   : scrollLineDown
 key Next  +Shift   : scrollPageDown
-key Insert+Shift -Control  : emitClipboard
-key Insert+Shift +Control  : emitSelection
 
 key ScrollLock     : scrollLock
 

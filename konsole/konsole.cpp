@@ -761,8 +761,10 @@ void Konsole::makeBasicGUI()
 
   m_copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0, te,
                                  SLOT(copyClipboard()), m_shortcuts, "copy");
-  m_pasteClipboard = new KAction(i18n("&Paste"), "editpaste", 0, te,
+  m_pasteClipboard = new KAction(i18n("&Paste"), "editpaste", Qt::SHIFT+Qt::Key_Insert, te,
                                  SLOT(pasteClipboard()), m_shortcuts, "paste");
+  m_pasteSelection = new KAction(i18n("Paste Selection"), Qt::CTRL+Qt::SHIFT+Qt::Key_Insert, te,
+                                 SLOT(pasteSelection()), m_shortcuts, "pasteselection");
 
   m_clearTerminal = new KAction(i18n("C&lear Terminal"), 0, this,
                                 SLOT(slotClearTerminal()), m_shortcuts, "clear_terminal");

@@ -109,6 +109,7 @@ public slots:
 
     void copyClipboard();
     void pasteClipboard();
+    void pasteSelection();
     void onClearSelection();
 
 signals:

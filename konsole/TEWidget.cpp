@@ -1302,6 +1302,11 @@ void TEWidget::pasteClipboard()
   emitSelection(false,false);
 }
 
+void TEWidget::pasteSelection()
+{
+  emitSelection(true,false);
+}
+
 void TEWidget::onClearSelection()
 {
   emit clearSelectionSignal();

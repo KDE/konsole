@@ -99,18 +99,18 @@ key F10   -Shift   : "\E[21~"
 key F11   -Shift   : "\E[23~"
 key F12   -Shift   : "\E[24~"
 
-key F1 +Shift    : "\EO2P"  
+key F1 +Shift    : "\EO2P"
 key F2 +Shift    : "\EO2Q"
 key F3 +Shift    : "\EO2R"
 key F4 +Shift    : "\EO2S"
 key F5 +Shift    : "\E[15;2~"
-key F6 +Shift    : "\E[17;2~" 
-key F7 +Shift    : "\E[18;2~" 
-key F8 +Shift    : "\E[19;2~" 
-key F9 +Shift    : "\E[20;2~" 
-key F10+Shift    : "\E[21;2~" 
-key F11+Shift    : "\E[23;2~" 
-key F12+Shift    : "\E[24;2~" 
+key F6 +Shift    : "\E[17;2~"
+key F7 +Shift    : "\E[18;2~"
+key F8 +Shift    : "\E[19;2~"
+key F9 +Shift    : "\E[20;2~"
+key F10+Shift    : "\E[21;2~"
+key F11+Shift    : "\E[23;2~"
+key F12+Shift    : "\E[24;2~"
 
 # Work around dead keys
 
@@ -123,8 +123,6 @@ key Up    +Shift   : scrollLineUp
 key Prior +Shift   : scrollPageUp
 key Down  +Shift   : scrollLineDown
 key Next  +Shift   : scrollPageDown
-key Insert+Shift -Control  : emitClipboard
-key Insert+Shift +Control  : emitSelection
 
 key ScrollLock     : scrollLock
 

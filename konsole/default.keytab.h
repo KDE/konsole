@@ -125,8 +125,6 @@
   "key Prior +Shift   : scrollPageUp\n"
   "key Down  +Shift   : scrollLineDown\n"
   "key Next  +Shift   : scrollPageDown\n"
-  "key Insert+Shift -Control  : emitClipboard\n"
-  "key Insert+Shift +Control  : emitSelection\n"
   "\n"
   "key ScrollLock     : scrollLock\n"
   "\n"

@@ -877,8 +877,6 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
   {
   switch(cmd) // ... and execute if found.
   {
-    case CMD_emitClipboard  : gui->emitSelection(false,false); return;
-    case CMD_emitSelection  : gui->emitSelection(true,false); return;
     case CMD_scrollPageUp   : gui->doScroll(-gui->Lines()/2); return;
     case CMD_scrollPageDown : gui->doScroll(+gui->Lines()/2); return;
     case CMD_scrollLineUp   : gui->doScroll(-1             ); return;

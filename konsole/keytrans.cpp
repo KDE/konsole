@@ -469,9 +469,7 @@ void KeyTransSymbols::defOprSyms()
   defOprSym("scrollLineDown",CMD_scrollLineDown);
   defOprSym("scrollPageUp",  CMD_scrollPageUp  );
   defOprSym("scrollPageDown",CMD_scrollPageDown);
-  defOprSym("emitSelection", CMD_emitSelection );
   defOprSym("scrollLock",    CMD_scrollLock);
-  defOprSym("emitClipboard", CMD_emitClipboard);
 }
 
 void KeyTransSymbols::defModSyms()

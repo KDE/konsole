@@ -28,13 +28,11 @@
 
 #define CMD_none          -1
 #define CMD_send           0
-#define CMD_emitSelection  1
 #define CMD_scrollPageUp   2
 #define CMD_scrollPageDown 3
 #define CMD_scrollLineUp   4
 #define CMD_scrollLineDown 5
 #define CMD_scrollLock     6
-#define CMD_emitClipboard  7
 
 #define BITS(x,v) ((((v)!=0)<<(x)))
 

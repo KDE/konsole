@@ -291,6 +291,7 @@ private:
 
   KAction       *m_copyClipboard;
   KAction       *m_pasteClipboard;
+  KAction       *m_pasteSelection;
   KAction       *m_clearTerminal;
   KAction       *m_resetClearTerminal;
   KAction       *m_clearAllSessionHistories;
