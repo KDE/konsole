@@ -38,6 +38,7 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <grp.h>
+#include "../../config.h"
 
 #if defined (_HPUX_SOURCE)
 #define _TERMIOS_INCLUDED
@@ -134,8 +135,8 @@ void Shell::makeShell(const char* dev, char* argv[],
 
   if (term && term[0]) 
   {
-    putenv((QString("TERM=") + term).data()); // export TERM=term
-//  setenv("TERM",term,1); // this is not available with Solaris
+//  putenv((QString("TERM=") + term).data()); // export TERM=term
+    setenv("TERM",term,1); // this is not available with Solaris
   }
 
   f = argv[0];
