@@ -564,7 +564,7 @@ void TEPty::startPgm(const char* pgm, QValueList<QCString> & args, const char* t
 // #define CERASE 0177
 // #endif
 
-#if defined (__FreeBSD__) || defined (__NetBSD__) || defined (__OpenBSD__) || defined (__bsdi__)
+#if defined (__FreeBSD__) || defined (__NetBSD__) || defined (__OpenBSD__) || defined (__bsdi__) || defined(__APPLE__)
       ioctl(0,TIOCGETA,(char *)&ttmode);
 #else
 #   if defined (_HPUX_SOURCE) || defined(__Lynx__)
@@ -576,7 +576,7 @@ void TEPty::startPgm(const char* pgm, QValueList<QCString> & args, const char* t
       ttmode.c_cc[VINTR] = CTRL('C');
       ttmode.c_cc[VQUIT] = CTRL('\\');
       ttmode.c_cc[VERASE] = 0177;
-#if defined (__FreeBSD__) || defined (__NetBSD__) || defined (__OpenBSD__) || defined (__bsdi__)
+#if defined (__FreeBSD__) || defined (__NetBSD__) || defined (__OpenBSD__) || defined (__bsdi__) || defined(__APPLE__)
       ioctl(0,TIOCSETA,(char *)&ttmode);
 #else
 #   ifdef _HPUX_SOURCE
