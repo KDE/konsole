@@ -37,7 +37,7 @@ public:
   virtual void streamHistory(QTextStream*);
 
   virtual void findTextBegin();
-  virtual bool findTextNext( const QString &str, bool forward, bool caseSensitive );
+  virtual bool findTextNext( const QString &str, bool forward, bool caseSensitive, bool regExp );
 
 public slots: // signals incoming from TEWidget
 

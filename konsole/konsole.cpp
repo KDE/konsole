@@ -80,6 +80,7 @@ Time to start a requirement list.
 #include <qcheckbox.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
+#include <qhbox.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -109,6 +110,9 @@ Time to start a requirement list.
 #include <kiconloader.h>
 #include <kstringhandler.h>
 #include <ktip.h>
+
+#include <kregexpeditorinterface.h>
+#include <kparts/componentfactory.h>
 
 #include "konsole.h"
 #include <netwm.h>
@@ -2390,7 +2394,7 @@ void Konsole::slotClearHistory()
 void Konsole::slotFindHistory()
 {
   if( !m_finddialog ) {
-    m_finddialog = new KEdFind( this, "konsolefind", false);
+    m_finddialog = new KonsoleFind( this, "konsolefind", false);
     connect(m_finddialog,SIGNAL(search()),this,SLOT(slotFind()));
     connect(m_finddialog,SIGNAL(done()),this,SLOT(slotFindDone()));
   }
@@ -2416,7 +2420,8 @@ void Konsole::slotFind()
   bool forward = !m_finddialog->get_direction();
   m_find_pattern = m_finddialog->getText();
 
-  if (se->getEmulation()->findTextNext(m_find_pattern,forward,m_finddialog->case_sensitive()))
+  if (se->getEmulation()->findTextNext(m_find_pattern,forward,
+                          m_finddialog->case_sensitive(),m_finddialog->reg_exp()))
     m_find_found = true;
   else
     if (m_find_found) {
@@ -2530,6 +2535,43 @@ unsigned int SizeDialog::columns() const
 unsigned int SizeDialog::lines() const
 {
   return m_lines->value();
+}
+
+//////////////////////////////////////////////////////////////////////
+
+KonsoleFind::KonsoleFind( QWidget *parent, const char *name, bool modal )
+  : KEdFind( parent, name, false ), m_editorDialog(0), m_editRegExp(0)
+{
+  QHBox* row = new QHBox( (QWidget*)group );
+  m_asRegExp = new QCheckBox( i18n("As &Regular Expression"), row, "asRegexp" );
+
+  if (!KTrader::self()->query("KRegExpEditor/KRegExpEditor").isEmpty()) {
+    m_editRegExp = new QPushButton( i18n("&Edit"), row, "editRegExp" );
+    connect( m_asRegExp, SIGNAL( toggled(bool) ), m_editRegExp, SLOT( setEnabled(bool) ) );
+    connect( m_editRegExp, SIGNAL( clicked() ), this, SLOT( slotEditRegExp() ) );
+    m_editRegExp->setEnabled( false );
+  }
+}
+
+void KonsoleFind::slotEditRegExp()
+{
+  if ( m_editorDialog == 0 )
+    m_editorDialog = KParts::ComponentFactory::createInstanceFromQuery<QDialog>( "KRegExpEditor/KRegExpEditor", QString::null, this );
+
+  assert( m_editorDialog );
+
+  KRegExpEditorInterface *iface = dynamic_cast<KRegExpEditorInterface *>( m_editorDialog );
+  assert( iface );
+
+  iface->setRegExp( getText() );
+  bool ret = m_editorDialog->exec();
+  if ( ret == QDialog::Accepted)
+    setText( iface->regExp() );
+}
+
+bool KonsoleFind::reg_exp() const
+{
+  return m_asRegExp->isChecked();
 }
 
 //////////////////////////////////////////////////////////////////////

@@ -46,7 +46,8 @@
 #define VERSION "1.1"
 
 class KRootPixmap;
-class QCheckBox; 
+class QCheckBox;
+class KonsoleFind;
 
 // Defined in main.C
 const char *konsole_shell(QStrList &args);
@@ -245,10 +246,10 @@ private:
 
   KonsoleBookmarkHandler *bookmarkHandler;
 
-  KEdFind* m_finddialog;
-  bool     m_find_first;
-  bool     m_find_found;
-  QString  m_find_pattern;
+  KonsoleFind* m_finddialog;
+  bool         m_find_first;
+  bool         m_find_found;
+  QString      m_find_pattern;
 
   int cmd_serial;
   int cmd_first_screen;
@@ -310,7 +311,7 @@ protected:
   QPushButton*   m_setUnlimited;
 };
 
-class SizeDialog : public KDialogBase 
+class SizeDialog : public KDialogBase
 {
     Q_OBJECT
 public:
@@ -329,5 +330,20 @@ protected:
   QSpinBox*  m_lines;
 };
 
+class KonsoleFind : public KEdFind
+{
+    Q_OBJECT
+public:
+  KonsoleFind( QWidget *parent = 0, const char *name=0, bool modal=true );
+  bool reg_exp() const;
+
+private slots:
+  void slotEditRegExp();
+
+private:
+  QCheckBox*    m_asRegExp;
+  QPushButton*  m_editRegExp;
+  QDialog*      m_editorDialog;
+};
 
 #endif

@@ -71,6 +71,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <qregexp.h>
 
 #include <assert.h>
 
@@ -361,7 +362,7 @@ void TEmulation::findTextBegin()
   m_findPos = -1;
 }
 
-bool TEmulation::findTextNext( const QString &str, bool forward, bool caseSensitive )
+bool TEmulation::findTextNext( const QString &str, bool forward, bool caseSensitive, bool regExp )
 {
   int pos = -1;
   QString string;
@@ -369,7 +370,10 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool caseSensit
   if (forward) {
     for (int i = (m_findPos==-1?0:m_findPos+1); i<(scr->getHistLines()+scr->getLines()); i++) {
       string = scr->getHistoryLine(i);
-      pos = string.find(str, 0, caseSensitive);
+      if (regExp)
+        pos = string.find( QRegExp(str,caseSensitive) );
+      else
+        pos = string.find(str, 0, caseSensitive);
       if(pos!=-1) {
         m_findPos=i;
         if(i>scr->getHistLines())
@@ -384,7 +388,10 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool caseSensit
   else { // searching backwards
     for(int i = (m_findPos==-1?(scr->getHistLines()+scr->getLines()):m_findPos-1); i>=0; i--) {
       string = scr->getHistoryLine(i);
-      pos = string.find(str, 0, caseSensitive);
+      if (regExp)
+        pos = string.find( QRegExp(str,caseSensitive) );
+      else
+        pos = string.find(str, 0, caseSensitive);
       if(pos!=-1) {
         m_findPos=i;
         if(i>scr->getHistLines())
