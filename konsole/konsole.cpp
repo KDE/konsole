@@ -76,6 +76,7 @@ Time to start a requirement list.
 
 #include <qspinbox.h>
 #include <qcheckbox.h>
+#include <qimage.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
 #include <qhbox.h>
@@ -294,13 +295,17 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
   makeBasicGUI();
   //KONSOLEDEBUG<<"Konsole ctor() after makeBasicGUI "<<time.elapsed()<<" msecs elapsed"<<endl;
 
-  if (isRestored)
+  if (isRestored) {
     n_tabbar = wanted_tabbar;
+    KConfig *c = KApplication::kApplication()->sessionConfig();
+    c->setDesktopGroup();
+    b_dynamicTabHide = c->readBoolEntry("DynamicTabHide", false);
+  }
 
   if (!tabbaron)
     n_tabbar = TabNone;
 
-  if (n_tabbar!=TabNone) {
+  if (n_tabbar!=TabNone && !b_dynamicTabHide) {
     makeTabWidget();
     setCentralWidget(tabwidget);
   }
@@ -317,7 +322,10 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
     te->setFocus();
 
     readProperties(config, schema, false);
-    n_tabbar = TabNone;
+    if (!b_dynamicTabHide)
+      n_tabbar = TabNone;
+    else if (isRestored)
+      n_tabbar = wanted_tabbar;
     setCentralWidget(te);
   }
 
@@ -328,11 +336,11 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
     menubar->hide();
   if (!frameon) {
     b_framevis=false;
-    te->setFrameStyle( QFrame::NoFrame );
+    if (te) te->setFrameStyle( QFrame::NoFrame );
   }
   if (!scrollbaron) {
     n_scroll = TEWidget::SCRNONE;
-    te->setScrollbarLocation(TEWidget::SCRNONE);
+    if (te) te->setScrollbarLocation(TEWidget::SCRNONE);
   }
 
   // activate and run first session //////////////////////////////////////////
@@ -767,14 +775,28 @@ void Konsole::makeGUI()
    se->setSchemaNo(curr_schema);
 
    // insert keymaps into menu
-   //FIXME: sort
+   // This sorting seems a bit cumbersome; but it is not called often.
+   QStringList kt_titles;
+   typedef QMap<QString,KeyTrans*> QStringKeyTransMap;
+   QStringKeyTransMap kt_map;
+
    for (int i = 0; i < KeyTrans::count(); i++)
    {
       KeyTrans* ktr = KeyTrans::find(i);
       assert( ktr );
+      QString title=ktr->hdr().lower();
+      kt_titles << title;
+      kt_map[title] = ktr;
+   }
+   kt_titles.sort();
+   for ( QStringList::Iterator it = kt_titles.begin(); it != kt_titles.end(); ++it ) {
+      KeyTrans* ktr = kt_map[*it];
+      assert( ktr );
       QString title=ktr->hdr();
       m_keytab->insertItem(title.replace('&',"&&"),ktr->numb());
+      //KONSOLEDEBUG << *it << "---" << title << "---" << ktr->numb() << endl;
    }
+
    applySettingsToGUI();
    isRestored = false;
 
@@ -1360,7 +1382,7 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("ActiveSession", active);
   config->writeEntry("DefaultSession", m_defaultSessionFilename);
   config->writeEntry("TabViewMode", int(m_tabViewMode));
-  config->writeEntry("DynamicTabHide", int(b_dynamicTabHide));
+  config->writeEntry("DynamicTabHide", b_dynamicTabHide);
 
   if (se) {
     config->writeEntry("history", se->history().getSize());
@@ -1486,7 +1508,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       // Tab View Mode
       m_tabViewMode = TabViewModes(config->readNumEntry("TabViewMode", ShowIconAndText));
       b_dynamicTabHide = config->readBoolEntry("DynamicTabHide", false);
-   }
+      }
 
    if (m_menuCreated)
    {
@@ -2172,7 +2194,7 @@ void Konsole::enterURL(const QString& URL, const QString&)
        newtext += " -p " + QString().setNum(u.port());
     if (u.hasUser())
        newtext += " -l " + u.user();
-    
+
     /*
      * If we have a host, connect.
      */
@@ -2281,10 +2303,8 @@ void Konsole::addSession(TESession* s)
     createSessionTab(te, SmallIconSet(s->IconName()), newTitle);
     setSchema(s->schemaNo());
     tabwidget->setCurrentPage(tabwidget->count()-1);
-    if (s->isMasterMode()) {
-      disableMasterModeConnections(); // no duplicate connections, remove old
-      enableMasterModeConnections();
-    }
+    disableMasterModeConnections(); // no duplicate connections, remove old
+    enableMasterModeConnections();
   }
 }
 
@@ -2936,8 +2956,25 @@ void Konsole::notifySessionState(TESession* session, int state)
   }
   if (!state_iconname.isEmpty()
       && session->testAndSetStateIconName(state_iconname)
-      && m_tabViewMode != ShowTextOnly)
-    tabwidget->setTabIconSet(session->widget(), SmallIconSet(state_iconname));
+      && m_tabViewMode != ShowTextOnly) {
+
+    QPixmap normal = KGlobal::instance()->iconLoader()->loadIcon(state_iconname,
+                       KIcon::Small, 0, KIcon::DefaultState, 0L, true);
+    QPixmap active = KGlobal::instance()->iconLoader()->loadIcon(state_iconname,
+                       KIcon::Small, 0, KIcon::ActiveState, 0L, true);
+
+    // make sure they are not larger than 16x16
+    if (normal.width() > 16 || normal.height() > 16)
+      normal.convertFromImage(normal.convertToImage().smoothScale(16,16));
+    if (active.width() > 16 || active.height() > 16)
+      active.convertFromImage(active.convertToImage().smoothScale(16,16));
+
+    QIconSet iconset;
+    iconset.setPixmap(normal, QIconSet::Small, QIconSet::Normal);
+    iconset.setPixmap(active, QIconSet::Small, QIconSet::Active);
+
+    tabwidget->setTabIconSet(session->widget(), iconset);
+  }
 }
 
 // --| Session support |-------------------------------------------------------
