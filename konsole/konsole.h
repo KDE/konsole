@@ -179,6 +179,7 @@ private slots:
   void slotSelectFont();
   void slotSelectScrollbar();
   void loadScreenSessions();
+  void updateFullScreen(bool on);
 
   void slotSaveSettings();
   void slotSaveSessionsProfile();
