@@ -196,6 +196,8 @@ void TEWidget::setColorTable(const ColorEntry table[])
    QCodec.
 */
 
+static inline bool isLineChar(Q_UINT16 c) { return ((c & 0xFF80) == 0x2500);}
+
 // assert for i in [0..31] : vt100extended(vt100_graphics[i]) == i.
 
 unsigned short vt100_graphics[32] =
@@ -269,10 +271,9 @@ void TEWidget::fontChange(const QFont &)
     if (fw != fm.width(REPCHAR[i])){
       fixed_font = false;
       break;
-    } else
-      fw = fm.width(REPCHAR[i]);
   }
-
+  }
+  
   if (font_w>200) // don't trust unrealistic value, fallback to QFontMetrics::maxWidth()
     font_w=fm.maxWidth();
   if (font_w<1)
@@ -426,6 +427,122 @@ TEWidget::~TEWidget()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
+/**
+ A table for emulating the simple (single width) unicode drawing chars.
+ It represents the 250x - 257x glyphs. If it's zero, we can't use it.
+ if it's not, it's encoded as follows: imagine a 5x5 grid where the points are numbered
+ 0 to 24 left to top, top to bottom. Each point is represented by the corresponding bit.
+  
+ Then, the pixels basically have the following interpretation:
+ _|||_
+ -...-
+ -...-
+ -...-
+ _|||_
+
+where _ = none
+      | = vertical line.
+      - = horizontal line.
+ */
+ 
+
+enum LineEncode
+{
+    TopL  = (1<<1),
+    TopC  = (1<<2),
+    TopR  = (1<<3),
+    
+    LeftT = (1<<5),
+    Int11 = (1<<6),
+    Int12 = (1<<7),
+    Int13 = (1<<8),
+    RightT = (1<<9),
+    
+    LeftC = (1<<10),
+    Int21 = (1<<11),
+    Int22 = (1<<12),
+    Int23 = (1<<13),
+    RightC = (1<<14),
+    
+    LeftB = (1<<15),
+    Int31 = (1<<16),
+    Int32 = (1<<17),
+    Int33 = (1<<18),
+    RightB = (1<<19),
+    
+    BotL  = (1<<21),
+    BotC  = (1<<22),
+    BotR  = (1<<23),
+};
+
+#include "linefont.h"
+
+static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code)
+{
+    //Calculate cell midpoints, end points.
+    int cx = x + w/2;
+    int cy = y + h/2;
+    int ex = x + w - 1;
+    int ey = y + h - 1;
+
+    Q_UINT32 toDraw = LineChars[code];
+    
+    //Top lines:
+    if (toDraw & TopL)
+        paint.drawLine(cx-1, y, cx-1, cy-2);
+    if (toDraw & TopC)
+        paint.drawLine(cx, y, cx, cy-2);
+    if (toDraw & TopR)
+        paint.drawLine(cx+1, y, cx+1, cy-2);
+
+    //Bot lines:
+    if (toDraw & BotL)
+        paint.drawLine(cx-1, cy+2, cx-1, ey);
+    if (toDraw & BotC)
+        paint.drawLine(cx, cy+2, cx, ey);
+    if (toDraw & BotR)
+        paint.drawLine(cx+1, cy+2, cx+1, ey);
+
+    //Left lines:
+    if (toDraw & LeftT)
+        paint.drawLine(x, cy-1, cx-2, cy-1);
+    if (toDraw & LeftC)
+        paint.drawLine(x, cy, cx-2, cy);
+    if (toDraw & LeftB)
+        paint.drawLine(x, cy+1, cx-2, cy+1);
+
+    //Right lines:
+    if (toDraw & RightT)
+        paint.drawLine(cx+2, cy-1, ex, cy-1);
+    if (toDraw & RightC)
+        paint.drawLine(cx+2, cy, ex, cy);
+    if (toDraw & RightB)
+        paint.drawLine(cx+2, cy+1, ex, cy+1);
+    
+    //Intersection points.
+    if (toDraw & Int11)
+        paint.drawPoint(cx-1, cy-1);
+    if (toDraw & Int12)
+        paint.drawPoint(cx, cy-1);
+    if (toDraw & Int13)
+        paint.drawPoint(cx+1, cy-1);
+    
+    if (toDraw & Int21)
+        paint.drawPoint(cx-1, cy);
+    if (toDraw & Int22)
+        paint.drawPoint(cx, cy);
+    if (toDraw & Int23)
+        paint.drawPoint(cx+1, cy);
+
+    if (toDraw & Int31)
+        paint.drawPoint(cx-1, cy+1);
+    if (toDraw & Int32)
+        paint.drawPoint(cx, cy+1);
+    if (toDraw & Int33)
+        paint.drawPoint(cx+1, cy+1);
+
+}
+
 void TEWidget::drawTextFixed(QPainter &paint, int x, int y,
                              QString& str, const ca *attr)
 {
@@ -446,6 +563,19 @@ void TEWidget::drawTextFixed(QPainter &paint, int x, int y,
       w = font_w*2;
       nc+=2;
     }
+    
+    //Check for line-drawing char
+    if (isLineChar(drawstr[0].unicode()))
+    {
+        uchar code = drawstr[0].cell();
+        if (LineChars[code])
+        {
+            drawLineChar(paint, x, y, w, font_h, code);
+            x += w;
+            continue;
+        }
+    }
+    
     paint.drawText(x,y, w, font_h, Qt::AlignHCenter | Qt::DontClip, drawstr, -1);
     x += w;
   }
@@ -671,6 +801,7 @@ HCNT("setImage");
   int    tLy = tL.y();
   hasBlinker = false;
 
+  bool lineDraw = false;
   int cf  = -1; // undefined
   int cb  = -1; // undefined
   int cr  = -1; // undefined
@@ -717,6 +848,7 @@ HCNT("setImage");
             continue;
         int p = 0;
         disstrU[p++] = c; //fontMap(c);
+        lineDraw = isLineChar(c);
         cr = ext[x].r;
         cb = ext[x].b;
         if (ext[x].f != cf) cf = ext[x].f;
@@ -731,7 +863,7 @@ HCNT("setImage");
           }
 
           if (ext[x+len].f != cf || ext[x+len].b != cb || ext[x+len].r != cr ||
-              !dirtyMask[x+len] )
+              !dirtyMask[x+len] || isLineChar(c) != lineDraw)
             break;
 
           disstrU[p++] = c; //fontMap(c);
@@ -756,9 +888,13 @@ HCNT("setImage");
             m_isIMSel = true;
 	}
         
+        bool save_fixed_font = fixed_font;
+        if (lineDraw)
+           fixed_font = false;
         drawAttrStr(paint,
                     QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
                     unistr, &ext[x], pm != NULL, true);
+        fixed_font = save_fixed_font;
         x += len - 1;
       }
     }
@@ -918,15 +1054,16 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect, bool pm)
       c = image[loc(x,y)].c;
       if (c)
          disstrU[p++] = c; //fontMap(c);
+      bool lineDraw = isLineChar(c);
       int cf = image[loc(x,y)].f;
       int cb = image[loc(x,y)].b;
       int cr = image[loc(x,y)].r;
       while (x+len <= rlx &&
              image[loc(x+len,y)].f == cf &&
              image[loc(x+len,y)].b == cb &&
-             image[loc(x+len,y)].r == cr )
+             image[loc(x+len,y)].r == cr &&
+             isLineChar( c = image[loc(x+len,y)].c) == lineDraw) // Assignment!
       {
-        c = image[loc(x+len,y)].c;
         if (c)
           disstrU[p++] = c; //fontMap(c);
         else
@@ -941,10 +1078,14 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect, bool pm)
 
       if (!isBlinkEvent || (cr & RE_BLINK))
       {
+         bool save_fixed_font = fixed_font;
+         if (lineDraw)
+            fixed_font = false;
          QString unistr(disstrU,p);
          drawAttrStr(paint,
                 QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
                 unistr, &image[loc(x,y)], pm, !(isBlinkEvent || isPrinting));
+         fixed_font = save_fixed_font;
       }
       x += len - 1;
     }

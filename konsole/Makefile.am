@@ -6,6 +6,7 @@ INCLUDES = -I. $(all_includes)
 # you can add here more. This one gets installed
 # bin_PROGRAMS = kcmkonsole
 bin_PROGRAMS =
+noinst_PROGRAMS = fontembedder
 lib_LTLIBRARIES = 
 kdeinit_LTLIBRARIES = konsole.la
 kde_module_LTLIBRARIES = libkonsolepart.la kded_kwrited.la
@@ -25,6 +26,10 @@ libkonsolepart_la_SOURCES = TEPty.cpp BlockArray.cpp konsole_part.cpp \
 
 libkonsolepart_la_LDFLAGS = $(KDE_PLUGIN) $(all_libraries)
 libkonsolepart_la_LIBADD = $(XTESTLIB) $(LIB_KPARTS)
+
+fontembedder_SOURCES = fontembedder.cpp
+fontembedder_LDFLAGS = $(all_libraries)
+fontembedder_LDADD = $(LIB_QT)
 
 # kwrited kded module
 kded_kwrited_la_SOURCES = kwrited.cpp TEPty.cpp kwrited.skel
@@ -47,7 +52,7 @@ noinst_HEADERS = TEWidget.h TEPty.h TEmulation.h TEmuVt102.h \
 	TECommon.h TEScreen.h konsole.h schema.h session.h konsole_wcwidth.h \
 	kwrited.h TEHistory.h keytrans.h default.keytab.h BlockArray.h \
         konsolebookmarkhandler.h konsolebookmarkmenu.h zmodem_dialog.h \
-        printsettings.h
+        printsettings.h linefont.h
 
 METASOURCES = AUTO
 
@@ -70,3 +75,6 @@ mimedir = $(kde_mimedir)/application
 mime_DATA = x-konsole.desktop
 
 EXTRA_DIST = $(mime_DATA)
+
+fonts: fontembedder
+	./fontembedder $(srcdir)/linefont.src > linefont.h
