@@ -64,6 +64,7 @@ TEScreen::TEScreen(int lines, int columns)
 
   image      = (ca*) malloc(lines*columns*sizeof(ca));
   tabstops   = NULL; initTabStops();
+  cuX = cuY = sa_cu_re = cu_re = sa_cu_fg = cu_fg = sa_cu_bg = cu_bg = 0;
 
   histCursor = 0;
 
@@ -389,6 +390,7 @@ void TEScreen::resizeImage(int new_lines, int new_columns)
 
   // make new image
   ca* newimg = (ca*)malloc(new_lines*new_columns*sizeof(ca));
+  memset(newimg, 0, new_lines*new_columns*sizeof(ca));
 
   clearSelection();
 

@@ -155,6 +155,7 @@ KeytabReader::KeytabReader(QString p, QIODevice &d)
   path = p;
   buf = &d;
   cc = 0;
+  colno = 0;
 }
 
 void KeytabReader::getCc()

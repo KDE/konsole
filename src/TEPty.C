@@ -579,7 +579,8 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
     Create an instance.
 */
 TEPty::TEPty()
-{
+{ 
+  memset(&wsize, 0, sizeof(struct winsize));
   fd = openPty();
   connect(this, SIGNAL(receivedStdout(int, int &)), 
 	  this, SLOT(DataReceived(int, int&)));
