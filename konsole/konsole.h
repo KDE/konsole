@@ -100,7 +100,7 @@ public:
   virtual QCStringList functionsDynamic();
 
 public slots:
-  void activateSession(int position);
+  void activateSession(const int position);
 
   void makeGUI();
   QString newSession();
