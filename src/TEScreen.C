@@ -753,7 +753,9 @@ void TEScreen::ShowCharacter(unsigned char c)
   // if (xenl)
   if (cuX >= columns)
   {
+//    fprintf(stderr, "at eol, wrap=%d c=+%c+(%d)\n", getMode(MODE_Wrap), c, c );
     if (getMode(MODE_Wrap)) NextLine(); else cuX = columns-1;
+    
   }
 
   if (graphic) // handle graphical character set here
