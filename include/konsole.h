@@ -21,6 +21,8 @@
 #include <ksimpleconfig.h>
 #include <kaction.h>
 #include <qstrlist.h>
+#include <qintdict.h>
+#include <qptrdict.h>
 
 #include "TEPty.h"
 #include "TEWidget.h"
@@ -68,7 +70,7 @@ private slots:
   void notifySize(int,int);
   void setHeader();
   void changeTitle(int, const QString&);
-    
+
 protected:
 
  void saveProperties(KConfig* config);
@@ -83,7 +85,7 @@ private slots:
   void setSchema(int n);
   void sendSignal(int n);
   void slotToggleToolbar();
-  void slotToggleMenubar();  
+  void slotToggleMenubar();
   void slotToggleFrame();
   void slotRenameSession();
   void slotSelectSize();
@@ -93,13 +95,13 @@ private slots:
 private:
 
   void makeMenu();
-  void runSession(TESession* s); 
+  void runSession(TESession* s);
   void addSession(TESession* s);
   void setColorPixmaps();
 
   //  void setFrameVisible(bool);
   void setHistory(bool);
-  
+
   void setSchema(const char* path);
   void setSchema(const ColorSchema* s);
   void setFont(int fontno);
@@ -108,6 +110,19 @@ private:
   void loadSessionCommands();
 
 private:
+
+  //////// Those used to be as static in konsole.C, leading
+  /////// to crashes on Solaris (non initialised)
+  ////// I suppose it's ok to make them class specific
+  ///// (after all, Konsole == window, and this could be different for
+  //// two windows....). Make them static pointers initialised in the
+  /// constructor if this is not ok.
+  // (David)
+  int session_no;
+  QPtrDict<TESession> action2session;
+  QPtrDict<KRadioAction> session2action;
+  QIntDict<KSimpleConfig> no2command;
+  int cmd_serial;
 
   TEWidget*      te;
   TESession*     se;

@@ -75,9 +75,6 @@
 #include <klineeditdlg.h>
 #include <kdebug.h>
 
-
-#include <qintdict.h>
-#include <qptrdict.h>
 #include <qmessagebox.h>
 
 #include <klocale.h>
@@ -118,17 +115,14 @@ const char *fonts[] = {
  };
 #define TOPFONT ((sizeof(fonts)/sizeof(char*))-1)
 
-static int session_no = 0;
-static QPtrDict<TESession> action2session;
-static QPtrDict<KRadioAction> session2action;
-
-static QIntDict<KSimpleConfig> no2command;
-static int cmd_serial = 0;
-
 Konsole::Konsole(const QString& name,
                  const char* _pgm, QStrList & _args,
                  int histon) : KTMainWindow(name), pgm(_pgm), args(_args)
 {
+
+  session_no = 0;
+  cmd_serial = 0;
+
   se = 0L;
   rootxpm = 0L;
   menubar = menuBar();

@@ -21,8 +21,8 @@
 
 static int schema_serial = 0; //FIXME: remove,localize
 
-static QIntDict<ColorSchema> numb2schema;
-static QDict<ColorSchema>    path2schema;
+static QIntDict<ColorSchema> * numb2schema = 0L;
+static QDict<ColorSchema>   * path2schema = 0L;
 
 template class QIntDict<ColorSchema>;
 template class QDict<ColorSchema>;
@@ -129,25 +129,25 @@ ColorSchema* ColorSchema::readSchema(const char* path)
 
 ColorSchema* ColorSchema::find(int numb)
 {
-  ColorSchema* res = numb2schema.find(numb);
-  return res ? res : numb2schema.find(0);
+  ColorSchema* res = numb2schema->find(numb);
+  return res ? res : numb2schema->find(0);
 }
 
 ColorSchema* ColorSchema::find(const char* path)
 {
-  ColorSchema* res = path2schema.find(path);
-  return res ? res : numb2schema.find(0);
+  ColorSchema* res = path2schema->find(path);
+  return res ? res : numb2schema->find(0);
 }
 
 int ColorSchema::count()
 {
-  return numb2schema.count();
+  return numb2schema->count();
 }
 
 void ColorSchema::addSchema()
 {
-  numb2schema.insert(numb,this);
-  path2schema.insert(path,this);
+  numb2schema->insert(numb,this);
+  path2schema->insert(path,this);
 }
 
 static const ColorEntry default_table[TABLE_COLORS] =
@@ -186,6 +186,12 @@ ColorSchema* ColorSchema::defaultSchema()
 
 void ColorSchema::loadAllSchemas()
 {
+
+  if ( !numb2schema )
+    numb2schema = new QIntDict<ColorSchema>;
+  if ( !path2schema )
+    path2schema = new QDict<ColorSchema>;
+
   defaultSchema()->addSchema();
   schema_serial = 1;
   QStringList lst = KGlobal::dirs()->findAllResources("appdata", "*.schema");

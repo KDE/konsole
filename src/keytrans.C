@@ -265,13 +265,20 @@ class KeyTransSymbols
 {
 public:
   KeyTransSymbols();
+protected:
+  void defOprSyms();
+  void defModSyms();
+  void defKeySyms();
+  void defKeySym(const char* key, int val);
+  void defOprSym(const char* key, int val);
+  void defModSym(const char* key, int val);
 public:
   QDict<QObject> keysyms;
   QDict<QObject> modsyms;
   QDict<QObject> oprsyms;
 };
 
-static KeyTransSymbols syms;
+static KeyTransSymbols * syms = 0L;
 
 // parser ----------------------------------------------------------------------------------
 /* Syntax
@@ -314,8 +321,8 @@ Loop:
   {
 //printf("line %3d: ",startofsym);
     getSymbol(); assertSyntax(sym == SYMName, "Name expected")
-    assertSyntax(syms.keysyms[res], "Unknown key name")
-    int key = (int)syms.keysyms[res]-1;
+    assertSyntax(syms->keysyms[res], "Unknown key name")
+    int key = (int)syms->keysyms[res]-1;
 //printf(" key %s (%04x)",res.ascii(),(int)keysyms[res]-1);
     getSymbol(); // + - :
     int mode = 0;
@@ -326,8 +333,8 @@ Loop:
       getSymbol();
       // mode name
       assertSyntax(sym == SYMName, "Name expected")
-      assertSyntax(syms.modsyms[res], "Unknown mode name")
-      int bits = (int)syms.modsyms[res]-1;
+      assertSyntax(syms->modsyms[res], "Unknown mode name")
+      int bits = (int)syms->modsyms[res]-1;
       if (mask & (1 << bits))
       {
         fprintf(stderr,"%s(%d,%d): mode name used multible times.\n",path.ascii(),slinno,scolno);
@@ -347,8 +354,8 @@ Loop:
     int cmd = 0;
     if (sym == SYMName)
     {
-      assertSyntax(syms.oprsyms[res], "Unknown operator name")
-      cmd = (int)syms.oprsyms[res]-1;
+      assertSyntax(syms->oprsyms[res], "Unknown operator name")
+      cmd = (int)syms->oprsyms[res]-1;
 //printf(": do %s(%d)",res.ascii(),(int)oprsyms[res]-1);
     }
     if (sym == SYMString)
@@ -404,22 +411,22 @@ KeyTrans* KeyTrans::fromFile(const char* path)
 // material needed for parsing the config file.
 // This is incomplete work.
 
-void defKeySym(const char* key, int val)
+void KeyTransSymbols::defKeySym(const char* key, int val)
 {
-  syms.keysyms.insert(key,(QObject*)(val+1));
+  keysyms.insert(key,(QObject*)(val+1));
 }
 
-void defOprSym(const char* key, int val)
+void KeyTransSymbols::defOprSym(const char* key, int val)
 {
-  syms.oprsyms.insert(key,(QObject*)(val+1));
+  oprsyms.insert(key,(QObject*)(val+1));
 }
 
-void defModSym(const char* key, int val)
+void KeyTransSymbols::defModSym(const char* key, int val)
 {
-  syms.modsyms.insert(key,(QObject*)(val+1));
+  modsyms.insert(key,(QObject*)(val+1));
 }
 
-static void defOprSyms()
+void KeyTransSymbols::defOprSyms()
 {
   // Modifier
   defOprSym("scrollLineUp",  CMD_scrollLineUp  );
@@ -429,7 +436,7 @@ static void defOprSyms()
   defOprSym("emitSelection", CMD_emitSelection );
 }
 
-static void defModSyms()
+void KeyTransSymbols::defModSyms()
 {
   // Modifier
   defModSym("Shift",      BITS_Shift        );
@@ -442,7 +449,7 @@ static void defModSyms()
   defModSym("AppCuKeys",  BITS_AppCuKeys    );
 }
 
-static void defKeySyms()
+void KeyTransSymbols::defKeySyms()
 {
   // Grey keys
   defKeySym("Escape",       Qt::Key_Escape      );
@@ -595,35 +602,42 @@ KeyTransSymbols::KeyTransSymbols()
 
 static int keytab_serial = 0; //FIXME: remove,localize
 
-static QIntDict<KeyTrans> numb2keymap;
-static QDict<KeyTrans>    path2keymap;
+static QIntDict<KeyTrans> * numb2keymap = 0L;
+static QDict<KeyTrans>    * path2keymap = 0L;
 
 KeyTrans* KeyTrans::find(int numb)
 {
-  KeyTrans* res = numb2keymap.find(numb);
-  return res ? res : numb2keymap.find(0);
+  KeyTrans* res = numb2keymap->find(numb);
+  return res ? res : numb2keymap->find(0);
 }
 
 KeyTrans* KeyTrans::find(const char* path)
 {
-  KeyTrans* res = path2keymap.find(path);
-  return res ? res : numb2keymap.find(0);
+  KeyTrans* res = path2keymap->find(path);
+  return res ? res : numb2keymap->find(0);
 }
 
 int KeyTrans::count()
 {
-  return numb2keymap.count();
+  return numb2keymap->count();
 }
 
 void KeyTrans::addKeyTrans()
 {
   this->numb = keytab_serial ++;
-  numb2keymap.insert(numb,this);
-  path2keymap.insert(path,this);
+  numb2keymap->insert(numb,this);
+  path2keymap->insert(path,this);
 }
 
 void KeyTrans::loadAll()
 {
+  if (!numb2keymap)
+    numb2keymap = new QIntDict<KeyTrans>;
+  if (!path2keymap)
+    path2keymap = new QDict<KeyTrans>;
+  if (!syms)
+    syms = new KeyTransSymbols;
+
   defaultKeyTrans()->addKeyTrans();
   QStringList lst = KGlobal::dirs()->findAllResources("appdata", "*.keytab");
 

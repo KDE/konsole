@@ -46,7 +46,7 @@ TESession::TESession(KTMainWindow* main, TEWidget* te, const char* _pgm, QStrLis
 
 void TESession::run()
 {
-  kdDebug() << "Running the session!" << pgm << "\n";
+  //kdDebug() << "Running the session!" << pgm << "\n";
   sh->run(pgm,args,term,FALSE);
 }
 

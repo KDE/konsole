@@ -15,7 +15,7 @@
 /*! \class TEPty
 
     \brief Ptys provide a pseudo terminal connection to a program.
-    
+
     Although closely related to pipes, these pseudo terminal connections have
     some ability, that makes it nessesary to uses them. Most importent, they
     know about changing screen sizes and UNIX job control.
@@ -26,7 +26,7 @@
     One can create many instances of this class within a program.
     As a side effect of using this class, a signal(2) handler is
     installed on SIGCHLD.
-    
+
     \par FIXME
 
     [NOTE: much of the technical stuff below will be replaced by forkpty.]
@@ -80,7 +80,7 @@ extern "C" {
 #include <utempter.h>
 }
 #endif
-   
+
 
 #include <assert.h>
 #include <fcntl.h>
@@ -123,7 +123,7 @@ template class QIntDict<TEPty>;
 
 FILE* syslog_file = NULL; //stdout;
 
-static QIntDict<TEPty> ptys;
+static QIntDict<TEPty> * ptys = 0L;
 
 #define PTY_FILENO 3
 #define BASE_CHOWN "konsole_grantpty"
@@ -155,8 +155,8 @@ int chownpty(int fd, int grant)
     if (rc != pid)
     { // signal from other child, behave like catchChild.
       // guess this gives quite some control chaos...
-      TEPty* sh = ptys.find(rc);
-      if (sh) { ptys.remove(rc); sh->donePty(w); }
+      TEPty* sh = ptys->find(rc);
+      if (sh) { ptys->remove(rc); sh->donePty(w); }
       goto retry;
     }
     signal(SIGCHLD,tmp);
@@ -185,15 +185,15 @@ void TEPty::setSize(int lines, int columns)
 void catchChild(int)
 { int status;
   pid_t pid = waitpid(-1,&status,WNOHANG);
-  TEPty* sh = ptys.find(pid);
-  if (sh) { ptys.remove(pid); sh->donePty(status); }
+  TEPty* sh = ptys->find(pid);
+  if (sh) { ptys->remove(pid); sh->donePty(status); }
 }
 
 void TEPty::donePty(int status)
 {
 #ifdef HAVE_UTEMPTER
   removeLineFromUtmp(ttynam, fd);
-#endif   
+#endif
   if (needGrantPty) chownpty(fd,FALSE);
   emit done(status);
 }
@@ -209,11 +209,13 @@ const char* TEPty::deviceName()
 */
 int TEPty::run(const char* pgm, QStrList & args, const char* term, int addutmp)
 {
-  
+  if (!ptys)
+    ptys = new QIntDict<TEPty>;
+
   comm_pid = fork();
   if (comm_pid <  0) { fprintf(stderr,"Can't fork\n"); return -1; }
   if (comm_pid == 0) makePty(ttynam,pgm,args,term,addutmp);
-  if (comm_pid >  0) ptys.insert(comm_pid,this);
+  if (comm_pid >  0) ptys->insert(comm_pid,this);
   return 0;
 }
 
@@ -225,7 +227,7 @@ int TEPty::openPty()
 
 #ifdef __sgi__
   ptyfd = open("/dev/ptmx",O_RDWR);
-  if (ptyfd < 0) 
+  if (ptyfd < 0)
     {
       perror("Can't open a pseudo teletype");
       return(-1);
@@ -276,11 +278,11 @@ int TEPty::openPty()
   }
 #endif
   if (ptyfd < 0) // Linux, FIXME: Trouble on other systems?
-  { for (const char* s3 = "pqrstuvwxyzabcde"; *s3 != 0; s3++) 
-    { for (const char* s4 = "0123456789abcdef"; *s4 != 0; s4++) 
+  { for (const char* s3 = "pqrstuvwxyzabcde"; *s3 != 0; s3++)
+    { for (const char* s4 = "0123456789abcdef"; *s4 != 0; s4++)
       { sprintf(ptynam,"/dev/pty%c%c",*s3,*s4);
         sprintf(ttynam,"/dev/tty%c%c",*s3,*s4);
-        if ((ptyfd = open(ptynam,O_RDWR)) >= 0) 
+        if ((ptyfd = open(ptynam,O_RDWR)) >= 0)
         { if (geteuid() == 0 || access(ttynam,R_OK|W_OK) == 0) break;
           close(ptyfd); ptyfd = -1;
         }
@@ -330,7 +332,7 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   //fprintf(stderr,"opening slave pty (%s) failed.\n",dev);
   //exit(1);
   }
-  
+
 #if (defined(SVR4) || defined(__SVR4)) && (defined(i386) || defined(__i386__) || defined(__sgi__))
   // Solaris x86
   ioctl(tt, I_PUSH, "ptem");
@@ -340,35 +342,35 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   // Stamp utmp/wtmp if we have and want them
 #ifdef HAVE_UTEMPTER
   if (addutmp) addToUtmp(dev, "", fd);
-#endif   
+#endif
 
   //reset signal handlers for child process
   for (sig = 1; sig < NSIG; sig++) signal(sig,SIG_DFL);
- 
+
   // Don't know why, but his is vital for SIGHUP to find the child.
   // Could be, we get rid of the controling terminal by this.
   // getrlimit is a getdtablesize() equivalent, more portable (David Faure)
   struct rlimit rlp;
   getrlimit(RLIMIT_NOFILE, &rlp);
-  for (int i = 0; i < (int)rlp.rlim_cur; i++) 
+  for (int i = 0; i < (int)rlp.rlim_cur; i++)
     if (i != tt && i != fd) close(i); //FIXME: (result of merge) Check if not closing fd is OK)
 
   dup2(tt,fileno(stdin));
   dup2(tt,fileno(stdout));
   dup2(tt,fileno(stderr));
-  
+
   if (tt > 2) close(tt);
 
-  // Setup job control ////////////////////////////////// 
+  // Setup job control //////////////////////////////////
 
   // This is pretty obscure stuff which makes the session
   // to be the controlling terminal of a process group.
 
   if (setsid() < 0) perror("failed to set process group"); // (vital for bash)
 
-#if defined(TIOCSCTTY)  
+#if defined(TIOCSCTTY)
   ioctl(0, TIOCSCTTY, 0);
-#endif  
+#endif
 
   int pgrp = getpid();                 // This sequence is necessary for
   ioctl(0, TIOCSPGRP, (char *)&pgrp);  // event propagation. Omitting this
@@ -397,7 +399,7 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
       tcgetattr(0, &ttmode);
 #   else
       ioctl(0,TCGETS,(char *)&ttmode);
-#   endif        
+#   endif
 #endif
       ttmode.c_cc[VINTR] = CTRL('C');
       ttmode.c_cc[VQUIT] = CTRL('\\');
@@ -409,11 +411,11 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
       tcsetattr(0, TCSANOW, &ttmode);
 #   else
       ioctl(0,TCSETS,(char *)&ttmode);
-#   endif        
+#   endif
 #endif
 
   close(fd);
-  
+
   // drop privileges
   setuid(getuid()); setgid(getgid());
 
@@ -435,7 +437,7 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   exit(1);                             // control should never come here.
 }
 
-/*! 
+/*!
     Create an instance.
 */
 TEPty::TEPty()
@@ -467,7 +469,7 @@ void TEPty::kill(int signal)
 
 /*! sends a character through the line */
 void TEPty::send_byte(char c)
-{ 
+{
   write(fd,&c,1);
 }
 
