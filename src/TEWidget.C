@@ -812,7 +812,7 @@ void TEWidget::focusInEvent( QFocusEvent * )
 }
 
 
-void TEWidget::focusOutEvent( QFocusEvent *e )
+void TEWidget::focusOutEvent( QFocusEvent * )
 {
     // do nothing, to prevent repainting
 }
