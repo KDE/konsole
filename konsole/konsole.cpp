@@ -130,6 +130,9 @@ Time to start a requirement list.
 
 #define KONSOLEDEBUG    kdDebug(1211)
 
+#define POPUP_NEW_SESSION_ID 121
+#define POPUP_SETTINGS_ID 212
+
 // KonsoleFontSelectAction is now also used for selectSize!
 class KonsoleFontSelectAction : public KSelectAction {
 public:
@@ -416,6 +419,8 @@ void Konsole::updateRMBMenu()
          m_rightButton->insertSeparator( index+1 );
       }
       index = 2;
+      m_rightButton->setItemVisible(POPUP_NEW_SESSION_ID,true);
+      m_rightButton->setItemVisible(POPUP_SETTINGS_ID,true);
    }
    else
    {
@@ -425,6 +430,8 @@ void Konsole::updateRMBMenu()
          m_rightButton->removeItemAt(index);
       }
       index = 0;
+      m_rightButton->setItemVisible(POPUP_NEW_SESSION_ID,false);
+      m_rightButton->setItemVisible(POPUP_SETTINGS_ID,false);
    }
 
    if (!m_fullscreen)
@@ -715,7 +722,7 @@ void Konsole::makeGUI()
 
       m_rightButton->insertSeparator();
       if (m_tabbarSessionsCommands)
-         m_rightButton->insertItem( i18n("New Sess&ion"), m_tabbarSessionsCommands );
+         m_rightButton->insertItem( i18n("New Sess&ion"), m_tabbarSessionsCommands, POPUP_NEW_SESSION_ID );
       m_detachSession->plug(m_rightButton);
       m_renameSession->plug(m_rightButton);
 
@@ -728,7 +735,7 @@ void Konsole::makeGUI()
       if (m_options)
       {
          m_rightButton->insertSeparator();
-         m_rightButton->insertItem(i18n("S&ettings"), m_options);
+         m_rightButton->insertItem(i18n("S&ettings"), m_options, POPUP_SETTINGS_ID);
       }
       m_rightButton->insertSeparator();
       m_closeSession->plug(m_rightButton );
