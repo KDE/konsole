@@ -28,36 +28,63 @@ keyboard "XTerm (XFree 4.x.x)"
 
 # common keys
 
-key Escape         : "\E"
-key Tab   -Shift   : "\t"
-key Tab   +Shift   : "\E[Z"
+key Escape             : "\E"
 
-key Return-Shift   : "\r"
-key Return+Shift   : "\EOM"
+key Tab   -Shift       : "\t"
+key Tab   +Shift+Ansi  : "\E[Z"
+key Tab   +Shift-Ansi  : "\t"
+
+key Return-Shift-NewLine : "\r"
+key Return-Shift+NewLine : "\r\n"
+
+key Return+Shift         : "\EOM"
 
 # Backspace and Delete codes are preserving CTRL-H.
 
 key Backspace      : "\x7f"
 
-# cursor keys
+# Arrow keys in VT52 mode
 
-key Up    -Shift   : "\EOA"
-key Down  -Shift   : "\EOB"
-key Right -Shift   : "\EOC"
-key Left  -Shift   : "\EOD"
+key Up   -Shift-Ansi : "\EA"
+key Down -Shift-Ansi : "\EB"
+key Right-Shift-Ansi : "\EC"
+key Left -Shift-Ansi : "\ED"
+
+# Arrow keys in ANSI mode with Application - and Normal Cursor Mode)
+
+key Up   -Shift+Ansi+AppCuKeys : "\EOA"
+key Down -Shift+Ansi+AppCuKeys : "\EOB"
+key Right-Shift+Ansi+AppCuKeys : "\EOC"
+key Left -Shift+Ansi+AppCuKeys : "\EOD"
+
+key Up   -Shift+Ansi-AppCuKeys : "\E[A"
+key Down -Shift+Ansi-AppCuKeys : "\E[B"
+key Right-Shift+Ansi-AppCuKeys : "\E[C"
+key Left -Shift+Ansi-AppCuKeys : "\E[D"
 
 # other grey PC keys
 
-key Enter          : "\r"
+key Enter+NewLine : "\r\n"
+key Enter-NewLine : "\r"
 
-key Home  -Shift   : "\E[1~"
-key Insert-Shift   : "\E[2~"
-key Delete-Shift   : "\E[3~"
-key End   -Shift   : "\E[4~"
-key Prior -Shift   : "\E[5~"
-key Next  -Shift   : "\E[6~"
+key Home  -Shift-AppCuKeys : "\E[H"  
+key End   -Shift-AppCuKeys : "\E[F"  
+key Home  +Shift-AppCuKeys : "\E[2H"  
+key End   +Shift-AppCuKeys : "\E[2F"  
 
-# function keys
+key Home  -Shift+AppCuKeys : "\EOH"  
+key End   -Shift+AppCuKeys : "\EOF"  
+key Home  +Shift+AppCuKeys : "\EO2H"  
+key End   +Shift+AppCuKeys : "\EO2F"  
+
+key Insert-Shift : "\E[2~"  
+key Delete-Shift : "\E[3~"  
+key Prior -Shift : "\E[5~"  
+key Next  -Shift : "\E[6~"  
+
+key Delete+Shift : "\E[3;2~"  
+
+# Function keys w/o Shift modifier
 
 key F1    -Shift   : "\EOP"
 key F2    -Shift   : "\EOQ"
@@ -71,14 +98,19 @@ key F9    -Shift   : "\E[20~"
 key F10   -Shift   : "\E[21~"
 key F11   -Shift   : "\E[23~"
 key F12   -Shift   : "\E[24~"
-key F1    +Shift   : "\E[25~"
-key F2    +Shift   : "\E[26~"
-key F3    +Shift   : "\E[28~"
-key F4    +Shift   : "\E[29~"
-key F5    +Shift   : "\E[31~"
-key F6    +Shift   : "\E[32~"
-key F7    +Shift   : "\E[33~"
-key F8    +Shift   : "\E[34~"
+
+key F1 +Shift    : "\EO2P"  
+key F2 +Shift    : "\EO2Q"
+key F3 +Shift    : "\EO2R"
+key F4 +Shift    : "\EO2S"
+key F5 +Shift    : "\E[15;2~"
+key F6 +Shift    : "\E[17;2~" 
+key F7 +Shift    : "\E[18;2~" 
+key F8 +Shift    : "\E[19;2~" 
+key F9 +Shift    : "\E[20;2~" 
+key F10+Shift    : "\E[21;2~" 
+key F11+Shift    : "\E[23;2~" 
+key F12+Shift    : "\E[24;2~" 
 
 # Work around dead keys
 
