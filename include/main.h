@@ -34,7 +34,7 @@ class TEDemo : public KTMainWindow
 
 public:
 
-  TEDemo(QStrList & _args, int login_shell);
+  TEDemo(char* name, QStrList & _args, int login_shell);
   ~TEDemo();
   void setColLin(int columns, int lines);
 
@@ -69,15 +69,19 @@ protected:
 private slots:
 
   void setSchema(int n);
-//  void saveYourself();
 
 private:
 
   void makeMenu();
   void makeStatusbar();
+  void runSession(TESession* s);
   void addSession(TESession* s);
   void setColorPixmaps();
 
+  void setMenuVisible(bool);
+  void setFrameVisible(bool);
+  void setBsHack(bool);
+  
   void setSchema(const char* path);
   void setSchema(const ColorSchema* s);
   void setFont(int fontno);
@@ -112,7 +116,7 @@ private:
   int         n_render;
   QString     pmPath; // pixmap path
   QString     dropText;
-
+  QSize       defaultSize;
   int         curr_schema; // current schema no
 
   QStrList args;

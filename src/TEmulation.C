@@ -10,7 +10,9 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-/* \class
+/*! \class Emulation
+
+    \brief Mediator between TEWidget and TEScreen.
 
    This class is responsible to scan the escapes sequences of the terminal
    emulation and to map it to their corresponding semantic complements.
@@ -20,6 +22,39 @@
    It is also responsible to refresh the TEWidget by certain rules.
 
    \sa TEWidget \sa TEScreen
+
+   \par A note on refreshing
+
+   Allthough the modifications to the current screen image could immediately
+   be propagated via `TEWidget' to the graphical surface, we have chosen
+   another way here.
+
+   The reason for doing so is twofold.
+   First, experiments show that directly displaying the operation results
+   in slowing down the overall performance of emulations. First,
+   displaying individual characters using X11 creates a lot of overhead.
+   Second, by using the following refreshing method, the screen operations
+   can be completely separated from the displaying. This greatly simplifies
+   the programmer's task of coding and maintaining the screen operations,
+   since one need not worry about differential modifications on the
+   display affecting the operation of concern.
+
+   We use a refreshing algorithm here that has been adoped from rxvt/kvt.
+
+   By this, refreshing is driven by a timer, which is (re)started whenever
+   a new bunch of data to be interpreted by the emulation arives at `onRcvBlock'.
+   As soon as no more data arrive for `BULK_TIMEOUT' milliseconds, we trigger
+   refresh. This rule suits both bulk display operation as done by curses as
+   well as individual characters typed.
+   (BULK_TIMEOUT < 1000 / max characters received from keyboard per second).
+
+   Additionally, we trigger refreshing by newlines comming in to make visual
+   snapshots of lists as produced by `cat', `ls' and likely programs, thereby
+   producing the illusion of a permanent and immediate display operation.
+
+   As a sort of catch-all needed for cases where none of the above
+   conditions catch, the screen refresh is also triggered by a count
+   of incoming bulks (`bulk_incnt').
 */
 
 /* FIXME
@@ -179,41 +214,7 @@ void Emulation::clearSelection() {
   showBulk();
 }
 
-/* ------------------------------------------------------------------------- */
-
-/*! A note on refreshing
-
-   Allthough the modifications to the current screen image could immediately
-   be propagated via `TEWidget' to the graphical surface, we have chosen
-   another way here.
-
-   The reason for doing so is twofold.
-   First, experiments show that directly displaying the operation results
-   in slowing down the overall performance of emulations. First,
-   displaying individual characters using X11 creates a lot of overhead.
-   Second, by using the following refreshing method, the screen operations
-   can be completely separated from the displaying. This greatly simplifies
-   the programmer's task of coding and maintaining the screen operations,
-   since one need not worry about differential modifications on the
-   display affecting the operation of concern.
-
-   We use a refreshing algorithm here that has been adoped from rxvt/kvt.
-
-   By this, refreshing is driven by a timer, which is (re)started whenever
-   a new bunch of data to be interpreted by the emulation arives at `onRcvBlock'.
-   As soon as no more data arrive for `BULK_TIMEOUT' milliseconds, we trigger
-   refresh. This rule suits both bulk display operation as done by curses as
-   well as individual characters typed.
-   (BULK_TIMEOUT < 1000 / max characters received from keyboard per second).
-
-   Additionally, we trigger refreshing by newlines comming in to make visual
-   snapshots of lists as produced by `cat', `ls' and likely programs, thereby
-   producing the illusion of a permanent and immediate display operation.
-
-   As a sort of catch-all needed for cases where none of the above
-   conditions catch, the screen refresh is also triggered by a count
-   of incoming bulks (`bulk_incnt').
-*/
+/* Refreshing -------------------------------------------------------------- */
 
 #define BULK_TIMEOUT 20
 

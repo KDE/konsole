@@ -1,6 +1,22 @@
+Here is a list of little projects
+
 - deflicker, setting all the attributes separately
   both when creating and changing to a session
   creates 3 setimage and 1 paint events.
+
+- when manipulating binary files, sometimes one
+  screws up ones terminal settings.  xterm has
+  a convenient 'hard reset' menu choice. Further
+  killing individual sessions would be nice to have.
+
+- when removing and adding the menu, the window
+  remains the same size, meaning that the number of
+  rows changes.  For applications that do not take
+  kindly to this, it would be nice if the window
+  changed sizes and the number of rows remained the same.
+  [Additionally, some clients are very sensible about
+   resizing. Evtl. an option to keep the size of the
+   konsole's screens would be nice-to-have].
 
 - make resizing more clever
   to see the issue, 'ls /dev', make window smaller
@@ -28,16 +44,12 @@
 - dynamic buffer adjustment or configurability.
 - clear buffer facility.
 
-- i18n improvements?
-
 - write configuration utility at least for *.schema files.
 
 - evtl. handle *.kdelnk files using regular setup utilities
   and a rpc client. Should become a parameter in any case.
 
 - allow reloading the configuration files at runtime.
-
-- Unix98 compatible way of using pty (openpty/forkpty).
 
 ! announce konsole-1.0 ------------------------------------
 
@@ -47,6 +59,7 @@
   - media copy (print)
   - double high, double width (vt100)
   - reverse wraparound?
+  - add secondary buffer to linux console (the real one).
 
 - Linux console improvements
   - Attributes
@@ -60,6 +73,7 @@
     in the program?
   - use scalable font?
   - allow fonts being configured freely
+  - fix national characters in Linux console emulation.
 
 - add configuration for function keys
 

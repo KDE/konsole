@@ -34,6 +34,7 @@ public:
 
   void       setConnect(bool r);
   Emulation* getEmulation();      // to control emulation
+  bool       isSecure();
 
 public:
 
@@ -45,11 +46,11 @@ public:
   void setSchemaNo(int sn);
   void setFontNo(int fn);
   void setTitle(const char* title);
-
-  void run();
+  void kill(int signal);
 
 public slots:
 
+  void run();
   void done(int status);
   void terminate();
 
