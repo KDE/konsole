@@ -12,6 +12,9 @@
   rows changes.  For applications that do not take
   kindly to this, it would be nice if the window
   changed sizes and the number of rows remained the same.
+  [Additionally, some clients are very sensible about
+   resizing. Evtl. an option to keep the size of the
+   konsole's screens would be nice-to-have].
 
 - make resizing more clever
   to see the issue, 'ls /dev', make window smaller
