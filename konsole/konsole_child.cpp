@@ -27,7 +27,6 @@ KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar
 ,session_terminated(false)
 ,wallpaperSource(0)
 ,se(_se)
-,schema(_schema)
 ,allowResize(_allowResize)
 {
   te = new TEWidget(this);
@@ -54,19 +53,7 @@ KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar
 
   setColLin(columns, lines);
 
-  session_transparent=false;
-  if (schema) {
-    te->setColorTable(schema->table()); //FIXME: set twice here to work around a bug
-    if (schema->useTransparency()) {
-      rootxpm->setFadeEffect(schema->tr_x(), QColor(schema->tr_r(), schema->tr_g(), schema->tr_b()));
-      rootxpm->start();
-      session_transparent=true;
-    } else {
-      rootxpm->stop();
-      pixmap_menu_activated(schema->alignment(),schema->imagePath());
-    }
-    te->setColorTable(schema->table());
-  }
+  setSchema(_schema);
 
   updateTitle();
 
@@ -129,6 +116,23 @@ void KonsoleChild::run() {
 
    kWinModule = new KWinModule();
    connect( kWinModule,SIGNAL(currentDesktopChanged(int)), this,SLOT(currentDesktopChanged(int)) );
+}
+
+void KonsoleChild::setSchema(ColorSchema* _schema) {
+  schema=_schema;
+  session_transparent=false;
+  if (schema) {
+    te->setColorTable(schema->table()); //FIXME: set twice here to work around a bug
+    if (schema->useTransparency()) {
+      rootxpm->setFadeEffect(schema->tr_x(), QColor(schema->tr_r(), schema->tr_g(), schema->tr_b()));
+      rootxpm->start();
+      session_transparent=true;
+    } else {
+      rootxpm->stop();
+      pixmap_menu_activated(schema->alignment(),schema->imagePath());
+    }
+    te->setColorTable(schema->table());
+  }
 }
 
 void KonsoleChild::updateTitle()
