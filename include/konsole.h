@@ -20,6 +20,7 @@
 #include <kmainwindow.h>
 #include <ksimpleconfig.h>
 #include <kaction.h>
+#include <kpopupmenu.h>
 #include <qstrlist.h>
 #include <qintdict.h>
 #include <qptrdict.h>
@@ -124,13 +125,13 @@ private:
   KMenuBar*   menubar;
   KStatusBar* statusbar;
 
-  QPopupMenu* m_file;
-  QPopupMenu* m_sessions;
-  QPopupMenu* m_options;
-  QPopupMenu* m_schema;
-  QPopupMenu* m_keytab;
-  QPopupMenu* m_codec;
-  QPopupMenu* m_toolbarSessionsCommands;
+  KPopupMenu* m_file;
+  KPopupMenu* m_sessions;
+  KPopupMenu* m_options;
+  KPopupMenu* m_schema;
+  KPopupMenu* m_keytab;
+  KPopupMenu* m_codec;
+  KPopupMenu* m_toolbarSessionsCommands;
 
   KToggleAction *showToolbar;
   bool        b_toolbarvis;

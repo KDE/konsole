@@ -129,7 +129,7 @@ Konsole::Konsole(const char* name,
                  const char* _pgm, QStrList & _args,
                  int histon) : KMainWindow(0, name), pgm(_pgm), args(_args)
 {
-
+  no2command.setAutoDelete(true);
   session_no = 0;
   cmd_serial = 0;
 
@@ -164,7 +164,7 @@ Konsole::Konsole(const char* name,
 
   loadSessionCommands();
   m_file->insertSeparator();
-  m_file->insertItem( i18n("&Quit"), kapp, SLOT(quit()));
+  m_file->insertItem( i18n("&Quit"), this, SLOT(close()));
 
   // load schema /////////////////////////////////////////////////////////////
 
@@ -238,16 +238,16 @@ void Konsole::makeMenu()
 {
   // options (taken from kvt) //////////////////////////////////////
 
-  m_file = new QPopupMenu(this);
+  m_file = new KPopupMenu(this);
   connect(m_file, SIGNAL(activated(int)), SLOT(newSession(int)));
-  m_toolbarSessionsCommands = new QPopupMenu(this);
+  m_toolbarSessionsCommands = new KPopupMenu(this);
   connect(m_toolbarSessionsCommands, SIGNAL(activated(int)), SLOT(newSession(int)));
 
   KAction *newsession = KStdAction::openNew(this , SLOT(newSessionSelect()));
   newsession->plug(toolBar());
   toolBar()->insertLineSeparator();
 
-  QPopupMenu* m_signals = new QPopupMenu(this);
+  KPopupMenu* m_signals = new KPopupMenu(this);
   m_signals->insertItem( i18n("STOP"), 17); // FIXME: comes with 3 values
   m_signals->insertItem( i18n("CONT"), 18); // FIXME: comes with 3 values
   m_signals->insertItem( i18n("HUP" ),  1);
@@ -256,7 +256,7 @@ void Konsole::makeMenu()
   m_signals->insertItem( i18n("KILL"),  9);
   connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
 
-  m_sessions = new QPopupMenu(this);
+  m_sessions = new KPopupMenu(this);
   m_sessions->setCheckable(TRUE);
   m_sessions->insertItem( i18n("Send Signal"), m_signals );
 
@@ -266,20 +266,20 @@ void Konsole::makeMenu()
 
   m_sessions->insertSeparator();
 
-  m_schema = new QPopupMenu(this);
+  m_schema = new KPopupMenu(this);
   m_schema->setCheckable(TRUE);
   connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
 
-  m_keytab = new QPopupMenu;
+  m_keytab = new KPopupMenu(this);
   m_keytab->setCheckable(TRUE);
   connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
 
-  m_codec  = new QPopupMenu;
+  m_codec  = new KPopupMenu(this);
   m_codec->setCheckable(TRUE);
   m_codec->insertItem( i18n("&locale"), 1 );
   m_codec->setItemChecked(1,TRUE);
 
-  m_options = new QPopupMenu(this);
+  m_options = new KPopupMenu(this);
   // insert the rename schema here too, because they will not find it
   // on shift right click
   renameSession->plug(m_options);
@@ -354,7 +354,7 @@ void Konsole::makeMenu()
                              "terms of the GNU General Public License\n"
                              "and comes WITHOUT ANY WARRANTY.\n"
                              "See 'LICENSE.readme' for details.").arg(PACKAGE).arg(VERSION);
-  QPopupMenu* m_help =  helpMenu(aboutAuthor, false);
+  KPopupMenu* m_help =  helpMenu(aboutAuthor, false);
   m_help->insertItem( i18n("&Technical Reference"), this, SLOT(tecRef()),
                       0, -1, 1);
   m_options->installEventFilter( this );
@@ -1037,7 +1037,7 @@ void Konsole::doneSession(TESession* s, int )
       QTimer::singleShot(1,this,SLOT(activateSession()));
     }
     else
-      kapp->quit();
+      close();
   }
 }
 

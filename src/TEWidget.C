@@ -277,7 +277,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   // Init DnD ////////////////////////////////////////////////////////////////
   currentSession = NULL;
   setAcceptDrops(true); // attempt
-  m_drop = new QPopupMenu;
+  m_drop = new KPopupMenu(this);
   m_drop->insertItem( i18n("Paste"), 0);
   m_drop->insertItem( i18n("cd"),    1);
   connect(m_drop, SIGNAL(activated(int)), SLOT(drop_menu_activated(int)));

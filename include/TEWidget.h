@@ -20,6 +20,8 @@
 #include <qkeycode.h>
 #include <qscrollbar.h>
 
+#include <kpopupmenu.h>
+
 #include "TECommon.h"
 
 extern unsigned short vt100_graphics[32];
@@ -173,7 +175,7 @@ private:
     BOOL blinking;   // hide text in paintEvent
     BOOL hasBlinker; // has characters to blink
     QTimer* blinkT;  // active when hasBlinker
-    QPopupMenu* m_drop;
+    KPopupMenu* m_drop;
     QString dropText;
  public:
     // current session in this widget
