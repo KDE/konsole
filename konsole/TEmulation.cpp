@@ -300,43 +300,20 @@ void TEmulation::onRcvBlock(const char *s, int len)
   bulkStart();
   for (int i = 0; i < len; i++)
   {
+    QString result = decoder->toUnicode(&s[i],1);
+    int reslen = result.length();
+    for (int j = 0; j < reslen; j++)
+    {
+      if (result[j].category() == QChar::Mark_NonSpacing)
+         scr->compose(result.mid(j,1));
+      else
+         onRcvChar(result[j].unicode());
+    }
     if (s[i] == '\030')
     {
       if ((len-i-1 > 3) && (strncmp(s+i+1, "B00", 3) == 0))
-      {
-        if (i > 0)
-           onRcvBlock(s, i-1); // Process preceeding data
       	emit zmodemDetected();
-      	return;
-      }
     }
-  }
-
-  QString result = decoder->toUnicode(s,len);
-
-  // Begin // Handle unicode compose sequences
-  int reslen = result.length();
-  int j;
-  for (j = 0; j < reslen; j++)
-  {
-    if (result[j].category() != QChar::Mark_NonSpacing)
-      break;
-  }
-  if (j > 0)
-  {
-     // How inconvenient... we have a compose sequence for something
-     // that we have put on screen already.
-     QString compose = result.left(j);
-     result = result.mid(j);
-     scr->compose(compose);
-  }
-  result.compose();
-  // End // Handle unicode compose sequences
-  
-  reslen = result.length();
-  for (j = 0; j < reslen; j++)
-  {
-    onRcvChar(result[j].unicode());
   }
 }
 
