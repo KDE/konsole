@@ -43,7 +43,7 @@ kwrited_SOURCES	= dummy.C
 kwrited_LDADD   = kwrited.la 
 kwrited_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
-konsole_la_SOURCES = main.C konsole.C sessionaction.C
+konsole_la_SOURCES = main.C konsole.C
 konsole_la_LIBADD  = libkonsolepart.la
 konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
 
@@ -68,10 +68,10 @@ install-data-local:
 install-exec-local: install-binPROGRAMS
 	@(chown root $(bindir)/konsole_grantpty && chmod 4755 $(bindir)/konsole_grantpty) || echo "Please make konsole_grandpty setuid root"
 
-# just to make sure, automake makes them
+# Not AUTO here, because there are some unused files
 METASOURCES = TEWidget.moc TEmuVt102.moc session.moc konsole.moc \
-	TEmulation.moc TEPty.moc kwrited.moc konsole_part.moc \
-	sessionaction.moc
+       TEmulation.moc TEPty.moc kwrited.moc konsole_part.moc \
+       sessionaction.moc
 
 META_INCLUDES = $(srcdir)/../include
 
@@ -101,12 +101,4 @@ mime_DATA = x-konsole.desktop
 datadir =$(kde_confdir)
 data_DATA =konsolerc
 
-
-# specifying gofai as a handler for the above mimetype
-# also specifies the icon, and position in the kicker menus
-#kdelnkdir = $(kde_appsdir)/Utilities
-#kdelnk_DATA = konsole.desktop
-# ... Hmm, it's already in applnk/ (David)
-
-# ??? no need to specify kdelnk_DATA here?
 EXTRA_DIST = $(mime_DATA) $(data_DATA)                                             

@@ -93,7 +93,7 @@ Time to start a requirement list.
 #include <krootpixmap.h>
 #include <kaction.h>
 #include <kstdaction.h>
-#include <sessionaction.h>
+#include <kpopupmenu.h>
 #include <klineeditdlg.h>
 #include <kdebug.h>
 
@@ -274,14 +274,14 @@ void Konsole::makeMenu()
   // options (taken from kvt) //////////////////////////////////////
 
   m_file = new KPopupMenu(this);
-
   connect(m_file, SIGNAL(activated(int)), SLOT(newSession(int)));
-  m_toolbarSessionsCommands = new KPopupMenu(this);
-  connect(m_toolbarSessionsCommands, SIGNAL(activated(int)), SLOT(newSession(int)));
 
-  NewSessionAction *newsession = new NewSessionAction(this, SLOT(newSession()), this);
-  newsession->setPopup(m_toolbarSessionsCommands);
+  KToolBarPopupAction *newsession = new KToolBarPopupAction(i18n("&New"), "filenew",
+                KStdAccel::key(KStdAccel::New), this, SLOT(newSession()),
+                this, KStdAction::stdName(KStdAction::New));
   newsession->plug(toolBar());
+  m_toolbarSessionsCommands = newsession->popupMenu();
+  connect(m_toolbarSessionsCommands, SIGNAL(activated(int)), SLOT(newSession(int)));
   toolBar()->insertLineSeparator();
 
   KPopupMenu* m_signals = new KPopupMenu(this);
