@@ -846,7 +846,9 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
   }
 
   // revert to non-history when typing
-  if (scr->getHistCursor() != scr->getHistLines() && !ev->text().isEmpty())
+  if (scr->getHistCursor() != scr->getHistLines() && (!ev->text().isEmpty()
+    || ev->key()==Key_Down || ev->key()==Key_Up || ev->key()==Key_Left || ev->key()==Key_Right 
+    || ev->key()==Key_PageUp || ev->key()==Key_PageDown))
     scr->setHistCursor(scr->getHistLines());
 
   if (cmd==CMD_send) {
