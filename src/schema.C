@@ -530,7 +530,7 @@ bool ColorSchemaList::updateAllSchemaTimes(const QDateTime& now)
 			}
 		}
 	}
-
+   sort();
 	return r;
 }
 
@@ -586,5 +586,12 @@ bool ColorSchemaList::checkSchemas()
 
 	return r;
 }
+
+int ColorSchemaList::compareItems(QCollection::Item item1, QCollection::Item item2)
+{
+   ColorSchema* schema1=(ColorSchema*)item1;
+   ColorSchema* schema2=(ColorSchema*)item2;
+   return -1*QString::compare(schema1->title(),schema2->title());
+};
 
 

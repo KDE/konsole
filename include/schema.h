@@ -216,6 +216,8 @@ public:
 		if (p) return p;
 		return defaultSchema;
 	} ;
+protected:
+   virtual int compareItems(QCollection::Item item1, QCollection::Item item2);
 
 private:
 	/**

@@ -472,18 +472,18 @@ void Konsole::makeGUI()
    delete colors;
    colors = new ColorSchemaList();
    //kdDebug()<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
-   //kdDebug()<<"Konsole::makeGUI(): checkSchemas()"<<endl;
    colors->checkSchemas();
    //kdDebug()<<"Konsole::makeGUI() updateSchemas()"<<endl;
    updateSchemaMenu();
-   //kdDebug()<<"Konsole::makeGUI(): updateSchemas done"<<endl;
    ColorSchema *sch=colors->find(s_schema);
    curr_schema=sch->numb();
    kdDebug()<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
-   m_schema->setItemChecked(0,false);
-   m_schema->setItemChecked(1,false);
+   for (int i=0; i<m_schema->count(); i++)
+      m_schema->setItemChecked(i,false);
+
    m_schema->setItemChecked(curr_schema,true);
    m_initialSession->setSchemaNo(curr_schema);
+
    // insert keymaps into menu
    //FIXME: sort
    for (int i = 0; i < KeyTrans::count(); i++)
