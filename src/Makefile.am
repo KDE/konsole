@@ -43,7 +43,7 @@ kwrited_SOURCES	= dummy.C
 kwrited_LDADD   = kwrited.la 
 kwrited_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
-konsole_la_SOURCES = main.C konsole.C
+konsole_la_SOURCES = main.C konsole.C sessionaction.C
 konsole_la_LIBADD  = libkonsolepart.la
 konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
 
@@ -70,7 +70,8 @@ install-exec-local: install-binPROGRAMS
 
 # just to make sure, automake makes them
 METASOURCES = TEWidget.moc TEmuVt102.moc session.moc konsole.moc \
-	TEmulation.moc TEPty.moc kwrited.moc konsole_part.moc
+	TEmulation.moc TEPty.moc kwrited.moc konsole_part.moc \
+	sessionaction.moc
 
 META_INCLUDES = $(srcdir)/../include
 
