@@ -572,6 +572,8 @@ void Konsole::makeGUI()
    m_options->insertSeparator();
    // The 'filesave' icon is useable, but it might be confusing. I don't use it for now - Martijn
    m_options->insertItem( SmallIconSet( "filesave" ), i18n("Save &Settings"), 8);
+   m_options->insertTearOffHandle();
+
    connect(m_options, SIGNAL(activated(int)), SLOT(opt_menu_activated(int)));
    m_options->installEventFilter( this );
 
