@@ -738,12 +738,15 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
 
 //printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().length(),ev->text().length()?ev->text().ascii()[0]:0);
 
+/*NO! this is correct X-On/X-Off behavior, i think. Use Ctrl-Q to release.
+  If this is not the problem, it needs to be fixed in TEPty.C, but i doubt.
   if ((ev->key()==Key_S) && (ev->state()==ControlButton))
     return; // Ctrl+s will cause it to freeze up 
             // (this is a tty problem, possibly)
             // It's something to do with "ctrl+s" 
             // toggling Scroll on the [real] console
             // This is a hack, but it works. So there.
+*/
 
   // revert to non-history when typing
   if (scr->getHistCursor() != scr->getHistLines());
@@ -751,10 +754,9 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
 
   // lookup in keyboard translation table ...
   int cmd; const char* txt; int len;
-  if (keytrans->findEntry(ev->key(), encodeMode(MODE_NewLine  , BITS_NewLine   ) +
-                                     encodeMode(MODE_BsHack   , BITS_BsHack    ) + //FIXME: deprecated
-                                     encodeMode(MODE_Ansi     , BITS_Ansi      ) +
-                                     encodeMode(MODE_AppCuKeys, BITS_AppCuKeys ) +
+  if (keytrans->findEntry(ev->key(), encodeMode(MODE_NewLine  , BITS_NewLine   ) + // OLD,
+                                     encodeMode(MODE_Ansi     , BITS_Ansi      ) + // OBSOLETE,
+                                     encodeMode(MODE_AppCuKeys, BITS_AppCuKeys ) + // VT100 stuff
                                      encodeStat(ControlButton , BITS_Control   ) +
                                      encodeStat(ShiftButton   , BITS_Shift     ) +
                                      encodeStat(AltButton     , BITS_Alt       ),
@@ -818,7 +820,7 @@ static unsigned short vt100_graphics[32] =
 unsigned short TEmuVt102::applyCharset(unsigned short c)
 {
   if (CHARSET.graphic && 0x5f <= c && c <= 0x7e) return vt100_graphics[c-0x5f];
-  if (CHARSET.pound                && c == '#' ) return 0xa3;
+  if (CHARSET.pound                && c == '#' ) return 0xa3; //This mode is obsolete
   return c;
 }
 
@@ -883,7 +885,7 @@ void TEmuVt102::useCharset(int n)
 {
   CHARSET.cu_cs   = n&3;
   CHARSET.graphic = (CHARSET.charset[n&3] == '0');
-  CHARSET.pound   = (CHARSET.charset[n&3] == 'A');
+  CHARSET.pound   = (CHARSET.charset[n&3] == 'A'); //This mode is obsolete
 }
 
 /*! Save the cursor position and the rendition attribute settings. */
@@ -891,7 +893,7 @@ void TEmuVt102::useCharset(int n)
 void TEmuVt102::saveCursor()
 {
   CHARSET.sa_graphic = CHARSET.graphic;
-  CHARSET.sa_pound   = CHARSET.pound;
+  CHARSET.sa_pound   = CHARSET.pound; //This mode is obsolete
   // we are not clear about these
   //sa_charset = charsets[cScreen->charset];
   //sa_charset_num = cScreen->charset;
@@ -903,7 +905,7 @@ void TEmuVt102::saveCursor()
 void TEmuVt102::restoreCursor()
 {
   CHARSET.graphic = CHARSET.sa_graphic;
-  CHARSET.pound   = CHARSET.sa_pound;
+  CHARSET.pound   = CHARSET.sa_pound; //This mode is obsolete
   scr->restoreCursor();
 }
 
@@ -912,8 +914,9 @@ void TEmuVt102::restoreCursor()
 void TEmuVt102::resetModes()
 {
   resetMode(MODE_Mouse1000); saveMode(MODE_Mouse1000);
-  resetMode(MODE_AppCuKeys); saveMode(MODE_AppCuKeys);
   resetMode(MODE_AppScreen); saveMode(MODE_AppScreen);
+  // here come obsolete modes
+  resetMode(MODE_AppCuKeys); saveMode(MODE_AppCuKeys);
   resetMode(MODE_NewLine  );
     setMode(MODE_Ansi     );
   resetMode(MODE_BsHack   );

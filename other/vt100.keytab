@@ -2,7 +2,7 @@
 #
 # --------------------------------------------------------------
 
-hdr "(NOT FUNCTIONAL, YET) BS sends BS"
+keyboard "(NOT FUNCTIONAL, YET) vt100"
 
 # --------------------------------------------------------------
 #
@@ -28,7 +28,8 @@ hdr "(NOT FUNCTIONAL, YET) BS sends BS"
 #   
 # - Newline     : effects Return and Enter key.
 # - Application : effects Up and Down key.
-# - Ansi        : effects Up and Down key.
+#
+# - Ansi        : effects Up and Down key (This is for VT52, really).
 #
 # Operations are
 #
@@ -57,11 +58,10 @@ key Return-Alt+NewLine : "\r\n"
 key Return+Alt-NewLine : "\E\r"  
 key Return+Alt+NewLine : "\E\r\n"
 
-# Regular Backspace and Delete codes.
-# This might not work on *ix systems.
+# Some desperately try to save the ^H.
 
-key Backspace : "\x08"
-key Delete    : "\x7f"
+key Backspace : "\x7f"
+key Delete    : "\E[3~"
 
 # These codes are for the VT52 mode of VT100
 # The Ansi mode (i.e. VT100 mode) is set by
@@ -86,21 +86,14 @@ key Down -Shift+Ansi-AppCuKeys : "\E[B"
 key Right+Ansi-AppCuKeys : "\E[C"
 key Left +Ansi-AppCuKeys : "\E[D"
 
-# linux functions keys F1-F5 differ from xterm
-#
-# F1 : "\E[[A" 
-# F2 : "\E[[B" 
-# F3 : "\E[[C" 
-# F4 : "\E[[D" 
-# F5 : "\E[[E" 
-
-# function keys
+# function keys (FIXME: make pf1-pf4)
 
 key F1     : "\E[11~"
 key F2     : "\E[12~"
 key F3     : "\E[13~"
 key F4     : "\E[14~"
 key F5     : "\E[15~"
+
 key F6     : "\E[17~" 
 key F7     : "\E[18~" 
 key F8     : "\E[19~" 
@@ -109,8 +102,8 @@ key F10    : "\E[21~"
 key F11    : "\E[23~" 
 key F12    : "\E[24~" 
 
-key Home   : "\E[1~"  
-key End    : "\E[4~"
+key Home   : "\E[H"  
+key End    : "\E[F"  
 
 key Prior -Shift : "\E[5~"  
 key Next  -Shift : "\E[6~"  

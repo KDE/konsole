@@ -278,7 +278,7 @@ KeyTrans* KeyTrans::fromDevice(QString path, QIODevice &buf)
   // Test tokenizer
 Loop:
   // syntax: ["key" KeyName { ("+" | "-") ModeName } ":" String/CommandName] ["#" Comment]
-  if (sym == SYMName && !strcmp(res.ascii(),"hdr"))
+  if (sym == SYMName && !strcmp(res.ascii(),"keyboard"))
   {
     getSymbol(buf); 
     if (sym != SYMString) goto ERROR; // header expected

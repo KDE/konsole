@@ -1,129 +1,76 @@
 # [KeyTab] Konsole Keyboard Table
-#
-# --------------------------------------------------------------
 
-hdr "xterm"
+keyboard "default"
 
 # --------------------------------------------------------------
 #
 # This configuration table allows to customize the
 # meaning of the keys.
 #
-# The syntax is that each entry has the form : 
+# The syntax of each entry has the form 
 #
 #   "key" Keyname { ("+"|"-") Modename } ":" (String|Operation)
 #
 # Keynames are those defined in <qnamespace.h> with the
 # "Qt::Key_" removed. (We'd better insert the list here)
 #
-# Mode names are : 
-#
-# - Shift
-# - Alt
-# - Control
-#
-#   The VT100 emulation has two modes that can affect the
-#   sequences emitted by certain keys. These modes are
-#   under control of the client program.
-#   
-# - Newline     : effects Return and Enter key.
-# - Application : effects Up and Down key.
-# - Ansi        : effects Up and Down key.
-#
-# Operations are
-#
-# - scrollUpLine
-# - scrollUpPage
-# - scrollDownLine
-# - scrollDownPage
-#
-# - emitSelection
+# Mode names are: Shift, Alt, Control.
 #
 # If the key is not found here, the text of the
 # key event as provided by QT is emitted, possibly
 # preceeded by ESC if the Alt key is pressed.
 #
 # --------------------------------------------------------------
+#
+# Note that this table is a "risc" version made to ease
+# customization without bothering with obsolete details.
+# See VT100.keytab for more hairy stuff.
+#
+# --------------------------------------------------------------
 
-key Escape : "\E"
-key Tab    : "\t"
+key Escape     : "\E"
+key Tab        : "\t"
 
-# VT100 can add an extra \n after return.
-# The NewLine mode is set by an escape sequence.
+key Enter      : "\r"  # Keypad-Enter.
+key Return-Alt : "\r"  
+key Return+Alt : "\E\r"  
 
-key Return-Alt-NewLine : "\r"  
-key Return-Alt+NewLine : "\r\n"
-
-key Return+Alt-NewLine : "\E\r"  
-key Return+Alt+NewLine : "\E\r\n"
-
-# Note that Backspace and Delete are sending
-# other codes but the expected.
+# Backspace and Delete codes are preserving CTRL-H.
 
 key Backspace : "\x7f"
 key Delete    : "\E[3~"
 
-# These codes are for the VT52 mode of VT100
-# The Ansi mode (i.e. VT100 mode) is set by
-# an escape sequence
-
-key Up   -Shift-Ansi : "\EA"
-key Down -Shift-Ansi : "\EB"
-key Right-Ansi : "\EC"
-key Left -Ansi : "\ED"
-
-# VT100 emits a mode bit together
-# with the arrow keys.The AppCuKeys
-# mode is set by an escape sequence.
-
-key Up   -Shift+Ansi+AppCuKeys : "\EOA"
-key Down -Shift+Ansi+AppCuKeys : "\EOB"
-key Right+Ansi+AppCuKeys : "\EOC"
-key Left +Ansi+AppCuKeys : "\EOD"
-
-key Up   -Shift+Ansi-AppCuKeys : "\E[A"
-key Down -Shift+Ansi-AppCuKeys : "\E[B"
-key Right+Ansi-AppCuKeys : "\E[C"
-key Left +Ansi-AppCuKeys : "\E[D"
-
-# linux functions keys F1-F5 differ from xterm
-#
-# F1 : "\E[[A" 
-# F2 : "\E[[B" 
-# F3 : "\E[[C" 
-# F4 : "\E[[D" 
-# F5 : "\E[[E" 
-
 # function keys
 
-key F1     : "\E[11~"
-key F2     : "\E[12~"
-key F3     : "\E[13~"
-key F4     : "\E[14~"
-key F5     : "\E[15~"
-key F6     : "\E[17~" 
-key F7     : "\E[18~" 
-key F8     : "\E[19~" 
-key F9     : "\E[20~" 
-key F10    : "\E[21~" 
-key F11    : "\E[23~" 
-key F12    : "\E[24~" 
+key F1  : "\E[11~"
+key F2  : "\E[12~"
+key F3  : "\E[13~"
+key F4  : "\E[14~"
+key F5  : "\E[15~"
+key F6  : "\E[17~" 
+key F7  : "\E[18~" 
+key F8  : "\E[19~" 
+key F9  : "\E[20~" 
+key F10 : "\E[21~" 
+key F11 : "\E[23~" 
+key F12 : "\E[24~" 
 
-key Home   : "\E[1~"  
-key End    : "\E[4~"  
+key Up    -Shift : "\EOA"
+key Down  -Shift : "\EOB"
+key Right        : "\EOC"
+key Left         : "\EOD"
 
+key Home         : "\E[1~"  
+key End          : "\E[4~"  
 key Prior -Shift : "\E[5~"  
 key Next  -Shift : "\E[6~"  
 key Insert-Shift : "\E[2~"  
 
-# Keypad-Enter. See comment on Return above.
-
-key Enter+NewLine : "\r\n"
-key Enter-NewLine : "\r"  
+# Work around dead keys
 
 key Space +Control : "\x00"
 
-# some of keys are used by konsole.
+# Some keys are used by konsole to cause operations.
 
 key Up    +Shift   : scrollLineUp
 key Prior +Shift   : scrollPageUp
@@ -137,5 +84,5 @@ key Insert+Shift   : emitSelection
 # cannot be recognized as such.
 
 #----------------------------------------------------------
-
+#   
 # Following other strings as emitted by konsole.

@@ -6,7 +6,7 @@ data_DATA = BlackOnLightYellow.schema BlackOnWhite.schema \
   DarkPicture.schema LightPicture.schema Transparent.schema GreenTint.schema \
   Transparent_MC.schema GreenTint_MC.schema \
   linux.desktop mc.desktop shell.desktop su.desktop \
-  linux.keytab nobshack.keytab
+  linux.keytab vt100.keytab
 
 KDE_ICON = konsole
 

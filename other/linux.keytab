@@ -2,7 +2,7 @@
 #
 # --------------------------------------------------------------
 
-hdr "(NOT FUNCTIONAL, YET) Linux"
+keyboard "(NOT FUNCTIONAL, YET) linux"
 
 # --------------------------------------------------------------
 #
@@ -28,7 +28,8 @@ hdr "(NOT FUNCTIONAL, YET) Linux"
 #   
 # - Newline     : effects Return and Enter key.
 # - Application : effects Up and Down key.
-# - Ansi        : effects Up and Down key.
+#
+# - Ansi        : effects Up and Down key (This is for VT52, really).
 #
 # Operations are
 #
@@ -87,19 +88,11 @@ key Left +Ansi-AppCuKeys : "\E[D"
 
 # linux functions keys F1-F5 differ from xterm
 
-F1 : "\E[[A" 
-F2 : "\E[[B" 
-F3 : "\E[[C" 
-F4 : "\E[[D" 
-F5 : "\E[[E" 
-
-# function keys
-
-# key F1     : "\E[11~"
-# key F2     : "\E[12~"
-# key F3     : "\E[13~"
-# key F4     : "\E[14~"
-# key F5     : "\E[15~"
+key F1 : "\E[[A" 
+key F2 : "\E[[B" 
+key F3 : "\E[[C" 
+key F4 : "\E[[D" 
+key F5 : "\E[[E" 
 
 key F6     : "\E[17~" 
 key F7     : "\E[18~" 
