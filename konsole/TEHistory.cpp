@@ -51,7 +51,7 @@ FIXME: some complain about the history buffer comsuming the
 FIXME: Terminating the history is not properly indicated
        in the menu. We should throw a signal.
 
-FIXME: There is noticable decrease in speed, also. Perhaps,
+FIXME: There is noticeable decrease in speed, also. Perhaps,
        there whole feature needs to be revisited therefore.
        Disadvantage of a more elaborated, say block-oriented
        scheme with wrap around would be it's complexity.

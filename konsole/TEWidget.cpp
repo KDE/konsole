@@ -1082,7 +1082,7 @@ void TEWidget::extendSelection( QPoint pos )
   int    scroll = scrollbar->value();
 
   // we're in the process of moving the mouse with the left button pressed
-  // the mouse cursor will kept catched within the bounds of the text in
+  // the mouse cursor will kept caught within the bounds of the text in
   // this widget.
 
   // Adjust position within text area bounds. See FIXME above.

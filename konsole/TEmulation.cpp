@@ -51,7 +51,7 @@
    well as individual characters typed.
 
    We start also a second time which is never restarted. If repeatedly
-   restarting of the first timer could delay continous output indefinitly,
+   restarting of the first timer could delay continuous output indefinitly,
    the second timer guarantees that the output is refreshed with at least
    a fixed rate.
 */

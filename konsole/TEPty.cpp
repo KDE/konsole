@@ -51,7 +51,7 @@
     simultanous instances of this class is (globally) limited by the number of
     those device pairs, which is 256.
 
-    Another technic are UNIX 98 PTY's. These are supported also, and prefered
+    Another technic are UNIX 98 PTY's. These are supported also, and preferred
     over the (obsolete) predecessor.
 
     There's a sinister ioctl(2), signal(2) and job control stuff

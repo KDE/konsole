@@ -1,4 +1,4 @@
-Contained in here is a list of VT100 facilities (and extention based on it),
+Contained in here is a list of VT100 facilities (and extension based on it),
 that have very low priority or are not likely to be ever implemented by me.
 The order is more or less by priority, so you'll find the most interesting
 stuff in the beginning. All this is mainly included so that you can see, what

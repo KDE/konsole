@@ -27,7 +27,7 @@ it specifies which codes are interpreted by them, and what has been omitted.
 To begin with, all of the above call themselfes "ANSI" emulations, which makes this
 notion pretty vage. "ANSI" referes here to the American National Standards 
 Institute's documents X3.41-1974 and X3.64-1977. DEC partially implemented this
-standart in their VT100 terminal, with some additions. The VT102 is a later extention
+standart in their VT100 terminal, with some additions. The VT102 is a later extension
 of that. Both the Linux console and the XTerm emulation implement most of VT102,
 with some additions. MS stepped in later and produced another ANSI emulation,
 <code>ansi.sys</code>, for their OS, which became of some relevance in BBS style
@@ -153,14 +153,14 @@ Work is currently in progress to fix this issue.
   <p>
   In both models, the notion of a current position (historically
   a printer's head, nowadays visualized by a cursor) is present.
-  "Printing" a charater at the current position and advancing
+  "Printing" a character at the current position and advancing
   the head together with the starting a new line are the most
   fundamental operations of the emulation.
   <p>
   The full screen model basically adds the possibility to position
   the cursor and to overwrite and clear the screen.
   <p>
-  A plethora of additional (more or less usefull) commands are
+  A plethora of additional (more or less useful) commands are
   then added on this by every specific emulation, see below for
   the awful details.
   <p>
@@ -266,10 +266,10 @@ Work is currently in progress to fix this issue.
   from the control sequence syntax, but may be embedded within a control
   sequence.  Embedded control characters are executed as soon as they are
   encountered by a VT100.  The processing of the control sequence then
-  continues with the next character recieved.  The exceptions are:
+  continues with the next character received.  The exceptions are:
   if the <a href=#ESC>ESC</a> character occurs, the current control sequence
   is aborted, and a new one commences beginning with the <a href=#ESC>ESC</a>
-  just recieved.  If the character <a href=#CAN>CAN</a> (0x0c) or the
+  just received.  If the character <a href=#CAN>CAN</a> (0x0c) or the
   character <a href=#SUB>SUB</a> (0x0e) occurs,
   the current control sequence is aborted.  The ability to embed control
   characters allows the synchronization characters XON and XOFF to be
@@ -2273,7 +2273,7 @@ Work is currently in progress to fix this issue.
     <td  colspan=6>  This is a private parameter to the <a href=#SM>SM</a> and <a href=#RM>RM</a>
   control sequences.  The
   reset state prevents the cursor from moving when characters are
-  recieved while at the right margin.  The set state causes these
+  received while at the right margin.  The set state causes these
   characters to advance to the next line, causing a scroll up if required
   and permitted.  See <a href=#MODES>MODES</a>, <a href=#SM>SM</a>, and
   <a href=#RM>RM</a>.
@@ -2566,7 +2566,7 @@ Work is currently in progress to fix this issue.
   discretion.  On power up or reset, the VT100 is inhibited from sending
   unsolicited reports.
   <p>
-  The meanings of the sequence paramters are:
+  The meanings of the sequence parameters are:
 <tr><td><p></td></tr>
 <tr>
 <td></td>
@@ -3742,7 +3742,7 @@ Work is currently in progress to fix this issue.
   other sets are private character sets.  Special graphics means that the
   graphic characters fpr the codes 0137 to 0176 are replaced with other
   characters.  The specified character set will be used until another SCS
-  is recieved.
+  is received.
 <tr><td><p></td></tr>
 <tr>
 <td></td>
@@ -4114,7 +4114,7 @@ Work is currently in progress to fix this issue.
     <td colspan=5 ><code> <b>ESC</b> <b>&lt;</b></code>
 <tr><td><p></td>
 <tr><td></td>
-    <td  colspan=6>  This is an extention to the VT52 commands to embed the emulation into VT100.
+    <td  colspan=6>  This is an extension to the VT52 commands to embed the emulation into VT100.
   It allows to return back to VT100 emulation (ANSI mode).
   See also <a href=#DECANM>DECANM</a> and <a href=#SM>SM</a>.
 <tr><td><p></td></tr>

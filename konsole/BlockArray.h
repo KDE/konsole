@@ -37,7 +37,7 @@ public:
     * An unique index number is returned for accessing
     * it later (if not yet droped then)
     *
-    * Note, that the block may be dropped completly
+    * Note, that the block may be dropped completely
     * if history is turned off.
     */
     size_t append(Block *block);
@@ -54,7 +54,7 @@ public:
 
     /**
     * reorders blocks as needed. If newsize is null,
-    * the history is emptied completly. The indices
+    * the history is emptied completely. The indices
     * returned on append won't change their semantic,
     * but they may not be valid after this call.
     */
