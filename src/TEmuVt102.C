@@ -957,18 +957,37 @@ void VT102Emulation::onKeyPress( QKeyEvent* ev )
   if (scr->getHistCursor() != scr->getHistLines());
     scr->setHistCursor(scr->getHistLines());
 
+//printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().length(),ev->text().length()?ev->text().ascii()[0]:0);
+
   // Note: there 3 ways in rxvt to handle the Meta (Alt) key
   //       1) ignore it
   //       2) preceed the keycode by ESC (what we do here)
   //       3) set the 8th bit of each char in string
   //          (which may fail for 8bit (european) characters.
-  if (ev->state() & AltButton) sendString("\033"); // ESC
 
-printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().length(),ev->text().length()?ev->text().ascii()[0]:0);
+  if (!ev->text().isEmpty())
+  {
+    if (ev->text().length() == 1 && (ev->state() & AltButton))
+      sendString("\033"); // ESC, this is the ALT prefix
+    QCString s = codec->fromUnicode(ev->text());
+    emit sndBlock(s.data(),s.length());
+    return;
+  }
+
+  if (0 < ev->ascii() && ev->ascii() < 32)
+  { char c[1];
+    c[0] = ev->ascii();
+    emit sndBlock((char*)c,1);
+    return;
+  }
 
   key = ev->key();
+  if (0x1000 <= key && key <= 0x10ff)
   switch (key)
   {
+    case Key_Escape    : sendString("\033"); return;
+    case Key_Tab       : sendString("\t"); return;
+
     case Key_Return    : sendString(getMode(MODE_NewLine)?"\r\n"   :"\r"  ); return;
     case Key_Backspace : sendString(getMode(MODE_BsHack )?"\x7f"   :"\x08"); return;
     case Key_Delete    : sendString(getMode(MODE_BsHack )?"\033[3~":"\x7f"); return;
@@ -998,6 +1017,7 @@ printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().len
     case Key_Next      : sendString("\033[6~"  ); return;
     case Key_Insert    : sendString("\033[2~"  ); return;
     //FIXME: get keypad somehow
+    default            : return;
   }
   if (KeyComb(ControlButton,Key_Space)) // ctrl-Space == ctrl-@
   {
@@ -1006,19 +1026,5 @@ printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().len
   if (KeyComb(ControlButton,Key_Print)) // ctrl-print == sys-req
   {
     reportAnswerBack(); return;
-  }
-  if (!ev->text().isEmpty())
-  {
-    if (0 <= ev->ascii() && ev->ascii() < 32)
-    { char c[1];
-      c[0] = ev->ascii();
-      emit sndBlock((char*)c,1);
-    }
-    else
-    {
-      QTextCodec* loc = QTextCodec::codecForLocale();
-      QCString s = codec->fromUnicode(loc->toUnicode(ev->text()));
-      emit sndBlock(s.data(),s.length());
-    }
   }
 }

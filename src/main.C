@@ -367,9 +367,9 @@ void TEDemo::makeMenu()
 
   m_scrollbar = new QPopupMenu;
   m_scrollbar->setCheckable(TRUE);
-  m_scrollbar->insertItem( i18n("&Hide"), SCRNONE);
-  m_scrollbar->insertItem( i18n("&Left"), SCRLEFT);
-  m_scrollbar->insertItem( i18n("&Right"), SCRRIGHT);
+  m_scrollbar->insertItem( i18n("&Hide"), TEWidget::SCRNONE);
+  m_scrollbar->insertItem( i18n("&Left"), TEWidget::SCRLEFT);
+  m_scrollbar->insertItem( i18n("&Right"), TEWidget::SCRRIGHT);
   connect(m_scrollbar, SIGNAL(activated(int)), SLOT(scrollbar_menu_activated(int)));
 
   m_size = new QPopupMenu;
@@ -471,7 +471,7 @@ void TEDemo::readProperties(KConfig* config)
 HERE; printf("reading 'history' = %d\n",b_scroll);
   b_bshack   = config->readBoolEntry("BS hack",TRUE);
   n_font     = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
-  n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",SCRRIGHT),2);
+  n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
   s_schema   = config->readEntry("schema","");
 
   // Global options ///////////////////////
@@ -479,7 +479,7 @@ HERE; printf("reading 'history' = %d\n",b_scroll);
   setMenuVisible(config->readBoolEntry("menubar visible",TRUE));
   setFrameVisible(config->readBoolEntry("has frame",TRUE));
   
-  scrollbar_menu_activated(QMIN(config->readUnsignedNumEntry("scrollbar",SCRRIGHT),2));
+  scrollbar_menu_activated(QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2));
 
   // not necessary for SM (KTMainWindow does it after), but useful for default settings
 /*FIXME: (merging) state of material below unclear*/

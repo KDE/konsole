@@ -550,7 +550,7 @@ void TEWidget::setScrollbarLocation(int loc)
 
 void TEWidget::mousePressEvent(QMouseEvent* ev)
 {
-printf("press [%d,%d] %d\n",ev->x()/font_w,ev->y()/font_h,ev->button());
+//printf("press [%d,%d] %d\n",ev->x()/font_w,ev->y()/font_h,ev->button());
   if ( !contentsRect().contains(ev->pos()) ) return;
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
@@ -783,7 +783,7 @@ void TEWidget::setMouseMarks(bool on)
 void TEWidget::emitSelection()
 // Paste Clipboard by simulating keypress events
 { 
-    QString text = QApplication::clipboard()->text();
+  QString text = QApplication::clipboard()->text();
     if ( ! text.isNull() ) {
         text.replace(QRegExp("\n"), "\r");
         QKeyEvent e(QEvent::KeyPress, 0,-1,0, text);
@@ -792,7 +792,7 @@ void TEWidget::emitSelection()
     }
 }
 
-void TEWidget::setSelection(const char *t)
+void TEWidget::setSelection(const QString& t)
 {
   // Disconnect signal while WE set the clipboard
   QObject *cb = QApplication::clipboard();   
@@ -803,7 +803,6 @@ void TEWidget::setSelection(const char *t)
 
   QObject::connect( cb, SIGNAL(dataChanged()), 
                      this, SLOT(onClearSelection()) );
-  return;
 }
 
 void TEWidget::onClearSelection()
@@ -887,9 +886,9 @@ void TEWidget::fontChange(const QFont &)
   font_w = fontMetrics().maxWidth();
   font_a = fontMetrics().ascent();
 HERE;
-printf("font_h: %d\n",font_h);
-printf("font_w: %d\n",font_w);
-printf("font_a: %d\n",font_a);
+//printf("font_h: %d\n",font_h);
+//printf("font_w: %d\n",font_w);
+//printf("font_a: %d\n",font_a);
 printf("charset: %s\n",QFont::encodingName(font().charSet()).ascii());
 printf("rawname: %s\n",font().rawName().ascii());
 

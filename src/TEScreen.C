@@ -976,9 +976,9 @@ void TEScreen::setSelExtentXY(const int x, const int y)
   }
 }
 
-char *TEScreen::getSelText(const BOOL preserve_line_breaks) 
+QString TEScreen::getSelText(const BOOL preserve_line_breaks) 
 {
-  char *m;  	// buffer to fill.
+  int *m;  	// buffer to fill.
   int s,d; 	// source index, dest. index.
   int hist_BR=loc(0,hist.getLines()-1);
   int hY = sel_TL / columns ;
@@ -989,7 +989,7 @@ char *TEScreen::getSelText(const BOOL preserve_line_breaks)
   
   // allocate buffer for maximum possible size...
   d = (sel_BR - sel_TL)/columns + 1 ;
-  m = (char*) malloc(  d * (columns+1) + 2 );
+  m = new int[ d * (columns+1) + 2 ];
   d = 0;
 
   while ( s <= sel_BR )
@@ -1040,10 +1040,12 @@ char *TEScreen::getSelText(const BOOL preserve_line_breaks)
     }
   }
 
-  // trim buffer size to actual size needed.
-  m=(char*)realloc( m ,  sizeof(char)*(d+1) );
-  m[d]= '\0';
-  return(m);
+  QChar* qc = new QChar[d];
+  for (int i = 0; i < d; i++)
+    qc[i] = m[i];
+  QString res(qc,d);
+  delete m; delete qc;
+  return res;
 }
 /* above ... end of line processing for selection -- psilva
 cases:

@@ -19,7 +19,7 @@ OTHDIR = $(TOPDIR)/other
 INCLUDES =  -I$(INCDIR) $(all_includes)
 
 # you can add here more. This one gets installed 
-bin_PROGRAMS = 	konsole kcmkonsole konsole_grantpty kwrited
+bin_PROGRAMS = 	konsole konsole_grantpty kwrited #kcmkonsole 
 
 noinst_LIBRARIES = libkonsole.a
 
@@ -36,9 +36,9 @@ konsole_SOURCES	= main.C schema.C session.C krootpixmap.cpp
 konsole_LDADD   = libkonsole.a $(LIB_KIMGIO) $(LIB_KDEUI) $(LIBUTEMPTER)
 konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
-kcmkonsole_SOURCES = kcmkonsole.C schema.C
-kcmkonsole_LDADD   = $(LIB_KIMGIO) $(LIB_KDEUI) 
-kcmkonsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
+# kcmkonsole_SOURCES = kcmkonsole.C schema.C
+# kcmkonsole_LDADD   = $(LIB_KIMGIO) $(LIB_KDEUI) 
+# kcmkonsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 konsole_grantpty_SOURCES = konsole_grantpty.c
 konsole_grantpty_LDFLAGS = $(KDE_RPATH)
@@ -55,8 +55,8 @@ install-exec-local: install-binPROGRAMS
 
 # just to make sure, automake makes them 
 METASOURCES =TEWidget.moc TEmuVt102.moc session.moc main.moc \
-	TEmulation.moc TEShell.moc kcmkonsole.moc kwrited.moc \
-	krootpixmap.moc
+	TEmulation.moc TEShell.moc kwrited.moc \
+	krootpixmap.moc #kcmkonsole.moc
 
 META_INCLUDES = $(srcdir)/../include
 

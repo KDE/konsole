@@ -180,6 +180,9 @@ void Emulation::onKeyPress( QKeyEvent* ev )
     scr->setHistCursor(scr->getHistLines());
   if (!ev->text().isEmpty())
   { // A block of text
+    // Note that the text is proper unicode.
+    // We should do a conversion here, but since this
+    // routine will never be used, we simply emit plain ascii.
     emit sndBlock(ev->text().ascii(),ev->text().length());
   }
   else if (ev->ascii()>0)
@@ -218,11 +221,10 @@ void Emulation::onSelectionExtend(const int x, const int y) {
 
 void Emulation::setSelection(const BOOL preserve_line_breaks) {
   if (!connected) return;
-  char *t = scr->getSelText(preserve_line_breaks);
-  if (t != NULL ) {
-  	gui->setSelection(t);
-  	free(t);
-  }
+  QString t = scr->getSelText(preserve_line_breaks);
+HERE;printf("Text >%s< %d\n",t.latin1(),t.length());
+  if (t) gui->setSelection(t);
+HERE;
 }
 
 void Emulation::clearSelection() {
