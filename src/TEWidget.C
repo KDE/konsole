@@ -189,12 +189,12 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
 */
 
 void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
-                           char* str, int len, ca attr, BOOL pm)
+                           char* str, int len, ca attr, BOOL pm, BOOL clear)
 {
   if (pm && color_table[attr.b].transparent)
   {
     paint.setBackgroundMode( TransparentMode );
-    erase(rect);
+    if (clear) erase(rect);
   }
   else
   {
@@ -278,7 +278,7 @@ HCNT("setImage");
         }
         drawAttrStr(paint, 
                     QRect(blX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
-                    disstr, len, ext[x], pm != NULL);
+                    disstr, len, ext[x], pm != NULL, true);
         x += len - 1;
       }
     }
@@ -331,11 +331,12 @@ HCNT("paintEvent");
   int rlx = QMIN(columns-1, QMAX(0,(rect.right()  - tLx - blX ) / font_w));
   int rly = QMIN(lines-1,   QMAX(0,(rect.bottom() - tLy - bY  ) / font_h));
 
-/*
+  /*
  printf("paintEvent: %d..%d, %d..%d (%d..%d, %d..%d)\n",lux,rlx,luy,rly,
   rect.left(), rect.right(), rect.top(), rect.bottom());
-*/
-
+  */
+  if (pm != NULL && color_table[image->b].transparent)
+    erase(rect);
   for (int y = luy; y <= rly; y++)
   for (int x = lux; x <= rlx; x++)
   { char *disstr = new char[columns]; int len = 1;
@@ -352,7 +353,7 @@ HCNT("paintEvent");
     }
     drawAttrStr(paint, 
                 QRect(blX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
-                disstr, len, image[loc(x,y)], pm != NULL);
+                disstr, len, image[loc(x,y)], pm != NULL, false);
     x += len - 1;
     delete disstr;
   }

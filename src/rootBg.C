@@ -248,13 +248,13 @@ void RootPixmap::generateBackground(bool shade, double r, double g, double b)
 	if ( orMode == Portrait ) {
 
 	  pmDesktop.resize( 20, QApplication::desktop()->height() );
-	  KPixmapEffect::gradient(pmDesktop, color2, color1, 
+	  KPixmapEffect::gradient(pmDesktop, color1, color2, 
 				  KPixmapEffect::VerticalGradient, numColors );
 
 	} else {
 
 	  pmDesktop.resize( QApplication::desktop()->width(), 20 );
-	  KPixmapEffect::gradient(pmDesktop, color2, color1, 
+	  KPixmapEffect::gradient(pmDesktop, color1, color2, 
 				  KPixmapEffect::HorizontalGradient, 
 				  numColors);
 		
@@ -265,13 +265,13 @@ void RootPixmap::generateBackground(bool shade, double r, double g, double b)
 	bgPixmap = new QPixmap(w,h);
 		
 	if ( orMode == Portrait ) {
-	    for (uint pw = 0; pw <= w; pw += pmDesktop.width())
-	      bitBlt( bgPixmap, pw, 0, &pmDesktop, 0, 0,
+	    for (uint pw = 0; pw <= w/20; pw += pmDesktop.width())
+	      bitBlt( bgPixmap, pw*20, 0, &pmDesktop, 0, 0,
 		      pmDesktop.width(), h);
 	} else {
-	    for (uint ph = 0; ph <= h; ph += pmDesktop.height()) {
+	    for (uint ph = 0; ph <= h/20; ph += pmDesktop.height()) {
 	      debug("land %d",ph);
-	      bitBlt( bgPixmap, 0, ph, &pmDesktop, 0, 0,
+	      bitBlt( bgPixmap, 0, ph*20, &pmDesktop, 0, 0,
 		      w, pmDesktop.height());
 	  }
 	}

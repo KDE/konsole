@@ -74,7 +74,7 @@ protected:
     bool eventFilter( QObject *, QEvent * );
 
     void drawAttrStr(QPainter &paint, QRect rect, 
-                     char* str, int len, ca attr, BOOL pm);
+                     char* str, int len, ca attr, BOOL pm, BOOL clear);
     void paintEvent( QPaintEvent * );
 
     void resizeEvent(QResizeEvent*);
