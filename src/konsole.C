@@ -843,7 +843,14 @@ void Konsole::activateSession()
 
 void Konsole::newSessionSelect()
 {
-  m_file->popup(te->mapToGlobal(QPoint(0,te->height()-m_file->sizeHint().height())));
+  // Take into account the position of the toolBar to determine where we put the popup
+  if((toolBar()->barPos() == KToolBar::Top) || (toolBar()->barPos() == KToolBar::Left)) {
+    m_file->popup(te->mapToGlobal(QPoint(0,0)));
+  } else if(toolBar()->barPos() == KToolBar::Right) {
+    m_file->popup(te->mapToGlobal(QPoint(te->width()-m_file->sizeHint().width(), 0)));
+  } else {
+    m_file->popup(te->mapToGlobal(QPoint(0,te->height()-m_file->sizeHint().height())));
+  }
 }
 
 void Konsole::newSession(int i)
