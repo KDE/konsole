@@ -142,6 +142,7 @@ TEDemo::TEDemo(const QString& name, QStrList & _args, int login_shell, int histo
   rootxpm = 0L;
   menubar = menuBar();
   b_scroll = histon;
+  b_fullscreen = FALSE;
   
   // create terminal emulation framework ////////////////////////////////////
 
@@ -402,9 +403,11 @@ void TEDemo::makeMenu()
   m_options->insertItem( i18n("&History"), 3 );
   m_options->insertItem( i18n("Scroll&bar"), m_scrollbar);
   m_options->insertSeparator();
+  m_options->insertItem( i18n("&Fullscreen"), 5);
+  m_options->setItemChecked(5,b_fullscreen);
+  m_options->insertSeparator();
   m_options->insertItem( i18n("BS sends &DEL"), 4 );
   m_options->setItemChecked(4,b_bshack);
-
   m_options->insertSeparator();
   m_options->insertItem( i18n("&Font"), m_font);
   m_options->insertItem( i18n("&Size"), m_size);
@@ -461,6 +464,7 @@ void TEDemo::saveProperties(KConfig* config)
   config->writeEntry("history",b_scroll);
   config->writeEntry("has frame",b_framevis);
   config->writeEntry("BS hack",b_bshack);
+  config->writeEntry("Fullscreen",b_fullscreen);
   config->writeEntry("font",n_font);
   config->writeEntry("defaultfont", defaultFont);
   config->writeEntry("schema",s_schema);
@@ -487,6 +491,7 @@ void TEDemo::readProperties(KConfig* config)
   b_framevis = config->readBoolEntry("has frame",TRUE);
   b_scroll = config->readBoolEntry("history",TRUE);
   b_bshack   = config->readBoolEntry("BS hack",TRUE);
+  b_fullscreen = config->readBoolEntry("Fullscreen",FALSE);
   n_font     = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
   n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
   s_schema   = config->readEntry("schema","");
@@ -697,6 +702,8 @@ void TEDemo::opt_menu_activated(int item)
     case 3: setHistory(!b_scroll);
             break;
     case 4: setBsHack(!b_bshack);
+            break;
+    case 5: setFullScreen(!b_fullscreen);
             break;
     case 8: saveProperties(kapp->config());
             break;
@@ -1068,8 +1075,23 @@ int main(int argc, char* argv[])
     m->show();
   }
   
-
   return a.exec();
+}
+
+void TEDemo::setFullScreen(bool on)
+{
+  if (on == b_fullscreen) return;
+  if (on)
+  {
+    _saveGeometry = geometry();
+    setGeometry(kapp->desktop()->geometry());
+  }
+  else
+  {
+    setGeometry(_saveGeometry);
+  }
+  b_fullscreen = on;
+  m_options->setItemChecked(5,b_fullscreen);
 }
 
 #include "main.moc"

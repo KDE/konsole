@@ -41,6 +41,7 @@ public:
   TEDemo(const QString& name, QStrList & _args, int login_shell, int histon);
   ~TEDemo();
   void setColLin(int columns, int lines);
+  void setFullScreen(bool on);
 
 private slots:
   void configureRequest(TEWidget*,int,int,int);
@@ -129,6 +130,9 @@ private:
   QFont       defaultFont;
 
   QStrList args;
+
+  bool        b_fullscreen;
+  QRect       _saveGeometry;
 
 public:
 
