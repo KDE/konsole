@@ -33,15 +33,8 @@
 #define CMD_scrollPageDown 3
 #define CMD_scrollLineUp   4
 #define CMD_scrollLineDown 5
-#define CMD_prevSession    6
-#define CMD_nextSession    7
-#define CMD_newSession     8
-#define CMD_activateMenu   9
-#define CMD_moveSessionLeft 10
-#define CMD_moveSessionRight 11
-#define CMD_scrollLock 12
-#define CMD_emitClipboard 13
-#define CMD_renameSession 14
+#define CMD_scrollLock     6
+#define CMD_emitClipboard  7
 
 #define BITS(x,v) ((((v)!=0)<<(x)))
 

@@ -72,7 +72,6 @@ KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar
   connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
            this, SLOT(configureRequest(TEWidget*, int, int, int)) );
 
-  connect( se->getEmulation(),SIGNAL(renameSession()), this,SLOT(renameSession()) );
   connect( se,SIGNAL(updateTitle()), this,SLOT(updateTitle()) );
   connect( se,SIGNAL(renameSession(TESession*,const QString&)), this,SLOT(slotRenameSession(TESession*,const QString&)) );
   connect( se,SIGNAL(restoreAllListenToKeyPress()), this,SLOT(restoreAllListenToKeyPress()) );

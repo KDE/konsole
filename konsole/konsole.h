@@ -113,7 +113,7 @@ private slots:
   void closeCurrentSession();
   void doneChild(KonsoleChild*, TESession*);
   void doneSession(TESession*,int);
-  void opt_menu_activated(int item);
+  void slotToggleFullscreen();
   void schema_menu_activated(int item);
   void pixmap_menu_activated(int item);
   void keytab_menu_activated(int item);
@@ -157,6 +157,7 @@ private slots:
   void loadScreenSessions();
 
   void slotSaveSettings();
+  void slotConfigureKeys();
   void slotConfigure();
   void reparseConfiguration();
 
@@ -231,6 +232,7 @@ private:
   KToggleAction *showToolbar;
   KToggleAction *showMenubar;
   KToggleAction *showScrollbar;
+  KToggleAction *m_fullscreen;
 
   KSelectAction *selectSize;
   KSelectAction *selectFont;
@@ -243,6 +245,8 @@ private:
   KAction       *m_detachSession;
   KAction       *m_moveSessionLeft;
   KAction       *m_moveSessionRight;
+
+  KActionCollection *m_shortcuts;
 
   KonsoleBookmarkHandler *bookmarkHandler;
 

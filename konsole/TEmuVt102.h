@@ -54,20 +54,13 @@ public:
   ~TEmuVt102();
 
 public slots: // signals incoming from TEWidget
- 
+
   void onKeyPress(QKeyEvent*);
   void onMouse(int cb, int cx, int cy);
 
 signals:
 
   void changeTitle(int,const QString&);
-  void prevSession();
-  void nextSession();
-  void newSession();
-  void renameSession();
-  void activateMenu();
-  void moveSessionLeft();
-  void moveSessionRight();
 
 public:
 

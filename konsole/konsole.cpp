@@ -88,6 +88,7 @@ Time to start a requirement list.
 #include <kfiledialog.h>
 
 #include <kfontdialog.h>
+#include <kkeydialog.h>
 #include <kstandarddirs.h>
 #include <qpainter.h>
 #include <kmenubar.h>
@@ -201,6 +202,7 @@ DCOPObject( "konsole" )
 ,showToolbar(0)
 ,showMenubar(0)
 ,showScrollbar(0)
+,m_fullscreen(0)
 ,selectSize(0)
 ,selectFont(0)
 ,selectScrollbar(0)
@@ -374,7 +376,8 @@ void Konsole::makeGUI()
        const_cast<QPopupMenu *>(static_cast<const QPopupMenu *>(sender()))->removeItemAt(0);
        }
 
-   KActionCollection* actions = new KActionCollection(this);
+   KActionCollection* actions = actionCollection();
+   m_shortcuts = new KActionCollection(this);
 
    // Send Signal Menu -------------------------------------------------------------
    m_signals = new KPopupMenu(this);
@@ -388,7 +391,7 @@ void Konsole::makeGUI()
 
    // Edit Menu ----------------------------------------------------------------
    KAction *pasteClipboard = new KAction(i18n("&Paste"), "editpaste", 0,
-     te, SLOT(pasteClipboard()), actions);
+     te, SLOT(pasteClipboard()), m_shortcuts, "paste");
    pasteClipboard->plug(m_edit);
 
    m_edit->setCheckable(TRUE);
@@ -396,56 +399,58 @@ void Konsole::makeGUI()
 
    m_edit->insertSeparator();
    m_findHistory = new KAction(i18n("&Find in History..."), "find", 0, this,
-                                       SLOT(slotFindHistory()), actions);
+                               SLOT(slotFindHistory()), m_shortcuts, "find_history");
    m_findHistory->setEnabled( se->history().isOn() );
    m_findHistory->plug(m_edit);
 
    m_saveHistory = new KAction(i18n("S&ave History As..."), "filesaveas", 0, this,
-                                       SLOT(slotSaveHistory()), actions);
+                               SLOT(slotSaveHistory()), m_shortcuts, "save_history");
    m_saveHistory->setEnabled( se->history().isOn() );
    m_saveHistory->plug(m_edit);
 
    m_edit->insertSeparator();
    m_clearHistory = new KAction(i18n("Clear &History"), "history_clear", 0, this,
-                                       SLOT(slotClearHistory()), actions);
+                                SLOT(slotClearHistory()), m_shortcuts, "clear_history");
    m_clearHistory->setEnabled( se->history().isOn() );
    m_clearHistory->plug(m_edit);
 
    KAction *clearAllSessionHistories = new KAction(i18n("Clear All H&istories"), "history_clear", 0,
-     this, SLOT(slotClearAllSessionHistories()), actions);
+     this, SLOT(slotClearAllSessionHistories()), m_shortcuts, "clear_all_histories");
    clearAllSessionHistories->plug(m_edit);
 
    // View Menu
    m_detachSession = new KAction(i18n("&Detach Session"), 0, this,
-                                        SLOT(detachSession()), actions);
+                                 SLOT(detachSession()), m_shortcuts, "detach_session");
    m_detachSession->setEnabled(false);
    m_detachSession->plug(m_view);
 
-   KAction *renameSession = new KAction(i18n("&Rename Session..."), 0, this,
-                                        SLOT(slotRenameSession()), actions);
+   KAction *renameSession = new KAction(i18n("&Rename Session..."), Qt::CTRL+Qt::ALT+Qt::Key_S, this,
+                                        SLOT(slotRenameSession()), m_shortcuts, "rename_session");
    renameSession->plug(m_view);
 
    m_view->insertSeparator();
    monitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ), "idea", 0, this,
-                                     SLOT( slotToggleMonitor() ), this );
+                                     SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_activity" );
    monitorActivity->plug ( m_view );
 
    monitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ), "ktip", 0, this,
-                                     SLOT( slotToggleMonitor() ), this );
+                                     SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_silence" );
    monitorSilence->plug ( m_view );
 
    masterMode = new KToggleAction ( i18n( "Send &Input to All Sessions" ), "remote", 0, this,
-                                     SLOT( slotToggleMasterMode() ), this );
+                                     SLOT( slotToggleMasterMode() ), m_shortcuts, "send_input_to_all_sessions" );
    masterMode->plug ( m_view );
 
    m_view->insertSeparator();
-   m_moveSessionLeft = new KAction(i18n("&Move Session Left"), QApplication::reverseLayout() ? "forward" : "back", 0, this,
-                                        SLOT(moveSessionLeft()), actions);
+   m_moveSessionLeft = new KAction(i18n("&Move Session Left"), QApplication::reverseLayout() ? "forward" : "back",
+                                        QApplication::reverseLayout() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Right : Qt::CTRL+Qt::SHIFT+Qt::Key_Left, this,
+                                        SLOT(moveSessionLeft()), m_shortcuts, "move_session_left");
    m_moveSessionLeft->setEnabled( false );
    m_moveSessionLeft->plug(m_view);
 
-   m_moveSessionRight = new KAction(i18n("M&ove Session Right"), QApplication::reverseLayout() ? "back" : "forward", 0, this,
-                                        SLOT(moveSessionRight()), actions);
+   m_moveSessionRight = new KAction(i18n("M&ove Session Right"), QApplication::reverseLayout() ? "back" : "forward",
+                                        QApplication::reverseLayout() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Left : Qt::CTRL+Qt::SHIFT+Qt::Key_Right, this,
+                                        SLOT(moveSessionRight()), m_shortcuts, "move_session_right");
    m_moveSessionRight->setEnabled( false );
    m_moveSessionRight->plug(m_view);
 
@@ -473,17 +478,17 @@ void Konsole::makeGUI()
    //options menu
    // Menubar on/off
    showMenubar = new KToggleAction ( i18n( "Show &Menubar" ), "showmenu", 0, this,
-                                     SLOT( slotToggleMenubar() ), actions );
+                                     SLOT( slotToggleMenubar() ), m_shortcuts, "show_menubar" );
    showMenubar->plug ( m_options );
 
    // Toolbar on/off
    showToolbar = new KToggleAction ( i18n( "Show &Toolbar" ), 0, this,
-                                     SLOT( slotToggleToolbar() ), actions );
+                                     SLOT( slotToggleToolbar() ), m_shortcuts, "show_toolbar" );
    showToolbar->plug(m_options);
 
    // Scrollbar
    selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), 0, this,
-                                       SLOT(slotSelectScrollbar()), actions);
+                                       SLOT(slotSelectScrollbar()), actions );
    QStringList scrollitems;
    scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
    selectScrollbar->setItems(scrollitems);
@@ -491,8 +496,10 @@ void Konsole::makeGUI()
 
    // Fullscreen
    m_options->insertSeparator();
-   m_options->insertItem( SmallIconSet( "window_fullscreen" ), i18n("F&ull-Screen"), 5);
-   m_options->setItemChecked(5,b_fullscreen);
+   m_fullscreen = new KToggleAction(i18n("F&ull-Screen"), "window_fullscreen", 0, this,
+                                    SLOT(slotToggleFullscreen()), m_shortcuts, "fullscreen");
+   m_fullscreen->setChecked(b_fullscreen);
+   m_fullscreen->plug(m_options);
    m_options->insertSeparator();
 
    // Select Bell
@@ -542,7 +549,7 @@ void Konsole::makeGUI()
    selectSize->setItems(sizeitems);
    selectSize->plug(m_options);
 
-   KAction *historyType = new KAction(i18n("&History..."), "history", 0, this,
+   KAction *historyType = new KAction(i18n("Hist&ory..."), "history", 0, this,
                                       SLOT(slotHistoryType()), actions);
    historyType->plug(m_options);
 
@@ -553,6 +560,7 @@ void Konsole::makeGUI()
 
    m_options->insertSeparator();
 
+   KStdAction::keyBindings(this, SLOT(slotConfigureKeys()), actionCollection())->plug(m_options);
    KAction *configure = KStdAction::preferences(this, SLOT(slotConfigure()), actions);
    configure->plug(m_options);
 
@@ -562,6 +570,7 @@ void Konsole::makeGUI()
    m_options->installEventFilter( this );
 
    //help menu
+   m_help->setAccel(QKeySequence(),m_help->idAt(0));
    m_help->insertSeparator(1);
    m_help->insertItem(i18n("&Tip of the Day..."), this, SLOT(showTip()), 0, -1, 2);
 
@@ -571,12 +580,12 @@ void Konsole::makeGUI()
 
    m_session->insertSeparator();
    KAction *closeSession = new KAction(i18n("&Close Session"), "fileclose", 0, this,
-                                        SLOT(closeCurrentSession()), actions);
+                                        SLOT(closeCurrentSession()), m_shortcuts, "close_session");
    closeSession->plug(m_session);
 
    m_session->insertSeparator();
-   m_session->insertItem( SmallIconSet( "exit" ), i18n("&Quit"), this, SLOT( close() ) );
-
+   KAction *quit = new KAction(i18n("&Quit"), "exit", 0, this, SLOT( close() ), m_shortcuts, "quit");
+   quit->plug(m_session);
 
    connect(m_session, SIGNAL(activated(int)), SLOT(newSession(int)));
 
@@ -595,11 +604,11 @@ void Konsole::makeGUI()
 
    m_rightButton->insertSeparator();
    m_rightButton->insertItem(i18n("S&ettings"), m_options);
-   m_rightButton->insertSeparator();      
+   m_rightButton->insertSeparator();
    closeSession->plug(m_rightButton );
    m_rightButton->insertTearOffHandle();
 
-
+   
    delete colors;
    colors = new ColorSchemaList();
    //KONSOLEDEBUG<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
@@ -631,6 +640,15 @@ void Konsole::makeGUI()
    }
    applySettingsToGUI();
    isRestored = false;
+
+   new KAction(i18n("Previous Session"), QApplication::reverseLayout() ? Qt::SHIFT+Qt::Key_Right : Qt::SHIFT+Qt::Key_Left,
+               this, SLOT(prevSession()), m_shortcuts, "previous_session");
+   new KAction(i18n("Next Session"), QApplication::reverseLayout() ? Qt::SHIFT+Qt::Key_Left : Qt::SHIFT+Qt::Key_Right,
+               this, SLOT(nextSession()), m_shortcuts, "next_session");
+   new KAction(i18n("New Session"), Qt::CTRL+Qt::ALT+Qt::Key_N, this, SLOT(newSession()), m_shortcuts, "new_session");
+   new KAction(i18n("Activate Menu"), Qt::CTRL+Qt::ALT+Qt::Key_M, this, SLOT(activateMenu()), m_shortcuts, "activate_menu");
+
+   m_shortcuts->readShortcutSettings();
 };
 
 void Konsole::makeBasicGUI()
@@ -1167,12 +1185,9 @@ void Konsole::slotToggleToolbar() {
      toolBar()->hide();
 }
 
-void Konsole::opt_menu_activated(int item)
+void Konsole::slotToggleFullscreen()
 {
-  switch( item )  {
-    case 5: setFullScreen(!b_fullscreen);
-            break;
-  }
+  setFullScreen(!b_fullscreen);
 }
 
 void Konsole::slotSaveSettings()
@@ -1182,6 +1197,12 @@ void Konsole::slotSaveSettings()
   saveProperties(config);
   saveMainWindowSettings(config);
   config->sync();
+}
+
+void Konsole::slotConfigureKeys()
+{
+   KKeyDialog::configure(m_shortcuts);
+   m_shortcuts->writeShortcutSettings();
 }
 
 void Konsole::slotConfigure()
@@ -1288,7 +1309,7 @@ void Konsole::setFullScreen(bool on)
 //      KONSOLEDEBUG << "On is false, b_fullscreen is " << b_fullscreen << ". Set to Normal view and set caption." << endl;
     }
 //  return;
-    m_options->setItemChecked(5,b_fullscreen);
+    m_fullscreen->setChecked(b_fullscreen);
 
 }
 
@@ -1508,13 +1529,6 @@ void Konsole::activateSession(TESession *s)
        for (TESession *se = sessions.first(); se; se = sessions.next())
          se->setListenToKeyPress(FALSE);
 
-     QObject::disconnect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
-     QObject::disconnect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
-     QObject::disconnect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
-     QObject::disconnect( se->getEmulation(),SIGNAL(renameSession()), this,SLOT(slotRenameSession()) );
-     QObject::disconnect( se->getEmulation(),SIGNAL(activateMenu()), this,SLOT(activateMenu()) );
-     QObject::disconnect( se->getEmulation(),SIGNAL(moveSessionLeft()), this,SLOT(moveSessionLeft()) );
-     QObject::disconnect( se->getEmulation(),SIGNAL(moveSessionRight()), this,SLOT(moveSessionRight()) );
      notifySessionState(se,NOTIFYNORMAL);
      // Delete the session if isn't in the session list any longer.
      if (sessions.find(se) == -1)
@@ -1559,13 +1573,6 @@ void Konsole::activateSession(TESession *s)
 void Konsole::allowPrevNext()
 {
   if (!se) return;
-  QObject::connect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
-  QObject::connect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
-  QObject::connect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
-  QObject::connect( se->getEmulation(),SIGNAL(renameSession()), this,SLOT(slotRenameSession()) );
-  QObject::connect( se->getEmulation(),SIGNAL(activateMenu()), this,SLOT(activateMenu()) );
-  QObject::connect( se->getEmulation(),SIGNAL(moveSessionLeft()), this,SLOT(moveSessionLeft()) );
-  QObject::connect( se->getEmulation(),SIGNAL(moveSessionRight()), this,SLOT(moveSessionRight()) );
   notifySessionState(se,NOTIFYNORMAL);
 }
 
@@ -2167,13 +2174,6 @@ void Konsole::detachSession() {
   disconnect( se,SIGNAL(done(TESession*,int)),
               this,SLOT(doneSession(TESession*,int)) );
 
-  disconnect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
-  disconnect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
-  disconnect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
-  disconnect( se->getEmulation(),SIGNAL(renameSession()), this,SLOT(slotRenameSession()) );
-  disconnect( se->getEmulation(),SIGNAL(activateMenu()), this,SLOT(activateMenu()) );
-  disconnect( se->getEmulation(),SIGNAL(moveSessionLeft()), this,SLOT(moveSessionLeft()) );
-  disconnect( se->getEmulation(),SIGNAL(moveSessionRight()), this,SLOT(moveSessionRight()) );
   disconnect( se->getEmulation(),SIGNAL(ImageSizeChanged(int,int)), this,SLOT(notifySize(int,int)));
   disconnect( se->getEmulation(),SIGNAL(changeColumns(int)), this,SLOT(changeColumns(int)) );
 

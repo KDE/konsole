@@ -1278,7 +1278,7 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
        e->type() == QEvent::AccelAvailable ) && qApp->focusWidget() == this )
   {
       static_cast<QKeyEvent *>( e )->ignore();
-      return true;
+      return false;
   }
   if ( obj != this /* when embedded */ && obj != parent() /* when standalone */ )
       return FALSE; // not us
@@ -1305,9 +1305,9 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
 #if QT_VERSION < 300
     return false;               // accept event
 #else
-    // in Qt2 when key events were propagated up the tree 
+    // in Qt2 when key events were propagated up the tree
     // (unhandled? -> parent widget) they passed the event filter only once at
-    // the beginning. in qt3 this has changed, that is, the event filter is 
+    // the beginning. in qt3 this has changed, that is, the event filter is
     // called each time the event is sent (see loop in QApplication::notify,
     // when internalNotify() is called for KeyPress, whereas internalNotify
     // activates also the global event filter) . That's why we stop propagation
@@ -1335,7 +1335,7 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
 
     QIMEvent *qime = (QIMEvent *)e;
     composeLength = qime->text().length();
-    
+
     text += qime->text();
     if (!text.isEmpty())
     {

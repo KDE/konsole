@@ -149,13 +149,6 @@ key Space +Control : "\x00"
 
 # some of keys are used by konsole.
 
-key Left  +Shift -Control  : prevSession
-key Right +Shift -Control  : nextSession
-key Left  +Shift +Control  : moveSessionLeft
-key Right +Shift +Control  : moveSessionRight
-key N +Control +Alt: newSession
-key M +Control +Alt: activateMenu
-key S +Control +Alt: renameSession
 key Up    +Shift   : scrollLineUp
 key Prior +Shift   : scrollPageUp
 key Down  +Shift   : scrollLineDown
