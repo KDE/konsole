@@ -141,7 +141,6 @@ protected:
     // Dnd
     void dragEnterEvent(QDragEnterEvent* event);
     void dropEvent(QDropEvent* event);
-    bool isTargetSelected(int x, int y);
     void doDrag();
     enum DragState { diNone, diPending, diDragging };
 
