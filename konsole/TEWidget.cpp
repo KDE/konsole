@@ -85,6 +85,10 @@
 #define loc(X,Y) ((Y)*columns+(X))
 #endif
 
+#ifndef round
+#define round(a) ((a)>0 ? (int)((a)+0.5) : -(int)(0.5-(a)))
+#endif
+
 //FIXME: the rim should normally be 1, 0 only when running in full screen mode.
 #define rimX 0      // left/right rim width
 #define rimY 0      // top/bottom rim high
@@ -96,7 +100,7 @@
 #define REPCHAR   "ABCDEFGHIJKLMNOPQRSTUVWXYZ" \
                   "abcdefgjijklmnopqrstuvwxyz" \
                   "0123456789./+@"
-										
+
 // scroll increment used when dragging selection at top/bottom of window.
 
 // static
