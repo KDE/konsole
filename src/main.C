@@ -26,7 +26,7 @@
 #ifdef HAVE_CONFIG_H
 #include"config.h"
 #endif
- 
+
 #include <qdir.h>
 
 #include <stdio.h>
@@ -62,7 +62,7 @@
 
 #define WITH_VGA
 
-char *fonts[] = {"6x13", "5x7", "6x10", "7x13", "9x15", "10x20", 
+char *fonts[] = {"6x13", "5x7", "6x10", "7x13", "9x15", "10x20",
                  "linux8x16", "linux8x8" };
 
 static QIntDict<TESession> no2session;
@@ -309,17 +309,19 @@ void TEDemo::readProperties(KConfig* config)
   s_schema   = config->readEntry("schema","");
   lincol0    = config->readSizeEntry("size",&dftSize); //FIXME: to be replaced by window size
 
-  QString entry = config->readEntry("kmenubar");
-  if (!entry.isEmpty() && entry == "floating")
-  {
-    menubar->setMenuBarPos(KMenuBar::Floating);
-    QString geo = config->readEntry("kmenubargeometry");
-    if (!geo.isEmpty()) menubar->setGeometry(KWM::setProperties(menubar->winId(), geo));
+  if (menubar->menuBarPos() != KMenuBar::Floating) {
+      QString entry = config->readEntry("kmenubar");
+      if (!entry.isEmpty() && entry == "floating")
+	  {
+	      menubar->setMenuBarPos(KMenuBar::Floating);
+	      QString geo = config->readEntry("kmenubargeometry");
+	      if (!geo.isEmpty()) menubar->setGeometry(KWM::setProperties(menubar->winId(), geo));
+	  }
+      else if (!entry.isEmpty() && entry == "top")
+	  menubar->setMenuBarPos(KMenuBar::Top);
+      else if (!entry.isEmpty() && entry == "bottom")
+	  menubar->setMenuBarPos(KMenuBar::Bottom);
   }
-  else if (!entry.isEmpty() && entry == "top")
-    menubar->setMenuBarPos(KMenuBar::Top);
-  else if (!entry.isEmpty() && entry == "bottom")
-    menubar->setMenuBarPos(KMenuBar::Bottom);
 }
 
 /* ------------------------------------------------------------------------- */
@@ -533,10 +535,10 @@ void TEDemo::tecRef()
 void TEDemo::activateSession(int sn)
 {
   TESession* s = no2session.find(sn);
-  if (se) 
-  { 
-    se->setConnect(FALSE); 
-    int no = (int)session2no.find(se); 
+  if (se)
+  {
+    se->setConnect(FALSE);
+    int no = (int)session2no.find(se);
     m_sessions->setItemChecked(no,FALSE);
   }
   se = s;
@@ -549,7 +551,7 @@ void TEDemo::activateSession(int sn)
   s->setConnect(TRUE);                    // does a bulkShow (setImage)
   setFont(s->fontNo());                   //FIXME: creates flicker?
                                           //FIXME: check here if we're still alife.
-                                          //       if not, quit, otherwise, 
+                                          //       if not, quit, otherwise,
                                           //       start propagating quit.
 }
 
@@ -625,7 +627,7 @@ void TEDemo::doneSession(TESession* s, int status)
       str = str + "\nReturn code = " + rcs;
     }
     KMsgBox::message( this, "Error", str, KMsgBox::EXCLAMATION );
-    
+
   }
   int no = (int)session2no.find(s);
   if (!no) return; // oops
@@ -644,7 +646,7 @@ void TEDemo::doneSession(TESession* s, int status)
   QTimer::singleShot(100,s,SLOT(terminate()));
 
   if (s == se)
-  { // pick a new session 
+  { // pick a new session
     se = NULL;
     QIntDictIterator<TESession> it( no2session );
     if ( it.current() )
