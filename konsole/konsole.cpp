@@ -420,6 +420,7 @@ void Konsole::updateRMBMenu()
       }
       index = 2;
       m_rightButton->setItemVisible(POPUP_NEW_SESSION_ID,true);
+      m_rightButton->setItemVisible(m_separator_id,true);
       m_rightButton->setItemVisible(POPUP_SETTINGS_ID,true);
    }
    else
@@ -431,6 +432,7 @@ void Konsole::updateRMBMenu()
       }
       index = 0;
       m_rightButton->setItemVisible(POPUP_NEW_SESSION_ID,false);
+      m_rightButton->setItemVisible(m_separator_id,false);
       m_rightButton->setItemVisible(POPUP_SETTINGS_ID,false);
    }
 
@@ -734,7 +736,7 @@ void Konsole::makeGUI()
 
       if (m_options)
       {
-         m_rightButton->insertSeparator();
+         m_separator_id=m_rightButton->insertSeparator();
          m_rightButton->insertItem(i18n("S&ettings"), m_options, POPUP_SETTINGS_ID);
       }
       m_rightButton->insertSeparator();

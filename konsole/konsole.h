@@ -149,6 +149,7 @@ private slots:
   void updateSchemaMenu();
   void updateKeytabMenu();
   void updateRMBMenu();
+  int m_separator_id;
 
   void changeColumns(int);
   void notifySessionState(TESession* session,int state);
