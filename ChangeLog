@@ -1,6 +1,7 @@
 01 Nov 1998
 - minor bugs fixed to handle unexpected or incomplete installations
   and broken configuration scrips better.
+- FreeBSD adjustments
 29 Oct 1998
 - sessions reactived
 - Session/Command menu additionally with Shift/Control+RightMouse
