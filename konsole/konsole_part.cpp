@@ -191,7 +191,7 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   colors->sort();
 
   readProperties();
-  se->setConnect(TRUE);
+  se->setConnect(true);
 
   makeGUI();
 
@@ -230,7 +230,7 @@ void konsolePart::doneSession(TESession*,int)
     kdDebug(1211) << "doneSession - disconnecting done" << endl;;
     disconnect( se,SIGNAL(done(TESession*,int)),
                 this,SLOT(doneSession(TESession*,int)) );
-    se->setConnect(FALSE);
+    se->setConnect(false);
     //QTimer::singleShot(100,se,SLOT(terminate()));
     kdDebug(1211) << "se->terminate()" << endl;;
     se->terminate();
@@ -362,13 +362,13 @@ void konsolePart::makeGUI()
 
   // Keyboard Options Menu ---------------------------------------------------
   m_keytab = new KPopupMenu((KMainWindow*)parentWidget);
-  m_keytab->setCheckable(TRUE);
+  m_keytab->setCheckable(true);
   connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
   m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
 
   // Schema Options Menu -----------------------------------------------------
   m_schema = new KPopupMenu((KMainWindow*)parentWidget);
-  m_schema->setCheckable(TRUE);
+  m_schema->setCheckable(true);
   connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
   connect(m_schema, SIGNAL(aboutToShow()), SLOT(schema_menu_check()));
   m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Sch&ema" ), m_schema);
@@ -461,10 +461,10 @@ void konsolePart::applySettingsToGUI()
 
 void konsolePart::readProperties()
 {
-  KConfig* config = new KConfig("konsolepartrc",TRUE);
+  KConfig* config = new KConfig("konsolepartrc",true);
   config->setDesktopGroup();
 
-  b_framevis = config->readBoolEntry("has frame",FALSE);
+  b_framevis = config->readBoolEntry("has frame",false);
   b_histEnabled = config->readBoolEntry("historyenabled",true);
   n_bell = QMIN(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),2);
   n_font = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
@@ -510,7 +510,7 @@ void konsolePart::readProperties()
 
   se->setKeymapNo(n_keytab);
   te->setBellMode(n_bell);
-  te->setBlinkingCursor(config->readBoolEntry("BlinkingCursor",FALSE));
+  te->setBlinkingCursor(config->readBoolEntry("BlinkingCursor",false));
   te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
   te->setLineSpacing( config->readUnsignedNumEntry( "LineSpacing", 0 ) );
   te->setScrollbarLocation(n_scroll);
@@ -518,7 +518,7 @@ void konsolePart::readProperties()
 
   delete config;
 
-  config = new KConfig("konsolerc",TRUE);
+  config = new KConfig("konsolerc",true);
   config->setDesktopGroup();
   te->setTerminalSizeHint( config->readBoolEntry("TerminalSizeHint",true) );
   delete config;
@@ -605,8 +605,8 @@ void konsolePart::setFont(int fontno)
 
 void konsolePart::updateKeytabMenu()
 {
-  m_keytab->setItemChecked(n_keytab,FALSE);
-  m_keytab->setItemChecked(se->keymapNo(),TRUE);
+  m_keytab->setItemChecked(n_keytab,false);
+  m_keytab->setItemChecked(se->keymapNo(),true);
   n_keytab = se->keymapNo();
 }
 
@@ -665,8 +665,8 @@ void konsolePart::setSchema(ColorSchema* s)
   if (!s) return;
 
   if (m_schema) {
-    m_schema->setItemChecked(curr_schema,FALSE);
-    m_schema->setItemChecked(s->numb(),TRUE);
+    m_schema->setItemChecked(curr_schema,false);
+    m_schema->setItemChecked(s->numb(),true);
   }
 
   s_schema = s->relPath();

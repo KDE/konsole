@@ -41,7 +41,7 @@ KWrited::KWrited() : QObject()
   wid->setFont(KGlobalSettings::fixedFont());
   wid->setMinimumWidth(wid->fontMetrics().maxWidth()*80 +
       wid->minimumSizeHint().width());
-  wid->setReadOnly(TRUE);
+  wid->setReadOnly(true);
   wid->setFocusPolicy(QWidget::NoFocus);
 
   pty = new TEPty();

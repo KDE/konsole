@@ -454,7 +454,7 @@ void TEmulation::bulkEnd()
   if ( bulk_nlcnt > gui->Lines() || bulk_incnt > 20 )
     showBulk();                         // resets bulk_??cnt to 0, too.
   else
-    bulk_timer.start(BULK_TIMEOUT,TRUE);
+    bulk_timer.start(BULK_TIMEOUT,true);
 }
 
 void TEmulation::setConnect(bool c)

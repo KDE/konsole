@@ -324,7 +324,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
   blinkCursorT   = new QTimer(this);
   connect(blinkCursorT, SIGNAL(timeout()), this, SLOT(blinkCursorEvent()));
 
-  setMouseMarks(TRUE);
+  setMouseMarks(true);
   setColorTable(base_color_table); // init color table
 
   qApp->installEventFilter( this ); //FIXME: see below
@@ -400,7 +400,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
       if (attr.r & RE_UNDERLINE)
         paint.drawLine(rect.left(), rect.y()+font_a+1,
                        rect.right(),rect.y()+font_a+1 );
-      paint.setClipping(FALSE);
+      paint.setClipping(false);
     }
   }
   if ((attr.r & RE_CURSOR) && !hasFocus()) {
@@ -412,7 +412,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
     }
     paint.setClipRect(rect);
     paint.drawRect(rect.x(),rect.y(),rect.width(),rect.height()-m_lineSpacing);
-    paint.setClipping(FALSE);
+    paint.setClipping(false);
   }
 }
 
@@ -442,14 +442,14 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
 { int y,x,len;
   const QPixmap* pm = backgroundPixmap();
   QPainter paint;
-  setUpdatesEnabled(FALSE);
+  setUpdatesEnabled(false);
   paint.begin( this );
 HCNT("setImage");
 
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
   int    tLy = tL.y();
-  hasBlinker = FALSE;
+  hasBlinker = false;
 
   int cf  = -1; // undefined
   int cb  = -1; // undefined
@@ -504,9 +504,9 @@ HCNT("setImage");
   }
   drawFrame( &paint );
   paint.end();
-  setUpdatesEnabled(TRUE);
+  setUpdatesEnabled(true);
   if ( hasBlinker && !blinkT->isActive()) blinkT->start(1000); // 1000 ms
-  if (!hasBlinker && blinkT->isActive()) { blinkT->stop(); blinking = FALSE; }
+  if (!hasBlinker && blinkT->isActive()) { blinkT->stop(); blinking = false; }
   delete [] disstrU;
 
   if (resizing && terminalSizeHint)
@@ -550,7 +550,7 @@ void TEWidget::setBlinkingCursor(bool blink)
     if (cursorBlinking)
       blinkCursorEvent();
     else
-      cursorBlinking = FALSE;
+      cursorBlinking = false;
   }
 }
 
@@ -569,7 +569,7 @@ void TEWidget::paintEvent( QPaintEvent* pe )
 //{ static int cnt = 0; printf("paint %d\n",cnt++); }
   const QPixmap* pm = backgroundPixmap();
   QPainter paint;
-  setUpdatesEnabled(FALSE);
+  setUpdatesEnabled(false);
   paint.begin( this );
   paint.setBackgroundMode( TransparentMode );
 HCNT("paintEvent");
@@ -635,19 +635,19 @@ HCNT("paintEvent");
   delete [] disstrU;
   drawFrame( &paint );
   paint.end();
-  setUpdatesEnabled(TRUE);
+  setUpdatesEnabled(true);
 }
 
 void TEWidget::blinkEvent()
 {
   blinking = !blinking;
-  repaint(FALSE);
+  repaint(false);
 }
 
 void TEWidget::blinkCursorEvent()
 {
   cursorBlinking = !cursorBlinking;
-  repaint(cursorRect, FALSE);
+  repaint(cursorRect, false);
 }
 
 /* ------------------------------------------------------------------------- */
@@ -694,9 +694,9 @@ void TEWidget::propagateSize()
   //NOTE: control flows from the back through the chest right into the eye.
   //      `emu' will call back via `setImage'.
 
-  resizing = TRUE;
+  resizing = true;
   emit changedImageSizeSignal(lines, columns); // expose resizeEvent
-  resizing = FALSE;
+  resizing = false;
 }
 
 /* ------------------------------------------------------------------------- */
@@ -779,8 +779,8 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   int    tLx = tL.x();
   int    tLy = tL.y();
 
-  line_selection_mode = FALSE;
-  word_selection_mode = FALSE;
+  line_selection_mode = false;
+  word_selection_mode = false;
 
   QPoint pos = QPoint((ev->x()-tLx-bX+(font_w/2))/font_w,(ev->y()-tLy-bY)/font_h);
 
@@ -898,7 +898,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
   iPntSelCorr.ry() -= scrollbar->value();
   QPoint pntSelCorr = pntSel;
   pntSelCorr.ry() -= scrollbar->value();
-  bool swapping = FALSE;
+  bool swapping = false;
 
   if ( word_selection_mode )
   {
@@ -1096,7 +1096,7 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
   iPntSel = bgnSel;
   iPntSel.ry() += scrollbar->value();
 
-  word_selection_mode = TRUE;
+  word_selection_mode = true;
 
   // find word boundaries...
   int selClass = charClass(image[i].c);
@@ -1137,8 +1137,8 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
 
   emit clearSelectionSignal();
 
-  line_selection_mode = TRUE;
-  word_selection_mode = FALSE;
+  line_selection_mode = true;
+  word_selection_mode = false;
 
   actSel = 2; // within selection
 
@@ -1192,7 +1192,7 @@ int TEWidget::charClass(UINT16 ch) const
     QChar qch=QChar(ch);
     if ( qch.isSpace() ) return ' ';
 
-    if ( qch.isLetterOrNumber() || word_characters.contains(qch, FALSE) )
+    if ( qch.isLetterOrNumber() || word_characters.contains(qch, false) )
     return 'a';
 
     // Everything else is weird
@@ -1303,7 +1303,7 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
       return false;
   }
   if ( obj != this /* when embedded */ && obj != parent() /* when standalone */ )
-      return FALSE; // not us
+      return false; // not us
   if ( e->type() == QEvent::Wheel)
   {
     if ( ((QWheelEvent *)e)->orientation() == Qt::Vertical )
@@ -1321,7 +1321,7 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
       if (cursorBlinking)
         blinkCursorEvent();
       else
-        cursorBlinking = FALSE;
+        cursorBlinking = false;
     }
 
     emit keyPressedSignal(ke); // expose

@@ -427,7 +427,7 @@ void TEmuVt102::tau( int token, int p, int q )
 
     case TY_ESC___('D'      ) : scr->index                (          ); break; //VT100
     case TY_ESC___('E'      ) : scr->NextLine             (          ); break; //VT100
-    case TY_ESC___('H'      ) : scr->changeTabStop        (TRUE      ); break; //VT100
+    case TY_ESC___('H'      ) : scr->changeTabStop        (true      ); break; //VT100
     case TY_ESC___('M'      ) : scr->reverseIndex         (          ); break; //VT100
     case TY_ESC___('Z'      ) :      reportTerminalType   (          ); break;
     case TY_ESC___('c'      ) :      reset                (          ); break;
@@ -472,7 +472,7 @@ void TEmuVt102::tau( int token, int p, int q )
     case TY_CSI_PS('J',    0) : scr->clearToEndOfScreen   (          ); break;
     case TY_CSI_PS('J',    1) : scr->clearToBeginOfScreen (          ); break;
     case TY_CSI_PS('J',    2) : scr->clearEntireScreen    (          ); break;
-    case TY_CSI_PS('g',    0) : scr->changeTabStop        (FALSE     ); break; //VT100
+    case TY_CSI_PS('g',    0) : scr->changeTabStop        (false     ); break; //VT100
     case TY_CSI_PS('g',    3) : scr->clearTabStops        (          ); break; //VT100
     case TY_CSI_PS('h',    4) : scr->    setMode      (MODE_Insert   ); break;
     case TY_CSI_PS('h',   20) :          setMode      (MODE_NewLine  ); break;
@@ -953,10 +953,10 @@ void TEmuVt102::resetCharset(int scrno)
 {
   charset[scrno].cu_cs   = 0;
   strncpy(charset[scrno].charset,"BBBB",4);
-  charset[scrno].sa_graphic = FALSE;
-  charset[scrno].sa_pound   = FALSE;
-  charset[scrno].graphic = FALSE;
-  charset[scrno].pound   = FALSE;
+  charset[scrno].sa_graphic = false;
+  charset[scrno].sa_pound   = false;
+  charset[scrno].graphic = false;
+  charset[scrno].pound   = false;
 }
 
 /*!
@@ -1047,10 +1047,10 @@ void TEmuVt102::resetModes()
 
 void TEmuVt102::setMode(int m)
 {
-  currParm.mode[m] = TRUE;
+  currParm.mode[m] = true;
   switch (m)
   {
-    case MODE_Mouse1000 : gui->setMouseMarks(FALSE);
+    case MODE_Mouse1000 : gui->setMouseMarks(false);
     break;
 
     case MODE_AppScreen : screen[1]->clearSelection();
@@ -1066,10 +1066,10 @@ void TEmuVt102::setMode(int m)
 
 void TEmuVt102::resetMode(int m)
 {
-  currParm.mode[m] = FALSE;
+  currParm.mode[m] = false;
   switch (m)
   {
-    case MODE_Mouse1000 : gui->setMouseMarks(TRUE);
+    case MODE_Mouse1000 : gui->setMouseMarks(true);
     break;
 
     case MODE_AppScreen : screen[0]->clearSelection();
@@ -1093,7 +1093,7 @@ void TEmuVt102::restoreMode(int m)
   if(saveParm.mode[m]) setMode(m); else resetMode(m);
 }
 
-BOOL TEmuVt102::getMode(int m)
+bool TEmuVt102::getMode(int m)
 {
   return currParm.mode[m];
 }

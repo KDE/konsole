@@ -118,9 +118,9 @@ bool KeyTrans::findEntry(int key, int bits, int* cmd, const char** txt, int* len
       *cmd = it.current()->cmd;
       *txt = it.current()->txt.ascii();
       *len = it.current()->txt.length();
-      return TRUE;
+      return true;
     }
-  return FALSE;
+  return false;
 }
 
 /* ------------------------------------------------------------------------- */

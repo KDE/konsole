@@ -416,7 +416,7 @@ int TEPty::openPty()
     fprintf(stderr,"Can't open a pseudo teletype\n"); exit(1);
   }
 
-  if (needGrantPty && !chownpty(ptyfd, TRUE))
+  if (needGrantPty && !chownpty(ptyfd, true))
   {
     fprintf(stderr,"konsole: chownpty failed for device %s::%s.\n",ptynam,ttynam);
     fprintf(stderr,"       : This means the session can be eavesdroped.\n");

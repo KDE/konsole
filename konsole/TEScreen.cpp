@@ -51,9 +51,9 @@
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 #endif
 
-//FIXME: this is emulation specific. Use FALSE for xterm, TRUE for ANSI.
+//FIXME: this is emulation specific. Use false for xterm, true for ANSI.
 //FIXME: see if we can get this from terminfo.
-#define BS_CLEARS FALSE
+#define BS_CLEARS false
 
 #ifndef loc
 #define loc(X,Y) ((Y)*columns+(X))
@@ -326,7 +326,7 @@ void TEScreen::insertLines(int n)
 
 void TEScreen::setMode(int m)
 {
-  currParm.mode[m] = TRUE;
+  currParm.mode[m] = true;
   switch(m)
   {
     case MODE_Origin : cuX = 0; cuY = tmargin; break; //FIXME: home
@@ -337,7 +337,7 @@ void TEScreen::setMode(int m)
 
 void TEScreen::resetMode(int m)
 {
-  currParm.mode[m] = FALSE;
+  currParm.mode[m] = false;
   switch(m)
   {
     case MODE_Origin : cuX = 0; cuY = 0; break; //FIXME: home
@@ -360,7 +360,7 @@ void TEScreen::restoreMode(int m)
 
 //NOTE: this is a helper function
 /*! Return the setting  a specific mode. */
-BOOL TEScreen::getMode(int m)
+bool TEScreen::getMode(int m)
 {
   return currParm.mode[m];
 }
@@ -658,7 +658,7 @@ void TEScreen::Tabulate()
 
 void TEScreen::clearTabStops()
 {
-  for (int i = 0; i < columns; i++) tabstops[i-1] = FALSE;
+  for (int i = 0; i < columns; i++) tabstops[i-1] = false;
 }
 
 void TEScreen::changeTabStop(bool set)
@@ -1114,7 +1114,7 @@ bool TEScreen::testIsSelected(const int x,const int y)
   return ( pos >= sel_TL && pos <= sel_BR );
 }
 
-QString TEScreen::getSelText(const BOOL preserve_line_breaks)
+QString TEScreen::getSelText(const bool preserve_line_breaks)
 {
   if (sel_begin == -1)
      return QString::null; // Selection got clear while selecting.

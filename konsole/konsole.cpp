@@ -401,7 +401,7 @@ void Konsole::makeGUI()
    // Edit Menu ----------------------------------------------------------------
    m_pasteClipboard->plug(m_edit);
 
-   m_edit->setCheckable(TRUE);
+   m_edit->setCheckable(true);
    m_edit->insertItem( i18n("&Send Signal"), m_signals );
 
    m_edit->insertSeparator();
@@ -457,13 +457,13 @@ void Konsole::makeGUI()
 
    // Schema Options Menu -----------------------------------------------------
    m_schema = new KPopupMenu(this);
-   m_schema->setCheckable(TRUE);
+   m_schema->setCheckable(true);
    connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
    connect(m_schema, SIGNAL(aboutToShow()), SLOT(schema_menu_check()));
 
    // Keyboard Options Menu ---------------------------------------------------
    m_keytab = new KPopupMenu(this);
-   m_keytab->setCheckable(TRUE);
+   m_keytab->setCheckable(true);
    connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
 
    //options menu
@@ -659,7 +659,7 @@ void Konsole::makeBasicGUI()
   m_toolbarSessionsCommands = newsession->popupMenu();
   connect(m_toolbarSessionsCommands, SIGNAL(activated(int)), SLOT(newSessionToolbar(int)));
 
-  toolBar()->setFullSize( TRUE );
+  toolBar()->setFullSize( true );
 
   m_session = new KPopupMenu(this);
   m_edit = new KPopupMenu(this);
@@ -667,7 +667,7 @@ void Konsole::makeBasicGUI()
   bookmarkHandler = new KonsoleBookmarkHandler( this, true );
   m_bookmarks = bookmarkHandler->menu();
   m_options = new KPopupMenu(this);
-  m_help =  helpMenu(0, FALSE);
+  m_help =  helpMenu(0, false);
   m_rightButton = new KPopupMenu(this);
   
   m_rightSession = new KPopupMenu( m_rightButton );
@@ -986,18 +986,18 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
 
    if (config==KGlobal::config())
    {
-     b_warnQuit=config->readBoolEntry( "WarnQuit", TRUE );
-     b_allowResize=config->readBoolEntry( "AllowResize", TRUE);
+     b_warnQuit=config->readBoolEntry( "WarnQuit", true );
+     b_allowResize=config->readBoolEntry( "AllowResize", true);
 
      s_word_seps= config->readEntry("wordseps",":@-./_~");
      te->setWordCharacters(s_word_seps);
 
-     b_framevis = config->readBoolEntry("has frame",TRUE);
+     b_framevis = config->readBoolEntry("has frame",true);
      te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
 
-     te->setBlinkingCursor(config->readBoolEntry("BlinkingCursor",FALSE));
-     te->setCtrlDrag(config->readBoolEntry("CtrlDrag",FALSE));
-     te->setCutToBeginningOfLine(config->readBoolEntry("CutToBeginningOfLine",FALSE));
+     te->setBlinkingCursor(config->readBoolEntry("BlinkingCursor",false));
+     te->setCtrlDrag(config->readBoolEntry("CtrlDrag",false));
+     te->setCutToBeginningOfLine(config->readBoolEntry("CutToBeginningOfLine",false));
      te->setTerminalSizeHint( config->readBoolEntry("TerminalSizeHint",true) );
      te->setLineSpacing( config->readUnsignedNumEntry( "LineSpacing", 0 ) );
 
@@ -1010,7 +1010,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
    if (!globalConfigOnly)
    {
       n_defaultKeytab=KeyTrans::find(config->readEntry("keytab","default"))->numb(); // act. the keytab for this session
-      b_fullscreen = config->readBoolEntry("Fullscreen",FALSE);
+      b_fullscreen = config->readBoolEntry("Fullscreen",false);
       n_defaultFont = n_font = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
       n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
       n_bell = QMIN(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),2);
@@ -1218,8 +1218,8 @@ void Konsole::updateKeytabMenu()
 {
   if (m_menuCreated)
   {
-     m_keytab->setItemChecked(n_keytab,FALSE);
-     m_keytab->setItemChecked(se->keymapNo(),TRUE);
+     m_keytab->setItemChecked(n_keytab,false);
+     m_keytab->setItemChecked(se->keymapNo(),true);
   };
   n_keytab = se->keymapNo();
 }
@@ -1440,21 +1440,21 @@ void Konsole::restoreAllListenToKeyPress()
 {
   if(se->isMasterMode())
     for (TESession *ses = sessions.first(); ses; ses = sessions.next())
-      ses->setListenToKeyPress(TRUE);
+      ses->setListenToKeyPress(true);
   else
-    se->setListenToKeyPress(TRUE);
+    se->setListenToKeyPress(true);
 }
 
 void Konsole::feedAllSessions(const QString &text)
 {
   for (TESession *ses = sessions.first(); ses; ses = sessions.next())
-    ses->setListenToKeyPress(TRUE);
+    ses->setListenToKeyPress(true);
   if (te)
     te->emitText(text);
   if(!se->isMasterMode()) {
     for (TESession *ses = sessions.first(); ses; ses = sessions.next())
-      ses->setListenToKeyPress(FALSE);
-    se->setListenToKeyPress(TRUE);
+      ses->setListenToKeyPress(false);
+    se->setListenToKeyPress(true);
   }
 }
 
@@ -1691,10 +1691,10 @@ void Konsole::activateSession(TESession *s)
 {
   if (se)
   {
-     se->setConnect(FALSE);
+     se->setConnect(false);
      if(se->isMasterMode())
        for (TESession *se = sessions.first(); se; se = sessions.next())
-         se->setListenToKeyPress(FALSE);
+         se->setListenToKeyPress(false);
 
      notifySessionState(se,NOTIFYNORMAL);
      // Delete the session if isn't in the session list any longer.
@@ -1716,10 +1716,10 @@ void Konsole::activateSession(TESession *s)
   {
       setFont(s->fontNo());
   }
-  s->setConnect(TRUE);
+  s->setConnect(true);
   if(se->isMasterMode())
     for (TESession *se = sessions.first(); se; se = sessions.next())
-      se->setListenToKeyPress(TRUE);
+      se->setListenToKeyPress(true);
   updateTitle();
   if (!m_menuCreated)
      return;
@@ -1997,10 +1997,10 @@ void Konsole::doneSession(TESession* s, int )
   sessions.remove(s);
   delete ra; // will the toolbar die?
 
-  s->setConnect(FALSE);
+  s->setConnect(false);
   if(s->isMasterMode())
     for (TESession *se = sessions.first(); se; se = sessions.next())
-      se->setListenToKeyPress(FALSE);
+      se->setListenToKeyPress(false);
 
   delete s;
   if (s == se_previous)
@@ -2155,11 +2155,11 @@ void Konsole::slotToggleMasterMode()
   se->setMasterMode( _masterMode );
   if(_masterMode)
     for (TESession *ses = sessions.first(); ses; ses = sessions.next())
-      ses->setListenToKeyPress(TRUE);
+      ses->setListenToKeyPress(true);
   else {
     for (TESession *ses = sessions.first(); ses; ses = sessions.next())
-      ses->setListenToKeyPress(FALSE);
-    se->setListenToKeyPress(TRUE);
+      ses->setListenToKeyPress(false);
+    se->setListenToKeyPress(true);
   }
   notifySessionState(se,NOTIFYNORMAL);
 }
@@ -2209,7 +2209,7 @@ void Konsole::addSessionCommand(const QString &path)
     filename="shell.desktop";
   }
   else
-    co = new KSimpleConfig(path,TRUE);
+    co = new KSimpleConfig(path,true);
   co->setDesktopGroup();
   QString typ = co->readEntry("Type");
   QString txt = co->readEntry("Name");
@@ -2369,8 +2369,8 @@ void Konsole::setSchema(ColorSchema* s)
 //        KONSOLEDEBUG << "Checking menu items" << endl;
   if (m_schema)
   {
-    m_schema->setItemChecked(curr_schema,FALSE);
-    m_schema->setItemChecked(s->numb(),TRUE);
+    m_schema->setItemChecked(curr_schema,false);
+    m_schema->setItemChecked(s->numb(),true);
   }
 //        KONSOLEDEBUG << "Remembering schema data" << endl;
 

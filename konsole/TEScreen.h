@@ -113,7 +113,7 @@ public: // these are all `Screen' operations
     //
     // -------------------------------------
     //
-    BOOL getMode     (int n);
+    bool getMode     (int n);
     //
     // only for report cursor position
     //
@@ -157,7 +157,7 @@ public: // these are all `Screen' operations
     void setBusySelecting(bool busy) { sel_busy = busy; }
     bool testIsSelected(const int x,const int y);
 
-    QString getSelText(const BOOL preserve_line_breaks);
+    QString getSelText(const bool preserve_line_breaks);
     QString getHistory();
     QString getHistoryLine(int no);
 

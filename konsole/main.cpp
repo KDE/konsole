@@ -335,9 +335,9 @@ int main(int argc, char* argv[])
         m->setSchema(sessionconfig->readEntry("Schema0"));
         m->initSessionFont(sessionconfig->readNumEntry("Font0", -1));
         m->initSessionKeyTab(sessionconfig->readEntry("KeyTab0"));
-        m->initMonitorActivity(sessionconfig->readBoolEntry("MonitorActivity0",FALSE));
-        m->initMonitorSilence(sessionconfig->readBoolEntry("MonitorSilence0",FALSE));
-        m->initMasterMode(sessionconfig->readBoolEntry("MasterMode0",FALSE));
+        m->initMonitorActivity(sessionconfig->readBoolEntry("MonitorActivity0",false));
+        m->initMonitorSilence(sessionconfig->readBoolEntry("MonitorSilence0",false));
+        m->initMasterMode(sessionconfig->readBoolEntry("MasterMode0",false));
         counter++;
 
         while (counter < session_count)
@@ -364,11 +364,11 @@ int main(int argc, char* argv[])
           key = QString("KeyTab%1").arg(counter);
           m->initSessionKeyTab(sessionconfig->readEntry(key));
           key = QString("MonitorActivity%1").arg(counter);
-          m->initMonitorActivity(sessionconfig->readBoolEntry(key,FALSE));
+          m->initMonitorActivity(sessionconfig->readBoolEntry(key,false));
           key = QString("MonitorSilence%1").arg(counter);
-          m->initMonitorSilence(sessionconfig->readBoolEntry(key,FALSE));
+          m->initMonitorSilence(sessionconfig->readBoolEntry(key,false));
           key = QString("MasterMode%1").arg(counter);
-          m->initMasterMode(sessionconfig->readBoolEntry(key,FALSE));
+          m->initMasterMode(sessionconfig->readBoolEntry(key,false));
           counter++;
         }
         m->activateSession( sessionconfig->readNumEntry("ActiveSession",0)+1 );

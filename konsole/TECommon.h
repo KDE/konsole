@@ -19,18 +19,6 @@
 
 #include <qcolor.h>
 
-#ifndef BOOL
-typedef int BOOL;
-#endif
-
-#ifndef FALSE
-#define FALSE 0
-#endif
-
-#ifndef TRUE
-#define TRUE 1
-#endif
-
 #ifndef UINT8
 typedef unsigned char UINT8;
 #endif
@@ -76,16 +64,16 @@ public:
   UINT8  b; // background color
   UINT8  r; // rendition
 public:
-  friend BOOL operator == (ca a, ca b);
-  friend BOOL operator != (ca a, ca b);
+  friend bool operator == (ca a, ca b);
+  friend bool operator != (ca a, ca b);
 };
 
-inline BOOL operator == (ca a, ca b)
+inline bool operator == (ca a, ca b)
 {
   return a.c == b.c && a.f == b.f && a.b == b.b && a.r == b.r;
 }
 
-inline BOOL operator != (ca a, ca b)
+inline bool operator != (ca a, ca b)
 {
   return a.c != b.c || a.f != b.f || a.b != b.b || a.r != b.r;
 }

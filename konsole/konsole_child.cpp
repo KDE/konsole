@@ -139,7 +139,7 @@ void KonsoleChild::slotRenameSession(TESession*, const QString &)
 
 void KonsoleChild::restoreAllListenToKeyPress()
 {
-  se->setListenToKeyPress(TRUE);
+  se->setListenToKeyPress(true);
 }
 
 void KonsoleChild::setColLin(int columns, int lines)
@@ -160,7 +160,7 @@ void KonsoleChild::changeColumns(int columns)
 
 KonsoleChild::~KonsoleChild()
 {
-  se->setConnect(FALSE);
+  se->setConnect(false);
   delete te;
   if (session_terminated) {
     delete se;
@@ -180,7 +180,7 @@ void KonsoleChild::configureRequest(TEWidget* te, int, int x, int y)
 
 void KonsoleChild::doneSession(TESession*,int)
 {
-  se->setConnect(FALSE);
+  se->setConnect(false);
   session_terminated=true;
   delete this;
 }

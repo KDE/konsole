@@ -30,7 +30,7 @@
 
 struct DECpar
 {
-  BOOL mode[MODE_total];
+  bool mode[MODE_total];
 };
 
 struct CharCodes
@@ -73,7 +73,7 @@ public slots:
 
 public:
     
-  BOOL getMode    (int m);
+  bool getMode    (int m);
 
   void setMode    (int m);
   void resetMode  (int m);
