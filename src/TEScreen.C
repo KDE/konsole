@@ -1037,7 +1037,7 @@ char *TEScreen::getSelText(const BOOL preserve_line_breaks)
 {
   char *m;  	// buffer to fill.
   int s,d; 	// source index, dest. index.
-  int hist_BR=loc(0,histLines);
+  int hist_BR=loc(0,histLines-1);
   int hY = sel_TL / columns ;
   int hX = sel_TL % columns;
   int eol;	// end of line
