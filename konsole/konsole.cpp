@@ -108,6 +108,7 @@ Time to start a requirement list.
 #include <kaccelmanager.h>
 
 #include <kaction.h>
+#include <kshell.h>
 #include <qlabel.h>
 #include <kpopupmenu.h>
 #include <klocale.h>
@@ -3068,17 +3069,7 @@ void Konsole::addSessionCommand(const QString &path)
   }
 
   exec = KRun::binaryName(exec, false);
-
-  if ( exec.startsWith( "~/" ) ) {        // ~/script
-    exec = exec.remove( 0, 1 );      // ~
-    exec = exec.prepend( QDir::homeDirPath() );
-  } else if ( exec.startsWith( "~" ) ) {  // ~user/script
-      // FIXME: What do when ~user != ~ ?
-      // We could check that user == current user... blah!
-    kdWarning()<<"Unable to handle Exec=~user/ (use ~/ or full path): "<<exec<<" in "<<path.latin1()<<endl;
-    return;    // ignore
-  }
-
+  exec = KShell::tildeExpand(exec);
   QString pexec = KGlobal::dirs()->findExe(exec);
 
   if (typ.isEmpty() || txt.isEmpty() || typ != "KonsoleApplication"
