@@ -12,7 +12,7 @@
 
 
 * currently working on
-  add configuration for function keys
+  add configuration for function keys.
   document broken keypad (It's a QT issue really)
   document VT100 keypad codes (doc/missing.keys)
 
@@ -21,9 +21,7 @@
 
 - when manipulating binary files, sometimes one
   screws up ones terminal settings.  xterm has
-  a convenient 'hard reset' menu choice. Further
-  sending signal from the menu to the client
-  would be nice to have.
+  a convenient 'hard reset' menu choice.
 
 - keep session open after client program termination.
   Useful for things like 'konsole -e ls'.

@@ -75,6 +75,7 @@ protected:
 private slots:
 
   void setSchema(int n);
+  void sendSignal(int n);
 
 private:
 

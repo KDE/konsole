@@ -359,8 +359,19 @@ void Konsole::makeMenu()
 //m_commands = new QPopupMenu;
 //connect(m_commands, SIGNAL(activated(int)), SLOT(newSession(int)));
 
+  QPopupMenu* m_signals = new QPopupMenu;
+  m_signals->insertItem( i18n("STOP"), 17 ); // FIXME: comes with 3 values
+  m_signals->insertItem( i18n("CONT"), 18 ); // FIXME: comes with 3 values
+  m_signals->insertItem( i18n("HUP"), 1 );
+  m_signals->insertItem( i18n("INT"), 2 );
+  m_signals->insertItem( i18n("TERM"), 15 );
+  m_signals->insertItem( i18n("KILL"), 9 );
+  connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
+
   m_sessions = new QPopupMenu;
   m_sessions->setCheckable(TRUE);
+  m_sessions->insertItem( i18n("Send Signal"), m_signals );
+  m_sessions->insertSeparator();
   connect(m_sessions, SIGNAL(activated(int)), SLOT(activateSession(int)));
 
   m_file = new QPopupMenu;
@@ -800,6 +811,11 @@ void Konsole::tecRef()
 //         make the drawEvent.
 //       - font, background image and color palette should be set in one go.
 
+void Konsole::sendSignal(int sn)
+{
+  if (se) se->kill(sn);
+}
+
 void Konsole::activateSession(int sn)
 {
   TESession* s = no2session.find(sn);
@@ -813,12 +829,12 @@ void Konsole::activateSession(int sn)
   if (!s) { fprintf(stderr,"session not found\n"); return; } // oops
   m_sessions->setItemChecked(sn,TRUE);
   if (s->schemaNo()!=curr_schema) {
-    setSchema(s->schemaNo());               //FIXME: creates flicker? Do only if differs
+    setSchema(s->schemaNo());             //FIXME: creates flicker? Do only if differs
     //Set Font. Now setConnect should do the appropriate action.
     //if the size has changed, a resize event (noticable to the application)
     //should happen. Else, we  could even start the application
-    s->setConnect(TRUE);                    // does a bulkShow (setImage)
-    setFont(s->fontNo());                   //FIXME: creates flicker?
+    s->setConnect(TRUE);                  // does a bulkShow (setImage)
+    setFont(s->fontNo());                 //FIXME: creates flicker?
                                           //FIXME: check here if we're still alife.
                                           //       if not, quit, otherwise,
                                           //       start propagating quit.

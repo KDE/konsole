@@ -296,8 +296,15 @@ void TEmulation::bulkEnd()
 void TEmulation::setConnect(bool c)
 {
   connected = c;
-  if ( connected) showBulk();
-  if (!connected) scr->clearSelection();
+  if ( connected)
+  {
+    onImageSizeChange(gui->Lines(), gui->Columns());
+    showBulk();
+  }
+  else
+  {
+    scr->clearSelection();
+  }
 }
 
 // ---------------------------------------------------------------------------
