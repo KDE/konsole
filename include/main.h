@@ -112,7 +112,7 @@ private:
   int         n_render;
   QString     pmPath; // pixmap path
   QString     dropText;
-
+  QSize       defaultSize;
   int         curr_schema; // current schema no
 
   QStrList args;
