@@ -332,6 +332,10 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
   dragInfo.state = diNone;
 
   setFocusPolicy( WheelFocus );
+
+  // We're just a big pixmap, no need to have a background 
+  // Speeds up redraws
+  setBackgroundMode(NoBackground);
 }
 
 //FIXME: make proper destructor
