@@ -1,6 +1,7 @@
 CONTRIBUTORS
-- Peter Silva <peter.silva@videotron.ca> (bugfixing, decent marking)
-- Dale M. Flaven <dflaven@netport.com> (bugfixing)
 - Matthias Ettrich <ettrich@kde.org> (rework of the session management
   and command line argument handling in main.C)
+- Dale M. Flaven <dflaven@netport.com> (bugfixing)
+- Lars Knoll <knoll@mpi-hd.mpg.de> (bugfixing)
+- Peter Silva <peter.silva@videotron.ca> (bugfixing, decent marking)
 - Kevin Street <street@iname.com> (FreeBSD port)

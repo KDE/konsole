@@ -28,6 +28,11 @@
 
 - i18n improvements?
 
+- write configuration utility at least for *.schema files.
+
+- evtl. handle *.kdelnk files using regular setup utilities
+  and a rpc client. Should become a parameter in any case.
+
 ! announce konsole-1.0 ------------------------------------
 
 - check for other codes/features (Linux console, xterm)
@@ -36,10 +41,30 @@
   - media copy (print)
   - double high, double width (vt100)
   - reverse wraparound?
+  - Linux console knows some extra tricks mapping graphical
+    characters.
+
 - use scalable font?
+
 - /dev/console?
+
+- selecting lines that wraps insert a '\n' in the middle of the
+  line when pasting. A related problem occures with resizing.
+
+- reintegrate kom (modem stuff).
+
 - fix non-numeric keypad (It's a QT issue really)
+
 - check for VT100 SETUP (doc/More/vt100-setup.txt)
+
 - VT100 keypad codes (doc/missing.keys, pass vttest section 5)
 - proper schema manager?
-- ...?
+
+- It might be nice to be able to resize the terminal emulation screen 
+  size and widget screen size independently, so that one could use a
+  132 column xterm emulation, showing only 60 columns on the screen,
+  with horizontal scrolling to follow the cursor.  Default would be
+  to have the two slaved like now, but one could use the menubar to 
+  disassociate them.  This would allow, for example, one to read reports 
+  that are too wide for the screen, or the use of normal tools on
+  very narrow screens. 
