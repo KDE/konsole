@@ -206,10 +206,8 @@ int main(int argc, char* argv[])
   has_noxft = !args->isSet("xft");
   TEWidget::setAntialias( !has_noxft );
 
-
   KApplication a;
   KImageIO::registerFormats(); // add io for additional image formats
-  a.dcopClient()->setQtBridgeEnabled(false);
   //2.1 secs
 
   QString title;
@@ -255,6 +253,9 @@ int main(int argc, char* argv[])
   wname = qtargs->getOption("name");
   full_script = args->isSet("script");
   auto_close = args->isSet("close");
+
+  if (!full_script)
+	a.dcopClient()->setQtBridgeEnabled(false);
 
   QCString type = "";
 
