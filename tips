@@ -1,25 +1,25 @@
 <tip category="Konsole">
 <html>
-<p>...that you can start new Konsole sessions by pressing the "New" button in Konsole toolbar?
+<p>...that you can start new Konsole sessions by pressing the "New" button in the Konsole toolbar?
 </html>
 </tip>
 
 <tip category="Konsole">
 <html>
-<p>...that pressing and holding the "New" button in toolbar will allow you to
+<p>...that pressing and holding the "New" button in the Konsole toolbar will allow you to
 select what session type the "New" button starts?
 </html>
 </tip>
 
 <tip category="Konsole">
 <html>
-<p>...that Ctrl+Alt+n shortcut will do the same as clicking the "New" button in toolbar?
+<p>...that pressing Ctrl+Alt+N is the same as clicking the "New" button in the toolbar?
 </html>
 </tip>
 
 <tip category="Konsole|Keyboard">
 <html>
-<p>...that you can cycle through the Konsole sessions by holding the Shift key and
+<p>...that you can cycle through the Konsole sessions by holding down the Shift key and
 pressing the Left or Right Arrow keys?
 </html>
 </tip>
@@ -50,13 +50,13 @@ in the Konsole toolbar?
 
 <tip category="Konsole|Keyboard">
 <html>
-<p>...that you can activate the menu with Ctrl+Alt+m shortcut?
+<p>...that you can activate the menu with the Ctrl+Alt+M shortcut?
 </html>
 </tip>
 
 <tip category="Konsole|Keyboard">
 <html>
-<p>...that you can rename your current Konsole session with Ctrl+Alt+S shortcut?
+<p>...that you can rename your current Konsole session with the Ctrl+Alt+S shortcut?
 </html>
 </tip>
 
@@ -78,7 +78,7 @@ which you can find under "Settings/Configure Konsole..."?
 <tip category="Konsole|Keyboard">
 <html>
 <p>...that you can reorder the session buttons in the toolbar with "View" menu
-commands or by holding the Shift and Ctrl keys and pressing the Left or Right 
+commands or by holding down the Shift and Ctrl keys and pressing the Left or Right 
 Arrow keys?
 </p>
 </html>
@@ -86,28 +86,28 @@ Arrow keys?
 
 <tip category="Konsole|Keyboard">
 <html>
-<p>...that you can scroll pagewise in the history by holding the Shift key 
+<p>...that you can scroll pagewise in the history by holding down the Shift key 
 and pressing the Page Up or Page Down keys?
 </html>
 </tip>
 
 <tip category="Konsole|Keyboard">
 <html>
-<p>...that you can scroll linewise in the history by holding the Shift key 
+<p>...that you can scroll linewise in the history by holding down the Shift key 
 and pressing the Up or Down Arrow keys?
 </html>
 </tip>
 
 <tip category="Konsole|Keyboard">
 <html>
-<p>...that you can insert the clipboard by holding the Shift key and 
+<p>...that you can insert the clipboard by holding down the Shift key and 
 pressing the Insert key?
 </html>
 </tip>
 
 <tip category="Konsole|Keyboard">
 <html>
-<p>...that you can insert the X selection by holding the Shift and 
+<p>...that you can insert the X selection by holding down the Shift and 
 Ctrl keys and pressing the Insert key?
 </html>
 </tip>
@@ -120,15 +120,15 @@ Ctrl keys and pressing the Insert key?
 
 <tip category="Konsole">
 <html>
-<p>...that you can set the length of history to "unlimited"? </p>
+<p>...that you can set the history length to "unlimited"? </p>
 <p>Just set it to 0 lines.
 </html>
 </tip>
 
 <tip category="Konsole">
 <html>
-<p>...that pressing Ctrl while pasting selection with middle mouse
-button will send selection buffer instead of pasting it?
+<p>...that pressing Ctrl while pasting the selection with the middle mouse
+button will send the selection buffer instead of pasting it?
 </html>
 </tip>
 
@@ -146,14 +146,14 @@ button will send selection buffer instead of pasting it?
 
 <tip category="Konsole">
 <html>
-<p>...that when a program evaluates right mouse button you can still 
+<p>...that when a program evaluates the right mouse button you can still 
 get the right mouse button pop-up menu while pressing the Shift key?
 </html>
 </tip>
 
 <tip category="Konsole">
 <html>
-<p>...that when a program evaluates left mouse button you can still select 
+<p>...that when a program evaluates the left mouse button you can still select 
 text while pressing the Shift key?
 </html>
 </tip>
