@@ -1548,9 +1548,10 @@ void Konsole::changeColumns(int columns)
 }
 
 void Konsole::slotSelectSize() {
+    int item = selectSize->currentItem();
     if (b_fullscreen)
        slotToggleFullscreen();
-    int item = selectSize->currentItem();
+
     switch (item) {
     case 0: setColLin(40,15); break;
     case 1: setColLin(80,24); break;
