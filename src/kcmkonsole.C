@@ -194,14 +194,11 @@ Tripel Tripel::linear(const Tripel &p0, const Tripel &p1, float f)
 
 Tripel Tripel::togray(float f)
 {
-  // I've used the physiological luminescense factors here.
-  // They appear not right with the phosphor of my monitor.
-  // May be i should have set them all to 1/3, but i want
-  // to get different sorts of gray for the colors also.
-  // If your' tuning, note that they have to total to 1.
-  Tripel rp = Tripel::linear(Tripel(0.37*r),Tripel(r,0,0),f);
-  Tripel bp = Tripel::linear(Tripel(0.39*b),Tripel(0,b,0),f);
-  Tripel gp = Tripel::linear(Tripel(0.24*g),Tripel(0,0,g),f);
+  // If your are tuning the luminescense factors to match the
+  // phosphor of your monitor, note that they have to total to 1.
+  Tripel rp = Tripel::linear(Tripel(0.34*r),Tripel(r,0,0),f);
+  Tripel bp = Tripel::linear(Tripel(0.16*b),Tripel(0,b,0),f);
+  Tripel gp = Tripel::linear(Tripel(0.50*g),Tripel(0,0,g),f);
   return Tripel::add( rp, Tripel::add( bp, gp ));
 }
 

@@ -55,6 +55,7 @@ public:
   void onRcvByte(int);
   void reset();
   void resetTerminal();
+  void sendString(const char *);
 
 public:
     
@@ -91,8 +92,6 @@ private:
   void XtermHack();
 
   // 
-
-  void sendString(const char *);
 
   void reportTerminalType();
   void reportStatus();

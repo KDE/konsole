@@ -55,6 +55,8 @@ public:
   virtual void setMode  (int) = NULL;
   virtual void resetMode(int) = NULL;
 
+  virtual void sendString(const char*) = NULL;
+
 public:
 
   virtual void setConnect(bool r);
@@ -62,10 +64,6 @@ public:
 protected slots: // triggered by timer
 
   void showBulk();
-
-protected:
-
-  void sendString(const char*);
 
 protected:
 

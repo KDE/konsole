@@ -88,11 +88,17 @@ TEDemo::TEDemo(const char* args[], int login_shell) : KTMainWindow()
   te = new TEWidget(this);
 
 
-  // create applications ////////////////////////////////////////////////////
+  // create applications /////////////////////////////////////////////////////
 
   setView(te,FALSE);
   makeMenu();
   makeStatusbar();
+
+  // Init DnD: Set up drop zone and drop handler /////////////////////////////
+
+  dropZone = new KDNDDropZone( this, DndURL );
+  connect( dropZone, SIGNAL( dropAction( KDNDDropZone* )),
+                     SLOT( onDrop( KDNDDropZone*)));
 
   // load session commands ///////////////////////////////////////////////////
 
@@ -151,6 +157,36 @@ void TEDemo::setColLin(int columns, int lines)
 TEDemo::~TEDemo()
 {
 //FIXME: close all session properly and clean up
+}
+
+/* ------------------------------------------------------------------------- */
+/*                                                                           */
+/*                                                                           */
+/* ------------------------------------------------------------------------- */
+
+void TEDemo::onDrop( KDNDDropZone* _zone )
+{
+  QStrList strlist;
+  KURL *url;
+  QString str = "";
+  int file_count = 0;
+  char *p;
+
+  strlist = _zone->getURLList();
+  if (strlist.count()){
+    p = strlist.first();
+    while(p != 0) {
+      url = new KURL( p );
+      if(file_count++ > 0)
+	str += " ";
+      str += url->path();
+      delete url;
+      p = strlist.next();
+    }
+//    send_string((unsigned char *)str.data(), str.length());
+printf("drop: >%s<\n",str.data());
+se->getEmulation()->sendString(str.data());
+  }
 }
 
 /* ------------------------------------------------------------------------- */

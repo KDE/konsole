@@ -1,3 +1,9 @@
+30 Nov 1998
+- added DND support
+26 Nov 1998
+- added xterm-83 patch, vim.schema
+20 Nov 1998
+- some works on integrating documentation
 14 Nov 1998 Peter Silva <peter.silva@kde.org>
 - added -vt_sz command line option.
 - added Ctrl modifier for text selection without line breaks.

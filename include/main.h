@@ -56,6 +56,7 @@ private slots:
   void notifySize(int,int);
   void setHeader();
   void changeTitle(int,char*s);
+  void onDrop( KDNDDropZone* _zone );
     
 protected:
 
@@ -87,6 +88,7 @@ private:
 
   KMenuBar*   menubar;
   KStatusBar* statusbar;
+  KDNDDropZone  *dropZone;
 
   QPopupMenu* m_commands;
   QPopupMenu* m_sessions;

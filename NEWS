@@ -6,6 +6,7 @@ New in 0.9.8
 - configurable new sesion command (see /opt/kde/share/apps/konsole/*.kdelnk)
 - minor bugs fixed
 - Artistic License
+- DND support
 
 New in 0.8.9
 
