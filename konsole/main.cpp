@@ -200,8 +200,8 @@ int main(int argc, char* argv[])
   QString title;
   if(args->isSet("T")) {
     title = QFile::decodeName(args->getOption("T"));
-
   }
+
   QString term = QString::fromLatin1(args->getOption("tn"));
   login_shell = args->isSet("ls");
  
@@ -222,11 +222,6 @@ int main(int argc, char* argv[])
      {
         title = QFile::decodeName(shell);  // program executed in the title bar
      }
-  }
-
-  if (title.isEmpty())
-  {
-     title = kapp->caption(); // `konsole' or -caption
   }
 
   QCString sz = "";

@@ -215,7 +215,6 @@ DCOPObject( "konsole" )
 ,b_warnQuit(false)
 ,m_histSize(DEFAULT_HISTORY_SIZE)
 ,b_histEnabled(true)
-,s_title(_title)
 {
   isRestored = b_inRestore;
   wasRestored = false;
@@ -288,7 +287,7 @@ DCOPObject( "konsole" )
   // activate and run first session //////////////////////////////////////////
   // FIXME: this slows it down if --type is given, but prevents a crash (malte)
   //KONSOLEDEBUG << "Konsole pgm: " << _program << endl;
-  se = newSession(co, _program, _args, _term);
+  se = newSession(co, _program, _args, _term, QString::null, _title);
   if (b_histEnabled && m_histSize)
     se->setHistory(HistoryTypeBuffer(m_histSize));
   else if (b_histEnabled && !m_histSize)
@@ -1597,13 +1596,13 @@ void Konsole::newSession(const QString &type)
   newSession(co);
 }
 
-TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &args, const QString &_term,const QString &_icon)
+TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &args, const QString &_term,const QString &_icon,const QString &_title)
 {
   QString emu = "xterm";
   QString icon = "openterm";
   QString key;
   QString sch = s_kconfigSchema;
-  QString txt = s_title;
+  QString txt;
   unsigned int     fno = n_defaultFont;
   QStrList cmdArgs;
 
@@ -1612,7 +1611,7 @@ TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrLis
      emu = co->readEntry("Term", emu);
      key = co->readEntry("KeyTab", key);
      sch = co->readEntry("Schema", sch);
-     txt = co->readEntry("Name", txt);
+     txt = co->readEntry("Name");
      fno = co->readUnsignedNumEntry("Font", fno);
      icon = co->readEntry("Icon", icon);
   }
@@ -1622,6 +1621,9 @@ TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrLis
 
   if (!_icon.isEmpty())
      icon = _icon;
+
+  if (!_title.isEmpty())
+     txt = _title;
 
   if (!program.isEmpty()) {
      cmdArgs = args;

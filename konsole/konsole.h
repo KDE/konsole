@@ -151,7 +151,7 @@ private slots:
 
 private:
   KSimpleConfig *defaultSession();
-  TESession *newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(), const QString &_term = QString::null, const QString &_icon = QString::null);
+  TESession *newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(), const QString &_term = QString::null, const QString &_icon = QString::null, const QString &_title = QString::null);
   void readProperties(KConfig *config, const QString &schema);
   void applySettingsToGUI();
   void makeBasicGUI();
@@ -253,10 +253,6 @@ private:
 
   unsigned int m_histSize;
   bool         b_histEnabled:1;
-
-public:
-
-  QString     s_title;
 };
 
 class QSpinBox;
