@@ -88,6 +88,9 @@ Time to start a requirement list.
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <kfiledialog.h>
+#include <qtextstream.h>
+
 #include <kfontdialog.h>
 #include <kglobal.h>
 #include <kstddirs.h>
@@ -199,6 +202,7 @@ Konsole::Konsole(const char* name, const QString& _program,
 ,selectScrollbar(0)
 ,selectBell(0)
 ,m_clearHistory(0)
+,m_saveHistory(0)
 ,m_moveSessionLeft(0)
 ,m_moveSessionRight(0)
 ,warnQuit(0)
@@ -366,6 +370,11 @@ void Konsole::makeGUI()
                                        SLOT(slotClearHistory()), this);
    m_clearHistory->setEnabled( se->history().isOn() );
    m_clearHistory->plug(m_sessions);
+
+   m_saveHistory = new KAction(i18n("S&ave History As..."), "filesave", 0, this,
+                                       SLOT(slotSaveHistory()), this);
+   m_saveHistory->setEnabled( se->history().isOn() );
+   m_saveHistory->plug(m_sessions);
 
    m_moveSessionLeft = new KAction(i18n("&Move Session Left"), "back", 0, this,
                                         SLOT(moveSessionLeft()), this);
@@ -1434,6 +1443,7 @@ void Konsole::activateSession(TESession *s)
   updateKeytabMenu(); // act. the keytab for this session
   if (m_clearHistory) {
      m_clearHistory->setEnabled( se->history().isOn() );
+     m_saveHistory->setEnabled( se->history().isOn() );
      sessions.find(se);
      int position=sessions.at();
      m_moveSessionLeft->setEnabled(position>0);
@@ -1976,6 +1986,7 @@ void Konsole::slotHistoryType()
   HistoryTypeDialog dlg(se->history(), m_histSize, this);
   if (dlg.exec()) {
     m_clearHistory->setEnabled( dlg.isOn() );
+    m_saveHistory->setEnabled( dlg.isOn() );
     if (dlg.isOn()) {
       if (dlg.nbLines() > 0) {
          se->setHistory(HistoryTypeBuffer(dlg.nbLines()));
@@ -2003,6 +2014,41 @@ void Konsole::slotHistoryType()
 void Konsole::slotClearHistory()
 {
   clearSessionHistory(*se);
+}
+
+void Konsole::slotSaveHistory()
+{
+  KURL url = KFileDialog::getSaveURL(QString::null, QString::null, 0L, i18n("Save History..."));
+
+  if ( !url.isLocalFile() ) {
+    KMessageBox::sorry(this, i18n("This is not a local file.\n"));
+    return;
+  }
+
+  int query = KMessageBox::Yes;
+  QFileInfo info;
+  QString name( url.path() );
+  info.setFile( name );
+  if( info.exists() )
+    query = KMessageBox::warningYesNoCancel( this,
+      i18n( "A file with this name already exists.\nDo you want to overwrite it?" ) );
+
+  if (query==KMessageBox::Yes) {
+    QFile file(url.path());
+    if(!file.open(IO_WriteOnly)) {
+      KMessageBox::sorry(this, i18n("Unable to write to file."));
+      return;
+    }
+
+    QTextStream textStream(&file);
+    sessions.current()->getEmulation()->streamHistory( &textStream );
+
+    file.close();
+    if(file.status()) {
+      KMessageBox::sorry(this, i18n("Could not save history."));
+      return;
+    }
+  }
 }
 
 //////////////////////////////////////////////////////////////////////

@@ -1246,6 +1246,17 @@ FIXME:
 
 */
 
+QString TEScreen::getHistory() {
+  sel_begin = 0;
+  sel_BR = sel_begin;
+  sel_TL = sel_begin;
+  setSelExtentXY(columns-1,lines-1);
+  QString tmp=getSelText(true);
+  while (tmp.at(tmp.length()-2).unicode()==10 && tmp.at(tmp.length()-1).unicode()==10)
+    tmp.truncate(tmp.length()-1);
+  return tmp;
+}
+
 void TEScreen::addHistLine()
 {
   assert(hasScroll() || histCursor == 0);

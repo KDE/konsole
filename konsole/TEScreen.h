@@ -154,6 +154,7 @@ public: // these are all `Screen' operations
     void setSelExtentXY(const int x, const int y);
     void clearSelection();
     QString getSelText(const BOOL preserve_line_breaks);
+    QString getHistory();
 
     void checkSelection(int from, int to);
 

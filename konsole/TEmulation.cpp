@@ -289,6 +289,10 @@ void TEmulation::clearSelection() {
   showBulk();
 }
 
+void TEmulation::streamHistory(QTextStream* stream) {
+  *stream << scr->getHistory();
+}
+
 // Refreshing -------------------------------------------------------------- --
 
 #define BULK_TIMEOUT 20

@@ -117,6 +117,7 @@ private slots:
   void slotClearAllSessionHistories();
   void slotHistoryType();
   void slotClearHistory();
+  void slotSaveHistory();
   void slotWordSeps();
   void slotSelectBell();
   void slotSelectSize();
@@ -183,6 +184,7 @@ private:
   KSelectAction *selectLineSpacing;
 
   KAction       *m_clearHistory;
+  KAction       *m_saveHistory;
   KAction       *m_moveSessionLeft;
   KAction       *m_moveSessionRight;
 

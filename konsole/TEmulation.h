@@ -31,6 +31,7 @@ public:
 public:
   virtual void setHistory(const HistoryType&);
   virtual const HistoryType& history();
+  virtual void streamHistory(QTextStream*);
 
 public slots: // signals incoming from TEWidget
 
