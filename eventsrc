@@ -35,6 +35,7 @@ default_presentation=1
 
 [BellInvisible]
 Name=Bell in non-visible session
+Name[cy]=Cloch mewn sesiwn anweledig
 Name[da]=Klokke i ikke-synlig session
 Name[el]=Μεγαφωνάκι στην μη ορατή σύνοδο
 Name[es]=Timbre en sesión invisible
@@ -45,6 +46,7 @@ Name[sr]=Zvonce u nevidljivoj sesije
 Name[sv]=Ljudsignal i osynlig session
 Name[th]=ออดบนเซสชันที่มองไม่เห็น
 Comment=Bell emitted within a non-visible session
+Comment[cy]=Gollyngwyd cloch mewn sesiwn anweledig
 Comment[da]=Klokke brugt indenfor en ikke-synlig session
 Comment[el]=Το μεγαφωνάκι ενεργοποιήθηκε σε μία μη ορατή σύνοδο
 Comment[es]=Suena el timbre incluso en un sesión visible
@@ -106,6 +108,7 @@ default_presentation=16
 
 [Finished]
 Name=Session finished with non-zero status
+Name[cy]=Gorffenodd y sesiwn efo cyflwr di-sero
 Name[da]=Session afsluttet med ikke-nul status
 Name[el]=Η σύνοδος τελείωσε με μη μηδενική κατάσταση
 Name[es]=Sesión terminada con estado no cero
@@ -116,6 +119,7 @@ Name[sr]=Sesija je završena sa ne-nula statusom
 Name[sv]=Sessionen klar med status skild från noll
 Name[th]=เซสชันจบการทำงานได้สถานะไม่ใช่ค่าศูนย์
 Comment=A session has exited with non-zero status
+Comment[cy]=Terfynnodd sesiwn efo cyflwr di-sero
 Comment[da]=En session er gået ud med ikke-nul status
 Comment[el]=Μια σύνοδος τελείωσε με μη μηδενική κατάσταση
 Comment[es]=Ha terminado una sesión con estado no cero
