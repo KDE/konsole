@@ -1994,15 +1994,15 @@ void Konsole::slotConfigureKeys()
   if (!ctrlKeys.isEmpty())
   {
     ctrlKeys.sort();
-    KMessageBox::informationList( this, i18n( "You have chosen one or more Ctrl+<key> combinations to be used as shortcut. "
-                                               "As a result such key combinations will no longer be passed to the command shell "
+    KMessageBox::informationList( this, i18n( "You have chosen one or more Ctrl+<key> combinations to be used as shortcuts. "
+                                               "As a result these key combinations will no longer be passed to the command shell "
                                                "or to applications that run inside Konsole. "
                                                "This can have the unintended consequence that functionality that would otherwise be "
                                                "bound to these key combinations is no longer accessible."
                                                "\n\n"
                                                "You may wish to reconsider your choice of keys and use Alt+Ctrl+<key> or Ctrl+Shift+<key> instead."
                                                "\n\n"
-                                               "You are currently using the following Ctrl-<key> combinations:" ),
+                                               "You are currently using the following Ctrl+<key> combinations:" ),
                                                ctrlKeys,
                                                i18n( "Choice Of Shortcut Keys" ), 0);
   }
