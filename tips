@@ -1,0 +1,184 @@
+<tip category="Konsole">
+<html>
+<p>...that you can start new Konsole sessions by pressing the "New" button in Konsole toolbar?
+</html>
+</tip>
+
+<tip category="Konsole">
+<html>
+<p>...that pressing and holding the "New" button in toolbar will allow you to
+select what session type "New" button starts?
+</html>
+</tip>
+
+<tip category="Konsole">
+<html>
+<p>...that while holding Ctrl and Alt keys and pressing "n" will do the same as clicking
+the "New" button in toolbar?
+</html>
+</tip>
+
+<tip category="Konsole|Keyboard">
+<html>
+<p>...that you can cycle through the Konsole sessions by holding the Shift key and
+pressing the Left or Right Arrow keys?
+</html>
+</tip>
+
+<tip category="Konsole">
+<html>
+<p>...that you can get a 'Linux console-like' terminal? 
+<p>Deactivate the Konsole's menubar, toolbar and scrollbar, select the Linux font
+and the Linux Colors schema and apply the full-screen mode. You might also then
+want to set the panel to auto-hide.
+</html>
+</tip>
+
+<tip category="Konsole">
+<html>
+<p>...that you can rename your Konsole sessions by clicking with the right mouse
+button and selecting "Rename session"? The change will be reflected in the
+Konsole toolbar, making it easier to remember the content of the session.
+</html>
+</tip>
+
+<tip category="Konsole">
+<html>
+<p>...that you can rename a Konsole session by double-clicking it's button
+in the Konsole toolbar?
+</html>
+</tip>
+
+<tip category="Konsole|Keyboard">
+<html>
+<p>...that you can activate the menu with Ctrl+Alt+m shortcut?
+</html>
+</tip>
+
+<tip category="Konsole|Keyboard">
+<html>
+<p>...that you can rename your current Konsole session with Ctrl+Alt+s shortcut?
+</html>
+</tip>
+
+<tip category="Konsole">
+<html>
+<p>...that you can create your own session types by using the session
+type editor that you can find in the KDE Control Center?
+</html>
+</tip>
+
+<tip category="Konsole">
+<html>
+<p>...that you can create your own color schemes by using the schema editor
+that you can find in the KDE Control Center?
+</p>
+</html>
+</tip>
+
+<tip category="Konsole|Keyboard">
+<html>
+<p>...that you can reorder the session buttons in the toolbar with "View" menu
+entries or by holding the Shift and Ctrl keys and pressing the Left or Right 
+Arrow keys?
+</p>
+</html>
+</tip>
+
+<tip category="Konsole|Keyboard">
+<html>
+<p>...that you can scroll pagewise in the history by holding the Shift key 
+and pressing the Page Up or Down keys?
+</html>
+</tip>
+
+<tip category="Konsole|Keyboard">
+<html>
+<p>...that you can scroll linewise in the history by holding the Shift key 
+and pressing the Up or Down Arrow keys?
+</html>
+</tip>
+
+<tip category="Konsole|Keyboard">
+<html>
+<p>...that you can insert the clipboard by holding the Shift key and 
+pressing the Insert key?
+</html>
+</tip>
+
+<tip category="Konsole|Keyboard">
+<html>
+<p>...that you can insert the X selection by holding the Shift and 
+Ctrl keys and pressing the Insert key?
+</html>
+</tip>
+
+<tip category="Konsole">
+<html>
+<p>...that you can drag &amp; drop selected text?
+</html>
+</tip>
+
+<tip category="Konsole">
+<html>
+<p>...that you can set the length of history to "unlimited"? </p>
+<p>Just set it to 0 lines.
+</html>
+</tip>
+
+<tip category="Konsole">
+<html>
+<p>...that pressing Ctrl while pasting selection with middle mouse
+button will send selection buffer instead of pasting it?
+</html>
+</tip>
+
+<tip category="Konsole">
+<html>
+<p>...that you can turn off the terminal size hint in the Konsole
+module in the KDE Control Center?
+</html>
+</tip>
+
+<tip category="Konsole">
+<html>
+<p>...that pressing Ctrl while selecting text will let Konsole ignore line breaks?
+</html>
+</tip>
+
+<tip category="Konsole">
+<html>
+<p>...that when a program evaluates right mouse button you can still 
+get the right mouse button pop-up menu while pressing the Shift key?
+</html>
+</tip>
+
+<tip category="Konsole">
+<html>
+<p>...that when program evaluates left mouse button you can still select 
+text while pressing the Shift key?
+</html>
+</tip>
+
+<tip category="Konsole">
+<html>
+<p>...that you can let Konsole set the current directory as window title?
+For Bash, put 'export PS1=$PS1"\[\e]0;\H:\w\a\]' in your ~/.bashrc .
+</html>
+</tip>
+
+<tip category="Konsole">
+<html>
+<p>...that double-clicking will select a whole word?
+<p>When you don't release the mouse button after the second click you 
+can extend your selection by additional words when moving the mouse.
+</html>
+</tip>
+
+<tip category="Konsole">
+<html>
+<p>...that triple-clicking will select a whole line?
+<p>When you don't release the mouse button after the third click you 
+can extend your selection by additional lines when moving the mouse.
+</html>
+</tip>
