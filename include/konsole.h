@@ -51,6 +51,7 @@ public:
   void setFullScreen(bool on);
 
 private slots:
+  void slotBackgroundChanged(int desk);
   void configureRequest(TEWidget*,int,int,int);
   void activateSession();
   void activateSession(TESession*);
@@ -171,6 +172,8 @@ private:
 
   bool        b_fullscreen;
   QRect       _saveGeometry;
+
+  bool        alreadyNoticedBackgroundChange_;
 
 public:
 

@@ -97,6 +97,7 @@ Time to start a requirement list.
 #include <klineeditdlg.h>
 #include <kdebug.h>
 #include <kapp.h>
+#include <kipc.h>
 
 #include <qfontmetrics.h>
 
@@ -154,8 +155,19 @@ const char *fonts[] = {
 
 Konsole::Konsole(const char* name,
                  const char* _pgm, QStrList & _args,
-                 int histon, bool toolbaron) : KMainWindow(0, name), pgm(_pgm), args(_args)
+                 int histon, bool toolbaron) : KMainWindow(0, name), pgm(_pgm), args(_args),
+                 alreadyNoticedBackgroundChange_(false)
 {
+  kapp->addKipcEventMask(KIPC::BackgroundChanged);
+
+  connect
+    (
+     kapp,
+     SIGNAL(backgroundChanged(int)),
+     this,
+     SLOT(slotBackgroundChanged(int))
+    );
+
   no2command.setAutoDelete(true);
   session_no = 0;
   cmd_serial = 0;
@@ -1322,6 +1334,19 @@ void Konsole::slotWordSeps() {
   if (dlg.exec()) {
     s_word_seps = dlg.text();
     te->setWordCharacters(s_word_seps);
+  }
+}
+
+void Konsole::slotBackgroundChanged(int desk)
+{
+  kdDebug() << "Konsole::slotBackgroundChanged(" << desk << ")\n";
+
+  // We only do this once, because KRootPixmap should handle it later.
+
+  if (!alreadyNoticedBackgroundChange_ && (0 != rootxpm))
+  {
+    alreadyNoticedBackgroundChange_ = true;
+    rootxpm->repaint(true);
   }
 }
 
