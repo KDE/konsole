@@ -11,12 +11,11 @@ right mouse button while holding down the control key).
 To get proper support of graphic characters, you need a linux console
 font being installed. Proceed as follows:
 
-  cp konsole/other/linux8x16.pcf.gz /usr/X11R6/lib/X11/fonts/misc
-  mkfontdir /usr/X11R6/lib/X11/fonts/misc
-
-(For some strange reason i had to restart my X server too, to make
- it aware of the new font. Try "xfd -fn linux8x16" to see if the
- font is available.)
+|
+|     cp konsole/other/linux8x16.pcf.gz /usr/X11R6/lib/X11/fonts/misc
+|     mkfontdir /usr/X11R6/lib/X11/fonts/misc
+|     xset fp rehash
+|
 
 Depending on the application, you might need to switch to dark
 background, for the best results. (Konsole does this automatically
