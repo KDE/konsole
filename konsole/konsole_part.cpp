@@ -190,6 +190,7 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
 
   setWidget(te);
+  te->setFocus();
   connect( te,SIGNAL(configureRequest(TEWidget*,int,int,int)),
            this,SLOT(configureRequest(TEWidget*,int,int,int)) );
 
