@@ -168,7 +168,6 @@ const char *fonts[] = {
 
 #define DEFAULT_HISTORY_SIZE 1000
 
-
 Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, int histon,
                  bool menubaron, bool toolbaron, bool frameon, bool scrollbaron, const QString &_icon,
                  const QString &_title, QCString type, const QString &_term, bool b_inRestore,
@@ -355,6 +354,12 @@ void Konsole::showTipOnStart()
 /*  Make menu                                                                */
 /* ------------------------------------------------------------------------- */
 
+// Be carefull !!
+//this function consumes a lot of time, that's why it is called delayed on demand.
+//be careful not to introduce function calls which lead to the execution of this
+//function when starting konsole
+//be careful not to access stuff which is created in this function before this function was called !
+//you can check this using m_menuCreated, aleXXX
 void Konsole::makeGUI()
 {
    if (m_menuCreated) return;
@@ -382,7 +387,6 @@ void Konsole::makeGUI()
        }
 
    KActionCollection* actions = actionCollection();
-   m_shortcuts = new KActionCollection(this);
 
    // Send Signal Menu -------------------------------------------------------------
    m_signals = new KPopupMenu(this);
@@ -679,8 +683,6 @@ void Konsole::makeGUI()
                this, SLOT(prevSession()), m_shortcuts, "previous_session");
    new KAction(i18n("Next Session"), QApplication::reverseLayout() ? Qt::SHIFT+Qt::Key_Left : Qt::SHIFT+Qt::Key_Right,
                this, SLOT(nextSession()), m_shortcuts, "next_session");
-   new KAction(i18n("New Session"), Qt::CTRL+Qt::ALT+Qt::Key_N, this, SLOT(newSession()), m_shortcuts, "new_session");
-   new KAction(i18n("Activate Menu"), Qt::CTRL+Qt::ALT+Qt::Key_M, this, SLOT(activateMenu()), m_shortcuts, "activate_menu");
 
    new KAction(i18n("List Sessions"), 0, this, SLOT(listSessions()), m_shortcuts, "list_sessions");
    new KAction(i18n("Switch to Session 1"), 0, this, SLOT(switchToSession1()), m_shortcuts, "switch_to_session_1");
@@ -749,6 +751,10 @@ void Konsole::makeBasicGUI()
   menubar->insertItem(i18n("Bookmarks"), m_bookmarks);
   menubar->insertItem(i18n("Settings"), m_options);
   menubar->insertItem(i18n("Help"), m_help);
+
+   m_shortcuts = new KActionCollection(this);
+  new KAction(i18n("New Session"), Qt::CTRL+Qt::ALT+Qt::Key_N, this, SLOT(newSession()), m_shortcuts, "new_session");
+  new KAction(i18n("Activate Menu"), Qt::CTRL+Qt::ALT+Qt::Key_M, this, SLOT(activateMenu()), m_shortcuts, "activate_menu");
 };
 
 /**
@@ -1528,7 +1534,7 @@ void Konsole::runSession(TESession* s)
 
 void Konsole::addSession(TESession* s)
 {
-  QString newTitle = s->Title();
+   QString newTitle = s->Title();
 
   bool nameOk;
   int count = 1;
@@ -1578,19 +1584,20 @@ void Konsole::addSession(TESession* s)
   action2session.insert(ra, s);
   session2action.insert(s,ra);
   sessions.append(s);
-
   if (sessions.count()>1) {
-    if (!m_menuCreated)
-      makeGUI();
-    m_detachSession->setEnabled(true);
+     if (!m_menuCreated)
+        makeGUI();
+     m_detachSession->setEnabled(true);
   }
 
   if (m_menuCreated)
      ra->plug(m_view);
 
   int button_id=ra->itemId( ra->plug(toolBar()) );
+
   KToolBarButton* ktb=toolBar()->getButton(button_id);
   connect(ktb,SIGNAL(doubleClicked(int)), this,SLOT(slotRenameSession(int)));
+
   session2button.insert(s,ktb);
 }
 
