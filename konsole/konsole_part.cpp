@@ -459,7 +459,8 @@ void konsolePart::makeGUI()
 
      // Save Settings
      m_options->insertSeparator();
-     KAction *saveSettings = KStdAction::saveOptions(this, SLOT(saveProperties()), actions);
+     KAction *saveSettings = new KAction(i18n("&Save as Default"), "filesave", 0, this, 
+                    SLOT(saveProperties()), actions, "save_default");
      saveSettings->plug(m_options);
      if (KGlobalSettings::insertTearOffHandle())
         m_options->insertTearOffHandle();
