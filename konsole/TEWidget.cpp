@@ -531,7 +531,7 @@ HCNT("setImage");
   int lins = QMIN(this->lines,  QMAX(0,lines  ));
   int cols = QMIN(this->columns,QMAX(0,columns));
   QChar *disstrU = new QChar[cols];
-  char *dirtyMask = malloc(cols+2); 
+  char *dirtyMask = (char *) malloc(cols+2); 
 
 //{ static int cnt = 0; printf("setImage %d\n",cnt++); }
   for (y = 0; y < lins; y++)
