@@ -73,6 +73,7 @@ GeneralPage::GeneralPage(QWidget* parent) : PageFrame(parent)
   bigWidget->setAlignment( AlignCenter  );
   bigWidget->setBackgroundMode(PaletteBase);
 //bigWidget->setMinimumHeight(400);
+ 
   Contents
   ( i18n( 
     "General Konsole settings"

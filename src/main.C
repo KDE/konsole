@@ -49,6 +49,8 @@
 #include <sys/wait.h>
 #include <assert.h>
 
+#include <locale.h>
+
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
 #define MIN(A,B) ((A)>(B)?(B):(A))
@@ -729,6 +731,7 @@ static void usage()
    " -sl <number> ........... Save number lines in scroll-back buffer\n"
    " -vt_bg Colors .......... Set background color of the terminal window\n"
    " -vt_fg Color ........... Set foreground color of the terminal window\n"
+   " -vt_sz CCxLL ........... terminal size in columns x lines \n"
    "\n"
    "Other options due to man:X(1x), Qt and KDE, among them:\n"
    "\n"
@@ -754,10 +757,12 @@ int main(int argc, char* argv[])
 
   QString fg = "";
   QString bg = "";
+  QString sz = "";
 
   const char** eargs = (const char**)malloc(3*sizeof(char*));
   eargs[0] = shell; eargs[1] = NULL;
 
+  setlocale( LC_ALL, "" );
   KApplication a(argc, argv, PACKAGE);
 
   for (int i = 1; i < argc; i++)
@@ -772,6 +777,7 @@ int main(int argc, char* argv[])
     }
     if (!strcmp(argv[i],"-vt_fg") && i+1 < argc) fg = argv[++i];
     if (!strcmp(argv[i],"-vt_bg") && i+1 < argc) bg = argv[++i];
+    if (!strcmp(argv[i],"-vt_sz") && i+1 < argc) sz = argv[++i];
     if (!strcmp(argv[i],"-sl") && i+1 < argc)  {
       QString a(argv[++i]);
       maxHistLines = a.toInt();
@@ -781,7 +787,7 @@ int main(int argc, char* argv[])
     if (!strcmp(argv[i],"-h")) { usage(); exit(0); }
     if (!strcmp(argv[i],"-help")) { usage(); exit(0); }
     if (!strcmp(argv[i],"--help")) { usage(); exit(0); }
-//FIXME: more: font, menu, scrollbar, pixmap, ....
+    //FIXME: more: font, menu, scrollbar, pixmap, ....
   }
   // ///////////////////////////////////////////////
 
@@ -789,11 +795,25 @@ int main(int argc, char* argv[])
 
   //FIXME: free(eargs) or keep global.
 
+  int c = 80, l = 40;
+  if ( (strcmp("", sz) != 0) ) {
+	     char *ls = strchr( sz, 'x' );
+	     if ( ls != NULL ) {
+		*ls='\0';
+		ls++;
+		c=atoi(sz);
+		l=atoi(ls);
+		fprintf(stderr, "setColLin(%d, %d)\n", c, l );
+	     } else {
+	        fprintf(stderr, "expected -vt_sz <#columns>x<#lines> ie. 80x40\n" );
+             }
+  }
   if (a.isRestored())
       RESTORE( TEDemo(eargs,login_shell) )
   else {	
       TEDemo*  m = new TEDemo(eargs,login_shell);
       m->title = a.getCaption();
+      if (strcmp("",sz) !=0) m->setColLin(c,l);
       if (welcome) m->setCaption(i18n("Welcome to the console"));
       QTimer::singleShot(5000,m,SLOT(setHeader()));
       m->show();

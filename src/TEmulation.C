@@ -74,8 +74,8 @@ Emulation::Emulation(TEWidget* gui)
 		   this,SLOT(onSelectionBegin(const int,const int)) );
   QObject::connect(gui,SIGNAL(extendSelectionSignal(const int,const int)),
 		   this,SLOT(onSelectionExtend(const int,const int)) );
-  QObject::connect(gui,SIGNAL(endSelectionSignal()),
-		   this,SLOT(setSelection()) );
+  QObject::connect(gui,SIGNAL(endSelectionSignal(const BOOL)),
+		   this,SLOT(setSelection(const BOOL)) );
   QObject::connect(gui,SIGNAL(clearSelectionSignal()),
 		   this,SLOT(clearSelection()) );
 }
@@ -164,9 +164,9 @@ void Emulation::onSelectionExtend(const int x, const int y) {
   showBulk();
 }
 
-void Emulation::setSelection() {
+void Emulation::setSelection(int preserve_line_breaks) {
   if (!connected) return;
-  char *t = scr->getSelText();
+  char *t = scr->getSelText(preserve_line_breaks);
   if (t != NULL ) {
   	gui->setSelection(t);
   	free(t);

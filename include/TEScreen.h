@@ -148,7 +148,7 @@ public: // these are all `Screen' operations
     void setSelBeginXY(const int x, const int y);
     void setSelExtentXY(const int x, const int y);
     void clearSelection();
-    char *getSelText();
+    char *getSelText(const BOOL preserve_line_breaks);
 
 private: // helper
 

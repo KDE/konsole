@@ -1,3 +1,8 @@
+14 Nov 1998 Peter Silva <peter.silva@kde.org>
+- added -vt_sz command line option.
+- added Ctrl modifier for text selection without line breaks.
+- started working on word-class (just stubs, nothing complete.)  
+- documented the Ctrl-modifier, fixed section headings.
 09 Nov 1998
 - minor bugs fixed.
 - putenv/setenv - prefered Solaris compatibility over

@@ -66,7 +66,7 @@ signals:
     void clearSelectionSignal();
     void beginSelectionSignal( const int x, const int y );
     void extendSelectionSignal( const int x, const int y );
-    void endSelectionSignal();
+    void endSelectionSignal(const BOOL preserve_line_breaks);
 
 
 protected:
@@ -102,6 +102,7 @@ public:
 public slots:
 
     void onClearSelection();
+    void setWordClass(char* s);
 
 protected slots:
 
@@ -132,6 +133,9 @@ private:
 
     QPoint pntSel; // current selection point
     int    actSel; // selection state
+    char   *word_characters;  // word class characters.
+    BOOL    word_selection_mode;
+    BOOL    preserve_line_breaks;
 
     QClipboard*    cb;
     QScrollBar* scrollbar;

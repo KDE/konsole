@@ -166,9 +166,14 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   font_w   = 1;
   font_h   = 1;
   font_a   = 1;
+  word_selection_mode = FALSE;
 
   setMouseMarks(TRUE);
   setVTFont( QFont("fixed") );
+  
+  //make an empty string as default to avoid having to test for NULL
+  word_characters = NULL;
+  setWordClass("");
 
   setColorTable(base_color_table); // init color table
 
@@ -486,12 +491,15 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   {
     QPoint pos = QPoint((ev->x()-tLx-blX)/font_w,(ev->y()-tLy-bY)/font_h);
 
+    if ( ev->state() & ControlButton ) {
+	preserve_line_breaks = FALSE ;
+    }
     if (mouse_marks || (ev->state() & ShiftButton))
     {
       emit clearSelectionSignal();
       pntSel = pos;
       actSel = 1; // left mouse button pressed but nothing selected yet.
-      grabMouse(crossCursor); // handle with care!
+      grabMouse(   /*crossCursor*/  ); // handle with care!	
     }
     else
     {
@@ -555,7 +563,8 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
 //  printf("release [%d,%d] %d\n",ev->x()/font_w,ev->y()/font_h,ev->button());
   if ( ev->button() == LeftButton)
   {
-    if ( actSel > 1 ) emit endSelectionSignal();
+    if ( actSel > 1 ) emit endSelectionSignal(preserve_line_breaks);
+    preserve_line_breaks = TRUE;
 
     //FIXME: emits a release event even if the mouse is
     //       outside the range. The procedure used in `mouseMoveEvent'
@@ -571,6 +580,13 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
                         (ev->y()-tLy-bY)/font_h + 1 );
     releaseMouse();
   }
+}
+
+void TEWidget::setWordClass(char* s) {
+    if (s) {
+	if (word_characters) free(word_characters);
+	word_characters = strdup(s);
+    }
 }
 
 void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
@@ -610,12 +626,15 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
      // set the end...
      i = loc( endSel.x(), endSel.y() );
      x = endSel.x();
-     while((isalnum(image[i].c)||ispunct(image[i].c)) && (x < (columns-1)))
+     while((isalnum(image[i].c)||ispunct(image[i].c)||strchr(word_characters,image[i].c)) 
+		&& (x < (columns-1)))
      { i++; x++ ; }
      if (x < (columns-1)) x--;
      endSel.setX(x);
      emit extendSelectionSignal( endSel.x(), endSel.y() );
-     emit endSelectionSignal();
+     emit endSelectionSignal(preserve_line_breaks);
+     preserve_line_breaks = TRUE;
+ 
    }
 }
 

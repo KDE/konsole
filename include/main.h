@@ -34,6 +34,7 @@ public:
 
   TEDemo(const char* args[], int login_shell);
   ~TEDemo();
+  void setColLin(int columns, int lines);
 
 private slots:
   void configureRequest(TEWidget*,int,int,int);
@@ -71,7 +72,6 @@ private:
   void makeStatusbar();
   void addSession(TESession* s);
   void setColorPixmaps();
-  void setColLin(int columns, int lines);
 
   void setSchema(const char* path);
   void setSchema(const ColorSchema* s);

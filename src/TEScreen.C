@@ -185,7 +185,7 @@ void TEScreen::setSelExtentXY(const int x, const int y)
 */
 }
 
-char *TEScreen::getSelText() 
+char *TEScreen::getSelText(const BOOL preserve_line_breaks) 
 {
   char *m;
   int s,d; /// source index, dest. index.
@@ -217,7 +217,7 @@ char *TEScreen::getSelText()
       hY++; 
       s = ((s+1)/columns + 1)*columns;
       hX=0; 
-      if ( s <= sel_BR ) m[d++]='\n';
+      if ( s <= sel_BR ) m[d++]=(preserve_line_breaks?'\n':' ');
     }
     else
     {
@@ -231,7 +231,7 @@ char *TEScreen::getSelText()
         eol = sel_BR ;
       }
       while (s <= eol)  m[d++] = image[s++-hist_BR].c;
-      if (eol < sel_BR ) m[d++]='\n'; 
+      if (eol < sel_BR) m[d++]=(preserve_line_breaks?'\n':' ');
       s = ( eol/columns + 1)*columns;
     }
   }
@@ -239,7 +239,7 @@ char *TEScreen::getSelText()
   // trim buffer size to actual size needed.
   m=(char*)realloc( m ,  sizeof(char)*(d+1) );
   m[d]= '\0';
-//  printf( "TEScreen::getSelText returning +%s+\n", m );
+  //printf( "TEScreen::getSelText returning +%s+\n", m );
   return(m);
 }
  
@@ -497,7 +497,7 @@ void TEScreen::resizeImage(int new_lines, int new_columns)
 }
 
 /*
-   Clearifying rendition here and in TEWidget.
+   Clarifying rendition here and in TEWidget.
 
    currently, TEWidget's color table is
      0       1       2 .. 9    10 .. 17
