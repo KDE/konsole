@@ -2267,6 +2267,29 @@ void Konsole::buildSessionMenus()
    m_quit->plug(m_session);
 }
 
+static void insertItemSorted(KPopupMenu *menu, const QIconSet &iconSet, const QString &txt, int id)
+{
+  const int defaultId = 1; // The id of the 'new' item.
+  int index = menu->indexOf(defaultId);
+  int count = menu->count();
+  if (index >= 0)
+  {
+     index++; // Skip separator
+     while(true)
+     {
+        index++;
+        if (index >= count)
+        {
+           index = -1; // Insert at end
+           break;
+        }
+        if (menu->text(menu->idAt(index)) > txt)
+           break; // Insert before this item
+     }
+  }
+  menu->insertItem(iconSet, txt, id, index);
+}
+
 void Konsole::addSessionCommand(const QString &path)
 {
   KSimpleConfig* co;
@@ -2297,12 +2320,13 @@ void Konsole::addSessionCommand(const QString &path)
     return; // ignore
 
   }
+
   QString icon = co->readEntry("Icon", "openterm");
-  m_toolbarSessionsCommands->insertItem( SmallIconSet( icon ), txt, ++cmd_serial );
+  insertItemSorted(m_toolbarSessionsCommands, SmallIconSet( icon ), txt, ++cmd_serial );
   QString comment = co->readEntry("Comment");
   if (comment.isEmpty())
     comment=txt.prepend(i18n("New "));
-  m_session->insertItem( SmallIconSet( icon ), comment, cmd_serial );
+  insertItemSorted( m_session, SmallIconSet( icon ), comment, cmd_serial );
   no2command.insert(cmd_serial,co);
 
   int j = filename.findRev('/');
