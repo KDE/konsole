@@ -836,8 +836,10 @@ void Konsole::makeGUI()
    QStringList options;
    options << i18n("Text &and Icons") << i18n("&Text Only") << i18n("&Icons Only");
    viewOptions->setItems(options);
+   viewOptions->setCurrentItem(m_tabViewMode);
    viewOptions->plug(m_tabPopupMenu);
    connect(viewOptions, SIGNAL(activated(int)), this, SLOT(slotTabSetViewOptions(int)));
+   slotTabSetViewOptions(m_tabViewMode);
 
    m_tabPopupMenu->insertSeparator();
    m_tabPopupMenu->insertItem( SmallIcon("fileclose"), i18n("C&lose Session"), this,
@@ -1311,6 +1313,7 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("keytab",KeyTrans::find(n_defaultKeytab)->id());
   config->writeEntry("ActiveSession", active);
   config->writeEntry("DefaultSession", m_defaultSessionFilename);
+  config->writeEntry("TabViewMode", int(m_tabViewMode));
 
   if (se) {
     config->writeEntry("history", se->history().getSize());
@@ -1432,6 +1435,9 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       m_histSize = config->readNumEntry("history",DEFAULT_HISTORY_SIZE);
       b_histEnabled = config->readBoolEntry("historyenabled",true);
       //KONSOLEDEBUG << "Hist size : " << m_histSize << endl;
+
+      // Tab View Mode
+      m_tabViewMode = TabViewModes(config->readNumEntry("TabViewMode", ShowIconAndText));
    }
 
    if (m_menuCreated)
@@ -2423,7 +2429,9 @@ QString Konsole::newSession(const QString &type)
   return newSession(co);
 }
 
-QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &args, const QString &_term,const QString &_icon,const QString &_title, const QString &_cwd)
+QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &args,
+                            const QString &_term,const QString &_icon,
+                            const QString &_title, const QString &_cwd)
 {
   QString emu = "xterm";
   QString icon = "openterm";
@@ -2849,7 +2857,8 @@ void Konsole::notifySessionState(TESession* session, int state)
 			 break;
   }
   if (!state_iconname.isEmpty()
-      && session->testAndSetStateIconName(state_iconname))
+      && session->testAndSetStateIconName(state_iconname)
+      && m_tabViewMode != ShowTextOnly)
     tabwidget->setTabIconSet(session->widget(), SmallIconSet(state_iconname));
 }
 
