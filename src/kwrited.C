@@ -2,6 +2,7 @@
 
 #include <kapp.h>
 #include <kglobal.h>
+#include <kglobalsettings.h>
 #include <kwrited.h>
 
 #include <TEPty.h>
@@ -27,7 +28,7 @@
 KWrited::KWrited() : QObject()
 {
   wid = new QMultiLineEdit(NULL,"kwrited");
-  wid->setFont(KGlobal::fixedFont());
+  wid->setFont(KGlobalSettings::fixedFont());
   wid->setMinimumWidth(wid->fontMetrics().maxWidth()*80 + 
       wid->minimumSizeHint().width());
   wid->setReadOnly(TRUE);
