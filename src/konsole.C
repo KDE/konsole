@@ -592,7 +592,7 @@ bool Konsole::queryClose()
     }
     // WABA: Don't close if there are any sessions left. 
     // Tell them to go away.
-    if (sessions.count())
+    if (!skip_exit_query && sessions.count())
     {
         sessions.first();
         while(sessions.current()) 
@@ -600,7 +600,7 @@ bool Konsole::queryClose()
             sessions.current()->kill(SIGHUP);
             sessions.next();
         }
-        return skip_exit_query;
+        return false;
     }
     // If there is no warning requested or required or if warnQuit is a NULL
     // pointer for some reason, just assume closing is safe
