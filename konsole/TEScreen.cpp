@@ -1322,6 +1322,11 @@ void TEScreen::getSelText(bool preserve_line_breaks, QTextStream *stream)
             m[d++] = c;
             newlineneeded = true;
 	  }
+	  if (((s - hist_BR) % columns == 0) && newlineneeded)
+	  {
+            LINE_END;
+	    newlineneeded = false;
+	  }
 	}
 	else {
 	  s++;
