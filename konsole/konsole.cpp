@@ -2287,11 +2287,7 @@ void Konsole::addSessionCommand(const QString &path)
      exec = exec.mid(7,exec.length()-8);
   }
 
-  int pos = exec.find(' ');
-  if (pos > 0) {
-     exec = exec.left(pos);
-  }
-
+  exec = KRun::binaryName(exec, false);
   QString pexec = KGlobal::dirs()->findExe(exec);
   if (typ.isEmpty() || txt.isEmpty() || typ != "KonsoleApplication" 
       || ( !exec.isEmpty() && pexec.isEmpty() ) )
