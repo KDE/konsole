@@ -1087,7 +1087,7 @@ void Konsole::setSchema(const ColorSchema* s)
 }
 
 void Konsole::slotRenameSession() {
-  kDebugInfo("slotRenameSession");
+  kdDebug() << "slotRenameSession\n";
   KRadioAction *ra = session2action.find(se);
   QString name = ra->text();
   KLineEditDlg dlg(i18n("Session name"),name, this);
