@@ -1201,7 +1201,7 @@ void Konsole::setColLin(int columns, int lines)
     adjustSize();
     if (b_fixedSize)
       setFixedSize(sizeHint());
-    notifySize(lines,columns); // set menu items (strange arg order !)
+    notifySize(columns, lines);  // set menu items
   }
 }
 
@@ -1548,7 +1548,7 @@ void Konsole::applySettingsToGUI()
    if (m_options)
    {
 //      setFont();
-      notifySize(te->Lines(),te->Columns());
+      notifySize(te->Columns(), te->Lines());
       selectTabbar->setCurrentItem(n_tabbar);
       showMenubar->setChecked(!menuBar()->isHidden());
       selectScrollbar->setCurrentItem(n_scroll);
@@ -1955,8 +1955,7 @@ void Konsole::slotSelectSize() {
    }
 }
 
-
-void Konsole::notifySize(int lines, int columns)
+void Konsole::notifySize(int columns, int lines)
 {
   if (selectSize)
   {
@@ -2343,7 +2342,7 @@ void Konsole::activateSession(TESession *s)
 
   if (rootxpms[te])
     rootxpms[te]->start();
-  notifySize(te->Lines(), te->Columns());  // set menu items (strange arg order !)
+  notifySize(te->Columns(), te->Lines()); // set menu items
   s->setConnect(true);
   updateTitle();
   if (!m_menuCreated)

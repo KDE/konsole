@@ -101,7 +101,7 @@ signals:
     void sendSignal(int n);
     void closeCurrentSession();
 
-    void notifySize(int,int);
+    void notifySize(int /*columns*/, int /*lines*/);
 
     void slotToggleFrame();
     void slotSelectScrollbar();

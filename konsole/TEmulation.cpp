@@ -503,7 +503,7 @@ void TEmulation::onImageSizeChange(int lines, int columns)
    //kdDebug(1211)<<"TEmulation::onImageSizeChange() showBulk()"<<endl;
   showBulk();
    //kdDebug(1211)<<"TEmulation::onImageSizeChange() showBulk() done"<<endl;
-  emit ImageSizeChanged(lines,columns);   // propagate event
+  emit ImageSizeChanged(columns, lines);   // propagate event
    //kdDebug(1211)<<"TEmulation::onImageSizeChange() done"<<endl;
 }
 

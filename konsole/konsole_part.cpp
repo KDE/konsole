@@ -831,7 +831,7 @@ void konsolePart::setSchema(ColorSchema* s)
   se->setSchemaNo(s->numb());
 }
 
-void konsolePart::notifySize(int /* lines */, int /* columns */)
+void konsolePart::notifySize(int /* columns */, int /* lines */)
 {
   ColorSchema *sch=colors->find(s_schema);
 
