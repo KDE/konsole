@@ -22,7 +22,6 @@
 // even though it might be available on a particular system.
 #if defined(AVOID_XKB)
 #undef HAVE_XKB
-#undef HAVE_XTEST
 #endif
 
 #include <klocale.h>
@@ -793,7 +792,7 @@ void TEmuVt102::onMouse( int cb, int cx, int cy )
 
 // Keyboard Handling ------------------------------------------------------- --
 
-#if defined(HAVE_XTEST) || defined(HAVE_XKB)
+#if defined(HAVE_XKB)
 static void scrolllock_set_off();
 static void scrolllock_set_on();
 #endif
@@ -810,7 +809,7 @@ void TEmuVt102::scrollLock(const bool lock)
     holdScreen = false;
     emit lockPty(false);
   }
-#if defined(HAVE_XTEST) || defined(HAVE_XKB)
+#if defined(HAVE_XKB)
   if (holdScreen)
     scrolllock_set_on();
   else
@@ -1094,7 +1093,7 @@ void TEmuVt102::setConnect(bool c)
       setMode(MODE_Mouse1000);
     else
       resetMode(MODE_Mouse1000);
-#if defined(HAVE_XTEST) || defined(HAVE_XKB)
+#if defined(HAVE_XKB)
     if (holdScreen)
       scrolllock_set_on();
     else
@@ -1178,24 +1177,17 @@ DEALINGS IN THE SOFTWARE.
 
 ****************************************************************************/
 
+#if defined(HAVE_XKB)
+
 #include <X11/Xlib.h>
 
-#ifdef HAVE_XTEST
-#include <X11/extensions/XTest.h>
-#endif
-
-#ifdef HAVE_XKB
 #define explicit myexplicit
 #include <X11/XKBlib.h>
 #undef explicit
-#endif
 
 #include <X11/keysym.h>
 
-#if defined(HAVE_XTEST) || defined(HAVE_XKB)
-
 /* the XKB stuff is based on code created by Oswald Buddenhagen <ossi@kde.org> */
-#ifdef HAVE_XKB
 static int xkb_init()
 {
     int xkb_opcode, xkb_event, xkb_error;
@@ -1211,18 +1203,22 @@ static unsigned int xkb_mask_modifier( XkbDescPtr xkb, const char *name )
     int i;
     if( !xkb || !xkb->names )
 	return 0;
+
+    Atom atom = XInternAtom( xkb->dpy, name, TRUE );
+    if (atom == None)
+        return 0;
+	
     for( i = 0;
          i < XkbNumVirtualMods;
 	 i++ )
+    {
+	if (atom == xkb->names->vmods[i] )
 	{
-	char* modStr = XGetAtomName( xkb->dpy, xkb->names->vmods[i] );
-	if( modStr != NULL && strcmp(name, modStr) == 0 )
-	    {
 	    unsigned int mask;
 	    XkbVirtualModsToReal( xkb, 1 << i, &mask );
 	    return mask;
-	    }
 	}
+    }
     return 0;
 }
 
@@ -1230,11 +1226,11 @@ static unsigned int xkb_scrolllock_mask()
 {
     XkbDescPtr xkb;
     if(( xkb = XkbGetKeyboard( qt_xdisplay(), XkbAllComponentsMask, XkbUseCoreKbd )) != NULL )
-	{
+    {
         unsigned int mask = xkb_mask_modifier( xkb, "ScrollLock" );
         XkbFreeKeyboard( xkb, 0, True );
         return mask;
-        }
+    }
     return 0;
 }
 
@@ -1267,71 +1263,14 @@ static int xkb_set_off()
     XkbLockModifiers ( qt_xdisplay(), XkbUseCoreKbd, scrolllock_mask, 0);
     return 1;
 }
-#endif
-
-#ifdef HAVE_XTEST
-static int xtest_get_scrolllock_state()
-{
-    int i;
-    int scrolllock_mask = 0;
-    Window dummy1, dummy2;
-    int dummy3, dummy4, dummy5, dummy6;
-    unsigned int mask;
-    XModifierKeymap* map = XGetModifierMapping( qt_xdisplay() );
-    KeyCode scrolllock_keycode = XKeysymToKeycode( qt_xdisplay(), XK_Scroll_Lock );
-    if( scrolllock_keycode == NoSymbol )
-        return 0;
-    for( i = 0;
-         i < 8;
-         ++i )
-        {
-	if( map->modifiermap[ map->max_keypermod * i ] == scrolllock_keycode )
-		scrolllock_mask = 1 << i;
-	}
-    XQueryPointer( qt_xdisplay(), DefaultRootWindow( qt_xdisplay() ), &dummy1, &dummy2,
-        &dummy3, &dummy4, &dummy5, &dummy6, &mask );
-    XFreeModifiermap( map );
-    return mask & scrolllock_mask;
-}
-
-static void xtest_change_scrolllock()
-{
-    XTestFakeKeyEvent( qt_xdisplay(), XKeysymToKeycode( qt_xdisplay(), XK_Scroll_Lock ), True, CurrentTime );
-    XTestFakeKeyEvent( qt_xdisplay(), XKeysymToKeycode( qt_xdisplay(), XK_Scroll_Lock ), False, CurrentTime );
-}
-
-static void xtest_set_on()
-{
-    if( !xtest_get_scrolllock_state())
-        xtest_change_scrolllock();
-}
-
-static void xtest_set_off()
-{
-    if( xtest_get_scrolllock_state())
-        xtest_change_scrolllock();
-}
-#endif
 
 static void scrolllock_set_on()
 {
-#ifdef HAVE_XKB
-    if( xkb_set_on())
-        return;
-#endif
-#ifdef HAVE_XTEST
-    xtest_set_on();
-#endif
+    xkb_set_on();
 }
 
 static void scrolllock_set_off()
 {
-#ifdef HAVE_XKB
-    if( xkb_set_off())
-        return;
-#endif
-#ifdef HAVE_XTEST
-    xtest_set_off();
-#endif
+    xkb_set_off();
 }
-#endif // defined(HAVE_XTEST) || defined(HAVE_XKB)
+#endif // defined(HAVE_XKB)
