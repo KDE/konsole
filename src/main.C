@@ -70,6 +70,10 @@
 #include <kmessagebox.h>
 #include <krootpixmap.h>
 #include <kcmdlineargs.h>
+#include <kaction.h>
+#include <kstdaction.h>
+#include <klineeditdlg.h>
+#include <kdebug.h>
 
 #include <kimgio.h>
 
@@ -111,8 +115,11 @@ static KCmdLineOptions options[] =
    { 0, 0, 0 }
 };
 
-template class QIntDict<TESession>;
+//template class QIntDict<TESession>;
 template class QIntDict<KSimpleConfig>;
+// BL
+template class QPtrDict<KRadioAction>;
+
 
 const char *fonts[] = {
  "6x13",  // FIXME: "fixed" used in favor of this
@@ -126,10 +133,12 @@ const char *fonts[] = {
  };
 #define TOPFONT ((sizeof(fonts)/sizeof(char*))-1)
 
-static QIntDict<TESession> no2session;
+//static QIntDict<TESession> no2session;
 //static QPtrDict<void>      session2no;
-static QPtrDict<QObject>      session2no;
+//static QPtrDict<QObject>      session2no;
 static int session_no = 0;
+static QPtrDict<TESession> action2session;
+static QPtrDict<KRadioAction> session2action;
 
 static QIntDict<KSimpleConfig> no2command;
 static int cmd_serial = 0;
@@ -158,6 +167,10 @@ Konsole::Konsole(const QString& name,
   setView(te,FALSE);
   makeMenu();
   makeStatusbar();
+  // temporary default: show
+  toolBar()->setIconText(KToolBar::TextOnly);
+  toolBar()->show();
+  
 
   // Init DnD ////////////////////////////////////////////////////////////////
 
@@ -376,6 +389,11 @@ void Konsole::makeMenu()
   m_sessions = new QPopupMenu;
   m_sessions->setCheckable(TRUE);
   m_sessions->insertItem( i18n("Send Signal"), m_signals );
+
+  KAction *act = new KAction("Rename session...", 0, this, SLOT(slotRenameSession()), this);
+  act->plug(m_sessions);
+  // act->plug(toolBar());
+
   m_sessions->insertSeparator();
   connect(m_sessions, SIGNAL(activated(int)), SLOT(activateSession(int)));
 
@@ -430,6 +448,12 @@ void Konsole::makeMenu()
   m_options = new QPopupMenu;
   m_options->setCheckable(TRUE);
   m_options->insertItem( i18n("&Menubar"), 1 );
+  // where is going to put it?
+  showToolbar = KStdAction::showToolbar(this, SLOT(slotToggleToolbar()));
+  //showToolbar->setChecked(gofaiConfig::getInstance()->toolbarVisible);
+  showToolbar->plug(m_options);
+
+
   m_options->insertItem( i18n("&Frame"), 2 );
   m_options->insertItem( i18n("Scroll&bar"), m_scrollbar);
   m_options->insertSeparator();
@@ -541,7 +565,10 @@ void Konsole::readProperties(KConfig* config)
   setSchema(config->readEntry("schema",""));
 
   // (2) apply to sessions (currently only the 1st one)
-  TESession* s = no2session.find(1);
+  //  TESession* s = no2session.find(1);  
+  QPtrDictIterator<TESession> it( action2session ); // iterator for dict
+  TESession* s = it.current();
+
   if (s)
   {
     s->setFontNo(n_font);
@@ -623,7 +650,8 @@ void Konsole::font_menu_activated(int item)
     item = 0;
   }
   setFont(item);
-  activateSession((int)session2no.find(se)); // for attribute change
+  // activateSession((int)session2no.find(se)); // for attribute change
+  activateSession(); // activates the current
 }
 
 void Konsole::schema_menu_activated(int item)
@@ -631,7 +659,8 @@ void Konsole::schema_menu_activated(int item)
   assert(se);
   //FIXME: save schema name
   setSchema(item);
-  activateSession((int)session2no.find(se)); // for attribute change
+  //  activateSession((int)session2no.find(se)); // for attribute change
+  activateSession(); // activates the current
 }
 
 void Konsole::keytab_menu_activated(int item)
@@ -679,6 +708,10 @@ void Konsole::setMenuVisible(bool visible)
   m_options->setItemChecked(1,b_menuvis);
   if (b_menuvis) menubar->show(); else menubar->hide();
   updateRects();
+}
+
+void Konsole::slotToggleToolbar() {
+  enableToolBar(showToolbar->isChecked() ? KToolBar::Show : KToolBar::Hide);
 }
 
 void Konsole::setFrameVisible(bool visible)
@@ -810,24 +843,74 @@ void Konsole::sendSignal(int sn)
   if (se) se->kill(sn);
 }
 
-void Konsole::activateSession(int sn)
+
+void Konsole::runSession(TESession* s)
 {
-  TESession* s = no2session.find(sn);
-  if (se)
-  {
-    se->setConnect(FALSE);
-    int no = (int)session2no.find(se);
-    m_sessions->setItemChecked(no,FALSE);
-  }
-  se = s;
-  if (!s) { fprintf(stderr,"session not found\n"); return; } // oops
-  m_sessions->setItemChecked(sn,TRUE);
-  if (s->schemaNo()!=curr_schema) {
-    setSchema(s->schemaNo());             //FIXME: creates flicker? Do only if differs
-    //Set Font. Now setConnect should do the appropriate action.
-    //if the size has changed, a resize event (noticable to the application)
-    //should happen. Else, we  could even start the application
-    s->setConnect(TRUE);                  // does a bulkShow (setImage)
+    //  int session_no = (int)session2no.find(s);
+    //activateSession(session_no);
+    KRadioAction *ra = session2action.find(s);
+    ra->setChecked(true);
+    activateSession();
+
+  // give some time to get through the
+  // resize events before starting up.
+    QTimer::singleShot(100,s,SLOT(run()));
+}
+
+void Konsole::addSession(TESession* s)
+{
+  session_no += 1;
+  //  no2session.insert(session_no,s);
+  // session2no.insert(s,(QObject*)session_no);
+  //  m_sessions->insertItem(s->Title(), session_no);
+
+  // create an action for the session
+  QString title;
+  title.sprintf("%s No %d", s->Title().data(), session_no);
+  char buffer[30];
+  sprintf(buffer,"%d",session_no);
+  KRadioAction *ra = new KRadioAction(title, 0, this, SLOT(activateSession()), this, buffer);
+  ra->setExclusiveGroup("sessions");
+  ra->setChecked(true);
+  action2session.insert(ra, s);
+  session2action.insert(s,ra);
+  ra->plug(m_sessions);
+  ra->plug(toolBar());
+  //  slotRenameSession();
+}
+
+/*
+  New activate session for the 
+ */
+void Konsole::activateSession() {
+    TESession* s = NULL;
+    kDebugInfo("Here we are!!!");
+    QPtrDictIterator<TESession> it( action2session ); // iterator for dict
+    while ( it.current() ) {
+	KRadioAction *ra = (KRadioAction*)it.currentKey();
+	if (ra->isChecked()) {
+	    //kDebugInfo("Activate session no %d", (int)it.current());
+	    s = it.current();
+	    break;
+	}
+	++it;
+    }
+    if (s==NULL) {
+	return;
+    }
+    kDebugInfo("Doing the activation");
+    if (se)
+	{
+	    se->setConnect(FALSE);
+	}
+    se = s;
+    if (!s) { fprintf(stderr,"session not found\n"); return; } // oops
+    if (s->schemaNo()!=curr_schema) {
+	setSchema(s->schemaNo());             //FIXME: creates flicker? Do only if differs
+	//Set Font. Now setConnect should do the appropriate action.
+	//if the size has changed, a resize event (noticable to the application)
+	//should happen. Else, we  could even start the application
+	s->setConnect(TRUE);                  // does a bulkShow (setImage)
     setFont(s->fontNo());                 //FIXME: creates flicker?
                                           //FIXME: check here if we're still alife.
                                           //       if not, quit, otherwise,
@@ -837,24 +920,6 @@ void Konsole::activateSession(int sn)
     s->setConnect(TRUE);
   }
   setHeader();
-}
-
-void Konsole::runSession(TESession* s)
-{
-  int session_no = (int)session2no.find(s);
-  activateSession(session_no);
-
-  // give some time to get through the
-  // resize events before starting up.
-  QTimer::singleShot(100,s,SLOT(run()));
-}
-
-void Konsole::addSession(TESession* s)
-{
-  session_no += 1;
-  no2session.insert(session_no,s);
-  session2no.insert(s,(QObject*)session_no);
-  m_sessions->insertItem(s->Title(), session_no);
 }
 
 void Konsole::newSession(int i)
@@ -921,11 +986,11 @@ void Konsole::doneSession(TESession* s, int )
     KMessageBox::sorry(this, str);
   }
 #endif
-  int no = (int)session2no.find(s);
-  if (!no) return; // oops
-  no2session.remove(no);
-  session2no.remove(s);
-  m_sessions->removeItem(no);
+  KRadioAction *ra = session2action.find(s);
+  ra->unplug(m_sessions);
+  ra->unplug(toolBar());
+  session2action.remove(s);
+  action2session.remove(ra);
 
   s->setConnect(FALSE);
 
@@ -940,10 +1005,13 @@ void Konsole::doneSession(TESession* s, int )
   if (s == se)
   { // pick a new session
     se = NULL;
-    QIntDictIterator<TESession> it( no2session );
-    if ( it.current() )
-      activateSession(it.currentKey());
-    else
+    //    QIntDictIterator<TESession> it( no2session );
+    QPtrDictIterator<KRadioAction> it( session2action);
+    if ( it.current() ) {
+	//      activateSession(it.currentKey());
+	it.current()->setChecked(true);
+        activateSession();
+    } else
       kapp->quit();
   }
 }
@@ -1012,6 +1080,17 @@ void Konsole::setSchema(const ColorSchema* s)
   te->setColorTable(s->table);
   if (se) se->setSchemaNo(s->numb);
 }
+
+void Konsole::slotRenameSession() {
+  kDebugInfo("slotRenameSession");
+  KRadioAction *ra = session2action.find(se);
+  QString name = ra->text();
+  KLineEditDlg dlg("Session name",name, this);
+  if (dlg.exec()) {
+    ra->setText(dlg.text());
+  }
+}
+
 
 /* --| main |---------------------------------------------------------------- */
 
