@@ -569,6 +569,7 @@ void Konsole::makeGUI()
    m_quit->plug(m_session);
 
    connect(m_session, SIGNAL(activated(int)), SLOT(newSession(int)));
+   connect(m_rightSession, SIGNAL(activated(int)), SLOT(newSession(int)));
 
    // Right mouse button menu
    showMenubar->plug ( m_rightButton );
@@ -663,6 +664,10 @@ void Konsole::makeBasicGUI()
   m_options = new KPopupMenu(this);
   m_help =  helpMenu(0, FALSE);
   m_rightButton = new KPopupMenu(this);
+  
+  m_rightSession = new KPopupMenu( m_rightButton );
+  m_rightButton->insertItem( i18n("Sess&ion"), m_rightSession );
+  m_rightButton->insertSeparator();
 
   // Bookmarks that open new sessions.
   bookmarkHandlerSession = new KonsoleBookmarkHandler( this, false );
@@ -2215,6 +2220,7 @@ void Konsole::addSessionCommand(const QString &path)
   if (comment.isEmpty())
     comment=txt.prepend(i18n("New "));
   m_session->insertItem( SmallIconSet( icon ), comment, cmd_serial );
+  m_rightSession->insertItem( SmallIconSet( icon ), comment, cmd_serial );
   no2command.insert(cmd_serial,co);
 
   int j = filename.findRev('/');
@@ -2227,6 +2233,7 @@ void Konsole::loadSessionCommands()
 {
   addSessionCommand(QString::null);
   m_session->insertSeparator();
+  m_rightSession->insertSeparator();
   QStringList lst = KGlobal::dirs()->findAllResources("appdata", "*.desktop", false, true);
 
   for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it )
@@ -2234,7 +2241,10 @@ void Konsole::loadSessionCommands()
        addSessionCommand(*it);
 
   m_session->insertSeparator();
+  m_rightSession->insertSeparator();
   m_session->insertItem(SmallIconSet("keditbookmarks"),
+                        i18n("New Shell at Bookmark"), m_bookmarksSession);
+  m_rightSession->insertItem(SmallIconSet("keditbookmarks"),
                         i18n("New Shell at Bookmark"), m_bookmarksSession);
 }
 
@@ -2251,6 +2261,7 @@ void Konsole::addScreenSession(const QString &socket)
   QString icon = "openterm"; // FIXME use another icon (malte)
   cmd_serial++;
   m_session->insertItem( SmallIconSet( icon ), txt, cmd_serial, cmd_serial - 1 );
+  m_rightSession->insertItem( SmallIconSet( icon ), txt, cmd_serial, cmd_serial - 1 );
   m_toolbarSessionsCommands->insertItem( SmallIconSet( icon ), txt, cmd_serial );
   no2command.insert(cmd_serial,co);
   no2tempFile.insert(cmd_serial,tmpFile);
@@ -2299,6 +2310,7 @@ void Konsole::resetScreenSessions()
     for (int i = cmd_first_screen; i <= cmd_serial; ++i)
     {
       m_session->removeItem(i);
+      m_rightSession->removeItem(i);
       m_toolbarSessionsCommands->removeItem(i);
       no2command.remove(i);
       no2tempFile.remove(i);
