@@ -294,7 +294,7 @@ void Konsole::makeMenu()
 
   // Send Signal Menu -------------------------------------------------------------
   KPopupMenu* m_signals = new KPopupMenu(this);
-  m_signals->insertItem( i18n( "Suspend Task" )   + " (KILL)", 17);     // FIXME: comes with 3 values
+  m_signals->insertItem( i18n( "Suspend Task" )   + " (STOP)", 17);     // FIXME: comes with 3 values
   m_signals->insertItem( i18n( "Continue Task" )  + " (CONT)", 18);     // FIXME: comes with 3 values
   m_signals->insertItem( i18n( "Hangup" )         + " (HUP)",   1);
   m_signals->insertItem( i18n( "Interrupt Task" ) + " (INT)",   2);
