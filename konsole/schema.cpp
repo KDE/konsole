@@ -132,7 +132,7 @@ ColorSchema::ColorSchema(const QString& pathname)
 {
   //start with a valid time, aleXXX
   *lastRead = QDateTime::currentDateTime();
-  QString fPath = locate("data", "konsole/"+pathname);
+  QString fPath = pathname.startsWith("/") ? pathname : locate("data", "konsole/"+pathname);
   if (fPath.isEmpty() || !QFile::exists(fPath))
   {
     fRelPath = QString::null;
@@ -291,11 +291,11 @@ static int random_hue = -1;
 
 bool ColorSchema::rereadSchemaFile()
 {
-  QString fPath = fRelPath.isEmpty() ? "" : locate("data", "konsole/"+fRelPath);
-  if (fPath.isEmpty()) return false;
+  QString fPath = fRelPath.isEmpty() ? "" : (fRelPath.startsWith("/") ? fRelPath : locate("data", "konsole/"+fRelPath));
+  if (fPath.isEmpty() || !QFile::exists(fPath))
+     return false;
 
   //KONSOLEDEBUG << "Rereading schema file " << fPath << endl;
-
 
   FILE *sysin = fopen(QFile::encodeName(fPath),"r");
   if (!sysin)
@@ -479,6 +479,14 @@ ColorSchema *ColorSchemaList::find(const QString& path)
    //kdDebug(1211)<<"ColorSchema::find() count()=="<<count()<<endl;
    ColorSchemaListIterator it(*this);
    ColorSchema *c;
+
+   if (path.startsWith("/")) {
+      //KONSOLEDEBUG << " schema given as a full path... " << path << endl;
+      ColorSchema *newSchema = new ColorSchema(path);
+      if (newSchema)
+         append(newSchema);
+      return newSchema;
+   }
 
    while ((c=it.current()))
    {

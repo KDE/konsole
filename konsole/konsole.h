@@ -42,7 +42,7 @@
 #undef PACKAGE
 #undef VERSION
 #define PACKAGE "konsole"
-#define VERSION "1.3"
+#define VERSION "1.3.2"
 
 class KRootPixmap;
 class QLabel;
@@ -54,6 +54,7 @@ class KToggleAction;
 class KSelectAction;
 class KRadioAction;
 class KTabWidget;
+class QToolButton;
 
 // Defined in main.C
 const char *konsole_shell(QStrList &args);
@@ -272,6 +273,8 @@ private:
                         const QString &text, int index = -1);
   QIconSet iconSetForSession(TESession *session) const;
 
+  bool eventFilter( QObject *o, QEvent *e );
+
   QPtrList<TEWidget> activeTEs();
 
   QPtrDict<TESession> action2session;
@@ -409,6 +412,9 @@ private:
   int m_separator_id;
 
   TESession*  m_contextMenuSession;
+  
+  QToolButton* m_newSessionButton;
+  QPoint      m_newSessionButtonMousePressPos;
 };
 
 class QSpinBox;
