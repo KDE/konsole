@@ -90,6 +90,10 @@ konsolePart::konsolePart(QWidget *parent, const char *name)
 {
   setInstance(konsoleFactory::instance());
 
+  // This is needed since only konsole.C does it
+  // Without those two -> crash on keypress... (David)
+  KeyTrans::loadAll();
+
   // create a canvas to insert our widget
 
   m_extension = new konsoleBrowserExtension(this);
@@ -122,15 +126,12 @@ konsolePart::konsolePart(QWidget *parent, const char *name)
   initial->setConnect(TRUE);
   QTimer::singleShot(0/*100*/,initial,SLOT(run()));
 
+  initial->getEmulation()->setKeytrans(0);
+
   // setXMLFile("konsole_part.rc");
 
   // kDebugInfo("Loading successful");
   // kDebugInfo("XML file set");
-
-  // This is needed since only konsole.C does it
-  // Without those two -> crash on keypress... (David)
-  KeyTrans::loadAll();
-  initial->getEmulation()->setKeytrans(0);
 }
 
 
