@@ -53,7 +53,7 @@ static KCmdLineOptions options[] =
    { "profile <name>",  I18N_NOOP("Start with given sessions profile"), 0 },
    { "schema <name>",   I18N_NOOP("Use given .schema file"), 0 },
    { "workdir <dir>",   I18N_NOOP("Change working directory of the konsole to 'dir'"), 0 },
-   { "url <url>",       I18N_NOOP("Open 'url' instead of shell"), 0 },
+   { "url <url>",       I18N_NOOP("Open 'URL' instead of shell"), 0 },
    { "!e <command>",    I18N_NOOP("Execute 'command' instead of shell"), 0 },
    // WABA: All options after -e are treated as arguments.
    { "+[args]",         I18N_NOOP("Arguments for 'command'"), 0 },
@@ -240,7 +240,7 @@ int main(int argc, char* argv[])
   QString url;
   if(args->isSet("url")) {
       if (args->isSet("ls") || args->isSet("e"))
-          KCmdLineArgs::usage(i18n("You can't use -url and -ls or -e.\n"));
+          KCmdLineArgs::usage(i18n("You cannot use -url and -ls or -e.\n"));
       url = QString::fromLatin1(args->getOption("url"));
       if (title.isEmpty())
           title = url;
