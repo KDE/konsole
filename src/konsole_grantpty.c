@@ -25,7 +25,6 @@
  */
 
 #include <errno.h>
-#include <error.h>
 #include <grp.h>
 #include <stdio.h>
 #include <stdlib.h>
