@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Exec=kwrited
 Name=KDE Write Daemon
-Name[af]=kde skryf bediener
+Name[af]=Kde Skryf Bediener
 Name[ar]=مراقب الكتابة
 Name[az]=KDEWrite Proqramı
 Name[bg]=Демон Write на KDE
@@ -23,7 +23,7 @@ Name[ko]=KDE Write 데몬
 Name[lt]=KDE „write“ tarnyba
 Name[lv]=KDE Write Dēmons
 Name[mt]=Daemon tal-ktib KDE
-Name[nb]=KDE Skrive Daemon
+Name[nb]=KDE Skrivedaemon
 Name[nl]=KDE Schrijfdaemon
 Name[nn]=KDE Skrivingsdemon
 Name[pl]=Demon zapisu KDE

@@ -2,7 +2,7 @@
 #define KWRITED_H
 
 #include <TEPty.h>
-#include <qmultilineedit.h>
+#include <qtextedit.h>
 
 class KWrited : public QObject
 { Q_OBJECT
@@ -12,7 +12,7 @@ public:
 private slots:
   void block_in(int fd);
 private:
-  QMultiLineEdit* wid;
+  QTextEdit* wid;
   TEPty* pty;
 };
 
