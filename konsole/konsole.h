@@ -385,7 +385,6 @@ private:
   bool        b_framevis:1;
   bool        b_fullscreen:1;
   bool        m_menuCreated:1;
-  bool        skip_exit_query:1;
   bool        b_warnQuit:1;
   bool        isRestored:1;
   bool        b_allowResize:1; // Whether application may resize

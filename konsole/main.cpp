@@ -118,22 +118,11 @@ const char *konsole_shell(QStrList &args)
 }
 
 /**
-   The goal of this class is to prevent GUI confirmation
-   on the exit when the class is called from the session
-   manager.
-   It must be here, because this has to be called before
-   the KMainWindow's manager.
-
-   It is also used to add "--noxft" and "--ls" to the restoreCommand
+   The goal of this class is to add "--noxft" and "--ls" to the restoreCommand
    if konsole was started with any of those options.
  */
 class KonsoleSessionManaged: public KSessionManaged {
 public:
-    bool commitData( QSessionManager&) {
-        konsole->skip_exit_query = true;
-        return true;
-    };
-
     bool saveState( QSessionManager&sm) {
         QStringList restartCommand = sm.restartCommand();
         if (has_noxft)
@@ -149,7 +138,6 @@ public:
         sm.setRestartCommand(restartCommand);
         return true;
     }
-    Konsole *konsole;
 };
 
 
@@ -430,7 +418,7 @@ extern "C" int kdemain(int argc, char* argv[])
   signal(SIGHUP, SIG_IGN);
 
   putenv((char*)"COLORTERM="); // to trigger mc's color detection
-  KonsoleSessionManaged *ksm = new KonsoleSessionManaged();
+  KonsoleSessionManaged ksm;
 
   if (a.isRestored() || !profile.isEmpty())
   {
@@ -510,10 +498,9 @@ extern "C" int kdemain(int argc, char* argv[])
         }
         m->setDefaultSession( sessionconfig->readEntry("DefaultSession","shell.desktop") );
 
-        ksm->konsole = m;
-        ksm->konsole->initFullScreen();
+        m->initFullScreen();
         if ( !profile.isEmpty() ) {
-          ksm->konsole->callReadPropertiesInternal(sessionconfig,1);
+          m->callReadPropertiesInternal(sessionconfig,1);
           profile = "";
           // Hack to work-around sessions initialized with minimum size
           for (int i=0;i<counter;i++)
@@ -544,7 +531,6 @@ extern "C" int kdemain(int argc, char* argv[])
       m->setSchema(schema);
     }
 
-    ksm->konsole = m;
     m->setColLin(c,l); // will use default height and width if called with (0,0)
 
     m->initFullScreen();

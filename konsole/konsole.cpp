@@ -246,7 +246,6 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 ,b_dynamicTabHide(false)
 ,b_fullscreen(false)
 ,m_menuCreated(false)
-,skip_exit_query(false) // used to skip the query when closed by the session management
 ,b_warnQuit(false)
 ,b_allowResize(true) // Whether application may resize
 ,b_fixedSize(false) // Whether user may resize
@@ -1114,7 +1113,7 @@ void Konsole::activateMenu()
  */
 bool Konsole::queryClose()
 {
-   if(skip_exit_query)
+   if(kapp->sessionSaving())
      // saving session - do not even think about doing any kind of cleanup here
        return true;
 
@@ -1378,7 +1377,6 @@ void Konsole::saveProperties(KConfig* config) {
   if (config != KGlobal::config())
   {
      // called by the session manager
-     skip_exit_query = true;
      config->writeEntry("numSes",sessions.count());
      sessions.first();
      while(counter < sessions.count())
