@@ -90,7 +90,7 @@
 */
 
 TEmulation::TEmulation(TEWidget* gui)
-: decoder((QTextDecoder*)NULL)
+: decoder(0)
 {
   this->gui = gui;
 
@@ -126,6 +126,7 @@ TEmulation::~TEmulation()
 {
   delete screen[0];
   delete screen[1];
+  delete decoder;
   bulk_timer.stop();
 }
 
@@ -154,7 +155,7 @@ void TEmulation::setCodec(int c)
   //FIXME: check whether we have to free codec
   codec = c ? QTextCodec::codecForName("utf8")
             : QTextCodec::codecForLocale();
-  if (decoder) delete decoder;
+  delete decoder;
   decoder = codec->makeDecoder();
 }
 
