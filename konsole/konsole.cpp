@@ -964,8 +964,7 @@ void Konsole::slotSaveSessionsProfile()
       QFile::remove( path );
 
     KSimpleConfig cfg( path );
-    saveProperties(&cfg);
-    cfg.setGroup("WindowProperties1");
+    savePropertiesInternal(&cfg,1);
     saveMainWindowSettings(&cfg);
   }
 }

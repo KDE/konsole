@@ -42,7 +42,7 @@
 #undef PACKAGE
 #undef VERSION
 #define PACKAGE "konsole"
-#define VERSION "1.2"
+#define VERSION "1.2 post"
 
 class KRootPixmap;
 class QCheckBox;
@@ -101,6 +101,8 @@ public:
 
   virtual bool processDynamic(const QCString &fun, const QByteArray &data, QCString& replyType, QByteArray &replyData);
   virtual QCStringList functionsDynamic();
+
+  void callReadPropertiesInternal(KConfig *config, int number) { readPropertiesInternal(config,number); }
 
 public slots:
   void activateSession(const int position);
