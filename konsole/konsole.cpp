@@ -105,6 +105,7 @@ Time to start a requirement list.
 #include <kglobalsettings.h>
 #include <knotifydialog.h>
 #include <kprinter.h>
+#include <kaccelmanager.h>
 
 #include <kaction.h>
 #include <qlabel.h>
@@ -274,6 +275,8 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
   no2filename.setAutoDelete(true);
   menubar = menuBar();
 
+  KAcceleratorManager::setNoAccel( menubar );
+
   sessionNumberMapper = new QSignalMapper( this );
   connect( sessionNumberMapper, SIGNAL( mapped( int ) ),
           this, SLOT( newSessionTabbar( int ) ) );
@@ -324,8 +327,8 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
   setCentralWidget(tabwidget);
 
   if (b_dynamicTabHide || n_tabbar==TabNone)
-    tabwidget->setTabBarHidden(true);     
-         
+    tabwidget->setTabBarHidden(true);
+
   if (!histon)
     b_histEnabled=false;
 
@@ -835,7 +838,7 @@ void Konsole::makeGUI()
    dynamicTabHideOption->setChecked(b_dynamicTabHide);
    dynamicTabHideOption->plug(m_tabbarPopupMenu);
  }
- 
+
 void Konsole::slotSetEncoding()
 {
   if (!se) return;
@@ -861,6 +864,8 @@ void Konsole::makeTabWidget()
     tabwidget->setTabPosition(QTabWidget::Top);
   else
     tabwidget->setTabPosition(QTabWidget::Bottom);
+
+  KAcceleratorManager::setNoAccel( tabwidget );
 
   connect(tabwidget, SIGNAL(movedTab(int,int)), SLOT(slotMovedTab(int,int)));
   connect(tabwidget, SIGNAL(mouseDoubleClick(QWidget*)), SLOT(slotRenameSession()));
@@ -1058,8 +1063,8 @@ void Konsole::makeBasicGUI()
 
   //help menu
   if (m_help)
-     m_help->setAccel(QKeySequence(),m_help->idAt(0)); 
-     // Don't steal F1 (handbook) accel (esp. since it not visible in 
+     m_help->setAccel(QKeySequence(),m_help->idAt(0));
+     // Don't steal F1 (handbook) accel (esp. since it not visible in
      // "Configure Shortcuts").
 
   m_closeSession = new KAction(i18n("C&lose Session"), "fileclose", 0, this,
@@ -1877,7 +1882,7 @@ void Konsole::slotSelectTabbar() {
    if ( n_tabbar == TabNone ) {     // Hide tabbar
       tabwidget->setTabBarHidden( true );
    } else {
-      if ( tabwidget->isTabBarHidden() ) 
+      if ( tabwidget->isTabBarHidden() )
          tabwidget->setTabBarHidden( false );
       if ( n_tabbar == TabTop )
          tabwidget->setTabPosition( QTabWidget::Top );
@@ -1929,7 +1934,7 @@ void Konsole::slotConfigureKeys()
     }
 
     // Are there any shortcuts for Session Menu entries?
-    if ( !b_sessionShortcutsEnabled && 
+    if ( !b_sessionShortcutsEnabled &&
          m_shortcuts->action( i )->shortcut().count() &&
          QString(m_shortcuts->action( i )->name()).startsWith("SSC_") ) {
       b_sessionShortcutsEnabled = true;
@@ -2527,7 +2532,7 @@ void Konsole::slotSetSessionEncoding(TESession *session, const QString &encoding
   if (!selectSetEncoding)
      makeGUI();
   QStringList items = selectSetEncoding->items();
-  
+
   QString enc;
   unsigned int i = 0;
   for(QStringList::ConstIterator it = items.begin();
@@ -2541,7 +2546,7 @@ void Konsole::slotSetSessionEncoding(TESession *session, const QString &encoding
   }
   if (i >= items.count())
      return;
-     
+
   bool found = false;
   enc = KGlobal::charsets()->encodingForName(enc);
   QTextCodec * qtc = KGlobal::charsets()->codecForName(enc, found);
@@ -3260,13 +3265,13 @@ void Konsole::createSessionMenus()
   KSimpleConfig *cfg = no2command[SESSION_NEW_SHELL_ID];
   QString txt = cfg->readEntry("Name");
   QString icon = cfg->readEntry("Icon", "openterm");
-  insertItemSorted(m_tabbarSessionsCommands, SmallIconSet(icon), 
+  insertItemSorted(m_tabbarSessionsCommands, SmallIconSet(icon),
                    txt.replace('&',"&&"), SESSION_NEW_SHELL_ID );
 
   QString comment = cfg->readEntry("Comment");
   if (comment.isEmpty())
     comment=txt.prepend(i18n("New "));
-  insertItemSorted(m_session, SmallIconSet(icon), 
+  insertItemSorted(m_session, SmallIconSet(icon),
                    comment.replace('&',"&&"), SESSION_NEW_SHELL_ID);
   m_session->insertItem(SmallIconSet("window_new"),
                         i18n("New &Window"), SESSION_NEW_WINDOW_ID);
@@ -3282,12 +3287,12 @@ void Konsole::createSessionMenus()
 
     QString txt = (*it).readEntry("Name");
     QString icon = (*it).readEntry("Icon", "openterm");
-    insertItemSorted(m_tabbarSessionsCommands, SmallIconSet(icon), 
+    insertItemSorted(m_tabbarSessionsCommands, SmallIconSet(icon),
                      txt.replace('&',"&&"), it.currentKey() );
     QString comment = (*it).readEntry("Comment");
     if (comment.isEmpty())
       comment=txt.prepend(i18n("New "));
-    insertItemSorted(m_session, SmallIconSet(icon), 
+    insertItemSorted(m_session, SmallIconSet(icon),
                      comment.replace('&',"&&"), it.currentKey());
   }
 
