@@ -21,6 +21,7 @@
 #include <kiconloader.h>
 
 #include <stdio.h>
+#include <klocale.h>
 
 #define HERE fprintf(stderr,"%s(%d): here\n",__FILE__,__LINE__);
 

@@ -71,6 +71,7 @@
 #include <assert.h>
 
 #include <locale.h>
+#include <drag.h>
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
