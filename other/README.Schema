@@ -19,6 +19,7 @@ Syntax
   :: "image" Usage PathToPictureFile
   :: "transparency" Fade Red Green Blue
   :: "color" Slot Red Green Blue Transparent Bold
+  :: "rcolor" Slot Saturation Value Transparent Bold
   :: "sysfg" Slot Transparent Bold
   :: "sysbg" Slot Transparent Bold
 
@@ -102,6 +103,11 @@ Meaning
     clause. Use the sysfg or the sysbg clause
     to indicate the default fore and background
     colors of the desktop.
+
+    To specify randomized color for a slot use
+    the clause rcolor. The two parameters to it 
+    being Saturation - the amount of colour, 
+    and Value, the darkness of the colour.
 
     To use transparency/images and to simulate
     the behavior of the xterm, one can supply
