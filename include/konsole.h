@@ -23,6 +23,8 @@
 #include <kaction.h>
 #include <kpopupmenu.h>
 
+#include <kwinmodule.h>
+
 #include <qstrlist.h>
 #include <qintdict.h>
 #include <qptrdict.h>
@@ -63,6 +65,8 @@ public:
   void initSessionKeyTab(const QString &keyTab);
   void newSession(const QString &program, const QStrList &args, const QString &term);
 
+  void run();
+
 public slots:
 
   void makeGUI();
@@ -79,6 +83,7 @@ protected:
  void showFullScreen();
 
 private slots:
+  void currentDesktopChanged(int desk);
   void slotBackgroundChanged(int desk);
   void configureRequest(TEWidget*,int,int,int);
   void activateSession();
@@ -147,6 +152,7 @@ private:
   ColorSchemaList* colors;
 
   KRootPixmap*   rootxpm;
+  KWinModule*    kWinModule;
 
   KMenuBar*   menubar;
   KStatusBar* statusbar;
@@ -180,7 +186,7 @@ private:
   int         n_scroll;
   int         n_render;
   int         curr_schema; // current schema no
-  int         noticedBackgroundChangeOnDesktop;
+  int         wallpaperSource;
   QString     s_schema;
   QString     s_kconfigSchema;
   QString     s_word_seps;			// characters that are considered part of a word

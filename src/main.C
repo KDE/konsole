@@ -326,6 +326,7 @@ int main(int argc, char* argv[])
         ksm->konsole->initFullScreen();
         // works only for the first one, but there won't be more.
         n++;
+        m->run();
     }
   }
   else
@@ -339,8 +340,9 @@ int main(int argc, char* argv[])
     //2.5 sec
     m->initFullScreen();
     m->show();
+    m->run();
   }
   //2.6 sec
-  
+
   return a.exec();
 }

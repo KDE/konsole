@@ -97,6 +97,7 @@ Time to start a requirement list.
 #include <kmenubar.h>
 #include <kmessagebox.h>
 #include <krootpixmap.h>
+#include <netwm.h>
 #include <kaction.h>
 #include <kstdaction.h>
 #include <kpopupmenu.h>
@@ -179,6 +180,7 @@ Konsole::Konsole(const char* name, const QString& _program,
 ,m_initialSession(0)
 ,colors(0)
 ,rootxpm(0)
+,kWinModule(0)
 ,menubar(0)
 ,statusbar(0)
 ,m_file(0)
@@ -204,7 +206,7 @@ Konsole::Konsole(const char* name, const QString& _program,
 ,n_defaultKeytab(0)
 ,n_render(0)
 ,curr_schema(0)
-,noticedBackgroundChangeOnDesktop(0)
+,wallpaperSource(0)
 ,s_kconfigSchema("")
 ,b_scroll(histon)
 ,b_fullscreen(false)
@@ -217,7 +219,6 @@ Konsole::Konsole(const char* name, const QString& _program,
 {
   isRestored = b_inRestore;
   wasRestored = false;
-  kapp->addKipcEventMask(KIPC::BackgroundChanged);
   connect( kapp,SIGNAL(backgroundChanged(int)),this, SLOT(slotBackgroundChanged(int)));
 
   no2command.setAutoDelete(true);
@@ -311,6 +312,15 @@ Konsole::~Konsole()
 
     delete colors;
     colors=0;
+
+    if( kWinModule )
+       delete kWinModule;
+    kWinModule = 0;
+}
+
+void Konsole::run() {
+   kWinModule = new KWinModule();
+   connect( kWinModule,SIGNAL(currentDesktopChanged(int)), this,SLOT(currentDesktopChanged(int)) );
 }
 
 /* ------------------------------------------------------------------------- */
@@ -1804,13 +1814,43 @@ void Konsole::slotBackgroundChanged(int desk)
   ColorSchema* s = colors->find(curr_schema);
   if (s==0) return;
 
-  // We only do this once, because KRootPixmap should handle it later.
+  // Only update rootxpm if window is visible on current desktop
+  NETWinInfo info( qt_xdisplay(), winId(), qt_xrootwin(), NET::WMDesktop );
 
-  if (s->useTransparency() && noticedBackgroundChangeOnDesktop!=desk && (0 != rootxpm))
-  {
-    noticedBackgroundChangeOnDesktop = desk;
+  if (s->useTransparency() && info.desktop()==desk && (0 != rootxpm)) {
+    //KONSOLEDEBUG << "Wallpaper changed on my desktop, " << desk << ", repainting..." << endl;
+    wallpaperSource = desk;
     rootxpm->repaint(true);
   }
+}
+
+void Konsole::currentDesktopChanged(int desk) {
+   //Get window info
+   NETWinInfo info( qt_xdisplay(), winId(), qt_xrootwin(), NET::WMDesktop );
+   bool bNeedUpdate = false;
+ 
+   if( info.desktop()==NETWinInfo::OnAllDesktops ) {
+      //This is a sticky window so it will always need updating
+      bNeedUpdate = true;
+   }
+   else if( (info.desktop() == desk) && (wallpaperSource != desk) ) {
+      bNeedUpdate = true;
+   }
+   else {
+      //We are not sticky and already have the wallpaper for our desktop
+      return;
+   }
+
+   //Check to see if we are transparent too
+   ColorSchema* s = colors->find(curr_schema);
+   if (s==0) 
+      return;
+
+   //This window is transparent, update the root pixmap
+   if( bNeedUpdate && s->useTransparency() ) {
+      wallpaperSource = desk;
+      rootxpm->repaint(true);
+   }
 }
 
 #include "konsole.moc"
