@@ -278,8 +278,8 @@ int TEPty::openPty()
   }
 #endif
   if (ptyfd < 0) // Linux, FIXME: Trouble on other systems?
-  { for (const char* s3 = "pqrstuvwxyzabcde"; *s3 != 0; s3++)
-    { for (const char* s4 = "0123456789abcdef"; *s4 != 0; s4++)
+  { for (const char* s3 = "pqrstuvwxyzabcdefghijklmno"; *s3 != 0; s3++)
+    { for (const char* s4 = "0123456789abcdefghijklmnopqrstuvwxyz"; *s4 != 0; s4++)
       { sprintf(ptynam,"/dev/pty%c%c",*s3,*s4);
         sprintf(ttynam,"/dev/tty%c%c",*s3,*s4);
         if ((ptyfd = open(ptynam,O_RDWR)) >= 0)
