@@ -81,50 +81,50 @@ int main(int argc, char* argv[])
     "(c) 1997-2000, Lars Doelle");
   aboutData.addAuthor("Lars Doelle",0, "lars.doelle@on-line.de");
   aboutData.addCredit("Peter Silva",
-    "decent marking",
+    I18N_NOOP("decent marking"),
     "peter.silva@videotron.ca");
   aboutData.addCredit("Lotzi Boloni",
-    "partification\n"
-    "Toolbar and session names",
+    I18N_NOOP("partification\n"
+    "Toolbar and session names"),
     "boloni@cs.purdue.edu");
   aboutData.addCredit("David Faure",
-    "partification\n"
-    "overall improvements",
+    I18N_NOOP("partification\n"
+    "overall improvements"),
     "David.Faure@insa-lyon.fr");
   aboutData.addCredit("Antonio Larrosa",
-    "transparency",
+    I18N_NOOP("transparency"),
     "larrosa@kde.org");
   aboutData.addCredit("Matthias Ettrich",
-    "most of main.C donated via kvt\n"
-    "overall improvements",
+    I18N_NOOP("most of main.C donated via kvt\n"
+    "overall improvements"),
     "ettrich@kde.org");
   aboutData.addCredit("Warwick Allison",
-    "schema and selection improvements",
+    I18N_NOOP("schema and selection improvements"),
     "warwick@troll.no");
   aboutData.addCredit("Dan Pilone",
-    "SGI Port",
+    I18N_NOOP("SGI Port"),
     "pilone@slac.com");
   aboutData.addCredit("Kevin Street",
-    "FreeBSD port",
+    I18N_NOOP("FreeBSD port"),
     "street@iname.com");
   aboutData.addCredit("Sven Fischer",
-    "bug fixing",
+    I18N_NOOP("bug fixing"),
     "herpes@kawo2.rwth-aachen.de");
   aboutData.addCredit("Waldo Bastian",
-    "bug fixing",
+    I18N_NOOP("bug fixing"),
     "bastian@kde.org");
   aboutData.addCredit("Dale M. Flaven",
-    "bug fixing",
+    I18N_NOOP("bug fixing"),
     "dflaven@netport.com");
   aboutData.addCredit("Martin Jones",
-    "bug fixing",
+    I18N_NOOP("bug fixing"),
     "mjones@powerup.com.au");
   aboutData.addCredit("Lars Knoll",
-    "bug fixing",
+    I18N_NOOP("bug fixing"),
     "knoll@mpi-hd.mpg.de");
-  aboutData.addCredit("Thanks to many other",
+  aboutData.addCredit("",I18N_NOOP("Thanks to many others.\n"
     "The above list only reflects the contributors\n"
-    "i mananged to keep track for.");
+    "I managed to keep track for."));
 
   KCmdLineArgs::init( argc, argv, &aboutData );
   KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
