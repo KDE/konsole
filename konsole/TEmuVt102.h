@@ -116,6 +116,9 @@ private:
   void reportCursorPosition();
   void reportTerminalParms(int p);
 
+  void onScrollLock();
+  void scrollLock(bool lock);
+ 
 protected:
 
   unsigned short applyCharset(unsigned short c);
@@ -129,6 +132,7 @@ protected:
 
   DECpar currParm;
   DECpar saveParm;
+  bool holdScreen;
 };
 
 #endif // ifndef ANSIEMU_H

@@ -750,6 +750,26 @@ void TEmuVt102::onMouse( int cb, int cx, int cy )
 
 // Keyboard Handling ------------------------------------------------------- --
 
+void TEmuVt102::scrollLock(const bool lock)
+{
+  if (lock)
+  {
+    holdScreen = true;
+    emit sndBlock("\023", 1); // XOFF -> ^S
+  }
+  else
+  {
+    holdScreen = false;
+    emit sndBlock("\021", 1); // XON -> ^Q
+  }
+}
+
+void TEmuVt102::onScrollLock()
+{
+  bool switchlock = !holdScreen;
+  scrollLock(switchlock);
+}
+
 #define encodeMode(M,B) BITS(B,getMode(M))
 #define encodeStat(M,B) BITS(B,((ev->state() & (M)) == (M)))
 
@@ -796,6 +816,17 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
     case CMD_activateMenu   : emit activateMenu();            return;
     case CMD_moveSessionLeft : emit moveSessionLeft();        return;
     case CMD_moveSessionRight: emit moveSessionRight();       return;
+    case CMD_scrollLock     : onScrollLock(                ); return;
+  }
+
+  // Catch XOFF/XON aka ^S/^Q.  The state is used for the ScrollLock impl.
+  if ( (ev->state() & ControlButton) )
+  {
+    if ( (ev->type() & QEvent::KeyPress) )
+    {
+      if ( ev->key()  == Key_Q ) { scrollLock(false); return; }
+      if ( ev->key()  == Key_S ) { scrollLock(true);  return; }
+    }
   }
 
   // fall back handling
@@ -944,6 +975,7 @@ void TEmuVt102::resetModes()
   resetMode(MODE_AppCuKeys); saveMode(MODE_AppCuKeys);
   resetMode(MODE_NewLine  );
     setMode(MODE_Ansi     );
+  holdScreen = false;
 }
 
 void TEmuVt102::setMode(int m)

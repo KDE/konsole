@@ -101,6 +101,7 @@
   "key Down  +Shift   : scrollLineDown\n"
   "key Next  +Shift   : scrollPageDown\n"
   "key Insert+Shift   : emitSelection\n"
+  "key ScrollLock     : scrollLock\n"
   "\n"
   "# keypad characters are not offered differently by Qt.\n"
   ""

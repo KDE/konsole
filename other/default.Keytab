@@ -100,4 +100,6 @@ key Down  +Shift   : scrollLineDown
 key Next  +Shift   : scrollPageDown
 key Insert+Shift   : emitSelection
 
+key ScrollLock     : scrollLock
+
 # keypad characters are not offered differently by Qt.
