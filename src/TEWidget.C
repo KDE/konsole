@@ -282,6 +282,11 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,possibleTripleClick(false)
 ,currentSession(0)
 {
+  // The offsets are not yet calculated. 
+  // Do not calculate these too often to be more smoothly when resizing
+  // konsole in opaque mode.
+  bY = blX = -1;
+
   cb = QApplication::clipboard();
   QObject::connect( (QObject*)cb, SIGNAL(dataChanged()),
                     this, SLOT(onClearSelection()) );
@@ -591,6 +596,7 @@ void TEWidget::setScroll(int cursor, int slines)
 void TEWidget::setScrollbarLocation(int loc)
 {
   if (scrollLoc == loc) return; // quickly
+  bY = blX = -1;
   scrollLoc = loc;
   propagateSize();
   update();
@@ -1126,20 +1132,23 @@ void TEWidget::calcGeometry()
   {
     case SCRNONE :
      columns = ( contentsRect().width() - 2 * rimX ) / font_w;
-     blX = (contentsRect().width() - (columns*font_w) ) / 2;
+     if ( blX < 0 )
+        blX = (contentsRect().width() - (columns*font_w) ) / 2;
      brX = blX;
      scrollbar->hide();
      break;
     case SCRLEFT :
      columns = ( contentsRect().width() - 2 * rimX - scrollbar->width()) / font_w;
-     brX = (contentsRect().width() - (columns*font_w) - scrollbar->width() ) / 2;
+     if ( blX < 0 )
+        brX = (contentsRect().width() - (columns*font_w) - scrollbar->width() ) / 2;
      blX = brX + scrollbar->width();
      scrollbar->move(contentsRect().topLeft());
      scrollbar->show();
      break;
     case SCRRIGHT:
      columns = ( contentsRect().width()  - 2 * rimX - scrollbar->width()) / font_w;
-     blX = (contentsRect().width() - (columns*font_w) - scrollbar->width() ) / 2;
+     if ( blX < 0 )
+        blX = (contentsRect().width() - (columns*font_w) - scrollbar->width() ) / 2;
      brX = blX;
      scrollbar->move(contentsRect().topRight() - QPoint(scrollbar->width()-1,0));
      scrollbar->show();
@@ -1147,7 +1156,8 @@ void TEWidget::calcGeometry()
   }
   //FIXME: support 'rounding' styles
   lines   = ( contentsRect().height() - 2 * rimY  ) / font_h;
-  bY = (contentsRect().height() - (lines  *font_h)) / 2;
+  if ( bY < 0 )
+     bY = (contentsRect().height() - (lines  *font_h)) / 2;
 }
 
 void TEWidget::makeImage()
