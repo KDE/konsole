@@ -1844,7 +1844,7 @@ void Konsole::setArgs(QStrList newArgs)
 void Konsole::setPgm(QString newPgm)
 {
 //  QStrList args = new QStrList();
-  pgm = newPgm.latin1();
+  pgm = strdup(newPgm.latin1());
 }
 
 #include "konsole.moc"
