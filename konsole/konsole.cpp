@@ -1688,6 +1688,12 @@ void Konsole::doneSession(TESession* s, int )
     else
       close();
   }
+  else {
+    sessions.find(se);
+    uint position=sessions.at();
+    m_moveSessionLeft->setEnabled(position>0);
+    m_moveSessionRight->setEnabled(position<sessions.count()-1);
+  }
 }
 
 /*! Cycle to previous session (if any) */
