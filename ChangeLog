@@ -1,14 +1,15 @@
+11 July 1999
+- merged kde-1.1 changes into head branch.
+- removed "Insert Pastes" option. (Actually, you
+  can still paste using the insert key, but have
+  to print Shift, additionally. Have to check the
+  doc's whether this is properly mentioned)
 12 June 1999 Stephan Kulow <coolo@kde.org>
 - merged the below changes back into HEAD
 28 May 1999 Dan Pilone <pilone@slac.com>
 - Ported konsole to SGI (well, hopefully all SVR4 machines.)
 22 May 1999
 - added transparency/tint support
-11 Feb 1999
-- added some docs
-- set version to 0.9.10
-06 Feb 1999
-- adjusting geometry save/restore
 05 Apr 1999
 - made sessions die silently.
 24 Mar 1999
@@ -28,6 +29,11 @@
 - added -name
 - Shift-Insert pastes
 - added *.kdelnk to be seeked in ~./kde/apps/konsole, too.
+11 Feb 1999
+- added some docs
+- set version to 0.9.10
+06 Feb 1999
+- adjusting geometry save/restore
 03 Feb 1999
 - fixed -caption
 - some adjustments in geometry management

@@ -9,7 +9,7 @@
 
    Usage:
 
-   - In TEWidget.C let syslog be stdout.
+   - In TEShell.C let syslog be stdout.
    - konsole > ttt
    - produce the effect in question.
    - run this program.

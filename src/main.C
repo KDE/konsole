@@ -152,7 +152,6 @@ TEDemo::TEDemo(const QString& name, QStrList & _args, int login_shell) : KTMainW
   te->setFrameStyle( b_framevis
                      ? QFrame::WinPanel | QFrame::Sunken
                      : QFrame::NoFrame );
-  te->setInsertToPaste( b_inspaste );
   te->setScrollbarLocation(n_scroll);
 
   // construct initial session ///////////////////////////////////////////////
@@ -364,8 +363,6 @@ void TEDemo::makeMenu()
   m_options->insertSeparator();
   m_options->insertItem( i18n("BS sends &DEL"), 4 );
   m_options->setItemChecked(4,b_bshack);
-  m_options->insertItem( i18n("&Insert pastes"), 5 );
-  m_options->setItemChecked(5,b_inspaste);
 
   m_options->insertSeparator();
   m_options->insertItem( i18n("&Font"), m_font);
@@ -414,7 +411,6 @@ void TEDemo::saveProperties(KConfig* config)
   config->writeEntry("menubar visible",b_menuvis);
   config->writeEntry("has frame",b_framevis);
   config->writeEntry("BS hack",b_bshack);
-  config->writeEntry("insert paste",b_inspaste);
   config->writeEntry("font",n_font);
   config->writeEntry("schema",s_schema);
   config->writeEntry("scrollbar",n_scroll);
@@ -422,8 +418,8 @@ void TEDemo::saveProperties(KConfig* config)
   if (args.count() > 0) config->writeEntry("konsolearguments", args);
   config->writeEntry("class",name());
   config->writeEntry("defaultheight", height()); // for "save options". Not used by SM.
-  config->writeEntry("defaultwidth", width()); // for "save options". Not used by SM.
-  config->writeEntry("kmenubar", //FIXME:Float
+  config->writeEntry("defaultwidth", width());   // for "save options". Not used by SM.
+  config->writeEntry("kmenubar",                 //FIXME:Float
                      menubar->menuBarPos() == KMenuBar::Bottom ? "bottom" : "top");
   // geometry (placement) done by KTMainWindow
   config->sync();
@@ -435,10 +431,10 @@ void TEDemo::saveProperties(KConfig* config)
 void TEDemo::readProperties(KConfig* config)
 {
   config->setGroup("options"); // bad! will no allow us to support multi windows
+/*FIXME: (merging) state of material below unclear.*/
   b_menuvis  = config->readBoolEntry("menubar visible",TRUE);
   b_framevis = config->readBoolEntry("has frame",TRUE);
   b_bshack   = config->readBoolEntry("BS hack",TRUE);
-  b_inspaste = config->readBoolEntry("insert paste",FALSE);
   n_font     = QMIN(config->readUnsignedNumEntry("font",3),7);
   n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",SCRRIGHT),2);
   s_schema   = config->readEntry("schema","");
@@ -451,7 +447,18 @@ void TEDemo::readProperties(KConfig* config)
   scrollbar_menu_activated(QMIN(config->readUnsignedNumEntry("scrollbar",SCRRIGHT),2));
 
   // not necessary for SM (KTMainWindow does it after), but useful for default settings
-
+/*FIXME: (merging) state of material below unclear*/
+  if (menubar->menuBarPos() != KMenuBar::Floating)
+  { QString entry = config->readEntry("kmenubar");
+    if (!entry.isEmpty() && entry == "floating")
+    {
+      menubar->setMenuBarPos(KMenuBar::Floating);
+      QString geo = config->readEntry("kmenubargeometry");
+      if (!geo.isEmpty()) menubar->setGeometry(KWM::setProperties(menubar->winId(), geo));
+    }
+    else if (!entry.isEmpty() && entry == "top") menubar->setMenuBarPos(KMenuBar::Top);
+    else if (!entry.isEmpty() && entry == "bottom") menubar->setMenuBarPos(KMenuBar::Bottom);
+  }
   // (geometry stuff removed) done by KTMainWindow for SM, and not needed otherwise
 
   // Options that should be applied to all sessions /////////////
@@ -647,11 +654,8 @@ void TEDemo::opt_menu_activated(int item)
             break;
     case 2: setFrameVisible(!b_framevis);
             break;
-  case 4: setBsHack(!b_bshack);
+    case 4: setBsHack(!b_bshack);
             break;
-    case 5: b_inspaste = !b_inspaste;
-            m_options->setItemChecked(5,b_inspaste);
-            te->setInsertToPaste( b_inspaste );
     case 8: saveProperties(kapp->getConfig());
             break;
   }
@@ -847,8 +851,7 @@ void TEDemo::doneSession(TESession* s, int )
     {char rcs[100]; sprintf(rcs,"%d.\n",WEXITSTATUS((status)));
       str = str + i18n("\nReturn code = ") + rcs;
     }
-    QMessageBox::warning( this, i18n("Error - Konsole"), str,
-			  i18n("&Ok"));
+    KMsgBox::message( this, i18n("Error"), str, KMsgBox::EXCLAMATION );
   }
 #endif
   int no = (int)session2no.find(s);
@@ -903,6 +906,23 @@ void TEDemo::loadSessionCommands()
   
   for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it ) 
     addSessionCommand(*it);
+/*FIXME: (merging) guess this is obsolete
+  for (int local=0; local<=1; local++)
+  {
+    // KApplication could support this technique better
+    QString path = local
+                 ? kapp->localkdedir() + "/share/apps/konsole"
+                 : kapp->kde_datadir() + "/konsole";
+    QDir d( path );
+    if(!d.exists()) return;
+    d.setFilter( QDir::Files | QDir::Readable );
+    d.setNameFilter( "*.kdelnk" );
+    const QFileInfoList *list = d.entryInfoList();
+    QFileInfoListIterator it( *list );
+    for(QFileInfo *fi; (fi=it.current()); ++it )
+      addSessionCommand(fi->filePath());
+  }
+*/
 }
 
 // --| Schema support |-------------------------------------------------------

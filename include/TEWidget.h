@@ -39,7 +39,6 @@ public:
     
     void setScrollbarLocation(int loc);
     void setScroll(int cursor, int lines);
-    void setInsertToPaste(bool on);
 
 public:
     
@@ -149,8 +148,6 @@ private:
     BOOL blinking;   // hide text in paintEvent
     BOOL hasBlinker; // has characters to blink
     QTimer* blinkT;  // active when hasBlinker
-
-    bool ins_to_paste; // Insert key causes paste
 };
 
 #endif // TE_WIDGET_H

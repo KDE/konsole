@@ -168,7 +168,6 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   font_h   = 1;
   font_a   = 1;
   word_selection_mode = FALSE;
-  ins_to_paste = FALSE;
 
   setMouseMarks(TRUE);
   setVTFont( QFont("fixed") );
@@ -776,12 +775,6 @@ bool TEWidget::eventFilter( QObject *, QEvent *e )
       case ShiftButton|(Key_Insert   << 8) :
            emitSelection();
            break;
-      case (Key_Insert << 8) : // Some progs use this.
-	   if ( ins_to_paste ) {
-             emitSelection();
-             break;
-	   }
-	   // FALLTHROUGH
       default :
            emit keyPressedSignal(ke); // expose
            break;
@@ -802,11 +795,6 @@ bool TEWidget::eventFilter( QObject *, QEvent *e )
     }
   }
   return FALSE; // standard event processing
-}
-
-void TEWidget::setInsertToPaste(bool on)
-{
-  ins_to_paste = on;
 }
 
 /* ------------------------------------------------------------------------- */

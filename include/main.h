@@ -18,6 +18,7 @@
 
 #include <kwmmapp.h>
 #include <ktmainwindow.h>
+//#include <ktopwidget.h>
 #include <ksimpleconfig.h>
 #include <qstrlist.h>
 
@@ -93,7 +94,7 @@ private:
   void setMenuVisible(bool);
   void setFrameVisible(bool);
   void setBsHack(bool);
- 
+  
   void setSchema(const char* path);
   void setSchema(const ColorSchema* s);
   void setFont(int fontno);
@@ -124,7 +125,6 @@ private:
   bool        b_menuvis;
   bool        b_framevis;
   bool        b_bshack;
-  bool        b_inspaste;
   int         n_font;
   int         n_scroll;
   QString     s_schema;

@@ -53,10 +53,13 @@
     over the (obsolete) predecessor.
 
     There's a sinister ioctl(2), signal(2) and job control stuff
-    nessesary to make everything work as it should. (/sa makeShell)
+    nessesary to make everything work as it should.
 */
 
-#include "../../config.h"
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -76,11 +79,10 @@
 #include <assert.h>
 #include <fcntl.h>
 #include <grp.h>
+
 #include <signal.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <termios.h>
-#include <time.h>
+//#include <time.h>
 #include <unistd.h>
 
 #if defined (_HPUX_SOURCE)
@@ -99,24 +101,17 @@
 
 #include "TEShell.h"
 #include "TEShell.moc"
+
+
 #include <kapp.h>
 #include <kstddirs.h>
 #include <kmsgbox.h>
 
-#ifndef HERE
 #define HERE fprintf(stdout,"%s(%d): here\n",__FILE__,__LINE__)
-#endif
 
 FILE* syslog_file = NULL; //stdout;
 
 static QIntDict<Shell> shells;
-
-/* -------------------------------------------------------------------------- */
-
-//#include <unistd.h>
-//#include <stdlib.h>
-//#include <sys/types.h>
-//#include <sys/wait.h>
 
 #define PTY_FILENO 3
 #define BASE_CHOWN "konsole_grantpty"
@@ -138,7 +133,8 @@ static int chownpty(int fd, int grant)
     /* We pass the master pseudo terminal as file descriptor PTY_FILENO. */
     if (fd != PTY_FILENO && dup2(fd, PTY_FILENO) < 0) exit(1);
     QString path = locate("exe", BASE_CHOWN);
-    
+//  QString path = KApplication::kde_bindir() + "/" + BASE_CHOWN;
+//  execle(path.data(), BASE_CHOWN, grant?"--grant":"--revoke", NULL, NULL);
     execle(path.ascii(), BASE_CHOWN, grant?"--grant":"--revoke", NULL, NULL);
     exit(1); // should not be reached
   }
@@ -305,7 +301,6 @@ void Shell::makeShell(const char* dev, QStrList & args,
 #ifdef TIOCSPTLCK
   int flag = 0; ioctl(fd,TIOCSPTLCK,&flag); // unlock pty
 #endif
-
   // open and set all standard files to slave tty
   int tt = open(dev, O_RDWR);
 
@@ -331,7 +326,7 @@ void Shell::makeShell(const char* dev, QStrList & args,
   struct rlimit rlp;
   getrlimit(RLIMIT_NOFILE, &rlp);
   for (int i = 0; i < (int)rlp.rlim_cur; i++) 
-    if (i != tt && i != fd) close(i);
+    if (i != tt && i != fd) close(i); //FIXME: (result of merge) Check if not closing fd is OK)
 
   dup2(tt,fileno(stdin));
   dup2(tt,fileno(stdout));
@@ -428,51 +423,6 @@ void Shell::makeShell(const char* dev, QStrList & args,
   perror("exec failed");
   exit(1);                             // control should never come here.
 }
-
-// int openShell()
-//     { 
-//     int ptyfd; 
-    
-// #ifndef SVR4 
-//     char *s3, *s4;
-//     static char ptyc3[] = "pqrstuvwxyzabcde";
-//     static char ptyc4[] = "0123456789abcdef";
-// #endif
-    
-//     // Find a master pty that we can open ////////////////////////////////
-// #ifdef SVR4
-//     ptyfd = open("/dev/ptmx",O_RDWR);
-//     if (ptyfd < 0) 
-// 	{
-// 	perror("Can't open a pseudo teletype");
-// 	return(-1);
-// 	}
-//     grantpt(ptyfd);
-//     unlockpt(ptyfd);
-//     fcntl(ptyfd,F_SETFL,O_NDELAY);
-//     ttynam = ptsname(ptyfd);
-// #else
-//     ptyfd = -1;
-//     for (s3 = ptyc3; *s3 != 0; s3++) 
-// 	{
-// 	for (s4 = ptyc4; *s4 != 0; s4++) 
-// 	    {
-// 	    ptynam[8] = ttynam[8] = *s3;
-// 	    ptynam[9] = ttynam[9] = *s4;
-// 	    if ((ptyfd = open(ptynam,O_RDWR)) >= 0) 
-// 		{
-// 		if (geteuid() == 0 || access(ttynam,R_OK|W_OK) == 0) break;
-// 		close(ptyfd); ptyfd = -1;
-// 		}
-// 	    }
-// 	if (ptyfd >= 0) break;
-// 	}
-//     if (ptyfd < 0) { fprintf(stderr,"Can't open a pseudo teletype\n"); exit(1); }
-//     fcntl(ptyfd,F_SETFL,O_NDELAY);
-// #endif
-    
-//     return ptyfd;
-//     }
 
 /*! 
     Create a shell.

@@ -63,8 +63,6 @@ install-data-local:
 install-exec-local:
 	@(chown root $(bindir)/konsole_grantpty && chmod 4755 $(bindir)/konsole_grantpty) || echo "Please make konsole_grandpty setuid root"  
 
-# the library search path. 
-
 # just to make sure, automake makes them 
 METASOURCES =TEWidget.moc TEmuVt102.moc session.moc main.moc \
 	TEmulation.moc TEShell.moc kcmkonsole.moc

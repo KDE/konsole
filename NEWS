@@ -8,7 +8,7 @@ New in 0.9.10
 - added *.kdelnk to be seeked in ~./kde/apps/konsole, too.
 - added -name to set the window class
 - documentation improvements
-                                
+
 New in 0.9.9 [Feb 11 1999]
 
 - some small bug fixed (see ChangeLog).
