@@ -703,12 +703,9 @@ void VT102Emulation::XtermHack()
   for (i = 2; i < ppos && '0'<=pbuf[i] && pbuf[i]<'9' ; i++)
     arg = 10*arg + (pbuf[i]-'0');
   if (pbuf[i] != ';') { ReportErrorToken(); return; }
-  QChar *str = new QChar[ppos-i-1];
-//  strncpy(str,pbuf+i+1,ppos-i-2); //FIXME:XXX: pbuf is NOT a char* anymore FIXME FIXME FIXME.
+  QChar *str = new QChar[ppos-i-2];
   for (int j = 0; j < ppos-i-2; j++) str[j] = pbuf[i+1+j];
   QString unistr(str,ppos-i-2);
-  //str[ppos-i-2]='\0';
-printf("Title: >%s<\n",unistr.ascii());
   if (arg <= 2) emit changeTitle(arg,unistr);
   delete str;
 }
