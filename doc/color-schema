@@ -1,0 +1,114 @@
+[README.color.schema]
+
+Having made parts of the rendition process configurable, some explanation
+seem to be required, to. Since I'm writing a color schema configuration
+program in the moment, these notes are also some of the preparations for it.
+
+
+First of all, the redition process deals with a lot of parameters, making
+a useful configuration program for it quite complicated.
+
+Looking at TECommon.h, the current implementation of a character cell allows
+not less then 256 different foreground and background colors, together with
+256 rendition values, with, forming a bit vector can be treated as 8 different
+rendition attributes (like blink, bold, underlined, etc.)
+
+[From the later, one already sees one misconception within the current
+ implentation. Attributes like bold, underlined, etc. belong to font.
+ Now because we do not have a proper terminal font family, this goes
+ into the rendition attributes instead. Sooner or later, no way will
+ lead around getting a proper family of scalable fonts for konsole.]
+
+
+Upon further investigation one has carefully to distinguish between
+the ability of the protocol to express rendition and the abilities of
+the terminal widget to do them.
+
+The protocol is able to express 18 different colors, this is 8 colors
+taken from an RBG cube and an additional default color (which is intentionally
+one of the 8 but it needn't be) both for fore- and background.
+
+For simplicity, we interpret the fore- and background colors of the RGB cube
+to be identical, thus ending up with 10 different colors (8 RBG + 2 default).
+Note that this is not necessary, but just konsole's interpretation, it may
+well make quite a lot of sense to have different sets of (real) colors for fore-
+and background.
+
+Now the xterm protocol can further express the following attributes:
+
+- bold
+- underlined
+- blink
+- reverse
+
+The Linux console protocol knows also the attribute
+
+- half-bright
+
+Now, when it comes to interpretation, things become pretty messed up.
+
+Xterm interprets "bold"        as "font bold" + "foreground intensive"
+Linux interprets "bold"        as "foreground intensive"
+
+Xterm interprets "blink"       as nothing
+Linux interprets "blink"       as "background intensive"
+
+Xterm interprets "underlined"  as "font underlined"
+Linux interprets "underlines"  as "foreground intensive"
+
+Xterm interprets "half-bright" as nothing
+Linux interprets "half-bright" as "foreground dim"
+ANSI  interprets "half-bright" as "font italic"
+
+all   interprets  "reverse"     as "exchange fore- and background color"
+
+
+A flexible interpretation engine is needed to cope with all this.
+A proper configuration should also take care of it.
+
+Since intensive and faint colors can also be expressed by the protocols,
+the number of colors double or tripple (we do not have implemented
+half-bright, yet, since we've just started to do the Linux console emulation.)
+
+Note that the protocol is not able to express "intense", which causes part
+of the confusion listed above.  Xterms interpretation of bold as intensive+bold
+is most probably caused by the fact, that in a black on white color display
+(which is their default), "black" cannot be intensified, thus the attribute
+would get lost. Linux gets around this problem by having the regular black as
+dark gray, and only intensive black as black.
+
+As a matter of personal taste, the author strongly dislikes the apparence of
+the this combination when it comes to colorful applications. Thus the default
+schema of konsole is configured to render only the default foreground color
+as bold, while the others are rendered intensive. By this, the interpretation
+device (and it's configuration) is even more complex as it appears above.
+
+
+Konsole's rendition engine is currently not able to cope with font attributes
+by changing the font. Instead, it does some (costly) operations with the
+character images themselves to produce:
+
+- bold
+- underlined
+
+It cannot render italic and is (by a parameter) limited to 20 different
+colors. That fore- and background colors are interpreted identically, is
+also build-in to the engine (and interpretation). These aren't severe
+limitations, it can be changed easily.
+
+Other then the emulations mentioned above, konsole can interpret "blink"
+as blink. Just to have a little more fun, konsole can display background
+images, meaning that some background colors have to be interpreted as 
+"transparent" when a background image exists. Practically, this can only
+be the default background color, so a least this one could be hard-wired.
+
+To set up a proper configuration, I do not want the users to cope with
+all this unnecessary complications. Instead, a approach has to be found,
+that allows to configure the already existing interpretations and other,
+that do make sense. As stated above, it does not make sense individual
+colors beside the default background colors to become transparent. Nor
+does it make sense, to set all the 52 possible colors individually, since
+an RGB color cube is intented with some intensity attributes. Some
+experimentation is certainly necessary to get things right. E.g. VGA and
+X11 colors are different for one of the yellow sorts, beside just being
+gamma corrected.
