@@ -1,6 +1,8 @@
 CFLAGS	= -O
 OBJS	= main.o esc.o
 
+all: vttest quote
+
 vttest:	$(OBJS)
 	cc $(CFLAGS) -o vttest $(OBJS)
 

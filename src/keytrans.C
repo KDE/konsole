@@ -10,6 +10,7 @@
 
 #include "keytrans.h"
 #include <qnamespace.h>
+#include <qbuffer.h>
 
 #include <stdio.h>
 
@@ -116,8 +117,11 @@ void KeyTrans::addXtermKeys()
 // VT100 can add an extra \n after return.
 // The NewLine mode is set by an escape sequence.
 
-  addEntry(Qt::Key_Return, bOff(BITS_NewLine), CMD_send, "\r", 1);
-  addEntry(Qt::Key_Return, bOn(BITS_NewLine), CMD_send, "\r\n", 2);
+  addEntry(Qt::Key_Return, bOff(BITS_Alt)|bOff(BITS_NewLine), CMD_send, "\r", 1);
+  addEntry(Qt::Key_Return, bOff(BITS_Alt)|bOn(BITS_NewLine), CMD_send, "\r\n", 2);
+
+  addEntry(Qt::Key_Return, bOn(BITS_Alt)|bOff(BITS_NewLine), CMD_send, "\033\r", 2);
+  addEntry(Qt::Key_Return, bOn(BITS_Alt)|bOn(BITS_NewLine), CMD_send, "\033\r\n", 3);
 
 // Some desperately try to save the ^H.
 // The BsHack mode is set by regular
@@ -307,6 +311,117 @@ void defKeySyms()
 #include <stdio.h>
 
 // We define a very poor scanner, here.
+/* Syntax
+   - Line :: [KeyName { ("+" | "-") ModeName } ":" (String|CommandName)] "\n"
+   - Comment :: '#' (any but \n)*
+   Tokens
+   - Spaces
+   - Name
+   - String
+   - Opr ("+","-",":","#","\n").
+*/
+
+// Ok, we have a regular tokenizer here.
+
+#define SYMName    0
+#define SYMString  1
+#define SYMEol     2
+#define SYMEof     3
+#define SYMOpr     4
+
+#define inRange(L,X,H) ((L <= X) && (X <= H))
+#define isNibble(X) (inRange('A',X,'F')||inRange('a',X,'f')||inRange('0',X,'9'))
+#define convNibble(X) (inRange('0',X,'9')?X-'9':X+10-(inRange('A',X,'F')?'A':'a'))
+
+int sym;
+QString res;
+int len;
+
+int cc;
+QBuffer buf;
+
+bool getSymbol()
+{
+  while (cc == ' ')
+    cc = buf.getch(); // skip spaces
+  if (cc == '#')      // skip comment
+  {
+    while (cc != '\n' && cc > 0)
+      cc = buf.getch();
+  }
+  if (cc <= 0)
+  {
+    sym = SYMEof;
+    return FALSE; // eos
+  }
+  if (cc == '\n')
+  {
+    sym = SYMEol;
+    return TRUE; // eol
+  }
+  if (inRange('A',cc,'Z'))
+  {
+    sym = SYMName;
+    res = "";
+    while (inRange('A',cc,'Z') || inRange('a',cc,'z')) 
+      cc = buf.getch();
+    res = res + (char)cc;
+    //NOW, we have a preread!
+    return TRUE;
+  }
+  if (strchr("+-:",cc))
+  {
+    sym = SYMOpr;
+    return TRUE;
+  }
+  // must be string
+  // we keep things simple here
+  if (cc == '"')
+  {
+    cc = buf.getch();
+    res = "";
+    len = 0;
+    while (cc >= ' ' && cc != '"')
+    { int sc;
+      if (cc == '\\') // handle quotation
+      {
+        cc = buf.getch();
+        switch (cc)
+        {
+          case 'b'  : sc =  8; break;
+          case 'f'  : sc = 12; break;
+          case 't'  : sc =  9; break;
+          case 'r'  : sc = 13; break;
+          case 'n'  : sc = 10; break;
+          case '\\' : // fall thru
+          case '"'  : sc = cc; break;
+          case 'x'  : cc = buf.getch();
+                      sc = 0;
+                      if (isNibble(cc)) { sc = 16*sc + convNibble(cc); cc = buf.getch(); } else goto ERROR;
+                      if (isNibble(cc)) { sc = 16*sc + convNibble(cc); cc = buf.getch(); } else goto ERROR;
+                      break;
+          default   : goto ERROR;
+        }
+      }
+      else
+      {
+        // regular char
+        sc = cc; cc = buf.getch();
+      }
+      res = res + (char)sc;
+      len = len + 1;
+    }
+    if (cc != '"') goto ERROR;
+    cc = buf.getch();
+    sym = SYMString;
+    return TRUE;
+  }
+  ERROR:
+  /* Error processing is so, that we skip all errorness lines.
+     This is stable, since no errors can follow from this behavior.
+  */
+  return TRUE;
+}
 
 #define skipspaces while (*cc == ' ') cc++
 
@@ -328,7 +443,7 @@ void defKeySyms()
 static void scanline(char* cc)
 { char* id;
 Loop:
-  // syntax: [KeyName { ("+" | "-") ModeName } ":" String/Command] ["#" Comment]
+  // syntax: [KeyName { ("+" | "-") ModeName } ":" String/CommandName] ["#" Comment]
   skipspaces;
   if ('A' <= *cc && *cc <= 'Z')
   {
@@ -385,13 +500,13 @@ Loop:
 }
 
 /*
-int main()
+void test()
 {
-  scanline
-  (
+  QCString txt =
 #include "KeyTab.sys"
-  );
-  return 0;
+  ;
+  buf(txt);
+  cc = buf.getch();
 }
 */
 
