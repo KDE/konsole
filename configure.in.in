@@ -3,6 +3,7 @@ AC_MSG_CHECKING(whether we can use openpty)
 ac_use_openpty="yes"
 AC_ARG_ENABLE(openpty, [  --disable-openpty       disable openpty (UNIX98 terminals) support [defaul=enabled]], [ac_use_openpty="no"])
 if test "$ac_use_openpty" = "yes"; then
+	kde_safe_LIBS=$LIBS
 	LIBS="$LIBS $LIBUTIL"
 	AC_TRY_RUN([
 #include <pty.h>
@@ -16,6 +17,7 @@ int main(int argc, char* argv) {
 	return 0;
 }
 ], [ac_use_openpty="yes"], [ac_use_openpty="no"])
+	LIBS=$kde_safe_LIBS
 fi
 if test "$ac_use_openpty" = "yes"; then
 	AC_DEFINE(HAVE_OPENPTY, 1, [Defines whether we can use the openpty() function])
