@@ -138,7 +138,7 @@ protected:
     bool event( QEvent * );
 
     void drawAttrStr(QPainter &paint, QRect rect,
-                     QString& str, ca attr, bool pm, bool clear);
+                     QString& str, const ca *attr, bool pm, bool clear);
     void paintEvent( QPaintEvent * );
 
     void resizeEvent(QResizeEvent*);
