@@ -1301,6 +1301,11 @@ void TEScreen::addHistLine()
          if (histCursor+1 == newHistLines)
            histCursor++;
     }
+    else
+      // if user is looking at the history or selecting, hold position
+      if ((histCursor > 0) && ((histCursor != newHistLines) || (sel_begin!=-1))) {
+         histCursor--;
+      }
 
     if (sel_begin != -1)
     {
