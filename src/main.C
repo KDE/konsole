@@ -16,6 +16,9 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+#include <qdir.h>
+
 #include <kapp.h>
 #include <klocale.h>
 #include <kaboutdata.h>
@@ -41,6 +44,7 @@ static KCmdLineOptions options[] =
    { "notoolbar",       I18N_NOOP("Do not display toolbar"), 0 },
    { "vt_sz CCxLL",  I18N_NOOP("Terminal size in columns x lines"), 0 },
    { "type <type>", I18N_NOOP("Open the given session type instead of the default shell"), 0 },
+   { "workdir <dir>", I18N_NOOP("Change working directory of the konsole to 'dir'"), 0 },
    { "!e <command>",  I18N_NOOP("Execute 'command' instead of shell"), 0 },
    // WABA: All options after -e are treated as arguments.
    { "+[args]",    I18N_NOOP("Arguments for 'command'"), 0 },
@@ -185,7 +189,9 @@ int main(int argc, char* argv[])
   if(args->isSet("type")) {
     type = args->getOption("type");
   }
-
+  if(args->isSet("workdir"))
+     QDir::setCurrent( args->getOption("workdir") );
+ 
   //FIXME: more: font, menu, scrollbar, schema, session ...
 
   args->clear();
