@@ -5,6 +5,8 @@
   "key Tab   -Shift       : \"\\t\"\n"
   "key Tab   +Shift+Ansi  : \"\\E[Z\"\n"
   "key Tab   +Shift-Ansi  : \"\\t\"\n"
+  "key Backtab     +Ansi  : \"\\E[Z\"\n"
+  "key Backtab     -Ansi  : \"\\t\"\n"
   "key Return-Shift-NewLine : \"\\r\"\n"
   "key Return-Shift+NewLine : \"\\r\\n\"\n"
   "key Return+Shift         : \"\\EOM\"\n"
