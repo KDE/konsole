@@ -34,6 +34,7 @@
 #include <qlabel.h>
 #include <qfile.h>
 #include <qsplitter.h>
+#include <qregexp.h>
 #include <kglobalsettings.h>
 
 #include <qdom.h>

@@ -51,6 +51,7 @@
 #include <qstyle.h>
 #include <qfile.h>
 #include <qdragobject.h>
+#include <qregexp.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -229,9 +230,16 @@ void TEWidget::fontChange(const QFont &)
 //printf("charset: %s\n",QFont::encodingName(font().charSet()).ascii());
 //printf("rawname: %s\n",font().rawName().ascii());
     
+#if QT_VERSION < 300
   fontMap = strcmp(QFont::encodingName(font().charSet()).ascii(),"iso10646")
           ? vt100extended
           : identicalMap;
+#else
+#if defined(Q_CC_GNU)
+#warning ###
+#endif
+  fontMap = identicalMap; 
+#endif
   propagateSize();
   update();
 }
@@ -956,7 +964,18 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
               // know where the current selection is.
 
     emit keyPressedSignal(ke); // expose
+#if QT_VERSION < 300
     return false;               // accept event
+#else
+    // in Qt2 when key events were propagated up the tree 
+    // (unhandled? -> parent widget) they passed the event filter only once at
+    // the beginning. in qt3 this has changed, that is, the event filter is 
+    // called each time the event is sent (see loop in QApplication::notify,
+    // when internalNotify() is called for KeyPress, whereas internalNotify
+    // activates also the global event filter) . That's why we stop propagation
+    // here.
+    return true;
+#endif
   }
   if ( e->type() == QEvent::Enter )
   {
