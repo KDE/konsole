@@ -245,7 +245,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
   applyMainWindowSettings(config);
   if (currentSize != size())
      defaultSize = size();
-  //kdDebug()<<"Konsole ctor(): readProps()"<<endl;
+  //kdDebug()<<"Konsole ctor(): readProps() type="<<type<<endl;
   QString schema;
   KSimpleConfig *co = type.isEmpty() ?
      0 : new KSimpleConfig(locate("appdata", type + ".desktop"), true /* read only */);
@@ -1418,9 +1418,11 @@ void Konsole::setSchema(ColorSchema* s)
   if (!s) return;
 
         KONSOLEDEBUG << "Checking menu items" << endl;
-
-  m_schema->setItemChecked(curr_schema,FALSE);
-  m_schema->setItemChecked(s->numb(),TRUE);
+  if (m_schema)
+  {
+    m_schema->setItemChecked(curr_schema,FALSE);
+    m_schema->setItemChecked(s->numb(),TRUE);
+  }
         KONSOLEDEBUG << "Remembering schema data" << endl;
 
   s_schema = s->path();
