@@ -102,7 +102,7 @@ public:
   void callReadPropertiesInternal(KConfig *config, int number) { readPropertiesInternal(config,number); }
 
 public slots:
-  void activateSession(const int position);
+  void activateSession(int position);
 
   void makeGUI();
   QString newSession();

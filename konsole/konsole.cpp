@@ -1798,7 +1798,7 @@ void Konsole::listSessions()
   m_sessionList->popup(mapToGlobal(QPoint((width()/2)-(m_sessionList->width()/2),(height()/2)-(m_sessionList->height()/2))));
 }
 
-void Konsole::activateSession(const int position)
+void Konsole::activateSession(int position)
 {
   if (position<=0 || position>(int)sessions.count())
     return;
