@@ -475,9 +475,7 @@ void TEmulation::setConnect(bool c)
   if ( connected)
   {
     //kdDebug(1211)<<"TEmulation::setConnect() onImageSize..."<<endl;
-    onImageSizeChange(gui->Lines(), gui->Columns());
-    //kdDebug(1211)<<"TEmulation::setConnect() showBulk()"<<endl;
-    showBulk();
+    onImageSizeChange(gui->Lines(), gui->Columns());  // calls showBulk();
     //kdDebug(1211)<<"TEmulation::setConnect() done"<<endl;
   }
   else
