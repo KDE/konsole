@@ -1435,6 +1435,17 @@ void Konsole::reparseConfiguration()
   KGlobal::config()->reparseConfiguration();
   readProperties(KGlobal::config(), QString::null, true);
   buildSessionMenus();
+  
+  setSchema(curr_schema);
+  for (KonsoleChild *child = detached.first(); child; child = detached.next()) {
+     int numb = child->session()->schemaNo();
+     ColorSchema* s = colors->find(numb);
+     if (s) {
+       if (s->hasSchemaFileChanged())
+         s->rereadSchemaFile();
+       child->setSchema(s);
+     }
+  }
 }
 
 // --| color selection |-------------------------------------------------------
