@@ -78,6 +78,7 @@ Q_OBJECT
     const char* deviceName();
     
   protected:
+      virtual void commClose();
       virtual int commSetupDoneC();
       virtual int setupCommunication(Communication comm);
   

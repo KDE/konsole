@@ -252,6 +252,12 @@ void TEPty::setSize(int lines, int columns)
   //kdDebug(1211)<<"TEPty::setSize() done"<<endl;
 }
 
+void TEPty::commClose()
+{
+  donePty();
+  KProcess::commClose();
+}
+
 void TEPty::donePty()
 {
   int status = exitStatus();
@@ -654,8 +660,6 @@ TEPty::TEPty() : pSendJobTimer(NULL)
   fd = openPty();
   connect(this, SIGNAL(receivedStdout(int, int &)), 
 	  this, SLOT(DataReceived(int, int&)));
-  connect(this, SIGNAL(processExited(KProcess *)),
-          this, SLOT(donePty()));
 }
 
 /*!
