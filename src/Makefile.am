@@ -63,7 +63,7 @@ BUILTSOURCES =TEWidget.moc TEmuVt102.moc session.moc main.moc TEmulation.moc TES
 CLEANFILES = $(BUILTSOURCES)
 
 messages:
-	$(XGETTEXT) -C -ktranslate -ki18n -x $(includedir)/kde.pot $(konsole_SOURCES) && mv messages.po ../../po/kconsole.pot
+	$(XGETTEXT) -C -ktranslate -ki18n -x $(includedir)/kde.pot $(konsole_SOURCES) && mv messages.po ../../po/konsole.pot
 
 # just install datas here. Use install-exec-local for scripts and etc.
 # the binary itself is already installed from automake
