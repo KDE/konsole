@@ -244,11 +244,11 @@ int openShell()
 
 /*! 
     Create a shell.
-    \param login_shell is a hack. FIXME: remove.
+    \param _login_shell is a hack. FIXME: remove.
 */
-Shell::Shell(int login_shell)
+Shell::Shell(int _login_shell)
 {
-  login_shell=login_shell;
+  login_shell=_login_shell;
 
   fd = openShell();
 
