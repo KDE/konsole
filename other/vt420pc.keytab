@@ -131,7 +131,7 @@ key F11+Shift    : "\E[23;2~"
 key F12+Shift    : "\E[24;2~" 
 
 key Home   : "\E[H"  
-key End    : "\E[1~"  
+key End    : "\E[F"  
 
 key Prior -Shift : "\E[5~"  
 key Next  -Shift : "\E[6~"  
