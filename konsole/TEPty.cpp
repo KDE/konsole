@@ -164,15 +164,21 @@ extern "C" {
 #define HERE fprintf(stdout,"%s(%d): here\n",__FILE__,__LINE__)
 #endif
 
+// Small hack to keep it still compiling with KDE 3.0
+#include "kdeversion.h"
+#if KDE_VERSION <305
+  #undef HAVE_OPENPTY
+#endif
+
 template class QIntDict<TEPty>;
 
 class KUtmpProcess : public KProcess
 {
 public:
-   int commSetupDoneC() 
+   int commSetupDoneC()
    {
-     dup2(cmdFd, 0);   
-     dup2(cmdFd, 1);   
+     dup2(cmdFd, 0);
+     dup2(cmdFd, 1);
      dup2(cmdFd, 3);
      return 1;
    }
@@ -321,7 +327,6 @@ int TEPty::openPty()
   // be opened by several different methods.
 
   // We try, as we know them, one by one.
-
 #if defined(HAVE_OPENPTY) //FIXME: some work needed.
   if (ptyfd < 0) {
     int master_fd, slave_fd;

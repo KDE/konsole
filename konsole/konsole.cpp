@@ -829,8 +829,12 @@ bool Konsole::queryClose()
     if (skip_exit_query)
     {
         // Wait a bit for all childs to clean themselves up. 
-        while(sessions.count() && KProcessController::theKProcessController->waitForProcessExit(1));
-        return true; // Ready or not, here I come...
+#if KDE_VERSION >=305
+	while(sessions.count() && KProcessController::theKProcessController->waitForProcessExit(1));
+#else
+        while(sessions.count());
+#endif
+	return true; // Ready or not, here I come...
     }
     else
     {
