@@ -27,6 +27,7 @@ KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar
 ,session_terminated(false)
 ,wallpaperSource(0)
 ,se(_se)
+,schema(_schema)
 ,allowResize(_allowResize)
 {
   te = new TEWidget(this);
