@@ -157,6 +157,7 @@ private slots:
   void prevSession();
   void nextSession();
   void activateMenu();
+  void slotMovedTab(int,int);
   void moveSessionLeft();
   void moveSessionRight();
   void allowPrevNext();

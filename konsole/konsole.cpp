@@ -797,8 +797,11 @@ void Konsole::makeGUI()
 void Konsole::makeTabWidget()
 {
   tabwidget = new KTabWidget(this);
+  tabwidget->setTabReorderingEnabled(true);
+  connect(tabwidget, SIGNAL(movedTab(int,int)), SLOT(slotMovedTab(int,int)));
   connect(tabwidget, SIGNAL(mouseDoubleClick(QWidget*)), SLOT(slotRenameSession()));
   connect(tabwidget, SIGNAL(currentChanged(QWidget*)), SLOT(activateSession(QWidget*)));
+
   if (kapp->authorize("shell_access")) {
     QToolButton* newsession = new QToolButton( tabwidget );
 //    newsession->setTextLabel("New");
@@ -2148,7 +2151,7 @@ void Konsole::activateSession(TESession *s)
        // the current schema has changed
        setSchema(s->schemaNo());
     }
-    
+
     if (s->fontNo() != n_font)
     {
         setFont(s->fontNo());
@@ -2508,6 +2511,26 @@ void Konsole::nextSession()
   sessions.find(se); sessions.next();
   if (!sessions.current()) sessions.first();
   if (sessions.current()) activateSession(sessions.current());
+}
+
+void Konsole::slotMovedTab(int from, int to)
+{
+  //kdDebug() << "Konsole::slotMovedTab(" << from <<","<<to<<")"<<endl;
+
+  TESession* _se = sessions.take(from);
+  sessions.remove(_se);
+  sessions.insert(to,_se);
+
+  KRadioAction *ra = session2action.find(_se);
+  ra->unplug(m_view);
+  ra->plug(m_view,(m_view->count()-sessions.count()+1)+to);
+
+  if (to==tabwidget->currentPageIndex()) {
+    if (!m_menuCreated)
+      makeGUI();
+    m_moveSessionLeft->setEnabled(to>0);
+    m_moveSessionRight->setEnabled(to<sessions.count()-1);
+  }
 }
 
 /* Move session forward in session list if possible */
