@@ -420,7 +420,7 @@ void TEDemo::makeMenu()
                              "This program is free software under the\n"
                              "terms of the GNU General Public License\n"
                              "and comes WITHOUT ANY WARRANTY.\n"
-                             "See `LICENSE.readme´ for details.").arg(PACKAGE).arg(VERSION);
+                             "See 'LICENSE.readme' for details.").arg(PACKAGE).arg(VERSION);
   
   QPopupMenu* m_help =  helpMenu(aboutAuthor, false);
   m_help->insertItem( i18n("&Technical Reference ..."), this, SLOT(tecRef()), 
