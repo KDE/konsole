@@ -105,8 +105,6 @@ void TEmuVt102::reset()
   screen[0]->reset();
   //kdDebug(1211)<<"TEmuVt102::reset() setCodec()"<<endl;
   setCodec(0);
-  //kdDebug(1211)<<"TEmuVt102::reset() setKeyTrans()"<<endl;
-  setKeytrans(0);
   //kdDebug(1211)<<"TEmuVt102::reset() done"<<endl;
 }
 
@@ -325,10 +323,7 @@ void TEmuVt102::XtermHack()
   QString unistr(str,ppos-i-2);
   // arg == 1 doesn't change the title. In XTerm it only changes the icon name
   // (btw: arg=0 changes title and icon, arg=1 only icon, arg=2 only title
-  if (arg == 0 || arg == 2) {
-//    kdDebug(1211) << "changeTitle to " << unistr << endl;
-    emit changeTitle(arg,unistr);
-    }
+  emit changeTitle(arg,unistr);
   delete [] str;
 }
 
@@ -573,15 +568,34 @@ void TEmuVt102::tau( int token, int p, int q )
     case TY_CSI_PR('h',   47) :          setMode      (MODE_AppScreen); break; //VT100
     case TY_CSI_PR('l',   47) :        resetMode      (MODE_AppScreen); break; //VT100
 
+    // XTerm defines the following modes:
+    // SET_VT200_MOUSE             1000
+    // SET_VT200_HIGHLIGHT_MOUSE   1001
+    // SET_BTN_EVENT_MOUSE         1002
+    // SET_ANY_EVENT_MOUSE         1003
+    //
+    // FIXME: Modes 1000,1002 and 1003 have subtle differences which we don't
+    // support yet, we treat them all the same.
+
     case TY_CSI_PR('h', 1000) :          setMode      (MODE_Mouse1000); break; //XTERM
     case TY_CSI_PR('l', 1000) :        resetMode      (MODE_Mouse1000); break; //XTERM
     case TY_CSI_PR('s', 1000) :         saveMode      (MODE_Mouse1000); break; //XTERM
     case TY_CSI_PR('r', 1000) :      restoreMode      (MODE_Mouse1000); break; //XTERM
 
     case TY_CSI_PR('h', 1001) : /* IGNORED: hilite mouse tracking    */ break; //XTERM
-    case TY_CSI_PR('l', 1001) : /* IGNORED: hilite mouse tracking    */ break; //XTERM
+    case TY_CSI_PR('l', 1001) :        resetMode      (MODE_Mouse1000); break; //XTERM
     case TY_CSI_PR('s', 1001) : /* IGNORED: hilite mouse tracking    */ break; //XTERM
     case TY_CSI_PR('r', 1001) : /* IGNORED: hilite mouse tracking    */ break; //XTERM
+
+    case TY_CSI_PR('h', 1002) :          setMode      (MODE_Mouse1000); break; //XTERM
+    case TY_CSI_PR('l', 1002) :        resetMode      (MODE_Mouse1000); break; //XTERM
+    case TY_CSI_PR('s', 1002) :         saveMode      (MODE_Mouse1000); break; //XTERM
+    case TY_CSI_PR('r', 1002) :      restoreMode      (MODE_Mouse1000); break; //XTERM
+
+    case TY_CSI_PR('h', 1003) :          setMode      (MODE_Mouse1000); break; //XTERM
+    case TY_CSI_PR('l', 1003) :        resetMode      (MODE_Mouse1000); break; //XTERM
+    case TY_CSI_PR('s', 1003) :         saveMode      (MODE_Mouse1000); break; //XTERM
+    case TY_CSI_PR('r', 1003) :      restoreMode      (MODE_Mouse1000); break; //XTERM
 
     case TY_CSI_PR('h', 1047) :          setMode      (MODE_AppScreen); break; //XTERM
     case TY_CSI_PR('l', 1047) :        resetMode      (MODE_AppScreen); break; //XTERM

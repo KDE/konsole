@@ -124,7 +124,6 @@ konsolePart::konsolePart(QWidget *parentWidget, const char *widgetName, QObject 
   connect( te,SIGNAL(configureRequest(TEWidget*,int,int,int)),
            this,SLOT(configureRequest(TEWidget*,int,int,int)) );
   initial->setConnect(TRUE);
-  initial->getEmulation()->setKeytrans(0);
   te->currentSession = initial;
 
   // At least set the font to the default, if we can't read in

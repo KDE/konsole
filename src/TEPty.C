@@ -180,9 +180,18 @@ int chownpty(int fd, int grant)
 // param grant: 1 to grant, 0 to revoke
 // returns 1 on success 0 on fail
 {
+  struct sigaction newsa, oldsa;
+  newsa.sa_handler = SIG_DFL;
+  newsa.sa_mask = sigset_t();
+  newsa.sa_flags = 0;
+  sigaction(SIGCHLD, &newsa, &oldsa);
+
   pid_t pid = fork();
   if (pid < 0)
   {
+    // restore previous SIGCHLD handler
+    sigaction(SIGCHLD, &oldsa, NULL);
+
     return 0;
   }
   if (pid == 0)
@@ -195,14 +204,6 @@ int chownpty(int fd, int grant)
   }
 
   if (pid > 0) {
-    // ### FreeBSD seems to need the SIGCHLD sighandler resett to default for
-    // waitpid() to work. - Brad
-    struct sigaction newsa, oldsa;
-    newsa.sa_handler = SIG_DFL;
-    newsa.sa_mask = sigset_t();
-    newsa.sa_flags = 0;
-    sigaction(SIGCHLD, &newsa, &oldsa);
-
     int w;
 retry:
     int rc = waitpid (pid, &w, 0);
@@ -560,7 +561,7 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   close(fd);
 
   // drop privileges
-  setuid(getuid()); setgid(getgid());
+  setgid(getgid()); setuid(getuid()); 
 
   // propagate emulation
   if (term && term[0]) setenv("TERM",term,1);

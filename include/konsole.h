@@ -41,6 +41,9 @@
 class KRootPixmap;
 class QCheckBox; 
 
+// Defined in main.C
+const char *konsole_shell(QStrList &args);
+
 class Konsole : public KMainWindow
 {
     Q_OBJECT
@@ -49,15 +52,16 @@ class Konsole : public KMainWindow
 public:
 
   Konsole(const char * name, const QString &_program, QStrList & _args,
-    int histon, bool, const QString & _title, QCString type = 0, bool b_inRestore = false);
+    int histon, bool, const QString & _title, QCString type = 0, const QString &_term=QString::null, bool b_inRestore = false);
   ~Konsole();
   void setColLin(int columns, int lines);
   void setFullScreen(bool on);
   void initFullScreen();
   void initSessionSchema(int schemaNo);
+  void initSessionFont(int fontNo);
   void initSessionTitle(const QString &_title);
-  void initRenameSession(const QString &_title);
-  void newSession(const QString &program, const QStrList &args);
+  void initSessionKeyTab(const QString &keyTab);
+  void newSession(const QString &program, const QStrList &args, const QString &term);
 
 public slots:
 
@@ -90,6 +94,7 @@ private slots:
   //void newSessionSelect();
   void newSession(int kind);
   void updateSchemaMenu();
+  void updateKeytabMenu();
 
   void changeColumns(int);
   void notifySize(int,int);
@@ -113,7 +118,7 @@ private slots:
 
 private:
   KSimpleConfig *defaultSession();
-  TESession *newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList());
+  TESession *newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(), const QString &_term = QString::null);
   void readProperties(KConfig *config, const QString &schema);
   void applySettingsToGUI();
   void makeBasicGUI();
@@ -169,12 +174,13 @@ private:
   int cmd_serial;
   int cmd_first_screen;
   int         n_keytab;
-  int         n_oldkeytab;
+  int         n_defaultKeytab;
   int         n_font;
   int         n_defaultFont; // font as set in config to use as default for new sessions
   int         n_scroll;
   int         n_render;
   int         curr_schema; // current schema no
+  int         noticedBackgroundChangeOnDesktop;
   QString     s_schema;
   QString     s_kconfigSchema;
   QString     s_word_seps;			// characters that are considered part of a word
@@ -191,7 +197,6 @@ private:
   bool        m_menuCreated:1;
   bool        skip_exit_query:1;
   bool        b_warnQuit:1;
-  bool        alreadyNoticedBackgroundChange_:1;
   bool        isRestored;
   bool        wasRestored;
 

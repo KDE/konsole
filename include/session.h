@@ -28,7 +28,7 @@ public:
 
   TESession(KMainWindow* main, TEWidget* w,
             const QString &pgm, QStrList & _args,
-	    const char* term);
+	    const QString &term);
   ~TESession();
 
 public:
@@ -38,9 +38,12 @@ public:
   bool        isSecure();
   int schemaNo();
   int fontNo();
-  const char* emuName();
+  const QString& Term();
   const QString& Title();
-  QString fullTitle() const;  int keymap();
+  const QString& IconText();
+  QString fullTitle() const;
+  int keymapNo();
+  QString keymap();
   QStrList getArgs();
   QString getPgm();
 
@@ -49,8 +52,10 @@ public:
 
   void setSchemaNo(int sn);
   void setKeymapNo(int kn);
+  void setKeymap(const QString& _id);
   void setFontNo(int fn);
-  void setTitle(const QString& title);
+  void setTitle(const QString& _title);
+  void setIconText(const QString& _iconText);
   void kill(int signal);
 
 public slots:
@@ -78,14 +83,14 @@ private:
   // use a persistent reference instead.
   int            schema_no;
   int            font_no;
-  int            keymap_no;
   QString        title;
   QString        userTitle;
+  QString        iconText; // as set by: echo -en '\033]1;IconText\007
 
   QString        pgm;
   QStrList       args;
 
-  QCString       term;
+  QString        term;
 };
 
 #endif

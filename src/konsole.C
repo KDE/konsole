@@ -110,6 +110,7 @@ Time to start a requirement list.
 #include <klocale.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <signal.h>
 #include <dirent.h>
 #include <fcntl.h>
 #include <assert.h>
@@ -170,7 +171,7 @@ const char *fonts[] = {
 
 Konsole::Konsole(const char* name, const QString& _program,
                  QStrList & _args, int histon, bool toolbaron,
-                 const QString &_title, QCString type, bool b_inRestore)
+                 const QString &_title, QCString type, const QString &_term, bool b_inRestore)
 :KMainWindow(0, name)
 ,te(0)
 ,se(0)
@@ -199,16 +200,16 @@ Konsole::Konsole(const char* name, const QString& _program,
 ,cmd_serial(0)
 ,cmd_first_screen(-1)
 ,n_keytab(0)
-,n_oldkeytab(0)
+,n_defaultKeytab(0)
 ,n_render(0)
 ,curr_schema(0)
+,noticedBackgroundChangeOnDesktop(0)
 ,s_kconfigSchema("")
 ,b_scroll(histon)
 ,b_fullscreen(false)
 ,m_menuCreated(false)
 ,skip_exit_query(false) // used to skip the query when closed by the session management
 ,b_warnQuit(false)
-,alreadyNoticedBackgroundChange_(false)
 ,m_histSize(DEFAULT_HISTORY_SIZE)
 ,b_histEnabled(true)
 ,s_title(_title)
@@ -274,7 +275,7 @@ Konsole::Konsole(const char* name, const QString& _program,
   // activate and run first session //////////////////////////////////////////
   // FIXME: this slows it down if --type is given, but prevents a crash (malte)
   //KONSOLEDEBUG << "Konsole pgm: " << _program << endl;
-  se = newSession(co, _program, _args);
+  se = newSession(co, _program, _args, _term);
   if (b_histEnabled && m_histSize)
     se->setHistory(HistoryTypeBuffer(m_histSize));
   else if (b_histEnabled && !m_histSize)
@@ -288,7 +289,6 @@ Konsole::Konsole(const char* name, const QString& _program,
   se->setConnect(TRUE);
   
   updateTitle();
-  se->setKeymapNo(n_keytab); // act. the keytab for this session
 
   //QTimer::singleShot(1,this,SLOT(allowPrevNext())); // hack, hack, hack
   //seems to work, aleXXX
@@ -444,7 +444,7 @@ void Konsole::makeGUI()
    m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Schema" ), m_schema);
    m_options->insertSeparator();
 
-   KAction *historyType = new KAction(i18n("History..."), 0, this,
+   KAction *historyType = new KAction(i18n("History..."), "history", 0, this,
                                       SLOT(slotHistoryType()), this);
    historyType->plug(m_options);
    
@@ -489,8 +489,8 @@ void Konsole::makeGUI()
     KPopupMenu* m_help =  helpMenu(aboutAuthor, false);
     */
    //help menu
-   m_help->insertItem( i18n("&Technical Reference"), this, SLOT(tecRef()),
-                       0, -1, 1);
+   //m_help->insertItem( i18n("&Technical Reference"), this, SLOT(tecRef()),
+   //                    0, -1, 1);
 
    //the different session types
    loadSessionCommands();
@@ -567,7 +567,6 @@ void Konsole::makeBasicGUI()
   menubar->insertItem(i18n("File") , m_file);
   menubar->insertItem(i18n("Sessions"), m_sessions);
   menubar->insertItem(i18n("Settings"), m_options);
-  menubar->insertSeparator();
   menubar->insertItem(i18n("Help"), m_help);
 };
 
@@ -587,12 +586,24 @@ bool Konsole::queryClose()
                                                "Are you sure you want to quit?" ) )
               == KMessageBox::No )
             ) {
-            return FALSE;
+            return false;
         }
+    }
+    // WABA: Don't close if there are any sessions left. 
+    // Tell them to go away.
+    if (!skip_exit_query && sessions.count())
+    {
+        sessions.first();
+        while(sessions.current()) 
+        {
+            sessions.current()->kill(SIGHUP);
+            sessions.next();
+        }
+        return false;
     }
     // If there is no warning requested or required or if warnQuit is a NULL
     // pointer for some reason, just assume closing is safe
-    return  TRUE;
+    return true;
 }
 
 void Konsole::slotWarnQuit()
@@ -700,6 +711,12 @@ void Konsole::saveProperties(KConfig* config) {
         config->writeEntry(key, sessions.current()->getArgs());
         key = QString("Pgm%1").arg(counter);
         config->writeEntry(key, sessions.current()->getPgm());
+        key = QString("Font%1").arg(counter);
+        config->writeEntry(key, sessions.current()->fontNo());
+        key = QString("Term%1").arg(counter);
+        config->writeEntry(key, sessions.current()->Term());
+        key = QString("KeyTab%1").arg(counter);
+        config->writeEntry(key, sessions.current()->keymap());
         sessions.next();
         counter++;
      }
@@ -708,12 +725,12 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("history",b_scroll);
   config->writeEntry("has frame",b_framevis);
   config->writeEntry("Fullscreen",b_fullscreen);
-  config->writeEntry("font",n_font);
+  config->writeEntry("font",n_defaultFont);
   config->writeEntry("defaultfont", defaultFont);
-  config->writeEntry("schema",s_schema);
+  config->writeEntry("schema",s_kconfigSchema);
   config->writeEntry("wordseps",s_word_seps);
   config->writeEntry("scrollbar",n_scroll);
-  config->writeEntry("keytab",n_keytab);
+  config->writeEntry("keytab",n_defaultKeytab);
   config->writeEntry("WarnQuit", b_warnQuit);
 
   if (se) {
@@ -742,8 +759,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    /*FIXME: (merging) state of material below unclear.*/
    b_scroll = config->readBoolEntry("history",TRUE);
    b_warnQuit=config->readBoolEntry( "WarnQuit", TRUE );
-   n_oldkeytab=n_keytab;
-   n_keytab=config->readNumEntry("keytab",0); // act. the keytab for this session
+   n_defaultKeytab=config->readNumEntry("keytab",0); // act. the keytab for this session
    b_fullscreen = config->readBoolEntry("Fullscreen",FALSE);
    n_defaultFont = n_font = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
    n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
@@ -810,15 +826,14 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
 void Konsole::applySettingsToGUI()
 {
    if (!m_menuCreated) return;
-   m_options->setItemChecked(3,b_scroll);
    warnQuit->setChecked ( b_warnQuit);
-   m_keytab->setItemChecked(n_oldkeytab,FALSE);
-   m_keytab->setItemChecked(n_keytab,TRUE);
    showFrame->setChecked( b_framevis );
    selectFont->setCurrentItem(n_font);
+   notifySize(te->Lines(),te->Columns());
    showToolbar->setChecked(!toolBar()->isHidden());
    showMenubar->setChecked(!menuBar()->isHidden());
    selectScrollbar->setCurrentItem(n_scroll);
+   updateKeytabMenu();
 };
 
 
@@ -891,6 +906,7 @@ void Konsole::slotSelectFont() {
       return;
   }
   setFont(item);
+  n_defaultFont = n_font; // This is the new default
   activateSession(); // activates the current
 }
 
@@ -901,6 +917,7 @@ void Konsole::schema_menu_activated(int item)
 //        KONSOLEDEBUG << "Item " << item << " selected from schema menu"
 //                << endl;
   setSchema(item);
+  s_kconfigSchema = s_schema; // This is the new default
   activateSession(); // activates the current
 }
 
@@ -937,19 +954,21 @@ void Konsole::updateSchemaMenu()
 
 }
 
-void Konsole::keytab_menu_activated(int item)
+void Konsole::updateKeytabMenu()
 {
-  //  assert(se);
-  //HERE; printf("keytab: %d\n",item);
-  if (se) // not active at the beginning
-    se->setKeymapNo(item);
   if (m_menuCreated)
   {
      m_keytab->setItemChecked(n_keytab,FALSE);
-     m_keytab->setItemChecked(item,TRUE);
+     m_keytab->setItemChecked(se->keymapNo(),TRUE);
   };
-  n_keytab = item;
+  n_keytab = se->keymapNo();
+}
 
+void Konsole::keytab_menu_activated(int item)
+{
+  se->setKeymapNo(item);
+  n_defaultKeytab = item;
+  updateKeytabMenu();
 }
 
 void Konsole::setFont(int fontno)
@@ -1071,6 +1090,7 @@ void Konsole::notifySize(int lines, int columns)
 void Konsole::updateTitle()
 {
   setCaption( te->currentSession->fullTitle() );
+  setIconText( te->currentSession->IconText() );
 }
 
 /*
@@ -1124,8 +1144,13 @@ void Konsole::initSessionSchema(int schemaNo) {
   setSchema(schemaNo);
 }
 
-void Konsole::initSessionTitle(const QString &_title) {
-  sessions.current()->setTitle(_title);
+void Konsole::initSessionFont(int fontNo) {
+  if (fontNo == -1) return; // Don't change
+  setFont(fontNo);
+}
+
+void Konsole::initSessionKeyTab(const QString &keyTab) {
+  se->setKeymap(keyTab);
 }
 
 void Konsole::setFullScreen(bool on)
@@ -1272,10 +1297,12 @@ void Konsole::activateSession(TESession *s)
 
   te->currentSession = se;
   if (s->fontNo() != n_font)
+  {
       setFont(s->fontNo());
+  }
   s->setConnect(TRUE);
   updateTitle();
-  keytab_menu_activated(n_keytab); // act. the keytab for this session
+  updateKeytabMenu(); // act. the keytab for this session
 }
 
 void Konsole::allowPrevNext()
@@ -1305,10 +1332,10 @@ KSimpleConfig *Konsole::defaultSession()
   return 0;
 }
 
-void Konsole::newSession(const QString &pgm, const QStrList &args)
+void Konsole::newSession(const QString &pgm, const QStrList &args, const QString &term)
 {
   KSimpleConfig *co = defaultSession();
-  newSession(co, pgm, args);  
+  newSession(co, pgm, args, term);  
 }
 
 void Konsole::newSession()
@@ -1323,9 +1350,10 @@ void Konsole::newSession(int i)
   if (co) newSession(co);
 }
 
-TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &args)
+TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &args, const QString &_term)
 {
-  QCString emu = "xterm";
+  QString emu = "xterm";
+  QString key; 
   QString sch = s_kconfigSchema;
   QString txt = s_title;
   unsigned int     fno = n_defaultFont;
@@ -1334,11 +1362,15 @@ TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrLis
   if (co)
   {
      co->setDesktopGroup();
-     emu = co->readEntry("Term", emu).ascii();
+     emu = co->readEntry("Term", emu);
+     key = co->readEntry("KeyTab", key);
      sch = co->readEntry("Schema", sch);
      txt = co->readEntry("Comment", txt);
      fno = co->readUnsignedNumEntry("Font", fno);
   }
+
+  if (!_term.isEmpty())
+     emu = _term;
 
   if (!program.isEmpty()) 
   {
@@ -1346,11 +1378,8 @@ TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrLis
   }
   else
   {
-     const char* shell = getenv("SHELL");
-     if (shell == NULL || *shell == '\0') shell = "/bin/sh";
-     program = QFile::decodeName(shell);
+     program = QFile::decodeName(konsole_shell(cmdArgs));
 
-     cmdArgs.append(shell);
      if (co)
      {
         co->setDesktopGroup();
@@ -1381,6 +1410,10 @@ TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrLis
 
   s->setFontNo(QMIN(fno, TOPFONT));
   s->setSchemaNo(schmno);
+  if (key.isEmpty())
+    s->setKeymapNo(n_defaultKeytab);
+  else
+    s->setKeymap(key);
   s->setTitle(txt);
 
   if (b_histEnabled && m_histSize)
@@ -1454,7 +1487,6 @@ void Konsole::doneSession(TESession* s, int )
       close();
   }
 }
-
 
 /*! Cycle to previous session (if any) */
 
@@ -1646,7 +1678,7 @@ void Konsole::slotRenameSession() {
 }
 
 
-void Konsole::initRenameSession(const QString &_title) {
+void Konsole::initSessionTitle(const QString &_title) {
   KRadioAction *ra = session2action.find(se);
 
   se->setTitle(_title);
@@ -1764,7 +1796,7 @@ void Konsole::slotWordSeps() {
   }
 }
 
-void Konsole::slotBackgroundChanged(int /*desk*/)
+void Konsole::slotBackgroundChanged(int desk)
 {
   //KONSOLEDEBUG << "Konsole::slotBackgroundChanged(" << desk << ")\n";
   ColorSchema* s = colors->find(curr_schema);
@@ -1772,9 +1804,9 @@ void Konsole::slotBackgroundChanged(int /*desk*/)
 
   // We only do this once, because KRootPixmap should handle it later.
 
-  if (s->useTransparency() && !alreadyNoticedBackgroundChange_ && (0 != rootxpm))
+  if (s->useTransparency() && noticedBackgroundChangeOnDesktop!=desk && (0 != rootxpm))
   {
-    alreadyNoticedBackgroundChange_ = true;
+    noticedBackgroundChangeOnDesktop = desk;
     rootxpm->repaint(true);
   }
 }

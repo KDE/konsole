@@ -61,6 +61,7 @@
 #include <assert.h>
 
 #include "TEWidget.moc"
+#include <krun.h>
 #include <kapp.h>
 #include <kcursor.h>
 #include <kurl.h>
@@ -263,10 +264,13 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,resizing(false)
 ,actSel(0)
 ,word_selection_mode(false)
+,line_selection_mode(false)
+,preserve_line_breaks(true)
 ,scrollLoc(SCRNONE)
 ,word_characters(":@-./_~")
 ,blinking(false)
 ,m_drop(0)
+,possibleTripleClick(false)
 ,currentSession(0)
 {
   cb = QApplication::clipboard();
@@ -619,11 +623,18 @@ void TEWidget::setScrollbarLocation(int loc)
 void TEWidget::mousePressEvent(QMouseEvent* ev)
 {
 //printf("press [%d,%d] %d\n",ev->x()/font_w,ev->y()/font_h,ev->button());
+
+  if (possibleTripleClick) {
+    mouseTripleClickEvent(ev);
+    return;
+  }
+
   if ( !contentsRect().contains(ev->pos()) ) return;
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
   int    tLy = tL.y();
 
+  line_selection_mode = FALSE;
   word_selection_mode = FALSE;
 
 //printf("press top left [%d,%d] by=%d\n",tLx,tLy, bY);
@@ -631,7 +642,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   {
     QPoint pos = QPoint((ev->x()-tLx-blX)/font_w,(ev->y()-tLy-bY)/font_h);
 
-    if ( ev->state() & ControlButton ) preserve_line_breaks = FALSE ;
+    preserve_line_breaks = !( ev->state() & ControlButton ); 
 
     if (mouse_marks || (ev->state() & ShiftButton))
     {
@@ -734,9 +745,33 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     }
   }
 
+  if ( line_selection_mode )
+  {
+    // Extend to complete line
+    bool above_not_below = ( here.y() < iPntSel.y() );
+    bool old_above_not_below = ( pntSel.y() < iPntSel.y() );
+    swapping = above_not_below != old_above_not_below;
+
+    QPoint above = above_not_below ? here : iPntSel;
+    QPoint below = above_not_below ? iPntSel : here;
+    
+    above.setX(0);
+    below.setX(columns-1);
+
+    // Pick which is start (ohere) and which is extension (here)
+    if ( above_not_below )
+    {
+      here = above; ohere = below;
+    }
+    else
+    {
+      here = below; ohere = above;
+    }
+  }
+
   if (here == pntSel && scroll == scrollbar->value()) return; // not moved
 
-  if ( word_selection_mode ) {
+  if ( word_selection_mode || line_selection_mode ) {
     if ( actSel < 2 || swapping ) {
       emit beginSelectionSignal( ohere.x(), ohere.y() );
     }
@@ -755,7 +790,6 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
   if ( ev->button() == LeftButton)
   {
     if ( actSel > 1 ) emit endSelectionSignal(preserve_line_breaks);
-    preserve_line_breaks = TRUE;
     actSel = 0;
 
     //FIXME: emits a release event even if the mouse is
@@ -820,8 +854,36 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
      actSel = 2; // within selection
      emit extendSelectionSignal( endSel.x(), endSel.y() );
      emit endSelectionSignal(preserve_line_breaks);
-     preserve_line_breaks = TRUE;
    }
+
+  possibleTripleClick=true;
+  QTimer::singleShot(QApplication::doubleClickInterval(),this,SLOT(tripleClickTimeout())); 
+}
+
+void TEWidget::tripleClickTimeout()
+{
+  possibleTripleClick=false;
+}
+
+void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
+{
+  if ( ev->button() != LeftButton) return;
+
+  QPoint tL  = contentsRect().topLeft();
+  int    tLx = tL.x();
+  int    tLy = tL.y();
+  iPntSel = QPoint((ev->x()-tLx-blX)/font_w,(ev->y()-tLy-bY)/font_h);
+
+  emit clearSelectionSignal();
+
+  line_selection_mode = TRUE;
+  word_selection_mode = FALSE;
+
+  actSel = 2; // within selection
+
+  emit beginSelectionSignal( 0, iPntSel.y() );
+  emit extendSelectionSignal( 0, iPntSel.y()+1 );
+  emit endSelectionSignal(preserve_line_breaks);
 }
 
 void TEWidget::focusInEvent( QFocusEvent * )
@@ -1116,13 +1178,16 @@ void TEWidget::dropEvent(QDropEvent* event)
           bPopup = false; // more than one file, don't popup
         }
         KURL url(p);
+        QString tmp;
         if (url.isLocalFile()) {
-          dropText += url.path(); // local URL : remove protocol
+          tmp = url.path(); // local URL : remove protocol
         }
         else {
-          dropText += url.prettyURL();
+          tmp = url.url();
           bPopup = false; // a non-local file, don't popup
         }
+        KRun::shellQuote(tmp);
+        dropText += tmp;
       }
 
       if (bPopup)

@@ -2,7 +2,6 @@
 [KDE Desktop Entry]
 Type=KonsoleApplication
 Name=Administrator
-Name[af]=ADMINISTRATEUR
 Name[az]=İdarəçi
 Name[bg]=Администратор
 Name[br]=Merour
@@ -36,12 +35,12 @@ Name[ru]=Администратор
 Name[sk]=Administrátor
 Name[sv]=Administratör
 Name[ta]=¿¢÷Å¡¸¢
+Name[th]=ผู้ดูแลระบบ
 Name[tr]=Yönetici
 Name[uk]=Системний адміністратор
+Name[xh]=Umphathi wokwamkela
 Name[zh_CN.GB2312]=管理员
-Name[zh_TW.Big5]=管理員
 Comment=Root Console
-Comment[af]=ROOT KONSOLE
 Comment[az]=Root Konsolu
 Comment[bg]=root-Конзола
 Comment[br]=Letrin root
@@ -82,10 +81,11 @@ Comment[sl]=Konzola superuporabnika
 Comment[sr]=Root konzola
 Comment[sv]=Rotkonsol
 Comment[ta]=§Å÷ ¸¡ý§º¡ø
+Comment[th]=คอนโซลผู้ดูแลระบบ
 Comment[tr]=Root Konsolu
 Comment[uk]=Консоль системного адміністратора
+Comment[xh]=Isakhelo esiqulathe ibhodi yezitshixo sengcambu
 Comment[zh_CN.GB2312]=Root 控制台
-Comment[zh_TW.Big5]=Root 操控台
 Exec=su
 Schema=/opt/kde/share/apps/konsole/Linux.schema
 #VGA
