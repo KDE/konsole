@@ -244,6 +244,7 @@ DCOPObject( "konsole" )
 ,b_allowResize(true)
 ,b_addToUtmp(true)
 ,b_xonXoff(false)
+,b_bidiEnabled(false)
 ,b_fullScripting(false)
 ,m_histSize(DEFAULT_HISTORY_SIZE)
 {
@@ -305,6 +306,7 @@ DCOPObject( "konsole" )
   //KONSOLEDEBUG << "my Looking for schema " << schema << endl;
   readProperties(config, schema, false);
   //KONSOLEDEBUG<<"Konsole ctor() after readProps "<<time.elapsed()<<" msecs elapsed"<<endl;
+  te->setBidiEnabled(b_bidiEnabled);
 
   if (!menubaron)
     menubar->hide();
@@ -705,6 +707,8 @@ void Konsole::makeGUI()
 
    new KAction(i18n("Bigger Font"), 0, this, SLOT(biggerFont()), m_shortcuts, "bigger_font");
    new KAction(i18n("Smaller Font"), 0, this, SLOT(smallerFont()), m_shortcuts, "smaller_font");
+
+   new KAction(i18n("Toggle Bidi"), Qt::CTRL+Qt::ALT+Qt::Key_B, this, SLOT(toggleBidi()), m_shortcuts, "toggle_bidi");
 
    m_shortcuts->readShortcutSettings();
 };
@@ -1107,6 +1111,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
        ses->setMonitorSilenceSeconds(monitorSilenceSeconds);
 
      b_xonXoff = config->readBoolEntry("XonXoff",false);
+     b_bidiEnabled = config->readBoolEntry("EnableBidi",false);
      config->setGroup("UTMP");
      b_addToUtmp = config->readBoolEntry("AddToUtmp",true);
      config->setDesktopGroup();
@@ -3077,6 +3082,12 @@ void Konsole::slotPrint()
                      printer.option("app-konsole-printexact") == "true");
     paint.end();
   }
+}
+
+void Konsole::toggleBidi()
+{
+  te->setBidiEnabled(!te->isBidiEnabled());
+  te->repaint();
 }
 
 //////////////////////////////////////////////////////////////////////

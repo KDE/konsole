@@ -308,6 +308,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,resizing(false)
 ,terminalSizeHint(false)
 ,terminalSizeStartup(true)
+,bidiEnabled(false)
 ,actSel(0)
 ,word_selection_mode(false)
 ,line_selection_mode(false)
@@ -467,7 +468,12 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
     {
       // The meaning of y differs between different versions of QPainter::drawText!!
       int y = rect.y()+a; // baseline
-      paint.drawText(x,y, str, -1, QPainter::LTR);
+
+      if (bidiEnabled)
+        paint.drawText(x,y, str, -1);
+      else
+        paint.drawText(x,y, str, -1, QPainter::LTR);
+
     }
 
     if (color_table[attr->f].bold && isPrinting)
@@ -501,7 +507,12 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
         {
           // The meaning of y differs between different versions of QPainter::drawText!!
           int y = rect.y()+a; // baseline
-          paint.drawText(x,y, str, -1, QPainter::LTR);
+
+          if (bidiEnabled)
+            paint.drawText(x,y, str, -1);
+          else
+            paint.drawText(x,y, str, -1, QPainter::LTR);
+
         }
       }
       if (attr->r & RE_UNDERLINE)

@@ -104,6 +104,9 @@ public:
     void setTerminalSizeHint(bool on) { terminalSizeHint=on; }
     bool isTerminalSizeHint() { return terminalSizeHint; }
     void setTerminalSizeStartup(bool on) { terminalSizeStartup=on; }
+
+    void setBidiEnabled(bool set) { bidiEnabled=set; }
+    bool isBidiEnabled() { return bidiEnabled; }
     
     void print(QPainter &paint, bool friendly, bool exact);
 
@@ -211,6 +214,7 @@ private:
 
     bool resizing;
     bool terminalSizeHint,terminalSizeStartup;
+    bool bidiEnabled;
     bool mouse_marks;
 
     void makeImage();

@@ -216,6 +216,8 @@ private slots:
 
   void slotPrint();
 
+  void toggleBidi();
+
 private:
   KSimpleConfig *defaultSession();
   QString newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(), const QString &_term = QString::null, const QString &_icon = QString::null, const QString &_title = QString::null, const QString &_cwd = QString::null);
@@ -353,6 +355,7 @@ private:
   bool        b_allowResize:1;
   bool        b_addToUtmp:1;
   bool        b_xonXoff:1;
+  bool        b_bidiEnabled:1;
 
   bool        b_histEnabled:1;
   bool        b_fullScripting:1;
