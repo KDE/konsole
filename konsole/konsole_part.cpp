@@ -523,7 +523,7 @@ void konsolePart::readProperties()
 
   b_framevis = config->readBoolEntry("has frame",false);
   b_histEnabled = config->readBoolEntry("historyenabled",true);
-  n_bell = QMIN(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),2);
+  n_bell = QMIN(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),3);
   n_font = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
   n_keytab=config->readNumEntry("keytab",0); // act. the keytab for this session
   n_scroll = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);

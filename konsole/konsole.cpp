@@ -1498,7 +1498,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       n_defaultFont = n_font = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
       n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
       n_tabbar   = QMIN(config->readUnsignedNumEntry("tabbar",TabBottom),2);
-      n_bell = QMIN(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),2);
+      n_bell = QMIN(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),3);
 
       checkSoundSystem();
       if ( !b_soundSystemEnabled && (n_bell == TEWidget::BELLNOTIFY) )
