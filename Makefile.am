@@ -7,8 +7,8 @@ sudata_DATA = konsolesu.desktop
 sudatadir = $(kde_appsdir)/System/More
 
 install-data-local: uninstall.desktop
-	$(mkinstalldirs) $(kde_appsdir)/System
-	$(INSTALL_DATA) $(srcdir)/uninstall.desktop $(kde_appsdir)/System/konsolesu.desktop 
+	$(mkinstalldirs) $(DESTDIR)$(kde_appsdir)/System
+	$(INSTALL_DATA) $(srcdir)/uninstall.desktop $(DESTDIR)$(kde_appsdir)/System/konsolesu.desktop 
 
 kde_services_DATA = konsolepart.desktop
 
