@@ -48,6 +48,7 @@ public:
   bool        isMonitorSilence();
   bool        isMasterMode();
   int schemaNo();
+  int encodingNo();
   int fontNo();
   const QString& Term();
   const QString& SessionId();
@@ -71,6 +72,7 @@ public:
   void setMonitorSilenceSeconds(int seconds);
   void setMasterMode(bool);
   void setSchemaNo(int sn);
+  void setEncodingNo(int index);
   void setKeymapNo(int kn);
   void setKeymap(const QString& _id);
   void setFontNo(int fn);
@@ -196,7 +198,7 @@ private:
   // Color/Font Changes by ESC Sequences
 
   QColor         modifiedBackground; // as set by: echo -en '\033]11;Color\007
-
+  int            encoding_no;
 };
 
 #endif

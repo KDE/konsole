@@ -50,6 +50,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
    , zmodemBusy(false)
    , zmodemProc(0)
    , zmodemProgress(0)
+   , encoding_no(0)
 {
   //kdDebug(1211)<<"TESession ctor() new TEPty"<<endl;
   sh = new TEPty();
@@ -333,6 +334,11 @@ int TESession::schemaNo()
   return schema_no;
 }
 
+int TESession::encodingNo()
+{
+  return encoding_no;
+}
+
 int TESession::keymapNo()
 {
   return em->keymapNo();
@@ -363,6 +369,11 @@ void TESession::setSchemaNo(int sn)
   schema_no = sn;
 }
 
+void TESession::setEncodingNo(int index)
+{
+  encoding_no = index;
+}
+  
 void TESession::setKeymapNo(int kn)
 {
   em->setKeymap(kn);

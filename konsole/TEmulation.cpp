@@ -200,6 +200,13 @@ const HistoryType& TEmulation::history()
   return screen[0]->getScroll();
 }
 
+void TEmulation::setCodec(const QTextCodec * qtc)
+{
+  codec = qtc;
+  delete decoder;
+  decoder = codec->makeDecoder();
+}
+
 void TEmulation::setCodec(int c)
 {
   //FIXME: check whether we have to free codec

@@ -34,6 +34,7 @@ public:
 
 public:
   virtual void setHistory(const HistoryType&);
+  void setCodec(const QTextCodec *);
   virtual const HistoryType& history();
   virtual void streamHistory(QTextStream*);
 
@@ -103,7 +104,7 @@ protected:
 
   void setCodec(int c); // codec number, 0 = locale, 1=utf8
 
-  QTextCodec* codec;
+  const QTextCodec* codec;
   QTextDecoder* decoder;
 
   KeyTrans* keytrans;

@@ -457,6 +457,7 @@ extern "C" int kdemain(int argc, char* argv[])
         m->enableFixedSize(fixed_size);
 	m->restore(n);
         m->makeGUI();
+        m->setEncoding(sessionconfig->readNumEntry("Encoding0"));
         m->setSchema(sessionconfig->readEntry("Schema0"));
         m->initSessionFont(sessionconfig->readNumEntry("Font0", -1));
         m->initSessionKeyTab(sessionconfig->readEntry("KeyTab0"));
@@ -484,6 +485,8 @@ extern "C" int kdemain(int argc, char* argv[])
           m->initSessionTitle(sTitle);
           key = QString("Schema%1").arg(counter);
           m->setSchema(sessionconfig->readEntry(key));
+          key = QString("Encoding%1").arg(counter);
+          m->setEncoding(sessionconfig->readNumEntry(key));
           key = QString("Font%1").arg(counter);
           m->initSessionFont(sessionconfig->readNumEntry(key, -1));
           key = QString("KeyTab%1").arg(counter);

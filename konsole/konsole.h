@@ -82,6 +82,7 @@ public:
   void initMasterMode(bool on);
   void newSession(const QString &program, const QStrList &args, const QString &term, const QString &icon, const QString &cwd);
   void setSchema(const QString & path);
+  void setEncoding(int);
 
   void enableFullScripting(bool b);
   void enableFixedSize(bool b);
@@ -228,6 +229,7 @@ private slots:
   void slotTabSetViewOptions(int);
   void slotTabbarToggleDynamicHide();
 
+  void slotSetEncoding();
 private:
   KSimpleConfig *defaultSession();
   QString newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(),
@@ -318,6 +320,7 @@ private:
   KSelectAction *selectScrollbar;
   KSelectAction *selectTabbar;
   KSelectAction *selectBell;
+  KSelectAction *selectSetEncoding;
 
   KAction       *m_clearHistory;
   KAction       *m_findHistory;

@@ -124,6 +124,7 @@ Time to start a requirement list.
 #include <ktabwidget.h>
 #include <kregexpeditorinterface.h>
 #include <kparts/componentfactory.h>
+#include <kcharsets.h>
 
 #include "konsole.h"
 #include <netwm.h>
@@ -648,6 +649,14 @@ void Konsole::makeGUI()
       selectFont->setItems(it);
       selectFont->plug(m_options);
 
+      // encoding menu, start with default checked !
+      selectSetEncoding = new KSelectAction(i18n("&Encoding"), 0, actions, "set_encoding");
+      QStringList list = KGlobal::charsets()->descriptiveEncodingNames();
+      list.prepend( i18n( "Default" ) );
+      selectSetEncoding->setItems(list);
+      selectSetEncoding->setCurrentItem (0);
+      connect(selectSetEncoding, SIGNAL(activated()), SLOT(slotSetEncoding()));
+      selectSetEncoding->plug(m_options);
 
       if (kapp->authorizeKAction("keyboard"))
          m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
@@ -847,6 +856,23 @@ void Konsole::makeGUI()
    dynamicTabHideOption->setChecked(b_dynamicTabHide);
    dynamicTabHideOption->plug(m_tabbarPopupMenu);
  }
+ 
+void Konsole::slotSetEncoding()
+{
+  if (!se) return;
+
+  bool found;
+  QString enc = KGlobal::charsets()->encodingForName(selectSetEncoding->currentText());
+  QTextCodec * qtc = KGlobal::charsets()->codecForName(enc, found);
+  if(!found)
+  {
+    kdDebug() << "Codec " << selectSetEncoding->currentText() << " not found!" << endl;
+    qtc = QTextCodec::codecForLocale();
+  }
+
+  se->setEncodingNo(selectSetEncoding->currentItem());
+  se->getEmulation()->setCodec(qtc);
+}
 
 void Konsole::makeTabWidget()
 {
@@ -1386,6 +1412,8 @@ void Konsole::saveProperties(KConfig* config) {
         config->writeEntry(key, sessions.current()->Title());
         key = QString("Schema%1").arg(counter);
         config->writeEntry(key, colors->find( sessions.current()->schemaNo() )->relPath());
+	key = QString("Encoding%1").arg(counter);
+	config->writeEntry(key, sessions.current()->encodingNo());
         key = QString("Args%1").arg(counter);
         config->writeEntry(key, sessions.current()->getArgs());
         key = QString("Pgm%1").arg(counter);
@@ -2534,6 +2562,7 @@ void Konsole::activateSession(TESession *s)
   if (!m_menuCreated)
      return;
 
+  selectSetEncoding->setCurrentItem(se->encodingNo());
   updateKeytabMenu(); // act. the keytab for this session
   m_clearHistory->setEnabled( se->history().isOn() );
   m_findHistory->setEnabled( se->history().isOn() );
@@ -3330,6 +3359,12 @@ void Konsole::setSchema(const QString & path)
         const_cast<ColorSchema *>(s)->rereadSchemaFile();
   }
   if (s) setSchema(s);
+}
+
+void Konsole::setEncoding(int index)
+{
+  selectSetEncoding->setCurrentItem(index);
+  slotSetEncoding();
 }
 
 void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
