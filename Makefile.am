@@ -9,8 +9,12 @@ update_DATA = konsole.upd
 update_SCRIPTS = schemaStrip.pl
 updatedir = $(kde_datadir)/kconf_update
 
-autostart_DATA = kwrited.desktop
-autostartdir = $(datadir)/autostart
+servicesdir = $(kde_servicesdir)/kded
+services_DATA = kwrited.desktop
+
+install-data-local: uninstall.desktop
+	$(mkinstalldirs) $(DESTDIR)$(datadir)/autostart
+	$(INSTALL_DATA) $(srcdir)/uninstall.desktop $(DESTDIR)$(datadir)/autostart/kwrited.desktop
 
 konsolehere_DATA = konsolehere.desktop
 konsoleheredir = $(kde_datadir)/konqueror/servicemenus
@@ -23,12 +27,3 @@ miscdir = $(kde_datadir)/konsole
 
 EXTRA_DIST = CONTRIBUTORS LICENSE.readme README.bugs \
 	README.linux.console tests $(xdg_apps_DATA)
-
-kwritedrc: $(top_builddir)/config.h
-	echo "[General]" >kwritedrc
-	if test -z "@LIBUTEMPTER@"; then \
-	    echo "# No utempter support, kwrited disabled by default" >>kwritedrc ; \
-	    echo Autostart=false >>kwritedrc ; \
-	else \
-	    echo Autostart=true >>kwritedrc ; \
-	fi

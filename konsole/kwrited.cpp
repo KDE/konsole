@@ -11,6 +11,7 @@
 #include <kcrash.h>
 #include <kpty.h>
 #include <kuser.h>
+#include <kglobal.h>
 
 #include "kwrited.h"
 
@@ -76,40 +77,23 @@ void KWrited::block_in(int fd)
   wid->raise();
 }
 
-static KWrited *pro = 0;
-
-void signal_handler(int) {
-    delete pro;
-    ::exit(0);
-}
-
-extern "C" int kdemain(int argc, char* argv[])
+KWritedModule::KWritedModule( const QCString& obj )
+    : KDEDModule( obj )
 {
-  KLocale::setMainCatalogue("konsole");
-  KCmdLineArgs::init(argc, argv, "kwrited", I18N_NOOP("WriteDaemon"),
-	I18N_NOOP("KDE Daemon for receiving 'write' messages."),
-	"2.0.0");
-
-  KUniqueApplication::addCmdLineOptions();
-
-  if (!KUniqueApplication::start())
-  {
-     fputs(i18n("kwrited is already running.\n").local8Bit().data(), stderr);
-     exit(1);
-  }
-
-  // WABA: Make sure not to enable session management.
-  unsetenv("SESSION_MANAGER");
-  signal (SIGHUP, signal_handler);
-  KCrash::setEmergencySaveFunction(signal_handler);
-
-  KUniqueApplication app;
-  pro = new KWrited;
-  app.dcopClient()->setDaemonMode( true );
-  int r = app.exec();
-  delete pro;
-  return r;
+    KGlobal::locale()->insertCatalogue("konsole");
+    pro = new KWrited;
 }
+
+KWritedModule::~KWritedModule()
+{
+    delete pro;
+    KGlobal::locale()->removeCatalogue("konsole");
+}
+
+extern "C"
+KDEDModule *create_kwrited( const QCString& obj )
+    {
+    return new KWritedModule( obj );
+    }
 
 #include "kwrited.moc"
-

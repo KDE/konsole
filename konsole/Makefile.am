@@ -7,9 +7,9 @@ INCLUDES = -I. $(all_includes)
 # bin_PROGRAMS = kcmkonsole
 bin_PROGRAMS =
 lib_LTLIBRARIES = 
-kdeinit_LTLIBRARIES = kwrited.la konsole.la
+kdeinit_LTLIBRARIES = konsole.la
+kde_module_LTLIBRARIES = libkonsolepart.la kded_kwrited.la
 
-kde_module_LTLIBRARIES = libkonsolepart.la
 libkonsolepart_la_SOURCES = TEPty.cpp BlockArray.cpp konsole_part.cpp \
 	schema.cpp \
 	session.cpp \
@@ -26,10 +26,10 @@ libkonsolepart_la_SOURCES = TEPty.cpp BlockArray.cpp konsole_part.cpp \
 libkonsolepart_la_LDFLAGS = $(KDE_PLUGIN) $(all_libraries)
 libkonsolepart_la_LIBADD = $(XTESTLIB) $(LIB_KPARTS)
 
-# kwrited kdeinit module
-kwrited_la_SOURCES = kwrited.cpp TEPty.cpp
-kwrited_la_LIBADD  = $(LIB_KDECORE) 
-kwrited_la_LDFLAGS = $(all_libraries) -module -avoid-version
+# kwrited kded module
+kded_kwrited_la_SOURCES = kwrited.cpp TEPty.cpp kwrited.skel
+kded_kwrited_la_LIBADD  = $(LIB_KDECORE) 
+kded_kwrited_la_LDFLAGS = $(all_libraries) -module -avoid-version
 
 # konsole kdeinit module
 konsole_la_SOURCES = TEPty.cpp BlockArray.cpp main.cpp konsole.cpp schema.cpp session.cpp TEWidget.cpp TEmuVt102.cpp \
