@@ -12,8 +12,13 @@ CONTRIBUTORS
   - dnd adjustsments
   - "-e" included into session management.
   - minor overall improvements.
+- Sven Fischer <herpes@kawo2.rwth-aachen.de>
+  - bug fixing
+  - moved installations
 - Dale M. Flaven <dflaven@netport.com>
   - bug fixing
+- Martin Jones <mjones@powerup.com.au>
+  - support for atypical kde apps dir locn.
 - Lars Knoll <knoll@mpi-hd.mpg.de>
   - bug fixing
 - Peter Silva <peter.silva@videotron.ca>

@@ -602,7 +602,7 @@ void TEDemo::changeTitle(int, const char*s)
 void TEDemo::about()
 //FIXME: make this a little nicer
 {
-  QString title, msg;
+  QString title, msg(1000);
 
   title.sprintf(i18n("About %s"), PACKAGE);
   msg.sprintf(i18n(

@@ -54,7 +54,10 @@ ColorSchema* ColorSchema::readSchema(const char* path)
         if (!strcmp(rend,"center")) attr = 3; else
         if (!strcmp(rend,"full"  )) attr = 4; else
           continue;
-        res->imagepath = path;
+
+        // if this is not an absolute filename, prepend the wallpaper dir
+        if (path[0] != '/') res->imagepath = kapp->kde_wallpaperdir() + '/';
+        res->imagepath += path;
         res->alignment = attr;
       }
       if (!strncmp(line,"color",5))
@@ -101,12 +104,14 @@ ColorSchema* ColorSchema::readSchema(const char* path)
 
 ColorSchema* ColorSchema::find(int numb)
 {
-  return numb2schema.find(numb);
+  ColorSchema* res = numb2schema.find(numb);
+  return res ? res : numb2schema.find(0);
 }
 
 ColorSchema* ColorSchema::find(const char* path)
 {
-  return path2schema.find(path);
+  ColorSchema* res = path2schema.find(path);
+  return res ? res : numb2schema.find(0);
 }
 
 int ColorSchema::count()
