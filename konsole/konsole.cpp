@@ -76,6 +76,7 @@ Time to start a requirement list.
 
 #include <qspinbox.h>
 #include <qcheckbox.h>
+#include <qimage.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
 #include <qhbox.h>
@@ -2936,8 +2937,25 @@ void Konsole::notifySessionState(TESession* session, int state)
   }
   if (!state_iconname.isEmpty()
       && session->testAndSetStateIconName(state_iconname)
-      && m_tabViewMode != ShowTextOnly)
-    tabwidget->setTabIconSet(session->widget(), SmallIconSet(state_iconname));
+      && m_tabViewMode != ShowTextOnly) {
+      
+    QPixmap normal = KGlobal::instance()->iconLoader()->loadIcon(state_iconname, 
+                       KIcon::Small, 0, KIcon::DefaultState, 0L, true);
+    QPixmap active = KGlobal::instance()->iconLoader()->loadIcon(state_iconname,
+                       KIcon::Small, 0, KIcon::ActiveState, 0L, true);
+
+    // make sure they are not larger than 16x16
+    if (normal.width() > 16 || normal.height() > 16)
+      normal.convertFromImage(normal.convertToImage().smoothScale(16,16));
+    if (active.width() > 16 || active.height() > 16)
+      active.convertFromImage(active.convertToImage().smoothScale(16,16));
+
+    QIconSet iconset;
+    iconset.setPixmap(normal, QIconSet::Small, QIconSet::Normal);
+    iconset.setPixmap(active, QIconSet::Small, QIconSet::Active);
+
+    tabwidget->setTabIconSet(session->widget(), iconset);
+  }
 }
 
 // --| Session support |-------------------------------------------------------
