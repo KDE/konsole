@@ -16,11 +16,11 @@ default_sound=KDE_Beep_Beep.wav
 default_presentation=1
 
 [BellInvisible]
-Name=Bell in invisible session
+Name=Bell in non-visible session
 Name[es]=Timbre en sesión invisible
 Name[hu]=Csengetés egy nem látható munkafolyamatban
 Name[sv]=Ljudsignal i osynlig session
-Comment=Bell emitted within an invisible session
+Comment=Bell emitted within a non-visible session
 Comment[es]=Suena el timbre en una sesión invisible
 Comment[hu]=Csengetés egy nem látható munkafolyamatban
 Comment[sv]=Ljudsignal inne i en osynlig session
@@ -50,11 +50,11 @@ Comment[sv]=Tystnad funnen i en bevakad session
 default_presentation=16
 
 [Finished]
-Name=Session finished
+Name=Session finished with non-zero status
 Name[es]=Sesión terminada
 Name[hu]=Egy munkafolyamat befejeződött
 Name[sv]=Sessionen klar
-Comment=A running session has exited.
+Comment=A session has exited with non-zero status
 Comment[es]=Ha terminado una sesión en ejecución.
 Comment[hu]=Egy munkafolyamat futása befejeződött.
 Comment[sv]=Ett session som kör har avslutats.

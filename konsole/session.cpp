@@ -277,7 +277,7 @@ void TESession::done(int exitStatus)
     emit updateTitle();
     return;
   }
-  if (!wantedClose)
+  if (!wantedClose && exitStatus)
   {
     KNotifyClient::event("Finished", i18n("Session '%1' exited with status %2.").arg(title).arg(exitStatus));
   }
