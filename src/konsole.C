@@ -475,7 +475,7 @@ void Konsole::makeGUI()
    kdDebug()<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
    m_schema->setItemChecked(0,false);
    m_schema->setItemChecked(curr_schema,true);
-
+   m_initialSession->setSchemaNo(curr_schema);
    // insert keymaps into menu
    //FIXME: sort
    for (int i = 0; i < KeyTrans::count(); i++)
