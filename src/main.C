@@ -728,7 +728,7 @@ void Konsole::opt_menu_activated(int item)
     case 1: setMenuVisible(!b_menuvis);
             if (!b_menuvis)
             {
-              setCaption("Use the right mouse button to bring back the menu");
+              setCaption(i18n("Use the right mouse button to bring back the menu"));
               QTimer::singleShot(5000,this,SLOT(setHeader()));
             }
             break;
