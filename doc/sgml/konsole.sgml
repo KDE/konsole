@@ -375,9 +375,9 @@ Some programs have flaws when run under a X console.
   X11 applications can get the keyevents from konsole, if they want.
   Beware of trojan horses.
 <p>
-  konsole uses the X/Open routine grantpt to chown the slave tty to
-  prevent eavesdroping your sessions in a multiuser environment. This
-  means, you need at least glibc2.1 to compile konsole.
+  konsole uses the separate konsole_grantpty to chown the slave tty to
+  prevent eavesdroping your sessions in a multiuser environment.
+  Make sure to have this program installed root-suid.
 
 <sect1>Known Bugs
 <p>

@@ -169,9 +169,9 @@ Konsole drops privileges immediately after being started.
 <P>Secure keyboard (X11) is not implemented which means that other
 X11 applications can get the keyevents from konsole, if they want.
 Beware of trojan horses.
-<P>konsole uses the X/Open routine grantpt to chown the slave tty to
-prevent eavesdroping your sessions in a multiuser environment. This
-means, you need at least glibc2.1 to compile konsole.
+<P>konsole uses the separate konsole_grantpty to chown the slave tty to
+prevent eavesdroping your sessions in a multiuser environment.
+Make sure to have this program installed root-suid.
 <P>
 <H2><A NAME="ss5.8">5.8 Known Bugs</A>
 </H2>

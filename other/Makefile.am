@@ -1,4 +1,3 @@
-
 datadir = $(kde_datadir)/konsole
 data_DATA = BlackOnLightYellow.schema BlackOnWhite.schema \
 	Example.Schema GreenOnBlack.schema WhiteOnBlack.schema \
