@@ -364,12 +364,12 @@ void TEPty::openPty()
       m_MasterFd = master_fd;
       m_SlaveFd = slave_fd;
 #ifdef HAVE_PTSNAME
-      strncpy(ptynam, ptsname(master_fd), 50);
+      strlcpy(ptynam, ptsname(master_fd), 50);
 #else
       // Just a guess, maybe ttyname with return nothing.
-      strncpy(ptynam, ttyname(master_fd),50);
+      strlcpy(ptynam, ttyname(master_fd),50);
 #endif
-      strncpy(ttynam, ttyname(slave_fd), 50);
+      strlcpy(ttynam, ttyname(slave_fd), 50);
 
       m_bNeedGrantPty = false;
 
@@ -406,7 +406,7 @@ void TEPty::openPty()
     {
       char *ptsn = ptsname(m_MasterFd);
       if (ptsn) {
-          strncpy(ttynam, ptsname(m_MasterFd), 50);
+          strlcpy(ttynam, ptsname(m_MasterFd), 50);
           grantpt(m_MasterFd);
           m_bNeedGrantPty = false;
       } else {
@@ -522,7 +522,7 @@ int TEPty::makePty(bool _addutmp)
       abort();
     }
   }
-  strncpy(l_struct.ut_name, str_ptr, UT_NAMESIZE);
+  strlcpy(l_struct.ut_name, str_ptr, UT_NAMESIZE);
 
   if (gethostname(l_struct.ut_host, UT_HOSTSIZE) == -1) {
      if (errno != ENOMEM)
@@ -535,7 +535,7 @@ int TEPty::makePty(bool _addutmp)
   }
   if (strncmp(str_ptr, "/dev/", 5) == 0)
        str_ptr += 5;
-  strncpy(l_struct.ut_line, str_ptr, UT_LINESIZE);
+  strlcpy(l_struct.ut_line, str_ptr, UT_LINESIZE);
   time(&l_struct.ut_time);
 
   login(&l_struct);
