@@ -28,8 +28,3 @@ kwritedrc: $(top_builddir)/config.h
 	else \
 	    echo Autostart=true >>kwritedrc ; \
 	fi
-
-messages: rc.cpp
-	$(PREPARETIPS) > tips.cc
-	$(XGETTEXT) konsole/*.cpp tips.cc -o $(podir)/konsole.pot
-	rm -f tips.cc
