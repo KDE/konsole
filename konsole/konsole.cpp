@@ -1349,9 +1349,29 @@ void Konsole::setFullScreen(bool on)
 //         make the drawEvent.
 //       - font, background image and color palette should be set in one go.
 
+void Konsole::feedAllSessions(const QString &text)
+{
+  for (TESession *ses = sessions.first(); ses; ses = sessions.next())
+    ses->setListenToKeyPress(TRUE);
+  if (te)
+    te->emitText(text);
+  if(!se->isMasterMode()) {
+    for (TESession *ses = sessions.first(); ses; ses = sessions.next())
+      ses->setListenToKeyPress(FALSE);
+    se->setListenToKeyPress(TRUE);
+  }
+}
+
 void Konsole::feedCurrentSession(const QString &text)
 {
   if (te) te->emitText(text);
+}
+
+void Konsole::sendAllSessions(const QString &text)
+{
+  QString newtext=text;
+  newtext.append("\r");
+  feedAllSessions(newtext);
 }
 
 void Konsole::sendCurrentSession(const QString &text)

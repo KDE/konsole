@@ -78,7 +78,9 @@ public:
 
   void newSession(const QString &type);
   void renameCurrentSession(const QString &name);
+  void feedAllSessions(const QString &text);
   void feedCurrentSession(const QString &text);
+  void sendAllSessions(const QString &text);
   void sendCurrentSession(const QString &text);
 
 public slots:
