@@ -351,7 +351,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
   QColor fColor=(((attr.r & RE_CURSOR) && hasFocus() && (!hasBlinkingCursor || !cursorBlinking)) ? color_table[attr.b].color : color_table[attr.f].color);
   QColor bColor=(((attr.r & RE_CURSOR) && hasFocus() && (!hasBlinkingCursor || !cursorBlinking)) ? color_table[attr.f].color : color_table[attr.b].color);
 
-  if (pm && color_table[attr.b].transparent)
+  if (pm && color_table[attr.b].transparent && (!(attr.r & RE_CURSOR) || cursorBlinking))
   {
     paint.setBackgroundMode( TransparentMode );
     if (clear) erase(rect);
@@ -368,6 +368,8 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
   }
   if (!(blinking && (attr.r & RE_BLINK)))
   {
+    if ((attr.r && RE_CURSOR) && cursorBlinking)
+      erase(rect);
     paint.setPen(fColor);
     paint.drawText(rect.x(),rect.y()+font_a, str);
     if ((attr.r & RE_UNDERLINE) || color_table[attr.f].bold)
@@ -385,6 +387,8 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
     }
   }
   if ((attr.r & RE_CURSOR) && !hasFocus()) {
+    if (pm && color_table[attr.b].transparent)
+      erase(rect);
     paint.setClipRect(rect);
     paint.drawRect(rect.x(),rect.y(),rect.width(),rect.height()-m_lineSpacing);
     paint.setClipping(FALSE);
@@ -490,7 +494,13 @@ void TEWidget::setBlinkingCursor(bool blink)
 {
   hasBlinkingCursor=blink;
   if (blink && !blinkCursorT->isActive()) blinkCursorT->start(1000);
-  if (!blink && blinkCursorT->isActive()) { blinkCursorT->stop(); cursorBlinking = FALSE; }
+  if (!blink && blinkCursorT->isActive()) {
+    blinkCursorT->stop();
+    if (cursorBlinking)
+      blinkCursorEvent();
+    else
+      cursorBlinking = FALSE;
+  }
 }
 
 // paint Event ////////////////////////////////////////////////////
@@ -1158,7 +1168,10 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
 
     if (hasBlinkingCursor) {
       blinkCursorT->start(1000);
-      cursorBlinking = FALSE;
+      if (cursorBlinking)
+        blinkCursorEvent();
+      else
+        cursorBlinking = FALSE;
     }
 
     emit keyPressedSignal(ke); // expose
