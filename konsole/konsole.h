@@ -191,6 +191,9 @@ private slots:
   void switchToSession11() { activateSession(11); }
   void switchToSession12() { activateSession(12); }
 
+  void biggerFonts();
+  void smallerFonts();
+
 private:
   KSimpleConfig *defaultSession();
   QString newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(), const QString &_term = QString::null, const QString &_icon = QString::null, const QString &_title = QString::null, const QString &_cwd = QString::null);

@@ -641,6 +641,9 @@ void Konsole::makeGUI()
    new KAction(i18n("Switch to Session 11"), 0, this, SLOT(switchToSession11()), m_shortcuts, "switch_to_session_11");
    new KAction(i18n("Switch to Session 12"), 0, this, SLOT(switchToSession12()), m_shortcuts, "switch_to_session_12");
 
+   new KAction(i18n("Bigger Fonts"), 0, this, SLOT(biggerFonts()), m_shortcuts, "bigger_fonts");
+   new KAction(i18n("Smaller Fonts"), 0, this, SLOT(smallerFonts()), m_shortcuts, "smaller_fonts");
+
    m_shortcuts->readShortcutSettings();
 };
 
@@ -2911,6 +2914,28 @@ void Konsole::currentDesktopChanged(int desk) {
       wallpaperSource = desk;
       rootxpm->repaint(true);
    }
+}
+
+///////////////////////////////////////////////////////////
+
+void Konsole::biggerFonts(void) {
+    assert(se);
+    if (defaultFont.pixelSize() == -1)
+        defaultFont.setPointSize( defaultFont.pointSize() + 1);
+    else
+        defaultFont.setPixelSize( defaultFont.pixelSize() + 2 );
+    setFont( DEFAULTFONT );
+    activateSession();
+}
+
+void Konsole::smallerFonts(void) {
+    assert(se);
+    if (defaultFont.pixelSize() == -1)
+        defaultFont.setPointSize( defaultFont.pointSize() - 1);
+    else
+        defaultFont.setPixelSize( defaultFont.pixelSize() - 2 );
+    setFont( DEFAULTFONT );
+    activateSession();
 }
 
 #include "konsole.moc"
