@@ -46,6 +46,7 @@ public slots: // signals incoming from TEWidget
   virtual void onKeyPress(QKeyEvent*);
  
   virtual void clearSelection();
+  virtual void copySelection();
   virtual void onSelectionBegin(const int x, const int y);
   virtual void onSelectionExtend(const int x, const int y);
   virtual void setSelection(const bool preserve_line_breaks);

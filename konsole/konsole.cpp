@@ -401,6 +401,7 @@ void Konsole::makeGUI()
    connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
 
    // Edit Menu ----------------------------------------------------------------
+   m_copyClipboard->plug(m_edit);
    m_pasteClipboard->plug(m_edit);
 
    m_edit->setCheckable(true);
@@ -576,6 +577,7 @@ void Konsole::makeGUI()
    showMenubar->plug ( m_rightButton );
    m_rightButton->insertSeparator();
 
+   m_copyClipboard->plug(m_rightButton);
    m_pasteClipboard->plug(m_rightButton);
    m_rightButton->insertItem(i18n("&Send Signal"), m_signals);
 
@@ -703,10 +705,12 @@ void Konsole::makeBasicGUI()
 
   m_shortcuts = new KActionCollection(this);
 
+  m_copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0, te,
+                                 SLOT(copyClipboard()), m_shortcuts, "copy");
   m_pasteClipboard = new KAction(i18n("&Paste"), "editpaste", 0, te,
                                  SLOT(pasteClipboard()), m_shortcuts, "paste");
 
-  m_clearTerminal = new KAction(i18n("&Clear Terminal"), 0, this,
+  m_clearTerminal = new KAction(i18n("C&lear Terminal"), 0, this,
                                 SLOT(slotClearTerminal()), m_shortcuts, "clear_terminal");
   m_resetClearTerminal = new KAction(i18n("&Reset and Clear Terminal"), 0, this,
                                      SLOT(slotResetClearTerminal()), m_shortcuts, "reset_clear_terminal");

@@ -103,6 +103,7 @@ public:
 
 public slots:
 
+    void copyClipboard();
     void pasteClipboard();
     void onClearSelection();
 
@@ -114,6 +115,7 @@ signals:
     void changedHistoryCursor(int value);
     void configureRequest( TEWidget*, int state, int x, int y );
 
+    void copySelectionSignal();
     void clearSelectionSignal();
     void beginSelectionSignal( const int x, const int y );
     void extendSelectionSignal( const int x, const int y );

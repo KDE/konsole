@@ -1251,12 +1251,16 @@ void TEWidget::setSelection(const QString& t)
                      this, SLOT(onClearSelection()) );
 
   cb->setSelectionMode( true );
-  QApplication::clipboard()->setText(t);
+  cb->setText(t);
   cb->setSelectionMode( false );
-  QApplication::clipboard()->setText(t);
 
   QObject::connect( cb, SIGNAL(selectionChanged()),
                      this, SLOT(onClearSelection()) );
+}
+
+void TEWidget::copyClipboard()
+{
+  emit copySelectionSignal();
 }
 
 void TEWidget::pasteClipboard()

@@ -272,6 +272,7 @@ private:
   KAction       *m_moveSessionLeft;
   KAction       *m_moveSessionRight;
 
+  KAction       *m_copyClipboard;
   KAction       *m_pasteClipboard;
   KAction       *m_clearTerminal;
   KAction       *m_resetClearTerminal;

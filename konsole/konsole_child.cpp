@@ -97,6 +97,10 @@ KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar
   m_rightButton = new KPopupMenu(this);
   KActionCollection* actions = new KActionCollection(this);
 
+  KAction *copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0,
+                                        te, SLOT(copyClipboard()), actions);
+  copyClipboard->plug(m_rightButton);
+
   KAction *pasteClipboard = new KAction(i18n("&Paste"), "editpaste", 0,
                                         te, SLOT(pasteClipboard()), actions);
   pasteClipboard->plug(m_rightButton);

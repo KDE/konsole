@@ -72,6 +72,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <qregexp.h>
+#include <qclipboard.h>
 
 #include <assert.h>
 
@@ -131,6 +132,8 @@ void TEmulation::connectGUI()
 		   this,SLOT(onSelectionExtend(const int,const int)) );
   QObject::connect(gui,SIGNAL(endSelectionSignal(const bool)),
 		   this,SLOT(setSelection(const bool)) );
+  QObject::connect(gui,SIGNAL(copySelectionSignal()),
+		   this,SLOT(copySelection()) );
   QObject::connect(gui,SIGNAL(clearSelectionSignal()),
 		   this,SLOT(clearSelection()) );
   QObject::connect(gui,SIGNAL(isBusySelecting(bool)),
@@ -158,6 +161,8 @@ void TEmulation::changeGUI(TEWidget* newgui)
 		   this,SLOT(onSelectionExtend(const int,const int)) );
   QObject::disconnect(gui,SIGNAL(endSelectionSignal(const bool)),
 		   this,SLOT(setSelection(const bool)) );
+  QObject::disconnect(gui,SIGNAL(copySelectionSignal()),
+		   this,SLOT(copySelection()) );
   QObject::disconnect(gui,SIGNAL(clearSelectionSignal()),
 		   this,SLOT(clearSelection()) );
   QObject::disconnect(gui,SIGNAL(isBusySelecting(bool)),
@@ -351,6 +356,12 @@ void TEmulation::clearSelection() {
   if (!connected) return;
   scr->clearSelection();
   showBulk();
+}
+
+void TEmulation::copySelection() {
+  if (!connected) return;
+  QString t = scr->getSelText(true);
+  QApplication::clipboard()->setText(t);
 }
 
 void TEmulation::streamHistory(QTextStream* stream) {

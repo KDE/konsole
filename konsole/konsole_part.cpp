@@ -430,6 +430,10 @@ void konsolePart::makeGUI()
 
   // Popup Menu -------------------------------------------------------------------
   m_popupMenu = new KPopupMenu((KMainWindow*)parentWidget);
+  KAction *copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0,
+                                        te, SLOT(copyClipboard()), actions);
+  copyClipboard->plug(m_popupMenu);
+  
   KAction *pasteClipboard = new KAction(i18n("&Paste"), "editpaste", 0,
                                         te, SLOT(pasteClipboard()), actions);
   pasteClipboard->plug(m_popupMenu);
