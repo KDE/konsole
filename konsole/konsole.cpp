@@ -1163,7 +1163,7 @@ void Konsole::slotCouldNotClose()
              i18n("The application running in Konsole does not respond to the close request. "
                   "Do you want Konsole to close anyway?"),
              i18n("Application Does Not Respond"),
-             i18n("Close"));
+             KStdGuiItem::close());
     if (result == KMessageBox::Continue)
     {
         while(sessions.first())
