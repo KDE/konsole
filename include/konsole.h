@@ -162,7 +162,7 @@ private:
   KPopupMenu* m_options;
   KPopupMenu* m_schema;
   KPopupMenu* m_keytab;
-  KPopupMenu* m_codec;
+//  KPopupMenu* m_codec;
   KPopupMenu* m_toolbarSessionsCommands;
   KPopupMenu* m_signals;
   KPopupMenu* m_help;
