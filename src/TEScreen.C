@@ -1035,13 +1035,13 @@ void TEScreen::setSelExtentXY(const int x, const int y)
 
 char *TEScreen::getSelText(const BOOL preserve_line_breaks) 
 {
-  char *m;
-  int s,d; /// source index, dest. index.
+  char *m;  	// buffer to fill.
+  int s,d; 	// source index, dest. index.
   int hist_BR=loc(0,histLines);
   int hY = sel_TL / columns ;
   int hX = sel_TL % columns;
-  int eol;
-  s = sel_TL;
+  int eol;	// end of line
+  s = sel_TL;   // tracks copy in source. 
   d = 0;
   
   // allocate buffer for maximum possible size...
@@ -1053,9 +1053,9 @@ char *TEScreen::getSelText(const BOOL preserve_line_breaks)
   {
     if ( s < hist_BR )
     { 	// get lines from history buffer.
-      eol=histBuffer[hY]->len-1;
-      if  ((hY == (sel_BR/columns)) && (eol > (sel_BR%columns)) ) eol=sel_BR%columns;
-      while ( hX <= eol )
+      eol=histBuffer[hY]->len;
+      if  ((hY == (sel_BR/columns)) && (eol >= (sel_BR%columns)) ) eol=sel_BR%columns;
+      while ( hX < eol )
       { 
          m[d++] = histBuffer[hY]->line[hX++].c; 
          s++;
