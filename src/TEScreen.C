@@ -672,6 +672,14 @@ void TEScreen::ShowCharacter(unsigned short c)
   image[i].r = ef_re;
 
   cuX += 1;
+
+  if(cuX >= columns) {
+    if(getMode(MODE_Wrap))
+      NextLine();
+    else
+      cuX = columns-1;
+  }
+
 }
 
 // Region commands -------------------------------------------------------------
