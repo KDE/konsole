@@ -528,8 +528,7 @@ void TEDemo::setFont(int fontno)
   f.setRawMode( TRUE );
   if ( !f.exactMatch() )
   {
-    QString msg;
-    msg.sprintf(i18n("Font `%s' not found.\nCheck README.linux.console for help."), fonts[fontno]);
+    QString msg = i18n("Font `%1' not found.\nCheck README.linux.console for help.").arg(fonts[fontno]);
     KMsgBox::message
     ( this,
       i18n("Error"), msg,
@@ -635,18 +634,16 @@ void TEDemo::changeTitle(int, const char*s)
 void TEDemo::about()
 //FIXME: make this a little nicer
 {
-    QString title, msg;
-
-    title.sprintf(i18n("About %s"), PACKAGE);
-    msg.sprintf(i18n(
-	"%s version %s - an X terminal\n"
+    QString title = i18n("About %1").arg(PACKAGE);
+    QString msg = i18n(
+	"%1 version %2 - an X terminal\n"
 	"\n"
 	"Copyright (c) 1998 by Lars Doelle <lars.doelle@on-line.de>\n"
 	"\n"
 	"This program is free software under the\n"
 	"terms of the Artistic License and comes\n"
 	"WITHOUT ANY WARRANTY.\n"
-	"See `LICENSE.readme´ for details."), PACKAGE, VERSION);
+	"See `LICENSE.readme´ for details.").arg(PACKAGE).arg(VERSION);
     KMsgBox::message( 0, title, msg );
 }
 
@@ -765,8 +762,7 @@ void TEDemo::doneSession(TESession* s, int status)
 #if 0
   if (!WIFEXITED((status)) || WEXITSTATUS((status)))
   {
-    QString str;
-    str.sprintf(i18n("`%s' terminated abnormally."), s->Title());
+    QString str = i18n("`%1' terminated abnormally.").arg(s->Title());
     if (WIFEXITED((status)))
     {char rcs[100]; sprintf(rcs,"%d.\n",WEXITSTATUS((status)));
       str = str + i18n("\nReturn code = ") + rcs;
