@@ -5,7 +5,6 @@
 #include <qregexp.h>
 #include <qtextstream.h>
 
-#include <kbookmarkimporter.h>
 #include <kmimetype.h>
 #include <kpopupmenu.h>
 #include <ksavefile.h>
@@ -80,25 +79,6 @@ void KonsoleBookmarkMenu::fillBookmarkMenu()
 
     if ( m_bAddBookmark )
       addNewFolder();
-
-    if ( m_pManager->showNSBookmarks()
-         && QFile::exists( KNSBookmarkImporter::netscapeBookmarksFile() ) )
-    {
-      m_parentMenu->insertSeparator();
-
-      KActionMenu * actionMenu = new KActionMenu( i18n("Netscape Bookmarks"),
-                                                  "netscape",
-                                                  m_actionCollection, 0L );
-      actionMenu->plug( m_parentMenu );
-      m_actions.append( actionMenu );
-      KonsoleBookmarkMenu *subMenu = new KonsoleBookmarkMenu( m_pManager,
-                                         m_kOwner, actionMenu->popupMenu(),
-                                         m_actionCollection, false,
-					 m_bAddBookmark, QString::null );
-      m_lstSubMenus.append(subMenu);
-      connect( actionMenu->popupMenu(), SIGNAL(aboutToShow()), subMenu,
-               SLOT(slotNSLoad()));
-    }
   }
 
   KBookmarkGroup parentBookmark = m_pManager->findByAddress( m_parentAddress ).toGroup();
@@ -159,26 +139,9 @@ void KonsoleBookmarkMenu::fillBookmarkMenu()
 
 void KonsoleBookmarkMenu::slotBookmarkSelected()
 {
-    KAction * a;
-    QString b;
-
     if ( !m_pOwner ) return; // this view doesn't handle bookmarks...
-    a = (KAction*)sender();
-    b = a->text();
     m_kOwner->openBookmarkURL( QString::fromUtf8(sender()->name()), /* URL */
                                ( (KAction *)sender() )->text() /* Title */ );
-}
-
-void KonsoleBookmarkMenu::slotNSBookmarkSelected()
-{
-    KAction *a;
-    QString b;
-
-    QString link(sender()->name()+8);
-    a = (KAction*)sender();
-    b = a->text();
-    m_kOwner->openBookmarkURL( link, /*URL */
-                               ( (KAction *)sender() )->text()  /* Title */ );
 }
 
 #include "konsolebookmarkmenu.moc"

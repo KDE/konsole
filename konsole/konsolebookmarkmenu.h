@@ -45,7 +45,6 @@ private:
 protected slots:
     void slotAboutToShow2();
     void slotBookmarkSelected();
-    void slotNSBookmarkSelected();
 
 protected:
     void refill();
