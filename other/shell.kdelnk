@@ -2,12 +2,14 @@
 [KDE Desktop Entry]
 Type=KonsoleApplication
 Name=Shell
+Name[da]=Skald
 Name[fi]=Komentotulkki
 Name[is]=Skel
 Name[no]=Skall
 Name[ro]=Interpretor
 Name[sv]=Skal
 Comment=Shell
+Comment[da]=Skald
 Comment[fi]=Komentotulkki
 Comment[is]=Skel
 Comment[no]=Skall
