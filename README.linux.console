@@ -43,7 +43,7 @@ like emulations are:
 6) A few key codes (F1-F5) differ.
 7) The Linux console occupies the whole display.
 
-Clearly, 1) to 3) makes the Linux console so distinct that
+Clearly, 1) and 2) make the Linux console so distinct that
 an explicit Linux console simulation cannot exist.
 
 
@@ -60,6 +60,9 @@ emulation, too (BUT THERE SHOULD BE NO NEED TO DO SO):
 [TODO: to control the the above two points via menu settings
  is work in progress, meaning not available yet.]
 
+In general it is not advisable to ever modify the above
+indicated settings unless you know what you're doing.
+
 Please note that these applications then may not react properly
 on changing the window size anymore. Often they ignore it
 completely or behave strange in other ways. I even saw one
@@ -70,7 +73,7 @@ considered a bug of these applications, i cannot help it.
 
 Mouse-aware application will most probably not recognize
 mouse events (especially mc) since they might try to get
-these events from gpm instead from the console.
+these events from gpm instead.
 
 MC will not be able to access the special console devices
 then and cannot simulate a secondary screen, treating the

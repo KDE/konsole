@@ -10,9 +10,7 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-/* This module is work in progress.
-   State is "almost done".
-   Still TODO:
+/* Still TODO:
    - handle errors more gracefully.
    - put into configuration
 */
@@ -170,8 +168,6 @@ static bool getSymbol(QIODevice &buf)
     cc = buf.getch();
     return TRUE;
   }
-  // must be string
-  // we keep things simple here
   if (cc == '"')
   {
     cc = buf.getch();
@@ -213,9 +209,9 @@ static bool getSymbol(QIODevice &buf)
   }
   ERROR:
   /* Error processing is so, that we skip all errorness lines.
-     This is stable, since no errors can follow from this behavior.
-  */
+     This is stable, since no other errors can follow from this behavior.
     //FIXME: not done right, yet.
+  */
     fprintf(stderr,"error reading keytab line %d.\n",startofsym);
     fprintf(stderr,"text following: ");
     while (cc != '\n' && cc > 0)
@@ -276,7 +272,6 @@ KeyTrans* KeyTrans::fromDevice(QString path, QIODevice &buf)
   lineno = 1;
   getSymbol(buf);
 
-  // Test tokenizer
 Loop:
   // syntax: ["key" KeyName { ("+" | "-") ModeName } ":" String/CommandName] ["#" Comment]
   if (sym == SYMName && !strcmp(res.ascii(),"keyboard"))

@@ -367,12 +367,12 @@ void Konsole::makeMenu()
 //connect(m_commands, SIGNAL(activated(int)), SLOT(newSession(int)));
 
   QPopupMenu* m_signals = new QPopupMenu;
-  m_signals->insertItem( i18n("STOP"), 17 ); // FIXME: comes with 3 values
-  m_signals->insertItem( i18n("CONT"), 18 ); // FIXME: comes with 3 values
-  m_signals->insertItem( i18n("HUP"), 1 );
-  m_signals->insertItem( i18n("INT"), 2 );
-  m_signals->insertItem( i18n("TERM"), 15 );
-  m_signals->insertItem( i18n("KILL"), 9 );
+  m_signals->insertItem( i18n("STOP"), 17); // FIXME: comes with 3 values
+  m_signals->insertItem( i18n("CONT"), 18); // FIXME: comes with 3 values
+  m_signals->insertItem( i18n("HUP" ),  1);
+  m_signals->insertItem( i18n("INT" ),  2);
+  m_signals->insertItem( i18n("TERM"), 15);
+  m_signals->insertItem( i18n("KILL"),  9);
   connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
 
   m_sessions = new QPopupMenu;
