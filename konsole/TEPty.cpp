@@ -246,10 +246,10 @@ retry:
 void TEPty::setSize(int lines, int columns)
 {
   //kdDebug(1211)<<"TEPty::setSize()"<<endl;
-  wsize.ws_row = (unsigned short)lines;
-  wsize.ws_col = (unsigned short)columns;
-  if(fd < 0) return;
-  ioctl(fd,TIOCSWINSZ,(char *)&wsize);
+  m_WSize.ws_row = (unsigned short)lines;
+  m_WSize.ws_col = (unsigned short)columns;
+  if(m_MasterFd < 0) return;
+  ioctl(m_MasterFd, TIOCSWINSZ,(char *)&m_WSize);
   //kdDebug(1211)<<"TEPty::setSize() done"<<endl;
 }
 
@@ -258,7 +258,7 @@ void TEPty::commClose()
 #ifdef HAVE_UTEMPTER
   {
      KUtmpProcess utmp;
-     utmp.cmdFd = fd;
+     utmp.cmdFd = m_MasterFd;
      utmp << "/usr/sbin/utempter" << "-d" << ttynam;
      utmp.start(KProcess::Block);
   }
@@ -271,7 +271,7 @@ void TEPty::commClose()
         logout(tty_name);
   }
 #endif
-  if (needGrantPty) chownpty(fd, false);
+  if (m_bNeedGrantPty) chownpty(m_MasterFd, false);
  
   KProcess::commClose();
 }
@@ -304,12 +304,18 @@ int TEPty::run(const char* _pgm, QStrList & _args, const char* _term, bool _addu
   term = _term;
   konsole_dcop = _konsole_dcop;
   konsole_dcop_session = _konsole_dcop_session;
-  addutmp = _addutmp;
-  if (fd < 0)
+  m_bAddUtmp = _addutmp;
+  if (m_MasterFd < 0)
      return -1;
 
   if (!start(NotifyOnExit, (Communication) (Stdout | NoRead)))
      return -1;
+
+  if (m_SlaveFd >= 0)
+  {
+     close(m_SlaveFd);
+     m_SlaveFd = -1;
+  }
 
   resume(); // Start...
   return 0;
@@ -326,9 +332,9 @@ void TEPty::setWriteable(bool writeable)
     chmod(deviceName(), sbuf.st_mode & ~(S_IWGRP|S_IWOTH));
 }
 
-int TEPty::openPty()
-{ int ptyfd = -1;
-  needGrantPty = true;
+void TEPty::openPty()
+{ 
+  m_bNeedGrantPty = true;
 
 #include <kdeversion.h>
 #if KDE_VERSION <305
@@ -342,10 +348,11 @@ int TEPty::openPty()
 
   // We try, as we know them, one by one.
 #if defined(HAVE_OPENPTY) //FIXME: some work needed.
-  if (ptyfd < 0) {
+  if (m_MasterFd < 0) {
     int master_fd, slave_fd;
     if (openpty(&master_fd, &slave_fd, NULL, NULL, NULL) == 0) {
-      ptyfd = master_fd;
+      m_MasterFd = master_fd;
+      m_SlaveFd = slave_fd;
 #ifdef HAVE_PTSNAME
       strncpy(ptynam, ptsname(master_fd), 50);
 #else
@@ -354,7 +361,7 @@ int TEPty::openPty()
 #endif
       strncpy(ttynam, ttyname(slave_fd), 50);
 
-      needGrantPty = false;
+      m_bNeedGrantPty = false;
        
       /* Get the group ID of the special `tty' group.  */
       struct group* p = getgrnam(TTY_GROUP);    /* posix */
@@ -362,13 +369,13 @@ int TEPty::openPty()
 
       if (fchown(slave_fd, (uid_t) -1, gid) < 0)
       {
-         needGrantPty = true;
+         m_bNeedGrantPty = true;
          fprintf(stderr,"konsole: cannot chown %s.\n",ttynam); 
          perror("Reason");
       }
       else if (chmod(ttynam, S_IRUSR|S_IWUSR|S_IWGRP) < 0)
       {
-         needGrantPty = true;
+         m_bNeedGrantPty = true;
          fprintf(stderr,"konsole: cannot chmod %s.\n",ttynam); 
          perror("Reason");
       }
@@ -378,65 +385,65 @@ int TEPty::openPty()
 
 //#if defined(__sgi__) || defined(__osf__) || defined(__svr4__)
 #if defined(HAVE_GRANTPT) && defined(HAVE_PTSNAME)
-  if (ptyfd < 0)
+  if (m_MasterFd < 0)
   {
 #ifdef _AIX
-    ptyfd = open("/dev/ptc",O_RDWR);
+    m_MasterFd = open("/dev/ptc",O_RDWR);
 #else
-    ptyfd = open("/dev/ptmx",O_RDWR);
+    m_MasterFd = open("/dev/ptmx",O_RDWR);
 #endif
-    if (ptyfd >= 0)
+    if (m_MasterFd >= 0)
     {
-      char *ptsn = ptsname(ptyfd);
+      char *ptsn = ptsname(m_MasterFd);
       if (ptsn) {
-          strncpy(ttynam, ptsname(ptyfd), 50);
-          grantpt(ptyfd);
-          needGrantPty = false;
+          strncpy(ttynam, ptsname(m_MasterFd), 50);
+          grantpt(m_MasterFd);
+          m_bNeedGrantPty = false;
       } else {
       	  perror("ptsname");
-	  close(ptyfd);
-	  ptyfd = -1;
+	  close(m_MasterFd);
+	  m_MasterFd = -1;
       }
     }
   }
 #endif
 
 #if defined(_SCO_DS) || defined(__USLC__) // SCO OSr5 and UnixWare, might be obsolete
-  if (ptyfd < 0)
+  if (m_MasterFd < 0)
   { for (int idx = 0; idx < 256; idx++)
     { sprintf(ptynam, "/dev/ptyp%d", idx);
       sprintf(ttynam, "/dev/ttyp%d", idx);
       if (access(ttynam, F_OK) < 0) { idx = 256; break; }
-      if ((ptyfd = open (ptynam, O_RDWR)) >= 0)
+      if ((m_MasterFd = open (ptynam, O_RDWR)) >= 0)
       { if (access (ttynam, R_OK|W_OK) == 0) break;
-        close(ptyfd); ptyfd = -1;
+        close(m_MasterFd); m_MasterFd = -1;
       }
     }
   }
 #endif
 
-  if (ptyfd < 0) // Linux device names, FIXME: Trouble on other systems?
+  if (m_MasterFd < 0) // Linux device names, FIXME: Trouble on other systems?
   { for (const char* s3 = "pqrstuvwxyzabcdefghijklmno"; *s3 != 0; s3++)
     { for (const char* s4 = "0123456789abcdefghijklmnopqrstuvwxyz"; *s4 != 0; s4++)
       { sprintf(ptynam,"/dev/pty%c%c",*s3,*s4);
         sprintf(ttynam,"/dev/tty%c%c",*s3,*s4);
-        if ((ptyfd = open(ptynam,O_RDWR)) >= 0)
+        if ((m_MasterFd = open(ptynam,O_RDWR)) >= 0)
         { if (geteuid() == 0 || access(ttynam,R_OK|W_OK) == 0) break;
-          close(ptyfd); ptyfd = -1;
+          close(m_MasterFd); m_MasterFd = -1;
         }
       }
-      if (ptyfd >= 0) break;
+      if (m_MasterFd >= 0) break;
     }
   }
 
-  if (ptyfd < 0)
+  if (m_MasterFd < 0)
   {
     fprintf(stderr,"Can't open a pseudo teletype\n"); 
-    _error = i18n("Unable to open a suitable terminal device.");
+    m_strError = i18n("Unable to open a suitable terminal device.");
     return -1;
   }
 
-  if (needGrantPty && !chownpty(ptyfd, true))
+  if (m_bNeedGrantPty && !chownpty(m_MasterFd, true))
   {
     fprintf(stderr,"konsole: chownpty failed for device %s::%s.\n",ptynam,ttynam);
     fprintf(stderr,"       : This means the session can be eavesdroped.\n");
@@ -446,14 +453,12 @@ int TEPty::openPty()
                                              "konsole").local8Bit().data());
   }
 
-  fcntl(ptyfd,F_SETFL,O_NDELAY);
-
-  return ptyfd;
+  fcntl(m_MasterFd,F_SETFL,O_NDELAY);
 }
 
 int TEPty::makePty(bool _addutmp)
 {
-  if (fd < 0) // no master pty could be opened
+  if (m_MasterFd < 0) // no master pty could be opened
   {
   //FIXME:
     fprintf(stderr,"opening master pty failed.\n");
@@ -461,15 +466,18 @@ int TEPty::makePty(bool _addutmp)
   }
 
 #ifdef HAVE_UNLOCKPT
-  unlockpt(fd);
+  unlockpt(m_MasterFd);
 #endif
 
 #if defined(TIOCSPTLCK) && 0 //FIXME: obsolete, to removed if no one complains
-  int flag = 0; ioctl(fd,TIOCSPTLCK,&flag); // unlock pty
+  int flag = 0; ioctl(m_MasterFd,TIOCSPTLCK,&flag); // unlock pty
 #endif
 
   // open and set all standard files to slave tty
-  int tt = open(ttynam, O_RDWR);
+  int tt = m_SlaveFd; // Already opened?
+
+  if (tt < 0)
+    tt = open(ttynam, O_RDWR); 
 
   if (tt < 0) // the slave pty could be opened
   {
@@ -489,7 +497,7 @@ int TEPty::makePty(bool _addutmp)
   if (_addutmp)
   {
      KUtmpProcess utmp;
-     utmp.cmdFd = fd;
+     utmp.cmdFd = m_MasterFd;
      utmp << "/usr/sbin/utempter" << "-a" << ttynam << "";
      utmp.start(KProcess::Block);
   }
@@ -529,7 +537,7 @@ int TEPty::makePty(bool _addutmp)
 void TEPty::startPgm(const char* pgm, QValueList<QCString> & args, const char* term)
 { 
   int sig;
-  int tt = makePty(addutmp);
+  int tt = makePty(m_bAddUtmp);
 
   //reset signal handlers for child process
   for (sig = 1; sig < NSIG; sig++)
@@ -543,7 +551,7 @@ void TEPty::startPgm(const char* pgm, QValueList<QCString> & args, const char* t
   // We need to close all remaining fd's.
   // Especially the one used by KProcess::start to see if we are running ok.
   for (int i = 0; i < (int)rlp.rlim_cur; i++)
-    if (i != tt && i != fd) close(i); //FIXME: (result of merge) Check if not closing fd is OK)
+    if (i != tt && i != m_MasterFd) close(i); //FIXME: (result of merge) Check if not closing fd is OK)
 
   dup2(tt,fileno(stdin));
   dup2(tt,fileno(stdout));
@@ -598,7 +606,7 @@ void TEPty::startPgm(const char* pgm, QValueList<QCString> & args, const char* t
       ioctl(0,TCGETS,(char *)&ttmode);
 #   endif
 #endif
-      if (!xonxoff)
+      if (!m_bXonXoff)
          ttmode.c_iflag &= ~(IXOFF | IXON);
       ttmode.c_cc[VINTR] = CTRL('C');
       ttmode.c_cc[VQUIT] = CTRL('\\');
@@ -613,7 +621,7 @@ void TEPty::startPgm(const char* pgm, QValueList<QCString> & args, const char* t
 #   endif
 #endif
 
-  close(fd);
+  close(m_MasterFd);
 
   // drop privileges
   setgid(getgid()); setuid(getuid()); 
@@ -632,7 +640,7 @@ void TEPty::startPgm(const char* pgm, QValueList<QCString> & args, const char* t
 
   argv[i] = 0L;
 
-  ioctl(0,TIOCSWINSZ,(char *)&wsize);  // set screen size
+  ioctl(0,TIOCSWINSZ,(char *)&m_WSize);  // set screen size
 
   // finally, pass to the new program
   //  kdDebug(1211) << "We are ready to run the program " << pgm << endl;
@@ -646,9 +654,11 @@ void TEPty::startPgm(const char* pgm, QValueList<QCString> & args, const char* t
 */
 TEPty::TEPty() : pSendJobTimer(NULL)
 { 
-  xonxoff = false;
-  memset(&wsize, 0, sizeof(struct winsize));
-  fd = openPty();
+  m_bXonXoff = false;
+  memset(&m_WSize, 0, sizeof(struct winsize));
+  m_SlaveFd = -1;
+  m_MasterFd = -1;
+  openPty();
   connect(this, SIGNAL(receivedStdout(int, int &)), 
 	  this, SLOT(DataReceived(int, int&)));
   connect(this, SIGNAL(processExited(KProcess *)),
@@ -666,8 +676,8 @@ TEPty::~TEPty()
 
 int TEPty::setupCommunication(Communication comm)
 {
-   if (fd <= 0) return 0;
-   out[0] = fd;
+   if (m_MasterFd <= 0) return 0;
+   out[0] = m_MasterFd;
    out[1] = dup(2); // Dummy
    communication = comm;
    return 1;
@@ -697,7 +707,7 @@ void TEPty::doSendJobs() {
   int written;
   while(!pendingSendJobs.isEmpty()) {
     SendJob& job = pendingSendJobs.first();
-    written = write(fd, job.buffer.data() + job.start, job.length);
+    written = write(m_MasterFd, job.buffer.data() + job.start, job.length);
     if (written==-1) {
       if ( errno!=EAGAIN && errno!=EINTR )
         pendingSendJobs.remove(pendingSendJobs.begin());
@@ -726,14 +736,14 @@ void TEPty::appendSendJob(const char* s, int len)
 /*! sends len bytes through the line */
 void TEPty::send_bytes(const char* s, int len)
 {
-  if (fd < 0)
+  if (m_MasterFd < 0)
     return;
   if (!pendingSendJobs.isEmpty()) {
     appendSendJob(s,len);
   }else {
     int written;
     do {
-      written = write(fd,s,len);
+      written = write(m_MasterFd,s,len);
       if (written==-1) {
         if ( errno==EAGAIN || errno==EINTR )
           appendSendJob(s,len);
@@ -749,7 +759,7 @@ void TEPty::send_bytes(const char* s, int len)
 void TEPty::DataReceived(int,int &len)
 { 
   char buf[4096];
-  len = read(fd, buf, 4096);
+  len = read(m_MasterFd, buf, 4096);
   if (len < 0)
      return;
 

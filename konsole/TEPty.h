@@ -44,13 +44,13 @@ Q_OBJECT
      * the necessary connections to the signals and slots of the
      * instance before starting the execution of the client.
      */
-    int run( const char* pgm, QStrList & args, const char* term, bool addutmp,
+    int run( const char* pgm, QStrList & args, const char* term, bool _addutmp,
              const char* konsole_dcop = "", const char* konsole_dcop_session = "" );
     void setWriteable(bool writeable);
-    void setXonXoff(bool _xonxoff) { xonxoff = _xonxoff; }
+    void setXonXoff(bool _xonxoff) { m_bXonXoff = _xonxoff; }
     int makePty(bool _addutmp);
-    int masterFd() { return fd; }
-    QString error() { return _error; }
+    int masterFd() { return m_MasterFd; }
+    QString error() { return m_strError; }
 
   public slots:
     void lockPty(bool lock);
@@ -92,7 +92,7 @@ Q_OBJECT
       
   private:
     void startPgm(const char* pgm, QValueList<QCString> & args, const char* term);
-    int  openPty();
+    void openPty();
     void appendSendJob(const char* s, int len);
 
   private slots:
@@ -100,15 +100,16 @@ Q_OBJECT
 
   private:
 
-    struct winsize wsize;
-    int fd;
-    bool             needGrantPty;
-    bool             xonxoff;
+    struct winsize m_WSize;
+    int m_MasterFd;
+    int m_SlaveFd;
+    bool             m_bNeedGrantPty;
+    bool             m_bXonXoff;
+    bool             m_bAddUtmp;
     char ptynam[50]; // "/dev/ptyxx" | "/dev/ptmx"
     char ttynam[50]; // "/dev/ttyxx" | "/dev/pts/########..."
     const char *pgm;
-    bool addutmp;
-    QString _error;
+    QString m_strError;
 
     // environment variables
     const char *term;
