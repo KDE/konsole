@@ -757,15 +757,7 @@ void Konsole::changeTitle(int, const QString& s)
 void Konsole::setFullScreen(bool on)
 {
   if (on == b_fullscreen) return;
-  if (on)
-  {
-    _saveGeometry = geometry();
-    setGeometry(kapp->desktop()->geometry());
-  }
-  else
-  {
-    setGeometry(_saveGeometry);
-  }
+  if (on) showFullScreen(); else showNormal();
   b_fullscreen = on;
   m_options->setItemChecked(5,b_fullscreen);
 }
