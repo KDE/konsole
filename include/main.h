@@ -80,17 +80,17 @@ private slots:
   void setSchema(int n);
   void sendSignal(int n);
   void slotToggleToolbar();
+  void slotToggleMenubar();  
   void slotRenameSession();
 
 private:
 
   void makeMenu();
-  void makeStatusbar();
   void runSession(TESession* s); 
   void addSession(TESession* s);
   void setColorPixmaps();
 
-  void setMenuVisible(bool);
+  //  void setMenuVisible(bool);
   void setFrameVisible(bool);
   void setHistory(bool);
   
@@ -124,8 +124,11 @@ private:
 //
   KToggleAction *showToolbar;
   bool        b_toolbarvis;
+  KToggleAction *showMenubar;
   bool        b_menuvis;
+  KToggleAction *showScrollbar;
   bool        b_scroll;
+  KToggleAction *showFrame;
   bool        b_framevis;
   int         n_toolbarpos;
   int         n_keytab;

@@ -93,7 +93,6 @@
 #include "main.h"
 #include "keytrans.h"
 
-template class QPtrDict<TESession>;
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
@@ -118,9 +117,8 @@ static KCmdLineOptions options[] =
    { 0, 0, 0 }
 };
 
-//template class QIntDict<TESession>;
+template class QPtrDict<TESession>;
 template class QIntDict<KSimpleConfig>;
-// BL
 template class QPtrDict<KRadioAction>;
 
 
@@ -136,9 +134,6 @@ const char *fonts[] = {
  };
 #define TOPFONT ((sizeof(fonts)/sizeof(char*))-1)
 
-//static QIntDict<TESession> no2session;
-//static QPtrDict<void>      session2no;
-//static QPtrDict<QObject>      session2no;
 static int session_no = 0;
 static QPtrDict<TESession> action2session;
 static QPtrDict<KRadioAction> session2action;
@@ -169,10 +164,8 @@ Konsole::Konsole(const QString& name,
 
   setView(te,FALSE);
   makeMenu();
-  makeStatusbar();
   // temporary default: show
   toolBar()->setIconText(KToolBar::IconTextRight);
-  //  toolBar()->setBarPos(KToolBar::Bottom);
   toolBar()->show();
   
 
@@ -363,23 +356,9 @@ void Konsole::configureRequest(TEWidget* te, int state, int x, int y)
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void Konsole::makeStatusbar()
-{
-//statusbar = new KStatusBar(this);
-//setStatusBar(statusbar);
-}
-
-/* ------------------------------------------------------------------------- */
-/*                                                                           */
-/*                                                                           */
-/* ------------------------------------------------------------------------- */
-
 void Konsole::makeMenu()
 {
   // options (taken from kvt) //////////////////////////////////////
-
-//m_commands = new QPopupMenu;
-//connect(m_commands, SIGNAL(activated(int)), SLOT(newSession(int)));
 
   KAction *newsession = KStdAction::openNew(this, SLOT(newDefaultSession()));
   newsession->plug(toolBar());
@@ -453,11 +432,14 @@ void Konsole::makeMenu()
   m_codec->setItemChecked(1,TRUE);
 
   m_options = new QPopupMenu;
-  m_options->setCheckable(TRUE);
-  m_options->insertItem( i18n("&Menubar"), 1 );
+  //  m_options->setCheckable(TRUE);
+  //m_options->insertItem( i18n("&Menubar"), 1 );
   // where is going to put it?
+  
+  showMenubar = KStdAction::showMenubar(this, SLOT(slotToggleMenubar()));
+  showMenubar->plug(m_options);
+
   showToolbar = KStdAction::showToolbar(this, SLOT(slotToggleToolbar()));
-  //showToolbar->setChecked(gofaiConfig::getInstance()->toolbarVisible);
   showToolbar->plug(m_options);
 
 
@@ -565,10 +547,13 @@ void Konsole::readProperties(KConfig* config)
 
   // Global options ///////////////////////
 
-  setMenuVisible(config->readBoolEntry("menubar visible",TRUE));
+  //  setMenuVisible(config->readBoolEntry("menubar visible",TRUE));
   setFrameVisible(config->readBoolEntry("has frame",TRUE));
   showToolbar->setChecked(b_toolbarvis);
   slotToggleToolbar();
+  showMenubar->setChecked(b_menuvis);
+  slotToggleMenubar();
+  
   toolBar()->setBarPos((KToolBar::BarPosition)n_toolbarpos);
 
   scrollbar_menu_activated(QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2));
@@ -718,6 +703,7 @@ void Konsole::setFont(int fontno)
   if (se) se->setFontNo(fontno);
 }
 
+/*
 void Konsole::setMenuVisible(bool visible)
 {
   b_menuvis = visible;
@@ -725,6 +711,17 @@ void Konsole::setMenuVisible(bool visible)
   if (b_menuvis) menubar->show(); else menubar->hide();
   updateRects();
 }
+*/
+
+void Konsole::slotToggleMenubar() {
+  b_menuvis = showMenubar->isChecked();
+  if (b_menuvis) menubar->show(); else menubar->hide();
+  if (!b_menuvis) {
+    setCaption(i18n("Use the right mouse button to bring back the menu"));
+    QTimer::singleShot(5000,this,SLOT(setHeader()));
+  }
+}
+
 
 void Konsole::slotToggleToolbar() {
   b_toolbarvis = showToolbar->isChecked();
@@ -752,6 +749,7 @@ void Konsole::opt_menu_activated(int item)
 {
   switch( item )
   {
+    /*
     case 1: setMenuVisible(!b_menuvis);
             if (!b_menuvis)
             {
@@ -759,6 +757,7 @@ void Konsole::opt_menu_activated(int item)
               QTimer::singleShot(5000,this,SLOT(setHeader()));
             }
             break;
+    */
     case 2: setFrameVisible(!b_framevis);
             break;
     case 3: setHistory(!b_scroll);
@@ -863,8 +862,6 @@ void Konsole::sendSignal(int sn)
 
 void Konsole::runSession(TESession* s)
 {
-    //  int session_no = (int)session2no.find(s);
-    //activateSession(session_no);
     KRadioAction *ra = session2action.find(s);
     ra->setChecked(true);
     activateSession();
@@ -877,10 +874,6 @@ void Konsole::runSession(TESession* s)
 void Konsole::addSession(TESession* s)
 {
   session_no += 1;
-  //  no2session.insert(session_no,s);
-  // session2no.insert(s,(QObject*)session_no);
-  //  m_sessions->insertItem(s->Title(), session_no);
-
   // create an action for the session
   QString title = i18n("%1 No %2").arg(s->Title()).arg(session_no);
   char buffer[30];
@@ -899,16 +892,14 @@ void Konsole::addSession(TESession* s)
 }
 
 /*
-  New activate session for the 
+   Activate session for the 
  */
 void Konsole::activateSession() {
     TESession* s = NULL;
-    kDebugInfo("Here we are!!!");
     QPtrDictIterator<TESession> it( action2session ); // iterator for dict
     while ( it.current() ) {
 	KRadioAction *ra = (KRadioAction*)it.currentKey();
 	if (ra->isChecked()) {
-	    //kDebugInfo("Activate session no %d", (int)it.current());
 	    s = it.current();
 	    break;
 	}
@@ -917,7 +908,6 @@ void Konsole::activateSession() {
     if (s==NULL) {
 	return;
     }
-    kDebugInfo("Doing the activation");
     if (se)
 	{
 	    se->setConnect(FALSE);
@@ -930,12 +920,15 @@ void Konsole::activateSession() {
 	//if the size has changed, a resize event (noticable to the application)
 	//should happen. Else, we  could even start the application
 	s->setConnect(TRUE);                  // does a bulkShow (setImage)
-    setFont(s->fontNo());                 //FIXME: creates flicker?
+	setFont(s->fontNo());                 //FIXME: creates flicker?
                                           //FIXME: check here if we're still alife.
                                           //       if not, quit, otherwise,
                                           //       start propagating quit.
     title = s->Title(); // take title from current session
   } else {
+      //    setSchema(s->schemaNo());  // hmm.. now it is needed, I guess
+    // only if transparent
+      rootxpm->repaint(true);  
     s->setConnect(TRUE);
   }
   setHeader();
@@ -1093,8 +1086,6 @@ void Konsole::setSchema(const ColorSchema* s)
   te->setColorTable(s->table); //FIXME: set twice here to work around a bug
 
   if (s->usetransparency) {
-//FIXME: what is this?
-//  rootxpm->checkAvailable(true);
     rootxpm->setFadeEffect(s->tr_x, QColor(s->tr_r, s->tr_g, s->tr_b));
     rootxpm->start();
   } else {
