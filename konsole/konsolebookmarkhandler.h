@@ -23,7 +23,6 @@ public:
     virtual QString currentURL() const;
 
     KPopupMenu *menu() const { return m_menu; }
-    void setAddEnabled(bool);
 
 signals:
     void openURL( const QString& url );
