@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <X11/Xlib.h>
+#include <config.h>
 
 /* TODO
    for anyone who likes to do improvements here, go ahead.
@@ -62,7 +63,7 @@ void KWrited::block_in(const char* txt, int len)
   if (len < 0) len = 0;
   QCString text( txt, len+1 );
   text[len] = 0;
-  wid->insert( QString::fromLocal8Bit( text ) ); 
+  wid->insert( QString::fromLocal8Bit( text ) );
   wid->show();
   XRaiseWindow( wid->x11Display(), wid->winId());
 }
@@ -70,7 +71,7 @@ void KWrited::block_in(const char* txt, int len)
 int main(int argc, char* argv[])
 {
   KLocale::setMainCatalogue("konsole");
-  KCmdLineArgs::init(argc, argv, "kwrited", 
+  KCmdLineArgs::init(argc, argv, "kwrited",
 	I18N_NOOP("KDE Daemon for receiving 'write' messages."),
 	"2.0.0");
 
@@ -81,9 +82,9 @@ int main(int argc, char* argv[])
      fprintf(stderr, i18n("kwrited is already running.").local8Bit());
      exit(1);
   }
- 
+
   // WABA: Make sure not to enable session management.
-  putenv("SESSION_MANAGER=");
+  unsetenv("SESSION_MANAGER");
 
   KUniqueApplication app;
 
