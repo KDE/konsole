@@ -1,5 +1,5 @@
 #include "session.h"
-#include <zmodem_dialog.h>
+#include "zmodem_dialog.h"
 
 #include <kdebug.h>
 #include <dcopclient.h>

@@ -17,9 +17,9 @@
 #include <kmainwindow.h>
 #include <qstrlist.h>
 
-#include <TEPty.h>
-#include <TEWidget.h>
-#include <TEmuVt102.h>
+#include "TEPty.h"
+#include "TEWidget.h"
+#include "TEmuVt102.h"
 
 #include "sessioniface.h"
 
@@ -126,7 +126,7 @@ signals:
   void renameSession(TESession* ses, const QString &name);
 
   void openURLRequest(const QString &cwd);
-  
+
   void zmodemDetected(TESession *);
 
 private slots:
@@ -155,7 +155,7 @@ private:
   int            schema_no;
   int            font_no;
   int            silence_seconds;
-  
+
   int            font_h;
   int            font_w;
 
@@ -177,7 +177,7 @@ private:
 
   QString        cwd;
   QString        initial_cwd;
-  
+
   // ZModem
   bool           zmodemBusy;
   KProcIO*       zmodemProc;

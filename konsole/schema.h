@@ -44,7 +44,7 @@
 #include <qstring.h>
 #include <qptrlist.h>
 
-#include <TECommon.h>
+#include "TECommon.h"
 
 #ifndef KONSOLEDEBUG
 /*

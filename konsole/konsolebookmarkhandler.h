@@ -4,7 +4,7 @@
 #define KONSOLEBOOKMARKHANDLER_H
 
 #include <kbookmarkmanager.h>
-#include <konsolebookmarkmenu.h>
+#include "konsolebookmarkmenu.h"
 
 class QTextStream;
 class KPopupMenu;
@@ -45,7 +45,7 @@ private:
     Konsole *m_konsole;
     KPopupMenu *m_menu;
     KonsoleBookmarkMenu *m_bookmarkMenu;
-    
+
     QTextStream *m_importStream;
 
 protected:

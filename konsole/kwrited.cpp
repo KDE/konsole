@@ -7,7 +7,7 @@
 #include <kcmdlineargs.h>
 #include <klocale.h>
 #include <kglobalsettings.h>
-#include <kwrited.h>
+#include "kwrited.h"
 #include <kdebug.h>
 #include <kcrash.h>
 #include <kpty.h>
@@ -43,7 +43,7 @@ KWrited::KWrited() : QObject()
       wid->minimumSizeHint().width());
   wid->setReadOnly(true);
   wid->setFocusPolicy(QWidget::NoFocus);
- 
+
   pty = new KPty();
   pty->open();
   const char *user = getlogin();

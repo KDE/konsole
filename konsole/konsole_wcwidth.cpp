@@ -7,7 +7,7 @@
  * Markus Kuhn -- 2001-01-12 -- public domain
  */
 
-#include <konsole_wcwidth.h>
+#include "konsole_wcwidth.h"
 
 struct interval {
   unsigned short first;
@@ -118,7 +118,7 @@ int konsole_wcwidth(Q_UINT16 ucs)
 
   /* if we arrive here, ucs is not a combining or C0/C1 control character */
 
-  return 1 + 
+  return 1 +
     (ucs >= 0x1100 &&
      (ucs <= 0x115f ||                    /* Hangul Jamo init. consonants */
       (ucs >= 0x2e80 && ucs <= 0xa4cf && (ucs & ~0x0011) != 0x300a &&

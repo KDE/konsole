@@ -16,14 +16,14 @@
  *  Boston, MA 02111-1307, USA.
  **/
 
-#include <zmodem_dialog.h>
+#include "zmodem_dialog.h"
 
 #include <qtextedit.h>
 
 #include <klocale.h>
 
 ZModemDialog::ZModemDialog(QWidget *parent, bool modal, const QString &caption)
- : KDialogBase(parent, "zmodem_progress", modal, caption, 
+ : KDialogBase(parent, "zmodem_progress", modal, caption,
    User1|Close, User1, true,
    i18n("&Stop"))
 {
@@ -34,7 +34,7 @@ ZModemDialog::ZModemDialog(QWidget *parent, bool modal, const QString &caption)
   setMainWidget(textEdit);
   connect(this, SIGNAL(user1Clicked()), this, SLOT(slotClose()));
 }
-  
+
 void ZModemDialog::addProgressText(const QString &txt)
 {
   int p = textEdit->paragraphs();
