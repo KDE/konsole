@@ -123,7 +123,7 @@ Q_OBJECT
     QValueList<SendJob> pendingSendJobs;
     QTimer* pSendJobTimer;
 
-friend int chownpty(int,int);
+friend int chownpty(int, bool);
 };
 
 #endif

@@ -144,6 +144,10 @@ extern "C" {
 #include <bsdtty.h>
 #endif
 
+#if defined(HAVE_OPENPTY)
+	#include <pty.h>
+#endif
+
 #include <qintdict.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
@@ -151,6 +155,7 @@ extern "C" {
 #include "TEPty.h"
 #include "TEPty.moc"
 
+#define TTY_GROUP "tty"
 
 #include <kstandarddirs.h>
 #include <kdebug.h>
@@ -179,9 +184,9 @@ FILE* syslog_file = NULL; //stdout;
 #define PTY_FILENO 3
 #define BASE_CHOWN "konsole_grantpty"
 
-int chownpty(int fd, int grant)
+int chownpty(int fd, bool grant)
 // param fd: the fd of a master pty.
-// param grant: 1 to grant, 0 to revoke
+// param grant: true to grant, false to revoke
 // returns 1 on success 0 on fail
 {
   struct sigaction newsa, oldsa;
@@ -209,8 +214,9 @@ int chownpty(int fd, int grant)
 
   if (pid > 0) {
     int w;
+
 retry:
-    int rc = waitpid (pid, &w, 0);
+    int rc = waitpid(pid, &w, 0);
     if ((rc == -1) && (errno == EINTR))
       goto retry;
 
@@ -259,7 +265,7 @@ void TEPty::donePty()
         logout(tty_name);
   }
 #endif
-  if (needGrantPty) chownpty(fd,FALSE);
+  if (needGrantPty) chownpty(fd, false);
   emit done(status);
 }
 
@@ -307,7 +313,7 @@ void TEPty::setWriteable(bool writeable)
 
 int TEPty::openPty()
 { int ptyfd = -1;
-  needGrantPty = TRUE;
+  needGrantPty = true;
 
   // Find a master pty that we can open ////////////////////////////////
 
@@ -316,20 +322,32 @@ int TEPty::openPty()
 
   // We try, as we know them, one by one.
 
-#if defined(HAVE_OPENPTY) && 0 //FIXME: some work needed.
-#warning wheee
-  if (ptyfd < 0)
-  {
+#if defined(HAVE_OPENPTY) //FIXME: some work needed.
+  if (ptyfd < 0) {
     int master_fd, slave_fd;
-    char name[10]; // RTSL it shouldn't be any longer
-    if (!openpty(&master_fd, &slave_fd, name, 0/*no termios*/,0 /*and again*/)) {
-      ptyfd=master_fd;
-      strncpy(ptynam, name, 50);
-      strncpy(ttynam, name, 50);
-      ttynam[5]='t';
-      // one needs to look into who owns what to make sure chownpty is needed
-      // FIXME: further, the logic of openPty has to adjusted to pass a file
-      //        handle instead of a name.
+    if (openpty(&master_fd, &slave_fd, NULL, NULL, NULL) == 0) {
+      ptyfd = master_fd;
+      strncpy(ptynam, ptsname(master_fd), 50);
+      strncpy(ttynam, ttyname(slave_fd), 50);
+
+      needGrantPty = false;
+       
+      /* Get the group ID of the special `tty' group.  */
+      struct group* p = getgrnam(TTY_GROUP);    /* posix */
+      gid_t gid = p ? p->gr_gid : getgid ();    /* posix */
+
+      if (fchown(slave_fd, (uid_t) -1, gid) < 0)
+      {
+         needGrantPty = true;
+         fprintf(stderr,"konsole: cannot chown %s.\n",ttynam); 
+         perror("Reason");
+      }
+      else if (chmod(ttynam, S_IRUSR|S_IWUSR|S_IWGRP) < 0)
+      {
+         needGrantPty = true;
+         fprintf(stderr,"konsole: cannot chmod %s.\n",ttynam); 
+         perror("Reason");
+      }
     }
   }
 #endif
@@ -349,39 +367,11 @@ int TEPty::openPty()
       if (ptsn) {
           strncpy(ttynam, ptsname(ptyfd), 50);
           grantpt(ptyfd);
-          needGrantPty = FALSE;
+          needGrantPty = false;
       } else {
       	  perror("ptsname");
 	  close(ptyfd);
 	  ptyfd = -1;
-      }
-    }
-  }
-#endif
-
-#if defined(TIOCGPTN) && 0 //FIXME: obsolete, to be removed if no one complains
-  if (ptyfd > 0)
-  {
-    strcpy(ptynam,"/dev/ptmx");
-    strcpy(ttynam,"/dev/pts/");
-    ptyfd = open(ptynam,O_RDWR);
-    if (ptyfd >= 0) // got the master pty
-    { int ptyno;
-      if (ioctl(ptyfd, TIOCGPTN, &ptyno) == 0)
-      { struct stat sbuf;
-        sprintf(ttynam,"/dev/pts/%d",ptyno);
-        if (stat(ttynam,&sbuf) == 0 && S_ISCHR(sbuf.st_mode))
-          needGrantPty = FALSE;
-        else
-        {
-          close(ptyfd);
-          ptyfd = -1;
-        }
-      }
-      else
-      {
-        close(ptyfd);
-        ptyfd = -1;
       }
     }
   }
@@ -421,13 +411,14 @@ int TEPty::openPty()
     fprintf(stderr,"Can't open a pseudo teletype\n"); exit(1);
   }
 
-  if (needGrantPty && !chownpty(ptyfd,TRUE))
+  if (needGrantPty && !chownpty(ptyfd, TRUE))
   {
     fprintf(stderr,"konsole: chownpty failed for device %s::%s.\n",ptynam,ttynam);
     fprintf(stderr,"       : This means the session can be eavesdroped.\n");
     fprintf(stderr,"       : Make sure konsole_grantpty is installed in\n");
     fprintf(stderr,"       : %s and setuid root.\n",
-            KGlobal::dirs()->findResourceDir("exe", "konsole").local8Bit().data());
+            KGlobal::dirs()->findResourceDir("exe",
+                                             "konsole").local8Bit().data());
   }
 
   fcntl(ptyfd,F_SETFL,O_NDELAY);
