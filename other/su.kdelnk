@@ -2,7 +2,9 @@
 [KDE Desktop Entry]
 Type=KonsoleApplication
 Name=Administrator
+Name[pt_BR]=Administrador
 Comment=Root Console
+Comment[pt_BR]=Console Raiz
 Exec=su
 Schema=/opt/kde/share/apps/konsole/Linux.schema
 #VGA
