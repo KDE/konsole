@@ -116,13 +116,14 @@ int main (int argc, char *argv[])
         while ((dirp = readdir(dp))) {
           if (dirp->d_fileno != dsb.st_ino)
             continue;
-
+	  {
 	  int pdlen = strlen(_PATH_DEV), namelen = strlen(dirp->d_name);
 	  pty = malloc(pdlen + namelen + 1);
 	  if (pty) {
 	    *pty = 0;
 	    strcat(pty, _PATH_DEV);
 	    strcat(pty, dirp->d_name);
+	  }
           }
         }
 
