@@ -1,0 +1,9 @@
+# Hello world
+Id=kde2.2/r1
+File=konsolerc
+Group=options,Desktop Entry
+Key=has frame
+Key=schema
+Key=defaultfont
+Key=MenuBar
+Key=scrollbar
