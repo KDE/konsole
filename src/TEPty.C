@@ -78,6 +78,11 @@
 #include <float.h>
 #endif
 
+#ifdef _AIX
+#define _ALL_SOURCE
+#include <sys/types.h>
+#endif
+
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -285,7 +290,11 @@ int TEPty::openPty()
 #if defined(HAVE_GRANTPT) && defined(HAVE_PTSNAME)
   if (ptyfd < 0)
   {
+#ifdef _AIX
+    ptyfd = open("/dev/ptc",O_RDWR);
+#else
     ptyfd = open("/dev/ptmx",O_RDWR);
+#endif
     if (ptyfd >= 0)
     {
       strncpy(ttynam, ptsname(ptyfd), 50);
@@ -465,7 +474,11 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
 #endif
 
   int pgrp = getpid();                 // This sequence is necessary for
+#ifdef _AIX
+  tcsetpgrp (0, pgrp);
+#else
   ioctl(0, TIOCSPGRP, (char *)&pgrp);  // event propagation. Omitting this
+#endif
   setpgid(0,0);                        // is not noticeable with all
   close(open(dev, O_WRONLY, 0));       // clients (bash,vi). Because bash
   setpgid(0,0);                        // heals this, use '-e' to test it.
