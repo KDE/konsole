@@ -87,6 +87,8 @@
 #include <sys/wait.h>
 #include <assert.h>
 
+#include <kaboutdata.h>
+
 #include "main.h"
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
@@ -989,10 +991,15 @@ int main(int argc, char* argv[])
   QStrList eargs;
   eargs.append(shell);
 
-  KCmdLineArgs::init(argc, argv, PACKAGE, description, VERSION);
-
-  KCmdLineArgs::addCmdLineOptions( options );
-
+  KAboutData aboutData( PACKAGE, I18N_NOOP("Konsole"), 
+    VERSION, description, KAboutData::GPL, 
+    "(c) 1997-2000, Lars Doelle");
+  aboutData.addAuthor("Lars Doelle",0, "lars.doelle@on-line.de");
+  aboutData.addAuthor("Matthias Ettrich",0, "ettrich@kde.org");
+  KCmdLineArgs::init( argc, argv, &aboutData );
+  KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
+  
+  
   setlocale( LC_ALL, "" );
   KApplication a;
   kimgioRegister(); // add io for additional image formats
