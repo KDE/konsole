@@ -297,9 +297,16 @@ int TEPty::openPty()
 #endif
     if (ptyfd >= 0)
     {
-      strncpy(ttynam, ptsname(ptyfd), 50);
-      grantpt(ptyfd);
-      needGrantPty = FALSE;
+      char *ptsn = ptsname(ptyfd);
+      if (ptsn) {
+          strncpy(ttynam, ptsname(ptyfd), 50);
+          grantpt(ptyfd);
+          needGrantPty = FALSE;
+      } else {
+      	  perror("ptsname");
+	  close(ptyfd);
+	  ptyfd = -1;
+      }
     }
   }
 #endif
