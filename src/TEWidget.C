@@ -894,7 +894,7 @@ void TEWidget::onClearSelection()
 //   which would also let you have an in-focus cursor and an out-focus
 //   cursor like xterm does.
 
-// for the auto-hide cursor feature, I added empty focusInEvent() and 
+// for the auto-hide cursor feature, I added empty focusInEvent() and
 // focusOutEvent() so that update() isn't called.
 // For auto-hide, we need to get keypress-events, but we only get them when
 // we have focus.
@@ -906,6 +906,12 @@ void TEWidget::doScroll(int lines)
 
 bool TEWidget::eventFilter( QObject *obj, QEvent *e )
 {
+  if ( (e->type() == QEvent::Accel ||
+       e->type() == QEvent::AccelAvailable ) && qApp->focusWidget() == this )
+  {
+      static_cast<QKeyEvent *>( e )->ignore();
+      return true;
+  }
   if ( obj != this /* when embedded */ && obj != parent() /* when standalone */ )
       return FALSE; // not us
   if ( e->type() == QEvent::Wheel)
@@ -932,7 +938,7 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
     QObject::connect( (QObject*)cb, SIGNAL(dataChanged()),
       this, SLOT(onClearSelection()) );
   }
-  return FALSE; // standard event processing
+  return QFrame::eventFilter( obj, e );
 }
 
 /* ------------------------------------------------------------------------- */
