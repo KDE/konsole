@@ -35,7 +35,6 @@ public slots: // signals incoming from TEWidget
   virtual void onImageSizeChange(int lines, int columns);
   virtual void onHistoryCursorChange(int cursor);
   virtual void onKeyPress(QKeyEvent*);
-//void onMouse(int cb, int cx, int cy);
  
   virtual void clearSelection();
   virtual void onSelectionBegin(const int x, const int y);
@@ -56,23 +55,26 @@ signals:
 public:
 
   virtual void onRcvByte(int);
+
   virtual void setMode  (int) = 0;
   virtual void resetMode(int) = 0;
 
   virtual void sendString(const char*) = 0;
 
-public:
-
   virtual void setConnect(bool r);
-
-protected slots: // triggered by timer
-
-  void showBulk();
+  void setColumns(int columns);
 
 protected:
 
   TEWidget* gui;
-  TEScreen* scr;       // referes to one `screen'
+  TEScreen* scr;         // referes to one `screen'
+  TEScreen* screen[2];   // 0 = primary, 1 = alternate
+  void setScreen(int n); // set `scr' to `screen[n]'
+
+  bool   connected;    // communicate with widget
+
+// refreshing related material.
+// this is localized in the class.
 
 private:
 
@@ -81,10 +83,11 @@ private:
   char*  SelectedText;
   int    bulk_incnt;   // bulk counter
 
-protected:
-  bool   connected;    // communicate with widget
+private slots: // triggered by timer
 
-protected:
+  void showBulk();
+
+private:
 
   void bulkNewline();
   void bulkStart();

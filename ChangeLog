@@ -1,3 +1,5 @@
+27 Jan 2000
+- revisited emulation classes.
 25 Jan 2000
 - improved console8x16. This merged from the iso[01..10].f16.pcf
   as distributed in the console fonts package.

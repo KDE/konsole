@@ -2,5 +2,5 @@
 
 noinst_HEADERS = TEWidget.h TEShell.h TEmulation.h TEmuVt102.h \
 	TECommon.h TEScreen.h kcmkonsole.h main.h schema.h session.h \
-	kwrited.h krootpixmap.h TEHistory.h
+	kwrited.h krootpixmap.h TEHistory.h keytrans.h
 

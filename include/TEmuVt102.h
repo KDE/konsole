@@ -51,28 +51,24 @@ class VT102Emulation : public Emulation // QObject
 
 public:
 
-  VT102Emulation(TEWidget* gui, const char* term);
+  VT102Emulation(TEWidget* gui);
   ~VT102Emulation();
-
-public:
-  void setHistory(bool on);
 
 public slots: // signals incoming from TEWidget
  
-  void onImageSizeChange(int lines, int columns);
   void onKeyPress(QKeyEvent*);
   void onMouse(int cb, int cx, int cy);
 
 signals:
+
   void changeTitle(int,const QString&);
 
 public:
 
-  void tableInit();
+  void reset();
+
   void onRcvByte(int);
   void processCharacter(int cc);
-  void reset();
-  void resetTerminal();
   void sendString(const char *);
 
 public:
@@ -83,26 +79,27 @@ public:
   void resetMode  (int m);
   void saveMode   (int m);
   void restoreMode(int m);
-
-  void setCharset(int n, int cs); //FIXME: experimental
+  void resetModes();
 
   void setConnect(bool r);
 
-  void setColumns(int columns);   //FIXME: experimental
-
 private:
 
+  void resetToken();
 #define MAXPBUF 80
+  void pushToToken(int cc);
   int pbuf[MAXPBUF]; //FIXME: overflow?
   int ppos;
 #define MAXARGS 15
+  void addDigit(int dig);
+  void addArgument();
   int argv[MAXARGS];
   int argc;
+  void initTokenizer();
   int tbl[256];
 
   void scan_buffer_report(); //FIXME: rename
   void ReportErrorToken();   //FIXME: rename
-  void NotImplemented(char* what);
 
   void tau(int code, int p, int q);
   void XtermHack();
@@ -113,23 +110,18 @@ private:
   void reportStatus();
   void reportAnswerBack();
   void reportCursorPosition();
-  void reportMouseEvent(int ev, int x, int y);
   void reportTerminalParms(int p);
-
-  QString emulation;
 
 protected:
 
-  TEScreen* screen[2];   // 0 = primary, 1 = alternate
-  void setScreen(int n); // set `scr' to `screen[n]'
-
-  CharCodes charset[2];
-  void setCharsetX(int n, int cs);
-  void setAndUseCharset(int n, int cs);
+  unsigned short applyCharset(unsigned short c);
+  void setCharset(int n, int cs);
   void useCharset(int n);
+  void setAndUseCharset(int n, int cs);
   void saveCursor();
   void restoreCursor();
-  unsigned short applyCharmap(unsigned short c);
+  void resetCharset(int scrno);
+  CharCodes charset[2];
 
   void setCodec(int c); // codec number, 0 = locale, 1=utf8
 

@@ -16,7 +16,7 @@
 TESession::TESession(KTMainWindow* main, TEWidget* te, QStrList & _args, const char* term, int login_session) : schema_no(0), font_no(3), args(_args), login_shell(login_session)
 {
   sh = new Shell();
-  em = new VT102Emulation(te,term);
+  em = new VT102Emulation(te);
 
   this->term = strdup(term);
 

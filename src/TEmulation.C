@@ -92,7 +92,9 @@ Emulation::Emulation(TEWidget* gui)
 {
   this->gui = gui;
 
-  this->scr = new TEScreen(gui->Lines(),gui->Columns());
+  screen[0] = new TEScreen(gui->Lines(),gui->Columns());
+  screen[1] = new TEScreen(gui->Lines(),gui->Columns());
+  scr = screen[0];
 
   bulk_nlcnt = 0; // reset bulk newline counter
   bulk_incnt = 0; // reset bulk counter
@@ -120,20 +122,28 @@ Emulation::Emulation(TEWidget* gui)
 
 Emulation::~Emulation()
 {
-  delete scr;
+  delete screen[0];
+  delete screen[1];
+}
+
+/*! change between primary and alternate screen
+*/
+
+void Emulation::setScreen(int n)
+{
+  scr = screen[n&1];
 }
 
 void Emulation::setHistory(bool on)
 {
-HERE; printf("Emulation::setHistory(%s)\n",on?"on":"off");
-  scr->setScroll(on);
+  screen[0]->setScroll(on);
   if (!connected) return;
   showBulk();
 }
 
 bool Emulation::history()
 {
-  return scr->hasScroll();
+  return screen[0]->hasScroll();
 }
 
 // Interpreting Codes ---------------------------------------------------------
@@ -157,7 +167,7 @@ void Emulation::onRcvByte(int c)
   {
     case '\b'      : scr->BackSpace();                 break;
     case '\t'      : scr->Tabulate();                  break;
-    case '\n'      : scr->NewLine(); bulkNewline();    break;
+    case '\n'      : scr->NewLine();                   break;
     case '\r'      : scr->Return();                    break;
     case 0x07      : gui->Bell();                      break;
     default        : scr->ShowCharacter(c);            break;
@@ -202,11 +212,14 @@ void Emulation::onRcvBlock(const char *s, int len)
   bulkStart();
   bulk_incnt += 1;
   for (int i = 0; i < len; i++)
-    onRcvByte(s[i]);
+  {
+    onRcvByte(s[i]); if (s[i] == '\n') bulkNewline();
+  }
   bulkEnd();
 }
 
-// Selection ---------------------------
+// Selection --------------------------------------------------------------- --
+
 void Emulation::onSelectionBegin(const int x, const int y) {
   if (!connected) return;
   scr->setSelBeginXY(x,y);
@@ -222,9 +235,7 @@ void Emulation::onSelectionExtend(const int x, const int y) {
 void Emulation::setSelection(const BOOL preserve_line_breaks) {
   if (!connected) return;
   QString t = scr->getSelText(preserve_line_breaks);
-HERE;printf("Text >%s< %d\n",t.latin1(),t.length());
   if (t) gui->setSelection(t);
-HERE;
 }
 
 void Emulation::clearSelection() {
@@ -233,7 +244,7 @@ void Emulation::clearSelection() {
   showBulk();
 }
 
-/* Refreshing -------------------------------------------------------------- */
+// Refreshing -------------------------------------------------------------- --
 
 #define BULK_TIMEOUT 20
 
@@ -296,7 +307,8 @@ void Emulation::setConnect(bool c)
 void Emulation::onImageSizeChange(int lines, int columns)
 {
   if (!connected) return;
-  scr->resizeImage(lines,columns);
+  screen[0]->resizeImage(lines,columns);
+  screen[1]->resizeImage(lines,columns);
   showBulk();
   emit ImageSizeChanged(lines,columns);   // propagate event to serial line
 }
@@ -306,4 +318,11 @@ void Emulation::onHistoryCursorChange(int cursor)
   if (!connected) return;
   scr->setHistCursor(cursor);
   showBulk();
+}
+
+void Emulation::setColumns(int columns)
+{
+  //FIXME: this goes strange ways.
+  //       Can we put this straight or explain it at least?
+  emit changeColumns(columns);
 }
