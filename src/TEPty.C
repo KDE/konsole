@@ -100,9 +100,11 @@ extern "C" {
 
 #include <signal.h>
 
+#if !defined(__osf__)
 #ifdef HAVE_TERMIO_H
 /* needed at least on AIX */
 #include <termio.h>
+#endif
 #endif
 #ifdef HAVE_TERMIOS_H
 /* for HP-UX (some versions) the extern C is needed, and for other

@@ -61,7 +61,6 @@
 
 /* FIXME
    - evtl. the bulk operations could be made more transparent.
-   - evtl. shrink the history buffer after no keystrokes happend for a while.
 */
 
 #include "TEmulation.h"

@@ -39,6 +39,11 @@ FIXME: some complain about the history buffer comsuming the
        since the history does not behave gracefully in cases
        where the memory is used up completely. I have some
        problems to reproduce this event in my installation.
+
+FIXME: There is noticable decrease in speed, also. Perhaps,
+       there whole feature needs to be revisited therefore.
+       Disadvantage of a more elaborated say block-oriented
+       scheme with wrap around would be it's complexity.
 */
 
 

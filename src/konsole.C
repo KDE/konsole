@@ -470,9 +470,9 @@ void Konsole::saveProperties(KConfig* config)
 
   if (args.count() > 0) config->writeEntry("konsolearguments", args);
   config->writeEntry("class",name());
-  config->writeEntry("defaultheight", te->height());
+  config->writeEntry("defaultheight", height());
   // for "save options". Not used by SM.
-  config->writeEntry("defaultwidth", te->width());
+  config->writeEntry("defaultwidth", width());
   // for "save options". Not used by SM.
   //config->writeEntry("kmenubar",                 //FIXME:Float
   //                   menubar->menuBarPos() == KMenuBar::Bottom ? "bottom" : "top");
