@@ -75,7 +75,7 @@ QString TESession::fullTitle() const
 {
     QString res = title;
     if ( !userTitle.isEmpty() )
-        res += " - " + userTitle;
+        res = userTitle + " - " + res;
     return res;
 }
 
