@@ -2274,11 +2274,26 @@ void Konsole::addSessionCommand(const QString &path)
   co->setDesktopGroup();
   QString typ = co->readEntry("Type");
   QString txt = co->readEntry("Name");
-  if (typ.isEmpty() || txt.isEmpty() || typ != "KonsoleApplication")
+
+  // try to locate the binary
+  QString exec= co->readEntry("Exec");
+  if (exec.startsWith("su -c \'")) {
+     exec = exec.mid(7,exec.length()-8);
+  }
+
+  int pos = exec.find(' ');
+  if (pos > 0) {
+     exec = exec.left(pos);
+  }
+
+  QString pexec = KGlobal::dirs()->findExe(exec);
+  if (typ.isEmpty() || txt.isEmpty() || typ != "KonsoleApplication" 
+      || ( !exec.isEmpty() && pexec.isEmpty() ) )
   {
     if (!path.isEmpty())
        delete co;
     return; // ignore
+
   }
   QString icon = co->readEntry("Icon", "openterm");
   m_toolbarSessionsCommands->insertItem( SmallIconSet( icon ), txt, ++cmd_serial );
