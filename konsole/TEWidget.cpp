@@ -52,6 +52,7 @@
 #include <qfile.h>
 #include <qdragobject.h>
 #include <qregexp.h>
+#include <qlayout.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -280,6 +281,9 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,blinking(false)
 ,m_drop(0)
 ,possibleTripleClick(false)
+,mResizeWidget(0)
+,mResizeLabel(0)
+,mResizeTimer(0)
 ,currentSession(0)
 {
   // The offsets are not yet calculated. 
@@ -437,6 +441,33 @@ HCNT("setImage");
   if ( hasBlinker && !blinkT->isActive()) blinkT->start(1000); // 1000 ms
   if (!hasBlinker &&  blinkT->isActive()) { blinkT->stop(); blinking = FALSE; }
   delete [] disstrU;
+
+  if (resizing)
+  {
+     if (!mResizeWidget)
+     {
+        mResizeWidget = new QFrame(this);
+        QFont f = mResizeWidget->font();
+        f.setPointSize(f.pointSize()*2);
+        f.setBold(true);
+        mResizeWidget->setFont(f);
+        mResizeWidget->setFrameShape((QFrame::Shape) (QFrame::Box|QFrame::Raised));
+        mResizeWidget->setMidLineWidth(4);
+        QBoxLayout *l = new QVBoxLayout( mResizeWidget, 10);
+        mResizeLabel = new QLabel(i18n("Size: XXX x XXX"), mResizeWidget);
+        l->addWidget(mResizeLabel, 1, AlignCenter);
+        mResizeWidget->setMinimumWidth(mResizeLabel->fontMetrics().width(i18n("Size: XXX x XXX"))+20);
+        mResizeWidget->setMinimumHeight(mResizeLabel->sizeHint().height()+20);
+        mResizeTimer = new QTimer(this);
+        connect(mResizeTimer, SIGNAL(timeout()), mResizeWidget, SLOT(hide()));
+     }
+     QString sizeStr = i18n("Size: %1 x %2").arg(columns).arg(lines);
+     mResizeLabel->setText(sizeStr);
+     mResizeWidget->move((width()-mResizeWidget->width())/2,
+                         (height()-mResizeWidget->height())/2);
+     mResizeWidget->show();
+     mResizeTimer->start(1000, true);
+  }
 }
 
 // paint Event ////////////////////////////////////////////////////

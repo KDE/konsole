@@ -127,6 +127,8 @@ protected:
 
     void clearImage();
 
+    void mouseTripleClickEvent(QMouseEvent* ev);
+
 protected slots:
 
     void scrollChanged(int value);
@@ -176,7 +178,10 @@ private:
     QString dropText;
     bool possibleTripleClick;  // is set in mouseDoubleClickEvent and deleted
                                // after QApplication::doubleClickInterval() delay
-    void mouseTripleClickEvent(QMouseEvent* ev);
+                               
+    QFrame *mResizeWidget;                               
+    QLabel *mResizeLabel;                               
+    QTimer *mResizeTimer;
 
  public:
     // current session in this widget
