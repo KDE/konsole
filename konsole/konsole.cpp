@@ -2307,7 +2307,7 @@ void Konsole::enterURL(const QString& URL, const QString&)
 
   if (URL.startsWith("file:")) {
     KURL uglyurl(URL);
-    newtext=uglyurl.prettyURL().mid(5);
+    newtext=uglyurl.path();
     KRun::shellQuote(newtext);
     te->emitText("cd "+newtext+"\r");
   }
