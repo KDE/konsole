@@ -104,7 +104,6 @@ TEDemo::TEDemo(const QString& name, QStrList & _args, int login_shell) : KTMainW
   se = 0L;
   rootxpm = 0L;
   menubar = menuBar();
-  setMinimumSize(200,100);
   
   // session management
 
@@ -171,8 +170,11 @@ TEDemo::TEDemo(const QString& name, QStrList & _args, int login_shell) : KTMainW
 
   // activate and run first session //////////////////////////////////////////
 
-  runSession(initial);
+  // WABA: Make sure all the xxxBars are in place so that 
+  //       we can resize our mainWidget to its target size. 
+  updateRects(); 
 
+  runSession(initial);
 }
 
 /*!
@@ -190,14 +192,15 @@ void TEDemo::setColLin(int columns, int lines)
       defaultSize = te->calcSize(80,24);
       notifySize(24,80); // set menu items (strange arg order !)
     }
-    resize(defaultSize);
+    te->resize(defaultSize);
   }
   else
   {
-    resize(te->calcSize(columns,lines));
+    QSize size = te->calcSize(columns, lines);
+    te->resize(size);
     notifySize(lines,columns); // set menu items (strange arg order !)
   }
-  updateRects();
+  adjustSize();
 }
 
 TEDemo::~TEDemo()

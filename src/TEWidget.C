@@ -911,11 +911,17 @@ void TEWidget::makeImage()
 }
 
 // calculate the needed size
-QSize TEWidget::calcSize(int cols, int lins)
-{ int frw = width() - contentsRect().width();
+QSize TEWidget::calcSize(int cols, int lins) const
+{ 
+  int frw = width() - contentsRect().width();
   int frh = height() - contentsRect().height();
   int scw = (scrollLoc==SCRNONE?0:scrollbar->width());
   return QSize( font_w*cols + 2*rimX + frw + scw, font_h*lins + 2*rimY + frh );
+}
+
+QSize TEWidget::sizeHint() const
+{
+   return size();
 }
 
 void TEWidget::styleChange(QStyle &)
