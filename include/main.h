@@ -47,7 +47,8 @@ private slots:
   void configureRequest(TEWidget*,int,int,int);
 
   void scrollbar_menu_activated(int item);
-  void activateSession(int);
+  void activateSession();
+
   void doneSession(TESession*,int);
   void opt_menu_activated(int item);
   void font_menu_activated(int item);
@@ -77,6 +78,8 @@ private slots:
 
   void setSchema(int n);
   void sendSignal(int n);
+  void slotToggleToolbar();
+  void slotRenameSession();
 
 private:
 
@@ -118,6 +121,7 @@ private:
   QPopupMenu* m_size;
   QPopupMenu* m_drop;
 //
+  KToggleAction *showToolbar;
   bool        b_menuvis;
   bool        b_scroll;
   bool        b_framevis;

@@ -991,6 +991,7 @@ void Konsole::doneSession(TESession* s, int )
   ra->unplug(toolBar());
   session2action.remove(s);
   action2session.remove(ra);
+  delete ra; // will the toolbar die?
 
   s->setConnect(FALSE);
 
