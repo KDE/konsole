@@ -166,7 +166,7 @@ For Bash, put 'export PS1=$PS1"\[\e]0;\H:\w\a\]"' in your ~/.bashrc .
 
 <tip category="Konsole">
 <html>
-<p>...that you can let Konsole set the current directory as session name?
+<p>...that you can let Konsole set the current directory as the session name?
 For Bash, put 'export PS1=$PS1"\[\e]30;\H:\w\a\]"' in your ~/.bashrc .
 </html>
 </tip>
