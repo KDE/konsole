@@ -507,6 +507,10 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         m->initMasterMode(sessionconfig->readBoolEntry("MasterMode0",false));
         counter++;
 
+        // show() before 2nd+ sessions are created allows --profile to
+        //  initialize the TE size correctly.
+        m->show();
+
         while (counter < session_count)
         {
           key = QString("Title%1").arg(counter);
@@ -552,7 +556,6 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 	// works only for the first one, but there won't be more.
         n++;
         m->activateSession( sessionconfig->readNumEntry("ActiveSession",0) );
-        m->show();
 	m->setAutoClose(auto_close);
     }
   }
