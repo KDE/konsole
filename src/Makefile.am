@@ -20,7 +20,7 @@ lib_LTLIBRARIES = libkonsolepart.la kwrited.la konsole.la
 # libkonsolepart is a part, but konsole.la links directly to it, so we can't
 # install it under kde_module
 
-libkonsolepart_la_SOURCES = BlockArray.C TEPty.C \
+libkonsolepart_la_SOURCES = TEPty.C BlockArray.C \
 	schema.C \
 	session.C \
 	TEWidget.C \
@@ -50,7 +50,7 @@ konsole_la_LIBADD  = libkonsolepart.la
 konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
 
 # konsole executable - has all the sources, doesn't link kparts, saves startup time
-konsole_SOURCES	= BlockArray.C TEPty.C main.C konsole.C schema.C session.C TEWidget.C TEmuVt102.C \
+konsole_SOURCES	= TEPty.C BlockArray.C main.C konsole.C schema.C session.C TEWidget.C TEmuVt102.C \
                   TEScreen.C TEmulation.C TEHistory.C keytrans.C 
 konsole_LDADD = $(LIB_KDEUI) $(LIB_KSYCOCA) $(LIBUTEMPTER) $(LIBUTIL)
 konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
