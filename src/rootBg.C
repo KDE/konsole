@@ -91,8 +91,8 @@ void RootPixmap::readSettings(int num)
     first_time = true;
   }
 
-  KConfig config(KApplication::kde_configdir() + tmpf,
-		  KApplication::localconfigdir() + tmpf);
+  KConfig config(locate("config", tmpf),
+		 KApplication::localconfigdir() + tmpf);
 
   bool randomMode = false;
   int randomDesk=0;
