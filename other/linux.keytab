@@ -2,7 +2,8 @@
 #
 # --------------------------------------------------------------
 
-keyboard "linux console" # NOT TESTED, MAY NEED SOME CLEANUPS
+# NOT TESTED, MAY NEED SOME CLEANUPS
+keyboard "linux console"
 
 # --------------------------------------------------------------
 #
