@@ -125,6 +125,8 @@ TEmulation::TEmulation(TEWidget* w)
 		   this,SLOT(clearSelection()) );
   QObject::connect(gui,SIGNAL(isBusySelecting(bool)),
 		   this,SLOT(isBusySelecting(bool)) );
+  QObject::connect(gui,SIGNAL(testIsSelected(const int, const int, bool &)),
+		   this,SLOT(testIsSelected(const int, const int, bool &)) );
   setKeymap(0); // Default keymap
 }
 
@@ -299,6 +301,12 @@ void TEmulation::isBusySelecting(bool busy)
 {
   if (!connected) return;
   scr->setBusySelecting(busy);
+}
+
+void TEmulation::testIsSelected(const int x, const int y, bool &selected)
+{
+  if (!connected) return;
+  selected=scr->testIsSelected(x,y);
 }
 
 void TEmulation::clearSelection() {

@@ -1102,6 +1102,12 @@ void TEScreen::setSelExtentXY(const int x, const int y)
   }
 }
 
+bool TEScreen::testIsSelected(const int x,const int y)
+{
+  int pos = loc(x,y+histCursor);
+  return ( pos >= sel_TL && pos <= sel_BR );
+}
+
 QString TEScreen::getSelText(const BOOL preserve_line_breaks)
 {
   if (sel_begin == -1) 

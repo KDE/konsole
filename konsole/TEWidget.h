@@ -113,6 +113,7 @@ signals:
     void extendSelectionSignal( const int x, const int y );
     void endSelectionSignal(const bool preserve_line_breaks);
     void isBusySelecting(bool);
+    void testIsSelected(const int x, const int y, bool &selected /* result */);
 
 protected:
 
@@ -149,11 +150,6 @@ protected:
       QPoint          start;
       QTextDrag       *dragObject;
     } dragInfo;
-
-    struct selectionBounds {
-      QPoint start;
-      QPoint end;
-    } selBound;
 
     virtual int charClass(UINT16) const;
 

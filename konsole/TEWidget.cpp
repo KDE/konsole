@@ -329,12 +329,6 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
   // Init DnD ////////////////////////////////////////////////////////////////
   setAcceptDrops(true); // attempt
   dragInfo.state = diNone;
-  selBound.start.setX(-1);
-  selBound.end.setX(-1);
-/*  m_drop = new KPopupMenu(this);
-  m_drop->insertItem( i18n("Paste"), 0);
-  m_drop->insertItem( i18n("cd"),    1);
-  connect(m_drop, SIGNAL(activated(int)), SLOT(drop_menu_activated(int)));*/
 
   setFocusPolicy( WheelFocus );
 }
@@ -783,8 +777,11 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   {
     emit isBusySelecting(true); // Keep it steady...
     // Drag only when the Control key is hold
-    if ((!ctrldrag || ev->state() & ControlButton) && 
-        selBound.start.x()!=-1 && selBound.end.x()!=-1 && isTargetSelected(pos.x(), pos.y())) {
+    bool selected = false;
+    // The receiver of the testIsSelected() signal will adjust 
+    // 'selected' accordingly.
+    emit testIsSelected(pos.x(), pos.y(), selected);
+    if ((!ctrldrag || ev->state() & ControlButton) && selected ) {
       // The user clicked inside selected text
       dragInfo.state = diPending;
       dragInfo.start = ev->pos();
@@ -799,11 +796,6 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       {
         emit clearSelectionSignal();
         iPntSel = pntSel = pos;
-        if (selBound.start.x()==-1)
-          selBound.start = pos;
-        else
-          selBound.start.setX(-1);
-        selBound.end.setX(-1);
         actSel = 1; // left mouse button pressed but nothing selected yet.
         grabMouse(   /*crossCursor*/  ); // handle with care!	
       }
@@ -844,8 +836,6 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
       // we've left the drag square, we can start a real drag operation now
       emit isBusySelecting(false); // Ok.. we can breath again.
       emit clearSelectionSignal();
-      selBound.start.setX(-1);
-      selBound.end.setX(-1);
       doDrag();
     }
     return;
@@ -999,17 +989,14 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
 
   if ( word_selection_mode || line_selection_mode ) {
     if ( actSel < 2 || swapping ) {
-      selBound.start = ohere;
       emit beginSelectionSignal( ohere.x(), ohere.y() );
     }
   } else if ( actSel < 2 ) {
-    selBound.start = pntSel;
     emit beginSelectionSignal( pntSel.x(), pntSel.y() );
   }
 
   actSel = 2; // within selection
   pntSel = here;
-  selBound.end = here;
   emit extendSelectionSignal( here.x(), here.y() );
 }
 
@@ -1022,8 +1009,6 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
     if(dragInfo.state == diPending)
     {
       // We had a drag event pending but never confirmed.  Kill selection
-      selBound.start.setX(-1);
-      selBound.end.setX(-1);
       emit clearSelectionSignal();
     }
     else
@@ -1079,8 +1064,6 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
 
 
   emit clearSelectionSignal();
-  selBound.start.setX(-1);
-  selBound.end.setX(-1);
   QPoint bgnSel = pos;
   QPoint endSel = pos;
   int i = loc(bgnSel.x(),bgnSel.y());
@@ -1097,7 +1080,6 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
      { i--; if (x>0) x--; else {x=columns-1; bgnSel.ry()--;} }
      bgnSel.setX(x);
      emit beginSelectionSignal( bgnSel.x(), bgnSel.y() );
-     selBound.start = bgnSel;
 
      // set the end...
      i = loc( endSel.x(), endSel.y() );
@@ -1107,7 +1089,6 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
      endSel.setX(x);
      actSel = 2; // within selection
      emit extendSelectionSignal( endSel.x(), endSel.y() );
-     selBound.end = endSel;
      emit endSelectionSignal(preserve_line_breaks);
    }
 
@@ -1128,8 +1109,6 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
   iPntSel = QPoint((ev->x()-tLx-bX)/font_w,(ev->y()-tLy-bY)/font_h);
 
   emit clearSelectionSignal();
-  selBound.start.setX(-1);
-  selBound.end.setX(-1);
 
   line_selection_mode = TRUE;
   word_selection_mode = FALSE;
@@ -1139,12 +1118,10 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
   while (iPntSel.y()>0 && m_line_wrapped[iPntSel.y()-1])
     iPntSel.ry()--;
   emit beginSelectionSignal( 0, iPntSel.y() );
-  selBound.start.setX(0); selBound.start.setY(iPntSel.y());
 
   while (iPntSel.y()<lines-1 && m_line_wrapped[iPntSel.y()])
     iPntSel.ry()++;
   emit extendSelectionSignal( 0, iPntSel.y()+1 );
-  selBound.end.setX(0); selBound.end.setY(iPntSel.y() + 1);
 
   emit endSelectionSignal(preserve_line_breaks);
 }
@@ -1222,8 +1199,6 @@ void TEWidget::emitSelection(bool useXselection,bool appendReturn)
     QKeyEvent e(QEvent::KeyPress, 0,-1,0, text);
     emit keyPressedSignal(&e); // expose as a big fat keypress event
     emit clearSelectionSignal();
-    selBound.start.setX(-1);
-    selBound.end.setX(-1);
   }
   QApplication::clipboard()->setSelectionMode( false );
 }
@@ -1252,8 +1227,6 @@ void TEWidget::pasteClipboard()
 void TEWidget::onClearSelection()
 {
   emit clearSelectionSignal();
-  selBound.start.setX(-1);
-  selBound.end.setX(-1);
 }
 
 /* ------------------------------------------------------------------------- */
@@ -1528,30 +1501,6 @@ void TEWidget::dropEvent(QDropEvent* event)
     }
     // Paste it
   }
-}
-
-// Given coordinates, is the target in a selection?
-bool TEWidget::isTargetSelected(int x, int y)
-{
-  //fprintf( stderr, "Start: (%d,%d)\n", selBound.start.x(), selBound.start.y());
-  //fprintf( stderr, "Pos: (%d,%d)\n", x, y);
-  //fprintf( stderr, "End: (%d,%d)\n\n", selBound.end.x(), selBound.end.y());
-
-  if( (selBound.start.y()>selBound.end.y()) || 
-      (selBound.start.y()==selBound.end.y() && selBound.start.x()>selBound.end.x()) ) {
-    //  If the selected manually from the bottom right to the top left
-    //  the start will actually be the end and vice versa.  Switch them now
-    //  to make for an easier if statement below
-    QPoint tempPoint = selBound.start;
-    selBound.start = selBound.end;
-    selBound.end = tempPoint;
-  }
-
-  if ( ((y<selBound.start.y()) || (y==selBound.start.y() && x<selBound.start.x())) ||
-       ((y>selBound.end.y())   || (y==selBound.end.y()   && x>selBound.end.x())) )
-    return false;
-
-  return true;
 }
 
 void TEWidget::doDrag()

@@ -155,6 +155,8 @@ public: // these are all `Screen' operations
     void setSelExtentXY(const int x, const int y);
     void clearSelection();
     void setBusySelecting(bool busy) { sel_busy = busy; }
+    bool testIsSelected(const int x,const int y);
+
     QString getSelText(const BOOL preserve_line_breaks);
     QString getHistory();
     QString getHistoryLine(int no);
