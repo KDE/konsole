@@ -9,6 +9,7 @@ Comment[wa]=Konsole (terminå di KDE)
 
 [BellVisible]
 Name=Bell in visible session
+Name[cy]=Cloch yn y sesiwn gweladwy
 Name[da]=Klokke i synlig session
 Name[el]=Μεγαφωνάκι στην ορατή σύνοδο
 Name[es]=Timbre en sesión visible
@@ -19,6 +20,7 @@ Name[sr]=Zvonce u vidljivoj sesiji
 Name[sv]=Ljudsignal i synlig session
 Name[th]=ออดบนเซสชันที่มองเห็น
 Comment=Bell emitted within a visible session
+Comment[cy]=Gollyngwyd cloch mewn sesiwn gweledig
 Comment[da]=Klokke brugt indenfor en synlig session
 Comment[el]=Το μεγαφωνάκι ενεργοποιήθηκε σε μία ορατή σύνοδο
 Comment[es]=Suena el timbre incluso en un sesión visible
@@ -56,6 +58,7 @@ default_presentation=16
 
 [Activity]
 Name=Activity in monitored session
+Name[cy]=Gweithgarwch mewn sesiwn wedi'i fonitro
 Name[da]=Aktivitet i overvåget session
 Name[el]=Δραστηριότητα στην εποπτευόμενη σύνοδο
 Name[es]=Actividad en sesión monitorizada
@@ -67,6 +70,7 @@ Name[sr]=Aktivnost u nadziranoj sesiji
 Name[sv]=Aktivitet i bevakad session
 Name[th]=การกระทำบนเซสชันติดตามการทำงาน
 Comment=Activity detected in a monitored session
+Comment[cy]=Datgelwyd gweithgaredd mewn seswin wedi'i fonitro
 Comment[da]=Aktivitet detekteret i en overvåget session
 Comment[el]=Δραστηριότητα παρατηρήθηκε σε μια εποπτευόμενη σύνοδο
 Comment[es]=Detectada actividad en una sesión monitorizada
@@ -79,6 +83,7 @@ default_presentation=16
 
 [Silence]
 Name=Silence in monitored session
+Name[cy]=Distawrwydd mewn sesiwn wedi'i fonitro
 Name[da]=Stilhed i overvåget session
 Name[el]=Ησυχία στην εποπτευόμενη σύνοδο
 Name[es]=Silencio en sesión monitorizada
@@ -88,6 +93,7 @@ Name[pt_BR]=Silêncio na sessão monitorada
 Name[sr]=Tišina u nadziranoj sesiji
 Name[sv]=Tystnad i bevakad session
 Comment=Silence detected in a monitored session
+Comment[cy]=Datgelwyd distawrwydd mewn sesiwn wedi'i fonitro
 Comment[da]=Stilhed detekteret i en overvåget session
 Comment[el]=Ησυχία παρατηρήθηκε σε μια εποπτευόμενη σύνοδο
 Comment[es]=Silencio detectado en una sesión monitorizada
