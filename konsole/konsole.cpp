@@ -1322,30 +1322,30 @@ void Konsole::slotTabSetViewOptions(int mode)
 {
   m_tabViewMode = TabViewModes(mode);
 
-    for(int i = 0; i < tabwidget->count(); i++) {
+  for(int i = 0; i < tabwidget->count(); i++) {
 
-      QWidget *page = tabwidget->page(i);
-      QIconSet icon = iconSetForSession(sessions.at(i));
-      QString title = sessions.at(i)->Title();
+    QWidget *page = tabwidget->page(i);
+    QIconSet icon = iconSetForSession(sessions.at(i));
+    QString title = sessions.at(i)->Title();
 
-      switch(mode) {
-        case ShowIconAndText:
+    switch(mode) {
+      case ShowIconAndText:
 //          tabwidget->setTabLabel(page, title);
 //          tabwidget->setTabIconSet(page, icon);
-          tabwidget->changeTab(page, icon, title);
-          break;
-        case ShowTextOnly:
+        tabwidget->changeTab(page, icon, title);
+        break;
+      case ShowTextOnly:
 //          tabwidget->setTabLabel(page, title);
 //          tabwidget->setTabIconSet(page, QIconSet());
-          tabwidget->changeTab(page, QIconSet(), title);
-          break;
-        case ShowIconOnly:
+        tabwidget->changeTab(page, QIconSet(), title);
+        break;
+      case ShowIconOnly:
 //          tabwidget->setTabLabel(page, QString::null);
 //          tabwidget->setTabIconSet(page, icon);
-          tabwidget->changeTab(page, icon, QString::null);
-          break;
-      }
+        tabwidget->changeTab(page, icon, QString::null);
+        break;
     }
+  }
 }
 
 void Konsole::slotToggleAutoResizeTabs()
@@ -2043,15 +2043,14 @@ void Konsole::reparseConfiguration()
 
   m_shortcuts->readShortcutSettings();
 
-    for (TESession *_se = sessions.first(); _se; _se = sessions.next()) {
-       ColorSchema* s = colors->find( _se->schemaNo() );
-       if (s) {
-         if (s->hasSchemaFileChanged())
-           s->rereadSchemaFile();
-         setSchema(s,_se->widget());
-       }
-    }
-
+  for (TESession *_se = sessions.first(); _se; _se = sessions.next()) {
+     ColorSchema* s = colors->find( _se->schemaNo() );
+     if (s) {
+       if (s->hasSchemaFileChanged())
+         s->rereadSchemaFile();
+       setSchema(s,_se->widget());
+     }
+  }
 }
 
 // --| color selection |-------------------------------------------------------
@@ -2111,7 +2110,7 @@ void Konsole::updateTitle()
 {
   setCaption( se->fullTitle() );
   setIconText( se->IconText() );
-    tabwidget->setTabIconSet(se->widget(), iconSetForSession(se));
+  tabwidget->setTabIconSet(se->widget(), iconSetForSession(se));
   QString icon = se->IconName();
   KRadioAction *ra = session2action.find(se);
   if (ra && (ra->icon() != icon))
@@ -2186,38 +2185,38 @@ void Konsole::updateFullScreen( bool on )
 
 void Konsole::disableMasterModeConnections()
 {
-    QPtrListIterator<TESession> from_it(sessions);
-    for (; from_it.current(); ++from_it) {
-      TESession *from = from_it.current();
-      if (from->isMasterMode()) {
-        QPtrListIterator<TESession> to_it(sessions);
-        for (; to_it.current(); ++to_it) {
-          TESession *to = to_it.current();
-          if (to!=from)
-            disconnect(from->widget(),SIGNAL(keyPressedSignal(QKeyEvent*)),
-                       to->getEmulation(),SLOT(onKeyPress(QKeyEvent*)));
-        }
+  QPtrListIterator<TESession> from_it(sessions);
+  for (; from_it.current(); ++from_it) {
+    TESession *from = from_it.current();
+    if (from->isMasterMode()) {
+      QPtrListIterator<TESession> to_it(sessions);
+      for (; to_it.current(); ++to_it) {
+        TESession *to = to_it.current();
+        if (to!=from)
+          disconnect(from->widget(),SIGNAL(keyPressedSignal(QKeyEvent*)),
+                     to->getEmulation(),SLOT(onKeyPress(QKeyEvent*)));
       }
     }
+  }
 }
 
 void Konsole::enableMasterModeConnections()
 {
-    QPtrListIterator<TESession> from_it(sessions);
-    for (; from_it.current(); ++from_it) {
-      TESession *from = from_it.current();
-      if (from->isMasterMode()) {
-        QPtrListIterator<TESession> to_it(sessions);
-        for (; to_it.current(); ++to_it) {
-          TESession *to = to_it.current();
-          if (to!=from) {
-            connect(from->widget(),SIGNAL(keyPressedSignal(QKeyEvent*)),
-                    to->getEmulation(),SLOT(onKeyPress(QKeyEvent*)));
-          }
+  QPtrListIterator<TESession> from_it(sessions);
+  for (; from_it.current(); ++from_it) {
+    TESession *from = from_it.current();
+    if (from->isMasterMode()) {
+      QPtrListIterator<TESession> to_it(sessions);
+      for (; to_it.current(); ++to_it) {
+        TESession *to = to_it.current();
+        if (to!=from) {
+          connect(from->widget(),SIGNAL(keyPressedSignal(QKeyEvent*)),
+                  to->getEmulation(),SLOT(onKeyPress(QKeyEvent*)));
         }
       }
-      from->setListenToKeyPress(true);
     }
+    from->setListenToKeyPress(true);
+  }
 }
 
 void Konsole::feedAllSessions(const QString &text)
@@ -2358,13 +2357,13 @@ void Konsole::addSession(TESession* s)
   if (m_menuCreated)
      ra->plug(m_view);
 
-    createSessionTab(te, SmallIconSet(s->IconName()), newTitle);
-    setSchema(s->schemaNo());
-    tabwidget->setCurrentPage(tabwidget->count()-1);
-    disableMasterModeConnections(); // no duplicate connections, remove old
-    enableMasterModeConnections();
-    if( m_removeSessionButton )
-      m_removeSessionButton->setEnabled(tabwidget->count()>1);
+  createSessionTab(te, SmallIconSet(s->IconName()), newTitle);
+  setSchema(s->schemaNo());
+  tabwidget->setCurrentPage(tabwidget->count()-1);
+  disableMasterModeConnections(); // no duplicate connections, remove old
+  enableMasterModeConnections();
+  if( m_removeSessionButton )
+    m_removeSessionButton->setEnabled(tabwidget->count()>1);
 }
 
 QString Konsole::currentSession()
@@ -2450,7 +2449,7 @@ void Konsole::activateSession(TESession *s)
   if (se)
   {
      se->setConnect(false);
-       se->setListenToKeyPress(true);
+     se->setListenToKeyPress(true);
      notifySessionState(se,NOTIFYNORMAL);
      // Delete the session if isn't in the session list any longer.
      if (sessions.find(se) == -1)
@@ -2462,13 +2461,13 @@ void Konsole::activateSession(TESession *s)
   session2action.find(se)->setChecked(true);
   QTimer::singleShot(1,this,SLOT(allowPrevNext())); // hack, hack, hack
 
-    tabwidget->showPage( se->widget() );
-    te = se->widget();
-    if (m_menuCreated) {
-      selectBell->setCurrentItem(te->bellMode());
-      setFont(se->fontNo());
-      updateSchemaMenu();
-    }
+  tabwidget->showPage( se->widget() );
+  te = se->widget();
+  if (m_menuCreated) {
+    selectBell->setCurrentItem(te->bellMode());
+    setFont(se->fontNo());
+    updateSchemaMenu();
+  }
 
   if (rootxpms[te])
     rootxpms[te]->start();
@@ -2698,22 +2697,22 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
   if (sessions.count()==1 && n_tabbar!=TabNone)
     tabwidget->setTabBarHidden( false );
 
-    TEWidget* te_old = te;
-    te=new TEWidget(tabwidget);
+  TEWidget* te_old = te;
+  te=new TEWidget(tabwidget);
 
-    connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
-             this, SLOT(configureRequest(TEWidget*,int,int,int)) );
-    if (te_old) {
-      initTEWidget(te, te_old);
-    }
-    else {
-      readProperties(KGlobal::config(), "", true);
-      setFont(QMIN(fno, TOPFONT));
-      te->setScrollbarLocation(n_scroll);
-      te->setBellMode(n_bell);
-    }
+  connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
+           this, SLOT(configureRequest(TEWidget*,int,int,int)) );
+  if (te_old) {
+    initTEWidget(te, te_old);
+  }
+  else {
+    readProperties(KGlobal::config(), "", true);
+    setFont(QMIN(fno, TOPFONT));
+    te->setScrollbarLocation(n_scroll);
+    te->setBellMode(n_bell);
+  }
 
-    te->setMinimumSize(150,70);
+  te->setMinimumSize(150,70);
 
   QString sessionId="session-"+QString::number(++sessionIdCounter);
   TESession* s = new TESession(te, QFile::encodeName(program),cmdArgs,emu,winId(),sessionId,cwd);
@@ -2851,14 +2850,14 @@ void Konsole::doneSession(TESession* s)
 
   KRadioAction *ra = session2action.find(s);
   ra->unplug(m_view);
-    tabwidget->removePage( s->widget() );
-    if (rootxpms[s->widget()]) {
-      delete rootxpms[s->widget()];
-      rootxpms.remove(s->widget());
-    }
-    delete s->widget();
-    if(m_removeSessionButton )
-        m_removeSessionButton->setEnabled(tabwidget->count()>1);
+  tabwidget->removePage( s->widget() );
+  if (rootxpms[s->widget()]) {
+    delete rootxpms[s->widget()];
+    rootxpms.remove(s->widget());
+  }
+  delete s->widget();
+  if(m_removeSessionButton )
+      m_removeSessionButton->setEnabled(tabwidget->count()>1);
   session2action.remove(s);
   action2session.remove(ra);
   int sessionIndex = sessions.findRef(s);
@@ -2958,11 +2957,11 @@ void Konsole::moveSessionLeft()
   ra->unplug(m_view);
   ra->plug(m_view,(m_view->count()-sessions.count()+1)+position-1);
 
-    tabwidget->blockSignals(true);
-    tabwidget->removePage(se->widget());
-    tabwidget->blockSignals(false);
-    createSessionTab(se->widget(), iconSetForSession(se), se->Title(), position-1);
-    tabwidget->showPage(se->widget());
+  tabwidget->blockSignals(true);
+  tabwidget->removePage(se->widget());
+  tabwidget->blockSignals(false);
+  createSessionTab(se->widget(), iconSetForSession(se), se->Title(), position-1);
+  tabwidget->showPage(se->widget());
 
   if (!m_menuCreated)
     makeGUI();
@@ -2986,11 +2985,11 @@ void Konsole::moveSessionRight()
   ra->unplug(m_view);
   ra->plug(m_view,(m_view->count()-sessions.count()+1)+position+1);
 
-    tabwidget->blockSignals(true);
-    tabwidget->removePage(se->widget());
-    tabwidget->blockSignals(false);
-    createSessionTab(se->widget(), iconSetForSession(se), se->Title(), position+1);
-    tabwidget->showPage(se->widget());
+  tabwidget->blockSignals(true);
+  tabwidget->removePage(se->widget());
+  tabwidget->blockSignals(false);
+  createSessionTab(se->widget(), iconSetForSession(se), se->Title(), position+1);
+  tabwidget->showPage(se->widget());
 
   if (!m_menuCreated)
     makeGUI();
@@ -3038,7 +3037,7 @@ void Konsole::setMasterMode(bool _state, TESession* _se)
   if (_se==se)
     masterMode->setChecked( _state );
 
-    disableMasterModeConnections();
+  disableMasterModeConnections();
 
   _se->setMasterMode( _state );
 
@@ -3434,12 +3433,12 @@ void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
   }
 
   tewidget->setColorTable(s->table());
-    QPtrListIterator<TESession> ses_it(sessions);
-    for (; ses_it.current(); ++ses_it)
-      if (tewidget==ses_it.current()->widget()) {
-        ses_it.current()->setSchemaNo(s->numb());
-        break;
-      }
+  QPtrListIterator<TESession> ses_it(sessions);
+  for (; ses_it.current(); ++ses_it)
+    if (tewidget==ses_it.current()->widget()) {
+      ses_it.current()->setSchemaNo(s->numb());
+      break;
+    }
 }
 
 void Konsole::slotDetachSession()
@@ -3497,14 +3496,14 @@ void Konsole::detachSession(TESession* _se) {
   if (sessions.count()==1)
     m_detachSession->setEnabled(false);
 
-    tabwidget->removePage( se_widget );
-    if (rootxpms[se_widget]) {
-      delete rootxpms[se_widget];
-      rootxpms.remove(se_widget);
-    }
-    delete se_widget;
-    if (b_dynamicTabHide && tabwidget->count()==1)
-      tabwidget->setTabBarHidden(true);
+  tabwidget->removePage( se_widget );
+  if (rootxpms[se_widget]) {
+    delete rootxpms[se_widget];
+    rootxpms.remove(se_widget);
+  }
+  delete se_widget;
+  if (b_dynamicTabHide && tabwidget->count()==1)
+    tabwidget->setTabBarHidden(true);
 }
 
 void Konsole::attachSession(TESession* session)
@@ -3514,22 +3513,22 @@ void Konsole::attachSession(TESession* session)
 
   TEWidget* se_widget = session->widget();
 
-    te=new TEWidget(tabwidget);
+  te=new TEWidget(tabwidget);
 
-    connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
-             this, SLOT(configureRequest(TEWidget*,int,int,int)) );
+  connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
+           this, SLOT(configureRequest(TEWidget*,int,int,int)) );
 
-    te->resize(se_widget->size());
-    te->setSize(se_widget->Columns(), se_widget->Lines());
-    initTEWidget(te, se_widget);
-    session->changeWidget(te);
-    te->setFocus();
-    createSessionTab(te, SmallIconSet(session->IconName()), session->Title());
-    setSchema(session->schemaNo());
-    if (session->isMasterMode()) {
-      disableMasterModeConnections(); // no duplicate connections, remove old
-      enableMasterModeConnections();
-    }
+  te->resize(se_widget->size());
+  te->setSize(se_widget->Columns(), se_widget->Lines());
+  initTEWidget(te, se_widget);
+  session->changeWidget(te);
+  te->setFocus();
+  createSessionTab(te, SmallIconSet(session->IconName()), session->Title());
+  setSchema(session->schemaNo());
+  if (session->isMasterMode()) {
+    disableMasterModeConnections(); // no duplicate connections, remove old
+    enableMasterModeConnections();
+  }
 
   QString title=session->Title();
   KRadioAction *ra = new KRadioAction(title.replace('&',"&&"), session->IconName(),
@@ -4107,11 +4106,11 @@ void Konsole::enableFixedSize(bool b)
 QPtrList<TEWidget> Konsole::activeTEs()
 {
    QPtrList<TEWidget> ret;
-     if (sessions.count()>0)
-       for (TESession *_se = sessions.first(); _se; _se = sessions.next())
-          ret.append(_se->widget());
-     else if (te)  // check for startup initalization case in newSession()
-       ret.append(te);
+   if (sessions.count()>0)
+     for (TESession *_se = sessions.first(); _se; _se = sessions.next())
+        ret.append(_se->widget());
+   else if (te)  // check for startup initalization case in newSession()
+     ret.append(te);
    return ret;
 }
 
