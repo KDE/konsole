@@ -207,12 +207,16 @@ KonsoleChild::~KonsoleChild()
   disconnect( se->getEmulation(),SIGNAL(ImageSizeChanged(int,int)), this,SLOT(notifySize(int,int)));
   se->setConnect(false);
 
-  TEWidget* old_te=te;
-  emit doneChild(this,se);
-  delete old_te;
   if (session_terminated) {
+    delete te;
     delete se;
     se=NULL;
+    emit doneChild(this,NULL);
+  }
+  else {
+    TEWidget* old_te=te;
+    emit doneChild(this,se);
+    delete old_te;
   }
 
   if( kWinModule )
