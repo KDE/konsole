@@ -53,16 +53,17 @@ public:
 private:
   void addKeyTrans();
   static KeyTrans* fromDevice(QString path, QIODevice &buf);
-  void addEntry(int key, int bits, int mask, int cmd, QString txt);
-private:
+public:
   class KeyEntry
   {
   public:
-    KeyEntry(int key, int bits, int mask, int cmd, QString txt);
+    KeyEntry(int ref, int key, int bits, int mask, int cmd, QString txt);
     ~KeyEntry();
   public:
     bool matches(int key, int bits, int mask);
     QString text();
+  public:
+    int ref;
   private:
     int     key;
     int     bits;
@@ -71,6 +72,8 @@ private:
     int cmd;
     QString txt;
   };
+public:
+  KeyEntry* addEntry(int ref, int key, int bits, int mask, int cmd, QString txt);
 private:
   QList<KeyEntry> table;
 public: //FIXME: we'd do better

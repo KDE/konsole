@@ -1,3 +1,5 @@
+ 5 Feb 2000
+- proper diagnostics added to keytrans reader.
 31 Jan 2000
 - session swap respects size change
 - added sending signals to menu

@@ -22,12 +22,12 @@
     and from the user. It hardly does anything interesting.
 */
 
-/*WORKING ON:
-  - order the configuration steps properly.
-    - general default values
-    - session management OR saved configuration
-    - command line parameters (for initial session only)
-    * other runtime config (menu, resize, etc).
+/*TODO:
+  - allow to set keytab
+  - allow to set coded
+  - fix setting history
+  - fix resize (scroll)
+  - fix reported crash in TEScreen.C (tcsh+TERM=ansi,CTRL-A)
 */
 
 /*FIXME:
@@ -40,17 +40,9 @@
     - configuration files
     - other events (e.g. resizing)
     We have to find a single-place method to maintain this.
-    Scedule: post kde 1.2
   - Controling the widget is currently done by individual attributes.
     This lead to quite some amount of flicker when a whole bunch of
     attributes has to be set, e.g. in session swapping.
-    Scedule: post kde 1.2
-  - The schema file name in session config files is not location
-    transparent.
-*/
-
-/* TODO
-- don't reread the pixmap every time
 */
 
 #include"config.h"
@@ -703,7 +695,7 @@ void Konsole::setFrameVisible(bool visible)
 
 void Konsole::setHistory(bool on)
 {
-HERE; printf("setHistory: %s, having%s session.\n",on?"on":"off",se?"":" no");
+//HERE; printf("setHistory: %s, having%s session.\n",on?"on":"off",se?"":" no");
   b_scroll = on;
   m_options->setItemChecked(3,b_scroll);
   if (se) se->setHistory( b_scroll );

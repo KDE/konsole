@@ -10,11 +10,6 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-/* Still TODO:
-   - handle errors more gracefully.
-   - put into configuration
-*/
-
 /*
    The keyboard translation table allows to configure konsoles behavior
    on key strokes.
@@ -37,8 +32,8 @@
 
 // KeyEntry -
 
-KeyTrans::KeyEntry::KeyEntry(int _key, int _bits, int _mask, int _cmd, QString _txt)
-: key(_key), bits(_bits), mask(_mask), cmd(_cmd), txt(_txt)
+KeyTrans::KeyEntry::KeyEntry(int _ref, int _key, int _bits, int _mask, int _cmd, QString _txt)
+: ref(_ref), key(_key), bits(_bits), mask(_mask), cmd(_cmd), txt(_txt)
 {
 }
 
@@ -68,18 +63,18 @@ KeyTrans::~KeyTrans()
 {
 }
 
-void KeyTrans::addEntry(int key, int bits, int mask, int cmd, QString txt)
+KeyTrans::KeyEntry* KeyTrans::addEntry(int ref, int key, int bits, int mask, int cmd, QString txt)
+// returns conflicting entry
 {
   for (QListIterator<KeyEntry> it(table); it.current(); ++it)
   {
     if (it.current()->matches(key,bits,mask))
     {
-      fprintf(stderr,"rejecting key %d bits 0x%02x mask 0x%02x:"
-                     " conflict with earlier entry.\n",key,bits,mask);
-      return;
+      return it.current();
     }
   }
-  table.append(new KeyEntry(key,bits,mask,cmd,txt));
+  table.append(new KeyEntry(ref,key,bits,mask,cmd,txt));
+  return (KeyEntry*)NULL;
 }
 
 bool KeyTrans::findEntry(int key, int bits, int* cmd, const char** txt, int* len)
@@ -114,118 +109,130 @@ bool KeyTrans::findEntry(int key, int bits, int* cmd, const char** txt, int* len
 #define SYMEol     2
 #define SYMEof     3
 #define SYMOpr     4
+#define SYMError   5
 
 #define inRange(L,X,H) ((L <= X) && (X <= H))
 #define isNibble(X) (inRange('A',X,'F')||inRange('a',X,'f')||inRange('0',X,'9'))
 #define convNibble(X) (inRange('0',X,'9')?X-'0':X+10-(inRange('A',X,'F')?'A':'a'))
 
-//FIXME: we might give these variables a prefix.
-static int     startofsym;
-static int     sym;
-static QString res;
-static int     len;
-static int     cc;
-static int     lineno;
-
-
-static bool getSymbol(QIODevice &buf)
+class KeytabReader
 {
-  res = ""; len = 0;
-  while (cc == ' ')
-    cc = buf.getch(); // skip spaces
+public:
+  KeytabReader(QString p, QIODevice &d);
+public:
+  void getCc();
+  void getSymbol();
+  void parseTo(KeyTrans* kt);
+  void ReportError(const char* msg);
+  void ReportToken(); // diagnostic
+private:
+  int     sym;
+  QString res;
+  int     len;
+  int     slinno;
+  int     scolno;
+private:
+  int     cc;
+  int     linno;
+  int     colno;
+  QIODevice* buf;
+  QString path;
+};
+
+
+KeytabReader::KeytabReader(QString p, QIODevice &d)
+{
+  path = p;
+  buf = &d;
+  cc = 0;
+}
+
+void KeytabReader::getCc()
+{
+  if (cc == '\n') { linno += 1; colno = 0; }
+  if (cc < 0) return;
+  cc = buf->getch();
+  colno += 1;
+}
+
+void KeytabReader::getSymbol()
+{
+  res = ""; len = 0; sym = SYMError;
+  while (cc == ' ') getCc(); // skip spaces
   if (cc == '#')      // skip comment
   {
-    while (cc != '\n' && cc > 0)
-      cc = buf.getch();
+    while (cc != '\n' && cc > 0) getCc();
   }
-  startofsym = lineno;
+  slinno = linno;
+  scolno = colno;
   if (cc <= 0)
   {
-    sym = SYMEof;
-    return FALSE; // eos
+    sym = SYMEof; return; // eos
   }
   if (cc == '\n')
   {
-    lineno += 1;
-    sym = SYMEol;
-    cc = buf.getch();
-    return TRUE; // eol
+    getCc();
+    sym = SYMEol; return; // eol
   }
   if (inRange('A',cc,'Z')||inRange('a',cc,'z')||inRange('0',cc,'9'))
   {
-    sym = SYMName;
     while (inRange('A',cc,'Z') || inRange('a',cc,'z') || inRange('0',cc,'9'))
     {
       res = res + (char)cc;
-      cc = buf.getch();
+      getCc();
     }
-    return TRUE;
+    sym = SYMName;
+    return;
   }
   if (strchr("+-:",cc))
   {
-    sym = SYMOpr;
     res = (char)cc;
-    cc = buf.getch();
-    return TRUE;
+    getCc();
+    sym = SYMOpr; return;
   }
   if (cc == '"')
   {
-    cc = buf.getch();
+    getCc();
     while (cc >= ' ' && cc != '"')
     { int sc;
       if (cc == '\\') // handle quotation
       {
-        cc = buf.getch();
+        getCc();
         switch (cc)
         {
-          case 'E'  : sc = 27; cc = buf.getch(); break;
-          case 'b'  : sc =  8; cc = buf.getch(); break;
-          case 'f'  : sc = 12; cc = buf.getch(); break;
-          case 't'  : sc =  9; cc = buf.getch(); break;
-          case 'r'  : sc = 13; cc = buf.getch(); break;
-          case 'n'  : sc = 10; cc = buf.getch(); break;
+          case 'E'  : sc = 27; getCc(); break;
+          case 'b'  : sc =  8; getCc(); break;
+          case 'f'  : sc = 12; getCc(); break;
+          case 't'  : sc =  9; getCc(); break;
+          case 'r'  : sc = 13; getCc(); break;
+          case 'n'  : sc = 10; getCc(); break;
           case '\\' : // fall thru
-          case '"'  : sc = cc; cc = buf.getch(); break;
-          case 'x'  : cc = buf.getch();
+          case '"'  : sc = cc; getCc(); break;
+          case 'x'  : getCc();
                       sc = 0;
-                      if (isNibble(cc)) { sc = 16*sc + convNibble(cc); cc = buf.getch(); } else goto ERROR;
-                      if (isNibble(cc)) { sc = 16*sc + convNibble(cc); cc = buf.getch(); } else goto ERROR;
+                      if (!isNibble(cc)) return; sc = 16*sc + convNibble(cc); getCc();
+                      if (!isNibble(cc)) return; sc = 16*sc + convNibble(cc); getCc();
                       break;
-          default   : goto ERROR;
+          default   : return;
         }
       }
       else
       {
         // regular char
-        sc = cc; cc = buf.getch();
+        sc = cc; getCc();
       }
       res = res + (char)sc;
       len = len + 1;
     }
-    if (cc != '"') goto ERROR;
-    cc = buf.getch();
-    sym = SYMString;
-    return TRUE;
+    if (cc != '"') return;
+    getCc();
+    sym = SYMString; return;
   }
-  ERROR:
-  /* Error processing is so, that we skip all errorness lines.
-     This is stable, since no other errors can follow from this behavior.
-    //FIXME: not done right, yet.
-  */
-    fprintf(stderr,"error reading keytab line %d.\n",startofsym);
-    fprintf(stderr,"text following: ");
-    while (cc != '\n' && cc > 0)
-    {
-      fprintf(stderr,"%c",cc);
-      cc = buf.getch();
-    }
-    fprintf(stderr,"\n");
-    return FALSE;
 }
 
-static void ReportToken() // diagnostic
+void KeytabReader::ReportToken() // diagnostic
 {
-  printf("sym(%d): ",startofsym);
+  printf("sym(%d): ",slinno);
   switch(sym)
   {
     case SYMEol    : printf("End of line"); break;
@@ -238,6 +245,11 @@ static void ReportToken() // diagnostic
                      break;
   }
   printf("\n");
+}
+
+void KeytabReader::ReportError(const char* msg) // diagnostic
+{
+  fprintf(stderr,"%s(%d,%d):error: %s.\n",path.ascii(),slinno,scolno,msg);
 }
 
 // local symbol tables ---------------------------------------------------------------------
@@ -264,62 +276,74 @@ KeyTrans* KeyTrans::fromDevice(QString path, QIODevice &buf)
 {
   KeyTrans* kt = new KeyTrans;
   kt->path = path;
+  KeytabReader ktr(path,buf); ktr.parseTo(kt);
+  return kt;
+}
 
+
+#define assertSyntax(Cond,Message) if (!(Cond)) { ReportError(Message); goto ERROR; }
+
+void KeytabReader::parseTo(KeyTrans* kt)
+{
   // Opening sequence
 
-  buf.open(IO_ReadOnly);
-  cc = buf.getch();
-  lineno = 1;
-  getSymbol(buf);
+  buf->open(IO_ReadOnly);
+  getCc();
+  linno = 1;
+  colno  = 1;
+  getSymbol();
 
 Loop:
   // syntax: ["key" KeyName { ("+" | "-") ModeName } ":" String/CommandName] ["#" Comment]
   if (sym == SYMName && !strcmp(res.ascii(),"keyboard"))
   {
-    getSymbol(buf);
-    if (sym != SYMString) goto ERROR; // header expected
+    getSymbol(); assertSyntax(sym == SYMString, "Header expected")
     kt->hdr = i18n(res);
-    getSymbol(buf);
-    if (sym != SYMEol)    goto ERROR; // unexpected text
-    getSymbol(buf);                   // eoln
+    getSymbol(); assertSyntax(sym == SYMEol, "Text unexpected")
+    getSymbol();                   // eoln
     goto Loop;
   }
   if (sym == SYMName && !strcmp(res.ascii(),"key"))
   {
 //printf("line %3d: ",startofsym);
-    getSymbol(buf);
-    // keyname
-    if (sym != SYMName) goto ERROR; // mode name expected
-    if (!syms.keysyms[res]) goto ERROR; // unknown key
+    getSymbol(); assertSyntax(sym == SYMName, "Name expected")
+    assertSyntax(syms.keysyms[res], "Unknown key name")
     int key = (int)syms.keysyms[res]-1;
 //printf(" key %s (%04x)",res.ascii(),(int)keysyms[res]-1);
-    getSymbol(buf); // + - :
+    getSymbol(); // + - :
     int mode = 0;
     int mask = 0;
     while (sym == SYMOpr && (!strcmp(res.ascii(),"+") || !strcmp(res.ascii(),"-")))
     {
       bool on = !strcmp(res.ascii(),"+");
-      getSymbol(buf);
+      getSymbol();
       // mode name
-      if (sym != SYMName) goto ERROR; // mode name expected
-      if (!syms.modsyms[res]) goto ERROR; // unknown mod
+      assertSyntax(sym == SYMName, "Name expected")
+      assertSyntax(syms.modsyms[res], "Unknown mode name")
       int bits = (int)syms.modsyms[res]-1;
-      mode |= (on << bits);
-      mask |= (1 << bits);
+      if (mask & (1 << bits))
+      {
+        fprintf(stderr,"%s(%d,%d): mode name used multible times.\n",path.ascii(),slinno,scolno);
+      }
+      else
+      {
+        mode |= (on << bits);
+        mask |= (1 << bits);
+      }
 //printf(", mode %s(%d) %s",res.ascii(),(int)modsyms[res]-1,on?"on":"off");
-      getSymbol(buf);
+      getSymbol();
     }
-    if (sym != SYMOpr || strcmp(res.ascii(),":")) goto ERROR; // ":" expected
-    getSymbol(buf);
+    assertSyntax(sym == SYMOpr && !strcmp(res.ascii(),":"), "':' expected")
+    getSymbol();
     // string or command
+    assertSyntax(sym == SYMName || sym == SYMString,"Command or string expected")
     int cmd = 0;
     if (sym == SYMName)
     {
-      if (!syms.oprsyms[res]) goto ERROR; // unknown opr
+      assertSyntax(syms.oprsyms[res], "Unknown operator name")
       cmd = (int)syms.oprsyms[res]-1;
 //printf(": do %s(%d)",res.ascii(),(int)oprsyms[res]-1);
     }
-    else
     if (sym == SYMString)
     {
       cmd = CMD_send;
@@ -327,30 +351,30 @@ Loop:
 //for (unsigned i = 0; i < res.length(); i++)
 //printf(" %02x(%c)",res.ascii()[i],res.ascii()[i]>=' '?res.ascii()[i]:'?');
     }
-    else
-      goto ERROR; // command or string expected
 //printf(". summary %04x,%02x,%02x,%d\n",key,mode,mask,cmd);
-    kt->addEntry(key,mode,mask,cmd,res);
-    getSymbol(buf);
-    if (sym != SYMEol) goto ERROR; // unexpected text
-    getSymbol(buf); // eoln
+    KeyTrans::KeyEntry* ke = kt->addEntry(slinno,key,mode,mask,cmd,res);
+    if (ke)
+    {
+      fprintf(stderr,"%s(%d): keystroke already assigned in line %d.\n",path.ascii(),slinno,ke->ref);
+    }
+    getSymbol();
+    assertSyntax(sym == SYMEol, "Unexpected text")
     goto Loop;
   }
-  else
   if (sym == SYMEol)
   {
-    getSymbol(buf);
+    getSymbol();
     goto Loop;
   }
 
-  if (sym != SYMEof)
-  {
-ERROR: printf("ERROR:"); printf("symbol: "); ReportToken();
-  }
+  assertSyntax(sym == SYMEof, "Undecodable Line")
 
-  buf.close();
+  buf->close();
+  return;
 
-  return kt;
+ERROR:
+  while (sym != SYMEol && sym != SYMEof) getSymbol(); // eoln
+  goto Loop;
 }
 
 
