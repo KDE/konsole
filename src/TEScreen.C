@@ -62,7 +62,10 @@ TEScreen::TEScreen(int lines, int columns)
   this->lines   = lines;
   this->columns = columns;
 
-  image      = (ca*) malloc(lines*columns*sizeof(ca));
+  // we add +1 here as under some weired circumstances konsole crashes
+  // reading out of bound. As a crash is worse, we afford the minimum
+  // of added memory
+  image      = (ca*) malloc((lines+1)*columns*sizeof(ca));
   tabstops   = NULL; initTabStops();
   cuX = cuY = sa_cu_re = cu_re = sa_cu_fg = cu_fg = sa_cu_bg = cu_bg = 0;
 
