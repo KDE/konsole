@@ -15,13 +15,11 @@ keyboard "XTerm (XFree 3.x.x)"
 key Escape         : "\E"
 key Tab            : "\t"
 
-key Return-Alt     : "\r"
-key Return+Alt     : "\E\r"
+key Return         : "\r"
 
 # Backspace and Delete codes are preserving CTRL-H.
 
-key Backspace-Alt  : "\x7f"
-key Backspace+Alt  : "\E\x7f"
+key Backspace      : "\x7f"
 
 # cursor keys
 

@@ -71,17 +71,13 @@ key Tab    : "\t"
 # VT100 can add an extra \n after return.
 # The NewLine mode is set by an escape sequence.
 
-key Return-Alt-NewLine : "\r"  
-key Return-Alt+NewLine : "\r\n"
-
-key Return+Alt-NewLine : "\E\r"  
-key Return+Alt+NewLine : "\E\r\n"
+key Return-NewLine : "\r"  
+key Return+NewLine : "\r\n"
 
 # Some desperately try to save the ^H.
 # may be not everyone wants this
 
-key Backspace-Alt : "\x08"  # Control H
-key Backspace+Alt : "\E\x08"  # Escape Control H
+key Backspace : "\x08"  # Control H
 key Delete    : "\x7f"
 
 # These codes are for the VT420pc

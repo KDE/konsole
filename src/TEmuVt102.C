@@ -776,11 +776,9 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
     case CMD_scrollPageDown : gui->doScroll(+gui->Lines()/2); return;
     case CMD_scrollLineUp   : gui->doScroll(-1             ); return;
     case CMD_scrollLineDown : gui->doScroll(+1             ); return;
-    case CMD_send           :
-                 emit sndBlock(txt,len);         return;
-    //            if (ev->state() & AltButton) sendString("\033");
-    //            emit sndBlock(txt,len);
-    //            return;
+    case CMD_send           : if (ev->state() & AltButton) sendString("\033");
+                              emit sndBlock(txt,len);
+                              return;
     case CMD_prevSession    : emit prevSession();             return;
     case CMD_nextSession    : emit nextSession();             return;
     case CMD_newSession     : emit newSession();              return;

@@ -32,14 +32,12 @@ key Escape         : "\E"
 key Tab   -Shift   : "\t"
 key Tab   +Shift   : "\E[Z"
 
-key Return-Shift-Alt : "\r"
-key Return-Shift+Alt : "\E\r"
-key Return+Shift     : "\EOM"
+key Return-Shift   : "\r"
+key Return+Shift   : "\EOM"
 
 # Backspace and Delete codes are preserving CTRL-H.
 
-key Backspace-Alt    : "\x7f"
-key Backspace+Alt    : "\E\x7f"
+key Backspace      : "\x7f"
 
 # cursor keys
 
