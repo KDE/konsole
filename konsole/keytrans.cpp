@@ -26,6 +26,7 @@
 #include <klocale.h>
 
 #include <stdio.h>
+#include <stddef.h>
 
 #ifndef HERE
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
@@ -372,7 +373,7 @@ Loop:
 //printf("line %3d: ",startofsym);
     getSymbol(); assertSyntax(sym == SYMName, "Name expected")
     assertSyntax(syms->keysyms[res], "Unknown key name")
-    int key = (long)( syms->keysyms[res] ) -1;
+    ptrdiff_t key = (ptrdiff_t)(syms->keysyms[res]) - 1;
 //printf(" key %s (%04x)",res.latin1(),(int)syms->keysyms[res]-1);
     getSymbol(); // + - :
     int mode = 0;
@@ -384,7 +385,7 @@ Loop:
       // mode name
       assertSyntax(sym == SYMName, "Name expected")
       assertSyntax(syms->modsyms[res], "Unknown mode name")
-      int bits = (long)syms->modsyms[res]-1;
+      ptrdiff_t bits = (ptrdiff_t)(syms->modsyms[res]) - 1;
       if (mask & (1 << bits))
       {
         fprintf(stderr,"%s(%d,%d): mode name used multible times.\n",path.ascii(),slinno,scolno);
@@ -401,11 +402,11 @@ Loop:
     getSymbol();
     // string or command
     assertSyntax(sym == SYMName || sym == SYMString,"Command or string expected")
-    int cmd = 0;
+    ptrdiff_t cmd = 0;
     if (sym == SYMName)
     {
       assertSyntax(syms->oprsyms[res], "Unknown operator name")
-      cmd = (long)syms->oprsyms[res]-1;
+      cmd = (ptrdiff_t)(syms->oprsyms[res]) - 1;
 //printf(": do %s(%d)",res.latin1(),(int)syms->oprsyms[res]-1);
     }
     if (sym == SYMString)
