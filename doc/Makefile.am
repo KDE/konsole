@@ -12,7 +12,7 @@
 # kde_toolbardir    Where general toolbar icons should go to.
 # kde_wallpaperdir  Where general wallpapers should go to.
 
-SUBDIRS=sgml VT100
+SUBDIRS=VT100
 
 EXTRA_DIST = More README.first histBuffer missing.codes missing.keys
 
