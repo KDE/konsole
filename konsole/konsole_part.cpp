@@ -220,7 +220,7 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   // insert keymaps into menu
   if (m_keytab)
   {
-     for (int i = 0; i < KeyTrans::count(); i++) 
+     for (int i = 0; i < KeyTrans::count(); i++)
      {
         KeyTrans* ktr = KeyTrans::find(i);
        m_keytab->insertItem(ktr->hdr(),ktr->numb());
@@ -258,10 +258,10 @@ void konsolePart::sessionDestroyed()
   delete this;
 }
 
-void konsolePart::configureRequest(TEWidget*te,int,int x,int y)
+void konsolePart::configureRequest(TEWidget*_te,int,int x,int y)
 {
   if (m_popupMenu)
-     m_popupMenu->popup(te->mapToGlobal(QPoint(x,y)));
+     m_popupMenu->popup(_te->mapToGlobal(QPoint(x,y)));
 }
 
 konsolePart::~konsolePart()
@@ -400,7 +400,7 @@ void konsolePart::makeGUI()
         connect(m_schema, SIGNAL(aboutToShow()), SLOT(schema_menu_check()));
         m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Sch&ema" ), m_schema);
      }
-     
+
 
      KAction *historyType = new KAction(i18n("&History..."), "history", 0, this,
                                         SLOT(slotHistoryType()), actions, "history");
@@ -697,7 +697,7 @@ void konsolePart::schema_menu_check()
 void konsolePart::updateSchemaMenu()
 {
   if (!m_schema) return;
-  
+
   m_schema->clear();
   for (int i = 0; i < (int) colors->count(); i++)  {
     ColorSchema* s = (ColorSchema*)colors->at(i);

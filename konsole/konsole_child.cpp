@@ -103,7 +103,7 @@ KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar
      }
 
      m_rightButton->insertSeparator();
-  
+
      KAction *attachSession = new KAction(i18n("&Attach Session"), 0, this,
                                        SLOT(attachSession()), actions, "attach_session");
      attachSession->plug(m_rightButton);
@@ -202,10 +202,10 @@ KonsoleChild::~KonsoleChild()
   kWinModule = 0;
 }
 
-void KonsoleChild::configureRequest(TEWidget* te, int, int x, int y)
+void KonsoleChild::configureRequest(TEWidget* _te, int, int x, int y)
 {
   if (m_rightButton)
-     m_rightButton->popup(te->mapToGlobal(QPoint(x,y)));
+     m_rightButton->popup(_te->mapToGlobal(QPoint(x,y)));
 }
 
 void KonsoleChild::doneSession(TESession*)
@@ -311,7 +311,7 @@ void KonsoleChild::currentDesktopChanged(int desk) {
    //Get window info
    NETWinInfo info( qt_xdisplay(), winId(), qt_xrootwin(), NET::WMDesktop );
    bool bNeedUpdate = false;
- 
+
    if( info.desktop()==NETWinInfo::OnAllDesktops ) {
       //This is a sticky window so it will always need updating
       bNeedUpdate = true;

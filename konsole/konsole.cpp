@@ -260,6 +260,9 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
   // create terminal emulation framework ////////////////////////////////////
 
   te = new TEWidget(this);
+  connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
+           this, SLOT(configureRequest(TEWidget*,int,int,int)) );
+
   //KONSOLEDEBUG<<"Konsole ctor() after new TEWidget() "<<time.elapsed()<<" msecs elapsed"<<endl;
   te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
   // we need focus so that the auto-hide cursor feature works (Carsten)
@@ -644,7 +647,7 @@ void Konsole::makeGUI()
       KAction* selectionEnd = new KAction(i18n("Set Selection End"), 0, te,
                                SLOT(setSelectionEnd()), actions, "selection_end");
       selectionEnd->plug(m_rightButton);
-   
+
       m_copyClipboard->plug(m_rightButton);
       m_pasteClipboard->plug(m_rightButton);
       if (m_signals)
@@ -989,14 +992,14 @@ void Konsole::setColLin(int columns, int lines)
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void Konsole::configureRequest(TEWidget* te, int state, int x, int y)
+void Konsole::configureRequest(TEWidget* _te, int state, int x, int y)
 {
 //printf("Konsole::configureRequest(_,%d,%d)\n",x,y);
    if (!m_menuCreated)
       makeGUI();
   KPopupMenu *menu = (state & ControlButton) ? m_session : m_rightButton;
   if (menu)
-     menu->popup(te->mapToGlobal(QPoint(x,y)));
+     menu->popup(_te->mapToGlobal(QPoint(x,y)));
 }
 
 /* ------------------------------------------------------------------------- */
@@ -2058,8 +2061,6 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
   // If you add any new signal-slot connection below, think about doing it in konsolePart too
   connect( s,SIGNAL(done(TESession*)),
            this,SLOT(doneSession(TESession*)) );
-  connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
-           this, SLOT(configureRequest(TEWidget*,int,int,int)) );
   connect( s, SIGNAL( updateTitle() ),
            this, SLOT( updateTitle() ) );
   connect( s, SIGNAL( notifySessionState(TESession*, int) ),
