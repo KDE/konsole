@@ -152,7 +152,7 @@ public: // these are all `Screen' operations
     //
     // Selection
     //
-    void setSelBeginXY(const int x, const int y);
+    void setSelBeginXY(const int x, const int y, const bool columnmode);
     void setSelExtentXY(const int x, const int y);
     void clearSelection();
     void setBusySelecting(bool busy) { sel_busy = busy; }
@@ -178,8 +178,6 @@ private: // helper
 
     void effectiveRendition();
     void reverseRendition(ca* p);
-
-private:
 
     /*
        The state of the screen is more complex as one would
@@ -233,6 +231,7 @@ private:
     int sel_TL;    // TopLeft Location.
     int sel_BR;    // Bottom Right Location.
     bool sel_busy; // Busy making a selection.
+    bool columnmode;  // Column selection mode
 
     // effective colors and rendition ------------
 

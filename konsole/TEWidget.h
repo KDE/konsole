@@ -123,7 +123,7 @@ signals:
 
     void copySelectionSignal();
     void clearSelectionSignal();
-    void beginSelectionSignal( const int x, const int y );
+    void beginSelectionSignal( const int x, const int y, const bool columnmode );
     void extendSelectionSignal( const int x, const int y );
     void endSelectionSignal(const bool preserve_line_breaks);
     void isBusySelecting(bool);
@@ -213,6 +213,7 @@ private:
     bool    word_selection_mode;
     bool    line_selection_mode;
     bool    preserve_line_breaks;
+    bool    column_selection_mode;
 
     QClipboard*    cb;
     QScrollBar* scrollbar;

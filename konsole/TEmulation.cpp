@@ -119,8 +119,8 @@ void TEmulation::connectGUI()
                    this,SLOT(onHistoryCursorChange(int)));
   QObject::connect(gui,SIGNAL(keyPressedSignal(QKeyEvent*)),
                    this,SLOT(onKeyPress(QKeyEvent*)));
-  QObject::connect(gui,SIGNAL(beginSelectionSignal(const int,const int)),
-		   this,SLOT(onSelectionBegin(const int,const int)) );
+  QObject::connect(gui,SIGNAL(beginSelectionSignal(const int,const int,const bool)),
+		   this,SLOT(onSelectionBegin(const int,const int,const bool)) );
   QObject::connect(gui,SIGNAL(extendSelectionSignal(const int,const int)),
 		   this,SLOT(onSelectionExtend(const int,const int)) );
   QObject::connect(gui,SIGNAL(endSelectionSignal(const bool)),
@@ -314,9 +314,9 @@ void TEmulation::onRcvBlock(const char *s, int len)
 
 // Selection --------------------------------------------------------------- --
 
-void TEmulation::onSelectionBegin(const int x, const int y) {
+void TEmulation::onSelectionBegin(const int x, const int y, const bool columnmode) {
   if (!connected) return;
-  scr->setSelBeginXY(x,y);
+  scr->setSelBeginXY(x,y,columnmode);
   showBulk();
 }
 

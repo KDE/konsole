@@ -300,6 +300,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,word_selection_mode(false)
 ,line_selection_mode(false)
 ,preserve_line_breaks(true)
+,column_selection_mode(false)
 ,scrollLoc(SCRNONE)
 ,word_characters(":@-./_~")
 ,bellMode(BELLSYSTEM)
@@ -817,7 +818,8 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       // No reason to ever start a drag event
       dragInfo.state = diNone;
 
-      preserve_line_breaks = !( ev->state() & ControlButton );
+      preserve_line_breaks = !( ( ev->state() & ControlButton ) && !(ev->state() & AltButton) );
+      column_selection_mode = (ev->state() & AltButton) && (ev->state() & ControlButton);
 
       if (mouse_marks || (ev->state() & ShiftButton))
       {
@@ -1004,7 +1006,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
 
     // Find left (left_not_right ? from start : from here)
     QPoint right = left_not_right ? iPntSelCorr : here;
-    if (right.x() > 0)
+    if ( right.x() > 0 && !column_selection_mode )
     {
       i = loc(right.x(),right.y());
       if (i>=0 && i<=image_size) {
@@ -1025,7 +1027,6 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     if ( left_not_right )
     {
       here = left; ohere = right; offset = 0;
-
     }
     else
     {
@@ -1038,13 +1039,19 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
   if (here == ohere) return; // It's not left, it's not right.
 
   if ( actSel < 2 || swapping )
-    emit beginSelectionSignal( ohere.x()-1-offset, ohere.y() );
+    if ( column_selection_mode && !line_selection_mode && !word_selection_mode )
+      emit beginSelectionSignal( ohere.x(), ohere.y(), true );
+    else
+      emit beginSelectionSignal( ohere.x()-1-offset, ohere.y(), false );
 
   actSel = 2; // within selection
   pntSel = here;
   pntSel.ry() += scrollbar->value();
 
-  emit extendSelectionSignal( here.x() + offset, here.y() );
+  if ( column_selection_mode && !line_selection_mode && !word_selection_mode )
+    emit extendSelectionSignal( here.x(), here.y() );
+  else
+    emit extendSelectionSignal( here.x()+offset, here.y() );
 }
 
 void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
@@ -1127,7 +1134,7 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
      while ( ((x>0) || (bgnSel.y()>0 && m_line_wrapped[bgnSel.y()-1])) && charClass(image[i-1].c) == selClass )
      { i--; if (x>0) x--; else {x=columns-1; bgnSel.ry()--;} }
      bgnSel.setX(x);
-     emit beginSelectionSignal( bgnSel.x(), bgnSel.y() );
+     emit beginSelectionSignal( bgnSel.x(), bgnSel.y(), false );
 
      // set the end...
      i = loc( endSel.x(), endSel.y() );
@@ -1185,10 +1192,10 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
     while ( ((x>0) || (iPntSel.y()>0 && m_line_wrapped[iPntSel.y()-1])) && charClass(image[i-1].c) == selClass )
     { i--; if (x>0) x--; else {x=columns-1; iPntSel.ry()--;} }
 
-    emit beginSelectionSignal( x, iPntSel.y() );
+    emit beginSelectionSignal( x, iPntSel.y(), false );
   }
   else
-    emit beginSelectionSignal( 0, iPntSel.y() );
+    emit beginSelectionSignal( 0, iPntSel.y(), false );
 
   while (iPntSel.y()<lines-1 && m_line_wrapped[iPntSel.y()])
     iPntSel.ry()++;

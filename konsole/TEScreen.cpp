@@ -76,6 +76,7 @@ TEScreen::TEScreen(int l, int c)
     tabstops(0),
     sel_begin(0), sel_TL(0), sel_BR(0),
     sel_busy(false),
+    columnmode(false),
     ef_fg(0), ef_bg(0), ef_re(0),
     sa_cuX(0), sa_cuY(0),
     sa_cu_re(0), sa_cu_fg(0), sa_cu_bg(0)
@@ -535,7 +536,13 @@ void TEScreen::effectiveRendition()
 */
 
 ca* TEScreen::getCookedImage()
-{ int x,y;
+{
+/*kdDebug() << "sel_begin=" << sel_begin << "(" << sel_begin/columns << "," << sel_begin%columns << ")"
+  << "  sel_TL=" << sel_TL << "(" << sel_TL/columns << "," << sel_TL%columns << ")"
+  << "  sel_BR=" << sel_BR << "(" << sel_BR/columns << "," << sel_BR%columns << ")"
+  << "  histcursor=" << histCursor << endl;*/
+
+  int x,y;
   ca* merged = (ca*)malloc(lines*columns*sizeof(ca));
   ca dft(' ',DEFAULT_FORE_COLOR,DEFAULT_BACK_COLOR,DEFAULT_RENDITION);
 
@@ -544,37 +551,38 @@ ca* TEScreen::getCookedImage()
   {
     int len = QMIN(columns,hist->getLineLen(y+histCursor));
     int yp  = y*columns;
-    int yq  = (y+histCursor)*columns;
 
 //    kdDebug(1211) << "InGetCookedImage - In first For.  Y =" << y << "histCursor = " << histCursor << endl;
     hist->getCells(y+histCursor,0,len,merged+yp);
     for (x = len; x < columns; x++) merged[yp+x] = dft;
+    if (sel_begin !=-1)
     for (x = 0; x < columns; x++)
-    {   int p=x + yp; int q=x + yq;
+      {
 #ifdef REVERSE_WRAPPED_LINES
         if (hist->isWrappedLine(y+histCursor))
           reverseRendition(&merged[p]);
 #endif
-        if ( ( q >= sel_TL ) && ( q <= sel_BR ) )
+        if (testIsSelected(x,y)) {
+          int p=x + yp;
           reverseRendition(&merged[p]); // for selection
     }
+  }
   }
   if (lines >= hist->getLines()-histCursor)
   {
     for (y = (hist->getLines()-histCursor); y < lines ; y++)
     {
        int yp  = y*columns;
-       int yq  = (y+histCursor)*columns;
        int yr =  (y-hist->getLines()+histCursor)*columns;
 //       kdDebug(1211) << "InGetCookedImage - In second For.  Y =" << y << endl;
        for (x = 0; x < columns; x++)
-       { int p = x + yp; int q = x + yq; int r = x + yr;
+       { int p = x + yp; int r = x + yr;
          merged[p] = image[r];
 #ifdef REVERSE_WRAPPED_LINES
          if (line_wrapped[y- hist->getLines() +histCursor])
            reverseRendition(&merged[p]);
 #endif
-         if ( q >= sel_TL && q <= sel_BR )
+         if (sel_begin != -1 && testIsSelected(x,y))
            reverseRendition(&merged[p]); // for selection
        }
 
@@ -582,8 +590,8 @@ ca* TEScreen::getCookedImage()
   }
   // evtl. inverse display
   if (getMode(MODE_Screen))
-  { int i,n = lines*columns;
-    for (i = 0; i < n; i++)
+  {
+    for (int i = 0; i < lines*columns; i++)
       reverseRendition(&merged[i]); // for reverse display
   }
 //  if (getMode(MODE_Cursor) && (cuY+(hist->getLines()-histCursor) < lines)) // cursor visible
@@ -1091,7 +1099,7 @@ void TEScreen::clearSelection()
   sel_begin = -1;
 }
 
-void TEScreen::setSelBeginXY(const int x, const int y)
+void TEScreen::setSelBeginXY(const int x, const int y, const bool mode)
 {
 //  kdDebug(1211) << "setSelBeginXY(" << x << "," << y << ")" << endl;
   sel_begin = loc(x,y+histCursor) ;
@@ -1101,6 +1109,7 @@ void TEScreen::setSelBeginXY(const int x, const int y)
 
   sel_BR = sel_begin;
   sel_TL = sel_begin;
+  columnmode = mode;
 }
 
 void TEScreen::setSelExtentXY(const int x, const int y)
@@ -1126,8 +1135,20 @@ void TEScreen::setSelExtentXY(const int x, const int y)
 
 bool TEScreen::testIsSelected(const int x,const int y)
 {
+  if (columnmode) {
+    int sel_Left,sel_Right;
+    if ( sel_TL % columns < sel_BR % columns ) {
+      sel_Left = sel_TL; sel_Right = sel_BR;
+    } else {
+      sel_Left = sel_BR; sel_Right = sel_TL;
+    }
+    return ( x >= sel_Left % columns ) && ( x <= sel_Right % columns ) &&
+           ( y+histCursor >= sel_TL / columns ) && ( y+histCursor <= sel_BR / columns );
+  }
+  else {
   int pos = loc(x,y+histCursor);
   return ( pos >= sel_TL && pos <= sel_BR );
+  }
 }
 
 QString TEScreen::getSelText(const bool preserve_line_breaks)
@@ -1150,6 +1171,60 @@ QString TEScreen::getSelText(const bool preserve_line_breaks)
   m = new int[d * (columns + 1) + 2];
   d = 0;
 
+  if (columnmode) {
+    bool newlineneeded=false;
+
+    int sel_Left, sel_Right;
+    if ( sel_TL % columns < sel_BR % columns ) {
+      sel_Left = sel_TL; sel_Right = sel_BR;
+    } else {
+      sel_Left = sel_BR; sel_Right = sel_TL;
+    }
+
+    while (s <= sel_BR) {
+      if (s < hist_BR) {		// get lines from hist->history buffer.
+          hX = sel_Left % columns;
+	  eol = hist->getLineLen(hY);
+	  if ((hY == (sel_BR / columns)) &&
+              (eol > (sel_BR % columns)))
+          {
+              eol = sel_BR % columns + 1;
+          }
+
+	  while (hX < eol && hX <= sel_Right % columns)
+          {
+            Q_UINT16 c = hist->getCell(hY, hX++).c;
+            if (c)
+              m[d++] = c;
+            s++;
+          }
+          m[d++] = '\n';
+
+          hY++;
+          s = hY * columns;
+      }
+      else {				// or from screen image.
+        if (testIsSelected((s - hist_BR) % columns, (s - hist_BR) / columns)) {
+          Q_UINT16 c = image[s++ - hist_BR].c;
+          if (c) {
+            m[d++] = c;
+            newlineneeded = true;
+	  }
+	}
+	else {
+	  s++;
+	  if (newlineneeded) {
+            m[d++] = '\n';
+	    newlineneeded = false;
+	  }
+	}
+      }
+    }
+    if (newlineneeded)
+      m[d++] = '\n';
+  }
+  else
+  {
   while (s <= sel_BR)
   {
       if (s < hist_BR)
@@ -1256,6 +1331,7 @@ QString TEScreen::getSelText(const bool preserve_line_breaks)
 
         s = (eol / columns + 1) * columns;
       }
+    }
   }
 
   QChar* qc = new QChar[d];
