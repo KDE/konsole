@@ -573,8 +573,9 @@ void TEDemo::newSession(int i)
   QString txt = co->readEntry("Comment"); // not null
   int     fno = MIN(co->readUnsignedNumEntry("Font",se->fontNo()),6);
 
-  ColorSchema* schema = sch.isNull()?numb2schema.find(se->schemaNo()):path2schema.find(sch);
-  int schmno = schema->numb;
+  ColorSchema* schema = path2schema.find(sch);
+
+  int schmno = schema?schema->numb:se->schemaNo();
 
   if (emu.isEmpty()) emu = se->emuName();
 

@@ -6,6 +6,17 @@ run under an X console. So rule number one is to check the "bug" with another
 X terminal to find out whether it is `konsole' specific or not.
 
 
+Installation problems:
+
+
+  Please note that running the linux application requieres that the linux16x8
+  font is installed on your system. Since i have a strong personal dislike of
+  requiering an installation to be run with root privileges, i've omitted this
+  step from the installation script. See README.linux.console for an
+  installation procedure that requiere root privileges. Alternativly, you can
+  try doing the same using xset(1x) only.
+
+
 Following a list of problems known with some applications:
 
 
