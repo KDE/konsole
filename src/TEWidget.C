@@ -61,6 +61,7 @@
 #include <assert.h>
 
 #include "TEWidget.moc"
+#include <krun.h>
 #include <kapp.h>
 #include <kcursor.h>
 #include <kurl.h>
@@ -1116,13 +1117,16 @@ void TEWidget::dropEvent(QDropEvent* event)
           bPopup = false; // more than one file, don't popup
         }
         KURL url(p);
+        QString tmp;
         if (url.isLocalFile()) {
-          dropText += url.path(); // local URL : remove protocol
+          tmp = url.path(); // local URL : remove protocol
         }
         else {
-          dropText += url.prettyURL();
+          tmp = url.url();
           bPopup = false; // a non-local file, don't popup
         }
+        KRun::shellQuote(tmp);
+        dropText += tmp;
       }
 
       if (bPopup)
