@@ -188,6 +188,7 @@ private:
 
   TEWidget*      te;
   TESession*     se;
+  TESession*     se_previous;
   TESession*     m_initialSession;
   ColorSchemaList* colors;
 

@@ -169,6 +169,7 @@ DCOPObject( "konsole" )
 ,m_defaultSessionFilename("")
 ,te(0)
 ,se(0)
+,se_previous(0)
 ,m_initialSession(0)
 ,colors(0)
 ,rootxpm(0)
@@ -1482,6 +1483,7 @@ void Konsole::activateSession(TESession *s)
      if (sessions.find(se) == -1)
         delete se;
   }
+  se_previous = se;
   se = s;
   session2action.find(se)->setChecked(true);
   QTimer::singleShot(1,this,SLOT(allowPrevNext())); // hack, hack, hack
@@ -1710,12 +1712,17 @@ void Konsole::doneSession(TESession* s, int )
       se->setListenToKeyPress(FALSE);
 
   delete s;
+  if (s == se_previous)
+    se_previous=NULL;
   if (s == se)
   { // pick a new session
     se = 0;
     if (sessions.count())
     {
-      se = sessions.at(sessionIndex ? sessionIndex - 1 : 0);
+      if (se_previous)
+        se = se_previous;
+      else
+        se = sessions.at(sessionIndex ? sessionIndex - 1 : 0);
       session2action.find(se)->setChecked(true);
       //FIXME: this Timer stupidity originated from the connected
       //       design of Emulations. By this the newly activated
