@@ -58,6 +58,8 @@ void TESession::kill(int signal)
 
 TESession::~TESession()
 {
+ QObject::disconnect( sh, SIGNAL( done( int ) ),
+		      this, SLOT( done( int ) ) );
   free(term);
   delete em;
   delete sh;
