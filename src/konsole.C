@@ -278,6 +278,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
   //seems to work, aleXXX
   connect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
   connect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
+  connect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
 
   //kdDebug()<<"Konsole ctor() ends "<<time.elapsed()<<" msecs elapsed"<<endl;
   //kdDebug()<<"Konsole ctor(): done"<<endl;
@@ -1156,6 +1157,7 @@ void Konsole::activateSession(TESession *s)
      se->setConnect(FALSE);
      QObject::disconnect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
      QObject::disconnect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
+     QObject::disconnect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
      // Delete the session if isn't in the session list any longer.
      if (sessions.find(se) == -1)
         delete se;
@@ -1193,7 +1195,8 @@ void Konsole::allowPrevNext()
 {
   QObject::connect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
   QObject::connect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
-  QObject::connect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
+  QObject::connect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) 
+);
 }
 
 void Konsole::newSession()
