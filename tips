@@ -195,3 +195,13 @@ can extend your selection by additional words when moving the mouse.
 can extend your selection by additional lines when moving the mouse.
 </html>
 </tip>
+
+
+<tip category="Konsole">
+<html>
+<p>...that if you drag &amp; drop a URL in a konsole window you
+get a menu with the possibility of copying or moving the pointed to file into the current working directory
+as well as just pasting the URL as text.
+<p>This works with any type of URL which KDE supports.
+</html>
+</tip>
