@@ -50,6 +50,7 @@ public:
   ~Konsole();
   void setColLin(int columns, int lines);
   void setFullScreen(bool on);
+  void setArgs(QStrList newArgs);
   void initFullScreen();
   void initSessionSchema(int schemaNo);
   void initSessionTitle(QString title);
@@ -185,6 +186,7 @@ private:
   QStrList    args;
   QRect       _saveGeometry;
 
+  bool        bIsBlankNewSession;
   bool        b_scroll:1;
   bool        b_framevis:1;
   bool        b_fullscreen:1;

@@ -159,6 +159,8 @@ int main(int argc, char* argv[])
     if (args->isSet("ls") && t) // see sh(1)
     {
       t = strdup(t); *t = '-';
+      //KONSOLEDEBUG << "Appending t = " << t << " to eargs." << endl;
+      eargs.append(shell);
       eargs.append(t);
     }
     else
@@ -243,10 +245,12 @@ int main(int argc, char* argv[])
     QString tmpTitle;
     QString sTitle;
     QString tmpSchema;
-    QStrList titles = new QStrList();
+    QString tmpArgs;
 
     while (KMainWindow::canBeRestored(n)){
         sessionconfig->setDesktopGroup();
+        shell = sessionconfig->readEntry("Program", shell).latin1();
+        sessionconfig->readListEntry("Args0", eargs);
         cTitle+=(sessionconfig->readEntry("Title0", title)).latin1();
         Konsole *m = new Konsole(wname,shell,eargs,histon,toolbaron,cTitle,type,true);
         m->restore(n);
@@ -258,11 +262,15 @@ int main(int argc, char* argv[])
         while (n2 < (n3 - 1)) {
           tmpTitle = "Title";
           tmpTitle+= (char) (n2+49);
+          tmpArgs="Args";
+          tmpArgs+= (char) (n2+49);
           sessionconfig->setDesktopGroup();
           sTitle=sessionconfig->readEntry(tmpTitle, "Failed");
-          titles.append(sTitle.latin1());
+//          titles.append(sTitle.latin1());
           tmpSchema="Schema";
           tmpSchema+= (char) (n2+49);
+          sessionconfig->readListEntry(tmpArgs, eargs);
+          m->setArgs(eargs);
 //          QTimer::singleShot(5000,m,SLOT(newSession()));
           m->newSession();
 //          kdDebug(1211) << "Adding title tmpTitle = " << sessionconfig->readEntry(tmpTitle, m->title);
@@ -271,6 +279,9 @@ int main(int argc, char* argv[])
           m->initSessionSchema(sessionconfig->readEntry(tmpSchema,"0").toInt());
           n2++;
           }
+        //put original args back in place from session 1
+        sessionconfig->readListEntry("Args0", eargs);
+        m->setArgs(eargs);
         ksm->konsole = m;
         ksm->konsole->initFullScreen();
         // works only for the first one, but there won't be more.

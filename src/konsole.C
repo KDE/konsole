@@ -215,6 +215,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
   //QTime time;
   //time.start();
   isRestored = b_inRestore;
+  bIsBlankNewSession = false;
   wasRestored = false;
   kapp->addKipcEventMask(KIPC::BackgroundChanged);
   connect( kapp,SIGNAL(backgroundChanged(int)),this, SLOT(slotBackgroundChanged(int)));
@@ -694,6 +695,7 @@ void Konsole::saveProperties(KConfig* config) {
     QString tmpTitle;
     QString tmpTwo;
     QString tmpSchema;
+    QString tmpArgs;
     config->setDesktopGroup();
 
     if (config != KGlobal::config()) {
@@ -710,6 +712,9 @@ void Konsole::saveProperties(KConfig* config) {
         tmpSchema="Schema";
         tmpSchema+= (char) (counter+48);
         config->writeEntry(tmpSchema,sessions.current()->schemaNo());
+        tmpArgs="Args";
+        tmpArgs+= (char) (counter+48);
+        config->writeEntry(tmpArgs,sessions.current()->getArgs());
 //        KONSOLEDEBUG << "Writing " << tmpTitle << " -- " << sessions.current()->Title().latin1() << endl;
         sessions.next();
         counter++;
@@ -727,6 +732,8 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("scrollbar",n_scroll);
   config->writeEntry("keytab",n_keytab);
   config->writeEntry("WarnQuit", b_warnQuit);
+  config->writeEntry("Program", pgm);
+
   if (se) {
     config->writeEntry("history", se->history().getSize());
     config->writeEntry("historyenabled", b_histEnabled);
@@ -1324,16 +1331,21 @@ void Konsole::newSession()
   while ( (session==0) && (i<=no2command.count()) )
   // antlarr: Why is first session session number 1 instead of number 0 ?
   {
+    bIsBlankNewSession = true;
     KSimpleConfig* co = no2command.find(i);
     //KONSOLEDEBUG<<"Konsole::newSession() Exec: -"<<co->readEntry("Exec")<<"-"<<endl;
 
     if ( co && co->readEntry("Exec").isEmpty() ) session=i;
     i++;
   }
-  //KONSOLEDEBUG<<"Konsole::newSession(): session: "<<session<<endl;
+  KONSOLEDEBUG<<"Konsole::newSession(): session: "<<session<<endl;
+  KONSOLEDEBUG<<"Konsole::newSession(): command.count(): "<<no2command.count()<<endl;
+
   if (session==0) session=1;
 
   newSession(session);
+  for (int i=1; i < 10000 ; i++) {}
+  bIsBlankNewSession = false;
 }
 
 /*void Konsole::newSessionSelect()
@@ -1356,6 +1368,7 @@ void Konsole::newSession(int i)
 
 TESession *Konsole::newSession(KSimpleConfig *co)
 {
+//  KONSOLEDEBUG << "In *Konsole::newSession(KSimpleConfig *co)" << endl;
   const char* shell = getenv("SHELL");
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
 
@@ -1367,6 +1380,7 @@ TESession *Konsole::newSession(KSimpleConfig *co)
   QStrList cmdArgs;
   if (co)
   {
+//      KONSOLEDEBUG << "We NEVER get there" << endl;
       co->setDesktopGroup();
       cmd = co->readEntry("Exec");
       emu = co->readEntry("Term", emu).ascii();
@@ -1374,15 +1388,34 @@ TESession *Konsole::newSession(KSimpleConfig *co)
       txt = co->readEntry("Comment", txt);
 //      KONSOLEDEBUG<<"Restored txt "<< txt << endl;
       fno = co->readUnsignedNumEntry("Font", fno);
-      cmdArgs.append(shell);
+
+      if (!(bIsBlankNewSession)) {
+        cmdArgs.append(shell);
+        }
+
       if (!cmd.isEmpty())
       {
         cmdArgs.append("-c");
         cmdArgs.append(QFile::encodeName(cmd));
       }
   }
-  else
+  else  {
+//      KONSOLEDEBUG << "We get here" << endl;
       cmdArgs = args;
+      }
+
+  if (bIsBlankNewSession) {
+    if(!(args.isEmpty())) {
+      pgm = strdup(args.at(0));
+
+//      KONSOLEDEBUG << "pgm set to " << pgm << endl;
+//      KONSOLEDEBUG << "args.count() = " << args.count() << endl;
+//      KONSOLEDEBUG << "We DO get here.  It is a blank session and the args aren't empty." << endl;
+//      KONSOLEDEBUG << "Count of args is " << args.count() << endl;
+      cmdArgs = args;
+      }
+    }
+
   ColorSchema* schema = sch.isEmpty()
                       ? colors->find(s_schema)
                       : colors->find(sch);
@@ -1390,7 +1423,8 @@ TESession *Konsole::newSession(KSimpleConfig *co)
       schema=(ColorSchema*)colors->at(0);  //the default one
   int schmno = schema->numb();
 
-  TESession* s = new TESession(this,te,co ? shell : pgm,cmdArgs,emu);
+//  TESession* s = new TESession(this,te,co ? shell : pgm,cmdArgs,emu);
+  TESession* s = new TESession(this,te,pgm,cmdArgs,emu);
   connect( s,SIGNAL(done(TESession*,int)),
            this,SLOT(doneSession(TESession*,int)) );
   connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
@@ -1793,5 +1827,9 @@ void Konsole::slotBackgroundChanged(int /*desk*/)
   }
 }
 
-
+void Konsole::setArgs(QStrList newArgs)
+{
+//  QStrList args = new QStrList();
+  args = newArgs;
+}
 #include "konsole.moc"

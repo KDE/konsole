@@ -167,4 +167,15 @@ const HistoryType& TESession::history()
   return em->history();
 }
 
+QStrList TESession::getArgs()
+{
+  return args;
+}
+
+const char* TESession::getPgm()
+{
+  return pgm;
+}
+
+
 #include "session.moc"

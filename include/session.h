@@ -41,6 +41,8 @@ public:
   const char* emuName();
   const QString& Title();
   QString fullTitle() const;  int keymap();
+  QStrList getArgs();
+  const char* getPgm();
 
   void setHistory(const HistoryType&);
   const HistoryType& history();

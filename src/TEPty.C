@@ -266,6 +266,7 @@ int TEPty::run(const char* _pgm, QStrList & _args, const char* _term, int _addut
 {
   arguments = _args;
   arguments.prepend(_pgm);
+//  kdDebug() << "pgm = " << _pgm << endl;
   term = _term;
   addutmp = _addutmp;
 
@@ -410,6 +411,7 @@ int TEPty::openPty()
 //! only used internally. See `run' for interface
 void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const char* term, int addutmp)
 { 
+
   int sig;
   if (fd < 0) // no master pty could be opened
   {
@@ -563,10 +565,28 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   // propagate emulation
   if (term && term[0]) setenv("TERM",term,1);
 
+//  kdDebug() << "In TEPty.  args.count() is  " << args.count() << endl;
+//  kdDebug() << "In TEPty.  i is " << i << endl;
+//  kdDebug() << "In TEPty.  pgm  is " << pgm << endl;
+
+//  for (int k=1; k < 500000 ; k++) {
+//    for (int j=1; j < 5000 ; j++) {}
+//    }
+
   // convert QStrList into char*[]
   unsigned int i;
   char **argv = (char**)malloc(sizeof(char*)*(args.count()+1));
+//  char **argv = (char**)malloc(sizeof(char*)*(args.count()+0));
   for (i = 0; i<args.count(); i++) argv[i] = strdup(args.at(i));
+//  for (i = 1; i<args.count(); i++) argv[i-1] = strdup(args.at(i));
+  pgm = strdup(args.at(0));
+//  kdDebug() << "In TEPty.  first arg is " << argv[0] << endl;
+//  kdDebug() << "In TEPty.  i is " << i << endl;
+//  kdDebug() << "In TEPty.  pgm  is " << pgm << endl;
+//  for (int k=1; k < 500000 ; k++) {
+//    for (int j=1; j < 8000 ; j++) {}
+//  }
+
   argv[i] = 0L;
 
   ioctl(0,TIOCSWINSZ,(char *)&wsize);  // set screen size
@@ -574,6 +594,7 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   // finally, pass to the new program
   //  kdDebug(1211) << "We are ready to run the program " << pgm << endl;
   execvp(pgm, argv);
+  //execvp("/bin/bash", argv);
   perror("exec failed");
   exit(1);                             // control should never come here.
 }
