@@ -150,6 +150,8 @@ ColorSchema::ColorSchema(const QString& pathname)
   m_numb = serial++;
 }
 
+
+
 ColorSchema::ColorSchema()
 :m_fileRead(false)
 ,fPath(QString::null)
@@ -158,6 +160,11 @@ ColorSchema::ColorSchema()
 {
   setDefaultSchema();
   m_numb = 0;
+}
+
+ColorSchema::~ColorSchema()
+{
+    delete lastRead;
 }
 
 ColorSchema::ColorSchema(KConfig& c)

@@ -68,7 +68,7 @@ public:
 	* with the same settings as the default schema is returned.
 	*/
 	ColorSchema(const QString& pathname);
-
+	~ColorSchema();
 	/**
 	* Construct a color schema from the given config file.
 	* (This is different from the constructor with a pathname
