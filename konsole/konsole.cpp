@@ -2762,7 +2762,7 @@ void Konsole::detachSession() {
   ColorSchema* schema = colors->find(curr_schema);
   KonsoleChild* konsolechild = new KonsoleChild(se,te->Columns(),te->Lines(),n_scroll,
                                                 b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame,
-                                                schema,te->font(),te->isBellMode(),te->wordCharacters(),
+                                                schema,te->font(),te->bellMode(),te->wordCharacters(),
                                                 te->blinkingCursor(),te->ctrlDrag(),te->isTerminalSizeHint(),
                                                 te->lineSpacing(),te->cutToBeginningOfLine(),b_allowResize, b_fixedSize);
   detached.append(konsolechild);

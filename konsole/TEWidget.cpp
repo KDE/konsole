@@ -315,7 +315,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,column_selection_mode(false)
 ,scrollLoc(SCRNONE)
 ,word_characters(":@-./_~")
-,bellMode(BELLSYSTEM)
+,m_bellMode(BELLSYSTEM)
 ,blinking(false)
 ,cursorBlinking(false)
 ,hasBlinkingCursor(false)
@@ -1698,19 +1698,19 @@ void TEWidget::frameChanged()
 
 void TEWidget::setBellMode(int mode)
 {
-  bellMode=mode;
+  m_bellMode=mode;
 }
 
 void TEWidget::Bell(bool visibleSession, QString message)
 {
-  if (bellMode==BELLSYSTEM) {
+  if (m_bellMode==BELLSYSTEM) {
     KNotifyClient::beep();
-  } else if (bellMode==BELLNOTIFY) {
+  } else if (m_bellMode==BELLNOTIFY) {
     if (visibleSession)
       KNotifyClient::event(winId(), "BellVisible", message);
     else
       KNotifyClient::event(winId(), "BellInvisible", message);
-  } else if (bellMode==BELLVISUAL) {
+  } else if (m_bellMode==BELLVISUAL) {
     swapColorTable();
     QTimer::singleShot(200,this,SLOT(swapColorTable()));
   }

@@ -89,7 +89,7 @@ public:
     QString wordCharacters() { return word_characters; }
 
     void setBellMode(int mode);
-    int isBellMode() { return bellMode; }
+    int bellMode() { return m_bellMode; }
     enum { BELLSYSTEM=0, BELLNOTIFY=1, BELLVISUAL=2 };
     void Bell(bool visibleSession, QString message);
 
@@ -236,7 +236,7 @@ private:
     QScrollBar* scrollbar;
     int         scrollLoc;
     QString     word_characters;
-    int         bellMode;
+    int         m_bellMode;
 
     bool blinking;   // hide text in paintEvent
     bool hasBlinker; // has characters to blink
