@@ -596,16 +596,6 @@ void Konsole::makeGUI()
    connect(m_options, SIGNAL(activated(int)), SLOT(opt_menu_activated(int)));
    m_options->installEventFilter( this );
 
-   // Right mouse button menu
-   showMenubar->plug ( m_rightButton );
-   m_rightButton->insertSeparator();
-   copyClipboard->plug(m_rightButton);
-   pasteClipboard->plug(m_rightButton);
-   m_rightButton->insertSeparator();
-   renameSession->plug(m_rightButton);
-   m_rightButton->insertSeparator();
-   m_rightButton->insertItem(i18n("&Settings"), m_options);
-
    //the different session types
    loadSessionCommands();
    loadScreenSessions();
@@ -614,12 +604,27 @@ void Konsole::makeGUI()
    KAction *closeSession = new KAction(i18n("&Close Session"), "fileclose", 0, this,
                                         SLOT(closeCurrentSession()), this);
    closeSession->plug(m_session);
-  
+
    m_session->insertSeparator();
    m_session->insertItem( SmallIconSet( "exit" ), i18n("&Quit"), this, SLOT( close() ) );
 
 
    connect(m_session, SIGNAL(activated(int)), SLOT(newSession(int)));
+
+   // Right mouse button menu
+   showMenubar->plug ( m_rightButton );
+   m_rightButton->insertSeparator();
+   copyClipboard->plug(m_rightButton);
+   pasteClipboard->plug(m_rightButton);
+   m_rightButton->insertSeparator();
+   m_rightButton->insertItem(i18n("&Send Signal"), m_signals);
+   renameSession->plug(m_rightButton);
+   m_rightButton->insertSeparator();
+   m_rightButton->insertItem(i18n("&Settings"), m_options);
+   m_rightButton->insertSeparator();
+   closeSession->plug(m_rightButton );
+   m_rightButton->insertTearOffHandle();
+
 
    delete colors;
    colors = new ColorSchemaList();
