@@ -200,7 +200,10 @@ int main(int argc, char* argv[])
     title = QFile::decodeName(args->getOption("T"));
   }
 
-  QString term = QString::fromLatin1(args->getOption("tn"));
+  QString term = "";
+  if(args->isSet("tn")) {
+    term=QString::fromLatin1(args->getOption("tn"));
+  }
   login_shell = args->isSet("ls");
  
   QStrList eargs;
