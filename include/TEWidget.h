@@ -67,6 +67,8 @@ public:
 
     QSize sizeHint() const;
 
+    void setWordCharacters(QString wc);
+
 public:
 
     void Bell();
@@ -167,6 +169,7 @@ private:
     QClipboard*    cb;
     QScrollBar* scrollbar;
     int         scrollLoc;
+    QString     word_characters;
 
 //#define SCRNONE  0
 //#define SCRLEFT  1

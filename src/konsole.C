@@ -404,6 +404,10 @@ void Konsole::makeMenu()
   m_options->insertItem( i18n("&Codec"), m_codec);
   m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
 
+  KAction *WordSeps = new KAction(i18n("Word Separators"), 0, this,
+                             SLOT(slotWordSeps()), this);
+  WordSeps->plug(m_options);
+
   // Open Session Warning on Quit
   // FIXME: Allocate KActionCollection as parent, not this - Martijn
 /*
@@ -567,6 +571,7 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("font",n_font);
   config->writeEntry("defaultfont", defaultFont);
   config->writeEntry("schema",s_schema);
+  config->writeEntry("wordseps",s_word_seps);
   config->writeEntry("scrollbar",n_scroll);
   config->writeEntry("keytab",n_keytab);
   config->writeEntry("WarnQuit", warnQuit->isChecked());
@@ -596,6 +601,8 @@ void Konsole::readProperties(KConfig* config)
   selectScrollbar->setCurrentItem(n_scroll);
   slotSelectScrollbar();
   s_schema   = config->readEntry("schema","");
+  s_word_seps= config->readEntry("wordseps",":@-./_~");
+  te->setWordCharacters(s_word_seps);
 
   // Global options ///////////////////////
 
@@ -1307,6 +1314,15 @@ void Konsole::slotRenameSession() {
     ra->setText(dlg.text());
     ra->setIcon("openterm"); // I don't know why it is needed here
     toolBar()->updateRects();
+  }
+}
+
+void Konsole::slotWordSeps() {
+  kdDebug() << "Konsole::slotWordSeps\n";
+  KLineEditDlg dlg(i18n("Characters other than alphanumerics considered part of a word when double clicking"),s_word_seps, this);
+  if (dlg.exec()) {
+    s_word_seps = dlg.text();
+    te->setWordCharacters(s_word_seps);
   }
 }
 

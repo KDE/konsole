@@ -283,6 +283,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   m_drop = new KPopupMenu(this);
   m_drop->insertItem( i18n("Paste"), 0);
   m_drop->insertItem( i18n("cd"),    1);
+  word_characters = ":@-./_~";
   connect(m_drop, SIGNAL(activated(int)), SLOT(drop_menu_activated(int)));
 
   setFocusPolicy( WheelFocus );
@@ -839,12 +840,16 @@ int TEWidget::charClass(char ch) const
 
     if ( isspace(ch) ) return ' ';
 
-    static const char *word_characters = ":@-./_~";
-    if ( isalnum(ch) || strchr(word_characters, ch) )
+    if ( isalnum(ch) || word_characters.contains(ch) )
     return 'a';
 
     // Everything else is weird
     return 1;
+}
+
+void TEWidget::setWordCharacters(QString wc)
+{
+	word_characters = wc;
 }
 
 void TEWidget::setMouseMarks(bool on)
@@ -1150,4 +1155,5 @@ void TEWidget::drop_menu_activated(int item)
       break;
   }
 }
+
 

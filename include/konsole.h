@@ -93,6 +93,7 @@ private slots:
   void slotToggleMenubar();
   void slotToggleFrame();
   void slotRenameSession();
+  void slotWordSeps();
   void slotSelectSize();
   void slotSelectFont();
   void slotSelectScrollbar();
@@ -157,6 +158,7 @@ private:
   int         n_font;
   int         n_scroll;
   QString     s_schema;
+  QString     s_word_seps;			// characters that are considered part of a word
   int         n_render;
   QString     pmPath; // pixmap path
   QString     dropText;
