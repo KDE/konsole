@@ -1,4 +1,11 @@
-CONTRIBUTORS. See ChangeLog also
+Konsole was initially written by
+Lars Doelle <lars.doelle@on-line.de>,
+who is currently maintaining it.
+
+Partially substantial work has been
+contributed by many other developers.
+Amoung them are:
+
 - Warwick Allison <warwick@troll.no>
   - 16 color SGR codes (xterm-83)
   - schema files seeked also in ~/.kde/share/apps/konsole
@@ -16,6 +23,7 @@ CONTRIBUTORS. See ChangeLog also
   - dnd adjustsments
   - "-e" included into session management.
   - minor overall improvements.
+  - partification
 - Sven Fischer <herpes@kawo2.rwth-aachen.de>
   - bug fixing
   - moved installations

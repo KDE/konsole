@@ -20,13 +20,5 @@ is in history display mode. One can revert to normal operation most
 quickly by typing any character (which is then not passed to the
 application) or scroll down to the end.
 
-Konsole maintains a flexible length of the history and tends to forget
-about its older more and more if no new lines are added to it.
-
 |Implementation|-------------------------------------------------------------- 
 
-The TEScreen class contains the actual implementation of the history
-buffer. This is basically a copy off all the lines scrolled out of
-line 1 of the display using `TEScreen::index'.
-
-...
