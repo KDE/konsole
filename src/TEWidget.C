@@ -264,6 +264,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,resizing(false)
 ,actSel(0)
 ,word_selection_mode(false)
+,preserve_line_breaks(true)
 ,scrollLoc(SCRNONE)
 ,word_characters(":@-./_~")
 ,blinking(false)
@@ -632,7 +633,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   {
     QPoint pos = QPoint((ev->x()-tLx-blX)/font_w,(ev->y()-tLy-bY)/font_h);
 
-    if ( ev->state() & ControlButton ) preserve_line_breaks = FALSE ;
+    preserve_line_breaks = !( ev->state() & ControlButton ); 
 
     if (mouse_marks || (ev->state() & ShiftButton))
     {
@@ -756,7 +757,6 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
   if ( ev->button() == LeftButton)
   {
     if ( actSel > 1 ) emit endSelectionSignal(preserve_line_breaks);
-    preserve_line_breaks = TRUE;
     actSel = 0;
 
     //FIXME: emits a release event even if the mouse is
@@ -821,7 +821,6 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
      actSel = 2; // within selection
      emit extendSelectionSignal( endSel.x(), endSel.y() );
      emit endSelectionSignal(preserve_line_breaks);
-     preserve_line_breaks = TRUE;
    }
 }
 
