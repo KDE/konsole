@@ -1625,6 +1625,9 @@ void Konsole::listSessions()
   int counter=0;
   KPopupMenu* m_sessionList = new KPopupMenu(this);
   m_sessionList->insertTitle(i18n("Session List:"));
+#if KDE_VERSION >=305
+  m_sessionList->setKeyboardShortcutsEnabled(true);
+#endif
   for (TESession *ses = sessions.first(); ses; ses = sessions.next())
     m_sessionList->insertItem(SmallIcon(ses->IconName()),ses->Title(),++counter);
   connect(m_sessionList, SIGNAL(activated(int)), SLOT(activateSession(int)));
