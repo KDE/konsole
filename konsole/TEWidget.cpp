@@ -1371,7 +1371,7 @@ void TEWidget::dropEvent(QDropEvent* event)
           dropText += " ";
           bPopup = false; // more than one file, don't popup
         }
-        KURL url(p);
+        KURL url(QUriDrag::uriToUnicodeUri(p));
         QString tmp;
         if (url.isLocalFile()) {
           tmp = url.path(); // local URL : remove protocol
