@@ -69,7 +69,7 @@ PageFrame::~PageFrame()
 
 GeneralPage::GeneralPage(QWidget* parent) : PageFrame(parent)
 {
-  QLabel *bigWidget = new QLabel( "This is work in progress.", this );
+  QLabel *bigWidget = new QLabel( i18n("This is work in progress."), this );
   bigWidget->setFrameStyle( QFrame::Panel | QFrame::Sunken );
   bigWidget->setAlignment( AlignCenter  );
   bigWidget->setBackgroundMode(PaletteBase);
@@ -260,7 +260,7 @@ void ColorTable::paintEvent(QPaintEvent* e)
 
 SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
 {
-  QLabel *bigWidget = new QLabel(this); //( "This is work in progress.", this );
+  QLabel *bigWidget = new QLabel(this); //( i18n("This is work in progress."), this );
   bigWidget->setFrameStyle( QFrame::Panel | QFrame::Sunken );
   bigWidget->setAlignment( AlignCenter  );
 
@@ -424,7 +424,7 @@ SchemaConfig::~SchemaConfig()
 
 SessionConfig::SessionConfig(QWidget* parent) : PageFrame(parent)
 {
-  QLabel *bigWidget = new QLabel( "This is work in progress.", this );
+  QLabel *bigWidget = new QLabel( i18n("This is work in progress."), this );
   bigWidget->setFrameStyle( QFrame::Panel | QFrame::Sunken );
   bigWidget->setAlignment( AlignCenter  );
   bigWidget->setBackgroundMode(PaletteBase);
@@ -454,22 +454,22 @@ KcmKonsole::KcmKonsole(int &argc, char **argv, const char *name)
   {
 //  if (!pages || pages->contains("schemes"))
       addPage(schemes = new SchemaConfig(dialog),
-              klocale->translate("&Color Schemes"),
+              i18n("&Color Schemes"),
               "kcmkonsole-not-written-yet.html");
 //  if (!pages || pages->contains("general"))
       addPage(general = new GeneralPage(dialog),
-              klocale->translate("&General"),
+              i18n("&General"),
               "kcmkonsole-not-written-yet.html");
 //  if (!pages || pages->contains("sessions"))
       addPage(sessions = new SessionConfig(dialog),
-              klocale->translate("&Sessions"),
+              i18n("&Sessions"),
               "kcmkonsole-not-written-yet.html");
 
     if (schemes || sessions || general)
        dialog->show();
     else
     {
-      fprintf(stderr, klocale->translate("usage:"));
+      fprintf(stderr, i18n("usage:"));
       fprintf(stderr, "kcmkonsole [-init | schemes | general | sessions]\n");
       justInit = TRUE;
     }
@@ -495,7 +495,7 @@ void KcmKonsole::defaultValues()
 int main(int argc, char **argv)
 {
   KcmKonsole app(argc, argv, "kcmkonsole");
-  app.setTitle(klocale->translate("Konsole Settings"));
+  app.setTitle(i18n("Konsole Settings"));
   
   if (app.runGUI())
     return app.exec();
