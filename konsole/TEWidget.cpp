@@ -328,6 +328,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
   setAcceptDrops(true); // attempt
   dragInfo.state = diNone;
   selBound.start.setX(-1);
+  selBound.end.setX(-1);
 /*  m_drop = new KPopupMenu(this);
   m_drop->insertItem( i18n("Paste"), 0);
   m_drop->insertItem( i18n("cd"),    1);
@@ -739,7 +740,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   if ( ev->button() == LeftButton)
   {
     emit isBusySelecting(true); // Keep it steady...
-    if (isTargetSelected(pos.x(), pos.y())){
+    if (selBound.start.x()!=-1 && selBound.end.x()!=-1 && isTargetSelected(pos.x(), pos.y())){
       // The user clicked inside selected text
 
       dragInfo.state = diPending;
@@ -756,7 +757,11 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       {
         emit clearSelectionSignal();
         iPntSel = pntSel = pos;
-        selBound.start = selBound.end = pos;
+        if (selBound.start.x()==-1)
+          selBound.start = pos;
+        else
+          selBound.start.setX(-1);
+        selBound.end.setX(-1);
         actSel = 1; // left mouse button pressed but nothing selected yet.
         grabMouse(   /*crossCursor*/  ); // handle with care!	
       }
@@ -766,14 +771,14 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       }
     }
   }
-  if ( ev->button() == MidButton )
+  else if ( ev->button() == MidButton )
   {
     if (mouse_marks)
       emitSelection(true,ev->state() & ControlButton);
     else
       emit mouseSignal( 1, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
   }
-  if ( ev->button() == RightButton )
+  else if ( ev->button() == RightButton )
   {
     if (mouse_marks || (ev->state() & ShiftButton))
       emit configureRequest( this, ev->state()&(ShiftButton|ControlButton), ev->x(), ev->y() );
@@ -798,6 +803,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
       emit isBusySelecting(false); // Ok.. we can breath again.
       emit clearSelectionSignal();
       selBound.start.setX(-1);
+      selBound.end.setX(-1);
       doDrag();
     }
     return;
@@ -975,6 +981,7 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
     {
       // We had a drag event pending but never confirmed.  Kill selection
       selBound.start.setX(-1);
+      selBound.end.setX(-1);
       emit clearSelectionSignal();
     }
     else
@@ -1030,6 +1037,8 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
 
 
   emit clearSelectionSignal();
+  selBound.start.setX(-1);
+  selBound.end.setX(-1);
   QPoint bgnSel = pos;
   QPoint endSel = pos;
   int i = loc(bgnSel.x(),bgnSel.y());
@@ -1077,6 +1086,8 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
   iPntSel = QPoint((ev->x()-tLx-bX)/font_w,(ev->y()-tLy-bY)/font_h);
 
   emit clearSelectionSignal();
+  selBound.start.setX(-1);
+  selBound.end.setX(-1);
 
   line_selection_mode = TRUE;
   word_selection_mode = FALSE;
@@ -1168,6 +1179,8 @@ void TEWidget::emitSelection(bool useXselection,bool appendReturn)
     QKeyEvent e(QEvent::KeyPress, 0,-1,0, text);
     emit keyPressedSignal(&e); // expose as a big fat keypress event
     emit clearSelectionSignal();
+    selBound.start.setX(-1);
+    selBound.end.setX(-1);
   }
   QApplication::clipboard()->setSelectionMode( false );
 }
@@ -1196,6 +1209,8 @@ void TEWidget::pasteClipboard()
 void TEWidget::onClearSelection()
 {
   emit clearSelectionSignal();
+  selBound.start.setX(-1);
+  selBound.end.setX(-1);
 }
 
 /* ------------------------------------------------------------------------- */
@@ -1489,8 +1504,7 @@ bool TEWidget::isTargetSelected(int x, int y)
     selBound.end = tempPoint;
   }
 
-  if ( (selBound.start.x()==-1) ||
-       ((y<selBound.start.y()) || (y==selBound.start.y() && x<selBound.start.x())) ||
+  if ( ((y<selBound.start.y()) || (y==selBound.start.y() && x<selBound.start.x())) ||
        ((y>selBound.end.y())   || (y==selBound.end.y()   && x>selBound.end.x())) )
     return false;
 
