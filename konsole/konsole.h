@@ -85,6 +85,7 @@ public:
   void newSession(const QString &program, const QStrList &args, const QString &term, const QString &icon, const QString &title, const QString &cwd);
   void setSchema(const QString & path);
   void setEncoding(int);
+  void setSessionTitle(QString&, TESession* = 0);
 
   void enableFullScripting(bool b);
   void enableFixedSize(bool b);

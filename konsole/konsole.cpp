@@ -3472,6 +3472,14 @@ void Konsole::attachSession(TESession* session)
   activateSession(session);
 }
 
+void Konsole::setSessionTitle( QString& title, TESession* ses )
+{
+   if ( !ses )
+      ses = se;
+   ses->setTitle( title );
+   slotRenameSession( ses, title );
+}
+
 void Konsole::renameSession(TESession* ses) {
   QString title = ses->Title();
   bool ok;

@@ -530,6 +530,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
           key = QString("Cwd%1").arg(counter);
           sCwd = sessionconfig->readPathEntry(key);
           m->newSession(sPgm, eargs, sTerm, sIcon, sTitle, sCwd);
+          m->setSessionTitle(sTitle);  // Use title as is
           key = QString("Schema%1").arg(counter);
           m->setSchema(sessionconfig->readEntry(key));
           key = QString("Encoding%1").arg(counter);
