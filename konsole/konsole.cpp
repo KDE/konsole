@@ -2416,7 +2416,7 @@ HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
 
   hb->addWidget(m_btnEnable);
   hb->addSpacing(10);
-  hb->addWidget(new QLabel(i18n("Number of lines : "), mainFrame));
+  hb->addWidget(new QLabel(i18n("Number of lines: "), mainFrame));
   hb->addWidget(m_size);
   hb->addSpacing(10);
   hb->addWidget(m_setUnlimited);

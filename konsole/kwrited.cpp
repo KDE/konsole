@@ -50,7 +50,7 @@ KWrited::KWrited() : QObject()
   QSocketNotifier *sn = new QSocketNotifier(fd, QSocketNotifier::Read, this);
   connect(sn, SIGNAL(activated(int)), this, SLOT(block_in(int)));
 
-  wid->setCaption(QString("KWrited - listening on device ") + pty->deviceName());
+  wid->setCaption(QString("KWrited - Listening on Device ") + pty->deviceName());
 }
 
 KWrited::~KWrited()
