@@ -142,8 +142,8 @@ ColorSchema::ColorSchema(const QString& pathname)
   else
   {
     fRelPath = pathname;
-/*  this is done on demand, see the headers, aleXXX
     clearSchema();
+/*  this is done on demand, see the headers, aleXXX
     (void) rereadSchemaFile(); */
   }
 
