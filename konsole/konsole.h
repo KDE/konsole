@@ -27,6 +27,7 @@
 #include <qstrlist.h>
 #include <qintdict.h>
 #include <qptrdict.h>
+#include <qsignalmapper.h>
 
 #include "TEPty.h"
 #include "TEWidget.h"
@@ -257,6 +258,7 @@ private:
   void buildSessionMenus();
   void addSessionCommand(const QString & path);
   void loadSessionCommands();
+  void createSessionMenus();
   void addScreenSession(const QString & path, const QString & socket);
   void resetScreenSessions();
 
@@ -403,6 +405,8 @@ private:
   bool        b_histEnabled:1;
   bool        b_fullScripting:1;
   bool        b_showstartuptip:1;
+  bool        b_sessionShortcutsEnabled:1;
+  bool        b_sessionShortcutsMapped:1;
 
   unsigned int m_histSize;
   int m_separator_id;
@@ -412,6 +416,8 @@ private:
   QToolButton* m_newSessionButton;
   QToolButton* m_removeSessionButton;
   QPoint      m_newSessionButtonMousePressPos;
+
+  QSignalMapper* sessionNumberMapper;
 };
 
 class QSpinBox;

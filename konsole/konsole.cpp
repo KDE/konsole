@@ -255,10 +255,13 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 ,b_bidiEnabled(false)
 ,b_fullScripting(false)
 ,b_showstartuptip(true)
+,b_sessionShortcutsEnabled(false)
+,b_sessionShortcutsMapped(false)
 ,m_histSize(DEFAULT_HISTORY_SIZE)
 ,m_separator_id(-1)
 ,m_newSessionButton(0)
 ,m_removeSessionButton(0)
+,sessionNumberMapper(0)
 {
   isRestored = b_inRestore;
   connect( &m_closeTimeout, SIGNAL(timeout()), this, SLOT(slotCouldNotClose()));
@@ -267,6 +270,10 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
   no2tempFile.setAutoDelete(true);
   no2filename.setAutoDelete(true);
   menubar = menuBar();
+
+  sessionNumberMapper = new QSignalMapper( this );
+  connect( sessionNumberMapper, SIGNAL( mapped( int ) ),
+          this, SLOT( newSessionTabbar( int ) ) );
 
   colors = new ColorSchemaList();
   colors->checkSchemas();
@@ -359,6 +366,8 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 
 Konsole::~Konsole()
 {
+    delete sessionNumberMapper;
+
     while (detached.count()) {
         KonsoleChild* child=detached.first();
         delete child;
@@ -1114,6 +1123,12 @@ void Konsole::makeBasicGUI()
 
   new KAction(i18n("Toggle Bidi"), Qt::CTRL+Qt::ALT+Qt::Key_B, this, SLOT(toggleBidi()), m_shortcuts, "toggle_bidi");
 
+  // Should we load all *.desktop files now?  Required for Session shortcuts.
+  if ( KConfigGroup(KGlobal::config(), "General").readBoolEntry("SessionShortcutsEnabled", false) ) {
+    b_sessionShortcutsEnabled = true;
+    loadSessionCommands();
+    loadScreenSessions();
+  }
   m_shortcuts->readShortcutSettings();
 
   m_sessionList = new KPopupMenu(this);
@@ -2025,6 +2040,15 @@ void Konsole::slotConfigureKeys()
       if (key.modFlags() == KKey::CTRL)
         ctrlKeys += key.toString();
     }
+
+    // Are there any shortcuts for Session Menu entries?
+    if ( !b_sessionShortcutsEnabled && 
+         m_shortcuts->action( i )->shortcut().count() &&
+         QString(m_shortcuts->action( i )->name()).startsWith("SSC_") ) {
+      b_sessionShortcutsEnabled = true;
+      KConfigGroup group(KGlobal::config(), "General");
+      group.writeEntry("SessionShortcutsEnabled", true);
+    }
   }
 
   if (!ctrlKeys.isEmpty())
@@ -2055,7 +2079,34 @@ void Konsole::reparseConfiguration()
 {
   KGlobal::config()->reparseConfiguration();
   readProperties(KGlobal::config(), QString::null, true);
+
+  // The .desktop files may have been changed by user...
+  b_sessionShortcutsMapped = false;
+
+  // Mappings may have to be changed...get a fresh mapper.
+  disconnect( sessionNumberMapper, SIGNAL( mapped( int ) ),
+          this, SLOT( newSessionTabbar( int ) ) );
+  delete sessionNumberMapper;
+  sessionNumberMapper = new QSignalMapper( this );
+  connect( sessionNumberMapper, SIGNAL( mapped( int ) ),
+          this, SLOT( newSessionTabbar( int ) ) );
+
+  // Should be a better way to traverse KActionCollection
+  uint count = m_shortcuts->count();
+  for ( uint i = 0; i < count; i++ )
+  {
+    KAction* action = m_shortcuts->action( i );
+    // Delete all session shortcuts...
+    if ( QString(action->name()).startsWith("SSC_") ) {
+      delete action; // Remove Action and Accel
+      if ( i == 0 ) i = 0;
+      else i--;
+      count--; // = m_shortcuts->count();
+    }
+  }
+
   buildSessionMenus();
+  m_shortcuts->readShortcutSettings();
 
   if (tabwidget) {
     for (TESession *_se = sessions.first(); _se; _se = sessions.next()) {
@@ -3198,15 +3249,10 @@ void Konsole::buildSessionMenus()
    if (m_tabbarSessionsCommands)
       m_tabbarSessionsCommands->clear();
 
-   no2command.clear();
-   no2tempFile.clear();
-   no2filename.clear();
-
-   cmd_serial = 0;
-   cmd_first_screen = -1;
-
    loadSessionCommands();
    loadScreenSessions();
+
+   createSessionMenus();
 
    if (kapp->authorizeKAction("file_print"))
    {
@@ -3275,34 +3321,82 @@ void Konsole::addSessionCommand(const QString &path)
 
   }
 
-  QString icon = co->readEntry("Icon", "openterm");
-  insertItemSorted(m_tabbarSessionsCommands, SmallIconSet( icon ), txt.replace('&',"&&"), ++cmd_serial );
-  QString comment = co->readEntry("Comment");
-  if (comment.isEmpty())
-    comment=txt.prepend(i18n("New "));
-  insertItemSorted( m_session, SmallIconSet( icon ), comment.replace('&',"&&"), cmd_serial );
-  no2command.insert(cmd_serial,co);
+  no2command.insert(++cmd_serial,co);
 
   int j = filename.findRev('/');
   if (j > -1)
     filename = filename.mid(j+1);
   no2filename.insert(cmd_serial,new QString(filename));
-}
 
+  // Add shortcuts only once and not for 'New Shell (cmd_serial=1)'.
+  if ( ( b_sessionShortcutsMapped == true ) or ( cmd_serial == 1 ) ) return;
+
+  // Add an empty shortcut for each Session.
+  QString comment = co->readEntry("Comment");
+  if (comment.isEmpty())
+    comment=txt.prepend(i18n("New "));
+
+  QString name = comment;
+  name.prepend("SSC_");  // Allows easy searching for Session ShortCuts
+  name.replace(" ", "_");
+  QString cmd_id = QString("%1").arg(cmd_serial);
+
+  // Is there already this shortcut?
+  KAction* sessionAction;
+  if ( m_shortcuts->action( name.latin1() ) ) {
+    sessionAction = m_shortcuts->action( name.latin1() );
+  } else {
+    sessionAction = new KAction( comment, 0, this, 0, m_shortcuts, name.latin1() );
+  }
+  connect( sessionAction, SIGNAL( activated() ), sessionNumberMapper, SLOT( map() ) );
+//  kdDebug()<<"Mapping "<<name.latin1()<<" to "<<cmd_serial<<endl;
+  sessionNumberMapper->setMapping( sessionAction, cmd_serial );
+
+}
 
 void Konsole::loadSessionCommands()
 {
+  no2command.clear();
+  no2tempFile.clear();
+  no2filename.clear();
+
+  cmd_serial = 0;
+  cmd_first_screen = -1;
+
   if (!kapp->authorize("shell_access"))
      return;
+
   addSessionCommand(QString::null);
-  m_session->insertSeparator();
-  m_tabbarSessionsCommands->insertSeparator();
 
   QStringList lst = KGlobal::dirs()->findAllResources("appdata", "*.desktop", false, true);
 
   for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it )
     if (!(*it).endsWith("/shell.desktop"))
        addSessionCommand(*it);
+
+  b_sessionShortcutsMapped = true;
+}
+
+void Konsole::createSessionMenus()
+{
+  QIntDictIterator<KSimpleConfig> it( no2command );
+  for ( ; it.current(); ++it ) {
+    if ( it.currentKey() == 2 ) {   // Add Separator afer New Shell
+      m_session->insertSeparator();
+      m_tabbarSessionsCommands->insertSeparator();
+    }
+    QString txt = (*it).readEntry("Name");
+//    kdDebug()<< it.currentKey() << ": " << txt.latin1() << endl;
+
+    QString icon = (*it).readEntry("Icon", "openterm");
+    insertItemSorted(m_tabbarSessionsCommands, SmallIconSet(icon), 
+                     txt.replace('&',"&&"), it.currentKey() );
+    QString comment = (*it).readEntry("Comment");
+    if (comment.isEmpty())
+      comment=txt.prepend(i18n("New "));
+    insertItemSorted(m_session, SmallIconSet(icon), 
+                     comment.replace('&',"&&"), it.currentKey());
+  }
 
   if (m_bookmarksSession)
   {
