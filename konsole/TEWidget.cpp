@@ -390,14 +390,14 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
     if ((attr.r && RE_CURSOR) && cursorBlinking)
       erase(rect);
     paint.setPen(fColor);
-    paint.drawText(rect.x(),rect.y()+font_a, str);
+    paint.drawText(rect.x(),rect.y()+font_a, str, -1, QPainter::LTR);
     if ((attr.r & RE_UNDERLINE) || color_table[attr.f].bold)
     {
       paint.setClipRect(rect);
       if (color_table[attr.f].bold)
       {
         paint.setBackgroundMode( TransparentMode );
-        paint.drawText(rect.x()+1,rect.y()+font_a, str); // second stroke
+        paint.drawText(rect.x()+1,rect.y()+font_a, str, -1, QPainter::LTR); // second stroke
       }
       if (attr.r & RE_UNDERLINE)
         paint.drawLine(rect.left(), rect.y()+font_a+1,
@@ -410,7 +410,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
     {
       erase(rect);
       paint.setBackgroundMode( TransparentMode );
-      paint.drawText(rect.x(),rect.y()+font_a, str);
+      paint.drawText(rect.x(),rect.y()+font_a, str, -1, QPainter::LTR);
     }
     paint.setClipRect(rect);
     paint.drawRect(rect.x(),rect.y(),rect.width(),rect.height()-m_lineSpacing);
