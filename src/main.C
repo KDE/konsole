@@ -381,7 +381,8 @@ void Konsole::makeMenu()
   // act->plug(toolBar());
 
   m_sessions->insertSeparator();
-  connect(m_sessions, SIGNAL(activated(int)), SLOT(activateSession(int)));
+  // probably don't need this one
+  //  connect(m_sessions, SIGNAL(activated(int)), SLOT(activateSession(int)));
 
   m_file = new QPopupMenu;
   connect(m_file, SIGNAL(activated(int)), SLOT(newSession(int)));
@@ -653,7 +654,6 @@ void Konsole::font_menu_activated(int item)
     item = 0;
   }
   setFont(item);
-  // activateSession((int)session2no.find(se)); // for attribute change
   activateSession(); // activates the current
 }
 
@@ -662,7 +662,6 @@ void Konsole::schema_menu_activated(int item)
   assert(se);
   //FIXME: save schema name
   setSchema(item);
-  //  activateSession((int)session2no.find(se)); // for attribute change
   activateSession(); // activates the current
 }
 
@@ -1028,8 +1027,7 @@ void Konsole::doneSession(TESession* s, int )
     //    QIntDictIterator<TESession> it( no2session );
     QPtrDictIterator<KRadioAction> it( session2action);
     if ( it.current() ) {
-  //      activateSession(it.currentKey());
-  it.current()->setChecked(true);
+        it.current()->setChecked(true);
         activateSession();
     } else
       kapp->quit();
