@@ -669,17 +669,22 @@ void Konsole::setFont(int fontno)
 
 void Konsole::slotToggleMenubar() {
   b_menuvis = showMenubar->isChecked();
-  if (b_menuvis) menubar->show(); else menubar->hide();
+  if (b_menuvis) 
+     menubar->show(); 
+  else 
+     menubar->hide();
   if (!b_menuvis) {
     setCaption(i18n("Use the right mouse button to bring back the menu"));
     QTimer::singleShot(5000,this,SLOT(setHeader()));
   }
 }
 
-
 void Konsole::slotToggleToolbar() {
   b_toolbarvis = showToolbar->isChecked();
-  toolBar()->enable(b_toolbarvis ? KToolBar::Show : KToolBar::Hide);
+  if (b_toolbarvis)
+     toolBar()->show();
+  else
+     toolBar()->hide();
 }
 
 void Konsole::slotToggleFrame() {
