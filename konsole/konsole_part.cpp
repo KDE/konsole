@@ -662,7 +662,7 @@ void konsolePart::setFont(int fontno)
 void konsolePart::fontNotFound()
 {
   QString msg = i18n("Font `%1' not found.\nCheck README.linux.console for help.").arg(fontNotFound_par);
-  KMessageBox::error(parentWidget,  msg);
+  KMessageBox::information(parentWidget,  msg, i18n("Font Not Found"), QString("font_not_found_%1").arg(fontNotFound_par));
 }
 
 void konsolePart::updateKeytabMenu()
