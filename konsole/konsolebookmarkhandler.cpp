@@ -100,7 +100,7 @@ void KonsoleBookmarkHandler::slotNewFolder( const QString& text, bool /*open*/,
 }
 
 void KonsoleBookmarkHandler::slotBookmarksChanged( const QString &,
-                                                   const QString & caller )
+                                                   const QString &)
 {
     // This is called when someone changes bookmarks in konsole....
     m_bookmarkMenu->slotBookmarksChanged("");
