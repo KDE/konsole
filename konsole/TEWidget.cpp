@@ -818,6 +818,44 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     }
   }
 
+  if ( !word_selection_mode && !line_selection_mode && groupFinalSpaces )
+  {
+    // Extend to word boundaries
+    int i;
+    int selClass;
+
+    bool left_not_right = ( here.y() < iPntSel.y() ||
+	   here.y() == iPntSel.y() && here.x() < iPntSel.x() );
+    bool old_left_not_right = ( pntSel.y() < iPntSel.y() ||
+	   pntSel.y() == iPntSel.y() && pntSel.x() < iPntSel.x() );
+    swapping = left_not_right != old_left_not_right;
+
+    // Find left (left_not_right ? from here : from start)
+    QPoint left = left_not_right ? here : iPntSel;
+
+    // Find left (left_not_right ? from start : from here)
+    QPoint right = left_not_right ? iPntSel : here;
+    i = loc(right.x(),right.y());
+    selClass = charClass(image[i].c);
+    if (selClass == ' ')
+    {
+       while ( right.x() < columns-1 && charClass(image[i+1].c) == selClass )
+       { i++; right.rx()++; }
+       if (right.x() < columns-1) right = left_not_right ? iPntSel : here;
+    }
+
+    // Pick which is start (ohere) and which is extension (here)
+    if ( left_not_right )
+    {
+      here = left; ohere = right;
+    }
+    else
+    {
+      here = right; ohere = left;
+    }
+
+  }
+
   if (here == pntSel && scroll == scrollbar->value()) return; // not moved
 
   if ( word_selection_mode || line_selection_mode ) {
@@ -968,6 +1006,11 @@ int TEWidget::charClass(char ch) const
 
     // Everything else is weird
     return 1;
+}
+
+void TEWidget::setGroupFinalSpaces(bool on)
+{
+	groupFinalSpaces = on;
 }
 
 void TEWidget::setWordCharacters(QString wc)

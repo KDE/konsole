@@ -125,6 +125,7 @@ private slots:
   void slotSelectScrollbar();
   void slotSelectLineSpacing();
   void slotWarnQuit();
+  void slotGroupFinalSpaces();
   void loadScreenSessions();
 
 private:
@@ -189,6 +190,7 @@ private:
   KAction       *m_moveSessionRight;
 
   KToggleAction *warnQuit;                      // Warn when closing this session on quit
+  KToggleAction *groupFinalSpaces;
 
   int cmd_serial;
   int cmd_first_screen;
@@ -217,6 +219,7 @@ private:
   bool        m_menuCreated:1;
   bool        skip_exit_query:1;
   bool        b_warnQuit:1;
+  bool        b_groupFinalSpaces:1;
   bool        isRestored;
   bool        wasRestored;
 

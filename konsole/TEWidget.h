@@ -70,6 +70,7 @@ public:
     QSize sizeHint() const;
 
     void setWordCharacters(QString wc);
+    void setGroupFinalSpaces(bool on);
 
     void setBellMode(int mode);
     enum { BELLNONE=0, BELLSYSTEM=1, BELLVISUAL=2 };
@@ -178,6 +179,7 @@ private:
     int         scrollLoc;
     QString     word_characters;
     int         bellMode;
+    bool groupFinalSpaces;
 
     bool blinking;   // hide text in paintEvent
     bool hasBlinker; // has characters to blink

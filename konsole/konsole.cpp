@@ -206,6 +206,7 @@ Konsole::Konsole(const char* name, const QString& _program,
 ,m_moveSessionLeft(0)
 ,m_moveSessionRight(0)
 ,warnQuit(0)
+,groupFinalSpaces(0)
 ,cmd_serial(0)
 ,cmd_first_screen(-1)
 ,n_keytab(0)
@@ -545,6 +546,11 @@ void Konsole::makeGUI()
     SLOT(slotToggleQuitWarning()), this);
     */
 
+   groupFinalSpaces = new KToggleAction (i18n("&Auto-select spaces till EOL"),
+                                 0, this,SLOT(slotGroupFinalSpaces()), this);
+
+   groupFinalSpaces->plug (m_options);
+
    warnQuit = new KToggleAction (i18n("&Warn for Open Sessions on Quit"),
                                  0, this,SLOT(slotWarnQuit()), this);
 
@@ -704,6 +710,12 @@ void Konsole::slotWarnQuit()
    b_warnQuit=warnQuit->isChecked();
 };
 
+void Konsole::slotGroupFinalSpaces()
+{
+   b_groupFinalSpaces=groupFinalSpaces->isChecked();
+   te->setGroupFinalSpaces(b_groupFinalSpaces);
+};
+
 /**
    This function calculates the size of the external widget
    needed for the internal widget to be
@@ -831,6 +843,7 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("keytab",n_defaultKeytab);
   config->writeEntry("WarnQuit", b_warnQuit);
   config->writeEntry("ActiveSession", active);
+  config->writeEntry("GroupFinalSpaces", b_groupFinalSpaces);
   config->writeEntry("LineSpacing", te->lineSpacing());
 
   if (se) {
@@ -859,6 +872,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    /*FIXME: (merging) state of material below unclear.*/
    b_scroll = config->readBoolEntry("history",TRUE);
    b_warnQuit=config->readBoolEntry( "WarnQuit", TRUE );
+   b_groupFinalSpaces=config->readBoolEntry( "GroupFinalSpaces", FALSE );
    n_defaultKeytab=config->readNumEntry("keytab",0); // act. the keytab for this session
    b_fullscreen = config->readBoolEntry("Fullscreen",FALSE);
    // +1 because we have on more...a custom selected font
@@ -910,6 +924,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    te->setScrollbarLocation(n_scroll);
    te->setBellMode(n_bell);
    te->setWordCharacters(s_word_seps);
+   te->setGroupFinalSpaces(b_groupFinalSpaces);
    te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
    te->setColorTable(sch->table());
 
@@ -931,7 +946,8 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
 void Konsole::applySettingsToGUI()
 {
    if (!m_menuCreated) return;
-   warnQuit->setChecked ( b_warnQuit);
+   warnQuit->setChecked ( b_warnQuit );
+   groupFinalSpaces->setChecked ( b_groupFinalSpaces );
    showFrame->setChecked( b_framevis );
    selectFont->setCurrentItem(n_font);
    selectLineSpacing->setCurrentItem(te->lineSpacing());
