@@ -210,8 +210,6 @@ void TEmulation::onRcvChar(int c)
 // process application unicode input to terminal
 // this is a trivial scanner
 {
-  emit notifySessionState(NOTIFYACTIVITY);
-
   c &= 0xff;
   switch (c)
   {
@@ -264,6 +262,8 @@ void TEmulation::onKeyPress( QKeyEvent* ev )
 
 void TEmulation::onRcvBlock(const char *s, int len)
 {
+  emit notifySessionState(NOTIFYACTIVITY);
+
   bulkStart();
   bulk_incnt += 1;
   for (int i = 0; i < len; i++)

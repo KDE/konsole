@@ -271,8 +271,6 @@ void TEmuVt102::initTokenizer()
 
 void TEmuVt102::onRcvChar(int cc)
 { int i;
-  emit notifySessionState(NOTIFYACTIVITY);
-
   if (cc == 127) return; //VT100: ignore.
 
   if (ces(    CTL))
