@@ -295,13 +295,17 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
   makeBasicGUI();
   //KONSOLEDEBUG<<"Konsole ctor() after makeBasicGUI "<<time.elapsed()<<" msecs elapsed"<<endl;
 
-  if (isRestored)
+  if (isRestored) {
     n_tabbar = wanted_tabbar;
+    KConfig *c = KApplication::kApplication()->sessionConfig();
+    c->setDesktopGroup();
+    b_dynamicTabHide = c->readBoolEntry("DynamicTabHide", false);
+  }
 
   if (!tabbaron)
     n_tabbar = TabNone;
 
-  if (n_tabbar!=TabNone) {
+  if (n_tabbar!=TabNone && !b_dynamicTabHide) {
     makeTabWidget();
     setCentralWidget(tabwidget);
   }
@@ -318,7 +322,10 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
     te->setFocus();
 
     readProperties(config, schema, false);
+    if (!b_dynamicTabHide)
     n_tabbar = TabNone;
+    else if (isRestored)
+      n_tabbar = wanted_tabbar;
     setCentralWidget(te);
   }
 
@@ -1375,7 +1382,7 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("ActiveSession", active);
   config->writeEntry("DefaultSession", m_defaultSessionFilename);
   config->writeEntry("TabViewMode", int(m_tabViewMode));
-  config->writeEntry("DynamicTabHide", int(b_dynamicTabHide));
+  config->writeEntry("DynamicTabHide", b_dynamicTabHide);
 
   if (se) {
     config->writeEntry("history", se->history().getSize());
