@@ -128,7 +128,7 @@ int konsole_wcwidth(Q_UINT16 ucs)
       (ucs >= 0xfe30 && ucs <= 0xfe6f) || /* CJK Compatibility Forms */
       (ucs >= 0xff00 && ucs <= 0xff5f) || /* Fullwidth Forms */
       (ucs >= 0xffe0 && ucs <= 0xffe6) ||
-      (ucs >= 0x20000 && ucs <= 0x2ffff)));
+      (ucs >= 0x2000 && ucs <= 0x2fff)));
 }
 
 #if 0
