@@ -111,6 +111,7 @@ Time to start a requirement list.
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <dirent.h>
+#include <fcntl.h>
 #include <assert.h>
 
 #include <kiconloader.h>
@@ -1584,11 +1585,18 @@ void Konsole::loadScreenSessions()
     struct dirent *entry;
     while ((entry = readdir(dir)))
     {
+      QCString path = screenDir + "/" + entry->d_name;
       struct stat st;
-      if (stat(screenDir + "/" + entry->d_name, &st) != 0)
+      if (stat(path, &st) != 0)
         continue;
-      if (S_ISFIFO(st.st_mode) && !(st.st_mode & 0111)) // xbit == attached
+
+      int fd;
+      if (S_ISFIFO(st.st_mode) && !(st.st_mode & 0111) && // xbit == attached
+          (fd = open(path, O_WRONLY | O_NONBLOCK)) != -1)
+      {
+        ::close(fd);
         sessions.append(QFile::decodeName(entry->d_name));
+      }
     }
     closedir(dir);
   }
