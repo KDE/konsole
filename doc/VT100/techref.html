@@ -73,16 +73,7 @@ Work is currently in progress to fix this issue.
   regular ttys (printer with keyboard) or later more sophisticated
   things with cathode ray tubes.
   <p>
-  <pre>
-      +-----------+                      +------------+
-      |           |                      |            |
-      |           | -------------------&gt; |            |--&gt; Printer and/or Display
-      |   UNIX    |    bi-directional    |  Terminal  |
-      |   host    |    serial line       |   Device   |
-      |           | &lt;------------------- |            |&lt;-- Keyboard and Mouse
-      |           |                      |            |
-      +-----------+                      +------------+
-  </pre>
+  <center><img src="konsole2.gif"></center>
   <p>
   Today, hardware has become so cheap, that each single user could
   be provided with a complete host/display combination for the former
@@ -325,19 +316,8 @@ Work is currently in progress to fix this issue.
   <em>EXAMPLE</em>:  Control sequence to turn off all character attributes, then
   turn on underscore and blink attributes (<a href=#SGR>SGR</a>).
   <p>
-  <pre>                      Delimiters
-                            / \       
-                           /   \       
-                           |   |
-                          \ / \ /
-  Sequence:       &lt;ESC&gt;[ 0 ; 4 ; 5 m
-                  ^^^^^^ ^   ^   ^ ^
-                  |||||| |   |   | |
-                  \||||/  \  |  /  +------Final character
-                   \||/    \ | /
-                   CSI   Selective
-                         Parameters
-  </pre>
+  <center><img src="konsole1.gif"></center>
+  <p>
   The octal representation of this string is:
   <pre>
      033 0133 060 073 064 073 065 0155

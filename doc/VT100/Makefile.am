@@ -1,5 +1,5 @@
 
-doc_DATA = vt100.gif techref.html
+doc_DATA = vt100.gif konsole1.gif konsole2.gif techref.html
 
 docdir = $(kde_htmldir)/en/konsole
 
