@@ -42,7 +42,7 @@
 #undef PACKAGE
 #undef VERSION
 #define PACKAGE "konsole"
-#define VERSION "1.3 Beta"
+#define VERSION "1.3"
 
 class KRootPixmap;
 class QLabel;
@@ -348,7 +348,7 @@ private:
   KAction       *m_print;
   KAction       *m_quit;
   KAction       *m_tabDetachSession;
-  
+
   KActionCollection *m_shortcuts;
 
   KonsoleBookmarkHandler *bookmarkHandler;
