@@ -431,7 +431,6 @@ void Konsole::saveProperties(KConfig* config)
   // bad! will no allow us to support multi windows
   config->writeEntry("menubar visible",b_menuvis);
   config->writeEntry("toolbar visible", b_toolbarvis);
-  config->writeEntry("toolbar position", int(toolBar()->barPos()));
   config->writeEntry("history",b_scroll);
   config->writeEntry("has frame",b_framevis);
   config->writeEntry("Fullscreen",b_fullscreen);
@@ -464,8 +463,6 @@ void Konsole::readProperties(KConfig* config)
 /*FIXME: (merging) state of material below unclear.*/
   b_menuvis  = config->readBoolEntry("menubar visible",TRUE);
   b_toolbarvis  = config->readBoolEntry("toolbar visible",TRUE);
-  //  n_toolbarpos  = config->readUnsignedNumEntry("toolbar position",
-  //  		     (unsigned int) KToolBar::Bottom);
 
   b_scroll = config->readBoolEntry("history",TRUE);
   int n2_keytab = config->readNumEntry("keytab",0);
@@ -513,10 +510,6 @@ void Konsole::readProperties(KConfig* config)
   slotToggleToolbar();
   showMenubar->setChecked(b_menuvis);
   slotToggleMenubar();
-
-  // n_toolbarpos is nowhere saved, so it always defaults to Bottom
-  // for now, don't do anything and let KToolBar handle that internally
-  // toolBar()->setBarPos((KToolBar::BarPosition)n_toolbarpos);
 }
 
 /* ------------------------------------------------------------------------- */
@@ -841,7 +834,7 @@ void Konsole::activateSession()
     s->setConnect(TRUE);     // does a bulkShow (setImage)
     setFont(s->fontNo());    //FIXME: creates flicker?
   } else  {
-    // the schema was not changed 
+    // the schema was not changed
     ColorSchema* schema = ColorSchema::find(s->schemaNo());
     if (schema->usetransparency) {
       setSchema(schema);
@@ -860,7 +853,7 @@ void Konsole::newSessionSelect()
 
 void Konsole::newSession()
 {
-  int i=1;
+  uint i=1;
   int session=0;
   while ( (session==0) && (i<=no2command.count()) )
   // antlarr: Why is first session session number 1 instead of number 0 ?

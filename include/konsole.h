@@ -158,7 +158,6 @@ private:
   KSelectAction *selectFont;
   KSelectAction *selectScrollbar;
 
-  int         n_toolbarpos;
   int         n_keytab;
   int         n_font;
   int         n_scroll;
