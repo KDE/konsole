@@ -17,27 +17,14 @@
 */
 
 #include "TECommon.h"
+#include "TEHistory.h"
 
-/*!
-*/
 #define MODE_Origin    0
-/*!
-*/
 #define MODE_Wrap      1
-/*!
-*/
 #define MODE_Insert    2
-/*!
-*/
 #define MODE_Screen    3
-/*!
-*/
 #define MODE_Cursor    4
-/*!
-*/
 #define MODE_NewLine   5
-/*!
-*/
 #define MODES_SCREEN   6
 
 /*!
@@ -47,14 +34,6 @@ struct ScreenParm
   int mode[MODES_SCREEN];
 };
 
-/*!
-*/
-struct histLine
-// basically, another string representation
-{
-  int len;
-  ca  line[1]; // [len], really.
-};
 
 class TEScreen
 {
@@ -147,11 +126,7 @@ public: // these are all `Screen' operations
     void home();
     void reset();
     //
-    void ShowCharacter(unsigned char c);
-    //
-    void setCharset(int n, int cs);       //FIXME: evtl. move to emulation
-    void setAndUseCharset(int n, int cs); //FIXME: evtl. move to emulation
-    void useCharset(int n);               //FIXME: evtl. move to emulation
+    void ShowCharacter(unsigned short c);
     //
     void resizeImage(int new_lines, int new_columns);
     //
@@ -163,12 +138,13 @@ public: // these are all `Screen' operations
     int  getColumns() { return columns; }
 
     /*! set the position of the history cursor. */
-    void setHistCursor(int cursor) { histCursor = cursor; } //FIXME:rangecheck
+    void setHistCursor(int cursor);
     /*! return the position of the history cursor. */
-    int  getHistCursor() { return histCursor; }
-    /*! return the number of lines in the history buffer. */
-    int  getHistLines (){ return histLines;  }
-    void setHistMaxLines(int maxLines);
+    int  getHistCursor();
+
+    int  getHistLines ();
+    void setScroll(bool on);
+    bool hasScroll();
 
     //
     // Selection
@@ -177,6 +153,8 @@ public: // these are all `Screen' operations
     void setSelExtentXY(const int x, const int y);
     void clearSelection();
     char *getSelText(const BOOL preserve_line_breaks);
+
+    void checkSelection(int from, int to);
 
 private: // helper
 
@@ -194,16 +172,11 @@ private: // helper
     void effectiveRendition();
     void reverseRendition(ca* p);
 
-
 private:
 
     bool* tabstops;
-    char charset[4]; //FIXME: evtl. move to emulation
 
     // rendition info
-    int   cu_cs;      // actual charset.
-    bool  graphic;    //FIXME: evtl. move to emulation
-    bool  pound  ;    //FIXME: evtl. move to emulation
     UINT8 cu_fg;
     UINT8 cu_bg;
     UINT8 cu_re;      // rendition
@@ -219,8 +192,6 @@ private:
     // save cursor & rendition  --------------------
 
     // rendition info
-    bool  sa_graphic;    //FIXME: evtl. move to emulation
-    bool  sa_pound;      //FIXME: evtl. move to emulation
     UINT8 sa_cu_re;
     UINT8 sa_cu_fg;
     UINT8 sa_cu_bg;
@@ -247,9 +218,7 @@ private:
     // history buffer ---------------
 
     int histCursor;   // display position relative to start of histBuffer
-    int histLines;    // current lines in histbuffer
-    int histMaxLines; // maximum lines in histbuffer
-    histLine** histBuffer;
+    HistoryScroll hist;
 
     // selection -------------------
 

@@ -1,6 +1,7 @@
 #include "session.h"
-
 #include <qpushbutton.h>
+
+#define HERE fprintf(stderr,"%s(%d): here\n",__FILE__,__LINE__)
 
 /*! \class TESession
 
@@ -114,5 +115,15 @@ const char* TESession::Title()
   return title.data();
 }
 
+void TESession::setHistory(bool on)
+{
+HERE; printf("TESession::setHistory %s\n",on?"on":"off");
+  em->setHistory( on );
+}
+
+bool TESession::history()
+{
+  return em->history();
+}
 
 #include "session.moc"

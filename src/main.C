@@ -22,6 +22,14 @@
     and from the user. It hardly does anything interesting.
 */
 
+/*WORKING ON:
+  - order the configuration steps properly.
+    - general default values
+    - session management OR saved configuration
+    - command line parameters (for initial session only)
+    * other runtime config (menu, resize, etc).
+*/
+
 /*FIXME:
   - All the material in here badly sufferes from the fact that the
     configuration can originate from many places, so all is duplicated
@@ -85,12 +93,28 @@
 #undef PACKAGE
 #undef VERSION
 #define PACKAGE "konsole"
-#define VERSION "0.9.11"
+#define VERSION "0.9.12"
 
-#define WITH_VGA
 
-const char *fonts[] = {"6x13", "5x7", "6x10", "7x13", "9x15", "10x20",
-                 "linux8x16", "linux8x8" };
+#define UNICODE_TEST 1
+
+const char *fonts[] = {
+ "6x13", // FIXME: "fixed" used in favor of this
+ "5x7", // tiny font, never used
+#ifdef UNICODE_TEST
+ "-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1",
+#else
+ "6x10",
+#endif
+ "7x13", "9x15", "10x20",
+#ifdef UNICODE_TEST
+ "-misc-console-medium-r-normal--16-160-72-72-c-160-iso10646-1",
+ "-misc-console-medium-r-normal--8-80-72-72-c-80-iso10646-1"
+#else
+ "linux8x16", "linux8x8"
+#endif
+ };
+#define TOPFONT ((sizeof(fonts)/sizeof(char*))-1)
 
 static QIntDict<TESession> no2session;
 static QPtrDict<void>      session2no;
@@ -99,17 +123,13 @@ static int session_no = 0;
 static QIntDict<KSimpleConfig> no2command;
 static int cmd_serial = 0;
 
-TEDemo::TEDemo(const QString& name, QStrList & _args, int login_shell) : KTMainWindow(name), args(_args)
+TEDemo::TEDemo(const QString& name, QStrList & _args, int login_shell, int histon) : KTMainWindow(name), args(_args)
 {
   se = 0L;
   rootxpm = 0L;
   menubar = menuBar();
+  b_scroll = histon;
   
-  // session management
-
-// WABA: Removed old session management call
-//  setUnsavedData( true ); // terminals cannot store their contents
-
   // create terminal emulation framework ////////////////////////////////////
 
   te = new TEWidget(this);
@@ -125,6 +145,7 @@ TEDemo::TEDemo(const QString& name, QStrList & _args, int login_shell) : KTMainW
   makeStatusbar();
 
   // Init DnD ////////////////////////////////////////////////////////////////
+
   setAcceptDrops(true);
   
   // load session commands ///////////////////////////////////////////////////
@@ -137,6 +158,7 @@ TEDemo::TEDemo(const QString& name, QStrList & _args, int login_shell) : KTMainW
 
   curr_schema = 0;
   ColorSchema::loadAllSchemas();
+  //FIXME: sort
   for (int i = 0; i < ColorSchema::count(); i++)
   { ColorSchema* s = ColorSchema::find(i);
     assert( s );
@@ -153,14 +175,18 @@ TEDemo::TEDemo(const QString& name, QStrList & _args, int login_shell) : KTMainW
                      : QFrame::NoFrame );
   te->setScrollbarLocation(n_scroll);
 
+//FIXME: call newSession here, somehow, instead the stuff below.
+
   // construct initial session ///////////////////////////////////////////////
 
-  TESession* initial = new TESession(this,te,args,"xterm",login_shell);
+  TESession* initial = new TESession(this,te,args,"xterm-color",login_shell);
 
   title = (args.count() && (kapp->caption() == PACKAGE))
         ? QString(args.at(0))  // program executed in the title bar
         : kapp->caption();  // `konsole' or -caption
   initial->setTitle(title);
+HERE; printf("setHistory' = %d in ::TEDemo.\n",b_scroll);
+  initial->setHistory(b_scroll); //FIXME:FIXME:FIXME: take from schema
 
   addSession(initial);
 
@@ -361,6 +387,7 @@ void TEDemo::makeMenu()
   m_options->setCheckable(TRUE);
   m_options->insertItem( i18n("&Menubar"), 1 );
   m_options->insertItem( i18n("&Frame"), 2 );
+  m_options->insertItem( i18n("&History"), 3 );
   m_options->insertItem( i18n("Scroll&bar"), m_scrollbar);
   m_options->insertSeparator();
   m_options->insertItem( i18n("BS sends &DEL"), 4 );
@@ -411,6 +438,7 @@ void TEDemo::saveProperties(KConfig* config)
 {
   config->setGroup("options"); // bad! will no allow us to support multi windows
   config->writeEntry("menubar visible",b_menuvis);
+  config->writeEntry("history",b_scroll);
   config->writeEntry("has frame",b_framevis);
   config->writeEntry("BS hack",b_bshack);
   config->writeEntry("font",n_font);
@@ -437,8 +465,10 @@ void TEDemo::readProperties(KConfig* config)
 /*FIXME: (merging) state of material below unclear.*/
   b_menuvis  = config->readBoolEntry("menubar visible",TRUE);
   b_framevis = config->readBoolEntry("has frame",TRUE);
+  b_scroll = config->readBoolEntry("history",TRUE);
+HERE; printf("reading 'history' = %d\n",b_scroll);
   b_bshack   = config->readBoolEntry("BS hack",TRUE);
-  n_font     = QMIN(config->readUnsignedNumEntry("font",3),7);
+  n_font     = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
   n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",SCRRIGHT),2);
   s_schema   = config->readEntry("schema","");
 
@@ -469,13 +499,16 @@ void TEDemo::readProperties(KConfig* config)
   setBsHack(config->readBoolEntry("BS hack",TRUE));
   QFont tmpFont("fixed");
   defaultFont = config->readFontEntry("defaultfont", &tmpFont);
-  setFont(QMIN(config->readUnsignedNumEntry("font",3),7)); // sets n_font and menu item
+  setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT)); // sets n_font and menu item
   setSchema(config->readEntry("schema",""));
+
   // (2) apply to sessions (currently only the 1st one)
   TESession* s = no2session.find(1);
   if (s) {
     s->setFontNo(n_font);
     s->setSchemaNo(ColorSchema::find(s_schema)->numb);
+HERE; printf("setting 'history' = %d in read.\n",b_scroll);
+    s->setHistory(b_scroll);
     if (b_bshack)
       s->getEmulation()->setMode(MODE_BsHack);
     else
@@ -486,7 +519,6 @@ void TEDemo::readProperties(KConfig* config)
   defaultSize.setWidth ( config->readNumEntry("defaultwidth", 0) );
   defaultSize.setHeight( config->readNumEntry("defaultheight", 0) );
 }
-
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
@@ -549,7 +581,8 @@ void TEDemo::font_menu_activated(int item)
 {
   assert(se);
 
-  if (item == 1000) {
+  if (item == 1000)
+  {
     KFontDialog::getFont(defaultFont, true);
     item = 0;
   }
@@ -568,13 +601,16 @@ void TEDemo::schema_menu_activated(int item)
 void TEDemo::setFont(int fontno)
 {
   QFont f;
-
   if (fontno == 0)
     f = defaultFont;
   else
+  if (fonts[fontno][0] == '-')
+    f.setRawName( fonts[fontno] );
+  else
+  {
     f.setFamily(fonts[fontno]);
-  if (fontno != 0)
     f.setRawMode( TRUE );
+  }
   if ( !f.exactMatch() && fontno != 0)
   {
     QString msg = i18n("Font `%1' not found.\nCheck README.linux.console for help.").arg(fonts[fontno]);
@@ -607,6 +643,14 @@ void TEDemo::setFrameVisible(bool visible)
                      : QFrame::NoFrame );
 }
 
+void TEDemo::setHistory(bool on)
+{
+HERE; printf("setting 'history' = %d in setHistory.\n",b_scroll);
+  b_scroll = on;
+  m_options->setItemChecked(3,b_scroll);
+  if (se) se->setHistory( b_scroll );
+}
+
 void TEDemo::setBsHack(bool bshack)
 {
   b_bshack = bshack;
@@ -631,6 +675,9 @@ void TEDemo::opt_menu_activated(int item)
             }
             break;
     case 2: setFrameVisible(!b_framevis);
+            break;
+    case 3: setHistory(!b_scroll);
+HERE; printf("setHistory' = %d in menu.\n",b_scroll);
             break;
     case 4: setBsHack(!b_bshack);
             break;
@@ -695,12 +742,12 @@ void TEDemo::about()
 {
     QString msg = i18n(
 	"%1 version %2 - an X terminal\n"
-	"\n"
-	"Copyright (c) 1998 by Lars Doelle <lars.doelle@on-line.de>\n"
+	"Copyright (c) 1997-1999 by\n"
+        "Lars Doelle <lars.doelle@on-line.de>\n"
 	"\n"
 	"This program is free software under the\n"
-	"terms of the Artistic License and comes\n"
-	"WITHOUT ANY WARRANTY.\n"
+        "terms of the GNU General Public License\n"
+	"and comes WITHOUT ANY WARRANTY.\n"
 	"See `LICENSE.readme´ for details.").arg(PACKAGE).arg(VERSION);
     KMessageBox::about( 0, msg);
 }
@@ -788,7 +835,7 @@ void TEDemo::newSession(int i)
   QString emu = co->readEntry("Term");
   QString sch = co->readEntry("Schema");
   QString txt = co->readEntry("Comment"); // not null
-  int     fno = QMIN(co->readUnsignedNumEntry("Font",se->fontNo()),7);
+  int     fno = QMIN(co->readUnsignedNumEntry("Font",se->fontNo()),TOPFONT);
 
   ColorSchema* schema = sch.isEmpty()
                       ? (ColorSchema*)NULL
@@ -810,6 +857,8 @@ void TEDemo::newSession(int i)
   s->setFontNo(fno);
   s->setSchemaNo(schmno);
   s->setTitle(txt.data());
+HERE; printf("setHistory' = %d in newSession.\n",b_scroll);
+  s->setHistory(b_scroll); //FIXME:FIXME:FIXME: take from schema
 
   addSession(s);
   runSession(s); // activate and run
@@ -914,7 +963,8 @@ void TEDemo::setSchema(const ColorSchema* s)
   te->setColorTable(s->table); //FIXME: set twice here to work around a bug
   
   if (s->usetransparency) {
-    rootxpm->checkAvailable(true);
+//FIXME: what is this?
+//  rootxpm->checkAvailable(true);
     rootxpm->setFadeEffect(s->tr_x, QColor(s->tr_r, s->tr_g, s->tr_b));
     rootxpm->start();
   } else {
@@ -940,7 +990,7 @@ static void usage()
    " -h ..................... This text\n"
    " -ls .................... Start login shell\n"
    " -nowelcome ............. Suppress greeting\n"
-   " -sl <number> ........... Save number lines in scroll-back buffer\n"
+   " -nohist ................ Do not save lines in scroll-back buffer\n"
    " -vt_sz CCxLL ........... terminal size in columns x lines \n"
    "\n"
    "Other options due to man:X(1x), Qt and KDE, among them:\n"
@@ -951,8 +1001,6 @@ static void usage()
   );
 }
 
-extern int maxHistLines;
-
 int main(int argc, char* argv[])
 {
   setuid(getuid()); setgid(getgid()); // drop privileges
@@ -960,6 +1008,7 @@ int main(int argc, char* argv[])
   // deal with shell/command ////////////////////////////
   int login_shell=0;
   int welcome=1;
+  int histon=1;
   const char* shell = getenv("SHELL");
   const char* wname = PACKAGE;
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
@@ -985,10 +1034,14 @@ int main(int argc, char* argv[])
       break;
     }
     if (!strcmp(argv[i],"-vt_sz") && i+1 < argc) sz = argv[++i];
-    if (!strcmp(argv[i],"-sl") && i+1 < argc)  {
+    if (!strcmp(argv[i],"-sl") && i+1 < argc)
+    {
+      fprintf(stderr, "konsole: -sl <lines> is obsolete.\n"
+                      "konsole: use -nohist for -sl 0.\n");
       QString a(argv[++i]);
-      maxHistLines = a.toInt();
+      if (!a.toInt()) histon = FALSE;
     }
+    if (!strcmp(argv[i],"-nohist")) histon = FALSE;
     if (!strcmp(argv[i],"-name") && i+1 < argc) wname = argv[++i];
     if (!strcmp(argv[i],"-ls") ) login_shell=1;
     if (!strcmp(argv[i],"-nowelcome")) welcome=0;
@@ -998,8 +1051,6 @@ int main(int argc, char* argv[])
     //FIXME: more: font, menu, scrollbar, schema, session ...
   }
   // ///////////////////////////////////////////////
-
-  putenv("COLORTERM="); //FIXME: for mc, which cannot detect color terminals
 
   int c = 0, l = 0;
   if ( (strcmp("", sz) != 0) )
@@ -1015,11 +1066,11 @@ int main(int argc, char* argv[])
     sessionconfig->setGroup("options");
     sessionconfig->readListEntry("konsolearguments", eargs);
     wname = sessionconfig->readEntry("class",wname).data();
-    RESTORE( TEDemo(wname,eargs,login_shell) )
+    RESTORE( TEDemo(wname,eargs,login_shell,histon) )
   }
   else
   {  
-    TEDemo*  m = new TEDemo(wname,eargs,login_shell);
+    TEDemo*  m = new TEDemo(wname,eargs,login_shell,histon);
     m->setColLin(c,l); // will use default height and width if called with (0,0)
 
     if (welcome)
@@ -1029,6 +1080,7 @@ int main(int argc, char* argv[])
     }
     m->show();
   }
+  
 
   return a.exec();
 }

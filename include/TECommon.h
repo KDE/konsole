@@ -64,10 +64,13 @@ typedef unsigned short UINT16;
 class ca
 {
 public:
-  inline ca(UINT8 _c, UINT8 _f, UINT8 _b, UINT8 _r)
+  inline ca(UINT16 _c = ' ',
+            UINT8 _f = DEFAULT_FORE_COLOR,
+            UINT8 _b = DEFAULT_BACK_COLOR,
+            UINT8 _r = DEFAULT_RENDITION)
        : c(_c), f(_f), b(_b), r(_r) {}
 public:
-  UINT8  c; // character
+  UINT16 c; // character
   UINT8  f; // foreground color
   UINT8  b; // background color
   UINT8  r; // rendition

@@ -39,7 +39,7 @@ class TEDemo : public KTMainWindow
 
 public:
 
-  TEDemo(const QString& name, QStrList & _args, int login_shell);
+  TEDemo(const QString& name, QStrList & _args, int login_shell, int histon);
   ~TEDemo();
   void setColLin(int columns, int lines);
 
@@ -88,6 +88,7 @@ private:
 
   void setMenuVisible(bool);
   void setFrameVisible(bool);
+  void setHistory(bool);
   void setBsHack(bool);
   
   void setSchema(const char* path);
@@ -117,6 +118,7 @@ private:
   QPopupMenu* m_drop;
 //
   bool        b_menuvis;
+  bool        b_scroll;
   bool        b_framevis;
   bool        b_bshack;
   int         n_font;

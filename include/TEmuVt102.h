@@ -18,6 +18,7 @@
 #include "TEmulation.h"
 #include <qtimer.h>
 #include <stdio.h>
+#include <qtextcodec.h>
 
 #define MODE_AppScreen (MODES_SCREEN+0)
 #define MODE_AppCuKeys (MODES_SCREEN+1)
@@ -32,6 +33,22 @@ struct DECpar
   BOOL mode[MODE_total];
 };
 
+//FIXME: this is a first step to move the encoding
+//       material from the screen to the emulation
+//       layer. It is far from being done.
+struct CharCodes
+{
+  // coding info
+  char charset[4]; //
+  int  cu_cs;      // actual charset.
+  bool graphic;    // Some VT100 tricks
+  bool pound  ;    // Some VT100 tricks
+  bool sa_graphic; // now in emulation
+  bool sa_pound;   // now in emulation
+  bool useUTF8;    // With some care, this might be handled
+                   // by QTextCodec allone.
+};
+
 class VT102Emulation : public Emulation // QObject
 { Q_OBJECT
 
@@ -39,6 +56,9 @@ public:
 
   VT102Emulation(TEWidget* gui, const char* term);
   ~VT102Emulation();
+
+public:
+  void setHistory(bool on);
 
 public slots: // signals incoming from TEWidget
  
@@ -53,6 +73,7 @@ public:
 
   void tableInit();
   void onRcvByte(int);
+  void processCharacter(int cc);
   void reset();
   void resetTerminal();
   void sendString(const char *);
@@ -77,7 +98,7 @@ public:
 private:
 
 #define MAXPBUF 80
-  unsigned char pbuf[MAXPBUF]; //FIXME: overflow!
+  int pbuf[MAXPBUF]; //FIXME: overflow!
   int ppos;
 #define MAXARGS 15
   int argv[MAXARGS];
@@ -107,8 +128,23 @@ protected:
   TEScreen* screen[2];   // 0 = primary, 1 = alternate
   void setScreen(int n); // set `scr' to `screen[n]'
 
+  CharCodes charset[2];    //FIXME: not used, yet.
+  void setCharsetX(int n, int cs);
+  void setAndUseCharset(int n, int cs);
+  void useCharset(int n);
+  void saveCursor();
+  void restoreCursor();
+  unsigned short applyCharmap(unsigned short c);
+  void ShowCharacter(int c);
+
+  void setCodec(int c); // codec number, 0 = locale, 1=utf8
+
   DECpar currParm;
   DECpar saveParm;
+
+  QTextCodec* codec;
+  QTextCodec* localeCodec;
+  QTextDecoder* decoder;
 };
 
 #endif // ifndef ANSIEMU_H

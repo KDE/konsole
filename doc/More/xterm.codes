@@ -112,17 +112,17 @@ x              7               Negative Image
                25         (A)  Not Blinking
                27         (A)  Positive Image
 
-               3x         (A)  Foreground Color x
-               4x         (A)  Background Color x
-                x = 0     (A)  Black
-                    1     (A)  Red
-                    2     (A)  Green
-                    3     (A)  Yellow
-                    4     (A)  Blue
-                    5     (A)  Magenta
-                    6     (A)  Cyan
-                    7     (A)  White
-                    9     (A)  Default
+x              3x         (A)  Foreground Color x
+x              4x         (A)  Background Color x
+x               x = 0     (A)  Black
+x                   1     (A)  Red
+x                   2     (A)  Green
+x                   3     (A)  Yellow
+x                   4     (A)  Blue
+x                   5     (A)  Magenta
+x                   6     (A)  Cyan
+x                   7     (A)  White
+x                   9     (A)  Default
 
 x   ESC [ 6 n                  Send Device Report
 x         Ps = 5               Send Status report           (ESC [ 0 n)

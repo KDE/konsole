@@ -62,10 +62,9 @@ TEScreen::TEScreen(int lines, int columns)
 
   image      = (ca*) malloc(lines*columns*sizeof(ca));
   tabstops   = NULL; initTabStops();
-  histBuffer = NULL;
-  histLines  = 0;
+
   histCursor = 0;
-  histMaxLines = 0;
+
   clearSelection();
   reset();
 }
@@ -188,7 +187,7 @@ void TEScreen::index()
   //FIXME: below bmargin?
   if (cuY >= bmargin)
   {
-    if (tmargin == 0 && bmargin == lines-1) addHistLine(); // history
+    if (tmargin == 0 && bmargin == lines-1) addHistLine(); // hist.history
     scrollUp(tmargin,1);
   } 
   else
@@ -339,13 +338,9 @@ void TEScreen::saveCursor()
 {
   sa_cuX     = cuX;
   sa_cuY     = cuY;
-  sa_graphic = graphic;
-  sa_pound   = pound;
   sa_cu_re   = cu_re;
   sa_cu_fg   = cu_fg;
   sa_cu_bg   = cu_bg;
-  // FIXME: Character set info: sa_charset = charsets[cScreen->charset];
-  //                            sa_charset_num = cScreen->charset;
 }
 
 /*! Restore the cursor position and the rendition attribute settings. */
@@ -354,13 +349,9 @@ void TEScreen::restoreCursor()
 {
   cuX     = QMIN(sa_cuX,columns-1);
   cuY     = QMIN(sa_cuY,lines-1);
-  graphic = sa_graphic;
-  pound   = sa_pound;
   cu_re   = sa_cu_re;
   cu_fg   = sa_cu_fg;
   cu_bg   = sa_cu_bg;
-  // FIXME: Character set info: sa_charset = charsets[cScreen->charset];
-  //                            sa_charset_num = cScreen->charset;
   effectiveRendition();
 }
 
@@ -382,7 +373,7 @@ void TEScreen::restoreCursor()
 
 void TEScreen::resizeImage(int new_lines, int new_columns)
 {
-//FIXME: evtl. transfer from/to history buffer
+//FIXME: evtl. transfer from/to hist.history buffer
 
   // make new image
   ca* newimg = (ca*)malloc(new_lines*new_columns*sizeof(ca));
@@ -497,15 +488,14 @@ ca* TEScreen::getCookedImage()
   ca* merged = (ca*)malloc(lines*columns*sizeof(ca));
   ca dft(' ',DEFAULT_FORE_COLOR,DEFAULT_BACK_COLOR,DEFAULT_RENDITION);
 
-  for (y = 0; (y < lines) && (y < (histLines-histCursor)); y++)
+  for (y = 0; (y < lines) && (y < (hist.getLines()-histCursor)); y++)
   {
-    int len = QMIN(columns,histBuffer[y+histCursor]->len);
-    ca* img = histBuffer[y+histCursor]->line;
+    int len = QMIN(columns,hist.getLineLen(y+histCursor));
     
     for (x = 0; x < len; x++) 
     {   int p=x + y*columns;
         int q=x + (y+histCursor)*columns;
-        merged[p] = img[x];
+        merged[p] = hist.getCell(y+histCursor,x);
         if ( ( q >= sel_TL ) && ( q <= sel_BR ) )
           reverseRendition(&merged[p]); // for selection
     }
@@ -517,14 +507,14 @@ ca* TEScreen::getCookedImage()
           reverseRendition(&merged[p]); // for selection
     }
   }
-  if (lines >= histLines-histCursor)
+  if (lines >= hist.getLines()-histCursor)
   {
-    for (y = (histLines-histCursor); y < lines ; y++)
+    for (y = (hist.getLines()-histCursor); y < lines ; y++)
     {
        for (x = 0; x < columns; x++) 
        { int p = x + y * columns;
          int q = x + (y+histCursor)*columns;
-         int r = x + (y-histLines+histCursor)*columns;
+         int r = x + (y-hist.getLines()+histCursor)*columns;
          merged[p] = image[r];
          if ( q >= sel_TL && q <= sel_BR )
            reverseRendition(&merged[p]); // for selection
@@ -538,8 +528,8 @@ ca* TEScreen::getCookedImage()
     for (i = 0; i < n; i++)
       reverseRendition(&merged[i]); // for reverse display
   }
-  if (getMode(MODE_Cursor) && (cuY+(histLines-histCursor) < lines)) // cursor visible
-    reverseRendition(&merged[loc(cuX,cuY+(histLines-histCursor))]);
+  if (getMode(MODE_Cursor) && (cuY+(hist.getLines()-histCursor) < lines)) // cursor visible
+    reverseRendition(&merged[loc(cuX,cuY+(hist.getLines()-histCursor))]);
   return merged;
 }
 
@@ -551,18 +541,13 @@ void TEScreen::reset()
 {
     setMode(MODE_Wrap  ); saveMode(MODE_Wrap  );  // wrap at end of margin
   resetMode(MODE_Origin); saveMode(MODE_Origin);  // position refere to [1,1]
-  resetMode(MODE_Insert); saveMode(MODE_Origin);  // overstroke
+  resetMode(MODE_Insert); saveMode(MODE_Insert);  // overstroke
     setMode(MODE_Cursor);                         // cursor visible
   resetMode(MODE_Screen);                         // screen not inverse
   resetMode(MODE_NewLine);
 
   tmargin=0;
   bmargin=lines-1;
-
-  cu_cs   = 0;
-  strncpy(charset,"BBBB",4);
-  graphic = FALSE;
-  pound   = FALSE;
 
   setDefaultRendition();
   saveCursor();
@@ -636,29 +621,29 @@ void TEScreen::NewLine()
     with the *first* character that would fall onto the next line (xenl).
 */
 
-void TEScreen::ShowCharacter(unsigned char c)
+void TEScreen::checkSelection(int from, int to)
 {
+  if ( from+histCursor*columns <= sel_BR && to+histCursor*columns >= sel_TL)
+    clearSelection();
+}
 
-  // if (xenl)
+void TEScreen::ShowCharacter(unsigned short c)
+{
+  // Note that VT100 does wrapping BEFORE putting the character.
+  // This has impact on the assumption of valid cursor positions.
+  // We indicate the fact that a newline has to be triggered by
+  // putting the cursor one right to the last column of the screen.
+
   if (cuX >= columns)
   {
     if (getMode(MODE_Wrap)) NextLine(); else cuX = columns-1;
   }
 
-  if (graphic) // handle graphical character set here
-  {
-    if (c >= 0x5f && c <= 0x7e) c = (c == 0x5f) ? 0x7f : c - 0x5f;
-    //FIXME: the linux console knows some non-VT100 chars, too.
-  }
-  if (pound && c == '#') c = 0xa3; // pound sign
-
   if (getMode(MODE_Insert)) insertChars(1);
 
-  int i = loc(cuX,cuY) ;
+  int i = loc(cuX,cuY);
 
-  if ( ((i+histCursor*columns)<=sel_BR) &&
-       ((i+histCursor*columns)>=sel_TL) && 
-       c != image[i].c                     ) clearSelection();
+  checkSelection(i, i); // check if selection is still valid.
 
   image[i].c = c;
   image[i].f = ef_fg;
@@ -666,49 +651,6 @@ void TEScreen::ShowCharacter(unsigned char c)
   image[i].r = ef_re;
 
   cuX += 1;
-
-  //FIXME: VT100 wrapping is more complicated then i first thought.
-  //       It does not happen after, but before the character is put.
-  //       This has impact on the assumption of valid cursor positions.
-  //       We indicate the fact that a newline has to be triggered by
-  //       putting the cursor one right to the last column of the screen.
-  // Further, other emulations (ansi.sys) might be more straight, so
-  // the actual processing should be made dependend on a flag (xenl).
-
-  // if (!xenl)
-  // if (cuX >= columns)
-  // {
-  //   if (getMode(MODE_Wrap)) NextLine(); else cuX = columns-1;
-  // }
-
-}
-
-/*!
-*/
-
-void TEScreen::setCharset(int n, int cs)
-{
-  charset[n&3] = cs;
-  useCharset(cu_cs);
-}
-
-/*!
-*/
-
-void TEScreen::setAndUseCharset(int n, int cs)
-{
-  charset[n&3] = cs;
-  useCharset(n&3);
-}
-
-/*!
-*/
-
-void TEScreen::useCharset(int n)
-{
-  cu_cs   = n&3;
-  graphic = (charset[n&3] == '0');
-  pound   = (charset[n&3] == 'A');
 }
 
 // Region commands -------------------------------------------------------------
@@ -726,7 +668,7 @@ void TEScreen::scrollUp(int from, int n)
   moveImage(loc(0,from),loc(0,from+n),loc(columns-1,bmargin));
   clearImage(loc(0,bmargin-n+1),loc(columns-1,bmargin),' ');
   
-  if ( from == 0 && sel_begin >= 0) //FIXME: && lines scroll into the history buffer
+  if ( from == 0 && sel_begin >= 0) //FIXME: && lines scroll into the hist.history buffer
                                     //FIXME: condition is not ok.
   {
       sel_TL -= (n-from)*columns;
@@ -1038,7 +980,7 @@ char *TEScreen::getSelText(const BOOL preserve_line_breaks)
 {
   char *m;  	// buffer to fill.
   int s,d; 	// source index, dest. index.
-  int hist_BR=loc(0,histLines-1);
+  int hist_BR=loc(0,hist.getLines()-1);
   int hY = sel_TL / columns ;
   int hX = sel_TL % columns;
   int eol;	// end of line
@@ -1053,19 +995,19 @@ char *TEScreen::getSelText(const BOOL preserve_line_breaks)
   while ( s <= sel_BR )
   {
     if ( s < hist_BR+columns )
-    { 	// get lines from history buffer.
-      eol=histBuffer[hY]->len;
+    { 	// get lines from hist.history buffer.
+      eol=hist.getLineLen(hY);
       if  ((hY == (sel_BR/columns)) && (eol >= (sel_BR%columns)) ) eol=sel_BR%columns+1;
       while ( hX < eol )
       { 
-         m[d++] = histBuffer[hY]->line[hX++].c; 
+         m[d++] = hist.getCell(hY,hX++).c; 
          s++;
       }
 
       // see below for end of line processing...
       if ( s <= sel_BR ) {
 	if ( (eol+1)%columns == 0) {
-	    if (histBuffer[hY]->line[columns-1].c == ' ') { m[d++]=' '; }
+	    if (hist.getCell(hY,columns-1).c == ' ') { m[d++]=' '; }
 	} 
         else {
 		m[d++]=((preserve_line_breaks||(eol%columns==0))?'\n':' ');   
@@ -1128,52 +1070,60 @@ FIXME:
 
 */
 
-/* ------------------------------------------------------------------------- */
-/*                                                                           */
-/*                                History Buffer                             */
-/*                                                                           */
-/* ------------------------------------------------------------------------- */
- 
-void TEScreen::setHistMaxLines(int maxlines)
-// set history buffer size
-{
-  if (maxlines < histMaxLines) return; //FIXME: handle decrease
-  histMaxLines = maxlines;
-}
-
 void TEScreen::addHistLine()
-{ int x; histLine* line; int end = columns-1;
-  ca dft(' ',DEFAULT_FORE_COLOR,DEFAULT_BACK_COLOR,DEFAULT_RENDITION);
-
-  if (histMaxLines == 0) return; // no buffer
-
-  // extract 1st line
-  while (end >= 0 && image[end] == dft) end -= 1;
-  line = (histLine*) malloc(sizeof(histLine)+sizeof(ca)*(end+1-1));
-  for (x = 0; x <= end; x++) line->line[x] = image[loc(x,0)];
-  line->len = end+1;
+{
+  assert(hasScroll() || histCursor == 0);
 
   // add to hist buffer
-  if (histLines >= histMaxLines) 
-  { int i;
-    free(histBuffer[0]);
-    for (i = 1; i < histLines; i++) histBuffer[i-1] = histBuffer[i];
-    if (histCursor == 0) histCursor = histLines; // revert to non-hist.
-    histCursor -= (histLines != histCursor);
-  }
-  else
-  {
-    histCursor += (histLines == histCursor);
-    histLines  += 1;
-    histBuffer  = (histLine**)realloc(histBuffer,sizeof(histLine*)*histLines);
+  // we have to take care about scrolling, too...
 
-    // correct selection 
+  if (hasScroll())
+  { ca dft;
+
+    int end = columns-1;
+    while (end >= 0 && image[end] == dft)
+      end -= 1;
+
+    for (int i = 0; i <= end; i++)
+      hist.addCell(image[i]);
+    hist.addLine();
+
+    // adjust history cursor 
+    histCursor += (hist.getLines()-1 == histCursor);
+
+    // adjust selection 
     if (sel_TL > 0 ) 
     {
-      sel_TL += columns;
-      sel_BR += columns;
+      sel_TL    += columns;
+      sel_BR    += columns;
       sel_begin += columns;
     }
   }
-  histBuffer[histLines-1] = line;
+}
+
+void TEScreen::setHistCursor(int cursor)
+{ 
+  histCursor = cursor; //FIXME:rangecheck
+}
+
+int TEScreen::getHistCursor()
+{
+  return histCursor;
+}
+
+int TEScreen::getHistLines()
+{
+  return hist.getLines();
+}
+
+void TEScreen::setScroll(bool on)
+{
+  histCursor = 0;
+  clearSelection();
+  hist.setScroll(on);
+}
+
+bool TEScreen::hasScroll()
+{
+  return hist.hasScroll();
 }

@@ -78,7 +78,7 @@ protected:
     bool eventFilter( QObject *, QEvent * );
 
     void drawAttrStr(QPainter &paint, QRect rect, 
-                     char* str, int len, ca attr, BOOL pm, BOOL clear);
+                     QChar* str, int len, ca attr, BOOL pm, BOOL clear);
     void paintEvent( QPaintEvent * );
 
     void resizeEvent(QResizeEvent*);
@@ -115,6 +115,7 @@ protected slots:
 
 private:
     
+    bool iso10646;   // ISO 10646 font.
     bool fixed_font; // has fixed pitch
     int  font_h;     // height
     int  font_w;     // width

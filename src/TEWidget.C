@@ -189,9 +189,74 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
     attributed string draw primitive
 */
 
-void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
-                           char* str, int len, ca attr, BOOL pm, BOOL clear)
+/* The font coding madness strikes again ...
+
+   Now the usual xterm fonts have the VT100 graphical
+   characters at 0x00 .. 0x1f. QT's iso mapping leaves
+   0x00 .. 0x7f without any changes. But the graphicals
+   come in here as proper unicode characters.
+
+   We treat non-iso10646 fonts as VT100 extended
+   and do the requiered mapping from unicode to
+   0x00 .. 0x1f. The remaining translation is then
+   left to the QCodec.
+
+   NOTE that the below table has to be kept in sync
+   with TEmuVt102::vt100_graphics.
+*/
+
+static QChar iso8858vt100extended(QChar c)
 {
+  switch (c.unicode())
+  {
+    case 0x25c6 : return  1;
+    case 0x2592 : return  2;
+    case 0x2409 : return  3;
+    case 0x240c : return  4;
+    case 0x240d : return  5;
+    case 0x240a : return  6;
+    case 0x00b0 : return  7;
+    case 0x00b1 : return  8;
+    case 0x2424 : return  9;
+    case 0x240b : return 10;
+    case 0x2518 : return 11;
+    case 0x2510 : return 12;
+    case 0x250c : return 13;
+    case 0x2514 : return 14;
+    case 0x253c : return 15;
+    case 0xf800 : return 16;
+    case 0xf801 : return 17;
+    case 0x2500 : return 18;
+    case 0xf803 : return 19;
+    case 0xf804 : return 20;
+    case 0x251c : return 21;
+    case 0x2524 : return 22;
+    case 0x2534 : return 23;
+    case 0x252c : return 24;
+    case 0x2502 : return 25;
+    case 0x2264 : return 26;
+    case 0x2265 : return 27;
+    case 0x03c0 : return 28;
+    case 0x2260 : return 29;
+    case 0x00a3 : return 30;
+    case 0x00b7 : return 31;
+  }
+  return c;
+}
+
+void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
+                           QChar* str, int len, ca attr, BOOL pm, BOOL clear)
+{
+  if (!iso10646)
+  {
+    // an optional conversion step is put in here.
+    // basically, we have to apply a partial unicode to
+    // "VT100 extended" ISO conversion.
+    for (int i = 0; i < len; i++)
+      str[i] = iso8858vt100extended(str[i]);
+  }
+  QString unistr(str,len);
+
   if (pm && color_table[attr.b].transparent)
   {
     paint.setBackgroundMode( TransparentMode );
@@ -210,14 +275,14 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
   if (!(blinking && (attr.r & RE_BLINK)))
   {
     paint.setPen(color_table[attr.f].color); 
-    paint.drawText(rect.x(),rect.y()+font_a, str,len);
+    paint.drawText(rect.x(),rect.y()+font_a, unistr);
     if ((attr.r & RE_UNDERLINE) || color_table[attr.f].bold)
     {
       paint.setClipRect(rect);
       if (color_table[attr.f].bold)
       {
         paint.setBackgroundMode( TransparentMode );
-        paint.drawText(rect.x()+1,rect.y()+font_a, str,len);
+        paint.drawText(rect.x()+1,rect.y()+font_a, unistr);
       }
       if (attr.r & RE_UNDERLINE)
         paint.drawLine(rect.left(), rect.y()+font_a+1,
@@ -252,7 +317,7 @@ HCNT("setImage");
   
   int lins = QMIN(this->lines,  QMAX(0,lines  ));
   int cols = QMIN(this->columns,QMAX(0,columns));
-  char *disstr = new char[cols];
+  QChar *disstrU = new QChar[cols];
 
 //{ static int cnt = 0; printf("setImage %d\n",cnt++); }
   for (y = 0; y < lins; y++)
@@ -269,17 +334,17 @@ HCNT("setImage");
         cb = ext[x].b; 
         if (ext[x].f != cf) cf = ext[x].f;
         int lln = cols - x;
-        disstr[0] = ext[x+0].c;
+        disstrU[0] = ext[x+0].c;
         for (len = 1; len < lln; len++)
         {
           if (ext[x+len].f != cf || ext[x+len].b != cb || ext[x+len].r != cr ||
               ext[x+len] == lcl[x+len] )
             break;
-          disstr[len] = ext[x+len].c;
+          disstrU[len] = ext[x+len].c;
         }
         drawAttrStr(paint, 
                     QRect(blX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
-                    disstr, len, ext[x], pm != NULL, true);
+                    disstrU, len, ext[x], pm != NULL, true);
         x += len - 1;
       }
     }
@@ -291,7 +356,7 @@ HCNT("setImage");
   setUpdatesEnabled(TRUE);
   if ( hasBlinker && !blinkT->isActive()) blinkT->start(1000); // 1000 ms
   if (!hasBlinker &&  blinkT->isActive()) { blinkT->stop(); blinking = FALSE; }
-  delete disstr;
+  delete disstrU;
 }
 
 // paint Event ////////////////////////////////////////////////////
@@ -320,9 +385,7 @@ HCNT("paintEvent");
   // can thus be larger than the image, but less then the size
   // of one character.
 
-  // FIXME: explain/change 'rounding' style
-
- QRect rect = pe->rect().intersect(contentsRect());
+  QRect rect = pe->rect().intersect(contentsRect());
 
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
@@ -344,8 +407,10 @@ HCNT("paintEvent");
 
   for (int y = luy; y <= rly; y++)
   for (int x = lux; x <= rlx; x++)
-  { char *disstr = new char[columns]; int len = 1;
-    disstr[0] = image[loc(x,y)].c; 
+  { 
+    QChar *disstrU = new QChar[columns];
+    int len = 1;
+    disstrU[0] = image[loc(x,y)].c; 
     int cf = image[loc(x,y)].f;
     int cb = image[loc(x,y)].b;
     int cr = image[loc(x,y)].r;
@@ -354,13 +419,14 @@ HCNT("paintEvent");
            image[loc(x+len,y)].b == cb &&
            image[loc(x+len,y)].r == cr )
     {
-      disstr[len] = image[loc(x+len,y)].c; len += 1;
+      disstrU[len] = image[loc(x+len,y)].c;
+      len += 1;
     }
     drawAttrStr(paint, 
                 QRect(blX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
-                disstr, len, image[loc(x,y)], pm != NULL, false);
+                disstrU, len, image[loc(x,y)], pm != NULL, false);
     x += len - 1;
-    delete disstr;
+    delete disstrU;
   }
   drawFrame( &paint );
   paint.end();
@@ -484,7 +550,7 @@ void TEWidget::setScrollbarLocation(int loc)
 
 void TEWidget::mousePressEvent(QMouseEvent* ev)
 {
-// printf("press [%d,%d] %d\n",ev->x()/font_w,ev->y()/font_h,ev->button());
+printf("press [%d,%d] %d\n",ev->x()/font_w,ev->y()/font_h,ev->button());
   if ( !contentsRect().contains(ev->pos()) ) return;
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
@@ -820,6 +886,14 @@ void TEWidget::fontChange(const QFont &)
   font_h = fontMetrics().height();
   font_w = fontMetrics().maxWidth();
   font_a = fontMetrics().ascent();
+HERE;
+printf("font_h: %d\n",font_h);
+printf("font_w: %d\n",font_w);
+printf("font_a: %d\n",font_a);
+printf("charset: %s\n",QFont::encodingName(font().charSet()).ascii());
+printf("rawname: %s\n",font().rawName().ascii());
+
+  iso10646 = !strcmp(QFont::encodingName(font().charSet()).ascii(),"iso10646");
   propagateSize();
   update();
 }

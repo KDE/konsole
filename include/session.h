@@ -42,7 +42,9 @@ public:
   int fontNo();
   const char* emuName();
   const char* Title();
+  bool history();
 
+  void setHistory(bool on);
   void setSchemaNo(int sn);
   void setFontNo(int fn);
   void setTitle(const char* title);

@@ -1,3 +1,10 @@
+ 7 Jan 2000
+- added unicode support. (see README.unicode)
+- added arbitrary long history buffers.
+- code adjustments to the provide linux console font.
+- added font directory to simply installation.
+- added recognition for ESC[>c
+- changed TERM=xterm-color
  1 Aug 1999
 - added kwrited to provide utmp support. (see README.utmp)
 11 July 1999

@@ -26,6 +26,10 @@ public:
   Emulation(TEWidget* gui);
   ~Emulation();
 
+public:
+  virtual void setHistory(bool on);
+  virtual bool history();
+
 public slots: // signals incoming from TEWidget
 
   virtual void onImageSizeChange(int lines, int columns);

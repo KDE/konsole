@@ -24,13 +24,13 @@
    \sa TEWidget \sa TEScreen
 */
 
+//NOTE: search for 'NotImplemented' and IGNORED to find unimplemented features.
+
 /* FIXME
    - For strange reasons, the extend of the rendition attributes ranges over
      all screens and not over the actual screen. We have to find out the
      precise extend.
 */
-//NOTE: search for 'NotImplemented' and IGNORED to find unimplemented features.
-//TODO: we have no means yet, to change the emulation on the fly.
 
 #include "TEmuVt102.h"
 #include "TEWidget.h"
@@ -39,6 +39,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <qkeycode.h>
+#include <qtextcodec.h>
 
 #include <assert.h>
 
@@ -59,15 +60,10 @@
 /*!
 */
 
-int maxHistLines = 2000;
-//#define MAXHISTLINES 100 // natural constant for now.
-
 VT102Emulation::VT102Emulation(TEWidget* gui, const char* term) : Emulation(gui)
 {
   screen[0] = scr;
-  screen[0]->setHistMaxLines(maxHistLines);
   screen[1] = new TEScreen(gui->Lines(),gui->Columns());
-  // note that the application screen has not history buffer.
 
   QObject::connect(gui,SIGNAL(mouseSignal(int,int,int)),
                    this,SLOT(onMouse(int,int,int)));
@@ -76,6 +72,12 @@ VT102Emulation::VT102Emulation(TEWidget* gui, const char* term) : Emulation(gui)
   resetTerminal();
   setMode(MODE_BsHack);
   emulation = term;
+  decoder = (QTextDecoder*)NULL;
+
+  localeCodec = (!strcmp(term,"linux"))
+              ? QTextCodec::loadCharmapFile("cp437.charmap") :
+              QTextCodec::codecForLocale();
+  setCodec(0);
 }
 
 void VT102Emulation::resetTerminal()
@@ -90,7 +92,22 @@ void VT102Emulation::resetTerminal()
     setMode(MODE_Ansi);
 
   screen[0]->reset();
+
+  charset[0].cu_cs   = 0;
+  strncpy(charset[0].charset,"BBBB",4);
+  charset[0].sa_graphic = FALSE;
+  charset[0].sa_pound   = FALSE;
+  charset[0].graphic = FALSE;
+  charset[0].pound   = FALSE;
+
   screen[1]->reset();
+
+  charset[1].cu_cs   = 0;
+  strncpy(charset[1].charset,"BBBB",4);
+  charset[1].sa_graphic = FALSE;
+  charset[1].sa_pound   = FALSE;
+  charset[1].graphic = FALSE;
+  charset[1].pound   = FALSE;
 }
 
 /*!
@@ -132,7 +149,7 @@ void VT102Emulation::setColumns(int columns)
    - CHR        - Printable characters     (32..255 but DEL (=127))
    - CTL        - Control characters       (0..31 but ESC (= 27), DEL)
    - ESC        - Escape codes of the form <ESC><CHR but `[]()+*#'>
-   - ESC_DE     - Escape codes of the form <ESC><any of `()+*#'> C
+   - ESC_DE     - Escape codes of the form <ESC><any of `()+*#%'> C
    - CSI_PN     - Escape codes of the form <ESC>'['     {Pn} ';' {Pn} C
    - CSI_PS     - Escape codes of the form <ESC>'['     {Pn} ';' ...  C
    - CSI_PR     - Escape codes of the form <ESC>'[' '?' {Pn} ';' ...  C
@@ -155,7 +172,7 @@ void VT102Emulation::setColumns(int columns)
 #define TY_CHR___(   )  TY_CONSTR(0,0,0)
 #define TY_CTL___(A  )  TY_CONSTR(1,A,0)
 #define TY_ESC___(A  )  TY_CONSTR(2,A,0)
-#define TY_ESC_CS(   )  TY_CONSTR(3,0,0)
+#define TY_ESC_CS(A,B)  TY_CONSTR(3,A,B)
 #define TY_ESC_DE(A  )  TY_CONSTR(4,A,0)
 #define TY_CSI_PS(A,N)  TY_CONSTR(5,A,N)
 #define TY_CSI_PN(A  )  TY_CONSTR(6,A,0)
@@ -173,7 +190,8 @@ void VT102Emulation::tau( int code, int p, int q )
 //printf("tau(%d,%d,%d, %d,%d)\n",(code>>0)&0xff,(code>>8)&0xff,(code>>16)&0xffff,p,q);
   switch (code)
   {
-    case TY_CHR___(         ) : scr->ShowCharacter        (p         ); break; //VT100
+
+    case TY_CHR___(         ) :      ShowCharacter        (p         ); break; //UTF16
 
     //FIXME:       127 DEL    : ignored on input?
 
@@ -191,19 +209,21 @@ void VT102Emulation::tau( int code, int p, int q )
     case TY_CTL___(CNTL('K')) :      NewLine              (          ); break; //VT100
     case TY_CTL___(CNTL('L')) :      NewLine              (          ); break; //VT100
     case TY_CTL___(CNTL('M')) : scr->Return               (          ); break; //VT100
-    case TY_CTL___(CNTL('N')) : scr->useCharset           (         1); break; //VT100
-    case TY_CTL___(CNTL('O')) : scr->useCharset           (         0); break; //VT100
+
+    case TY_CTL___(CNTL('N')) :      useCharset           (         1); break; //VT100
+    case TY_CTL___(CNTL('O')) :      useCharset           (         0); break; //VT100
+
     case TY_CTL___(CNTL('P')) : /* DLE: ignored                      */ break;
-    case TY_CTL___(CNTL('Q')) : /* DC1: FIXME: XON continue          */ break; //VT100
+    case TY_CTL___(CNTL('Q')) : /* DC1: XON continue                 */ break; //VT100
     case TY_CTL___(CNTL('R')) : /* DC2: ignored                      */ break;
     case TY_CTL___(CNTL('S')) : /* DC3: XOFF halt                    */ break; //VT100
     case TY_CTL___(CNTL('T')) : /* DC4: ignored                      */ break;
     case TY_CTL___(CNTL('U')) : /* NAK: ignored                      */ break;
     case TY_CTL___(CNTL('V')) : /* SYN: ignored                      */ break;
     case TY_CTL___(CNTL('W')) : /* ETB: ignored                      */ break;
-    case TY_CTL___(CNTL('X')) : scr->ShowCharacter        (         2); break; //VT100
+    case TY_CTL___(CNTL('X')) :      ShowCharacter        (    0x2592); break; //VT100
     case TY_CTL___(CNTL('Y')) : /* EM : ignored                      */ break;
-    case TY_CTL___(CNTL('Z')) : scr->ShowCharacter        (         2); break; //VT100
+    case TY_CTL___(CNTL('Z')) :      ShowCharacter        (    0x2592); break; //VT100
     case TY_CTL___(CNTL('[')) : /* ESC: cannot be seen here.         */ break;
     case TY_CTL___(CNTL('\\')): /* FS : ignored                      */ break;
     case TY_CTL___(CNTL(']')) : /* GS : ignored                      */ break;
@@ -216,15 +236,34 @@ void VT102Emulation::tau( int code, int p, int q )
     case TY_ESC___('M'      ) : scr->reverseIndex         (          ); break; //VT100
     case TY_ESC___('Z'      ) :      reportTerminalType   (          ); break;
     case TY_ESC___('c'      ) :      resetTerminal        (          ); break;
-    case TY_ESC___('n'      ) : scr->useCharset           (         2); break;
-    case TY_ESC___('o'      ) : scr->useCharset           (         3); break;
-    case TY_ESC___('7'      ) : scr->saveCursor           (          ); break;
-    case TY_ESC___('8'      ) : scr->restoreCursor        (          ); break;
+
+    case TY_ESC___('n'      ) :      useCharset           (         2); break;
+    case TY_ESC___('o'      ) :      useCharset           (         3); break;
+    case TY_ESC___('7'      ) :      saveCursor           (          ); break;
+    case TY_ESC___('8'      ) :      restoreCursor        (          ); break;
+
     case TY_ESC___('='      ) :          setMode      (MODE_AppKeyPad); break;
     case TY_ESC___('>'      ) :        resetMode      (MODE_AppKeyPad); break;
     case TY_ESC___('<'      ) :          setMode      (MODE_Ansi     ); break; //VT100
 
-    case TY_ESC_CS(         ) :      setCharset           (p-'(',   q); break; //VT100
+    case TY_ESC_CS('(',  '0') :      setCharset           (0,     '0'); break; //VT100
+    case TY_ESC_CS('(',  'A') :      setCharset           (0,     'A'); break; //VT100
+    case TY_ESC_CS('(',  'B') :      setCharset           (0,     'B'); break; //VT100
+
+    case TY_ESC_CS(')',  '0') :      setCharset           (1,     '0'); break; //VT100
+    case TY_ESC_CS(')',  'A') :      setCharset           (1,     'A'); break; //VT100
+    case TY_ESC_CS(')',  'B') :      setCharset           (1,     'B'); break; //VT100
+
+    case TY_ESC_CS('*',  '0') :      setCharset           (2,     '0'); break; //VT100
+    case TY_ESC_CS('*',  'A') :      setCharset           (2,     'A'); break; //VT100
+    case TY_ESC_CS('*',  'B') :      setCharset           (2,     'B'); break; //VT100
+
+    case TY_ESC_CS('+',  '0') :      setCharset           (3,     '0'); break; //VT100
+    case TY_ESC_CS('+',  'A') :      setCharset           (3,     'A'); break; //VT100
+    case TY_ESC_CS('+',  'B') :      setCharset           (3,     'B'); break; //VT100
+
+    case TY_ESC_CS('%',  'G') :      setCodec             (1         ); break; //LINUX
+    case TY_ESC_CS('%',  '@') :      setCodec             (0         ); break; //LINUX
 
     case TY_ESC_DE('3'      ) : /* IGNORED: double high, top half    */ break;
     case TY_ESC_DE('4'      ) : /* IGNORED: double high, bottom half */ break;
@@ -242,7 +281,7 @@ void VT102Emulation::tau( int code, int p, int q )
     case TY_CSI_PS('g',    3) : scr->clearTabStops        (          ); break; //VT100
     case TY_CSI_PS('h',    4) : scr->    setMode      (MODE_Insert   ); break;
     case TY_CSI_PS('h',   20) :          setMode      (MODE_NewLine  ); break;
-    case TY_CSI_PS('i',    0) : /*                                   */ break; //VT100
+    case TY_CSI_PS('i',    0) : /* IGNORE: attached printer          */ break; //VT100
     case TY_CSI_PS('l',    4) : scr->  resetMode      (MODE_Insert   ); break;
     case TY_CSI_PS('l',   20) :        resetMode      (MODE_NewLine  ); break;
 
@@ -324,54 +363,75 @@ void VT102Emulation::tau( int code, int p, int q )
     case TY_CSI_PN('r'      ) : scr->setMargins           (p,       q); break; //VT100
     case TY_CSI_PN('y'      ) : /* IGNORED: Confidence test          */ break; //VT100
 
-    //FIXME: experimental, evtl. we can shrink this a little. (hlsr as parm?)
     case TY_CSI_PR('h',    1) :          setMode      (MODE_AppCuKeys); break; //VT100
     case TY_CSI_PR('l',    1) :        resetMode      (MODE_AppCuKeys); break; //VT100
     case TY_CSI_PR('s',    1) :         saveMode      (MODE_AppCuKeys); break; //FIXME
     case TY_CSI_PR('r',    1) :      restoreMode      (MODE_AppCuKeys); break; //FIXME
+
     case TY_CSI_PR('l',    2) :        resetMode      (MODE_Ansi     ); break; //VT100
+
     case TY_CSI_PR('h',    3) :      setColumns           (       132); break; //VT100
     case TY_CSI_PR('l',    3) :      setColumns           (        80); break; //VT100
+
     case TY_CSI_PR('h',    4) : /* IGNORED: soft scrolling           */ break; //VT100
     case TY_CSI_PR('l',    4) : /* IGNORED: soft scrolling           */ break; //VT100
+
     case TY_CSI_PR('h',    5) : scr->    setMode      (MODE_Screen   ); break; //VT100
     case TY_CSI_PR('l',    5) : scr->  resetMode      (MODE_Screen   ); break; //VT100
+
     case TY_CSI_PR('h',    6) : scr->    setMode      (MODE_Origin   ); break; //VT100
     case TY_CSI_PR('l',    6) : scr->  resetMode      (MODE_Origin   ); break; //VT100
     case TY_CSI_PR('s',    6) : scr->   saveMode      (MODE_Origin   ); break; //FIXME
     case TY_CSI_PR('r',    6) : scr->restoreMode      (MODE_Origin   ); break; //FIXME
+
     case TY_CSI_PR('h',    7) : scr->    setMode      (MODE_Wrap     ); break; //VT100
     case TY_CSI_PR('l',    7) : scr->  resetMode      (MODE_Wrap     ); break; //VT100
     case TY_CSI_PR('s',    7) : scr->   saveMode      (MODE_Wrap     ); break; //FIXME
     case TY_CSI_PR('r',    7) : scr->restoreMode      (MODE_Wrap     ); break; //FIXME
+
     case TY_CSI_PR('h',    8) : /* IGNORED: autorepeat on            */ break; //VT100
     case TY_CSI_PR('l',    8) : /* IGNORED: autorepeat off           */ break; //VT100
+
     case TY_CSI_PR('h',    9) : /* IGNORED: interlace                */ break; //VT100
     case TY_CSI_PR('l',    9) : /* IGNORED: interlace                */ break; //VT100
+
     case TY_CSI_PR('h',   25) :          setMode      (MODE_Cursor   ); break; //VT100
     case TY_CSI_PR('l',   25) :        resetMode      (MODE_Cursor   ); break; //VT100
+
+    case TY_CSI_PR('h',   41) : /* IGNORED: obsolete more(1) fix     */ break; //XTERM
+    case TY_CSI_PR('l',   41) : /* IGNORED: obsolete more(1) fix     */ break; //XTERM
+    case TY_CSI_PR('s',   41) : /* IGNORED: obsolete more(1) fix     */ break; //XTERM
+    case TY_CSI_PR('r',   41) : /* IGNORED: obsolete more(1) fix     */ break; //XTERM
+
     case TY_CSI_PR('h',   47) :          setMode      (MODE_AppScreen); break; //VT100
     case TY_CSI_PR('l',   47) :        resetMode      (MODE_AppScreen); break; //VT100
+
     case TY_CSI_PR('h', 1000) :          setMode      (MODE_Mouse1000); break; //XTERM
     case TY_CSI_PR('l', 1000) :        resetMode      (MODE_Mouse1000); break; //XTERM
     case TY_CSI_PR('s', 1000) :         saveMode      (MODE_Mouse1000); break; //XTERM
     case TY_CSI_PR('r', 1000) :      restoreMode      (MODE_Mouse1000); break; //XTERM
+
     case TY_CSI_PR('h', 1001) : /* IGNORED: hilite mouse tracking    */ break; //XTERM
     case TY_CSI_PR('l', 1001) : /* IGNORED: hilite mouse tracking    */ break; //XTERM
     case TY_CSI_PR('s', 1001) : /* IGNORED: hilite mouse tracking    */ break; //XTERM
     case TY_CSI_PR('r', 1001) : /* IGNORED: hilite mouse tracking    */ break; //XTERM
+
     case TY_CSI_PR('h', 1047) :          setMode      (MODE_AppScreen); break; //XTERM
     case TY_CSI_PR('l', 1047) :        resetMode      (MODE_AppScreen); break; //XTERM
-    case TY_CSI_PR('h', 1048) : scr->saveCursor           (          ); break; //XTERM
-    case TY_CSI_PR('l', 1048) : scr->restoreCursor        (          ); break; //XTERM
+
+    //FIXME: Unicode: save translations
+    case TY_CSI_PR('h', 1048) :      saveCursor           (          ); break; //XTERM
+    case TY_CSI_PR('l', 1048) :      restoreCursor        (          ); break; //XTERM
 
     //FIXME: when changing between vt52 and ansi mode evtl do some resetting.
     case TY_VT52__('A'      ) : scr->cursorUp             (         1); break; //VT52
     case TY_VT52__('B'      ) : scr->cursorDown           (         1); break; //VT52
     case TY_VT52__('C'      ) : scr->cursorRight          (         1); break; //VT52
     case TY_VT52__('D'      ) : scr->cursorLeft           (         1); break; //VT52
-    case TY_VT52__('F'      ) : scr->setAndUseCharset     (0,     '0'); break; //VT52
-    case TY_VT52__('G'      ) : scr->setAndUseCharset     (0,     'B'); break; //VT52
+
+    case TY_VT52__('F'      ) :      setAndUseCharset     (0,     '0'); break; //VT52
+    case TY_VT52__('G'      ) :      setAndUseCharset     (0,     'B'); break; //VT52
+
     case TY_VT52__('H'      ) : scr->setCursorYX          (1,1       ); break; //VT52
     case TY_VT52__('I'      ) : scr->reverseIndex         (          ); break; //VT52
     case TY_VT52__('J'      ) : scr->clearToEndOfScreen   (          ); break; //VT52
@@ -384,6 +444,144 @@ void VT102Emulation::tau( int code, int p, int q )
 
     default : ReportErrorToken();    break;
   };
+}
+
+// -----------------------------------------------------------------------------
+//
+// Translation.      
+//
+// -----------------------------------------------------------------------------
+
+/*
+   Translation
+   
+   We convert here from the incoming character stream
+   to control codes and individual utf-16 characters.
+
+   This is complicated by VT100 charmaps, which do their
+   own encodings.
+
+   FIXME: we have to put things a little more straight, here.
+*/
+
+#define CHARSET charset[scr==screen[1]]
+
+/*!
+*/
+
+void VT102Emulation::setCharset(int n, int cs)
+{
+  charset[0].charset[n&3] = cs;
+  useCharset(charset[0].cu_cs);
+  charset[1].charset[n&3] = cs;
+  useCharset(charset[1].cu_cs);
+}
+
+/*!
+*/
+
+void VT102Emulation::setAndUseCharset(int n, int cs)
+{
+  CHARSET.charset[n&3] = cs;
+  useCharset(n&3);
+}
+
+/*!
+*/
+
+void VT102Emulation::useCharset(int n)
+{
+  CHARSET.cu_cs   = n&3;
+  CHARSET.graphic = (CHARSET.charset[n&3] == '0');
+  CHARSET.pound   = (CHARSET.charset[n&3] == 'A');
+}
+
+/*! Save the cursor position and the rendition attribute settings. */
+
+void VT102Emulation::saveCursor()
+{
+  CHARSET.sa_graphic = CHARSET.graphic;
+  CHARSET.sa_pound   = CHARSET.pound;
+  // FIXME: Character set info: sa_charset = charsets[cScreen->charset];
+  //                            sa_charset_num = cScreen->charset;
+  scr->saveCursor();
+}
+
+/*! Restore the cursor position and the rendition attribute settings. */
+
+void VT102Emulation::restoreCursor()
+{
+  CHARSET.graphic = CHARSET.sa_graphic;
+  CHARSET.pound   = CHARSET.sa_pound;
+  scr->restoreCursor();
+}
+
+// Character Set Conversion ---------------------------------------------------
+
+// Second Level Translation
+
+/* 
+   Yes, this is wierd. What happens here is that the VT100 (and
+   xterms) have a special code translation layer. This has to be
+   placed somewhere in the overall conversion pipeline and the
+   place is certainly after code conversion.
+*/
+
+static unsigned short vt100_graphics[32] =
+{ // 0/8     1/9    2/10    3/11    4/12    5/13    6/14    7/15
+  0x0020, 0x25C6, 0x2592, 0x2409, 0x240c, 0x240d, 0x240a, 0x00b0,
+  0x00b1, 0x2424, 0x240b, 0x2518, 0x2510, 0x250c, 0x2514, 0x253c,
+  0xF800, 0xF801, 0x2500, 0xF803, 0xF804, 0x251c, 0x2524, 0x2534,
+  0x252c, 0x2502, 0x2264, 0x2265, 0x03C0, 0x2260, 0x00A3, 0x00b7
+};
+
+/*
+   Apply current character map. This is VT100 specific stuff.
+*/
+
+unsigned short VT102Emulation::applyCharmap(unsigned short c)
+{
+  if (CHARSET.graphic && 0x5f <= c && c <= 0x7e) return vt100_graphics[c-0x5f];
+  if (CHARSET.pound                && c == '#' ) return 0xa3;
+  return c;
+}
+
+/*
+   Show Character using current character map.
+   The screen knows only unicode characters
+   and no translations.
+*/
+
+void VT102Emulation::ShowCharacter(int c)
+{
+  scr->ShowCharacter(applyCharmap(c));
+}
+
+// First Level Translation (Bytes -> Unicode)
+
+/* We are doing code conversion first before scanning for controls.
+*/
+
+void VT102Emulation::onRcvByte(int cc)
+{
+  char chars[1]; chars[0] = cc;
+
+  QString result = decoder->toUnicode(chars,1);
+
+  int reslen = result.length();
+  for (int i = 0; i < reslen; i++)
+    processCharacter(result[i].unicode());
+}
+
+void VT102Emulation::setCodec(int c)
+{
+printf("setCodec(%d)\n",c);
+  //FIXME: check whether we have to free codec
+  codec = c ? QTextCodec::codecForName("utf8")
+            : localeCodec; //QTextCodec::codecForLocale();
+  if (decoder) delete decoder;
+  decoder = codec->makeDecoder();
+printf("codec: %s\n",codec->name());
 }
 
 // -----------------------------------------------------------------------------
@@ -415,8 +613,8 @@ void VT102Emulation::tableInit()
   for(i = 32;                    i < 256; i++) tbl[ i] |= CHR;
   for(s = (UINT8*)"@ABCDGHLMPXcdfry"; *s; s++) tbl[*s] |= CPN;
   for(s = (UINT8*)"0123456789"      ; *s; s++) tbl[*s] |= DIG;
-  for(s = (UINT8*)"()+*"            ; *s; s++) tbl[*s] |= SCS;
-  for(s = (UINT8*)"()+*#[]"         ; *s; s++) tbl[*s] |= GRP;
+  for(s = (UINT8*)"()+*%"           ; *s; s++) tbl[*s] |= SCS;
+  for(s = (UINT8*)"()+*#[]%"        ; *s; s++) tbl[*s] |= GRP;
 }
 
 /* Ok, here comes the nasty part of the decoder.
@@ -431,49 +629,59 @@ void VT102Emulation::tableInit()
 */
 
 #define lec(P,L,C) (p == (P) &&                     s[(L)]         == (C))
-#define les(P,L,C) (p == (P) &&                (tbl[s[(L)]] & (C)) == (C))
+#define lun(     ) (p ==  1  &&                       cc           >= 32 )
+#define les(P,L,C) (p == (P) && s[L] < 256  && (tbl[s[(L)]] & (C)) == (C))
 #define eec(C)     (p >=  3  &&        cc                          == (C))
-#define ees(C)     (p >=  3  &&                (tbl[  cc  ] & (C)) == (C))
-#define eps(C)     (p >=  3  && s[2] != '?' && (tbl[  cc  ] & (C)) == (C))
+#define ees(C)     (p >=  3  && cc < 256 &&    (tbl[  cc  ] & (C)) == (C))
+#define eps(C)     (p >=  3  && s[2] != '?' && cc < 256 && (tbl[  cc  ] & (C)) == (C))
 #define epp( )     (p >=  3  && s[2] == '?'                              )
+#define egt(     ) (p ==  3  && s[2] == '>'                              )
 #define Xpe        (ppos>=2  && pbuf[1] == ']'                           )
 #define Xte        (Xpe                        &&     cc           ==  7 )
-#define ces(C)     (                           (tbl[  cc  ] & (C)) == (C) && !Xte)
+#define ces(C)     (            cc < 256 &&    (tbl[  cc  ] & (C)) == (C) && !Xte)
 #define Dig        a[n] = 10*a[n] + cc - '0';
 #define Arg        argc = QMIN(argc+1,MAXARGS-1); argv[argc] = 0;
 
-//FIXME: introduce real states.
+//FIXME: introduce real states?
 //
 //
 
-void VT102Emulation::onRcvByte(int c)
-{ unsigned char cc = c; int i;
+/* process an incoming unicode character
+*/
+
+void VT102Emulation::processCharacter(int cc)
+{ int i;
+
   if (cc == 127) return; //VT100: ignore.
 
   if (ces(    CTL))
-  {
+  { //DEC HACK ALERT! Control Characters are allowed *within* esc sequences in VT100
     if (cc == CNTL('X') || cc == CNTL('Z') || cc == ESC) reset(); //VT100: CAN or SUB
-    if (cc != ESC)    { tau( TY_CTL___(cc     ),    0,   0);          return; }
+    if (cc != ESC)    { tau( TY_CTL___(cc     ),    0,   0); return; }
   }
+
   pbuf[ppos] = cc; ppos = QMIN(ppos+1,MAXPBUF-1);
-  unsigned char* s = pbuf;
-  int            p = ppos;
-  int *          a = argv;
-  int            n = argc;
+
+  int* s = pbuf;
+  int  p = ppos;
+  int* a = argv;
+  int  n = argc;
   if (getMode(MODE_Ansi))
   {
-    if (lec(1,0,ESC)) {                                               return; }
-    if (les(2,1,GRP)) {                                               return; }
-    if (Xte         ) { XtermHack();                         reset(); return; }
-    if (Xpe         ) {                                               return; }
-    if (lec(3,2,'?')) {                                               return; }
-    if (les(1,0,CHR)) { tau( TY_CHR___(       ), s[0],   0); reset(); return; }
-    if (lec(2,0,ESC)) { tau( TY_ESC___(s[1]   ),    0,   0); reset(); return; }
-    if (les(3,1,SCS)) { tau( TY_ESC_CS(       ), s[1],s[2]); reset(); return; }
-    if (lec(3,1,'#')) { tau( TY_ESC_DE(s[2]   ),    0,   0); reset(); return; }
-    if (eps(    CPN)) { tau( TY_CSI_PN(cc     ), a[0],a[1]); reset(); return; }
-    if (ees(    DIG)) { Dig                                           return; }
-    if (eec(    ';')) { Arg                                           return; }
+    if (lec(1,0,ESC)) {                                                 return; }
+    if (les(2,1,GRP)) {                                                 return; }
+    if (Xte         ) { XtermHack();                           reset(); return; }
+    if (Xpe         ) {                                                 return; }
+    if (lec(3,2,'?')) {                                                 return; }
+    if (lec(3,2,'>')) {                                                 return; }
+    if (lun(       )) { tau( TY_CHR___(         ),   cc,   0); reset(); return; }
+    if (lec(2,0,ESC)) { tau( TY_ESC___(s[1]     ),    0,   0); reset(); return; }
+    if (les(3,1,SCS)) { tau( TY_ESC_CS(s[1],s[2]),    0,   0); reset(); return; }
+    if (lec(3,1,'#')) { tau( TY_ESC_DE(s[2]     ),    0,   0); reset(); return; }
+//  if (egt(       )) { tau( TY_CSI_PG(cc       ),  '>',   0); reset(); return; }
+    if (eps(    CPN)) { tau( TY_CSI_PN(cc       ), a[0],a[1]); reset(); return; }
+    if (ees(    DIG)) { Dig                                             return; }
+    if (eec(    ';')) { Arg                                             return; }
     for (i=0;i<=n;i++)
     if (epp(       ))   tau( TY_CSI_PR(cc,a[i]),    0,   0);          else
                         tau( TY_CSI_PS(cc,a[i]),    0,   0);
@@ -519,24 +727,24 @@ void VT102Emulation::XtermHack()
 /*!
 */
 
-static void hexdump(char* s, int len)
+static void hexdump(int* s, int len)
 { int i;
   for (i = 0; i < len; i++)
   {
     if (s[i] == '\\')
       printf("\\\\");
     else
-    if ((s[i]&0xff) > 32)
+    if ((s[i]) > 32)
       printf("%c",s[i]);
     else
-      printf("\\%02x",s[i]&0xff);
+      printf("\\%02x",s[i]);
   }
 }
 
 void VT102Emulation::scan_buffer_report()
 {
   if (ppos == 0 || ppos == 1 && (pbuf[0] & 0xff) >= 32) return;
-  printf("token: "); hexdump((char*)pbuf,ppos); printf("\n");
+  printf("token: "); hexdump(pbuf,ppos); printf("\n");
 }
 
 /*!
@@ -567,9 +775,10 @@ void VT102Emulation::reportTerminalType()
 {
 //FIXME: should change?
   if (getMode(MODE_Ansi))
-    sendString("\033[?1;2c"); // I'm a VT100 with AP0
+//  sendString("\033[?1;2c");     // I'm a VT100 with AP0 //FIXME: send only in response to ^[[0c
+    sendString("\033[>0;115;0c"); // I'm a VT220          //FIXME: send only in response to ^[[>c
   else
-    sendString("\033/Z");     // I'm a VT52
+    sendString("\033/Z");         // I'm a VT52
 }
 
 /*!
@@ -583,9 +792,11 @@ void VT102Emulation::reportStatus()
 /*!
 */
 
+#define ANSWER_BACK ""
+
 void VT102Emulation::reportAnswerBack()
 {
-  sendString("konsole"); //FIXME? make configurable?
+  sendString(ANSWER_BACK); //FIXME? make configurable?
 }
 
 /*!
@@ -691,12 +902,6 @@ void VT102Emulation::setConnect(bool c)
   }
 }
 
-void VT102Emulation::setCharset(int n, int cs)
-{
-  screen[0]->setCharset(n, cs);
-  screen[1]->setCharset(n, cs);
-}
-
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /*                                Miscelaneous                               */
@@ -709,6 +914,14 @@ void VT102Emulation::setCharset(int n, int cs)
 void VT102Emulation::setScreen(int n)
 {
   scr = screen[n&1];
+}
+
+void VT102Emulation::setHistory(bool on)
+{
+HERE; printf("VT102Emulation::setHistory(%s)\n",on?"on":"off");
+  screen[0]->setScroll(on);
+  if (!connected) return;
+  showBulk();
 }
 
 /* ------------------------------------------------------------------------- */
@@ -731,7 +944,7 @@ void VT102Emulation::onMouse( int cb, int cx, int cy )
 
 #define KeyComb(B,K) ((ev->state() & (B)) == (B) && ev->key() == (K))
 
-#define Xterm (!strcmp(emulation.data(),"xterm"))
+#define Xterm (!strcmp(emulation.data(),"xterm-color"))
 /*!
 */
 
@@ -751,7 +964,7 @@ void VT102Emulation::onKeyPress( QKeyEvent* ev )
   //          (which may fail for 8bit (european) characters.
   if (ev->state() & AltButton) sendString("\033"); // ESC
 
-//printf("State/Key: 0x%04x 0x%04x\n",ev->state(),ev->key());
+printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().length(),ev->text().length()?ev->text().ascii()[0]:0);
 
   key = ev->key();
   switch (key)
@@ -795,14 +1008,17 @@ void VT102Emulation::onKeyPress( QKeyEvent* ev )
     reportAnswerBack(); return;
   }
   if (!ev->text().isEmpty())
-  { // A block of text
-    emit sndBlock(ev->text().ascii(), ev->text().length());
-  }
-  else if (ev->ascii()>0)
-  { unsigned char c[1];
-    c[0] = ev->ascii();
-//printf("ansi key: "); hexdump(c,1); printf("\n");
-    emit sndBlock((char*)c,1);
-    return;
+  {
+    if (0 <= ev->ascii() && ev->ascii() < 32)
+    { char c[1];
+      c[0] = ev->ascii();
+      emit sndBlock((char*)c,1);
+    }
+    else
+    {
+      QTextCodec* loc = QTextCodec::codecForLocale();
+      QCString s = codec->fromUnicode(loc->toUnicode(ev->text()));
+      emit sndBlock(s.data(),s.length());
+    }
   }
 }

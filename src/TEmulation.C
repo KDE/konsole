@@ -123,6 +123,19 @@ Emulation::~Emulation()
   delete scr;
 }
 
+void Emulation::setHistory(bool on)
+{
+HERE; printf("Emulation::setHistory(%s)\n",on?"on":"off");
+  scr->setScroll(on);
+  if (!connected) return;
+  showBulk();
+}
+
+bool Emulation::history()
+{
+  return scr->hasScroll();
+}
+
 // Interpreting Codes ---------------------------------------------------------
 
 /*
