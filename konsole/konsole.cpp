@@ -850,7 +850,7 @@ void Konsole::makeBasicGUI()
   m_print->setShortcut( KShortcut() );
   m_quit = new KAction(i18n("&Quit"), "exit", 0, this, SLOT( close() ), m_shortcuts, "file_quit");
 
-  new KAction(i18n("New Session"), Qt::CTRL+Qt::ALT+Qt::Key_N, this, SLOT(newSession()), m_shortcuts, "new_session");
+  new KAction(i18n("New Session"), "Ctrl+Alt+N;Ctrl+Shift+N", this, SLOT(newSession()), m_shortcuts, "new_session");
   new KAction(i18n("Activate Menu"), Qt::CTRL+Qt::ALT+Qt::Key_M, this, SLOT(activateMenu()), m_shortcuts, "activate_menu");
   new KAction(i18n("List Sessions"), 0, this, SLOT(listSessions()), m_shortcuts, "list_sessions");
 
