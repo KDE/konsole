@@ -1535,7 +1535,8 @@ void Konsole::enterURL(const QString& URL, const QString&)
     se->setListenToKeyPress(true);
   }
   if (URL.startsWith("file:")) {
-    newtext=URL.mid(5);
+    KURL uglyurl(URL);
+    newtext=uglyurl.prettyURL().mid(5);
     KRun::shellQuote(newtext);
     te->emitText("\001\013cd "+newtext+"\r");
   }

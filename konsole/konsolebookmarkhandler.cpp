@@ -53,7 +53,7 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel 
 
 QString KonsoleBookmarkHandler::currentURL() const
 {
-    return m_konsole->baseURL().url();
+    return m_konsole->baseURL().prettyURL();
 }
 
 void KonsoleBookmarkHandler::importOldBookmarks( const QString& path,
