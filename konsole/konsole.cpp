@@ -2074,7 +2074,8 @@ void Konsole::doneSession(TESession* s, int)
       }
     }
     else
-      close();
+      if (!skip_exit_query)
+        close();
   }
   else {
     sessions.find(se);
