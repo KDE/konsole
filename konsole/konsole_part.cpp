@@ -363,9 +363,10 @@ void konsolePart::makeGUI()
                                  SLOT(slotSelectBell()), actions, "bell");
 
      QStringList bellitems;
-     bellitems << i18n("&None")
-            << i18n("&System Notification")
-            << i18n("&Visible Bell");
+     bellitems << i18n("System &Bell")
+            << i18n("System &Notification")
+            << i18n("&Visible Bell")
+            << i18n("N&one");
      selectBell->setItems(bellitems);
      selectBell->plug(m_options);
 
