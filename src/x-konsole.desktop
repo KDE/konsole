@@ -1,7 +1,9 @@
 [Desktop Entry]
 Type=MimeType
-MimeType=x-application/konsole
+MimeType=application/x-konsole
 X-KDE-AutoEmbed=true
 Icon=konsole
 Patterns=*.shell;
 Comment=File to open a shell
+Comment[no]=Fil for å åpne et skall
+Comment[no_NY]=Fil for å åpne et skall
