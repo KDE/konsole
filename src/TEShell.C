@@ -63,6 +63,9 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
+#ifdef __FreeBSD__
+#include <sys/time.h>
+#endif
 #include <sys/resource.h>
 #include <grp.h>
 #include "../../config.h"
