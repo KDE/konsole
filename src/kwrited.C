@@ -70,6 +70,7 @@ void KWrited::block_in(const char* txt, int len)
 
 int main(int argc, char* argv[])
 {
+  KLocale::setMainCatalogue("konsole");
   KCmdLineArgs::init(argc, argv, "kwrited", 
 	I18N_NOOP("KDE Daemon for receiving 'write' messages."),
 	"2.0.0");
