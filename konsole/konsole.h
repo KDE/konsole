@@ -66,7 +66,6 @@ public:
   void setColLin(int columns, int lines);
   void setFullScreen(bool on);
   void initFullScreen();
-  void initSessionSchema(int schemaNo);
   void initSessionFont(int fontNo);
   void initSessionTitle(const QString &_title);
   void initSessionKeyTab(const QString &keyTab);
@@ -74,6 +73,7 @@ public:
   void initMonitorSilence(bool on);
   void initMasterMode(bool on);
   void newSession(const QString &program, const QStrList &args, const QString &term, const QString &icon, const QString &cwd);
+  void setSchema(const QString & path);
 
   void run();
   void setDefaultSession(const QString &filename);
@@ -195,7 +195,6 @@ private:
   void addSession(TESession* s);
   void setColorPixmaps();
 
-  void setSchema(const QString & path);
   void setSchema(ColorSchema* s);
   void setFont(int fontno);
 

@@ -308,7 +308,7 @@ int main(int argc, char* argv[])
         Konsole *m = new Konsole(wname,sPgm,eargs,histon,menubaron,toolbaron,frameon,scrollbaron,sIcon,sTitle,0/*type*/,sTerm,true,sCwd);
         m->restore(n);
         m->makeGUI();
-        m->initSessionSchema(sessionconfig->readNumEntry("Schema0"));
+        m->setSchema(sessionconfig->readEntry("Schema0"));
         m->initSessionFont(sessionconfig->readNumEntry("Font0", -1));
         m->initSessionKeyTab(sessionconfig->readEntry("KeyTab0"));
         m->initMonitorActivity(sessionconfig->readBoolEntry("MonitorActivity0",FALSE));
@@ -316,7 +316,7 @@ int main(int argc, char* argv[])
         m->initMasterMode(sessionconfig->readBoolEntry("MasterMode0",FALSE));
         counter++;
 
-        while (counter < session_count) 
+        while (counter < session_count)
         {
           sessionconfig->setDesktopGroup();
           key = QString("Title%1").arg(counter);
@@ -334,7 +334,7 @@ int main(int argc, char* argv[])
           m->newSession(sPgm, eargs, sTerm, sIcon, sCwd);
           m->initSessionTitle(sTitle);
           key = QString("Schema%1").arg(counter);
-          m->initSessionSchema(sessionconfig->readNumEntry(key));
+          m->setSchema(sessionconfig->readEntry(key));
           key = QString("Font%1").arg(counter);
           m->initSessionFont(sessionconfig->readNumEntry(key, -1));
           key = QString("KeyTab%1").arg(counter);

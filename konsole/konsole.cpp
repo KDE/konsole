@@ -829,7 +829,7 @@ void Konsole::saveProperties(KConfig* config) {
         key = QString("Title%1").arg(counter);
         config->writeEntry(key, sessions.current()->Title());
         key = QString("Schema%1").arg(counter);
-        config->writeEntry(key, sessions.current()->schemaNo());
+        config->writeEntry(key, colors->find( sessions.current()->schemaNo() )->relPath());
         key = QString("Args%1").arg(counter);
         config->writeEntry(key, sessions.current()->getArgs());
         key = QString("Pgm%1").arg(counter);
@@ -1298,10 +1298,6 @@ void Konsole::initFullScreen()
    setColLin(0,0);
    }
   setFullScreen(b_fullscreen);
-}
-
-void Konsole::initSessionSchema(int schemaNo) {
-  setSchema(schemaNo);
 }
 
 void Konsole::initSessionFont(int fontNo) {
