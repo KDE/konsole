@@ -1179,6 +1179,7 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
   word_selection_mode = false;
 
   actSel = 2; // within selection
+  emit isBusySelecting(true); // Keep it steady...
 
   while (iPntSel.y()>0 && m_line_wrapped[iPntSel.y()-1])
     iPntSel.ry()--;
