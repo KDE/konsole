@@ -1,3 +1,5 @@
+10 Sep 2000
+- *.keytab not sending \0 fixed.
  9 Sep 2000
 - license restricted to GPLv2
 - added Konsole2.Requierements
