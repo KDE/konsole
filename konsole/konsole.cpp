@@ -248,6 +248,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 ,m_tabViewMode(ShowIconAndText)
 ,b_dynamicTabHide(false)
 ,b_autoResizeTabs(false)
+,b_framevis(true)
 ,b_fullscreen(false)
 ,m_menuCreated(false)
 ,b_warnQuit(false)
@@ -1499,7 +1500,8 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
      b_allowResize=config->readBoolEntry( "AllowResize", false);
      b_bidiEnabled = config->readBoolEntry("EnableBidi",false);
      s_word_seps= config->readEntry("wordseps",":@-./_~");
-     b_framevis = config->readBoolEntry("has frame",true);
+     if (b_framevis)  // False only with --noframe
+       b_framevis = config->readBoolEntry("has frame",true);
      QPtrList<TEWidget> tes = activeTEs();
      for (TEWidget *_te = tes.first(); _te; _te = tes.next()) {
        _te->setWordCharacters(s_word_seps);
