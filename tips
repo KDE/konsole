@@ -162,7 +162,8 @@ For Bash, put 'export PS1=$PS1"\[\e]0;\H:\w\a\]"' in your ~/.bashrc .
 <html>
 <p>...that if you let your shell pass the current directory to Konsole within the prompt
 variable, e.g. for Bash with 'export PS1=$PS1"\[\e]31;\w\a\]"' in your ~/.bashrc, then
-Konsole can bookmark it, and session management will remember your current working directory?
+Konsole can bookmark it, and session management will remember your current working directory
+on non-Linux systems too?
 </html>
 </tip>
 
