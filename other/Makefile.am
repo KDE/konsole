@@ -6,8 +6,9 @@ data_DATA = BlackOnLightYellow.schema BlackOnWhite.schema \
   syscolor.schema Linux.schema XTerm.schema vim.schema \
   DarkPicture.schema LightPicture.schema Transparent.schema GreenTint.schema
 
-kde_icon_DATA = konsole.xpm colourness.xpm brightness.xpm contrast.xpm
+kde_icon_DATA = konsole.xpm 
 
+kde_toolbar_DATA = colourness.xpm brightness.xpm contrast.xpm
 
 install-data-local: 
 	$(mkinstalldirs) $(kde_minidir)
