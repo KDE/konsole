@@ -238,7 +238,7 @@ void ColorTable::paintEvent(QPaintEvent* e)
   if (schema)
   for (y = 0; y < BASE_COLORS-2; y++)
   {
-    QRect base = contentsRect();
+    QRect base = frameRect();
     int top = base.height()*(y+0)/(BASE_COLORS-2);
     int bot = base.height()*(y+1)/(BASE_COLORS-2);
     QRect rect(QPoint(base.left(),top),QPoint(base.right(),bot));
