@@ -1,3 +1,477 @@
+
+PRINT.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|ShowCharacter|p
+
+NUL.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+SOH.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+STX.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+ETX.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+EOT.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+ENQ.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|reportAnswerBack| 
+
+ACK.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+BEL.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |gui|Bell| 
+
+BS.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|BackSpace| 
+
+HT.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|Tabulate| 
+
+LF.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|NewLine| 
+
+VT.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|NewLine| 
+
+FF.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|NewLine| 
+
+CR.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|Return| 
+
+LS0.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|useCharset|1
+
+LS1.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|useCharset|0
+
+DLE.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+DC1.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+DC2.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+DC3.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+DC4.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+NAK.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+SYN.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+ETB.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+CAN.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|ShowCharacter|2
+
+EM.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+SUB.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|ShowCharacter|2
+
+ESC.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+FS.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+GS.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+RS.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+US.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+IND.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|index| 
+
+NEL.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|NextLine| 
+
+HTS.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|changeTabStop|TRUE
+
+RI.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|reverseIndex| 
+
+DECID.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|reportTerminalType| 
+
+RIS.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|resetTerminal| 
+
+LS2.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|useCharset|2
+
+LS3.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|useCharset|3
+
+DECSC.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|saveCursor| 
+
+DECRC.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|restoreCursor| 
+
+DECKPAM.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|setMode|MODE_AppKeyPad
+
+DECKPNM.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|resetMode|MODE_AppKeyPad
+
+DECANSI.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|setMode|MODE_Ansi
+
+SCS.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|setCharset|p-'(',q
+
+DECDHLT.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+DECDHLB.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+DECSWL.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+DECDWL.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+DECALN.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|helpAlign| 
+
+EL.table.XPS
+  Subcode|Emulation|Scope|Operation|Args|Meaning
+  0|konsole|scr|clearToEndOfLine||Meaning
+  1|konsole|scr|clearToBeginOfLine||Meaning
+  2|konsole|scr|clearEntireLine||Meaning
+
+ED.table.XPS
+  Subcode|Emulation|Scope|Operation|Args|Meaning
+  0|konsole|scr|clearToEndOfScreen||Meaning
+  1|konsole|scr|clearToBeginOfScreen||Meaning
+  2|konsole|scr|clearEntireScreen||Meaning
+
+TBC.table.XPS
+  Subcode|Emulation|Scope|Operation|Args|Meaning
+  0|konsole|scr|changeTabStop|FALSE|Meaning
+  3|konsole|scr|clearTabStops||Meaning
+
+SM.table.XPS
+  Subcode|Emulation|Scope|Operation|Args|Meaning
+  4|konsole|scr|setMode|MODE_Insert|Meaning
+  20|konsole|emu|setMode|MODE_NewLine|\ref:LNM
+
+MC.table.XPS
+  Subcode|Emulation|Scope|Operation|Args|Meaning
+  0|konsole|emu|Ignored||Meaning
+
+RM.table.XPS
+  Subcode|Emulation|Scope|Operation|Args|Meaning
+  4|konsole|scr|resetMode|MODE_Insert|Meaning
+  20|konsole|emu|resetMode|MODE_NewLine|\ref:LNM
+
+SGR.table.XPS
+  Subcode|Emulation|Scope|Operation|Args|Meaning
+  0|konsole|scr|setDefaultRendition||Meaning
+  1|konsole|scr|setRendition|RE_BOLD|Meaning
+  4|konsole|scr|setRendition|RE_UNDERLINE|Meaning
+  5|konsole|scr|setRendition|RE_BLINK|Meaning
+  7|konsole|scr|setRendition|RE_REVERSE|Meaning
+  10|konsole|emu|Ignored||Meaning
+  11|konsole|emu|Ignored||Meaning
+  12|konsole|emu|Ignored||Meaning
+  22|konsole|scr|resetRendition|RE_BOLD|Meaning
+  24|konsole|scr|resetRendition|RE_UNDERLINE|Meaning
+  25|konsole|scr|resetRendition|RE_BLINK|Meaning
+  27|konsole|scr|resetRendition|RE_REVERSE|Meaning
+  30|konsole|scr|setForeColor|0|Meaning
+  31|konsole|scr|setForeColor|1|Meaning
+  32|konsole|scr|setForeColor|2|Meaning
+  33|konsole|scr|setForeColor|3|Meaning
+  34|konsole|scr|setForeColor|4|Meaning
+  35|konsole|scr|setForeColor|5|Meaning
+  36|konsole|scr|setForeColor|6|Meaning
+  37|konsole|scr|setForeColor|7|Meaning
+  39|konsole|scr|setForeColorToDefault||Meaning
+  40|konsole|scr|setBackColor|0|Meaning
+  41|konsole|scr|setBackColor|1|Meaning
+  42|konsole|scr|setBackColor|2|Meaning
+  43|konsole|scr|setBackColor|3|Meaning
+  44|konsole|scr|setBackColor|4|Meaning
+  45|konsole|scr|setBackColor|5|Meaning
+  46|konsole|scr|setBackColor|6|Meaning
+  47|konsole|scr|setBackColor|7|Meaning
+  49|konsole|scr|setBackColorToDefault||Meaning
+  90|konsole|scr|setForeColor|8|Meaning
+  91|konsole|scr|setForeColor|9|Meaning
+  92|konsole|scr|setForeColor|10|Meaning
+  93|konsole|scr|setForeColor|11|Meaning
+  94|konsole|scr|setForeColor|12|Meaning
+  95|konsole|scr|setForeColor|13|Meaning
+  96|konsole|scr|setForeColor|14|Meaning
+  97|konsole|scr|setForeColor|15|Meaning
+  100|konsole|scr|setBackColor|8|Meaning
+  101|konsole|scr|setBackColor|9|Meaning
+  102|konsole|scr|setBackColor|10|Meaning
+  103|konsole|scr|setBackColor|11|Meaning
+  104|konsole|scr|setBackColor|12|Meaning
+  105|konsole|scr|setBackColor|13|Meaning
+  106|konsole|scr|setBackColor|14|Meaning
+  107|konsole|scr|setBackColor|15|Meaning
+
+DSR.table.XPS
+  Subcode|Emulation|Scope|Operation|Args|Meaning
+  5|konsole|emu|reportStatus||Meaning
+  6|konsole|emu|reportCursorPosition||Meaning
+
+DECREQTPARM.table.XPS
+  Subcode|Emulation|Scope|Operation|Args|Meaning
+  0|konsole|emu|reportTerminalParms|2|Meaning
+  1|konsole|emu|reportTerminalParms|3|Meaning
+
+ICH.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|insertChars|p
+
+CUU.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|cursorUp|p
+
+CUD.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|cursorDown|p
+
+CUF.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|cursorRight|p
+
+CUB.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|cursorLeft|p
+
+CHA.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|setCursorX|p
+
+CUP.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|setCursorYX|p,q
+
+IL.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|insertLines|p
+
+DL.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|deleteLines|p
+
+DCH.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|deleteChars|p
+
+ECH.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|eraseChars|p
+
+DA.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|reportTerminalType| 
+
+VPA.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|setCursorY|p
+
+HVP.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|setCursorYX|p,q
+
+DECSTBM.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|setMargins|p,q
+
+DECTST.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|Ignored| 
+
+DECSET.table.XPS
+  Subcode|Emulation|Scope|Operation|Args|Meaning
+  1|konsole|emu|setMode|MODE_AppCuKeys|Meaning
+  3|konsole|emu|setColumns|132|Meaning
+  4|konsole|emu|Ignored||Meaning
+  5|konsole|scr|setMode|MODE_Screen|Meaning
+  6|konsole|scr|setMode|MODE_Origin|Meaning
+  7|konsole|scr|setMode|MODE_Wrap|Meaning
+  8|konsole|emu|Ignored||Meaning
+  9|konsole|emu|Ignored||Meaning
+  25|konsole|emu|setMode|MODE_Cursor|Meaning
+  47|konsole|emu|setMode|MODE_AppScreen|Meaning
+  1000|konsole|emu|setMode|MODE_Mouse1000|Meaning
+  1001|konsole|emu|Ignored||Meaning
+  1047|konsole|emu|setMode|MODE_AppScreen|Meaning
+  1048|konsole|scr|saveCursor||Meaning
+
+DECRST.table.XPS
+  Subcode|Emulation|Scope|Operation|Args|Meaning
+  1|konsole|emu|resetMode|MODE_AppCuKeys|Meaning
+  2|konsole|emu|resetMode|MODE_Ansi|Meaning
+  3|konsole|emu|setColumns|80|Meaning
+  4|konsole|emu|Ignored||Meaning
+  5|konsole|scr|resetMode|MODE_Screen|Meaning
+  6|konsole|scr|resetMode|MODE_Origin|Meaning
+  7|konsole|scr|resetMode|MODE_Wrap|Meaning
+  8|konsole|emu|Ignored||Meaning
+  9|konsole|emu|Ignored||Meaning
+  25|konsole|emu|resetMode|MODE_Cursor|Meaning
+  47|konsole|emu|resetMode|MODE_AppScreen|Meaning
+  1000|konsole|emu|resetMode|MODE_Mouse1000|Meaning
+  1001|konsole|emu|Ignored||Meaning
+  1047|konsole|emu|resetMode|MODE_AppScreen|Meaning
+  1048|konsole|scr|restoreCursor||Meaning
+
+XTESAVE.table.XPS
+  Subcode|Emulation|Scope|Operation|Args|Meaning
+  1|konsole|emu|saveMode|MODE_AppCuKeys|Meaning
+  6|konsole|scr|saveMode|MODE_Origin|Meaning
+  7|konsole|scr|saveMode|MODE_Wrap|Meaning
+  1000|konsole|emu|saveMode|MODE_Mouse1000|Meaning
+  1001|konsole|emu|Ignored||Meaning
+
+XTERESTORE.table.XPS
+  Subcode|Emulation|Scope|Operation|Args|Meaning
+  1|konsole|emu|restoreMode|MODE_AppCuKeys|Meaning
+  6|konsole|scr|restoreMode|MODE_Origin|Meaning
+  7|konsole|scr|restoreMode|MODE_Wrap|Meaning
+  1000|konsole|emu|restoreMode|MODE_Mouse1000|Meaning
+  1001|konsole|emu|Ignored||Meaning
+
+VT52CUU.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|cursorUp|1
+
+VT52CUD.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|cursorDown|1
+
+VT52CUF.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|cursorRight|1
+
+VT52CUB.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|cursorLeft|1
+
+VT52SCSF.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|setAndUseCharset|0,'0'
+
+VT52SCSG.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|setAndUseCharset|0,'B'
+
+VT52CUH.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|setCursorYX|1,1
+
+VT52RI.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|reverseIndex| 
+
+VT52EDS.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|clearToEndOfScreen| 
+
+VT52EDL.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|clearToEndOfLine| 
+
+VT52CUP.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |scr|setCursorYX|p-31,q-31
+
+VT52REP.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|reportTerminalType| 
+
+VT52ANSI.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|setMode|MODE_Ansi
+
+VT52KPAM.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|setMode|MODE_AppKeyPad
+
+VT52KPNM.table.XEX
+  Instruction:2|Scope|Operation|Args
+  |emu|resetMode|MODE_AppKeyPad
+
 ##############################################################################
 #                                                                            #
 # [Table.Codes]                  Concept Data Base                           #
@@ -26,93 +500,133 @@
 # The missing link in the moment is a proper handling of all the Ps arguments
 # that refere to different routines (subfunction of an esc code).
 
+KEYBOARD.head Keyboard Events
+KEYBOARD.attr Konsole Event
+KEYBOARD.text
+  FIXME. explain
+KEYBOARD.table.Codes
+  Key|Code:4
+  AltButton|"\033"
+  Return|MODE_NewLine ? "\r\n" : "\r"
+  Backspace|MODE_BsHack ? "\x7f" : "\x08"
+  Delete|MODE_BsHack ? "\033[3~" : "\x7f"
+  Up|!MODE_Ansi ?"\033A" : MODE_AppCuKeys ?"\033OA" : "\033[A"
+  Down|!MODE_Ansi ?"\033B" : MODE_AppCuKeys ?"\033OB" : "\033[B"
+  Right|!MODE_Ansi ?"\033C" : MODE_AppCuKeys ?"\033OC" : "\033[C"
+  Left|!MODE_Ansi ?"\033D" : MODE_AppCuKeys ?"\033OD" : "\033[D"
+  F1|Xterm? "\033[11~": "\033[[A" 
+  F2|Xterm? "\033[12~": "\033[[B" 
+  F3|Xterm? "\033[13~": "\033[[C" 
+  F4|Xterm? "\033[14~": "\033[[D" 
+  F5|Xterm? "\033[15~": "\033[[E" 
+  F6|"\033[17~" 
+  F7|"\033[18~" 
+  F8|"\033[19~" 
+  F9|"\033[20~" 
+  F10|"\033[21~" 
+  F11|"\033[23~" 
+  F12|"\033[24~" 
+  Home|"\033[7~"  
+  End|"\033[8~"  
+  Prior|"\033[5~"  
+  Next|"\033[6~"  
+  Insert|"\033[2~"  
+  Control_Space|"\x00"
+  Control_Print|reportAnswerBack()
+  Ascii|Character
+
+MOUSE.head Mouse Events
+MOUSE.attr Konsole Event
+MOUSE.text
+  FIXME. explain
+
 CHA.head Cursor Horizontal Absolute
-CHA.attr Konsole ECMA Command
-CHA.code ESC [ {Pn} G
+CHA.attr Konsole ECMA Command.Cursor
+CHA.code CSI|G|{Pn}
 CHA.text
   FIXME. explain
   
 DCH.head Delete Character
-DCH.attr Konsole ECMA Command
-DCH.code ESC [ {Pn} P
+DCH.attr Konsole ECMA Command.Delete
+DCH.code CSI|P|{Pn}
 DCH.text
   FIXME. explain
 
 DECRST.head DEC Private Reset Mode
-DECRST.attr Konsole VT100 Command
-DECRST.code ESC [ ? {Ps...} l
+DECRST.attr Konsole VT100 Command.SetMode
+DECRST.code PRI|l|{Ps;...}
 DECRST.text
   FIXME. explain
 
-DECSET.head DEC Private Reset Mode
-DECSET.attr Konsole VT100 Command
-DECSET.code ESC [ ? {Ps...} h 
+DECSET.head DEC Private Set Mode
+DECSET.attr Konsole VT100 Command.SetMode
+DECSET.code PRI|h|{Ps;...}
 DECSET.text
   FIXME. explain
 
 DL.head Delete Line
-DL.attr Konsole ECMA Command
-DL.code ESC [ {Pn} M
+DL.attr Konsole ECMA Command.Delete
+DL.code CSI|M|{Pn}
 DL.text
   FIXME. explain
 
 ECH.head Erase Character
-ECH.attr Konsole ECMA Command
-ECH.code ESC [ {Pn} X
+ECH.attr Konsole ECMA Command.Erase
+ECH.code CSI|X|{Pn}
 ECH.text
   FIXME. explain
 
 ICH.head Insert Character
-ICH.attr Konsole ECMA Command
-ICH.code ESC [ {Pn} @
+ICH.attr Konsole ECMA Command.Insert
+ICH.code CSI|@|{Pn}
 ICH.text
   FIXME. explain
 
 IL.head Insert Line
-IL.attr Konsole Command
-IL.code ESC [ {Pn} L
+IL.attr Konsole Command.Insert
+IL.code CSI|L|{Pn}
 IL.text
   FIXME. explain
 
 LS2.head Lock Shift Two
-LS2.attr Konsole Command
-LS2.code FIXME
+LS2.attr Konsole Command.RenderMode
+LS2.code ESC|n| 
 LS2.text
   FIXME. explain
 
 LS3.head Lock Shift Three
-LS3.attr Konsole Command
-LS3.code FIXME
+LS3.attr Konsole Command.RenderMode
+LS3.code ESC|o| 
 LS3.text
   FIXME. explain
 
 MC.head Media Copy
-MC.attr ECMA VT100 Command
-MC.code ESC [ {Pn} i
+MC.attr ECMA VT100 Command.NoImp
+MC.code CSI|i|{Pn}
 MC.text
   FIXME. explain
 
 VPA.head Vertical Position Absolute
-VPA.attr Konsole ECMA Command
-VPA.code ESC [ {Pn} d
+VPA.attr Konsole ECMA Command.Cursor
+VPA.code CSI|d|{Pn}
 VPA.text
   FIXME. explain
 
 XTERESTORE.head XTerm Private Restore Mode
-XTERESTORE.attr Konsole XTerm Command
-XTERESTORE.code ESC [ ? {Ps...} r
+XTERESTORE.attr Konsole XTerm Command.SetMode
+XTERESTORE.code PRI|r|{Ps;...}
 XTERESTORE.text
   FIXME. explain
 
 XTESAVE.head XTerm Private Save Mode
-XTESAVE.attr Konsole XTerm Command
-XTESAVE.code ESC [ ? {Ps...} s
+XTESAVE.attr Konsole XTerm Command.SetMode
+XTESAVE.code PRI|s|{Ps;...}
 XTESAVE.text
   FIXME. explain
 
 NUL.head Null
-NUL.attr Konsole VT100 Linux XTerm Command Ignored
-NUL.code 0x00
+NUL.attr Konsole VT100 Linux XTerm Command.Ignored
+NUL.code CTL|0x00| 
 NUL.text
   NUL is used as media- or time-fill. It is ignored by Konsole, but may
   be sensible for devices which requiere a recognizable amount of time
@@ -120,171 +634,205 @@ NUL.text
   device).
 
 SOH.head Start Of Heading
-SOH.attr Konsole VT100 Linux XTerm Command Ignored
-SOH.code 0x01
+SOH.attr Konsole VT100 Linux XTerm Command.Ignored
+SOH.code CTL|0x01| 
+SOH.text
+  Ignored
 
 STX.head Start Of Text
-STX.attr Konsole VT100 Linux XTerm Command Ignored
-STX.code 0x02
+STX.attr Konsole VT100 Linux XTerm Command.Ignored
+STX.code CTL|0x02| 
+STX.text
+  Ignored
 
 ETX.head End Of Text
-ETX.attr Konsole VT100 Linux XTerm Command Ignored
-ETX.code 0x03
+ETX.attr Konsole VT100 Linux XTerm Command.Ignored
+ETX.code CTL|0x03| 
+ETX.text
+  Ignored
 
 EOT.head End Of Transmission
-EOT.attr Konsole VT100 Linux XTerm Command Ignored
-EOT.code 0x04
+EOT.attr Konsole VT100 Linux XTerm Command.Ignored
+EOT.code CTL|0x04| 
+EOT.text
+  Ignored
 
 ENQ.head Enquiry
-ENQ.attr VT100
-ENQ.code 0x05
+ENQ.attr VT100 Command.Request
+ENQ.code CTL|0x05| 
 ENQ.text
   Transmit the ANSWERBACK message. The answerback message can be loaded
   in SET-UP B (i.e. is a configurable string).
 
 ACK.head Acknowledge
-ACK.attr Konsole VT100 Linux XTerm Command Ignored
-ACK.code 0x06
+ACK.attr Konsole VT100 Linux XTerm Command.Ignored
+ACK.code CTL|0x06| 
+ACK.text
+  Ignored
 
 BEL.head Bell
-BEL.attr VT100
-BEL.code 0x07
+BEL.attr VT100 Command
+BEL.code CTL|0x07| 
 BEL.text
   Sound bell
 
 BS.head Back Space
-BS.attr VT100
-BS.code 0x08
+BS.attr VT100 Command.Cursor
+BS.code CTL|0x08| 
 BS.text
   Move cursor to the left one position, unless it is at the left
   margin, in which case no action is taken.
 
 HT.head Horizontal Tabulation
-HT.attr VT100
-HT.code 0x09
+HT.attr VT100 Command.Cursor
+HT.code CTL|0x09| 
 HT.text
   Move cursor to the next tab stop, or to the right margin
   if no further tabs are set.
 
 LF.head Line Feed
-LF.attr VT100
-LF.code 0x0a
+LF.attr VT100 Command.Cursor
+LF.code CTL|0x0a| 
 LF.text
   Causes either a line feed or new line operation (See \ref:LNM.)
 
 VT.head Vertical Tabulation
-VT.attr VT100
-VT.code 0x0b
+VT.attr VT100 Command.Cursor
+VT.code CTL|0x0b| 
 VT.text
   Same as \ref:LF.
 
 FF.head Form Feed
-FF.attr VT100
-FF.code 0x0c
+FF.attr VT100 Command.Cursor
+FF.code CTL|0x0c| 
 FF.text
   Same as \ref:LF.
 
 CR.head Carriage Return
-CR.attr VT100
-CR.code 0x0d
+CR.attr VT100 Command.Cursor
+CR.code CTL|0x0d| 
 CR.text
   Move the cursor to the left margin of the current line.
 
-SO.head Shift Out (Lock Shift Zero)
-SO.attr VT100
-SO.code 0x0e
-SO.text
+LS0.head Lock Shift Zero (Shift Out - SO)
+LS0.attr VT100 Command.RenderMode
+LS0.code CTL|0x0e| 
+LS0.text
   Invoke the G1 character set, as designated by the \ref:SCS control sequence.
 
-SI.head Shift In (Lock Shift One)
-SI.attr VT100
-SI.code 0x0f
-SI.text
+LS1.head Lock Shift One (Shift In - SI)
+LS1.attr VT100 Command.RenderMode
+LS1.code CTL|0x0f| 
+LS1.text
   Invoke the G0 character set, as selected by the <ESC>( sequence.
 
-DLE.head Delete
-DLE.attr Konsole VT100 Linux XTerm Command Ignored
-DLE.code 0x10
+DLE.head Data Link Escape
+DLE.attr Konsole VT100 Linux XTerm Command.Ignored
+DLE.code CTL|0x10| 
+DLE.text
+  Ignored
 
 DC1.head Device Control One
 DC1.attr VT100 Ignored
-DC1.code 0x11
+DC1.code CTL|0x11| 
 DC1.text
   Causes terminal to resume transmission (XON).
 
 DC2.head Device Control Two
-DC2.attr Konsole VT100 Linux XTerm Command Ignored
-DC2.code 0x12
+DC2.attr Konsole VT100 Linux XTerm Command.Ignored
+DC2.code CTL|0x12| 
+DC2.text
+  Ignored
 
 DC3.head Device Control Three
-DC3.attr Konsole VT100 Linux XTerm Command Ignored
-DC3.code 0x13
+DC3.attr Konsole VT100 Linux XTerm Command.Ignored
+DC3.code CTL|0x13| 
 DC3.text
   Causes terminal to stop transmitting all codes except XOFF and XON (XOFF).
 
 DC4.head Device Control Four
-DC4.attr Konsole VT100 Linux XTerm Command Ignored
-DC4.code 0x14
+DC4.attr Konsole VT100 Linux XTerm Command.Ignored
+DC4.code CTL|0x14| 
+DC4.text
+  Ignored
 
 NAK.head Negative Acknowledge
-NAK.attr Konsole VT100 Linux XTerm Command Ignored
-NAK.code 0x15
+NAK.attr Konsole VT100 Linux XTerm Command.Ignored
+NAK.code CTL|0x15| 
+NAK.text
+  Ignored
 
-SYN.head
-SYN.attr Konsole VT100 Linux XTerm Command Ignored
-SYN.code 0x16
+SYN.head Synchronous Idle
+SYN.attr Konsole VT100 Linux XTerm Command.Ignored
+SYN.code CTL|0x16| 
+SYN.text
+  Ignored
 
 ETB.head End Of Transmission Block
-ETB.attr Konsole VT100 Linux XTerm Command Ignored
-ETB.code 0x17
+ETB.attr Konsole VT100 Linux XTerm Command.Ignored
+ETB.code CTL|0x17| 
+ETB.text
+  Ignored
 
 CAN.head Cancel
-CAN.attr VT100
-CAN.code 0x18
+CAN.attr VT100 Command
+CAN.code CTL|0x18| 
 CAN.text
   If sent during a control sequence, the sequence id immediately
   terminated and not executed.  It also causes the error character
   (checkerboard) to be displayed.
 
-EM.head
-EM.attr Konsole VT100 Linux XTerm Command Ignored
-EM.code 0x19
+EM.head End Of Medium
+EM.attr Konsole VT100 Linux XTerm Command.Ignored
+EM.code CTL|0x19| 
+EM.text
+  Ignored
 
-SUB.head
-SUB.attr VT100
-SUB.code 0x1a
+SUB.head Substitute
+SUB.attr VT100 Command
+SUB.code CTL|0x1a| 
 SUB.text
   Same as \ref:CAN.
 
 ESC.head Escape
 ESC.attr ECMA VT100 Ignored
-ESC.code 0x1b
+ESC.code CTL|0x1b| 
 ESC.text
   Introduces a control sequence.
 
-FS.head
-FS.attr Konsole VT100 Linux XTerm Command Ignored
-FS.code 0x1c
+FS.head File Separator (IS4 - Information Separator Four)
+FS.attr Konsole VT100 Linux XTerm Command.Ignored
+FS.code CTL|0x1c| 
+FS.text
+  Ignored
 
-GS.head
-GS.attr Konsole VT100 Linux XTerm Command Ignored
-GS.code 0x1d
+GS.head Group Separator (IS3 - Information Separator Three)
+GS.attr Konsole VT100 Linux XTerm Command.Ignored
+GS.code CTL|0x1d| 
+GS.text
+  Ignored
 
-RS.head
-RS.attr Konsole VT100 Linux XTerm Command Ignored
-RS.code 0x1e
+RS.head Record Separator (IS2 - Information Separator Two)
+RS.attr Konsole VT100 Linux XTerm Command.Ignored
+RS.code CTL|0x1e| 
+RS.text
+  Ignored
 
-US.head
-US.attr Konsole VT100 Linux XTerm Command Ignored
-US.code 0x1f
+US.head Unit Separator (IS1 - Information Separator One)
+US.attr Konsole VT100 Linux XTerm Command.Ignored
+US.code CTL|0x1f| 
+US.text
+  Ignored
 
 DEL.head Delete Character
-DEL.attr VT100 Command Ignored
-DEL.code 0x7f
+DEL.attr VT100 Command.Ignored
+DEL.code DEL|| 
+DEL.text
+  Ignored
 
 CPR.head Cursor Position Report
 CPR.attr VT100 ECMA Reply
-CPR.code ESC [ {Pn} ; {Pn} R
+CPR.code CSI|R|{Pn;Pn}
 CPR.dflt 1 1
 CPR.text
   The CPR sequence reports the active position by means of the
@@ -300,8 +848,8 @@ CPR.text
   (\ref:DSR) command sent from the host.
 
 CUB.head Cursor Backward
-CUB.attr VT100 ECMA Command Event
-CUB.code ESC [ {Pn} D
+CUB.attr VT100 ECMA Command.Cursor Event
+CUB.code CSI|D|{Pn}
 CUB.dflt 1
 CUB.text
   The CUB sequence move the cursor to the left.  The distance moved is
@@ -310,8 +858,8 @@ CUB.text
   left margin.
 
 CUD.head Cursor Down
-CUD.attr VT100 ECMA Command Event
-CUD.code ESC [ {Pn} B
+CUD.attr VT100 ECMA Command.Cursor Event
+CUD.code CSI|B|{Pn}
 CUD.dflt 1
 CUD.text
   Moves the cursor down a number of lines as specified in the parameter
@@ -319,8 +867,8 @@ CUD.text
   margin.
 
 CUF.head Cursor Foreward
-CUF.attr VT100 ECMA Command Event
-CUF.code ESC [ {Pn} C
+CUF.attr VT100 ECMA Command.Cursor Event
+CUF.code CSI|C|{Pn}
 CUF.dflt 1
 CUF.text
   The CUF sequence moves the cursor to the right a number of positions
@@ -328,8 +876,8 @@ CUF.text
   margin.
 
 CUP.head Cursor Position
-CUP.attr VT100 ECMA Command
-CUP.code ESC [ {Pn} ; {Pn} H
+CUP.attr VT100 ECMA Command.Cursor
+CUP.code CSI|H|{Pn;Pn}
 CUP.dflt 1 1
 CUP.text
   The CUP sequence moves the curor to the position specified by the
@@ -343,8 +891,8 @@ CUP.text
   (\ref:DECOM).
 
 CUU.head Cursor Up
-CUU.attr VT100 ECMA Command Event
-CUU.code ESC [ {Pn} A
+CUU.attr VT100 ECMA Command.Cursor Event
+CUU.code CSI|A|{Pn}
 CUU.dflt 1
 CUU.text
   Moves the cursor up without changing columns.  The cursor is moved up a
@@ -352,8 +900,8 @@ CUU.text
   moved beyond the top margin.
 
 DA.head Device Attributes Request
-DA.attr VT100 ECMA Command
-DA.code ESC [ {Pn} c
+DA.attr VT100 ECMA Command.Request
+DA.code CSI|c|{Pn}
 DA.dflt 0
 DA.text
   The host requests the VT100 to send a DA sequence to indentify
@@ -363,12 +911,13 @@ DA.text
 
 DECDA.head Device Attributes Reply
 DECDA.attr VT100 DEC Reply
-DECDA.code ESC [ ? 1 ; {Pn} c
+DECDA.code PRI|c|{1;Pn}
 DECDA.text
   Response to the \ref:DA request (VT100 to host) is generated
   by the VT100 as a DECDA control sequence with the numeric parameters as
   follows:
 DECDA.table.Pn
+  Pn|Meaning:4
   0|No options
   1|Processor Option (STP)
   2|Advanced Video Option (AVO)
@@ -379,7 +928,7 @@ DECDA.table.Pn
 
 DECALN.head Screen Alignment Display
 DECALN.attr VT100 DEC Command
-DECALN.code ESC # 8
+DECALN.code HSH|8| 
 DECALN.text
   This command causes the VT100 to fill it's screen with uppercase Es for
   screen focus and alignment.
@@ -436,8 +985,8 @@ DECCOLM.text
   \ref:RM, and \ref:SM.
 
 DECDHLT.head Double Height Line (Top)
-DECDHLT.attr VT100 DEC Command
-DECDHLT.code ESC # 3
+DECDHLT.attr VT100 DEC Command.NoImp
+DECDHLT.code HSH|3| 
 DECDHLT.text
   This sequence cause the line containing the cursor to become the top
   half of a double-height, double width line.
@@ -452,8 +1001,8 @@ DECDHLT.text
   same character string.
 
 DECDHLB.head Double Height Line (Bottom)
-DECDHLB.attr VT100 DEC Command
-DECDHLB.code ESC # 4
+DECDHLB.attr VT100 DEC Command.NoImp
+DECDHLB.code HSH|4| 
 DECDHLB.text
   This sequence cause the line containing the cursor to become the
   bottom half of a double-height, double width line.
@@ -468,8 +1017,8 @@ DECDHLB.text
   same character string.
 
 DECDWL.head Double Width Line
-DECDWL.attr VT100 DEC Command
-DECDWL.code ESC # 6
+DECDWL.attr VT100 DEC Command.NoImp
+DECDWL.code HSH|6| 
 DECDWL.text
   This causes the line that contains the cursor to become double-width
   single height.  If the line was single width, all characters ro the
@@ -478,8 +1027,8 @@ DECDWL.text
   the right margin, in which case it is moved to the right margin.
 
 DECID.head Identify Terminal
-DECID.attr VT100 DEC Command
-DECID.code ESC Z
+DECID.attr VT100 DEC Command.Request
+DECID.code ESC|Z| 
 DECID.text
   This sequence causes the same response as the \ref:DA sequence.  This
   sequence will not be supported in future models.
@@ -495,30 +1044,31 @@ DECINLM.text
   \ref:RM, and \ref:SM.
 
 DECKPAM.head Keypad Application Mode
-DECKPAM.attr VT100 DEC Command Mode
-DECKPAM.code ESC =
+DECKPAM.attr VT100 DEC Command.Mode Mode
+DECKPAM.code ESC|=| 
 DECKPAM.text
   The auxiliary keypad keys will transmit control sequences.
 
 DECKPNM.head Keypad Numeric Mode
-DECKPNM.attr VT100 DEC Mode Command
-DECKPNM.code ESC >
+DECKPNM.attr VT100 DEC Mode Command.Mode
+DECKPNM.code ESC|>| 
 DECKPNM.text
   The auxiliary keypad keys will send ASCII codes corresponding to the
   characters engraved on their keys.
 
 DECLL.head Load LEDs
-DECLL.attr VT100 DEC Command
-DECLL.code ESC [ {Ps} q
+DECLL.attr VT100 DEC Command.NoImp
+DECLL.code CSI|q|{Ps;...}
 DECLL.dflt 0
 DECLL.text
   Load the four programmable LEDs on the keyboard according to the parameter(s).
-DECLL.table.Ps
-  0|Clear All LEDs
-  1|Light L1
-  2|Light L2
-  3|Light L3
-  4|Light L4
+DECLL.table.XPS
+  Subcode|Emulation|Scope|Operation|Args|Meaning
+  0|VT100|emu|Ignored||Clear All LEDs
+  1|VT100|emu|Ignored||Light L1
+  2|VT100|emu|Ignored||Light L2
+  3|VT100|emu|Ignored||Light L3
+  4|VT100|emu|Ignored||Light L4
 
 DECOM.head Origin Mode
 DECOM.attr VT100 DEC Mode
@@ -541,15 +1091,15 @@ DECOM.text
   being line 1, column 1.
 
 DECRC.head Restore Cursor
-DECRC.attr VT100 DEC Command
-DECRC.code ESC 8
+DECRC.attr VT100 DEC Command.CursMode
+DECRC.code ESC|8| 
 DECRC.text
   This sequence causes the previously saved cursor position, graphic
   rendition, and character set to be restored.
 
 DECREPTPARM.head Report Terminal Parameters
 DECREPTPARM.attr VT100 ANSI Reply
-DECREPTPARM.code ESC [ {sol} ; {par} ; {nbits} ; {xspd} ; {rspd} ; {cmul} ; {flags} x
+DECREPTPARM.code CSI|x|{sol;par;nbits;xspd;rspd;cmul;flags}
 DECREPTPARM.text
   This sequence is generated by the VT100 to notify the host of the
   status of selected terminal parameters.  The status sequence may be
@@ -560,16 +1110,20 @@ DECREPTPARM.text
   .
   The meanings of the sequence paramters are:
 DECREPTPARM.table.sol
+  sol|Meaning:4
   1|This message is a report.
   2|This message is a report, and the terminal is only reporting on request.
 DECREPTPARM.table.par
+  par|Meaning:4
   1|No parity set
   4|Parity set and odd
   5|Parity set and even
 DECREPTPARM.table.nbits
+  nbits|Meaning:4
   1|8 bits per character
   2|7 bits per character
 DECREPTPARM.table.speed(xspd,rspd)
+  speed|Meaning (xspd,rspd):4
   0|Speed set to 50 bps
   8|Speed set to 75 bps
   16|Speed set to 110 bps
@@ -587,13 +1141,15 @@ DECREPTPARM.table.speed(xspd,rspd)
   112|Speed set to 9600 bps
   120|Speed set tp 19200 bps
 DECREPTPARM.table.cmul
+  cmul|Meaning:4
   1|The bit rate multiplier is 16
 DECREPTPARM.table.flags
+  flags|Meaning:4
   0-15|This value communicates the four switch values in block 5 of SET-UP B, which are only visible to the user when an STP option is installed.
 
 DECREQTPARM.head Request Terminal Parameters
-DECREQTPARM.attr VT100 ANSI Command
-DECREQTPARM.code ESC [ {Ps} x
+DECREQTPARM.attr VT100 ANSI Command.Request
+DECREQTPARM.code CSI|x|{Ps}
 DECREQTPARM.text
   The host sends this sequence to request the VT100 to send a
   \ref:DECREPTPARM
@@ -604,8 +1160,8 @@ DECREQTPARM.text
   \ref:DECREPTPARMs in response to a request.
 
 DECSC.head Save Cursor
-DECSC.attr VT100 DEC Command
-DECSC.code ESC 7
+DECSC.attr VT100 DEC Command.CursMode
+DECSC.code ESC|7| 
 DECSC.text
   Causes the cursor position, graphic rendition, and character set to be
   saved.  (See \ref:DECRC)
@@ -630,8 +1186,8 @@ DECSCNM.text
   See \ref:MODES, \ref:RM, and \ref:SM.
 
 DECSTBM.head Set Top and Bottom Margins
-DECSTBM.attr VT100 DEC Command
-DECSTBM.code ESC [ {Pn} ; {Pn} r
+DECSTBM.attr VT100 DEC Command.CursMode
+DECSTBM.code CSI|r|{Pn;Pn}
 DECSTBM.dflt 1 ScreenLines
 DECSTBM.text
   This sequence sets the top and bottom margins to define the scrolling
@@ -645,8 +1201,8 @@ DECSTBM.text
   position (See \ref:DECOM).
 
 DECSWL.head Single-width Line
-DECSWL.attr VT100 DEC Command
-DECSWL.code ESC # 5
+DECSWL.attr VT100 DEC Command.NoImp
+DECSWL.code HSH|5| 
 DECSWL.text
   This causes the line which contains the cursor to become single-width,
   single-height.  The cursor remains on the same character position.
@@ -654,20 +1210,21 @@ DECSWL.text
 
 DECTST.head Invoke Confidence Test
 DECTST.attr VT100 ANSI Command
-DECTST.code ESC [ 2 ; {Ps} y
+DECTST.code CSI|y|{2;Ps}
 DECTST.text
   Ps is the parameter indicating the test to be done.  It is computed by
   taking the weight indicated for each desired test and adding them
   together.  If Ps is 0, no test is performed but the VT100 is reset.
 DECTST.table.Weight
+  Weight|Meaning:4
   1|POST (ROM checksum, RAM NVR, keyboardm and AVO)
   2|Data Loop Back (Loopback connector required)
   3|EIA Modem Control Test (Loopback connector req.)
   4|Repeat Testing until failure
 
 DSR.head Device Status Report
-DSR.attr VT100 ANSI Command Reply
-DSR.code ESC [ {Ps} n
+DSR.attr VT100 ANSI Command.Request Reply
+DSR.code CSI|n|{Ps}
 DSR.text
   Requests and reports the general status of the VT100 according to the
   following parameters.
@@ -675,45 +1232,48 @@ DSR.text
   DSR with a parameter of 0 or 3 is always sent as a response to a
   requesting DSR with a parameter of 5.
 DSR.table.Ps
+  Ps|Direction|Meaning:3
   0|to host |Ready, no faults detected
   3|to host |Malfunction detected
   5|to VT100|Report Status (using a DSR control sequence)
   6|to VT100|Report Active Position (using a CPR sequence)
 
 ED.head Erase in Display
-ED.attr VT100 ANSI Command
-ED.code ESC [ {Ps} J
+ED.attr VT100 ANSI Command.Erase
+ED.code CSI|J|{Ps}
 ED.dflt 0
 ED.text
   This sequence erases some or all of the characters in the display
   according to the parameter.  Any complete line erased by this sequence
   will return that line to single width mode.
 ED.table.Ps
+  Ps|Operation:4
   0|Erase from the cursor to the end of the screen.
   1|Erase from the start of the screen to the cursor.
   2|Erase the entire screen.
 
 EL.head Erase in Line
-EL.attr VT100 ANSI Command
-EL.code ESC [ {Ps} K
+EL.attr VT100 ANSI Command.Erase
+EL.code CSI|K|{Ps}
 EL.dflt 0
 EL.text
   Erases some or all characters in the active line, according to the
   parameter.
 EL.table
+  Ps|Operation:4
   0|Erase from cursor to the end of the line.
   1|Erase from the start of the line to the cursor.
   2|Erase the entire line.
 
 HTS.head Horizontal Tab Set
-HTS.attr VT100 ANSI Command
-HTS.code ESC H
+HTS.attr VT100 ANSI Command.CursMode
+HTS.code ESC|H| 
 HTS.text
   Set a tab stop at the current cursor position.
 
 HVP.head Horizontal and Vertical Position
-HVP.attr VT100 ANSI Command
-HVP.code ESC [ {Pn} ; {Pn} f
+HVP.attr VT100 ANSI Command.Cursor
+HVP.code CSI|f|{Pn;Pn}
 HVP.dflt 1 1
 HVP.text
   Moves the cursor to the position specified by the parameters.  The
@@ -725,8 +1285,8 @@ HVP.text
   (\ref:DECOM).
 
 IND.head Index
-IND.attr VT100 ANSI Command
-IND.code ESC D
+IND.attr VT100 ANSI Command.Cursor
+IND.code ESC|D| 
 IND.text
   This sequence causes the cursor to move downward one line without
   changing the column.  If the cursor is at the bottom margin, a scroll
@@ -749,15 +1309,15 @@ LNM.text
   (\ref:NEL) format effectors.
 
 NEL.head Next Line
-NEL.attr VT100 ANSI Command
-NEL.code ESC E
+NEL.attr VT100 ANSI Command.Cursor
+NEL.code ESC|E| 
 NEL.text
   This causes the cursor to move to the first position of the next line
   down.  If the cursor is on the bottom line, a scroll is performed.
 
 PRINT.head Printable Characters
-PRINT.attr ECMA VT100 Command
-PRINT.code 0x20..0x7e,0xa0..0xff
+PRINT.attr ECMA VT100 Command.Display
+PRINT.code PRN||{0x20..0x7e,0xa0..0xff} 
 PRINT.text
   Printable characters are basically displayed. They my cause a line
   wrap when the cursor is already located at the end of the line.
@@ -767,34 +1327,34 @@ PRINT.text
   to print at the rightmost column without producing an implicit line feed.
 
 RI.head Reverse Index
-RI.attr VT100 ANSI Command
-RI.code ESC M
+RI.attr VT100 ANSI Command.Cursor
+RI.code ESC|M| 
 RI.text
   Move the cursor up one line without changing columns.  If the cursor is
   on the top line, a scroll down is performed.
 
 RIS.head Reset to Initial State
-RIS.attr VT100 ANSI Command
-RIS.code ESC c
+RIS.attr VT100 ANSI Command.Mode
+RIS.code ESC|c| 
 RIS.text
   Resets the VT100 to the state is has upon power up.  This also causes
   the execution of the POST and signal INT H to be asserted briefly.
 
 RM.head Reset Mode
-RM.attr VT100 ANSI Command
-RM.code ESC [ {Ps...} l
+RM.attr VT100 ANSI Command.SetMode
+RM.code CSI|l|{Ps;...}
 RM.text
   Resets one or more VT100 modes as specified by each selective parameter
   in the parameter string.  Each mode to be reset is specified by a
   separate parameter.  See \ref:MODES and \ref:SM.
 
 SCS.head Select Character Set
-SCS.attr VT100 ANSI Command
-SCS.code ESC {Pc} {Cs}
+SCS.attr VT100 ANSI Command.RenderMode
+SCS.code SCS||{Pc;Cs}
 SCS.text
   The appropriate D0 and G1 character sets are designated from one of the
   five possible sets.  The G0 and G1 sets are invoked by the characters
-  \ref:SI and \ref:SO, respectively.
+  \ref:LS1 and \ref:LS0, respectively.
   .
   The United Kingdom and ASCII sets conform to the "ISO international
   register of character sets to be used with escape sequences".  The
@@ -803,9 +1363,11 @@ SCS.text
   characters.  The specified character set will be used until another SCS
   is recieved.
 SCS.table.Pc
+  Pc|Character Selection:4
   (|Select G0 Set
   )|Select G1 Set
 SCS.table.Cs
+  Cs|Character Set:4
   A|United Kingdom Set
   B|ASCII Set
   0|Special Graphics
@@ -813,8 +1375,8 @@ SCS.table.Cs
   2|Alternate Character ROM (Special Graphics)
 
 SGR.head Select Graphic Rendition
-SGR.attr VT100 ANSI Command
-SGR.code ESC [ {Ps...} m
+SGR.attr VT100 ANSI Command.RenderMode
+SGR.code CSI|m|{Ps;...}
 SGR.text
   Invoke the graphic rendition specified by the parameter(s).  All
   following characters transmitted to the VT100 are rendered according
@@ -827,6 +1389,7 @@ SGR.text
   specifying either underscore or reverse will activate the currently
   selected attribute.
 SGR.table.Ps
+  Ps|Operation:4
   0|Attributes Off
   1|Bold or increased intensity
   4|Underscore
@@ -834,8 +1397,8 @@ SGR.table.Ps
   7|Negative (reverse) image
 
 SM.head Set Mode
-SM.attr VT100 ANSI Command
-SM.code ESC [ {Ps...} h
+SM.attr VT100 ANSI Command.SetMode
+SM.code CSI|h|{Ps;...}
 SM.text
   Causes one or more modes to be set within the VT100 as specified by
   each selective parameter string.  Each mode to be set is specified by a
@@ -844,8 +1407,8 @@ SM.text
   See \ref:RM and \ref:MODES.
 
 TBC.head Tabulation Clear
-TBC.attr VT100 ANSI Command
-TBC.code ESC [ {Ps} g
+TBC.attr VT100 ANSI Command.CursMode
+TBC.code CSI|g|{Ps}
 TBC.text
   If the parameter is missing or 0, this will clear the tab stop at the
   cursor's position.  If it is 3, this will clear all of the tab stops.
@@ -858,96 +1421,96 @@ TBC.text
 ##############################################################################
 
 VT52ANSI.head VT52 ANSI Ansi Mode
-VT52ANSI.attr Konsole VT100 XTerm Command
-VT52ANSI.code ESC <
+VT52ANSI.attr Konsole VT52 VT100 XTerm Command.Mode
+VT52ANSI.code ESC|<| 
 VT52ANSI.text
   This is an extention to the VT52 commands to embed the emulation into VT100.
   It allows to return back to VT100 emulation (ANSI mode).
   See also \ref:DECANM and \ref:SM.
 
 VT52CUB.head VT52 Cursor Back
-VT52CUB.attr Konsole VT52 XTerm VT100 Command
-VT52CUB.code ESC D
+VT52CUB.attr Konsole Command.VT52
+VT52CUB.code ESC|D| 
 VT52CUB.text
   See \ref:CUB.
 
 VT52CUD.head VT52 Cursor Down
-VT52CUD.attr Konsole VT52 XTerm VT100 Command
-VT52CUD.code ESC B
+VT52CUD.attr Konsole Command.VT52
+VT52CUD.code ESC|B| 
 VT52CUD.text
   See \ref:CUD.
 
 VT52CUF.head VT52 Cursor Forward
-VT52CUF.attr Konsole VT52 XTerm VT100 Command
-VT52CUF.code ESC C
+VT52CUF.attr Konsole Command.VT52
+VT52CUF.code ESC|C| 
 VT52CUF.text
   See \ref:CUF.
 
 VT52CUP.head VT52 Cursor Position
-VT52CUP.attr Konsole VT52 XTerm VT100 Command
-VT52CUP.code ESC Y {X} {Y}
+VT52CUP.attr Konsole Command.VT52
+VT52CUP.code VT5||{X;Y}
 VT52CUP.text
   Line and column numbers for direct cursor address are single
   character codes whose values are the desired number plus
   37 (in Octal). Line and column numbers start at 1.
 
 VT52CUU.head VT52 Cursor Up
-VT52CUU.attr Konsole VT52 XTerm VT100 Command
-VT52CUU.code ESC A
+VT52CUU.attr Konsole Command.VT52
+VT52CUU.code ESC|A| 
 VT52CUU.text
   See \ref:CUU.
 
 VT52EDL.head VT52 Clear To End Of Line
-VT52EDL.attr Konsole VT52 XTerm VT100 Command
-VT52EDL.code ESC K
+VT52EDL.attr Konsole Command.VT52
+VT52EDL.code ESC|K| 
 VT52EDL.text
   FIXME. explain
 
 VT52EDS.head VT52 Clear To End Of Screen
-VT52EDS.attr Konsole VT52 XTerm VT100 Command
-VT52EDS.code ESC J
+VT52EDS.attr Konsole Command.VT52
+VT52EDS.code ESC|J| 
 VT52EDS.text
   FIXME. explain
 
 VT52CUH.head VT52 Cursor Home
-VT52CUH.attr Konsole VT52 XTerm VT100 Command
-VT52CUH.code ESC H
+VT52CUH.attr Konsole Command.VT52
+VT52CUH.code ESC|H| 
 VT52CUH.text
   FIXME. explain
 
 VT52KPAM.head VT52 Enter alternate keypad mode
-VT52KPAM.attr Konsole VT52 XTerm VT100 Command
-VT52KPAM.code ESC =
+VT52KPAM.attr Konsole Command.VT52
+VT52KPAM.code ESC|=| 
 VT52KPAM.text
   FIXME. explain
 
 VT52KPNM.head VT52 Exit alternate keypad mode
-VT52KPNM.attr Konsole VT52 XTerm VT100 Command
-VT52KPNM.code ESC >
+VT52KPNM.attr Konsole Command.VT52
+VT52KPNM.code ESC|>| 
 VT52KPNM.text
   FIXME. explain
 
 VT52REP.head VT52 Report Terminal Type
-VT52REP.attr Konsole VT52 XTerm VT100 Command
-VT52REP.code ESC Z
+VT52REP.attr Konsole Command.VT52
+VT52REP.code ESC|Z| 
 VT52REP.text
   Response to ESC Z is ESC / Z.
 
 VT52RI.head VT52 Reverse Index
-VT52RI.attr Konsole VT52 XTerm VT100 Command
-VT52RI.code ESC I
+VT52RI.attr Konsole Command.VT52
+VT52RI.code ESC|I| 
 VT52RI.text
   FIXME. explain
 
 VT52SCSF.head VT52 Select special graphics character set
-VT52SCSF.attr Konsole VT52 XTerm VT100 Command
-VT52SCSF.code ESC F
+VT52SCSF.attr Konsole Command.VT52
+VT52SCSF.code ESC|F| 
 VT52SCSF.text
   FIXME. explain
 
 VT52SCSG.head VT52 Select ASCII character set
-VT52SCSG.attr Konsole VT52 XTerm VT100 Command
-VT52SCSG.code ESC G
+VT52SCSG.attr Konsole Command.VT52
+VT52SCSG.code ESC|G| 
 VT52SCSG.text
   FIXME. explain
 VT52 Compatible Mode

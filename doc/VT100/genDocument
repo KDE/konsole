@@ -62,14 +62,18 @@ This situation is further confused by the fact, that often many versions of the
 above terminals and emulations are out, one able to do a little more or less then
 the other.
 <p>
+<hr>
+<p>
 Currently, the body of this document is mainly a concept data base, that
-referes to the VT100 component of the emulation. Any indication whether
-these codes are implemented by konsole or not are missing. So do additional
-codes origination from the Xterm and Linux console emulation. If you need to
-know the precise extend of the emulation, please refere to the TEmuVt102.C
-source, which contains a table, that fully answers the question. I'm in the
-process to integrate this table into this concept data base, to link the
-konsole emulation sources closely with it's documentation.
+referes to the VT100 component of the emulation. Though the codes accepted by
+konsole are now clearly indicated, a comparison to the xterm and Linux console
+emulation is missing.
+<p>
+The konsole emulation sources is not linked closely with it's documentation,
+and, also accurate at the time of writing, it can still fall slightly appart.
+Work is currently in progress to fix this issue. A decent indexing is on the
+way also.
+
 
 
 <h2>Notes &amp; todos</h2>
@@ -365,6 +369,37 @@ The following attributes below have the following meaning:
 <li>Reply - Sent from terminal to the host (as response to an Inquiery).
 <li>Event - Sent from terminal to the host (caused by a user activity).
 <li>Mode - The entry is a mode.
+</ul>
+
+<p>
+<ul>
+<li>Host to Terminal (Commands,Requests)
+<ul>
+<li>Commands
+<ul>
+<li>Character Display Operation
+<li>Rendition related status
+<li>Cursor
+<li>Cursor related status
+<li>Edit
+<li>Miscellaneous
+<li>General mode setting
+<li>Miscellaneous status
+<li>VT52
+<li>Not implemented
+<li>Ignored
+</ul>
+<li>Requests
+</ul>
+<li>Terminal to Host (Replies, Events)
+<ul>
+<li>Replies
+<li>Events
+</ul>
+<li>Modes
+<ul>
+<li>Modes
+</ul>
 </ul>
 etx
 
