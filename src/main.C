@@ -268,7 +268,7 @@ void TEDemo::saveProperties(KConfig* config)
 
 void TEDemo::readProperties(KConfig* config)
 {
-  QSize dftSize(400,200);
+  QSize dftSize(80,25);
   config->setGroup("options");
   b_menuvis  = config->readBoolEntry("menubar visible",TRUE);
   b_framevis = config->readBoolEntry("has frame",TRUE);
