@@ -13,6 +13,7 @@ class SessionIface : virtual public DCOPObject
 
     virtual void clearHistory() =0;
     virtual void renameSession(const QString &name) =0;
+    virtual QString sessionName() =0;
 };
 
 #endif // SESSIONIFACE_H

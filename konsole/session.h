@@ -90,6 +90,7 @@ public:
   void feedSession(const QString &text);
   void sendSession(const QString &text);
   void renameSession(const QString &name);
+  QString sessionName() { return title; }
 
   virtual bool processDynamic(const QCString &fun, const QByteArray &data, QCString& replyType, QByteArray &replyData);
   virtual QCStringList functionsDynamic();
