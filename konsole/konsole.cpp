@@ -93,6 +93,7 @@ Time to start a requirement list.
 #include <kmenubar.h>
 #include <kmessagebox.h>
 #include <krootpixmap.h>
+#include <krun.h>
 #include <kstdaction.h>
 #include <klineeditdlg.h>
 #include <kdebug.h>
@@ -1349,6 +1350,7 @@ void Konsole::enterURL(const QString& URL)
   }
   if (URL.startsWith("file:")) {
     QString newtext=URL.mid(5);   
+    KRun::shellQuote(newtext);
     te->emitText("cd "+newtext+"\r");
   }
   else
