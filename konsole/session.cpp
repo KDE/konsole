@@ -29,6 +29,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, QStrList & _args, const
    , schema_no(0)
    , font_no(3)
    , silence_seconds(10)
+   , add_to_utmp(true)
    , pgm(_pgm)
    , args(_args)
    , sessionId(_sessionId)
@@ -80,7 +81,7 @@ void TESession::run()
   QString cwd_save = QDir::currentDirPath();
   if (!initial_cwd.isEmpty())
      QDir::setCurrent(initial_cwd);
-  sh->run(QFile::encodeName(pgm),args,term.latin1(),true,
+  sh->run(QFile::encodeName(pgm),args,term.latin1(), add_to_utmp,
           ("DCOPRef("+appId+",konsole)").latin1(),
           ("DCOPRef("+appId+","+sessionId+")").latin1());
   if (!initial_cwd.isEmpty())
@@ -358,6 +359,11 @@ void TESession::setMonitorSilenceSeconds(int seconds)
 void TESession::setMasterMode(bool _master)
 {
   masterMode=_master;
+}
+
+void TESession::setAddToUtmp(bool set)
+{
+  add_to_utmp = set;
 }
 
 #include "session.moc"

@@ -525,6 +525,8 @@ void konsolePart::readProperties()
   config = new KConfig("konsolerc",true);
   config->setDesktopGroup();
   te->setTerminalSizeHint( config->readBoolEntry("TerminalSizeHint",true) );
+  config->setGroup("UTMP");
+  se->setAddToUtmp( config->readBoolEntry("AddToUtmp",true));
   delete config;
 }
 

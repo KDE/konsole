@@ -327,6 +327,7 @@ private:
   bool        b_warnQuit:1;
   bool        isRestored:1;
   bool        b_allowResize:1;
+  bool        b_addToUtmp:1;
 
   bool         b_histEnabled:1;
   unsigned int m_histSize;

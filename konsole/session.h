@@ -71,6 +71,7 @@ public:
   void setTitle(const QString& _title);
   void setIconName(const QString& _iconName);
   void setIconText(const QString& _iconText);
+  void setAddToUtmp(bool);
   bool testAndSetStateIconName (const QString& newname);
   bool sendSignal(int signal);
 
@@ -125,6 +126,7 @@ private:
   QString        userTitle;
   QString        iconName;
   QString        iconText; // as set by: echo -en '\033]1;IconText\007
+  bool           add_to_utmp;
 
   QString	 stateIconName;
 

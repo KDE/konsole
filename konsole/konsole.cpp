@@ -154,7 +154,7 @@ template class QIntDict<KSimpleConfig>;
 template class QPtrDict<KRadioAction>;
 
 
-const char *fonts[] = {
+const char * const fonts[] = {
  "13",
  "7",   // tiny font, never used
  "10",  // small font
@@ -234,6 +234,7 @@ DCOPObject( "konsole" )
 ,skip_exit_query(false) // used to skip the query when closed by the session management
 ,b_warnQuit(false)
 ,b_allowResize(true)
+,b_addToUtmp(true)
 ,m_histSize(DEFAULT_HISTORY_SIZE)
 {
   isRestored = b_inRestore;
@@ -1042,6 +1043,10 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
      monitorSilenceSeconds=config->readUnsignedNumEntry("SilenceSeconds", 10);
      for (TESession *ses = sessions.first(); ses; ses = sessions.next())
        ses->setMonitorSilenceSeconds(monitorSilenceSeconds);
+       
+     config->setGroup("UTMP");
+     b_addToUtmp = config->readBoolEntry("AddToUtmp",true);
+     config->setDesktopGroup();
    }
 
    ColorSchema* sch = 0;
@@ -1928,6 +1933,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
     s->setKeymap(key);
   s->setTitle(txt);
   s->setIconName(icon);
+  s->setAddToUtmp(b_addToUtmp);
 
   if (b_histEnabled && m_histSize)
     s->setHistory(HistoryTypeBuffer(m_histSize));
