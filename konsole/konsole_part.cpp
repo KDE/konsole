@@ -240,19 +240,19 @@ void konsolePart::doneSession(TESession*)
   // see doneSession in konsole.cpp
   if (se)
   {
-    kdDebug(1211) << "doneSession - disconnecting done" << endl;;
+    kdDebug(1211) << "doneSession - disconnecting done" << endl;
     disconnect( se,SIGNAL(done(TESession*)),
                 this,SLOT(doneSession(TESession*)) );
     se->setConnect(false);
     //QTimer::singleShot(100,se,SLOT(terminate()));
-    kdDebug(1211) << "se->terminate()" << endl;;
+    kdDebug(1211) << "se->terminate()" << endl;
     se->terminate();
   }
 }
 
 void konsolePart::sessionDestroyed()
 {
-  kdDebug(1211) << "sessionDestroyed()" << endl;;
+  kdDebug(1211) << "sessionDestroyed()" << endl;
   disconnect( se, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
   se = 0;
   delete this;
