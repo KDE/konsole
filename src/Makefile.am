@@ -35,15 +35,15 @@ INCLUDES =  -I$(INCDIR) $(all_includes)
 # you can add here more. This one gets installed 
 bin_PROGRAMS = 	konsole kcmkonsole
 
-lib_LTLIBRARIES = libkonsole.la
+noinst_LIBRARIES = libkonsole.a
 
-libkonsole_la_SOURCES = TEWidget.C TEmuVt102.C TEScreen.C TEmulation.C TEShell.C
-libkonsole_la_LDFLAGS =  -version-info `expr $(VERSION) + $(SUBVERS)`:$(RELEASE):$(SUBVERS)
+libkonsole_a_SOURCES = TEWidget.C TEmuVt102.C TEScreen.C TEmulation.C TEShell.C
+# libkonsole_a_LDFLAGS =  -version-info `expr $(VERSION) + $(SUBVERS)`:$(RELEASE):$(SUBVERS)
                        
 # Which sources should be compiled for konsole.
 
 konsole_SOURCES	= main.C schema.C session.C
-konsole_LDADD   = libkonsole.la $(LIB_KIMGIO) $(LIB_KDEUI) 
+konsole_LDADD   = libkonsole.a $(LIB_KIMGIO) $(LIB_KDEUI) 
 konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 kcmkonsole_SOURCES	= kcmkonsole.C schema.C
