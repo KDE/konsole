@@ -262,7 +262,7 @@ void TEmuVt102::initTokenizer()
   for(i =  0;                      i < 256; i++) tbl[ i]  = 0;
   for(i =  0;                      i <  32; i++) tbl[ i] |= CTL;
   for(i = 32;                      i < 256; i++) tbl[ i] |= CHR;
-  for(s = (UINT8*)"@ABCDGHILMPXZcdfry"; *s; s++) tbl[*s] |= CPN;
+  for(s = (UINT8*)"@ABCDGHILMPSTXZcdfry"; *s; s++) tbl[*s] |= CPN;
   for(s = (UINT8*)"0123456789"        ; *s; s++) tbl[*s] |= DIG;
   for(s = (UINT8*)"()+*%"             ; *s; s++) tbl[*s] |= SCS;
   for(s = (UINT8*)"()+*#[]%"          ; *s; s++) tbl[*s] |= GRP;
@@ -408,7 +408,7 @@ switch( N )
            break;
    case 5: printf("CSI-PS-%c-%d", (token>>8)&0xff, (token>>16)&0xff );
            break;
-   case 6: printf("CSI-PN-%c", (token>>8)&0xff);
+   case 6: printf("CSI-PN-%c [%d]", (token>>8)&0xff, p);
            break;
    case 7: printf("CSI-PR-%c-%d", (token>>8)&0xff, (token>>16)&0xff );
            break;
@@ -593,6 +593,8 @@ switch( N )
     case TY_CSI_PN('L'      ) : scr->insertLines          (p         ); break;
     case TY_CSI_PN('M'      ) : scr->deleteLines          (p         ); break;
     case TY_CSI_PN('P'      ) : scr->deleteChars          (p         ); break;
+    case TY_CSI_PN('S'      ) : scr->scrollUp             (p         ); break;
+    case TY_CSI_PN('T'      ) : scr->scrollDown           (p         ); break;
     case TY_CSI_PN('X'      ) : scr->eraseChars           (p         ); break;
     case TY_CSI_PN('Z'      ) : scr->backTabulate         (p         ); break;
     case TY_CSI_PN('c'      ) :      reportTerminalType   (          ); break; //VT100
