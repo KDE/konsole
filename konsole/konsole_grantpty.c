@@ -175,5 +175,12 @@ int main (int argc, char *argv[])
     return 1; /* FAIL */
   }
 
+  if (revoke(tty) < 0)
+  {
+    fprintf(stderr,"%s: cannot revoke %s.\n",argv[0],tty); perror("Reason");
+    return 1; /* FAIL */
+  }
+
+
   return 0; /* OK */
 }
