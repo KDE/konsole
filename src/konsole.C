@@ -109,7 +109,7 @@ Time to start a requirement list.
 #include "keytrans.h"
 
 
-#define KONSOLEDEBUG	kdDebug(1211)
+#define KONSOLEDEBUG    kdDebug(1211)
 
 
 class KonsoleFontSelectAction : public KSelectAction {
@@ -172,7 +172,7 @@ Konsole::Konsole(const char* name,
   te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
   // we need focus so that the auto-hide cursor feature works (Carsten)
   // but a part shouldn't force that it receives the focus, so we do it here (David)
-  te->setFocus(); 
+  te->setFocus();
 
   // Transparency handler ///////////////////////////////////////////////////
   rootxpm = new KRootPixmap(te);
@@ -287,12 +287,12 @@ void Konsole::makeMenu()
   toolBar()->insertLineSeparator();
 
   KPopupMenu* m_signals = new KPopupMenu(this);
-  m_signals->insertItem( i18n("STOP"), 17); // FIXME: comes with 3 values
-  m_signals->insertItem( i18n("CONT"), 18); // FIXME: comes with 3 values
-  m_signals->insertItem( i18n("HUP" ),  1);
-  m_signals->insertItem( i18n("INT" ),  2);
-  m_signals->insertItem( i18n("TERM"), 15);
-  m_signals->insertItem( i18n("KILL"),  9);
+  m_signals->insertItem( i18n( "Suspend Task" )   + " (KILL)", 17);     // FIXME: comes with 3 values
+  m_signals->insertItem( i18n( "Continue Task" )  + " (CONT)", 18);     // FIXME: comes with 3 values
+  m_signals->insertItem( i18n( "Hangup" )         + " (HUP)",   1);
+  m_signals->insertItem( i18n( "Interrupt Task" ) + " (INT)",   2);
+  m_signals->insertItem( i18n( "Terminate Task" ) + " (TERM)", 15);
+  m_signals->insertItem( i18n( "Kill Task" )      + " (KILL)",  9);
   connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
 
   m_sessions = new KPopupMenu(this);
@@ -332,12 +332,12 @@ void Konsole::makeMenu()
   showToolbar->plug(m_options);
   // Frame on/off
   showFrame = new KToggleAction(i18n("Show &Frame"), 0,
-				this, SLOT(slotToggleFrame()), this);
+                                this, SLOT(slotToggleFrame()), this);
   showFrame->plug(m_options);
 
   // Scrollbar
   selectScrollbar = new KSelectAction(i18n("Scrollbar"), 0, this,
-			     SLOT(slotSelectScrollbar()), this);
+                             SLOT(slotSelectScrollbar()), this);
   QStringList scrollitems;
   scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
   selectScrollbar->setItems(scrollitems);
@@ -347,20 +347,22 @@ void Konsole::makeMenu()
   m_options->insertItem( i18n("F&ullscreen"), 5);
   m_options->setItemChecked(5,b_fullscreen);
   m_options->insertSeparator();
+
+
   // Select size
   selectSize = new KSelectAction(i18n("Size"), 0, this,
-			     SLOT(slotSelectSize()), this);
+                             SLOT(slotSelectSize()), this);
   QStringList sizeitems;
   sizeitems << i18n("40x15 (&small)")
-	    << i18n("80x24 (&vt100)")
-	    << i18n("80x25 (&ibmpc)")
-	    << i18n("80x40 (&xterm)")
-	    << i18n("80x52 (ibmv&ga)");
+            << i18n("80x24 (&vt100)")
+            << i18n("80x25 (&ibmpc)")
+            << i18n("80x40 (&xterm)")
+            << i18n("80x52 (ibmv&ga)");
   selectSize->setItems(sizeitems);
   selectSize->plug(m_options);
   // Select font
   selectFont = new KonsoleFontSelectAction(i18n("Font"), 0, this,
-				 SLOT(slotSelectFont()), this);
+                                 SLOT(slotSelectFont()), this);
   QStringList it;
   it << i18n("&Normal")
      << i18n("&Tiny")
@@ -383,6 +385,14 @@ void Konsole::makeMenu()
   m_options->insertSeparator();
   m_options->insertItem( i18n("&Codec"), m_codec);
   m_options->insertItem( i18n("&Keyboard"), m_keytab);
+
+  // Open Session Warning on Quit
+  // FIXME: Allocate KActionCollection as parent, not this - Martijn
+  warnQuit = new KToggleAction (i18n("&Warn for Open Sessions on Quit"),
+                                0, this, SLOT(slotToggleQuitWarning()), this);
+  warnQuit->plug (m_options);
+  //m_options->insertSeparator();
+
   m_options->insertSeparator();
   m_options->insertItem( i18n("Save &Options"), 8);
   connect(m_options, SIGNAL(activated(int)), SLOT(opt_menu_activated(int)));
@@ -417,24 +427,45 @@ void Konsole::makeMenu()
 }
 
 /**
+                Ask for Quit confirmation - Martijn Klingens
+                Asks for confirmation if there are still open shells when the 'Warn on
+                Quit' option is set.
+ */
+bool Konsole::queryClose()
+{
+    if ( warnQuit && warnQuit->isChecked () ) {
+        if( (sessions.count()>1) &&
+            ( KMessageBox::warningYesNo( this, i18n( "You have open sessions (besides the current one).\n"
+                                                     "These will be killed if you continue.\n\n"
+                                                     "Are you sure you want to quit?" ) )
+              == KMessageBox::No )
+            )
+            return FALSE;
+        }
+        // If there is no warning requested or required or if warnQuit is a NULL
+        // pointer for some reason, just assume closing is safe
+        return  TRUE;
+}
+
+/**
    This function calculates the size of the external widget
    needed for the internal widget to be
  */
 QSize Konsole::calcSize(int columns, int lines) {
     QSize size = te->calcSize(columns, lines);
     if (!toolBar()->isHidden()) {
- 	if ((toolBar()->barPos()==KToolBar::Top) ||
-	    (toolBar()->barPos()==KToolBar::Bottom)) {
+        if ((toolBar()->barPos()==KToolBar::Top) ||
+            (toolBar()->barPos()==KToolBar::Bottom)) {
             int height = toolBar()->sizeHint().height();
-	    size += QSize(0, height);
-	}
-	if ((toolBar()->barPos()==KToolBar::Left) ||
-	    (toolBar()->barPos()==KToolBar::Right)) {
-	    size += QSize(toolBar()->sizeHint().width(), 0);
-	}
+            size += QSize(0, height);
+        }
+        if ((toolBar()->barPos()==KToolBar::Left) ||
+            (toolBar()->barPos()==KToolBar::Right)) {
+            size += QSize(toolBar()->sizeHint().width(), 0);
+        }
     }
     if (!menuBar()->isHidden()) {
-	size += QSize(0,menuBar()->sizeHint().height());
+        size += QSize(0,menuBar()->sizeHint().height());
     }
     return size;
 }
@@ -503,9 +534,10 @@ void Konsole::saveProperties(KConfig* config)
   config->writeEntry("schema",s_schema);
   config->writeEntry("scrollbar",n_scroll);
   config->writeEntry("keytab",n_keytab);
+  config->writeEntry("WarnQuit", warnQuit->isChecked());
 
   if (args.count() > 0) config->writeEntry("konsolearguments", args);
-  config->writeEntry("class",name());          
+  config->writeEntry("class",name());
 }
 
 
@@ -517,6 +549,8 @@ void Konsole::readProperties(KConfig* config)
 /*FIXME: (merging) state of material below unclear.*/
   b_scroll = config->readBoolEntry("history",TRUE);
   setHistory(b_scroll);
+
+  warnQuit->setChecked ( config->readBoolEntry( "WarnQuit", TRUE ) );
 
   int n2_keytab = config->readNumEntry("keytab",0);
   keytab_menu_activated(n2_keytab); // act. the keytab for this session
@@ -553,9 +587,9 @@ void Konsole::readProperties(KConfig* config)
     s->setHistory(b_scroll);
   }
   else
-  { 
+  {
     kdError() << "Session 1 not found"
-    	<< endl;
+        << endl;
   } // oops
 
 }
@@ -633,26 +667,26 @@ void Konsole::schema_menu_activated(int item)
 {
   assert(se);
   //FIXME: save schema name
-	KONSOLEDEBUG << "Item " << item << " selected from schema menu"
-		<< endl;
+        KONSOLEDEBUG << "Item " << item << " selected from schema menu"
+                << endl;
   setSchema(item);
   activateSession(); // activates the current
 }
 
 /* slot */ void Konsole::schema_menu_check()
 {
-	if (colors->checkSchemas())
-	{
-		updateSchemaMenu();
-	}
+        if (colors->checkSchemas())
+        {
+                updateSchemaMenu();
+        }
 }
 
 void Konsole::updateSchemaMenu()
 {
-	KONSOLEDEBUG << "Updating schema menu with "
-		<< colors->count()
-		<< " items."
-		<< endl;
+        KONSOLEDEBUG << "Updating schema menu with "
+                << colors->count()
+                << " items."
+                << endl;
 
   m_schema->clear();
   for (int i = 0; i < (int) colors->count(); i++)
@@ -663,10 +697,10 @@ void Konsole::updateSchemaMenu()
 
   if (te && te->currentSession)
   {
-  	KONSOLEDEBUG << "Current session has schema "
-		<< te->currentSession->schemaNo()
-		<< endl;
-  	m_schema->setItemChecked(te->currentSession->schemaNo(),true);
+        KONSOLEDEBUG << "Current session has schema "
+                << te->currentSession->schemaNo()
+                << endl;
+        m_schema->setItemChecked(te->currentSession->schemaNo(),true);
   }
 
 }
@@ -784,15 +818,15 @@ void Konsole::notifySize(int lines, int columns)
     selectSize->blockSignals(true);
     selectSize->setCurrentItem(-1);
     if (columns==40&&lines==15)
-	selectSize->setCurrentItem(0);
+        selectSize->setCurrentItem(0);
     if (columns==80&&lines==24)
-	selectSize->setCurrentItem(1);
+        selectSize->setCurrentItem(1);
     if (columns==80&&lines==25)
-	selectSize->setCurrentItem(2);
+        selectSize->setCurrentItem(2);
     if (columns==80&&lines==40)
-	selectSize->setCurrentItem(3);
+        selectSize->setCurrentItem(3);
     if (columns==80&&lines==52)
-	selectSize->setCurrentItem(4);
+        selectSize->setCurrentItem(4);
     selectSize->blockSignals(false);
     if (n_render >= 3) pixmap_menu_activated(n_render);
 }
@@ -815,16 +849,16 @@ void Konsole::changeTitle(int, const QString& s)
 void Konsole::showFullScreen()
 {
     if ( !isTopLevel() )
-	return;
+        return;
     if ( topData()->fullscreen ) {
-	show();
-	raise();
-	return;
+        show();
+        raise();
+        return;
     }
     if ( topData()->normalGeometry.width() < 0 )
-	topData()->normalGeometry = QRect( pos(), size() );
+        topData()->normalGeometry = QRect( pos(), size() );
     reparent( 0, WType_TopLevel | WStyle_Customize | WStyle_NoBorderEx, // | WStyle_StaysOnTop,
-	      QPoint(0,0) );
+              QPoint(0,0) );
     topData()->fullscreen = 1;
     resize( qApp->desktop()->size() );
     raise();
@@ -889,11 +923,11 @@ void Konsole::addSession(TESession* s)
   //  int acc = CTRL+SHIFT+Key_0+session_no; // Lars: keys stolen by kwin.
   KRadioAction *ra = new KRadioAction(title,
                                      "openterm",
-				      0,
-				      this,
-				      SLOT(activateSession()),
-				      this);
-				      //				      buffer);
+                                      0,
+                                      this,
+                                      SLOT(activateSession()),
+                                      this);
+                                      //                                      buffer);
   ra->setExclusiveGroup("sessions");
   ra->setChecked(true);
   // key accelerator
@@ -944,7 +978,7 @@ void Konsole::activateSession(TESession *s)
 #if 0
     ColorSchema* schema = colors->find(s->schemaNo());
     if (schema && (schema->usetransparency)) {
-	rootxpm->repaint(true); // this is a must, otherwise you loose the bg.
+        rootxpm->repaint(true); // this is a must, otherwise you loose the bg.
     }
 #endif
   }
@@ -1160,16 +1194,16 @@ void Konsole::setSchema(int numb)
   if (!s)
   {
         kdWarning() << "No schema found. Using default." << endl;
-  	s=colors->at(0);
+        s=colors->at(0);
   }
   if (s->numb != numb)
   {
-  	kdWarning() << "No schema with number " << numb << endl;
+        kdWarning() << "No schema with number " << numb << endl;
   }
 
   if (s->hasSchemaFileChanged())
   {
-	const_cast<ColorSchema *>(s)->rereadSchemaFile();
+        const_cast<ColorSchema *>(s)->rereadSchemaFile();
   }
   if (s) setSchema(s);
 }
@@ -1179,12 +1213,12 @@ void Konsole::setSchema(const QString & path)
   const ColorSchema* s = colors->find(path);
   if (!s)
   {
-  	kdWarning() << "Could not find schema named " << path << endl;
-  	s=colors->at(0);
+        kdWarning() << "Could not find schema named " << path << endl;
+        s=colors->at(0);
   }
   if (s->hasSchemaFileChanged())
   {
-  	const_cast<ColorSchema *>(s)->rereadSchemaFile();
+        const_cast<ColorSchema *>(s)->rereadSchemaFile();
   }
   if (s) setSchema(s);
 }
@@ -1193,11 +1227,11 @@ void Konsole::setSchema(const ColorSchema* s)
 {
   if (!s) return;
 
-	KONSOLEDEBUG << "Checking menu items" << endl;
+        KONSOLEDEBUG << "Checking menu items" << endl;
 
   m_schema->setItemChecked(curr_schema,FALSE);
   m_schema->setItemChecked(s->numb,TRUE);
-	KONSOLEDEBUG << "Remembering schema data" << endl;
+        KONSOLEDEBUG << "Remembering schema data" << endl;
 
   s_schema = s->path();
   curr_schema = s->numb;
@@ -1205,17 +1239,17 @@ void Konsole::setSchema(const ColorSchema* s)
   te->setColorTable(s->table); //FIXME: set twice here to work around a bug
 
   if (s->usetransparency) {
-	KONSOLEDEBUG << "Setting up transparency" << endl;
+        KONSOLEDEBUG << "Setting up transparency" << endl;
     rootxpm->setFadeEffect(s->tr_x, QColor(s->tr_r, s->tr_g, s->tr_b));
     rootxpm->start();
     rootxpm->repaint(true);
   } else {
-	KONSOLEDEBUG << "Stopping transparency" << endl;
+        KONSOLEDEBUG << "Stopping transparency" << endl;
     rootxpm->stop();
     pixmap_menu_activated(s->alignment);
   }
 
-	KONSOLEDEBUG << "Doing the rest" << endl;
+        KONSOLEDEBUG << "Doing the rest" << endl;
 
   te->setColorTable(s->table);
   if (se) se->setSchemaNo(s->numb);

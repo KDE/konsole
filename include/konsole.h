@@ -74,6 +74,7 @@ private slots:
 
 protected:
 
+	bool queryClose();
  void saveProperties(KConfig* config);
  void readProperties(KConfig* config);
  void saveGlobalProperties(KConfig* config);
@@ -146,6 +147,8 @@ private:
   KSelectAction *selectSize;
   KSelectAction *selectFont;
   KSelectAction *selectScrollbar;
+
+  KToggleAction	*warnQuit;			// Warn when closing this session on quit
 
   int         n_keytab;
   int         n_font;
