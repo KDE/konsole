@@ -63,7 +63,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
-#ifdef __FreeBSD__
+#ifdef TIME_WITH_SYS_TIME
 #include <sys/time.h>
 #endif
 #include <sys/resource.h>
