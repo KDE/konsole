@@ -45,7 +45,7 @@ static KCmdLineOptions options[] =
    { "noclose",         I18N_NOOP("Do not close Konsole when command exits"), 0 },
    { "nohist",          I18N_NOOP("Do not save lines in history"), 0 },
    { "nomenubar",       I18N_NOOP("Do not display menubar"), 0 },
-   { "notabbar",        I18N_NOOP("Do not display tabbar"), 0 },
+   { "notabbar",        I18N_NOOP("Do not display tab bar"), 0 },
    { "noframe",         I18N_NOOP("Do not display frame"), 0 },
    { "noscrollbar",     I18N_NOOP("Do not display scrollbar"), 0 },
    { "noxft",           I18N_NOOP("Do not use XFT (Anti-Aliasing)"), 0 },

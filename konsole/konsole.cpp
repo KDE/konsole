@@ -594,7 +594,7 @@ void Konsole::makeGUI()
       showMenubar->plug ( m_options );
 
       // Tabbar
-      selectTabbar = new KSelectAction(i18n("&Tabbar"), 0, this,
+      selectTabbar = new KSelectAction(i18n("&Tab Bar"), 0, this,
                                        SLOT(slotSelectTabbar()), actions, "tabbar" );
       QStringList tabbaritems;
       tabbaritems << i18n("&Hide") << i18n("&Top") << i18n("&Bottom");
@@ -777,9 +777,9 @@ void Konsole::makeGUI()
    applySettingsToGUI();
    isRestored = false;
 
-   new KAction(i18n("Goto Previous Session"), QApplication::reverseLayout() ? Qt::SHIFT+Qt::Key_Right : Qt::SHIFT+Qt::Key_Left,
+   new KAction(i18n("Go to Previous Session"), QApplication::reverseLayout() ? Qt::SHIFT+Qt::Key_Right : Qt::SHIFT+Qt::Key_Left,
                this, SLOT(prevSession()), m_shortcuts, "previous_session");
-   new KAction(i18n("Goto Next Session"), QApplication::reverseLayout() ? Qt::SHIFT+Qt::Key_Left : Qt::SHIFT+Qt::Key_Right,
+   new KAction(i18n("Go to Next Session"), QApplication::reverseLayout() ? Qt::SHIFT+Qt::Key_Left : Qt::SHIFT+Qt::Key_Right,
                this, SLOT(nextSession()), m_shortcuts, "next_session");
 
    new KAction(i18n("Switch to Session 1"), 0, this, SLOT(switchToSession1()), m_shortcuts, "switch_to_session_1");
