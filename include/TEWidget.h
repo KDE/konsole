@@ -71,6 +71,8 @@ signals:
 
 protected:
 
+    virtual void styleChange( QStyle& );
+
     bool eventFilter( QObject *, QEvent * );
 
     void drawAttrStr(QPainter &paint, QRect rect, 
