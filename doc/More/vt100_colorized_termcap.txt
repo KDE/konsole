@@ -1,0 +1,438 @@
+Article 3992 of comp.terminals:
+Path: cs.utk.edu!gatech!howland.reston.ans.net!vixen.cso.uiuc.edu!uwm.edu!msunews!harbinger.cc.monash.edu.au!bunyip.cc.uq.oz.au!newshost.gu.edu.au!news
+From: Tony Nugent <T.Nugent@sct.gu.edu.au>
+Newsgroups: comp.terminals
+Subject: (howto) Set up a custom (colour) vt term
+Date: 30 Apr 1995 06:35:49 GMT
+Organization: Griffith University Brisbane Queensland Australia
+Lines: 371
+Message-ID: <3nvb45$2kl@griffin.itc.gu.edu.au>
+Reply-To: T.Nugent@sct.gu.edu.au
+NNTP-Posting-Host: kraken.itc.gu.edu.au
+Summary: How to set up a customised term entry
+Keywords: vt100 vt102 vt220 ansi colour terminfo termcap term
+
+G'day all!
+
+Here is something that I wrote a little while ago (with some more
+recent changes) for someone who asked me how to set up a
+customised TERMINFO and TERMCAP entry.
+
+I've never seen this in any FAQ, and I thought that others might
+be interested in this too, so I've posted it.  It took me *ages*
+and lots of trial and error to figure out how to do this
+properly, but the process is actually quite simple once you have
+the man pages figured out :)
+
+I would appreciate any comments, corrections or suggestions to
+this... I'm posting it here into comp.terminals as a "beta"
+document as I'm sure that this could be refined some more.
+
+========8<----insert-crowbar-here------------------------------
+
+I presume that you understand the basics of ansi and vt-term
+escape sequences.
+
+I use a customised vt220 term to get colours instead of boring
+black and white text on my pc screen when I'm logged into my
+account over a modem.  My comms program is emulating vt100/220
+with my screen in 50 line mode (49 lines + one for my comms
+program's status line).
+
+The system here with my account is a Sparc running Solaris 2.3,
+SunOS 5.3 - but this also works under SGI IRIX and SunOS 4.3.1
+(remote vt-term login).  I use tcsh as my default login shell
+(I'll eventually try out ksh once I have some time :-)
+
+Here is my customised termcap entry, produced by the "infocmp -1"
+command...
+
+========8<-----------cut-here------------>8====================
+#	Reconstructed via infocmp from file: /home/tnugent/.terminfo/v/vt220
+vt220|vt-220|dec colour vt220,
+	xon,
+	cols#80, lines#49, vt#3,
+	bel=^G, blink=\E[5m$<2>, bold=\E[1m\E[32;44m$<2>,
+	clear=\E[;H\E[2J$<50>, cnorm=\E[?7h\E[0;2;1;36m,
+	cr=\r, csr=\E[%i%p1%d;%p2%dr, cub1=\b, cud1=\n,
+	cuf1=\E[C$<2>, cup=\E[%i%p1%d;%p2%dH$<5>,
+	cuu1=\E[A$<2>, cvvis=\E[?7l, ed=\E[J$<50>,
+	el=\E[K$<3>, home=\E[H, ht=\t, ind=\n,
+	is2=\E[1;49r\E[49;1H, kbs=\b, kcub1=\EOD, kcud1=\EOB,
+	kcuf1=\EOC, kcuu1=\EOA, kf0=\E[29~, kf1=\EOP,
+	kf10=\E[29~, kf2=\EOQ, kf3=\EOR, kf4=\EOS, kf5=\E[17~,
+	kf6=\E[18~, kf7=\E[19~, kf8=\E[20~, kf9=\E[21~,
+	rc=\E8, rev=\E[7m$<2>, ri=\EM$<5>, rmacs=\E(B$<4>,
+	rmir=\E[4l, rmkx=\E[?1l\E>, rmso=\E[7m\E[0;1;36m$<2>,
+	rmul=\E[m\E[0;1;36m$<2>,
+	rs2=\E>\E[?3l\E[?4l\E[?5l\E[?7h\E1;36m\E[?8h, sc=\E7,
+	sgr0=\E[m\E[1;36m$<2>, smkx=\E[?1h\E=,
+	smso=\E[m\E[1;33;44m$<2>, smul=\E[4m\E[1;32m$<2>,
+========8<-----------cut-here------------>8====================
+
+For the explaination of what all this means, see "man terminfo";
+also try "man termcap", but this man page is often not there.
+
+It's set for a default of 49 lines, but if you only use 24 then
+change it in the entry, but I'll explain how to easily reset it
+manually with some aliases.
+
+Otherwise edit this however you like.  You'll recognise all the
+"ansi" escape sequences up there.  Customise the colour ones as
+desired, but after trial and error I've found these to be quite
+acceptable.  Some of the entries might need some more refining,
+but this works.  Bold, underline, reverse and norm are all in
+colour.  I've thought about adding an entry for italic (sitm and
+ritm), but I haven't got around to this yet.
+
+I've called this "vt220", but it really isn't (although
+compatable).  I've found it better to use a "common" name rather
+than an unusual one, or else I tend to get "unknown term type,
+using dumb terminal settings" complaints when I rlogin or telnet
+into other accounts.
+
+vt220 is defined in /etc/termcap here as:
+
+de|vt220|DEC VT220 in vt100 emulation mode:\
+	:tc=vt100:
+
+so vt220 actually uses vt100 anyway.  They are similar, but vt220
+defines more of the F (function) keys.  Other differences are
+trivial (and I haven't noticed many from what I've been able to
+ascertain from a scattering of "non-authoritative" sources).
+
+Create a ~/.terminfo/ directory, and save this terminfo entry in
+a file called ~/.terminfo/terminfo.src
+
+Now change to this directory and append the other terminal
+entries that you might use onto the end of this file (except for
+vt220):
+
+% echo $term
+% infocmp >> terminfo.src
+% infocmp vt100 >> terminfo.src
+% infocmp xterm >> terminfo.src
+
+etc.  Check it's general format what you find in /etc/termcap to
+make sure that it's similar.
+
+Now do this (in the ~/.terminfo/ directory):
+
+% setenv TERMINFO ~/.terminfo
+% tic
+
+After running tic (it uses the terminfo.src file), you should see
+a new directory called ~/.terminfo/v/ (and perhaps others) which
+has the termcap entries compiled from the terminfo.src file.
+
+Now, do this:
+
+% set term=vt220
+
+You *should* immediately see a change in colour of normally white
+(or grey) text to a light bright blue (see "norm=" above).  If
+you have tcsh as your shell, then try the prompts below to see
+some nice bold and reverse colour.  Man pages should now also
+demostrate this too (especially if you have setenv PAGER "less -s
+-I").  Nice change, eh?  :-)
+
+Ok, now to make this change permanent...
+
+Cut this shell script out, save it in ~/.terminfo/maketc and
+"chmod +x maketc" to make it executable:
+
+========8<-----------cut-here------------>8====================
+#!/bin/sh
+#
+# Make a TERMCAP entry
+#
+# Use:
+#    maketc [termtype] 
+#
+# setenv TERMCAP `maketc [termtype]`
+#
+# There's probably a better way to do this
+#
+infocmp -C $1 | \
+  sed -e '/^#/d' -e '3,$s/[	 ]//g' -e 's/:\\$//' | \
+  awk '{printf("%s",$0)}'
+echo ""
+# NB: that's a Tab and a space in between the []'s!
+# Is there a way to get sed to strip out newlines?
+========8<-----------cut-here------------>8====================
+
+Now try this (using this new term setting):
+
+% maketc
+
+Ugly, yes?  :)
+
+Create a ~/.terminfo/TERMCAP.vt220 file by redirecting this output:
+
+% maketc vt220 > TERMCAP.vt220
+
+(alternatively, use " setenv TERMCAP `cat ~/.terminfo/maketc` "
+below instead).
+
+Put the following lines in your ~/.login file, or into another
+file (say, ~/.termrc) and source it from ~/.login...
+
+========8<-----------cut-here------------>8====================
+# Please customise this!
+#
+if ( ! $?term ) then
+  set term=vt102
+  setenv TERM vt102
+endif
+#
+switch($term)
+#
+  case 'vt220':
+  case 'vt102':
+    stty rows 49
+    stty columns 80
+    setenv LINES 49
+    setenv COLUMNS 80
+    echo Assuming \($term with $LINES rows\)
+    breaksw
+  case 'vt100':
+    stty rows 24
+    stty columns 80
+    setenv LINES 24
+    setenv COLUMNS 80
+    breaksw
+  case 'xterm':
+    eval `/usr/openwin/bin/resize`
+    stty rows $LINES
+    stty cols $COLUMNS
+  default:
+    breaksw
+endsw
+#
+# Set colour if on a vt100, vt102 or vt220
+#
+if ( $TERM == vt102 || $TERM == vt100 || $TERM == vt220 ) then
+  setenv TERMINFO ~/.terminfo
+  set term=vt220
+  setenv TERM vt220
+  setenv TERMCAP `cat ${TERMINFO}/TERMCAP.vt220`
+  # setenv TERMCAP `~/.terminfo/maketc`
+endif
+#
+# Set variables: NORM BOLD OFFBOLD ULINE OFFULINE REV
+#
+setenv NORM `tput cnorm`
+setenv REV `tput rev`
+setenv BOLD `tput smso`
+setenv OFFBOLD `tput smso`
+setenv ULINE `tput smul`
+setenv OFFUL `tput rmul`
+#
+echo ""
+echo "${BOLD}TERMINFO is now: $NORM$TERMINFO"
+echo "${BOLD}TERMCAP  is now: $NORM"
+echo "$TERMCAP"
+echo ""
+#
+echo -n "${ULINE}"\$TERM"$NORM is $BOLD $TERM $NORM and "
+echo    "${ULINE}"\$term"$NORM is $BOLD $term ${NORM}"
+echo -n "$BOLD $LINES $NORM ${ULINE}rows${NORM} "
+echo    "$BOLD $COLUMNS $NORM ${ULINE}columns${NORM}"
+echo ""
+#
+echo -n "${REV}reverse${NORM}  "
+echo -n "${BOLD}bold${NORM}  "
+echo -n "${ULINE}underline${OFFUL} "
+echo "$NORM"
+echo -n "${REV}${BOLD} reverse-bold ${NORM} "
+echo -n "${REV}${ULINE} reverse-underline ${NORM} "
+echo -n "${BOLD}${ULINE} bold-underline ${NORM} "
+echo -n "${REV}${BOLD}${ULINE} reverse-bold-underline ${NORM} "
+echo ""
+#
+echo -n tset:
+/usr/ucb/tset -I -Q -
+#
+========8<-----------cut-here------------>8====================
+
+It's a bit overdone, but it will show you what's going on.
+Warnings.... on some unix'es, stty does not have "rows" or
+"columns" options.  And if you ever use those global variables
+for anything, enclose the variables in quotes like I have above.
+
+Next time you log in (with csh or tcsh), ~/.login is sourced
+(after ~/.cshrc) and you will automatically have this customised
+colour terminal enabled.
+
+To make switching term very easy, I use a few aliases.  I have
+the following in a ~/.alias file that I source from ~/.cshrc...
+
+========8<-----------cut-here------------>8====================
+# ~/.alias
+# sourced from ~/.cshrc
+#...
+#...
+#
+#-------- Terminal setup ------------
+#
+a cls		'clear'
+a seterm	'setenv TERM \!:1 ; set term=\!:1'
+a vt102		'unsetenv TERMINFO ; unsetenv TERMCAP ; seterm vt102'
+a vt220		'colour'
+a colour	'setenv TERMINFO ~/.terminfo ; \
+		setenv TERMCAP `cat ${TERMINFO}/TERMCAP` ; seterm vt220'
+a rows		'stty rows \!:1    ; setenv LINES \!:1   ; cols 80'
+a cols		'stty columns \!:1 ; setenv COLUMNS \!:1 '
+a setsize	'rows \!:1 ; echo $LINES line mode'
+a 49		'setsize 49'
+a 50		'49'
+a 24		'setsize 24'
+a 25		'24'
+#
+a vtn		'echo -n "^[[m^[(B^[)0^O^[[?5l^[7^[[r^[8"'
+#                         ^^  ^^  ^^  ^^^^    ^^ ^^  ^^
+#                         Esc Esc  Esc Ctrl-O EscEsc Esc
+# If the vtn alias doesn't work correctly, then try this:
+# a vtn		'echo "X[mX(BX)0OX[?5lX7X[rX8" | tr '\''XO'\'' '\''\033\017'\'''
+#
+#
+#... other aliases ...
+========8<-----------cut-here------------>8====================
+
+The vtn alias has been piped through cat -v to make the control
+codes look like their two-character representation.  Edit the
+echo'ed string so that the ^[ characters are real escape
+characters and ^O is a control-O.  Or comment out that line and
+use the one below it that uses the tr command.  This alias is
+very, VERY handy for resetting a vt100 style screen if it gets
+screwed up with an accidental character set sequence (see any
+vt100 term escape code reference).
+
+If you want to see some interesting colourful prompts and you use
+tcsh, then try sourcing this:
+
+========8<-----------cut-here------------>8====================
+# Primary tcsh command prompt
+#
+# simple looking one
+# set prompt='$S%?%s %B%/-%b%U%h%u-%U%#%u%L'
+#
+# set prompt='%S%l%s|%U%?%u[%B%t%b]%S%~%s-%B%h%b-%U%#%u%L'
+# set prompt='%u%s%b[%U%m%u|%U%~%u][%S%t%s][%B%h%b][%S%?%s]%U-%#%u%L'
+# set prompt='%B%b[%S%?%s][%S%t%s][%B%h%b][%U%m%u|%U%~%u]%U-%#%u%L'
+  set prompt='%B%b[%S%?%s][%U%t%u][%S%m%s|%S%~%s][%B%h%b]%U-%#%u%L'
+#
+# prompt2
+# Used wherever normal csh prompts with a question mark.
+#
+# set prompt2='%B%R?>%b '
+  set prompt2='%B%R%b%S?%s%L'
+#
+# prompt3
+# Used  when displaying  the  corrected command line when automatic
+# spelling correction is in effect.
+#
+# set prompt3='CORRECT>%R (y|n|e)?'
+# set prompt3='%BCORRECT%b%S>%s%R (%By%b|%Bn%b|%Be%b)%S?%s%L'
+  set prompt3='%{[41;33;5m%}CORRECT%S>%s%R (%By%b|%Bn%b|%Be%b)%S?%s%L'
+========8<-----------cut-here------------>8====================
+
+Note how the red colour is manually put into prompt3.  It's
+possible to put colour sequences into the prompts of all the
+common shells (check its man page).
+
+For more info check out:
+
+1. The man pages for:
+	terminfo, (termcap), stty, tput, infocmp, captoinfo, tic
+	(and the man pages in the "see also" sections).
+
+2. The file /etc/termcap
+
+3. The comp.terminals ftp archive site:
+	cs.utk.edu :: /pub/shuford/terminal/
+   You should be able to find at least one file there that
+   explains all the vt100 control sequences.
+
+4. I've got a file with the vt102 and ansi escape sequences in it.
+   If you want a copy, just let me know.
+
+5. I've never seen it, but for a color xterm check this out:
+	X11R5 and X11R6 versions:
+	ftp.x.org	/R5contrib/color_xterm.tar.Z
+	ftp.x.org	/contrib/utilities/color-xterm-R6-patch.README
+	ftp.x.org	/contrib/utilities/color-xterm-R6pl5-patch.gz
+	ftp.x.org	/contrib/utilities/colour_xterm.tar.gz
+
+Enjoy!
+
+Tony
+T.Nugent@sct.gu.edu.au
+04/23/95
+========8<----insert-crowbar-here------------------------------
+
+All comments very much appreciated.
+
+Cheers
+Tony
+        MMM             \|/              www              __^__
+       (o o)            @ @             (o o)            /(o o)\
+  -.ooO-(_)-Ooo.-+-.oOO-(_)-OOo.-+-.oOO--(_)--OOo.-+-.oOO==(_)==OOo.-----+
+  |    Tony Nugent  |-| Griffith University  T.Nugent@sct.gu.edu.au      |--.
+  |     __'!`__     | | Brisbane, Queensland tnugent@gucis.cit.gu.edu.au |  |
+  |      (o o)      | | Australia                                        |  |
+  `-ooO---(=)---Ooo-' `--------------------------------------------------'  |
+    `------------------' `--------------------------------------------------'
+
+
+Article 3993 of comp.terminals:
+Path: cs.utk.edu!gatech!swrinde!hookup!news.moneng.mei.com!uwm.edu!msunews!harbinger.cc.monash.edu.au!bunyip.cc.uq.oz.au!newshost.gu.edu.au!news
+From: Tony Nugent <T.Nugent@sct.gu.edu.au>
+Newsgroups: comp.terminals
+Subject: Re: (howto) Set up a custom (colour) vt term
+Date: 30 Apr 1995 07:17:03 GMT
+Organization: Griffith University Brisbane Queensland Australia
+Lines: 35
+Message-ID: <3nvdhf$36j@griffin.itc.gu.edu.au>
+References: <3nvb45$2kl@griffin.itc.gu.edu.au>
+Reply-To: T.Nugent@sct.gu.edu.au
+NNTP-Posting-Host: kraken.itc.gu.edu.au
+Keywords: vt100 vt102 vt220 ansi colour terminfo termcap term
+
+Tony Nugent <T.Nugent@sct.gu.edu.au> writes:
+
+Sorry about this:
+
+[munch]
+
+>To make switching term very easy, I use a few aliases.  I have
+>the following in a ~/.alias file that I source from ~/.cshrc...
+
+>========8<-----------cut-here------------>8====================
+># ~/.alias
+># sourced from ~/.cshrc
+>#...
+
+alias a		'alias'
+
+>#...
+>#
+>#-------- Terminal setup ------------
+>#
+>a cls		'clear'
+>a seterm	'setenv TERM \!:1 ; set term=\!:1'
+
+[munch]
+
+I forgot to mention that I have the alias command aliased to "a".
+
+Cheers
+Tony
+    /~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/~\
+   | Tony Nugent  Griffith University, Brisbane, Queensland, Australia| _ |
+   |      Email:  T.Nugent@sct.gu.edu.au  tnugent@gucis.cit.gu.edu.au | @||
+    \__________________________________________________________________\_/|
+    /  Pull here for the full .sig or use finger on the second address   /
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+

@@ -1,0 +1,28 @@
+/* XPM */
+/* Drawn  by Nico Shirwing for the K Desktop Environment */
+/* See http://www.kde.org */
+static char*kvt[]={
+"16 16 6 1",
+"# c #000000",
+"b c #808080",
+"a c #c0c0c0",
+"d c #c0ffff",
+"c c #ffffff",
+". c None",
+"..###########...",
+".#aaaaaaaaaaa#..",
+".#abbbbbbbbba#..",
+".#ab#######ca#..",
+".#ab#dd####ca#..",
+".#ab#######ca#..",
+".#ab#######ca#..",
+".#ab#######ca#..",
+".#aaaaaaaaaaa#..",
+".#bbbbbbbbbbb#..",
+"..###########...",
+"..#b............",
+"..b#............",
+"..#b.##.........",
+"...##a#.........",
+".....##........."};
+

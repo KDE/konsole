@@ -1,0 +1,29 @@
+[framework]
+
+The structure of the framework is as follows:
+
+
+              - - - - - - >               - - - - - ->
+     TEWidget                  vt102emu                Shell
+              <------------               < - - - - - 
+                                  |
+                                  |
+                                  V
+                              TEScreen
+
+Within the drawing, a solid line (A --> B) mean A calls B while the dashed
+lines means connected by signal.
+
+Thus the AnsiEmulation knows about TEWidget and TEScreen, but not the other
+way round. `main.C' connects the whole framework.
+
+The state of the emulation is somewhat like `version 0.8'. It knows most 
+xterm/vt100 escape codes and does well with bash, vi and mc right now.
+
+'man' shows a little different output since underlines are missing.
+
+The `Shell' material is a dump but of no real importance.
+
+The current implementation does not longer fit to 'kom' since we
+are using block operations with the modem. May be we can implement
+this within the main program to indicate the end of bulk there.

@@ -1,0 +1,166 @@
+Article 2317 of comp.terminals:
+Path: cs.utk.edu!darwin.sura.net!opusc!usceast!riker!chan
+From: chan@charlie.ece.scarolina.edu (Simon Chan)
+Newsgroups: comp.terminals
+Subject: INFO for VT100 !!!!!!!!
+Date: 27 Apr 1994 23:30:09 -0400
+Organization: Univ of S. Carolina, ECE Dept
+Lines: 153
+Message-ID: <chan.767503605@riker>
+NNTP-Posting-Host: riker.ece.scarolina.edu
+
+	So I am posting this once again.....
+------------------------------<Cut Here>---------------------------------------
+Taken from VT100 Programming Reference Card (DIGITAL)
+
+ANSI Compatible Mode
+
+	Cursor Movement Commands
+		Cursor up			ESC [ Pn A
+		Cursor down			ESC [ Pn B
+		Cursor forward (right)		ESC [ Pn C
+		Cursor backward (left)		ESC [ Pn D
+		Direct cursor addressing	ESC [ Pl; Pc H	or
+						ESC [ Pl; Pc f
+		Index				ESC D
+		Next Line			ESC E
+		Reverse index			ESC M
+		Save cursor and attributes	ESC 7
+		Restore cursor and attributes	ESC 8
+		* Pn = decimal parameter in string of ASCII digits.(default 1)
+		* Pl = line number (default 0); Pc = column number (default 0)
+
+	Line Size (Double-Height and Double-Width) Commands
+		Change this line to double-height top half	ESC # 3
+		Change this line to double-height bottom half	ESC # 4
+		Change this line to single-width single-height	ESC # 5
+		Change this line to double-width single-height	ESC # 6
+
+	Character Attributes
+		ESC [ Ps;Ps;Ps;...,Ps m
+		Ps =	0 or None	All Attributes Off
+			1		Bold on
+			4		Underscore on
+			5		Blink on
+			7		Reverse video on
+		Any other parameter values are ignored.
+
+	Erasing
+		From cursor to end of line		ESC [ K  or ESC [ 0 K
+		From beginning of line to cursor	ESC [ 1 K
+		Entire line containing cursor		ESC [ 2 K
+		From cursor to end of screen		ESC [ J  or ESC [ 0 J
+		From beginning of screen to cursor	ESC [ 1 J
+		Entire screen				ESC [ 2 J
+
+	Programmable LEDs
+		ESC [ Ps;Ps;...Ps q
+		Ps =	0 or None	All LEDs Off
+			1		L1 on
+			2		L2 on
+			3		L3 on
+			4		L4 on
+		Any other parameter values are ignored.
+
+	Character Set (G0 and G1 Designators)
+		Charactor Set			G0 Designator	G1 Designator
+		United Kingdom (UK)		ESC ( A		ESC ) A
+		United States (USASCII)		ESC ( B		ESC ) B
+		Special graphics characters	ESC ( 0		ESC ) 0
+		 and line drawing set
+		Alternate character ROM		ESC ( 1		ESC ) 1
+		Alternate character ROM		ESC ( 2		ESC ) 2
+		 special graphics characters
+
+	Scrolling Region
+		ESC [ Pt ; Pb r
+		Pt is the number of the top line of the scrolling region;
+		Pb is the number of the bottom line of the scrolling region 
+		and must be greater than  Pt.
+		(The default for Pt is line 1, the default for Pb is the end 
+		 of the screen)
+
+	TAB stops
+		Set tab at current column		ESC H
+		Clear tab at curent column		ESC [ g or ESC [ 0 g
+		Clear all tabs				ESC [ 3 g
+
+	Modes
+	                          To Set                To Reset
+	Mode Name            Mode        Sequence   Mode        Sequence
+	Line feed/new line   New line    ESC [20h   Line feed   ESC [20l
+	Cursor key mode	     Application ESC [?1h   Cursor      ESC [?l
+	ANSI/VT52 mode       ANSI        ESC <      VT52        ESC [?2l
+	Column mode          132 Col     ESC [?3h   80 Col      ESC [?3l
+	Scrolling mode       Smooth      ESC [?4h   Jump        ESC [?4l
+	Screen mode          Reverse     ESC [?5h   Normal      ESC [?5l
+	Origin mode          Relative    ESC [?6h   Absolute    ESC [?6l
+	Wraparound           On          ESC [?7h   Off         ESC [?7l
+	Auto repeat          On          ESC [?8h   Off         ESC [?8l
+	Interlace            On          ESC [?9h   Off         ESC [?9l
+	Graphic proc. option On          ESC 1      Off         ESC 2
+	Keypad mode          Application ESC =      Numeric     ESC >
+
+	Reports
+		Cursor Position Report
+		Invoked by			ESC [ 6 n
+		Response is			ESC [ Pl; Pc R
+		* Pl = line number; Pc = column number
+
+	Status Report
+		Invoked by			ESC [ 5 n
+		Response is			ESC [ 0 n  (terminal ok)
+						ESC [ 3 n  (terminal not ok)
+
+	What Are You
+		Invoked by			ESC [ c  or  ESC [ O c
+		Response is			ESC [ ?1 ; Ps C
+		Ps =	0	Base VT100, no options
+			1	Processor option (STP)
+			2	Advanced Video option (AVO)
+			3	AVO and STP
+			4	Graphocs processor option (GO)
+			5	GO and STP
+			6	GO and AVO
+			7	GO, STP, and AVO
+	Alternately invoked by ESC Z (not recommended.) Response is the same.
+
+	Reset
+		ESC c
+
+	Confidence Tests
+	Fill Screen with "Es"		ESC # 8
+	Invoke Test(s)			ESC [ 2 ; Ps y
+	Ps =	1				Power-up self test
+						(ROM checksum, RAM, NVR,
+						keyboard and AVO if installed)
+		2(loop back connector required)	Data Loop Back
+		4(loop back connector required)	ETA Modern Control Test
+		8				Repeat selected test(s)
+						indefinitely
+						(until failure or power off)
+
+VT52 Compatible Mode
+	Cursor Up				ESC A
+	Cursor Down				ESC B
+	Cursor Right				ESC C
+	Cursor Left				ESC D
+	Select Special Graphics character set	ESC F
+	Select ASCII character set		ESC G
+	Cursor to home				ESC H
+	Reverse line feed			ESC I
+	Erase to end of screen			ESC J
+	Erase to end of line			ESC K
+	Direct cursor address			ESC Ylc		(see note 1)
+	Identify				ESC Z		(see note 2)
+	Enter alternate keypad mode		ESC =
+	Exit alternate keypad mode		ESC >
+	Enter ANSI mode				ESC <
+
+	NOTE 1: Line and column numbers for direct cursor address are single
+		character codes whose values are the desired number plus
+		37 (in Octal). Line and column numbers start at 1.
+	NOTE 2: Response to ESC Z is ESC / Z.
+
+
+

@@ -1,0 +1,32 @@
+[histBuffer]
+
+|Documentation|----------------------------------------------------------------
+
+The `history' is a facility, that allows to get access to lines
+scrolled out from the visible part of the display. It is mainly used
+to present the complete result of an operation that produces much
+output, such as compilation runs.
+
+This facility is offered by virtually any terminal around on Linux.
+
+There are basically two means to control the visible section of the
+history. One can both use the keyboard, by pressing Shift-PageUp and
+Shift-PageDown, and, if the scrollbar is visible, one can use it to
+page through the history also.
+
+Once parts of the history become visible, konsole maintains this
+position, even if new text is added to the history meanwhile. Thus, it
+is in history display mode. One can revert to normal operation most
+quickly by typing any character (which is then not passed to the
+application) or scroll down to the end.
+
+Konsole maintains a flexible length of the history and tends to forget
+about its older more and more if no new lines are added to it.
+
+|Implementation|-------------------------------------------------------------- 
+
+The TEScreen class contains the actual implementation of the history
+buffer. This is basically a copy off all the lines scrolled out of
+line 1 of the display using `TEScreen::index'.
+
+...

@@ -1,0 +1,184 @@
+<html><head>
+<title>VTTEST Score Sheet - MS Telnet for Windows NT</title>
+</head><body>
+<h2>VTTEST Score Sheet - MS Telnet for Windows NT</h2>
+<pre>
+VTTEST VT100/VT102 Compatibility Test Score Sheet
+
+                     
+Program and version: <b>MS Telnet 1.0 Windows NT</b> Date: ____<b>18 Dec 95</b>___
+
+Score: ____<b>25</b>____ + Extra credit: ____<b>0</b>____ = Final score: ____<b>25</b>___
+
+Check box if test passed.  Score 1 point per check mark.
+Perfect score = 100 points.  Extra credit at end.
+
+1. Test of cursor movements
+
+[<b>0</b>]   1. Text inside frame of E's inside frame of *'s and +'s, 80 columns
+[<b>0</b>]   2. Text inside frame of E's inside frame of *'s and +'s, 132 columns
+[<b>0</b>]   3. Cursor-control chars inside ESC sequences
+[<b>1</b>]   4. Leading 0's in ESC sequences
+
+2. Test of screen features
+
+[<b>1</b>]   5. Three identical lines of *'s (test of wrap mode)
+[<b>0</b>]   6. Test of tab setting/resetting
+[<b>0</b>]   7. 132-column mode, light background
+[<b>1</b>]   8. 80-column mode, light background
+[<b>0</b>]   9. 132-column mode, dark background
+[<b>0</b>]  10. 80-column mode, dark background
+[<b>1</b>]  11. Soft scroll down
+[<b>1</b>]  12. Soft scroll up / down
+[<b>1</b>]  13. Jump scroll down
+[<b>1</b>]  14. Jump scroll up / down
+[<b>0</b>]  15. Origin mode test (2 parts)
+
+     Graphic Rendition test pattern, dark background
+
+[<b>1</b>]  16. Normal ("vanilla")
+[<b>0</b>]  17. Normal underlined distinct from normal
+[<b>0</b>]  18. Normal blink distinct from all above
+[<b>1</b>]  19. Normal underline blink distinct from all above
+[<b>0</b>]  20. Normal reverse ("negative") distinct from all above
+[<b>0</b>]  21. Normal underline reverse distinct from all above
+[<b>0</b>]  22. Normal blink reverse distinct from all above
+[<b>0</b>]  23. Normal underline blink reverse distinct from all above
+[<b>0</b>]  24. Bold distinct from all above
+[<b>0</b>]  25. Bold underlined distinct from all above
+[<b>0</b>]  26. Bold blink distinct from all above
+[<b>0</b>]  27. Bold underline blink distinct from all above
+[<b>0</b>]  28. Bold reverse ("negative") distinct from all above
+[<b>0</b>]  29. Bold underline reverse distinct from all above
+[<b>0</b>]  30. Bold blink reverse distinct from all above
+[<b>0</b>]  31. Bold underline blink reverse distinct from all above
+
+     Graphic Rendition test pattern, light background
+
+[<b>0</b>]  32. Normal ("vanilla")
+[<b>0</b>]  33. Normal underlined distinct from normal
+[<b>0</b>]  34. Normal blink distinct from all above
+[<b>0</b>]  35. Normal underline blink distinct from all above
+[<b>0</b>]  36. Normal reverse ("negative") distinct from all above
+[<b>0</b>]  37. Normal underline reverse distinct from all above
+[<b>0</b>]  38. Normal blink reverse distinct from all above
+[<b>0</b>]  39. Normal underline blink reverse distinct from all above
+[<b>0</b>]  40. Bold distinct from all above
+[<b>0</b>]  41. Bold underlined distinct from all above
+[<b>0</b>]  42. Bold blink distinct from all above
+[<b>0</b>]  43. Bold underline blink distinct from all above
+[<b>0</b>]  44. Bold reverse ("negative") distinct from all above
+[<b>0</b>]  45. Bold underline reverse distinct from all above
+[<b>0</b>]  46. Bold blink reverse distinct from all above
+[<b>0</b>]  47. Bold underline blink reverse distinct from all above
+
+     Save/Restore Cursor  
+
+[<b>1</b>]  48. AAAA's correctly placed
+[<b>0</b>]  49. Lines correctly rendered (middle of character cell)
+[<b>0</b>]  50. Diamonds correctly rendered
+
+3. Test of character sets
+
+[<b>0</b>]  51. UK/National shows Pound Sterling sign in 3rd position
+[<b>0</b>]  52. US ASCII shows number sign in 3rd position
+[<b>0</b>]  53. SO/SI works (right columns identical with left columns)
+[<b>0</b>]  54. True special graphics & line drawing chars, not simulated by ASCII
+
+4. Test of double-sized chars
+
+     Test 1 in 80-column mode:
+
+[<b>0</b>]  55. Left margin correct
+[<b>0</b>]  56. Width correct
+
+     Test 2 in 80-column mode:
+
+[<b>0</b>]  57. Left margin correct
+[<b>0</b>]  58. Width correct
+
+     Test 1 in 132-column mode:
+
+[<b>0</b>]  59. Left margin correct
+[<b>0</b>]  60. Width correct
+
+     Test 2 in 132-column mode:
+
+[<b>0</b>]  61. Left margin correct
+[<b>0</b>]  62. Width correct
+
+[<b>0</b>]  63. "The man programmer strikes again" test pattern
+[<b>0</b>]  64. "Exactly half the box should remain"
+
+5. Test of keyboard
+
+[<b>0</b>]  65. LEDs.
+[<b>0</b>]  66. Autorepeat
+[<b>1</b>]  67. "Press each key" (ability to send each ASCII graphic char)
+[<b>1</b>]  68. Arrow keys (ANSI/Cursor key mode reset)
+[<b>1</b>]  69. Arrow keys (ANSI/Cursor key mode set)
+[<b>1</b>]  70. Arrow keys VT52 mode
+[<b>1</b>]  71. PF keys numeric mode
+[<b>1</b>]  72. PF keys application mode
+[<b>1</b>]  73. PF keys VT52 numeric mode
+[<b>1</b>]  74. PF keys VT52 application mode
+[<b>0</b>]  75. Send answerback message from keyboard
+[<b>1</b>]  76. Ability to send every control character
+
+6. Test of Terminal Reports
+
+[<b>0</b>]  77. Respond to ENQ with answerback
+[<b>0</b>]  78. Newline mode set
+[<b>1</b>]  79. Newline mode reset
+[<b>0</b>]  80. Device status report 5
+[<b>1</b>]  81. Device status report 6
+[<b>1</b>]  82. Device attributes report
+[<b>0</b>]  83. Request terminal parameters 0
+[<b>0</b>]  84. Request terminal parameters 1
+
+7. Test of VT52 submode
+
+[<b>1</b>]  85. Centered rectangle
+[<b>1</b>]  86. Normal character set
+[<b>0</b>]  87. Graphics character set
+[<b>1</b>]  88. Identify query
+
+8. VT102 Features
+
+[<b>0</b>]  89. Insert/delete line, 80 columns
+[<b>0</b>]  90. Insert (character) mode, 80 columns
+[<b>0</b>]  91. Delete character, 80 columns
+[<b>0</b>]  92. Right column staggered by 1 (normal chars), 80 columns
+[<b>0</b>]  93. Right column staggered by 1 (double-wide chars), 80 columns
+[<b>1</b>]  94. ANSI insert character, 80 columns
+[<b>0</b>]  95. Insert/delete line, 132 columns
+[<b>0</b>]  96. Insert (character) mode, 132 columns
+[<b>0</b>]  97. Delete character, 132 columns
+[<b>0</b>]  98. Right column staggered by 1 (normal chars), 132 columns
+[<b>0</b>]  99. Right column staggered by 1 (double-wide chars), 132 columns
+[<b>0</b>] 100. ANSI insert character, 132 columns
+
+9. Extra credit
+
+[<b>0</b>] 101. True soft (smooth) scroll
+[<b>0</b>] 102. True underline
+[<b>0</b>] 103. True blink
+[<b>0</b>] 104. True double-high/wide lines, not simulated
+[<b>0</b>] 105. Reset terminal (*)
+[<b>0</b>] 106. Interpret controls (debug mode) (*)
+[<b>0</b>] 107. Send BREAK (250 msec) (*)
+[<b>0</b>] 108. Send Long BREAK (1.5 sec) (*)
+[<b>0</b>] 109. Host-controlled transparent / controller print (*)
+[<b>0</b>] 110. Host-controlled autoprint (*)
+
+(*) Features of VT100 not tested by vttest.
+
+NOTES:
+Test 3 (character sets) puts it into graphics mode, from which it
+can't recover.
+
+<hr><address>
+VTTEST Score Sheet / Columbia University / kermit@columbia.edu / 18 Dec 95
+</address>
+</body>
+</html>

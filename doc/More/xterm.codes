@@ -1,0 +1,206 @@
+
+  Basic forms
+
+  : Char (ordinary character) - evtChar(char chr)
+  : Cntl (control character)  - evtCtrl(char control)
+  : ESC <Mono>                - evtMono(char mono)
+  : ESC [ <Ps> <Char>         - evtParm(char pc, int n, char* Ps[])
+  : ESC <Duo> <Char>          - evtPrmc(char duo, char arg)
+
+  : Special forms for Xterm extentions
+
+
+  DEC private mode.
+
+  - Although <Ps> can be any character in range of 0x30-0x3f, that
+    means any of "0123456789:;<=>?", a scan through different sources
+    shows that DEC private mode is indicated only with the *first*
+    parameter. That means that the '?' is attached only to the first
+    parameter in a sequence and all following are implicitely ment, too.
+    Thus DES private mode and ordinary modes cannot be mixed within
+    one sequence.
+
+------------------------
+
+  The following is a list of control sequences recognized by screen.  "(V)"
+  and "(A)" indicate VT100-specific and ANSI- or ISO-specific functions,
+  respectively.
+
+  'x' in beginning means 'XTerm'. (ftp://ftp.x.org/...?)
+
+x   BEL                        Bell                       (Ctrl-G)
+x   BS                         Backspace                  (Ctrl-H)
+x   TAB                        Horizontal Tab (HT)        (Ctrl-I)
+x   LF                         Linefeed or New Line (NL)  (Ctrl-J)
+x   VT                         Vertical Tab               (Ctrl-K) same as LF
+x   FF                         Form Feed or New Page (NP) (Ctrl-L) same as LF
+x   CR                         Carriage Return            (Ctrl-M)
+x   SO                    (A)  Lock Shift G1              (Ctrl-N)
+x   SI                    (A)  Lock Shift G0              (Ctrl-N)
+
+x   ESC # 8               (V)  Fill Screen with E's (for adjustment)
+
+x   ESC ( Pcs             (A)  Designate character set as G0
+x   ESC ) Pcs             (A)  Designate character set as G1
+x   ESC * Pcs             (A)  Designate character set as G2
+x   ESC + Pcs             (A)  Designate character set as G3
+x         Pcs = 0 : Graphics
+x               A : UK
+x               B : US
+
+x   ESC 7                 (V)  Save Cursor and Attributes
+x   ESC 8                 (V)  Restore Cursor and Attributes
+
+x   ESC =                 (V)  Application Keypad Mode
+x   ESC >                 (V)  Numeric Keypad Mode
+
+x   ESC D                      Index
+x   ESC E                      Next Line
+x   ESC F                      Cursor to left lower corner
+x   ESC H                      Horizontal        Tab Set
+x   ESC M                      Reverse Index
+x   ESC N                 (A)  Single Shift G2
+x   ESC O                 (A)  Single Shift G3
+x   ESC Z                      Send VT100 Identification String
+
+x   ESC [ Pn @ (dft:1)    (A)  Insert Blank Characters
+x   ESC [ Pn A (dft:1)         Cursor Up   
+x   ESC [ Pn B (dft:1)         Cursor Down 
+x   ESC [ Pn C (dft:1)         Cursor Right
+x   ESC [ Pn D (dft:1)         Cursor Left
+
+x   ESC [ Pn ; Pn H (dft:1;1)  Direct Cursor Addressing
+    ESC [ Pn J      (dft:1)    Erase in Display
+x         Pn = 0    (dft)      From Cursor to End of Screen
+x              1               From Beginning of Screen to Cursor
+x              2               Clear whole screen
+    ESC [ Pn K                 Erase in Line
+x         Pn = 0    (dft)      From Cursor to End of Line
+x              1               From Beginning of Line to Cursor
+x              2               Clear whole Line
+x   ESC [ Pn L (dft: 1)   (A)  Insert Line
+x   ESC [ Pn M (dft: 1)   (A)  Delete Line
+x   ESC [ Pn P (dft: 1)   (A)  Delete Character
+
+x   ESC [ Ps c                 Send Device Attribute
+x         Ps = 0    (dft)      Send VT100 Identification String
+x              >               Send VT220 Secondary Device Attributes String
+
+x   ESC [ Pn ; Pn f (dft:1;1)  Direct Cursor Addressing (see ESC[H)
+x   ESC [ Ps g                 Clear Tabs
+x         Ps = 0    (dft)      Clear current
+x              3               Clear all
+
+    ESC [ Ps ;...; Ps h        Set Mode
+    ESC [ Ps ;...; Ps l        Reset Mode (indicated in parenthesis)
+x         Ps = 4          (A)  Insert (Replace) Mode
+x              20         (A)  Automatic (Normal) Linefeed Mode
+-              34              Normal Cursor Visibility
+
+x   ESC [ Ps ;...; Ps m        Select Graphic Rendition
+x         Ps = 0    (dft)      Default Rendition
+x              1               Bold
+-              2          (A)  Faint
+-              3          (A)  Standout Mode (ANSI: Italicized)
+x              4               Underlined
+x              5               Blinking
+x              7               Negative Image
+
+               22         (A)  Normal Intensity
+               23         (A)  Standout Mode off (ANSI: Italicized off)
+               24         (A)  Not Underlined
+               25         (A)  Not Blinking
+               27         (A)  Positive Image
+
+               3x         (A)  Foreground Color x
+               4x         (A)  Background Color x
+                x = 0     (A)  Black
+                    1     (A)  Red
+                    2     (A)  Green
+                    3     (A)  Yellow
+                    4     (A)  Blue
+                    5     (A)  Magenta
+                    6     (A)  Cyan
+                    7     (A)  White
+                    9     (A)  Default
+
+x   ESC [ 6 n                  Send Device Report
+x         Ps = 5               Send Status report           (ESC [ 0 n)
+x              6               Send Cursor Position Report  (ESC [ Row ; Col R)
+
+x   ESC [ Pn ; Pn r (dft:all)  Set Scrolling region
+
+x   ESC [ ? Ps ; ... Ps h      Set DEC private mode
+x   ESC [ ? Ps ; ... Ps l      Reset DEC private mode
+x   ESC [ ? Ps ; ... Ps s      Save DEC private mode
+x   ESC [ ? Ps ; ... Ps r      Restore DEC private mode
+x         Ps = 1          (V)  Application (Normal) Cursor Keys
+x              2               // xterm: US -> G0..G3 // vt100: --> ansi/vt52
+x              3          (V)  132 (80) columns mode
+x              4               Smooth (Fast) Scroll
+x              5          (V)  Reverse (Normal) Video
+x              6          (V)  Origin (Normal) Cursor Mode
+x              7          (V)  Wraparound (Normal) Cursor Mode
+x              8               (No) Autorepeat Keys
+x              9               (Don't) Send Mouse XY on button press
+x              40              (Dis-) Allow 80<->132
+x              44              turn on (off) margin bell
+x              45              (no) reverse wrap around mode
+x              47              use (normal) alternate screen
+x              1000            (don't) send mouse XY on button press and release
+
+               i won't care for that
+x--            38              Enter Textronix Mode
+x??            41              (No) 'more(1)' fix
+x-             46              start (stop) logging
+x              1001            (don't) use hilite mouse tracking
+
+----------------------------------------------
+
+following some Xterm specific commands
+
+x   ESC ] Ps ; Pt BEL     (A)  Operating System Command (xterm title hack)
+x         Ps = 0
+x              1
+x              2
+x              46
+x              50
+
+x   ESC ^ Pt ESC \        (A)  Privacy Message String (Message Line)
+x-  ESC _ Pt ESC \        (A)  Application Program Command
+x-  ESC P Ps ESC \        (A)  Device Control String.  Outputs a string
+                               directly to the host terminal without
+                               interpretation.
+
+----------------------------------------------
+
+x   ESC c                      Full Reset
+
+x   ESC n                 (A)  Lock Shift G2
+x   ESC o                 (A)  Lock Shift G3
+
+------------ more...
+
+    ESC [ s               (A)  Save Cursor and Attributes
+
+    ESC [ 8 ; Ph ; Pw t        Resize the window to `Ph' lines and `Pw' columns
+                               (SunView special)
+
+    ESC \                 (A)  String Terminator
+    ESC !                      Global Message String (Message Line)
+    ESC k                      A.k.a. Definition String
+
+-   ESC [ Pn i            (A)  Relay to printer (ANSI Media Copy)
+-         Pn = 4          (A)  Stop  relay to printer (ANSI Media Copy)
+-              5          (A)  Start relay to printer (ANSI Media Copy)
+
+x-  ESC l                      Memory Lock   (HP) (FIXME: what that?)
+x-  ESC m                      Memory Unlock (HP) (FIXME: what that?)
+
+x-  ESC |
+x-  ESC }
+x-  ESC ~
+
+//FIXME: ESC[...T is hilite mouse tracking in xterm.
+-   ESC [ Pn S                 Scroll Scrolling Region Up
+-   ESC [ Pn T                 Scroll Scrolling Region Down

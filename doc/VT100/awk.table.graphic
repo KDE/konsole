@@ -1,0 +1,30 @@
+function header()
+{
+  printf("<tr><td>Octal<br>Code   </td>\n");
+  printf("    <td>ASCII<br>Graphic</td>\n");
+  printf("    <td>Special Graphic </td></tr>\n");
+  printf("<tr><td><hr></td>\n");
+  printf("    <td><hr></td>\n");
+  printf("    <td><hr></td></tr>\n");
+}
+
+BEGIN { 
+  color = "" # " bgcolor=lightblue"
+  printf("<center>\n");
+  printf("<table cellspacing=30>\n");
+  printf("<tr><td><table>");
+  header();
+}
+ {
+   
+#   printf("%04o %s %c %s %s\n",NR-1+95,$1,NR-1+95,$2,$3);
+    if (NR > 1 && NR % 16 == 1) { printf("</td></table></td><td><table>"); header(); }
+    printf("<tr><td%s>%04o</td>\n",color,NR-1+95);
+    printf("    <td%s align=center>%c</td>\n",color,NR-1+95);
+    printf("    <td%s>%s</td></tr>\n",color,$0);
+}
+END {
+  printf("</td></tr></table>\n");
+  printf("</table>\n");
+  printf("</center>\n");
+}

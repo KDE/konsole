@@ -1,0 +1,45 @@
+- deflicker, setting all the attributes separately
+  both when creating and changing to a session
+  creates 3 setimage and 1 paint events.
+
+- make resizing more clever
+  to see the issue, 'ls /dev', make window smaller
+  and then larger again.
+
+- complete command line options
+  - emit undecodeable sequences only on on demand (-d).
+  - font, menu, scrollbar, ... other configs
+  - deal with unrecognized options
+
+- complete session awareness
+  - save commandline option (-e)
+
+- implement kvt features
+  - DND
+  - awareness of gui style change
+
+- improve/complete documentation
+
+- check through FIXMEs
+- clean up code
+
+- dynamic buffer adjustment or configurability.
+- clear buffer facility.
+
+- i18n improvements?
+
+! announce konsole-1.0 ------------------------------------
+
+- check for other codes/features (Linux console, xterm)
+  - change xterm title hack to respect icon instruction?
+  - secure keyboard? (check other security issues)
+  - media copy (print)
+  - double high, double width (vt100)
+  - reverse wraparound?
+- use scalable font?
+- /dev/console?
+- fix non-numeric keypad (It's a QT issue really)
+- check for VT100 SETUP (doc/More/vt100-setup.txt)
+- VT100 keypad codes (doc/missing.keys, pass vttest section 5)
+- proper schema manager?
+- ...?

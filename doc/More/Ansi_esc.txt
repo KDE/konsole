@@ -1,0 +1,77 @@
+                              ANSI ESCAPE SEQUENCES
+===============================================================================
+Wherever you see '#', that should be replaced by the appropriate number.
+
+        ESC code sequence                       Function
+       -------------------              ---------------------------
+Cursor Controls:
+         ESC[#;#H or ESC[#;#f           Moves cusor to line #, column #
+         ESC[#A                         Moves cursor up # lines
+         ESC[#B                         Moves cursor down # lines
+         ESC[#C                         Moves cursor forward # spaces
+         ESC[#D                         Moves cursor back # spaces
+         ESC[#;#R                       Reports current cursor line & column
+         ESC[s                          Saves cursor position for recall later
+         ESC[u                          Return to saved cursor position
+
+Erase Functions:
+         ESC[2J                         Clear screen and home cursor
+         ESC[K                          Clear to end of line
+
+Set Graphics Rendition:
+         ESC[#;#;....;#m                Set display attributes where # is
+                                            0 for normal display
+                                            1 for bold on
+                                            4 underline (mono only)
+                                            5 blink on
+                                            7 reverse video on
+                                            8 nondisplayed (invisible)
+                                            30 black foreground 
+                                            31 red foreground 
+                                            32 green foreground 
+                                            33 yellow foreground 
+                                            34 blue foreground 
+                                            35 magenta foreground 
+                                            36 cyan foreground 
+                                            37 white foreground
+                                            40 black background
+                                            41 red background
+                                            42 green background
+                                            43 yellow background
+                                            44 blue background
+                                            45 magenta background
+                                            46 cyan background
+                                            47 white background
+
+         ESC[=#;7h or                   Put screen in indicated mode where # is
+         ESC[=h or                          0 for 40 x 25 black & white
+         ESC[=0h or                         1 for 40 x 25 color
+         ESC[?7h                            2 for 80 x 25 b&w
+                                            3 for 80 x 25 color
+                                            4 for 320 x 200 color graphics
+                                            5 for 320 x 200 b & w graphics
+                                            6 for 640 x 200 b & w graphics
+                                            7 to wrap at end of line 
+
+         ESC[=#;7l or ESC[=l or         Resets mode # set with above command
+         ESC[=0l or ESC[?7l
+
+Keyboard Reassignments:
+         ESC[#;#;...p                   Keyboard reassignment. The first ASCII
+         or ESC["string"p               code defines which code is to be 
+         or ESC[#;"string";#;           changed. The remaining codes define
+            #;"string";#p               what it is to be changed to.
+
+         E.g. Reassign the Q and q keys to the A and a keys (and vice versa).
+         ESC [65;81p                    A becomes Q
+         ESC [97;113p                   a becomes q
+         ESC [81;65p                    Q becomes A
+         ESC [113;97p                   q becomes a
+
+         E.g. Reassign the F10 key to a DIR command.
+         ESC [0;68;"dir";13p            The 0;68 is the extended ASCII code 
+                                        for the F10 key and 13 is the ASCII
+                                        code for a carriage return.
+         
+         Other function key codes       F1=59,F2=60,F3=61,F4=62,F5=63
+                                        F6=64,F7=65,F8=66,F9=67,F10=68

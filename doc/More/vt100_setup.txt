@@ -1,0 +1,170 @@
+From: sherwin@royalt.enet.dec.com (Jim Sherwin)
+Newsgroups: comp.terminals
+Subject: Re: VT100 (DEC) Setup Problem (online/offline)
+Message-ID: <29245@nntpd.lkg.dec.com>
+Date: 25 Oct 91 02:02:07 GMT
+Organization: DEC -- Video, Image and Printer Systems Group
+Lines: 63
+
+
+	Striking the SET-UP key places you into SET-UP A mode.  SET-UP A is
+	basically your tab stops.  Use the space bar to move along the ruler
+	and strike the T key at the desired tab stop location.
+
+	SET-UP B may only be entered from SET-UP A and is done be striking
+	the 5 on the main keyboard (i.e. top-row).
+
+	To exit SET-UP B strike the SET-UP key.
+
+	The SET-UP parameters are as follows:
+
+
+  	Bank	Position   Parameters
+  
+  	1	1	   Scroll;        0=jump;       1=smooth
+  	1	2	   Autorepeat;    0=off;        1=on
+  	1	3	   Screen;        0=dark;       1=light
+  	1	4	   Cursor;        0=underline;  1=block
+  
+  	2	1	   Margin Bell;   0=off;        1=on
+  	2	2	   Keyclick;      0=off;        1=on
+  	2	3	   ANSI/VT52;     0=VT52;       1=ANSI
+  	2	4	   Auto XON/XOFF; 0=off;        1=on
+  
+  	3	1	   Pound Sign;    0=octothorpe; 1=British Pound
+  	3	2	   Wrap Around;   0=off;        1=on
+  	3	3	   New Line;      0=off;        1=on
+  	3	4	   Interlace;     0=off;        1=on
+  
+  	4	1	   Parity Sense;  0=odd;        1=even
+  	4	2	   Parity;        0=off;        1=on
+  	4	3	   Bits per Char; 0=7 bits;     1=8 bits
+  	4	4	   Power;         0=60 Hz;      1=50 Hz
+
+	While in SET-UP B mode, these features are set by positioning the
+	cursor above the feature switch, using the spacebar, and striking
+	the 6 key on the main keyboard.
+
+	To set the ANSWERBACK MESSAGE, enter SET-UP B and strike the SHIFT
+	and A keys simultaneously.  The terminal will respond with A = on
+	the screen.  Type a message delimiter character which may be any
+	chaacter not used in the actual message.  Type the ANSWERBACK
+	MESSAGE, up to 20 characters.  Type the message delimiter
+	character.  The message will disappear from the screen.  You may
+	not edit an ANSWERBACK MESSAGE.  You may only supercede it with a
+	new ANSWERBACK MESSAGE.
+
+	To save the SET-UP, strike the SHIFT and S keys simultaneously,
+	while in SET-UP mode.
+
+	I hope this helps.
+
+	Jim
+
+
+ <>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>
+ <> "When things are going well,   \    Jim Sherwin a.k.a.                  <>
+ <>  someone will inevitably        \   sherwin@royalt.enet.dec.com         <>
+ <>  experiment detrimentally."      \  !decwrl!royalt.enet.dec.com!sherwin <>
+ <>               Boyle's Second Law  \ sherwin%royalt.enet@decwrl.dec.com  <>
+ <>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>-<>
+
+
+Article 20936 of comp.dcom.modems:
+Path: utkcs2!darwin.sura.net!jvnc.net!yale.edu!think.com!news.bbn.com!news.bbn.com!news
+From: Paul Placeway <pplacewa@bbn.com>
+Newsgroups: comp.dcom.modems,alt.bbs
+Subject: Re: Detecting ANSI on a remote system
+Date: 11 Jul 1992 00:04:09 GMT
+Lines: 82
+Message-ID: <l5s9bpINNqdt@news.bbn.com>
+References: <1992Jul8.204233.13120@csusac.csus.edu> <1992Jul9.053233.11670@f109f.mil.se>
+NNTP-Posting-Host: bbn.com
+Xref: utkcs2 comp.dcom.modems:20936 alt.bbs:11447
+
+nils@f109f.mil.se (Nils Hammar) writes:
+
+< emamid@athena.ecs.csus.edu (David Emami) writes:
+
+
+< >I am currently writing a communications app using TurboVision; I've got a
+< >view that can display ANSI, but how do I let the system that I hook up with
+< >that I can use ANSI codes. Most BBS's that I've tried respond with "ANSI
+< >detected" or "ANSI not detected" when I login using a commercial term
+< >program, based on the emulation I'm using. I presume that the BBS sends a
+< >string which I need to respond to in a certain way; what should my program
+< >be looking for, and how should it answer? Any help would be appreciated.
+
+< What I have been using is the function that reports the cursor position.
+< If you get an answer on that request that is correct, it's ANSI, or a VT100
+< compatible terminal. To determine if it's a VT100 or similar, you will have
+< to send a second request that's only recognized by the VT100 or
+< similar terminals. That request will result in an answer that tells you
+< almost everything that you need to know about the terminal.
+< If this secondary request doesn't give you any response, then it's only
+< ANSI. This is a really nice way to find out if you can send high resolution
+< graphics to the caller too. What a surprise to get a hig resolution
+< picture on the screen when you are calling an ordinary BBS!
+
+The ANSI Device Status Report (DSR) is
+
+	ESC [ <n> n
+
+where <n> is 5 for a status report (OK reply is "ESC [ 0 n"), and 6
+for report cursor position (reply is "ESC [ <row> ; <col> R").
+
+ANSI (and DEC) Send Device Attributes is
+
+	ESC [ <n> c
+
+where <n> is a number, in ASCII 0-9, and usually is 0 for the request.
+
+Here are a (small) selection of replies:
+
+	what			reply			comments
+	----			-----			-----------
+	xterm			ESC[?1;2c		VT100 w/AVO
+	MacKermit		ESC[?1;2c
+	VT102			ESC[?6c
+	VT320			ESC[63;1;2;8;9c
+
+(These are from vttest, by Per Lindberg)
+
+	vanilla VT100			ESC[?1;0c	no options
+	VT100 with STP			ESC[?1;1c
+	VT100 with AVO			ESC[?1;2c	could be a VT102
+	VT100 with STP and AVO		ESC[?1;3c
+	VT100 with GPO			ESC[?1;4c
+	VT100 with STP and GPO		ESC[?1;5c
+	VT100 with AVO and GPO		ESC[?1;6c
+	VT100 with STP, AVO and GPO	ESC[?1;7c
+	VT100 with PP and AVO		ESC[?1;11c
+	VT100 with PP, GPO and AVO	ESC[?1;15c
+	VT132 with AVO			ESC[?4;2c
+	VT132 with AVO and STP		ESC[?4;3c
+	VT132 with GPO and AVO		ESC[?4;6c
+	VT132 with GPO, AVO, and STP	ESC[?4;7c
+	VT132 with PP and AVO		ESC[?4;11c
+	VT132 with PP, GPO and AVO	ESC[?4;15c
+	VT131				ESC[?7c
+	VT125				ESC[?12;5c   VT125 also has ROM version
+	VT125 with AVO			ESC[?12;7c   number, so this won't work
+	VK100 (GIGI)			ESC[?5;0c
+	VK100 (GIGI)			ESC[?5c
+
+	DXterm (DEC's version of xterm)	ESC[?63;1;3;4;6;8;9;15;16;29c
+
+< For this reason, I once wrote a program that convert PCX pictures
+< to DEC Sixel Graphics. It was interesting to view those pictures
+< on the screen with MS-KERMIT (which supports Sixel Graphics in colour.)
+< The only disadvantage was that Sixel graphics is bitmapped and slow.
+
+This is cute, but one needs to be careful about assuming what a
+terminal emulator will do based on what it claims to be.  There are a
+lot of mediocre "emulations" out there.  This is partially because the
+ANSI spec allows the terminal to do a lot of weird and unexpected
+things, like embedding simple control characters in the middle of an
+escape sequence.  ("foo ^H^[^H[^H4^HCbar" should render as "foo bar".
+Yuck.)
+
+		-- Paul Placeway <pplacewa@bbn.com>

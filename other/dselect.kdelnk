@@ -1,0 +1,10 @@
+# KDE Config File
+[KDE Desktop Entry]
+Type=KonsoleApplication
+Name=dselect
+Comment=Debian Package Manager
+Exec=dselect
+Schema=/opt/kde/share/apps/konsole/WhiteOnBlack.schema
+#VGA
+Font=6
+Term=linux

@@ -1,0 +1,124 @@
+Newsgroups: comp.terminals,comp.protocols.misc
+Subject: ANSI X3.64 sequences (was Re: VT100 scrolling region)
+Summary: Escape code effects
+Expires: Sun, 31 Jan 1993 22:23:24 GMT
+References: <18623@mindlink.bc.ca> <lj3vgrINNieu@news.bbn.com>
+Sender: shuford@cs.utk.edu
+Followup-To: comp.terminals
+Distribution: world
+Organization: University of Tennessee, Knoxville--Dept. of Computer Science
+Keywords: VT100, scroll, control code, Escape, ANSI X3.64, terminal
+
+In article <lj3vgrINNieu@news.bbn.com> pdsmith@bbn.com (Peter D. Smith) writes:
+> In article <18623@mindlink.bc.ca>, Frank@mindlink.bc.ca (Frank I. Reiter)
+> writes:
+> > Part of an application I am working on includes a VT100 emulator.
+> > 1) Does ESC [;22r mean "scroll lines 0 through 22" or does it mean "Set
+> > the bottom scrolling line to 22, leave the top line as it is set already"?
+>
+> It should mean 'scroll lines 1 to 22'.
+
+The control sequences recognized by the Digital Equipment Corporation
+VT100, VT200, VT300, and VT400-family character-cell video terminals
+are an extended variant of the control sequences specified by an ANSI
+standard, ANSI X3.64.  (ISO DP6429 is the international version.)
+
+The generic sequence introducer is a thing called CSI (Control
+Sequence Introducer).  If you are using 8-bit communication, you
+can use the hexadecimal value 9B to represent this (but be sure you
+understand the side effects thereof).  Otherwise, use the 7-bit
+equivalent: the Escape character (1Bh) followed by [  (the left
+bracket character).
+
+The canonical form of the given scroll-region command would be  
+
+    CSI xx ; yy r
+
+or in 7-bit style
+
+    Esc [ xx ; yy r
+
+(where xx and yy are decimal digits expressed in ASCII/IA5; you do not
+actually use a space between sequence elements, this is for clarity.
+Be careful with the notation here--sometimes a space character _is_
+a sequence element, as in the SR Scroll Right editing function.)
+
+In an X3.64 control sequence, the numeric arguments may default to an
+arbitrary value specific to the device function being controlled.  Do
+not assume that the default always will be 0 or 1. (Or there may be
+no default allowed.)  For example, the numeric arguments in the GSM
+(Graphic Size Modify) sequence have the default values 100, 100.
+
+As a private extension to X3.64, DEC defines the DECSTBM (Set Top and
+Bottom Margins) command as follows:
+
+        CSI Pt ; Pb r
+
+    Selects top and bottom margins defining the scrolling region.
+    Pt is the line number of the first line in the scrolling region.
+    Pb is the line number of the bottom line.
+    If you do not select either Pt or Pb, they default to the top
+    and bottom respectively.  Lines are counted from 1.
+
+(See \VT220 Programmer Pocket Guide/, part EK-VT220-HR-002, page 37.)
+
+> Remember that these sequences
+> could be implemented in TTL without a microprocessor of any
+> kind & therefore use the simplest possible implementation.  
+
+Peter must be thinking of the much simpler DEC VT52 sequences.  As far
+as I know, terminals implementing X3.64 have ALWAYS used a built-in
+microprocessor.  The VT100 was built around an 8-bit-bus Intel 8085.
+
+In fact, when the X3.64 document was published (circa 1978), some
+vendors, insisting on using discrete logic designs, objected that the
+standard was so complex it could not be implemented.  Most of these
+vendors are now floating belly-up on the tide of technology.  Some
+credit is due to The Heath Company for a pioneering microprocessor-
+based video terminal that implemented many of the X3.64 functions.
+
+> > 2) Should a clear screen code clear the scrolling region only, or the
+> >    entire screen?  How about a clear to end of screen?
+>
+> I think this is the whole screen regardless of the scrolling region.
+> Don't bet your company on it, though.
+
+Screen clearing should not depend on scrolling.
+
+Erasing parts of the display (EL and ED) in the VT100 is performed thus:
+
+     Erase from cursor to end of line           Esc [ 0 K    or Esc [ K
+     Erase from beginning of line to cursor     Esc [ 1 K
+     Erase line containing cursor               Esc [ 2 K
+     Erase from cursor to end of screen         Esc [ 0 J    or Esc [ J
+     Erase from beginning of screen to cursor   Esc [ 1 J
+     Erase entire screen                        Esc [ 2 J
+
+Some brain-damaged terminal/emulators respond to Esc [ J as if it were
+Esc [ 2 J (here the default is 0), and _some_ versions of Microsoft's
+MS-DOS ANSI.SYS contain a bug requiring software to send Esc [ k
+(instead of the uppercase).  Of course, you would never make this mistake.
+
+The VT200 and later terminals have the ECH control sequence:
+
+  Esc yy X
+
+(where yy is a numeric parameter)
+
+This erases the cursor position and the next (yy-1) positions, but this
+is not part of the least common denominator VT100.
+
+ - - - - - -
+
+There is still various video-terminal information available for
+anonymous FTP in "pub/shuford" from
+
+    CS.UTK.EDU  [128.169.94.1]
+
+ - - - - - -
+
+VT, Flip Chip, DIBOL, and Rainbow are trademarks of Digital Equipment
+Corporation.
+
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+

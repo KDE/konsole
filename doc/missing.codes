@@ -1,0 +1,89 @@
+Contained in here is a list of VT100 facilities (and extention based on it),
+that have very low priority or are not likely to be ever implemented by me.
+The order is more or less by priority, so you'll find the most interesting
+stuff in the beginning. All this is mainly included so that you can see, what
+you miss.
+
+- some modes -----------------------------------------------------------------
+
+ The next two modes are difficult to implement (for me).
+ May be i do them, may be not. Think, smooth scroll would be kool.
+
+   '?4'= Jump scroll (set); Smooth scroll (reset)
+   '?8'= Auto repeat on (set); Auto repeat off (reset)
+
+ following are not in VT100, nor in xterm, check Linux console
+
+    '2'= Lock keyboard (set); Unlock keyboard (reset)
+   '12'= Echo on (set); Echo off (reset)
+
+Hmm, one can easily dig out more other which may originate from different
+VT100/VT102 variants. We'll keep things simple, but have to check trough xterm
+and Linux console to be sure.
+
+- rendition material ----------------------------------------------------------
+
+This is mainly not implemented because the fonts are too weak.
+Eventually, i can do better if i dig a little...
+ 
+Set graphic rendition
+  Where <n> is
+   2 = Half				// Not in vt100, ansi italic
+  21 = Normal intensity (this might well be a spelling mistake i.e. == 22)
+  Check linux console for some sco-ish stuff.
+ 
+Line attributes
+  Double-height Top half      Esc  #   3
+                Bottom half   Esc  #   4
+  Single-width, single-height Esc  #   5
+  Double-width                Esc  #   6
+
+- printing related stuff, will not be implemented ----------------------------
+
+Don't think this is of any use today. 
+These codes seem not to appear in VT100 only, may be it was an option.
+Implement a log instead?
+Implement "save screen and buffer"?
+
+Modes // not in VT100
+  '?18'= Send FF to printer after print screen (set); No char after PS (reset)
+  '?19'= Print screen prints full screen (set); PS prints scroll region (reset)
+ 
+Printing
+  Esc  [ <c> i
+  Where <c> is
+      ''= Same as '0'
+     '0'= Prints screen (full or scroll region)
+     '4'= Printer controller off
+     '5'= Printer controller on (Print all received chars to printer)
+    '?1'= Print cursor line
+    '?4'= Auto print off
+    '?5'= Auto print on (Prints line to printer when you exit from it)
+ 
+VT52 sequences
+    Auto print on          Esc  ^
+    Auto print off         Esc  -
+    Printer controller on  Esc  W
+    Printer controller off Esc  X
+    Print cursor line      Esc  V
+    Print screen           Esc  ]
+
+- huh, that could be fun! ----------------------------------------------------
+ 
+Programmable LEDs               Esc [ Ps q
+        0 - All LEDs off
+  (1 - 4) - Turn respective LED on
+ 
+- does not produce a reply, anyway -------------------------------------------
+
+Invoke confidence test
+    Esc  [   2   ; <n> y
+  Where <n> is
+     '1'= Power-up test
+     '2'= Data loopback test
+     '4'= EIA loopback test
+     '9'= Power-up tests (continuously)
+    '10'= Data loopback tests (continuously)
+    '12'= EIA loopback tests (continuously)
+    '16'= Printer loopback test
+    '24'= Printer loopback tests (continuously)

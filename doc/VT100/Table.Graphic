@@ -1,0 +1,32 @@
+Blank
+Diamond
+Checkerboard
+Digraph: (HT)
+Digraph: (FF)
+Digraph: (CR)
+Digraph: (LF)
+Degree Symbol: &deg;
++/- Symbol: &plusmn;
+Digraph: (NL)
+Digraph: (VT)
+Lower-right corner
+Upper-right corner
+Upper-left corner
+Lower-left corner
+Crossing lines (+)
+Horiz Line - scan 1
+Horiz Line - scan 3
+Horiz Line - scan 5
+Horiz Line - scan 7
+Horiz Line - scan 9
+Left "T" (|-)
+Right "T" (-|)
+Bottom "T" (|_)
+Top "T" (T)
+Vertical Bar (|)
+Less/Equal: &le;
+Graeter/Egual: &ge;
+Pi symbol: &pi;
+Not equal: &ne;
+UK pound symbol: &pound;
+Centered dot: &middot;

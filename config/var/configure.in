@@ -1,0 +1,82 @@
+# Original Author was Kalle@kde.org
+# I lifted it in some mater. (Stephan Kulow)
+# I used much code from Janos Farkas
+
+dnl Process this file with autoconf to produce a configure script.
+AC_INIT(acinclude.m4) dnl a source file from your sub dir, but acinclude.m4 does the job
+AC_CANONICAL_SYSTEM  
+AC_ARG_PROGRAM
+
+dnl You have to change this
+AM_INIT_AUTOMAKE(konsole, 0.8.5) dnl searches for some needed programs
+
+dnl make $KDEDIR the default for the installation
+AC_PREFIX_DEFAULT(${KDEDIR:-/usr/local/kde})
+
+dnl generate the config header
+AM_CONFIG_HEADER(config.h) dnl at the distribution this done
+
+dnl Checks for programs.
+AC_CHECK_COMPILERS
+KDE_PROG_LIBTOOL
+
+dnl find out some variables 
+AC_AIX
+AC_MINIX
+
+dnl for NLS support. Call them in this order!
+AC_LANG_CPLUSPLUS dnl switch to C++
+AM_KDE_WITH_NLS dnl check if nls is wanted
+
+dnl Checks for header files.
+AC_LANG_CPLUSPLUS dnl switch to C++
+AC_HEADER_DIRENT dnl check for dirent.h
+AC_HEADER_STDC dnl check for other stdc headers. More traditional ;)
+dnl check for some more header files. You can remove some of
+dnl them, if you want to. But it doesn't hurt
+AC_CHECK_HEADERS(fcntl.h sys/time.h unistd.h sys/cdefs.h)
+AC_CHECK_HEADERS(fnmatch.h sysent.h strings.h sys/stat.h)
+
+dnl Checks for libraries.
+AC_CHECK_LIB(socket, socket, [LIBSOCKET="-lsocket -lnsl"]) dnl for Solaris' X11
+AC_SUBST(LIBSOCKET)
+AC_PATH_KDE dnl check X, Qt and KDE
+AC_CHECK_LIB(compat, main, [LIBCOMPAT="-lcompat"]) dnl for FreeBSD
+AC_SUBST(LIBCOMPAT)
+AC_FIND_GIF dnl only needed, if you need gif, but doesn't hurt
+AC_FIND_JPEG dnl only needed, if you need jpeg, but doesn't hurt
+AC_CHECK_RPATH
+dnl Checks for typedefs, structures, and compiler characteristics.
+AC_HEADER_TIME
+
+dnl check if the compiler has bool
+AC_CHECK_BOOL
+dnl check if the system needs some #defines
+AC_CHECK_GNU_EXTENSIONS
+
+dnl Checks for library functions. 
+AC_CHECK_FUNCS(socket vsnprintf)
+AC_CHECK_SETENV
+AC_LANG_CPLUSPLUS
+AC_CHECK_FUNCS(getdomainname)
+AC_CHECK_KSIZE_T
+
+dnl Perform program name transformation
+AC_ARG_PROGRAM
+
+dnl Features
+AC_ARG_ENABLE(all-fonts, \
+  [--enable-all-fonts      Font selection, highly experimental], \
+  AC_DEFINE(ANY_FONT), )
+AC_ARG_ENABLE(vga, \
+  [--enable-vga            Include VGA font, experimental], \
+  AC_DEFINE(WITH_VGA), )
+
+dnl output files
+topdir=`pwd`
+AC_SUBST(topdir)
+dnl add here all your Makefiles
+AC_OUTPUT(Makefile \
+	other/Makefile \
+	doc/Makefile \
+	src/Makefile )

@@ -1,0 +1,255 @@
+iowa_vt100.news
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+Newsgroups: comp.terminals
+Path: utkcs2!emory!swrinde!cs.utexas.edu!wupost!gumby!destroyer
+     !news.iastate.edu!emann
+From: emann@iastate.edu (The Emann)
+Subject: A vt100 ctrl seq list
+Message-ID: <1992Mar13.072004.12444@news.iastate.edu>
+Date: 13 Mar 92 07:20:04 GMT
+Sender: news@news.iastate.edu (USENET News System)
+Lines: 205
+
+
+     Without benefit of a vt100 programmer's reference, we've been trying
+to locate as complete a list of control sequences for vt52/100/102's.
+This list here was compiled from the lists we could find.  Most notably
+Rob Elliott's 'Selected ANSI Escape codes'; the Villanova list; and the
+ANSI_X3.64-tables-from-BYTE list.  We'd much rather have a reference manual,
+but if anyone can tell us what's missing or incorrect in this list, it
+would be greatly appreciated.
+
+start of list
+----------------------------------------------
+Control Characters
+------------------
+
+Char
+Name  Dec   Hex     Action Taken
+------------------------------------------------------------------
+NUL   0     0x00    ignored; Null
+SOH   1     0x01    ignored; Start of heading
+STX   2     0x02    ignored; Start of text
+ETX   3     0x03    ignored; End of text
+EOT   4     0x04    ignored; End of transmission
+ENQ   5     0x05    Transmit answerback message
+ACK   6     0x06    ignored; Acknowledge
+BEL   7     0x07    Ring the bell
+BS    8     0x08    Move cursor left
+HT    9     0x09    Move cursor to next tab stop; Horizontal tab
+LF    10    0x0A    Line feed; causes print if in autoprint
+VT    11    0x0B    Same as LF; Vertical tab
+FF    12    0x0C    Same as LF; Form feed
+CR    13    0x0D    Move cursor to left margin or newline; Carriage return
+SO    14    0x0E    Invoke G1 character set
+SI    15    0x0F    Invoke G0 character set
+DC1   16    0x10    ignored; Device control 1
+XON   17    0x11    Resume transmission; Device control 2
+DC3   18    0x02    ignored; Device control 3
+XOFF  19    0x13    Halt transmission; Device control 4
+NAK   20    0x14    ignored; Negative acknowledge
+SYN   21    0x15    ignored; Syncronous idle
+ETB   22    0x16    ignored; End of transmission block
+CAN   23    0x17    ignored; Cancel
+EM    24    0x18    Cancel escape sequence and display checkerboard
+SUB   26    0x1A    Same as CAN
+ESC   27    0x1B    Introduce a control sequence
+FS    28    0x1C    ignored; File separator
+GS    29    0x1D    ignored; Group separator
+RS    30    0x1E    ignored; Record separator
+US    31    0x1F    ignored; Unit separator
+DEL   127   0x7F    ignored; Delete
+
+Control Sequences
+-----------------
+
+Action                  VT52 mode       ANSI (VT100)
+----------------------------------------------------
+Cursor up               Esc A           Esc [ Pn A
+Cursor down             Esc B           Esc [ Pn B
+Cursor right            Esc C           Esc [ Pn C
+Cursor left             Esc D           Esc [ Pn D
+Cursor home             Esc H
+Cursor address          Esc Y Pl Pc     Esc [ Pn(row);Pn(col);H or
+                                        Esc [ Pn(row);Pn(col);f
+Cursor position report                  Esc [ 6 n
+                                        returns: Esc [ Pn(row);Pn(col) R
+Index                                   Esc D
+Newline                                 Esc E
+Reverse newline         Esc I           Esc M
+Save cursor & attr                      Esc 7
+Restore cursor & attr                   Esc 8
+Insert line                             Esc [ Pn L
+Delete line                             Esc [ Pn M
+Delete character                        Esc [ Pn P
+Define scrolling region                 Esc [ Pn(top);Pn(bot) r
+Erase cursor to EOL     Esc K           Esc [ K
+Erase BOL to cursor                     Esc [ 1 K
+Erase entire line                       Esc [ 2 K
+Erase cursor to EOS     Esc J           Esc [ J
+Erase BOS to cursor                     Esc [ 1 J
+Erase entire screen                     Esc [ 2 J
+Print screen or region  Esc ]           Esc [ i     (region in ANSI only)
+Print cursor line       Esc V           Esc [ ? 1 i
+Enter print controller  Esc W           Esc [ 5 i
+Exit print controller   Esc X           Esc [ 4 i
+Enter auto print        Esc ^           Esc [ ? 5 i
+Exit auto print         Esc -           Esc [ ? 4 i
+Set tab at current col                  Esc H
+Clr tab at current col                  Esc [ g
+Clear all tabs                          Esc [ 3 g
+Enter ANSI mode         Esc <
+Application keypad      Esc =           Esc =
+Numeric kyepad          Esc >           Esc >
+Fill screen with 'E's                   Esc # 8
+Reset                                   Esc c
+Identify                Esc Z           Esc Z
+                        returns: Esc/Z  returns: Esc [ ? 6 c
+Device attr report                      Esc [ c
+                                        returns: Esc [ ? 6 c
+Device status report                    Esc [ 5 n
+                                        returns: Esc [ O n
+Request term params                     Esc [ 1 x
+                          returns: Esc[3;<par>;<nbits>;<xspeed>;<rspeed>;1;0x
+
+Mode name               Ps    Set (Esc [ Ps h)  Reset (Esc [ Ps l)  VT100
+-------------------------------------------------------------------------
+Keyboard action         2     Locked            Unlocked            reset
+Insertion               4     Insert            Overwrite           reset
+Duplex                  12    Full              Half (echo)         available
+Linefeed/Newline        20    Newline           Linefeed            available
+Cursor key              ?1    Application       Cursor              available
+ANSI/VT52               ?2    ANSI              VT52                available
+Column width            ?3    132               80                  available
+Scolling method         ?4    Smooth            Jump                available
+Screen                  ?5    Reverse           Normal              available
+Origin                  ?6    Relative          Absolute            available
+Wraparound              ?7    Wrap              Truncate            available
+Key auto repeat         ?8    Repeating         No repeat           available
+Print formfeed          ?18   Yes               No                  available
+Print extent            ?19   Full screen       Scolling region     available
+
+Character set           VT52      VT100 (G0)  VT100 (G1)
+--------------------------------------------------------
+United Kingdom (UK)               Esc ( A     Esc ) A
+United States (US)      Esc G     Esc ( B     Esc ) B
+Graphics                Esc F     Esc ( 0     Esc ) 0
+Default ROM                       Esc ( 1     Esc ) 1
+Alternate ROM                     Esc ( 2     Esc ) 2
+Switch to G0/G1                   Esc O       Esc N
+
+Character attributes    Ps  (Esc [ Ps;Ps;Ps;...Psm)
+---------------------------------------------------
+Normal (attr off)       0               Note: Ps=3 4 or 6 are unknown and
+Bold on                 1                     probably redundant.
+Underscore on           2
+Blink on                5
+Inverse on              7
+
+Line Sizes:
+Change current line             VT100
+---------------------------------------
+To double-height top half       Esc # 3
+To double-height bottom half    Esc # 4
+To normal size                  Esc # 5
+To double-width                 Esc # 6
+
+Cursor control keys   VT52    VT100 (appl mode)   VT100 (cursor mode)
+---------------------------------------------------------------------
+Up arrow              Esc A   Esc O A             Esc [ A
+Down arrow            Esc B   Esc O B             Esc [ B
+Right arrow           Esc C   Esc O C             Esc [ C
+Left arrow            Esc D   Esc O D             Esc [ D
+
+Auxilliary keypad   VT52 (num)  VT52 (appl)   VT100 (num)   VT100 (appl)
+------------------------------------------------------------------------
+0                   0           Esc ? p       0             Esc O p
+1                   1           Esc ? q       1             Esc O q
+2                   2           Esc ? r       2             Esc O r
+3                   3           Esc ? s       3             Esc O s
+4                   4           Esc ? t       4             Esc O t
+5                   5           Esc ? u       5             Esc O u
+6                   6           Esc ? v       6             Esc O v
+7                   7           Esc ? w       7             Esc O w
+8                   8           Esc ? x       8             Esc O x
+9                   9           Esc ? y       9             Esc O y
+-                   -           Esc ? m       -             Esc O m
+,                   ,           Esc ? l       ,             Esc O l
+.                   .           Esc ? n       .             Esc O n
+Enter               ^M          Esc ? M       ^M            Esc O M
+PF1                 Esc P       Esc P         Esc O P       Esc O P
+PF2                 Esc Q       Esc Q         Esc O Q       Esc O Q
+PF3                 Esc R       Esc R         Esc O R       Esc O R
+PF4                 Esc S       Esc S         Esc O S       Esc O S
+
+G0 graphics char set
+--------------------
+
+ASCII code          Symbol displayed
+------------------------------------
+\                   Diamond
+a                   Chekerboard 
+e                   Degree sign 
+g                   Plus/minus sign 
+j                   Lower-right box corner 
+k                   Upper-right box corner 
+l                   Upper-left box corner 
+m                   Lower-left box corner 
+n                   Intersecting lines 
+o                   Horizontal line - scan 1 (bottom)
+p                   Horizontal line - scan 3
+q                   Horizontal line - scan 5  (matches with box corners)
+r                   Horizontal line - scan 7
+s                   Horizontal line - scan 9 (top)
+t                   Left T 
+u                   Right T 
+v                   Top T 
+w                   Bottom T 
+x                   Vertical bar 
+y                   Less-than-or-equal-to sign 
+z                   Greater-than-or-equal-to sign 
+|                   Not-equal-to sign
+(                   Pi sign 
+)                   UK pound sign 
+~                   Centered dot
+
+---------------------------------------
+end of list
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+Path: utkcs2!memstvx1!ukma!asuvax!cs.utexas.edu!usc!elroy.jpl.nasa.gov!wvus
+      !abode!blars!blarson
+Newsgroups: comp.terminals
+Subject: Re: A vt100 ctrl seq list
+Message-ID: <295@blars.UUCP>
+From: blarson@blars.UUCP
+Date: 13 Mar 92 10:13:23 GMT
+Reply-To: blarson@usc.edu
+References: <1992Mar13.072004.12444@news.iastate.edu>
+Lines: 20
+
+In article <1992Mar13.072004.12444@news.iastate.edu>,
+ emann@iastate.edu (The Emann) writes:
+>
+>  Without benefit of a vt100 programmer's reference, we've been trying
+> to locate as complete a list of control sequences for vt52/100/102's.
+
+Even if you had one, it wouldn't list them all.  A couple of examples:
+(Genuine vt100, imitators probably get them wrong.  (Dec never was good
+at imitating their own terminals.))
+
+Esc [ 2 ; 8 y	Wait for poweroff.
+Esc [ 2 ; 15 y	Flashing background mode.  Also puts terminal in local.
+
+Also, many sequences produced different results at different speeds.
+The original VT100 terminal has many undocumented modes such as 24
+duplicate lines, linefeed goes up, etc.
+
+-- 
+blarson@usc.edu			usc!blarson			blarson@zog
+C news and rn for os9/68k!
+
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/

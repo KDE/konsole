@@ -1,0 +1,6 @@
+# KDE Config File
+[KDE Desktop Entry]
+Type=KonsoleApplication
+Name=Shell
+Comment=Shell
+Exec=sh

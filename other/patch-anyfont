@@ -1,0 +1,120 @@
+NOTE: this is most probably broken, better keep hands off here.
+
+--- TEWidget.C	Wed May  6 19:05:54 1998
++++ TEWidget.C-withANY_FONT	Wed May  6 19:02:21 1998
+@@ -184,6 +184,9 @@
+   QPainter paint;
+   setUpdatesEnabled(FALSE);
+   paint.begin( this );
++#ifdef ANY_FONT
++  paint.setBackgroundMode( TransparentMode );
++#endif
+ 
+   QPoint tL  = contentsRect().topLeft();
+   int    tLx = tL.x();
+@@ -225,6 +228,14 @@
+           disstr[len] = ext[x+len].c;
+         }
+ //printf("draw: %d %d %d\n",y,x,len);
++#ifdef ANY_FONT
++        cb = ext[x].b; 
++        if (!pm || cb != DEFAULT_BACK_COLOR)
++          paint.fillRect(blX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h,
++                         color_table[cb]);
++        else 
++          erase(blX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h);
++#else
+         if (ext[x].b != cb) 
+         {
+           cb = ext[x].b; 
+@@ -238,12 +249,23 @@
+         }
+         if (pm && cb == DEFAULT_BACK_COLOR)
+           erase(blX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h);
+-        paint.drawText(blX+tLx+font_w*x,bY+tLy+font_a+font_h*y, disstr,len);
+-        if (cr & RE_BOLD)
+-          paint.drawText(blX+tLx+font_w*x+1,bY+tLy+font_a+font_h*y, disstr,len);
+-        if (cr & RE_UNDERLINE)
+-          paint.drawLine(blX+tLx+font_w*x,      bY+tLy+font_a+font_h*y+1,
+-                         blX+tLx+font_w*(x+len),bY+tLy+font_a+font_h*y+1 );
++#endif
++#ifdef ANY_FONT
++        if (fixed_font)
++        {
++#endif
++          paint.drawText(blX+tLx+font_w*x,bY+tLy+font_a+font_h*y, disstr,len);
++          if (cr & RE_BOLD)
++            paint.drawText(blX+tLx+font_w*x+1,bY+tLy+font_a+font_h*y, disstr,len);
++          if (cr & RE_UNDERLINE)
++            paint.drawLine(blX+tLx+font_w*x,      bY+tLy+font_a+font_h*y+1,
++                           blX+tLx+font_w*(x+len),bY+tLy+font_a+font_h*y+1 );
++#ifdef ANY_FONT
++        }
++        else // proportional font
++          for (int i = 0; i < len; i++)
++            paint.drawText(blX+tLx+font_w*(x+i),bY+tLy+font_a+font_h*y, disstr+i,1);
++#endif
+         x += len - 1;
+       }
+     }
+@@ -310,6 +332,13 @@
+     {
+       disstr[len] = image[loc(x+len,y)].c; len += 1;
+     }
++#ifdef ANY_FONT
++    if (!pm || cb != DEFAULT_BACK_COLOR)
++      paint.fillRect(blX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h,
++                     color_table[cb]);
++    else 
++      erase(blX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h);
++#else
+     if (!pm || cb != DEFAULT_BACK_COLOR)
+     {
+       if (blinking)
+@@ -326,14 +355,25 @@
+       paint.setBackgroundMode( TransparentMode );
+       erase(blX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h);
+     }
++#endif
+     if (!blinking || !(cr & RE_BLINK))
+     {
+-      paint.drawText(blX+tLx+font_w*x,bY+tLy+font_a+font_h*y, disstr,len);
+-      if (cr & RE_BOLD)
+-        paint.drawText(blX+tLx+font_w*x+1,bY+tLy+font_a+font_h*y, disstr,len);
+-      if (cr & RE_UNDERLINE)
+-        paint.drawLine(blX+tLx+font_w*x,      bY+tLy+font_a+font_h*y+1,
+-                       blX+tLx+font_w*(x+len),bY+tLy+font_a+font_h*y+1 );
++#ifdef ANY_FONT
++      if (fixed_font)
++      {
++#endif
++        paint.drawText(blX+tLx+font_w*x,bY+tLy+font_a+font_h*y, disstr,len);
++        if (cr & RE_BOLD)
++          paint.drawText(blX+tLx+font_w*x+1,bY+tLy+font_a+font_h*y, disstr,len);
++        if (cr & RE_UNDERLINE)
++          paint.drawLine(blX+tLx+font_w*x,      bY+tLy+font_a+font_h*y+1,
++                         blX+tLx+font_w*(x+len),bY+tLy+font_a+font_h*y+1 );
++#ifdef ANY_FONT
++      }
++      else // proportional font
++        for (int i = 0; i < len; i++)
++          paint.drawText(blX+tLx+font_w*(x+i),bY+tLy+font_a+font_h*y, disstr+i,1);
++#endif
+     }
+     x += len - 1;
+   }
+@@ -458,6 +498,14 @@
+   font_h = fontMetrics().height();
+   font_w = fontMetrics().maxWidth();
+   font_a = fontMetrics().ascent();
++#ifdef ANY_FONT
++  //FIXME: this is broken. QT returns false for "9x15"!
++  //       anyway, the option is deactivated by default
++  //       and the bug will only harm a speed penalty.
++  fixed_font = fontInfo().fixedPitch();
++#else
++  fixed_font = TRUE;
++#endif
+ 
+   setMinimumSize(blX+brX+5*font_w,2*bY+5*font_h);
+ 

@@ -1,0 +1,64 @@
+New in 0.9.8
+
+- some support for linux console added (experimental)
+- multiple sessions (experimental but functional with a serious flaw)
+  check [README.bugs] before using this feature.
+- color schemes (see /opt/kde/share/apps/konsole/*.schema)
+- configurable new sesion command (see /opt/kde/share/apps/konsole/*.kdelnk)
+- minor bugs fixed
+
+New in 0.8.9
+
+- marking improve (thanks to Peter Silva)
+  - now works in history buffer, too.
+  - autoscrolling while marking.
+  - word selection by double click.
+
+New in 0.8.8
+
+- selection for background pixmaps (somewhat overdone)
+  You need libjpeg, libpng and libqimgio (qt-1.40/extentions) for that.
+
+New in 0.8.7
+
+- (partial) session management
+- some command line options
+- added support for some new xterm private modes (?1047,?1048).
+
+New in 0.8.6
+
+- vt52 mode
+- Size setting
+- escape codes completed
+- FreeBSD support (Kevin Street <street@iname.com>)
+- konsole's primary home is the kdenonbeta package
+
+New in 0.8.5
+
+- rendition is completed, so underline, bold and blinking should
+  work properly by now.
+
+- some material related to cursors has been fixed and added.
+
+- some experimental material removed
+  - VGA font deactivated by default. This is stuff for a future Linux
+    console and ANSI-BBS emulation.
+  - variable pitch font support moved to a patch. Result was a desaster
+    anyway, since these fonts are not prepared to be used with a terminal
+    emulation.
+
+New in 0.8.4
+
+- history buffer and scroll bar added.
+
+New in 0.8.3
+
+- autoconf material
+
+- One may use a background pixmap with konsole, now. This feature is 
+  experimental.  It originates from Eterm. To try this, move a pixmap named
+  `konsole.ppm' to $HOME/.kde/apps/konsole to try it.  It can be anything
+  that QPixmap::load is able to read.  You can get pixmaps from the Eterm
+  background tar balls. I've put some into the 'other/' directory, too. Note
+  that you need to set fore- and background colors that matches the color of
+  the pixmap. The picture will appear tiled in any case.

@@ -1,0 +1,440 @@
+RES=techref.html
+
+function header
+{
+cat << etx >> $RES
+<h2>
+<table width=100%>
+<tr><td align=center bgcolor=#d0d0d0></td></tr>
+<tr><td align=center bgcolor=#d0d0d0>$1</td></tr>
+<tr><td align=center bgcolor=#d0d0d0></td></tr>
+</table>
+</h2>
+etx
+}
+
+cat > $RES /dev/null
+
+# -- HTML Header --------------------------------------------------------------------
+
+cat >> $RES << etx
+<html>
+<head>
+<title>VT100</title>
+<!-- NOTE: this page is generated using the "genDocument" script -->
+</head>
+<body bgcolor=white>
+
+<hr>
+
+etx
+
+# -- Editors Notes ------------------------------------------------------------------
+
+
+
+cat >> $RES << etx
+
+<h1><center>VT100</center></h1>
+<center><img src="vt100.gif"></center>
+
+<it>Please note that this text is under construction</it>
+
+<h2>Preface</h2>
+
+This document accompanies the Konsole and Kom programs, which are mainly terminal
+emulations.  Since material about the extend and precise semantics of the emulatation
+intended by these programs is hard to find on the internet today, it came out
+nessesary to include a more precise specification within their release.
+<p>
+Hopefully, this helps to clearify the relation to the VT100, VT102, Linux, XTerm
+and ansi.sys (ANSI-BBS) terminals, which are the target of these programs. Further,
+it specifies which codes are interpreted by them, and what has been omitted.
+<p>
+To begin with, all of the above call themselfes "ANSI" emulations, which makes this
+notion pretty vage. "ANSI" referes here to the American National Standards 
+Institute's documents X3.41-1974 and X3.64-1977. DEC partially implemented this
+standart in their VT100 terminal, with some additions. The VT102 is a later extention
+of that. Both the Linux console and the XTerm emulation implement most of VT102,
+with some additions. MS stepped in later and produced another ANSI emulation,
+<code>ansi.sys</code>, for their OS, which became of some relevance in BBS style
+telecommunication programs. One can view this as a small subset of the VT100 
+emulation, with some additions, of cause.
+<p>
+This situation is further confused by the fact, that often many versions of the
+above terminals and emulations are out, one able to do a little more or less then
+the other. Especially the later makes the production of a <em>working</em>
+emulation an impossible task. And this is the place where this document steps in:
+
+
+<h2>Editor's notes &amp; todos</h2>
+<ul>
+<li>Include complete reference on keyboard material.
+<li>Check for explaination of out-of-bound values.
+<li>Include VT52, VT102, XTERM, LINUX-console codes
+<li>Translate to codes to decimal
+<li>Make the whole document more concept oriented
+<li>See the section <em>Method of description</em>, below
+</ul>
+etx
+
+# -- Codes --------------------------------------------------------------------------
+
+header "Terminal Control Commands"
+
+cat >> $RES << etx
+
+The VT100 is an upward and downward software-compatible terminal;
+that is, previous Digital video terminals have Digital's private standards
+for control sequences. The American National Standards Institute has since
+standardized escape and control sequences in terminals in documents X3.41-1974
+and X3.64-1977.
+<p>
+The VT100 is compatible with both the previous Digital standard and
+ANSI standards.  Customers may use existing Digital software designed around
+the VT52 or new VT100 software.  The VT100 has a "VT52 compatible" mode in
+which the VT100 responds to control sequences like a VT52.  In this mode, most
+of the new VT100 features cannot be used.
+<p>
+Throughout this document references will be made to "VT52 mode" or
+"ANSI mode".  These two terms are used to indicate the VT100's software
+compatibility.
+<p>
+<em>NOTE</em>: The ANSI standards allow the manufacturer flexibility in implementing
+each function.  This document describes how the VT100 will respond to the
+implemented ANSI central function.
+<p>
+
+<!-- BEGIN: new section about the codes -->
+
+<h2>Method of description</h2>
+
+<em>All the following in this section is an outline</em>. <p>
+
+Parts of the terminal description
+<ul>
+<li>State
+<br>This is mainly the screen, the cursor (including it's graphical state)
+    and some hidden mode variables. Note that the state cannot be investigated
+    by the attached host.
+<li>Interface
+<br>That's what goes over the wire. Beside being related to objects, this
+    appears so closely related to contemporal process communication, that
+    it might be discussed in likely terms.
+<br>We have information flowing in both directions. On could destinguist
+    between:
+<li>Commands
+<br>These are "calls" of the terminals interface by the host which cause
+    some change of the terminals state, but do not end in a response.
+<li>Requests
+<br>These are "calls" of the terminals interface by the host which do not cause
+    any change of the terminals state, but end in a response of the terminal.
+    Clearly, requests are somehow used to investigate the state of the terminal.
+<li>Events
+<br>These are signals from the terminal caused by the user affecting the
+    mouse or keyboard to the host.
+<li>Replys
+<br>These are send by the terminal as a result of a Request from the hosts.
+<li>Encoding/Decoding
+<br>Since the 
+</ul>
+
+
+<!-- END -->
+etx
+
+header "Control Characters"
+
+cat >> $RES << etx
+
+The control characters recognized by the VT100 are listed below.  All
+other control characters cause no action to be taken.
+<p>
+Control characters (codes 00 - 037 inclusive) are specifically excluded
+from the control sequence syntax, but may be embedded within a control
+sequence.  Embedded control characters are executed as soon as they are
+encountered by the VT100.  The processing of the control sequence then
+continues with the next character recieved.  The exceptions are: if the &lt;ESC&gt;
+character occurs, the current control sequence is aborted, and a new one
+commences beginning with the &lt;ESC&gt; just recieved.  If the character &lt;CAN&gt;
+(030) or the character &lt;SUB&gt; (032) occurs, the current control sequence is
+aborted.  The ability to embed control characters allows the synchronization
+characters XON and XOFF to be interpreted properly without affecting the
+control sequence.
+<p>
+etx
+
+awk -f awk.table.control < Table.Control >> $RES
+
+header "Control Sequences"
+cat >> $RES << etx
+
+<h3>Definitions</h3>
+
+<dl>
+<dt>Control Sequence Introducer (CSI):
+<dd>An escape sequence that provides
+    supplementary controls and is itself a prefix affecting the
+    interpretation of a limited number of contiguous characters.
+    In the VT100, the CSI is: &lt;ESC&gt;[
+
+<dt>Parameter:
+<dd>1. A string of zero or more decimal characters which
+       represent a single value.  Leading zeros are ignored.  The
+       decimal characters have a range of 0 (060) to 9 (071).
+<br>2. The value so represented.
+
+<dt>Numeric Parameter:
+<dd>A parameter that represents a number, designated by Pn.
+
+<dt>Selective Parameter:
+<dd>A parameter that selects a subfunction from a
+    specified set of subfunctions, designated by Ps.  In general, a
+    control sequence with more than one selective parameter causes
+    the same effect as several control sequences, each with one
+    selective parameter, e.g., CSI Psa; Psb; Psc F is identical to
+    CSI Psa F CSI Psb F CSI Psc F.
+
+<dt>Parameter String:
+<dd>A string of parameters separated by a semicolon.
+
+<dt>Default:
+<dd> A function-dependent value that is assumed when no explicit
+     value, or a value of 0, is specified.
+
+<dt>Final character:
+<dd>A character whose bit combination terminates an escape or control sequence.
+</dl>
+
+
+<em>EXAMPLE</em>:  Control sequence to turn off all character attributes, then
+turn on underscore and blink attributes (<a href=#SGR>SGR</a>).
+
+<pre>                      Delimiters
+                          / \       
+                         /   \       
+                         |   |
+                        \ / \ /
+Sequence:       &lt;ESC&gt;[ 0 ; 4 ; 5 m
+                ^^^^^^ ^   ^   ^ ^
+                |||||| |   |   | |
+                \||||/  \  |  /  +------Final character
+                 \||/    \ | /
+                 CSI   Selective
+                       Parameters
+</pre>
+The octal representation of this string is:
+<pre>
+   033 0133 060 073 064 073 065 0155
+  &lt;ESC&gt;   [   0   ;   4   ;   5    m
+</pre>
+
+
+Alternate sequences which will accomplish the same thing:
+
+<ul>
+<li><code>&lt;ESC&gt;[;4;m     </code>
+<li><code>&lt;ESC&gt;[m        </code>
+<br><code>&lt;ESC&gt;[4m       </code>
+<br><code>&lt;ESC&gt;[5m       </code>
+<li><code>&lt;ESC&gt;[0;04;005m</code>
+</ul>
+
+
+All of the following control sequences are transmitted from the Host to
+VT100 unless otherwise noted.  All of the control sequences are a subset of
+those defined in ANSI X 3.64 1977 and ANSI X 3.41 1974.
+<p>
+The following text conforms to these formatting conventions:
+<ul>
+<li>Control characters are designated by angle brackets (e.g.
+    the Escape character is &lt;ESC&gt;).
+
+<li>Parameters are indicated by curly braces.
+
+<li>Parameter types usually are indicated as one of:
+    <table>
+    <tr><td>{Pn} </td><td>A string of digits representing a numerical value.</td></tr>
+    <tr><td>{Ps} </td><td>A character that selects an item from a list.</td></tr>
+    <tr><td>{a-z}</td><td>Any lowercase sequence of one44 or more
+                          characters in braces represent a value to be
+                          entered (as in {Pn}), and the name in the
+                          braces will be referred to in explanatory text.</td></tr>
+    </table>
+
+<li>Spaces in the control sequence are present for clarity and
+                        may be omitted.  Spaces which are required will be
+                        surrounded by single quotes: ' '.
+
+<li>All other characters are literals.
+</ul>
+
+<p>
+The following attributes below have the following meaning:
+<ul>
+<li>VT100 - This code is known to VT100.
+<li>ANSI  - This code is defined by ANSI.
+<li>DEC   - This code is DEC private.
+<li>Command - Sent from host to the terminal. <b>FIXME:</b>add Inquiery.
+<li>Reply - Sent from terminal to the host (as response to an Inquiery).
+<li>Event - Sent from terminal to the host (caused by a user activity).
+<li>Mode - The entry is a mode.
+</ul>
+etx
+
+
+genTC.pl >> $RES
+
+header "Modes"
+
+cat >> $RES << etx
+<a name=#MODES></a>
+
+
+The Following is a list of VT100 modes which may be changed with Set
+Mode (SM) and Reset Mode (RM) controls.
+
+<h3>ANSI Specified Modes</h3>
+
+<table border=1>
+<tr><td>Parameter</td><td>Mnemonic</td><td>Function</td></tr>
+<tr><td><hr></td><td><hr></td><td><hr></td></tr>
+<tr><td>0        </td><td>        </td><td>Error (Ignored)</td></tr>
+<tr><td>20       </td><td>LNM     </td><td>Line Feed/New Line Mode</td></tr>
+</table>
+
+
+<h3>DEC Private Modes</h3>
+
+If the first character in the parameter string is ? (077), the
+parameters are interpreted as DEC private parameters according to the
+following:
+
+<table border=1>
+<tr><td>Parameter</td><td>Mnemonic</td><td>Function
+<tr><td><hr></td><td><hr></td><td><hr></td></tr>
+<tr><td>0</td><td>       </td><td>Error (Ignored)</td></tr>
+<tr><td>1</td><td><a href=#DECCKM >DECCKM </a></td><td>Cursor Key     </td></tr>
+<tr><td>2</td><td><a href=#DECANM >DECANM </a></td><td>ANSI/VT52      </td></tr>
+<tr><td>3</td><td><a href=#DECCOLM>DECCOLM</a></td><td>Column         </td></tr>
+<tr><td>4</td><td><a href=#DECSCLM>DECSCLM</a></td><td>Scrolling      </td></tr>
+<tr><td>5</td><td><a href=#DECSCNM>DECSCNM</a></td><td>Screen         </td></tr>
+<tr><td>6</td><td><a href=#DECOM  >DECOM  </a></td><td>Origin         </td></tr>
+<tr><td>7</td><td><a href=#DECAWM >DECAWM </a></td><td>Auto Wrap      </td></tr>
+<tr><td>8</td><td><a href=#DECARM>DECARM </a></td><td>Auto Repeat    </td></tr>
+<tr><td>9</td><td><a href=#DECINLM>DECINLM</a></td><td>Interlace      </td></tr>
+</table>
+
+Any other parameter values are ignored.
+
+<p>
+The following modes, which are specified in the ANSI standard, may be
+considered to be permanently set, permanently reset, or not applicable,
+as noted.
+
+<table border=1>
+<tr><td>Mnemonic</td><td>Function                 </td><td>State</td></tr>
+
+<tr><td>CRM     </td><td>Control Representation   </td><td>Reset</td></tr>
+<tr><td>EBM     </td><td>Editing Boundary         </td><td>Reset</td></tr>
+<tr><td>ERM     </td><td>Erasure                  </td><td>Set  </td></tr>
+<tr><td>FEAM    </td><td>Format Effector Action   </td><td>Reset</td></tr>
+<tr><td>FETM    </td><td>Format Effector Transfer </td><td>Reset</td></tr>
+<tr><td>GATM    </td><td>Guarded Area Transfer    </td><td>NA   </td></tr>
+<tr><td>HEM     </td><td>Horizontal Editing       </td><td>NA   </td></tr>
+<tr><td>IRM     </td><td>Insertion-replacement    </td><td>Reset</td></tr>
+<tr><td>KAM     </td><td>Keyboard Action          </td><td>Reset</td></tr>
+<tr><td>MATM    </td><td>Multiple area transfer   </td><td>NA   </td></tr>
+<tr><td>PUM     </td><td>Positioning Unit         </td><td>Reset</td></tr>
+<tr><td>SATM    </td><td>Selected Area Transfer   </td><td>NA   </td></tr>
+<tr><td>SRTM    </td><td>Status Reporting Transfer</td><td>Reset</td></tr>
+<tr><td>TSM     </td><td>Tabulation Stop          </td><td>Reset</td></tr>
+<tr><td>TTM     </td><td>Transfer Termination     </td><td>NA   </td></tr>
+<tr><td>VEM     </td><td>Vertical Editing         </td><td>NA   </td></tr>
+</table>
+etx
+
+# -- Keyboard Codes -----------------------------------------------------------------
+
+cat >> $RES << etx
+<h2>Keyboard Codes</h2>
+
+The notation &lt;ESC&gt; denotes a single ASCII Escape character, 1Bx.
+
+<table border=1>
+<tr>
+<td>Cursor Key</td>
+<td>VT52 mode</td>
+<td>ANSI mode w/cursor <br> key mode reset</td>
+<td>ANSI mode w/cursor <br> key mode set</td>
+</tr>
+<tr><td>UP   </td><td>&lt;ESC&gt;A</td><td>&lt;ESC&gt;[A</td><td>&lt;ESC&gt;OA</td></tr>
+<tr><td>DOWN </td><td>&lt;ESC&gt;B</td><td>&lt;ESC&gt;[B</td><td>&lt;ESC&gt;OB</td></tr>
+<tr><td>RIGHT</td><td>&lt;ESC&gt;C</td><td>&lt;ESC&gt;[C</td><td>&lt;ESC&gt;OC</td></tr>
+<tr><td>LEFT </td><td>&lt;ESC&gt;D</td><td>&lt;ESC&gt;[D</td><td>&lt;ESC&gt;OD</td></tr>
+</table>
+etx
+
+
+# -- Graphics Characters ------------------------------------------------------------
+
+cat >> $RES << etx
+<h2>Special Graphics Characters</h2>
+
+If the Special Graphics set is selected, the graphics for ASCII codes
+0137 through 0176 will be replaced according to the following table (see the
+<a href=#SCS>SCS</a> control sequence).
+etx
+
+
+awk -f awk.table.graphic < Table.Graphic >> $RES
+
+
+cat >> $RES << etx
+<em>NOTE 1</em>: Codes 0152-0156 and 0164-0170 are used to draw rectangular grids" each
+piece of this set is contiguous with other so the lines formed will be
+unbroken.
+<p>
+<em>NOTE 2</em>: Codes 0157-0163 give better vertical resolution than dashes and
+underlines when drawing graphs; using these segments, 120 x 132 resolution may
+be obtained in 132 column mode with the Advanced Video Option installed.
+<p>
+
+<h2>References</h2>
+<em>NOTE</em>: ANSI standards may be obtained by writing:
+<center>American National Standards Institute</center>
+<center>Sales Department</center>
+<center>1430 Broadway</center>
+<center>New York, NY, 10018</center>
+etx
+
+
+cat >> $RES << etx
+<hr>
+<h3>Other Material</h3>
+<a href="nomailto:">Petri Virekoski</a> has posted much of
+this document to <a href="news:comp.terminals">comp.terminals</a>
+in 1993.  It is largely derived from DEC document EK-VT100-UG-003,
+the original manual for the VT100.
+I htmlized and edited his posting in 1998 to provide the
+<code>Konsole</code> program with proper reference material.
+The original author is mentioned here only to honor his work,
+he has nothing to do with <code>Konsole</code>. Do not bother
+him with any questions.
+<p>
+Most so-called VT100 implementations (both stand-alone terminals and
+PC emulators) actually implement more controls than are given here. 
+The minimal standard is really the slightly more advanced VT102 terminal.
+<p>
+<hr>
+<small>
+This text is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+<p>
+<a href="mailto:lars.doelle@on-line.de">Lars D&ouml;lle</a>, 1998
+</small>
+
+</body>
+</html>
+etx

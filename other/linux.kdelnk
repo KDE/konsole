@@ -1,0 +1,10 @@
+# KDE Config File
+[KDE Desktop Entry]
+Type=KonsoleApplication
+Name=Linux
+Comment=Linux Console
+Exec=bash
+Schema=/opt/kde/share/apps/konsole/WhiteOnBlack.schema
+#VGA
+Font=6
+Term=linux

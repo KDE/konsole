@@ -1,0 +1,14 @@
+# KDE Config File  
+[KDE Desktop Entry]
+Type=Application
+Exec=konsole %i %mi -caption "%c"
+#MiniIcon=konsole-mini.xpm
+#Icon=konsole.xpm
+DocPath=konsole/index.html
+Comment=Konsole
+Comment[es]=Konsole
+Comment[pt_BR]=Konsole
+Terminal=0
+Name=Konsole
+Name[es]=Konsole
+Name[pt_BR]=Konsole

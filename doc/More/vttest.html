@@ -1,0 +1,205 @@
+<html><head>
+<title>The VTTEST VT100/102 Terminal Emulation Test</title>
+</head><body>
+<h3>The VTTEST VT100/102 Terminal Emulation Test</h3>
+
+The VTTEST program was written in 1983-85 by Per Lindberg of Stockholm
+University in Sweden to exercise and test all the features of a Digital
+Equipment Corporation (DEC) VT100 or VT102 terminal or software that emulates
+one of these terminals.  Incidentally, the primary additional feature of the
+VT102 terminal over the VT100 is character insertion and deletion, important in
+text-editing applications (like vi or EMACS), especially on slow connections.
+<p>
+You may obtain the C-language source code for the VTTEST program by ftp,
+compile it on your UNIX system (or adapt it to others), and run the tests
+yourself:
+<p>
+<a href="ftp://kermit.columbia.edu/kermit/vttest/">
+ftp://kermit.columbia.edu/kermit/vttest/</a>
+<p>
+The VTTEST program does not test any features of the VT220 or above,
+nor of esoteric VT models like VT125, VT131, etc.  A VT220/320 test suite
+similar to VTTEST would be most welcome, but none seems to exist.
+<p>
+The following sheet may be used to administer the test.  There are 100
+points, plus 10 possible extra-credit points, so the highest possible
+score would be 110.  To minimize confusion and promote fairness, begin with
+your emulator set to:
+<ul>
+<li>VT102 (or, if no VT102, then VT100) emulation;
+<li>24 rows by 80 columns;
+<li>Light foreground on dark background;
+<li>Answerback enabled.
+</ul>
+<pre>
+<hr>
+VTTEST VT100/VT102 Compatibility Test Score Sheet
+
+Program and version: konsole______________________________ Date: _________
+
+Score: ____________ + Extra credit: ___________ = Final score: ___________
+
+Check box if test passed.  Score 1 point per check mark.
+Perfect score = 100 points.  Extra credit at end.
+
+1. Test of cursor movements
+
+[1]   1. Text inside frame of E's inside frame of *'s and +'s, 80 columns
+[1]   2. Text inside frame of E's inside frame of *'s and +'s, 132 columns
+[1]   3. Cursor-control chars inside ESC sequences
+[1]   4. Leading 0's in ESC sequences
+
+2. Test of screen features
+
+[1]   5. Three identical lines of *'s (test of wrap mode)
+[1]   6. Test of tab setting/resetting
+[1]   7. 132-column mode, light background
+[1]   8. 80-column mode, light background
+[1]   9. 132-column mode, dark background
+[1]  10. 80-column mode, dark background
+[1]  11. Soft scroll down
+[1]  12. Soft scroll up / down
+[1]  13. Jump scroll down
+[1]  14. Jump scroll up / down
+[1]  15. Origin mode test (2 parts)
+
+     Graphic Rendition test pattern, dark background
+
+[1]  16. Normal ("vanilla")
+[1]  17. Normal underlined distinct from normal
+[1]  18. Normal blink distinct from all above
+[1]  19. Normal underline blink distinct from all above
+[1]  20. Normal reverse ("negative") distinct from all above
+[1]  21. Normal underline reverse distinct from all above
+[1]  22. Normal blink reverse distinct from all above
+[1]  23. Normal underline blink reverse distinct from all above
+[1]  24. Bold distinct from all above
+[1]  25. Bold underlined distinct from all above
+[1]  26. Bold blink distinct from all above
+[1]  27. Bold underline blink distinct from all above
+[1]  28. Bold reverse ("negative") distinct from all above
+[1]  29. Bold underline reverse distinct from all above
+[1]  30. Bold blink reverse distinct from all above
+[1]  31. Bold underline blink reverse distinct from all above
+
+     Graphic Rendition test pattern, light background
+
+[1]  32. Normal ("vanilla")
+[1]  33. Normal underlined distinct from normal
+[1]  34. Normal blink distinct from all above
+[1]  35. Normal underline blink distinct from all above
+[1]  36. Normal reverse ("negative") distinct from all above
+[1]  37. Normal underline reverse distinct from all above
+[1]  38. Normal blink reverse distinct from all above
+[1]  39. Normal underline blink reverse distinct from all above
+[1]  40. Bold distinct from all above
+[1]  41. Bold underlined distinct from all above
+[1]  42. Bold blink distinct from all above
+[1]  43. Bold underline blink distinct from all above
+[1]  44. Bold reverse ("negative") distinct from all above
+[1]  45. Bold underline reverse distinct from all above
+[1]  46. Bold blink reverse distinct from all above
+[1]  47. Bold underline blink reverse distinct from all above
+
+     Save/Restore Cursor  
+
+[1]  48. AAAA's correctly placed
+[1]  49. Lines correctly rendered (middle of character cell)
+[1]  50. Diamonds correctly rendered
+
+3. Test of character sets
+
+[1]  51. UK/National shows Pound Sterling sign in 3rd position
+[1]  52. US ASCII shows number sign in 3rd position
+[1]  53. SO/SI works (right columns identical with left columns)
+[1]  54. True special graphics & line drawing chars, not simulated by ASCII
+
+4. Test of double-sized chars
+
+     Test 1 in 80-column mode:
+
+[0]  55. Left margin correct
+[0]  56. Width correct
+
+     Test 2 in 80-column mode:
+
+[0]  57. Left margin correct
+[0]  58. Width correct
+
+     Test 1 in 132-column mode:
+
+[0]  59. Left margin correct
+[0]  60. Width correct
+
+     Test 2 in 132-column mode:
+
+[0]  61. Left margin correct
+[0]  62. Width correct
+
+[0]  63. "The man programmer strikes again" test pattern
+[0]  64. "Exactly half the box should remain"
+
+5. Test of keyboard
+
+[?]  65. LEDs.
+[?]  66. Autorepeat
+[1]  67. "Press each key" (ability to send each ASCII graphic char)
+[1]  68. Arrow keys (ANSI/Cursor key mode reset)
+[1]  69. Arrow keys (ANSI/Cursor key mode set)
+[?]  70. Arrow keys VT52 mode
+[?]  71. PF keys numeric mode
+[?]  72. PF keys application mode
+[?]  73. PF keys VT52 numeric mode
+[?]  74. PF keys VT52 application mode
+[1]  75. Send answerback message from keyboard
+[?]  76. Ability to send every control character
+
+6. Test of Terminal Reports
+
+[1]  77. Respond to ENQ with answerback
+[1]  78. Newline mode set
+[1]  79. Newline mode reset
+[1]  80. Device status report 5
+[1]  81. Device status report 6
+[1]  82. Device attributes report
+[1]  83. Request terminal parameters 0
+[1]  84. Request terminal parameters 1
+
+7. Test of VT52 submode
+
+[1]  85. Centered rectangle
+[1]  86. Normal character set
+[1]  87. Graphics character set
+[1]  88. Identify query
+
+8. VT102 Features
+
+[1]  89. Insert/delete line, 80 columns
+[1]  90. Insert (character) mode, 80 columns
+[1]  91. Delete character, 80 columns
+[1]  92. Right column staggered by 1 (normal chars), 80 columns
+[1]  93. Right column staggered by 1 (double-wide chars), 80 columns
+[1]  94. ANSI insert character, 80 columns
+[1]  95. Insert/delete line, 132 columns
+[1]  96. Insert (character) mode, 132 columns
+[1]  97. Delete character, 132 columns
+[1]  98. Right column staggered by 1 (normal chars), 132 columns
+[1]  99. Right column staggered by 1 (double-wide chars), 132 columns
+[1] 100. ANSI insert character, 132 columns
+
+9. Extra credit
+
+[0] 101. True soft (smooth) scroll
+[1] 102. True underline
+[1] 103. True blink
+[0] 104. True double-high/wide lines, not simulated
+[1] 105. Reset terminal (*)
+[0] 106. Interpret controls (debug mode) (*)
+[0] 107. Send BREAK (250 msec) (*)
+[0] 108. Send Long BREAK (1.5 sec) (*)
+[0] 109. Host-controlled transparent / controller print (*)
+[0] 110. Host-controlled autoprint (*)
+
+(*) Features of VT100 not tested by vttest.
+</body>
+</html>

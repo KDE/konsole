@@ -1,0 +1,137 @@
+28 Oct 1998
+- tracking down licence issues
+- spent far to much time on explaining them
+27 Oct 1998 Mario Weilguni <mweilguni@kde.org>
+- prevented TEWidget from accepting font-change-requests from 
+  KDE's "Display properties"
+- fixed a segfault caused by reading a non-existant directory in
+  TEDemo::loadAllSchemas() and TEDemo::loadSessionCommands()
+25 Oct 1998
+- marking within mouse aware application now needs an extra shift
+- added command configuration files /opt/kde/share/apps/konsole/*.kdelnk
+24 Oct 1998
+	- adjusted geometry management. Window is not resized anylonger when
+  changeing font size, scrollbar, frame, menubar.
+- made font & schema attributes per-session.
+23 Oct 1998
+- introduced color schemes /opt/kde/share/apps/konsole/*.schema
+23 Oct 1998
+- introduced multible sessions
+21 Oct 1998
+- clear sets current rendition attributes now (instead of default rendition)
+- ESC[<pn>X added from Linux console-codes
+- Characters sets per emulation instead of per screen.
+11 Sep 1998
+- tests/vttest now reads CTRL-C XON XOFF NL correctly
+30 Aug 1998
+- cursor symbols adjusted
+- only the application screen has a history buffer
+- bgnSel/endSel removed in favor of pntSel
+- improved scrolling while marking
+- minor warnings removed (egcs more happy now)
+28 Aug 1998
+- scrolling via selection drag & double click word selection added (Peter Silva)
+25 Aug 1998
+- proper marking added, most selection code moved to Screen. (Peter Silva)
+22 Aug 1998
+- minor workaround added to makefile (-lz)
+- CONTRIBUTORS added
+20 Aug 1998
+- minor fixes related to background pixmaps
+- fixed multible size change on startup
+- add catch-all to bulk handling
+16 Aug 1998
+- added support for jpeg and png
+- KFilePreviewDialog added for background pixmap selection added
+  (guess i overdid it somehow)
+- tiled/centered/full implemented.
+- load/saveOptions extended to support background pixmaps
+05 Jun 1998
+- added xterm title hack
+- hooked in some documentation
+- added user hint for menubar
+04 Jun 1998
+- fixed scrollbar side change
+- added support for new xterm ESC[?1048 (save,restore cursor)
+03 Jun 1998
+- adjusted resizing behavior (may cause flicker in other installations)
+02 Jun 1998
+- improved speedup with vim 5.0
+- added support for new xterm ESC[?1047 (primary,application screen)
+25 May 1998
+- fixed a signal passing problem when using "-e"
+- included (partial implemented) session awareness
+- glitch in doc path fixed
+18 May 1998
+- prepared for i18n
+17 May 1998
+- some command parameters added
+16 May 1998
+- SIGHUP problem finally solved
+- minor security optimization
+- FreeBSD support improved (Kevin Street <street@iname.com>)
+14 May 1998
+- minor keyboard adjustments
+- rescheduled keypad material due to problems
+13 May 1998
+- removed some flicker related to KTW
+- Welcome to the konsole
+- vt52 mode added
+- completed terminal reports
+- completed other intended esc codes. thanks goodness, that's done!
+- started a list of codes not to be implemented.
+12 May 1998
+- size setting material added (still somewhat incomplete)
+- FreeBSD support introduced (Kevin Street <street@iname.com>)
+10 May 1998
+- cleanups in Shell.C
+0.8.5
+- released
+0.8.48
+- introduced clip rect for bold characters.
+0.8.47
+- cleared up several readmes.
+0.8.45
+- minor problems with blinking fixed
+- optional variable-width font support removed.
+  The fonts came out to be unusable.
+0.8.44
+- added underline attribute
+- added blinking attribute
+- fixed bold attribute
+0.8.43
+- optional variable-width font support added.
+- vga font made optional.
+- tiny font deactivated.
+0.8.42
+- add show/hide cursor command
+- add inverse mode (DECSCNM)
+- mode handling adjusted
+- clarified image production
+0.8.41
+- rendition introduced in ca structure
+- fixed cursor sometimes not drawn
+- Change Log reversed (showing newest on top now)
+0.8.4
+- released
+0.8.34
+- added README.bugs
+- added term.ti
+0.8.32
+- History buffer added.
+- Shell changed to use '/bin/bash'.
+- vga.pcf.Z included.
+0.8.31
+- Scrollbar added.
+0.8.3
+- released
+0.8.25:
+- about, help added.
+0.8.24:
+- fixed uninitialized MODE_Insert
+- fixed bulkShow triggered by bulkNewline while inBulk :)
+0.8.22: 
+- added automake/autoconf stuff
+- made a try with background pixmaps
+0.8.2: 
+- released 28 Apr 1998

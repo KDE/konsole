@@ -1,0 +1,389 @@
+Date: Sat, 27 Oct 90 15:59:27 -0400
+From: tihor@acf4.NYU.EDU (Stephen Tihor)
+Message-Id: <9010271959.AA10105@acf4.NYU.EDU>
+To: tihor@acf4.NYU.EDU
+Subject: Re: VT100/52/ANSI et.al. Escape codes
+Newsgroups: comp.os.vms
+In-Reply-To: <9010240014.AA10730@ucbvax.Berkeley.EDU> 23 Oct 90 16:00 EDT
+
+/* acf4:comp.os.vms */
+/* 20950709@VUVAXCOM.BITNET (Jim McRee [Merlin]) /  4:00 pm  Oct 23, 1990 */
+
+                                Villanova University
+                        Campus Computing - Terminal Emulation
+                  Includes VT100 and VT52 Terminal and Control Codes
+
+        This file contains control and terminal codes for the VT100 terminals,
+ANSI terminals, and VT52 terminals. Many of the codes were derived from PC/
+Intercomm, from Mark of the Unicorn Software.  I have researched some of them
+and added some of my own.
+
+                                        Thank you,
+                                        Jim McRee  (209507097@VUVAXCOM.BITNET)
+
+(* ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** *)
+
+                              CONTROL SEQUENCE SUMMARY
+
+  * For additional information on the DEC VT100 and VT102 terminals, please
+    consult the VT100 USER GUIDE and VT102 USER GUIDE, published by Digital
+    Equipment Corporation as part numbers EK-VT100-UG and EK-VT102-UG.
+
+
+CONTROL CHARACTERS:
+------------------
+
+Character
+Name    Decimal Action Taken
+---------------------------------------------------------------
+NUL     0       Fill character; ignored on input.
+ENQ     5       Transmit answerback message.
+BEL     7       Ring the bell.
+BS      8       Move cursor left.
+HT      9       Move cursor to next tab stop.
+LF      10      Line feed; causes print if in autoprint.
+VT      11      Same as LF.
+FF      12      Same as LF.
+CR      13      Move cursor to left margin or newline.
+SO      14      Invoke G1 character set.
+SI      15      Invoke G0 character set.
+XON     17      Resume transmission.
+XOFF    19      Halt transmission.
+CAN     24      Cancel escape sequence and display checkerboard.
+SUB     26      Same as CAN.
+ESC     27      Introduce a control sequence.
+DEL     127     Fill character; ignored on input.
+
+  * All characters less than 32 decimal which are not listed above are ignored.
+
+(* ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** *)
+
+ANSI MODE SUMMARY:
+-----------------
+
+  *In ANSI sequences, parameters are given as a string of ASCII digits
+   ('0' - '9') seperated by semicolons.  Pn refers to a number whose value
+   used directly.  Ps refers to a number used as a selector.
+
+CURSOR MOVEMENT:
+---------------
+
+        Cursor Up:      Esc [ Pn A
+        Cursor Down:    Esc [ Pn B
+        Cursor Left:    Esc [ Pn C
+        Cursor Right:   Esc [ Pn D
+
+        Direct Addressing :  Esc [ Pn(row);Pn(col);H or
+                             Esc [ Pn(row);Pn(col);f
+
+                             ie.  (Pascal)
+                                Writeln (Esc,'[',Row:1,';',col:1,';','H');
+
+        Index:          Esc D
+        New Line:       Esc E
+        Reverse Line:   Esc M
+
+        Save cursor & Attributes:     Esc 7
+        Restore cursor & attributes:  Esc 8
+
+ERASING:
+-------
+
+        Cursor to end of line           Esc [ K
+        Beginning of line to cursor     Esc [ 1 K
+        Entire line                     Esc [ 2 K
+        Cursor to end of screen         Esc [ J
+        Beginning of screen to cursor   Esc [ 1 J
+        Entire screen                   Esc [ 2 J
+
+       (Some programs expect Esc [ J to always clear the entire
+        screen, but this does not conform to the standard.)
+
+MODES:
+-----
+
+        Set with        Esc [ Ps h
+        Reset with      Esc [ Ps l
+
+Mode name               Ps      Set             Reset
+-------------------------------------------------------------------
+Keyboard action         2       Locked          Unlocked
+Insertion               4       Insert          Overwrite
+Send - Receive          12      Full            Echo
+Line feed/New line      20      New line        Line feed
+Cursor key              ?1      Application     Cursor
+ANSI/VT52               ?2      ANSI            VT52
+Column                  ?3      132             80
+Scrolling               ?4      Smooth          Jump
+Screen                  ?5      Reverse         Normal
+Origin                  ?6      Relative        Absolute
+Wraparound              ?7      Wrap            Truncate
+Auto key repeat         ?8      Repeating       No repeat
+Print form feed         ?18     Yes             No
+Print extent            ?19     Full screen     Scrolling region
+
+Keypad application      Esc =
+Keypad numeric mode     Esc >
+
+EDITING:
+-------
+
+        Insert line             Esc [ Pn L
+        Delete line             Esc [ Pn M
+        Delete character        Esc [ Pn P
+        Scrolling region        Esc [ Pn(top);Pn(bot) r
+
+PRINTING:
+--------
+
+        Print screen or region  Esc [ i
+        Print cursor line       Esc [ ? 1 i
+        Enter auto print        Esc [ ? 5 i
+        Exit auto print         Esc [ ? 4 i
+        Enter print controller  Esc [ 5 i
+        Exit print controller   Esc [ 4 i
+
+LINE SIZE:
+---------
+
+        The following is a list of the available styles of printing on the
+screen.  "Yes" in any column means that the option is supported by the escape
+code on that line.  "No" means that the option is not supported by the escape
+code on that line; however, it may, and almost certainly is, supported by
+another escape sequence.
+
+Double-height and double-width double the size of the characters in their
+respective ways (ie. Double-height is twice as tall as usual).  _Line
+designates underlining.  Blink is for blinking characters.  Side is the
+orientation of the character.  Normal means that there is no orientation.
+
+Top and bottom refers to the position of the character in order to make a
+complete character.  The top and bottom sequences will be important if you use
+the double height option.  You will need to print the line twice to get a
+complete line.  The first printing will print the top part of the characters
+and the second printing will print the bottom part.
+
+Inverse refers to the condition of the character.  "No" indicates that the
+character will be printed in the color it normally is printed in with its usual
+backround.  "Yes" means that the character will be printed in the backround
+color and the character's backround will be the color it is usually printed in.
+Shade refers to the brightness of the character.  Normal is the standard
+brightness of the character.  Bright is bold type.  Dark is a darker brightness
+than usual.
+
+The escape code is the command you would type before the text you want to print
+to get the indicated effects.  This section was greatly expanded in version 1.1
+of this file.
+
+Double  Double
+Height  Width   _Line   Blink  Side    Inverse  Shade   Escape Code
+-----------------------------------------------------------------------
+ No      No       No     No    Normal    No     Normal  <ESC>[0m
+ Yes     Yes      No     No    Top       No     Bright  <ESC>#3<ESC>[1m
+ Yes     Yes      No     No    Bottom    No     Bright  <ESC>#4<ESC>[1m
+ Yes     Yes      No     No    Top       No     Dark    <ESC>#3<ESC>[2m
+ Yes     Yes      No     No    Bottom    No     Dark    <ESC>#4<ESC>[2m
+ Yes     Yes      No     No    Top       No     Normal  <ESC>#3<ESC>[3m
+ Yes     Yes      No     No    Bottom    No     Normal  <ESC>#4<ESC>[3m
+ Yes     Yes      Yes    No    Top       No     Normal  <ESC>#3<ESC>[4m
+ Yes     Yes      Yes    No    Bottom    No     Normal  <ESC>#4<ESC>[4m
+ Yes     Yes      No     Yes   Top       No     Normal  <ESC>#3<ESC>[5m
+ Yes     Yes      No     Yes   Bottom    No     Normal  <ESC>#4<ESC>[5m
+ Yes     Yes      No     No    Top       Yes    Normal  <ESC>#3<ESC>[7m
+ Yes     Yes      No     No    Bottom    Yes    Normal  <ESC>#3<ESC>[7m
+ No      Yes      No     No    Normal    No     Normal  <ESC>#6<ESC>[0m
+ No      Yes      No     No    Normal    No     Bright  <ESC>#6<ESC>[1m
+ No      Yes      No     No    Normal    No     Dark    <ESC>#6<ESC>[2m
+ No      Yes      Yes    No    Normal    No     Normal  <ESC>#6<ESC>[4m
+ No      Yes      No     Yes   Normal    No     Normal  <ESC>#6<ESC>[5m
+ No      Yes      No     No    Normal    Yes    Normal  <ESC>#6<ESC>[7m
+ No      No       No     No    Normal    No     Bright  <ESC>#7<ESC>[1m
+ No      No       No     No    Normal    No     Dark    <ESC>#7<ESC>[2m
+ No      No       Yes    No    Normal    No     Normal  <ESC>#7<ESC>[4m
+ No      No       No     Yes   Normal    No     Normal  <ESC>#7<ESC>[5m
+ No      No       No     No    Normal    Yes    Normal  <ESC>#7<ESC>[7m
+
+* Some codes have been eliminated due to a repetition of effects.  To the best
+  of my knowledge, these codes are complete and correct.  If you should find
+  any errors, or you find some new sequences/effects, please inform me.
+
+* <ESC>#3 and <ESC>#4 behave in the same way as <ESC>#3[3m and <ESC>#4[4m.
+
+CHARACTER SETS:
+--------------
+
+Character set           G0              G1
+-----------------------------------------------------
+United Kingdom (UK)     Esc ( A         Esc ) A
+United States (US)      Esc ( B         Esc ) B
+Graphics                Esc ( 0         Esc ) 0
+Default ROM             Esc ( 1         Esc ) 1
+Alternate ROM           Esc ( 2         Esc ) 2
+
+Switch to G0/G1         Esc O           Esc N
+
+TAB STOPS:
+---------
+
+        Set tab at current column       Esc H
+        Clear tab at current column     Esc [ g
+        Clear all tabs                  Esc [ 3 g
+
+MISCELLANEOUS:
+-------------
+
+        Hard Reset                      Esc c
+
+        Character attributes            Esc [ Ps m
+                                    or  Esc [ Ps ; Ps ; Ps m
+                0 - All attributes off
+                1 - Bold on
+                4 - Underscore on
+                5 - Blink on
+                7 - Reverse on
+
+        Programmable LEDs               Esc [ Ps q
+                0 - All LEDs off
+          (1 - 4) - Turn respective LED on
+
+        Fill screen with "E"s (test)    Esc # 8
+
+(* ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** *)
+
+NON-VT100 CONTROL SEQUENCES:
+----------------------------
+
+        *Some VT100 terminal programs also understand a few other escape
+         sequences than the standard VT100.  I cannot guarantee that any of
+         these nonstandard codes will work with any particular terminal, but
+         they may be useful if they do work.
+
+        Transmit a file         Esc { T filenameCR   ---> CR = Carriage Return
+        Receive a file          Esc { R filenameCR   ---> CR = Carriage Return
+        Append to a file        Esc { A filenameCR   ---> CR = Carriage Return
+        Save collected text     Esc { S
+        Save collected text     Esc S
+
+        * These sequences will probably be most useful in developing a micro
+          version of a VT100 emulator or in adapting an existing one.
+
+(* ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** *)
+
+VT52 MODE SUMMARY:
+-----------------
+
+        Cursor up               Esc A
+        Cursor down             Esc B
+        Cursor right            Esc C
+        Cursor left             Esc D
+        Graphics character set  Esc F
+        ASCII character set     Esc G
+        Home cursor             Esc H
+        Reverse line feed       Esc I
+        Erase to end of screen  Esc J
+        Erase to end of line    Esc K
+        Print cursor line       Esc V
+        Enter print controller  Esc W
+        Exit print controller   Esc X
+        Cursor address          Esc Y row col
+        Identify                Esc Z
+        Print screen            Esc ]
+        Enter auto print        Esc ^
+        Exit auto print         Esc -
+        Alternate keypad        Esc =
+        Numeric keypad          Esc >
+        Enter ANSI mode         Esc <
+
+        * Row and column numbers are single characters with a bias of 31.
+          E.g., "$" means row/column 5.)
+
+KEYPAD AND FUNCTION KEY SUMMARY:
+-------------------------------
+
+        CURSOR CONTROL KEYS:
+        -------------------
+                                Vt52    ANSI and Cursor Key modes
+                Arrow Key       Mode    Reset           Set
+                ---------------------------------------------------
+                Up              Esc A   Esc [ A         Esc O A
+                Down            Esc B   Esc [ B         Esc O B
+                Right           Esc C   Esc [ C         Esc O C
+                Left            Esc D   Esc [ D         Esc O D
+
+        AUXILLIARY KEYPAD:
+        -----------------
+
+                     VT52 Mode                       ANSI Mode
+        Key     Numeric         Application     Numeric         Application
+        ----------------------------------------------------------------------
+        0       0               Esc ? p         0               Esc O p
+        1       1               Esc ? q         1               Esc O q
+        2       2               Esc ? r         2               Esc O r
+        3       3               Esc ? s         3               Esc O s
+        4       4               Esc ? t         4               Esc O t
+        5       5               Esc ? u         5               Esc O u
+        6       6               Esc ? v         6               Esc O v
+        7       7               Esc ? w         7               Esc O w
+        8       8               Esc ? x         8               Esc O x
+        9       9               Esc ? y         9               Esc O y
+        -       -               Esc ? m         -               Esc O m
+        ,       ,               Esc ? l         ,               Esc O l
+        .       .               Esc ? n         .               Esc O n
+        ENTER   ^M              Esc ? M         ^M              Esc O M
+        PF1     Esc P           Esc P           Esc O P         Esc O P
+        PF2     Esc Q           Esc Q           Esc O Q         Esc O Q
+        PF3     Esc R           Esc R           Esc O R         Esc O R
+        PF4     Esc S           Esc S           Esc O S         Esc O S
+
+VT100 CURRENT STATES:
+--------------------
+
+        Esc [ c         DA:Device Attributes
+
+                        or
+
+        Esc Z           DECID:Identify Terminal (ANSI mode)
+
+                        * For PC/Intercomm and some other emulators,
+                          irrespective of the parameter(s) present, the
+                          response is always
+
+                                Esc [ ? 6 c
+
+                          (i.e., a VT102)  Other DEC terminals will respond
+                          according to their configuration and mode.
+
+        Esc Z           Identify (VT52 mode)
+
+                        * The sequence Esc / Z is always returned.
+
+        Esc [ <sol> x   DECREQTPARM: Request Terminal Parameters
+
+                        * <sol> values other than 1 are ignored.  Upon
+                          receipt of a <sol> value of 1, the following
+                          response is sent:
+
+                                Esc[3;<par>;<nbits>;<xspeed>;<rspeed>;1;0x
+
+                                * Where <par>, <nbits>, <xspeed>, and <rspeed>
+                                  are as for VT100s with the following
+                                  exceptions:
+
+                                  <nbits>       Values of 5 and 6 bits per
+                                                character are sent as 7 bits.
+
+                                  <xspeed>,<rspeed>
+                                                These two numbers will always
+                                                be the same.  9600 baud is
+                                                sent for 7200 baud.
+
+        Esc [ Ps n      DSR: Device Status Report
+
+                        * Parameter values other than 5, 6, are ignored.
+                          If the parameter value is 5, the sequence
+                          Esc [ O n is returned.  If the parameter value is
+                          6, the CPR: Cursor Position Report sequence
+                          Esc [ Pn ; Pn R is returned with the Pn set to
+                          cursor row and column numbers.
+/* ---------- */
+

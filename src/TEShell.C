@@ -1,0 +1,206 @@
+/* -------------------------------------------------------------------------- */
+/*                                                                            */
+/* [shell.cpp]                       Shell                                    */
+/*                                                                            */
+/* -------------------------------------------------------------------------- */
+/*                                                                            */
+/* Copyright (c) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>            */
+/*                                                                            */
+/* This file is part of Konsole - an X terminal for KDE                       */
+/*                                                                            */
+/* The whole program is available under the GNU General Public Licence.       */
+/* See COPYING, the documenation, or <http://www.gnu.org> for details.        */
+/*                                                                            */
+/* -------------------------------------------------------------------------- */
+
+/* FIXME:
+   - should be made able to be instanciated more than once
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#include <termios.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
+#include <grp.h>
+
+#if defined (_HPUX_SOURCE)
+#define _TERMIOS_INCLUDED
+#include <bsdtty.h>
+#endif
+
+#include <assert.h>
+#include <time.h>
+#include <signal.h>
+#include <qintdict.h>
+#include <sys/wait.h>
+
+#include "TEShell.h"
+#include "TEShell.moc"
+
+#define HERE fprintf(stdout,"%s(%d): here\n",__FILE__,__LINE__)
+
+FILE* log = NULL; //stdout;
+
+/* -------------------------------------------------------------------------- */
+
+void Shell::setSize(int lines, int columns)
+// Tell the teletype handler what size the window is.
+// Called after a window size change.
+{ struct winsize wsize;
+  if(fd < 0) return;
+  wsize.ws_row = (unsigned short)lines;
+  wsize.ws_col = (unsigned short)columns;
+  ioctl(fd,TIOCSWINSZ,(char *)&wsize);
+}
+
+static char ptynam[] = "/dev/ptyxx";
+static char ttynam[] = "/dev/ttyxx";
+//static int  comm_pid;
+
+static QIntDict<Shell> shells;
+
+static void catchChild(int)
+// Catch a SIGCHLD signal and exit if the child has died.
+{ pid_t pid;
+  pid = wait((int *)NULL);
+//fprintf(stdout,"%s(%d): child %d died.\n",__FILE__,__LINE__,pid);
+  Shell* sh = shells.find(pid);
+  if (sh) 
+  { 
+    shells.remove(pid); sh->doneShell();
+  }
+}
+
+void Shell::doneShell()
+{
+  emit done();
+}
+
+int Shell::run(char* argv[], const char* term)
+{
+  pid_t comm_pid = fork();
+  if (comm_pid <  0) { fprintf(stderr,"Can't fork\n"); return -1; }
+  if (comm_pid == 0) makeShell(ttynam,argv,term);
+  if (comm_pid >  0) shells.insert(comm_pid,this);
+  return 0;
+}
+
+void Shell::makeShell(const char* dev, char* argv[], const char* term)
+// only used internally. See `run' for interface
+{ int sig; char* t;
+  // open and set all standard files to master/slave tty
+  int tt = open(dev, O_RDWR);
+
+  //reset signal handlers for child process
+  for (sig = 1; sig < NSIG; sig++)
+      signal(sig,SIG_DFL);
+ 
+  // Don't know why, but his is vital for SIGHUP to find the child.
+  // Could be, we get rid of the controling terminal by this.
+  for (int i = 0; i < getdtablesize(); i++) if (i != tt) close(i);
+
+  dup2(tt,fileno(stdin));
+  dup2(tt,fileno(stdout));
+  dup2(tt,fileno(stderr));
+
+  setsid();                            // set process group (vital for bash)
+
+  int pgrp = getpid();                 // This sequence is necessary for
+  ioctl(tt, TIOCSPGRP, (char *)&pgrp); // event propagation. Omitting this
+  setpgid(tt,0);                       // is not noticeable with all
+  close(open(dev, O_WRONLY, 0));       // clients (bash,vi). Because bash
+  setpgid(tt,0);                       // heals this, use '-e' to test it.
+
+  setuid(getuid()); setgid(getgid());  // drop privileges
+
+  if (term && term[0])
+  {
+    t = (char*)malloc(6+strlen(term));
+    strcpy(t,"TERM="); strcat(t,term);
+    putenv(t);
+    free(t);
+  }
+
+  execvp (argv[0], argv);
+  perror("exec failed");
+  exit(1);                             // control should never come here.
+}
+
+int openShell()
+{ int ptyfd; char *s3, *s4;
+  static char ptyc3[] = "pqrstuvwxyz";
+  static char ptyc4[] = "0123456789abcdef";
+
+  // Find a master pty that we can open ////////////////////////////////
+
+  ptyfd = -1;
+  for (s3 = ptyc3; *s3 != 0; s3++) 
+  {
+    for (s4 = ptyc4; *s4 != 0; s4++) 
+    {
+      ptynam[8] = ttynam[8] = *s3;
+      ptynam[9] = ttynam[9] = *s4;
+      if ((ptyfd = open(ptynam,O_RDWR)) >= 0) 
+      {
+        if (geteuid() == 0 || access(ttynam,R_OK|W_OK) == 0) break;
+        close(ptyfd); ptyfd = -1;
+      }
+    }
+    if (ptyfd >= 0) break;
+  }
+  if (ptyfd < 0) { fprintf(stderr,"Can't open a pseudo teletype\n"); exit(1); }
+  fcntl(ptyfd,F_SETFL,O_NDELAY);
+
+  return ptyfd;
+}
+
+Shell::Shell()
+/* setup shell */
+{
+  fd = openShell();
+
+  //for (int i = 1; i <= 15; i++) if (i!=SIGCHLD) signal(i,catch_sig);
+  signal(SIGCHLD,catchChild);
+
+  mn = new QSocketNotifier(fd, QSocketNotifier::Read);
+  mw = new QSocketNotifier(fd, QSocketNotifier::Write);
+  connect( mn, SIGNAL(activated(int)), this, SLOT(DataReceived(int)) );
+  connect( mw, SIGNAL(activated(int)), this, SLOT(DataWritten(int)) );
+}
+
+Shell::~Shell()
+{
+  delete mn;
+  delete mw;
+  close(fd);
+}
+
+void Shell::send_byte(char c)
+{ 
+  write(fd,&c,1); mw->setEnabled(TRUE);
+}
+
+void Shell::send_string(const char* s)
+{
+  write(fd,s,strlen(s)); mw->setEnabled(TRUE);
+}
+
+void Shell::send_bytes(const char* s, int len)
+{
+  write(fd,s,len); mw->setEnabled(TRUE);
+}
+
+void Shell::DataReceived(int)
+{ char buf[4096];
+  int n = read(fd, buf, 4096);
+  emit block_in(buf,n);
+  if (log) for (int i = 0; i < n; i++) fputc(buf[i],log);
+}
+
+void Shell::DataWritten(int)
+{
+  mw->setEnabled(FALSE); written();
+}

@@ -1,0 +1,40 @@
+VT52 Compatible Mode
+
+: VT52A Cursor Up
+c ESC A
+: VT52b Cursor Down
+c ESC B
+: VT52C Cursor Right
+c ESC C
+: VT52D Cursor Left
+c ESC D
+: VT52F Select Special Graphics character set
+c ESC F
+: VT52G Select ASCII character set
+c ESC G
+: VT52H Cursor to home
+c ESC H
+: VT52I Reverse line feed
+c ESC I
+: VT52J Erase to end of screen
+c ESC J
+: VT52K Erase to end of line
+c ESC K
+: VT52Y Direct cursor address
+c ESC Y {l} {c}
+h
+  Line and column numbers for direct cursor address are single
+  character codes whose values are the desired number plus
+  37 (in Octal). Line and column numbers start at 1.
+e
+: VT52Z Identify
+c ESC Z
+h
+  Response to ESC Z is ESC / Z.
+e
+: VT52KBAM Enter alternate keypad mode
+c ESC =
+: VT52KEAM Exit alternate keypad mode
+c ESC >
+: VT52AM Enter ANSI mode
+c ESC <

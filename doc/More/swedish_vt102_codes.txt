@@ -1,0 +1,413 @@
+Article 3073 of comp.terminals:
+Path: cs.utk.edu!stc06.CTD.ORNL.GOV!fnnews.fnal.gov!uwm.edu!news.alpha.net!news.mathworks.com!europa.eng.gtefsd.com!howland.reston.ans.net!EU.net!uunet!sunic!trane.uninett.no!due.uninett.no!usenet
+From: lars@mi.uib.no (Lars Johanson)
+Newsgroups: comp.terminals
+Subject: vt102 escape codes
+Date: 24 Oct 1994 16:29:21 GMT
+Organization: Haukeland Sykehus
+Lines: 399
+Message-ID: <38gnd1$cio@due.uninett.no>
+NNTP-Posting-Host: lpjo.onh.haukeland.no
+X-Newsreader: WinVN 0.92.6+
+
+
+Hi.
+
+I have seen some people asking for escape sequencies for the 
+vt100-terminal. I asked the DIGITAL company in Sweden, and 
+received this (hopefully not copyrighted). It is a vt102 terminal, 
+but there seems to be little difference. I've tried to mark 
+functions special to vt102 with:		// Not in vt100
+
+Here you are:
+
+
+
+Escape codes for vt102 terminal. 
+
+All numbers below are octal.<n> means numeric value,<c> means character string.
+If <n> is missing it is 0 or in cursor movements 1.
+ 
+Reset and set modes
+  Set Modes
+    Esc  [ <c> ; ... ; <c> h
+    033 133   073   073   150
+  Reset Modes
+    Esc  [ <c> ; ... ; <c> l
+    033 133   073   073   154
+ 
+  Where <c> is
+    '2'= Lock keyboard (set); Unlock keyboard (reset)
+    '4'= Insert mode (set); Replace mode (reset)
+   '12'= Echo on (set); Echo off (reset)
+   '20'= Return = CR+LF (set); Return = CR (reset)
+   '?1'= Cursorkeys application (set); Cursorkeys normal (reset)
+   '?2'= Ansi (set); VT52 (reset)
+   '?3'= 132 char/row (set); 80 char/row (reset)
+   '?4'= Jump scroll (set); Smooth scroll (reset)
+   '?5'= Reverse screen (set); Normal screen (reset)
+   '?6'= Sets relative coordinates (set); Sets absolute coordinates (reset)
+   '?7'= Auto wrap (set); Auto wrap off (reset)
+   '?8'= Auto repeat on (set); Auto repeat off (reset)
+  '?18'= Send FF to printer after print screen (set); No char after PS (reset)
+  '?19'= Print screen prints full screen (set); PS prints scroll region (reset)
+  '?25'= Cursor on (set); Cursor off (reset) 
+ 
+Set scrolling region (n1=upper,n2=lower)
+  Esc  [ <n1> ; <n2> r
+  033 133    073    162
+ 
+ 
+Cursor movement (<n>=how many chars or lines), cursor stop at margin.
+  Up
+    Esc  [ <n> A
+    033 133   101
+  Down
+    Esc  [ <n> B
+    033 133   102
+  Right
+    Esc  [ <n> C
+    033 133   103
+  Left
+    Esc  [  n  D
+    033 133   104
+  Cursor position  (<n1>=y,<n2>=x, from top of screen or scroll region)
+       Esc  [ <n1> ; <n2> H
+       033 133    073    110
+    Or Esc  [ <n1> ; <n2> f
+       033 133    073    146
+  Index (cursor down with scroll up when at margin)
+    Esc  D
+    033 104
+  Reverse index (cursor up with scroll down when at margin)
+    Esc  M
+    033 115
+  Next line (CR+Index)
+    Esc  E
+    033 105
+  Save cursor and attribute
+    Esc  7
+    033 067
+  Restore cursor and attribute
+    Esc  8
+    033 070
+ 
+ 
+Keybad character selection
+  Application keypad mode
+    Esc  =
+    033 075
+  Numeric keypad mode
+    Esc  >
+    033 076
+ 
+  Keypadkeys codes generated
+                  Numeric      Application                VT52 Application
+    0             0 (060)      Esc O p (033 117 160)      Esc ? p (033 077 160)
+    1             1 (061)      Esc O q (033 117 161)      Esc ? q (033 077 161)
+    2             2 (062)      Esc O r (033 117 162)      Esc ? r (033 077 162)
+    3             3 (063)      Esc O s (033 117 163)      Esc ? s (033 077 163)
+    4             4 (064)      Esc O t (033 117 164)      Esc ? t (033 077 164)
+    5             5 (065)      Esc O u (033 117 165)      Esc ? u (033 077 165)
+    6             6 (066)      Esc O v (033 117 166)      Esc ? v (033 077 166)
+    7             7 (067)      Esc O w (033 117 167)      Esc ? w (033 077 167)
+    8             8 (070)      Esc O x (033 117 170)      Esc ? x (033 077 170)
+    9             9 (071)      Esc O y (033 117 171)      Esc ? y (033 077 171)
+    - (minus)     - (055)      Esc O m (033 117 155)      Esc ? m (033 077 155)
+    , (comma)     , (054)      Esc O l (033 117 154)      Esc ? l (033 077 154)
+    . (period)    . (056)      Esc O n (033 117 156)      Esc ? n (033 077 156)
+    Enter         CR (015)*    Esc O M (033 117 115)      Esc ? M (033 077 115)
+    PF1           Esc O P      Esc O P (033 117 120)      Esc P (033 120)
+    PF2           Esc O Q      Esc O Q (033 117 121)      Esc Q (033 121)
+    PF3           Esc O R      Esc O R (033 117 122)      Esc R (033 122)
+    PF4           Esc O S      Esc O S (033 117 123)      Esc S (033 123)
+  * Or CR+LF (015 012)
+ 
+  Cursorkeys codes generated (changed by set and reset modes '?1')
+          normal         application
+    Up    Esc  [   A     Esc  O   A
+          033 133 101    033 117 101
+    Down  Esc  [   B     Esc  O   B
+          033 133 102    033 117 102
+    Right Esc  [   C     Esc  O   C
+          033 133 103    033 117 103
+    Left  Esc  [   D     Esc  O   D
+          033 133 104    033 117 104
+ 
+ 
+Select character set
+  UK as G0
+    Esc  (   A
+    033 050 101
+  US as G0
+    Esc  (   B
+    033 050 102
+  Special characters and line drawing character set as G0
+    Esc  (   0
+    033 050 060
+  Alternate ROM as G0					// Not in vt100
+    Esc  (   1
+    033 050 061
+  Alternate ROM special characters character set as G0	// Not in vt100
+    Esc  (   2
+    033 050 062
+ 
+  UK as G1
+    Esc  )   A
+    033 051 101
+  US as G1
+    Esc  )   B
+    033 051 102
+  Special characters and line drawing character set as G1
+    Esc  )   0
+    033 051 060
+  Alternate ROM as G1					// Not in vt100
+    Esc  )   1
+    033 051 061
+  Alternate ROM special characters character set as G1	// Not in vt100
+    Esc  )   2
+    033 051 062
+ 
+  Selects G2 for one character				// Not in vt100
+    Esc  N
+    033 115
+  Selects G3 for one character				// Not in vt100
+    Esc  O
+    033 117
+ 
+ 
+Set graphic rendition
+  Esc  [ <n> ; <n> m
+  033 133   073   156
+ 
+  Where <n> is
+   0 = Turn off attributes
+   1 = Bold (Full)
+   2 = Half				// Not in vt100
+   4 = Underline
+   5 = Blink
+   7 = Reverse
+  21 = Normal intensity
+  22 = Normal intensity
+  24 = Cancel underlined
+  25 = Cancel blinking
+  27 = Cancel reverse
+ 
+Tab stops
+  Set horizontal tab
+    Esc  H
+    033 110
+  Clear horizontal tab
+       Esc  [   g
+       033 133 147
+    Or Esc  [   0   g
+       033 133 060 147
+  Clear all horizontal tabs
+    Esc  [   3   g
+    033 133 063 147
+ 
+ 
+Line attributes
+  Double-height
+    Top half
+      Esc  #   3
+      033 043 063
+    Bottom half
+      Esc  #   4
+      033 043 064
+  Single-width, single-height
+    Esc  #   5
+    033 043 065
+  Double-width
+    Esc  #   6
+    033 043 066
+ 
+ 
+Erasing
+  Erase in line
+    End of line (including cursor position)
+         Esc  [   K
+         033 133 113
+      Or Esc  [   0   K
+         033 133 060 113
+    Beginning of line (including cursor position)
+      Esc  [   1   K
+      033 133 061 113
+    Complete line
+      Esc  [   2   K
+      033 133 062 113
+  Erase in display
+    End of screen (including cursor position)
+         Esc  [   J
+         033 133 112
+      Or Esc  [   0   J
+         033 133 060 112
+    Beginning of screen (including cursor position)
+      Esc  [   1   J
+      033 133 061 112
+    Complete display
+      Esc  [   2   J
+      033 133 062 112
+ 
+ 
+Computer editing
+  Delete characters (<n> characters right from cursor
+    Esc  [ <n> P
+    033 133   120
+  Insert line (<n> lines)
+    Esc  [ <n> L
+    033 133   114
+  Delete line (<n> lines)
+    Esc  [ <n> M
+    033 133   115
+ 
+ 
+Printing
+  Esc  [ <c> i
+  033 133    151
+ 
+  Where <c> is
+      ''= Same as '0'
+     '0'= Prints screen (full or scroll region)
+     '4'= Printer controller off
+     '5'= Printer controller on (Print all received chars to printer)
+    '?1'= Print cursor line
+    '?4'= Auto print off
+    '?5'= Auto print on (Prints line to printer when you exit from it)
+ 
+ 
+Reports
+  Device status
+    Esc  [ <c> n
+    033 133   156
+ 
+  Where <c> is
+      '0'=Response Ready, no malfunctions detected
+      '3'=Malfunction, error in self-test.
+      '5'=Status report request
+      '6'=Request cursor position.
+    '?10'=Response to printer status request, All ok.
+    '?11'=Response to printer status request, Printer is not ready.
+    '?13'=Response to printer status request, No printer.
+    '?15'=Status report request from printer
+ 
+  Cursor position raport (Response to request cursor position)
+    Esc  [ <n1> ; <n2> R
+    033 133    073    122
+  Request terminal to identify itself (esc Z may not be supported in future)
+    Esc  [   c
+    033 133 143
+    Esc  [   0   c
+    033 133 060 143
+    Esc  Z
+    033 132
+  Response to terminal identify (VT102)
+    Esc  [   ?   6   c
+    033 133 077 066 143
+ 
+ 
+Reset to initial state
+  Esc  c
+  033 143
+ 
+ 
+Tests
+  Invoke confidence test
+    Esc  [   2   ; <n> y
+    033 133 062 073   171
+ 
+  Where <n> is
+     '1'= Power-up test
+     '2'= Data loopback test
+     '4'= EIA loopback test
+     '9'= Power-up tests (continuously)
+    '10'= Data loopback tests (continuously)
+    '12'= EIA loopback tests (continuously)
+    '16'= Printer loopback test
+    '24'= Printer loopback tests (continuously)
+ 
+ 
+Screen adjustments
+  Esc  #   8
+  033 043 070
+ 
+ 
+Keyboard indicator
+  Led L1 off
+    Esc  [   0   q
+    033 133 060 181
+  Led L1 on
+    Esc  [   1   q
+    033 133 061 181
+ 
+ 
+ 
+VT52 sequences
+  Ansi mode
+    Esc  <
+    033 074
+  Cursor positioning
+    Up    Esc  A
+          033 101
+    Down  Esc  B
+          033 102
+    Right Esc  C
+          033 103
+    Left  Esc  D
+          033 104
+    Home  Esc  H
+          033 110
+    Direct cursor address
+      Esc  Y  <line+040> <columns+040>
+      033 131
+    Reverse linefeed       Esc  I
+                           033 111
+    Erase to end of line   Esc  K
+                           033 113
+    Erase to end of screen Esc  J
+                           033 112
+    Auto print on          Esc  ^
+                           033 136
+    Auto print off         Esc   
+                           033 137
+    Printer controller on  Esc  W
+                           033 127
+    Printer controller off Esc  X
+                           033 130
+    Print cursor line      Esc  V
+                           033 135
+    Print screen           Esc  ]
+                           033 135
+    Indentify request      Esc  Z
+                           033 132
+    Response to indetify   Esc  /   Z
+     request (VT52)        033 057 132
+    Special charset (same  Esc  F
+     as line draw in VT102 033 106
+    Normal char set        Esc  G
+                           033 107
+ 
+ 
+Control characters
+  000 = Null (fill character)
+  003 = ETX (Can be selected half-duplex turnaround char)
+  004 = EOT (Can be turnaround or disconnect char, if turn, then DLE-EOT=disc.)
+  005 = ENQ (Transmits answerback message)
+  007 = BEL (Generates bell tone)
+  010 = BS  (Moves cursor left)
+  011 = HT  (Moves cursor to next tab)
+  012 = LF  (Linefeed or New line operation)
+  013 = VT  (Processed as LF)
+  014 = FF  (Processed as LF, can be selected turnaround char)
+  015 = CR  (Moves cursor to left margin, can be turnaround char)
+  016 = SO  (Selects G1 charset)
+  017 = SI  (Selects G0 charset)
+  021 = DC1 (XON, causes terminal to continue transmit)
+  023 = DC3 (XOFF, causes terminal to stop transmitting)
+  030 = CAN (Cancels escape sequence)
+  032 = SUB (Processed as CAN)
+  033 = ESC (Processed as sequence indicator)
+
+
+
+

@@ -1,0 +1,6 @@
+# KDE Config File
+[KDE Desktop Entry]
+Type=KonsoleApplication
+Name=MC
+Comment=Midnight Commander
+Exec=mc -c

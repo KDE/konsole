@@ -1,0 +1,215 @@
+                     Konsole is Copyright (C) 1998 by 
+                   Lars Doelle <lars.doelle@on-line.de>
+
+                                  ~~~~~
+
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; version 2 dated June, 1991.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program;  if not, write to the Free Software
+   Foundation, Inc., 675 Mass Ave., Cambridge, MA 02139, USA.
+
+
+                                  ~~~~~
+
+   Additionally, you have the expressed permission of the author
+   to distribute this program both in source as well as in binary
+   form even if the above license (GPL) would prohibit it because
+   the work might have to be linked with the non-free library QT
+   to become fully functional.
+ 
+   Any regulation within the GPL that would imply that a distribution
+   of this program is not possible because of this said reason is
+   hereby explicitly excluded from the license of this program.
+
+   Note that this addition is not explicitly stated everywhere
+   in the program. Wherever the GPL is referred in the work, the
+   GPL with this addition is intended.
+
+   
+                                  ~~~~~
+
+   The part of Konsole that constitutes the `libkonsole' library is
+   subject of the GNU LIBRARY GENERAL PUBLIC LICENSE (LGPL) with
+   the above permission included.
+
+   If you're a freeware author and in need of any changes to the
+   libkonsole for your work, the usual send-me-the-patch procedure
+   applies.
+   
+                                  ~~~~~
+
+                                 Rational
+
+
+   One might wonder about the complication of the license of Konsole
+   and it's parts, so some explanation is needed for the ones who take
+   care of this.
+
+   Because QT (on which the whole KDE bases) is a non-GPL library a
+   lot of concerns have been mentioned, one of them making Debian and
+   others to stop distributing KDE. As a result of this, authors of other
+   parts of KDE have moved to the Artistic License. Since the Artistic
+   License is too liberate for me (it allows to make proprietary software
+   based on the work of the respective author), i do not go this road.
+   Now since some of these authors might want to reuse the core parts
+   of Konsole (and i encourage them to do so), i have formally to enable
+   them by putting these parts under a different license (LGPL for
+   these authors and an extra permission for Debian).
+
+
+                                  ~~~~~
+
+                      Can Linux dance with the wolf?
+                      
+                           A Personal Statement
+
+
+   Having just changed the license of Konsole, i do not want to go back to
+   work without expressing some personal thoughts about issues related to the
+   whole process. Statements like this from KDE developers are rare and so
+   are the discussions among them about it. These are my personal views.
+   
+
+   I do share some concerns of Debian, Red Hat, RMS and many others about the
+   non-GPL-free foundation of KDE, although i see no real problem arising from
+   it now or in future. That how-shall-we-deal-with-QT is not agreed upon
+   throughout the free software movement is perhaps the biggest problem that
+   we have with QT in the moment. To ease the minds of the many concerned,
+   I'll port my KDE share to Harmony as soon as it becomes usable. I will not
+   see advance in this, though, which will become clear if you read on.
+   
+   Troll has been going towards the free software community as far as any
+   company i can think of can go without releasing their product under the
+   GPL. They have to continue releasing their product under the current
+   license. If not, it falls under GPL. Their source is open and free for
+   freeware development. Practically, they have to incorporate our changes
+   if they want to be part of the game. The only ones who have to pay Troll
+   for QT are people who are making money from it. I think that's legitimate
+   and fair, even seen through a looking glass.
+
+   The KDE authors have carefully chosen QT both because of it's technical
+   merits and it's liberate license, thereby raising a loan from a generous
+   company, which is in fact unusual. Of cause one can worry about the cost
+   of the debt and may feel angry about being included in the group of
+   debtors without ever being asked. But i don't see it is so hard to say
+   "Thank you, Troll". And yes, the price of freedom is courage. Ours and
+   their's.
+
+   Immanuel Kant stated freedom as pure independence, a basic border against
+   the freedom of others. Hegel, who lived 50 years later, pointed out on the
+   shortcomings of this idea (isolation), and found (quite typical for him)
+   that freedom grows from mutual dependencies. How true. Living in Europa,
+   i could tell about the dependencies of the separate countries becoming
+   deeper over the the last centuries and how ridiculous tight our borders
+   are today. Having spent the last nine month in the United States living a
+   foreigner's life, i could tell about other borders to overcome. As a part
+   of the free software movement, I'm concerned about the splendid isolation
+   that this movement has from the commercial part of software production.
+
+   While lately many important companies have made tries to get involved
+   in our movement, the KDE project is currently the only attempt from our
+   side. I see the QT dependency of KDE as an experiment and that Troll,
+   the KDE developers, the Harmony programmers and any users of the KDE
+   project taking their share of the risk in this process. It may fail, but
+   knowing the involved groups, i hold this for being very unlikely. They
+   all have individually the strength to handle the issue.
+
+   To achieve a greater penetration of the way we want to produce and share
+   our work into the corporate part of our particular trade, experiments
+   like this are badly needed in my opinion. I have been writing to RMS and
+   ask him to think about formulating a license that would still suit the
+   needs of the free software movement and gives hint to companies that want
+   to release their source for the use within the free software community.
+   A delicate task for sure. May be he didn't understand my intention, but the
+   outcome was, that he declined the necessity of such a license. So GNU does
+   not head or guide these attempts, and it is left to individual software
+   authors, companies and everyone else to deal with this fact.
+   
+   It is not true that the KDE authors do not take care for the freeware
+   movement, especially including GNU. To the contrary, their effort has
+   pushed the whole movement far forward from a state when moxfm and lesstif
+   have been the only hopes of the desktop interested part of this it.
+
+   Although I'm personally not addicted to harmony, i do not like to take
+   part on the flame war related to the KDE and GNOME projects. But i do want
+   to make Debian and others to become aware of the outcome of what they are
+   doing to the KDE project by deciding not to distribute it.
+
+   As said in the rational of the Konsole's license, many KDE developers
+   felt being forced by Debian latest steps to release their work under the
+   Artistic License, which is Debian- but not GNU-free. So the result of
+   Debian's pushing is a loss for GNU. They may well continue to throw stones
+   after the KDE project until they will finally have managed to build a wall.
+
+   Talking politically, i want to express that a structural redesign is not
+   only necessary when a program's task becomes larger and more advanced,
+   but also when a movement grows and goes down it's road. Are we still able
+   to integrate new parts or have we already reached our limits? Are we really
+   compatible to the rest of the world? Are we loosing our identity by such
+   an integration or are we loosing more then we gain? Does anyone outside
+   have to give up their identity completely before they can take part on our
+   game? 
+
+   They're talking about "World Domination" in the Linux community, be it
+   seriously of for fun. But can this mean anything different than to offer
+   a true improvement over the current situation to everyone? Our particular
+   trade tends to establish monopolies, and although companies never failed
+   to do their part to get one, all minus one always suffered badly from this
+   too, keeping themselves back behind their own possibilities. May be, the
+   Linux way of making software can do it's share to find out of these
+   troubles.
+   
+   Economically, there' many people out who want to make money from their
+   work and publish their source to the benefit of everyone and themselves.
+   RMS suggestion that program authors shall spend their lives from offering
+   support for their products does not seem to work well, at least not as a
+   first step. It apparently grabs to short. The only ones making their lives
+   from freeware products now are some distributors. For me, this model appears
+   as being too tight under the current circumstances.
+   
+   Troll work did not only overcome serious technical limitations in the X
+   construction by kicking out the obsolete Xt component and replacing it with
+   C++ which is far more suited to make new kinds of widgets, but they managed
+   to get deeper into the free software movement that any software company did
+   before.
+
+   I wish we could match their abilities both in technical and political
+   respect. I would love to see us all in a situation when parts of the
+   corporate world depend likely on Linux as KDE depends on QT today.
+   
+   But playing with companies can be very dangerous. Most have a wolf's nature
+   and forget their best intentions when they become hungry. And that happens
+   to be periodically. The warnings not to do so are best founded. It certainly
+   takes lots of skill and courage and likely much luck not to get hurt. It's a
+   risk, but it can be a lot of fun also.
+
+   Everyone in the Linux community wants companies being involved. The larger,
+   the better. But now that this really happened many get scared when thinking
+   about the possible consequences. Those who express their concerns cannot be
+   be blamed to be cowards. A look on the research and development investments
+   of the larger ones can really scare the bravest. And that's only their eyes
+   but not their muscles and not their teeth.
+ 
+   The relation between the freeware community and the corporate world is
+   certainly a quest that will reappear in many forms, at least if Linux
+   continues to grow. We have to solve each of them in a individual way.
+   
+   So how to deal with it? Can Linux dance with the wolf? With the bear? With
+   the dragon? With the troll?
+
+
+   Anyway, after this personal statement, i want to ask the distributors
+   to seriously reconsider their KDE-related politics and to respect our
+   programming effort as a true contribution to the free software movement.
+   
+   I can well live with the *political* decision not to distribute KDE. But
+   i was very disappointed to learn that Debian did this with a poor legal
+   reasoning. We have a culture of discussion to care for, too.

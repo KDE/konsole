@@ -1,0 +1,124 @@
+KEYPAD AND FUNCTION KEY SUMMARY:
+-------------------------------
+
+        CURSOR CONTROL KEYS:
+        -------------------
+                                Vt52    ANSI and Cursor Key modes
+                Arrow Key       Mode    Reset           Set
+                ---------------------------------------------------
+                Up              Esc A   Esc [ A         Esc O A
+DONE            Down            Esc B   Esc [ B         Esc O B
+                Right           Esc C   Esc [ C         Esc O C
+                Left            Esc D   Esc [ D         Esc O D
+
+Comes out to be more complicated than it first appeared...
+Troll did something to the key pad. Evtl. i must get raw X11 key events.
+The mapping below is quite useless anyway, since it referes to the VT100
+keypad (see doc/More/vt100-numeric-keypad.txt for more). A proper Linux
+implementations should send the codes written on the keys of the keypad.
+
+        AUXILLIARY KEYPAD:
+        -----------------
+
+                     VT52 Mode                       ANSI Mode
+        Key     Numeric         Application     Numeric         Application
+        ----------------------------------------------------------------------
+        0       0               Esc ? p         0               Esc O p
+        1       1               Esc ? q         1               Esc O q
+        2       2               Esc ? r         2               Esc O r
+        3       3               Esc ? s         3               Esc O s
+        4       4               Esc ? t         4               Esc O t
+        5       5               Esc ? u         5               Esc O u
+        6       6               Esc ? v         6               Esc O v
+        7       7               Esc ? w         7               Esc O w
+        8       8               Esc ? x         8               Esc O x
+        9       9               Esc ? y         9               Esc O y
+        -       -               Esc ? m         -               Esc O m
+        ,       ,               Esc ? l         ,               Esc O l
+        .       .               Esc ? n         .               Esc O n
+        ENTER   ^M              Esc ? M         ^M              Esc O M
+
+        PF1     Esc P           Esc P           Esc O P         Esc O P
+        PF2     Esc Q           Esc Q           Esc O Q         Esc O Q
+        PF3     Esc R           Esc R           Esc O R         Esc O R
+        PF4     Esc S           Esc S           Esc O S         Esc O S
+
+--------------------------------------------------------------------------
+(due to Eterm)                    Key Codes
+--------------------------------------------------------------------------
+		Normal		Shift		Control		Application
+Up		ESC [ A		ESC [ a		ESC O a		ESC O A
+Down		ESC [ B		ESC [ b		ESC O b		ESC O B
+Right		ESC [ C		ESC [ c		ESC O c		ESC O C
+Left		ESC [ D		ESC [ d		ESC O d		ESC O D
+
+		Normal		Shift		Control
+Tab		^I		ESC [ Z		^I
+BackSpace	^H		^?		^?
+
+		Normal		Shift		Control		Ctrl+Shift
+Home == Find	ESC [ 1 ~	ESC [ 1 $	ESC [ 1 ^	ESC [ 1 @
+Insert		ESC [ 2 ~	paste-mouse	ESC [ 2 ^	ESC [ 2 @
+Execute		ESC [ 3 ~	ESC [ 3 $	ESC [ 3 ^	ESC [ 3 @
+End == Select	ESC [ 4 ~	ESC [ 4 $	ESC [ 4 ^	ESC [ 4 @
+Prior		ESC [ 5 ~	scroll-up	ESC [ 5 ^	ESC [ 5 @
+Next		ESC [ 6 ~	scroll-down	ESC [ 6 ^	ESC [ 6 @
+
+Delete		ESC [ 3 ~	ESC [ 3 $	ESC [ 3 ^	ESC [ 3 @
+
+Function Keys:
+(Note: Shift + F1-10 generates F11-20)
+		Norm		Shift		Control		Ctrl+Shift
+F1		ESC [ 11 ~	ESC [ 23 ~	ESC [ 11 ^	ESC [ 23 ^
+F2		ESC [ 12 ~	ESC [ 24 ~	ESC [ 12 ^	ESC [ 24 ^
+F3		ESC [ 13 ~	ESC [ 25 ~	ESC [ 13 ^	ESC [ 25 ^
+F4		ESC [ 14 ~	ESC [ 26 ~	ESC [ 14 ^	ESC [ 26 ^
+F5		ESC [ 15 ~	ESC [ 28 ~	ESC [ 15 ^	ESC [ 28 ^
+
+F6		ESC [ 17 ~	ESC [ 29 ~	ESC [ 17 ^	ESC [ 29 ^
+F7		ESC [ 18 ~	ESC [ 31 ~	ESC [ 18 ^	ESC [ 31 ^
+F8		ESC [ 19 ~	ESC [ 32 ~	ESC [ 19 ^	ESC [ 32 ^
+F9		ESC [ 20 ~	ESC [ 33 ~	ESC [ 20 ^	ESC [ 33 ^
+F10		ESC [ 21 ~	ESC [ 34 ~	ESC [ 21 ^	ESC [ 34 ^
+
+F11		ESC [ 23 ~	ESC [ 23 $	ESC [ 23 ^	ESC [ 23 @
+F12		ESC [ 24 ~	ESC [ 24 $	ESC [ 24 ^	ESC [ 24 @
+F13		ESC [ 25 ~	ESC [ 25 $	ESC [ 25 ^	ESC [ 25 @
+F14		ESC [ 26 ~	ESC [ 26 $	ESC [ 26 ^	ESC [ 26 @
+
+F15 (Help)	ESC [ 28 ~	ESC [ 28 $	ESC [ 28 ^	ESC [ 28 @
+F16 (Menu)	ESC [ 29 ~	ESC [ 29 $	ESC [ 29 ^	ESC [ 29 @
+
+F17		ESC [ 31 ~	ESC [ 31 $	ESC [ 31 ^	ESC [ 31 @
+F18		ESC [ 32 ~	ESC [ 32 $	ESC [ 32 ^	ESC [ 32 @
+F19		ESC [ 33 ~	ESC [ 33 $	ESC [ 33 ^	ESC [ 33 @
+F20		ESC [ 34 ~	ESC [ 34 $	ESC [ 34 ^	ESC [ 34 @
+
+Keypad:
+   use Shift to temporarily override Appl-Keypad setting
+   use Num_Lock to toggle Appl-Keypad setting
+   if Num_Lock is off, escape sequences toggle Appl-Keypad setting
+------
+		Normal		Application
+KP_Enter	^M		ESC O M
+KP_F1		ESC O P		ESC O P
+KP_F2		ESC O Q		ESC O Q
+KP_F3		ESC O R		ESC O R
+KP_F4		ESC O S		ESC O S
+XK_KP_Multiply	*		ESC O j
+XK_KP_Add	+		ESC O k
+XK_KP_Separator	,		ESC O l
+XK_KP_Subtract	-		ESC O m
+XK_KP_Decimal	.		ESC O n
+XK_KP_Divide	/		ESC O o
+XK_KP_0		0		ESC O p
+XK_KP_1		1		ESC O q
+XK_KP_2		2		ESC O r
+XK_KP_3		3		ESC O s
+XK_KP_4		4		ESC O t
+XK_KP_5		5		ESC O u
+XK_KP_6		6		ESC O v
+XK_KP_7		7		ESC O w
+XK_KP_8		8		ESC O x
+XK_KP_9		9		ESC O y
+--------------------------------------------------------------------------
