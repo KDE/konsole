@@ -168,15 +168,15 @@ void konsolePart::configureRequest(TEWidget*te,int,int x,int y)
 }
 
 void konsolePart::slotNew() {
-  kDebugInfo("slotNew called");
+    kdDebug() << "slotNew called\n";
 }
 
 void konsolePart::slotSaveFile() {
-  kDebugInfo("slotSaveFile called");
+    kdDebug() << "slotSaveFile called\n";
 }
 
 void konsolePart::slotLoadFile() {
-  kDebugInfo("slotLoadFile called");
+    kdDebug() << "slotLoadFile called\n";
 }
 
 konsolePart::~konsolePart()

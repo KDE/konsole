@@ -646,7 +646,7 @@ void Konsole::slotSelectScrollbar() {
 void Konsole::slotSelectFont() {
   assert(se);
   int item = selectFont->currentItem();
-  kDebugInfo("slotSelectFont %d", item);
+  kdDebug() << "slotSelectFont " << item << endl;
   if (item == 8) // this is the default
   {
     KFontDialog::getFont(defaultFont, true);
