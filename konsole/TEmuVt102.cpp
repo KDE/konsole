@@ -882,7 +882,17 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
     case CMD_scrollLock     : onScrollLock(                ); return;
   }
   }
-
+  if (holdScreen)
+  {
+    switch(ev->key())
+    {
+    case Key_Down : gui->doScroll(+1); return;
+    case Key_Up : gui->doScroll(-1); return;
+    case Key_PageUp : gui->doScroll(-gui->Lines()/2); return;
+    case Key_PageDown : gui->doScroll(gui->Lines()/2); return;
+    }
+  }
+  
   // revert to non-history when typing
   if (scr->getHistCursor() != scr->getHistLines() && (!ev->text().isEmpty()
     || ev->key()==Key_Down || ev->key()==Key_Up || ev->key()==Key_Left || ev->key()==Key_Right
