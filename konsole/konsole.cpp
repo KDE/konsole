@@ -1408,9 +1408,9 @@ void Konsole::addSession(TESession* s)
      ra->plug(m_sessions);
 
   int button_id=ra->itemId( ra->plug(toolBar()) );
-  KToolBarButton* ktb=toolBar()->getButton(button_id);
+  KToolBarButton* ktb=toolBar()->getButton(button_id);  
   connect(ktb,SIGNAL(doubleClicked(int)), this,SLOT(slotRenameSession(int)));
-
+  session2button.insert(s,ktb);
 }
 
 /**
@@ -1632,6 +1632,7 @@ void Konsole::doneSession(TESession* s, int )
   ra->unplug(m_sessions);
   ra->unplug(toolBar());
   session2action.remove(s);
+  session2button.remove(s);
   action2session.remove(ra);
   int sessionIndex = sessions.findRef(s);
   sessions.remove(s);
@@ -1702,9 +1703,11 @@ void Konsole::moveSessionLeft()
   ra->plug(m_sessions,(m_sessions->count()-sessions.count()+1)+position-1);
 
   ra->unplug(toolBar());
+  session2button.remove(se);
   int button_id=ra->itemId( ra->plug(toolBar(),position-1+2 ));  // +2 because of "New" and separator
   KToolBarButton* ktb=toolBar()->getButton(button_id);
   connect(ktb,SIGNAL(doubleClicked(int)), this,SLOT(slotRenameSession(int)));
+  session2button.insert(se,ktb);
 
   if (!m_menuCreated)
     makeGUI();
@@ -1729,9 +1732,11 @@ void Konsole::moveSessionRight()
   ra->plug(m_sessions,(m_sessions->count()-sessions.count()+1)+position+1);
 
   ra->unplug(toolBar());
+  session2button.remove(se);
   int button_id=ra->itemId( ra->plug(toolBar(),position+1+2) );  // +2 because of "New" and separator
   KToolBarButton* ktb=toolBar()->getButton(button_id);
   connect(ktb,SIGNAL(doubleClicked(int)), this,SLOT(slotRenameSession(int)));
+  session2button.insert(se,ktb);
 
   if (!m_menuCreated)
     makeGUI();
@@ -1748,8 +1753,7 @@ void Konsole::slotToggleMonitor()
 
 void Konsole::notifySessionState(TESession* session, int state)
 {
-  int button_id=-(sessions.find(session)+3);
-  KToolBarButton* ktb=toolBar()->getButton(button_id);
+  KToolBarButton* ktb=session2button.find(session);
   switch(state)
   {
     case NOTIFYNORMAL  : ktb->setIcon("openterm");
