@@ -24,7 +24,7 @@
    An arbitrary long scroll.
 
    One can modify the scroll only by adding either cells
-   or newcells, but access it randomly.
+   or newlines, but access it randomly.
 
    The model is that of an arbitrary wide typewriter scroll
    in that the scroll is a serie of lines and each line is
