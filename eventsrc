@@ -39,6 +39,7 @@ Name=Activity in monitored session
 Name[da]=Aktivitet i overvåget session
 Name[es]=Actividad en sesión monitorizada
 Name[hu]=Aktivitás egy monitorozott munkafolyamatban
+Name[sk]=Aktivita v monitorovaných sedeniach
 Name[sv]=Aktivitet i bevakad session
 Name[th]=การกระทำบนเซสชันติดตามการทำงาน
 Comment=Activity detected in a monitored session
