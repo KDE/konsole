@@ -71,6 +71,8 @@
 #include <kglobalsettings.h>
 #include <kshortcut.h>
 #include <kurldrag.h>
+#include <qlabel.h>
+#include <qtimer.h>
 
 #ifndef HERE
 #define HERE printf("%s(%d): %s\n",__FILE__,__LINE__,__FUNCTION__)

@@ -103,6 +103,9 @@ Time to start a requirement list.
 #include <dcopclient.h>
 #include <kglobalsettings.h>
 
+#include <kaction.h>
+#include <qlabel.h>
+#include <kpopupmenu.h>
 #include <klocale.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
@@ -491,7 +494,7 @@ void Konsole::makeGUI()
    if (bookmarkHandler)
       connect( bookmarkHandler, SIGNAL( openURL( const QString&, const QString& )),
             SLOT( enterURL( const QString&, const QString& )));
-   if (bookmarkHandlerSession)            
+   if (bookmarkHandlerSession)
       connect( bookmarkHandlerSession, SIGNAL( openURL( const QString&, const QString& )),
             SLOT( newSession( const QString&, const QString& )));
    if (m_bookmarks)
@@ -1403,7 +1406,7 @@ void Konsole::reparseConfiguration()
   KGlobal::config()->reparseConfiguration();
   readProperties(KGlobal::config(), QString::null, true);
   buildSessionMenus();
-  
+
   setSchema(curr_schema);
   for (KonsoleChild *child = detached.first(); child; child = detached.next()) {
      int numb = child->session()->schemaNo();
@@ -1976,7 +1979,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
   connect( s->getEmulation(), SIGNAL(ImageSizeChanged(int,int)),
            this, SLOT(notifySize(int,int)));
   connect( s, SIGNAL(zmodemDetected(TESession*)),
-           this, SLOT(slotZModemDetected(TESession*)));           
+           this, SLOT(slotZModemDetected(TESession*)));
 
   s->setFontNo(QMIN(fno, TOPFONT));
   s->setSchemaNo(schmno);
@@ -2935,25 +2938,25 @@ void Konsole::slotZModemUpload()
   {
     KMessageBox::sorry(this,
          i18n("<p>The current session already has a ZModem file transfer in progress."));
-    return;                          
+    return;
   }
   QString zmodem = KGlobal::dirs()->findExe("sz");
   if (zmodem.isEmpty())
-    zmodem = KGlobal::dirs()->findExe("lsz");  
+    zmodem = KGlobal::dirs()->findExe("lsz");
   if (zmodem.isEmpty())
   {
-    KMessageBox::sorry(this, 
+    KMessageBox::sorry(this,
                    i18n("<p>No suitable ZModem software was found on "
                         "the system.\n"
                         "<p>You may wish to install the 'rzsz' or 'lrzsz' package.\n"));
-    return;                       
+    return;
   }
 
-  QStringList files = KFileDialog::getOpenFileNames(QString::null, QString::null, this, 
+  QStringList files = KFileDialog::getOpenFileNames(QString::null, QString::null, this,
   	i18n("Select Files to Upload"));
   if (files.isEmpty())
     return;
-    
+
   se->startZModem(zmodem, QString::null, files);
 }
 
@@ -2964,21 +2967,21 @@ void Konsole::slotZModemDetected(TESession *session)
 
   QString zmodem = KGlobal::dirs()->findExe("rz");
   if (zmodem.isEmpty())
-    zmodem = KGlobal::dirs()->findExe("lrz");  
+    zmodem = KGlobal::dirs()->findExe("lrz");
   if (zmodem.isEmpty())
   {
-    KMessageBox::information(this, 
+    KMessageBox::information(this,
                    i18n("<p>A ZModem file transfer attempt has been detected, "
                         "but no suitable ZModem software was found on "
                         "the system.\n"
                         "<p>You may wish to install the 'rzsz' or 'lrzsz' package.\n"));
-    return;                       
+    return;
   }
   KURLRequesterDlg dlg(KGlobalSettings::documentPath(),
                    i18n("A ZModem file transfer attempt has been detected.\n"
                         "Please specify the directory you want to store the file(s):"),
                    this, "zmodem_dlg");
-  dlg.setButtonOKText( i18n("&Download"), 
+  dlg.setButtonOKText( i18n("&Download"),
                        i18n("Start downloading file to specified directory."),
                        i18n("Start downloading file to specified directory."));
   if (!dlg.exec())

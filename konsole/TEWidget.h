@@ -15,8 +15,6 @@
 
 #include <qbitarray.h>
 #include <qwidget.h>
-#include <qlabel.h>
-#include <qtimer.h>
 #include <qcolor.h>
 #include <qkeycode.h>
 #include <qscrollbar.h>
@@ -25,9 +23,12 @@
 
 #include "TECommon.h"
 
+
 extern unsigned short vt100_graphics[32];
 
 class Konsole;
+class QLabel;
+class QTimer;
 
 class TEWidget : public QFrame
 // a widget representing attributed text
@@ -128,7 +129,7 @@ protected:
 
     virtual void styleChange( QStyle& );
 
-    bool eventFilter( QObject *, QEvent * );    
+    bool eventFilter( QObject *, QEvent * );
     bool event( QEvent * );
 
     void drawAttrStr(QPainter &paint, QRect rect,
@@ -221,7 +222,7 @@ private:
     bool isBlinkEvent; // paintEvent due to blinking.
     QTimer* blinkT;  // active when hasBlinker
     QTimer* blinkCursorT;  // active when hasBlinkingCursor
-    
+
     KPopupMenu* m_drop;
     QString dropText;
     int m_dnd_file_count;

@@ -39,6 +39,15 @@
 #include <kmessagebox.h>
 #include <krun.h>
 #include <kstdaction.h>
+#include <qlabel.h>
+
+#include <qcheckbox.h>
+#include <qspinbox.h>
+#include <qpushbutton.h>
+#include <kpopupmenu.h>
+#include <krootpixmap.h>
+#include <kconfig.h>
+#include <kaction.h>
 
 extern "C"
 {

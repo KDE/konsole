@@ -16,7 +16,6 @@
 #include "TEWidget.h"
 #include "TEScreen.h"
 #include "TEmulation.h"
-#include <qtimer.h>
 #include <stdio.h>
 
 //
@@ -72,7 +71,7 @@ public slots:
   void sendString(const char *);
 
 public:
-    
+
   bool getMode    (int m);
 
   void setMode    (int m);
@@ -104,7 +103,7 @@ private:
   void tau(int code, int p, int q);
   void XtermHack();
 
-  // 
+  //
 
   void reportTerminalType();
   void reportSecondaryAttributes();
@@ -115,7 +114,7 @@ private:
 
   void onScrollLock();
   void scrollLock(const bool lock);
- 
+
 protected:
 
   unsigned short applyCharset(unsigned short c);
@@ -126,7 +125,7 @@ protected:
   void restoreCursor();
   void resetCharset(int scrno);
   void setMargins(int t, int b);
-  
+
   CharCodes charset[2];
 
   DECpar currParm;

@@ -20,8 +20,6 @@
 #include <kmainwindow.h>
 #include <kdialogbase.h>
 #include <ksimpleconfig.h>
-#include <kaction.h>
-#include <kpopupmenu.h>
 #include <keditcl.h>
 
 #include <kwinmodule.h>
@@ -49,6 +47,11 @@
 class KRootPixmap;
 class QCheckBox;
 class KonsoleFind;
+class KPopupMenu;
+class KAction;
+class KToggleAction;
+class KSelectAction;
+class KRadioAction;
 
 // Defined in main.C
 const char *konsole_shell(QStrList &args);
@@ -61,7 +64,7 @@ class Konsole : public KMainWindow, virtual public KonsoleIface
 public:
 
   Konsole(const char * name, const QString &_program, QStrList & _args, int histon,
-    bool menubaron, bool toolbaron, bool frameon, bool scrollbaron, const QString &icon, const QString &_title, 
+    bool menubaron, bool toolbaron, bool frameon, bool scrollbaron, const QString &icon, const QString &_title,
     QCString type = 0, const QString &_term=QString::null, bool b_inRestore = false, const QString &workdir=QString::null);
   ~Konsole();
   void setColLin(int columns, int lines);
@@ -76,7 +79,7 @@ public:
   void initMasterMode(bool on);
   void newSession(const QString &program, const QStrList &args, const QString &term, const QString &icon, const QString &cwd);
   void setSchema(const QString & path);
-  
+
   void enableFullScripting(bool b);
 
   void run();
@@ -111,7 +114,7 @@ protected:
  void saveProperties(KConfig* config);
  void readProperties(KConfig* config);
 
- 
+
 
 private slots:
   void currentDesktopChanged(int desk);

@@ -24,15 +24,8 @@
 #include <kparts/browserextension.h>
 #include <kparts/factory.h>
 
-#include <qcheckbox.h>
-#include <qspinbox.h>
-#include <qpushbutton.h>
 
-#include <kaction.h>
-#include <kconfig.h>
 #include <kdialogbase.h>
-#include <kpopupmenu.h>
-#include <krootpixmap.h>
 
 #include <kde_terminal_interface.h>
 
@@ -41,6 +34,13 @@
 
 class KInstance;
 class konsoleBrowserExtension;
+class QPushButton;
+class QSpinBox;
+class KPopupMenu;
+class QCheckBox;
+class KRootPixmap;
+class KToggleAction;
+class KSelectAction;
 
 namespace KParts { class GUIActivateEvent; }
 

@@ -15,7 +15,7 @@
 
 #include <qfile.h>
 #include <qregexp.h>
-
+#include <kaction.h>
 
 KonsoleBookmarkMenu::KonsoleBookmarkMenu( KBookmarkManager* mgr,
                      KonsoleBookmarkHandler * _owner, KPopupMenu * _parentMenu,
