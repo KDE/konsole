@@ -285,7 +285,7 @@ bool konsolePart::openURL( const KURL & url )
       stat( QFile::encodeName( url.path() ), &buff );
       QString text = ( S_ISDIR( buff.st_mode ) ? url.path() : url.directory() );
       KRun::shellQuote(text);
-      text = QString::fromLatin1("cd ") + text + '\n';
+      text = QString::fromLatin1("\001\013cd ") + text + '\n';
       te->emitText( text );
   }
 
