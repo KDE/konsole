@@ -125,7 +125,7 @@ int main(int argc, char* argv[])
 
   KAboutData aboutData( PACKAGE, I18N_NOOP("Konsole"),
     VERSION, description, KAboutData::License_GPL_V2,
-    "(c) 1997-2001, Lars Doelle");
+    "(c) 1997-2002, Lars Doelle");
   aboutData.addAuthor("Waldo Bastian",I18N_NOOP("Maintainer"), "bastian@kde.org");
   aboutData.addAuthor("Lars Doelle",I18N_NOOP("Author"), "lars.doelle@on-line.de");
   aboutData.addCredit("Stephan Binner",
