@@ -124,18 +124,18 @@ extern "C" {
 
 #include <signal.h>
 
-#if !defined(__osf__)
-#ifdef HAVE_TERMIO_H
-/* needed at least on AIX */
-#include <termio.h>
-#endif
-#endif
 #ifdef HAVE_TERMIOS_H
 /* for HP-UX (some versions) the extern C is needed, and for other
    platforms it doesn't hurt */
 extern "C" {
 #include <termios.h>
 }
+#endif
+#if !defined(__osf__)
+#ifdef HAVE_TERMIO_H
+/* needed at least on AIX */
+#include <termio.h>
+#endif
 #endif
 //#include <time.h>
 #include <unistd.h>
@@ -297,9 +297,16 @@ int TEPty::openPty()
 #endif
     if (ptyfd >= 0)
     {
-      strncpy(ttynam, ptsname(ptyfd), 50);
-      grantpt(ptyfd);
-      needGrantPty = FALSE;
+      char *ptsn = ptsname(ptyfd);
+      if (ptsn) {
+          strncpy(ttynam, ptsname(ptyfd), 50);
+          grantpt(ptyfd);
+          needGrantPty = FALSE;
+      } else {
+      	  perror("ptsname");
+	  close(ptyfd);
+	  ptyfd = -1;
+      }
     }
   }
 #endif
