@@ -484,7 +484,7 @@ int TEPty::makePty()
   memset(&l_struct, 0, sizeof(struct utmp));
 
   if (! (str_ptr=getlogin()) ) {
-    if ( ! str_ptr=getenv("LOGNAME")) {
+    if ( ! (str_ptr=getenv("LOGNAME"))) {
       abort();
     }
   }
