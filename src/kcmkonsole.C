@@ -306,7 +306,7 @@ SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
   slayout->setColStretch(0,1);
   slayout->setColStretch(1,2);
 
-  QPixmap pm0 = Icon(QString("contrast.xpm"));
+  QPixmap pm0 = BarIcon(QString("contrast"));
   QLabel* ll0 = new QLabel(bigWidget);
   ll0->setPixmap(pm0);
   ll0->setFixedSize( ll0->sizeHint() );
@@ -319,7 +319,7 @@ SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
   QToolTip::add(sl0,i18n("Contrast"));
   QToolTip::add(ll0,i18n("Contrast"));
 
-  QPixmap pm1 = Icon(QString("brightness.xpm"));
+  QPixmap pm1 = BarIcon("brightness");
   QLabel* ll1 = new QLabel(bigWidget);
   ll1->setPixmap(pm1);
   ll1->setFixedSize( ll1->sizeHint() );
@@ -332,7 +332,7 @@ SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
   QToolTip::add(sl1,i18n("Brightness"));
   QToolTip::add(ll1,i18n("Brightness"));
 
-  QPixmap pm2 = Icon(QString("colourness.xpm"));
+  QPixmap pm2 = BarIcon("colourness");
   QLabel* ll2 = new QLabel(bigWidget);
   ll2->setPixmap(pm2);
   ll2->setFixedSize( ll2->sizeHint() );
