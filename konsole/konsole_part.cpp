@@ -24,6 +24,7 @@
 
 #include <sys/stat.h>
 #include <stdlib.h>
+#include <assert.h>
 
 #include <qfile.h>
 #include <qlayout.h>
@@ -225,9 +226,23 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   if (m_keytab)
   {
      m_keytab->clear();
+
+     QStringList kt_titles;
+     typedef QMap<QString,KeyTrans*> QStringKeyTransMap;
+     QStringKeyTransMap kt_map;
+
      for (int i = 0; i < KeyTrans::count(); i++)
      {
         KeyTrans* ktr = KeyTrans::find(i);
+        assert( ktr );
+        QString title=ktr->hdr().lower();
+        kt_titles << title;
+        kt_map[title] = ktr;
+     }
+     kt_titles.sort();
+     for ( QStringList::Iterator it = kt_titles.begin(); it != kt_titles.end(); ++it ) {
+        KeyTrans* ktr = kt_map[*it];
+        assert( ktr );
         QString title=ktr->hdr();
         m_keytab->insertItem(title.replace('&',"&&"),ktr->numb());
      }
