@@ -165,7 +165,7 @@ void KonsoleChild::changeColumns(int columns)
   }
 }
 
-void KonsoleChild::notifySize(int lines, int columns)
+void KonsoleChild::notifySize(int /*lines*/, int /*columns*/)
 {
   if (schema && schema->alignment() >= 3)
     pixmap_menu_activated(schema->alignment(),schema->imagePath());
