@@ -1069,19 +1069,21 @@ void Konsole::setFont(int fontno)
     f = defaultFont;
   else
   if (fonts[fontno][0] == '-')
+  {
     f.setRawName( fonts[fontno] );
+    if ( !f.exactMatch() && fontno != DEFAULTFONT)
+    {
+      // Ugly hack to prevent bug #20487
+      fontNotFound_par=fonts[fontno];
+      QTimer::singleShot(1,this,SLOT(fontNotFound()));
+      return;
+    }
+  }
   else
   {
     f.setFamily("fixed");
     f.setFixedPitch(true);
     f.setPixelSize(QString(fonts[fontno]).toInt());
-  }
-  if ( !f.exactMatch() && fontno != DEFAULTFONT)
-  {
-    // Ugly hack to prevent bug #20487
-    fontNotFound_par=fonts[fontno];
-    QTimer::singleShot(1,this,SLOT(fontNotFound()));
-    return;
   }
   if (se) se->setFontNo(fontno);
   if (m_menuCreated)
