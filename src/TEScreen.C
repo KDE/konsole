@@ -77,6 +77,7 @@ TEScreen::TEScreen(int lines, int columns)
 TEScreen::~TEScreen()
 {
   free(image);
+  if (tabstops) free(tabstops);
 }
 
 /* ------------------------------------------------------------------------- */

@@ -407,7 +407,7 @@ HCNT("setImage");
   setUpdatesEnabled(TRUE);
   if ( hasBlinker && !blinkT->isActive()) blinkT->start(1000); // 1000 ms
   if (!hasBlinker &&  blinkT->isActive()) { blinkT->stop(); blinking = FALSE; }
-  delete disstrU;
+  delete [] disstrU;
 }
 
 // paint Event ////////////////////////////////////////////////////
@@ -478,7 +478,7 @@ HCNT("paintEvent");
                 QRect(blX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
                 unistr, image[loc(x,y)], pm != NULL, false);
     x += len - 1;
-    delete disstrU;
+    delete [] disstrU;
   }
   drawFrame( &paint );
   paint.end();

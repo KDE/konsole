@@ -139,6 +139,7 @@ Konsole::Konsole(const char* name,
   b_scroll = histon;
   b_fullscreen = FALSE;
   n_keytab = 0;
+  n_render = 0;
 
   // create terminal emulation framework ////////////////////////////////////
 
