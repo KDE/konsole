@@ -1,0 +1,20 @@
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<kpartgui name="Part" version="1">
+<MenuBar>
+ <Menu name="File">
+  <Action name="new"/>
+  <Action name="save"/>
+  <Action name="load"/>
+ </Menu>
+ <Menu name="MINIDRAW Tools"><text>MINIDRAW Tools</text>
+  <Action name="testdialog"/>
+  <Menu name="zoom"><text>Zoom</text>
+   <Action name="zoomin"/>
+   <Action name="zoomout"/>
+  </Menu>
+ </Menu>
+</MenuBar>
+<ToolBar name="Part1-ToolBar">
+ <Action name="p1_blah"/>
+</ToolBar>
+</kpartgui>
