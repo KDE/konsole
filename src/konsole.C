@@ -205,13 +205,13 @@ Konsole::Konsole(const char* name, const QString& _program,
 ,n_defaultKeytab(0)
 ,n_render(0)
 ,curr_schema(0)
+,noticedBackgroundChangeOnDesktop(0)
 ,s_kconfigSchema("")
 ,b_scroll(histon)
 ,b_fullscreen(false)
 ,m_menuCreated(false)
 ,skip_exit_query(false) // used to skip the query when closed by the session management
 ,b_warnQuit(false)
-,alreadyNoticedBackgroundChange_(false)
 ,m_histSize(DEFAULT_HISTORY_SIZE)
 ,b_histEnabled(true)
 ,s_title(_title)
@@ -1878,9 +1878,9 @@ void Konsole::slotBackgroundChanged(int desk)
 
   // We only do this once, because KRootPixmap should handle it later.
 
-  if (s->useTransparency() && !alreadyNoticedBackgroundChange_ && (0 != rootxpm))
+  if (s->useTransparency() && noticedBackgroundChangeOnDesktop!=desk && (0 != rootxpm))
   {
-    alreadyNoticedBackgroundChange_ = true;
+    noticedBackgroundChangeOnDesktop = desk;
     rootxpm->repaint(true);
   }
 }
