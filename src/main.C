@@ -88,6 +88,7 @@
 #include <assert.h>
 
 #include <kaboutdata.h>
+#include <kiconloader.h>
 
 #include "main.h"
 #include "keytrans.h"
@@ -168,7 +169,7 @@ Konsole::Konsole(const QString& name,
   makeMenu();
   makeStatusbar();
   // temporary default: show
-  toolBar()->setIconText(KToolBar::TextOnly);
+  toolBar()->setIconText(KToolBar::IconTextRight);
   toolBar()->setBarPos(KToolBar::Bottom);
   toolBar()->show();
   
@@ -876,6 +877,9 @@ void Konsole::addSession(TESession* s)
   KRadioAction *ra = new KRadioAction(title, 0, this, SLOT(activateSession()), this, buffer);
   ra->setExclusiveGroup("sessions");
   ra->setChecked(true);
+
+  KIconLoader *ldr = KGlobal::iconLoader();
+  ra->setIconSet(ldr->loadIcon("konsole", KIconLoader::Small));
   action2session.insert(ra, s);
   session2action.insert(s,ra);
   ra->plug(m_sessions);
