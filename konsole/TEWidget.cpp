@@ -1659,7 +1659,7 @@ void TEWidget::drop_menu_activated(int item)
       setActiveWindow();
       break;
    case 1: // cd ...
-     emit sendStringToEmu("cd ");
+     emit sendStringToEmu("\001\013cd ");
       struct stat statbuf;
       if ( ::stat( QFile::encodeName( dropText ), &statbuf ) == 0 )
       {
@@ -1676,13 +1676,13 @@ void TEWidget::drop_menu_activated(int item)
       setActiveWindow();
       break;
    case 2: // copy
-     emit sendStringToEmu("cp -i ");
+     emit sendStringToEmu("\001\013cp -i ");
      break;
    case 3: // link
-     emit sendStringToEmu("ln -s ");
+     emit sendStringToEmu("\001\013ln -s ");
      break;
    case 4: // move
-     emit sendStringToEmu("mv -i ");
+     emit sendStringToEmu("\001\013mv -i ");
      break;
    }
    if (item>1 && item<5) {

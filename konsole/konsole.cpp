@@ -1537,7 +1537,7 @@ void Konsole::enterURL(const QString& URL, const QString&)
   if (URL.startsWith("file:")) {
     newtext=URL.mid(5);
     KRun::shellQuote(newtext);
-    te->emitText("cd "+newtext+"\r");
+    te->emitText("\001\013cd "+newtext+"\r");
   }
   else if (URL.contains("://", true)) {
     i = URL.find("://", 0);
