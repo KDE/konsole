@@ -61,5 +61,5 @@ METASOURCES = TEWidget.moc TEmuVt102.moc session.moc main.moc \
 META_INCLUDES = $(srcdir)/../include
 
 messages:
-	$(XGETTEXT) -C -ktranslate -ki18n -x $(includedir)/kde.pot $(konsole_SOURCES) && mv messages.po $(podir)/konsole.pot
+	$(XGETTEXT) -C -ktranslate -kI18N_NOOP -ki18n -x $(includedir)/kde.pot $(konsole_SOURCES) && mv messages.po $(podir)/konsole.pot
 
