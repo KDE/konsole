@@ -1,19 +1,18 @@
 <tip category="Konsole">
 <html>
-<p>...that you can start new Konsole sessions by pressing the "New" button in the Konsole toolbar?
+<p>...that you can start a new standard session by pressing the "New" button in the tabbar?
 </html>
 </tip>
 
 <tip category="Konsole">
 <html>
-<p>...that pressing and holding the "New" button in the Konsole toolbar will allow you to
-select what session type the "New" button starts?
+<p>...that pressing and holding the "New" button on the tabbar will display a menu of sessions to select?
 </html>
 </tip>
 
 <tip category="Konsole">
 <html>
-<p>...that pressing Ctrl+Alt+N is the same as clicking the "New" button in the toolbar?
+<p>...that pressing Ctrl+Alt+N will start a new standard session?
 </html>
 </tip>
 
@@ -27,9 +26,9 @@ pressing the Left or Right Arrow keys?
 <tip category="Konsole">
 <html>
 <p>...that you can get a 'Linux console-like' terminal? 
-<p>Deactivate the Konsole's menubar, toolbar and scrollbar, select the Linux font
-and the Linux Colors schema and apply the full-screen mode. You might also then
-want to set the panel to auto-hide.
+<p>Hide Konsole's menubar, tabbar and scrollbar, select the Linux font
+and the Linux Colors schema and apply the full-screen mode. You might also 
+want to set the KDE panel to auto-hide.
 </html>
 </tip>
 
@@ -37,14 +36,13 @@ want to set the panel to auto-hide.
 <html>
 <p>...that you can rename your Konsole sessions by clicking with the right mouse
 button and selecting "Rename session"? The change will be reflected in the
-Konsole toolbar, making it easier to remember the content of the session.
+Konsole tabbar, making it easier to remember the content of the session.
 </html>
 </tip>
 
 <tip category="Konsole">
 <html>
-<p>...that you can rename a Konsole session by double-clicking its button
-in the Konsole toolbar?
+<p>...that you can rename a Konsole session by double-clicking its tab?
 </html>
 </tip>
 
@@ -62,22 +60,22 @@ in the Konsole toolbar?
 
 <tip category="Konsole">
 <html>
-<p>...that you can create your own session types by using the session
-type editor which you can find under "Settings/Configure Konsole..."?
+<p>...that you can create your own session types by using the session 
+editor which you can find under "Settings->Configure Konsole..."?
 </html>
 </tip>
 
 <tip category="Konsole">
 <html>
 <p>...that you can create your own color schemes by using the schema editor
-which you can find under "Settings/Configure Konsole..."?
+which you can find under "Settings->Configure Konsole..."?
 </p>
 </html>
 </tip>
 
 <tip category="Konsole|Keyboard">
 <html>
-<p>...that you can reorder the session buttons in the toolbar with "View" menu
+<p>...that you can reorder the session tabs with "View->Move Session Left/Right" menu
 commands or by holding down the Shift and Ctrl keys and pressing the Left or Right 
 Arrow keys?
 </p>
@@ -114,12 +112,6 @@ Ctrl keys and pressing the Insert key?
 
 <tip category="Konsole">
 <html>
-<p>...that you can drag &amp; drop selected text?
-</html>
-</tip>
-
-<tip category="Konsole">
-<html>
 <p>...that pressing Ctrl while pasting the selection with the middle mouse
 button will append a carriage return after pasting the selection buffer?
 </html>
@@ -127,7 +119,7 @@ button will append a carriage return after pasting the selection buffer?
 
 <tip category="Konsole">
 <html>
-<p>...that you can turn off the terminal size hint under "Settings/Configure Konsole..."?
+<p>...that you can turn off the terminal size hint under "Settings->Configure Konsole..."?
 </html>
 </tip>
 
@@ -209,7 +201,7 @@ as well as just pasting the URL as text.
 
 <tip category="Konsole">
 <html>
-<p>...that the "Settings/Configure Shortcuts..." dialog allows you to define keyboard shortcuts for actions
+<p>...that the "Settings->Configure Shortcuts..." dialog allows you to define keyboard shortcuts for actions
 not shown in the menu, like activating menu, changing font and for listing and switching sessions?
 </html>
 </tip>
