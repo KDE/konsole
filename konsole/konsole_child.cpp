@@ -59,7 +59,6 @@ KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar
     if (schema->useTransparency()) {
       rootxpm->setFadeEffect(schema->tr_x(), QColor(schema->tr_r(), schema->tr_g(), schema->tr_b()));
       rootxpm->start();
-      rootxpm->repaint(true);
       session_transparent=true;
     } else {
       rootxpm->stop();

@@ -1092,7 +1092,6 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
          //KONSOLEDEBUG << "Setting up transparency" << endl;
          rootxpm->setFadeEffect(sch->tr_x(), QColor(sch->tr_r(), sch->tr_g(), sch->tr_b()));
          rootxpm->start();
-         rootxpm->repaint(true);
       }
       else
       {
@@ -2420,7 +2419,6 @@ void Konsole::setSchema(ColorSchema* s)
 //        KONSOLEDEBUG << "Setting up transparency" << endl;
     rootxpm->setFadeEffect(s->tr_x(), QColor(s->tr_r(), s->tr_g(), s->tr_b()));
     rootxpm->start();
-    rootxpm->repaint(true);
   } else {
 //        KONSOLEDEBUG << "Stopping transparency" << endl;
     rootxpm->stop();

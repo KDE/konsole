@@ -498,7 +498,6 @@ void konsolePart::readProperties()
     //KONSOLEDEBUG << "Setting up transparency" << endl;
     rootxpm->setFadeEffect(sch->tr_x(), QColor(sch->tr_r(), sch->tr_g(), sch->tr_b()));
     rootxpm->start();
-    rootxpm->repaint(true);
   }
   else {
     rootxpm->stop();
@@ -696,7 +695,6 @@ void konsolePart::setSchema(ColorSchema* s)
   if (s->useTransparency()) {
     rootxpm->setFadeEffect(s->tr_x(), QColor(s->tr_r(), s->tr_g(), s->tr_b()));
     rootxpm->start();
-    rootxpm->repaint(true);
   }
   else {
     rootxpm->stop();
