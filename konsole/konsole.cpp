@@ -295,13 +295,17 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
   makeBasicGUI();
   //KONSOLEDEBUG<<"Konsole ctor() after makeBasicGUI "<<time.elapsed()<<" msecs elapsed"<<endl;
 
-  if (isRestored)
+  if (isRestored) {
     n_tabbar = wanted_tabbar;
+    KConfig *c = KApplication::kApplication()->sessionConfig();
+    c->setDesktopGroup();
+    b_dynamicTabHide = c->readBoolEntry("DynamicTabHide", false);
+  }
 
   if (!tabbaron)
     n_tabbar = TabNone;
 
-  if (n_tabbar!=TabNone) {
+  if (n_tabbar!=TabNone && !b_dynamicTabHide) {
     makeTabWidget();
     setCentralWidget(tabwidget);
   }
@@ -318,7 +322,10 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
     te->setFocus();
 
     readProperties(config, schema, false);
-    n_tabbar = TabNone;
+    if (!b_dynamicTabHide)
+      n_tabbar = TabNone;
+    else if (isRestored)
+      n_tabbar = wanted_tabbar;
     setCentralWidget(te);
   }
 
@@ -1375,7 +1382,7 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("ActiveSession", active);
   config->writeEntry("DefaultSession", m_defaultSessionFilename);
   config->writeEntry("TabViewMode", int(m_tabViewMode));
-  config->writeEntry("DynamicTabHide", int(b_dynamicTabHide));
+  config->writeEntry("DynamicTabHide", b_dynamicTabHide);
 
   if (se) {
     config->writeEntry("history", se->history().getSize());
@@ -1501,7 +1508,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       // Tab View Mode
       m_tabViewMode = TabViewModes(config->readNumEntry("TabViewMode", ShowIconAndText));
       b_dynamicTabHide = config->readBoolEntry("DynamicTabHide", false);
-   }
+      }
 
    if (m_menuCreated)
    {
@@ -2187,7 +2194,7 @@ void Konsole::enterURL(const QString& URL, const QString&)
        newtext += " -p " + QString().setNum(u.port());
     if (u.hasUser())
        newtext += " -l " + u.user();
-    
+
     /*
      * If we have a host, connect.
      */
@@ -2950,8 +2957,8 @@ void Konsole::notifySessionState(TESession* session, int state)
   if (!state_iconname.isEmpty()
       && session->testAndSetStateIconName(state_iconname)
       && m_tabViewMode != ShowTextOnly) {
-      
-    QPixmap normal = KGlobal::instance()->iconLoader()->loadIcon(state_iconname, 
+
+    QPixmap normal = KGlobal::instance()->iconLoader()->loadIcon(state_iconname,
                        KIcon::Small, 0, KIcon::DefaultState, 0L, true);
     QPixmap active = KGlobal::instance()->iconLoader()->loadIcon(state_iconname,
                        KIcon::Small, 0, KIcon::ActiveState, 0L, true);
