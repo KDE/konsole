@@ -6,6 +6,7 @@
 #include <kglobal.h>
 #include <kglobalsettings.h>
 #include <kwrited.h>
+#include <kdebug.h>
 
 #include <TEPty.h>
 #include <stdlib.h>
@@ -59,13 +60,11 @@ KWrited::~KWrited()
 void KWrited::block_in(const char* txt, int len)
 {
   if (len < 0) len = 0;
-  char *_text = new char[len+1];
-  strncpy(_text,txt,len);
-  _text[len] = 0;
-  wid->insert(_text);
+  QCString text( txt, len+1 );
+  text[len] = 0;
+  wid->insert( QString::fromLocal8Bit( text ) ); 
   wid->show();
   XRaiseWindow( wid->x11Display(), wid->winId());
-  delete _text;
 }
 
 int main(int argc, char* argv[])
