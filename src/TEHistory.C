@@ -1,0 +1,175 @@
+/* -------------------------------------------------------------------------- */
+/*                                                                            */
+/* [TEHistory.C]                   History Buffer                             */
+/*                                                                            */
+/* -------------------------------------------------------------------------- */
+/*                                                                            */
+/* Copyright (c) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>            */
+/*                                                                            */
+/* This file is part of Konsole - an X terminal for KDE                       */
+/*                                                                            */
+/* -------------------------------------------------------------------------- */
+
+#include "TEHistory.h"
+#include <stdlib.h>
+#include <assert.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <error.h>
+
+#define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
+
+/*
+   An arbitrary long scroll.
+
+   One can modify the scroll only by adding either cells
+   or newcells, but access it randomly.
+
+   The model is that of an arbitrary wide typewriter scroll
+   in that the scroll is a serie of lines and each line is
+   a serie of cells with no overwriting permitted.
+
+   The implementation provides arbitrary length and numbers
+   of cells and line/column indexed read access to the scroll
+   at constant costs.
+*/
+
+
+// History Buffer ///////////////////////////////////////////
+
+/*
+   A Row(X) data type which allows adding elements to the end.
+*/
+
+HistoryBuffer::HistoryBuffer()
+{
+  ion    = -1;
+  length = 0;
+}
+
+HistoryBuffer::~HistoryBuffer()
+{
+  setScroll(FALSE);
+}
+
+void HistoryBuffer::setScroll(bool on)
+{
+  if (on == hasScroll()) return;
+
+  if (on)
+  {
+    assert( ion < 0 );
+    assert( length == 0);
+    FILE* tmp = tmpfile(); if (!tmp) { perror("konsole: cannot open temp file.\n"); return; }
+    ion = dup(fileno(tmp)); if (ion<0) perror("konsole: cannot dup temp file.\n");
+    fclose(tmp);
+  }
+  else
+  {
+    assert( ion >= 0 );
+    close(ion);
+    ion    = -1;
+    length = 0;
+  }
+}
+
+bool HistoryBuffer::hasScroll()
+{
+  return ion >= 0;
+}
+
+void HistoryBuffer::add(const unsigned char* bytes, int len)
+{ int rc;
+  assert(hasScroll());
+  rc = lseek(ion,length,SEEK_SET); if (rc < 0) perror("HistoryBuffer::add.seek");
+  rc = write(ion,bytes,len);       if (rc < 0) perror("HistoryBuffer::add.write");
+  length += rc;
+}
+
+void HistoryBuffer::get(unsigned char* bytes, int len, int loc)
+{ int rc;
+  assert(hasScroll());
+  if (loc < 0 || len < 0 || loc + len > length)
+    fprintf(stderr,"getHist(...,%d,%d): invalid args.\n",len,loc);
+  rc = lseek(ion,loc,SEEK_SET); if (rc < 0) perror("HistoryBuffer::get.seek");
+  rc = read(ion,bytes,len);     if (rc < 0) perror("HistoryBuffer::get.read");
+}
+
+int HistoryBuffer::len()
+{
+  return length;
+}
+
+// History Scroll //////////////////////////////////////
+
+/* 
+   The history scroll makes a Row(Row(Cell)) from
+   two history buffers. The index buffer contains
+   start of line positions which refere to the cells
+   buffer.
+
+   Note that index[0] addresses the second line
+   (line #1), while the first line (line #0) starts
+   at 0 in cells.
+*/
+
+HistoryScroll::HistoryScroll()
+{
+}
+
+HistoryScroll::~HistoryScroll()
+{
+}
+ 
+void HistoryScroll::setScroll(bool on)
+{
+  index.setScroll(on);
+  cells.setScroll(on);
+}
+ 
+bool HistoryScroll::hasScroll()
+{
+  return index.hasScroll() && cells.hasScroll();
+}
+
+int HistoryScroll::getLines()
+{
+  return index.len() / sizeof(int);
+}
+
+int HistoryScroll::getLineLen(int lineno)
+{
+  return (startOfLine(lineno+1) - startOfLine(lineno)) / sizeof(ca);
+}
+
+int HistoryScroll::startOfLine(int lineno)
+{
+  if (lineno <= 0) return 0;
+  if (lineno <= getLines())
+  { int res;
+    index.get((unsigned char*)&res,sizeof(int),(lineno-1)*sizeof(int));
+    return res;
+  }
+  return cells.len();
+}
+
+ca HistoryScroll::getCell(int lineno, int colno)
+{ ca res;
+  if (hasScroll())
+    cells.get((unsigned char*)&res,sizeof(ca),startOfLine(lineno)+colno*sizeof(ca));
+  return res;
+}
+
+void HistoryScroll::addCell(ca text)
+{
+  if (!hasScroll()) return;
+  cells.add((unsigned char*)&text,sizeof(ca));
+}
+
+void HistoryScroll::addLine()
+{
+  if (!hasScroll()) return;
+  int locn = cells.len();
+  index.add((unsigned char*)&locn,sizeof(int));
+}
