@@ -16,7 +16,7 @@ INCLUDES =  -I$(INCDIR) $(all_includes)
 
 # you can add here more. This one gets installed
 bin_PROGRAMS = 	konsole konsole_grantpty kwrited #kcmkonsole
-lib_LTLIBRARIES = kwrited.la konsole.la libkonsolepart.la
+lib_LTLIBRARIES = libkonsolepart.la kwrited.la konsole.la
 # libkonsolepart is a part, but konsole.la links directly to it, so we can't
 # install it under kde_module
 
