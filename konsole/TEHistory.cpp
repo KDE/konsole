@@ -445,6 +445,7 @@ void HistoryScrollBlockArray::addCells(ca a[], int count)
 
   size_t res = m_blockArray.newBlock();
   assert (res > 0);
+  Q_UNUSED( res );
 
   // store line length
   size_t *pLen = new size_t;
