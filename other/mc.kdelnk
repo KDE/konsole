@@ -4,4 +4,5 @@ Type=KonsoleApplication
 Name=MC
 Comment=Midnight Commander
 Comment[is]=mc:  Skráarstjóri fyrir textaham
+Comment[ro]=Midnite Commander
 Exec=mc -c
