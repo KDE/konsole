@@ -1,6 +1,7 @@
 [Desktop Entry]
 ServiceTypes=inode/directory
 Actions=openTerminalHere
+X-KDE-AuthorizeAction=shell_access
 
 [Desktop Action openTerminalHere]
 Name=Open Terminal Here
@@ -21,9 +22,12 @@ Name[fi]=Avaa terminaali tähän
 Name[fr]=Ouvrir un terminal ici
 Name[he]=פתח מסוף כאן
 Name[hu]=Parancsértelmező megnyitása itt
+Name[is]=Opna skjáhermi hér
 Name[it]=Apri terminale qui
 Name[ja]=ここでターミナルを開く
+Name[lo]=ເທີມິເນລຂອງ X
 Name[lt]=Atverti čia terminalą
+Name[mk]=Овде отвори терминал
 Name[mt]=Iftaħ terminal hawn
 Name[nb]=Åpne terminal her
 Name[nl]=Terminal openen
@@ -32,7 +36,9 @@ Name[nso]=Bula mafelelo Mo
 Name[pl]=Otwórz tutaj terminal
 Name[pt]=Abrir um Terminal Aqui
 Name[pt_BR]=Abrir Terminal aqui
+Name[ro]=Deschide un terminal aici
 Name[ru]=Открыть терминал здесь
+Name[se]=Raba terminála dáppe
 Name[sk]=Tu otvoriť terminál
 Name[sl]=Tu odpri terminal
 Name[ss]=Vula sikhungo lapha
@@ -41,6 +47,7 @@ Name[ta]=Ó¨ÉÂò¨¾ þíÌ ¾¢È
 Name[tr]=Terminali Burada Aç
 Name[uk]=Відкрити термінал
 Name[ven]=Vulani theminala hafhano
+Name[vi]=Mở đầu cuối ở đây
 Name[xh]=Vula Isiphelo Sendlela Apha
 Name[zh_CN]=在此打开终端
 Name[zh_TW]=在這裡開啟終端機

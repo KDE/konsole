@@ -103,7 +103,7 @@ void TEmuVt102::changeGUI(TEWidget* newgui)
   }
   TEmulation::changeGUI(newgui);
   QObject::connect(gui,SIGNAL(mouseSignal(int,int,int)),
-                   this,SLOT(onMouse(int,int,int)));  
+                   this,SLOT(onMouse(int,int,int)));
   QObject::connect(gui, SIGNAL(sendStringToEmu(const char*)),
 		   this, SLOT(sendString(const char*)));
 }
@@ -581,8 +581,8 @@ void TEmuVt102::tau( int token, int p, int q )
 
     case TY_CSI_PR('l',    2) :        resetMode      (MODE_Ansi     ); break; //VT100
 
-    case TY_CSI_PR('h',    3) : /* IGNORED:  setColumns (       132) */ break; //VT100
-    case TY_CSI_PR('l',    3) : /* IGNORED:  setColumns (        80) */ break; //VT100
+    case TY_CSI_PR('h',    3) :                setColumns (       132); break; //VT100
+    case TY_CSI_PR('l',    3) :                setColumns (        80); break; //VT100
 
     case TY_CSI_PR('h',    4) : /* IGNORED: soft scrolling           */ break; //VT100
     case TY_CSI_PR('l',    4) : /* IGNORED: soft scrolling           */ break; //VT100
@@ -806,9 +806,9 @@ void TEmuVt102::onMouse( int cb, int cx, int cy )
 { char tmp[20];
   if (!connected) return;
   // normal buttons are passed as 0x20 + button,
-  // mouse wheel (buttons 4,5) as 0x60 + button
-  if (cb >= 4) cb += 0x40;
-  sprintf(tmp,"\033[M%c%c%c",cb+040,cx+040,cy+040);
+  // mouse wheel (buttons 4,5) as 0x5c + button
+  if (cb >= 4) cb += 0x3c;
+  sprintf(tmp,"\033[M%c%c%c",cb+0x20,cx+0x20,cy+0x20);
   sendString(tmp);
 }
 
@@ -873,15 +873,18 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
                                      encodeStat(AltButton     , BITS_Alt       ),
                           &cmd, &txt, &len, &metaspecified ))
 //printf("cmd: %d, %s, %d\n",cmd,txt,len);
-  switch(cmd) // ... and execute if found.
+  if (connected)
   {
-    case CMD_emitClipboard  : gui->emitSelection(false,false); return;
-    case CMD_emitSelection  : gui->emitSelection(true,false); return;
-    case CMD_scrollPageUp   : gui->doScroll(-gui->Lines()/2); return;
-    case CMD_scrollPageDown : gui->doScroll(+gui->Lines()/2); return;
-    case CMD_scrollLineUp   : gui->doScroll(-1             ); return;
-    case CMD_scrollLineDown : gui->doScroll(+1             ); return;
-    case CMD_scrollLock     : onScrollLock(                ); return;
+     switch(cmd) // ... and execute if found.
+     {
+       case CMD_emitClipboard  : gui->emitSelection(false,false); return;
+       case CMD_emitSelection  : gui->emitSelection(true,false); return;
+       case CMD_scrollPageUp   : gui->doScroll(-gui->Lines()/2); return;
+       case CMD_scrollPageDown : gui->doScroll(+gui->Lines()/2); return;
+       case CMD_scrollLineUp   : gui->doScroll(-1             ); return;
+       case CMD_scrollLineDown : gui->doScroll(+1             ); return;
+       case CMD_scrollLock     : onScrollLock(                ); return;
+     }
   }
 
   // revert to non-history when typing
@@ -1056,7 +1059,7 @@ void TEmuVt102::setMode(int m)
   currParm.mode[m] = true;
   switch (m)
   {
-    case MODE_Mouse1000 : gui->setMouseMarks(false);
+    case MODE_Mouse1000 : if (connected) gui->setMouseMarks(false);
     break;
 
     case MODE_AppScreen : screen[1]->clearSelection();
@@ -1075,7 +1078,7 @@ void TEmuVt102::resetMode(int m)
   currParm.mode[m] = false;
   switch (m)
   {
-    case MODE_Mouse1000 : gui->setMouseMarks(true);
+    case MODE_Mouse1000 : if (connected) gui->setMouseMarks(true);
     break;
 
     case MODE_AppScreen : screen[0]->clearSelection();
@@ -1168,7 +1171,9 @@ void TEmuVt102::scan_buffer_report()
 
 void TEmuVt102::ReportErrorToken()
 {
+#ifndef NDEBUG
   printf("undecodable "); scan_buffer_report();
+#endif
 }
 
 /*

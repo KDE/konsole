@@ -145,6 +145,17 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
 ,se(0)
 ,colors(0)
 ,rootxpm(0)
+,blinkingCursor(0)
+,showFrame(0)
+,selectBell(0)
+,selectFont(0)
+,selectLineSpacing(0)
+,selectScrollbar(0)
+,m_keytab(0)
+,m_schema(0)
+,m_signals(0)
+,m_options(0)
+,m_popupMenu(0)
 ,m_histSize(DEFAULT_HISTORY_SIZE)
 {
   parentWidget=_parentWidget;
@@ -199,23 +210,30 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
 
   makeGUI();
 
-  updateSchemaMenu();
+  if (m_schema)
+  {
+     updateSchemaMenu();
 
-  ColorSchema *sch=colors->find(s_schema);
-  if (sch)
-    curr_schema=sch->numb();
-  else
-    curr_schema = 0;
-  for (uint i=0; i<m_schema->count(); i++)
-    m_schema->setItemChecked(i,false);
+     ColorSchema *sch=colors->find(s_schema);
+     if (sch)
+        curr_schema=sch->numb();
+     else
+        curr_schema = 0;
+     for (uint i=0; i<m_schema->count(); i++)
+        m_schema->setItemChecked(i,false);
 
-  m_schema->setItemChecked(curr_schema,true);
-  se->setSchemaNo(curr_schema);
+     m_schema->setItemChecked(curr_schema,true);
+     se->setSchemaNo(curr_schema);
+  }
 
   // insert keymaps into menu
-  for (int i = 0; i < KeyTrans::count(); i++) {
-    KeyTrans* ktr = KeyTrans::find(i);
-    m_keytab->insertItem(ktr->hdr(),ktr->numb());
+  if (m_keytab)
+  {
+     for (int i = 0; i < KeyTrans::count(); i++) 
+     {
+        KeyTrans* ktr = KeyTrans::find(i);
+        m_keytab->insertItem(ktr->hdr(),ktr->numb());
+     }
   }
 
   applySettingsToGUI();
@@ -251,7 +269,8 @@ void konsolePart::sessionDestroyed()
 
 void konsolePart::configureRequest(TEWidget*te,int,int x,int y)
 {
-  m_popupMenu->popup(te->mapToGlobal(QPoint(x,y)));
+  if (m_popupMenu)
+     m_popupMenu->popup(te->mapToGlobal(QPoint(x,y)));
 }
 
 konsolePart::~konsolePart()
@@ -289,7 +308,7 @@ bool konsolePart::openURL( const KURL & url )
       stat( QFile::encodeName( url.path() ), &buff );
       QString text = ( S_ISDIR( buff.st_mode ) ? url.path() : url.directory() );
       KRun::shellQuote(text);
-      text = QString::fromLatin1("\001\013cd ") + text + '\n';
+      text = QString::fromLatin1("cd ") + text + '\n';
       te->emitText( text );
   }
 
@@ -310,47 +329,57 @@ void konsolePart::emitOpenURLRequest(const QString &cwd)
 
 void konsolePart::makeGUI()
 {
+  if (!kapp->authorizeKAction("konsole_rmb"))
+     return;
+
   KActionCollection* actions = new KActionCollection(this);
 
   // Send Signal Menu -------------------------------------------------------------
-  m_signals = new KPopupMenu((KMainWindow*)parentWidget);
-  m_signals->insertItem( i18n( "&Suspend Task" )   + " (STOP)", SIGSTOP);
-  m_signals->insertItem( i18n( "&Continue Task" )  + " (CONT)", SIGCONT);
-  m_signals->insertItem( i18n( "&Hangup" )         + " (HUP)",   SIGHUP);
-  m_signals->insertItem( i18n( "&Interrupt Task" ) + " (INT)",   SIGINT);
-  m_signals->insertItem( i18n( "&Terminate Task" ) + " (TERM)", SIGTERM);
-  m_signals->insertItem( i18n( "&Kill Task" )      + " (KILL)",  SIGKILL);
-  m_signals->insertItem( i18n( "User Signal &1")   + " (USR1)", SIGUSR1);
-  m_signals->insertItem( i18n( "User Signal &2")   + " (USR2)", SIGUSR2);
-  connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
+  if (kapp->authorizeKAction("send_signal"))
+  {
+     m_signals = new KPopupMenu((KMainWindow*)parentWidget);
+     m_signals->insertItem( i18n( "&Suspend Task" )   + " (STOP)", SIGSTOP);
+     m_signals->insertItem( i18n( "&Continue Task" )  + " (CONT)", SIGCONT);
+     m_signals->insertItem( i18n( "&Hangup" )         + " (HUP)",   SIGHUP);
+     m_signals->insertItem( i18n( "&Interrupt Task" ) + " (INT)",   SIGINT);
+     m_signals->insertItem( i18n( "&Terminate Task" ) + " (TERM)", SIGTERM);
+     m_signals->insertItem( i18n( "&Kill Task" )      + " (KILL)",  SIGKILL);
+     m_signals->insertItem( i18n( "User Signal &1")   + " (USR1)", SIGUSR1);
+     m_signals->insertItem( i18n( "User Signal &2")   + " (USR2)", SIGUSR2);
+     connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
+  }
 
   // Settings Menu ----------------------------------------------------------------
-  m_options = new KPopupMenu((KMainWindow*)parentWidget);
+  if (kapp->authorizeKAction("settings"))
+  {
+     m_options = new KPopupMenu((KMainWindow*)parentWidget);
 
-  // Scrollbar
-  selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), 0, this,
+     // Scrollbar
+     selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), 0, this,
                                       SLOT(slotSelectScrollbar()), actions);
-  QStringList scrollitems;
-  scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
-  selectScrollbar->setItems(scrollitems);
-  selectScrollbar->plug(m_options);
 
-  // Select Bell
-  m_options->insertSeparator();
-  selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), 0 , this,
-                                 SLOT(slotSelectBell()), actions);
-  QStringList bellitems;
-  bellitems << i18n("&None")
+     QStringList scrollitems;
+     scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
+     selectScrollbar->setItems(scrollitems);
+     selectScrollbar->plug(m_options);
+
+     // Select Bell
+     m_options->insertSeparator();
+     selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), 0 , this,
+                                 SLOT(slotSelectBell()), actions, "bell");
+
+     QStringList bellitems;
+     bellitems << i18n("&None")
             << i18n("&System Notification")
             << i18n("&Visible Bell");
-  selectBell->setItems(bellitems);
-  selectBell->plug(m_options);
+     selectBell->setItems(bellitems);
+     selectBell->plug(m_options);
 
-  // Select font
-  selectFont = new KonsoleFontSelectAction( i18n( "&Font" ), SmallIconSet( "text" ), 0,
-                                            this, SLOT(slotSelectFont()), actions);
-  QStringList it;
-  it << i18n("&Normal")
+     // Select font
+     selectFont = new KonsoleFontSelectAction( i18n( "&Font" ), SmallIconSet( "text" ), 0,
+                                            this, SLOT(slotSelectFont()), actions, "font");
+     QStringList it;
+     it << i18n("&Normal")
      << i18n("&Tiny")
      << i18n("&Small")
      << i18n("&Medium")
@@ -361,95 +390,108 @@ void konsolePart::makeGUI()
      << i18n("&Unicode")
      << ""
      << i18n("&Custom...");
-  selectFont->setItems(it);
-  selectFont->plug(m_options);
+     selectFont->setItems(it);
+     selectFont->plug(m_options);
 
-  // Keyboard Options Menu ---------------------------------------------------
-  m_keytab = new KPopupMenu((KMainWindow*)parentWidget);
-  m_keytab->setCheckable(true);
-  connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
-  m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
+     // Keyboard Options Menu ---------------------------------------------------
+     if (kapp->authorizeKAction("keyboard"))
+     {
+        m_keytab = new KPopupMenu((KMainWindow*)parentWidget);
+        m_keytab->setCheckable(true);
+        connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
+        m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
+     }
 
-  // Schema Options Menu -----------------------------------------------------
-  m_schema = new KPopupMenu((KMainWindow*)parentWidget);
-  m_schema->setCheckable(true);
-  connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
-  connect(m_schema, SIGNAL(aboutToShow()), SLOT(schema_menu_check()));
-  m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Sch&ema" ), m_schema);
+     // Schema Options Menu -----------------------------------------------------
+     if (kapp->authorizeKAction("schema"))
+     {
+        m_schema = new KPopupMenu((KMainWindow*)parentWidget);
+        m_schema->setCheckable(true);
+        connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
+        connect(m_schema, SIGNAL(aboutToShow()), SLOT(schema_menu_check()));
+        m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Sch&ema" ), m_schema);
+     }
 
-  KAction *historyType = new KAction(i18n("&History..."), "history", 0, this,
-                                     SLOT(slotHistoryType()), actions);
-  historyType->plug(m_options);
-  m_options->insertSeparator();
+     KAction *historyType = new KAction(i18n("&History..."), "history", 0, this,
+                                     SLOT(slotHistoryType()), actions, "history");
+     historyType->plug(m_options);
+     m_options->insertSeparator();
 
-  // Select line spacing
-  selectLineSpacing =
-    new KSelectAction
-    (
-     i18n("Li&ne Spacing"),
-     SmallIconSet("leftjust"), // Non-code hack.
-     0,
-     this,
-     SLOT(slotSelectLineSpacing()),
-     this
-    );
+     // Select line spacing
+     selectLineSpacing =
+       new KSelectAction
+       (
+        i18n("Li&ne Spacing"),
+        SmallIconSet("leftjust"), // Non-code hack.
+        0,
+        this,
+        SLOT(slotSelectLineSpacing()),
+        this
+       );
 
-  QStringList lineSpacingList;
+     QStringList lineSpacingList;
 
-  lineSpacingList
-    << i18n("&0")
-    << i18n("&1")
-    << i18n("&2")
-    << i18n("&3")
-    << i18n("&4")
-    << i18n("&5")
-    << i18n("&6")
-    << i18n("&7")
-    << i18n("&8");
+     lineSpacingList
+       << i18n("&0")
+       << i18n("&1")
+       << i18n("&2")
+       << i18n("&3")
+       << i18n("&4")
+       << i18n("&5")
+       << i18n("&6")
+       << i18n("&7")
+       << i18n("&8");
 
-  selectLineSpacing->setItems(lineSpacingList);
-  selectLineSpacing->plug(m_options);
+     selectLineSpacing->setItems(lineSpacingList);
+     selectLineSpacing->plug(m_options);
 
-  // Blinking Cursor
-  blinkingCursor = new KToggleAction (i18n("Blinking &Cursor"),
+     // Blinking Cursor
+     blinkingCursor = new KToggleAction (i18n("Blinking &Cursor"),
                                       0, this,SLOT(slotBlinkingCursor()), actions);
-  blinkingCursor->plug(m_options);
+     blinkingCursor->plug(m_options);
 
-  // Frame on/off
-  showFrame = new KToggleAction(i18n("Show Fr&ame"), 0,
+     // Frame on/off
+     showFrame = new KToggleAction(i18n("Show Fr&ame"), 0,
                                 this, SLOT(slotToggleFrame()), actions);
-  showFrame->plug(m_options);
+     showFrame->plug(m_options);
 
-  // Word Connectors
-  KAction *WordSeps = new KAction(i18n("Wor&d Connectors..."), 0, this,
+     // Word Connectors
+     KAction *WordSeps = new KAction(i18n("Wor&d Connectors..."), 0, this,
                                   SLOT(slotWordSeps()), actions);
-  WordSeps->plug(m_options);
+     WordSeps->plug(m_options);
 
-  // Save Settings
-  m_options->insertSeparator();
-  KAction *saveSettings = KStdAction::saveOptions(this, SLOT(saveProperties()), actions);
-  saveSettings->plug(m_options);
-  if (KGlobalSettings::insertTearOffHandle())
-    m_options->insertTearOffHandle();
+     // Save Settings
+     m_options->insertSeparator();
+     KAction *saveSettings = KStdAction::saveOptions(this, SLOT(saveProperties()), actions);
+     saveSettings->plug(m_options);
+     if (KGlobalSettings::insertTearOffHandle())
+        m_options->insertTearOffHandle();
+  }
 
   // Popup Menu -------------------------------------------------------------------
   m_popupMenu = new KPopupMenu((KMainWindow*)parentWidget);
   KAction *copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0,
-                                        te, SLOT(copyClipboard()), actions);
+                                        te, SLOT(copyClipboard()), actions, "edit_copy");
   copyClipboard->plug(m_popupMenu);
   
   KAction *pasteClipboard = new KAction(i18n("&Paste"), "editpaste", 0,
-                                        te, SLOT(pasteClipboard()), actions);
+                                        te, SLOT(pasteClipboard()), actions, "edit_paste");
   pasteClipboard->plug(m_popupMenu);
 
-  m_popupMenu->insertItem(i18n("&Send Signal"), m_signals);
-  m_popupMenu->insertSeparator();
+  if (m_signals)
+  {
+     m_popupMenu->insertItem(i18n("&Send Signal"), m_signals);
+     m_popupMenu->insertSeparator();
+  }
 
-  m_popupMenu->insertItem(i18n("S&ettings"), m_options);
-  m_popupMenu->insertSeparator();
+  if (m_options)
+  {
+     m_popupMenu->insertItem(i18n("S&ettings"), m_options);
+     m_popupMenu->insertSeparator();
+  }
 
   KAction *closeSession = new KAction(i18n("&Close Terminal Emulator"), "fileclose", 0, this,
-                                      SLOT(closeCurrentSession()), actions);
+                                      SLOT(closeCurrentSession()), actions, "close_session");
   closeSession->plug(m_popupMenu);
   if (KGlobalSettings::insertTearOffHandle())
     m_popupMenu->insertTearOffHandle();
@@ -457,14 +499,21 @@ void konsolePart::makeGUI()
 
 void konsolePart::applySettingsToGUI()
 {
-  showFrame->setChecked( b_framevis );
-  selectScrollbar->setCurrentItem(n_scroll);
-  selectFont->setCurrentItem(n_font);
+  if (showFrame)
+     showFrame->setChecked( b_framevis );
+  if (selectScrollbar)
+     selectScrollbar->setCurrentItem(n_scroll);
+  if (selectFont)
+     selectFont->setCurrentItem(n_font);
   updateKeytabMenu();
-  selectBell->setCurrentItem(n_bell);
-  selectLineSpacing->setCurrentItem(te->lineSpacing());
-  blinkingCursor->setChecked(te->blinkingCursor());
-  m_schema->setItemChecked(curr_schema,true);
+  if (selectBell)
+     selectBell->setCurrentItem(n_bell);
+  if (selectLineSpacing)
+     selectLineSpacing->setCurrentItem(te->lineSpacing());
+  if (blinkingCursor)
+     blinkingCursor->setChecked(te->blinkingCursor());
+  if (m_schema)
+     m_schema->setItemChecked(curr_schema,true);
 };
 
 void konsolePart::readProperties()
@@ -632,6 +681,7 @@ void konsolePart::fontNotFound()
 
 void konsolePart::updateKeytabMenu()
 {
+  if ( ! se || ! m_keytab ) return;
   m_keytab->setItemChecked(n_keytab,false);
   m_keytab->setItemChecked(se->keymapNo(),true);
   n_keytab = se->keymapNo();
@@ -659,6 +709,8 @@ void konsolePart::schema_menu_check()
 
 void konsolePart::updateSchemaMenu()
 {
+  if (!m_schema) return;
+  
   m_schema->clear();
   for (int i = 0; i < (int) colors->count(); i++)  {
     ColorSchema* s = (ColorSchema*)colors->at(i);

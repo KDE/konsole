@@ -135,7 +135,7 @@ int main(int argc, char* argv[])
   bool toolbaron = true;
   bool frameon = true;
   bool scrollbaron = true;
-  const char* wname = PACKAGE;
+  QCString wname = PACKAGE;
 
 
   KAboutData aboutData( PACKAGE, I18N_NOOP("Konsole"),
@@ -392,8 +392,7 @@ int main(int argc, char* argv[])
         ksm->konsole = m;
         ksm->konsole->initFullScreen();
         if ( !profile.isEmpty() ) {
-          ksm->konsole->setName( "konsole-mainwindow#1" );
-          ksm->konsole->applyMainWindowSettings(sessionconfig);
+          ksm->konsole->callReadPropertiesInternal(sessionconfig,1);
           profile = "";
           // Hack to work-around sessions initialized with minimum size
           for (int i=1;i<=counter;i++)

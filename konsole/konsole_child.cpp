@@ -83,44 +83,54 @@ KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar
 
   connect( kapp,SIGNAL(backgroundChanged(int)),this, SLOT(slotBackgroundChanged(int)));
 
-  // Send Signal Menu -------------------------------------------------------------
-  KPopupMenu* m_signals = new KPopupMenu(this);
-  m_signals->insertItem( i18n( "&Suspend Task" )   + " (STOP)", SIGSTOP);
-  m_signals->insertItem( i18n( "&Continue Task" )  + " (CONT)", SIGCONT);
-  m_signals->insertItem( i18n( "&Hangup" )         + " (HUP)", SIGHUP);
-  m_signals->insertItem( i18n( "&Interrupt Task" ) + " (INT)", SIGINT);
-  m_signals->insertItem( i18n( "&Terminate Task" ) + " (TERM)", SIGTERM);
-  m_signals->insertItem( i18n( "&Kill Task" )      + " (KILL)", SIGKILL);
-  m_signals->insertItem( i18n( "User Signal &1")   + " (USR1)", SIGUSR1);
-  m_signals->insertItem( i18n( "User Signal &2")   + " (USR2)", SIGUSR2);
-  connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
+  if (kapp->authorizeKAction("konsole_rmb"))
+  {
+     m_rightButton = new KPopupMenu(this);
 
-  m_rightButton = new KPopupMenu(this);
-  KActionCollection* actions = new KActionCollection(this);
+     KActionCollection* actions = new KActionCollection(this);
 
-  KAction *copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0,
-                                        te, SLOT(copyClipboard()), actions);
-  copyClipboard->plug(m_rightButton);
+     KAction *copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0,
+                                        te, SLOT(copyClipboard()), actions, "edit_copy");
 
-  KAction *pasteClipboard = new KAction(i18n("&Paste"), "editpaste", 0,
-                                        te, SLOT(pasteClipboard()), actions);
-  pasteClipboard->plug(m_rightButton);
-  m_rightButton->insertItem(i18n("&Send Signal"), m_signals);
+     copyClipboard->plug(m_rightButton);
 
-  m_rightButton->insertSeparator();
-  KAction *attachSession = new KAction(i18n("&Attach Session"), 0, this,
-                                       SLOT(attachSession()), actions);
-  attachSession->plug(m_rightButton);
-  KAction *renameSession = new KAction(i18n("&Rename Session..."), 0, this,
-                                       SLOT(renameSession()), actions);
-  renameSession->plug(m_rightButton);
+     KAction *pasteClipboard = new KAction(i18n("&Paste"), "editpaste", 0,
+                                        te, SLOT(pasteClipboard()), actions, "edit_paste");
+     pasteClipboard->plug(m_rightButton);
 
-  m_rightButton->insertSeparator();
-  KAction *closeSession = new KAction(i18n("C&lose Session"), "fileclose", 0, this,
-                                      SLOT(closeSession()), actions);
-  closeSession->plug(m_rightButton );
-  if (KGlobalSettings::insertTearOffHandle())
-    m_rightButton->insertTearOffHandle();
+     // Send Signal Menu -------------------------------------------------------------
+     if (kapp->authorizeKAction("send_signal"))
+     {
+        KPopupMenu* m_signals = new KPopupMenu(this);
+        m_signals->insertItem( i18n( "&Suspend Task" )   + " (STOP)", SIGSTOP);
+        m_signals->insertItem( i18n( "&Continue Task" )  + " (CONT)", SIGCONT);
+        m_signals->insertItem( i18n( "&Hangup" )         + " (HUP)", SIGHUP);
+        m_signals->insertItem( i18n( "&Interrupt Task" ) + " (INT)", SIGINT);
+        m_signals->insertItem( i18n( "&Terminate Task" ) + " (TERM)", SIGTERM);
+        m_signals->insertItem( i18n( "&Kill Task" )      + " (KILL)", SIGKILL);
+        m_signals->insertItem( i18n( "User Signal &1")   + " (USR1)", SIGUSR1);
+        m_signals->insertItem( i18n( "User Signal &2")   + " (USR2)", SIGUSR2);
+        connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
+        m_rightButton->insertItem(i18n("&Send Signal"), m_signals);
+     }
+
+     m_rightButton->insertSeparator();
+  
+     KAction *attachSession = new KAction(i18n("&Attach Session"), 0, this,
+                                       SLOT(attachSession()), actions, "attach_session");
+     attachSession->plug(m_rightButton);
+     KAction *renameSession = new KAction(i18n("&Rename Session..."), 0, this,
+                                       SLOT(renameSession()), actions, "rename_session");
+     renameSession->plug(m_rightButton);
+
+     m_rightButton->insertSeparator();
+     KAction *closeSession = new KAction(i18n("C&lose Session"), "fileclose", 0, this,
+                                      SLOT(closeSession()), actions, "close_session");
+     closeSession->plug(m_rightButton );
+
+     if (KGlobalSettings::insertTearOffHandle())
+        m_rightButton->insertTearOffHandle();
+  }
 }
 
 void KonsoleChild::run() {
@@ -189,7 +199,8 @@ KonsoleChild::~KonsoleChild()
 
 void KonsoleChild::configureRequest(TEWidget* te, int, int x, int y)
 {
-  m_rightButton->popup(te->mapToGlobal(QPoint(x,y)));
+  if (m_rightButton)
+     m_rightButton->popup(te->mapToGlobal(QPoint(x,y)));
 }
 
 void KonsoleChild::doneSession(TESession*)

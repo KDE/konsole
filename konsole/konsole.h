@@ -44,7 +44,7 @@
 #undef PACKAGE
 #undef VERSION
 #define PACKAGE "konsole"
-#define VERSION "1.2"
+#define VERSION "1.2.2"
 
 class KRootPixmap;
 class QCheckBox;
@@ -98,6 +98,8 @@ public:
 
   virtual bool processDynamic(const QCString &fun, const QByteArray &data, QCString& replyType, QByteArray &replyData);
   virtual QCStringList functionsDynamic();
+
+  void callReadPropertiesInternal(KConfig *config, int number) { readPropertiesInternal(config,number); }
 
 public slots:
   void activateSession(const int position);
@@ -204,6 +206,8 @@ private slots:
   void biggerFont();
   void smallerFont();
 
+  void slotPrint();
+
 private:
   KSimpleConfig *defaultSession();
   QString newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(), const QString &_term = QString::null, const QString &_icon = QString::null, const QString &_title = QString::null, const QString &_cwd = QString::null);
@@ -290,6 +294,7 @@ private:
   KAction       *m_renameSession;
   KAction       *m_saveProfile;
   KAction       *m_closeSession;
+  KAction       *m_print;
   KAction       *m_quit;
 
   KActionCollection *m_shortcuts;
