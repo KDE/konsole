@@ -455,7 +455,7 @@ void Konsole::makeGUI()
    showToolbar->plug(m_options);
 
    // Scrollbar
-   selectScrollbar = new KSelectAction(i18n("Scro&llbar"), 0, this,
+   selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), 0, this,
                                        SLOT(slotSelectScrollbar()), this);
    QStringList scrollitems;
    scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
@@ -468,7 +468,7 @@ void Konsole::makeGUI()
    m_options->insertSeparator();
 
    // Select font
-   selectFont = new KonsoleFontSelectAction( i18n( "F&ont" ),
+   selectFont = new KonsoleFontSelectAction( i18n( "&Font" ),
           SmallIconSet( "text" ), 0, this, SLOT(slotSelectFont()), this);
    QStringList it;
    it << i18n("&Normal")
@@ -478,7 +478,7 @@ void Konsole::makeGUI()
       << i18n("&Large")
       << i18n("&Huge")
       << ""
-      << i18n("&Linux")
+      << i18n("L&inux")
       << i18n("&Unicode")
       << ""
       << i18n("&Custom...");
