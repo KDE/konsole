@@ -80,7 +80,8 @@ key Return+Alt+NewLine : "\E\r\n"
 # Some desperately try to save the ^H.
 # may be not everyone wants this
 
-key Backspace : "\x08"  # Control H
+key Backspace-Alt : "\x08"  # Control H
+key Backspace+Alt : "\E\x08"  # Escape Control H
 key Delete    : "\x7f"
 
 # These codes are for the VT420pc
@@ -152,8 +153,12 @@ key Space +Control : "\x00"
 
 # some of keys are used by konsole.
 
-key Left  +Shift   : prevSession
-key Right +Shift   : nextSession
+key Left  +Shift -Control  : prevSession
+key Right +Shift -Control  : nextSession
+key Left  +Shift +Control  : moveSessionLeft
+key Right +Shift +Control  : moveSessionRight
+key N +Control +Alt: newSession
+key M +Control +Alt: activateMenu
 key Up    +Shift   : scrollLineUp
 key Prior +Shift   : scrollPageUp
 key Down  +Shift   : scrollLineDown
