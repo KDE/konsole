@@ -873,15 +873,18 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
                                      encodeStat(AltButton     , BITS_Alt       ),
                           &cmd, &txt, &len, &metaspecified ))
 //printf("cmd: %d, %s, %d\n",cmd,txt,len);
-  switch(cmd) // ... and execute if found.
+  if (connected)
   {
-    case CMD_emitClipboard  : gui->emitSelection(false,false); return;
-    case CMD_emitSelection  : gui->emitSelection(true,false); return;
-    case CMD_scrollPageUp   : gui->doScroll(-gui->Lines()/2); return;
-    case CMD_scrollPageDown : gui->doScroll(+gui->Lines()/2); return;
-    case CMD_scrollLineUp   : gui->doScroll(-1             ); return;
-    case CMD_scrollLineDown : gui->doScroll(+1             ); return;
-    case CMD_scrollLock     : onScrollLock(                ); return;
+     switch(cmd) // ... and execute if found.
+     {
+       case CMD_emitClipboard  : gui->emitSelection(false,false); return;
+       case CMD_emitSelection  : gui->emitSelection(true,false); return;
+       case CMD_scrollPageUp   : gui->doScroll(-gui->Lines()/2); return;
+       case CMD_scrollPageDown : gui->doScroll(+gui->Lines()/2); return;
+       case CMD_scrollLineUp   : gui->doScroll(-1             ); return;
+       case CMD_scrollLineDown : gui->doScroll(+1             ); return;
+       case CMD_scrollLock     : onScrollLock(                ); return;
+     }
   }
 
   // revert to non-history when typing
@@ -1056,7 +1059,7 @@ void TEmuVt102::setMode(int m)
   currParm.mode[m] = true;
   switch (m)
   {
-    case MODE_Mouse1000 : gui->setMouseMarks(false);
+    case MODE_Mouse1000 : if (connected) gui->setMouseMarks(false);
     break;
 
     case MODE_AppScreen : screen[1]->clearSelection();
@@ -1075,7 +1078,7 @@ void TEmuVt102::resetMode(int m)
   currParm.mode[m] = false;
   switch (m)
   {
-    case MODE_Mouse1000 : gui->setMouseMarks(true);
+    case MODE_Mouse1000 : if (connected) gui->setMouseMarks(true);
     break;
 
     case MODE_AppScreen : screen[0]->clearSelection();
