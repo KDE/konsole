@@ -48,12 +48,12 @@
 RootPixmap::RootPixmap()
 {
 bgPixmap=0L;
-};
+}
 
 RootPixmap::~RootPixmap()
 {
 if (bgPixmap) delete bgPixmap;
-};
+}
 
 void RootPixmap::readSettings(int num)
 {
@@ -205,7 +205,7 @@ void RootPixmap::readSettings(int num)
     wallpaper = config.readEntry( "Wallpaper", DEFAULT_WALLPAPER );
 
   hasPm = true;
-};
+}
 
 QPixmap *RootPixmap::loadWallpaper()
 {
@@ -297,10 +297,11 @@ void RootPixmap::generateBackground(bool shade, double r, double g, double b)
       break;
 	
     case Flat:
-      if (wpPixmap ) {
+      {
 	delete bgPixmap;
 	bgPixmap = new QPixmap(w, h);
-	bgPixmap->fill( color1 );
+        if (shade) shadeColor(&color1,r,g,b); 
+        bgPixmap->fill( color1 );
       }
       break;
 	
@@ -322,23 +323,18 @@ void RootPixmap::generateBackground(bool shade, double r, double g, double b)
 	  }
 	}
 	pt.end();
+        if (shade) shadePixmap(&tile,r,g,b); 
 
 	delete bgPixmap;
-	bgPixmap = new QPixmap();
-
-	if (! wpPixmap ) {
-	  *bgPixmap = tile;
-	} else {
-	  bgPixmap->resize(w, h);
-	  uint sx, sy = 0;
-	  while (sy < h) {
-	    sx = 0;
-	    while (sx < w) {
-	      bitBlt( bgPixmap, sx, sy, &tile, 0, 0, 8, 8);
-	      sx += 8;
-	    }
-	    sy += 8;
+	bgPixmap = new QPixmap(w,h);
+	uint sx, sy = 0;
+	while (sy < h) {
+	  sx = 0;
+	  while (sx < w) {
+	    bitBlt( bgPixmap, sx, sy, &tile, 0, 0, 8, 8);
+	    sx += 8;
 	  }
+	  sy += 8;
 	}
 	break;
       }
@@ -606,7 +602,7 @@ void RootPixmap::generateBackground(bool shade, double r, double g, double b)
       wpPixmap = 0;
 	
     }
-};
+}
 
 
 void RootPixmap::generateBackground(double r, double  g, double b)
@@ -631,7 +627,13 @@ void RootPixmap::shadePixmap(QPixmap *pm, double r, double  g, double b)
   }
   pm->convertFromImage(qimg);
 
-};
+}
+
+void RootPixmap::shadeColor(QColor *color, double r, double  g, double b)
+{
+//  QRgb qrgb=color->rgb()
+  color->setRgb((int)(color->red()*r),(int)(color->green()*g),(int)(color->blue()*b));
+}
 
 QPixmap *RootPixmap::getPixmap(int x,int y,int w,int h)
 {
@@ -645,7 +647,7 @@ if (h>bgPixmap->height()-y) h=bgPixmap->height()-y;
 QPixmap *pm=new QPixmap(w,h,bgPixmap->depth());
 bitBlt(pm,0,0,bgPixmap,x,y,w,h,Qt::CopyROP);
 return pm;
-};
+}
 
 QPixmap *RootPixmap::getPixmap()
 {

@@ -21,6 +21,7 @@ QPixmap *loadWallpaper(void);
 void generateBackground(bool shade=false, double r=1.0, double g=1.0, double b=1.0);
 void generateBackground(double r,double g, double b);
 void shadePixmap(QPixmap *pm,double r,double g, double b); 
+void shadeColor(QColor *color, double r, double  g, double b);
 
 public:
 RootPixmap();
