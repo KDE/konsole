@@ -152,6 +152,7 @@ TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
   te->setFrameStyle( b_framevis
                      ? QFrame::WinPanel | QFrame::Sunken
                      : QFrame::NoFrame );
+  te->setInsertToPaste( b_inspaste );
   te->setScrollbarLocation(n_scroll);
 
   // construct initial session ///////////////////////////////////////////////
@@ -360,6 +361,8 @@ void TEDemo::makeMenu()
   m_options->insertSeparator();
   m_options->insertItem( i18n("BS sends &DEL"), 4 );
   m_options->setItemChecked(4,b_bshack);
+  m_options->insertItem( i18n("&Insert pastes"), 5 );
+  m_options->setItemChecked(5,b_inspaste);
   m_options->insertSeparator();
   m_options->insertItem( i18n("&Font"), m_font);
   m_options->insertItem( i18n("&Size"), m_size);
@@ -412,6 +415,7 @@ void TEDemo::saveProperties(KConfig* config)
   config->writeEntry("menubar visible",b_menuvis);
   config->writeEntry("has frame",b_framevis);
   config->writeEntry("BS hack",b_bshack);
+  config->writeEntry("insert paste",b_inspaste);
   config->writeEntry("font",n_font);
   config->writeEntry("schema",s_schema);
   config->writeEntry("scrollbar",n_scroll);
@@ -430,6 +434,7 @@ void TEDemo::readProperties(KConfig* config)
   b_menuvis  = config->readBoolEntry("menubar visible",TRUE);
   b_framevis = config->readBoolEntry("has frame",TRUE);
   b_bshack   = config->readBoolEntry("BS hack",TRUE);
+  b_inspaste = config->readBoolEntry("insert paste",FALSE);
   n_font     = MIN(config->readUnsignedNumEntry("font",3),7);
   n_scroll   = MIN(config->readUnsignedNumEntry("scrollbar",SCRRIGHT),2);
   s_schema   = config->readEntry("schema","");
@@ -566,6 +571,10 @@ void TEDemo::opt_menu_activated(int item)
               ((VT102Emulation*)se->getEmulation())->setMode(MODE_BsHack);
             else
               ((VT102Emulation*)se->getEmulation())->resetMode(MODE_BsHack);
+            break;
+    case 5: b_inspaste = !b_inspaste;
+            m_options->setItemChecked(5,b_inspaste);
+            te->setInsertToPaste( b_inspaste );
             break;
     case 8: saveProperties(kapp->getConfig());
             break;

@@ -106,6 +106,7 @@ private:
   bool        b_menuvis;
   bool        b_framevis;
   bool        b_bshack;
+  bool        b_inspaste;
   int         n_font;
   int         n_scroll;
   QString     s_schema;
