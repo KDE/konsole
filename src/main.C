@@ -440,6 +440,10 @@ void TEDemo::readProperties(KConfig* config)
   if (s) {
     s->setFontNo(n_font);
     s->setSchemaNo(ColorSchema::find(s_schema)->numb);
+    if (b_bshack)
+      s->getEmulation()->setMode(MODE_BsHack);
+    else
+      s->getEmulation()->resetMode(MODE_BsHack);      
   } else { fprintf(stderr,"session 1 not found\n"); } // oops
 
   // Default values for startup, changed by "save options". Not used by SM.
