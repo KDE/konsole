@@ -339,12 +339,12 @@ void Konsole::makeMenu()
   m_options->insertSeparator();
 
   // Menubar on/off
-  showMenubar = new KToggleAction ( i18n( "Show &Toolbar" ), 0, this,
+  showMenubar = new KToggleAction ( i18n( "Show &Menubar" ), 0, this,
                                     SLOT( slotToggleMenubar() ), this );
   showMenubar->plug ( m_options );
 
   // Toolbar on/off
-  showToolbar = new KToggleAction ( i18n( "Show &Menubar" ), 0, this,
+  showToolbar = new KToggleAction ( i18n( "Show &Toolbar" ), 0, this,
                                     SLOT( slotToggleToolbar() ), this );
   showToolbar->plug(m_options);
 
