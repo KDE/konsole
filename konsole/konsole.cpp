@@ -1231,22 +1231,24 @@ void Konsole::slotTabSetViewOptions(int mode)
 {
   m_tabViewMode = TabViewModes(mode);
 
-  for(int i = 0; i < tabwidget->count(); i++) {
+  if (tabwidget) {
+    for(int i = 0; i < tabwidget->count(); i++) {
 
-    QWidget *page = tabwidget->page(i);
-    QIconSet icon = iconSetForSession(sessions.at(i));
-    QString title = sessions.at(i)->Title();
+      QWidget *page = tabwidget->page(i);
+      QIconSet icon = iconSetForSession(sessions.at(i));
+      QString title = sessions.at(i)->Title();
 
-    switch(mode) {
-    case ShowIconAndText:
-      tabwidget->changeTab(page, icon, title);
-      break;
-    case ShowTextOnly:
-      tabwidget->changeTab(page, QIconSet(), title);
-      break;
-    case ShowIconOnly:
-      tabwidget->changeTab(page, icon, QString::null);
-      break;
+      switch(mode) {
+        case ShowIconAndText:
+          tabwidget->changeTab(page, icon, title);
+          break;
+        case ShowTextOnly:
+          tabwidget->changeTab(page, QIconSet(), title);
+          break;
+        case ShowIconOnly:
+          tabwidget->changeTab(page, icon, QString::null);
+          break;
+      }
     }
   }
 }
