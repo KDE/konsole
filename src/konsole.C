@@ -1019,17 +1019,25 @@ void Konsole::doneSession(TESession* s, int )
   // to get messed up in rare cases. The following causes delete not to
   // be called from within the signal handler.
 
-  QTimer::singleShot(100,s,SLOT(terminate()));
+  QTimer::singleShot(1,s,SLOT(terminate()));
 
   if (s == se)
   { // pick a new session
-    se = NULL;
-    //    QIntDictIterator<TESession> it( no2session );
-    QPtrDictIterator<KRadioAction> it( session2action);
-    if ( it.current() ) {
-        it.current()->setChecked(true);
-        activateSession();
-    } else
+    se = sessions.first();
+    if ( se )
+    {
+      session2action.find(se)->setChecked(true);
+      //FIXME: this Timer stupidity originated from the connected
+      //       design of Emulations. By this the newly activated
+      //       session might get a Ctrl(D) if the session has be
+      //       terminated by this keypress. A likely problem
+      //       can be found in the CMD_prev/nextSession processing.
+      //       Since the timer approach only works at good weather,
+      //       the whole construction is not suited to what it
+      //       should do. Affected is the TEEmulation::setConnect.
+      QTimer::singleShot(1,this,SLOT(activateSession()));
+    }
+    else
       kapp->quit();
   }
 }

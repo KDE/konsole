@@ -1,6 +1,7 @@
  4 Sep 2000
 - made Shift-(Left|Right) to change sessions
 - restored session selection on tool bar
+- fixed Ctrl-D being propagated to other sessions.
 28 Aug 2000
 - fullscreen mode adjusted to qt-2.1
  2 Jul 2000
