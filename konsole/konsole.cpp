@@ -626,7 +626,8 @@ void Konsole::makeGUI()
       QStringList bellitems;
       bellitems << i18n("System &Bell")
                 << i18n("System &Notification")
-                << i18n("&Visible Bell");
+                << i18n("&Visible Bell")
+                << i18n("N&one");
       selectBell->setItems(bellitems);
       selectBell->plug(m_options);
 

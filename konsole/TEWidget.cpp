@@ -1832,6 +1832,8 @@ void TEWidget::setBellMode(int mode)
 
 void TEWidget::Bell(bool visibleSession, QString message)
 {
+  if (m_bellMode==BELLNONE) return;
+
   if (m_bellMode==BELLSYSTEM) {
     KNotifyClient::beep();
   } else if (m_bellMode==BELLNOTIFY) {

@@ -93,7 +93,7 @@ public:
 
     void setBellMode(int mode);
     int bellMode() { return m_bellMode; }
-    enum { BELLSYSTEM=0, BELLNOTIFY=1, BELLVISUAL=2 };
+    enum { BELLSYSTEM=0, BELLNOTIFY=1, BELLVISUAL=2, BELLNONE=3 };
     void Bell(bool visibleSession, QString message);
 
     void setSelection(const QString &t);
