@@ -25,6 +25,8 @@
 #include <qsocketnotifier.h>
 #include <qtimer.h>
 #include <qstrlist.h>
+#include <qvaluelist.h>
+#include <qarray.h>
 
 class TEPty: public KProcess
 {
@@ -82,6 +84,10 @@ Q_OBJECT
   private:
     void makePty(const char* dev, const char* pgm, QStrList & args, const char* term, int addutmp);
     int  openPty();
+    void appendSendJob(const char* s, int len);
+
+  private slots:
+    void doSendJobs();
 
   private:
 
@@ -93,6 +99,20 @@ Q_OBJECT
     const char *pgm;
     const char *term;
     int addutmp;
+
+    struct SendJob {
+      SendJob() {}
+      SendJob(const char* b, int len) {
+        buffer.duplicate(b,len);
+        start = 0;
+        length = len;
+      }
+      QArray<char> buffer;
+      int start;
+      int length;
+    };
+    QValueList<SendJob> pendingSendJobs;
+    QTimer* pSendJobTimer;
 
 friend int chownpty(int,int);
 };

@@ -607,7 +607,7 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
 /*!
     Create an instance.
 */
-TEPty::TEPty()
+TEPty::TEPty() : pSendJobTimer(NULL)
 { 
   memset(&wsize, 0, sizeof(struct winsize));
   fd = openPty();
@@ -645,19 +645,63 @@ int TEPty::commSetupDoneC()
 /*! sends a character through the line */
 void TEPty::send_byte(char c)
 {
-  write(fd,&c,1);
+  send_bytes(&c,1);
 }
 
 /*! sends a 0 terminated string through the line */
 void TEPty::send_string(const char* s)
 {
-  write(fd,s,strlen(s));
+  send_bytes(s,strlen(s));
 }
+
+void TEPty::doSendJobs() {
+  int written;
+  while(!pendingSendJobs.isEmpty()) {
+    SendJob& job = pendingSendJobs.first();
+    written = write(fd, job.buffer.data() + job.start, job.length);
+    if (written==-1) {
+      if ( errno!=EAGAIN && errno!=EINTR )
+        pendingSendJobs.remove(pendingSendJobs.begin());
+      return;
+    }else {
+      job.start += written;
+      job.length -= written;
+      if ( job.length == 0 )
+        pendingSendJobs.remove(pendingSendJobs.begin());
+    }
+  }
+  if (pSendJobTimer)
+    pSendJobTimer->stop();
+}
+
+void TEPty::appendSendJob(const char* s, int len)
+{
+  pendingSendJobs.append(SendJob(s,len));
+  if (!pSendJobTimer) {
+    pSendJobTimer = new QTimer(this);
+    connect(pSendJobTimer, SIGNAL(timeout()), this, SLOT(doSendJobs()) );
+  }
+  pSendJobTimer->start(0);
+}  
 
 /*! sends len bytes through the line */
 void TEPty::send_bytes(const char* s, int len)
 {
-  write(fd,s,len);
+  if (!pendingSendJobs.isEmpty()) {
+    appendSendJob(s,len);
+  }else {
+    int written;
+    do {
+      written = write(fd,s,len);
+      if (written==-1) {
+        if ( errno==EAGAIN || errno==EINTR )
+          appendSendJob(s,len);
+        return;
+      }
+      s += written;
+      len -= written;
+    } while(len>0);
+  }
 }
 
 /*! indicates that a block of data is received */
