@@ -214,6 +214,7 @@ extern "C" int kdemain(int argc, char* argv[])
   KCmdLineArgs *qtargs = KCmdLineArgs::parsedArgs("qt");
   has_noxft = !args->isSet("xft");
   TEWidget::setAntialias( !has_noxft );
+  TEWidget::setStandalone( true );
 
   KApplication a;
   KImageIO::registerFormats(); // add io for additional image formats

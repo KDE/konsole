@@ -99,6 +99,7 @@
 
 // static
 bool TEWidget::s_antialias = true;
+bool TEWidget::s_standalone = false;
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
@@ -1738,7 +1739,7 @@ bool TEWidget::event( QEvent *e )
     KKey key( ke );
     int keyCodeQt = key.keyCodeQt();
 
-    if ( ke->state() == Qt::ControlButton )
+    if ( !standalone() && (ke->state() == Qt::ControlButton) )
     {
       ke->accept();
       return true;

@@ -1971,8 +1971,37 @@ void Konsole::slotConfigureNotifications()
 
 void Konsole::slotConfigureKeys()
 {
-   KKeyDialog::configure(m_shortcuts);
-   m_shortcuts->writeShortcutSettings();
+  KKeyDialog::configure(m_shortcuts);
+  m_shortcuts->writeShortcutSettings();
+   
+  QStringList ctrlKeys;
+
+  for ( uint i = 0; i < m_shortcuts->count(); i++ )
+  {
+    KShortcut shortcut = (m_shortcuts->action( i ))->shortcut();
+    for( uint j = 0; j < shortcut.count(); j++)
+    {
+      const KKey &key = shortcut.seq(j).key(0); // First Key of KeySequence
+      if (key.modFlags() == KKey::CTRL)
+        ctrlKeys += key.toString();
+    }
+  }
+
+  if (!ctrlKeys.isEmpty())
+  {
+    ctrlKeys.sort();
+    KMessageBox::informationList( this, i18n( "You have chosen one or more Ctrl+<key> combinations to be used as shortcut. "
+                                               "As a result such key combinations will no longer be passed to the command shell "
+                                               "or to applications that run inside Konsole. "
+                                               "This can have the unintended consequence that functionality that would otherwise be "
+                                               "bound to these key combinations is no longer accessible."
+                                               "\n\n"
+                                               "You may wish to reconsider your choice of keys and use Alt+Ctrl+<key> or Ctrl+Shift+<key> instead."
+                                               "\n\n"
+                                               "You are currently using the following Ctrl-<key> combinations:" ), 
+                                               ctrlKeys,
+                                               i18n( "Choice Of Shortcut Keys" ), 0);
+  }
 }
 
 void Konsole::slotConfigure()

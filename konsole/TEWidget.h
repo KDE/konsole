@@ -102,6 +102,8 @@ public:
     void setMouseMarks(bool on);
     static void setAntialias( bool enable ) { s_antialias = enable; }
     static bool antialias()                 { return s_antialias;   }
+    static void setStandalone( bool standalone ) { s_standalone = standalone; }
+    static bool standalone()                { return s_standalone;   }
 
     void setTerminalSizeHint(bool on) { terminalSizeHint=on; }
     bool isTerminalSizeHint() { return terminalSizeHint; }
@@ -265,7 +267,8 @@ private:
     bool possibleTripleClick;  // is set in mouseDoubleClickEvent and deleted
                                // after QApplication::doubleClickInterval() delay
 
-    static bool s_antialias; // do we antialias or not
+    static bool s_antialias;   // do we antialias or not
+    static bool s_standalone;  // are we part of a standalone konsole?
 
     QFrame *mResizeWidget;
     QLabel *mResizeLabel;
