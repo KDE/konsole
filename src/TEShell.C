@@ -221,29 +221,34 @@ int Shell::openShell()
   }
 #endif
 
-  // no UNIX 98 PTY's, fall back to old style ptys
-
+#if defined(_SCO_DS) || defined(__USLC__) /* SCO OSr5 and UnixWare */
   if (ptyfd < 0)
-  { char *s3, *s4;
-    static char ptyc3[] = "pqrstuvwxyzabcde";
-    static char ptyc4[] = "0123456789abcdef";
-    strcpy(ptynam,"/dev/ptyxx");
-    strcpy(ttynam,"/dev/ttyxx");
-    for (s3 = ptyc3; *s3 != 0; s3++) 
-    {
-      for (s4 = ptyc4; *s4 != 0; s4++) 
-      {
-        ptynam[8] = ttynam[8] = *s3;
-        ptynam[9] = ttynam[9] = *s4;
+  { for (int idx = 0; idx < 256; idx++)
+    { sprintf(ptynam, "/dev/ptyp%d", idx);
+      sprintf(ttynam, "/dev/ttyp%d", idx);
+      if (access(ttynam, F_OK) < 0) { idx = 256; break; }
+      if ((ptyfd = open (ptynam, O_RDWR)) >= 0)
+      { if (access (ttynam, R_OK|W_OK) == 0) break;
+        close(ptyfd); ptyfd = -1;
+      }
+    }
+  }
+#endif
+
+  if (ptyfd < 0) // Linux, FIXME: Trouble on other systems?
+  { for (char* s3 = "pqrstuvwxyzabcde"; *s3 != 0; s3++) 
+    { for (char* s4 = "0123456789abcdef"; *s4 != 0; s4++) 
+      { sprintf(ptynam,"/dev/pty%c%c",*s3,*s4);
+        sprintf(ttynam,"/dev/tty%c%c",*s3,*s4);
         if ((ptyfd = open(ptynam,O_RDWR)) >= 0) 
-        {
-          if (geteuid() == 0 || access(ttynam,R_OK|W_OK) == 0) break;
+        { if (geteuid() == 0 || access(ttynam,R_OK|W_OK) == 0) break;
           close(ptyfd); ptyfd = -1;
         }
       }
       if (ptyfd >= 0) break;
     }
   }
+
   if (ptyfd < 0)
   {
     //FIXME: handle more gracefully.

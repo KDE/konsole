@@ -43,7 +43,7 @@ int main (int argc, char *argv[])
   gid_t         gid;
   uid_t         uid;
   mode_t        mod;
-  char          tty[11];
+  char*         tty;
 
   // check preconditions ///////////////////////////////////////////////////
 
@@ -92,12 +92,13 @@ int main (int argc, char *argv[])
   close(PTY_FILENO);
 
   // matches /dev/pty??
-  if (strlen(pty) != 10 || strncmp(pty,"/dev/pty",8))
+  if (strlen(pty) < 8 || strncmp(pty,"/dev/pty",8))
   {
     fprintf(stderr,"%s: determined a strange device name `%s'.\n",argv[0],pty);
     return 1; //FAIL
   }
 
+  tty = malloc(strlen(pty) + 1);
   strcpy(tty,"/dev/tty");
   strcat(tty,pty+8);
 
