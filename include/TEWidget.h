@@ -107,6 +107,7 @@ protected:
 
     void focusInEvent( QFocusEvent * );
     void focusOutEvent( QFocusEvent * );
+    bool focusNextPrevChild( bool next );
     // Dnd
     void dragEnterEvent(QDragEnterEvent* event);
     void dropEvent(QDropEvent* event);

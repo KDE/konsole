@@ -110,7 +110,6 @@ konsolePart::konsolePart(QWidget *parentWidget, const char *widgetName, QObject 
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
   eargs.append(shell);
   te = new TEWidget(parentWidget,widgetName);
-  te->setFocusPolicy(QWidget::ClickFocus);
   te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
   te->setScrollbarLocation(TEWidget::SCRRIGHT);
   setWidget(te);

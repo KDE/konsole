@@ -824,6 +824,14 @@ void TEWidget::focusOutEvent( QFocusEvent * )
     // do nothing, to prevent repainting
 }
 
+bool TEWidget::focusNextPrevChild( bool next )
+{
+  if (next)
+    return false; // This disables changing the active part in konqueror
+                  // when pressing Tab
+  return QFrame::focusNextPrevChild( next );
+}
+
 
 int TEWidget::charClass(char ch) const
 {
