@@ -326,6 +326,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
   // Init DnD ////////////////////////////////////////////////////////////////
   setAcceptDrops(true); // attempt
   dragInfo.state = diNone;
+  selBound.start.setX(-1);
 /*  m_drop = new KPopupMenu(this);
   m_drop->insertItem( i18n("Paste"), 0);
   m_drop->insertItem( i18n("cd"),    1);
@@ -797,6 +798,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
         ev->y() > dragInfo.start.y() + 4 || ev->y() < dragInfo.start.y() - 4) {
       // we've left the drag square, we can start a real drag operation now
       emit clearSelectionSignal();
+      selBound.start.setX(-1);
       doDrag();
     }
     return;
@@ -972,6 +974,7 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
     if(dragInfo.state == diPending)
     {
       // We had a drag event pending but never confirmed.  Kill selection
+      selBound.start.setX(-1);
       emit clearSelectionSignal();
     }else
     {
@@ -1491,7 +1494,8 @@ bool TEWidget::isTargetSelected(int x, int y)
     selBound.end = tempPoint;
   }
 
-  if ( ((y<selBound.start.y()) || (y==selBound.start.y() && x<selBound.start.x())) ||
+  if ( (selBound.start.x()==-1) ||
+       ((y<selBound.start.y()) || (y==selBound.start.y() && x<selBound.start.x())) ||
        ((y>selBound.end.y())   || (y==selBound.end.y()   && x>selBound.end.x())) )
     return false;
 
