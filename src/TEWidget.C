@@ -177,8 +177,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   
   setColorTable(base_color_table); // init color table
 
-  setFocusPolicy(QWidget::StrongFocus);
-  setFocus();
+  if ( parent ) parent->installEventFilter( this ); //FIXME: see below
 }
 
 //FIXME: make proper destructor
@@ -736,55 +735,66 @@ void TEWidget::onClearSelection()
   emit clearSelectionSignal();
 }
 
-// focusIn/OutEvent are overloaded also to
-// suppress the default redraw when focus
-// is changed. This is to reduce flicker.
-
-void TEWidget::focusInEvent(QFocusEvent*)
-{
-  // do not clear selection while having the focus
-  QObject::disconnect( (QObject*)cb, SIGNAL(dataChanged()), 
-  this, SLOT(onClearSelection()) );
-}
-
-void TEWidget::focusOutEvent(QFocusEvent*)
-{
-  // clear selection when other program changes the clipboard
-  QObject::connect( (QObject*)cb, SIGNAL(dataChanged()), 
-  this, SLOT(onClearSelection()) );
-}
-
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /*                                Keyboard                                   */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TEWidget::keyPressEvent(QKeyEvent* ke)
+//FIXME: an `eventFilter' has been installed instead of a `keyPressEvent'
+//       due to a bug in `QT' or the ignorance of the author to prevent
+//       repaintevents being emitted to the screen whenever one leaves
+//       or reenters the screen to/from another application.
+//
+//   Troll says you need to change focusInEvent() and focusOutEvent(),
+//   which would also let you have an in-focus cursor and an out-focus
+//   cursor like xterm does.
+
+bool TEWidget::eventFilter( QObject *, QEvent *e )
 {
-  actSel=0; // Key stroke implies a screen update, so TEWidget won't
-            // know where the current selection is.
-  switch (ke->state() | (ke->key() << 8))
+  if ( e->type() == Event_KeyPress )
+  { QKeyEvent* ke = (QKeyEvent*)e;
+
+    actSel=0; // Key stroke implies a screen update, so TEWidget won't
+              // know where the current selection is.
+ 
+    switch (ke->state() | (ke->key() << 8))
+    {
+      case ShiftButton|(Key_PageUp   << 8) : 
+           scrollbar->setValue(scrollbar->value()-lines/2);
+           break;
+      case ShiftButton|(Key_PageDown << 8) :
+           scrollbar->setValue(scrollbar->value()+lines/2);
+           break;
+      case ShiftButton|(Key_Up       << 8) : 
+           scrollbar->setValue(scrollbar->value()-1);
+           break;
+      case ShiftButton|(Key_Down     << 8) :
+           scrollbar->setValue(scrollbar->value()+1);
+           break;
+      case ShiftButton|(Key_Insert   << 8) :
+           emitSelection();
+           break;
+      default :
+           emit keyPressedSignal(ke); // expose
+           break;
+    }
+    return TRUE; // accept event
+  } 
+  else
   {
-    case ShiftButton|(Key_PageUp   << 8) : 
-         scrollbar->setValue(scrollbar->value()-lines/2);
-         break;
-    case ShiftButton|(Key_PageDown << 8) :
-         scrollbar->setValue(scrollbar->value()+lines/2);
-         break;
-    case ShiftButton|(Key_Up       << 8) : 
-         scrollbar->setValue(scrollbar->value()-1);
-         break;
-    case ShiftButton|(Key_Down     << 8) :
-         scrollbar->setValue(scrollbar->value()+1);
-         break;
-    case ShiftButton|(Key_Insert   << 8) :
-         emitSelection();
-         break;
-    default :
-         emit keyPressedSignal(ke); // expose
-         break;
+    if ( e->type() == Event_Enter )
+    {
+        QObject::disconnect( (QObject*)cb, SIGNAL(dataChanged()), 
+        this, SLOT(onClearSelection()) );
+    }
+    if ( e->type() == Event_Leave )
+    {
+        QObject::connect( (QObject*)cb, SIGNAL(dataChanged()), 
+        this, SLOT(onClearSelection()) );
+    }
   }
+  return FALSE; // standard event processing
 }
 
 /* ------------------------------------------------------------------------- */
