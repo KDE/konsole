@@ -3111,7 +3111,7 @@ void Konsole::slotPrint()
 {
   KPrinter printer;
   printer.addDialogPage(new PrintSettings());
-  if (printer.setup(this))
+  if (printer.setup(this, i18n("Print %1").arg(se->Title())))
   {
     printer.setFullPage(false);
     printer.setCreator("Konsole");
