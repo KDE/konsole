@@ -543,8 +543,9 @@ ca* TEScreen::getCookedImage()
   << "  histcursor=" << histCursor << endl;*/
 
   int x,y;
-  ca* merged = (ca*)malloc(lines*columns*sizeof(ca));
+  ca* merged = (ca*)malloc((lines*columns+1)*sizeof(ca));
   ca dft(' ',DEFAULT_FORE_COLOR,DEFAULT_BACK_COLOR,DEFAULT_RENDITION);
+  merged[lines*columns] = dft;
 
 //  kdDebug(1211) << "InGetCookedImage" << endl;
   for (y = 0; (y < lines) && (y < (hist->getLines()-histCursor)); y++)
