@@ -119,20 +119,16 @@ void Shell::makeShell(const char* dev, char* argv[],
   
   setuid(getuid()); setgid(getgid());  // drop privileges
 
-  if (term && term[0])
-  {
-    t = (char*)malloc(6+strlen(term));
-    strcpy(t,"TERM="); strcat(t,term);
-    putenv(t);
-    free(t);
-  }
+  if (term && term[0]) 
+    setenv("TERM",term,1);             // export TERM=term
 
   f = argv[0];
-  if ( login_shell ) {
-      t = strrchr( argv[0], '/' );
-      t = strdup(t);
-      *t = '-';
-      argv[0] = t;
+  if ( login_shell )                   // see sh(1)
+  {
+    t = strrchr( argv[0], '/' );
+    t = strdup(t);
+    *t = '-';
+    argv[0] = t;
   }
   execvp (f, argv);
   perror("exec failed");
