@@ -20,6 +20,8 @@
 #include <stdio.h>
 #include <qtextcodec.h>
 
+//
+
 #define MODE_AppScreen (MODES_SCREEN+0)
 #define MODE_AppCuKeys (MODES_SCREEN+1)
 #define MODE_AppKeyPad (MODES_SCREEN+2)

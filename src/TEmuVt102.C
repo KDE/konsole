@@ -959,6 +959,9 @@ void VT102Emulation::onKeyPress( QKeyEvent* ev )
 
 //printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().length(),ev->text().length()?ev->text().ascii()[0]:0);
 
+  if (ev->text().length() == 1 && (ev->state() & AltButton))
+    sendString("\033"); // ESC, this is the ALT prefix
+
   key = ev->key();
   if (0x1000 <= key && key <= 0x10ff)
   switch (key)
@@ -1013,8 +1016,6 @@ void VT102Emulation::onKeyPress( QKeyEvent* ev )
     //       2) preceed the keycode by ESC (what we do here)
     //       3) set the 8th bit of each char in string
     //          (which may fail for 8bit (european) characters.
-    if (ev->text().length() == 1 && (ev->state() & AltButton))
-      sendString("\033"); // ESC, this is the ALT prefix
     QCString s = codec->fromUnicode(ev->text()); // encode for application
     emit sndBlock(s.data(),s.length());          // we may well have s.length() > 1 
     return;
