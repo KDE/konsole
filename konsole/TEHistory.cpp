@@ -230,7 +230,8 @@ void HistoryScrollBuffer::addCells(ca a[], int count)
      m_buffFilled = true;
     }
 
-  if (m_nbLines < m_maxNbLines) ++m_nbLines;
+  // FIXME: See BR96605
+  if (m_nbLines < m_maxNbLines - 1) ++m_nbLines;
 
   // m_histBuffer.remove(m_arrayIndex); // not necessary
   m_histBuffer.insert(m_arrayIndex, newLine);
