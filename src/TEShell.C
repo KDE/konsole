@@ -52,6 +52,7 @@
 
 #include "TEShell.h"
 #include "TEShell.moc"
+#include <qstring.h>
 
 #define HERE fprintf(stdout,"%s(%d): here\n",__FILE__,__LINE__)
 
@@ -132,7 +133,10 @@ void Shell::makeShell(const char* dev, char* argv[],
   setuid(getuid()); setgid(getgid());  // drop privileges
 
   if (term && term[0]) 
-    setenv("TERM",term,1);             // export TERM=term
+  {
+    putenv((QString("TERM=") + term).data()); // export TERM=term
+//  setenv("TERM",term,1); // this is not available with Solaris
+  }
 
   f = argv[0];
   if ( login_shell )                   // see sh(1)

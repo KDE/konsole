@@ -1,5 +1,7 @@
 09 Nov 1998
 - minor bugs fixed.
+- putenv/setenv - prefered Solaris compatibility over
+  a workaround for some broken gcc/clib version
 04 Nov 1998
 - minor bug fixes integrated
 - xterm color schema added

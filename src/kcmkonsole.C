@@ -192,10 +192,14 @@ Tripel Tripel::linear(const Tripel &p0, const Tripel &p1, float f)
 
 Tripel Tripel::togray(float f)
 {
-  // I've guessed these factors. They've to total to 1.0
-  Tripel rp = Tripel::linear(Tripel(0.25*r),Tripel(r,0,0),f);
-  Tripel bp = Tripel::linear(Tripel(0.35*b),Tripel(0,b,0),f);
-  Tripel gp = Tripel::linear(Tripel(0.45*g),Tripel(0,0,g),f);
+  // I've used the physiological luminescense factors here.
+  // They appear not right with the phosphor of my monitor.
+  // May be i should have set them all to 1/3, but i want
+  // to get different sorts of gray for the colors also.
+  // If your' tuning, note that they have to total to 1.
+  Tripel rp = Tripel::linear(Tripel(0.37*r),Tripel(r,0,0),f);
+  Tripel bp = Tripel::linear(Tripel(0.39*b),Tripel(0,b,0),f);
+  Tripel gp = Tripel::linear(Tripel(0.24*g),Tripel(0,0,g),f);
   return Tripel::add( rp, Tripel::add( bp, gp ));
 }
 
@@ -228,13 +232,13 @@ setText(pa&&*pa?pa+1:"/* build-in schema */");
 }
 
 void ColorTable::paintEvent(QPaintEvent* e)
-{ int x,y;
+{
   // in the moment we don't care and paint the whole bunch
   // we don't care about all the tricks, also.
   QPainter paint;
   paint.begin( this );
   if (schema)
-  for (y = 0; y < BASE_COLORS-2; y++)
+  for (int y = 0; y < BASE_COLORS-2; y++)
   {
     QRect base = frameRect();
     int top = base.height()*(y+0)/(BASE_COLORS-2);
@@ -247,16 +251,6 @@ void ColorTable::paintEvent(QPaintEvent* e)
     Tripel t3 = Tripel::add( t0.scale(scale), t2 );
     Tripel t4 = t3.togray(color);
     paint.fillRect(rect, t4.color() );
-/*
-    for (x = 0; x < TABLE_COLORS; x++)
-    {
-      int bgn = base.width()*(x+0)/TABLE_COLORS;
-      int end = base.width()*(x+1)/TABLE_COLORS;
-      QRect rect(QPoint((3*bgn+end)/4,(3*top+bot)/4),
-                 QPoint((3*end+bgn)/4,(3*bot+top)/4));
-      paint.fillRect(rect, schema->table[x].color );
-    }
-*/
   }
 //drawFrame(&paint);
   paint.end();

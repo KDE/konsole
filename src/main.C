@@ -394,7 +394,8 @@ void TEDemo::setFont(int fontno)
   if ( !f.exactMatch() )
     KMsgBox::message
     ( this,
-      "Error", QString("Font '") + fonts[fontno] + "' not found.",
+      "Error", QString("Font '") + fonts[fontno] + "' not found.\n"
+      "Check README.linux.console for help.",
       KMsgBox::EXCLAMATION );
   else
   {
@@ -413,8 +414,8 @@ void TEDemo::opt_menu_activated(int item)
             m_options->setItemChecked(1,b_menuvis);
             if (b_menuvis) menubar->show(); else menubar->hide();
             updateRects();
-	    if (!b_menuvis)
-	    {
+	          if (!b_menuvis)
+	          {
               setCaption("Use the right mouse button to bring back the menu");
               QTimer::singleShot(5000,this,SLOT(setHeader()));
             }
