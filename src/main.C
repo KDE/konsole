@@ -707,7 +707,9 @@ void TEDemo::runSession(TESession* s)
   int session_no = (int)session2no.find(s);
   activateSession(session_no);
 
-  s->run();
+  // give some time to get through the
+  // resize events before starting up.
+  QTimer::singleShot(100,s,SLOT(run()));
 }
 
 void TEDemo::addSession(TESession* s)

@@ -46,10 +46,9 @@ public:
   void setFontNo(int fn);
   void setTitle(const char* title);
 
-  void run();
-
 public slots:
 
+  void run();
   void done(int status);
   void terminate();
 
