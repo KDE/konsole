@@ -3410,7 +3410,7 @@ void Konsole::detachSession(TESession* _se) {
   disconnect( _se,SIGNAL(renameSession(TESession*,const QString&)), this,SLOT(slotRenameSession(TESession*,const QString&)) );
 
   ColorSchema* schema = colors->find(_se->schemaNo());
-  KonsoleChild* konsolechild = new KonsoleChild(_se,se_widget->Columns(),se_widget->Lines(),n_scroll,
+  KonsoleChild* konsolechild = new KonsoleChild(this,_se,se_widget->Columns(),se_widget->Lines(),n_scroll,
                                                 b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame,
                                                 schema,se_widget->font(),se_widget->bellMode(),se_widget->wordCharacters(),
                                                 se_widget->blinkingCursor(),se_widget->ctrlDrag(),se_widget->isTerminalSizeHint(),

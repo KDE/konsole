@@ -31,7 +31,7 @@ class KonsoleChild : public KMainWindow
 { Q_OBJECT
 
 public:
-  KonsoleChild(TESession*, int columns, int lines, int scrollbar_location, int frame_style,
+  KonsoleChild(Konsole* parent, TESession*, int columns, int lines, int scrollbar_location, int frame_style,
                ColorSchema* schema,QFont font, int bellmode, QString wordcharacters,
                bool blinkingCursor, bool ctrlDrag, bool terminalSizeHint, int lineSpacing,
 	       bool cutToBeginningOfLine, bool allowResize, bool fixedSize);

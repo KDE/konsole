@@ -18,14 +18,15 @@
 #include <qwmatrix.h>
 
 #include "konsole_child.h"
+#include "konsole.h"
 #include <netwm.h>
 
 extern bool argb_visual; // declared in main.cpp and konsole_part.cpp
 
-KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar_location, int frame_style,
+KonsoleChild::KonsoleChild(Konsole* parent, TESession* _se, int columns, int lines, int scrollbar_location, int frame_style,
                            ColorSchema* _schema,QFont font,int bellmode,QString wordcharacters,
                            bool blinkingCursor, bool ctrlDrag, bool terminalSizeHint, int lineSpacing,
-                           bool cutToBeginningOfLine, bool _allowResize, bool _fixedSize):KMainWindow()
+                           bool cutToBeginningOfLine, bool _allowResize, bool _fixedSize):KMainWindow(parent)
 ,session_terminated(false)
 ,wallpaperSource(0)
 ,se(_se)
