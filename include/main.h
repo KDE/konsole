@@ -134,6 +134,7 @@ private:
   QString     dropText;
   QSize       defaultSize;
   int         curr_schema; // current schema no
+  QFont       defaultFont;
 
   QStrList args;
 
