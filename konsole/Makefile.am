@@ -37,7 +37,7 @@ konsole_la_SOURCES = TEPty.cpp BlockArray.cpp main.cpp konsole.cpp schema.cpp se
      konsole_wcwidth.cpp konsolebookmarkhandler.cpp konsolebookmarkmenu.cpp konsole_child.cpp \
      zmodem_dialog.cpp printsettings.cpp
 konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
-konsole_la_LIBADD = $(LIB_KDEUI) $(LIB_KIO) $(LIB_KDEPRINT) $(LIBUTIL) $(XTESTLIB)
+konsole_la_LIBADD = $(LIB_KDEUI) $(LIB_KIO) $(LIB_KDEPRINT) $(LIBUTIL) $(XTESTLIB) $(LIB_XRENDER)
 
 # kcmkonsole_SOURCES = kcmkonsole.cpp schema.cpp
 # kcmkonsole_LDADD   = $(LIB_KDEUI)

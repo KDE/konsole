@@ -29,7 +29,19 @@
 #include <kimageio.h>
 #include <kdebug.h>
 #include <kstandarddirs.h>
+
+#include <config.h>
+
 #include "konsole.h"
+
+#if defined(Q_WS_X11) && defined(HAVE_XRENDER) && QT_VERSION >= 0x030300
+# define COMPOSITE
+#endif
+
+#ifdef COMPOSITE
+# include <X11/Xlib.h>
+# include <X11/extensions/Xrender.h>
+#endif
 
 static const char description[] =
   I18N_NOOP("X terminal for use with KDE.");
@@ -49,7 +61,8 @@ static KCmdLineOptions options[] =
    { "notoolbar",       I18N_NOOP("Do not display tab bar"), 0 },
    { "noframe",         I18N_NOOP("Do not display frame"), 0 },
    { "noscrollbar",     I18N_NOOP("Do not display scrollbar"), 0 },
-   { "noxft",           I18N_NOOP("Do not use XFT (Anti-Aliasing)"), 0 },
+   { "noxft",           I18N_NOOP("Do not use Xft (Anti-Aliasing)"), 0 },
+   { "noargb",          I18N_NOOP("Do not use the ARGB32 visual (Transparency)"), 0 },
    { "vt_sz CCxLL",     I18N_NOOP("Terminal size in columns x lines"), 0 },
    { "noresize",        I18N_NOOP("Terminal size is fixed"), 0 },
    { "type <type>",     I18N_NOOP("Open the given session type instead of the default shell"), 0 },
@@ -72,6 +85,8 @@ static bool login_shell = false;
 static bool full_script = false;
 static bool auto_close = true;
 static bool fixed_size = false;
+
+bool argb_visual = false;
 
 const char *konsole_shell(QStrList &args)
 {
@@ -216,7 +231,48 @@ extern "C" int kdemain(int argc, char* argv[])
   TEWidget::setAntialias( !has_noxft );
   TEWidget::setStandalone( true );
 
+#ifdef COMPOSITE
+  char *display = 0;
+  if ( qtargs->isSet("display"))
+    display = qtargs->getOption( "display" ).data();
+
+  Display *dpy = XOpenDisplay( display );
+  if ( !dpy ) {
+    kdError() << "cannot connect to X server " << display << endl;
+    exit( 1 );
+  }
+
+  int screen = DefaultScreen( dpy );
+  Colormap colormap = 0;
+  Visual *visual = 0;
+  int event_base, error_base;
+
+  if ( args->isSet("argb") && XRenderQueryExtension( dpy, &event_base, &error_base ) ) 
+  {
+    int nvi;
+    XVisualInfo templ;
+    templ.screen  = screen;
+    templ.depth   = 32;
+    templ.c_class = TrueColor;
+    XVisualInfo *xvi = XGetVisualInfo( dpy, VisualScreenMask | VisualDepthMask
+		  | VisualClassMask, &templ, &nvi );
+
+    for ( int i = 0; i < nvi; i++ ) {
+      XRenderPictFormat *format = XRenderFindVisualFormat( dpy, xvi[i].visual );
+      if ( format->type == PictTypeDirect && format->direct.alphaMask ) {
+        visual = xvi[i].visual;
+        colormap = XCreateColormap( dpy, RootWindow( dpy, screen ), visual, AllocNone );
+        argb_visual = true;
+        break;
+      }
+    }
+  }
+
+  KApplication a( dpy, Qt::HANDLE( visual ), Qt::HANDLE( colormap ) );
+#else
   KApplication a;
+#endif
+
   KImageIO::registerFormats(); // add io for additional image formats
   //2.1 secs
 

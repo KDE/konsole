@@ -50,6 +50,9 @@
 #include <kconfig.h>
 #include <kaction.h>
 
+// We can't use the ARGB32 visual when embedded in another application
+bool argb_visual = false;
+
 extern "C"
 {
   /**

@@ -41,6 +41,8 @@ public:
     TEWidget(QWidget *parent=0, const char *name=0);
     virtual ~TEWidget();
 
+    void setBlendColor(const QRgb color) { blend_color = color; }
+
     void setDefaultBackColor(const QColor& color);
     QColor getDefaultBackColor();
 
@@ -297,6 +299,8 @@ private:
     int m_cursorCol;
     bool m_isIMEdit;
     bool m_isIMSel;
+
+    QRgb blend_color;
     
 private slots:
     void drop_menu_activated(int item);

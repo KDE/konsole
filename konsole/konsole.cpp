@@ -134,6 +134,8 @@ Time to start a requirement list.
 #define POPUP_NEW_SESSION_ID 121
 #define POPUP_SETTINGS_ID 212
 
+extern bool argb_visual; // declared in main.cpp and konsole_part.cpp
+
 // KonsoleFontSelectAction is now also used for selectSize!
 class KonsoleFontSelectAction : public KSelectAction {
 public:
@@ -3303,11 +3305,16 @@ void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
 
   if (s->useTransparency()) {
 //        KONSOLEDEBUG << "Setting up transparency" << endl;
-    if (!rootxpms[tewidget])
-      rootxpms.insert( tewidget, new KRootPixmap(tewidget) );
-    rootxpms[tewidget]->setFadeEffect(s->tr_x(), QColor(s->tr_r(), s->tr_g(), s->tr_b()));
-    rootxpms[tewidget]->start();
-    rootxpms[tewidget]->repaint(true);
+    if (!argb_visual) {
+      if (!rootxpms[tewidget])
+        rootxpms.insert( tewidget, new KRootPixmap(tewidget) );
+      rootxpms[tewidget]->setFadeEffect(s->tr_x(), QColor(s->tr_r(), s->tr_g(), s->tr_b()));
+      rootxpms[tewidget]->start();
+      rootxpms[tewidget]->repaint(true);
+    } else {
+      tewidget->setBlendColor(qRgba(s->tr_r(), s->tr_g(), s->tr_b(), int(s->tr_x() * 255)));
+      tewidget->setErasePixmap( QPixmap() ); // make sure any background pixmap is unset
+    }
   } else {
 //        KONSOLEDEBUG << "Stopping transparency" << endl;
       if (rootxpms[tewidget]) {
@@ -3315,6 +3322,7 @@ void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
         rootxpms.remove(tewidget);
       }
        pixmap_menu_activated(s->alignment(), tewidget);
+       tewidget->setBlendColor(qRgba(0, 0, 0, 0xff));
   }
 
   tewidget->setColorTable(s->table());

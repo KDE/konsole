@@ -20,6 +20,8 @@
 #include "konsole_child.h"
 #include <netwm.h>
 
+extern bool argb_visual; // declared in main.cpp and konsole_part.cpp
+
 KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar_location, int frame_style,
                            ColorSchema* _schema,QFont font,int bellmode,QString wordcharacters,
                            bool blinkingCursor, bool ctrlDrag, bool terminalSizeHint, int lineSpacing,
@@ -137,10 +139,16 @@ void KonsoleChild::setSchema(ColorSchema* _schema) {
   if (schema) {
     te->setColorTable(schema->table()); //FIXME: set twice here to work around a bug
     if (schema->useTransparency()) {
-      if (!rootxpm)
-        rootxpm = new KRootPixmap(te);
-      rootxpm->setFadeEffect(schema->tr_x(), QColor(schema->tr_r(), schema->tr_g(), schema->tr_b()));
-      rootxpm->start();
+      if (!argb_visual) {
+        if (!rootxpm)
+          rootxpm = new KRootPixmap(te);
+        rootxpm->setFadeEffect(schema->tr_x(), QColor(schema->tr_r(), schema->tr_g(), schema->tr_b()));
+        rootxpm->start();
+      } else {
+        te->setBlendColor(qRgba(schema->tr_r(), schema->tr_g(),
+                                schema->tr_b(), int(schema->tr_x() * 255)));
+        te->setErasePixmap( QPixmap() ); // make sure any background pixmap is unset
+      } 
     } else {
       if (rootxpm) {
         rootxpm->stop();
@@ -148,6 +156,7 @@ void KonsoleChild::setSchema(ColorSchema* _schema) {
         rootxpm=0;
       }
       pixmap_menu_activated(schema->alignment(),schema->imagePath());
+      te->setBlendColor(qRgba(0, 0, 0, 0xff));
     }
     te->setColorTable(schema->table());
   }

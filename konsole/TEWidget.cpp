@@ -95,6 +95,8 @@
                   "abcdefgjijklmnopqrstuvwxyz" \
                   "0123456789./+@"
 
+extern bool argb_visual; // declared in main.cpp and konsole_part.cpp
+
 // scroll increment used when dragging selection at top/bottom of window.
 
 // static
@@ -140,7 +142,7 @@ static const ColorEntry base_color_table[TABLE_COLORS] =
 void TEWidget::setDefaultBackColor(const QColor& color)
 {
   defaultBgColor = color;
-  if (!backgroundPixmap())
+  if (qAlpha(blend_color) != 0xff && !backgroundPixmap())
     setBackgroundColor(getDefaultBackColor());
 }
 
@@ -160,7 +162,17 @@ void TEWidget::setColorTable(const ColorEntry table[])
 {
   for (int i = 0; i < TABLE_COLORS; i++) color_table[i] = table[i];
   const QPixmap* pm = backgroundPixmap();
-  if (!pm) setBackgroundColor(getDefaultBackColor());
+  if (!pm)
+    if (!argb_visual || (qAlpha(blend_color) == 0xff))
+      setBackgroundColor(getDefaultBackColor());
+    else {
+      float alpha = qAlpha(blend_color) / 255.;
+      int pixel = qAlpha(blend_color) << 24 |
+                  int(qRed(blend_color) * alpha) << 16 |
+                  int(qGreen(blend_color) * alpha) << 8  |
+                  int(qBlue(blend_color) * alpha);
+      setBackgroundColor(QColor(blend_color, pixel));
+    }
   update();
 }
 
@@ -358,6 +370,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,m_cursorCol(0)
 ,m_isIMEdit(false)
 ,m_isIMSel(false)
+,blend_color(qRgba(0,0,0,0xff))
 {
   // The offsets are not yet calculated.
   // Do not calculate these too often to be more smoothly when resizing
@@ -388,10 +401,6 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
   dragInfo.state = diNone;
 
   setFocusPolicy( WheelFocus );
-
-  // We're just a big pixmap, no need to have a background
-  // Speeds up redraws
-  setBackgroundMode(NoBackground);
 }
 
 //FIXME: make proper destructor
@@ -462,7 +471,26 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
     {
       if (pm || color_table[attr->b].color != color_table[ colorsSwapped ? DEFAULT_FORE_COLOR : DEFAULT_BACK_COLOR ].color
           || clear || (blinking && (attr->r & RE_BLINK)))
-        paint.fillRect(rect, color_table[attr->b].color);
+
+        // draw background colors with 75% opacity
+        if ( argb_visual && qAlpha(blend_color) < 0xff ) {
+          QRgb col = color_table[attr->b].color.rgb();
+
+          Q_UINT8 salpha = 192;
+          Q_UINT8 dalpha = 255 - salpha;
+
+          int a, r, g, b;
+          a = QMIN( (qAlpha (col) * salpha) / 255 + (qAlpha (blend_color) * dalpha) / 255, 255 ); 
+          r = QMIN( (qRed   (col) * salpha) / 255 + (qRed   (blend_color) * dalpha) / 255, 255 );
+          g = QMIN( (qGreen (col) * salpha) / 255 + (qGreen (blend_color) * dalpha) / 255, 255 );
+          b = QMIN( (qBlue  (col) * salpha) / 255 + (qBlue  (blend_color) * dalpha) / 255, 255 );
+
+          col = a << 24 | r << 16 | g << 8 | b;
+          int pixel = a << 24 | (r * a / 255) << 16 | (g * a / 255) << 8 | (b * a / 255);
+
+          paint.fillRect(rect, QColor(col, pixel));
+        } else
+          paint.fillRect(rect, color_table[attr->b].color);
     }
 
     QString tmpStr = str.simplifyWhiteSpace();
@@ -515,6 +543,11 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
   // Paint text
   if (!(blinking && (attr->r & RE_BLINK)))
   {
+    // ### Disabled for now, since it causes problems with characters
+    // that use the full width and/or height of the character cells.
+    //bool shadow = ( !isPrinting && qAlpha(blend_color) < 0xff
+    //		    && qGray( fColor.rgb() ) > 64 );
+    bool shadow = false;
     paint.setPen(fColor);
     int x = rect.x();
     if (color_table[attr->f].bold && printerBold)
@@ -531,18 +564,26 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
       // The meaning of y differs between different versions of QPainter::drawText!!
       int y = rect.y(); // top of rect
 
+      if ( shadow ) {
+        paint.setPen( Qt::black );
+        drawTextFixed(paint, x+1, y+1, str, attr);
+        paint.setPen(fColor);
+      }
+
       drawTextFixed(paint, x, y, str, attr);
     }
     else
     {
       // The meaning of y differs between different versions of QPainter::drawText!!
       int y = rect.y()+a; // baseline
+ 
+      if ( shadow ) {
+        paint.setPen( Qt::black );
+        paint.drawText(x+1,y+1, str, -1, bidiEnabled ? QPainter::Auto : QPainter::LTR );
+        paint.setPen(fColor);
+      }
 
-      if (bidiEnabled)
-        paint.drawText(x,y, str, -1);
-      else
-        paint.drawText(x,y, str, -1, QPainter::LTR);
-
+      paint.drawText(x,y, str, -1, bidiEnabled ? QPainter::Auto : QPainter::LTR );
     }
 
     if (color_table[attr->f].bold && isPrinting)
