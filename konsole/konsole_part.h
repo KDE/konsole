@@ -90,7 +90,7 @@ signals:
     void sessionDestroyed();
     void configureRequest(TEWidget*,int,int x,int y);
     void updateTitle();
-    void restoreAllListenToKeyPress();
+    void enableMasterModeConnections();
 
  private slots:
     void emitOpenURLRequest(const QString &url);

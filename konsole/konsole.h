@@ -186,8 +186,8 @@ private slots:
   void slotConfigure();
   void reparseConfiguration();
 
-  void clearAllListenToKeyPress();
-  void restoreAllListenToKeyPress();
+  void disableMasterModeConnections();
+  void enableMasterModeConnections();
   void enterURL( const QString&, const QString& );
   void newSession( const QString&, const QString& );
 

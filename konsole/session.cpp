@@ -225,11 +225,11 @@ bool TESession::closeSession()
 
 void TESession::feedSession(const QString &text)
 {
-  emit clearAllListenToKeyPress();
+  emit disableMasterModeConnections();
   setListenToKeyPress(true);
   te->emitText(text);
   setListenToKeyPress(false);
-  emit restoreAllListenToKeyPress();
+  emit enableMasterModeConnections();
 }
 
 void TESession::sendSession(const QString &text)

@@ -64,7 +64,7 @@ KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar
 
   connect( se,SIGNAL(updateTitle()), this,SLOT(updateTitle()) );
   connect( se,SIGNAL(renameSession(TESession*,const QString&)), this,SLOT(slotRenameSession(TESession*,const QString&)) );
-  connect( se,SIGNAL(restoreAllListenToKeyPress()), this,SLOT(restoreAllListenToKeyPress()) );
+  connect( se,SIGNAL(enableMasterModeConnections()), this,SLOT(enableMasterModeConnections()) );
   connect( se->getEmulation(),SIGNAL(ImageSizeChanged(int,int)), this,SLOT(notifySize(int,int)));
   connect(se->getEmulation(),SIGNAL(changeColumns(int)), this,SLOT(changeColumns(int)) );
 
@@ -164,7 +164,7 @@ void KonsoleChild::slotRenameSession(TESession*, const QString &)
   updateTitle();
 }
 
-void KonsoleChild::restoreAllListenToKeyPress()
+void KonsoleChild::enableMasterModeConnections()
 {
   se->setListenToKeyPress(true);
 }

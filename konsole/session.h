@@ -126,8 +126,8 @@ signals:
   void updateTitle();
   void notifySessionState(TESession* session, int state);
 
-  void clearAllListenToKeyPress();
-  void restoreAllListenToKeyPress();
+  void disableMasterModeConnections();
+  void enableMasterModeConnections();
   void renameSession(TESession* ses, const QString &name);
 
   void openURLRequest(const QString &cwd);

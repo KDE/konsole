@@ -48,7 +48,7 @@ private slots:
   void doneSession(TESession*);
   void updateTitle();
   void slotRenameSession(TESession* ses, const QString &name);
-  void restoreAllListenToKeyPress();
+  void enableMasterModeConnections();
   void changeColumns(int columns);
   void notifySize(int,int);
 

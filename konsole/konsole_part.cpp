@@ -877,7 +877,7 @@ void konsolePart::slotWordSeps() {
   }
 }
 
-void konsolePart::restoreAllListenToKeyPress()
+void konsolePart::enableMasterModeConnections()
 {
   if ( se ) se->setListenToKeyPress(true);
 }
@@ -1017,8 +1017,8 @@ void konsolePart::startProgram( const QString& program,
            this,SLOT(emitOpenURLRequest(const QString &)) );
   connect( se, SIGNAL( updateTitle() ),
            this, SLOT( updateTitle() ) );
-  connect( se, SIGNAL(restoreAllListenToKeyPress()),
-           this, SLOT(restoreAllListenToKeyPress()) );
+  connect( se, SIGNAL(enableMasterModeConnections()),
+           this, SLOT(enableMasterModeConnections()) );
   connect( se, SIGNAL( processExited() ),
            this, SLOT( slotProcessExited() ) );
   connect( se, SIGNAL( receivedData( const QString& ) ),
@@ -1029,8 +1029,8 @@ void konsolePart::startProgram( const QString& program,
   //         this, SLOT(slotRenameSession(TESession*, const QString&)) );
   //connect( se->getEmulation(), SIGNAL(changeColumns(int)),
   //         this, SLOT(changeColumns(int)) );
-  //connect( se, SIGNAL(clearAllListenToKeyPress()),
-  //        this, SLOT(clearAllListenToKeyPress()) );
+  //connect( se, SIGNAL(disableMasterModeConnections()),
+  //        this, SLOT(disableMasterModeConnections()) );
 
   if (b_histEnabled && m_histSize)
     se->setHistory(HistoryTypeBuffer(m_histSize));
