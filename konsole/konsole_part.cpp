@@ -224,6 +224,7 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   // insert keymaps into menu
   if (m_keytab)
   {
+     m_keytab->clear();
      for (int i = 0; i < KeyTrans::count(); i++)
      {
         KeyTrans* ktr = KeyTrans::find(i);
@@ -686,10 +687,13 @@ void konsolePart::fontNotFound()
 
 void konsolePart::updateKeytabMenu()
 {
-  if ( ! se || ! m_keytab ) return;
-  m_keytab->setItemChecked(n_keytab,false);
-  m_keytab->setItemChecked(se->keymapNo(),true);
-  n_keytab = se->keymapNo();
+  if ( se && m_keytab ) {
+    m_keytab->setItemChecked(n_keytab,false);
+    m_keytab->setItemChecked(se->keymapNo(),true);
+    n_keytab = se->keymapNo();
+  } else if ( m_keytab ) {    // no se yet, happens at startup
+    m_keytab->setItemChecked(n_keytab, true);
+  }
 }
 
 void konsolePart::keytab_menu_activated(int item)
