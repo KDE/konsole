@@ -53,7 +53,7 @@ KRootPixmap::KRootPixmap(QWidget *widget)
 
     connect(kapp, SIGNAL(backgroundChanged(int)), SLOT(slotBackgroundChanged(int)));
     connect(m_pPixmap, SIGNAL(done(bool)), SLOT(slotDone(bool)));
-    connect(m_pTimer, SIGNAL(timeout()), SLOT(repaint(bool)));
+    connect(m_pTimer, SIGNAL(timeout()), SLOT(repaint()));
 
     QObject *obj = m_pWidget;
     while (obj->parent())
@@ -114,6 +114,11 @@ bool KRootPixmap::eventFilter(QObject *, QEvent *event)
 }
 
 	
+void KRootPixmap::repaint()
+{
+    repaint(false);
+}
+
 void KRootPixmap::repaint(bool force)
 {
     QPoint p1 = m_pWidget->mapToGlobal(m_pWidget->rect().topLeft());

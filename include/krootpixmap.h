@@ -74,13 +74,16 @@ public:
      */
     bool checkAvailable(bool show_warning);
 
-public slots:
     /**
      * Repaint the widget background. Normally, you shouldn't need this.
      *
      * @param force Force a repaint, even if the contents did not change.
      */
-    void repaint(bool force=false);
+    void repaint(bool force);
+
+public slots:
+    // Same version, as a slot, for internal use
+    void repaint();
 
 protected:
     virtual bool eventFilter(QObject *, QEvent *);
