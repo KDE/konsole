@@ -264,7 +264,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
       co->setDesktopGroup();
       schema = co->readEntry("Schema");
   }
-  kdDebug() << "my Looking for schema " << schema << endl;
+  //kdDebug() << "my Looking for schema " << schema << endl;
   readProperties(config, schema);
   //kdDebug()<<"Konsole ctor() after readProps "<<time.elapsed()<<" msecs elapsed"<<endl;
   //kdDebug()<<"Konsole ctor(): toolbar"<<endl;
@@ -470,7 +470,7 @@ void Konsole::makeGUI()
    // Help and about menu
    /*
     QString aboutAuthor = i18n("%1 version %2 - an X terminal\n"
-    "Copyright (c) 1997-2000 by\n"
+    "Copyright (c) 1997-2001 by\n"
     "Lars Doelle <lars.doelle@on-line.de>\n"
     "\n"
     "This program is free software under the\n"
@@ -697,6 +697,7 @@ void Konsole::saveProperties(KConfig* config) {
         }
      kdDebug() << "Save properties called with a different config\n";
   }
+  config->setDesktopGroup();
   config->writeEntry("history",b_scroll);
   config->writeEntry("has frame",b_framevis);
   config->writeEntry("Fullscreen",b_fullscreen);

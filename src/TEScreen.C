@@ -822,6 +822,7 @@ void TEScreen::moveImage(int dst, int loca, int loce)
     kdDebug() << "WARNING!!! call to TEScreen:moveImage with loce < loca!" << endl;
     return;
   }
+  //kdDebug() << "Using memmove to scroll up" << endl;
   memmove(&image[dst],&image[loca],(loce-loca+1)*sizeof(ca));
 }
 

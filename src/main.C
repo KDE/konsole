@@ -250,9 +250,10 @@ int main(int argc, char* argv[])
         cTitle+=(sessionconfig->readEntry("Title0", title)).latin1();
         Konsole *m = new Konsole(wname,shell,eargs,histon,toolbaron,cTitle,type,true);
         m->restore(n);
-        m->initSessionSchema(sessionconfig->readEntry("Schema0","0").toInt());
         for (int i=1; i < 10000 ; i++) {}
         m->makeGUI();
+        for (int i=1; i < 10000 ; i++) {}
+        m->initSessionSchema(sessionconfig->readEntry("Schema0","0").toInt());
 
         while (n2 < (n3 - 1)) {
           tmpTitle = "Title";

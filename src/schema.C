@@ -289,7 +289,7 @@ bool ColorSchema::rereadSchemaFile()
 {
 	if (fPath.isEmpty()) return false;
 
-	KONSOLEDEBUG << "Rereading schema file " << fPath << endl;
+	//KONSOLEDEBUG << "Rereading schema file " << fPath << endl;
 
 
 	FILE *sysin = fopen(QFile::encodeName(fPath),"r");
@@ -389,9 +389,7 @@ bool ColorSchema::rereadSchemaFile()
 
 bool ColorSchema::hasSchemaFileChanged() const
 {
-	KONSOLEDEBUG << "Checking schema file "
-		<< fPath
-		<< endl;
+	//KONSOLEDEBUG << "Checking schema file " << fPath << endl;
 
 	// The default color schema never changes.
 	//
@@ -455,8 +453,8 @@ ColorSchema *ColorSchemaList::find(const QString& path)
 {
    if (path.isEmpty()) 
       return const_cast<ColorSchema *>(at(0));
-	KONSOLEDEBUG << "Looking for schema " << path << endl;
-   kdDebug()<<"ColorSchema::find() count()=="<<count()<<endl;
+	//KONSOLEDEBUG << "Looking for schema " << path << endl;
+   //kdDebug()<<"ColorSchema::find() count()=="<<count()<<endl;
 	ColorSchemaListIterator it(*this);
 	ColorSchema *c;
    bool pathIsOnlyFileName=(!path.contains("/"));
@@ -471,7 +469,7 @@ ColorSchema *ColorSchemaList::find(const QString& path)
    //list is empty except the default schema
    if (count()==1)
    {
-      kdDebug()<<"ColorSchema::find() empty"<<endl;
+      //kdDebug()<<"ColorSchema::find() empty"<<endl;
       ColorSchema *newSchema = new ColorSchema(path);
       if (newSchema)
          append(newSchema);
@@ -482,7 +480,7 @@ ColorSchema *ColorSchemaList::find(const QString& path)
 
 ColorSchema *ColorSchemaList::find(int i)
 {
-	KONSOLEDEBUG << "Looking for schema m_number " << i << endl;
+	//KONSOLEDEBUG << "Looking for schema m_number " << i << endl;
 
 	ColorSchemaListIterator it(*this);
 	ColorSchema *c;

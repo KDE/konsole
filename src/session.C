@@ -70,7 +70,7 @@ void TESession::kill(int signal)
 
 TESession::~TESession()
 {
- kdDebug() << "disconnnecting..." << endl;
+ //kdDebug() << "disconnnecting..." << endl;
  QObject::disconnect( sh, SIGNAL( done( int ) ),
 		      this, SLOT( done( int ) ) );
   delete em;
