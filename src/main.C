@@ -196,7 +196,6 @@ TEDemo::TEDemo(const QString& name, QStrList & _args, int login_shell, int histo
         ? QString(args.at(0))  // program executed in the title bar
         : kapp->caption();  // `konsole' or -caption
   initial->setTitle(title);
-HERE; printf("setHistory' = %d in ::TEDemo.\n",b_scroll);
   initial->setHistory(b_scroll); //FIXME:FIXME:FIXME: take from schema
 
   addSession(initial);
@@ -477,7 +476,6 @@ void TEDemo::readProperties(KConfig* config)
   b_menuvis  = config->readBoolEntry("menubar visible",TRUE);
   b_framevis = config->readBoolEntry("has frame",TRUE);
   b_scroll = config->readBoolEntry("history",TRUE);
-HERE; printf("reading 'history' = %d\n",b_scroll);
   b_bshack   = config->readBoolEntry("BS hack",TRUE);
   n_font     = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
   n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
@@ -519,7 +517,6 @@ HERE; printf("reading 'history' = %d\n",b_scroll);
   if (s) {
     s->setFontNo(n_font);
     s->setSchemaNo(ColorSchema::find(s_schema)->numb);
-HERE; printf("setting 'history' = %d in read.\n",b_scroll);
     s->setHistory(b_scroll);
     if (b_bshack)
       s->getEmulation()->setMode(MODE_BsHack);
@@ -657,7 +654,6 @@ void TEDemo::setFrameVisible(bool visible)
 
 void TEDemo::setHistory(bool on)
 {
-HERE; printf("setting 'history' = %d in setHistory.\n",b_scroll);
   b_scroll = on;
   m_options->setItemChecked(3,b_scroll);
   if (se) se->setHistory( b_scroll );
@@ -689,7 +685,6 @@ void TEDemo::opt_menu_activated(int item)
     case 2: setFrameVisible(!b_framevis);
             break;
     case 3: setHistory(!b_scroll);
-HERE; printf("setHistory' = %d in menu.\n",b_scroll);
             break;
     case 4: setBsHack(!b_bshack);
             break;
@@ -869,7 +864,6 @@ void TEDemo::newSession(int i)
   s->setFontNo(fno);
   s->setSchemaNo(schmno);
   s->setTitle(txt.data());
-HERE; printf("setHistory' = %d in newSession.\n",b_scroll);
   s->setHistory(b_scroll); //FIXME:FIXME:FIXME: take from schema
 
   addSession(s);
@@ -1069,7 +1063,6 @@ int main(int argc, char* argv[])
   }
   else
   {  
-printf("EARGS[0] = %s\n", eargs.at(0));
     TEDemo*  m = new TEDemo(wname,eargs,login_shell,histon);
     m->setColLin(c,l); // will use default height and width if called with (0,0)
 

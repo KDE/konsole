@@ -117,7 +117,6 @@ const char* TESession::Title()
 
 void TESession::setHistory(bool on)
 {
-HERE; printf("TESession::setHistory %s\n",on?"on":"off");
   em->setHistory( on );
 }
 

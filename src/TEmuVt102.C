@@ -580,13 +580,11 @@ void VT102Emulation::onRcvByte(int cc)
 
 void VT102Emulation::setCodec(int c)
 {
-printf("setCodec(%d)\n",c);
   //FIXME: check whether we have to free codec
   codec = c ? QTextCodec::codecForName("utf8")
             : localeCodec; //QTextCodec::codecForLocale();
   if (decoder) delete decoder;
   decoder = codec->makeDecoder();
-printf("codec: %s\n",codec->name());
 }
 
 // -----------------------------------------------------------------------------
@@ -923,7 +921,6 @@ void VT102Emulation::setScreen(int n)
 
 void VT102Emulation::setHistory(bool on)
 {
-HERE; printf("VT102Emulation::setHistory(%s)\n",on?"on":"off");
   screen[0]->setScroll(on);
   if (!connected) return;
   showBulk();
@@ -975,7 +972,6 @@ void VT102Emulation::onKeyPress( QKeyEvent* ev )
     case Key_Tab       : sendString("\t"); return;
 
     case Key_Return    : sendString(getMode(MODE_NewLine)?"\r\n"   :"\r"  ); return;
-    case Key_Enter     : sendString(getMode(MODE_NewLine)?"\r\n"   :"\r"  ); return;
     case Key_Backspace : sendString(getMode(MODE_BsHack )?"\x7f"   :"\x08"); return;
     case Key_Delete    : sendString(getMode(MODE_BsHack )?"\033[3~":"\x7f"); return;
 
@@ -998,8 +994,9 @@ void VT102Emulation::onKeyPress( QKeyEvent* ev )
     case Key_F11       : sendString("\033[23~" ); return;
     case Key_F12       : sendString("\033[24~" ); return;
 
-    case Key_Home      : sendString("\033[H"  ); return;
-    case Key_End       : sendString("\033[F"  ); return;
+    case Key_Enter     : sendString(getMode(MODE_NewLine)?"\r\n"   :"\r"  ); return;
+    case Key_Home      : sendString("\033[H"   ); return;
+    case Key_End       : sendString("\033[F"   ); return;
     case Key_Prior     : sendString("\033[5~"  ); return;
     case Key_Next      : sendString("\033[6~"  ); return;
     case Key_Insert    : sendString("\033[2~"  ); return;

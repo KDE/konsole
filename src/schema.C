@@ -67,9 +67,7 @@ ColorSchema* ColorSchema::readSchema(const char* path)
         if (!strcmp(rend,"full"  )) attr = 4; else
           continue;
 
-HERE;printf("path: %s\n",path);
         res->imagepath = locate("wallpaper", path);
-HERE;printf("ipath: %s\n",res->imagepath.ascii());
         res->alignment = attr;
       }
       if (!strncmp(line,"transparency",12))
