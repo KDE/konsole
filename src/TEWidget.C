@@ -712,8 +712,9 @@ void TEWidget::emitSelection()
 { 
     QString text = QApplication::clipboard()->text();
     if ( ! text.isNull() ) {
-	QKeyEvent e(QEvent::KeyPress, 0,0,0, text);
-	emit keyPressedSignal(&e); // expose as a big fat keypress event
+        text.replace(QRegExp("\n"), "\r");
+        QKeyEvent e(QEvent::KeyPress, 0,0,0, text);
+        emit keyPressedSignal(&e); // expose as a big fat keypress event
     }
 }
 
@@ -861,14 +862,8 @@ void TEWidget::clearImage()
 void TEWidget::calcGeometry()
 {
 
-#if QT_VERSION ==  210
-#warning Using Qt2.1.0 CVS scrollbar extents (mosfet).
-    scrollbar->resize(QApplication::style().scrollBarExtent().width(),
-                      contentsRect().height());
-#else
-    scrollbar->resize(16, contentsRect().height());
-#endif
-
+  scrollbar->resize(QApplication::style().scrollBarExtent().width(),
+                    contentsRect().height());
   switch(scrollLoc)
   {
     case SCRNONE : 
