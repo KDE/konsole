@@ -3,6 +3,7 @@
 Type=KonsoleApplication
 Name=Linux
 Comment=Linux Console
+Comment[cs]=Linuxová konzole
 Comment[es]=Consola Linux
 Comment[no]=Linux-konsoll
 Comment[pt_BR]=Console do Linux
