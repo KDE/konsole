@@ -411,7 +411,9 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
     }
     else
     {
-      paint.fillRect(rect, color_table[attr->b].color);
+      if (pm || color_table[attr->b].color != color_table[DEFAULT_BACK_COLOR].color
+          || clear || (blinking && (attr->r & RE_BLINK)))
+        paint.fillRect(rect, color_table[attr->b].color);
     }
   }
 
