@@ -9,6 +9,11 @@
 /* This file is part of Konsole - an X terminal for KDE                       */
 /* -------------------------------------------------------------------------- */
 
+/* If you're compiling konsole on non-Linux platforms and find
+   problems that you can track down to this file, please have
+   a look into ../README.ports, too.
+*/
+
 /*! \file
 */
 
@@ -66,6 +71,11 @@
 /* for NSIG */
 #ifndef _BSD_SOURCE
 #define _BSD_SOURCE
+#endif
+
+#ifdef __osf__
+#define _OSF_SOURCE
+#include <float.h>
 #endif
 
 #include <stdlib.h>

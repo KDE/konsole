@@ -1,6 +1,6 @@
 [README.unicode]
 
-Konsole now supports unicode, which means one can display up
+Konsole supports unicode, which means one can display up
 to 64K different glyphs at the same time on one screen.
 
 The enhancement is pretty complete and the main current

@@ -1,9 +1,5 @@
 [README.keyboard]
 
-Some keyboard configuration stuff is currently work in progress.
-to be completed, very soon. Here is preliminary information.
-
-
 The *.keytab files (located in $KDEDIR/share/apps/konsole) allow
 to configure the keyboard due to your specific environment.
 

@@ -21,6 +21,7 @@
 #include <kaboutdata.h>
 #include <kcmdlineargs.h>
 #include <kimageio.h>
+#include <dcopclient.h>
 #include "konsole.h"
 
 static const char *description =
@@ -161,6 +162,10 @@ int main(int argc, char* argv[])
        KCmdLineArgs::usage(i18n("expected --vt_sz <#columns>x<#lines> ie. 80x40\n"));
     }
   }
+
+  // ///////////////////////////////////////////////
+
+  // a.dcopClient()->registerAs(a.name()); //FIXME: Experimental
 
   // ///////////////////////////////////////////////
 

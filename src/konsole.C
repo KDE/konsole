@@ -26,6 +26,7 @@
 /*TODO:
   - allow to set coded
   - officially declare this file to be hacked to death. ;^)
+  - merge into konsole_part.
 */
 
 /*STATE:
@@ -37,12 +38,15 @@
   are pretty stable, the upper level material has certainly drifted.
 
   Everything related to Sessions, Configuration has to be redesigned.
+  It seems that the konsole now falls apart into individual sessions
+  and a session manager.
 
 Time to start a requirement list.
 
   - Rework the Emulation::setConnect logic.
     Together with session changing (Shift-Left/Right, Ctrl-D) it allows
     key events to propagate to other sessions.
+
   - Get rid of the unconfigurable, uncallable initial "Konsole" session.
     Leads to code replication in konsole_part and other issues. Related
     to the booting of konsole, thus matter of redesign.
