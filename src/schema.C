@@ -454,7 +454,7 @@ ColorSchema *ColorSchemaList::find(const QString& path)
    if (path.isEmpty()) 
       return const_cast<ColorSchema *>(at(0));
 	//KONSOLEDEBUG << "Looking for schema " << path << endl;
-   //kdDebug()<<"ColorSchema::find() count()=="<<count()<<endl;
+   //kdDebug(1211)<<"ColorSchema::find() count()=="<<count()<<endl;
 	ColorSchemaListIterator it(*this);
 	ColorSchema *c;
    bool pathIsOnlyFileName=(!path.contains("/"));
@@ -469,7 +469,7 @@ ColorSchema *ColorSchemaList::find(const QString& path)
    //list is empty except the default schema
    if (count()==1)
    {
-      //kdDebug()<<"ColorSchema::find() empty"<<endl;
+      //kdDebug(1211)<<"ColorSchema::find() empty"<<endl;
       ColorSchema *newSchema = new ColorSchema(path);
       if (newSchema)
          append(newSchema);

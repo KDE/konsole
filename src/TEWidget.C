@@ -564,15 +564,15 @@ void TEWidget::scrollChanged(int)
 
 void TEWidget::setScroll(int cursor, int slines)
 {
-  //kdDebug()<<"TEWidget::setScroll() disconnect()"<<endl;
+  //kdDebug(1211)<<"TEWidget::setScroll() disconnect()"<<endl;
   disconnect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
-  //kdDebug()<<"TEWidget::setScroll() setRange()"<<endl;
+  //kdDebug(1211)<<"TEWidget::setScroll() setRange()"<<endl;
   scrollbar->setRange(0,slines);
-  //kdDebug()<<"TEWidget::setScroll() setSteps()"<<endl;
+  //kdDebug(1211)<<"TEWidget::setScroll() setSteps()"<<endl;
   scrollbar->setSteps(1,lines);
   scrollbar->setValue(cursor);
   connect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
-  //kdDebug()<<"TEWidget::setScroll() done"<<endl;
+  //kdDebug(1211)<<"TEWidget::setScroll() done"<<endl;
 }
 
 void TEWidget::setScrollbarLocation(int loc)
@@ -1133,12 +1133,12 @@ void TEWidget::dropEvent(QDropEvent* event)
 	  if (currentSession) {
 	    currentSession->getEmulation()->sendString(dropText.local8Bit());
 	  }
-	  kdDebug() << "Drop:" << dropText.local8Bit() << "\n";
+	  kdDebug(1211) << "Drop:" << dropText.local8Bit() << "\n";
 	}
     }
   }
   else if(QTextDrag::decode(event, dropText)) {
-    kdDebug() << "Drop:" << dropText.local8Bit() << "\n";
+    kdDebug(1211) << "Drop:" << dropText.local8Bit() << "\n";
     if (currentSession) {
       currentSession->getEmulation()->sendString(dropText.local8Bit());
     }

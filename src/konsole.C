@@ -225,7 +225,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
   // create terminal emulation framework ////////////////////////////////////
 
   te = new TEWidget(this);
-  //kdDebug()<<"Konsole ctor() after new TEWidget() "<<time.elapsed()<<" msecs elapsed"<<endl;
+  //KONSOLEDEBUG<<"Konsole ctor() after new TEWidget() "<<time.elapsed()<<" msecs elapsed"<<endl;
   te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
   // we need focus so that the auto-hide cursor feature works (Carsten)
   // but a part shouldn't force that it receives the focus, so we do it here (David)
@@ -233,20 +233,20 @@ Konsole::Konsole(const char* name, const char* _pgm,
 
   // Transparency handler ///////////////////////////////////////////////////
   rootxpm = new KRootPixmap(te);
-  //kdDebug()<<"Konsole ctor() after new RootPixmap() "<<time.elapsed()<<" msecs elapsed"<<endl;
+  //KONSOLEDEBUG<<"Konsole ctor() after new RootPixmap() "<<time.elapsed()<<" msecs elapsed"<<endl;
 
   // create applications /////////////////////////////////////////////////////
 
   setCentralWidget(te);
 
   makeBasicGUI();
-  //kdDebug()<<"Konsole ctor() after makeBasicGUI "<<time.elapsed()<<" msecs elapsed"<<endl;
+  //KONSOLEDEBUG<<"Konsole ctor() after makeBasicGUI "<<time.elapsed()<<" msecs elapsed"<<endl;
 
   colors = new ColorSchemaList();
   colors->checkSchemas();
 
   KeyTrans::loadAll();
-  //kdDebug()<<"Konsole ctor() after KeyTrans::loadAll() "<<time.elapsed()<<" msecs elapsed"<<endl;
+  //KONSOLEDEBUG<<"Konsole ctor() after KeyTrans::loadAll() "<<time.elapsed()<<" msecs elapsed"<<endl;
   if (mytitle.isEmpty())
   {
      title = (args.count() && (kapp->caption() == PACKAGE))
@@ -263,7 +263,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
   applyMainWindowSettings(config);
   if (currentSize != size())
      defaultSize = size();
-  //kdDebug()<<"Konsole ctor(): readProps() type="<<type<<endl;
+  //KONSOLEDEBUG<<"Konsole ctor(): readProps() type="<<type<<endl;
   QString schema;
   KSimpleConfig *co = type.isEmpty() ?
      0 : new KSimpleConfig(locate("appdata", type + ".desktop"), true /* read only */);
@@ -272,10 +272,10 @@ Konsole::Konsole(const char* name, const char* _pgm,
       co->setDesktopGroup();
       schema = co->readEntry("Schema");
   }
-  //kdDebug() << "my Looking for schema " << schema << endl;
+  //KONSOLEDEBUG << "my Looking for schema " << schema << endl;
   readProperties(config, schema);
-  //kdDebug()<<"Konsole ctor() after readProps "<<time.elapsed()<<" msecs elapsed"<<endl;
-  //kdDebug()<<"Konsole ctor(): toolbar"<<endl;
+  //KONSOLEDEBUG<<"Konsole ctor() after readProps "<<time.elapsed()<<" msecs elapsed"<<endl;
+  //KONSOLEDEBUG<<"Konsole ctor(): toolbar"<<endl;
   if (!toolbaron)
     toolBar()->hide();
 
@@ -289,7 +289,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
 
 
   delete co;
-  //kdDebug()<<"Konsole ctor(): runSession()"<<endl;
+  //KONSOLEDEBUG<<"Konsole ctor(): runSession()"<<endl;
   te->currentSession = se;
   se->setConnect(TRUE);
   if (mytitle.isEmpty()) {
@@ -304,8 +304,8 @@ Konsole::Konsole(const char* name, const char* _pgm,
   connect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
   connect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
 
-  //kdDebug()<<"Konsole ctor() ends "<<time.elapsed()<<" msecs elapsed"<<endl;
-  //kdDebug()<<"Konsole ctor(): done"<<endl;
+  //KONSOLEDEBUG<<"Konsole ctor() ends "<<time.elapsed()<<" msecs elapsed"<<endl;
+  //KONSOLEDEBUG<<"Konsole ctor(): done"<<endl;
 }
 
 Konsole::~Konsole()
@@ -333,7 +333,7 @@ void Konsole::makeGUI()
    disconnect(m_options,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_help,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_sessions,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
-   //kdDebug()<<"Konsole::makeGUI()"<<endl;
+   //KONSOLEDEBUG<<"Konsole::makeGUI()"<<endl;
    connect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
    connect(m_file,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
    m_menuCreated=true;
@@ -511,12 +511,12 @@ void Konsole::makeGUI()
 
    delete colors;
    colors = new ColorSchemaList();
-   //kdDebug()<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
+   //KONSOLEDEBUG<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
    colors->checkSchemas();
-   //kdDebug()<<"Konsole::makeGUI() updateSchemas()"<<endl;
+   //KONSOLEDEBUG<<"Konsole::makeGUI() updateSchemas()"<<endl;
    updateSchemaMenu();
    ColorSchema *sch=colors->find(s_schema);
-   kdDebug()<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
+   KONSOLEDEBUG<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
    if (sch)
         curr_schema=sch->numb();
    else
@@ -542,7 +542,7 @@ void Konsole::makeGUI()
 
 void Konsole::makeBasicGUI()
 {
-  //kdDebug()<<"Konsole::makeBasicGUI()"<<endl;
+  //KONSOLEDEBUG<<"Konsole::makeBasicGUI()"<<endl;
   KToolBarPopupAction *newsession = new KToolBarPopupAction(i18n("&New"), "filenew",
                 0 , this, SLOT(newSession()),this, KStdAction::stdName(KStdAction::New));
   newsession->plug(toolBar());
@@ -687,7 +687,7 @@ void Konsole::readGlobalProperties(KConfig* config)
 }
 
 void Konsole::saveProperties(KConfig* config) {
-    kdDebug() << "Save properties called\n";
+    KONSOLEDEBUG << "Save properties called\n";
     uint counter=0;
     QString tmpTitle;
     QString tmpTwo;
@@ -700,7 +700,7 @@ void Konsole::saveProperties(KConfig* config) {
       config->writeEntry("numSes",sessions.count());
       sessions.first();
       while(counter < sessions.count()) {
-//        kdDebug() << "Top of loop..." << endl;
+//        KONSOLEDEBUG << "Top of loop..." << endl;
         tmpTitle="Title";
         tmpTitle+= (char) (counter+48);
         tmpTwo=sessions.current()->Title();
@@ -708,11 +708,11 @@ void Konsole::saveProperties(KConfig* config) {
         tmpSchema="Schema";
         tmpSchema+= (char) (counter+48);
         config->writeEntry(tmpSchema,sessions.current()->schemaNo());
-//        kdDebug() << "Writing " << tmpTitle << " -- " << sessions.current()->Title().latin1() << endl;
+//        KONSOLEDEBUG << "Writing " << tmpTitle << " -- " << sessions.current()->Title().latin1() << endl;
         sessions.next();
         counter++;
         }
-     kdDebug() << "Save properties called with a different config\n";
+     KONSOLEDEBUG << "Save properties called with a different config\n";
   }
   config->setDesktopGroup();
   config->writeEntry("history",b_scroll);
@@ -748,7 +748,7 @@ void Konsole::readProperties(KConfig* config)
 void Konsole::readProperties(KConfig* config, const QString &schema)
 {
    config->setDesktopGroup();
-   kdDebug()<<"Konsole::readProps()"<<endl;
+   KONSOLEDEBUG<<"Konsole::readProps()"<<endl;
    /*FIXME: (merging) state of material below unclear.*/
    b_scroll = config->readBoolEntry("history",TRUE);
    b_warnQuit=config->readBoolEntry( "WarnQuit", TRUE );
@@ -892,7 +892,7 @@ void Konsole::slotSelectScrollbar() {
 void Konsole::slotSelectFont() {
   assert(se);
   int item = selectFont->currentItem();
-  // kdDebug() << "slotSelectFont " << item << endl;
+  // KONSOLEDEBUG << "slotSelectFont " << item << endl;
   if (item == 8) // this is the default
   {
     if ( KFontDialog::getFont(defaultFont, true) == QDialog::Accepted )
@@ -1292,7 +1292,7 @@ void Konsole::activateSession(TESession *s)
   }
   if (te->currentSession) {
     te->currentSession->setTitle(title);
-//    kdDebug()<<"setTitle 1221 - " << title <<endl;
+//    KONSOLEDEBUG<<"setTitle 1221 - " << title <<endl;
     }
   te->currentSession = se;
   if (s->fontNo() != n_font)
@@ -1325,12 +1325,12 @@ void Konsole::newSession()
   // antlarr: Why is first session session number 1 instead of number 0 ?
   {
     KSimpleConfig* co = no2command.find(i);
-    //kdDebug()<<"Konsole::newSession() Exec: -"<<co->readEntry("Exec")<<"-"<<endl;
+    //KONSOLEDEBUG<<"Konsole::newSession() Exec: -"<<co->readEntry("Exec")<<"-"<<endl;
 
     if ( co && co->readEntry("Exec").isEmpty() ) session=i;
     i++;
   }
-  //kdDebug()<<"Konsole::newSession(): session: "<<session<<endl;
+  //KONSOLEDEBUG<<"Konsole::newSession(): session: "<<session<<endl;
   if (session==0) session=1;
 
   newSession(session);
@@ -1372,7 +1372,7 @@ TESession *Konsole::newSession(KSimpleConfig *co)
       emu = co->readEntry("Term", emu).ascii();
       sch = co->readEntry("Schema", sch);
       txt = co->readEntry("Comment", txt);
-//      kdDebug()<<"Restored txt "<< txt << endl;
+//      KONSOLEDEBUG<<"Restored txt "<< txt << endl;
       fno = co->readUnsignedNumEntry("Font", fno);
       cmdArgs.append(shell);
       if (!cmd.isEmpty())
@@ -1398,7 +1398,7 @@ TESession *Konsole::newSession(KSimpleConfig *co)
 
   s->setFontNo(QMIN(fno, TOPFONT));
   s->setSchemaNo(schmno);
-//kdDebug()<<"setTitle Konsole 1319 "<< txt << endl;
+//KONSOLEDEBUG<<"setTitle Konsole 1319 "<< txt << endl;
   s->setTitle(txt);
 
   if (b_histEnabled)
@@ -1645,12 +1645,12 @@ void Konsole::setSchema(ColorSchema* s)
 }
 
 void Konsole::slotRenameSession() {
-  kdDebug() << "slotRenameSession\n";
+  KONSOLEDEBUG << "slotRenameSession\n";
   KRadioAction *ra = session2action.find(se);
   QString name = ra->text();
   KLineEditDlg dlg(i18n("Session name"),name, this);
   if (dlg.exec()) {
-//    kdDebug()<<"setTitle 1566"<<endl;
+//    KONSOLEDEBUG<<"setTitle 1566"<<endl;
     se->setTitle(dlg.text());
     if(se == te->currentSession) {
       title = dlg.text();
@@ -1664,12 +1664,12 @@ void Konsole::slotRenameSession() {
 
 
 void Konsole::initRenameSession(QString sTitle) {
-//  kdDebug() << "initRenameSession\n";
+//  KONSOLEDEBUG << "initRenameSession\n";
   KRadioAction *ra = session2action.find(se);
   QString name = ra->text();
 //  KLineEditDlg dlg(i18n("Session name"),name, this);
 //  if (dlg.exec()) {
-//    kdDebug()<<"setTitle 1566"<<endl;
+//    KONSOLEDEBUG<<"setTitle 1566"<<endl;
     se->setTitle(sTitle);
     if(se == te->currentSession) {
       title = sTitle;
@@ -1711,14 +1711,14 @@ HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
 
   if ( ! histType.isOn()) {
 
-    kdDebug() << "HistoryTypeDialog() : hist type off \n";
+    KONSOLEDEBUG << "HistoryTypeDialog() : hist type off \n";
 
     btnEnable->setChecked(false);
     slotHistEnable(false);
 
   } else {
 
-    kdDebug() << "HistoryTypeDialog() : hist type true : " << histType.getSize() << endl;
+    KONSOLEDEBUG << "HistoryTypeDialog() : hist type true : " << histType.getSize() << endl;
 
     btnEnable->setChecked(true);
     m_size->setValue(histType.getSize());
@@ -1729,7 +1729,7 @@ HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
 
 void HistoryTypeDialog::slotHistEnable(bool b)
 {
-  kdDebug() << "Konsole::slotHistEnable(" << b << ")\n";
+  KONSOLEDEBUG << "Konsole::slotHistEnable(" << b << ")\n";
 
   m_isOn = b;
   m_size->setEnabled(b);
@@ -1746,7 +1746,7 @@ unsigned int HistoryTypeDialog::nbLines() const
 
 void Konsole::slotHistoryType()
 {
-  kdDebug() << "Konsole::slotHistoryType()\n";
+  KONSOLEDEBUG << "Konsole::slotHistoryType()\n";
   if (!se) return;
   
   HistoryTypeDialog dlg(se->history(), m_histSize, this);
@@ -1772,7 +1772,7 @@ void Konsole::slotHistoryType()
 
 
 void Konsole::slotWordSeps() {
-  kdDebug() << "Konsole::slotWordSeps\n";
+  KONSOLEDEBUG << "Konsole::slotWordSeps\n";
   KLineEditDlg dlg(i18n("Characters other than alphanumerics considered part of a word when double clicking"),s_word_seps, this);
   if (dlg.exec()) {
     s_word_seps = dlg.text();
@@ -1782,7 +1782,7 @@ void Konsole::slotWordSeps() {
 
 void Konsole::slotBackgroundChanged(int /*desk*/)
 {
-  //kdDebug() << "Konsole::slotBackgroundChanged(" << desk << ")\n";
+  //KONSOLEDEBUG << "Konsole::slotBackgroundChanged(" << desk << ")\n";
   ColorSchema* s = colors->find(curr_schema);
   if (s==0) return;
 

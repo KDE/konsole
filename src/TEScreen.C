@@ -527,14 +527,14 @@ ca* TEScreen::getCookedImage()
   ca* merged = (ca*)malloc(lines*columns*sizeof(ca));
   ca dft(' ',DEFAULT_FORE_COLOR,DEFAULT_BACK_COLOR,DEFAULT_RENDITION);
 
-//  kdDebug() << "InGetCookedImage" << endl;
+//  kdDebug(1211) << "InGetCookedImage" << endl;
   for (y = 0; (y < lines) && (y < (hist->getLines()-histCursor)); y++)
   {
     int len = QMIN(columns,hist->getLineLen(y+histCursor));
     int yp  = y*columns;
     int yq  = (y+histCursor)*columns;
 
-//    kdDebug() << "InGetCookedImage - In first For.  Y =" << y << "histCursor = " << histCursor << endl;
+//    kdDebug(1211) << "InGetCookedImage - In first For.  Y =" << y << "histCursor = " << histCursor << endl;
     hist->getCells(y+histCursor,0,len,merged+yp);
     for (x = len; x < columns; x++) merged[yp+x] = dft;
     for (x = 0; x < columns; x++)
@@ -550,7 +550,7 @@ ca* TEScreen::getCookedImage()
        int yp  = y*columns;
        int yq  = (y+histCursor)*columns;
        int yr =  (y-hist->getLines()+histCursor)*columns;
-//       kdDebug() << "InGetCookedImage - In second For.  Y =" << y << endl;
+//       kdDebug(1211) << "InGetCookedImage - In second For.  Y =" << y << endl;
        for (x = 0; x < columns; x++)
        { int p = x + yp; int q = x + yq; int r = x + yr;
          merged[p] = image[r];
@@ -838,10 +838,10 @@ void TEScreen::moveImage(int dst, int loca, int loce)
 {
 //FIXME: check positions
   if (loce < loca) {
-    kdDebug() << "WARNING!!! call to TEScreen:moveImage with loce < loca!" << endl;
+    kdDebug(1211) << "WARNING!!! call to TEScreen:moveImage with loce < loca!" << endl;
     return;
   }
-  //kdDebug() << "Using memmove to scroll up" << endl;
+  //kdDebug(1211) << "Using memmove to scroll up" << endl;
   memmove(&image[dst],&image[loca],(loce-loca+1)*sizeof(ca));
 }
 

@@ -47,7 +47,7 @@ extern "C"
    */
   void *init_libkonsolepart()
   {
-      kdDebug() << "Konsole in actions!!!" << endl;
+      kdDebug(1211) << "Konsole in actions!!!" << endl;
     return new konsoleFactory;
   }
 };
@@ -78,7 +78,7 @@ KParts::Part *konsoleFactory::createPart(QWidget *parentWidget, const char *widg
                                          QObject *parent, const char *name, const char*,
                                          const QStringList& )
 {
-  kdDebug() << "konsoleFactory::createPart parentWidget=" << parentWidget << " parent=" << parent << endl;
+  kdDebug(1211) << "konsoleFactory::createPart parentWidget=" << parentWidget << " parent=" << parent << endl;
   KParts::Part *obj = new konsolePart(parentWidget, widgetName, parent, name);
   emit objectCreated(obj);
   return obj;
@@ -158,19 +158,19 @@ void konsolePart::doneSession(TESession*,int)
   // see doneSession in konsole.C
   if (initial)
   {
-    kdDebug() << "doneSession - disconnecting done" << endl;;
+    kdDebug(1211) << "doneSession - disconnecting done" << endl;;
     disconnect( initial,SIGNAL(done(TESession*,int)),
                 this,SLOT(doneSession(TESession*,int)) );
     initial->setConnect(FALSE);
     //QTimer::singleShot(100,initial,SLOT(terminate()));
-    kdDebug() << "initial->terminate()" << endl;;
+    kdDebug(1211) << "initial->terminate()" << endl;;
     initial->terminate();
   }
 }
 
 void konsolePart::sessionDestroyed()
 {
-  kdDebug() << "sessionDestroyed()" << endl;;
+  kdDebug(1211) << "sessionDestroyed()" << endl;;
   disconnect( initial, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
   initial = 0;
   delete this;
@@ -182,24 +182,24 @@ void konsolePart::configureRequest(TEWidget*te,int,int x,int y)
 }
 
 void konsolePart::slotNew() {
-    kdDebug() << "slotNew called\n";
+    kdDebug(1211) << "slotNew called\n";
 }
 
 void konsolePart::slotSaveFile() {
-    kdDebug() << "slotSaveFile called\n";
+    kdDebug(1211) << "slotSaveFile called\n";
 }
 
 void konsolePart::slotLoadFile() {
-    kdDebug() << "slotLoadFile called\n";
+    kdDebug(1211) << "slotLoadFile called\n";
 }
 
 konsolePart::~konsolePart()
 {
-  kdDebug() << "konsolePart::~konsolePart() this=" << this << endl;
+  kdDebug(1211) << "konsolePart::~konsolePart() this=" << this << endl;
   if ( initial )
   {
     disconnect( initial, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
-    kdDebug() << "Deleting initial session" << endl;
+    kdDebug(1211) << "Deleting initial session" << endl;
     delete initial;
   }
   //te is deleted by the framework
@@ -209,7 +209,7 @@ bool konsolePart::openURL( const KURL & url )
 {
   m_url = url;
   emit setWindowCaption( url.prettyURL() );
-  kdDebug() << "Set Window Caption to " << url.prettyURL() << "\n";
+  kdDebug(1211) << "Set Window Caption to " << url.prettyURL() << "\n";
   emit started( 0 );
 
   if ( url.isLocalFile() )

@@ -302,9 +302,9 @@ void TEmulation::showBulk()
                   scr->getColumns());     // actual refresh
     free(image);
     //FIXME: check that we do not trigger other draw event here.
-    //kdDebug()<<"TEmulation::showBulk(): setScroll()"<<endl;
+    //kdDebug(1211)<<"TEmulation::showBulk(): setScroll()"<<endl;
     gui->setScroll(scr->getHistCursor(),scr->getHistLines());
-    //kdDebug()<<"TEmulation::showBulk(): setScroll() done"<<endl;
+    //kdDebug(1211)<<"TEmulation::showBulk(): setScroll() done"<<endl;
   }
 }
 
@@ -323,15 +323,15 @@ void TEmulation::bulkEnd()
 
 void TEmulation::setConnect(bool c)
 {
-   //kdDebug()<<"TEmulation::setConnect()"<<endl;
+   //kdDebug(1211)<<"TEmulation::setConnect()"<<endl;
   connected = c;
   if ( connected)
   {
-    //kdDebug()<<"TEmulation::setConnect() onImageSize..."<<endl;
+    //kdDebug(1211)<<"TEmulation::setConnect() onImageSize..."<<endl;
     onImageSizeChange(gui->Lines(), gui->Columns());
-    //kdDebug()<<"TEmulation::setConnect() showBulk()"<<endl;
+    //kdDebug(1211)<<"TEmulation::setConnect() showBulk()"<<endl;
     showBulk();
-    //kdDebug()<<"TEmulation::setConnect() done"<<endl;
+    //kdDebug(1211)<<"TEmulation::setConnect() done"<<endl;
   }
   else
   {
@@ -349,15 +349,15 @@ void TEmulation::setConnect(bool c)
 
 void TEmulation::onImageSizeChange(int lines, int columns)
 {
-   //kdDebug()<<"TEmulation::onImageSizeChange()"<<endl;
+   //kdDebug(1211)<<"TEmulation::onImageSizeChange()"<<endl;
   if (!connected) return;
   screen[0]->resizeImage(lines,columns);
   screen[1]->resizeImage(lines,columns);
-   //kdDebug()<<"TEmulation::onImageSizeChange() showBulk()"<<endl;
+   //kdDebug(1211)<<"TEmulation::onImageSizeChange() showBulk()"<<endl;
   showBulk();
-   //kdDebug()<<"TEmulation::onImageSizeChange() showBulk() done"<<endl;
+   //kdDebug(1211)<<"TEmulation::onImageSizeChange() showBulk() done"<<endl;
   emit ImageSizeChanged(lines,columns);   // propagate event to serial line
-   //kdDebug()<<"TEmulation::onImageSizeChange() done"<<endl;
+   //kdDebug(1211)<<"TEmulation::onImageSizeChange() done"<<endl;
 }
 
 void TEmulation::onHistoryCursorChange(int cursor)

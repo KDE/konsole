@@ -265,7 +265,7 @@ int main(int argc, char* argv[])
           tmpSchema+= (char) (n2+49);
 //          QTimer::singleShot(5000,m,SLOT(newSession()));
           m->newSession();
-//          kdDebug() << "Adding title tmpTitle = " << sessionconfig->readEntry(tmpTitle, m->title);
+//          kdDebug(1211) << "Adding title tmpTitle = " << sessionconfig->readEntry(tmpTitle, m->title);
 
           m->initRenameSession(sTitle);
           m->initSessionSchema(sessionconfig->readEntry(tmpSchema,"0").toInt());

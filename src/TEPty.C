@@ -227,12 +227,12 @@ retry:
 
 void TEPty::setSize(int lines, int columns)
 {
-  //kdDebug()<<"TEPty::setSize()"<<endl;
+  //kdDebug(1211)<<"TEPty::setSize()"<<endl;
   wsize.ws_row = (unsigned short)lines;
   wsize.ws_col = (unsigned short)columns;
   if(fd < 0) return;
   ioctl(fd,TIOCSWINSZ,(char *)&wsize);
-  //kdDebug()<<"TEPty::setSize() done"<<endl;
+  //kdDebug(1211)<<"TEPty::setSize() done"<<endl;
 }
 
 void TEPty::donePty()
@@ -572,7 +572,7 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   ioctl(0,TIOCSWINSZ,(char *)&wsize);  // set screen size
 
   // finally, pass to the new program
-  //  kdDebug() << "We are ready to run the program " << pgm << endl;
+  //  kdDebug(1211) << "We are ready to run the program " << pgm << endl;
   execvp(pgm, argv);
   perror("exec failed");
   exit(1);                             // control should never come here.

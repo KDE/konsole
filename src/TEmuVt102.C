@@ -69,14 +69,14 @@
 
 TEmuVt102::TEmuVt102(TEWidget* gui) : TEmulation(gui)
 {
-  //kdDebug()<<"TEmuVt102 ctor() connecting"<<endl;
+  //kdDebug(1211)<<"TEmuVt102 ctor() connecting"<<endl;
   QObject::connect(gui,SIGNAL(mouseSignal(int,int,int)),
                    this,SLOT(onMouse(int,int,int)));
-  //kdDebug()<<"TEmuVt102 ctor() initToken..."<<endl;
+  //kdDebug(1211)<<"TEmuVt102 ctor() initToken..."<<endl;
   initTokenizer();
-  //kdDebug()<<"TEmuVt102 ctor() reset()"<<endl;
+  //kdDebug(1211)<<"TEmuVt102 ctor() reset()"<<endl;
   reset();
-  //kdDebug()<<"TEmuVt102 ctor() ctor done"<<endl;
+  //kdDebug(1211)<<"TEmuVt102 ctor() ctor done"<<endl;
 }
 
 /*!
@@ -91,23 +91,23 @@ TEmuVt102::~TEmuVt102()
 
 void TEmuVt102::reset()
 {
-  //kdDebug()<<"TEmuVt102::reset() resetToken()"<<endl;
+  //kdDebug(1211)<<"TEmuVt102::reset() resetToken()"<<endl;
   resetToken();
-  //kdDebug()<<"TEmuVt102::reset() resetModes()"<<endl;
+  //kdDebug(1211)<<"TEmuVt102::reset() resetModes()"<<endl;
   resetModes();
-  //kdDebug()<<"TEmuVt102::reset() resetCharSet()"<<endl;
+  //kdDebug(1211)<<"TEmuVt102::reset() resetCharSet()"<<endl;
   resetCharset(0);
-  //kdDebug()<<"TEmuVt102::reset() reset screen0()"<<endl;
+  //kdDebug(1211)<<"TEmuVt102::reset() reset screen0()"<<endl;
   screen[0]->reset();
-  //kdDebug()<<"TEmuVt102::reset() resetCharSet()"<<endl;
+  //kdDebug(1211)<<"TEmuVt102::reset() resetCharSet()"<<endl;
   resetCharset(1);
-  //kdDebug()<<"TEmuVt102::reset() reset screen 1"<<endl;
+  //kdDebug(1211)<<"TEmuVt102::reset() reset screen 1"<<endl;
   screen[0]->reset();
-  //kdDebug()<<"TEmuVt102::reset() setCodec()"<<endl;
+  //kdDebug(1211)<<"TEmuVt102::reset() setCodec()"<<endl;
   setCodec(0);
-  //kdDebug()<<"TEmuVt102::reset() setKeyTrans()"<<endl;
+  //kdDebug(1211)<<"TEmuVt102::reset() setKeyTrans()"<<endl;
   setKeytrans(0);
-  //kdDebug()<<"TEmuVt102::reset() done"<<endl;
+  //kdDebug(1211)<<"TEmuVt102::reset() done"<<endl;
 }
 
 /* ------------------------------------------------------------------------- */
@@ -326,7 +326,7 @@ void TEmuVt102::XtermHack()
   // arg == 1 doesn't change the title. In XTerm it only changes the icon name
   // (btw: arg=0 changes title and icon, arg=1 only icon, arg=2 only title
   if (arg == 0 || arg == 2) {
-//    kdDebug() << "changeTitle to " << unistr << endl;
+//    kdDebug(1211) << "changeTitle to " << unistr << endl;
     emit changeTitle(arg,unistr);
     }
   delete [] str;

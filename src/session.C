@@ -24,16 +24,16 @@ TESession::TESession(KMainWindow* main, TEWidget* te, const char* _pgm, QStrList
    , pgm(_pgm)
    , args(_args)
 {
-  //kdDebug()<<"TESession ctor() new TEPty"<<endl;
+  //kdDebug(1211)<<"TESession ctor() new TEPty"<<endl;
   sh = new TEPty();
-  //kdDebug()<<"TESession ctor() new TEmuVt102"<<endl;
+  //kdDebug(1211)<<"TESession ctor() new TEmuVt102"<<endl;
   em = new TEmuVt102(te);
 
   term = _term;
 
-  //kdDebug()<<"TESession ctor() sh->setSize()"<<endl;
+  //kdDebug(1211)<<"TESession ctor() sh->setSize()"<<endl;
   sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
-  //kdDebug()<<"TESession ctor() connecting"<<endl;
+  //kdDebug(1211)<<"TESession ctor() connecting"<<endl;
   connect( sh,SIGNAL(block_in(const char*,int)),em,SLOT(onRcvBlock(const char*,int)) );
   connect( em,SIGNAL(ImageSizeChanged(int,int)),sh,SLOT(setSize(int,int)));
 
@@ -46,21 +46,21 @@ TESession::TESession(KMainWindow* main, TEWidget* te, const char* _pgm, QStrList
   connect( em,SIGNAL(changeTitle(int, const QString&)),main,SLOT(changeTitle(int, const QString&)) );
 //  connect( em,SIGNAL(changeTitle(int, const QString&)),this,SLOT(saveChangedTitle(int, const QString&)) );
   connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
-  //kdDebug()<<"TESession ctor() done"<<endl;
+  //kdDebug(1211)<<"TESession ctor() done"<<endl;
 }
 
 
 
 void TESession::run()
 {
-  //kdDebug() << "Running the session!" << pgm << "\n";
+  //kdDebug(1211) << "Running the session!" << pgm << "\n";
   sh->run(pgm,args,term.data(),FALSE);
 }
 
 void TESession::saveChangedTitle(int, const QString& s)
 {
    title=s;
-//   kdDebug() << "saveChangedTitle in Session to " << title << endl;
+//   kdDebug(1211) << "saveChangedTitle in Session to " << title << endl;
 };
 
 void TESession::kill(int signal)
@@ -70,7 +70,7 @@ void TESession::kill(int signal)
 
 TESession::~TESession()
 {
- //kdDebug() << "disconnnecting..." << endl;
+ //kdDebug(1211) << "disconnnecting..." << endl;
  QObject::disconnect( sh, SIGNAL( done( int ) ),
 		      this, SLOT( done( int ) ) );
   delete em;
@@ -138,7 +138,7 @@ void TESession::setFontNo(int fn)
 void TESession::setTitle(const QString& title)
 {
   this->title = title;
-//  kdDebug()<<"Session setTitle " <<  title <<endl;
+//  kdDebug(1211)<<"Session setTitle " <<  title <<endl;
 }
 
 const QString& TESession::Title()
