@@ -65,9 +65,9 @@ static KCmdLineOptions options[] =
    { "notoolbar",       I18N_NOOP("Do not display tab bar"), 0 },
    { "noframe",         I18N_NOOP("Do not display frame"), 0 },
    { "noscrollbar",     I18N_NOOP("Do not display scrollbar"), 0 },
-   { "noxft",           I18N_NOOP("Do not use Xft (Anti-Aliasing)"), 0 },
+   { "noxft",           I18N_NOOP("Do not use Xft (anti-aliasing)"), 0 },
 #ifdef COMPOSITE
-   { "noargb",          I18N_NOOP("Do not use the ARGB32 visual (Transparency)"), 0 },
+   { "noargb",          I18N_NOOP("Do not use the ARGB32 visual (transparency)"), 0 },
 #endif
    { "vt_sz CCxLL",     I18N_NOOP("Terminal size in columns x lines"), 0 },
    { "noresize",        I18N_NOOP("Terminal size is fixed"), 0 },
