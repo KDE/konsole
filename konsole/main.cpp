@@ -492,7 +492,6 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 
         while (counter < session_count)
         {
-          sessionconfig->setDesktopGroup();
           key = QString("Title%1").arg(counter);
           sTitle = sessionconfig->readEntry(key, title);
           key = QString("Args%1").arg(counter);
@@ -520,7 +519,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
           m->initMonitorSilence(sessionconfig->readBoolEntry(key,false));
           key = QString("MasterMode%1").arg(counter);
           m->initMasterMode(sessionconfig->readBoolEntry(key,false));
-                  counter++;
+          counter++;
         }
         m->setDefaultSession( sessionconfig->readEntry("DefaultSession","shell.desktop") );
 
