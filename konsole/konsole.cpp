@@ -1534,9 +1534,8 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       // Options that should be applied to all sessions /////////////
 
       // (1) set menu items and Konsole members
-      QFont tmpFont("fixed");
-      tmpFont.setFixedPitch(true);
-      tmpFont.setStyleHint(QFont::TypeWriter);
+      // TODO: Use font size in fixedFont()
+      QFont tmpFont = KGlobalSettings::fixedFont();
       defaultFont = config->readFontEntry("defaultfont", &tmpFont);
 
       //set the schema
@@ -1804,10 +1803,7 @@ void Konsole::setFont(int fontno)
   }
   else
   {
-    QFont f;
-    f.setFamily("fixed");
-    f.setFixedPitch(true);
-    f.setStyleHint(QFont::TypeWriter);
+    QFont f = KGlobalSettings::fixedFont();
     f.setPixelSize(QString(fonts[fontno]).toInt());
     te->setVTFont(f);
   }

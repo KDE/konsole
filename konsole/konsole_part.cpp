@@ -561,9 +561,8 @@ void konsolePart::readProperties()
 
   n_encoding = config->readNumEntry("encoding",0);
 
-  QFont tmpFont("fixed");
-  tmpFont.setFixedPitch(true);
-  tmpFont.setStyleHint(QFont::TypeWriter);
+  // TODO: Use font size in fixedFont()
+  QFont tmpFont = KGlobalSettings::fixedFont();
   defaultFont = config->readFontEntry("defaultfont", &tmpFont);
   setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT));
 
@@ -702,10 +701,7 @@ void konsolePart::setFont(int fontno)
   }
   else
   {
-    QFont f;
-    f.setFamily("fixed");
-    f.setFixedPitch(true);
-    f.setStyleHint(QFont::TypeWriter);
+    QFont f = KGlobalSettings::fixedFont();
     f.setPixelSize(QString(fonts[fontno]).toInt());
     te->setVTFont(f);
   }
