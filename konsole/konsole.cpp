@@ -963,7 +963,7 @@ void Konsole::makeBasicGUI()
 
   showMenubar = new KToggleAction ( i18n( "Show &Menubar" ), "showmenu", 0, this,
                                     SLOT( slotToggleMenubar() ), m_shortcuts, "show_menubar" );
-  m_fullscreen = KStdAction::fullScreen(this, SLOT(slotToggleFullscreen()), m_shortcuts );
+  m_fullscreen = KStdAction::fullScreen(this, SLOT(setFullScreen( bool )), m_shortcuts, this );
   m_fullscreen->setChecked(b_fullscreen);
 
   m_saveProfile = new KAction( i18n( "Save Sessions &Profile..." ), 0, this,
@@ -1814,7 +1814,7 @@ void Konsole::changeColumns(int columns)
 void Konsole::slotSelectSize() {
     int item = selectSize->currentItem();
     if (b_fullscreen)
-       slotToggleFullscreen();
+       setFullScreen( false );
 
     switch (item) {
     case 0: setColLin(40,15); break;
@@ -1880,45 +1880,20 @@ void Konsole::initFullScreen()
   setFullScreen(b_fullscreen);
 }
 
-void Konsole::slotToggleFullscreen()
-{
-  setFullScreen(!b_fullscreen);
-  te->setFrameStyle( b_framevis && !b_fullscreen ?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
-}
-
 void Konsole::setFullScreen(bool on)
 {
+  if( on == isFullScreen())
+    return;
+  b_fullscreen = on;
   if( on )
-    showFullScreen(); // both calls will generate event triggering updateFullScreen()
+    showFullScreen();
   else {
     if( isFullScreen()) // showNormal() may also do unminimize, unmaximize etc. :(
         showNormal();
-  }
-}
-
-void Konsole::updateFullScreen()
-{
-  if( isFullScreen() == b_fullscreen )
-      return;
-  b_fullscreen = isFullScreen();
-  if (b_fullscreen) {
-    te->setFrameStyle( QFrame::NoFrame );
-  }
-  else {
-    te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
     updateTitle(); // restore caption of window
   }
-  if (m_fullscreen)
-    m_fullscreen->setChecked(b_fullscreen);
-    
   updateRMBMenu();
-}
-
-bool Konsole::event( QEvent* e )
-{
-    if( e->type() == QEvent::ShowFullScreen || e->type() == QEvent::ShowNormal )
-        updateFullScreen();
-    return KMainWindow::event( e );
+  te->setFrameStyle( b_framevis && !b_fullscreen ?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
 }
 
 /* --| sessions |------------------------------------------------------------ */

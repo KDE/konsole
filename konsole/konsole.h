@@ -71,7 +71,6 @@ public:
     const QString &workdir=QString::null);
   ~Konsole();
   void setColLin(int columns, int lines);
-  void setFullScreen(bool on);
   void setAutoClose(bool on);
   void initFullScreen();
   void initSessionFont(int fontNo);
@@ -122,9 +121,6 @@ protected:
  bool queryClose();
  void saveProperties(KConfig* config);
  void readProperties(KConfig* config);
- virtual bool event(QEvent* e);
-
-
 
 private slots:
   void currentDesktopChanged(int desk);
@@ -136,7 +132,7 @@ private slots:
   void doneChild(KonsoleChild*, TESession*);
   void doneSession(TESession*);
   void slotCouldNotClose();
-  void slotToggleFullscreen();
+  void setFullScreen(bool on);
   void schema_menu_activated(int item);
   void pixmap_menu_activated(int item, TEWidget* tewidget=0);
   void keytab_menu_activated(int item);
@@ -248,7 +244,6 @@ private:
   void addSession(TESession* s);
   void detachSession(TESession* _se=0);
   void setColorPixmaps();
-  void updateFullScreen();
 
   void setSchema(ColorSchema* s, TEWidget* tewidget=0);
   void setFont(int fontno=-1);
