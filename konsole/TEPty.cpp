@@ -278,7 +278,7 @@ const char* TEPty::deviceName()
 /*!
     start the client program.
 */
-int TEPty::run(const char* _pgm, QStrList & _args, const char* _term, int _addutmp,
+int TEPty::run(const char* _pgm, QStrList & _args, const char* _term, bool _addutmp,
                const char* _konsole_dcop, const char* _konsole_dcop_session)
 {
   clearArguments();

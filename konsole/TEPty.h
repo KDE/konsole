@@ -40,12 +40,12 @@ Q_OBJECT
   public:
 
     /*!
-        having a `run' separate from the constructor allows to make
-        the necessary connections to the signals and slots of the
-        instance before starting the execution of the client.
-    */
-    int run(const char* pgm, QStrList & args, const char* term, int addutmp,
-            const char* konsole_dcop = "", const char* konsole_dcop_session = "");
+     * having a `run' separate from the constructor allows to make
+     * the necessary connections to the signals and slots of the
+     * instance before starting the execution of the client.
+     */
+    int run( const char* pgm, QStrList & args, const char* term, bool addutmp,
+             const char* konsole_dcop = "", const char* konsole_dcop_session = "" );
     void setWriteable(bool writeable);
     int makePty(bool _addutmp);
     int masterFd() { return fd; }
@@ -102,7 +102,7 @@ Q_OBJECT
     char ptynam[50]; // "/dev/ptyxx" | "/dev/ptmx"
     char ttynam[50]; // "/dev/ttyxx" | "/dev/pts/########..."
     const char *pgm;
-    int addutmp;
+    bool addutmp;
 
     // environment variables
     const char *term;
@@ -123,7 +123,7 @@ Q_OBJECT
     QValueList<SendJob> pendingSendJobs;
     QTimer* pSendJobTimer;
 
-friend int chownpty(int, bool);
+  friend int chownpty(int, bool);
 };
 
 #endif

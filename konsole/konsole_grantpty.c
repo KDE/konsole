@@ -60,7 +60,7 @@ int main (int argc, char *argv[])
     printf("%s is a helper for\n",argv[0]);
     printf("konsole and not intented to\n");
     printf("be called from the command\n");
-    printf("line. In needs to be installed\n");
+    printf("line. It needs to be installed\n");
     printf("root setuid to function.\n");
     return 1; /* FAIL */
   }
@@ -76,12 +76,12 @@ int main (int argc, char *argv[])
   if (!strcmp(argv[1],"--grant"))
   {
     uid = getuid(); /* current user id */
-    mod = S_IRUSR|S_IWUSR|S_IWGRP;
+    mod = S_IRUSR | S_IWUSR | S_IWGRP;
   }
   else
   {
     uid = 0;        /* root */
-    mod = S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH;
+    mod = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH;
   }
   /* Get the group ID of the special `tty' group.  */
   p = getgrnam(TTY_GROUP);            /* posix */
@@ -117,14 +117,12 @@ int main (int argc, char *argv[])
           if (dirp->d_fileno != dsb.st_ino)
             continue;
 
-          {
-            int pdlen = strlen(_PATH_DEV), namelen = strlen(dirp->d_name);
-            pty = malloc(pdlen + namelen + 1);
-            if (pty) {
-              *pty = 0;
-              strcat(pty, _PATH_DEV);
-              strcat(pty, dirp->d_name);
-            }
+	  int pdlen = strlen(_PATH_DEV), namelen = strlen(dirp->d_name);
+	  pty = malloc(pdlen + namelen + 1);
+	  if (pty) {
+	    *pty = 0;
+	    strcat(pty, _PATH_DEV);
+	    strcat(pty, dirp->d_name);
           }
         }
 
