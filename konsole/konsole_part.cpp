@@ -528,7 +528,7 @@ void konsolePart::readProperties()
 
   QString schema = config->readEntry("Schema");
 
-  s_kconfigSchema=config->readEntry("schema", "");
+  s_kconfigSchema=config->readEntry("schema");
   ColorSchema* sch = colors->find(schema.isEmpty() ? s_kconfigSchema : schema);
   if (!sch) {
     sch=(ColorSchema*)colors->at(0);  //the default one

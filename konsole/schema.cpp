@@ -168,7 +168,7 @@ ColorSchema::ColorSchema(KConfig& c)
   c.setGroup("SchemaGeneral");
 
   m_title = c.readEntry("Title",i18n("[no title]"));
-  m_imagePath = c.readEntry("ImagePath",QString::null);
+  m_imagePath = c.readEntry("ImagePath");
   m_alignment = c.readNumEntry("ImageAlignment",1);
   m_useTransparency = c.readBoolEntry("UseTransparency",false);
 

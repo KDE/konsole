@@ -1078,7 +1078,7 @@ void Konsole::saveProperties(KConfig* config) {
         if (cwd.isEmpty())
           cwd=sessions.current()->getInitial_cwd();
         key = QString("Cwd%1").arg(counter);
-        config->writeEntry(key, cwd);
+        config->writePathEntry(key, cwd);
 
         if (sessions.current()==se)
 	  active=counter;
@@ -1175,7 +1175,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT));
 
       //set the schema
-      s_kconfigSchema=config->readEntry("schema", "");
+      s_kconfigSchema=config->readEntry("schema");
       sch = colors->find(schema.isEmpty() ? s_kconfigSchema : schema);
       if (!sch)
       {
@@ -2060,7 +2060,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
 
      if (co) {
         co->setDesktopGroup();
-        QString cmd = co->readEntry("Exec");
+        QString cmd = co->readPathEntry("Exec");
 
         if (!cmd.isEmpty()) {
           cmdArgs.append("-c");
@@ -2459,7 +2459,7 @@ void Konsole::addSessionCommand(const QString &path)
   QString txt = co->readEntry("Name");
 
   // try to locate the binary
-  QString exec= co->readEntry("Exec");
+  QString exec= co->readPathEntry("Exec");
   if (exec.startsWith("su -c \'")) {
      exec = exec.mid(7,exec.length()-8);
   }
@@ -2524,7 +2524,7 @@ void Konsole::addScreenSession(const QString &path, const QString &socket)
   co->writeEntry("Name", socket);
   QString txt = i18n("Screen is a program controlling screens!", "Screen at %1").arg(socket);
   co->writeEntry("Comment", txt);
-  co->writeEntry("Exec", QString::fromLatin1("SCREENDIR=%1 screen -r %2")
+  co->writePathEntry("Exec", QString::fromLatin1("SCREENDIR=%1 screen -r %2")
     .arg(path).arg(socket));
   QString icon = "openterm"; // FIXME use another icon (malte)
   cmd_serial++;

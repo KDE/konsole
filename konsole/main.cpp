@@ -351,7 +351,7 @@ extern "C" int kdemain(int argc, char* argv[])
         sTitle = sessionconfig->readEntry("Title0", title);
         sTerm = sessionconfig->readEntry("Term0");
         sIcon = sessionconfig->readEntry("Icon0","openterm");
-        sCwd = sessionconfig->readEntry("Cwd0");
+        sCwd = sessionconfig->readPathEntry("Cwd0");
         Konsole *m = new Konsole(wname,sPgm,eargs,histon,menubaron,toolbaron,frameon,scrollbaron,sIcon,sTitle,0/*type*/,sTerm,true,sCwd);
         m->enableFullScripting(full_script);
         m->enableFixedSize(fixed_size);
@@ -379,7 +379,7 @@ extern "C" int kdemain(int argc, char* argv[])
           key = QString("Icon%1").arg(counter);
           sIcon = sessionconfig->readEntry(key,"openterm");
           key = QString("Cwd%1").arg(counter);
-          sCwd = sessionconfig->readEntry(key);
+          sCwd = sessionconfig->readPathEntry(key);
           m->newSession(sPgm, eargs, sTerm, sIcon, sCwd);
           m->initSessionTitle(sTitle);
           key = QString("Schema%1").arg(counter);
