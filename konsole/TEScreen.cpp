@@ -1116,7 +1116,7 @@ bool TEScreen::testIsSelected(const int x,const int y)
 
 QString TEScreen::getSelText(const BOOL preserve_line_breaks)
 {
-  if (sel_begin == -1) 
+  if (sel_begin == -1)
      return QString::null; // Selection got clear while selecting.
 
   int *m;			// buffer to fill.
@@ -1145,7 +1145,7 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
           {
               eol = sel_BR % columns + 1;
           }
-          
+
           while (hX < eol)
           {
               Q_UINT16 c = hist->getCell(hY, hX++).c;
@@ -1204,7 +1204,8 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
         }
         else if (eol == sel_BR)
         {
-            addNewLine = true;
+            if (!line_wrapped[(eol - hist_BR)/columns])
+	        addNewLine = true;
         }
         else
         {
