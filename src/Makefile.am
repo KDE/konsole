@@ -52,10 +52,15 @@ kcmkonsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 konsole_grantpty_SOURCES = konsole_grantpty.c
 
+install-data-local:
+	@echo ""
+	@echo "konsole_grantpty is by default installed with SETUID root bit!"
+	@echo "This is needed for konsole to ensure that it can't be eavesdroped."
+	@echo ""
+
+# konsole_grantpty needs to be installed setuid root
 install-exec-local:
-	@echo
-	@echo Make sure to set konsole_grantpty to be root suid.
-	@echo
+	@(chown root $(bindir)/konsole_grantpty && chmod 4755 $(bindir)/konsole_grantpty) || echo "Please make konsole_grandpty setuid root"  
 
 # the library search path. 
 
