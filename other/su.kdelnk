@@ -2,31 +2,7 @@
 [KDE Desktop Entry]
 Type=KonsoleApplication
 Name=Administrator
-Name[cs]=Administr·tor
-Name[es]=Administrador
-Name[fr]=Administrateur
-Name[hu]=Adminisztr·tor
-Name[is]=Ofurpaur
-Name[it]=Amministratore
-Name[pt]=Administrador
-Name[pt_BR]=Administrador
-Name[ru]=·ƒÕ…Œ…”‘“¡‘œ“
 Comment=Root Console
-Comment[cs]=Konzole superuæivatele
-Comment[da]=Rootkonsol
-Comment[de]=Rootkonsole
-Comment[es]=Consola Root
-Comment[fr]=Console administrateur
-Comment[hu]=Root Konzol
-Comment[is]=Skj·hermir ofurpaurs
-Comment[it]=Console di Root
-Comment[no]=Root-konsoll
-Comment[pl]=Konsola administratora
-Comment[pt]=Consola como root
-Comment[pt_BR]=Console Raiz
-Comment[ro]=Consol„ de ROOT
-Comment[ru]=ÎœŒ”œÃÿ Root'¡
-Comment[sk]=Rootovsk· konzola
 Exec=su
 Schema=/opt/kde/share/apps/konsole/Linux.schema
 #VGA
