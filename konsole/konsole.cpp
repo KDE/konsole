@@ -2392,17 +2392,6 @@ void Konsole::notifySessionState(TESession* session, int state)
 
 // --| Session support |-------------------------------------------------------
 
-void Konsole::clearSessionHistory(TESession & session)
-{
-  if (b_histEnabled == true) {
-    session.setHistory(HistoryTypeNone());
-    if (m_histSize)
-      session.setHistory(HistoryTypeBuffer(m_histSize));
-    else
-      session.setHistory(HistoryTypeFile());
-  }
-}
-
 void Konsole::buildSessionMenus()
 {
    m_session->clear();
@@ -2803,8 +2792,8 @@ void Konsole::initSessionTitle(const QString &_title) {
 }
 
 void Konsole::slotClearAllSessionHistories() {
-  for (TESession *se = sessions.first(); se; se = sessions.next())
-    clearSessionHistory(*se);
+  for (TESession *_se = sessions.first(); _se; _se = sessions.next())
+    _se->clearHistory();
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -2920,7 +2909,7 @@ void Konsole::slotHistoryType()
 
 void Konsole::slotClearHistory()
 {
-  clearSessionHistory(*se);
+  se->clearHistory();
 }
 
 void Konsole::slotFindHistory()

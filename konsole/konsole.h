@@ -232,7 +232,6 @@ private:
   void setSchema(ColorSchema* s);
   void setFont(int fontno=-1);
 
-  void clearSessionHistory(TESession & session);
   void buildSessionMenus();
   void addSessionCommand(const QString & path);
   void loadSessionCommands();

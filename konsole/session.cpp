@@ -399,6 +399,18 @@ const HistoryType& TESession::history()
   return em->history();
 }
 
+void TESession::clearHistory()
+{
+  if (history().isOn()) {
+    int histSize = history().getSize();
+    setHistory(HistoryTypeNone());
+    if (histSize)
+      setHistory(HistoryTypeBuffer(histSize));
+    else
+      setHistory(HistoryTypeFile());
+  }
+}
+
 QStrList TESession::getArgs()
 {
   return args;

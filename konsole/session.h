@@ -85,6 +85,7 @@ public:
 
   // Additional functions for DCOP
   bool closeSession();
+  void clearHistory();
   void feedSession(const QString &text);
   void sendSession(const QString &text);
   void renameSession(const QString &name);
