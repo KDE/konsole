@@ -1,6 +1,7 @@
 [Desktop Entry]
 ServiceTypes=inode/directory
 Actions=openTerminalHere
+X-KDE-AuthorizeAction=shell_access
 
 [Desktop Action openTerminalHere]
 Name=Open Terminal Here
