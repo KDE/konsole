@@ -916,9 +916,6 @@ void Konsole::activateSession()
   }
   else
   {
-    // setSchema(s->schemaNo());  // hmm.. now it is needed, I guess
-    // only if transparent
-    rootxpm->repaint(true);  
     s->setConnect(TRUE);
   }
   setHeader();

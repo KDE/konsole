@@ -18,6 +18,7 @@
 class QEvent;
 class QRect;
 class QWidget;
+class QTimer;
 class KSharedPixmap;
 
 /**
@@ -65,13 +66,6 @@ public:
     void stop();
 
     /**
-     * Repaint the widget background. Normally, you shouldn't need this.
-     *
-     * @param force Force a repaint, even if the contents did not change.
-     */
-    void repaint(bool force=false);
-
-    /**
      * Check if pseudo transparency is available.
      *
      * @param show_warning Show a warning message when transparent
@@ -79,6 +73,14 @@ public:
      * @return True if transparency is available, false otherwise.
      */
     bool checkAvailable(bool show_warning);
+
+public slots:
+    /**
+     * Repaint the widget background. Normally, you shouldn't need this.
+     *
+     * @param force Force a repaint, even if the contents did not change.
+     */
+    void repaint(bool force=false);
 
 protected:
     virtual bool eventFilter(QObject *, QEvent *);
@@ -88,7 +90,7 @@ private slots:
     void slotDone(bool);
 
 private:
-    bool m_bActive, m_bInit, m_bShown;
+    bool m_bActive, m_bInit;
     int m_Desk;
 
     double m_Fade;
@@ -96,6 +98,7 @@ private:
 
     QRect m_Rect;
     QWidget *m_pWidget;
+    QTimer *m_pTimer;
     KSharedPixmap *m_pPixmap;
 };
 

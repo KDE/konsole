@@ -3,21 +3,18 @@
  * $Id$
  *
  * This file is part of the KDE project, module kdeui.
- * Copyright (C) 1999 Geert Jansen <g.t.jansen@stud.tue.nl>
+ * Copyright (C) 1999,2000 Geert Jansen <jansen@kde.org>
  * 
  * You can Freely distribute this program under the GNU Library
  * General Public License. See the file "COPYING.LIB" for the exact 
  * licensing terms.
  *
- * 18 Dec 99: Geert Jansen
- *  
- *   Ported to the new KSharedPixmap.
+ * 3 Mar 2000: Geert Jansen
+ *   - Don't update when moving.
+ *   - Use KPixmapIO for applying effects on the transparent background.
  *
- * 11/05/99: Geert Jansen
- *
- *   First implemenation of the KRootPixmap class. I think this should be
- *   moved to kdeui after the KRASH release.
- * 
+ * 18 Dec 1999: Geert Jansen
+ *   - Ported to the new KSharedPixmap.
  */
 
 #include <math.h>
@@ -27,13 +24,17 @@
 #include <qrect.h>
 #include <qpoint.h>
 #include <qevent.h>
+#include <qimage.h>
 
 #include <kapp.h>
 #include <klocale.h>
 #include <kwin.h>
 #include <kpixmap.h>
+#include <kimageeffect.h>
 #include <kpixmapeffect.h>
 #include <kmessagebox.h>
+#include <kpixmapio.h>
+#include <kdebug.h>
 
 #include <ksharedpixmap.h>
 #include <krootpixmap.h>
@@ -45,13 +46,14 @@
 KRootPixmap::KRootPixmap(QWidget *widget)
 {
     m_pWidget = widget;
-    m_pPixmap = new KSharedPixmap();
+    m_pPixmap = new KSharedPixmap;
+    m_pTimer = new QTimer;
     m_bInit = false;
     m_bActive = false;
-    m_bShown = false;
 
     connect(kapp, SIGNAL(backgroundChanged(int)), SLOT(slotBackgroundChanged(int)));
     connect(m_pPixmap, SIGNAL(done(bool)), SLOT(slotDone(bool)));
+    connect(m_pTimer, SIGNAL(timeout()), SLOT(repaint(bool)));
 
     QObject *obj = m_pWidget;
     while (obj->parent())
@@ -70,6 +72,7 @@ void KRootPixmap::start()
 void KRootPixmap::stop()
 {
     m_bActive = false;
+    m_pTimer->stop();
 }
 
 
@@ -85,23 +88,21 @@ void KRootPixmap::setFadeEffect(double fade, QColor color)
 }
 
 
-bool KRootPixmap::eventFilter(QObject *obj, QEvent *event)
+bool KRootPixmap::eventFilter(QObject *, QEvent *event)
 {
-    if (!obj->isWidgetType())
+    if (!m_bInit && (event->type() == QEvent::Paint))
+	m_bInit = true;
+    if (!m_bActive)
 	return false;
-
+	
     switch (event->type()) {
     case QEvent::Resize:
     case QEvent::Move:
-	repaint();
+	m_pTimer->start(100, true);
 	break;
 
     case QEvent::Paint:
-	// init after first paint event
-	if (!m_bInit) {
-	    m_bInit = true;
-	    repaint();
-	}
+	repaint();
 	break;
 
     default:
@@ -115,9 +116,6 @@ bool KRootPixmap::eventFilter(QObject *obj, QEvent *event)
 	
 void KRootPixmap::repaint(bool force)
 {
-    if (!m_bActive || !m_bInit)
-	return;
-
     QPoint p1 = m_pWidget->mapToGlobal(m_pWidget->rect().topLeft());
     QPoint p2 = m_pWidget->mapToGlobal(m_pWidget->rect().bottomRight());
     if ((p1 == m_Rect.topLeft()) && (m_pWidget->width() < m_Rect.width()) &&
@@ -138,7 +136,7 @@ void KRootPixmap::repaint(bool force)
 
     // KSharedPixmap will correctly generate a tile for us.
     if (!m_pPixmap->loadFromShared(QString("DESKTOP%1").arg(m_Desk), m_Rect))
-	qDebug("loading of desktop background failed");
+	kDebugWarning("loading of desktop background failed");
 }
 
 
@@ -160,14 +158,20 @@ bool KRootPixmap::checkAvailable(bool show_warning)
 void KRootPixmap::slotDone(bool success)
 {
     if (!success) {
-	qDebug("loading of desktop background failed");
+	kDebugWarning("loading of desktop background failed");
 	return;
     }
 
-    if (m_Fade > 1e-6)
-	KPixmapEffect::fade(*m_pPixmap, m_Fade, m_FadeColor);
+    QPixmap pm = *m_pPixmap;
 
-    m_pWidget->setBackgroundPixmap(*m_pPixmap);
+    if (m_Fade > 1e-6) {
+	KPixmapIO io;
+	QImage img = io.convertToImage(pm);
+	img = KImageEffect::fade(img, m_Fade, m_FadeColor);
+	pm = io.convertToPixmap(img);
+    }
+
+    m_pWidget->setBackgroundPixmap(pm);
 }
   
 
