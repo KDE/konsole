@@ -320,9 +320,11 @@ QString TESession::getPgm()
 QString TESession::getCwd()
 {
 #ifdef HAVE_PROC_CWD
-	QFileInfo Cwd(QString("/proc/%1/cwd").arg(sh->pid()));
-	if(Cwd.isSymLink())
-		cwd = Cwd.readLink();
+  if (cwd.isEmpty()) {
+    QFileInfo Cwd(QString("/proc/%1/cwd").arg(sh->pid()));
+    if(Cwd.isSymLink())
+      return Cwd.readLink();
+  }
 #endif /* HAVE_PROC_CWD */
   return cwd;
 }
