@@ -158,6 +158,7 @@ void TEScreen::clearSelection()
 void TEScreen::setSelBeginXY(const int x, const int y) 
 {
   sel_begin = loc( (x==columns)?(x-1):x,y+histCursor) ;
+
 /*
   printf( "SetSelBeginXY( %d, %d, --> %d ) histCursor=%d \n", 
         x, y, sel_begin, histCursor );
@@ -168,22 +169,31 @@ void TEScreen::setSelBeginXY(const int x, const int y)
 
 void TEScreen::setSelExtentXY(const int x, const int y) 
 {
-  int l =  loc( ((x==columns)||(x==0))?(x-1):x,y + histCursor);
+  int l;
+
+
+  l =  loc( x,y + histCursor);
 
   if (l < sel_begin)
   { 
-    sel_TL = (x==0)?l+1:l; 
+    sel_TL = l; 
     sel_BR = sel_begin;
   } 
   else
   { 
+    /* FIXME: Psilva...
+	hack because we sometimes receive events which are out of bounds... 
+	The real fix is probably in TEWidget? not sure ...
+     */
+    if (x==columns||x==0) l--;
+
     sel_TL = sel_begin;
     sel_BR = l; 
   }
 /*
   printf( "SetSelExtentXY( %d, %d, TL=%d, BR=%d ) histCursor=%d \n", 
         x, y, sel_TL, sel_BR, histCursor );
- */ 
+ */
 }
 
 char *TEScreen::getSelText(const BOOL preserve_line_breaks) 
