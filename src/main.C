@@ -269,6 +269,10 @@ int main(int argc, char* argv[])
 
   // ///////////////////////////////////////////////
 
+  // Ignore SIGHUP so that we don't get killed when 
+  // our parent-shell gets closed.
+  signal(SIGHUP, SIG_IGN); 
+
   putenv((char*)"COLORTERM="); // to trigger mc's color detection
   KonsoleSessionManaged *ksm = new KonsoleSessionManaged();
 
