@@ -105,7 +105,7 @@ signals:
 
     void slotToggleFrame();
     void slotSelectScrollbar();
-    void slotSelectFont();
+    void slotSelectFont(int);
     void schema_menu_check();
     void keytab_menu_activated(int item);
     void updateSchemaMenu();
@@ -117,9 +117,9 @@ signals:
     void slotSelectLineSpacing();
     void slotBlinkingCursor();
     void slotWordSeps();
-    void fontNotFound();
     void slotSetEncoding();
-    void slotFontChanged();
+    void biggerFont();
+    void smallerFont();
 
  private:
     konsoleBrowserExtension *m_extension;
@@ -128,7 +128,6 @@ signals:
     void makeGUI();
     void applySettingsToGUI();
 
-    void setFont(int fontno);
     void setSchema(ColorSchema* s);
     void updateKeytabMenu();
 
@@ -146,7 +145,6 @@ signals:
     KToggleAction* showFrame;
 
     KSelectAction* selectBell;
-    KSelectAction* selectFont;
     KSelectAction* selectLineSpacing;
     KSelectAction* selectScrollbar;
     KSelectAction* selectSetEncoding;
@@ -163,14 +161,12 @@ signals:
     QString     s_schema;
     QString     s_kconfigSchema;
     QString     s_word_seps;			// characters that are considered part of a word
-    QString     fontNotFound_par;
 
     bool        b_framevis:1;
     bool        b_histEnabled:1;
 
     int         curr_schema; // current schema no
     int         n_bell;
-    int         n_font;
     int         n_keytab;
     int         n_render;
     int         n_scroll;
