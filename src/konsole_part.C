@@ -31,6 +31,7 @@
 #include <kiconloader.h>
 #include <kdebug.h>
 #include <qlabel.h>
+#include <qfile.h>
 #include <qsplitter.h>
 
 #include <qdom.h>
@@ -196,6 +197,13 @@ bool konsolePart::openURL( const KURL & url )
 
   if ( url.isLocalFile() )
   {
+      struct stat buff;
+      stat( QFile::encodeName( url.path() ), &buff );
+      if ( !S_ISDIR( buff.st_mode ) )
+      {
+          emit canceled( QString::null );
+          return false;
+      }
       QString text = url.path();
       text.replace(QRegExp(" "), "\\ "); // escape spaces
       text = QString::fromLatin1("cd ") + text + '\n';
