@@ -55,6 +55,8 @@
 #include <qdir.h>
 #include <qevent.h>
 #include <qdragobject.h>
+#include <qobjectlist.h>
+#include <ktoolbarbutton.h>
 
 #include <stdio.h>
 #include <cstdlib>
@@ -139,7 +141,10 @@ Konsole::Konsole(const char* name,
   toolBar()->setIconText(KToolBar::IconTextRight);
   toolBar()->show();
 
-
+  setDockEnabled( toolBar(), QMainWindow::Left, FALSE ); 
+  setDockEnabled( toolBar(), QMainWindow::Right, FALSE ); 
+  toolBar()->setFullSize( TRUE );
+  
   // Init DnD ////////////////////////////////////////////////////////////////
 
   //  setAcceptDrops(true);
@@ -230,8 +235,15 @@ void Konsole::makeMenu()
 {
   // options (taken from kvt) //////////////////////////////////////
 
-  KAction *newsession = KStdAction::openNew(this, SLOT(newSessionSelect()));
+  m_file = new QPopupMenu;
+  connect(m_file, SIGNAL(activated(int)), SLOT(newSession(int)));
+
+  KAction *newsession = KStdAction::openNew(this , SLOT(newSessionSelect()));
   newsession->plug(toolBar());
+  QObjectList *l = toolBar()->queryList( "KToolBarButton" );
+  if ( l && l->first() )
+      ( (KToolBarButton*)l->first() )->setPopup( m_file );
+  delete l;
   toolBar()->insertLineSeparator();
 
   QPopupMenu* m_signals = new QPopupMenu;
@@ -252,8 +264,6 @@ void Konsole::makeMenu()
   act->plug(m_sessions);
 
   m_sessions->insertSeparator();
-  m_file = new QPopupMenu;
-  connect(m_file, SIGNAL(activated(int)), SLOT(newSession(int)));
 
   m_schema = new QPopupMenu;
   m_schema->setCheckable(TRUE);
@@ -843,14 +853,6 @@ void Konsole::activateSession()
 
 void Konsole::newSessionSelect()
 {
-  // Take into account the position of the toolBar to determine where we put the popup
-  if((toolBar()->barPos() == KToolBar::Top) || (toolBar()->barPos() == KToolBar::Left)) {
-    m_file->popup(te->mapToGlobal(QPoint(0,0)));
-  } else if(toolBar()->barPos() == KToolBar::Right) {
-    m_file->popup(te->mapToGlobal(QPoint(te->width()-m_file->sizeHint().width(), 0)));
-  } else {
-    m_file->popup(te->mapToGlobal(QPoint(0,te->height()-m_file->sizeHint().height())));
-  }
 }
 
 void Konsole::newSession(int i)
