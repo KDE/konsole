@@ -121,7 +121,6 @@ Time to start a requirement list.
 
 #include "konsole.h"
 #include <netwm.h>
-#include "printsettings.h"
 
 #define KONSOLEDEBUG    kdDebug(1211)
 
@@ -3161,7 +3160,6 @@ void Konsole::enableFullScripting(bool b)
 void Konsole::slotPrint()
 {
   KPrinter printer;
-  printer.addDialogPage(new PrintSettings());
   if (printer.setup(this))
   {
     printer.setFullPage(false);

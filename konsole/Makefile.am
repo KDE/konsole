@@ -47,7 +47,7 @@ kwrited_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 # konsole kdeinit module
 konsole_la_SOURCES = TEPty.cpp BlockArray.cpp main.cpp konsole.cpp schema.cpp session.cpp TEWidget.cpp TEmuVt102.cpp \
      TEScreen.cpp TEmulation.cpp TEHistory.cpp keytrans.cpp konsoleiface.skel sessioniface.skel \
-     konsole_wcwidth.cpp konsolebookmarkhandler.cpp konsolebookmarkmenu.cpp konsole_child.cpp printsettings.cpp
+     konsole_wcwidth.cpp konsolebookmarkhandler.cpp konsolebookmarkmenu.cpp konsole_child.cpp
 konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
 konsole_la_LIBADD = $(LIB_KDEPRINT) $(LIBUTIL) $(XTESTLIB)
 
