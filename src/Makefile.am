@@ -1,7 +1,5 @@
 # This file is part of Konsole - an X terminal for KDE
 
-AM_CPPFLAGS = -UQT_NO_ASCII_CAST
-
 # just set the variable
 APPSDIR = $(kde_appsdir)/Utilities
 DATADIR = $(kde_datadir)/konsole

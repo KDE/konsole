@@ -1132,14 +1132,14 @@ void TEWidget::drop_menu_activated(int item)
   switch (item)
   {
     case 0: // paste
-      currentSession->getEmulation()->sendString(dropText);
+      currentSession->getEmulation()->sendString(dropText.local8Bit());
 //    KWM::activate((Window)this->winId());
       break;
     case 1: // cd ...
       currentSession->getEmulation()->sendString("cd ");
       QString text = KURL( dropText ).directory( true, false );
       text.replace(QRegExp(" "), "\\ "); // escape spaces
-      currentSession->getEmulation()->sendString(text);
+      currentSession->getEmulation()->sendString(text.local8Bit());
       currentSession->getEmulation()->sendString("\n");
 //    KWM::activate((Window)this->winId());
       break;

@@ -900,7 +900,7 @@ void Konsole::newSession(int i)
 
   QString cmd = co->readEntry("Exec");
   QString nam = co->readEntry("Name");    // not null
-  QString emu = co->readEntry("Term");
+  QCString emu = co->readEntry("Term").ascii();
   QString sch = co->readEntry("Schema");
   QString txt = co->readEntry("Comment"); // not null
   int     fno = QMIN(co->readUnsignedNumEntry("Font",se->fontNo()),TOPFONT);

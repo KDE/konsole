@@ -134,7 +134,7 @@ public:
   void ReportToken(); // diagnostic
 private:
   int     sym;
-  QString res;
+  QCString res;
   int     len;
   int     slinno;
   int     scolno;
@@ -244,11 +244,11 @@ void KeytabReader::ReportToken() // diagnostic
   {
     case SYMEol    : printf("End of line"); break;
     case SYMEof    : printf("End of file"); break;
-    case SYMName   : printf("Name: %s",res.ascii()); break;
-    case SYMOpr    : printf("Opr : %s",res.ascii()); break;
+    case SYMName   : printf("Name: %s",res.data()); break;
+    case SYMOpr    : printf("Opr : %s",res.data()); break;
     case SYMString : printf("String len %d,%d ",res.length(),len);
                      for (unsigned i = 0; i < res.length(); i++)
-                       printf(" %02x(%c)",res.ascii()[i],res.ascii()[i]>=' '?res.ascii()[i]:'?');
+                       printf(" %02x(%c)",res.data()[i],res.data()[i]>=' '?res.data()[i]:'?');
                      break;
   }
   printf("\n");
@@ -309,7 +309,7 @@ void KeytabReader::parseTo(KeyTrans* kt)
 
 Loop:
   // syntax: ["key" KeyName { ("+" | "-") ModeName } ":" String/CommandName] ["#" Comment]
-  if (sym == SYMName && !strcmp(res.ascii(),"keyboard"))
+  if (sym == SYMName && !strcmp(res,"keyboard"))
   {
     getSymbol(); assertSyntax(sym == SYMString, "Header expected")
     kt->hdr = i18n(res);
@@ -317,19 +317,19 @@ Loop:
     getSymbol();                   // eoln
     goto Loop;
   }
-  if (sym == SYMName && !strcmp(res.ascii(),"key"))
+  if (sym == SYMName && !strcmp(res,"key"))
   {
 //printf("line %3d: ",startofsym);
     getSymbol(); assertSyntax(sym == SYMName, "Name expected")
     assertSyntax(syms->keysyms[res], "Unknown key name")
     int key = (int)syms->keysyms[res]-1;
-//printf(" key %s (%04x)",res.ascii(),(int)keysyms[res]-1);
+//printf(" key %s (%04x)",res.data(),(int)keysyms[res]-1);
     getSymbol(); // + - :
     int mode = 0;
     int mask = 0;
-    while (sym == SYMOpr && (!strcmp(res.ascii(),"+") || !strcmp(res.ascii(),"-")))
+    while (sym == SYMOpr && (!strcmp(res,"+") || !strcmp(res,"-")))
     {
-      bool on = !strcmp(res.ascii(),"+");
+      bool on = !strcmp(res,"+");
       getSymbol();
       // mode name
       assertSyntax(sym == SYMName, "Name expected")
@@ -344,10 +344,10 @@ Loop:
         mode |= (on << bits);
         mask |= (1 << bits);
       }
-//printf(", mode %s(%d) %s",res.ascii(),(int)modsyms[res]-1,on?"on":"off");
+//printf(", mode %s(%d) %s",res.data(),(int)modsyms[res]-1,on?"on":"off");
       getSymbol();
     }
-    assertSyntax(sym == SYMOpr && !strcmp(res.ascii(),":"), "':' expected")
+    assertSyntax(sym == SYMOpr && !strcmp(res,":"), "':' expected")
     getSymbol();
     // string or command
     assertSyntax(sym == SYMName || sym == SYMString,"Command or string expected")
@@ -356,14 +356,14 @@ Loop:
     {
       assertSyntax(syms->oprsyms[res], "Unknown operator name")
       cmd = (int)syms->oprsyms[res]-1;
-//printf(": do %s(%d)",res.ascii(),(int)oprsyms[res]-1);
+//printf(": do %s(%d)",res.data(),(int)oprsyms[res]-1);
     }
     if (sym == SYMString)
     {
       cmd = CMD_send;
 //printf(": send");
 //for (unsigned i = 0; i < res.length(); i++)
-//printf(" %02x(%c)",res.ascii()[i],res.ascii()[i]>=' '?res.ascii()[i]:'?');
+//printf(" %02x(%c)",res.data()[i],res.data()[i]>=' '?res.data()[i]:'?');
     }
 //printf(". summary %04x,%02x,%02x,%d\n",key,mode,mask,cmd);
     KeyTrans::KeyEntry* ke = kt->addEntry(slinno,key,mode,mask,cmd,res);
