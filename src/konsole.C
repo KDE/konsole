@@ -489,8 +489,8 @@ void Konsole::makeGUI()
     KPopupMenu* m_help =  helpMenu(aboutAuthor, false);
     */
    //help menu
-   m_help->insertItem( i18n("&Technical Reference"), this, SLOT(tecRef()),
-                       0, -1, 1);
+   //m_help->insertItem( i18n("&Technical Reference"), this, SLOT(tecRef()),
+   //                    0, -1, 1);
 
    //the different session types
    loadSessionCommands();
