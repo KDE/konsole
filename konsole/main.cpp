@@ -19,6 +19,7 @@
 
 #include <qdir.h>
 #include <qsessionmanager.h>
+#include <qwidgetlist.h>
 
 #include <dcopclient.h>
 
@@ -420,5 +421,19 @@ int main(int argc, char* argv[])
     m->showTipOnStart();
   }
 
-  return a.exec();
+  int ret = a.exec();
+  
+ //// Temporary code, waiting for Qt to do this properly
+
+  // Delete all toplevel widgets that have WDestructiveClose
+  QWidgetList *list = QApplication::topLevelWidgets();
+  QWidgetListIt it(*list);
+  QWidget * w;
+  while( (w=it.current()) != 0 ) {
+     ++it;
+     if ( w->testWFlags( Qt::WDestructiveClose ) )
+          delete w;
+  }  
+
+  return ret;  
 }

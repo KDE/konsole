@@ -322,8 +322,28 @@ DCOPObject( "konsole" )
 
 Konsole::~Konsole()
 {
-//FIXME: close all session properly and clean up
-    // Delete the session if isn't in the session list any longer.
+    while (detached.count()) {
+        KonsoleChild* child=detached.first();
+        delete child;
+        detached.remove(child);
+    }
+
+    sessions.first();
+    while(sessions.current())
+    {
+      sessions.current()->sendSignal(SIGHUP);
+      sessions.next();
+    }
+
+    // Wait a bit for all childs to clean themselves up. 
+#if KDE_VERSION >=305
+    while(sessions.count() && KProcessController::theKProcessController->waitForProcessExit(1))
+        ;
+//#else
+//    while(sessions.count())
+//        ;
+#endif
+
     sessions.setAutoDelete(true);
 
     resetScreenSessions();
@@ -796,6 +816,10 @@ void Konsole::activateMenu()
  */
 bool Konsole::queryClose()
 {
+   if(skip_exit_query)
+     // saving session - do not even think about doing any kind of cleanup here
+       return true;
+        
    while (detached.count()) {
      KonsoleChild* child=detached.first();
      delete child;
@@ -805,7 +829,7 @@ bool Konsole::queryClose()
    if (sessions.count() == 0)
        return true;
 
-   if ( (!skip_exit_query) && b_warnQuit)
+   if ( b_warnQuit)
    {
         if( (sessions.count()>1) &&
             ( KMessageBox::warningYesNo( this,
@@ -832,30 +856,17 @@ bool Konsole::queryClose()
       sessions.next();
     }
 
-    if (skip_exit_query)
+    if (!allOK)
     {
-        // Wait a bit for all childs to clean themselves up. 
-#if KDE_VERSION >=305
-	while(sessions.count() && KProcessController::theKProcessController->waitForProcessExit(1));
-#else
-        while(sessions.count());
-#endif
-	return true; // Ready or not, here I come...
+      KMessageBox::information( this, i18n("Not all sessions could be closed. "
+                                           "Please end all sessions running under other user IDs. "
+                                           "In most cases typing 'exit' at the prompt will end them.") );
     }
     else
     {
-        if (!allOK)
-        {
-          KMessageBox::information( this, i18n("Not all sessions could be closed. "
-                                               "Please end all sessions running under other user IDs. "
-                                               "In most cases typing 'exit' at the prompt will end them.") );
-        }
-        else
-        {
-          m_closeTimeout.start(1500, true);
-        }
-        return false;
+      m_closeTimeout.start(1500, true);
     }
+    return false;
 }
 
 void Konsole::slotCouldNotClose()
