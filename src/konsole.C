@@ -297,6 +297,7 @@ Konsole::Konsole(const char* name, const QString& _program,
   connect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
   connect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
   connect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
+  connect( se->getEmulation(),SIGNAL(activateMenu()), this,SLOT(activateMenu()) );
 
   //KONSOLEDEBUG<<"Konsole ctor() ends "<<time.elapsed()<<" msecs elapsed"<<endl;
   //KONSOLEDEBUG<<"Konsole ctor(): done"<<endl;
@@ -579,6 +580,27 @@ void Konsole::makeBasicGUI()
   menubar->insertItem(i18n("Settings"), m_options);
   menubar->insertItem(i18n("Help"), m_help);
 };
+
+/**
+   Make menubar available via escape sequence (Default: Ctrl+Alt+m)
+ */
+void Konsole::activateMenu()
+{
+  menubar->activateItemAt(0);
+  if ( !showMenubar->isChecked() ) {
+    menubar->show();
+    connect( menubar,SIGNAL(activated(int)), this,SLOT(hideMenu(int)));
+ // FIXME: How can one catch if the menu is aborted with ESC/clicking elsewhere?
+  }
+}
+
+void Konsole::hideMenu(int item)
+{
+  disconnect( menubar,SIGNAL(activated(int)), this,SLOT(hideMenu(int)));
+  if ( !showMenubar->isChecked() ) {
+    menubar->hide();
+  }
+}
 
 /**
    Ask for Quit confirmation - Martijn Klingens
@@ -1288,6 +1310,7 @@ void Konsole::activateSession(TESession *s)
      QObject::disconnect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
      QObject::disconnect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
      QObject::disconnect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
+     QObject::disconnect( se->getEmulation(),SIGNAL(activateMenu()), this,SLOT(activateMenu()) );
      // Delete the session if isn't in the session list any longer.
      if (sessions.find(se) == -1)
         delete se;
@@ -1317,7 +1340,8 @@ void Konsole::allowPrevNext()
 {
   QObject::connect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
   QObject::connect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
-  QObject::connect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) 
+  QObject::connect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
+  QObject::connect( se->getEmulation(),SIGNAL(activateMenu()), this,SLOT(activateMenu()) 
 );
 }
 

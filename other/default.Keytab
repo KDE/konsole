@@ -90,7 +90,8 @@ key Space +Control : "\x00"
 
 key Left  +Shift   : prevSession
 key Right +Shift   : nextSession
-key N +Control +Alt  : newSession
+key N +Control +Alt: newSession
+key M +Control +Alt: activateMenu
 key Up    +Shift   : scrollLineUp
 key Prior +Shift   : scrollPageUp
 key Down  +Shift   : scrollLineDown

@@ -100,6 +100,8 @@ private slots:
   void updateTitle();
   void prevSession();
   void nextSession();
+  void activateMenu();
+  void hideMenu(int);
   void allowPrevNext();
   void setSchema(int n);
   void sendSignal(int n);
