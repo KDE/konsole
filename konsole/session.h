@@ -23,6 +23,10 @@
 
 #include "sessioniface.h"
 
+class KProcIO;
+class KProcess;
+class ZModemDialog;
+
 class TESession : public QObject, virtual public SessionIface
 { Q_OBJECT
 
@@ -89,6 +93,10 @@ public:
   virtual QCStringList functionsDynamic();
   void enableFullScripting(bool b) { fullScripting = b; }
 
+  void startZModem(const QString &rz, const QString &dir, const QStringList &list);
+  void cancelZModem();
+  bool zmodemIsBusy() { return zmodemBusy; }
+
 public slots:
 
   void run();
@@ -96,6 +104,13 @@ public slots:
   void terminate();
   void setUserTitle( int, const QString &caption );
   void ptyError();
+  void slotZModemDetected();
+  void emitZModemDetected();
+
+  void zmodemStatus(KProcess *, char *data, int len);
+  void zmodemSendBlock(KProcess *, char *data, int len);
+  void zmodemRcvBlock(const char *data, int len);
+  void zmodemDone();
 
 signals:
 
@@ -108,6 +123,8 @@ signals:
   void renameSession(TESession* ses, const QString &name);
 
   void openURLRequest(const QString &cwd);
+  
+  void zmodemDetected(TESession *);
 
 private slots:
   void monitorTimerDone();
@@ -150,6 +167,11 @@ private:
 
   QString        cwd;
   QString        initial_cwd;
+  
+  // ZModem
+  bool           zmodemBusy;
+  KProcIO*       zmodemProc;
+  ZModemDialog*  zmodemProgress;
 };
 
 #endif

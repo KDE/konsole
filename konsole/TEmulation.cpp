@@ -318,6 +318,11 @@ void TEmulation::onRcvBlock(const char *s, int len)
     for (int j = 0; j < reslen; j++)
       onRcvChar(result[j].unicode());
     if (s[i] == '\n') bulkNewline();
+    if (s[i] == '\030')
+    {
+      if ((len-i-1 > 9) && (strncmp(s+i+1, "B00000000", 9) == 0))
+      	emit zmodemDetected();
+    }
   }
   bulkEnd();
 }

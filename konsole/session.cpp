@@ -1,13 +1,17 @@
 #include "session.h"
+#include <zmodem_dialog.h>
+
 #include <kdebug.h>
 #include <dcopclient.h>
 #include <kmessagebox.h>
 #include <klocale.h>
+#include <kprocio.h>
 
 #include <stdlib.h>
 #include <qfile.h>
 #include <qdir.h>
 #include <qregexp.h>
+#include <qtextedit.h>
 
 #ifndef HERE
 #define HERE fprintf(stderr,"%s(%d): here\n",__FILE__,__LINE__)
@@ -39,6 +43,9 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
    , sessionId(_sessionId)
    , cwd("")
    , initial_cwd(_initial_cwd)
+   , zmodemBusy(false)
+   , zmodemProc(0)
+   , zmodemProgress(0)
 {
   //kdDebug(1211)<<"TESession ctor() new TEPty"<<endl;
   sh = new TEPty();
@@ -66,6 +73,8 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
            this, SLOT( notifySessionState(int) ) );
   monitorTimer = new QTimer(this);
   connect(monitorTimer, SIGNAL(timeout()), this, SLOT(monitorTimerDone()));
+
+  connect( em, SIGNAL( zmodemDetected() ), this, SLOT(slotZModemDetected()));
 
   connect( sh,SIGNAL(done(int)), this,SLOT(done()) );
   //kdDebug(1211)<<"TESession ctor() done"<<endl;
@@ -196,6 +205,8 @@ TESession::~TESession()
                        this, SLOT( done() ) );
   delete em;
   delete sh;
+
+  delete zmodemProc;
 }
 
 void TESession::setConnect(bool c)
@@ -396,6 +407,121 @@ void TESession::setXonXoff(bool set)
 {
   xon_xoff = set;
 }
+
+void TESession::slotZModemDetected()
+{
+  if (!zmodemBusy)
+  {
+    QTimer::singleShot(10, this, SLOT(emitZModemDetected()));
+    zmodemBusy = true;
+  }
+}
+
+void TESession::emitZModemDetected()
+{
+  emit zmodemDetected(this);
+}
+
+void TESession::cancelZModem()
+{
+  sh->send_bytes("\030\030\030\030", 4); // Abort
+  zmodemBusy = false;
+}
+
+void TESession::startZModem(const QString &zmodem, const QString &dir, const QStringList &list)
+{
+  zmodemBusy = true;
+  zmodemProc = new KProcIO;
+
+  (*zmodemProc) << zmodem << "-v";
+  for(QStringList::ConstIterator it = list.begin();
+      it != list.end();
+      ++it)
+  {
+     (*zmodemProc) << (*it);
+  }
+
+  if (!dir.isEmpty())
+     zmodemProc->setWorkingDirectory(dir);
+  zmodemProc->start(KProcIO::NotifyOnExit, false);
+  
+  // Override the read-processing of KProcIO
+  disconnect(zmodemProc,SIGNAL (receivedStdout (KProcess *, char *, int)), 0, 0);
+  connect(zmodemProc,SIGNAL (receivedStdout (KProcess *, char *, int)), 
+          this, SLOT(zmodemSendBlock(KProcess *, char *, int)));
+  connect(zmodemProc,SIGNAL (receivedStderr (KProcess *, char *, int)), 
+          this, SLOT(zmodemStatus(KProcess *, char *, int)));
+  connect(zmodemProc,SIGNAL (processExited(KProcess *)),
+          this, SLOT(zmodemDone()));
+
+  disconnect( sh,SIGNAL(block_in(const char*,int)),em,SLOT(onRcvBlock(const char*,int)) );
+  connect( sh,SIGNAL(block_in(const char*,int)), this ,SLOT(zmodemRcvBlock(const char*,int)) );
+
+  zmodemProgress = new ZModemDialog(te->topLevelWidget(), false,
+                                    i18n("ZModem Progress"));
+  
+  connect(zmodemProgress, SIGNAL(user1Clicked()), 
+          this, SLOT(zmodemDone()));
+
+  zmodemProgress->show();
+}
+
+void TESession::zmodemSendBlock(KProcess *, char *data, int len)
+{
+  sh->send_bytes(data, len);
+}
+
+void TESession::zmodemStatus(KProcess *, char *data, int len)
+{
+  QCString msg(data, len+1);
+  while(!msg.isEmpty())
+  {
+     int i = msg.find('\015');
+     int j = msg.find('\012');
+     QCString txt;
+     if ((i != -1) && ((j == -1) || (i < j)))
+     {
+       msg = msg.mid(i+1);
+     }
+     else if (j != -1)
+     {
+       txt = msg.left(j);
+       msg = msg.mid(j+1);
+     }
+     else
+     {
+       txt = msg;
+       msg.truncate(0);
+     }
+     if (!txt.isEmpty())
+       zmodemProgress->addProgressText(QString::fromLocal8Bit(txt));
+  }
+}
+
+void TESession::zmodemRcvBlock(const char *data, int len)
+{
+  QByteArray ba;
+  ba.duplicate(data, len);
+  zmodemProc->writeStdin(ba);
+}
+
+void TESession::zmodemDone()
+{
+  if (zmodemProc)
+  {
+    delete zmodemProc;
+    zmodemProc = 0;
+    zmodemBusy = false;
+  
+    disconnect( sh,SIGNAL(block_in(const char*,int)), this ,SLOT(zmodemRcvBlock(const char*,int)) );
+    connect( sh,SIGNAL(block_in(const char*,int)),em,SLOT(onRcvBlock(const char*,int)) );
+
+    sh->send_bytes("\030\030\030\030", 4); // Abort
+    sh->send_bytes("\001\013\n", 3); // Try to get prompt back
+    zmodemProgress->done();
+  }
+}
+
 
 bool TESession::processDynamic(const QCString &fun, const QByteArray &data, QCString& replyType, QByteArray &replyData)
 {

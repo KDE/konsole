@@ -86,6 +86,7 @@ Time to start a requirement list.
 #include <stdlib.h>
 
 #include <kfiledialog.h>
+#include <kurlrequesterdlg.h>
 
 #include <kfontdialog.h>
 #include <kkeydialog.h>
@@ -198,6 +199,7 @@ DCOPObject( "konsole" )
 ,m_signals(0)
 ,m_help(0)
 ,m_rightButton(0)
+,m_zmodemUpload(0)
 ,monitorActivity(0)
 ,monitorSilence(0)
 ,masterMode(0)
@@ -456,6 +458,9 @@ void Konsole::makeGUI()
    // View Menu
    m_detachSession->plug(m_view);
    m_renameSession->plug(m_view);
+
+   m_view->insertSeparator();
+   m_zmodemUpload->plug( m_view );
 
    m_view->insertSeparator();
    monitorActivity->plug ( m_view );
@@ -773,6 +778,8 @@ void Konsole::makeBasicGUI()
 
   m_renameSession = new KAction(i18n("&Rename Session..."), Qt::CTRL+Qt::ALT+Qt::Key_S, this,
                                 SLOT(slotRenameSession()), m_shortcuts, "rename_session");
+  m_zmodemUpload = new KAction(i18n("&ZModem upload..."), Qt::CTRL+Qt::ALT+Qt::Key_U, this,
+                                SLOT(slotZModemUpload()), m_shortcuts, "zmodem_upload");
   monitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ), "idea", 0, this,
                                         SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_activity" );
   monitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ), "ktip", 0, this,
@@ -1941,6 +1948,8 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
            this, SLOT(changeColumns(int)) );
   connect( s->getEmulation(), SIGNAL(ImageSizeChanged(int,int)),
            this, SLOT(notifySize(int,int)));
+  connect( s, SIGNAL(zmodemDetected(TESession*)),
+           this, SLOT(slotZModemDetected(TESession*)));           
 
   s->setFontNo(QMIN(fno, TOPFONT));
   s->setSchemaNo(schmno);
@@ -2889,6 +2898,69 @@ void Konsole::slotSaveHistory()
   }
 }
 
+void Konsole::slotZModemUpload()
+{
+  if (se->zmodemIsBusy())
+  {
+    KMessageBox::sorry(this,
+         i18n("<p>The current session already has a ZModem file transfer in progress."));
+    return;                          
+  }
+  QString zmodem = KGlobal::dirs()->findExe("sz");
+  if (zmodem.isEmpty())
+    zmodem = KGlobal::dirs()->findExe("lsz");  
+  if (zmodem.isEmpty())
+  {
+    KMessageBox::sorry(this, 
+                   i18n("<p>No suitable ZModem software was found on "
+                        "the system.\n"
+                        "<p>You may wish to install the 'rzsz' or 'lrzsz' package.\n"));
+    return;                       
+  }
+
+  QStringList files = KFileDialog::getOpenFileNames(QString::null, QString::null, this, 
+  	i18n("Select Files to Upload"));
+  if (files.isEmpty())
+    return;
+    
+  se->startZModem(zmodem, QString::null, files);
+}
+
+void Konsole::slotZModemDetected(TESession *session)
+{
+  if(se != session)
+    activateSession(session);
+
+  QString zmodem = KGlobal::dirs()->findExe("rz");
+  if (zmodem.isEmpty())
+    zmodem = KGlobal::dirs()->findExe("lrz");  
+  if (zmodem.isEmpty())
+  {
+    KMessageBox::information(this, 
+                   i18n("<p>A ZModem file transfer attempt has been detected, "
+                        "but no suitable ZModem software was found on "
+                        "the system.\n"
+                        "<p>You may wish to install the 'rzsz' or 'lrzsz' package.\n"));
+    return;                       
+  }
+  KURLRequesterDlg dlg(KGlobalSettings::documentPath(),
+                   i18n("A ZModem file transfer attempt has been detected.\n"
+                        "Please specify the directory you want to store the file(s):"),
+                   this, "zmodem_dlg");
+  dlg.setButtonOKText( i18n("&Download"), 
+                       i18n("Start downloading file to specified directory."),
+                       i18n("Start downloading file to specified directory."));
+  if (!dlg.exec())
+  {
+     session->cancelZModem();
+  }
+  else
+  {
+     const KURL &url = dlg.selectedURL();
+     session->startZModem(zmodem, url.path(), QStringList());
+  }
+}
+
 //////////////////////////////////////////////////////////////////////
 
 SizeDialog::SizeDialog(const unsigned int columns,
@@ -3051,6 +3123,7 @@ void Konsole::smallerFont(void) {
     setFont( DEFAULTFONT );
     activateSession();
 }
+
 
 bool Konsole::processDynamic(const QCString &fun, const QByteArray &data, QCString& replyType, QByteArray &replyData)
 {

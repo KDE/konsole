@@ -204,6 +204,9 @@ private slots:
   void biggerFont();
   void smallerFont();
 
+  void slotZModemDetected(TESession *session);
+  void slotZModemUpload();
+
 private:
   KSimpleConfig *defaultSession();
   QString newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(), const QString &_term = QString::null, const QString &_icon = QString::null, const QString &_title = QString::null, const QString &_cwd = QString::null);
@@ -260,6 +263,7 @@ private:
   KPopupMenu* m_help;
   KPopupMenu* m_rightButton;
 
+  KAction *m_zmodemUpload;
   KToggleAction *monitorActivity;
   KToggleAction *monitorSilence;
   KToggleAction *masterMode;
