@@ -130,6 +130,7 @@ private slots:
   void activateSession();
   void activateSession(TESession*);
   void closeCurrentSession();
+  void confirmCloseCurrentSession();
   void doneChild(KonsoleChild*, TESession*);
   void doneSession(TESession*);
   void slotCouldNotClose();

@@ -908,7 +908,7 @@ void Konsole::makeTabWidget()
     QToolTip::add(m_removeSessionButton,i18n("Close the current session"));
     m_removeSessionButton->setIconSet( SmallIcon( "tab_remove" ) );
     m_removeSessionButton->adjustSize();
-    connect(m_removeSessionButton, SIGNAL(clicked()), SLOT(closeCurrentSession()));
+    connect(m_removeSessionButton, SIGNAL(clicked()), SLOT(confirmCloseCurrentSession()));
     tabwidget->setCornerWidget( m_removeSessionButton, BottomRight );
 
   }
@@ -1502,7 +1502,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       checkSoundSystem();
       if ( !b_soundSystemEnabled && (n_bell == BELLNOTIFY) )
          n_bell = BELLSYSTEM;
-      
+
       // Options that should be applied to all sessions /////////////
 
       // (1) set menu items and Konsole members
@@ -2781,6 +2781,15 @@ void Konsole::newSession(const QString& sURL, const QString& title)
     * We can't create a session without a protocol.
     * We should ideally popup a warning.
     */
+}
+
+void Konsole::confirmCloseCurrentSession()
+{
+   if (KMessageBox::warningContinueCancel(this,
+     i18n("Are you sure that you want to close the current session?"),
+     i18n("Close Confirmation"), KGuiItem(i18n("C&lose Session"),"tab_remove"),
+     "ConfirmCloseSession")==KMessageBox::Continue)
+       closeCurrentSession();
 }
 
 void Konsole::closeCurrentSession()
