@@ -1,0 +1,68 @@
+> Konsole is a *great* program, but is designed for the end user to have a
+> lot of control over their session--which in our environment would be
+> very bad.  The users have no clue what emulation to pick, how many
+> columns and rows they need.
+>
+> What would really help is some command line arguments that would take
+> configure certain items, and then disable them from the pulldowns along
+> the top.
+>
+> For instance, if the command --noscrollbar was issued, it would turn off
+> the scroll bar and then now allow them to turn it back on again via the
+> pulldowns.
+>
+> The more things that I could configure via the command line, the better.
+
+A lot of this can already be disabled with KDE's KIOSK framework. By adding a 
+[KDE Action Restrictions] group to your konsolerc file, you can disable individual actions. The following actions are used in konsole:
+
+action/copy
+action/paste
+action/clear_terminal
+action/reset_clear_terminal
+action/find_history
+action/find_next
+action/find_previous
+action/save_history
+action/clear_history
+action/clear_all_histories
+action/detach_session
+action/rename_session
+action/monitor_activity
+action/monitor_silence
+action/send_input_to_all_sessions
+action/show_menubar
+action/show_toolbar
+action/fullscreen
+action/save_sessions_profile
+action/close_session
+action/quit
+action/new_session
+action/activate_menu
+action/list_sessions
+
+Since KDE 3.1.1 the following actions will be available as well:
+action/bell
+action/font
+action/schema
+action/size
+action/scrollbar
+action/keyboard
+
+
+So if you don't want the user to toggle his scrollbar settings, you would add:
+
+[KDE Action Restrictions]
+action/scrollbar=false
+
+Also usefull in this context is:
+
+[KDE Action Restrictions]
+shell_access=false
+
+This disables all actions that start a new shell in konsole (such as 
+action/new_session, but more complete) This requires KDE 3.1.0 or newer.
+
+Note that if you change this in konsolerc it will apply to all konsoles. 
+However you can copy konsolerc to e.g. my_konsolerc and then start konsole 
+with "konsole --config my_konsolerc"
