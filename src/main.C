@@ -95,6 +95,7 @@ TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
 {
   se = 0L;
   menubar = menuBar();
+  setMinimumSize(200,100);
   
   // get the default values
   readProperties(kapp->getConfig());
