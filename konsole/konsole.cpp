@@ -1925,6 +1925,8 @@ void Konsole::createSessionTab(TEWidget *widget, const QIconSet &iconSet,
 
 QIconSet Konsole::iconSetForSession(TESession *session) const
 {
+  if (m_tabViewMode == ShowTextOnly)
+    return QIconSet();
   return SmallIconSet(session->isMasterMode() ? "remote" : session->IconName());
 }
 
