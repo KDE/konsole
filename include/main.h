@@ -19,6 +19,7 @@
 #include <kfm.h>
 #include <kapp.h>
 #include <ktmainwindow.h>
+//#include <ktopwidget.h>
 #include <ksimpleconfig.h>
 #include <qstrlist.h>
 
@@ -68,7 +69,7 @@ protected:
 private slots:
 
   void setSchema(int n);
-  void saveYourself();
+//  void saveYourself();
 
 private:
 
