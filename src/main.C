@@ -190,7 +190,7 @@ TEDemo::TEDemo(const QString& name, QStrList & _args, int login_shell, int histo
 
   // construct initial session ///////////////////////////////////////////////
 
-  TESession* initial = new TESession(this,te,args,"xterm-color",login_shell);
+  TESession* initial = new TESession(this,te,args,"xterm",login_shell);
 
   title = (args.count() && (kapp->caption() == PACKAGE))
         ? QString(args.at(0))  // program executed in the title bar
@@ -1054,6 +1054,10 @@ int main(int argc, char* argv[])
        KCmdLineArgs::usage(i18n("expected --vt_sz <#columns>x<#lines> ie. 80x40\n")); 
     }
   }
+
+  // ///////////////////////////////////////////////
+
+  putenv("COLORTERM="); // to trigger mc's color detection
 
   if (a.isRestored())
   {

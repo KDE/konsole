@@ -944,7 +944,7 @@ void VT102Emulation::onMouse( int cb, int cx, int cy )
 
 #define KeyComb(B,K) ((ev->state() & (B)) == (B) && ev->key() == (K))
 
-#define Xterm (!strcmp(emulation.data(),"xterm-color"))
+#define Xterm (!strcmp(emulation.data(),"xterm"))
 /*!
 */
 
