@@ -18,6 +18,13 @@
 */
 #include "config.h"
 
+// this allows konsole to be compiled without XKB and XTEST extensions
+// even though it might be available on a particular system.
+#if defined(AVOID_XKB)
+#undef HAVE_XKB
+#undef HAVE_XTEST
+#endif
+
 #include "TEmuVt102.h"
 #include "TEWidget.h"
 #include "TEScreen.h"
