@@ -380,6 +380,14 @@ void Konsole::makeGUI()
    connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
 
    // Edit Menu ----------------------------------------------------------------
+   KAction *copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0,
+     te, SLOT(copyClipboard()), this);
+   copyClipboard->plug(m_edit);
+   KAction *pasteClipboard = new KAction(i18n("&Paste"), "editpaste", 0,
+     te, SLOT(pasteClipboard()), this);
+   pasteClipboard->plug(m_edit);
+
+   m_edit->insertSeparator();
    m_edit->setCheckable(TRUE);
    m_edit->insertItem( i18n("&Send Signal"), m_signals );
 
@@ -405,11 +413,11 @@ void Konsole::makeGUI()
    renameSession->plug(m_view);
 
    m_view->insertSeparator();
-   monitorActivity = new KToggleAction ( i18n( "Monitor for Activity" ), "idea", 0, this,
+   monitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ), "idea", 0, this,
                                      SLOT( slotToggleMonitor() ), this );
    monitorActivity->plug ( m_view );
 
-   monitorSilence = new KToggleAction ( i18n( "Monitor for Silence" ), "ktip", 0, this,
+   monitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ), "ktip", 0, this,
                                      SLOT( slotToggleMonitor() ), this );
    monitorSilence->plug ( m_view );
 

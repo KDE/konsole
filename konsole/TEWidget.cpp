@@ -705,9 +705,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   }
   if ( ev->button() == MidButton )
   {
-    QApplication::clipboard()->setSelectionMode( true );
-    emitSelection();
-    QApplication::clipboard()->setSelectionMode( false );
+    emitSelection(true);
   }
   if ( ev->button() == RightButton ) // Configure
   {
@@ -876,7 +874,7 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
 //printf("release [%d,%d] %d\n",ev->x()/font_w,ev->y()/font_h,ev->button());
   if ( ev->button() == LeftButton)
   {
-    if ( actSel > 1 ) emit endSelectionSignal(preserve_line_breaks);
+    if ( actSel > 1 ) emit endSelectionSignal(preserve_line_breaks,true);
     actSel = 0;
 
     //FIXME: emits a release event even if the mouse is
@@ -940,7 +938,7 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
      endSel.setX(x);
      actSel = 2; // within selection
      emit extendSelectionSignal( endSel.x(), endSel.y() );
-     emit endSelectionSignal(preserve_line_breaks);
+     emit endSelectionSignal(preserve_line_breaks,true);
    }
 
   possibleTripleClick=true;
@@ -970,7 +968,7 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
 
   emit beginSelectionSignal( 0, iPntSel.y() );
   emit extendSelectionSignal( 0, iPntSel.y()+1 );
-  emit endSelectionSignal(preserve_line_breaks);
+  emit endSelectionSignal(preserve_line_breaks,true);
 }
 
 void TEWidget::focusInEvent( QFocusEvent * )
@@ -1032,9 +1030,10 @@ void TEWidget::setMouseMarks(bool on)
 
 #undef KeyPress
 
-void TEWidget::emitSelection()
+void TEWidget::emitSelection(bool useXselection)
 // Paste Clipboard by simulating keypress events
 {
+  QApplication::clipboard()->setSelectionMode( useXselection );
   QString text = QApplication::clipboard()->text();
   if ( ! text.isEmpty() )
   {
@@ -1043,21 +1042,32 @@ void TEWidget::emitSelection()
     emit keyPressedSignal(&e); // expose as a big fat keypress event
     emit clearSelectionSignal();
   }
+  QApplication::clipboard()->setSelectionMode( false );
 }
 
-void TEWidget::setSelection(const QString& t)
+void TEWidget::setSelection(const QString& t,bool useXselection)
 {
   // Disconnect signal while WE set the clipboard
   QClipboard *cb = QApplication::clipboard();
   QObject::disconnect( cb, SIGNAL(selectionChanged()),
                      this, SLOT(onClearSelection()) );
 
-  cb->setSelectionMode( true );
+  cb->setSelectionMode( useXselection );
   QApplication::clipboard()->setText(t);
   cb->setSelectionMode( false );
 
   QObject::connect( cb, SIGNAL(selectionChanged()),
                      this, SLOT(onClearSelection()) );
+}
+
+void TEWidget::copyClipboard()
+{
+  emit endSelectionSignal(true,false);
+}
+
+void TEWidget::pasteClipboard()
+{
+  emitSelection(false);
 }
 
 void TEWidget::onClearSelection()

@@ -817,7 +817,7 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
 //printf("cmd: %d, %s, %d\n",cmd,txt,len);
   switch(cmd) // ... and execute if found.
   {
-    case CMD_emitSelection  : gui->emitSelection();           return;
+    case CMD_emitSelection  : gui->emitSelection(false);      return;
     case CMD_scrollPageUp   : gui->doScroll(-gui->Lines()/2); return;
     case CMD_scrollPageDown : gui->doScroll(+gui->Lines()/2); return;
     case CMD_scrollLineUp   : gui->doScroll(-1             ); return;

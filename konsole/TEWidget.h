@@ -56,7 +56,7 @@ public:
 
     uint lineSpacing() const;
 
-    void emitSelection();
+    void emitSelection(bool useXselection);
 
     void setImage(const ca* const newimg, int lines, int columns);
 
@@ -76,7 +76,7 @@ public:
     enum { BELLNONE=0, BELLSYSTEM=1, BELLVISUAL=2 };
     void Bell();
 
-    void setSelection(const QString &t);
+    void setSelection(const QString &t,const bool useXselection);
 
     virtual void setFont(const QFont &);
     void setVTFont(const QFont &);
@@ -88,6 +88,8 @@ public:
 
 public slots:
 
+    void copyClipboard();
+    void pasteClipboard();
     void onClearSelection();
 
 signals:
@@ -101,7 +103,7 @@ signals:
     void clearSelectionSignal();
     void beginSelectionSignal( const int x, const int y );
     void extendSelectionSignal( const int x, const int y );
-    void endSelectionSignal(const bool preserve_line_breaks);
+    void endSelectionSignal(const bool preserve_line_breaks,const bool useXselection);
 
 
 protected:
