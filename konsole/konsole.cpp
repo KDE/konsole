@@ -1607,7 +1607,7 @@ TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrLis
      emu = co->readEntry("Term", emu);
      key = co->readEntry("KeyTab", key);
      sch = co->readEntry("Schema", sch);
-     txt = co->readEntry("Comment", txt);
+     txt = co->readEntry("Name", txt);
      fno = co->readUnsignedNumEntry("Font", fno);
      icon = co->readEntry("Icon", icon);
   }
@@ -1880,10 +1880,8 @@ void Konsole::addSessionCommand(const QString &path)
     co = new KSimpleConfig(path,TRUE);
   co->setDesktopGroup();
   QString typ = co->readEntry("Type");
-  QString txt = co->readEntry("Comment");
-  QString nam = co->readEntry("Name");
-  if (typ.isEmpty() || txt.isEmpty() || nam.isEmpty() ||
-      typ != "KonsoleApplication")
+  QString txt = co->readEntry("Name");
+  if (typ.isEmpty() || txt.isEmpty() || typ != "KonsoleApplication")
   {
     if (!path.isEmpty())
        delete co; 
