@@ -60,9 +60,8 @@
 
 #include <stdio.h>
 #include <cstdlib>
-//#include <unistd.h>
 
-#include <kcolordlg.h>
+//#include <kcolordlg.h>
 #include <kfontdialog.h>
 #include <kglobal.h>
 #include <kstddirs.h>
@@ -77,7 +76,7 @@
 #include <klineeditdlg.h>
 #include <kdebug.h>
 
-#include <qmessagebox.h>
+//#include <qmessagebox.h>
 #include <qfontmetrics.h>
 
 #include <klocale.h>
@@ -145,11 +144,6 @@ Konsole::Konsole(const char* name,
   setDockEnabled( toolBar(), QMainWindow::Left, FALSE );
   setDockEnabled( toolBar(), QMainWindow::Right, FALSE );
   toolBar()->setFullSize( TRUE );
-
-  // Init DnD ////////////////////////////////////////////////////////////////
-
-  //  setAcceptDrops(true);
-  // FIXME: Now it is in TEWidget. Clean this up
 
   // load session commands ///////////////////////////////////////////////////
 
@@ -822,12 +816,13 @@ void Konsole::addSession(TESession* s)
   ra->plug(toolBar());
 }
 
-/*
-   Activate session
+/**
+   Activates a session (from the menu or by pressing a button)
  */
 void Konsole::activateSession()
 {
   TESession* s = NULL;
+  // finds the session based on which button was activated
   QPtrDictIterator<TESession> it( action2session ); // iterator for dict
   while ( it.current() )
   {
@@ -835,35 +830,26 @@ void Konsole::activateSession()
     if (ra->isChecked()) { s = it.current(); break; }
     ++it;
   }
-  if (s==NULL) {
+  if (s==NULL) { // the session was not found
     return;
   }
-  //if (se == s) {  // This happens on startup
-  //  kdDebug() << "Hello, you pressed the same button!!!" << endl;
-  //}
   if (se) { se->setConnect(FALSE); }
   se = s;
-  if (!s) { fprintf(stderr,"session not found\n"); return; } // oops
-  if (s->schemaNo()!=curr_schema)
-  {
+  //   if (!s) { fprintf(stderr,"session not found\n"); return; } // oops
+  if (s->schemaNo()!=curr_schema)  {
+    // the current schema has changed
     setSchema(s->schemaNo());
-    //Set Font. Now setConnect should do the appropriate action.
-    //if the size has changed, a resize event (noticable to the application)
-    //should happen. Else, we  could even start the application
     s->setConnect(TRUE);     // does a bulkShow (setImage)
     setFont(s->fontNo());    //FIXME: creates flicker?
-    title = s->Title(); // take title from current session
-  }
-  else
-  {
-    // if the schema uses transparency we MUST redo it...
-    // even if it flickers. There might be a flickerless solution for this
-    // but please don't change it without finding a solution first.
+  } else  {
+    // the schema was not changed 
     ColorSchema* schema = ColorSchema::find(s->schemaNo());
-    if (schema->usetransparency)
-      setSchema(s->schemaNo());
+    if (schema->usetransparency) {
+      setSchema(schema);
+    }
     s->setConnect(TRUE);
   }
+  title = s->Title(); // take title from current session
   setHeader();
   te->currentSession = se;
   keytab_menu_activated(n_keytab); // act. the keytab for this session
@@ -937,11 +923,6 @@ void Konsole::newSession(int i)
   s->setSchemaNo(schmno);
   s->setTitle(txt);
   s->setHistory(b_scroll); //FIXME: take from schema
-
-  // Lotzi B: I don't know why it was here, but commenting it out
-  // fixes the annoying bug of the jumping of the scrollbar when
-  // creating a new menu
-  //setHistory(b_scroll); //FIXME: take from schema
 
   addSession(s);
   runSession(s); // activate and run
