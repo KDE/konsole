@@ -843,6 +843,42 @@ void TEScreen::moveImage(int dst, int loca, int loce)
   }
   //kdDebug(1211) << "Using memmove to scroll up" << endl;
   memmove(&image[dst],&image[loca],(loce-loca+1)*sizeof(ca));
+  if (sel_begin != -1)
+  {
+     // Adjust selection to follow scroll.
+     bool beginIsTL = (sel_begin == sel_TL);     
+     int diff = dst - loca; // Scroll by this amount
+     int scr_TL=loc(0,hist->getLines());
+     int srca = loca+scr_TL; // Translate index from screen to global
+     int srce = loce+scr_TL; // Translate index from screen to global
+     int desta = srca+diff;
+     int deste = srce+diff;
+
+     if ((sel_TL >= srca) && (sel_TL <= srce))
+        sel_TL += diff;
+     else if ((sel_TL >= desta) && (sel_TL <= deste))
+        sel_BR = -1; // Clear selection (see below)
+
+     if ((sel_BR >= srca) && (sel_BR <= srce))
+        sel_BR += diff;
+     else if ((sel_BR >= desta) && (sel_BR <= deste))
+        sel_BR = -1; // Clear selection (see below)
+
+     if (sel_BR < 0)
+     {
+        clearSelection();
+     }
+     else 
+     {
+        if (sel_TL < 0)
+           sel_TL = 0;
+     }
+
+     if (beginIsTL)
+        sel_begin = sel_TL;
+     else
+        sel_begin = sel_BR;
+  }
 }
 
 /*! clear from (including) current cursor position to end of screen.
@@ -1199,8 +1235,46 @@ void TEScreen::addHistLine()
     hist->addCells(image,end+1);
     hist->addLine();
 
+    bool beginIsTL = (sel_begin == sel_TL);
+
     // adjust history cursor
-    histCursor += (hist->getLines()-1 == histCursor);
+    if (hist->getLines()-1 == histCursor)
+    {
+       histCursor++;
+       // Adjust selection for the new 
+       if (sel_begin != -1)
+       {
+          sel_TL += columns;
+          sel_BR += columns;
+       }
+    }
+
+    if (sel_begin != -1)
+    {
+       // Scroll selection in history up
+       int top_BR = loc(0, 1+hist->getLines());
+
+       if (sel_TL < top_BR)
+          sel_TL -= columns;
+
+       if (sel_BR < top_BR)
+          sel_BR -= columns;
+
+       if (sel_BR < 0)
+       {
+          clearSelection();
+       }
+       else 
+       {
+          if (sel_TL < 0)
+             sel_TL = 0;
+       }
+
+       if (beginIsTL)
+          sel_begin = sel_TL;
+       else
+          sel_begin = sel_BR;
+    }
   }
 
   if (!hasScroll()) histCursor = 0; //FIXME: a poor workaround
@@ -1223,6 +1297,7 @@ int TEScreen::getHistLines()
 
 void TEScreen::setScroll(const HistoryType& t)
 {
+  clearSelection();
   hist = t.getScroll(hist);
   histCursor = hist->getLines();
 }
