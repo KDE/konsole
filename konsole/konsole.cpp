@@ -705,7 +705,8 @@ void Konsole::makeGUI()
    {
       KeyTrans* ktr = KeyTrans::find(i);
       assert( ktr );
-      m_keytab->insertItem(ktr->hdr(),ktr->numb());
+      QString title=ktr->hdr();
+      m_keytab->insertItem(title.replace(QRegExp("^&|([^&])&"),"\\1&&"),ktr->numb());
    }
    applySettingsToGUI();
    isRestored = false;
@@ -1362,7 +1363,8 @@ void Konsole::updateSchemaMenu()
   {
      ColorSchema* s = (ColorSchema*)colors->at(i);
     assert( s );
-    m_schema->insertItem(s->title(),s->numb(),0);
+    QString title=s->title();
+    m_schema->insertItem(title.replace(QRegExp("^&|([^&])&"),"\\1&&"),s->numb(),0);
   }
 
   if (te && se)
@@ -1803,7 +1805,7 @@ void Konsole::addSession(TESession* s)
   // create an action for the session
   //  char buffer[30];
   //  int acc = CTRL+SHIFT+Key_0+session_no; // Lars: keys stolen by kwin.
-  KRadioAction *ra = new KRadioAction(newTitle,
+  KRadioAction *ra = new KRadioAction(newTitle.replace(QRegExp("^&|([^&])&"),"\\1&&"),
                                       s->IconName(),
                                       0,
                                       this,
@@ -1856,8 +1858,10 @@ void Konsole::listSessions()
 #if KDE_VERSION >=306
   m_sessionList->setKeyboardShortcutsEnabled(true);
 #endif
-  for (TESession *ses = sessions.first(); ses; ses = sessions.next())
-    m_sessionList->insertItem(SmallIcon(ses->IconName()),ses->Title(),++counter);
+  for (TESession *ses = sessions.first(); ses; ses = sessions.next()) {
+    QString title=ses->Title();
+    m_sessionList->insertItem(SmallIcon(ses->IconName()),title.replace(QRegExp("^&|([^&])&"),"\\1&&"),++counter);
+  }
   connect(m_sessionList, SIGNAL(activated(int)), SLOT(activateSession(int)));
   m_sessionList->adjustSize();
   m_sessionList->popup(mapToGlobal(QPoint((width()/2)-(m_sessionList->width()/2),(height()/2)-(m_sessionList->height()/2))));
@@ -2476,11 +2480,11 @@ void Konsole::addSessionCommand(const QString &path)
   }
 
   QString icon = co->readEntry("Icon", "openterm");
-  insertItemSorted(m_toolbarSessionsCommands, SmallIconSet( icon ), txt, ++cmd_serial );
+  insertItemSorted(m_toolbarSessionsCommands, SmallIconSet( icon ), txt.replace(QRegExp("^&|([^&])&"),"\\1&&"), ++cmd_serial );
   QString comment = co->readEntry("Comment");
   if (comment.isEmpty())
     comment=txt.prepend(i18n("New "));
-  insertItemSorted( m_session, SmallIconSet( icon ), comment, cmd_serial );
+  insertItemSorted( m_session, SmallIconSet( icon ), comment.replace(QRegExp("^&|([^&])&"),"\\1&&"), cmd_serial );
   no2command.insert(cmd_serial,co);
 
   int j = filename.findRev('/');
@@ -2714,7 +2718,9 @@ void Konsole::detachSession() {
 void Konsole::attachSession(TESession* session)
 {
   session->changeWidget(te);
-  KRadioAction *ra = new KRadioAction(session->Title(), session->IconName(),
+  
+  QString title=session->Title();
+  KRadioAction *ra = new KRadioAction(title.replace(QRegExp("^&|([^&])&"),"\\1&&"), session->IconName(),
                                       0, this, SLOT(activateSession()), this);
 
   ra->setExclusiveGroup("sessions");
@@ -2757,7 +2763,7 @@ void Konsole::slotRenameSession() {
   dlg.setCaption(i18n("Rename Session"));
   if (dlg.exec()) {
     se->setTitle(dlg.text());
-    ra->setText(dlg.text());
+    ra->setText(dlg.text().replace(QRegExp("^&|([^&])&"),"\\1&&"));
     ra->setIcon( se->IconName() ); // I don't know why it is needed here
     if(se->isMasterMode())
       session2button.find(se)->setIcon("remote");
@@ -2773,7 +2779,8 @@ void Konsole::slotRenameSession(int) {
 void Konsole::slotRenameSession(TESession* ses, const QString &name)
 {
   KRadioAction *ra = session2action.find(ses);
-  ra->setText(name);
+  QString title=name;
+  ra->setText(title.replace(QRegExp("^&|([^&])&"),"\\1&&"));
   ra->setIcon( ses->IconName() ); // I don't know why it is needed here
   if(ses->isMasterMode())
     session2button.find(ses)->setIcon("remote");
@@ -2785,7 +2792,8 @@ void Konsole::initSessionTitle(const QString &_title) {
   KRadioAction *ra = session2action.find(se);
 
   se->setTitle(_title);
-  ra->setText(_title);
+  QString title=_title;
+  ra->setText(title.replace(QRegExp("^&|([^&])&"),"\\1&&"));
   ra->setIcon( se->IconName() ); // I don't know why it is needed here
   toolBar()->updateRects();
   updateTitle();

@@ -28,6 +28,7 @@
 #include <qfile.h>
 #include <qlayout.h>
 #include <qwmatrix.h>
+#include <qregexp.h>
 
 #include <kaboutdata.h>
 #include <kdebug.h>
@@ -223,7 +224,8 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
      for (int i = 0; i < KeyTrans::count(); i++)
      {
         KeyTrans* ktr = KeyTrans::find(i);
-       m_keytab->insertItem(ktr->hdr(),ktr->numb());
+        QString title=ktr->hdr();
+        m_keytab->insertItem(title.replace(QRegExp("^&|([^&])&"),"\\1&&"),ktr->numb());
      }
   }
 
@@ -701,7 +703,8 @@ void konsolePart::updateSchemaMenu()
   m_schema->clear();
   for (int i = 0; i < (int) colors->count(); i++)  {
     ColorSchema* s = (ColorSchema*)colors->at(i);
-    m_schema->insertItem(s->title(),s->numb(),0);
+    QString title=s->title();
+    m_schema->insertItem(title.replace(QRegExp("^&|([^&])&"),"\\1&&"),s->numb(),0);
   }
 
   if (te && se) {
