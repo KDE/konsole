@@ -1141,7 +1141,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
      s_word_seps= config->readEntry("wordseps",":@-./_~");
      te->setWordCharacters(s_word_seps);
 
-     te->setTerminalSizeHint( config->readBoolEntry("TerminalSizeHint",true) );
+     te->setTerminalSizeHint( config->readBoolEntry("TerminalSizeHint",false) );
 
      b_framevis = config->readBoolEntry("has frame",true);
      te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
