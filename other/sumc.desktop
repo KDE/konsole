@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=KonsoleApplication
+Name=Administrator Midnight Commander
+Comment=Root Midnight Commander
+Exec=su -c mc -c 
+Schema=BlackOnLightYellow.schema
+#VGA
+#Font=6
