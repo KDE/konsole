@@ -139,13 +139,13 @@ ColorSchema::ColorSchema(const QString& pathname)
     fRelPath = QString::null;
     setDefaultSchema();
   }
-  //this is done on demand, see the headers, aleXXX
-/*  else
+  else
   {
     fRelPath = pathname;
+/*  this is done on demand, see the headers, aleXXX
     clearSchema();
-    (void) rereadSchemaFile();
-  }*/
+    (void) rereadSchemaFile(); */
+  }
 
   m_numb = serial++;
 }
