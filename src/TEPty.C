@@ -227,7 +227,11 @@ void TEPty::donePty()
 #elif defined(USE_LOGIN)
   char *tty_name=ttyname(0);
   if (tty_name)
+  {
+  	if (strncmp(tty_name, "/dev/", 5) == 0)
+	    tty_name += 5;
         logout(tty_name);
+  }
 #endif
   if (needGrantPty) chownpty(fd,FALSE);
   emit done(status);
@@ -442,10 +446,13 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
      l_struct.ut_host[UT_HOSTSIZE]=0;
   }
 
-  if (! (str_ptr=ttyname(0)) ) {
+  if (! (str_ptr=ttyname(tt)) ) {
     abort();
   }
+  if (strncmp(str_ptr, "/dev/", 5) == 0)
+       str_ptr += 5;
   strncpy(l_struct.ut_line, str_ptr, UT_LINESIZE);
+  time(&l_struct.ut_time); 
 
   login(&l_struct);
 #endif
