@@ -174,9 +174,8 @@ private:
     int  font_w;     // width
     int  font_a;     // ascend
 
-    int blX;    // actual offset (left)
-    int brX;    // actual offset (right)
-    int bY;     // actual offset
+    int bX;    // offset
+    int bY;    // offset
 
     int lines;
     int columns;

@@ -302,7 +302,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
   // The offsets are not yet calculated. 
   // Do not calculate these too often to be more smoothly when resizing
   // konsole in opaque mode.
-  bY = blX = -1;
+  bY = bX = 1;
 
   cb = QApplication::clipboard();
   QObject::connect( (QObject*)cb, SIGNAL(selectionChanged()),
@@ -463,7 +463,7 @@ HCNT("setImage");
         }
         QString unistr(disstrU,len);
         drawAttrStr(paint,
-                    QRect(blX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
+                    QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
                     unistr, ext[x], pm != NULL, true);
         x += len - 1;
       }
@@ -551,15 +551,10 @@ HCNT("paintEvent");
   int    tLx = tL.x();
   int    tLy = tL.y();
 
-  int lux = QMIN(columns-1, QMAX(0,(rect.left()   - tLx - blX ) / font_w));
+  int lux = QMIN(columns-1, QMAX(0,(rect.left()   - tLx - bX ) / font_w));
   int luy = QMIN(lines-1,   QMAX(0,(rect.top()    - tLy - bY  ) / font_h));
-  int rlx = QMIN(columns-1, QMAX(0,(rect.right()  - tLx - blX ) / font_w));
+  int rlx = QMIN(columns-1, QMAX(0,(rect.right()  - tLx - bX ) / font_w));
   int rly = QMIN(lines-1,   QMAX(0,(rect.bottom() - tLy - bY  ) / font_h));
-
-  /*
- printf("paintEvent: %d..%d, %d..%d (%d..%d, %d..%d)\n",lux,rlx,luy,rly,
-  rect.left(), rect.right(), rect.top(), rect.bottom());
-  */
 
   //  if (pm != NULL && color_table[image->b].transparent)
   //  erase(rect);
@@ -584,7 +579,7 @@ HCNT("paintEvent");
     }
     QString unistr(disstrU,len);
     drawAttrStr(paint,
-                QRect(blX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
+                QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
                 unistr, image[loc(x,y)], pm != NULL, false);
     x += len - 1;
   }
@@ -682,7 +677,7 @@ void TEWidget::setScroll(int cursor, int slines)
 void TEWidget::setScrollbarLocation(int loc)
 {
   if (scrollLoc == loc) return; // quickly
-  bY = blX = -1;
+  bY = bX = 1;
   scrollLoc = loc;
   propagateSize();
   update();
@@ -738,7 +733,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   line_selection_mode = FALSE;
   word_selection_mode = FALSE;
 
-  QPoint pos = QPoint((ev->x()-tLx-blX)/font_w,(ev->y()-tLy-bY)/font_h);
+  QPoint pos = QPoint((ev->x()-tLx-bX)/font_w,(ev->y()-tLy-bY)/font_h);
 
 //printf("press top left [%d,%d] by=%d\n",tLx,tLy, bY);
   if ( ev->button() == LeftButton)
@@ -775,14 +770,14 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
     if (mouse_marks)
       emitSelection(true,ev->state() & ControlButton);
     else
-      emit mouseSignal( 1, (ev->x()-tLx-blX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
+      emit mouseSignal( 1, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
   }
   if ( ev->button() == RightButton )
   {
     if (mouse_marks || (ev->state() & ShiftButton))
       emit configureRequest( this, ev->state()&(ShiftButton|ControlButton), ev->x(), ev->y() );
     else
-      emit mouseSignal( 2, (ev->x()-tLx-blX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
+      emit mouseSignal( 2, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
   }
 }
 
@@ -827,8 +822,8 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
 
   // Adjust position within text area bounds. See FIXME above.
   QPoint pos = ev->pos();
-  if ( pos.x() < tLx+blX )                  pos.setX( tLx+blX );
-  if ( pos.x() > tLx+blX+columns*font_w-1 ) pos.setX( tLx+blX+columns*font_w );
+  if ( pos.x() < tLx+bX )                  pos.setX( tLx+bX );
+  if ( pos.x() > tLx+bX+columns*font_w-1 ) pos.setX( tLx+bX+columns*font_w );
   if ( pos.y() < tLy+bY )                   pos.setY( tLy+bY );
   if ( pos.y() > tLy+bY+lines*font_h-1 )    pos.setY( tLy+bY+lines*font_h-1 );
   // check if we produce a mouse move event by this
@@ -843,7 +838,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     scrollbar->setValue(scrollbar->value()-yMouseScroll); // scrollback
   }
 
-  QPoint here = QPoint((pos.x()-tLx-blX)/font_w,(pos.y()-tLy-bY)/font_h);
+  QPoint here = QPoint((pos.x()-tLx-bX)/font_w,(pos.y()-tLy-bY)/font_h);
   QPoint ohere;
   bool swapping = FALSE;
 
@@ -993,7 +988,7 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
 
       if (!mouse_marks && !(ev->state() & ShiftButton))
         emit mouseSignal( 3, // release
-                        (ev->x()-tLx-blX)/font_w + 1,
+                        (ev->x()-tLx-bX)/font_w + 1,
                         (ev->y()-tLy-bY)/font_h + 1 );
       releaseMouse();
     }
@@ -1005,7 +1000,7 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
     int    tLx = tL.x();
     int    tLy = tL.y();
 
-    emit mouseSignal( 3, (ev->x()-tLx-blX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
+    emit mouseSignal( 3, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
     releaseMouse();
   }
 }
@@ -1017,7 +1012,7 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
   int    tLy = tL.y();
-  QPoint pos = QPoint((ev->x()-tLx-blX)/font_w,(ev->y()-tLy-bY)/font_h);
+  QPoint pos = QPoint((ev->x()-tLx-bX)/font_w,(ev->y()-tLy-bY)/font_h);
 
   // pass on double click as two clicks.
   if (!mouse_marks && !(ev->state() & ShiftButton))
@@ -1074,7 +1069,7 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
   int    tLy = tL.y();
-  iPntSel = QPoint((ev->x()-tLx-blX)/font_w,(ev->y()-tLy-bY)/font_h);
+  iPntSel = QPoint((ev->x()-tLx-bX)/font_w,(ev->y()-tLy-bY)/font_h);
 
   emit clearSelectionSignal();
 
@@ -1352,32 +1347,21 @@ void TEWidget::calcGeometry()
   {
     case SCRNONE :
      columns = ( contentsRect().width() - 2 * rimX ) / font_w;
-     if ( blX < 0 )
-        blX = (contentsRect().width() - (columns*font_w) ) / 2;
-     brX = blX;
      scrollbar->hide();
      break;
     case SCRLEFT :
      columns = ( contentsRect().width() - 2 * rimX - scrollbar->width()) / font_w;
-     if ( blX < 0 )
-        brX = (contentsRect().width() - (columns*font_w) - scrollbar->width() ) / 2;
-     blX = brX + scrollbar->width();
      scrollbar->move(contentsRect().topLeft());
      scrollbar->show();
      break;
     case SCRRIGHT:
      columns = ( contentsRect().width()  - 2 * rimX - scrollbar->width()) / font_w;
-     if ( blX < 0 )
-        blX = (contentsRect().width() - (columns*font_w) - scrollbar->width() ) / 2;
-     brX = blX;
      scrollbar->move(contentsRect().topRight() - QPoint(scrollbar->width()-1,0));
      scrollbar->show();
      break;
   }
   //FIXME: support 'rounding' styles
   lines   = ( contentsRect().height() - 2 * rimY  ) / font_h;
-  if ( bY < 0 )
-     bY = (contentsRect().height() - (lines  *font_h)) / 2;
 }
 
 void TEWidget::makeImage()
@@ -1394,7 +1378,7 @@ QSize TEWidget::calcSize(int cols, int lins) const
   int frw = width() - contentsRect().width();
   int frh = height() - contentsRect().height();
   int scw = (scrollLoc==SCRNONE?0:scrollbar->width());
-  return QSize( font_w*cols + 2*rimX + frw + scw, font_h*lins + 2*rimY + frh );
+  return QSize( font_w*cols + 2*rimX + frw + scw + bX*2, font_h*lins + 2*rimY + frh + bY*2 );
 }
 
 QSize TEWidget::sizeHint() const
