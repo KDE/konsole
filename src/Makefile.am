@@ -22,7 +22,7 @@ INCLUDES =  -I$(INCDIR) $(all_includes)
 bin_PROGRAMS = 	konsole konsole_grantpty kwrited #kcmkonsole
 lib_LTLIBRARIES = kwrited.la konsole.la libkonsolepart.la
 
-libkonsolepart_la_SOURCES =konsole.C \
+libkonsolepart_la_SOURCES = \
 	schema.C \
 	session.C \
 	TEWidget.C \
@@ -47,7 +47,7 @@ kwrited_SOURCES	= dummy.C
 kwrited_LDADD   = kwrited.la 
 kwrited_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
-konsole_la_SOURCES = main.C 
+konsole_la_SOURCES = main.C konsole.C
 konsole_la_LIBADD  = libkonsolepart.la
 konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
 
