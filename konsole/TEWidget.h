@@ -107,6 +107,8 @@ public:
     
     void print(QPainter &paint, bool friendly, bool exact);
 
+    void setRim(int rim) { rimX=rim; rimY=rim; }
+
 public slots:
 
     void setSelectionEnd();
@@ -260,6 +262,10 @@ private:
 
     QPoint configureRequestPoint;  // remember right mouse button click position
     bool colorsSwapped; // true during visual bell
+
+    // the rim should normally be 1, 0 only when running in full screen mode.
+    int rimX;      // left/right rim width
+    int rimY;      // top/bottom rim high
 
 private slots:
     void drop_menu_activated(int item);

@@ -85,10 +85,6 @@
 #define loc(X,Y) ((Y)*columns+(X))
 #endif
 
-//FIXME: the rim should normally be 1, 0 only when running in full screen mode.
-#define rimX 0      // left/right rim width
-#define rimY 0      // top/bottom rim high
-
 #define SCRWIDTH 16 // width of the scrollbar
 
 #define yMouseScroll 1
@@ -336,6 +332,8 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,mResizeTimer(0)
 ,m_lineSpacing(0)
 ,colorsSwapped(false)
+,rimX(1)
+,rimY(1)
 {
   // The offsets are not yet calculated.
   // Do not calculate these too often to be more smoothly when resizing
@@ -1711,39 +1709,38 @@ void TEWidget::clearImage()
 
 void TEWidget::calcGeometry()
 {
-  //FIXME: set rimX == rimY == 0 when running in full screen mode.
-
   scrollbar->resize(QApplication::style().pixelMetric(QStyle::PM_ScrollBarExtent),
                     contentsRect().height());
   switch(scrollLoc)
   {
     case SCRNONE :
-     bX = 1;
+     bX = rimX;
      contentWidth = contentsRect().width() - 2 * rimX;
      scrollbar->hide();
      break;
     case SCRLEFT :
-     bX = 1+scrollbar->width();
+     bX = rimX+scrollbar->width();
      contentWidth = contentsRect().width() - 2 * rimX - scrollbar->width();
      scrollbar->move(contentsRect().topLeft());
      scrollbar->show();
      break;
     case SCRRIGHT:
-     bX = 1;
+     bX = rimX;
      contentWidth = contentsRect().width()  - 2 * rimX - scrollbar->width();
      scrollbar->move(contentsRect().topRight() - QPoint(scrollbar->width()-1,0));
      scrollbar->show();
      break;
   }
   columns = contentWidth / font_w;
-  
+
   if (columns<1) {
     kdDebug(1211) << "TEWidget::calcGeometry: columns=" << columns << endl;
     columns=1;
   }
 
   //FIXME: support 'rounding' styles
-  contentHeight = contentsRect().height() - 2 * rimY;
+  bY = rimY;
+  contentHeight = contentsRect().height() - 2 * rimY + /* mysterious */ 1;
   lines = contentHeight / font_h;
 }
 
@@ -1762,7 +1759,7 @@ QSize TEWidget::calcSize(int cols, int lins) const
   int frw = width() - contentsRect().width();
   int frh = height() - contentsRect().height();
   int scw = (scrollLoc==SCRNONE?0:scrollbar->width());
-  return QSize( font_w*cols + 2*rimX + frw + scw + 2, font_h*lins + 2*rimY + frh + 2 );
+  return QSize( font_w*cols + 2*rimX + frw + scw, font_h*lins + 2*rimY + frh + /* mysterious */ 1 );
 }
 
 QSize TEWidget::sizeHint() const

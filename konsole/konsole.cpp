@@ -1496,7 +1496,7 @@ void Konsole::slotSelectSize() {
     case 2: setColLin(80,25); break;
     case 3: setColLin(80,40); break;
     case 4: setColLin(80,52); break;
-    case 5: SizeDialog dlg(te->Columns(), te->Lines(), this);
+    case 6: SizeDialog dlg(te->Columns(), te->Lines(), this);
             if (dlg.exec())
               setColLin(dlg.columns(),dlg.lines());
             break;
@@ -1560,10 +1560,12 @@ void Konsole::setFullScreen(bool on)
 //    KONSOLEDEBUG << "On and b_Fullscreen both equal " << b_fullscreen << "." << endl;
 //    }
     if (on) {
+      te->setRim(0);
       showFullScreen();
       b_fullscreen = on;
       }
     else {
+      te->setRim(1);
       showNormal();
       updateTitle(); // restore caption of window
       b_fullscreen = false;
