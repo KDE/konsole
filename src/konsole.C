@@ -1394,7 +1394,7 @@ void Konsole::addScreenSession(const QString &socket)
   KSimpleConfig *co = new KSimpleConfig(QString::null, true);
   co->setDesktopGroup();
   co->writeEntry("Name", socket);
-  QString txt = i18n("Screen at %1").arg(socket);
+  QString txt = i18n("Screen is a program controlling screens!", "Screen at %1").arg(socket);
   co->writeEntry("Comment", txt);
   co->writeEntry("Exec", QString::fromLatin1("screen -r %1").arg(socket));
   QString icon = "openterm"; // FIXME use another icon (malte)
