@@ -319,30 +319,12 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
   if (!tabbaron)
     n_tabbar = TabNone;
 
-  if (n_tabbar!=TabNone && !b_dynamicTabHide) {
-    makeTabWidget();
-    setCentralWidget(tabwidget);
-  }
-  else {
-    // create terminal emulation framework ////////////////////////////////////
-    te = new TEWidget(this);
-    connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
-             this, SLOT(configureRequest(TEWidget*,int,int,int)) );
+  makeTabWidget();
+  setCentralWidget(tabwidget);
 
-    //KONSOLEDEBUG<<"Konsole ctor() after new TEWidget() "<<time.elapsed()<<" msecs elapsed"<<endl;
-    te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
-    // we need focus so that the auto-hide cursor feature works (Carsten)
-    // but a part shouldn't force that it receives the focus, so we do it here (David)
-    te->setFocus();
-
-    readProperties(config, schema, false);
-    if (!b_dynamicTabHide)
-    n_tabbar = TabNone;
-    else if (isRestored)
-      n_tabbar = wanted_tabbar;
-    setCentralWidget(te);
-  }
-
+  if (b_dynamicTabHide || n_tabbar==TabNone)
+    tabwidget->setTabBarHidden(true);     
+         
   if (!histon)
     b_histEnabled=false;
 
@@ -1340,8 +1322,10 @@ void Konsole::slotTabSetViewOptions(int mode)
 void Konsole::slotTabbarToggleDynamicHide()
 {
   b_dynamicTabHide=!b_dynamicTabHide;
-  if (tabwidget->count()==1)
-    switchToFlat();
+  if (b_dynamicTabHide && tabwidget->count()==1)
+    tabwidget->setTabBarHidden(true);
+  else
+    tabwidget->setTabBarHidden(false);
 }
 
 /* ------------------------------------------------------------------------- */
@@ -1853,82 +1837,6 @@ void Konsole::initTEWidget(TEWidget* new_te, TEWidget* default_te)
   new_te->setMinimumSize(150,70);
 }
 
-void Konsole::switchToTabWidget()
-{
-  if (tabwidget) return;
-
-  TEWidget* se_widget = se->widget();
-  makeTabWidget();
-
-  QPtrListIterator<TESession> ses_it(sessions);
-  while(TESession* _se=ses_it.current()) {
-    TEWidget* new_te=new TEWidget(tabwidget);
-
-    connect( new_te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
-             this, SLOT(configureRequest(TEWidget*,int,int,int)) );
-    initTEWidget(new_te, se_widget);
-
-    createSessionTab(new_te, SmallIconSet(_se->IconName()), _se->Title());
-    setSchema(_se->schemaNo(),new_te);
-
-    new_te->calcGeometry();
-    _se->changeWidget(new_te);
-
-    ++ses_it;
-  }
-
-  if (rootxpms[se_widget]) {
-    delete rootxpms[se_widget];
-    rootxpms.remove(se_widget);
-  }
-  setCentralWidget(tabwidget);
-  tabwidget->showPage(se->widget());
-  tabwidget->show();
-
-  delete se_widget;
-
-  if (se->isMasterMode())
-    enableMasterModeConnections();
-}
-
-void Konsole::switchToFlat()
-{
-  if (!tabwidget) return;
-
-  TEWidget* se_widget = se->widget();
-
-  te=new TEWidget(this);
-
-  connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
-           this, SLOT(configureRequest(TEWidget*,int,int,int)) );
-
-  initTEWidget(te, se_widget);
-  te->setFocus();
-
-  setCentralWidget(te);
-  te->show();
-
-  te->calcGeometry();
-
-  sessions.first();
-  while(sessions.current())
-  {
-    sessions.current()->changeWidget(te);
-    sessions.next();
-  }
-  setSchema(se->schemaNo());
-
-  for (int i=0;i<tabwidget->count();i++)
-    if (rootxpms[tabwidget->page(i)]) {
-      delete rootxpms[tabwidget->page(i)];
-      rootxpms.remove(tabwidget->page(i));
-    }
-  delete tabwidget;  // deletes old master mode connections
-  tabwidget = 0L;
-  if (se->isMasterMode())
-    enableMasterModeConnections();
-}
-
 void Konsole::createSessionTab(TEWidget *widget, const QIconSet &iconSet,
                                const QString &text, int index)
 {
@@ -1960,23 +1868,21 @@ void Konsole::slotSelectTabbar() {
    if (m_menuCreated)
       n_tabbar = selectTabbar->currentItem();
 
-  if (n_tabbar!=TabNone) {
-    if (!tabwidget) {
-      if (!(sessions.count()==1 && b_dynamicTabHide))
-        switchToTabWidget();
-    }
-    else {
-      if (n_tabbar==TabTop)
-        tabwidget->setTabPosition(QTabWidget::Top);
+   if ( n_tabbar == TabNone ) {     // Hide tabbar
+      tabwidget->setTabBarHidden( true );
+   } else {
+      if ( tabwidget->isTabBarHidden() ) 
+         tabwidget->setTabBarHidden( false );
+      if ( n_tabbar == TabTop )
+         tabwidget->setTabPosition( QTabWidget::Top );
       else
-        tabwidget->setTabPosition(QTabWidget::Bottom);
+         tabwidget->setTabPosition( QTabWidget::Bottom );
+   }
+
+/* FIXME: Still necessary ? */
       QPtrDictIterator<KRootPixmap> it(rootxpms);
       for (;it.current();++it)
         it.current()->repaint(true);
-    }
-  }
-  else if (tabwidget)
-    switchToFlat();
 
   if (b_fixedSize)
   {
@@ -2790,8 +2696,8 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
       schema=(ColorSchema*)colors->at(0);  //the default one
   int schmno = schema->numb();
 
-  if (sessions.count()==1 && !tabwidget && n_tabbar!=TabNone)
-    switchToTabWidget();
+  if (sessions.count()==1 && n_tabbar!=TabNone)
+    tabwidget->setTabBarHidden( false );
 
   if (tabwidget) {
     TEWidget* te_old = te;
@@ -3003,8 +2909,8 @@ void Konsole::doneSession(TESession* s)
   }
   if (sessions.count()==1) {
     m_detachSession->setEnabled(false);
-    if (tabwidget && b_dynamicTabHide)
-      switchToFlat();
+    if (b_dynamicTabHide && !tabwidget->isTabBarHidden())
+       tabwidget->setTabBarHidden(true);
   }
 }
 
@@ -3623,15 +3529,15 @@ void Konsole::detachSession(TESession* _se) {
       rootxpms.remove(se_widget);
     }
     delete se_widget;
-    if (tabwidget->count()==1 && b_dynamicTabHide)
-      switchToFlat();
+    if (b_dynamicTabHide && tabwidget->count()==1)
+      tabwidget->setTabBarHidden(true);
   }
 }
 
 void Konsole::attachSession(TESession* session)
 {
-  if (sessions.count()==1 && !tabwidget && n_tabbar!=TabNone)
-    switchToTabWidget();
+  if (b_dynamicTabHide && sessions.count()==1 && n_tabbar!=TabNone)
+    tabwidget->setTabBarHidden(false);
 
   TEWidget* se_widget = session->widget();
 
@@ -3653,8 +3559,6 @@ void Konsole::attachSession(TESession* session)
       enableMasterModeConnections();
     }
   }
-  else
-    session->changeWidget(te);
 
   QString title=session->Title();
   KRadioAction *ra = new KRadioAction(title.replace('&',"&&"), session->IconName(),

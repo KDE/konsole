@@ -261,8 +261,6 @@ private:
   void resetScreenSessions();
 
   void initTEWidget(TEWidget* new_te, TEWidget* default_te);
-  void switchToTabWidget();
-  void switchToFlat();
 
   void createSessionTab(TEWidget *widget, const QIconSet& iconSet,
                         const QString &text, int index = -1);
