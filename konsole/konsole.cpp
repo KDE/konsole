@@ -1069,6 +1069,8 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       // Options that should be applied to all sessions /////////////
       // (1) set menu items and Konsole members
       QFont tmpFont("fixed");
+      tmpFont.setFixedPitch(true);
+      tmpFont.setStyleHint(QFont::TypeWriter);
       defaultFont = config->readFontEntry("defaultfont", &tmpFont);
       setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT));
 

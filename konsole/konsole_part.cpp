@@ -482,6 +482,8 @@ void konsolePart::readProperties()
   s_word_seps= config->readEntry("wordseps",":@-./_~");
 
   QFont tmpFont("fixed");
+  tmpFont.setFixedPitch(true);
+  tmpFont.setStyleHint(QFont::TypeWriter);
   defaultFont = config->readFontEntry("defaultfont", &tmpFont);
   setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT));
 
@@ -598,6 +600,8 @@ void konsolePart::setFont(int fontno)
   if (fonts[fontno][0] == '-')
   {
     f.setRawName( fonts[fontno] );
+    f.setFixedPitch(true);
+    f.setStyleHint( QFont::TypeWriter );
     if ( !f.exactMatch() && fontno != DEFAULTFONT)
     {
       // Ugly hack to prevent bug #20487
@@ -610,6 +614,7 @@ void konsolePart::setFont(int fontno)
   {
     f.setFamily("fixed");
     f.setFixedPitch(true);
+    f.setStyleHint(QFont::TypeWriter);
     f.setPixelSize(QString(fonts[fontno]).toInt());
   }
 
