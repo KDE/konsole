@@ -594,18 +594,16 @@ void TEDemo::font_menu_activated(int item)
     KFontDialog::getFont(defaultFont, true);
     item = 0;
   }
-  se->setFontNo(item);
+  setFont(item);
   activateSession((int)session2no.find(se)); // for attribute change
-  // setFont(item) is probably enough
 }
 
 void TEDemo::schema_menu_activated(int item)
 {
   assert(se);
   //FIXME: save schema name
-  se->setSchemaNo(item);
+  setSchema(item);
   activateSession((int)session2no.find(se)); // for attribute change
-  // setSchema(item) is probably enough
 }
 
 void TEDemo::setFont(int fontno)
@@ -630,6 +628,7 @@ void TEDemo::setFont(int fontno)
   m_font->setItemChecked(n_font,FALSE);
   m_font->setItemChecked(fontno, TRUE);
   n_font = fontno;
+  if (se) se->setFontNo(fontno);
 }
 
 void TEDemo::setMenuVisible(bool visible)
