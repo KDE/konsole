@@ -109,7 +109,7 @@ static KCmdLineOptions options[] =
    { "nohist",          I18N_NOOP("Do not save lines in scroll-back buffer"), 0 },
    { "vt_sz CCxLL",	I18N_NOOP("Terminal size in columns x lines"), 0 },
    { "e <command>",	I18N_NOOP("Execute 'command' instead of shell"), 0 },
-#warning WABA: We need a way to say that all options after -e should be treated as arguments.
+//FIXME: WABA: We need a way to say that all options after -e should be treated as arguments.
    { "+[args]",		I18N_NOOP("Arguments for 'command'"), 0 },
    { 0, 0, 0 }
 };
@@ -199,7 +199,8 @@ TEDemo::TEDemo(const QString& name, QStrList & _args, int login_shell, int histo
         ? QString(args.at(0))  // program executed in the title bar
         : kapp->caption();  // `konsole' or -caption
   initial->setTitle(title);
-  initial->setHistory(b_scroll); //FIXME:FIXME:FIXME: take from schema
+  //initial->setHistory(b_scroll); //FIXME: take from schema
+  setHistory(b_scroll); //FIXME: take from schema
 
   addSession(initial);
 
@@ -248,7 +249,8 @@ TEDemo::~TEDemo()
 }
 
 /* ------------------------------------------------------------------------- */
-/* Drag & Drop                                                                          */
+/*                                                                           */
+/* Drag & Drop                                                               */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
@@ -669,6 +671,7 @@ void TEDemo::setFrameVisible(bool visible)
 
 void TEDemo::setHistory(bool on)
 {
+HERE; printf("setHistory: %s, having%s session.\n",on?"on":"off",se?"":" no");
   b_scroll = on;
   m_options->setItemChecked(3,b_scroll);
   if (se) se->setHistory( b_scroll );
@@ -861,7 +864,8 @@ void TEDemo::newSession(int i)
   s->setFontNo(fno);
   s->setSchemaNo(schmno);
   s->setTitle(txt.data());
-  s->setHistory(b_scroll); //FIXME:FIXME:FIXME: take from schema
+  //s->setHistory(b_scroll); //FIXME: take from schema
+  setHistory(b_scroll); //FIXME: take from schema
 
   addSession(s);
   runSession(s); // activate and run

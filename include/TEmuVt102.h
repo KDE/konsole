@@ -132,7 +132,6 @@ protected:
   void saveCursor();
   void restoreCursor();
   unsigned short applyCharmap(unsigned short c);
-  void ShowCharacter(int c);
 
   void setCodec(int c); // codec number, 0 = locale, 1=utf8
 

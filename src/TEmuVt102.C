@@ -191,7 +191,7 @@ void VT102Emulation::tau( int code, int p, int q )
   switch (code)
   {
 
-    case TY_CHR___(         ) :      ShowCharacter        (p         ); break; //UTF16
+    case TY_CHR___(         ) : scr->ShowCharacter        (p         ); break; //UTF16
 
     //FIXME:       127 DEL    : ignored on input?
 
@@ -221,9 +221,9 @@ void VT102Emulation::tau( int code, int p, int q )
     case TY_CTL___(CNTL('U')) : /* NAK: ignored                      */ break;
     case TY_CTL___(CNTL('V')) : /* SYN: ignored                      */ break;
     case TY_CTL___(CNTL('W')) : /* ETB: ignored                      */ break;
-    case TY_CTL___(CNTL('X')) :      ShowCharacter        (    0x2592); break; //VT100
+    case TY_CTL___(CNTL('X')) : scr->ShowCharacter        (    0x2592); break; //VT100
     case TY_CTL___(CNTL('Y')) : /* EM : ignored                      */ break;
-    case TY_CTL___(CNTL('Z')) :      ShowCharacter        (    0x2592); break; //VT100
+    case TY_CTL___(CNTL('Z')) : scr->ShowCharacter        (    0x2592); break; //VT100
     case TY_CTL___(CNTL('[')) : /* ESC: cannot be seen here.         */ break;
     case TY_CTL___(CNTL('\\')): /* FS : ignored                      */ break;
     case TY_CTL___(CNTL(']')) : /* GS : ignored                      */ break;
@@ -464,9 +464,11 @@ void VT102Emulation::tau( int code, int p, int q )
    to control codes and individual utf-16 characters.
 
    This is complicated by VT100 charmaps, which do their
-   own encodings.
+   own encodings. These VT100 charmaps are responsible
+   for some line drawing graphical glyphs.
 
-   FIXME: we have to put things a little more straight, here.
+   Translation is a layered into the emulation, but
+   treated by the protocol like a screen mode.
 */
 
 #define CHARSET charset[scr==screen[1]]
@@ -549,17 +551,6 @@ unsigned short VT102Emulation::applyCharmap(unsigned short c)
   if (CHARSET.graphic && 0x5f <= c && c <= 0x7e) return vt100_graphics[c-0x5f];
   if (CHARSET.pound                && c == '#' ) return 0xa3;
   return c;
-}
-
-/*
-   Show Character using current character map.
-   The screen knows only unicode characters
-   and no translations.
-*/
-
-void VT102Emulation::ShowCharacter(int c)
-{
-  scr->ShowCharacter(applyCharmap(c));
 }
 
 // First Level Translation (Bytes -> Unicode)
@@ -671,20 +662,21 @@ void VT102Emulation::processCharacter(int cc)
   int  n = argc;
   if (getMode(MODE_Ansi))
   {
-    if (lec(1,0,ESC)) {                                                 return; }
-    if (les(2,1,GRP)) {                                                 return; }
-    if (Xte         ) { XtermHack();                           reset(); return; }
-    if (Xpe         ) {                                                 return; }
-    if (lec(3,2,'?')) {                                                 return; }
-    if (lec(3,2,'>')) {                                                 return; }
-    if (lun(       )) { tau( TY_CHR___(         ),   cc,   0); reset(); return; }
-    if (lec(2,0,ESC)) { tau( TY_ESC___(s[1]     ),    0,   0); reset(); return; }
-    if (les(3,1,SCS)) { tau( TY_ESC_CS(s[1],s[2]),    0,   0); reset(); return; }
-    if (lec(3,1,'#')) { tau( TY_ESC_DE(s[2]     ),    0,   0); reset(); return; }
+    if (lec(1,0,ESC)) {                                                  return; }
+    if (les(2,1,GRP)) {                                                  return; }
+    if (Xte         ) { XtermHack();                            reset(); return; }
+    if (Xpe         ) {                                                  return; }
+    if (lec(3,2,'?')) {                                                  return; }
+    if (lec(3,2,'>')) {                                                  return; }
+    if (lun(       )) { tau( TY_CHR___(), applyCharmap(cc), 0); reset(); return; }
+  
+    if (lec(2,0,ESC)) { tau( TY_ESC___(s[1]     ),  0,   0);    reset(); return; }
+    if (les(3,1,SCS)) { tau( TY_ESC_CS(s[1],s[2]),  0,   0);    reset(); return; }
+    if (lec(3,1,'#')) { tau( TY_ESC_DE(s[2]     ),  0,   0);    reset(); return; }
 //  if (egt(       )) { tau( TY_CSI_PG(cc       ),  '>',   0); reset(); return; }
-    if (eps(    CPN)) { tau( TY_CSI_PN(cc       ), a[0],a[1]); reset(); return; }
-    if (ees(    DIG)) { Dig                                             return; }
-    if (eec(    ';')) { Arg                                             return; }
+    if (eps(    CPN)) { tau( TY_CSI_PN(cc       ),  a[0],a[1]); reset(); return; }
+    if (ees(    DIG)) { Dig                                              return; }
+    if (eec(    ';')) { Arg                                              return; }
     for (i=0;i<=n;i++)
     if (epp(       ))   tau( TY_CSI_PR(cc,a[i]),    0,   0);          else
                         tau( TY_CSI_PS(cc,a[i]),    0,   0);
