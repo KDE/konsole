@@ -8,25 +8,11 @@ my $test = 0;
 
 # Syntax -----------------------------------------------------------------------
 #
-# defn NAME Text
-#?attr Host-to-VT100 VT100-to-Host Mode Editor-Function Format-Effector
-#?code Code
-#?dflt Value
-# html
-#   Text
+# Dotted.Name Text
+# Dotted.Name
+#   Text Lines
 #
-# New Syntax
-#
-# DEFINEWORD NAME Headline     --> (Type,Name,Head)
-# ATTRIBUTE Line               --> (Attr)
-# ATTRIBUTE                    --> (Attr)
-#   Text
-#
-# { 'defn' ==> { 'code' ==> 0, 'attr' ==> 0, 'dflt' ==> 0, 'html' ==> 1 } }
-#
-# Transition to new form.
-# 1) parser generates new form && unparser uses this.
-# 2) new parser using generic scheme.
+# The dotted names have to be unique. Conceptually, they form a tree.
 #
 
 
@@ -36,13 +22,14 @@ my $test = 0;
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
 
+my $all = {};
+
+my $state = 0;
+my $name = '';
+my $value = '';
+
 sub parse
 {
-  my $state = 0;
-  my $all = {};
-  my $rec = {};
-  my $docu = '';
-
   sub chkstate
   { my ($expect,$lineno,$line) = @_;
     if ($state != $expect)
@@ -50,13 +37,12 @@ sub parse
       print STDERR "$source($lineno): line unexpected in state $state. : $line\n";
     }
   }
+
   sub reduce
-  { my ($txt) = @_;
-    $rec->{'html'} = $docu;
-    $all->{$rec->{'name'}} = $rec;
-    $rec = {};
+  {
+    $all->{$name} = $value;
     $state = 0;
-    $docu = '';
+    $value = '';
   }
 
   open(CODES, $source) || die "cannot open file '" . $source . "'.";
@@ -66,32 +52,33 @@ sub parse
     my @Fld = split(' ', $_);
 
     if ($#Fld == -1)
-    { if ($state != 0 && $state != 2)
-      { print STDERR "$source($.): empty line in state $state. : $_\n"; }
+    { 
+      reduce() if $state != 0;
     }
-    elsif (substr($_, 1, 1) eq ' ')
-    { &chkstate(2,$.,$_);
-      $docu .= ($docu eq "" ? "" : "\n") . $_; #FIXME: unchop
+    elsif (substr($_, 0, 1) eq '#')
+    {
+      ; #ignore
     }
-    elsif ($Fld[0] eq 'defn')
-    { reduce() if ($state == 2);
-      &chkstate(0,$.,$_);
-      $rec->{'type'} = $Fld[0];
-      $rec->{'name'} = $Fld[1];
-      $rec->{'head'} = join ' ', @Fld[2..$#Fld];
-      $state = 1;
+    elsif (substr($_, 0, 1) eq ' ')
+    { &chkstate(1,$.,$_);
+      $value .= ($value eq "" ? "" : "\n") . $_; #FIXME: unchop
     }
-    elsif (($Fld[0] eq 'code' || $Fld[0] eq 'attr' || $Fld[0] eq 'dflt' ) && 
-            $state == 1) 
-    { $rec->{$Fld[0]} = join ' ',@Fld[1..$#Fld]; }
-    elsif ($Fld[0] eq 'html' && $state == 1) { $state = 2; }
     else
     {
-      print STDERR "$source($.): $_\n";
+      reduce() if $state != 0;
+      $name = $Fld[0];
+      if ($#Fld == 0)
+      {
+        $state = 1;
+      }
+      else
+      {
+        $value = join ' ', @Fld[1..$#Fld];
+        reduce();
+      }
     }
   }
-
-  reduce() if ($state == 2);
+  reduce() if ($state == 1);
   chkstate(0,$.,$_);
 
   return $all;
@@ -124,15 +111,16 @@ sub tail
   }
 }
 
+my $color1 = " bgcolor=\"#D0D0D0\"";
+my $color2 = "";
+my $color3 = "";
+
 sub layout 
 { my ($Name, $Head, $Code, $Doku, $Dflt, $Attr) = @_;
   if ($html) 
   {
-    my $color1 = " bgcolor=\"#D0D0D0\"";
-    my $color2 = "";
-    my $color3 = "";
 
-    print "<tr><td><p></td>\n";
+    print "<tr><td><p></td></tr>\n";
 
     print "<tr><td $color1><a name=$Name>$Name</a>\n";
     if ($Attr eq '')
@@ -161,8 +149,13 @@ sub layout
     }
 
     print "<tr><td><p></td>\n";
-    print "<tr><td>\n";
-    print "    <td $color3 colspan=2>$Doku";
+    print "<tr><td></td>\n";
+    $_ = $Doku;
+    s/</&lt;/g;
+    s/>/&gt;/g;
+    s/\\ref:([A-Z]+)/<a href=#$1>$1<\/a>/g;
+    s/\n  \.\n/\n  <p>\n/g;
+    print "    <td $color3 colspan=2>\n$_";
   }
   if ($test)
   {
@@ -180,10 +173,9 @@ sub codeToHtml
   my $res = '<code>';
   foreach (split(' ', $code))
   {
-    /^ESC$/      && do { $res  = 'ESC';          next; };
-    /^\{(.*)\}$/ && do { $res .= " <em>$1</em>"; next; };
-    /^<$/        && do { $res .= '&lt;';         next; };
-    /^>$/        && do { $res .= '&gt;';         next; };
+    /^\{(.*)\}$/ && do { $res .= " <em>$1</em>";   next; };
+    /^<$/        && do { $res .= ' <b>&lt;</b>'; next; };
+    /^>$/        && do { $res .= ' <b>&gt;</b>'; next; };
     $res .= " <b>$_</b>";
   }
   return $res . '</code>';
@@ -197,15 +189,43 @@ sub codeToHtml
 
 my $t = parse();
 my $p;
+my $table = 0;
 
 head();
 foreach $p (sort keys %$t)
-{ my $r = $t->{$p};
-  layout( $p, 
-          $r->{'head'},
-          exists $r->{'code'}?$r->{'code'}:"", 
-          exists $r->{'html'}?$r->{'html'}:"",
-          exists $r->{'dflt'}?$r->{'dflt'}:"",
-          exists $r->{'attr'}?$r->{'attr'}:"" );
+{
+  my @Fld = split('\.', $p);
+  if ($#Fld == 1 && $Fld[1] eq 'head')
+  {
+    print "</table>\n" if ($table);
+    my $name = $Fld[0];
+    my $head = $t->{$p};
+    layout( $name, $head,
+            exists $t->{"$name.code"}?$t->{"$name.code"}:"", 
+            exists $t->{"$name.text"}?$t->{"$name.text"}:"",
+            exists $t->{"$name.dflt"}?$t->{"$name.dflt"}:"",
+            exists $t->{"$name.attr"}?$t->{"$name.attr"}:"" );
+    $table = 0;
+  }
+  if ($html && $#Fld == 2 && $Fld[1] eq 'table')
+  {
+    my $lines = $t->{$p};
+    my $line;
+    my $field;
+    print "<p>\n";
+    print "<tr><td></td><td><table width=100%>\n" if (!$table); 
+    print "<tr><td $color1>$Fld[2]</td><td $color1>Meaning</td></tr>\n";
+    foreach $line (split('\n', $lines))
+    {
+      print "<tr>\n";
+      foreach $field (split('\|',$line))
+      {
+        print "<td>$field</td>" ;
+      }
+      print "</tr>\n";
+    }
+    $table = 1;
+  }
 }
+print "</table>\n" if ($table);
 tail();

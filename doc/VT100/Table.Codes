@@ -1,163 +1,451 @@
-defn CPR Cursor Position Report
-attr VT100 ANSI Reply
-code ESC [ {Pn} ; {Pn} R
-dflt 1 1
-html
+##############################################################################
+#                                                                            #
+# [Table.Codes]                  Concept Data Base                           #
+#                                                                            #
+# Copyright (c) 1998 by Lars Doelle <lars.doelle@on-line.de>                 #
+# This file is part of Konsole                                               #
+##############################################################################
+
+# This is work in progress. The overall goal is to link the documentation of
+# konsole closely to it's source. Further, the source could be organize such
+# that the emulation dependent parts are separated from everything else.
+# If this goal is matched, the emulation independent parts have to undergo
+# documentation, also.
+#
+# Refere to [db.trans] for not-yet-integrated stuff.
+#
+# What has to be done in any case is to merge db.trans into this file and to
+# make a script that extracts it again. From db.trans, we then generate parts
+# of the decoder (the semantic assignment).
+#
+# db2.pl contains as script able to slit TEScreen.C into the emulation
+# (in)dependent parts due to [db.trans].
+#
+# A like thing has to be done for TEmuVt102.C/h and for TEScreen.h.
+#
+# The missing link in the moment is a proper handling of all the Ps arguments
+# that refere to different routines (subfunction of an esc code).
+
+CHA.head Cursor Horizontal Absolute
+CHA.attr Konsole ECMA Command
+CHA.code ESC [ {Pn} G
+CHA.text
+  FIXME. explain
+  
+DCH.head Delete Character
+DCH.attr Konsole ECMA Command
+DCH.code ESC [ {Pn} P
+DCH.text
+  FIXME. explain
+
+DECANSI.head DEC Private Ansi Mode
+DECANSI.attr Konsole VT100 Command
+DECANSI.code FIXME
+DECANSI.text
+  FIXME. explain
+
+DECRST.head DEC Private Reset Mode
+DECRST.attr Konsole VT100 Command
+DECRST.code ESC [ ? {Ps} ... l
+DECRST.text
+  FIXME. explain
+
+DECSET.head DEC Private Reset Mode
+DECSET.attr Konsole VT100 Command
+DECSET.code ESC [ ? {Ps} ... h 
+DECSET.text
+  FIXME. explain
+
+DL.head Delete Line
+DL.attr Konsole ECMA Command
+DL.code ESC [ {Pn} M
+DL.text
+  FIXME. explain
+
+ECH.head Erase Character
+ECH.attr Konsole ECMA Command
+ECH.code ESC [ {Pn} X
+ECH.text
+  FIXME. explain
+
+ICH.head Insert Character
+ICH.attr Konsole ECMA Command
+ICH.code ESC [ {Pn} @
+ICH.text
+  FIXME. explain
+
+IL.head Insert Line
+IL.attr Konsole Command
+IL.code ESC [ {Pn} L
+IL.text
+  FIXME. explain
+
+LS2.head Lock Shift Two
+LS2.attr Konsole Command
+LS2.code FIXME
+LS2.text
+  FIXME. explain
+
+LS3.head Lock Shift Three
+LS3.attr Konsole Command
+LS3.code FIXME
+LS3.text
+  FIXME. explain
+
+MC.head Media Copy
+MC.attr ECMA VT100 Command
+MC.code ESC [ {Pn} i
+MC.text
+  FIXME. explain
+
+VPA.head Vertical Position Absolute
+VPA.attr Konsole ECMA Command
+VPA.code ESC [ {Pn} d
+VPA.text
+  FIXME. explain
+
+XTERESTORE.head XTerm Private Restore Mode
+XTERESTORE.attr Konsole XTerm Command
+XTERESTORE.code ESC [ ? {Ps} ... r
+XTERESTORE.text
+  FIXME. explain
+
+XTESAVE.head XTerm Private Save Mode
+XTESAVE.attr Konsole XTerm Command
+XTESAVE.code ESC [ ? {Ps} ... s
+XTESAVE.text
+  FIXME. explain
+
+NUL.head Null
+NUL.attr Konsole VT100 Linux XTerm Command Ignored
+NUL.code 0x00
+NUL.text
+  NUL is used as media- or time-fill. It is ignored by Konsole, but may
+  be sensible for devices which requiere a recognizable amount of time
+  to complete some commands (e.g. form feed on a non-buffering printing
+  device).
+
+SOH.head Start Of Heading
+SOH.attr Konsole VT100 Linux XTerm Command Ignored
+SOH.code 0x01
+
+STX.head Start Of Text
+STX.attr Konsole VT100 Linux XTerm Command Ignored
+STX.code 0x02
+
+ETX.head End Of Text
+ETX.attr Konsole VT100 Linux XTerm Command Ignored
+ETX.code 0x03
+
+EOT.head End Of Transmission
+EOT.attr Konsole VT100 Linux XTerm Command Ignored
+EOT.code 0x04
+
+ENQ.head Enquiry
+ENQ.attr VT100
+ENQ.code 0x05
+ENQ.text
+  Transmit the ANSWERBACK message. The answerback message can be loaded
+  in SET-UP B (i.e. is a configurable string).
+
+ACK.head Acknowledge
+ACK.attr Konsole VT100 Linux XTerm Command Ignored
+ACK.code 0x06
+
+BEL.head Bell
+BEL.attr VT100
+BEL.code 0x07
+BEL.text
+  Sound bell
+
+BS.head Back Space
+BS.attr VT100
+BS.code 0x08
+BS.text
+  Move cursor to the left one position, unless it is at the left
+  margin, in which case no action is taken.
+
+HT.head Horizontal Tabulation
+HT.attr VT100
+HT.code 0x09
+HT.text
+  Move cursor to the next tab stop, or to the right margin
+  if no further tabs are set.
+
+LF.head Line Feed
+LF.attr VT100
+LF.code 0x0a
+LF.text
+  Causes either a line feed or new line operation (See \ref:LNM.)
+
+VT.head Vertical Tabulation
+VT.attr VT100
+VT.code 0x0b
+VT.text
+  Same as \ref:LF.
+
+FF.head Form Feed
+FF.attr VT100
+FF.code 0x0c
+FF.text
+  Same as \ref:LF.
+
+CR.head Carriage Return
+CR.attr VT100
+CR.code 0x0d
+CR.text
+  Move the cursor to the left margin of the current line.
+
+SO.head Shift Out (Lock Shift Zero)
+SO.attr VT100
+SO.code 0x0e
+SO.text
+  Invoke the G1 character set, as designated by the \ref:SCS control sequence.
+
+SI.head Shift In (Lock Shift One)
+SI.attr VT100
+SI.code 0x0f
+SI.text
+  Invoke the G0 character set, as selected by the <ESC>( sequence.
+
+DLE.head Delete
+DLE.attr Konsole VT100 Linux XTerm Command Ignored
+DLE.code 0x10
+
+DC1.head Device Control One
+DC1.attr VT100 Ignored
+DC1.code 0x11
+DC1.text
+  Causes terminal to resume transmission (XON).
+
+DC2.head Device Control Two
+DC2.attr Konsole VT100 Linux XTerm Command Ignored
+DC2.code 0x12
+
+DC3.head Device Control Three
+DC3.attr Konsole VT100 Linux XTerm Command Ignored
+DC3.code 0x13
+DC3.text
+  Causes terminal to stop transmitting all codes except XOFF and XON (XOFF).
+
+DC4.head Device Control Four
+DC4.attr Konsole VT100 Linux XTerm Command Ignored
+DC4.code 0x14
+
+NAK.head Negative Acknowledge
+NAK.attr Konsole VT100 Linux XTerm Command Ignored
+NAK.code 0x15
+
+SYN.head
+SYN.attr Konsole VT100 Linux XTerm Command Ignored
+SYN.code 0x16
+
+ETB.head End Of Transmission Block
+ETB.attr Konsole VT100 Linux XTerm Command Ignored
+ETB.code 0x17
+
+CAN.head Cancel
+CAN.attr VT100
+CAN.code 0x18
+CAN.text
+  If sent during a control sequence, the sequence id immediately
+  terminated and not executed.  It also causes the error character
+  (checkerboard) to be displayed.
+
+EM.head
+EM.attr Konsole VT100 Linux XTerm Command Ignored
+EM.code 0x19
+
+SUB.head
+SUB.attr VT100
+SUB.code 0x1a
+SUB.text
+  Same as \ref:CAN.
+
+ESC.head Escape
+ESC.attr ECMA VT100 Ignored
+ESC.code 0x1b
+ESC.text
+  Introduces a control sequence.
+
+FS.head
+FS.attr Konsole VT100 Linux XTerm Command Ignored
+FS.code 0x1c
+
+GS.head
+GS.attr Konsole VT100 Linux XTerm Command Ignored
+GS.code 0x1d
+
+RS.head
+RS.attr Konsole VT100 Linux XTerm Command Ignored
+RS.code 0x1e
+
+US.head
+US.attr Konsole VT100 Linux XTerm Command Ignored
+US.code 0x1f
+
+DEL.head Delete Character
+DEL.attr VT100 Command Ignored
+DEL.code 0x7f
+
+CPR.head Cursor Position Report
+CPR.attr VT100 ECMA Reply
+CPR.code ESC [ {Pn} ; {Pn} R
+CPR.dflt 1 1
+CPR.text
   The CPR sequence reports the active position by means of the
   parameters.  This sequence has two parameter values, the first
   specifying the line and the second specifying the column.  The default
   condition with no parameters present, or parameters of 0, is equivalent
   to a cursor at home position.
-  <p>
+  .
   The numbering of the lines depends upon the state of the Origin Mode
-  (<a href=#DECOM>DECOM</a>).
-  <p>
+  (\ref:DECOM).
+  .
   This control sequence is sent in reply to a device status report
-  (<a href=#DSR>DSR</a>) command sent from the host.
+  (\ref:DSR) command sent from the host.
 
-defn CUB Cursor Backward
-attr VT100 ANSI Command Event
-code ESC [ {Pn} D
-dflt 1
-html
+CUB.head Cursor Backward
+CUB.attr VT100 ECMA Command Event
+CUB.code ESC [ {Pn} D
+CUB.dflt 1
+CUB.text
   The CUB sequence move the cursor to the left.  The distance moved is
   determined by the parameter.  If the parameter missing, zero, or one,
   the cursor is moved one position.  The cursor cannot be moved past the
   left margin.
 
-defn CUD Cursor Down
-attr VT100 ANSI Command Event
-code ESC [ {Pn} B
-dflt 1
-html
+CUD.head Cursor Down
+CUD.attr VT100 ECMA Command Event
+CUD.code ESC [ {Pn} B
+CUD.dflt 1
+CUD.text
   Moves the cursor down a number of lines as specified in the parameter
   without changing columns.  The cursor cannot be moved past the bottom
   margin.
 
-defn CUF Cursor Foreward
-attr VT100 ANSI Command Event
-code ESC [ {Pn} C
-dflt 1
-html
+CUF.head Cursor Foreward
+CUF.attr VT100 ECMA Command Event
+CUF.code ESC [ {Pn} C
+CUF.dflt 1
+CUF.text
   The CUF sequence moves the cursor to the right a number of positions
   specified in the parameter.  The cursor cannot be moved past the right
   margin.
 
-defn CUP Cursor Position
-attr VT100 ANSI Command
-code ESC [ {Pn} ; {Pn} H
-dflt 1 1
-html
+CUP.head Cursor Position
+CUP.attr VT100 ECMA Command
+CUP.code ESC [ {Pn} ; {Pn} H
+CUP.dflt 1 1
+CUP.text
   The CUP sequence moves the curor to the position specified by the
   parameters.  The first parameter specifies the line, and the second
   specifies the column.  A value of zero for either line or column moves
   the cursor to the first line or column in the display.  The default
-  string (&lt;ESC&gt;H) homes the cursor.  In the VT100, this command behaves
-  identically to it's format effector counterpart, <a href=#HVP>HVP</a>.
-  <p>
+  string (<ESC>H) homes the cursor.  In the VT100, this command behaves
+  identically to it's format effector counterpart, \ref:HVP.
+  .
   The numbering of the lines depends upon the state of the Origin Mode
-  (<a href=#DECOM>DECOM</a>).
-
-defn CUU Cursor Up
-attr VT100 ANSI Command Event
-code ESC [ {Pn} A
-dflt 1
-html
+  (\ref:DECOM).
+
+CUU.head Cursor Up
+CUU.attr VT100 ECMA Command Event
+CUU.code ESC [ {Pn} A
+CUU.dflt 1
+CUU.text
   Moves the cursor up without changing columns.  The cursor is moved up a
   number of lines as indicated by the parameter.  The cursor cannot be
   moved beyond the top margin.
 
-defn DA Device Attributes
-attr VT100 ANSI Command Reply
-code ESC [ {Pn} c
-dflt 0
-html
+DA.head Device Attributes Request
+DA.attr VT100 ECMA Command
+DA.code ESC [ {Pn} c
+DA.dflt 0
+DA.text
   The host requests the VT100 to send a DA sequence to indentify
   itself.  This is done by sending the DA sequence with no parameters,
   or with a parameter of zero.
-  <p>
-  Response to the request described above (VT100 to host) is generated
-  by the VT100 as a DA control sequence with the numeric parameters as
-  follows:
-  <p>
-  <table>
-  <tr><td>Option Present             </td><td>Sequence Sent                 </td></tr>
-  <tr><td><hr>                       </td><td><hr>                          </td></tr>
-  <tr><td>No options                 </td><td><code>&lt;ESC&gt;[?1;0c</code></td></tr>
-  <tr><td>Processor Option (STP)     </td><td><code>&lt;ESC&gt;[?1;1c</code></td></tr>
-  <tr><td>Advanced Video Option (AVO)</td><td><code>&lt;ESC&gt;[?1;2c</code></td></tr>
-  <tr><td>AVO and STP                </td><td><code>&lt;ESC&gt;[?1;3c</code></td></tr>
-  <tr><td>Graphics Option (GPO)      </td><td><code>&lt;ESC&gt;[?1;4c</code></td></tr>
-  <tr><td>GPO and STP                </td><td><code>&lt;ESC&gt;[?1;5c</code></td></tr>
-  <tr><td>GPO and AVO                </td><td><code>&lt;ESC&gt;[?1;6c</code></td></tr>
-  <tr><td>GPO, ACO, and STP          </td><td><code>&lt;ESC&gt;[?1;7c</code></td></tr>
-  </table>
+  The device replies by (\ref:DECDA).
 
-defn DECALN Screen Alignment Display
-attr VT100 DEC Command
-code ESC # 8
-html
+DECDA.head Device Attributes Reply
+DECDA.attr VT100 DEC Reply
+DECDA.code ESC [ ? 1 ; {Pn} c
+DECDA.text
+  Response to the \ref:DA request (VT100 to host) is generated
+  by the VT100 as a DECDA control sequence with the numeric parameters as
+  follows:
+DECDA.table.Pn
+  0|No options
+  1|Processor Option (STP)
+  2|Advanced Video Option (AVO)
+  3|AVO and STP
+  4|Graphics Option (GPO)
+  5|GPO and STP
+  6|GPO and AVO
+
+DECALN.head Screen Alignment Display
+DECALN.attr VT100 DEC Command
+DECALN.code ESC # 8
+DECALN.text
   This command causes the VT100 to fill it's screen with uppercase Es for
   screen focus and alignment.
 
-defn DECANM ANSI/VT52 Mode
-attr VT100 DEC Mode
-html
-  This is a private parameter to the <a href=#SM>SM</a> and <a href=#RM>RM</a>
+DECANM.head ANSI/VT52 Mode
+DECANM.attr VT100 DEC Mode
+DECANM.text
+  This is a private parameter to the \ref:SM and \ref:RM
   control sequences.  The
   reset state causes only VT52 compatible escape sequences to be
   recognized.  The set state causes only ANSI compatible escape sequences
-  to be recognized.  See the entries for <a href=#MODES>MODES</a>,
-  <a href=#SM>SM</a>, and <a href=#RM>RM</a>.
+  to be recognized.  See the entries for \ref:MODES,
+  \ref:SM, and \ref:RM.
 
-defn DECARM Auto Repeat Mode
-attr VT100 DEC Mode
-html
-  This is a private parameter to the <a href=#SM>SM</a> and <a href=#RM>RM</a>
+DECARM.head Auto Repeat Mode
+DECARM.attr VT100 DEC Mode
+DECARM.text
+  This is a private parameter to the \ref:SM and \ref:RM
   control sequences.  The
   reset state causes no keyboard keys to auto-repeat, the set state
-  causes most of them to.  See <a href=#MODES>MODES</a>, <a href=#SM>SM</a>,
-  and <a href=#RM>RM</a>.
-
-defn DECAWM Autowrap Mode
-attr VT100 DEC Mode
-html
-  This is a private parameter to the <a href=#SM>SM</a> and <a href=#RM>RM</a>
+  causes most of them to.  See \ref:MODES, \ref:SM,
+  and \ref:RM.
+
+DECAWM.head Autowrap Mode
+DECAWM.attr VT100 DEC Mode
+DECAWM.text
+  This is a private parameter to the \ref:SM and \ref:RM
   control sequences.  The
   reset state prevents the cursor from moving when characters are
   recieved while at the right margin.  The set state causes these
   characters to advance to the next line, causing a scroll up if required
-  and permitted.  See <a href=#MODES>MODES</a>, <a href=#SM>SM</a>, and
-  <a href=#RM>RM</a>.
+  and permitted.  See \ref:MODES, \ref:SM, and
+  \ref:RM.
 
-defn DECCKM Cursor Keys Mode
-attr VT100 DEC Mode
-html
-  This is a private parameter to the <a href=#SM>SM</a> and <a href=#RM>RM</a>
+DECCKM.head Cursor Keys Mode
+DECCKM.attr VT100 DEC Mode
+DECCKM.text
+  This is a private parameter to the \ref:SM and \ref:RM
   control requences.  This
   mode is only effective when the terminal is in keypad application mode
-  (<a href=#DECKPAM>DECKPAM</a>) and the ANSI/VT52 mode (<a href=#DECANM>DECANM</a>)
+  (\ref:DECKPAM) and the ANSI/VT52 mode (\ref:DECANM)
   is set.  Under these
   conditions, if this mode is reset, the cursor keys will send ANSI
   cursor control commands.  If setm the cursor keys will send application
-  function commands. See <a href=#MODES>MODES</a>, <a href=#RM>RM</a>, and
-  <a href=#SM>SM</a>.
+  function commands. See \ref:MODES, \ref:RM, and
+  \ref:SM.
 
-defn DECCOLM Column Mode
-attr VT100 DEC Mode
-html
-  This is a private parameter to the <a href=#SM>SM</a> and <a href=#RM>RM</a>
+DECCOLM.head Column Mode
+DECCOLM.attr VT100 DEC Mode
+DECCOLM.text
+  This is a private parameter to the \ref:SM and \ref:RM
   control sequences.  The
   reset state causes an 80 column screen to be used.  The set state
-  causes a 132 column screen to be used.  See <a href=#MODES>MODES</a>,
-  <a href=#RM>RM</a>, and <a href=#SM>SM</a>.
+  causes a 132 column screen to be used.  See \ref:MODES,
+  \ref:RM, and \ref:SM.
 
-defn DECDHL Double Height Line
-attr VT100 DEC Command
-html
-      <code>ESC # 3</code> Top Half
-  <br><code>ESC # 4</code> Bottom Half
-  <p>
+DECDHL.head Double Height Line
+DECDHL.attr VT100 DEC Command
+DECDHL.code ESC # {Hn}
+DECDHL.text
   These sequences cause the line containing the cursor to become the top
   or bottom half of a double-height, double width line.  The sequences
   should be used in pairs on adjacent lines with each line containing the
@@ -166,435 +454,486 @@ html
   cursor remains over the same character position, unless it would be to
   the right of the right margin, in which case it is moved to the right
   margin.
+DECDHL.table.Pn
+  3|Top    Half
+  4|Bottom Half
 
-defn DECDWL Double Width Line
-attr VT100 DEC Command
-code ESC # 6
-html
+DECDWL.head Double Width Line
+DECDWL.attr VT100 DEC Command
+DECDWL.code ESC # 6
+DECDWL.text
   This causes the line that contains the cursor to become double-width
   single height.  If the line was single width, all characters ro the
   right of the center of the screen will be lost.  The cursor remains
   over the same character position, unless it would be to the right of
   the right margin, in which case it is moved to the right margin.
 
-defn DECID Identify Terminal
-attr VT100 DEC Command
-code ESC Z
-html
-  This sequence causes the same response as the <a href=#DA>DA</a> sequence.  This
+DECID.head Identify Terminal
+DECID.attr VT100 DEC Command
+DECID.code ESC Z
+DECID.text
+  This sequence causes the same response as the \ref:DA sequence.  This
   sequence will not be supported in future models.
-
-defn DECINLM Interlace Mode
-attr VT100 DEC Mode
-html
-  This is a private parameter to the <a href=#RM>RM</a> and <a href=#SM>SM</a>
+
+DECINLM.head Interlace Mode
+DECINLM.attr VT100 DEC Mode
+DECINLM.text
+  This is a private parameter to the \ref:RM and \ref:SM
   control sequences.  The
   reset state (non-interlace) causes the video processor to display 240
   scan lines per frame.  The set state causes the video processor to
-  display 480 scan lines per screen.  See <a href=#MODES>MODES</a>,
-  <a href=#RM>RM</a>, and <a href=#SM>SM</a>.
+  display 480 scan lines per screen.  See \ref:MODES,
+  \ref:RM, and \ref:SM.
 
-defn DECKPAM Keypad Application Mode
-attr VT100 DEC Command Mode
-code ESC =
-html
+DECKPAM.head Keypad Application Mode
+DECKPAM.attr VT100 DEC Command Mode
+DECKPAM.code ESC =
+DECKPAM.text
   The auxiliary keypad keys will transmit control sequences.
 
-defn DECKPNM Keypad Numeric Mode
-attr VT100 DEC Mode Command
-code ESC &gt;
-html
+DECKPNM.head Keypad Numeric Mode
+DECKPNM.attr VT100 DEC Mode Command
+DECKPNM.code ESC >
+DECKPNM.text
   The auxiliary keypad keys will send ASCII codes corresponding to the
   characters engraved on their keys.
 
-defn DECLL Load LEDs
-attr VT100 DEC Command
-code ESC [ {Ps} q
-dflt 0
-html
+DECLL.head Load LEDs
+DECLL.attr VT100 DEC Command
+DECLL.code ESC [ {Ps} q
+DECLL.dflt 0
+DECLL.text
   Load the four programmable LEDs on the keyboard according to the parameter(s).
-  <p>
-  <table>
-  <tr><td>Parameter     </td><td>Meaning       </td></tr>
-  <tr><td><hr>          </td><td><hr>          </td></tr>
-  <tr><td align=center>0</td><td>Clear All LEDs</td></tr>
-  <tr><td align=center>1</td><td>Light L1      </td></tr>
-  <tr><td align=center>2</td><td>Light L2      </td></tr>
-  <tr><td align=center>3</td><td>Light L3      </td></tr>
-  <tr><td align=center>4</td><td>Light L4      </td></tr>
-  </table>
+DECLL.table.Ps
+  0|Clear All LEDs
+  1|Light L1
+  2|Light L2
+  3|Light L3
+  4|Light L4
 
-defn DECOM Origin Mode
-attr VT100 DEC Mode
-html
-  This is a private parameter to <a href=#SM>SM</a> and <a href=#RM>RM</a>
+DECOM.head Origin Mode
+DECOM.attr VT100 DEC Mode
+DECOM.text
+  This is a private parameter to \ref:SM and \ref:RM
   control sequences.  The reset
   state causes the origin (or home position) to be the upper left
   character position of the screen.  Line and column numbers are,
   therefore, independent of current margin settings.  The cursor may be
-  positioned outside the margins with a cursor position (<a href=#CUP>CUP</a>) or
-  horizontal and vertical position (<a href=#HVP>HVP</a>) control.
-  <p>
+  positioned outside the margins with a cursor position (\ref:CUP) or
+  horizontal and vertical position (\ref:HVP) control.
+  .
   The set state causes the origin to be at the upper left character
   position within the current margins.  Line and column numbers are,
   therefore, relative to the current margin settings.  The cursor cannot
   be positioned outside of the margins.
-  <p>
+  .
   The cursor is moved to the new home position when this mode is set or
   reset.  Lines and columns are numbered consecutively, with the origin
   being line 1, column 1.
-
-defn DECRC Restore Cursor
-attr VT100 DEC Command
-code ESC 8
-html
+
+DECRC.head Restore Cursor
+DECRC.attr VT100 DEC Command
+DECRC.code ESC 8
+DECRC.text
   This sequence causes the previously saved cursor position, graphic
   rendition, and character set to be restored.
 
-defn DECREPTPARM Report Terminal Parameters
-attr VT100 ANSI Reply
-code ESC [ {sol} ; {par} ; {nbits} ; {xspd} ; {rspd} ; {cmul} ; {flags} x
-html
+DECREPTPARM.head Report Terminal Parameters
+DECREPTPARM.attr VT100 ANSI Reply
+DECREPTPARM.code ESC [ {sol} ; {par} ; {nbits} ; {xspd} ; {rspd} ; {cmul} ; {flags} x
+DECREPTPARM.text
   This sequence is generated by the VT100 to notify the host of the
   status of selected terminal parameters.  The status sequence may be
-  sent when requested by the host (via <a href=#DECREQTPARM>DECREQTPARM</a>)
+  sent when requested by the host (via \ref:DECREQTPARM)
   or at the terminal's
   discretion.  On power up or reset, the VT100 is inhibited from sending
   unsolicited reports.
-  <p>
+  .
   The meanings of the sequence paramters are:
-  <p>
-  <table>
-  <tr><td>Parameter</td><td>Value</td><td>Meaning</td></tr>
+DECREPTPARM.table.sol
+  1|This message is a report.
+  2|This message is a report, and the terminal is only reporting on request.
+DECREPTPARM.table.par
+  1|No parity set
+  4|Parity set and odd
+  5|Parity set and even
+DECREPTPARM.table.nbits
+  1|8 bits per character
+  2|7 bits per character
+DECREPTPARM.table.speed(xspd,rspd)
+  0|Speed set to 50 bps
+  8|Speed set to 75 bps
+  16|Speed set to 110 bps
+  24|Speed set to 134.5 bps
+  32|Speed set to 150 bps
+  40|Speed set to 200 bps
+  48|Speed set to 300 bps
+  56|Speed set to 600 bps
+  64|Speed set to 1200 bps
+  72|Speed set to 1800 bps
+  80|Speed set to 2000 bps
+  88|Speed set to 2400 bps
+  96|Speed set to 3600 bps
+  104|Speed set to 4800 bps
+  112|Speed set to 9600 bps
+  120|Speed set tp 19200 bps
+DECREPTPARM.table.cmul
+  1|The bit rate multiplier is 16
+DECREPTPARM.table.flags
+  0-15|This value communicates the four switch values in block 5 of SET-UP B, which are only visible to the user when an STP option is installed.
 
-  <tr><td><hr></td><td><hr></td><td><hr></td></tr>
-
-  <tr><td rowspan=2>{sol}</td>
-      <td>1</td><td>This message is a report.</td></tr>
-  <tr><td>2</td><td>This message is a report, and the terminal is
-               only reporting on request.</td></tr>
-
-  <tr><td><hr></td><td><hr></td><td><hr></td></tr>
-
-  <tr><td rowspan=3>{par}</td>
-      <td>1</td><td>No parity set</td></tr>
-  <tr><td>4</td><td>Parity set and odd</td></tr>
-  <tr><td>5</td><td>Parity set and even</td></tr>
-
-  <tr><td><hr></td><td><hr></td><td><hr></td></tr>
-
-  <tr><td rowspan=2>{nbits}</td>
-      <td>1</tr><td>8 bits per character</td></tr>
-  <tr><td>2</tr><td>7 bits per character</td></tr>
-
-  <tr><td><hr></td><td><hr></td><td><hr></td></tr>
-
-  <tr><td rowspan=16>{xspd} <em>and</em> {rspd}
-                     <br>
-                     {xspd} = Transmit Speed
-                     <br>
-                     {rspd} = Recieve Speed</td>
-      <td>0  </tr><td>Speed set to 50 bps   </td></tr>
-  <tr><td>8  </tr><td>Speed set to 75 bps   </td></tr>
-  <tr><td>16 </tr><td>Speed set to 110 bps  </td></tr>
-  <tr><td>24 </tr><td>Speed set to 134.5 bps</td></tr>
-  <tr><td>32 </tr><td>Speed set to 150 bps  </td></tr>
-  <tr><td>40 </tr><td>Speed set to 200 bps  </td></tr>
-  <tr><td>48 </tr><td>Speed set to 300 bps  </td></tr>
-  <tr><td>56 </tr><td>Speed set to 600 bps  </td></tr>
-  <tr><td>64 </tr><td>Speed set to 1200 bps </td></tr>
-  <tr><td>72 </tr><td>Speed set to 1800 bps </td></tr>
-  <tr><td>80 </tr><td>Speed set to 2000 bps </td></tr>
-  <tr><td>88 </tr><td>Speed set to 2400 bps </td></tr>
-  <tr><td>96 </tr><td>Speed set to 3600 bps </td></tr>
-  <tr><td>104</tr><td>Speed set to 4800 bps </td></tr>
-  <tr><td>112</tr><td>Speed set to 9600 bps </td></tr>
-  <tr><td>120</tr><td>Speed set tp 19200 bps</td></tr>
-
-  <tr><td><hr></td><td><hr></td><td><hr></td></tr>
-
-  <tr><td>{cmul}</td><td>1</td><td>The bit rate multiplier is 16</td></tr>
-
-  <tr><td><hr></td><td><hr></td><td><hr></td></tr>
-
-  <tr><td>{flags}</td><td>0-15</td><td>This value communicates the four switch values
-                             in block 5 of SET-UP B, which are only visible
-                             to the user when an STP option is installed.</td></tr>
-  </table>
-
-defn DECREQTPARM Request Terminal Parameters
-attr VT100 ANSI Command
-code ESC [ {Ps} x
-html
+DECREQTPARM.head Request Terminal Parameters
+DECREQTPARM.attr VT100 ANSI Command
+DECREQTPARM.code ESC [ {Ps} x
+DECREQTPARM.text
   The host sends this sequence to request the VT100 to send a
-  <a href=#DECREPTPARM>DECREPTPARM</a>
+  \ref:DECREPTPARM
   sequence back.  {Ps} can be either 0 or 1.  If 0, the terminal will be
-  allowed to send unsolicited <a href=#DECREPTPARM>DECREPTPARM</a>s.
+  allowed to send unsolicited \ref:DECREPTPARMs.
   These reports will be generated each time the terminal exits the SET-UP mode.
-  If {Ps} is 1, then the terminal will only generate 
-  <a href=#DECREPTPARM>DECREPTPARM</a>s in response to a request.
+  If {Ps} is 1, then the terminal will only generate
+  \ref:DECREPTPARMs in response to a request.
 
-defn DECSC Save Cursor
-attr VT100 DEC Command
-code ESC 7
-html
+DECSC.head Save Cursor
+DECSC.attr VT100 DEC Command
+DECSC.code ESC 7
+DECSC.text
   Causes the cursor position, graphic rendition, and character set to be
-  saved.  (See <a href=#DECRC>DECRC</a>)
+  saved.  (See \ref:DECRC)
 
-defn DECSCLM Scrolling Mode
-attr VT100 DEC Mode
-html
-  This is a private parameter to <a href=#RM>RM</a> and <a href=#SM>SM</a>
+DECSCLM.head Scrolling Mode
+DECSCLM.attr VT100 DEC Mode
+DECSCLM.text
+  This is a private parameter to \ref:RM and \ref:SM
   control sequences.  The reset
   state causes scrolls to "jump" instantaneuously one line at a time.
   The set state causes the scrolls to be "smooth", and scrolls at a
-  maximum rate of siz lines/sec.  See <a href=#MODES>MODES</a>,
-  <a href=#RM>RM</a>, and <a href=#SM>SM</a>.
-
-defn DECSCNM Screen Mode
-attr VT100 DEC Mode
-html
-  This is a private parameter to <a href=#RM>RM</a> and <a href=#SM>SM</a>
+  maximum rate of siz lines/sec.  See \ref:MODES,
+  \ref:RM, and \ref:SM.
+
+DECSCNM.head Screen Mode
+DECSCNM.attr VT100 DEC Mode
+DECSCNM.text
+  This is a private parameter to \ref:RM and \ref:SM
   control sequences.  The reset
   state causes the screen to be black with white characters; the set
   state causes the screen to be white with black characters.
-  See <a href=#MODES>MODES</a>, <a href=#RM>RM</a>, and <a href=#SM>SM</a>.
+  See \ref:MODES, \ref:RM, and \ref:SM.
 
-defn DECSTBM Set Top and Bottom Margins
-attr VT100 DEC Command
-code ESC [ {Pn} ; {Pn} r
-dflt 1 ScreenLines
-html
+DECSTBM.head Set Top and Bottom Margins
+DECSTBM.attr VT100 DEC Command
+DECSTBM.code ESC [ {Pn} ; {Pn} r
+DECSTBM.dflt 1 ScreenLines
+DECSTBM.text
   This sequence sets the top and bottom margins to define the scrolling
   region.  The first parameter is the line number of the first line in
   the scrolling region; the second parameter is the line number of the
   bottom line of the scrolling region.
-  <p>
-  Default is the entire screen (no margins). 
+  .
+  Default is the entire screen (no margins).
   The minimum region allowed is two lines, i.e., the top line
   must be less than the bottom.  The cursor is placed in the home
-  position (See <a href=#DECOM>DECOM</a>).
+  position (See \ref:DECOM).
 
-defn DECSWL Single-width Line
-attr VT100 DEC Command
-code ESC # 5
-html
+DECSWL.head Single-width Line
+DECSWL.attr VT100 DEC Command
+DECSWL.code ESC # 5
+DECSWL.text
   This causes the line which contains the cursor to become single-width,
   single-height.  The cursor remains on the same character position.
   This is the default condition for all new lines on the screen.
 
-defn DECTST Invoke Confidence Test
-attr VT100 ANSI Command
-code ESC [ 2 ; {Ps} y
-html
+DECTST.head Invoke Confidence Test
+DECTST.attr VT100 ANSI Command
+DECTST.code ESC [ 2 ; {Ps} y
+DECTST.text
   Ps is the parameter indicating the test to be done.  It is computed by
   taking the weight indicated for each desired test and adding them
   together.  If Ps is 0, no test is performed but the VT100 is reset.
-  <p>
-  <table>
-  <tr><td>Test                                            </td><td>Weight</td></tr>
-  <tr><td><hr>                                            </td><td><hr>  </td></tr>
-  <tr><td>POST (ROM checksum, RAM NVR, keyboardm and AVO) </td><td>1     </td></tr>
-  <tr><td>Data Loop Back (Loopback connector required)    </td><td>2     </td></tr>
-  <tr><td>EIA Modem Control Test (Loopback connector req.)</td><td>4     </td></tr>
-  <tr><td>Repeat Testing until failure                    </td><td>8     </td></tr>
-  </table>
-
-defn DSR Device Status Report
-attr VT100 ANSI Command Reply
-code ESC [ {Ps} n
-html
+DECTST.table.Weight
+  1|POST (ROM checksum, RAM NVR, keyboardm and AVO)
+  2|Data Loop Back (Loopback connector required)
+  3|EIA Modem Control Test (Loopback connector req.)
+  4|Repeat Testing until failure
+
+DSR.head Device Status Report
+DSR.attr VT100 ANSI Command Reply
+DSR.code ESC [ {Ps} n
+DSR.text
   Requests and reports the general status of the VT100 according to the
-  following parameters:
-  <p>
-  <table>
-  <tr><td>Parameter</td><td>Direction</td><td>Meaning                  </td></tr>
-  <tr><td><hr>     </td><td><hr>     </td><td><hr>                     </td></tr>
-  <tr><td>0        </td><td>to host  </td><td>Ready, no faults detected</td></tr>
-  <tr><td>3        </td><td>to host  </td><td>Malfunction Detected     </td></tr>
-  <tr><td>5        </td><td>to VT100 </td>
-                        <td>Report Status (using a DSR control sequence)</td></tr>
-  <tr><td>6        </td><td>to VT100 </td>
-                        <td>Report Active Position (using a CPR sequence)</td></tr>
-  </table>
-  <p>
+  following parameters.
+  .
   DSR with a parameter of 0 or 3 is always sent as a response to a
   requesting DSR with a parameter of 5.
+DSR.table.Ps
+  0|to host |Ready, no faults detected
+  3|to host |Malfunction detected
+  5|to VT100|Report Status (using a DSR control sequence)
+  6|to VT100|Report Active Position (using a CPR sequence)
 
-defn ED Erase in Display
-attr VT100 ANSI Command
-code ESC [ {Ps} J
-dflt 0
-html
+ED.head Erase in Display
+ED.attr VT100 ANSI Command
+ED.code ESC [ {Ps} J
+ED.dflt 0
+ED.text
   This sequence erases some or all of the characters in the display
   according to the parameter.  Any complete line erased by this sequence
   will return that line to single width mode.
-  <p>
-  <table>
-  <tr><td>Parameter</td><td>Meaning                                          </td></tr>
-  <tr><td><hr>     </td><td><hr>                                             </td></tr>
-  <tr><td>0        </td><td>Erase from the cursor to the end of the screen.  </td></tr>
-  <tr><td>1        </td><td>Erase from the start of the screen to the cursor.</td></tr>
-  <tr><td>2        </td><td>Erase the entire screen.                         </td></tr>
-  </table>
+ED.table.Ps
+  0|Erase from the cursor to the end of the screen.
+  1|Erase from the start of the screen to the cursor.
+  2|Erase the entire screen.
 
-defn EL Erase in Line
-attr VT100 ANSI Command
-code ESC [ {Ps} K
-dflt 0
-html
+EL.head Erase in Line
+EL.attr VT100 ANSI Command
+EL.code ESC [ {Ps} K
+EL.dflt 0
+EL.text
   Erases some or all characters in the active line, according to the
   parameter.
-  <p>
-  <table>
-  <tr><td>Parameter</td><td>Meaning                                        </td></tr>
-  <tr><td><hr>     </td><td><hr>                                           </td></tr>
-  <tr><td>0        </td><td>Erase from cursor to the end of the line.      </td></tr>
-  <tr><td>1        </td><td>Erase from the start of the line to the cursor.</td></tr>
-  <tr><td>2        </td><td>Erase the entire line.                         </td></tr>
-  </table>
+EL.table
+  0|Erase from cursor to the end of the line.
+  1|Erase from the start of the line to the cursor.
+  2|Erase the entire line.
 
-defn HTS Horizontal Tab Set
-attr VT100 ANSI Command
-code ESC H
-html
+HTS.head Horizontal Tab Set
+HTS.attr VT100 ANSI Command
+HTS.code ESC H
+HTS.text
   Set a tab stop at the current cursor position.
-
-defn HVP Horizontal and Vertical Position
-attr VT100 ANSI Command
-code ESC [ {Pn} ; {Pn} f
-dflt 1 1
-html
+
+HVP.head Horizontal and Vertical Position
+HVP.attr VT100 ANSI Command
+HVP.code ESC [ {Pn} ; {Pn} f
+HVP.dflt 1 1
+HVP.text
   Moves the cursor to the position specified by the parameters.  The
   first parameter specifies the line, and the second specifies the
   column.  A parameter of 0 or 1 causes the active position to move to
   the first line or column in the display.  In the VT100, this control
-  behaves identically with it's editor counterpart, <a href=#CUP>CUP</a>.
+  behaves identically with it's editor counterpart, \ref:CUP.
   The numbering of hte lines depends upon the state of the Origin Mode
-  (<a href=#DECOM>DECOM</a>).
+  (\ref:DECOM).
 
-defn IND Index
-attr VT100 ANSI Command
-code ESC D
-html
+IND.head Index
+IND.attr VT100 ANSI Command
+IND.code ESC D
+IND.text
   This sequence causes the cursor to move downward one line without
   changing the column.  If the cursor is at the bottom margin, a scroll
   up is performed.
 
-defn LNM Line Feed/New Line Mode
-attr VT100 ANSI Mode
-html
-  This is a parameter to <a href=#SM>SM</a> and <a href=#RM>RM</a> control sequences.
+LNM.head Line Feed/New Line Mode
+LNM.attr VT100 ANSI Mode
+LNM.text
+  This is a parameter to \ref:SM and \ref:RM control sequences.
   The reset state
-  causes the interpretation of the &lt;LF&gt; character to imply only vertical
+  causes the interpretation of the \ref:LF character to imply only vertical
   movement of the cursor and causes the RETURN key to send the single
-  code &lt;CR&gt;.
-  <p>
-  The set state causes the &lt;LF&gt; character to imply movement
+  code \ref:CR.
+  .
+  The set state causes the \ref:LF character to imply movement
   to the first position of the following line, and causes the RETURN key
-  to send the code pair &lt;CR&gt;&lt;LF&gt;.  This is the New Line option.
-  <p>
-  This mode does not affect the Index (<a href=#IND>IND</a>) or the next line
-  (<a href=#NEL>NEL</a>) format effectors.
+  to send the code pair \ref:CR \ref:LF.  This is the New Line option.
+  .
+  This mode does not affect the Index (\ref:IND) or the next line
+  (\ref:NEL) format effectors.
 
-defn NEL Next Line
-attr VT100 ANSI Command
-code ESC E
-html
+NEL.head Next Line
+NEL.attr VT100 ANSI Command
+NEL.code ESC E
+NEL.text
   This causes the cursor to move to the first position of the next line
   down.  If the cursor is on the bottom line, a scroll is performed.
 
-defn RI Reverse Index
-attr VT100 ANSI Command
-code ESC M
-html
+PRINT.head Printable Characters
+PRINT.attr ECMA VT100 Command
+PRINT.code 0x20..0x7e,0x80..0xff
+PRINT.text
+  Printable characters are basically displayed. They my cause a line
+  wrap when the cursor is already located at the end of the line.
+  .
+  The VT100 has a unique way to do this by producing a line wrap before
+  the character would be displayed on the next line. This feature allows
+  to print at the rightmost column without producing an implicit line feed.
+
+RI.head Reverse Index
+RI.attr VT100 ANSI Command
+RI.code ESC M
+RI.text
   Move the cursor up one line without changing columns.  If the cursor is
   on the top line, a scroll down is performed.
 
-defn RIS Reset to Initial State
-attr VT100 ANSI Command
-code ESC c
-html
+RIS.head Reset to Initial State
+RIS.attr VT100 ANSI Command
+RIS.code ESC c
+RIS.text
   Resets the VT100 to the state is has upon power up.  This also causes
   the execution of the POST and signal INT H to be asserted briefly.
-
-defn RM Reset Mode
-attr VT100 ANSI Command
-code ESC [ {Ps} ; ... l
-html
+
+RM.head Reset Mode
+RM.attr VT100 ANSI Command
+RM.code ESC [ {Ps} ; ... l
+RM.text
   Resets one or more VT100 modes as specified by each selective parameter
   in the parameter string.  Each mode to be reset is specified by a
-  separate parameter.  See <a href=#MODES>MODES</a> and <a href=#SM>SM</a>.
+  separate parameter.  See \ref:MODES and \ref:SM.
 
-defn SCS Select Character Set
-attr VT100 ANSI Command
-html
-  <code>&lt;ESC;&gt;( {Cs}</code>  Select G0 Set <br>
-  <code>&lt;ESC;&gt;) {Cs}</code>  Select G1 Set
-  <p>
+SCS.head Select Character Set
+SCS.attr VT100 ANSI Command
+SCS.code ESC {Pc} {Cs}
+SCS.text
   The appropriate D0 and G1 character sets are designated from one of the
-  five possible sets.  The G0 and G1 sets are invokedd by the characters
-  &lt;SI&gt; and &lt;SO&gt;, respectively.
-  <p>
-  <table>
-  <tr><td>Parameter</td><td>Meaning            </td></tr>
-  <tr><td><hr>     </td><td><hr>               </td></tr>
-  <tr><td>A        </td><td>United Kingdom Set </td></tr>
-  <tr><td>B        </td><td>ASCII Set          </td></tr>
-  <tr><td>0        </td><td>Special Graphics   </td></tr>
-  <tr><td>1        </td><td>Alternate Character ROM<br>Standard Character Set</td><tr>
-  <tr><td>2        </td><td>Alternate Character ROM<br>Special Graphics      </td><tr>
-  </table>
-  <p>
+  five possible sets.  The G0 and G1 sets are invoked by the characters
+  \ref:SI and \ref:SO, respectively.
+  .
   The United Kingdom and ASCII sets conform to the "ISO international
   register of character sets to be used with escape sequences".  The
   other sets are private character sets.  Special graphics means that the
   graphic characters fpr the codes 0137 to 0176 are replaced with other
   characters.  The specified character set will be used until another SCS
   is recieved.
+SCS.table.Pc
+  (|Select G0 Set
+  )|Select G1 Set
+SCS.table.Cs
+  A|United Kingdom Set
+  B|ASCII Set
+  0|Special Graphics
+  1|Alternate Character ROM (Standard Character Set)
+  2|Alternate Character ROM (Special Graphics)
 
-defn SGR Select Graphic Rendition
-attr VT100 ANSI Command
-code ESC [ {Ps} ; ... m
-html
+SGR.head Select Graphic Rendition
+SGR.attr VT100 ANSI Command
+SGR.code ESC [ {Ps} ; ... m
+SGR.text
   Invoke the graphic rendition specified by the parameter(s).  All
   following characters transmitted to the VT100 are rendered according
   to the parameter(s) until the next occurrence of an SGR.
-  <p>
-  <table>
-  <tr><td>Parameter</td><td>Meaning                    </td></tr>
-  <tr><td><hr>     </td><td><hr>                       </td></tr>
-  <tr><td>0        </td><td>Attributes Off             </td></tr>
-  <tr><td>1        </td><td>Bold or increased intensity</td></tr>
-  <tr><td>4        </td><td>Underscore                 </td></tr>
-  <tr><td>5        </td><td>Blink                      </td></tr>
-  <tr><td>7        </td><td>Negative (reverse) image   </td></tr>
-  </table>
-  <p>
+  .
   All other parameter values are ignored.
-  <p>
+  .
   Without the Advanced Video Option, only one type of character attribute
   is possible, as determined by the cursor selection; in that case
   specifying either underscore or reverse will activate the currently
   selected attribute.
-
-defn SM Set Mode
-attr VT100 ANSI Command
-code ESC [ {Ps} ; ... h
-html
+SGR.table.Ps
+  0|Attributes Off
+  1|Bold or increased intensity
+  4|Underscore
+  5|Blink
+  7|Negative (reverse) image
+
+SM.head Set Mode
+SM.attr VT100 ANSI Command
+SM.code ESC [ {Ps} ; ... h
+SM.text
   Causes one or more modes to be set within the VT100 as specified by
   each selective parameter string.  Each mode to be set is specified by a
   seperate parameter.  A mode is considered set until it is reset by a
-  Reset Mode (<a href=#RM>RM</a>) control sequence.  
-  See <a href=#RM>RM</a> and <a href=#MODES>MODES</a>.
-  <p>
-  <em>[Editor's note: The original DEC VT100 documentation EK-VT100-UG-003
-  erroneously omitted the "[" character from the SM sequence.]</em>
+  Reset Mode (\ref:RM) control sequence.
+  See \ref:RM and \ref:MODES.
 
-defn TBC Tabulation Clear
-attr VT100 ANSI Command
-code ESC [ {Ps} g
-html
+TBC.head Tabulation Clear
+TBC.attr VT100 ANSI Command
+TBC.code ESC [ {Ps} g
+TBC.text
   If the parameter is missing or 0, this will clear the tab stop at the
   cursor's position.  If it is 3, this will clear all of the tab stops.
   Any other parameter is ignored.
+
+##############################################################################
+#                                                                            #
+#                                    VT52                                    #
+#                                                                            #
+##############################################################################
+
+VT52ANSI.head VT52 Ansi Mode
+VT52ANSI.attr Konsole VT100 XTerm Command
+VT52ANSI.code ESC <
+VT52ANSI.text
+  FIXME. explain
+
+VT52CUB.head VT52 Cursor Back
+VT52CUB.attr Konsole VT52 XTerm VT100 Command
+VT52CUB.code ESC D
+VT52CUB.text
+  FIXME. explain
+
+VT52CUD.head VT52 Cursor Down
+VT52CUD.attr Konsole VT52 XTerm VT100 Command
+VT52CUD.code ESC B
+VT52CUD.text
+  FIXME. explain
+
+VT52CUF.head VT52 Cursor Forward
+VT52CUF.attr Konsole VT52 XTerm VT100 Command
+VT52CUF.code ESC C
+VT52CUF.text
+  FIXME. explain
+
+VT52CUP.head VT52 Cursor Position
+VT52CUP.attr Konsole VT52 XTerm VT100 Command
+VT52CUP.code ESC {X} {Y}
+VT52CUP.text
+  FIXME. explain
+
+VT52CUU.head VT52 Cursor Up
+VT52CUU.attr Konsole VT52 XTerm VT100 Command
+VT52CUU.code A
+VT52CUU.text
+  FIXME. explain
+
+VT52EDL.head VT52 Clear To End Of Line
+VT52EDL.attr Konsole VT52 XTerm VT100 Command
+VT52EDL.code ESC K
+VT52EDL.text
+  FIXME. explain
+
+VT52EDS.head VT52 Clear To End Of Screen
+VT52EDS.attr Konsole VT52 XTerm VT100 Command
+VT52EDS.code ESC J
+VT52EDS.text
+  FIXME. explain
+
+VT52CUH.head VT52 Cursor Home
+VT52CUH.attr Konsole VT52 XTerm VT100 Command
+VT52CUH.code ESC H
+VT52CUH.text
+  FIXME. explain
+
+VT52KPAM.head VT52 Keyboard Application Mode
+VT52KPAM.attr Konsole VT52 XTerm VT100 Command
+VT52KPAM.code ESC =
+VT52KPAM.text
+  FIXME. explain
+
+VT52KPNM.head VT52 Keyboard Numeric Mode
+VT52KPNM.attr Konsole VT52 XTerm VT100 Command
+VT52KPNM.code ESC >
+VT52KPNM.text
+  FIXME. explain
+
+VT52REP.head VT52 Report Terminal Type
+VT52REP.attr Konsole VT52 XTerm VT100 Command
+VT52REP.code ESC Z
+VT52REP.text
+  FIXME. explain
+
+VT52RI.head VT52 Reverse Index
+VT52RI.attr Konsole VT52 XTerm VT100 Command
+VT52RI.code ESC I
+VT52RI.text
+  FIXME. explain
+
+VT52SCSF.head VT52 Set Character Set
+VT52SCSF.attr Konsole VT52 XTerm VT100 Command
+VT52SCSF.code ESC F
+VT52SCSF.text
+  FIXME. explain
+
+VT52SCSG.head VT52 Set Character Set
+VT52SCSG.attr Konsole VT52 XTerm VT100 Command
+VT52SCSG.code ESC G
+VT52SCSG.text
+  FIXME. explain

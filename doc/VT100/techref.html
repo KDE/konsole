@@ -36,18 +36,32 @@ emulation, with some additions, of cause.
 <p>
 This situation is further confused by the fact, that often many versions of the
 above terminals and emulations are out, one able to do a little more or less then
-the other. Especially the later makes the production of a <em>working</em>
-emulation an impossible task. And this is the place where this document steps in:
+the other. Especially the later makes the production of an emulation a difficult
+task.
+<p>
+This document contains the material collected and
+attempts to describe not only the abilities of konsole, but also to give a
+full reference of the emulations that konsole is capable of, but does
+eventually not implement completely.
+<p>
+Currently, the body of this document is mainly a concept data base, that
+referes to the VT100 component of the emulation. Any indication whether
+these codes are implemented by konsole or not are missing. So do additional
+codes origination from the Xterm and Linux console emulation. If you need to
+know the precise extend of the emulation, please refere to the TEmuVt102.C
+source, which contains a table, that fully answers the question. I'm in the
+process to integrate this table into this concept data base, to link the
+konsole emulation sources closely with it's documentation.
 
 
-<h2>Editor's notes &amp; todos</h2>
+<h2>Notes &amp; todos</h2>
 <ul>
 <li>Include complete reference on keyboard material.
 <li>Check for explaination of out-of-bound values.
 <li>Include VT52, VT102, XTERM, LINUX-console codes
-<li>Translate to codes to decimal
 <li>Make the whole document more concept oriented
 <li>See the section <em>Method of description</em>, below
+<li>Derive some summarizing lists.
 </ul>
 <h2>
 <table width=100%>
@@ -109,7 +123,6 @@ Parts of the terminal description
 <li>Replys
 <br>These are send by the terminal as a result of a Request from the hosts.
 <li>Encoding/Decoding
-<br>Since the 
 </ul>
 
 
@@ -125,39 +138,19 @@ Parts of the terminal description
 The control characters recognized by the VT100 are listed below.  All
 other control characters cause no action to be taken.
 <p>
-Control characters (codes 00 - 037 inclusive) are specifically excluded
+Control characters (codes 0x00 - 0x1f inclusive) are specifically excluded
 from the control sequence syntax, but may be embedded within a control
 sequence.  Embedded control characters are executed as soon as they are
 encountered by the VT100.  The processing of the control sequence then
-continues with the next character recieved.  The exceptions are: if the &lt;ESC&gt;
-character occurs, the current control sequence is aborted, and a new one
-commences beginning with the &lt;ESC&gt; just recieved.  If the character &lt;CAN&gt;
-(030) or the character &lt;SUB&gt; (032) occurs, the current control sequence is
-aborted.  The ability to embed control characters allows the synchronization
-characters XON and XOFF to be interpreted properly without affecting the
-control sequence.
+continues with the next character recieved.  The exceptions are:
+if the <a href=#ESC>ESC</a> character occurs, the current control sequence
+is aborted, and a new one commences beginning with the <a href=#ESC>ESC</a>
+just recieved.  If the character <a href=#CAN>CAN</a> (0x0c) or the
+character <a href=#SUB>SUB</a> (0x0e) occurs,
+the current control sequence is aborted.  The ability to embed control
+characters allows the synchronization characters XON and XOFF to be
+interpreted properly without affecting the control sequence.
 <p>
-<table>
-<tr><td>Control Character<td>Octal Code<td>Action Taken
-<tr><td><hr><td><hr><td><hr>
-<tr><td><code>&lt;NUL&gt;</code><td>000<td>Ignored on input; not stored in buffer
-<tr><td><code>&lt;EN&gt;</code><td>005<td>Transmit the ANSWERBACK message. The answerback message can be loaded in SET-UP B (i.e. is a configurable string).
-<tr><td><code>&lt;BE&gt;</code><td>007<td>Sound bell
-<tr><td><code>&lt;BS&gt;</code><td>010<td>Move cursor to the left one position, unless it is at the left margin, in which case no action is taken.
-<tr><td><code>&lt;HT&gt;</code><td>011<td>Move cursor to the next tab stop, or to the right margin if no further tabs are set.
-<tr><td><code>&lt;LF&gt;</code><td>012<td>Causes either a line feed or new line operation (See new line mode.)
-<tr><td><code>&lt;VT&gt;</code><td>013<td>Same as &lt;LF&gt;.
-<tr><td><code>&lt;FF&gt;</code><td>014<td>Same as &lt;LF&gt;.
-<tr><td><code>&lt;CR&gt;</code><td>015<td>Move the cursor to the left margin of the current line.
-<tr><td><code>&lt;SO&gt;</code><td>016<td>Invoke the G1 character set, as designated by the SCS control sequence.
-<tr><td><code>&lt;SI&gt;</code><td>017<td>Invoke the G0 character set, as selected by the &lt;ESC&gt;( sequence.
-<tr><td><code>&lt;DC1&gt;</code><td>021<td>Causes terminal to resume transmission (XON).
-<tr><td><code>&lt;DC3&gt;</code><td>023<td>Causes terminal to stop transmitting all codes except XOFF and XON (XOFF).
-<tr><td><code>&lt;CAN&gt;</code><td>030<td>If sent during a control sequence, the sequence id immediately terminated and not executed.  It also causes the error character (checkerboard) to be displayed.
-<tr><td><code>&lt;SUB&gt;</code><td>032<td>Same as &lt;CAN&gt;.
-<tr><td><code>&lt;ESC&gt;</code><td>033<td>Introduces a control sequence.
-<tr><td><code>&lt;DEL&gt;</code><td>177<td>Ignored on input; not stored in buffer.
-</table>
 <h2>
 <table width=100%>
 <tr><td align=center bgcolor=#d0d0d0></td></tr>
@@ -165,6 +158,46 @@ control sequence.
 <tr><td align=center bgcolor=#d0d0d0></td></tr>
 </table>
 </h2>
+
+Conceptually, the commands to the terminal emulation are encoded if form
+of byte sequences to meet the restrictions of the transport media. These
+sequences have pretty different originations and therefore the format of
+the sequences are inhomogenous.
+<p>
+Refering both to their origin and form, one can group the overall encoding
+schemes as follows:
+<p>
+<table>
+<tr><td bgcolor=#d0d0d0>Pattern</td><td bgcolor=#d0d0d0>Scope</td><td bgcolor=#d0d0d0>Comment</td></tr>
+<tr><td>Ascii Printable Characters</td><td>ASCII ECMA</td>
+  <td>This is the most original pattern of all. The characters to be
+      displayed are passed over the chanel and are interpreted by the
+      terminal (emulation) as instructions to display the corresponding
+      glyph of the ascii character set.</td></tr>
+<tr><td>Ascii Control Characters</td><td>ASCII ECMA</td>
+  <td>Ascii defines some non-printable, but format effecting characters, too.
+      Depending on the emulation, at least some of them are given a meaning.
+      The typical implemented ones are those that are handled by a teletype
+      like device.</td></tr>
+<tr><td>Simple Escape Sequence</td><td>ECMA</td>
+  <td>These sequences are made up from an <b>ESC</b> character followed by
+      exactly one other character in the range ???..???.</td></tr>
+<tr><td>CSI Sequence</td><td>ECMA</td>
+  <td></td></tr>
+<tr><td colspan=3>
+  <p>
+    The remaining codes are nonstandard but traditionalized hacks. Since
+    ANSI/ECMA provides proper slots for extentions, there is not much to
+    say about these inventions.
+  <p>
+    </td></tr>
+<tr><td>DEC hash hack</td><td>VT100</td><td><b>ESC #</b><i>{Digit}</i></td></tr>
+<tr><td>DEC scs hack</td><td>VT100</td><td><b>ESC</b><i>{CC} {DD}</i></td></tr>
+<tr><td>XTERM title hack</td><td>XTERM</td><td><b>ESC ]</b><i>{text}</i><b>BEL</b></td></tr>
+<tr><td>MS keyboard hack</td><td>ansi.sys</td><td><b>ESC ! ...</b></td></tr>
+  <td></td></tr>
+
+</table>
 
 <h3>Definitions</h3>
 
@@ -279,17 +312,71 @@ The following attributes below have the following meaning:
 </ul>
 <table>
 <tr><td width=10%%><td width=50%%><td width=40%%>
+<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=ACK>ACK</a>
+    <td  bgcolor="#D0D0D0"><b>Acknowledge</b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 Linux XTerm Command Ignored
 <tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x06</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=BEL>BEL</a>
+    <td  bgcolor="#D0D0D0"><b>Bell</b>
+    <td  bgcolor="#D0D0D0">VT100
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x07</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Sound bell<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=BS>BS</a>
+    <td  bgcolor="#D0D0D0"><b>Back Space</b>
+    <td  bgcolor="#D0D0D0">VT100
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x08</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Move cursor to the left one position, unless it is at the left
+  margin, in which case no action is taken.<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=CAN>CAN</a>
+    <td  bgcolor="#D0D0D0"><b>Cancel</b>
+    <td  bgcolor="#D0D0D0">VT100
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x18</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  If sent during a control sequence, the sequence id immediately
+  terminated and not executed.  It also causes the error character
+  (checkerboard) to be displayed.<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=CHA>CHA</a>
+    <td  bgcolor="#D0D0D0"><b>Cursor Horizontal Absolute</b>
+    <td  bgcolor="#D0D0D0">Konsole ECMA Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <em>Pn</em> <b>G</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=CPR>CPR</a>
     <td  bgcolor="#D0D0D0"><b>Cursor Position Report</b>
-    <td  bgcolor="#D0D0D0">VT100 ANSI Reply
+    <td  bgcolor="#D0D0D0">VT100 ECMA Reply
 <tr><td><p></td>
 <tr><td>
-    <td >ESC <b>[</b> <em>Pn</em> <b>;</b> <em>Pn</em> <b>R</b></code>
+    <td ><code> <b>ESC</b> <b>[</b> <em>Pn</em> <b>;</b> <em>Pn</em> <b>R</b></code>
     <td >Default: 1 1
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  The CPR sequence reports the active position by means of the
+<tr><td></td>
+    <td  colspan=2>
+  The CPR sequence reports the active position by means of the
   parameters.  This sequence has two parameter values, the first
   specifying the line and the second specifying the column.  The default
   condition with no parameters present, or parameters of 0, is equivalent
@@ -299,54 +386,68 @@ The following attributes below have the following meaning:
   (<a href=#DECOM>DECOM</a>).
   <p>
   This control sequence is sent in reply to a device status report
-  (<a href=#DSR>DSR</a>) command sent from the host.<tr><td><p></td>
+  (<a href=#DSR>DSR</a>) command sent from the host.<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=CR>CR</a>
+    <td  bgcolor="#D0D0D0"><b>Carriage Return</b>
+    <td  bgcolor="#D0D0D0">VT100
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x0d</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Move the cursor to the left margin of the current line.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=CUB>CUB</a>
     <td  bgcolor="#D0D0D0"><b>Cursor Backward</b>
-    <td  bgcolor="#D0D0D0">VT100 ANSI Command Event
+    <td  bgcolor="#D0D0D0">VT100 ECMA Command Event
 <tr><td><p></td>
 <tr><td>
-    <td >ESC <b>[</b> <em>Pn</em> <b>D</b></code>
+    <td ><code> <b>ESC</b> <b>[</b> <em>Pn</em> <b>D</b></code>
     <td >Default: 1
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  The CUB sequence move the cursor to the left.  The distance moved is
+<tr><td></td>
+    <td  colspan=2>
+  The CUB sequence move the cursor to the left.  The distance moved is
   determined by the parameter.  If the parameter missing, zero, or one,
   the cursor is moved one position.  The cursor cannot be moved past the
-  left margin.<tr><td><p></td>
+  left margin.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=CUD>CUD</a>
     <td  bgcolor="#D0D0D0"><b>Cursor Down</b>
-    <td  bgcolor="#D0D0D0">VT100 ANSI Command Event
+    <td  bgcolor="#D0D0D0">VT100 ECMA Command Event
 <tr><td><p></td>
 <tr><td>
-    <td >ESC <b>[</b> <em>Pn</em> <b>B</b></code>
+    <td ><code> <b>ESC</b> <b>[</b> <em>Pn</em> <b>B</b></code>
     <td >Default: 1
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  Moves the cursor down a number of lines as specified in the parameter
+<tr><td></td>
+    <td  colspan=2>
+  Moves the cursor down a number of lines as specified in the parameter
   without changing columns.  The cursor cannot be moved past the bottom
-  margin.<tr><td><p></td>
+  margin.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=CUF>CUF</a>
     <td  bgcolor="#D0D0D0"><b>Cursor Foreward</b>
-    <td  bgcolor="#D0D0D0">VT100 ANSI Command Event
+    <td  bgcolor="#D0D0D0">VT100 ECMA Command Event
 <tr><td><p></td>
 <tr><td>
-    <td >ESC <b>[</b> <em>Pn</em> <b>C</b></code>
+    <td ><code> <b>ESC</b> <b>[</b> <em>Pn</em> <b>C</b></code>
     <td >Default: 1
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  The CUF sequence moves the cursor to the right a number of positions
+<tr><td></td>
+    <td  colspan=2>
+  The CUF sequence moves the cursor to the right a number of positions
   specified in the parameter.  The cursor cannot be moved past the right
-  margin.<tr><td><p></td>
+  margin.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=CUP>CUP</a>
     <td  bgcolor="#D0D0D0"><b>Cursor Position</b>
-    <td  bgcolor="#D0D0D0">VT100 ANSI Command
+    <td  bgcolor="#D0D0D0">VT100 ECMA Command
 <tr><td><p></td>
 <tr><td>
-    <td >ESC <b>[</b> <em>Pn</em> <b>;</b> <em>Pn</em> <b>H</b></code>
+    <td ><code> <b>ESC</b> <b>[</b> <em>Pn</em> <b>;</b> <em>Pn</em> <b>H</b></code>
     <td >Default: 1 1
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  The CUP sequence moves the curor to the position specified by the
+<tr><td></td>
+    <td  colspan=2>
+  The CUP sequence moves the curor to the position specified by the
   parameters.  The first parameter specifies the line, and the second
   specifies the column.  A value of zero for either line or column moves
   the cursor to the first line or column in the display.  The default
@@ -354,97 +455,148 @@ The following attributes below have the following meaning:
   identically to it's format effector counterpart, <a href=#HVP>HVP</a>.
   <p>
   The numbering of the lines depends upon the state of the Origin Mode
-  (<a href=#DECOM>DECOM</a>).<tr><td><p></td>
+  (<a href=#DECOM>DECOM</a>).<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=CUU>CUU</a>
     <td  bgcolor="#D0D0D0"><b>Cursor Up</b>
-    <td  bgcolor="#D0D0D0">VT100 ANSI Command Event
+    <td  bgcolor="#D0D0D0">VT100 ECMA Command Event
 <tr><td><p></td>
 <tr><td>
-    <td >ESC <b>[</b> <em>Pn</em> <b>A</b></code>
+    <td ><code> <b>ESC</b> <b>[</b> <em>Pn</em> <b>A</b></code>
     <td >Default: 1
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  Moves the cursor up without changing columns.  The cursor is moved up a
+<tr><td></td>
+    <td  colspan=2>
+  Moves the cursor up without changing columns.  The cursor is moved up a
   number of lines as indicated by the parameter.  The cursor cannot be
-  moved beyond the top margin.<tr><td><p></td>
+  moved beyond the top margin.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DA>DA</a>
-    <td  bgcolor="#D0D0D0"><b>Device Attributes</b>
-    <td  bgcolor="#D0D0D0">VT100 ANSI Command Reply
+    <td  bgcolor="#D0D0D0"><b>Device Attributes Request</b>
+    <td  bgcolor="#D0D0D0">VT100 ECMA Command
 <tr><td><p></td>
 <tr><td>
-    <td >ESC <b>[</b> <em>Pn</em> <b>c</b></code>
+    <td ><code> <b>ESC</b> <b>[</b> <em>Pn</em> <b>c</b></code>
     <td >Default: 0
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  The host requests the VT100 to send a DA sequence to indentify
+<tr><td></td>
+    <td  colspan=2>
+  The host requests the VT100 to send a DA sequence to indentify
   itself.  This is done by sending the DA sequence with no parameters,
   or with a parameter of zero.
-  <p>
-  Response to the request described above (VT100 to host) is generated
-  by the VT100 as a DA control sequence with the numeric parameters as
-  follows:
-  <p>
-  <table>
-  <tr><td>Option Present             </td><td>Sequence Sent                 </td></tr>
-  <tr><td><hr>                       </td><td><hr>                          </td></tr>
-  <tr><td>No options                 </td><td><code>&lt;ESC&gt;[?1;0c</code></td></tr>
-  <tr><td>Processor Option (STP)     </td><td><code>&lt;ESC&gt;[?1;1c</code></td></tr>
-  <tr><td>Advanced Video Option (AVO)</td><td><code>&lt;ESC&gt;[?1;2c</code></td></tr>
-  <tr><td>AVO and STP                </td><td><code>&lt;ESC&gt;[?1;3c</code></td></tr>
-  <tr><td>Graphics Option (GPO)      </td><td><code>&lt;ESC&gt;[?1;4c</code></td></tr>
-  <tr><td>GPO and STP                </td><td><code>&lt;ESC&gt;[?1;5c</code></td></tr>
-  <tr><td>GPO and AVO                </td><td><code>&lt;ESC&gt;[?1;6c</code></td></tr>
-  <tr><td>GPO, ACO, and STP          </td><td><code>&lt;ESC&gt;[?1;7c</code></td></tr>
-  </table><tr><td><p></td>
+  The device replies by (<a href=#DECDA>DECDA</a>).<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=DC1>DC1</a>
+    <td  bgcolor="#D0D0D0"><b>Device Control One</b>
+    <td  bgcolor="#D0D0D0">VT100 Ignored
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x11</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Causes terminal to resume transmission (XON).<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=DC2>DC2</a>
+    <td  bgcolor="#D0D0D0"><b>Device Control Two</b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 Linux XTerm Command Ignored
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x12</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=DC3>DC3</a>
+    <td  bgcolor="#D0D0D0"><b>Device Control Three</b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 Linux XTerm Command Ignored
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x13</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Causes terminal to stop transmitting all codes except XOFF and XON (XOFF).<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=DC4>DC4</a>
+    <td  bgcolor="#D0D0D0"><b>Device Control Four</b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 Linux XTerm Command Ignored
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x14</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=DCH>DCH</a>
+    <td  bgcolor="#D0D0D0"><b>Delete Character</b>
+    <td  bgcolor="#D0D0D0">Konsole ECMA Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <em>Pn</em> <b>P</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECALN>DECALN</a>
     <td  bgcolor="#D0D0D0"><b>Screen Alignment Display</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>ESC <b>#</b> <b>8</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>#</b> <b>8</b></code>
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  This command causes the VT100 to fill it's screen with uppercase Es for
-  screen focus and alignment.<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  This command causes the VT100 to fill it's screen with uppercase Es for
+  screen focus and alignment.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECANM>DECANM</a>
     <td  bgcolor="#D0D0D0"><b>ANSI/VT52 Mode</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Mode
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  This is a private parameter to the <a href=#SM>SM</a> and <a href=#RM>RM</a>
+<tr><td></td>
+    <td  colspan=2>
+  This is a private parameter to the <a href=#SM>SM</a> and <a href=#RM>RM</a>
   control sequences.  The
   reset state causes only VT52 compatible escape sequences to be
   recognized.  The set state causes only ANSI compatible escape sequences
   to be recognized.  See the entries for <a href=#MODES>MODES</a>,
-  <a href=#SM>SM</a>, and <a href=#RM>RM</a>.<tr><td><p></td>
+  <a href=#SM>SM</a>, and <a href=#RM>RM</a>.<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=DECANSI>DECANSI</a>
+    <td  bgcolor="#D0D0D0"><b>DEC Private Ansi Mode</b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>FIXME</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECARM>DECARM</a>
     <td  bgcolor="#D0D0D0"><b>Auto Repeat Mode</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Mode
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  This is a private parameter to the <a href=#SM>SM</a> and <a href=#RM>RM</a>
+<tr><td></td>
+    <td  colspan=2>
+  This is a private parameter to the <a href=#SM>SM</a> and <a href=#RM>RM</a>
   control sequences.  The
   reset state causes no keyboard keys to auto-repeat, the set state
   causes most of them to.  See <a href=#MODES>MODES</a>, <a href=#SM>SM</a>,
-  and <a href=#RM>RM</a>.<tr><td><p></td>
+  and <a href=#RM>RM</a>.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECAWM>DECAWM</a>
     <td  bgcolor="#D0D0D0"><b>Autowrap Mode</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Mode
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  This is a private parameter to the <a href=#SM>SM</a> and <a href=#RM>RM</a>
+<tr><td></td>
+    <td  colspan=2>
+  This is a private parameter to the <a href=#SM>SM</a> and <a href=#RM>RM</a>
   control sequences.  The
   reset state prevents the cursor from moving when characters are
   recieved while at the right margin.  The set state causes these
   characters to advance to the next line, causing a scroll up if required
   and permitted.  See <a href=#MODES>MODES</a>, <a href=#SM>SM</a>, and
-  <a href=#RM>RM</a>.<tr><td><p></td>
+  <a href=#RM>RM</a>.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECCKM>DECCKM</a>
     <td  bgcolor="#D0D0D0"><b>Cursor Keys Mode</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Mode
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  This is a private parameter to the <a href=#SM>SM</a> and <a href=#RM>RM</a>
+<tr><td></td>
+    <td  colspan=2>
+  This is a private parameter to the <a href=#SM>SM</a> and <a href=#RM>RM</a>
   control requences.  This
   mode is only effective when the terminal is in keypad application mode
   (<a href=#DECKPAM>DECKPAM</a>) and the ANSI/VT52 mode (<a href=#DECANM>DECANM</a>)
@@ -452,25 +604,57 @@ The following attributes below have the following meaning:
   conditions, if this mode is reset, the cursor keys will send ANSI
   cursor control commands.  If setm the cursor keys will send application
   function commands. See <a href=#MODES>MODES</a>, <a href=#RM>RM</a>, and
-  <a href=#SM>SM</a>.<tr><td><p></td>
+  <a href=#SM>SM</a>.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECCOLM>DECCOLM</a>
     <td  bgcolor="#D0D0D0"><b>Column Mode</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Mode
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  This is a private parameter to the <a href=#SM>SM</a> and <a href=#RM>RM</a>
+<tr><td></td>
+    <td  colspan=2>
+  This is a private parameter to the <a href=#SM>SM</a> and <a href=#RM>RM</a>
   control sequences.  The
   reset state causes an 80 column screen to be used.  The set state
   causes a 132 column screen to be used.  See <a href=#MODES>MODES</a>,
-  <a href=#RM>RM</a>, and <a href=#SM>SM</a>.<tr><td><p></td>
+  <a href=#RM>RM</a>, and <a href=#SM>SM</a>.<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=DECDA>DECDA</a>
+    <td  bgcolor="#D0D0D0"><b>Device Attributes Reply</b>
+    <td  bgcolor="#D0D0D0">VT100 DEC Reply
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <b>?</b> <b>1</b> <b>;</b> <em>Pn</em> <b>c</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Response to the <a href=#DA>DA</a> request (VT100 to host) is generated
+  by the VT100 as a DECDA control sequence with the numeric parameters as
+  follows:<p>
+<tr><td></td><td><table width=100%>
+<tr><td  bgcolor="#D0D0D0">Pn</td><td  bgcolor="#D0D0D0">Meaning</td></tr>
+<tr>
+<td>  0</td><td>No options</td></tr>
+<tr>
+<td>  1</td><td>Processor Option (STP)</td></tr>
+<tr>
+<td>  2</td><td>Advanced Video Option (AVO)</td></tr>
+<tr>
+<td>  3</td><td>AVO and STP</td></tr>
+<tr>
+<td>  4</td><td>Graphics Option (GPO)</td></tr>
+<tr>
+<td>  5</td><td>GPO and STP</td></tr>
+<tr>
+<td>  6</td><td>GPO and AVO</td></tr>
+</table>
+<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECDHL>DECDHL</a>
     <td  bgcolor="#D0D0D0"><b>Double Height Line</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>      <code>ESC # 3</code> Top Half
-  <br><code>ESC # 4</code> Bottom Half
-  <p>
+    <td  colspan=2><code> <b>ESC</b> <b>#</b> <em>Hn</em></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
   These sequences cause the line containing the cursor to become the top
   or bottom half of a double-height, double width line.  The sequences
   should be used in pairs on adjacent lines with each line containing the
@@ -478,86 +662,105 @@ The following attributes below have the following meaning:
   characters to the right of the center of the screen will be lost.  The
   cursor remains over the same character position, unless it would be to
   the right of the right margin, in which case it is moved to the right
-  margin.<tr><td><p></td>
+  margin.<p>
+<tr><td></td><td><table width=100%>
+<tr><td  bgcolor="#D0D0D0">Pn</td><td  bgcolor="#D0D0D0">Meaning</td></tr>
+<tr>
+<td>  3</td><td>Top    Half</td></tr>
+<tr>
+<td>  4</td><td>Bottom Half</td></tr>
+</table>
+<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECDWL>DECDWL</a>
     <td  bgcolor="#D0D0D0"><b>Double Width Line</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>ESC <b>#</b> <b>6</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>#</b> <b>6</b></code>
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  This causes the line that contains the cursor to become double-width
+<tr><td></td>
+    <td  colspan=2>
+  This causes the line that contains the cursor to become double-width
   single height.  If the line was single width, all characters ro the
   right of the center of the screen will be lost.  The cursor remains
   over the same character position, unless it would be to the right of
-  the right margin, in which case it is moved to the right margin.<tr><td><p></td>
+  the right margin, in which case it is moved to the right margin.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECID>DECID</a>
     <td  bgcolor="#D0D0D0"><b>Identify Terminal</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>ESC <b>Z</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>Z</b></code>
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  This sequence causes the same response as the <a href=#DA>DA</a> sequence.  This
-  sequence will not be supported in future models.<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  This sequence causes the same response as the <a href=#DA>DA</a> sequence.  This
+  sequence will not be supported in future models.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECINLM>DECINLM</a>
     <td  bgcolor="#D0D0D0"><b>Interlace Mode</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Mode
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  This is a private parameter to the <a href=#RM>RM</a> and <a href=#SM>SM</a>
+<tr><td></td>
+    <td  colspan=2>
+  This is a private parameter to the <a href=#RM>RM</a> and <a href=#SM>SM</a>
   control sequences.  The
   reset state (non-interlace) causes the video processor to display 240
   scan lines per frame.  The set state causes the video processor to
   display 480 scan lines per screen.  See <a href=#MODES>MODES</a>,
-  <a href=#RM>RM</a>, and <a href=#SM>SM</a>.<tr><td><p></td>
+  <a href=#RM>RM</a>, and <a href=#SM>SM</a>.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECKPAM>DECKPAM</a>
     <td  bgcolor="#D0D0D0"><b>Keypad Application Mode</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Command Mode
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>ESC <b>=</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>=</b></code>
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  The auxiliary keypad keys will transmit control sequences.<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  The auxiliary keypad keys will transmit control sequences.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECKPNM>DECKPNM</a>
     <td  bgcolor="#D0D0D0"><b>Keypad Numeric Mode</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Mode Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>ESC <b>&gt;</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>&gt;</b></code>
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  The auxiliary keypad keys will send ASCII codes corresponding to the
-  characters engraved on their keys.<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  The auxiliary keypad keys will send ASCII codes corresponding to the
+  characters engraved on their keys.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECLL>DECLL</a>
     <td  bgcolor="#D0D0D0"><b>Load LEDs</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Command
 <tr><td><p></td>
 <tr><td>
-    <td >ESC <b>[</b> <em>Ps</em> <b>q</b></code>
+    <td ><code> <b>ESC</b> <b>[</b> <em>Ps</em> <b>q</b></code>
     <td >Default: 0
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  Load the four programmable LEDs on the keyboard according to the parameter(s).
-  <p>
-  <table>
-  <tr><td>Parameter     </td><td>Meaning       </td></tr>
-  <tr><td><hr>          </td><td><hr>          </td></tr>
-  <tr><td align=center>0</td><td>Clear All LEDs</td></tr>
-  <tr><td align=center>1</td><td>Light L1      </td></tr>
-  <tr><td align=center>2</td><td>Light L2      </td></tr>
-  <tr><td align=center>3</td><td>Light L3      </td></tr>
-  <tr><td align=center>4</td><td>Light L4      </td></tr>
-  </table><tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Load the four programmable LEDs on the keyboard according to the parameter(s).<p>
+<tr><td></td><td><table width=100%>
+<tr><td  bgcolor="#D0D0D0">Ps</td><td  bgcolor="#D0D0D0">Meaning</td></tr>
+<tr>
+<td>  0</td><td>Clear All LEDs</td></tr>
+<tr>
+<td>  1</td><td>Light L1</td></tr>
+<tr>
+<td>  2</td><td>Light L2</td></tr>
+<tr>
+<td>  3</td><td>Light L3</td></tr>
+<tr>
+<td>  4</td><td>Light L4</td></tr>
+</table>
+<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECOM>DECOM</a>
     <td  bgcolor="#D0D0D0"><b>Origin Mode</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Mode
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  This is a private parameter to <a href=#SM>SM</a> and <a href=#RM>RM</a>
+<tr><td></td>
+    <td  colspan=2>
+  This is a private parameter to <a href=#SM>SM</a> and <a href=#RM>RM</a>
   control sequences.  The reset
   state causes the origin (or home position) to be the upper left
   character position of the screen.  Line and column numbers are,
@@ -572,414 +775,995 @@ The following attributes below have the following meaning:
   <p>
   The cursor is moved to the new home position when this mode is set or
   reset.  Lines and columns are numbered consecutively, with the origin
-  being line 1, column 1.<tr><td><p></td>
+  being line 1, column 1.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECRC>DECRC</a>
     <td  bgcolor="#D0D0D0"><b>Restore Cursor</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>ESC <b>8</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>8</b></code>
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  This sequence causes the previously saved cursor position, graphic
-  rendition, and character set to be restored.<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  This sequence causes the previously saved cursor position, graphic
+  rendition, and character set to be restored.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECREPTPARM>DECREPTPARM</a>
     <td  bgcolor="#D0D0D0"><b>Report Terminal Parameters</b>
     <td  bgcolor="#D0D0D0">VT100 ANSI Reply
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>ESC <b>[</b> <em>sol</em> <b>;</b> <em>par</em> <b>;</b> <em>nbits</em> <b>;</b> <em>xspd</em> <b>;</b> <em>rspd</em> <b>;</b> <em>cmul</em> <b>;</b> <em>flags</em> <b>x</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <em>sol</em> <b>;</b> <em>par</em> <b>;</b> <em>nbits</em> <b>;</b> <em>xspd</em> <b>;</b> <em>rspd</em> <b>;</b> <em>cmul</em> <b>;</b> <em>flags</em> <b>x</b></code>
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  This sequence is generated by the VT100 to notify the host of the
+<tr><td></td>
+    <td  colspan=2>
+  This sequence is generated by the VT100 to notify the host of the
   status of selected terminal parameters.  The status sequence may be
   sent when requested by the host (via <a href=#DECREQTPARM>DECREQTPARM</a>)
   or at the terminal's
   discretion.  On power up or reset, the VT100 is inhibited from sending
   unsolicited reports.
   <p>
-  The meanings of the sequence paramters are:
-  <p>
-  <table>
-  <tr><td>Parameter</td><td>Value</td><td>Meaning</td></tr>
-  <tr><td><hr></td><td><hr></td><td><hr></td></tr>
-  <tr><td rowspan=2>{sol}</td>
-      <td>1</td><td>This message is a report.</td></tr>
-  <tr><td>2</td><td>This message is a report, and the terminal is
-               only reporting on request.</td></tr>
-  <tr><td><hr></td><td><hr></td><td><hr></td></tr>
-  <tr><td rowspan=3>{par}</td>
-      <td>1</td><td>No parity set</td></tr>
-  <tr><td>4</td><td>Parity set and odd</td></tr>
-  <tr><td>5</td><td>Parity set and even</td></tr>
-  <tr><td><hr></td><td><hr></td><td><hr></td></tr>
-  <tr><td rowspan=2>{nbits}</td>
-      <td>1</tr><td>8 bits per character</td></tr>
-  <tr><td>2</tr><td>7 bits per character</td></tr>
-  <tr><td><hr></td><td><hr></td><td><hr></td></tr>
-  <tr><td rowspan=16>{xspd} <em>and</em> {rspd}
-                     <br>
-                     {xspd} = Transmit Speed
-                     <br>
-                     {rspd} = Recieve Speed</td>
-      <td>0  </tr><td>Speed set to 50 bps   </td></tr>
-  <tr><td>8  </tr><td>Speed set to 75 bps   </td></tr>
-  <tr><td>16 </tr><td>Speed set to 110 bps  </td></tr>
-  <tr><td>24 </tr><td>Speed set to 134.5 bps</td></tr>
-  <tr><td>32 </tr><td>Speed set to 150 bps  </td></tr>
-  <tr><td>40 </tr><td>Speed set to 200 bps  </td></tr>
-  <tr><td>48 </tr><td>Speed set to 300 bps  </td></tr>
-  <tr><td>56 </tr><td>Speed set to 600 bps  </td></tr>
-  <tr><td>64 </tr><td>Speed set to 1200 bps </td></tr>
-  <tr><td>72 </tr><td>Speed set to 1800 bps </td></tr>
-  <tr><td>80 </tr><td>Speed set to 2000 bps </td></tr>
-  <tr><td>88 </tr><td>Speed set to 2400 bps </td></tr>
-  <tr><td>96 </tr><td>Speed set to 3600 bps </td></tr>
-  <tr><td>104</tr><td>Speed set to 4800 bps </td></tr>
-  <tr><td>112</tr><td>Speed set to 9600 bps </td></tr>
-  <tr><td>120</tr><td>Speed set tp 19200 bps</td></tr>
-  <tr><td><hr></td><td><hr></td><td><hr></td></tr>
-  <tr><td>{cmul}</td><td>1</td><td>The bit rate multiplier is 16</td></tr>
-  <tr><td><hr></td><td><hr></td><td><hr></td></tr>
-  <tr><td>{flags}</td><td>0-15</td><td>This value communicates the four switch values
-                             in block 5 of SET-UP B, which are only visible
-                             to the user when an STP option is installed.</td></tr>
-  </table><tr><td><p></td>
+  The meanings of the sequence paramters are:<p>
+<tr><td></td><td><table width=100%>
+<tr><td  bgcolor="#D0D0D0">cmul</td><td  bgcolor="#D0D0D0">Meaning</td></tr>
+<tr>
+<td>  1</td><td>The bit rate multiplier is 16</td></tr>
+<p>
+<tr><td  bgcolor="#D0D0D0">flags</td><td  bgcolor="#D0D0D0">Meaning</td></tr>
+<tr>
+<td>  0-15</td><td>This value communicates the four switch values in block 5 of SET-UP B, which are only visible to the user when an STP option is installed.</td></tr>
+<p>
+<tr><td  bgcolor="#D0D0D0">nbits</td><td  bgcolor="#D0D0D0">Meaning</td></tr>
+<tr>
+<td>  1</td><td>8 bits per character</td></tr>
+<tr>
+<td>  2</td><td>7 bits per character</td></tr>
+<p>
+<tr><td  bgcolor="#D0D0D0">par</td><td  bgcolor="#D0D0D0">Meaning</td></tr>
+<tr>
+<td>  1</td><td>No parity set</td></tr>
+<tr>
+<td>  4</td><td>Parity set and odd</td></tr>
+<tr>
+<td>  5</td><td>Parity set and even</td></tr>
+<p>
+<tr><td  bgcolor="#D0D0D0">sol</td><td  bgcolor="#D0D0D0">Meaning</td></tr>
+<tr>
+<td>  1</td><td>This message is a report.</td></tr>
+<tr>
+<td>  2</td><td>This message is a report, and the terminal is only reporting on request.</td></tr>
+<p>
+<tr><td  bgcolor="#D0D0D0">speed(xspd,rspd)</td><td  bgcolor="#D0D0D0">Meaning</td></tr>
+<tr>
+<td>  0</td><td>Speed set to 50 bps</td></tr>
+<tr>
+<td>  8</td><td>Speed set to 75 bps</td></tr>
+<tr>
+<td>  16</td><td>Speed set to 110 bps</td></tr>
+<tr>
+<td>  24</td><td>Speed set to 134.5 bps</td></tr>
+<tr>
+<td>  32</td><td>Speed set to 150 bps</td></tr>
+<tr>
+<td>  40</td><td>Speed set to 200 bps</td></tr>
+<tr>
+<td>  48</td><td>Speed set to 300 bps</td></tr>
+<tr>
+<td>  56</td><td>Speed set to 600 bps</td></tr>
+<tr>
+<td>  64</td><td>Speed set to 1200 bps</td></tr>
+<tr>
+<td>  72</td><td>Speed set to 1800 bps</td></tr>
+<tr>
+<td>  80</td><td>Speed set to 2000 bps</td></tr>
+<tr>
+<td>  88</td><td>Speed set to 2400 bps</td></tr>
+<tr>
+<td>  96</td><td>Speed set to 3600 bps</td></tr>
+<tr>
+<td>  104</td><td>Speed set to 4800 bps</td></tr>
+<tr>
+<td>  112</td><td>Speed set to 9600 bps</td></tr>
+<tr>
+<td>  120</td><td>Speed set tp 19200 bps</td></tr>
+</table>
+<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECREQTPARM>DECREQTPARM</a>
     <td  bgcolor="#D0D0D0"><b>Request Terminal Parameters</b>
     <td  bgcolor="#D0D0D0">VT100 ANSI Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>ESC <b>[</b> <em>Ps</em> <b>x</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <em>Ps</em> <b>x</b></code>
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  The host sends this sequence to request the VT100 to send a
+<tr><td></td>
+    <td  colspan=2>
+  The host sends this sequence to request the VT100 to send a
   <a href=#DECREPTPARM>DECREPTPARM</a>
   sequence back.  {Ps} can be either 0 or 1.  If 0, the terminal will be
   allowed to send unsolicited <a href=#DECREPTPARM>DECREPTPARM</a>s.
   These reports will be generated each time the terminal exits the SET-UP mode.
-  If {Ps} is 1, then the terminal will only generate 
-  <a href=#DECREPTPARM>DECREPTPARM</a>s in response to a request.<tr><td><p></td>
+  If {Ps} is 1, then the terminal will only generate
+  <a href=#DECREPTPARM>DECREPTPARM</a>s in response to a request.<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=DECRST>DECRST</a>
+    <td  bgcolor="#D0D0D0"><b>DEC Private Reset Mode</b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <b>?</b> <em>Ps</em> <b>...</b> <b>l</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECSC>DECSC</a>
     <td  bgcolor="#D0D0D0"><b>Save Cursor</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>ESC <b>7</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>7</b></code>
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  Causes the cursor position, graphic rendition, and character set to be
-  saved.  (See <a href=#DECRC>DECRC</a>)<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Causes the cursor position, graphic rendition, and character set to be
+  saved.  (See <a href=#DECRC>DECRC</a>)<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECSCLM>DECSCLM</a>
     <td  bgcolor="#D0D0D0"><b>Scrolling Mode</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Mode
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  This is a private parameter to <a href=#RM>RM</a> and <a href=#SM>SM</a>
+<tr><td></td>
+    <td  colspan=2>
+  This is a private parameter to <a href=#RM>RM</a> and <a href=#SM>SM</a>
   control sequences.  The reset
   state causes scrolls to "jump" instantaneuously one line at a time.
   The set state causes the scrolls to be "smooth", and scrolls at a
   maximum rate of siz lines/sec.  See <a href=#MODES>MODES</a>,
-  <a href=#RM>RM</a>, and <a href=#SM>SM</a>.<tr><td><p></td>
+  <a href=#RM>RM</a>, and <a href=#SM>SM</a>.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECSCNM>DECSCNM</a>
     <td  bgcolor="#D0D0D0"><b>Screen Mode</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Mode
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  This is a private parameter to <a href=#RM>RM</a> and <a href=#SM>SM</a>
+<tr><td></td>
+    <td  colspan=2>
+  This is a private parameter to <a href=#RM>RM</a> and <a href=#SM>SM</a>
   control sequences.  The reset
   state causes the screen to be black with white characters; the set
   state causes the screen to be white with black characters.
-  See <a href=#MODES>MODES</a>, <a href=#RM>RM</a>, and <a href=#SM>SM</a>.<tr><td><p></td>
+  See <a href=#MODES>MODES</a>, <a href=#RM>RM</a>, and <a href=#SM>SM</a>.<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=DECSET>DECSET</a>
+    <td  bgcolor="#D0D0D0"><b>DEC Private Reset Mode</b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <b>?</b> <em>Ps</em> <b>...</b> <b>h</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECSTBM>DECSTBM</a>
     <td  bgcolor="#D0D0D0"><b>Set Top and Bottom Margins</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Command
 <tr><td><p></td>
 <tr><td>
-    <td >ESC <b>[</b> <em>Pn</em> <b>;</b> <em>Pn</em> <b>r</b></code>
+    <td ><code> <b>ESC</b> <b>[</b> <em>Pn</em> <b>;</b> <em>Pn</em> <b>r</b></code>
     <td >Default: 1 ScreenLines
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  This sequence sets the top and bottom margins to define the scrolling
+<tr><td></td>
+    <td  colspan=2>
+  This sequence sets the top and bottom margins to define the scrolling
   region.  The first parameter is the line number of the first line in
   the scrolling region; the second parameter is the line number of the
   bottom line of the scrolling region.
   <p>
-  Default is the entire screen (no margins). 
+  Default is the entire screen (no margins).
   The minimum region allowed is two lines, i.e., the top line
   must be less than the bottom.  The cursor is placed in the home
-  position (See <a href=#DECOM>DECOM</a>).<tr><td><p></td>
+  position (See <a href=#DECOM>DECOM</a>).<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECSWL>DECSWL</a>
     <td  bgcolor="#D0D0D0"><b>Single-width Line</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>ESC <b>#</b> <b>5</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>#</b> <b>5</b></code>
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  This causes the line which contains the cursor to become single-width,
+<tr><td></td>
+    <td  colspan=2>
+  This causes the line which contains the cursor to become single-width,
   single-height.  The cursor remains on the same character position.
-  This is the default condition for all new lines on the screen.<tr><td><p></td>
+  This is the default condition for all new lines on the screen.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECTST>DECTST</a>
     <td  bgcolor="#D0D0D0"><b>Invoke Confidence Test</b>
     <td  bgcolor="#D0D0D0">VT100 ANSI Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>ESC <b>[</b> <b>2</b> <b>;</b> <em>Ps</em> <b>y</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <b>2</b> <b>;</b> <em>Ps</em> <b>y</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Ps is the parameter indicating the test to be done.  It is computed by
+  taking the weight indicated for each desired test and adding them
+  together.  If Ps is 0, no test is performed but the VT100 is reset.<p>
+<tr><td></td><td><table width=100%>
+<tr><td  bgcolor="#D0D0D0">Weight</td><td  bgcolor="#D0D0D0">Meaning</td></tr>
+<tr>
+<td>  1</td><td>POST (ROM checksum, RAM NVR, keyboardm and AVO)</td></tr>
+<tr>
+<td>  2</td><td>Data Loop Back (Loopback connector required)</td></tr>
+<tr>
+<td>  3</td><td>EIA Modem Control Test (Loopback connector req.)</td></tr>
+<tr>
+<td>  4</td><td>Repeat Testing until failure</td></tr>
+</table>
+<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=DEL>DEL</a>
+    <td  bgcolor="#D0D0D0"><b>Delete Character</b>
+    <td  bgcolor="#D0D0D0">VT100 Command Ignored
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>  Ps is the parameter indicating the test to be done.  It is computed by
-  taking the weight indicated for each desired test and adding them
-  together.  If Ps is 0, no test is performed but the VT100 is reset.
-  <p>
-  <table>
-  <tr><td>Test                                            </td><td>Weight</td></tr>
-  <tr><td><hr>                                            </td><td><hr>  </td></tr>
-  <tr><td>POST (ROM checksum, RAM NVR, keyboardm and AVO) </td><td>1     </td></tr>
-  <tr><td>Data Loop Back (Loopback connector required)    </td><td>2     </td></tr>
-  <tr><td>EIA Modem Control Test (Loopback connector req.)</td><td>4     </td></tr>
-  <tr><td>Repeat Testing until failure                    </td><td>8     </td></tr>
-  </table><tr><td><p></td>
+    <td  colspan=2><code> <b>0x7f</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=DL>DL</a>
+    <td  bgcolor="#D0D0D0"><b>Delete Line</b>
+    <td  bgcolor="#D0D0D0">Konsole ECMA Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <em>Pn</em> <b>M</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=DLE>DLE</a>
+    <td  bgcolor="#D0D0D0"><b>Delete</b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 Linux XTerm Command Ignored
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x10</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DSR>DSR</a>
     <td  bgcolor="#D0D0D0"><b>Device Status Report</b>
     <td  bgcolor="#D0D0D0">VT100 ANSI Command Reply
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>ESC <b>[</b> <em>Ps</em> <b>n</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <em>Ps</em> <b>n</b></code>
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  Requests and reports the general status of the VT100 according to the
-  following parameters:
-  <p>
-  <table>
-  <tr><td>Parameter</td><td>Direction</td><td>Meaning                  </td></tr>
-  <tr><td><hr>     </td><td><hr>     </td><td><hr>                     </td></tr>
-  <tr><td>0        </td><td>to host  </td><td>Ready, no faults detected</td></tr>
-  <tr><td>3        </td><td>to host  </td><td>Malfunction Detected     </td></tr>
-  <tr><td>5        </td><td>to VT100 </td>
-                        <td>Report Status (using a DSR control sequence)</td></tr>
-  <tr><td>6        </td><td>to VT100 </td>
-                        <td>Report Active Position (using a CPR sequence)</td></tr>
-  </table>
+<tr><td></td>
+    <td  colspan=2>
+  Requests and reports the general status of the VT100 according to the
+  following parameters.
   <p>
   DSR with a parameter of 0 or 3 is always sent as a response to a
-  requesting DSR with a parameter of 5.<tr><td><p></td>
+  requesting DSR with a parameter of 5.<p>
+<tr><td></td><td><table width=100%>
+<tr><td  bgcolor="#D0D0D0">Ps</td><td  bgcolor="#D0D0D0">Meaning</td></tr>
+<tr>
+<td>  0</td><td>to host </td><td>Ready, no faults detected</td></tr>
+<tr>
+<td>  3</td><td>to host </td><td>Malfunction detected</td></tr>
+<tr>
+<td>  5</td><td>to VT100</td><td>Report Status (using a DSR control sequence)</td></tr>
+<tr>
+<td>  6</td><td>to VT100</td><td>Report Active Position (using a CPR sequence)</td></tr>
+</table>
+<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=ECH>ECH</a>
+    <td  bgcolor="#D0D0D0"><b>Erase Character</b>
+    <td  bgcolor="#D0D0D0">Konsole ECMA Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <em>Pn</em> <b>X</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=ED>ED</a>
     <td  bgcolor="#D0D0D0"><b>Erase in Display</b>
     <td  bgcolor="#D0D0D0">VT100 ANSI Command
 <tr><td><p></td>
 <tr><td>
-    <td >ESC <b>[</b> <em>Ps</em> <b>J</b></code>
+    <td ><code> <b>ESC</b> <b>[</b> <em>Ps</em> <b>J</b></code>
     <td >Default: 0
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  This sequence erases some or all of the characters in the display
+<tr><td></td>
+    <td  colspan=2>
+  This sequence erases some or all of the characters in the display
   according to the parameter.  Any complete line erased by this sequence
-  will return that line to single width mode.
-  <p>
-  <table>
-  <tr><td>Parameter</td><td>Meaning                                          </td></tr>
-  <tr><td><hr>     </td><td><hr>                                             </td></tr>
-  <tr><td>0        </td><td>Erase from the cursor to the end of the screen.  </td></tr>
-  <tr><td>1        </td><td>Erase from the start of the screen to the cursor.</td></tr>
-  <tr><td>2        </td><td>Erase the entire screen.                         </td></tr>
-  </table><tr><td><p></td>
+  will return that line to single width mode.<p>
+<tr><td></td><td><table width=100%>
+<tr><td  bgcolor="#D0D0D0">Ps</td><td  bgcolor="#D0D0D0">Meaning</td></tr>
+<tr>
+<td>  0</td><td>Erase from the cursor to the end of the screen.</td></tr>
+<tr>
+<td>  1</td><td>Erase from the start of the screen to the cursor.</td></tr>
+<tr>
+<td>  2</td><td>Erase the entire screen.</td></tr>
+</table>
+<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=EL>EL</a>
     <td  bgcolor="#D0D0D0"><b>Erase in Line</b>
     <td  bgcolor="#D0D0D0">VT100 ANSI Command
 <tr><td><p></td>
 <tr><td>
-    <td >ESC <b>[</b> <em>Ps</em> <b>K</b></code>
+    <td ><code> <b>ESC</b> <b>[</b> <em>Ps</em> <b>K</b></code>
     <td >Default: 0
 <tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Erases some or all characters in the active line, according to the
+  parameter.<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=EM>EM</a>
+    <td  bgcolor="#D0D0D0"><b></b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 Linux XTerm Command Ignored
+<tr><td><p></td>
 <tr><td>
-    <td  colspan=2>  Erases some or all characters in the active line, according to the
-  parameter.
-  <p>
-  <table>
-  <tr><td>Parameter</td><td>Meaning                                        </td></tr>
-  <tr><td><hr>     </td><td><hr>                                           </td></tr>
-  <tr><td>0        </td><td>Erase from cursor to the end of the line.      </td></tr>
-  <tr><td>1        </td><td>Erase from the start of the line to the cursor.</td></tr>
-  <tr><td>2        </td><td>Erase the entire line.                         </td></tr>
-  </table><tr><td><p></td>
+    <td  colspan=2><code> <b>0x19</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=ENQ>ENQ</a>
+    <td  bgcolor="#D0D0D0"><b>Enquiry</b>
+    <td  bgcolor="#D0D0D0">VT100
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x05</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Transmit the ANSWERBACK message. The answerback message can be loaded
+  in SET-UP B (i.e. is a configurable string).<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=EOT>EOT</a>
+    <td  bgcolor="#D0D0D0"><b>End Of Transmission</b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 Linux XTerm Command Ignored
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x04</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=ESC>ESC</a>
+    <td  bgcolor="#D0D0D0"><b>Escape</b>
+    <td  bgcolor="#D0D0D0">ECMA VT100 Ignored
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x1b</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Introduces a control sequence.<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=ETB>ETB</a>
+    <td  bgcolor="#D0D0D0"><b>End Of Transmission Block</b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 Linux XTerm Command Ignored
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x17</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=ETX>ETX</a>
+    <td  bgcolor="#D0D0D0"><b>End Of Text</b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 Linux XTerm Command Ignored
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x03</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=FF>FF</a>
+    <td  bgcolor="#D0D0D0"><b>Form Feed</b>
+    <td  bgcolor="#D0D0D0">VT100
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x0c</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Same as <a href=#LF>LF</a>.<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=FS>FS</a>
+    <td  bgcolor="#D0D0D0"><b></b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 Linux XTerm Command Ignored
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x1c</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=GS>GS</a>
+    <td  bgcolor="#D0D0D0"><b></b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 Linux XTerm Command Ignored
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x1d</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=HT>HT</a>
+    <td  bgcolor="#D0D0D0"><b>Horizontal Tabulation</b>
+    <td  bgcolor="#D0D0D0">VT100
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x09</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Move cursor to the next tab stop, or to the right margin
+  if no further tabs are set.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=HTS>HTS</a>
     <td  bgcolor="#D0D0D0"><b>Horizontal Tab Set</b>
     <td  bgcolor="#D0D0D0">VT100 ANSI Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>ESC <b>H</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>H</b></code>
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  Set a tab stop at the current cursor position.<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Set a tab stop at the current cursor position.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=HVP>HVP</a>
     <td  bgcolor="#D0D0D0"><b>Horizontal and Vertical Position</b>
     <td  bgcolor="#D0D0D0">VT100 ANSI Command
 <tr><td><p></td>
 <tr><td>
-    <td >ESC <b>[</b> <em>Pn</em> <b>;</b> <em>Pn</em> <b>f</b></code>
+    <td ><code> <b>ESC</b> <b>[</b> <em>Pn</em> <b>;</b> <em>Pn</em> <b>f</b></code>
     <td >Default: 1 1
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  Moves the cursor to the position specified by the parameters.  The
+<tr><td></td>
+    <td  colspan=2>
+  Moves the cursor to the position specified by the parameters.  The
   first parameter specifies the line, and the second specifies the
   column.  A parameter of 0 or 1 causes the active position to move to
   the first line or column in the display.  In the VT100, this control
   behaves identically with it's editor counterpart, <a href=#CUP>CUP</a>.
   The numbering of hte lines depends upon the state of the Origin Mode
-  (<a href=#DECOM>DECOM</a>).<tr><td><p></td>
+  (<a href=#DECOM>DECOM</a>).<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=ICH>ICH</a>
+    <td  bgcolor="#D0D0D0"><b>Insert Character</b>
+    <td  bgcolor="#D0D0D0">Konsole ECMA Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <em>Pn</em> <b>@</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=IL>IL</a>
+    <td  bgcolor="#D0D0D0"><b>Insert Line</b>
+    <td  bgcolor="#D0D0D0">Konsole Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <em>Pn</em> <b>L</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=IND>IND</a>
     <td  bgcolor="#D0D0D0"><b>Index</b>
     <td  bgcolor="#D0D0D0">VT100 ANSI Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>ESC <b>D</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>D</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  This sequence causes the cursor to move downward one line without
+  changing the column.  If the cursor is at the bottom margin, a scroll
+  up is performed.<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=LF>LF</a>
+    <td  bgcolor="#D0D0D0"><b>Line Feed</b>
+    <td  bgcolor="#D0D0D0">VT100
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>  This sequence causes the cursor to move downward one line without
-  changing the column.  If the cursor is at the bottom margin, a scroll
-  up is performed.<tr><td><p></td>
+    <td  colspan=2><code> <b>0x0a</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Causes either a line feed or new line operation (See <a href=#LNM>LNM</a>.)<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=LNM>LNM</a>
     <td  bgcolor="#D0D0D0"><b>Line Feed/New Line Mode</b>
     <td  bgcolor="#D0D0D0">VT100 ANSI Mode
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  This is a parameter to <a href=#SM>SM</a> and <a href=#RM>RM</a> control sequences.
+<tr><td></td>
+    <td  colspan=2>
+  This is a parameter to <a href=#SM>SM</a> and <a href=#RM>RM</a> control sequences.
   The reset state
-  causes the interpretation of the &lt;LF&gt; character to imply only vertical
+  causes the interpretation of the <a href=#LF>LF</a> character to imply only vertical
   movement of the cursor and causes the RETURN key to send the single
-  code &lt;CR&gt;.
+  code <a href=#CR>CR</a>.
   <p>
-  The set state causes the &lt;LF&gt; character to imply movement
+  The set state causes the <a href=#LF>LF</a> character to imply movement
   to the first position of the following line, and causes the RETURN key
-  to send the code pair &lt;CR&gt;&lt;LF&gt;.  This is the New Line option.
+  to send the code pair <a href=#CR>CR</a> <a href=#LF>LF</a>.  This is the New Line option.
   <p>
   This mode does not affect the Index (<a href=#IND>IND</a>) or the next line
-  (<a href=#NEL>NEL</a>) format effectors.<tr><td><p></td>
+  (<a href=#NEL>NEL</a>) format effectors.<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=LS2>LS2</a>
+    <td  bgcolor="#D0D0D0"><b>Lock Shift Two</b>
+    <td  bgcolor="#D0D0D0">Konsole Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>FIXME</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=LS3>LS3</a>
+    <td  bgcolor="#D0D0D0"><b>Lock Shift Three</b>
+    <td  bgcolor="#D0D0D0">Konsole Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>FIXME</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=MC>MC</a>
+    <td  bgcolor="#D0D0D0"><b>Media Copy</b>
+    <td  bgcolor="#D0D0D0">ECMA VT100 Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <em>Pn</em> <b>i</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=NAK>NAK</a>
+    <td  bgcolor="#D0D0D0"><b>Negative Acknowledge</b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 Linux XTerm Command Ignored
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x15</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=NEL>NEL</a>
     <td  bgcolor="#D0D0D0"><b>Next Line</b>
     <td  bgcolor="#D0D0D0">VT100 ANSI Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>ESC <b>E</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>E</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  This causes the cursor to move to the first position of the next line
+  down.  If the cursor is on the bottom line, a scroll is performed.<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=NUL>NUL</a>
+    <td  bgcolor="#D0D0D0"><b>Null</b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 Linux XTerm Command Ignored
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>  This causes the cursor to move to the first position of the next line
-  down.  If the cursor is on the bottom line, a scroll is performed.<tr><td><p></td>
+    <td  colspan=2><code> <b>0x00</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  NUL is used as media- or time-fill. It is ignored by Konsole, but may
+  be sensible for devices which requiere a recognizable amount of time
+  to complete some commands (e.g. form feed on a non-buffering printing
+  device).<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=PRINT>PRINT</a>
+    <td  bgcolor="#D0D0D0"><b>Printable Characters</b>
+    <td  bgcolor="#D0D0D0">ECMA VT100 Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x20..0x7e,0x80..0xff</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Printable characters are basically displayed. They my cause a line
+  wrap when the cursor is already located at the end of the line.
+  <p>
+  The VT100 has a unique way to do this by producing a line wrap before
+  the character would be displayed on the next line. This feature allows
+  to print at the rightmost column without producing an implicit line feed.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=RI>RI</a>
     <td  bgcolor="#D0D0D0"><b>Reverse Index</b>
     <td  bgcolor="#D0D0D0">VT100 ANSI Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>ESC <b>M</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>M</b></code>
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  Move the cursor up one line without changing columns.  If the cursor is
-  on the top line, a scroll down is performed.<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Move the cursor up one line without changing columns.  If the cursor is
+  on the top line, a scroll down is performed.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=RIS>RIS</a>
     <td  bgcolor="#D0D0D0"><b>Reset to Initial State</b>
     <td  bgcolor="#D0D0D0">VT100 ANSI Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>ESC <b>c</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>c</b></code>
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  Resets the VT100 to the state is has upon power up.  This also causes
-  the execution of the POST and signal INT H to be asserted briefly.<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Resets the VT100 to the state is has upon power up.  This also causes
+  the execution of the POST and signal INT H to be asserted briefly.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=RM>RM</a>
     <td  bgcolor="#D0D0D0"><b>Reset Mode</b>
     <td  bgcolor="#D0D0D0">VT100 ANSI Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>ESC <b>[</b> <em>Ps</em> <b>;</b> <b>...</b> <b>l</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <em>Ps</em> <b>;</b> <b>...</b> <b>l</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Resets one or more VT100 modes as specified by each selective parameter
+  in the parameter string.  Each mode to be reset is specified by a
+  separate parameter.  See <a href=#MODES>MODES</a> and <a href=#SM>SM</a>.<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=RS>RS</a>
+    <td  bgcolor="#D0D0D0"><b></b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 Linux XTerm Command Ignored
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>  Resets one or more VT100 modes as specified by each selective parameter
-  in the parameter string.  Each mode to be reset is specified by a
-  separate parameter.  See <a href=#MODES>MODES</a> and <a href=#SM>SM</a>.<tr><td><p></td>
+    <td  colspan=2><code> <b>0x1e</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=SCS>SCS</a>
     <td  bgcolor="#D0D0D0"><b>Select Character Set</b>
     <td  bgcolor="#D0D0D0">VT100 ANSI Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>  <code>&lt;ESC;&gt;( {Cs}</code>  Select G0 Set <br>
-  <code>&lt;ESC;&gt;) {Cs}</code>  Select G1 Set
-  <p>
+    <td  colspan=2><code> <b>ESC</b> <em>Pc</em> <em>Cs</em></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
   The appropriate D0 and G1 character sets are designated from one of the
-  five possible sets.  The G0 and G1 sets are invokedd by the characters
-  &lt;SI&gt; and &lt;SO&gt;, respectively.
-  <p>
-  <table>
-  <tr><td>Parameter</td><td>Meaning            </td></tr>
-  <tr><td><hr>     </td><td><hr>               </td></tr>
-  <tr><td>A        </td><td>United Kingdom Set </td></tr>
-  <tr><td>B        </td><td>ASCII Set          </td></tr>
-  <tr><td>0        </td><td>Special Graphics   </td></tr>
-  <tr><td>1        </td><td>Alternate Character ROM<br>Standard Character Set</td><tr>
-  <tr><td>2        </td><td>Alternate Character ROM<br>Special Graphics      </td><tr>
-  </table>
+  five possible sets.  The G0 and G1 sets are invoked by the characters
+  <a href=#SI>SI</a> and <a href=#SO>SO</a>, respectively.
   <p>
   The United Kingdom and ASCII sets conform to the "ISO international
   register of character sets to be used with escape sequences".  The
   other sets are private character sets.  Special graphics means that the
   graphic characters fpr the codes 0137 to 0176 are replaced with other
   characters.  The specified character set will be used until another SCS
-  is recieved.<tr><td><p></td>
+  is recieved.<p>
+<tr><td></td><td><table width=100%>
+<tr><td  bgcolor="#D0D0D0">Cs</td><td  bgcolor="#D0D0D0">Meaning</td></tr>
+<tr>
+<td>  A</td><td>United Kingdom Set</td></tr>
+<tr>
+<td>  B</td><td>ASCII Set</td></tr>
+<tr>
+<td>  0</td><td>Special Graphics</td></tr>
+<tr>
+<td>  1</td><td>Alternate Character ROM (Standard Character Set)</td></tr>
+<tr>
+<td>  2</td><td>Alternate Character ROM (Special Graphics)</td></tr>
+<p>
+<tr><td  bgcolor="#D0D0D0">Pc</td><td  bgcolor="#D0D0D0">Meaning</td></tr>
+<tr>
+<td>  (</td><td>Select G0 Set</td></tr>
+<tr>
+<td>  )</td><td>Select G1 Set</td></tr>
+</table>
+<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=SGR>SGR</a>
     <td  bgcolor="#D0D0D0"><b>Select Graphic Rendition</b>
     <td  bgcolor="#D0D0D0">VT100 ANSI Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>ESC <b>[</b> <em>Ps</em> <b>;</b> <b>...</b> <b>m</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <em>Ps</em> <b>;</b> <b>...</b> <b>m</b></code>
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  Invoke the graphic rendition specified by the parameter(s).  All
+<tr><td></td>
+    <td  colspan=2>
+  Invoke the graphic rendition specified by the parameter(s).  All
   following characters transmitted to the VT100 are rendered according
   to the parameter(s) until the next occurrence of an SGR.
-  <p>
-  <table>
-  <tr><td>Parameter</td><td>Meaning                    </td></tr>
-  <tr><td><hr>     </td><td><hr>                       </td></tr>
-  <tr><td>0        </td><td>Attributes Off             </td></tr>
-  <tr><td>1        </td><td>Bold or increased intensity</td></tr>
-  <tr><td>4        </td><td>Underscore                 </td></tr>
-  <tr><td>5        </td><td>Blink                      </td></tr>
-  <tr><td>7        </td><td>Negative (reverse) image   </td></tr>
-  </table>
   <p>
   All other parameter values are ignored.
   <p>
   Without the Advanced Video Option, only one type of character attribute
   is possible, as determined by the cursor selection; in that case
   specifying either underscore or reverse will activate the currently
-  selected attribute.<tr><td><p></td>
+  selected attribute.<p>
+<tr><td></td><td><table width=100%>
+<tr><td  bgcolor="#D0D0D0">Ps</td><td  bgcolor="#D0D0D0">Meaning</td></tr>
+<tr>
+<td>  0</td><td>Attributes Off</td></tr>
+<tr>
+<td>  1</td><td>Bold or increased intensity</td></tr>
+<tr>
+<td>  4</td><td>Underscore</td></tr>
+<tr>
+<td>  5</td><td>Blink</td></tr>
+<tr>
+<td>  7</td><td>Negative (reverse) image</td></tr>
+</table>
+<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=SI>SI</a>
+    <td  bgcolor="#D0D0D0"><b>Shift In (Lock Shift One)</b>
+    <td  bgcolor="#D0D0D0">VT100
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x0f</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Invoke the G0 character set, as selected by the &lt;ESC&gt;( sequence.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=SM>SM</a>
     <td  bgcolor="#D0D0D0"><b>Set Mode</b>
     <td  bgcolor="#D0D0D0">VT100 ANSI Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>ESC <b>[</b> <em>Ps</em> <b>;</b> <b>...</b> <b>h</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <em>Ps</em> <b>;</b> <b>...</b> <b>h</b></code>
 <tr><td><p></td>
-<tr><td>
-    <td  colspan=2>  Causes one or more modes to be set within the VT100 as specified by
+<tr><td></td>
+    <td  colspan=2>
+  Causes one or more modes to be set within the VT100 as specified by
   each selective parameter string.  Each mode to be set is specified by a
   seperate parameter.  A mode is considered set until it is reset by a
-  Reset Mode (<a href=#RM>RM</a>) control sequence.  
-  See <a href=#RM>RM</a> and <a href=#MODES>MODES</a>.
-  <p>
-  <em>[Editor's note: The original DEC VT100 documentation EK-VT100-UG-003
-  erroneously omitted the "[" character from the SM sequence.]</em><tr><td><p></td>
+  Reset Mode (<a href=#RM>RM</a>) control sequence.
+  See <a href=#RM>RM</a> and <a href=#MODES>MODES</a>.<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=SO>SO</a>
+    <td  bgcolor="#D0D0D0"><b>Shift Out (Lock Shift Zero)</b>
+    <td  bgcolor="#D0D0D0">VT100
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x0e</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Invoke the G1 character set, as designated by the <a href=#SCS>SCS</a> control sequence.<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=SOH>SOH</a>
+    <td  bgcolor="#D0D0D0"><b>Start Of Heading</b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 Linux XTerm Command Ignored
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x01</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=STX>STX</a>
+    <td  bgcolor="#D0D0D0"><b>Start Of Text</b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 Linux XTerm Command Ignored
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x02</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=SUB>SUB</a>
+    <td  bgcolor="#D0D0D0"><b></b>
+    <td  bgcolor="#D0D0D0">VT100
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x1a</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Same as <a href=#CAN>CAN</a>.<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=SYN>SYN</a>
+    <td  bgcolor="#D0D0D0"><b></b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 Linux XTerm Command Ignored
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x16</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=TBC>TBC</a>
     <td  bgcolor="#D0D0D0"><b>Tabulation Clear</b>
     <td  bgcolor="#D0D0D0">VT100 ANSI Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>ESC <b>[</b> <em>Ps</em> <b>g</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <em>Ps</em> <b>g</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  If the parameter is missing or 0, this will clear the tab stop at the
+  cursor's position.  If it is 3, this will clear all of the tab stops.
+  Any other parameter is ignored.<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=US>US</a>
+    <td  bgcolor="#D0D0D0"><b></b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 Linux XTerm Command Ignored
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2>  If the parameter is missing or 0, this will clear the tab stop at the
-  cursor's position.  If it is 3, this will clear all of the tab stops.
-  Any other parameter is ignored.</table>
+    <td  colspan=2><code> <b>0x1f</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=VPA>VPA</a>
+    <td  bgcolor="#D0D0D0"><b>Vertical Position Absolute</b>
+    <td  bgcolor="#D0D0D0">Konsole ECMA Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <em>Pn</em> <b>d</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=VT>VT</a>
+    <td  bgcolor="#D0D0D0"><b>Vertical Tabulation</b>
+    <td  bgcolor="#D0D0D0">VT100
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>0x0b</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  Same as <a href=#LF>LF</a>.<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=VT52ANSI>VT52ANSI</a>
+    <td  bgcolor="#D0D0D0"><b>VT52 Ansi Mode</b>
+    <td  bgcolor="#D0D0D0">Konsole VT100 XTerm Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>&lt;</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=VT52CUB>VT52CUB</a>
+    <td  bgcolor="#D0D0D0"><b>VT52 Cursor Back</b>
+    <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>D</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=VT52CUD>VT52CUD</a>
+    <td  bgcolor="#D0D0D0"><b>VT52 Cursor Down</b>
+    <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>B</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=VT52CUF>VT52CUF</a>
+    <td  bgcolor="#D0D0D0"><b>VT52 Cursor Forward</b>
+    <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>C</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=VT52CUH>VT52CUH</a>
+    <td  bgcolor="#D0D0D0"><b>VT52 Cursor Home</b>
+    <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>H</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=VT52CUP>VT52CUP</a>
+    <td  bgcolor="#D0D0D0"><b>VT52 Cursor Position</b>
+    <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <em>X</em> <em>Y</em></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=VT52CUU>VT52CUU</a>
+    <td  bgcolor="#D0D0D0"><b>VT52 Cursor Up</b>
+    <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>A</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=VT52EDL>VT52EDL</a>
+    <td  bgcolor="#D0D0D0"><b>VT52 Clear To End Of Line</b>
+    <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>K</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=VT52EDS>VT52EDS</a>
+    <td  bgcolor="#D0D0D0"><b>VT52 Clear To End Of Screen</b>
+    <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>J</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=VT52KPAM>VT52KPAM</a>
+    <td  bgcolor="#D0D0D0"><b>VT52 Keyboard Application Mode</b>
+    <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>=</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=VT52KPNM>VT52KPNM</a>
+    <td  bgcolor="#D0D0D0"><b>VT52 Keyboard Numeric Mode</b>
+    <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>&gt;</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=VT52REP>VT52REP</a>
+    <td  bgcolor="#D0D0D0"><b>VT52 Report Terminal Type</b>
+    <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>Z</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=VT52RI>VT52RI</a>
+    <td  bgcolor="#D0D0D0"><b>VT52 Reverse Index</b>
+    <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>I</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=VT52SCSF>VT52SCSF</a>
+    <td  bgcolor="#D0D0D0"><b>VT52 Set Character Set</b>
+    <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>F</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=VT52SCSG>VT52SCSG</a>
+    <td  bgcolor="#D0D0D0"><b>VT52 Set Character Set</b>
+    <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>G</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=XTERESTORE>XTERESTORE</a>
+    <td  bgcolor="#D0D0D0"><b>XTerm Private Restore Mode</b>
+    <td  bgcolor="#D0D0D0">Konsole XTerm Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <b>?</b> <em>Ps</em> <b>...</b> <b>r</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain<tr><td><p></td></tr>
+<tr><td  bgcolor="#D0D0D0"><a name=XTESAVE>XTESAVE</a>
+    <td  bgcolor="#D0D0D0"><b>XTerm Private Save Mode</b>
+    <td  bgcolor="#D0D0D0">Konsole XTerm Command
+<tr><td><p></td>
+<tr><td>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <b>?</b> <em>Ps</em> <b>...</b> <b>s</b></code>
+<tr><td><p></td>
+<tr><td></td>
+    <td  colspan=2>
+  FIXME. explain</table>
 <h2>
 <table width=100%>
 <tr><td align=center bgcolor=#d0d0d0></td></tr>

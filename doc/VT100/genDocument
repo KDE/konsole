@@ -31,8 +31,6 @@ etx
 
 # -- Editors Notes ------------------------------------------------------------------
 
-
-
 cat >> $RES << etx
 
 <h1><center>VT100</center></h1>
@@ -63,18 +61,32 @@ emulation, with some additions, of cause.
 <p>
 This situation is further confused by the fact, that often many versions of the
 above terminals and emulations are out, one able to do a little more or less then
-the other. Especially the later makes the production of a <em>working</em>
-emulation an impossible task. And this is the place where this document steps in:
+the other. Especially the later makes the production of an emulation a difficult
+task.
+<p>
+This document contains the material collected and
+attempts to describe not only the abilities of konsole, but also to give a
+full reference of the emulations that konsole is capable of, but does
+eventually not implement completely.
+<p>
+Currently, the body of this document is mainly a concept data base, that
+referes to the VT100 component of the emulation. Any indication whether
+these codes are implemented by konsole or not are missing. So do additional
+codes origination from the Xterm and Linux console emulation. If you need to
+know the precise extend of the emulation, please refere to the TEmuVt102.C
+source, which contains a table, that fully answers the question. I'm in the
+process to integrate this table into this concept data base, to link the
+konsole emulation sources closely with it's documentation.
 
 
-<h2>Editor's notes &amp; todos</h2>
+<h2>Notes &amp; todos</h2>
 <ul>
 <li>Include complete reference on keyboard material.
 <li>Check for explaination of out-of-bound values.
 <li>Include VT52, VT102, XTERM, LINUX-console codes
-<li>Translate to codes to decimal
 <li>Make the whole document more concept oriented
 <li>See the section <em>Method of description</em>, below
+<li>Derive some summarizing lists.
 </ul>
 etx
 
@@ -136,7 +148,6 @@ Parts of the terminal description
 <li>Replys
 <br>These are send by the terminal as a result of a Request from the hosts.
 <li>Encoding/Decoding
-<br>Since the 
 </ul>
 
 
@@ -150,24 +161,63 @@ cat >> $RES << etx
 The control characters recognized by the VT100 are listed below.  All
 other control characters cause no action to be taken.
 <p>
-Control characters (codes 00 - 037 inclusive) are specifically excluded
+Control characters (codes 0x00 - 0x1f inclusive) are specifically excluded
 from the control sequence syntax, but may be embedded within a control
 sequence.  Embedded control characters are executed as soon as they are
 encountered by the VT100.  The processing of the control sequence then
-continues with the next character recieved.  The exceptions are: if the &lt;ESC&gt;
-character occurs, the current control sequence is aborted, and a new one
-commences beginning with the &lt;ESC&gt; just recieved.  If the character &lt;CAN&gt;
-(030) or the character &lt;SUB&gt; (032) occurs, the current control sequence is
-aborted.  The ability to embed control characters allows the synchronization
-characters XON and XOFF to be interpreted properly without affecting the
-control sequence.
+continues with the next character recieved.  The exceptions are:
+if the <a href=#ESC>ESC</a> character occurs, the current control sequence
+is aborted, and a new one commences beginning with the <a href=#ESC>ESC</a>
+just recieved.  If the character <a href=#CAN>CAN</a> (0x0c) or the
+character <a href=#SUB>SUB</a> (0x0e) occurs,
+the current control sequence is aborted.  The ability to embed control
+characters allows the synchronization characters XON and XOFF to be
+interpreted properly without affecting the control sequence.
 <p>
 etx
 
-awk -f awk.table.control < Table.Control >> $RES
+# awk -f awk.table.control < Table.Control >> $RES
 
 header "Control Sequences"
 cat >> $RES << etx
+
+Conceptually, the commands to the terminal emulation are encoded if form
+of byte sequences to meet the restrictions of the transport media. These
+sequences have pretty different originations and therefore the format of
+the sequences are inhomogenous.
+<p>
+Refering both to their origin and form, one can group the overall encoding
+schemes as follows:
+<p>
+<table>
+<tr><td bgcolor=#d0d0d0>Pattern</td><td bgcolor=#d0d0d0>Scope</td><td bgcolor=#d0d0d0>Comment</td></tr>
+<tr><td>Ascii Printable Characters</td><td>ASCII ECMA</td>
+  <td>This is the most original pattern of all. The characters to be
+      displayed are passed over the chanel and are interpreted by the
+      terminal (emulation) as instructions to display the corresponding
+      glyph of the ascii character set.</td></tr>
+<tr><td>Ascii Control Characters</td><td>ASCII ECMA</td>
+  <td>Ascii defines some non-printable, but format effecting characters, too.
+      Depending on the emulation, at least some of them are given a meaning.
+      The typical implemented ones are those that are handled by a teletype
+      like device.</td></tr>
+<tr><td>Simple Escape Sequence</td><td>ECMA</td>
+  <td>These sequences are made up from an <b>ESC</b> character followed by
+      exactly one other character in the range ???..???.</td></tr>
+<tr><td>CSI Sequence</td><td>ECMA</td>
+  <td></td></tr>
+<tr><td colspan=3>
+  <p>
+    The remaining codes are nonstandard but traditionalized hacks. Since
+    ANSI/ECMA provides proper slots for extentions, there is not much to
+    say about these inventions.
+  <p>
+    </td></tr>
+<tr><td>DEC hash hack</td><td>VT100</td><td><b>ESC #</b><i>{Digit}</i></td></tr>
+<tr><td>DEC scs hack</td><td>VT100</td><td><b>ESC</b><i>{CC} {DD}</i></td></tr>
+<tr><td>XTERM title hack</td><td>XTERM</td><td><b>ESC ]</b><i>{text}</i><b>BEL</b></td></tr>
+
+</table>
 
 <h3>Definitions</h3>
 
@@ -283,7 +333,7 @@ The following attributes below have the following meaning:
 etx
 
 
-genTC.pl >> $RES
+./genTC.pl >> $RES
 
 header "Modes"
 
