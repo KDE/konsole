@@ -44,6 +44,11 @@
 #include <bsdtty.h>
 #endif
 
+#ifdef HAVE_SYS_STROPTS_H
+#include <sys/stropts.h>
+#define _NEW_TTY_CTRL
+#endif
+
 #include <assert.h>
 #include <time.h>
 #include <signal.h>
@@ -103,7 +108,13 @@ void Shell::makeShell(const char* dev, QStrList & args,
 { int sig; char* t;
   // open and set all standard files to master/slave tty
   int tt = open(dev, O_RDWR | O_EXCL);
-   
+  
+  // Solaris apparently needs this 
+#if defined(SVR4) || defined(__SVR4)
+  ioctl(tt, I_PUSH, "ptem");
+  ioctl(tt, I_PUSH, "ldterm");
+#endif
+
   //reset signal handlers for child process
   for (sig = 1; sig < NSIG; sig++) signal(sig,SIG_DFL);
  
