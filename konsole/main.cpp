@@ -419,7 +419,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
     }
     else
     {
-       KCmdLineArgs::usage(i18n("expected --vt_sz <#columns>x<#lines> ie. 80x40\n"));
+       KCmdLineArgs::usage(i18n("expected --vt_sz <#columns>x<#lines> e.g. 80x40\n"));
     }
   }
 
