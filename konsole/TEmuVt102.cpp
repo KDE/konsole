@@ -1145,8 +1145,11 @@ bool TEmuVt102::getMode(int m)
 void TEmuVt102::setConnect(bool c)
 {
   TEmulation::setConnect(c);
-  QObject::disconnect(gui, SIGNAL(sendStringToEmu(const char*)),
-		      this, SLOT(sendString(const char*)));
+  if (gui)
+  {
+    QObject::disconnect(gui, SIGNAL(sendStringToEmu(const char*)),
+                        this, SLOT(sendString(const char*)));
+  }
   if (c)
   { // refresh mouse mode
     if (getMode(MODE_Mouse1000))
