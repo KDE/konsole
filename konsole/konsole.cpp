@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------- */
 /*                                                                        */
-/* [main.C]                        Konsole                                */
+/* [konsole.cpp]                   Konsole                                */
 /*                                                                        */
 /* ---------------------------------------------------------------------- */
 /*                                                                        */
@@ -567,9 +567,7 @@ void Konsole::makeGUI()
    renameSession->plug(m_rightButton);
    m_rightButton->insertItem(i18n("S&ettings"), m_options);
    m_rightButton->insertSeparator();
-   KAction *closeSessionRMB = new KAction(i18n("C&lose Session"), "fileclose", 0, this,
-                                        SLOT(closeCurrentSession()), actions);
-   closeSessionRMB->plug(m_rightButton );
+   closeSession->plug(m_rightButton );
    m_rightButton->insertTearOffHandle();
 
 
