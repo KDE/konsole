@@ -325,6 +325,7 @@ int main(int argc, char* argv[])
           m->initSessionKeyTab(sessionconfig->readEntry(key));
           counter++;
         }
+        m->setActiveSession( sessionconfig->readNumEntry("ActiveSession",0) );
         ksm->konsole = m;
         ksm->konsole->initFullScreen();
         // works only for the first one, but there won't be more.

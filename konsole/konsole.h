@@ -54,6 +54,7 @@ public:
   Konsole(const char * name, const QString &_program, QStrList & _args,
     int histon, bool, const QString & _title, QCString type = 0, const QString &_term=QString::null, bool b_inRestore = false);
   ~Konsole();
+  void setActiveSession(uint sessionNo);
   void setColLin(int columns, int lines);
   void setFullScreen(bool on);
   void initFullScreen();

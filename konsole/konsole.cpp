@@ -734,6 +734,7 @@ void Konsole::readGlobalProperties(KConfig* config)
 
 void Konsole::saveProperties(KConfig* config) {
   uint counter=0;
+  uint active=0;
   QString key;
   config->setDesktopGroup();
 
@@ -759,6 +760,8 @@ void Konsole::saveProperties(KConfig* config) {
         config->writeEntry(key, sessions.current()->Term());
         key = QString("KeyTab%1").arg(counter);
         config->writeEntry(key, sessions.current()->keymap());
+        if (sessions.current()==se)
+	  active=counter;
         sessions.next();
         counter++;
      }
@@ -775,6 +778,7 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("bellmode",n_bell);
   config->writeEntry("keytab",n_defaultKeytab);
   config->writeEntry("WarnQuit", b_warnQuit);
+  config->writeEntry("ActiveSession", active);
 
   if (se) {
     config->writeEntry("history", se->history().getSize());
@@ -1321,6 +1325,13 @@ void Konsole::addSession(TESession* s)
 /**
    Activates a session (from the menu or by pressing a button)
  */
+void Konsole::setActiveSession(uint sessionNo)
+{
+  if (sessionNo>=sessions.count())
+    return;
+  activateSession( sessions.at(sessionNo) );
+}
+
 void Konsole::activateSession()
 {
   TESession* s = NULL;
