@@ -69,7 +69,7 @@ void KWrited::block_in(const char* txt, int len)
 int main(int argc, char* argv[])
 {
   // WABA: Make sure not to enable session management.
-  putenv(strdup("SESSION_MANAGER="));
+  putenv("SESSION_MANAGER=");
 
   KApplication app(argc, argv, "kwrited");
   //FIXME: check if we have already have kwrited running.

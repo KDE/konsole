@@ -120,7 +120,7 @@ int main(int argc, char* argv[])
 
   // ///////////////////////////////////////////////
 
-  putenv(strdup("COLORTERM=")); // to trigger mc's color detection
+  putenv((char*)"COLORTERM="); // to trigger mc's color detection
 
   if (a.isRestored())
   {
