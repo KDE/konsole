@@ -161,7 +161,7 @@ text while pressing the Shift key?
 <tip category="Konsole">
 <html>
 <p>...that you can let Konsole set the current directory as the window title?
-For Bash, put 'export PS1=$PS1"\[\e]0;\H:\w\a\]' in your ~/.bashrc .
+For Bash, put 'export PS1=$PS1"\[\e]0;\H:\w\a\]"' in your ~/.bashrc .
 </html>
 </tip>
 

@@ -861,19 +861,9 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
     case CMD_scrollLock     : onScrollLock(                ); return;
   }
 
-  // Catch XOFF/XON aka ^S/^Q.  The state is used for the ScrollLock impl.
-  if ( (ev->state() & ControlButton) )
-  {
-    if ( (ev->type() & QEvent::KeyPress) )
-    {
-      if ( ev->key()  == Key_Q ) { scrollLock(false); return; }
-      if ( ev->key()  == Key_S ) { scrollLock(true);  return; }
-    }
-  }
-
   // revert to non-history when typing
   if (scr->getHistCursor() != scr->getHistLines() && (!ev->text().isEmpty()
-    || ev->key()==Key_Down || ev->key()==Key_Up || ev->key()==Key_Left || ev->key()==Key_Right 
+    || ev->key()==Key_Down || ev->key()==Key_Up || ev->key()==Key_Left || ev->key()==Key_Right
     || ev->key()==Key_PageUp || ev->key()==Key_PageDown))
     scr->setHistCursor(scr->getHistLines());
 
