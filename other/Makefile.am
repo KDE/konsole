@@ -14,5 +14,5 @@ KDE_ICON = konsole
 appicondir = $(kde_datadir)/konsole/pics
 appicon_DATA = colourness.png brightness.png contrast.png
 
-EXTRA_DIST = $(data_DATA) $(kde_toolbar_DATA)
+EXTRA_DIST = $(data_DATA) $(appicon_DATA)
 
