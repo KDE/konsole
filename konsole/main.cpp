@@ -519,7 +519,6 @@ extern "C" int kdemain(int argc, char* argv[])
         n++;
         m->activateSession( sessionconfig->readNumEntry("ActiveSession",0) );
         m->show();
-        m->run();
 	m->setAutoClose(auto_close);
     }
   }
@@ -545,7 +544,6 @@ extern "C" int kdemain(int argc, char* argv[])
 
     m->initFullScreen();
     m->show();
-    m->run();
     if (showtip)
       m->showTipOnStart();
     m->setAutoClose(auto_close);

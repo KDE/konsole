@@ -86,7 +86,6 @@ public:
   void enableFullScripting(bool b);
   void enableFixedSize(bool b);
 
-  void run();
   void setDefaultSession(const QString &filename);
   void showTipOnStart();
 
@@ -127,8 +126,6 @@ protected:
  void readProperties(KConfig* config);
 
 private slots:
-  void currentDesktopChanged(int desk);
-  void slotBackgroundChanged(int desk);
   void configureRequest(TEWidget*,int,int,int);
   void activateSession();
   void activateSession(TESession*);

@@ -261,7 +261,6 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 ,m_removeSessionButton(0)
 {
   isRestored = b_inRestore;
-  connect( kapp,SIGNAL(backgroundChanged(int)),this, SLOT(slotBackgroundChanged(int)));
   connect( &m_closeTimeout, SIGNAL(timeout()), this, SLOT(slotCouldNotClose()));
 
   no2command.setAutoDelete(true);
@@ -392,11 +391,6 @@ Konsole::~Konsole()
 
     delete kWinModule;
     kWinModule = 0;
-}
-
-void Konsole::run() {
-   kWinModule = new KWinModule(0, KWinModule::INFO_DESKTOP);
-   connect( kWinModule,SIGNAL(currentDesktopChanged(int)), this,SLOT(currentDesktopChanged(int)) );
 }
 
 void Konsole::setAutoClose(bool on)
@@ -3952,66 +3946,6 @@ void KonsoleFind::slotEditRegExp()
 bool KonsoleFind::reg_exp() const
 {
   return m_asRegExp->isChecked();
-}
-
-//////////////////////////////////////////////////////////////////////
-
-void Konsole::slotBackgroundChanged(int desk)
-{
-  ColorSchema* s = colors->find(curr_schema);
-  if (s==0) return;
-
-  // Only update rootxpm if window is visible on current desktop
-  NETWinInfo info( qt_xdisplay(), winId(), qt_xrootwin(), NET::WMDesktop );
-
-  if (s->useTransparency() && info.desktop()==desk && (0 != rootxpms[te])) {
-    //KONSOLEDEBUG << "Wallpaper changed on my desktop, " << desk << ", repainting..." << endl;
-    //Check to see if we are on the current desktop. If not, delay the repaint
-    //by setting wallpaperSource to 0. Next time our desktop is selected, we will
-    //automatically update because we are saying "I don't have the current wallpaper"
-    NETRootInfo rootInfo( qt_xdisplay(), NET::CurrentDesktop );
-    rootInfo.activate();
-    if( rootInfo.currentDesktop() == info.desktop() && rootxpms[te]) {
-       //We are on the current desktop, go ahead and update
-       //KONSOLEDEBUG << "My desktop is current, updating..." << endl;
-       wallpaperSource = desk;
-       rootxpms[te]->repaint(true);
-    }
-    else {
-       //We are not on the current desktop, mark our wallpaper source 'stale'
-       //KONSOLEDEBUG << "My desktop is NOT current, delaying update..." << endl;
-       wallpaperSource = 0;
-    }
-  }
-}
-
-void Konsole::currentDesktopChanged(int desk) {
-   //Get window info
-   NETWinInfo info( qt_xdisplay(), winId(), qt_xrootwin(), NET::WMDesktop );
-   bool bNeedUpdate = false;
-
-   if( info.desktop()==NETWinInfo::OnAllDesktops ) {
-      //This is a sticky window so it will always need updating
-      bNeedUpdate = true;
-   }
-   else if( (info.desktop() == desk) && (wallpaperSource != desk) ) {
-      bNeedUpdate = true;
-   }
-   else {
-      //We are not sticky and already have the wallpaper for our desktop
-      return;
-   }
-
-   //Check to see if we are transparent too
-   ColorSchema* s = colors->find(curr_schema);
-   if (s==0)
-      return;
-
-   //This window is transparent, update the root pixmap
-   if( bNeedUpdate && s->useTransparency() && rootxpms[te]) {
-      wallpaperSource = desk;
-      rootxpms[te]->repaint(true);
-   }
 }
 
 ///////////////////////////////////////////////////////////
