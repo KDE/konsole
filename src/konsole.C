@@ -170,6 +170,9 @@ Konsole::Konsole(const char* name,
 
   te = new TEWidget(this);
   te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
+  // we need focus so that the auto-hide cursor feature works (Carsten)
+  // but a part shouldn't force that it receives the focus, so we do it here (David)
+  te->setFocus(); 
 
   // Transparency handler ///////////////////////////////////////////////////
   rootxpm = new KRootPixmap(te);

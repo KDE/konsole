@@ -284,8 +284,6 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   m_drop->insertItem( i18n("cd"),    1);
   connect(m_drop, SIGNAL(activated(int)), SLOT(drop_menu_activated(int)));
 
-  // we need focus so that the auto-hide cursor feature works
-  setFocus();
   setFocusPolicy( WheelFocus );
 }
 
