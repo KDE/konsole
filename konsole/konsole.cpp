@@ -1375,6 +1375,14 @@ void Konsole::addSession(TESession* s)
            break;
         }
      }
+     for (KonsoleChild *child = detached.first(); child; child = detached.next())
+     {
+        if (newTitle == child->session()->Title())
+        {
+           nameOk = false;
+           break;
+        }
+     }
      if (!nameOk)
      {
        count++;

@@ -36,6 +36,7 @@ public:
                bool blinkingCursor, bool ctrlDrag, bool terminalSizeHint, int lineSpacing);
   void run();
   ~KonsoleChild();
+  TESession*  session() { return se; }
 
 signals:
   void doneChild(KonsoleChild*, TESession*);
