@@ -58,7 +58,8 @@
 
 #include <kcolordlg.h>
 #include <kfontdialog.h>
-#include <kmsgbox.h>
+#include <kglobal.h>
+#include <kstddirs.h>
 #include <kurl.h>
 #include <qpainter.h>
 
@@ -66,6 +67,7 @@
 
 #include <qintdict.h>
 #include <qptrdict.h>
+#include <qmessagebox.h>
 
 #include <kwm.h>
 #include <sys/wait.h>
@@ -586,10 +588,7 @@ void TEDemo::setFont(int fontno)
   if ( !f.exactMatch() )
   {
     QString msg = i18n("Font `%1' not found.\nCheck README.linux.console for help.").arg(fonts[fontno]);
-    KMsgBox::message
-    ( this,
-      i18n("Error"), msg,
-      KMsgBox::EXCLAMATION );
+    QMessageBox::warning(this, i18n("Error - Konsole"), msg, i18n("&Ok"));
   }
   else
   {
@@ -701,7 +700,7 @@ void TEDemo::about()
 	"terms of the Artistic License and comes\n"
 	"WITHOUT ANY WARRANTY.\n"
 	"See `LICENSE.readme´ for details.").arg(PACKAGE).arg(VERSION);
-    KMsgBox::message( 0, title, msg );
+    QMessageBox::information( 0, title, msg, i18n("&Ok") );
 }
 
 void TEDemo::help()
@@ -824,8 +823,8 @@ void TEDemo::doneSession(TESession* s, int status)
     {char rcs[100]; sprintf(rcs,"%d.\n",WEXITSTATUS((status)));
       str = str + i18n("\nReturn code = ") + rcs;
     }
-    KMsgBox::message( this, i18n("Error"), str, KMsgBox::EXCLAMATION );
-
+    QMessageBox::warning( this, i18n("Error - Konsole"), str,
+			  i18n("&Ok"));
   }
 #endif
   int no = (int)session2no.find(s);
@@ -876,13 +875,19 @@ void TEDemo::addSessionCommand(const char* path)
 
 void TEDemo::loadSessionCommands()
 {
-  QString path = kapp->kde_datadir() + "/konsole";
+  QString path = locate("data", "/konsole");
   QDir d( path );
   if(!d.exists()) return;
   d.setFilter( QDir::Files | QDir::Readable );
-  d.setNameFilter( "*.kdelnk" );
+  d.setNameFilter( "*.desktop" );
   const QFileInfoList *list = d.entryInfoList();
   QFileInfoListIterator it( *list );
+  for(QFileInfo *fi; (fi=it.current()); ++it )
+    addSessionCommand(fi->filePath());
+
+  d.setNameFilter( "*.kdelnk" );
+  list = d.entryInfoList();
+  it = *list;
   for(QFileInfo *fi; (fi=it.current()); ++it )
     addSessionCommand(fi->filePath());
 }
