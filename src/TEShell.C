@@ -109,8 +109,8 @@ void Shell::makeShell(const char* dev, QStrList & args,
   // open and set all standard files to master/slave tty
   int tt = open(dev, O_RDWR | O_EXCL);
   
-  // Solaris apparently needs this 
-#if defined(SVR4) || defined(__SVR4)
+#if (defined(SVR4) || defined(__SVR4)) && (defined(i386) || defined(__i386__))
+  // Solaris x86
   ioctl(tt, I_PUSH, "ptem");
   ioctl(tt, I_PUSH, "ldterm");
 #endif
