@@ -240,7 +240,7 @@ int TEPty::openPty()
 
   // Find a master pty that we can open ////////////////////////////////
 
-#ifdef __sgi__
+#if defined(__sgi__) || defined(__osf__) || defined(SVR4) || defined(__SVR4)
   ptyfd = open("/dev/ptmx",O_RDWR);
   if (ptyfd < 0)
     {
