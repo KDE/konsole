@@ -58,6 +58,7 @@ public:
 
     void emitSelection(bool useXselection,bool appendReturn);
     void emitText(QString text);
+    void sendRMBclick(int atX,int atY);
 
     void setImage(const ca* const newimg, int lines, int columns);
 

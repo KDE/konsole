@@ -716,6 +716,13 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   }
 }
 
+void TEWidget::sendRMBclick(int atX,int atY)
+{
+  QPoint tL  = contentsRect().topLeft();
+  emit mouseSignal( 2, (atX-tL.x()-blX)/font_w+1, (atY-tL.y()-bY)/font_h+1 ); // right button
+  emit mouseSignal( 3, (atX-tL.x()-blX)/font_w+1, (atY-tL.y()-bY)/font_h+1 ); // release button
+}
+
 void TEWidget::mouseMoveEvent(QMouseEvent* ev)
 {
   // for auto-hiding the cursor, we need mouseTracking

@@ -134,6 +134,7 @@ private slots:
   void slotToggleFrame();
   void slotRenameSession();
   void slotRenameSession(int);
+  void slotSendRMBclick();
   void slotToggleMonitor();
   void slotToggleMasterMode();
   void slotClearAllSessionHistories();
@@ -234,6 +235,8 @@ private:
   int         n_render;
   int         curr_schema; // current schema no
   int         wallpaperSource;
+  int         sendRMBclickAtX;
+  int         sendRMBclickAtY;
   QString     s_schema;
   QString     s_kconfigSchema;
   QString     s_word_seps;			// characters that are considered part of a word

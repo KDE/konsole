@@ -208,6 +208,8 @@ DCOPObject( "konsole" )
 ,n_render(0)
 ,curr_schema(0)
 ,wallpaperSource(0)
+,sendRMBclickAtX(0)
+,sendRMBclickAtY(0)
 ,s_kconfigSchema("")
 ,b_scroll(histon)
 ,b_fullscreen(false)
@@ -618,11 +620,16 @@ void Konsole::makeGUI()
    pasteClipboard->plug(m_rightButton);
    m_rightButton->insertSeparator();
    m_rightButton->insertItem(i18n("&Send Signal"), m_signals);
+   KAction *sendRMBclick = new KAction(i18n("Send R&ight Click"), 0, this,
+                                        SLOT(slotSendRMBclick()), this);
+   sendRMBclick->plug(m_rightButton);
    renameSession->plug(m_rightButton);
    m_rightButton->insertSeparator();
-   m_rightButton->insertItem(i18n("&Settings"), m_options);
+   m_rightButton->insertItem(i18n("S&ettings"), m_options);
    m_rightButton->insertSeparator();
-   closeSession->plug(m_rightButton );
+   KAction *closeSessionRMB = new KAction(i18n("C&lose Session"), "fileclose", 0, this,
+                                        SLOT(closeCurrentSession()), this);
+   closeSessionRMB->plug(m_rightButton );
    m_rightButton->insertTearOffHandle();
 
 
@@ -805,12 +812,17 @@ void Konsole::configureRequest(TEWidget* te, int state, int x, int y)
 //printf("Konsole::configureRequest(_,%d,%d)\n",x,y);
    if (!m_menuCreated)
       makeGUI();
+  sendRMBclickAtX=x;
+  sendRMBclickAtY=y;
   ( (state & ShiftButton  ) ? m_edit :
     (state & ControlButton) ? m_session :
                               m_rightButton  )
   ->popup(te->mapToGlobal(QPoint(x,y)));
 }
 
+void Konsole::slotSendRMBclick() {
+  te->sendRMBclick(sendRMBclickAtX,sendRMBclickAtY);
+}
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
