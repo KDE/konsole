@@ -63,7 +63,7 @@ private slots:
   void changeColumns(int);
   void notifySize(int,int);
   void setHeader();
-  void changeTitle(int, const char*s);
+  void changeTitle(int, const QString&);
     
 protected:
 

@@ -67,7 +67,7 @@ public slots: // signals incoming from TEWidget
   void onMouse(int cb, int cx, int cy);
 
 signals:
-  void changeTitle(int,const char*);
+  void changeTitle(int,const QString&);
 
 public:
 
@@ -98,7 +98,7 @@ public:
 private:
 
 #define MAXPBUF 80
-  int pbuf[MAXPBUF]; //FIXME: overflow!
+  int pbuf[MAXPBUF]; //FIXME: overflow?
   int ppos;
 #define MAXARGS 15
   int argv[MAXARGS];

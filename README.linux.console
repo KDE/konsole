@@ -10,8 +10,7 @@ available, it's abilities have been preserved.
 The main differences between the Linux console and xterm
 like emulations are:
 
-1) The Linux console uses some special devices (vcs,vcsa),
-   which cannot be emulated.
+1) The Linux console uses some special devices (vcs,vcsa).
 2) The Linux console uses gpm for the mouse.
 3) The Linux console does not have an application screen.
    Xterm like application switch from a primary screen to

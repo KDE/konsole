@@ -31,8 +31,8 @@ TESession::TESession(KTMainWindow* main, TEWidget* te, QStrList & _args, const c
                     sh,SLOT(send_bytes(const char*,int)) );
   QObject::connect( em,SIGNAL(changeColumns(int)),
                     main,SLOT(changeColumns(int)) );
-  QObject::connect( em,SIGNAL(changeTitle(int, const char*)),
-                    main,SLOT(changeTitle(int, const char*)) );
+  QObject::connect( em,SIGNAL(changeTitle(int, const QString&)),
+                    main,SLOT(changeTitle(int, const QString&)) );
   QObject::connect( this,SIGNAL(done(TESession*,int)),
                     main,SLOT(doneSession(TESession*,int)) );
   QObject::connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );

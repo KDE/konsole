@@ -1,3 +1,5 @@
+11 Jan 2000
+- upgraded xterm title hack to unicode.
  7 Jan 2000
 - added unicode support. (see README.unicode)
 - added arbitrary long history buffers.

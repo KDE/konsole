@@ -732,7 +732,7 @@ void TEDemo::setHeader()
   setCaption(title);
 }
 
-void TEDemo::changeTitle(int, const char*s)
+void TEDemo::changeTitle(int, const QString& s)
 {
   title = s; setHeader();
 }
