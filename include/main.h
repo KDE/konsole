@@ -109,8 +109,6 @@ private:
   int         n_scroll;
   QString     s_schema;
   int         n_render;
-  QSize       lincol0; //FIXME: something is messed up initializing the size (event handling)
-  QSize       lincol;
   QString     pmPath; // pixmap path
   QString     dropText;
 

@@ -35,9 +35,6 @@
     This lead to quite some amount of flicker when a whole bunch of
     attributes has to be set, e.g. in session swapping.
     Scedule: post kde 1.2
-  - Moving geometry management from char to pixel is half done.
-    Means that setColLin is used in unappropriate places.
-    Likely the configuration is still char based.
   - The schema file name in session config files is not location
     transparent.
 */
@@ -115,7 +112,6 @@ TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
 
   te = new TEWidget(this);
 
-
   // create applications /////////////////////////////////////////////////////
 
   setView(te,FALSE);
@@ -153,8 +149,6 @@ TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
                      ? QFrame::WinPanel | QFrame::Sunken
                      : QFrame::NoFrame );
   te->setScrollbarLocation(n_scroll);
-
-  setColLin(lincol0.width(),lincol0.height());
 
   // construct initial session ///////////////////////////////////////////////
 
@@ -410,7 +404,9 @@ void TEDemo::saveProperties(KConfig* config)
   config->writeEntry("font",n_font);
   config->writeEntry("schema",s_schema);
   config->writeEntry("scrollbar",n_scroll);
-  config->writeEntry("size",lincol); //FIXME: to be replace by window size
+  config->writeEntry("geometry", geometry()); //FIXME: we get wrong geometry info here
+                                              //NOTE: I'm running a borderless
+                                              //      konsole in MacOS style.
   config->writeEntry("kmenubar",
                      menubar->menuBarPos() == KMenuBar::Bottom ? "bottom" : "top");
   config->sync();
@@ -418,7 +414,7 @@ void TEDemo::saveProperties(KConfig* config)
 
 void TEDemo::readProperties(KConfig* config)
 {
-  QSize dftSize(80,25);
+  QRect dftRect = geometry();
   config->setGroup("options"); // bad! will no allow us to support multi windows
   b_menuvis  = config->readBoolEntry("menubar visible",TRUE);
   b_framevis = config->readBoolEntry("has frame",TRUE);
@@ -426,20 +422,18 @@ void TEDemo::readProperties(KConfig* config)
   n_font     = MIN(config->readUnsignedNumEntry("font",3),7);
   n_scroll   = MIN(config->readUnsignedNumEntry("scrollbar",SCRRIGHT),2);
   s_schema   = config->readEntry("schema","");
-  lincol0    = config->readSizeEntry("size",&dftSize); //FIXME: to be replaced by window size
-
-  if (menubar->menuBarPos() != KMenuBar::Floating) {
-      QString entry = config->readEntry("kmenubar");
-      if (!entry.isEmpty() && entry == "floating")
-	  {
-	      menubar->setMenuBarPos(KMenuBar::Floating);
-	      QString geo = config->readEntry("kmenubargeometry");
-	      if (!geo.isEmpty()) menubar->setGeometry(KWM::setProperties(menubar->winId(), geo));
-	  }
-      else if (!entry.isEmpty() && entry == "top")
-	  menubar->setMenuBarPos(KMenuBar::Top);
-      else if (!entry.isEmpty() && entry == "bottom")
-	  menubar->setMenuBarPos(KMenuBar::Bottom);
+  setGeometry(config->readRectEntry("geometry",&dftRect));
+move(+4,-5); //FIXME: we work around a KTMainWidget bug here. (see geometry() above)
+  if (menubar->menuBarPos() != KMenuBar::Floating)
+  { QString entry = config->readEntry("kmenubar");
+    if (!entry.isEmpty() && entry == "floating")
+    {
+      menubar->setMenuBarPos(KMenuBar::Floating);
+      QString geo = config->readEntry("kmenubargeometry");
+      if (!geo.isEmpty()) menubar->setGeometry(KWM::setProperties(menubar->winId(), geo));
+    }
+    else if (!entry.isEmpty() && entry == "top") menubar->setMenuBarPos(KMenuBar::Top);
+    else if (!entry.isEmpty() && entry == "bottom") menubar->setMenuBarPos(KMenuBar::Bottom);
   }
 }
 
@@ -465,10 +459,10 @@ void TEDemo::pixmap_menu_activated(int item)
             { QPixmap bgPixmap;
               bgPixmap.resize(te->size());
               bgPixmap.fill(te->getDefaultBackColor());
-			        bitBlt( &bgPixmap, ( te->size().width() - pm.width() ) / 2,
-				                        ( te->size().height() - pm.height() ) / 2,
+              bitBlt( &bgPixmap, ( te->size().width() - pm.width() ) / 2,
+                                ( te->size().height() - pm.height() ) / 2,
                       &pm, 0, 0,
-				              pm.width(), pm.height() );
+                      pm.width(), pm.height() );
               te->setBackgroundPixmap(bgPixmap);
             }
     break;
@@ -539,8 +533,8 @@ void TEDemo::opt_menu_activated(int item)
             m_options->setItemChecked(1,b_menuvis);
             if (b_menuvis) menubar->show(); else menubar->hide();
             updateRects();
-	          if (!b_menuvis)
-	          {
+            if (!b_menuvis)
+            {
               setCaption("Use the right mouse button to bring back the menu");
               QTimer::singleShot(5000,this,SLOT(setHeader()));
             }
@@ -595,7 +589,6 @@ void TEDemo::notifySize(int lines, int columns)
     QTimer::singleShot(2000,this,SLOT(setHeader()));
   }
 */
-  lincol = QSize(columns,lines);
   m_size->setItemChecked(0,columns==40&&lines==15);
   m_size->setItemChecked(1,columns==80&&lines==24);
   m_size->setItemChecked(2,columns==80&&lines==25);
@@ -856,17 +849,12 @@ static void usage()
    " -ls .................... Start login session\n"
    " -nowelcome ............. Suppress greeting\n"
    " -sl <number> ........... Save number lines in scroll-back buffer\n"
-   " -vt_bg Colors .......... Set background color of the terminal window\n"
-   " -vt_fg Color ........... Set foreground color of the terminal window\n"
    " -vt_sz CCxLL ........... terminal size in columns x lines \n"
    "\n"
    "Other options due to man:X(1x), Qt and KDE, among them:\n"
    "\n"
    " -caption 'Text'......... Set title\n"
    " -display <display> ..... Set the X-Display\n"
-   "\n"
-   "Please note that the configuration via command line\n"
-   "is badly out of sync and may not work as expected.\n"
   ,PACKAGE,PACKAGE,VERSION
   );
 }
@@ -885,8 +873,6 @@ int main(int argc, char* argv[])
   char* shell = getenv("SHELL");
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
 
-  QString fg = "";
-  QString bg = "";
   QString sz = "";
 
   QStrList eargs;
@@ -904,8 +890,6 @@ int main(int argc, char* argv[])
       for (j = 0; j+i+1 < argc; j++) eargs.append( argv[i+j+1] );
       break;
     }
-    if (!strcmp(argv[i],"-vt_fg") && i+1 < argc) fg = argv[++i];
-    if (!strcmp(argv[i],"-vt_bg") && i+1 < argc) bg = argv[++i];
     if (!strcmp(argv[i],"-vt_sz") && i+1 < argc) sz = argv[++i];
     if (!strcmp(argv[i],"-sl") && i+1 < argc)  {
       QString a(argv[++i]);
@@ -923,33 +907,30 @@ int main(int argc, char* argv[])
   putenv("COLORTERM="); //FIXME: for mc, which cannot detect color terminals
 
   int c = 80, l = 40;
-  if ( (strcmp("", sz) != 0) ) {
-	     char *ls = strchr( sz, 'x' );
-	     if ( ls != NULL ) {
-		*ls='\0';
-		ls++;
-		c=atoi(sz);
-		l=atoi(ls);
-		fprintf(stderr, "setColLin(%d, %d)\n", c, l );
-	     } else {
-	        fprintf(stderr, "expected -vt_sz <#columns>x<#lines> ie. 80x40\n" );
-             }
+  if ( (strcmp("", sz) != 0) )
+  { char *ls = strchr( sz, 'x' );
+    if ( ls != NULL )
+    { *ls='\0'; ls++; c=atoi(sz); l=atoi(ls); }
+    else
+    { fprintf(stderr, "expected -vt_sz <#columns>x<#lines> ie. 80x40\n" ); }
   }
-  if (a.isRestored()) {
-      KConfig * sessionconfig = a.getSessionConfig();
-      sessionconfig->setGroup("options");
-      sessionconfig->readListEntry("konsolearguments", eargs);
-      RESTORE( TEDemo(eargs,login_shell) )
+  if (a.isRestored())
+  {
+    KConfig * sessionconfig = a.getSessionConfig();
+    sessionconfig->setGroup("options");
+    sessionconfig->readListEntry("konsolearguments", eargs);
+    RESTORE( TEDemo(eargs,login_shell) )
   }
-  else {	
-      TEDemo*  m = new TEDemo(eargs,login_shell);
-      if (strcmp("",sz) !=0) m->setColLin(c,l);
-      if (welcome)
-      {
-        m->setCaption(i18n("Welcome to the console"));
-        QTimer::singleShot(5000,m,SLOT(setHeader()));
-      }
-      m->show();
+  else
+  {  
+    TEDemo*  m = new TEDemo(eargs,login_shell);
+    if (strcmp("",sz) !=0) m->setColLin(c,l);
+    if (welcome)
+    {
+      m->setCaption(i18n("Welcome to the console"));
+      QTimer::singleShot(5000,m,SLOT(setHeader()));
+    }
+    m->show();
   }
 
   return a.exec();
