@@ -254,13 +254,6 @@ void TEPty::setSize(int lines, int columns)
 
 void TEPty::commClose()
 {
-  donePty();
-  KProcess::commClose();
-}
-
-void TEPty::donePty()
-{
-  int status = exitStatus();
 #ifdef HAVE_UTEMPTER
   {
      KUtmpProcess utmp;
@@ -278,7 +271,13 @@ void TEPty::donePty()
   }
 #endif
   if (needGrantPty) chownpty(fd, false);
+ 
+  KProcess::commClose();
+}
 
+void TEPty::donePty()
+{
+  int status = exitStatus();
   emit done(status);
 }
 
@@ -662,6 +661,8 @@ TEPty::TEPty() : pSendJobTimer(NULL)
   fd = openPty();
   connect(this, SIGNAL(receivedStdout(int, int &)), 
 	  this, SLOT(DataReceived(int, int&)));
+  connect(this, SIGNAL(processExited(KProcess *)),
+          this, SLOT(donePty()));
 }
 
 /*!

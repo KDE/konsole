@@ -55,7 +55,7 @@ KWrited::KWrited() : QObject()
 
 KWrited::~KWrited()
 {
-    pty->donePty();
+    pty->commClose();
     delete pty;
 }
 

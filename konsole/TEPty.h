@@ -76,9 +76,10 @@ Q_OBJECT
     void send_string(const char* s);
 
     const char* deviceName();
+
+    virtual void commClose();
     
   protected:
-      virtual void commClose();
       virtual int commSetupDoneC();
       virtual int setupCommunication(Communication comm);
   
