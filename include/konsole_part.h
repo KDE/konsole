@@ -69,6 +69,7 @@ class konsolePart: public KParts::ReadOnlyPart
 
       void doneSession(TESession*,int);
       void sessionDestroyed();
+      void configureRequest(TEWidget*,int,int x,int y);
 
  private:
     QLabel *widget;

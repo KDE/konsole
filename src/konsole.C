@@ -188,8 +188,10 @@ Konsole::Konsole(const QString& name,
 
   TESession* initial = new TESession(this,te,pgm,args,"xterm");
 
-  QObject::connect( initial,SIGNAL(done(TESession*,int)),
-                    this,SLOT(doneSession(TESession*,int)) );
+  connect( initial,SIGNAL(done(TESession*,int)),
+           this,SLOT(doneSession(TESession*,int)) );
+  connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
+           this, SLOT(configureRequest(TEWidget*,int,int,int)) );
 
   title = (args.count() && (kapp->caption() == PACKAGE))
         ? QString(args.at(0))  // program executed in the title bar
@@ -956,8 +958,10 @@ void Konsole::newSession(int i)
   }
 
   TESession* s = new TESession(this,te,shell,args,emu);
-  QObject::connect( s,SIGNAL(done(TESession*,int)),
-                    this,SLOT(doneSession(TESession*,int)) );
+  connect( s,SIGNAL(done(TESession*,int)),
+           this,SLOT(doneSession(TESession*,int)) );
+  connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
+           this, SLOT(configureRequest(TEWidget*,int,int,int)) );
 
   s->setFontNo(fno);
   s->setSchemaNo(schmno);

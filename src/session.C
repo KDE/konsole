@@ -40,8 +40,7 @@ TESession::TESession(KTMainWindow* main, TEWidget* te, const char* _pgm, QStrLis
                     main,SLOT(changeTitle(int, const QString&)) );
   QObject::connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
   //FIXME: note the right place
-  QObject::connect( te,SIGNAL(configureRequest(TEWidget*,int,int,int)),
-                    main,SLOT(configureRequest(TEWidget*,int,int,int)) );
+  // (David: moved the connect away, not sure what that FIXME is about)
 }
 
 

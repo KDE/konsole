@@ -22,6 +22,7 @@
 
 #include "konsole_part.h"
 
+#include <sys/stat.h>
 #include <kinstance.h>
 #include <klocale.h>
 #include <kaboutdata.h>
@@ -111,8 +112,10 @@ konsolePart::konsolePart(QWidget *parent, const char *name)
   // faking a KTMainwindow - TESession assumes that (wrong design!)
   initial = new TESession((KTMainWindow*)parent,
                           te,shell,eargs,"xterm");
-  QObject::connect( initial,SIGNAL(done(TESession*,int)),
-                    this,SLOT(doneSession(TESession*,int)) );
+  connect( initial,SIGNAL(done(TESession*,int)),
+           this,SLOT(doneSession(TESession*,int)) );
+  connect( te,SIGNAL(configureRequest(TEWidget*,int,int,int)),
+           this,SLOT(configureRequest(TEWidget*,int,int,int)) );
   initial->setConnect(TRUE);
   initial->getEmulation()->setKeytrans(0);
   te->currentSession = initial;
@@ -142,6 +145,11 @@ void konsolePart::sessionDestroyed()
 {
   initial = 0;
   delete this;
+}
+
+void konsolePart::configureRequest(TEWidget*te,int,int x,int y)
+{
+    emit m_extension->popupMenu( te->mapToGlobal(QPoint(x,y)), m_url, "inode/directory", S_IFDIR );
 }
 
 void konsolePart::slotNew() {
