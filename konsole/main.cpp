@@ -75,6 +75,7 @@ static KCmdLineOptions options[] =
    { "type <type>",     I18N_NOOP("Open the given session type instead of the default shell"), 0 },
    { "types",           I18N_NOOP("List available session types"), 0 },
    { "keytab <name>",   I18N_NOOP("Use given .keytab file"), 0 },
+   { "keytabs",         I18N_NOOP("List available keytabs"), 0 },
    { "profile <name>",  I18N_NOOP("Start with given sessions profile"), 0 },
    { "profiles",        I18N_NOOP("List available profiles"), 0 },
    { "schema <name>",   I18N_NOOP("Use given .schema file"), 0 },
@@ -352,11 +353,25 @@ extern "C" int kdemain(int argc, char* argv[])
     return 0;
   }
 
+  if(args->isSet("keytabs")) {
+    QStringList lst = KGlobal::dirs()->findAllResources("data", "konsole/*.keytab");
+
+    printf("default\n");   // 'buildin' keytab
+    lst.sort();
+    for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it )
+    {
+      QFileInfo fi(*it);
+      QString file = fi.baseName();
+      printf("%s\n", QFile::encodeName(file).data());
+    }
+    return 0;
+  }
+
   QString workDir = QFile::decodeName( args->getOption("workdir") );
 
   QString keytab = "";
   if (args->isSet("keytab"))
-    keytab = args->getOption("keytab");
+    keytab = QFile::decodeName(args->getOption("keytab"));
 
   QString schema = "";
   if (args->isSet("schema"))
