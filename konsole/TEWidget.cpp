@@ -70,6 +70,7 @@
 #include <klocale.h>
 #include <knotifyclient.h>
 #include <kglobalsettings.h>
+#include <kshortcut.h>
 #include <kurldrag.h>
 
 #ifndef HERE
@@ -1436,8 +1437,8 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
   return QFrame::eventFilter( obj, e );
 }
 
-// Override any accelerator with shortcut = Ctrl+D when pressed with the keyboard
-// focus in TEWidget, so that Ctrl+D will still work as 'exit'.
+// Override any Ctrl+<key> accelerator when pressed with the keyboard
+// focus in TEWidget, so that the key will be passed to the terminal instead.
 bool TEWidget::event( QEvent *e )
 {
   if ( e->type() == QEvent::AccelOverride )
@@ -1446,9 +1447,7 @@ bool TEWidget::event( QEvent *e )
     KKey key( ke );
     int keyCodeQt = key.keyCodeQt();
 
-    // The following if-statement is probably better
-    //if ( ke->state() == Qt::ControlButton )
-    if ( ke->key() == Qt::Key_D && ke->state() == Qt::ControlButton )
+    if ( ke->state() == Qt::ControlButton )
     {
       ke->accept();
       return true;
@@ -1457,6 +1456,7 @@ bool TEWidget::event( QEvent *e )
     // Override any of the following accelerators:
     switch ( keyCodeQt )
     {
+      case Key_Tab:
       case Key_Delete:
         ke->accept();
         return true;
