@@ -63,10 +63,6 @@ Utf-8 code is enabled and disabled by sending <ESC>%G or <ESC>%@.
 The utf8.sh utility in the test directory does this.
 
 ---
-Example of non-locale client code. (Discontining Linux Console Support)
+TODO: Example of non-locale client code.
+(Discontining Linux Console Support)
 ---
-
-- Konsole comes with a conversion utility, also, that allows to
-  convert arbitrary console (.psf) fonts for use in X11.
- 
-- Improved font selection?
