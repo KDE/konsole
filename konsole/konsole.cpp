@@ -394,7 +394,8 @@ void Konsole::makeGUI()
 {
    if (m_menuCreated) return;
    //not longer needed
-   disconnect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+   if (m_toolbarSessionsCommands)
+      disconnect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_session,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_options,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_help,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
@@ -404,7 +405,8 @@ void Konsole::makeGUI()
    disconnect(m_bookmarks,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_bookmarksSession,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    //KONSOLEDEBUG<<"Konsole::makeGUI()"<<endl;
-   connect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
+   if (m_toolbarSessionsCommands)
+      connect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
    connect(m_session,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
    m_menuCreated=true;
 
@@ -612,7 +614,8 @@ void Konsole::makeGUI()
    m_rightButton->insertItem(i18n("&Send Signal"), m_signals);
 
    m_rightButton->insertSeparator();
-   m_rightButton->insertItem( i18n("New Sess&ion"), m_toolbarSessionsCommands );
+   if (m_toolbarSessionsCommands)
+       m_rightButton->insertItem( i18n("New Sess&ion"), m_toolbarSessionsCommands );
    m_detachSession->plug(m_rightButton);
    m_renameSession->plug(m_rightButton);
 
@@ -685,12 +688,15 @@ void Konsole::makeGUI()
 void Konsole::makeBasicGUI()
 {
   //KONSOLEDEBUG<<"Konsole::makeBasicGUI()"<<endl;
-  KToolBarPopupAction *newsession = new KToolBarPopupAction(i18n("&New"), "filenew",
+  if (kapp->authorize("shell_access"))
+  {
+     KToolBarPopupAction *newsession = new KToolBarPopupAction(i18n("&New"), "filenew",
                 0 , this, SLOT(newSession()),this, KStdAction::stdName(KStdAction::New));
-  newsession->plug(toolBar());
-  toolBar()->insertLineSeparator();
-  m_toolbarSessionsCommands = newsession->popupMenu();
-  connect(m_toolbarSessionsCommands, SIGNAL(activated(int)), SLOT(newSessionToolbar(int)));
+    newsession->plug(toolBar());
+    toolBar()->insertLineSeparator();
+    m_toolbarSessionsCommands = newsession->popupMenu();
+    connect(m_toolbarSessionsCommands, SIGNAL(activated(int)), SLOT(newSessionToolbar(int)));
+  }
 
   toolBar()->setFullSize( true );
 
@@ -716,7 +722,8 @@ void Konsole::makeBasicGUI()
   // activating shortcuts here means deactivating them in the other
   // programs.
 
-  connect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+  if (m_toolbarSessionsCommands)
+     connect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_session,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_options,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_help,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
@@ -2272,6 +2279,8 @@ void Konsole::addSessionCommand(const QString &path)
 
 void Konsole::loadSessionCommands()
 {
+  if (!kapp->authorize("shell_access"))
+     return;
   addSessionCommand(QString::null);
   m_session->insertSeparator();
   m_toolbarSessionsCommands->insertSeparator();
@@ -2311,6 +2320,8 @@ void Konsole::addScreenSession(const QString &socket)
 
 void Konsole::loadScreenSessions()
 {
+  if (!kapp->authorize("shell_access"))
+     return;
   QCString screenDir = getenv("SCREENDIR");
   if (screenDir.isEmpty())
     screenDir = QFile::encodeName(QDir::homeDirPath()) + "/.screen/";
@@ -2351,7 +2362,8 @@ void Konsole::resetScreenSessions()
     for (int i = cmd_first_screen; i <= cmd_serial; ++i)
     {
       m_session->removeItem(i);
-      m_toolbarSessionsCommands->removeItem(i);
+      if (m_toolbarSessionsCommands)
+         m_toolbarSessionsCommands->removeItem(i);
       no2command.remove(i);
       no2tempFile.remove(i);
       no2filename.remove(i);
