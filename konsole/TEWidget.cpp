@@ -1944,6 +1944,11 @@ void TEWidget::setFixedSize(int cols, int lins)
   isFixedSize = true;
   columns = cols;
   lines = lins;
+  if (image)
+  {
+     free(image);
+     makeImage();
+  }
   setSize(cols, lins);
   QFrame::setFixedSize(m_size);
 }
