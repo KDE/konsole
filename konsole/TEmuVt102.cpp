@@ -861,9 +861,10 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
   {
     if ( (ev->type() & QEvent::KeyPress) )
     {
-      if ( ev->key()  == Key_Q ) { scrollLock(false); return; }
+//      if ( ev->key()  == Key_Q ) { scrollLock(false); return; }
       if ( ev->key()  == Key_S ) {
-        scrollLock(true);
+//        scrollLock(true);
+        emit sndBlock("\023", 1); // XOFF -> ^S
 	KMessageBox::information(gui,
 	                         i18n("You have just sent Ctrl-S to the terminal application!\n\n"
 	                              "Some applications, like shells, will interpret this as the command to "
