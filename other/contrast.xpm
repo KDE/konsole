@@ -1,0 +1,22 @@
+/* XPM */
+static char * contrast_xpm[] = {
+"15 15 4 1",
+" 	c None",
+".	c black",
+"X	c gray50",
+"o	c white",
+"               ",
+"               ",
+"     .....     ",
+"   ....Xoo..   ",
+"   ....Xooo.   ",
+"  .....Xoooo.  ",
+"  .....Xoooo.  ",
+"  .....Xoooo.  ",
+"  .....Xoooo.  ",
+"  .....Xoooo.  ",
+"   ....Xooo.   ",
+"   ....Xoo..   ",
+"     .....     ",
+"               ",
+"               "};

@@ -1,0 +1,22 @@
+/* XPM */
+static char * colourness_xpm[] = {
+"15 15 4 1",
+" 	c None",
+".	c black",
+"X	c gray50",
+"o	c red",
+"               ",
+"               ",
+"     .....     ",
+"   ..XX.oo..   ",
+"   .XXX.ooo.   ",
+"  .XXXX.oooo.  ",
+"  .XXXX.oooo.  ",
+"  .XXXX.oooo.  ",
+"  .XXXX.oooo.  ",
+"  .XXXX.oooo.  ",
+"   .XXX.ooo.   ",
+"   ..XX.oo..   ",
+"     .....     ",
+"               ",
+"               "};

@@ -1,0 +1,21 @@
+/* XPM */
+static char * brightness_xpm[] = {
+"15 15 3 1",
+" 	c None",
+".	c black",
+"X	c white",
+"       .       ",
+" .           . ",
+"     .....     ",
+"   ..XXXXX..   ",
+"   .XXXXXXX.   ",
+"  .XXXXXXXXX.  ",
+"  .XXXXXXXXX.  ",
+". .XXXXXXXXX. .",
+"  .XXXXXXXXX.  ",
+"  .XXXXXXXXX.  ",
+"   .XXXXXXX.   ",
+"   ..XXXXX..   ",
+"     .....     ",
+" .           . ",
+"       .       "};

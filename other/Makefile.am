@@ -11,6 +11,9 @@ icon_DATA = konsole.xpm
 install-data-local: 
 	$(mkinstalldirs) $(kde_minidir)
 	$(INSTALL_DATA) konsole-mini.xpm $(kde_minidir)/konsole.xpm
+	$(INSTALL_DATA) colourness.xpm $(kde_icondir)
+	$(INSTALL_DATA) brightness.xpm $(kde_icondir)
+	$(INSTALL_DATA) contrast.xpm $(kde_icondir)
 
 uninstall-local:
 	rm -f $(kde_minidir)/konsole.xpm

@@ -15,6 +15,7 @@
 #include "schema.h"
 #include "qlayout.h"
 #include "qpushbt.h"
+#include "qtooltip.h"
 #include "qpixmap.h"
 #include "qslider.h"
 #include <kiconloader.h>
@@ -269,59 +270,85 @@ SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
   smlWidget->setAlignment( AlignCenter  );
   smlWidget->setBackgroundMode(PaletteBase);
 
-  QGridLayout* topLayout = new QGridLayout( bigWidget, 2, 2, 5 ); 
+  QGridLayout* topLayout = new QGridLayout( bigWidget, 3, 3, 5 ); 
   lbox = new QListBox(bigWidget); //FIXME: QT does not react on setFrameStyle
   //lbox->setFrameStyle( QFrame::Panel | QFrame::Sunken );
 //colorTableW = new ColorTable(bigWidget,0,TABLE_COLORS-1);
-  topLayout->setColStretch(0,4);
-  topLayout->setColStretch(1,2);
-  topLayout->setRowStretch(0,4);
-  topLayout->setRowStretch(1,1);
+  topLayout->setColStretch(0,1);
+  topLayout->setColStretch(1,1);
+  topLayout->setColStretch(2,1);
+  topLayout->setRowStretch(0,1);
+  topLayout->setRowStretch(1,4);
+  topLayout->setRowStretch(2,1);
 //topLayout->addWidget( colorTableW, 0, 0 );
-  topLayout->addWidget( lbox, 0, 1 );
+  topLayout->addMultiCellWidget( lbox, 0,1, 2,2 );
 
   colorTableW[0] = new ColorTable(bigWidget, 0, 1);
   colorTableW[1] = new ColorTable(bigWidget, 2, 9);
   colorTableW[2] = new ColorTable(bigWidget,10,11);
   colorTableW[3] = new ColorTable(bigWidget,12,19);
 
+  QToolTip::add(colorTableW[0],i18n("regular fore- and background"));
+  QToolTip::add(colorTableW[1],i18n("regular rgb color palette"));
+  QToolTip::add(colorTableW[2],i18n("intensive fore- and background"));
+  QToolTip::add(colorTableW[3],i18n("intensive rgb color palette"));
+/*
   QGridLayout* clayout = new QGridLayout(2,2,5);
   topLayout->addLayout( clayout, 0,0 );
   clayout->setRowStretch(0,1);
   clayout->setRowStretch(1,4);
-  clayout->addWidget(colorTableW[0], 0,0);
-  clayout->addWidget(colorTableW[1], 1,0);
-  clayout->addWidget(colorTableW[2], 0,1);
-  clayout->addWidget(colorTableW[3], 1,1);
+*/
+  topLayout->addWidget(colorTableW[0], 0,0);
+  topLayout->addWidget(colorTableW[2], 0,1);
+  topLayout->addWidget(colorTableW[1], 1,0);
+  topLayout->addWidget(colorTableW[3], 1,1);
 
   QGridLayout* slayout = new QGridLayout(3,2,5);
-  topLayout->addLayout( slayout, 1,0 );
+  topLayout->addLayout( slayout, 2,0 );
   slayout->setColStretch(0,1);
-  slayout->setColStretch(1,3);
+  slayout->setColStretch(1,2);
 
+  QPixmap pm0 = kapp->getIconLoader()->loadIcon(QString("contrast.xpm"));
+  QLabel* ll0 = new QLabel(bigWidget);
+  ll0->setPixmap(pm0);
+  ll0->setFixedSize( ll0->sizeHint() );
   sl0 = new QSlider(0,100,10,0,QSlider::Horizontal,bigWidget);
   sl0->setTickmarks(QSlider::Below);
-  slayout->addWidget(new QLabel(i18n("contrast"),bigWidget),0,0);
+  slayout->addWidget(ll0,0,0);
   slayout->addWidget(sl0,0,1);
   QObject::connect( sl0, SIGNAL(valueChanged(int)),
                     this, SLOT(sl0ValueChanged(int)) );
+  QToolTip::add(sl0,i18n("Contrast"));
+  QToolTip::add(ll0,i18n("Contrast"));
 
+  QPixmap pm1 = kapp->getIconLoader()->loadIcon(QString("brightness.xpm"));
+  QLabel* ll1 = new QLabel(bigWidget);
+  ll1->setPixmap(pm1);
+  ll1->setFixedSize( ll1->sizeHint() );
   sl1 = new QSlider(0,100,10,0,QSlider::Horizontal,bigWidget);
   sl1->setTickmarks(QSlider::Below);
-  slayout->addWidget(new QLabel(i18n("brightness"),bigWidget),1,0);
+  slayout->addWidget(ll1,1,0);
   slayout->addWidget(sl1,1,1);
   QObject::connect( sl1, SIGNAL(valueChanged(int)),
                     this, SLOT(sl1ValueChanged(int)) );
+  QToolTip::add(sl1,i18n("Brightness"));
+  QToolTip::add(ll1,i18n("Brightness"));
 
+  QPixmap pm2 = kapp->getIconLoader()->loadIcon(QString("colourness.xpm"));
+  QLabel* ll2 = new QLabel(bigWidget);
+  ll2->setPixmap(pm2);
+  ll2->setFixedSize( ll2->sizeHint() );
   sl2 = new QSlider(0,100,10,0,QSlider::Horizontal,bigWidget);
   sl2->setTickmarks(QSlider::Below);
-  slayout->addWidget(new QLabel(i18n("colourness"),bigWidget),2,0);
+  slayout->addWidget(ll2,2,0);
   slayout->addWidget(sl2,2,1);
   QObject::connect( sl2, SIGNAL(valueChanged(int)),
                     this, SLOT(sl2ValueChanged(int)) );
+  QToolTip::add(sl2,i18n("Colourness"));
+  QToolTip::add(ll2,i18n("Colourness"));
 
 //topLayout->addMultiCellWidget( smlWidget, 1,1, 0,1 );
-  topLayout->addWidget( smlWidget, 1,1 );
+  topLayout->addMultiCellWidget( smlWidget, 2,2, 1,2 );
   ColorSchema::loadAllSchemas();
   for (int i = 0; i < ColorSchema::count(); i++)
   { ColorSchema* s = ColorSchema::find(i);

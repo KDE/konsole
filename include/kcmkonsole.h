@@ -28,7 +28,7 @@ public:
 class ColorTable : public QLabel
 {
 public:
-  ColorTable(QWidget* parent);
+  ColorTable(QWidget* parent, int lower, int upper);
   void setSchema(ColorSchema* s);
 protected:
   void paintEvent(QPaintEvent* e);
@@ -38,6 +38,9 @@ public:
   float scale;
   float shift;
   float color;
+private:
+  int lower;
+  int upper;
 };
 
 class SchemaConfig : public PageFrame
@@ -53,7 +56,7 @@ protected slots:
   void sl2ValueChanged(int n);
 private:
   QListBox* lbox;
-  ColorTable* colorTableW;
+  ColorTable* colorTableW[4];
   QSlider* sl0; //FIXME: name
   QSlider* sl1; //FIXME: name
   QSlider* sl2; //FIXME: name
