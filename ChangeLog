@@ -1,3 +1,5 @@
+24 Mar 1999
+- added Unix98 pty support.
 22 Mar 1999
 - made a non-glibc2.1 version of the fix below.
 - fixed a signal/wait problems related with it.

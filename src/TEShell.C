@@ -49,6 +49,9 @@
 
     The pty is for the Shell while the program gets the tty.
 
+    Another technic are UNIX 98 PTY's. These are supported also, and prefered
+    over the (obsolete) predecessor.
+
     There's a sinister ioctl(2), signal(2) and job control stuff
     nessesary to make everything work as it should.
 */
@@ -92,9 +95,6 @@
 #define HERE fprintf(stdout,"%s(%d): here\n",__FILE__,__LINE__)
 
 FILE* syslog_file = NULL; //stdout;
-
-static char ptynam[] = "/dev/ptyxx";
-static char ttynam[] = "/dev/ttyxx";
 
 static QIntDict<Shell> shells;
 
@@ -154,10 +154,10 @@ static int chownpty(int fd, int grant)
 */
 
 void Shell::setSize(int lines, int columns)
-{ struct winsize wsize;
-  if(fd < 0) return;
+{ struct winsize wsize; //FIXME: put into Shell.
   wsize.ws_row = (unsigned short)lines;
   wsize.ws_col = (unsigned short)columns;
+  if(fd < 0) return;
   ioctl(fd,TIOCSWINSZ,(char *)&wsize);
 }
 
@@ -171,7 +171,7 @@ static void catchChild(int)
 
 void Shell::doneShell(int status)
 {
-  chownpty(fd,FALSE);
+  if (needGrantPty) chownpty(fd,FALSE);
   emit done(status);
 }
 
@@ -187,13 +187,103 @@ int Shell::run(QStrList & args, const char* term)
   return 0;
 }
 
+int Shell::openShell()
+{ int ptyfd = -1;
+  needGrantPty = TRUE;
+
+  // Find a master pty that we can open ////////////////////////////////
+
+  // first we try UNIX PTY's
+
+#ifdef TIOCGPTN
+  strcpy(ptynam,"/dev/ptmx");
+  strcpy(ttynam,"/dev/pts/");
+  ptyfd = open(ptynam,O_RDWR);
+  if (ptyfd >= 0) // got the master pty
+  { int ptyno;
+    if (ioctl(ptyfd, TIOCGPTN, &ptyno) == 0)
+    { struct stat sbuf;
+      sprintf(ttynam,"/dev/pts/%d",ptyno);
+      if (stat(ttynam,&sbuf) == 0 && S_ISCHR(sbuf.st_mode))
+        needGrantPty = FALSE;
+      else
+      {
+        close(ptyfd);
+        ptyfd = -1;
+      }
+    }
+    else
+    {
+      close(ptyfd);
+      ptyfd = -1;
+    }
+  }
+#endif
+
+  // no UNIX 98 PTY's, fall back to old style ptys
+
+  if (ptyfd < 0)
+  { char *s3, *s4;
+    static char ptyc3[] = "pqrstuvwxyzabcde";
+    static char ptyc4[] = "0123456789abcdef";
+    strcpy(ptynam,"/dev/ptyxx");
+    strcpy(ttynam,"/dev/ttyxx");
+    for (s3 = ptyc3; *s3 != 0; s3++) 
+    {
+      for (s4 = ptyc4; *s4 != 0; s4++) 
+      {
+        ptynam[8] = ttynam[8] = *s3;
+        ptynam[9] = ttynam[9] = *s4;
+        if ((ptyfd = open(ptynam,O_RDWR)) >= 0) 
+        {
+          if (geteuid() == 0 || access(ttynam,R_OK|W_OK) == 0) break;
+          close(ptyfd); ptyfd = -1;
+        }
+      }
+      if (ptyfd >= 0) break;
+    }
+  }
+  if (ptyfd < 0)
+  {
+    //FIXME: handle more gracefully.
+    fprintf(stderr,"Can't open a pseudo teletype\n"); exit(1);
+  }
+  if (needGrantPty && !chownpty(ptyfd,TRUE))
+  {
+    fprintf(stderr,"konsole: chownpty failed for device %s::%s.\n",ptynam,ttynam);
+    fprintf(stderr,"       : This means the session can be eavesdroped.\n");
+    fprintf(stderr,"       : Make sure konsole_grantpty is installed in\n");
+    fprintf(stderr,"       : %s and setuid root.\n",KApplication::kde_bindir().data());
+  }
+  fcntl(ptyfd,F_SETFL,O_NDELAY);
+
+  return ptyfd;
+}
+
 //! only used internally. See `run' for interface
 void Shell::makeShell(const char* dev, QStrList & args, 
 	const char* term)
 { int sig; char* t;
 
-  // open and set all standard files to master/slave tty
-  int tt = open(dev, O_RDWR | O_EXCL);
+  if (fd < 0) // no master pty could be opened
+  {
+  //FIXME:
+  //fprintf(stderr,"opening master pty failed.\n");
+  //exit(1);
+  }
+
+#ifdef TIOCSPTLCK
+  int flag = 0; ioctl(fd,TIOCSPTLCK,&flag); // unlock pty
+#endif
+  // open and set all standard files to slave tty
+  int tt = open(dev, O_RDWR);
+
+  if (tt < 0) // the slave pty could be opened
+  {
+  //FIXME:
+  //fprintf(stderr,"opening slave pty (%s) failed.\n",dev);
+  //exit(1);
+  }
   
 #if (defined(SVR4) || defined(__SVR4)) && (defined(i386) || defined(__i386__))
   // Solaris x86
@@ -260,41 +350,6 @@ void Shell::makeShell(const char* dev, QStrList & args,
   execvp(f, argv);
   perror("exec failed");
   exit(1);                             // control should never come here.
-}
-
-int openShell()
-{ int ptyfd; char *s3, *s4;
-  static char ptyc3[] = "pqrstuvwxyzabcde";
-  static char ptyc4[] = "0123456789abcdef";
-
-  // Find a master pty that we can open ////////////////////////////////
-
-  ptyfd = -1;
-  for (s3 = ptyc3; *s3 != 0; s3++) 
-  {
-    for (s4 = ptyc4; *s4 != 0; s4++) 
-    {
-      ptynam[8] = ttynam[8] = *s3;
-      ptynam[9] = ttynam[9] = *s4;
-      if ((ptyfd = open(ptynam,O_RDWR)) >= 0) 
-      {
-        if (geteuid() == 0 || access(ttynam,R_OK|W_OK) == 0) break;
-        close(ptyfd); ptyfd = -1;
-      }
-    }
-    if (ptyfd >= 0) break;
-  }
-  if (ptyfd < 0) { fprintf(stderr,"Can't open a pseudo teletype\n"); exit(1); }
-  if (!chownpty(ptyfd,TRUE))
-  {
-    fprintf(stderr,"konsole: chownpty failed for device %s::%s.\n",ptynam,ttynam);
-    fprintf(stderr,"       : This means the session can be eavesdroped.\n");
-    fprintf(stderr,"       : Make sure konsole_grantpty is installed in\n");
-    fprintf(stderr,"       : %s and setuid root.\n",KApplication::kde_bindir().data());
-  }
-  fcntl(ptyfd,F_SETFL,O_NDELAY);
-
-  return ptyfd;
 }
 
 /*! 

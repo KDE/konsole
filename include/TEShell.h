@@ -74,6 +74,7 @@ Q_OBJECT
   private:
 
     void makeShell(const char* dev, QStrList & args, const char* term);
+    int  openShell();
 
   private:
 
@@ -81,7 +82,10 @@ Q_OBJECT
     pid_t            comm_pid;
     int		           login_shell;
     QSocketNotifier* mn;
-    bool             save_session;
+
+    bool             needGrantPty;
+    char ptynam[50]; // "/dev/ptyxx" | "/dev/ptmx"
+    char ttynam[50]; // "/dev/ttyxx" | "/dev/pts/########..."
 };
 
 #endif

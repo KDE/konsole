@@ -1,5 +1,6 @@
 New in 0.9.10
 
+- Unix98 pty support.
 - fix for a security hole.
 - lots of other bugs fixed
 - Shift-Up/Down scrolls history
