@@ -1361,8 +1361,9 @@ void Konsole::addSessionCommand(const QString &path)
   {
     delete co; return; // ignore
   }
-  m_file->insertItem( SmallIconSet( "openterm" ), txt, ++cmd_serial );
-  m_toolbarSessionsCommands->insertItem( SmallIconSet( "openterm" ), txt, cmd_serial );
+  QString icon = co->readEntry("Icon", "openterm");
+  m_file->insertItem( SmallIconSet( icon ), txt, ++cmd_serial );
+  m_toolbarSessionsCommands->insertItem( SmallIconSet( icon ), txt, cmd_serial );
   no2command.insert(cmd_serial,co);
 }
 
