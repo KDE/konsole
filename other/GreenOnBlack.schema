@@ -13,7 +13,7 @@ title Green on Black
 #      |              | |
 #      V V--color--V  V V
 
-color  0  24 178  24  0 0  # regular   foreground color (Green)
+color  0  24 240  24  0 0  # regular   foreground color (Green)
 color  1   0   0   0  1 0  # regular   background color (Black)
 
 color  2   0   0   0  0 0  # regular   color 0 Black
@@ -29,7 +29,7 @@ color  9 178 178 178  0 0  # regular   color 7 White
 
 # instead of changing the colors, we've flaged the text to become bold
 
-color 10  24 178  24  0 1  # intensive foreground color
+color 10  24 240  24  0 1  # intensive foreground color
 color 11   0   0   0  1 0  # intensive background color
 
 color 12 104 104 104  0 0  # intensive color 0
