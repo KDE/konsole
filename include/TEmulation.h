@@ -17,6 +17,8 @@
 #include "TEScreen.h"
 #include <qtimer.h>
 #include <stdio.h>
+#include <qtextcodec.h>
+#include <keytrans.h>
 
 class TEmulation : public QObject
 { Q_OBJECT
@@ -54,7 +56,7 @@ signals:
 
 public:
 
-  virtual void onRcvByte(int);
+  virtual void onRcvChar(int);
 
   virtual void setMode  (int) = 0;
   virtual void resetMode(int) = 0;
@@ -64,6 +66,8 @@ public:
   virtual void setConnect(bool r);
   void setColumns(int columns);
 
+  void setKeytrans(int no);
+
 protected:
 
   TEWidget* gui;
@@ -72,6 +76,14 @@ protected:
   void setScreen(int n); // set `scr' to `screen[n]'
 
   bool   connected;    // communicate with widget
+
+  void setCodec(int c); // codec number, 0 = locale, 1=utf8
+
+  QTextCodec* codec;
+  QTextCodec* localeCodec;
+  QTextDecoder* decoder;
+
+  KeyTrans* keytrans;
 
 // refreshing related material.
 // this is localized in the class.

@@ -80,10 +80,5 @@ TODO: Example of non-locale client code
     = Discontining Linux console support
 
 As a nice side effect, the Linux console support can be reduced
-to a konsole configuration example. By having the vga font
-converted to iso10646, a Linux console lookalike is possible
-simply by font selection while running xterm. The other Linux
-console specific adjustments are of no real help, so no support
-for them beside a README.linux.console that explains how to set
-them is provided.
+to a konsole configuration example. See README.linux.console.
 ---

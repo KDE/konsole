@@ -44,9 +44,11 @@ public:
   const char* emuName();
   const QString& Title();
   bool history();
+  int keymap();
 
   void setHistory(bool on);
   void setSchemaNo(int sn);
+  void setKeymapNo(int kn);
   void setFontNo(int fn);
   void setTitle(const QString& title);
   void kill(int signal);
@@ -67,8 +69,12 @@ private:
   TEWidget*      te;
   TEmulation*    em;
 
+  //FIXME: using the indices here
+  // is propably very bad. We should
+  // use a persistent reference instead.
   int            schema_no;
   int            font_no;
+  int            keymap_no;
   QString        title;
 
   const char*    pgm;

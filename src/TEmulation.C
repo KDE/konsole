@@ -91,6 +91,7 @@
 */
 
 TEmulation::TEmulation(TEWidget* gui)
+: decoder((QTextDecoder*)NULL)
 {
   this->gui = gui;
 
@@ -148,6 +149,20 @@ bool TEmulation::history()
   return screen[0]->hasScroll();
 }
 
+void TEmulation::setCodec(int c)
+{
+  //FIXME: check whether we have to free codec
+  codec = c ? QTextCodec::codecForName("utf8")
+            : QTextCodec::codecForLocale();
+  if (decoder) delete decoder;
+  decoder = codec->makeDecoder();
+}
+
+void TEmulation::setKeytrans(int no)
+{
+  keytrans = KeyTrans::find(no);
+}
+
 // Interpreting Codes ---------------------------------------------------------
 
 /*
@@ -160,8 +175,8 @@ bool TEmulation::history()
 /*!
 */
 
-void TEmulation::onRcvByte(int c)
-// process application input to terminal
+void TEmulation::onRcvChar(int c)
+// process application unicode input to terminal
 // this is a trivial scanner
 { 
   c &= 0xff;
@@ -204,9 +219,10 @@ void TEmulation::onKeyPress( QKeyEvent* ev )
   }
 }
 
-// helpers  -------------------------------------------------------------------
+// Unblocking, Byte to Unicode translation --------------------------------- --
 
-/*!
+/*
+   We are doing code conversion from locale to unicode first.
 */
 
 void TEmulation::onRcvBlock(const char *s, int len)
@@ -215,7 +231,10 @@ void TEmulation::onRcvBlock(const char *s, int len)
   bulk_incnt += 1;
   for (int i = 0; i < len; i++)
   {
-    onRcvByte(s[i]);
+    QString result = decoder->toUnicode(&s[i],1);
+    int reslen = result.length();
+    for (int j = 0; j < reslen; j++)
+      onRcvChar(result[j].unicode());
     if (s[i] == '\n') bulkNewline();
   }
   bulkEnd();

@@ -13,13 +13,10 @@ undistinguishable from the original. To do so, switch off the
 menubar, scrollbar and frame, select the Linux colors and font
 and set the full screen mode. 
 
-You should get a pixel identical display then, despite the
-fact that you're still running an X terminal. In case you're
-getting confused whether running console or konsole then,
-note that the mouse cursor looks different. Use the right
-mouse button menu to switch between fullscreen and regular
-mode. You might find the ALT-Tab and CTRL-Tab keys helpful
-then, too.
+If you're running the console with the same resolution as
+your X display (which you can, thanks to the frame buffer
+console), you should get a pixel identical display then,
+despite the fact that you're still running an X terminal.
 
 
 * What make the Linux console so unique?
@@ -50,26 +47,25 @@ an explicit Linux console simulation cannot exist.
 * Running Konsole in true Linux console mode:
 
 To some degree, one can run application with Linux console
-emulation, too (BUT THERE SHOULD BE NO NEED TO DO SO):
+emulation, too.
 
 - export TERM=linux to trigger ncurses aware applications
   to expect a linux console.
 - set the appropriate codec (this is cp437 on my installation)
   to get graphical and international characters properly.
+[TODO: to control codec via menu settings is work in progress, meaning not available yet.]
 - set the Linux keyboard to get the F1-F5 function keys right.
-[TODO: to control the the above two points via menu settings
- is work in progress, meaning not available yet.]
 
-In general it is not advisable to ever modify the above
+In general it is NOT advisable to ever modify the above
 indicated settings unless you know what you're doing.
 
-Please note that these applications then may not react properly
-on changing the window size anymore. Often they ignore it
-completely or behave strange in other ways. I even saw one
-application dying from the shock of noticing that the linux
-console has simply changed it's size (Debian's dselect). Since
-the Linux console can be resized, this behavior is to be
-considered a bug of these applications, i cannot help it.
+Note that applications then may not react properly on changing
+the window size anymore. Often they ignore it completely or
+behave strange in other ways. I even saw one application dying
+from the shock of noticing that the linux console has simply
+changed it's size (Debian's dselect). Since the Linux console
+can be resized, this behavior is to be considered a bug in
+these applications, i cannot help it.
 
 Mouse-aware application will most probably not recognize
 mouse events (especially mc) since they might try to get
@@ -78,6 +74,9 @@ these events from gpm instead.
 MC will not be able to access the special console devices
 then and cannot simulate a secondary screen, treating the
 emulation as "dummy" with respect to it (^O).
+
+Some application will also assume that the default background
+is black, thereby producing random black background ranges.
 
 The linux console can some funny quirks with special graphic
 characters and i will not teach Konsole all of them. In rare

@@ -63,12 +63,10 @@
 /*!
 */
 
-TEmuVt102::TEmuVt102(TEWidget* gui)
-: TEmulation(gui), decoder((QTextDecoder*)NULL)
+TEmuVt102::TEmuVt102(TEWidget* gui) : TEmulation(gui)
 {
   QObject::connect(gui,SIGNAL(mouseSignal(int,int,int)),
                    this,SLOT(onMouse(int,int,int)));
-  keytrans = KeyTrans::find(0); //FIXME: go to proper config
   initTokenizer();
   reset();
 }
@@ -90,6 +88,7 @@ void TEmuVt102::reset()
   resetCharset(0); screen[0]->reset();
   resetCharset(1); screen[0]->reset();
   setCodec(0);
+  setKeytrans(0);
 }
 
 /* ------------------------------------------------------------------------- */
@@ -107,8 +106,7 @@ void TEmuVt102::reset()
 
    The pipeline proceeds as follows:
 
-   - Local code page to unicode translation (onRcvByte)
-   - Tokenizing the ESC codes (processChar)
+   - Tokenizing the ESC codes (onRcvChar)
    - VT100 code page translation of plain characters (applyCharset)
    - Interpretation of ESC codes (tau)
 
@@ -162,33 +160,6 @@ void TEmuVt102::reset()
 #define TY_CSI_PR(A,N)  TY_CONSTR(7,A,N)
 
 #define TY_VT52__(A  )  TY_CONSTR(8,A,0)
-
-
-// Byte to Unicode translation --------------------------------------------- --
-
-/*
-   We are doing code conversion from locale to unicode first.
-*/
-
-void TEmuVt102::onRcvByte(int cc)
-{
-  char chars[1]; chars[0] = cc;
-
-  QString result = decoder->toUnicode(chars,1);
-
-  int reslen = result.length();
-  for (int i = 0; i < reslen; i++)
-    processCharacter(result[i].unicode());
-}
-
-void TEmuVt102::setCodec(int c)
-{
-  //FIXME: check whether we have to free codec
-  codec = c ? QTextCodec::codecForName("utf8")
-            : QTextCodec::codecForLocale();
-  if (decoder) delete decoder;
-  decoder = codec->makeDecoder();
-}
 
 // Tokenizer --------------------------------------------------------------- --
 
@@ -274,7 +245,7 @@ void TEmuVt102::initTokenizer()
 
 // process an incoming unicode character
 
-void TEmuVt102::processCharacter(int cc)
+void TEmuVt102::onRcvChar(int cc)
 { int i;
 
   if (cc == 127) return; //VT100: ignore.
@@ -738,22 +709,6 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
 
 //printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().length(),ev->text().length()?ev->text().ascii()[0]:0);
 
-/*THE UNKNOWN HACKER WROTE:
-  >> if ((ev->key()==Key_S) && (ev->state()==ControlButton))
-  >>   return; // Ctrl+s will cause it to freeze up 
-  >>           // (this is a tty problem, possibly)
-  >>           // It's something to do with "ctrl+s" 
-  >>           // toggling Scroll on the [real] console
-  >>           // This is a hack, but it works. So there.
-
-  NO! this is correct X-On/X-Off behavior. Use Ctrl-Q to release.
-  This is most likely an application or usage problem. Try Ctrl-S
-  (search) in emacs -nw for an example. Ctrl-S is to cause freeze
-  in the shell. If you experience it elsewhere (e.g. joe), please
-  report the problem to the author of the program.
-  I'll remove this section in a bit.
-*/
-
   // revert to non-history when typing
   if (scr->getHistCursor() != scr->getHistLines());
     scr->setHistCursor(scr->getHistLines());
@@ -813,14 +768,6 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
 
 #define CHARSET charset[scr==screen[1]]
 
-static unsigned short vt100_graphics[32] =
-{ // 0/8     1/9    2/10    3/11    4/12    5/13    6/14    7/15
-  0x0020, 0x25C6, 0x2592, 0x2409, 0x240c, 0x240d, 0x240a, 0x00b0,
-  0x00b1, 0x2424, 0x240b, 0x2518, 0x2510, 0x250c, 0x2514, 0x253c,
-  0xF800, 0xF801, 0x2500, 0xF803, 0xF804, 0x251c, 0x2524, 0x2534,
-  0x252c, 0x2502, 0x2264, 0x2265, 0x03C0, 0x2260, 0x00A3, 0x00b7
-};
-
 // Apply current character map.
 
 unsigned short TEmuVt102::applyCharset(unsigned short c)
@@ -829,24 +776,6 @@ unsigned short TEmuVt102::applyCharset(unsigned short c)
   if (CHARSET.pound                && c == '#' ) return 0xa3; //This mode is obsolete
   return c;
 }
-
-/* ------------------------------------------------------------------------- */
-/*                                                                           */
-/*                                Mode Operations                            */
-/*                                                                           */
-/* ------------------------------------------------------------------------- */
-
-/*
-   Some of the emulations state is either added to the state of the screens.
-
-   This causes some scoping problems, since different emulations choose to
-   located the mode either to the current screen or to both.
-
-   For strange reasons, the extend of the rendition attributes ranges over
-   all screens and not over the actual screen.
-
-   We decided on the precise precise extend, somehow.
-*/
 
 /*
    "Charset" related part of the emulation state.
@@ -915,6 +844,24 @@ void TEmuVt102::restoreCursor()
   scr->restoreCursor();
 }
 
+/* ------------------------------------------------------------------------- */
+/*                                                                           */
+/*                                Mode Operations                            */
+/*                                                                           */
+/* ------------------------------------------------------------------------- */
+
+/*
+   Some of the emulations state is either added to the state of the screens.
+
+   This causes some scoping problems, since different emulations choose to
+   located the mode either to the current screen or to both.
+
+   For strange reasons, the extend of the rendition attributes ranges over
+   all screens and not over the actual screen.
+
+   We decided on the precise precise extend, somehow.
+*/
+
 // "Mode" related part of the state. These are all booleans.
 
 void TEmuVt102::resetModes()
@@ -925,7 +872,6 @@ void TEmuVt102::resetModes()
   resetMode(MODE_AppCuKeys); saveMode(MODE_AppCuKeys);
   resetMode(MODE_NewLine  );
     setMode(MODE_Ansi     );
-  resetMode(MODE_BsHack   );
 }
 
 void TEmuVt102::setMode(int m)

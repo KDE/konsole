@@ -85,6 +85,11 @@ int TESession::schemaNo()
   return schema_no;
 }
 
+int TESession::keymap()
+{
+  return keymap_no;
+}
+
 int TESession::fontNo()
 {
   return font_no;
@@ -98,6 +103,12 @@ const char* TESession::emuName()
 void TESession::setSchemaNo(int sn)
 {
   schema_no = sn;
+}
+
+void TESession::setKeymapNo(int kn)
+{
+  keymap_no = kn;
+  em->setKeytrans(kn);
 }
 
 void TESession::setFontNo(int fn)

@@ -16,10 +16,8 @@
 #include "TEWidget.h"
 #include "TEScreen.h"
 #include "TEmulation.h"
-#include "keytrans.h"
 #include <qtimer.h>
 #include <stdio.h>
-#include <qtextcodec.h>
 
 //
 
@@ -28,8 +26,7 @@
 #define MODE_AppKeyPad (MODES_SCREEN+2)
 #define MODE_Mouse1000 (MODES_SCREEN+3)
 #define MODE_Ansi      (MODES_SCREEN+4)
-#define MODE_BsHack    (MODES_SCREEN+5)
-#define MODE_total     (MODES_SCREEN+6)
+#define MODE_total     (MODES_SCREEN+5)
 
 struct DECpar
 {
@@ -68,8 +65,7 @@ public:
 
   void reset();
 
-  void onRcvByte(int);
-  void processCharacter(int cc);
+  void onRcvChar(int cc);
   void sendString(const char *);
 
 public:
@@ -124,16 +120,8 @@ protected:
   void resetCharset(int scrno);
   CharCodes charset[2];
 
-  void setCodec(int c); // codec number, 0 = locale, 1=utf8
-
   DECpar currParm;
   DECpar saveParm;
-
-  QTextCodec* codec;
-  QTextCodec* localeCodec;
-  QTextDecoder* decoder;
-
-  KeyTrans* keytrans;
 };
 
 #endif // ifndef ANSIEMU_H

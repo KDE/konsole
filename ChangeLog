@@ -1,3 +1,7 @@
+ 7 Feb 2000
+- 'BsHack' internals removed.
+- last X11 reference removed.
+- code movements and clearup.
  5 Feb 2000
 - proper diagnostics added to keytrans reader.
 31 Jan 2000

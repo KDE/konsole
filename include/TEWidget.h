@@ -22,6 +22,8 @@
 
 #include "TECommon.h"
 
+extern unsigned short vt100_graphics[32];
+
 class TEWidget : public QFrame
 // a widget representing attributed text
 { Q_OBJECT
@@ -83,7 +85,7 @@ protected:
     bool eventFilter( QObject *, QEvent * );
 
     void drawAttrStr(QPainter &paint, QRect rect, 
-                     QChar* str, int len, ca attr, BOOL pm, BOOL clear);
+                     QString& str, ca attr, BOOL pm, BOOL clear);
     void paintEvent( QPaintEvent * );
 
     void resizeEvent(QResizeEvent*);
@@ -119,7 +121,8 @@ protected slots:
 
 private:
     
-    bool iso10646;   // ISO 10646 font.
+    QChar (*fontMap)(QChar); // possible vt100 font extention
+
     bool fixed_font; // has fixed pitch
     int  font_h;     // height
     int  font_w;     // width

@@ -30,7 +30,10 @@
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
-// KeyEntry -
+/* KeyEntry
+
+   instances represent the individual assignments
+*/
 
 KeyTrans::KeyEntry::KeyEntry(int _ref, int _key, int _bits, int _mask, int _cmd, QString _txt)
 : ref(_ref), key(_key), bits(_bits), mask(_mask), cmd(_cmd), txt(_txt)
@@ -51,7 +54,11 @@ QString KeyTrans::KeyEntry::text()
   return txt;
 }
 
-// KeyTrans -
+/* KeyTrans
+
+   combines the individual assignments to a proper map
+   Takes part in a collection themself.
+*/
 
 KeyTrans::KeyTrans()
 {
@@ -96,12 +103,12 @@ bool KeyTrans::findEntry(int key, int bits, int* cmd, const char** txt, int* len
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-// Ok, we have a regular tokenizer here.
+// regular tokenizer
 /* Tokens
    - Spaces
-   - Name
+   - Name    (A-Za-z0-9)+
    - String
-   - Opr     +-:
+   - Opr     on of +-:
 */
 
 #define SYMName    0

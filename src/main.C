@@ -39,7 +39,11 @@
     - menu
     - configuration files
     - other events (e.g. resizing)
-    We have to find a single-place method to maintain this.
+    We have to find a single-place method to better maintain this.
+  - In general, the material contained in here and in session.C
+    should be rebalanced. Much more material now comes from configuration
+    files and the overall routines should better respect this.
+  - Font+Size list should go to a configuration file, too.
   - Controling the widget is currently done by individual attributes.
     This lead to quite some amount of flicker when a whole bunch of
     attributes has to be set, e.g. in session swapping.
@@ -139,6 +143,7 @@ Konsole::Konsole(const QString& name,
   menubar = menuBar();
   b_scroll = histon;
   b_fullscreen = FALSE;
+  n_keytab = 0;
 
   // create terminal emulation framework ////////////////////////////////////
 
@@ -175,7 +180,7 @@ Konsole::Konsole(const QString& name,
     m_schema->insertItem(s->title,s->numb);
   }
 
-  // load schema /////////////////////////////////////////////////////////////
+  // load keymaps ////////////////////////////////////////////////////////////
 
   KeyTrans::loadAll();
   //FIXME: sort
@@ -184,6 +189,7 @@ Konsole::Konsole(const QString& name,
     assert( s );
     m_keytab->insertItem(s->hdr,s->numb);
   }
+  m_keytab->setItemChecked(0,TRUE);
 
   // set global options ///////////////////////////////////////////////////////
 
@@ -414,7 +420,7 @@ void Konsole::makeMenu()
 
   m_keytab = new QPopupMenu;
   m_keytab->setCheckable(TRUE);
-  m_keytab->setItemChecked(0,TRUE);
+  connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
 
   m_codec  = new QPopupMenu;
   m_codec->setCheckable(TRUE);
@@ -489,7 +495,6 @@ void Konsole::saveProperties(KConfig* config)
   config->writeEntry("menubar visible",b_menuvis);
   config->writeEntry("history",b_scroll);
   config->writeEntry("has frame",b_framevis);
-  config->writeEntry("BS hack",b_bshack);
   config->writeEntry("Fullscreen",b_fullscreen);
   config->writeEntry("font",n_font);
   config->writeEntry("defaultfont", defaultFont);
@@ -516,8 +521,7 @@ void Konsole::readProperties(KConfig* config)
   b_menuvis  = config->readBoolEntry("menubar visible",TRUE);
   b_framevis = config->readBoolEntry("has frame",TRUE);
   b_scroll = config->readBoolEntry("history",TRUE);
-  b_bshack   = config->readBoolEntry("BS hack",TRUE);
-  b_fullscreen = config->readBoolEntry("Fullscreen",FALSE);
+  b_fullscreen = FALSE; // config->readBoolEntry("Fullscreen",FALSE);
   n_font     = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
   n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
   s_schema   = config->readEntry("schema","");
@@ -529,25 +533,8 @@ void Konsole::readProperties(KConfig* config)
 
   scrollbar_menu_activated(QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2));
 
-  // not necessary for SM (KTMainWindow does it after), but useful for default settings
-/*FIXME: (merging) state of material below unclear*/
-// Commented out; kmenubar not movable any more (sven)
-//  if (menubar->menuBarPos() != KMenuBar::Floating)
-//  { QString entry = config->readEntry("kmenubar");
-//    if (!entry.isEmpty() && entry == "floating")
-//    {
-//      menubar->setMenuBarPos(KMenuBar::Floating);
-//      QString geo = config->readEntry("kmenubargeometry");
-//      if (!geo.isEmpty()) menubar->setGeometry(KWM::setProperties(menubar->winId(), geo));
-//    }
-//    else if (!entry.isEmpty() && entry == "top") menubar->setMenuBarPos(KMenuBar::Top);
-//    else if (!entry.isEmpty() && entry == "bottom") menubar->setMenuBarPos(KMenuBar::Bottom);
-//  }
-  // (geometry stuff removed) done by KTMainWindow for SM, and not needed otherwise
-
   // Options that should be applied to all sessions /////////////
   // (1) set menu items and Konsole members
-  setBsHack(config->readBoolEntry("BS hack",TRUE)); //FIXME: dead dog
   QFont tmpFont("fixed");
   defaultFont = config->readFontEntry("defaultfont", &tmpFont);
   setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT)); // sets n_font and menu item
@@ -555,15 +542,14 @@ void Konsole::readProperties(KConfig* config)
 
   // (2) apply to sessions (currently only the 1st one)
   TESession* s = no2session.find(1);
-  if (s) {
+  if (s)
+  {
     s->setFontNo(n_font);
     s->setSchemaNo(ColorSchema::find(s_schema)->numb);
     s->setHistory(b_scroll);
-    if (b_bshack) //FIXME: dead dog
-      s->getEmulation()->setMode(MODE_BsHack); //FIXME: dead dog
-    else
-      s->getEmulation()->resetMode(MODE_BsHack);       //FIXME: dead dog
-  } else { fprintf(stderr,"session 1 not found\n"); } // oops
+  }
+  else
+  { fprintf(stderr,"session 1 not found\n"); } // oops
 
   // Default values for startup, changed by "save options". Not used by SM.
   defaultSize.setWidth ( config->readNumEntry("defaultwidth", 0) );
@@ -648,6 +634,17 @@ void Konsole::schema_menu_activated(int item)
   activateSession((int)session2no.find(se)); // for attribute change
 }
 
+void Konsole::keytab_menu_activated(int item)
+{
+  assert(se);
+HERE; printf("keytab: %d\n",item);
+  se->setKeymapNo(item);
+  m_keytab->setItemChecked(n_keytab,FALSE);
+  m_keytab->setItemChecked(item,TRUE);
+  n_keytab = item;
+
+}
+
 void Konsole::setFont(int fontno)
 {
   QFont f;
@@ -701,18 +698,6 @@ void Konsole::setHistory(bool on)
   if (se) se->setHistory( b_scroll );
 }
 
-void Konsole::setBsHack(bool bshack) //FIXME: dead dog
-{
-  b_bshack = bshack;
-  m_options->setItemChecked(4,b_bshack);
-  //FIXME: solve typing issue below
-  if (se)
-    if (b_bshack)
-      ((TEmuVt102*)se->getEmulation())->setMode(MODE_BsHack);
-    else
-      ((TEmuVt102*)se->getEmulation())->resetMode(MODE_BsHack);
-}
-
 void Konsole::opt_menu_activated(int item)
 {
   switch( item )
@@ -727,8 +712,6 @@ void Konsole::opt_menu_activated(int item)
     case 2: setFrameVisible(!b_framevis);
             break;
     case 3: setHistory(!b_scroll);
-            break;
-    case 4: setBsHack(!b_bshack); //FIXME: dead dog
             break;
     case 5: setFullScreen(!b_fullscreen);
             break;
@@ -791,11 +774,13 @@ void Konsole::setFullScreen(bool on)
   if (on == b_fullscreen) return;
   if (on)
   {
+HERE;
     _saveGeometry = geometry();
     setGeometry(kapp->desktop()->geometry());
   }
   else
   {
+HERE;
     setGeometry(_saveGeometry);
   }
   b_fullscreen = on;

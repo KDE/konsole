@@ -1,8 +1,6 @@
 [README.fonts]
 
-This directory contains terminal fonts converted
-from different sources to suit both the needs of
-X11, QT and konsole. These are:
+Fonts need to suit the needs of X11, QT and konsole.
 
 
 * the font has to be fixed width.

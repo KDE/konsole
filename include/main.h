@@ -55,6 +55,7 @@ private slots:
   void size_menu_activated(int item);
   void pixmap_menu_activated(int item);
   void drop_menu_activated(int item);
+  void keytab_menu_activated(int item);
   void tecRef();
   void newSession(int kind);
 
@@ -88,7 +89,6 @@ private:
   void setMenuVisible(bool);
   void setFrameVisible(bool);
   void setHistory(bool);
-  void setBsHack(bool); //FIXME: dead dog
   
   void setSchema(const char* path);
   void setSchema(const ColorSchema* s);
@@ -121,7 +121,7 @@ private:
   bool        b_menuvis;
   bool        b_scroll;
   bool        b_framevis;
-  bool        b_bshack; //FIXME: dead dog
+  int         n_keytab;
   int         n_font;
   int         n_scroll;
   QString     s_schema;

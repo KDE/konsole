@@ -2,7 +2,7 @@
 #
 # --------------------------------------------------------------
 
-keyboard "(NOT FUNCTIONAL, YET) linux"
+keyboard "linux console" # NOT TESTED, MAY NEED SOME CLEANUPS
 
 # --------------------------------------------------------------
 #

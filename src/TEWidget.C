@@ -46,7 +46,6 @@
 #include "TEWidget.h"
 
 #include <qpainter.h>
-#include <qkeycode.h>
 #include <qclipboard.h>
 #include <qstyle.h>
 
@@ -59,7 +58,6 @@
 
 #include "TEWidget.moc"
 #include <kapp.h>
-#include <X11/Xlib.h>
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 #define HCNT(Name) // { static int cnt = 1; printf("%s(%d): %s %d\n",__FILE__,__LINE__,Name,cnt++); }
@@ -81,6 +79,8 @@
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
+//FIXME: the default color table is in session.C now.
+//       We need a way to get rid of this one, here.
 static const ColorEntry base_color_table[TABLE_COLORS] =
 // The following are almost IBM standard color codes, with some slight
 // gamma correction for the dim colors to compensate for bright X screens.
@@ -127,86 +127,37 @@ void TEWidget::setColorTable(const ColorEntry table[])
   update();
 }
 
-void TEWidget::setVTFont(const QFont& f)
-{
-  QFrame::setFont(f);
-}
-
-void TEWidget::setFont(const QFont &)
-{
-  // ignore font change request if not coming from konsole itself
-}
-
 //FIXME: add backgroundPixmapChanged.
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
-/*                         Constructor / Destructor                          */
+/*                                   Font                                    */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
-{
-  cb = QApplication::clipboard();   
-  QObject::connect( (QObject*)cb, SIGNAL(dataChanged()), 
-                    this, SLOT(onClearSelection()) );
+/* 
+   The VT100 has 32 special graphical characters. The usual vt100 extended
+   xterm fonts have these at 0x00..0x1f.
 
-  scrollbar = new QScrollBar(this);
-  scrollbar->setCursor( arrowCursor );
-  connect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
-  scrollLoc = SCRNONE;
-
-  blinkT   = new QTimer(this);
-  connect(blinkT, SIGNAL(timeout()), this, SLOT(blinkEvent()));
-  blinking = FALSE;
-
-  resizing = FALSE;
-  actSel   = 0;
-  image    = 0;
-  lines    = 1;
-  columns  = 1;
-  font_w   = 1;
-  font_h   = 1;
-  font_a   = 1;
-  word_selection_mode = FALSE;
-
-  setMouseMarks(TRUE);
-  setVTFont( QFont("fixed") );
-  
-  setColorTable(base_color_table); // init color table
-
-  if ( parent ) parent->installEventFilter( this ); //FIXME: see below
-}
-
-//FIXME: make proper destructor
-
-/* ------------------------------------------------------------------------- */
-/*                                                                           */
-/*                             Display Operations                            */
-/*                                                                           */
-/* ------------------------------------------------------------------------- */
-
-/*!
-    attributed string draw primitive
-*/
-
-/* The font coding madness strikes again ...
-
-   Now the usual xterm fonts have the VT100 graphical
-   characters at 0x00 .. 0x1f. QT's iso mapping leaves
-   0x00 .. 0x7f without any changes. But the graphicals
+   QT's iso mapping leaves 0x00..0x7f without any changes. But the graphicals
    come in here as proper unicode characters.
 
-   We treat non-iso10646 fonts as VT100 extended
-   and do the requiered mapping from unicode to
-   0x00 .. 0x1f. The remaining translation is then
-   left to the QCodec.
-
-   NOTE that the below table has to be kept in sync
-   with TEmuVt102::vt100_graphics.
+   We treat non-iso10646 fonts as VT100 extended and do the requiered mapping
+   from unicode to 0x00..0x1f. The remaining translation is then left to the
+   QCodec.
 */
 
-static QChar iso8858vt100extended(QChar c)
+// assert for i in [0..31] : vt100extended(vt100_graphics[i]) == i.
+
+unsigned short vt100_graphics[32] =
+{ // 0/8     1/9    2/10    3/11    4/12    5/13    6/14    7/15
+  0x0020, 0x25C6, 0x2592, 0x2409, 0x240c, 0x240d, 0x240a, 0x00b0,
+  0x00b1, 0x2424, 0x240b, 0x2518, 0x2510, 0x250c, 0x2514, 0x253c,
+  0xF800, 0xF801, 0x2500, 0xF803, 0xF804, 0x251c, 0x2524, 0x2534,
+  0x252c, 0x2502, 0x2264, 0x2265, 0x03C0, 0x2260, 0x00A3, 0x00b7
+};
+
+static QChar vt100extended(QChar c)
 {
   switch (c.unicode())
   {
@@ -245,19 +196,92 @@ static QChar iso8858vt100extended(QChar c)
   return c;
 }
 
-void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
-                           QChar* str, int len, ca attr, BOOL pm, BOOL clear)
+static QChar identicalMap(QChar c)
 {
-  if (!iso10646)
-  {
-    // an optional conversion step is put in here.
-    // basically, we have to apply a partial unicode to
-    // "VT100 extended" ISO conversion.
-    for (int i = 0; i < len; i++)
-      str[i] = iso8858vt100extended(str[i]);
-  }
-  QString unistr(str,len);
+  return c;
+}
 
+void TEWidget::fontChange(const QFont &)
+{
+  font_h = fontMetrics().height();
+  font_w = fontMetrics().maxWidth();
+  font_a = fontMetrics().ascent();
+//printf("font_h: %d\n",font_h);
+//printf("font_w: %d\n",font_w);
+//printf("font_a: %d\n",font_a);
+//printf("charset: %s\n",QFont::encodingName(font().charSet()).ascii());
+//printf("rawname: %s\n",font().rawName().ascii());
+
+  fontMap = strcmp(QFont::encodingName(font().charSet()).ascii(),"iso10646")
+          ? vt100extended
+          : identicalMap;
+  propagateSize();
+  update();
+}
+
+void TEWidget::setVTFont(const QFont& f)
+{
+  QFrame::setFont(f);
+}
+
+void TEWidget::setFont(const QFont &)
+{
+  // ignore font change request if not coming from konsole itself
+}
+
+/* ------------------------------------------------------------------------- */
+/*                                                                           */
+/*                         Constructor / Destructor                          */
+/*                                                                           */
+/* ------------------------------------------------------------------------- */
+
+TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
+{
+  cb = QApplication::clipboard();   
+  QObject::connect( (QObject*)cb, SIGNAL(dataChanged()), 
+                    this, SLOT(onClearSelection()) );
+
+  scrollbar = new QScrollBar(this);
+  scrollbar->setCursor( arrowCursor );
+  connect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
+  scrollLoc = SCRNONE;
+
+  blinkT   = new QTimer(this);
+  connect(blinkT, SIGNAL(timeout()), this, SLOT(blinkEvent()));
+  blinking = FALSE;
+
+  resizing = FALSE;
+  actSel   = 0;
+  image    = 0;
+  lines    = 1;
+  columns  = 1;
+  font_w   = 1;
+  font_h   = 1;
+  font_a   = 1;
+  word_selection_mode = FALSE;
+
+  setMouseMarks(TRUE);
+  setVTFont( QFont("fixed") );
+  setColorTable(base_color_table); // init color table
+
+  if ( parent ) parent->installEventFilter( this ); //FIXME: see below
+}
+
+//FIXME: make proper destructor
+
+/* ------------------------------------------------------------------------- */
+/*                                                                           */
+/*                             Display Operations                            */
+/*                                                                           */
+/* ------------------------------------------------------------------------- */
+
+/*!
+    attributed string draw primitive
+*/
+
+void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
+                           QString& str, ca attr, BOOL pm, BOOL clear)
+{
   if (pm && color_table[attr.b].transparent)
   {
     paint.setBackgroundMode( TransparentMode );
@@ -276,14 +300,14 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
   if (!(blinking && (attr.r & RE_BLINK)))
   {
     paint.setPen(color_table[attr.f].color); 
-    paint.drawText(rect.x(),rect.y()+font_a, unistr);
+    paint.drawText(rect.x(),rect.y()+font_a, str);
     if ((attr.r & RE_UNDERLINE) || color_table[attr.f].bold)
     {
       paint.setClipRect(rect);
       if (color_table[attr.f].bold)
       {
         paint.setBackgroundMode( TransparentMode );
-        paint.drawText(rect.x()+1,rect.y()+font_a, unistr);
+        paint.drawText(rect.x()+1,rect.y()+font_a, str); // second stroke
       }
       if (attr.r & RE_UNDERLINE)
         paint.drawLine(rect.left(), rect.y()+font_a+1,
@@ -335,17 +359,18 @@ HCNT("setImage");
         cb = ext[x].b; 
         if (ext[x].f != cf) cf = ext[x].f;
         int lln = cols - x;
-        disstrU[0] = ext[x+0].c;
+        disstrU[0] = fontMap(ext[x+0].c);
         for (len = 1; len < lln; len++)
         {
           if (ext[x+len].f != cf || ext[x+len].b != cb || ext[x+len].r != cr ||
               ext[x+len] == lcl[x+len] )
             break;
-          disstrU[len] = ext[x+len].c;
+          disstrU[len] = fontMap(ext[x+len].c);
         }
+        QString unistr(disstrU,len);
         drawAttrStr(paint, 
                     QRect(blX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
-                    disstrU, len, ext[x], pm != NULL, true);
+                    unistr, ext[x], pm != NULL, true);
         x += len - 1;
       }
     }
@@ -411,7 +436,7 @@ HCNT("paintEvent");
   { 
     QChar *disstrU = new QChar[columns];
     int len = 1;
-    disstrU[0] = image[loc(x,y)].c; 
+    disstrU[0] = fontMap(image[loc(x,y)].c); 
     int cf = image[loc(x,y)].f;
     int cb = image[loc(x,y)].b;
     int cr = image[loc(x,y)].r;
@@ -420,12 +445,13 @@ HCNT("paintEvent");
            image[loc(x+len,y)].b == cb &&
            image[loc(x+len,y)].r == cr )
     {
-      disstrU[len] = image[loc(x+len,y)].c;
+      disstrU[len] = fontMap(image[loc(x+len,y)].c);
       len += 1;
     }
+    QString unistr(disstrU,len);
     drawAttrStr(paint, 
                 QRect(blX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
-                disstrU, len, image[loc(x,y)], pm != NULL, false);
+                unistr, image[loc(x,y)], pm != NULL, false);
     x += len - 1;
     delete disstrU;
   }
@@ -525,9 +551,10 @@ void TEWidget::setScrollbarLocation(int loc)
 
 /*! 
     Three different operations can be performed using the mouse, and the
-    routines in this section serve both.
-    1) The press/release events are exposed (to the application)
-    2) Marking (press and move left button)  and Pasting (press middle button)
+    routines in this section serve all of them:
+
+    1) The press/release events are exposed to the application
+    2) Marking (press and move left button) and Pasting (press middle button)
     3) The right mouse button is used from the configuration menu
 
     NOTE: During the marking process we attempt to keep the cursor within
@@ -820,10 +847,10 @@ void TEWidget::onClearSelection()
 
 //FIXME: an `eventFilter' has been installed instead of a `keyPressEvent'
 //       due to a bug in `QT' or the ignorance of the author to prevent
-//       repaintevents being emitted to the screen whenever one leaves
+//       repaint events being emitted to the screen whenever one leaves
 //       or reenters the screen to/from another application.
 //
-//   Troll says you need to change focusInEvent() and focusOutEvent(),
+//   Troll says one needs to change focusInEvent() and focusOutEvent(),
 //   which would also let you have an in-focus cursor and an out-focus
 //   cursor like xterm does.
 
@@ -862,28 +889,6 @@ bool TEWidget::eventFilter( QObject *, QEvent *e )
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
-/*                                   Font                                    */
-/*                                                                           */
-/* ------------------------------------------------------------------------- */
-
-void TEWidget::fontChange(const QFont &)
-{
-  font_h = fontMetrics().height();
-  font_w = fontMetrics().maxWidth();
-  font_a = fontMetrics().ascent();
-//printf("font_h: %d\n",font_h);
-//printf("font_w: %d\n",font_w);
-//printf("font_a: %d\n",font_a);
-//printf("charset: %s\n",QFont::encodingName(font().charSet()).ascii());
-//printf("rawname: %s\n",font().rawName().ascii());
-
-  iso10646 = !strcmp(QFont::encodingName(font().charSet()).ascii(),"iso10646");
-  propagateSize();
-  update();
-}
-
-/* ------------------------------------------------------------------------- */
-/*                                                                           */
 /*                                  Frame                                    */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
@@ -902,7 +907,7 @@ void TEWidget::frameChanged()
 
 void TEWidget::Bell()
 {
-  XBell(qt_xdisplay(),0);
+  QApplication::beep();
 }
 
 /* ------------------------------------------------------------------------- */
