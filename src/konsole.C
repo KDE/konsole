@@ -326,10 +326,11 @@ void Konsole::makeGUI()
 
    // Remove the empty separator Qt inserts if the menu is empty on popup,
    // not sure if this will be "fixed" in Qt, for now use this hack (malte)
-   if (sender()->inherits("QPopupMenu") &&
+   if(!(isRestored)) {
+     if (sender()->inherits("QPopupMenu") &&
        static_cast<const QPopupMenu *>(sender())->count() == 1)
        const_cast<QPopupMenu *>(static_cast<const QPopupMenu *>(sender()))->removeItemAt(0);
-
+       }
    // Send Signal Menu -------------------------------------------------------------
    m_signals = new KPopupMenu(this);
    m_signals->insertItem( i18n( "Suspend Task" )   + " (STOP)", 17);     // FIXME: comes with 3 values
@@ -508,6 +509,7 @@ void Konsole::makeGUI()
 
    m_schema->setItemChecked(curr_schema,true);
 //   m_initialSession->setSchemaNo(curr_schema);
+   while (se == NULL) {}
    se->setSchemaNo(curr_schema);
 
    // insert keymaps into menu
