@@ -440,7 +440,7 @@ void TEPty::openPty()
   {
     fprintf(stderr,"Can't open a pseudo teletype\n"); 
     m_strError = i18n("Unable to open a suitable terminal device.");
-    return -1;
+    return;
   }
 
   if (m_bNeedGrantPty && !chownpty(m_MasterFd, true))
