@@ -816,7 +816,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     }
   }
 
-  if ( !word_selection_mode && !line_selection_mode && groupFinalSpaces )
+  if ( !word_selection_mode && !line_selection_mode )
   {
     // Extend to word boundaries
     int i;
@@ -1004,11 +1004,6 @@ int TEWidget::charClass(char ch) const
 
     // Everything else is weird
     return 1;
-}
-
-void TEWidget::setGroupFinalSpaces(bool on)
-{
-	groupFinalSpaces = on;
 }
 
 void TEWidget::setWordCharacters(QString wc)
