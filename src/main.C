@@ -909,8 +909,9 @@ void TEDemo::setSchema(const ColorSchema* s)
   curr_schema = s->numb;
   pmPath = s->imagepath;
   te->setColorTable(s->table); //FIXME: set twice here to work around a bug
-
-  if (s->usetransparency && rootxpm->checkAvail(true)) {
+  
+  if (s->usetransparency) {
+    rootxpm->checkAvailable(true);
     rootxpm->setFadeEffect(s->tr_x, QColor(s->tr_r, s->tr_g, s->tr_b));
     rootxpm->start();
   } else {

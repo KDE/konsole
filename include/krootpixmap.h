@@ -1,6 +1,6 @@
 /* vi: ts=8 sts=4 sw=4
  *
- * $Id: $
+ * $Id$
  *
  * This file is part of the KDE project, module kdesktop.
  * Copyright (C) 1999 Geert Jansen <g.t.jansen@stud.tue.nl>
@@ -55,17 +55,6 @@ public:
     void setFadeEffect(double strength, QColor color);
 
     /**
-     * Check if pseudo transparency is available.
-     *
-     * @param showDlg If set to true and pseudo transparency is not
-     * available, a dialog box is presented to the user explaining the
-     * situation and how to resolve it.
-     * @return True if pseudo transparency is available, false otherwise.
-     */
-    bool checkAvail(bool showDlg=false);
-
-
-    /**
      * Start background handling.
      */
     void start();
@@ -82,14 +71,24 @@ public:
      */
     void repaint(bool force=false);
 
+    /**
+     * Check if pseudo transparency is available.
+     *
+     * @param show_warning Show a warning message when transparent
+     * backgrounds are not available.
+     * @return True if transparency is available, false otherwise.
+     */
+    bool checkAvailable(bool show_warning);
+
 protected:
     virtual bool eventFilter(QObject *, QEvent *);
 
 private slots:
-    void slotBackgroundChanged(int desk);
+    void slotBackgroundChanged(int);
+    void slotDone(bool);
 
 private:
-    bool m_bActive, m_bInit;
+    bool m_bActive, m_bInit, m_bShown;
     int m_Desk;
 
     double m_Fade;
