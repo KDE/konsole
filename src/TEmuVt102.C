@@ -102,7 +102,7 @@ void TEmuVt102::reset()
   //kdDebug(1211)<<"TEmuVt102::reset() resetCharSet()"<<endl;
   resetCharset(1);
   //kdDebug(1211)<<"TEmuVt102::reset() reset screen 1"<<endl;
-  screen[0]->reset();
+  screen[1]->reset();
   //kdDebug(1211)<<"TEmuVt102::reset() setCodec()"<<endl;
   setCodec(0);
   //kdDebug(1211)<<"TEmuVt102::reset() done"<<endl;
@@ -524,7 +524,7 @@ void TEmuVt102::tau( int token, int p, int q )
     case TY_CSI_PN('c'      ) :      reportTerminalType   (          ); break; //VT100
     case TY_CSI_PN('d'      ) : scr->setCursorY           (p         ); break; //LINUX
     case TY_CSI_PN('f'      ) : scr->setCursorYX          (p,       q); break; //VT100
-    case TY_CSI_PN('r'      ) : scr->setMargins           (p,       q); break; //VT100
+    case TY_CSI_PN('r'      ) :      setMargins           (p,       q); break; //VT100
     case TY_CSI_PN('y'      ) : /* IGNORED: Confidence test          */ break; //VT100
 
     case TY_CSI_PR('h',    1) :          setMode      (MODE_AppCuKeys); break; //VT100
@@ -869,6 +869,12 @@ void TEmuVt102::useCharset(int n)
   CHARSET.cu_cs   = n&3;
   CHARSET.graphic = (CHARSET.charset[n&3] == '0');
   CHARSET.pound   = (CHARSET.charset[n&3] == 'A'); //This mode is obsolete
+}
+
+void TEmuVt102::setMargins(int t, int b)
+{
+  screen[0]->setMargins(t, b);
+  screen[1]->setMargins(t, b);
 }
 
 /*! Save the cursor position and the rendition attribute settings. */
