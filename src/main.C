@@ -175,9 +175,12 @@ int main(int argc, char* argv[])
   wname = args->getOption("name");
   login_shell = args->isSet("ls");
   welcome = args->isSet("welcome");
-  QCString title;
+  QCString title=NULL;
+  if(args->isSet("T")) {
+    title=args->getOption("title");
+    }
+
   QCString type = args->getOption("type");
-  //QCString title=args->getOption("title");
 
   //FIXME: more: font, menu, scrollbar, schema, session ...
 
