@@ -1,3 +1,5 @@
+Here is a list of little projects
+
 - deflicker, setting all the attributes separately
   both when creating and changing to a session
   creates 3 setimage and 1 paint events.
@@ -49,8 +51,6 @@
 
 - allow reloading the configuration files at runtime.
 
-- Unix98 compatible way of using pty (openpty/forkpty).
-
 ! announce konsole-1.0 ------------------------------------
 
 - check for other codes/features (Linux console, xterm)
@@ -59,6 +59,7 @@
   - media copy (print)
   - double high, double width (vt100)
   - reverse wraparound?
+  - add secondary buffer to linux console (the real one).
 
 - Linux console improvements
   - Attributes
@@ -72,6 +73,7 @@
     in the program?
   - use scalable font?
   - allow fonts being configured freely
+  - fix national characters in Linux console emulation.
 
 - add configuration for function keys
 

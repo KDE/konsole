@@ -770,17 +770,20 @@ void TEDemo::newSession(int i)
 void TEDemo::doneSession(TESession* s, int status)
 {
 //printf("%s(%d): Exited:%d ExitStatus:%d\n",__FILE__,__LINE__,WIFEXITED(status),WEXITSTATUS(status));
+#if 0 // die silently
   if (!WIFEXITED((status)) || WEXITSTATUS((status)))
   {
     QString str;
+    //FIXME: "Title" is not a precise locator for the message.
+    //       The command would be better.
     str.sprintf(i18n("`%s' terminated abnormally."), s->Title());
     if (WIFEXITED((status)))
     {char rcs[100]; sprintf(rcs,"%d.\n",WEXITSTATUS((status)));
       str = str + i18n("\nReturn code = ") + rcs;
     }
     KMsgBox::message( this, i18n("Error"), str, KMsgBox::EXCLAMATION );
-
   }
+#endif
   int no = (int)session2no.find(s);
   if (!no) return; // oops
   no2session.remove(no);

@@ -1,3 +1,5 @@
+05 Apr 1999
+- made sessions die silently.
 24 Mar 1999
 - added Unix98 pty support.
 22 Mar 1999
@@ -6,6 +8,8 @@
 - changed version number to 0.9.10 thereby disappointing
   all those who desperately hoped, 0.9.9 will be followed
   by 1.0.0 ;)
+15 Mar 1999 David Faure <David.Faure@insa-lyon.fr>
+- fixed some bugs.
 18 Mar 1999
 - added grantpt to prevent eavesdroping the slave tty.
   konsole now depends on at least glibc2.1
