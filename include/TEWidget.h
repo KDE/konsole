@@ -41,6 +41,9 @@ public:
     enum { SCRNONE=0, SCRLEFT=1, SCRRIGHT=2 };
 
     void setScroll(int cursor, int lines);
+    void doScroll(int lines);
+
+    void emitSelection();
 
 public:
     
@@ -93,7 +96,6 @@ protected:
     void mouseReleaseEvent( QMouseEvent* );
     void mouseMoveEvent( QMouseEvent* );
 
-    void emitSelection();
     virtual int charClass(char) const;
 
     void clearImage();

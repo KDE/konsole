@@ -724,44 +724,46 @@ void TEmuVt102::onMouse( int cb, int cx, int cy )
 
 // Keyboard Handling ------------------------------------------------------- --
 
-#define KeyComb(B,K) ((ev->state() & (B)) == (B) && ev->key() == (K))
 #define encodeMode(M,B) BITS(B,getMode(M))
+#define encodeStat(M,B) BITS(B,((ev->state() & (M)) == (M)))
 
 /*
    Keyboard event handling has been simplified somewhat by pushing
    the complications towards a configuration file [see KeyTrans class].
-
-   This simplifies it so, that we either find a specified string or
-   operation of the keystroke or we emit string delivered by QT for
-   it. The later omits most grey keys, but processes the control characters
-   properly.
-
-   Additionally to this, the QT sequence is preceeded by the ESC character
-   if the ALT key is pressed, too.
 */
 
 void TEmuVt102::onKeyPress( QKeyEvent* ev )
 {
   if (!connected) return; // someone else gets the keys
 
+//printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().length(),ev->text().length()?ev->text().ascii()[0]:0);
+
   // revert to non-history when typing
   if (scr->getHistCursor() != scr->getHistLines());
     scr->setHistCursor(scr->getHistLines());
 
-//printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().length(),ev->text().length()?ev->text().ascii()[0]:0);
+  // lookup in keyboard translation table ...
+  int cmd; const char* txt; int len;
+  if (keytrans.findEntry(ev->key(), encodeMode(MODE_NewLine  , BITS_NewLine   ) +
+                                    encodeMode(MODE_BsHack   , BITS_BsHack    ) + //FIXME: deprecated
+                                    encodeMode(MODE_Ansi     , BITS_Ansi      ) +
+                                    encodeMode(MODE_AppCuKeys, BITS_AppCuKeys ) +
+                                    encodeStat(ControlButton , BITS_Control   ) +
+                                    encodeStat(ShiftButton   , BITS_Shift     ) +
+                                    encodeStat(AltButton     , BITS_Alt       ),
+                         &cmd, &txt, &len ))
+  switch(cmd) // ... and execute if found.
+  {
+    case CMD_emitSelection  : gui->emitSelection();           return;
+    case CMD_scrollPageUp   : gui->doScroll(-gui->Lines()/2); return;
+    case CMD_scrollPageDown : gui->doScroll(+gui->Lines()/2); return;
+    case CMD_scrollLineUp   : gui->doScroll(-1             ); return;
+    case CMD_scrollLineDown : gui->doScroll(+1             ); return;
+    case CMD_send           : emit sndBlock(txt,len);         return;
+  }
 
-  QString seq = keytrans.findEntry(ev->key(), encodeMode(MODE_NewLine  , BITS_NewLine   ) +
-                                              encodeMode(MODE_BsHack   , BITS_BsHack    ) +
-                                              encodeMode(MODE_Ansi     , BITS_Ansi      ) +
-                                              encodeMode(MODE_AppCuKeys, BITS_AppCuKeys ) 
-                                            ); //FIXME: add shift, alt, cntl.
-  if (!seq.isNull()) { sendString(seq.ascii()); return; }
-  //FIXME: two more build-in keys, five more in TEWidget.
-  // we have to allow operations and string containing the zero byte to handle these.
-  if (KeyComb(ControlButton,Key_Space)) /* ctrl-Space == ctrl-@  */ { sndBlock("\x00",1); return; }
-  if (KeyComb(ControlButton,Key_Print)) /* ctrl-print == sys-req */ { reportAnswerBack(); return; }
-
-  if (!ev->text().isEmpty())                         // Fall back keyboard handling
+  // fall back handling
+  if (!ev->text().isEmpty())
   {
     if (ev->state() & AltButton) sendString("\033"); // ESC, this is the ALT prefix
     QCString s = codec->fromUnicode(ev->text());     // encode for application

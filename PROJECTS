@@ -1,91 +1,40 @@
-Here is a list of little projects
-
-- deflicker, setting all the attributes separately
-  both when creating and changing to a session
-  creates 3 setimage and 1 paint events.
+Here is a list of open issues:
 
 - when manipulating binary files, sometimes one
   screws up ones terminal settings.  xterm has
   a convenient 'hard reset' menu choice. Further
-  killing individual sessions would be nice to have.
+  sending signal from the menu to the client
+  would be nice to have.
 
-- when removing and adding the menu, the window
-  remains the same size, meaning that the number of
-  rows changes.  For applications that do not take
-  kindly to this, it would be nice if the window
-  changed sizes and the number of rows remained the same.
-  [Additionally, some clients are very sensible about
-   resizing. Evtl. an option to keep the size of the
-   konsole's screens would be nice-to-have].
+- keep session open after client program termination.
+  Useful for things like 'konsole -e ls'.
 
-- make resizing more clever
-  to see the issue, 'ls /dev', make window smaller
-  and then larger again.
+* stuff centered around resizing and text vs. matrix:
 
-- introduce the concept of "logical lines" for resizing and
-  cut'n'paste.
+  - make resizing more clever
+    to see the issue, 'ls /dev', make window smaller
+    and then larger again.
+  - introduce the concept of "logical lines" for resizing and
+    cut'n'paste.
+  - selecting lines that wraps insert a '\n' in the middle of the
+    line when pasting. A related problem occures with resizing.
 
-- complete command line options
-  - emit undecodeable sequences only on on demand (-d).
-  - font, menu, scrollbar, ... other configs
-  - deal with unrecognized options
+* configuration related:
 
-- complete session awareness
-  - save *all* konsole sessions, not only the primary.
+  - command line options
+    - font, menu, scrollbar, schema, kdelnk ... other configs
+  - write configuration utility for config (*.schema,*.kdelnk) files.
 
-- implement kvt features
-  - awareness of gui style change
+  - add configuration for function keys. <<< currently working on (LD)
 
-- improve/complete documentation
+* improve/complete documentation
 
-- check through FIXMEs
-- clean up code
+  - document broken keypad (It's a QT issue really)
+    see VT100 keypad codes (doc/missing.keys)
+  - include README.* into doc.
+  - explain configuration files
 
-- write configuration utility at least for *.schema files.
-
-- evtl. handle *.kdelnk files using regular setup utilities
-  and a rpc client. Should become a parameter in any case.
-
-- allow reloading the configuration files at runtime.
-
-- check for other codes/features (Linux console, xterm)
-  - change xterm title hack to respect icon instruction?
-  - secure keyboard? (check other security issues)
-  - media copy (print)
-  - double high, double width (vt100)
-  - reverse wraparound?
-  - add secondary buffer to linux console (the real one).
-  - smooth scroll?
-  - LEDs?
-
-- Linux console improvements
-  - Attributes
-    - underline --> intensive foreground
-    - blink     --> intensive background
-  - Linux console knows some extra tricks mapping graphical
-    characters.
-
-- add configuration for function keys.
-
-- /dev/console?
-
-- selecting lines that wraps insert a '\n' in the middle of the
-  line when pasting. A related problem occures with resizing.
-
-- reintegrate kom (modem stuff).
-
-- fix non-numeric keypad (It's a QT issue really)
-
-- check for VT100 SETUP (doc/More/vt100-setup.txt)
-
-- VT100 keypad codes (doc/missing.keys, pass vttest section 5)
-- proper schema manager?
-
-- It might be nice to be able to resize the terminal emulation screen 
-  size and widget screen size independently, so that one could use a
-  132 column xterm emulation, showing only 60 columns on the screen,
-  with horizontal scrolling to follow the cursor.  Default would be
-  to have the two slaved like now, but one could use the menubar to 
-  disassociate them.  This would allow, for example, one to read reports 
-  that are too wide for the screen, or the use of normal tools on
-  very narrow screens. 
+- deflicker, setting all the attributes separately
+  both when creating and changing to a session
+  creates 3 setimage and 1 paint events. (This may
+  have improved, lately).

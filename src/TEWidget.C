@@ -497,7 +497,6 @@ void TEWidget::propagateSize()
 
 void TEWidget::scrollChanged(int)
 {
-HERE; printf("TEWidget::scrollChanged\n");
   emit changedHistoryCursor(scrollbar->value()); //expose
 }
 
@@ -828,52 +827,35 @@ void TEWidget::onClearSelection()
 //   which would also let you have an in-focus cursor and an out-focus
 //   cursor like xterm does.
 
+void TEWidget::doScroll(int lines)
+{
+  scrollbar->setValue(scrollbar->value()+lines);
+}
+
 bool TEWidget::eventFilter( QObject *, QEvent *e )
 {
   if ( e->type() == QEvent::Wheel)
-    QApplication::sendEvent( scrollbar, e);
+  {
+    QApplication::sendEvent(scrollbar, e);
+  }
   if ( e->type() == QEvent::KeyPress )
   { QKeyEvent* ke = (QKeyEvent*)e;
 
     actSel=0; // Key stroke implies a screen update, so TEWidget won't
               // know where the current selection is.
- 
-    // FIXME: keyboard procession is going to be localized in TEmuVT102.
-    switch (ke->state() | (ke->key() << 8))
-    {
-      case ShiftButton|(Key_PageUp   << 8) : 
-           scrollbar->setValue(scrollbar->value()-lines/2);
-           break;
-      case ShiftButton|(Key_PageDown << 8) :
-           scrollbar->setValue(scrollbar->value()+lines/2);
-           break;
-      case ShiftButton|(Key_Up       << 8) : 
-           scrollbar->setValue(scrollbar->value()-1);
-           break;
-      case ShiftButton|(Key_Down     << 8) :
-           scrollbar->setValue(scrollbar->value()+1);
-           break;
-      case ShiftButton|(Key_Insert   << 8) :
-           emitSelection();
-           break;
-      default :
-           emit keyPressedSignal(ke); // expose
-           break;
-    }
-    return TRUE; // accept event
+
+    emit keyPressedSignal(ke); // expose
+    return TRUE;               // accept event
   } 
-  else
+  if ( e->type() == QEvent::Enter )
   {
-    if ( e->type() == QEvent::Enter )
-    {
-        QObject::disconnect( (QObject*)cb, SIGNAL(dataChanged()), 
-        this, SLOT(onClearSelection()) );
-    }
-    if ( e->type() == QEvent::Leave )
-    {
-        QObject::connect( (QObject*)cb, SIGNAL(dataChanged()), 
-        this, SLOT(onClearSelection()) );
-    }
+    QObject::disconnect( (QObject*)cb, SIGNAL(dataChanged()), 
+      this, SLOT(onClearSelection()) );
+  }
+  if ( e->type() == QEvent::Leave )
+  {
+    QObject::connect( (QObject*)cb, SIGNAL(dataChanged()), 
+      this, SLOT(onClearSelection()) );
   }
   return FALSE; // standard event processing
 }
