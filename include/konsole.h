@@ -45,7 +45,7 @@ class Konsole : public KTMainWindow
 
 public:
 
-  Konsole(const QString& name, const char* pgm, QStrList & _args, int histon);
+  Konsole(const char * name, const char* pgm, QStrList & _args, int histon);
   ~Konsole();
   void setColLin(int columns, int lines);
   void setFullScreen(bool on);
@@ -106,7 +106,7 @@ private:
   void setSchema(const ColorSchema* s);
   void setFont(int fontno);
 
-  void addSessionCommand(const char* path);
+  void addSessionCommand(const QString & path);
   void loadSessionCommands();
 
 private:
