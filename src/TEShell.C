@@ -110,6 +110,7 @@ extern "C" {
 
 
 #include <kapp.h>
+#include <kglobal.h>
 #include <kstddirs.h>
 
 #define HERE fprintf(stdout,"%s(%d): here\n",__FILE__,__LINE__)
@@ -138,8 +139,6 @@ static int chownpty(int fd, int grant)
     /* We pass the master pseudo terminal as file descriptor PTY_FILENO. */
     if (fd != PTY_FILENO && dup2(fd, PTY_FILENO) < 0) exit(1);
     QString path = locate("exe", BASE_CHOWN);
-//  QString path = KApplication::kde_bindir() + "/" + BASE_CHOWN;
-//  execle(path.data(), BASE_CHOWN, grant?"--grant":"--revoke", NULL, NULL);
     execle(path.ascii(), BASE_CHOWN, grant?"--grant":"--revoke", NULL, NULL);
     exit(1); // should not be reached
   }
@@ -287,7 +286,8 @@ int Shell::openShell()
     fprintf(stderr,"konsole: chownpty failed for device %s::%s.\n",ptynam,ttynam);
     fprintf(stderr,"       : This means the session can be eavesdroped.\n");
     fprintf(stderr,"       : Make sure konsole_grantpty is installed in\n");
-    fprintf(stderr,"       : %s and setuid root.\n",KApplication::kde_bindir().data());
+    fprintf(stderr,"       : %s and setuid root.\n",
+	    KGlobal::dirs()->findResourceDir("exe", "konsole").data());
   }
   fcntl(ptyfd,F_SETFL,O_NDELAY);
 
