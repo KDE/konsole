@@ -772,11 +772,9 @@ bool TEWidget::eventFilter( QObject *, QEvent *e )
       case ShiftButton|(Key_Down     << 8) :
            scrollbar->setValue(scrollbar->value()+1);
            break;
-#if 0
-      case (Key_Insert << 8) : // Some progs use this.
+      case ShiftButton|(Key_Insert   << 8) :
            emitSelection();
            break;
-#endif
       default :
            emit keyPressedSignal(ke); // expose
            break;
