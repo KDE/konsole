@@ -9,4 +9,5 @@ Comment=Shell
 Comment[fi]=Komentotulkki
 Comment[is]=Skel
 Comment[no]=Skall
+Comment[sk]=Príkazový riadok
 Exec=sh

@@ -11,6 +11,7 @@ Comment[it]=Console Linux
 Comment[no]=Linux-konsoll
 Comment[pt_BR]=Console do Linux
 Comment[ru]=Консоль Linux
+Comment[sk]=LinuxovА konzola
 Exec=bash
 Schema=/opt/kde/share/apps/konsole/Linux.schema
 #VGA
