@@ -245,7 +245,7 @@ void TEWidget::fontChange(const QFont &)
           : identicalMap;
 #else
 #if defined(Q_CC_GNU)
-#warning ###
+#warning TODO: Review/fix vt100 extended font-mapping
 #endif
   fontMap = identicalMap; 
 #endif
