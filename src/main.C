@@ -72,16 +72,18 @@ static int session_no = 0;
 static QIntDict<KSimpleConfig> no2command;
 static int cmd_serial = 0;
 
-TEDemo::TEDemo(const char* args[], int login_shell) : KTMainWindow()
+TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
 {
-  se = NULL;
-  title = PACKAGE;
+  se = 0L;
   menubar = menuBar();
   readProperties(kapp->getConfig());
 
   // session management
 
   setUnsavedData( true ); // terminals cannot store their contents
+  kapp->setTopWidget(this);
+  kapp->enableSessionManagement();
+  connect(kapp, SIGNAL(saveYourself()), SLOT(saveYourself()));
 
   // create terminal emulation framework ////////////////////////////////////
 
@@ -131,7 +133,12 @@ TEDemo::TEDemo(const char* args[], int login_shell) : KTMainWindow()
   TESession* initial = new TESession(this,te,args,"xterm",login_shell);
   initial->setFontNo(n_font);
   initial->setSchemaNo(ColorSchema::find(s_schema)->numb);
-  initial->setTitle(args[0]);
+  if (args.count())
+      title = args.at(0); // display program executed in the title bar
+  else
+      title = PACKAGE;
+
+  initial->setTitle(args.at(0));
 
   // start first session /////////////////////////////////////////////////////
 
@@ -345,6 +352,22 @@ void TEDemo::makeMenu()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
+void TEDemo::saveYourself()
+{
+    /* Called by kwm for session management. Code taken from kvt. David */
+    KConfig* config = kapp->getSessionConfig();
+    saveProperties(config);
+    /* config->writeEntry("geometry", KWM::getProperties(winId()));
+       if (menubar->menuBarPos() == KMenuBar::Floating){
+       config->writeEntry("kmenubar", "floating");
+       config->writeEntry("kmenubargeometry",
+       KWM::getProperties(menubar->winId()));
+       } */
+    if (args.count() > 0)
+        config->writeEntry("konsolearguments", args);
+    config->sync();
+}
+
 void TEDemo::saveProperties(KConfig* config)
 {
   config->setGroup("options");
@@ -550,7 +573,7 @@ void TEDemo::setHeader()
   setCaption(title);
 }
 
-void TEDemo::changeTitle(int, char*s)
+void TEDemo::changeTitle(int, const char*s)
 {
   title = s; setHeader();
 }
@@ -617,6 +640,8 @@ void TEDemo::activateSession(int sn)
                                           //FIXME: check here if we're still alife.
                                           //       if not, quit, otherwise,
                                           //       start propagating quit.
+  title = s->Title(); // take title from current session
+  setHeader();
 }
 
 void TEDemo::addSession(TESession* s)
@@ -662,11 +687,10 @@ void TEDemo::newSession(int i)
 
   if (emu.isEmpty()) emu = se->emuName();
 
-  const char* args[4];
-  args[0] = shell;
-  args[1] = "-c";
-  args[2] = cmd.data();
-  args[3] = NULL;
+  QStrList args;
+  args.append(shell);
+  args.append("-c");
+  args.append(cmd);
 
   TESession* s = new TESession(this,te,args,emu.data(),0);
   s->setFontNo(fno);
@@ -825,8 +849,8 @@ int main(int argc, char* argv[])
   QString bg = "";
   QString sz = "";
 
-  const char** eargs = (const char**)malloc(3*sizeof(char*));
-  eargs[0] = shell; eargs[1] = NULL;
+  QStrList eargs;
+  eargs.append(shell);
 
   setlocale( LC_ALL, "" );
   KApplication a(argc, argv, PACKAGE);
@@ -834,11 +858,10 @@ int main(int argc, char* argv[])
   for (int i = 1; i < argc; i++)
   {
     if (!strcmp(argv[i],"-e") && i+1 < argc) // handle command
-    { free(eargs);
-      eargs = (const char**)malloc((argc-i+1)*sizeof(char*));
+    {
+      eargs.clear();
       int j;
-      for (j = 0; j+i+1 < argc; j++) eargs[j] = argv[i+j+1];
-      eargs[j]=NULL;
+      for (j = 0; j+i+1 < argc; j++) eargs.append( argv[i+j+1] );
       break;
     }
     if (!strcmp(argv[i],"-vt_fg") && i+1 < argc) fg = argv[++i];
@@ -859,8 +882,6 @@ int main(int argc, char* argv[])
 
   putenv("COLORTERM="); //FIXME: for mc, which cannot detect color terminals
 
-  //FIXME: free(eargs) or keep global.
-
   int c = 80, l = 40;
   if ( (strcmp("", sz) != 0) ) {
 	     char *ls = strchr( sz, 'x' );
@@ -874,14 +895,19 @@ int main(int argc, char* argv[])
 	        fprintf(stderr, "expected -vt_sz <#columns>x<#lines> ie. 80x40\n" );
              }
   }
-  if (a.isRestored())
+  if (a.isRestored()) {
+      KConfig * sessionconfig = a.getSessionConfig();
+      sessionconfig->setGroup("options");
+      sessionconfig->readListEntry("konsolearguments", eargs);
       RESTORE( TEDemo(eargs,login_shell) )
+  }
   else {	
       TEDemo*  m = new TEDemo(eargs,login_shell);
-      m->title = a.getCaption();
       if (strcmp("",sz) !=0) m->setColLin(c,l);
-      if (welcome) m->setCaption(i18n("Welcome to the console"));
-      QTimer::singleShot(5000,m,SLOT(setHeader()));
+      if (welcome) {
+          m->setCaption(i18n("Welcome to the console"));
+          QTimer::singleShot(5000,m,SLOT(setHeader()));
+      }
       m->show();
   }
 

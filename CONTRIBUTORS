@@ -1,5 +1,8 @@
 CONTRIBUTORS
 
+- David Faure <David.Faure@insa-lyon.fr>
+  - "-e" included into session management.
+  - minor overall improvements.
 - Warwick Allison <warwick@troll.no>
   - 16 color SGR codes (xterm-83)
   - schema files seeked also in ~/.kde/share/apps/konsole

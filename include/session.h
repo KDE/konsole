@@ -15,6 +15,7 @@
 
 #include <kapp.h>
 #include <ktmainwindow.h>
+#include <qstrlist.h>
 
 #include "TEShell.h"
 #include "TEWidget.h"
@@ -25,7 +26,7 @@ class TESession : public QObject
 
 public:
 
-  TESession(KTMainWindow* main, TEWidget* w, const char* args[], 
+  TESession(KTMainWindow* main, TEWidget* w, QStrList & _args,
 	const char* term, int login_session);
   ~TESession();
 
@@ -66,7 +67,7 @@ private:
   int            font_no;   // no exactly the right place
 
   char*          term;
-  char**         args;
+  QStrList       args;
   QString        title;
 };
 

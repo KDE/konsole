@@ -88,19 +88,19 @@ void Shell::doneShell(int status)
   emit done(status);
 }
 
-int Shell::run(char* argv[], const char* term)
+int Shell::run(QStrList & args, const char* term)
 {
   pid_t comm_pid = fork();
   if (comm_pid <  0) { fprintf(stderr,"Can't fork\n"); return -1; }
-  if (comm_pid == 0) makeShell(ttynam,argv,term);
+  if (comm_pid == 0) makeShell(ttynam,args,term);
   if (comm_pid >  0) shells.insert(comm_pid,this);
   return 0;
 }
 
-void Shell::makeShell(const char* dev, char* argv[], 
+void Shell::makeShell(const char* dev, QStrList & args, 
 	const char* term)
 // only used internally. See `run' for interface
-{ int sig; char* t; char *f;
+{ int sig; char* t;
   // open and set all standard files to master/slave tty
   int tt = open(dev, O_RDWR);
    
@@ -140,8 +140,14 @@ void Shell::makeShell(const char* dev, char* argv[],
   // propagate emulation
   if (term && term[0]) setenv("TERM",term,1);
 
+  // convert QStrList into char*[]
+  unsigned int i;
+  char **argv = (char**)malloc(sizeof(char*)*(args.count()+1));
+  for (i = 0; i<args.count(); i++) argv[i] = strdup(args.at(i));
+  argv[i] = 0L;
+
   // setup for login shells
-  f = argv[0];
+  char *f = argv[0];
   if ( login_shell )                   // see sh(1)
   {
     t = strrchr( argv[0], '/' );

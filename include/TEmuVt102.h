@@ -47,7 +47,7 @@ public slots: // signals incoming from TEWidget
   void onMouse(int cb, int cx, int cy);
 
 signals:
-  void changeTitle(int,char*);
+  void changeTitle(int,const char*);
 
 public:
 

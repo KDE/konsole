@@ -1,3 +1,6 @@
+20 Dec 1998 David Faure <David.Faure@insa-lyon.fr
+- "-e" added to session management
+- slight overall improvements
 20 Dec 1998
 - fixed or worked around a marking issue in scrollUp/scrollDown.
 04 Dec 1998 Alex Zepeda <garbanzo@hooked.net>

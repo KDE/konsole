@@ -20,6 +20,7 @@
 #include <kapp.h>
 #include <ktmainwindow.h>
 #include <ksimpleconfig.h>
+#include <qstrlist.h>
 
 #include "TEShell.h"
 #include "TEWidget.h"
@@ -32,7 +33,7 @@ class TEDemo : public KTMainWindow
 
 public:
 
-  TEDemo(const char* args[], int login_shell);
+  TEDemo(QStrList & _args, int login_shell);
   ~TEDemo();
   void setColLin(int columns, int lines);
 
@@ -56,7 +57,7 @@ private slots:
   void changeColumns(int);
   void notifySize(int,int);
   void setHeader();
-  void changeTitle(int,char*s);
+  void changeTitle(int, const char*s);
   void onDrop( KDNDDropZone* _zone );
     
 protected:
@@ -67,6 +68,7 @@ protected:
 private slots:
 
   void setSchema(int n);
+  void saveYourself();
 
 private:
 
@@ -113,6 +115,8 @@ private:
   QString     dropText;
 
   int         curr_schema; // current schema no
+
+  QStrList args;
 
 public:
 

@@ -18,6 +18,7 @@
 #include <termios.h>
 #include <qsocknot.h>
 #include <qtimer.h>
+#include <qstrlist.h>
 
 /* ---| Shell Parameters |--------------------------------------------------- */
 
@@ -32,7 +33,7 @@ Q_OBJECT
     ~Shell();
 
   public:
-    int run(char* argv[], const char* term);
+    int run(QStrList & args, const char* term);
 
   signals:
     void done(int status);
@@ -62,7 +63,7 @@ Q_OBJECT
 
   private:
 
-    void makeShell(const char* dev, char* argv[], const char* term);
+    void makeShell(const char* dev, QStrList & args, const char* term);
 
   private:
 

@@ -12,19 +12,12 @@
     of the abilities of the framework - multible sessions.
 */
 
-TESession::TESession(KTMainWindow* main, TEWidget* te, const char* args[], const char* term, int login_session)
+TESession::TESession(KTMainWindow* main, TEWidget* te, QStrList & _args, const char* term, int login_session) : args(_args)
 {
   sh = new Shell(login_session);
   em = new VT102Emulation(te,term);
 
   this->term = strdup(term);
-
-  { int i;
-    for (i = 0; args[i]; i++);
-    this->args = (char**)malloc(sizeof(char*)*(i+1));
-    for (i = 0; args[i]; i++) this->args[i] = strdup(args[i]);
-    this->args[i] = NULL;
-  }
 
   sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
   QObject::connect( sh,SIGNAL(block_in(const char*,int)),
@@ -37,8 +30,8 @@ TESession::TESession(KTMainWindow* main, TEWidget* te, const char* args[], const
                     sh,SLOT(send_bytes(const char*,int)) );
   QObject::connect( em,SIGNAL(changeColumns(int)),
                     main,SLOT(changeColumns(int)) );
-  QObject::connect( em,SIGNAL(changeTitle(int, char*)),
-                    main,SLOT(changeTitle(int, char*)) );
+  QObject::connect( em,SIGNAL(changeTitle(int, const char*)),
+                    main,SLOT(changeTitle(int, const char*)) );
   QObject::connect( this,SIGNAL(done(TESession*,int)),
                     main,SLOT(doneSession(TESession*,int)) );
   QObject::connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
@@ -53,10 +46,8 @@ void TESession::run()
 }
 
 TESession::~TESession()
-{ int i;
+{
   free(term);
-  for (i = 0; args[i]; i++) free(args[i]);
-  free(args);
   delete em;
   delete sh;
 }
