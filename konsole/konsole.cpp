@@ -1067,18 +1067,28 @@ bool Konsole::queryClose()
 
    if ( b_warnQuit)
    {
-        if( (sessions.count()>1) &&
-            ( KMessageBox::warningYesNo( this,
-                                         i18n( "You have open sessions (besides the current one). "
-                                               "These will be killed if you continue.\n"
-                                               "Are you sure you want to quit?" ),
-					 i18n("Really Quit?"),
-					 i18n("&Quit"), i18n("&Cancel") )
-
-              == KMessageBox::No )
-            ) {
-            return false;
-        }
+        if(sessions.count()>1) {
+	    switch (
+		KMessageBox::warningYesNoCancel( 
+	    	    this,
+            	    i18n( "You have open sessions (besides the current one). "
+                	  "These will be killed if you continue.\n"
+                	  "Are you sure you want to quit?" ),
+	    	    i18n("Really Quit?"),
+	    	    i18n("&Quit"), 
+	    	    KGuiItem(i18n("C&lose Session"),"fileclose")
+		)
+	    ) {
+		case KMessageBox::Yes :
+		break;
+		case KMessageBox::No :
+		    { closeCurrentSession(); 
+		        return false;
+		    }
+		break;
+		case KMessageBox::Cancel : return false; 
+	    }
+	}
     }
 
     // WABA: Don't close if there are any sessions left.
