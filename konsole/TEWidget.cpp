@@ -1309,7 +1309,8 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
       return FALSE; // not us
   if ( e->type() == QEvent::Wheel)
   {
-    QApplication::sendEvent(scrollbar, e);
+    if ( ((QWheelEvent *)e)->orientation() == Qt::Vertical )
+      QApplication::sendEvent(scrollbar, e);
   }
   if ( e->type() == QEvent::KeyPress )
   {
