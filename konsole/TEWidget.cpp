@@ -472,7 +472,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
       int w = font_w * (m_imSelEnd - m_imSelStart);
       int h = font_h;
 
-      QRect tmpRect = QRect( x, y, w, h ); 
+      QRect tmpRect = QRect( x, y, w, h );
       if ( str != m_imPreeditText ) {  // ugly hack
         tmpRect.setLeft( tmpRect.left() + font_w );
         tmpRect.setWidth( tmpRect.width() + font_w );
@@ -695,7 +695,7 @@ HCNT("setImage");
           if ( ( m_imSelStart < m_imSelEnd ) )
             m_isIMSel = true;
 	}
-        
+
         drawAttrStr(paint,
                     QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
                     unistr, &ext[x], pm != NULL, true);
@@ -745,7 +745,7 @@ HCNT("setImage");
      QString sizeStr = i18n("Size: %1 x %2").arg(columns).arg(lines);
      mResizeLabel->setText(sizeStr);
      mResizeWidget->move((width()-mResizeWidget->width())/2,
-                         (height()-mResizeWidget->height())/2);
+                         (height()-mResizeWidget->height())/2+20);
      mResizeWidget->show();
      mResizeTimer->start(1000, true);
   }
@@ -1714,7 +1714,7 @@ void TEWidget::imEndEvent( QIMEvent *e )
                              contentsRect().width(), contentsRect().height() );
   m_imStart = 0;
   m_imPreeditLength = 0;
- 
+
   m_isIMEdit = m_isIMSel = false;
   repaint( repaintRect, true );
 }
