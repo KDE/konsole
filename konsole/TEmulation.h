@@ -18,6 +18,7 @@
 #include <qtimer.h>
 #include <stdio.h>
 #include <qtextcodec.h>
+#include <qguardedptr.h>
 #include <keytrans.h>
 
 enum { NOTIFYNORMAL=0, NOTIFYBELL=1, NOTIFYACTIVITY=2, NOTIFYSILENCE=3 };
@@ -89,7 +90,7 @@ public:
 
 protected:
 
-  TEWidget* gui;
+  QGuardedPtr<TEWidget> gui;
   TEScreen* scr;         // referes to one `screen'
   TEScreen* screen[2];   // 0 = primary, 1 = alternate
   void setScreen(int n); // set `scr' to `screen[n]'

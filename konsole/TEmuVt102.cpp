@@ -93,12 +93,14 @@ TEmuVt102::TEmuVt102(TEWidget* gui) : TEmulation(gui)
 
 void TEmuVt102::changeGUI(TEWidget* newgui)
 {
-  if (gui==newgui) return;
+  if (static_cast<TEWidget *>( gui )==newgui) return;
 
-  QObject::disconnect(gui,SIGNAL(mouseSignal(int,int,int)),
-                      this,SLOT(onMouse(int,int,int)));
-  QObject::disconnect(gui, SIGNAL(sendStringToEmu(const char*)),
-		   this, SLOT(sendString(const char*)));
+  if ( gui ) {
+    QObject::disconnect(gui,SIGNAL(mouseSignal(int,int,int)),
+                        this,SLOT(onMouse(int,int,int)));
+    QObject::disconnect(gui, SIGNAL(sendStringToEmu(const char*)),
+                        this, SLOT(sendString(const char*)));
+  }
   TEmulation::changeGUI(newgui);
   QObject::connect(gui,SIGNAL(mouseSignal(int,int,int)),
                    this,SLOT(onMouse(int,int,int)));  

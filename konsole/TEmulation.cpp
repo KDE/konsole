@@ -147,28 +147,30 @@ void TEmulation::connectGUI()
 
 void TEmulation::changeGUI(TEWidget* newgui)
 {
-  if (gui==newgui) return;
+  if (static_cast<TEWidget *>( gui )==newgui) return;
 
-  QObject::disconnect(gui,SIGNAL(changedImageSizeSignal(int,int)),
-                   this,SLOT(onImageSizeChange(int,int)));
-  QObject::disconnect(gui,SIGNAL(changedHistoryCursor(int)),
-                   this,SLOT(onHistoryCursorChange(int)));
-  QObject::disconnect(gui,SIGNAL(keyPressedSignal(QKeyEvent*)),
-                   this,SLOT(onKeyPress(QKeyEvent*)));
-  QObject::disconnect(gui,SIGNAL(beginSelectionSignal(const int,const int)),
-		   this,SLOT(onSelectionBegin(const int,const int)) );
-  QObject::disconnect(gui,SIGNAL(extendSelectionSignal(const int,const int)),
-		   this,SLOT(onSelectionExtend(const int,const int)) );
-  QObject::disconnect(gui,SIGNAL(endSelectionSignal(const bool)),
-		   this,SLOT(setSelection(const bool)) );
-  QObject::disconnect(gui,SIGNAL(copySelectionSignal()),
-		   this,SLOT(copySelection()) );
-  QObject::disconnect(gui,SIGNAL(clearSelectionSignal()),
-		   this,SLOT(clearSelection()) );
-  QObject::disconnect(gui,SIGNAL(isBusySelecting(bool)),
-		   this,SLOT(isBusySelecting(bool)) );
-  QObject::disconnect(gui,SIGNAL(testIsSelected(const int, const int, bool &)),
-		   this,SLOT(testIsSelected(const int, const int, bool &)) );
+  if ( gui ) {
+    QObject::disconnect(gui,SIGNAL(changedImageSizeSignal(int,int)),
+                     this,SLOT(onImageSizeChange(int,int)));
+    QObject::disconnect(gui,SIGNAL(changedHistoryCursor(int)),
+                     this,SLOT(onHistoryCursorChange(int)));
+    QObject::disconnect(gui,SIGNAL(keyPressedSignal(QKeyEvent*)),
+                     this,SLOT(onKeyPress(QKeyEvent*)));
+    QObject::disconnect(gui,SIGNAL(beginSelectionSignal(const int,const int)),
+                     this,SLOT(onSelectionBegin(const int,const int)) );
+    QObject::disconnect(gui,SIGNAL(extendSelectionSignal(const int,const int)),
+                     this,SLOT(onSelectionExtend(const int,const int)) );
+    QObject::disconnect(gui,SIGNAL(endSelectionSignal(const bool)),
+                     this,SLOT(setSelection(const bool)) );
+    QObject::disconnect(gui,SIGNAL(copySelectionSignal()),
+                     this,SLOT(copySelection()) );
+    QObject::disconnect(gui,SIGNAL(clearSelectionSignal()),
+                     this,SLOT(clearSelection()) );
+    QObject::disconnect(gui,SIGNAL(isBusySelecting(bool)),
+                     this,SLOT(isBusySelecting(bool)) );
+    QObject::disconnect(gui,SIGNAL(testIsSelected(const int, const int, bool &)),
+                     this,SLOT(testIsSelected(const int, const int, bool &)) );
+  }
   gui=newgui;
   connectGUI();
 }
