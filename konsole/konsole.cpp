@@ -453,8 +453,6 @@ void Konsole::makeGUI()
             SLOT( newURLSession( const QString& )));
    connect(m_bookmarks, SIGNAL(aboutToShow()), SLOT(bookmarks_menu_check()));
    connect(m_bookmarksSession, SIGNAL(aboutToShow()), SLOT(bookmarks_menu_check()));
-   // call manually to disable accelerator c-b for add-bookmark initially.
-   bookmarks_menu_check();
 
    // Schema Options Menu -----------------------------------------------------
    m_schema = new KPopupMenu(this);
@@ -669,6 +667,10 @@ void Konsole::makeBasicGUI()
   m_view = new KPopupMenu(this);
   bookmarkHandler = new KonsoleBookmarkHandler( this, true );
   m_bookmarks = bookmarkHandler->menu();
+
+  // call manually to disable accelerator c-b for add-bookmark initially.
+  bookmarks_menu_check();
+
   m_options = new KPopupMenu(this,"attack");
   m_help =  helpMenu(0, false);
 
@@ -1087,7 +1089,9 @@ void Konsole::applySettingsToGUI()
 
 void Konsole::bookmarks_menu_check()
 {
-  bool state = !(se->getCwd().isEmpty());
+  bool state = false;
+  if ( se )
+      state = !(se->getCwd().isEmpty());
 
   KAction *addBookmark = actionCollection()->action( "add_bookmark" );
   if ( !addBookmark )
