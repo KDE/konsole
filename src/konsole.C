@@ -807,7 +807,8 @@ void Konsole::slotToggleToolbar() {
     Toggle the Frame visibility
  */
 void Konsole::slotToggleFrame() {
-  te->setFrameStyle( showFrame->isChecked()
+  b_framevis = showFrame->isChecked();
+  te->setFrameStyle( b_framevis
                      ? ( QFrame::WinPanel | QFrame::Sunken )
                      : QFrame::NoFrame );
 }
