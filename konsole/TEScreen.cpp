@@ -1016,6 +1016,10 @@ void TEScreen::clearToBeginOfScreen()
 
 void TEScreen::clearEntireScreen()
 {
+  // Add entire screen to history
+  for (int i = 0; i < (lines-1); i++)
+    addHistLine(); scrollUp(0,1);
+
   clearImage(loc(0,0),loc(columns-1,lines-1),' ');
 }
 
