@@ -883,7 +883,7 @@ void Konsole::makeTabWidget()
 
     m_removeSessionButton = new QToolButton( tabwidget );
     QToolTip::add(m_removeSessionButton,i18n("Close the current session"));
-    m_removeSessionButton->setIconSet( SmallIcon( "tab_remove" ) );
+    m_removeSessionButton->setIconSet( SmallIconSet( "tab_remove" ) );
     m_removeSessionButton->adjustSize();
     m_removeSessionButton->setEnabled(false);
     connect(m_removeSessionButton, SIGNAL(clicked()), SLOT(confirmCloseCurrentSession()));
@@ -1868,7 +1868,7 @@ void Konsole::switchToTabWidget()
   setCentralWidget(tabwidget);
   tabwidget->showPage(se->widget());
   tabwidget->show();
-  
+
   delete se_widget;
 
   if (se->isMasterMode())
