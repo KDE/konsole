@@ -403,6 +403,7 @@ private:
 
   bool        b_histEnabled:1;
   bool        b_fullScripting:1;
+  bool        b_showstartuptip:1;
   unsigned int m_histSize;
   int m_separator_id;
 

@@ -251,6 +251,7 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 ,b_xonXoff(false)
 ,b_bidiEnabled(false)
 ,b_fullScripting(false)
+,b_showstartuptip(true)
 ,m_histSize(DEFAULT_HISTORY_SIZE)
 {
   isRestored = b_inRestore;
@@ -397,7 +398,8 @@ void Konsole::showTip()
 
 void Konsole::showTipOnStart()
 {
-   KTipDialog::showTip(this);
+   if (b_showstartuptip)
+      KTipDialog::showTip(this);
 }
 
 /* ------------------------------------------------------------------------- */
@@ -2431,6 +2433,9 @@ void Konsole::setDefaultSession(const QString &filename)
 {
   delete m_defaultSession;
   m_defaultSession = new KSimpleConfig(locate("appdata", filename), true /* read only */);
+  m_defaultSession->setDesktopGroup();
+  b_showstartuptip = m_defaultSession->readBoolEntry("Tips", true);
+          
   m_defaultSessionFilename=filename;
 }
 

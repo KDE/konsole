@@ -52,8 +52,10 @@ static KCmdLineOptions options[] =
    { "vt_sz CCxLL",     I18N_NOOP("Terminal size in columns x lines"), 0 },
    { "noresize",        I18N_NOOP("Terminal size is fixed"), 0 },
    { "type <type>",     I18N_NOOP("Open the given session type instead of the default shell"), 0 },
+   { "types",           I18N_NOOP("List available session types."), 0 },
    { "keytab <name>",   I18N_NOOP("Use given .keytab file"), 0 },
    { "profile <name>",  I18N_NOOP("Start with given sessions profile"), 0 },
+   { "profiles",        I18N_NOOP("List available profiles."), 0 },
    { "schema <name>",   I18N_NOOP("Use given .schema file"), 0 },
    { "script",          I18N_NOOP("Enable extended DCOP functions"), 0 },
    { "workdir <dir>",   I18N_NOOP("Change working directory of the konsole to 'dir'"), 0 },
@@ -139,6 +141,7 @@ extern "C" int kdemain(int argc, char* argv[])
   bool tabbaron = true;
   bool frameon = true;
   bool scrollbaron = true;
+  bool showtip = true;
   QCString wname = PACKAGE;
 
 
@@ -245,6 +248,7 @@ extern "C" int kdemain(int argc, char* argv[])
      {
         title = QFile::decodeName(shell);  // program executed in the title bar
      }
+     showtip = false;
   }
 
   QCString sz = "";
@@ -267,6 +271,21 @@ extern "C" int kdemain(int argc, char* argv[])
   if(args->isSet("type")) {
     type = args->getOption("type");
   }
+  if(args->isSet("types")) {
+    QStringList types = KGlobal::dirs()->findAllResources("appdata", "*.desktop", false, true);
+    types.sort();
+    for(QStringList::ConstIterator it = types.begin(); 
+        it != types.end(); ++it)
+    {
+       QString file = *it;
+       file = file.mid(file.findRev('/')+1);
+       if (file.endsWith(".desktop"))
+          file = file.left(file.length()-8);
+       printf("%s\n", QFile::encodeName(file).data());
+    }
+    return 0;
+  }
+  
   if(args->isSet("workdir"))
      QDir::setCurrent( args->getOption("workdir") );
 
@@ -288,6 +307,20 @@ extern "C" int kdemain(int argc, char* argv[])
     else
       profile = "";
   }
+  if (args->isSet("profiles"))
+  {
+     QStringList profiles = KGlobal::dirs()->findAllResources("data", "konsole/profiles/*", false, true);
+     profiles.sort();
+     for(QStringList::ConstIterator it = profiles.begin(); 
+         it != profiles.end(); ++it)
+     {
+        QString file = *it;
+        file = file.mid(file.findRev('/')+1);
+        printf("%s\n", QFile::encodeName(file).data());
+     }
+     return 0;
+  }
+
 
   //FIXME: more: font
 
@@ -441,7 +474,8 @@ extern "C" int kdemain(int argc, char* argv[])
     m->initFullScreen();
     m->show();
     m->run();
-    m->showTipOnStart();
+    if (showtip)
+      m->showTipOnStart();
     m->setAutoClose(auto_close);
   }
 
