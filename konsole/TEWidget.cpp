@@ -379,6 +379,9 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 
   setFocusPolicy( WheelFocus );
 
+  // im
+  setInputMethodEnabled(true);
+
   // We're just a big pixmap, no need to have a background
   // Speeds up redraws
   setBackgroundMode(NoBackground);
