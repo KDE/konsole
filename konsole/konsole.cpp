@@ -778,7 +778,7 @@ void Konsole::makeBasicGUI()
 
   m_renameSession = new KAction(i18n("&Rename Session..."), Qt::CTRL+Qt::ALT+Qt::Key_S, this,
                                 SLOT(slotRenameSession()), m_shortcuts, "rename_session");
-  m_zmodemUpload = new KAction(i18n("&ZModem upload..."), Qt::CTRL+Qt::ALT+Qt::Key_U, this,
+  m_zmodemUpload = new KAction(i18n("&ZModem Upload..."), Qt::CTRL+Qt::ALT+Qt::Key_U, this,
                                 SLOT(slotZModemUpload()), m_shortcuts, "zmodem_upload");
   monitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ), "idea", 0, this,
                                         SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_activity" );
