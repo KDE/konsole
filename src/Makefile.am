@@ -86,7 +86,7 @@ messages:
 	for i in ../other/*.Keytab ../other/*.keytab; do \
 	  grep "^keyboard" $$i | sed -e 's#^keyboard \"\(.*\)\"$$#i18n(\"\1\")#' >> schemas.C ;\
 	done
-	$(XGETTEXT)  $(konsole_SOURCES) schemas.C -o $(podir)/konsole.pot
+	$(XGETTEXT) $(konsole_SOURCES) $(libkonsole_la_SOURCES) schemas.C -o $(podir)/konsole.pot
 	rm -f schemas.C
 
 dummy.C:
