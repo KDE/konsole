@@ -76,13 +76,17 @@ TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
 {
   se = 0L;
   menubar = menuBar();
+  
+  // get the default values
   readProperties(kapp->getConfig());
 
   // session management
 
   setUnsavedData( true ); // terminals cannot store their contents
-  kapp->setTopWidget(this);
-  kapp->enableSessionManagement();
+
+  // a KTMainWindow supports session management as default, but we
+  // want something extra for the arguments. So just connect to the
+  // saveYourself() signal.
   connect(kapp, SIGNAL(saveYourself()), SLOT(saveYourself()));
 
   // create terminal emulation framework ////////////////////////////////////
@@ -192,7 +196,7 @@ void TEDemo::onDrop( KDNDDropZone* _zone )
     p = strlist.first();
     while(p != 0)
     {
-      if(file_count++ > 0) 
+      if(file_count++ > 0)
       {
         dropText += " ";
         bPopup = false; // more than one file, don't popup
@@ -370,15 +374,7 @@ void TEDemo::makeMenu()
 
 void TEDemo::saveYourself()
 {
-    /* Called by kwm for session management. Code taken from kvt. David */
     KConfig* config = kapp->getSessionConfig();
-    saveProperties(config);
-    /* config->writeEntry("geometry", KWM::getProperties(winId()));
-       if (menubar->menuBarPos() == KMenuBar::Floating){
-       config->writeEntry("kmenubar", "floating");
-       config->writeEntry("kmenubargeometry",
-       KWM::getProperties(menubar->winId()));
-       } */
     if (args.count() > 0)
         config->writeEntry("konsolearguments", args);
     config->sync();
@@ -386,7 +382,7 @@ void TEDemo::saveYourself()
 
 void TEDemo::saveProperties(KConfig* config)
 {
-  config->setGroup("options");
+  config->setGroup("options"); // bad! will no allow us to support multi windows
   config->writeEntry("menubar visible",b_menuvis);
   config->writeEntry("has frame",b_framevis);
   config->writeEntry("BS hack",b_bshack);
@@ -402,7 +398,7 @@ void TEDemo::saveProperties(KConfig* config)
 void TEDemo::readProperties(KConfig* config)
 {
   QSize dftSize(80,25);
-  config->setGroup("options");
+  config->setGroup("options"); // bad! will no allow us to support multi windows
   b_menuvis  = config->readBoolEntry("menubar visible",TRUE);
   b_framevis = config->readBoolEntry("has frame",TRUE);
   b_bshack   = config->readBoolEntry("BS hack",TRUE);
