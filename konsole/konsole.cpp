@@ -390,7 +390,7 @@ void Konsole::makeGUI()
    m_clearHistory->setEnabled( se->history().isOn() );
    m_clearHistory->plug(m_edit);
 
-   KAction *clearAllSessionHistories = new KAction(i18n("Clear all H&istories"), "history_clear", 0,
+   KAction *clearAllSessionHistories = new KAction(i18n("Clear All H&istories"), "history_clear", 0,
      this, SLOT(slotClearAllSessionHistories()), this);
    clearAllSessionHistories->plug(m_edit);
 
@@ -408,7 +408,7 @@ void Konsole::makeGUI()
                                      SLOT( slotToggleMonitor() ), this );
    monitorSilence->plug ( m_view );
 
-   masterMode = new KToggleAction ( i18n( "Send &Input to all Sessions" ), "remote", 0, this,
+   masterMode = new KToggleAction ( i18n( "Send &Input to All Sessions" ), "remote", 0, this,
                                      SLOT( slotToggleMasterMode() ), this );
    masterMode->plug ( m_view );
 
