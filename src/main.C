@@ -234,6 +234,7 @@ int main(int argc, char* argv[])
         Konsole *m = new Konsole(wname,shell,eargs,histon,toolbaron,title);
         m->restore(n);
         ksm->konsole = m;
+        ksm->konsole->initFullScreen();
         // works only for the first one, but there won't be more.
         n++;
     }
