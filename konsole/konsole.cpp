@@ -681,7 +681,8 @@ void Konsole::makeGUI()
    {
       KeyTrans* ktr = KeyTrans::find(i);
       assert( ktr );
-      m_keytab->insertItem(ktr->hdr(),ktr->numb());
+      QString title=ktr->hdr();
+      m_keytab->insertItem(title.replace(QRegExp("^&|([^&])&"),"\\1&&"),ktr->numb());
    }
    applySettingsToGUI();
    isRestored = false;
@@ -1310,7 +1311,8 @@ void Konsole::updateSchemaMenu()
   {
      ColorSchema* s = (ColorSchema*)colors->at(i);
     assert( s );
-    m_schema->insertItem(s->title(),s->numb(),0);
+    QString title=s->title();
+    m_schema->insertItem(title.replace(QRegExp("^&|([^&])&"),"\\1&&"),s->numb(),0);
   }
 
   if (te && se)
@@ -2399,11 +2401,11 @@ void Konsole::addSessionCommand(const QString &path)
   }
 
   QString icon = co->readEntry("Icon", "openterm");
-  insertItemSorted(m_toolbarSessionsCommands, SmallIconSet( icon ), txt, ++cmd_serial );
+  insertItemSorted(m_toolbarSessionsCommands, SmallIconSet( icon ), txt.replace(QRegExp("^&|([^&])&"),"\\1&&"), ++cmd_serial );
   QString comment = co->readEntry("Comment");
   if (comment.isEmpty())
     comment=txt.prepend(i18n("New "));
-  insertItemSorted( m_session, SmallIconSet( icon ), comment, cmd_serial );
+  insertItemSorted( m_session, SmallIconSet( icon ), comment.replace(QRegExp("^&|([^&])&"),"\\1&&"), cmd_serial );
   no2command.insert(cmd_serial,co);
 
   int j = filename.findRev('/');
