@@ -96,7 +96,10 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
 
 void TESession::ptyError()
 {
-  KMessageBox::error(te->topLevelWidget(), sh->error());
+  if ( sh->error().isEmpty() )
+    KMessageBox::error(te->topLevelWidget(), i18n("Unable to allocate a pseudo teletype!"));
+  else
+    KMessageBox::error(te->topLevelWidget(), sh->error());
   emit done(this);
 }
 
@@ -130,9 +133,15 @@ void TESession::run()
   if (!initial_cwd.isEmpty())
      QDir::setCurrent(initial_cwd);
   sh->setXonXoff(xon_xoff);
-  sh->run(QFile::encodeName(pgm), args, term.latin1(), winId, add_to_utmp,
+
+  int result = sh->run(QFile::encodeName(pgm), args, term.latin1(), 
+          winId, add_to_utmp,
           ("DCOPRef("+appId+",konsole)").latin1(),
           ("DCOPRef("+appId+","+sessionId+")").latin1());
+  if (result < 0) {     // Error in creating pseudo teletype
+    kdWarning()<<"Unable to allocate a pseudo teletype!"<<endl;
+    QTimer::singleShot(0, this, SLOT(ptyError()));
+  }
   if (!initial_cwd.isEmpty())
      QDir::setCurrent(cwd_save);
   else

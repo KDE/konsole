@@ -122,7 +122,7 @@ int TEPty::run(const char* _pgm, QStrList & _args, const char* _term, ulong wini
 
   setUsePty(All, _addutmp);
 
-  if (!start(NotifyOnExit, (Communication) (Stdin | Stdout)))
+  if ( start(NotifyOnExit, (Communication) (Stdin | Stdout)) == false )
      return -1;
 
   resume(); // Start...
