@@ -1191,6 +1191,7 @@ void Konsole::allowPrevNext()
 {
   QObject::connect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
   QObject::connect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
+  QObject::connect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
 }
 
 void Konsole::newSession()

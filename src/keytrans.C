@@ -476,6 +476,7 @@ void KeyTransSymbols::defOprSyms()
   defOprSym("emitSelection", CMD_emitSelection );
   defOprSym("prevSession",   CMD_prevSession   );
   defOprSym("nextSession",   CMD_nextSession   );
+  defOprSym("newSession",    CMD_newSession    );
 }
 
 void KeyTransSymbols::defModSyms()

@@ -62,6 +62,7 @@ signals:
   void changeTitle(int,const QString&);
   void prevSession();
   void nextSession();
+  void newSession();
 
 public:
 
