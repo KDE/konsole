@@ -196,6 +196,7 @@ Konsole::Konsole(const char* name, const QString& _program,
 ,selectSize(0)
 ,selectFont(0)
 ,selectScrollbar(0)
+,selectBell(0)
 ,clearHistory(0)
 ,warnQuit(0)
 ,cmd_serial(0)
@@ -427,6 +428,16 @@ void Konsole::makeGUI()
       << i18n("80x52 (IBM V&GA)");
    selectSize->setItems(sizeitems);
    selectSize->plug(m_options);
+
+   // Select Bell
+   selectBell = new KSelectAction(i18n("Bell"), 0 , this,
+                                  SLOT(slotSelectBell()), this);
+   QStringList bellitems;
+   bellitems << i18n("&None")
+             << i18n("&System Notification")
+             << i18n("&Visible Bell");
+   selectBell->setItems(bellitems);
+   selectBell->plug(m_options);
 
    // Select font
    selectFont = new KonsoleFontSelectAction( i18n( "Font" ),
@@ -758,6 +769,7 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("schema",s_kconfigSchema);
   config->writeEntry("wordseps",s_word_seps);
   config->writeEntry("scrollbar",n_scroll);
+  config->writeEntry("bellmode",n_bell);
   config->writeEntry("keytab",n_keytab);
   config->writeEntry("WarnQuit", b_warnQuit);
 
@@ -792,6 +804,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    b_fullscreen = config->readBoolEntry("Fullscreen",FALSE);
    n_defaultFont = n_font = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
    n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
+   n_bell = QMIN(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),2);
    s_word_seps= config->readEntry("wordseps",":@-./_~");
    b_framevis = config->readBoolEntry("has frame",TRUE);
 
@@ -833,6 +846,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    //KONSOLEDEBUG << "Doing the rest" << endl;
 
    te->setScrollbarLocation(n_scroll);
+   te->setBellMode(n_bell);
    te->setWordCharacters(s_word_seps);
    te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
    te->setColorTable(sch->table());
@@ -864,6 +878,7 @@ void Konsole::applySettingsToGUI()
    showToolbar->setChecked(!toolBar()->isHidden());
    showMenubar->setChecked(!menuBar()->isHidden());
    selectScrollbar->setCurrentItem(n_scroll);
+   selectBell->setCurrentItem(n_bell);
 };
 
 
@@ -914,6 +929,11 @@ void Konsole::pixmap_menu_activated(int item)
     default: // oops
              n_render = 1;
   }
+}
+
+void Konsole::slotSelectBell() {
+  n_bell = selectBell->currentItem();
+  te->setBellMode(n_bell);
 }
 
 void Konsole::slotSelectScrollbar() {

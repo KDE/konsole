@@ -275,6 +275,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,preserve_line_breaks(true)
 ,scrollLoc(SCRNONE)
 ,word_characters(":@-./_~")
+,bellMode(BELLSYSTEM)
 ,blinking(false)
 ,m_drop(0)
 ,currentSession(0)
@@ -1008,9 +1009,27 @@ void TEWidget::frameChanged()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
+void TEWidget::setBellMode(int mode)
+{
+  bellMode=mode;
+}
+
 void TEWidget::Bell()
 {
-  KNotifyClient::beep();
+  if (bellMode==BELLSYSTEM)
+    KNotifyClient::beep();
+  if (bellMode==BELLVISUAL) {
+    swapColorTable();
+    QTimer::singleShot(200,this,SLOT(swapColorTable()));
+  }
+}
+
+void TEWidget::swapColorTable()
+{
+  ColorEntry color = color_table[1];
+  color_table[1]=color_table[0];
+  color_table[0]= color;
+  update();
 }
 
 /* ------------------------------------------------------------------------- */

@@ -113,6 +113,7 @@ private slots:
   void slotHistoryType();
   void slotClearHistory();
   void slotWordSeps();
+  void slotSelectBell();
   void slotSelectSize();
   void slotSelectFont();
   void slotSelectScrollbar();
@@ -172,6 +173,7 @@ private:
   KSelectAction *selectSize;
   KSelectAction *selectFont;
   KSelectAction *selectScrollbar;
+  KSelectAction *selectBell;
 
   KAction       *clearHistory;
 
@@ -184,6 +186,7 @@ private:
   int         n_font;
   int         n_defaultFont; // font as set in config to use as default for new sessions
   int         n_scroll;
+  int         n_bell;
   int         n_render;
   int         curr_schema; // current schema no
   QString     s_schema;

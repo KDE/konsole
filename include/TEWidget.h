@@ -66,7 +66,10 @@ public:
 
     void setWordCharacters(QString wc);
 
+    void setBellMode(int mode);
+    enum { BELLNONE=0, BELLSYSTEM=1, BELLVISUAL=2 };
     void Bell();
+
     void setSelection(const QString &t);
 
     virtual void setFont(const QFont &);
@@ -163,10 +166,7 @@ private:
     QScrollBar* scrollbar;
     int         scrollLoc;
     QString     word_characters;
-
-//#define SCRNONE  0
-//#define SCRLEFT  1
-//#define SCRRIGHT 2
+    int         bellMode;
 
     bool blinking;   // hide text in paintEvent
     bool hasBlinker; // has characters to blink
@@ -178,6 +178,7 @@ private:
     TESession *currentSession;
 private slots:
     void drop_menu_activated(int item);
+    void swapColorTable();
 };
 
 #endif // TE_WIDGET_H
