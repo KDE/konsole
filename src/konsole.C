@@ -425,19 +425,16 @@ QSize Konsole::calcSize(int columns, int lines) {
     if (!toolBar()->isHidden()) {
  	if ((toolBar()->barPos()==KToolBar::Top) ||
 	    (toolBar()->barPos()==KToolBar::Bottom)) {
-            int height = toolBar()->size().height();
-            // The height of the toolbar is 1 during startup.
-            if (height == 1)
-               height = n_toolbarheight;
+            int height = toolBar()->sizeHint().height();
 	    size += QSize(0, height);
 	}
 	if ((toolBar()->barPos()==KToolBar::Left) ||
 	    (toolBar()->barPos()==KToolBar::Right)) {
-	    size += QSize(toolBar()->size().width(), 0);
+	    size += QSize(toolBar()->sizeHint().width(), 0);
 	}
     }
     if (!menuBar()->isHidden()) {
-	size += QSize(0,menuBar()->size().height());
+	size += QSize(0,menuBar()->sizeHint().height());
     }
     return size;
 }
@@ -498,9 +495,6 @@ void Konsole::readGlobalProperties(KConfig* config)
 
 void Konsole::saveProperties(KConfig* config)
 {
-  n_toolbarheight = toolBar()->size().height();
-  // bad! will no allow us to support multi windows
-  config->writeEntry("toolbar height", n_toolbarheight);
   config->writeEntry("history",b_scroll);
   config->writeEntry("has frame",b_framevis);
   config->writeEntry("Fullscreen",b_fullscreen);
@@ -521,8 +515,6 @@ void Konsole::saveProperties(KConfig* config)
 void Konsole::readProperties(KConfig* config)
 {
 /*FIXME: (merging) state of material below unclear.*/
-  n_toolbarheight = config->readNumEntry("toolbar height",32); // Hack on hack...
-
   b_scroll = config->readBoolEntry("history",TRUE);
   setHistory(b_scroll);
 

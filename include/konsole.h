@@ -134,7 +134,6 @@ private:
   KPopupMenu* m_toolbarSessionsCommands;
 
   KToggleAction *showToolbar;
-  int         n_toolbarheight;
   KToggleAction *showMenubar;
   KToggleAction *showScrollbar;
   bool        b_scroll;
