@@ -41,6 +41,7 @@ public:
     TEWidget(QWidget *parent=0, const char *name=0);
     virtual ~TEWidget();
 
+    void setDefaultBackColor(const QColor& color);
     QColor getDefaultBackColor();
 
     const ColorEntry* getColorTable() const;
@@ -219,6 +220,7 @@ private:
     QBitArray m_line_wrapped;
 
     ColorEntry color_table[TABLE_COLORS];
+    QColor defaultBgColor;
 
     bool resizing;
     bool terminalSizeHint,terminalSizeStartup;

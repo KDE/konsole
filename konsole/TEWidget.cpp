@@ -136,8 +136,17 @@ static const ColorEntry base_color_table[TABLE_COLORS] =
    IBMPC (rgb) Black   Blue    Green   Cyan    Red     Magenta Yellow  White
 */
 
+void TEWidget::setDefaultBackColor(const QColor& color)
+{
+  defaultBgColor = color;
+  if (!backgroundPixmap())
+    setBackgroundColor(getDefaultBackColor());
+}
+
 QColor TEWidget::getDefaultBackColor()
 {
+  if (defaultBgColor.isValid())
+    return defaultBgColor;
   return color_table[DEFAULT_BACK_COLOR].color;
 }
 
@@ -150,7 +159,7 @@ void TEWidget::setColorTable(const ColorEntry table[])
 {
   for (int i = 0; i < TABLE_COLORS; i++) color_table[i] = table[i];
   const QPixmap* pm = backgroundPixmap();
-  if (!pm) setBackgroundColor(color_table[DEFAULT_BACK_COLOR].color);
+  if (!pm) setBackgroundColor(getDefaultBackColor());
   update();
 }
 

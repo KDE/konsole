@@ -109,6 +109,8 @@ void TESession::changeWidget(TEWidget* w)
   font_w = te->fontWidth();
   sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
 
+  te->setDefaultBackColor(modifiedBackground);
+
   QObject::connect(te,SIGNAL(changedContentSizeSignal(int,int)),
                    this,SLOT(onContentSizeChange(int,int)));
   QObject::connect(te,SIGNAL(changedFontMetricSignal(int,int)),
@@ -149,9 +151,7 @@ void TESession::setUserTitle( int what, const QString &caption )
       if (backColor.isValid()){// change color via \033]11;Color\007
 	if (backColor != modifiedBackground) {
 	    modifiedBackground = backColor;
-	    const QPixmap* pm = te->backgroundPixmap();
-	    if (!pm) te->setBackgroundColor(backColor);
-	    te->update();
+	    te->setDefaultBackColor(backColor);
 	}
       }
     }
