@@ -38,7 +38,7 @@ key Return+Shift     : "\EOM"
 
 # Backspace and Delete codes are preserving CTRL-H.
 
-key Backspace      : "\b"
+key Backspace      : "\x7f"
 
 # cursor keys
 
@@ -51,10 +51,10 @@ key Left  -Shift   : "\EOD"
 
 key Enter          : "\r"
 
-key Home  -Shift   : "\EOH"
+key Home  -Shift   : "\E[1~"
 key Insert-Shift   : "\E[2~"
 key Delete-Shift   : "\E[3~"
-key End   -Shift   : "\EOF"
+key End   -Shift   : "\E[4~"
 key Prior -Shift   : "\E[5~"
 key Next  -Shift   : "\E[6~"
 
@@ -72,18 +72,14 @@ key F9    -Shift   : "\E[20~"
 key F10   -Shift   : "\E[21~"
 key F11   -Shift   : "\E[23~"
 key F12   -Shift   : "\E[24~"
-key F1    +Shift   : "\EO2P"
-key F2    +Shift   : "\EO2Q"
-key F3    +Shift   : "\EO2R"
-key F4    +Shift   : "\EO2S"
-key F5    +Shift   : "\E[15;2~"
-key F6    +Shift   : "\E[17;2~"
-key F7    +Shift   : "\E[18;2~"
-key F8    +Shift   : "\E[19;2~"
-key F9    +Shift   : "\E[20;2~"
-key F10   +Shift   : "\E[21;2~"
-key F11   +Shift   : "\E[23;2~"
-key F12   +Shift   : "\E[24;2~"
+key F1    +Shift   : "\E[25~"
+key F2    +Shift   : "\E[26~"
+key F3    +Shift   : "\E[28~"
+key F4    +Shift   : "\E[29~"
+key F5    +Shift   : "\E[31~"
+key F6    +Shift   : "\E[32~"
+key F7    +Shift   : "\E[33~"
+key F8    +Shift   : "\E[34~"
 
 # Work around dead keys
 
