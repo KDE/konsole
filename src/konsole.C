@@ -90,12 +90,6 @@
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
-/*
-#undef PACKAGE
-#undef VERSION
-#define PACKAGE "konsole"
-#define VERSION "0.9.12"
-*/
 
 
 template class QPtrDict<TESession>;
@@ -149,7 +143,8 @@ Konsole::Konsole(const QString& name,
 
   // Init DnD ////////////////////////////////////////////////////////////////
 
-  setAcceptDrops(true);
+  //  setAcceptDrops(true);
+  // FIXME: Now it is in TEWidget. Clean this up
 
   // load session commands ///////////////////////////////////////////////////
 
@@ -341,13 +336,16 @@ void Konsole::makeMenu()
   QPopupMenu* m_help =  helpMenu(aboutAuthor, false);
   m_help->insertItem( i18n("&Technical Reference ..."), this, SLOT(tecRef()),
                       0, -1, 1);
+  /*
   // Popup menu for drag & drop
   m_drop = new QPopupMenu;
   m_drop->insertItem( i18n("Paste"), 0);
   m_drop->insertItem( i18n("cd"),    1);
   connect(m_drop, SIGNAL(activated(int)), SLOT(drop_menu_activated(int)));
+  */
 
   m_options->installEventFilter( this );
+
 
   // For those who would like to add shortcuts here, be aware that
   // ALT-key combinations are heavily used by many programs. Thus,
@@ -872,15 +870,12 @@ void Konsole::activateSession()
   if (!s) { fprintf(stderr,"session not found\n"); return; } // oops
   if (s->schemaNo()!=curr_schema)
   {
-    setSchema(s->schemaNo());             //FIXME: creates flicker? Do only if differs
+    setSchema(s->schemaNo()); 
     //Set Font. Now setConnect should do the appropriate action.
     //if the size has changed, a resize event (noticable to the application)
     //should happen. Else, we  could even start the application
-    s->setConnect(TRUE);                  // does a bulkShow (setImage)
-    setFont(s->fontNo());                 //FIXME: creates flicker?
-                                          //FIXME: check here if we're still alife.
-                                          //       if not, quit, otherwise,
-                                          //       start propagating quit.
+    s->setConnect(TRUE);     // does a bulkShow (setImage)
+    setFont(s->fontNo());    //FIXME: creates flicker?
     title = s->Title(); // take title from current session
   }
   else
@@ -894,6 +889,7 @@ void Konsole::activateSession()
     s->setConnect(TRUE);
   }
   setHeader();
+  te->currentSession = se;
   keytab_menu_activated(n_keytab); // act. the keytab for this session
 }
 

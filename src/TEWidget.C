@@ -44,10 +44,12 @@
 
 #include "config.h"
 #include "TEWidget.h"
+#include "session.h"
 
 #include <qpainter.h>
 #include <qclipboard.h>
 #include <qstyle.h>
+#include <qdragobject.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -58,6 +60,9 @@
 
 #include "TEWidget.moc"
 #include <kapp.h>
+#include <kurl.h>
+#include <kdebug.h>
+#include <klocale.h>
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 #define HCNT(Name) // { static int cnt = 1; printf("%s(%d): %s %d\n",__FILE__,__LINE__,Name,cnt++); }
@@ -265,6 +270,15 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   setColorTable(base_color_table); // init color table
 
   qApp->installEventFilter( this ); //FIXME: see below
+
+  // Init DnD ////////////////////////////////////////////////////////////////
+  currentSession = NULL;
+  setAcceptDrops(true); // attempt
+  m_drop = new QPopupMenu;
+  m_drop->insertItem( i18n("Paste"), 0);
+  m_drop->insertItem( i18n("cd"),    1);
+  connect(m_drop, SIGNAL(activated(int)), SLOT(drop_menu_activated(int)));
+
 }
 
 //FIXME: make proper destructor
@@ -1000,3 +1014,88 @@ void TEWidget::styleChange(QStyle &)
 {
     propagateSize();
 }
+
+
+/* --------------------------------------------------------------------- */
+/*                                                                       */
+/* Drag & Drop                                                           */
+/*                                                                       */
+/* --------------------------------------------------------------------- */
+
+void TEWidget::dragEnterEvent(QDragEnterEvent* e)
+{
+  e->accept(QTextDrag::canDecode(e) ||
+      QUriDrag::canDecode(e));
+}
+
+void TEWidget::dropEvent(QDropEvent* event)
+{
+    // The current behaviour when url(s) are dropped is
+    // * if there is only ONE url and if it's a LOCAL one, ask for paste or cd
+    // * in all other cases, just paste
+    //   (for non-local ones, or for a list of URLs, 'cd' is nonsense)
+  QStrList strlist;
+  KURL *url;
+  int file_count = 0;
+  dropText = "";
+  bool bPopup = true;
+
+  if(QUriDrag::decode(event, strlist)) {
+    if (strlist.count()) {
+      for(const char* p = strlist.first(); p; p = strlist.next()) {
+        if(file_count++ > 0) {
+          dropText += " ";
+          bPopup = false; // more than one file, don't popup
+        }
+        url = new KURL( QString(p) );
+        if (url->isLocalFile()) {
+          dropText += url->path(); // local URL : remove protocol
+        }
+        else {
+          dropText += p;
+          bPopup = false; // a non-local file, don't popup
+        }
+        delete url;
+        p = strlist.next();
+      }
+      
+      if (bPopup)
+        // m_drop->popup(pos() + event->pos());
+	m_drop->popup(mapToGlobal(event->pos()));
+      else 
+	{
+	  if (currentSession) {
+	    currentSession->getEmulation()->sendString(dropText.latin1());
+	  }
+	  kdDebug() << "Drop:" << dropText.latin1() << "\n";
+	}
+    }
+  }
+  else if(QTextDrag::decode(event, dropText)) {
+    kdDebug() << "Drop:" << dropText.latin1() << "\n";
+    if (currentSession) {
+      currentSession->getEmulation()->sendString(dropText.latin1());
+    }
+    // Paste it
+  }
+}
+
+
+void TEWidget::drop_menu_activated(int item)
+{
+  switch (item)
+  {
+    case 0: // paste
+      currentSession->getEmulation()->sendString(dropText);
+//    KWM::activate((Window)this->winId());
+      break;
+    case 1: // cd ...
+      currentSession->getEmulation()->sendString("cd ");
+      KURL url( dropText );
+      currentSession->getEmulation()->sendString(url.directory());
+      currentSession->getEmulation()->sendString("\n");
+//    KWM::activate((Window)this->winId());
+      break;
+  }
+}
+

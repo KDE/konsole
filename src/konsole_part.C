@@ -98,18 +98,7 @@ konsolePart::konsolePart(QWidget *parent, const char *name)
 
   m_extension = new konsoleBrowserExtension(this);
 
-  //bool login_shell = false;
-  //bool welcome = true;
-  //bool histon = true;
-  //const char* wname = PACKAGE;
-
-  //  QCString sz = "";
-  //sz = args->getOption("vt_sz");
-  //histon = args->isSet("hist");
-  //wname = args->getOption("name");
-  //login_shell = args->isSet("ls");
   QStrList eargs;
-  //  welcome = args->isSet("welcome");
 
   const char* shell = getenv("SHELL");
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
@@ -125,8 +114,8 @@ konsolePart::konsolePart(QWidget *parent, const char *name)
   //  initial->run();
   initial->setConnect(TRUE);
   QTimer::singleShot(0/*100*/,initial,SLOT(run()));
-
   initial->getEmulation()->setKeytrans(0);
+  te->currentSession = initial;
 
   // setXMLFile("konsole_part.rc");
 

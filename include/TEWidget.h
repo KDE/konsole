@@ -1,14 +1,14 @@
-/* -------------------------------------------------------------------------- */
-/*                                                                            */
-/* [te_widget.h]           Terminal Emulation Widget                          */
-/*                                                                            */
-/* -------------------------------------------------------------------------- */
-/*                                                                            */
-/* Copyright (c) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>            */
-/*                                                                            */
-/* This file is part of Konsole - an X terminal for KDE                       */
-/*                                                                            */
-/* -------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------- */
+/*                                                                         */
+/* [te_widget.h]           Terminal Emulation Widget                       */
+/*                                                                         */
+/* ----------------------------------------------------------------------- */
+/*                                                                         */
+/* Copyright (c) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>         */
+/*                                                                         */
+/* This file is part of Konsole - an X terminal for KDE                    */
+/*                                                                         */
+/* ----------------------------------------------------------------------- */
 
 #ifndef TE_WIDGET_H
 #define TE_WIDGET_H
@@ -23,6 +23,8 @@
 #include "TECommon.h"
 
 extern unsigned short vt100_graphics[32];
+
+class TESession;
 
 class TEWidget : public QFrame
 // a widget representing attributed text
@@ -98,6 +100,10 @@ protected:
     void mousePressEvent( QMouseEvent* );
     void mouseReleaseEvent( QMouseEvent* );
     void mouseMoveEvent( QMouseEvent* );
+    // Dnd
+    void dragEnterEvent(QDragEnterEvent* event);
+    void dropEvent(QDropEvent* event);
+
 
     virtual int charClass(char) const;
 
@@ -161,6 +167,13 @@ private:
     BOOL blinking;   // hide text in paintEvent
     BOOL hasBlinker; // has characters to blink
     QTimer* blinkT;  // active when hasBlinker
+    QPopupMenu* m_drop;
+    QString dropText;
+ public:
+    // current session in this widget
+    TESession *currentSession;
+private slots:
+    void drop_menu_activated(int item);
 };
 
 #endif // TE_WIDGET_H
