@@ -3,3 +3,4 @@ CONTRIBUTORS
 - Dale M. Flaven <dflaven@netport.com> (bugfixing)
 - Matthias Ettrich <ettrich@kde.org> (rework of the session management
   and command line argument handling in main.C)
+- Kevin Street <street@iname.com> (FreeBSD port)

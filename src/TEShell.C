@@ -101,15 +101,21 @@ void Shell::makeShell(const char* dev, char* argv[], const char* term)
   dup2(tt,fileno(stdin));
   dup2(tt,fileno(stdout));
   dup2(tt,fileno(stderr));
+  
+  if (tt > 2) close(tt);
+  
+  if (setsid() < 0) perror("failed to set process group"); // (vital for bash)
 
-  setsid();                            // set process group (vital for bash)
+#if defined(TIOCSCTTY)  
+  ioctl(0, TIOCSCTTY, 0);
+#endif  
 
   int pgrp = getpid();                 // This sequence is necessary for
-  ioctl(tt, TIOCSPGRP, (char *)&pgrp); // event propagation. Omitting this
-  setpgid(tt,0);                       // is not noticeable with all
+  ioctl(0, TIOCSPGRP, (char *)&pgrp);  // event propagation. Omitting this
+  setpgid(0,0);                        // is not noticeable with all
   close(open(dev, O_WRONLY, 0));       // clients (bash,vi). Because bash
-  setpgid(tt,0);                       // heals this, use '-e' to test it.
-
+  setpgid(0,0);                        // heals this, use '-e' to test it.
+  
   setuid(getuid()); setgid(getgid());  // drop privileges
 
   if (term && term[0])
