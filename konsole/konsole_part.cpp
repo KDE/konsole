@@ -278,12 +278,12 @@ void konsolePart::makeGUI()
 {
   // Send Signal Menu -------------------------------------------------------------
   m_signals = new KPopupMenu((KMainWindow*)parentWidget);
-  m_signals->insertItem( i18n( "&Suspend Task" )   + " (STOP)", 17);     // FIXME: comes with 3 values
-  m_signals->insertItem( i18n( "&Continue Task" )  + " (CONT)", 18);     // FIXME: comes with 3 values
-  m_signals->insertItem( i18n( "&Hangup" )         + " (HUP)",   1);
-  m_signals->insertItem( i18n( "&Interrupt Task" ) + " (INT)",   2);
-  m_signals->insertItem( i18n( "&Terminate Task" ) + " (TERM)", 15);
-  m_signals->insertItem( i18n( "&Kill Task" )      + " (KILL)",  9);
+  m_signals->insertItem( i18n( "&Suspend Task" )   + " (STOP)", SIGSTOP);
+  m_signals->insertItem( i18n( "&Continue Task" )  + " (CONT)", SIGCONT);
+  m_signals->insertItem( i18n( "&Hangup" )         + " (HUP)",   SIGHUP);
+  m_signals->insertItem( i18n( "&Interrupt Task" ) + " (INT)",   SIGINT);
+  m_signals->insertItem( i18n( "&Terminate Task" ) + " (TERM)", SIGTERM);
+  m_signals->insertItem( i18n( "&Kill Task" )      + " (KILL)",  SIGKILL);
   connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
 
   // Settings Menu ----------------------------------------------------------------
