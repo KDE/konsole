@@ -130,10 +130,10 @@ QColor(0xFF,0xFF,0xFF), 0, 0 )
 
 ColorSchema::ColorSchema(const QString& pathname)
 :m_fileRead(false)
-,fPath(pathname)
 ,lastRead(new QDateTime())
 {
-	if (pathname.isNull() || !QFile::exists(pathname))
+    fPath = locate("appdata", pathname);
+	if (fPath.isNull() || !QFile::exists(fPath))
 	{
 		fPath = QString::null;
 		setDefaultSchema();

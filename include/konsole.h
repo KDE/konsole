@@ -45,7 +45,8 @@ class Konsole : public KMainWindow
     friend class KonsoleSessionManaged;
 public:
 
-  Konsole(const char * name, const char* pgm, QStrList & _args, int histon, bool, QCString mytitle);
+  Konsole(const char * name, const char* pgm, QStrList & _args,
+    int histon, bool, QCString mytitle, QCString type = 0);
   ~Konsole();
   void setColLin(int columns, int lines);
   void setFullScreen(bool on);
@@ -99,7 +100,8 @@ private slots:
   void makeGUI();
 
 private:
-
+  TESession *newSession(KSimpleConfig *co);
+  void readProperties(KConfig *config, const QString &schema);
   void applySettingsToGUI();
   void makeBasicGUI();
   void runSession(TESession* s);

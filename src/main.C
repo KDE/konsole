@@ -40,6 +40,7 @@ static KCmdLineOptions options[] =
    { "nohist",          I18N_NOOP("Do not save lines in scroll-back buffer"), 0 },
    { "notoolbar",       I18N_NOOP("Do not display toolbar"), 0 },
    { "vt_sz CCxLL",  I18N_NOOP("Terminal size in columns x lines"), 0 },
+   { "type <type>", I18N_NOOP("Open the given session type instead of the default shell"), 0 },
    { "!e <command>",  I18N_NOOP("Execute 'command' instead of shell"), 0 },
    // WABA: All options after -e are treated as arguments.
    { "+[args]",    I18N_NOOP("Arguments for 'command'"), 0 },
@@ -175,6 +176,7 @@ int main(int argc, char* argv[])
   login_shell = args->isSet("ls");
   welcome = args->isSet("welcome");
   QCString title;
+  QCString type = args->getOption("type");
   //QCString title=args->getOption("title");
 
   //FIXME: more: font, menu, scrollbar, schema, session ...
@@ -226,7 +228,7 @@ int main(int argc, char* argv[])
   else
   {
     //2.1 sec
-    Konsole*  m = new Konsole(wname,shell,eargs,histon,toolbaron,title);
+    Konsole*  m = new Konsole(wname,shell,eargs,histon,toolbaron,title,type);
     //2.5 sec
     ksm->konsole = m;
     m->setColLin(c,l); // will use default height and width if called with (0,0)

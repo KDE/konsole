@@ -154,7 +154,8 @@ const char *fonts[] = {
 #include <qdatetime.h>
 
 Konsole::Konsole(const char* name, const char* _pgm,
-                 QStrList & _args, int histon, bool toolbaron, QCString mytitle)
+                 QStrList & _args, int histon, bool toolbaron,
+                 QCString mytitle, QCString type)
 :KMainWindow(0, name)
 ,te(0)
 ,se(0)
@@ -226,22 +227,8 @@ Konsole::Konsole(const char* name, const char* _pgm,
 
   colors = new ColorSchemaList();
 
-  // construct initial session ///////////////////////////////////////////////
-  //FIXME: call newSession here, somehow, instead the stuff below.
-  // Please do it ! It forces to duplicate code... (David)
-
   KeyTrans::loadAll();
   //kdDebug()<<"Konsole ctor() after KeyTrans::loadAll() "<<time.elapsed()<<" msecs elapsed"<<endl;
-
-  //kdDebug()<<"Konsole ctor(): new TESession()"<<endl;
-  m_initialSession = new TESession(this,te,pgm,args,"xterm");
-  //kdDebug()<<"Konsole ctor() after new Session() "<<time.elapsed()<<" msecs elapsed"<<endl;
-
-  connect( m_initialSession,SIGNAL(done(TESession*,int)),
-           this,SLOT(doneSession(TESession*,int)) );
-  connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
-           this, SLOT(configureRequest(TEWidget*,int,int,int)) );
-
   if (mytitle.isEmpty())
   {
      title = (args.count() && (kapp->caption() == PACKAGE))
@@ -249,10 +236,6 @@ Konsole::Konsole(const char* name, const char* _pgm,
         : kapp->caption();  // `konsole' or -caption
   }
   else title=mytitle;
-  m_initialSession->setTitle(title);
-  se = m_initialSession;
-
-  addSession(m_initialSession);
 
   // read and apply default values ///////////////////////////////////////////
   resize(321, 321); // Dummy.
@@ -262,16 +245,25 @@ Konsole::Konsole(const char* name, const char* _pgm,
   applyMainWindowSettings(config);
   if (currentSize != size())
      defaultSize = size();
-  config->setGroup("options");
   //kdDebug()<<"Konsole ctor(): readProps()"<<endl;
-  readProperties(config);
+  QString schema;
+  KSimpleConfig *co = type.isEmpty() ?
+     0 : new KSimpleConfig(locate("appdata", type + ".desktop"), true /* read only */);
+  if (co)
+  {
+      co->setDesktopGroup();
+      schema = co->readEntry("Schema");
+  }
+  readProperties(config, schema);
   //kdDebug()<<"Konsole ctor() after readProps "<<time.elapsed()<<" msecs elapsed"<<endl;
   //kdDebug()<<"Konsole ctor(): toolbar"<<endl;
   if (!toolbaron)
     toolBar()->hide();
 
   // activate and run first session //////////////////////////////////////////
-
+  // FIXME: this slows it down if --type is given, but prevents a crash (malte)
+  se = newSession(co);
+  delete co;
   //kdDebug()<<"Konsole ctor(): runSession()"<<endl;
   te->currentSession = se;
   se->setConnect(TRUE);
@@ -279,9 +271,6 @@ Konsole::Konsole(const char* name, const char* _pgm,
   setHeader();
   se->setKeymapNo(n_keytab); // act. the keytab for this session
 
-  // give some time to get through the
-  // resize events before starting up.
-  QTimer::singleShot(80,se,SLOT(run()));
   //QTimer::singleShot(1,this,SLOT(allowPrevNext())); // hack, hack, hack
   //seems to work, aleXXX
   connect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
@@ -336,7 +325,8 @@ void Konsole::makeGUI()
                                         SLOT(slotRenameSession()), this);
    renameSession->plug(m_sessions);
    m_sessions->insertSeparator();
-   KRadioAction *ra = session2action.find(m_initialSession);
+//   KRadioAction *ra = session2action.find(m_initialSession);
+   KRadioAction *ra = session2action.find(se);
    if (ra!=0) ra->plug(m_sessions);
 
 
@@ -494,7 +484,8 @@ void Konsole::makeGUI()
       m_schema->setItemChecked(i,false);
 
    m_schema->setItemChecked(curr_schema,true);
-   m_initialSession->setSchemaNo(curr_schema);
+//   m_initialSession->setSchemaNo(curr_schema);
+   se->setSchemaNo(curr_schema);
 
    // insert keymaps into menu
    //FIXME: sort
@@ -682,6 +673,13 @@ void Konsole::saveProperties(KConfig* config) {
 // So it has to apply the settings when reading them.
 void Konsole::readProperties(KConfig* config)
 {
+    readProperties(config, QString::null);
+}
+
+// If --type option was given, load the corresponding schema instead of
+// default
+void Konsole::readProperties(KConfig* config, const QString &schema)
+{
    kdDebug()<<"Konsole::readProps()"<<endl;
    /*FIXME: (merging) state of material below unclear.*/
    b_scroll = config->readBoolEntry("history",TRUE);
@@ -704,7 +702,7 @@ void Konsole::readProperties(KConfig* config)
 
    //set the schema
    s_kconfigSchema=config->readEntry("schema", "");
-   ColorSchema* sch = colors->find(s_kconfigSchema);
+   ColorSchema* sch = colors->find(schema.isEmpty() ? s_kconfigSchema : schema);
    if (!sch)
    {
       kdWarning() << "Could not find schema named " <<s_kconfigSchema<< endl;
@@ -736,11 +734,6 @@ void Konsole::readProperties(KConfig* config)
    te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
    te->setColorTable(sch->table());
 
-   if (se)
-   {
-      se->setSchemaNo(colors->findAny(s_schema)->numb());
-      se->setHistory(b_scroll);
-   }
    if (m_menuCreated)
    {
       applySettingsToGUI();
@@ -1222,35 +1215,32 @@ void Konsole::newSession()
 
 void Konsole::newSession(int i)
 {
-  //kdDebug()<<"Konsole::newSession()"<<endl;
-  if (!m_menuCreated) makeGUI();
+  KSimpleConfig* co = no2command.find(i);
+  if (co) newSession(co);
+}
+
+TESession *Konsole::newSession(KSimpleConfig *co)
+{
   const char* shell = getenv("SHELL");
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
 
-  KSimpleConfig* co = no2command.find(i);
-  if (!co) return; // oops
-
-  assert( se ); //FIXME: careful here.
-
-  QString cmd = co->readEntry("Exec");
-  //kdDebug()<<"Konsole::newSession() Exec: -"<<cmd<<"-"<<endl;
-  QString nam = co->readEntry("Name");    // not null
-  QCString emu = co->readEntry("Term").ascii();
-  QString sch = co->readEntry("Schema",s_kconfigSchema);
-  //kdDebug()<<"Konsole::newSession() schema: -"<<sch<<"-"<<endl;
-  QString txt = co->readEntry("Comment"); // not null
-  int     fno = QMIN(co->readUnsignedNumEntry("Font",se->fontNo()),TOPFONT);
-  //kdDebug()<<"Konsole::newSession() config: "<<co->readUnsignedNumEntry("Font")<<" se->font: "<<se->fontNo()<<" TOP: "<<TOPFONT<<endl;
-
+  QString cmd;
+  QCString emu = "xterm";
+  QString sch = s_kconfigSchema;
+  QString txt = title;
+  unsigned int     fno = 0;
+  if (co)
+  {
+      cmd = co->readEntry("Exec");
+      emu = co->readEntry("Term", emu).ascii();
+      sch = co->readEntry("Schema", sch);
+      txt = co->readEntry("Comment", txt);
+      fno = co->readUnsignedNumEntry("Font");
+  }
   ColorSchema* schema = sch.isEmpty()
-                      ? (ColorSchema*)NULL
+                      ? colors->find(s_schema)
                       : colors->find(sch);
-
-  int schmno = schema? schema->numb() :se->schemaNo();
-
-  //kdDebug()<<"Konsole::newSession() schema number: "<<schmno<<endl;
-
-  if (emu.isEmpty()) emu = se->emuName();
+  int schmno = schema->numb();
 
   QStrList args;
   args.append(shell);
@@ -1266,13 +1256,14 @@ void Konsole::newSession(int i)
   connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
            this, SLOT(configureRequest(TEWidget*,int,int,int)) );
 
-  s->setFontNo(fno);
+  s->setFontNo(QMIN(fno, TOPFONT));
   s->setSchemaNo(schmno);
   s->setTitle(txt);
   s->setHistory(b_scroll); //FIXME: take from schema
 
   addSession(s);
   runSession(s); // activate and run
+  return s;
 }
 
 //FIXME: If a child dies during session swap,
