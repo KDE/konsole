@@ -2397,6 +2397,7 @@ void Konsole::addSession(TESession* s)
       disableMasterModeConnections(); // no duplicate connections, remove old
       enableMasterModeConnections();
     }
+    if( tabwidget )
     m_removeSessionButton->setEnabled(tabwidget->count()>1);
 }
 
@@ -2839,6 +2840,7 @@ void Konsole::doneSession(TESession* s)
       rootxpms.remove(s->widget());
     }
     delete s->widget();
+    if( tabwidget )
     m_removeSessionButton->setEnabled(tabwidget->count()>1);
   }
   session2action.remove(s);
