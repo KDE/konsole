@@ -12,11 +12,12 @@ INCLUDES = -I. $(all_includes)
 
 # you can add here more. This one gets installed
 bin_PROGRAMS = 	konsole konsole_grantpty kwrited #kcmkonsole
-lib_LTLIBRARIES = libkonsolepart.la kwrited.la konsole.la
+lib_LTLIBRARIES = kwrited.la konsole.la
 
 # libkonsolepart is a part, but konsole.la links directly to it, so we can't
 # install it under kde_module
 
+kde_module_LTLIBRARIES = libkonsolepart.la
 libkonsolepart_la_SOURCES = TEPty.cpp BlockArray.cpp konsole_part.cpp \
 	schema.cpp \
 	session.cpp \
@@ -30,7 +31,7 @@ libkonsolepart_la_SOURCES = TEPty.cpp BlockArray.cpp konsole_part.cpp \
 	konsoleiface.skel \
         sessioniface.skel
 
-libkonsolepart_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN)
+libkonsolepart_la_LDFLAGS = $(KDE_PLUGIN) $(all_libraries)
 libkonsolepart_la_LIBADD = $(XTESTLIB) $(LIB_KPARTS)
 
 # kwrited kdeinit module
