@@ -81,6 +81,7 @@ public:
   void initMonitorActivity(bool on);
   void initMonitorSilence(bool on);
   void initMasterMode(bool on);
+  void initTabColor(QColor color);
   void newSession(const QString &program, const QStrList &args, const QString &term, const QString &icon, const QString &title, const QString &cwd);
   void setSchema(const QString & path);
   void setEncoding(int);
@@ -419,6 +420,8 @@ private:
   QSignalMapper* sessionNumberMapper;
   QStringList    sl_sessionShortCuts;
   QString  s_workDir;
+
+  QColor    m_tabColor;
 };
 
 class QSpinBox;

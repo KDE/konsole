@@ -508,6 +508,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         m->initMonitorActivity(sessionconfig->readBoolEntry("MonitorActivity0",false));
         m->initMonitorSilence(sessionconfig->readBoolEntry("MonitorSilence0",false));
         m->initMasterMode(sessionconfig->readBoolEntry("MasterMode0",false));
+        m->initTabColor(sessionconfig->readColorEntry("TabColor"));
         counter++;
 
         // show() before 2nd+ sessions are created allows --profile to
@@ -544,6 +545,8 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
           m->initMonitorSilence(sessionconfig->readBoolEntry(key,false));
           key = QString("MasterMode%1").arg(counter);
           m->initMasterMode(sessionconfig->readBoolEntry(key,false));
+          key = QString("TabColor%1").arg(counter);
+          m->initTabColor(sessionconfig->readColorEntry(key));
           counter++;
         }
         m->setDefaultSession( sessionconfig->readEntry("DefaultSession","shell.desktop") );

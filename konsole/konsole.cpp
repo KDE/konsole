@@ -255,6 +255,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 ,sessionNumberMapper(0)
 ,sl_sessionShortCuts(0)
 ,s_workDir(workdir)
+,m_tabColor(QColor())
 {
   isRestored = b_inRestore;
   connect( &m_closeTimeout, SIGNAL(timeout()), this, SLOT(slotCouldNotClose()));
@@ -1396,6 +1397,8 @@ void Konsole::saveProperties(KConfig* config) {
         config->writeEntry(key, sessions.current()->isMonitorSilence());
         key = QString("MasterMode%1").arg(counter);
         config->writeEntry(key, sessions.current()->isMasterMode());
+        key = QString("TabColor%1").arg(counter);
+        config->writeEntry(key, tabwidget->tabColor((sessions.current())->widget()));
 
         QString cwd=sessions.current()->getCwd();
         if (cwd.isEmpty())
@@ -1425,6 +1428,7 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("TabViewMode", int(m_tabViewMode));
   config->writeEntry("DynamicTabHide", b_dynamicTabHide);
   config->writeEntry("AutoResizeTabs", b_autoResizeTabs);
+  config->writeEntry("TabColor", tabwidget->tabColor(se->widget()));
 
   if (se) {
     config->writeEntry("history", se->history().getSize());
@@ -1546,6 +1550,8 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       m_tabViewMode = TabViewModes(config->readNumEntry("TabViewMode", ShowIconAndText));
       b_dynamicTabHide = config->readBoolEntry("DynamicTabHide", false);
       b_autoResizeTabs = config->readBoolEntry("AutoResizeTabs", false);
+      m_tabColor = config->readColorEntry("TabColor");
+      if ( !m_tabColor.isValid() ) m_tabColor = QColor( Qt::black );
    }
 
    if (m_menuCreated)
@@ -1777,7 +1783,7 @@ void Konsole::createSessionTab(TEWidget *widget, const QIconSet &iconSet,
     tabwidget->insertTab(widget, iconSet, QString::null, index);
     break;
   }
-  tabwidget->setTabColor(widget, QColor(0, 0, 0));
+  tabwidget->setTabColor(widget, m_tabColor);
 }
 
 QIconSet Konsole::iconSetForSession(TESession *session) const
@@ -2903,6 +2909,12 @@ void Konsole::initMasterMode(bool state)
 {
   masterMode->setChecked(state);
   slotToggleMasterMode();
+}
+
+void Konsole::initTabColor(QColor color)
+{
+  if ( !color.isValid() ) color = QColor( Qt::black );
+  tabwidget->setTabColor( se->widget(), color );
 }
 
 void Konsole::slotToggleMasterMode()
