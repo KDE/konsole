@@ -550,40 +550,41 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
   QPoint ohere;
   bool swapping = FALSE;
 
-  if ( word_selection_mode ) {
-      // Extend to word boundaries
-      int i;
-      int selClass;
+  if ( word_selection_mode )
+  {
+    // Extend to word boundaries
+    int i;
+    int selClass;
 
-      bool left_not_right = ( here.y() < iPntSel.y() ||
+    bool left_not_right = ( here.y() < iPntSel.y() ||
 	   here.y() == iPntSel.y() && here.x() < iPntSel.x() );
-      bool old_left_not_right = ( pntSel.y() < iPntSel.y() ||
+    bool old_left_not_right = ( pntSel.y() < iPntSel.y() ||
 	   pntSel.y() == iPntSel.y() && pntSel.x() < iPntSel.x() );
-      swapping = left_not_right != old_left_not_right;
+    swapping = left_not_right != old_left_not_right;
 
-      // Find left (left_not_right ? from here : from start)
-      QPoint left = left_not_right ? here : iPntSel;
-      i = loc(left.x(),left.y());
-      selClass = charClass(image[i].c);
-      while ( left.x() > 0 && charClass(image[i-1].c) == selClass )
-	{ i--; left.rx()--; }
+    // Find left (left_not_right ? from here : from start)
+    QPoint left = left_not_right ? here : iPntSel;
+    i = loc(left.x(),left.y());
+    selClass = charClass(image[i].c);
+    while ( left.x() > 0 && charClass(image[i-1].c) == selClass )
+    { i--; left.rx()--; }
 
-      // Find left (left_not_right ? from start : from here)
-      QPoint right = left_not_right ? iPntSel : here;
-      i = loc(right.x(),right.y());
-      selClass = charClass(image[i].c);
-      while ( right.x() < columns-1 && charClass(image[i+1].c) == selClass )
-	{ i++; right.rx()++; }
+    // Find left (left_not_right ? from start : from here)
+    QPoint right = left_not_right ? iPntSel : here;
+    i = loc(right.x(),right.y());
+    selClass = charClass(image[i].c);
+    while ( right.x() < columns-1 && charClass(image[i+1].c) == selClass )
+    { i++; right.rx()++; }
 
-      // Pick which is start (ohere) and which is extension (here)
-      if ( left_not_right )
-      {
-	here = left;
-	ohere = right;
-      } else {
-	here = right;
-	ohere = left;
-      }
+    // Pick which is start (ohere) and which is extension (here)
+    if ( left_not_right )
+    {
+      here = left; ohere = right;
+    }
+    else
+    {
+      here = right; ohere = left;
+    }
   }
 
   if (here == pntSel && scroll == scrollbar->value()) return; // not moved
@@ -658,7 +659,7 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
     // set the start...
      int x = bgnSel.x();
      while ( x > 0 && charClass(image[i-1].c) == selClass )
-	{ i--; x--; }
+     { i--; x--; }
      bgnSel.setX(x);
      emit beginSelectionSignal( bgnSel.x(), bgnSel.y() );
 
@@ -666,7 +667,7 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
      i = loc( endSel.x(), endSel.y() );
      x = endSel.x();
      while( x < columns-1 && charClass(image[i+1].c) == selClass )
-	{ i++; x++ ; }
+     { i++; x++ ; }
      endSel.setX(x);
      emit extendSelectionSignal( endSel.x(), endSel.y() );
      emit endSelectionSignal(preserve_line_breaks);
@@ -684,7 +685,7 @@ int TEWidget::charClass(char ch) const
 
     static char *word_characters = "@-./_~";
     if ( isalnum(ch) || strchr(word_characters, ch) )
-	return 'a';
+    return 'a';
 
     // Everything else is weird
     return 1;

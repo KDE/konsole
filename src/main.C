@@ -161,11 +161,10 @@ TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
   TESession* initial = new TESession(this,te,args,"xterm",login_shell);
   initial->setFontNo(n_font);
   initial->setSchemaNo(ColorSchema::find(s_schema)->numb);
-  if (args.count())
-      title = args.at(0); // display program executed in the title bar
-  else
-      title = PACKAGE;
 
+  title = (args.count() && !strcmp(kapp->getCaption(),PACKAGE))
+        ? args.at(0)           // program executed in the title bar
+        : kapp->getCaption();  // `konsole' or -caption
   initial->setTitle(title);
 
   // start first session /////////////////////////////////////////////////////
@@ -945,9 +944,10 @@ int main(int argc, char* argv[])
   else {	
       TEDemo*  m = new TEDemo(eargs,login_shell);
       if (strcmp("",sz) !=0) m->setColLin(c,l);
-      if (welcome) {
-          m->setCaption(i18n("Welcome to the console"));
-          QTimer::singleShot(5000,m,SLOT(setHeader()));
+      if (welcome)
+      {
+        m->setCaption(i18n("Welcome to the console"));
+        QTimer::singleShot(5000,m,SLOT(setHeader()));
       }
       m->show();
   }
