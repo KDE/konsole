@@ -1,12 +1,5 @@
 # This file is part of Konsole - an X terminal for KDE
 
-# just set the variable
-APPSDIR = $(kde_appsdir)/Utilities
-DATADIR = $(kde_datadir)/konsole
-PICSDIR = $(DATADIR)/pics
-TOOLBARDIR = $(DATADIR)/toolbar
-MIMEDIR = $(kde_mimedir)/text
-
 # set the include path for X, qt and KDE
 INCLUDES = -I. $(all_includes)
 
