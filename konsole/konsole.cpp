@@ -646,6 +646,9 @@ void Konsole::makeGUI()
    {
       showMenubar->plug ( m_rightButton );
       m_rightButton->insertSeparator();
+      if (m_fullscreen)
+        m_fullscreen->plug(m_rightButton);
+      m_rightButton->insertSeparator();
 
       KAction* selectionEnd = new KAction(i18n("Set Selection End"), 0, te,
                                SLOT(setSelectionEnd()), actions, "selection_end");
@@ -973,7 +976,7 @@ void Konsole::slotCouldNotClose()
 
 void Konsole::setColLin(int columns, int lines)
 {
-  if ((columns==0) || (lines==0)) 
+  if ((columns==0) || (lines==0))
   {
     if (b_fixedSize || defaultSize.isEmpty())
     {
@@ -982,12 +985,12 @@ void Konsole::setColLin(int columns, int lines)
       lines = 24;
     }
   }
-  
-  if ((columns==0) || (lines==0)) 
+
+  if ((columns==0) || (lines==0))
   {
     resize(defaultSize);
-  } 
-  else 
+  }
+  else
   {
     if (b_fixedSize)
        te->setFixedSize(columns, lines);
@@ -2737,7 +2740,7 @@ void Konsole::detachSession() {
 void Konsole::attachSession(TESession* session)
 {
   session->changeWidget(te);
-  
+
   QString title=session->Title();
   KRadioAction *ra = new KRadioAction(title.replace('&',"&&"), session->IconName(),
                                       0, this, SLOT(activateSession()), this);
