@@ -37,6 +37,7 @@
 #include "session.h"
 
 class KInstance;
+namespace KParts { class GUIActivateEvent; }
 
 class konsoleFactory : public KParts::Factory
 {
@@ -70,11 +71,14 @@ class konsolePart: public KParts::ReadOnlyPart
     virtual bool openURL( const KURL & url );
     virtual bool openFile() {return false;} // never used
     virtual bool closeURL() {return true;}
+    virtual void guiActivateEvent( KParts::GUIActivateEvent * event );
 
  protected slots:
     void doneSession(TESession*,int);
     void sessionDestroyed();
     void configureRequest(TEWidget*,int,int x,int y);
+    void updateTitle();
+    void restoreAllListenToKeyPress();
 
  private slots:
     void readProperties();

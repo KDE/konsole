@@ -27,7 +27,7 @@
 
 #include <qfile.h>
 #include <qlayout.h>
-#include <qwmatrix.h> 
+#include <qwmatrix.h>
 
 #include <kaboutdata.h>
 #include <kdebug.h>
@@ -49,7 +49,6 @@ extern "C"
    */
   void *init_libkonsolepart()
   {
-      kdDebug(1211) << "Konsole in actions!!!" << endl;
     return new konsoleFactory;
   }
 };
@@ -125,7 +124,7 @@ void KonsoleFontSelectAction::slotActivated(int index) {
 //////////////////////////////////////////////////////////////////////
 
 const char *fonts[] = {
- "13", 
+ "13",
  "7",   // tiny font, never used
  "10",  // small font
  "13",  // medium
@@ -152,7 +151,7 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   setInstance(konsoleFactory::instance());
 
   // This is needed since only konsole.cpp does it
-  // Without those two -> crash on keypress... (David)
+  // Without this -> crash on keypress... (David)
   KeyTrans::loadAll();
 
   QStrList eargs;
@@ -164,12 +163,22 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
 
   setWidget(te);
-  // faking a KMainwindow - TESession assumes that (wrong design!)
-  se = new TESession((KMainWindow*)parentWidget,te,shell,eargs,"xterm");
+  se = new TESession(te,shell,eargs,"xterm");
   connect( se,SIGNAL(done(TESession*,int)),
            this,SLOT(doneSession(TESession*,int)) );
   connect( te,SIGNAL(configureRequest(TEWidget*,int,int,int)),
            this,SLOT(configureRequest(TEWidget*,int,int,int)) );
+  connect( se, SIGNAL( updateTitle() ),
+           this, SLOT( updateTitle() ) );
+  connect( se, SIGNAL(restoreAllListenToKeyPress()),
+           this, SLOT(restoreAllListenToKeyPress()) );
+  // We ignore the following signals
+  //connect( se, SIGNAL(renameSession(TESession*,const QString&)),
+  //         this, SLOT(slotRenameSession(TESession*, const QString&)) );
+  //connect( se->getEmulation(), SIGNAL(changeColumns(int)),
+  //         this, SLOT(changeColumns(int)) );
+  //connect( se, SIGNAL(clearAllListenToKeyPress()),
+  //        this, SLOT(clearAllListenToKeyPress()) );
   se->setConnect(TRUE);
   te->currentSession = se;
 
@@ -256,6 +265,7 @@ konsolePart::~konsolePart()
 
 bool konsolePart::openURL( const KURL & url )
 {
+  //kdDebug(1211) << "konsolePart::openURL " << url.prettyURL() << endl;
   m_url = url;
   emit setWindowCaption( url.prettyURL() );
   kdDebug(1211) << "Set Window Caption to " << url.prettyURL() << "\n";
@@ -266,9 +276,8 @@ bool konsolePart::openURL( const KURL & url )
       stat( QFile::encodeName( url.path() ), &buff );
       QString text = ( S_ISDIR( buff.st_mode ) ? url.path() : url.directory() );
       KRun::shellQuote(text);
-      text = QString::fromLatin1("cd ") + text + '\n';
-      QKeyEvent e(QEvent::KeyPress, 0,-1,0, text);
-      se->getEmulation()->onKeyPress(&e);
+      text = QString::fromLatin1("cd ") + text;
+      te->emitText( text );
   }
 
   emit completed();
@@ -523,13 +532,13 @@ void konsolePart::closeCurrentSession()
   sendSignal(SIGHUP);
 }
 
-void konsolePart::slotToggleFrame() 
+void konsolePart::slotToggleFrame()
 {
   b_framevis = showFrame->isChecked();
   te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame);
 }
 
-void konsolePart::slotSelectScrollbar() 
+void konsolePart::slotSelectScrollbar()
 {
   n_scroll = selectScrollbar->currentItem();
   te->setScrollbarLocation(n_scroll);
@@ -707,7 +716,7 @@ void konsolePart::slotHistoryType()
         se->setHistory(HistoryTypeBuffer(dlg.nbLines()));
         m_histSize = dlg.nbLines();
         b_histEnabled = true;
-      } 
+      }
       else {
         se->setHistory(HistoryTypeFile());
         m_histSize = 0;
@@ -744,6 +753,21 @@ void konsolePart::slotWordSeps() {
     s_word_seps = dlg.text();
     te->setWordCharacters(s_word_seps);
   }
+}
+
+void konsolePart::restoreAllListenToKeyPress()
+{
+    se->setListenToKeyPress(true);
+}
+
+void konsolePart::updateTitle()
+{
+    emit setWindowCaption( se->fullTitle() );
+}
+
+void konsolePart::guiActivateEvent( KParts::GUIActivateEvent * )
+{
+    // Don't let ReadOnlyPart::guiActivateEvent reset the window caption
 }
 
 //////////////////////////////////////////////////////////////////////

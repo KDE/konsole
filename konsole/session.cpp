@@ -22,7 +22,7 @@
     of the abilities of the framework - multible sessions.
 */
 
-TESession::TESession(KMainWindow* main, TEWidget* _te, const QString &_pgm, QStrList & _args, const QString &_term,const QString &_sessionId, const QString &_cwd)
+TESession::TESession(TEWidget* _te, const QString &_pgm, QStrList & _args, const QString &_term,const QString &_sessionId, const QString &_cwd)
    : DCOPObject( _sessionId.latin1() )
    , monitorActivity(false)
    , monitorSilence(false)
@@ -49,17 +49,7 @@ TESession::TESession(KMainWindow* main, TEWidget* _te, const QString &_pgm, QStr
   //kdDebug(1211)<<"TESession ctor() connecting"<<endl;
   connect( sh,SIGNAL(block_in(const char*,int)),em,SLOT(onRcvBlock(const char*,int)) );
   connect( em,SIGNAL(ImageSizeChanged(int,int)),sh,SLOT(setSize(int,int)));
-
-  // 'main' should do those connects itself, somehow.
-  // These aren't KTMW's slots, but konsole's.(David)
-
-  connect( em,SIGNAL(ImageSizeChanged(int,int)),main,SLOT(notifySize(int,int)));
   connect( em,SIGNAL(sndBlock(const char*,int)),sh,SLOT(send_bytes(const char*,int)) );
-  connect( em,SIGNAL(changeColumns(int)),main,SLOT(changeColumns(int)) );
-
-  connect( this, SIGNAL(clearAllListenToKeyPress()),main,SLOT(clearAllListenToKeyPress()) );
-  connect( this, SIGNAL(restoreAllListenToKeyPress()),main,SLOT(restoreAllListenToKeyPress()) );
-  connect( this, SIGNAL(renameSession(TESession*,const QString&)),main,SLOT(slotRenameSession(TESession*, const QString&)) );
 
   connect( em, SIGNAL( changeTitle( int, const QString & ) ),
            this, SLOT( setUserTitle( int, const QString & ) ) );
@@ -68,7 +58,7 @@ TESession::TESession(KMainWindow* main, TEWidget* _te, const QString &_pgm, QStr
            this, SLOT( notifySessionState(int) ) );
   monitorTimer = new QTimer(this);
   connect(monitorTimer, SIGNAL(timeout()), this, SLOT(monitorTimerDone()));
-  
+
   connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
   //kdDebug(1211)<<"TESession ctor() done"<<endl;
 }
@@ -80,7 +70,7 @@ void TESession::run()
   //kdDebug(1211) << "Running the session!" << pgm << "\n";
   //pgm = "pine";
   QString appId=kapp->dcopClient()->appId();
-  
+
   QString cwd_save = QDir::currentDirPath();
   if (!cwd.isEmpty())
      QDir::setCurrent(cwd);
@@ -318,7 +308,7 @@ bool TESession::isMonitorSilence() { return monitorSilence; }
 bool TESession::isMasterMode() { return masterMode; }
 
 void TESession::setMonitorActivity(bool _monitor) { monitorActivity=_monitor; }
-void TESession::setMonitorSilence(bool _monitor) 
+void TESession::setMonitorSilence(bool _monitor)
 {
   if (monitorSilence==_monitor)
     return;

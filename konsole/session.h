@@ -28,7 +28,7 @@ class TESession : public QObject, virtual public SessionIface
 
 public:
 
-  TESession(KMainWindow* main, TEWidget* w,
+  TESession(TEWidget* w,
             const QString &pgm, QStrList & _args,
 	    const QString &term, const QString &sessionId="session-1",
 	    const QString &cwd = QString::null);

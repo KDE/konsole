@@ -146,7 +146,7 @@ template class QPtrDict<KRadioAction>;
 
 
 const char *fonts[] = {
- "13", 
+ "13",
  "7",   // tiny font, never used
  "10",  // small font
  "13",  // medium
@@ -280,7 +280,7 @@ DCOPObject( "konsole" )
     toolBar()->hide();
   toolBar()->setText(i18n("Session Toolbar"));
   if (!frameon) {
-    b_framevis=false; 
+    b_framevis=false;
     te->setFrameStyle( QFrame::NoFrame );
   }
   if (!scrollbaron) {
@@ -528,10 +528,10 @@ void Konsole::makeGUI()
    save_settings->plug(m_options);
 
    m_options->insertSeparator();
-   
+
    KAction *configure = KStdAction::preferences(this, SLOT(slotConfigure()), actions);
    configure->plug(m_options);
-   
+
    m_options->insertTearOffHandle();
 
    connect(m_options, SIGNAL(activated(int)), SLOT(opt_menu_activated(int)));
@@ -670,7 +670,7 @@ bool Konsole::queryClose()
                                                "Are you sure you want to quit?" ),
 					 i18n("Are you sure you want to quit?"),
 					 i18n("Quit"), i18n("Cancel") )
-	      
+
               == KMessageBox::No )
             ) {
             return false;
@@ -826,7 +826,7 @@ void Konsole::readProperties(KConfig* config)
 // If --type option was given, load the corresponding schema instead of
 // default
 //
-// When globalConfigOnly is true only the options that are shared among all 
+// When globalConfigOnly is true only the options that are shared among all
 // konsoles are being read.
 void Konsole::readProperties(KConfig* config, const QString &schema, bool globalConfigOnly)
 {
@@ -987,7 +987,7 @@ void Konsole::slotSelectFont() {
   assert(se);
   int item = selectFont->currentItem();
   // KONSOLEDEBUG << "slotSelectFont " << item << endl;
-  if (item == DEFAULTFONT) 
+  if (item == DEFAULTFONT)
   {
     if ( KFontDialog::getFont(defaultFont, true) == QDialog::Rejected )
     {
@@ -1263,7 +1263,7 @@ void Konsole::clearAllListenToKeyPress()
   for (TESession *ses = sessions.first(); ses; ses = sessions.next())
     ses->setListenToKeyPress(false);
 }
- 
+
 void Konsole::restoreAllListenToKeyPress()
 {
   if(se->isMasterMode())
@@ -1357,7 +1357,7 @@ void Konsole::addSession(TESession* s)
      ra->plug(m_view);
 
   int button_id=ra->itemId( ra->plug(toolBar()) );
-  KToolBarButton* ktb=toolBar()->getButton(button_id);  
+  KToolBarButton* ktb=toolBar()->getButton(button_id);
   connect(ktb,SIGNAL(doubleClicked(int)), this,SLOT(slotRenameSession(int)));
   session2button.insert(s,ktb);
 }
@@ -1371,7 +1371,7 @@ QString Konsole::sessionId(const int position)
 {
   if (position<=0 || position>sessions.count())
     return "";
-  
+
   return sessions.at(position-1)->SessionId();
 }
 
@@ -1589,7 +1589,8 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
   int schmno = schema->numb();
 
   QString sessionId="session-"+QString::number(++sessionIdCounter);
-  TESession* s = new TESession(this,te, QFile::encodeName(program),cmdArgs,emu,sessionId,cwd);
+  TESession* s = new TESession(te, QFile::encodeName(program),cmdArgs,emu,sessionId,cwd);
+  // If you add any new signal-slot connection below, think about doing it in konsolePart too
   connect( s,SIGNAL(done(TESession*,int)),
            this,SLOT(doneSession(TESession*,int)) );
   connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
@@ -1598,6 +1599,16 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
            this, SLOT( updateTitle() ) );
   connect( s, SIGNAL( notifySessionState(TESession*, int) ),
            this, SLOT( notifySessionState(TESession*, int)) );
+  connect( s, SIGNAL(clearAllListenToKeyPress()),
+           this, SLOT(clearAllListenToKeyPress()) );
+  connect( s, SIGNAL(restoreAllListenToKeyPress()),
+           this, SLOT(restoreAllListenToKeyPress()) );
+  connect( s, SIGNAL(renameSession(TESession*,const QString&)),
+           this, SLOT(slotRenameSession(TESession*, const QString&)) );
+  connect( s->getEmulation(), SIGNAL(changeColumns(int)),
+           this, SLOT(changeColumns(int)) );
+  connect( s->getEmulation(), SIGNAL(ImageSizeChanged(int,int)),
+           this, SLOT(notifySize(int,int)));
 
   s->setFontNo(QMIN(fno, TOPFONT));
   s->setSchemaNo(schmno);
@@ -1869,7 +1880,7 @@ void Konsole::addSessionCommand(const QString &path)
   if (typ.isEmpty() || txt.isEmpty() || typ != "KonsoleApplication")
   {
     if (!path.isEmpty())
-       delete co; 
+       delete co;
     return; // ignore
   }
   QString icon = co->readEntry("Icon", "openterm");
@@ -2229,7 +2240,7 @@ void Konsole::slotFind()
       }
     }
   else
-    KMessageBox::information( this, 
+    KMessageBox::information( this,
     	i18n( "Search string '%1' not found." ).arg(KStringHandler::csqueeze(m_find_pattern)),
 	i18n( "Find" ) );
 }
@@ -2358,7 +2369,7 @@ void Konsole::currentDesktopChanged(int desk) {
    //Get window info
    NETWinInfo info( qt_xdisplay(), winId(), qt_xrootwin(), NET::WMDesktop );
    bool bNeedUpdate = false;
- 
+
    if( info.desktop()==NETWinInfo::OnAllDesktops ) {
       //This is a sticky window so it will always need updating
       bNeedUpdate = true;
@@ -2373,7 +2384,7 @@ void Konsole::currentDesktopChanged(int desk) {
 
    //Check to see if we are transparent too
    ColorSchema* s = colors->find(curr_schema);
-   if (s==0) 
+   if (s==0)
       return;
 
    //This window is transparent, update the root pixmap
