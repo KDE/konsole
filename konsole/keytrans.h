@@ -51,7 +51,8 @@ class KeyTrans
 
       KeyTrans(const QString& p);
       ~KeyTrans();
-      bool findEntry(int key, int bits, int* cmd, const char** txt, int* len);
+      bool findEntry(int key, int bits, int* cmd, const char** txt, int* len,
+                     bool* metaspecified);
       const QString& hdr()         {if (!m_fileRead) readConfig(); return m_hdr;}
       int numb()                   {return m_numb;}
       const QString& id() { return m_id;}
@@ -62,6 +63,7 @@ class KeyTrans
             KeyEntry(int ref, int key, int bits, int mask, int cmd, QString txt);
             ~KeyEntry();
             bool matches(int key, int bits, int mask);
+            bool metaspecified(void);
             QString text();
             int ref;
          private:
