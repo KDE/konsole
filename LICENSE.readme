@@ -2,10 +2,6 @@ konsole - an X terminal emulation
 
 Copyright (c) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
 
-[After wasting to much time on worrying about license issues, i finally
- decided to move konsole onto the license below. It might take a few days
- to remove all references to the GPL from the source.]
-
                                The "Artistic License"
 
                                       Preamble

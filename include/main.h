@@ -11,9 +11,6 @@
 /* The material contained in here more or less directly orginates from        */
 /* kvt, which is copyright (c) 1996 by Matthias Ettrich <ettrich@kde.org>     */
 /*                                                                            */
-/* The whole program is copyleft under the GNU General Public Licence.        */
-/* See COPYING, the documenation, or <http://www.gnu.org> for details.        */
-/*                                                                            */
 /* -------------------------------------------------------------------------- */
 
 #ifndef MAIN_H

@@ -8,9 +8,6 @@
 /*                                                                            */
 /* This file is part of Konsole - an X terminal for KDE                       */
 /*                                                                            */
-/* The whole program is available under the GNU Public Software Licence.      */
-/* See COPYING, the documenation, or <http://www.gnu.org> for details.        */
-/*                                                                            */
 /* -------------------------------------------------------------------------- */
 
 

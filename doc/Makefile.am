@@ -13,7 +13,3 @@
 # kde_wallpaperdir  Where general wallpapers should go to.
 
 SUBDIRS=sgml VT100
-
-doc_DATA = gpl.html
-
-docdir = $(kde_htmldir)/en/konsole

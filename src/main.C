@@ -11,9 +11,6 @@
 /* The material contained in here more or less directly orginates from        */
 /* kvt, which is copyright (c) 1996 by Matthias Ettrich <ettrich@kde.org>     */
 /*                                                                            */
-/* The whole program is copyleft under the GNU General Public Licence.        */
-/* See COPYING, the documenation, or <http://www.gnu.org> for details.        */
-/*                                                                            */
 /* -------------------------------------------------------------------------- */
 
 /* TODO
@@ -441,21 +438,17 @@ void TEDemo::changeTitle(int, char*s)
 void TEDemo::about()
 //FIXME: make this a little nicer
 {
-  if
-  ( KMsgBox::yesNo
-    ( 0, "About " PACKAGE,
-
-      PACKAGE " version " VERSION " - an X terminal\n"
-      "\n"
-      "Copyright (c) 1998 by Lars Doelle <lars.doelle@on-line.de>\n"
-      "\n"
-      "This program is free software under the terms of\n"
-      "the GNU General Public License and comes WITHOUT\n"
-      "ANY WARRANTY. See `Licence´ for details.",
-      KMsgBox::INFORMATION,
-      "Close", "Licence"
-    ) == 2 )
-   kapp->invokeHTMLHelp(PACKAGE "/gpl.html","");
+  KMsgBox::message
+  ( 0, "About " PACKAGE,
+    PACKAGE " version " VERSION " - an X terminal\n"
+    "\n"
+    "Copyright (c) 1998 by Lars Doelle <lars.doelle@on-line.de>\n"
+    "\n"
+    "This program is free software under the\n"
+    "terms of the Artistic License and comes\n"
+    "WITHOUT ANY WARRANTY.\n"
+    "See `LICENSE.readme´ for details."
+  );
 }
 
 void TEDemo::help()
