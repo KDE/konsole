@@ -768,14 +768,28 @@ void Konsole::makeGUI()
    se->setSchemaNo(curr_schema);
 
    // insert keymaps into menu
-   //FIXME: sort
+   // This sorting seems a bit cumbersome; but it is not called often.
+   QStringList kt_titles;
+   typedef QMap<QString,KeyTrans*> QStringKeyTransMap;
+   QStringKeyTransMap kt_map;
+
    for (int i = 0; i < KeyTrans::count(); i++)
    {
       KeyTrans* ktr = KeyTrans::find(i);
       assert( ktr );
+      QString title=ktr->hdr().lower();
+      kt_titles << title;
+      kt_map[title] = ktr;
+   }
+   kt_titles.sort();
+   for ( QStringList::Iterator it = kt_titles.begin(); it != kt_titles.end(); ++it ) {
+      KeyTrans* ktr = kt_map[*it];
+      assert( ktr );
       QString title=ktr->hdr();
       m_keytab->insertItem(title.replace('&',"&&"),ktr->numb());
+      //KONSOLEDEBUG << *it << "---" << title << "---" << ktr->numb() << endl;
    }
+
    applySettingsToGUI();
    isRestored = false;
 
