@@ -55,9 +55,12 @@
     Compatibility issues with obsolete installations and other unixes
     my prevent this.
 */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
+#endif
+
+#if HAVE_GRANTPT && HAVE_PTSNAME && HAVE_UNLOCKPT && !defined(_GNU_SOURCE)
+#define _GNU_SOURCE // make stdlib.h offer the above fcts
 #endif
 
 #include <stdlib.h>
@@ -240,46 +243,72 @@ int TEPty::openPty()
 
   // Find a master pty that we can open ////////////////////////////////
 
-#if defined(__sgi__) || defined(__osf__) || defined(SVR4) || defined(__SVR4)
-  ptyfd = open("/dev/ptmx",O_RDWR);
+  // Because not all the pty animals are created equal, they want to
+  // be opened by several different methods.
+
+  // We try, as we know them, one by one.
+
+#if HAVE_OPENPTY && 0 //FIXME: some work needed.
+#warning wheee
   if (ptyfd < 0)
-    {
-      perror("Can't open a pseudo teletype");
-      return(-1);
+  {
+    int master_fd, slave_fd;
+    char name[10]; // RTSL it shouldn't be any longer
+    if (!openpty(&master_fd, &slave_fd, name, 0/*no termios*/,0 /*and again*/)) {
+      ptyfd=master_fd;
+      strncpy(ptynam, name, 50);
+      strncpy(ttynam, name, 50);
+      ttynam[5]='t';
+      // one needs to look into who owns what to make sure chownpty is needed
+      // FIXME: further, the logic of openPty has to adjusted to pass a file
+      //        handle instead of a name.
     }
-  strncpy(ttynam, ptsname(ptyfd), 50);
-  grantpt(ptyfd);
-  unlockpt(ptyfd);
-  needGrantPty = FALSE;
+  }
 #endif
 
-  // first we try UNIX PTY's
-#ifdef TIOCGPTN
-  strcpy(ptynam,"/dev/ptmx");
-  strcpy(ttynam,"/dev/pts/");
-  ptyfd = open(ptynam,O_RDWR);
-  if (ptyfd >= 0) // got the master pty
-  { int ptyno;
-    if (ioctl(ptyfd, TIOCGPTN, &ptyno) == 0)
-    { struct stat sbuf;
-      sprintf(ttynam,"/dev/pts/%d",ptyno);
-      if (stat(ttynam,&sbuf) == 0 && S_ISCHR(sbuf.st_mode))
-        needGrantPty = FALSE;
+//#if defined(__sgi__) || defined(__osf__) || defined(SVR4) || defined(__SVR4)
+#if HAVE_GRANTPT && HAVE_PTSNAME
+  if (ptyfd < 0)
+  {
+    ptyfd = open("/dev/ptmx",O_RDWR);
+    if (ptyfd >= 0)
+    {
+      strncpy(ttynam, ptsname(ptyfd), 50);
+      grantpt(ptyfd);
+      needGrantPty = FALSE;
+    }
+  }
+#endif
+
+#if defined(TIOCGPTN) && 0 //FIXME: obsolete, to be removed if no one complains
+  if (ptyfd > 0)
+  {
+    strcpy(ptynam,"/dev/ptmx");
+    strcpy(ttynam,"/dev/pts/");
+    ptyfd = open(ptynam,O_RDWR);
+    if (ptyfd >= 0) // got the master pty
+    { int ptyno;
+      if (ioctl(ptyfd, TIOCGPTN, &ptyno) == 0)
+      { struct stat sbuf;
+        sprintf(ttynam,"/dev/pts/%d",ptyno);
+        if (stat(ttynam,&sbuf) == 0 && S_ISCHR(sbuf.st_mode))
+          needGrantPty = FALSE;
+        else
+        {
+          close(ptyfd);
+          ptyfd = -1;
+        }
+      }
       else
       {
         close(ptyfd);
         ptyfd = -1;
       }
     }
-    else
-    {
-      close(ptyfd);
-      ptyfd = -1;
-    }
   }
 #endif
 
-#if defined(_SCO_DS) || defined(__USLC__) /* SCO OSr5 and UnixWare */
+#if defined(_SCO_DS) || defined(__USLC__) // SCO OSr5 and UnixWare, might be obsolete
   if (ptyfd < 0)
   { for (int idx = 0; idx < 256; idx++)
     { sprintf(ptynam, "/dev/ptyp%d", idx);
@@ -292,21 +321,8 @@ int TEPty::openPty()
     }
   }
 #endif
-#ifdef HAVE_OPENPTY
-#warning wheee
-  if (ptyfd < 0) {
-    int master_fd, slave_fd;
-    char name[10]; // RTSL it shouldn't be any longer
-    if (!openpty(&master_fd, &slave_fd, name, 0/*no termios*/,0 /*and again*/)) {
-      ptyfd=master_fd;
-      strncpy(ptynam, name, 50);
-      strncpy(ttynam, name, 50);
-      ttynam[5]='t';
-      // one needs to look into who owns what to make sure chownpty is needed
-    }
-  }
-#endif
-  if (ptyfd < 0) // Linux, FIXME: Trouble on other systems?
+
+  if (ptyfd < 0) // Linux device names, FIXME: Trouble on other systems?
   { for (const char* s3 = "pqrstuvwxyzabcdefghijklmno"; *s3 != 0; s3++)
     { for (const char* s4 = "0123456789abcdefghijklmnopqrstuvwxyz"; *s4 != 0; s4++)
       { sprintf(ptynam,"/dev/pty%c%c",*s3,*s4);
@@ -325,6 +341,7 @@ int TEPty::openPty()
     //FIXME: handle more gracefully.
     fprintf(stderr,"Can't open a pseudo teletype\n"); exit(1);
   }
+
   if (needGrantPty && !chownpty(ptyfd,TRUE))
   {
     fprintf(stderr,"konsole: chownpty failed for device %s::%s.\n",ptynam,ttynam);
@@ -333,6 +350,7 @@ int TEPty::openPty()
     fprintf(stderr,"       : %s and setuid root.\n",
             KGlobal::dirs()->findResourceDir("exe", "konsole").local8Bit().data());
   }
+
   fcntl(ptyfd,F_SETFL,O_NDELAY);
 
   return ptyfd;
@@ -349,9 +367,14 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
     exit(1);
   }
 
-#ifdef TIOCSPTLCK
+#if HAVE_UNLOCKPT
+  unlockpt(fd);
+#endif
+
+#if defined(TIOCSPTLCK) && 0 //FIXME: obsolete, to removed if no one complains
   int flag = 0; ioctl(fd,TIOCSPTLCK,&flag); // unlock pty
 #endif
+
   // open and set all standard files to slave tty
   int tt = open(dev, O_RDWR);
 
