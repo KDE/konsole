@@ -306,6 +306,7 @@ private:
   bool        skip_exit_query:1;
   bool        b_warnQuit:1;
   bool        isRestored:1;
+  bool        b_allowResize:1;
 
   bool         b_histEnabled:1;
   unsigned int m_histSize;
@@ -313,7 +314,7 @@ private:
 
 class QSpinBox;
 
-class HistoryTypeDialog : public KDialogBase 
+class HistoryTypeDialog : public KDialogBase
 {
     Q_OBJECT
 public:

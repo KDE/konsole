@@ -34,7 +34,7 @@ public:
   KonsoleChild(TESession*, int columns, int lines, int scrollbar_location, int frame_style,
                ColorSchema* schema,QFont font, int bellmode, QString wordcharacters,
                bool blinkingCursor, bool ctrlDrag, bool terminalSizeHint, int lineSpacing,
-	       bool cutToBeginningOfLine);
+	       bool cutToBeginningOfLine, bool allowResize);
   void run();
   ~KonsoleChild();
   TESession*  session() { return se; }
@@ -59,6 +59,7 @@ private slots:
   void closeSession();
 
 private:
+  bool allowResize;
   void setColLin(int columns, int lines);
   void pixmap_menu_activated(int item,QString pmPath);
 

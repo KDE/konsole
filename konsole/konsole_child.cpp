@@ -22,10 +22,11 @@
 KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar_location, int frame_style,
                            ColorSchema* schema,QFont font,int bellmode,QString wordcharacters,
                            bool blinkingCursor, bool ctrlDrag, bool terminalSizeHint, int lineSpacing,
-                           bool cutToBeginningOfLine):KMainWindow()
+                           bool cutToBeginningOfLine, bool _allowResize):KMainWindow()
 ,session_terminated(false)
 ,wallpaperSource(0)
 ,se(_se)
+,allowResize(_allowResize)
 {
   te = new TEWidget(this);
   te->setVTFont(font);
@@ -147,8 +148,10 @@ void KonsoleChild::setColLin(int columns, int lines)
 
 void KonsoleChild::changeColumns(int columns)
 {
-  setColLin(columns,te->Lines());
-  te->update();
+  if (allowResize) {
+    setColLin(columns,te->Lines());
+    te->update();
+  }
 }
 
 KonsoleChild::~KonsoleChild()

@@ -230,6 +230,7 @@ DCOPObject( "konsole" )
 ,m_menuCreated(false)
 ,skip_exit_query(false) // used to skip the query when closed by the session management
 ,b_warnQuit(false)
+,b_allowResize(true)
 ,m_histSize(DEFAULT_HISTORY_SIZE)
 {
   isRestored = b_inRestore;
@@ -417,7 +418,7 @@ void Konsole::makeGUI()
    m_findNext->setEnabled( se->history().isOn() );
    m_findNext->plug(m_edit);
 
-   m_findPrevious = new KAction(i18n("&Find P&revious"), "previous", 0, this,
+   m_findPrevious = new KAction(i18n("Find P&revious"), "previous", 0, this,
                                 SLOT(slotFindPrevious()), m_shortcuts, "find_previous");
    m_findPrevious->setEnabled( se->history().isOn() );
    m_findPrevious->plug(m_edit);
@@ -945,6 +946,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
    if (config==KGlobal::config())
    {
      b_warnQuit=config->readBoolEntry( "WarnQuit", TRUE );
+     b_allowResize=config->readBoolEntry( "AllowResize", TRUE);
 
      s_word_seps= config->readEntry("wordseps",":@-./_~");
      te->setWordCharacters(s_word_seps);
@@ -1285,8 +1287,10 @@ void Konsole::reparseConfiguration()
 
 void Konsole::changeColumns(int columns)
 {
-  setColLin(columns,te->Lines());
-  te->update();
+  if (b_allowResize) {
+    setColLin(columns,te->Lines());
+    te->update();
+  }
 }
 
 void Konsole::slotSelectSize() {
@@ -2278,7 +2282,7 @@ void Konsole::detachSession() {
                                                 b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame,
                                                 schema,te->font(),te->isBellMode(),te->wordCharacters(),
                                                 te->blinkingCursor(),te->ctrlDrag(),te->isTerminalSizeHint(),
-                                                te->lineSpacing(),te->cutToBeginningOfLine());
+                                                te->lineSpacing(),te->cutToBeginningOfLine(),b_allowResize);
   detached.append(konsolechild);
   konsolechild->show();
   konsolechild->run();
