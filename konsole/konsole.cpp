@@ -540,6 +540,7 @@ void Konsole::makeGUI()
    m_options->installEventFilter( this );
 
    //help menu
+   m_help->setAccel(QKeySequence(),m_help->idAt(0));
    m_help->insertSeparator(1);
    m_help->insertItem(i18n("&Tip of the Day..."), this, SLOT(showTip()), 0, -1, 2);
 
