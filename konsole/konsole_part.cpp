@@ -573,6 +573,10 @@ void konsolePart::slotSelectScrollbar()
 
 void konsolePart::slotSelectFont() {
   int item = selectFont->currentItem();
+  if( item > 9 ) // compensate for the two separators
+      --item;
+  if( item > 6 )
+      --item;
   // KONSOLEDEBUG << "slotSelectFont " << item << endl;
   if (item == DEFAULTFONT) {
     if ( KFontDialog::getFont(defaultFont, true) == QDialog::Rejected ) {

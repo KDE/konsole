@@ -1235,6 +1235,10 @@ void Konsole::slotSelectScrollbar() {
 void Konsole::slotSelectFont() {
   assert(se);
   int item = selectFont->currentItem();
+  if( item > 9 ) // compensate for the two separators
+      --item;
+  if( item > 6 )
+      --item;
   // KONSOLEDEBUG << "slotSelectFont " << item << endl;
   if (item == DEFAULTFONT)
   {
