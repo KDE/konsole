@@ -664,27 +664,14 @@ void Konsole::readGlobalProperties(KConfig* config)
   QDir::setCurrent(config->readEntry("working directory", QDir::currentDirPath()));
 }
 
+/* _Don't_ change the group on the config object in this method.
+   If you absolutely have to, ensure, that readProperties and saveProperties
+   read from the same group the same keys (e.g. the schema key belongs in the
+   group which is given to this routine, _not_ to any group someone might set
+   here), or change the group _after_ all other keys are written.
+   This was broken two times in the past. (matz@kde.org)  */
 void Konsole::saveProperties(KConfig* config) {
-    kdDebug() << "Save properties called\n";
-    int counter=0;
-    QString tmpTitle;
-  if (config != KGlobal::config()) {
-      config->setGroup("options");
-      // called by the session manager
-      skip_exit_query = true;
-      config->writeEntry("numSes",sessions.count());
-      sessions.first();
-      while(counter < sessions.count()) {
-        kdDebug() << "Top of loop..." << endl;
-        tmpTitle="Title";
-        tmpTitle+= (char) counter;
-        config->writeEntry(tmpTitle,sessions.current()->Title());
-        kdDebug() << "Writing title #" << counter << " -- " << sessions.current()->Title() << endl;
-        sessions.next();
-        counter++;
-        }
-     kdDebug() << "Save properties called with a different config\n";
-  }
+  kdDebug() << "Save properties called\n";
 
   config->writeEntry("history",b_scroll);
   config->writeEntry("has frame",b_framevis);
@@ -699,6 +686,32 @@ void Konsole::saveProperties(KConfig* config) {
 
   if (args.count() > 0) config->writeEntry("konsolearguments", args);
   config->writeEntry("class",name());
+
+  if (config != KGlobal::config()) {
+      /* Don't use KConfigGroupSaver here, as it relies on being destructed
+         on block boundaries, which is not ensured by the standard.  
+	 We do not really need to save the old group, as we do this right now
+	 at the end of saveProperties(), but safer is better.  */
+      QString old_group (config->group());
+      QString tmpTitle;
+      config->setGroup("options");
+      // called by the session manager
+      skip_exit_query = true;
+      config->writeEntry("numSes",sessions.count());
+      sessions.first();
+      int counter=0;
+      while(counter < sessions.count()) {
+        kdDebug() << "Top of loop..." << endl;
+        tmpTitle="Title";
+        tmpTitle+= (char) counter;
+        config->writeEntry(tmpTitle,sessions.current()->Title());
+        kdDebug() << "Writing title #" << counter << " -- " << sessions.current()->Title() << endl;
+        sessions.next();
+        counter++;
+      }
+      config->setGroup (old_group);
+    kdDebug() << "Save properties called with a different config\n";
+  }
 }
 
 
