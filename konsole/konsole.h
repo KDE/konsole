@@ -108,6 +108,7 @@ public:
   void callReadPropertiesInternal(KConfig *config, int number) { readPropertiesInternal(config,number); }
 
   enum TabPosition { TabNone, TabTop, TabBottom };
+  enum TabViewModes { ShowIconAndText = 0, ShowTextOnly = 1, ShowIconOnly = 2 };
 
 public slots:
   void activateSession(int position);

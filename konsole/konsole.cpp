@@ -1208,13 +1208,13 @@ void Konsole::slotTabSetViewOptions(int mode)
     QString title = sessions.at(i)->Title();
 
     switch(mode) {
-    case 0:
+    case ShowIconAndText:
       tabwidget->changeTab(page, icon, title);
       break;
-    case 1:
+    case ShowTextOnly:
       tabwidget->changeTab(page, QIconSet(), title);
       break;
-    case 2:
+    case ShowIconOnly:
       tabwidget->changeTab(page, icon, QString::null);
       break;
     }
