@@ -679,6 +679,10 @@ void TEWidget::onClearSelection()
 //       due to a bug in `QT' or the ignorance of the author to prevent
 //       repaintevents being emitted to the screen whenever one leaves
 //       or reenters the screen to/from another application.
+//
+//   Troll says you need to change focusInEvent() and focusOutEvent(),
+//   which would also let you have an in-focus cursor and an out-focus
+//   cursor like xterm does.
 
 bool TEWidget::eventFilter( QObject *, QEvent *e )
 {
