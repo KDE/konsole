@@ -100,6 +100,8 @@ void TESession::setUserTitle( int what, const QString &caption )
        userTitle = caption;
     if ((what == 0) || (what == 1))
        iconText = caption;
+    if (what == 30)
+       renameSession(caption);
     emit updateTitle();
 }
 
