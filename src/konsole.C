@@ -404,7 +404,7 @@ void Konsole::makeMenu()
   m_options->insertItem( i18n("&Codec"), m_codec);
   m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
 
-  KAction *WordSeps = new KAction(i18n("Word Separators"), 0, this,
+  KAction *WordSeps = new KAction(i18n("Word Separators..."), 0, this,
                              SLOT(slotWordSeps()), this);
   WordSeps->plug(m_options);
 
