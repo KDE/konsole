@@ -128,9 +128,18 @@ int main(int argc, char* argv[])
     "(c) 1997-2001, Lars Doelle");
   aboutData.addAuthor("Waldo Bastian",I18N_NOOP("Maintainer"), "bastian@kde.org");
   aboutData.addAuthor("Lars Doelle",I18N_NOOP("Author"), "lars.doelle@on-line.de");
+  aboutData.addCredit("Stephan Binner",
+    I18N_NOOP("bug fixing and improvements"),
+    "stephan.binner@gmx.de");
   aboutData.addCredit("Chris Machemer",
     I18N_NOOP("bug fixing"),
     "machey@ceinetworks.com");
+  aboutData.addCredit("Stephan Kulow",
+    I18N_NOOP("Solaris support and work on history"),
+    "coolo@kde.org");
+  aboutData.addCredit("Alexander Neundorf",
+    I18N_NOOP("faster startup, bug fixing"),
+    "neundorf@kde.org");
   aboutData.addCredit("Peter Silva",
     I18N_NOOP("decent marking"),
     "peter.silva@videotron.ca");
@@ -170,15 +179,6 @@ int main(int argc, char* argv[])
   aboutData.addCredit("Lars Knoll",
     I18N_NOOP("bug fixing"),
     "knoll@mpi-hd.mpg.de");
-  aboutData.addCredit("Alexander Neundorf",
-    I18N_NOOP("faster startup, bug fixing"),
-    "neundorf@kde.org");
-  aboutData.addCredit("Stephan Kulow",
-    I18N_NOOP("Solaris support and work on history"),
-    "coolo@kde.org");
-  aboutData.addCredit("Stephan Binner",
-    I18N_NOOP("bug fixing and improvements"),
-    "stephan.binner@gmx.de");
   aboutData.addCredit("",I18N_NOOP("Thanks to many others.\n"
     "The above list only reflects the contributors\n"
     "I managed to keep track of."));
