@@ -16,7 +16,7 @@ lib_LTLIBRARIES = libkonsolepart.la kwrited.la konsole.la
 # libkonsolepart is a part, but konsole.la links directly to it, so we can't
 # install it under kde_module
 
-libkonsolepart_la_SOURCES = TEPty.cpp BlockArray.cpp \
+libkonsolepart_la_SOURCES = TEPty.cpp BlockArray.cpp konsole_part.cpp \
 	schema.cpp \
 	session.cpp \
 	TEWidget.cpp \
@@ -24,8 +24,7 @@ libkonsolepart_la_SOURCES = TEPty.cpp BlockArray.cpp \
 	TEScreen.cpp \
 	TEmulation.cpp \
 	TEHistory.cpp \
-	keytrans.cpp \
-        konsole_part.cpp
+	keytrans.cpp 
 
 libkonsolepart_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN)
 libkonsolepart_la_LIBADD = $(LIB_KPARTS) $(LIBUTEMPTER) $(LIBUTIL) @XTESTLIB@
