@@ -36,6 +36,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
+#include <sys/resource.h>
 #include <grp.h>
 #include "../../config.h"
 
@@ -120,7 +121,10 @@ void Shell::makeShell(const char* dev, QStrList & args,
  
   // Don't know why, but his is vital for SIGHUP to find the child.
   // Could be, we get rid of the controling terminal by this.
-  for (int i = 0; i < getdtablesize(); i++) if (i != tt && i != fd) close(i);
+  // getrlimit is a getdtablesize() equivalent, more portable (David Faure)
+  struct rlimit rlp;
+  getrlimit(RLIMIT_NOFILE, &rlp);
+  for (int i = 0; i < rlp.rlim_cur; i++) if (i != tt && i != fd) close(i);
 
   dup2(tt,fileno(stdin));
   dup2(tt,fileno(stdout));
