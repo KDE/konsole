@@ -1,6 +1,6 @@
 # [x11r5.Keytab] Keyboard Table for X11 R5
 
-keyboard "xterm (X11 R5)"
+keyboard "xterm (XFree 3.x.x)"
 
 # --------------------------------------------------------------
 #
