@@ -70,8 +70,7 @@ install-exec-local: install-binPROGRAMS
 
 # Not AUTO here, because there are some unused files
 METASOURCES = TEWidget.moc TEmuVt102.moc session.moc konsole.moc \
-       TEmulation.moc TEPty.moc kwrited.moc konsole_part.moc \
-       sessionaction.moc
+       TEmulation.moc TEPty.moc kwrited.moc konsole_part.moc 
 
 META_INCLUDES = $(srcdir)/../include
 
