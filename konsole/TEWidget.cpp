@@ -1266,7 +1266,7 @@ void TEWidget::drop_menu_activated(int item)
    {
    case 0: // paste
       currentSession->getEmulation()->sendString(dropText.local8Bit());
-//    KWM::activate((Window)this->winId());
+      setActiveWindow();
       break;
    case 1: // cd ...
       currentSession->getEmulation()->sendString("cd ");
@@ -1283,7 +1283,7 @@ void TEWidget::drop_menu_activated(int item)
       dropText.replace(QRegExp(" "), "\\ "); // escape spaces
       currentSession->getEmulation()->sendString(dropText.local8Bit());
       currentSession->getEmulation()->sendString("\n");
-      //    KWM::activate((Window)this->winId());
+      setActiveWindow();
       break;
    }
 }
