@@ -18,6 +18,7 @@
 #include <stdlib.h>
 
 #include <qdir.h>
+#include <qsessionmanager.h>
 
 #include <kapp.h>
 #include <klocale.h>
@@ -42,6 +43,7 @@ static KCmdLineOptions options[] =
    { "xwin",            I18N_NOOP("ignored"), 0 },
    { "nohist",          I18N_NOOP("Do not save lines in scroll-back buffer"), 0 },
    { "notoolbar",       I18N_NOOP("Do not display toolbar"), 0 },
+   { "noxft",           I18N_NOOP("Do not use XFT (Anti-Aliasing)"), 0 },
    { "vt_sz CCxLL",  I18N_NOOP("Terminal size in columns x lines"), 0 },
    { "type <type>", I18N_NOOP("Open the given session type instead of the default shell"), 0 },
    { "workdir <dir>", I18N_NOOP("Change working directory of the konsole to 'dir'"), 0 },
@@ -51,6 +53,7 @@ static KCmdLineOptions options[] =
    { 0, 0, 0 }
 };
 
+static bool has_noxft = false;
 
 /**
    The goal of this class is to prevent GUI confirmation
@@ -58,6 +61,9 @@ static KCmdLineOptions options[] =
    manager.
    It must be here, because this has to be called before
    the KMainWindow's manager.
+
+   It is also used to add "--noxft" to the restoreCommand if 
+   konsole was started with that option.
  */
 class KonsoleSessionManaged: public KSessionManaged {
 public:
@@ -65,6 +71,16 @@ public:
         konsole->skip_exit_query = true;
         return true;
     };
+
+    bool saveState( QSessionManager&sm) {
+        if (has_noxft) 
+        {
+            QStringList restartCommand = sm.restartCommand();
+            restartCommand.prepend("--noxft");
+            sm.setRestartCommand(restartCommand);
+        }
+        return true;
+    }
     Konsole *konsole;
 };
 
@@ -143,12 +159,17 @@ int main(int argc, char* argv[])
   KCmdLineArgs::init( argc, argv, &aboutData );
   KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
   //1.53 sec
+  KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+  if (!args->isSet("xft"))
+  {
+     putenv(qstrdup("QT_XFT=0"));
+     has_noxft = true;
+  }
 
   KApplication a;
   KImageIO::registerFormats(); // add io for additional image formats
   //2.1 secs
 
-  KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
   QString title;
   if(args->isSet("T")) {
     title = QFile::decodeName(args->getOption("title"));
@@ -307,7 +328,6 @@ int main(int argc, char* argv[])
     m->show();
   }
   //2.6 sec
-
   
   return a.exec();
 }
