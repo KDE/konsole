@@ -130,6 +130,7 @@ private:
   QPopupMenu* m_schema;
   QPopupMenu* m_keytab;
   QPopupMenu* m_codec;
+  QPopupMenu* m_toolbarSessionsCommands;
 
   KToggleAction *showToolbar;
   bool        b_toolbarvis;

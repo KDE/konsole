@@ -228,13 +228,15 @@ void Konsole::makeMenu()
 
   m_file = new QPopupMenu(this);
   connect(m_file, SIGNAL(activated(int)), SLOT(newSession(int)));
+  m_toolbarSessionsCommands = new QPopupMenu(this);
+  connect(m_toolbarSessionsCommands, SIGNAL(activated(int)), SLOT(newSession(int)));
 
   KAction *newsession = KStdAction::openNew(this , SLOT(newSessionSelect()));
   newsession->plug(toolBar());
   QObjectList *l = toolBar()->queryList( "KToolBarButton" );
   if ( l && l->first() )
   {
-      ( (KToolBarButton*)l->first() )->setDelayedPopup( m_file );
+      ( (KToolBarButton*)l->first() )->setDelayedPopup( m_toolbarSessionsCommands );
       connect( (KToolBarButton*)l->first() , SIGNAL(clicked()), this, SLOT(newSession()));
 
   }
@@ -1005,6 +1007,7 @@ void Konsole::addSessionCommand(const QString &path)
     delete co; return; // ignore
   }
   m_file->insertItem(txt, ++cmd_serial);
+  m_toolbarSessionsCommands->insertItem(txt, cmd_serial);
   no2command.insert(cmd_serial,co);
 }
 
