@@ -296,6 +296,15 @@ int TEPty::openPty()
     }
   }
 #endif
+#ifdef HAVE_OPENPTY
+  if (ptyfd < 0) {
+    int master_fd, slave_fd;
+    if (!openpty(&master_fd, &slave_fd, 0 /*noname*/, 0/*no termios*/,0 /*and again*/)) {
+      ptyfd=master_fd;
+      // one needs to look into who owns what to make sure chownpty is needed
+    }
+  }
+#endif
   if (ptyfd < 0) // Linux, FIXME: Trouble on other systems?
   { for (const char* s3 = "pqrstuvwxyzabcdefghijklmno"; *s3 != 0; s3++)
     { for (const char* s4 = "0123456789abcdefghijklmnopqrstuvwxyz"; *s4 != 0; s4++)
