@@ -13,6 +13,8 @@
 #ifndef TECOMMON_H
 #define TECOMMON_H
 
+#include <qcolor.h>
+
 #ifndef BOOL
 typedef int BOOL;
 #endif
@@ -75,5 +77,12 @@ inline BOOL operator != (ca a, ca b)
 {
   return a.c != b.c || a.f != b.f || a.b != b.b || a.r != b.r;
 }
+
+struct ColorEntry
+{
+  QColor color;
+  bool   transparent; // if used on bg
+  bool   bold;        // if used on fg
+};
 
 #endif // TECOMMON_H

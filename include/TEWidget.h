@@ -22,13 +22,6 @@
 
 #include "TECommon.h"
 
-struct ColorEntry
-{
-  QColor color;
-  bool   transparent; // if used on bg
-  bool   bold;        // if used on fg
-};
-
 class TEWidget : public QFrame
 // a widget representing attributed text
 { Q_OBJECT

@@ -12,9 +12,11 @@
 */
 
 #include "kcmkonsole.h"
+#include "schema.h"
 #include "qlayout.h"
 #include "qpushbt.h"
 #include "qpixmap.h"
+#include "qtableview.h"
 #include <kiconloader.h>
 
 #include <stdio.h>
@@ -86,12 +88,52 @@ GeneralPage::~GeneralPage()
 
 //--| Schema configuration |----------------------------------------------------
 
+
+ColorTable::ColorTable(QWidget* parent) : QFrame(parent)
+{
+  //setFrameStyle( QFrame::Panel | QFrame::Sunken );
+  setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
+  setBackgroundMode(PaletteBase);
+}
+
+//void ColorTable::resizeEvent(QResizeEvent* e)
+//{
+//}
+
+//void ColorTable::paintCell(QPainter* p, int row, int col)
+//{
+//}
+
 SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
 {
-  QLabel *bigWidget = new QLabel( "This is work in progress.", this );
+  QLabel *bigWidget = new QLabel(this); //( "This is work in progress.", this );
   bigWidget->setFrameStyle( QFrame::Panel | QFrame::Sunken );
   bigWidget->setAlignment( AlignCenter  );
   bigWidget->setBackgroundMode(PaletteBase);
+
+  QLabel *smlWidget = new QLabel( "This is work in progress.", bigWidget );
+  smlWidget->setFrameStyle( QFrame::Panel | QFrame::Sunken );
+  smlWidget->setAlignment( AlignCenter  );
+  smlWidget->setBackgroundMode(PaletteBase);
+
+  QGridLayout* topLayout = new QGridLayout( bigWidget, 2, 2, 5 ); 
+  lbox = new QListBox(bigWidget); //FIXME: QT does not react on setFrameStyle
+  ColorTable* colorTableW = new ColorTable(bigWidget);
+  topLayout->setColStretch(0,4);
+  topLayout->setColStretch(1,2);
+  topLayout->setRowStretch(0,4);
+  topLayout->setRowStretch(1,1);
+  topLayout->addWidget( colorTableW, 0, 0 );
+  topLayout->addWidget( lbox, 0, 1 );
+  topLayout->addMultiCellWidget( smlWidget, 1,1, 0,1 );
+  ColorSchema::loadAllSchemas();
+  for (int i = 0; i < ColorSchema::count(); i++)
+  { ColorSchema* s = ColorSchema::find(i);
+//  assert( s );
+    lbox->insertItem(s->title.data());
+  }
+  topLayout->activate();
+
   Contents
   ( i18n(
     "Color Schema Management"
@@ -140,6 +182,10 @@ KcmKonsole::KcmKonsole(int &argc, char **argv, const char *name)
 {
   if (runGUI())
   {
+//  if (!pages || pages->contains("schemes"))
+      addPage(schemes = new SchemaConfig(dialog),
+              klocale->translate("&Color Schemes"),
+              "kcmkonsole-not-written-yet.html");
 //  if (!pages || pages->contains("general"))
       addPage(general = new GeneralPage(dialog),
               klocale->translate("&General"),
@@ -147,10 +193,6 @@ KcmKonsole::KcmKonsole(int &argc, char **argv, const char *name)
 //  if (!pages || pages->contains("sessions"))
       addPage(sessions = new SessionConfig(dialog),
               klocale->translate("&Sessions"),
-              "kcmkonsole-not-written-yet.html");
-//  if (!pages || pages->contains("schemes"))
-      addPage(schemes = new SchemaConfig(dialog),
-              klocale->translate("&Color Schemes"),
               "kcmkonsole-not-written-yet.html");
 
     if (schemes || sessions || general)

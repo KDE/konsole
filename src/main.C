@@ -70,8 +70,6 @@ static int session_no = 0;
 static QIntDict<KSimpleConfig> no2command;
 static int cmd_serial = 0;
 
-static int schema_serial = 1;
-
 TEDemo::TEDemo(const char* args[], int login_shell) : KTMainWindow()
 {
   se = NULL;
@@ -101,7 +99,12 @@ TEDemo::TEDemo(const char* args[], int login_shell) : KTMainWindow()
   // load schema /////////////////////////////////////////////////////////////
 
   curr_schema = 0;
-  loadAllSchemas();
+  ColorSchema::loadAllSchemas();
+  for (int i = 0; i < ColorSchema::count(); i++)
+  { ColorSchema* s = ColorSchema::find(i);
+    assert( s );
+    m_schema->insertItem(s->title.data(),s->numb);
+  }
 
 //FIXME: we should build a complete session before running it.
 
@@ -117,7 +120,7 @@ TEDemo::TEDemo(const char* args[], int login_shell) : KTMainWindow()
 
   TESession* initial = new TESession(this,te,args,"xterm",login_shell);
   initial->setFontNo(n_font);
-  initial->setSchemaNo(path2schema.find(s_schema)->numb);
+  initial->setSchemaNo(ColorSchema::find(s_schema)->numb);
   initial->setTitle(args[0]);
 
   // start first session /////////////////////////////////////////////////////
@@ -582,7 +585,7 @@ void TEDemo::newSession(int i)
 
   ColorSchema* schema = sch.isEmpty()
                       ? (ColorSchema*)NULL
-                      : path2schema.find(sch);
+                      : ColorSchema::find(sch);
 
   int schmno = schema?schema->numb:se->schemaNo();
 
@@ -639,167 +642,7 @@ void TEDemo::doneSession(TESession* s, int status)
   }
 }
 
-// --| Schema support |-------------------------------------------------------
-
-void TEDemo::addSchema(const ColorSchema* s)
-{
-  numb2schema.insert(s->numb,s);
-  path2schema.insert(s->path.data(),s);
-  m_schema->insertItem(s->title.data(),s->numb);
-}
-
-void TEDemo::setSchema(int numb)
-{
-  ColorSchema* s = numb2schema.find(numb);
-  if (s) setSchema(s);
-}
-
-void TEDemo::setSchema(const char* path)
-{
-  ColorSchema* s = path2schema.find(path);
-  if (s) setSchema(s);
-}
-
-void TEDemo::setSchema(const ColorSchema* s)
-{
-  if (!s) return;
-  m_schema->setItemChecked(curr_schema,FALSE);
-  m_schema->setItemChecked(s->numb,TRUE);
-  s_schema = s->path;
-  curr_schema = s->numb;
-  pmPath = s->imagepath;
-  te->setColorTable(s->table); //FIXME: set twice here to work around a bug
-  pixmap_menu_activated(s->alignment);
-  te->setColorTable(s->table);
-  if (se) se->setSchemaNo(s->numb);
-}
-
-
-ColorSchema* TEDemo::readSchema(const char* path)
-{ FILE* sysin = fopen(path,"r");
-  char line[100]; int i;
-
-  if (!sysin) return NULL;
-  //
-  ColorSchema* res = new ColorSchema;
-  res->path = path;
-  res->numb = schema_serial++;
-  for (i = 0; i < TABLE_COLORS; i++)
-  {
-    res->table[i].color       = QColor(0,0,0);
-    res->table[i].transparent = 0;
-    res->table[i].bold        = 0;
-  }
-  res->title     = "[missing title]";
-  res->imagepath = "";
-  res->alignment = 1;
-  //
-  while (fscanf(sysin,"%80[^\n]\n",line) > 0)
-  {
-    if (strlen(line) > 5)
-    {
-      if (!strncmp(line,"title",5))
-      {
-        res->title = line+6;
-      }
-      if (!strncmp(line,"image",5))
-      { char rend[100], path[100]; int attr = 1;
-        if (sscanf(line,"image %s %s",rend,path) != 2)
-          continue;
-        if (!strcmp(rend,"tile"  )) attr = 2; else
-        if (!strcmp(rend,"center")) attr = 3; else
-        if (!strcmp(rend,"full"  )) attr = 4; else
-          continue;
-        res->imagepath = path;
-        res->alignment = attr;
-      }
-      if (!strncmp(line,"color",5))
-      { int fi,cr,cg,cb,tr,bo;
-        if(sscanf(line,"color %d %d %d %d %d %d",&fi,&cr,&cg,&cb,&tr,&bo) != 6)
-          continue;
-        if (!(0 <= fi && fi <= TABLE_COLORS)) continue;
-        if (!(0 <= cr && cr <= 255         )) continue;
-        if (!(0 <= cg && cg <= 255         )) continue;
-        if (!(0 <= cb && cb <= 255         )) continue;
-        if (!(0 <= tr && tr <= 1           )) continue;
-        if (!(0 <= bo && bo <= 1           )) continue;
-        res->table[fi].color       = QColor(cr,cg,cb);
-        res->table[fi].transparent = tr;
-        res->table[fi].bold        = bo;
-      }
-      if (!strncmp(line,"sysfg",5))
-      { int fi,tr,bo;
-        if(sscanf(line,"sysfg %d %d %d",&fi,&tr,&bo) != 3)
-          continue;
-        if (!(0 <= fi && fi <= TABLE_COLORS)) continue;
-        if (!(0 <= tr && tr <= 1           )) continue;
-        if (!(0 <= bo && bo <= 1           )) continue;
-        res->table[fi].color       = kapp->textColor;
-        res->table[fi].transparent = tr;
-        res->table[fi].bold        = bo;
-      }
-      if (!strncmp(line,"sysbg",5))
-      { int fi,tr,bo;
-        if(sscanf(line,"sysbg %d %d %d",&fi,&tr,&bo) != 3)
-          continue;
-        if (!(0 <= fi && fi <= TABLE_COLORS)) continue;
-        if (!(0 <= tr && tr <= 1           )) continue;
-        if (!(0 <= bo && bo <= 1           )) continue;
-        res->table[fi].color       = kapp->backgroundColor;
-        res->table[fi].transparent = tr;
-        res->table[fi].bold        = bo;
-      }
-    }
-  }
-  fclose(sysin);
-  return res;
-}
-
-static const ColorEntry default_table[TABLE_COLORS] =
- // The following are almost IBM standard color codes, with some slight
- // gamma correction for the dim colors to compensate for bright X screens.
- // It contains the 8 ansiterm/xterm colors in 2 intensities.
-{
-    { QColor(0x00,0x00,0x00), 0, 0 }, { QColor(0xFF,0xFF,0xFF), 1, 0 }, // Dfore, Dback
-    { QColor(0x00,0x00,0x00), 0, 0 }, { QColor(0xB2,0x18,0x18), 0, 0 }, // Black, Red
-    { QColor(0x18,0xB2,0x18), 0, 0 }, { QColor(0xB2,0x68,0x18), 0, 0 }, // Green, Yellow
-    { QColor(0x18,0x18,0xB2), 0, 0 }, { QColor(0xB2,0x18,0xB2), 0, 0 }, // Blue,  Magenta
-    { QColor(0x18,0xB2,0xB2), 0, 0 }, { QColor(0xB2,0xB2,0xB2), 0, 0 }, // Cyan,  White
-    // intensive
-    { QColor(0x00,0x00,0x00), 0, 1 }, { QColor(0xFF,0xFF,0xFF), 1, 0 },
-    { QColor(0x68,0x68,0x68), 0, 0 }, { QColor(0xFF,0x54,0x54), 0, 0 }, 
-    { QColor(0x54,0xFF,0x54), 0, 0 }, { QColor(0xFF,0xFF,0x54), 0, 0 }, 
-    { QColor(0x54,0x54,0xFF), 0, 0 }, { QColor(0xFF,0x54,0xFF), 0, 0 },
-    { QColor(0x54,0xFF,0xFF), 0, 0 }, { QColor(0xFF,0xFF,0xFF), 0, 0 }
-};
-
-ColorSchema* TEDemo::defaultSchema()
-{
-  ColorSchema* res = new ColorSchema;
-  res->path = "";
-  res->numb = 0;
-  res->title = "Konsole Default";
-  res->imagepath = ""; // background pixmap
-  res->alignment = 1;  // none
-  for (int i = 0; i < TABLE_COLORS; i++)
-    res->table[i] = default_table[i];
-  return res;
-}
-
-void TEDemo::loadAllSchemas()
-{
-  addSchema(defaultSchema());
-  QString path = kapp->kde_datadir() + "/konsole";
-  QDir d( path );
-  if(!d.exists())
-    return;
-  d.setFilter( QDir::Files | QDir::Readable );
-  d.setNameFilter( "*.schema" );
-  const QFileInfoList *list = d.entryInfoList();
-  QFileInfoListIterator it( *list );      // create list iterator
-  for(QFileInfo *fi; (fi=it.current()); ++it )
-    addSchema(readSchema(fi->filePath()));
-}
+// --| Session support |-------------------------------------------------------
 
 void TEDemo::addSessionCommand(const char* path)
 {
@@ -830,6 +673,34 @@ void TEDemo::loadSessionCommands()
   QFileInfoListIterator it( *list );      // create list iterator
   for(QFileInfo *fi; (fi=it.current()); ++it )
     addSessionCommand(fi->filePath());
+}
+
+// --| Schema support |-------------------------------------------------------
+
+void TEDemo::setSchema(int numb)
+{
+  ColorSchema* s = ColorSchema::find(numb);
+  if (s) setSchema(s);
+}
+
+void TEDemo::setSchema(const char* path)
+{
+  ColorSchema* s = ColorSchema::find(path);
+  if (s) setSchema(s);
+}
+
+void TEDemo::setSchema(const ColorSchema* s)
+{
+  if (!s) return;
+  m_schema->setItemChecked(curr_schema,FALSE);
+  m_schema->setItemChecked(s->numb,TRUE);
+  s_schema = s->path;
+  curr_schema = s->numb;
+  pmPath = s->imagepath;
+  te->setColorTable(s->table); //FIXME: set twice here to work around a bug
+  pixmap_menu_activated(s->alignment);
+  te->setColorTable(s->table);
+  if (se) se->setSchemaNo(s->numb);
 }
 
 /* --| main |---------------------------------------------------------------- */

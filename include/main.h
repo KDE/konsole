@@ -25,16 +25,7 @@
 #include "TEWidget.h"
 #include "TEmuVt102.h"
 #include "session.h"
-
-struct ColorSchema
-{
-  QString    path;
-  int        numb;
-  QString    title;
-  QString    imagepath;
-  int        alignment;
-  ColorEntry table[TABLE_COLORS];
-};
+#include "schema.h"
 
 class TEDemo : public KTMainWindow
 { Q_OBJECT
@@ -82,13 +73,9 @@ private:
   void setColorPixmaps();
   void setColLin(int columns, int lines);
 
-  void addSchema(const ColorSchema* s);
-  void loadAllSchemas();
   void setSchema(const char* path);
   void setSchema(const ColorSchema* s);
   void setFont(int fontno);
-  ColorSchema* readSchema(const char* path);
-  ColorSchema* defaultSchema();
 
   void addSessionCommand(const char* path);
   void loadSessionCommands();
@@ -108,9 +95,6 @@ private:
   QPopupMenu* m_font;
   QPopupMenu* m_schema;
   QPopupMenu* m_size;
-//
-  QIntDict<ColorSchema> numb2schema;
-  QDict<ColorSchema>    path2schema;
 //
   bool        b_menuvis;
   bool        b_framevis;

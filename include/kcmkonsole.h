@@ -5,6 +5,7 @@
 
 #include <qwidget.h>
 #include <qlabel.h>
+#include <qlistbox.h>
 #include <kcontrol.h>
 
 class PageFrame : public QWidget
@@ -22,11 +23,22 @@ public:
   ~GeneralPage();
 };
 
+class ColorTable : public QFrame
+{
+public:
+  ColorTable(QWidget* parent);
+protected:
+//void paintEvent(QPaintEvent* e);
+//void resizeEvent(QResizeEvent* e);
+};
+
 class SchemaConfig : public PageFrame
 { Q_OBJECT
 public:
   SchemaConfig(QWidget* parent);
   ~SchemaConfig();
+private:
+  QListBox* lbox;
 };
 
 class SessionConfig : public PageFrame
