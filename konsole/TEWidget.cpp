@@ -63,7 +63,6 @@
 
 #include <assert.h>
 
-#include <kdebug.h>
 #include <krun.h>
 #include <kcursor.h>
 #include <kdebug.h>
