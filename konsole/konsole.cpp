@@ -1302,7 +1302,11 @@ void Konsole::addSession(TESession* s)
   sessions.append(s);
   if (m_menuCreated)
      ra->plug(m_sessions);
-  ra->plug(toolBar());
+
+  int button_id=ra->itemId( ra->plug(toolBar()) );
+  KToolBarButton* ktb=toolBar()->getButton(button_id);
+  connect(ktb,SIGNAL(doubleClicked(int)), this,SLOT(slotRenameSession(int)));
+  
 }
 
 /**
@@ -1746,6 +1750,10 @@ void Konsole::slotRenameSession() {
     toolBar()->updateRects();
     updateTitle();
   }
+}
+
+void Konsole::slotRenameSession(int) {
+  slotRenameSession();
 }
 
 

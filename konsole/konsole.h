@@ -110,6 +110,7 @@ private slots:
   void slotToggleMenubar();
   void slotToggleFrame();
   void slotRenameSession();
+  void slotRenameSession(int);
   void slotClearAllSessionHistories();
   void slotHistoryType();
   void slotClearHistory();
