@@ -67,7 +67,8 @@ void TESession::run()
 {
   //kdDebug(1211) << "Running the session!" << pgm << "\n";
   //pgm = "pine";
-  sh->run(QFile::encodeName(pgm),args,term.latin1(),FALSE);
+  sh->run(QFile::encodeName(pgm),args,term.latin1(),true);
+  sh->setWriteable(false);  // We are reachable via kwrited.
 }
 
 void TESession::setUserTitle( int what, const QString &caption )

@@ -279,6 +279,16 @@ int TEPty::run(const char* _pgm, QStrList & _args, const char* _term, int _addut
 
 }
 
+void TEPty::setWriteable(bool writeable)
+{
+  struct stat sbuf;
+  stat(deviceName(), &sbuf);
+  if (writeable)
+    chmod(deviceName(), sbuf.st_mode | S_IWGRP);
+  else
+    chmod(deviceName(), sbuf.st_mode & ~(S_IWGRP|S_IWOTH));
+}
+
 int TEPty::openPty()
 { int ptyfd = -1;
   needGrantPty = TRUE;

@@ -45,6 +45,7 @@ Q_OBJECT
         instance before starting the execution of the client.
     */
     int run(const char* pgm, QStrList & args, const char* term, int addutmp);
+    void setWriteable(bool writeable);
 
   public slots:
 
