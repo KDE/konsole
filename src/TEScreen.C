@@ -544,7 +544,10 @@ ca* TEScreen::getCookedImage()
     for (i = 0; i < n; i++)
       reverseRendition(&merged[i]); // for reverse display
   }
-  if (getMode(MODE_Cursor) && (cuY+(hist.getLines()-histCursor) < lines)) // cursor visible
+//  if (getMode(MODE_Cursor) && (cuY+(hist.getLines()-histCursor) < lines)) // cursor visible
+
+  int loc_ = loc(cuX, cuY+hist.getLines()-histCursor);
+  if(getMode(MODE_Cursor) && loc_ < columns*lines)
     reverseRendition(&merged[loc(cuX,cuY+(hist.getLines()-histCursor))]);
   return merged;
 }
@@ -673,12 +676,6 @@ void TEScreen::ShowCharacter(unsigned short c)
 
   cuX += 1;
 
-  if(cuX >= columns) {
-    if(getMode(MODE_Wrap))
-      NextLine();
-    else
-      cuX = columns-1;
-  }
 
 }
 
