@@ -91,6 +91,7 @@ public:
   void sendSession(const QString &text);
   void renameSession(const QString &name);
   QString sessionName() { return title; }
+  int sessionPID() { return sh->pid(); }
 
   virtual bool processDynamic(const QCString &fun, const QByteArray &data, QCString& replyType, QByteArray &replyData);
   virtual QCStringList functionsDynamic();
