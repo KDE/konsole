@@ -385,21 +385,24 @@ int main(int argc, char* argv[])
           m->initMonitorSilence(sessionconfig->readBoolEntry(key,false));
           key = QString("MasterMode%1").arg(counter);
           m->initMasterMode(sessionconfig->readBoolEntry(key,false));
-          counter++;
+                  counter++;
         }
-        m->activateSession( sessionconfig->readNumEntry("ActiveSession",0)+1 );
         m->setDefaultSession( sessionconfig->readEntry("DefaultSession","shell.desktop") );
 
         ksm->konsole = m;
+        ksm->konsole->initFullScreen();
         if ( !profile.isEmpty() ) {
           ksm->konsole->setName( "konsole-mainwindow#1" );
           ksm->konsole->applyMainWindowSettings(sessionconfig);
           profile = "";
+          // Hack to work-around sessions initialized with minimum size
+          for (int i=1;i<=counter;i++)
+            m->activateSession( i );
         }
-	ksm->konsole->initFullScreen();
 	// works only for the first one, but there won't be more.
         n++;
-	m->run();
+        m->activateSession( sessionconfig->readNumEntry("ActiveSession",0)+1 );
+        m->run();
         m->setAutoClose(auto_close);
     }
   }
@@ -430,7 +433,7 @@ int main(int argc, char* argv[])
   }
 
   int ret = a.exec();
-  
+
  //// Temporary code, waiting for Qt to do this properly
 
   // Delete all toplevel widgets that have WDestructiveClose
@@ -441,7 +444,7 @@ int main(int argc, char* argv[])
      ++it;
      if ( w->testWFlags( Qt::WDestructiveClose ) )
           delete w;
-  }  
+  }
 
-  return ret;  
+  return ret;
 }
