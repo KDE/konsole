@@ -1223,9 +1223,8 @@ int TEScreen::getHistLines()
 
 void TEScreen::setScroll(const HistoryType& t)
 {
-  delete hist;
-  hist = t.getScroll();
-  histCursor = 0;
+  hist = t.getScroll(hist);
+  histCursor = hist->getLines();
 }
 
 bool TEScreen::hasScroll()

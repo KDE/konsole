@@ -232,6 +232,30 @@ void HistoryScrollBuffer::addCells(ca a[], int count)
   m_histBuffer.insert(m_arrayIndex, newLine);
 }
 
+void HistoryScrollBuffer::normalize()
+{
+  if (!m_buffFilled || !m_arrayIndex) return;
+  QVector<histline> newHistBuffer;
+  newHistBuffer.resize(m_maxNbLines);
+  for(int i = 0; i < m_maxNbLines-2; i++)
+  {
+     int lineno = adjustLineNb(i);
+     newHistBuffer.insert(i+1, m_histBuffer[lineno]);
+  }
+  m_histBuffer.setAutoDelete(false);
+  // Qt 2.3: QVector copy assignment is buggy :-(
+  //  m_histBuffer = newHistBuffer;
+  for(int i = 0; i < m_maxNbLines; i++)
+  {
+     m_histBuffer.insert(i, newHistBuffer[i]);
+  }
+  m_histBuffer.setAutoDelete(true);
+
+  m_arrayIndex = m_maxNbLines;
+  m_buffFilled = false;
+  m_nbLines = m_maxNbLines-2;
+}
+
 void HistoryScrollBuffer::addLine()
 {
   // ? Do nothing
@@ -276,8 +300,14 @@ void HistoryScrollBuffer::getCells(int lineno, int colno, int count, ca res[])
 
 void HistoryScrollBuffer::setMaxNbLines(unsigned int nbLines)
 {
+  normalize();
   m_maxNbLines = nbLines;
   m_histBuffer.resize(m_maxNbLines);
+  if (m_nbLines > m_maxNbLines - 2)
+     m_nbLines = m_maxNbLines -2;
+
+  delete m_histType;
+  m_histType = new HistoryTypeBuffer(nbLines);
 }
 
 int HistoryScrollBuffer::adjustLineNb(int lineno)
@@ -426,8 +456,9 @@ bool HistoryTypeNone::isOn() const
   return false;
 }
 
-HistoryScroll* HistoryTypeNone::getScroll() const
+HistoryScroll* HistoryTypeNone::getScroll(HistoryScroll *old) const
 {
+  delete old;
   return new HistoryScrollNone();
 }
 
@@ -453,8 +484,9 @@ unsigned int HistoryTypeBlockArray::getSize() const
   return m_size;
 }
 
-HistoryScroll* HistoryTypeBlockArray::getScroll() const
+HistoryScroll* HistoryTypeBlockArray::getScroll(HistoryScroll *old) const
 {
+  delete old;
   return new HistoryScrollBlockArray(m_size);
 }
 
@@ -483,8 +515,18 @@ unsigned int HistoryTypeBuffer::getSize() const
   return getNbLines();
 }
 
-HistoryScroll* HistoryTypeBuffer::getScroll() const
+HistoryScroll* HistoryTypeBuffer::getScroll(HistoryScroll *old) const
 {
+  if (old)
+  {
+    HistoryScrollBuffer *oldBuffer = dynamic_cast<HistoryScrollBuffer*>(old);
+    if (oldBuffer)
+    {
+       oldBuffer->setMaxNbLines(m_nbLines);
+       return oldBuffer;
+    }
+    delete old;
+  }
   return new HistoryScrollBuffer(m_nbLines);
 }
 
@@ -505,8 +547,9 @@ const QString& HistoryTypeFile::getFileName() const
   return m_fileName;
 }
 
-HistoryScroll* HistoryTypeFile::getScroll() const
+HistoryScroll* HistoryTypeFile::getScroll(HistoryScroll *old) const
 {
+  delete old;
   return new HistoryScrollFile(m_fileName);
 }
 

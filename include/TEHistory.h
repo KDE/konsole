@@ -121,9 +121,13 @@ public:
 
   void setMaxNbLines(unsigned int nbLines);
   unsigned int maxNbLines() { return m_maxNbLines; }
+  
 
 private:
   int adjustLineNb(int lineno);
+
+  // Normalize buffer so that the size can be changed.
+  void normalize();
 
   bool m_hasScroll;
   QVector<histline> m_histBuffer;
@@ -191,7 +195,7 @@ public:
   virtual bool isOn()                const = 0;
   virtual unsigned int getSize()     const = 0;
 
-  virtual HistoryScroll* getScroll() const = 0;
+  virtual HistoryScroll* getScroll(HistoryScroll *) const = 0;
 };
 
 class HistoryTypeNone : public HistoryType
@@ -202,7 +206,7 @@ public:
   virtual bool isOn() const;
   virtual unsigned int getSize() const;
 
-  virtual HistoryScroll* getScroll() const;
+  virtual HistoryScroll* getScroll(HistoryScroll *) const;
 };
 
 class HistoryTypeBlockArray : public HistoryType
@@ -213,7 +217,7 @@ public:
   virtual bool isOn() const;
   virtual unsigned int getSize() const;
 
-  virtual HistoryScroll* getScroll() const;
+  virtual HistoryScroll* getScroll(HistoryScroll *) const;
 
 protected:
   size_t m_size;
@@ -229,7 +233,7 @@ public:
   virtual const QString& getFileName() const;
   virtual unsigned int getSize() const;
 
-  virtual HistoryScroll* getScroll() const;
+  virtual HistoryScroll* getScroll(HistoryScroll *) const;
 
 protected:
   QString m_fileName;
@@ -245,7 +249,7 @@ public:
   virtual unsigned int getNbLines() const;
   virtual unsigned int getSize() const;
 
-  virtual HistoryScroll* getScroll() const;
+  virtual HistoryScroll* getScroll(HistoryScroll *) const;
 
 protected:
   unsigned int m_nbLines;
