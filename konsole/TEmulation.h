@@ -20,6 +20,8 @@
 #include <qtextcodec.h>
 #include <keytrans.h>
 
+enum { NOTIFYNORMAL=0, NOTIFYBELL=1, NOTIFYACTIVITY=2, NOTIFYSILENCE=3 };
+
 class TEmulation : public QObject
 { Q_OBJECT
 
@@ -54,6 +56,7 @@ signals:
   void ImageSizeChanged(int lines, int columns);
   void changeColumns(int columns);
   void changeTitle(int arg, const char* str);
+  void notifySessionState(int state);
 
 public:
 

@@ -202,6 +202,8 @@ void TEmulation::onRcvChar(int c)
 // process application unicode input to terminal
 // this is a trivial scanner
 {
+  emit notifySessionState(NOTIFYACTIVITY);
+
   c &= 0xff;
   switch (c)
   {
@@ -209,7 +211,10 @@ void TEmulation::onRcvChar(int c)
     case '\t'      : scr->Tabulate();                  break;
     case '\n'      : scr->NewLine();                   break;
     case '\r'      : scr->Return();                    break;
-    case 0x07      : gui->Bell();                      break;
+    case 0x07      : if (connected)
+                       gui->Bell();
+                     emit notifySessionState(NOTIFYBELL);
+                     break;
     default        : scr->ShowCharacter(c);            break;
   };
 }
@@ -226,6 +231,7 @@ void TEmulation::onRcvChar(int c)
 void TEmulation::onKeyPress( QKeyEvent* ev )
 {
   if (!connected) return; // someone else gets the keys
+  emit notifySessionState(NOTIFYNORMAL);
   if (scr->getHistCursor() != scr->getHistLines());
     scr->setHistCursor(scr->getHistLines());
   if (!ev->text().isEmpty())

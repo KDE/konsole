@@ -174,6 +174,9 @@ int main(int argc, char* argv[])
   aboutData.addCredit("Stephan Kulow",
     I18N_NOOP("Solaris support and work on history"),
     "coolo@kde.org");
+  aboutData.addCredit("Stephan Binner",
+    I18N_NOOP("bug fixing and improvements"),
+    "stephan.binner@gmx.de");
   aboutData.addCredit("",I18N_NOOP("Thanks to many others.\n"
     "The above list only reflects the contributors\n"
     "I managed to keep track of."));

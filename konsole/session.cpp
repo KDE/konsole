@@ -8,6 +8,8 @@
 #define HERE fprintf(stderr,"%s(%d): here\n",__FILE__,__LINE__)
 #endif
 
+#define SILENCE_TIMEOUT 10000 // milliseconds
+
 /*! \class TESession
 
     Sessions are combinations of TEPTy and Emulations.
@@ -19,7 +21,9 @@
 */
 
 TESession::TESession(KMainWindow* main, TEWidget* te, const QString &_pgm, QStrList & _args, const QString &_term)
-   : schema_no(0)
+   : monitorActivity(false)
+   , monitorSilence(false)
+   , schema_no(0)
    , font_no(3)
    , pgm(_pgm)
    , args(_args)
@@ -48,6 +52,11 @@ TESession::TESession(KMainWindow* main, TEWidget* te, const QString &_pgm, QStrL
   connect( em, SIGNAL( changeTitle( int, const QString & ) ),
            this, SLOT( setUserTitle( int, const QString & ) ) );
 
+  connect( em, SIGNAL( notifySessionState(int) ),
+           this, SLOT( notifySessionState(int) ) );
+  monitorTimer = new QTimer(this);
+  connect(monitorTimer, SIGNAL(timeout()), this, SLOT(monitorTimerDone()));
+  
   connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
   //kdDebug(1211)<<"TESession ctor() done"<<endl;
 }
@@ -79,6 +88,25 @@ QString TESession::fullTitle() const
     return res;
 }
 
+void TESession::monitorTimerDone()
+{
+  emit notifySessionState(this,NOTIFYSILENCE);
+  monitorTimer->start(SILENCE_TIMEOUT,true);
+}
+
+void TESession::notifySessionState(int state)
+{
+  if (state==NOTIFYACTIVITY) {
+    if (monitorSilence) {
+      monitorTimer->stop();
+      monitorTimer->start(SILENCE_TIMEOUT,true);
+    }
+    if (!monitorActivity)
+      return;
+  }
+
+  emit notifySessionState(this, state);
+}
 
 void TESession::kill(int signal)
 {
@@ -203,5 +231,20 @@ QString TESession::getPgm()
   return pgm;
 }
 
+bool TESession::isMonitorActivity() { return monitorActivity; }
+bool TESession::isMonitorSilence() { return monitorSilence; }
+
+void TESession::setMonitorActivity(bool _monitor) { monitorActivity=_monitor; }
+void TESession::setMonitorSilence(bool _monitor) 
+{
+  if (monitorSilence==_monitor)
+    return;
+
+  monitorSilence=_monitor;
+  if (monitorSilence)
+    monitorTimer->start(SILENCE_TIMEOUT,true);
+  else
+    monitorTimer->stop();
+}
 
 #include "session.moc"

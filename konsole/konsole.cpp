@@ -195,6 +195,8 @@ Konsole::Konsole(const char* name, const QString& _program,
 ,m_toolbarSessionsCommands(0)
 ,m_signals(0)
 ,m_help(0)
+,monitorActivity(0)
+,monitorSilence(0)
 ,showToolbar(0)
 ,showMenubar(0)
 ,showScrollbar(0)
@@ -370,6 +372,14 @@ void Konsole::makeGUI()
    KAction *renameSession = new KAction(i18n("&Rename Session..."), 0, this,
                                         SLOT(slotRenameSession()), this);
    renameSession->plug(m_sessions);
+
+   monitorActivity = new KToggleAction ( i18n( "Monitor for Activity" ), "idea", 0, this,
+                                     SLOT( slotToggleMonitor() ), this );
+   monitorActivity->plug ( m_sessions );
+
+   monitorSilence = new KToggleAction ( i18n( "Monitor for Silence" ), "ktip", 0, this,
+                                     SLOT( slotToggleMonitor() ), this );
+   monitorSilence->plug ( m_sessions );
 
    m_clearHistory = new KAction(i18n("Clear &History"), "history_clear", 0, this,
                                        SLOT(slotClearHistory()), this);
@@ -1438,6 +1448,7 @@ void Konsole::activateSession(TESession *s)
      QObject::disconnect( se->getEmulation(),SIGNAL(activateMenu()), this,SLOT(activateMenu()) );
      QObject::disconnect( se->getEmulation(),SIGNAL(moveSessionLeft()), this,SLOT(moveSessionLeft()) );
      QObject::disconnect( se->getEmulation(),SIGNAL(moveSessionRight()), this,SLOT(moveSessionRight()) );
+     notifySessionState(se,NOTIFYNORMAL);
      // Delete the session if isn't in the session list any longer.
      if (sessions.find(se) == -1)
         delete se;
@@ -1463,6 +1474,8 @@ void Konsole::activateSession(TESession *s)
   updateKeytabMenu(); // act. the keytab for this session
   m_clearHistory->setEnabled( se->history().isOn() );
   m_saveHistory->setEnabled( se->history().isOn() );
+  monitorActivity->setChecked( se->isMonitorActivity() );
+  monitorSilence->setChecked( se->isMonitorSilence() );
   sessions.find(se);
   uint position=sessions.at();
   m_moveSessionLeft->setEnabled(position>0);
@@ -1477,6 +1490,7 @@ void Konsole::allowPrevNext()
   QObject::connect( se->getEmulation(),SIGNAL(activateMenu()), this,SLOT(activateMenu()) );
   QObject::connect( se->getEmulation(),SIGNAL(moveSessionLeft()), this,SLOT(moveSessionLeft()) );
   QObject::connect( se->getEmulation(),SIGNAL(moveSessionRight()), this,SLOT(moveSessionRight()) );
+  notifySessionState(se,NOTIFYNORMAL);
 }
 
 KSimpleConfig *Konsole::defaultSession()
@@ -1563,6 +1577,8 @@ TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrLis
            this, SLOT(configureRequest(TEWidget*,int,int,int)) );
   connect( s, SIGNAL( updateTitle() ),
            this, SLOT( updateTitle() ) );
+  connect( s, SIGNAL( notifySessionState(TESession*, int) ),
+           this, SLOT( notifySessionState(TESession*, int)) );
 
   s->setFontNo(QMIN(fno, TOPFONT));
   s->setSchemaNo(schmno);
@@ -1721,6 +1737,29 @@ void Konsole::moveSessionRight()
     makeGUI();
   m_moveSessionLeft->setEnabled(true);
   m_moveSessionRight->setEnabled(position+1<sessions.count()-1);
+}
+
+void Konsole::slotToggleMonitor()
+{
+  se->setMonitorActivity( monitorActivity->isChecked() );
+  se->setMonitorSilence( monitorSilence->isChecked() );
+  notifySessionState(se,NOTIFYNORMAL);
+}
+
+void Konsole::notifySessionState(TESession* session, int state)
+{
+  int button_id=-(sessions.find(session)+3);
+  KToolBarButton* ktb=toolBar()->getButton(button_id);
+  switch(state)
+  {
+    case NOTIFYNORMAL  : ktb->setIcon("openterm");
+                         break;
+    case NOTIFYBELL    : ktb->setIcon("bell");
+                         break;
+    case NOTIFYACTIVITY: ktb->setIcon("idea");
+                         break;
+    case NOTIFYSILENCE : ktb->setIcon("ktip");
+  }
 }
 
 // --| Session support |-------------------------------------------------------

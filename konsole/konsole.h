@@ -99,6 +99,7 @@ private slots:
   void updateKeytabMenu();
 
   void changeColumns(int);
+  void notifySessionState(TESession* session,int state);
   void notifySize(int,int);
   void updateTitle();
   void prevSession();
@@ -114,6 +115,7 @@ private slots:
   void slotToggleFrame();
   void slotRenameSession();
   void slotRenameSession(int);
+  void slotToggleMonitor();
   void slotClearAllSessionHistories();
   void slotHistoryType();
   void slotClearHistory();
@@ -175,10 +177,13 @@ private:
   KPopupMenu* m_signals;
   KPopupMenu* m_help;
 
+  KToggleAction *monitorActivity;
+  KToggleAction *monitorSilence;
   KToggleAction *showToolbar;
   KToggleAction *showMenubar;
   KToggleAction *showScrollbar;
   KToggleAction *showFrame;
+
   KSelectAction *selectSize;
   KSelectAction *selectFont;
   KSelectAction *selectScrollbar;

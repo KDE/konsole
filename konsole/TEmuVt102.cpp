@@ -267,6 +267,7 @@ void TEmuVt102::initTokenizer()
 
 void TEmuVt102::onRcvChar(int cc)
 { int i;
+  emit notifySessionState(NOTIFYACTIVITY);
 
   if (cc == 127) return; //VT100: ignore.
 
@@ -367,7 +368,10 @@ void TEmuVt102::tau( int token, int p, int q )
     case TY_CTL___('D'      ) : /* EOT: ignored                      */ break;
     case TY_CTL___('E'      ) :      reportAnswerBack     (          ); break; //VT100
     case TY_CTL___('F'      ) : /* ACK: ignored                      */ break;
-    case TY_CTL___('G'      ) : gui->Bell                 (          ); break; //VT100
+    case TY_CTL___('G'      ) : if (connected)
+                                  gui->Bell  (          );
+                                emit notifySessionState(NOTIFYBELL);
+                                break; //VT100
     case TY_CTL___('H'      ) : scr->BackSpace            (          ); break; //VT100
     case TY_CTL___('I'      ) : scr->Tabulate             (          ); break; //VT100
     case TY_CTL___('J'      ) : scr->NewLine              (          ); break; //VT100
@@ -793,6 +797,7 @@ void TEmuVt102::onScrollLock()
 void TEmuVt102::onKeyPress( QKeyEvent* ev )
 {
   if (!connected) return; // someone else gets the keys
+  emit notifySessionState(NOTIFYNORMAL);
 
 //printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().length(),ev->text().length()?ev->text().ascii()[0]:0);
 

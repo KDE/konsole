@@ -36,6 +36,8 @@ public:
   void        setConnect(bool r);
   TEmulation* getEmulation();      // to control emulation
   bool        isSecure();
+  bool        isMonitorActivity();
+  bool        isMonitorSilence();
   int schemaNo();
   int fontNo();
   const QString& Term();
@@ -50,6 +52,8 @@ public:
   void setHistory(const HistoryType&);
   const HistoryType& history();
 
+  void setMonitorActivity(bool);
+  void setMonitorSilence(bool);
   void setSchemaNo(int sn);
   void setKeymapNo(int kn);
   void setKeymap(const QString& _id);
@@ -68,15 +72,22 @@ signals:
 
   void done(TESession*, int);
   void updateTitle();
+  void notifySessionState(TESession* session, int state);
 
 private slots:
   void setUserTitle( int, const QString &caption );
+  void monitorTimerDone();
+  void notifySessionState(int state);
 
 private:
 
   TEPty*         sh;
   TEWidget*      te;
   TEmulation*    em;
+
+  bool           monitorActivity;
+  bool           monitorSilence;
+  QTimer*        monitorTimer;
 
   //FIXME: using the indices here
   // is propably very bad. We should
