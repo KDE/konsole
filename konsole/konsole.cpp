@@ -1492,12 +1492,6 @@ void Konsole::slotToggleToolbar() {
   }
 }
 
-void Konsole::slotToggleFullscreen()
-{
-  setFullScreen(!b_fullscreen);
-  te->setFrameStyle( b_framevis && !b_fullscreen ?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
-}
-
 void Konsole::slotSaveSettings()
 {
   KConfig *config = KGlobal::config();
@@ -1602,16 +1596,6 @@ void Konsole::updateTitle()
   setIconText( se->IconText() );
 }
 
-void Konsole::initFullScreen()
-{
-  //This function is to be called from main.C to initialize the state of the Konsole (fullscreen or not).  It doesn't appear to work
-  //from inside the Konsole constructor
-  if (b_fullscreen) {
-    setColLin(0,0);
-  }
-  setFullScreen(b_fullscreen);
-}
-
 void Konsole::initSessionFont(int fontNo) {
   if (fontNo == -1) return; // Don't change
   setFont(fontNo);
@@ -1622,22 +1606,53 @@ void Konsole::initSessionKeyTab(const QString &keyTab) {
   updateKeytabMenu();
 }
 
+void Konsole::initFullScreen()
+{
+  //This function is to be called from main.C to initialize the state of the Konsole (fullscreen or not).  It doesn't appear to work
+  //from inside the Konsole constructor
+  if (b_fullscreen) {
+    setColLin(0,0);
+  }
+  setFullScreen(b_fullscreen);
+}
+
+void Konsole::slotToggleFullscreen()
+{
+  setFullScreen(!b_fullscreen);
+  te->setFrameStyle( b_framevis && !b_fullscreen ?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
+}
+
 void Konsole::setFullScreen(bool on)
 {
-  if (on) {
+  if( on )
+    showFullScreen(); // both calls will generate event triggering updateFullScreen()
+  else {
+    if( isFullScreen()) // showNormal() may also do unminimize, unmaximize etc. :(
+        showNormal();
+  }
+}
+
+void Konsole::updateFullScreen()
+{
+  if( isFullScreen() == b_fullscreen )
+      return;
+  b_fullscreen = isFullScreen();
+  if (b_fullscreen) {
     te->setFrameStyle( QFrame::NoFrame );
-    showFullScreen();
-    b_fullscreen = on;
   }
   else {
     te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
-    if( isFullScreen()) // showNormal() may also do unminimize, unmaximize etc.
-      showNormal();
     updateTitle(); // restore caption of window
-    b_fullscreen = false;
   }
   if (m_fullscreen)
     m_fullscreen->setChecked(b_fullscreen);
+}
+
+bool Konsole::event( QEvent* e )
+{
+    if( e->type() == QEvent::ShowFullScreen || e->type() == QEvent::ShowNormal )
+        updateFullScreen();
+    return KMainWindow::event( e );
 }
 
 /* --| sessions |------------------------------------------------------------ */

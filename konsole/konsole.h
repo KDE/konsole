@@ -117,6 +117,7 @@ protected:
  bool queryClose();
  void saveProperties(KConfig* config);
  void readProperties(KConfig* config);
+ virtual bool event(QEvent* e);
 
 
 
@@ -228,6 +229,7 @@ private:
   void runSession(TESession* s);
   void addSession(TESession* s);
   void setColorPixmaps();
+  void updateFullScreen();
 
   void setSchema(ColorSchema* s);
   void setFont(int fontno=-1);
