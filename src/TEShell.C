@@ -36,6 +36,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
+#include <sys/resource.h>
 #include <grp.h>
 #include "../../config.h"
 
@@ -61,7 +62,7 @@
 
 #define HERE fprintf(stdout,"%s(%d): here\n",__FILE__,__LINE__)
 
-FILE* syslog = NULL; //stdout;
+FILE* syslog_file = NULL; //stdout;
 
 /* -------------------------------------------------------------------------- */
 
@@ -120,7 +121,10 @@ void Shell::makeShell(const char* dev, QStrList & args,
  
   // Don't know why, but his is vital for SIGHUP to find the child.
   // Could be, we get rid of the controling terminal by this.
-  for (int i = 0; i < getdtablesize(); i++) if (i != tt && i != fd) close(i);
+  // getrlimit is a getdtablesize() equivalent, more portable (David Faure)
+  struct rlimit rlp;
+  getrlimit(RLIMIT_NOFILE, &rlp);
+  for (int i = 0; i < rlp.rlim_cur; i++) if (i != tt && i != fd) close(i);
 
   dup2(tt,fileno(stdin));
   dup2(tt,fileno(stdout));
@@ -251,11 +255,11 @@ void Shell::DataReceived(int)
 { char buf[4096];
   int n = read(fd, buf, 4096);
   emit block_in(buf,n);
-  if (syslog) // if (debugging) ...
+  if (syslog_file) // if (debugging) ...
   {
     int i;
-    for (i = 0; i < n; i++) fputc(buf[i],syslog);
-    fflush(syslog);
+    for (i = 0; i < n; i++) fputc(buf[i],syslog_file);
+    fflush(syslog_file);
   }
 }
 
