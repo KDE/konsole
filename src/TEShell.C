@@ -93,6 +93,11 @@
 
 FILE* syslog_file = NULL; //stdout;
 
+static char ptynam[] = "/dev/ptyxx";
+static char ttynam[] = "/dev/ttyxx";
+
+static QIntDict<Shell> shells;
+
 /* -------------------------------------------------------------------------- */
 
 //#include <unistd.h>
@@ -108,21 +113,36 @@ static int chownpty(int fd, int grant)
 // param grant: 1 to grant, 0 to revoke
 // returns 1 on success 0 on fail
 {
+  void(*tmp)(int) = signal(SIGCHLD,SIG_DFL);
   pid_t pid = fork();
-  if (pid < 0) return 0;
+  if (pid < 0)
+  {
+    signal(SIGCHLD,tmp);
+    return 0;
+  }
   if (pid == 0)
   {
     /* We pass the master pseudo terminal as file descriptor PTY_FILENO. */
     if (fd != PTY_FILENO && dup2(fd, PTY_FILENO) < 0) exit(1);
     QString path = KApplication::kde_bindir() + "/" + BASE_CHOWN;
-printf("path: %s, do:%s\n",path.data(),grant?"--grant":"--revoke");
     execle(path.data(), BASE_CHOWN, grant?"--grant":"--revoke", NULL, NULL);
     exit(1); // should not be reached
   }
   if (pid > 0)
   { int w;
-    return (waitpid (pid, &w, 0) != -1 && WIFEXITED(w) && WEXITSTATUS(w) == 0);
+  retry:
+    int rc = waitpid (pid, &w, 0);
+    if (rc != pid)
+    { // signal from other child, behave like catchChild.
+      // guess this gives quite some control chaos...
+      Shell* sh = shells.find(rc);
+      if (sh) { shells.remove(rc); sh->doneShell(w); }
+      goto retry;
+    }
+    signal(SIGCHLD,tmp);
+    return (rc != -1 && WIFEXITED(w) && WEXITSTATUS(w) == 0);
   }
+  signal(SIGCHLD,tmp);
   return 0; //dummy.
 }
 
@@ -141,15 +161,10 @@ void Shell::setSize(int lines, int columns)
   ioctl(fd,TIOCSWINSZ,(char *)&wsize);
 }
 
-static char ptynam[] = "/dev/ptyxx";
-static char ttynam[] = "/dev/ttyxx";
-
-static QIntDict<Shell> shells;
-
 //! Catch a SIGCHLD signal and propagate that the child died.
 static void catchChild(int)
 { int status;
-  pid_t pid = wait(&status);
+  pid_t pid = waitpid(-1,&status,WNOHANG);
   Shell* sh = shells.find(pid);
   if (sh) { shells.remove(pid); sh->doneShell(status); }
 }
