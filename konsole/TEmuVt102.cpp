@@ -25,6 +25,9 @@
 #undef HAVE_XTEST
 #endif
 
+#include <klocale.h>
+#include <kmessagebox.h>
+
 #include "TEmuVt102.h"
 #include "TEWidget.h"
 #include "TEScreen.h"
@@ -854,13 +857,22 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
     if ( (ev->type() & QEvent::KeyPress) )
     {
       if ( ev->key()  == Key_Q ) { scrollLock(false); return; }
-      if ( ev->key()  == Key_S ) { scrollLock(true);  return; }
+      if ( ev->key()  == Key_S ) {
+        scrollLock(true);
+	KMessageBox::information(gui,
+	                         i18n("You have just sent Ctrl-S to the terminal application!\n\n"
+	                              "Some applications like shells will interpret this as command to stop "
+	                              "their output (XOFF) according to the XON/XOFF flow control protocol.\n"
+				      "If an application seems frozen, try sending Ctrl-Q (XON)."),
+	                         i18n("Ctrl-S Sent!"),"ShowWorkflowInfo");
+	return;
+      }
     }
   }
 
   // revert to non-history when typing
   if (scr->getHistCursor() != scr->getHistLines() && (!ev->text().isEmpty()
-    || ev->key()==Key_Down || ev->key()==Key_Up || ev->key()==Key_Left || ev->key()==Key_Right 
+    || ev->key()==Key_Down || ev->key()==Key_Up || ev->key()==Key_Left || ev->key()==Key_Right
     || ev->key()==Key_PageUp || ev->key()==Key_PageDown))
     scr->setHistCursor(scr->getHistLines());
 
