@@ -162,7 +162,6 @@ extern "C" {
 #include <kglobal.h>
 #include <kstddirs.h>
 #include <kdebug.h>
-#include "iostream.h"
 
 #ifndef HERE
 #define HERE fprintf(stdout,"%s(%d): here\n",__FILE__,__LINE__)
