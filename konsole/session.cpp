@@ -105,6 +105,10 @@ void TESession::changeWidget(TEWidget* w)
                      this,SLOT(onFontMetricChange(int,int)));
   te=w;
   em->changeGUI(w);
+  font_h = te->fontHeight();
+  font_w = te->fontWidth();
+  sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
+
   QObject::connect(te,SIGNAL(changedContentSizeSignal(int,int)),
                    this,SLOT(onContentSizeChange(int,int)));
   QObject::connect(te,SIGNAL(changedFontMetricSignal(int,int)),
