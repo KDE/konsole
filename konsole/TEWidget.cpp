@@ -812,7 +812,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   }
   else if ( ev->button() == MidButton )
   {
-    if (mouse_marks)
+    if ( mouse_marks || (!mouse_marks && (ev->state() & ShiftButton)) )
       emitSelection(true,ev->state() & ControlButton);
     else
       emit mouseSignal( 1, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
