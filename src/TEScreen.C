@@ -401,6 +401,7 @@ void TEScreen::restoreCursor()
 
 void TEScreen::resizeImage(int new_lines, int new_columns)
 {
+  if ((new_lines==lines) && (new_columns==columns)) return;
 
   if (cuY > new_lines-1)
   { // attempt to preserve focus and lines
