@@ -71,7 +71,7 @@ Time to start a requirement list.
     attributes has to be set, e.g. in session swapping.
 */
 
-#include"config.h"
+#include <config.h>
 
 #include <qdir.h>
 #include <qevent.h>
@@ -197,7 +197,7 @@ Konsole::Konsole(const char* name,
 
   loadSessionCommands();
   m_file->insertSeparator();
-  m_file->insertItem( i18n("&Quit"), this, SLOT(close()));
+  m_file->insertItem( SmallIconSet( "exit" ), i18n("&Quit"), this, SLOT( close() ) );
 
   // load schema /////////////////////////////////////////////////////////////
 
@@ -285,13 +285,14 @@ void Konsole::makeMenu()
   connect(m_file, SIGNAL(activated(int)), SLOT(newSession(int)));
 
   KToolBarPopupAction *newsession = new KToolBarPopupAction(i18n("&New"), "filenew",
-                KStdAccel::key(KStdAccel::New), this, SLOT(newSession()),
+                0 , this, SLOT(newSession()),
                 this, KStdAction::stdName(KStdAction::New));
   newsession->plug(toolBar());
   m_toolbarSessionsCommands = newsession->popupMenu();
   connect(m_toolbarSessionsCommands, SIGNAL(activated(int)), SLOT(newSession(int)));
   toolBar()->insertLineSeparator();
 
+  // Send Signal Menu -------------------------------------------------------------
   KPopupMenu* m_signals = new KPopupMenu(this);
   m_signals->insertItem( i18n( "Suspend Task" )   + " (KILL)", 17);     // FIXME: comes with 3 values
   m_signals->insertItem( i18n( "Continue Task" )  + " (CONT)", 18);     // FIXME: comes with 3 values
@@ -301,6 +302,7 @@ void Konsole::makeMenu()
   m_signals->insertItem( i18n( "Kill Task" )      + " (KILL)",  9);
   connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
 
+  // Sessions Menu ----------------------------------------------------------------
   m_sessions = new KPopupMenu(this);
   m_sessions->setCheckable(TRUE);
   m_sessions->insertItem( i18n("Send Signal"), m_signals );
@@ -311,31 +313,41 @@ void Konsole::makeMenu()
 
   m_sessions->insertSeparator();
 
+  // Schema Options Menu ----------------------------------------------------------
   m_schema = new KPopupMenu(this);
   m_schema->setCheckable(TRUE);
   connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
   connect(m_schema, SIGNAL(aboutToShow()), SLOT(schema_menu_check()));
 
+  // Keyboard Options Menu --------------------------------------------------------
   m_keytab = new KPopupMenu(this);
   m_keytab->setCheckable(TRUE);
   connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
 
+  // Codec Options Menu -----------------------------------------------------------
   m_codec  = new KPopupMenu(this);
   m_codec->setCheckable(TRUE);
   m_codec->insertItem( i18n("&locale"), 1 );
   m_codec->setItemChecked(1,TRUE);
 
+  // Options Menu -----------------------------------------------------------------
+  // Do __NOT__ use KStdActions, because these may also show unusable accel keys!
+  // (At least they do for 'Show Menubar'):
   m_options = new KPopupMenu(this);
-  // insert the rename schema here too, because they will not find it
-  // on shift right click
+  // insert 'Rename Session' here too, because they will not find it on right click
   renameSession->plug(m_options);
   m_options->insertSeparator();
+
   // Menubar on/off
-  showMenubar = KStdAction::showMenubar(this, SLOT(slotToggleMenubar()), this);
-  showMenubar->plug(m_options);
+  showMenubar = new KToggleAction ( i18n( "Show &Toolbar" ), 0, this,
+                                    SLOT( slotToggleMenubar() ), this );
+  showMenubar->plug ( m_options );
+
   // Toolbar on/off
-  showToolbar = KStdAction::showToolbar(this, SLOT(slotToggleToolbar()), this);
+  showToolbar = new KToggleAction ( i18n( "Show &Menubar" ), 0, this,
+                                    SLOT( slotToggleToolbar() ), this );
   showToolbar->plug(m_options);
+
   // Frame on/off
   showFrame = new KToggleAction(i18n("Show &Frame"), 0,
                                 this, SLOT(slotToggleFrame()), this);
@@ -390,7 +402,7 @@ void Konsole::makeMenu()
   m_options->setItemEnabled(3, false);
   m_options->insertSeparator();
   m_options->insertItem( i18n("&Codec"), m_codec);
-  m_options->insertItem( i18n("&Keyboard"), m_keytab);
+  m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
 
   // Open Session Warning on Quit
   // FIXME: Allocate KActionCollection as parent, not this - Martijn
@@ -408,8 +420,11 @@ void Konsole::makeMenu()
   //m_options->insertSeparator();
 
   m_options->insertSeparator();
+  // The 'filesave' icon is useable, but it might be confusing. I don't use it for now - Martijn
   m_options->insertItem( i18n("Save &Options"), 8);
+  //  m_options->insertItem( SmallIconSet( "filesave" ), i18n("Save &Options"), 8);
   connect(m_options, SIGNAL(activated(int)), SLOT(opt_menu_activated(int)));
+  m_options->installEventFilter( this );
   // Help and about menu
 /*
   QString aboutAuthor = i18n("%1 version %2 - an X terminal\n"
@@ -425,8 +440,6 @@ void Konsole::makeMenu()
   KPopupMenu* m_help =  helpMenu(0, FALSE);
   m_help->insertItem( i18n("&Technical Reference"), this, SLOT(tecRef()),
                       0, -1, 1);
-  m_options->installEventFilter( this );
-
 
   // For those who would like to add shortcuts here, be aware that
   // ALT-key combinations are heavily used by many programs. Thus,
@@ -764,33 +777,38 @@ void Konsole::setFont(int fontno)
   n_font = fontno;
 }
 
+/**
+     Toggle the Menubar visibility
+ */
 void Konsole::slotToggleMenubar() {
-  bool b_menuvis = showMenubar->isChecked();
-  if (b_menuvis)
+  if ( showMenubar->isChecked() )
      menubar->show();
   else
      menubar->hide();
-  if (!b_menuvis) {
+  if (!showMenubar->isChecked()) {
     setCaption(i18n("Use the right mouse button to bring back the menu"));
     QTimer::singleShot(5000,this,SLOT(setHeader()));
   }
 }
 
+/**
+    Toggle the Toolbar visibility
+ */
 void Konsole::slotToggleToolbar() {
-  bool b_toolbarvis = showToolbar->isChecked();
-  if (b_toolbarvis)
+  if (showToolbar->isChecked())
      toolBar()->show();
   else
      toolBar()->hide();
 }
 
+/**
+    Toggle the Frame visibility
+ */
 void Konsole::slotToggleFrame() {
-  b_framevis = showFrame->isChecked();
-  te->setFrameStyle( b_framevis
+  te->setFrameStyle( showFrame->isChecked()
                      ? ( QFrame::WinPanel | QFrame::Sunken )
                      : QFrame::NoFrame );
 }
-
 
 void Konsole::setHistory(bool on) {
   b_scroll = on;
@@ -1194,8 +1212,8 @@ void Konsole::addSessionCommand(const QString &path)
   {
     delete co; return; // ignore
   }
-  m_file->insertItem(txt, ++cmd_serial);
-  m_toolbarSessionsCommands->insertItem(txt, cmd_serial);
+  m_file->insertItem( SmallIconSet( "openterm" ), txt, ++cmd_serial );
+  m_toolbarSessionsCommands->insertItem( SmallIconSet( "openterm" ), txt, cmd_serial );
   no2command.insert(cmd_serial,co);
 }
 
