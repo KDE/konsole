@@ -103,3 +103,4 @@ GenericName[zh_CN]=终端程序
 GenericName[zh_TW]=終端機程式
 GenericName[zu]=Uhlelo lwemisebenzi lwangaohandle
 X-KDE-AuthorizeAction=shell_access
+Categories=QT;KDE;System
