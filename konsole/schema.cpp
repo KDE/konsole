@@ -130,6 +130,8 @@ ColorSchema::ColorSchema(const QString& pathname)
 :m_fileRead(false)
 ,lastRead(new QDateTime())
 {
+  //start with a valid time, aleXXX
+  *lastRead = QDateTime::currentDateTime();
   fPath = locate("data", "konsole/"+pathname);
   if (fPath.isEmpty() || !QFile::exists(fPath))
   {
@@ -137,12 +139,13 @@ ColorSchema::ColorSchema(const QString& pathname)
     fRelPath = QString::null;
     setDefaultSchema();
   }
-  else
+  //this is done on demand, see the headers, aleXXX
+/*  else
   {
     fRelPath = pathname;
     clearSchema();
     (void) rereadSchemaFile();
-  }
+  }*/
 
   m_numb = serial++;
 }
@@ -533,7 +536,8 @@ bool ColorSchemaList::updateAllSchemaTimes(const QDateTime& now)
       }
     }
   }
-   sort();
+  //this has to be done explicitly now, to avoid reading all schema files on startup, aleXXX
+//   sort();
   return r;
 }
 

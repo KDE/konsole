@@ -614,6 +614,7 @@ void Konsole::makeGUI()
    colors = new ColorSchemaList();
    //KONSOLEDEBUG<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
    colors->checkSchemas();
+   colors->sort();
    //KONSOLEDEBUG<<"Konsole::makeGUI() updateSchemas()"<<endl;
    updateSchemaMenu();
    ColorSchema *sch=colors->find(s_schema);
@@ -1088,6 +1089,7 @@ void Konsole::schema_menu_activated(int item)
 {
         if (colors->checkSchemas())
         {
+                colors->sort();
                 updateSchemaMenu();
         }
 }

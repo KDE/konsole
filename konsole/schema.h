@@ -181,7 +181,7 @@ class ColorSchemaList : protected QPtrList<ColorSchema>
 public:
 	/**
 	* The following functions are redeclared public since
-	* they're needed, but we still want to inherit proteccted
+	* they're needed, but we still want to inherit protected
 	* from QPtrList to prevent unsightly -- and perhaps dangerous --
 	* tampering with the ColorSchemaList.
 	*/
@@ -189,7 +189,8 @@ public:
 	const ColorSchema *at(unsigned int i) 
 		{ return QPtrList<ColorSchema>::at(i); } ;
 
-public:
+   void sort() {QPtrList<ColorSchema>::sort();};
+
 	ColorSchemaList();
    virtual ~ColorSchemaList();
 	/**
