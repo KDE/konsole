@@ -240,7 +240,7 @@ void KonsoleChild::renameSession() {
   bool ok;
 
   name = KInputDialog::getText( i18n( "Rename Session" ),
-      i18n( "Session name" ), name, &ok, this );
+      i18n( "Session name:" ), name, &ok, this );
 
   if (ok) {
     se->setTitle(name);
