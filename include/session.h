@@ -27,7 +27,7 @@ class TESession : public QObject
 public:
 
   TESession(KMainWindow* main, TEWidget* w,
-            const char* pgm, QStrList & _args,
+            const QString &pgm, QStrList & _args,
 	    const char* term);
   ~TESession();
 
@@ -42,7 +42,7 @@ public:
   const QString& Title();
   QString fullTitle() const;  int keymap();
   QStrList getArgs();
-  const char* getPgm();
+  QString getPgm();
 
   void setHistory(const HistoryType&);
   const HistoryType& history();
@@ -82,7 +82,7 @@ private:
   QString        title;
   QString        userTitle;
 
-  const char*    pgm;
+  QString        pgm;
   QStrList       args;
 
   QCString       term;

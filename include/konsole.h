@@ -48,23 +48,21 @@ class Konsole : public KMainWindow
     friend class KonsoleSessionManaged;
 public:
 
-  Konsole(const char * name, const char* pgm, QStrList & _args,
-    int histon, bool, QCString mytitle, QCString type = 0, bool b_inRestore = false);
+  Konsole(const char * name, const QString &_program, QStrList & _args,
+    int histon, bool, const QString & _title, QCString type = 0, bool b_inRestore = false);
   ~Konsole();
   void setColLin(int columns, int lines);
   void setFullScreen(bool on);
-  void setArgs(QStrList newArgs);
-  void setPgm(QString newPgm);
   void initFullScreen();
   void initSessionSchema(int schemaNo);
-  void initSessionTitle(QString title);
-  void initRenameSession(QString sTitle);
+  void initSessionTitle(const QString &_title);
+  void initRenameSession(const QString &_title);
+  void newSession(const QString &program, const QStrList &args);
 
 public slots:
 
   void makeGUI();
   void newSession();
-  void newRestoredSession(QString title);
 
 protected:
 
@@ -95,7 +93,6 @@ private slots:
 
   void changeColumns(int);
   void notifySize(int,int);
-  void setHeader();
   void updateTitle();
   void prevSession();
   void nextSession();
@@ -115,7 +112,8 @@ private slots:
   void loadScreenSessions();
 
 private:
-  TESession *newSession(KSimpleConfig *co);
+  KSimpleConfig *defaultSession();
+  TESession *newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList());
   void readProperties(KConfig *config, const QString &schema);
   void applySettingsToGUI();
   void makeBasicGUI();
@@ -186,12 +184,8 @@ private:
   QFont       defaultFont;
   QSize       defaultSize;
 
-  const char* pgm;
-  const char* myPgm;
-  QStrList    args;
   QRect       _saveGeometry;
 
-  bool        bIsBlankNewSession;
   bool        b_scroll:1;
   bool        b_framevis:1;
   bool        b_fullscreen:1;
@@ -207,7 +201,7 @@ private:
 
 public:
 
-  QString     title;
+  QString     s_title;
 };
 
 class QSpinBox;

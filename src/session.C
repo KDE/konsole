@@ -18,7 +18,7 @@
     of the abilities of the framework - multible sessions.
 */
 
-TESession::TESession(KMainWindow* main, TEWidget* te, const char* _pgm, QStrList & _args, const char *_term)
+TESession::TESession(KMainWindow* main, TEWidget* te, const QString &_pgm, QStrList & _args, const char *_term)
    : schema_no(0)
    , font_no(3)
    , pgm(_pgm)
@@ -57,7 +57,7 @@ void TESession::run()
 {
   //kdDebug(1211) << "Running the session!" << pgm << "\n";
   //pgm = "pine";
-  sh->run(pgm,args,term.data(),FALSE);
+  sh->run(QFile::encodeName(pgm),args,term.data(),FALSE);
 }
 
 void TESession::setUserTitle( int, const QString &caption )
@@ -147,10 +147,10 @@ void TESession::setFontNo(int fn)
   font_no = fn;
 }
 
-void TESession::setTitle(const QString& title)
+void TESession::setTitle(const QString& _title)
 {
-  this->title = title;
-//  kdDebug(1211)<<"Session setTitle " <<  title <<endl;
+  title = _title;
+  //kdDebug(1211)<<"Session setTitle " <<  title <<endl;
 }
 
 const QString& TESession::Title()
@@ -173,7 +173,7 @@ QStrList TESession::getArgs()
   return args;
 }
 
-const char* TESession::getPgm()
+QString TESession::getPgm()
 {
   return pgm;
 }

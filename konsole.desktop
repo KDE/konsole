@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec=konsole %i %m -caption "%c"
+Exec=konsole %i %m
 Icon=konsole
 DocPath=konsole/index.html
 Terminal=0

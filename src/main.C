@@ -149,6 +149,11 @@ int main(int argc, char* argv[])
   //2.1 secs
 
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+  QString title;
+  if(args->isSet("T")) {
+    title = QFile::decodeName(args->getOption("title"));
+  }
+
   QStrList eargs;
 
   const char* shell = getenv("SHELL");
@@ -175,6 +180,13 @@ int main(int argc, char* argv[])
      eargs.append(shell);
      for(int i=0; i < args->count(); i++)
        eargs.append( args->arg(i) );
+
+     if (title.isEmpty())
+     {
+        title = (kapp->caption() == kapp->aboutData()->programName())
+           ? QFile::decodeName(shell)  // program executed in the title bar
+           : kapp->caption();  // `konsole' or -caption
+     }
   }
 
   QCString sz = "";
@@ -184,10 +196,6 @@ int main(int argc, char* argv[])
   wname = args->getOption("name");
   login_shell = args->isSet("ls");
   welcome = args->isSet("welcome");
-  QCString title;
-  if(args->isSet("T")) {
-    title=args->getOption("title");
-    }
 
   QCString type = "";
 
@@ -231,76 +239,43 @@ int main(int argc, char* argv[])
   {
     KConfig * sessionconfig = a.sessionConfig();
     sessionconfig->setDesktopGroup();
-    sessionconfig->readListEntry("konsolearguments", eargs);
     wname = sessionconfig->readEntry("class",wname).latin1();
 //    RESTORE( Konsole(wname,shell,eargs,histon,toolbaron) )
     int n = 1;
-    int n2= 0;
-    QString tmp_n3;
-    QCString cTitle ="";
-    int n3=0;
 
-    tmp_n3 = sessionconfig->readEntry("numSes", "");
-    n3=tmp_n3.toInt();
-    QString tmpTitle;
+    int session_count = sessionconfig->readNumEntry("numSes");
+    int counter = 0;
+    QString key;
     QString sTitle;
-    QString tmpSchema;
-    QString tmpArgs;
-    QString tmpPgm;
     QString sPgm;
 
-    while (KMainWindow::canBeRestored(n)){
+    while (KMainWindow::canBeRestored(n))
+    {
         sessionconfig->setDesktopGroup();
-        //wname = sessionconfig->readEntry("class",wname).latin1();
-        //shell = "";
-        //FIXME If we can just restore the command to a char *, we'd be golden.
-        sPgm = sessionconfig->readEntry("Pgm0", "failed");
-        //*cTitle = sPgm;
-        //cTitle+=" : ";
-        const char * myCmd = strdup(sPgm.latin1());
-        //cTitle+=myCmd;
-        //cTitle+=" : ";
-        //kdDebug() << "sPgm equals " << sPgm << endl;
-        //shell = sPgm.latin1();
-        //kdDebug() << "shell set to " << shell << endl;
+        sPgm = sessionconfig->readEntry("Pgm0", shell);
         sessionconfig->readListEntry("Args0", eargs);
-        cTitle+=(sessionconfig->readEntry("Title0", title)).latin1();
-        Konsole *m = new Konsole(wname,myCmd,eargs,histon,toolbaron,cTitle,type,true);
+        sTitle = sessionconfig->readEntry("Title0", title);
+        Konsole *m = new Konsole(wname,sPgm,eargs,histon,toolbaron,sTitle,type,true);
         m->restore(n);
-        for (int i=1; i < 10000 ; i++) {}
         m->makeGUI();
-        for (int i=1; i < 10000 ; i++) {}
-        m->initSessionSchema(sessionconfig->readEntry("Schema0","0").toInt());
+        m->initSessionSchema(sessionconfig->readNumEntry("Schema0"));
+        counter++;
 
-        while (n2 < (n3 - 1)) {
-          tmpTitle = "Title";
-          tmpTitle+= (char) (n2+49);
-          tmpArgs="Args";
-          tmpArgs+= (char) (n2+49);
+        while (counter < session_count) 
+        {
           sessionconfig->setDesktopGroup();
-          sTitle=sessionconfig->readEntry(tmpTitle, "Failed");
-//          titles.append(sTitle.latin1());
-          tmpSchema="Schema";
-          tmpSchema+= (char) (n2+49);
-          sessionconfig->readListEntry(tmpArgs, eargs);
-          tmpPgm="Pgm";
-          tmpPgm+= (char) (n2+49);
-          sPgm=sessionconfig->readEntry(tmpPgm, shell);
-          m->setArgs(eargs);
-          m->setPgm(sPgm);
-//          QTimer::singleShot(5000,m,SLOT(newSession()));
-          m->newSession();
-//          kdDebug(1211) << "Adding title tmpTitle = " << sessionconfig->readEntry(tmpTitle, m->title);
-
+          key = QString("Title%1").arg(counter);
+          sTitle = sessionconfig->readEntry(key, title);
+          key = QString("Args%1").arg(counter);
+          sessionconfig->readListEntry(key, eargs);
+          key = QString("Pgm%1").arg(counter);
+          sPgm = sessionconfig->readEntry(key, shell);
+          m->newSession(sPgm, eargs);
           m->initRenameSession(sTitle);
-          m->initSessionSchema(sessionconfig->readEntry(tmpSchema,"0").toInt());
-          n2++;
-          }
-        //put original args back in place from session 1
-        sessionconfig->readListEntry("Args0", eargs);
-        m->setArgs(eargs);
-        sPgm = sessionconfig->readEntry("Pgm0", "failed");
-        m->setPgm(sPgm);
+          key = QString("Schema%1").arg(counter);
+          m->initSessionSchema(sessionconfig->readNumEntry(key));
+          counter++;
+        }
         ksm->konsole = m;
         ksm->konsole->initFullScreen();
         // works only for the first one, but there won't be more.
@@ -310,7 +285,7 @@ int main(int argc, char* argv[])
   else
   {
     //2.1 sec
-    Konsole*  m = new Konsole(wname,shell,eargs,histon,toolbaron,title,type);
+    Konsole*  m = new Konsole(wname,QFile::decodeName(shell),eargs,histon,toolbaron,title,type);
     //2.5 sec
     ksm->konsole = m;
     m->setColLin(c,l); // will use default height and width if called with (0,0)
@@ -318,7 +293,7 @@ int main(int argc, char* argv[])
     if (welcome && false) // ME: disable the greeting, it mixes up the taskbar
     {
       m->setCaption(i18n("Welcome to the console"));
-      QTimer::singleShot(5000,m,SLOT(setHeader()));
+      QTimer::singleShot(5000,m,SLOT(updateTitle()));
     }
     //2.5 sec
     m->initFullScreen();

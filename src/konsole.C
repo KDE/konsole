@@ -168,9 +168,9 @@ const char *fonts[] = {
 
 #include <qdatetime.h>
 
-Konsole::Konsole(const char* name, const char* _pgm,
+Konsole::Konsole(const char* name, const QString& _program,
                  QStrList & _args, int histon, bool toolbaron,
-                 QCString mytitle, QCString type, bool b_inRestore)
+                 const QString &_title, QCString type, bool b_inRestore)
 :KMainWindow(0, name)
 ,te(0)
 ,se(0)
@@ -204,8 +204,6 @@ Konsole::Konsole(const char* name, const char* _pgm,
 ,n_render(0)
 ,curr_schema(0)
 ,s_kconfigSchema("")
-,pgm(_pgm)
-,args(_args)
 ,b_scroll(histon)
 ,b_fullscreen(false)
 ,m_menuCreated(false)
@@ -214,12 +212,9 @@ Konsole::Konsole(const char* name, const char* _pgm,
 ,alreadyNoticedBackgroundChange_(false)
 ,m_histSize(DEFAULT_HISTORY_SIZE)
 ,b_histEnabled(true)
+,s_title(_title)
 {
-  //kdDebug() << "pgm = " << pgm << " at startup" << endl;
-  //QTime time;
-  //time.start();
   isRestored = b_inRestore;
-  bIsBlankNewSession = false;
   wasRestored = false;
   kapp->addKipcEventMask(KIPC::BackgroundChanged);
   connect( kapp,SIGNAL(backgroundChanged(int)),this, SLOT(slotBackgroundChanged(int)));
@@ -251,14 +246,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
   colors->checkSchemas();
 
   KeyTrans::loadAll();
-  //KONSOLEDEBUG<<"Konsole ctor() after KeyTrans::loadAll() "<<time.elapsed()<<" msecs elapsed"<<endl;
-  if (mytitle.isEmpty())
-  {
-     title = (args.count() && (kapp->caption() == PACKAGE))
-        ? QString(args.at(0))  // program executed in the title bar
-        : kapp->caption();  // `konsole' or -caption
-  }
-  else title=mytitle;
+  //KONSOLEDEBUG<<"Konsole ctor() after KeyTrans::loadAll() "<<time.elapsed()<<" msecs elapsed"<<endl; 
 
   // read and apply default values ///////////////////////////////////////////
   resize(321, 321); // Dummy.
@@ -286,7 +274,8 @@ Konsole::Konsole(const char* name, const char* _pgm,
 
   // activate and run first session //////////////////////////////////////////
   // FIXME: this slows it down if --type is given, but prevents a crash (malte)
-  se = newSession(co);
+  //KONSOLEDEBUG << "Konsole pgm: " << _program << endl;
+  se = newSession(co, _program, _args);
   if (b_histEnabled && m_histSize)
     se->setHistory(HistoryTypeBuffer(m_histSize));
   else if (b_histEnabled && !m_histSize)
@@ -298,11 +287,8 @@ Konsole::Konsole(const char* name, const char* _pgm,
   //KONSOLEDEBUG<<"Konsole ctor(): runSession()"<<endl;
   te->currentSession = se;
   se->setConnect(TRUE);
-  if (mytitle.isEmpty()) {
-//    title = se->fullTitle(); // take title from current session
-    title = se->Title(); // take title from current session
-    }
-  setHeader();
+  
+  updateTitle();
   se->setKeymapNo(n_keytab); // act. the keytab for this session
 
   //QTimer::singleShot(1,this,SLOT(allowPrevNext())); // hack, hack, hack
@@ -523,7 +509,7 @@ void Konsole::makeGUI()
    //KONSOLEDEBUG<<"Konsole::makeGUI() updateSchemas()"<<endl;
    updateSchemaMenu();
    ColorSchema *sch=colors->find(s_schema);
-   KONSOLEDEBUG<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
+   //KONSOLEDEBUG<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
    if (sch)
         curr_schema=sch->numb();
    else
@@ -695,40 +681,29 @@ void Konsole::readGlobalProperties(KConfig* config)
 }
 
 void Konsole::saveProperties(KConfig* config) {
-    KONSOLEDEBUG << "Save properties called\n";
-    uint counter=0;
-    QString tmpTitle;
-    QString tmpTwo;
-    QString tmpSchema;
-    QString tmpArgs;
-    QString tmpPgm;
-    config->setDesktopGroup();
+  uint counter=0;
+  QString key;
+  config->setDesktopGroup();
 
-    if (config != KGlobal::config()) {
-      // called by the session manager
-      skip_exit_query = true;
-      config->writeEntry("numSes",sessions.count());
-      sessions.first();
-      while(counter < sessions.count()) {
-//        KONSOLEDEBUG << "Top of loop..." << endl;
-        tmpTitle="Title";
-        tmpTitle+= (char) (counter+48);
-        tmpTwo=sessions.current()->Title();
-        config->writeEntry(tmpTitle,tmpTwo);
-        tmpSchema="Schema";
-        tmpSchema+= (char) (counter+48);
-        config->writeEntry(tmpSchema,sessions.current()->schemaNo());
-        tmpArgs="Args";
-        tmpArgs+= (char) (counter+48);
-        config->writeEntry(tmpArgs,sessions.current()->getArgs());
-        tmpPgm="Pgm";
-        tmpPgm+= (char) (counter+48);
-        config->writeEntry(tmpPgm, sessions.current()->getPgm());
-//        KONSOLEDEBUG << "Writing " << tmpTitle << " -- " << sessions.current()->Title().latin1() << endl;
+  if (config != KGlobal::config()) 
+  {
+     // called by the session manager
+     skip_exit_query = true;
+     config->writeEntry("numSes",sessions.count());
+     sessions.first();
+     while(counter < sessions.count()) 
+     {
+        key = QString("Title%1").arg(counter);
+        config->writeEntry(key, sessions.current()->Title());
+        key = QString("Schema%1").arg(counter);
+        config->writeEntry(key, sessions.current()->schemaNo());
+        key = QString("Args%1").arg(counter);
+        config->writeEntry(key, sessions.current()->getArgs());
+        key = QString("Pgm%1").arg(counter);
+        config->writeEntry(key, sessions.current()->getPgm());
         sessions.next();
         counter++;
-        }
-     KONSOLEDEBUG << "Save properties called with a different config\n";
+     }
   }
   config->setDesktopGroup();
   config->writeEntry("history",b_scroll);
@@ -747,7 +722,6 @@ void Konsole::saveProperties(KConfig* config) {
     config->writeEntry("historyenabled", b_histEnabled);
   }
 
-  if (args.count() > 0) config->writeEntry("konsolearguments", args);
   config->writeEntry("class",name());
 }
 
@@ -765,7 +739,7 @@ void Konsole::readProperties(KConfig* config)
 void Konsole::readProperties(KConfig* config, const QString &schema)
 {
    config->setDesktopGroup();
-   KONSOLEDEBUG<<"Konsole::readProps()"<<endl;
+   //KONSOLEDEBUG<<"Konsole::readProps()"<<endl;
    /*FIXME: (merging) state of material below unclear.*/
    b_scroll = config->readBoolEntry("history",TRUE);
    b_warnQuit=config->readBoolEntry( "WarnQuit", TRUE );
@@ -801,18 +775,18 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
 
    if (sch->useTransparency())
    {
-      KONSOLEDEBUG << "Setting up transparency" << endl;
+      //KONSOLEDEBUG << "Setting up transparency" << endl;
       rootxpm->setFadeEffect(sch->tr_x(), QColor(sch->tr_r(), sch->tr_g(), sch->tr_b()));
       rootxpm->start();
       rootxpm->repaint(true);
    }
    else
    {
-      KONSOLEDEBUG << "Stopping transparency" << endl;
+      //KONSOLEDEBUG << "Stopping transparency" << endl;
       rootxpm->stop();
       pixmap_menu_activated(sch->alignment());
    }
-   KONSOLEDEBUG << "Doing the rest" << endl;
+   //KONSOLEDEBUG << "Doing the rest" << endl;
 
    te->setScrollbarLocation(n_scroll);
    te->setWordCharacters(s_word_seps);
@@ -925,8 +899,8 @@ void Konsole::schema_menu_activated(int item)
 {
   assert(se);
   //FIXME: save schema name
-        KONSOLEDEBUG << "Item " << item << " selected from schema menu"
-                << endl;
+//        KONSOLEDEBUG << "Item " << item << " selected from schema menu"
+//                << endl;
   setSchema(item);
   activateSession(); // activates the current
 }
@@ -941,10 +915,10 @@ void Konsole::schema_menu_activated(int item)
 
 void Konsole::updateSchemaMenu()
 {
-        KONSOLEDEBUG << "Updating schema menu with "
-                << colors->count()
-                << " items."
-                << endl;
+//        KONSOLEDEBUG << "Updating schema menu with "
+//                << colors->count()
+//                << " items."
+//                << endl;
 
   m_schema->clear();
   for (int i = 0; i < (int) colors->count(); i++)
@@ -956,9 +930,9 @@ void Konsole::updateSchemaMenu()
 
   if (te && te->currentSession)
   {
-        KONSOLEDEBUG << "Current session has schema "
-                << te->currentSession->schemaNo()
-                << endl;
+//        KONSOLEDEBUG << "Current session has schema "
+//                << te->currentSession->schemaNo()
+//                << endl;
         m_schema->setItemChecked(te->currentSession->schemaNo(),true);
   }
 
@@ -1015,7 +989,7 @@ void Konsole::slotToggleMenubar() {
      menubar->hide();
   if (!showMenubar->isChecked()) {
     setCaption(i18n("Use the right mouse button to bring back the menu"));
-    QTimer::singleShot(5000,this,SLOT(setHeader()));
+    QTimer::singleShot(5000,this,SLOT(updateTitle()));
   }
 }
 
@@ -1095,16 +1069,9 @@ void Konsole::notifySize(int lines, int columns)
     if (n_render >= 3) pixmap_menu_activated(n_render);
 }
 
-void Konsole::setHeader()
-{
-//  KONSOLEDEBUG << "setHeader title = " << title << endl;
-  setCaption(title);
-}
-
 void Konsole::updateTitle()
 {
-  title = te->currentSession->fullTitle();
-  setHeader();
+  setCaption( te->currentSession->fullTitle() );
 }
 
 /*
@@ -1158,14 +1125,9 @@ void Konsole::initSessionSchema(int schemaNo) {
   setSchema(schemaNo);
 }
 
-void Konsole::initSessionTitle(QString title) {
-  sessions.current()->setTitle(title);
+void Konsole::initSessionTitle(const QString &_title) {
+  sessions.current()->setTitle(_title);
 }
-
-void Konsole::newRestoredSession(QString title) {
-  newSession();
-  initSessionTitle(title);
-  }
 
 void Konsole::setFullScreen(bool on)
 {
@@ -1178,7 +1140,7 @@ void Konsole::setFullScreen(bool on)
       }
     else {
       showNormal();
-      setCaption(title); // restore caption of window
+      updateTitle(); // restore caption of window
       b_fullscreen = false;
 //      KONSOLEDEBUG << "On is false, b_fullscreen is " << b_fullscreen << ". Set to Normal view and set caption." << endl;
     }
@@ -1225,14 +1187,8 @@ void Konsole::runSession(TESession* s)
 void Konsole::addSession(TESession* s)
 {
   session_no += 1;
-  //QString title;
-  //If restoring  via session management, don't tack on the "No 1" to the first session's title.
-  if (isRestored) {
-    title = s->Title();
-    }
-  else {
-    title = i18n("%1 No %2").arg(s->Title()).arg(session_no);
-    }
+
+  QString title = i18n("%1 No %2").arg(s->Title()).arg(session_no);
 
   // create an action for the session
   //  char buffer[30];
@@ -1294,27 +1250,12 @@ void Konsole::activateSession(TESession *s)
      // the current schema has changed
      setSchema(s->schemaNo());
   }
-  else
-  {
-    // the schema was not changed
-#if 0
-    ColorSchema* schema = colors->find(s->schemaNo());
-    if (schema && (schema->usetransparency)) {
-        rootxpm->repaint(true); // this is a must, otherwise you loose the bg.
-    }
-#endif
-  }
-//  if (te->currentSession) {
-//    te->currentSession->setTitle(title);
-//    KONSOLEDEBUG<<"setTitle 1221 - " << title <<endl;
-//    }
+
   te->currentSession = se;
   if (s->fontNo() != n_font)
       setFont(s->fontNo());
   s->setConnect(TRUE);
-  title = s->fullTitle(); // take title from current session
-//  title = s->Title(); // take title from current session
-  setHeader();
+  updateTitle();
   keytab_menu_activated(n_keytab); // act. the keytab for this session
 }
 
@@ -1326,46 +1267,36 @@ void Konsole::allowPrevNext()
 );
 }
 
-void Konsole::newSession()
+KSimpleConfig *Konsole::defaultSession()
 {
   if (!m_menuCreated) {
     if (!isRestored) {
        makeGUI();
-       }
-     }
-
-  uint i=1;
-  int session=0;
-  while ( (session==0) && (i<=no2command.count()) )
-  // antlarr: Why is first session session number 1 instead of number 0 ?
-  {
-    bIsBlankNewSession = true;
-    KSimpleConfig* co = no2command.find(i);
-    //KONSOLEDEBUG<<"Konsole::newSession() Exec: -"<<co->readEntry("Exec")<<"-"<<endl;
-
-    if ( co && co->readEntry("Exec").isEmpty() ) session=i;
-    i++;
+    }
   }
-  KONSOLEDEBUG<<"Konsole::newSession(): session: "<<session<<endl;
-  KONSOLEDEBUG<<"Konsole::newSession(): command.count(): "<<no2command.count()<<endl;
 
-  if (session==0) session=1;
+  QIntDictIterator<KSimpleConfig> it( no2command);
 
-  newSession(session);
-  bIsBlankNewSession = false;
+  while( it.current()) {
+     KSimpleConfig *co = it.current();
+     if ( co && co->readEntry("Exec").isEmpty() ) 
+        return co;
+     ++it;
+  }
+  return 0;
 }
 
-/*void Konsole::newSessionSelect()
+void Konsole::newSession(const QString &pgm, const QStrList &args)
 {
-  // Take into account the position of the toolBar to determine where we put the popup
-  if((toolBar()->barPos() == KToolBar::Top) || (toolBar()->barPos() == KToolBar::Left)) {
-    m_file->popup(te->mapToGlobal(QPoint(0,0)));
-  } else if(toolBar()->barPos() == KToolBar::Right) {
-    m_file->popup(te->mapToGlobal(QPoint(te->width()-m_file->sizeHint().width(), 0)));
-  } else {
-    m_file->popup(te->mapToGlobal(QPoint(0,te->height()-m_file->sizeHint().height())));
-  }
-}*/
+  KSimpleConfig *co = defaultSession();
+  newSession(co, pgm, args);  
+}
+
+void Konsole::newSession()
+{
+  KSimpleConfig *co = defaultSession();
+  newSession(co, QString::null, QStrList());  
+}
 
 void Konsole::newSession(int i)
 {
@@ -1373,48 +1304,46 @@ void Konsole::newSession(int i)
   if (co) newSession(co);
 }
 
-TESession *Konsole::newSession(KSimpleConfig *co)
+TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &args)
 {
-  const char* shell = getenv("SHELL");
-  if (shell == NULL || *shell == '\0') shell = "/bin/sh";
-
-  QString cmd;
   QCString emu = "xterm";
   QString sch = s_kconfigSchema;
-  QString txt = title;
+  QString txt = s_title;
   unsigned int     fno = n_defaultFont;
   QStrList cmdArgs;
+
   if (co)
   {
-      //KONSOLEDEBUG << "This session was started with a .desktop file" << endl;
-      co->setDesktopGroup();
-      cmd = co->readEntry("Exec");
-      emu = co->readEntry("Term", emu).ascii();
-      sch = co->readEntry("Schema", sch);
-      txt = co->readEntry("Comment", txt);
-      fno = co->readUnsignedNumEntry("Font", fno);
-
-      if (!(bIsBlankNewSession)) {
-        cmdArgs.append(shell);
-        }
-
-      if (!cmd.isEmpty())
-      {
-        cmdArgs.append("-c");
-        cmdArgs.append(QFile::encodeName(cmd));
-      }
+     co->setDesktopGroup();
+     emu = co->readEntry("Term", emu).ascii();
+     sch = co->readEntry("Schema", sch);
+     txt = co->readEntry("Comment", txt);
+     fno = co->readUnsignedNumEntry("Font", fno);
   }
-  else  {
-      cmdArgs = args;
-      }
 
-  if (bIsBlankNewSession) {
-    //This session was started with the New button or the newSession key combo
-    shell = pgm;
-    if(!(args.isEmpty())) {
-      cmdArgs = args;
-      }
-    }
+  if (!program.isEmpty()) 
+  {
+     cmdArgs = args;
+  }
+  else
+  {
+     const char* shell = getenv("SHELL");
+     if (shell == NULL || *shell == '\0') shell = "/bin/sh";
+     program = QFile::decodeName(shell);
+
+     cmdArgs.append(shell);
+     if (co)
+     {
+        co->setDesktopGroup();
+        QString cmd = co->readEntry("Exec");
+
+        if (!cmd.isEmpty())
+        {
+          cmdArgs.append("-c");
+          cmdArgs.append(QFile::encodeName(cmd));
+        }
+     }
+  }
 
   ColorSchema* schema = sch.isEmpty()
                       ? colors->find(s_schema)
@@ -1423,7 +1352,7 @@ TESession *Konsole::newSession(KSimpleConfig *co)
       schema=(ColorSchema*)colors->at(0);  //the default one
   int schmno = schema->numb();
 
-  TESession* s = new TESession(this,te,co ? shell : pgm,cmdArgs,emu);
+  TESession* s = new TESession(this,te, QFile::encodeName(program),cmdArgs,emu);
   connect( s,SIGNAL(done(TESession*,int)),
            this,SLOT(doneSession(TESession*,int)) );
   connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
@@ -1534,8 +1463,6 @@ void Konsole::addSessionCommand(const QString &path)
   co->setDesktopGroup();
   QString typ = co->readEntry("Type");
   QString txt = co->readEntry("Comment");
-  // not used ?? !
-  //  QString cmd = co->readEntry("Exec");
   QString nam = co->readEntry("Name");
   if (typ.isEmpty() || txt.isEmpty() || nam.isEmpty() ||
       typ != "KonsoleApplication")
@@ -1657,13 +1584,13 @@ void Konsole::setSchema(ColorSchema* s)
 {
   if (!s) return;
 
-        KONSOLEDEBUG << "Checking menu items" << endl;
+//        KONSOLEDEBUG << "Checking menu items" << endl;
   if (m_schema)
   {
     m_schema->setItemChecked(curr_schema,FALSE);
     m_schema->setItemChecked(s->numb(),TRUE);
   }
-        KONSOLEDEBUG << "Remembering schema data" << endl;
+//        KONSOLEDEBUG << "Remembering schema data" << endl;
 
   s_schema = s->path();
   curr_schema = s->numb();
@@ -1671,12 +1598,12 @@ void Konsole::setSchema(ColorSchema* s)
   te->setColorTable(s->table()); //FIXME: set twice here to work around a bug
 
   if (s->useTransparency()) {
-        KONSOLEDEBUG << "Setting up transparency" << endl;
+//        KONSOLEDEBUG << "Setting up transparency" << endl;
     rootxpm->setFadeEffect(s->tr_x(), QColor(s->tr_r(), s->tr_g(), s->tr_b()));
     rootxpm->start();
     rootxpm->repaint(true);
   } else {
-        KONSOLEDEBUG << "Stopping transparency" << endl;
+//        KONSOLEDEBUG << "Stopping transparency" << endl;
     rootxpm->stop();
     pixmap_menu_activated(s->alignment());
   }
@@ -1686,38 +1613,28 @@ void Konsole::setSchema(ColorSchema* s)
 }
 
 void Konsole::slotRenameSession() {
-  KONSOLEDEBUG << "slotRenameSession\n";
+//  KONSOLEDEBUG << "slotRenameSession\n";
   KRadioAction *ra = session2action.find(se);
   QString name = ra->text();
   KLineEditDlg dlg(i18n("Session name"),name, this);
   if (dlg.exec()) {
     se->setTitle(dlg.text());
-    if(se == te->currentSession) {
-      title = se->fullTitle();
-      setHeader();
-    }
     ra->setText(dlg.text());
     ra->setIcon("openterm"); // I don't know why it is needed here
     toolBar()->updateRects();
+    updateTitle();
   }
 }
 
 
-void Konsole::initRenameSession(QString sTitle) {
-//  KONSOLEDEBUG << "initRenameSession\n";
+void Konsole::initRenameSession(const QString &_title) {
   KRadioAction *ra = session2action.find(se);
-  QString name = ra->text();
-//  KLineEditDlg dlg(i18n("Session name"),name, this);
-//  if (dlg.exec()) {
-    se->setTitle(sTitle);
-    if(se == te->currentSession) {
-      title = se->fullTitle();
-      setHeader();
-    }
-    ra->setText(sTitle);
-    ra->setIcon("openterm"); // I don't know why it is needed here
-    toolBar()->updateRects();
-//  }
+
+  se->setTitle(_title);
+  ra->setText(_title);
+  ra->setIcon("openterm"); // I don't know why it is needed here
+  toolBar()->updateRects();
+  updateTitle();
 }
 
 
@@ -1786,7 +1703,7 @@ bool HistoryTypeDialog::isOn() const
 
 void Konsole::slotHistoryType()
 {
-  KONSOLEDEBUG << "Konsole::slotHistoryType()\n";
+//  KONSOLEDEBUG << "Konsole::slotHistoryType()\n";
   if (!se) return;
   
   HistoryTypeDialog dlg(se->history(), m_histSize, this);
@@ -1820,7 +1737,7 @@ void Konsole::slotHistoryType()
 
 
 void Konsole::slotWordSeps() {
-  KONSOLEDEBUG << "Konsole::slotWordSeps\n";
+//  KONSOLEDEBUG << "Konsole::slotWordSeps\n";
   KLineEditDlg dlg(i18n("Characters other than alphanumerics considered part of a word when double clicking"),s_word_seps, this);
   if (dlg.exec()) {
     s_word_seps = dlg.text();
@@ -1841,18 +1758,6 @@ void Konsole::slotBackgroundChanged(int /*desk*/)
     alreadyNoticedBackgroundChange_ = true;
     rootxpm->repaint(true);
   }
-}
-
-void Konsole::setArgs(QStrList newArgs)
-{
-//  QStrList args = new QStrList();
-  args = newArgs;
-}
-
-void Konsole::setPgm(QString newPgm)
-{
-//  QStrList args = new QStrList();
-  pgm = strdup(newPgm.latin1());
 }
 
 #include "konsole.moc"

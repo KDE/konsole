@@ -260,11 +260,7 @@ void ColorSchema::readConfigColor(KConfig& c,
 
 void ColorSchema::writeConfig(const QString& path) const
 {
-	KONSOLEDEBUG << "Writing schema "
-		<< fPath
-		<< " to file "
-		<< path
-		<< endl;
+//	KONSOLEDEBUG << "Writing schema " << fPath << " to file " << path << endl;
 		
 	KConfig c(path,false,false);
 
@@ -404,9 +400,7 @@ bool ColorSchema::hasSchemaFileChanged() const
 
 		if (written > (*lastRead))
 		{
-			KONSOLEDEBUG << "Schema file was modified "
-				<< written.toString()
-				<< endl;
+//			KONSOLEDEBUG << "Schema file was modified " << written.toString() << endl;
 
 			return true;
 		}
@@ -435,7 +429,7 @@ void ColorSchema::updateLastRead(const QDateTime& dt)
 ColorSchemaList::ColorSchemaList() :
 	QList<ColorSchema> ()
 {
-	KONSOLEDEBUG << "Got new color list" << endl;
+//	KONSOLEDEBUG << "Got new color list" << endl;
 
 	defaultSchema = new ColorSchema();
 	append(defaultSchema);
@@ -496,7 +490,7 @@ ColorSchema *ColorSchemaList::find(int i)
 
 bool ColorSchemaList::updateAllSchemaTimes(const QDateTime& now)
 {
-	KONSOLEDEBUG << "Updating time stamps" << endl;
+//	KONSOLEDEBUG << "Updating time stamps" << endl;
 
 	QStringList list = KGlobal::dirs()->
 		findAllResources("appdata", "*.schema");
@@ -536,7 +530,7 @@ bool ColorSchemaList::updateAllSchemaTimes(const QDateTime& now)
 
 bool ColorSchemaList::deleteOldSchemas(const QDateTime& now)
 {
-	KONSOLEDEBUG << "Checking for vanished schemas" << endl;
+//	KONSOLEDEBUG << "Checking for vanished schemas" << endl;
 
 	ColorSchemaListIterator it(*this);
 	ColorSchema *p ;
@@ -569,7 +563,7 @@ bool ColorSchemaList::deleteOldSchemas(const QDateTime& now)
 
 bool ColorSchemaList::checkSchemas()
 {
-	KONSOLEDEBUG << "Checking for new schemas" << endl;
+//	KONSOLEDEBUG << "Checking for new schemas" << endl;
 
 	bool r = false;	// Any new schema's found?
 
