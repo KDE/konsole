@@ -20,6 +20,7 @@ like emulations are:
    the one used in X11.
 5) The TERM environment variable is "linux"
 6) A few key codes (F1-F5) differ.
+7) The Linux console occupies the whole display.
 
 
 To cope with 1) and 3) would require to modify the Linux
@@ -27,22 +28,23 @@ console itself; 2) would have likely implications. Work
 on an explicit Linux console emulation has been aborted,
 therefore.
 
-Konsole can handle 4), 5) and 6), so one can run programs
-designed for the Linux console to some degree.  Normally,
-you should get satisfying results when you switch to Linux
-colors and select the Linux font.
+Konsole can handle 4) to 7), so one cannot run programs
+designed for the Linux console to a high degree but can
+also setup a complete lookalike. You should get satisfying
+results when you switch to Linux colors, select the Linux
+font and set the full screen option.
 
 
 To really run application with Linux console emulation
-(and there should be no need to do so):
+(AND THERE SHOULD BE NO NEED TO DO SO):
 
 - export TERM=linux to trigger ncurses aware applications
   to expect a linux console.
 - set the appropriate charmap (this is cp437 on my installation)
   to get graphical and international characters properly.
 - set the Linux keymap for the F1-F5 function keys.
-[FIXME: the above two points are work in progress, meaning
-not available right now]
+[TODO: to control the the above two points via menu settings
+ is work in progress, meaning not available in user space yet.]
 
 
 Please note that these applications may not react properly on
@@ -57,7 +59,7 @@ Mouse-aware application will most probably not recognize
 mouse events (especially mc) since they might try to get
 these events from gpm instead from the console.
 
-MC will not be able to access the specicial console devices
+MC will not be able to access the special console devices
 then and cannot simulate a secondary screen, treating the
 emulation as "dummy" with respect to it (^O).
 
