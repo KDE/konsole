@@ -390,81 +390,6 @@ void Konsole::setColLin(int columns, int lines)
   adjustSize();
 }
 
-
-/* ------------------------------------------------------------------------- */
-/*                                                                           */
-/* Drag & Drop                                                               */
-/*                                                                           */
-/* ------------------------------------------------------------------------- */
-
-void Konsole::dragEnterEvent(QDragEnterEvent* e)
-{
-  e->accept(QTextDrag::canDecode(e) ||
-      QUriDrag::canDecode(e));
-}
-
-// XXXXXXXXX is this still used ?
-void Konsole::dropEvent(QDropEvent* event)
-{
-    // The current behaviour when url(s) are dropped is
-    // * if there is only ONE url and if it's a LOCAL one, ask for paste or cd
-    // * in all other cases, just paste
-    //   (for non-local ones, or for a list of URLs, 'cd' is nonsense)
-  QStrList strlist;
-  KURL *url;
-  int file_count = 0;
-  dropText = "";
-  bool bPopup = true;
-
-  if(QUriDrag::decode(event, strlist)) {
-    if (strlist.count()) {
-      for(const char* p = strlist.first(); p; p = strlist.next()) {
-        if(file_count++ > 0) {
-          dropText += " ";
-          bPopup = false; // more than one file, don't popup
-        }
-        url = new KURL( QString(p) );
-        if (url->isLocalFile()) {
-          dropText += url->path(); // local URL : remove protocol
-        }
-        else {
-          dropText += p;
-          bPopup = false; // a non-local file, don't popup
-        }
-        delete url;
-      }
-      if (bPopup)
-        m_drop->popup(pos() + event->pos());
-      else
-        se->getEmulation()->sendString(dropText.latin1());
-    }
-  }
-  else if(QTextDrag::decode(event, dropText))
-    se->getEmulation()->sendString(dropText.latin1()); // Paste it
-}
-
-/*
-  unused apparently (David)
-void Konsole::drop_menu_activated(int item)
-{
-  switch (item)
-  {
-    case 0: // paste
-      se->getEmulation()->sendString(dropText);
-      break;
-    case 1: // cd ...
-    {
-      se->getEmulation()->sendString("cd ");
-      QString text = KURL( dropText ).directory( true, false );
-      text.replace(QRegExp(" "), "\\ "); // escape spaces
-      se->getEmulation()->sendString(text);
-      se->getEmulation()->sendString("\n");
-    }
-    break;
-  }
-}
-*/
-
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /*                                                                           */
@@ -970,7 +895,11 @@ void Konsole::newSession(int i)
   s->setSchemaNo(schmno);
   s->setTitle(txt);
   s->setHistory(b_scroll); //FIXME: take from schema
-  setHistory(b_scroll); //FIXME: take from schema
+ 
+  // Lotzi B: I don't know why it was here, but commenting it out
+  // fixes the annoying bug of the jumping of the scrollbar when 
+  // creating a new menu
+  //setHistory(b_scroll); //FIXME: take from schema
 
   addSession(s);
   runSession(s); // activate and run

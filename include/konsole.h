@@ -60,7 +60,6 @@ private slots:
   void opt_menu_activated(int item);
   void schema_menu_activated(int item);
   void pixmap_menu_activated(int item);
-  // void drop_menu_activated(int item);
   void keytab_menu_activated(int item);
   void tecRef();
   void newSession(int kind);
@@ -79,8 +78,7 @@ protected:
  void readGlobalProperties(KConfig* config);
 
  // Dnd
- void dragEnterEvent(QDragEnterEvent* event);
- void dropEvent(QDropEvent* event);
+ //void dragEnterEvent(QDragEnterEvent* event);
 
 private slots:
 
