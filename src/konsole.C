@@ -251,7 +251,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
   resize(321, 321); // Dummy.
   QSize currentSize = size();
   KConfig * config = KGlobal::config();
-  config->setGroup("options");
+  config->setDesktopGroup();
   applyMainWindowSettings(config);
   if (currentSize != size())
      defaultSize = size();
@@ -675,7 +675,7 @@ void Konsole::saveProperties(KConfig* config) {
     QString tmpTitle;
     QString tmpTwo;
     QString tmpSchema;
-    config->setGroup("options");
+    config->setDesktopGroup();
 
     if (config != KGlobal::config()) {
       // called by the session manager
@@ -725,7 +725,7 @@ void Konsole::readProperties(KConfig* config)
 // default
 void Konsole::readProperties(KConfig* config, const QString &schema)
 {
-   config->setGroup("options");
+   config->setDesktopGroup();
    kdDebug()<<"Konsole::readProps()"<<endl;
    /*FIXME: (merging) state of material below unclear.*/
    b_scroll = config->readBoolEntry("history",TRUE);
@@ -1012,7 +1012,7 @@ void Konsole::opt_menu_activated(int item)
             break;
     case 8:
             KConfig *config = KGlobal::config();
-            config->setGroup("options");
+            config->setDesktopGroup();
             saveProperties(config);
             saveMainWindowSettings(config);
             config->sync();

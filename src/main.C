@@ -228,7 +228,7 @@ int main(int argc, char* argv[])
   if (a.isRestored())
   {
     KConfig * sessionconfig = a.sessionConfig();
-    sessionconfig->setGroup("options");
+    sessionconfig->setDesktopGroup();
     sessionconfig->readListEntry("konsolearguments", eargs);
     wname = sessionconfig->readEntry("class",wname).latin1();
 //    RESTORE( Konsole(wname,shell,eargs,histon,toolbaron) )
@@ -246,17 +246,18 @@ int main(int argc, char* argv[])
     QStrList titles = new QStrList();
 
     while (KMainWindow::canBeRestored(n)){
-        sessionconfig->setGroup("options");
+        sessionconfig->setDesktopGroup();
         cTitle+=(sessionconfig->readEntry("Title0", title)).latin1();
         Konsole *m = new Konsole(wname,shell,eargs,histon,toolbaron,cTitle,type,true);
         m->restore(n);
+        m->initSessionSchema(sessionconfig->readEntry("Schema0","0").toInt());
         for (int i=1; i < 10000 ; i++) {}
         m->makeGUI();
 
         while (n2 < (n3 - 1)) {
           tmpTitle = "Title";
           tmpTitle+= (char) (n2+49);
-          sessionconfig->setGroup("options");
+          sessionconfig->setDesktopGroup();
           sTitle=sessionconfig->readEntry(tmpTitle, "Failed");
           titles.append(sTitle.latin1());
           tmpSchema="Schema";
