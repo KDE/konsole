@@ -95,6 +95,39 @@ FILE* syslog_file = NULL; //stdout;
 
 /* -------------------------------------------------------------------------- */
 
+//#include <unistd.h>
+//#include <stdlib.h>
+//#include <sys/types.h>
+//#include <sys/wait.h>
+
+#define PTY_FILENO 3
+#define BASE_CHOWN "konsole_grantpty"
+
+static int chownpty(int fd, int grant)
+// param fd: the fd of a master pty.
+// param grant: 1 to grant, 0 to revoke
+// returns 1 on success 0 on fail
+{
+  pid_t pid = fork();
+  if (pid < 0) return 0;
+  if (pid == 0)
+  {
+    /* We pass the master pseudo terminal as file descriptor PTY_FILENO. */
+    if (fd != PTY_FILENO && dup2(fd, PTY_FILENO) < 0) exit(1);
+    QString path = KApplication::kde_bindir() + "/" + BASE_CHOWN;
+printf("path: %s, do:%s\n",path.data(),grant?"--grant":"--revoke");
+    execle(path.data(), BASE_CHOWN, grant?"--grant":"--revoke", NULL, NULL);
+    exit(1); // should not be reached
+  }
+  if (pid > 0)
+  { int w;
+    return (waitpid (pid, &w, 0) != -1 && WIFEXITED(w) && WEXITSTATUS(w) == 0);
+  }
+  return 0; //dummy.
+}
+
+/* -------------------------------------------------------------------------- */
+
 /*!
    Informs the client program about the
    actual size of the window.
@@ -123,6 +156,7 @@ static void catchChild(int)
 
 void Shell::doneShell(int status)
 {
+  chownpty(fd,FALSE);
   emit done(status);
 }
 
@@ -160,7 +194,7 @@ void Shell::makeShell(const char* dev, QStrList & args,
   // getrlimit is a getdtablesize() equivalent, more portable (David Faure)
   struct rlimit rlp;
   getrlimit(RLIMIT_NOFILE, &rlp);
-  for (int i = 0; i < rlp.rlim_cur; i++) if (i != tt && i != fd) close(i);
+  for (int i = 0; i < rlp.rlim_cur; i++) if (i != tt) close(i);
 
   dup2(tt,fileno(stdin));
   dup2(tt,fileno(stdout));
@@ -184,15 +218,6 @@ void Shell::makeShell(const char* dev, QStrList & args,
   setpgid(0,0);                        // is not noticeable with all
   close(open(dev, O_WRONLY, 0));       // clients (bash,vi). Because bash
   setpgid(0,0);                        // heals this, use '-e' to test it.
-
-/*
-#if defined(TIOCSPTLCK)
-  int flag = 1;                        // Linux-only security solution:
-  if (ioctl(fd,TIOCSPTLCK,&flag))      // prohibit opening tty from now on
-#endif
-    perror("Warning: The session is insecure.");
-*/
-  close(fd);
   
   // drop privileges
   setuid(getuid()); setgid(getgid());
@@ -245,12 +270,12 @@ int openShell()
     if (ptyfd >= 0) break;
   }
   if (ptyfd < 0) { fprintf(stderr,"Can't open a pseudo teletype\n"); exit(1); }
-  if (grantpt(ptyfd))
+  if (!chownpty(ptyfd,TRUE))
   {
-    perror("konsole");
-    fprintf(stderr,"konsole: grantpt failed for device %s.\n",ptynam);
-    fprintf(stderr,"konsole: this means the session can be eavesdroped.\n");
-    exit(1);
+    fprintf(stderr,"konsole: chownpty failed for device %s::%s.\n",ptynam,ttynam);
+    fprintf(stderr,"       : This means the session can be eavesdroped.\n");
+    fprintf(stderr,"       : Make sure konsole_grantpty is installed in\n");
+    fprintf(stderr,"       : %s and setuid root.\n",KApplication::kde_bindir().data());
   }
   fcntl(ptyfd,F_SETFL,O_NDELAY);
 

@@ -33,7 +33,7 @@ OTHDIR = $(TOPDIR)/other
 INCLUDES =  -I$(INCDIR) $(all_includes)
 
 # you can add here more. This one gets installed 
-bin_PROGRAMS = 	konsole kcmkonsole
+bin_PROGRAMS = 	konsole kcmkonsole konsole_grantpty
 
 noinst_LIBRARIES = libkonsole.a
 
@@ -49,6 +49,13 @@ konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 kcmkonsole_SOURCES = kcmkonsole.C schema.C
 kcmkonsole_LDADD   = $(LIB_KIMGIO) $(LIB_KDEUI) 
 kcmkonsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
+
+konsole_grantpty_SOURCES = konsole_grantpty.c
+
+install-exec-local:
+	@echo
+	@echo Make sure to set konsole_grantpty to be root suid.
+	@echo
 
 # the library search path. 
 
