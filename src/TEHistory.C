@@ -59,7 +59,7 @@ FIXME: There is noticable decrease in speed, also. Perhaps,
 
 //#define tmpfile xTmpFile
 
-#if 0
+#if 1
 
 FILE* xTmpFile()
 {
@@ -134,7 +134,7 @@ bool HistoryScroll::hasScroll()
   return true;
 }
 
-#if 0
+#if 1
 // History Scroll File //////////////////////////////////////
 
 /* 
@@ -242,6 +242,8 @@ int HistoryScrollBuffer::getLineLen(int lineno)
 {
   if (lineno >= m_maxNbLines) return 0;
   
+  lineno = (lineno + m_arrayIndex + 1) % m_maxNbLines;
+
   histline *l = m_histBuffer[lineno];
 
   return l ? l->size() : 0;
@@ -253,6 +255,8 @@ void HistoryScrollBuffer::getCells(int lineno, int colno, int count, ca res[])
   if (!count) return;
 
   assert (lineno < m_maxNbLines);
+
+  lineno = (lineno + m_arrayIndex + 1) % m_maxNbLines;
   
   histline *l = m_histBuffer[lineno];
 
@@ -341,7 +345,8 @@ int  HistoryScrollBlockArray::getLineLen(int lineno)
   return res;
 }
 
-void HistoryScrollBlockArray::getCells(int lineno, int colno, int count, ca res[])
+void HistoryScrollBlockArray::getCells(int lineno, int colno,
+                                       int count, ca res[])
 {
   if (!count) return;
 
@@ -441,7 +446,7 @@ HistoryScroll* HistoryTypeBlockArray::getScroll() const
 }
 
 
-#if 0 // Disabled for now 
+#if 1 // Disabled for now 
 
 //////////////////////////////
 
@@ -458,6 +463,11 @@ bool HistoryTypeBuffer::isOn() const
 unsigned int HistoryTypeBuffer::getNbLines() const
 {
   return m_nbLines;
+}
+
+unsigned int HistoryTypeBuffer::getSize() const
+{
+  return getNbLines();
 }
 
 HistoryScroll* HistoryTypeBuffer::getScroll() const
@@ -485,6 +495,11 @@ const QString& HistoryTypeFile::getFileName() const
 HistoryScroll* HistoryTypeFile::getScroll() const
 {
   return new HistoryScrollFile(m_fileName);
+}
+
+unsigned int HistoryTypeFile::getSize() const
+{
+  return 0;
 }
 
 #endif

@@ -283,7 +283,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
   // FIXME: this slows it down if --type is given, but prevents a crash (malte)
   se = newSession(co);
   if (b_histEnabled && m_histSize)
-    se->setHistory(HistoryTypeBlockArray(m_histSize));
+    se->setHistory(HistoryTypeBuffer(m_histSize));
   else
     se->setHistory(HistoryTypeNone());
 
@@ -518,9 +518,9 @@ void Konsole::makeGUI()
    ColorSchema *sch=colors->find(s_schema);
    kdDebug()<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
    if (sch)
-	curr_schema=sch->numb();
+        curr_schema=sch->numb();
    else
-	curr_schema = 0;
+        curr_schema = 0;
    for (uint i=0; i<m_schema->count(); i++)
       m_schema->setItemChecked(i,false);
 
@@ -1402,7 +1402,7 @@ TESession *Konsole::newSession(KSimpleConfig *co)
   s->setTitle(txt);
 
   if (b_histEnabled)
-      s->setHistory(HistoryTypeBlockArray(m_histSize));
+      s->setHistory(HistoryTypeBuffer(m_histSize));
   else
       s->setHistory(HistoryTypeNone());
 
@@ -1754,7 +1754,7 @@ void Konsole::slotHistoryType()
 
     if (dlg.isOn() && dlg.nbLines() > 0) {
 
-      se->setHistory(HistoryTypeBlockArray(dlg.nbLines()));
+      se->setHistory(HistoryTypeBuffer(dlg.nbLines()));
       m_histSize = dlg.nbLines();
       b_histEnabled = true;
 

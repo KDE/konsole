@@ -18,7 +18,7 @@
 
 #include "TECommon.h"
 
-#if 0
+#if 1
 /*
    An extendable tmpfile(1) based buffer.
 */
@@ -73,7 +73,7 @@ protected:
 
 };
 
-#if 0
+#if 1
 
 //////////////////////////////////////////////////////////////////////
 // File-based history (e.g. file log, no limitation in length)
@@ -217,7 +217,7 @@ protected:
   size_t m_size;
 };
 
-#if 0 // Disabled for now 
+#if 1 // Disabled for now 
 class HistoryTypeFile : public HistoryType
 {
 public:
@@ -225,6 +225,7 @@ public:
 
   virtual bool isOn() const;
   virtual const QString& getFileName() const;
+  virtual unsigned int getSize() const;
 
   virtual HistoryScroll* getScroll() const;
 
@@ -240,6 +241,7 @@ public:
   
   virtual bool isOn() const;
   virtual unsigned int getNbLines() const;
+  virtual unsigned int getSize() const;
 
   virtual HistoryScroll* getScroll() const;
 
