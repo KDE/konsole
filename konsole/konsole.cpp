@@ -442,6 +442,9 @@ void Konsole::makeGUI()
    m_edit->insertItem( i18n("&Send Signal"), m_signals );
 
    m_edit->insertSeparator();
+   m_zmodemUpload->plug( m_edit );
+
+   m_edit->insertSeparator();
    m_clearTerminal->plug(m_edit);
 
    m_resetClearTerminal->plug(m_edit);
@@ -458,9 +461,6 @@ void Konsole::makeGUI()
    // View Menu
    m_detachSession->plug(m_view);
    m_renameSession->plug(m_view);
-
-   m_view->insertSeparator();
-   m_zmodemUpload->plug( m_view );
 
    m_view->insertSeparator();
    monitorActivity->plug ( m_view );
