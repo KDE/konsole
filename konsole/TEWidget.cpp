@@ -781,7 +781,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   line_selection_mode = FALSE;
   word_selection_mode = FALSE;
 
-  QPoint pos = QPoint((ev->x()-tLx-bX)/font_w,(ev->y()-tLy-bY)/font_h);
+  QPoint pos = QPoint((ev->x()-tLx-bX+(font_w/2))/font_w,(ev->y()-tLy-bY)/font_h);
 
 //printf("press top left [%d,%d] by=%d\n",tLx,tLy, bY);
   if ( ev->button() == LeftButton)
@@ -806,13 +806,14 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       if (mouse_marks || (ev->state() & ShiftButton))
       {
         emit clearSelectionSignal();
+        pos.ry() += scrollbar->value();
         iPntSel = pntSel = pos;
         actSel = 1; // left mouse button pressed but nothing selected yet.
         grabMouse(   /*crossCursor*/  ); // handle with care!
       }
       else
       {
-        emit mouseSignal( 0, pos.x() + 1, pos.y() + 1 ); // left button
+        emit mouseSignal( 0, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 ); // Left button
       }
     }
   }
@@ -877,6 +878,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
   if ( pos.x() > tLx+bX+columns*font_w-1 ) pos.setX( tLx+bX+columns*font_w );
   if ( pos.y() < tLy+bY )                   pos.setY( tLy+bY );
   if ( pos.y() > tLy+bY+lines*font_h-1 )    pos.setY( tLy+bY+lines*font_h-1 );
+
   // check if we produce a mouse move event by this
   if ( pos != ev->pos() ) cursor().setPos(mapToGlobal(pos));
 
@@ -889,8 +891,12 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     scrollbar->setValue(scrollbar->value()-yMouseScroll); // scrollback
   }
 
-  QPoint here = QPoint((pos.x()-tLx-bX)/font_w,(pos.y()-tLy-bY)/font_h);
+  QPoint here = QPoint((pos.x()-tLx-bX+(font_w/2))/font_w,(pos.y()-tLy-bY)/font_h);
   QPoint ohere;
+  QPoint iPntSelCorr = iPntSel;
+  iPntSelCorr.ry() -= scrollbar->value();
+  QPoint pntSelCorr = pntSel;
+  pntSelCorr.ry() -= scrollbar->value();
   bool swapping = FALSE;
 
   if ( word_selection_mode )
@@ -899,21 +905,21 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     int i;
     int selClass;
 
-    bool left_not_right = ( here.y() < iPntSel.y() ||
-	   here.y() == iPntSel.y() && here.x() < iPntSel.x() );
-    bool old_left_not_right = ( pntSel.y() < iPntSel.y() ||
-	   pntSel.y() == iPntSel.y() && pntSel.x() < iPntSel.x() );
+    bool left_not_right = ( here.y() < iPntSelCorr.y() ||
+	   here.y() == iPntSelCorr.y() && here.x() < iPntSelCorr.x() );
+    bool old_left_not_right = ( pntSelCorr.y() < iPntSelCorr.y() ||
+	   pntSelCorr.y() == iPntSelCorr.y() && pntSelCorr.x() < iPntSelCorr.x() );
     swapping = left_not_right != old_left_not_right;
 
     // Find left (left_not_right ? from here : from start)
-    QPoint left = left_not_right ? here : iPntSel;
+    QPoint left = left_not_right ? here : iPntSelCorr;
     i = loc(left.x(),left.y());
     selClass = charClass(image[i].c);
     while ( ((left.x()>0) || (left.y()>0 && m_line_wrapped[left.y()-1])) && charClass(image[i-1].c) == selClass )
     { i--; if (left.x()>0) left.rx()--; else {left.rx()=columns-1; left.ry()--;} }
 
     // Find left (left_not_right ? from start : from here)
-    QPoint right = left_not_right ? iPntSel : here;
+    QPoint right = left_not_right ? iPntSelCorr : here;
     i = loc(right.x(),right.y());
     selClass = charClass(image[i].c);
     while( ((right.x()<columns-1) || (right.y()<lines-1 && m_line_wrapped[right.y()])) && charClass(image[i+1].c) == selClass )
@@ -928,18 +934,19 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     {
       here = right; ohere = left;
     }
+    ohere.rx()++;
   }
 
   if ( line_selection_mode )
   {
     // Extend to complete line
-    bool above_not_below = ( here.y() < iPntSel.y() );
-    bool old_above_not_below = ( pntSel.y() < iPntSel.y() );
+    bool above_not_below = ( here.y() < iPntSelCorr.y() );
+    bool old_above_not_below = ( pntSelCorr.y() < iPntSelCorr.y() );
     swapping = true; // triple click maybe selected a wrapped line
-
-    QPoint above = above_not_below ? here : iPntSel;
-    QPoint below = above_not_below ? iPntSel : here;
-
+   
+    QPoint above = above_not_below ? here : iPntSelCorr;
+    QPoint below = above_not_below ? iPntSelCorr : here;
+    
     while (above.y()>0 && m_line_wrapped[above.y()-1])
       above.ry()--;
     while (below.y()<lines-1 && m_line_wrapped[below.y()])
@@ -957,75 +964,63 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     {
       here = below; ohere = above;
     }
+    ohere.rx()++;
   }
 
+  int offset = 0;
   if ( !word_selection_mode && !line_selection_mode )
   {
     int i;
     int selClass;
 
-    bool left_not_right = ( here.y() < iPntSel.y() ||
-	   here.y() == iPntSel.y() && here.x() < iPntSel.x() );
-    bool old_left_not_right = ( pntSel.y() < iPntSel.y() ||
-	   pntSel.y() == iPntSel.y() && pntSel.x() < iPntSel.x() );
+    bool left_not_right = ( here.y() < iPntSelCorr.y() ||
+	   here.y() == iPntSelCorr.y() && here.x() < iPntSelCorr.x() );
+    bool old_left_not_right = ( pntSelCorr.y() < iPntSelCorr.y() ||
+	   pntSelCorr.y() == iPntSelCorr.y() && pntSelCorr.x() < iPntSelCorr.x() );
     swapping = left_not_right != old_left_not_right;
 
     // Find left (left_not_right ? from here : from start)
-    QPoint left = left_not_right ? here : iPntSel;
+    QPoint left = left_not_right ? here : iPntSelCorr;
 
     // Find left (left_not_right ? from start : from here)
-    QPoint right = left_not_right ? iPntSel : here;
-    i = loc(right.x(),right.y());
-    selClass = charClass(image[i-1].c);
-    if (selClass == ' ')
+    QPoint right = left_not_right ? iPntSelCorr : here;
+    if (right.x() > 0)
     {
-       while ( right.x() < columns-1 && charClass(image[i+1].c) == selClass && !m_line_wrapped[right.y()])
-       { i++; right.rx()++; }
-       if (right.x() < columns-1)
-         right = left_not_right ? iPntSel : here;
-       else
-         right.rx()++;  // will be balanced later because of offset=-1;
+      i = loc(right.x(),right.y());
+      selClass = charClass(image[i-1].c);
+      if (selClass == ' ')
+      {
+        while ( right.x() < columns-1 && charClass(image[i+1].c) == selClass && (right.y()<lines-1) && !m_line_wrapped[right.y()])
+        { i++; right.rx()++; }
+        if (right.x() < columns-1)
+          right = left_not_right ? iPntSelCorr : here;
+        else
+          right.rx()++;  // will be balanced later because of offset=-1;
+      }
     }
 
     // Pick which is start (ohere) and which is extension (here)
     if ( left_not_right )
     {
-      here = left; ohere = right;
+      here = left; ohere = right; offset = 0;
     }
     else
     {
-      here = right; ohere = left;
+      here = right; ohere = left; offset = -1;
     }
-
   }
 
-  if (here == pntSel && (pos.x()-tLx-bX)!=0 /*allow selecting up to first character of line*/
-      && scroll == scrollbar->value()) return; // not moved
+  if ((here == pntSelCorr) && (scroll == scrollbar->value())) return; // not moved
+  
+  if (here == ohere) return; // It's not left, it's not right.
 
-  if ( word_selection_mode || line_selection_mode ) {
-    if ( actSel < 2 || swapping ) {
-      emit beginSelectionSignal( ohere.x(), ohere.y() );
-    }
-  } else if ( actSel < 2 ) {
-    emit beginSelectionSignal( pntSel.x(), pntSel.y() );
-  }
+  if ( actSel < 2 || swapping )
+    emit beginSelectionSignal( ohere.x()-1-offset, ohere.y() );
 
   actSel = 2; // within selection
   pntSel = here;
-  bool left_not_right = ( here.y() < iPntSel.y() ||
-	                  here.y() == iPntSel.y() && here.x() < iPntSel.x() );
+  pntSel.ry() += scrollbar->value();
 
-  int offset = 0;
-  if ( !word_selection_mode && !line_selection_mode ) {
-    if (left_not_right) {
-      if ( (pos.x()-tLx-bX)>0 && here.x()+1<columns)  // allow selecting up to first character of line
-        offset=1;
-    }
-    else
-      if (here.x()>0) // don't select last character of previous line
-        offset=-1;
-  }
-//  kdDebug(1211) << "tlX=" << tLx << "  bX=" << bX << "  offset=" << offset <<endl;
   emit extendSelectionSignal( here.x() + offset, here.y() );
 }
 
@@ -1097,6 +1092,7 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
   QPoint endSel = pos;
   int i = loc(bgnSel.x(),bgnSel.y());
   iPntSel = bgnSel;
+  iPntSel.ry() += scrollbar->value();
 
   word_selection_mode = TRUE;
 
@@ -1153,6 +1149,8 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
   emit extendSelectionSignal( columns-1, iPntSel.y() );
 
   emit endSelectionSignal(preserve_line_breaks);
+
+  iPntSel.ry() += scrollbar->value();
 }
 
 void TEWidget::focusInEvent( QFocusEvent * )
