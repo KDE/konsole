@@ -77,21 +77,25 @@
 
 #ifdef HAVE_UTEMPTER
 extern "C" {
-#include <utempter.h>
+	#include <utempter.h>
 }
 #endif
-
 
 #include <assert.h>
 #include <fcntl.h>
 #include <grp.h>
 
 #ifdef HAVE_LIBUTIL_H
-#include <libutil.h>
-#define USE_LOGIN
+	#include <libutil.h>
+	#define USE_LOGIN
 #elif defined(HAVE_UTIL_H)
-#include <util.h>
-#define USE_LOGIN
+	#include <util.h>
+	#define USE_LOGIN
+#endif
+
+#ifdef USE_LOGIN
+	#include <errno.h>
+	#include <utmp.h>
 #endif
 
 #include <signal.h>
@@ -297,10 +301,15 @@ int TEPty::openPty()
   }
 #endif
 #ifdef HAVE_OPENPTY
+#warning wheee
   if (ptyfd < 0) {
     int master_fd, slave_fd;
-    if (!openpty(&master_fd, &slave_fd, 0 /*noname*/, 0/*no termios*/,0 /*and again*/)) {
+    char name[10]; // RTSL it shouldn't be any longer
+    if (!openpty(&master_fd, &slave_fd, name, 0/*no termios*/,0 /*and again*/)) {
       ptyfd=master_fd;
+      strncpy(ptynam, name, 50);
+      strncpy(ttynam, name, 50);
+      ttynam[5]='t';
       // one needs to look into who owns what to make sure chownpty is needed
     }
   }
@@ -370,7 +379,8 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   // Stamp utmp/wtmp if we have and want them
 #ifdef HAVE_UTEMPTER
   if (addutmp) addToUtmp(dev, "", fd);
-#elif defined(USE_LOGIN)
+#endif
+#ifdef USE_LOGIN
   char *str_ptr;
   struct utmp l_struct;
   memset(&l_struct, 0, sizeof(struct utmp));
@@ -381,7 +391,9 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   strncpy(l_struct.ut_name, str_ptr, UT_NAMESIZE);
 
   if (gethostname(l_struct.ut_host, UT_HOSTSIZE) == -1) {
-    abort();
+     if (errno != ENOMEM)
+        abort();
+     l_struct.ut_host[UT_HOSTSIZE]=0;
   }
 
   if (! (str_ptr=ttyname(0)) ) {
