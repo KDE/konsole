@@ -1276,7 +1276,6 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
         {
            //KONSOLEDEBUG << "Stopping transparency" << endl
            if (rootxpms[te]) {
-             rootxpms[te]->stop();
              delete rootxpms[te];
              rootxpms.remove(te);
            }
@@ -1588,23 +1587,28 @@ void Konsole::switchToTabWidget()
   TEWidget* se_widget = se->widget();
   makeTabWidget();
 
-  sessions.first();
-  while(sessions.current()) {
+  QPtrListIterator<TESession> ses_it(sessions);
+  while(TESession* _se=ses_it.current()) {
     TEWidget* new_te=new TEWidget(tabwidget);
 
     connect( new_te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
              this, SLOT(configureRequest(TEWidget*,int,int,int)) );
     initTEWidget(new_te, se_widget);
-    setSchema(sessions.current()->schemaNo(),new_te);
 
-    tabwidget->insertTab(new_te,SmallIconSet(sessions.current()->IconName()),sessions.current()->Title());
+    tabwidget->insertTab(new_te,SmallIconSet(_se->IconName()),_se->Title());
+    setSchema(_se->schemaNo(),new_te);
+
     new_te->calcGeometry();
-    sessions.current()->changeWidget(new_te);
+    _se->changeWidget(new_te);
 
-    sessions.next();
+    ++ses_it;
   }
 
-//  delete se_widget;
+  if (rootxpms[se_widget]) {
+    delete rootxpms[se_widget];
+    rootxpms.remove(se_widget);
+  }
+  delete se_widget;
   setCentralWidget(tabwidget);
   tabwidget->show();
 }
@@ -1621,8 +1625,6 @@ void Konsole::switchToFlat()
   initTEWidget(te, se_widget);
   te->setFocus();
 
-  setSchema(se->schemaNo());
-
   setCentralWidget(te);
   te->show();
 
@@ -1633,6 +1635,12 @@ void Konsole::switchToFlat()
   {
     sessions.current()->changeWidget(te);
     sessions.next();
+  }
+  setSchema(se->schemaNo());
+
+  if (rootxpms[se_widget]) {
+    delete rootxpms[se_widget];
+    rootxpms.remove(se_widget);
   }
   delete tabwidget;
   tabwidget = 0L;
@@ -2030,14 +2038,8 @@ void Konsole::addSession(TESession* s)
   if (tabwidget) {
   //KONSOLEDEBUG<<"Konsole ctor() after new TEWidget() "<<time.elapsed()<<" msecs elapsed"<<endl;
     tabwidget->insertTab(te,SmallIconSet(s->IconName()),newTitle);
+    setSchema(s->schemaNo());
     tabwidget->setCurrentPage(tabwidget->count()-1);
-/*
-    KSimpleConfig *co = defaultSession();
-    co->setDesktopGroup();
-    QString schema = co->readEntry("Schema");
-    //KONSOLEDEBUG << "my Looking for schema " << schema << endl;
-
-    readProperties(KGlobal::config(), schema, false);*/
   }
 }
 
@@ -2315,7 +2317,6 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
       te->setBellMode(n_bell);
     }
 
-    setSchema(schmno);
     te->setMinimumSize(150,70);
   }
 
@@ -2439,6 +2440,10 @@ void Konsole::doneSession(TESession* s)
   ra->unplug(m_view);
   if (tabwidget) {
     tabwidget->removePage( s->widget() );
+    if (rootxpms[s->widget()]) {
+      delete rootxpms[s->widget()];
+      rootxpms.remove(s->widget());
+    }
     delete s->widget();
   }
   session2action.remove(s);
@@ -2529,7 +2534,7 @@ void Konsole::slotMovedTab(int from, int to)
     if (!m_menuCreated)
       makeGUI();
     m_moveSessionLeft->setEnabled(to>0);
-    m_moveSessionRight->setEnabled(to<sessions.count()-1);
+    m_moveSessionRight->setEnabled(to<(int)sessions.count()-1);
   }
 }
 
@@ -2881,7 +2886,7 @@ void Konsole::setSchema(int numb, TEWidget* tewidget)
   {
         const_cast<ColorSchema *>(s)->rereadSchemaFile();
   }
-  if (s) setSchema(s, tewidget);
+	  if (s) setSchema(s, tewidget);
 }
 
 void Konsole::setSchema(const QString & path)
@@ -2905,16 +2910,18 @@ void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
   if (!tewidget) tewidget=te;
 
 //        KONSOLEDEBUG << "Checking menu items" << endl;
-  if (m_schema)
-  {
-    m_schema->setItemChecked(curr_schema,false);
-    m_schema->setItemChecked(s->numb(),true);
-  }
+  if (tewidget==te) {
+    if (m_schema)
+    {
+      m_schema->setItemChecked(curr_schema,false);
+      m_schema->setItemChecked(s->numb(),true);
+    }
 //        KONSOLEDEBUG << "Remembering schema data" << endl;
 
-  s_schema = s->relPath();
-  curr_schema = s->numb();
-  pmPath = s->imagePath();
+    s_schema = s->relPath();
+    curr_schema = s->numb();
+    pmPath = s->imagePath();
+  }
   tewidget->setColorTable(s->table()); //FIXME: set twice here to work around a bug
 
   if (s->useTransparency()) {
@@ -2927,7 +2934,6 @@ void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
   } else {
 //        KONSOLEDEBUG << "Stopping transparency" << endl;
       if (rootxpms[tewidget]) {
-        rootxpms[tewidget]->stop();
         delete rootxpms[tewidget];
         rootxpms.remove(tewidget);
       }
@@ -2935,7 +2941,15 @@ void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
   }
 
   tewidget->setColorTable(s->table());
-  if (tabwidget && se)
+  if (tabwidget) {
+    QPtrListIterator<TESession> ses_it(sessions);
+    for (; ses_it.current(); ++ses_it)
+      if (tewidget==ses_it.current()->widget()) {
+        ses_it.current()->setSchemaNo(s->numb());
+        break;
+      }
+  }
+  else if (se)
     se->setSchemaNo(s->numb());
 }
 
@@ -2961,7 +2975,7 @@ void Konsole::detachSession() {
   disconnect( se,SIGNAL(restoreAllListenToKeyPress()), this,SLOT(restoreAllListenToKeyPress()) );
   disconnect( se,SIGNAL(renameSession(TESession*,const QString&)), this,SLOT(slotRenameSession(TESession*,const QString&)) );
 
-  ColorSchema* schema = colors->find(curr_schema);
+  ColorSchema* schema = colors->find(se->schemaNo());
   KonsoleChild* konsolechild = new KonsoleChild(se,te->Columns(),te->Lines(),n_scroll,
                                                 b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame,
                                                 schema,te->font(),te->bellMode(),te->wordCharacters(),
@@ -2989,6 +3003,10 @@ void Konsole::detachSession() {
 
   if (tabwidget) {
     tabwidget->removePage( se_widget );
+    if (rootxpms[se_widget]) {
+      delete rootxpms[se_widget];
+      rootxpms.remove(se_widget);
+    }
     delete se_widget;
   }
 }
@@ -3003,10 +3021,12 @@ void Konsole::attachSession(TESession* session)
              this, SLOT(configureRequest(TEWidget*,int,int,int)) );
 
     initTEWidget(te, se_widget);
-    setSchema(session->schemaNo());
+    session->changeWidget(te);
     tabwidget->insertTab(te,SmallIconSet(session->IconName()),session->Title());
+    setSchema(session->schemaNo());
   }
-  session->changeWidget(te);
+  else
+    session->changeWidget(te);
 
   QString title=session->Title();
   KRadioAction *ra = new KRadioAction(title.replace('&',"&&"), session->IconName(),
