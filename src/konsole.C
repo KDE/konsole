@@ -404,6 +404,7 @@ void Konsole::dragEnterEvent(QDragEnterEvent* e)
       QUriDrag::canDecode(e));
 }
 
+// XXXXXXXXX is this still used ?
 void Konsole::dropEvent(QDropEvent* event)
 {
     // The current behaviour when url(s) are dropped is

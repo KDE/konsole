@@ -1056,13 +1056,12 @@ void TEWidget::dropEvent(QDropEvent* event)
           bPopup = false; // a non-local file, don't popup
         }
         delete url;
-        p = strlist.next();
       }
-      
+
       if (bPopup)
         // m_drop->popup(pos() + event->pos());
 	m_drop->popup(mapToGlobal(event->pos()));
-      else 
+      else
 	{
 	  if (currentSession) {
 	    currentSession->getEmulation()->sendString(dropText.latin1());
