@@ -6,16 +6,18 @@
   to see the issue, 'ls /dev', make window smaller
   and then larger again.
 
+- introduce the concept of "logical lines" for resizing and
+  cut'n'paste.
+
 - complete command line options
   - emit undecodeable sequences only on on demand (-d).
   - font, menu, scrollbar, ... other configs
   - deal with unrecognized options
 
 - complete session awareness
-  - save commandline option (-e)
+  - save *all* konsole sessions, not only the primary.
 
 - implement kvt features
-  - DND
   - awareness of gui style change
 
 - improve/complete documentation
@@ -34,8 +36,6 @@
   and a rpc client. Should become a parameter in any case.
 
 - allow reloading the configuration files at runtime.
-
-- read configuration files both from kdedir() _and_ localkdedir().
 
 - Unix98 compatible way of using pty (openpty/forkpty).
 
