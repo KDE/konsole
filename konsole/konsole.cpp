@@ -554,7 +554,7 @@ void Konsole::makeGUI()
 //   m_options->insertItem( SmallIconSet( "charset" ), i18n( "&Codec" ), m_codec);
    m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
 
-   KAction *WordSeps = new KAction(i18n("Wor&d Separators..."), 0, this,
+   KAction *WordSeps = new KAction(i18n("Wor&d Connectors..."), 0, this,
                                    SLOT(slotWordSeps()), this);
    WordSeps->plug(m_options);
 
@@ -2319,7 +2319,7 @@ unsigned int SizeDialog::lines() const
 void Konsole::slotWordSeps() {
 //  KONSOLEDEBUG << "Konsole::slotWordSeps\n";
   KLineEditDlg dlg(i18n("Characters other than alphanumerics considered part of a word when double clicking"),s_word_seps, this);
-  dlg.setCaption(i18n("Word Separators"));
+  dlg.setCaption(i18n("Word Connectors"));
   if (dlg.exec()) {
     s_word_seps = dlg.text();
     te->setWordCharacters(s_word_seps);
