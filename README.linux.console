@@ -1,42 +1,58 @@
-Earlier, some character oriented applications were written
-with the Linux console as the platform in mind, and although
-most of them do well when run in xterm emulation (which is
-konsole's default), they didn't look as pleasant as the
-original. Therefore, Konsole has had an explicit Linux
-console emulation mode. Though this mode is not longer
-available, it's abilities have been preserved.
+Konsole and the Linux console
 
 
-The main differences between the Linux console and xterm
+From a technical point of view, the Linux console differes
+so substantially from any other terminal, that it impossible
+to fully emulate it. This is because the Linux console lives
+in kernel space and interfaces by kernel means, which cannot
+be simulated by any user space application.
+
+Contrary to this fact, konsole can be configured to appear
+and function console like to a degree that makes it virtually
+undistinguishable from the original. So if you enjoy to run
+KDE on a HAL/9 while flying to Jupiter, but always wondered
+how the Linux console really looks like, switch off the
+menubar, scrollbar and frame, select the Linux colors and
+font and set the full screen mode. 
+
+You should get a pixel identical display then, despite the
+fact that you're still running an X terminal. In case you're
+getting confused whether running console or konsole then,
+note that the mouse cursor looks different. Use the right
+mouse button menu to switch between fullscreen and regular
+mode. You might find the ALT-Tab and CTRL-Tab keys helpful
+then, too.
+
+
+* What make the Linux console so unique?
+
+The central differences between the Linux console and xterm
 like emulations are:
 
-1) The Linux console uses some special devices (vcs,vcsa).
+1) The Linux console uses some special devices (vcs,vcsa)
+   and ioctls for some purposes, for which no correspondent
+   escape codes exist.
 2) The Linux console uses gpm for the mouse.
 3) The Linux console does not have an application screen.
    Xterm like application switch from a primary screen to
    the application screen when running in full screen mode,
    keeping the shell session apart from the application.
+   Application like MC emulation the application screen on
+   the Linux console using the devices mentioned in 1).
 4) The Linux console may use a character map different from
    the one used in X11.
 5) The TERM environment variable is "linux"
 6) A few key codes (F1-F5) differ.
 7) The Linux console occupies the whole display.
 
-
-To cope with 1) and 3) would require to modify the Linux
-console itself; 2) would have likely implications. Work
-on an explicit Linux console emulation has been aborted,
-therefore.
-
-Konsole can handle 4) to 7), so one cannot run programs
-designed for the Linux console to a high degree but can
-also setup a complete lookalike. You should get satisfying
-results when you switch to Linux colors, select the Linux
-font and set the full screen option.
+Clearly, 1) to 3) makes the Linux console so distinct that
+an explicit Linux console simulation cannot exist.
 
 
-To really run application with Linux console emulation
-(AND THERE SHOULD BE NO NEED TO DO SO):
+* Running Konsole in true Linux console mode:
+
+To some degree, one can run application with Linux console
+emulation, too (BUT THERE SHOULD BE NO NEED TO DO SO):
 
 - export TERM=linux to trigger ncurses aware applications
   to expect a linux console.
@@ -46,14 +62,13 @@ To really run application with Linux console emulation
 [TODO: to control the the above two points via menu settings
  is work in progress, meaning not available in user space yet.]
 
-
-Please note that these applications may not react properly on
-changing the window size. Often they ignore it completely or
-behave strange in other ways. I even saw one application dying
-from the shock of noticing that the linux console has simply
-changed it's size (Debian's dselect). Since the Linux console
-can be resized, this behavior is to be considered a bug of
-these applications, i cannot help it.
+Please note that these applications then may not react properly
+on changing the window size anymore. Often they ignore it
+completely or behave strange in other ways. I even saw one
+application dying from the shock of noticing that the linux
+console has simply changed it's size (Debian's dselect). Since
+the Linux console can be resized, this behavior is to be
+considered a bug of these applications, i cannot help it.
 
 Mouse-aware application will most probably not recognize
 mouse events (especially mc) since they might try to get
