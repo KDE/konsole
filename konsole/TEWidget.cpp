@@ -1443,10 +1443,23 @@ bool TEWidget::event( QEvent *e )
   if ( e->type() == QEvent::AccelOverride )
   {
     QKeyEvent *ke = static_cast<QKeyEvent *>( e );
+    KKey key( ke );
+    int keyCodeQt = key.keyCodeQt();
+
+    // The following if-statement is probably better
+    //if ( ke->state() == Qt::ControlButton )
     if ( ke->key() == Qt::Key_D && ke->state() == Qt::ControlButton )
     {
       ke->accept();
       return true;
+    }
+    
+    // Override any of the following accelerators:
+    switch ( keyCodeQt )
+    {
+      case Key_Delete:
+        ke->accept();
+        return true;
     }
   }
   return QFrame::event( e );
