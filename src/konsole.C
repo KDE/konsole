@@ -300,6 +300,12 @@ Konsole::~Konsole()
 void Konsole::makeGUI()
 {
    if (m_menuCreated) return;
+   //not longer needed
+   disconnect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+   disconnect(m_file,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+   disconnect(m_options,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+   disconnect(m_help,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+   disconnect(m_sessions,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    //kdDebug()<<"Konsole::makeGUI()"<<endl;
    m_menuCreated=true;
 
