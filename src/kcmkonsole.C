@@ -21,6 +21,7 @@
 #include <kiconloader.h>
 
 #include <stdio.h>
+#include <kstddirs.h>
 #include <klocale.h>
 #include <kglobal.h>
 
@@ -48,7 +49,7 @@ void PageFrame::Contents(const char* header, QWidget* body, const char* footer)
     topLayout->addWidget( sb , 2);
     QBoxLayout *sbl = new QHBoxLayout( sb,5,5 ); 
     QLabel* logo = new QLabel(sb);
-    QPixmap pm = KGlobal::iconLoader()->loadApplicationIcon("konsole.xpm");
+    QPixmap pm = KGlobal::iconLoader()->loadIcon(locate("icon","konsole"));
     logo->setPixmap(pm);
     logo->setAlignment( AlignCenter );
     logo->setMinimumSize( logo->sizeHint() );

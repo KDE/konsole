@@ -9,7 +9,7 @@ data_DATA = BlackOnLightYellow.schema BlackOnWhite.schema \
 
 KDE_ICON = konsole
 
-kde_toolbar_DATA = colourness.xpm brightness.xpm contrast.xpm
+kde_toolbar_DATA = colourness.png brightness.png contrast.png
 
 EXTRA_DIST = $(data_DATA) $(kde_toolbar_DATA)
 
