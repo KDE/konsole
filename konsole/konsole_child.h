@@ -59,7 +59,6 @@ private slots:
   void closeSession();
 
 private:
-  bool allowResize;
   void setColLin(int columns, int lines);
   void pixmap_menu_activated(int item,QString pmPath);
 
@@ -68,6 +67,7 @@ private:
   int  wallpaperSource;
 
   TESession*     se;
+  bool allowResize;
   TEWidget*      te;
   KPopupMenu*    m_rightButton;
   KRootPixmap*   rootxpm;

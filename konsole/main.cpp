@@ -258,7 +258,7 @@ int main(int argc, char* argv[])
   if (args->isSet("schema"))
     schema = args->getOption("schema");
 
-  KConfig * sessionconfig;
+  KConfig * sessionconfig = 0;
   QString profile = "";
   if (args->isSet("profile")) {
     profile = args->getOption("profile");
