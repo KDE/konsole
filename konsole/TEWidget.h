@@ -80,8 +80,9 @@ public:
     
     void calcGeometry();
     void propagateSize();
-    QSize calcSize(int cols, int lins) const;
-
+    void updateImageSize();
+    void setSize(int cols, int lins);
+    void setFixedSize(int cols, int lins);
     QSize sizeHint() const;
 
     void setWordCharacters(QString wc);
@@ -247,6 +248,7 @@ private:
     bool isPrinting; // Paint job is intended for printer
     bool printerFriendly; // paint printer friendly, save ink
     bool printerBold; // Use a bold font instead of overstrike for bold
+    bool isFixedSize; //Columns / lines are locked.
     QTimer* blinkT;  // active when hasBlinker
     QTimer* blinkCursorT;  // active when hasBlinkingCursor
 
@@ -273,7 +275,8 @@ private:
     // the rim should normally be 1, 0 only when running in full screen mode.
     int rimX;      // left/right rim width
     int rimY;      // top/bottom rim high
-
+    QSize m_size;
+    
 private slots:
     void drop_menu_activated(int item);
     void swapColorTable();

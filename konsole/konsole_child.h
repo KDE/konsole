@@ -34,7 +34,7 @@ public:
   KonsoleChild(TESession*, int columns, int lines, int scrollbar_location, int frame_style,
                ColorSchema* schema,QFont font, int bellmode, QString wordcharacters,
                bool blinkingCursor, bool ctrlDrag, bool terminalSizeHint, int lineSpacing,
-	       bool cutToBeginningOfLine, bool allowResize);
+	       bool cutToBeginningOfLine, bool allowResize, bool fixedSize);
   void run();
   void setSchema(ColorSchema* s);
   ~KonsoleChild();
@@ -59,7 +59,7 @@ private slots:
   void attachSession();
   void renameSession();
   void closeSession();
-
+  
 private:
   void setColLin(int columns, int lines);
   void pixmap_menu_activated(int item,QString pmPath);
@@ -71,6 +71,7 @@ private:
   TESession*     se;
   ColorSchema*   schema;
   bool allowResize;
+  bool b_fixedSize;
   TEWidget*      te;
   KPopupMenu*    m_rightButton;
   KRootPixmap*   rootxpm;

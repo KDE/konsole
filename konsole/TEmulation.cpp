@@ -147,8 +147,8 @@ void TEmulation::changeGUI(TEWidget* newgui)
                      this,SLOT(onHistoryCursorChange(int)));
     QObject::disconnect(gui,SIGNAL(keyPressedSignal(QKeyEvent*)),
                      this,SLOT(onKeyPress(QKeyEvent*)));
-    QObject::disconnect(gui,SIGNAL(beginSelectionSignal(const int,const int)),
-                     this,SLOT(onSelectionBegin(const int,const int)) );
+    QObject::disconnect(gui,SIGNAL(beginSelectionSignal(const int,const int,const bool)),
+                     this,SLOT(onSelectionBegin(const int,const int,const bool)) );
     QObject::disconnect(gui,SIGNAL(extendSelectionSignal(const int,const int)),
                      this,SLOT(onSelectionExtend(const int,const int)) );
     QObject::disconnect(gui,SIGNAL(endSelectionSignal(const bool)),

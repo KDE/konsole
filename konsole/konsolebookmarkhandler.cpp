@@ -24,14 +24,14 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel 
 {
     m_menu = new KPopupMenu( konsole, "bookmark menu" );
 
-    QString file = locate( "data", "kfile/bookmarks.xml" );
-    if ( file.isEmpty() )
-        file = locateLocal( "data", "kfile/bookmarks.xml" );
+    m_file = locate( "data", "kfile/bookmarks.xml" );
+    if ( m_file.isEmpty() )
+        m_file = locateLocal( "data", "kfile/bookmarks.xml" );
 
-    KBookmarkManager *manager = KBookmarkManager::managerForFile( file, false);
+    KBookmarkManager *manager = KBookmarkManager::managerForFile( m_file, false);
 
     // import old bookmarks
-    if ( !KStandardDirs::exists( file ) ) {
+    if ( !KStandardDirs::exists( m_file ) ) {
         QString oldFile = locate( "data", "kfile/bookmarks.html" );
         if ( !oldFile.isEmpty() )
             importOldBookmarks( oldFile, manager );
@@ -51,6 +51,16 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel 
                                             NULL, false /* Not toplevel */
 					    ,false      /* No 'Add Bookmark' */);
     }
+}
+
+void KonsoleBookmarkHandler::slotEditBookmarks()
+{
+    KProcess proc;
+    proc << QString::fromLatin1("keditbookmarks");
+    proc << "--nobrowser";
+    proc << "--caption" << i18n("Konsole Bookmarks Editor");
+    proc << m_file;
+    proc.start(KProcess::DontCare);
 }
 
 QString KonsoleBookmarkHandler::currentURL() const

@@ -23,12 +23,13 @@
 KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar_location, int frame_style,
                            ColorSchema* _schema,QFont font,int bellmode,QString wordcharacters,
                            bool blinkingCursor, bool ctrlDrag, bool terminalSizeHint, int lineSpacing,
-                           bool cutToBeginningOfLine, bool _allowResize):KMainWindow()
+                           bool cutToBeginningOfLine, bool _allowResize, bool _fixedSize):KMainWindow()
 ,session_terminated(false)
 ,wallpaperSource(0)
 ,se(_se)
 ,schema(_schema)
 ,allowResize(_allowResize)
+,b_fixedSize(_fixedSize)
 {
   te = new TEWidget(this);
   te->setVTFont(font);
@@ -165,9 +166,18 @@ void KonsoleChild::restoreAllListenToKeyPress()
 void KonsoleChild::setColLin(int columns, int lines)
 {
   if ((columns==0) || (lines==0))
-    resize(sizeForCentralWidgetSize(te->calcSize(80,24)));
+  {
+    columns = 80;
+    lines = 24;
+  }
+
+  if (b_fixedSize)
+    te->setFixedSize(columns, lines);
   else
-    resize(sizeForCentralWidgetSize(te->calcSize(columns, lines)));
+    te->setSize(columns, lines);
+  adjustSize();
+  if (b_fixedSize)
+    setFixedSize(sizeHint());
   if (schema && schema->alignment() >= 3)
     pixmap_menu_activated(schema->alignment(),schema->imagePath());
 }

@@ -82,6 +82,7 @@ public:
   void setSchema(const QString & path);
 
   void enableFullScripting(bool b);
+  void enableFixedSize(bool b);
 
   void run();
   void setDefaultSession(const QString &filename);
@@ -352,7 +353,8 @@ private:
   bool        skip_exit_query:1;
   bool        b_warnQuit:1;
   bool        isRestored:1;
-  bool        b_allowResize:1;
+  bool        b_allowResize:1; // Whether application may resize
+  bool        b_fixedSize:1; // Whether user may resize
   bool        b_addToUtmp:1;
   bool        b_xonXoff:1;
   bool        b_bidiEnabled:1;

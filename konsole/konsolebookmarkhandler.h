@@ -30,6 +30,7 @@ public:
 
 private slots:
     void slotBookmarksChanged( const QString &, const QString & caller );
+    void slotEditBookmarks();
 
 signals:
     void openURL( const QString& url, const QString& title );
@@ -40,6 +41,7 @@ private:
     Konsole *m_konsole;
     KPopupMenu *m_menu;
     KonsoleBookmarkMenu *m_bookmarkMenu;
+    QString m_file;
 
 protected:
     virtual void virtual_hook( int id, void* data );

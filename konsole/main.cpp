@@ -50,6 +50,7 @@ static KCmdLineOptions options[] =
    { "noscrollbar",     I18N_NOOP("Do not display scrollbar"), 0 },
    { "noxft",           I18N_NOOP("Do not use XFT (Anti-Aliasing)"), 0 },
    { "vt_sz CCxLL",     I18N_NOOP("Terminal size in columns x lines"), 0 },
+   { "noresize",        I18N_NOOP("Terminal size is fixed"), 0 },
    { "type <type>",     I18N_NOOP("Open the given session type instead of the default shell"), 0 },
    { "keytab <name>",   I18N_NOOP("Use given .keytab file"), 0 },
    { "profile <name>",  I18N_NOOP("Start with given sessions profile"), 0 },
@@ -66,6 +67,7 @@ static bool has_noxft = false;
 static bool login_shell = false;
 static bool full_script = false;
 static bool auto_close = true;
+static bool fixed_size = false;
 
 const char *konsole_shell(QStrList &args)
 {
@@ -116,6 +118,8 @@ public:
             restartCommand.append("--script");
         if (!auto_close)
             restartCommand.append("--noclose");
+        if (fixed_size)
+            restartCommand.append("--noresize");
         sm.setRestartCommand(restartCommand);
         return true;
     }
@@ -253,6 +257,7 @@ int main(int argc, char* argv[])
   wname = qtargs->getOption("name");
   full_script = args->isSet("script");
   auto_close = args->isSet("close");
+  fixed_size = !args->isSet("resize");
 
   if (!full_script)
 	a.dcopClient()->setQtBridgeEnabled(false);
@@ -305,6 +310,9 @@ int main(int argc, char* argv[])
     }
   }
 
+  if (!kapp->authorizeKAction("size"))
+    fixed_size = true;
+
   // ///////////////////////////////////////////////
 
   // Ignore SIGHUP so that we don't get killed when
@@ -346,6 +354,7 @@ int main(int argc, char* argv[])
         sCwd = sessionconfig->readEntry("Cwd0");
         Konsole *m = new Konsole(wname,sPgm,eargs,histon,menubaron,toolbaron,frameon,scrollbaron,sIcon,sTitle,0/*type*/,sTerm,true,sCwd);
         m->enableFullScripting(full_script);
+        m->enableFixedSize(fixed_size);
 	m->restore(n);
         m->makeGUI();
         m->setSchema(sessionconfig->readEntry("Schema0"));
@@ -409,6 +418,7 @@ int main(int argc, char* argv[])
   {
     Konsole*  m = new Konsole(wname,(shell ? QFile::decodeName(shell) : QString::null),eargs,histon,menubaron,toolbaron,frameon,scrollbaron,QString::null,title,type,term);
     m->enableFullScripting(full_script);
+    m->enableFixedSize(fixed_size);
     //3.8 :-(
     //exit(0);
 

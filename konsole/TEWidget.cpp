@@ -325,6 +325,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,isPrinting(false)
 ,printerFriendly(false)
 ,printerBold(false)
+,isFixedSize(false)
 ,m_drop(0)
 ,possibleTripleClick(false)
 ,mResizeWidget(0)
@@ -557,7 +558,11 @@ void TEWidget::setCursorPos(const int curx, const int cury)
 */
 
 void TEWidget::setImage(const ca* const newimg, int lines, int columns)
-{ int y,x,len;
+{ 
+  if (!image)
+     updateImageSize(); // Create image
+
+  int y,x,len;
   const QPixmap* pm = backgroundPixmap();
   QPainter paint;
   setUpdatesEnabled(false);
@@ -846,23 +851,26 @@ void TEWidget::blinkCursorEvent()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TEWidget::resizeEvent(QResizeEvent* ev)
+void TEWidget::resizeEvent(QResizeEvent*)
 {
-  //printf("resize: %d,%d\n",ev->size().width(),ev->size().height());
-  //printf("approx: %d,%d\n",ev->size().width()/font_w,ev->size().height()/font_h);
-  //printf("leaves: %d,%d\n",ev->size().width()%font_w,ev->size().height()%font_h);
-  //printf("curren: %d,%d\n",width(),height());
-HCNT("resizeEvent");
-
-  // see comment in `paintEvent' concerning the rounding.
-  //FIXME: could make a routine here; check width(),height()
-  assert(ev->size().width() == width());
-  assert(ev->size().height() == height());
-
-  propagateSize();
+  updateImageSize();
 }
 
 void TEWidget::propagateSize()
+{
+  if (isFixedSize)
+  {
+     setSize(columns, lines);
+     QFrame::setFixedSize(sizeHint());
+     parentWidget()->adjustSize();
+     parentWidget()->setFixedSize(parentWidget()->sizeHint());
+     return;
+  }
+  if (image)
+     updateImageSize();
+}
+
+void TEWidget::updateImageSize()
 {
   ca* oldimg = image;
   int oldlin = lines;
@@ -918,6 +926,7 @@ void TEWidget::setScrollbarLocation(int loc)
   if (scrollLoc == loc) return; // quickly
   bY = bX = 1;
   scrollLoc = loc;
+  calcGeometry();
   propagateSize();
   update();
 }
@@ -1761,17 +1770,21 @@ void TEWidget::calcGeometry()
      scrollbar->show();
      break;
   }
-  columns = contentWidth / font_w;
-
-  if (columns<1) {
-    kdDebug(1211) << "TEWidget::calcGeometry: columns=" << columns << endl;
-    columns=1;
-  }
 
   //FIXME: support 'rounding' styles
   bY = rimY;
   contentHeight = contentsRect().height() - 2 * rimY + /* mysterious */ 1;
-  lines = contentHeight / font_h;
+
+  if (!isFixedSize)
+  {
+     columns = contentWidth / font_w;
+
+     if (columns<1) {
+       kdDebug(1211) << "TEWidget::calcGeometry: columns=" << columns << endl;
+       columns=1;
+     }
+     lines = contentHeight / font_h;
+  }
 }
 
 void TEWidget::makeImage()
@@ -1784,17 +1797,27 @@ void TEWidget::makeImage()
 }
 
 // calculate the needed size
-QSize TEWidget::calcSize(int cols, int lins) const
+void TEWidget::setSize(int cols, int lins)
 {
   int frw = width() - contentsRect().width();
   int frh = height() - contentsRect().height();
   int scw = (scrollLoc==SCRNONE?0:scrollbar->width());
-  return QSize( font_w*cols + 2*rimX + frw + scw, font_h*lins + 2*rimY + frh + /* mysterious */ 1 );
+  m_size = QSize(font_w*cols + 2*rimX + frw + scw, font_h*lins + 2*rimY + frh + /* mysterious */ 1);
+  updateGeometry();
+}
+
+void TEWidget::setFixedSize(int cols, int lins)
+{
+  isFixedSize = true;
+  columns = cols;
+  lines = lins;
+  setSize(cols, lins);
+  QFrame::setFixedSize(m_size);
 }
 
 QSize TEWidget::sizeHint() const
 {
-   return size();
+  return m_size;
 }
 
 void TEWidget::styleChange(QStyle &)

@@ -241,7 +241,8 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 ,m_menuCreated(false)
 ,skip_exit_query(false) // used to skip the query when closed by the session management
 ,b_warnQuit(false)
-,b_allowResize(true)
+,b_allowResize(true) // Whether application may resize
+,b_fixedSize(false) // Whether user may resize
 ,b_addToUtmp(true)
 ,b_xonXoff(false)
 ,b_bidiEnabled(false)
@@ -325,8 +326,6 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
   }
 
   // activate and run first session //////////////////////////////////////////
-  // FIXME: this slows it down if --type is given, but prevents a crash (malte)
-  //KONSOLEDEBUG << "Konsole pgm: " << _program << endl;
   newSession(co, _program, _args, _term, _icon, _title, _cwd);
 
   //KONSOLEDEBUG<<"Konsole ctor() ends "<<time.elapsed()<<" msecs elapsed"<<endl;
@@ -547,7 +546,8 @@ void Konsole::makeGUI()
 
       // Fullscreen
       m_options->insertSeparator();
-      m_fullscreen->plug(m_options);
+      if (m_fullscreen)
+        m_fullscreen->plug(m_options);
       m_options->insertSeparator();
 
       // Select Bell
@@ -587,18 +587,21 @@ void Konsole::makeGUI()
          m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Sch&ema" ), m_schema);
 
       // Select size
-      selectSize = new KonsoleFontSelectAction(i18n("S&ize"), 0, this,
+      if (!b_fixedSize)
+      {
+         selectSize = new KonsoleFontSelectAction(i18n("S&ize"), 0, this,
                                   SLOT(slotSelectSize()), actions, "size");
-      QStringList sizeitems;
-      sizeitems << i18n("40x15 (&Small)")
-         << i18n("80x24 (&VT100)")
-         << i18n("80x25 (&IBM PC)")
-         << i18n("80x40 (&XTerm)")
-         << i18n("80x52 (IBM V&GA)")
-         << ""
-         << i18n("&Custom...");
-      selectSize->setItems(sizeitems);
-      selectSize->plug(m_options);
+         QStringList sizeitems;
+         sizeitems << i18n("40x15 (&Small)")
+            << i18n("80x24 (&VT100)")
+            << i18n("80x25 (&IBM PC)")
+            << i18n("80x40 (&XTerm)")
+            << i18n("80x52 (IBM V&GA)")
+            << ""
+            << i18n("&Custom...");
+         selectSize->setItems(sizeitems);
+         selectSize->plug(m_options);
+      }
 
       KAction *historyType = new KAction(i18n("Hist&ory..."), "history", 0, this,
                                       SLOT(slotHistoryType()), actions, "history");
@@ -970,19 +973,29 @@ void Konsole::slotCouldNotClose()
 
 void Konsole::setColLin(int columns, int lines)
 {
-  if ((columns==0) || (lines==0))
+  if ((columns==0) || (lines==0)) 
   {
-    if (defaultSize.isEmpty()) // not in config file : set default value
+    if (b_fixedSize || defaultSize.isEmpty())
     {
-      defaultSize = sizeForCentralWidgetSize(te->calcSize(80,24));
-      notifySize(24,80); // set menu items (strange arg order !)
+      // not in config file : set default value
+      columns = 80;
+      lines = 24;
     }
+  }
+  
+  if ((columns==0) || (lines==0)) 
+  {
     resize(defaultSize);
-  } else {
-    QSize size = te->calcSize(columns, lines);
-    resize(sizeForCentralWidgetSize(size));
-    if (!kapp->authorizeKAction("size"))
-       te->setFixedSize(size);
+  } 
+  else 
+  {
+    if (b_fixedSize)
+       te->setFixedSize(columns, lines);
+    else
+       te->setSize(columns, lines);
+    adjustSize();
+    if (b_fixedSize)
+      setFixedSize(sizeHint());
     notifySize(lines,columns); // set menu items (strange arg order !)
   }
 }
@@ -1448,6 +1461,11 @@ void Konsole::slotToggleMenubar() {
      menubar->show();
   else
      menubar->hide();
+  if (b_fixedSize)
+  {
+     adjustSize();
+     setFixedSize(sizeHint());
+  }
   if (!showMenubar->isChecked()) {
     setCaption(i18n("Use the right mouse button to bring back the menu"));
     QTimer::singleShot(5000,this,SLOT(updateTitle()));
@@ -1462,11 +1480,17 @@ void Konsole::slotToggleToolbar() {
      toolBar()->show();
   else
      toolBar()->hide();
+  if (b_fixedSize)
+  {
+     adjustSize();
+     setFixedSize(sizeHint());
+  }
 }
 
 void Konsole::slotToggleFullscreen()
 {
   setFullScreen(!b_fullscreen);
+  te->setFrameStyle( b_framevis && !b_fullscreen ?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
 }
 
 void Konsole::slotSaveSettings()
@@ -1525,6 +1549,8 @@ void Konsole::changeColumns(int columns)
 }
 
 void Konsole::slotSelectSize() {
+    if (b_fullscreen)
+       slotToggleFullscreen();
     int item = selectSize->currentItem();
     switch (item) {
     case 0: setColLin(40,15); break;
@@ -1575,8 +1601,8 @@ void Konsole::initFullScreen()
   //This function is to be called from main.C to initialize the state of the Konsole (fullscreen or not).  It doesn't appear to work
   //from inside the Konsole constructor
   if (b_fullscreen) {
-   setColLin(0,0);
-   }
+    setColLin(0,0);
+  }
   setFullScreen(b_fullscreen);
 }
 
@@ -1592,26 +1618,20 @@ void Konsole::initSessionKeyTab(const QString &keyTab) {
 
 void Konsole::setFullScreen(bool on)
 {
-//  if (on == b_fullscreen) {
-//    KONSOLEDEBUG << "On and b_Fullscreen both equal " << b_fullscreen << "." << endl;
-//    }
-    if (on) {
-      te->setRim(0);
-      showFullScreen();
-      b_fullscreen = on;
-      }
-    else {
-      te->setRim(1);
-      if( isFullScreen()) // showNormal() may also do unminimize, unmaximize etc.
-        showNormal();
-      updateTitle(); // restore caption of window
-      b_fullscreen = false;
-//      KONSOLEDEBUG << "On is false, b_fullscreen is " << b_fullscreen << ". Set to Normal view and set caption." << endl;
-    }
-//  return;
-    if (m_fullscreen!=0)
-       m_fullscreen->setChecked(b_fullscreen);
-
+  if (on) {
+    te->setFrameStyle( QFrame::NoFrame );
+    showFullScreen();
+    b_fullscreen = on;
+  }
+  else {
+    te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
+    if( isFullScreen()) // showNormal() may also do unminimize, unmaximize etc.
+      showNormal();
+    updateTitle(); // restore caption of window
+    b_fullscreen = false;
+  }
+  if (m_fullscreen)
+    m_fullscreen->setChecked(b_fullscreen);
 }
 
 /* --| sessions |------------------------------------------------------------ */
@@ -1748,7 +1768,7 @@ void Konsole::runSession(TESession* s)
 
 void Konsole::addSession(TESession* s)
 {
-   QString newTitle = s->Title();
+  QString newTitle = s->Title();
 
   bool nameOk;
   int count = 1;
@@ -2680,7 +2700,7 @@ void Konsole::detachSession() {
                                                 b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame,
                                                 schema,te->font(),te->isBellMode(),te->wordCharacters(),
                                                 te->blinkingCursor(),te->ctrlDrag(),te->isTerminalSizeHint(),
-                                                te->lineSpacing(),te->cutToBeginningOfLine(),b_allowResize);
+                                                te->lineSpacing(),te->cutToBeginningOfLine(),b_allowResize, b_fixedSize);
   detached.append(konsolechild);
   konsolechild->show();
   konsolechild->run();
@@ -3327,6 +3347,16 @@ void Konsole::enableFullScripting(bool b)
     b_fullScripting = b;
     for (TESession *se = sessions.first(); se; se = sessions.next())
        se->enableFullScripting(b);
+}
+
+void Konsole::enableFixedSize(bool b)
+{
+    b_fixedSize = b;
+    if (b_fixedSize)
+    {
+      delete m_fullscreen;
+      m_fullscreen = 0;
+    }
 }
 
 #include "konsole.moc"
