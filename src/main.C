@@ -890,9 +890,9 @@ void Konsole::activateSession()
   if (s==NULL) {
     return; 
   }
-  if (se == s) {
-    kdDebug() << "Hello, you pressed the same button!!!";
-  }
+  //if (se == s) {  // This happens on startup
+  //  kdDebug() << "Hello, you pressed the same button!!!" << endl;
+  //}
   if (se) { se->setConnect(FALSE); }
   se = s;
   if (!s) { fprintf(stderr,"session not found\n"); return; } // oops
