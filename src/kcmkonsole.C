@@ -89,20 +89,35 @@ GeneralPage::~GeneralPage()
 //--| Schema configuration |----------------------------------------------------
 
 
-ColorTable::ColorTable(QWidget* parent) : QFrame(parent)
+ColorTable::ColorTable(QWidget* parent) : QLabel(parent)
 {
   //setFrameStyle( QFrame::Panel | QFrame::Sunken );
   setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
+  setAlignment(AlignCenter);
   setBackgroundMode(PaletteBase);
+  schema = (ColorSchema*)NULL;
 }
 
 //void ColorTable::resizeEvent(QResizeEvent* e)
 //{
 //}
 
-//void ColorTable::paintCell(QPainter* p, int row, int col)
-//{
-//}
+void ColorTable::setSchema(ColorSchema* s)
+{
+  schema = s;
+//paintEvent(NULL);
+setText("");
+  if (!schema) return;
+char* pa = strrchr(s->path.data(),'/');
+setText(pa&&*pa?pa+1:"/* build-in schema */");
+}
+
+void ColorTable::paintEvent(QPaintEvent* e)
+{
+  // in the moment we don't care and paint the whole bunch
+  //if (!schema) return;
+  QFrame::paintEvent(e);
+}
 
 SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
 {
@@ -118,7 +133,8 @@ SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
 
   QGridLayout* topLayout = new QGridLayout( bigWidget, 2, 2, 5 ); 
   lbox = new QListBox(bigWidget); //FIXME: QT does not react on setFrameStyle
-  ColorTable* colorTableW = new ColorTable(bigWidget);
+  //lbox->setFrameStyle( QFrame::Panel | QFrame::Sunken );
+  colorTableW = new ColorTable(bigWidget);
   topLayout->setColStretch(0,4);
   topLayout->setColStretch(1,2);
   topLayout->setRowStretch(0,4);
@@ -133,6 +149,9 @@ SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
     lbox->insertItem(s->title.data());
   }
   topLayout->activate();
+  QObject::connect( lbox, SIGNAL( highlighted(int) ),
+                    this, SLOT( setSchema(int) ) );
+                  
 
   Contents
   ( i18n(
@@ -144,6 +163,11 @@ SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
     "specifications of the rendering."
     )
   );
+}
+
+void SchemaConfig::setSchema(int n)
+{
+  colorTableW->setSchema(ColorSchema::find(n));
 }
 
 SchemaConfig::~SchemaConfig()
@@ -182,13 +206,13 @@ KcmKonsole::KcmKonsole(int &argc, char **argv, const char *name)
 {
   if (runGUI())
   {
-//  if (!pages || pages->contains("schemes"))
-      addPage(schemes = new SchemaConfig(dialog),
-              klocale->translate("&Color Schemes"),
-              "kcmkonsole-not-written-yet.html");
 //  if (!pages || pages->contains("general"))
       addPage(general = new GeneralPage(dialog),
               klocale->translate("&General"),
+              "kcmkonsole-not-written-yet.html");
+//  if (!pages || pages->contains("schemes"))
+      addPage(schemes = new SchemaConfig(dialog),
+              klocale->translate("&Color Schemes"),
               "kcmkonsole-not-written-yet.html");
 //  if (!pages || pages->contains("sessions"))
       addPage(sessions = new SessionConfig(dialog),

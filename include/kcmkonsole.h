@@ -7,6 +7,7 @@
 #include <qlabel.h>
 #include <qlistbox.h>
 #include <kcontrol.h>
+#include "schema.h"
 
 class PageFrame : public QWidget
 { Q_OBJECT
@@ -23,13 +24,15 @@ public:
   ~GeneralPage();
 };
 
-class ColorTable : public QFrame
+class ColorTable : public QLabel
 {
 public:
   ColorTable(QWidget* parent);
+  void setSchema(ColorSchema* s);
 protected:
-//void paintEvent(QPaintEvent* e);
-//void resizeEvent(QResizeEvent* e);
+  void paintEvent(QPaintEvent* e);
+private:
+  ColorSchema* schema;
 };
 
 class SchemaConfig : public PageFrame
@@ -37,8 +40,11 @@ class SchemaConfig : public PageFrame
 public:
   SchemaConfig(QWidget* parent);
   ~SchemaConfig();
+protected slots: 
+  void setSchema(int n);
 private:
   QListBox* lbox;
+  ColorTable* colorTableW;
 };
 
 class SessionConfig : public PageFrame
