@@ -199,12 +199,7 @@ bool konsolePart::openURL( const KURL & url )
   {
       struct stat buff;
       stat( QFile::encodeName( url.path() ), &buff );
-      if ( !S_ISDIR( buff.st_mode ) )
-      {
-          emit canceled( QString::null );
-          return false;
-      }
-      QString text = url.path();
+      QString text = ( S_ISDIR( buff.st_mode ) ? url.path() : url.directory() );
       text.replace(QRegExp(" "), "\\ "); // escape spaces
       text = QString::fromLatin1("cd ") + text + '\n';
       QKeyEvent e(QEvent::KeyPress, 0,-1,0, text);
