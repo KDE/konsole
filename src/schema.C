@@ -19,6 +19,7 @@
 #include <kstddirs.h>
 #include <kglobal.h>
 #include <klocale.h>
+#include <kstaticdeleter.h>
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
@@ -26,6 +27,9 @@ static int schema_serial = 0; //FIXME: remove,localize
 
 static QIntDict<ColorSchema> * numb2schema = 0L;
 static QDict<ColorSchema>   * path2schema = 0L;
+
+static KStaticDeleter< QIntDict<ColorSchema> > n2sd;
+static KStaticDeleter< QDict<ColorSchema> > p2sd;
 
 template class QIntDict<ColorSchema>;
 template class QDict<ColorSchema>;
@@ -197,9 +201,9 @@ void ColorSchema::loadAllSchemas()
 {
 
   if ( !numb2schema )
-    numb2schema = new QIntDict<ColorSchema>;
+    numb2schema = n2sd.setObject(new QIntDict<ColorSchema>);
   if ( !path2schema )
-    path2schema = new QDict<ColorSchema>;
+    path2schema = p2sd.setObject(new QDict<ColorSchema>);
 
   defaultSchema()->addSchema();
   schema_serial = 1;
