@@ -1545,6 +1545,8 @@ void TEWidget::dropEvent(QDropEvent* event)
       else
 	{
 	  if (currentSession) {
+            if (file_count==1)
+	      KRun::shellQuote(dropText);
 	    currentSession->getEmulation()->sendString(dropText.local8Bit());
 	  }
 	  kdDebug(1211) << "Drop:" << dropText.local8Bit() << "\n";
