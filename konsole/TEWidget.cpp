@@ -1679,7 +1679,7 @@ void TEWidget::dropEvent(QDropEvent* event)
 void TEWidget::doDrag()
 {
   dragInfo.state = diDragging;
-  dragInfo.dragObject = new QTextDrag(QApplication::clipboard()->text(), this);
+  dragInfo.dragObject = new QTextDrag(QApplication::clipboard()->text(QClipboard::Selection), this);
   dragInfo.dragObject->dragCopy();
   // Don't delete the QTextDrag object.  Qt will delete it when it's done with it.
 }
