@@ -201,6 +201,7 @@ private:
 
     QPoint iPntSel; // initial selection point
     QPoint pntSel; // current selection point
+    QPoint tripleSelBegin; // help avoid flicker
     int    actSel; // selection state
     bool    word_selection_mode;
     bool    line_selection_mode;
@@ -221,7 +222,7 @@ private:
     bool isBlinkEvent; // paintEvent due to blinking.
     QTimer* blinkT;  // active when hasBlinker
     QTimer* blinkCursorT;  // active when hasBlinkingCursor
-    
+
     KPopupMenu* m_drop;
     QString dropText;
     int m_dnd_file_count;
