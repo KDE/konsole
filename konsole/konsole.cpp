@@ -2070,6 +2070,10 @@ void Konsole::updateTitle()
   setIconText( se->IconText() );
   if (tabwidget)
     tabwidget->setTabIconSet(se->widget(), iconSetForSession(se));
+  QString icon = se->IconName();
+  KRadioAction *ra = session2action.find(se);
+  if (ra && (ra->icon() != icon))
+    ra->setIcon(icon);
 }
 
 void Konsole::initSessionFont(int fontNo) {
@@ -2313,7 +2317,7 @@ void Konsole::addSession(TESession* s)
                                       0,
                                       this,
                                       SLOT(activateSession()),
-                                      this);
+                                      m_shortcuts);
   ra->setExclusiveGroup("sessions");
   ra->setChecked(true);
 
@@ -3394,7 +3398,7 @@ void Konsole::attachSession(TESession* session)
 
   QString title=session->Title();
   KRadioAction *ra = new KRadioAction(title.replace('&',"&&"), session->IconName(),
-                                      0, this, SLOT(activateSession()), this);
+                                      0, this, SLOT(activateSession()), m_shortcuts);
 
   ra->setExclusiveGroup("sessions");
   ra->setChecked(true);
