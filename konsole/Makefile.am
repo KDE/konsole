@@ -30,7 +30,7 @@ libkonsolepart_la_SOURCES = TEPty.cpp BlockArray.cpp konsole_part.cpp \
         sessioniface.skel
 
 libkonsolepart_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN)
-libkonsolepart_la_LIBADD = $(LIB_KPARTS) $(LIBUTIL) @XTESTLIB@
+libkonsolepart_la_LIBADD = $(LIB_KPARTS) $(LIBUTIL) $(XTESTLIB)
 
 # kwrited kdeinit module
 kwrited_la_SOURCES = kwrited.cpp
@@ -48,7 +48,7 @@ konsole_la_SOURCES = TEPty.cpp BlockArray.cpp main.cpp konsole.cpp schema.cpp se
      TEScreen.cpp TEmulation.cpp TEHistory.cpp keytrans.cpp konsoleiface.skel sessioniface.skel \
      konsole_wcwidth.cpp konsolebookmarkhandler.cpp konsole_child.cpp
 konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
-konsole_la_LIBADD = $(LIB_KDEUI) $(LIB_KIO) $(LIBUTIL) @XTESTLIB@
+konsole_la_LIBADD = $(LIB_KDEUI) $(LIB_KIO) $(LIBUTIL) $(XTESTLIB)
 
 # konsole executable
 konsole_SOURCES = dummy.cpp
