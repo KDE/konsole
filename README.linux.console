@@ -9,11 +9,9 @@ be simulated by any user space application.
 
 Contrary to this fact, konsole can be configured to appear
 and function console like to a degree that makes it virtually
-undistinguishable from the original. So if you enjoy to run
-KDE on a HAL/9 while flying to Jupiter, but always wondered
-how the Linux console really looks like, switch off the
-menubar, scrollbar and frame, select the Linux colors and
-font and set the full screen mode. 
+undistinguishable from the original. To do so, switch off the
+menubar, scrollbar and frame, select the Linux colors and font
+and set the full screen mode. 
 
 You should get a pixel identical display then, despite the
 fact that you're still running an X terminal. In case you're
