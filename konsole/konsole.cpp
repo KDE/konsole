@@ -591,8 +591,11 @@ void Konsole::makeGUI()
    renameSession->plug(m_rightButton);
    
    m_rightButton->insertSeparator();
-   m_rightButton->insertItem(i18n("S&ettings"), m_options);
+   m_rightButton->insertItem(i18n("&Bookmarks"), m_bookmarks);
+
    m_rightButton->insertSeparator();
+   m_rightButton->insertItem(i18n("S&ettings"), m_options);
+   m_rightButton->insertSeparator();      
    closeSession->plug(m_rightButton );
    m_rightButton->insertTearOffHandle();
 
