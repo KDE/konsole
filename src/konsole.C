@@ -242,6 +242,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
   }
   else title=mytitle;
   m_initialSession->setTitle(title);
+  se = m_initialSession;
 
   addSession(m_initialSession);
 
@@ -263,7 +264,6 @@ Konsole::Konsole(const char* name, const char* _pgm,
   // activate and run first session //////////////////////////////////////////
 
   kdDebug()<<"Konsole ctor(): runSession()"<<endl;
-  se = m_initialSession;
   te->currentSession = se;
   se->setConnect(TRUE);
   title = se->Title(); // take title from current session
