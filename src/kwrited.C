@@ -29,7 +29,9 @@
    - add client complements.
 */
 
+#ifndef HERE
 #define HERE fprintf(stderr,"%s(%d): here\n",__FILE__,__LINE__)
+#endif
 
 KWrited::KWrited() : QObject()
 {

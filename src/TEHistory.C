@@ -18,7 +18,9 @@
 #include <unistd.h>
 #include <errno.h>
 
+#ifndef HERE
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
+#endif
 
 /*
    An arbitrary long scroll.

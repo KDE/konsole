@@ -68,10 +68,16 @@
 #include <klocale.h>
 #include <knotifyclient.h>
 
+#ifndef HERE
 #define HERE printf("%s(%d): %s\n",__FILE__,__LINE__,__FUNCTION__)
+#endif
+#ifndef HCNT
 #define HCNT(Name) // { static int cnt = 1; printf("%s(%d): %s %d\n",__FILE__,__LINE__,Name,cnt++); }
+#endif
 
+#ifndef loc
 #define loc(X,Y) ((Y)*columns+(X))
+#endif
 
 //FIXME: the rim should normally be 1, 0 only when running in full screen mode.
 #define rimX 0      // left/right rim width

@@ -4,7 +4,9 @@
 
 #include <stdlib.h>
 
+#ifndef HERE
 #define HERE fprintf(stderr,"%s(%d): here\n",__FILE__,__LINE__)
+#endif
 
 /*! \class TESession
 

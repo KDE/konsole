@@ -46,13 +46,17 @@
 
 #include "TEScreen.h"
 
+#ifndef HERE
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
+#endif
 
 //FIXME: this is emulation specific. Use FALSE for xterm, TRUE for ANSI.
 //FIXME: see if we can get this from terminfo.
 #define BS_CLEARS FALSE
 
+#ifndef loc
 #define loc(X,Y) ((Y)*columns+(X))
+#endif
 
 /*! creates a `TEScreen' of `lines' lines and `columns' columns.
 */
