@@ -313,14 +313,14 @@ void TEmulation::onRcvBlock(const char *s, int len)
 
     // If we get a control code halfway a multi-byte sequence
     // we flush the decoder and continue with the control code.
-    if ((!reslen) && (s[i] < 32) && (s[i] > 0))
+    if ((s[i] < 32) && (s[i] > 0))
     {
        // Flush decoder
        while(!result.length())
-          decoder->toUnicode(&s[i],1);
-       result = " ";
-       result[0] = QChar(s[i]);
+          result = decoder->toUnicode(&s[i],1);
        reslen = 1;
+       result.setLength(reslen);
+       result[0] = QChar(s[i]);
     }
 
     for (int j = 0; j < reslen; j++)
