@@ -569,6 +569,8 @@ void TEmuVt102::tau( int token, int p, int q )
 
     case TY_CSI_PR('h',   47) :          setMode      (MODE_AppScreen); break; //VT100
     case TY_CSI_PR('l',   47) :        resetMode      (MODE_AppScreen); break; //VT100
+    case TY_CSI_PR('s',   47) :         saveMode      (MODE_AppScreen); break; //XTERM
+    case TY_CSI_PR('r',   47) :      restoreMode      (MODE_AppScreen); break; //XTERM
 
     // XTerm defines the following modes:
     // SET_VT200_MOUSE             1000
@@ -600,16 +602,20 @@ void TEmuVt102::tau( int token, int p, int q )
     case TY_CSI_PR('r', 1003) :      restoreMode      (MODE_Mouse1000); break; //XTERM
 
     case TY_CSI_PR('h', 1047) :          setMode      (MODE_AppScreen); break; //XTERM
-    case TY_CSI_PR('l', 1047) :        resetMode      (MODE_AppScreen); break; //XTERM
+    case TY_CSI_PR('l', 1047) : screen[1]->clearEntireScreen(); resetMode(MODE_AppScreen); break; //XTERM
+    case TY_CSI_PR('s', 1047) :         saveMode      (MODE_AppScreen); break; //XTERM
+    case TY_CSI_PR('r', 1047) :      restoreMode      (MODE_AppScreen); break; //XTERM
 
     //FIXME: Unitoken: save translations
     case TY_CSI_PR('h', 1048) :      saveCursor           (          ); break; //XTERM
     case TY_CSI_PR('l', 1048) :      restoreCursor        (          ); break; //XTERM
+    case TY_CSI_PR('s', 1048) :      saveCursor           (          ); break; //XTERM
+    case TY_CSI_PR('r', 1048) :      restoreCursor        (          ); break; //XTERM
 
     //FIXME: every once new sequences like this pop up in xterm.
     //       Here's a guess of what they could mean.
-    case TY_CSI_PR('h', 1049) :          setMode      (MODE_AppScreen); break; //XTERM
-    case TY_CSI_PR('l', 1049) :        resetMode      (MODE_AppScreen); break; //XTERM
+    case TY_CSI_PR('h', 1049) : saveCursor(); screen[1]->clearEntireScreen(); setMode(MODE_AppScreen); break; //XTERM
+    case TY_CSI_PR('l', 1049) : resetMode(MODE_AppScreen); restoreCursor(); break; //XTERM
 
     //FIXME: when changing between vt52 and ansi mode evtl do some resetting.
     case TY_VT52__('A'      ) : scr->cursorUp             (         1); break; //VT52
@@ -935,10 +941,10 @@ void TEmuVt102::setMode(int m)
   {
     case MODE_Mouse1000 : gui->setMouseMarks(FALSE);
     break;
+
     case MODE_AppScreen : screen[1]->clearSelection();
-                          screen[1]->clearEntireScreen();
                           setScreen(1);
-	  break;
+    break;
   }
   if (m < MODES_SCREEN || m == MODE_NewLine)
   {
