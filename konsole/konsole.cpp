@@ -196,6 +196,7 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 ,m_toolbarSessionsCommands(0)
 ,m_signals(0)
 ,m_help(0)
+,m_rightButton(0)
 ,monitorActivity(0)
 ,monitorSilence(0)
 ,showToolbar(0)
@@ -354,6 +355,7 @@ void Konsole::makeGUI()
    disconnect(m_session,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_options,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_help,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+   disconnect(m_rightButton,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_edit,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_view,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    //KONSOLEDEBUG<<"Konsole::makeGUI()"<<endl;
@@ -589,18 +591,16 @@ void Konsole::makeGUI()
    m_options->insertItem( SmallIconSet( "filesave" ), i18n("Save &Settings"), 8);
    connect(m_options, SIGNAL(activated(int)), SLOT(opt_menu_activated(int)));
    m_options->installEventFilter( this );
-   // Help and about menu
-   /*
-    QString aboutAuthor = i18n("%1 version %2 - an X terminal\n"
-    "Copyright (c) 1997-2001 by\n"
-    "Lars Doelle <lars.doelle@on-line.de>\n"
-    "\n"
-    "This program is free software under the\n"
-    "terms of the GNU General Public License\n"
-    "and comes WITHOUT ANY WARRANTY.\n"
-    "See 'LICENSE.readme' for details.").arg(PACKAGE).arg(VERSION);
-    KPopupMenu* m_help =  helpMenu(aboutAuthor, false);
-    */
+
+   // Right mouse button menu
+   showMenubar->plug ( m_rightButton );
+   m_rightButton->insertSeparator();
+   copyClipboard->plug(m_rightButton);
+   pasteClipboard->plug(m_rightButton);
+   m_rightButton->insertSeparator();
+   renameSession->plug(m_rightButton);
+   m_rightButton->insertSeparator();
+   m_rightButton->insertItem(i18n("&Settings"), m_options);
 
    //the different session types
    loadSessionCommands();
@@ -669,6 +669,7 @@ void Konsole::makeBasicGUI()
   m_view = new KPopupMenu(this);
   m_options = new KPopupMenu(this);
   m_help =  helpMenu(0, FALSE);
+  m_rightButton = new KPopupMenu(this);
 
   // For those who would like to add shortcuts here, be aware that
   // ALT-key combinations are heavily used by many programs. Thus,
@@ -679,6 +680,7 @@ void Konsole::makeBasicGUI()
   connect(m_session,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_options,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_help,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+  connect(m_rightButton,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_edit,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_view,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
 
@@ -799,7 +801,7 @@ void Konsole::configureRequest(TEWidget* te, int state, int x, int y)
       makeGUI();
   ( (state & ShiftButton  ) ? m_edit :
     (state & ControlButton) ? m_session :
-                              m_options  )
+                              m_rightButton  )
   ->popup(te->mapToGlobal(QPoint(x,y)));
 }
 

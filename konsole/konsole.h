@@ -177,6 +177,7 @@ private:
   KPopupMenu* m_toolbarSessionsCommands;
   KPopupMenu* m_signals;
   KPopupMenu* m_help;
+  KPopupMenu* m_rightButton;
 
   KToggleAction *monitorActivity;
   KToggleAction *monitorSilence;
