@@ -631,12 +631,23 @@ switch( N )
 
     case TY_CSI_PR('h',    8) : /* IGNORED: autorepeat on            */ break; //VT100
     case TY_CSI_PR('l',    8) : /* IGNORED: autorepeat off           */ break; //VT100
+    case TY_CSI_PR('s',    8) : /* IGNORED: autorepeat on            */ break; //VT100
+    case TY_CSI_PR('r',    8) : /* IGNORED: autorepeat off           */ break; //VT100
 
     case TY_CSI_PR('h',    9) : /* IGNORED: interlace                */ break; //VT100
     case TY_CSI_PR('l',    9) : /* IGNORED: interlace                */ break; //VT100
+    case TY_CSI_PR('s',    9) : /* IGNORED: interlace                */ break; //VT100
+    case TY_CSI_PR('r',    9) : /* IGNORED: interlace                */ break; //VT100
+
+    case TY_CSI_PR('h',   12) : /* IGNORED: Cursor blink             */ break; //att610
+    case TY_CSI_PR('l',   12) : /* IGNORED: Cursor blink             */ break; //att610
+    case TY_CSI_PR('s',   12) : /* IGNORED: Cursor blink             */ break; //att610
+    case TY_CSI_PR('r',   12) : /* IGNORED: Cursor blink             */ break; //att610
 
     case TY_CSI_PR('h',   25) :          setMode      (MODE_Cursor   ); break; //VT100
     case TY_CSI_PR('l',   25) :        resetMode      (MODE_Cursor   ); break; //VT100
+    case TY_CSI_PR('s',   25) :         saveMode      (MODE_Cursor   ); break; //VT100
+    case TY_CSI_PR('r',   25) :      restoreMode      (MODE_Cursor   ); break; //VT100
 
     case TY_CSI_PR('h',   41) : /* IGNORED: obsolete more(1) fix     */ break; //XTERM
     case TY_CSI_PR('l',   41) : /* IGNORED: obsolete more(1) fix     */ break; //XTERM
