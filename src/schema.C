@@ -81,7 +81,7 @@ ColorSchema* ColorSchema::readSchema(const char* path)
         if (!(0 <= fi && fi <= TABLE_COLORS)) continue;
         if (!(0 <= tr && tr <= 1           )) continue;
         if (!(0 <= bo && bo <= 1           )) continue;
-        res->table[fi].color       = kapp->textColor;
+        res->table[fi].color       = kapp->palette()->normal().text();
         res->table[fi].transparent = tr;
         res->table[fi].bold        = bo;
       }
@@ -92,7 +92,7 @@ ColorSchema* ColorSchema::readSchema(const char* path)
         if (!(0 <= fi && fi <= TABLE_COLORS)) continue;
         if (!(0 <= tr && tr <= 1           )) continue;
         if (!(0 <= bo && bo <= 1           )) continue;
-        res->table[fi].color       = kapp->backgroundColor;
+        res->table[fi].color       = kapp->palette()->normal().background();
         res->table[fi].transparent = tr;
         res->table[fi].bold        = bo;
       }
