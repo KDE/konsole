@@ -98,8 +98,6 @@ messages: rc.cpp
 dummy.cpp:
 	echo > dummy.cpp
 
-konsole.lo: konsole.o
-
 # setting up x-application/konsole as a special mimetype
 mimedir = $(kde_mimedir)/application
 mime_DATA = x-konsole.desktop
