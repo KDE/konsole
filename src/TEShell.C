@@ -109,7 +109,7 @@ void Shell::makeShell(const char* dev, QStrList & args,
  
   // Don't know why, but his is vital for SIGHUP to find the child.
   // Could be, we get rid of the controling terminal by this.
-  for (int i = 0; i < getdtablesize(); i++) if (i != tt) close(i);
+  for (int i = 0; i < getdtablesize(); i++) if (i != tt && i != fd) close(i);
 
   dup2(tt,fileno(stdin));
   dup2(tt,fileno(stdout));
@@ -119,7 +119,7 @@ void Shell::makeShell(const char* dev, QStrList & args,
 
   // Setup job control
 
-  // "Here are dragons."
+  // "There be dragons."
   //   (Ancient world map)
   
   if (setsid() < 0) perror("failed to set process group"); // (vital for bash)
@@ -133,6 +133,13 @@ void Shell::makeShell(const char* dev, QStrList & args,
   setpgid(0,0);                        // is not noticeable with all
   close(open(dev, O_WRONLY, 0));       // clients (bash,vi). Because bash
   setpgid(0,0);                        // heals this, use '-e' to test it.
+
+#if defined(TIOCSPTLCK)
+  int flag = 1;                        // Linux-only security solution:
+  if (ioctl(fd,TIOCSPTLCK,&flag))      // prohibit opening tty from now on
+#endif
+    perror("Warning: The session is insecure.");
+  close(fd);
   
   // drop privileges
   setuid(getuid()); setgid(getgid());
