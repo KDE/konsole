@@ -478,10 +478,6 @@ void TEmulation::setConnect(bool c)
     onImageSizeChange(gui->Lines(), gui->Columns());  // calls showBulk();
     //kdDebug(1211)<<"TEmulation::setConnect() done"<<endl;
   }
-  else
-  {
-    scr->clearSelection();
-  }
 }
 
 void TEmulation::setListenToKeyPress(bool l)
