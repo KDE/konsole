@@ -90,8 +90,6 @@ public:
 
   void setColumns(int columns);   //FIXME: experimental
 
-  void NewLine    ();             //FIXME: evtl. move to TEmulation
-
 private:
 
 #define MAXPBUF 80

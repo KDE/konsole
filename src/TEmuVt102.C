@@ -14,22 +14,7 @@
 
    \brief Actual Emulation for Konsole
 
-   This class is responsible to scan the escapes sequences of the terminal
-   emulation and to map it to their corresponding semantic complements.
-   Thus this module knows mainly about decoding escapes sequences and
-   is a stateless device w.r.t. the semantics.
-
-   It is also responsible to refresh the TEWidget by certain rules.
-
    \sa TEWidget \sa TEScreen
-*/
-
-//NOTE: search for 'NotImplemented' and IGNORED to find unimplemented features.
-
-/* FIXME
-   - For strange reasons, the extend of the rendition attributes ranges over
-     all screens and not over the actual screen. We have to find out the
-     precise extend.
 */
 
 #include "TEmuVt102.h"
@@ -45,17 +30,42 @@
 
 #include "TEmuVt102.moc"
 
+/* VT102 Terminal Emulation
+
+   This class puts together the screens, the shell (pty line) and the widget
+   to a complete terminal emulation. Beside combining it's componentes, it
+   handles the emulations's protocol.
+
+   This module consists of the following sections:
+
+   - Constructor/Destructor/Initiation
+   - Incoming Bytes Event pipeline
+   - Outgoing Bytes
+     - Mouse Events
+     - Keyboard Events
+   - Resize Event Handling
+   - Modes and likely Variables
+   - Miscelaneous
+   - Diagnostics
+*/
+
 #define ESC 27
+#define CNTL(c) ((c)-'@')
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
-/*                                Emulation                                  */
+/*                    Constructor/Destructor/Initiation                      */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-#define CNTL(c) ((c)-'@')
+/* Constructor/Destructor/initiation
+
+   The only interesting thing here, is that two screen
+   are allocated of which one is inherited by the super
+   class. Likely behaves destruction.
+*/
 
 /*!
 */
@@ -68,10 +78,12 @@ VT102Emulation::VT102Emulation(TEWidget* gui, const char* term) : Emulation(gui)
   QObject::connect(gui,SIGNAL(mouseSignal(int,int,int)),
                    this,SLOT(onMouse(int,int,int)));
 
-  tableInit();
+  tableInit();          //FIXME: goto reset?
   resetTerminal();
-  setMode(MODE_BsHack);
-  emulation = term;
+  setMode(MODE_BsHack); //FIXME: goto resetModes?
+  emulation = term;     //FIXME: rename terminfo?
+
+  //FIXME: move section to appropriate place, too.
   decoder = (QTextDecoder*)NULL;
 
   localeCodec = //(!strcmp(term,"linux"))
@@ -83,8 +95,9 @@ VT102Emulation::VT102Emulation(TEWidget* gui, const char* term) : Emulation(gui)
 void VT102Emulation::resetTerminal()
 {
 
-  reset();
+  reset(); //FIXME:doc: What is this?
 
+//resetModes();
   resetMode(MODE_Mouse1000); saveMode(MODE_Mouse1000);
   resetMode(MODE_AppCuKeys); saveMode(MODE_AppCuKeys);
   resetMode(MODE_AppScreen); saveMode(MODE_AppScreen);
@@ -93,6 +106,7 @@ void VT102Emulation::resetTerminal()
 
   screen[0]->reset();
 
+//resetScreenModes(0);
   charset[0].cu_cs   = 0;
   strncpy(charset[0].charset,"BBBB",4);
   charset[0].sa_graphic = FALSE;
@@ -102,6 +116,7 @@ void VT102Emulation::resetTerminal()
 
   screen[1]->reset();
 
+//resetScreenModes(0);
   charset[1].cu_cs   = 0;
   strncpy(charset[1].charset,"BBBB",4);
   charset[1].sa_graphic = FALSE;
@@ -119,22 +134,244 @@ VT102Emulation::~VT102Emulation()
   delete screen[1];
 }
 
+/* ------------------------------------------------------------------------- */
+/*                                                                           */
+/*                     Processing the incoming byte stream                   */
+/*                                                                           */
+/* ------------------------------------------------------------------------- */
 
-void VT102Emulation::onImageSizeChange(int lines, int columns)
+/* Incoming Bytes Event pipeline
+
+   - Local code page to unicode translation (onRcvByte)
+   - Tokenizing the ESC codes (processChar)
+   - VT100 code page translation of plain characters (applyCharmap)
+   - Interpretation of ESC codes (tau)
+
+   The tokens and their meaning are described in the
+   technical reference of this program.
+*/
+
+// Tokens ------------------------------------------------------------------ --
+/*
+   This section deals with decoding the incoming character stream.
+   Decoding means here, that the stream is first seperated into `tokens'
+   which are then mapped to a `meaning' provided as operations by the
+   `Screen' class.
+
+   The tokens are defined below. They are:
+
+   - CHR        - Printable characters     (32..255 but DEL (=127))
+   - CTL        - Control characters       (0..31 but ESC (= 27), DEL)
+   - ESC        - Escape codes of the form <ESC><CHR but `[]()+*#'>
+   - ESC_DE     - Escape codes of the form <ESC><any of `()+*#%'> C
+   - CSI_PN     - Escape codes of the form <ESC>'['     {Pn} ';' {Pn} C
+   - CSI_PS     - Escape codes of the form <ESC>'['     {Pn} ';' ...  C
+   - CSI_PR     - Escape codes of the form <ESC>'[' '?' {Pn} ';' ...  C
+   - VT52       - VT52 escape codes
+                  - <ESC><Chr>
+                  - <ESC>'Y'{Pc}{Pc}
+   - XTE_HA     - Xterm hacks              <ESC>`]' {Pn} `;' {Text} <BEL>
+                  note that this is handled differently
+
+   The last two forms allow list of arguments. Since the elements of
+   the lists are treated individually the same way, they are passed
+   as individual tokens to the interpretation. Further, because the
+   meaning of the parameters are names (althought represented as numbers),
+   they are includes within the token ('N').
+
+*/
+
+#define TY_CONSTR(T,A,N) ( ((((int)N) & 0xffff) << 16) | ((((int)A) & 0xff) << 8) | (((int)T) & 0xff) )
+
+#define TY_CHR___(   )  TY_CONSTR(0,0,0)
+#define TY_CTL___(A  )  TY_CONSTR(1,A,0)
+#define TY_ESC___(A  )  TY_CONSTR(2,A,0)
+#define TY_ESC_CS(A,B)  TY_CONSTR(3,A,B)
+#define TY_ESC_DE(A  )  TY_CONSTR(4,A,0)
+#define TY_CSI_PS(A,N)  TY_CONSTR(5,A,N)
+#define TY_CSI_PN(A  )  TY_CONSTR(6,A,0)
+#define TY_CSI_PR(A,N)  TY_CONSTR(7,A,N)
+
+#define TY_VT52__(A  )  TY_CONSTR(8,A,0)
+
+// Byte to Unicode translation --------------------------------------------- --
+
+// We are doing code conversion first before scanning for escape codes.
+
+void VT102Emulation::onRcvByte(int cc)
 {
-  if (scr != screen[0]) screen[0]->resizeImage(lines,columns);
-  if (scr != screen[1]) screen[1]->resizeImage(lines,columns);
-  Emulation::onImageSizeChange(lines,columns);
+  char chars[1]; chars[0] = cc;
+
+  QString result = decoder->toUnicode(chars,1);
+
+  int reslen = result.length();
+  for (int i = 0; i < reslen; i++)
+    processCharacter(result[i].unicode());
 }
 
-void VT102Emulation::NewLine()
+void VT102Emulation::setCodec(int c)
 {
-  scr->NewLine(); bulkNewline();
+  //FIXME: check whether we have to free codec
+  codec = c ? QTextCodec::codecForName("utf8")
+            : localeCodec; //QTextCodec::codecForLocale();
+  if (decoder) delete decoder;
+  decoder = codec->makeDecoder();
 }
 
-void VT102Emulation::setColumns(int columns)
+// Character Classes ------------------------------------------------------- --
+
+void VT102Emulation::reset()
 {
-  emit changeColumns(columns); // this goes strange ways
+  ppos = 0; argc = 0; argv[0] = 0; argv[1] = 0;
+}
+
+#define CTL  1
+#define CHR  2
+#define CPN  4
+#define DIG  8
+#define SCS 16
+#define GRP 32
+
+void VT102Emulation::tableInit()
+{ int i; UINT8* s;
+  for(i =  0;                    i < 256; i++) tbl[ i]  = 0;
+  for(i =  0;                    i <  32; i++) tbl[ i] |= CTL;
+  for(i = 32;                    i < 256; i++) tbl[ i] |= CHR;
+  for(s = (UINT8*)"@ABCDGHLMPXcdfry"; *s; s++) tbl[*s] |= CPN;
+  for(s = (UINT8*)"0123456789"      ; *s; s++) tbl[*s] |= DIG;
+  for(s = (UINT8*)"()+*%"           ; *s; s++) tbl[*s] |= SCS;
+  for(s = (UINT8*)"()+*#[]%"        ; *s; s++) tbl[*s] |= GRP;
+}
+
+// Tokenizer --------------------------------------------------------------- --
+
+/* Ok, here comes the nasty part of the decoder.
+
+   The following defines do not abstract nor explain anything,
+   they are only introduced to shorten the lines in the following
+   routine, which is their only application.
+
+   - P is the length of the token scanned so far.
+   - L (often P-1) is the position on which contents we base a decision.
+   - C is a character or a group of characters (taken from 'tbl').
+*/
+
+#define lec(P,L,C) (p == (P) &&                     s[(L)]         == (C))
+#define lun(     ) (p ==  1  &&                       cc           >= 32 )
+#define les(P,L,C) (p == (P) && s[L] < 256  && (tbl[s[(L)]] & (C)) == (C))
+#define eec(C)     (p >=  3  &&        cc                          == (C))
+#define ees(C)     (p >=  3  && cc < 256 &&    (tbl[  cc  ] & (C)) == (C))
+#define eps(C)     (p >=  3  && s[2] != '?' && cc < 256 && (tbl[  cc  ] & (C)) == (C))
+#define epp( )     (p >=  3  && s[2] == '?'                              )
+#define egt(     ) (p ==  3  && s[2] == '>'                              )
+#define Xpe        (ppos>=2  && pbuf[1] == ']'                           )
+#define Xte        (Xpe                        &&     cc           ==  7 )
+#define ces(C)     (            cc < 256 &&    (tbl[  cc  ] & (C)) == (C) && !Xte)
+#define Dig        a[n] = 10*a[n] + cc - '0';
+#define Arg        argc = QMIN(argc+1,MAXARGS-1); argv[argc] = 0;
+
+// process an incoming unicode character
+
+void VT102Emulation::processCharacter(int cc)
+{ int i;
+
+  if (cc == 127) return; //VT100: ignore.
+
+  if (ces(    CTL))
+  { //DEC HACK ALERT! Control Characters are allowed *within* esc sequences in VT100
+    if (cc == CNTL('X') || cc == CNTL('Z') || cc == ESC) reset(); //VT100: CAN or SUB
+    if (cc != ESC)    { tau( TY_CTL___(cc     ),    0,   0); if (cc == '\n') bulkNewline(); return; }
+  }
+
+  pbuf[ppos] = cc; ppos = QMIN(ppos+1,MAXPBUF-1);
+
+  int* s = pbuf;
+  int  p = ppos;
+  int* a = argv;
+  int  n = argc;
+  if (getMode(MODE_Ansi))
+  {
+    if (lec(1,0,ESC)) {                                                 return; }
+    if (les(2,1,GRP)) {                                                 return; }
+    if (Xte         ) { XtermHack();                           reset(); return; }
+    if (Xpe         ) {                                                 return; }
+    if (lec(3,2,'?')) {                                                 return; }
+    if (lec(3,2,'>')) {                                                 return; }
+    if (lun(       )) { tau( TY_CHR___(         ), applyCharmap(cc), 0); reset(); return; }
+    if (lec(2,0,ESC)) { tau( TY_ESC___(s[1]     ),    0,   0); reset(); return; }
+    if (les(3,1,SCS)) { tau( TY_ESC_CS(s[1],s[2]),    0,   0); reset(); return; }
+    if (lec(3,1,'#')) { tau( TY_ESC_DE(s[2]     ),    0,   0); reset(); return; }
+//  if (egt(       )) { tau( TY_CSI_PG(cc       ),  '>',   0); reset(); return; }
+    if (eps(    CPN)) { tau( TY_CSI_PN(cc       ), a[0],a[1]); reset(); return; }
+    if (ees(    DIG)) { Dig                                             return; }
+    if (eec(    ';')) { Arg                                             return; }
+    for (i=0;i<=n;i++)
+    if (epp(       ))   tau( TY_CSI_PR(cc,a[i]),    0,   0);          else
+                        tau( TY_CSI_PS(cc,a[i]),    0,   0);
+    reset();
+  }
+  else // mode VT52
+  {
+    if (lec(1,0,ESC))                                                 return;
+    if (les(1,0,CHR)) { tau( TY_CHR___(       ), s[0],   0); reset(); return; }
+    if (lec(2,1,'Y'))                                                 return;
+    if (lec(3,1,'Y'))                                                 return;
+    if (p < 4)        { tau( TY_VT52__(s[1]   ),    0,   0); reset(); return; }
+                        tau( TY_VT52__(s[1]   ), s[2],s[3]); reset(); return;
+  }
+}
+
+void VT102Emulation::XtermHack()
+{ int i,arg = 0;
+  for (i = 2; i < ppos && '0'<=pbuf[i] && pbuf[i]<'9' ; i++)
+    arg = 10*arg + (pbuf[i]-'0');
+  if (pbuf[i] != ';') { ReportErrorToken(); return; }
+  QChar *str = new QChar[ppos-i-2];
+  for (int j = 0; j < ppos-i-2; j++) str[j] = pbuf[i+1+j];
+  QString unistr(str,ppos-i-2);
+  if (arg <= 2) emit changeTitle(arg,unistr);
+  delete str;
+}
+
+// Character Set Conversion ------------------------------------------------ --
+
+/* Translation
+
+   We convert here from the incoming character stream
+   to control codes and individual utf-16 characters.
+
+   This is complicated by VT100 charmaps, which do their
+   own encodings.
+*/
+
+// Second Level Translation
+
+/* 
+   Yes, this is wierd. What happens here is that the VT100 (and
+   xterms) have a special code translation layer. This has to be
+   placed somewhere in the overall conversion pipeline and the
+   place is certainly after code conversion.
+*/
+
+#define CHARSET charset[scr==screen[1]]
+
+static unsigned short vt100_graphics[32] =
+{ // 0/8     1/9    2/10    3/11    4/12    5/13    6/14    7/15
+  0x0020, 0x25C6, 0x2592, 0x2409, 0x240c, 0x240d, 0x240a, 0x00b0,
+  0x00b1, 0x2424, 0x240b, 0x2518, 0x2510, 0x250c, 0x2514, 0x253c,
+  0xF800, 0xF801, 0x2500, 0xF803, 0xF804, 0x251c, 0x2524, 0x2534,
+  0x252c, 0x2502, 0x2264, 0x2265, 0x03C0, 0x2260, 0x00A3, 0x00b7
+};
+
+/*
+   Apply current character map. This is VT100 specific stuff.
+*/
+
+unsigned short VT102Emulation::applyCharmap(unsigned short c)
+{
+  if (CHARSET.graphic && 0x5f <= c && c <= 0x7e) return vt100_graphics[c-0x5f];
+  if (CHARSET.pound                && c == '#' ) return 0xa3;
+  return c;
 }
 
 // Interpreting Codes ---------------------------------------------------------
@@ -191,7 +428,7 @@ void VT102Emulation::tau( int code, int p, int q )
   switch (code)
   {
 
-    case TY_CHR___(         ) :      ShowCharacter        (p         ); break; //UTF16
+    case TY_CHR___(         ) : scr->ShowCharacter        (p         ); break; //UTF16
 
     //FIXME:       127 DEL    : ignored on input?
 
@@ -205,9 +442,9 @@ void VT102Emulation::tau( int code, int p, int q )
     case TY_CTL___(CNTL('G')) : gui->Bell                 (          ); break; //VT100
     case TY_CTL___(CNTL('H')) : scr->BackSpace            (          ); break; //VT100
     case TY_CTL___(CNTL('I')) : scr->Tabulate             (          ); break; //VT100
-    case TY_CTL___(CNTL('J')) :      NewLine              (          ); break; //VT100
-    case TY_CTL___(CNTL('K')) :      NewLine              (          ); break; //VT100
-    case TY_CTL___(CNTL('L')) :      NewLine              (          ); break; //VT100
+    case TY_CTL___(CNTL('J')) : scr->NewLine              (          ); break; //VT100
+    case TY_CTL___(CNTL('K')) : scr->NewLine              (          ); break; //VT100
+    case TY_CTL___(CNTL('L')) : scr->NewLine              (          ); break; //VT100
     case TY_CTL___(CNTL('M')) : scr->Return               (          ); break; //VT100
 
     case TY_CTL___(CNTL('N')) :      useCharset           (         1); break; //VT100
@@ -221,9 +458,9 @@ void VT102Emulation::tau( int code, int p, int q )
     case TY_CTL___(CNTL('U')) : /* NAK: ignored                      */ break;
     case TY_CTL___(CNTL('V')) : /* SYN: ignored                      */ break;
     case TY_CTL___(CNTL('W')) : /* ETB: ignored                      */ break;
-    case TY_CTL___(CNTL('X')) :      ShowCharacter        (    0x2592); break; //VT100
+    case TY_CTL___(CNTL('X')) : scr->ShowCharacter        (    0x2592); break; //VT100
     case TY_CTL___(CNTL('Y')) : /* EM : ignored                      */ break;
-    case TY_CTL___(CNTL('Z')) :      ShowCharacter        (    0x2592); break; //VT100
+    case TY_CTL___(CNTL('Z')) : scr->ShowCharacter        (    0x2592); break; //VT100
     case TY_CTL___(CNTL('[')) : /* ESC: cannot be seen here.         */ break;
     case TY_CTL___(CNTL('\\')): /* FS : ignored                      */ break;
     case TY_CTL___(CNTL(']')) : /* GS : ignored                      */ break;
@@ -451,317 +688,23 @@ void VT102Emulation::tau( int code, int p, int q )
   };
 }
 
-// -----------------------------------------------------------------------------
-//
-// Translation.      
-//
-// -----------------------------------------------------------------------------
-
-/*
-   Translation
-   
-   We convert here from the incoming character stream
-   to control codes and individual utf-16 characters.
-
-   This is complicated by VT100 charmaps, which do their
-   own encodings.
-
-   FIXME: we have to put things a little more straight, here.
-*/
-
-#define CHARSET charset[scr==screen[1]]
-
-/*!
-*/
-
-void VT102Emulation::setCharset(int n, int cs)
-{
-  charset[0].charset[n&3] = cs;
-  useCharset(charset[0].cu_cs);
-  charset[1].charset[n&3] = cs;
-  useCharset(charset[1].cu_cs);
-}
-
-/*!
-*/
-
-void VT102Emulation::setAndUseCharset(int n, int cs)
-{
-  CHARSET.charset[n&3] = cs;
-  useCharset(n&3);
-}
-
-/*!
-*/
-
-void VT102Emulation::useCharset(int n)
-{
-  CHARSET.cu_cs   = n&3;
-  CHARSET.graphic = (CHARSET.charset[n&3] == '0');
-  CHARSET.pound   = (CHARSET.charset[n&3] == 'A');
-}
-
-/*! Save the cursor position and the rendition attribute settings. */
-
-void VT102Emulation::saveCursor()
-{
-  CHARSET.sa_graphic = CHARSET.graphic;
-  CHARSET.sa_pound   = CHARSET.pound;
-  // FIXME: Character set info: sa_charset = charsets[cScreen->charset];
-  //                            sa_charset_num = cScreen->charset;
-  scr->saveCursor();
-}
-
-/*! Restore the cursor position and the rendition attribute settings. */
-
-void VT102Emulation::restoreCursor()
-{
-  CHARSET.graphic = CHARSET.sa_graphic;
-  CHARSET.pound   = CHARSET.sa_pound;
-  scr->restoreCursor();
-}
-
-// Character Set Conversion ---------------------------------------------------
-
-// Second Level Translation
-
-/* 
-   Yes, this is wierd. What happens here is that the VT100 (and
-   xterms) have a special code translation layer. This has to be
-   placed somewhere in the overall conversion pipeline and the
-   place is certainly after code conversion.
-*/
-
-static unsigned short vt100_graphics[32] =
-{ // 0/8     1/9    2/10    3/11    4/12    5/13    6/14    7/15
-  0x0020, 0x25C6, 0x2592, 0x2409, 0x240c, 0x240d, 0x240a, 0x00b0,
-  0x00b1, 0x2424, 0x240b, 0x2518, 0x2510, 0x250c, 0x2514, 0x253c,
-  0xF800, 0xF801, 0x2500, 0xF803, 0xF804, 0x251c, 0x2524, 0x2534,
-  0x252c, 0x2502, 0x2264, 0x2265, 0x03C0, 0x2260, 0x00A3, 0x00b7
-};
-
-/*
-   Apply current character map. This is VT100 specific stuff.
-*/
-
-unsigned short VT102Emulation::applyCharmap(unsigned short c)
-{
-  if (CHARSET.graphic && 0x5f <= c && c <= 0x7e) return vt100_graphics[c-0x5f];
-  if (CHARSET.pound                && c == '#' ) return 0xa3;
-  return c;
-}
-
-/*
-   Show Character using current character map.
-   The screen knows only unicode characters
-   and no translations.
-*/
-
-void VT102Emulation::ShowCharacter(int c)
-{
-  scr->ShowCharacter(applyCharmap(c));
-}
-
-// First Level Translation (Bytes -> Unicode)
-
-/* We are doing code conversion first before scanning for controls.
-*/
-
-void VT102Emulation::onRcvByte(int cc)
-{
-  char chars[1]; chars[0] = cc;
-
-  QString result = decoder->toUnicode(chars,1);
-
-  int reslen = result.length();
-  for (int i = 0; i < reslen; i++)
-    processCharacter(result[i].unicode());
-}
-
-void VT102Emulation::setCodec(int c)
-{
-  //FIXME: check whether we have to free codec
-  codec = c ? QTextCodec::codecForName("utf8")
-            : localeCodec; //QTextCodec::codecForLocale();
-  if (decoder) delete decoder;
-  decoder = codec->makeDecoder();
-}
-
-// -----------------------------------------------------------------------------
-//
-// Scanner / Transducer
-//
-// -----------------------------------------------------------------------------
-
-//FIXME: evtl. we have to straiten the scanner a bit.
-
-// Scanning -------------------------------------------------------------------
-
-void VT102Emulation::reset()
-{
-  ppos = 0; argc = 0; argv[0] = 0; argv[1] = 0;
-}
-
-#define CTL  1
-#define CHR  2
-#define CPN  4
-#define DIG  8
-#define SCS 16
-#define GRP 32
-
-void VT102Emulation::tableInit()
-{ int i; UINT8* s;
-  for(i =  0;                    i < 256; i++) tbl[ i]  = 0;
-  for(i =  0;                    i <  32; i++) tbl[ i] |= CTL;
-  for(i = 32;                    i < 256; i++) tbl[ i] |= CHR;
-  for(s = (UINT8*)"@ABCDGHLMPXcdfry"; *s; s++) tbl[*s] |= CPN;
-  for(s = (UINT8*)"0123456789"      ; *s; s++) tbl[*s] |= DIG;
-  for(s = (UINT8*)"()+*%"           ; *s; s++) tbl[*s] |= SCS;
-  for(s = (UINT8*)"()+*#[]%"        ; *s; s++) tbl[*s] |= GRP;
-}
-
-/* Ok, here comes the nasty part of the decoder.
-
-   The following defines do not abstract nor explain anything,
-   they are only introduced to shorten the lines in the following
-   routine, which is their only application.
-
-   - P is the length of the token scanned so far.
-   - L (often P-1) is the position on which contents we base a decision.
-   - C is a character or a group of characters (taken from 'tbl').
-*/
-
-#define lec(P,L,C) (p == (P) &&                     s[(L)]         == (C))
-#define lun(     ) (p ==  1  &&                       cc           >= 32 )
-#define les(P,L,C) (p == (P) && s[L] < 256  && (tbl[s[(L)]] & (C)) == (C))
-#define eec(C)     (p >=  3  &&        cc                          == (C))
-#define ees(C)     (p >=  3  && cc < 256 &&    (tbl[  cc  ] & (C)) == (C))
-#define eps(C)     (p >=  3  && s[2] != '?' && cc < 256 && (tbl[  cc  ] & (C)) == (C))
-#define epp( )     (p >=  3  && s[2] == '?'                              )
-#define egt(     ) (p ==  3  && s[2] == '>'                              )
-#define Xpe        (ppos>=2  && pbuf[1] == ']'                           )
-#define Xte        (Xpe                        &&     cc           ==  7 )
-#define ces(C)     (            cc < 256 &&    (tbl[  cc  ] & (C)) == (C) && !Xte)
-#define Dig        a[n] = 10*a[n] + cc - '0';
-#define Arg        argc = QMIN(argc+1,MAXARGS-1); argv[argc] = 0;
-
-//FIXME: introduce real states?
-//
-//
-
-/* process an incoming unicode character
-*/
-
-void VT102Emulation::processCharacter(int cc)
-{ int i;
-
-  if (cc == 127) return; //VT100: ignore.
-
-  if (ces(    CTL))
-  { //DEC HACK ALERT! Control Characters are allowed *within* esc sequences in VT100
-    if (cc == CNTL('X') || cc == CNTL('Z') || cc == ESC) reset(); //VT100: CAN or SUB
-    if (cc != ESC)    { tau( TY_CTL___(cc     ),    0,   0); return; }
-  }
-
-  pbuf[ppos] = cc; ppos = QMIN(ppos+1,MAXPBUF-1);
-
-  int* s = pbuf;
-  int  p = ppos;
-  int* a = argv;
-  int  n = argc;
-  if (getMode(MODE_Ansi))
-  {
-    if (lec(1,0,ESC)) {                                                 return; }
-    if (les(2,1,GRP)) {                                                 return; }
-    if (Xte         ) { XtermHack();                           reset(); return; }
-    if (Xpe         ) {                                                 return; }
-    if (lec(3,2,'?')) {                                                 return; }
-    if (lec(3,2,'>')) {                                                 return; }
-    if (lun(       )) { tau( TY_CHR___(         ),   cc,   0); reset(); return; }
-    if (lec(2,0,ESC)) { tau( TY_ESC___(s[1]     ),    0,   0); reset(); return; }
-    if (les(3,1,SCS)) { tau( TY_ESC_CS(s[1],s[2]),    0,   0); reset(); return; }
-    if (lec(3,1,'#')) { tau( TY_ESC_DE(s[2]     ),    0,   0); reset(); return; }
-//  if (egt(       )) { tau( TY_CSI_PG(cc       ),  '>',   0); reset(); return; }
-    if (eps(    CPN)) { tau( TY_CSI_PN(cc       ), a[0],a[1]); reset(); return; }
-    if (ees(    DIG)) { Dig                                             return; }
-    if (eec(    ';')) { Arg                                             return; }
-    for (i=0;i<=n;i++)
-    if (epp(       ))   tau( TY_CSI_PR(cc,a[i]),    0,   0);          else
-                        tau( TY_CSI_PS(cc,a[i]),    0,   0);
-    reset();
-  }
-  else // mode VT52
-  {
-    if (lec(1,0,ESC))                                                 return;
-    if (les(1,0,CHR)) { tau( TY_CHR___(       ), s[0],   0); reset(); return; }
-    if (lec(2,1,'Y'))                                                 return;
-    if (lec(3,1,'Y'))                                                 return;
-    if (p < 4)        { tau( TY_VT52__(s[1]   ),    0,   0); reset(); return; }
-                        tau( TY_VT52__(s[1]   ), s[2],s[3]); reset(); return;
-  }
-}
-
-void VT102Emulation::XtermHack()
-{ int i,arg = 0;
-  for (i = 2; i < ppos && '0'<=pbuf[i] && pbuf[i]<'9' ; i++)
-    arg = 10*arg + (pbuf[i]-'0');
-  if (pbuf[i] != ';') { ReportErrorToken(); return; }
-  QChar *str = new QChar[ppos-i-2];
-  for (int j = 0; j < ppos-i-2; j++) str[j] = pbuf[i+1+j];
-  QString unistr(str,ppos-i-2);
-  if (arg <= 2) emit changeTitle(arg,unistr);
-  delete str;
-}
-
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
-/*                               Reporting                                   */
+/*                            Outgoing Bytes                                 */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-/*! shows the contents of the scan buffer.
+/* Outgoing Bytes
 
-    This functions is used for diagnostics. It is called by \e ReportErrorToken
-    to inform about strings that cannot be decoded or handled by the emulation.
-
-    \sa ReportErrorToken
+   These orinate from several sources:
+   - Replies
+   - Mouse Events
+   - Keyboard Events
 */
 
-/*!
-*/
+// Replies ----------------------------------------------------------------- --
 
-static void hexdump(int* s, int len)
-{ int i;
-  for (i = 0; i < len; i++)
-  {
-    if (s[i] == '\\')
-      printf("\\\\");
-    else
-    if ((s[i]) > 32 && s[i] < 127)
-      printf("%c",s[i]);
-    else
-      printf("\\%04x(hex)",s[i]);
-  }
-}
-
-void VT102Emulation::scan_buffer_report()
-{
-  if (ppos == 0 || ppos == 1 && (pbuf[0] & 0xff) >= 32) return;
-  printf("token: "); hexdump(pbuf,ppos); printf("\n");
-}
-
-/*!
-*/
-
-void VT102Emulation::ReportErrorToken()
-{
-  printf("undecodable "); scan_buffer_report();
-}
-
-void VT102Emulation::NotImplemented(char* text)
-{
-  printf("not implemented: %s.",text); scan_buffer_report();
-}
+// This section copes with replies send as response to an enquiery control code.
 
 /*!
 */
@@ -830,107 +773,9 @@ void VT102Emulation::reportTerminalParms(int p)
   sendString(tmp);
 }
 
-/* ------------------------------------------------------------------------- */
-/*                                                                           */
-/*                                Mode Operations                            */
-/*                                                                           */
-/* ------------------------------------------------------------------------- */
+// Mouse Handling ---------------------------------------------------------- --
 
-// NOTE: experimental section.
-//       This is due to the fact that modes have to be handled both on
-//       emulation and screen level. Dought that we can clean this up.
-
-void VT102Emulation::setMode(int m)
-{
-  currParm.mode[m] = TRUE;
-  switch (m)
-  {
-    case MODE_Mouse1000 : gui->setMouseMarks(FALSE);
-    break;
-    case MODE_AppScreen : screen[1]->clearSelection();
-                          screen[1]->clearEntireScreen();
-                          setScreen(1);
-	  break;
-  }
-  if (m < MODES_SCREEN || m == MODE_NewLine)
-  {
-    screen[0]->setMode(m);
-    screen[1]->setMode(m);
-  }
-}
-
-void VT102Emulation::resetMode(int m)
-{
-  currParm.mode[m] = FALSE;
-  switch (m)
-  {
-    case MODE_Mouse1000 : gui->setMouseMarks(TRUE);
-    break;
-    case MODE_AppScreen : screen[0]->clearSelection();
-                          setScreen(0);
-    break;
-  }
-  if (m < MODES_SCREEN || m == MODE_NewLine)
-  {
-    screen[0]->resetMode(m);
-    screen[1]->resetMode(m);
-  }
-}
-
-void VT102Emulation::saveMode(int m)
-{
-  saveParm.mode[m] = currParm.mode[m];
-}
-
-void VT102Emulation::restoreMode(int m)
-{
-  if(saveParm.mode[m]) setMode(m); else resetMode(m);
-}
-
-//NOTE: this is a helper function
-BOOL VT102Emulation::getMode(int m)
-{
-  return currParm.mode[m];
-}
-
-void VT102Emulation::setConnect(bool c)
-{
-  Emulation::setConnect(c);
-  if (c)
-  { // refresh mouse mode
-    if (getMode(MODE_Mouse1000))
-      setMode(MODE_Mouse1000);
-    else
-      resetMode(MODE_Mouse1000);
-  }
-}
-
-/* ------------------------------------------------------------------------- */
-/*                                                                           */
-/*                                Miscelaneous                               */
-/*                                                                           */
-/* ------------------------------------------------------------------------- */
-
-/*! change between primary and alternate screen
-*/
-
-void VT102Emulation::setScreen(int n)
-{
-  scr = screen[n&1];
-}
-
-void VT102Emulation::setHistory(bool on)
-{
-  screen[0]->setScroll(on);
-  if (!connected) return;
-  showBulk();
-}
-
-/* ------------------------------------------------------------------------- */
-/*                                                                           */
-/*                                Mouse Handling                             */
-/*                                                                           */
-/* ------------------------------------------------------------------------- */
+// Mouse clicks are eventually reported to the client application.
 
 void VT102Emulation::onMouse( int cb, int cx, int cy )
 {
@@ -938,11 +783,7 @@ void VT102Emulation::onMouse( int cb, int cx, int cy )
   reportMouseEvent(cb,cx,cy);
 }
 
-/* ------------------------------------------------------------------------- */
-/*                                                                           */
-/*                             Keyboard Handling                             */
-/*                                                                           */
-/* ------------------------------------------------------------------------- */
+// Keyboard Handling ------------------------------------------------------- --
 
 #define KeyComb(B,K) ((ev->state() & (B)) == (B) && ev->key() == (K))
 
@@ -1031,4 +872,224 @@ printf("control: %d\n",ev->ascii());
     emit sndBlock((char*)c,1);
     return;
   }
+}
+
+/* ------------------------------------------------------------------------- */
+/*                                                                           */
+/*                                Mode Operations                            */
+/*                                                                           */
+/* ------------------------------------------------------------------------- */
+
+/* FIXME
+   - For strange reasons, the extend of the rendition attributes ranges over
+     all screens and not over the actual screen. We have to find out the
+     precise extend.
+*/
+
+/*!
+*/
+
+void VT102Emulation::setCharset(int n, int cs)
+{
+  charset[0].charset[n&3] = cs;
+  useCharset(charset[0].cu_cs);
+  charset[1].charset[n&3] = cs;
+  useCharset(charset[1].cu_cs);
+}
+
+/*!
+*/
+
+void VT102Emulation::setAndUseCharset(int n, int cs)
+{
+  CHARSET.charset[n&3] = cs;
+  useCharset(n&3);
+}
+
+/*!
+*/
+
+void VT102Emulation::useCharset(int n)
+{
+  CHARSET.cu_cs   = n&3;
+  CHARSET.graphic = (CHARSET.charset[n&3] == '0');
+  CHARSET.pound   = (CHARSET.charset[n&3] == 'A');
+}
+
+/*! Save the cursor position and the rendition attribute settings. */
+
+void VT102Emulation::saveCursor()
+{
+  CHARSET.sa_graphic = CHARSET.graphic;
+  CHARSET.sa_pound   = CHARSET.pound;
+  // FIXME: Character set info: sa_charset = charsets[cScreen->charset];
+  //                            sa_charset_num = cScreen->charset;
+  scr->saveCursor();
+}
+
+/*! Restore the cursor position and the rendition attribute settings. */
+
+void VT102Emulation::restoreCursor()
+{
+  CHARSET.graphic = CHARSET.sa_graphic;
+  CHARSET.pound   = CHARSET.sa_pound;
+  scr->restoreCursor();
+}
+
+// NOTE: experimental section.
+//       This is due to the fact that modes have to be handled both on
+//       emulation and screen level. Dought that we can clean this up.
+
+void VT102Emulation::setMode(int m)
+{
+  currParm.mode[m] = TRUE;
+  switch (m)
+  {
+    case MODE_Mouse1000 : gui->setMouseMarks(FALSE);
+    break;
+    case MODE_AppScreen : screen[1]->clearSelection();
+                          screen[1]->clearEntireScreen();
+                          setScreen(1);
+	  break;
+  }
+  if (m < MODES_SCREEN || m == MODE_NewLine)
+  {
+    screen[0]->setMode(m);
+    screen[1]->setMode(m);
+  }
+}
+
+void VT102Emulation::resetMode(int m)
+{
+  currParm.mode[m] = FALSE;
+  switch (m)
+  {
+    case MODE_Mouse1000 : gui->setMouseMarks(TRUE);
+    break;
+    case MODE_AppScreen : screen[0]->clearSelection();
+                          setScreen(0);
+    break;
+  }
+  if (m < MODES_SCREEN || m == MODE_NewLine)
+  {
+    screen[0]->resetMode(m);
+    screen[1]->resetMode(m);
+  }
+}
+
+void VT102Emulation::saveMode(int m)
+{
+  saveParm.mode[m] = currParm.mode[m];
+}
+
+void VT102Emulation::restoreMode(int m)
+{
+  if(saveParm.mode[m]) setMode(m); else resetMode(m);
+}
+
+//NOTE: this is a helper function
+BOOL VT102Emulation::getMode(int m)
+{
+  return currParm.mode[m];
+}
+
+void VT102Emulation::setConnect(bool c)
+{
+  Emulation::setConnect(c);
+  if (c)
+  { // refresh mouse mode
+    if (getMode(MODE_Mouse1000))
+      setMode(MODE_Mouse1000);
+    else
+      resetMode(MODE_Mouse1000);
+  }
+}
+
+/* ------------------------------------------------------------------------- */
+/*                                                                           */
+/*                          Resize Event Handling                            */
+/*                                                                           */
+/* ------------------------------------------------------------------------- */
+
+void VT102Emulation::onImageSizeChange(int lines, int columns)
+{
+  if (scr != screen[0]) screen[0]->resizeImage(lines,columns);
+  if (scr != screen[1]) screen[1]->resizeImage(lines,columns);
+  Emulation::onImageSizeChange(lines,columns);
+}
+
+void VT102Emulation::setColumns(int columns)
+{
+  emit changeColumns(columns); // this goes strange ways
+}
+
+/* ------------------------------------------------------------------------- */
+/*                                                                           */
+/*                                Miscelaneous                               */
+/*                                                                           */
+/* ------------------------------------------------------------------------- */
+
+/*! change between primary and alternate screen
+*/
+
+void VT102Emulation::setScreen(int n)
+{
+  scr = screen[n&1];
+}
+
+void VT102Emulation::setHistory(bool on)
+{
+  screen[0]->setScroll(on);
+  if (!connected) return;
+  showBulk();
+}
+
+/* ------------------------------------------------------------------------- */
+/*                                                                           */
+/*                               Diagnostic                                  */
+/*                                                                           */
+/* ------------------------------------------------------------------------- */
+
+/*! shows the contents of the scan buffer.
+
+    This functions is used for diagnostics. It is called by \e ReportErrorToken
+    to inform about strings that cannot be decoded or handled by the emulation.
+
+    \sa ReportErrorToken
+*/
+
+/*!
+*/
+
+static void hexdump(int* s, int len)
+{ int i;
+  for (i = 0; i < len; i++)
+  {
+    if (s[i] == '\\')
+      printf("\\\\");
+    else
+    if ((s[i]) > 32 && s[i] < 127)
+      printf("%c",s[i]);
+    else
+      printf("\\%04x(hex)",s[i]);
+  }
+}
+
+void VT102Emulation::scan_buffer_report()
+{
+  if (ppos == 0 || ppos == 1 && (pbuf[0] & 0xff) >= 32) return;
+  printf("token: "); hexdump(pbuf,ppos); printf("\n");
+}
+
+/*!
+*/
+
+void VT102Emulation::ReportErrorToken()
+{
+  printf("undecodable "); scan_buffer_report();
+}
+
+void VT102Emulation::NotImplemented(char* text)
+{
+  printf("not implemented: %s.",text); scan_buffer_report();
 }
