@@ -1,11 +1,9 @@
 Many character oriented applications were written with the linux
-console as the platform in mind, and although many of them do well
-when run in xterm emulation (which is konsole's default), don't
-look as pleasant as the original.
+console as the platform in mind, and although most of them do
+well when run in xterm emulation (which is konsole's default),
+they don't look as pleasant as the original.
 
 Konsole has lately improved it's support for the linux console.
-Especially using the new session mechanism makes running the
-linux console under X11 a snap.
 
 Simple choose "Linux console" from the "New" menu (or click the
 right mouse button while holding down the control key).

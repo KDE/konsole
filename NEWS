@@ -1,8 +1,7 @@
 New in 0.9.8
 
 - some support for linux console added (experimental)
-- multiple sessions (experimental but functional with a serious flaw)
-  check [README.bugs] before using this feature.
+- multiple sessions (experimental, flickers like hell)
 - color schemes (see /opt/kde/share/apps/konsole/*.schema)
 - configurable new sesion command (see /opt/kde/share/apps/konsole/*.kdelnk)
 - minor bugs fixed
