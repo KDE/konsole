@@ -885,6 +885,7 @@ void Konsole::makeTabWidget()
     QToolTip::add(m_removeSessionButton,i18n("Close the current session"));
     m_removeSessionButton->setIconSet( SmallIcon( "tab_remove" ) );
     m_removeSessionButton->adjustSize();
+    m_removeSessionButton->setEnabled(false);
     connect(m_removeSessionButton, SIGNAL(clicked()), SLOT(confirmCloseCurrentSession()));
     tabwidget->setCornerWidget( m_removeSessionButton, BottomRight );
 
@@ -1337,7 +1338,8 @@ void Konsole::checkSoundSystem()
 {
   KConfig *arts_config = new KConfig("kcmartsrc");
   arts_config->setGroup("Arts");
-  b_soundSystemEnabled = arts_config->readBoolEntry("StartServer", false);
+  b_soundSystemEnabled = arts_config->readBoolEntry("StartServer", true);
+  delete arts_config;
 }
 
 /* ------------------------------------------------------------------------- */
@@ -1877,10 +1879,11 @@ void Konsole::switchToTabWidget()
     delete rootxpms[se_widget];
     rootxpms.remove(se_widget);
   }
-  delete se_widget;
   setCentralWidget(tabwidget);
   tabwidget->showPage(se->widget());
   tabwidget->show();
+  
+  delete se_widget;
 
   if (se->isMasterMode())
     enableMasterModeConnections();
@@ -2395,6 +2398,8 @@ void Konsole::addSession(TESession* s)
       disableMasterModeConnections(); // no duplicate connections, remove old
       enableMasterModeConnections();
     }
+    if( tabwidget )
+    m_removeSessionButton->setEnabled(tabwidget->count()>1);
 }
 
 QString Konsole::currentSession()
@@ -2836,6 +2841,8 @@ void Konsole::doneSession(TESession* s)
       rootxpms.remove(s->widget());
     }
     delete s->widget();
+    if( tabwidget )
+    m_removeSessionButton->setEnabled(tabwidget->count()>1);
   }
   session2action.remove(s);
   action2session.remove(ra);

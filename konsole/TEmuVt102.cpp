@@ -908,6 +908,7 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
   if (keytrans->findEntry(ev->key(), encodeMode(MODE_NewLine  , BITS_NewLine   ) + // OLD,
                                      encodeMode(MODE_Ansi     , BITS_Ansi      ) + // OBSOLETE,
                                      encodeMode(MODE_AppCuKeys, BITS_AppCuKeys ) + // VT100 stuff
+                                     encodeMode(MODE_AppScreen, BITS_AppScreen ) + // VT100 stuff
                                      encodeStat(ControlButton , BITS_Control   ) +
                                      encodeStat(ShiftButton   , BITS_Shift     ) +
                                      encodeStat(AltButton     , BITS_Alt       ),

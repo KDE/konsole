@@ -24,7 +24,8 @@
 #define BITS_Control    4
 #define BITS_Shift      5
 #define BITS_Alt        6
-#define BITS_COUNT      7
+#define BITS_AppScreen  7
+#define BITS_COUNT      8
 
 #define CMD_none          -1
 #define CMD_send           0
