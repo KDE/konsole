@@ -83,14 +83,13 @@
 #include <time.h>
 #include <unistd.h>
 
-/* sgis have /dev/ptmx [bmg] */
-#ifdef __sgi__
-#define SVR4
-#endif
-
 #if defined (_HPUX_SOURCE)
 #define _TERMIOS_INCLUDED
 #include <bsdtty.h>
+#endif
+
+#ifdef __sgi__
+#define SVR4
 #endif
 
 #include <qintdict.h>
@@ -174,13 +173,6 @@ void Shell::setSize(int lines, int columns)
   ioctl(fd,TIOCSWINSZ,(char *)&wsize);
 }
 
-#ifndef SVR4
-static char ptynam[] = "/dev/ptyxx";
-static char ttynam[] = "/dev/ttyxx";
-#else
-char *ttynam, *ptsname();
-#endif
-
 //! Catch a SIGCHLD signal and propagate that the child died.
 static void catchChild(int)
 { int status;
@@ -213,8 +205,20 @@ int Shell::openShell()
 
   // Find a master pty that we can open ////////////////////////////////
 
-  // first we try UNIX PTY's
+#ifdef __sgi__
+  ptyfd = open("/dev/ptmx",O_RDWR);
+  if (ptyfd < 0) 
+    {
+      perror("Can't open a pseudo teletype");
+      return(-1);
+    }
+  strncpy(ttynam, ptsname(ptyfd), 50);
+  grantpt(ptyfd);
+  unlockpt(ptyfd);
+  needGrantPty = FALSE;
+#endif
 
+  // first we try UNIX PTY's
 #ifdef TIOCGPTN
   strcpy(ptynam,"/dev/ptmx");
   strcpy(ttynam,"/dev/pts/");
@@ -253,7 +257,6 @@ int Shell::openShell()
     }
   }
 #endif
-
   if (ptyfd < 0) // Linux, FIXME: Trouble on other systems?
   { for (const char* s3 = "pqrstuvwxyzabcde"; *s3 != 0; s3++) 
     { for (const char* s4 = "0123456789abcdef"; *s4 != 0; s4++) 
@@ -300,6 +303,7 @@ void Shell::makeShell(const char* dev, QStrList & args,
 #ifdef TIOCSPTLCK
   int flag = 0; ioctl(fd,TIOCSPTLCK,&flag); // unlock pty
 #endif
+
   // open and set all standard files to slave tty
   int tt = open(dev, O_RDWR);
 
@@ -310,7 +314,7 @@ void Shell::makeShell(const char* dev, QStrList & args,
   //exit(1);
   }
   
-#if (defined(SVR4) || defined(__SVR4)) && (defined(i386) || defined(__i386__))
+#if (defined(SVR4) || defined(__SVR4)) && (defined(i386) || defined(__i386__) || defined(__sgi__))
   // Solaris x86
   ioctl(tt, I_PUSH, "ptem");
   ioctl(tt, I_PUSH, "ldterm");
@@ -423,50 +427,50 @@ void Shell::makeShell(const char* dev, QStrList & args,
   exit(1);                             // control should never come here.
 }
 
-int openShell()
-{ 
- int ptyfd; 
-
-#ifndef SVR4 
- char *s3, *s4;
- static char ptyc3[] = "pqrstuvwxyzabcde";
- static char ptyc4[] = "0123456789abcdef";
-#endif
-
-  // Find a master pty that we can open ////////////////////////////////
-#ifdef SVR4
-  ptyfd = open("/dev/ptmx",O_RDWR);
-  if (ptyfd < 0) 
-    {
-      perror("Can't open a pseudo teletype");
-      return(-1);
-    }
-  grantpt(ptyfd);
-  unlockpt(ptyfd);
-  fcntl(ptyfd,F_SETFL,O_NDELAY);
-  ttynam = ptsname(ptyfd);
-#else
-  ptyfd = -1;
-  for (s3 = ptyc3; *s3 != 0; s3++) 
-  {
-    for (s4 = ptyc4; *s4 != 0; s4++) 
-    {
-      ptynam[8] = ttynam[8] = *s3;
-      ptynam[9] = ttynam[9] = *s4;
-      if ((ptyfd = open(ptynam,O_RDWR)) >= 0) 
-      {
-        if (geteuid() == 0 || access(ttynam,R_OK|W_OK) == 0) break;
-        close(ptyfd); ptyfd = -1;
-      }
-    }
-    if (ptyfd >= 0) break;
-  }
-  if (ptyfd < 0) { fprintf(stderr,"Can't open a pseudo teletype\n"); exit(1); }
-  fcntl(ptyfd,F_SETFL,O_NDELAY);
-#endif
-
-  return ptyfd;
-}
+// int openShell()
+//     { 
+//     int ptyfd; 
+    
+// #ifndef SVR4 
+//     char *s3, *s4;
+//     static char ptyc3[] = "pqrstuvwxyzabcde";
+//     static char ptyc4[] = "0123456789abcdef";
+// #endif
+    
+//     // Find a master pty that we can open ////////////////////////////////
+// #ifdef SVR4
+//     ptyfd = open("/dev/ptmx",O_RDWR);
+//     if (ptyfd < 0) 
+// 	{
+// 	perror("Can't open a pseudo teletype");
+// 	return(-1);
+// 	}
+//     grantpt(ptyfd);
+//     unlockpt(ptyfd);
+//     fcntl(ptyfd,F_SETFL,O_NDELAY);
+//     ttynam = ptsname(ptyfd);
+// #else
+//     ptyfd = -1;
+//     for (s3 = ptyc3; *s3 != 0; s3++) 
+// 	{
+// 	for (s4 = ptyc4; *s4 != 0; s4++) 
+// 	    {
+// 	    ptynam[8] = ttynam[8] = *s3;
+// 	    ptynam[9] = ttynam[9] = *s4;
+// 	    if ((ptyfd = open(ptynam,O_RDWR)) >= 0) 
+// 		{
+// 		if (geteuid() == 0 || access(ttynam,R_OK|W_OK) == 0) break;
+// 		close(ptyfd); ptyfd = -1;
+// 		}
+// 	    }
+// 	if (ptyfd >= 0) break;
+// 	}
+//     if (ptyfd < 0) { fprintf(stderr,"Can't open a pseudo teletype\n"); exit(1); }
+//     fcntl(ptyfd,F_SETFL,O_NDELAY);
+// #endif
+    
+//     return ptyfd;
+//     }
 
 /*! 
     Create a shell.
