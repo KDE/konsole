@@ -120,8 +120,6 @@ TEmulation::TEmulation(TEWidget* w)
 
 void TEmulation::connectGUI()
 {
-  QObject::connect(gui,SIGNAL(changedImageSizeSignal(int,int)),
-                   this,SLOT(onImageSizeChange(int,int)));
   QObject::connect(gui,SIGNAL(changedHistoryCursor(int)),
                    this,SLOT(onHistoryCursorChange(int)));
   QObject::connect(gui,SIGNAL(keyPressedSignal(QKeyEvent*)),
@@ -150,8 +148,6 @@ void TEmulation::changeGUI(TEWidget* newgui)
   if (static_cast<TEWidget *>( gui )==newgui) return;
 
   if ( gui ) {
-    QObject::disconnect(gui,SIGNAL(changedImageSizeSignal(int,int)),
-                     this,SLOT(onImageSizeChange(int,int)));
     QObject::disconnect(gui,SIGNAL(changedHistoryCursor(int)),
                      this,SLOT(onHistoryCursorChange(int)));
     QObject::disconnect(gui,SIGNAL(keyPressedSignal(QKeyEvent*)),
@@ -481,9 +477,7 @@ void TEmulation::setConnect(bool c)
   connected = c;
   if ( connected)
   {
-    //kdDebug(1211)<<"TEmulation::setConnect() onImageSize..."<<endl;
-    onImageSizeChange(gui->Lines(), gui->Columns());  // calls showBulk();
-    //kdDebug(1211)<<"TEmulation::setConnect() done"<<endl;
+    showBulk();
   }
 }
 
@@ -503,13 +497,14 @@ void TEmulation::setListenToKeyPress(bool l)
 void TEmulation::onImageSizeChange(int lines, int columns)
 {
    //kdDebug(1211)<<"TEmulation::onImageSizeChange()"<<endl;
-  if (!connected) return;
   screen[0]->resizeImage(lines,columns);
   screen[1]->resizeImage(lines,columns);
+    
+  if (!connected) return;
    //kdDebug(1211)<<"TEmulation::onImageSizeChange() showBulk()"<<endl;
   showBulk();
    //kdDebug(1211)<<"TEmulation::onImageSizeChange() showBulk() done"<<endl;
-  emit ImageSizeChanged(lines,columns);   // propagate event to serial line
+  emit ImageSizeChanged(lines,columns);   // propagate event
    //kdDebug(1211)<<"TEmulation::onImageSizeChange() done"<<endl;
 }
 

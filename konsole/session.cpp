@@ -52,6 +52,8 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
   te = _te;
   //kdDebug(1211)<<"TESession ctor() new TEmuVt102"<<endl;
   em = new TEmuVt102(te);
+  QObject::connect(te,SIGNAL(changedImageSizeSignal(int,int)),
+                   this,SLOT(onImageSizeChange(int,int)));
 
   term = _term;
   iconName = "openterm";
@@ -62,7 +64,6 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
   //kdDebug(1211)<<"TESession ctor() connecting"<<endl;
   connect( sh,SIGNAL(block_in(const char*,int)),this,SLOT(onRcvBlock(const char*,int)) );
 
-  connect( em,SIGNAL(ImageSizeChanged(int,int)),sh,SLOT(setSize(int,int)));
   connect( em,SIGNAL(sndBlock(const char*,int)),sh,SLOT(send_bytes(const char*,int)) );
   connect( em,SIGNAL(lockPty(bool)),sh,SLOT(lockPty(bool)) );
 
@@ -90,8 +91,12 @@ void TESession::ptyError()
 
 void TESession::changeWidget(TEWidget* w)
 {
+  QObject::disconnect(te,SIGNAL(changedImageSizeSignal(int,int)),
+                     this,SLOT(onImageSizeChange(int,int)));
   te=w;
   em->changeGUI(w);
+  QObject::connect(te,SIGNAL(changedImageSizeSignal(int,int)),
+                   this,SLOT(onImageSizeChange(int,int)));
 }
 
 void TESession::run()
@@ -158,6 +163,13 @@ void TESession::notifySessionState(int state)
   }
 
   emit notifySessionState(this, state);
+}
+
+void TESession::onImageSizeChange(int lines, int columns) // TEWidget has to send pixel sizes
+{
+  // Individual calculation based on session font following later
+  em->onImageSizeChange(lines,columns);
+  sh->setSize(lines,columns);
 }
 
 bool TESession::sendSignal(int signal)

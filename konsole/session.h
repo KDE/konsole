@@ -133,6 +133,7 @@ private slots:
   void onRcvBlock( const char* buf, int len );
   void monitorTimerDone();
   void notifySessionState(int state);
+  void onImageSizeChange(int lines, int columns);
 
 private:
 
