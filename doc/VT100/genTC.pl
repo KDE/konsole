@@ -278,7 +278,7 @@ foreach $p (sort keys %$t)
   {
     my $name = $Fld[0];
     my $head = $t->{$p};
-    my $attr = exists $t->{"$name.attr"}?$t->{"$name.attr"}:"";
+    my $attr = exists $t->{"$name.sect"}?$t->{"$name.sect"}:"";
     if ($attr =~ /$Include/)
     {
     layout2( $name, $head, exists $t->{"$name.code"}?$t->{"$name.code"}:"");
@@ -379,7 +379,7 @@ foreach $p (sort keys %$t)
             exists $t->{"$name.code"}?$t->{"$name.code"}:"", 
             exists $t->{"$name.text"}?$t->{"$name.text"}:"",
             exists $t->{"$name.dflt"}?$t->{"$name.dflt"}:"",
-            exists $t->{"$name.attr"}?$t->{"$name.attr"}:"" );
+            exists $t->{"$name.emus"}?$t->{"$name.emus"}:"" );
     $table = 0;
   }
   if ($html && $#Fld == 2 && $Fld[1] eq 'table')

@@ -176,14 +176,15 @@ void TEDemo::onDrop( KDNDDropZone* _zone )
   if (strlist.count())
   {
     p = strlist.first();
-    while(p != 0) {
+    while(p != 0)
+    {
       if(file_count++ > 0)
-	dropText += " ";
+        dropText += " ";
       url = new KURL( p );
       if (!strcmp(url->protocol(),"file"))
-          dropText += url->path();
+        dropText += url->path();
       else
-          dropText += p;
+        dropText += p;
       delete url;
       p = strlist.next();
     }

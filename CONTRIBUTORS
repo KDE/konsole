@@ -5,8 +5,11 @@ CONTRIBUTORS
   - schema files seeked also in ~/.kde/share/apps/konsole
   - vim.schema
 - Matthias Ettrich <ettrich@kde.org>
+  - most of main.C donated via kvt.
   - rework of the session management
   - command line argument handling in main.C
+- David Faure <David.Faure@insa-lyon.fr>
+  - dnd adjustsments
 - Dale M. Flaven <dflaven@netport.com>
   - bug fixing
 - Lars Knoll <knoll@mpi-hd.mpg.de>

@@ -44,7 +44,7 @@ TY_ESC___|DECRC|'8'||scr|restoreCursor|
 TY_ESC___|DECKPAM|'='||emu|setMode|MODE_AppKeyPad
 TY_ESC___|DECKPNM|'>'||emu|resetMode|MODE_AppKeyPad
 TY_ESC___|DECANSI|'<'||emu|setMode|MODE_Ansi
-TY_ESC_CS|SCS|||emu|setCharset|p-'|',q
+TY_ESC_CS|SCS|||emu|setCharset|p-'(',q
 TY_ESC_DE|DECDHLT|'3'||||
 TY_ESC_DE|DECDHLB|'4'||||
 TY_ESC_DE|DECSWL|'5'||||
