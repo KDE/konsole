@@ -22,14 +22,11 @@
 
 #include "konsole_part.h"
 
-#include <sys/stat.h>
-#include <stdlib.h>
 #include <assert.h>
 
 #include <qfile.h>
 #include <qlayout.h>
 #include <qwmatrix.h>
-#include <qregexp.h>
 
 #include <kaboutdata.h>
 #include <kcharsets.h>
@@ -94,7 +91,7 @@ KParts::Part *konsoleFactory::createPartObject(QWidget *parentWidget, const char
                                          QObject *parent, const char *name, const char *classname,
                                          const QStringList&)
 {
-  kdDebug(1211) << "konsoleFactory::createPart parentWidget=" << parentWidget << " parent=" << parent << endl;
+//  kdDebug(1211) << "konsoleFactory::createPart parentWidget=" << parentWidget << " parent=" << parent << endl;
   KParts::Part *obj = new konsolePart(parentWidget, widgetName, parent, name, classname);
   return obj;
 }
@@ -103,40 +100,11 @@ KInstance *konsoleFactory::instance()
 {
   if ( !s_instance )
     {
-      s_aboutData = new KAboutData("konsole", I18N_NOOP("Konsole"), "1.1");
+      s_aboutData = new KAboutData("konsole", I18N_NOOP("Konsole"), "1.5");
       s_instance = new KInstance( s_aboutData );
     }
   return s_instance;
 }
-
-//////////////////////////////////////////////////////////////////////
-
-class KonsoleFontSelectAction : public KSelectAction {
-public:
-    KonsoleFontSelectAction(const QString &text, int accel,
-                            const QObject* receiver, const char* slot,
-                            QObject* parent, const char* name = 0 )
-        : KSelectAction(text, accel, receiver, slot, parent, name) {}
-    KonsoleFontSelectAction( const QString &text, const QIconSet& pix,
-                             int accel, const QObject* receiver,
-                             const char* slot, QObject* parent,
-                             const char* name = 0 )
-        : KSelectAction(text, pix, accel, receiver, slot, parent, name) {}
-
-    virtual void slotActivated( int index );
-};
-
-void KonsoleFontSelectAction::slotActivated(int index) {
-    // emit even if it's already activated
-    if (currentItem() == index) {
-      KSelectAction::slotActivated();
-      return;
-    } else {
-      KSelectAction::slotActivated(index);
-    }
-}
-
-//////////////////////////////////////////////////////////////////////
 
 #define DEFAULT_HISTORY_SIZE 1000
 
@@ -252,19 +220,19 @@ void konsolePart::doneSession(TESession*)
   // see doneSession in konsole.cpp
   if (se)
   {
-    kdDebug(1211) << "doneSession - disconnecting done" << endl;
+//    kdDebug(1211) << "doneSession - disconnecting done" << endl;
     disconnect( se,SIGNAL(done(TESession*)),
                 this,SLOT(doneSession(TESession*)) );
     se->setConnect(false);
     //QTimer::singleShot(100,se,SLOT(terminate()));
-    kdDebug(1211) << "se->terminate()" << endl;
+//    kdDebug(1211) << "se->terminate()" << endl;
     se->terminate();
   }
 }
 
 void konsolePart::sessionDestroyed()
 {
-  kdDebug(1211) << "sessionDestroyed()" << endl;
+//  kdDebug(1211) << "sessionDestroyed()" << endl;
   disconnect( se, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
   se = 0;
   delete this;
@@ -278,10 +246,10 @@ void konsolePart::configureRequest(TEWidget*_te,int,int x,int y)
 
 konsolePart::~konsolePart()
 {
-  kdDebug(1211) << "konsolePart::~konsolePart() this=" << this << endl;
+//  kdDebug(1211) << "konsolePart::~konsolePart() this=" << this << endl;
   if ( se ) {
     disconnect( se, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
-    kdDebug(1211) << "Deleting se session" << endl;
+//    kdDebug(1211) << "Deleting se session" << endl;
     delete se;
     se=0;
   }
@@ -303,7 +271,7 @@ bool konsolePart::openURL( const KURL & url )
 
   m_url = url;
   emit setWindowCaption( url.prettyURL() );
-  kdDebug(1211) << "Set Window Caption to " << url.prettyURL() << "\n";
+//  kdDebug(1211) << "Set Window Caption to " << url.prettyURL() << "\n";
   emit started( 0 );
 
   if ( url.isLocalFile() ) {
@@ -602,7 +570,6 @@ void konsolePart::readProperties()
   te->setColorTable(sch->table()); //FIXME: set twice here to work around a bug
 
   if (sch->useTransparency()) {
-    //KONSOLEDEBUG << "Setting up transparency" << endl;
     if (!rootxpm)
       rootxpm = new KRootPixmap(te);
     rootxpm->setFadeEffect(sch->tr_x(), QColor(sch->tr_r(), sch->tr_g(), sch->tr_b()));
