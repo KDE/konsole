@@ -51,8 +51,12 @@ KWrited::~KWrited()
 void KWrited::block_in(const char* txt, int len)
 {
   if (len < 0) len = 0;
-  char _text[len+1]; strncpy(_text,txt,len); _text[len] = 0; wid->insert(_text);
+  char *_text = new char[len+1]; 
+  strncpy(_text,txt,len); 
+  _text[len] = 0; 
+  wid->insert(_text);
   wid->show(); KWM::raise(wid->winId());
+  delete _text;
 }
 
 int main(int argc, char* argv[])
