@@ -85,6 +85,7 @@ public slots:
   void run();
   void done(int status);
   void terminate();
+  void setUserTitle( int, const QString &caption );
 
 signals:
 
@@ -99,7 +100,6 @@ signals:
   void openURLRequest(const QString &cwd);
 
 private slots:
-  void setUserTitle( int, const QString &caption );
   void monitorTimerDone();
   void notifySessionState(int state);
 

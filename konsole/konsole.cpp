@@ -1356,6 +1356,11 @@ void Konsole::enterURL(const QString& URL)
     KRun::shellQuote(newtext);
     te->emitText("cd "+newtext+"\r");
   }
+  else if (URL.startsWith("ssh://")) {
+    QString newtext=URL.mid(6);   
+    se->setUserTitle(31,"");           // we don't know remote cwd
+    te->emitText("ssh "+newtext+"\r");
+  }
   else
     te->emitText(URL);
   restoreAllListenToKeyPress();  
