@@ -44,8 +44,7 @@ the AT&T 4410v1, these are arrow symbols, a full block and a
 checker board. Most other tricks that the linux console is
 able to do with character sets are eventually not even used
 in a single instance, so you will hardly be disturbed by 
-konsoles inability to do them. Please accept, that i've just
-started to support the linux console emulation.
+konsoles inability to do them.
 
 
 Anyway, try
