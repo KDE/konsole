@@ -186,6 +186,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
 ,n_oldkeytab(0)
 ,n_render(0)
 ,curr_schema(0)
+,s_kconfigSchema("")
 ,pgm(_pgm)
 ,args(_args)
 ,b_scroll(histon)
@@ -480,6 +481,7 @@ void Konsole::makeGUI()
    curr_schema=sch->numb();
    kdDebug()<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
    m_schema->setItemChecked(0,false);
+   m_schema->setItemChecked(1,false);
    m_schema->setItemChecked(curr_schema,true);
    m_initialSession->setSchemaNo(curr_schema);
    // insert keymaps into menu
@@ -689,11 +691,11 @@ void Konsole::readProperties(KConfig* config)
    setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT));
 
    //set the schema
-   QString tmpStr=config->readEntry("schema", "");
-   ColorSchema* sch = colors->find(tmpStr);
+   s_kconfigSchema=config->readEntry("schema", "");
+   ColorSchema* sch = colors->find(s_kconfigSchema);
    if (!sch)
    {
-      kdWarning() << "Could not find schema named " <<tmpStr<< endl;
+      kdWarning() << "Could not find schema named " <<s_kconfigSchema<< endl;
       sch=(ColorSchema*)colors->at(0);  //the default one
    }
    if (sch->hasSchemaFileChanged()) sch->rereadSchemaFile();
@@ -1183,11 +1185,12 @@ void Konsole::newSession()
   // antlarr: Why is first session session number 1 instead of number 0 ?
   {
     KSimpleConfig* co = no2command.find(i);
+    //kdDebug()<<"Konsole::newSession() Exec: -"<<co->readEntry("Exec")<<"-"<<endl;
 
     if ( co && co->readEntry("Exec").isEmpty() ) session=i;
     i++;
   }
-
+  //kdDebug()<<"Konsole::newSession(): session: "<<session<<endl;
   if (session==0) session=1;
 
   newSession(session);
@@ -1207,8 +1210,8 @@ void Konsole::newSession()
 
 void Konsole::newSession(int i)
 {
-   //kdDebug()<<"Konsole::newSession()"<<endl;
-   if (!m_menuCreated) makeGUI();
+  //kdDebug()<<"Konsole::newSession()"<<endl;
+  if (!m_menuCreated) makeGUI();
   const char* shell = getenv("SHELL");
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
 
@@ -1218,9 +1221,10 @@ void Konsole::newSession(int i)
   assert( se ); //FIXME: careful here.
 
   QString cmd = co->readEntry("Exec");
+  //kdDebug()<<"Konsole::newSession() Exec: -"<<cmd<<"-"<<endl;
   QString nam = co->readEntry("Name");    // not null
   QCString emu = co->readEntry("Term").ascii();
-  QString sch = co->readEntry("Schema");
+  QString sch = co->readEntry("Schema",s_kconfigSchema);
   //kdDebug()<<"Konsole::newSession() schema: -"<<sch<<"-"<<endl;
   QString txt = co->readEntry("Comment"); // not null
   int     fno = QMIN(co->readUnsignedNumEntry("Font",se->fontNo()),TOPFONT);
@@ -1459,11 +1463,13 @@ void Konsole::slotWordSeps() {
 
 void Konsole::slotBackgroundChanged(int desk)
 {
-  kdDebug() << "Konsole::slotBackgroundChanged(" << desk << ")\n";
+  //kdDebug() << "Konsole::slotBackgroundChanged(" << desk << ")\n";
+  ColorSchema* s = colors->find(curr_schema);
+  if (s==0) return;
 
   // We only do this once, because KRootPixmap should handle it later.
 
-  if (!alreadyNoticedBackgroundChange_ && (0 != rootxpm))
+  if (s->useTransparency() && !alreadyNoticedBackgroundChange_ && (0 != rootxpm))
   {
     alreadyNoticedBackgroundChange_ = true;
     rootxpm->repaint(true);
