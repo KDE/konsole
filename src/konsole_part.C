@@ -35,6 +35,9 @@
 
 #include <qdom.h>
 
+#include <X11/Xlib.h> // for XFlush
+#undef KeyPress
+
 
 extern "C"
 {
@@ -137,6 +140,8 @@ konsolePart::konsolePart(QWidget *parentWidget, const char *widgetName, QObject 
 
 void konsolePart::doneSession(TESession*,int)
 {
+  // without this donePty will be called after we deleted everything (->crashes)
+  XFlush( qt_xdisplay() );
   // see doneSession in konsole.C
   initial->setConnect(FALSE);
   QTimer::singleShot(100,initial,SLOT(terminate()));
@@ -195,8 +200,6 @@ bool konsolePart::openURL( const KURL & url )
 
   emit completed();
   return true;
-
-  // TODO: follow directory m_file
 
   //  widget->setText(m_file);
   /*
