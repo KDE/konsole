@@ -257,13 +257,13 @@ void TEmuVt102::pushToToken(int cc)
 
 void TEmuVt102::initTokenizer()
 { int i; UINT8* s;
-  for(i =  0;                    i < 256; i++) tbl[ i]  = 0;
-  for(i =  0;                    i <  32; i++) tbl[ i] |= CTL;
-  for(i = 32;                    i < 256; i++) tbl[ i] |= CHR;
-  for(s = (UINT8*)"@ABCDGHLMPXcdfry"; *s; s++) tbl[*s] |= CPN;
-  for(s = (UINT8*)"0123456789"      ; *s; s++) tbl[*s] |= DIG;
-  for(s = (UINT8*)"()+*%"           ; *s; s++) tbl[*s] |= SCS;
-  for(s = (UINT8*)"()+*#[]%"        ; *s; s++) tbl[*s] |= GRP;
+  for(i =  0;                      i < 256; i++) tbl[ i]  = 0;
+  for(i =  0;                      i <  32; i++) tbl[ i] |= CTL;
+  for(i = 32;                      i < 256; i++) tbl[ i] |= CHR;
+  for(s = (UINT8*)"@ABCDGHILMPXZcdfry"; *s; s++) tbl[*s] |= CPN;
+  for(s = (UINT8*)"0123456789"        ; *s; s++) tbl[*s] |= DIG;
+  for(s = (UINT8*)"()+*%"             ; *s; s++) tbl[*s] |= SCS;
+  for(s = (UINT8*)"()+*#[]%"          ; *s; s++) tbl[*s] |= GRP;
   resetToken();
 }
 
@@ -559,10 +559,12 @@ void TEmuVt102::tau( int token, int p, int q )
     case TY_CSI_PN('D'      ) : scr->cursorLeft           (p         ); break; //VT100
     case TY_CSI_PN('G'      ) : scr->setCursorX           (p         ); break; //LINUX
     case TY_CSI_PN('H'      ) : scr->setCursorYX          (p,       q); break; //VT100
+    case TY_CSI_PN('I'      ) : scr->Tabulate             (p         ); break;
     case TY_CSI_PN('L'      ) : scr->insertLines          (p         ); break;
     case TY_CSI_PN('M'      ) : scr->deleteLines          (p         ); break;
     case TY_CSI_PN('P'      ) : scr->deleteChars          (p         ); break;
     case TY_CSI_PN('X'      ) : scr->eraseChars           (p         ); break;
+    case TY_CSI_PN('Z'      ) : scr->backTabulate         (p         ); break;
     case TY_CSI_PN('c'      ) :      reportTerminalType   (          ); break; //VT100
     case TY_CSI_PN('d'      ) : scr->setCursorY           (p         ); break; //LINUX
     case TY_CSI_PN('f'      ) : scr->setCursorYX          (p,       q); break; //VT100

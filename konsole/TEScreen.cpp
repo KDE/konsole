@@ -650,10 +650,26 @@ void TEScreen::BackSpace()
 /*!
 */
 
-void TEScreen::Tabulate()
+void TEScreen::Tabulate(int n)
 {
   // note that TAB is a format effector (does not write ' ');
-  cursorRight(1); while(cuX < columns-1 && !tabstops[cuX]) cursorRight(1);
+  if (n == 0) n = 1;
+  while((n > 0) && (cuX < columns-1))
+  {
+    cursorRight(1); while((cuX < columns-1) && !tabstops[cuX]) cursorRight(1);
+    n--;
+  }
+}
+
+void TEScreen::backTabulate(int n)
+{
+  // note that TAB is a format effector (does not write ' ');
+  if (n == 0) n = 1;
+  while((n > 0) && (cuX > 0))
+  {
+     cursorLeft(1); while((cuX > 0) && !tabstops[cuX]) cursorLeft(1);
+     n--;
+  }
 }
 
 void TEScreen::clearTabStops()

@@ -65,7 +65,8 @@ public: // these are all `Screen' operations
     //
     void Return      ();
     void BackSpace   ();
-    void Tabulate    ();
+    void Tabulate    (int n = 1);
+    void backTabulate(int n);
     //
     // Editing
     //
