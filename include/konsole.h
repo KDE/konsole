@@ -75,6 +75,8 @@ protected:
 
  void saveProperties(KConfig* config);
  void readProperties(KConfig* config);
+ void saveGlobalProperties(KConfig* config);
+ void readGlobalProperties(KConfig* config);
 
  // Dnd
  void dragEnterEvent(QDragEnterEvent* event);

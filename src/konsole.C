@@ -477,6 +477,18 @@ void Konsole::configureRequest(TEWidget* te, int state, int x, int y)
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
+void Konsole::saveGlobalProperties(KConfig* config)
+{
+  config->setGroup("global options");
+  config->writeEntry("working directory", QDir::currentDirPath());
+}
+
+void Konsole::readGlobalProperties(KConfig* config)
+{
+  config->setGroup("global options");
+  QDir::setCurrent(config->readEntry("working directory", QDir::currentDirPath()));
+}
+
 void Konsole::saveProperties(KConfig* config)
 {
   config->setGroup("options"); 
