@@ -55,6 +55,9 @@
   - produce font families instead of doing underline and bold
     in the program?
   - use scalable font?
+  - allow fonts being configured freely
+
+- add configuration for function keys
 
 - /dev/console?
 
