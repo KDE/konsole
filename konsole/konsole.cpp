@@ -3112,7 +3112,8 @@ void Konsole::slotPrint()
 
 void Konsole::toggleBidi()
 {
-  te->setBidiEnabled(!te->isBidiEnabled());
+  b_bidiEnabled=!b_bidiEnabled;
+  te->setBidiEnabled(b_bidiEnabled);
   te->repaint();
 }
 
