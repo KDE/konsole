@@ -307,7 +307,7 @@ void TEmuVt102::XtermHack()
   // arg == 1 doesn't change the title. In XTerm it only changes the icon name
   // (btw: arg=0 changes title and icon, arg=1 only icon, arg=2 only title
   if (arg == 0 || arg == 2) emit changeTitle(arg,unistr);
-  delete str;
+  delete [] str;
 }
 
 // Interpreting Codes ---------------------------------------------------------

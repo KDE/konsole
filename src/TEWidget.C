@@ -292,6 +292,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
 TEWidget::~TEWidget()
 {
   qApp->removeEventFilter( this );
+  if (image) free(image);
 }
 
 /* ------------------------------------------------------------------------- */
