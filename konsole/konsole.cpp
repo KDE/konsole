@@ -3067,16 +3067,27 @@ void Konsole::addSessionCommand(const QString &path)
      exec = exec.mid(7,exec.length()-8);
   }
 
-  exec = exec.replace( "~", QDir::homeDirPath() );
   exec = KRun::binaryName(exec, false);
+
+  if ( exec.startsWith( "~/" ) ) {        // ~/script
+    exec = exec.remove( 0, 1 );      // ~
+    exec = exec.prepend( QDir::homeDirPath() );
+  } else if ( exec.startsWith( "~" ) ) {  // ~user/script
+      // FIXME: What do when ~user != ~ ?
+      // We could check that user == current user... blah!
+    kdWarning()<<"Unable to handle Exec=~user/ (use ~/ or full path): "<<exec<<" in "<<path.latin1()<<endl;
+    return;    // ignore
+  }
+
   QString pexec = KGlobal::dirs()->findExe(exec);
+
   if (typ.isEmpty() || txt.isEmpty() || typ != "KonsoleApplication"
       || ( !exec.isEmpty() && pexec.isEmpty() ) )
   {
     if (!path.isEmpty())
        delete co;
+    kdWarning()<<"Unable to use "<<path.latin1()<<endl;
     return; // ignore
-
   }
 
   no2command.insert(++cmd_serial,co);
