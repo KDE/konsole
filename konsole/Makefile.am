@@ -24,7 +24,8 @@ libkonsolepart_la_SOURCES = TEPty.cpp BlockArray.cpp konsole_part.cpp \
 	TEScreen.cpp \
 	TEmulation.cpp \
 	TEHistory.cpp \
-	keytrans.cpp 
+	keytrans.cpp \
+	konsoleiface.skel
 
 libkonsolepart_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN)
 libkonsolepart_la_LIBADD = $(LIB_KPARTS) $(LIBUTEMPTER) $(LIBUTIL) @XTESTLIB@
