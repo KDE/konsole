@@ -103,7 +103,7 @@ void TEmuVt102::changeGUI(TEWidget* newgui)
   }
   TEmulation::changeGUI(newgui);
   QObject::connect(gui,SIGNAL(mouseSignal(int,int,int)),
-                   this,SLOT(onMouse(int,int,int)));  
+                   this,SLOT(onMouse(int,int,int)));
   QObject::connect(gui, SIGNAL(sendStringToEmu(const char*)),
 		   this, SLOT(sendString(const char*)));
 }
@@ -802,7 +802,7 @@ void TEmuVt102::reportAnswerBack()
 
 void TEmuVt102::onMouse( int cb, int cx, int cy )
 { char tmp[20];
-  if (!connected) return;
+  if (!connected || cx<1 || cy<1) return;
   // normal buttons are passed as 0x20 + button,
   // mouse wheel (buttons 4,5) as 0x5c + button
   if (cb >= 4) cb += 0x3c;
