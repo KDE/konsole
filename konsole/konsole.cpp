@@ -346,6 +346,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
   }
 
   //KONSOLEDEBUG<<"Konsole ctor() ends "<<time.elapsed()<<" msecs elapsed"<<endl;
+  connect(kapp, SIGNAL(kdisplayFontChanged()), this, SLOT(slotFontChanged()));
 
   kapp->dcopClient()->setDefaultObject( "konsole" );
 }
@@ -4089,6 +4090,17 @@ bool KonsoleFind::reg_exp() const
 }
 
 ///////////////////////////////////////////////////////////
+
+void Konsole::slotFontChanged()
+{
+  TEWidget *oldTe = te;
+  QPtrList<TEWidget> tes = activeTEs();
+  for (TEWidget *_te = tes.first(); _te; _te = tes.next()) {
+    te = _te;
+    setFont(n_font);
+  }
+  te = oldTe;
+}
 
 void Konsole::biggerFont(void) {
     assert(se);

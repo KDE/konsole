@@ -119,6 +119,7 @@ signals:
     void slotWordSeps();
     void fontNotFound();
     void slotSetEncoding();
+    void slotFontChanged();
 
  private:
     konsoleBrowserExtension *m_extension;

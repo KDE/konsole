@@ -234,6 +234,7 @@ private slots:
   void slotTabSetViewOptions(int);
   void slotTabbarToggleDynamicHide();
   void slotToggleAutoResizeTabs();
+  void slotFontChanged();
 
   void slotSetEncoding();
 private:

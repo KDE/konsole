@@ -252,9 +252,9 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   applySettingsToGUI();
 
   // kDebugInfo("Loading successful");
+  connect(kapp, SIGNAL(kdisplayFontChanged()), this, SLOT(slotFontChanged()));
 
   QTimer::singleShot( 0, this, SLOT( showShell() ) );
-
 }
 
 void konsolePart::doneSession(TESession*)
@@ -1166,6 +1166,11 @@ void konsolePart::slotProcessExited()
 void konsolePart::slotReceivedData( const QString& s )
 {
     emit receivedData( s );
+}
+
+void konsolePart::slotFontChanged()
+{
+    setFont( n_font );
 }
 
 #include "konsole_part.moc"
