@@ -86,7 +86,7 @@
 
 #define WITH_VGA
 
-char *fonts[] = {"6x13", "5x7", "6x10", "7x13", "9x15", "10x20",
+const char *fonts[] = {"6x13", "5x7", "6x10", "7x13", "9x15", "10x20",
                  "linux8x16", "linux8x8" };
 
 static QIntDict<TESession> no2session;
@@ -474,7 +474,7 @@ void TEDemo::readProperties(KConfig* config)
 
 /* --| *Event |------------------------------------------------------------ */
 
-void TEDemo::moveEvent (QMoveEvent *qme)
+void TEDemo::moveEvent (QMoveEvent *)
 {
   // Get another area of the background 
   if ((useTransparency)&&(rootxpm)) rootxpm->setBackgroundPixmap(te);	
@@ -791,7 +791,7 @@ void TEDemo::addSession(TESession* s)
 
 void TEDemo::newSession(int i)
 {
-  char* shell = getenv("SHELL");
+  const char* shell = getenv("SHELL");
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
 
   KSimpleConfig* co = no2command.find(i);
@@ -835,7 +835,7 @@ void TEDemo::newSession(int i)
 //       this routine might be called before
 //       session swap is completed.
 
-void TEDemo::doneSession(TESession* s, int status)
+void TEDemo::doneSession(TESession* s, int )
 {
 //printf("%s(%d): Exited:%d ExitStatus:%d\n",__FILE__,__LINE__,WIFEXITED(status),WEXITSTATUS(status));
 #if 0 // die silently
@@ -988,8 +988,8 @@ int main(int argc, char* argv[])
   // deal with shell/command ////////////////////////////
   int login_shell=0;
   int welcome=1;
-  char* shell = getenv("SHELL");
-  char* wname = PACKAGE;
+  const char* shell = getenv("SHELL");
+  const char* wname = PACKAGE;
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
 
   QString sz = "";

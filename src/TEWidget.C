@@ -685,7 +685,7 @@ int TEWidget::charClass(char ch) const
 
     if ( isspace(ch) ) return ' ';
 
-    static char *word_characters = ":@-./_~";
+    static const char *word_characters = ":@-./_~";
     if ( isalnum(ch) || strchr(word_characters, ch) )
     return 'a';
 
