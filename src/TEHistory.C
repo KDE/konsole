@@ -79,7 +79,7 @@ void HistoryBuffer::setScroll(bool on)
 
     if (on)
     {
-        array.setSize(50000);
+        array.setSize(500000);
         assert(array.lastBlock());
     }
     else
@@ -191,13 +191,13 @@ bool HistoryScroll::hasScroll()
 
 int HistoryScroll::getLines()
 {
-    return 0;
+    if (!hasScroll()) return 0;
+    int indexlen = index.len() / sizeof(int);
+    if (indexlen <= 0)
+        return 0;
+    return indexlen;
     /*
-  if (!hasScroll()) return 0;
-  int indexlen = index.len() / sizeof(int);
-  if (indexlen <= 0)
-      return 0;
-  int orig = indexlen;
+    int orig = indexlen;
   int res = 0;
   index.get((unsigned char*)&res,sizeof(int),(indexlen-1)*sizeof(int));
   kdDebug() << "getLines1 " << res << " " << indexlen << endl;
@@ -226,7 +226,7 @@ int HistoryScroll::startOfLine(int lineno)
   {
       int res = 0;
       index.get((unsigned char*)&res,sizeof(int),(lineno-1)*sizeof(int));
-      kdDebug() << "startOfLine " << cells.len() << " " << res << endl;
+//      kdDebug() << "startOfLine " << cells.len() << " " << res << endl;
       return res;
   }
 
