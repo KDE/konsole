@@ -332,7 +332,7 @@ int HistoryScrollBuffer::adjustLineNb(int lineno)
   if (m_buffFilled)
       return (lineno + m_arrayIndex + 2) % m_maxNbLines;
   else
-      return lineno + 1;
+      return lineno ? lineno + 1 : 0;
 }
 
 
