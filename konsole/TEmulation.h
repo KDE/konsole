@@ -35,6 +35,9 @@ public:
   virtual const HistoryType& history();
   virtual void streamHistory(QTextStream*);
 
+  virtual void findTextBegin();
+  virtual bool findTextNext( const QString &str, bool forward, bool caseSensitive );
+
 public slots: // signals incoming from TEWidget
 
   virtual void onImageSizeChange(int lines, int columns);
@@ -110,8 +113,8 @@ private:
   QTimer bulk_timer;
   int    bulk_nlcnt;   // bulk newline counter
   int    bulk_incnt;   // bulk counter
-
-
+  
+  int    m_findPos;
 };
 
 #endif // ifndef EMULATION_H

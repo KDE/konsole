@@ -22,6 +22,7 @@
 #include <ksimpleconfig.h>
 #include <kaction.h>
 #include <kpopupmenu.h>
+#include <keditcl.h>
 
 #include <kwinmodule.h>
 
@@ -138,6 +139,7 @@ private slots:
   void slotClearAllSessionHistories();
   void slotHistoryType();
   void slotClearHistory();
+  void slotFindHistory();
   void slotSaveHistory();
   void slotWordSeps();
   void slotSelectBell();
@@ -151,6 +153,9 @@ private slots:
 
   void clearAllListenToKeyPress();
   void restoreAllListenToKeyPress();
+
+  void slotFind();
+  void slotFindDone();
 
 private:
   KSimpleConfig *defaultSession();
@@ -219,12 +224,18 @@ private:
   KSelectAction *selectLineSpacing;
 
   KAction       *m_clearHistory;
+  KAction       *m_findHistory;
   KAction       *m_saveHistory;
   KAction       *m_moveSessionLeft;
   KAction       *m_moveSessionRight;
 
   KToggleAction *blinkingCursor;
   KToggleAction *warnQuit;                      // Warn when closing this session on quit
+
+  KEdFind* m_finddialog;
+  bool     m_find_first;
+  bool     m_find_found;
+  QString  m_find_pattern;
 
   int cmd_serial;
   int cmd_first_screen;

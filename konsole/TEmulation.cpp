@@ -100,7 +100,8 @@ TEmulation::TEmulation(TEWidget* w)
   decoder(0),
   keytrans(0),
   bulk_nlcnt(0),
-  bulk_incnt(0)
+  bulk_incnt(0),
+  m_findPos(-1)
 {
 
   screen[0] = new TEScreen(gui->Lines(),gui->Columns());
@@ -297,6 +298,50 @@ void TEmulation::clearSelection() {
 
 void TEmulation::streamHistory(QTextStream* stream) {
   *stream << scr->getHistory();
+}
+
+void TEmulation::findTextBegin()
+{
+  m_findPos = -1;
+}
+
+bool TEmulation::findTextNext( const QString &str, bool forward, bool caseSensitive )
+{
+  int pos = -1;
+  QString string;
+
+  if (forward) {
+    for (int i = (m_findPos==-1?0:m_findPos+1); i<(scr->getHistLines()+scr->getLines()); i++) {
+      string = scr->getHistoryLine(i);
+      pos = string.find(str, 0, caseSensitive);
+      if(pos!=-1) {
+        m_findPos=i;
+        if(i>scr->getHistLines())
+          scr->setHistCursor(scr->getHistLines());
+        else
+          scr->setHistCursor(i);
+        showBulk();
+	return true;
+      }
+    }
+  }
+  else { // searching backwards
+    for(int i = (m_findPos==-1?(scr->getHistLines()+scr->getLines()):m_findPos-1); i>=0; i--) {
+      string = scr->getHistoryLine(i);
+      pos = string.find(str, 0, caseSensitive);
+      if(pos!=-1) {
+        m_findPos=i;
+        if(i>scr->getHistLines())
+          scr->setHistCursor(scr->getHistLines());
+        else
+          scr->setHistCursor(i);
+        showBulk();
+	return true;
+      }
+    }
+  }
+
+  return false;
 }
 
 // Refreshing -------------------------------------------------------------- --

@@ -106,6 +106,7 @@ Time to start a requirement list.
 #include <assert.h>
 
 #include <kiconloader.h>
+#include <kstringhandler.h>
 
 #include "konsole.h"
 #include <netwm.h>
@@ -196,11 +197,14 @@ DCOPObject( "konsole" )
 ,selectScrollbar(0)
 ,selectBell(0)
 ,m_clearHistory(0)
+,m_findHistory(0)
 ,m_saveHistory(0)
 ,m_moveSessionLeft(0)
 ,m_moveSessionRight(0)
 ,blinkingCursor(0)
 ,warnQuit(0)
+,m_finddialog(0)
+,m_find_pattern("")
 ,cmd_serial(0)
 ,cmd_first_screen(-1)
 ,n_keytab(0)
@@ -372,17 +376,22 @@ void Konsole::makeGUI()
    m_edit->insertItem( i18n("&Send Signal"), m_signals );
 
    m_edit->insertSeparator();
+   m_findHistory = new KAction(i18n("&Find in History..."), "find", 0, this,
+                                       SLOT(slotFindHistory()), this);
+   m_findHistory->setEnabled( se->history().isOn() );
+   m_findHistory->plug(m_edit);
+
    m_saveHistory = new KAction(i18n("S&ave History As..."), "filesaveas", 0, this,
                                        SLOT(slotSaveHistory()), this);
    m_saveHistory->setEnabled( se->history().isOn() );
    m_saveHistory->plug(m_edit);
 
+   m_edit->insertSeparator();
    m_clearHistory = new KAction(i18n("Clear &History"), "history_clear", 0, this,
                                        SLOT(slotClearHistory()), this);
    m_clearHistory->setEnabled( se->history().isOn() );
    m_clearHistory->plug(m_edit);
 
-   m_edit->insertSeparator();
    KAction *clearAllSessionHistories = new KAction(i18n("Clear all H&istories"), "history_clear", 0,
      this, SLOT(slotClearAllSessionHistories()), this);
    clearAllSessionHistories->plug(m_edit);
@@ -1508,6 +1517,8 @@ void Konsole::activateSession(TESession *s)
     makeGUI();
   updateKeytabMenu(); // act. the keytab for this session
   m_clearHistory->setEnabled( se->history().isOn() );
+  m_findHistory->setEnabled( se->history().isOn() );
+  se->getEmulation()->findTextBegin();
   m_saveHistory->setEnabled( se->history().isOn() );
   monitorActivity->setChecked( se->isMonitorActivity() );
   monitorSilence->setChecked( se->isMonitorSilence() );
@@ -2158,6 +2169,7 @@ void Konsole::slotHistoryType()
   HistoryTypeDialog dlg(se->history(), m_histSize, this);
   if (dlg.exec()) {
     m_clearHistory->setEnabled( dlg.isOn() );
+    m_findHistory->setEnabled( dlg.isOn() );
     m_saveHistory->setEnabled( dlg.isOn() );
     if (dlg.isOn()) {
       if (dlg.nbLines() > 0) {
@@ -2186,6 +2198,71 @@ void Konsole::slotHistoryType()
 void Konsole::slotClearHistory()
 {
   clearSessionHistory(*se);
+}
+
+void Konsole::slotFindHistory()
+{
+  if( !m_finddialog ) {
+    m_finddialog = new KEdFind( this, "konsolefind", false);
+    connect(m_finddialog,SIGNAL(search()),this,SLOT(slotFind()));
+    connect(m_finddialog,SIGNAL(done()),this,SLOT(slotFindDone()));
+  }
+
+  QString string;
+  string = m_finddialog->getText();
+  m_finddialog->setText(string.isEmpty() ? m_find_pattern : string);
+
+  m_find_first = true;
+  m_find_found = false;
+
+  m_finddialog->show();
+  m_finddialog->result();
+}
+
+void Konsole::slotFind()
+{
+  if (m_find_first) {
+    se->getEmulation()->findTextBegin();
+    m_find_first = false;
+  }
+
+  bool forward = !m_finddialog->get_direction();
+  m_find_pattern = m_finddialog->getText();
+
+  if (se->getEmulation()->findTextNext(m_find_pattern,forward,m_finddialog->case_sensitive()))
+    m_find_found = true;
+  else
+    if (m_find_found) {
+      if (forward) {
+        if ( KMessageBox::questionYesNo( this,
+             i18n("End of history reached.\n" "Continue from the beginning?"),
+  	     i18n("Find") ) == KMessageBox::Yes ) {
+          m_find_first = true;
+    	  slotFind();
+        }
+      }
+      else {
+        if ( KMessageBox::questionYesNo( this,
+             i18n("Beginning of history reached.\n" "Continue from the end?"),
+  	     i18n("Find") ) == KMessageBox::Yes ) {
+          m_find_first = true;
+   	  slotFind();
+        }
+      }
+    }
+  else
+    KMessageBox::information( this, 
+    	i18n( "Search string '%1' not found." ).arg(KStringHandler::csqueeze(m_find_pattern)),
+	i18n( "Find" ) );
+}
+
+void Konsole::slotFindDone()
+{
+  if (!m_finddialog)
+    return;
+
+  se->getEmulation()->clearSelection();
+  m_finddialog->hide();
 }
 
 void Konsole::slotSaveHistory()

@@ -155,6 +155,7 @@ public: // these are all `Screen' operations
     void clearSelection();
     QString getSelText(const BOOL preserve_line_breaks);
     QString getHistory();
+    QString getHistoryLine(int no);
 
     void checkSelection(int from, int to);
 

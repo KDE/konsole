@@ -1257,6 +1257,14 @@ QString TEScreen::getHistory() {
   return tmp;
 }
 
+QString TEScreen::getHistoryLine(int no)
+{
+  sel_begin = loc(0,no);
+  sel_TL = sel_begin;
+  sel_BR = loc(columns-1,no);
+  return getSelText(false);
+}
+
 void TEScreen::addHistLine()
 {
   assert(hasScroll() || histCursor == 0);
