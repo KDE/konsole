@@ -37,7 +37,6 @@ static KCmdLineOptions options[] =
 {
    { "name <name>",  I18N_NOOP("Set Window Class"), 0 },
    { "ls",    I18N_NOOP("Start login shell"), 0 },
-   { "nowelcome",       I18N_NOOP("Suppress greeting"), 0 },
    { "T <title>",       I18N_NOOP("Set the window title"), 0 },
    { "xwin",            I18N_NOOP("ignored"), 0 },
    { "nohist",          I18N_NOOP("Do not save lines in scroll-back buffer"), 0 },
@@ -114,7 +113,6 @@ int main(int argc, char* argv[])
   setgid(getgid()); setuid(getuid()); // drop privileges
 
   // deal with shell/command ////////////////////////////
-  bool welcome = true;
   bool histon = true;
   bool toolbaron = true;
   const char* wname = PACKAGE;
@@ -227,7 +225,6 @@ int main(int argc, char* argv[])
   histon = args->isSet("hist");
   toolbaron = args->isSet("toolbar");
   wname = args->getOption("name");
-  welcome = args->isSet("welcome");
 
   QCString type = "";
 
@@ -339,11 +336,6 @@ int main(int argc, char* argv[])
     ksm->konsole = m;
     m->setColLin(c,l); // will use default height and width if called with (0,0)
 
-    if (welcome && false) // ME: disable the greeting, it mixes up the taskbar
-    {
-      m->setCaption(i18n("Welcome to the console"));
-      QTimer::singleShot(5000,m,SLOT(updateTitle()));
-    }
     //2.5 sec
     m->initFullScreen();
     m->show();
