@@ -195,7 +195,7 @@ protected slots:
 
 private:
 
-    QChar (*fontMap)(QChar); // possible vt100 font extention
+//    QChar (*fontMap)(QChar); // possible vt100 font extention
 
     bool fixed_font; // has fixed pitch
     int  font_h;     // height

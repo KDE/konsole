@@ -221,12 +221,12 @@ static QChar vt100extended(QChar c)
   }
   return c;
 }
-*/
 
 static QChar identicalMap(QChar c)
 {
   return c;
 }
+*/
 
 void TEWidget::fontChange(const QFont &)
 {
@@ -268,7 +268,7 @@ void TEWidget::fontChange(const QFont &)
 #warning TODO: Review/fix vt100 extended font-mapping
 #endif
 
-  fontMap = identicalMap;
+//  fontMap = identicalMap;
   emit changedFontMetricSignal( font_h, font_w );
   propagateSize();
   update();
@@ -611,7 +611,7 @@ HCNT("setImage");
         if ( !c )
             continue;
         int p = 0;
-        disstrU[p++] = fontMap(c);
+        disstrU[p++] = c; //fontMap(c);
         cr = ext[x].r;
         cb = ext[x].b;
         if (ext[x].f != cf) cf = ext[x].f;
@@ -629,7 +629,7 @@ HCNT("setImage");
               !dirtyMask[x+len] )
             break;
 
-          disstrU[p++] = fontMap(c);
+          disstrU[p++] = c; //fontMap(c);
         }
 
         QString unistr(disstrU, p);
@@ -791,7 +791,7 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect, bool pm)
       int p = 0;
       c = image[loc(x,y)].c;
       if (c)
-         disstrU[p++] = fontMap(c);
+         disstrU[p++] = c; //fontMap(c);
       int cf = image[loc(x,y)].f;
       int cb = image[loc(x,y)].b;
       int cr = image[loc(x,y)].r;
@@ -802,7 +802,7 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect, bool pm)
       {
         c = image[loc(x+len,y)].c;
         if (c)
-          disstrU[p++] = fontMap(c);
+          disstrU[p++] = c; //fontMap(c);
         else
           fixed_font = false;
         len++;
