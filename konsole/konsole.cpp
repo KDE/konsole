@@ -167,7 +167,8 @@ const char *fonts[] = {
  "-misc-console-medium-r-normal--16-160-72-72-c-160-iso10646-1", // "Linux"
  "-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1",    // "Unicode"
  };
-#define TOPFONT ((sizeof(fonts)/sizeof(char*))-1)
+#define TOPFONT (sizeof(fonts)/sizeof(char*))
+#define DEFAULTFONT TOPFONT
 
 #define DEFAULT_HISTORY_SIZE 1000
 
@@ -875,8 +876,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    b_groupFinalSpaces=config->readBoolEntry( "GroupFinalSpaces", FALSE );
    n_defaultKeytab=config->readNumEntry("keytab",0); // act. the keytab for this session
    b_fullscreen = config->readBoolEntry("Fullscreen",FALSE);
-   // +1 because we have on more...a custom selected font
-   n_defaultFont = n_font = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT+1);
+   n_defaultFont = n_font = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
    n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
    n_bell = QMIN(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),2);
    s_word_seps= config->readEntry("wordseps",":@-./_~");
@@ -888,8 +888,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    // (1) set menu items and Konsole members
    QFont tmpFont("fixed");
    defaultFont = config->readFontEntry("defaultfont", &tmpFont);
-   // +1 because we have on more...a custom selected font
-   setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT+1));
+   setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT));
 
    //set the schema
    s_kconfigSchema=config->readEntry("schema", "");
@@ -1031,7 +1030,7 @@ void Konsole::slotSelectFont() {
   assert(se);
   int item = selectFont->currentItem();
   // KONSOLEDEBUG << "slotSelectFont " << item << endl;
-  if (item == 8) // this is the default
+  if (item == DEFAULTFONT) 
   {
     if ( KFontDialog::getFont(defaultFont, true) == QDialog::Rejected )
     {
@@ -1108,7 +1107,7 @@ void Konsole::keytab_menu_activated(int item)
 void Konsole::setFont(int fontno)
 {
   QFont f;
-  if (fontno == 8)
+  if (fontno == DEFAULTFONT)
     f = defaultFont;
   else
   if (fonts[fontno][0] == '-')
@@ -1118,7 +1117,7 @@ void Konsole::setFont(int fontno)
     f.setFamily(fonts[fontno]);
     f.setRawMode( TRUE );
   }
-  if ( !f.exactMatch() && fontno != 8)
+  if ( !f.exactMatch() && fontno != DEFAULTFONT)
   {
     QString msg = i18n("Font `%1' not found.\nCheck README.linux.console for help.").arg(fonts[fontno]);
     KMessageBox::error(this,  msg);
@@ -1572,8 +1571,7 @@ TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrLis
   connect( s, SIGNAL( updateTitle() ),
            this, SLOT( updateTitle() ) );
 
-  // +1 because we have on more...a custom selected font
-  s->setFontNo(QMIN(fno, TOPFONT+1));
+  s->setFontNo(QMIN(fno, TOPFONT));
   s->setSchemaNo(schmno);
   if (key.isEmpty())
     s->setKeymapNo(n_defaultKeytab);
