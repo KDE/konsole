@@ -1,0 +1,15 @@
+[README]
+
+Beside a few png pictures you find
+
+- *.schema   : README.Schema
+- *.keytab   : README.KeyTab
+- *.desktop  : README.Desktop
+
+files here.
+
+Please consult the indicated READMEs
+to learn about their syntax and purpose.
+
+kcmkonsole.C, brightness.png, colorness.png, contrast.png
+is an old attempt to write a configurator for these files.

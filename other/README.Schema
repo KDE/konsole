@@ -1,4 +1,4 @@
-[README.schema]
+[README.Schema]
 
 The schemata offered in the Options/Schema menu are
 taken from from configurations files with a *.schema
@@ -6,7 +6,7 @@ pattern either located in $KDEDIR/share/apps/konsole
 or ~/.kde/share/apps/konsole.
 
 Schemata allow to configure the color set that konsole
-uses, together with some more information on redition
+uses, together with some more information on rendition
 processing.
 
 Syntax
@@ -40,10 +40,10 @@ Meaning
       
     When a schema uses a background image (or transparency)
     one has to make at least one color slot transparent to
-    get any visible effect. Please read below about the
+    achive any visible effect. Please read below about the
     "Transparent" field in color,sysbg,sysfg.
 
-  - The "transparency" clause picks uses the background
+  - The "transparency" clause picks and uses the background
     of the desktop as if it where an image together with
     a fade effect. This effect will fade the background
     to the specified color.
@@ -61,7 +61,7 @@ Meaning
     To this end, konsole offers 20 color slots.
 
      Slot  Meaning
-    -----  -------------------------------------------
+    -----  --------------------------
         0  regular   foreground color
         1  regular   background color
       2-9  regular   bgr color 0-7
@@ -69,8 +69,10 @@ Meaning
        11  intensive background color
     12-19  intensive bgr color 0-7
 
-    The "normal" meaning of the "bgr" color codes
-    is a bitwise interpretation.
+    The traditional meaning of the "bgr" color codes
+    has a bitwise interpretation of an additive three
+    primary color scheme inherited from early EGA
+    color terminals.
 
     Color  Bits  Colors
     -----  ----  -------
@@ -83,8 +85,7 @@ Meaning
         6   110  Cyan
         7   111  White
 
-    This assumes a three primary colors in an additive
-    color scheme. One may or may not stick to this.
+    One may or may not stick to this tradition.
     Konsole allows to assign colors freely to slots.
 
     The slots fall apart into two groups, regular
@@ -110,10 +111,10 @@ Meaning
     - Bold (0/1) to render characters bold.
 
 
-If you a little about the escape codes, you'll
-have noticed that intensive and bold rendition
-are sort of confused. This is inherited by the
-xterm which we are simulating.
+If you know about the escape codes, you might have
+noticed that intensive and bold rendition are sort
+of confused. This is inherited by the xterm which
+konsole is simulating.
 
 One can use the colortest.sh script supplied
 with the konsole source distribution to test

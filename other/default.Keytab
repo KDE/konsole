@@ -2,33 +2,22 @@
 
 # --------------------------------------------------------------
 #
-# This file in included only for reference purposes. 
+# This file is used to create the buildin keyboard table.
+# It is included for reference purpose with the *.keytab
+# files that are loaded dynamically.
 #
 # Modifying it does not have any effect (unless you
 # derive the default.keytab.h and recompile konsole).
 #
 # To customize your keyboard, copy this file to something
 # ending with .keytab and change it to meet you needs.
+# Please read the README.KeyTab and the README.keyboard
+# in this case.
 #
 # --------------------------------------------------------------
 
 keyboard "xterm (default)"
 
-# --------------------------------------------------------------
-#
-# The syntax of each entry has the form
-#
-#   "key" Keyname { ("+"|"-") Modename } ":" (String|Operation)
-#
-# Keynames are those defined in <qnamespace.h>
-# with the "Qt::Key_" prefix removed.
-#
-# Mode names are: Shift, Alt, Control.
-#
-# If the key is not found here, the text of the
-# key event as provided by QT is emitted, possibly
-# preceeded by ESC if the Alt key is pressed.
-#
 # --------------------------------------------------------------
 #
 # Note that this particular table is a "risc" version made to
