@@ -3,6 +3,7 @@
 #include <kdebug.h>
 
 #include <stdlib.h>
+#include <qfile.h>
 
 #ifndef HERE
 #define HERE fprintf(stderr,"%s(%d): here\n",__FILE__,__LINE__)
