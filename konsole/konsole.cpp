@@ -1057,7 +1057,7 @@ void Konsole::makeBasicGUI()
   connect( m_fullscreen,SIGNAL(toggled(bool)), this,SLOT(updateFullScreen(bool)));
   m_fullscreen->setChecked(b_fullscreen);
 
-  m_saveProfile = new KAction( i18n( "Save Sessions &Profile..." ), 0, this,
+  m_saveProfile = new KAction( i18n( "Save Sessions &Profile..." ), SmallIconSet("filesaveas"), 0, this,
                          SLOT( slotSaveSessionsProfile() ), m_shortcuts, "save_sessions_profile" );
 
   //help menu
