@@ -998,9 +998,6 @@ int main(int argc, char* argv[])
 {
   setuid(getuid()); setgid(getgid()); // drop privileges
 
-  KInstance *inst = new KInstance("konsole");
-  kimgioRegister(); // add io for additional image formats
-
   // deal with shell/command ////////////////////////////
   int login_shell=0;
   int welcome=1;
@@ -1015,6 +1012,7 @@ int main(int argc, char* argv[])
 
   setlocale( LC_ALL, "" );
   KWMModuleApplication a(argc, argv, PACKAGE);
+  kimgioRegister(); // add io for additional image formats
 
   for (int i = 1; i < argc; i++)
   {
@@ -1073,9 +1071,7 @@ int main(int argc, char* argv[])
     m->show();
   }
 
-  int r = a.exec();
-  delete inst;
-  return r;
+  return a.exec();
 }
 
 #include "main.moc"
