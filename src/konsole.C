@@ -1093,7 +1093,7 @@ void Konsole::addSessionCommand(const QString &path)
   co->setDesktopGroup();
   QString typ = co->readEntry("Type");
   QString txt = co->readEntry("Comment");
-  // not used ??!
+  // not used ?? !
   //  QString cmd = co->readEntry("Exec");
   QString nam = co->readEntry("Name");
   if (typ.isEmpty() || txt.isEmpty() || nam.isEmpty() ||
