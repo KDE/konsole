@@ -11,7 +11,7 @@
  * 
  * In konsole we open a master pty. This can be opened
  * done by at most one process. Prior to opening the
- * master pty, the slave pty cannot be opened. The, in
+ * master pty, the slave pty cannot be opened. Then, in
  * grantpty, we fork to this program. The trick is, that
  * the parameter is passes as a file handle, which cannot
  * be faked, so that we get a secure setuid root chmod/chown
@@ -32,7 +32,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#define PTY_FILENO 3    // keep in sync with grantpty
+#define PTY_FILENO 3    /* keep in sync with grantpty */
 #define TTY_GROUP "tty"
 
 int main (int argc, char *argv[])
@@ -45,8 +45,7 @@ int main (int argc, char *argv[])
   mode_t        mod;
   char*         tty;
 
-  // check preconditions ///////////////////////////////////////////////////
-
+  /* check preconditions **************************************************/
   if (argc != 2 || (strcmp(argv[1],"--grant") && strcmp(argv[1],"--revoke")))
   {
     printf("usage: %s (--grant|--revoke)\n",argv[0]);
@@ -55,47 +54,47 @@ int main (int argc, char *argv[])
     printf("be called from the command\n");
     printf("line. In needs to be installed\n");
     printf("root setuid to function.\n");
-    return 1; //FAIL
+    return 1; /* FAIL */
   }
 
   if (geteuid () != 0)
   {
     fprintf(stderr,"%s not installed root-suid\n",argv[0]);
-    return 1; //FAIL
+    return 1; /* FAIL */
   }
 
-  // setup parameters for the operation ////////////////////////////////////
+  /* setup parameters for the operation ***********************************/
 
   if (!strcmp(argv[1],"--grant"))
   { 
-    uid = getuid(); // current user id
+    uid = getuid(); /* current user id */
     mod = S_IRUSR|S_IWUSR|S_IWGRP;
   }
   else
   {
-    uid = 0;        // root
+    uid = 0;        /* root */
     mod = S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH;
   }
   /* Get the group ID of the special `tty' group.  */
-  p = getgrnam(TTY_GROUP);            // posix
-  gid = p ? p->gr_gid : getgid ();    // posix
+  p = getgrnam(TTY_GROUP);            /* posix */
+  gid = p ? p->gr_gid : getgid ();    /* posix */
 
-  // get slave pty name from master pty file handle in PTY_FILENO //////////
+  /* get slave pty name from master pty file handle in PTY_FILENO *********/
 
   /* Check that PTY_FILENO is a valid master pseudo terminal.  */
-  pty = ttyname(PTY_FILENO);          // posix
+  pty = ttyname(PTY_FILENO);          /* posix */
   if (pty == NULL)
   {
     fprintf(stderr,"%s: cannot determine the name of device.\n",argv[0]);
-    return 1; //FAIL
+    return 1; /* FAIL */
   }
   close(PTY_FILENO);
 
-  // matches /dev/pty??
+  /* matches /dev/pty?? */
   if (strlen(pty) < 8 || strncmp(pty,"/dev/pty",8))
   {
     fprintf(stderr,"%s: determined a strange device name `%s'.\n",argv[0],pty);
-    return 1; //FAIL
+    return 1; /* FAIL */
   }
 
   tty = malloc(strlen(pty) + 1);
@@ -106,21 +105,21 @@ int main (int argc, char *argv[])
   if (stat(tty, &st) < 0 || !S_ISCHR(st.st_mode))
   {
     fprintf(stderr,"%s: found `%s' not to be a character device.\n",argv[0],tty);
-    return 1; //FAIL
+    return 1; /* FAIL */
   }
 
-  // Perform the actual chown/chmod /////////////////////////////////////
+  /* Perform the actual chown/chmod ************************************/
 
   if (chown(tty, uid, gid) < 0)
   {
     fprintf(stderr,"%s: cannot chown %s.\n",argv[0],tty); perror("Reason");
-    return 1; //FAIL
+    return 1; /* FAIL */
   }
   if (chmod(tty, mod) < 0)
   {
     fprintf(stderr,"%s: cannot chmod %s.\n",argv[0],tty); perror("Reason");
-    return 1; //FAIL
+    return 1; /* FAIL */
   }
 
-  return 0; //OK
+  return 0; /* OK */
 }
