@@ -54,9 +54,52 @@ int main(int argc, char* argv[])
   const char* wname = PACKAGE;
 
   KAboutData aboutData( PACKAGE, I18N_NOOP("Konsole"),
-    VERSION, description, KAboutData::License_GPL,
+    VERSION, description, KAboutData::License_GPL_V2,
     "(c) 1997-2000, Lars Doelle");
   aboutData.addAuthor("Lars Doelle",0, "lars.doelle@on-line.de");
+  aboutData.addCredit("Peter Silva",
+    "decent marking",
+    "peter.silva@videotron.ca");
+  aboutData.addCredit("Lotzi Boloni",
+    "partification\n"
+    "Toolbar and session names",
+    "boloni@cs.purdue.edu");
+  aboutData.addCredit("David Faure",
+    "partification\n"
+    "overall improvements",
+    "David.Faure@insa-lyon.fr");
+  aboutData.addCredit("Antonio Larrosa",
+    "transparency",
+    "larrosa@kde.org");
+  aboutData.addCredit("Matthias Ettrich",
+    "most of main.C donated via kvt\n"
+    "overall improvements",
+    "ettrich@kde.org");
+  aboutData.addCredit("Warwick Allison",
+    "schema and selection improvements",
+    "warwick@troll.no");
+  aboutData.addCredit("Dan Pilone",
+    "SGI Port",
+    "pilone@slac.com");
+  aboutData.addCredit("Kevin Street",
+    "FreeBSD port",
+    "street@iname.com");
+  aboutData.addCredit("Sven Fischer",
+    "bug fixing",
+    "herpes@kawo2.rwth-aachen.de");
+  aboutData.addCredit("Dale M. Flaven",
+    "bug fixing",
+    "dflaven@netport.com");
+  aboutData.addCredit("Martin Jones",
+    "bug fixing",
+    "mjones@powerup.com.au");
+  aboutData.addCredit("Lars Knoll",
+    "bug fixing",
+    "knoll@mpi-hd.mpg.de");
+  aboutData.addCredit("Thanks to many other",
+    "The above list only reflects the contributors\n"
+    "i mananged to keep track for.");
+  
   KCmdLineArgs::init( argc, argv, &aboutData );
   KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
 

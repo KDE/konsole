@@ -346,6 +346,7 @@ void Konsole::makeMenu()
   m_options->insertItem( i18n("Save &Options"), 8);
   connect(m_options, SIGNAL(activated(int)), SLOT(opt_menu_activated(int)));
   // Help and about menu
+/*
   QString aboutAuthor = i18n("%1 version %2 - an X terminal\n"
                              "Copyright (c) 1997-2000 by\n"
                              "Lars Doelle <lars.doelle@on-line.de>\n"
@@ -355,6 +356,8 @@ void Konsole::makeMenu()
                              "and comes WITHOUT ANY WARRANTY.\n"
                              "See 'LICENSE.readme' for details.").arg(PACKAGE).arg(VERSION);
   KPopupMenu* m_help =  helpMenu(aboutAuthor, false);
+*/
+  KPopupMenu* m_help =  helpMenu(0, FALSE);
   m_help->insertItem( i18n("&Technical Reference"), this, SLOT(tecRef()),
                       0, -1, 1);
   m_options->installEventFilter( this );
