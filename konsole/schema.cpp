@@ -287,6 +287,8 @@ void ColorSchema::writeConfig(const QString& path) const
   }
 }
 
+static int random_hue = -1;
+
 bool ColorSchema::rereadSchemaFile()
 {
   QString fPath = fRelPath.isEmpty() ? "" : locate("data", "konsole/"+fRelPath);
@@ -353,7 +355,9 @@ bool ColorSchema::rereadSchemaFile()
         if(sscanf(line,"rcolor %d %d %d %d %d",&fi,&cs,&cv,&tr,&bo) != 5)
           continue;
         if (!(0 <= fi && fi <= TABLE_COLORS)) continue;
-        ch = (KApplication::random()%32) * 11;
+        if (random_hue == -1)
+          random_hue = (KApplication::random()%32) * 11;
+        ch = random_hue;
         if (!(0 <= cs && cs <= 255         )) continue;
         if (!(0 <= cv && cv <= 255         )) continue;
         if (!(0 <= tr && tr <= 1           )) continue;
