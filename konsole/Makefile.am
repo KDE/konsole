@@ -29,7 +29,7 @@ libkonsolepart_la_SOURCES = TEPty.cpp BlockArray.cpp konsole_part.cpp \
         sessioniface.skel
 
 libkonsolepart_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN)
-libkonsolepart_la_LIBADD = $(LIB_KPARTS) $(LIBUTIL) @XTESTLIB@
+libkonsolepart_la_LIBADD = $(LIBUTIL) @XTESTLIB@ $(LIB_KPARTS)
 
 # kwrited kdeinit module
 kwrited_la_SOURCES = kwrited.cpp
@@ -50,7 +50,7 @@ konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
 konsole_SOURCES	= TEPty.cpp BlockArray.cpp main.cpp konsole.cpp schema.cpp session.cpp TEWidget.cpp TEmuVt102.cpp \
                   TEScreen.cpp TEmulation.cpp TEHistory.cpp keytrans.cpp konsoleiface.skel sessioniface.skel \
                   konsole_wcwidth.cpp
-konsole_LDADD = $(LIB_KDEUI) $(LIB_KSYCOCA) $(LIBUTIL) $(LIB_KFILE) @XTESTLIB@
+konsole_LDADD = $(LIB_KSYCOCA) $(LIBUTIL) $(LIB_KFILE) @XTESTLIB@ $(LIB_KDEUI)
 konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 # kcmkonsole_SOURCES = kcmkonsole.cpp schema.cpp
@@ -72,7 +72,7 @@ install-data-local:
 
 # konsole_grantpty needs to be installed setuid root
 install-exec-local: install-binPROGRAMS
-	@(chown root $(bindir)/konsole_grantpty && chmod 4755 $(bindir)/konsole_grantpty) || echo "Please make konsole_grandpty setuid root"
+	@(chown root $(DESTDIR)$(bindir)/konsole_grantpty && chmod 4755 $(DESTDIR)$(bindir)/konsole_grantpty) || echo "Please make konsole_grandpty setuid root"
 
 # Not AUTO here, because there are some unused files
 METASOURCES = TEWidget.moc TEmuVt102.moc session.moc konsole.moc \

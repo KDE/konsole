@@ -177,12 +177,13 @@ private:
     int lines;
     int columns;
     ca *image; // [lines][columns]
+    int image_size;
     QBitArray m_line_wrapped;
 
     ColorEntry color_table[TABLE_COLORS];
 
     bool resizing;
-    bool terminalSizeHint;
+    bool terminalSizeHint,terminalSizeStartup;
     bool mouse_marks;
 
     void makeImage();

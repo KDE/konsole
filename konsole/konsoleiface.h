@@ -16,8 +16,6 @@ class KonsoleIface : virtual public DCOPObject
     virtual QString sessionId(const int position) = 0;
 
     virtual void activateSession(const QString &sessionId) = 0;
-    virtual void feedAllSessions(const QString &text) = 0;
-    virtual void sendAllSessions(const QString &text) = 0;
 
     virtual void nextSession() = 0;
     virtual void prevSession() = 0;
