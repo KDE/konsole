@@ -180,7 +180,7 @@ DCOPObject( "konsole" )
 ,m_options(0)
 ,m_schema(0)
 ,m_keytab(0)
-,m_codec(0)
+//,m_codec(0)
 ,m_toolbarSessionsCommands(0)
 ,m_signals(0)
 ,m_help(0)
@@ -456,10 +456,10 @@ void Konsole::makeGUI()
    connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
 
    // Codec Options Menu ------------------------------------------------------
-   m_codec  = new KPopupMenu(this);
+/*   m_codec  = new KPopupMenu(this);
    m_codec->setCheckable(TRUE);
    m_codec->insertItem( i18n("&Locale"), 1 );
-   m_codec->setItemChecked(1,TRUE);
+   m_codec->setItemChecked(1,TRUE); */
 
    //options menu
    // Menubar on/off
@@ -570,7 +570,7 @@ void Konsole::makeGUI()
    historyType->plug(m_options);
 
    m_options->insertSeparator();
-   m_options->insertItem( SmallIconSet( "charset" ), i18n( "&Codec" ), m_codec);
+//   m_options->insertItem( SmallIconSet( "charset" ), i18n( "&Codec" ), m_codec);
    m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
 
    KAction *WordSeps = new KAction(i18n("Wor&d Separators..."), 0, this,
