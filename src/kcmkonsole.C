@@ -227,11 +227,11 @@ ColorTable::ColorTable(QWidget* parent, int lower, int upper) : QLabel(parent)
 void ColorTable::setSchema(ColorSchema* s)
 {
   schema = s;
-setText("");
+  setText("");
   setBackgroundMode(schema?NoBackground:PaletteBase);
   if (!schema) return;
-char* pa = strrchr(s->path.data(),'/');
-setText(pa&&*pa?pa+1:"/* build-in schema */");
+  char* pa = (char*)strrchr(s->path.data(),'/');
+  setText(pa&&*pa?pa+1:"/* build-in schema */");
   update();
 }
 

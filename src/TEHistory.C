@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include <error.h>
+#include <errno.h>
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 

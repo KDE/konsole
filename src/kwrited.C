@@ -3,6 +3,7 @@
 #include <kapp.h>
 #include <kwrited.h>
 #include <TEShell.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <kwm.h>
 

@@ -117,6 +117,8 @@ extern "C" {
 #define HERE fprintf(stdout,"%s(%d): here\n",__FILE__,__LINE__)
 #endif
 
+template class QIntDict<Shell>;
+
 FILE* syslog_file = NULL; //stdout;
 
 static QIntDict<Shell> shells;

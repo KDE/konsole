@@ -95,6 +95,8 @@
 #define PACKAGE "konsole"
 #define VERSION "0.9.12"
 
+template class QIntDict<TESession>;
+template class QIntDict<KSimpleConfig>;
 
 #define UNICODE_TEST 1
 
@@ -1054,7 +1056,7 @@ int main(int argc, char* argv[])
 
   int c = 0, l = 0;
   if ( (strcmp("", sz) != 0) )
-  { char *ls = strchr( sz, 'x' );
+  { char *ls = (char*)strchr( sz, 'x' );
     if ( ls != NULL )
     { *ls='\0'; ls++; c=atoi(sz); l=atoi(ls); }
     else
