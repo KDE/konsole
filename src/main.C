@@ -23,18 +23,21 @@
 /*FIXME:
   - All the material in here badly sufferes from the fact that the
     configuration can originate from many places, so all is duplicated
-    and falls out of service. The sources are:
+    and falls out of service. Especially the command line is badly broken.
+    The sources are:
     - command line
     - menu
     - configuration files
     - other events (e.g. resizing)
-    We have to find a single place method to maintain this.
-  - Moving geometry management from char to pixel is half done.
-    Means that setColLin is used in unappropriate places.
-    Likely the configuration is still char based.
+    We have to find a single-place method to maintain this.
+    Scedule: post kde 1.2
   - Controling the widget is currently done by individual attributes.
     This lead to quite some amount of flicker when a whole bunch of
     attributes has to be set, e.g. in session swapping.
+    Scedule: post kde 1.2
+  - Moving geometry management from char to pixel is half done.
+    Means that setColLin is used in unappropriate places.
+    Likely the configuration is still char based.
   - The schema file name in session config files is not location
     transparent.
 */
@@ -151,6 +154,8 @@ TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
                      : QFrame::NoFrame );
   te->setScrollbarLocation(n_scroll);
 
+  setColLin(lincol0.width(),lincol0.height());
+
   // construct initial session ///////////////////////////////////////////////
 
   TESession* initial = new TESession(this,te,args,"xterm",login_shell);
@@ -161,13 +166,11 @@ TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
   else
       title = PACKAGE;
 
-  initial->setTitle(args.at(0));
+  initial->setTitle(title);
 
   // start first session /////////////////////////////////////////////////////
 
   addSession(initial);
-
-  setColLin(lincol0.width(),lincol0.height());
 }
 
 /*!
@@ -862,6 +865,9 @@ static void usage()
    "\n"
    " -caption 'Text'......... Set title\n"
    " -display <display> ..... Set the X-Display\n"
+   "\n"
+   "Please note that the configuration via command line\n"
+   "is badly out of sync and may not work as expected.\n"
   ,PACKAGE,PACKAGE,VERSION
   );
 }

@@ -761,6 +761,12 @@ bool TEWidget::eventFilter( QObject *, QEvent *e )
       case ShiftButton|(Key_PageDown << 8) :
            scrollbar->setValue(scrollbar->value()+lines/2);
            break;
+      case ShiftButton|(Key_Up       << 8) : 
+           scrollbar->setValue(scrollbar->value()-1);
+           break;
+      case ShiftButton|(Key_Down     << 8) :
+           scrollbar->setValue(scrollbar->value()+1);
+           break;
 #if 0
       case (Key_Insert << 8) : // Some progs use this.
            emitSelection();
