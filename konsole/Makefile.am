@@ -82,7 +82,7 @@ install-exec-hook:
 # Not AUTO here, because there are some unused files
 METASOURCES = TEWidget.moc TEmuVt102.moc session.moc konsole.moc konsole_child.moc \
               TEmulation.moc TEPty.moc kwrited.moc konsole_part.moc konsolebookmarkhandler.moc \
-              konsolebookmarkmenu.moc printsettings.moc
+              konsolebookmarkmenu.moc
 
 messages: rc.cpp
 	rm -f schemas.cpp
