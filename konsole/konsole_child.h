@@ -49,6 +49,7 @@ private slots:
   void slotRenameSession(TESession* ses, const QString &name);
   void restoreAllListenToKeyPress();
   void changeColumns(int columns);
+  void notifySize(int,int);
 
   void currentDesktopChanged(int desk);
   void slotBackgroundChanged(int desk);
@@ -67,6 +68,7 @@ private:
   int  wallpaperSource;
 
   TESession*     se;
+  ColorSchema*   schema;
   bool allowResize;
   TEWidget*      te;
   KPopupMenu*    m_rightButton;

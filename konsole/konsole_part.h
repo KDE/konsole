@@ -92,6 +92,8 @@ class konsolePart: public KParts::ReadOnlyPart
     void sendSignal(int n);
     void closeCurrentSession();
 
+    void notifySize(int,int);
+
     void slotToggleFrame();
     void slotSelectScrollbar();
     void slotSelectFont();

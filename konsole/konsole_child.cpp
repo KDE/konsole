@@ -21,12 +21,13 @@
 #include <netwm.h>
 
 KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar_location, int frame_style,
-                           ColorSchema* schema,QFont font,int bellmode,QString wordcharacters,
+                           ColorSchema* _schema,QFont font,int bellmode,QString wordcharacters,
                            bool blinkingCursor, bool ctrlDrag, bool terminalSizeHint, int lineSpacing,
                            bool cutToBeginningOfLine, bool _allowResize):KMainWindow()
 ,session_terminated(false)
 ,wallpaperSource(0)
 ,se(_se)
+,schema(_schema)
 ,allowResize(_allowResize)
 {
   te = new TEWidget(this);
@@ -77,6 +78,7 @@ KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar
   connect( se,SIGNAL(updateTitle()), this,SLOT(updateTitle()) );
   connect( se,SIGNAL(renameSession(TESession*,const QString&)), this,SLOT(slotRenameSession(TESession*,const QString&)) );
   connect( se,SIGNAL(restoreAllListenToKeyPress()), this,SLOT(restoreAllListenToKeyPress()) );
+  connect( se->getEmulation(),SIGNAL(ImageSizeChanged(int,int)), this,SLOT(notifySize(int,int)));
   connect(se->getEmulation(),SIGNAL(changeColumns(int)), this,SLOT(changeColumns(int)) );
 
   connect( kapp,SIGNAL(backgroundChanged(int)),this, SLOT(slotBackgroundChanged(int)));
@@ -151,6 +153,8 @@ void KonsoleChild::setColLin(int columns, int lines)
     resize(sizeForCentralWidgetSize(te->calcSize(80,24)));
   else
     resize(sizeForCentralWidgetSize(te->calcSize(columns, lines)));
+  if (schema && schema->alignment() >= 3)
+    pixmap_menu_activated(schema->alignment(),schema->imagePath());
 }
 
 void KonsoleChild::changeColumns(int columns)
@@ -161,8 +165,15 @@ void KonsoleChild::changeColumns(int columns)
   }
 }
 
+void KonsoleChild::notifySize(int lines, int columns)
+{
+  if (schema && schema->alignment() >= 3)
+    pixmap_menu_activated(schema->alignment(),schema->imagePath());
+}
+
 KonsoleChild::~KonsoleChild()
 {
+  disconnect( se->getEmulation(),SIGNAL(ImageSizeChanged(int,int)), this,SLOT(notifySize(int,int)));
   se->setConnect(false);
   delete te;
   if (session_terminated) {

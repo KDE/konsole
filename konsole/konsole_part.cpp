@@ -185,6 +185,8 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   //         this, SLOT(changeColumns(int)) );
   //connect( se, SIGNAL(clearAllListenToKeyPress()),
   //        this, SLOT(clearAllListenToKeyPress()) );
+  connect( se->getEmulation(),SIGNAL(ImageSizeChanged(int,int)), 
+           this,SLOT(notifySize(int,int)));
 
   rootxpm = new KRootPixmap(te);
 
@@ -705,6 +707,14 @@ void konsolePart::setSchema(ColorSchema* s)
 
   te->setColorTable(s->table());
   se->setSchemaNo(s->numb());
+}
+
+void konsolePart::notifySize(int lines, int columns)
+{
+  ColorSchema *sch=colors->find(s_schema);
+
+  if (sch && sch->alignment() >= 3)
+    pixmap_menu_activated(sch->alignment());
 }
 
 void konsolePart::pixmap_menu_activated(int item)
