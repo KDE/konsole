@@ -6,6 +6,7 @@ Name[fr]=Administrateur
 Name[pt_BR]=Administrador
 Comment=Root Console
 Comment[da]=Rootkonsol
+Comment[de]=Rootkonsole
 Comment[fr]=Console administrateur
 Comment[pt_BR]=Console Raiz
 Exec=su
