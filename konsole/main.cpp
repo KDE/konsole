@@ -443,11 +443,8 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
     if (profile.isEmpty())
       sessionconfig = a.sessionConfig();
     sessionconfig->setDesktopGroup();
-    wname = sessionconfig->readEntry("class",wname).latin1();
     int n = 1;
 
-    int session_count = sessionconfig->readNumEntry("numSes");
-    int counter = 0;
     QString key;
     QString sTitle;
     QString sPgm;
@@ -460,9 +457,14 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
     // should use one group / mainwindow
     while (KMainWindow::canBeRestored(n) || !profile.isEmpty())
     {
-        sessionconfig->setGroup("foo");
+        sessionconfig->setGroup(QString("%1").arg(n));
         if (!sessionconfig->hasKey("Pgm0"))
             sessionconfig->setDesktopGroup(); // Backwards compatible
+
+        int session_count = sessionconfig->readNumEntry("numSes");
+        int counter = 0;
+
+        wname = sessionconfig->readEntry("class",wname).latin1();
 
         sPgm = sessionconfig->readEntry("Pgm0", shell);
         sessionconfig->readListEntry("Args0", eargs);
