@@ -102,8 +102,9 @@ mime_DATA = x-konsole.desktop
 
 # specifying gofai as a handler for the above mimetype
 # also specifies the icon, and position in the kicker menus
-kdelnkdir = $(kde_appsdir)/Utilities
-kdelnk_DATA = konsole.desktop
+#kdelnkdir = $(kde_appsdir)/Utilities
+#kdelnk_DATA = konsole.desktop
+# ... Hmm, it's already in applnk/ (David)
 
 # ??? no need to specify kdelnk_DATA here?
 EXTRA_DIST = $(mime_DATA)                                             
