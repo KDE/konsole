@@ -1,3 +1,5 @@
+// This module is work in progress.
+
 #include "keytrans.h"
 #include <qnamespace.h>
 
@@ -181,4 +183,97 @@ void KeyTrans::addXtermKeys()
 //Print +BITS_Control, "");
 
 // Other strings are emitted by konsole, too.
+}
+
+// material needed for parsing the config file.
+
+void defKeySym(const char*, int)
+{
+}
+
+void defModSym(const char*, int)
+{
+}
+
+void defModSyms()
+{
+  // Modifier
+  defModSym("Shift",      Qt::SHIFT         );
+  defModSym("Ctrl",       Qt::CTRL          );
+  defModSym("Alt",        Qt::ALT           );
+  // Modes
+  defModSym("BsHack",     BITS_BsHack       ); // deprecated
+  defModSym("Ansi",       BITS_Ansi         );
+  defModSym("NewLine",    BITS_NewLine      );
+  defModSym("AppCuKeys",  BITS_AppCuKeys    );
+}
+
+void defKeySyms()
+{
+  defKeySym("Escape",     Qt::Key_Escape    );
+  defKeySym("Tab",        Qt::Key_Tab       );
+  defKeySym("Backtab",    Qt::Key_Backtab   );
+  defKeySym("Backspace",  Qt::Key_Backspace );
+  defKeySym("Return",     Qt::Key_Return    );
+  defKeySym("Enter",      Qt::Key_Enter     );
+  defKeySym("Insert",     Qt::Key_Insert    );
+  defKeySym("Delete",     Qt::Key_Delete    );
+  defKeySym("Pause",      Qt::Key_Pause     );
+  defKeySym("Print",      Qt::Key_Print     );
+  defKeySym("SysReq",     Qt::Key_SysReq    );
+  defKeySym("Home",       Qt::Key_Home      );
+  defKeySym("End",        Qt::Key_End       );
+  defKeySym("Left",       Qt::Key_Left      );
+  defKeySym("Up",         Qt::Key_Up        );
+  defKeySym("Right",      Qt::Key_Right     );
+  defKeySym("Down",       Qt::Key_Down      );
+  defKeySym("Prior",      Qt::Key_Prior     );
+  defKeySym("Next",       Qt::Key_Next      );
+  defKeySym("Shift",      Qt::Key_Shift     );
+  defKeySym("Control",    Qt::Key_Control   );
+  defKeySym("Meta",       Qt::Key_Meta      );
+  defKeySym("Alt",        Qt::Key_Alt       );
+  defKeySym("CapsLock",   Qt::Key_CapsLock  );
+  defKeySym("NumLock",    Qt::Key_NumLock   );
+  defKeySym("ScrollLock", Qt::Key_ScrollLock);
+  defKeySym("F1",         Qt::Key_F1        );
+  defKeySym("F2",         Qt::Key_F2        );
+  defKeySym("F3",         Qt::Key_F3        );
+  defKeySym("F4",         Qt::Key_F4        );
+  defKeySym("F5",         Qt::Key_F5        );
+  defKeySym("F6",         Qt::Key_F6        );
+  defKeySym("F7",         Qt::Key_F7        );
+  defKeySym("F8",         Qt::Key_F8        );
+  defKeySym("F9",         Qt::Key_F9        );
+  defKeySym("F10",        Qt::Key_F10       );
+  defKeySym("F11",        Qt::Key_F11       );
+  defKeySym("F12",        Qt::Key_F12       );
+  defKeySym("F13",        Qt::Key_F13       );
+  defKeySym("F14",        Qt::Key_F14       );
+  defKeySym("F15",        Qt::Key_F15       );
+  defKeySym("F16",        Qt::Key_F16       );
+  defKeySym("F17",        Qt::Key_F17       );
+  defKeySym("F18",        Qt::Key_F18       );
+  defKeySym("F19",        Qt::Key_F19       );
+  defKeySym("F20",        Qt::Key_F20       );
+  defKeySym("F21",        Qt::Key_F21       );
+  defKeySym("F22",        Qt::Key_F22       );
+  defKeySym("F23",        Qt::Key_F23       );
+  defKeySym("F24",        Qt::Key_F24       );
+  defKeySym("F25",        Qt::Key_F25       );
+  defKeySym("F26",        Qt::Key_F26       );
+  defKeySym("F27",        Qt::Key_F27       );
+  defKeySym("F28",        Qt::Key_F28       );
+  defKeySym("F29",        Qt::Key_F29       );
+  defKeySym("F30",        Qt::Key_F30       );
+  defKeySym("F31",        Qt::Key_F31       );
+  defKeySym("F32",        Qt::Key_F32       );
+  defKeySym("F33",        Qt::Key_F33       );
+  defKeySym("F34",        Qt::Key_F34       );
+  defKeySym("F35",        Qt::Key_F35       );
+  defKeySym("Super_L",    Qt::Key_Super_L   );
+  defKeySym("Super_R",    Qt::Key_Super_R   );
+  defKeySym("Menu",       Qt::Key_Menu      );
+  defKeySym("Hyper_L",    Qt::Key_Hyper_L   );
+  defKeySym("Hyper_R",    Qt::Key_Hyper_R   );
 }
