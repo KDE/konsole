@@ -996,7 +996,7 @@ void Konsole::makeBasicGUI()
 
   showMenubar = new KToggleAction ( i18n( "Show &Menubar" ), "showmenu", 0, this,
                                     SLOT( slotToggleMenubar() ), m_shortcuts, "show_menubar" );
-  m_fullscreen = KStdAction::fullScreen(this, SLOT(setFullScreen( bool )), m_shortcuts, this );
+  m_fullscreen = KStdAction::fullScreen(this, SLOT(setFullScreen()), m_shortcuts, this );
   m_fullscreen->setChecked(b_fullscreen);
 
   m_saveProfile = new KAction( i18n( "Save Sessions &Profile..." ), 0, this,
@@ -1996,6 +1996,11 @@ void Konsole::initFullScreen()
     setColLin(0,0);
   }
   setFullScreen(b_fullscreen);
+}
+
+void Konsole::setFullScreen()
+{
+  setFullScreen(true);
 }
 
 void Konsole::setFullScreen(bool on)

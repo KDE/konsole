@@ -133,6 +133,7 @@ private slots:
   void doneChild(KonsoleChild*, TESession*);
   void doneSession(TESession*);
   void slotCouldNotClose();
+  void setFullScreen();
   void setFullScreen(bool on);
   void schema_menu_activated(int item);
   void pixmap_menu_activated(int item, TEWidget* tewidget=0);
