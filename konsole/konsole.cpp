@@ -1292,6 +1292,8 @@ void Konsole::setFont(int fontno)
   if (fonts[fontno][0] == '-')
   {
     f.setRawName( fonts[fontno] );
+    f.setFixedPitch(true);
+    f.setStyleHint(QFont::TypeWriter);
     if ( !f.exactMatch() && fontno != DEFAULTFONT)
     {
       // Ugly hack to prevent bug #20487
@@ -1304,6 +1306,7 @@ void Konsole::setFont(int fontno)
   {
     f.setFamily("fixed");
     f.setFixedPitch(true);
+    f.setStyleHint(QFont::TypeWriter);
     f.setPixelSize(QString(fonts[fontno]).toInt());
   }
   if (se) se->setFontNo(fontno);
