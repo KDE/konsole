@@ -17,8 +17,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <errno.h>
-#include <kdebug.h>
 
+#define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
 /*
    An arbitrary long scroll.
@@ -54,6 +54,16 @@ FIXME: There is noticable decrease in speed, also. Perhaps,
 //FIXME: tempory replacement for tmpfile
 //       this is here one for debugging purpose.
 
+//#define tmpfile xTmpFile
+
+FILE* xTmpFile()
+{
+  static int fid = 0;
+  char fname[80];
+  sprintf(fname,"TmpFile.%d",fid++);
+  return fopen(fname,"w");
+}
+
 
 // History Buffer ///////////////////////////////////////////
 
@@ -63,103 +73,66 @@ FIXME: There is noticable decrease in speed, also. Perhaps,
 
 HistoryBuffer::HistoryBuffer()
 {
-    length = 0;
+  ion    = -1;
+  length = 0;
 }
 
 HistoryBuffer::~HistoryBuffer()
 {
-    setScroll(false);
+  setScroll(FALSE);
 }
 
 void HistoryBuffer::setScroll(bool on)
 {
-    kdDebug() << "setScroll " << on << endl;
+  if (on == hasScroll()) return;
 
-    if (on == hasScroll()) return;
-
-    if (on)
-    {
-        array.setSize(500000);
-        assert(array.lastBlock());
-    }
-    else
-    {
-        array.setSize(0);
-    }
+  if (on)
+  {
+    assert( ion < 0 );
+    assert( length == 0);
+    FILE* tmp = tmpfile(); if (!tmp) { perror("konsole: cannot open temp file.\n"); return; }
+    ion = dup(fileno(tmp)); if (ion<0) perror("konsole: cannot dup temp file.\n");
+    fclose(tmp);
+  }
+  else
+  {
+    assert( ion >= 0 );
+    close(ion);
+    ion    = -1;
+    length = 0;
+  }
 }
 
 bool HistoryBuffer::hasScroll()
 {
-    return (array.lastBlock() != 0);
+  return ion >= 0;
 }
 
 void HistoryBuffer::add(const unsigned char* bytes, int len)
-{
-    assert(hasScroll());
-    int rest = ENTRIES - array.lastBlock()->size;
-    while (rest < len) {
-        memcpy(array.lastBlock()->data + array.lastBlock()->size, bytes, rest);
-        array.lastBlock()->size += rest;
-        array.newBlock();
-        if (!array.lastBlock()) { // something failed
-            setScroll(false);
-            return;
-        }
-        len -= rest;
-        bytes += rest;
-        rest = ENTRIES - array.lastBlock()->size;
-    }
-    memcpy(array.lastBlock()->data + array.lastBlock()->size , bytes, len);
-    array.lastBlock()->size += len;
+{ int rc;
+  assert(hasScroll());
+  rc = lseek(ion,length,SEEK_SET); if (rc < 0) { perror("HistoryBuffer::add.seek"); setScroll(FALSE); return; }
+  rc = write(ion,bytes,len);       if (rc < 0) { perror("HistoryBuffer::add.write"); setScroll(FALSE); return; }
+  length += rc;
 }
 
 void HistoryBuffer::get(unsigned char* bytes, int len, int loc)
-{
-    assert(hasScroll());
-    if (len < 0 || loc < 0 || size_t(loc + len) > this->len()) {
-        fprintf(stderr,"getHist(...,%d,%d): invalid args.\n",len,loc);
-        return;
-    }
-    size_t firstblock = loc / ENTRIES;
-    size_t offset = loc - (firstblock * ENTRIES);
-    int rest = ENTRIES - offset;
-    if (rest > len)
-        rest = len;
-    if (!array.at(firstblock))
-        return;
-
-    memcpy(bytes, array.at(firstblock)->data + offset, rest);
-    len -= rest;
-    bytes += rest;
-    firstblock++;
-    while (len) {
-         if (int(ENTRIES) > len)
-             rest = len;
-         else
-             rest = ENTRIES;
-         memcpy(bytes, array.at(firstblock)->data, rest);
-         bytes += rest;
-         len -= rest;
-         firstblock++;
-    }
+{ int rc;
+  assert(hasScroll());
+  if (loc < 0 || len < 0 || loc + len > length)
+    fprintf(stderr,"getHist(...,%d,%d): invalid args.\n",len,loc);
+  rc = lseek(ion,loc,SEEK_SET); if (rc < 0) { perror("HistoryBuffer::get.seek"); setScroll(FALSE); return; }
+  rc = read(ion,bytes,len);     if (rc < 0) { perror("HistoryBuffer::get.read"); setScroll(FALSE); return; }
 }
 
-bool HistoryBuffer::has(int loc) const
+int HistoryBuffer::len()
 {
-    return array.has(loc / ENTRIES);
-}
-
-size_t HistoryBuffer::len() const
-{
-    if (array.lastBlock())
-        return array.len() * ENTRIES + array.lastBlock()->size;
-    else
-        return 0;
+  return length;
 }
 
 // History Scroll //////////////////////////////////////
 
-/*
+/* 
    The history scroll makes a Row(Row(Cell)) from
    two history buffers. The index buffer contains
    start of line positions which refere to the cells
@@ -177,39 +150,22 @@ HistoryScroll::HistoryScroll()
 HistoryScroll::~HistoryScroll()
 {
 }
-
+ 
 void HistoryScroll::setScroll(bool on)
 {
   index.setScroll(on);
   cells.setScroll(on);
 }
-
+ 
 bool HistoryScroll::hasScroll()
 {
-    return index.hasScroll() && cells.hasScroll();
+  return index.hasScroll() && cells.hasScroll();
 }
 
 int HistoryScroll::getLines()
 {
-    if (!hasScroll()) return 0;
-    int indexlen = index.len() / sizeof(int);
-    if (indexlen <= 0)
-        return 0;
-    return indexlen;
-    /*
-    int orig = indexlen;
-  int res = 0;
-  index.get((unsigned char*)&res,sizeof(int),(indexlen-1)*sizeof(int));
-  kdDebug() << "getLines1 " << res << " " << indexlen << endl;
-  while (!cells.has(res)) {
-      indexlen--;
-      if (!indexlen)
-          break;
-      index.get((unsigned char*)&res,sizeof(int),(indexlen-1)*sizeof(int));
-  }
-  kdDebug() << "getLines " << orig << " " << indexlen << endl;
-  return indexlen;
-*/
+  if (!hasScroll()) return 0;
+  return index.len() / sizeof(int);
 }
 
 int HistoryScroll::getLineLen(int lineno)
@@ -223,13 +179,10 @@ int HistoryScroll::startOfLine(int lineno)
   if (lineno <= 0) return 0;
   if (!hasScroll()) return 0;
   if (lineno <= getLines())
-  {
-      int res = 0;
-      index.get((unsigned char*)&res,sizeof(int),(lineno-1)*sizeof(int));
-//      kdDebug() << "startOfLine " << cells.len() << " " << res << endl;
-      return res;
+  { int res;
+    index.get((unsigned char*)&res,sizeof(int),(lineno-1)*sizeof(int));
+    return res;
   }
-
   return cells.len();
 }
 
@@ -249,5 +202,5 @@ void HistoryScroll::addLine()
 {
   if (!hasScroll()) return;
   int locn = cells.len();
-  index.add((unsigned char*)&locn, sizeof(int));
+  index.add((unsigned char*)&locn,sizeof(int));
 }

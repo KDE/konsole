@@ -28,7 +28,6 @@ libkonsolepart_la_SOURCES = TEPty.C \
 	TEScreen.C \
 	TEmulation.C \
 	TEHistory.C \
-	BlockArray.C \
 	keytrans.C \
         konsole_part.C
 

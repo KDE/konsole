@@ -442,6 +442,8 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   // Stamp utmp/wtmp if we have and want them
 #ifdef HAVE_UTEMPTER
   if (addutmp) addToUtmp(dev, "", fd);
+#else
+  (void)addutmp;
 #endif
 #ifdef USE_LOGIN
   char *str_ptr;
