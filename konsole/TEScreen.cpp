@@ -658,7 +658,7 @@ void TEScreen::Tabulate()
 
 void TEScreen::clearTabStops()
 {
-  for (int i = 0; i < columns; i++) tabstops[i-1] = false;
+  for (int i = 0; i < columns; i++) tabstops[i] = false;
 }
 
 void TEScreen::changeTabStop(bool set)
@@ -720,11 +720,11 @@ void TEScreen::ShowCharacter(unsigned short c)
      return;
 
   if (cuX+w > columns) {
-    if (getMode(MODE_Wrap)) { 
+    if (getMode(MODE_Wrap)) {
       line_wrapped[cuY]=true;
       NextLine();
-    } 
-    else 
+    }
+    else
       cuX = columns-w;
   }
 
@@ -740,7 +740,7 @@ void TEScreen::ShowCharacter(unsigned short c)
   image[i].r = ef_re;
 
   cuX += w--;
-  
+
   while(w)
   {
      i++;
@@ -901,7 +901,7 @@ void TEScreen::moveImage(int dst, int loca, int loce)
   if (sel_begin != -1)
   {
      // Adjust selection to follow scroll.
-     bool beginIsTL = (sel_begin == sel_TL);     
+     bool beginIsTL = (sel_begin == sel_TL);
      int diff = dst - loca; // Scroll by this amount
      int scr_TL=loc(0,hist->getLines());
      int srca = loca+scr_TL; // Translate index from screen to global
@@ -923,7 +923,7 @@ void TEScreen::moveImage(int dst, int loca, int loce)
      {
         clearSelection();
      }
-     else 
+     else
      {
         if (sel_TL < 0)
            sel_TL = 0;
@@ -1270,7 +1270,7 @@ QString TEScreen::getSelText(const bool preserve_line_breaks)
     {
       // Strip trailing spaces
       j = last_space;
-    }  
+    }
 
   QString res(qc, j);
 
@@ -1333,7 +1333,7 @@ void TEScreen::addHistLine()
           sel_BR += columns;
        }
     }
-   
+
     // Scroll up if user is looking at the history and we can scroll up
     if ((histCursor > 0) &&  // We can scroll up and...
         ((histCursor != newHistLines) || // User is looking at history...
@@ -1357,7 +1357,7 @@ void TEScreen::addHistLine()
        {
           clearSelection();
        }
-       else 
+       else
        {
           if (sel_TL < 0)
              sel_TL = 0;
