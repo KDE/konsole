@@ -37,6 +37,8 @@
 
 - read configuration files both from kdedir() _and_ localkdedir().
 
+- Unix98 compatible way of using pty (openpty/forkpty).
+
 ! announce konsole-1.0 ------------------------------------
 
 - check for other codes/features (Linux console, xterm)
