@@ -313,8 +313,7 @@ Konsole::~Konsole()
     delete colors;
     colors=0;
 
-    if( kWinModule )
-       delete kWinModule;
+    delete kWinModule;
     kWinModule = 0;
 }
 
@@ -1493,8 +1492,7 @@ KSimpleConfig *Konsole::defaultSession()
 
 void Konsole::setDefaultSession(const QString &filename)
 {
-  if (m_defaultSession)
-    delete m_defaultSession;
+  delete m_defaultSession;
   m_defaultSession = new KSimpleConfig(locate("appdata", filename), true /* read only */);
   m_defaultSessionFilename=filename;
 }
