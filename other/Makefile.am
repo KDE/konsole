@@ -6,15 +6,12 @@ data_DATA = BlackOnLightYellow.schema BlackOnWhite.schema \
   syscolor.schema Linux.schema XTerm.schema vim.schema \
   DarkPicture.schema LightPicture.schema
 
-icondir = $(kde_icondir)
-icon_DATA = konsole.xpm
+kde_icon_DATA = konsole.xpm colourness.xpm brightness.xpm contrast.xpm
+
 
 install-data-local: 
 	$(mkinstalldirs) $(kde_minidir)
-	$(INSTALL_DATA) konsole-mini.xpm $(kde_minidir)/konsole.xpm
-	$(INSTALL_DATA) colourness.xpm $(kde_icondir)
-	$(INSTALL_DATA) brightness.xpm $(kde_icondir)
-	$(INSTALL_DATA) contrast.xpm $(kde_icondir)
+	$(INSTALL_DATA) $(srcdir)/konsole-mini.xpm $(kde_minidir)/konsole.xpm
 
 uninstall-local:
 	rm -f $(kde_minidir)/konsole.xpm
