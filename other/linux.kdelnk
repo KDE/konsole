@@ -4,7 +4,6 @@ Type=KonsoleApplication
 Name=Linux
 Name[pl]=Linuks
 Comment=Linux Console
-Comment[br]=Letrin Linux
 Comment[ca]=Consola Linux
 Comment[cs]=Linuxová konzole
 Comment[da]=Linux Konsol

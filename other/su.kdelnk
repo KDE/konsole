@@ -24,6 +24,7 @@ Comment[no]=Root-konsoll
 Comment[pl]=Konsola administratora
 Comment[pt]=Consola como root
 Comment[pt_BR]=Console Raiz
+Comment[ro]=Consol„ de ROOT
 Comment[ru]=ÎœŒ”œÃÿ Root'¡
 Comment[sk]=Rootovsk· konzola
 Exec=su
