@@ -1893,8 +1893,8 @@ void Konsole::addSessionCommand(const QString &path)
     return; // ignore
   }
   QString icon = co->readEntry("Icon", "openterm");
-  m_session->insertItem( SmallIconSet( icon ), txt, ++cmd_serial );
-  m_toolbarSessionsCommands->insertItem( SmallIconSet( icon ), txt, cmd_serial );
+  m_toolbarSessionsCommands->insertItem( SmallIconSet( icon ), txt, ++cmd_serial );
+  m_session->insertItem( SmallIconSet( icon ), txt.prepend(i18n("New ")), cmd_serial );
   no2command.insert(cmd_serial,co);
 }
 
