@@ -233,7 +233,8 @@ void Shell::DataReceived(int)
   emit block_in(buf,n);
   if (syslog) // if (debugging) ...
   {
-    for (int i = 0; i < n; i++) fputc(buf[i],syslog);
+    int i;
+    for (i = 0; i < n; i++) fputc(buf[i],syslog);
     fflush(syslog);
   }
 }
