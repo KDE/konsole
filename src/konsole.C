@@ -112,6 +112,25 @@ Time to start a requirement list.
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
 
+class KonsoleFontSelectAction : public KSelectAction {
+public:
+    KonsoleFontSelectAction(const QString &text, int accel,
+                            const QObject* receiver, const char* slot,
+                            QObject* parent, const char* name = 0 )
+        : KSelectAction(text, accel, receiver, slot, parent, name) {}
+
+    virtual void slotActivated( int index );
+};
+
+void KonsoleFontSelectAction::slotActivated(int index) {
+    // emit even if it's already activated
+    if (currentItem() == index) {
+        KSelectAction::slotActivated();
+        return;
+    } else {
+        KSelectAction::slotActivated(index);
+    }
+}
 
 template class QPtrDict<TESession>;
 template class QIntDict<KSimpleConfig>;
@@ -333,7 +352,7 @@ void Konsole::makeMenu()
   selectSize->setItems(sizeitems);
   selectSize->plug(m_options);
   // Select font
-  selectFont = new KSelectAction(i18n("Font"), 0, this,
+  selectFont = new KonsoleFontSelectAction(i18n("Font"), 0, this,
 				 SLOT(slotSelectFont()), this);
   QStringList it;
   it << i18n("&Normal")
@@ -599,7 +618,7 @@ void Konsole::slotSelectScrollbar() {
 void Konsole::slotSelectFont() {
   assert(se);
   int item = selectFont->currentItem();
-  //kdDebug() << "slotSelectFont " << item << endl;
+  // kdDebug() << "slotSelectFont " << item << endl;
   if (item == 8) // this is the default
   {
     KFontDialog::getFont(defaultFont, true);
@@ -649,6 +668,7 @@ void Konsole::setFont(int fontno)
     return;
   }
   if (se) se->setFontNo(fontno);
+  selectFont->setCurrentItem(fontno);
   te->setVTFont(f);
   n_font = fontno;
 }
@@ -892,7 +912,8 @@ void Konsole::activateSession(TESession *s)
     }
   }
   te->currentSession = se;
-  if (s->fontNo() != n_font) setFont(s->fontNo());
+  if (s->fontNo() != n_font)
+      setFont(s->fontNo());
   s->setConnect(TRUE);
   title = s->Title(); // take title from current session
   setHeader();
