@@ -163,7 +163,8 @@ const char *fonts[] = {
  "-misc-console-medium-r-normal--16-160-72-72-c-160-iso10646-1", // "Linux"
  "-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1",    // "Unicode"
  };
-#define TOPFONT ((sizeof(fonts)/sizeof(char*))-1)
+#define TOPFONT (sizeof(fonts)/sizeof(char*))
+#define DEFAULTFONT TOPFONT
 
 #define DEFAULT_HISTORY_SIZE 1000
 
@@ -898,7 +899,7 @@ void Konsole::slotSelectFont() {
   assert(se);
   int item = selectFont->currentItem();
   // KONSOLEDEBUG << "slotSelectFont " << item << endl;
-  if (item == 8) // this is the default
+  if (item == DEFAULTFONT) // this is the default
   {
     if ( KFontDialog::getFont(defaultFont, true) == QDialog::Rejected )
     {
@@ -975,7 +976,7 @@ void Konsole::keytab_menu_activated(int item)
 void Konsole::setFont(int fontno)
 {
   QFont f;
-  if (fontno == 8)
+  if (fontno == DEFAULTFONT)
     f = defaultFont;
   else
   if (fonts[fontno][0] == '-')
@@ -985,7 +986,7 @@ void Konsole::setFont(int fontno)
     f.setFamily(fonts[fontno]);
     f.setRawMode( TRUE );
   }
-  if ( !f.exactMatch() && fontno != 8)
+  if ( !f.exactMatch() && fontno != DEFAULTFONT)
   {
     QString msg = i18n("Font `%1' not found.\nCheck README.linux.console for help.").arg(fonts[fontno]);
     KMessageBox::error(this,  msg);
