@@ -76,6 +76,10 @@ KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar
 
      KActionCollection* actions = new KActionCollection(this);
 
+     KAction* selectionEnd = new KAction(i18n("Set Selection End"), 0, te,
+                                  SLOT(setSelectionEnd()), actions, "selection_end");
+     selectionEnd->plug(m_rightButton);
+
      KAction *copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0,
                                         te, SLOT(copyClipboard()), actions, "edit_copy");
 

@@ -461,6 +461,10 @@ void konsolePart::makeGUI()
 
   // Popup Menu -------------------------------------------------------------------
   m_popupMenu = new KPopupMenu((KMainWindow*)parentWidget);
+  KAction* selectionEnd = new KAction(i18n("Set Selection End"), 0, te,
+                               SLOT(setSelectionEnd()), actions, "selection_end");
+  selectionEnd->plug(m_popupMenu);
+
   KAction *copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0,
                                         te, SLOT(copyClipboard()), actions, "edit_copy");
   copyClipboard->plug(m_popupMenu);
