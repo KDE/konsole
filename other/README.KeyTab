@@ -62,6 +62,7 @@ Operations are
   - scrollUpPage   : scroll up   one page in the history log
   - scrollDownLine : scroll down one line in the history log
   - scrollDownPage : scroll down one page in the history log
+  - emitClipboard  : "paste" the current clipboard
   - emitSelection  : "paste" the current selection
 
 Strings have the syntax of C strings,

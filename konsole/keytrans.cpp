@@ -466,6 +466,7 @@ void KeyTransSymbols::defOprSyms()
   defOprSym("moveSessionLeft",  CMD_moveSessionLeft   );
   defOprSym("moveSessionRight", CMD_moveSessionRight  );
   defOprSym("scrollLock",    CMD_scrollLock);
+  defOprSym("emitClipboard", CMD_emitClipboard);
 }
 
 void KeyTransSymbols::defModSyms()
