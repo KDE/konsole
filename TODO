@@ -33,6 +33,8 @@
 - evtl. handle *.kdelnk files using regular setup utilities
   and a rpc client. Should become a parameter in any case.
 
+- allow reloading the configuration files at runtime.
+
 ! announce konsole-1.0 ------------------------------------
 
 - check for other codes/features (Linux console, xterm)
@@ -41,10 +43,18 @@
   - media copy (print)
   - double high, double width (vt100)
   - reverse wraparound?
+
+- Linux console improvements
+  - Attributes
+    - underline --> intensive foreground
+    - blink     --> intensive background
   - Linux console knows some extra tricks mapping graphical
     characters.
 
-- use scalable font?
+- Fonts
+  - produce font families instead of doing underline and bold
+    in the program?
+  - use scalable font?
 
 - /dev/console?
 

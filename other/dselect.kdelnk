@@ -4,7 +4,7 @@ Type=KonsoleApplication
 Name=dselect
 Comment=Debian Package Manager
 Exec=dselect
-Schema=/opt/kde/share/apps/konsole/WhiteOnBlack.schema
+Schema=/opt/kde/share/apps/konsole/Linux.schema
 #VGA
 Font=6
 Term=linux

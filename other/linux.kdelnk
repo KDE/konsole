@@ -4,7 +4,7 @@ Type=KonsoleApplication
 Name=Linux
 Comment=Linux Console
 Exec=bash
-Schema=/opt/kde/share/apps/konsole/WhiteOnBlack.schema
+Schema=/opt/kde/share/apps/konsole/Linux.schema
 #VGA
 Font=6
 Term=linux
