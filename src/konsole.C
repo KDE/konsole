@@ -485,8 +485,11 @@ void Konsole::makeGUI()
    //kdDebug()<<"Konsole::makeGUI() updateSchemas()"<<endl;
    updateSchemaMenu();
    ColorSchema *sch=colors->find(s_schema);
-   curr_schema=sch->numb();
    kdDebug()<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
+   if (sch)
+	curr_schema=sch->numb(); 
+   else
+	curr_schema = 0;
    for (int i=0; i<m_schema->count(); i++)
       m_schema->setItemChecked(i,false);
 
