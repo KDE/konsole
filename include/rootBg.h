@@ -11,6 +11,9 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
+#ifndef _ROOTBG_H_
+#define _ROOTBG_H_
+
 class RootPixmap 
 {
 
@@ -66,3 +69,5 @@ private:
   enum { Flat = 1, Gradient, Pattern };
   enum { Portrait = 1, Landscape };
 };
+
+#endif

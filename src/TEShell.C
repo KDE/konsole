@@ -70,7 +70,9 @@
 #include "TEShell.h"
 #include "TEShell.moc"
 
+#ifndef HERE
 #define HERE fprintf(stdout,"%s(%d): here\n",__FILE__,__LINE__)
+#endif
 
 FILE* syslog_file = NULL; //stdout;
 
