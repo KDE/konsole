@@ -20,7 +20,7 @@ INCLUDES =  -I$(INCDIR) $(all_includes)
 
 # you can add here more. This one gets installed
 bin_PROGRAMS = 	konsole konsole_grantpty kwrited #kcmkonsole
-lib_LTLIBRARIES = libkonsole.la kwrited.la
+lib_LTLIBRARIES = libkonsole.la kwrited.la konsole.la
 
 #noinst_LTLIBRARIES = libkonsole.la
 
@@ -50,6 +50,10 @@ kwrited_la_LDFLAGS = $(all_libraries) -module -avoid-version
 kwrited_SOURCES	= dummy.C
 kwrited_LDADD   = kwrited.la 
 kwrited_LDFLAGS = $(all_libraries) $(KDE_RPATH)
+
+konsole_la_SOURCES = main.C 
+konsole_la_LIBADD  = libkonsole.la $(LIB_KIMGIO)
+konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
 
 konsole_SOURCES	= main.C 
 konsole_LDADD   = libkonsole.la $(LIB_KIMGIO)
