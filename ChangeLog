@@ -1,3 +1,5 @@
+28 May 1999 Dan Pilone <pilone@slac.com>
+- Ported konsole to SGI (well, hopefully all SVR4 machines.)
 22 May 1999
 - added transparency/tint support
 11 Feb 1999

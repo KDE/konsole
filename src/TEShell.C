@@ -54,6 +54,11 @@
 #include <time.h>
 #include <unistd.h>
 
+/* sgis have /dev/ptmx [bmg] */
+#ifdef __sgi__
+#define SVR4
+#endif
+
 #if defined (_HPUX_SOURCE)
 #define _TERMIOS_INCLUDED
 #include <bsdtty.h>
@@ -81,8 +86,12 @@ void Shell::setSize(int lines, int columns)
   ioctl(fd,TIOCSWINSZ,(char *)&wsize);
 }
 
+#ifndef SVR4
 static char ptynam[] = "/dev/ptyxx";
 static char ttynam[] = "/dev/ttyxx";
+#else
+char *ttynam, *ptsname();
+#endif
 
 static QIntDict<Shell> shells;
 
@@ -114,9 +123,14 @@ void Shell::makeShell(const char* dev, QStrList & args,
 { int sig; char* t;
   // open and set all standard files to master/slave tty
   int tt = open(dev, O_RDWR | O_EXCL);
-  
-#if (defined(SVR4) || defined(__SVR4)) && (defined(i386) || defined(__i386__))
+  if (tt < 0)
+      {
+      perror("Could not open slave tty.");
+      exit(-1);
+      }
+// #if (defined(SVR4) || defined(__SVR4)) && (defined(i386) || defined(__i386__))
   // Solaris x86
+#ifdef SVR4
   ioctl(tt, I_PUSH, "ptem");
   ioctl(tt, I_PUSH, "ldterm");
 #endif
@@ -153,6 +167,42 @@ void Shell::makeShell(const char* dev, QStrList & args,
   setpgid(0,0);                        // is not noticeable with all
   close(open(dev, O_WRONLY, 0));       // clients (bash,vi). Because bash
   setpgid(0,0);                        // heals this, use '-e' to test it.
+
+  static struct termios ttmode;
+#undef CTRL
+#define CTRL(c) ((c) - '@')
+
+// #ifdef SVR4
+// #define CINTR 0177
+// #define CQUIT CTRL('U')
+// #define CERASE CTRL('H')
+// // #else
+// #define CINTR CTRL('C')
+// #define CQUIT CTRL('\\')
+// #define CERASE 0177
+// #endif
+
+#if defined (__FreeBSD__) || (__NetBSD__) || defined(__bsdi__)
+      ioctl(0,TIOCGETA,(char *)&ttmode);
+#else
+#   if defined (_HPUX_SOURCE) || defined(__Lynx__)
+      tcgetattr(0, &ttmode);
+#   else
+      ioctl(0,TCGETS,(char *)&ttmode);
+#   endif        
+#endif
+      ttmode.c_cc[VINTR] = CTRL('C');
+      ttmode.c_cc[VQUIT] = CTRL('\\');
+      ttmode.c_cc[VERASE] = 0177;
+#if defined (__FreeBSD__) || (__NetBSD__) || defined(__bsdi__)
+      ioctl(0,TIOCSETA,(char *)&ttmode);
+#else
+#   ifdef _HPUX_SOURCE
+      tcsetattr(0, TCSANOW, &ttmode);
+#   else
+      ioctl(0,TCSETS,(char *)&ttmode);
+#   endif        
+#endif
 
 /*
 #if defined(TIOCSPTLCK)
@@ -192,12 +242,28 @@ void Shell::makeShell(const char* dev, QStrList & args,
 }
 
 int openShell()
-{ int ptyfd; char *s3, *s4;
-  static char ptyc3[] = "pqrstuvwxyzabcde";
-  static char ptyc4[] = "0123456789abcdef";
+{ 
+ int ptyfd; 
+
+#ifndef SVR4 
+ char *s3, *s4;
+ static char ptyc3[] = "pqrstuvwxyzabcde";
+ static char ptyc4[] = "0123456789abcdef";
+#endif
 
   // Find a master pty that we can open ////////////////////////////////
-
+#ifdef SVR4
+  ptyfd = open("/dev/ptmx",O_RDWR);
+  if (ptyfd < 0) 
+    {
+      perror("Can't open a pseudo teletype");
+      return(-1);
+    }
+  grantpt(ptyfd);
+  unlockpt(ptyfd);
+  fcntl(ptyfd,F_SETFL,O_NDELAY);
+  ttynam = ptsname(ptyfd);
+#else
   ptyfd = -1;
   for (s3 = ptyc3; *s3 != 0; s3++) 
   {
@@ -215,6 +281,7 @@ int openShell()
   }
   if (ptyfd < 0) { fprintf(stderr,"Can't open a pseudo teletype\n"); exit(1); }
   fcntl(ptyfd,F_SETFL,O_NDELAY);
+#endif
 
   return ptyfd;
 }
