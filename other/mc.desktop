@@ -1,15 +1,14 @@
 [Desktop Entry]
 Type=KonsoleApplication
 Name=MC
-Name[et]=mc
-Name[ro]=Midnight Commander
+Name[et]=Midnight Commander
 Comment=Midnight Commander
+Comment[af]=MIDDERNAG KOMMANDEUR
 Comment[ca]=Gestor de fitxers Midnight Commander
 Comment[eo]=Dosieradministrilo "Meznokta komandanto"
 Comment[is]=mc:  Skráastjóri fyrir textaham
 Comment[ko]=미드나잇 커맨더
 Comment[lv]=Pusnakts Komandieris
 Comment[mk]=Midnight Commander - клон на NC (Norton Commander)
-Comment[oc]=Gestionari de fiqui�rs Midnight Commander
-Comment[ro]=MC
+Comment[oc]=Gestionari de fiquièrs Midnight Commander
 Exec=mc -c
