@@ -204,7 +204,7 @@ Konsole::Konsole(const QString& name,
 
   // read and apply default values ///////////////////////////////////////////
 
-  readProperties(kapp->config());
+  readProperties(KGlobal::config());
 
   // activate and run first session //////////////////////////////////////////
 
@@ -525,7 +525,7 @@ void Konsole::saveProperties(KConfig* config)
 
 
 
-// Called by constructor (with config = kapp->config())
+// Called by constructor (with config = KGlobal::config())
 // and by session-management (with config = sessionconfig).
 // So it has to apply the settings when reading them.
 void Konsole::readProperties(KConfig* config)
@@ -745,7 +745,7 @@ void Konsole::opt_menu_activated(int item)
             break;
     case 5: setFullScreen(!b_fullscreen);
             break;
-    case 8: saveProperties(kapp->config());
+    case 8: saveProperties(KGlobal::config());
             break;
   }
 }
