@@ -18,7 +18,7 @@
     of the abilities of the framework - multible sessions.
 */
 
-TESession::TESession(KMainWindow* main, TEWidget* te, const QString &_pgm, QStrList & _args, const char *_term)
+TESession::TESession(KMainWindow* main, TEWidget* te, const QString &_pgm, QStrList & _args, const QString &_term)
    : schema_no(0)
    , font_no(3)
    , pgm(_pgm)
@@ -58,7 +58,7 @@ void TESession::run()
 {
   //kdDebug(1211) << "Running the session!" << pgm << "\n";
   //pgm = "pine";
-  sh->run(QFile::encodeName(pgm),args,term.data(),FALSE);
+  sh->run(QFile::encodeName(pgm),args,term.latin1(),FALSE);
 }
 
 void TESession::setUserTitle( int what, const QString &caption )
@@ -121,9 +121,14 @@ int TESession::schemaNo()
   return schema_no;
 }
 
-int TESession::keymap()
+int TESession::keymapNo()
 {
-  return keymap_no;
+  return em->keymapNo();
+}
+
+QString TESession::keymap()
+{
+  return em->keymap();
 }
 
 int TESession::fontNo()
@@ -131,9 +136,9 @@ int TESession::fontNo()
   return font_no;
 }
 
-const char* TESession::emuName()
+const QString & TESession::Term()
 {
-  return term.data();
+  return term;
 }
 
 void TESession::setSchemaNo(int sn)
@@ -143,8 +148,12 @@ void TESession::setSchemaNo(int sn)
 
 void TESession::setKeymapNo(int kn)
 {
-  keymap_no = kn;
-  em->setKeytrans(kn);
+  em->setKeymap(kn);
+}
+
+void TESession::setKeymap(const QString &id)
+{
+  em->setKeymap(id);
 }
 
 void TESession::setFontNo(int fn)

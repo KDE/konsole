@@ -57,3 +57,5 @@ Exec=bash
 Schema=Linux.schema
 #VGA
 Font=6
+Term=linux
+KeyTab=linux
