@@ -563,4 +563,4 @@ Comment[uk]=Сеанс завершився з кодом помилки
 Comment[vi]=Một session vừa kết thúc với trạng thái khác 0
 Comment[xx]=xxA session has exited with non-zero statusxx
 Comment[zh_TW]=工作階段結束於非零狀態
-default_presentation=16
+default_presentation=0
