@@ -38,6 +38,7 @@
 class QDragEnterEvent;
 class QDropEvent;
 
+class KAccel;
 class KRootPixmap;
 
 class Konsole : public KTMainWindow
@@ -131,6 +132,7 @@ private:
 
   KMenuBar*   menubar;
   KStatusBar* statusbar;
+  KAccel*     accel;
 
   QPopupMenu* m_file;
   QPopupMenu* m_sessions;

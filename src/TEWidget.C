@@ -60,6 +60,7 @@
 
 #include "TEWidget.moc"
 #include <kapp.h>
+#include <kcursor.h>
 #include <kurl.h>
 #include <kdebug.h>
 #include <klocale.h>
@@ -270,6 +271,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   setColorTable(base_color_table); // init color table
 
   qApp->installEventFilter( this ); //FIXME: see below
+  KCursor::setAutoHideCursor( this, true );
 
   // Init DnD ////////////////////////////////////////////////////////////////
   currentSession = NULL;
@@ -279,6 +281,9 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   m_drop->insertItem( i18n("cd"),    1);
   connect(m_drop, SIGNAL(activated(int)), SLOT(drop_menu_activated(int)));
 
+  // we need focus so that the auto-hide cursor feature works
+  setFocus();
+  setFocusPolicy( WheelFocus );
 }
 
 //FIXME: make proper destructor
@@ -636,6 +641,10 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
 
 void TEWidget::mouseMoveEvent(QMouseEvent* ev)
 {
+  // for auto-hiding the cursor, we need mouseTracking
+  if (ev->state() == NoButton )
+    return;
+
   if (actSel == 0) return;
   if (ev->state() & MidButton)
     return; // don't extend selection while pasting
@@ -726,7 +735,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
 
 void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
 {
-//  printf("release [%d,%d] %d\n",ev->x()/font_w,ev->y()/font_h,ev->button());
+  // printf("release [%d,%d] %d\n",ev->x()/font_w,ev->y()/font_h,ev->button());
   if ( ev->button() == LeftButton)
   {
     if ( actSel > 1 ) emit endSelectionSignal(preserve_line_breaks);
@@ -796,6 +805,18 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
      preserve_line_breaks = TRUE;
    }
 }
+
+void TEWidget::focusInEvent( QFocusEvent * )
+{
+    // do nothing, to prevent repainting
+}
+
+
+void TEWidget::focusOutEvent( QFocusEvent *e )
+{
+    // do nothing, to prevent repainting
+}
+
 
 int TEWidget::charClass(char ch) const
 {
@@ -873,6 +894,11 @@ void TEWidget::onClearSelection()
 //   which would also let you have an in-focus cursor and an out-focus
 //   cursor like xterm does.
 
+// for the auto-hide cursor feature, I added empty focusInEvent() and 
+// focusOutEvent() so that update() isn't called.
+// For auto-hide, we need to get keypress-events, but we only get them when
+// we have focus.
+
 void TEWidget::doScroll(int lines)
 {
   scrollbar->setValue(scrollbar->value()+lines);
@@ -894,7 +920,7 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
               // know where the current selection is.
 
     emit keyPressedSignal(ke); // expose
-    return TRUE;               // accept event
+    return false;               // accept event
   }
   if ( e->type() == QEvent::Enter )
   {

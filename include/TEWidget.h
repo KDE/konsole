@@ -41,7 +41,7 @@ public:
 
     const ColorEntry* getColorTable() const;
     void              setColorTable(const ColorEntry table[]);
-    
+
     void setScrollbarLocation(int loc);
     enum { SCRNONE=0, SCRLEFT=1, SCRRIGHT=2 };
 
@@ -51,7 +51,7 @@ public:
     void emitSelection();
 
 public:
-    
+
     void setImage(const ca* const newimg, int lines, int columns);
 
     int  Lines()   { return lines;   }
@@ -60,7 +60,7 @@ public:
     void calcGeometry();
     void propagateSize();
     QSize calcSize(int cols, int lins) const;
-    
+
     QSize sizeHint() const;
 
 public:
@@ -87,7 +87,7 @@ protected:
 
     bool eventFilter( QObject *, QEvent * );
 
-    void drawAttrStr(QPainter &paint, QRect rect, 
+    void drawAttrStr(QPainter &paint, QRect rect,
                      QString& str, ca attr, BOOL pm, BOOL clear);
     void paintEvent( QPaintEvent * );
 
@@ -100,6 +100,9 @@ protected:
     void mousePressEvent( QMouseEvent* );
     void mouseReleaseEvent( QMouseEvent* );
     void mouseMoveEvent( QMouseEvent* );
+    
+    void focusInEvent( QFocusEvent * );
+    void focusOutEvent( QFocusEvent * );
     // Dnd
     void dragEnterEvent(QDragEnterEvent* event);
     void dropEvent(QDropEvent* event);
@@ -127,7 +130,7 @@ protected slots:
     void blinkEvent();
 
 private:
-    
+
     QChar (*fontMap)(QChar); // possible vt100 font extention
 
     bool fixed_font; // has fixed pitch
