@@ -899,20 +899,10 @@ void TEDemo::addSessionCommand(const char* path)
 
 void TEDemo::loadSessionCommands()
 {
-    for (int local=0; local<=1; local++) {
-	// KApplication could support this technique better
-	QString path = local
-	    ? kapp->localkdedir() + "/share/apps/konsole"
-	    : kapp->kde_datadir() + "/konsole";
-	QDir d( path );
-	if(!d.exists()) return;
-	d.setFilter( QDir::Files | QDir::Readable );
-	d.setNameFilter( "*.kdelnk" );
-	const QFileInfoList *list = d.entryInfoList();
-	QFileInfoListIterator it( *list );
-	for(QFileInfo *fi; (fi=it.current()); ++it )
-	    addSessionCommand(fi->filePath());
-    }
+  QStringList lst = KGlobal::dirs()->findAllResources("appdata", "*.desktop");
+  
+  for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it ) 
+    addSessionCommand(*it);
 }
 
 // --| Schema support |-------------------------------------------------------

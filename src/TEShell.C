@@ -100,6 +100,7 @@
 #include "TEShell.h"
 #include "TEShell.moc"
 #include <kapp.h>
+#include <kstddirs.h>
 #include <kmsgbox.h>
 
 #ifndef HERE
@@ -136,8 +137,9 @@ static int chownpty(int fd, int grant)
   {
     /* We pass the master pseudo terminal as file descriptor PTY_FILENO. */
     if (fd != PTY_FILENO && dup2(fd, PTY_FILENO) < 0) exit(1);
-    QString path = KApplication::kde_bindir() + "/" + BASE_CHOWN;
-    execle(path.data(), BASE_CHOWN, grant?"--grant":"--revoke", NULL, NULL);
+    QString path = locate("exe", BASE_CHOWN);
+    
+    execle(path.ascii(), BASE_CHOWN, grant?"--grant":"--revoke", NULL, NULL);
     exit(1); // should not be reached
   }
   if (pid > 0)
