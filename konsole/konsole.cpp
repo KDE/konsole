@@ -1818,19 +1818,24 @@ void Konsole::slotToggleMasterMode()
 void Konsole::notifySessionState(TESession* session, int state)
 {
   KToolBarButton* ktb=session2button.find(session);
+  QString state_iconname;
   switch(state)
   {
     case NOTIFYNORMAL  : if(session->isMasterMode())
-                           ktb->setIcon("remote");
+                           state_iconname = "remote";
                          else
-                           ktb->setIcon(session->IconName());
+                           state_iconname = session->IconName();
                          break;
-    case NOTIFYBELL    : ktb->setIcon("bell");
+    case NOTIFYBELL    : state_iconname = "bell";
                          break;
-    case NOTIFYACTIVITY: ktb->setIcon("idea");
+    case NOTIFYACTIVITY: state_iconname = "idea";
                          break;
-    case NOTIFYSILENCE : ktb->setIcon("ktip");
+    case NOTIFYSILENCE : state_iconname = "ktip";
+			 break;
   }
+  if (!state_iconname.isEmpty()
+      && session->testAndSetStateIconName(state_iconname))
+    ktb->setIcon (state_iconname);
 }
 
 // --| Session support |-------------------------------------------------------

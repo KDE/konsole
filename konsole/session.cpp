@@ -283,6 +283,16 @@ const QString& TESession::IconText()
   return iconText;
 }
 
+bool TESession::testAndSetStateIconName (const QString& newname)
+{
+  if (newname != stateIconName)
+    {
+      stateIconName = newname;
+      return true;
+    }
+  return false;
+}
+
 void TESession::setHistory(const HistoryType &hType)
 {
   em->setHistory(hType);

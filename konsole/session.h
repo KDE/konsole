@@ -67,6 +67,7 @@ public:
   void setTitle(const QString& _title);
   void setIconName(const QString& _iconName);
   void setIconText(const QString& _iconText);
+  bool testAndSetStateIconName (const QString& newname);
   bool sendSignal(int signal);
 
   // Additional functions for DCOP
@@ -117,6 +118,8 @@ private:
   QString        userTitle;
   QString        iconName;
   QString        iconText; // as set by: echo -en '\033]1;IconText\007
+
+  QString	 stateIconName;
 
   QString        pgm;
   QStrList       args;
