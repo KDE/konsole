@@ -15,11 +15,11 @@
 
 <h2>Preface</h2>
 
-This document accompanies the Konsole and Kom programs, which are mainly terminal
-emulations.  Since material about the extend and precise semantics of the emulatation
-intended by these programs is hard to find on the internet today, it came out
-nessesary to include a more precise specification within their release.
-<p>
+This document accompanies the Konsole program, which is a terminal emulation
+for the X Windows System.  Since material about the extend and precise semantics
+of the emulatation intended to be handled by this programs is hard to find on the
+internet today, it came out nessesary to include a more precise specification within
+their release.
 Hopefully, this helps to clearify the relation to the VT100, VT102, Linux, XTerm
 and ansi.sys (ANSI-BBS) terminals, which are the target of these programs. Further,
 it specifies which codes are interpreted by them, and what has been omitted.
@@ -33,16 +33,9 @@ with some additions. MS stepped in later and produced another ANSI emulation,
 <code>ansi.sys</code>, for their OS, which became of some relevance in BBS style
 telecommunication programs. One can view this as a small subset of the VT100 
 emulation, with some additions, of cause.
-<p>
 This situation is further confused by the fact, that often many versions of the
 above terminals and emulations are out, one able to do a little more or less then
-the other. Especially the later makes the production of an emulation a difficult
-task.
-<p>
-This document contains the material collected and
-attempts to describe not only the abilities of konsole, but also to give a
-full reference of the emulations that konsole is capable of, but does
-eventually not implement completely.
+the other.
 <p>
 Currently, the body of this document is mainly a concept data base, that
 referes to the VT100 component of the emulation. Any indication whether
@@ -598,18 +591,8 @@ The following attributes below have the following meaning:
   control sequences.  The
   reset state causes only VT52 compatible escape sequences to be
   recognized.  The set state causes only ANSI compatible escape sequences
-  to be recognized.  See the entries for <a href=#MODES>MODES</a>,
-  <a href=#SM>SM</a>, and <a href=#RM>RM</a>.<tr><td><p></td></tr>
-<tr><td  bgcolor="#D0D0D0"><a name=DECANSI>DECANSI</a>
-    <td  bgcolor="#D0D0D0"><b>DEC Private Ansi Mode</b>
-    <td  bgcolor="#D0D0D0">Konsole VT100 Command
-<tr><td><p></td>
-<tr><td>
-    <td  colspan=2><code> <b>FIXME</b></code>
-<tr><td><p></td>
-<tr><td></td>
-    <td  colspan=2>
-  FIXME. explain<tr><td><p></td></tr>
+  to be recognized.  See the entries for <a href=#MODES>MODES</a>, <a href=#SM>SM</a>, <a href=#RM>RM</a>
+  and <a href=#VT52ANSI>VT52ANSI</a>.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECARM>DECARM</a>
     <td  bgcolor="#D0D0D0"><b>Auto Repeat Mode</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Mode
@@ -619,8 +602,7 @@ The following attributes below have the following meaning:
   This is a private parameter to the <a href=#SM>SM</a> and <a href=#RM>RM</a>
   control sequences.  The
   reset state causes no keyboard keys to auto-repeat, the set state
-  causes most of them to.  See <a href=#MODES>MODES</a>, <a href=#SM>SM</a>,
-  and <a href=#RM>RM</a>.<tr><td><p></td></tr>
+  causes most of them to.  See <a href=#MODES>MODES</a>, <a href=#SM>SM</a> and <a href=#RM>RM</a>.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=DECAWM>DECAWM</a>
     <td  bgcolor="#D0D0D0"><b>Autowrap Mode</b>
     <td  bgcolor="#D0D0D0">VT100 DEC Mode
@@ -948,7 +930,7 @@ The following attributes below have the following meaning:
     <td  bgcolor="#D0D0D0">Konsole VT100 Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2><code> <b>ESC</b> <b>[</b> <b>?</b> <em>Ps</em> <b>...</b> <b>l</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <b>?</b> <em>Ps...</em> <b>l</b></code>
 <tr><td><p></td>
 <tr><td></td>
     <td  colspan=2>
@@ -992,7 +974,7 @@ The following attributes below have the following meaning:
     <td  bgcolor="#D0D0D0">Konsole VT100 Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2><code> <b>ESC</b> <b>[</b> <b>?</b> <em>Ps</em> <b>...</b> <b>h</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <b>?</b> <em>Ps...</em> <b>h</b></code>
 <tr><td><p></td>
 <tr><td></td>
     <td  colspan=2>
@@ -1448,7 +1430,7 @@ The following attributes below have the following meaning:
     <td  bgcolor="#D0D0D0">VT100 ANSI Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2><code> <b>ESC</b> <b>[</b> <em>Ps</em> <b>;</b> <b>...</b> <b>l</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <em>Ps...</em> <b>l</b></code>
 <tr><td><p></td>
 <tr><td></td>
     <td  colspan=2>
@@ -1509,7 +1491,7 @@ The following attributes below have the following meaning:
     <td  bgcolor="#D0D0D0">VT100 ANSI Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2><code> <b>ESC</b> <b>[</b> <em>Ps</em> <b>;</b> <b>...</b> <b>m</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <em>Ps...</em> <b>m</b></code>
 <tr><td><p></td>
 <tr><td></td>
     <td  colspan=2>
@@ -1552,7 +1534,7 @@ The following attributes below have the following meaning:
     <td  bgcolor="#D0D0D0">VT100 ANSI Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2><code> <b>ESC</b> <b>[</b> <em>Ps</em> <b>;</b> <b>...</b> <b>h</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <em>Ps...</em> <b>h</b></code>
 <tr><td><p></td>
 <tr><td></td>
     <td  colspan=2>
@@ -1654,7 +1636,7 @@ The following attributes below have the following meaning:
     <td  colspan=2>
   Same as <a href=#LF>LF</a>.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=VT52ANSI>VT52ANSI</a>
-    <td  bgcolor="#D0D0D0"><b>VT52 Ansi Mode</b>
+    <td  bgcolor="#D0D0D0"><b>VT52 ANSI Ansi Mode</b>
     <td  bgcolor="#D0D0D0">Konsole VT100 XTerm Command
 <tr><td><p></td>
 <tr><td>
@@ -1662,7 +1644,9 @@ The following attributes below have the following meaning:
 <tr><td><p></td>
 <tr><td></td>
     <td  colspan=2>
-  FIXME. explain<tr><td><p></td></tr>
+  This is an extention to the VT52 commands to embed the emulation into VT100.
+  It allows to return back to VT100 emulation (ANSI mode).
+  See also <a href=#DECANM>DECANM</a> and <a href=#SM>SM</a>.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=VT52CUB>VT52CUB</a>
     <td  bgcolor="#D0D0D0"><b>VT52 Cursor Back</b>
     <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
@@ -1672,7 +1656,7 @@ The following attributes below have the following meaning:
 <tr><td><p></td>
 <tr><td></td>
     <td  colspan=2>
-  FIXME. explain<tr><td><p></td></tr>
+  See <a href=#CUB>CUB</a>.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=VT52CUD>VT52CUD</a>
     <td  bgcolor="#D0D0D0"><b>VT52 Cursor Down</b>
     <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
@@ -1682,7 +1666,7 @@ The following attributes below have the following meaning:
 <tr><td><p></td>
 <tr><td></td>
     <td  colspan=2>
-  FIXME. explain<tr><td><p></td></tr>
+  See <a href=#CUD>CUD</a>.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=VT52CUF>VT52CUF</a>
     <td  bgcolor="#D0D0D0"><b>VT52 Cursor Forward</b>
     <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
@@ -1692,7 +1676,7 @@ The following attributes below have the following meaning:
 <tr><td><p></td>
 <tr><td></td>
     <td  colspan=2>
-  FIXME. explain<tr><td><p></td></tr>
+  See <a href=#CUF>CUF</a>.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=VT52CUH>VT52CUH</a>
     <td  bgcolor="#D0D0D0"><b>VT52 Cursor Home</b>
     <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
@@ -1708,21 +1692,23 @@ The following attributes below have the following meaning:
     <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2><code> <b>ESC</b> <em>X</em> <em>Y</em></code>
+    <td  colspan=2><code> <b>ESC</b> <b>Y</b> <em>X</em> <em>Y</em></code>
 <tr><td><p></td>
 <tr><td></td>
     <td  colspan=2>
-  FIXME. explain<tr><td><p></td></tr>
+  Line and column numbers for direct cursor address are single
+  character codes whose values are the desired number plus
+  37 (in Octal). Line and column numbers start at 1.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=VT52CUU>VT52CUU</a>
     <td  bgcolor="#D0D0D0"><b>VT52 Cursor Up</b>
     <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2><code> <b>A</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>A</b></code>
 <tr><td><p></td>
 <tr><td></td>
     <td  colspan=2>
-  FIXME. explain<tr><td><p></td></tr>
+  See <a href=#CUU>CUU</a>.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=VT52EDL>VT52EDL</a>
     <td  bgcolor="#D0D0D0"><b>VT52 Clear To End Of Line</b>
     <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
@@ -1744,7 +1730,7 @@ The following attributes below have the following meaning:
     <td  colspan=2>
   FIXME. explain<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=VT52KPAM>VT52KPAM</a>
-    <td  bgcolor="#D0D0D0"><b>VT52 Keyboard Application Mode</b>
+    <td  bgcolor="#D0D0D0"><b>VT52 Enter alternate keypad mode</b>
     <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
 <tr><td><p></td>
 <tr><td>
@@ -1754,7 +1740,7 @@ The following attributes below have the following meaning:
     <td  colspan=2>
   FIXME. explain<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=VT52KPNM>VT52KPNM</a>
-    <td  bgcolor="#D0D0D0"><b>VT52 Keyboard Numeric Mode</b>
+    <td  bgcolor="#D0D0D0"><b>VT52 Exit alternate keypad mode</b>
     <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
 <tr><td><p></td>
 <tr><td>
@@ -1772,7 +1758,7 @@ The following attributes below have the following meaning:
 <tr><td><p></td>
 <tr><td></td>
     <td  colspan=2>
-  FIXME. explain<tr><td><p></td></tr>
+  Response to ESC Z is ESC / Z.<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=VT52RI>VT52RI</a>
     <td  bgcolor="#D0D0D0"><b>VT52 Reverse Index</b>
     <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
@@ -1784,7 +1770,7 @@ The following attributes below have the following meaning:
     <td  colspan=2>
   FIXME. explain<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=VT52SCSF>VT52SCSF</a>
-    <td  bgcolor="#D0D0D0"><b>VT52 Set Character Set</b>
+    <td  bgcolor="#D0D0D0"><b>VT52 Select special graphics character set</b>
     <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
 <tr><td><p></td>
 <tr><td>
@@ -1794,7 +1780,7 @@ The following attributes below have the following meaning:
     <td  colspan=2>
   FIXME. explain<tr><td><p></td></tr>
 <tr><td  bgcolor="#D0D0D0"><a name=VT52SCSG>VT52SCSG</a>
-    <td  bgcolor="#D0D0D0"><b>VT52 Set Character Set</b>
+    <td  bgcolor="#D0D0D0"><b>VT52 Select ASCII character set</b>
     <td  bgcolor="#D0D0D0">Konsole VT52 XTerm VT100 Command
 <tr><td><p></td>
 <tr><td>
@@ -1808,7 +1794,7 @@ The following attributes below have the following meaning:
     <td  bgcolor="#D0D0D0">Konsole XTerm Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2><code> <b>ESC</b> <b>[</b> <b>?</b> <em>Ps</em> <b>...</b> <b>r</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <b>?</b> <em>Ps...</em> <b>r</b></code>
 <tr><td><p></td>
 <tr><td></td>
     <td  colspan=2>
@@ -1818,7 +1804,7 @@ The following attributes below have the following meaning:
     <td  bgcolor="#D0D0D0">Konsole XTerm Command
 <tr><td><p></td>
 <tr><td>
-    <td  colspan=2><code> <b>ESC</b> <b>[</b> <b>?</b> <em>Ps</em> <b>...</b> <b>s</b></code>
+    <td  colspan=2><code> <b>ESC</b> <b>[</b> <b>?</b> <em>Ps...</em> <b>s</b></code>
 <tr><td><p></td>
 <tr><td></td>
     <td  colspan=2>
@@ -2038,26 +2024,6 @@ be obtained in 132 column mode with the Advanced Video Option installed.
 <p>
 
 <h2>References</h2>
-<em>NOTE</em>: ANSI standards may be obtained by writing:
-<center>American National Standards Institute</center>
-<center>Sales Department</center>
-<center>1430 Broadway</center>
-<center>New York, NY, 10018</center>
-<hr>
-<h3>Other Material</h3>
-<a href="nomailto:">Petri Virekoski</a> has posted much of
-this document to <a href="news:comp.terminals">comp.terminals</a>
-in 1993.  It is largely derived from DEC document EK-VT100-UG-003,
-the original manual for the VT100.
-I htmlized and edited his posting in 1998 to provide the
-<code>Konsole</code> program with proper reference material.
-The original author is mentioned here only to honor his work,
-he has nothing to do with <code>Konsole</code>. Do not bother
-him with any questions.
-<p>
-Most so-called VT100 implementations (both stand-alone terminals and
-PC emulators) actually implement more controls than are given here. 
-The minimal standard is really the slightly more advanced VT102 terminal.
 <p>
 <hr>
 <small>

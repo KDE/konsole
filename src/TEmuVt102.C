@@ -275,6 +275,25 @@ void VT102Emulation::tau( int code, int p, int q )
     case TY_CSI_PS('m',   46) : scr->setBackColor         (         6); break;
     case TY_CSI_PS('m',   47) : scr->setBackColor         (         7); break;
     case TY_CSI_PS('m',   49) : scr->setBackColorToDefault(          ); break;
+
+    case TY_CSI_PS('m',   90) : scr->setForeColor         (         8); break;
+    case TY_CSI_PS('m',   91) : scr->setForeColor         (         9); break;
+    case TY_CSI_PS('m',   92) : scr->setForeColor         (        10); break;
+    case TY_CSI_PS('m',   93) : scr->setForeColor         (        11); break;
+    case TY_CSI_PS('m',   94) : scr->setForeColor         (        12); break;
+    case TY_CSI_PS('m',   95) : scr->setForeColor         (        13); break;
+    case TY_CSI_PS('m',   96) : scr->setForeColor         (        14); break;
+    case TY_CSI_PS('m',   97) : scr->setForeColor         (        15); break;
+
+    case TY_CSI_PS('m',  100) : scr->setBackColor         (         8); break;
+    case TY_CSI_PS('m',  101) : scr->setBackColor         (         9); break;
+    case TY_CSI_PS('m',  102) : scr->setBackColor         (        10); break;
+    case TY_CSI_PS('m',  103) : scr->setBackColor         (        11); break;
+    case TY_CSI_PS('m',  104) : scr->setBackColor         (        12); break;
+    case TY_CSI_PS('m',  105) : scr->setBackColor         (        13); break;
+    case TY_CSI_PS('m',  106) : scr->setBackColor         (        14); break;
+    case TY_CSI_PS('m',  107) : scr->setBackColor         (        15); break;
+
     case TY_CSI_PS('n',    5) :      reportStatus         (          ); break;
     case TY_CSI_PS('n',    6) :      reportCursorPosition (          ); break;
     case TY_CSI_PS('q',    0) : /* IGNORED: LEDs off                 */ break; //VT100

@@ -1,7 +1,18 @@
 CONTRIBUTORS
-- Matthias Ettrich <ettrich@kde.org> (rework of the session management
-  and command line argument handling in main.C)
-- Dale M. Flaven <dflaven@netport.com> (bugfixing)
-- Lars Knoll <knoll@mpi-hd.mpg.de> (bugfixing)
-- Peter Silva <peter.silva@videotron.ca> (bugfixing, decent marking)
-- Kevin Street <street@iname.com> (FreeBSD port)
+
+- Warwick Allison <warwick@dyret.troll.no>
+  - 16 color SGR codes (xterm-83)
+  - schema files seeked also in ~/.kde/share/apps/konsole
+  - vim.schema
+- Matthias Ettrich <ettrich@kde.org>
+  - rework of the session management
+  - command line argument handling in main.C
+- Dale M. Flaven <dflaven@netport.com>
+  - bug fixing
+- Lars Knoll <knoll@mpi-hd.mpg.de>
+  - bug fixing
+- Peter Silva <peter.silva@videotron.ca>
+  - bug fixing
+  - decent marking
+- Kevin Street <street@iname.com>
+  - FreeBSD port

@@ -94,8 +94,6 @@ sub head
 {
   if ($html)
   {
-#   print "<html>\n";
-#   print "<body>\n";
     print "<table>\n";
     print "<tr><td width=10%%><td width=50%%><td width=40%%>\n";
   }
@@ -106,8 +104,6 @@ sub tail
   if ($html)
   {
     print "</table>\n";
-#   print "</body>\n";
-#   print "</html>\n";
   }
 }
 
@@ -153,7 +149,7 @@ sub layout
     $_ = $Doku;
     s/</&lt;/g;
     s/>/&gt;/g;
-    s/\\ref:([A-Z]+)/<a href=#$1>$1<\/a>/g;
+    s/\\ref:([A-Z0-9]+)/<a href=#$1>$1<\/a>/g;
     s/\n  \.\n/\n  <p>\n/g;
     print "    <td $color3 colspan=2>\n$_";
   }

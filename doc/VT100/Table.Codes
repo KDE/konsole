@@ -38,21 +38,15 @@ DCH.code ESC [ {Pn} P
 DCH.text
   FIXME. explain
 
-DECANSI.head DEC Private Ansi Mode
-DECANSI.attr Konsole VT100 Command
-DECANSI.code FIXME
-DECANSI.text
-  FIXME. explain
-
 DECRST.head DEC Private Reset Mode
 DECRST.attr Konsole VT100 Command
-DECRST.code ESC [ ? {Ps} ... l
+DECRST.code ESC [ ? {Ps...} l
 DECRST.text
   FIXME. explain
 
 DECSET.head DEC Private Reset Mode
 DECSET.attr Konsole VT100 Command
-DECSET.code ESC [ ? {Ps} ... h 
+DECSET.code ESC [ ? {Ps...} h 
 DECSET.text
   FIXME. explain
 
@@ -106,13 +100,13 @@ VPA.text
 
 XTERESTORE.head XTerm Private Restore Mode
 XTERESTORE.attr Konsole XTerm Command
-XTERESTORE.code ESC [ ? {Ps} ... r
+XTERESTORE.code ESC [ ? {Ps...} r
 XTERESTORE.text
   FIXME. explain
 
 XTESAVE.head XTerm Private Save Mode
 XTESAVE.attr Konsole XTerm Command
-XTESAVE.code ESC [ ? {Ps} ... s
+XTESAVE.code ESC [ ? {Ps...} s
 XTESAVE.text
   FIXME. explain
 
@@ -397,8 +391,8 @@ DECANM.text
   control sequences.  The
   reset state causes only VT52 compatible escape sequences to be
   recognized.  The set state causes only ANSI compatible escape sequences
-  to be recognized.  See the entries for \ref:MODES,
-  \ref:SM, and \ref:RM.
+  to be recognized.  See the entries for \ref:MODES, \ref:SM, \ref:RM
+  and \ref:VT52ANSI.
 
 DECARM.head Auto Repeat Mode
 DECARM.attr VT100 DEC Mode
@@ -406,8 +400,7 @@ DECARM.text
   This is a private parameter to the \ref:SM and \ref:RM
   control sequences.  The
   reset state causes no keyboard keys to auto-repeat, the set state
-  causes most of them to.  See \ref:MODES, \ref:SM,
-  and \ref:RM.
+  causes most of them to.  See \ref:MODES, \ref:SM and \ref:RM.
 
 DECAWM.head Autowrap Mode
 DECAWM.attr VT100 DEC Mode
@@ -764,7 +757,7 @@ NEL.text
 
 PRINT.head Printable Characters
 PRINT.attr ECMA VT100 Command
-PRINT.code 0x20..0x7e,0x80..0xff
+PRINT.code 0x20..0x7e,0xa0..0xff
 PRINT.text
   Printable characters are basically displayed. They my cause a line
   wrap when the cursor is already located at the end of the line.
@@ -789,7 +782,7 @@ RIS.text
 
 RM.head Reset Mode
 RM.attr VT100 ANSI Command
-RM.code ESC [ {Ps} ; ... l
+RM.code ESC [ {Ps...} l
 RM.text
   Resets one or more VT100 modes as specified by each selective parameter
   in the parameter string.  Each mode to be reset is specified by a
@@ -821,7 +814,7 @@ SCS.table.Cs
 
 SGR.head Select Graphic Rendition
 SGR.attr VT100 ANSI Command
-SGR.code ESC [ {Ps} ; ... m
+SGR.code ESC [ {Ps...} m
 SGR.text
   Invoke the graphic rendition specified by the parameter(s).  All
   following characters transmitted to the VT100 are rendered according
@@ -842,7 +835,7 @@ SGR.table.Ps
 
 SM.head Set Mode
 SM.attr VT100 ANSI Command
-SM.code ESC [ {Ps} ; ... h
+SM.code ESC [ {Ps...} h
 SM.text
   Causes one or more modes to be set within the VT100 as specified by
   each selective parameter string.  Each mode to be set is specified by a
@@ -864,41 +857,45 @@ TBC.text
 #                                                                            #
 ##############################################################################
 
-VT52ANSI.head VT52 Ansi Mode
+VT52ANSI.head VT52 ANSI Ansi Mode
 VT52ANSI.attr Konsole VT100 XTerm Command
 VT52ANSI.code ESC <
 VT52ANSI.text
-  FIXME. explain
+  This is an extention to the VT52 commands to embed the emulation into VT100.
+  It allows to return back to VT100 emulation (ANSI mode).
+  See also \ref:DECANM and \ref:SM.
 
 VT52CUB.head VT52 Cursor Back
 VT52CUB.attr Konsole VT52 XTerm VT100 Command
 VT52CUB.code ESC D
 VT52CUB.text
-  FIXME. explain
+  See \ref:CUB.
 
 VT52CUD.head VT52 Cursor Down
 VT52CUD.attr Konsole VT52 XTerm VT100 Command
 VT52CUD.code ESC B
 VT52CUD.text
-  FIXME. explain
+  See \ref:CUD.
 
 VT52CUF.head VT52 Cursor Forward
 VT52CUF.attr Konsole VT52 XTerm VT100 Command
 VT52CUF.code ESC C
 VT52CUF.text
-  FIXME. explain
+  See \ref:CUF.
 
 VT52CUP.head VT52 Cursor Position
 VT52CUP.attr Konsole VT52 XTerm VT100 Command
-VT52CUP.code ESC {X} {Y}
+VT52CUP.code ESC Y {X} {Y}
 VT52CUP.text
-  FIXME. explain
+  Line and column numbers for direct cursor address are single
+  character codes whose values are the desired number plus
+  37 (in Octal). Line and column numbers start at 1.
 
 VT52CUU.head VT52 Cursor Up
 VT52CUU.attr Konsole VT52 XTerm VT100 Command
-VT52CUU.code A
+VT52CUU.code ESC A
 VT52CUU.text
-  FIXME. explain
+  See \ref:CUU.
 
 VT52EDL.head VT52 Clear To End Of Line
 VT52EDL.attr Konsole VT52 XTerm VT100 Command
@@ -918,13 +915,13 @@ VT52CUH.code ESC H
 VT52CUH.text
   FIXME. explain
 
-VT52KPAM.head VT52 Keyboard Application Mode
+VT52KPAM.head VT52 Enter alternate keypad mode
 VT52KPAM.attr Konsole VT52 XTerm VT100 Command
 VT52KPAM.code ESC =
 VT52KPAM.text
   FIXME. explain
 
-VT52KPNM.head VT52 Keyboard Numeric Mode
+VT52KPNM.head VT52 Exit alternate keypad mode
 VT52KPNM.attr Konsole VT52 XTerm VT100 Command
 VT52KPNM.code ESC >
 VT52KPNM.text
@@ -934,7 +931,7 @@ VT52REP.head VT52 Report Terminal Type
 VT52REP.attr Konsole VT52 XTerm VT100 Command
 VT52REP.code ESC Z
 VT52REP.text
-  FIXME. explain
+  Response to ESC Z is ESC / Z.
 
 VT52RI.head VT52 Reverse Index
 VT52RI.attr Konsole VT52 XTerm VT100 Command
@@ -942,14 +939,15 @@ VT52RI.code ESC I
 VT52RI.text
   FIXME. explain
 
-VT52SCSF.head VT52 Set Character Set
+VT52SCSF.head VT52 Select special graphics character set
 VT52SCSF.attr Konsole VT52 XTerm VT100 Command
 VT52SCSF.code ESC F
 VT52SCSF.text
   FIXME. explain
 
-VT52SCSG.head VT52 Set Character Set
+VT52SCSG.head VT52 Select ASCII character set
 VT52SCSG.attr Konsole VT52 XTerm VT100 Command
 VT52SCSG.code ESC G
 VT52SCSG.text
   FIXME. explain
+VT52 Compatible Mode

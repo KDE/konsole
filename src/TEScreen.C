@@ -1071,7 +1071,7 @@ void TEScreen::setDefaultRendition()
 
 void TEScreen::setForeColor(int fgcolor)
 {
-  cu_fg = 2+(fgcolor&7);
+  cu_fg = (fgcolor&7)+((fgcolor&8) ? 4+8 : 2);
   effectiveRendition();
 }
 
@@ -1080,7 +1080,7 @@ void TEScreen::setForeColor(int fgcolor)
 
 void TEScreen::setBackColor(int bgcolor)
 {
-  cu_bg = 2+(bgcolor&7);
+  cu_bg = (bgcolor&7)+((bgcolor&8) ? 4+8 : 2);
   effectiveRendition();
 }
 

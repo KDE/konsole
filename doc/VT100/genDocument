@@ -40,11 +40,11 @@ cat >> $RES << etx
 
 <h2>Preface</h2>
 
-This document accompanies the Konsole and Kom programs, which are mainly terminal
-emulations.  Since material about the extend and precise semantics of the emulatation
-intended by these programs is hard to find on the internet today, it came out
-nessesary to include a more precise specification within their release.
-<p>
+This document accompanies the Konsole program, which is a terminal emulation
+for the X Windows System.  Since material about the extend and precise semantics
+of the emulatation intended to be handled by this programs is hard to find on the
+internet today, it came out nessesary to include a more precise specification within
+their release.
 Hopefully, this helps to clearify the relation to the VT100, VT102, Linux, XTerm
 and ansi.sys (ANSI-BBS) terminals, which are the target of these programs. Further,
 it specifies which codes are interpreted by them, and what has been omitted.
@@ -58,16 +58,9 @@ with some additions. MS stepped in later and produced another ANSI emulation,
 <code>ansi.sys</code>, for their OS, which became of some relevance in BBS style
 telecommunication programs. One can view this as a small subset of the VT100 
 emulation, with some additions, of cause.
-<p>
 This situation is further confused by the fact, that often many versions of the
 above terminals and emulations are out, one able to do a little more or less then
-the other. Especially the later makes the production of an emulation a difficult
-task.
-<p>
-This document contains the material collected and
-attempts to describe not only the abilities of konsole, but also to give a
-full reference of the emulations that konsole is capable of, but does
-eventually not implement completely.
+the other.
 <p>
 Currently, the body of this document is mainly a concept data base, that
 referes to the VT100 component of the emulation. Any indication whether
@@ -494,30 +487,6 @@ be obtained in 132 column mode with the Advanced Video Option installed.
 <p>
 
 <h2>References</h2>
-<em>NOTE</em>: ANSI standards may be obtained by writing:
-<center>American National Standards Institute</center>
-<center>Sales Department</center>
-<center>1430 Broadway</center>
-<center>New York, NY, 10018</center>
-etx
-
-
-cat >> $RES << etx
-<hr>
-<h3>Other Material</h3>
-<a href="nomailto:">Petri Virekoski</a> has posted much of
-this document to <a href="news:comp.terminals">comp.terminals</a>
-in 1993.  It is largely derived from DEC document EK-VT100-UG-003,
-the original manual for the VT100.
-I htmlized and edited his posting in 1998 to provide the
-<code>Konsole</code> program with proper reference material.
-The original author is mentioned here only to honor his work,
-he has nothing to do with <code>Konsole</code>. Do not bother
-him with any questions.
-<p>
-Most so-called VT100 implementations (both stand-alone terminals and
-PC emulators) actually implement more controls than are given here. 
-The minimal standard is really the slightly more advanced VT102 terminal.
 <p>
 <hr>
 <small>
