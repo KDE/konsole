@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <qdir.h>
 #include <qtextstream.h>
 
 #include <kbookmarkimporter.h>
@@ -54,6 +55,20 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel 
 QString KonsoleBookmarkHandler::currentURL() const
 {
     return m_konsole->baseURL().prettyURL();
+}
+
+QString KonsoleBookmarkHandler::currentTitle() const
+{
+    const KURL &u = m_konsole->baseURL();
+    if (u.isLocalFile())
+    {
+       QString path = u.path();
+       QString home = QDir::homeDirPath();
+       if (path.startsWith(home))
+          path.replace(0, home.length(), "~");
+       return path;
+    }
+    return u.prettyURL();
 }
 
 void KonsoleBookmarkHandler::importOldBookmarks( const QString& path,
