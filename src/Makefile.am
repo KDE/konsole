@@ -20,6 +20,7 @@ INCLUDES =  -I$(INCDIR) $(all_includes)
 
 # you can add here more. This one gets installed
 bin_PROGRAMS = 	konsole konsole_grantpty kwrited #kcmkonsole
+lib_LTLIBRARIES = kwrited.la
 
 noinst_LTLIBRARIES = libkonsole.la
 
@@ -28,8 +29,12 @@ libkonsole_la_SOURCES = TEWidget.C TEmuVt102.C TEScreen.C TEmulation.C TEPty.C T
 
 # Which sources should be compiled for konsole.
 
-kwrited_SOURCES	= kwrited.C
-kwrited_LDADD   = libkonsole.la $(LIB_KIMGIO) $(LIB_KDEUI) $(LIBUTEMPTER)
+kwrited_la_SOURCES	= kwrited.C
+kwrited_la_LIBADD   = libkonsole.la $(LIB_KIMGIO) $(LIB_KDEUI) $(LIBUTEMPTER)
+kwrited_la_LDFLAGS = $(all_libraries) -module -avoid-version
+
+kwrited_SOURCES	= dummy.C
+kwrited_LDADD   = kwrited.la 
 kwrited_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 konsole_SOURCES	= main.C schema.C session.C krootpixmap.cpp
