@@ -9,7 +9,7 @@ konsole_other_data_DATA = BlackOnLightColor.schema BlackOnLightYellow.schema Bla
   Transparent_lightbg.schema \
   Transparent_darkbg.schema \
   linux.desktop mc.desktop shell.desktop su.desktop sumc.desktop \
-  linux.keytab vt100.keytab vt420pc.keytab x11r5.keytab \
+  linux.keytab vt100.keytab vt420pc.keytab x11r5.keytab solaris.keytab \
   README.Schema README.KeyTab README.default.Keytab screen.desktop
 
 profiledir = $(kde_datadir)/konsole/profiles
