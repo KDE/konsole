@@ -5,6 +5,9 @@ datadir = $(kde_appsdir)/System
 
 kde_services_DATA = konsolepart.desktop
 
+update_DATA = konsole.upd
+updatedir = $(kde_datadir)/kconf_update
+
 autostart_DATA = kwrited.desktop
 autostartdir = $(prefix)/share/autostart
 
