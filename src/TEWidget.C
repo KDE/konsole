@@ -66,6 +66,7 @@
 #include <kurl.h>
 #include <kdebug.h>
 #include <klocale.h>
+#include <knotifyclient.h>
 
 #define HERE printf("%s(%d): %s\n",__FILE__,__LINE__,__FUNCTION__)
 #define HCNT(Name) // { static int cnt = 1; printf("%s(%d): %s %d\n",__FILE__,__LINE__,Name,cnt++); }
@@ -973,7 +974,7 @@ void TEWidget::frameChanged()
 
 void TEWidget::Bell()
 {
-  QApplication::beep();
+  KNotifyClient::beep();
 }
 
 /* ------------------------------------------------------------------------- */

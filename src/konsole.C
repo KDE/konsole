@@ -691,8 +691,10 @@ void Konsole::slotSelectFont() {
   // kdDebug() << "slotSelectFont " << item << endl;
   if (item == 8) // this is the default
   {
-    KFontDialog::getFont(defaultFont, true);
-    item = 0;
+    if ( KFontDialog::getFont(defaultFont, true) == QDialog::Accepted )
+      item = 0;
+    else
+      return;
   }
   setFont(item);
   activateSession(); // activates the current
