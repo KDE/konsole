@@ -1105,10 +1105,8 @@ void Konsole::makeBasicGUI()
   new KAction(i18n("Go to Next Session"), QApplication::reverseLayout() ? Qt::SHIFT+Qt::Key_Left : Qt::SHIFT+Qt::Key_Right,
               this, SLOT(nextSession()), m_shortcuts, "next_session");
 
-  char actionname[20];
-  for (int i=1;i<13;i++) {
-     sprintf(actionname,"switch_to_session_%02d", i);
-     new KAction(i18n("Switch to Session %1").arg(i), 0, this, SLOT(switchToSession()), m_shortcuts, actionname);
+  for (int i=1;i<13;i++) { // Due to 12 function keys?
+     new KAction(i18n("Switch to Session %1").arg(i), 0, this, SLOT(switchToSession()), m_shortcuts, QString().sprintf("switch_to_session_%02d", i).latin1());
   }
 
   new KAction(i18n("Bigger Font"), 0, this, SLOT(biggerFont()), m_shortcuts, "bigger_font");
