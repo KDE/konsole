@@ -1610,6 +1610,7 @@ void Konsole::switchToTabWidget()
   }
   delete se_widget;
   setCentralWidget(tabwidget);
+  tabwidget->showPage(se->widget());
   tabwidget->show();
 }
 
@@ -1638,10 +1639,11 @@ void Konsole::switchToFlat()
   }
   setSchema(se->schemaNo());
 
-  if (rootxpms[se_widget]) {
-    delete rootxpms[se_widget];
-    rootxpms.remove(se_widget);
-  }
+  for (int i=0;i<tabwidget->count();i++)
+    if (rootxpms[tabwidget->page(i)]) {
+      delete rootxpms[tabwidget->page(i)];
+      rootxpms.remove(tabwidget->page(i));
+    }
   delete tabwidget;
   tabwidget = 0L;
 }
@@ -1660,6 +1662,9 @@ void Konsole::slotSelectTabbar() {
       tabwidget->setTabPosition(QTabWidget::Top);
     else
       tabwidget->setTabPosition(QTabWidget::Bottom);
+    QPtrDictIterator<KRootPixmap> it(rootxpms);
+    for (;it.current();++it)
+      it.current()->repaint(true);
   }
   else if (tabwidget)
     switchToFlat();
