@@ -615,6 +615,6 @@ int ColorSchemaList::compareItems(QPtrCollection::Item item1, QPtrCollection::It
    ColorSchema* schema1=(ColorSchema*)item1;
    ColorSchema* schema2=(ColorSchema*)item2;
    return -1*QString::compare(schema1->title(),schema2->title());
-};
+}
 
 

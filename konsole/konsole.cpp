@@ -708,7 +708,7 @@ void Konsole::makeGUI()
    new KAction(i18n("Smaller Font"), 0, this, SLOT(smallerFont()), m_shortcuts, "smaller_font");
 
    m_shortcuts->readShortcutSettings();
-};
+}
 
 void Konsole::makeBasicGUI()
 {
@@ -855,7 +855,7 @@ void Konsole::makeBasicGUI()
   new KAction(i18n("List Sessions"), 0, this, SLOT(listSessions()), m_shortcuts, "list_sessions");
 
   m_shortcuts->readShortcutSettings();
-};
+}
 
 /**
    Make menubar available via escape sequence (Default: Ctrl+Alt+m)
@@ -1183,7 +1183,7 @@ void Konsole::applySettingsToGUI()
       selectBell->setCurrentItem(n_bell);
    }
    updateKeytabMenu();
-};
+}
 
 
 /* ------------------------------------------------------------------------- */
