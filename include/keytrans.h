@@ -32,6 +32,8 @@
 #define CMD_scrollPageDown 3
 #define CMD_scrollLineUp   4
 #define CMD_scrollLineDown 5
+#define CMD_prevSession    6
+#define CMD_nextSession    7
 
 #define BITS(x,v) ((((v)!=0)<<(x)))
 

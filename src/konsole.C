@@ -230,7 +230,7 @@ void Konsole::makeMenu()
 {
   // options (taken from kvt) //////////////////////////////////////
 
-  KAction *newsession = KStdAction::openNew(this, SLOT(newDefaultSession()));
+  KAction *newsession = KStdAction::openNew(this, SLOT(newSessionSelect()));
   newsession->plug(toolBar());
   toolBar()->insertLineSeparator();
 
@@ -841,12 +841,9 @@ void Konsole::activateSession()
   keytab_menu_activated(n_keytab); // act. the keytab for this session
 }
 
-void Konsole::newDefaultSession()
+void Konsole::newSessionSelect()
 {
-  // (Lotzi says) for some funny reason, this is the third in the list
-  // (Lars says)  it's random, really. The list is read in, and should
-  //              best be presented.
-  newSession(3);
+  m_file->popup(te->mapToGlobal(QPoint(0,te->height()-m_file->sizeHint().height())));
 }
 
 void Konsole::newSession(int i)

@@ -434,6 +434,8 @@ void KeyTransSymbols::defOprSyms()
   defOprSym("scrollPageUp",  CMD_scrollPageUp  );
   defOprSym("scrollPageDown",CMD_scrollPageDown);
   defOprSym("emitSelection", CMD_emitSelection );
+  defOprSym("prevSession",   CMD_prevSession   );
+  defOprSym("nextSession",   CMD_nextSession   );
 }
 
 void KeyTransSymbols::defModSyms()

@@ -33,6 +33,14 @@
    The implementation provides arbitrary length and numbers
    of cells and line/column indexed read access to the scroll
    at constant costs.
+
+FIXME: some complain about the history buffer comsuming the
+       memory of their machines. Fulfilled need busily spawn
+       children ... sigh.
+
+       Note that wrapping a scroll like this one is not
+       precisely simple, but we'll meditate on it...
+
 */
 
 
