@@ -1,3 +1,13 @@
+20 Dec 2000
+- Made ColorSchema a class instead of a struct.
+- Added hasSchemaFileChanged() to detect changed .schema files if needed.
+- Added checks for new schema files when accessing the schema menu.
+- When schema files are removed the corresponding schemas are removed too.
+- Fixed some i18n problems in schema.C.
+- Laid groundwork for switch to KConfig (from schema files).
+- Check for new schema's every time the schema menu is accessed. I realise
+  this may be resource intensive on some people's machines. Maybe we need
+  a little timeout mechanism to prevent checks all too often.
 20 Sep 2000
 - made resizing more content preservative
 11 Sep 2000

@@ -109,7 +109,7 @@ Time to start a requirement list.
 #include "keytrans.h"
 
 
-#define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
+#define KONSOLEDEBUG	kdDebug(1211)
 
 
 class KonsoleFontSelectAction : public KSelectAction {
@@ -196,13 +196,9 @@ Konsole::Konsole(const char* name,
   // load schema /////////////////////////////////////////////////////////////
 
   curr_schema = 0;
-  ColorSchema::loadAllSchemas();
-  //FIXME: sort
-  for (int i = 0; i < ColorSchema::count(); i++)
-  { ColorSchema* s = ColorSchema::find(i);
-    assert( s );
-    m_schema->insertItem(s->title,s->numb);
-  }
+  colors = new ColorSchemaList();
+  colors->checkSchemas();
+  updateSchemaMenu();
 
   // load keymaps ////////////////////////////////////////////////////////////
 
@@ -266,6 +262,9 @@ Konsole::~Konsole()
     if (sessions.find(se) == -1)
        delete se;
     sessions.setAutoDelete(true);
+
+    delete colors;
+    colors=0;
 }
 
 /* ------------------------------------------------------------------------- */
@@ -309,6 +308,7 @@ void Konsole::makeMenu()
   m_schema = new KPopupMenu(this);
   m_schema->setCheckable(TRUE);
   connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
+  connect(m_schema, SIGNAL(aboutToShow()), SLOT(schema_menu_check()));
 
   m_keytab = new KPopupMenu(this);
   m_keytab->setCheckable(TRUE);
@@ -549,11 +549,14 @@ void Konsole::readProperties(KConfig* config)
   if (s)
   {
     s->setFontNo(n_font);
-    s->setSchemaNo(ColorSchema::find(s_schema)->numb);
+    s->setSchemaNo(colors->findAny(s_schema)->numb);
     s->setHistory(b_scroll);
   }
   else
-  { fprintf(stderr,"session 1 not found\n"); } // oops
+  { 
+    kdError() << "Session 1 not found"
+    	<< endl;
+  } // oops
 
 }
 
@@ -630,8 +633,42 @@ void Konsole::schema_menu_activated(int item)
 {
   assert(se);
   //FIXME: save schema name
+	KONSOLEDEBUG << "Item " << item << " selected from schema menu"
+		<< endl;
   setSchema(item);
   activateSession(); // activates the current
+}
+
+/* slot */ void Konsole::schema_menu_check()
+{
+	if (colors->checkSchemas())
+	{
+		updateSchemaMenu();
+	}
+}
+
+void Konsole::updateSchemaMenu()
+{
+	KONSOLEDEBUG << "Updating schema menu with "
+		<< colors->count()
+		<< " items."
+		<< endl;
+
+  m_schema->clear();
+  for (int i = 0; i < (int) colors->count(); i++)
+  { const ColorSchema* s = colors->at(i);
+    assert( s );
+    m_schema->insertItem(s->title,s->numb,0);
+  }
+
+  if (te && te->currentSession)
+  {
+  	KONSOLEDEBUG << "Current session has schema "
+		<< te->currentSession->schemaNo()
+		<< endl;
+  	m_schema->setItemChecked(te->currentSession->schemaNo(),true);
+  }
+
 }
 
 void Konsole::keytab_menu_activated(int item)
@@ -904,10 +941,12 @@ void Konsole::activateSession(TESession *s)
     setSchema(s->schemaNo());
   } else  {
     // the schema was not changed
-    ColorSchema* schema = ColorSchema::find(s->schemaNo());
-    if (schema->usetransparency) {
+#if 0
+    ColorSchema* schema = colors->find(s->schemaNo());
+    if (schema && (schema->usetransparency)) {
 	rootxpm->repaint(true); // this is a must, otherwise you loose the bg.
     }
+#endif
   }
   te->currentSession = se;
   if (s->fontNo() != n_font)
@@ -973,7 +1012,7 @@ void Konsole::newSession(int i)
 
   ColorSchema* schema = sch.isEmpty()
                       ? (ColorSchema*)NULL
-                      : ColorSchema::find(sch);
+                      : colors->find(sch);
 
   //FIXME: schema names here are absolut. Wrt. loadAllSchemas,
   //       relative pathes should be allowed, too.
@@ -1117,33 +1156,66 @@ void Konsole::loadSessionCommands()
 
 void Konsole::setSchema(int numb)
 {
-  ColorSchema* s = ColorSchema::find(numb);
+  const ColorSchema* s = colors->find(numb);
+  if (!s)
+  {
+        kdWarning() << "No schema found. Using default." << endl;
+  	s=colors->at(0);
+  }
+  if (s->numb != numb)
+  {
+  	kdWarning() << "No schema with number " << numb << endl;
+  }
+
+  if (s->hasSchemaFileChanged())
+  {
+	const_cast<ColorSchema *>(s)->rereadSchemaFile();
+  }
   if (s) setSchema(s);
 }
 
 void Konsole::setSchema(const QString & path)
 {
-  ColorSchema* s = ColorSchema::find(path);
+  const ColorSchema* s = colors->find(path);
+  if (!s)
+  {
+  	kdWarning() << "Could not find schema named " << path << endl;
+  	s=colors->at(0);
+  }
+  if (s->hasSchemaFileChanged())
+  {
+  	const_cast<ColorSchema *>(s)->rereadSchemaFile();
+  }
   if (s) setSchema(s);
 }
 
 void Konsole::setSchema(const ColorSchema* s)
 {
   if (!s) return;
+
+	KONSOLEDEBUG << "Checking menu items" << endl;
+
   m_schema->setItemChecked(curr_schema,FALSE);
   m_schema->setItemChecked(s->numb,TRUE);
-  s_schema = s->path;
+	KONSOLEDEBUG << "Remembering schema data" << endl;
+
+  s_schema = s->path();
   curr_schema = s->numb;
   pmPath = s->imagepath;
   te->setColorTable(s->table); //FIXME: set twice here to work around a bug
 
   if (s->usetransparency) {
+	KONSOLEDEBUG << "Setting up transparency" << endl;
     rootxpm->setFadeEffect(s->tr_x, QColor(s->tr_r, s->tr_g, s->tr_b));
     rootxpm->start();
+    rootxpm->repaint(true);
   } else {
+	KONSOLEDEBUG << "Stopping transparency" << endl;
     rootxpm->stop();
     pixmap_menu_activated(s->alignment);
   }
+
+	KONSOLEDEBUG << "Doing the rest" << endl;
 
   te->setColorTable(s->table);
   if (se) se->setSchemaNo(s->numb);
