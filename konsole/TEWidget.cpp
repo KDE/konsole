@@ -472,7 +472,7 @@ enum LineEncode
     
     BotL  = (1<<21),
     BotC  = (1<<22),
-    BotR  = (1<<23),
+    BotR  = (1<<23)
 };
 
 #include "linefont.h"
