@@ -5,9 +5,11 @@ Comment[be]=Кансоля
 
 [BellVisible]
 Name=Bell in visible session
+Name[es]=Timbre en sesión visible
 Name[hu]=Csengetés egy látható munkafolyamatban
 Name[sv]=Ljudsignal i synlig session
 Comment=Bell emitted within a visible session
+Comment[es]=Suena el timbre incluso en un sesión visible
 Comment[hu]=Csengetés egy látható munkafolyamatban
 Comment[sv]=Ljudsignal inne i en synlig session
 default_sound=KDE_Beep_Beep.wav
@@ -15,9 +17,11 @@ default_presentation=1
 
 [BellInvisible]
 Name=Bell in invisible session
+Name[es]=Timbre en sesión invisible
 Name[hu]=Csengetés egy nem látható munkafolyamatban
 Name[sv]=Ljudsignal i osynlig session
 Comment=Bell emitted within an invisible session
+Comment[es]=Suena el timbre en una sesión invisible
 Comment[hu]=Csengetés egy nem látható munkafolyamatban
 Comment[sv]=Ljudsignal inne i en osynlig session
 default_sound=KDE_Beep_Beep.wav
@@ -25,27 +29,33 @@ default_presentation=16
 
 [Activity]
 Name=Activity in monitored session
+Name[es]=Actividad en sesión monitorizada
 Name[hu]=Aktivitás egy monitorozott munkafolyamatban
 Name[sv]=Aktivitet i bevakad session
 Comment=Activity detected in a monitored session
+Comment[es]=Detectada actividad en una sesión monitorizada
 Comment[hu]=Aktivitás észlelve egy monitorozott munkafolyamatban
 Comment[sv]=Aktivitet funnen i en bevakad session
 default_presentation=16
 
 [Silence]
 Name=Silence in monitored session
+Name[es]=Silencio en sesión monitorizada
 Name[hu]=Üresjárat egy monitorozott munkafolyamatban
 Name[sv]=Tystnad i bevakad session
 Comment=Silence detected in a monitored session
+Comment[es]=Silencio detectado en una sesión monitorizada
 Comment[hu]=Üresjárat észlelve egy monitorozott munkafolyamatban
 Comment[sv]=Tystnad funnen i en bevakad session
 default_presentation=16
 
 [Finished]
 Name=Session finished
+Name[es]=Sesión terminada
 Name[hu]=Egy munkafolyamat befejeződött
 Name[sv]=Sessionen klar
 Comment=A running session has exited.
+Comment[es]=Ha terminado una sesión en ejecución.
 Comment[hu]=Egy munkafolyamat futása befejeződött.
 Comment[sv]=Ett session som kör har avslutats.
 default_presentation=16
