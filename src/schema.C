@@ -450,17 +450,19 @@ ColorSchemaList::~ColorSchemaList()
 }
 
 
-
+//now it works also if you give only the filename without path
 ColorSchema *ColorSchemaList::find(const QString& path)
 {
 	KONSOLEDEBUG << "Looking for schema " << path << endl;
    kdDebug()<<"ColorSchema::find() count()=="<<count()<<endl;
 	ColorSchemaListIterator it(*this);
 	ColorSchema *c;
+   bool pathIsOnlyFileName=(!path.contains("/"));
 
 	while ((c=it.current()))
 	{
-		if ((*it)->path() == path) return *it;
+      if ((pathIsOnlyFileName) && ((*it)->path().contains(path))) return *it;
+      else if ((*it)->path() == path) return *it;
 		++it;
 	}
 

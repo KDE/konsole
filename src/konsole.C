@@ -226,7 +226,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
 
   KeyTrans::loadAll();
 
-  kdDebug()<<"Konsole ctor(): new TESession()"<<endl;
+  //kdDebug()<<"Konsole ctor(): new TESession()"<<endl;
   m_initialSession = new TESession(this,te,pgm,args,"xterm");
 
   connect( m_initialSession,SIGNAL(done(TESession*,int)),
@@ -255,15 +255,15 @@ Konsole::Konsole(const char* name, const char* _pgm,
   if (currentSize != size())
      defaultSize = size();
   config->setGroup("options");
-  kdDebug()<<"Konsole ctor(): readProps()"<<endl;
+  //kdDebug()<<"Konsole ctor(): readProps()"<<endl;
   readProperties(config);
-  kdDebug()<<"Konsole ctor(): toolbar"<<endl;
+  //kdDebug()<<"Konsole ctor(): toolbar"<<endl;
   if (!toolbaron)
     toolBar()->hide();
 
   // activate and run first session //////////////////////////////////////////
 
-  kdDebug()<<"Konsole ctor(): runSession()"<<endl;
+  //kdDebug()<<"Konsole ctor(): runSession()"<<endl;
   te->currentSession = se;
   se->setConnect(TRUE);
   title = se->Title(); // take title from current session
@@ -278,7 +278,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
   connect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
   connect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
 
-  kdDebug()<<"Konsole ctor(): done"<<endl;
+  //kdDebug()<<"Konsole ctor(): done"<<endl;
 }
 
 Konsole::~Konsole()
@@ -300,7 +300,7 @@ Konsole::~Konsole()
 void Konsole::makeGUI()
 {
    if (m_menuCreated) return;
-   kdDebug()<<"Konsole::makeGUI()"<<endl;
+   //kdDebug()<<"Konsole::makeGUI()"<<endl;
    m_menuCreated=true;
 
    // Send Signal Menu -------------------------------------------------------------
@@ -464,12 +464,12 @@ void Konsole::makeGUI()
 
    delete colors;
    colors = new ColorSchemaList();
-   kdDebug()<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
-   kdDebug()<<"Konsole::makeGUI(): checkSchemas()"<<endl;
+   //kdDebug()<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
+   //kdDebug()<<"Konsole::makeGUI(): checkSchemas()"<<endl;
    colors->checkSchemas();
-   kdDebug()<<"Konsole::makeGUI() updateSchemas()"<<endl;
+   //kdDebug()<<"Konsole::makeGUI() updateSchemas()"<<endl;
    updateSchemaMenu();
-   kdDebug()<<"Konsole::makeGUI(): updateSchemas done"<<endl;
+   //kdDebug()<<"Konsole::makeGUI(): updateSchemas done"<<endl;
    ColorSchema *sch=colors->find(s_schema);
    curr_schema=sch->numb();
    kdDebug()<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
@@ -489,7 +489,7 @@ void Konsole::makeGUI()
 
 void Konsole::makeBasicGUI()
 {
-   kdDebug()<<"Konsole::makeBasicGUI()"<<endl;
+   //kdDebug()<<"Konsole::makeBasicGUI()"<<endl;
    KToolBarPopupAction *newsession = new KToolBarPopupAction(i18n("&New"), "filenew",
                 0 , this, SLOT(newSession()),this, KStdAction::stdName(KStdAction::New));
   newsession->plug(toolBar());
@@ -1201,7 +1201,7 @@ void Konsole::newSession()
 
 void Konsole::newSession(int i)
 {
-   kdDebug()<<"Konsole::newSession()"<<endl;
+   //kdDebug()<<"Konsole::newSession()"<<endl;
    if (!m_menuCreated) makeGUI();
   const char* shell = getenv("SHELL");
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
@@ -1215,21 +1215,18 @@ void Konsole::newSession(int i)
   QString nam = co->readEntry("Name");    // not null
   QCString emu = co->readEntry("Term").ascii();
   QString sch = co->readEntry("Schema");
-  kdDebug()<<"Konsole::newSession() schema: -"<<sch<<"-"<<endl;
+  //kdDebug()<<"Konsole::newSession() schema: -"<<sch<<"-"<<endl;
   QString txt = co->readEntry("Comment"); // not null
   int     fno = QMIN(co->readUnsignedNumEntry("Font",se->fontNo()),TOPFONT);
-  kdDebug()<<"Konsole::newSession() config: "<<co->readUnsignedNumEntry("Font")<<" se->font: "<<se->fontNo()<<" TOP: "<<TOPFONT<<endl;
+  //kdDebug()<<"Konsole::newSession() config: "<<co->readUnsignedNumEntry("Font")<<" se->font: "<<se->fontNo()<<" TOP: "<<TOPFONT<<endl;
 
   ColorSchema* schema = sch.isEmpty()
                       ? (ColorSchema*)NULL
                       : colors->find(sch);
 
-  //FIXME: schema names here are absolut. Wrt. loadAllSchemas,
-  //       relative pathes should be allowed, too.
-
   int schmno = schema? schema->numb() :se->schemaNo();
 
-  kdDebug()<<"Konsole::newSession() schema number: "<<schmno<<endl;
+  //kdDebug()<<"Konsole::newSession() schema number: "<<schmno<<endl;
 
   if (emu.isEmpty()) emu = se->emuName();
 
