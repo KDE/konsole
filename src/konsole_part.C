@@ -46,7 +46,7 @@ extern "C"
    * the form 'void *init_lib<library name>()  It always returns a
    * new factory object
    */
-  void *init_libkonsole()
+  void *init_libkonsolepart()
   {
       printf(" \n\n\nKonsole in actions!!! \n\n\n");
     return new konsoleFactory;
@@ -70,7 +70,7 @@ konsoleFactory::~konsoleFactory()
 
   if ( s_aboutData )
     delete s_aboutData;
-  
+
   s_instance = 0;
   s_aboutData = 0;
 }
