@@ -988,6 +988,7 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
   int hY = sel_TL / columns;
   int hX = sel_TL % columns;
   int eol;			// end of line
+  int lines = 0;
 
   s = sel_TL;			// tracks copy in source.
 
@@ -1055,6 +1056,7 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
 	  hY++;
 	  hX = 0;
 	  s = hY * columns;
+          lines++;
 	}
     else
       {				// or from screen image.
@@ -1097,8 +1099,15 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
 	  }
 
 	s = (eol / columns + 1) * columns;
+        lines++;
       }
     }
+
+  if (lines > 1)
+  {
+     // Strip trailing spaces if more than one line selected.
+     while ((d>0) && isspace(m[d-1])) d--;
+  }
 
   QChar* qc = new QChar[d];
 
