@@ -34,7 +34,7 @@ class TEDemo : public KTMainWindow
 
 public:
 
-  TEDemo(QStrList & _args, int login_shell);
+  TEDemo(char* name, QStrList & _args, int login_shell);
   ~TEDemo();
   void setColLin(int columns, int lines);
 

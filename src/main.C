@@ -93,7 +93,7 @@ static int session_no = 0;
 static QIntDict<KSimpleConfig> no2command;
 static int cmd_serial = 0;
 
-TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
+TEDemo::TEDemo(char* name, QStrList & _args, int login_shell) : KTMainWindow(name), args(_args)
 {
   se = 0L;
   menubar = menuBar();
@@ -877,6 +877,7 @@ static void usage()
    "%s version %s, an X terminal for KDE.\n"
    "\n"
    " -e Command Parameter ... Execute command instead of shell\n"
+   " -name .................. Set Window Class\n"
    " -h ..................... This text\n"
    " -ls .................... Start login shell\n"
    " -nowelcome ............. Suppress greeting\n"
@@ -903,6 +904,7 @@ int main(int argc, char* argv[])
   int login_shell=0;
   int welcome=1;
   char* shell = getenv("SHELL");
+  char* wname = PACKAGE;
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
 
   QString sz = "";
@@ -929,6 +931,7 @@ int main(int argc, char* argv[])
       QString a(argv[++i]);
       maxHistLines = a.toInt();
     }
+    if (!strcmp(argv[i],"-name") && i+1 < argc) wname = argv[++i];
     if (!strcmp(argv[i],"-ls") ) login_shell=1;
     if (!strcmp(argv[i],"-nowelcome")) welcome=0;
     if (!strcmp(argv[i],"-h")) { usage(); exit(0); }
@@ -953,11 +956,12 @@ int main(int argc, char* argv[])
     KConfig * sessionconfig = a.getSessionConfig();
     sessionconfig->setGroup("options");
     sessionconfig->readListEntry("konsolearguments", eargs);
-    RESTORE( TEDemo(eargs,login_shell) )
+    wname = sessionconfig->readEntry("class",wname).data();
+    RESTORE( TEDemo(wname,eargs,login_shell) )
   }
   else
   {  
-    TEDemo*  m = new TEDemo(eargs,login_shell);
+    TEDemo*  m = new TEDemo(wname,eargs,login_shell);
     m->setColLin(c,l); // will use default height and width if called with (0,0)
 
     if (welcome)
