@@ -2,9 +2,11 @@
 [KDE Desktop Entry]
 Type=KonsoleApplication
 Name=Administrator
+Name[fr]=Administrateur
 Name[pt_BR]=Administrador
 Comment=Root Console
 Comment[da]=Rootkonsol
+Comment[fr]=Console administrateur
 Comment[pt_BR]=Console Raiz
 Exec=su
 Schema=/opt/kde/share/apps/konsole/Linux.schema
