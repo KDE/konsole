@@ -57,10 +57,12 @@ private slots:
   void schema_menu_activated(int item);
   void pixmap_menu_activated(int item);
   void keytab_menu_activated(int item);
+  void schema_menu_check();
   void tecRef();
   void newSession();
   void newSessionSelect();
   void newSession(int kind);
+  void updateSchemaMenu();
 
   void changeColumns(int);
   void notifySize(int,int);
@@ -119,6 +121,8 @@ private:
 
   TEWidget*      te;
   TESession*     se;
+
+  ColorSchemaList* colors;
 
   KRootPixmap*   rootxpm;
 
