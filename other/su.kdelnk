@@ -2,12 +2,14 @@
 [KDE Desktop Entry]
 Type=KonsoleApplication
 Name=Administrator
+Name[es]=Administrador
 Name[fr]=Administrateur
 Name[is]=Ofurpaur
 Name[pt_BR]=Administrador
 Comment=Root Console
 Comment[da]=Rootkonsol
 Comment[de]=Rootkonsole
+Comment[es]=Consola Root
 Comment[fr]=Console administrateur
 Comment[is]=Skjáhermir ofurpaurs
 Comment[pt_BR]=Console Raiz
