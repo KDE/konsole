@@ -762,6 +762,7 @@ void TEDemo::newSession(int i)
 void TEDemo::doneSession(TESession* s, int status)
 {
 //printf("%s(%d): Exited:%d ExitStatus:%d\n",__FILE__,__LINE__,WIFEXITED(status),WEXITSTATUS(status));
+#if 0
   if (!WIFEXITED((status)) || WEXITSTATUS((status)))
   {
     QString str;
@@ -773,6 +774,7 @@ void TEDemo::doneSession(TESession* s, int status)
     KMsgBox::message( this, i18n("Error"), str, KMsgBox::EXCLAMATION );
 
   }
+#endif
   int no = (int)session2no.find(s);
   if (!no) return; // oops
   no2session.remove(no);
