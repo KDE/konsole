@@ -1290,7 +1290,8 @@ void TEScreen::addHistLine()
           sel_BR += columns;
        }
        else
-          histCursor++;
+         if (histCursor+1 == newHistLines)
+           histCursor++;
     }
 
     if (sel_begin != -1)
