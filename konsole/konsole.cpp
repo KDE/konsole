@@ -836,7 +836,7 @@ void Konsole::makeGUI()
    options << i18n("Text &and Icons") << i18n("&Text Only") << i18n("&Icons Only");
    viewOptions->setItems(options);
    viewOptions->plug(m_tabPopupMenu);
-   connect(viewOptions, SIGNAL(activated(int)), this, SLOT(slotTabSetViewOptions(int)));   
+   connect(viewOptions, SIGNAL(activated(int)), this, SLOT(slotTabSetViewOptions(int)));
 
    m_tabPopupMenu->insertSeparator();
    m_tabPopupMenu->insertItem( SmallIcon("fileclose"), i18n("C&lose Session"), this,
@@ -1748,6 +1748,9 @@ void Konsole::switchToTabWidget()
   setCentralWidget(tabwidget);
   tabwidget->showPage(se->widget());
   tabwidget->show();
+
+  if (se->isMasterMode())
+    enableMasterModeConnections();
 }
 
 void Konsole::switchToFlat()
@@ -1780,8 +1783,10 @@ void Konsole::switchToFlat()
       delete rootxpms[tabwidget->page(i)];
       rootxpms.remove(tabwidget->page(i));
     }
-  delete tabwidget;
+  delete tabwidget;  // deletes old master mode connections
   tabwidget = 0L;
+  if (se->isMasterMode())
+    enableMasterModeConnections();
 }
 
 QIconSet Konsole::iconSetForSession(TESession *session) const
@@ -1980,32 +1985,64 @@ void Konsole::setFullScreen(bool on)
 //         make the drawEvent.
 //       - font, background image and color palette should be set in one go.
 
-void Konsole::clearAllListenToKeyPress()
+void Konsole::disableMasterModeConnections()
 {
-  for (TESession *ses = sessions.first(); ses; ses = sessions.next())
-    ses->setListenToKeyPress(false);
+  if (tabwidget) {
+    QPtrListIterator<TESession> from_it(sessions);
+    for (; from_it.current(); ++from_it) {
+      TESession *from = from_it.current();
+      if (from->isMasterMode()) {
+        QPtrListIterator<TESession> to_it(sessions);
+        for (; to_it.current(); ++to_it) {
+          TESession *to = to_it.current();
+          if (to!=from)
+            disconnect(from->widget(),SIGNAL(keyPressedSignal(QKeyEvent*)),
+                       to->getEmulation(),SLOT(onKeyPress(QKeyEvent*)));
+        }
+      }
+    }
+  }
+  else
+    for (TESession *ses = sessions.first(); ses; ses = sessions.next())
+      ses->setListenToKeyPress(false);
 }
 
-void Konsole::restoreAllListenToKeyPress()
+void Konsole::enableMasterModeConnections()
 {
-  if(se->isMasterMode())
-    for (TESession *ses = sessions.first(); ses; ses = sessions.next())
-      ses->setListenToKeyPress(true);
-  else
-    se->setListenToKeyPress(true);
+  if (tabwidget) {
+    QPtrListIterator<TESession> from_it(sessions);
+    for (; from_it.current(); ++from_it) {
+      TESession *from = from_it.current();
+      if (from->isMasterMode()) {
+        QPtrListIterator<TESession> to_it(sessions);
+        for (; to_it.current(); ++to_it) {
+          TESession *to = to_it.current();
+          if (to!=from) {
+            connect(from->widget(),SIGNAL(keyPressedSignal(QKeyEvent*)),
+                    to->getEmulation(),SLOT(onKeyPress(QKeyEvent*)));
+          }
+        }
+      }
+      from->setListenToKeyPress(true);
+    }
+  }
+  else {
+    if(se->isMasterMode())
+      for (TESession *ses = sessions.first(); ses; ses = sessions.next())
+        ses->setListenToKeyPress(true);
+    else
+      se->setListenToKeyPress(true);
+  }
 }
 
 void Konsole::feedAllSessions(const QString &text)
 {
-  for (TESession *ses = sessions.first(); ses; ses = sessions.next())
-    ses->setListenToKeyPress(true);
-  if (te)
-    te->emitText(text);
-  if(!se->isMasterMode()) {
-    for (TESession *ses = sessions.first(); ses; ses = sessions.next())
-      ses->setListenToKeyPress(false);
-    se->setListenToKeyPress(true);
-  }
+  if (!te) return;
+  bool oldMasterMode = se->isMasterMode();
+  setMasterMode(true);
+  te->emitText(text);
+  if (!oldMasterMode)
+    setMasterMode(false);
 }
 
 void Konsole::sendAllSessions(const QString &text)
@@ -2027,10 +2064,6 @@ void Konsole::enterURL(const QString& URL, const QString&)
   QString path, login, host, newtext;
   int i;
 
-  if (se->isMasterMode()) {
-    clearAllListenToKeyPress();
-    se->setListenToKeyPress(true);
-  }
   if (URL.startsWith("file:")) {
     KURL uglyurl(URL);
     newtext=uglyurl.prettyURL().mid(5);
@@ -2066,7 +2099,6 @@ void Konsole::enterURL(const QString& URL, const QString&)
   }
   else
     te->emitText(URL);
-  restoreAllListenToKeyPress();
 }
 
 void Konsole::slotClearTerminal()
@@ -2162,6 +2194,10 @@ void Konsole::addSession(TESession* s)
     tabwidget->insertTab(te,SmallIconSet(s->IconName()),newTitle);
     setSchema(s->schemaNo());
     tabwidget->setCurrentPage(tabwidget->count()-1);
+    if (s->isMasterMode()) {
+      disableMasterModeConnections(); // no duplicate connections, remove old
+      enableMasterModeConnections();
+    }
   }
 }
 
@@ -2245,10 +2281,12 @@ void Konsole::activateSession(TESession *s)
   if (se)
   {
      se->setConnect(false);
-     if(se->isMasterMode())
+     if (tabwidget)
+       se->setListenToKeyPress(true);
+     else if(se->isMasterMode()) {
        for (TESession *_se = sessions.first(); _se; _se = sessions.next())
          _se->setListenToKeyPress(false);
-
+     }
      notifySessionState(se,NOTIFYNORMAL);
      // Delete the session if isn't in the session list any longer.
      if (sessions.find(se) == -1)
@@ -2283,7 +2321,7 @@ void Konsole::activateSession(TESession *s)
 
   notifySize(te->Lines(), te->Columns());  // set menu items (strange arg order !)
   s->setConnect(true);
-  if(se->isMasterMode())
+  if(!tabwidget && se->isMasterMode())
     for (TESession *_se = sessions.first(); _se; _se = sessions.next())
       _se->setListenToKeyPress(true);
   updateTitle();
@@ -2452,10 +2490,10 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
            this, SLOT( updateTitle() ) );
   connect( s, SIGNAL( notifySessionState(TESession*, int) ),
            this, SLOT( notifySessionState(TESession*, int)) );
-  connect( s, SIGNAL(clearAllListenToKeyPress()),
-           this, SLOT(clearAllListenToKeyPress()) );
-  connect( s, SIGNAL(restoreAllListenToKeyPress()),
-           this, SLOT(restoreAllListenToKeyPress()) );
+  connect( s, SIGNAL(disableMasterModeConnections()),
+           this, SLOT(disableMasterModeConnections()) );
+  connect( s, SIGNAL(enableMasterModeConnections()),
+           this, SLOT(enableMasterModeConnections()) );
   connect( s, SIGNAL(renameSession(TESession*,const QString&)),
            this, SLOT(slotRenameSession(TESession*, const QString&)) );
   connect( s->getEmulation(), SIGNAL(changeColumns(int)),
@@ -2574,7 +2612,7 @@ void Konsole::doneSession(TESession* s)
   delete ra; // will the toolbar die?
 
   s->setConnect(false);
-  if(s->isMasterMode())
+  if(!tabwidget && s->isMasterMode())
     for (TESession *_se = sessions.first(); _se; _se = sessions.next())
       _se->setListenToKeyPress(false);
 
@@ -2755,18 +2793,17 @@ void Konsole::setMasterMode(bool _state, TESession* _se)
   if (_se->isMasterMode() == _state)
     return;
 
-  _se->setMasterMode(_state);
-  if (_se == se)
-    masterMode->setChecked(_state);
+  if (_se==se)
+    masterMode->setChecked( _state );
 
-  if(_state)
-    for (TESession *ses = sessions.first(); ses; ses = sessions.next())
-      ses->setListenToKeyPress(true);
-  else {
-    for (TESession *ses = sessions.first(); ses; ses = sessions.next())
-      ses->setListenToKeyPress(false);
-    _se->setListenToKeyPress(true);
-  }
+  if(!_state || tabwidget)
+    disableMasterModeConnections();
+
+  _se->setMasterMode( _state );
+
+  if (_state)
+    enableMasterModeConnections();
+
   notifySessionState(_se,NOTIFYNORMAL);
 }
 
@@ -3111,8 +3148,8 @@ void Konsole::detachSession(TESession* _se) {
 
   disconnect( _se,SIGNAL(updateTitle()), this,SLOT(updateTitle()) );
   disconnect( _se,SIGNAL(notifySessionState(TESession*,int)), this,SLOT(notifySessionState(TESession*,int)) );
-  disconnect( _se,SIGNAL(clearAllListenToKeyPress()), this,SLOT(clearAllListenToKeyPress()) );
-  disconnect( _se,SIGNAL(restoreAllListenToKeyPress()), this,SLOT(restoreAllListenToKeyPress()) );
+  disconnect( _se,SIGNAL(disableMasterModeConnections()), this,SLOT(disableMasterModeConnections()) );
+  disconnect( _se,SIGNAL(enableMasterModeConnections()), this,SLOT(enableMasterModeConnections()) );
   disconnect( _se,SIGNAL(renameSession(TESession*,const QString&)), this,SLOT(slotRenameSession(TESession*,const QString&)) );
 
   ColorSchema* schema = colors->find(_se->schemaNo());
@@ -3167,6 +3204,10 @@ void Konsole::attachSession(TESession* session)
     session->changeWidget(te);
     tabwidget->insertTab(te,SmallIconSet(session->IconName()),session->Title());
     setSchema(session->schemaNo());
+    if (session->isMasterMode()) {
+      disableMasterModeConnections(); // no duplicate connections, remove old
+      enableMasterModeConnections();
+    }
   }
   else
     session->changeWidget(te);
@@ -3193,8 +3234,8 @@ void Konsole::attachSession(TESession* session)
   connect( session,SIGNAL(updateTitle()), this,SLOT(updateTitle()) );
   connect( session,SIGNAL(notifySessionState(TESession*,int)), this,SLOT(notifySessionState(TESession*,int)) );
 
-  connect( session,SIGNAL(clearAllListenToKeyPress()), this,SLOT(clearAllListenToKeyPress()) );
-  connect( session,SIGNAL(restoreAllListenToKeyPress()), this,SLOT(restoreAllListenToKeyPress()) );
+  connect( session,SIGNAL(disableMasterModeConnections()), this,SLOT(disableMasterModeConnections()) );
+  connect( session,SIGNAL(enableMasterModeConnections()), this,SLOT(enableMasterModeConnections()) );
   connect( session,SIGNAL(renameSession(TESession*,const QString&)), this,SLOT(slotRenameSession(TESession*,const QString&)) );
   connect( session->getEmulation(),SIGNAL(ImageSizeChanged(int,int)), this,SLOT(notifySize(int,int)));
   connect( session->getEmulation(),SIGNAL(changeColumns(int)), this,SLOT(changeColumns(int)) );
