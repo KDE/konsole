@@ -242,7 +242,7 @@ void TEWidget::fontChange(const QFont &)
 //printf("font_w: %d\n",font_w);
 //printf("font_a: %d\n",font_a);
 //printf("rawname: %s\n",font().rawName().ascii());
-    
+
 #if QT_VERSION < 300
   fontMap = strcmp(QFont::encodingName(font().charSet()).ascii(),"iso10646")
           ? vt100extended
@@ -251,7 +251,7 @@ void TEWidget::fontChange(const QFont &)
 #if defined(Q_CC_GNU)
 #warning TODO: Review/fix vt100 extended font-mapping
 #endif
-  fontMap = identicalMap; 
+  fontMap = identicalMap;
 #endif
   propagateSize();
   update();
@@ -1507,6 +1507,11 @@ void TEWidget::calcGeometry()
      scrollbar->show();
      break;
   }
+  if (columns<1) {
+    kdDebug(1211) << "TEWidget::calcGeometry: columns=" << columns << endl;
+    columns=1;
+  }
+
   //FIXME: support 'rounding' styles
   lines   = ( contentsRect().height() - 2 * rimY  ) / font_h;
 }
