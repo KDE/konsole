@@ -18,14 +18,14 @@ OTHDIR = $(TOPDIR)/other
 # set the include path for X, qt and KDE
 INCLUDES =  -I$(INCDIR) $(all_includes)
 
-# you can add here more. This one gets installed 
-bin_PROGRAMS = 	konsole konsole_grantpty kwrited #kcmkonsole 
+# you can add here more. This one gets installed
+bin_PROGRAMS = 	konsole konsole_grantpty kwrited #kcmkonsole
 
 noinst_LIBRARIES = libkonsole.a
 
 libkonsole_a_SOURCES = TEWidget.C TEmuVt102.C TEScreen.C TEmulation.C TEPty.C TEHistory.C keytrans.C
 # libkonsole_a_LDFLAGS =  -version-info `expr $(VERSION) + $(SUBVERS)`:$(RELEASE):$(SUBVERS)
-                       
+
 # Which sources should be compiled for konsole.
 
 kwrited_SOURCES	= kwrited.C
@@ -37,7 +37,7 @@ konsole_LDADD   = libkonsole.a $(LIB_KIMGIO) $(LIB_KDEUI) $(LIBUTEMPTER)
 konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 # kcmkonsole_SOURCES = kcmkonsole.C schema.C
-# kcmkonsole_LDADD   = $(LIB_KIMGIO) $(LIB_KDEUI) 
+# kcmkonsole_LDADD   = $(LIB_KIMGIO) $(LIB_KDEUI)
 # kcmkonsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 konsole_grantpty_SOURCES = konsole_grantpty.c
@@ -51,15 +51,24 @@ install-data-local:
 
 # konsole_grantpty needs to be installed setuid root
 install-exec-local: install-binPROGRAMS
-	@(chown root $(bindir)/konsole_grantpty && chmod 4755 $(bindir)/konsole_grantpty) || echo "Please make konsole_grandpty setuid root"  
+	@(chown root $(bindir)/konsole_grantpty && chmod 4755 $(bindir)/konsole_grantpty) || echo "Please make konsole_grandpty setuid root"
 
-# just to make sure, automake makes them 
+# just to make sure, automake makes them
 METASOURCES = TEWidget.moc TEmuVt102.moc session.moc main.moc \
 	TEmulation.moc TEPty.moc kwrited.moc \
-	krootpixmap.moc 
+	krootpixmap.moc
 
 META_INCLUDES = $(srcdir)/../include
 
 messages:
-	$(XGETTEXT) -C -ktranslate -kI18N_NOOP -ki18n -x $(includedir)/kde.pot $(konsole_SOURCES) && mv messages.po $(podir)/konsole.pot
+	rm -f schemas.C
+	for i in ../other/*.schema; do \
+	  grep "^title" $$i | cut -d':' -f2- | sed -e 's#^title \(.*\)$$#i18n(\"\1\")#' >> schemas.C ;\
+	done
+	for i in ../other/*.Keytab ../other/*.keytab; do \
+	  grep "^keyboard" $$i | sed -e 's#^keyboard \"\(.*\)\"$$#i18n(\"\1\")#' >> schemas.C ;\
+	done
+	$(XGETTEXT) -C  -kI18N_NOOP -ki18n -x $(includedir)/kde.pot $(konsole_SOURCES) schemas.C -o $(podir)/konsole.pot
+	rm -f schemas.C
+
 

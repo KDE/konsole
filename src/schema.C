@@ -15,6 +15,7 @@
 #include <qdir.h>
 #include <kstddirs.h>
 #include <kglobal.h>
+#include <klocale.h>
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
@@ -53,7 +54,7 @@ ColorSchema* ColorSchema::readSchema(const char* path)
     {
       if (!strncmp(line,"title",5))
       {
-        res->title = line+6;
+        res->title = i18n(line+6);
       }
       if (!strncmp(line,"image",5))
       { char rend[100], path[100]; int attr = 1;
@@ -158,8 +159,8 @@ static const ColorEntry default_table[TABLE_COLORS] =
     ColorEntry( QColor(0x18,0xB2,0xB2), 0, 0 ), ColorEntry( QColor(0xB2,0xB2,0xB2), 0, 0 ), // Cyan,  White
     // intensive
     ColorEntry( QColor(0x00,0x00,0x00), 0, 1 ), ColorEntry( QColor(0xFF,0xFF,0xFF), 1, 0 ),
-    ColorEntry( QColor(0x68,0x68,0x68), 0, 0 ), ColorEntry( QColor(0xFF,0x54,0x54), 0, 0 ), 
-    ColorEntry( QColor(0x54,0xFF,0x54), 0, 0 ), ColorEntry( QColor(0xFF,0xFF,0x54), 0, 0 ), 
+    ColorEntry( QColor(0x68,0x68,0x68), 0, 0 ), ColorEntry( QColor(0xFF,0x54,0x54), 0, 0 ),
+    ColorEntry( QColor(0x54,0xFF,0x54), 0, 0 ), ColorEntry( QColor(0xFF,0xFF,0x54), 0, 0 ),
     ColorEntry( QColor(0x54,0x54,0xFF), 0, 0 ), ColorEntry( QColor(0xFF,0x54,0xFF), 0, 0 ),
     ColorEntry( QColor(0x54,0xFF,0xFF), 0, 0 ), ColorEntry( QColor(0xFF,0xFF,0xFF), 0, 0 )
 };
@@ -185,7 +186,7 @@ void ColorSchema::loadAllSchemas()
   defaultSchema()->addSchema();
   schema_serial = 1;
   QStringList lst = KGlobal::dirs()->findAllResources("appdata", "*.schema");
-  
+
   for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it ) {
     ColorSchema* sc = ColorSchema::readSchema(*it);
     if (sc) sc->addSchema();

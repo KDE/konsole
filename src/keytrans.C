@@ -31,6 +31,7 @@
 #include <qfile.h>
 #include <kglobal.h>
 #include <kstddirs.h>
+#include <klocale.h>
 
 #include <stdio.h>
 
@@ -152,10 +153,10 @@ static bool getSymbol(QIODevice &buf)
     cc = buf.getch();
     return TRUE; // eol
   }
-  if (inRange('A',cc,'Z')||inRange('a',cc,'z')||inRange('0',cc,'9')) 
+  if (inRange('A',cc,'Z')||inRange('a',cc,'z')||inRange('0',cc,'9'))
   {
     sym = SYMName;
-    while (inRange('A',cc,'Z') || inRange('a',cc,'z') || inRange('0',cc,'9')) 
+    while (inRange('A',cc,'Z') || inRange('a',cc,'z') || inRange('0',cc,'9'))
     {
       res = res + (char)cc;
       cc = buf.getch();
@@ -280,9 +281,9 @@ Loop:
   // syntax: ["key" KeyName { ("+" | "-") ModeName } ":" String/CommandName] ["#" Comment]
   if (sym == SYMName && !strcmp(res.ascii(),"keyboard"))
   {
-    getSymbol(buf); 
+    getSymbol(buf);
     if (sym != SYMString) goto ERROR; // header expected
-    kt->hdr = res;
+    kt->hdr = i18n(res);
     getSymbol(buf);
     if (sym != SYMEol)    goto ERROR; // unexpected text
     getSymbol(buf);                   // eoln
@@ -291,13 +292,13 @@ Loop:
   if (sym == SYMName && !strcmp(res.ascii(),"key"))
   {
 //printf("line %3d: ",startofsym);
-    getSymbol(buf); 
+    getSymbol(buf);
     // keyname
     if (sym != SYMName) goto ERROR; // mode name expected
     if (!syms.keysyms[res]) goto ERROR; // unknown key
     int key = (int)syms.keysyms[res]-1;
 //printf(" key %s (%04x)",res.ascii(),(int)keysyms[res]-1);
-    getSymbol(buf); // + - : 
+    getSymbol(buf); // + - :
     int mode = 0;
     int mask = 0;
     while (sym == SYMOpr && (!strcmp(res.ascii(),"+") || !strcmp(res.ascii(),"-")))
@@ -599,7 +600,7 @@ void KeyTrans::loadAll()
 {
   defaultKeyTrans()->addKeyTrans();
   QStringList lst = KGlobal::dirs()->findAllResources("appdata", "*.keytab");
-  
+
   for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it ) {
     KeyTrans* sc = KeyTrans::fromFile(*it);
     if (sc) sc->addKeyTrans();
