@@ -45,6 +45,7 @@
 #define VERSION "1.2 post"
 
 class KRootPixmap;
+class QLabel;
 class QCheckBox;
 class KonsoleFind;
 class KPopupMenu;
@@ -378,6 +379,7 @@ public slots:
   bool isOn() const;
 
 protected:
+  QLabel*        m_label;
   QSpinBox*      m_size;
   QCheckBox*     m_btnEnable;
   QPushButton*   m_setUnlimited;

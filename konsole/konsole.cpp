@@ -2753,27 +2753,29 @@ HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
                                      QWidget *parent)
   : KDialogBase(Plain, i18n("History Configuration"),
                 Help | Default | Ok | Cancel, Ok,
-                parent)
+                parent, 0, true, true)
 {
   QFrame *mainFrame = plainPage();
 
   QHBoxLayout *hb = new QHBoxLayout(mainFrame);
 
   m_btnEnable    = new QCheckBox(i18n("&Enable"), mainFrame);
+  connect(m_btnEnable, SIGNAL(toggled(bool)), SLOT(slotHistEnable(bool)));
 
-  QObject::connect(m_btnEnable, SIGNAL(toggled(bool)),
-                   this,      SLOT(slotHistEnable(bool)));
+  m_label = new QLabel(i18n("&Number of lines: "), mainFrame);
 
   m_size = new QSpinBox(0, 10 * 1000 * 1000, 100, mainFrame);
   m_size->setValue(histSize);
   m_size->setSpecialValueText(i18n("Unlimited (number of lines)", "Unlimited"));
+
+  m_label->setBuddy( m_size );
 
   m_setUnlimited = new QPushButton(i18n("&Set Unlimited"), mainFrame);
   connect( m_setUnlimited,SIGNAL(clicked()), this,SLOT(slotSetUnlimited()) );
 
   hb->addWidget(m_btnEnable);
   hb->addSpacing(10);
-  hb->addWidget(new QLabel(i18n("Number of lines: "), mainFrame));
+  hb->addWidget(m_label);
   hb->addWidget(m_size);
   hb->addSpacing(10);
   hb->addWidget(m_setUnlimited);
@@ -2798,6 +2800,7 @@ void HistoryTypeDialog::slotDefault()
 
 void HistoryTypeDialog::slotHistEnable(bool b)
 {
+  m_label->setEnabled(b);
   m_size->setEnabled(b);
   m_setUnlimited->setEnabled(b);
   if (b) m_size->setFocus();
@@ -2817,9 +2820,6 @@ bool HistoryTypeDialog::isOn() const
 {
   return m_btnEnable->isChecked();
 }
-
-
-
 
 void Konsole::slotHistoryType()
 {
