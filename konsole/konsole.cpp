@@ -862,7 +862,7 @@ bool Konsole::queryClose()
 void Konsole::slotCouldNotClose()
 {
     int result = KMessageBox::warningContinueCancel(this, 
-             i18n("The application running in konsole does not respond to the close request. "
+             i18n("The application running in Konsole does not respond to the close request. "
                   "Do you want Konsole to close anyway?"), 
              i18n("Application Does Not Respond"),
              i18n("Close"));
