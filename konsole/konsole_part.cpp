@@ -277,6 +277,8 @@ bool konsolePart::openURL( const KURL & url )
 
 void konsolePart::makeGUI()
 {
+  KActionCollection* actions = new KActionCollection(this);
+
   // Send Signal Menu -------------------------------------------------------------
   m_signals = new KPopupMenu((KMainWindow*)parentWidget);
   m_signals->insertItem( i18n( "&Suspend Task" )   + " (STOP)", SIGSTOP);
@@ -292,7 +294,7 @@ void konsolePart::makeGUI()
 
   // Scrollbar
   selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), 0, this,
-                                      SLOT(slotSelectScrollbar()), this);
+                                      SLOT(slotSelectScrollbar()), actions);
   QStringList scrollitems;
   scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
   selectScrollbar->setItems(scrollitems);
@@ -301,7 +303,7 @@ void konsolePart::makeGUI()
   // Select Bell
   m_options->insertSeparator();
   selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), 0 , this,
-                                 SLOT(slotSelectBell()), this);
+                                 SLOT(slotSelectBell()), actions);
   QStringList bellitems;
   bellitems << i18n("&None")
             << i18n("&System Notification")
@@ -311,7 +313,7 @@ void konsolePart::makeGUI()
 
   // Select font
   selectFont = new KonsoleFontSelectAction( i18n( "&Font" ), SmallIconSet( "text" ), 0,
-                                            this, SLOT(slotSelectFont()), this);
+                                            this, SLOT(slotSelectFont()), actions);
   QStringList it;
   it << i18n("&Normal")
      << i18n("&Tiny")
@@ -341,7 +343,7 @@ void konsolePart::makeGUI()
   m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Sch&ema" ), m_schema);
 
   KAction *historyType = new KAction(i18n("&History..."), "history", 0, this,
-                                     SLOT(slotHistoryType()), this);
+                                     SLOT(slotHistoryType()), actions);
   historyType->plug(m_options);
   m_options->insertSeparator();
 
@@ -375,29 +377,29 @@ void konsolePart::makeGUI()
 
   // Blinking Cursor
   blinkingCursor = new KToggleAction (i18n("Blinking &Cursor"),
-                                      0, this,SLOT(slotBlinkingCursor()), this);
+                                      0, this,SLOT(slotBlinkingCursor()), actions);
   blinkingCursor->plug(m_options);
 
   // Frame on/off
   showFrame = new KToggleAction(i18n("Show Fr&ame"), 0,
-                                this, SLOT(slotToggleFrame()), this);
+                                this, SLOT(slotToggleFrame()), actions);
   showFrame->plug(m_options);
 
   // Word Connectors
   KAction *WordSeps = new KAction(i18n("Wor&d Connectors..."), 0, this,
-                                  SLOT(slotWordSeps()), this);
+                                  SLOT(slotWordSeps()), actions);
   WordSeps->plug(m_options);
 
   // Save Settings
   m_options->insertSeparator();
-  KAction *saveSettings = KStdAction::saveOptions(this, SLOT(saveProperties()), this);
+  KAction *saveSettings = KStdAction::saveOptions(this, SLOT(saveProperties()), actions);
   saveSettings->plug(m_options);
   m_options->insertTearOffHandle();
 
   // Popup Menu -------------------------------------------------------------------
   m_popupMenu = new KPopupMenu((KMainWindow*)parentWidget);
   KAction *pasteClipboard = new KAction(i18n("&Paste"), "editpaste", 0,
-                                        te, SLOT(pasteClipboard()), this);
+                                        te, SLOT(pasteClipboard()), actions);
   pasteClipboard->plug(m_popupMenu);
 
   m_popupMenu->insertItem(i18n("&Send Signal"), m_signals);
@@ -407,7 +409,7 @@ void konsolePart::makeGUI()
   m_popupMenu->insertSeparator();
 
   KAction *closeSession = new KAction(i18n("&Close Terminal Emulator"), "fileclose", 0, this,
-                                      SLOT(closeCurrentSession()), this);
+                                      SLOT(closeCurrentSession()), actions);
   closeSession->plug(m_popupMenu);
   m_popupMenu->insertTearOffHandle();
 }

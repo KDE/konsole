@@ -359,6 +359,9 @@ void Konsole::makeGUI()
        static_cast<const QPopupMenu *>(sender())->count() == 1)
        const_cast<QPopupMenu *>(static_cast<const QPopupMenu *>(sender()))->removeItemAt(0);
        }
+
+   KActionCollection* actions = new KActionCollection(this);
+
    // Send Signal Menu -------------------------------------------------------------
    m_signals = new KPopupMenu(this);
    m_signals->insertItem( i18n( "&Suspend Task" )   + " (STOP)", SIGSTOP);
@@ -371,7 +374,7 @@ void Konsole::makeGUI()
 
    // Edit Menu ----------------------------------------------------------------
    KAction *pasteClipboard = new KAction(i18n("&Paste"), "editpaste", 0,
-     te, SLOT(pasteClipboard()), this);
+     te, SLOT(pasteClipboard()), actions);
    pasteClipboard->plug(m_edit);
 
    m_edit->setCheckable(TRUE);
@@ -379,28 +382,28 @@ void Konsole::makeGUI()
 
    m_edit->insertSeparator();
    m_findHistory = new KAction(i18n("&Find in History..."), "find", 0, this,
-                                       SLOT(slotFindHistory()), this);
+                                       SLOT(slotFindHistory()), actions);
    m_findHistory->setEnabled( se->history().isOn() );
    m_findHistory->plug(m_edit);
 
    m_saveHistory = new KAction(i18n("S&ave History As..."), "filesaveas", 0, this,
-                                       SLOT(slotSaveHistory()), this);
+                                       SLOT(slotSaveHistory()), actions);
    m_saveHistory->setEnabled( se->history().isOn() );
    m_saveHistory->plug(m_edit);
 
    m_edit->insertSeparator();
    m_clearHistory = new KAction(i18n("Clear &History"), "history_clear", 0, this,
-                                       SLOT(slotClearHistory()), this);
+                                       SLOT(slotClearHistory()), actions);
    m_clearHistory->setEnabled( se->history().isOn() );
    m_clearHistory->plug(m_edit);
 
    KAction *clearAllSessionHistories = new KAction(i18n("Clear All H&istories"), "history_clear", 0,
-     this, SLOT(slotClearAllSessionHistories()), this);
+     this, SLOT(slotClearAllSessionHistories()), actions);
    clearAllSessionHistories->plug(m_edit);
 
    // View Menu
    KAction *renameSession = new KAction(i18n("&Rename Session..."), 0, this,
-                                        SLOT(slotRenameSession()), this);
+                                        SLOT(slotRenameSession()), actions);
    renameSession->plug(m_view);
 
    m_view->insertSeparator();
@@ -418,12 +421,12 @@ void Konsole::makeGUI()
 
    m_view->insertSeparator();
    m_moveSessionLeft = new KAction(i18n("&Move Session Left"), "back", 0, this,
-                                        SLOT(moveSessionLeft()), this);
+                                        SLOT(moveSessionLeft()), actions);
    m_moveSessionLeft->setEnabled( false );
    m_moveSessionLeft->plug(m_view);
 
    m_moveSessionRight = new KAction(i18n("M&ove Session Right"), "forward", 0, this,
-                                        SLOT(moveSessionRight()), this);
+                                        SLOT(moveSessionRight()), actions);
    m_moveSessionRight->setEnabled( false );
    m_moveSessionRight->plug(m_view);
 
@@ -446,17 +449,17 @@ void Konsole::makeGUI()
    //options menu
    // Menubar on/off
    showMenubar = new KToggleAction ( i18n( "Show &Menubar" ), "showmenu", 0, this,
-                                     SLOT( slotToggleMenubar() ), this );
+                                     SLOT( slotToggleMenubar() ), actions );
    showMenubar->plug ( m_options );
 
    // Toolbar on/off
    showToolbar = new KToggleAction ( i18n( "Show &Toolbar" ), 0, this,
-                                     SLOT( slotToggleToolbar() ), this );
+                                     SLOT( slotToggleToolbar() ), actions );
    showToolbar->plug(m_options);
 
    // Scrollbar
    selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), 0, this,
-                                       SLOT(slotSelectScrollbar()), this);
+                                       SLOT(slotSelectScrollbar()), actions);
    QStringList scrollitems;
    scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
    selectScrollbar->setItems(scrollitems);
@@ -470,7 +473,7 @@ void Konsole::makeGUI()
 
    // Select Bell
    selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), 0 , this,
-                                  SLOT(slotSelectBell()), this);
+                                  SLOT(slotSelectBell()), actions);
    QStringList bellitems;
    bellitems << i18n("&None")
              << i18n("&System Notification")
@@ -480,7 +483,7 @@ void Konsole::makeGUI()
 
    // Select font
    selectFont = new KonsoleFontSelectAction( i18n( "&Font" ),
-          SmallIconSet( "text" ), 0, this, SLOT(slotSelectFont()), this);
+          SmallIconSet( "text" ), 0, this, SLOT(slotSelectFont()), actions);
    QStringList it;
    it << i18n("&Normal")
       << i18n("&Tiny")
@@ -503,7 +506,7 @@ void Konsole::makeGUI()
 
    // Select size
    selectSize = new KonsoleFontSelectAction(i18n("S&ize"), 0, this,
-                                  SLOT(slotSelectSize()), this);
+                                  SLOT(slotSelectSize()), actions);
    QStringList sizeitems;
    sizeitems << i18n("40x15 (&Small)")
       << i18n("80x24 (&VT100)")
@@ -516,17 +519,17 @@ void Konsole::makeGUI()
    selectSize->plug(m_options);
 
    KAction *historyType = new KAction(i18n("&History..."), "history", 0, this,
-                                      SLOT(slotHistoryType()), this);
+                                      SLOT(slotHistoryType()), actions);
    historyType->plug(m_options);
 
    m_options->insertSeparator();
 
-   KAction *save_settings = KStdAction::saveOptions(this, SLOT(slotSaveSettings()), this);
+   KAction *save_settings = KStdAction::saveOptions(this, SLOT(slotSaveSettings()), actions);
    save_settings->plug(m_options);
 
    m_options->insertSeparator();
    
-   KAction *configure = KStdAction::preferences(this, SLOT(slotConfigure()), this);
+   KAction *configure = KStdAction::preferences(this, SLOT(slotConfigure()), actions);
    configure->plug(m_options);
    
    m_options->insertTearOffHandle();
@@ -544,7 +547,7 @@ void Konsole::makeGUI()
 
    m_session->insertSeparator();
    KAction *closeSession = new KAction(i18n("&Close Session"), "fileclose", 0, this,
-                                        SLOT(closeCurrentSession()), this);
+                                        SLOT(closeCurrentSession()), actions);
    closeSession->plug(m_session);
 
    m_session->insertSeparator();
@@ -564,7 +567,7 @@ void Konsole::makeGUI()
    m_rightButton->insertItem(i18n("S&ettings"), m_options);
    m_rightButton->insertSeparator();
    KAction *closeSessionRMB = new KAction(i18n("C&lose Session"), "fileclose", 0, this,
-                                        SLOT(closeCurrentSession()), this);
+                                        SLOT(closeCurrentSession()), actions);
    closeSessionRMB->plug(m_rightButton );
    m_rightButton->insertTearOffHandle();
 
