@@ -1,0 +1,4 @@
+[Desktop Entry]
+Exec=kwrited
+Name=KDE Write Daemon
+Type=Service
