@@ -43,10 +43,16 @@ public:
   ~KeyTrans();
   static KeyTrans* defaultKeyTrans();
   static KeyTrans* fromFile(const char* path);
+  static KeyTrans* find(int numb);
+  static KeyTrans* find(const char* path);
+public:
+  static int count();
+  static void loadAll();
 public:
   bool findEntry(int key, int bits, int* cmd, const char** txt, int* len);
 private:
-  static KeyTrans* fromDevice(QIODevice &buf);
+  void addKeyTrans();
+  static KeyTrans* fromDevice(QString path, QIODevice &buf);
   void addEntry(int key, int bits, int mask, int cmd, QString txt);
 private:
   class KeyEntry
@@ -66,8 +72,11 @@ private:
     QString txt;
   };
 private:
-  QString         hdr;
   QList<KeyEntry> table;
+public: //FIXME: we'd do better
+  QString         hdr;
+  int numb;
+  QString path;
 };
 
 #endif

@@ -183,7 +183,15 @@ Konsole::Konsole(const QString& name,
     m_schema->insertItem(s->title.data(),s->numb);
   }
 
-//FIXME: we should build a complete session before running it.
+  // load schema /////////////////////////////////////////////////////////////
+
+  KeyTrans::loadAll();
+  //FIXME: sort
+  for (int i = 0; i < KeyTrans::count(); i++)
+  { KeyTrans* s = KeyTrans::find(i);
+    assert( s );
+    m_keytab->insertItem(s->hdr.data(),s->numb);
+  }
 
   // set global options ///////////////////////////////////////////////////////
 
@@ -193,9 +201,8 @@ Konsole::Konsole(const QString& name,
                      : QFrame::NoFrame );
   te->setScrollbarLocation(n_scroll);
 
-//FIXME: call newSession here, somehow, instead the stuff below.
-
   // construct initial session ///////////////////////////////////////////////
+//FIXME: call newSession here, somehow, instead the stuff below.
 
   TESession* initial = new TESession(this,te,pgm,args,"xterm");
 
@@ -413,12 +420,11 @@ void Konsole::makeMenu()
   m_schema->setCheckable(TRUE);
   connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
 
-  QPopupMenu* m_keytab = new QPopupMenu;
+  m_keytab = new QPopupMenu;
   m_keytab->setCheckable(TRUE);
-  m_keytab->insertItem( i18n("&xterm"), 1 );
-  m_keytab->setItemChecked(1,TRUE);
+  m_keytab->setItemChecked(0,TRUE);
 
-  QPopupMenu* m_codec  = new QPopupMenu;
+  m_codec  = new QPopupMenu;
   m_codec->setCheckable(TRUE);
   m_codec->insertItem( i18n("&locale"), 1 );
   m_codec->setItemChecked(1,TRUE);

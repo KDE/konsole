@@ -20,9 +20,6 @@
 
 static int schema_serial = 0; //FIXME: remove,localize
 
-template class QIntDict<ColorSchema>;
-template class QDict<ColorSchema>;
-
 static QIntDict<ColorSchema> numb2schema;
 static QDict<ColorSchema>    path2schema;
 

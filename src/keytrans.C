@@ -27,7 +27,10 @@
 #include <qbuffer.h>
 #include <qobject.h>
 #include <qdict.h>
+#include <qintdict.h>
 #include <qfile.h>
+#include <kglobal.h>
+#include <kstddirs.h>
 
 #include <stdio.h>
 
@@ -58,6 +61,8 @@ QString KeyTrans::KeyEntry::text()
 
 KeyTrans::KeyTrans()
 {
+  path = "";
+  numb = 0;
 }
 
 KeyTrans::~KeyTrans()
@@ -258,9 +263,10 @@ static KeyTransSymbols syms;
    - Comment :: '#' (any but \n)*
 */
 
-KeyTrans* KeyTrans::fromDevice(QIODevice &buf)
+KeyTrans* KeyTrans::fromDevice(QString path, QIODevice &buf)
 {
   KeyTrans* kt = new KeyTrans;
+  kt->path = path;
 
   // Opening sequence
 
@@ -358,13 +364,13 @@ KeyTrans* KeyTrans::defaultKeyTrans()
 #include "default.keytab.h"
   ;
   QBuffer buf(txt);
-  return fromDevice(buf);
+  return fromDevice("[buildin]",buf);
 }
 
 KeyTrans* KeyTrans::fromFile(const char* path)
 {
   QFile file(path);
-  return fromDevice(file);
+  return fromDevice(path,file);
 }
 
 // local symbol tables ---------------------------------------------------------------------
@@ -488,8 +494,49 @@ KeyTransSymbols::KeyTransSymbols()
   defKeySyms();
 }
 
-// Debugging material -----------------------------------------------------------
+// Global material -----------------------------------------------------------
 
+static int keytab_serial = 0; //FIXME: remove,localize
+
+static QIntDict<KeyTrans> numb2keymap;
+static QDict<KeyTrans>    path2keymap;
+
+KeyTrans* KeyTrans::find(int numb)
+{
+  KeyTrans* res = numb2keymap.find(numb);
+  return res ? res : numb2keymap.find(0);
+}
+
+KeyTrans* KeyTrans::find(const char* path)
+{
+  KeyTrans* res = path2keymap.find(path);
+  return res ? res : numb2keymap.find(0);
+}
+
+int KeyTrans::count()
+{
+  return numb2keymap.count();
+}
+
+void KeyTrans::addKeyTrans()
+{
+  this->numb = keytab_serial ++;
+  numb2keymap.insert(numb,this);
+  path2keymap.insert(path.data(),this);
+}
+
+void KeyTrans::loadAll()
+{
+  defaultKeyTrans()->addKeyTrans();
+  QStringList lst = KGlobal::dirs()->findAllResources("appdata", "*.keytab");
+  
+  for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it ) {
+    KeyTrans* sc = KeyTrans::fromFile(*it);
+    if (sc) sc->addKeyTrans();
+  }
+}
+
+// Debugging material -----------------------------------------------------------
 /*
 void TestTokenizer(QBuffer &buf)
 {

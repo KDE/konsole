@@ -113,6 +113,8 @@ private:
   QPopupMenu* m_scrollbar;
   QPopupMenu* m_font;
   QPopupMenu* m_schema;
+  QPopupMenu* m_keytab;
+  QPopupMenu* m_codec;
   QPopupMenu* m_size;
   QPopupMenu* m_drop;
 //

@@ -2,7 +2,7 @@
 #
 # --------------------------------------------------------------
 
-hdr "xterm"
+hdr "(NOT FUNCTIONAL, YET) Linux"
 
 # --------------------------------------------------------------
 #
@@ -63,20 +63,15 @@ key Return-Alt+NewLine : "\r\n"
 key Return+Alt-NewLine : "\E\r"  
 key Return+Alt+NewLine : "\E\r\n"
 
-# NOTE: we remove exactly stuff like this.
-#       by means of this file
-#
 # Some desperately try to save the ^H.
 # The BsHack mode is set by regular
 # configurations means for convenience.
 
-# key Backspace-BsHack : "\x08"
-# key Delete   -BsHack : "\x7f"
-# key Backspace+BsHack : "\x7f"
-# key Delete   +BsHack : "\E[3~"
+key Backspace-BsHack : "\x08"
+key Delete   -BsHack : "\x7f"
 
-key Backspace : "\x7f"
-key Delete    : "\E[3~"
+key Backspace+BsHack : "\x7f"
+key Delete   +BsHack : "\E[3~"
 
 # These codes are for the VT52 mode of VT100
 # The Ansi mode (i.e. VT100 mode) is set by

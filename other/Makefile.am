@@ -2,10 +2,11 @@
 datadir = $(kde_datadir)/konsole
 data_DATA = BlackOnLightYellow.schema BlackOnWhite.schema \
 	Example.Schema GreenOnBlack.schema WhiteOnBlack.schema \
-	default.Schema linux.desktop mc.desktop shell.desktop \
-  syscolor.schema Linux.schema XTerm.schema vim.schema \
+	default.Schema syscolor.schema Linux.schema XTerm.schema vim.schema \
   DarkPicture.schema LightPicture.schema Transparent.schema GreenTint.schema \
-  Transparent_MC.schema GreenTint_MC.schema su.desktop
+  Transparent_MC.schema GreenTint_MC.schema \
+  linux.desktop mc.desktop shell.desktop su.desktop \
+  linux.keytab nobshack.keytab
 
 KDE_ICON = konsole
 

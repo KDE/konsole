@@ -68,9 +68,7 @@ TEmuVt102::TEmuVt102(TEWidget* gui)
 {
   QObject::connect(gui,SIGNAL(mouseSignal(int,int,int)),
                    this,SLOT(onMouse(int,int,int)));
-  keytrans = KeyTrans::defaultKeyTrans();
-//FIXME: allow to set another keyboard translator
-//keytrans = KeyTrans::fromFile("../other/default.KeyMap");
+  keytrans = KeyTrans::find(0); //FIXME: go to proper config
   initTokenizer();
   reset();
 }
