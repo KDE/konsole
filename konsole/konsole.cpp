@@ -2008,7 +2008,7 @@ void Konsole::slotConfigureKeys()
                                                "\n\n"
                                                "You are currently using the following Ctrl+<key> combinations:" ),
                                                ctrlKeys,
-                                               i18n( "Choice Of Shortcut Keys" ), 0);
+                                               i18n( "Choice of Shortcut Keys" ), 0);
   }
 }
 
