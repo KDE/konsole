@@ -1690,7 +1690,8 @@ void Konsole::activateSession(TESession *s)
       se->setListenToKeyPress(TRUE);
   updateTitle();
   if (!m_menuCreated)
-    makeGUI();
+     return;
+//    makeGUI();   //seems to be ok without this here, aleXXX
   updateKeytabMenu(); // act. the keytab for this session
   m_clearHistory->setEnabled( se->history().isOn() );
   m_findHistory->setEnabled( se->history().isOn() );
