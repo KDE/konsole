@@ -1,6 +1,6 @@
 /* ------------------------------------------------------------------------ */
 /*                                                                          */
-/* [TEWidget.C]            Terminal Emulation Widget                        */
+/* [TEWidget.cpp]        Terminal Emulation Widget                          */
 /*                                                                          */
 /* ------------------------------------------------------------------------ */
 /*                                                                          */
@@ -293,6 +293,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,blinking(false)
 ,cursorBlinking(false)
 ,hasBlinkingCursor(false)
+,ctrldrag(false)
 ,m_drop(0)
 ,possibleTripleClick(false)
 ,mResizeWidget(0)
@@ -781,18 +782,14 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   if ( ev->button() == LeftButton)
   {
     emit isBusySelecting(true); // Keep it steady...
-    if (selBound.start.x()!=-1 && selBound.end.x()!=-1 && isTargetSelected(pos.x(), pos.y())){
+    // Drag only when the Control key is hold
+    if ((!ctrldrag || ev->state() & ControlButton) && 
+        selBound.start.x()!=-1 && selBound.end.x()!=-1 && isTargetSelected(pos.x(), pos.y())) {
       // The user clicked inside selected text
-      // Drag only when the Control key is hold
-      // TOFIX for 3.1: create a configure dialog for that key
-      if ( ev->state() & ControlButton )
-      {
-         dragInfo.state = diPending;
-         dragInfo.start = ev->pos();
-      }
-
-    }else
-    {
+      dragInfo.state = diPending;
+      dragInfo.start = ev->pos();
+    } 
+    else {
       // No reason to ever start a drag event
       dragInfo.state = diNone;
 

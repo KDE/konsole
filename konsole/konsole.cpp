@@ -844,6 +844,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
      te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
 
      te->setBlinkingCursor(config->readBoolEntry("BlinkingCursor",FALSE));
+     te->setCtrlDrag(config->readBoolEntry("CtrlDrag",FALSE));
      te->setTerminalSizeHint( config->readBoolEntry("TerminalSizeHint",true) );
      te->setLineSpacing( config->readUnsignedNumEntry( "LineSpacing", 0 ) );
    }

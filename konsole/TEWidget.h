@@ -54,7 +54,7 @@ public:
 
     bool blinkingCursor() { return hasBlinkingCursor; }
     void setBlinkingCursor(bool blink);
-
+    void setCtrlDrag(bool enable) { ctrldrag=enable; }
     void setLineSpacing(uint);
     uint lineSpacing() const;
 
@@ -209,6 +209,7 @@ private:
     bool hasBlinker; // has characters to blink
     bool cursorBlinking;     // hide cursor in paintEvent
     bool hasBlinkingCursor;  // has blinking cursor enabled
+    bool ctrldrag;           // require Ctrl key for drag
     QTimer* blinkT;  // active when hasBlinker
     QTimer* blinkCursorT;  // active when hasBlinkingCursor
     KPopupMenu* m_drop;
