@@ -176,7 +176,7 @@ static int chownpty(int fd, int grant)
 */
 
 void Shell::setSize(int lines, int columns)
-{ struct winsize wsize; //FIXME: put into Shell.
+{
   wsize.ws_row = (unsigned short)lines;
   wsize.ws_col = (unsigned short)columns;
   if(fd < 0) return;
@@ -436,6 +436,8 @@ void Shell::makeShell(const char* dev, QStrList & args, const char* term, int lo
     *t = '-';
     argv[0] = t;
   }
+
+  ioctl(0,TIOCSWINSZ,(char *)&wsize);  // set screen size
 
   // finally, pass to the new program
   execvp(f, argv);

@@ -597,9 +597,9 @@ void TEScreen::initTabStops()
 {
   if (tabstops) free(tabstops);
   tabstops = (bool*)malloc(columns*sizeof(bool));
-//FIXME: Arrg! The 1st tabstop has to be one longer than the other!
-//       i.e. the kids start counting from 0 instead of 1.
-//       Other programs might behave correctly. Be aware.
+  // Arrg! The 1st tabstop has to be one longer than the other.
+  // i.e. the kids start counting from 0 instead of 1.
+  // Other programs might behave correctly. Be aware.
   for (int i = 0; i < columns; i++) tabstops[i] = (i%8 == 0 && i != 0);
 }
 

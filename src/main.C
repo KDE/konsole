@@ -887,8 +887,8 @@ void TEDemo::doneSession(TESession* s, int )
   s->setConnect(FALSE);
 
   // This slot (doneSession) is activated from the Shell when receiving a
-  // SIGCHLD. A lot is done during the signal handler, apparently deleting
-  // the Shell additionally, is sometimes too much, causing something
+  // SIGCHLD. A lot is done during the signal handler. Apparently deleting
+  // the Shell additionally is sometimes too much, causing something
   // to get messed up in rare cases. The following causes delete not to
   // be called from within the signal handler.
 
