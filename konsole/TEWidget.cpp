@@ -599,6 +599,9 @@ HCNT("paintEvent");
           disstrU[p++] = fontMap(c);
         len++;
       }
+      if ((x+len < columns) && (!image[loc(x+len,y)].c))
+        len++; // Adjust for trailing part of multi-column char
+
       QString unistr(disstrU,p);
       drawAttrStr(paint,
                 QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
