@@ -16,10 +16,9 @@ INCLUDES =  -I$(INCDIR) $(all_includes)
 
 # you can add here more. This one gets installed
 bin_PROGRAMS = 	konsole konsole_grantpty kwrited #kcmkonsole
-lib_LTLIBRARIES = kwrited.la konsole.la
-# It's a part, but konsole.la links directly to it, so we can't
+lib_LTLIBRARIES = kwrited.la konsole.la libkonsolepart.la
+# libkonsolepart is a part, but konsole.la links directly to it, so we can't
 # install it under kde_module
-lib_LTLIBRARIES = libkonsolepart.la
 
 libkonsolepart_la_SOURCES = TEPty.C \
 	schema.C \
