@@ -275,6 +275,8 @@ const char* TEPty::deviceName()
 int TEPty::run(const char* _pgm, QStrList & _args, const char* _term, int _addutmp,
                const char* _konsole_dcop, const char* _konsole_dcop_session)
 {
+  clearArguments();
+
   QStrListIterator it( _args );
   for (; it.current(); ++it )
     arguments << it.current();
