@@ -556,6 +556,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
       if (schema.right(7)!=".schema")
         schema+=".schema";
       m->setSchema(schema);
+      m->activateSession(0); // Fixes BR83162, transp. schema + notabbar
     }
 
     m->setColLin(c,l); // will use default height and width if called with (0,0)
