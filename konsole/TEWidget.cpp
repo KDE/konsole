@@ -240,12 +240,11 @@ void TEWidget::fontChange(const QFont &)
   // waba TEWidget 1.123:
   // "Base character width on widest ASCII character. This prevents too wide
   //  characters in the presence of double wide (e.g. Japanese) characters."
-  int fw;
   // Get the width from representative normal width characters
   font_w = qRound((double)fm.width(REPCHAR)/(double)strlen(REPCHAR));
 
   fixed_font = true;
-  fw = fm.width(REPCHAR[0]);
+  int fw = fm.width(REPCHAR[0]);
   for(unsigned int i=1; i< strlen(REPCHAR); i++){
     if (fw != fm.width(REPCHAR[i])){
       fixed_font = false;
@@ -454,11 +453,22 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
     {
       // The meaning of y differs between different versions of QPainter::drawText!!
       int y = rect.y(); // top of rect
+      unsigned int nc=0;
+      int w;
       for(unsigned int i=0;i<str.length();i++)
       {
         drawstr = str.at(i);
         // Add double of the width if next c is 0;
-        int w = (attr+i+1)->c ? font_w : font_w * 2;
+        if ((attr+nc+1)->c)
+        {
+          w = font_w;
+          nc++;
+        }
+        else
+        {
+          w = font_w*2;
+          nc+=2;
+        }
         paint.drawText(x,y, w, font_h, Qt::AlignHCenter | Qt::DontClip, drawstr, -1);
         x += w;
       }
@@ -488,13 +498,24 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
         {
           // The meaning of y differs between different versions of QPainter::drawText!!
           int y = rect.y(); // top of rect
+          unsigned int nc=0;
+          int w;
           for(unsigned int i=0;i<str.length();i++)
           {
-             drawstr = str.at(i);
-             // Add double of the width if next c is 0;
-             int w = (attr+i+1)->c ? font_w : font_w * 2;
-             paint.drawText(x,y, w, font_h, Qt::AlignHCenter | Qt::DontClip, drawstr, -1);
-             x += w;
+            drawstr = str.at(i);
+            // Add double of the width if next c is 0;
+            if ((attr+nc+1)->c)
+            {
+              w = font_w;
+              nc++;
+            }
+            else
+            {
+              w = font_w*2;
+              nc+=2;
+            }
+            paint.drawText(x,y, w, font_h, Qt::AlignHCenter | Qt::DontClip, drawstr, -1);
+            x += w;
           }
         }
         else
@@ -598,7 +619,10 @@ HCNT("setImage");
         {
           c = ext[x+len].c;
           if (!c)
+          {
+            fixed_font = false;
             continue; // Skip trailing part of multi-col chars.
+          }
 
           if (ext[x+len].f != cf || ext[x+len].b != cb || ext[x+len].r != cr ||
               !dirtyMask[x+len] )
@@ -778,10 +802,15 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect, bool pm)
         c = image[loc(x+len,y)].c;
         if (c)
           disstrU[p++] = fontMap(c);
+        else
+          fixed_font = false;
         len++;
       }
       if ((x+len < columns) && (!image[loc(x+len,y)].c))
+      {
+        fixed_font = false;
         len++; // Adjust for trailing part of multi-column char
+      }
 
       if (!isBlinkEvent || (cr & RE_BLINK))
       {
