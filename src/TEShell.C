@@ -186,7 +186,7 @@ static void catchChild(int)
 void Shell::doneShell(int status)
 {
 #ifdef HAVE_UTEMPTER
-  removeLineFromUtmp(ttynam,fd);
+  removeLineFromUtmp(ttynam);
 #endif   
   if (needGrantPty) chownpty(fd,FALSE);
   emit done(status);
