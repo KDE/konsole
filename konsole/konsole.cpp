@@ -632,12 +632,11 @@ void Konsole::makeGUI()
       selectFont->plug(m_options);
 
       // encoding menu, start with default checked !
-      selectSetEncoding = new KSelectAction(i18n("&Encoding"), 0, actions, "set_encoding");
+      selectSetEncoding = new KSelectAction( i18n( "&Encoding" ), SmallIconSet( "charset" ), 0, this, SLOT(slotSetEncoding()), actions, "set_encoding" );
       QStringList list = KGlobal::charsets()->descriptiveEncodingNames();
       list.prepend( i18n( "Default" ) );
       selectSetEncoding->setItems(list);
       selectSetEncoding->setCurrentItem (0);
-      connect(selectSetEncoding, SIGNAL(activated()), SLOT(slotSetEncoding()));
       selectSetEncoding->plug(m_options);
 
       if (kapp->authorizeKAction("keyboard"))
