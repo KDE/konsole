@@ -224,7 +224,7 @@ private:
   void setColorPixmaps();
 
   void setSchema(ColorSchema* s);
-  void setFont(int fontno);
+  void setFont(int fontno=-1);
 
   void clearSessionHistory(TESession & session);
   void buildSessionMenus();

@@ -1165,7 +1165,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
 void Konsole::applySettingsToGUI()
 {
    if (!m_menuCreated) return;
-   selectFont->setCurrentItem(n_font);
+   setFont();
    notifySize(te->Lines(),te->Columns());
    showToolbar->setChecked(!toolBar()->isHidden());
    showMenubar->setChecked(!menuBar()->isHidden());
@@ -1262,7 +1262,7 @@ void Konsole::slotSelectFont() {
   {
     if ( KFontDialog::getFont(defaultFont, true) == QDialog::Rejected )
     {
-      selectFont->setCurrentItem(n_font);
+      setFont();
       return;
     }
   }
@@ -1336,10 +1336,16 @@ void Konsole::keytab_menu_activated(int item)
 void Konsole::setFont(int fontno)
 {
   QFont f;
-  if (fontno == DEFAULTFONT)
+  if (fontno == -1)
+  {
     f = defaultFont;
-  else
-  if (fonts[fontno][0] == '-')
+    fontno = n_font;
+  }
+  else if (fontno == DEFAULTFONT)
+  {
+    f = defaultFont;
+  }
+  else if (fonts[fontno][0] == '-')
   {
     f.setRawName( fonts[fontno] );
     f.setFixedPitch(true);
@@ -1361,7 +1367,18 @@ void Konsole::setFont(int fontno)
   }
   if (se) se->setFontNo(fontno);
   if (m_menuCreated)
-     selectFont->setCurrentItem(fontno);
+  {
+     QStringList items = selectFont->items();
+     int i = fontno;
+     int j = 0;
+     for(;j < items.count();j++)
+     {
+       if (!items[j].isEmpty())
+          if (!i--)
+             break;
+     }
+     selectFont->setCurrentItem(j);
+  }
   te->setVTFont(f);
   n_font = fontno;
 }
