@@ -1060,6 +1060,8 @@ void Konsole::makeBasicGUI()
 
   showMenubar = new KToggleAction ( i18n( "Show &Menubar" ), "showmenu", 0, this,
                                     SLOT( slotToggleMenubar() ), m_shortcuts, "show_menubar" );
+  showMenubar->setCheckedState( KGuiItem( "Hide &Menubar", "showmenu", QString::null, QString::null ) );
+
   m_fullscreen = KStdAction::fullScreen(0, 0, m_shortcuts, this );
   connect( m_fullscreen,SIGNAL(toggled(bool)), this,SLOT(updateFullScreen(bool)));
   m_fullscreen->setChecked(b_fullscreen);
@@ -1975,7 +1977,7 @@ void Konsole::slotConfigureKeys()
 {
   KKeyDialog::configure(m_shortcuts);
   m_shortcuts->writeShortcutSettings();
-   
+
   QStringList ctrlKeys;
 
   for ( uint i = 0; i < m_shortcuts->count(); i++ )
@@ -2000,7 +2002,7 @@ void Konsole::slotConfigureKeys()
                                                "\n\n"
                                                "You may wish to reconsider your choice of keys and use Alt+Ctrl+<key> or Ctrl+Shift+<key> instead."
                                                "\n\n"
-                                               "You are currently using the following Ctrl-<key> combinations:" ), 
+                                               "You are currently using the following Ctrl-<key> combinations:" ),
                                                ctrlKeys,
                                                i18n( "Choice Of Shortcut Keys" ), 0);
   }
@@ -2260,7 +2262,7 @@ void Konsole::enterURL(const QString& URL, const QString&)
        newtext += " -p " + QString().setNum(u.port());
     if (u.hasUser())
        newtext += " -l " + u.user();
-    
+
     /*
      * If we have a host, connect.
      */
@@ -3023,8 +3025,8 @@ void Konsole::notifySessionState(TESession* session, int state)
   if (!state_iconname.isEmpty()
       && session->testAndSetStateIconName(state_iconname)
       && m_tabViewMode != ShowTextOnly) {
-      
-    QPixmap normal = KGlobal::instance()->iconLoader()->loadIcon(state_iconname, 
+
+    QPixmap normal = KGlobal::instance()->iconLoader()->loadIcon(state_iconname,
                        KIcon::Small, 0, KIcon::DefaultState, 0L, true);
     QPixmap active = KGlobal::instance()->iconLoader()->loadIcon(state_iconname,
                        KIcon::Small, 0, KIcon::ActiveState, 0L, true);
