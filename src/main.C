@@ -76,10 +76,6 @@
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
-#ifndef MIN
-inline int MIN(int A, int B) { return ((A>B) ? B : A); }
-#endif
-
 #undef PACKAGE
 #undef VERSION
 #define PACKAGE "konsole"
@@ -439,8 +435,8 @@ void TEDemo::readProperties(KConfig* config)
   b_framevis = config->readBoolEntry("has frame",TRUE);
   b_bshack   = config->readBoolEntry("BS hack",TRUE);
   b_inspaste = config->readBoolEntry("insert paste",FALSE);
-  n_font     = MIN(config->readUnsignedNumEntry("font",3),7);
-  n_scroll   = MIN(config->readUnsignedNumEntry("scrollbar",SCRRIGHT),2);
+  n_font     = QMIN(config->readUnsignedNumEntry("font",3),7);
+  n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",SCRRIGHT),2);
   s_schema   = config->readEntry("schema","");
   if (menubar->menuBarPos() != KMenuBar::Floating)
   { QString entry = config->readEntry("kmenubar");
@@ -733,7 +729,7 @@ void TEDemo::newSession(int i)
   QString emu = co->readEntry("Term");
   QString sch = co->readEntry("Schema");
   QString txt = co->readEntry("Comment"); // not null
-  int     fno = MIN(co->readUnsignedNumEntry("Font",se->fontNo()),7);
+  int     fno = QMIN(co->readUnsignedNumEntry("Font",se->fontNo()),7);
 
   ColorSchema* schema = sch.isEmpty()
                       ? (ColorSchema*)NULL
