@@ -274,7 +274,6 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
   colors->sort();
 
   KeyTrans::loadAll();
-  //KONSOLEDEBUG<<"Konsole ctor() after KeyTrans::loadAll() "<<time.elapsed()<<" msecs elapsed"<<endl;
 
   // create applications /////////////////////////////////////////////////////
   // read and apply default values ///////////////////////////////////////////
@@ -285,7 +284,6 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
   applyMainWindowSettings(config);
   if (currentSize != size())
      defaultSize = size();
-  //KONSOLEDEBUG<<"Konsole ctor(): readProps() type="<<type<<endl;
 
   KSimpleConfig *co;
   if (!type.isEmpty())
@@ -294,12 +292,9 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 
   co->setDesktopGroup();
   QString schema = co->readEntry("Schema");
-  //KONSOLEDEBUG << "my Looking for schema " << schema << endl;
   readProperties(config, schema, false);
-  //KONSOLEDEBUG<<"Konsole ctor() after readProps "<<time.elapsed()<<" msecs elapsed"<<endl;
 
   makeBasicGUI();
-  //KONSOLEDEBUG<<"Konsole ctor() after makeBasicGUI "<<time.elapsed()<<" msecs elapsed"<<endl;
 
   if (isRestored) {
     n_tabbar = wanted_tabbar;
@@ -331,7 +326,6 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
     if (te) te->setScrollbarLocation(TEWidget::SCRNONE);
   }
 
-  //KONSOLEDEBUG<<"Konsole ctor() ends "<<time.elapsed()<<" msecs elapsed"<<endl;
 //  connect(kapp, SIGNAL(kdisplayFontChanged()), this, SLOT(slotFontChanged()));
 
   kapp->dcopClient()->setDefaultObject( "konsole" );
@@ -445,7 +439,7 @@ void Konsole::updateRMBMenu()
 void Konsole::makeGUI()
 {
    if (m_menuCreated) return;
-   //not longer needed
+
    if (m_tabbarSessionsCommands)
       disconnect(m_tabbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_session,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
@@ -461,7 +455,6 @@ void Konsole::makeGUI()
       disconnect(m_bookmarks,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    if (m_bookmarksSession)
       disconnect(m_bookmarksSession,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
-   //KONSOLEDEBUG<<"Konsole::makeGUI()"<<endl;
    if (m_tabbarSessionsCommands)
       connect(m_tabbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
    connect(m_session,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
@@ -721,13 +714,10 @@ void Konsole::makeGUI()
 
    delete colors;
    colors = new ColorSchemaList();
-   //KONSOLEDEBUG<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
    colors->checkSchemas();
    colors->sort();
-   //KONSOLEDEBUG<<"Konsole::makeGUI() updateSchemas()"<<endl;
    updateSchemaMenu();
    ColorSchema *sch=colors->find(s_schema);
-   //KONSOLEDEBUG<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
    if (sch)
         curr_schema=sch->numb();
    else
@@ -759,7 +749,6 @@ void Konsole::makeGUI()
       assert( ktr );
       QString title=ktr->hdr();
       m_keytab->insertItem(title.replace('&',"&&"),ktr->numb());
-      //KONSOLEDEBUG << *it << "---" << title << "---" << ktr->numb() << endl;
    }
 
    applySettingsToGUI();
@@ -874,10 +863,6 @@ void Konsole::makeTabWidget()
     connect(tabwidget, SIGNAL(mouseDoubleClick()), SLOT(newSession()));
 
     m_newSessionButton = new QToolButton( tabwidget );
-//    // Looks kind of broken with most styles?
-//    newsession->setTextLabel("New");
-//    newsession->setTextPosition(QToolButton::Right);
-//    newsession->setUsesTextLabel(true);
     QToolTip::add(m_newSessionButton,i18n("Click for new standard session\nClick and hold for session menu"));
     m_newSessionButton->setIconSet( SmallIcon( "tab_new" ) );
     m_newSessionButton->adjustSize();
@@ -930,7 +915,6 @@ bool Konsole::eventFilter( QObject *o, QEvent *ev )
 
 void Konsole::makeBasicGUI()
 {
-  //KONSOLEDEBUG<<"Konsole::makeBasicGUI()"<<endl;
   if (kapp->authorize("shell_access")) {
     m_tabbarSessionsCommands = new KPopupMenu( this );
     connect(m_tabbarSessionsCommands, SIGNAL(activated(int)), SLOT(newSessionTabbar(int)));
@@ -1228,7 +1212,6 @@ void Konsole::setColLin(int columns, int lines)
 
 void Konsole::configureRequest(TEWidget* _te, int state, int x, int y)
 {
-//printf("Konsole::configureRequest(_,%d,%d)\n",x,y);
    if (!m_menuCreated)
       makeGUI();
   KPopupMenu *menu = (state & ControlButton) ? m_session : m_rightButton;
@@ -1308,18 +1291,12 @@ void Konsole::slotTabSetViewOptions(int mode)
 
     switch(mode) {
       case ShowIconAndText:
-//          tabwidget->setTabLabel(page, title);
-//          tabwidget->setTabIconSet(page, icon);
         tabwidget->changeTab(page, icon, title);
         break;
       case ShowTextOnly:
-//          tabwidget->setTabLabel(page, title);
-//          tabwidget->setTabIconSet(page, QIconSet());
         tabwidget->changeTab(page, QIconSet(), title);
         break;
       case ShowIconOnly:
-//          tabwidget->setTabLabel(page, QString::null);
-//          tabwidget->setTabIconSet(page, icon);
         tabwidget->changeTab(page, icon, QString::null);
         break;
     }
@@ -1467,7 +1444,6 @@ void Konsole::readProperties(KConfig* config)
 // konsoles are being read.
 void Konsole::readProperties(KConfig* config, const QString &schema, bool globalConfigOnly)
 {
-   //KONSOLEDEBUG<<"Konsole::readProps()"<<endl;
 
    if (config==KGlobal::config())
    {
@@ -1530,14 +1506,12 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       if (te) {
         if (sch->useTransparency())
         {
-           //KONSOLEDEBUG << "Setting up transparency" << endl;
            if (!rootxpms[te])
              rootxpms.insert( te, new KRootPixmap(te) );
            rootxpms[te]->setFadeEffect(sch->tr_x(), QColor(sch->tr_r(), sch->tr_g(), sch->tr_b()));
         }
         else
         {
-           //KONSOLEDEBUG << "Stopping transparency" << endl
            if (rootxpms[te]) {
              delete rootxpms[te];
              rootxpms.remove(te);
@@ -1554,7 +1528,6 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       // History
       m_histSize = config->readNumEntry("history",DEFAULT_HISTORY_SIZE);
       b_histEnabled = config->readBoolEntry("historyenabled",true);
-      //KONSOLEDEBUG << "Hist size : " << m_histSize << endl;
 
       // Tab View Mode
       m_tabViewMode = TabViewModes(config->readNumEntry("TabViewMode", ShowIconAndText));
@@ -1689,8 +1662,6 @@ void Konsole::schema_menu_activated(int item)
 {
   assert(se);
   //FIXME: save schema name
-//        KONSOLEDEBUG << "Item " << item << " selected from schema menu"
-//                << endl;
   setSchema(item);
   s_kconfigSchema = s_schema; // This is the new default
   activateSession(); // activates the current
@@ -1707,11 +1678,6 @@ void Konsole::schema_menu_activated(int item)
 
 void Konsole::updateSchemaMenu()
 {
-//        KONSOLEDEBUG << "Updating schema menu with "
-//                << colors->count()
-//                << " items."
-//                << endl;
-
   m_schema->clear();
   for (int i = 0; i < (int) colors->count(); i++)
   {
@@ -1723,9 +1689,6 @@ void Konsole::updateSchemaMenu()
 
   if (te && se)
   {
-//        KONSOLEDEBUG << "Current session has schema "
-//                << se->schemaNo()
-//                << endl;
         m_schema->setItemChecked(se->schemaNo(),true);
   }
 
@@ -1942,7 +1905,6 @@ void Konsole::reparseConfiguration()
         }
       }
       if ( ! b_foundSession ) {
-//       kdDebug()<< "Session "<<name<<" is not valid anymore... deleting"<<endl;
         action->setShortcut( KShortcut() );   // Clear shortcut
         m_shortcuts->writeShortcutSettings();
         delete action;           // Remove Action and Accel
@@ -2750,7 +2712,6 @@ void Konsole::closeCurrentSession()
 
 void Konsole::doneSession(TESession* s)
 {
-// qWarning("Konsole::doneSession(): Exited:%d ExitStatus:%d\n", WIFEXITED(status),WEXITSTATUS(status));
 
   if (s == se_previous)
     se_previous = 0;
@@ -2834,7 +2795,6 @@ void Konsole::nextSession()
 
 void Konsole::slotMovedTab(int from, int to)
 {
-  //kdDebug() << "Konsole::slotMovedTab(" << from <<","<<to<<")"<<endl;
 
   TESession* _se = sessions.take(from);
   sessions.remove(_se);
@@ -3106,7 +3066,6 @@ void Konsole::addSessionCommand(const QString &path)
     sessionAction = new KAction( comment, 0, this, 0, m_shortcuts, name.latin1() );
   }
   connect( sessionAction, SIGNAL( activated() ), sessionNumberMapper, SLOT( map() ) );
-//  kdDebug()<<"Mapping "<<name.latin1()<<" to "<<cmd_serial<<endl;
   sessionNumberMapper->setMapping( sessionAction, cmd_serial );
 
 }
@@ -3307,14 +3266,12 @@ void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
   if (!s) return;
   if (!tewidget) tewidget=te;
 
-//        KONSOLEDEBUG << "Checking menu items" << endl;
   if (tewidget==te) {
     if (m_schema)
     {
       m_schema->setItemChecked(curr_schema,false);
       m_schema->setItemChecked(s->numb(),true);
     }
-//        KONSOLEDEBUG << "Remembering schema data" << endl;
 
     s_schema = s->relPath();
     curr_schema = s->numb();
@@ -3323,7 +3280,6 @@ void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
   tewidget->setColorTable(s->table()); //FIXME: set twice here to work around a bug
 
   if (s->useTransparency()) {
-//        KONSOLEDEBUG << "Setting up transparency" << endl;
     if (!argb_visual) {
       if (!rootxpms[tewidget])
         rootxpms.insert( tewidget, new KRootPixmap(tewidget) );
@@ -3333,7 +3289,6 @@ void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
       tewidget->setErasePixmap( QPixmap() ); // make sure any background pixmap is unset
     }
   } else {
-//        KONSOLEDEBUG << "Stopping transparency" << endl;
       if (rootxpms[tewidget]) {
         delete rootxpms[tewidget];
         rootxpms.remove(tewidget);
@@ -3472,7 +3427,6 @@ void Konsole::attachSession(TESession* session)
 }
 
 void Konsole::renameSession(TESession* ses) {
-//  KONSOLEDEBUG << "renameSession\n";
   QString title = ses->Title();
   bool ok;
 
@@ -3584,7 +3538,6 @@ bool HistoryTypeDialog::isOn() const
 
 void Konsole::slotHistoryType()
 {
-//  KONSOLEDEBUG << "Konsole::slotHistoryType()\n";
   if (!se) return;
 
   HistoryTypeDialog dlg(se->history(), m_histSize, this);
