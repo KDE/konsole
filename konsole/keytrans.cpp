@@ -201,31 +201,30 @@ void KeytabReader::getSymbol()
   scolno = colno;
   if (cc <= 0)
   {
-    sym = SYMEof; return; // eos
+    sym = SYMEof; // eos
   }
-  if (cc == '\n')
+  else if (cc == '\n')
   {
     getCc();
-    sym = SYMEol; return; // eol
+    sym = SYMEol; // eol
   }
-  if (inRange('A',cc,'Z')||inRange('a',cc,'z')||inRange('0',cc,'9'))
+  else if (inRange('A',cc,'Z')||inRange('a',cc,'z')||inRange('0',cc,'9')||(cc=='_'))
   {
-    while (inRange('A',cc,'Z') || inRange('a',cc,'z') || inRange('0',cc,'9'))
+    while (inRange('A',cc,'Z') || inRange('a',cc,'z') || inRange('0',cc,'9') || (cc=='_'))
     {
       res = res + (char)cc;
       getCc();
     }
     sym = SYMName;
-    return;
   }
-  if (strchr("+-:",cc))
+  else if (strchr("+-:",cc))
   {
     res = "";
     res = res + (char)cc;
     getCc();
-    sym = SYMOpr; return;
+    sym = SYMOpr;
   }
-  if (cc == '"')
+  else if (cc == '"')
   {
     getCc();
     while (cc >= ' ' && cc != '"')
@@ -261,7 +260,12 @@ void KeytabReader::getSymbol()
     }
     if (cc != '"') return;
     getCc();
-    sym = SYMString; return;
+    sym = SYMString;
+  }
+  else
+  {
+    // cc was an invalid char. Get next cc or we will loop forever.
+    getCc();
   }
 }
 
