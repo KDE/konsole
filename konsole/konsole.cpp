@@ -1405,8 +1405,8 @@ void Konsole::slotSelectSize() {
 
 void Konsole::notifySize(int lines, int columns)
 {
-   if (!m_menuCreated) return;
-
+  if (m_menuCreated)
+  {
     selectSize->blockSignals(true);
     selectSize->setCurrentItem(-1);
     if (columns==40&&lines==15)
@@ -1422,7 +1422,9 @@ void Konsole::notifySize(int lines, int columns)
     else
         selectSize->setCurrentItem(5);
     selectSize->blockSignals(false);
-    if (n_render >= 3) pixmap_menu_activated(n_render);
+  }
+
+  if (n_render >= 3) pixmap_menu_activated(n_render);
 }
 
 void Konsole::updateTitle()
