@@ -96,8 +96,8 @@ konsolePart::konsolePart(QWidget *parent, const char *name)
 
   //bool login_shell = false;
   //bool welcome = true;
-  bool histon = true;
-  const char* wname = PACKAGE;
+  //bool histon = true;
+  //const char* wname = PACKAGE;
 
   //  QCString sz = "";
   //sz = args->getOption("vt_sz");
@@ -154,7 +154,20 @@ konsolePart::~konsolePart()
 
 bool konsolePart::openURL( const KURL & url )
 {
+  m_url = url;
   emit setWindowCaption( url.decodedURL() );
+  emit started( 0 );
+
+  if ( url.isLocalFile() )
+  {
+      QString text = url.path();
+      text.replace(QRegExp(" "), "\\ "); // escape spaces
+      text = QString::fromLatin1("cd ") + text + '\n';
+      QKeyEvent e(QEvent::KeyPress, 0,-1,0, text);
+      initial->getEmulation()->onKeyPress(&e);
+  }
+
+  emit completed();
   return true;
 
   // TODO: follow directory m_file

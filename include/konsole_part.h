@@ -58,7 +58,7 @@ class konsolePart: public KParts::ReadOnlyPart
 
  protected:
     virtual bool openURL( const KURL & url );
-    virtual bool openFile() {}
+    virtual bool openFile() {return false;} // never used
     virtual bool closeURL();
 
  protected slots:

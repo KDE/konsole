@@ -13,7 +13,7 @@
 /*! \class TEWidget
 
     \brief Visible screen contents
- 
+
    This class is responsible to map the `image' of a terminal emulation to the
    display. All the dependency of the emulation to a specific GUI or toolkit is
    localized here. Further, this widget has no knowledge about being part of an
@@ -95,14 +95,14 @@ static const ColorEntry base_color_table[TABLE_COLORS] =
   ColorEntry(QColor(0x18,0xB2,0xB2), 0, 0 ), ColorEntry( QColor(0xB2,0xB2,0xB2), 0, 0 ), // Cyan,  White
   // intensiv
   ColorEntry(QColor(0x00,0x00,0x00), 0, 1 ), ColorEntry( QColor(0xFF,0xFF,0xFF), 1, 0 ),
-  ColorEntry(QColor(0x68,0x68,0x68), 0, 0 ), ColorEntry( QColor(0xFF,0x54,0x54), 0, 0 ), 
-  ColorEntry(QColor(0x54,0xFF,0x54), 0, 0 ), ColorEntry( QColor(0xFF,0xFF,0x54), 0, 0 ), 
+  ColorEntry(QColor(0x68,0x68,0x68), 0, 0 ), ColorEntry( QColor(0xFF,0x54,0x54), 0, 0 ),
+  ColorEntry(QColor(0x54,0xFF,0x54), 0, 0 ), ColorEntry( QColor(0xFF,0xFF,0x54), 0, 0 ),
   ColorEntry(QColor(0x54,0x54,0xFF), 0, 0 ), ColorEntry( QColor(0xFF,0x54,0xFF), 0, 0 ),
   ColorEntry(QColor(0x54,0xFF,0xFF), 0, 0 ), ColorEntry( QColor(0xFF,0xFF,0xFF), 0, 0 )
 };
 
 /* Note that we use ANSI color order (bgr), while IBMPC color order is (rgb)
-   
+
    Code        0       1       2       3       4       5       6       7
    ----------- ------- ------- ------- ------- ------- ------- ------- -------
    ANSI  (bgr) Black   Red     Green   Yellow  Blue    Magenta Cyan    White
@@ -135,7 +135,7 @@ void TEWidget::setColorTable(const ColorEntry table[])
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-/* 
+/*
    The VT100 has 32 special graphical characters. The usual vt100 extended
    xterm fonts have these at 0x00..0x1f.
 
@@ -237,8 +237,8 @@ void TEWidget::setFont(const QFont &)
 
 TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
 {
-  cb = QApplication::clipboard();   
-  QObject::connect( (QObject*)cb, SIGNAL(dataChanged()), 
+  cb = QApplication::clipboard();
+  QObject::connect( (QObject*)cb, SIGNAL(dataChanged()),
                     this, SLOT(onClearSelection()) );
 
   scrollbar = new QScrollBar(this);
@@ -304,7 +304,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
   }
   if (!(blinking && (attr.r & RE_BLINK)))
   {
-    paint.setPen(color_table[attr.f].color); 
+    paint.setPen(color_table[attr.f].color);
     paint.drawText(rect.x(),rect.y()+font_a, str);
     if ((attr.r & RE_UNDERLINE) || color_table[attr.f].bold)
     {
@@ -344,7 +344,7 @@ HCNT("setImage");
   int cf  = -1; // undefined
   int cb  = -1; // undefined
   int cr  = -1; // undefined
-  
+
   int lins = QMIN(this->lines,  QMAX(0,lines  ));
   int cols = QMIN(this->columns,QMAX(0,columns));
   QChar *disstrU = new QChar[cols];
@@ -361,7 +361,7 @@ HCNT("setImage");
       if (ext[x] != lcl[x])
       {
         cr = ext[x].r;
-        cb = ext[x].b; 
+        cb = ext[x].b;
         if (ext[x].f != cf) cf = ext[x].f;
         int lln = cols - x;
         disstrU[0] = fontMap(ext[x+0].c);
@@ -373,7 +373,7 @@ HCNT("setImage");
           disstrU[len] = fontMap(ext[x+len].c);
         }
         QString unistr(disstrU,len);
-        drawAttrStr(paint, 
+        drawAttrStr(paint,
                     QRect(blX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
                     unistr, ext[x], pm != NULL, true);
         x += len - 1;
@@ -421,7 +421,7 @@ HCNT("paintEvent");
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
   int    tLy = tL.y();
- 
+
   int lux = QMIN(columns-1, QMAX(0,(rect.left()   - tLx - blX ) / font_w));
   int luy = QMIN(lines-1,   QMAX(0,(rect.top()    - tLy - bY  ) / font_h));
   int rlx = QMIN(columns-1, QMAX(0,(rect.right()  - tLx - blX ) / font_w));
@@ -438,14 +438,14 @@ HCNT("paintEvent");
 
   for (int y = luy; y <= rly; y++)
   for (int x = lux; x <= rlx; x++)
-  { 
+  {
     QChar *disstrU = new QChar[columns];
     int len = 1;
-    disstrU[0] = fontMap(image[loc(x,y)].c); 
+    disstrU[0] = fontMap(image[loc(x,y)].c);
     int cf = image[loc(x,y)].f;
     int cb = image[loc(x,y)].b;
     int cr = image[loc(x,y)].r;
-    while (x+len <= rlx && 
+    while (x+len <= rlx &&
            image[loc(x+len,y)].f == cf &&
            image[loc(x+len,y)].b == cb &&
            image[loc(x+len,y)].r == cr )
@@ -454,7 +454,7 @@ HCNT("paintEvent");
       len += 1;
     }
     QString unistr(disstrU,len);
-    drawAttrStr(paint, 
+    drawAttrStr(paint,
                 QRect(blX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
                 unistr, image[loc(x,y)], pm != NULL, false);
     x += len - 1;
@@ -554,7 +554,7 @@ void TEWidget::setScrollbarLocation(int loc)
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-/*! 
+/*!
     Three different operations can be performed using the mouse, and the
     routines in this section serve all of them:
 
@@ -751,8 +751,8 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
     emit mouseSignal( 0, pos.x()+1, pos.y()+1 ); // left button
     return;
   }
-     
-  
+
+
   emit clearSelectionSignal();
   QPoint bgnSel = pos;
   QPoint endSel = QPoint((ev->x()-tLx-blX)/font_w,(ev->y()-tLy-bY)/font_h);
@@ -815,7 +815,7 @@ void TEWidget::setMouseMarks(bool on)
 
 void TEWidget::emitSelection()
 // Paste Clipboard by simulating keypress events
-{ 
+{
   QString text = QApplication::clipboard()->text();
   if ( ! text.isNull() )
   {
@@ -829,18 +829,18 @@ void TEWidget::emitSelection()
 void TEWidget::setSelection(const QString& t)
 {
   // Disconnect signal while WE set the clipboard
-  QObject *cb = QApplication::clipboard();   
-  QObject::disconnect( cb, SIGNAL(dataChanged()), 
+  QObject *cb = QApplication::clipboard();
+  QObject::disconnect( cb, SIGNAL(dataChanged()),
                      this, SLOT(onClearSelection()) );
 
   QApplication::clipboard()->setText(t);
 
-  QObject::connect( cb, SIGNAL(dataChanged()), 
+  QObject::connect( cb, SIGNAL(dataChanged()),
                      this, SLOT(onClearSelection()) );
 }
 
 void TEWidget::onClearSelection()
-{ 
+{
   emit clearSelectionSignal();
 }
 
@@ -864,14 +864,16 @@ void TEWidget::doScroll(int lines)
   scrollbar->setValue(scrollbar->value()+lines);
 }
 
-bool TEWidget::eventFilter( QObject *, QEvent *e )
+bool TEWidget::eventFilter( QObject *obj, QEvent *e )
 {
+  if ( obj != this /* when embedded */ && obj != parent() /* when standalone */ )
+      return FALSE; // not us
   if ( e->type() == QEvent::Wheel)
   {
     QApplication::sendEvent(scrollbar, e);
   }
   if ( e->type() == QEvent::KeyPress )
-  { 
+  {
     QKeyEvent* ke = (QKeyEvent*)e;
 
     actSel=0; // Key stroke implies a screen update, so TEWidget won't
@@ -879,15 +881,15 @@ bool TEWidget::eventFilter( QObject *, QEvent *e )
 
     emit keyPressedSignal(ke); // expose
     return TRUE;               // accept event
-  } 
+  }
   if ( e->type() == QEvent::Enter )
   {
-    QObject::disconnect( (QObject*)cb, SIGNAL(dataChanged()), 
+    QObject::disconnect( (QObject*)cb, SIGNAL(dataChanged()),
       this, SLOT(onClearSelection()) );
   }
   if ( e->type() == QEvent::Leave )
   {
-    QObject::connect( (QObject*)cb, SIGNAL(dataChanged()), 
+    QObject::connect( (QObject*)cb, SIGNAL(dataChanged()),
       this, SLOT(onClearSelection()) );
   }
   return FALSE; // standard event processing
@@ -939,20 +941,20 @@ void TEWidget::clearImage()
 // Create Image ///////////////////////////////////////////////////////
 
 void TEWidget::calcGeometry()
-{ 
+{
   //FIXME: set rimX == rimY == 0 when running in full screen mode.
 
   scrollbar->resize(QApplication::style().scrollBarExtent().width(),
                     contentsRect().height());
   switch(scrollLoc)
   {
-    case SCRNONE : 
+    case SCRNONE :
      columns = ( contentsRect().width() - 2 * rimX ) / font_w;
      blX = (contentsRect().width() - (columns*font_w) ) / 2;
      brX = blX;
      scrollbar->hide();
      break;
-    case SCRLEFT : 
+    case SCRLEFT :
      columns = ( contentsRect().width() - 2 * rimX - scrollbar->width()) / font_w;
      brX = (contentsRect().width() - (columns*font_w) - scrollbar->width() ) / 2;
      blX = brX + scrollbar->width();
@@ -982,7 +984,7 @@ void TEWidget::makeImage()
 
 // calculate the needed size
 QSize TEWidget::calcSize(int cols, int lins) const
-{ 
+{
   int frw = width() - contentsRect().width();
   int frh = height() - contentsRect().height();
   int scw = (scrollLoc==SCRNONE?0:scrollbar->width());
