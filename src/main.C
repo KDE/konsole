@@ -114,6 +114,7 @@ TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
   // create terminal emulation framework ////////////////////////////////////
 
   te = new TEWidget(this);
+  te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
 
   // create applications /////////////////////////////////////////////////////
 
@@ -172,17 +173,26 @@ TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
 /*!
     sets application window to a size
     based on columns X lines of the te
-    guest widget
+    guest widget. Call with (0,0) for setting default size.
 */
 
 void TEDemo::setColLin(int columns, int lines)
 {
-  te->setFixedSize(te->calcSize(columns,lines));
+  if (columns==0 && lines==0)
+  {
+    if (defaultSize.isNull()) // not in config file : set default value
+    {
+      defaultSize = te->calcSize(80,24);
+      notifySize(24,80); // set menu items (strange arg order !)
+    }
+    resize(defaultSize);
+  }
+  else
+  {
+    resize(te->calcSize(columns,lines));
+    notifySize(lines,columns); // set menu items (strange arg order !)
+  }
   updateRects();
-  te->setMaximumSize(9999,9999); // allow resizing
-  te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
-  setMaximumSize(9999,9999);     // allow resizing
-  setMinimumSize(200,100);       // allow resizing
 }
 
 TEDemo::~TEDemo()
@@ -406,15 +416,16 @@ void TEDemo::saveProperties(KConfig* config)
   config->writeEntry("schema",s_schema);
   config->writeEntry("scrollbar",n_scroll);
   if (args.count() > 0) config->writeEntry("konsolearguments", args);
-  config->writeEntry("geometry", KWM::getProperties(winId()));
+  config->writeEntry("defaultheight", height()); // for "save options". Not used by SM.
+  config->writeEntry("defaultwidth", width()); // for "save options". Not used by SM.
   config->writeEntry("kmenubar", //FIXME:Float
                      menubar->menuBarPos() == KMenuBar::Bottom ? "bottom" : "top");
+  // geometry (placement) done by KTMainWindow
   config->sync();
 }
 
 void TEDemo::readProperties(KConfig* config)
 {
-  QString dftGeom = "1+4+0+512+307+4+0+512+307+0+0+0+1"; //FIXME: implementation
   config->setGroup("options"); // bad! will no allow us to support multi windows
   b_menuvis  = config->readBoolEntry("menubar visible",TRUE);
   b_framevis = config->readBoolEntry("has frame",TRUE);
@@ -422,7 +433,6 @@ void TEDemo::readProperties(KConfig* config)
   n_font     = MIN(config->readUnsignedNumEntry("font",3),7);
   n_scroll   = MIN(config->readUnsignedNumEntry("scrollbar",SCRRIGHT),2);
   s_schema   = config->readEntry("schema","");
-  setGeometry(KWM::setProperties(menubar->winId(), config->readEntry("geometry",dftGeom)));
   if (menubar->menuBarPos() != KMenuBar::Floating)
   { QString entry = config->readEntry("kmenubar");
     if (!entry.isEmpty() && entry == "floating")
@@ -434,6 +444,11 @@ void TEDemo::readProperties(KConfig* config)
     else if (!entry.isEmpty() && entry == "top") menubar->setMenuBarPos(KMenuBar::Top);
     else if (!entry.isEmpty() && entry == "bottom") menubar->setMenuBarPos(KMenuBar::Bottom);
   }
+  // (stuff removed) geometry done by KTMainWindow
+
+  // Default values for startup, changed by "save options". Not used by SM.
+  defaultSize.setWidth ( config->readNumEntry("defaultwidth", 0) );
+  defaultSize.setHeight( config->readNumEntry("defaultheight", 0) );
 }
 
 /* ------------------------------------------------------------------------- */
@@ -907,7 +922,7 @@ int main(int argc, char* argv[])
 
   putenv("COLORTERM="); //FIXME: for mc, which cannot detect color terminals
 
-  int c = 80, l = 40;
+  int c = 0, l = 0;
   if ( (strcmp("", sz) != 0) )
   { char *ls = strchr( sz, 'x' );
     if ( ls != NULL )
@@ -925,7 +940,8 @@ int main(int argc, char* argv[])
   else
   {  
     TEDemo*  m = new TEDemo(eargs,login_shell);
-    if (strcmp("",sz) !=0) m->setColLin(c,l);
+    m->setColLin(c,l); // will use default height and width if called with (0,0)
+
     if (welcome)
     {
       m->setCaption(i18n("Welcome to the console"));
