@@ -41,17 +41,18 @@ kwrited_SOURCES	= dummy.cpp
 kwrited_LDADD   = kwrited.la 
 kwrited_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
-# konsole executable - has all the sources, doesn't link kparts, saves startup time
-konsole_SOURCES	= TEPty.cpp BlockArray.cpp main.cpp konsole.cpp schema.cpp session.cpp TEWidget.cpp TEmuVt102.cpp \
-                  TEScreen.cpp TEmulation.cpp TEHistory.cpp keytrans.cpp konsoleiface.skel sessioniface.skel \
-                  konsole_wcwidth.cpp konsolebookmarkhandler.cpp konsole_child.cpp
-
-konsole_LDADD = $(LIB_KDEUI) $(LIB_KSYCOCA) $(LIBUTIL) $(LIB_KFILE) @XTESTLIB@
-konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 # konsole kdeinit module
-konsole_la_SOURCES = $(konsole_SOURCES)
+konsole_la_SOURCES = TEPty.cpp BlockArray.cpp main.cpp konsole.cpp schema.cpp session.cpp TEWidget.cpp TEmuVt102.cpp \
+     TEScreen.cpp TEmulation.cpp TEHistory.cpp keytrans.cpp konsoleiface.skel sessioniface.skel \
+     konsole_wcwidth.cpp konsolebookmarkhandler.cpp konsole_child.cpp
 konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
+konsole_la_LIBADD = $(LIB_KDEUI) $(LIB_KSYCOCA) $(LIBUTIL) $(LIB_KFILE) @XTESTLIB@
+
+# konsole executable
+konsole_SOURCES = dummy.cpp
+konsole_LDADD = konsole.la
+konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 # kcmkonsole_SOURCES = kcmkonsole.cpp schema.cpp
 # kcmkonsole_LDADD   = $(LIB_KDEUI)
