@@ -242,11 +242,11 @@ void TEWidget::fontChange(const QFont &)
   //  characters in the presence of double wide (e.g. Japanese) characters."
   int fw;
   // Get the width from representative normal width characters
-  font_w = round((double)fm.width(REPCHAR)/strlen(REPCHAR));
+  font_w = (int) round((double)fm.width(REPCHAR)/(double)strlen(REPCHAR));
 
   fixed_font = true;
   fw = fm.width(REPCHAR[0]);
-  for(int i=1; i< strlen(REPCHAR); i++){
+  for(unsigned int i=1; i< strlen(REPCHAR); i++){
     if (fw != fm.width(REPCHAR[i])){
       fixed_font = false;
       break;
@@ -326,6 +326,9 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,ctrldrag(false)
 ,cuttobeginningofline(false)
 ,isBlinkEvent(false)
+,isPrinting(false)
+,printerFriendly(false)
+,printerBold(false)
 ,m_drop(0)
 ,possibleTripleClick(false)
 ,mResizeWidget(0)
@@ -390,27 +393,30 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
                            QString& str, const ca *attr, bool pm, bool clear)
 {
   int a = font_a + m_lineSpacing / 2;
-  QColor fColor = color_table[attr->f].color;
+  QColor fColor = printerFriendly ? Qt::black : color_table[attr->f].color;
   QString drawstr;
   
-  if (attr->r & RE_CURSOR)
+  if ((attr->r & RE_CURSOR) && !isPrinting)
     cursorRect = rect;
 
   // Paint background
-  if (color_table[attr->b].transparent)
+  if (!printerFriendly)
   {
-    if (pm)
-       paint.setBackgroundMode( TransparentMode );
-    if (clear || (blinking && (attr->r & RE_BLINK)))
-       erase(rect);
-  }
-  else
-  {
-    paint.fillRect(rect, color_table[attr->b].color);
+    if (color_table[attr->b].transparent)
+    {
+      if (pm)
+        paint.setBackgroundMode( TransparentMode );
+      if (clear || (blinking && (attr->r & RE_BLINK)))
+        erase(rect);
+    }
+    else
+    {
+      paint.fillRect(rect, color_table[attr->b].color);
+    }
   }
 
   // Paint cursor
-  if ((attr->r & RE_CURSOR)) {
+  if ((attr->r & RE_CURSOR) && !isPrinting) {
     paint.setBackgroundMode( TransparentMode );
     int h = font_h - m_lineSpacing;
     QRect r(rect.x(),rect.y()+m_lineSpacing/2,rect.width(),h);
@@ -434,11 +440,20 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
   {
     paint.setPen(fColor);
     int x = rect.x();
+    if (color_table[attr->f].bold && printerBold)
+    {
+      // When printing we use a bold font for bold
+      paint.save();
+      QFont f = font();
+      f.setBold(true);
+      paint.setFont(f);
+    }
+    
     if(!fixed_font)
     {
       // The meaning of y differs between different versions of QPainter::drawText!!
       int y = rect.y(); // top of rect
-      for(int i=0;i<str.length();i++)
+      for(unsigned int i=0;i<str.length();i++)
       {
         drawstr = str.at(i);
         // Add double of the width if next c is 0;
@@ -453,19 +468,26 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
       int y = rect.y()+a; // baseline
       paint.drawText(x,y, str, -1, QPainter::LTR);
     }
+
+    if (color_table[attr->f].bold && isPrinting)
+    {
+      // When printing we use a bold font for bold
+      paint.restore();
+    }
     
     if ((attr->r & RE_UNDERLINE) || color_table[attr->f].bold)
     {
       paint.setClipRect(rect);
-      if (color_table[attr->f].bold)
+      if (color_table[attr->f].bold && !printerBold)
       {
+        // On screen we use overstrike for bold
         paint.setBackgroundMode( TransparentMode );
         int x = rect.x()+1;
         if(!fixed_font)
         {
           // The meaning of y differs between different versions of QPainter::drawText!!
           int y = rect.y(); // top of rect
-          for(int i=0;i<str.length();i++)
+          for(unsigned int i=0;i<str.length();i++)
           {
              drawstr = str.at(i);
              // Add double of the width if next c is 0;
@@ -676,6 +698,51 @@ HCNT("paintEvent");
 
   QRect rect = pe->rect().intersect(contentsRect());
 
+  paintContents(paint, rect, pm != 0);
+
+  drawFrame( &paint );
+  paint.end();
+  setUpdatesEnabled(true);
+}
+
+void TEWidget::print(QPainter &paint, bool friendly, bool exact)
+{
+   bool save_fixed_font = fixed_font;
+   bool save_blinking = blinking;
+   fixed_font = false;
+   blinking = false;
+   paint.setFont(font());
+
+   isPrinting = true;
+   printerFriendly = friendly;
+   printerBold = !exact;
+
+   if (exact)
+   {
+     QPixmap pm(contentsRect().right(), contentsRect().bottom());
+     pm.fill();
+     
+     QPainter pm_paint;
+     pm_paint.begin(&pm, this);
+     paintContents(pm_paint, contentsRect(), true);
+     pm_paint.end();
+     paint.drawPixmap(0, 0, pm);
+   }
+   else
+   {
+     paintContents(paint, contentsRect(), true);
+   }
+
+   printerFriendly = false;
+   isPrinting = false;
+   printerBold = false;
+   
+   fixed_font = save_fixed_font;
+   blinking = save_blinking;
+}
+
+void TEWidget::paintContents(QPainter &paint, const QRect &rect, bool pm)
+{
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
   int    tLy = tL.y();
@@ -720,15 +787,12 @@ HCNT("paintEvent");
          QString unistr(disstrU,p);
          drawAttrStr(paint,
                 QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
-                unistr, &image[loc(x,y)], pm != NULL, false);
+                unistr, &image[loc(x,y)], pm, false);
       }
       x += len - 1;
     }
   }
   delete [] disstrU;
-  drawFrame( &paint );
-  paint.end();
-  setUpdatesEnabled(true);
 }
 
 void TEWidget::blinkEvent()

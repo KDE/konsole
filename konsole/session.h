@@ -97,6 +97,8 @@ public:
   void cancelZModem();
   bool zmodemIsBusy() { return zmodemBusy; }
 
+  void print(QPainter &paint, bool friendly, bool exact);
+
 public slots:
 
   void run();

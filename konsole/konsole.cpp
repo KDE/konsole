@@ -103,6 +103,7 @@ Time to start a requirement list.
 #include <dcopclient.h>
 #include <kglobalsettings.h>
 #include <knotifydialog.h>
+#include <kprinter.h>
 
 #include <kaction.h>
 #include <qlabel.h>
@@ -125,6 +126,7 @@ Time to start a requirement list.
 
 #include "konsole.h"
 #include <netwm.h>
+#include "printsettings.h"
 
 #define KONSOLEDEBUG    kdDebug(1211)
 
@@ -841,6 +843,7 @@ void Konsole::makeBasicGUI()
 
   m_closeSession = new KAction(i18n("C&lose Session"), "fileclose", 0, this,
                                SLOT(closeCurrentSession()), m_shortcuts, "close_session");
+  m_print = new KAction(i18n("&Print Screen"), "file_print", 0, this, SLOT( slotPrint() ), m_shortcuts, "fileprint");
   m_quit = new KAction(i18n("&Quit"), "exit", 0, this, SLOT( close() ), m_shortcuts, "quit");
 
   new KAction(i18n("New Session"), Qt::CTRL+Qt::ALT+Qt::Key_N, this, SLOT(newSession()), m_shortcuts, "new_session");
@@ -1335,18 +1338,17 @@ void Konsole::keytab_menu_activated(int item)
 
 void Konsole::setFont(int fontno)
 {
-  QFont f;
   if (fontno == -1)
   {
-    f = defaultFont;
     fontno = n_font;
   }
   else if (fontno == DEFAULTFONT)
   {
-    f = defaultFont;
+    te->setVTFont(defaultFont);
   }
   else if (fonts[fontno][0] == '-')
   {
+    QFont f;
     f.setRawName( fonts[fontno] );
     f.setFixedPitch(true);
     f.setStyleHint(QFont::TypeWriter);
@@ -1357,15 +1359,20 @@ void Konsole::setFont(int fontno)
       QTimer::singleShot(1,this,SLOT(fontNotFound()));
       return;
     }
+    te->setVTFont(f);
   }
   else
   {
+    QFont f;
     f.setFamily("fixed");
     f.setFixedPitch(true);
     f.setStyleHint(QFont::TypeWriter);
     f.setPixelSize(QString(fonts[fontno]).toInt());
+    te->setVTFont(f);
   }
+
   if (se) se->setFontNo(fontno);
+
   if (m_menuCreated)
   {
      QStringList items = selectFont->items();
@@ -1379,7 +1386,7 @@ void Konsole::setFont(int fontno)
      }
      selectFont->setCurrentItem(j);
   }
-  te->setVTFont(f);
+
   n_font = fontno;
 }
 
@@ -2350,6 +2357,12 @@ void Konsole::buildSessionMenus()
    m_session->insertSeparator();
    m_closeSession->plug(m_session);
 
+   if (kapp->authorizeKAction("file_print"))
+   {
+      m_session->insertSeparator();
+      m_print->plug(m_session);
+   }
+
    m_session->insertSeparator();
    m_quit->plug(m_session);
 }
@@ -3037,6 +3050,22 @@ void Konsole::slotZModemDetected(TESession *session)
   {
      const KURL &url = dlg.selectedURL();
      session->startZModem(zmodem, url.path(), QStringList());
+  }
+}
+
+void Konsole::slotPrint()
+{
+  KPrinter printer;
+  printer.addDialogPage(new PrintSettings());
+  if (printer.setup(this))
+  {
+    printer.setFullPage(false);
+    printer.setCreator("Konsole");
+    QPainter paint;
+    paint.begin(&printer);
+    se->print(paint, printer.option("app-konsole-printfriendly") == "true",
+                     printer.option("app-konsole-printexact") == "true");
+    paint.end();
   }
 }
 

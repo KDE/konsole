@@ -641,4 +641,9 @@ void TESession::onRcvBlock( const char* buf, int len )
     emit receivedData( QString::fromLatin1( buf, len ) );
 }
 
+void TESession::print( QPainter &paint, bool friendly, bool exact )
+{
+    te->print(paint, friendly, exact);
+}
+
 #include "session.moc"
