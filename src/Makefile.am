@@ -50,7 +50,7 @@ install-data-local:
 	@echo ""
 
 # konsole_grantpty needs to be installed setuid root
-install-exec-local:
+install-exec-local: install-binPROGRAMS
 	@(chown root $(bindir)/konsole_grantpty && chmod 4755 $(bindir)/konsole_grantpty) || echo "Please make konsole_grandpty setuid root"  
 
 # just to make sure, automake makes them 
