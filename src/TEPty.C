@@ -87,7 +87,13 @@ extern "C" {
 #include <grp.h>
 
 #include <signal.h>
+#ifdef HAVE_TERMIO_H
+/* needed at least on AIX */
+#include <termio.h>
+#endif
+#ifdef HAVE_TERMIOS_H
 #include <termios.h>
+#endif
 //#include <time.h>
 #include <unistd.h>
 
