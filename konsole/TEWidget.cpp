@@ -1298,6 +1298,56 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
     return true;
 #endif
   }
+  static int composeLength = 0;
+  if ( e->type() == QEvent::IMStart )
+  {
+    QIMEvent *qime = (QIMEvent *)e;
+    composeLength = 0;
+    qime->accept();
+    return false;
+  }
+  if ( e->type() == QEvent::IMCompose )
+  {
+    QString text;
+    if (composeLength)
+    {
+      text.setLength(composeLength);
+      for(int i = 0; i < composeLength; i++)
+         text[i] = '\010';
+    }
+
+    QIMEvent *qime = (QIMEvent *)e;
+    composeLength = qime->text().length();
+    
+    text += qime->text();
+    if (!text.isEmpty())
+    {
+      QKeyEvent ke(QEvent::KeyPress, 0,-1,0, text);
+      emit keyPressedSignal(&ke);
+    }
+    qime->accept();
+    return false;
+  }
+  if ( e->type() == QEvent::IMEnd )
+  {
+    QString text;
+    if (composeLength)
+    {
+      text.setLength(composeLength);
+      for(int i = 0; i < composeLength; i++)
+         text[i] = '\010';
+    }
+
+    QIMEvent *qime = (QIMEvent *)e;
+    text += qime->text();
+    if (!text.isEmpty())
+    {
+      QKeyEvent ke(QEvent::KeyPress, 0,-1,0, text);
+      emit keyPressedSignal(&ke);
+    }
+    qime->accept();
+    return false;
+  }
   if ( e->type() == QEvent::Enter )
   {
     QObject::disconnect( (QObject*)cb, SIGNAL(dataChanged()),
