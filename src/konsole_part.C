@@ -189,7 +189,7 @@ konsolePart::~konsolePart()
 bool konsolePart::openURL( const KURL & url )
 {
   m_url = url;
-  emit setWindowCaption( url.decodedURL() );
+  emit setWindowCaption( url.prettyURL() );
   emit started( 0 );
 
   if ( url.isLocalFile() )
