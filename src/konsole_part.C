@@ -143,8 +143,11 @@ void konsolePart::doneSession(TESession*,int)
   // without this donePty will be called after we deleted everything (->crashes)
   XFlush( qt_xdisplay() );
   // see doneSession in konsole.C
-  initial->setConnect(FALSE);
-  QTimer::singleShot(100,initial,SLOT(terminate()));
+  if (initial)
+  {
+    initial->setConnect(FALSE);
+    QTimer::singleShot(100,initial,SLOT(terminate()));
+  }
 }
 
 void konsolePart::sessionDestroyed()
