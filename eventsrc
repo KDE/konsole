@@ -2,6 +2,7 @@
 IconName=konsole
 Comment=Konsole
 Comment[be]=Кансоля
+Comment[bg]=Конзола
 Comment[da]=Konsol
 Comment[fa]=کنسول
 Comment[th]=คอนโซล K
@@ -47,6 +48,7 @@ default_presentation=16
 
 [Activity]
 Name=Activity in monitored session
+Name[bg]=Дейности в наблюдавана сесия
 Name[da]=Aktivitet i overvåget session
 Name[es]=Actividad en sesión monitorizada
 Name[fa]=فعالیت در نشست تحت نظارت
@@ -56,6 +58,7 @@ Name[sk]=Aktivita v monitorovaných sedeniach
 Name[sv]=Aktivitet i bevakad session
 Name[th]=การกระทำบนเซสชันติดตามการทำงาน
 Comment=Activity detected in a monitored session
+Comment[bg]=Открити дейности в наблюдавана сесия
 Comment[da]=Aktivitet detekteret i en overvåget session
 Comment[es]=Detectada actividad en una sesión monitorizada
 Comment[fa]=یافتن فعالیت در نشست تحت نظارت
@@ -66,6 +69,7 @@ default_presentation=16
 
 [Silence]
 Name=Silence in monitored session
+Name[bg]=Подтискане на наблюдавана сесия
 Name[da]=Stilhed i overvåget session
 Name[es]=Silencio en sesión monitorizada
 Name[fa]=سکوت در نشست تحت نظارت
@@ -83,6 +87,7 @@ default_presentation=16
 
 [Finished]
 Name=Session finished with non-zero status
+Name[bg]=Сесията завърши ссъс статус различен от 0
 Name[da]=Session afsluttet med ikke-nul status
 Name[es]=Sesión terminada con estado no cero
 Name[fa]=نشست با وضعیت غیر صفر به پایان رسید
@@ -91,6 +96,7 @@ Name[pt_BR]=Sessão finalizada com status diferente de zero
 Name[sv]=Sessionen klar med status skild från noll
 Name[th]=เซสชันจบการทำงานได้สถานะไม่ใช่ค่าศูนย์
 Comment=A session has exited with non-zero status
+Comment[bg]=Сесията завърши със статус различен от 0
 Comment[da]=En session er gået ud med ikke-nul status
 Comment[es]=Ha terminado una sesión con estado no cero
 Comment[fa]=نشستی با وضعیت غر صفر به پایان رسیده است
