@@ -557,11 +557,15 @@ void TEWidget::scrollChanged(int)
 
 void TEWidget::setScroll(int cursor, int slines)
 {
+  //kdDebug()<<"TEWidget::setScroll() disconnect()"<<endl;
   disconnect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
+  //kdDebug()<<"TEWidget::setScroll() setRange()"<<endl;
   scrollbar->setRange(0,slines);
+  //kdDebug()<<"TEWidget::setScroll() setSteps()"<<endl;
   scrollbar->setSteps(1,lines);
   scrollbar->setValue(cursor);
   connect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
+  //kdDebug()<<"TEWidget::setScroll() done"<<endl;
 }
 
 void TEWidget::setScrollbarLocation(int loc)

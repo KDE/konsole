@@ -16,14 +16,22 @@
     of the abilities of the framework - multible sessions.
 */
 
-TESession::TESession(KMainWindow* main, TEWidget* te, const char* _pgm, QStrList & _args, const char *_term) : schema_no(0), font_no(3), pgm(_pgm), args(_args)
+TESession::TESession(KMainWindow* main, TEWidget* te, const char* _pgm, QStrList & _args, const char *_term)
+   : schema_no(0)
+   , font_no(3)
+   , pgm(_pgm)
+   , args(_args)
 {
+  //kdDebug()<<"TESession ctor() new TEPty"<<endl;
   sh = new TEPty();
+  //kdDebug()<<"TESession ctor() new TEmuVt102"<<endl;
   em = new TEmuVt102(te);
 
   term = _term;
 
+  //kdDebug()<<"TESession ctor() sh->setSize()"<<endl;
   sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
+  //kdDebug()<<"TESession ctor() connecting"<<endl;
   QObject::connect( sh,SIGNAL(block_in(const char*,int)),
                     em,SLOT(onRcvBlock(const char*,int)) );
   QObject::connect( em,SIGNAL(ImageSizeChanged(int,int)),
@@ -41,6 +49,7 @@ TESession::TESession(KMainWindow* main, TEWidget* te, const char* _pgm, QStrList
   QObject::connect( em,SIGNAL(changeTitle(int, const QString&)),
                     main,SLOT(changeTitle(int, const QString&)) );
   QObject::connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
+  //kdDebug()<<"TESession ctor() done"<<endl;
 }
 
 

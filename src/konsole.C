@@ -153,36 +153,53 @@ const char *fonts[] = {
  };
 #define TOPFONT ((sizeof(fonts)/sizeof(char*))-1)
 
-Konsole::Konsole(const char* name,
-                 const char* _pgm, QStrList & _args,
-                 int histon, bool toolbaron, QCString mytitle) : KMainWindow(0, name), pgm(_pgm), args(_args),
-                 alreadyNoticedBackgroundChange_(false)
+Konsole::Konsole(const char* name, const char* _pgm,
+                 QStrList & _args, int histon, bool toolbaron, QCString mytitle)
+:KMainWindow(0, name)
+,te(0)
+,se(0)
+,m_initialSession(0)
+,colors(0)
+,rootxpm(0)
+,menubar(0)
+,statusbar(0)
+,m_file(0)
+,m_sessions(0)
+,m_options(0)
+,m_schema(0)
+,m_keytab(0)
+,m_codec(0)
+,m_toolbarSessionsCommands(0)
+,m_signals(0)
+,m_help(0)
+,showToolbar(0)
+,showMenubar(0)
+,showScrollbar(0)
+,showFrame(0)
+,selectSize(0)
+,selectFont(0)
+,selectScrollbar(0)
+,warnQuit(0)
+,cmd_serial(0)
+,session_no(0)
+,n_keytab(0)
+,n_oldkeytab(0)
+,n_render(0)
+,curr_schema(0)
+,pgm(_pgm)
+,args(_args)
+,b_scroll(histon)
+,b_fullscreen(false)
+,m_menuCreated(false)
+,skip_exit_query(false) // used to skip the query when closed by the session management
+,b_warnQuit(false)
+,alreadyNoticedBackgroundChange_(false)
 {
-  kapp->addKipcEventMask(KIPC::BackgroundChanged);
-
-  connect
-    (
-     kapp,
-     SIGNAL(backgroundChanged(int)),
-     this,
-     SLOT(slotBackgroundChanged(int))
-    );
+   kapp->addKipcEventMask(KIPC::BackgroundChanged);
+   connect( kapp,SIGNAL(backgroundChanged(int)),this, SLOT(slotBackgroundChanged(int)));
 
   no2command.setAutoDelete(true);
-  session_no = 0;
-  cmd_serial = 0;
-
-  se = 0L;
-  rootxpm = 0L;
   menubar = menuBar();
-  b_scroll = histon;
-  b_fullscreen = FALSE;
-  n_keytab = 0;
-  n_render = 0;
-
-  // used to skip the query when closed by the session
-  // management
-  skip_exit_query = false;
 
   // create terminal emulation framework ////////////////////////////////////
 
@@ -199,67 +216,34 @@ Konsole::Konsole(const char* name,
 
   setCentralWidget(te);
 
-  makeMenu();
-  setDockEnabled( toolBar(), QMainWindow::Left, FALSE );
-  setDockEnabled( toolBar(), QMainWindow::Right, FALSE );
-  toolBar()->setFullSize( TRUE );
-   //  toolBar()->setIconText( KToolBar::IconTextRight);
+  makeBasicGUI();
 
-  // load session commands ///////////////////////////////////////////////////
-
-  loadSessionCommands();
-  m_file->insertSeparator();
-  m_file->insertItem( SmallIconSet( "exit" ), i18n("&Quit"), this, SLOT( close() ) );
-
-  // load schema /////////////////////////////////////////////////////////////
-
-  curr_schema = 0;
   colors = new ColorSchemaList();
-  colors->checkSchemas();
-  updateSchemaMenu();
-
-  // load keymaps ////////////////////////////////////////////////////////////
-
-  KeyTrans::loadAll();
-  //FIXME: sort
-  for (int i = 0; i < KeyTrans::count(); i++)
-  { KeyTrans* s = KeyTrans::find(i);
-    assert( s );
-    m_keytab->insertItem(s->hdr,s->numb);
-  }
-  m_keytab->setItemChecked(0,TRUE);
-
-  // set global options ///////////////////////////////////////////////////////
 
   // construct initial session ///////////////////////////////////////////////
-//FIXME: call newSession here, somehow, instead the stuff below.
+  //FIXME: call newSession here, somehow, instead the stuff below.
   // Please do it ! It forces to duplicate code... (David)
 
-  TESession* initial = new TESession(this,te,pgm,args,"xterm");
+  KeyTrans::loadAll();
 
-  connect( initial,SIGNAL(done(TESession*,int)),
+  kdDebug()<<"Konsole ctor(): new TESession()"<<endl;
+  m_initialSession = new TESession(this,te,pgm,args,"xterm");
+
+  connect( m_initialSession,SIGNAL(done(TESession*,int)),
            this,SLOT(doneSession(TESession*,int)) );
   connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
            this, SLOT(configureRequest(TEWidget*,int,int,int)) );
 
+  if (mytitle.isEmpty())
+  {
+     title = (args.count() && (kapp->caption() == PACKAGE))
+        ? QString(args.at(0))  // program executed in the title bar
+        : kapp->caption();  // `konsole' or -caption
+  }
+  else title=mytitle;
+  m_initialSession->setTitle(title);
 
-  if (mytitle.isEmpty()) {
-   title = (args.count() && (kapp->caption() == PACKAGE))
-         ? QString(args.at(0))  // program executed in the title bar
-         : kapp->caption();  // `konsole' or -caption
-         }
-  else {
-        title = mytitle;
-         }
-  initial->setTitle(title);
-
-  int myCount = args.count();
-     KONSOLEDEBUG << (char)myCount << " is the count of items in args.\n";
-
-//initial->setHistory(b_scroll); //FIXME: take from schema
-//  setHistory(b_scroll); //FIXME: take from schema
-
-  addSession(initial);
+  addSession(m_initialSession);
 
   // read and apply default values ///////////////////////////////////////////
   resize(321, 321); // Dummy.
@@ -270,17 +254,31 @@ Konsole::Konsole(const char* name,
   if (currentSize != size())
      defaultSize = size();
   config->setGroup("options");
+  kdDebug()<<"Konsole ctor(): readProps()"<<endl;
   readProperties(config);
+  kdDebug()<<"Konsole ctor(): toolbar"<<endl;
   if (!toolbaron)
     toolBar()->hide();
 
-  showToolbar->setChecked(!toolBar()->isHidden());
-  showMenubar->setChecked(!menuBar()->isHidden());
   // activate and run first session //////////////////////////////////////////
 
-  runSession(initial);
-  // apply keytab
-  keytab_menu_activated(n_keytab);
+  kdDebug()<<"Konsole ctor(): runSession()"<<endl;
+  se = m_initialSession;
+  te->currentSession = se;
+  se->setConnect(TRUE);
+  title = se->Title(); // take title from current session
+  setHeader();
+  se->setKeymapNo(n_keytab); // act. the keytab for this session
+
+  // give some time to get through the
+  // resize events before starting up.
+  QTimer::singleShot(80,se,SLOT(run()));
+  //QTimer::singleShot(1,this,SLOT(allowPrevNext())); // hack, hack, hack
+  //seems to work, aleXXX
+  connect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
+  connect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
+
+  kdDebug()<<"Konsole ctor(): done"<<endl;
 }
 
 Konsole::~Konsole()
@@ -299,183 +297,233 @@ Konsole::~Konsole()
 /*  Make menu                                                                */
 /* ------------------------------------------------------------------------- */
 
-void Konsole::makeMenu()
+void Konsole::makeGUI()
 {
-  // options (taken from kvt) //////////////////////////////////////
+   if (m_menuCreated) return;
+   kdDebug()<<"Konsole::makeGUI()"<<endl;
+   m_menuCreated=true;
 
-  m_file = new KPopupMenu(this);
-  connect(m_file, SIGNAL(activated(int)), SLOT(newSession(int)));
+   // Send Signal Menu -------------------------------------------------------------
+   m_signals = new KPopupMenu(this);
+   m_signals->insertItem( i18n( "Suspend Task" )   + " (STOP)", 17);     // FIXME: comes with 3 values
+   m_signals->insertItem( i18n( "Continue Task" )  + " (CONT)", 18);     // FIXME: comes with 3 values
+   m_signals->insertItem( i18n( "Hangup" )         + " (HUP)",   1);
+   m_signals->insertItem( i18n( "Interrupt Task" ) + " (INT)",   2);
+   m_signals->insertItem( i18n( "Terminate Task" ) + " (TERM)", 15);
+   m_signals->insertItem( i18n( "Kill Task" )      + " (KILL)",  9);
+   connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
 
-  KToolBarPopupAction *newsession = new KToolBarPopupAction(i18n("&New"), "filenew",
-                0 , this, SLOT(newSession()),
-                this, KStdAction::stdName(KStdAction::New));
+   // Sessions Menu ----------------------------------------------------------------
+   m_sessions->setCheckable(TRUE);
+   m_sessions->insertItem( i18n("Send Signal"), m_signals );
+   KAction *renameSession = new KAction(i18n("R&ename session..."), 0, this,
+                                        SLOT(slotRenameSession()), this);
+   renameSession->plug(m_sessions);
+   m_sessions->insertSeparator();
+   KRadioAction *ra = session2action.find(m_initialSession);
+   if (ra!=0) ra->plug(m_sessions);
+
+
+   // Schema Options Menu ----------------------------------------------------------
+   m_schema = new KPopupMenu(this);
+   m_schema->setCheckable(TRUE);
+   connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
+   connect(m_schema, SIGNAL(aboutToShow()), SLOT(schema_menu_check()));
+
+   // Keyboard Options Menu --------------------------------------------------------
+   m_keytab = new KPopupMenu(this);
+   m_keytab->setCheckable(TRUE);
+   connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
+
+   // Codec Options Menu -----------------------------------------------------------
+   m_codec  = new KPopupMenu(this);
+   m_codec->setCheckable(TRUE);
+   m_codec->insertItem( i18n("&locale"), 1 );
+   m_codec->setItemChecked(1,TRUE);
+
+   //options menu
+   // insert 'Rename Session' here too, because they will not find it on right click
+   renameSession->plug(m_options);
+   m_options->insertSeparator();
+
+   // Menubar on/off
+   showMenubar = new KToggleAction ( i18n( "Show &Menubar" ), 0, this,
+                                     SLOT( slotToggleMenubar() ), this );
+   showMenubar->plug ( m_options );
+
+   // Toolbar on/off
+   showToolbar = new KToggleAction ( i18n( "Show &Toolbar" ), 0, this,
+                                     SLOT( slotToggleToolbar() ), this );
+   showToolbar->plug(m_options);
+
+   // Frame on/off
+   showFrame = new KToggleAction(i18n("Show &Frame"), 0,
+                                 this, SLOT(slotToggleFrame()), this);
+   showFrame->plug(m_options);
+
+   // Scrollbar
+   selectScrollbar = new KSelectAction(i18n("Scrollbar"), 0, this,
+                                       SLOT(slotSelectScrollbar()), this);
+   QStringList scrollitems;
+   scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
+   selectScrollbar->setItems(scrollitems);
+   selectScrollbar->plug(m_options);
+
+   // Fullscreen
+   m_options->insertSeparator();
+   m_options->insertItem( i18n("F&ullscreen"), 5);
+   m_options->setItemChecked(5,b_fullscreen);
+   m_options->insertSeparator();
+
+   // Select size
+   selectSize = new KSelectAction(i18n("Size"), 0, this,
+                                  SLOT(slotSelectSize()), this);
+   QStringList sizeitems;
+   sizeitems << i18n("40x15 (&small)")
+      << i18n("80x24 (&vt100)")
+      << i18n("80x25 (&ibmpc)")
+      << i18n("80x40 (&xterm)")
+      << i18n("80x52 (ibmv&ga)");
+   selectSize->setItems(sizeitems);
+   selectSize->plug(m_options);
+
+   // Select font
+   selectFont = new KonsoleFontSelectAction(i18n("Font"), 0, this,
+                                            SLOT(slotSelectFont()), this);
+   QStringList it;
+   it << i18n("&Normal")
+      << i18n("&Tiny")
+      << i18n("&Small")
+      << i18n("&Medium")
+      << i18n("&Large")
+      << i18n("&Huge")
+      << ""
+      << i18n("&Linux")
+      << i18n("&Unicode")
+      << ""
+      << i18n("&Custom...");
+   selectFont->setItems(it);
+   selectFont->plug(m_options);
+
+   // Schema
+   m_options->insertItem( i18n("&Schema"), m_schema);
+   m_options->insertSeparator();
+   m_options->insertItem( i18n("&History"), 3 );
+   m_options->setItemEnabled(3, false);
+   m_options->insertSeparator();
+   m_options->insertItem( i18n("&Codec"), m_codec);
+   m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
+
+   KAction *WordSeps = new KAction(i18n("Word Separators"), 0, this,
+                                   SLOT(slotWordSeps()), this);
+   WordSeps->plug(m_options);
+
+   // Open Session Warning on Quit
+   // FIXME: Allocate KActionCollection as parent, not this - Martijn
+   /*
+    warnQuit = new KToggleAction (i18n("&Warn for Open Sessions on Quit"),
+    0, this,
+    SLOT(slotToggleQuitWarning()), this);
+    */
+
+   warnQuit = new KToggleAction (i18n("&Warn for Open Sessions on Quit"),
+                                 0, this,SLOT(slotWarnQuit()), this);
+
+   warnQuit->plug (m_options);
+   //m_options->insertSeparator();
+
+   m_options->insertSeparator();
+   // The 'filesave' icon is useable, but it might be confusing. I don't use it for now - Martijn
+   m_options->insertItem( i18n("Save &Settings"), 8);
+   //  m_options->insertItem( SmallIconSet( "filesave" ), i18n("Save &Settings"), 8);
+   connect(m_options, SIGNAL(activated(int)), SLOT(opt_menu_activated(int)));
+   m_options->installEventFilter( this );
+   // Help and about menu
+   /*
+    QString aboutAuthor = i18n("%1 version %2 - an X terminal\n"
+    "Copyright (c) 1997-2000 by\n"
+    "Lars Doelle <lars.doelle@on-line.de>\n"
+    "\n"
+    "This program is free software under the\n"
+    "terms of the GNU General Public License\n"
+    "and comes WITHOUT ANY WARRANTY.\n"
+    "See 'LICENSE.readme' for details.").arg(PACKAGE).arg(VERSION);
+    KPopupMenu* m_help =  helpMenu(aboutAuthor, false);
+    */
+   //help menu
+   m_help->insertItem( i18n("&Technical Reference"), this, SLOT(tecRef()),
+                       0, -1, 1);
+
+   //the different session types
+   loadSessionCommands();
+   m_file->insertSeparator();
+   m_file->insertItem( SmallIconSet( "exit" ), i18n("&Quit"), this, SLOT( close() ) );
+
+
+   connect(m_file, SIGNAL(activated(int)), SLOT(newSession(int)));
+
+   delete colors;
+   colors = new ColorSchemaList();
+   kdDebug()<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
+   kdDebug()<<"Konsole::makeGUI(): checkSchemas()"<<endl;
+   colors->checkSchemas();
+   kdDebug()<<"Konsole::makeGUI() updateSchemas()"<<endl;
+   updateSchemaMenu();
+   kdDebug()<<"Konsole::makeGUI(): updateSchemas done"<<endl;
+   ColorSchema *sch=colors->find(s_schema);
+   curr_schema=sch->numb();
+   kdDebug()<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
+   m_schema->setItemChecked(0,false);
+   m_schema->setItemChecked(curr_schema,true);
+
+   // insert keymaps into menu
+   //FIXME: sort
+   for (int i = 0; i < KeyTrans::count(); i++)
+   {
+      KeyTrans* s = KeyTrans::find(i);
+      assert( s );
+      m_keytab->insertItem(s->hdr,s->numb);
+   }
+   applySettingsToGUI();
+};
+
+void Konsole::makeBasicGUI()
+{
+   kdDebug()<<"Konsole::makeBasicGUI()"<<endl;
+   KToolBarPopupAction *newsession = new KToolBarPopupAction(i18n("&New"), "filenew",
+                0 , this, SLOT(newSession()),this, KStdAction::stdName(KStdAction::New));
   newsession->plug(toolBar());
+  toolBar()->insertLineSeparator();
   m_toolbarSessionsCommands = newsession->popupMenu();
   connect(m_toolbarSessionsCommands, SIGNAL(activated(int)), SLOT(newSession(int)));
-  toolBar()->insertLineSeparator();
 
-  // Send Signal Menu -------------------------------------------------------------
-  KPopupMenu* m_signals = new KPopupMenu(this);
-  m_signals->insertItem( i18n( "Suspend Task" )   + " (STOP)", 17);     // FIXME: comes with 3 values
-  m_signals->insertItem( i18n( "Continue Task" )  + " (CONT)", 18);     // FIXME: comes with 3 values
-  m_signals->insertItem( i18n( "Hangup" )         + " (HUP)",   1);
-  m_signals->insertItem( i18n( "Interrupt Task" ) + " (INT)",   2);
-  m_signals->insertItem( i18n( "Terminate Task" ) + " (TERM)", 15);
-  m_signals->insertItem( i18n( "Kill Task" )      + " (KILL)",  9);
-  connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
+  setDockEnabled( toolBar(), QMainWindow::Left, FALSE );
+  setDockEnabled( toolBar(), QMainWindow::Right, FALSE );
+  toolBar()->setFullSize( TRUE );
 
-  // Sessions Menu ----------------------------------------------------------------
+
+  m_file = new KPopupMenu(this);
   m_sessions = new KPopupMenu(this);
-  m_sessions->setCheckable(TRUE);
-  m_sessions->insertItem( i18n("Send Signal"), m_signals );
-
-  KAction *renameSession = new KAction(i18n("R&ename session..."), 0, this,
-                             SLOT(slotRenameSession()), this);
-  renameSession->plug(m_sessions);
-
-  m_sessions->insertSeparator();
-
-  // Schema Options Menu ----------------------------------------------------------
-  m_schema = new KPopupMenu(this);
-  m_schema->setCheckable(TRUE);
-  connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
-  connect(m_schema, SIGNAL(aboutToShow()), SLOT(schema_menu_check()));
-
-  // Keyboard Options Menu --------------------------------------------------------
-  m_keytab = new KPopupMenu(this);
-  m_keytab->setCheckable(TRUE);
-  connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
-
-  // Codec Options Menu -----------------------------------------------------------
-  m_codec  = new KPopupMenu(this);
-  m_codec->setCheckable(TRUE);
-  m_codec->insertItem( i18n("&locale"), 1 );
-  m_codec->setItemChecked(1,TRUE);
-
-  // Options Menu -----------------------------------------------------------------
-  // Do __NOT__ use KStdActions, because these may also show unusable accel keys!
-  // (At least they do for 'Show Menubar'):
   m_options = new KPopupMenu(this);
-  // insert 'Rename Session' here too, because they will not find it on right click
-  renameSession->plug(m_options);
-  m_options->insertSeparator();
-
-  // Menubar on/off
-  showMenubar = new KToggleAction ( i18n( "Show &Menubar" ), 0, this,
-                                    SLOT( slotToggleMenubar() ), this );
-  showMenubar->plug ( m_options );
-
-  // Toolbar on/off
-  showToolbar = new KToggleAction ( i18n( "Show &Toolbar" ), 0, this,
-                                    SLOT( slotToggleToolbar() ), this );
-  showToolbar->plug(m_options);
-
-  // Frame on/off
-  showFrame = new KToggleAction(i18n("Show &Frame"), 0,
-                                this, SLOT(slotToggleFrame()), this);
-  showFrame->plug(m_options);
-
-  // Scrollbar
-  selectScrollbar = new KSelectAction(i18n("Scrollbar"), 0, this,
-                             SLOT(slotSelectScrollbar()), this);
-  QStringList scrollitems;
-  scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
-  selectScrollbar->setItems(scrollitems);
-  selectScrollbar->plug(m_options);
-  // Fullscreen
-  m_options->insertSeparator();
-  m_options->insertItem( i18n("F&ullscreen"), 5);
-  m_options->setItemChecked(5,b_fullscreen);
-  m_options->insertSeparator();
-
-
-  // Select size
-  selectSize = new KSelectAction(i18n("Size"), 0, this,
-                             SLOT(slotSelectSize()), this);
-  QStringList sizeitems;
-  sizeitems << i18n("40x15 (&small)")
-            << i18n("80x24 (&vt100)")
-            << i18n("80x25 (&ibmpc)")
-            << i18n("80x40 (&xterm)")
-            << i18n("80x52 (ibmv&ga)");
-  selectSize->setItems(sizeitems);
-  selectSize->plug(m_options);
-  // Select font
-  selectFont = new KonsoleFontSelectAction(i18n("Font"), 0, this,
-                                 SLOT(slotSelectFont()), this);
-  QStringList it;
-  it << i18n("&Normal")
-     << i18n("&Tiny")
-     << i18n("&Small")
-     << i18n("&Medium")
-     << i18n("&Large")
-     << i18n("&Huge")
-     << ""
-     << i18n("&Linux")
-     << i18n("&Unicode")
-     << ""
-     << i18n("&Custom...");
-  selectFont->setItems(it);
-  selectFont->plug(m_options);
-  // Schema
-  m_options->insertItem( i18n("&Schema"), m_schema);
-  m_options->insertSeparator();
-  m_options->insertItem( i18n("&History"), 3 );
-  m_options->setItemEnabled(3, false);
-  m_options->insertSeparator();
-  m_options->insertItem( i18n("&Codec"), m_codec);
-  m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
-
-  KAction *WordSeps = new KAction(i18n("Word Separators..."), 0, this,
-                             SLOT(slotWordSeps()), this);
-  WordSeps->plug(m_options);
-
-  // Open Session Warning on Quit
-  // FIXME: Allocate KActionCollection as parent, not this - Martijn
-/*
-  warnQuit = new KToggleAction (i18n("&Warn for Open Sessions on Quit"),
-                                0, this,
-                                SLOT(slotToggleQuitWarning()), this);
-*/
-
-  warnQuit = new KToggleAction (i18n("&Warn for Open Sessions on Quit"), 0, this);
-
-  warnQuit->plug (m_options);
-  //m_options->insertSeparator();
-
-  m_options->insertSeparator();
-  // The 'filesave' icon is useable, but it might be confusing. I don't use it for now - Martijn
-  m_options->insertItem( i18n("Save &Settings"), 8);
-  //  m_options->insertItem( SmallIconSet( "filesave" ), i18n("Save &Settings"), 8);
-  connect(m_options, SIGNAL(activated(int)), SLOT(opt_menu_activated(int)));
-  m_options->installEventFilter( this );
-  // Help and about menu
-/*
-  QString aboutAuthor = i18n("%1 version %2 - an X terminal\n"
-                             "Copyright (c) 1997-2000 by\n"
-                             "Lars Doelle <lars.doelle@on-line.de>\n"
-                             "\n"
-                             "This program is free software under the\n"
-                             "terms of the GNU General Public License\n"
-                             "and comes WITHOUT ANY WARRANTY.\n"
-                             "See 'LICENSE.readme' for details.").arg(PACKAGE).arg(VERSION);
-  KPopupMenu* m_help =  helpMenu(aboutAuthor, false);
-*/
-  KPopupMenu* m_help =  helpMenu(0, FALSE);
-  m_help->insertItem( i18n("&Technical Reference"), this, SLOT(tecRef()),
-                      0, -1, 1);
+  m_help =  helpMenu(0, FALSE);
 
   // For those who would like to add shortcuts here, be aware that
   // ALT-key combinations are heavily used by many programs. Thus,
   // activating shortcuts here means deactivating them in the other
   // programs.
 
+  connect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+  connect(m_file,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+  connect(m_options,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+  connect(m_help,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+  connect(m_sessions,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+
   menubar->insertItem(i18n("File") , m_file);
   menubar->insertItem(i18n("Sessions"), m_sessions);
   menubar->insertItem(i18n("Settings"), m_options);
   menubar->insertSeparator();
   menubar->insertItem(i18n("Help"), m_help);
-}
+};
 
 /**
    Ask for Quit confirmation - Martijn Klingens
@@ -484,7 +532,8 @@ void Konsole::makeMenu()
  */
 bool Konsole::queryClose()
 {
-    if ( (!skip_exit_query) && warnQuit && warnQuit->isChecked () ) {
+   if ( (!skip_exit_query) && b_warnQuit)
+   {
         if( (sessions.count()>1) &&
             ( KMessageBox::warningYesNo( this,
                                          i18n( "You have open sessions (besides the current one).\n"
@@ -499,6 +548,11 @@ bool Konsole::queryClose()
     // pointer for some reason, just assume closing is safe
     return  TRUE;
 }
+
+void Konsole::slotWarnQuit()
+{
+   b_warnQuit=warnQuit->isChecked();
+};
 
 /**
    This function calculates the size of the external widget
@@ -552,6 +606,8 @@ void Konsole::setColLin(int columns, int lines)
 void Konsole::configureRequest(TEWidget* te, int state, int x, int y)
 {
 //printf("Konsole::configureRequest(_,%d,%d)\n",x,y);
+   if (!m_menuCreated)
+      makeGUI();
   ( (state & ShiftButton  ) ? m_sessions :
     (state & ControlButton) ? m_file :
                               m_options  )
@@ -594,7 +650,7 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("wordseps",s_word_seps);
   config->writeEntry("scrollbar",n_scroll);
   config->writeEntry("keytab",n_keytab);
-  config->writeEntry("WarnQuit", warnQuit->isChecked());
+  config->writeEntry("WarnQuit", b_warnQuit);
 
   if (args.count() > 0) config->writeEntry("konsolearguments", args);
   config->writeEntry("class",name());
@@ -606,55 +662,86 @@ void Konsole::saveProperties(KConfig* config) {
 // So it has to apply the settings when reading them.
 void Konsole::readProperties(KConfig* config)
 {
-/*FIXME: (merging) state of material below unclear.*/
-  b_scroll = config->readBoolEntry("history",TRUE);
-  setHistory(b_scroll);
+   kdDebug()<<"Konsole::readProps()"<<endl;
+   /*FIXME: (merging) state of material below unclear.*/
+   b_scroll = config->readBoolEntry("history",TRUE);
+   b_warnQuit=config->readBoolEntry( "WarnQuit", TRUE );
+   n_oldkeytab=n_keytab;
+   n_keytab=config->readNumEntry("keytab",0); // act. the keytab for this session
+   b_fullscreen = FALSE; // config->readBoolEntry("Fullscreen",FALSE);
+   n_font     = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
+   n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
+   s_word_seps= config->readEntry("wordseps",":@-./_~");
+   b_framevis = config->readBoolEntry("has frame",TRUE);
 
-  warnQuit->setChecked ( config->readBoolEntry( "WarnQuit", TRUE ) );
+   // Global options ///////////////////////
 
-  int n2_keytab = config->readNumEntry("keytab",0);
-  keytab_menu_activated(n2_keytab); // act. the keytab for this session
+   // Options that should be applied to all sessions /////////////
+   // (1) set menu items and Konsole members
+   QFont tmpFont("fixed");
+   defaultFont = config->readFontEntry("defaultfont", &tmpFont);
+   setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT));
 
-  b_fullscreen = FALSE; // config->readBoolEntry("Fullscreen",FALSE);
-  n_font     = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
-  n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
-  selectScrollbar->setCurrentItem(n_scroll);
-  slotSelectScrollbar();
-  s_schema   = config->readEntry("schema","");
-  s_word_seps= config->readEntry("wordseps",":@-./_~");
-  te->setWordCharacters(s_word_seps);
+   //set the schema
+   QString tmpStr=config->readEntry("schema", "");
+   ColorSchema* sch = colors->find(tmpStr);
+   if (!sch)
+   {
+      kdWarning() << "Could not find schema named " <<tmpStr<< endl;
+      sch=(ColorSchema*)colors->at(0);  //the default one
+   }
+   if (sch->hasSchemaFileChanged()) sch->rereadSchemaFile();
+   s_schema = sch->path();
+   curr_schema = sch->numb();
+   pmPath = sch->imagePath();
+   te->setColorTable(sch->table()); //FIXME: set twice here to work around a bug
 
-  // Global options ///////////////////////
+   if (sch->useTransparency())
+   {
+      KONSOLEDEBUG << "Setting up transparency" << endl;
+      rootxpm->setFadeEffect(sch->tr_x(), QColor(sch->tr_r(), sch->tr_g(), sch->tr_b()));
+      rootxpm->start();
+      rootxpm->repaint(true);
+   }
+   else
+   {
+      KONSOLEDEBUG << "Stopping transparency" << endl;
+      rootxpm->stop();
+      pixmap_menu_activated(sch->alignment());
+   }
+   KONSOLEDEBUG << "Doing the rest" << endl;
 
-  b_framevis = config->readBoolEntry("has frame",TRUE);
-  showFrame->setChecked( b_framevis );
-  slotToggleFrame();
+   te->setScrollbarLocation(n_scroll);
+   te->setWordCharacters(s_word_seps);
+   te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
+   te->setColorTable(sch->table());
 
-  // Options that should be applied to all sessions /////////////
-  // (1) set menu items and Konsole members
-  QFont tmpFont("fixed");
-  defaultFont = config->readFontEntry("defaultfont", &tmpFont);
-  setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT)); // sets n_font and menu item
-  setSchema(s_schema);
-
-  // (2) apply to sessions (currently only the 1st one)
-  //  TESession* s = no2session.find(1);
-  QPtrDictIterator<TESession> it( action2session ); // iterator for dict
-  TESession* s = it.current();
-
-  if (s)
-  {
-    s->setFontNo(n_font);
-    s->setSchemaNo(colors->findAny(s_schema)->numb);
-    s->setHistory(b_scroll);
-  }
-  else
-  {
-    kdError() << "Session 1 not found"
-        << endl;
-  } // oops
-
+   if (se)
+   {
+      se->setSchemaNo(colors->findAny(s_schema)->numb());
+      se->setHistory(b_scroll);
+   }
+   if (m_menuCreated)
+   {
+      applySettingsToGUI();
+      activateSession();
+   };
 }
+
+void Konsole::applySettingsToGUI()
+{
+   if (!m_menuCreated) return;
+   m_options->setItemChecked(3,b_scroll);
+   warnQuit->setChecked ( b_warnQuit);
+   m_keytab->setItemChecked(n_oldkeytab,FALSE);
+   m_keytab->setItemChecked(n_keytab,TRUE);
+   showFrame->setChecked( b_framevis );
+   selectFont->setCurrentItem(n_font);
+   showToolbar->setChecked(!toolBar()->isHidden());
+   showMenubar->setChecked(!menuBar()->isHidden());
+   selectScrollbar->setCurrentItem(n_scroll);
+};
+
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
@@ -706,9 +793,10 @@ void Konsole::pixmap_menu_activated(int item)
 }
 
 void Konsole::slotSelectScrollbar() {
-    n_scroll = selectScrollbar->currentItem();
-    te->setScrollbarLocation(n_scroll);
-    activateSession(); // maybe helps in bg
+   if (m_menuCreated)
+      n_scroll = selectScrollbar->currentItem();
+   te->setScrollbarLocation(n_scroll);
+   activateSession(); // maybe helps in bg
 }
 
 
@@ -754,9 +842,10 @@ void Konsole::updateSchemaMenu()
 
   m_schema->clear();
   for (int i = 0; i < (int) colors->count(); i++)
-  { const ColorSchema* s = colors->at(i);
+  {
+     ColorSchema* s = (ColorSchema*)colors->at(i);
     assert( s );
-    m_schema->insertItem(s->title,s->numb,0);
+    m_schema->insertItem(s->title(),s->numb(),0);
   }
 
   if (te && te->currentSession)
@@ -775,8 +864,11 @@ void Konsole::keytab_menu_activated(int item)
   //HERE; printf("keytab: %d\n",item);
   if (se) // not active at the beginning
     se->setKeymapNo(item);
-  m_keytab->setItemChecked(n_keytab,FALSE);
-  m_keytab->setItemChecked(item,TRUE);
+  if (m_menuCreated)
+  {
+     m_keytab->setItemChecked(n_keytab,FALSE);
+     m_keytab->setItemChecked(item,TRUE);
+  };
   n_keytab = item;
 
 }
@@ -801,7 +893,8 @@ void Konsole::setFont(int fontno)
     return;
   }
   if (se) se->setFontNo(fontno);
-  selectFont->setCurrentItem(fontno);
+  if (m_menuCreated)
+     selectFont->setCurrentItem(fontno);
   te->setVTFont(f);
   n_font = fontno;
 }
@@ -840,7 +933,8 @@ void Konsole::slotToggleFrame() {
                      : QFrame::NoFrame );
 }
 
-void Konsole::setHistory(bool on) {
+void Konsole::setHistory(bool on)
+{
   b_scroll = on;
   m_options->setItemChecked(3,b_scroll);
   if (se) se->setHistory( b_scroll );
@@ -885,6 +979,8 @@ void Konsole::slotSelectSize() {
 
 void Konsole::notifySize(int lines, int columns)
 {
+   if (!m_menuCreated) return;
+
     selectSize->blockSignals(true);
     selectSize->setCurrentItem(-1);
     if (columns==40&&lines==15)
@@ -979,8 +1075,8 @@ void Konsole::runSession(TESession* s)
     ra->setChecked(true);
     activateSession();
 
-  // give some time to get through the
-  // resize events before starting up.
+    // give some time to get through the
+    // resize events before starting up.
     QTimer::singleShot(100,s,SLOT(run()));
 }
 
@@ -1006,7 +1102,8 @@ void Konsole::addSession(TESession* s)
   action2session.insert(ra, s);
   session2action.insert(s,ra);
   sessions.append(s);
-  ra->plug(m_sessions);
+  if (m_menuCreated)
+     ra->plug(m_sessions);
   ra->plug(toolBar());
 }
 
@@ -1030,20 +1127,24 @@ void Konsole::activateSession()
 void Konsole::activateSession(TESession *s)
 {
   if (se)
-  { se->setConnect(FALSE);
-    QObject::disconnect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
-    QObject::disconnect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
-    // Delete the session if isn't in the session list any longer.
-    if (sessions.find(se) == -1)
-       delete se;
+  {
+     se->setConnect(FALSE);
+     QObject::disconnect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
+     QObject::disconnect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
+     // Delete the session if isn't in the session list any longer.
+     if (sessions.find(se) == -1)
+        delete se;
   }
   se = s;
   session2action.find(se)->setChecked(true);
   QTimer::singleShot(1,this,SLOT(allowPrevNext())); // hack, hack, hack
-  if (s->schemaNo()!=curr_schema)  {
-    // the current schema has changed
-    setSchema(s->schemaNo());
-  } else  {
+  if (s->schemaNo()!=curr_schema)
+  {
+     // the current schema has changed
+     setSchema(s->schemaNo());
+  }
+  else
+  {
     // the schema was not changed
 #if 0
     ColorSchema* schema = colors->find(s->schemaNo());
@@ -1085,7 +1186,7 @@ void Konsole::newSession()
   newSession(session);
 }
 
-void Konsole::newSessionSelect()
+/*void Konsole::newSessionSelect()
 {
   // Take into account the position of the toolBar to determine where we put the popup
   if((toolBar()->barPos() == KToolBar::Top) || (toolBar()->barPos() == KToolBar::Left)) {
@@ -1095,10 +1196,12 @@ void Konsole::newSessionSelect()
   } else {
     m_file->popup(te->mapToGlobal(QPoint(0,te->height()-m_file->sizeHint().height())));
   }
-}
+}*/
 
 void Konsole::newSession(int i)
 {
+   kdDebug()<<"Konsole::newSession()"<<endl;
+   if (!m_menuCreated) makeGUI();
   const char* shell = getenv("SHELL");
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
 
@@ -1111,6 +1214,7 @@ void Konsole::newSession(int i)
   QString nam = co->readEntry("Name");    // not null
   QCString emu = co->readEntry("Term").ascii();
   QString sch = co->readEntry("Schema");
+  kdDebug()<<"Konsole::newSession() schema: -"<<sch<<"-"<<endl;
   QString txt = co->readEntry("Comment"); // not null
   int     fno = QMIN(co->readUnsignedNumEntry("Font",se->fontNo()),TOPFONT);
 
@@ -1121,7 +1225,9 @@ void Konsole::newSession(int i)
   //FIXME: schema names here are absolut. Wrt. loadAllSchemas,
   //       relative pathes should be allowed, too.
 
-  int schmno = schema?schema->numb:se->schemaNo();
+  int schmno = schema? schema->numb() :se->schemaNo();
+
+  kdDebug()<<"Konsole::newSession() schema number: "<<schmno<<endl;
 
   if (emu.isEmpty()) emu = se->emuName();
 
@@ -1260,13 +1366,13 @@ void Konsole::loadSessionCommands()
 
 void Konsole::setSchema(int numb)
 {
-  const ColorSchema* s = colors->find(numb);
+  ColorSchema* s = colors->find(numb);
   if (!s)
   {
         kdWarning() << "No schema found. Using default." << endl;
-        s=colors->at(0);
+        s=(ColorSchema*)colors->at(0);
   }
-  if (s->numb != numb)
+  if (s->numb() != numb)
   {
         kdWarning() << "No schema with number " << numb << endl;
   }
@@ -1280,12 +1386,11 @@ void Konsole::setSchema(int numb)
 
 void Konsole::setSchema(const QString & path)
 {
-  const ColorSchema* s = colors->find(path);
+  ColorSchema* s = colors->find(path);
   if (!s)
   {
-        if(!path.isEmpty())
-              kdWarning() << "Could not find schema named " << path << endl;
-        s=colors->at(0);
+        kdWarning() << "Could not find schema named " << path << endl;
+        s=(ColorSchema*)colors->at(0);
   }
   if (s->hasSchemaFileChanged())
   {
@@ -1294,36 +1399,36 @@ void Konsole::setSchema(const QString & path)
   if (s) setSchema(s);
 }
 
-void Konsole::setSchema(const ColorSchema* s)
+void Konsole::setSchema(ColorSchema* s)
 {
   if (!s) return;
 
         KONSOLEDEBUG << "Checking menu items" << endl;
 
   m_schema->setItemChecked(curr_schema,FALSE);
-  m_schema->setItemChecked(s->numb,TRUE);
+  m_schema->setItemChecked(s->numb(),TRUE);
         KONSOLEDEBUG << "Remembering schema data" << endl;
 
   s_schema = s->path();
-  curr_schema = s->numb;
-  pmPath = s->imagepath;
-  te->setColorTable(s->table); //FIXME: set twice here to work around a bug
+  curr_schema = s->numb();
+  pmPath = s->imagePath();
+  te->setColorTable(s->table()); //FIXME: set twice here to work around a bug
 
-  if (s->usetransparency) {
+  if (s->useTransparency()) {
         KONSOLEDEBUG << "Setting up transparency" << endl;
-    rootxpm->setFadeEffect(s->tr_x, QColor(s->tr_r, s->tr_g, s->tr_b));
+    rootxpm->setFadeEffect(s->tr_x(), QColor(s->tr_r(), s->tr_g(), s->tr_b()));
     rootxpm->start();
     rootxpm->repaint(true);
   } else {
         KONSOLEDEBUG << "Stopping transparency" << endl;
     rootxpm->stop();
-    pixmap_menu_activated(s->alignment);
+    pixmap_menu_activated(s->alignment());
   }
 
         KONSOLEDEBUG << "Doing the rest" << endl;
 
-  te->setColorTable(s->table);
-  if (se) se->setSchemaNo(s->numb);
+  te->setColorTable(s->table());
+  if (se) se->setSchemaNo(s->numb());
 }
 
 void Konsole::slotRenameSession() {
@@ -1359,5 +1464,6 @@ void Konsole::slotBackgroundChanged(int desk)
     rootxpm->repaint(true);
   }
 }
+
 
 #include "konsole.moc"

@@ -227,10 +227,12 @@ retry:
 
 void TEPty::setSize(int lines, int columns)
 {
+  //kdDebug()<<"TEPty::setSize()"<<endl;
   wsize.ws_row = (unsigned short)lines;
   wsize.ws_col = (unsigned short)columns;
   if(fd < 0) return;
   ioctl(fd,TIOCSWINSZ,(char *)&wsize);
+  //kdDebug()<<"TEPty::setSize() done"<<endl;
 }
 
 void TEPty::donePty()

@@ -31,6 +31,8 @@
 
 #include "TEmuVt102.moc"
 
+#include <kdebug.h>
+
 /* VT102 Terminal Emulation
 
    This class puts together the screens, the pty and the widget to a
@@ -65,10 +67,14 @@
 
 TEmuVt102::TEmuVt102(TEWidget* gui) : TEmulation(gui)
 {
+  //kdDebug()<<"TEmuVt102 ctor() connecting"<<endl;
   QObject::connect(gui,SIGNAL(mouseSignal(int,int,int)),
                    this,SLOT(onMouse(int,int,int)));
+  //kdDebug()<<"TEmuVt102 ctor() initToken..."<<endl;
   initTokenizer();
+  //kdDebug()<<"TEmuVt102 ctor() reset()"<<endl;
   reset();
+  //kdDebug()<<"TEmuVt102 ctor() ctor done"<<endl;
 }
 
 /*!
@@ -83,12 +89,23 @@ TEmuVt102::~TEmuVt102()
 
 void TEmuVt102::reset()
 {
+  //kdDebug()<<"TEmuVt102::reset() resetToken()"<<endl;
   resetToken();
+  //kdDebug()<<"TEmuVt102::reset() resetModes()"<<endl;
   resetModes();
-  resetCharset(0); screen[0]->reset();
-  resetCharset(1); screen[0]->reset();
+  //kdDebug()<<"TEmuVt102::reset() resetCharSet()"<<endl;
+  resetCharset(0);
+  //kdDebug()<<"TEmuVt102::reset() reset screen0()"<<endl;
+  screen[0]->reset();
+  //kdDebug()<<"TEmuVt102::reset() resetCharSet()"<<endl;
+  resetCharset(1);
+  //kdDebug()<<"TEmuVt102::reset() reset screen 1"<<endl;
+  screen[0]->reset();
+  //kdDebug()<<"TEmuVt102::reset() setCodec()"<<endl;
   setCodec(0);
+  //kdDebug()<<"TEmuVt102::reset() setKeyTrans()"<<endl;
   setKeytrans(0);
+  //kdDebug()<<"TEmuVt102::reset() done"<<endl;
 }
 
 /* ------------------------------------------------------------------------- */

@@ -34,7 +34,8 @@ static KCmdLineOptions options[] =
    { "name <name>",  I18N_NOOP("Set Window Class"), 0 },
    { "ls",    I18N_NOOP("Start login shell"), 0 },
    { "nowelcome",       I18N_NOOP("Suppress greeting"), 0 },
-   { "T <title>",   I18N_NOOP("Set the window title"), 0 },
+   { "T", 0, 0 },
+   { "title <title>",           I18N_NOOP("Set the window title"), 0 },
    { "xwin",            I18N_NOOP("ignored"), 0 },
    { "nohist",          I18N_NOOP("Do not save lines in scroll-back buffer"), 0 },
    { "notoolbar",       I18N_NOOP("Do not display toolbar"), 0 },
@@ -75,7 +76,6 @@ int main(int argc, char* argv[])
   bool histon = true;
   bool toolbaron = true;
   const char* wname = PACKAGE;
-  QCString title;
 
 
   KAboutData aboutData( PACKAGE, I18N_NOOP("Konsole"),
@@ -170,8 +170,8 @@ int main(int argc, char* argv[])
   wname = args->getOption("name");
   login_shell = args->isSet("ls");
   welcome = args->isSet("welcome");
-  title = args->getOption("T");
-
+  QCString title;
+  //QCString title=args->getOption("title");
 
   //FIXME: more: font, menu, scrollbar, schema, session ...
 
@@ -212,7 +212,7 @@ int main(int argc, char* argv[])
 //    RESTORE( Konsole(wname,shell,eargs,histon,toolbaron) )
     int n = 1;
     while (KMainWindow::canBeRestored(n)){
-        Konsole *m = new Konsole(wname,shell,eargs,histon,toolbaron, title);
+        Konsole *m = new Konsole(wname,shell,eargs,histon,toolbaron,title);
         m->restore(n);
         ksm->konsole = m;
         // works only for the first one, but there won't be more.
