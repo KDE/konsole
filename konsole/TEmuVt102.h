@@ -64,6 +64,8 @@ signals:
   void nextSession();
   void newSession();
   void activateMenu();
+  void moveSessionLeft();
+  void moveSessionRight();
 
 public:
 

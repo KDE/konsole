@@ -198,7 +198,9 @@ Konsole::Konsole(const char* name, const QString& _program,
 ,selectFont(0)
 ,selectScrollbar(0)
 ,selectBell(0)
-,clearHistory(0)
+,m_clearHistory(0)
+,m_moveSessionLeft(0)
+,m_moveSessionRight(0)
 ,warnQuit(0)
 ,cmd_serial(0)
 ,cmd_first_screen(-1)
@@ -299,6 +301,8 @@ Konsole::Konsole(const char* name, const QString& _program,
   connect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
   connect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
   connect( se->getEmulation(),SIGNAL(activateMenu()), this,SLOT(activateMenu()) );
+  connect( se->getEmulation(),SIGNAL(moveSessionLeft()), this,SLOT(moveSessionLeft()) );
+  connect( se->getEmulation(),SIGNAL(moveSessionRight()), this,SLOT(moveSessionRight()) );
 
   //KONSOLEDEBUG<<"Konsole ctor() ends "<<time.elapsed()<<" msecs elapsed"<<endl;
   //KONSOLEDEBUG<<"Konsole ctor(): done"<<endl;
@@ -358,10 +362,20 @@ void Konsole::makeGUI()
                                         SLOT(slotRenameSession()), this);
    renameSession->plug(m_sessions);
 
-   clearHistory = new KAction(i18n("Clear &History"), "history_clear", 0, this,
+   m_clearHistory = new KAction(i18n("Clear &History"), "history_clear", 0, this,
                                        SLOT(slotClearHistory()), this);
-   clearHistory->setEnabled( se->history().isOn() );
-   clearHistory->plug(m_sessions);
+   m_clearHistory->setEnabled( se->history().isOn() );
+   m_clearHistory->plug(m_sessions);
+
+   m_moveSessionLeft = new KAction(i18n("&Move session left"), "back", 0, this,
+                                        SLOT(moveSessionLeft()), this);
+   m_moveSessionLeft->setEnabled( false );
+   m_moveSessionLeft->plug(m_sessions);
+
+   m_moveSessionRight = new KAction(i18n("M&ove session right"), "forward", 0, this,
+                                        SLOT(moveSessionRight()), this);
+   m_moveSessionRight->setEnabled( false );
+   m_moveSessionRight->plug(m_sessions);
 
    KAction *closeSession = new KAction(i18n("&Close session"), "fileclose", 0, this,
                                         SLOT(closeCurrentSession()), this);
@@ -1357,6 +1371,8 @@ void Konsole::activateSession(TESession *s)
      QObject::disconnect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
      QObject::disconnect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
      QObject::disconnect( se->getEmulation(),SIGNAL(activateMenu()), this,SLOT(activateMenu()) );
+     QObject::disconnect( se->getEmulation(),SIGNAL(moveSessionLeft()), this,SLOT(moveSessionLeft()) );
+     QObject::disconnect( se->getEmulation(),SIGNAL(moveSessionRight()), this,SLOT(moveSessionRight()) );
      // Delete the session if isn't in the session list any longer.
      if (sessions.find(se) == -1)
         delete se;
@@ -1378,8 +1394,13 @@ void Konsole::activateSession(TESession *s)
   s->setConnect(TRUE);
   updateTitle();
   updateKeytabMenu(); // act. the keytab for this session
-  if (clearHistory)
-      clearHistory->setEnabled( se->history().isOn() );
+  if (m_clearHistory) {
+     m_clearHistory->setEnabled( se->history().isOn() );
+     sessions.find(se);
+     int position=sessions.at();
+     m_moveSessionLeft->setEnabled(position>0);
+     m_moveSessionRight->setEnabled(position<sessions.count()-1);
+  }
 }
 
 void Konsole::allowPrevNext()
@@ -1387,8 +1408,9 @@ void Konsole::allowPrevNext()
   QObject::connect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
   QObject::connect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
   QObject::connect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
-  QObject::connect( se->getEmulation(),SIGNAL(activateMenu()), this,SLOT(activateMenu()) 
-);
+  QObject::connect( se->getEmulation(),SIGNAL(activateMenu()), this,SLOT(activateMenu()) ); 
+  QObject::connect( se->getEmulation(),SIGNAL(moveSessionLeft()), this,SLOT(moveSessionLeft()) );
+  QObject::connect( se->getEmulation(),SIGNAL(moveSessionRight()), this,SLOT(moveSessionRight()) );
 }
 
 KSimpleConfig *Konsole::defaultSession()
@@ -1590,6 +1612,55 @@ void Konsole::nextSession()
   sessions.find(se); sessions.next();
   if (!sessions.current()) sessions.first();
   if (sessions.current()) activateSession(sessions.current());
+}
+
+/* Move session forward in session list if possible */
+void Konsole::moveSessionLeft()
+{
+  sessions.find(se);
+  int position=sessions.at();
+  if (position==0)
+    return;
+
+  sessions.remove(position);
+  sessions.insert(position-1,se);
+
+  KRadioAction *ra = session2action.find(se);
+  ra->unplug(m_sessions);
+  ra->plug(m_sessions,(m_sessions->count()-sessions.count()+1)+position-1);
+
+  ra->unplug(toolBar());
+  int button_id=ra->itemId( ra->plug(toolBar(),position-1+2 ));  // +2 because of "New" and separator
+  KToolBarButton* ktb=toolBar()->getButton(button_id);
+  connect(ktb,SIGNAL(doubleClicked(int)), this,SLOT(slotRenameSession(int)));
+
+  m_moveSessionLeft->setEnabled(position-1>0);
+  m_moveSessionRight->setEnabled(true);
+}
+
+/* Move session back in session list if possible */
+void Konsole::moveSessionRight()
+{
+  sessions.find(se);
+  int position=sessions.at();
+
+  if (position==sessions.count()-1)
+    return;
+
+  sessions.remove(position);
+  sessions.insert(position+1,se);
+
+  KRadioAction *ra = session2action.find(se);
+  ra->unplug(m_sessions);
+  ra->plug(m_sessions,(m_sessions->count()-sessions.count()+1)+position+1);
+
+  ra->unplug(toolBar());
+  int button_id=ra->itemId( ra->plug(toolBar(),position+1+2) );  // +2 because of "New" and separator
+  KToolBarButton* ktb=toolBar()->getButton(button_id);
+  connect(ktb,SIGNAL(doubleClicked(int)), this,SLOT(slotRenameSession(int)));
+
+  m_moveSessionLeft->setEnabled(true);
+  m_moveSessionRight->setEnabled(position+1<sessions.count()-1);
 }
 
 // --| Session support |-------------------------------------------------------
@@ -1864,7 +1935,7 @@ void Konsole::slotHistoryType()
   
   HistoryTypeDialog dlg(se->history(), m_histSize, this);
   if (dlg.exec()) {
-    clearHistory->setEnabled( dlg.isOn() );
+    m_clearHistory->setEnabled( dlg.isOn() );
     if (dlg.isOn()) {
       if (dlg.nbLines() > 0) {
          se->setHistory(HistoryTypeBuffer(dlg.nbLines()));

@@ -36,6 +36,8 @@
 #define CMD_nextSession    7
 #define CMD_newSession     8
 #define CMD_activateMenu   9
+#define CMD_moveSessionLeft 10
+#define CMD_moveSessionRight 11
 
 #define BITS(x,v) ((((v)!=0)<<(x)))
 

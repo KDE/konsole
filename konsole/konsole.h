@@ -104,6 +104,8 @@ private slots:
   void prevSession();
   void nextSession();
   void activateMenu();
+  void moveSessionLeft();
+  void moveSessionRight();
   void allowPrevNext();
   void setSchema(int n);
   void sendSignal(int n);
@@ -178,7 +180,9 @@ private:
   KSelectAction *selectScrollbar;
   KSelectAction *selectBell;
 
-  KAction       *clearHistory;
+  KAction       *m_clearHistory;
+  KAction       *m_moveSessionLeft;
+  KAction       *m_moveSessionRight;
 
   KToggleAction *warnQuit;                      // Warn when closing this session on quit
 

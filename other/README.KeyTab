@@ -54,6 +54,8 @@ Operations are
 
   - prevSession    : change to the previous session, if any
   - nextSession    : change to the next     session, if any
+  - moveSessionLeft: move current session to left, if possible
+  - moveSessionRight: move current session to right, if possible
   - newSession     : create a new session
   - activateMenu   : activate menubar
   - scrollUpLine   : scroll up   one line in the history log
