@@ -41,17 +41,12 @@ Here is a list of little projects
 - check through FIXMEs
 - clean up code
 
-- dynamic buffer adjustment or configurability.
-- clear buffer facility.
-
 - write configuration utility at least for *.schema files.
 
 - evtl. handle *.kdelnk files using regular setup utilities
   and a rpc client. Should become a parameter in any case.
 
 - allow reloading the configuration files at runtime.
-
-! announce konsole-1.0 ------------------------------------
 
 - check for other codes/features (Linux console, xterm)
   - change xterm title hack to respect icon instruction?
@@ -60,6 +55,8 @@ Here is a list of little projects
   - double high, double width (vt100)
   - reverse wraparound?
   - add secondary buffer to linux console (the real one).
+  - smooth scroll?
+  - LEDs?
 
 - Linux console improvements
   - Attributes
@@ -67,13 +64,6 @@ Here is a list of little projects
     - blink     --> intensive background
   - Linux console knows some extra tricks mapping graphical
     characters.
-
-- Fonts
-  - produce font families instead of doing underline and bold
-    in the program?
-  - use scalable font?
-  - allow fonts being configured freely
-  - fix national characters in Linux console emulation.
 
 - add configuration for function keys.
 

@@ -31,7 +31,7 @@
 
     NOTE that this module is part of a program and not a dump for
     obsolete tty interfaces. The opening sequence can be reduced to
-    three or four lines, and, yes, i'll do this on a regular basis.
+    three or four lines, and, yes, i may do this on a regular basis.
     
     \par FIXME
 
