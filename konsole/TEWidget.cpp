@@ -1505,25 +1505,31 @@ void TEWidget::dropEvent(QDropEvent* event)
    {
       m_drop = new KPopupMenu(this);
       m_drop->insertItem( i18n("Paste"), 0);
-      m_drop->insertItem( i18n("cd"),    1);
+      m_drop->insertSeparator();
+      m_drop->insertItem( "cd", 1);
+      m_drop->insertItem( "cp", 2);
+      m_drop->insertItem( "ln", 3);
+      m_drop->insertItem( "mv", 4);
       connect(m_drop, SIGNAL(activated(int)), SLOT(drop_menu_activated(int)));
    };
     // The current behaviour when url(s) are dropped is
-    // * if there is only ONE url and if it's a LOCAL one, ask for paste or cd
+    // * if there is only ONE url and if it's a LOCAL one, ask for paste or cd/cp/ln/mv
+    // * if there are only LOCAL urls, ask for paste or cp/ln/mv
     // * in all other cases, just paste
     //   (for non-local ones, or for a list of URLs, 'cd' is nonsense)
   KURL::List urllist;
-  int file_count = 0;
+  m_dnd_file_count = 0;
   dropText = "";
   bool bPopup = true;
+  m_drop->setItemEnabled(1,true);
 
   if(KURLDrag::decode(event, urllist)) {
     if (!urllist.isEmpty()) {
       KURL::List::Iterator it;
       for ( it = urllist.begin(); it != urllist.end(); ++it ) {
-        if(file_count++ > 0) {
+        if(m_dnd_file_count++ > 0) {
           dropText += " ";
-          bPopup = false; // more than one file, don't popup
+	  m_drop->setItemEnabled(1,false);
         }
         KURL url = *it;
         QString tmp;
@@ -1545,6 +1551,8 @@ void TEWidget::dropEvent(QDropEvent* event)
       else
 	{
 	  if (currentSession) {
+            if (m_dnd_file_count==1)
+	      KRun::shellQuote(dropText);
 	    currentSession->getEmulation()->sendString(dropText.local8Bit());
 	  }
 	  kdDebug(1211) << "Drop:" << dropText.local8Bit() << "\n";
@@ -1573,7 +1581,8 @@ void TEWidget::drop_menu_activated(int item)
    switch (item)
    {
    case 0: // paste
-      KRun::shellQuote(dropText);
+      if (m_dnd_file_count==1)
+        KRun::shellQuote(dropText);
       currentSession->getEmulation()->sendString(dropText.local8Bit());
       setActiveWindow();
       break;
@@ -1594,6 +1603,22 @@ void TEWidget::drop_menu_activated(int item)
       currentSession->getEmulation()->sendString("\n");
       setActiveWindow();
       break;
+   case 2: // copy
+      currentSession->getEmulation()->sendString("cp -i ");
+      break;
+   case 3: // link
+      currentSession->getEmulation()->sendString("ln -s ");
+      break;
+   case 4: // move
+      currentSession->getEmulation()->sendString("mv -i ");
+      break;
+   }
+   if (item>1 && item<5) {
+      if (m_dnd_file_count==1)
+        KRun::shellQuote(dropText);
+      currentSession->getEmulation()->sendString(dropText.local8Bit());
+      currentSession->getEmulation()->sendString(" .\n");
+      setActiveWindow();
    }
 }
 

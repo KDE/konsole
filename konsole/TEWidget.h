@@ -213,15 +213,18 @@ private:
     bool ctrldrag;           // require Ctrl key for drag
     QTimer* blinkT;  // active when hasBlinker
     QTimer* blinkCursorT;  // active when hasBlinkingCursor
+    
     KPopupMenu* m_drop;
     QString dropText;
+    int m_dnd_file_count;
+
     bool possibleTripleClick;  // is set in mouseDoubleClickEvent and deleted
                                // after QApplication::doubleClickInterval() delay
 
     static bool s_antialias; // do we antialias or not
-                               
-    QFrame *mResizeWidget;                               
-    QLabel *mResizeLabel;                               
+
+    QFrame *mResizeWidget;
+    QLabel *mResizeLabel;
     QTimer *mResizeTimer;
 
     uint m_lineSpacing;
