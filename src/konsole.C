@@ -212,6 +212,8 @@ Konsole::Konsole(const QString& name,
   updateRects();
 
   runSession(initial);
+  // apply keytab
+  keytab_menu_activated(n_keytab);
 }
 
 Konsole::~Konsole()
@@ -479,7 +481,8 @@ void Konsole::configureRequest(TEWidget* te, int state, int x, int y)
 
 void Konsole::saveProperties(KConfig* config)
 {
-  config->setGroup("options"); // bad! will no allow us to support multi windows
+  config->setGroup("options"); 
+  // bad! will no allow us to support multi windows
   config->writeEntry("menubar visible",b_menuvis);
   config->writeEntry("toolbar visible", b_toolbarvis);
   config->writeEntry("toolbar position", toolBar()->barPos());
@@ -490,16 +493,21 @@ void Konsole::saveProperties(KConfig* config)
   config->writeEntry("defaultfont", defaultFont);
   config->writeEntry("schema",s_schema);
   config->writeEntry("scrollbar",n_scroll);
+  config->writeEntry("keytab",n_keytab);
 
   if (args.count() > 0) config->writeEntry("konsolearguments", args);
   config->writeEntry("class",name());
-  config->writeEntry("defaultheight", te->height()); // for "save options". Not used by SM.
-  config->writeEntry("defaultwidth", te->width());   // for "save options". Not used by SM.
+  config->writeEntry("defaultheight", te->height()); 
+  // for "save options". Not used by SM.
+  config->writeEntry("defaultwidth", te->width());   
+  // for "save options". Not used by SM.
   //config->writeEntry("kmenubar",                 //FIXME:Float
   //                   menubar->menuBarPos() == KMenuBar::Bottom ? "bottom" : "top");
   // geometry (placement) done by KTMainWindow
   config->sync();
 }
+
+
 
 // Called by constructor (with config = kapp->config())
 // and by session-management (with config = sessionconfig).
@@ -514,6 +522,9 @@ void Konsole::readProperties(KConfig* config)
   		     (unsigned int) KToolBar::Bottom);
 
   b_scroll = config->readBoolEntry("history",TRUE);
+  int n2_keytab = config->readNumEntry("keytab",0);
+  keytab_menu_activated(n2_keytab); // act. the keytab for this session
+
   b_fullscreen = FALSE; // config->readBoolEntry("Fullscreen",FALSE);
   n_font     = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
   n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
@@ -637,9 +648,10 @@ void Konsole::schema_menu_activated(int item)
 
 void Konsole::keytab_menu_activated(int item)
 {
-  assert(se);
-HERE; printf("keytab: %d\n",item);
-  se->setKeymapNo(item);
+  //  assert(se);
+  //HERE; printf("keytab: %d\n",item);
+  if (se) // not active at the beginning
+    se->setKeymapNo(item);
   m_keytab->setItemChecked(n_keytab,FALSE);
   m_keytab->setItemChecked(item,TRUE);
   n_keytab = item;
@@ -882,6 +894,7 @@ void Konsole::activateSession()
     s->setConnect(TRUE);
   }
   setHeader();
+  keytab_menu_activated(n_keytab); // act. the keytab for this session
 }
 
 void Konsole::newDefaultSession()
