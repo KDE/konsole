@@ -1,6 +1,7 @@
 03 Mar 1999
 - added -name
 - Shift-Insert pastes
+- added *.kdelnk to be seeked in ~./kde/apps/konsole, too.
 03 Feb 1999
 - fixed -caption
 - some adjustments in geometry management
