@@ -856,24 +856,13 @@ bool Konsole::queryClose()
     // WABA: Don't close if there are any sessions left.
     // Tell them to go away.
     sessions.first();
-    bool allOK=true;
     while(sessions.current())
     {
-      if (!sessions.current()->closeSession())
-        allOK=false;
+      sessions.current()->closeSession();
       sessions.next();
     }
 
-    if (!allOK)
-    {
-      KMessageBox::information( this, i18n("Not all sessions could be closed. "
-                                           "Please end all sessions running under other user IDs. "
-                                           "In most cases typing 'exit' at the prompt will end them.") );
-    }
-    else
-    {
-      m_closeTimeout.start(1500, true);
-    }
+    m_closeTimeout.start(1500, true);
     return false;
 }
 
@@ -2005,13 +1994,7 @@ void Konsole::newSession(const QString& sURL, const QString& title)
 
 void Konsole::closeCurrentSession()
 {
-  if (!se->closeSession())
-  {
-      KMessageBox::information( this, i18n("The session could not be closed. "
-                                           "If the session runs under another user ID you will "
-                                           "have to close it manually.\n"
-                                           "In most cases typing 'exit' at the prompt will close it.") );
-  }
+  se->closeSession();
 }
 
 void Konsole::doneChild(KonsoleChild* child, TESession* session)

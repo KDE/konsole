@@ -159,12 +159,12 @@ bool TESession::sendSignal(int signal)
 bool TESession::closeSession()
 {
   autoClose = true;
-  if (!sh->isRunning())
+  if (!sh->isRunning() || !sendSignal(SIGHUP))
   {
+     // Forced close.
      QTimer::singleShot(0, this, SLOT(done()));
-     return true;
   }
-  return sendSignal(SIGHUP);
+  return true;
 }
 
 void TESession::feedSession(const QString &text)
