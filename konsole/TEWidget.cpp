@@ -403,8 +403,8 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
   setFocusPolicy( WheelFocus );
 
   // im
-  setInputMethodEnabled(true);  
-  
+  setInputMethodEnabled(true);
+
   if (!argb_visual)
   {
     // Looks better at startup with KRootPixmap based pseudo-transparancy
@@ -489,7 +489,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
           Q_UINT8 dalpha = 255 - salpha;
 
           int a, r, g, b;
-          a = QMIN( (qAlpha (col) * salpha) / 255 + (qAlpha (blend_color) * dalpha) / 255, 255 ); 
+          a = QMIN( (qAlpha (col) * salpha) / 255 + (qAlpha (blend_color) * dalpha) / 255, 255 );
           r = QMIN( (qRed   (col) * salpha) / 255 + (qRed   (blend_color) * dalpha) / 255, 255 );
           g = QMIN( (qGreen (col) * salpha) / 255 + (qGreen (blend_color) * dalpha) / 255, 255 );
           b = QMIN( (qBlue  (col) * salpha) / 255 + (qBlue  (blend_color) * dalpha) / 255, 255 );
@@ -519,7 +519,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
       int w = font_w * (m_imSelEnd - m_imSelStart);
       int h = font_h;
 
-      QRect tmpRect = QRect( x, y, w, h ); 
+      QRect tmpRect = QRect( x, y, w, h );
       if ( str != m_imPreeditText ) {  // ugly hack
         tmpRect.setLeft( tmpRect.left() + font_w );
         tmpRect.setWidth( tmpRect.width() + font_w );
@@ -585,7 +585,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
     {
       // The meaning of y differs between different versions of QPainter::drawText!!
       int y = rect.y()+a; // baseline
- 
+
       if ( shadow ) {
         paint.setPen( Qt::black );
         paint.drawText(x+1,y+1, str, -1, bidiEnabled ? QPainter::Auto : QPainter::LTR );
@@ -755,7 +755,7 @@ HCNT("setImage");
           if ( ( m_imSelStart < m_imSelEnd ) )
             m_isIMSel = true;
 	}
-        
+
         drawAttrStr(paint,
                     QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
                     unistr, &ext[x], pm != NULL, true);
@@ -1011,7 +1011,7 @@ void TEWidget::updateImageSize()
   //NOTE: control flows from the back through the chest right into the eye.
   //      `emu' will call back via `setImage'.
 
-  resizing = true;
+  resizing = (oldlin!=lines) || (oldcol!=columns);
   emit changedContentSizeSignal(contentHeight, contentWidth); // expose resizeEvent
   resizing = false;
 }
@@ -1774,7 +1774,7 @@ void TEWidget::imEndEvent( QIMEvent *e )
                              contentsRect().width(), contentsRect().height() );
   m_imStart = 0;
   m_imPreeditLength = 0;
- 
+
   m_isIMEdit = m_isIMSel = false;
   repaint( repaintRect, true );
 }
