@@ -1,15 +1,12 @@
 # linux color schema for konsole
 
-title Transparent, light background
+title Transparent, light background 
 
-transparency 0.35 0 0 0
+transparency 0.1 0 0 0
 
-# FIXME
-#
-# The flaw in this schema is that "blick" comes out on the
-# Linux console as intensive background, really.
-# Since this is not used in clients you'll hardly notice
-# it in practice.
+# This is a schema for very light backgrounds. It makes some
+# hacks about the colors to make Midnight Commander transparent
+# and with suitable colors. 
 
 # foreground colors
 
@@ -20,26 +17,29 @@ transparency 0.35 0 0 0
 #      | red grn blu  | |
 #      V V--color--V  V V
 
-color  0 178 178 178  0 0  # regular   foreground color (White)
-color  1   0   0   0  1 0  # regular   background color (Black)
+color  0  50  50  50  0 0  # regular   foreground color (DarkGray)
+color  1  200 200 200  1 0  # regular   background color (White)
 
-color  2   0   0   0  0 0  # regular   color 0 Black
+# color  2   0   0   0  0 0  # regular   color 0 Black
+color  1  200 200 200  1 0  # regular   background color (White)
 color  3 178  24  24  0 0  # regular   color 1 Red
 color  4  24 178  24  0 0  # regular   color 2 Green
 color  5 178 104  24  0 0  # regular   color 3 Yellow
 #color  6  24  24 178  0 0  # regular   color 4 Blue
 color  6  0  0 0  1 0  # regular   color 4 Blue
+# Blue is transparent, to make MC transparent
 
 color  7 178  24 178  0 0  # regular   color 5 Magenta
 color  8  24 178 178  0 0  # regular   color 6 Cyan
-color  9 178 178 178  0 0  # regular   color 7 White
+# color  9 178 178 178  0 0  # regular   color 7 White
+color  9  50  50  50  0 0  # regular   foreground color (DarkGray)
 
 # intensive colors
 
 # instead of changing the colors, we've flaged the text to become bold
 
-color 10 255 255 255  0 0  # intensive foreground color
-color 11 104 104 104  1 0  # intensive background color
+color 10 0   0   0  0 0  # intensive foreground color
+color 11 255  255  255  1 0  # intensive background color
 
 color 12 104 104 104  0 0  # intensive color 0
 color 13 255  84  84  0 0  # intensive color 1
