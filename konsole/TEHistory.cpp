@@ -362,7 +362,7 @@ int  HistoryScrollNone::getLineLen(int)
   return 0;
 }
 
-bool HistoryScrollNone::isWrappedLine(int lineno)
+bool HistoryScrollNone::isWrappedLine(int /*lineno*/)
 {
   return false;
 }
@@ -408,7 +408,7 @@ int  HistoryScrollBlockArray::getLineLen(int lineno)
   return res;
 }
 
-bool HistoryScrollBlockArray::isWrappedLine(int lineno)
+bool HistoryScrollBlockArray::isWrappedLine(int /*lineno*/)
 {
   return false;
 }

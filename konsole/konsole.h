@@ -360,8 +360,8 @@ private slots:
 
 private:
   QCheckBox*    m_asRegExp;
-  QPushButton*  m_editRegExp;
   QDialog*      m_editorDialog;
+  QPushButton*  m_editRegExp;
 };
 
 #endif

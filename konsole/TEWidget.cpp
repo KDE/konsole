@@ -178,6 +178,7 @@ unsigned short vt100_graphics[32] =
   0x252c, 0x2502, 0x2264, 0x2265, 0x03C0, 0x2260, 0x00A3, 0x00b7
 };
 
+/*
 static QChar vt100extended(QChar c)
 {
   switch (c.unicode())
@@ -216,6 +217,7 @@ static QChar vt100extended(QChar c)
   }
   return c;
 }
+*/
 
 static QChar identicalMap(QChar c)
 {

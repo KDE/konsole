@@ -81,7 +81,7 @@ void KonsoleBookmarkHandler::importOldBookmarks( const QString& path,
     m_importStream = 0L;
 }
 
-void KonsoleBookmarkHandler::slotNewBookmark( const QString& text,
+void KonsoleBookmarkHandler::slotNewBookmark( const QString& /*text*/,
                                             const QCString& url,
                                             const QString& additionalInfo )
 {

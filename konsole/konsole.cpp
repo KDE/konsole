@@ -1484,7 +1484,7 @@ QString Konsole::currentSession()
 
 QString Konsole::sessionId(const int position)
 {
-  if (position<=0 || position>sessions.count())
+  if (position<=0 || position>(int)sessions.count())
     return "";
 
   return sessions.at(position-1)->SessionId();
@@ -1492,7 +1492,7 @@ QString Konsole::sessionId(const int position)
 
 void Konsole::activateSession(const int position)
 {
-  if (position<=0 || position>sessions.count())
+  if (position<=0 || position>(int)sessions.count())
     return;
   activateSession( sessions.at(position-1) );
 }
@@ -2566,7 +2566,7 @@ unsigned int SizeDialog::lines() const
 
 //////////////////////////////////////////////////////////////////////
 
-KonsoleFind::KonsoleFind( QWidget *parent, const char *name, bool modal )
+KonsoleFind::KonsoleFind( QWidget *parent, const char *name, bool /*modal*/ )
   : KEdFind( parent, name, false ), m_editorDialog(0), m_editRegExp(0)
 {
   QHBox* row = new QHBox( (QWidget*)group );
