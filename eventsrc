@@ -17,7 +17,9 @@ default_presentation=1
 
 [BellInvisible]
 Name=Bell in non-visible session
+Name[sv]=Ljudsignal i osynlig session
 Comment=Bell emitted within a non-visible session
+Comment[sv]=Ljudsignal inne i en osynlig session
 default_sound=KDE_Beep_Beep.wav
 default_presentation=16
 
@@ -45,5 +47,7 @@ default_presentation=16
 
 [Finished]
 Name=Session finished with non-zero status
+Name[sv]=Sessionen klar med status skild från noll
 Comment=A session has exited with non-zero status
+Comment[sv]=En session har avslutats med status skild från noll
 default_presentation=16
