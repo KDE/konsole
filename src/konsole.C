@@ -900,10 +900,11 @@ void Konsole::slotSelectFont() {
   // KONSOLEDEBUG << "slotSelectFont " << item << endl;
   if (item == 8) // this is the default
   {
-    if ( KFontDialog::getFont(defaultFont, true) == QDialog::Accepted )
-      item = 0;
-    else
+    if ( KFontDialog::getFont(defaultFont, true) == QDialog::Rejected )
+    {
+      selectFont->setCurrentItem(n_font);
       return;
+    }
   }
   setFont(item);
   n_defaultFont = n_font; // This is the new default
@@ -974,7 +975,7 @@ void Konsole::keytab_menu_activated(int item)
 void Konsole::setFont(int fontno)
 {
   QFont f;
-  if (fontno == 0)
+  if (fontno == 8)
     f = defaultFont;
   else
   if (fonts[fontno][0] == '-')
@@ -984,7 +985,7 @@ void Konsole::setFont(int fontno)
     f.setFamily(fonts[fontno]);
     f.setRawMode( TRUE );
   }
-  if ( !f.exactMatch() && fontno != 0)
+  if ( !f.exactMatch() && fontno != 8)
   {
     QString msg = i18n("Font `%1' not found.\nCheck README.linux.console for help.").arg(fonts[fontno]);
     KMessageBox::error(this,  msg);
