@@ -113,6 +113,7 @@ Time to start a requirement list.
 #include <kiconloader.h>
 #include <kstringhandler.h>
 #include <ktip.h>
+#include <kprocctrl.h>
 
 #include <kregexpeditorinterface.h>
 #include <kparts/componentfactory.h>
@@ -237,6 +238,7 @@ DCOPObject( "konsole" )
 {
   isRestored = b_inRestore;
   connect( kapp,SIGNAL(backgroundChanged(int)),this, SLOT(slotBackgroundChanged(int)));
+  connect( &m_closeTimeout, SIGNAL(timeout()), this, SLOT(slotCouldNotClose()));
 
   no2command.setAutoDelete(true);
   no2tempFile.setAutoDelete(true);
@@ -794,6 +796,9 @@ bool Konsole::queryClose()
      detached.remove(child);
    }
 
+   if (sessions.count() == 0)
+       return true;
+
    if ( (!skip_exit_query) && b_warnQuit)
    {
         if( (sessions.count()>1) &&
@@ -809,27 +814,54 @@ bool Konsole::queryClose()
             return false;
         }
     }
+
     // WABA: Don't close if there are any sessions left.
     // Tell them to go away.
-    if (!skip_exit_query && sessions.count())
+    sessions.first();
+    bool allOK=true;
+    while(sessions.current())
     {
-        sessions.first();
-        bool allOK=true;
-        while(sessions.current())
-        {
- 	    if (!sessions.current()->sendSignal(SIGHUP))
-              allOK=false;
-            sessions.next();
-        }
+      if (!sessions.current()->sendSignal(SIGHUP))
+        allOK=false;
+      sessions.next();
+    }
+
+    if (skip_exit_query)
+    {
+        // Wait a bit for all childs to clean themselves up. 
+        while(sessions.count() && KProcessController::theKProcessController->waitForProcessExit(1));
+        return true; // Ready or not, here I come...
+    }
+    else
+    {
         if (!allOK)
+        {
           KMessageBox::information( this, i18n("Not all sessions could be closed. "
                                                "Please end all sessions running under other user IDs. "
                                                "In most cases typing 'exit' at the prompt will end them.") );
+        }
+        else
+        {
+          m_closeTimeout.start(1500, true);
+        }                                               
         return false;
     }
-    // If there is no warning requested or required or if warnQuit is a NULL
-    // pointer for some reason, just assume closing is safe
-    return true;
+}
+
+void Konsole::slotCouldNotClose()
+{
+    int result = KMessageBox::warningContinueCancel(this, 
+             i18n("The application running in konsole does not respond to the close request. "
+                  "Do you want Konsole to close anyway?"), 
+             i18n("Application Does Not Respond"),
+             i18n("Close"));
+    if (result == KMessageBox::Continue)
+    {
+        while(sessions.first())
+        {
+            doneSession(sessions.current(), 0);
+        }
+    }
 }
 
 /**
@@ -1968,9 +2000,9 @@ void Konsole::doneChild(KonsoleChild* child, TESession* session)
 //       this routine might be called before
 //       session swap is completed.
 
-void Konsole::doneSession(TESession* s, int )
+void Konsole::doneSession(TESession* s, int status)
 {
-//printf("%s(%d): Exited:%d ExitStatus:%d\n",__FILE__,__LINE__,WIFEXITED(status),WEXITSTATUS(status));
+// qWarning("Konsole::doneSession(): Exited:%d ExitStatus:%d\n", WIFEXITED(status),WEXITSTATUS(status));
 #if 0 // die silently
   if (!WIFEXITED((status)) || WEXITSTATUS((status)))
   {

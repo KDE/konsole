@@ -113,6 +113,7 @@ private slots:
   void closeCurrentSession();
   void doneChild(KonsoleChild*, TESession*);
   void doneSession(TESession*,int);
+  void slotCouldNotClose();
   void slotToggleFullscreen();
   void schema_menu_activated(int item);
   void pixmap_menu_activated(int item);
@@ -314,6 +315,8 @@ private:
   QSize       defaultSize;
 
   QRect       _saveGeometry;
+
+  QTimer      m_closeTimeout;
 
   bool        b_framevis:1;
   bool        b_fullscreen:1;
