@@ -110,6 +110,7 @@ Time to start a requirement list.
 #include <klocale.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <signal.h>
 #include <dirent.h>
 #include <fcntl.h>
 #include <assert.h>
@@ -586,12 +587,24 @@ bool Konsole::queryClose()
                                                "Are you sure you want to quit?" ) )
               == KMessageBox::No )
             ) {
-            return FALSE;
+            return false;
         }
+    }
+    // WABA: Don't close if there are any sessions left. 
+    // Tell them to go away.
+    if (sessions.count())
+    {
+        sessions.first();
+        while(sessions.current()) 
+        {
+            sessions.current()->kill(SIGHUP);
+            sessions.next();
+        }
+        return skip_exit_query;
     }
     // If there is no warning requested or required or if warnQuit is a NULL
     // pointer for some reason, just assume closing is safe
-    return  TRUE;
+    return true;
 }
 
 void Konsole::slotWarnQuit()
@@ -1465,7 +1478,6 @@ void Konsole::doneSession(TESession* s, int )
       close();
   }
 }
-
 
 /*! Cycle to previous session (if any) */
 
