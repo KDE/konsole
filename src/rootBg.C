@@ -108,9 +108,9 @@ void RootPixmap::readSettings(int num)
 
       if ( useDir ) {
 	  
-	  QStringList list = KGlobal::dirs()->findAllReources("wallpaper");
+	  QStringList list = KGlobal::dirs()->findAllResources("wallpaper");
 
-	count = list.count();
+	  count = list.count();
 	if ( inorder ) {
 	  randomDesk = config.readNumEntry( "Item", 0 );
 	  randomDesk++;

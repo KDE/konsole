@@ -14,6 +14,7 @@
 #include "kapp.h"
 #include <qdir.h>
 #include <kstddirs.h>
+#include <kglobal.h>
 
 static int schema_serial = 0; //FIXME: remove,localize
 
