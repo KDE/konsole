@@ -54,9 +54,9 @@ install-exec-local: install-binPROGRAMS
 	@(chown root $(bindir)/konsole_grantpty && chmod 4755 $(bindir)/konsole_grantpty) || echo "Please make konsole_grandpty setuid root"  
 
 # just to make sure, automake makes them 
-METASOURCES =TEWidget.moc TEmuVt102.moc session.moc main.moc \
+METASOURCES = TEWidget.moc TEmuVt102.moc session.moc main.moc \
 	TEmulation.moc TEShell.moc kwrited.moc \
-	krootpixmap.moc #kcmkonsole.moc
+	krootpixmap.moc 
 
 META_INCLUDES = $(srcdir)/../include
 
