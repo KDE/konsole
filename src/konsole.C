@@ -1170,6 +1170,7 @@ void Konsole::allowPrevNext()
 
 void Konsole::newSession()
 {
+  if (!m_menuCreated) makeGUI();
   uint i=1;
   int session=0;
   while ( (session==0) && (i<=no2command.count()) )
@@ -1217,6 +1218,7 @@ void Konsole::newSession(int i)
   kdDebug()<<"Konsole::newSession() schema: -"<<sch<<"-"<<endl;
   QString txt = co->readEntry("Comment"); // not null
   int     fno = QMIN(co->readUnsignedNumEntry("Font",se->fontNo()),TOPFONT);
+  kdDebug()<<"Konsole::newSession() config: "<<co->readUnsignedNumEntry("Font")<<" se->font: "<<se->fontNo()<<" TOP: "<<TOPFONT<<endl;
 
   ColorSchema* schema = sch.isEmpty()
                       ? (ColorSchema*)NULL
