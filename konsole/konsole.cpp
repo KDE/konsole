@@ -668,7 +668,10 @@ bool Konsole::queryClose()
             ( KMessageBox::warningYesNo( this,
                                          i18n( "You have open sessions (besides the current one). "
                                                "These will be killed if you continue.\n"
-                                               "Are you sure you want to quit?" ) )
+                                               "Are you sure you want to quit?" ),
+					 i18n("Are you sure you want to quit?"),
+					 i18n("Quit"), i18n("Cancel") )
+	      
               == KMessageBox::No )
             ) {
             return false;
