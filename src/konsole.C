@@ -275,7 +275,9 @@ Konsole::Konsole(const char* name, const char* _pgm,
   //kdDebug()<<"Konsole ctor(): runSession()"<<endl;
   te->currentSession = se;
   se->setConnect(TRUE);
-  title = se->Title(); // take title from current session
+  if (mytitle.isEmpty()) {
+    title = se->Title(); // take title from current session
+    }
   setHeader();
   se->setKeymapNo(n_keytab); // act. the keytab for this session
 
@@ -1034,12 +1036,19 @@ void Konsole::notifySize(int lines, int columns)
 
 void Konsole::setHeader()
 {
+//  KONSOLEDEBUG << "setHeader title = " << title << endl;
   setCaption(title);
 }
 
 void Konsole::changeTitle(int, const QString& s)
 {
-  title = s; setHeader();
+//  KONSOLEDEBUG << "changeTitle title = " << s << endl;
+//  title = s; setHeader();
+  title = te->currentSession->Title();
+  title += " - ";
+  title += s;
+  setHeader();
+
 }
 
 /*
@@ -1050,21 +1059,21 @@ void Konsole::changeTitle(int, const QString& s)
 void Konsole::showFullScreen()
 {
     if ( !isTopLevel() ) {
-        KONSOLEDEBUG << "Not top level" << endl;
+//        KONSOLEDEBUG << "Not top level" << endl;
         return;
         }
 
     if ( topData()->fullscreen ) {
-        KONSOLEDEBUG << "TopData Fullscreen" << endl;
+//        KONSOLEDEBUG << "TopData Fullscreen" << endl;
         show();
         raise();
         return;
     }
     if ( topData()->normalGeometry.width() < 0 ) {
-        KONSOLEDEBUG << "TopData NormalGeo" << endl;
+//        KONSOLEDEBUG << "TopData NormalGeo" << endl;
         topData()->normalGeometry = QRect( pos(), size() );
         }
-    KONSOLEDEBUG << "Passed all if's" << endl;
+//    KONSOLEDEBUG << "Passed all if's" << endl;
     reparent( 0, WType_TopLevel | WStyle_Customize | WStyle_NoBorderEx, // | WStyle_StaysOnTop,
               QPoint(0,0) );
     topData()->fullscreen = 1;
@@ -1099,7 +1108,7 @@ void Konsole::setFullScreen(bool on)
       showNormal();
       setCaption(title); // restore caption of window
       b_fullscreen = false;
-      KONSOLEDEBUG << "On is false, b_fullscreen is " << b_fullscreen << ". Set to Normal view and set caption." << endl;
+//      KONSOLEDEBUG << "On is false, b_fullscreen is " << b_fullscreen << ". Set to Normal view and set caption." << endl;
     }
 //  return;
     m_options->setItemChecked(5,b_fullscreen);
@@ -1215,8 +1224,10 @@ void Konsole::activateSession(TESession *s)
     }
 #endif
   }
-  if (te->currentSession)
+  if (te->currentSession) {
     te->currentSession->setTitle(title);
+//    kdDebug()<<"setTitle 1221 - " << title <<endl;
+    }
   te->currentSession = se;
   if (s->fontNo() != n_font)
       setFont(s->fontNo());
@@ -1289,6 +1300,7 @@ TESession *Konsole::newSession(KSimpleConfig *co)
       emu = co->readEntry("Term", emu).ascii();
       sch = co->readEntry("Schema", sch);
       txt = co->readEntry("Comment", txt);
+//      kdDebug()<<"Restored txt "<< txt << endl;
       fno = co->readUnsignedNumEntry("Font", fno);
       cmdArgs.append(shell);
       if (!cmd.isEmpty())
@@ -1314,6 +1326,7 @@ TESession *Konsole::newSession(KSimpleConfig *co)
 
   s->setFontNo(QMIN(fno, TOPFONT));
   s->setSchemaNo(schmno);
+//kdDebug()<<"setTitle Konsole 1319 "<< txt << endl;
   s->setTitle(txt);
   s->setHistory(b_scroll); //FIXME: take from schema
 
@@ -1549,7 +1562,7 @@ void Konsole::setSchema(ColorSchema* s)
     pixmap_menu_activated(s->alignment());
   }
 
-        KONSOLEDEBUG << "GCM 1 Doing the rest" << endl;
+//        KONSOLEDEBUG << "GCM 1 Doing the rest" << endl;
 
   te->setColorTable(s->table());
   if (se) se->setSchemaNo(s->numb());
@@ -1561,6 +1574,7 @@ void Konsole::slotRenameSession() {
   QString name = ra->text();
   KLineEditDlg dlg(i18n("Session name"),name, this);
   if (dlg.exec()) {
+//    kdDebug()<<"setTitle 1566"<<endl;
     se->setTitle(dlg.text());
     if(se == te->currentSession) {
       title = dlg.text();

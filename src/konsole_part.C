@@ -209,6 +209,7 @@ bool konsolePart::openURL( const KURL & url )
 {
   m_url = url;
   emit setWindowCaption( url.prettyURL() );
+  kdDebug() << "Set Window Caption to " << url.prettyURL() << "\n";
   emit started( 0 );
 
   if ( url.isLocalFile() )
