@@ -885,6 +885,7 @@ void Konsole::makeTabWidget()
     QToolTip::add(m_removeSessionButton,i18n("Close the current session"));
     m_removeSessionButton->setIconSet( SmallIcon( "tab_remove" ) );
     m_removeSessionButton->adjustSize();
+    m_removeSessionButton->setEnabled(false);
     connect(m_removeSessionButton, SIGNAL(clicked()), SLOT(confirmCloseCurrentSession()));
     tabwidget->setCornerWidget( m_removeSessionButton, BottomRight );
 
@@ -2395,6 +2396,7 @@ void Konsole::addSession(TESession* s)
       disableMasterModeConnections(); // no duplicate connections, remove old
       enableMasterModeConnections();
     }
+    m_removeSessionButton->setEnabled(tabwidget->count()>1);
 }
 
 QString Konsole::currentSession()
@@ -2836,6 +2838,7 @@ void Konsole::doneSession(TESession* s)
       rootxpms.remove(s->widget());
     }
     delete s->widget();
+    m_removeSessionButton->setEnabled(tabwidget->count()>1);
   }
   session2action.remove(s);
   action2session.remove(ra);
