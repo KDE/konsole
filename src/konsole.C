@@ -236,6 +236,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
   //kdDebug()<<"Konsole ctor() after makeBasicGUI "<<time.elapsed()<<" msecs elapsed"<<endl;
 
   colors = new ColorSchemaList();
+  colors->checkSchemas();
 
   KeyTrans::loadAll();
   //kdDebug()<<"Konsole ctor() after KeyTrans::loadAll() "<<time.elapsed()<<" msecs elapsed"<<endl;
