@@ -403,6 +403,16 @@ void Konsole::makeGUI()
    m_findHistory->setEnabled( se->history().isOn() );
    m_findHistory->plug(m_edit);
 
+   m_findNext = new KAction(i18n("&Find Next"), "next", 0, this,
+                                  SLOT(slotFindNext()), m_shortcuts, "find_next");
+   m_findNext->setEnabled( se->history().isOn() );
+   m_findNext->plug(m_edit);
+
+   m_findPrevious = new KAction(i18n("&Find Previous"), "previous", 0, this,
+                                SLOT(slotFindPrevious()), m_shortcuts, "find_previous");
+   m_findPrevious->setEnabled( se->history().isOn() );
+   m_findPrevious->plug(m_edit);
+
    m_saveHistory = new KAction(i18n("S&ave History As..."), "filesaveas", 0, this,
                                SLOT(slotSaveHistory()), m_shortcuts, "save_history");
    m_saveHistory->setEnabled( se->history().isOn() );
@@ -1612,6 +1622,8 @@ void Konsole::activateSession(TESession *s)
   updateKeytabMenu(); // act. the keytab for this session
   m_clearHistory->setEnabled( se->history().isOn() );
   m_findHistory->setEnabled( se->history().isOn() );
+  m_findNext->setEnabled( se->history().isOn() );
+  m_findPrevious->setEnabled( se->history().isOn() );
   se->getEmulation()->findTextBegin();
   m_saveHistory->setEnabled( se->history().isOn() );
   monitorActivity->setChecked( se->isMonitorActivity() );
@@ -2374,6 +2386,7 @@ HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
   connect( m_setUnlimited,SIGNAL(clicked()), this,SLOT(slotSetUnlimited()) );
 
   hb->addWidget(m_btnEnable);
+  hb->addSpacing(10);
   hb->addWidget(new QLabel(i18n("Number of lines : "), mainFrame));
   hb->addWidget(m_size);
   hb->addSpacing(10);
@@ -2431,6 +2444,8 @@ void Konsole::slotHistoryType()
   if (dlg.exec()) {
     m_clearHistory->setEnabled( dlg.isOn() );
     m_findHistory->setEnabled( dlg.isOn() );
+    m_findNext->setEnabled( dlg.isOn() );
+    m_findPrevious->setEnabled( dlg.isOn() );
     m_saveHistory->setEnabled( dlg.isOn() );
     if (dlg.isOn()) {
       if (dlg.nbLines() > 0) {
@@ -2478,6 +2493,36 @@ void Konsole::slotFindHistory()
 
   m_finddialog->show();
   m_finddialog->result();
+}
+
+void Konsole::slotFindNext()
+{
+  if( !m_finddialog ) {
+    slotFindHistory();
+    return;
+  }
+  
+  QString string;
+  string = m_finddialog->getText();
+  m_finddialog->setText(string.isEmpty() ? m_find_pattern : string);
+
+  slotFind();
+}
+
+void Konsole::slotFindPrevious()
+{
+  if( !m_finddialog ) {
+    slotFindHistory();
+    return;
+  }
+
+  QString string;
+  string = m_finddialog->getText();
+  m_finddialog->setText(string.isEmpty() ? m_find_pattern : string);
+
+  m_finddialog->setDirection( !m_finddialog->get_direction() );
+  slotFind();
+  m_finddialog->setDirection( !m_finddialog->get_direction() );
 }
 
 void Konsole::slotFind()

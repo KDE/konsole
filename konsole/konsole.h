@@ -168,6 +168,8 @@ private slots:
 
   void slotFind();
   void slotFindDone();
+  void slotFindNext();
+  void slotFindPrevious();
 
   void fontNotFound();
   void showTip();
@@ -255,6 +257,8 @@ private:
 
   KAction       *m_clearHistory;
   KAction       *m_findHistory;
+  KAction       *m_findNext;
+  KAction       *m_findPrevious;
   KAction       *m_saveHistory;
   KAction       *m_detachSession;
   KAction       *m_moveSessionLeft;
