@@ -29,6 +29,7 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel 
         m_file = locateLocal( "data", "kfile/bookmarks.xml" );
 
     KBookmarkManager *manager = KBookmarkManager::managerForFile( m_file, false);
+    manager->setEditorOptions("Konsole", false);
 
     // import old bookmarks
     if ( !KStandardDirs::exists( m_file ) ) {
