@@ -1509,8 +1509,6 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
            if (!rootxpms[te])
              rootxpms.insert( te, new KRootPixmap(te) );
            rootxpms[te]->setFadeEffect(sch->tr_x(), QColor(sch->tr_r(), sch->tr_g(), sch->tr_b()));
-           rootxpms[te]->start();
-           rootxpms[te]->repaint(true);
         }
         else
         {
@@ -2455,6 +2453,8 @@ void Konsole::activateSession(TESession *s)
     }
   }
 
+  if (rootxpms[te])
+    rootxpms[te]->start();
   notifySize(te->Lines(), te->Columns());  // set menu items (strange arg order !)
   s->setConnect(true);
   if(!tabwidget && se->isMasterMode())
@@ -3271,8 +3271,6 @@ void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
     if (!rootxpms[tewidget])
       rootxpms.insert( tewidget, new KRootPixmap(tewidget) );
     rootxpms[tewidget]->setFadeEffect(s->tr_x(), QColor(s->tr_r(), s->tr_g(), s->tr_b()));
-    rootxpms[tewidget]->start();
-    rootxpms[tewidget]->repaint(true);
   } else {
 //        KONSOLEDEBUG << "Stopping transparency" << endl;
       if (rootxpms[tewidget]) {
