@@ -404,13 +404,13 @@ extern "C" int kdemain(int argc, char* argv[])
           ksm->konsole->callReadPropertiesInternal(sessionconfig,1);
           profile = "";
           // Hack to work-around sessions initialized with minimum size
-          for (int i=1;i<=counter;i++)
+          for (int i=0;i<counter;i++)
             m->activateSession( i );
           m->setColLin(c,l); // will use default height and width if called with (0,0)
         }
 	// works only for the first one, but there won't be more.
         n++;
-        m->activateSession( sessionconfig->readNumEntry("ActiveSession",0)+1 );
+        m->activateSession( sessionconfig->readNumEntry("ActiveSession",0) );
         m->show();
         m->run();
 	m->setAutoClose(auto_close);

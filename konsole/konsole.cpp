@@ -1928,18 +1928,18 @@ void Konsole::listSessions()
 #endif
   for (TESession *ses = sessions.first(); ses; ses = sessions.next()) {
     QString title=ses->Title();
-    m_sessionList->insertItem(SmallIcon(ses->IconName()),title.replace('&',"&&"),++counter);
+    m_sessionList->insertItem(SmallIcon(ses->IconName()),title.replace('&',"&&"),counter++);
   }
   connect(m_sessionList, SIGNAL(activated(int)), SLOT(activateSession(int)));
   m_sessionList->adjustSize();
   m_sessionList->popup(mapToGlobal(QPoint((width()/2)-(m_sessionList->width()/2),(height()/2)-(m_sessionList->height()/2))));
 }
 
-void Konsole::activateSession(const int position)
+void Konsole::activateSession(int position)
 {
-  if (position<=0 || position>(int)sessions.count())
+  if (position<0 || position>=(int)sessions.count())
     return;
-  activateSession( sessions.at(position-1) );
+  activateSession( sessions.at(position) );
 }
 
 void Konsole::activateSession(const QString &sessionId)

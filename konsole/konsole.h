@@ -107,7 +107,7 @@ public:
   void callReadPropertiesInternal(KConfig *config, int number) { readPropertiesInternal(config,number); }
 
 public slots:
-  void activateSession(const int position);
+  void activateSession(int position);
 
   void makeGUI();
   QString newSession();
@@ -198,18 +198,18 @@ private slots:
   void showTip();
 
   void listSessions();
-  void switchToSession1() { activateSession(1); }
-  void switchToSession2() { activateSession(2); }
-  void switchToSession3() { activateSession(3); }
-  void switchToSession4() { activateSession(4); }
-  void switchToSession5() { activateSession(5); }
-  void switchToSession6() { activateSession(6); }
-  void switchToSession7() { activateSession(7); }
-  void switchToSession8() { activateSession(8); }
-  void switchToSession9() { activateSession(9); }
-  void switchToSession10() { activateSession(10); }
-  void switchToSession11() { activateSession(11); }
-  void switchToSession12() { activateSession(12); }
+  void switchToSession1() { activateSession(0); }
+  void switchToSession2() { activateSession(1); }
+  void switchToSession3() { activateSession(2); }
+  void switchToSession4() { activateSession(3); }
+  void switchToSession5() { activateSession(4); }
+  void switchToSession6() { activateSession(5); }
+  void switchToSession7() { activateSession(6); }
+  void switchToSession8() { activateSession(7); }
+  void switchToSession9() { activateSession(8); }
+  void switchToSession10() { activateSession(9); }
+  void switchToSession11() { activateSession(10); }
+  void switchToSession12() { activateSession(11); }
 
   void biggerFont();
   void smallerFont();
