@@ -401,7 +401,7 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   }
 
 #if (defined(__svr4__) || defined(__sgi__))
-  // Solaris x86
+  // Solaris
   ioctl(tt, I_PUSH, "ptem");
   ioctl(tt, I_PUSH, "ldterm");
 #endif
