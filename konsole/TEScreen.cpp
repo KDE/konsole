@@ -1216,6 +1216,8 @@ QString TEScreen::getSelText(const bool preserve_line_breaks)
       if (s < hist_BR) {		// get lines from hist->history buffer.
           hX = sel_Left % columns;
 	  eol = hist->getLineLen(hY);
+          if (eol > columns)
+              eol = columns;
 	  if ((hY == (sel_BR / columns)) &&
               (eol > (sel_BR % columns)))
           {
@@ -1261,7 +1263,9 @@ QString TEScreen::getSelText(const bool preserve_line_breaks)
       if (s < hist_BR)
       {				// get lines from hist->history buffer.
           eol = hist->getLineLen(hY);
-
+          if (eol > columns)
+              eol = columns;
+          
           if ((hY == (sel_BR / columns)) &&
               (eol > (sel_BR % columns)))
           {
