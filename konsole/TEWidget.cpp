@@ -384,6 +384,32 @@ TEWidget::~TEWidget()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
+void TEWidget::drawTextFixed(QPainter &paint, int x, int y,
+                             QString& str, const ca *attr)
+{                             
+  QString drawstr;
+  unsigned int nc=0;
+  int w;
+  for(unsigned int i=0;i<str.length();i++)
+  {
+    drawstr = str.at(i);
+    // Add double of the width if next c is 0;
+    if ((attr+nc+1)->c)
+    {
+      w = font_w;
+      nc++;
+    }
+    else
+    {
+      w = font_w*2;
+      nc+=2;
+    }
+    paint.drawText(x,y, w, font_h, Qt::AlignHCenter | Qt::DontClip, drawstr, -1);
+    x += w;
+  }
+}
+
+
 /*!
     attributed string draw primitive
 */
@@ -454,25 +480,8 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
     {
       // The meaning of y differs between different versions of QPainter::drawText!!
       int y = rect.y(); // top of rect
-      unsigned int nc=0;
-      int w;
-      for(unsigned int i=0;i<str.length();i++)
-      {
-        drawstr = str.at(i);
-        // Add double of the width if next c is 0;
-        if ((attr+nc+1)->c)
-        {
-          w = font_w;
-          nc++;
-        }
-        else
-        {
-          w = font_w*2;
-          nc+=2;
-        }
-        paint.drawText(x,y, w, font_h, Qt::AlignHCenter | Qt::DontClip, drawstr, -1);
-        x += w;
-      }
+      
+      drawTextFixed(paint, x, y, str, attr);
     }
     else
     {
@@ -504,25 +513,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
         {
           // The meaning of y differs between different versions of QPainter::drawText!!
           int y = rect.y(); // top of rect
-          unsigned int nc=0;
-          int w;
-          for(unsigned int i=0;i<str.length();i++)
-          {
-            drawstr = str.at(i);
-            // Add double of the width if next c is 0;
-            if ((attr+nc+1)->c)
-            {
-              w = font_w;
-              nc++;
-            }
-            else
-            {
-              w = font_w*2;
-              nc+=2;
-            }
-            paint.drawText(x,y, w, font_h, Qt::AlignHCenter | Qt::DontClip, drawstr, -1);
-            x += w;
-          }
+          drawTextFixed(paint, x, y, str, attr);
         }
         else
         {
@@ -533,7 +524,6 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
             paint.drawText(x,y, str, -1);
           else
             paint.drawText(x,y, str, -1, QPainter::LTR);
-
         }
       }
       if (attr->r & RE_UNDERLINE)

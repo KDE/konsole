@@ -145,6 +145,9 @@ protected:
     bool eventFilter( QObject *, QEvent * );
     bool event( QEvent * );
 
+    void drawTextFixed(QPainter &paint, int x, int y,
+                       QString& str, const ca *attr);
+
     void drawAttrStr(QPainter &paint, QRect rect,
                      QString& str, const ca *attr, bool pm, bool clear);
     void paintEvent( QPaintEvent * );
