@@ -579,8 +579,8 @@ void TEmuVt102::tau( int token, int p, int q )
 
     case TY_CSI_PR('l',    2) :        resetMode      (MODE_Ansi     ); break; //VT100
 
-    case TY_CSI_PR('h',    3) : /* IGNORED:  setColumns (       132) */ break; //VT100
-    case TY_CSI_PR('l',    3) : /* IGNORED:  setColumns (        80) */ break; //VT100
+    case TY_CSI_PR('h',    3) :                setColumns (       132); break; //VT100
+    case TY_CSI_PR('l',    3) :                setColumns (        80); break; //VT100
 
     case TY_CSI_PR('h',    4) : /* IGNORED: soft scrolling           */ break; //VT100
     case TY_CSI_PR('l',    4) : /* IGNORED: soft scrolling           */ break; //VT100
