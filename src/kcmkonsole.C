@@ -48,7 +48,7 @@ void PageFrame::Contents(const char* header, QWidget* body, const char* footer)
     topLayout->addWidget( sb , 2);
     QBoxLayout *sbl = new QHBoxLayout( sb,5,5 ); 
     QLabel* logo = new QLabel(sb);
-    QPixmap pm = Icon(QString("konsole.xpm"));
+    QPixmap pm = KGlobal::iconLoader()->loadApplicationIcon("konsole.xpm");
     logo->setPixmap(pm);
     logo->setAlignment( AlignCenter );
     logo->setMinimumSize( logo->sizeHint() );
