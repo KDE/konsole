@@ -37,7 +37,7 @@
 
 KWrited::KWrited() : QObject()
 {
-  wid = new QMultiLineEdit(NULL,"kwrited");
+  wid = new QTextEdit(NULL,"kwrited");
   wid->setFont(KGlobalSettings::fixedFont());
   wid->setMinimumWidth(wid->fontMetrics().maxWidth()*80 +
       wid->minimumSizeHint().width());
@@ -71,7 +71,13 @@ void KWrited::block_in(int fd)
   if (len < 0) len = 0;
   QCString text( buf, len+1 );
   text[len] = 0;
-  wid->insert( QString::fromLocal8Bit( text ) );
+  
+  QString str = QString::fromLocal8Bit( text );
+  int i;
+  // Remove CR
+  while ( (i = str.find('\r')) != -1)
+     str.remove(i,1);
+  wid->insert( str );
   wid->show();
   XRaiseWindow( wid->x11Display(), wid->winId());
 }
