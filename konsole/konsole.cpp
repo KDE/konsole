@@ -557,15 +557,9 @@ void Konsole::makeGUI()
    masterMode->plug ( m_view );
 
    m_view->insertSeparator();
-   m_moveSessionLeft = new KAction(i18n("&Move Session Left"), QApplication::reverseLayout() ? "forward" : "back",
-                                        QApplication::reverseLayout() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Right : Qt::CTRL+Qt::SHIFT+Qt::Key_Left, this,
-                                        SLOT(moveSessionLeft()), m_shortcuts, "move_session_left");
    m_moveSessionLeft->setEnabled( false );
    m_moveSessionLeft->plug(m_view);
 
-   m_moveSessionRight = new KAction(i18n("M&ove Session Right"), QApplication::reverseLayout() ? "back" : "forward",
-                                        QApplication::reverseLayout() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Left : Qt::CTRL+Qt::SHIFT+Qt::Key_Right, this,
-                                        SLOT(moveSessionRight()), m_shortcuts, "move_session_right");
    m_moveSessionRight->setEnabled( false );
    m_moveSessionRight->plug(m_view);
 
@@ -800,23 +794,6 @@ void Konsole::makeGUI()
    applySettingsToGUI();
    isRestored = false;
 
-   new KAction(i18n("Go to Previous Session"), QApplication::reverseLayout() ? Qt::SHIFT+Qt::Key_Right : Qt::SHIFT+Qt::Key_Left,
-               this, SLOT(prevSession()), m_shortcuts, "previous_session");
-   new KAction(i18n("Go to Next Session"), QApplication::reverseLayout() ? Qt::SHIFT+Qt::Key_Left : Qt::SHIFT+Qt::Key_Right,
-               this, SLOT(nextSession()), m_shortcuts, "next_session");
-
-   char actionname[20];
-   for (int i=1;i<13;i++) {
-     sprintf(actionname,"switch_to_session_%02d", i);
-     new KAction(i18n("Switch to Session %1").arg(i), 0, this, SLOT(switchToSession()), m_shortcuts, actionname);
-   }
-
-   new KAction(i18n("Bigger Font"), 0, this, SLOT(biggerFont()), m_shortcuts, "bigger_font");
-   new KAction(i18n("Smaller Font"), 0, this, SLOT(smallerFont()), m_shortcuts, "smaller_font");
-
-   new KAction(i18n("Toggle Bidi"), Qt::CTRL+Qt::ALT+Qt::Key_B, this, SLOT(toggleBidi()), m_shortcuts, "toggle_bidi");
-
-   m_shortcuts->readShortcutSettings();
 
    // Fill tab context menu
    m_tabPopupMenu = new KPopupMenu( this );
@@ -1087,6 +1064,29 @@ void Konsole::makeBasicGUI()
   new KAction(i18n("New Session"), shortcut, this, SLOT(newSession()), m_shortcuts, "new_session");
   new KAction(i18n("Activate Menu"), Qt::CTRL+Qt::ALT+Qt::Key_M, this, SLOT(activateMenu()), m_shortcuts, "activate_menu");
   new KAction(i18n("List Sessions"), 0, this, SLOT(listSessions()), m_shortcuts, "list_sessions");
+
+  m_moveSessionLeft = new KAction(i18n("&Move Session Left"), QApplication::reverseLayout() ? "forward" : "back",
+                                        QApplication::reverseLayout() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Right : Qt::CTRL+Qt::SHIFT+Qt::Key_Left, this,
+                                        SLOT(moveSessionLeft()), m_shortcuts, "move_session_left");
+  m_moveSessionRight = new KAction(i18n("M&ove Session Right"), QApplication::reverseLayout() ? "back" : "forward",
+                                        QApplication::reverseLayout() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Left : Qt::CTRL+Qt::SHIFT+Qt::Key_Right, this,
+                                        SLOT(moveSessionRight()), m_shortcuts, "move_session_right");
+
+  new KAction(i18n("Go to Previous Session"), QApplication::reverseLayout() ? Qt::SHIFT+Qt::Key_Right : Qt::SHIFT+Qt::Key_Left,
+              this, SLOT(prevSession()), m_shortcuts, "previous_session");
+  new KAction(i18n("Go to Next Session"), QApplication::reverseLayout() ? Qt::SHIFT+Qt::Key_Left : Qt::SHIFT+Qt::Key_Right,
+              this, SLOT(nextSession()), m_shortcuts, "next_session");
+
+  char actionname[20];
+  for (int i=1;i<13;i++) {
+     sprintf(actionname,"switch_to_session_%02d", i);
+     new KAction(i18n("Switch to Session %1").arg(i), 0, this, SLOT(switchToSession()), m_shortcuts, actionname);
+  }
+
+  new KAction(i18n("Bigger Font"), 0, this, SLOT(biggerFont()), m_shortcuts, "bigger_font");
+  new KAction(i18n("Smaller Font"), 0, this, SLOT(smallerFont()), m_shortcuts, "smaller_font");
+
+  new KAction(i18n("Toggle Bidi"), Qt::CTRL+Qt::ALT+Qt::Key_B, this, SLOT(toggleBidi()), m_shortcuts, "toggle_bidi");
 
   m_shortcuts->readShortcutSettings();
 
