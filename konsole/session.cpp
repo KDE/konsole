@@ -23,7 +23,7 @@
     of the abilities of the framework - multible sessions.
 */
 
-TESession::TESession(TEWidget* _te, const QString &_pgm, QStrList & _args, const QString &_term,const QString &_sessionId, const QString &_initial_cwd)
+TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args, const QString &_term,const QString &_sessionId, const QString &_initial_cwd)
    : DCOPObject( _sessionId.latin1() )
    , monitorActivity(false)
    , monitorSilence(false)
@@ -406,7 +406,7 @@ bool TESession::processDynamic(const QCString &fun, const QByteArray &data, QCSt
         QString arg0;
         QDataStream arg( data, IO_ReadOnly );
         arg >> arg0;
-        feedSession(arg0);         
+        feedSession(arg0);
         replyType = "void";
         return true;
       }
@@ -415,7 +415,7 @@ bool TESession::processDynamic(const QCString &fun, const QByteArray &data, QCSt
         QString arg0;
         QDataStream arg( data, IO_ReadOnly );
         arg >> arg0;
-        sendSession(arg0);         
+        sendSession(arg0);
         replyType = "void";
         return true;
       }

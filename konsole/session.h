@@ -29,7 +29,7 @@ class TESession : public QObject, virtual public SessionIface
 public:
 
   TESession(TEWidget* w,
-            const QString &pgm, QStrList & _args,
+            const QString &pgm, const QStrList & _args,
 	    const QString &term, const QString &sessionId="session-1",
 	    const QString &initial_cwd = QString::null);
   void changeWidget(TEWidget* w);
