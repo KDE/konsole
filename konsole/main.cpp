@@ -165,7 +165,7 @@ extern "C" int kdemain(int argc, char* argv[])
 
   KAboutData aboutData( PACKAGE, I18N_NOOP("Konsole"),
     VERSION, description, KAboutData::License_GPL_V2,
-    "(c) 1997-2002, Lars Doelle");
+    "(c) 1997-2004, Lars Doelle");
   aboutData.addAuthor("Waldo Bastian",I18N_NOOP("Maintainer"), "bastian@kde.org");
   aboutData.addAuthor("Lars Doelle",I18N_NOOP("Author"), "lars.doelle@on-line.de");
   aboutData.addCredit("Stephan Binner",
@@ -248,7 +248,7 @@ extern "C" int kdemain(int argc, char* argv[])
   Visual *visual = 0;
   int event_base, error_base;
 
-  if ( args->isSet("argb") && XRenderQueryExtension( dpy, &event_base, &error_base ) ) 
+  if ( args->isSet("argb") && XRenderQueryExtension( dpy, &event_base, &error_base ) )
   {
     int nvi;
     XVisualInfo templ;
@@ -334,7 +334,7 @@ extern "C" int kdemain(int argc, char* argv[])
   if(args->isSet("types")) {
     QStringList types = KGlobal::dirs()->findAllResources("appdata", "*.desktop", false, true);
     types.sort();
-    for(QStringList::ConstIterator it = types.begin(); 
+    for(QStringList::ConstIterator it = types.begin();
         it != types.end(); ++it)
     {
        QString file = *it;
@@ -348,7 +348,7 @@ extern "C" int kdemain(int argc, char* argv[])
   if(args->isSet("schemas")) {
     ColorSchemaList colors;
     colors.checkSchemas();
-    for(int i = 0; i < (int) colors.count(); i++) 
+    for(int i = 0; i < (int) colors.count(); i++)
     {
        ColorSchema *schema = colors.find(i);
        QString relPath = schema->relPath();
@@ -357,7 +357,7 @@ extern "C" int kdemain(int argc, char* argv[])
     }
     return 0;
   }
-  
+
   if(args->isSet("workdir"))
      QDir::setCurrent( args->getOption("workdir") );
 
@@ -383,7 +383,7 @@ extern "C" int kdemain(int argc, char* argv[])
   {
      QStringList profiles = KGlobal::dirs()->findAllResources("data", "konsole/profiles/*", false, true);
      profiles.sort();
-     for(QStringList::ConstIterator it = profiles.begin(); 
+     for(QStringList::ConstIterator it = profiles.begin();
          it != profiles.end(); ++it)
      {
         QString file = *it;
