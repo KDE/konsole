@@ -29,7 +29,7 @@ class TEmulation : public QObject
 public:
 
   TEmulation(TEWidget* gui);
-  void changeGUI(TEWidget* newgui);
+  virtual void changeGUI(TEWidget* newgui);
   ~TEmulation();
 
 public:
