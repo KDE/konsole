@@ -1070,24 +1070,24 @@ bool Konsole::queryClose()
    {
         if(sessions.count()>1) {
 	    switch (
-		KMessageBox::warningYesNoCancel( 
+		KMessageBox::warningYesNoCancel(
 	    	    this,
             	    i18n( "You have open sessions (besides the current one). "
                 	  "These will be killed if you continue.\n"
                 	  "Are you sure you want to quit?" ),
 	    	    i18n("Really Quit?"),
-	    	    i18n("&Quit"), 
+	    	    KStdGuiItem::quit(),
 	    	    KGuiItem(i18n("C&lose Session"),"fileclose")
 		)
 	    ) {
 		case KMessageBox::Yes :
 		break;
 		case KMessageBox::No :
-		    { closeCurrentSession(); 
+		    { closeCurrentSession();
 		        return false;
 		    }
 		break;
-		case KMessageBox::Cancel : return false; 
+		case KMessageBox::Cancel : return false;
 	    }
 	}
     }
@@ -2054,7 +2054,7 @@ void Konsole::setFullScreen(bool on)
 }
 
 // don't call this directly
-void Konsole::updateFullScreen( bool on ) 
+void Konsole::updateFullScreen( bool on )
 {
   b_fullscreen = on;
   if( on )
@@ -2457,7 +2457,7 @@ void Konsole::setDefaultSession(const QString &filename)
   m_defaultSession = new KSimpleConfig(locate("appdata", filename), true /* read only */);
   m_defaultSession->setDesktopGroup();
   b_showstartuptip = m_defaultSession->readBoolEntry("Tips", true);
-          
+
   m_defaultSessionFilename=filename;
 }
 
