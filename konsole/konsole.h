@@ -110,8 +110,6 @@ public:
   enum TabPosition { TabNone, TabTop, TabBottom };
   enum TabViewModes { ShowIconAndText = 0, ShowTextOnly = 1, ShowIconOnly = 2 };
 
-  enum { BELLSYSTEM=0, BELLNOTIFY=1, BELLVISUAL=2 };  // From TEWidget.h
-
 public slots:
   void activateSession(int position);
   void activateSession(QWidget*);

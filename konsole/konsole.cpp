@@ -1500,8 +1500,8 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       n_bell = QMIN(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),2);
 
       checkSoundSystem();
-      if ( !b_soundSystemEnabled && (n_bell == BELLNOTIFY) )
-         n_bell = BELLSYSTEM;
+      if ( !b_soundSystemEnabled && (n_bell == TEWidget::BELLNOTIFY) )
+         n_bell = TEWidget::BELLSYSTEM;
 
       // Options that should be applied to all sessions /////////////
 
