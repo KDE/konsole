@@ -522,7 +522,9 @@ void konsolePart::readProperties()
   m_histSize = config->readNumEntry("history",DEFAULT_HISTORY_SIZE);
   s_word_seps= config->readEntry("wordseps",":@-./_~");
 
-  QFont tmpFont(KGlobalSettings::fixedFont());
+  QFont tmpFont("fixed");
+  tmpFont.setFixedPitch(true);
+  tmpFont.setStyleHint(QFont::TypeWriter);
   defaultFont = config->readFontEntry("defaultfont", &tmpFont);
   setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT));
 
@@ -647,7 +649,9 @@ void konsolePart::setFont(int fontno)
     }
     else
     {
-      f.setFamily(KGlobalSettings::fixedFont().family());
+      f.setFamily("fixed");
+      f.setFixedPitch(true);
+      f.setStyleHint(QFont::TypeWriter);
       f.setPixelSize(QString(fonts[fontno]).toInt());
     }
 
