@@ -1401,7 +1401,10 @@ TESession *Konsole::newSession(KSimpleConfig *co)
 //kdDebug()<<"setTitle Konsole 1319 "<< txt << endl;
   s->setTitle(txt);
 
-  //s->setHistory(b_scroll); //FIXME: take from schema
+  if (b_histEnabled)
+      s->setHistory(HistoryTypeBlockArray(m_histSize));
+  else
+      s->setHistory(HistoryTypeNone());
 
   addSession(s);
   runSession(s); // activate and run
