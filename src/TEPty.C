@@ -63,6 +63,11 @@
 #define _XOPEN_SOURCE // make stdlib.h offer the above fcts
 #endif
 
+/* for NSIG */
+#ifndef _BSD_SOURCE
+#define _BSD_SOURCE
+#endif
+
 #include <stdlib.h>
 #include <stdio.h>
 
