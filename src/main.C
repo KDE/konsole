@@ -59,6 +59,7 @@
 #include <kcolordlg.h>
 #include <kfontdialog.h>
 #include <kmsgbox.h>
+#include <kurl.h>
 #include <qpainter.h>
 
 #include <kimgio.h>

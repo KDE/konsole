@@ -16,7 +16,6 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <kfm.h>
 #include <kwmmapp.h>
 #include <ktmainwindow.h>
 //#include <ktopwidget.h>
