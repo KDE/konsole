@@ -535,18 +535,12 @@ void Konsole::readProperties(KConfig* config)
   showFrame->setChecked( b_framevis );
   slotToggleFrame();
 
-  showToolbar->setChecked(b_toolbarvis);
-  slotToggleToolbar();
-  showMenubar->setChecked(b_menuvis);
-  slotToggleMenubar();
-
-  toolBar()->setBarPos((KToolBar::BarPosition)n_toolbarpos);
   // Options that should be applied to all sessions /////////////
   // (1) set menu items and Konsole members
   QFont tmpFont("fixed");
   defaultFont = config->readFontEntry("defaultfont", &tmpFont);
   setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT)); // sets n_font and menu item
-  setSchema(config->readEntry("schema",""));
+  setSchema(config->readEntry("schema", ""));
 
   // (2) apply to sessions (currently only the 1st one)
   //  TESession* s = no2session.find(1);
@@ -565,6 +559,13 @@ void Konsole::readProperties(KConfig* config)
   // Default values for startup, changed by "save options". Not used by SM.
   defaultSize.setWidth ( config->readNumEntry("defaultwidth", 0) );
   defaultSize.setHeight( config->readNumEntry("defaultheight", 0) );
+
+  showToolbar->setChecked(b_toolbarvis);
+  slotToggleToolbar();
+  showMenubar->setChecked(b_menuvis);
+  slotToggleMenubar();
+
+  toolBar()->setBarPos((KToolBar::BarPosition)n_toolbarpos);
 }
 
 /* ------------------------------------------------------------------------- */
