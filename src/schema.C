@@ -59,9 +59,7 @@ ColorSchema* ColorSchema::readSchema(const char* path)
         if (!strcmp(rend,"full"  )) attr = 4; else
           continue;
 
-        // if this is not an absolute filename, prepend the wallpaper dir
-        if (path[0] != '/') res->imagepath = kapp->kde_wallpaperdir() + '/';
-        res->imagepath += path;
+        res->imagepath = locate("wallpaper", path);
         res->alignment = attr;
       }
       if (!strncmp(line,"transparency",12))

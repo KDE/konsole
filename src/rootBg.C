@@ -105,10 +105,8 @@ void RootPixmap::readSettings(int num)
       bool useDir = config.readBoolEntry( "UseDir", true );
 
       if ( useDir ) {
-	QString tmpd = config.readEntry( "Directory", KApplication::kde_wallpaperdir());
-	QDir d( tmpd, "*", QDir::Name, QDir::Readable | QDir::Files );
-
-	QStringList list = d.entryList();
+	  
+	  QStringList list = KGlobal::dirs()->findAllReources("wallpaper");
 
 	count = list.count();
 	if ( inorder ) {

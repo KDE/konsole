@@ -47,7 +47,7 @@ void PageFrame::Contents(const char* header, QWidget* body, const char* footer)
     topLayout->addWidget( sb , 2);
     QBoxLayout *sbl = new QHBoxLayout( sb,5,5 ); 
     QLabel* logo = new QLabel(sb);
-    QPixmap pm = kapp->getIconLoader()->loadIcon(QString("konsole.xpm"));
+    QPixmap pm = Icon(QString("konsole.xpm"));
     logo->setPixmap(pm);
     logo->setAlignment( AlignCenter );
     logo->setMinimumSize( logo->sizeHint() );
@@ -305,7 +305,7 @@ SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
   slayout->setColStretch(0,1);
   slayout->setColStretch(1,2);
 
-  QPixmap pm0 = kapp->getIconLoader()->loadIcon(QString("contrast.xpm"));
+  QPixmap pm0 = Icon(QString("contrast.xpm"));
   QLabel* ll0 = new QLabel(bigWidget);
   ll0->setPixmap(pm0);
   ll0->setFixedSize( ll0->sizeHint() );
@@ -318,7 +318,7 @@ SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
   QToolTip::add(sl0,i18n("Contrast"));
   QToolTip::add(ll0,i18n("Contrast"));
 
-  QPixmap pm1 = kapp->getIconLoader()->loadIcon(QString("brightness.xpm"));
+  QPixmap pm1 = Icon(QString("brightness.xpm"));
   QLabel* ll1 = new QLabel(bigWidget);
   ll1->setPixmap(pm1);
   ll1->setFixedSize( ll1->sizeHint() );
@@ -331,7 +331,7 @@ SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
   QToolTip::add(sl1,i18n("Brightness"));
   QToolTip::add(ll1,i18n("Brightness"));
 
-  QPixmap pm2 = kapp->getIconLoader()->loadIcon(QString("colourness.xpm"));
+  QPixmap pm2 = Icon(QString("colourness.xpm"));
   QLabel* ll2 = new QLabel(bigWidget);
   ll2->setPixmap(pm2);
   ll2->setFixedSize( ll2->sizeHint() );
