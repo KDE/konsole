@@ -180,8 +180,8 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
                  bool menubaron, bool toolbaron, bool frameon, bool scrollbaron, const QString &_icon,
                  const QString &_title, QCString type, const QString &_term, bool b_inRestore,
                  const QString &_cwd)
-:KMainWindow(0, name),
-DCOPObject( "konsole" )
+:DCOPObject( "konsole" )
+,KMainWindow(0, name),
 ,m_defaultSession(0)
 ,m_defaultSessionFilename("")
 ,te(0)
