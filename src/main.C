@@ -56,7 +56,7 @@
 #include <qdragobject.h>
 
 #include <stdio.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <unistd.h>
 
 #include <kcolordlg.h>
@@ -1044,7 +1044,7 @@ int main(int argc, char* argv[])
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
   if (args->getOption("e").isEmpty())
   {
-    char* t = strrchr(shell,'/');
+    char* t = (char*)strrchr(shell,'/');
     if (args->isSet("ls") && t) // see sh(1)
     {
       t = strdup(t); *t = '-';
