@@ -468,7 +468,7 @@ void TEDemo::notifySize(int lines, int columns)
 // printf("notifySize(%d,%d)\n",lines,columns);
   if (lines != lincol.height() || columns != lincol.width())
   { char buf[100];
-    sprintf(buf,"(%d columns x %d lines)",columns,lines);
+    sprintf(buf,i18n("(%d columns x %d lines)"),columns,lines);
     setCaption(buf);
     QTimer::singleShot(2000,this,SLOT(setHeader()));
   }
