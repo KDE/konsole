@@ -151,7 +151,7 @@ const char *fonts[] = {
 
 Konsole::Konsole(const char* name,
                  const char* _pgm, QStrList & _args,
-                 int histon) : KMainWindow(0, name), pgm(_pgm), args(_args)
+                 int histon, bool toolbaron) : KMainWindow(0, name), pgm(_pgm), args(_args)
 {
   no2command.setAutoDelete(true);
   session_no = 0;
@@ -164,6 +164,7 @@ Konsole::Konsole(const char* name,
   b_fullscreen = FALSE;
   n_keytab = 0;
   n_render = 0;
+
 
   // create terminal emulation framework ////////////////////////////////////
 
@@ -178,11 +179,10 @@ Konsole::Konsole(const char* name,
   setCentralWidget(te);
 
   makeMenu();
-
   setDockEnabled( toolBar(), QMainWindow::Left, FALSE );
   setDockEnabled( toolBar(), QMainWindow::Right, FALSE );
   toolBar()->setFullSize( TRUE );
-  //  toolBar()->setIconText( KToolBar::IconTextRight);
+   //  toolBar()->setIconText( KToolBar::IconTextRight);
 
   // load session commands ///////////////////////////////////////////////////
 
@@ -244,7 +244,11 @@ Konsole::Konsole(const char* name,
      defaultSize = size();
   config->setGroup("options");
   readProperties(config);
+  if (!toolbaron)
+    toolBar()->hide();
 
+  showToolbar->setChecked(!toolBar()->isHidden());
+  showMenubar->setChecked(!menuBar()->isHidden());
   // activate and run first session //////////////////////////////////////////
 
   runSession(initial);
@@ -503,7 +507,7 @@ void Konsole::saveProperties(KConfig* config)
   config->writeEntry("keytab",n_keytab);
 
   if (args.count() > 0) config->writeEntry("konsolearguments", args);
-  config->writeEntry("class",name());
+  config->writeEntry("class",name());          
 }
 
 
@@ -555,8 +559,6 @@ void Konsole::readProperties(KConfig* config)
   else
   { fprintf(stderr,"session 1 not found\n"); } // oops
 
-  showToolbar->setChecked(!toolBar()->isHidden());
-  showMenubar->setChecked(!menuBar()->isHidden());
 }
 
 /* ------------------------------------------------------------------------- */

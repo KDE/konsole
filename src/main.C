@@ -35,6 +35,7 @@ static KCmdLineOptions options[] =
    { "title",           I18N_NOOP("Set the window title"), 0 },
    { "xwin",            I18N_NOOP("ignored"), 0 },  
    { "nohist",          I18N_NOOP("Do not save lines in scroll-back buffer"), 0 },
+   { "notoolbar",       I18N_NOOP("Do not display toolbar"), 0 },
    { "vt_sz CCxLL",  I18N_NOOP("Terminal size in columns x lines"), 0 },
    { "!e <command>",  I18N_NOOP("Execute 'command' instead of shell"), 0 },
    // WABA: All options after -e are treated as arguments.
@@ -52,6 +53,7 @@ int main(int argc, char* argv[])
   bool login_shell = false;
   bool welcome = true;
   bool histon = true;
+  bool toolbaron = true;
   const char* wname = PACKAGE;
 
   KAboutData aboutData( PACKAGE, I18N_NOOP("Konsole"),
@@ -141,6 +143,7 @@ int main(int argc, char* argv[])
   QCString sz = "";
   sz = args->getOption("vt_sz");
   histon = args->isSet("hist");
+  toolbaron = args->isSet("toolbar");
   wname = args->getOption("name");
   login_shell = args->isSet("ls");
   welcome = args->isSet("welcome");
@@ -180,11 +183,11 @@ int main(int argc, char* argv[])
     sessionconfig->setGroup("options");
     sessionconfig->readListEntry("konsolearguments", eargs);
     wname = sessionconfig->readEntry("class",wname).latin1();
-    RESTORE( Konsole(wname,shell,eargs,histon) )
+    RESTORE( Konsole(wname,shell,eargs,histon,toolbaron) )
   }
   else
   {
-    Konsole*  m = new Konsole(wname,shell,eargs,histon);
+    Konsole*  m = new Konsole(wname,shell,eargs,histon,toolbaron);
     m->setColLin(c,l); // will use default height and width if called with (0,0)
 
     if (welcome)
