@@ -74,7 +74,7 @@ install-data-local:
 	@echo ""
 
 # konsole_grantpty needs to be installed setuid root
-install-exec-local: install-binPROGRAMS
+install-exec-hook: 
 	@(chown root $(DESTDIR)$(bindir)/konsole_grantpty && chmod 4755 $(DESTDIR)$(bindir)/konsole_grantpty) || echo "Please make konsole_grandpty setuid root"
 
 # Not AUTO here, because there are some unused files
