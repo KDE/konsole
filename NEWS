@@ -1,3 +1,14 @@
+New in 0.9.12
+
+- Unicode support
+- Font selection, sort of
+- Arbitrary long history
+- Change to GPL2
+
+New in 0.9.11
+
+- maintainence release 
+
 New in 0.9.10
 
 - Unix98 pty support.
