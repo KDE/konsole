@@ -18,6 +18,9 @@ updatedir = $(kde_datadir)/kconf_update
 autostart_DATA = kwrited.desktop
 autostartdir = $(prefix)/share/autostart
 
+konsolehere_DATA = konsolehere.desktop
+konsoleheredir = $(kde_datadir)/konqueror/servicemenus
+
 rc_DATA = kwritedrc
 rcdir = $(kde_confdir)
 

@@ -1,0 +1,8 @@
+[Desktop Entry]
+ServiceTypes=inode/directory
+Actions=openTerminalHere
+
+[Desktop Action openTerminalHere]
+Name=Open Terminal Here
+Icon=konsole
+Exec=konsole --workdir %U
