@@ -805,6 +805,7 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
      while( x < columns-1 && charClass(image[i+1].c) == selClass )
      { i++; x++ ; }
      endSel.setX(x);
+     actSel = 2; // within selection
      emit extendSelectionSignal( endSel.x(), endSel.y() );
      emit endSelectionSignal(preserve_line_breaks);
      preserve_line_breaks = TRUE;
