@@ -196,6 +196,7 @@ int main(int argc, char* argv[])
   // ///////////////////////////////////////////////
 
   putenv((char*)"COLORTERM="); // to trigger mc's color detection
+  KonsoleSessionManaged *ksm = new KonsoleSessionManaged();
 
   if (a.isRestored())
   {
@@ -203,11 +204,18 @@ int main(int argc, char* argv[])
     sessionconfig->setGroup("options");
     sessionconfig->readListEntry("konsolearguments", eargs);
     wname = sessionconfig->readEntry("class",wname).latin1();
-    RESTORE( Konsole(wname,shell,eargs,histon,toolbaron) )
+//    RESTORE( Konsole(wname,shell,eargs,histon,toolbaron) )
+    int n = 1;
+    while (KMainWindow::canBeRestored(n)){
+        Konsole *m = new Konsole(wname,shell,eargs,histon,toolbaron);
+        m->restore(n);
+        ksm->konsole = m;
+        // works only for the first one, but there won't be more.
+        n++;
+    }
   }
   else
   {
-      KonsoleSessionManaged *ksm = new KonsoleSessionManaged();
     Konsole*  m = new Konsole(wname,shell,eargs,histon,toolbaron);
     ksm->konsole = m;
     m->setColLin(c,l); // will use default height and width if called with (0,0)
