@@ -490,6 +490,11 @@ void konsolePart::readProperties()
   te->setWordCharacters(s_word_seps);
 
   delete config;
+
+  config = new KConfig("konsolerc",TRUE);
+  config->setDesktopGroup();
+  te->setTerminalSizeHint( config->readBoolEntry("TerminalSizeHint",true) );
+  delete config;
 }
 
 void konsolePart::saveProperties()
