@@ -1391,8 +1391,8 @@ void Konsole::setFullScreen(bool on)
 //      KONSOLEDEBUG << "On is false, b_fullscreen is " << b_fullscreen << ". Set to Normal view and set caption." << endl;
     }
 //  return;
-    m_fullscreen->setChecked(b_fullscreen);
-
+    if (m_fullscreen!=0)
+       m_fullscreen->setChecked(b_fullscreen);
 }
 
 /* --| sessions |------------------------------------------------------------ */
