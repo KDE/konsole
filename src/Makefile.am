@@ -22,9 +22,9 @@ INCLUDES =  -I$(INCDIR) $(all_includes)
 bin_PROGRAMS = 	konsole konsole_grantpty kwrited #kcmkonsole
 lib_LTLIBRARIES = kwrited.la konsole.la
 
-noinst_LTLIBRARIES = libmykonsole.la
+noinst_LTLIBRARIES = libkonsolepart.la
 
-libmykonsole_la_SOURCES =konsole.C \
+libkonsolepart_la_SOURCES =konsole.C \
 	schema.C \
 	session.C \
 	TEWidget.C \
@@ -36,10 +36,10 @@ libmykonsole_la_SOURCES =konsole.C \
 	keytrans.C \
         konsole_part.C
 
-libmykonsole_la_LDFLAGS = -no-undefined $(all_libraries) -version-info 1:0:0 
+libkonsolepart_la_LDFLAGS = -no-undefined $(all_libraries) -version-info 1:0:0 
 # -version-info `expr $(VERSION) + $(SUBVERS)`:$(RELEASE):$(SUBVERS)
 
-libmykonsole_la_LIBADD = $(LIB_KDEUI) $(LIBUTEMPTER) -lkparts
+libkonsolepart_la_LIBADD = $(LIB_KDEUI) $(LIBUTEMPTER) -lkparts
 
 # Which sources should be compiled for konsole.
 
@@ -52,11 +52,11 @@ kwrited_LDADD   = kwrited.la
 kwrited_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 konsole_la_SOURCES = main.C 
-konsole_la_LIBADD  = libmykonsole.la
+konsole_la_LIBADD  = libkonsolepart.la
 konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
 
 konsole_SOURCES	= main.C 
-konsole_LDADD   = libmykonsole.la
+konsole_LDADD   = libkonsolepart.la
 konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 # kcmkonsole_SOURCES = kcmkonsole.C schema.C
