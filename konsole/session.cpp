@@ -455,8 +455,8 @@ void TESession::startZModem(const QString &zmodem, const QString &dir, const QSt
   connect(zmodemProc,SIGNAL (processExited(KProcess *)),
           this, SLOT(zmodemDone()));
 
-  disconnect( sh,SIGNAL(block_in(const char*,int)),em,SLOT(onRcvBlock(const char*,int)) );
-  connect( sh,SIGNAL(block_in(const char*,int)), this ,SLOT(zmodemRcvBlock(const char*,int)) );
+  disconnect( sh,SIGNAL(block_in(const char*,int)), this, SLOT(onRcvBlock(const char*,int)) );
+  connect( sh,SIGNAL(block_in(const char*,int)), this, SLOT(zmodemRcvBlock(const char*,int)) );
 
   zmodemProgress = new ZModemDialog(te->topLevelWidget(), false,
                                     i18n("ZModem Progress"));
@@ -515,7 +515,7 @@ void TESession::zmodemDone()
     zmodemBusy = false;
 
     disconnect( sh,SIGNAL(block_in(const char*,int)), this ,SLOT(zmodemRcvBlock(const char*,int)) );
-    connect( sh,SIGNAL(block_in(const char*,int)),em,SLOT(onRcvBlock(const char*,int)) );
+    connect( sh,SIGNAL(block_in(const char*,int)), this, SLOT(onRcvBlock(const char*,int)) );
 
     sh->send_bytes("\030\030\030\030", 4); // Abort
     sh->send_bytes("\001\013\n", 3); // Try to get prompt back
