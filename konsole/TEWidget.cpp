@@ -1106,8 +1106,6 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
   {
     // Extend to complete line
     bool above_not_below = ( here.y() < iPntSelCorr.y() );
-//    bool old_above_not_below = ( pntSelCorr.y() < iPntSelCorr.y() );
-    swapping = true; // triple click maybe selected a wrapped line
 
     QPoint above = above_not_below ? here : iPntSelCorr;
     QPoint below = above_not_below ? iPntSelCorr : here;
@@ -1129,6 +1127,11 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     {
       here = below; ohere = above;
     }
+
+    QPoint newSelBegin = QPoint( ohere.x(), ohere.y() );
+    swapping = !(tripleSelBegin==newSelBegin);
+    tripleSelBegin = newSelBegin;
+
     ohere.rx()++;
   }
 
@@ -1336,9 +1339,12 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
     { i--; if (x>0) x--; else {x=columns-1; iPntSel.ry()--;} }
 
     emit beginSelectionSignal( x, iPntSel.y(), false );
+    tripleSelBegin = QPoint( x, iPntSel.y() );
   }
-  else
+  else {
     emit beginSelectionSignal( 0, iPntSel.y(), false );
+    tripleSelBegin = QPoint( 0, iPntSel.y() );
+  }
 
   while (iPntSel.y()<lines-1 && m_line_wrapped[iPntSel.y()])
     iPntSel.ry()++;

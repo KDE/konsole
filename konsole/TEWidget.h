@@ -213,6 +213,7 @@ private:
 
     QPoint iPntSel; // initial selection point
     QPoint pntSel; // current selection point
+    QPoint tripleSelBegin; // help avoid flicker
     int    actSel; // selection state
     bool    word_selection_mode;
     bool    line_selection_mode;
