@@ -22,6 +22,8 @@ CONTRIBUTORS. See ChangeLog also
   - support for atypical kde apps dir locn.
 - Lars Knoll <knoll@mpi-hd.mpg.de>
   - bug fixing
+- Antonio Larrosa <larrosa@kde.org>
+  - transparency/tint
 - Peter Silva <peter.silva@videotron.ca>
   - bug fixing
   - decent marking
