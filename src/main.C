@@ -1142,7 +1142,7 @@ int main(int argc, char* argv[])
   {
      if (args->isSet("ls"))
         KCmdLineArgs::usage(i18n("You can't use BOTH -ls and -e.\n"));
-     shell = args->getOption("e");
+     shell = strdup(args->getOption("e"));
      eargs.clear();
      eargs.append(shell);
      for(int i=0; i < args->count(); i++)
