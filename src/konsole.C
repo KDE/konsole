@@ -61,7 +61,6 @@
 #include <stdio.h>
 #include <cstdlib>
 
-//#include <kcolordlg.h>
 #include <kfontdialog.h>
 #include <kglobal.h>
 #include <kstddirs.h>
@@ -252,9 +251,9 @@ void Konsole::makeMenu()
   m_sessions->setCheckable(TRUE);
   m_sessions->insertItem( i18n("Send Signal"), m_signals );
 
-  KAction *act = new KAction(i18n("Rename session..."), 0, this,
+  KAction *renameSession = new KAction(i18n("Rename session..."), 0, this,
                              SLOT(slotRenameSession()), this);
-  act->plug(m_sessions);
+  renameSession->plug(m_sessions);
 
   m_sessions->insertSeparator();
 
@@ -272,6 +271,10 @@ void Konsole::makeMenu()
   m_codec->setItemChecked(1,TRUE);
 
   m_options = new QPopupMenu(this);
+  // insert the rename schema here too, because they will not find it
+  // on shift right click
+  renameSession->plug(m_options);
+  m_options->insertSeparator();
   // Menubar on/off
   showMenubar = KStdAction::showMenubar(this, SLOT(slotToggleMenubar()));
   showMenubar->plug(m_options);
@@ -281,7 +284,8 @@ void Konsole::makeMenu()
   // Frame on/off
   showFrame = new KToggleAction(i18n("Show &frame"), 0,
 				this, SLOT(slotToggleFrame()), this);
-  showFrame->plug(m_options);;
+  showFrame->plug(m_options);
+
   // Scrollbar
   selectScrollbar = new KSelectAction(i18n("Scrollbar"), 0, this,
 			     SLOT(slotSelectScrollbar()), this);
@@ -344,14 +348,6 @@ void Konsole::makeMenu()
   QPopupMenu* m_help =  helpMenu(aboutAuthor, false);
   m_help->insertItem( i18n("&Technical Reference ..."), this, SLOT(tecRef()),
                       0, -1, 1);
-  /*
-  // Popup menu for drag & drop
-  m_drop = new QPopupMenu;
-  m_drop->insertItem( i18n("Paste"), 0);
-  m_drop->insertItem( i18n("cd"),    1);
-  connect(m_drop, SIGNAL(activated(int)), SLOT(drop_menu_activated(int)));
-  */
-
   m_options->installEventFilter( this );
 
 
@@ -465,6 +461,8 @@ void Konsole::readProperties(KConfig* config)
   b_toolbarvis  = config->readBoolEntry("toolbar visible",TRUE);
 
   b_scroll = config->readBoolEntry("history",TRUE);
+  setHistory(b_scroll);
+
   int n2_keytab = config->readNumEntry("keytab",0);
   keytab_menu_activated(n2_keytab); // act. the keytab for this session
 
@@ -796,11 +794,19 @@ void Konsole::addSession(TESession* s)
   session_no += 1;
   // create an action for the session
   QString title = i18n("%1 No %2").arg(s->Title()).arg(session_no);
-  char buffer[30];
-  sprintf(buffer,"%d",session_no);
-  KRadioAction *ra = new KRadioAction(title, "openterm", 0, this, SLOT(activateSession()), this, buffer);
+  //  char buffer[30];
+  //  int acc = CTRL+SHIFT+Key_0+session_no;
+  KRadioAction *ra = new KRadioAction(title, 
+                                     "openterm", 
+				      0,
+				      this, 
+				      SLOT(activateSession()), 
+				      this); 
+				      //				      buffer);
   ra->setExclusiveGroup("sessions");
   ra->setChecked(true);
+  // key accelerator
+  //  accel->connectItem(accel->insertItem(acc), ra, SLOT(activate()));
 
   action2session.insert(ra, s);
   session2action.insert(s,ra);
@@ -838,6 +844,8 @@ void Konsole::activateSession()
     ColorSchema* schema = ColorSchema::find(s->schemaNo());
     if (schema->usetransparency) {
       setSchema(schema);
+      // ??? 
+      repaint();
     }
     s->setConnect(TRUE);
   }
@@ -1040,6 +1048,7 @@ void Konsole::slotRenameSession() {
   KLineEditDlg dlg(i18n("Session name"),name, this);
   if (dlg.exec()) {
     ra->setText(dlg.text());
+    ra->setIcon("openterm"); // I don't know why it is needed here
     toolBar()->updateRects();
   }
 }

@@ -35,10 +35,6 @@
 #define PACKAGE "konsole"
 #define VERSION "0.9.15"
 
-class QDragEnterEvent;
-class QDropEvent;
-
-class KAccel;
 class KRootPixmap;
 
 class Konsole : public KTMainWindow
@@ -53,10 +49,7 @@ public:
 
 private slots:
   void configureRequest(TEWidget*,int,int,int);
-
-//  void scrollbar_menu_activated(int item);
   void activateSession();
-
   void doneSession(TESession*,int);
   void opt_menu_activated(int item);
   void schema_menu_activated(int item);
@@ -78,9 +71,6 @@ protected:
  void readProperties(KConfig* config);
  void saveGlobalProperties(KConfig* config);
  void readGlobalProperties(KConfig* config);
-
- // Dnd
- //void dragEnterEvent(QDragEnterEvent* event);
 
 private slots:
 
@@ -133,19 +123,14 @@ private:
 
   KMenuBar*   menubar;
   KStatusBar* statusbar;
-  KAccel*     accel;
 
   QPopupMenu* m_file;
   QPopupMenu* m_sessions;
   QPopupMenu* m_options;
-  //  QPopupMenu* m_scrollbar;
-  //  QPopupMenu* m_font;
   QPopupMenu* m_schema;
   QPopupMenu* m_keytab;
   QPopupMenu* m_codec;
-  //  QPopupMenu* m_size;
-  QPopupMenu* m_drop;
-//
+
   KToggleAction *showToolbar;
   bool        b_toolbarvis;
   KToggleAction *showMenubar;
