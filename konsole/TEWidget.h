@@ -64,6 +64,8 @@ public:
     void setImage(const ca* const newimg, int lines, int columns);
     void setLineWrapped(QBitArray line_wrapped) { m_line_wrapped=line_wrapped; }
 
+    void setCursorPos(const int curx, const int cury);
+
     int  Lines()   { return lines;   }
     int  Columns() { return columns; }
 

@@ -414,6 +414,22 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
 }
 
 /*!
+    Set XIM Position
+*/
+void TEWidget::setCursorPos(const int curx, const int cury)
+{
+    QPoint tL  = contentsRect().topLeft();
+    int    tLx = tL.x();
+    int    tLy = tL.y();
+
+    int xpos, ypos;
+    ypos = bY + tLy + font_h*(cury-1) + font_a;
+    xpos = bX + tLx + font_w*curx;
+    setMicroFocusHint(xpos, ypos, 0, font_h);
+    // fprintf(stderr, "x/y = %d/%d\txpos/ypos = %d/%d\n", curx, cury, xpos, ypos);
+}
+
+/*!
     The image can only be set completely.
 
     The size of the new image may or may not match the size of the widget.

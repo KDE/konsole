@@ -382,6 +382,7 @@ void TEmulation::showBulk()
     gui->setImage(image,
                   scr->getLines(),
                   scr->getColumns());     // actual refresh
+    gui->setCursorPos(scr->getCursorX(), scr->getCursorY());	// set XIM position
     free(image);
     //FIXME: check that we do not trigger other draw event here.
     gui->setLineWrapped( scr->getCookedLineWrapped() );
