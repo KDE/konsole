@@ -1,8 +1,5 @@
 CONTRIBUTORS
 
-- David Faure <David.Faure@insa-lyon.fr>
-  - "-e" included into session management.
-  - minor overall improvements.
 - Warwick Allison <warwick@troll.no>
   - 16 color SGR codes (xterm-83)
   - schema files seeked also in ~/.kde/share/apps/konsole
@@ -13,6 +10,8 @@ CONTRIBUTORS
   - command line argument handling in main.C
 - David Faure <David.Faure@insa-lyon.fr>
   - dnd adjustsments
+  - "-e" included into session management.
+  - minor overall improvements.
 - Dale M. Flaven <dflaven@netport.com>
   - bug fixing
 - Lars Knoll <knoll@mpi-hd.mpg.de>
