@@ -60,7 +60,7 @@ extern "C"
    * the form 'void *init_lib<library name>()  It always returns a
    * new factory object
    */
-  void *init_libkonsolepart()
+  KDE_EXPORT void *init_libkonsolepart()
   {
     return new konsoleFactory;
   }
