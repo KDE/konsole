@@ -31,8 +31,6 @@ OTHDIR = $(TOPDIR)/other
 
 # set the include path for X, qt and KDE
 INCLUDES =  -I$(INCDIR) $(all_includes)
-# claim, which subdirectories you want to install
-#SUBDIRS = 
 
 # you can add here more. This one gets installed 
 bin_PROGRAMS = 	konsole
@@ -45,16 +43,12 @@ libkonsole_la_LDFLAGS =  -version-info `expr $(VERSION) + $(SUBVERS)`:$(RELEASE)
 # Which sources should be compiled for konsole.
 
 konsole_SOURCES	= main.C
-konsole_LDADD   = libkonsole.la -lkdeui -lkdecore -lqt -lXext -lX11 $(EXTRALIBS) $(LIBSOCKET)
+konsole_LDADD   = libkonsole.la $(LIB_KIMGIO) $(LIB_KDEUI) 
 konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 #LIBOBJS = TEWidget.lo TEmuVt102.lo TEScreen.lo TEmulation.lo TEShell.lo
 
 # the library search path. 
-
-# i have had troubles with the @LIB_KIMGIO@ macro.
-# if you like to put it in here, please make sure it works before commiting
-EXTRALIBS = $(KIMGIO_LIBS) -lkimgio
 
 # just to make sure, automake makes them 
 BUILTSOURCES =TEWidget.moc TEmuVt102.moc session.moc main.moc TEmulation.moc TEShell.moc
@@ -64,18 +58,6 @@ CLEANFILES = $(BUILTSOURCES)
 
 messages:
 	$(XGETTEXT) -C -ktranslate -ki18n -x $(includedir)/kde.pot $(konsole_SOURCES) && mv messages.po ../../po/konsole.pot
-
-# just install datas here. Use install-exec-local for scripts and etc.
-# the binary itself is already installed from automake
-# use mkinstalldirs, not "install -d"
-# don't install a list of file. Just one file per install.
-# if you have more of them, create a subdirectory with an extra Makefile 
-
-install-data-local: 
-
-# remove ALL you have installed in install-data-local or install-exec-local
-uninstall-local:
-
 
 # add a dependency for every moc file to be full portable
 
