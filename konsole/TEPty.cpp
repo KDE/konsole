@@ -110,7 +110,7 @@ int TEPty::run(const char* _pgm, QStrList & _args, const char* _term, bool _addu
 
   setUsePty(true, _addutmp);
 
-  if (!start(NotifyOnExit, (Communication) (Stdin | Stdout | NoRead)))
+  if (!start(NotifyOnExit, (Communication) (Stdin | Stdout)))
      return -1;
 
   resume(); // Start...
@@ -133,8 +133,8 @@ void TEPty::setWriteable(bool writeable)
 */
 TEPty::TEPty()
 {
-  connect(this, SIGNAL(receivedStdout(int, int &)),
-	  this, SLOT(DataReceived(int, int&)));
+  connect(this, SIGNAL(receivedStdout(KProcess *, char *, int )),
+	  this, SLOT(dataReceived(KProcess *,char *, int)));
   connect(this, SIGNAL(processExited(KProcess *)),
           this, SLOT(donePty()));
   connect(this, SIGNAL(wroteStdin(KProcess *)),
@@ -189,15 +189,8 @@ void TEPty::send_bytes(const char* s, int len)
 }
 
 /*! indicates that a block of data is received */
-void TEPty::DataReceived(int,int &len)
+void TEPty::dataReceived(KProcess *,char *buf, int len)
 {
-  char buf[4096];
-  int fd = ptyMasterFd();
-  
-  len = read(fd, buf, 4096);
-  if (len < 0)
-     return;
-
   emit block_in(buf,len);
 }
 

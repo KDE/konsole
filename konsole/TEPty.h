@@ -74,7 +74,7 @@ Q_OBJECT
     void send_string(const char* s);
 
   protected slots:
-      void DataReceived(int, int& len);
+      void dataReceived(KProcess *, char *buf, int len);
   public slots:
       void donePty();
       
