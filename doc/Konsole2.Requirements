@@ -1,4 +1,4 @@
-[Konsole2.Requierements]
+[Konsole2.Requirements]
 
 The current state of konsole asks for a redesign.
 
@@ -8,11 +8,11 @@ level level shifts because of new uses and fulfilled
 wishes.
 
 These cannot be implemented by evolutionary modification
-but requiere complete redesign/rewrites.
+but require complete redesign/rewrites.
 
-This file is to collect requierements and ideas for this.
+This file is to collect requirements and ideas for this.
 
-- Here are some ----------------------------------------
+- Here are some candidates -----------------------------
 
 - proper partification
 
@@ -29,6 +29,11 @@ This file is to collect requierements and ideas for this.
   Current history algorithm does not allow to limit the
   histories size. Also, it descreases the speed.
 
+- improve unicode support
+
+  this is both an ncurses and terminfo issue.
+  We may need to provide some help for these packages.
+
 - tty vs. fullscreen mode solution.
 
   The visual appearence of the problem is that information
@@ -43,6 +48,11 @@ This file is to collect requierements and ideas for this.
 
   The compiled-in defaults should consistently
   be handled like the default.Keytab.
+
+- Multi session startup
+
+  Having multible sessions in the beginning 
+  would be a nice option.
 
 - Event flow and class design.
 
@@ -65,7 +75,8 @@ This file is to collect requierements and ideas for this.
 
   We could use these then to weed out obsolete material
   and to make konsole having an ECMA compatible emulation
-  by default.
+  by default. This would perhaps allow to pull the emulation
+  straight again.
 
 ... Check through wishlist and FIXME/Notes/PROJECTS
 
