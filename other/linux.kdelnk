@@ -16,6 +16,7 @@ Comment[pt_BR]=Console do Linux
 Comment[ro]=Consol„ de Linux
 Comment[ru]=ÎœŒ”œÃÿ Linux
 Comment[sk]=Linuxov· konzola
+Comment[sl]=Konzola z Linuxu
 Comment[sv]=Linux konsol
 Exec=bash
 Schema=/opt/kde/share/apps/konsole/Linux.schema
