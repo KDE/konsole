@@ -176,6 +176,7 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
 
   colors = new ColorSchemaList();
   colors->checkSchemas();
+  colors->sort();
 
   readProperties();
 
@@ -590,6 +591,7 @@ void konsolePart::schema_menu_activated(int item)
 void konsolePart::schema_menu_check()
 {
   if (colors->checkSchemas()) {
+    colors->sort();
     updateSchemaMenu();
   }
 }
