@@ -34,7 +34,7 @@ static KCmdLineOptions options[] =
    { "nowelcome",       I18N_NOOP("Suppress greeting"), 0 },
    { "T", 0, 0 },
    { "title",           I18N_NOOP("Set the window title"), 0 },
-   { "xwin",            I18N_NOOP("ignored"), 0 },  
+   { "xwin",            I18N_NOOP("ignored"), 0 },
    { "nohist",          I18N_NOOP("Do not save lines in scroll-back buffer"), 0 },
    { "notoolbar",       I18N_NOOP("Do not display toolbar"), 0 },
    { "vt_sz CCxLL",  I18N_NOOP("Terminal size in columns x lines"), 0 },
@@ -106,7 +106,7 @@ int main(int argc, char* argv[])
   aboutData.addCredit("Thanks to many other",
     "The above list only reflects the contributors\n"
     "i mananged to keep track for.");
-  
+
   KCmdLineArgs::init( argc, argv, &aboutData );
   KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
 
@@ -191,7 +191,7 @@ int main(int argc, char* argv[])
     Konsole*  m = new Konsole(wname,shell,eargs,histon,toolbaron);
     m->setColLin(c,l); // will use default height and width if called with (0,0)
 
-    if (welcome)
+    if (welcome && false) // ME: disable the greeting, it mixes up the taskbar
     {
       m->setCaption(i18n("Welcome to the console"));
       QTimer::singleShot(5000,m,SLOT(setHeader()));
