@@ -233,6 +233,7 @@ private slots:
   void slotTabbarContextMenu(const QPoint &);
   void slotTabSetViewOptions(int);
   void slotTabbarToggleDynamicHide();
+  void slotToggleAutoResizeTabs();
 
   void slotSetEncoding();
 private:
@@ -386,6 +387,7 @@ private:
 
   TabViewModes m_tabViewMode;
   bool        b_dynamicTabHide;
+  bool        b_autoResizeTabs;
 
   bool        b_framevis:1;
   bool        b_fullscreen:1;

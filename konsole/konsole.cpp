@@ -247,6 +247,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 ,s_kconfigSchema("")
 ,m_tabViewMode(ShowIconAndText)
 ,b_dynamicTabHide(false)
+,b_autoResizeTabs(false)
 ,b_fullscreen(false)
 ,m_menuCreated(false)
 ,b_warnQuit(false)
@@ -836,6 +837,11 @@ void Konsole::makeGUI()
                                        SLOT( slotTabbarToggleDynamicHide() ), this);
    dynamicTabHideOption->setChecked(b_dynamicTabHide);
    dynamicTabHideOption->plug(m_tabbarPopupMenu);
+
+   KToggleAction *m_autoResizeTabs = new KToggleAction( i18n("Auto Resize Tabs"),
+                 0, this, SLOT( slotToggleAutoResizeTabs() ), this);
+   m_autoResizeTabs->setChecked(b_autoResizeTabs);
+   m_autoResizeTabs->plug(m_tabbarPopupMenu);
  }
 
 void Konsole::slotSetEncoding()
@@ -867,7 +873,8 @@ void Konsole::makeTabWidget()
 {
   tabwidget = new KTabWidget(this);
   tabwidget->setTabReorderingEnabled(true);
-  tabwidget->setAutomaticResizeTabs(true);
+  tabwidget->setAutomaticResizeTabs( b_autoResizeTabs );
+
   if (n_tabbar==TabTop)
     tabwidget->setTabPosition(QTabWidget::Top);
   else
@@ -1341,6 +1348,13 @@ void Konsole::slotTabSetViewOptions(int mode)
   }
 }
 
+void Konsole::slotToggleAutoResizeTabs()
+{
+  b_autoResizeTabs = !b_autoResizeTabs;
+
+  tabwidget->setAutomaticResizeTabs( b_autoResizeTabs );
+}
+
 void Konsole::slotTabbarToggleDynamicHide()
 {
   b_dynamicTabHide=!b_dynamicTabHide;
@@ -1443,6 +1457,7 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("DefaultSession", m_defaultSessionFilename);
   config->writeEntry("TabViewMode", int(m_tabViewMode));
   config->writeEntry("DynamicTabHide", b_dynamicTabHide);
+  config->writeEntry("AutoResizeTabs", b_autoResizeTabs);
 
   if (se) {
     config->writeEntry("history", se->history().getSize());
@@ -1570,6 +1585,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       // Tab View Mode
       m_tabViewMode = TabViewModes(config->readNumEntry("TabViewMode", ShowIconAndText));
       b_dynamicTabHide = config->readBoolEntry("DynamicTabHide", false);
+      b_autoResizeTabs = config->readBoolEntry("AutoResizeTabs", false);
    }
 
    if (m_menuCreated)
@@ -1593,6 +1609,7 @@ void Konsole::applySettingsToGUI()
       updateRMBMenu();
    }
    updateKeytabMenu();
+   tabwidget->setAutomaticResizeTabs( b_autoResizeTabs );
 }
 
 
