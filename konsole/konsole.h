@@ -68,7 +68,8 @@ public:
 
   Konsole(const char * name, int histon, bool menubaron, bool tabbaron,
     bool frameon, bool scrollbaron,
-    QCString type = 0, bool b_inRestore = false, const int wanted_tabbar = 0);
+    QCString type = 0, bool b_inRestore = false, const int wanted_tabbar = 0,
+    const QString &workdir=QString::null);
 
   ~Konsole();
   void setColLin(int columns, int lines);
@@ -414,6 +415,7 @@ private:
 
   QSignalMapper* sessionNumberMapper;
   QStringList    sl_sessionShortCuts;
+  QString  s_workDir;
 };
 
 class QSpinBox;

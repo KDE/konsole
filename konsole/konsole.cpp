@@ -187,7 +187,7 @@ static const char * const fonts[] = {
 #define DEFAULT_HISTORY_SIZE 1000
 
 Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bool frameon, bool scrollbaron,
-                 QCString type, bool b_inRestore, const int wanted_tabbar )
+                 QCString type, bool b_inRestore, const int wanted_tabbar, const QString &workdir )
 :DCOPObject( "konsole" )
 ,KMainWindow(0, name)
 ,m_defaultSession(0)
@@ -264,6 +264,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 ,m_removeSessionButton(0)
 ,sessionNumberMapper(0)
 ,sl_sessionShortCuts(0)
+,s_workDir(workdir)
 {
   isRestored = b_inRestore;
   connect( &m_closeTimeout, SIGNAL(timeout()), this, SLOT(slotCouldNotClose()));
@@ -1432,6 +1433,9 @@ void Konsole::saveProperties(KConfig* config) {
   {
       saveMainWindowSettings(config);
   }
+
+  if (!s_workDir.isEmpty())
+    config->writePathEntry("workdir", s_workDir);
 }
 
 
@@ -2671,6 +2675,11 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
   if (!_title.isEmpty())
      txt = _title;
 
+  // apply workdir only when the session config does not have a directory
+  if (cwd.isEmpty())
+     cwd = s_workDir;
+  // bookmarks take precedence over workdir
+  // however, --workdir option has precedence in the very first session
   if (!_cwd.isEmpty())
      cwd = _cwd;
 

@@ -472,8 +472,9 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         sTerm = sessionconfig->readEntry("Term0");
         sIcon = sessionconfig->readEntry("Icon0","openterm");
         sCwd = sessionconfig->readPathEntry("Cwd0");
+        workDir = sessionconfig->readPathEntry("workdir");
 	n_tabbar = QMIN(sessionconfig->readUnsignedNumEntry("tabbar",Konsole::TabBottom),2);
-        Konsole *m = new Konsole(wname,histon,menubaron,tabbaron,frameon,scrollbaron,0/*type*/,true,n_tabbar);
+        Konsole *m = new Konsole(wname,histon,menubaron,tabbaron,frameon,scrollbaron,0/*type*/,true,n_tabbar, workDir);
 
         m->newSession(sPgm, eargs, sTerm, sIcon, sTitle, sCwd);
 
@@ -541,7 +542,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   }
   else
   {
-    Konsole*  m = new Konsole(wname,histon,menubaron,tabbaron,frameon,scrollbaron,type, false, 0);
+    Konsole*  m = new Konsole(wname,histon,menubaron,tabbaron,frameon,scrollbaron,type, false, 0, workDir);
     m->newSession((shell ? QFile::decodeName(shell) : QString::null), eargs, term, QString::null, title, workDir);
     m->enableFullScripting(full_script);
     m->enableFixedSize(fixed_size);
