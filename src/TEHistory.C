@@ -242,7 +242,7 @@ int HistoryScrollBuffer::getLineLen(int lineno)
 {
   if (lineno >= m_maxNbLines) return 0;
   
-  lineno = (lineno + m_arrayIndex + 1) % m_maxNbLines;
+  lineno = (lineno + m_arrayIndex + 2) % m_maxNbLines;
 
   histline *l = m_histBuffer[lineno];
 
@@ -256,7 +256,7 @@ void HistoryScrollBuffer::getCells(int lineno, int colno, int count, ca res[])
 
   assert (lineno < m_maxNbLines);
 
-  lineno = (lineno + m_arrayIndex + 1) % m_maxNbLines;
+  lineno = (lineno + m_arrayIndex + 2) % m_maxNbLines;
   
   histline *l = m_histBuffer[lineno];
 

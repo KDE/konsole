@@ -535,7 +535,7 @@ ca* TEScreen::getCookedImage()
     int yq  = (y+histCursor)*columns;
 
 //    kdDebug() << "InGetCookedImage - In first For.  Y =" << y << "histCursor = " << histCursor << endl;
-    hist->getCells(y+histCursor+1,0,len,merged+yp);
+    hist->getCells(y+histCursor,0,len,merged+yp);
     for (x = len; x < columns; x++) merged[yp+x] = dft;
     for (x = 0; x < columns; x++)
     {   int p=x + yp; int q=x + yq;
@@ -1218,7 +1218,6 @@ int TEScreen::getHistCursor()
 
 int TEScreen::getHistLines()
 {
-  kdDebug() << "TEScreen::getHistLines" << endl;
   return hist->getLines();
 }
 
