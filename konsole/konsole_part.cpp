@@ -989,7 +989,7 @@ void konsolePart::showShellInDir( const QString& dir )
   {
       QString text = dir;
       KRun::shellQuote(text);
-      text = QString::fromLatin1("\001\013cd ") + text + '\n';
+      text = QString::fromLatin1("cd ") + text + '\n';
       te->emitText( text );
   };
 }

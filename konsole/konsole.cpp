@@ -1582,7 +1582,7 @@ void Konsole::enterURL(const QString& URL, const QString&)
     KURL uglyurl(URL);
     newtext=uglyurl.prettyURL().mid(5);
     KRun::shellQuote(newtext);
-    te->emitText("\001\013cd "+newtext+"\r");
+    te->emitText("cd "+newtext+"\r");
   }
   else if (URL.contains("://", true)) {
     i = URL.find("://", 0);
