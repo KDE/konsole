@@ -67,8 +67,8 @@ key Return+Alt+NewLine : "\E\r\n"
 # Some desperately try to save the ^H.
 # may be not everyone wants this
 
-key Backspace : "\008"  # yes we need Control H
-key Delete    : "\177"  # yes we need this too
+key Backspace : "\x08"  # Control H
+key Delete    : "\x7f"
 
 # These codes are for the VT420pc
 # The Ansi mode (i.e. VT100 mode) is set by
