@@ -218,6 +218,7 @@ private:
   void setFont(int fontno);
 
   void clearSessionHistory(TESession & session);
+  void buildSessionMenus();
   void addSessionCommand(const QString & path);
   void loadSessionCommands();
   void addScreenSession(const QString & socket);

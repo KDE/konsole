@@ -593,15 +593,8 @@ void Konsole::makeGUI()
    m_help->insertItem(SmallIcon( "idea" ), i18n("&Tip of the Day..."), 
             this, SLOT(showTip()), 0, -1, 2);
 
-   //the different session types
-   loadSessionCommands();
-   loadScreenSessions();
-
-   m_session->insertSeparator();
-   m_closeSession->plug(m_session);
-
-   m_session->insertSeparator();
-   m_quit->plug(m_session);
+   //the different session menus
+   buildSessionMenus();
 
    connect(m_session, SIGNAL(activated(int)), SLOT(newSession(int)));
 
@@ -1380,6 +1373,7 @@ void Konsole::reparseConfiguration()
 {
   KGlobal::config()->reparseConfiguration();
   readProperties(KGlobal::config(), QString::null, true);
+  buildSessionMenus();
 }
 
 // --| color selection |-------------------------------------------------------
@@ -2244,6 +2238,28 @@ void Konsole::clearSessionHistory(TESession & session)
   }
 }
 
+void Konsole::buildSessionMenus()
+{
+   m_session->clear();
+   m_toolbarSessionsCommands->clear();
+
+   no2command.clear();
+   no2tempFile.clear();
+   no2filename.clear();
+
+   cmd_serial = 0;
+   cmd_first_screen = -1;
+
+   loadSessionCommands();
+   loadScreenSessions();
+
+   m_session->insertSeparator();
+   m_closeSession->plug(m_session);
+
+   m_session->insertSeparator();
+   m_quit->plug(m_session);
+}
+
 void Konsole::addSessionCommand(const QString &path)
 {
   KSimpleConfig* co;
@@ -2276,6 +2292,7 @@ void Konsole::addSessionCommand(const QString &path)
     filename = filename.mid(j+1);
   no2filename.insert(cmd_serial,new QString(filename));
 }
+
 
 void Konsole::loadSessionCommands()
 {
