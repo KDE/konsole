@@ -161,6 +161,7 @@ private:
   int         n_render;
   int         curr_schema; // current schema no
   QString     s_schema;
+  QString     s_kconfigSchema;
   QString     s_word_seps;			// characters that are considered part of a word
   QString     pmPath; // pixmap path
   QString     dropText;
