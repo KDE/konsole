@@ -377,7 +377,15 @@ void TEScreen::restoreCursor()
 
 void TEScreen::resizeImage(int new_lines, int new_columns)
 {
-//FIXME: evtl. transfer from/to hist.history buffer
+
+  if (cuY > new_lines-1)
+  { // attempt to preserve focus and lines
+    bmargin = lines-1; //FIXME: margin lost
+    for (int i = 0; i < cuY-(new_lines-1); i++)
+    {
+      addHistLine(); scrollUp(0,1);
+    }
+  }
 
   // make new image
   ca* newimg = (ca*)malloc(new_lines*new_columns*sizeof(ca));
