@@ -160,19 +160,24 @@ void ColorSchema::loadAllSchemas()
 {
   defaultSchema()->addSchema();
   schema_serial = 1;
-  for (int local=0; local<=1; local++) {
-      // KApplication could support this technique better
-      QString path = local
-			? kapp->localkdedir() + "/share/apps/konsole"
-			: kapp->kde_datadir() + "/konsole";
-      QDir d( path );
-      if (d.exists()) {
-        d.setFilter( QDir::Files | QDir::Readable );
-        d.setNameFilter( "*.schema" );
-        const QFileInfoList *list = d.entryInfoList();
-        QFileInfoListIterator it( *list );      // create list iterator
-        for(QFileInfo *fi; (fi=it.current()); ++it )
-	  ColorSchema::readSchema(fi->filePath())->addSchema(); //FIXME: check for NULL
+  for (int local=0; local<=1; local++)
+  {
+    // KApplication could support this technique better
+    QString path = local
+                 ? kapp->localkdedir() + "/share/apps/konsole"
+                 : kapp->kde_datadir() + "/konsole";
+    QDir d( path );
+    if (d.exists())
+    {
+      d.setFilter( QDir::Files | QDir::Readable );
+      d.setNameFilter( "*.schema" );
+      const QFileInfoList *list = d.entryInfoList();
+      QFileInfoListIterator it( *list );      // create list iterator
+      for(QFileInfo *fi; (fi=it.current()); ++it )
+      {
+        ColorSchema* sc = ColorSchema::readSchema(fi->filePath());
+        if (sc) sc->addSchema();
       }
-   }
+    }
+  }
 }

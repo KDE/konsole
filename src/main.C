@@ -427,7 +427,7 @@ void TEDemo::readProperties(KConfig* config)
   n_scroll   = MIN(config->readUnsignedNumEntry("scrollbar",SCRRIGHT),2);
   s_schema   = config->readEntry("schema","");
   setGeometry(config->readRectEntry("geometry",&dftRect));
-move(+4,-5); //FIXME: we work around a KTMainWidget(?) bug here. (see geometry() above)
+//move(+4,-5); //FIXME: we work around a KWM(?) bug here. (see geometry() above)
   if (menubar->menuBarPos() != KMenuBar::Floating)
   { QString entry = config->readEntry("kmenubar");
     if (!entry.isEmpty() && entry == "floating")
@@ -716,6 +716,9 @@ void TEDemo::newSession(int i)
                       ? (ColorSchema*)NULL
                       : ColorSchema::find(sch);
 
+  //FIXME: schema names here are absolut. Wrt. loadAllSchemas,
+  //       relative pathes should be allowed, too.
+
   int schmno = schema?schema->numb:se->schemaNo();
 
   if (emu.isEmpty()) emu = se->emuName();
@@ -801,12 +804,11 @@ void TEDemo::loadSessionCommands()
 {
   QString path = kapp->kde_datadir() + "/konsole";
   QDir d( path );
-  if(!d.exists())
-    return;
+  if(!d.exists()) return;
   d.setFilter( QDir::Files | QDir::Readable );
   d.setNameFilter( "*.kdelnk" );
   const QFileInfoList *list = d.entryInfoList();
-  QFileInfoListIterator it( *list );      // create list iterator
+  QFileInfoListIterator it( *list );
   for(QFileInfo *fi; (fi=it.current()); ++it )
     addSessionCommand(fi->filePath());
 }
@@ -904,7 +906,7 @@ int main(int argc, char* argv[])
     if (!strcmp(argv[i],"-h")) { usage(); exit(0); }
     if (!strcmp(argv[i],"-help")) { usage(); exit(0); }
     if (!strcmp(argv[i],"--help")) { usage(); exit(0); }
-    //FIXME: more: font, menu, scrollbar, pixmap, ....
+    //FIXME: more: font, menu, scrollbar, schema, session ...
   }
   // ///////////////////////////////////////////////
 
