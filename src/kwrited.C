@@ -26,6 +26,7 @@ KWrited::KWrited() : QObject()
 {
   wid = new QMultiLineEdit(NULL,"kwrited");
   wid->setReadOnly(TRUE);
+  wid->setFocusPolicy(QWidget::NoFocus);
   shell = new Shell();
   QObject::connect(shell, SIGNAL(block_in(const char*,int)), this, SLOT(block_in(const char*,int)));
 
@@ -50,13 +51,8 @@ KWrited::~KWrited()
 void KWrited::block_in(const char* txt, int len)
 {
   if (len < 0) len = 0;
-  char _text[len+1];
-  strncpy(_text,txt,len);
-  _text[len] = 0;
-  wid->insert(_text);
-  wid->setFocusPolicy(QWidget::NoFocus);
-  wid->show();
-  KWM::raise(wid->winId());
+  char _text[len+1]; strncpy(_text,txt,len); _text[len] = 0; wid->insert(_text);
+  wid->show(); KWM::raise(wid->winId());
 }
 
 int main(int argc, char* argv[])
