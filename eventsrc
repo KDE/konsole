@@ -13,3 +13,13 @@ Name=Bell in invisible session
 Comment=Bell emitted within an invisible session
 default_sound=KDE_Beep_Beep.wav
 default_presentation=0
+
+[Activity]
+Name=Activity in monitored session
+Comment=Activity detected in a monitored session
+default_presentation=0
+
+[Silence]
+Name=Silence in monitored session
+Comment=Silence detected in a monitored session
+default_presentation=0

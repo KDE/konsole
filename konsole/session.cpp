@@ -4,6 +4,7 @@
 #include <kdebug.h>
 #include <dcopclient.h>
 #include <kmessagebox.h>
+#include <knotifyclient.h>
 #include <klocale.h>
 #include <kprocio.h>
 
@@ -156,6 +157,7 @@ QString TESession::fullTitle() const
 
 void TESession::monitorTimerDone()
 {
+  KNotifyClient::event("Silence", i18n("Silence in session '%1'").arg(title));
   emit notifySessionState(this,NOTIFYSILENCE);
   monitorTimer->start(silence_seconds*1000,true);
 }
@@ -163,7 +165,7 @@ void TESession::monitorTimerDone()
 void TESession::notifySessionState(int state)
 {
   if (state==NOTIFYBELL) {
-    te->Bell(em->isConnected(),"Bell in session '"+title+"'");
+    te->Bell(em->isConnected(),i18n("Bell in session '%1'").arg(title));
   } else if (state==NOTIFYACTIVITY) {
     if (monitorSilence) {
       monitorTimer->stop();
@@ -171,6 +173,7 @@ void TESession::notifySessionState(int state)
     }
     if (!monitorActivity)
       return;
+    KNotifyClient::event("Activity", i18n("Activity in session '%1'").arg(title));
   }
 
   emit notifySessionState(this, state);
