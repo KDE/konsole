@@ -1178,6 +1178,8 @@ void Konsole::activateSession(TESession *s)
     }
 #endif
   }
+  if (te->currentSession)
+    te->currentSession->setTitle(title);
   te->currentSession = se;
   if (s->fontNo() != n_font)
       setFont(s->fontNo());
@@ -1521,6 +1523,11 @@ void Konsole::slotRenameSession() {
   QString name = ra->text();
   KLineEditDlg dlg(i18n("Session name"),name, this);
   if (dlg.exec()) {
+    se->setTitle(dlg.text());
+    if(se == te->currentSession) {
+      title = dlg.text();
+      setHeader();
+    }
     ra->setText(dlg.text());
     ra->setIcon("openterm"); // I don't know why it is needed here
     toolBar()->updateRects();
