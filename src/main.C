@@ -167,7 +167,7 @@ Konsole::Konsole(const QString& name,
   // temporary default: show
   toolBar()->setIconText(KToolBar::IconTextRight);
   toolBar()->show();
-  
+
 
   // Init DnD ////////////////////////////////////////////////////////////////
 
@@ -205,7 +205,7 @@ Konsole::Konsole(const QString& name,
 
   if (b_menuvis) menubar->show(); else menubar->hide();
   te->setFrameStyle( b_framevis
-                    ? QFrame::WinPanel | QFrame::Sunken
+		     ? (QFrame::WinPanel | QFrame::Sunken)
                      : QFrame::NoFrame );
   te->setScrollbarLocation(n_scroll);
 
@@ -267,7 +267,7 @@ void Konsole::makeMenu()
   m_sessions->setCheckable(TRUE);
   m_sessions->insertItem( i18n("Send Signal"), m_signals );
 
-  KAction *act = new KAction(i18n("Rename session..."), 0, this, 
+  KAction *act = new KAction(i18n("Rename session..."), 0, this,
                              SLOT(slotRenameSession()), this);
   act->plug(m_sessions);
 
@@ -296,11 +296,11 @@ void Konsole::makeMenu()
   showToolbar = KStdAction::showToolbar(this, SLOT(slotToggleToolbar()));
   showToolbar->plug(m_options);
   // Frame on/off
-  showFrame = new KToggleAction("Show &frame", 0, 
+  showFrame = new KToggleAction("Show &frame", 0,
 				this, SLOT(slotToggleFrame()), this);
   showFrame->plug(m_options);;
   // Scrollbar
-  selectScrollbar = new KSelectAction("Scrollbar", 0, this, 
+  selectScrollbar = new KSelectAction("Scrollbar", 0, this,
 			     SLOT(slotSelectScrollbar()), this);
   QStringList scrollitems;
   scrollitems << "&Hide" << "&Left" << "Right";
@@ -312,30 +312,30 @@ void Konsole::makeMenu()
   m_options->setItemChecked(5,b_fullscreen);
   m_options->insertSeparator();
   // Select size
-  selectSize = new KSelectAction("Size", 0, this, 
+  selectSize = new KSelectAction("Size", 0, this,
 			     SLOT(slotSelectSize()), this);
   QStringList sizeitems;
-  sizeitems << "40x15 (&small)" 
-	    << "80x24 (&vt100)" 
-	    << "80x25 (&ibmpc)" 
-	    << "80x40 (&xterm)" 
+  sizeitems << "40x15 (&small)"
+	    << "80x24 (&vt100)"
+	    << "80x25 (&ibmpc)"
+	    << "80x40 (&xterm)"
 	    << "80x52 (ibmv&ga)";
   selectSize->setItems(sizeitems);
   selectSize->plug(m_options);
   // Select font
-  selectFont = new KSelectAction("Fonts", 0, this, 
+  selectFont = new KSelectAction("Fonts", 0, this,
 				 SLOT(slotSelectFont()), this);
   QStringList it;
   it << "&Normal"
      << "&Tiny"
-     << "&Small" 
-     << "&Medium" 
-     << "&Large" 
-     << "&Huge" 
-     << "" 
-     << "&Linux" 
-     << "&Unicode" 
-     << "" 
+     << "&Small"
+     << "&Medium"
+     << "&Large"
+     << "&Huge"
+     << ""
+     << "&Linux"
+     << "&Unicode"
+     << ""
      << "&Custom...";
   selectFont->setItems(it);
   selectFont->plug(m_options);
@@ -343,7 +343,7 @@ void Konsole::makeMenu()
   m_options->insertItem( i18n("&Schema"), m_schema);
   m_options->insertSeparator();
   m_options->insertItem( i18n("&History"), 3 );
-  m_options->insertSeparator();  
+  m_options->insertSeparator();
   m_options->insertItem( i18n("&Codec"), m_codec);
   m_options->insertItem( i18n("&Keyboard"), m_keytab);
   m_options->insertSeparator();
@@ -532,10 +532,9 @@ void Konsole::readProperties(KConfig* config)
 /*FIXME: (merging) state of material below unclear.*/
   b_menuvis  = config->readBoolEntry("menubar visible",TRUE);
   b_toolbarvis  = config->readBoolEntry("toolbar visible",TRUE);
-  n_toolbarpos  = config->readUnsignedNumEntry("toolbar position", 
+  n_toolbarpos  = config->readUnsignedNumEntry("toolbar position",
   		     (unsigned int) KToolBar::Bottom);
 
-  b_framevis = config->readBoolEntry("has frame",TRUE);
   b_scroll = config->readBoolEntry("history",TRUE);
   b_fullscreen = FALSE; // config->readBoolEntry("Fullscreen",FALSE);
   n_font     = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
@@ -545,15 +544,15 @@ void Konsole::readProperties(KConfig* config)
 
   // Global options ///////////////////////
 
-  //  setFrameVisible(config->readBoolEntry("has frame",TRUE));
   b_framevis = config->readBoolEntry("has frame",TRUE);
+  showFrame->setChecked( b_framevis );
   slotToggleFrame();
 
   showToolbar->setChecked(b_toolbarvis);
   slotToggleToolbar();
   showMenubar->setChecked(b_menuvis);
   slotToggleMenubar();
-  
+
   toolBar()->setBarPos((KToolBar::BarPosition)n_toolbarpos);
   // Options that should be applied to all sessions /////////////
   // (1) set menu items and Konsole members
@@ -563,7 +562,7 @@ void Konsole::readProperties(KConfig* config)
   setSchema(config->readEntry("schema",""));
 
   // (2) apply to sessions (currently only the 1st one)
-  //  TESession* s = no2session.find(1);  
+  //  TESession* s = no2session.find(1);
   QPtrDictIterator<TESession> it( action2session ); // iterator for dict
   TESession* s = it.current();
 
@@ -645,9 +644,9 @@ void Konsole::slotSelectFont() {
   {
     KFontDialog::getFont(defaultFont, true);
     item = 0;
-  }  
+  }
   setFont(item);
-  activateSession(); // activates the current    
+  activateSession(); // activates the current
 }
 
 void Konsole::schema_menu_activated(int item)
@@ -711,24 +710,11 @@ void Konsole::slotToggleToolbar() {
 }
 
 void Konsole::slotToggleFrame() {
-  kDebugInfo("Changing the frame style");
   b_framevis = showFrame->isChecked();
   te->setFrameStyle( b_framevis
-                     ? QFrame::WinPanel | QFrame::Sunken
+                     ? ( QFrame::WinPanel | QFrame::Sunken )
                      : QFrame::NoFrame );
 }
-
-/*
-void Konsole::setFrameVisible(bool visible)
-{
-  b_framevis = visible;
-  m_options->setItemChecked(2,b_framevis);
-  te->setFrameStyle( b_framevis
-                     ? QFrame::WinPanel | QFrame::Sunken
-                     : QFrame::NoFrame );
-}
-*/
-
 
 
 void Konsole::setHistory(bool on)
@@ -772,7 +758,7 @@ void Konsole::slotSelectSize() {
     case 2: setColLin(80,25); break;
     case 3: setColLin(80,40); break;
     case 4: setColLin(80,52); break;
-    }    
+    }
 }
 
 
@@ -780,16 +766,16 @@ void Konsole::notifySize(int lines, int columns)
 {
     selectSize->blockSignals(true);
     selectSize->setCurrentItem(-1);
-    if (columns==40&&lines==15) 
+    if (columns==40&&lines==15)
 	selectSize->setCurrentItem(0);
-    if (columns==80&&lines==24) 
-	selectSize->setCurrentItem(1);	
-    if (columns==80&&lines==25) 
-	selectSize->setCurrentItem(2);	
-    if (columns==80&&lines==40) 
-	selectSize->setCurrentItem(3);	
-    if (columns==80&&lines==52) 
-	selectSize->setCurrentItem(4);	
+    if (columns==80&&lines==24)
+	selectSize->setCurrentItem(1);
+    if (columns==80&&lines==25)
+	selectSize->setCurrentItem(2);
+    if (columns==80&&lines==40)
+	selectSize->setCurrentItem(3);
+    if (columns==80&&lines==52)
+	selectSize->setCurrentItem(4);
     selectSize->blockSignals(false);
     if (n_render >= 3) pixmap_menu_activated(n_render);
 }
@@ -888,7 +874,7 @@ void Konsole::activateSession()
     ++it;
   }
   if (s==NULL) {
-    return; 
+    return;
   }
   //if (se == s) {  // This happens on startup
   //  kdDebug() << "Hello, you pressed the same button!!!" << endl;
@@ -911,12 +897,12 @@ void Konsole::activateSession()
   }
   else
   {
-    // if the schema uses transparency we MUST redo it... 
+    // if the schema uses transparency we MUST redo it...
     // even if it flickers. There might be a flickerless solution for this
-    // but please don't change it without finding a solution first. 
+    // but please don't change it without finding a solution first.
     ColorSchema* schema = ColorSchema::find(s->schemaNo());
     if (schema->usetransparency)
-      setSchema(s->schemaNo()); 
+      setSchema(s->schemaNo());
     s->setConnect(TRUE);
   }
   setHeader();
