@@ -833,13 +833,33 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
     case CMD_scrollPageDown : gui->doScroll(+gui->Lines()/2); return;
     case CMD_scrollLineUp   : gui->doScroll(-1             ); return;
     case CMD_scrollLineDown : gui->doScroll(+1             ); return;
-    case CMD_prevSession    : emit prevSession();             return;
-    case CMD_nextSession    : emit nextSession();             return;
+    case CMD_prevSession    : 
+	if ( QApplication::reverseLayout() )
+	    emit nextSession();
+	else
+	    emit prevSession();             
+	return;
+    case CMD_nextSession    : 
+	if ( QApplication::reverseLayout() )
+	    emit prevSession();
+	else
+	    emit nextSession();             
+	return;
     case CMD_newSession     : emit newSession();              return;
     case CMD_renameSession  : emit renameSession();           return;
     case CMD_activateMenu   : emit activateMenu();            return;
-    case CMD_moveSessionLeft : emit moveSessionLeft();        return;
-    case CMD_moveSessionRight: emit moveSessionRight();       return;
+    case CMD_moveSessionLeft : 
+	if ( QApplication::reverseLayout() )
+	    emit moveSessionRight();
+	else
+	    emit moveSessionLeft();        
+	return;
+    case CMD_moveSessionRight: 
+	if ( QApplication::reverseLayout() )
+	    emit moveSessionLeft();
+	else
+	    emit moveSessionRight();       
+	return;
     case CMD_scrollLock     : onScrollLock(                ); return;
   }
 

@@ -421,12 +421,12 @@ void Konsole::makeGUI()
    masterMode->plug ( m_view );
 
    m_view->insertSeparator();
-   m_moveSessionLeft = new KAction(i18n("&Move Session Left"), "back", 0, this,
+   m_moveSessionLeft = new KAction(i18n("&Move Session Left"), QApplication::reverseLayout() ? "forward" : "back", 0, this,
                                         SLOT(moveSessionLeft()), actions);
    m_moveSessionLeft->setEnabled( false );
    m_moveSessionLeft->plug(m_view);
 
-   m_moveSessionRight = new KAction(i18n("M&ove Session Right"), "forward", 0, this,
+   m_moveSessionRight = new KAction(i18n("M&ove Session Right"), QApplication::reverseLayout() ? "back" : "forward", 0, this,
                                         SLOT(moveSessionRight()), actions);
    m_moveSessionRight->setEnabled( false );
    m_moveSessionRight->plug(m_view);
