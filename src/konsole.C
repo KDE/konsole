@@ -413,7 +413,7 @@ void Konsole::makeGUI()
    selectFont->plug(m_options);
 
    // Schema
-   m_options->insertItem( i18n("&Schema"), m_schema);
+   m_options->insertItem( i18n("Schema"), m_schema);
    m_options->insertSeparator();
    m_options->insertItem( i18n("&History"), 3 );
    m_options->setItemEnabled(3, false);
