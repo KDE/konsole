@@ -12,6 +12,7 @@ Comment[th]=คอนโซล K
 Comment[uz]=Консол
 Comment[wa]=Konsole (terminå di KDE)
 Comment[xx]=xxKonsolexx
+Comment[zh_TW]=Konsole 終端機程式
 
 [BellVisible]
 Name=Bell in visible session
@@ -40,6 +41,7 @@ Name[sv]=Ljudsignal i synlig session
 Name[th]=ออดบนเซสชันที่มองเห็น
 Name[tr]=Görünen oturumda zil
 Name[xx]=xxBell in visible sessionxx
+Name[zh_TW]=在可見的工作階段使用響鈴
 Comment=Bell emitted within a visible session
 Comment[bg]=Камбана във видима сесия
 Comment[ca]=Timbre emès dins d'una sessió visible
@@ -62,6 +64,7 @@ Comment[sr]=Звоно је емитовано унутар видљиве се�
 Comment[sv]=Ljudsignal inne i en synlig session
 Comment[th]=ส่งเสียงออดภายในเซสชันที่มองเห็นได้
 Comment[xx]=xxBell emitted within a visible sessionxx
+Comment[zh_TW]=在可見的工作階段使用響鈴
 default_sound=KDE_Beep_Beep.wav
 default_presentation=1
 
@@ -91,6 +94,7 @@ Name[sr]=Звоно у невидљивој сесије
 Name[sv]=Ljudsignal i osynlig session
 Name[th]=ออดบนเซสชันที่มองไม่เห็น
 Name[xx]=xxBell in non-visible sessionxx
+Name[zh_TW]=在不可見的工作階段使用響鈴
 Comment=Bell emitted within a non-visible session
 Comment[bg]=Камбана в невидима сесия
 Comment[ca]=Timbre emès dins d'una sessió no visible
@@ -112,6 +116,7 @@ Comment[sl]=Zvonec znotraj nevidne seje
 Comment[sr]=Звоно је емитовано унутар невидљиве сесије
 Comment[sv]=Ljudsignal inne i en osynlig session
 Comment[xx]=xxBell emitted within a non-visible sessionxx
+Comment[zh_TW]=在不可見的工作階段使用響鈴
 default_sound=KDE_Beep_Beep.wav
 default_presentation=16
 
@@ -142,6 +147,7 @@ Name[sv]=Aktivitet i bevakad session
 Name[th]=การกระทำบนเซสชันติดตามการทำงาน
 Name[tr]=İzlenen oturumda etkinlik
 Name[xx]=xxActivity in monitored sessionxx
+Name[zh_TW]=活動於監視中的工作階段
 Comment=Activity detected in a monitored session
 Comment[bg]=Активност в наблюдавана сесия
 Comment[ca]=Detectada activitat en una sessió monitoritzada
@@ -166,6 +172,7 @@ Comment[sr]=Откривена је активност у надзираној �
 Comment[sv]=Aktivitet funnen i en bevakad session
 Comment[tr]=İzlenen oturumda etkinlik var
 Comment[xx]=xxActivity detected in a monitored sessionxx
+Comment[zh_TW]=活動被偵測到於監視中的工作階段
 default_presentation=16
 
 [Silence]
@@ -194,6 +201,7 @@ Name[sr]=Тишина у надзираној сесији
 Name[sv]=Tystnad i bevakad session
 Name[tr]=İzlenen oturumda sessizlik
 Name[xx]=xxSilence in monitored sessionxx
+Name[zh_TW]=沉默於監視中工作階段
 Comment=Silence detected in a monitored session
 Comment[bg]=Пасивност в наблюдавана сесия
 Comment[ca]=Detectat silenci en una sessió monitoritzada
@@ -218,6 +226,7 @@ Comment[sr]=Откривена је тишина у надзираној сес�
 Comment[sv]=Tystnad funnen i en bevakad session
 Comment[tr]=İzlenen oturumda sessizlik var
 Comment[xx]=xxSilence detected in a monitored sessionxx
+Comment[zh_TW]=沉漠被偵測到於監視中的工作階段
 default_presentation=16
 
 [Finished]
@@ -247,6 +256,7 @@ Name[sv]=Sessionen klar med status skild från noll
 Name[th]=เซสชันจบการทำงานได้สถานะไม่ใช่ค่าศูนย์
 Name[tr]=Oturum sıfırdan farklı bir durumla çıktı
 Name[xx]=xxSession finished with non-zero statusxx
+Name[zh_TW]=工作階段結束於非零狀態
 Comment=A session has exited with non-zero status
 Comment[bg]=Сесия с код на изход различен от нула
 Comment[ca]=Una sessió ha eixit amb un estatus no zero
@@ -273,4 +283,5 @@ Comment[sv]=En session har avslutats med status skild från noll
 Comment[th]=เซสชันที่จบการทำงานโดยไม่ได้คืนค่าเป็นศูนย์
 Comment[tr]=Bir oturum hata vererek çıktı
 Comment[xx]=xxA session has exited with non-zero statusxx
+Comment[zh_TW]=工作階段結束於非零狀態
 default_presentation=16
