@@ -557,6 +557,18 @@ extern "C" int kdemain(int argc, char* argv[])
 
   // Delete all toplevel widgets that have WDestructiveClose
   QWidgetList *list = QApplication::topLevelWidgets();
+  // remove all toplevel widgets that have a parent (i.e. they
+  // got WTopLevel explicitly), they'll be deleted by the parent
+  list->first();
+  while( list->current())
+  {
+    if( list->current()->parentWidget() != NULL )
+    {
+        list->remove();
+        continue;
+    }
+    list->next();
+  }
   QWidgetListIt it(*list);
   QWidget * w;
   while( (w=it.current()) != 0 ) {
