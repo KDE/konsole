@@ -321,6 +321,7 @@ void TEmuVt102::onRcvChar(int cc)
   if (getMode(MODE_Ansi)) // decide on proper action
   {
     if (lec(1,0,ESC)) {                                                       return; }
+    if (lec(1,0,ESC+128)) { s[0] = ESC; onRcvChar('[');                       return; }
     if (les(2,1,GRP)) {                                                       return; }
     if (Xte         ) { XtermHack();                            resetToken(); return; }
     if (Xpe         ) {                                                       return; }
