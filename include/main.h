@@ -123,9 +123,11 @@ private:
   QPopupMenu* m_drop;
 //
   KToggleAction *showToolbar;
+  bool        b_toolbarvis;
   bool        b_menuvis;
   bool        b_scroll;
   bool        b_framevis;
+  int         n_toolbarpos;
   int         n_keytab;
   int         n_font;
   int         n_scroll;

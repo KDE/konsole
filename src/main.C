@@ -170,7 +170,7 @@ Konsole::Konsole(const QString& name,
   makeStatusbar();
   // temporary default: show
   toolBar()->setIconText(KToolBar::IconTextRight);
-  toolBar()->setBarPos(KToolBar::Bottom);
+  //  toolBar()->setBarPos(KToolBar::Bottom);
   toolBar()->show();
   
 
@@ -210,7 +210,7 @@ Konsole::Konsole(const QString& name,
 
   if (b_menuvis) menubar->show(); else menubar->hide();
   te->setFrameStyle( b_framevis
-                     ? QFrame::WinPanel | QFrame::Sunken
+                    ? QFrame::WinPanel | QFrame::Sunken
                      : QFrame::NoFrame );
   te->setScrollbarLocation(n_scroll);
 
@@ -522,6 +522,8 @@ void Konsole::saveProperties(KConfig* config)
 {
   config->setGroup("options"); // bad! will no allow us to support multi windows
   config->writeEntry("menubar visible",b_menuvis);
+  config->writeEntry("toolbar visible", b_toolbarvis);
+  config->writeEntry("toolbar position", toolBar()->barPos());
   config->writeEntry("history",b_scroll);
   config->writeEntry("has frame",b_framevis);
   config->writeEntry("Fullscreen",b_fullscreen);
@@ -548,6 +550,10 @@ void Konsole::readProperties(KConfig* config)
   config->setGroup("options"); // bad! will no allow us to support multi windows
 /*FIXME: (merging) state of material below unclear.*/
   b_menuvis  = config->readBoolEntry("menubar visible",TRUE);
+  b_toolbarvis  = config->readBoolEntry("toolbar visible",TRUE);
+  n_toolbarpos  = config->readUnsignedNumEntry("toolbar position", 
+			     (unsigned int) KToolBar::Bottom);
+
   b_framevis = config->readBoolEntry("has frame",TRUE);
   b_scroll = config->readBoolEntry("history",TRUE);
   b_fullscreen = FALSE; // config->readBoolEntry("Fullscreen",FALSE);
@@ -559,6 +565,9 @@ void Konsole::readProperties(KConfig* config)
 
   setMenuVisible(config->readBoolEntry("menubar visible",TRUE));
   setFrameVisible(config->readBoolEntry("has frame",TRUE));
+  showToolbar->setChecked(b_toolbarvis);
+  slotToggleToolbar();
+  toolBar()->setBarPos((KToolBar::BarPosition)n_toolbarpos);
 
   scrollbar_menu_activated(QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2));
 
@@ -716,7 +725,8 @@ void Konsole::setMenuVisible(bool visible)
 }
 
 void Konsole::slotToggleToolbar() {
-  enableToolBar(showToolbar->isChecked() ? KToolBar::Show : KToolBar::Hide);
+  b_toolbarvis = showToolbar->isChecked();
+  enableToolBar(b_toolbarvis ? KToolBar::Show : KToolBar::Hide);
 }
 
 void Konsole::setFrameVisible(bool visible)
