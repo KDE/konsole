@@ -110,7 +110,7 @@ signals:
     void beginSelectionSignal( const int x, const int y );
     void extendSelectionSignal( const int x, const int y );
     void endSelectionSignal(const bool preserve_line_breaks);
-
+    void isBusySelecting(bool);
 
 protected:
 

@@ -74,6 +74,7 @@ TEScreen::TEScreen(int l, int c)
     tmargin(0), bmargin(0),
     tabstops(0),
     sel_begin(0), sel_TL(0), sel_BR(0),
+    sel_busy(false),
     ef_fg(0), ef_bg(0), ef_re(0),
     sa_cuX(0), sa_cuY(0),
     sa_cu_re(0), sa_cu_fg(0), sa_cu_bg(0)
@@ -1293,21 +1294,22 @@ void TEScreen::addHistLine()
     // adjust history cursor
     if (newHistLines > oldHistLines)
     {
+       histCursor++;
        // Adjust selection for the new point of reference
        if (sel_begin != -1)
        {
           sel_TL += columns;
           sel_BR += columns;
        }
-       else
-         if (histCursor+1 == newHistLines)
-           histCursor++;
     }
-    else
-      // if user is looking at the history or selecting, hold position
-      if ((histCursor > 0) && ((histCursor != newHistLines) || (sel_begin!=-1))) {
-         histCursor--;
-      }
+   
+    // Scroll up if user is looking at the history and we can scroll up
+    if ((histCursor > 0) &&  // We can scroll up and...
+        ((histCursor != newHistLines) || // User is looking at history...
+          sel_busy)) // or user is selecting text.
+    {
+       histCursor--;
+    }
 
     if (sel_begin != -1)
     {

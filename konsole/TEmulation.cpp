@@ -123,6 +123,8 @@ TEmulation::TEmulation(TEWidget* w)
 		   this,SLOT(setSelection(const bool)) );
   QObject::connect(gui,SIGNAL(clearSelectionSignal()),
 		   this,SLOT(clearSelection()) );
+  QObject::connect(gui,SIGNAL(isBusySelecting(bool)),
+		   this,SLOT(isBusySelecting(bool)) );
   setKeymap(0); // Default keymap
 }
 
@@ -142,7 +144,10 @@ TEmulation::~TEmulation()
 
 void TEmulation::setScreen(int n)
 {
+  TEScreen *old = scr;
   scr = screen[n&1];
+  if (scr != old)
+     old->setBusySelecting(false);
 }
 
 void TEmulation::setHistory(const HistoryType& t)
@@ -288,6 +293,12 @@ void TEmulation::setSelection(const bool preserve_line_breaks) {
   if (!connected) return;
   QString t = scr->getSelText(preserve_line_breaks);
   if (!t.isNull()) gui->setSelection(t);
+}
+
+void TEmulation::isBusySelecting(bool busy)
+{
+  if (!connected) return;
+  scr->setBusySelecting(busy);
 }
 
 void TEmulation::clearSelection() {

@@ -738,6 +738,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
 //printf("press top left [%d,%d] by=%d\n",tLx,tLy, bY);
   if ( ev->button() == LeftButton)
   {
+    emit isBusySelecting(true); // Keep it steady...
     if (isTargetSelected(pos.x(), pos.y())){
       // The user clicked inside selected text
 
@@ -794,6 +795,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
    if ( ev->x() > dragInfo.start.x() + distance || ev->x() < dragInfo.start.x() - distance ||
         ev->y() > dragInfo.start.y() + distance || ev->y() < dragInfo.start.y() - distance) {
       // we've left the drag square, we can start a real drag operation now
+      emit isBusySelecting(false); // Ok.. we can breath again.
       emit clearSelectionSignal();
       selBound.start.setX(-1);
       doDrag();
@@ -968,14 +970,17 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
 //printf("release [%d,%d] %d\n",ev->x()/font_w,ev->y()/font_h,ev->button());
   if ( ev->button() == LeftButton)
   {
+    emit isBusySelecting(false); // Ok.. we can breath again.
     if(dragInfo.state == diPending)
     {
       // We had a drag event pending but never confirmed.  Kill selection
       selBound.start.setX(-1);
       emit clearSelectionSignal();
-    }else
+    }
+    else
     {
-     if ( actSel > 1 ) emit endSelectionSignal(preserve_line_breaks);
+      if ( actSel > 1 ) 
+          emit endSelectionSignal(preserve_line_breaks);
       actSel = 0;
 
       //FIXME: emits a release event even if the mouse is

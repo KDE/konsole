@@ -154,6 +154,7 @@ public: // these are all `Screen' operations
     void setSelBeginXY(const int x, const int y);
     void setSelExtentXY(const int x, const int y);
     void clearSelection();
+    void setBusySelecting(bool busy) { sel_busy = busy; }
     QString getSelText(const BOOL preserve_line_breaks);
     QString getHistory();
     QString getHistoryLine(int no);
@@ -228,6 +229,7 @@ private:
     int sel_begin; // The first location selected.
     int sel_TL;    // TopLeft Location.
     int sel_BR;    // Bottom Right Location.
+    bool sel_busy; // Busy making a selection.
 
     // effective colors and rendition ------------
 

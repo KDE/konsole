@@ -48,6 +48,7 @@ public slots: // signals incoming from TEWidget
   virtual void onSelectionBegin(const int x, const int y);
   virtual void onSelectionExtend(const int x, const int y);
   virtual void setSelection(const bool preserve_line_breaks);
+  virtual void isBusySelecting(bool busy);
 
 public slots: // signals incoming from data source
 
