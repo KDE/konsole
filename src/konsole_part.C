@@ -53,6 +53,11 @@ extern "C"
   }
 };
 
+static const char *mocs[] = {
+#include "libkonsolepart_la_moc_classes.h"
+0
+};
+
 /**
  * We need one static instance of the factory for our C 'main' function
  */
@@ -61,6 +66,7 @@ KAboutData *konsoleFactory::s_aboutData = 0;
 
 konsoleFactory::konsoleFactory()
 {
+  setMocClasses(mocs);
 }
 
 konsoleFactory::~konsoleFactory()
