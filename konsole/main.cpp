@@ -42,7 +42,7 @@ static KCmdLineOptions options[] =
    { "T <title>",       I18N_NOOP("Set the window title"), 0 },
    { "tn <terminal>",   I18N_NOOP("Specify terminal type as set in the TERM\nenvironment variable"), "xterm" },
    { "xwin",            I18N_NOOP("ignored"), 0 },
-   { "noclose",         I18N_NOOP("Do not close konsole when command exits"), 0 },
+   { "noclose",         I18N_NOOP("Do not close Konsole when command exits"), 0 },
    { "nohist",          I18N_NOOP("Do not save lines in history"), 0 },
    { "nomenubar",       I18N_NOOP("Do not display menubar"), 0 },
    { "notoolbar",       I18N_NOOP("Do not display toolbar"), 0 },
