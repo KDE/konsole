@@ -14,6 +14,7 @@
 #define TEHISTORY_H
 
 #include "TECommon.h"
+#include "BlockArray.h"
 
 /*
    An extendable tmpfile(1) based buffer.
@@ -31,11 +32,12 @@ public:
 public:
   void add(const unsigned char* bytes, int len);
   void get(unsigned char* bytes, int len, int loc);
-  int  len();
+    bool has(int loc) const;
+  size_t  len() const;
 
 private:
-  int  ion;
-  int  length;
+  size_t length;
+    BlockArray array;
 };
 
 class HistoryScroll
