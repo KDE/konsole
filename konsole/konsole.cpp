@@ -2525,7 +2525,8 @@ void Konsole::activateSession(TESession *s)
      if (sessions.find(se) == -1)
         delete se;
   }
-  se_previous = se;
+  if (se != s)
+     se_previous = se;
   se = s;
   session2action.find(se)->setChecked(true);
   QTimer::singleShot(1,this,SLOT(allowPrevNext())); // hack, hack, hack
@@ -2860,6 +2861,13 @@ void Konsole::doneSession(TESession* s)
     KMessageBox::sorry(this, str);
   }
 #endif
+
+  if (s == se_previous)
+    se_previous = 0;
+
+  if (se_previous)
+    activateSession(se_previous);
+
   KRadioAction *ra = session2action.find(s);
   ra->unplug(m_view);
   if (tabwidget) {
@@ -2884,18 +2892,18 @@ void Konsole::doneSession(TESession* s)
       _se->setListenToKeyPress(false);
 
   delete s;
+
   if (s == se_previous)
-    se_previous=NULL;
+    se_previous = 0;
+
   if (s == se)
   { // pick a new session
     se = 0;
     if (sessions.count() || detached.count())
     {
       if (sessions.count()) {
-        if (se_previous)
-          se = se_previous;
-        else
-          se = sessions.at(sessionIndex ? sessionIndex - 1 : 0);
+        se = sessions.at(sessionIndex ? sessionIndex - 1 : 0);
+
         session2action.find(se)->setChecked(true);
         //FIXME: this Timer stupidity originated from the connected
         //       design of Emulations. By this the newly activated
