@@ -448,7 +448,7 @@ void Konsole::makeGUI()
    m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Schema" ), m_schema);
    m_options->insertSeparator();
 
-   KAction *historyType = new KAction(i18n("History..."), 0, this,
+   KAction *historyType = new KAction(i18n("History..."), "history", 0, this,
                                       SLOT(slotHistoryType()), this);
    historyType->plug(m_options);
    
