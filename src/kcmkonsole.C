@@ -100,12 +100,12 @@ GeneralPage::~GeneralPage()
    The color adjustment made here are based on an RGB cube.
    Black is at (0,0,0), while White is at (1,1,1).
 
-   Now we arrage a subcube from (a,a,a) to (b,b,b).
-   We treat the length of its diagonal as "contrast"
-   and the location of it's center as "brightness".
+   Arraging a subcube from (a,a,a) to (b,b,b), we treat the
+   length of its diagonal as "contrast" and the location of
+   it's center as "brightness".
 
    The diagonal of the subcube contains only different sorts of
-   gray. By mapping the brightness of the colors to it's gray
+   gray. By mapping the luminence of the colors to it's gray
    equivalent, we can make a sort of "color intensity" mapping
    also, that has the full colors at one and the gray levels
    at it's other end.
@@ -206,10 +206,12 @@ Tripel Tripel::togray(float f)
 //--| Schema configuration |----------------------------------------------------
 
 
-ColorTable::ColorTable(QWidget* parent) : QLabel(parent)
+ColorTable::ColorTable(QWidget* parent, int lower, int upper) : QLabel(parent)
 {
   //setFrameStyle( QFrame::Panel | QFrame::Sunken );
   //setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
+  this->lower = lower;
+  this->upper = upper;
   setAlignment(AlignCenter);
   setBackgroundMode(PaletteBase);
   schema = (ColorSchema*)NULL;
@@ -238,13 +240,13 @@ void ColorTable::paintEvent(QPaintEvent* e)
   QPainter paint;
   paint.begin( this );
   if (schema)
-  for (int y = 0; y < BASE_COLORS-2; y++)
+  for (int y = lower; y <= upper; y++)
   {
     QRect base = frameRect();
-    int top = base.height()*(y+0)/(BASE_COLORS-2);
-    int bot = base.height()*(y+1)/(BASE_COLORS-2);
+    int top = base.height()*((y-lower)+0)/(upper-lower+1);
+    int bot = base.height()*((y-lower)+1)/(upper-lower+1);
     QRect rect(QPoint(base.left(),top),QPoint(base.right(),bot));
-    QColor c0 = schema->table[y+2].color;
+    QColor c0 = schema->table[y].color;
     float off   = shift * (1 - scale);
     Tripel t0(c0);
     Tripel t2(off);
@@ -270,13 +272,27 @@ SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
   QGridLayout* topLayout = new QGridLayout( bigWidget, 2, 2, 5 ); 
   lbox = new QListBox(bigWidget); //FIXME: QT does not react on setFrameStyle
   //lbox->setFrameStyle( QFrame::Panel | QFrame::Sunken );
-  colorTableW = new ColorTable(bigWidget);
+//colorTableW = new ColorTable(bigWidget,0,TABLE_COLORS-1);
   topLayout->setColStretch(0,4);
   topLayout->setColStretch(1,2);
   topLayout->setRowStretch(0,4);
   topLayout->setRowStretch(1,1);
-  topLayout->addWidget( colorTableW, 0, 0 );
+//topLayout->addWidget( colorTableW, 0, 0 );
   topLayout->addWidget( lbox, 0, 1 );
+
+  colorTableW[0] = new ColorTable(bigWidget, 0, 1);
+  colorTableW[1] = new ColorTable(bigWidget, 2, 9);
+  colorTableW[2] = new ColorTable(bigWidget,10,11);
+  colorTableW[3] = new ColorTable(bigWidget,12,19);
+
+  QGridLayout* clayout = new QGridLayout(2,2,5);
+  topLayout->addLayout( clayout, 0,0 );
+  clayout->setRowStretch(0,1);
+  clayout->setRowStretch(1,4);
+  clayout->addWidget(colorTableW[0], 0,0);
+  clayout->addWidget(colorTableW[1], 1,0);
+  clayout->addWidget(colorTableW[2], 0,1);
+  clayout->addWidget(colorTableW[3], 1,1);
 
   QGridLayout* slayout = new QGridLayout(3,2,5);
   topLayout->addLayout( slayout, 1,0 );
@@ -330,31 +346,43 @@ SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
 }
 
 void SchemaConfig::sl0ValueChanged(int n)
-{
-  colorTableW->scale = n / 100.0;
-  colorTableW->update();
+{ int i;
+  for (i = 0; i < 4; i++)
+  {
+    colorTableW[i]->scale = n / 100.0;
+    colorTableW[i]->update();
+  }
 }
 
 void SchemaConfig::sl1ValueChanged(int n)
-{
-  colorTableW->shift = n / 100.0;
-  colorTableW->update();
+{ int i;
+  for (i = 0; i < 4; i++)
+  {
+    colorTableW[i]->shift = n / 100.0;
+    colorTableW[i]->update();
+  }
 }
 
 void SchemaConfig::sl2ValueChanged(int n)
-{
-  colorTableW->color = n / 100.0;
-  colorTableW->update();
+{ int i;
+  for (i = 0; i < 4; i++)
+  {
+    colorTableW[i]->color = n / 100.0;
+    colorTableW[i]->update();
+  }
 }
 
 void SchemaConfig::setSchema(int n)
-{
-  colorTableW->setSchema(ColorSchema::find(n));
-  colorTableW->scale = 1.0;
+{ int i;
+  for (i = 0; i < 4; i++)
+  {
+    colorTableW[i]->setSchema(ColorSchema::find(n));
+    colorTableW[i]->scale = 1.0;
+    colorTableW[i]->shift = 0.5;
+    colorTableW[i]->color = 1.0;
+  }
   sl0->setValue(100);
-  colorTableW->shift = 0.5;
   sl1->setValue(50);
-  colorTableW->color = 1.0;
   sl2->setValue(100);
 }
 
