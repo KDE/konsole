@@ -47,6 +47,8 @@ Q_OBJECT
     int run(const char* pgm, QStrList & args, const char* term, int addutmp,
             const char* konsole_dcop = "", const char* konsole_dcop_session = "");
     void setWriteable(bool writeable);
+    int makePty();
+    int masterFd() { return fd; }
 
   public slots:
 
@@ -85,7 +87,7 @@ Q_OBJECT
       void donePty();
       
   private:
-    void makePty(const char* dev, const char* pgm, QValueList<QCString> & args, const char* term, int addutmp);
+    void startPgm(const char* pgm, QValueList<QCString> & args, const char* term);
     int  openPty();
     void appendSendJob(const char* s, int len);
 

@@ -7,6 +7,7 @@
 #include <kwrited.h>
 #include <kdebug.h>
 #include <dcopclient.h>
+#include <qsocketnotifier.h>
 
 #include <TEPty.h>
 #include <stdlib.h>
@@ -45,14 +46,10 @@ KWrited::KWrited() : QObject()
   pty = new TEPty();
   QObject::connect(pty, SIGNAL(block_in(const char*,int)), this, SLOT(block_in(const char*,int)));
 
-#if 1
-  //FIXME: here we have to do some improvements.
-  //       especially, i do not like to have any
-  //       program running on the device.
-  //       Have to make a new run, i guess.
-  QStrList cmd; cmd.append("/bin/cat"); // dummy
-  pty->run("/bin/cat",cmd,"dump",TRUE);
-#endif
+  pty->makePty();
+  int fd = pty->masterFd();
+  QSocketNotifier *sn = new QSocketNotifier(fd, QSocketNotifier::Read, this);
+  connect(sn, SIGNAL(activated(int)), this, SLOT(block_in(int)));
 
   wid->setCaption(QString("KWrited - listening on device ") + pty->deviceName());
 }
@@ -64,10 +61,15 @@ KWrited::~KWrited()
     delete pty;
 }
 
-void KWrited::block_in(const char* txt, int len)
+void KWrited::block_in(int fd)
 {
+  char buf[4096];
+  int len = read(fd, buf, 4096);
+  if (len < 0)
+     return;
+
   if (len < 0) len = 0;
-  QCString text( txt, len+1 );
+  QCString text( buf, len+1 );
   text[len] = 0;
   wid->insert( QString::fromLocal8Bit( text ) );
   wid->show();

@@ -435,11 +435,8 @@ int TEPty::openPty()
   return ptyfd;
 }
 
-//! only used internally. See `run' for interface
-void TEPty::makePty(const char* dev, const char* pgm, QValueList<QCString> & args, const char* term, int addutmp)
-{ 
-
-  int sig;
+int TEPty::makePty()
+{
   if (fd < 0) // no master pty could be opened
   {
   //FIXME:
@@ -456,12 +453,12 @@ void TEPty::makePty(const char* dev, const char* pgm, QValueList<QCString> & arg
 #endif
 
   // open and set all standard files to slave tty
-  int tt = open(dev, O_RDWR);
+  int tt = open(ttynam, O_RDWR);
 
   if (tt < 0) // the slave pty could be opened
   {
   //FIXME:
-  //fprintf(stderr,"opening slave pty (%s) failed.\n",dev);
+  //fprintf(stderr,"opening slave pty (%s) failed.\n",ttynam);
   //exit(1);
   }
 
@@ -477,11 +474,9 @@ void TEPty::makePty(const char* dev, const char* pgm, QValueList<QCString> & arg
   {
      KUtmpProcess utmp;
      utmp.cmdFd = fd;
-     utmp << "/usr/sbin/utempter" << "-a" << dev << "";
+     utmp << "/usr/sbin/utempter" << "-a" << ttynam << "";
      utmp.start(KProcess::Block);
   }
-#else
-  (void)addutmp;
 #endif
 #ifdef USE_LOGIN
   char *str_ptr;
@@ -509,6 +504,14 @@ void TEPty::makePty(const char* dev, const char* pgm, QValueList<QCString> & arg
 
   login(&l_struct);
 #endif
+  return tt;
+}
+
+//! only used internally. See `run' for interface
+void TEPty::startPgm(const char* pgm, QValueList<QCString> & args, const char* term)
+{ 
+  int sig;
+  int tt = makePty();
 
   //reset signal handlers for child process
   for (sig = 1; sig < NSIG; sig++)
@@ -548,7 +551,7 @@ void TEPty::makePty(const char* dev, const char* pgm, QValueList<QCString> & arg
   ioctl(0, TIOCSPGRP, (char *)&pgrp);  // event propagation. Omitting this
 #endif
   setpgid(0,0);                        // is not noticeable with all
-  close(open(dev, O_WRONLY, 0));       // clients (bash,vi). Because bash
+  close(open(ttynam, O_WRONLY, 0));       // clients (bash,vi). Because bash
   setpgid(0,0);                        // heals this, use '-e' to test it.
 
   /* without the '::' some version of HP-UX thinks, this declares
@@ -674,7 +677,7 @@ int TEPty::commSetupDoneC()
 {
    QCString pgm = arguments.first();
    arguments.pop_front();
-   makePty(ttynam, pgm,arguments,term,addutmp);
+   startPgm(pgm,arguments,term);
    return 0; // Never reached.
 }
 

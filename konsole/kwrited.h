@@ -10,7 +10,7 @@ public:
   KWrited();
  ~KWrited();
 private slots:
-  void block_in(const char* bytes, int len);
+  void block_in(int fd);
 private:
   QMultiLineEdit* wid;
   TEPty* pty;
