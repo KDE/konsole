@@ -491,7 +491,7 @@ extern "C" int kdemain(int argc, char* argv[])
   list->first();
   while( list->current())
   {
-    if( list->current()->parentWidget() != NULL )
+    if( list->current()->parentWidget() != NULL || !list->current()->testWFlags( Qt::WDestructiveClose ) )
     {
         list->remove();
         continue;
@@ -502,8 +502,7 @@ extern "C" int kdemain(int argc, char* argv[])
   QWidget * w;
   while( (w=it.current()) != 0 ) {
      ++it;
-     if ( w->testWFlags( Qt::WDestructiveClose ) )
-          delete w;
+     delete w;
   }
   delete list;
 
