@@ -74,7 +74,7 @@ install-data-local:
 
 # konsole_grantpty needs to be installed setuid root
 install-exec-local: install-binPROGRAMS
-	@(chown root $(bindir)/konsole_grantpty && chmod 4755 $(bindir)/konsole_grantpty) || echo "Please make konsole_grandpty setuid root"
+	@(chown root $(DESTDIR)$(bindir)/konsole_grantpty && chmod 4755 $(DESTDIR)$(bindir)/konsole_grantpty) || echo "Please make konsole_grandpty setuid root"
 
 # Not AUTO here, because there are some unused files
 METASOURCES = TEWidget.moc TEmuVt102.moc session.moc konsole.moc konsole_child.moc \
