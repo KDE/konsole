@@ -998,6 +998,7 @@ int main(int argc, char* argv[])
 {
   setuid(getuid()); setgid(getgid()); // drop privileges
 
+  KInstance *inst = new KInstance("konsole");
   kimgioRegister(); // add io for additional image formats
 
   // deal with shell/command ////////////////////////////
@@ -1072,7 +1073,9 @@ int main(int argc, char* argv[])
     m->show();
   }
 
-  return a.exec();
+  int r = a.exec();
+  delete inst;
+  return r;
 }
 
 #include "main.moc"
