@@ -7,14 +7,13 @@
 <tip category="Konsole">
 <html>
 <p>...that pressing and holding the "New" button in toolbar will allow you to
-select what session type "New" button starts?
+select what session type the "New" button starts?
 </html>
 </tip>
 
 <tip category="Konsole">
 <html>
-<p>...that while holding Ctrl and Alt keys and pressing "n" will do the same as clicking
-the "New" button in toolbar?
+<p>...that Ctrl+Alt+n shortcut will do the same as clicking the "New" button in toolbar?
 </html>
 </tip>
 
@@ -51,7 +50,7 @@ in the Konsole toolbar?
 
 <tip category="Konsole|Keyboard">
 <html>
-<p>...that you can activate the menu with Ctrl+Alt+M shortcut?
+<p>...that you can activate the menu with Ctrl+Alt+m shortcut?
 </html>
 </tip>
 
@@ -64,14 +63,14 @@ in the Konsole toolbar?
 <tip category="Konsole">
 <html>
 <p>...that you can create your own session types by using the session
-type editor which you can find in the KDE Control Center?
+type editor which you can find under "Settings/Configure Konsole..."?
 </html>
 </tip>
 
 <tip category="Konsole">
 <html>
 <p>...that you can create your own color schemes by using the schema editor
-which you can find in the KDE Control Center?
+which you can find under "Settings/Configure Konsole..."?
 </p>
 </html>
 </tip>
@@ -79,7 +78,7 @@ which you can find in the KDE Control Center?
 <tip category="Konsole|Keyboard">
 <html>
 <p>...that you can reorder the session buttons in the toolbar with "View" menu
-entries or by holding the Shift and Ctrl keys and pressing the Left or Right 
+commands or by holding the Shift and Ctrl keys and pressing the Left or Right 
 Arrow keys?
 </p>
 </html>
@@ -135,8 +134,7 @@ button will send selection buffer instead of pasting it?
 
 <tip category="Konsole">
 <html>
-<p>...that you can turn off the terminal size hint in the Konsole
-module in the KDE Control Center?
+<p>...that you can turn off the terminal size hint under "Settings/Configure Konsole..."?
 </html>
 </tip>
 
