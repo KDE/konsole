@@ -10,6 +10,10 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
+/*! \file TECommon.h
+    \brief Definitions shared between TEScreen and TEWidget.
+*/
+
 #ifndef TECOMMON_H
 #define TECOMMON_H
 

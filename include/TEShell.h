@@ -35,9 +35,8 @@ Q_OBJECT
   public:
     int run(QStrList & args, const char* term);
 
-  signals:
-    void done(int status);
   public:
+    /*! this is of internal use only. FIXME: make private */
     void doneShell(int status);
 
   public:
@@ -48,18 +47,26 @@ Q_OBJECT
     void send_bytes(const char* s, int len);
 
   signals:
+    /*!
+        emitted when the shell instance terminates.
+        \param status the wait(2) status code of the terminated child program.
+    */
+    void done(int status);
 
+    /*!
+        emitted when a new block of data comes in.
+        \param s - the data
+        \param len - the length of the block
+    */
     void block_in(const char* s, int len);
-    void written();         // Ready to write
 
   private slots:
 
-    void DataReceived(int); //
-    void DataWritten(int);  //
+    void DataReceived(int);
 
   public slots:
 
-    void setSize(int lines, int columns); // 
+    void setSize(int lines, int columns);
 
   private:
 
@@ -71,7 +78,6 @@ Q_OBJECT
     struct termios   tp;
     int		     login_shell;
     QSocketNotifier* mn;
-    QSocketNotifier* mw;
 };
 
 #endif

@@ -12,9 +12,11 @@
 
 /*! \class TEScreen
 
+    \brief The image manipulated by the emulation.
+
     This class implements the operations of the terminal emulation framework.
     It is a complete passive device, driven by the emulation decoder 
-    (AnsiEmulation). By this it forms infact an ADT, that mainly defines
+    (VT102Emulation). By this it forms infact an ADT, that mainly defines
     operations on a rectangular image.
 
     It does neither know how to display its image nor about escape sequences.
@@ -26,7 +28,7 @@
 
     The state manipulated by the operations is mainly kept in `image'.
 
-    \sa TEWidget \sa AnsiEmulation
+    \sa TEWidget \sa VT102Emulation
 */
 
 #include <stdio.h>
@@ -146,177 +148,6 @@ void TEScreen::setMargins(int top, int bot)
   bmargin = bot;
   cuX = 0;
   cuY = getMode(MODE_Origin) ? top : 0;
-}
-
-void TEScreen::clearSelection() 
-{
-  sel_BR = -1;
-  sel_TL = -1;
-  sel_begin = -1;
-}
-
-void TEScreen::setSelBeginXY(const int x, const int y) 
-{
-  sel_begin = loc(x,y+histCursor) ;
-  sel_BR = sel_begin;
-  sel_TL = sel_begin;
-}
-
-void TEScreen::setSelExtentXY(const int x, const int y) 
-{
-  int l =  loc(x,y + histCursor);
-
-  if (l < sel_begin)
-  { 
-    sel_TL = l; 
-    sel_BR = sel_begin;
-  } 
-  else
-  { 
-    /* FIXME, HACK to correct for x too far to the right... */
-    if (( x == columns )|| (x == 0)) l--;
-
-    sel_TL = sel_begin;
-    sel_BR = l; 
-  }
-}
-
-char *TEScreen::getSelText(const BOOL preserve_line_breaks) 
-{
-  char *m;
-  int s,d; /// source index, dest. index.
-  int hist_BR=loc(0,histLines);
-  int hY = sel_TL / columns ;
-  int hX = sel_TL % columns;
-  int eol;
-  s = sel_TL;
-  d = 0;
-  
-  // allocate buffer for maximum possible size...
-  d = (sel_BR - sel_TL)/columns + 1 ;
-  m = (char*) malloc(  sizeof(char) * d * (columns+1) + 2 );
-  d = 0;
-
-  while ( s <= sel_BR )
-  {
-    if ( s < hist_BR )
-    { 	// get lines from history buffer.
-      eol=histBuffer[hY]->len-1;
-      if  ((hY == (sel_BR/columns)) && (eol > (sel_BR%columns)) ) eol=sel_BR%columns;
-      while ( hX <= eol )
-      { 
-         m[d++] = histBuffer[hY]->line[hX++].c; 
-         s++;
-      }
-
-      // see below for end of line processing...
-      if ( s <= sel_BR ) {
-	if ( (eol+1)%columns == 0) {
-	    if (histBuffer[hY]->line[columns-1].c == ' ') { m[d++]=' '; }
-	} 
-        else {
-		m[d++]=((preserve_line_breaks||(eol%columns==0))?'\n':' ');   
-                s = ((s+1)/columns + 1)*columns;
-        }
-      }
-      hY++; 
-      hX=0; 
-    }
-    else // or from screen image.
-    {
-      eol = (s/columns + 1)*columns - 1 ;
-      if ( eol < sel_BR )
-      {
-        while ((eol > s) && isspace(image[eol-hist_BR].c)) eol--  ;
-      }
-      else
-      {
-        eol = sel_BR ;
-      }
-      while (s <= eol)  m[d++] = image[s++-hist_BR].c;
-
-/* end of line processing for selection -- psilva
-cases:
-
-1)    (eol+1)%columns == 0 --> the whole line is filled.
-   If the last char is a space, insert (preserve) space. otherwise
-   leave the text alone, so that words that are broken by linewrap 
-   are preserved.
-
-FIXME:
-	* this suppresses \n for command output that is
-	  sized to the exact column width of the screen.
-
-2)    eol%columns == 0     --> blank line.
-   insert a \n unconditionally.
-   Do it either you would because you are in preserve_line_break mode,
-   or because it's an ASCII paragraph delimiter, so even when
-   not preserving line_breaks, you want to preserve paragraph breaks.
-
-3)    else		 --> partially filled line
-   insert a \n in preserve line break mode, else a space 
-   The space prevents concatenation of the last word of one
-   line with the first of the next.
-
-*/
-      if (eol < sel_BR) {
-	if ( (eol+1)%columns == 0) {
-	    if (image[eol-hist_BR].c == ' ') m[d++]=' ';
-	} 
-        else m[d++]=(preserve_line_breaks||((eol%columns)==0)?'\n':' ');   
-      }
-      s = ( eol/columns + 1)*columns;
-    }
-  }
-
-  // trim buffer size to actual size needed.
-  m=(char*)realloc( m ,  sizeof(char)*(d+1) );
-  m[d]= '\0';
-  return(m);
-}
- 
-void TEScreen::setHistMaxLines(int maxlines)
-// set history buffer size
-{
-  if (maxlines < histMaxLines) return; //FIXME: handle decrease
-  histMaxLines = maxlines;
-}
-
-void TEScreen::addHistLine()
-{ int x; histLine* line; int end = columns-1;
-  ca dft(' ',DEFAULT_FORE_COLOR,DEFAULT_BACK_COLOR,DEFAULT_RENDITION);
-
-  if (histMaxLines == 0) return; // no buffer
-
-  // extract 1st line
-  while (end >= 0 && image[end] == dft) end -= 1;
-  line = (histLine*) malloc(sizeof(histLine)+sizeof(ca)*(end+1-1));
-  for (x = 0; x <= end; x++) line->line[x] = image[loc(x,0)];
-  line->len = end+1;
-
-  // add to hist buffer
-  if (histLines >= histMaxLines) 
-  { int i;
-    free(histBuffer[0]);
-    for (i = 1; i < histLines; i++) histBuffer[i-1] = histBuffer[i];
-    if (histCursor == 0) histCursor = histLines; // revert to non-hist.
-    histCursor -= (histLines != histCursor);
-  }
-  else
-  {
-    histCursor += (histLines == histCursor);
-    histLines  += 1;
-    histBuffer  = (histLine**)realloc(histBuffer,sizeof(histLine*)*histLines);
-
-    // correct selection 
-    if (sel_TL > 0 ) 
-    {
-      sel_TL += columns;
-      sel_BR += columns;
-      sel_begin += columns;
-    }
-  }
-  histBuffer[histLines-1] = line;
 }
 
 void TEScreen::index()
@@ -1089,4 +920,187 @@ void TEScreen::setForeColorToDefault()
 {
   cu_fg = DEFAULT_FORE_COLOR;
   effectiveRendition();
+}
+
+/* ------------------------------------------------------------------------- */
+/*                                                                           */
+/*                            Marking & Selection                            */
+/*                                                                           */
+/* ------------------------------------------------------------------------- */
+
+void TEScreen::clearSelection() 
+{
+  sel_BR = -1;
+  sel_TL = -1;
+  sel_begin = -1;
+}
+
+void TEScreen::setSelBeginXY(const int x, const int y) 
+{
+  sel_begin = loc(x,y+histCursor) ;
+  sel_BR = sel_begin;
+  sel_TL = sel_begin;
+}
+
+void TEScreen::setSelExtentXY(const int x, const int y) 
+{
+  int l =  loc(x,y + histCursor);
+
+  if (l < sel_begin)
+  { 
+    sel_TL = l; 
+    sel_BR = sel_begin;
+  } 
+  else
+  { 
+    /* FIXME, HACK to correct for x too far to the right... */
+    if (( x == columns )|| (x == 0)) l--;
+
+    sel_TL = sel_begin;
+    sel_BR = l; 
+  }
+}
+
+char *TEScreen::getSelText(const BOOL preserve_line_breaks) 
+{
+  char *m;
+  int s,d; /// source index, dest. index.
+  int hist_BR=loc(0,histLines);
+  int hY = sel_TL / columns ;
+  int hX = sel_TL % columns;
+  int eol;
+  s = sel_TL;
+  d = 0;
+  
+  // allocate buffer for maximum possible size...
+  d = (sel_BR - sel_TL)/columns + 1 ;
+  m = (char*) malloc(  sizeof(char) * d * (columns+1) + 2 );
+  d = 0;
+
+  while ( s <= sel_BR )
+  {
+    if ( s < hist_BR )
+    { 	// get lines from history buffer.
+      eol=histBuffer[hY]->len-1;
+      if  ((hY == (sel_BR/columns)) && (eol > (sel_BR%columns)) ) eol=sel_BR%columns;
+      while ( hX <= eol )
+      { 
+         m[d++] = histBuffer[hY]->line[hX++].c; 
+         s++;
+      }
+
+      // see below for end of line processing...
+      if ( s <= sel_BR ) {
+	if ( (eol+1)%columns == 0) {
+	    if (histBuffer[hY]->line[columns-1].c == ' ') { m[d++]=' '; }
+	} 
+        else {
+		m[d++]=((preserve_line_breaks||(eol%columns==0))?'\n':' ');   
+                s = ((s+1)/columns + 1)*columns;
+        }
+      }
+      hY++; 
+      hX=0; 
+    }
+    else // or from screen image.
+    {
+      eol = (s/columns + 1)*columns - 1 ;
+      if ( eol < sel_BR )
+      {
+        while ((eol > s) && isspace(image[eol-hist_BR].c)) eol--  ;
+      }
+      else
+      {
+        eol = sel_BR ;
+      }
+      while (s <= eol)  m[d++] = image[s++-hist_BR].c;
+
+/* end of line processing for selection -- psilva
+cases:
+
+1)    (eol+1)%columns == 0 --> the whole line is filled.
+   If the last char is a space, insert (preserve) space. otherwise
+   leave the text alone, so that words that are broken by linewrap 
+   are preserved.
+
+FIXME:
+	* this suppresses \n for command output that is
+	  sized to the exact column width of the screen.
+
+2)    eol%columns == 0     --> blank line.
+   insert a \n unconditionally.
+   Do it either you would because you are in preserve_line_break mode,
+   or because it's an ASCII paragraph delimiter, so even when
+   not preserving line_breaks, you want to preserve paragraph breaks.
+
+3)    else		 --> partially filled line
+   insert a \n in preserve line break mode, else a space 
+   The space prevents concatenation of the last word of one
+   line with the first of the next.
+
+*/
+      if (eol < sel_BR) {
+	if ( (eol+1)%columns == 0) {
+	    if (image[eol-hist_BR].c == ' ') m[d++]=' ';
+	} 
+        else m[d++]=(preserve_line_breaks||((eol%columns)==0)?'\n':' ');   
+      }
+      s = ( eol/columns + 1)*columns;
+    }
+  }
+
+  // trim buffer size to actual size needed.
+  m=(char*)realloc( m ,  sizeof(char)*(d+1) );
+  m[d]= '\0';
+  return(m);
+}
+
+/* ------------------------------------------------------------------------- */
+/*                                                                           */
+/*                                History Buffer                             */
+/*                                                                           */
+/* ------------------------------------------------------------------------- */
+ 
+void TEScreen::setHistMaxLines(int maxlines)
+// set history buffer size
+{
+  if (maxlines < histMaxLines) return; //FIXME: handle decrease
+  histMaxLines = maxlines;
+}
+
+void TEScreen::addHistLine()
+{ int x; histLine* line; int end = columns-1;
+  ca dft(' ',DEFAULT_FORE_COLOR,DEFAULT_BACK_COLOR,DEFAULT_RENDITION);
+
+  if (histMaxLines == 0) return; // no buffer
+
+  // extract 1st line
+  while (end >= 0 && image[end] == dft) end -= 1;
+  line = (histLine*) malloc(sizeof(histLine)+sizeof(ca)*(end+1-1));
+  for (x = 0; x <= end; x++) line->line[x] = image[loc(x,0)];
+  line->len = end+1;
+
+  // add to hist buffer
+  if (histLines >= histMaxLines) 
+  { int i;
+    free(histBuffer[0]);
+    for (i = 1; i < histLines; i++) histBuffer[i-1] = histBuffer[i];
+    if (histCursor == 0) histCursor = histLines; // revert to non-hist.
+    histCursor -= (histLines != histCursor);
+  }
+  else
+  {
+    histCursor += (histLines == histCursor);
+    histLines  += 1;
+    histBuffer  = (histLine**)realloc(histBuffer,sizeof(histLine*)*histLines);
+
+    // correct selection 
+    if (sel_TL > 0 ) 
+    {
+      sel_TL += columns;
+      sel_BR += columns;
+      sel_begin += columns;
+    }
+  }
+  histBuffer[histLines-1] = line;
 }

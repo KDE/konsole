@@ -13,7 +13,9 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-/*! /class
+/*! \class TEDemo
+
+    \brief Konsole's main program
 
     The class TEDemo handles the application level. Mainly, it is responsible
     for the configuration, taken from several files, from the command line

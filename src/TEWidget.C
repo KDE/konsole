@@ -10,7 +10,9 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-/*! \class
+/*! \class TEWidget
+
+    \brief Visible screen contents
  
    This class is responsible to map the `image' of a terminal emulation to the
    display. All the dependency of the emulation to a specific GUI or toolkit is
@@ -24,7 +26,7 @@
      when a setImage happens. During a resizeEvent no painting is done
      a paintEvent is expected to follow anyway.
 
-   /sa TEScreen /sa TEmulation
+   \sa framework.txt \sa TEScreen \sa Emulation
 */
 
 /* FIXME:

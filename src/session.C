@@ -2,7 +2,7 @@
 
 #include <qpushbutton.h>
 
-/*! /class
+/*! \class TESession
 
     Sessions are combinations of Shells and Emulations.
 

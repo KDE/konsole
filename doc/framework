@@ -1,15 +1,17 @@
-[framework]
+/*! \page framework
+    The terminal emulation framework
 
 The structure of the framework is as follows:
 
-
+<pre>
               - - - - - - >               - - - - - ->
-     TEWidget                  vt102emu                Shell
+     TEWidget              VT102Emulation              Shell
               <------------               < - - - - - 
                                   |
                                   |
                                   V
                               TEScreen
+</pre>
 
 Within the drawing, a solid line (A --> B) mean A calls B while the dashed
 lines means connected by signal.
@@ -27,3 +29,5 @@ The `Shell' material is a dump but of no real importance.
 The current implementation does not longer fit to 'kom' since we
 are using block operations with the modem. May be we can implement
 this within the main program to indicate the end of bulk there.
+
+*/

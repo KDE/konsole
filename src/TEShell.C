@@ -9,12 +9,34 @@
 /* This file is part of Konsole - an X terminal for KDE                       */
 /* -------------------------------------------------------------------------- */
 
-/*! /class Shell (FIXME: rename to TEpty or so)
+/*! \file
+*/
 
-    Shells provide a pseudo terminal connection to a program. Although it is
-    closely related to a pipe, these pseudo terminal connections have some
-    ability, that makes it nessesary to uses them. Most importent, they know
-    about changing screen sizes (/sa setSize).
+/*! \class Shell
+
+    \brief Shells provide a pseudo terminal connection to a program.
+    
+    Although closely related to pipes, these pseudo terminal connections have
+    some ability, that makes it nessesary to uses them. Most importent, they
+    know about changing screen sizes and UNIX job control.
+
+    Within the terminal emulation framework, this class represents the
+    host side of the terminal together with the connecting serial line.
+
+    One can create many instances of this class within a program.
+    As a side effect of using this class, a signal(2) handler is
+    installed on SIGCHLD.
+    
+    \par FIXME
+
+    publish the SIGCHLD signal if not related to an instance.
+
+    clearify Shell::done vs. Shell::~Shell semantics.
+
+    remove the `login_shell' parameter from the Shell::Shell.
+    Move parameters from Shell::run to Shell::Shell.
+
+    \par Pseudo terminals
 
     Pseudo terminals are a unique feature of UNIX, and always come in form of
     pairs of devices (/dev/ptyXX and /dev/ttyXX), which are connected to each
@@ -26,7 +48,7 @@
     The pty is for the Shell while the program gets the tty.
 
     There's a sinister ioctl(2), signal(2) and job control stuff
-    nessesary to make everything work as it should. (/sa makeShell)
+    nessesary to make everything work as it should.
 */
 
 #include <stdio.h>
@@ -66,9 +88,12 @@ FILE* syslog_file = NULL; //stdout;
 
 /* -------------------------------------------------------------------------- */
 
+/*!
+   Informs the client program about the
+   actual size of the window.
+*/
+
 void Shell::setSize(int lines, int columns)
-// Tell the teletype handler what size the window is.
-// Called after a window size change.
 { struct winsize wsize;
   if(fd < 0) return;
   wsize.ws_row = (unsigned short)lines;
@@ -81,8 +106,8 @@ static char ttynam[] = "/dev/ttyxx";
 
 static QIntDict<Shell> shells;
 
+//! Catch a SIGCHLD signal and propagate that the child died.
 static void catchChild(int)
-// Catch a SIGCHLD signal and propagate that the child died.
 { int status;
   pid_t pid = wait(&status);
   Shell* sh = shells.find(pid);
@@ -94,6 +119,9 @@ void Shell::doneShell(int status)
   emit done(status);
 }
 
+/*!
+    start the client program.
+*/
 int Shell::run(QStrList & args, const char* term)
 {
   pid_t comm_pid = fork();
@@ -103,9 +131,9 @@ int Shell::run(QStrList & args, const char* term)
   return 0;
 }
 
+//! only used internally. See `run' for interface
 void Shell::makeShell(const char* dev, QStrList & args, 
 	const char* term)
-// only used internally. See `run' for interface
 { int sig; char* t;
   // open and set all standard files to master/slave tty
   int tt = open(dev, O_RDWR | O_EXCL);
@@ -214,43 +242,52 @@ int openShell()
   return ptyfd;
 }
 
-Shell::Shell(int ls)
-/* setup shell */
+/*! 
+    Create a shell.
+    \param login_shell is a hack. FIXME: remove.
+*/
+Shell::Shell(int login_shell)
 {
-  login_shell=ls;
+  login_shell=login_shell;
 
   fd = openShell();
 
   signal(SIGCHLD,catchChild);
 
   mn = new QSocketNotifier(fd, QSocketNotifier::Read);
-  mw = new QSocketNotifier(fd, QSocketNotifier::Write);
   connect( mn, SIGNAL(activated(int)), this, SLOT(DataReceived(int)) );
-  connect( mw, SIGNAL(activated(int)), this, SLOT(DataWritten(int)) );
 }
 
+/*!
+    Destructor.
+    Note that the related client program is not killed
+    (yet) when a shell is deleted.
+*/
 Shell::~Shell()
 {
   delete mn;
-  delete mw;
   close(fd);
 }
 
+/*! sends a character through the line */
 void Shell::send_byte(char c)
 { 
-  write(fd,&c,1); mw->setEnabled(TRUE);
+  write(fd,&c,1);
 }
 
+/*! sends a 0 terminated string through the line */
 void Shell::send_string(const char* s)
 {
-  write(fd,s,strlen(s)); mw->setEnabled(TRUE);
+  write(fd,s,strlen(s));
 }
 
+/*! sends len bytes through the line */
 void Shell::send_bytes(const char* s, int len)
 {
-  write(fd,s,len); mw->setEnabled(TRUE);
+  write(fd,s,len);
 }
 
+/*! indicates that a block of data is received */
 void Shell::DataReceived(int)
 { char buf[4096];
   int n = read(fd, buf, 4096);
@@ -261,9 +298,4 @@ void Shell::DataReceived(int)
     for (i = 0; i < n; i++) fputc(buf[i],syslog_file);
     fflush(syslog_file);
   }
-}
-
-void Shell::DataWritten(int)
-{
-  mw->setEnabled(FALSE); written();
 }
