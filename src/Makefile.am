@@ -51,6 +51,7 @@ kcmkonsole_LDADD   = $(LIB_KIMGIO) $(LIB_KDEUI)
 kcmkonsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 konsole_grantpty_SOURCES = konsole_grantpty.c
+konsole_grantpty_LDFLAGS = $(KDE_RPATH)
 
 install-data-local:
 	@echo ""
