@@ -454,6 +454,7 @@ int main(int argc, char* argv[])
      if ( w->testWFlags( Qt::WDestructiveClose ) )
           delete w;
   }
+  delete list;
 
   return ret;
 }
