@@ -122,6 +122,11 @@ public:
                             const QObject* receiver, const char* slot,
                             QObject* parent, const char* name = 0 )
         : KSelectAction(text, accel, receiver, slot, parent, name) {}
+    KonsoleFontSelectAction( const QString &text, const QIconSet& pix,
+                             int accel, const QObject* receiver,
+                             const char* slot, QObject* parent,
+                             const char* name = 0 )
+        : KSelectAction(text, pix, accel, receiver, slot, parent, name) {}
 
     virtual void slotActivated( int index );
 };
@@ -342,18 +347,18 @@ void Konsole::makeGUI()
    if (ra!=0) ra->plug(m_sessions);
 
 
-   // Schema Options Menu ----------------------------------------------------------
+   // Schema Options Menu -----------------------------------------------------
    m_schema = new KPopupMenu(this);
    m_schema->setCheckable(TRUE);
    connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
    connect(m_schema, SIGNAL(aboutToShow()), SLOT(schema_menu_check()));
 
-   // Keyboard Options Menu --------------------------------------------------------
+   // Keyboard Options Menu ---------------------------------------------------
    m_keytab = new KPopupMenu(this);
    m_keytab->setCheckable(TRUE);
    connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
 
-   // Codec Options Menu -----------------------------------------------------------
+   // Codec Options Menu ------------------------------------------------------
    m_codec  = new KPopupMenu(this);
    m_codec->setCheckable(TRUE);
    m_codec->insertItem( i18n("&locale"), 1 );
@@ -389,7 +394,7 @@ void Konsole::makeGUI()
 
    // Fullscreen
    m_options->insertSeparator();
-   m_options->insertItem( i18n("F&ullscreen"), 5);
+   m_options->insertItem( SmallIconSet( "window_fullscreen" ), i18n("F&ullscreen"), 5);
    m_options->setItemChecked(5,b_fullscreen);
    m_options->insertSeparator();
 
@@ -406,8 +411,8 @@ void Konsole::makeGUI()
    selectSize->plug(m_options);
 
    // Select font
-   selectFont = new KonsoleFontSelectAction(i18n("Font"), 0, this,
-                                            SLOT(slotSelectFont()), this);
+   selectFont = new KonsoleFontSelectAction( i18n( "Font" ),
+          SmallIconSet( "text" ), 0, this, SLOT(slotSelectFont()), this);
    QStringList it;
    it << i18n("&Normal")
       << i18n("&Tiny")
@@ -424,15 +429,15 @@ void Konsole::makeGUI()
    selectFont->plug(m_options);
 
    // Schema
-   m_options->insertItem( i18n("Schema"), m_schema);
+   m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Schema" ), m_schema);
    m_options->insertSeparator();
    m_options->insertItem( i18n("&History"), 3 );
    m_options->setItemEnabled(3, false);
    m_options->insertSeparator();
-   m_options->insertItem( i18n("&Codec"), m_codec);
+   m_options->insertItem( SmallIconSet( "charset" ), i18n( "&Codec" ), m_codec);
    m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
 
-   KAction *WordSeps = new KAction(i18n("Word Separators"), 0, this,
+   KAction *WordSeps = new KAction(i18n("Word Separators..."), 0, this,
                                    SLOT(slotWordSeps()), this);
    WordSeps->plug(m_options);
 
@@ -452,8 +457,8 @@ void Konsole::makeGUI()
 
    m_options->insertSeparator();
    // The 'filesave' icon is useable, but it might be confusing. I don't use it for now - Martijn
-   m_options->insertItem( i18n("Save &Settings"), 8);
-   //  m_options->insertItem( SmallIconSet( "filesave" ), i18n("Save &Settings"), 8);
+   //m_options->insertItem( i18n("Save &Settings"), 8);
+   m_options->insertItem( SmallIconSet( "filesave" ), i18n("Save &Settings"), 8);
    connect(m_options, SIGNAL(activated(int)), SLOT(opt_menu_activated(int)));
    m_options->installEventFilter( this );
    // Help and about menu
