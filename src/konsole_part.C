@@ -35,10 +35,6 @@
 
 #include <qdom.h>
 
-#include <X11/Xlib.h> // for XFlush
-#undef KeyPress
-
-
 extern "C"
 {
   /**
@@ -142,27 +138,29 @@ konsolePart::konsolePart(QWidget *parentWidget, const char *widgetName, QObject 
   // kDebugInfo("Loading successful");
   // kDebugInfo("XML file set");
 
-  // (David): re-enabled the direct call to run, it seems to work too !?
   initial->run();
-  //QTimer::singleShot(0,initial,SLOT(run()));
 
   connect( initial, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
 }
 
 void konsolePart::doneSession(TESession*,int)
 {
-  // without this donePty will be called after we deleted everything (->crashes)
-  XFlush( qt_xdisplay() );
   // see doneSession in konsole.C
   if (initial)
   {
+    kdDebug() << "doneSession - disconnecting done" << endl;;
+    disconnect( initial,SIGNAL(done(TESession*,int)),
+                this,SLOT(doneSession(TESession*,int)) );
     initial->setConnect(FALSE);
-    QTimer::singleShot(100,initial,SLOT(terminate()));
+    //QTimer::singleShot(100,initial,SLOT(terminate()));
+    kdDebug() << "initial->terminate()" << endl;;
+    initial->terminate();
   }
 }
 
 void konsolePart::sessionDestroyed()
 {
+  kdDebug() << "sessionDestroyed()" << endl;;
   disconnect( initial, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
   initial = 0;
   delete this;
