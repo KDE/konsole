@@ -861,9 +861,9 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
         scrollLock(true);
 	KMessageBox::information(gui,
 	                         i18n("You have just sent Ctrl-S to the terminal application!\n\n"
-	                              "Some applications like shells will interpret this as command to stop "
-	                              "their output (XOFF) according to the XON/XOFF flow control protocol.\n"
-				      "If an application seems frozen, try sending Ctrl-Q (XON)."),
+	                              "Some applications, like shells, will interpret this as the command to "
+	                              "suspend output (XOFF) according to the XON/XOFF flow control protocol.\n"
+				      "If an application appears to be frozen, try sending Ctrl-Q (XON)."),
 	                         i18n("Ctrl-S Sent!"),"ShowWorkflowInfo");
 	return;
       }
