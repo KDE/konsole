@@ -14,7 +14,7 @@
  ***************************************************************************/
 
 #include <kglobalsettings.h>
-#include <klineeditdlg.h>
+#include <kinputdialog.h>
 #include <qwmatrix.h>
 
 #include "konsole_child.h"
@@ -237,10 +237,13 @@ void KonsoleChild::attachSession()
 
 void KonsoleChild::renameSession() {
   QString name = se->Title();
-  KLineEditDlg dlg(i18n("Session name"),name, this);
-  dlg.setCaption(i18n("Rename Session"));
-  if (dlg.exec()) {
-    se->setTitle(dlg.text());
+  bool ok;
+
+  name = KInputDialog::getText( i18n( "Rename Session" ),
+      i18n( "Session name" ), name, &ok, this );
+
+  if (ok) {
+    se->setTitle(name);
     updateTitle();
   }
 }
