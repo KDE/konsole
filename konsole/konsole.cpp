@@ -3668,9 +3668,9 @@ void Konsole::slotZModemDetected(TESession *session)
                    i18n("A ZModem file transfer attempt has been detected.\n"
                         "Please specify the directory you want to store the file(s):"),
                    this, "zmodem_dlg");
-  dlg.setButtonOKText( i18n("&Download"),
+  dlg.setButtonOK(KGuiItem( i18n("&Download"),
                        i18n("Start downloading file to specified directory."),
-                       i18n("Start downloading file to specified directory."));
+                       i18n("Start downloading file to specified directory.")));
   if (!dlg.exec())
   {
      session->cancelZModem();
