@@ -703,7 +703,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   }
   if ( ev->button() == MidButton )
   {
-    emitSelection(true);
+    emitSelection(true,ev->state() & ControlButton);
   }
   if ( ev->button() == RightButton ) // Configure
   {
@@ -1026,11 +1026,13 @@ void TEWidget::emitText(QString text)
   }
 }
 
-void TEWidget::emitSelection(bool useXselection)
+void TEWidget::emitSelection(bool useXselection,bool appendReturn)
 // Paste Clipboard by simulating keypress events
 {
   QApplication::clipboard()->setSelectionMode( useXselection );
   QString text = QApplication::clipboard()->text();
+  if(appendReturn)  
+    text.append("\r");
   if ( ! text.isEmpty() )
   {
     text.replace(QRegExp("\n"), "\r");
@@ -1063,7 +1065,7 @@ void TEWidget::copyClipboard()
 
 void TEWidget::pasteClipboard()
 {
-  emitSelection(false);
+  emitSelection(false,false);
 }
 
 void TEWidget::onClearSelection()
