@@ -69,6 +69,10 @@
 #define __svr4__
 #endif
 
+#if defined(HAVE_GRANTPT) && defined(HAVE_PTSNAME) && defined(HAVE_UNLOCKPT) && !defined(_XOPEN_SOURCE) && !defined(__svr4__)
+#define _XOPEN_SOURCE // make stdlib.h offer the above fcts
+#endif
+
 /* for NSIG */
 #ifndef _BSD_SOURCE
 #define _BSD_SOURCE

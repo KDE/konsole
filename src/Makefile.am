@@ -49,7 +49,7 @@ konsole_la_SOURCES = main.C konsole.C
 konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
 
 # konsole executable - has all the sources, doesn't link kparts, saves startup time
-konsole_SOURCES	= dummy.C main.C konsole.C TEPty.C schema.C session.C TEWidget.C TEmuVt102.C \
+konsole_SOURCES	= TEPty.C main.C konsole.C schema.C session.C TEWidget.C TEmuVt102.C \
                   TEScreen.C TEmulation.C TEHistory.C keytrans.C 
 konsole_LDADD = $(LIB_KDEUI) $(LIB_KSYCOCA) $(LIBUTEMPTER) $(LIBUTIL)
 konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
