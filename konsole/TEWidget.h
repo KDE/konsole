@@ -27,7 +27,6 @@
 
 extern unsigned short vt100_graphics[32];
 
-class TESession;
 class Konsole;
 
 class TEWidget : public QFrame
@@ -98,9 +97,6 @@ public:
     static void setAntialias( bool enable ) { s_antialias = enable; }
     static bool antialias()                 { return s_antialias;   }
 
-    // current session in this widget
-    TESession *currentSession;
-
     void setTerminalSizeHint(bool on) { terminalSizeHint=on; }
     bool isTerminalSizeHint() { return terminalSizeHint; }
     void setTerminalSizeStartup(bool on) { terminalSizeStartup=on; }
@@ -124,6 +120,7 @@ signals:
     void endSelectionSignal(const bool preserve_line_breaks);
     void isBusySelecting(bool);
     void testIsSelected(const int x, const int y, bool &selected /* result */);
+  void sendStringToEmu(const char*);
 
 protected:
 

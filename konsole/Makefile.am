@@ -8,7 +8,7 @@ TOOLBARDIR = $(DATADIR)/toolbar
 MIMEDIR = $(kde_mimedir)/text
 
 # set the include path for X, qt and KDE
-INCLUDES = $(all_includes)
+INCLUDES = $(all_includes) -I.
 
 # you can add here more. This one gets installed
 bin_PROGRAMS = 	konsole konsole_grantpty kwrited #kcmkonsole
@@ -106,4 +106,4 @@ mime_DATA = x-konsole.desktop
 datadir = $(kde_confdir)
 data_DATA =konsolerc
 
-EXTRA_DIST = $(mime_DATA) $(data_DATA)                                             
+EXTRA_DIST = $(mime_DATA) $(data_DATA)

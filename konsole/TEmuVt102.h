@@ -68,6 +68,7 @@ public:
   void reset();
 
   void onRcvChar(int cc);
+public slots:
   void sendString(const char *);
 
 public:

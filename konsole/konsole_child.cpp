@@ -117,7 +117,6 @@ KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar
 }
 
 void KonsoleChild::run() {
-   te->currentSession=se;
    se->changeWidget(te);
    se->setConnect(true);
 

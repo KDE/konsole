@@ -80,6 +80,8 @@ TEmuVt102::TEmuVt102(TEWidget* gui) : TEmulation(gui)
   //kdDebug(1211)<<"TEmuVt102 ctor() connecting"<<endl;
   QObject::connect(gui,SIGNAL(mouseSignal(int,int,int)),
                    this,SLOT(onMouse(int,int,int)));
+  QObject::connect(gui, SIGNAL(sendStringToEmu(const char*)),
+		   this, SLOT(sendString(const char*)));
   //kdDebug(1211)<<"TEmuVt102 ctor() initToken..."<<endl;
   initTokenizer();
   //kdDebug(1211)<<"TEmuVt102 ctor() reset()"<<endl;

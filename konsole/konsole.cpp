@@ -1194,12 +1194,12 @@ void Konsole::updateSchemaMenu()
     m_schema->insertItem(s->title(),s->numb(),0);
   }
 
-  if (te && te->currentSession)
+  if (te && se)
   {
 //        KONSOLEDEBUG << "Current session has schema "
 //                << te->currentSession->schemaNo()
 //                << endl;
-        m_schema->setItemChecked(te->currentSession->schemaNo(),true);
+        m_schema->setItemChecked(se->schemaNo(),true);
   }
 
 }
@@ -1364,8 +1364,8 @@ void Konsole::notifySize(int lines, int columns)
 
 void Konsole::updateTitle()
 {
-  setCaption( te->currentSession->fullTitle() );
-  setIconText( te->currentSession->IconText() );
+  setCaption( se->fullTitle() );
+  setIconText( se->IconText() );
 }
 
 void Konsole::initFullScreen()
@@ -1701,7 +1701,7 @@ void Konsole::activateSession(TESession *s)
      setSchema(s->schemaNo());
   }
 
-  te->currentSession = se;
+  //  te->currentSession = se;
   if (s->fontNo() != n_font)
   {
       setFont(s->fontNo());

@@ -39,12 +39,12 @@
 
 /* TODO
    - evtl. be sensitive to `paletteChange' while using default colors.
-   - set different 'rounding' styles? I.e. have a mode to show clipped chars?
+   - set different 'rounding' styles? I.e. have a mode to show clipped
+     chars?
 */
 
 #include "config.h"
 #include "TEWidget.h"
-#include "session.h"
 
 #include <qpainter.h>
 #include <qclipboard.h>
@@ -278,7 +278,6 @@ void TEWidget::setFont(const QFont &)
 
 TEWidget::TEWidget(QWidget *parent, const char *name)
 :QFrame(parent,name)
-,currentSession(0)
 ,font_h(1)
 ,font_w(1)
 ,font_a(1)
@@ -1583,20 +1582,16 @@ void TEWidget::dropEvent(QDropEvent* event)
          m_drop->popup(mapToGlobal(event->pos()));
       else
 	{
-	  if (currentSession) {
-            if (m_dnd_file_count==1)
-	      KRun::shellQuote(dropText);
-	    currentSession->getEmulation()->sendString(dropText.local8Bit());
-	  }
+	  if (m_dnd_file_count==1)
+	    KRun::shellQuote(dropText);
+	  emit sendStringToEmu ( dropText.local8Bit() );
 	  kdDebug(1211) << "Drop:" << dropText.local8Bit() << "\n";
 	}
     }
   }
   else if(QTextDrag::decode(event, dropText)) {
     kdDebug(1211) << "Drop:" << dropText.local8Bit() << "\n";
-    if (currentSession) {
-      currentSession->getEmulation()->sendString(dropText.local8Bit());
-    }
+    emit sendStringToEmu(dropText.local8Bit());
     // Paste it
   }
 }
@@ -1616,11 +1611,11 @@ void TEWidget::drop_menu_activated(int item)
    case 0: // paste
       if (m_dnd_file_count==1)
         KRun::shellQuote(dropText);
-      currentSession->getEmulation()->sendString(dropText.local8Bit());
+      emit sendStringToEmu(dropText.local8Bit());
       setActiveWindow();
       break;
    case 1: // cd ...
-      currentSession->getEmulation()->sendString("cd ");
+     emit sendStringToEmu("cd ");
       struct stat statbuf;
       if ( ::stat( QFile::encodeName( dropText ), &statbuf ) == 0 )
       {
@@ -1632,25 +1627,25 @@ void TEWidget::drop_menu_activated(int item)
          }
       }
       KRun::shellQuote(dropText);
-      currentSession->getEmulation()->sendString(dropText.local8Bit());
-      currentSession->getEmulation()->sendString("\n");
+      emit sendStringToEmu(dropText.local8Bit());
+      emit sendStringToEmu("\n");
       setActiveWindow();
       break;
    case 2: // copy
-      currentSession->getEmulation()->sendString("cp -i ");
-      break;
+     emit sendStringToEmu("cp -i ");
+     break;
    case 3: // link
-      currentSession->getEmulation()->sendString("ln -s ");
-      break;
+     emit sendStringToEmu("ln -s ");
+     break;
    case 4: // move
-      currentSession->getEmulation()->sendString("mv -i ");
-      break;
+     emit sendStringToEmu("mv -i ");
+     break;
    }
    if (item>1 && item<5) {
       if (m_dnd_file_count==1)
         KRun::shellQuote(dropText);
-      currentSession->getEmulation()->sendString(dropText.local8Bit());
-      currentSession->getEmulation()->sendString(" .\n");
+      emit sendStringToEmu(dropText.local8Bit());
+      emit sendStringToEmu(" .\n");
       setActiveWindow();
    }
 }

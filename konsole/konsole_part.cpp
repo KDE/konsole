@@ -183,7 +183,6 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   //         this, SLOT(changeColumns(int)) );
   //connect( se, SIGNAL(clearAllListenToKeyPress()),
   //        this, SLOT(clearAllListenToKeyPress()) );
-  te->currentSession = se;
 
   rootxpm = new KRootPixmap(te);
 
@@ -637,8 +636,8 @@ void konsolePart::updateSchemaMenu()
     m_schema->insertItem(s->title(),s->numb(),0);
   }
 
-  if (te && te->currentSession) {
-    m_schema->setItemChecked(te->currentSession->schemaNo(),true);
+  if (te && se) {
+    m_schema->setItemChecked(se->schemaNo(),true);
   }
 }
 

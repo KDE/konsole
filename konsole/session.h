@@ -17,9 +17,9 @@
 #include <kmainwindow.h>
 #include <qstrlist.h>
 
-#include "TEPty.h"
-#include "TEWidget.h"
-#include "TEmuVt102.h"
+#include <TEPty.h>
+#include <TEWidget.h>
+#include <TEmuVt102.h>
 
 #include "sessioniface.h"
 
