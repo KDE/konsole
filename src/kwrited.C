@@ -61,7 +61,7 @@ void KWrited::block_in(const char* txt, int len)
   strncpy(_text,txt,len);
   _text[len] = 0;
   wid->insert(_text);
-  wid->show(); 
+  wid->show();
   XRaiseWindow( wid->x11Display(), wid->winId());
   delete _text;
 }
@@ -69,7 +69,7 @@ void KWrited::block_in(const char* txt, int len)
 int main(int argc, char* argv[])
 {
   // WABA: Make sure not to enable session management.
-  putenv("SESSION_MANAGER=");
+  putenv(strdup("SESSION_MANAGER="));
 
   KApplication app(argc, argv, "kwrited");
   //FIXME: check if we have already have kwrited running.
