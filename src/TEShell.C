@@ -29,12 +29,6 @@
     
     \par FIXME
 
-    NOTE that this module is part of a program and not a dump for
-    obsolete tty interfaces. The opening sequence can be reduced to
-    three or four lines, and, yes, i may do this on a regular basis.
-    
-    \par FIXME
-
     [NOTE: much of the technical stuff below will be replaced by forkpty.]
 
     publish the SIGCHLD signal if not related to an instance.
@@ -60,6 +54,10 @@
 
     There's a sinister ioctl(2), signal(2) and job control stuff
     nessesary to make everything work as it should.
+
+    Much of the stuff can be simplified by using openpty from glibc2.
+    Compatibility issues with obsolete installations and other unixes
+    my prevent this.
 */
 
 #ifdef HAVE_CONFIG_H
