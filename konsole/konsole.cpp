@@ -659,10 +659,7 @@ void Konsole::makeBasicGUI()
   m_toolbarSessionsCommands = newsession->popupMenu();
   connect(m_toolbarSessionsCommands, SIGNAL(activated(int)), SLOT(newSession(int)));
 
-  setDockEnabled( toolBar(), QMainWindow::Left, FALSE );
-  setDockEnabled( toolBar(), QMainWindow::Right, FALSE );
   toolBar()->setFullSize( TRUE );
-
 
   m_session = new KPopupMenu(this);
   m_edit = new KPopupMenu(this);
