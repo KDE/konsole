@@ -221,7 +221,7 @@ private:
   void buildSessionMenus();
   void addSessionCommand(const QString & path);
   void loadSessionCommands();
-  void addScreenSession(const QString & socket);
+  void addScreenSession(const QString & path, const QString & socket);
   void resetScreenSessions();
 
   QPtrDict<TESession> action2session;

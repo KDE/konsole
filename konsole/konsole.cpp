@@ -2332,7 +2332,7 @@ void Konsole::loadSessionCommands()
                         i18n("Shell at Bookmark"), m_bookmarksSession);
 }
 
-void Konsole::addScreenSession(const QString &socket)
+void Konsole::addScreenSession(const QString &path, const QString &socket)
 {
   KTempFile *tmpFile = new KTempFile();
   tmpFile->setAutoDelete(true);
@@ -2341,7 +2341,8 @@ void Konsole::addScreenSession(const QString &socket)
   co->writeEntry("Name", socket);
   QString txt = i18n("Screen is a program controlling screens!", "Screen at %1").arg(socket);
   co->writeEntry("Comment", txt);
-  co->writeEntry("Exec", QString::fromLatin1("screen -r %1").arg(socket));
+  co->writeEntry("Exec", QString::fromLatin1("SCREENDIR=%1 screen -r %2")
+    .arg(path).arg(socket));
   QString icon = "openterm"; // FIXME use another icon (malte)
   cmd_serial++;
   m_session->insertItem( SmallIconSet( icon ), txt, cmd_serial, cmd_serial - 1 );
@@ -2358,6 +2359,10 @@ void Konsole::loadScreenSessions()
   QCString screenDir = getenv("SCREENDIR");
   if (screenDir.isEmpty())
     screenDir = QFile::encodeName(QDir::homeDirPath()) + "/.screen/";
+  // Some distributions add a shell function called screen that sets
+  // $SCREENDIR to ~/tmp. In this case the variable won't be set here.
+  if (!QFile::exists(screenDir))
+    screenDir = QFile::encodeName(QDir::homeDirPath()) + "/tmp/";
   QStringList sessions;
   // Can't use QDir as it doesn't support FIFOs :(
   DIR *dir = opendir(screenDir);
@@ -2383,7 +2388,7 @@ void Konsole::loadScreenSessions()
   }
   resetScreenSessions();
   for (QStringList::ConstIterator it = sessions.begin(); it != sessions.end(); ++it)
-    addScreenSession(*it);
+    addScreenSession(screenDir, *it);
 }
 
 void Konsole::resetScreenSessions()
