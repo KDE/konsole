@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <X11/Xlib.h>
 #include <config.h>
+#include <kcrash.h>
 
 /* TODO
    for anyone who likes to do improvements here, go ahead.
@@ -54,8 +55,8 @@ KWrited::KWrited() : QObject()
 
 KWrited::~KWrited()
 {
-  //FIXME: make sure we properly remove the utmp stamp on session end or kill.
-  exit(0);
+    pty->kill();
+    delete pty;
 }
 
 void KWrited::block_in(const char* txt, int len)
@@ -66,6 +67,14 @@ void KWrited::block_in(const char* txt, int len)
   wid->insert( QString::fromLocal8Bit( text ) );
   wid->show();
   XRaiseWindow( wid->x11Display(), wid->winId());
+}
+
+static KWrited *pro = 0;
+
+void signal_handler(int) {
+    delete pro;
+    pro = 0;
+    ::exit(0);
 }
 
 int main(int argc, char* argv[])
@@ -85,12 +94,16 @@ int main(int argc, char* argv[])
 
   // WABA: Make sure not to enable session management.
   unsetenv("SESSION_MANAGER");
+  signal (SIGHUP, signal_handler);
+  KCrash::setEmergencySaveFunction(signal_handler);
 
   KUniqueApplication app;
 
-  KWrited pro;
-  app.exec();
-  return 0;
+  pro = new KWrited;
+  int r = app.exec();
+  delete pro;
+  pro = 0;
+  return r;
 }
 
 #include "kwrited.moc"
