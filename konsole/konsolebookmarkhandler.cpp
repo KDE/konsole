@@ -39,6 +39,10 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole )
 
     m_bookmarkMenu = new KBookmarkMenu( manager, this, m_menu,
                                         konsole->actionCollection(), true );
+    // don't break c-b! essential for vi users :-)
+    KAction *addBookmark = konsole->actionCollection()->action( "add_bookmark" );
+    if ( addBookmark )
+	addBookmark->setShortcut( KShortcut() );
 }
 
 void KonsoleBookmarkHandler::setAddEnabled(bool state)
