@@ -783,9 +783,13 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
     emit isBusySelecting(true); // Keep it steady...
     if (selBound.start.x()!=-1 && selBound.end.x()!=-1 && isTargetSelected(pos.x(), pos.y())){
       // The user clicked inside selected text
-
-      dragInfo.state = diPending;
-      dragInfo.start = ev->pos();
+      // Drag only when the Control key is hold
+      // TOFIX for 3.1: create a configure dialog for that key
+      if ( ev->state() & ControlButton )
+      {
+         dragInfo.state = diPending;
+         dragInfo.start = ev->pos();
+      }
 
     }else
     {
