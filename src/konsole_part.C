@@ -106,6 +106,7 @@ konsolePart::konsolePart(QWidget *parent, const char *name)
   te = new TEWidget(parent);
   te->setFocusPolicy(QWidget::ClickFocus);
   te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
+  te->setScrollbarLocation(TEWidget::SCRRIGHT);
   setWidget(te);
   // faking a KTMainwindow - i dont know why it has it this way
   kdDebug() << "The shell is:" << shell << "\n";
@@ -116,6 +117,8 @@ konsolePart::konsolePart(QWidget *parent, const char *name)
   QTimer::singleShot(0/*100*/,initial,SLOT(run()));
   initial->getEmulation()->setKeytrans(0);
   te->currentSession = initial;
+
+  initial->setHistory(true);
 
   // setXMLFile("konsole_part.rc");
 
