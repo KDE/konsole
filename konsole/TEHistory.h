@@ -14,7 +14,7 @@
 #define TEHISTORY_H
 
 #include <qcstring.h>
-#include <qvector.h>
+#include <qptrvector.h>
 
 #include <ktempfile.h>
 
@@ -110,7 +110,7 @@ private:
 class HistoryScrollBuffer : public HistoryScroll
 {
 public:
-  typedef QArray<ca> histline;
+  typedef QMemArray<ca> histline;
 
   HistoryScrollBuffer(unsigned int maxNbLines = 1000);
   virtual ~HistoryScrollBuffer();
@@ -133,7 +133,7 @@ private:
   void normalize();
 
   bool m_hasScroll;
-  QVector<histline> m_histBuffer;
+  QPtrVector<histline> m_histBuffer;
   unsigned int m_maxNbLines;
   unsigned int m_nbLines;
   unsigned int m_arrayIndex;

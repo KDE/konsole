@@ -63,7 +63,7 @@
 #include <kdebug.h>
 
 
-typedef QListIterator<ColorSchema> ColorSchemaListIterator;
+typedef QPtrListIterator<ColorSchema> ColorSchemaListIterator;
 
 
 // Number all the new color schema's (non-default) from 1.
@@ -431,7 +431,7 @@ void ColorSchema::updateLastRead(const QDateTime& dt)
 
 
 ColorSchemaList::ColorSchemaList() :
-  QList<ColorSchema> ()
+  QPtrList<ColorSchema> ()
 {
 //  KONSOLEDEBUG << "Got new color list" << endl;
 
@@ -587,7 +587,7 @@ bool ColorSchemaList::checkSchemas()
   return r;
 }
 
-int ColorSchemaList::compareItems(QCollection::Item item1, QCollection::Item item2)
+int ColorSchemaList::compareItems(QPtrCollection::Item item1, QPtrCollection::Item item2)
 {
    ColorSchema* schema1=(ColorSchema*)item1;
    ColorSchema* schema2=(ColorSchema*)item2;

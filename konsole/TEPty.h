@@ -26,7 +26,7 @@
 #include <qtimer.h>
 #include <qstrlist.h>
 #include <qvaluelist.h>
-#include <qarray.h>
+#include <qmemarray.h>
 
 class TEPty: public KProcess
 {
@@ -108,7 +108,7 @@ Q_OBJECT
         start = 0;
         length = len;
       }
-      QArray<char> buffer;
+      QMemArray<char> buffer;
       int start;
       int length;
     };

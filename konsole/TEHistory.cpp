@@ -230,7 +230,7 @@ void HistoryScrollBuffer::addCells(ca a[], int count)
 void HistoryScrollBuffer::normalize()
 {
   if (!m_buffFilled || !m_arrayIndex) return;
-  QVector<histline> newHistBuffer;
+  QPtrVector<histline> newHistBuffer;
   newHistBuffer.resize(m_maxNbLines);
   for(int i = 0; i < (int) m_maxNbLines-2; i++)
   {

@@ -219,7 +219,7 @@ public:
 		return defaultSchema;
 	} ;
 protected:
-   virtual int compareItems(QCollection::Item item1, QCollection::Item item2);
+   virtual int compareItems(QPtrCollection::Item item1, QPtrCollection::Item item2);
 
 private:
 	/**

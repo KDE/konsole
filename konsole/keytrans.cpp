@@ -101,7 +101,7 @@ KeyTrans::~KeyTrans()
 KeyTrans::KeyEntry* KeyTrans::addEntry(int ref, int key, int bits, int mask, int cmd, QString txt)
 // returns conflicting entry
 {
-  for (QListIterator<KeyEntry> it(tableX); it.current(); ++it)
+  for (QPtrListIterator<KeyEntry> it(tableX); it.current(); ++it)
   {
     if (it.current()->matches(key,bits,mask))
     {
@@ -115,7 +115,7 @@ KeyTrans::KeyEntry* KeyTrans::addEntry(int ref, int key, int bits, int mask, int
 bool KeyTrans::findEntry(int key, int bits, int* cmd, const char** txt, int* len)
 {
   if (!m_fileRead) readConfig();
-  for (QListIterator<KeyEntry> it(tableX); it.current(); ++it)
+  for (QPtrListIterator<KeyEntry> it(tableX); it.current(); ++it)
     if (it.current()->matches(key,bits,0xffff))
     {
       *cmd = it.current()->cmd;
