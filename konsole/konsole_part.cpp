@@ -498,17 +498,6 @@ void konsolePart::readProperties()
     pixmap_menu_activated(sch->alignment());
   }
 
-  if ( se )
-  {
-    if (b_histEnabled && m_histSize)
-      se->setHistory(HistoryTypeBuffer(m_histSize));
-    else if (b_histEnabled && !m_histSize)
-      se->setHistory(HistoryTypeFile());
-    else
-      se->setHistory(HistoryTypeNone());
-  };
-
-  if ( se ) se->setKeymapNo(n_keytab);
   te->setBellMode(n_bell);
   te->setBlinkingCursor(config->readBoolEntry("BlinkingCursor",false));
   te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
@@ -521,8 +510,6 @@ void konsolePart::readProperties()
   config = new KConfig("konsolerc",true);
   config->setDesktopGroup();
   te->setTerminalSizeHint( config->readBoolEntry("TerminalSizeHint",true) );
-  config->setGroup("UTMP");
-  if ( se ) se->setAddToUtmp( config->readBoolEntry("AddToUtmp",true));
   delete config;
 }
 
@@ -968,6 +955,18 @@ void konsolePart::startProgram( const QString& program,
   //         this, SLOT(changeColumns(int)) );
   //connect( se, SIGNAL(clearAllListenToKeyPress()),
   //        this, SLOT(clearAllListenToKeyPress()) );
+
+  if (b_histEnabled && m_histSize)
+    se->setHistory(HistoryTypeBuffer(m_histSize));
+  else if (b_histEnabled && !m_histSize)
+    se->setHistory(HistoryTypeFile());
+  else
+    se->setHistory(HistoryTypeNone());
+  se->setKeymapNo(n_keytab);
+  KConfig* config = new KConfig("konsolerc",true);
+  config->setGroup("UTMP");
+  se->setAddToUtmp( config->readBoolEntry("AddToUtmp",true));
+  delete config;
 
   se->setConnect(true);
   se->setSchemaNo(curr_schema);
