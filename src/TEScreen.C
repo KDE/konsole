@@ -1043,12 +1043,12 @@ char *TEScreen::getSelText(const BOOL preserve_line_breaks)
   
   // allocate buffer for maximum possible size...
   d = (sel_BR - sel_TL)/columns + 1 ;
-  m = (char*) malloc(  sizeof(char) * d * (columns+1) + 2 );
+  m = (char*) malloc(  d * (columns+1) + 2 );
   d = 0;
 
   while ( s <= sel_BR )
   {
-    if ( s < hist_BR )
+    if ( s < hist_BR+columns )
     { 	// get lines from history buffer.
       eol=histBuffer[hY]->len;
       if  ((hY == (sel_BR/columns)) && (eol >= (sel_BR%columns)) ) eol=sel_BR%columns+1;
@@ -1088,7 +1088,7 @@ char *TEScreen::getSelText(const BOOL preserve_line_breaks)
 	if ( (eol+1)%columns == 0) {
 	    if (image[eol-hist_BR-columns].c == ' ') m[d++]=' ';
 	} 
-        else m[d++]=(preserve_line_breaks||((eol%columns)==0)?'\n':' ');   
+        else m[d++]=((preserve_line_breaks||((eol%columns)==0))?'\n':' ');   
       }
       s = ( eol/columns + 1)*columns;
     }
