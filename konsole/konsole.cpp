@@ -1145,8 +1145,9 @@ void Konsole::setFont(int fontno)
   }
   if ( !f.exactMatch() && fontno != DEFAULTFONT)
   {
-    QString msg = i18n("Font `%1' not found.\nCheck README.linux.console for help.").arg(fonts[fontno]);
-    KMessageBox::error(this,  msg);
+    // Ugly hack to prevent bug #20487
+    fontNotFound_par=fonts[fontno];
+    QTimer::singleShot(1,this,SLOT(fontNotFound()));
     return;
   }
   if (se) se->setFontNo(fontno);
@@ -1154,6 +1155,12 @@ void Konsole::setFont(int fontno)
      selectFont->setCurrentItem(fontno);
   te->setVTFont(f);
   n_font = fontno;
+}
+
+void Konsole::fontNotFound()
+{
+  QString msg = i18n("Font `%1' not found.\nCheck README.linux.console for help.").arg(fontNotFound_par);
+  KMessageBox::error(this,  msg);
 }
 
 /**

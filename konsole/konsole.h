@@ -156,6 +156,8 @@ private slots:
   void slotFind();
   void slotFindDone();
 
+  void fontNotFound();
+
 private:
   KSimpleConfig *defaultSession();
   QString newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(), const QString &_term = QString::null, const QString &_icon = QString::null, const QString &_title = QString::null);
@@ -255,6 +257,7 @@ private:
   QString     s_word_seps;			// characters that are considered part of a word
   QString     pmPath; // pixmap path
   QString     dropText;
+  QString     fontNotFound_par;
   QFont       defaultFont;
   QSize       defaultSize;
 
