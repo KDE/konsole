@@ -1501,8 +1501,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
      b_allowResize=config->readBoolEntry( "AllowResize", false);
      b_bidiEnabled = config->readBoolEntry("EnableBidi",false);
      s_word_seps= config->readEntry("wordseps",":@-./_~");
-     if (b_framevis)  // False only with --noframe
-       b_framevis = config->readBoolEntry("has frame",true);
+     b_framevis = config->readBoolEntry("has frame",true);
      QPtrList<TEWidget> tes = activeTEs();
      for (TEWidget *_te = tes.first(); _te; _te = tes.next()) {
        _te->setWordCharacters(s_word_seps);
