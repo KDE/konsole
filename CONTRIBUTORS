@@ -1,6 +1,6 @@
 CONTRIBUTORS
 
-- Warwick Allison <warwick@dyret.troll.no>
+- Warwick Allison <warwick@troll.no>
   - 16 color SGR codes (xterm-83)
   - schema files seeked also in ~/.kde/share/apps/konsole
   - vim.schema
