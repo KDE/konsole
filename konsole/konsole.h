@@ -83,6 +83,7 @@ private slots:
   void configureRequest(TEWidget*,int,int,int);
   void activateSession();
   void activateSession(TESession*);
+  void closeCurrentSession();
   void doneSession(TESession*,int);
   void opt_menu_activated(int item);
   void schema_menu_activated(int item);
@@ -102,7 +103,6 @@ private slots:
   void prevSession();
   void nextSession();
   void activateMenu();
-  void hideMenu(int);
   void allowPrevNext();
   void setSchema(int n);
   void sendSignal(int n);

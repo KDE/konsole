@@ -342,21 +342,32 @@ void Konsole::makeGUI()
        }
    // Send Signal Menu -------------------------------------------------------------
    m_signals = new KPopupMenu(this);
-   m_signals->insertItem( i18n( "Suspend Task" )   + " (STOP)", 17);     // FIXME: comes with 3 values
-   m_signals->insertItem( i18n( "Continue Task" )  + " (CONT)", 18);     // FIXME: comes with 3 values
-   m_signals->insertItem( i18n( "Hangup" )         + " (HUP)",   1);
-   m_signals->insertItem( i18n( "Interrupt Task" ) + " (INT)",   2);
-   m_signals->insertItem( i18n( "Terminate Task" ) + " (TERM)", 15);
-   m_signals->insertItem( i18n( "Kill Task" )      + " (KILL)",  9);
+   m_signals->insertItem( i18n( "&Suspend Task" )   + " (STOP)", 17);     // FIXME: comes with 3 values
+   m_signals->insertItem( i18n( "&Continue Task" )  + " (CONT)", 18);     // FIXME: comes with 3 values
+   m_signals->insertItem( i18n( "&Hangup" )         + " (HUP)",   1);
+   m_signals->insertItem( i18n( "&Interrupt Task" ) + " (INT)",   2);
+   m_signals->insertItem( i18n( "&Terminate Task" ) + " (TERM)", 15);
+   m_signals->insertItem( i18n( "&Kill Task" )      + " (KILL)",  9);
    connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
 
    // Sessions Menu ----------------------------------------------------------------
    m_sessions->setCheckable(TRUE);
-   m_sessions->insertItem( i18n("Send Signal"), m_signals );
-   KAction *renameSession = new KAction(i18n("R&ename session..."), 0, this,
+   m_sessions->insertItem( i18n("&Send Signal"), m_signals );
+   KAction *renameSession = new KAction(i18n("&Rename session..."), 0, this,
                                         SLOT(slotRenameSession()), this);
    renameSession->plug(m_sessions);
-   KAction *clearAllSessionHistories = new KAction(i18n("Clear Histories"), 0,
+
+   clearHistory = new KAction(i18n("Clear &History"), "edittrash", 0, this,
+                                       SLOT(slotClearHistory()), this);
+   clearHistory->setEnabled( se->history().isOn() );
+   clearHistory->plug(m_sessions);
+
+   KAction *closeSession = new KAction(i18n("&Close session"), "fileclose", 0, this,
+                                        SLOT(closeCurrentSession()), this);
+   closeSession->plug(m_sessions);
+   
+   m_sessions->insertSeparator();
+   KAction *clearAllSessionHistories = new KAction(i18n("Clear all H&istories"), "edittrash", 0,
      this, SLOT(slotClearAllSessionHistories()), this);
    clearAllSessionHistories->plug(m_sessions);
    m_sessions->insertSeparator();
@@ -403,7 +414,7 @@ void Konsole::makeGUI()
    showFrame->plug(m_options);
 
    // Scrollbar
-   selectScrollbar = new KSelectAction(i18n("Scrollbar"), 0, this,
+   selectScrollbar = new KSelectAction(i18n("Scro&llbar"), 0, this,
                                        SLOT(slotSelectScrollbar()), this);
    QStringList scrollitems;
    scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
@@ -417,7 +428,7 @@ void Konsole::makeGUI()
    m_options->insertSeparator();
 
    // Select size
-   selectSize = new KSelectAction(i18n("Size"), 0, this,
+   selectSize = new KSelectAction(i18n("S&ize"), 0, this,
                                   SLOT(slotSelectSize()), this);
    QStringList sizeitems;
    sizeitems << i18n("40x15 (&Small)")
@@ -429,7 +440,7 @@ void Konsole::makeGUI()
    selectSize->plug(m_options);
 
    // Select Bell
-   selectBell = new KSelectAction(i18n("Bell"), 0 , this,
+   selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), 0 , this,
                                   SLOT(slotSelectBell()), this);
    QStringList bellitems;
    bellitems << i18n("&None")
@@ -439,7 +450,7 @@ void Konsole::makeGUI()
    selectBell->plug(m_options);
 
    // Select font
-   selectFont = new KonsoleFontSelectAction( i18n( "Font" ),
+   selectFont = new KonsoleFontSelectAction( i18n( "F&ont" ),
           SmallIconSet( "text" ), 0, this, SLOT(slotSelectFont()), this);
    QStringList it;
    it << i18n("&Normal")
@@ -457,23 +468,18 @@ void Konsole::makeGUI()
    selectFont->plug(m_options);
 
    // Schema
-   m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Schema" ), m_schema);
+   m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Sch&ema" ), m_schema);
    m_options->insertSeparator();
 
-   KAction *historyType = new KAction(i18n("History..."), "history", 0, this,
+   KAction *historyType = new KAction(i18n("&History..."), "history", 0, this,
                                       SLOT(slotHistoryType()), this);
    historyType->plug(m_options);
    
-   clearHistory = new KAction(i18n("Clear History"), 0, this,
-                                       SLOT(slotClearHistory()), this);
-   clearHistory->plug(m_options);
-   clearHistory->setEnabled( se->history().isOn() );
-
    m_options->insertSeparator();
    m_options->insertItem( SmallIconSet( "charset" ), i18n( "&Codec" ), m_codec);
    m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
 
-   KAction *WordSeps = new KAction(i18n("Word Separators..."), 0, this,
+   KAction *WordSeps = new KAction(i18n("Wor&d Separators..."), 0, this,
                                    SLOT(slotWordSeps()), this);
    WordSeps->plug(m_options);
 
@@ -599,16 +605,7 @@ void Konsole::activateMenu()
   menubar->activateItemAt(0);
   if ( !showMenubar->isChecked() ) {
     menubar->show();
-    connect( menubar,SIGNAL(activated(int)), this,SLOT(hideMenu(int)));
- // FIXME: How can one catch if the menu is aborted with ESC/clicking elsewhere?
-  }
-}
-
-void Konsole::hideMenu(int item)
-{
-  disconnect( menubar,SIGNAL(activated(int)), this,SLOT(hideMenu(int)));
-  if ( !showMenubar->isChecked() ) {
-    menubar->hide();
+    showMenubar->setChecked(true);
   }
 }
 
@@ -1483,6 +1480,14 @@ TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrLis
   return s;
 }
 
+void Konsole::closeCurrentSession()
+{
+  if( sessions.count()>1 )
+    se->kill(SIGHUP);
+  else
+    emit close();
+}
+
 //FIXME: If a child dies during session swap,
 //       this routine might be called before
 //       session swap is completed.
@@ -1772,7 +1777,7 @@ HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
   
   QHBoxLayout *hb = new QHBoxLayout(mainFrame);
 
-  m_btnEnable    = new QCheckBox(i18n("Enable"), mainFrame);
+  m_btnEnable    = new QCheckBox(i18n("&Enable"), mainFrame);
 
   QObject::connect(m_btnEnable, SIGNAL(toggled(bool)),
                    this,      SLOT(slotHistEnable(bool)));
