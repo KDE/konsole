@@ -11,7 +11,7 @@ MIMEDIR = $(kde_mimedir)/text
 INCLUDES = -I. $(all_includes)
 
 # you can add here more. This one gets installed
-bin_PROGRAMS = 	konsole konsole_grantpty kwrited #kcmkonsole
+bin_PROGRAMS = 	konsole kwrited #kcmkonsole
 lib_LTLIBRARIES = kwrited.la konsole.la
 
 kde_module_LTLIBRARIES = libkonsolepart.la
@@ -64,19 +64,11 @@ noinst_HEADERS = TEWidget.h TEPty.h TEmulation.h TEmuVt102.h konsole_child.h \
 	kwrited.h TEHistory.h keytrans.h default.keytab.h BlockArray.h \
         konsolebookmarkhandler.h konsolebookmarkmenu.h zmodem_dialog.h
 
-konsole_grantpty_SOURCES = konsole_grantpty.c
-konsole_grantpty_LDFLAGS = $(KDE_RPATH) $(all_libraries)
-konsole_grantpty_LDADD = -lkdefakes
-
 install-data-local:
 	@echo ""
 	@echo "konsole_grantpty is by default installed with SETUID root bit!"
 	@echo "This is needed for konsole to ensure that it can't be eavesdroped."
 	@echo ""
-
-# konsole_grantpty needs to be installed setuid root
-install-exec-hook: 
-	@(chown root $(DESTDIR)$(bindir)/konsole_grantpty && chmod 4755 $(DESTDIR)$(bindir)/konsole_grantpty) || echo "Please make konsole_grandpty setuid root"
 
 # Not AUTO here, because there are some unused files
 METASOURCES = TEWidget.moc TEmuVt102.moc session.moc konsole.moc konsole_child.moc \
