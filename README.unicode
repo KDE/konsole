@@ -25,9 +25,8 @@ the current implementation copes well with these scripts.
 Since i like to support these scripts, too, any feed back
 is appreachiated.
 
-Also, a new set of linux console fonts have been converted
-for X11. These fonts have iso10646-1 encoding and the usual
-vga glyphs.
+Also, a new linux console font has been converted for X11.
+This font has iso10646-1 encoding and the usual vga glyphs.
 
 
 * A more precise anatomy of unicode support within konsole
