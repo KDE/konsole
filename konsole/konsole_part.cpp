@@ -790,7 +790,7 @@ void konsolePart::slotBlinkingCursor()
 }
 
 void konsolePart::slotWordSeps() {
-  KLineEditDlg dlg(i18n("Characters other than alphanumerics considered part of a word when double clicking"),s_word_seps, (KMainWindow*)parentWidget);
+  KLineEditDlg dlg(i18n("Characters other than alphanumerics considered part of a word when double clicking:"),s_word_seps, (KMainWindow*)parentWidget);
   dlg.setCaption(i18n("Word Connectors"));
   if (dlg.exec()) {
     s_word_seps = dlg.text();
@@ -835,9 +835,15 @@ HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
   m_size->setValue(histSize);
   m_size->setSpecialValueText(i18n("Unlimited (number of lines)", "Unlimited"));
 
+  m_setUnlimited = new QPushButton(i18n("&Set Unlimited"), mainFrame);
+  connect( m_setUnlimited,SIGNAL(clicked()), this,SLOT(slotSetUnlimited()) );
+
   hb->addWidget(m_btnEnable);
-  hb->addWidget(new QLabel(i18n("Number of lines : "), mainFrame));
+  hb->addSpacing(10);
+  hb->addWidget(new QLabel(i18n("Number of lines:"), mainFrame));
   hb->addWidget(m_size);
+  hb->addSpacing(10);
+  hb->addWidget(m_setUnlimited);
 
   if ( ! histType.isOn()) {
     m_btnEnable->setChecked(false);
@@ -860,7 +866,13 @@ void HistoryTypeDialog::slotDefault()
 void HistoryTypeDialog::slotHistEnable(bool b)
 {
   m_size->setEnabled(b);
+  m_setUnlimited->setEnabled(b);
   if (b) m_size->setFocus();
+}
+
+void HistoryTypeDialog::slotSetUnlimited()
+{
+  m_size->setValue(0);
 }
 
 unsigned int HistoryTypeDialog::nbLines() const

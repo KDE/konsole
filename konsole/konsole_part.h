@@ -26,6 +26,7 @@
 
 #include <qcheckbox.h>
 #include <qspinbox.h>
+#include <qpushbutton.h>
 
 #include <kaction.h>
 #include <kconfig.h>
@@ -170,6 +171,7 @@ public:
 
 public slots:
   void slotDefault();
+  void slotSetUnlimited();
   void slotHistEnable(bool);
 
   unsigned int nbLines() const;
@@ -178,6 +180,7 @@ public slots:
 protected:
   QCheckBox* m_btnEnable;
   QSpinBox*  m_size;
+  QPushButton* m_setUnlimited;
 };
 
 //////////////////////////////////////////////////////////////////////
