@@ -32,6 +32,7 @@
 #include <qregexp.h>
 
 #include <kaboutdata.h>
+#include <kcharsets.h>
 #include <kdebug.h>
 #include <kfontdialog.h>
 #include <kglobalsettings.h>
@@ -404,6 +405,14 @@ void konsolePart::makeGUI()
      selectFont->setItems(it);
      selectFont->plug(m_options);
 
+      // encoding menu, start with default checked !
+      selectSetEncoding = new KSelectAction( i18n( "&Encoding" ), SmallIconSet("charset" ), 0, this, SLOT(slotSetEncoding()), actions, "set_encoding" );
+      QStringList list = KGlobal::charsets()->descriptiveEncodingNames();
+      list.prepend( i18n( "Default" ) );
+      selectSetEncoding->setItems(list);
+      selectSetEncoding->setCurrentItem (0);
+      selectSetEncoding->plug(m_options);
+
      // Keyboard Options Menu ---------------------------------------------------
      if (kapp->authorizeKAction("keyboard"))
      {
@@ -532,6 +541,8 @@ void konsolePart::applySettingsToGUI()
      blinkingCursor->setChecked(te->blinkingCursor());
   if (m_schema)
      m_schema->setItemChecked(curr_schema,true);
+  if (selectSetEncoding)
+     selectSetEncoding->setCurrentItem(n_encoding);
 }
 
 void konsolePart::readProperties()
@@ -547,6 +558,8 @@ void konsolePart::readProperties()
   n_scroll = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
   m_histSize = config->readNumEntry("history",DEFAULT_HISTORY_SIZE);
   s_word_seps= config->readEntry("wordseps",":@-./_~");
+
+  n_encoding = config->readNumEntry("encoding",0);
 
   QFont tmpFont("fixed");
   tmpFont.setFixedPitch(true);
@@ -616,6 +629,7 @@ void konsolePart::saveProperties()
   config->writeEntry("schema",s_kconfigSchema);
   config->writeEntry("scrollbar",n_scroll);
   config->writeEntry("wordseps",s_word_seps);
+  config->writeEntry("encoding",n_encoding);
 
   config->sync();
   delete config;
@@ -902,6 +916,24 @@ void konsolePart::slotSelectBell() {
   te->setBellMode(n_bell);
 }
 
+void konsolePart::slotSetEncoding()
+{
+  if (!se) return;
+
+  bool found;
+  QString enc = KGlobal::charsets()->encodingForName(selectSetEncoding->currentText());
+  QTextCodec * qtc = KGlobal::charsets()->codecForName(enc, found);
+  if(!found)
+  {
+    kdDebug() << "Codec " << selectSetEncoding->currentText() << " not found!" << endl;
+    qtc = QTextCodec::codecForLocale();
+  }
+
+  n_encoding = selectSetEncoding->currentItem();
+  se->setEncodingNo(selectSetEncoding->currentItem());
+  se->getEmulation()->setCodec(qtc);
+}
+
 void konsolePart::slotSelectLineSpacing()
 {
   te->setLineSpacing( selectLineSpacing->currentItem() );
@@ -1093,6 +1125,7 @@ void konsolePart::startProgram( const QString& program,
 
   se->setConnect(true);
   se->setSchemaNo(curr_schema);
+  slotSetEncoding();
   se->run();
   connect( se, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
   setFont( n_font ); // we do this here, to make TEWidget recalculate

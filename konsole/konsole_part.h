@@ -118,6 +118,7 @@ signals:
     void slotBlinkingCursor();
     void slotWordSeps();
     void fontNotFound();
+    void slotSetEncoding();
 
  private:
     konsoleBrowserExtension *m_extension;
@@ -147,6 +148,7 @@ signals:
     KSelectAction* selectFont;
     KSelectAction* selectLineSpacing;
     KSelectAction* selectScrollbar;
+    KSelectAction* selectSetEncoding;
 
     KPopupMenu* m_keytab;
     KPopupMenu* m_schema;
@@ -174,6 +176,8 @@ signals:
     unsigned    m_histSize;
     bool        m_runningShell;
     bool        m_streamEnabled;
+    int         n_encoding;
+
 public:
     // these are the implementations for the TermEmuInterface
     // functions...
