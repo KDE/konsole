@@ -53,16 +53,12 @@ key Tab    : "\t"
 # VT100 can add an extra \n after return.
 # The NewLine mode is set by an escape sequence.
 
-key Return-Alt-NewLine : "\r"  
-key Return-Alt+NewLine : "\r\n"
-
-key Return+Alt-NewLine : "\E\r"  
-key Return+Alt+NewLine : "\E\r\n"
+key Return-NewLine : "\r"  
+key Return+NewLine : "\r\n"
 
 # Some desperately try to save the ^H.
 
-key Backspace-Alt : "\x7f"
-key Backspace+Alt : "\E\x7f"
+key Backspace : "\x7f"
 key Delete    : "\E[3~"
 
 # These codes are for the VT52 mode of VT100
