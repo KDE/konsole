@@ -21,10 +21,11 @@
     The class Konsole handles the application level. Mainly, it is responsible
     for the configuration, taken from several files, from the command line
     and from the user. It hardly does anything interesting.
+    Everything is created as late as possible to make it startup fast.
 */
 
 /*TODO:
-  - allow to set coded
+  - allow to set codec
   - officially declare this file to be hacked to death. ;^)
   - merge into konsole_part.
 */
@@ -66,7 +67,7 @@ Time to start a requirement list.
     should be rebalanced. Much more material now comes from configuration
     files and the overall routines should better respect this.
   - Font+Size list should go to a configuration file, too.
-  - Controling the widget is currently done by individual attributes.
+  - Controlling the widget is currently done by individual attributes.
     This lead to quite some amount of flicker when a whole bunch of
     attributes has to be set, e.g. in session swapping.
 */
@@ -111,10 +112,7 @@ Time to start a requirement list.
 #include "keytrans.h"
 
 
-
-
 #define KONSOLEDEBUG    kdDebug(1211)
-
 
 class KonsoleFontSelectAction : public KSelectAction {
 public:
@@ -152,6 +150,8 @@ const char *fonts[] = {
  "-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1",    // "Unicode"
  };
 #define TOPFONT ((sizeof(fonts)/sizeof(char*))-1)
+
+#include <qdatetime.h>
 
 Konsole::Konsole(const char* name, const char* _pgm,
                  QStrList & _args, int histon, bool toolbaron, QCString mytitle)
@@ -196,8 +196,10 @@ Konsole::Konsole(const char* name, const char* _pgm,
 ,b_warnQuit(false)
 ,alreadyNoticedBackgroundChange_(false)
 {
-   kapp->addKipcEventMask(KIPC::BackgroundChanged);
-   connect( kapp,SIGNAL(backgroundChanged(int)),this, SLOT(slotBackgroundChanged(int)));
+  //QTime time;
+  //time.start();
+  kapp->addKipcEventMask(KIPC::BackgroundChanged);
+  connect( kapp,SIGNAL(backgroundChanged(int)),this, SLOT(slotBackgroundChanged(int)));
 
   no2command.setAutoDelete(true);
   menubar = menuBar();
@@ -205,6 +207,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
   // create terminal emulation framework ////////////////////////////////////
 
   te = new TEWidget(this);
+  //kdDebug()<<"Konsole ctor() after new TEWidget() "<<time.elapsed()<<" msecs elapsed"<<endl;
   te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
   // we need focus so that the auto-hide cursor feature works (Carsten)
   // but a part shouldn't force that it receives the focus, so we do it here (David)
@@ -212,12 +215,14 @@ Konsole::Konsole(const char* name, const char* _pgm,
 
   // Transparency handler ///////////////////////////////////////////////////
   rootxpm = new KRootPixmap(te);
+  //kdDebug()<<"Konsole ctor() after new RootPixmap() "<<time.elapsed()<<" msecs elapsed"<<endl;
 
   // create applications /////////////////////////////////////////////////////
 
   setCentralWidget(te);
 
   makeBasicGUI();
+  //kdDebug()<<"Konsole ctor() after makeBasicGUI "<<time.elapsed()<<" msecs elapsed"<<endl;
 
   colors = new ColorSchemaList();
 
@@ -226,9 +231,11 @@ Konsole::Konsole(const char* name, const char* _pgm,
   // Please do it ! It forces to duplicate code... (David)
 
   KeyTrans::loadAll();
+  //kdDebug()<<"Konsole ctor() after KeyTrans::loadAll() "<<time.elapsed()<<" msecs elapsed"<<endl;
 
   //kdDebug()<<"Konsole ctor(): new TESession()"<<endl;
   m_initialSession = new TESession(this,te,pgm,args,"xterm");
+  //kdDebug()<<"Konsole ctor() after new Session() "<<time.elapsed()<<" msecs elapsed"<<endl;
 
   connect( m_initialSession,SIGNAL(done(TESession*,int)),
            this,SLOT(doneSession(TESession*,int)) );
@@ -258,6 +265,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
   config->setGroup("options");
   //kdDebug()<<"Konsole ctor(): readProps()"<<endl;
   readProperties(config);
+  //kdDebug()<<"Konsole ctor() after readProps "<<time.elapsed()<<" msecs elapsed"<<endl;
   //kdDebug()<<"Konsole ctor(): toolbar"<<endl;
   if (!toolbaron)
     toolBar()->hide();
@@ -279,6 +287,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
   connect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
   connect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
 
+  //kdDebug()<<"Konsole ctor() ends "<<time.elapsed()<<" msecs elapsed"<<endl;
   //kdDebug()<<"Konsole ctor(): done"<<endl;
 }
 
@@ -488,17 +497,17 @@ void Konsole::makeGUI()
    //FIXME: sort
    for (int i = 0; i < KeyTrans::count(); i++)
    {
-      KeyTrans* s = KeyTrans::find(i);
-      assert( s );
-      m_keytab->insertItem(s->hdr,s->numb);
+      KeyTrans* ktr = KeyTrans::find(i);
+      assert( ktr );
+      m_keytab->insertItem(ktr->hdr(),ktr->numb());
    }
    applySettingsToGUI();
 };
 
 void Konsole::makeBasicGUI()
 {
-   //kdDebug()<<"Konsole::makeBasicGUI()"<<endl;
-   KToolBarPopupAction *newsession = new KToolBarPopupAction(i18n("&New"), "filenew",
+  //kdDebug()<<"Konsole::makeBasicGUI()"<<endl;
+  KToolBarPopupAction *newsession = new KToolBarPopupAction(i18n("&New"), "filenew",
                 0 , this, SLOT(newSession()),this, KStdAction::stdName(KStdAction::New));
   newsession->plug(toolBar());
   toolBar()->insertLineSeparator();

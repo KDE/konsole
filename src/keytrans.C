@@ -64,11 +64,20 @@ QString KeyTrans::KeyEntry::text()
    Takes part in a collection themself.
 */
 
+KeyTrans::KeyTrans(const QString& path)
+:m_hdr("")
+,m_path(path)
+,m_numb(0)
+,m_fileRead(false)
+{
+  tableX.setAutoDelete(true);
+}
+
 KeyTrans::KeyTrans()
 {
-  table.setAutoDelete(true);
+/*  table.setAutoDelete(true);
   path = "";
-  numb = 0;
+  numb = 0;*/
 }
 
 KeyTrans::~KeyTrans()
@@ -78,20 +87,21 @@ KeyTrans::~KeyTrans()
 KeyTrans::KeyEntry* KeyTrans::addEntry(int ref, int key, int bits, int mask, int cmd, QString txt)
 // returns conflicting entry
 {
-  for (QListIterator<KeyEntry> it(table); it.current(); ++it)
+  for (QListIterator<KeyEntry> it(tableX); it.current(); ++it)
   {
     if (it.current()->matches(key,bits,mask))
     {
       return it.current();
     }
   }
-  table.append(new KeyEntry(ref,key,bits,mask,cmd,txt));
+  tableX.append(new KeyEntry(ref,key,bits,mask,cmd,txt));
   return (KeyEntry*)NULL;
 }
 
 bool KeyTrans::findEntry(int key, int bits, int* cmd, const char** txt, int* len)
 {
-  for (QListIterator<KeyEntry> it(table); it.current(); ++it)
+  if (!m_fileRead) readConfig();
+  for (QListIterator<KeyEntry> it(tableX); it.current(); ++it)
     if (it.current()->matches(key,bits,0xffff))
     {
       *cmd = it.current()->cmd;
@@ -293,14 +303,37 @@ static KeyTransSymbols * syms = 0L;
    - Comment :: '#' (any but \n)*
 */
 
-KeyTrans* KeyTrans::fromDevice(QString path, QIODevice &buf)
+/*KeyTrans* KeyTrans::fromDevice(QString path, QIODevice &buf)
 {
   KeyTrans* kt = new KeyTrans;
   kt->path = path;
-  KeytabReader ktr(path,buf); ktr.parseTo(kt);
   return kt;
-}
 
+  KeytabReader ktr(path,buf);
+  ktr.parseTo(kt);
+  return kt;
+}*/
+
+void KeyTrans::readConfig()
+{
+   if (m_fileRead) return;
+   m_fileRead=true;
+   QIODevice* buf(0);
+   if (m_path=="[buildin]")
+   {
+      QCString txt =
+#include "default.keytab.h"
+;
+      buf=new QBuffer(txt);
+   }
+   else
+   {
+      buf=new QFile(m_path);
+   };
+   KeytabReader ktr(m_path,*buf);
+   ktr.parseTo(this);
+   delete buf;
+};
 
 #define assertSyntax(Cond,Message) if (!(Cond)) { ReportError(Message); goto ERROR; }
 
@@ -319,7 +352,7 @@ Loop:
   if (sym == SYMName && !strcmp(res.latin1(),"keyboard"))
   {
     getSymbol(); assertSyntax(sym == SYMString, "Header expected")
-    kt->hdr = i18n(res.latin1());
+    kt->m_hdr = i18n(res.latin1());
     getSymbol(); assertSyntax(sym == SYMEol, "Text unexpected")
     getSymbol();                   // eoln
     goto Loop;
@@ -399,20 +432,20 @@ ERROR:
 }
 
 
-KeyTrans* KeyTrans::defaultKeyTrans()
+/*KeyTrans* KeyTrans::defaultKeyTrans()
 {
   QCString txt =
 #include "default.keytab.h"
   ;
   QBuffer buf(txt);
   return fromDevice("[buildin]",buf);
-}
+}*/
 
-KeyTrans* KeyTrans::fromFile(const char* path)
+/*KeyTrans* KeyTrans::fromFile(const char* path)
 {
   QFile file(path);
   return fromDevice(path,file);
-}
+}*/
 
 // local symbol tables ---------------------------------------------------------------------
 // material needed for parsing the config file.
@@ -633,9 +666,9 @@ int KeyTrans::count()
 
 void KeyTrans::addKeyTrans()
 {
-  this->numb = keytab_serial ++;
-  numb2keymap->insert(numb,this);
-  path2keymap->insert(path,this);
+  m_numb = keytab_serial ++;
+  numb2keymap->insert(m_numb,this);
+  path2keymap->insert(m_path,this);
 }
 
 void KeyTrans::loadAll()
@@ -647,11 +680,17 @@ void KeyTrans::loadAll()
   if (!syms)
     syms = new KeyTransSymbols;
 
-  defaultKeyTrans()->addKeyTrans();
+  //defaultKeyTrans()->addKeyTrans();
+  KeyTrans* sc = new KeyTrans("[buildin]");
+  sc->addKeyTrans();
+
   QStringList lst = KGlobal::dirs()->findAllResources("appdata", "*.keytab");
 
-  for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it ) {
-    KeyTrans* sc = KeyTrans::fromFile(QFile::encodeName(*it));
+  for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it )
+  {
+    //QFile file(QFile::encodeName(*it));
+    sc = new KeyTrans(QFile::encodeName(*it));
+    //KeyTrans* sc = KeyTrans::fromDevice(QFile::encodeName(*it),file);
     if (sc) sc->addKeyTrans();
   }
 }

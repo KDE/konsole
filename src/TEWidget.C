@@ -252,7 +252,22 @@ void TEWidget::setFont(const QFont &)
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
+TEWidget::TEWidget(QWidget *parent, const char *name)
+:QFrame(parent,name)
+,font_h(1)
+,font_w(1)
+,font_a(1)
+,lines(1)
+,columns(1)
+,image(0)
+,resizing(false)
+,actSel(0)
+,word_selection_mode(false)
+,scrollLoc(SCRNONE)
+,word_characters(":@-./_~")
+,blinking(false)
+,m_drop(0)
+,currentSession(0)
 {
   cb = QApplication::clipboard();
   QObject::connect( (QObject*)cb, SIGNAL(dataChanged()),
@@ -261,21 +276,9 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   scrollbar = new QScrollBar(this);
   scrollbar->setCursor( arrowCursor );
   connect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
-  scrollLoc = SCRNONE;
 
   blinkT   = new QTimer(this);
   connect(blinkT, SIGNAL(timeout()), this, SLOT(blinkEvent()));
-  blinking = FALSE;
-
-  resizing = FALSE;
-  actSel   = 0;
-  image    = 0;
-  lines    = 1;
-  columns  = 1;
-  font_w   = 1;
-  font_h   = 1;
-  font_a   = 1;
-  word_selection_mode = FALSE;
 
   setMouseMarks(TRUE);
   setVTFont( QFont("fixed") );
@@ -285,13 +288,11 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   KCursor::setAutoHideCursor( this, true );
 
   // Init DnD ////////////////////////////////////////////////////////////////
-  currentSession = NULL;
   setAcceptDrops(true); // attempt
-  m_drop = new KPopupMenu(this);
+/*  m_drop = new KPopupMenu(this);
   m_drop->insertItem( i18n("Paste"), 0);
   m_drop->insertItem( i18n("cd"),    1);
-  word_characters = ":@-./_~";
-  connect(m_drop, SIGNAL(activated(int)), SLOT(drop_menu_activated(int)));
+  connect(m_drop, SIGNAL(activated(int)), SLOT(drop_menu_activated(int)));*/
 
   setFocusPolicy( WheelFocus );
 }
@@ -315,7 +316,7 @@ TEWidget::~TEWidget()
 */
 
 void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
-                           QString& str, ca attr, BOOL pm, BOOL clear)
+                           QString& str, ca attr, bool pm, bool clear)
 {
   if (pm && color_table[attr.b].transparent)
   {
@@ -1091,6 +1092,13 @@ void TEWidget::dragEnterEvent(QDragEnterEvent* e)
 
 void TEWidget::dropEvent(QDropEvent* event)
 {
+   if (m_drop==0)
+   {
+      m_drop = new KPopupMenu(this);
+      m_drop->insertItem( i18n("Paste"), 0);
+      m_drop->insertItem( i18n("cd"),    1);
+      connect(m_drop, SIGNAL(activated(int)), SLOT(drop_menu_activated(int)));
+   };
     // The current behaviour when url(s) are dropped is
     // * if there is only ONE url and if it's a LOCAL one, ask for paste or cd
     // * in all other cases, just paste
@@ -1119,7 +1127,7 @@ void TEWidget::dropEvent(QDropEvent* event)
 
       if (bPopup)
         // m_drop->popup(pos() + event->pos());
-	m_drop->popup(mapToGlobal(event->pos()));
+         m_drop->popup(mapToGlobal(event->pos()));
       else
 	{
 	  if (currentSession) {
@@ -1141,30 +1149,29 @@ void TEWidget::dropEvent(QDropEvent* event)
 
 void TEWidget::drop_menu_activated(int item)
 {
-  switch (item)
-  {
-    case 0: // paste
+   switch (item)
+   {
+   case 0: // paste
       currentSession->getEmulation()->sendString(dropText.local8Bit());
 //    KWM::activate((Window)this->winId());
       break;
-    case 1: // cd ...
+   case 1: // cd ...
       currentSession->getEmulation()->sendString("cd ");
       struct stat statbuf;
       if ( ::stat( QFile::encodeName( dropText ), &statbuf ) == 0 )
       {
-        if ( !S_ISDIR(statbuf.st_mode) )
-        {
-          KURL url;
-          url.setPath( dropText );
-          dropText = url.directory( true, false ); // remove filename
-        }
+         if ( !S_ISDIR(statbuf.st_mode) )
+         {
+            KURL url;
+            url.setPath( dropText );
+            dropText = url.directory( true, false ); // remove filename
+         }
       }
       dropText.replace(QRegExp(" "), "\\ "); // escape spaces
       currentSession->getEmulation()->sendString(dropText.local8Bit());
       currentSession->getEmulation()->sendString("\n");
-//    KWM::activate((Window)this->winId());
+      //    KWM::activate((Window)this->winId());
       break;
-  }
+   }
 }
-
 

@@ -125,15 +125,20 @@ int main(int argc, char* argv[])
   aboutData.addCredit("Lars Knoll",
     I18N_NOOP("bug fixing"),
     "knoll@mpi-hd.mpg.de");
+  aboutData.addCredit("Alexander Neundorf",
+    I18N_NOOP("faster startup, bug fixing"),
+    "neundorf@kde.org");
   aboutData.addCredit("",I18N_NOOP("Thanks to many others.\n"
     "The above list only reflects the contributors\n"
     "I managed to keep track for."));
 
   KCmdLineArgs::init( argc, argv, &aboutData );
   KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
+  //1.53 sec
 
   KApplication a;
   KImageIO::registerFormats(); // add io for additional image formats
+  //2.1 secs
 
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
   QStrList eargs;
@@ -161,7 +166,6 @@ int main(int argc, char* argv[])
      for(int i=0; i < args->count(); i++)
        eargs.append( args->arg(i) );
   }
-
 
   QCString sz = "";
   sz = args->getOption("vt_sz");
@@ -221,7 +225,9 @@ int main(int argc, char* argv[])
   }
   else
   {
+    //2.1 sec
     Konsole*  m = new Konsole(wname,shell,eargs,histon,toolbaron,title);
+    //2.5 sec
     ksm->konsole = m;
     m->setColLin(c,l); // will use default height and width if called with (0,0)
 
@@ -230,8 +236,10 @@ int main(int argc, char* argv[])
       m->setCaption(i18n("Welcome to the console"));
       QTimer::singleShot(5000,m,SLOT(setHeader()));
     }
+    //2.5 sec
     m->show();
   }
+  //2.6 sec
 
   return a.exec();
 }

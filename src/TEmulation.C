@@ -116,8 +116,8 @@ TEmulation::TEmulation(TEWidget* gui)
 		   this,SLOT(onSelectionBegin(const int,const int)) );
   QObject::connect(gui,SIGNAL(extendSelectionSignal(const int,const int)),
 		   this,SLOT(onSelectionExtend(const int,const int)) );
-  QObject::connect(gui,SIGNAL(endSelectionSignal(const BOOL)),
-		   this,SLOT(setSelection(const BOOL)) );
+  QObject::connect(gui,SIGNAL(endSelectionSignal(const bool)),
+		   this,SLOT(setSelection(const bool)) );
   QObject::connect(gui,SIGNAL(clearSelectionSignal()),
 		   this,SLOT(clearSelection()) );
 }
@@ -258,7 +258,7 @@ void TEmulation::onSelectionExtend(const int x, const int y) {
   showBulk();
 }
 
-void TEmulation::setSelection(const BOOL preserve_line_breaks) {
+void TEmulation::setSelection(const bool preserve_line_breaks) {
   if (!connected) return;
   QString t = scr->getSelText(preserve_line_breaks);
   if (!t.isNull()) gui->setSelection(t);
