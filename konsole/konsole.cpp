@@ -1455,6 +1455,9 @@ void Konsole::saveProperties(KConfig* config) {
 
   if (!s_workDir.isEmpty())
     config->writePathEntry("workdir", s_workDir);
+
+  // Set the new default font
+  defaultFont = se->widget()->getVTFont();
 }
 
 
@@ -2568,7 +2571,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
   QString sch = s_kconfigSchema;
   QString txt;
   QString cwd;
-  QFont font = KGlobalSettings::fixedFont(); // Use defaultfont instead?
+  QFont font = defaultFont;
   QStrList cmdArgs;
 
   if (co) {
