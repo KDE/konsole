@@ -4,6 +4,17 @@
 #include <qstring.h>
 #include <qlist.h>
 
+#define BITS_NewLine    0
+#define BITS_BsHack     1
+#define BITS_Ansi       2
+#define BITS_AppCuKeys  3
+#define BITS_COUNT      4
+//FIXME: add Shift,Alt,Control
+
+#define MASKEDBITS_On(x)  ((3<<(2*x)))
+#define MASKEDBITS_Off(x) ((2<<(2*x)))
+#define BITS(x,v)         ((((v)!=0)<<(x)))
+
 class KeyTrans
 {
 public:

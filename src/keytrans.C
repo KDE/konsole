@@ -3,6 +3,8 @@
 #include "keytrans.h"
 #include <qnamespace.h>
 
+#include <stdio.h>
+
 // KeyEntry -
 
 KeyTrans::KeyEntry::KeyEntry(int _key, int _bits, int _mask, QString _txt)
@@ -40,7 +42,8 @@ void KeyTrans::addEntry(int key, int bits, int mask, QString txt)
   {
     if (it.current()->matches(key,bits,mask))
     {
-      // reject e, with error message
+      fprintf(stderr,"rejecting key %d bits 0x%02x mask 0x%02x:"
+                     " conflict with earlier entry.\n",key,bits,mask);
       return;
     }
   }
@@ -51,7 +54,16 @@ void KeyTrans::addEntry(int key, int maskedbits, QString txt)
 {
   // we come in with tristate encoded bits here and
   // separate a mask and a value from it.
-
+  // A bit clumpsy, isn't it?
+  int mask = 0;
+  int bits = 0;
+  for (int bit = 0; bit < BITS_COUNT; bit++)
+  {
+    mask |= (((maskedbits&(1 << (2*bit+1))) != 0) << bit);
+    bits |= (((maskedbits&(1 << (2*bit+0))) != 0) << bit);
+  }
+//printf("KEY: %d, bits:0x%02x, mask:0x%02x (masked bits:0x%02x)\n",key,bits,mask,maskedbits);
+  addEntry(key,bits,mask,txt);
 }
 
 QString KeyTrans::findEntry(int key, int bits)
@@ -92,13 +104,8 @@ QString KeyTrans::findEntry(int key, int bits)
 // Next +Shift: scroll History Buffer down one page
 //
 
-#define BITS_NewLine    0
-#define BITS_BsHack     1
-#define BITS_Ansi       2
-#define BITS_AppCuKeys  4
-
-#define bOn(x)    ((3<<(2*x)))
-#define bOff(x)   ((2<<(2*x)))
+#define bOn(X)  MASKEDBITS_On(X)
+#define bOff(X) MASKEDBITS_Off(X)
 
 void KeyTrans::addXtermKeys()
 {
@@ -108,43 +115,43 @@ void KeyTrans::addXtermKeys()
 // VT100 can add an extra \n after return.
 // The NewLine mode is set by an escape sequence.
 
-  addEntry(Qt::Key_Return, -BITS_NewLine, "\r");
-  addEntry(Qt::Key_Return, +BITS_NewLine, "\r\n");
+  addEntry(Qt::Key_Return, bOff(BITS_NewLine), "\r");
+  addEntry(Qt::Key_Return, bOn(BITS_NewLine), "\r\n");
 
 // Some desperately try to save the ^H.
 // The BsHack mode is set by regular
 // configurations means for convenience.
 
-  addEntry(Qt::Key_Backspace, -BITS_BsHack, "\x08");
-  addEntry(Qt::Key_Delete   , -BITS_BsHack, "\x7f");
+  addEntry(Qt::Key_Backspace, bOff(BITS_BsHack), "\x08");
+  addEntry(Qt::Key_Delete   , bOff(BITS_BsHack), "\x7f");
 
-  addEntry(Qt::Key_Backspace, +BITS_BsHack, "\x7f");
-  addEntry(Qt::Key_Delete   , +BITS_BsHack, "\033[3~");
+  addEntry(Qt::Key_Backspace, bOn(BITS_BsHack), "\x7f");
+  addEntry(Qt::Key_Delete   , bOn(BITS_BsHack), "\033[3~");
 
 // These codes are for the VT52 mode of VT100
 // The Ansi mode (i.e. VT100 mode) is set by
 // an escape sequence
 
-  addEntry(Qt::Key_Up   , -BITS_Ansi, "\033A");
-  addEntry(Qt::Key_Down , -BITS_Ansi, "\033B");
-  addEntry(Qt::Key_Right, -BITS_Ansi, "\033C");
-  addEntry(Qt::Key_Left , -BITS_Ansi, "\033D");
+  addEntry(Qt::Key_Up   , bOff(BITS_Ansi), "\033A");
+  addEntry(Qt::Key_Down , bOff(BITS_Ansi), "\033B");
+  addEntry(Qt::Key_Right, bOff(BITS_Ansi), "\033C");
+  addEntry(Qt::Key_Left , bOff(BITS_Ansi), "\033D");
 
 // VT100 emits a mode bit together
 // with the arrow keys.The AppCuKeys
 // mode is set by an escape sequence.
 
-  addEntry(Qt::Key_Up   , +BITS_Ansi +BITS_AppCuKeys, "\033OA");
-  addEntry(Qt::Key_Down , +BITS_Ansi +BITS_AppCuKeys, "\033OB");
-  addEntry(Qt::Key_Right, +BITS_Ansi +BITS_AppCuKeys, "\033OC");
-  addEntry(Qt::Key_Left , +BITS_Ansi +BITS_AppCuKeys, "\033OD");
+  addEntry(Qt::Key_Up   , bOn(BITS_Ansi) | bOn(BITS_AppCuKeys), "\033OA");
+  addEntry(Qt::Key_Down , bOn(BITS_Ansi) | bOn(BITS_AppCuKeys), "\033OB");
+  addEntry(Qt::Key_Right, bOn(BITS_Ansi) | bOn(BITS_AppCuKeys), "\033OC");
+  addEntry(Qt::Key_Left , bOn(BITS_Ansi) | bOn(BITS_AppCuKeys), "\033OD");
 
-  addEntry(Qt::Key_Up   , +BITS_Ansi -BITS_AppCuKeys, "\033[A");
-  addEntry(Qt::Key_Down , +BITS_Ansi -BITS_AppCuKeys, "\033[B");
-  addEntry(Qt::Key_Right, +BITS_Ansi -BITS_AppCuKeys, "\033[C");
-  addEntry(Qt::Key_Left , +BITS_Ansi -BITS_AppCuKeys, "\033[D");
+  addEntry(Qt::Key_Up   , bOn(BITS_Ansi) | bOff(BITS_AppCuKeys), "\033[A");
+  addEntry(Qt::Key_Down , bOn(BITS_Ansi) | bOff(BITS_AppCuKeys), "\033[B");
+  addEntry(Qt::Key_Right, bOn(BITS_Ansi) | bOff(BITS_AppCuKeys), "\033[C");
+  addEntry(Qt::Key_Left , bOn(BITS_Ansi) | bOff(BITS_AppCuKeys), "\033[D");
 
-// linux functions keys F1 -BITS_F5 differ from xterm
+// linux functions keys F1 bOff(BITS_F5 differ from xterm
 //
 // F1, "\033[[A" 
 // F2, "\033[[B" 
@@ -173,19 +180,25 @@ void KeyTrans::addXtermKeys()
   addEntry(Qt::Key_Next  , 0, "\033[6~");
   addEntry(Qt::Key_Insert, 0, "\033[2~");
 
-// Keypad -BITS_Enter. See comment on Return above.
+// Keypad bOff(BITS_Enter. See comment on Return above.
 
-  addEntry(Qt::Key_Enter,  +BITS_NewLine, "\r\n");
-  addEntry(Qt::Key_Enter,  -BITS_NewLine, "\r");
+  addEntry(Qt::Key_Enter,  bOn(BITS_NewLine), "\r\n");
+  addEntry(Qt::Key_Enter,  bOff(BITS_NewLine), "\r");
 
 // FIXME: get keypad somehow
-//Space +BITS_Control, "\x00");
-//Print +BITS_Control, "");
+//Space bOn(BITS_Control, "\x00");
+//Print bOn(BITS_Control, "");
 
 // Other strings are emitted by konsole, too.
 }
 
 // material needed for parsing the config file.
+
+/* ------------------------------------------------------------------------- */
+/*                                                                           */
+/* Scanner for keyboard configuration                                        */
+/*                                                                           */
+/* ------------------------------------------------------------------------- */
 
 void defKeySym(const char*, int)
 {

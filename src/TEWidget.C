@@ -838,6 +838,7 @@ bool TEWidget::eventFilter( QObject *, QEvent *e )
     actSel=0; // Key stroke implies a screen update, so TEWidget won't
               // know where the current selection is.
  
+    // FIXME: keyboard procession is going to be localized in TEmuVT102.
     switch (ke->state() | (ke->key() << 8))
     {
       case ShiftButton|(Key_PageUp   << 8) : 

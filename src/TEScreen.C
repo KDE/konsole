@@ -19,8 +19,8 @@
 
     This class implements the operations of the terminal emulation framework.
     It is a complete passive device, driven by the emulation decoder 
-    (VT102Emulation). By this it forms infact an ADT, that mainly defines
-    operations on a rectangular image.
+    (TEmuVT102). By this it forms in fact an ADT, that defines operations
+    on a rectangular image.
 
     It does neither know how to display its image nor about escape sequences.
     It is further independent of the underlying toolkit. By this, one can even
@@ -29,7 +29,8 @@
     Since the operations are called by a specific emulation decoder, one may
     collect their different operations here.
 
-    The state manipulated by the operations is mainly kept in `image'.
+    The state manipulated by the operations is mainly kept in `image', though
+    it is a little more complex bejond this. See the header file of the class.
 
     \sa TEWidget \sa VT102Emulation
 */
@@ -184,7 +185,6 @@ void TEScreen::setMargins(int top, int bot)
 void TEScreen::index()
 //=IND
 {
-  //FIXME: below bmargin?
   if (cuY >= bmargin)
   {
     if (tmargin == 0 && bmargin == lines-1) addHistLine(); // hist.history
@@ -204,7 +204,6 @@ void TEScreen::index()
 void TEScreen::reverseIndex()
 //=RI
 {
-  //FIXME: above tmargin?
   if (cuY <= tmargin) scrollDown(tmargin,1); else cuY -= 1;
 }
 

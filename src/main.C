@@ -1,6 +1,6 @@
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* [main.C]                 Testbed for TE framework                          */
+/* [main.C]                        Konsole                                    */
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
@@ -13,11 +13,11 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-/*! \class TEDemo
+/*! \class Konsole
 
-    \brief Konsole's main program
+    \brief Konsole's main class and program
 
-    The class TEDemo handles the application level. Mainly, it is responsible
+    The class Konsole handles the application level. Mainly, it is responsible
     for the configuration, taken from several files, from the command line
     and from the user. It hardly does anything interesting.
 */
@@ -130,13 +130,16 @@ const char *fonts[] = {
 #define TOPFONT ((sizeof(fonts)/sizeof(char*))-1)
 
 static QIntDict<TESession> no2session;
-static QPtrDict<void>      session2no;
+//static QPtrDict<void>      session2no;
+static QPtrDict<QObject>      session2no;
 static int session_no = 0;
 
 static QIntDict<KSimpleConfig> no2command;
 static int cmd_serial = 0;
 
-TEDemo::TEDemo(const QString& name, QStrList & _args, int login_shell, int histon) : KTMainWindow(name), args(_args)
+Konsole::Konsole(const QString& name,
+                 const char* _pgm, QStrList & _args,
+                 int histon) : KTMainWindow(name), pgm(_pgm), args(_args)
 {
   se = 0L;
   rootxpm = 0L;
@@ -193,7 +196,7 @@ TEDemo::TEDemo(const QString& name, QStrList & _args, int login_shell, int histo
 
   // construct initial session ///////////////////////////////////////////////
 
-  TESession* initial = new TESession(this,te,args,"xterm",login_shell);
+  TESession* initial = new TESession(this,te,pgm,args,"xterm");
 
   title = (args.count() && (kapp->caption() == PACKAGE))
         ? QString(args.at(0))  // program executed in the title bar
@@ -223,7 +226,7 @@ TEDemo::TEDemo(const QString& name, QStrList & _args, int login_shell, int histo
     guest widget. Call with (0,0) for setting default size.
 */
 
-void TEDemo::setColLin(int columns, int lines)
+void Konsole::setColLin(int columns, int lines)
 {
   if (columns==0 && lines==0)
   {
@@ -243,7 +246,7 @@ void TEDemo::setColLin(int columns, int lines)
   adjustSize();
 }
 
-TEDemo::~TEDemo()
+Konsole::~Konsole()
 {
 //FIXME: close all session properly and clean up
 }
@@ -254,13 +257,13 @@ TEDemo::~TEDemo()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TEDemo::dragEnterEvent(QDragEnterEvent* e) 
+void Konsole::dragEnterEvent(QDragEnterEvent* e) 
 {
   e->accept(QTextDrag::canDecode(e) || 
 	    QUriDrag::canDecode(e));
 }
 
-void TEDemo::dropEvent(QDropEvent* event)
+void Konsole::dropEvent(QDropEvent* event)
 {
     // The current behaviour when url(s) are dropped is
     // * if there is only ONE url and if it's a LOCAL one, ask for paste or cd
@@ -300,7 +303,7 @@ void TEDemo::dropEvent(QDropEvent* event)
     se->getEmulation()->sendString(dropText.latin1()); // Paste it
 }
 
-void TEDemo::drop_menu_activated(int item)
+void Konsole::drop_menu_activated(int item)
 {
   switch (item)
   {
@@ -323,9 +326,9 @@ void TEDemo::drop_menu_activated(int item)
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TEDemo::configureRequest(TEWidget* te, int state, int x, int y)
+void Konsole::configureRequest(TEWidget* te, int state, int x, int y)
 {
-//printf("TEDemo::configureRequest(_,%d,%d)\n",x,y);
+//printf("Konsole::configureRequest(_,%d,%d)\n",x,y);
   ( (state & ShiftButton  ) ? m_sessions :
     (state & ControlButton) ? m_file :
                               m_options  )
@@ -337,7 +340,7 @@ void TEDemo::configureRequest(TEWidget* te, int state, int x, int y)
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TEDemo::makeStatusbar()
+void Konsole::makeStatusbar()
 {
 //statusbar = new KStatusBar(this);
 //setStatusBar(statusbar);
@@ -348,7 +351,7 @@ void TEDemo::makeStatusbar()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TEDemo::makeMenu()
+void Konsole::makeMenu()
 {
   // options (taken from kvt) //////////////////////////////////////
 
@@ -459,7 +462,7 @@ void TEDemo::makeMenu()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TEDemo::saveProperties(KConfig* config)
+void Konsole::saveProperties(KConfig* config)
 {
   config->setGroup("options"); // bad! will no allow us to support multi windows
   config->writeEntry("menubar visible",b_menuvis);
@@ -485,7 +488,7 @@ void TEDemo::saveProperties(KConfig* config)
 // Called by constructor (with config = kapp->config())
 // and by session-management (with config = sessionconfig).
 // So it has to apply the settings when reading them.
-void TEDemo::readProperties(KConfig* config)
+void Konsole::readProperties(KConfig* config)
 {
   config->setGroup("options"); // bad! will no allow us to support multi windows
 /*FIXME: (merging) state of material below unclear.*/
@@ -522,7 +525,7 @@ void TEDemo::readProperties(KConfig* config)
   // (geometry stuff removed) done by KTMainWindow for SM, and not needed otherwise
 
   // Options that should be applied to all sessions /////////////
-  // (1) set menu items and TEDemo members
+  // (1) set menu items and Konsole members
   setBsHack(config->readBoolEntry("BS hack",TRUE));
   QFont tmpFont("fixed");
   defaultFont = config->readFontEntry("defaultfont", &tmpFont);
@@ -551,7 +554,7 @@ void TEDemo::readProperties(KConfig* config)
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TEDemo::pixmap_menu_activated(int item)
+void Konsole::pixmap_menu_activated(int item)
 {
   if (item <= 1) pmPath = "";
   QPixmap pm(pmPath.data());
@@ -595,7 +598,7 @@ void TEDemo::pixmap_menu_activated(int item)
   }
 }
 
-void TEDemo::scrollbar_menu_activated(int item)
+void Konsole::scrollbar_menu_activated(int item)
 {
   m_scrollbar->setItemChecked(n_scroll,FALSE);
   m_scrollbar->setItemChecked(item,    TRUE);
@@ -603,7 +606,7 @@ void TEDemo::scrollbar_menu_activated(int item)
   te->setScrollbarLocation(item);
 }
 
-void TEDemo::font_menu_activated(int item)
+void Konsole::font_menu_activated(int item)
 {
   assert(se);
 
@@ -616,7 +619,7 @@ void TEDemo::font_menu_activated(int item)
   activateSession((int)session2no.find(se)); // for attribute change
 }
 
-void TEDemo::schema_menu_activated(int item)
+void Konsole::schema_menu_activated(int item)
 {
   assert(se);
   //FIXME: save schema name
@@ -624,7 +627,7 @@ void TEDemo::schema_menu_activated(int item)
   activateSession((int)session2no.find(se)); // for attribute change
 }
 
-void TEDemo::setFont(int fontno)
+void Konsole::setFont(int fontno)
 {
   QFont f;
   if (fontno == 0)
@@ -652,7 +655,7 @@ void TEDemo::setFont(int fontno)
   if (se) se->setFontNo(fontno);
 }
 
-void TEDemo::setMenuVisible(bool visible)
+void Konsole::setMenuVisible(bool visible)
 {
   b_menuvis = visible;
   m_options->setItemChecked(1,b_menuvis);
@@ -660,7 +663,7 @@ void TEDemo::setMenuVisible(bool visible)
   updateRects();
 }
 
-void TEDemo::setFrameVisible(bool visible)
+void Konsole::setFrameVisible(bool visible)
 {
   b_framevis = visible;
   m_options->setItemChecked(2,b_framevis);
@@ -669,7 +672,7 @@ void TEDemo::setFrameVisible(bool visible)
                      : QFrame::NoFrame );
 }
 
-void TEDemo::setHistory(bool on)
+void Konsole::setHistory(bool on)
 {
 HERE; printf("setHistory: %s, having%s session.\n",on?"on":"off",se?"":" no");
   b_scroll = on;
@@ -677,7 +680,7 @@ HERE; printf("setHistory: %s, having%s session.\n",on?"on":"off",se?"":" no");
   if (se) se->setHistory( b_scroll );
 }
 
-void TEDemo::setBsHack(bool bshack)
+void Konsole::setBsHack(bool bshack)
 {
   b_bshack = bshack;
   m_options->setItemChecked(4,b_bshack);
@@ -689,7 +692,7 @@ void TEDemo::setBsHack(bool bshack)
       ((TEmuVt102*)se->getEmulation())->resetMode(MODE_BsHack);
 }
 
-void TEDemo::opt_menu_activated(int item)
+void Konsole::opt_menu_activated(int item)
 {
   switch( item )
   {
@@ -715,13 +718,13 @@ void TEDemo::opt_menu_activated(int item)
 
 // --| color selection |-------------------------------------------------------
 
-void TEDemo::changeColumns(int columns)
+void Konsole::changeColumns(int columns)
 {
   setColLin(columns,24); // VT100, FIXME: keep lines?
   te->update();
 }
 
-void TEDemo::size_menu_activated(int item)
+void Konsole::size_menu_activated(int item)
 {
   switch (item)
   {
@@ -733,7 +736,7 @@ void TEDemo::size_menu_activated(int item)
   }
 }
 
-void TEDemo::notifySize(int lines, int columns)
+void Konsole::notifySize(int lines, int columns)
 {
     //  printf("notifySize(%d,%d)\n",lines,columns);
 /*
@@ -752,19 +755,19 @@ void TEDemo::notifySize(int lines, int columns)
   if (n_render >= 3) pixmap_menu_activated(n_render);
 }
 
-void TEDemo::setHeader()
+void Konsole::setHeader()
 {
   setCaption(title);
 }
 
-void TEDemo::changeTitle(int, const QString& s)
+void Konsole::changeTitle(int, const QString& s)
 {
   title = s; setHeader();
 }
 
 // --| help |------------------------------------------------------------------
 
-void TEDemo::tecRef()
+void Konsole::tecRef()
 {
   kapp->invokeHTMLHelp(PACKAGE "/techref.html","");
 }
@@ -780,7 +783,7 @@ void TEDemo::tecRef()
 //         make the drawEvent.
 //       - font, background image and color palette should be set in one go.
 
-void TEDemo::activateSession(int sn)
+void Konsole::activateSession(int sn)
 {
   TESession* s = no2session.find(sn);
   if (se)
@@ -809,7 +812,7 @@ void TEDemo::activateSession(int sn)
   setHeader();
 }
 
-void TEDemo::runSession(TESession* s)
+void Konsole::runSession(TESession* s)
 {
   int session_no = (int)session2no.find(s);
   activateSession(session_no);
@@ -819,15 +822,15 @@ void TEDemo::runSession(TESession* s)
   QTimer::singleShot(100,s,SLOT(run()));
 }
 
-void TEDemo::addSession(TESession* s)
+void Konsole::addSession(TESession* s)
 {
   session_no += 1;
   no2session.insert(session_no,s);
-  session2no.insert(s,(void*)session_no);
+  session2no.insert(s,(QObject*)session_no);
   m_sessions->insertItem(s->Title(), session_no);
 }
 
-void TEDemo::newSession(int i)
+void Konsole::newSession(int i)
 {
   const char* shell = getenv("SHELL");
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
@@ -860,7 +863,7 @@ void TEDemo::newSession(int i)
   args.append("-c");
   args.append(cmd);
 
-  TESession* s = new TESession(this,te,args,emu.data(),0);
+  TESession* s = new TESession(this,te,shell,args,emu.data());
   s->setFontNo(fno);
   s->setSchemaNo(schmno);
   s->setTitle(txt.data());
@@ -875,7 +878,7 @@ void TEDemo::newSession(int i)
 //       this routine might be called before
 //       session swap is completed.
 
-void TEDemo::doneSession(TESession* s, int )
+void Konsole::doneSession(TESession* s, int )
 {
 //printf("%s(%d): Exited:%d ExitStatus:%d\n",__FILE__,__LINE__,WIFEXITED(status),WEXITSTATUS(status));
 #if 0 // die silently
@@ -920,7 +923,7 @@ void TEDemo::doneSession(TESession* s, int )
 
 // --| Session support |-------------------------------------------------------
 
-void TEDemo::addSessionCommand(const char* path)
+void Konsole::addSessionCommand(const char* path)
 {
   KSimpleConfig* co = new KSimpleConfig(path,TRUE);
   co->setDesktopGroup();
@@ -937,7 +940,7 @@ void TEDemo::addSessionCommand(const char* path)
   no2command.insert(cmd_serial,co);
 }
 
-void TEDemo::loadSessionCommands()
+void Konsole::loadSessionCommands()
 {
   QStringList lst = KGlobal::dirs()->findAllResources("appdata", "*.desktop", false, true);
   
@@ -947,19 +950,19 @@ void TEDemo::loadSessionCommands()
 
 // --| Schema support |-------------------------------------------------------
 
-void TEDemo::setSchema(int numb)
+void Konsole::setSchema(int numb)
 {
   ColorSchema* s = ColorSchema::find(numb);
   if (s) setSchema(s);
 }
 
-void TEDemo::setSchema(const char* path)
+void Konsole::setSchema(const char* path)
 {
   ColorSchema* s = ColorSchema::find(path);
   if (s) setSchema(s);
 }
 
-void TEDemo::setSchema(const ColorSchema* s)
+void Konsole::setSchema(const ColorSchema* s)
 {
   if (!s) return;
   m_schema->setItemChecked(curr_schema,FALSE);
@@ -993,14 +996,7 @@ int main(int argc, char* argv[])
   bool login_shell = false;
   bool welcome = true;
   bool histon = true;
-  const char* shell = getenv("SHELL");
   const char* wname = PACKAGE;
-  if (shell == NULL || *shell == '\0') shell = "/bin/sh";
-
-  QCString sz = "";
-
-  QStrList eargs;
-  eargs.append(shell);
 
   KAboutData aboutData( PACKAGE, I18N_NOOP("Konsole"), 
     VERSION, description, KAboutData::License_GPL, 
@@ -1015,19 +1011,35 @@ int main(int argc, char* argv[])
   kimgioRegister(); // add io for additional image formats
 
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+  QStrList eargs;
 
-  if (!args->getOption("e").isEmpty())
+  const char* shell = getenv("SHELL");
+  if (shell == NULL || *shell == '\0') shell = "/bin/sh";
+  if (args->getOption("e").isEmpty())
+  {
+    char* t = strrchr(shell,'/');
+    if (args->isSet("ls") && t) // see sh(1)
+    {
+      t = strdup(t); *t = '-';
+      eargs.append(t);
+    }
+    else
+      eargs.append(shell);
+  }
+  else
   {
      if (args->isSet("ls"))
         KCmdLineArgs::usage(i18n("You can't use BOTH -ls and -e.\n"));
+     shell = args->getOption("e");
      eargs.clear();
-     eargs.append( args->getOption("e"));
+     eargs.append(shell);
      for(int i=0; i < args->count(); i++)
         eargs.append( args->arg(i) );
   }
 
-  sz = args->getOption("vt_sz");
 
+  QCString sz = "";
+  sz = args->getOption("vt_sz");
   histon = args->isSet("hist");
   wname = args->getOption("name");
   login_shell = args->isSet("ls");
@@ -1064,11 +1076,11 @@ int main(int argc, char* argv[])
     sessionconfig->setGroup("options");
     sessionconfig->readListEntry("konsolearguments", eargs);
     wname = sessionconfig->readEntry("class",wname).data();
-    RESTORE( TEDemo(wname,eargs,login_shell,histon) )
+    RESTORE( Konsole(wname,shell,eargs,histon) )
   }
   else
   {  
-    TEDemo*  m = new TEDemo(wname,eargs,login_shell,histon);
+    Konsole*  m = new Konsole(wname,shell,eargs,histon);
     m->setColLin(c,l); // will use default height and width if called with (0,0)
 
     if (welcome)
@@ -1082,7 +1094,7 @@ int main(int argc, char* argv[])
   return a.exec();
 }
 
-void TEDemo::setFullScreen(bool on)
+void Konsole::setFullScreen(bool on)
 {
   if (on == b_fullscreen) return;
   if (on)

@@ -13,7 +13,7 @@
     of the abilities of the framework - multible sessions.
 */
 
-TESession::TESession(KTMainWindow* main, TEWidget* te, QStrList & _args, const char* term, int login_session) : schema_no(0), font_no(3), args(_args), login_shell(login_session)
+TESession::TESession(KTMainWindow* main, TEWidget* te, const char* _pgm, QStrList & _args, const char* term) : schema_no(0), font_no(3), pgm(_pgm), args(_args)
 {
   sh = new TEPty();
   em = new TEmuVt102(te);
@@ -43,7 +43,7 @@ TESession::TESession(KTMainWindow* main, TEWidget* te, QStrList & _args, const c
 
 void TESession::run()
 {
-  sh->run(args,term,login_shell,FALSE);
+  sh->run(pgm,args,term,FALSE);
 }
 
 void TESession::kill(int signal)

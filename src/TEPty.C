@@ -34,9 +34,7 @@
     publish the SIGCHLD signal if not related to an instance.
 
     clearify TEPty::done vs. TEPty::~TEPty semantics.
-
-    remove the `login_shell' parameter from the TEPty::TEPty.
-    Move parameters from TEPty::run to TEPty::TEPty.
+    check if pty is restartable via run after done.
 
     \par Pseudo terminals
 
@@ -207,11 +205,11 @@ const char* TEPty::deviceName()
 /*!
     start the client program.
 */
-int TEPty::run(QStrList & args, const char* term, int login_shell, int addutmp)
+int TEPty::run(const char* pgm, QStrList & args, const char* term, int addutmp)
 {
   comm_pid = fork();
   if (comm_pid <  0) { fprintf(stderr,"Can't fork\n"); return -1; }
-  if (comm_pid == 0) makePty(ttynam,args,term,login_shell,addutmp);
+  if (comm_pid == 0) makePty(ttynam,pgm,args,term,addutmp);
   if (comm_pid >  0) ptys.insert(comm_pid,this);
   return 0;
 }
@@ -307,8 +305,8 @@ int TEPty::openPty()
 }
 
 //! only used internally. See `run' for interface
-void TEPty::makePty(const char* dev, QStrList & args, const char* term, int login_shell, int addutmp)
-{ int sig; char* t;
+void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const char* term, int addutmp)
+{ int sig;
 
   if (fd < 0) // no master pty could be opened
   {
@@ -425,27 +423,16 @@ void TEPty::makePty(const char* dev, QStrList & args, const char* term, int logi
   for (i = 0; i<args.count(); i++) argv[i] = strdup(args.at(i));
   argv[i] = 0L;
 
-  // setup for login shells
-  char *f = argv[0];
-  if ( login_shell )                   // see sh(1)
-  {
-    t = strrchr( argv[0], '/' );
-    t = strdup(t);
-    *t = '-';
-    argv[0] = t;
-  }
-
   ioctl(0,TIOCSWINSZ,(char *)&wsize);  // set screen size
 
   // finally, pass to the new program
-  execvp(f, argv);
+  execvp(pgm, argv);
   perror("exec failed");
   exit(1);                             // control should never come here.
 }
 
 /*! 
     Create an instance.
-    \param _login_shell is a hack. FIXME: remove.
 */
 TEPty::TEPty()
 {

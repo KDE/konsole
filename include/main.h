@@ -1,6 +1,6 @@
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
-/* [main.h]                 Testbed for TE framework                          */
+/* [main.h]                         Konsole                                   */
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                                                                            */
@@ -33,13 +33,13 @@ class QDropEvent;
 
 class KRootPixmap;
 
-class TEDemo : public KTMainWindow
+class Konsole : public KTMainWindow
 { Q_OBJECT
 
 public:
 
-  TEDemo(const QString& name, QStrList & _args, int login_shell, int histon);
-  ~TEDemo();
+  Konsole(const QString& name, const char* pgm, QStrList & _args, int histon);
+  ~Konsole();
   void setColLin(int columns, int lines);
   void setFullScreen(bool on);
 
@@ -129,7 +129,8 @@ private:
   int         curr_schema; // current schema no
   QFont       defaultFont;
 
-  QStrList args;
+  const char* pgm;
+  QStrList    args;
 
   bool        b_fullscreen;
   QRect       _saveGeometry;

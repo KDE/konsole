@@ -36,7 +36,7 @@ KWrited::KWrited() : QObject()
   //       program running on the device.
   //       Have to make a new run, i guess.
   QStrList cmd; cmd.append("/bin/cat"); // dummy
-  pty->run(cmd,"dump",FALSE,TRUE);
+  pty->run("/bin/cat",cmd,"dump",TRUE);
 #endif
 
   wid->setCaption(QString("KWrited - listening on device ") + pty->deviceName());

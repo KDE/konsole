@@ -16,6 +16,7 @@
 #include "TEWidget.h"
 #include "TEScreen.h"
 #include "TEmulation.h"
+#include "keytrans.h"
 #include <qtimer.h>
 #include <stdio.h>
 #include <qtextcodec.h>
@@ -131,6 +132,8 @@ protected:
   QTextCodec* codec;
   QTextCodec* localeCodec;
   QTextDecoder* decoder;
+
+  KeyTrans keytrans;
 };
 
 #endif // ifndef ANSIEMU_H

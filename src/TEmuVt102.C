@@ -68,6 +68,7 @@ TEmuVt102::TEmuVt102(TEWidget* gui)
 {
   QObject::connect(gui,SIGNAL(mouseSignal(int,int,int)),
                    this,SLOT(onMouse(int,int,int)));
+  keytrans.addXtermKeys();
   initTokenizer();
   reset();
 }
@@ -724,13 +725,23 @@ void TEmuVt102::onMouse( int cb, int cx, int cy )
 // Keyboard Handling ------------------------------------------------------- --
 
 #define KeyComb(B,K) ((ev->state() & (B)) == (B) && ev->key() == (K))
+#define encodeMode(M,B) BITS(B,getMode(M))
 
 /*
+   Keyboard event handling has been simplified somewhat by pushing
+   the complications towards a configuration file [see KeyTrans class].
+
+   This simplifies it so, that we either find a specified string or
+   operation of the keystroke or we emit string delivered by QT for
+   it. The later omits most grey keys, but processes the control characters
+   properly.
+
+   Additionally to this, the QT sequence is preceeded by the ESC character
+   if the ALT key is pressed, too.
 */
 
 void TEmuVt102::onKeyPress( QKeyEvent* ev )
-{ int key;
-
+{
   if (!connected) return; // someone else gets the keys
 
   // revert to non-history when typing
@@ -739,90 +750,22 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
 
 //printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().length(),ev->text().length()?ev->text().ascii()[0]:0);
 
-  if (ev->text().length() == 1 && (ev->state() & AltButton))
-    sendString("\033"); // ESC, this is the ALT prefix
+  QString seq = keytrans.findEntry(ev->key(), encodeMode(MODE_NewLine  , BITS_NewLine   ) +
+                                              encodeMode(MODE_BsHack   , BITS_BsHack    ) +
+                                              encodeMode(MODE_Ansi     , BITS_Ansi      ) +
+                                              encodeMode(MODE_AppCuKeys, BITS_AppCuKeys ) 
+                                            ); //FIXME: add shift, alt, cntl.
+  if (!seq.isNull()) { sendString(seq.ascii()); return; }
+  //FIXME: two more build-in keys, five more in TEWidget.
+  // we have to allow operations and string containing the zero byte to handle these.
+  if (KeyComb(ControlButton,Key_Space)) /* ctrl-Space == ctrl-@  */ { sndBlock("\x00",1); return; }
+  if (KeyComb(ControlButton,Key_Print)) /* ctrl-print == sys-req */ { reportAnswerBack(); return; }
 
-  key = ev->key();
-  if (0x1000 <= key && key <= 0x10ff)
-#define USENEWKEYSTUFF 0
-#if USENEWKEYSTUFF
-//This is not yet ready for prime time...
+  if (!ev->text().isEmpty())                         // Fall back keyboard handling
   {
-     Qstring seq = keytable.find(key, encodeMode(MODE_NewLine  , BITS_NewLine   ) +
-                                      encodeMode(MODE_BsHack   , BITS_BsHack    ) +
-                                      encodeMode(MODE_Ansi     , BITS_Ansi      ) +
-                                      encodeMode(MODE_AppCuKeys, BITS_AppCuKeys ) );
-     if (!seq.isNull()) { sendString(seq.ascii()); return; }
-  }
-#else
-  switch (key)
-  {
-    case Key_Escape    : sendString("\033"); return;
-    case Key_Tab       : sendString("\t"); return;
-
-    case Key_Return    : sendString(getMode(MODE_NewLine)?"\r\n"   :"\r"  ); return;
-    case Key_Backspace : sendString(getMode(MODE_BsHack )?"\x7f"   :"\x08"); return;
-    case Key_Delete    : sendString(getMode(MODE_BsHack )?"\033[3~":"\x7f"); return;
-
-    case Key_Up        : sendString(!getMode(MODE_Ansi)?"\033A":getMode(MODE_AppCuKeys)?"\033OA":"\033[A"); return;
-    case Key_Down      : sendString(!getMode(MODE_Ansi)?"\033B":getMode(MODE_AppCuKeys)?"\033OB":"\033[B"); return;
-    case Key_Right     : sendString(!getMode(MODE_Ansi)?"\033C":getMode(MODE_AppCuKeys)?"\033OC":"\033[C"); return;
-    case Key_Left      : sendString(!getMode(MODE_Ansi)?"\033D":getMode(MODE_AppCuKeys)?"\033OD":"\033[D"); return;
-
-    //FIXME: we are about to replace the Xterm variable here by a more flexible mechanism.
-#define Xterm TRUE //FIXME: Earlier: (!strcmp(emulation.data(),"xterm"))
-    //                                        XTERM      LINUX
-    case Key_F1        : sendString(Xterm? "\033[11~": "\033[[A" ); return;
-    case Key_F2        : sendString(Xterm? "\033[12~": "\033[[B" ); return;
-    case Key_F3        : sendString(Xterm? "\033[13~": "\033[[C" ); return;
-    case Key_F4        : sendString(Xterm? "\033[14~": "\033[[D" ); return;
-    case Key_F5        : sendString(Xterm? "\033[15~": "\033[[E" ); return;
-#undef Xterm
-
-    case Key_F6        : sendString("\033[17~" ); return;
-    case Key_F7        : sendString("\033[18~" ); return;
-    case Key_F8        : sendString("\033[19~" ); return;
-    case Key_F9        : sendString("\033[20~" ); return;
-    case Key_F10       : sendString("\033[21~" ); return;
-    case Key_F11       : sendString("\033[23~" ); return;
-    case Key_F12       : sendString("\033[24~" ); return;
-
-    case Key_Enter     : sendString(getMode(MODE_NewLine)?"\r\n"   :"\r"  ); return;
-    case Key_Home      : sendString("\033[H"   ); return;
-    case Key_End       : sendString("\033[F"   ); return;
-    case Key_Prior     : sendString("\033[5~"  ); return;
-    case Key_Next      : sendString("\033[6~"  ); return;
-    case Key_Insert    : sendString("\033[2~"  ); return;
-    //FIXME: get keypad somehow
-    default            : return;
-  }
-#endif
-  if (KeyComb(ControlButton,Key_Space)) // ctrl-Space == ctrl-@
-  {
-    sndBlock("\x00",1); return;
-  }
-  if (KeyComb(ControlButton,Key_Print)) // ctrl-print == sys-req
-  {
-    reportAnswerBack(); return;
-  }
-
-  if (!ev->text().isEmpty())
-  {
-    // Note: there 3 ways in rxvt to handle the Meta (Alt) key
-    //       1) ignore it
-    //       2) preceed the keycode by ESC (what we do here)
-    //       3) set the 8th bit of each char in string
-    //          (which may fail for 8bit (european) characters.
-    QCString s = codec->fromUnicode(ev->text()); // encode for application
-    emit sndBlock(s.data(),s.length());          // we may well have s.length() > 1 
-    return;
-  }
-
-  if (0 < ev->ascii() && ev->ascii() < 32)
-  { char c[1];
-    c[0] = ev->ascii();
-printf("control: %d\n",ev->ascii());
-    emit sndBlock((char*)c,1);
+    if (ev->state() & AltButton) sendString("\033"); // ESC, this is the ALT prefix
+    QCString s = codec->fromUnicode(ev->text());     // encode for application
+    emit sndBlock(s.data(),s.length());              // we may well have s.length() > 1 
     return;
   }
 }

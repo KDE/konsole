@@ -37,19 +37,22 @@ Q_OBJECT
 
   public:
 
-    int run(QStrList & args, const char* term, int login_shell, int addutmp);
+    /*!
+        having a `run' separate from the constructor allows to make
+        the necessary connections to the signals and slots of the
+        instance before starting the execution of the client.
+    */
+    int run(const char* pgm, QStrList & args, const char* term, int addutmp);
+
     void kill(int signal);
-
-  public:
-
-    void send_byte(char s);
-    void send_string(const char* s);
 
   public slots:
 
     void send_bytes(const char* s, int len);
+    void setSize(int lines, int columns);
 
   signals:
+
     /*!
         emitted when the client program terminates.
         \param status the wait(2) status code of the terminated client program.
@@ -63,23 +66,22 @@ Q_OBJECT
     */
     void block_in(const char* s, int len);
 
-  private slots:
-
-    void DataReceived(int);
-
-  public slots:
-
-    void setSize(int lines, int columns);
-
   public:
+
+    void send_byte(char s);
+    void send_string(const char* s);
 
     const char* deviceName();
 
   private:
 
-    void makePty(const char* dev, QStrList & args, const char* term, int login_shell, int addutmp);
+    void makePty(const char* dev, const char* pgm, QStrList & args, const char* term, int addutmp);
     int  openPty();
     void donePty(int status);
+
+  private slots:
+
+    void DataReceived(int);
 
   private:
 

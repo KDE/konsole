@@ -166,7 +166,6 @@ private: // helper
 
     void addHistLine();
 
-    void swapCursor();
     void initTabStops();
 
     void effectiveRendition();
@@ -174,51 +173,50 @@ private: // helper
 
 private:
 
-    bool* tabstops;
+    /*
+       The state of the screen is more complex as one would
+       expect first. The screem does really do part of the
+       emulation providing state informations in form of modes,
+       margins, tabulators, cursor etc.
 
-    // rendition info
-    UINT8 cu_fg;
-    UINT8 cu_bg;
-    UINT8 cu_re;      // rendition
-
-    UINT8 ef_fg;
-    UINT8 ef_bg;
-    UINT8 ef_re;      // effective rendition
-    
-    // cursor location
-    int cuX;
-    int cuY;
-
-    // save cursor & rendition  --------------------
-
-    // rendition info
-    UINT8 sa_cu_re;
-    UINT8 sa_cu_fg;
-    UINT8 sa_cu_bg;
-
-    // cursor location
-    int sa_cuX;
-    int sa_cuY;
-
-    // margins ----------------
-
-    int bmargin;
-    int tmargin;
-
-    // states ----------------
-
-    ScreenParm currParm;
-    ScreenParm saveParm;
+       Even more unexpected are variables to save and restore
+       parts of the state.
+    */
 
     // screen image ----------------
+
     int lines;
     int columns;
     ca *image; // [lines][columns]
 
     // history buffer ---------------
 
-    int histCursor;   // display position relative to start of histBuffer
+    int histCursor;   // display position relative to start of the history buffer
     HistoryScroll hist;
+    
+    // cursor location
+
+    int cuX;
+    int cuY;
+
+    // cursor color and rendition info
+
+    UINT8 cu_fg;      // foreground
+    UINT8 cu_bg;      // background
+    UINT8 cu_re;      // rendition
+
+    // margins ----------------
+
+    int tmargin;      // top margin
+    int bmargin;      // bottom margin
+
+    // states ----------------
+
+    ScreenParm currParm;
+
+    // ----------------------------
+
+    bool* tabstops;
 
     // selection -------------------
 
@@ -226,6 +224,30 @@ private:
     int sel_TL;    // TopLeft Location.
     int sel_BR;    // Bottom Right Location.
 
+    // effective colors and rendition ------------
+
+    UINT8 ef_fg;      // These are derived from
+    UINT8 ef_bg;      // the cu_* variables above
+    UINT8 ef_re;      // to speed up operation
+
+    //
+    // save cursor, rendition & states ------------
+    // 
+
+    // cursor location
+
+    int sa_cuX;
+    int sa_cuY;
+
+    // rendition info
+
+    UINT8 sa_cu_re;
+    UINT8 sa_cu_fg;
+    UINT8 sa_cu_bg;
+
+    // modes
+
+    ScreenParm saveParm;
 };
 
 #endif // TESCREEN_H

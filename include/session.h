@@ -26,8 +26,9 @@ class TESession : public QObject
 
 public:
 
-  TESession(KTMainWindow* main, TEWidget* w, QStrList & _args,
-	const char* term, int login_session);
+  TESession(KTMainWindow* main, TEWidget* w,
+            const char* pgm, QStrList & _args,
+	    const char* term);
   ~TESession();
 
 public:
@@ -66,14 +67,14 @@ private:
   TEWidget*      te;
   TEmulation*    em;
 
-  int            schema_no; // no exactly the right place
-  int            font_no;   // no exactly the right place
-
-  char*          term;
-  QStrList       args;
+  int            schema_no;
+  int            font_no;
   QString        title;
 
-  int            login_shell;
+  const char*    pgm;
+  QStrList       args;
+
+  char*          term;
 };
 
 #endif
