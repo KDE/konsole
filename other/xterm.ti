@@ -132,7 +132,7 @@ xterm-basic|xterm terminal base (X Window System),
 	kf19=\E[33~, kf20=\E[34~,
 
 # Insert, home, end, delete, next page, previous page, backspace, enter
-	kich1=\E[2~, khome=\E[7~, kend=\E[8~,
+	kich1=\E[2~, khome=\E[H, kend=\E[F,
 	kdch1=\E[3~, knp=\E[6~, kpp=\E[5~,
 	kbs=\b, kent=\EOM, 
 
