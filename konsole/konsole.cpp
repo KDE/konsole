@@ -155,7 +155,7 @@ template class QIntDict<KSimpleConfig>;
 template class QPtrDict<KRadioAction>;
 
 
-const char * const fonts[] = {
+static const char * const fonts[] = {
  "13",
  "7",   // tiny font, never used
  "10",  // small font
