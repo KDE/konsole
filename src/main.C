@@ -405,8 +405,12 @@ void TEDemo::saveProperties(KConfig* config)
   config->writeEntry("schema",s_schema);
   config->writeEntry("scrollbar",n_scroll);
   config->writeEntry("geometry", geometry()); //FIXME: we get wrong geometry info here
-                                              //NOTE: I'm running a borderless
-                                              //      konsole in MacOS style.
+                                              //NOTE : I first thought that
+                                              //       problem depends on my
+                                              //       strange configuration.
+                                              //       I'm running a borderless
+                                              //       konsole in MacOS style.
+                                              //       But it doesn't.
   config->writeEntry("kmenubar",
                      menubar->menuBarPos() == KMenuBar::Bottom ? "bottom" : "top");
   config->sync();
@@ -423,7 +427,7 @@ void TEDemo::readProperties(KConfig* config)
   n_scroll   = MIN(config->readUnsignedNumEntry("scrollbar",SCRRIGHT),2);
   s_schema   = config->readEntry("schema","");
   setGeometry(config->readRectEntry("geometry",&dftRect));
-move(+4,-5); //FIXME: we work around a KTMainWidget bug here. (see geometry() above)
+move(+4,-5); //FIXME: we work around a KTMainWidget(?) bug here. (see geometry() above)
   if (menubar->menuBarPos() != KMenuBar::Floating)
   { QString entry = config->readEntry("kmenubar");
     if (!entry.isEmpty() && entry == "floating")
