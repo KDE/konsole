@@ -60,7 +60,7 @@ void TESession::run()
 void TESession::saveChangedTitle(int, const QString& s)
 {
    title=s;
-   kdDebug() << "saveChangedTitle in Session to " << title << endl;
+//   kdDebug() << "saveChangedTitle in Session to " << title << endl;
 };
 
 void TESession::kill(int signal)

@@ -51,6 +51,11 @@ public:
   void setColLin(int columns, int lines);
   void setFullScreen(bool on);
   void initFullScreen();
+  void initSessionTitle(QString title);
+
+public slots:
+
+  void newSession();
 
 protected:
 
@@ -74,7 +79,6 @@ private slots:
   void keytab_menu_activated(int item);
   void schema_menu_check();
   void tecRef();
-  void newSession();
   //what's this intended for ? aleXXX
   //void newSessionSelect();
   void newSession(int kind);

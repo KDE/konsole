@@ -666,9 +666,23 @@ void Konsole::readGlobalProperties(KConfig* config)
 
 void Konsole::saveProperties(KConfig* config) {
     kdDebug() << "Save properties called\n";
+    int counter=0;
+    QString tmpTitle;
   if (config != KGlobal::config()) {
+      config->setGroup("options");
       // called by the session manager
       skip_exit_query = true;
+      config->writeEntry("numSes",sessions.count());
+      sessions.first();
+      while(counter < sessions.count()) {
+        kdDebug() << "Top of loop..." << endl;
+        tmpTitle="Title";
+        tmpTitle+= (char) counter;
+        config->writeEntry(tmpTitle,sessions.current()->Title());
+        kdDebug() << "Writing title #" << counter << " -- " << sessions.current()->Title() << endl;
+        sessions.next();
+        counter++;
+        }
      kdDebug() << "Save properties called with a different config\n";
   }
 
@@ -1094,6 +1108,10 @@ void Konsole::initFullScreen()
   //This function is to be called from main.C to initialize the state of the Konsole (fullscreen or not).  It doesn't appear to work 
   //from inside the Konsole constructor
   setFullScreen(b_fullscreen);
+}
+
+void Konsole::initSessionTitle(QString title) {
+  sessions.current()->setTitle(title);
 }
 
 void Konsole::setFullScreen(bool on)

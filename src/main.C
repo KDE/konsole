@@ -230,9 +230,27 @@ int main(int argc, char* argv[])
     wname = sessionconfig->readEntry("class",wname).latin1();
 //    RESTORE( Konsole(wname,shell,eargs,histon,toolbaron) )
     int n = 1;
+    int n2= 0;
+    QString tmp_n3;
+    int n3=0;
+
+    tmp_n3 = sessionconfig->readEntry("numSes", "");
+    n3=tmp_n3.toInt();
+    QString tmpTitle;
+
     while (KMainWindow::canBeRestored(n)){
         Konsole *m = new Konsole(wname,shell,eargs,histon,toolbaron,title);
         m->restore(n);
+        m->initSessionTitle(sessionconfig->readEntry("Title0", m->title));
+        while (n2 < (n3 - 1)) {
+          tmpTitle = "Title";
+          tmpTitle+= (char) n2;
+          m->newSession();
+          kdDebug() << "Adding title tmpTitle = " << sessionconfig->readEntry(tmpTitle, m->title);
+//          m->initSessionTitle(sessionconfig->readEntry(tmpTitle, m->title));
+          m->initSessionTitle("m->title");
+          n2++;
+          }
         ksm->konsole = m;
         ksm->konsole->initFullScreen();
         // works only for the first one, but there won't be more.
