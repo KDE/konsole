@@ -1003,7 +1003,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       }
       else
       {
-        emit mouseSignal( 0, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
+        emit mouseSignal( 0, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maxValue() );
       }
     }
   }
@@ -1012,14 +1012,14 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
     if ( mouse_marks || (!mouse_marks && (ev->state() & ShiftButton)) )
       emitSelection(true,ev->state() & ControlButton);
     else
-      emit mouseSignal( 1, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
+      emit mouseSignal( 1, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maxValue() );
   }
   else if ( ev->button() == RightButton )
   {
     if (mouse_marks || (ev->state() & ShiftButton))
       emit configureRequest( this, ev->state()&(ShiftButton|ControlButton), ev->x(), ev->y() );
     else
-      emit mouseSignal( 2, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
+      emit mouseSignal( 2, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maxValue() );
   }
 }
 
@@ -1252,7 +1252,7 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
       if (!mouse_marks && !(ev->state() & ShiftButton))
         emit mouseSignal( 3, // release
                         (ev->x()-tLx-bX)/font_w + 1,
-                        (ev->y()-tLy-bY)/font_h + 1 );
+                        (ev->y()-tLy-bY)/font_h + 1 +scrollbar->value() -scrollbar->maxValue());
       releaseMouse();
     }
     dragInfo.state = diNone;
@@ -1263,7 +1263,7 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
     int    tLx = tL.x();
     int    tLy = tL.y();
 
-    emit mouseSignal( 3, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
+    emit mouseSignal( 3, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maxValue() );
     releaseMouse();
   }
 }
@@ -1282,7 +1282,7 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
   {
     // Send just _ONE_ click event, since the first click of the double click
     // was already sent by the click handler!
-    emit mouseSignal( 0, pos.x()+1, pos.y()+1 ); // left button
+    emit mouseSignal( 0, pos.x()+1, pos.y()+1 +scrollbar->value() -scrollbar->maxValue() ); // left button
     return;
   }
 
@@ -1323,13 +1323,18 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
 
 void TEWidget::wheelEvent( QWheelEvent* ev )
 {
-  if (!mouse_marks)
+  if (ev->orientation() != Qt::Vertical)
+    return;
+
+  if ( mouse_marks )
+    QApplication::sendEvent(scrollbar, ev);
+  else
   {
     QPoint tL  = contentsRect().topLeft();
     int    tLx = tL.x();
     int    tLy = tL.y();
     QPoint pos = QPoint((ev->x()-tLx-bX)/font_w,(ev->y()-tLy-bY)/font_h);
-    emit mouseSignal( ev->delta() > 0 ? 4 : 5, pos.x() + 1, pos.y() + 1 );
+    emit mouseSignal( ev->delta() > 0 ? 4 : 5, pos.x() + 1, pos.y() + 1 +scrollbar->value() -scrollbar->maxValue() );
   }
 }
 
@@ -1522,11 +1527,6 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
   }
   if ( obj != this /* when embedded */ && obj != parent() /* when standalone */ )
       return false; // not us
-  if ( e->type() == QEvent::Wheel)
-  {
-    if ( ((QWheelEvent *)e)->orientation() == Qt::Vertical )
-      QApplication::sendEvent(scrollbar, e);
-  }
   if ( e->type() == QEvent::KeyPress )
   {
     QKeyEvent* ke = (QKeyEvent*)e;
