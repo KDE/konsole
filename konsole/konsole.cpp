@@ -403,7 +403,8 @@ void Konsole::makeGUI()
       disconnect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_session,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_options,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
-   disconnect(m_help,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+   if (m_help)
+      disconnect(m_help,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_rightButton,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_edit,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_view,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
@@ -603,9 +604,12 @@ void Konsole::makeGUI()
      m_options->insertTearOffHandle();
 
    //help menu
-   m_help->insertSeparator(1);
-   m_help->insertItem(SmallIcon( "idea" ), i18n("&Tip of the Day"),
+   if (m_help)
+   {
+      m_help->insertSeparator(1);
+      m_help->insertItem(SmallIcon( "idea" ), i18n("&Tip of the Day"),
             this, SLOT(showTip()), 0, -1, 2);
+   }
 
    //the different session menus
    buildSessionMenus();
@@ -740,7 +744,8 @@ void Konsole::makeBasicGUI()
      connect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_session,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_options,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
-  connect(m_help,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+  if (m_help)
+     connect(m_help,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_rightButton,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_edit,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
   connect(m_view,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
@@ -755,7 +760,8 @@ void Konsole::makeBasicGUI()
   if (m_bookmarks)
      menubar->insertItem(i18n("Bookmarks"), m_bookmarks);
   menubar->insertItem(i18n("Settings"), m_options);
-  menubar->insertItem(i18n("Help"), m_help);
+  if (m_help)
+     menubar->insertItem(i18n("Help"), m_help);
 
   m_shortcuts = new KActionCollection(this);
 
@@ -820,7 +826,8 @@ void Konsole::makeBasicGUI()
                          SLOT( slotSaveSessionsProfile() ), m_shortcuts, "save_sessions_profile" );
 
   //help menu
-  m_help->setAccel(QKeySequence(),m_help->idAt(0));
+  if (m_help)
+     m_help->setAccel(QKeySequence(),m_help->idAt(0));
 
   m_closeSession = new KAction(i18n("C&lose Session"), "fileclose", 0, this,
                                SLOT(closeCurrentSession()), m_shortcuts, "close_session");
