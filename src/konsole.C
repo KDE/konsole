@@ -708,7 +708,7 @@ void Konsole::opt_menu_activated(int item)
 
 void Konsole::changeColumns(int columns)
 {
-  setColLin(columns,24); // VT100, FIXME: keep lines?
+  setColLin(columns,te->Lines());
   te->update();
 }
 
