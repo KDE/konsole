@@ -322,7 +322,8 @@ HCNT("paintEvent");
 
   // FIXME: explain/change 'rounding' style
 
-  QRect rect = pe->rect().intersect(contentsRect());
+ QRect rect = pe->rect().intersect(contentsRect());
+
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
   int    tLy = tL.y();
@@ -336,8 +337,11 @@ HCNT("paintEvent");
  printf("paintEvent: %d..%d, %d..%d (%d..%d, %d..%d)\n",lux,rlx,luy,rly,
   rect.left(), rect.right(), rect.top(), rect.bottom());
   */
-  if (pm != NULL && color_table[image->b].transparent)
-    erase(rect);
+
+  //  if (pm != NULL && color_table[image->b].transparent)
+  //  erase(rect);
+  // BL: I have no idea why we need this, and it breaks the refresh.
+
   for (int y = luy; y <= rly; y++)
   for (int x = lux; x <= rlx; x++)
   { char *disstr = new char[columns]; int len = 1;
