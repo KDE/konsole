@@ -329,11 +329,11 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
     menubar->hide();
   if (!frameon) {
     b_framevis=false;
-    te->setFrameStyle( QFrame::NoFrame );
+    if (te) te->setFrameStyle( QFrame::NoFrame );
   }
   if (!scrollbaron) {
     n_scroll = TEWidget::SCRNONE;
-    te->setScrollbarLocation(TEWidget::SCRNONE);
+    if (te) te->setScrollbarLocation(TEWidget::SCRNONE);
   }
 
   // activate and run first session //////////////////////////////////////////
