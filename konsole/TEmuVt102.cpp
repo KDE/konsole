@@ -1331,6 +1331,7 @@ static unsigned int xkb_scrolllock_mask()
                scrolllock_mask += 1 << i;
        }
 
+    delete map;
     return scrolllock_mask;
 }
 #endif

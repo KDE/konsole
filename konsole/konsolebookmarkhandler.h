@@ -17,6 +17,7 @@ class KonsoleBookmarkHandler : public QObject, public KBookmarkOwner
 
 public:
     KonsoleBookmarkHandler( Konsole *konsole, bool toplevel );
+    ~KonsoleBookmarkHandler();
 
     QPopupMenu * popupMenu();
 
@@ -42,12 +43,6 @@ private:
     KPopupMenu *m_menu;
     KonsoleBookmarkMenu *m_bookmarkMenu;
     QString m_file;
-
-protected:
-    virtual void virtual_hook( int id, void* data );
-private:
-    class KonsoleBookmarkHandlerPrivate;
-    KonsoleBookmarkHandlerPrivate *d;
 };
 
 

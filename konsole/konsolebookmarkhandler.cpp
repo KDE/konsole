@@ -54,6 +54,11 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel 
     }
 }
 
+KonsoleBookmarkHandler::~KonsoleBookmarkHandler()
+{
+    delete m_bookmarkMenu;
+}
+
 void KonsoleBookmarkHandler::slotEditBookmarks()
 {
     KProcess proc;
@@ -100,8 +105,5 @@ void KonsoleBookmarkHandler::slotBookmarksChanged( const QString &,
     // This is called when someone changes bookmarks in konsole....
     m_bookmarkMenu->slotBookmarksChanged("");
 }
-
-void KonsoleBookmarkHandler::virtual_hook( int id, void* data )
-{ KBookmarkOwner::virtual_hook( id, data ); }
 
 #include "konsolebookmarkhandler.moc"
