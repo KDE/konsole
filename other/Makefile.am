@@ -1,6 +1,6 @@
 
 datadir = $(kde_datadir)/konsole
-data_DATA = BlackOnLightColour.schema BlackOnLightYellow.schema BlackOnWhite.schema \
+data_DATA = BlackOnLightColor.schema BlackOnLightYellow.schema BlackOnWhite.schema \
 	Example.Schema GreenOnBlack.schema WhiteOnBlack.schema \
 	default.Schema syscolor.schema Linux.schema XTerm.schema vim.schema \
   DarkPicture.schema LightPicture.schema Transparent.schema GreenTint.schema \

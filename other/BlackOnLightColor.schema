@@ -14,7 +14,7 @@ title Black on Light Color
 #      V V--color--V  V V
 
 color  0   0   0   0  0 0  # regular   foreground color (Black)
-hsvcl  1  -1  30 255  1 0  # regular   background color (Light Colour)
+hsvcl  1  -1  30 255  1 0  # regular   background color (Light Color)
 
 color  2   0   0   0  0 0  # regular   color 0 Black
 color  3 178  24  24  0 0  # regular   color 1 Red
