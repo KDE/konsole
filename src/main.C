@@ -232,23 +232,29 @@ int main(int argc, char* argv[])
     int n = 1;
     int n2= 0;
     QString tmp_n3;
+    QCString cTitle ="";
     int n3=0;
 
     tmp_n3 = sessionconfig->readEntry("numSes", "");
     n3=tmp_n3.toInt();
     QString tmpTitle;
+    QString sTitle;
 
     while (KMainWindow::canBeRestored(n)){
-        Konsole *m = new Konsole(wname,shell,eargs,histon,toolbaron,title);
+        sessionconfig->setGroup("options");
+        cTitle+=(sessionconfig->readEntry("Title0", title)).latin1();
+        Konsole *m = new Konsole(wname,shell,eargs,histon,toolbaron,cTitle,type);
         m->restore(n);
-        m->initSessionTitle(sessionconfig->readEntry("Title0", m->title));
+
         while (n2 < (n3 - 1)) {
           tmpTitle = "Title";
-          tmpTitle+= (char) n2;
+          tmpTitle+= (char) (n2+49);
           m->newSession();
-          kdDebug() << "Adding title tmpTitle = " << sessionconfig->readEntry(tmpTitle, m->title);
-//          m->initSessionTitle(sessionconfig->readEntry(tmpTitle, m->title));
-          m->initSessionTitle(m->title);
+//          kdDebug() << "Adding title tmpTitle = " << sessionconfig->readEntry(tmpTitle, m->title);
+
+          sessionconfig->setGroup("options");
+          sTitle=sessionconfig->readEntry(tmpTitle, "Failed");
+          m->initRenameSession(sTitle);
           n2++;
           }
         ksm->konsole = m;

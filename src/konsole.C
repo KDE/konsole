@@ -249,8 +249,8 @@ Konsole::Konsole(const char* name, const char* _pgm,
   resize(321, 321); // Dummy.
   QSize currentSize = size();
   KConfig * config = KGlobal::config();
-  config->setGroup("options");
   applyMainWindowSettings(config);
+  config->setGroup("options");
   if (currentSize != size())
      defaultSize = size();
   //kdDebug()<<"Konsole ctor(): readProps() type="<<type<<endl;
@@ -262,6 +262,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
       co->setDesktopGroup();
       schema = co->readEntry("Schema");
   }
+  kdDebug() << "my Looking for schema " << schema << endl;
   readProperties(config, schema);
   //kdDebug()<<"Konsole ctor() after readProps "<<time.elapsed()<<" msecs elapsed"<<endl;
   //kdDebug()<<"Konsole ctor(): toolbar"<<endl;
@@ -664,15 +665,30 @@ void Konsole::readGlobalProperties(KConfig* config)
   QDir::setCurrent(config->readEntry("working directory", QDir::currentDirPath()));
 }
 
-/* _Don't_ change the group on the config object in this method.
-   If you absolutely have to, ensure, that readProperties and saveProperties
-   read from the same group the same keys (e.g. the schema key belongs in the
-   group which is given to this routine, _not_ to any group someone might set
-   here), or change the group _after_ all other keys are written.
-   This was broken two times in the past. (matz@kde.org)  */
 void Konsole::saveProperties(KConfig* config) {
-  kdDebug() << "Save properties called\n";
-
+    kdDebug() << "Save properties called\n";
+    int counter=0;
+    QString tmpTitle;
+    QString tmpTwo;
+  if (config != KGlobal::config()) {
+      config->setGroup("options");
+      // called by the session manager
+      skip_exit_query = true;
+      config->writeEntry("numSes",sessions.count());
+      sessions.first();
+      while(counter < sessions.count()) {
+//        kdDebug() << "Top of loop..." << endl;
+        tmpTitle="Title";
+        tmpTitle+= (char) (counter+48);
+        tmpTwo=sessions.current()->Title();
+        config->writeEntry(tmpTitle,tmpTwo);
+//        kdDebug() << "Writing " << tmpTitle << " -- " << sessions.current()->Title().latin1() << endl;
+        sessions.next();
+        counter++;
+        }
+     kdDebug() << "Save properties called with a different config\n";
+  }
+  config->setDesktopGroup();
   config->writeEntry("history",b_scroll);
   config->writeEntry("has frame",b_framevis);
   config->writeEntry("Fullscreen",b_fullscreen);
@@ -686,32 +702,6 @@ void Konsole::saveProperties(KConfig* config) {
 
   if (args.count() > 0) config->writeEntry("konsolearguments", args);
   config->writeEntry("class",name());
-
-  if (config != KGlobal::config()) {
-      /* Don't use KConfigGroupSaver here, as it relies on being destructed
-         on block boundaries, which is not ensured by the standard.  
-	 We do not really need to save the old group, as we do this right now
-	 at the end of saveProperties(), but safer is better.  */
-      QString old_group (config->group());
-      QString tmpTitle;
-      config->setGroup("options");
-      // called by the session manager
-      skip_exit_query = true;
-      config->writeEntry("numSes",sessions.count());
-      sessions.first();
-      int counter=0;
-      while(counter < sessions.count()) {
-        kdDebug() << "Top of loop..." << endl;
-        tmpTitle="Title";
-        tmpTitle+= (char) counter;
-        config->writeEntry(tmpTitle,sessions.current()->Title());
-        kdDebug() << "Writing title #" << counter << " -- " << sessions.current()->Title() << endl;
-        sessions.next();
-        counter++;
-      }
-      config->setGroup (old_group);
-    kdDebug() << "Save properties called with a different config\n";
-  }
 }
 
 
@@ -729,6 +719,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
 {
    kdDebug()<<"Konsole::readProps()"<<endl;
    /*FIXME: (merging) state of material below unclear.*/
+   config->setDesktopGroup();
    b_scroll = config->readBoolEntry("history",TRUE);
    b_warnQuit=config->readBoolEntry( "WarnQuit", TRUE );
    n_oldkeytab=n_keytab;
@@ -1186,7 +1177,12 @@ void Konsole::addSession(TESession* s)
 {
   session_no += 1;
   // create an action for the session
-  QString title = i18n("%1 No %2").arg(s->Title()).arg(session_no);
+//  if (inRestore) {
+//    QString title = s->Title();
+//    }
+//  else {
+    QString title = i18n("%1 No %2").arg(s->Title()).arg(session_no);
+//    }
   //  char buffer[30];
   //  int acc = CTRL+SHIFT+Key_0+session_no; // Lars: keys stolen by kwin.
   KRadioAction *ra = new KRadioAction(title,
@@ -1328,6 +1324,7 @@ TESession *Konsole::newSession(KSimpleConfig *co)
   QStrList cmdArgs;
   if (co)
   {
+      co->setDesktopGroup();
       cmd = co->readEntry("Exec");
       emu = co->readEntry("Term", emu).ascii();
       sch = co->readEntry("Schema", sch);
@@ -1617,6 +1614,26 @@ void Konsole::slotRenameSession() {
     toolBar()->updateRects();
   }
 }
+
+
+void Konsole::initRenameSession(QString sTitle) {
+//  kdDebug() << "initRenameSession\n";
+  KRadioAction *ra = session2action.find(se);
+  QString name = ra->text();
+//  KLineEditDlg dlg(i18n("Session name"),name, this);
+//  if (dlg.exec()) {
+//    kdDebug()<<"setTitle 1566"<<endl;
+    se->setTitle(sTitle);
+    if(se == te->currentSession) {
+      title = sTitle;
+      setHeader();
+    }
+    ra->setText(sTitle);
+    ra->setIcon("openterm"); // I don't know why it is needed here
+    toolBar()->updateRects();
+//  }
+}
+
 
 void Konsole::slotWordSeps() {
   kdDebug() << "Konsole::slotWordSeps\n";

@@ -52,6 +52,7 @@ public:
   void setFullScreen(bool on);
   void initFullScreen();
   void initSessionTitle(QString title);
+  void initRenameSession(QString sTitle);
 
 public slots:
 
