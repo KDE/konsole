@@ -49,6 +49,7 @@ public:
 
  private:
     static KInstance *s_instance;
+    static KAboutData *s_aboutData;
 };
 
 class konsolePart: public KParts::ReadOnlyPart

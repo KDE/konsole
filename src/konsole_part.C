@@ -57,6 +57,7 @@ extern "C"
  * We need one static instance of the factory for our C 'main' function
  */
 KInstance *konsoleFactory::s_instance = 0L;
+KAboutData *konsoleFactory::s_aboutData = 0;
 
 konsoleFactory::konsoleFactory()
 {
@@ -67,7 +68,11 @@ konsoleFactory::~konsoleFactory()
   if (s_instance)
     delete s_instance;
 
+  if ( s_aboutData )
+    delete s_aboutData;
+  
   s_instance = 0;
+  s_aboutData = 0;
 }
 
 KParts::Part *konsoleFactory::createPart(QWidget *parentWidget, const char *widgetName,
@@ -84,8 +89,8 @@ KInstance *konsoleFactory::instance()
 {
   if ( !s_instance )
     {
-      KAboutData about("konsole", I18N_NOOP("Konsole"), "1.0");
-      s_instance = new KInstance(&about);
+      s_aboutData = new KAboutData("konsole", I18N_NOOP("Konsole"), "1.0");
+      s_instance = new KInstance( s_aboutData );
     }
   return s_instance;
 }
