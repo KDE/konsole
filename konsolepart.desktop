@@ -1,7 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
 Type=Service
-Exec=konsole %i %m -caption "%c"
 Icon=konsole
 ServiceTypes=KParts/ReadOnlyPart,Browser/View,inode/directory
 

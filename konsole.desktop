@@ -1,7 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Type=Application
-Exec=konsole %i %m
+Exec=konsole
 Icon=konsole
 DocPath=konsole/index.html
 Terminal=0
@@ -11,6 +11,7 @@ Name=Konsole
 Name[af]=konsole
 Name[ar]=سطر الأوامر
 Name[az]=Konsol
+Name[be]=Кансоля
 Name[bg]=Конзола
 Name[bs]=Konzola
 Name[da]=Konsol
@@ -39,6 +40,7 @@ Name[zu]=iKonsole
 
 GenericName=Terminal Program
 GenericName[ar]=برنامج تيرمينال
+GenericName[be]=Тэрмінал
 GenericName[bg]=Терминална програма
 GenericName[bs]=Terminalni program
 GenericName[cs]=Terminálový program
