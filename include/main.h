@@ -55,7 +55,7 @@ private slots:
   void font_menu_activated(int item);
   void schema_menu_activated(int item);
   void size_menu_activated(int item);
-  void pixmap_menu_activated(int item);
+  void pixmap_menu_activated(int item, bool regetbg=true);
   void drop_menu_activated(int item);
   void about();
   void help();

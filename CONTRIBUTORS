@@ -30,3 +30,5 @@ CONTRIBUTORS. See ChangeLog also
   - decent marking
 - Kevin Street <street@iname.com>
   - FreeBSD port
+- Lotzi Boloni <boloni@cs.purdue.edu>
+  -Fast switch between sessions with the same schema.
