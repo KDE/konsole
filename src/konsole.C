@@ -468,7 +468,6 @@ void Konsole::readGlobalProperties(KConfig* config)
 void Konsole::saveProperties(KConfig* config)
 {
   n_toolbarheight = toolBar()->size().height();
-  config->setGroup("options");
   // bad! will no allow us to support multi windows
   config->writeEntry("toolbar height", n_toolbarheight);
   config->writeEntry("history",b_scroll);
