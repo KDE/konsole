@@ -191,6 +191,11 @@ private:
   bool           zmodemBusy;
   KProcIO*       zmodemProc;
   ZModemDialog*  zmodemProgress;
+
+  // Color/Font Changes by ESC Sequences
+
+  QColor         modifiedBackground; // as set by: echo -en '\033]11;Color\007
+
 };
 
 #endif

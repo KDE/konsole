@@ -143,13 +143,30 @@ void TESession::setUserTitle( int what, const QString &caption )
        userTitle = caption;
     if ((what == 0) || (what == 1))
        iconText = caption;
+    if (what == 11) {
+      QString colorString = caption.section(';',0,0);
+      QColor backColor = QColor(colorString);
+      if (backColor.isValid()){// change color via \033]11;Color\007
+	if (backColor != modifiedBackground) {
+	    modifiedBackground = backColor;
+	    const QPixmap* pm = te->backgroundPixmap();
+	    if (!pm) te->setBackgroundColor(backColor);
+	    te->update();
+	}
+      }
+    }
     if (what == 30)
        renameSession(caption);
     if (what == 31) {
        cwd=caption;
        cwd=cwd.replace( QRegExp("^~"), QDir::homeDirPath() );
        emit openURLRequest(cwd);
+    }    
+    if (what == 32) { // change icon via \033]32;Icon\007
+       iconName = caption;
+       te->update();
     }
+
     emit updateTitle();
 }
 

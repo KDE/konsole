@@ -2068,6 +2068,7 @@ void Konsole::updateTitle()
 {
   setCaption( se->fullTitle() );
   setIconText( se->IconText() );
+  tabwidget->setTabIconSet(se->widget(), iconSetForSession(se));
 }
 
 void Konsole::initSessionFont(int fontNo) {
