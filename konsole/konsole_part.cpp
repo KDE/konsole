@@ -183,7 +183,6 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   //         this, SLOT(changeColumns(int)) );
   //connect( se, SIGNAL(clearAllListenToKeyPress()),
   //        this, SLOT(clearAllListenToKeyPress()) );
-  se->setConnect(TRUE);
   te->currentSession = se;
 
   rootxpm = new KRootPixmap(te);
@@ -193,6 +192,7 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   colors->sort();
 
   readProperties();
+  se->setConnect(TRUE);
 
   makeGUI();
 

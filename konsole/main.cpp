@@ -388,9 +388,9 @@ int main(int argc, char* argv[])
   }
   else
   {
-    //2.1 sec
     Konsole*  m = new Konsole(wname,(shell ? QFile::decodeName(shell) : QString::null),eargs,histon,menubaron,toolbaron,frameon,scrollbaron,QString::null,title,type,term);
-    //2.5 sec
+    //3.8 :-(
+    //exit(0);
 
     if (!keytab.isEmpty())
       m->initSessionKeyTab(keytab);
@@ -404,13 +404,11 @@ int main(int argc, char* argv[])
     ksm->konsole = m;
     m->setColLin(c,l); // will use default height and width if called with (0,0)
 
-    //2.5 sec
     m->initFullScreen();
     m->show();
     m->run();
     m->showTipOnStart();
   }
-  //2.6 sec
 
   return a.exec();
 }

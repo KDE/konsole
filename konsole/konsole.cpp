@@ -168,7 +168,6 @@ const char *fonts[] = {
 
 #define DEFAULT_HISTORY_SIZE 1000
 
-
 Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, int histon,
                  bool menubaron, bool toolbaron, bool frameon, bool scrollbaron, const QString &_icon,
                  const QString &_title, QCString type, const QString &_term, bool b_inRestore,
@@ -261,6 +260,7 @@ DCOPObject( "konsole" )
 
   setCentralWidget(te);
 
+  b_histEnabled=histon;
   makeBasicGUI();
   //KONSOLEDEBUG<<"Konsole ctor() after makeBasicGUI "<<time.elapsed()<<" msecs elapsed"<<endl;
 
@@ -290,7 +290,6 @@ DCOPObject( "konsole" )
   //KONSOLEDEBUG << "my Looking for schema " << schema << endl;
   readProperties(config, schema, false);
   //KONSOLEDEBUG<<"Konsole ctor() after readProps "<<time.elapsed()<<" msecs elapsed"<<endl;
-  //KONSOLEDEBUG<<"Konsole ctor(): toolbar"<<endl;
 
   if (!menubaron)
     menubar->hide();
@@ -305,8 +304,6 @@ DCOPObject( "konsole" )
     n_scroll = TEWidget::SCRNONE;
     te->setScrollbarLocation(TEWidget::SCRNONE);
   }
-  if (!histon)
-    b_histEnabled=false;
 
   // activate and run first session //////////////////////////////////////////
   // FIXME: this slows it down if --type is given, but prevents a crash (malte)
@@ -314,7 +311,6 @@ DCOPObject( "konsole" )
   newSession(co, _program, _args, _term, _icon, _title, _cwd);
 
   //KONSOLEDEBUG<<"Konsole ctor() ends "<<time.elapsed()<<" msecs elapsed"<<endl;
-  //KONSOLEDEBUG<<"Konsole ctor(): done"<<endl;
 
   kapp->dcopClient()->setDefaultObject( "konsole" );
 }
@@ -355,6 +351,12 @@ void Konsole::showTipOnStart()
 /*  Make menu                                                                */
 /* ------------------------------------------------------------------------- */
 
+// Be carefull !!
+// This function consumes a lot of time, that's why it is called delayed on demand.
+// Be careful not to introduce function calls which lead to the execution of this
+// function when starting konsole
+// Be careful not to access stuff which is created in this function before this 
+// function was called ! you can check this using m_menuCreated, aleXXX
 void Konsole::makeGUI()
 {
    if (m_menuCreated) return;
@@ -382,7 +384,6 @@ void Konsole::makeGUI()
        }
 
    KActionCollection* actions = actionCollection();
-   m_shortcuts = new KActionCollection(this);
 
    // Send Signal Menu -------------------------------------------------------------
    m_signals = new KPopupMenu(this);
@@ -395,74 +396,33 @@ void Konsole::makeGUI()
    connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
 
    // Edit Menu ----------------------------------------------------------------
-   KAction *pasteClipboard = new KAction(i18n("&Paste"), "editpaste", 0,
-     te, SLOT(pasteClipboard()), m_shortcuts, "paste");
-   pasteClipboard->plug(m_edit);
+   m_pasteClipboard->plug(m_edit);
 
    m_edit->setCheckable(TRUE);
    m_edit->insertItem( i18n("&Send Signal"), m_signals );
 
    m_edit->insertSeparator();
-   KAction *clearTerminal = new KAction(i18n("&Clear Terminal"), 0, this,
-                                        SLOT(slotClearTerminal()), m_shortcuts, "clear_terminal");
-   clearTerminal->plug(m_edit);
+   m_clearTerminal->plug(m_edit);
 
-   KAction *resetclearTerminal = new KAction(i18n("&Reset and Clear Terminal"), 0, this,
-                                        SLOT(slotResetClearTerminal()), m_shortcuts, "reset_clear_terminal");
-   resetclearTerminal->plug(m_edit);
+   m_resetClearTerminal->plug(m_edit);
 
    m_edit->insertSeparator();
-   m_findHistory = new KAction(i18n("&Find in History..."), "find", 0, this,
-                               SLOT(slotFindHistory()), m_shortcuts, "find_history");
-   m_findHistory->setEnabled( se->history().isOn() );
    m_findHistory->plug(m_edit);
-
-   m_findNext = new KAction(i18n("Find &Next"), "next", 0, this,
-                                  SLOT(slotFindNext()), m_shortcuts, "find_next");
-   m_findNext->setEnabled( se->history().isOn() );
    m_findNext->plug(m_edit);
-
-   m_findPrevious = new KAction(i18n("Find P&revious"), "previous", 0, this,
-                                SLOT(slotFindPrevious()), m_shortcuts, "find_previous");
-   m_findPrevious->setEnabled( se->history().isOn() );
    m_findPrevious->plug(m_edit);
-
-   m_saveHistory = new KAction(i18n("S&ave History As..."), "filesaveas", 0, this,
-                               SLOT(slotSaveHistory()), m_shortcuts, "save_history");
-   m_saveHistory->setEnabled( se->history().isOn() );
    m_saveHistory->plug(m_edit);
-
    m_edit->insertSeparator();
-   m_clearHistory = new KAction(i18n("Clear &History"), "history_clear", 0, this,
-                                SLOT(slotClearHistory()), m_shortcuts, "clear_history");
-   m_clearHistory->setEnabled( se->history().isOn() );
    m_clearHistory->plug(m_edit);
-
-   KAction *clearAllSessionHistories = new KAction(i18n("Clear All H&istories"), "history_clear", 0,
-     this, SLOT(slotClearAllSessionHistories()), m_shortcuts, "clear_all_histories");
-   clearAllSessionHistories->plug(m_edit);
+   m_clearAllSessionHistories->plug(m_edit);
 
    // View Menu
-   m_detachSession = new KAction(i18n("&Detach Session"), 0, this,
-                                 SLOT(detachSession()), m_shortcuts, "detach_session");
-   m_detachSession->setEnabled(false);
    m_detachSession->plug(m_view);
-
-   KAction *renameSession = new KAction(i18n("&Rename Session..."), Qt::CTRL+Qt::ALT+Qt::Key_S, this,
-                                        SLOT(slotRenameSession()), m_shortcuts, "rename_session");
-   renameSession->plug(m_view);
+   m_renameSession->plug(m_view);
 
    m_view->insertSeparator();
-   monitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ), "idea", 0, this,
-                                     SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_activity" );
    monitorActivity->plug ( m_view );
-
-   monitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ), "ktip", 0, this,
-                                     SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_silence" );
    monitorSilence->plug ( m_view );
 
-   masterMode = new KToggleAction ( i18n( "Send &Input to All Sessions" ), "remote", 0, this,
-                                     SLOT( slotToggleMasterMode() ), m_shortcuts, "send_input_to_all_sessions" );
    masterMode->plug ( m_view );
 
    m_view->insertSeparator();
@@ -479,7 +439,6 @@ void Konsole::makeGUI()
    m_moveSessionRight->plug(m_view);
 
    m_view->insertSeparator();
-//   KRadioAction *ra = session2action.find(m_initialSession);
    KRadioAction *ra = session2action.find(se);
    if (ra!=0) ra->plug(m_view);
 
@@ -506,13 +465,9 @@ void Konsole::makeGUI()
 
    //options menu
    // Menubar on/off
-   showMenubar = new KToggleAction ( i18n( "Show &Menubar" ), "showmenu", 0, this,
-                                     SLOT( slotToggleMenubar() ), m_shortcuts, "show_menubar" );
    showMenubar->plug ( m_options );
 
    // Toolbar on/off
-   showToolbar = new KToggleAction ( i18n( "Show &Toolbar" ), 0, this,
-                                     SLOT( slotToggleToolbar() ), m_shortcuts, "show_toolbar" );
    showToolbar->plug(m_options);
 
    // Scrollbar
@@ -522,12 +477,9 @@ void Konsole::makeGUI()
    scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
    selectScrollbar->setItems(scrollitems);
    selectScrollbar->plug(m_options);
-   
+
    // Fullscreen
    m_options->insertSeparator();
-   m_fullscreen = new KToggleAction(i18n("F&ull-Screen"), "window_fullscreen", 0, this,
-                                    SLOT(slotToggleFullscreen()), m_shortcuts, "fullscreen");
-   m_fullscreen->setChecked(b_fullscreen);
    m_fullscreen->plug(m_options);
    m_options->insertSeparator();
 
@@ -589,9 +541,7 @@ void Konsole::makeGUI()
 
    m_options->insertSeparator();
 
-   KAction *saveProfile = new KAction( i18n( "Save Sessions &Profile..." ), 0, this,
-                          SLOT( slotSaveSessionsProfile() ), m_shortcuts, "save_sessions_profile" );
-   saveProfile->plug(m_options);
+   m_saveProfile->plug(m_options);
 
    m_options->insertSeparator();
 
@@ -603,7 +553,6 @@ void Konsole::makeGUI()
      m_options->insertTearOffHandle();
 
    //help menu
-   m_help->setAccel(QKeySequence(),m_help->idAt(0));
    m_help->insertSeparator(1);
    m_help->insertItem(i18n("&Tip of the Day..."), this, SLOT(showTip()), 0, -1, 2);
 
@@ -612,25 +561,22 @@ void Konsole::makeGUI()
    loadScreenSessions();
 
    m_session->insertSeparator();
-   KAction *closeSession = new KAction(i18n("&Close Session"), "fileclose", 0, this,
-                                        SLOT(closeCurrentSession()), m_shortcuts, "close_session");
-   closeSession->plug(m_session);
+   m_closeSession->plug(m_session);
 
    m_session->insertSeparator();
-   KAction *quit = new KAction(i18n("&Quit"), "exit", 0, this, SLOT( close() ), m_shortcuts, "quit");
-   quit->plug(m_session);
+   m_quit->plug(m_session);
 
    connect(m_session, SIGNAL(activated(int)), SLOT(newSession(int)));
 
    // Right mouse button menu
    showMenubar->plug ( m_rightButton );
    m_rightButton->insertSeparator();
-   pasteClipboard->plug(m_rightButton);
+   m_pasteClipboard->plug(m_rightButton);
    m_rightButton->insertItem(i18n("&Send Signal"), m_signals);
 
    m_rightButton->insertSeparator();
    m_detachSession->plug(m_rightButton);
-   renameSession->plug(m_rightButton);
+   m_renameSession->plug(m_rightButton);
    
    m_rightButton->insertSeparator();
    m_rightButton->insertItem(i18n("&Bookmarks"), m_bookmarks);
@@ -638,7 +584,7 @@ void Konsole::makeGUI()
    m_rightButton->insertSeparator();
    m_rightButton->insertItem(i18n("S&ettings"), m_options);
    m_rightButton->insertSeparator();
-   closeSession->plug(m_rightButton );
+   m_closeSession->plug(m_rightButton );
    if (KGlobalSettings::insertTearOffHandle())
      m_rightButton->insertTearOffHandle();
 
@@ -660,7 +606,6 @@ void Konsole::makeGUI()
       m_schema->setItemChecked(i,false);
 
    m_schema->setItemChecked(curr_schema,true);
-//   m_initialSession->setSchemaNo(curr_schema);
    while (se == NULL) {}
    se->setSchemaNo(curr_schema);
 
@@ -679,10 +624,7 @@ void Konsole::makeGUI()
                this, SLOT(prevSession()), m_shortcuts, "previous_session");
    new KAction(i18n("Next Session"), QApplication::reverseLayout() ? Qt::SHIFT+Qt::Key_Left : Qt::SHIFT+Qt::Key_Right,
                this, SLOT(nextSession()), m_shortcuts, "next_session");
-   new KAction(i18n("New Session"), Qt::CTRL+Qt::ALT+Qt::Key_N, this, SLOT(newSession()), m_shortcuts, "new_session");
-   new KAction(i18n("Activate Menu"), Qt::CTRL+Qt::ALT+Qt::Key_M, this, SLOT(activateMenu()), m_shortcuts, "activate_menu");
 
-   new KAction(i18n("List Sessions"), 0, this, SLOT(listSessions()), m_shortcuts, "list_sessions");
    new KAction(i18n("Switch to Session 1"), 0, this, SLOT(switchToSession1()), m_shortcuts, "switch_to_session_1");
    new KAction(i18n("Switch to Session 2"), 0, this, SLOT(switchToSession2()), m_shortcuts, "switch_to_session_2");
    new KAction(i18n("Switch to Session 3"), 0, this, SLOT(switchToSession3()), m_shortcuts, "switch_to_session_3");
@@ -749,6 +691,75 @@ void Konsole::makeBasicGUI()
   menubar->insertItem(i18n("Bookmarks"), m_bookmarks);
   menubar->insertItem(i18n("Settings"), m_options);
   menubar->insertItem(i18n("Help"), m_help);
+
+  m_shortcuts = new KActionCollection(this);
+
+  m_pasteClipboard = new KAction(i18n("&Paste"), "editpaste", 0, te,
+                                 SLOT(pasteClipboard()), m_shortcuts, "paste");
+
+  m_clearTerminal = new KAction(i18n("&Clear Terminal"), 0, this,
+                                SLOT(slotClearTerminal()), m_shortcuts, "clear_terminal");
+  m_resetClearTerminal = new KAction(i18n("&Reset and Clear Terminal"), 0, this,
+                                     SLOT(slotResetClearTerminal()), m_shortcuts, "reset_clear_terminal");
+  m_findHistory = new KAction(i18n("&Find in History..."), "find", 0, this,
+                              SLOT(slotFindHistory()), m_shortcuts, "find_history");
+  m_findHistory->setEnabled(b_histEnabled);
+
+  m_findNext = new KAction(i18n("Find &Next"), "next", 0, this,
+                           SLOT(slotFindNext()), m_shortcuts, "find_next");
+  m_findNext->setEnabled(b_histEnabled);
+
+  m_findPrevious = new KAction(i18n("Find P&revious"), "previous", 0, this,
+                               SLOT(slotFindPrevious()), m_shortcuts, "find_previous");
+  m_findPrevious->setEnabled( b_histEnabled );
+
+  m_saveHistory = new KAction(i18n("S&ave History As..."), "filesaveas", 0, this,
+                              SLOT(slotSaveHistory()), m_shortcuts, "save_history");
+  m_saveHistory->setEnabled(b_histEnabled );
+
+  m_clearHistory = new KAction(i18n("Clear &History"), "history_clear", 0, this,
+                               SLOT(slotClearHistory()), m_shortcuts, "clear_history");
+  m_clearHistory->setEnabled(b_histEnabled);
+
+  m_clearAllSessionHistories = new KAction(i18n("Clear All H&istories"), "history_clear", 0,
+    this, SLOT(slotClearAllSessionHistories()), m_shortcuts, "clear_all_histories");
+
+  m_detachSession = new KAction(i18n("&Detach Session"), 0, this,
+                                SLOT(detachSession()), m_shortcuts, "detach_session");
+  m_detachSession->setEnabled(false);
+
+  m_renameSession = new KAction(i18n("&Rename Session..."), Qt::CTRL+Qt::ALT+Qt::Key_S, this,
+                                SLOT(slotRenameSession()), m_shortcuts, "rename_session");
+  monitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ), "idea", 0, this,
+                                        SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_activity" );
+  monitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ), "ktip", 0, this,
+                                       SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_silence" );
+  masterMode = new KToggleAction ( i18n( "Send &Input to All Sessions" ), "remote", 0, this,
+                                   SLOT( slotToggleMasterMode() ), m_shortcuts, "send_input_to_all_sessions" );
+
+  showMenubar = new KToggleAction ( i18n( "Show &Menubar" ), "showmenu", 0, this,
+                                    SLOT( slotToggleMenubar() ), m_shortcuts, "show_menubar" );
+  showToolbar = new KToggleAction ( i18n( "Show &Toolbar" ), 0, this,
+                                    SLOT( slotToggleToolbar() ), m_shortcuts, "show_toolbar" );
+  m_fullscreen = new KToggleAction(i18n("F&ull-Screen"), "window_fullscreen", 0, this,
+                                   SLOT(slotToggleFullscreen()), m_shortcuts, "fullscreen");
+  m_fullscreen->setChecked(b_fullscreen);
+
+  m_saveProfile = new KAction( i18n( "Save Sessions &Profile..." ), 0, this,
+                         SLOT( slotSaveSessionsProfile() ), m_shortcuts, "save_sessions_profile" );
+
+  //help menu
+  m_help->setAccel(QKeySequence(),m_help->idAt(0));
+
+  m_closeSession = new KAction(i18n("&Close Session"), "fileclose", 0, this,
+                               SLOT(closeCurrentSession()), m_shortcuts, "close_session");
+  m_quit = new KAction(i18n("&Quit"), "exit", 0, this, SLOT( close() ), m_shortcuts, "quit");
+
+  new KAction(i18n("New Session"), Qt::CTRL+Qt::ALT+Qt::Key_N, this, SLOT(newSession()), m_shortcuts, "new_session");
+  new KAction(i18n("Activate Menu"), Qt::CTRL+Qt::ALT+Qt::Key_M, this, SLOT(activateMenu()), m_shortcuts, "activate_menu");
+  new KAction(i18n("List Sessions"), 0, this, SLOT(listSessions()), m_shortcuts, "list_sessions");
+
+  m_shortcuts->readShortcutSettings();
 };
 
 /**
@@ -1391,7 +1402,8 @@ void Konsole::setFullScreen(bool on)
 //      KONSOLEDEBUG << "On is false, b_fullscreen is " << b_fullscreen << ". Set to Normal view and set caption." << endl;
     }
 //  return;
-    m_fullscreen->setChecked(b_fullscreen);
+    if (m_fullscreen!=0)
+       m_fullscreen->setChecked(b_fullscreen);
 
 }
 
@@ -1528,7 +1540,7 @@ void Konsole::runSession(TESession* s)
 
 void Konsole::addSession(TESession* s)
 {
-  QString newTitle = s->Title();
+   QString newTitle = s->Title();
 
   bool nameOk;
   int count = 1;
@@ -1578,15 +1590,20 @@ void Konsole::addSession(TESession* s)
   action2session.insert(ra, s);
   session2action.insert(s,ra);
   sessions.append(s);
-  if (sessions.count()>1)
-    m_detachSession->setEnabled(true);
+  if (sessions.count()>1) {
+     if (!m_menuCreated)
+        makeGUI();
+     m_detachSession->setEnabled(true);
+  }
 
   if (m_menuCreated)
      ra->plug(m_view);
 
   int button_id=ra->itemId( ra->plug(toolBar()) );
+
   KToolBarButton* ktb=toolBar()->getButton(button_id);
   connect(ktb,SIGNAL(doubleClicked(int)), this,SLOT(slotRenameSession(int)));
+
   session2button.insert(s,ktb);
 }
 
@@ -1690,7 +1707,8 @@ void Konsole::activateSession(TESession *s)
       se->setListenToKeyPress(TRUE);
   updateTitle();
   if (!m_menuCreated)
-    makeGUI();
+     return;
+  
   updateKeytabMenu(); // act. the keytab for this session
   m_clearHistory->setEnabled( se->history().isOn() );
   m_findHistory->setEnabled( se->history().isOn() );

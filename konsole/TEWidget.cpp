@@ -326,7 +326,6 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
   connect(blinkCursorT, SIGNAL(timeout()), this, SLOT(blinkCursorEvent()));
 
   setMouseMarks(TRUE);
-  setVTFont( QFont("fixed") );
   setColorTable(base_color_table); // init color table
 
   qApp->installEventFilter( this ); //FIXME: see below

@@ -268,6 +268,15 @@ private:
   KAction       *m_moveSessionLeft;
   KAction       *m_moveSessionRight;
 
+  KAction       *m_pasteClipboard;
+  KAction       *m_clearTerminal;
+  KAction       *m_resetClearTerminal;
+  KAction       *m_clearAllSessionHistories;
+  KAction       *m_renameSession;
+  KAction       *m_saveProfile;
+  KAction       *m_closeSession;
+  KAction       *m_quit;
+
   KActionCollection *m_shortcuts;
 
   KonsoleBookmarkHandler *bookmarkHandler;
