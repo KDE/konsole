@@ -104,6 +104,8 @@ Time to start a requirement list.
 
 #include <klocale.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
+#include <dirent.h>
 #include <assert.h>
 
 #include <kiconloader.h>
@@ -182,6 +184,7 @@ Konsole::Konsole(const char* name, const char* _pgm,
 ,selectScrollbar(0)
 ,warnQuit(0)
 ,cmd_serial(0)
+,cmd_first_screen(-1)
 ,session_no(0)
 ,n_keytab(0)
 ,n_oldkeytab(0)
@@ -306,6 +309,8 @@ void Konsole::makeGUI()
    disconnect(m_help,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    disconnect(m_sessions,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    //kdDebug()<<"Konsole::makeGUI()"<<endl;
+   connect(m_toolbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
+   connect(m_file,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
    m_menuCreated=true;
 
    // Send Signal Menu -------------------------------------------------------------
@@ -462,6 +467,7 @@ void Konsole::makeGUI()
 
    //the different session types
    loadSessionCommands();
+   loadScreenSessions();
    m_file->insertSeparator();
    m_file->insertItem( SmallIconSet( "exit" ), i18n("&Quit"), this, SLOT( close() ) );
 
@@ -1375,6 +1381,55 @@ void Konsole::loadSessionCommands()
     addSessionCommand(*it);
 }
 
+void Konsole::addScreenSession(const QString &socket)
+{
+  // In-memory only
+  KSimpleConfig *co = new KSimpleConfig(QString::null, true);
+  co->setDesktopGroup();
+  co->writeEntry("Name", socket);
+  QString txt = i18n("Screen at %1").arg(socket);
+  co->writeEntry("Comment", txt);
+  co->writeEntry("Exec", QString::fromLatin1("screen -r %1").arg(socket));
+  QString icon = "openterm"; // FIXME use another icon (malte)
+  m_file->insertItem( SmallIconSet( icon ), txt, ++cmd_serial );
+  m_toolbarSessionsCommands->insertItem( SmallIconSet( icon ), txt, cmd_serial );
+  no2command.insert(cmd_serial,co);
+}
+
+void Konsole::loadScreenSessions()
+{
+  QCString screenDir = getenv("SCREENDIR");
+  if (screenDir.isEmpty())
+    screenDir = QFile::encodeName(QDir::homeDirPath()) + "/.screen/";
+  QStringList sessions;
+  // Can't use QDir as it doesn't support FIFOs :(
+  DIR *dir = opendir(screenDir);
+  if (dir)
+  {
+    struct dirent *entry;
+    while ((entry = readdir(dir)))
+    {
+      struct stat st;
+      if (stat(screenDir + "/" + entry->d_name, &st) != 0)
+        continue;
+      if (S_ISFIFO(st.st_mode) && !(st.st_mode & 0111)) // xbit == attached
+        sessions.append(QFile::decodeName(entry->d_name));
+    }
+    closedir(dir);
+  }
+  if (cmd_first_screen == -1)
+    cmd_first_screen = cmd_serial + 1;
+  else
+    for (int i = cmd_first_screen; i <= cmd_serial; ++i)
+    {
+      m_file->removeItem(i);
+      m_toolbarSessionsCommands->removeItem(i);
+      no2command.remove(i);
+      cmd_serial = cmd_first_screen - 1;
+    }
+  for (QStringList::ConstIterator it = sessions.begin(); it != sessions.end(); ++it)
+    addScreenSession(*it);
+}
 
 // --| Schema support |-------------------------------------------------------
 

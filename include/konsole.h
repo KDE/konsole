@@ -98,6 +98,7 @@ private slots:
   void slotSelectScrollbar();
   void slotWarnQuit();
   void makeGUI();
+  void loadScreenSessions();
 
 private:
   TESession *newSession(KSimpleConfig *co);
@@ -116,6 +117,7 @@ private:
 
   void addSessionCommand(const QString & path);
   void loadSessionCommands();
+  void addScreenSession(const QString & socket);
   QSize calcSize(int columns, int lines);
 
 
@@ -155,6 +157,7 @@ private:
   KToggleAction *warnQuit;                      // Warn when closing this session on quit
 
   int cmd_serial;
+  int cmd_first_screen;
   int session_no;
   int         n_keytab;
   int         n_oldkeytab;
