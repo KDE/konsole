@@ -51,6 +51,11 @@ public:
     void setScroll(int cursor, int lines);
     void doScroll(int lines);
 
+
+    void setLineSpacing(uint);
+
+    uint lineSpacing() const;
+
     void emitSelection();
 
     void setImage(const ca* const newimg, int lines, int columns);
@@ -76,6 +81,9 @@ public:
     void setVTFont(const QFont &);
 
     void setMouseMarks(bool on);
+
+    // current session in this widget
+    TESession *currentSession;
 
 public slots:
 
@@ -183,9 +191,8 @@ private:
     QLabel *mResizeLabel;                               
     QTimer *mResizeTimer;
 
- public:
-    // current session in this widget
-    TESession *currentSession;
+    uint m_lineSpacing;
+
 private slots:
     void drop_menu_activated(int item);
     void swapColorTable();

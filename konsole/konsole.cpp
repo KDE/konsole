@@ -484,6 +484,34 @@ void Konsole::makeGUI()
    selectFont->setItems(it);
    selectFont->plug(m_options);
 
+   // Select line spacing.
+   selectLineSpacing =
+     new KSelectAction
+     (
+      i18n("&Line spacing"),
+      SmallIconSet("leftjust"), // Non-code hack.
+      0,
+      this,
+      SLOT(slotSelectLineSpacing()),
+      this
+     );
+
+   QStringList lineSpacingList;
+
+   lineSpacingList
+     << i18n("&0")
+     << i18n("&1")
+     << i18n("&2")
+     << i18n("&3")
+     << i18n("&4")
+     << i18n("&5")
+     << i18n("&6")
+     << i18n("&7")
+     << i18n("&8");
+
+   selectLineSpacing->setItems(lineSpacingList);
+   selectLineSpacing->plug(m_options);
+
    // Schema
    m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Sch&ema" ), m_schema);
    m_options->insertSeparator();
@@ -794,6 +822,7 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("keytab",n_defaultKeytab);
   config->writeEntry("WarnQuit", b_warnQuit);
   config->writeEntry("ActiveSession", active);
+  config->writeEntry("LineSpacing", lineSpacing);
 
   if (se) {
     config->writeEntry("history", se->history().getSize());
@@ -829,6 +858,8 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    n_bell = QMIN(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),2);
    s_word_seps= config->readEntry("wordseps",":@-./_~");
    b_framevis = config->readBoolEntry("has frame",TRUE);
+
+   lineSpacing=config->readUnsignedNumEntry( "LineSpacing", 0 );
 
    // Global options ///////////////////////
 
@@ -868,6 +899,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    }
    //KONSOLEDEBUG << "Doing the rest" << endl;
 
+   te->setLineSpacing(lineSpacing);
    te->setScrollbarLocation(n_scroll);
    te->setBellMode(n_bell);
    te->setWordCharacters(s_word_seps);
@@ -965,6 +997,12 @@ void Konsole::slotSelectScrollbar() {
    activateSession(); // maybe helps in bg
 }
 
+
+void Konsole::slotSelectLineSpacing()
+{
+  lineSpacing = selectLineSpacing->currentItem();
+  te->setLineSpacing(lineSpacing);
+}
 
 void Konsole::slotSelectFont() {
   assert(se);

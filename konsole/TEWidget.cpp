@@ -222,7 +222,7 @@ static QChar identicalMap(QChar c)
 void TEWidget::fontChange(const QFont &)
 {
   QFontMetrics fm(font());
-  font_h = fm.height();
+  font_h = fm.height() + m_lineSpacing;
   font_w = fm.maxWidth();
   font_a = fm.ascent();
 //printf("font_h: %d\n",font_h);
@@ -264,6 +264,7 @@ void TEWidget::setFont(const QFont &)
 
 TEWidget::TEWidget(QWidget *parent, const char *name)
 :QFrame(parent,name)
+,currentSession(0)
 ,font_h(1)
 ,font_w(1)
 ,font_a(1)
@@ -284,7 +285,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,mResizeWidget(0)
 ,mResizeLabel(0)
 ,mResizeTimer(0)
-,currentSession(0)
+,m_lineSpacing(0)
 {
   // The offsets are not yet calculated. 
   // Do not calculate these too often to be more smoothly when resizing
@@ -1321,5 +1322,16 @@ void TEWidget::drop_menu_activated(int item)
       setActiveWindow();
       break;
    }
+}
+
+uint TEWidget::lineSpacing() const
+{
+  return m_lineSpacing;
+}
+
+void TEWidget::setLineSpacing(uint i)
+{
+  m_lineSpacing = i;
+  setVTFont(font()); // Trigger an update.
 }
 

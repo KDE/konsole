@@ -122,6 +122,7 @@ private slots:
   void slotSelectSize();
   void slotSelectFont();
   void slotSelectScrollbar();
+  void slotSelectLineSpacing();
   void slotWarnQuit();
   void loadScreenSessions();
 
@@ -179,6 +180,7 @@ private:
   KSelectAction *selectFont;
   KSelectAction *selectScrollbar;
   KSelectAction *selectBell;
+  KSelectAction *selectLineSpacing;
 
   KAction       *m_clearHistory;
   KAction       *m_moveSessionLeft;
@@ -218,6 +220,8 @@ private:
 
   unsigned int m_histSize;
   bool         b_histEnabled:1;
+
+  uint         lineSpacing;
 
 public:
 
