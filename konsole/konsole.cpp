@@ -3354,7 +3354,7 @@ void Konsole::slotRenameSession(TESession* ses, const QString &name)
   title=title.replace('&',"&&");
   ra->setText(title);
   ra->setIcon( ses->IconName() ); // I don't know why it is needed here
-  if (tabwidget)
+  if (tabwidget && m_tabViewMode!=ShowIconOnly)
     tabwidget->changeTab( ses->widget(), title );
   updateTitle();
 }
