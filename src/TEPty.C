@@ -64,6 +64,10 @@
 #include <config.h>
 #endif
 
+#ifdef __sgi
+#define __svr4__
+#endif
+
 #if defined(HAVE_GRANTPT) && defined(HAVE_PTSNAME) && defined(HAVE_UNLOCKPT) && !defined(_XOPEN_SOURCE) && !defined(__svr4__)
 #define _XOPEN_SOURCE // make stdlib.h offer the above fcts
 #endif
@@ -143,10 +147,6 @@ extern "C" {
 #if defined (_HPUX_SOURCE)
 #define _TERMIOS_INCLUDED
 #include <bsdtty.h>
-#endif
-
-#ifdef __sgi__
-#define __svr4__
 #endif
 
 #include <qintdict.h>
