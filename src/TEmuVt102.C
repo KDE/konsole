@@ -76,6 +76,8 @@ TEmuVt102::TEmuVt102(TEWidget* gui) : TEmulation(gui)
   initTokenizer();
   //kdDebug(1211)<<"TEmuVt102 ctor() reset()"<<endl;
   reset();
+  //kdDebug(1211)<<"TEmuVt102 ctor() setKeyTrans()"<<endl;
+  setKeytrans(0);
   //kdDebug(1211)<<"TEmuVt102 ctor() ctor done"<<endl;
 }
 
@@ -105,8 +107,6 @@ void TEmuVt102::reset()
   screen[0]->reset();
   //kdDebug(1211)<<"TEmuVt102::reset() setCodec()"<<endl;
   setCodec(0);
-  //kdDebug(1211)<<"TEmuVt102::reset() setKeyTrans()"<<endl;
-  setKeytrans(0);
   //kdDebug(1211)<<"TEmuVt102::reset() done"<<endl;
 }
 
