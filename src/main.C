@@ -168,24 +168,41 @@ void TEDemo::onDrop( KDNDDropZone* _zone )
 {
   QStrList strlist;
   KURL *url;
-  QString str = "";
   int file_count = 0;
   char *p;
+  dropText = "";
 
   strlist = _zone->getURLList();
-  if (strlist.count()){
+  if (strlist.count())
+  {
     p = strlist.first();
     while(p != 0) {
       url = new KURL( p );
       if(file_count++ > 0)
-	str += " ";
-      str += url->path();
+      dropText += " ";
+      dropText += url->path();
       delete url;
       p = strlist.next();
     }
-//    send_string((unsigned char *)str.data(), str.length());
-printf("drop: >%s<\n",str.data());
-se->getEmulation()->sendString(str.data());
+    m_drop->popup(QPoint(_zone->getMouseX(),_zone->getMouseY()));
+    //se->getEmulation()->sendString(str.data());
+  }
+}
+
+void TEDemo::drop_menu_activated(int item)
+{
+  switch (item)
+  {
+    case 0: // paste
+      se->getEmulation()->sendString(dropText.data());
+//    KWM::activate((Window)this->winId());
+      break;
+    case 1: // cd ...
+      se->getEmulation()->sendString("cd ");
+      se->getEmulation()->sendString(dropText.data());
+      se->getEmulation()->sendString("\n");
+//    KWM::activate((Window)this->winId());
+      break;
   }
 }
 
@@ -295,6 +312,11 @@ void TEDemo::makeMenu()
   m_help->insertItem( i18n("&About ..."), this, SLOT(about()));
   m_help->insertItem( i18n("&User's Manual ..."), this, SLOT(help()));
   m_help->insertItem( i18n("&Technical Reference ..."), this, SLOT(tecRef()));
+
+  m_drop = new QPopupMenu;
+  m_drop->insertItem( i18n("Paste"), 0);
+  m_drop->insertItem( i18n("cd"),    1);
+  connect(m_drop, SIGNAL(activated(int)), SLOT(drop_menu_activated(int)));
 
   m_options->installEventFilter( this );
 

@@ -119,7 +119,7 @@ void VT102Emulation::setColumns(int columns)
 {
   emit changeColumns(columns); // this goes strange ways
 }
-
+
 // Interpreting Codes ---------------------------------------------------------
 /*
    This section deals with decoding the incoming character stream.
@@ -245,6 +245,7 @@ void VT102Emulation::tau( int code, int p, int q )
     case TY_CSI_PS('i',    0) : /*                                   */ break; //VT100
     case TY_CSI_PS('l',    4) : scr->  resetMode      (MODE_Insert   ); break;
     case TY_CSI_PS('l',   20) :        resetMode      (MODE_NewLine  ); break;
+
     case TY_CSI_PS('m',    0) : scr->setDefaultRendition  (          ); break;
     case TY_CSI_PS('m',    1) : scr->  setRendition     (RE_BOLD     ); break; //VT100
     case TY_CSI_PS('m',    4) : scr->  setRendition     (RE_UNDERLINE); break; //VT100
@@ -257,6 +258,7 @@ void VT102Emulation::tau( int code, int p, int q )
     case TY_CSI_PS('m',   24) : scr->resetRendition     (RE_UNDERLINE); break;
     case TY_CSI_PS('m',   25) : scr->resetRendition     (RE_BLINK    ); break;
     case TY_CSI_PS('m',   27) : scr->resetRendition     (RE_REVERSE  ); break;
+
     case TY_CSI_PS('m',   30) : scr->setForeColor         (         0); break;
     case TY_CSI_PS('m',   31) : scr->setForeColor         (         1); break;
     case TY_CSI_PS('m',   32) : scr->setForeColor         (         2); break;
@@ -266,6 +268,7 @@ void VT102Emulation::tau( int code, int p, int q )
     case TY_CSI_PS('m',   36) : scr->setForeColor         (         6); break;
     case TY_CSI_PS('m',   37) : scr->setForeColor         (         7); break;
     case TY_CSI_PS('m',   39) : scr->setForeColorToDefault(          ); break;
+
     case TY_CSI_PS('m',   40) : scr->setBackColor         (         0); break;
     case TY_CSI_PS('m',   41) : scr->setBackColor         (         1); break;
     case TY_CSI_PS('m',   42) : scr->setBackColor         (         2); break;
@@ -382,7 +385,7 @@ void VT102Emulation::tau( int code, int p, int q )
     default : ReportErrorToken();    break;
   };
 }
-
+
 // -----------------------------------------------------------------------------
 //
 // Scanner / Transducer
@@ -725,8 +728,6 @@ void VT102Emulation::onMouse( int cb, int cx, int cy )
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-#define inApp  getMode(MODE_AppCuKeys)
-#define inAnsi getMode(MODE_Ansi     )
 #define KeyComb(B,K) ((ev->state() & (B)) == (B) && ev->key() == (K))
 
 #define Xterm (!strcmp(emulation.data(),"xterm"))
@@ -758,10 +759,10 @@ void VT102Emulation::onKeyPress( QKeyEvent* ev )
     case Key_Backspace : sendString(getMode(MODE_BsHack )?"\x7f"   :"\x08"); return;
     case Key_Delete    : sendString(getMode(MODE_BsHack )?"\033[3~":"\x7f"); return;
 
-    case Key_Up        : sendString(!inAnsi?"\033A":inApp?"\033OA":"\033[A"); return;
-    case Key_Down      : sendString(!inAnsi?"\033B":inApp?"\033OB":"\033[B"); return;
-    case Key_Right     : sendString(!inAnsi?"\033C":inApp?"\033OC":"\033[C"); return;
-    case Key_Left      : sendString(!inAnsi?"\033D":inApp?"\033OD":"\033[D"); return;
+    case Key_Up        : sendString(!getMode(MODE_Ansi)?"\033A":getMode(MODE_AppCuKeys)?"\033OA":"\033[A"); return;
+    case Key_Down      : sendString(!getMode(MODE_Ansi)?"\033B":getMode(MODE_AppCuKeys)?"\033OB":"\033[B"); return;
+    case Key_Right     : sendString(!getMode(MODE_Ansi)?"\033C":getMode(MODE_AppCuKeys)?"\033OC":"\033[C"); return;
+    case Key_Left      : sendString(!getMode(MODE_Ansi)?"\033D":getMode(MODE_AppCuKeys)?"\033OD":"\033[D"); return;
 
                                     //      XTERM      LINUX
     case Key_F1        : sendString(Xterm? "\033[11~": "\033[[A" ); return;

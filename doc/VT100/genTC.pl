@@ -10,11 +10,39 @@ my $test = 0;
 #
 # Dotted.Name Text
 # Dotted.Name
-#   Text Lines
+#   Text
+#   Lines
 #
 # The dotted names have to be unique. Conceptually, they form a tree.
 #
 
+# Data Model ------------------------------------------------------------------
+
+# This is currently pretty wierd.
+#
+# Empirically, we have
+#
+# NAME.head <Title Line>
+# NAME.attr { lots ... }
+# NAME.dflt Value ...
+# NAME.code <Typ>|<Ide>|<Parm>
+# NAME.text
+#   <text with some special tricks>
+# NAME.table.TAB
+#   <"|"-separated head line>
+#   <"|"-separated data rows>
+#
+# TABs
+# - .XPS, used for instructions with subcodes
+#   Subcode|Emulation|Scope|Operation|Parameter|Meaning
+# - .XEX, used for individual codes
+#   Instruction|Scope|Operation|Parameter
+#
+# Alternative
+# - .impl Scope|Operation|Parameters
+# - .subc.SUBCODE.impl
+# - .subc.SUBCODE.attr
+# - .subc.SUBCODE.head
 
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------

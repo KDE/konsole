@@ -47,6 +47,7 @@ private slots:
   void schema_menu_activated(int item);
   void size_menu_activated(int item);
   void pixmap_menu_activated(int item);
+  void drop_menu_activated(int item);
   void about();
   void help();
   void tecRef();
@@ -97,6 +98,7 @@ private:
   QPopupMenu* m_font;
   QPopupMenu* m_schema;
   QPopupMenu* m_size;
+  QPopupMenu* m_drop;
 //
   bool        b_menuvis;
   bool        b_framevis;
@@ -108,6 +110,7 @@ private:
   QSize       lincol0; //FIXME: something is messed up initializing the size (event handling)
   QSize       lincol;
   QString     pmPath; // pixmap path
+  QString     dropText;
 
   int         curr_schema; // current schema no
 

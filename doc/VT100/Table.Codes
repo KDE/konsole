@@ -1,3 +1,4 @@
+## freshly generated section, see for the file header below ##
 
 PRINT.table.XEX
   Instruction:2|Scope|Operation|Args
@@ -499,6 +500,8 @@ VT52KPNM.table.XEX
 #
 # The missing link in the moment is a proper handling of all the Ps arguments
 # that refere to different routines (subfunction of an esc code).
+
+## Keyboard #################################################################
 
 KEYBOARD.head Keyboard Events
 KEYBOARD.attr Konsole Event
