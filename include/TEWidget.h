@@ -31,15 +31,14 @@ class Konsole;
 
 class TEWidget : public QFrame
 // a widget representing attributed text
-{ Q_OBJECT
+{
+   Q_OBJECT
 
   friend class Konsole;
 public:
 
     TEWidget(QWidget *parent=0, const char *name=0);
     virtual ~TEWidget();
-
-public:
 
     QColor getDefaultBackColor();
 
@@ -54,8 +53,6 @@ public:
 
     void emitSelection();
 
-public:
-
     void setImage(const ca* const newimg, int lines, int columns);
 
     int  Lines()   { return lines;   }
@@ -69,9 +66,17 @@ public:
 
     void setWordCharacters(QString wc);
 
-public:
-
     void Bell();
+    void setSelection(const QString &t);
+
+    virtual void setFont(const QFont &);
+    void setVTFont(const QFont &);
+
+    void setMouseMarks(bool on);
+
+public slots:
+
+    void onClearSelection();
 
 signals:
 
@@ -84,7 +89,7 @@ signals:
     void clearSelectionSignal();
     void beginSelectionSignal( const int x, const int y );
     void extendSelectionSignal( const int x, const int y );
-    void endSelectionSignal(const BOOL preserve_line_breaks);
+    void endSelectionSignal(const bool preserve_line_breaks);
 
 
 protected:
@@ -94,7 +99,7 @@ protected:
     bool eventFilter( QObject *, QEvent * );
 
     void drawAttrStr(QPainter &paint, QRect rect,
-                     QString& str, ca attr, BOOL pm, BOOL clear);
+                     QString& str, ca attr, bool pm, bool clear);
     void paintEvent( QPaintEvent * );
 
     void resizeEvent(QResizeEvent*);
@@ -118,18 +123,6 @@ protected:
     virtual int charClass(char) const;
 
     void clearImage();
-
-public:
-    void setSelection(const QString &t);
-
-    virtual void setFont(const QFont &);
-    void setVTFont(const QFont &);
-
-    void setMouseMarks(bool on);
-
-public slots:
-
-    void onClearSelection();
 
 protected slots:
 
@@ -155,7 +148,7 @@ private:
 
     ColorEntry color_table[TABLE_COLORS];
 
-    BOOL resizing;
+    bool resizing;
     bool mouse_marks;
 
     void makeImage();
@@ -163,8 +156,8 @@ private:
     QPoint iPntSel; // initial selection point
     QPoint pntSel; // current selection point
     int    actSel; // selection state
-    BOOL    word_selection_mode;
-    BOOL    preserve_line_breaks;
+    bool    word_selection_mode;
+    bool    preserve_line_breaks;
 
     QClipboard*    cb;
     QScrollBar* scrollbar;
@@ -175,8 +168,8 @@ private:
 //#define SCRLEFT  1
 //#define SCRRIGHT 2
 
-    BOOL blinking;   // hide text in paintEvent
-    BOOL hasBlinker; // has characters to blink
+    bool blinking;   // hide text in paintEvent
+    bool hasBlinker; // has characters to blink
     QTimer* blinkT;  // active when hasBlinker
     KPopupMenu* m_drop;
     QString dropText;

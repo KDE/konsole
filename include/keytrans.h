@@ -37,51 +37,53 @@
 
 #define BITS(x,v) ((((v)!=0)<<(x)))
 
+class KeytabReader;
 
 class KeyTrans
 {
-public:
-  KeyTrans();
-  ~KeyTrans();
-  static KeyTrans* defaultKeyTrans();
-  static KeyTrans* fromFile(const char* path);
-  static KeyTrans* find(int numb);
-  static KeyTrans* find(const char* path);
-public:
-  static int count();
-  static void loadAll();
-public:
-  bool findEntry(int key, int bits, int* cmd, const char** txt, int* len);
-private:
-  void addKeyTrans();
-  static KeyTrans* fromDevice(QString path, QIODevice &buf);
-public:
-  class KeyEntry
-  {
-  public:
-    KeyEntry(int ref, int key, int bits, int mask, int cmd, QString txt);
-    ~KeyEntry();
-  public:
-    bool matches(int key, int bits, int mask);
-    QString text();
-  public:
-    int ref;
-  private:
-    int     key;
-    int     bits;
-    int     mask;
-  public:
-    int cmd;
-    QString txt;
-  };
-public:
-  KeyEntry* addEntry(int ref, int key, int bits, int mask, int cmd, QString txt);
-private:
-  QList<KeyEntry> table;
-public: //FIXME: we'd do better
-  QString         hdr;
-  int numb;
-  QString path;
+   friend KeytabReader;
+   public:
+      static KeyTrans* find(int numb);
+      static KeyTrans* find(const char* path);
+      static int count();
+      static void loadAll();
+
+      KeyTrans(const QString& p);
+      ~KeyTrans();
+      //static KeyTrans* defaultKeyTrans();
+      //static KeyTrans* fromFile(const char* path);
+      bool findEntry(int key, int bits, int* cmd, const char** txt, int* len);
+      const QString& hdr()         {if (!m_fileRead) readConfig(); return m_hdr;};
+      int numb()                   {return m_numb;};
+      const QString& path()        {return m_path;};
+
+      class KeyEntry
+      {
+         public:
+            KeyEntry(int ref, int key, int bits, int mask, int cmd, QString txt);
+            ~KeyEntry();
+            bool matches(int key, int bits, int mask);
+            QString text();
+            int ref;
+         private:
+            int     key;
+            int     bits;
+            int     mask;
+         public:
+            int cmd;
+            QString txt;
+      };
+
+   private:
+      KeyEntry* addEntry(int ref, int key, int bits, int mask, int cmd, QString txt);
+      void addKeyTrans();
+      void readConfig();
+      QList<KeyEntry> tableX;
+      QString m_hdr;
+      QString m_path;
+      int m_numb;
+      bool m_fileRead;
+      KeyTrans();
 };
 
 #endif
