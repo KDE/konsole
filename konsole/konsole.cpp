@@ -213,12 +213,10 @@ DCOPObject( "konsole" )
 ,wallpaperSource(0)
 ,sessionIdCounter(0)
 ,s_kconfigSchema("")
-,b_scroll(histon)
 ,b_fullscreen(false)
 ,m_menuCreated(false)
 ,skip_exit_query(false) // used to skip the query when closed by the session management
 ,b_warnQuit(false)
-,b_histEnabled(true)
 ,m_histSize(DEFAULT_HISTORY_SIZE)
 {
   isRestored = b_inRestore;
@@ -282,13 +280,15 @@ DCOPObject( "konsole" )
     toolBar()->hide();
   toolBar()->setText(i18n("Session Toolbar"));
   if (!frameon) {
-    b_framevis=false;
+    b_framevis=false; 
     te->setFrameStyle( QFrame::NoFrame );
   }
   if (!scrollbaron) {
     n_scroll = TEWidget::SCRNONE;
     te->setScrollbarLocation(TEWidget::SCRNONE);
   }
+  if (!histon)
+    b_histEnabled=false;
 
   // activate and run first session //////////////////////////////////////////
   // FIXME: this slows it down if --type is given, but prevents a crash (malte)
@@ -796,7 +796,6 @@ void Konsole::saveProperties(KConfig* config) {
      }
   }
   config->setDesktopGroup();
-  config->writeEntry("history",b_scroll);
   config->writeEntry("Fullscreen",b_fullscreen);
   config->writeEntry("font",n_defaultFont);
   config->writeEntry("defaultfont", defaultFont);
@@ -834,25 +833,30 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
    config->setDesktopGroup();
    //KONSOLEDEBUG<<"Konsole::readProps()"<<endl;
 
+   if (config==KGlobal::config())
+   {
+     b_warnQuit=config->readBoolEntry( "WarnQuit", TRUE );
+
+     s_word_seps= config->readEntry("wordseps",":@-./_~");
+     te->setWordCharacters(s_word_seps);
+
+     b_framevis = config->readBoolEntry("has frame",TRUE);
+     te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
+
+     te->setBlinkingCursor(config->readBoolEntry("BlinkingCursor",FALSE));
+     te->setTerminalSizeHint( config->readBoolEntry("TerminalSizeHint",true) );
+     te->setLineSpacing( config->readUnsignedNumEntry( "LineSpacing", 0 ) );
+   }
+
+   ColorSchema* sch = 0;
    if (!globalConfigOnly)
    {
-      b_scroll = config->readBoolEntry("history",TRUE);
       n_defaultKeytab=config->readNumEntry("keytab",0); // act. the keytab for this session
       b_fullscreen = config->readBoolEntry("Fullscreen",FALSE);
       n_defaultFont = n_font = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
       n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
       n_bell = QMIN(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),2);
-   }
 
-   b_warnQuit=config->readBoolEntry( "WarnQuit", TRUE );
-   s_word_seps= config->readEntry("wordseps",":@-./_~");
-   b_framevis = config->readBoolEntry("has frame",TRUE);
-   te->setBlinkingCursor(config->readBoolEntry("BlinkingCursor",FALSE));
-
-   ColorSchema* sch = 0;
-
-   if (!globalConfigOnly)
-   {
       // Options that should be applied to all sessions /////////////
       // (1) set menu items and Konsole members
       QFont tmpFont("fixed");
@@ -886,17 +890,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
          rootxpm->stop();
          pixmap_menu_activated(sch->alignment());
       }
-   }
-   
-   //KONSOLEDEBUG << "Doing the rest" << endl;
 
-   te->setTerminalSizeHint( config->readBoolEntry("TerminalSizeHint",true) );
-   te->setLineSpacing( config->readUnsignedNumEntry( "LineSpacing", 0 ) );
-   te->setWordCharacters(s_word_seps);
-   te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
-
-   if (!globalConfigOnly)
-   {
       te->setColorTable(sch->table());
       te->setScrollbarLocation(n_scroll);
       te->setBellMode(n_bell);
@@ -912,7 +906,6 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       applySettingsToGUI();
       activateSession();
    };
-//   setFullScreen(b_fullscreen);
 }
 
 void Konsole::applySettingsToGUI()

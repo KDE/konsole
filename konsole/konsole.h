@@ -260,7 +260,6 @@ private:
 
   QRect       _saveGeometry;
 
-  bool        b_scroll:1;
   bool        b_framevis:1;
   bool        b_fullscreen:1;
   bool        m_menuCreated:1;
