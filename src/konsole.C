@@ -810,12 +810,12 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
 void Konsole::applySettingsToGUI()
 {
    if (!m_menuCreated) return;
-   m_options->setItemChecked(3,b_scroll);
    warnQuit->setChecked ( b_warnQuit);
    m_keytab->setItemChecked(n_oldkeytab,FALSE);
    m_keytab->setItemChecked(n_keytab,TRUE);
    showFrame->setChecked( b_framevis );
    selectFont->setCurrentItem(n_font);
+   notifySize(te->Lines(),te->Columns());
    showToolbar->setChecked(!toolBar()->isHidden());
    showMenubar->setChecked(!menuBar()->isHidden());
    selectScrollbar->setCurrentItem(n_scroll);
