@@ -103,12 +103,6 @@
 #endif
 #include <sys/wait.h>
 
-#ifdef HAVE_UTEMPTER
-extern "C" {
-        #include <utempter.h>
-}
-#endif
-
 #include <errno.h>
 #include <assert.h>
 #include <fcntl.h>
@@ -170,6 +164,19 @@ extern "C" {
 
 template class QIntDict<TEPty>;
 
+class KUtmpProcess : public KProcess
+{
+public:
+   int commSetupDoneC() 
+   {
+     dup2(cmdFd, 0);   
+     dup2(cmdFd, 1);   
+     dup2(cmdFd, 3);
+     return 1;
+   }
+   int cmdFd;
+};
+
 FILE* syslog_file = NULL; //stdout;
 
 #define PTY_FILENO 3
@@ -180,9 +187,18 @@ int chownpty(int fd, int grant)
 // param grant: 1 to grant, 0 to revoke
 // returns 1 on success 0 on fail
 {
+  struct sigaction newsa, oldsa;
+  newsa.sa_handler = SIG_DFL;
+  newsa.sa_mask = sigset_t();
+  newsa.sa_flags = 0;
+  sigaction(SIGCHLD, &newsa, &oldsa);
+
   pid_t pid = fork();
   if (pid < 0)
   {
+    // restore previous SIGCHLD handler
+    sigaction(SIGCHLD, &oldsa, NULL);
+
     return 0;
   }
   if (pid == 0)
@@ -195,14 +211,6 @@ int chownpty(int fd, int grant)
   }
 
   if (pid > 0) {
-    // ### FreeBSD seems to need the SIGCHLD sighandler resett to default for
-    // waitpid() to work. - Brad
-    struct sigaction newsa, oldsa;
-    newsa.sa_handler = SIG_DFL;
-    newsa.sa_mask = sigset_t();
-    newsa.sa_flags = 0;
-    sigaction(SIGCHLD, &newsa, &oldsa);
-
     int w;
 retry:
     int rc = waitpid (pid, &w, 0);
@@ -239,7 +247,12 @@ void TEPty::donePty()
 {
   int status = exitStatus();
 #ifdef HAVE_UTEMPTER
-  removeLineFromUtmp(ttynam, fd);
+  {
+     KUtmpProcess utmp;
+     utmp.cmdFd = fd;
+     utmp << "/usr/sbin/utempter" << "-d" << ttynam;
+     utmp.start(KProcess::Block);
+  }
 #elif defined(USE_LOGIN)
   char *tty_name=ttyname(0);
   if (tty_name)
@@ -446,7 +459,13 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
 
   // Stamp utmp/wtmp if we have and want them
 #ifdef HAVE_UTEMPTER
-  if (addutmp) addToUtmp(dev, "", fd);
+  if (addutmp)
+  {
+     KUtmpProcess utmp;
+     utmp.cmdFd = fd;
+     utmp << "/usr/sbin/utempter" << "-a" << dev << "";
+     utmp.start(KProcess::Block);
+  }
 #else
   (void)addutmp;
 #endif
@@ -560,7 +579,7 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   close(fd);
 
   // drop privileges
-  setuid(getuid()); setgid(getgid());
+  setgid(getgid()); setuid(getuid()); 
 
   // propagate emulation
   if (term && term[0]) setenv("TERM",term,1);

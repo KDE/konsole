@@ -446,7 +446,7 @@ ColorSchemaList::~ColorSchemaList()
 ColorSchema *ColorSchemaList::find(const QString& path)
 {
    if (path.isEmpty()) 
-      return const_cast<ColorSchema *>(at(0));
+      return find(0);
 	//KONSOLEDEBUG << "Looking for schema " << path << endl;
    //kdDebug(1211)<<"ColorSchema::find() count()=="<<count()<<endl;
 	ColorSchemaListIterator it(*this);

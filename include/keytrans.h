@@ -45,18 +45,16 @@ class KeyTrans
    friend class KeytabReader;
    public:
       static KeyTrans* find(int numb);
-      static KeyTrans* find(const char* path);
+      static KeyTrans* find(const QString &id);
       static int count();
       static void loadAll();
 
       KeyTrans(const QString& p);
       ~KeyTrans();
-      //static KeyTrans* defaultKeyTrans();
-      //static KeyTrans* fromFile(const char* path);
       bool findEntry(int key, int bits, int* cmd, const char** txt, int* len);
-      const QString& hdr()         {if (!m_fileRead) readConfig(); return m_hdr;};
-      int numb()                   {return m_numb;};
-      const QString& path()        {return m_path;};
+      const QString& hdr()         {if (!m_fileRead) readConfig(); return m_hdr;}
+      int numb()                   {return m_numb;}
+      const QString& id() { return m_id;}
 
       class KeyEntry
       {
@@ -82,6 +80,7 @@ class KeyTrans
       QList<KeyEntry> tableX;
       QString m_hdr;
       QString m_path;
+      QString m_id;
       int m_numb;
       bool m_fileRead;
       KeyTrans();

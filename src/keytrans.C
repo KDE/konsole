@@ -71,6 +71,20 @@ KeyTrans::KeyTrans(const QString& path)
 ,m_fileRead(false)
 {
   tableX.setAutoDelete(true);
+  if (m_path=="[buildin]")
+  {
+     m_id = "default";
+  }
+  else
+  {
+     m_id = m_path;
+     int i = m_id.findRev('/');
+     if (i > -1)
+        m_id = m_id.mid(i+1);
+     i = m_id.findRev('.');
+     if (i > -1)
+        m_id = m_id.left(i);
+  }
 }
 
 KeyTrans::KeyTrans()
@@ -303,17 +317,6 @@ static KeyTransSymbols * syms = 0L;
    - Comment :: '#' (any but \n)*
 */
 
-/*KeyTrans* KeyTrans::fromDevice(QString path, QIODevice &buf)
-{
-  KeyTrans* kt = new KeyTrans;
-  kt->path = path;
-  return kt;
-
-  KeytabReader ktr(path,buf);
-  ktr.parseTo(kt);
-  return kt;
-}*/
-
 void KeyTrans::readConfig()
 {
    if (m_fileRead) return;
@@ -431,21 +434,6 @@ ERROR:
   goto Loop;
 }
 
-
-/*KeyTrans* KeyTrans::defaultKeyTrans()
-{
-  QCString txt =
-#include "default.keytab.h"
-  ;
-  QBuffer buf(txt);
-  return fromDevice("[buildin]",buf);
-}*/
-
-/*KeyTrans* KeyTrans::fromFile(const char* path)
-{
-  QFile file(path);
-  return fromDevice(path,file);
-}*/
 
 // local symbol tables ---------------------------------------------------------------------
 // material needed for parsing the config file.
@@ -646,7 +634,6 @@ KeyTransSymbols::KeyTransSymbols()
 static int keytab_serial = 0; //FIXME: remove,localize
 
 static QIntDict<KeyTrans> * numb2keymap = 0L;
-static QDict<KeyTrans>    * path2keymap = 0L;
 
 KeyTrans* KeyTrans::find(int numb)
 {
@@ -654,10 +641,16 @@ KeyTrans* KeyTrans::find(int numb)
   return res ? res : numb2keymap->find(0);
 }
 
-KeyTrans* KeyTrans::find(const char* path)
+KeyTrans* KeyTrans::find(const QString &id)
 {
-  KeyTrans* res = path2keymap->find(path);
-  return res ? res : numb2keymap->find(0);
+  QIntDictIterator<KeyTrans> it(*numb2keymap);
+  while(it.current())
+  {
+    if (it.current()->id() == id)
+       return it.current();
+    ++it;
+  }
+  return numb2keymap->find(0);
 }
 
 int KeyTrans::count()
@@ -669,15 +662,12 @@ void KeyTrans::addKeyTrans()
 {
   m_numb = keytab_serial ++;
   numb2keymap->insert(m_numb,this);
-  path2keymap->insert(m_path,this);
 }
 
 void KeyTrans::loadAll()
 {
   if (!numb2keymap)
     numb2keymap = new QIntDict<KeyTrans>;
-  if (!path2keymap)
-    path2keymap = new QDict<KeyTrans>;
   if (!syms)
     syms = new KeyTransSymbols;
 

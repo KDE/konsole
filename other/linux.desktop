@@ -1,15 +1,15 @@
 [Desktop Entry]
 Type=KonsoleApplication
 Name=Linux
-Name[af]=LINUX
 Name[az]=Linuks
 Name[eo]=Linukso
 Name[he]=סקוניל
 Name[ko]=리눅스
 Name[mk]=Линукс
 Name[pl]=Linuks
+Name[th]=ลีนุกซ์
+Name[xh]=iLinux
 Comment=Linux Console
-Comment[af]=LINUX KONSOLE
 Comment[az]=Linuks Konsolu
 Comment[bg]=Конзола на Linux
 Comment[bs]=Linux konzola
@@ -49,11 +49,14 @@ Comment[sl]=Konzola za Linux
 Comment[sr]=Linux Konzola
 Comment[sv]=Linuxkonsoll
 Comment[ta]=Linux ¸¡ý§º¡ø
+Comment[th]=คอนโซลลีนุกซ์
 Comment[tr]=Linux Konsolu
 Comment[uk]=Консоль Linux
+Comment[xh]=Isakhelo esiqulathe ibhodi yezitshixo se Linux
 Comment[zh_CN.GB2312]=Linux 控制台
-Comment[zh_TW.Big5]=Linux 操控台
 Exec=bash
 Schema=Linux.schema
 #VGA
 Font=6
+Term=linux
+KeyTab=linux

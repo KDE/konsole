@@ -1,7 +1,6 @@
 [Desktop Entry]
 Exec=kwrited
 Name=KDE Write Daemon
-Name[af]=KDE SKRYF BEDIENER
 Name[az]=KDEWrite Proqramı
 Name[bg]=Демон Write на KDE
 Name[cs]=Zapisovací démon KDE
@@ -25,14 +24,15 @@ Name[nl]=KDE Schrijfdaemon
 Name[no]=KDE Skrive Daemon
 Name[no_NY]=KDE Skrivingsdemon
 Name[pl]=Demon zapisu KDE
-Name[pt_BR]=Serviço de escrita do KDE
+Name[pt_BR]=Daemon de escrita do KDE
 Name[pt]=Servidor do Write do KDE
 Name[ru]=Демон Write
 Name[sk]=KDE Write démon
 Name[sl]=Pisalni strežnik za KDE
-Name[sv]=KDE Skrivdemon
+Name[sv]=KDE-skrivdemon
 Name[tr]=KDEWrite Programı
 Name[uk]=Демон запису KDE
+Name[xh]=KDE iDaemon yokuBhala
 Name[zh_CN.GB2312]=KDE 书写器守护进程
 Type=Service
 X-KDE-StartupNotify=false

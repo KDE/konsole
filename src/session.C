@@ -18,7 +18,7 @@
     of the abilities of the framework - multible sessions.
 */
 
-TESession::TESession(KMainWindow* main, TEWidget* te, const QString &_pgm, QStrList & _args, const char *_term)
+TESession::TESession(KMainWindow* main, TEWidget* te, const QString &_pgm, QStrList & _args, const QString &_term)
    : schema_no(0)
    , font_no(3)
    , pgm(_pgm)
@@ -30,6 +30,7 @@ TESession::TESession(KMainWindow* main, TEWidget* te, const QString &_pgm, QStrL
   em = new TEmuVt102(te);
 
   term = _term;
+  iconText = kapp->caption();
 
   //kdDebug(1211)<<"TESession ctor() sh->setSize()"<<endl;
   sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
@@ -57,12 +58,16 @@ void TESession::run()
 {
   //kdDebug(1211) << "Running the session!" << pgm << "\n";
   //pgm = "pine";
-  sh->run(QFile::encodeName(pgm),args,term.data(),FALSE);
+  sh->run(QFile::encodeName(pgm),args,term.latin1(),FALSE);
 }
 
-void TESession::setUserTitle( int, const QString &caption )
+void TESession::setUserTitle( int what, const QString &caption )
 {
-    userTitle = caption;
+    // (btw: what=0 changes title and icon, what=1 only icon, what=2 only title
+    if ((what == 0) || (what == 2))
+       userTitle = caption;
+    if ((what == 0) || (what == 1))
+       iconText = caption;
     emit updateTitle();
 }
 
@@ -70,7 +75,7 @@ QString TESession::fullTitle() const
 {
     QString res = title;
     if ( !userTitle.isEmpty() )
-        res += " - " + userTitle;
+        res = userTitle + " - " + res;
     return res;
 }
 
@@ -116,9 +121,14 @@ int TESession::schemaNo()
   return schema_no;
 }
 
-int TESession::keymap()
+int TESession::keymapNo()
 {
-  return keymap_no;
+  return em->keymapNo();
+}
+
+QString TESession::keymap()
+{
+  return em->keymap();
 }
 
 int TESession::fontNo()
@@ -126,9 +136,9 @@ int TESession::fontNo()
   return font_no;
 }
 
-const char* TESession::emuName()
+const QString & TESession::Term()
 {
-  return term.data();
+  return term;
 }
 
 void TESession::setSchemaNo(int sn)
@@ -138,8 +148,12 @@ void TESession::setSchemaNo(int sn)
 
 void TESession::setKeymapNo(int kn)
 {
-  keymap_no = kn;
-  em->setKeytrans(kn);
+  em->setKeymap(kn);
+}
+
+void TESession::setKeymap(const QString &id)
+{
+  em->setKeymap(id);
 }
 
 void TESession::setFontNo(int fn)
@@ -156,6 +170,17 @@ void TESession::setTitle(const QString& _title)
 const QString& TESession::Title()
 {
   return title;
+}
+
+void TESession::setIconText(const QString& _iconText)
+{
+  iconText = _iconText;
+  //kdDebug(1211)<<"Session setIconText " <<  iconText <<endl;
+}
+
+const QString& TESession::IconText()
+{
+  return iconText;
 }
 
 void TESession::setHistory(const HistoryType &hType)
