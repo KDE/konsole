@@ -805,7 +805,7 @@ void TEDemo::doneSession(TESession* s, int status)
 void TEDemo::addSessionCommand(const char* path)
 {
   KSimpleConfig* co = new KSimpleConfig(path,TRUE);
-  co->setGroup("KDE Desktop Entry");
+  co->setDesktopGroup();
   QString typ = co->readEntry("Type");
   QString txt = co->readEntry("Comment");
   QString cmd = co->readEntry("Exec");
