@@ -1628,9 +1628,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
      }
   }
 
-  ColorSchema* schema = sch.isEmpty()
-                      ? colors->find(s_schema)
-                      : colors->find(sch);
+  ColorSchema* schema = colors->find(sch);
   if (!schema)
       schema=(ColorSchema*)colors->at(0);  //the default one
   int schmno = schema->numb();
