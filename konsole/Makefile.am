@@ -76,8 +76,6 @@ install-exec-local: install-binPROGRAMS
 METASOURCES = TEWidget.moc TEmuVt102.moc session.moc konsole.moc \
        TEmulation.moc TEPty.moc kwrited.moc konsole_part.moc 
 
-META_INCLUDES = $(srcdir)/../include
-
 messages: rc.cpp
 	rm -f schemas.cpp
 	for i in ../other/*.schema; do \
