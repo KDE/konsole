@@ -1054,7 +1054,7 @@ char *TEScreen::getSelText(const BOOL preserve_line_breaks)
     if ( s < hist_BR )
     { 	// get lines from history buffer.
       eol=histBuffer[hY]->len;
-      if  ((hY == (sel_BR/columns)) && (eol >= (sel_BR%columns)) ) eol=sel_BR%columns;
+      if  ((hY == (sel_BR/columns)) && (eol >= (sel_BR%columns)) ) eol=sel_BR%columns+1;
       while ( hX < eol )
       { 
          m[d++] = histBuffer[hY]->line[hX++].c; 
@@ -1079,15 +1079,30 @@ char *TEScreen::getSelText(const BOOL preserve_line_breaks)
       eol = (s/columns + 1)*columns - 1 ;
       if ( eol < sel_BR )
       {
-        while ((eol > s) && isspace(image[eol-hist_BR].c)) eol--  ;
+        while ((eol > s) && isspace(image[eol-hist_BR-columns].c)) eol--  ;
       }
       else
       {
         eol = sel_BR ;
       }
-      while (s <= eol)  m[d++] = image[s++-hist_BR].c;
+      while (s <= eol)  m[d++] = image[s++-hist_BR-columns].c;
 
-/* end of line processing for selection -- psilva
+      if (eol < sel_BR) {
+	if ( (eol+1)%columns == 0) {
+	    if (image[eol-hist_BR-columns].c == ' ') m[d++]=' ';
+	} 
+        else m[d++]=(preserve_line_breaks||((eol%columns)==0)?'\n':' ');   
+      }
+      s = ( eol/columns + 1)*columns;
+    }
+  }
+
+  // trim buffer size to actual size needed.
+  m=(char*)realloc( m ,  sizeof(char)*(d+1) );
+  m[d]= '\0';
+  return(m);
+}
+/* above ... end of line processing for selection -- psilva
 cases:
 
 1)    (eol+1)%columns == 0 --> the whole line is filled.
@@ -1111,21 +1126,6 @@ FIXME:
    line with the first of the next.
 
 */
-      if (eol < sel_BR) {
-	if ( (eol+1)%columns == 0) {
-	    if (image[eol-hist_BR].c == ' ') m[d++]=' ';
-	} 
-        else m[d++]=(preserve_line_breaks||((eol%columns)==0)?'\n':' ');   
-      }
-      s = ( eol/columns + 1)*columns;
-    }
-  }
-
-  // trim buffer size to actual size needed.
-  m=(char*)realloc( m ,  sizeof(char)*(d+1) );
-  m[d]= '\0';
-  return(m);
-}
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
