@@ -725,7 +725,7 @@ void TEScreen::ShowCharacter(unsigned short c)
       NextLine();
     } 
     else 
-      cuX = columns-1; // 1? or w?
+      cuX = columns-w;
   }
 
   if (getMode(MODE_Insert)) insertChars(w);
