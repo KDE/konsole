@@ -421,8 +421,8 @@ void Konsole::makeMenu()
 
   m_options->insertSeparator();
   // The 'filesave' icon is useable, but it might be confusing. I don't use it for now - Martijn
-  m_options->insertItem( i18n("Save &Options"), 8);
-  //  m_options->insertItem( SmallIconSet( "filesave" ), i18n("Save &Options"), 8);
+  m_options->insertItem( i18n("Save &Settings"), 8);
+  //  m_options->insertItem( SmallIconSet( "filesave" ), i18n("Save &Settings"), 8);
   connect(m_options, SIGNAL(activated(int)), SLOT(opt_menu_activated(int)));
   m_options->installEventFilter( this );
   // Help and about menu
@@ -448,7 +448,7 @@ void Konsole::makeMenu()
 
   menubar->insertItem(i18n("File") , m_file);
   menubar->insertItem(i18n("Sessions"), m_sessions);
-  menubar->insertItem(i18n("Options"), m_options);
+  menubar->insertItem(i18n("Settings"), m_options);
   menubar->insertSeparator();
   menubar->insertItem(i18n("Help"), m_help);
 }
