@@ -5,6 +5,8 @@ INCLUDES = -I. $(all_includes)
 
 # you can add here more. This one gets installed
 # bin_PROGRAMS = kcmkonsole
+bin_PROGRAMS =
+lib_LTLIBRARIES = 
 kdeinit_LTLIBRARIES = kwrited.la konsole.la
 
 kde_module_LTLIBRARIES = libkonsolepart.la
