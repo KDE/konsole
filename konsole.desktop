@@ -4,7 +4,7 @@ Type=Application
 Exec=konsole
 Icon=konsole
 DocPath=konsole/index.html
-Terminal=0
+Terminal=false
 X-KDE-StartupNotify=true
 
 Name=Konsole
@@ -113,5 +113,5 @@ GenericName[zh_TW]=終端機程式
 GenericName[zu]=Uhlelo lwemisebenzi lwangaohandle
 X-DCOP-ServiceType=Multi
 X-KDE-AuthorizeAction=shell_access
-Categories=Qt;KDE;System;TerminalEmulator
+Categories=Qt;KDE;System;TerminalEmulator;
 Test=foo,bar
