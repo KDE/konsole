@@ -203,6 +203,7 @@ HistoryScrollBuffer::HistoryScrollBuffer(unsigned int maxNbLines)
     m_nbLines(0),
     m_arrayIndex(0)
 {
+  buffFilled=false;
   m_histBuffer.setAutoDelete(true);
   m_histBuffer.resize(maxNbLines);
 }
@@ -220,7 +221,10 @@ void HistoryScrollBuffer::addCells(ca a[], int count)
   newLine->duplicate(a, count);
   
   ++m_arrayIndex;
-  if (m_arrayIndex >= m_maxNbLines) m_arrayIndex = 0;
+  if (m_arrayIndex >= m_maxNbLines) {
+     m_arrayIndex = 0;
+    buffFilled = true;
+    }
 
   if (m_nbLines < m_maxNbLines - 1) ++m_nbLines;
 
@@ -241,8 +245,14 @@ int HistoryScrollBuffer::getLines()
 int HistoryScrollBuffer::getLineLen(int lineno)
 {
   if (lineno >= m_maxNbLines) return 0;
-  
-  lineno = (lineno + m_arrayIndex + 2) % m_maxNbLines;
+
+  kdDebug() << "HistoryScrollBuffer::getLineLen(int lineno) receives lineno = " << lineno << endl;
+
+  if (buffFilled)  lineno = (lineno + m_arrayIndex + 2) % m_maxNbLines;
+  else lineno++;
+
+  kdDebug() << "HistoryScrollBuffer::getLineLen(int lineno) gives lineno = " << lineno << ". m_arrayIndex = " << m_arrayIndex << endl;
+  kdDebug() << "HistoryScrollBuffer::getLineLen(int lineno) gives m_maxNbLines = " << m_maxNbLines << endl;
 
   histline *l = m_histBuffer[lineno];
 
@@ -256,8 +266,9 @@ void HistoryScrollBuffer::getCells(int lineno, int colno, int count, ca res[])
 
   assert (lineno < m_maxNbLines);
 
-  lineno = (lineno + m_arrayIndex + 2) % m_maxNbLines;
-  
+  if (buffFilled)  lineno = (lineno + m_arrayIndex + 2) % m_maxNbLines;
+  else lineno++;
+
   histline *l = m_histBuffer[lineno];
 
   if (!l) {

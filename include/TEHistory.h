@@ -129,7 +129,8 @@ private:
   unsigned int m_maxNbLines;
   unsigned int m_nbLines;
   unsigned int m_arrayIndex;
-  
+  bool buffFilled;
+
 };
 
 #endif
