@@ -494,8 +494,10 @@ void Konsole::makeGUI()
    if (m_signals)
       m_edit->insertItem( i18n("&Send Signal"), m_signals );
 
-   m_edit->insertSeparator();
-   m_zmodemUpload->plug( m_edit );
+   if ( m_zmodemUpload ) {
+      m_edit->insertSeparator();
+      m_zmodemUpload->plug( m_edit );
+   }
 
    m_edit->insertSeparator();
    m_clearTerminal->plug(m_edit);
@@ -1024,8 +1026,13 @@ void Konsole::makeBasicGUI()
 
   m_renameSession = new KAction(i18n("&Rename Session..."), Qt::CTRL+Qt::ALT+Qt::Key_S, this,
                                 SLOT(slotRenameSession()), m_shortcuts, "rename_session");
-  m_zmodemUpload = new KAction(i18n("&ZModem Upload..."), Qt::CTRL+Qt::ALT+Qt::Key_U, this,
-                                SLOT(slotZModemUpload()), m_shortcuts, "zmodem_upload");
+
+  if (kapp->authorizeKAction("zmodem_upload"))
+    m_zmodemUpload = new KAction( i18n( "&ZModem Upload..." ), 
+                                  Qt::CTRL+Qt::ALT+Qt::Key_U, this,
+                                  SLOT( slotZModemUpload() ), 
+                                  m_shortcuts, "zmodem_upload" );
+
   monitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ), "idea", 0, this,
                                         SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_activity" );
   monitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ), "ktip", 0, this,
@@ -3777,6 +3784,8 @@ void Konsole::slotZModemUpload()
 
 void Konsole::slotZModemDetected(TESession *session)
 {
+  if (!kapp->authorize("zmodem_download")) return;
+
   if(se != session)
     activateSession(session);
 
