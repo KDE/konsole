@@ -482,6 +482,7 @@ void KeyTransSymbols::defModSyms()
   defModSym("Ansi",       BITS_Ansi         );
   defModSym("NewLine",    BITS_NewLine      );
   defModSym("AppCuKeys",  BITS_AppCuKeys    );
+  defModSym("AppScreen",  BITS_AppScreen    );
 }
 
 void KeyTransSymbols::defKeySyms()
