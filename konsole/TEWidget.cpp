@@ -335,6 +335,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,mResizeLabel(0)
 ,mResizeTimer(0)
 ,m_lineSpacing(0)
+,colorsSwapped(false)
 {
   // The offsets are not yet calculated.
   // Do not calculate these too often to be more smoothly when resizing
@@ -411,7 +412,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
     }
     else
     {
-      if (pm || color_table[attr->b].color != color_table[DEFAULT_BACK_COLOR].color
+      if (pm || color_table[attr->b].color != color_table[ colorsSwapped ? DEFAULT_FORE_COLOR : DEFAULT_BACK_COLOR ].color
           || clear || (blinking && (attr->r & RE_BLINK)))
         paint.fillRect(rect, color_table[attr->b].color);
     }
@@ -1682,6 +1683,7 @@ void TEWidget::swapColorTable()
   ColorEntry color = color_table[1];
   color_table[1]=color_table[0];
   color_table[0]= color;
+  colorsSwapped = !colorsSwapped;
   update();
 }
 

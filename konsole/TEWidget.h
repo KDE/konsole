@@ -259,6 +259,7 @@ private:
     QRect       cursorRect; //for quick changing of cursor
 
     QPoint configureRequestPoint;  // remember right mouse button click position
+    bool colorsSwapped; // true during visual bell
 
 private slots:
     void drop_menu_activated(int item);
