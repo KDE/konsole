@@ -50,7 +50,6 @@
 #include <qdir.h>
 #include <qevent.h>
 #include <qdragobject.h>
-#include <qmessagebox.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -64,6 +63,7 @@
 #include <kurl.h>
 #include <qpainter.h>
 #include <kmenubar.h>
+#include <kmessagebox.h>
 
 #include <kimgio.h>
 
@@ -619,7 +619,7 @@ void TEDemo::setFont(int fontno)
   if ( !f.exactMatch() && fontno != 0)
   {
     QString msg = i18n("Font `%1' not found.\nCheck README.linux.console for help.").arg(fonts[fontno]);
-    QMessageBox::warning(this, i18n("Error - Konsole"), msg, i18n("&Ok"));
+    KMessageBox::error(this,  msg);
   }
   else
   {
@@ -733,7 +733,6 @@ void TEDemo::changeTitle(int, const char*s)
 void TEDemo::about()
 //FIXME: make this a little nicer
 {
-    QString title = i18n("About %1").arg(PACKAGE);
     QString msg = i18n(
 	"%1 version %2 - an X terminal\n"
 	"\n"
@@ -743,7 +742,7 @@ void TEDemo::about()
 	"terms of the Artistic License and comes\n"
 	"WITHOUT ANY WARRANTY.\n"
 	"See `LICENSE.readme´ for details.").arg(PACKAGE).arg(VERSION);
-    QMessageBox::information( 0, title, msg, i18n("&Ok") );
+    KMessageBox::about( 0, msg);
 }
 
 void TEDemo::help()
@@ -869,8 +868,7 @@ void TEDemo::doneSession(TESession* s, int )
     {char rcs[100]; sprintf(rcs,"%d.\n",WEXITSTATUS((status)));
       str = str + i18n("\nReturn code = ") + rcs;
     }
-    QMessageBox::warning(this, i18n("Error"), 
-			 str, i18n("&OK"));
+    KMessageBox::sorry(this, str);
   }
 #endif
   int no = (int)session2no.find(s);
