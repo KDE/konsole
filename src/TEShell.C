@@ -75,6 +75,10 @@
 #endif
 #include <sys/wait.h>
 
+#ifdef HAVE_UTEMPTER
+#include <utempter.h>
+#endif
+   
 
 #include <assert.h>
 #include <fcntl.h>
@@ -180,6 +184,9 @@ static void catchChild(int)
 
 void Shell::doneShell(int status)
 {
+#ifdef HAVE_UTEMPTER
+  removeFromUtmp();
+#endif   
   if (needGrantPty) chownpty(fd,FALSE);
   emit done(status);
 }
@@ -315,6 +322,11 @@ void Shell::makeShell(const char* dev, QStrList & args,
   ioctl(tt, I_PUSH, "ptem");
   ioctl(tt, I_PUSH, "ldterm");
 #endif
+
+  // Stamp utmp/wtmp if we have them
+#ifdef HAVE_UTEMPTER
+  addToUtmp(dev, "", fd);
+#endif   
 
   //reset signal handlers for child process
   for (sig = 1; sig < NSIG; sig++) signal(sig,SIG_DFL);
