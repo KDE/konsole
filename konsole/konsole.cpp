@@ -539,8 +539,8 @@ void Konsole::makeGUI()
    selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), 0 , this,
                                   SLOT(slotSelectBell()), actions, "bell");
    QStringList bellitems;
-   bellitems << i18n("&None")
-             << i18n("&System Notification")
+   bellitems << i18n("System &Bell")
+             << i18n("System &Notification")
              << i18n("&Visible Bell");
    selectBell->setItems(bellitems);
    selectBell->plug(m_options);
