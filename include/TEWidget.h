@@ -49,7 +49,9 @@ public:
 
     void calcGeometry();
     void propagateSize();
-    QSize calcSize(int cols, int lins);
+    QSize calcSize(int cols, int lins) const;
+    
+    QSize sizeHint() const;
 
 public:
 
