@@ -23,3 +23,8 @@ default_presentation=0
 Name=Silence in monitored session
 Comment=Silence detected in a monitored session
 default_presentation=0
+
+[Finished]
+Name=Session finished
+Comment=A running session has exited.
+default_presentation=0

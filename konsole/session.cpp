@@ -35,6 +35,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
    , monitorSilence(false)
    , masterMode(false)
    , autoClose(true)
+   , wantedClose(false)
    , schema_no(0)
    , font_no(3)
    , silence_seconds(10)
@@ -83,7 +84,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
 
   connect( em, SIGNAL( zmodemDetected() ), this, SLOT(slotZModemDetected()));
 
-  connect( sh,SIGNAL(done()), this,SLOT(done()) );
+  connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
   //kdDebug(1211)<<"TESession ctor() done"<<endl;
   if (!sh->error().isEmpty())
      QTimer::singleShot(0, this, SLOT(ptyError()));
@@ -203,6 +204,7 @@ bool TESession::sendSignal(int signal)
 bool TESession::closeSession()
 {
   autoClose = true;
+  wantedClose = true;
   if (!sh->isRunning() || !sendSignal(SIGHUP))
   {
      // Forced close.
@@ -236,8 +238,8 @@ void TESession::renameSession(const QString &name)
 TESession::~TESession()
 {
  //kdDebug(1211) << "disconnnecting..." << endl;
-  QObject::disconnect( sh, SIGNAL( done() ),
-                       this, SLOT( done() ) );
+  QObject::disconnect( sh, SIGNAL( done(int) ),
+                       this, SLOT( done(int) ) );
   delete em;
   delete sh;
 
@@ -256,13 +258,22 @@ void TESession::setListenToKeyPress(bool l)
   em->setListenToKeyPress(l);
 }
 
-void TESession::done()
+void TESession::done() {
+  emit processExited();
+  emit done(this);
+}
+
+void TESession::done(int exitStatus)
 {
   if (!autoClose)
   {
     userTitle = i18n("<Finished>");
     emit updateTitle();
     return;
+  }
+  if (!wantedClose)
+  {
+    KNotifyClient::event("Finished", i18n("Session '%1' exited with status %2.").arg(title).arg(exitStatus));
   }
   emit processExited();
   emit done(this);

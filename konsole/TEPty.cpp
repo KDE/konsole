@@ -78,9 +78,10 @@
 #include "TEPty.h"
 
 
-void TEPty::donePty()
+void TEPty::donePty(KProcess * pro)
 {
-  emit done();
+  pro->normalExit();
+  emit done(pro->exitStatus());
 }
 
 void TEPty::setSize(int lines, int cols)
@@ -143,7 +144,7 @@ TEPty::TEPty()
   connect(this, SIGNAL(receivedStdout(KProcess *, char *, int )),
 	  this, SLOT(dataReceived(KProcess *,char *, int)));
   connect(this, SIGNAL(processExited(KProcess *)),
-          this, SLOT(donePty()));
+          this, SLOT(donePty(KProcess *)));
   connect(this, SIGNAL(wroteStdin(KProcess *)),
           this, SLOT(doSendJobs()));
 

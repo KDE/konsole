@@ -56,7 +56,7 @@ Q_OBJECT
     /*!
         emitted when the client program terminates.
     */
-    void done();
+    void done(int returnCode);
 
     /*!
         emitted when a new block of data comes in.
@@ -79,7 +79,7 @@ Q_OBJECT
   protected slots:
       void dataReceived(KProcess *, char *buf, int len);
   public slots:
-      void donePty();
+      void donePty(KProcess *);
       
   private:
     void appendSendJob(const char* s, int len);

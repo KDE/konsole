@@ -101,6 +101,7 @@ public slots:
 
   void run();
   void done();
+  void done(int);
   void terminate();
   void setUserTitle( int, const QString &caption );
   void ptyError();
@@ -147,6 +148,7 @@ private:
   bool           monitorSilence;
   bool           masterMode;
   bool           autoClose;
+  bool           wantedClose;
   QTimer*        monitorTimer;
 
   //FIXME: using the indices here
