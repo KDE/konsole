@@ -293,7 +293,8 @@ Konsole::Konsole(const char* name, const char* _pgm,
   te->currentSession = se;
   se->setConnect(TRUE);
   if (mytitle.isEmpty()) {
-    title = se->Title(); // take title from current session
+    title = se->fullTitle(); // take title from current session
+//    title = se->Title(); // take title from current session
     }
   setHeader();
   se->setKeymapNo(n_keytab); // act. the keytab for this session
@@ -1084,16 +1085,10 @@ void Konsole::setHeader()
   setCaption(title);
 }
 
-void Konsole::changeTitle(int, const QString& s)
+void Konsole::updateTitle()
 {
-//  KONSOLEDEBUG << "changeTitle title = " << s << endl;
-//  title = s; setHeader();
-  title = te->currentSession->Title();
-  QString tmpTitle = title;
-  title += " - ";
-  title += s;
+  title = te->currentSession->fullTitle();
   setHeader();
-  title=tmpTitle;
 }
 
 /*
@@ -1215,12 +1210,12 @@ void Konsole::addSession(TESession* s)
 {
   session_no += 1;
   // create an action for the session
-//  if (inRestore) {
-//    QString title = s->Title();
-//    }
-//  else {
+  if (isRestored) {
+    QString title = s->Title();
+    }
+  else {
     QString title = i18n("%1 No %2").arg(s->Title()).arg(session_no);
-//    }
+    }
   //  char buffer[30];
   //  int acc = CTRL+SHIFT+Key_0+session_no; // Lars: keys stolen by kwin.
   KRadioAction *ra = new KRadioAction(title,
@@ -1290,15 +1285,16 @@ void Konsole::activateSession(TESession *s)
     }
 #endif
   }
-  if (te->currentSession) {
-    te->currentSession->setTitle(title);
+//  if (te->currentSession) {
+//    te->currentSession->setTitle(title);
 //    KONSOLEDEBUG<<"setTitle 1221 - " << title <<endl;
-    }
+//    }
   te->currentSession = se;
   if (s->fontNo() != n_font)
       setFont(s->fontNo());
   s->setConnect(TRUE);
-  title = s->Title(); // take title from current session
+  title = s->fullTitle(); // take title from current session
+//  title = s->Title(); // take title from current session
   setHeader();
   keytab_menu_activated(n_keytab); // act. the keytab for this session
 }
@@ -1395,6 +1391,8 @@ TESession *Konsole::newSession(KSimpleConfig *co)
            this,SLOT(doneSession(TESession*,int)) );
   connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
            this, SLOT(configureRequest(TEWidget*,int,int,int)) );
+  connect( s, SIGNAL( updateTitle() ),
+           this, SLOT( updateTitle() ) );
 
   s->setFontNo(QMIN(fno, TOPFONT));
   s->setSchemaNo(schmno);
@@ -1638,8 +1636,6 @@ void Konsole::setSchema(ColorSchema* s)
     pixmap_menu_activated(s->alignment());
   }
 
-//        KONSOLEDEBUG << "GCM 1 Doing the rest" << endl;
-
   te->setColorTable(s->table());
   if (se) se->setSchemaNo(s->numb());
 }
@@ -1650,10 +1646,9 @@ void Konsole::slotRenameSession() {
   QString name = ra->text();
   KLineEditDlg dlg(i18n("Session name"),name, this);
   if (dlg.exec()) {
-//    KONSOLEDEBUG<<"setTitle 1566"<<endl;
     se->setTitle(dlg.text());
     if(se == te->currentSession) {
-      title = dlg.text();
+      title = se->fullTitle();
       setHeader();
     }
     ra->setText(dlg.text());
@@ -1669,10 +1664,9 @@ void Konsole::initRenameSession(QString sTitle) {
   QString name = ra->text();
 //  KLineEditDlg dlg(i18n("Session name"),name, this);
 //  if (dlg.exec()) {
-//    KONSOLEDEBUG<<"setTitle 1566"<<endl;
     se->setTitle(sTitle);
     if(se == te->currentSession) {
-      title = sTitle;
+      title = se->fullTitle();
       setHeader();
     }
     ra->setText(sTitle);

@@ -40,7 +40,7 @@ public:
   int fontNo();
   const char* emuName();
   const QString& Title();
-  int keymap();
+  QString fullTitle() const;  int keymap();
 
   void setHistory(const HistoryType&);
   const HistoryType& history();
@@ -60,8 +60,10 @@ public slots:
 signals:
 
   void done(TESession*, int);
+  void updateTitle();
+
 private slots:
-  void saveChangedTitle(int, const QString& s);
+  void setUserTitle( int, const QString &caption );
 
 private:
 
@@ -76,6 +78,7 @@ private:
   int            font_no;
   int            keymap_no;
   QString        title;
+  QString        userTitle;
 
   const char*    pgm;
   QStrList       args;

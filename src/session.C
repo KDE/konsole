@@ -43,8 +43,10 @@ TESession::TESession(KMainWindow* main, TEWidget* te, const char* _pgm, QStrList
   connect( em,SIGNAL(ImageSizeChanged(int,int)),main,SLOT(notifySize(int,int)));
   connect( em,SIGNAL(sndBlock(const char*,int)),sh,SLOT(send_bytes(const char*,int)) );
   connect( em,SIGNAL(changeColumns(int)),main,SLOT(changeColumns(int)) );
-  connect( em,SIGNAL(changeTitle(int, const QString&)),main,SLOT(changeTitle(int, const QString&)) );
-//  connect( em,SIGNAL(changeTitle(int, const QString&)),this,SLOT(saveChangedTitle(int, const QString&)) );
+
+  connect( em, SIGNAL( changeTitle( int, const QString & ) ),
+           this, SLOT( setUserTitle( int, const QString & ) ) );
+
   connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
   //kdDebug(1211)<<"TESession ctor() done"<<endl;
 }
@@ -57,11 +59,20 @@ void TESession::run()
   sh->run(pgm,args,term.data(),FALSE);
 }
 
-void TESession::saveChangedTitle(int, const QString& s)
+void TESession::setUserTitle( int, const QString &caption )
 {
-   title=s;
-//   kdDebug(1211) << "saveChangedTitle in Session to " << title << endl;
-};
+    userTitle = caption;
+    emit updateTitle();
+}
+
+QString TESession::fullTitle() const
+{
+    QString res = title;
+    if ( !userTitle.isEmpty() )
+        res += " - " + userTitle;
+    return res;
+}
+
 
 void TESession::kill(int signal)
 {

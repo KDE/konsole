@@ -91,7 +91,7 @@ private slots:
   void changeColumns(int);
   void notifySize(int,int);
   void setHeader();
-  void changeTitle(int, const QString&);
+  void updateTitle();
   void prevSession();
   void nextSession();
   void allowPrevNext();
