@@ -773,9 +773,8 @@ QSize Konsole::calcSize(int columns, int lines) {
         }
     }
     if (!menuBar()->isHidden()) {
-        size += QSize(0,menuBar()->sizeHint().height());
+        size += QSize(0,menuBar()->heightForWidth(size.width()));
     }
-    size += QSize(2,4); // No idea why
     return size;
 }
 
