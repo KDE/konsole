@@ -133,7 +133,7 @@ ColorSchema::ColorSchema(const QString& pathname)
 ,lastRead(new QDateTime())
 {
     fPath = locate("appdata", pathname);
-	if (fPath.isNull() || !QFile::exists(fPath))
+	if (fPath.isEmpty() || !QFile::exists(fPath))
 	{
 		fPath = QString::null;
 		setDefaultSchema();
@@ -287,7 +287,7 @@ void ColorSchema::writeConfig(const QString& path) const
 
 bool ColorSchema::rereadSchemaFile()
 {
-	if (fPath.isNull()) return false;
+	if (fPath.isEmpty()) return false;
 
 	KONSOLEDEBUG << "Rereading schema file " << fPath << endl;
 
@@ -396,7 +396,7 @@ bool ColorSchema::hasSchemaFileChanged() const
 	// The default color schema never changes.
 	//
 	//
-	if (fPath.isNull()) return false;
+	if (fPath.isEmpty()) return false;
 
 	QFileInfo i(fPath);
 
@@ -453,6 +453,8 @@ ColorSchemaList::~ColorSchemaList()
 //now it works also if you give only the filename without path
 ColorSchema *ColorSchemaList::find(const QString& path)
 {
+   if (path.isEmpty()) 
+      return const_cast<ColorSchema *>(at(0));
 	KONSOLEDEBUG << "Looking for schema " << path << endl;
    kdDebug()<<"ColorSchema::find() count()=="<<count()<<endl;
 	ColorSchemaListIterator it(*this);

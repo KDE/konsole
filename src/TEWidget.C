@@ -882,7 +882,7 @@ void TEWidget::emitSelection()
 // Paste Clipboard by simulating keypress events
 {
   QString text = QApplication::clipboard()->text();
-  if ( ! text.isNull() )
+  if ( ! text.isEmpty() )
   {
     text.replace(QRegExp("\n"), "\r");
     QKeyEvent e(QEvent::KeyPress, 0,-1,0, text);
