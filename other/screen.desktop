@@ -1,5 +1,7 @@
 [Desktop Entry]
 Type=KonsoleApplication
-Name=New Screen Session
+Name=Screen Session
+Name[hu]=Új munkafolyamat
 Comment=Open a new screen session
+Comment[hu]=Megnyit egy új parancsértelmező ablakot
 Exec=screen 
