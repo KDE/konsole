@@ -974,7 +974,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     // Find left (left_not_right ? from start : from here)
     QPoint right = left_not_right ? iPntSel : here;
     i = loc(right.x(),right.y());
-    selClass = charClass(image[i].c);
+    selClass = charClass(image[i-1].c);
     if (selClass == ' ')
     {
        while ( right.x() < columns-1 && charClass(image[i+1].c) == selClass && !m_line_wrapped[right.y()])
