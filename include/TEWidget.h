@@ -96,8 +96,6 @@ protected:
     void resizeEvent(QResizeEvent*);
 
     void fontChange(const QFont &font);
-    void setFontMetrics(const QFont &f);
-
     void frameChanged();
 
     void mouseDoubleClickEvent(QMouseEvent* ev);

@@ -616,12 +616,6 @@ void Konsole::keytab_menu_activated(int item)
 
 void Konsole::setFont(int fontno)
 {
-    int lines = te->Lines();
-    int cols = te->Columns();
-
-    QFontMetrics fm(te->font());
-    int pointSize = fm.height();
-
   QFont f;
   if (fontno == 0)
     f = defaultFont;
@@ -639,21 +633,8 @@ void Konsole::setFont(int fontno)
     KMessageBox::error(this,  msg);
     return;
   }
-
-  QFontMetrics fm2(f);
-  //kdDebug(0) << "pointSizeOld=" << pointSize << " new=" << fm2.height() << endl;
-  if(fm2.height() > pointSize) {
-      //kdDebug(0) << "enlarging" << endl;
-      te->setFontMetrics(f);
-      setColLin(cols, lines);
-      te->setVTFont(f);
-      if (se) se->setFontNo(fontno);
-  } else {
-      te->setFontMetrics(f);
-      te->setVTFont(f);
-      setColLin(cols, lines);
-      if (se) se->setFontNo(fontno);
-  }
+  if (se) se->setFontNo(fontno);
+  te->setVTFont(f);
   n_font = fontno;
 }
 
@@ -880,19 +861,18 @@ void Konsole::activateSession(TESession *s)
   if (s->schemaNo()!=curr_schema)  {
     // the current schema has changed
     setSchema(s->schemaNo());
-    s->setConnect(TRUE);     // does a bulkShow (setImage)
-    setFont(s->fontNo());    //FIXME: creates flicker?
   } else  {
     // the schema was not changed
     ColorSchema* schema = ColorSchema::find(s->schemaNo());
     if (schema->usetransparency) {
 	rootxpm->repaint(true); // this is a must, otherwise you loose the bg.
     }
-    s->setConnect(TRUE);
   }
+  te->currentSession = se;
+  if (s->fontNo() != n_font) setFont(s->fontNo());
+  s->setConnect(TRUE);
   title = s->Title(); // take title from current session
   setHeader();
-  te->currentSession = se;
   keytab_menu_activated(n_keytab); // act. the keytab for this session
 }
 

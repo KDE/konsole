@@ -209,18 +209,7 @@ static QChar identicalMap(QChar c)
 
 void TEWidget::fontChange(const QFont &)
 {
-    setFontMetrics(font());
-    
-  fontMap = strcmp(QFont::encodingName(font().charSet()).ascii(),"iso10646")
-          ? vt100extended
-          : identicalMap;
-  propagateSize();
-  update();
-}
-
-void TEWidget::setFontMetrics(const QFont &f)
-{
-    QFontMetrics fm(f);
+  QFontMetrics fm(font());
   font_h = fm.height();
   font_w = fm.maxWidth();
   font_a = fm.ascent();
@@ -229,8 +218,13 @@ void TEWidget::setFontMetrics(const QFont &f)
 //printf("font_a: %d\n",font_a);
 //printf("charset: %s\n",QFont::encodingName(font().charSet()).ascii());
 //printf("rawname: %s\n",font().rawName().ascii());
-}    
-
+    
+  fontMap = strcmp(QFont::encodingName(font().charSet()).ascii(),"iso10646")
+          ? vt100extended
+          : identicalMap;
+  propagateSize();
+  update();
+}
 
 void TEWidget::setVTFont(const QFont& f)
 {
