@@ -823,7 +823,8 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    b_warnQuit=config->readBoolEntry( "WarnQuit", TRUE );
    n_defaultKeytab=config->readNumEntry("keytab",0); // act. the keytab for this session
    b_fullscreen = config->readBoolEntry("Fullscreen",FALSE);
-   n_defaultFont = n_font = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT);
+   // +1 because we have on more...a custom selected font
+   n_defaultFont = n_font = QMIN(config->readUnsignedNumEntry("font",3),TOPFONT+1); 
    n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
    n_bell = QMIN(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),2);
    s_word_seps= config->readEntry("wordseps",":@-./_~");
@@ -835,7 +836,8 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    // (1) set menu items and Konsole members
    QFont tmpFont("fixed");
    defaultFont = config->readFontEntry("defaultfont", &tmpFont);
-   setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT));
+   // +1 because we have on more...a custom selected font
+   setFont(QMIN(config->readUnsignedNumEntry("font",3),TOPFONT+1));
 
    //set the schema
    s_kconfigSchema=config->readEntry("schema", "");
@@ -1508,7 +1510,8 @@ TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrLis
   connect( s, SIGNAL( updateTitle() ),
            this, SLOT( updateTitle() ) );
 
-  s->setFontNo(QMIN(fno, TOPFONT));
+  // +1 because we have on more...a custom selected font
+  s->setFontNo(QMIN(fno, TOPFONT+1));
   s->setSchemaNo(schmno);
   if (key.isEmpty())
     s->setKeymapNo(n_defaultKeytab);
