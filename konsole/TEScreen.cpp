@@ -1172,6 +1172,16 @@ bool TEScreen::testIsSelected(const int x,const int y)
   }
 }
 
+static bool isSpace(UINT16 c)
+{
+  if ((c > 32) && (c < 127))
+     return false;
+  if ((c == 32) || (c == 0))
+     return true;
+  QChar qc(c);
+  return qc.isSpace();
+}
+
 QString TEScreen::getSelText(const bool preserve_line_breaks)
 {
   if (sel_begin == -1)
@@ -1308,7 +1318,7 @@ QString TEScreen::getSelText(const bool preserve_line_breaks)
         if (eol < sel_BR)
         {
             while ((eol > s) &&
-                   (!image[eol - hist_BR].c || isspace(image[eol - hist_BR].c)) &&
+                   (!image[eol - hist_BR].c || isSpace(image[eol - hist_BR].c)) &&
                    !line_wrapped[(eol-hist_BR)/columns])
             {
                 eol--;
