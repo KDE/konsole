@@ -738,6 +738,13 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
 
 //printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().length(),ev->text().length()?ev->text().ascii()[0]:0);
 
+  if ((ev->key()==Key_S) && (ev->state()==ControlButton))
+    return; // Ctrl+s will cause it to freeze up 
+            // (this is a tty problem, possibly)
+            // It's something to do with "ctrl+s" 
+            // toggling Scroll on the [real] console
+            // This is a hack, but it works. So there.
+
   // revert to non-history when typing
   if (scr->getHistCursor() != scr->getHistLines());
     scr->setHistCursor(scr->getHistLines());
