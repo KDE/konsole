@@ -807,7 +807,9 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
 //printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().length(),ev->text().length()?ev->text().ascii()[0]:0);
 
   // lookup in keyboard translation table ...
-  int cmd; const char* txt; int len;
+  int cmd = CMD_none; 
+  const char* txt; 
+  int len;
   if (keytrans->findEntry(ev->key(), encodeMode(MODE_NewLine  , BITS_NewLine   ) + // OLD,
                                      encodeMode(MODE_Ansi     , BITS_Ansi      ) + // OBSOLETE,
                                      encodeMode(MODE_AppCuKeys, BITS_AppCuKeys ) + // VT100 stuff

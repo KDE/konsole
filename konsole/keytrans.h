@@ -26,6 +26,7 @@
 #define BITS_Alt        6
 #define BITS_COUNT      7
 
+#define CMD_none          -1
 #define CMD_send           0
 #define CMD_emitSelection  1
 #define CMD_scrollPageUp   2
