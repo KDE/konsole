@@ -395,7 +395,7 @@ void Konsole::makeMenu()
   m_sessions->setCheckable(TRUE);
   m_sessions->insertItem( i18n("Send Signal"), m_signals );
 
-  KAction *act = new KAction("Rename session...", 0, this, SLOT(slotRenameSession()), this);
+  KAction *act = new KAction(i18n("Rename session..."), 0, this, SLOT(slotRenameSession()), this);
   act->plug(m_sessions);
   // act->plug(toolBar());
 
@@ -1099,7 +1099,7 @@ void Konsole::slotRenameSession() {
   kDebugInfo("slotRenameSession");
   KRadioAction *ra = session2action.find(se);
   QString name = ra->text();
-  KLineEditDlg dlg("Session name",name, this);
+  KLineEditDlg dlg(i18n("Session name"),name, this);
   if (dlg.exec()) {
     ra->setText(dlg.text());
   }
