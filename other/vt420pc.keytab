@@ -63,7 +63,7 @@ keyboard "VT420PC"
 
 key Escape : "\E"
 key Tab    : "\t"
-key Backtab	: "\E[Z"
+key Backtab: "\E[Z"
 
 # VT100 can add an extra \n after return.
 # The NewLine mode is set by an escape sequence.
