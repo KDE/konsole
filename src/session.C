@@ -16,12 +16,12 @@
     of the abilities of the framework - multible sessions.
 */
 
-TESession::TESession(KTMainWindow* main, TEWidget* te, const char* _pgm, QStrList & _args, const char* term) : schema_no(0), font_no(3), pgm(_pgm), args(_args)
+TESession::TESession(KTMainWindow* main, TEWidget* te, const char* _pgm, QStrList & _args, const char *_term) : schema_no(0), font_no(3), pgm(_pgm), args(_args)
 {
   sh = new TEPty();
   em = new TEmuVt102(te);
 
-  this->term = term;
+  term = _term;
 
   sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
   QObject::connect( sh,SIGNAL(block_in(const char*,int)),
