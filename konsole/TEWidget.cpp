@@ -287,6 +287,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,image(0)
 ,resizing(false)
 ,terminalSizeHint(false)
+,terminalSizeStartup(true)
 ,actSel(0)
 ,word_selection_mode(false)
 ,line_selection_mode(false)
@@ -512,6 +513,10 @@ HCNT("setImage");
 
   if (resizing && terminalSizeHint)
   {
+     if (terminalSizeStartup) {
+       terminalSizeStartup=false;
+       return;
+     }
      if (!mResizeWidget)
      {
         mResizeWidget = new QFrame(this);

@@ -103,6 +103,7 @@ public:
 
     void setTerminalSizeHint(bool on) { terminalSizeHint=on; }
     bool isTerminalSizeHint() { return terminalSizeHint; }
+    void setTerminalSizeStartup(bool on) { terminalSizeStartup=on; }
 
 public slots:
 
@@ -191,7 +192,7 @@ private:
     ColorEntry color_table[TABLE_COLORS];
 
     bool resizing;
-    bool terminalSizeHint;
+    bool terminalSizeHint,terminalSizeStartup;
     bool mouse_marks;
 
     void makeImage();

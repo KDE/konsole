@@ -40,6 +40,7 @@ KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar
   te->setBlinkingCursor(blinkingCursor);
   te->setCtrlDrag(ctrlDrag);
   te->setTerminalSizeHint(terminalSizeHint);
+  te->setTerminalSizeStartup(false);
   te->setLineSpacing(lineSpacing);
   te->setBellMode(bellmode);
   te->setMinimumSize(150,70);
