@@ -50,6 +50,11 @@ bool KeyTrans::KeyEntry::matches(int _key, int _bits, int _mask)
   return _key == key && (bits & m) == (_bits & m);
 }
 
+bool KeyTrans::KeyEntry::metaspecified(void)
+{
+  return (mask & (1 << BITS_Alt)) && (bits & (1 << BITS_Alt));
+}
+
 QString KeyTrans::KeyEntry::text()
 {
   return txt;
@@ -109,7 +114,8 @@ KeyTrans::KeyEntry* KeyTrans::addEntry(int ref, int key, int bits, int mask, int
   return (KeyEntry*)NULL;
 }
 
-bool KeyTrans::findEntry(int key, int bits, int* cmd, const char** txt, int* len)
+bool KeyTrans::findEntry(int key, int bits, int* cmd, const char** txt, int* len,
+               bool* metaspecified)
 {
   if (!m_fileRead) readConfig();
   for (QPtrListIterator<KeyEntry> it(tableX); it.current(); ++it)
@@ -118,6 +124,7 @@ bool KeyTrans::findEntry(int key, int bits, int* cmd, const char** txt, int* len
       *cmd = it.current()->cmd;
       *txt = it.current()->txt.ascii();
       *len = it.current()->txt.length();
+      *metaspecified = it.current()->metaspecified();
       return TRUE;
     }
   return FALSE;
