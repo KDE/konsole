@@ -72,7 +72,7 @@
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
-#define MIN(A,B) ((A)>(B)?(B):(A))
+inline int MIN(int A, int B) { return ((A>B) ? B : A); }
 
 #undef PACKAGE
 #undef VERSION
