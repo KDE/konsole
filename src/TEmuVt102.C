@@ -970,6 +970,7 @@ void VT102Emulation::onKeyPress( QKeyEvent* ev )
     case Key_Tab       : sendString("\t"); return;
 
     case Key_Return    : sendString(getMode(MODE_NewLine)?"\r\n"   :"\r"  ); return;
+    case Key_Enter     : sendString(getMode(MODE_NewLine)?"\r\n"   :"\r"  ); return;
     case Key_Backspace : sendString(getMode(MODE_BsHack )?"\x7f"   :"\x08"); return;
     case Key_Delete    : sendString(getMode(MODE_BsHack )?"\033[3~":"\x7f"); return;
 
