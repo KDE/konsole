@@ -32,5 +32,7 @@ Name[tr]=Kabuk
 Name[xh]=Iqokobhe
 Name[xx]=xx
 Name[zu]=Igobolodo
+Comment=New Shell
+Comment[de]=Neue Shell
 Exec=
 Cwd=
