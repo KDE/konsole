@@ -158,9 +158,6 @@ void TEScreen::clearSelection()
 void TEScreen::setSelBeginXY(const int x, const int y) 
 {
   sel_begin = loc(x,y+histCursor) ;
-/*  printf( "SetSelBeginXY( %d, %d, --> %d ) histCursor=%d \n", 
-        x, y, sel_begin, histCursor );
-*/
   sel_BR = sel_begin;
   sel_TL = sel_begin;
 }
@@ -179,10 +176,6 @@ void TEScreen::setSelExtentXY(const int x, const int y)
     sel_TL = sel_begin;
     sel_BR = l; 
   }
-/*
-  printf( "SetSelExtentXY( %d, %d, TL=%d, BR=%d ) histCursor=%d \n", 
-        x, y, sel_TL, sel_BR, histCursor );
-*/
 }
 
 char *TEScreen::getSelText(const BOOL preserve_line_breaks) 
@@ -276,7 +269,6 @@ FIXME:
   // trim buffer size to actual size needed.
   m=(char*)realloc( m ,  sizeof(char)*(d+1) );
   m[d]= '\0';
-  //printf( "TEScreen::getSelText returning +%s+\n", m );
   return(m);
 }
  
@@ -491,7 +483,6 @@ void TEScreen::restoreCursor()
 
 void TEScreen::resizeImage(int new_lines, int new_columns)
 {
-//printf( "resize image(new_lines=%d, new_columns=%d)\n", new_lines, new_columns );
 //FIXME: evtl. transfer from/to history buffer
 
   // make new image
@@ -832,7 +823,6 @@ void TEScreen::useCharset(int n)
 
 void TEScreen::scrollUp(int from, int n)
 {
-//  printf( " TEScreen::scrollUp(%d, %d)\n" , from, n );
   if (n <= 0 || from + n > bmargin) return;
   //FIXME: make sure `tmargin', `bmargin', `from', `n' is in bounds.
   moveImage(loc(0,from),loc(0,from+n),loc(columns-1,bmargin));
@@ -856,7 +846,6 @@ void TEScreen::scrollUp(int from, int n)
 void TEScreen::scrollDown(int from, int n)
 {
 //FIXME: make sure `tmargin', `bmargin', `from', `n' is in bounds.
-//  printf( " TEScreen::scrollDown(%d)\n" , n );
   if (n <= 0) return;
   if (from > bmargin) return;
   if (from + n > bmargin) n = bmargin - from;
@@ -970,9 +959,6 @@ void TEScreen::clearImage(int loca, int loce, char c)
 void TEScreen::moveImage(int dst, int loca, int loce)
 {
 //FIXME: check positions
-/*printf( " TEScreen::moveImage(dst=%d, loca=%d, loce=%d)\n",
-        dst, loca, loce );
-*/
   memmove(&image[dst],&image[loca],(loce-loca+1)*sizeof(ca));
 }
 

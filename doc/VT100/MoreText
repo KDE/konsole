@@ -1,0 +1,98 @@
+The refinement discussed here so far, is implemented in the
+overall structure of the program:
+
+
+                 Operations   -------------X
+                                        Screen(s)
+                 Protocol              /  |
+        Shell X------------X Emulation    |
+                                       \  V
+                                        Widget
+                 Events X------------------
+                                         
+
+Part    Application  Protocol      Data model   Visualization
+                                                User Events
+
+Files   TEShell.C    TEmulation.C  Screen.C     TEWidget.C
+                     TEVt102.C
+
+Types   TEShell      Emulation     TEScreen     TEWidget
+
+
+
+The abstract data type, in which the text is represented and
+manipulated by a set of operations is 
+
+
+------------------------------------------------------------------
+
+On the first glance, the terminal consists of the following
+parts:
+
+- A screen to display characters to the user on a rectangular area.
+- A keyboard to accept the user keypresses.
+- A bidirectional serial connection, on which the application
+  sends the text to be displayed to the terminal and on which
+  the user's key pressed are forwarded to the application.
+- The application that actually run on the terminal.
+
+More formally our terminal model consists of
+- a character screen : a matrix [Lines,Columns] -> Character
+- a current visual pointer position (cursor).
+- a set of operations by which the screen can be manipulated
+- a set of events (mainly keystrokes)
+- two streams on which bytes are exchanged between the
+  application and the terminal which are used to communicate
+  the operations and events between the two end points.
+- an initial state.
+
+           0       (columns)     V--- Columns-1
+          +-----------------------+
+          |                       | 0
+          |  text on              |
+          |  the screen           |
+          |                       | (lines)
+          |                       |
+          |                       |
+          |                       | Lines-1
+          +-----------------------+
+
+
+For adressing purpose, we call the (columnNo,lineNo) pair a "position"
+
+- protocol == collection of operations and their encoding.
+
+Beschreibung
+
+- Strom von Kommandos und Anfragen
+- Strom von Ereignissen und Antworten
+
+- HostToTerminalStream
+  : Sequence(Command U Request)
+
+- Type Command-Tokens
+  : Prn(Char)                            - literal(Character) - 1 char subset
+  : Ctl(Char)                            - 0-parm command
+  : Esc(Char)                            - 0-parm command
+  : Csi(Char,Args)                       - fix & flex num parm command
+                                           - some are sub-commands
+  : Pri(Char,Args) <: Csi("?",Char,Args) - fix & flex num parm command
+                                           - some are sub-commands
+  : Hsh(Char)                            - 0-parm command
+  : Scs(A,B)                             - 2-parm num command
+  : Vt5(A,B)                             - 2-parm num command
+
+- command definition
+
+  : name(parm:Type<:Integer)
+
+  : setFgColor(color)
+  : setBgColor(color)
+  : setReverse(bool)
+  : setBold(bool)
+  : setBlink(bool)
+
+------------------------------------------------------------------
+
+

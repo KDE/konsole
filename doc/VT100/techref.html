@@ -60,6 +60,124 @@ way also.
 <li>See the section <em>Method of description</em>, below
 <li>Derive some summarizing lists.
 </ul>
+<hr>
+<h2>Introduction</h2>
+<p>
+In a traditional UNIX installation a single machine (host) served
+several users by means of terminals attached to this host by a serial
+cable. These terminals (end points) where specialized devices, either
+regular ttys (printer with keyboard) or later more sophisticated
+things with cathode ray tubes.
+<p>
+<pre>
+
+    +-----------+    bi-directional    +------------+    Printer
+    |           |    serial line       |            |--&gt; and/or 
+    |   UNIX    | -------------------&gt; |  Terminal  |    Display
+    |   host    | &lt;------------------- |   Device   |
+    |           |                      |            |&lt;-- Keyboard
+    +-----------+                      +------------+
+</pre>
+<p>
+Today, hardware has become so cheap, that each single user could
+be provided with a complete host/display combination for the former
+price of a terminal.
+<p>
+Additional, and here we come to the X in the emulation, display
+devices have become graphical while the original terminal where
+only able to show characters but not graphics.
+<p>
+To allow programs designed for the original configuration to be
+used in the contemporary setup, "terminal emulations" where invented.
+In these emulations, the whole original setup is simulated.
+<p>
+The serial cable is folded into the operating system as a sort of
+loop back device, and a program, the terminal emulation, uses modern
+means of graphical user interfaces to behave like an earlier terminal.
+To complete the picture, the host in the diagram is replaced by the
+application that runs in the emulation (typically a shell or an old
+editor).  So, terminal emulations are in fact interfaces to character
+oriented applications.
+<p>
+
+This document describes the implementations of a program named
+"konsole", which is such an X terminal emulation. Since konsole
+is distributed under the GPL, meaning that it's source code is
+available to whoever likes to hack on it, the program would be
+incomplete without a proper introduction into the code and it's
+concepts. Thus, this text is to complement the program and the
+source with the remaining informations to make a complete product.
+<p>
+Please note that this document is work in progress, and does not
+cover the whole application. So far, it focuses on the screen and
+on the protocol (the emulation in a stricter meaning).
+
+
+<h2>A first refinement</h2>
+<p>
+
+Before we can come to the actual implementation, quite some
+notions have to be introduced. We have to get us an idea what
+a terminal emulation does in more detail.
+<p>
+To this end, a simple model of the terminal and it's operation
+is given, which is later extended and refined as we come deeper
+into matter and implementation.
+<p>
+
+At some level conception, a terminal can be described as a
+(abstract) data model. This means it has some type of state
+together with operations on that data type. These operations
+are somehow encoded to be passed over the serial line.
+<p>
+The concrete model is often loosely named the "emulation",
+the specific encoding chosen, the "protocol".
+<p>
+
+There are two principle models in use. The first, stream like
+one, which is related to a tty, consideres the terminal as an
+indefinit long and wide sheet of paper on which a printer head
+types the characters that come in over the line. Typical examples
+are shell scripts, make and other programs producing sequential
+protocols of their activity. Their basic data type is a list of
+list of characters.
+<p>
+The second principle model is used by applications written 
+especially for crt devices, so called full screen applications.
+These treat the terminal as a matrix of characters where each
+position can be individually addressed and written to. Typical
+representatives are full screen editors like vi and emacs,
+file managers like mc and mail readers like mutt.
+<p>
+Though the second model is newer, it's age does not imply a
+preference. To the contrary, both models have a right for their
+own and are both to be supported. The first model is fully
+expressed within konsole in form of it's ref:history buffer.
+<p>
+Note, that although the second model definitely build on the
+first one in almost any respect, it cannot fully express it,
+since it introduces a finite line length, while the first
+model works with indefinite lines.
+<p>
+Since application with both view of things are typically run
+within the same session, some effort has been made within
+konsole to maintain both ideas simultaniously, but only with
+limited success so far.
+<p>
+
+In both models, the notion of a current position (historically
+a printer's head, nowadays visualized by a cursor) is present.
+"Printing" a charater at the current position and advancing
+the head together with the starting a new line are the most
+fundamental operations of the emulation.
+<p>
+The full screen model basically adds the possibility to position
+the cursor and to overwrite and clear the screen.
+<p>
+A plethora of additional (more or less usefull) commands are
+then added on this by every specific emulation, see below for
+the awful details.
+
 <h2>
 <table width=100%>
 <tr><td align=center bgcolor=#d0d0d0></td></tr>
@@ -3042,6 +3160,19 @@ The following attributes below have the following meaning:
 <tr><td><p></td></tr>
 <tr>
 <td></td>
+<td colspan=1  bgcolor="#D0D0D0">  Ps</td><td colspan=4  bgcolor="#D0D0D0">Operation</td></tr>
+<tr>
+<td></td>
+<td colspan=1  bgcolor="#5188B2">  0</td><td colspan=4  bgcolor="#5188B2">Erase from cursor to the end of the line.</td></tr>
+<tr>
+<td></td>
+<td colspan=1  bgcolor="#5BA5B2">  1</td><td colspan=4  bgcolor="#5BA5B2">Erase from the start of the line to the cursor.</td></tr>
+<tr>
+<td></td>
+<td colspan=1  bgcolor="#5188B2">  2</td><td colspan=4  bgcolor="#5188B2">Erase the entire line.</td></tr>
+<tr><td><p></td></tr>
+<tr>
+<td></td>
 <td colspan=1  bgcolor="#D0D0D0">  Subcode</td><td colspan=1  bgcolor="#D0D0D0">Emulation</td><td colspan=1  bgcolor="#D0D0D0">Scope</td><td colspan=1  bgcolor="#D0D0D0">Operation</td><td colspan=1  bgcolor="#D0D0D0">Args</td><td colspan=1  bgcolor="#D0D0D0">Meaning</td></tr>
 <tr>
 <td></td>
@@ -4258,7 +4389,7 @@ The following attributes below have the following meaning:
     <td colspan=5 ><code> <b>ESC</b> <b>=</b></code>
 <tr><td><p></td>
 <tr><td></td>
-    <td  colspan=6>  FIXME. explain
+    <td  colspan=6>
 <tr><td><p></td></tr>
 <tr>
 <td></td>

@@ -1346,7 +1346,7 @@ EL.dflt 0
 EL.text
   Erases some or all characters in the active line, according to the
   parameter.
-EL.table
+EL.table.Ps
   Ps|Operation:4
   0|Erase from cursor to the end of the line.
   1|Erase from the start of the line to the cursor.
@@ -1591,7 +1591,7 @@ VT52KPAM.head VT52 Enter alternate keypad mode
 VT52KPAM.emus KONSOLE
 VT52KPAM.sect Command.VT52
 VT52KPAM.code ESC|=| 
-VT52KPAM.text
+VT2KPAM.text
   FIXME. explain
 
 VT52KPNM.head VT52 Exit alternate keypad mode
@@ -1628,4 +1628,3 @@ VT52SCSG.sect Command.VT52
 VT52SCSG.code ESC|G| 
 VT52SCSG.text
   FIXME. explain
-VT52 Compatible Mode
