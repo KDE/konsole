@@ -463,9 +463,20 @@ void Konsole::makeGUI()
    selectScrollbar->plug(m_options);
 
    // Fullscreen
+   m_options->insertSeparator();
    m_options->insertItem( SmallIconSet( "window_fullscreen" ), i18n("F&ull-Screen"), 5);
    m_options->setItemChecked(5,b_fullscreen);
    m_options->insertSeparator();
+
+   // Select Bell
+   selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), 0 , this,
+                                  SLOT(slotSelectBell()), this);
+   QStringList bellitems;
+   bellitems << i18n("&None")
+             << i18n("&System Notification")
+             << i18n("&Visible Bell");
+   selectBell->setItems(bellitems);
+   selectBell->plug(m_options);
 
    // Select font
    selectFont = new KonsoleFontSelectAction( i18n( "&Font" ),
@@ -503,16 +514,6 @@ void Konsole::makeGUI()
       << i18n("&Custom...");
    selectSize->setItems(sizeitems);
    selectSize->plug(m_options);
-
-   // Select Bell
-   selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), 0 , this,
-                                  SLOT(slotSelectBell()), this);
-   QStringList bellitems;
-   bellitems << i18n("&None")
-             << i18n("&System Notification")
-             << i18n("&Visible Bell");
-   selectBell->setItems(bellitems);
-   selectBell->plug(m_options);
 
    KAction *historyType = new KAction(i18n("&History..."), "history", 0, this,
                                       SLOT(slotHistoryType()), this);

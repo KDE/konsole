@@ -289,22 +289,27 @@ void konsolePart::makeGUI()
   // Settings Menu ----------------------------------------------------------------
   m_options = new KPopupMenu((KMainWindow*)parentWidget);
 
-  // Frame on/off
-  showFrame = new KToggleAction(i18n("Show &Frame"), 0,
-                                this, SLOT(slotToggleFrame()), this);
-  showFrame->plug(m_options);
-
   // Scrollbar
-  selectScrollbar = new KSelectAction(i18n("Scro&llbar"), 0, this,
+  selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), 0, this,
                                       SLOT(slotSelectScrollbar()), this);
   QStringList scrollitems;
   scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
   selectScrollbar->setItems(scrollitems);
   selectScrollbar->plug(m_options);
+
+  // Select Bell
   m_options->insertSeparator();
+  selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), 0 , this,
+                                 SLOT(slotSelectBell()), this);
+  QStringList bellitems;
+  bellitems << i18n("&None")
+            << i18n("&System Notification")
+            << i18n("&Visible Bell");
+  selectBell->setItems(bellitems);
+  selectBell->plug(m_options);
 
   // Select font
-  selectFont = new KonsoleFontSelectAction( i18n( "F&ont" ), SmallIconSet( "text" ), 0,
+  selectFont = new KonsoleFontSelectAction( i18n( "&Font" ), SmallIconSet( "text" ), 0,
                                             this, SLOT(slotSelectFont()), this);
   QStringList it;
   it << i18n("&Normal")
@@ -334,21 +339,10 @@ void konsolePart::makeGUI()
   connect(m_schema, SIGNAL(aboutToShow()), SLOT(schema_menu_check()));
   m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Sch&ema" ), m_schema);
 
-  m_options->insertSeparator();
   KAction *historyType = new KAction(i18n("&History..."), "history", 0, this,
                                      SLOT(slotHistoryType()), this);
   historyType->plug(m_options);
-
-  // Select Bell
   m_options->insertSeparator();
-  selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), 0 , this,
-                                 SLOT(slotSelectBell()), this);
-  QStringList bellitems;
-  bellitems << i18n("&None")
-            << i18n("&System Notification")
-            << i18n("&Visible Bell");
-  selectBell->setItems(bellitems);
-  selectBell->plug(m_options);
 
   // Select line spacing
   selectLineSpacing =
@@ -383,6 +377,11 @@ void konsolePart::makeGUI()
                                       0, this,SLOT(slotBlinkingCursor()), this);
   blinkingCursor->plug(m_options);
 
+  // Frame on/off
+  showFrame = new KToggleAction(i18n("Show Fr&ame"), 0,
+                                this, SLOT(slotToggleFrame()), this);
+  showFrame->plug(m_options);
+
   // Word Connectors
   KAction *WordSeps = new KAction(i18n("Wor&d Connectors..."), 0, this,
                                   SLOT(slotWordSeps()), this);
@@ -390,7 +389,7 @@ void konsolePart::makeGUI()
 
   // Save Settings
   m_options->insertSeparator();
-  KAction *saveSettings = new KAction( i18n("Save &Settings"), "filesave", 0, this,
+  KAction *saveSettings = new KAction( i18n("&Save Settings"), 0, 0, this,
 					     SLOT(saveProperties()), this);
   saveSettings->plug(m_options);
   m_options->insertTearOffHandle();
