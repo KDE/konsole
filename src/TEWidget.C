@@ -491,9 +491,8 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   {
     QPoint pos = QPoint((ev->x()-tLx-blX)/font_w,(ev->y()-tLy-bY)/font_h);
 
-    if ( ev->state() & ControlButton ) {
-	preserve_line_breaks = FALSE ;
-    }
+    if ( ev->state() & ControlButton ) preserve_line_breaks = FALSE ;
+
     if (mouse_marks || (ev->state() & ShiftButton))
     {
       emit clearSelectionSignal();

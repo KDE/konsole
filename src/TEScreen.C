@@ -204,22 +204,29 @@ char *TEScreen::getSelText(const BOOL preserve_line_breaks)
   while ( s <= sel_BR )
   {
     if ( s < hist_BR )
-    {
-      eol = s - (hY*columns) ;
-      if  (eol < histBuffer[hY]->len ) eol=histBuffer[hY]->len-1;
-      if  ((hY == (sel_BR/columns)) && (eol > (sel_BR%columns)) ) 
-        eol=sel_BR%columns;
+    { 	// get lines from history buffer.
+      eol=histBuffer[hY]->len-1;
+      if  ((hY == (sel_BR/columns)) && (eol > (sel_BR%columns)) ) eol=sel_BR%columns;
       while ( hX <= eol )
       { 
          m[d++] = histBuffer[hY]->line[hX++].c; 
          s++;
       }
+
+      // see below for end of line processing...
+      if ( s <= sel_BR ) {
+	if ( (eol+1)%columns == 0) {
+	    if (histBuffer[hY]->line[columns-1].c == ' ') { m[d++]=' '; }
+	} 
+        else {
+		m[d++]=((preserve_line_breaks||(eol%columns==0))?'\n':' ');   
+                s = ((s+1)/columns + 1)*columns;
+        }
+      }
       hY++; 
-      s = ((s+1)/columns + 1)*columns;
       hX=0; 
-      if ( s <= sel_BR ) m[d++]=(preserve_line_breaks?'\n':' ');
     }
-    else
+    else // or from screen image.
     {
       eol = (s/columns + 1)*columns - 1 ;
       if ( eol < sel_BR )
@@ -231,7 +238,37 @@ char *TEScreen::getSelText(const BOOL preserve_line_breaks)
         eol = sel_BR ;
       }
       while (s <= eol)  m[d++] = image[s++-hist_BR].c;
-      if (eol < sel_BR) m[d++]=(preserve_line_breaks?'\n':' ');
+
+/* end of line processing for selection -- psilva
+cases:
+
+1)    (eol+1)%columns == 0 --> the whole line is filled.
+   If the last char is a space, insert (preserve) space. otherwise
+   leave the text alone, so that words that are broken by linewrap 
+   are preserved.
+
+FIXME:
+	* this suppresses \n for command output that is
+	  sized to the exact column width of the screen.
+
+2)    eol%columns == 0     --> blank line.
+   insert a \n unconditionally.
+   Do it either you would because you are in preserve_line_break mode,
+   or because it's an ASCII paragraph delimiter, so even when
+   not preserving line_breaks, you want to preserve paragraph breaks.
+
+3)    else		 --> partially filled line
+   insert a \n in preserve line break mode, else a space 
+   The space prevents concatenation of the last word of one
+   line with the first of the next.
+
+*/
+      if (eol < sel_BR) {
+	if ( (eol+1)%columns == 0) {
+	    if (image[eol-hist_BR].c == ' ') m[d++]=' ';
+	} 
+        else m[d++]=(preserve_line_breaks||((eol%columns)==0)?'\n':' ');   
+      }
       s = ( eol/columns + 1)*columns;
     }
   }
