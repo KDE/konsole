@@ -5,9 +5,6 @@ data_DATA = BlackOnLightYellow.schema BlackOnWhite.schema \
 	default.Schema dselect.kdelnk linux.kdelnk mc.kdelnk shell.kdelnk \
   syscolor.schema
 
-appsdir = $(kde_appsdir)/Utilities
-apps_DATA = konsole.kdelnk
-
 icondir = $(kde_icondir)
 icon_DATA = konsole.xpm
 
