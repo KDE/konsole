@@ -13,6 +13,13 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
+/*! /class
+
+    The class TEDemo handles the application level. Mainly, it is responsible
+    for the configuration, taken from several files, from the command line
+    and from the user. It hardly does anything interesting.
+*/
+
 /* TODO
 - don't reread the pixmap every time
 */

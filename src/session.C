@@ -2,6 +2,16 @@
 
 #include <qpushbutton.h>
 
+/*! /class
+
+    Sessions are combinations of Shells and Emulations.
+
+    The stuff in here does not belong to the terminal emulation framework,
+    but to main.C. It serves it's duty by providing a single reference
+    to Shell/Emulation pairs. In fact, it is only there to demonstrate one
+    of the abilities of the framework - multible sessions.
+*/
+
 TESession::TESession(KTMainWindow* main, TEWidget* te, const char* args[], const char* term, int login_session)
 {
   sh = new Shell(login_session);
@@ -68,7 +78,7 @@ Emulation* TESession::getEmulation()
   return em;
 }
 
-// following interfaces might be misplaces ///
+// following interfaces might be misplaced ///
 
 int TESession::schemaNo()
 {

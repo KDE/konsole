@@ -10,8 +10,24 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-/* FIXME:
-   - should be made able to be instanciated more than once
+/*! /class Shell (FIXME: rename to TEpty or so)
+
+    Shells provide a pseudo terminal connection to a program. Although it is
+    closely related to a pipe, these pseudo terminal connections have some
+    ability, that makes it nessesary to uses them. Most importent, they know
+    about changing screen sizes (/sa setSize).
+
+    Pseudo terminals are a unique feature of UNIX, and always come in form of
+    pairs of devices (/dev/ptyXX and /dev/ttyXX), which are connected to each
+    other by the operating system. One may think of them as two serial devices
+    linked by a null-modem cable. Being based on devices the number of
+    simultanous instances of this class is (globally) limited by the number of
+    those device pairs, which is 256.
+
+    The pty is for the Shell while the program gets the tty.
+
+    There's a lot of sinister ioctl(2), signal(2) and process group id magic
+    nessesary to make everything work as it should. (/sa makeShell)
 */
 
 #include <stdio.h>
@@ -55,19 +71,15 @@ void Shell::setSize(int lines, int columns)
 
 static char ptynam[] = "/dev/ptyxx";
 static char ttynam[] = "/dev/ttyxx";
-//static int  comm_pid;
 
 static QIntDict<Shell> shells;
 
 static void catchChild(int)
-// Catch a SIGCHLD signal and exit if the child has died.
-{ pid_t pid; int status;
-  pid = wait(&status);
+// Catch a SIGCHLD signal and propagate that the child died.
+{ int status;
+  pid_t pid = wait(&status);
   Shell* sh = shells.find(pid);
-  if (sh) 
-  { 
-    shells.remove(pid); sh->doneShell(status);
-  }
+  if (sh) { shells.remove(pid); sh->doneShell(status); }
 }
 
 void Shell::doneShell(int status)
@@ -130,14 +142,14 @@ void Shell::makeShell(const char* dev, char* argv[],
     *t = '-';
     argv[0] = t;
   }
-  execvp (f, argv);
+  execvp(f, argv);
   perror("exec failed");
   exit(1);                             // control should never come here.
 }
 
 int openShell()
 { int ptyfd; char *s3, *s4;
-  static char ptyc3[] = "pqrstuvwxyz";
+  static char ptyc3[] = "pqrstuvwxyzabcde";
   static char ptyc4[] = "0123456789abcdef";
 
   // Find a master pty that we can open ////////////////////////////////
@@ -166,10 +178,10 @@ int openShell()
 Shell::Shell(int ls)
 /* setup shell */
 {
+  login_shell=ls;
+
   fd = openShell();
 
-  login_shell=ls;
-  //for (int i = 1; i <= 15; i++) if (i!=SIGCHLD) signal(i,catch_sig);
   signal(SIGCHLD,catchChild);
 
   mn = new QSocketNotifier(fd, QSocketNotifier::Read);
