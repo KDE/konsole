@@ -16,7 +16,7 @@
 
 #include <qobject.h>
 #include <termios.h>
-#include <qsocknot.h>
+#include <qsocketnotifier.h>
 #include <qtimer.h>
 #include <qstrlist.h>
 

@@ -18,7 +18,7 @@
 #include <qtimer.h>
 #include <qcolor.h>
 #include <qkeycode.h>
-#include <qscrbar.h>
+#include <qscrollbar.h>
 
 #include "TECommon.h"
 

@@ -14,7 +14,7 @@
 #include "kcmkonsole.h"
 #include "schema.h"
 #include "qlayout.h"
-#include "qpushbt.h"
+#include "qpushbutton.h"
 #include "qtooltip.h"
 #include "qpixmap.h"
 #include "qslider.h"

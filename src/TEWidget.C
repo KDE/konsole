@@ -43,7 +43,7 @@
 
 #include <qpainter.h>
 #include <qkeycode.h>
-#include <qclipbrd.h>
+#include <qclipboard.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -703,13 +703,19 @@ void TEWidget::setMouseMarks(bool on)
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
+#undef KeyPress
+
 void TEWidget::emitSelection()
 // Paste Clipboard by simulating keypress events
-{ const char *text = QApplication::clipboard()->text();
-  if ( text ) while (*text)
-  { QKeyEvent e(0,0,(int)(unsigned char)*text++,0);
-    emit keyPressedSignal(&e); // expose as keypress event
-  }
+{ 
+    QString text = QApplication::clipboard()->text();
+    if ( ! text.isNull() ) {
+	int index = 0;
+	while (text.at(index)) {
+	    QKeyEvent e(QEvent::KeyPress, 0,0,text.at(index++));
+	    emit keyPressedSignal(&e); // expose as keypress event
+	}
+    }
 }
 
 void TEWidget::setSelection(const char *t)
@@ -748,7 +754,7 @@ void TEWidget::onClearSelection()
 
 bool TEWidget::eventFilter( QObject *, QEvent *e )
 {
-  if ( e->type() == Event_KeyPress )
+  if ( e->type() == QEvent::KeyPress )
   { QKeyEvent* ke = (QKeyEvent*)e;
 
     actSel=0; // Key stroke implies a screen update, so TEWidget won't
@@ -781,12 +787,12 @@ bool TEWidget::eventFilter( QObject *, QEvent *e )
   } 
   else
   {
-    if ( e->type() == Event_Enter )
+    if ( e->type() == QEvent::Enter )
     {
         QObject::disconnect( (QObject*)cb, SIGNAL(dataChanged()), 
         this, SLOT(onClearSelection()) );
     }
-    if ( e->type() == Event_Leave )
+    if ( e->type() == QEvent::Leave )
     {
         QObject::connect( (QObject*)cb, SIGNAL(dataChanged()), 
         this, SLOT(onClearSelection()) );

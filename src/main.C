@@ -160,8 +160,8 @@ TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
   initial->setFontNo(n_font);
   initial->setSchemaNo(ColorSchema::find(s_schema)->numb);
 
-  title = (args.count() && !strcmp(kapp->getCaption(),PACKAGE))
-        ? args.at(0)           // program executed in the title bar
+  title = (args.count() && (kapp->getCaption() == PACKAGE))
+        ? QString(args.at(0))  // program executed in the title bar
         : kapp->getCaption();  // `konsole' or -caption
   initial->setTitle(title);
 
@@ -626,19 +626,19 @@ void TEDemo::changeTitle(int, const char*s)
 void TEDemo::about()
 //FIXME: make this a little nicer
 {
-  QString title, msg(1000);
+    QString title, msg;
 
-  title.sprintf(i18n("About %s"), PACKAGE);
-  msg.sprintf(i18n(
-    "%s version %s - an X terminal\n"
-    "\n"
-    "Copyright (c) 1998 by Lars Doelle <lars.doelle@on-line.de>\n"
-    "\n"
-    "This program is free software under the\n"
-    "terms of the Artistic License and comes\n"
-    "WITHOUT ANY WARRANTY.\n"
-    "See `LICENSE.readme´ for details."), PACKAGE, VERSION);
-  KMsgBox::message( 0, title, msg );
+    title.sprintf(i18n("About %s"), PACKAGE);
+    msg.sprintf(i18n(
+	"%s version %s - an X terminal\n"
+	"\n"
+	"Copyright (c) 1998 by Lars Doelle <lars.doelle@on-line.de>\n"
+	"\n"
+	"This program is free software under the\n"
+	"terms of the Artistic License and comes\n"
+	"WITHOUT ANY WARRANTY.\n"
+	"See `LICENSE.readme´ for details."), PACKAGE, VERSION);
+    KMsgBox::message( 0, title, msg );
 }
 
 void TEDemo::help()
