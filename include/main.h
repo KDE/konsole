@@ -59,6 +59,7 @@ private slots:
   void keytab_menu_activated(int item);
   void tecRef();
   void newSession(int kind);
+  void newDefaultSession();
 
   void changeColumns(int);
   void notifySize(int,int);

@@ -169,6 +169,7 @@ Konsole::Konsole(const QString& name,
   makeStatusbar();
   // temporary default: show
   toolBar()->setIconText(KToolBar::TextOnly);
+  toolBar()->setBarPos(KToolBar::Bottom);
   toolBar()->show();
   
 
@@ -376,6 +377,9 @@ void Konsole::makeMenu()
 
 //m_commands = new QPopupMenu;
 //connect(m_commands, SIGNAL(activated(int)), SLOT(newSession(int)));
+
+  KAction *newsession = KStdAction::openNew(this, SLOT(newDefaultSession()));
+  newsession->plug(toolBar());
 
   QPopupMenu* m_signals = new QPopupMenu;
   m_signals->insertItem( i18n("STOP"), 17); // FIXME: comes with 3 values
@@ -920,6 +924,11 @@ void Konsole::activateSession() {
     s->setConnect(TRUE);
   }
   setHeader();
+}
+
+void Konsole::newDefaultSession() {
+  // for some funny reason, this is the third in the list
+  newSession(3);
 }
 
 void Konsole::newSession(int i)
