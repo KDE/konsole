@@ -45,7 +45,8 @@ static KCmdLineOptions options[] =
    { "noclose",         I18N_NOOP("Do not close Konsole when command exits"), 0 },
    { "nohist",          I18N_NOOP("Do not save lines in history"), 0 },
    { "nomenubar",       I18N_NOOP("Do not display menubar"), 0 },
-   { "notabbar",        I18N_NOOP("Do not display tab bar"), 0 },
+   { "notabbar",        0, 0 },
+   { "notoolbar",       I18N_NOOP("Do not display tab bar"), 0 },
    { "noframe",         I18N_NOOP("Do not display frame"), 0 },
    { "noscrollbar",     I18N_NOOP("Do not display scrollbar"), 0 },
    { "noxft",           I18N_NOOP("Do not use XFT (Anti-Aliasing)"), 0 },
@@ -255,7 +256,7 @@ extern "C" int kdemain(int argc, char* argv[])
   sz = args->getOption("vt_sz");
   histon = args->isSet("hist");
   menubaron = args->isSet("menubar");
-  tabbaron = args->isSet("tabbar");
+  tabbaron = args->isSet("tabbar") && args->isSet("toolbar");
   frameon = args->isSet("frame");
   scrollbaron = args->isSet("scrollbar");
   wname = qtargs->getOption("name");
