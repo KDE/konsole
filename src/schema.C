@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include "kapp.h"
 #include <qdir.h>
+#include <kstddirs.h>
 
 static int schema_serial = 0; //FIXME: remove,localize
 

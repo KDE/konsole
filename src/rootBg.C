@@ -35,6 +35,7 @@
 #include <klocale.h>
 #include "config-kbgndwm.h"
 #include "rootBg.h"
+#include <kglobal.h>
 
 
 // By default, when you assign a background to your widget, the pixmap has
