@@ -1,3 +1,14 @@
+New in 0.9.9 [Feb 11 1999]
+
+- some small bug fixed (see ChangeLog).
+- Solaris 2.6 support.
+- more technical docs.
+- marking improved but still not optimal.
+- command line config and wm session
+  management partially broken.
+- closed a earsdrop security hole for Linux only.
+- line-wise history scrolling using Shift-Up/Down
+
 New in 0.9.8
 
 - some support for linux console added (experimental)

@@ -11,7 +11,6 @@ check([_,code]) :- !. /* [ TYP, ("Char"/none/Numb), [arg, ...] ] */
 check([_,text]) :- !. /* [ String/nl/ref(Sym) ... ] */
 
 check([_,table,'XPS']) :- !. /* interpretation */
-check([_,table,'XEX']) :- !. /* interpretation */
 
 /*Other (type) tables */
 /*check([_,table,_]) :- !, print(X), nl.*/
@@ -49,12 +48,6 @@ tcode(['PRI',Chr,Parm],pri(Chr,Parm)) :- !.
 tcode(['SCS',none,[A,B]],scs([A,B])) :- !.
 tcode(['VT5',none,[X,Y]],vt5([X,Y])) :- !.
 tcode(P,P) :- writef("\n - fail\n %t \n\n",[P]).
-
-meaning(Name,single) :- dict([Name,table,'XEX'],_).
-meaning(Name,subcode) :- dict([Name,table,'XPS'],_).
-
-msingle(Name,Lvl,Fun,'') :- dict([Name,table,'XEX'],[_,[_,Lvl,Fun]]).
-msingle(Name,Lvl,Fun,Args) :- dict([Name,table,'XEX'],[_,[_,Lvl,Fun,Args]]).
 
 pheads :-
   head(N,T),

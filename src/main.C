@@ -77,7 +77,7 @@
 #undef PACKAGE
 #undef VERSION
 #define PACKAGE "konsole"
-#define VERSION "0.9.8"
+#define VERSION "0.9.9"
 
 #define WITH_VGA
 
