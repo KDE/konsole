@@ -331,10 +331,8 @@ void TEDemo::makeMenu()
   m_font->insertSeparator();
   m_font->insertItem( i18n("&Linux"),  6);
   m_font->insertItem( i18n("Linux (small)"),7);
-#ifdef ANY_FONT
   m_font->insertSeparator();
-  m_font->insertItem( i18n("&More ..."), 1000); // for other fonts
-#endif
+  m_font->insertItem( i18n("&Custom ..."), 1000); // for other fonts
   connect(m_font, SIGNAL(activated(int)), SLOT(font_menu_activated(int)));
 
   m_scrollbar = new QPopupMenu;
@@ -367,11 +365,11 @@ void TEDemo::makeMenu()
   m_options->setItemChecked(4,b_bshack);
 
   m_options->insertSeparator();
-  m_options->insertItem( i18n("&Font"), m_font);
+  m_options->insertItem( i18n("&Font Size"), m_font);
   m_options->insertItem( i18n("&Size"), m_size);
   m_options->insertItem( i18n("&Schema"), m_schema);
   m_options->insertSeparator();
-  m_options->insertItem( i18n("&Save options"), 8);
+  m_options->insertItem( i18n("&Save Options"), 8);
   connect(m_options, SIGNAL(activated(int)), SLOT(opt_menu_activated(int)));
 
   QPopupMenu* m_help = new QPopupMenu;
@@ -414,6 +412,7 @@ void TEDemo::saveProperties(KConfig* config)
   config->writeEntry("has frame",b_framevis);
   config->writeEntry("BS hack",b_bshack);
   config->writeEntry("font",n_font);
+  config->writeEntry("defaultfont", defaultFont);
   config->writeEntry("schema",s_schema);
   config->writeEntry("scrollbar",n_scroll);
 
@@ -466,6 +465,8 @@ void TEDemo::readProperties(KConfig* config)
   // Options that should be applied to all sessions /////////////
   // (1) set menu items and TEDemo members
   setBsHack(config->readBoolEntry("BS hack",TRUE));
+  QFont tmpFont("fixed");
+  defaultFont = config->readFontEntry("defaultfont", &tmpFont);
   setFont(QMIN(config->readUnsignedNumEntry("font",3),7)); // sets n_font and menu item
   setSchema(config->readEntry("schema",""));
   // (2) apply to sessions (currently only the 1st one)
@@ -582,6 +583,11 @@ void TEDemo::scrollbar_menu_activated(int item)
 void TEDemo::font_menu_activated(int item)
 {
   assert(se);
+
+  if (item == 1000) {
+    KFontDialog::getFont(defaultFont, true);
+    item = 0;
+  }
   se->setFontNo(item);
   activateSession((int)session2no.find(se)); // for attribute change
   // setFont(item) is probably enough
@@ -598,9 +604,15 @@ void TEDemo::schema_menu_activated(int item)
 
 void TEDemo::setFont(int fontno)
 {
-  QFont f( fonts[fontno] );
-  f.setRawMode( TRUE );
-  if ( !f.exactMatch() )
+  QFont f;
+
+  if (fontno == 0)
+    f = defaultFont;
+  else
+    f.setFamily(fonts[fontno]);
+  if (fontno != 0)
+    f.setRawMode( TRUE );
+  if ( !f.exactMatch() && fontno != 0)
   {
     QString msg = i18n("Font `%1' not found.\nCheck README.linux.console for help.").arg(fonts[fontno]);
     QMessageBox::warning(this, i18n("Error - Konsole"), msg, i18n("&Ok"));
