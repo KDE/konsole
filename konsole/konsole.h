@@ -284,6 +284,7 @@ private:
   ColorSchemaList* colors;
 
   QPtrDict<KRootPixmap> rootxpms;
+  QMap<QWidget*, bool>  rootxpmsDirty;
   KWinModule*    kWinModule;
 
   KMenuBar*   menubar;

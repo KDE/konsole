@@ -880,6 +880,7 @@ void Konsole::makeGUI()
 void Konsole::makeTabWidget()
 {
   tabwidget = new KTabWidget(this);
+  tabwidget->installEventFilter(this);
   tabwidget->setTabReorderingEnabled(true);
   if (n_tabbar==TabTop)
     tabwidget->setTabPosition(QTabWidget::Top);
@@ -939,6 +940,21 @@ bool Konsole::eventFilter( QObject *o, QEvent *ev )
       {
         m_newSessionButton->openPopup();
         return true;
+      }
+    }
+  }
+  else if (o == tabwidget)
+  {
+    // There is probably a bug in KRootPixmap which makes this workaround
+    // neccesary:
+    // Mark the background of invisible TEWidgets dirty so they can be
+    // repainted when they are displayed next.
+    if (tabwidget && ev->type() == QEvent::Resize) {
+      for(int i = 0; i < tabwidget->count(); i++) {
+        QWidget *page = tabwidget->page(i);
+        if (page != tabwidget->currentPage()) {
+          rootxpmsDirty[page] = true;
+        }
       }
     }
   }
@@ -2425,6 +2441,11 @@ void Konsole::activateSession(QWidget* w)
 {
   activateSession(tabwidget->indexOf(w));
   w->setFocus();
+  if( rootxpmsDirty[w] ) {
+    // force repaint!
+    rootxpms[w]->repaint(true);
+    rootxpmsDirty.remove(w);
+  }
 }
 
 void Konsole::activateSession(const QString &sessionId)
