@@ -52,7 +52,6 @@
 #include <qstyle.h>
 #include <qfile.h>
 #include <qdragobject.h>
-#include <qregexp.h>
 #include <qlayout.h>
 
 #include <stdio.h>
@@ -1269,7 +1268,7 @@ void TEWidget::emitSelection(bool useXselection,bool appendReturn)
     text.append("\r");
   if ( ! text.isEmpty() )
   {
-    text.replace(QRegExp("\n"), "\r");
+    text.replace("\n", "\r");
     QKeyEvent e(QEvent::KeyPress, 0,-1,0, text);
     emit keyPressedSignal(&e); // expose as a big fat keypress event
     emit clearSelectionSignal();

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <qfile.h>
+#include <qregexp.h>
 #include <qtextstream.h>
 
 #include <kbookmarkimporter.h>
@@ -8,14 +10,11 @@
 #include <kpopupmenu.h>
 #include <ksavefile.h>
 #include <kstandarddirs.h>
+#include <kaction.h>
 
 #include "konsole.h"
 #include "konsolebookmarkmenu.h"
 #include "konsolebookmarkhandler.h"
-
-#include <qfile.h>
-#include <qregexp.h>
-#include <kaction.h>
 
 KonsoleBookmarkMenu::KonsoleBookmarkMenu( KBookmarkManager* mgr,
                      KonsoleBookmarkHandler * _owner, KPopupMenu * _parentMenu,
@@ -109,7 +108,7 @@ void KonsoleBookmarkMenu::fillBookmarkMenu()
         bm = parentBookmark.next(bm) )
   {
     QString text = bm.text();
-    text.replace( QRegExp( "&" ), "&&" );
+    text.replace( "&", "&&" );
     if ( !separatorInserted && m_bIsRoot) { // inserted before the first konq bookmark, to avoid the separator if no konq bookmark
       m_parentMenu->insertSeparator();
       separatorInserted = true;
