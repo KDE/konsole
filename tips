@@ -44,34 +44,34 @@ Konsole toolbar, making it easier to remember the content of the session.
 
 <tip category="Konsole">
 <html>
-<p>...that you can rename a Konsole session by double-clicking it's button
+<p>...that you can rename a Konsole session by double-clicking its button
 in the Konsole toolbar?
 </html>
 </tip>
 
 <tip category="Konsole|Keyboard">
 <html>
-<p>...that you can activate the menu with Ctrl+Alt+m shortcut?
+<p>...that you can activate the menu with Ctrl+Alt+M shortcut?
 </html>
 </tip>
 
 <tip category="Konsole|Keyboard">
 <html>
-<p>...that you can rename your current Konsole session with Ctrl+Alt+s shortcut?
+<p>...that you can rename your current Konsole session with Ctrl+Alt+S shortcut?
 </html>
 </tip>
 
 <tip category="Konsole">
 <html>
 <p>...that you can create your own session types by using the session
-type editor that you can find in the KDE Control Center?
+type editor which you can find in the KDE Control Center?
 </html>
 </tip>
 
 <tip category="Konsole">
 <html>
 <p>...that you can create your own color schemes by using the schema editor
-that you can find in the KDE Control Center?
+which you can find in the KDE Control Center?
 </p>
 </html>
 </tip>
@@ -88,7 +88,7 @@ Arrow keys?
 <tip category="Konsole|Keyboard">
 <html>
 <p>...that you can scroll pagewise in the history by holding the Shift key 
-and pressing the Page Up or Down keys?
+and pressing the Page Up or Page Down keys?
 </html>
 </tip>
 
@@ -155,14 +155,14 @@ get the right mouse button pop-up menu while pressing the Shift key?
 
 <tip category="Konsole">
 <html>
-<p>...that when program evaluates left mouse button you can still select 
+<p>...that when a program evaluates left mouse button you can still select 
 text while pressing the Shift key?
 </html>
 </tip>
 
 <tip category="Konsole">
 <html>
-<p>...that you can let Konsole set the current directory as window title?
+<p>...that you can let Konsole set the current directory as the window title?
 For Bash, put 'export PS1=$PS1"\[\e]0;\H:\w\a\]' in your ~/.bashrc .
 </html>
 </tip>
