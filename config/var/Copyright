@@ -39,26 +39,3 @@
    The part of Konsole that constitutes the `libkonsole' library is
    subject of the GNU LIBRARY GENERAL PUBLIC LICENSE (LGPL) with
    the above permission included.
-
-   If you're a freeware author and in need of any changes to the
-   libkonsole for your work, the usual send-me-the-patch procedure
-   applies.
-   
-                                  ~~~~~
-
-                                 Rational
-
-
-   One might wonder about the complication of the license of Konsole
-   and it's parts, so some explanation is needed for the ones who take
-   care of this.
-
-   Because QT (on which the whole KDE bases) is a non-GPL library a
-   lot of concerns have been mentioned, one of them making Debian and
-   others to stop distributing KDE. As a result of this, authors of other
-   parts of KDE have moved to the Artistic License.
-
-   Now since some of these authors might want to reuse the core parts
-   of Konsole (and i encourage them to do so), i have formally to enable
-   them by putting these parts under a different license (LGPL for
-   these authors and an extra permission for Debian).
