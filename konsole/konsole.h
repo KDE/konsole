@@ -226,6 +226,7 @@ private:
   QPtrDict<KRadioAction> session2action;
   QPtrDict<KToolBarButton> session2button;
   QPtrList<TESession> sessions;
+  QPtrList<TESession> sessionsSM;  // saves sessions for SM once deleted in sessions
   QPtrList<KonsoleChild> detached;
   QIntDict<KSimpleConfig> no2command;
   QIntDict<KTempFile> no2tempFile;
@@ -237,6 +238,7 @@ private:
   TESession*     se;
   TESession*     se_previous;
   TESession*     m_initialSession;
+  TESession*     m_activeSession;  // saves active session for SM/SaveProperties
   ColorSchemaList* colors;
 
   KRootPixmap*   rootxpm;

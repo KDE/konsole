@@ -56,6 +56,7 @@ public:
   QString getPgm();
   QString getCwd();
   QString getInitial_cwd() { return initial_cwd; }
+  void setInitial_cwd(const QString& _cwd) { initial_cwd=_cwd; }
 
   void setHistory(const HistoryType&);
   const HistoryType& history();

@@ -181,6 +181,7 @@ DCOPObject( "konsole" )
 ,se(0)
 ,se_previous(0)
 ,m_initialSession(0)
+,m_activeSession(0)
 ,colors(0)
 ,rootxpm(0)
 ,kWinModule(0)
@@ -328,6 +329,10 @@ Konsole::~Konsole()
 //FIXME: close all session properly and clean up
     // Delete the session if isn't in the session list any longer.
     sessions.setAutoDelete(true);
+    
+    // sessionsSM holds references to remembered sessions
+    sessionsSM.setAutoDelete(true);
+    sessionsSM.clear();
 
     resetScreenSessions();
     if (no2command.isEmpty())
@@ -824,12 +829,22 @@ bool Konsole::queryClose()
         }
     }
 
+    m_activeSession=se;  // remember active session for possible use by SaveProperties
+
     // WABA: Don't close if there are any sessions left.
     // Tell them to go away.
     sessions.first();
     bool allOK=true;
     while(sessions.current())
     {
+      if (skip_exit_query) {
+        // held references for SaveProperties
+        sessionsSM.append(sessions.current());
+
+        QString cwd=sessions.current()->getCwd();
+        if (!cwd.isEmpty())
+          sessions.current()->setInitial_cwd(cwd);
+      }
       if (!sessions.current()->sendSignal(SIGHUP))
         allOK=false;
       sessions.next();
@@ -837,7 +852,7 @@ bool Konsole::queryClose()
 
     if (skip_exit_query)
     {
-        // Wait a bit for all childs to clean themselves up. 
+        // Wait a bit for all childs to clean themselves up.
 #if KDE_VERSION >=305
 	while(sessions.count() && KProcessController::theKProcessController->waitForProcessExit(1));
 #else
@@ -947,42 +962,39 @@ void Konsole::saveProperties(KConfig* config) {
   {
      // called by the session manager
      skip_exit_query = true;
-     config->writeEntry("numSes",sessions.count());
-     sessions.first();
-     while(counter < sessions.count())
+     config->writeEntry("numSes",sessionsSM.count());
+     sessionsSM.first();
+     while(counter < sessionsSM.count())
      {
         key = QString("Title%1").arg(counter);
-        config->writeEntry(key, sessions.current()->Title());
+        config->writeEntry(key, sessionsSM.current()->Title());
         key = QString("Schema%1").arg(counter);
-        config->writeEntry(key, colors->find( sessions.current()->schemaNo() )->relPath());
+        config->writeEntry(key, colors->find( sessionsSM.current()->schemaNo() )->relPath());
         key = QString("Args%1").arg(counter);
-        config->writeEntry(key, sessions.current()->getArgs());
+        config->writeEntry(key, sessionsSM.current()->getArgs());
         key = QString("Pgm%1").arg(counter);
-        config->writeEntry(key, sessions.current()->getPgm());
+        config->writeEntry(key, sessionsSM.current()->getPgm());
         key = QString("Font%1").arg(counter);
-        config->writeEntry(key, sessions.current()->fontNo());
+        config->writeEntry(key, sessionsSM.current()->fontNo());
         key = QString("Term%1").arg(counter);
-        config->writeEntry(key, sessions.current()->Term());
+        config->writeEntry(key, sessionsSM.current()->Term());
         key = QString("KeyTab%1").arg(counter);
-        config->writeEntry(key, sessions.current()->keymap());
+        config->writeEntry(key, sessionsSM.current()->keymap());
         key = QString("Icon%1").arg(counter);
-        config->writeEntry(key, sessions.current()->IconName());
+        config->writeEntry(key, sessionsSM.current()->IconName());
         key = QString("MonitorActivity%1").arg(counter);
-        config->writeEntry(key, sessions.current()->isMonitorActivity());
+        config->writeEntry(key, sessionsSM.current()->isMonitorActivity());
         key = QString("MonitorSilence%1").arg(counter);
-        config->writeEntry(key, sessions.current()->isMonitorSilence());
+        config->writeEntry(key, sessionsSM.current()->isMonitorSilence());
         key = QString("MasterMode%1").arg(counter);
-        config->writeEntry(key, sessions.current()->isMasterMode());
+        config->writeEntry(key, sessionsSM.current()->isMasterMode());
 
-        QString cwd=sessions.current()->getCwd();
-        if (cwd.isEmpty()) 
-          cwd=sessions.current()->getInitial_cwd();
         key = QString("Cwd%1").arg(counter);
-        config->writeEntry(key, cwd);
+        config->writeEntry(key, sessionsSM.current()->getInitial_cwd());
 
-        if (sessions.current()==se)
+        if (sessionsSM.current()==m_activeSession)
 	  active=counter;
-        sessions.next();
+        sessionsSM.next();
         counter++;
      }
   }
@@ -2033,7 +2045,10 @@ void Konsole::doneSession(TESession* s, int)
     for (TESession *se = sessions.first(); se; se = sessions.next())
       se->setListenToKeyPress(false);
 
-  delete s;
+  if (!skip_exit_query)
+    // no program end, not listed in sessionsSM so delete it
+    delete s;
+
   if (s == se_previous)
     se_previous=NULL;
   if (s == se)
