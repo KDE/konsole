@@ -71,13 +71,15 @@ signals:
 
 protected:
 
-    bool eventFilter( QObject *, QEvent * );
-
     void drawAttrStr(QPainter &paint, QRect rect, 
                      char* str, int len, ca attr, BOOL pm);
     void paintEvent( QPaintEvent * );
 
     void resizeEvent(QResizeEvent*);
+
+    void focusInEvent(QFocusEvent*);
+    void focusOutEvent(QFocusEvent*);
+    void keyPressEvent(QKeyEvent *e);
 
     void fontChange(const QFont &font);
     void frameChanged();

@@ -1,3 +1,17 @@
+New in 0.9.10
+
+- fix for a security hole.
+- lots of other bugs fixed
+- Shift-Up/Down scrolls history
+- Shift-Insert pastes
+- added *.kdelnk to be seeked in ~./kde/apps/konsole, too.
+- added -name to set the window class
+- documentation improvements
+
+New in 0.9.9
+
+- someone beside me changing konsole's version number
+
 New in 0.9.8
 
 - some support for linux console added (experimental)

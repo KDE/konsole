@@ -79,7 +79,7 @@ inline int MIN(int A, int B) { return ((A>B) ? B : A); }
 #undef PACKAGE
 #undef VERSION
 #define PACKAGE "konsole"
-#define VERSION "0.9.9"
+#define VERSION "0.9.10"
 
 #define WITH_VGA
 

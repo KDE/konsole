@@ -42,8 +42,6 @@
 - dynamic buffer adjustment or configurability.
 - clear buffer facility.
 
-- i18n improvements?
-
 - write configuration utility at least for *.schema files.
 
 - evtl. handle *.kdelnk files using regular setup utilities
