@@ -41,6 +41,9 @@
 class KRootPixmap;
 class QCheckBox; 
 
+// Defined in main.C
+const char *konsole_shell(QStrList &args);
+
 class Konsole : public KMainWindow
 {
     Q_OBJECT

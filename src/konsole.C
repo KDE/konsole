@@ -1381,11 +1381,8 @@ TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrLis
   }
   else
   {
-     const char* shell = getenv("SHELL");
-     if (shell == NULL || *shell == '\0') shell = "/bin/sh";
-     program = QFile::decodeName(shell);
+     program = QFile::decodeName(konsole_shell(cmdArgs));
 
-     cmdArgs.append(shell);
      if (co)
      {
         co->setDesktopGroup();

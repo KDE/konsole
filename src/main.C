@@ -54,6 +54,29 @@ static KCmdLineOptions options[] =
 };
 
 static bool has_noxft = false;
+static bool login_shell = false;
+
+const char *konsole_shell(QStrList &args)
+{
+  const char* shell = getenv("SHELL");
+  if (shell == NULL || *shell == '\0') shell = "/bin/sh";
+  if (login_shell)
+  {
+    char* t = (char*)strrchr(shell,'/');
+    if (t) // see sh(1)
+    {
+      t = strdup(t); 
+      *t = '-';
+      args.append(t);
+      free(t);
+    }
+    else
+      args.append(shell);
+  }
+  else
+    args.append(shell);
+  return shell;
+}
 
 /**
    The goal of this class is to prevent GUI confirmation
@@ -62,8 +85,8 @@ static bool has_noxft = false;
    It must be here, because this has to be called before
    the KMainWindow's manager.
 
-   It is also used to add "--noxft" to the restoreCommand if 
-   konsole was started with that option.
+   It is also used to add "--noxft" and "--ls" to the restoreCommand 
+   if konsole was started with any of those options.
  */
 class KonsoleSessionManaged: public KSessionManaged {
 public:
@@ -73,12 +96,12 @@ public:
     };
 
     bool saveState( QSessionManager&sm) {
+        QStringList restartCommand = sm.restartCommand();
         if (has_noxft) 
-        {
-            QStringList restartCommand = sm.restartCommand();
             restartCommand.append("--noxft");
-            sm.setRestartCommand(restartCommand);
-        }
+        if (login_shell) 
+            restartCommand.append("--ls");
+        sm.setRestartCommand(restartCommand);
         return true;
     }
     Konsole *konsole;
@@ -92,7 +115,6 @@ int main(int argc, char* argv[])
   setgid(getgid()); setuid(getuid()); // drop privileges
 
   // deal with shell/command ////////////////////////////
-  bool login_shell = false;
   bool welcome = true;
   bool histon = true;
   bool toolbaron = true;
@@ -173,31 +195,22 @@ int main(int argc, char* argv[])
   QString title;
   if(args->isSet("T")) {
     title = QFile::decodeName(args->getOption("title"));
-  }
 
+  }
+  login_shell = args->isSet("ls");
+ 
   QStrList eargs;
 
-  const char* shell = getenv("SHELL");
-  if (shell == NULL || *shell == '\0') shell = "/bin/sh";
+  const char* shell;
   if (args->getOption("e").isEmpty())
   {
-    char* t = (char*)strrchr(shell,'/');
-    if (args->isSet("ls") && t) // see sh(1)
-    {
-      t = strdup(t); *t = '-';
-      //KONSOLEDEBUG << "Appending t = " << t << " to eargs." << endl;
-      //eargs.append(shell);
-      eargs.append(t);
-    }
-    else
-      eargs.append(shell);
+    shell = konsole_shell(eargs);     
   }
   else
   {
      if (args->isSet("ls"))
         KCmdLineArgs::usage(i18n("You can't use BOTH -ls and -e.\n"));
      shell = strdup(args->getOption("e"));
-     eargs.clear();
      eargs.append(shell);
      for(int i=0; i < args->count(); i++)
        eargs.append( args->arg(i) );
@@ -219,7 +232,6 @@ int main(int argc, char* argv[])
   histon = args->isSet("hist");
   toolbaron = args->isSet("toolbar");
   wname = args->getOption("name");
-  login_shell = args->isSet("ls");
   welcome = args->isSet("welcome");
 
   QCString type = "";
