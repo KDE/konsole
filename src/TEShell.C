@@ -324,7 +324,8 @@ void Shell::makeShell(const char* dev, QStrList & args,
   // getrlimit is a getdtablesize() equivalent, more portable (David Faure)
   struct rlimit rlp;
   getrlimit(RLIMIT_NOFILE, &rlp);
-  for (int i = 0; i < rlp.rlim_cur; i++) if (i != tt && i != fd) close(i);
+  for (int i = 0; i < (int)rlp.rlim_cur; i++) 
+    if (i != tt && i != fd) close(i);
 
   dup2(tt,fileno(stdin));
   dup2(tt,fileno(stdout));
