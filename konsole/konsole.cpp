@@ -108,6 +108,7 @@ Time to start a requirement list.
 #include <kaccelmanager.h>
 
 #include <kaction.h>
+#include <kshell.h>
 #include <qlabel.h>
 #include <kpopupmenu.h>
 #include <klocale.h>
@@ -3223,12 +3224,14 @@ void Konsole::addSessionCommand(const QString &path)
   }
 
   exec = KRun::binaryName(exec, false);
+  exec = KShell::tildeExpand(exec);
   QString pexec = KGlobal::dirs()->findExe(exec);
   if (typ.isEmpty() || txt.isEmpty() || typ != "KonsoleApplication"
       || ( !exec.isEmpty() && pexec.isEmpty() ) )
   {
     if (!path.isEmpty())
        delete co;
+    kdWarning()<<"Unable to use "<<path.latin1()<<endl;
     return; // ignore
 
   }
