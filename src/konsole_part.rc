@@ -1,4 +1,4 @@
-<!DOCTYPE kpartgui>
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
 <kpartgui name="Part">
 <MenuBar>
  <Menu name="File">
@@ -17,5 +17,4 @@
 <ToolBar name="Part1-ToolBar">
  <Action name="p1_blah"/>
 </ToolBar>
-<StatusBar/>
 </kpartgui>
