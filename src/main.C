@@ -175,7 +175,7 @@ int main(int argc, char* argv[])
   wname = args->getOption("name");
   login_shell = args->isSet("ls");
   welcome = args->isSet("welcome");
-  QCString title=NULL;
+  QCString title;
   if(args->isSet("T")) {
     title=args->getOption("title");
     }
