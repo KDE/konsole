@@ -41,7 +41,7 @@ class KeytabReader;
 
 class KeyTrans
 {
-   friend KeytabReader;
+   friend class KeytabReader;
    public:
       static KeyTrans* find(int numb);
       static KeyTrans* find(const char* path);

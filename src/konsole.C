@@ -487,10 +487,10 @@ void Konsole::makeGUI()
    ColorSchema *sch=colors->find(s_schema);
    kdDebug()<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
    if (sch)
-	curr_schema=sch->numb(); 
+	curr_schema=sch->numb();
    else
 	curr_schema = 0;
-   for (int i=0; i<m_schema->count(); i++)
+   for (uint i=0; i<m_schema->count(); i++)
       m_schema->setItemChecked(i,false);
 
    m_schema->setItemChecked(curr_schema,true);
@@ -1473,7 +1473,7 @@ void Konsole::slotWordSeps() {
   }
 }
 
-void Konsole::slotBackgroundChanged(int desk)
+void Konsole::slotBackgroundChanged(int /*desk*/)
 {
   //kdDebug() << "Konsole::slotBackgroundChanged(" << desk << ")\n";
   ColorSchema* s = colors->find(curr_schema);
