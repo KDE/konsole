@@ -3494,8 +3494,6 @@ void Konsole::detachSession(TESession* _se) {
   disconnect( _se,SIGNAL(enableMasterModeConnections()), this,SLOT(enableMasterModeConnections()) );
   disconnect( _se,SIGNAL(renameSession(TESession*,const QString&)), this,SLOT(slotRenameSession(TESession*,const QString&)) );
 
-  ColorSchema* schema = colors->find(_se->schemaNo());
-
   // TODO: "type" isn't passed properly
   Konsole* konsole = new Konsole(name(), b_histEnabled, !menubar->isHidden(), n_tabbar != TabNone, b_framevis,
                                  n_scroll != TEWidget::SCRNONE, 0, false, 0);
