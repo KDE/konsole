@@ -257,7 +257,7 @@ void Konsole::makeMenu()
   connect(m_toolbarSessionsCommands, SIGNAL(activated(int)), SLOT(newSession(int)));
 
   NewSessionAction *newsession = new NewSessionAction(this, SLOT(newSession()));
-  newsession->setPopup(m_file);
+  newsession->setPopup(m_toolbarSessionsCommands);
   newsession->plug(toolBar());
   toolBar()->insertLineSeparator();
 
