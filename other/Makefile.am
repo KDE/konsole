@@ -8,7 +8,7 @@ data_DATA = BlackOnLightYellow.schema BlackOnWhite.schema \
   Transparent_lightbg.schema \
   linux.desktop mc.desktop shell.desktop su.desktop \
   default.Keytab linux.keytab vt100.keytab vt420pc.keytab \
-  README.schema
+  Schema.README
 
 KDE_ICON = konsole
 
