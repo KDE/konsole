@@ -85,7 +85,7 @@ mimedir = $(kde_mimedir)/application
 mime_DATA = x-konsole.desktop
 
 # default toolbar configuration
-datadir = $(kde_confdir)
-data_DATA =konsolerc
+konsole_datadir = $(kde_confdir)
+konsole_data_DATA =konsolerc
 
-EXTRA_DIST = $(mime_DATA) $(data_DATA)
+EXTRA_DIST = $(mime_DATA) $(konsole_data_DATA)
