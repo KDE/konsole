@@ -2701,8 +2701,13 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
   s->setSchemaNo(schmno);
   if (key.isEmpty())
     s->setKeymapNo(n_defaultKeytab);
-  else
+  else {
+    // TODO: Fixes BR77018, see BR83000.
+    if (key.endsWith(".keytab"))
+      key.remove(".keytab");
     s->setKeymap(key);
+  }
+
   s->setTitle(txt);
   s->setIconName(icon);
   s->setAddToUtmp(b_addToUtmp);
