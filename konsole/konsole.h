@@ -145,7 +145,6 @@ private slots:
   void updateSchemaMenu();
   void updateKeytabMenu();
   void updateRMBMenu();
-  int m_separator_id;
 
   void changeColumns(int);
   void notifySessionState(TESession* session,int state);
@@ -393,6 +392,7 @@ private:
   bool        b_histEnabled:1;
   bool        b_fullScripting:1;
   unsigned int m_histSize;
+  int m_separator_id;
 
   TESession*  m_contextMenuSession;
 };
