@@ -3575,6 +3575,9 @@ void Konsole::detachSession(TESession* _se) {
     if (b_dynamicTabHide && tabwidget->count()==1)
       tabwidget->setTabBarHidden(true);
   }
+
+  if( m_removeSessionButton )
+    m_removeSessionButton->setEnabled(tabwidget->count()>1);
 }
 
 void Konsole::attachSession(TESession* session)
