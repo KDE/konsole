@@ -130,7 +130,7 @@ int main(int argc, char* argv[])
   aboutData.addAuthor("Lars Doelle",I18N_NOOP("Author"), "lars.doelle@on-line.de");
   aboutData.addCredit("Stephan Binner",
     I18N_NOOP("bug fixing and improvements"),
-    "stephan.binner@gmx.de");
+    "binner@kde.org");
   aboutData.addCredit("Chris Machemer",
     I18N_NOOP("bug fixing"),
     "machey@ceinetworks.com");
