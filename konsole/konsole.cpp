@@ -481,6 +481,7 @@ void Konsole::makeGUI()
       disconnect(m_bookmarks,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    if (m_bookmarksSession)
       disconnect(m_bookmarksSession,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
+   disconnect(m_tabPopupMenu,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    //KONSOLEDEBUG<<"Konsole::makeGUI()"<<endl;
    if (m_tabbarSessionsCommands)
       connect(m_tabbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
@@ -801,6 +802,22 @@ void Konsole::makeGUI()
    new KAction(i18n("Toggle Bidi"), Qt::CTRL+Qt::ALT+Qt::Key_B, this, SLOT(toggleBidi()), m_shortcuts, "toggle_bidi");
 
    m_shortcuts->readShortcutSettings();
+
+   // Fill tab context menu
+   m_tabPopupMenu->insertItem( i18n("&Detach Session"), this,
+                         SLOT(slotTabDetachSession()) );
+   m_tabPopupMenu->insertItem( i18n("&Rename Session..."), this,
+                         SLOT(slotTabRenameSession()) );
+
+   m_tabPopupMenu->insertSeparator();
+   m_tabPopupTabsMenu = new KPopupMenu( m_tabPopupMenu );
+   m_tabPopupMenu->insertItem( i18n("Switch to Tab" ), m_tabPopupTabsMenu );
+   connect( m_tabPopupTabsMenu, SIGNAL( activated ( int ) ),
+            SLOT( activateSession( int ) ) );
+
+   m_tabPopupMenu->insertSeparator();
+   m_tabPopupMenu->insertItem( SmallIcon("fileclose"), i18n("C&lose Session"), this,
+                          SLOT(slotTabCloseSession()) );
 }
 
 void Konsole::makeTabWidget()
@@ -968,6 +985,12 @@ void Konsole::makeBasicGUI()
   new KAction(i18n("List Sessions"), 0, this, SLOT(listSessions()), m_shortcuts, "list_sessions");
 
   m_shortcuts->readShortcutSettings();
+
+  m_sessionList = new KPopupMenu(this);
+  connect(m_sessionList, SIGNAL(activated(int)), SLOT(activateSession(int)));
+
+  m_tabPopupMenu = new KPopupMenu( this );
+  connect(m_tabPopupMenu,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
 }
 
 /**
@@ -1098,19 +1121,16 @@ void Konsole::configureRequest(TEWidget* _te, int state, int x, int y)
 
 void Konsole::slotTabContextMenu(QWidget* _te, const QPoint & pos)
 {
-  QPopupMenu* popupMenu = new QPopupMenu( this );
-
-  popupMenu->insertItem( i18n("&Detach Session"), this,
-                         SLOT(slotTabDetachSession()) );
-  popupMenu->insertItem( i18n("&Rename Session..."), this,
-                         SLOT(slotTabRenameSession()) );
-  popupMenu->insertSeparator();
-  popupMenu->insertItem( SmallIcon("fileclose"), i18n("C&lose Session"), this,
-                         SLOT(slotTabCloseSession()) );
+  m_tabPopupTabsMenu->clear();
+  int counter=0;
+  for (TESession *ses = sessions.first(); ses; ses = sessions.next()) {
+    QString title=ses->Title();
+    m_tabPopupTabsMenu->insertItem(SmallIcon(ses->IconName()),title.replace('&',"&&"),counter++);
+  }
 
   m_contextMenuSession=sessions.at( tabwidget->indexOf( _te ) );
 
-  popupMenu->popup( pos );
+  m_tabPopupMenu->popup( pos );
 }
 
 void Konsole::slotTabDetachSession() {
@@ -2113,7 +2133,7 @@ QString Konsole::sessionId(const int position)
 void Konsole::listSessions()
 {
   int counter=0;
-  KPopupMenu* m_sessionList = new KPopupMenu(this);
+  m_sessionList->clear();
   m_sessionList->insertTitle(i18n("Session List"));
 #if KDE_VERSION >=306
   m_sessionList->setKeyboardShortcutsEnabled(true);
@@ -2122,7 +2142,6 @@ void Konsole::listSessions()
     QString title=ses->Title();
     m_sessionList->insertItem(SmallIcon(ses->IconName()),title.replace('&',"&&"),counter++);
   }
-  connect(m_sessionList, SIGNAL(activated(int)), SLOT(activateSession(int)));
   m_sessionList->adjustSize();
   m_sessionList->popup(mapToGlobal(QPoint((width()/2)-(m_sessionList->width()/2),(height()/2)-(m_sessionList->height()/2))));
 }

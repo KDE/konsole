@@ -300,6 +300,9 @@ private:
   KPopupMenu* m_signals;
   KPopupMenu* m_help;
   KPopupMenu* m_rightButton;
+  KPopupMenu* m_sessionList;
+  KPopupMenu* m_tabPopupMenu;
+  KPopupMenu* m_tabPopupTabsMenu;
 
   KAction *m_zmodemUpload;
   KToggleAction *monitorActivity;
