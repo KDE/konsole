@@ -40,7 +40,9 @@ public:
   int fontNo();
   const char* emuName();
   const QString& Title();
-  QString fullTitle() const;  int keymap();
+  const QString& IconText();
+  QString fullTitle() const;
+  int keymap();
   QStrList getArgs();
   QString getPgm();
 
@@ -50,7 +52,8 @@ public:
   void setSchemaNo(int sn);
   void setKeymapNo(int kn);
   void setFontNo(int fn);
-  void setTitle(const QString& title);
+  void setTitle(const QString& _title);
+  void setIconText(const QString& _iconText);
   void kill(int signal);
 
 public slots:
@@ -81,6 +84,7 @@ private:
   int            keymap_no;
   QString        title;
   QString        userTitle;
+  QString        iconText; // as set by: echo -en '\033]1;IconText\007
 
   QString        pgm;
   QStrList       args;

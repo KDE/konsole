@@ -1075,6 +1075,7 @@ void Konsole::notifySize(int lines, int columns)
 void Konsole::updateTitle()
 {
   setCaption( te->currentSession->fullTitle() );
+  setIconText( te->currentSession->IconText() );
 }
 
 /*
