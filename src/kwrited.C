@@ -59,6 +59,7 @@ KWrited::KWrited() : QObject()
 KWrited::~KWrited()
 {
     pty->kill();
+    pty->donePty(); // this needs to be called manually here, because the app is exiting
     delete pty;
 }
 
