@@ -295,7 +295,7 @@ void TEScreen::addHistLine()
 
   // extract 1st line
   while (end >= 0 && image[end] == dft) end -= 1;
-  line = (histLine*) malloc(sizeof(histLine)+sizeof(ca)*(end+1));
+  line = (histLine*) malloc(sizeof(histLine)+sizeof(ca)*(end+1-1));
   for (x = 0; x <= end; x++) line->line[x] = image[loc(x,0)];
   line->len = end+1;
 

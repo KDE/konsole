@@ -29,9 +29,10 @@ struct ScreenParm
 };
 
 struct histLine
+// basically, another string representation
 {
   int len;
-  ca  line[0];
+  ca  line[1]; // [len], really.
 };
 
 class TEScreen
