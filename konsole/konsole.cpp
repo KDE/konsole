@@ -811,18 +811,11 @@ void Konsole::makeGUI()
    new KAction(i18n("Go to Next Session"), QApplication::reverseLayout() ? Qt::SHIFT+Qt::Key_Left : Qt::SHIFT+Qt::Key_Right,
                this, SLOT(nextSession()), m_shortcuts, "next_session");
 
-   new KAction(i18n("Switch to Session 1"), 0, this, SLOT(switchToSession1()), m_shortcuts, "switch_to_session_1");
-   new KAction(i18n("Switch to Session 2"), 0, this, SLOT(switchToSession2()), m_shortcuts, "switch_to_session_2");
-   new KAction(i18n("Switch to Session 3"), 0, this, SLOT(switchToSession3()), m_shortcuts, "switch_to_session_3");
-   new KAction(i18n("Switch to Session 4"), 0, this, SLOT(switchToSession4()), m_shortcuts, "switch_to_session_4");
-   new KAction(i18n("Switch to Session 5"), 0, this, SLOT(switchToSession5()), m_shortcuts, "switch_to_session_5");
-   new KAction(i18n("Switch to Session 6"), 0, this, SLOT(switchToSession6()), m_shortcuts, "switch_to_session_6");
-   new KAction(i18n("Switch to Session 7"), 0, this, SLOT(switchToSession7()), m_shortcuts, "switch_to_session_7");
-   new KAction(i18n("Switch to Session 8"), 0, this, SLOT(switchToSession8()), m_shortcuts, "switch_to_session_8");
-   new KAction(i18n("Switch to Session 9"), 0, this, SLOT(switchToSession9()), m_shortcuts, "switch_to_session_9");
-   new KAction(i18n("Switch to Session 10"), 0, this, SLOT(switchToSession10()), m_shortcuts, "switch_to_session_10");
-   new KAction(i18n("Switch to Session 11"), 0, this, SLOT(switchToSession11()), m_shortcuts, "switch_to_session_11");
-   new KAction(i18n("Switch to Session 12"), 0, this, SLOT(switchToSession12()), m_shortcuts, "switch_to_session_12");
+   char actionname[20];
+   for (int i=1;i<13;i++) {
+     sprintf(actionname,"switch_to_session_%02d", i);
+     new KAction(i18n("Switch to Session %1").arg(i), 0, this, SLOT(switchToSession()), m_shortcuts, actionname);
+   }
 
    new KAction(i18n("Bigger Font"), 0, this, SLOT(biggerFont()), m_shortcuts, "bigger_font");
    new KAction(i18n("Smaller Font"), 0, this, SLOT(smallerFont()), m_shortcuts, "smaller_font");
@@ -2412,6 +2405,11 @@ void Konsole::listSessions()
   }
   m_sessionList->adjustSize();
   m_sessionList->popup(mapToGlobal(QPoint((width()/2)-(m_sessionList->width()/2),(height()/2)-(m_sessionList->height()/2))));
+}
+
+void Konsole::switchToSession()
+{
+  activateSession( QString( sender()->name() ).right( 2 ).toInt() -1 );
 }
 
 void Konsole::activateSession(int position)

@@ -208,18 +208,7 @@ private slots:
   void slotPasteSelection() { te->pasteSelection(); }
 
   void listSessions();
-  void switchToSession1() { activateSession(0); }
-  void switchToSession2() { activateSession(1); }
-  void switchToSession3() { activateSession(2); }
-  void switchToSession4() { activateSession(3); }
-  void switchToSession5() { activateSession(4); }
-  void switchToSession6() { activateSession(5); }
-  void switchToSession7() { activateSession(6); }
-  void switchToSession8() { activateSession(7); }
-  void switchToSession9() { activateSession(8); }
-  void switchToSession10() { activateSession(9); }
-  void switchToSession11() { activateSession(10); }
-  void switchToSession12() { activateSession(11); }
+  void switchToSession();
 
   void biggerFont();
   void smallerFont();
@@ -412,7 +401,7 @@ private:
   int m_separator_id;
 
   TESession*  m_contextMenuSession;
-  
+
   QToolButton* m_newSessionButton;
   QToolButton* m_removeSessionButton;
   QPoint      m_newSessionButtonMousePressPos;
