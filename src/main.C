@@ -391,14 +391,14 @@ void TEDemo::makeMenu()
   // activating shortcuts here means deactivating them in the other
   // programs.
 
-  menubar->insertItem(i18n("&File") , m_file);
+  menubar->insertItem(i18n("File") , m_file);
 
-//menubar->insertItem(i18n("&New"), m_commands);
-  menubar->insertItem(i18n("&Sessions"), m_sessions);
+//menubar->insertItem(i18n("New"), m_commands);
+  menubar->insertItem(i18n("Sessions"), m_sessions);
 
-  menubar->insertItem(i18n("&Options"), m_options);
+  menubar->insertItem(i18n("Options"), m_options);
   menubar->insertSeparator();
-  menubar->insertItem(i18n("&Help"), m_help);
+  menubar->insertItem(i18n("Help"), m_help);
 }
 
 /* ------------------------------------------------------------------------- */
