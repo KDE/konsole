@@ -668,7 +668,10 @@ HCNT("setImage");
      {
         mResizeWidget = new QFrame(this);
         QFont f = KGlobalSettings::generalFont();
-        f.setPointSize((f.pointSize()*3)/2);
+        int fs = f.pointSize();
+        if (fs == -1)
+           fs = QFontInfo(f).pointSize();
+        f.setPointSize((fs*3)/2);
         f.setBold(true);
         mResizeWidget->setFont(f);
         mResizeWidget->setFrameShape((QFrame::Shape) (QFrame::Box|QFrame::Raised));
