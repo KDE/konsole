@@ -810,6 +810,8 @@ void Konsole::makeTabWidget()
   connect(tabwidget, SIGNAL(movedTab(int,int)), SLOT(slotMovedTab(int,int)));
   connect(tabwidget, SIGNAL(mouseDoubleClick(QWidget*)), SLOT(slotRenameSession()));
   connect(tabwidget, SIGNAL(currentChanged(QWidget*)), SLOT(activateSession(QWidget*)));
+  connect( tabwidget, SIGNAL(contextMenu(QWidget*, const QPoint &)),
+           SLOT(slotTabContextMenu(QWidget*, const QPoint &)));
 
   if (kapp->authorize("shell_access")) {
     QToolButton* newsession = new QToolButton( tabwidget );
@@ -928,7 +930,7 @@ void Konsole::makeBasicGUI()
     this, SLOT(slotClearAllSessionHistories()), m_shortcuts, "clear_all_histories");
 
   m_detachSession = new KAction(i18n("&Detach Session"), 0, this,
-                                SLOT(detachSession()), m_shortcuts, "detach_session");
+                                SLOT(slotDetachSession()), m_shortcuts, "detach_session");
   m_detachSession->setEnabled(false);
 
   m_renameSession = new KAction(i18n("&Rename Session..."), Qt::CTRL+Qt::ALT+Qt::Key_S, this,
@@ -1092,6 +1094,44 @@ void Konsole::configureRequest(TEWidget* _te, int state, int x, int y)
   KPopupMenu *menu = (state & ControlButton) ? m_session : m_rightButton;
   if (menu)
      menu->popup(_te->mapToGlobal(QPoint(x,y)));
+}
+
+void Konsole::slotTabContextMenu(QWidget* _te, const QPoint & pos)
+{
+  QPopupMenu* popupMenu = new QPopupMenu( this );
+
+  popupMenu->insertItem( i18n("&Detach Session"), this,
+                         SLOT(slotTabDetachSession()) );
+  popupMenu->insertItem( i18n("&Rename Session..."), this,
+                         SLOT(slotTabRenameSession()) );
+  popupMenu->insertSeparator();
+  popupMenu->insertItem( SmallIcon("fileclose"), i18n("C&lose Session"), this,
+                         SLOT(slotTabCloseSession()) );
+
+  m_contextMenuSession=sessions.at( tabwidget->indexOf( _te ) );
+
+  popupMenu->popup( pos );
+}
+
+void Konsole::slotTabDetachSession() {
+  detachSession( m_contextMenuSession );
+}
+
+void Konsole::slotTabRenameSession() {
+//  KONSOLEDEBUG << "slotTabRenameSession\n";
+  QString name = m_contextMenuSession->Title();
+  bool ok;
+
+  name = KInputDialog::getText( i18n( "Rename Session" ),
+      i18n( "Session name:" ), name, &ok, this );
+
+  if (ok)
+    initSessionTitle(name,m_contextMenuSession);
+}
+
+void Konsole::slotTabCloseSession()
+{
+  m_contextMenuSession->closeSession();
 }
 
 /* ------------------------------------------------------------------------- */
@@ -2967,34 +3007,41 @@ void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
     se->setSchemaNo(s->numb());
 }
 
-void Konsole::detachSession() {
-  KRadioAction *ra = session2action.find(se);
+void Konsole::slotDetachSession()
+{
+  detachSession();
+}
+
+void Konsole::detachSession(TESession* _se) {
+  if (!_se) _se=se;
+
+  KRadioAction *ra = session2action.find(_se);
   ra->unplug(m_view);
-  TEWidget* se_widget = se->widget();
-  session2action.remove(se);
+  TEWidget* se_widget = _se->widget();
+  session2action.remove(_se);
   action2session.remove(ra);
-  int sessionIndex = sessions.findRef(se);
-  sessions.remove(se);
+  int sessionIndex = sessions.findRef(_se);
+  sessions.remove(_se);
   delete ra;
 
-  disconnect( se,SIGNAL(done(TESession*)),
+  disconnect( _se,SIGNAL(done(TESession*)),
               this,SLOT(doneSession(TESession*)) );
 
-  disconnect( se->getEmulation(),SIGNAL(ImageSizeChanged(int,int)), this,SLOT(notifySize(int,int)));
-  disconnect( se->getEmulation(),SIGNAL(changeColumns(int)), this,SLOT(changeColumns(int)) );
+  disconnect( _se->getEmulation(),SIGNAL(ImageSizeChanged(int,int)), this,SLOT(notifySize(int,int)));
+  disconnect( _se->getEmulation(),SIGNAL(changeColumns(int)), this,SLOT(changeColumns(int)) );
 
-  disconnect( se,SIGNAL(updateTitle()), this,SLOT(updateTitle()) );
-  disconnect( se,SIGNAL(notifySessionState(TESession*,int)), this,SLOT(notifySessionState(TESession*,int)) );
-  disconnect( se,SIGNAL(clearAllListenToKeyPress()), this,SLOT(clearAllListenToKeyPress()) );
-  disconnect( se,SIGNAL(restoreAllListenToKeyPress()), this,SLOT(restoreAllListenToKeyPress()) );
-  disconnect( se,SIGNAL(renameSession(TESession*,const QString&)), this,SLOT(slotRenameSession(TESession*,const QString&)) );
+  disconnect( _se,SIGNAL(updateTitle()), this,SLOT(updateTitle()) );
+  disconnect( _se,SIGNAL(notifySessionState(TESession*,int)), this,SLOT(notifySessionState(TESession*,int)) );
+  disconnect( _se,SIGNAL(clearAllListenToKeyPress()), this,SLOT(clearAllListenToKeyPress()) );
+  disconnect( _se,SIGNAL(restoreAllListenToKeyPress()), this,SLOT(restoreAllListenToKeyPress()) );
+  disconnect( _se,SIGNAL(renameSession(TESession*,const QString&)), this,SLOT(slotRenameSession(TESession*,const QString&)) );
 
-  ColorSchema* schema = colors->find(se->schemaNo());
-  KonsoleChild* konsolechild = new KonsoleChild(se,te->Columns(),te->Lines(),n_scroll,
+  ColorSchema* schema = colors->find(_se->schemaNo());
+  KonsoleChild* konsolechild = new KonsoleChild(_se,se_widget->Columns(),se_widget->Lines(),n_scroll,
                                                 b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame,
-                                                schema,te->font(),te->bellMode(),te->wordCharacters(),
-                                                te->blinkingCursor(),te->ctrlDrag(),te->isTerminalSizeHint(),
-                                                te->lineSpacing(),te->cutToBeginningOfLine(),b_allowResize, b_fixedSize);
+                                                schema,se_widget->font(),se_widget->bellMode(),se_widget->wordCharacters(),
+                                                se_widget->blinkingCursor(),se_widget->ctrlDrag(),se_widget->isTerminalSizeHint(),
+                                                se_widget->lineSpacing(),se_widget->cutToBeginningOfLine(),b_allowResize, b_fixedSize);
   detached.append(konsolechild);
   konsolechild->show();
   konsolechild->run();
@@ -3002,16 +3049,19 @@ void Konsole::detachSession() {
   connect( konsolechild,SIGNAL(doneChild(KonsoleChild*, TESession*)),
            this,SLOT(doneChild(KonsoleChild*, TESession*)) );
 
-  if (se == se_previous)
-    se_previous=NULL;
+  if (_se==se) {
+    if (se == se_previous)
+      se_previous=NULL;
 
-  // pick a new session
-  if (se_previous)
-    se = se_previous;
-  else
-    se = sessions.at(sessionIndex ? sessionIndex - 1 : 0);
-  session2action.find(se)->setChecked(true);
-  QTimer::singleShot(1,this,SLOT(activateSession()));
+    // pick a new session
+    if (se_previous)
+      se = se_previous;
+    else
+      se = sessions.at(sessionIndex ? sessionIndex - 1 : 0);
+    session2action.find(se)->setChecked(true);
+    QTimer::singleShot(1,this,SLOT(activateSession()));
+  }
+
   if (sessions.count()==1)
     m_detachSession->setEnabled(false);
 
@@ -3097,9 +3147,11 @@ void Konsole::slotRenameSession(TESession* ses, const QString &name)
   updateTitle();
 }
 
-void Konsole::initSessionTitle(const QString &_title) {
-  se->setTitle(_title);
-  slotRenameSession(se,_title);
+void Konsole::initSessionTitle(const QString &_title, TESession* _se) {
+  if (!_se) _se=se;
+
+  _se->setTitle(_title);
+  slotRenameSession(_se,_title);
 }
 
 void Konsole::slotClearAllSessionHistories() {

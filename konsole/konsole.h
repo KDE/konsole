@@ -75,7 +75,7 @@ public:
   void setAutoClose(bool on);
   void initFullScreen();
   void initSessionFont(int fontNo);
-  void initSessionTitle(const QString &_title);
+  void initSessionTitle(const QString &_title, TESession* _se=0);
   void initSessionKeyTab(const QString &keyTab);
   void initMonitorActivity(bool on);
   void initMonitorSilence(bool on);
@@ -142,7 +142,7 @@ private slots:
   void keytab_menu_activated(int item);
   void schema_menu_check();
   void attachSession(TESession*);
-  void detachSession();
+  void slotDetachSession();
   void bookmarks_menu_check();
   void newSession(int kind);
   void newSessionTabbar(int kind);
@@ -232,6 +232,11 @@ private slots:
 
   void toggleBidi();
 
+  void slotTabContextMenu(QWidget*, const QPoint &);
+  void slotTabDetachSession();
+  void slotTabRenameSession();
+  void slotTabCloseSession();
+
 private:
   KSimpleConfig *defaultSession();
   QString newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(), const QString &_term = QString::null, const QString &_icon = QString::null, const QString &_title = QString::null, const QString &_cwd = QString::null);
@@ -241,6 +246,7 @@ private:
   void makeBasicGUI();
   void runSession(TESession* s);
   void addSession(TESession* s);
+  void detachSession(TESession* _se=0);
   void setColorPixmaps();
   void updateFullScreen();
 
@@ -382,6 +388,8 @@ private:
   bool        b_histEnabled:1;
   bool        b_fullScripting:1;
   unsigned int m_histSize;
+
+  TESession*  m_contextMenuSession;
 };
 
 class QSpinBox;
