@@ -424,7 +424,7 @@ void Konsole::makeGUI()
                                      SLOT( slotToggleMonitor() ), this );
    monitorSilence->plug ( m_view );
 
-   masterMode = new KToggleAction ( i18n( "Send &Input to all Sessions" ), 0, this,
+   masterMode = new KToggleAction ( i18n( "Send &Input to all Sessions" ), "remote", 0, this,
                                      SLOT( slotToggleMasterMode() ), this );
    masterMode->plug ( m_view );
 
@@ -1760,6 +1760,8 @@ void Konsole::moveSessionLeft()
   session2button.remove(se);
   int button_id=ra->itemId( ra->plug(toolBar(),position-1+2 ));  // +2 because of "New" and separator
   KToolBarButton* ktb=toolBar()->getButton(button_id);
+  if(se->isMasterMode())
+    ktb->setIcon("remote");
   connect(ktb,SIGNAL(doubleClicked(int)), this,SLOT(slotRenameSession(int)));
   session2button.insert(se,ktb);
 
@@ -1789,6 +1791,8 @@ void Konsole::moveSessionRight()
   session2button.remove(se);
   int button_id=ra->itemId( ra->plug(toolBar(),position+1+2) );  // +2 because of "New" and separator
   KToolBarButton* ktb=toolBar()->getButton(button_id);
+  if(se->isMasterMode())
+    ktb->setIcon("remote");
   connect(ktb,SIGNAL(doubleClicked(int)), this,SLOT(slotRenameSession(int)));
   session2button.insert(se,ktb);
 
@@ -1810,13 +1814,14 @@ void Konsole::slotToggleMasterMode()
   bool _masterMode=masterMode->isChecked();
   se->setMasterMode( _masterMode );
   if(_masterMode)
-    for (TESession *se = sessions.first(); se; se = sessions.next())
-      se->setListenToKeyPress(TRUE);
+    for (TESession *ses = sessions.first(); ses; ses = sessions.next())
+      ses->setListenToKeyPress(TRUE);
   else {
-    for (TESession *se = sessions.first(); se; se = sessions.next())
-      se->setListenToKeyPress(FALSE);
+    for (TESession *ses = sessions.first(); ses; ses = sessions.next())
+      ses->setListenToKeyPress(FALSE);
     se->setListenToKeyPress(TRUE);
   }
+  notifySessionState(se,NOTIFYNORMAL);
 }
 
 void Konsole::notifySessionState(TESession* session, int state)
@@ -1824,7 +1829,10 @@ void Konsole::notifySessionState(TESession* session, int state)
   KToolBarButton* ktb=session2button.find(session);
   switch(state)
   {
-    case NOTIFYNORMAL  : ktb->setIcon("openterm");
+    case NOTIFYNORMAL  : if(session->isMasterMode())
+                           ktb->setIcon("remote");
+                         else
+                           ktb->setIcon("openterm");
                          break;
     case NOTIFYBELL    : ktb->setIcon("bell");
                          break;
@@ -2021,6 +2029,8 @@ void Konsole::slotRenameSession() {
     se->setTitle(dlg.text());
     ra->setText(dlg.text());
     ra->setIcon("openterm"); // I don't know why it is needed here
+    if(se->isMasterMode())
+      session2button.find(se)->setIcon("remote");
     toolBar()->updateRects();
     updateTitle();
   }
@@ -2036,6 +2046,8 @@ void Konsole::renameCurrentSession(const QString &name)
   se->setTitle(name);
   ra->setText(name);
   ra->setIcon("openterm"); // I don't know why it is needed here
+  if(se->isMasterMode())
+    session2button.find(se)->setIcon("remote");
   toolBar()->updateRects();
   updateTitle();
 }
