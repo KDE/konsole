@@ -76,7 +76,9 @@
 #include <sys/wait.h>
 
 #ifdef HAVE_UTEMPTER
+extern "C" {
 #include <utempter.h>
+}
 #endif
    
 
