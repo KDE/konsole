@@ -753,7 +753,10 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   }
   if ( ev->button() == MidButton )
   {
-    emitSelection(true,ev->state() & ControlButton);
+    if (mouse_marks)
+      emitSelection(true,ev->state() & ControlButton);
+    else
+      emit mouseSignal( 1, (ev->x()-tLx-blX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 );
   }
   if ( ev->button() == RightButton )
   {
@@ -942,7 +945,8 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
                         (ev->y()-tLy-bY)/font_h + 1 );
     releaseMouse();
   }
-  if ( !mouse_marks && ev->button() == RightButton && !(ev->state() & ShiftButton)) {
+  if ( !mouse_marks && ((ev->button() == RightButton && !(ev->state() & ShiftButton))
+                        || ev->button() == MidButton) ) {
     QPoint tL  = contentsRect().topLeft();
     int    tLx = tL.x();
     int    tLy = tL.y();
