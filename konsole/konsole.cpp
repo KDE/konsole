@@ -2750,12 +2750,16 @@ void Konsole::slotToggleMasterMode()
 
 void Konsole::setMasterMode(bool _state, TESession* _se)
 {
-  if (!_se) _se=se;
-  if (_se->isMasterMode()==_state) return;
+  if (!_se)
+    _se = se;
+  if (_se->isMasterMode() == _state)
+    return;
 
-  _se->setMasterMode( _state );
-  if (_se=se)
-    masterMode->setChecked( _state );
+  _se->setMasterMode(_state);
+  if (se) {
+    _se = se;
+    masterMode->setChecked(_state);
+  }
 
   if(_state)
     for (TESession *ses = sessions.first(); ses; ses = sessions.next())
