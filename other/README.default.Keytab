@@ -62,6 +62,11 @@ key Down -Shift+Ansi-AppCuKeys : "\E[B"
 key Right-Shift+Ansi-AppCuKeys : "\E[C"
 key Left -Shift+Ansi-AppCuKeys : "\E[D"
 
+key Up   +Shift+AppScreen : "\E[a"
+key Down +Shift+AppScreen : "\E[b"
+key Right+Shift+AppScreen : "\E[c"
+key Left +Shift+AppScreen : "\E[d"
+
 # other grey PC keys
 
 key Enter+NewLine : "\r\n"
@@ -82,7 +87,11 @@ key Delete-Shift : "\E[3~"
 key Prior -Shift : "\E[5~"  
 key Next  -Shift : "\E[6~"  
 
+key Insert+Shift : "\E[2;2~"  
 key Delete+Shift : "\E[3;2~"  
+key Prior +Shift+AppScreen : "\E[5;2"
+key Next  +Shift+AppScreen  : "\E[6;2"
+
 
 # Function keys w/o Shift modifier
 
@@ -119,10 +128,10 @@ key Space +Control : "\x00"
 # Some keys are used by konsole to cause operations.
 # The scroll* operations refer to the history buffer.
 
-key Up    +Shift   : scrollLineUp
-key Prior +Shift   : scrollPageUp
-key Down  +Shift   : scrollLineDown
-key Next  +Shift   : scrollPageDown
+key Up    +Shift-AppScreen  : scrollLineUp
+key Prior +Shift-AppScreen  : scrollPageUp
+key Down  +Shift-AppScreen  : scrollLineDown
+key Next  +Shift-AppScreen  : scrollPageDown
 
 key ScrollLock     : scrollLock
 
