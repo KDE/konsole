@@ -173,6 +173,7 @@ private:
     char charset[4]; //FIXME: evtl. move to emulation
 
     // rendition info
+    int   cu_cs;      // actual charset.
     bool  graphic;    //FIXME: evtl. move to emulation
     bool  pound  ;    //FIXME: evtl. move to emulation
     UINT8 cu_fg;

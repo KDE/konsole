@@ -192,12 +192,10 @@ Tripel Tripel::linear(const Tripel &p0, const Tripel &p1, float f)
 
 Tripel Tripel::togray(float f)
 {
-  float rf = 0.25; // they've to total to 1.0
-  float bf = 0.30; // i've guessed these factors.
-  float gf = 0.45; //
-  Tripel rp = Tripel::linear(Tripel(rf*r),Tripel(r,0,0),f);
-  Tripel bp = Tripel::linear(Tripel(bf*b),Tripel(0,b,0),f);
-  Tripel gp = Tripel::linear(Tripel(gf*g),Tripel(0,0,g),f);
+  // I've guessed these factors. They've to total to 1.0
+  Tripel rp = Tripel::linear(Tripel(0.25*r),Tripel(r,0,0),f);
+  Tripel bp = Tripel::linear(Tripel(0.35*b),Tripel(0,b,0),f);
+  Tripel gp = Tripel::linear(Tripel(0.45*g),Tripel(0,0,g),f);
   return Tripel::add( rp, Tripel::add( bp, gp ));
 }
 

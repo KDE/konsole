@@ -330,7 +330,7 @@ HCNT("paintEvent");
   int rly = MIN(lines-1,   MAX(0,(rect.bottom() - tLy - bY  ) / font_h));
 
 /*
-printf("paintEvent: %d..%d, %d..%d (%d..%d, %d..%d)\n",lux,rlx,luy,rly,
+ printf("paintEvent: %d..%d, %d..%d (%d..%d, %d..%d)\n",lux,rlx,luy,rly,
   rect.left(), rect.right(), rect.top(), rect.bottom());
 */
 

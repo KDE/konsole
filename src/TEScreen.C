@@ -632,7 +632,10 @@ void TEScreen::reset()
   tmargin=0;
   bmargin=lines-1;
 
+  cu_cs   = 0;
   strncpy(charset,"BBBB",4);
+  graphic = FALSE;
+  pound   = FALSE;
 
   setDefaultRendition();
   saveCursor();
@@ -760,6 +763,7 @@ void TEScreen::ShowCharacter(unsigned char c)
 void TEScreen::setCharset(int n, int cs)
 {
   charset[n&3] = cs;
+  useCharset(cu_cs);
 }
 
 /*!
@@ -767,6 +771,7 @@ void TEScreen::setCharset(int n, int cs)
 
 void TEScreen::useCharset(int n)
 {
+  cu_cs   = n&3;
   graphic = (charset[n&3] == '0');
   pound   = (charset[n&3] == 'A');
 }
@@ -1012,8 +1017,6 @@ void TEScreen::setDefaultRendition()
   setForeColorToDefault();
   setBackColorToDefault();
   cu_re   = DEFAULT_RENDITION;
-  graphic = FALSE;
-  pound   = FALSE;
   effectiveRendition();
 }
 

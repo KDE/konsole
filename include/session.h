@@ -20,7 +20,7 @@
 #include "TEWidget.h"
 #include "TEmuVt102.h"
 
-class TESession : QObject
+class TESession : public QObject
 { Q_OBJECT
 
 public:
@@ -50,6 +50,7 @@ public:
 public slots:
 
   void done(int status);
+  void terminate();
 
 signals:
 

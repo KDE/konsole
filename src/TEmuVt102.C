@@ -693,7 +693,6 @@ void VT102Emulation::setScreen(int n)
 
 void VT102Emulation::onMouse( int cb, int cx, int cy )
 {
-HERE;
   if (!connected) return;
   reportMouseEvent(cb,cx,cy);
 }

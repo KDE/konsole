@@ -535,7 +535,7 @@ void TEDemo::activateSession(int sn)
     m_sessions->setItemChecked(no,FALSE);
   }
   se = s;
-  if (!s) return; // oops
+  if (!s) { fprintf(stderr,"session not found\n"); return; } // oops
   m_sessions->setItemChecked(sn,TRUE);
   setSchema(s->schemaNo());               //FIXME: creates flicker? Do only if differs
 //Set Font. Now setConnect should do the appropriate action.
@@ -629,7 +629,14 @@ void TEDemo::doneSession(TESession* s, int status)
   m_sessions->removeItem(no);
 
   s->setConnect(FALSE);
-  delete s;
+
+  // This slot (doneSession) is activated from the Shell when receiving a
+  // SIGCHLD. A lot is done during the signal handler, apparently deleting
+  // the Shell additionally, is sometimes too much, causing something
+  // to get messed up in rare cases. The following causes delete not to
+  // be called from within the signal handler.
+
+  QTimer::singleShot(100,s,SLOT(terminate()));
 
   if (s == se)
   { // pick a new session 

@@ -68,9 +68,12 @@ void TESession::setConnect(bool c)
 
 void TESession::done(int status)
 {
-//setConnect(FALSE);
   emit done(this,status);
-//delete this;
+}
+
+void TESession::terminate()
+{
+  delete this;
 }
 
 Emulation* TESession::getEmulation()
