@@ -1,0 +1,12 @@
+# KDE Config File
+[KDE Desktop Entry]
+Type=KonsoleApplication
+Name=Administrator
+Name[ja]=管理者
+Comment=Root Console
+Comment[ja]=Root コンソール
+Exec=su
+Schema=/opt/kde/share/apps/konsole/Linux.schema
+#VGA
+Font=6
+Term=linux

@@ -19,6 +19,7 @@
 #include <kfm.h>
 #include <kapp.h>
 #include <ktmainwindow.h>
+//#include <ktopwidget.h>
 #include <ksimpleconfig.h>
 #include <qstrlist.h>
 
@@ -33,7 +34,7 @@ class TEDemo : public KTMainWindow
 
 public:
 
-  TEDemo(QStrList & _args, int login_shell);
+  TEDemo(char* name, QStrList & _args, int login_shell);
   ~TEDemo();
   void setColLin(int columns, int lines);
 
@@ -68,15 +69,19 @@ protected:
 private slots:
 
   void setSchema(int n);
-  void saveYourself();
 
 private:
 
   void makeMenu();
   void makeStatusbar();
+  void runSession(TESession* s);
   void addSession(TESession* s);
   void setColorPixmaps();
 
+  void setMenuVisible(bool);
+  void setFrameVisible(bool);
+  void setBsHack(bool);
+  
   void setSchema(const char* path);
   void setSchema(const ColorSchema* s);
   void setFont(int fontno);
@@ -109,11 +114,9 @@ private:
   int         n_scroll;
   QString     s_schema;
   int         n_render;
-  QSize       lincol0; //FIXME: something is messed up initializing the size (event handling)
-  QSize       lincol;
   QString     pmPath; // pixmap path
   QString     dropText;
-
+  QSize       defaultSize;
   int         curr_schema; // current schema no
 
   QStrList args;

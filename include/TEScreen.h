@@ -13,21 +13,42 @@
 #ifndef TESCREEN_H
 #define TESCREEN_H
 
+/*! \file
+*/
+
 #include "TECommon.h"
 
+/*!
+*/
 #define MODE_Origin    0
+/*!
+*/
 #define MODE_Wrap      1
+/*!
+*/
 #define MODE_Insert    2
+/*!
+*/
 #define MODE_Screen    3
+/*!
+*/
 #define MODE_Cursor    4
+/*!
+*/
 #define MODE_NewLine   5
+/*!
+*/
 #define MODES_SCREEN   6
 
+/*!
+*/
 struct ScreenParm
 {
   int mode[MODES_SCREEN];
 };
 
+/*!
+*/
 struct histLine
 // basically, another string representation
 {
@@ -136,11 +157,16 @@ public: // these are all `Screen' operations
     //
     ca*  getCookedImage();
     
+    /*! return the number of lines. */
     int  getLines()   { return lines; }
+    /*! return the number of columns. */
     int  getColumns() { return columns; }
 
+    /*! set the position of the history cursor. */
     void setHistCursor(int cursor) { histCursor = cursor; } //FIXME:rangecheck
+    /*! return the position of the history cursor. */
     int  getHistCursor() { return histCursor; }
+    /*! return the number of lines in the history buffer. */
     int  getHistLines (){ return histLines;  }
     void setHistMaxLines(int maxLines);
 

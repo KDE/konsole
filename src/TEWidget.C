@@ -10,7 +10,9 @@
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 
-/*! \class
+/*! \class TEWidget
+
+    \brief Visible screen contents
  
    This class is responsible to map the `image' of a terminal emulation to the
    display. All the dependency of the emulation to a specific GUI or toolkit is
@@ -18,13 +20,15 @@
    emulation, it simply work within the terminal emulation framework by exposing
    size and key events and by being ordered to show a new image.
 
-   - The internal image has the size of the widget (evtl. rounded up)
-   - The external image used in setImage can have any size.
-   - (internally) the external image is simply copied to the internal
-     when a setImage happens. During a resizeEvent no painting is done
-     a paintEvent is expected to follow anyway.
+   <ul>
+   <li> The internal image has the size of the widget (evtl. rounded up)
+   <li> The external image used in setImage can have any size.
+   <li> (internally) the external image is simply copied to the internal
+        when a setImage happens. During a resizeEvent no painting is done
+        a paintEvent is expected to follow anyway.
+   </ul>
 
-   /sa TEScreen /sa TEmulation
+   \sa TEScreen \sa Emulation
 */
 
 /* FIXME:
@@ -57,11 +61,8 @@
 #include <kmsgbox.h>
 #include <X11/Xlib.h>
 
-#define MIN(a,b) ((a)<(b)?(a):(b))
-#define MAX(a,b) ((a)>(b)?(a):(b))
-
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
-#define HCNT(Name) //{ static int cnt = 1; printf("%s(%d): %s %d\n",__FILE__,__LINE__,Name,cnt++); }
+#define HCNT(Name) // { static int cnt = 1; printf("%s(%d): %s %d\n",__FILE__,__LINE__,Name,cnt++); }
 
 #define loc(X,Y) ((Y)*columns+(X))
 
@@ -249,8 +250,8 @@ HCNT("setImage");
   int cb  = -1; // undefined
   int cr  = -1; // undefined
   
-  int lins = MIN(this->lines,  MAX(0,lines  ));
-  int cols = MIN(this->columns,MAX(0,columns));
+  int lins = QMIN(this->lines,  QMAX(0,lines  ));
+  int cols = QMIN(this->columns,QMAX(0,columns));
   char *disstr = new char[cols];
 
 //{ static int cnt = 0; printf("setImage %d\n",cnt++); }
@@ -326,10 +327,10 @@ HCNT("paintEvent");
   int    tLx = tL.x();
   int    tLy = tL.y();
  
-  int lux = MIN(columns-1, MAX(0,(rect.left()   - tLx - blX ) / font_w));
-  int luy = MIN(lines-1,   MAX(0,(rect.top()    - tLy - bY  ) / font_h));
-  int rlx = MIN(columns-1, MAX(0,(rect.right()  - tLx - blX ) / font_w));
-  int rly = MIN(lines-1,   MAX(0,(rect.bottom() - tLy - bY  ) / font_h));
+  int lux = QMIN(columns-1, QMAX(0,(rect.left()   - tLx - blX ) / font_w));
+  int luy = QMIN(lines-1,   QMAX(0,(rect.top()    - tLy - bY  ) / font_h));
+  int rlx = QMIN(columns-1, QMAX(0,(rect.right()  - tLx - blX ) / font_w));
+  int rly = QMIN(lines-1,   QMAX(0,(rect.bottom() - tLy - bY  ) / font_h));
 
 /*
  printf("paintEvent: %d..%d, %d..%d (%d..%d, %d..%d)\n",lux,rlx,luy,rly,
@@ -396,8 +397,8 @@ void TEWidget::propagateSize()
   int oldcol = columns;
   makeImage();
   // we copy the old image to reduce flicker
-  int lins = MIN(oldlin,lines);
-  int cols = MIN(oldcol,columns);
+  int lins = QMIN(oldlin,lines);
+  int cols = QMIN(oldcol,columns);
   if (oldimg)
   {
     for (int lin = 0; lin < lins; lin++)
@@ -768,11 +769,9 @@ bool TEWidget::eventFilter( QObject *, QEvent *e )
       case ShiftButton|(Key_Down     << 8) :
            scrollbar->setValue(scrollbar->value()+1);
            break;
-#if 0
-      case (Key_Insert << 8) : // Some progs use this.
+      case ShiftButton|(Key_Insert   << 8) :
            emitSelection();
            break;
-#endif
       default :
            emit keyPressedSignal(ke); // expose
            break;

@@ -36,7 +36,7 @@ cat >> $RES << etx
 <h1><center>VT100</center></h1>
 <center><img src="vt100.gif"></center>
 
-<it>Please note that this text is under construction</it>
+<it>Please note that this text is under construction.</it>
 
 <h2>Preface</h2>
 
@@ -64,15 +64,19 @@ the other.
 <p>
 <hr>
 <p>
+I'm working towards a
+close integration of the konsole's source code with this document, but it
+is still a long way to go.
+<p>
 Currently, the body of this document is mainly a concept data base, that
 referes to the VT100 component of the emulation. Though the codes accepted by
 konsole are now clearly indicated, a comparison to the xterm and Linux console
 emulation is missing.
 <p>
 The konsole emulation sources is not linked closely with it's documentation,
-and, also accurate at the time of writing, it can still fall slightly appart.
-Work is currently in progress to fix this issue. A decent indexing is on the
-way also.
+and, also accurate at the time of writing, it can still fall slightly appart,
+though the codes accepted and produced by konsole should be properly listed.
+Work is currently in progress to fix this issue.
 
 
 
@@ -85,11 +89,16 @@ way also.
 <li>See the section <em>Method of description</em>, below
 <li>Derive some summarizing lists.
 </ul>
+<hr>
 etx
+
 
 # -- Codes --------------------------------------------------------------------------
 
-header "Terminal Control Commands"
+./genTC.pl >> $RES
+
+
+header "On VT100"
 
 cat >> $RES << etx
 
@@ -114,297 +123,7 @@ each function.  This document describes how the VT100 will respond to the
 implemented ANSI central function.
 <p>
 
-<!-- BEGIN: new section about the codes -->
-
-<h2>Method of description</h2>
-
-<em>All the following in this section is an outline</em>. <p>
-
-Parts of the terminal description
-<ul>
-<li>State
-<br>This is mainly the screen, the cursor (including it's graphical state)
-    and some hidden mode variables. Note that the state cannot be investigated
-    by the attached host.
-<li>Interface
-<br>That's what goes over the wire. Beside being related to objects, this
-    appears so closely related to contemporal process communication, that
-    it might be discussed in likely terms.
-<br>We have information flowing in both directions. On could destinguist
-    between:
-<li>Commands
-<br>These are "calls" of the terminals interface by the host which cause
-    some change of the terminals state, but do not end in a response.
-<li>Requests
-<br>These are "calls" of the terminals interface by the host which do not cause
-    any change of the terminals state, but end in a response of the terminal.
-    Clearly, requests are somehow used to investigate the state of the terminal.
-<li>Events
-<br>These are signals from the terminal caused by the user affecting the
-    mouse or keyboard to the host.
-<li>Replys
-<br>These are send by the terminal as a result of a Request from the hosts.
-<li>Encoding/Decoding
-</ul>
-
-
-<!-- END -->
 etx
-
-header "Control Sequences"
-cat >> $RES << etx
-
-Conceptually, the commands to the terminal emulation are encoded if form
-of byte sequences to meet the restrictions of the transport media. These
-sequences have pretty different originations and therefore the format of
-the sequences are inhomogenous.
-<p>
-Refering both to their origin and form, one can group the overall encoding
-schemes as follows:
-<p>
-<table>
-<tr><td width=20% bgcolor=#d0d0d0>Name</td><td width=20% bgcolor=#d0d0d0>Pattern</td><td bgcolor=#d0d0d0>Scope</td><td bgcolor=#d0d0d0>Comment</td></tr>
-<tr><td>Printable Ascii Characters</td><td>32..126</td><td>ASCII ECMA</td>
-  <td>This is the most original pattern of all. The characters to be
-      displayed are passed over the chanel and are interpreted by the
-      terminal (emulation) as instructions to display the corresponding
-      glyph of the ascii character set. Contempory emulations include the
-      upper half (128..255) of the extentions to the national ascii character
-      sets, also.</td></tr>
-<tr><td>Ascii Control Characters</td><td>0..26,28..31,127</td><td>ASCII ECMA</td>
-  <td>Ascii defines some non-printable, but format effecting characters, too.
-      Depending on the emulation, at least some of them are given a meaning.
-      The typically implemented ones are those that are handled by a teletype
-      like device.</td></tr>
-<tr><td>Simple Escape Sequence</td><td><b>ESC</b> <i>C</i></td><td>ECMA</td>
-  <td>These sequences are made up from an <b>ESC</b> character followed by
-      exactly one other character in the range ???..???.</td></tr>
-<tr><td>CSI Sequence</td>
-  <td><b>ESC</b> <b>[</b> <i>Parameters</i> {<i>I</i>} <i>C</i></td>
-  <td>ECMA</td>
-  <td></td></tr>
-<tr><td colspan=4>
-  <p>
-    The remaining codes are nonstandard but traditionalized hacks.
-  <p>
-    </td></tr>
-<tr><td>DEC hacks</td>
- <td><b>ESC</b> <i>C</i> <i>D</i></td>
- <td>VT100</td>
- <td></td></tr>
-<tr><td>XTERM hacks</td>
-<td><b>ESC ]</b> <i>Pn</i> <b>;</b> <i>text</i> <b>BEL</b></td>
-<td>XTERM</td>
-<td></td>
-<tr><td colspan=4>
-  <p>
-    VT52 uses a different (incompatible) set of escape codes. VT100 includes
-    the VT52 emulation as a mode.
-  <p>
-    </td></tr>
-</tr>
-<tr><td>Simple Escape Sequence</td><td><b>ESC</b> <i>C</i></td><td>VT52</td>
-  <td></td></tr>
-<tr><td>Complex Escape Sequence</td><td><b>ESC</b> <b>Y</b> <i>X</i> <i>Y</i></td><td>VT52</td>
-  <td></td></tr>
-
-</table>
-
-<h3>More on Control Sequences</h3>
-
-<h4>Control Characters</h4>
-
-Control characters (codes 0x00 - 0x1f inclusive) are specifically excluded
-from the control sequence syntax, but may be embedded within a control
-sequence.  Embedded control characters are executed as soon as they are
-encountered by the VT100.  The processing of the control sequence then
-continues with the next character recieved.  The exceptions are:
-if the <a href=#ESC>ESC</a> character occurs, the current control sequence
-is aborted, and a new one commences beginning with the <a href=#ESC>ESC</a>
-just recieved.  If the character <a href=#CAN>CAN</a> (0x0c) or the
-character <a href=#SUB>SUB</a> (0x0e) occurs,
-the current control sequence is aborted.  The ability to embed control
-characters allows the synchronization characters XON and XOFF to be
-interpreted properly without affecting the control sequence.
-<p>
-<b>FIXME</b>: <i>I've to check this w.r.t. the "I" component in modern
-   (EMCA) CSI sequences. Evtl. this is not compatible anymore.</i>
-<p>
-
-<h4>CSI Sequences</h4>
-
-<dl>
-<dt>Control Sequence Introducer (CSI):
-<dd>An escape sequence that provides
-    supplementary controls and is itself a prefix affecting the
-    interpretation of a limited number of contiguous characters.
-    In the VT100, the CSI is: &lt;ESC&gt;[
-
-<dt>Parameter:
-<dd>1. A string of zero or more decimal characters which
-       represent a single value.  Leading zeros are ignored.  The
-       decimal characters have a range of 0 (060) to 9 (071).
-<br>2. The value so represented.
-
-<dt>Numeric Parameter:
-<dd>A parameter that represents a number, designated by Pn.
-
-<dt>Selective Parameter:
-<dd>A parameter that selects a subfunction from a
-    specified set of subfunctions, designated by Ps.  In general, a
-    control sequence with more than one selective parameter causes
-    the same effect as several control sequences, each with one
-    selective parameter, e.g., CSI Psa; Psb; Psc F is identical to
-    CSI Psa F CSI Psb F CSI Psc F.
-
-<dt>Parameter String:
-<dd>A string of parameters separated by a semicolon.
-
-<dt>Default:
-<dd> A function-dependent value that is assumed when no explicit
-     value, or a value of 0, is specified.
-
-<dt>Final character:
-<dd>A character whose bit combination terminates an escape or control sequence.
-</dl>
-
-
-<em>EXAMPLE</em>:  Control sequence to turn off all character attributes, then
-turn on underscore and blink attributes (<a href=#SGR>SGR</a>).
-
-<pre>                      Delimiters
-                          / \       
-                         /   \       
-                         |   |
-                        \ / \ /
-Sequence:       &lt;ESC&gt;[ 0 ; 4 ; 5 m
-                ^^^^^^ ^   ^   ^ ^
-                |||||| |   |   | |
-                \||||/  \  |  /  +------Final character
-                 \||/    \ | /
-                 CSI   Selective
-                       Parameters
-</pre>
-The octal representation of this string is:
-<pre>
-   033 0133 060 073 064 073 065 0155
-  &lt;ESC&gt;   [   0   ;   4   ;   5    m
-</pre>
-
-
-Alternate sequences which will accomplish the same thing:
-
-<ul>
-<li><code>&lt;ESC&gt;[;4;m     </code>
-<li><code>&lt;ESC&gt;[m        </code>
-<br><code>&lt;ESC&gt;[4m       </code>
-<br><code>&lt;ESC&gt;[5m       </code>
-<li><code>&lt;ESC&gt;[0;04;005m</code>
-</ul>
-
-<h4>DEC hacks</h4>
-
-These form two groups of commands.
-<p>
-In one first the first character is a hash (<em>#</em>) and the following a digit.
-This command group is used to denote VT100 specific instructions and can
-safely be sonsidered to be obsolete. See
-  <a href=#DECALN>DECALN</a>,
-  <a href=#DECDHLB>DECDHLB</a>,
-  <a href=#DECDHLT>DECDHLT</a>,
-  <a href=#DECDWL>DECDWL</a> and
-  <a href=#DECSWL>DECSWL</a>.
-<p>
-The second one is used to specify character set mappings (see <a
-href=#SCS>SCS</a>). A CSI instruction to do this is specified in ECMA,
-and this should be used as a replacement.
-
-<h4>XTERM hacks</h4>
-
-etx
-
-header "The Concept Data Base"
-cat >> $RES << etx
-
-<i>The following text is a collection of several sorts of definitions and
-   explainations. It is incomplete in many respects and a working draft.
-   The author is well aware of the fact that this part of the document
-   is of few use without having proper indexes.
-</i>
-   
-<p>
-All of the following control sequences are transmitted from the Host to
-VT100 unless otherwise noted.  All of the control sequences are a subset of
-those defined in ANSI X 3.64 1977 and ANSI X 3.41 1974.
-<p>
-The following text conforms to these formatting conventions:
-<ul>
-<li>Individual character literals are set in bold face. Ascii representation
-    is used throughout, so <b>ESC</b> means the binary value of 27 and
-    <b>[</b> a value of 91.
-
-<li>Parameters are indicated by italic type faces.
-<li>Parameter types usually are indicated as one of:
-    <table>
-    <tr><td><i>Pn </i></td><td>A string of digits representing a numerical value.</td></tr>
-    <tr><td><i>Ps </i></td><td>A character that selects an item from a list.</td></tr>
-    <tr><td><i>a-z</i></td><td>Any lowercase sequence of one or more
-                        characters represent a value to be
-                        entered (as in <i>Pn</i>), and the name in the
-                        will be referred to in explanatory text.</td></tr>
-    </table>
-
-<li>Spaces are used only to improve readability, they do not occure in the
-    control sequences unless otherwise indicated.
-
-</ul>
-
-<p>
-The following attributes below have the following meaning:
-<ul>
-<li>VT100 - This code is known to VT100.
-<li>ANSI  - This code is defined by ANSI.
-<li>DEC   - This code is DEC private.
-<li>Command - Sent from host to the terminal. <b>FIXME:</b>add Inquiery.
-<li>Reply - Sent from terminal to the host (as response to an Inquiery).
-<li>Event - Sent from terminal to the host (caused by a user activity).
-<li>Mode - The entry is a mode.
-</ul>
-
-<p>
-<ul>
-<li>Host to Terminal (Commands,Requests)
-<ul>
-<li>Commands
-<ul>
-<li>Character Display Operation
-<li>Rendition related status
-<li>Cursor
-<li>Cursor related status
-<li>Edit
-<li>Miscellaneous
-<li>General mode setting
-<li>Miscellaneous status
-<li>VT52
-<li>Not implemented
-<li>Ignored
-</ul>
-<li>Requests
-</ul>
-<li>Terminal to Host (Replies, Events)
-<ul>
-<li>Replies
-<li>Events
-</ul>
-<li>Modes
-<ul>
-<li>Modes
-</ul>
-</ul>
-etx
-
-
-./genTC.pl >> $RES
 
 header "Modes"
 

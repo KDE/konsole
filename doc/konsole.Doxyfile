@@ -1,0 +1,10 @@
+PROJECT_NAME     = "Konsole"
+OUTPUT_DIRECTORY = konsole
+GENERATE_LATEX   = NO
+INPUT            = ../src ../include framework
+FILE_PATTERNS    = *.C *.h
+PERL_PATH        = /usr/bin/perl
+TAGFILES         = qt.tag
+QUIET            = NO
+EXTRACT_PRIVATE  = YES
+#EXTRACT_ALL      = YES
