@@ -35,7 +35,7 @@
 #include <kfontdialog.h>
 #include <kglobalsettings.h>
 #include <kiconloader.h>
-#include <klineeditdlg.h>
+#include <kinputdialog.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <krun.h>
@@ -849,10 +849,13 @@ void konsolePart::slotBlinkingCursor()
 }
 
 void konsolePart::slotWordSeps() {
-  KLineEditDlg dlg(i18n("Characters other than alphanumerics considered part of a word when double clicking:"),s_word_seps, (KMainWindow*)parentWidget);
-  dlg.setCaption(i18n("Word Connectors"));
-  if (dlg.exec()) {
-    s_word_seps = dlg.text();
+  bool ok;
+
+  QString seps = KInputDialog::getText( i18n( "Word Connectors" ),
+      i18n( "Characters other than alphanumerics considered part of a word when double clicking:" ), s_word_seps, &ok, parentWidget );
+  if ( ok )
+  {
+    s_word_seps = seps;
     te->setWordCharacters(s_word_seps);
   }
 }

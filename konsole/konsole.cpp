@@ -97,7 +97,7 @@ Time to start a requirement list.
 #include <krootpixmap.h>
 #include <krun.h>
 #include <kstdaction.h>
-#include <klineeditdlg.h>
+#include <kinputdialog.h>
 #include <kdebug.h>
 #include <kipc.h>
 #include <dcopclient.h>
@@ -1023,11 +1023,15 @@ void Konsole::configureRequest(TEWidget* _te, int state, int x, int y)
 
 void Konsole::slotSaveSessionsProfile()
 {
-  KLineEditDlg dlg(i18n("Enter name under which the profile should be saved:"), QString::null, this);
-  dlg.setCaption(i18n("Save Sessions Profile"));
-  if (dlg.exec()) {
-    QString path = locateLocal( "data", QString::fromLatin1( "konsole/profiles/" ) +
-                                dlg.text(), KGlobal::instance() );
+  bool ok;
+
+  QString prof = KInputDialog::getText( i18n( "Save Sessions Profile" ),
+      i18n( "Enter name under which the profile should be saved:" ),
+      QString::null, &ok, this );
+  if ( ok ) {
+    QString path = locateLocal( "data",
+        QString::fromLatin1( "konsole/profiles/" ) + prof,
+        KGlobal::instance() );
 
     if ( QFile::exists( path ) )
       QFile::remove( path );
@@ -2759,11 +2763,14 @@ void Konsole::slotRenameSession() {
 //  KONSOLEDEBUG << "slotRenameSession\n";
   KRadioAction *ra = session2action.find(se);
   QString name = se->Title();
-  KLineEditDlg dlg(i18n("Session name:"),name, this);
-  dlg.setCaption(i18n("Rename Session"));
-  if (dlg.exec()) {
-    se->setTitle(dlg.text());
-    ra->setText(dlg.text().replace('&',"&&"));
+  bool ok;
+
+  name = KInputDialog::getText( i18n( "Rename Session" ),
+      i18n( "Session name:" ), name, &ok, this );
+
+  if (ok) {
+    se->setTitle(name);
+    ra->setText(name.replace('&',"&&"));
     ra->setIcon( se->IconName() ); // I don't know why it is needed here
     if(se->isMasterMode())
       session2button.find(se)->setIcon("remote");
