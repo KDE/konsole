@@ -358,8 +358,7 @@ extern "C" int kdemain(int argc, char* argv[])
     return 0;
   }
 
-  if(args->isSet("workdir"))
-     QDir::setCurrent( args->getOption("workdir") );
+  QString workDir = QFile::decodeName( args->getOption("workdir") );
 
   QString keytab = "";
   if (args->isSet("keytab"))
@@ -524,7 +523,7 @@ extern "C" int kdemain(int argc, char* argv[])
   }
   else
   {
-    Konsole*  m = new Konsole(wname,(shell ? QFile::decodeName(shell) : QString::null),eargs,histon,menubaron,tabbaron,frameon,scrollbaron,QString::null,title,type,term);
+    Konsole*  m = new Konsole(wname,(shell ? QFile::decodeName(shell) : QString::null),eargs,histon,menubaron,tabbaron,frameon,scrollbaron,QString::null,title,type,term, false, 0, workDir);
     m->enableFullScripting(full_script);
     m->enableFixedSize(fixed_size);
     //3.8 :-(
