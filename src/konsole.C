@@ -136,7 +136,7 @@ Konsole::Konsole(const char* name,
 
   // create applications /////////////////////////////////////////////////////
 
-  setView(te,FALSE);
+  setCentralWidget(te);
   makeMenu();
   // temporary default: show
   toolBar()->setIconText(KToolBar::IconTextRight);
@@ -213,10 +213,6 @@ Konsole::Konsole(const char* name,
   readProperties(KGlobal::config());
 
   // activate and run first session //////////////////////////////////////////
-
-  // WABA: Make sure all the xxxBars are in place so that
-  //       we can resize ou configuration filesr mainWidget to its target size.
-  updateRects();
 
   runSession(initial);
   // apply keytab
@@ -395,15 +391,14 @@ void Konsole::setColLin(int columns, int lines)
       defaultSize = te->calcSize(80,24);
       notifySize(24,80); // set menu items (strange arg order !)
     }
-    resize(defaultSize);
+    te->resize(defaultSize);
   }
   else
   {
     QSize size = te->calcSize(columns, lines);
-    resize(size);
+    te->resize(size);
     notifySize(lines,columns); // set menu items (strange arg order !)
   }
-  //adjustSize();
 }
 
 /* ------------------------------------------------------------------------- */
