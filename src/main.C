@@ -77,7 +77,7 @@
 #undef PACKAGE
 #undef VERSION
 #define PACKAGE "konsole"
-#define VERSION "0.9.8"
+#define VERSION "0.9.9"
 
 #define WITH_VGA
 
@@ -95,6 +95,7 @@ TEDemo::TEDemo(QStrList & _args, int login_shell) : KTMainWindow(), args(_args)
 {
   se = 0L;
   menubar = menuBar();
+  setMinimumSize(200,100);
   
   // get the default values
   readProperties(kapp->getConfig());
@@ -387,13 +388,11 @@ void TEDemo::makeMenu()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TEDemo::saveYourself()
-{
-    KConfig* config = kapp->getSessionConfig();
-    if (args.count() > 0)
-        config->writeEntry("konsolearguments", args);
-    config->sync();
-}
+//void TEDemo::saveYourself()
+//{
+//    KConfig* config = kapp->getSessionConfig();
+//    config->sync();
+//}
 
 void TEDemo::saveProperties(KConfig* config)
 {
@@ -404,21 +403,16 @@ void TEDemo::saveProperties(KConfig* config)
   config->writeEntry("font",n_font);
   config->writeEntry("schema",s_schema);
   config->writeEntry("scrollbar",n_scroll);
-  config->writeEntry("geometry", geometry()); //FIXME: we get wrong geometry info here
-                                              //NOTE : I first thought that
-                                              //       problem depends on my
-                                              //       strange configuration.
-                                              //       I'm running a borderless
-                                              //       konsole in MacOS style.
-                                              //       But it doesn't.
-  config->writeEntry("kmenubar",
+  if (args.count() > 0) config->writeEntry("konsolearguments", args);
+  config->writeEntry("geometry", KWM::getProperties(winId()));
+  config->writeEntry("kmenubar", //FIXME:Float
                      menubar->menuBarPos() == KMenuBar::Bottom ? "bottom" : "top");
   config->sync();
 }
 
 void TEDemo::readProperties(KConfig* config)
 {
-  QRect dftRect = geometry();
+  QString dftGeom = "1+4+0+512+307+4+0+512+307+0+0+0+1"; //FIXME: implementation
   config->setGroup("options"); // bad! will no allow us to support multi windows
   b_menuvis  = config->readBoolEntry("menubar visible",TRUE);
   b_framevis = config->readBoolEntry("has frame",TRUE);
@@ -426,8 +420,7 @@ void TEDemo::readProperties(KConfig* config)
   n_font     = MIN(config->readUnsignedNumEntry("font",3),7);
   n_scroll   = MIN(config->readUnsignedNumEntry("scrollbar",SCRRIGHT),2);
   s_schema   = config->readEntry("schema","");
-  setGeometry(config->readRectEntry("geometry",&dftRect));
-//move(+4,-5); //FIXME: we work around a KWM(?) bug here. (see geometry() above)
+  setGeometry(KWM::setProperties(menubar->winId(), config->readEntry("geometry",dftGeom)));
   if (menubar->menuBarPos() != KMenuBar::Floating)
   { QString entry = config->readEntry("kmenubar");
     if (!entry.isEmpty() && entry == "floating")
