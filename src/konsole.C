@@ -195,8 +195,8 @@ Konsole::Konsole(const char* name, const QString& _program,
 ,selectSize(0)
 ,selectFont(0)
 ,selectScrollbar(0)
-,warnQuit(0)
 ,clearHistory(0)
+,warnQuit(0)
 ,cmd_serial(0)
 ,cmd_first_screen(-1)
 ,n_keytab(0)
@@ -709,6 +709,8 @@ void Konsole::saveProperties(KConfig* config) {
         config->writeEntry(key, sessions.current()->getArgs());
         key = QString("Pgm%1").arg(counter);
         config->writeEntry(key, sessions.current()->getPgm());
+        key = QString("Font%1").arg(counter);
+        config->writeEntry(key, sessions.current()->fontNo());
         sessions.next();
         counter++;
      }
@@ -717,9 +719,9 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("history",b_scroll);
   config->writeEntry("has frame",b_framevis);
   config->writeEntry("Fullscreen",b_fullscreen);
-  config->writeEntry("font",n_font);
+  config->writeEntry("font",n_defaultFont);
   config->writeEntry("defaultfont", defaultFont);
-  config->writeEntry("schema",s_schema);
+  config->writeEntry("schema",s_kconfigSchema);
   config->writeEntry("wordseps",s_word_seps);
   config->writeEntry("scrollbar",n_scroll);
   config->writeEntry("keytab",n_keytab);
@@ -900,6 +902,7 @@ void Konsole::slotSelectFont() {
       return;
   }
   setFont(item);
+  n_defaultFont = n_font; // This is the new default
   activateSession(); // activates the current
 }
 
@@ -910,6 +913,7 @@ void Konsole::schema_menu_activated(int item)
 //        KONSOLEDEBUG << "Item " << item << " selected from schema menu"
 //                << endl;
   setSchema(item);
+  s_kconfigSchema = s_schema; // This is the new default
   activateSession(); // activates the current
 }
 
@@ -1133,6 +1137,11 @@ void Konsole::initSessionSchema(int schemaNo) {
   setSchema(schemaNo);
 }
 
+void Konsole::initSessionFont(int fontNo) {
+  if (fontNo == -1) return; // Don't change
+  setFont(fontNo);
+}
+
 void Konsole::initSessionTitle(const QString &_title) {
   sessions.current()->setTitle(_title);
 }
@@ -1281,7 +1290,9 @@ void Konsole::activateSession(TESession *s)
 
   te->currentSession = se;
   if (s->fontNo() != n_font)
+  {
       setFont(s->fontNo());
+  }
   s->setConnect(TRUE);
   updateTitle();
   keytab_menu_activated(n_keytab); // act. the keytab for this session

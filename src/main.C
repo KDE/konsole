@@ -263,6 +263,7 @@ int main(int argc, char* argv[])
         m->restore(n);
         m->makeGUI();
         m->initSessionSchema(sessionconfig->readNumEntry("Schema0"));
+        m->initSessionFont(sessionconfig->readNumEntry("Font0", -1));
         counter++;
 
         while (counter < session_count) 
@@ -278,6 +279,8 @@ int main(int argc, char* argv[])
           m->initRenameSession(sTitle);
           key = QString("Schema%1").arg(counter);
           m->initSessionSchema(sessionconfig->readNumEntry(key));
+          key = QString("Font%1").arg(counter);
+          m->initSessionFont(sessionconfig->readNumEntry(key, -1));
           counter++;
         }
         ksm->konsole = m;
