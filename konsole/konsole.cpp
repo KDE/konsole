@@ -788,7 +788,7 @@ void Konsole::makeGUI()
    // Fill tab context menu
    m_tabPopupMenu = new KPopupMenu( this );
 
-   m_tabDetachSession= new KAction( i18n("&Detach Session"), 0, this, SLOT(slotTabDetachSession()), this );
+   m_tabDetachSession= new KAction( i18n("&Detach Session"), SmallIconSet("tab_breakoff"), 0, this, SLOT(slotTabDetachSession()), this );
    m_tabDetachSession->plug(m_tabPopupMenu);
 
    m_tabPopupMenu->insertItem( i18n("&Rename Session..."), this,
@@ -1034,7 +1034,7 @@ void Konsole::makeBasicGUI()
   m_clearAllSessionHistories = new KAction(i18n("Clear All H&istories"), "history_clear", 0,
     this, SLOT(slotClearAllSessionHistories()), m_shortcuts, "clear_all_histories");
 
-  m_detachSession = new KAction(i18n("&Detach Session"), 0, this,
+  m_detachSession = new KAction(i18n("&Detach Session"), SmallIconSet("tab_breakoff"), 0, this,
                                 SLOT(slotDetachSession()), m_shortcuts, "detach_session");
   m_detachSession->setEnabled(false);
 
