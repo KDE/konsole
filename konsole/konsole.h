@@ -147,6 +147,7 @@ private slots:
   void slotSelectFont();
   void slotSelectScrollbar();
   void slotSelectLineSpacing();
+  void slotBlinkingCursor();
   void slotWarnQuit();
   void loadScreenSessions();
 
@@ -222,6 +223,7 @@ private:
   KAction       *m_moveSessionLeft;
   KAction       *m_moveSessionRight;
 
+  KToggleAction *blinkingCursor;
   KToggleAction *warnQuit;                      // Warn when closing this session on quit
 
   int cmd_serial;

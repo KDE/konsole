@@ -51,9 +51,10 @@ public:
     void setScroll(int cursor, int lines);
     void doScroll(int lines);
 
+    bool blinkingCursor() { return m_blinkingCursor; }
+    void setBlinkingCursor(bool blink);
 
     void setLineSpacing(uint);
-
     uint lineSpacing() const;
 
     void emitSelection(bool useXselection,bool appendReturn);
@@ -185,6 +186,7 @@ private:
 
     bool blinking;   // hide text in paintEvent
     bool hasBlinker; // has characters to blink
+    bool m_blinkingCursor;
     QTimer* blinkT;  // active when hasBlinker
     KPopupMenu* m_drop;
     QString dropText;

@@ -283,6 +283,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,word_characters(":@-./_~")
 ,bellMode(BELLSYSTEM)
 ,blinking(false)
+,m_blinkingCursor(false)
 ,m_drop(0)
 ,possibleTripleClick(false)
 ,mResizeWidget(0)
@@ -344,8 +345,8 @@ TEWidget::~TEWidget()
 void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
                            QString& str, ca attr, bool pm, bool clear)
 {
-  QColor fColor=((attr.r & RE_CURSOR) && hasFocus() ? color_table[attr.b].color : color_table[attr.f].color);
-  QColor bColor=((attr.r & RE_CURSOR) && hasFocus() ? color_table[attr.f].color : color_table[attr.b].color);
+  QColor fColor=(((attr.r & RE_CURSOR) && hasFocus() && (!m_blinkingCursor || !blinking)) ? color_table[attr.b].color : color_table[attr.f].color);
+  QColor bColor=(((attr.r & RE_CURSOR) && hasFocus() && (!m_blinkingCursor || !blinking)) ? color_table[attr.f].color : color_table[attr.b].color);
 
   if (pm && color_table[attr.b].transparent)
   {
@@ -448,7 +449,7 @@ HCNT("setImage");
   paint.end();
   setUpdatesEnabled(TRUE);
   if ( hasBlinker && !blinkT->isActive()) blinkT->start(1000); // 1000 ms
-  if (!hasBlinker &&  blinkT->isActive()) { blinkT->stop(); blinking = FALSE; }
+  if (!hasBlinker && !m_blinkingCursor && blinkT->isActive()) { blinkT->stop(); blinking = FALSE; }
   delete [] disstrU;
 
   if (resizing)
@@ -477,6 +478,13 @@ HCNT("setImage");
      mResizeWidget->show();
      mResizeTimer->start(1000, true);
   }
+}
+
+void TEWidget::setBlinkingCursor(bool blink)
+{
+  m_blinkingCursor=blink;
+  if (blink && !blinkT->isActive()) blinkT->start(1000);
+  if (!blink && !hasBlinker && blinkT->isActive()) { blinkT->stop(); blinking = FALSE; }
 }
 
 // paint Event ////////////////////////////////////////////////////

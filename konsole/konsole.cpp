@@ -200,6 +200,7 @@ DCOPObject( "konsole" )
 ,m_saveHistory(0)
 ,m_moveSessionLeft(0)
 ,m_moveSessionRight(0)
+,blinkingCursor(0)
 ,warnQuit(0)
 ,cmd_serial(0)
 ,cmd_first_screen(-1)
@@ -577,14 +578,11 @@ void Konsole::makeGUI()
                                    SLOT(slotWordSeps()), this);
    WordSeps->plug(m_options);
 
-   // Open Session Warning on Quit
-   // FIXME: Allocate KActionCollection as parent, not this - Martijn
-   /*
-    warnQuit = new KToggleAction (i18n("&Warn for Open Sessions on Quit"),
-    0, this,
-    SLOT(slotToggleQuitWarning()), this);
-    */
+   blinkingCursor = new KToggleAction (i18n("Blinking &Cursor"),
+                                 0, this,SLOT(slotBlinkingCursor()), this);
+   blinkingCursor->plug(m_options);
 
+   // Open Session Warning on Quit
    warnQuit = new KToggleAction (i18n("&Warn for Open Sessions on Quit"),
                                  0, this,SLOT(slotWarnQuit()), this);
 
@@ -593,7 +591,6 @@ void Konsole::makeGUI()
 
    m_options->insertSeparator();
    // The 'filesave' icon is useable, but it might be confusing. I don't use it for now - Martijn
-   //m_options->insertItem( i18n("Save &Settings"), 8);
    m_options->insertItem( SmallIconSet( "filesave" ), i18n("Save &Settings"), 8);
    connect(m_options, SIGNAL(activated(int)), SLOT(opt_menu_activated(int)));
    m_options->installEventFilter( this );
@@ -752,6 +749,11 @@ bool Konsole::queryClose()
     return true;
 }
 
+void Konsole::slotBlinkingCursor()
+{
+  te->setBlinkingCursor(blinkingCursor->isChecked());
+}
+
 void Konsole::slotWarnQuit()
 {
    b_warnQuit=warnQuit->isChecked();
@@ -889,6 +891,7 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("scrollbar",n_scroll);
   config->writeEntry("bellmode",n_bell);
   config->writeEntry("keytab",n_defaultKeytab);
+  config->writeEntry("BlinkingCursor", te->blinkingCursor());
   config->writeEntry("WarnQuit", b_warnQuit);
   config->writeEntry("ActiveSession", active);
   config->writeEntry("DefaultSession", m_defaultSessionFilename);
@@ -919,6 +922,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    //KONSOLEDEBUG<<"Konsole::readProps()"<<endl;
    /*FIXME: (merging) state of material below unclear.*/
    b_scroll = config->readBoolEntry("history",TRUE);
+   te->setBlinkingCursor(config->readBoolEntry("BlinkingCursor",FALSE));
    b_warnQuit=config->readBoolEntry( "WarnQuit", TRUE );
    n_defaultKeytab=config->readNumEntry("keytab",0); // act. the keytab for this session
    b_fullscreen = config->readBoolEntry("Fullscreen",FALSE);
@@ -990,6 +994,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
 void Konsole::applySettingsToGUI()
 {
    if (!m_menuCreated) return;
+   blinkingCursor->setChecked(te->blinkingCursor());
    warnQuit->setChecked ( b_warnQuit );
    showFrame->setChecked( b_framevis );
    selectFont->setCurrentItem(n_font);
