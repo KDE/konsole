@@ -175,11 +175,16 @@ TEDemo::~TEDemo()
 
 void TEDemo::onDrop( KDNDDropZone* _zone )
 {
+    // The current behaviour when url(s) are dropped is
+    // * if there is only ONE url and if it's a LOCAL one, ask for paste or cd
+    // * in all other cases, just paste
+    //   (for non-local ones, or for a list of URLs, 'cd' is nonsense)
   QStrList strlist;
   KURL *url;
   int file_count = 0;
   char *p;
   dropText = "";
+  bool bPopup = true;
 
   strlist = _zone->getURLList();
   if (strlist.count())
@@ -187,18 +192,28 @@ void TEDemo::onDrop( KDNDDropZone* _zone )
     p = strlist.first();
     while(p != 0)
     {
-      if(file_count++ > 0)
+      if(file_count++ > 0) 
+      {
         dropText += " ";
+        bPopup = false; // more than one file, don't popup
+      }
       url = new KURL( p );
       if (!strcmp(url->protocol(),"file"))
-        dropText += url->path();
+      {
+        dropText += url->path(); // local URL : remove protocol
+      }
       else
+      {
         dropText += p;
+        bPopup = false; // a non-local file, don't popup
+      }
       delete url;
       p = strlist.next();
     }
-    m_drop->popup(QPoint(_zone->getMouseX(),_zone->getMouseY()));
-    //se->getEmulation()->sendString(str.data());
+    if (bPopup)
+        m_drop->popup(QPoint(_zone->getMouseX(),_zone->getMouseY()));
+    else
+        se->getEmulation()->sendString(dropText.data());
   }
 }
 
@@ -212,7 +227,8 @@ void TEDemo::drop_menu_activated(int item)
       break;
     case 1: // cd ...
       se->getEmulation()->sendString("cd ");
-      se->getEmulation()->sendString(dropText.data());
+      KURL url( dropText );
+      se->getEmulation()->sendString(url.directory());
       se->getEmulation()->sendString("\n");
 //    KWM::activate((Window)this->winId());
       break;
