@@ -624,7 +624,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
 {
 //printf("press [%d,%d] %d\n",ev->x()/font_w,ev->y()/font_h,ev->button());
 
-  if (possibleTripleClick) {
+  if ( possibleTripleClick && (ev->button()==LeftButton) ) {
     mouseTripleClickEvent(ev);
     return;
   }
@@ -867,8 +867,6 @@ void TEWidget::tripleClickTimeout()
 
 void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
 {
-  if ( ev->button() != LeftButton) return;
-
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
   int    tLy = tL.y();
