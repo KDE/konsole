@@ -86,7 +86,7 @@ void signal_handler(int) {
 extern "C" int kdemain(int argc, char* argv[])
 {
   KLocale::setMainCatalogue("konsole");
-  KCmdLineArgs::init(argc, argv, "kwrited",
+  KCmdLineArgs::init(argc, argv, "kwrited", I18N_NOOP("WriteDaemon"),
 	I18N_NOOP("KDE Daemon for receiving 'write' messages."),
 	"2.0.0");
 

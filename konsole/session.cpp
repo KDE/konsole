@@ -164,7 +164,7 @@ QString TESession::fullTitle() const
 void TESession::monitorTimerDone()
 {
   if (monitorSilence) {
-    KNotifyClient::event("Silence", i18n("Silence in session '%1'").arg(title));
+    KNotifyClient::event(winId, "Silence", i18n("Silence in session '%1'").arg(title));
     emit notifySessionState(this,NOTIFYSILENCE);
   }
   notifiedActivity=false;
@@ -181,7 +181,7 @@ void TESession::notifySessionState(int state)
     if (!monitorActivity)
       return;
     if (!notifiedActivity) {
-      KNotifyClient::event("Activity", i18n("Activity in session '%1'").arg(title));
+      KNotifyClient::event(winId, "Activity", i18n("Activity in session '%1'").arg(title));
       notifiedActivity=true;
       monitorTimer->start(silence_seconds*1000,true);
     }
@@ -284,16 +284,16 @@ void TESession::done(int exitStatus)
   if (!wantedClose && (exitStatus || sh->signalled()))
   {
     if (sh->normalExit())
-      KNotifyClient::event("Finished", i18n("Session '%1' exited with status %2.").arg(title).arg(exitStatus));
+      KNotifyClient::event(winId, "Finished", i18n("Session '%1' exited with status %2.").arg(title).arg(exitStatus));
     else if (sh->signalled())
     {
       if (sh->coreDumped())
-        KNotifyClient::event("Finished", i18n("Session '%1' exited with signal %2 and dumped core.").arg(title).arg(sh->exitSignal()));
+        KNotifyClient::event(winId, "Finished", i18n("Session '%1' exited with signal %2 and dumped core.").arg(title).arg(sh->exitSignal()));
       else
-        KNotifyClient::event("Finished", i18n("Session '%1' exited with signal %2.").arg(title).arg(sh->exitSignal()));
+        KNotifyClient::event(winId, "Finished", i18n("Session '%1' exited with signal %2.").arg(title).arg(sh->exitSignal()));
     }
     else
-      KNotifyClient::event("Finished", i18n("Session '%1' exited unexpectedly.").arg(title));
+      KNotifyClient::event(winId, "Finished", i18n("Session '%1' exited unexpectedly.").arg(title));
   }
   emit processExited();
   emit done(this);
