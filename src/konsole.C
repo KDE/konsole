@@ -910,7 +910,7 @@ void Konsole::newSession(int i)
 
   assert( se ); //FIXME: careful here.
 
-  QString cmd = co->readEntry("Exec");    // not null
+  QString cmd = co->readEntry("Exec");
   QString nam = co->readEntry("Name");    // not null
   QString emu = co->readEntry("Term");
   QString sch = co->readEntry("Schema");
@@ -930,8 +930,11 @@ void Konsole::newSession(int i)
 
   QStrList args;
   args.append(shell);
-  args.append("-c");
-  args.append(cmd);
+  if (!cmd.isEmpty())
+  {
+    args.append("-c");
+    args.append(cmd);
+  }
 
   TESession* s = new TESession(this,te,shell,args,emu);
   s->setFontNo(fno);
@@ -1004,7 +1007,7 @@ void Konsole::addSessionCommand(const char* path)
   QString txt = co->readEntry("Comment");
   QString cmd = co->readEntry("Exec");
   QString nam = co->readEntry("Name");
-  if (typ.isEmpty() || txt.isEmpty() || cmd.isEmpty() || nam.isEmpty() ||
+  if (typ.isEmpty() || txt.isEmpty() || nam.isEmpty() ||
       typ != "KonsoleApplication")
   {
     delete co; return; // ignore
