@@ -6,6 +6,7 @@ Comment[da]=Konsol
 Comment[fa]=کنسول
 Comment[th]=คอนโซล K
 Comment[wa]=Konsole (terminå di KDE)
+Comment[xx]=xxKonsolexx
 
 [BellVisible]
 Name=Bell in visible session
@@ -19,6 +20,7 @@ Name[pt_BR]=Campainha visível nas sessões
 Name[sr]=Zvonce u vidljivoj sesiji
 Name[sv]=Ljudsignal i synlig session
 Name[th]=ออดบนเซสชันที่มองเห็น
+Name[xx]=xxBell in visible sessionxx
 Comment=Bell emitted within a visible session
 Comment[cy]=Gollyngwyd cloch mewn sesiwn gweledig
 Comment[da]=Klokke brugt indenfor en synlig session
@@ -30,6 +32,7 @@ Comment[pt_BR]=Campainha emitida dentro de uma sessão visível
 Comment[sr]=Zvonce je emitovano unutar vidljive sesije
 Comment[sv]=Ljudsignal inne i en synlig session
 Comment[th]=ส่งเสียงออดภายในเซสชันที่มองเห็นได้
+Comment[xx]=xxBell emitted within a visible sessionxx
 default_sound=KDE_Beep_Beep.wav
 default_presentation=1
 
@@ -45,6 +48,7 @@ Name[pt_BR]=Campainha invisível nas sessões
 Name[sr]=Zvonce u nevidljivoj sesije
 Name[sv]=Ljudsignal i osynlig session
 Name[th]=ออดบนเซสชันที่มองไม่เห็น
+Name[xx]=xxBell in non-visible sessionxx
 Comment=Bell emitted within a non-visible session
 Comment[cy]=Gollyngwyd cloch mewn sesiwn anweledig
 Comment[da]=Klokke brugt indenfor en ikke-synlig session
@@ -55,6 +59,7 @@ Comment[hu]=Csengetés egy nem látható munkafolyamatban
 Comment[pt_BR]=Campainha emitida dentro de uma sessão invisível
 Comment[sr]=Zvonce je emitovano unutar nevidljive sesije
 Comment[sv]=Ljudsignal inne i en osynlig session
+Comment[xx]=xxBell emitted within a non-visible sessionxx
 default_sound=KDE_Beep_Beep.wav
 default_presentation=16
 
@@ -71,6 +76,7 @@ Name[sk]=Aktivita v monitorovaných sedeniach
 Name[sr]=Aktivnost u nadziranoj sesiji
 Name[sv]=Aktivitet i bevakad session
 Name[th]=การกระทำบนเซสชันติดตามการทำงาน
+Name[xx]=xxActivity in monitored sessionxx
 Comment=Activity detected in a monitored session
 Comment[cy]=Datgelwyd gweithgaredd mewn seswin wedi'i fonitro
 Comment[da]=Aktivitet detekteret i en overvåget session
@@ -81,6 +87,7 @@ Comment[hu]=Aktivitás észlelve egy monitorozott munkafolyamatban
 Comment[pt_BR]=Atividade detectada em uma sessão monitorada
 Comment[sr]=Otkrivena je aktivnost u nadziranoj sesiji
 Comment[sv]=Aktivitet funnen i en bevakad session
+Comment[xx]=xxActivity detected in a monitored sessionxx
 default_presentation=16
 
 [Silence]
@@ -94,6 +101,7 @@ Name[hu]=Üresjárat egy monitorozott munkafolyamatban
 Name[pt_BR]=Silêncio na sessão monitorada
 Name[sr]=Tišina u nadziranoj sesiji
 Name[sv]=Tystnad i bevakad session
+Name[xx]=xxSilence in monitored sessionxx
 Comment=Silence detected in a monitored session
 Comment[cy]=Datgelwyd distawrwydd mewn sesiwn wedi'i fonitro
 Comment[da]=Stilhed detekteret i en overvåget session
@@ -104,6 +112,7 @@ Comment[hu]=Üresjárat észlelve egy monitorozott munkafolyamatban
 Comment[pt_BR]=Silêncio detectado em uma sessão monitorada
 Comment[sr]=Otkrivena je tišina u nadziranoj sesiji
 Comment[sv]=Tystnad funnen i en bevakad session
+Comment[xx]=xxSilence detected in a monitored sessionxx
 default_presentation=16
 
 [Finished]
@@ -118,6 +127,7 @@ Name[pt_BR]=Sessão finalizada com status diferente de zero
 Name[sr]=Sesija je završena sa ne-nula statusom
 Name[sv]=Sessionen klar med status skild från noll
 Name[th]=เซสชันจบการทำงานได้สถานะไม่ใช่ค่าศูนย์
+Name[xx]=xxSession finished with non-zero statusxx
 Comment=A session has exited with non-zero status
 Comment[cy]=Terfynnodd sesiwn efo cyflwr di-sero
 Comment[da]=En session er gået ud med ikke-nul status
@@ -129,4 +139,5 @@ Comment[pt_BR]=Uma sessão foi finalizada com status diferente de zero
 Comment[sr]=Sesija je izašla sa ne-nula statusom
 Comment[sv]=En session har avslutats med status skild från noll
 Comment[th]=เซสชันที่จบการทำงานโดยไม่ได้คืนค่าเป็นศูนย์
+Comment[xx]=xxA session has exited with non-zero statusxx
 default_presentation=16
