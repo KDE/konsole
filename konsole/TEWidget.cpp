@@ -296,6 +296,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,cursorBlinking(false)
 ,hasBlinkingCursor(false)
 ,ctrldrag(false)
+,cuttobeginningofline(false)
 ,m_drop(0)
 ,possibleTripleClick(false)
 ,mResizeWidget(0)
@@ -1099,7 +1100,7 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
    }
 
   possibleTripleClick=true;
-  QTimer::singleShot(QApplication::doubleClickInterval(),this,SLOT(tripleClickTimeout())); 
+  QTimer::singleShot(QApplication::doubleClickInterval(),this,SLOT(tripleClickTimeout()));
 }
 
 void TEWidget::tripleClickTimeout()
@@ -1123,7 +1124,18 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
 
   while (iPntSel.y()>0 && m_line_wrapped[iPntSel.y()-1])
     iPntSel.ry()--;
-  emit beginSelectionSignal( 0, iPntSel.y() );
+  if (cuttobeginningofline) {
+    // find word boundary start
+    int i = loc(iPntSel.x(),iPntSel.y());
+    int selClass = charClass(image[i].c);
+    int x = iPntSel.x();
+    while ( ((x>0) || (iPntSel.y()>0 && m_line_wrapped[iPntSel.y()-1])) && charClass(image[i-1].c) == selClass )
+    { i--; if (x>0) x--; else {x=columns-1; iPntSel.ry()--;} }
+
+    emit beginSelectionSignal( x, iPntSel.y() );
+  }
+  else
+    emit beginSelectionSignal( 0, iPntSel.y() );
 
   while (iPntSel.y()<lines-1 && m_line_wrapped[iPntSel.y()])
     iPntSel.ry()++;

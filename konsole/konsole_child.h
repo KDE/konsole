@@ -33,7 +33,8 @@ class KonsoleChild : public KMainWindow
 public:
   KonsoleChild(TESession*, int columns, int lines, int scrollbar_location, int frame_style,
                ColorSchema* schema,QFont font, int bellmode, QString wordcharacters,
-               bool blinkingCursor, bool ctrlDrag, bool terminalSizeHint, int lineSpacing);
+               bool blinkingCursor, bool ctrlDrag, bool terminalSizeHint, int lineSpacing,
+	       bool cutToBeginningOfLine);
   void run();
   ~KonsoleChild();
   TESession*  session() { return se; }

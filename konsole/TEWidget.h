@@ -58,6 +58,9 @@ public:
     void setCtrlDrag(bool enable) { ctrldrag=enable; }
     bool ctrlDrag() { return ctrldrag; }
 
+    void setCutToBeginningOfLine(bool enable) { cuttobeginningofline=enable; }
+    bool cutToBeginningOfLine() { return cuttobeginningofline; }
+
     void setLineSpacing(uint);
     uint lineSpacing() const;
 
@@ -211,6 +214,7 @@ private:
     bool cursorBlinking;     // hide cursor in paintEvent
     bool hasBlinkingCursor;  // has blinking cursor enabled
     bool ctrldrag;           // require Ctrl key for drag
+    bool cuttobeginningofline; // triple click only selects forward
     QTimer* blinkT;  // active when hasBlinker
     QTimer* blinkCursorT;  // active when hasBlinkingCursor
     

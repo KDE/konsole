@@ -263,6 +263,7 @@ private:
   int         curr_schema; // current schema no
   int         wallpaperSource;
   int         sessionIdCounter;
+  int         monitorSilenceSeconds;
 
   QString     s_schema;
   QString     s_kconfigSchema;

@@ -62,6 +62,7 @@ public:
 
   void setMonitorActivity(bool);
   void setMonitorSilence(bool);
+  void setMonitorSilenceSeconds(int seconds);
   void setMasterMode(bool);
   void setSchemaNo(int sn);
   void setKeymapNo(int kn);
@@ -118,6 +119,7 @@ private:
   // use a persistent reference instead.
   int            schema_no;
   int            font_no;
+  int            silence_seconds;
 
   QString        title;
   QString        userTitle;

@@ -11,8 +11,6 @@
 #define HERE fprintf(stderr,"%s(%d): here\n",__FILE__,__LINE__)
 #endif
 
-#define SILENCE_TIMEOUT 10000 // milliseconds
-
 /*! \class TESession
 
     Sessions are combinations of TEPTy and Emulations.
@@ -30,6 +28,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, QStrList & _args, const
    , masterMode(false)
    , schema_no(0)
    , font_no(3)
+   , silence_seconds(10)
    , pgm(_pgm)
    , args(_args)
    , sessionId(_sessionId)
@@ -120,7 +119,7 @@ QString TESession::fullTitle() const
 void TESession::monitorTimerDone()
 {
   emit notifySessionState(this,NOTIFYSILENCE);
-  monitorTimer->start(SILENCE_TIMEOUT,true);
+  monitorTimer->start(silence_seconds*1000,true);
 }
 
 void TESession::notifySessionState(int state)
@@ -128,7 +127,7 @@ void TESession::notifySessionState(int state)
   if (state==NOTIFYACTIVITY) {
     if (monitorSilence) {
       monitorTimer->stop();
-      monitorTimer->start(SILENCE_TIMEOUT,true);
+      monitorTimer->start(silence_seconds*1000,true);
     }
     if (!monitorActivity)
       return;
@@ -330,9 +329,18 @@ void TESession::setMonitorSilence(bool _monitor)
 
   monitorSilence=_monitor;
   if (monitorSilence)
-    monitorTimer->start(SILENCE_TIMEOUT,true);
+    monitorTimer->start(silence_seconds*1000,true);
   else
     monitorTimer->stop();
+}
+
+void TESession::setMonitorSilenceSeconds(int seconds)
+{
+  silence_seconds=seconds;
+  if (monitorSilence) {
+    monitorTimer->stop();
+    monitorTimer->start(silence_seconds*1000,true);
+  }
 }
 
 void TESession::setMasterMode(bool _master)

@@ -221,6 +221,7 @@ DCOPObject( "konsole" )
 ,curr_schema(0)
 ,wallpaperSource(0)
 ,sessionIdCounter(0)
+,monitorSilenceSeconds(10)
 ,s_kconfigSchema("")
 ,b_fullscreen(false)
 ,m_menuCreated(false)
@@ -875,8 +876,13 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
 
      te->setBlinkingCursor(config->readBoolEntry("BlinkingCursor",FALSE));
      te->setCtrlDrag(config->readBoolEntry("CtrlDrag",FALSE));
+     te->setCutToBeginningOfLine(config->readBoolEntry("CutToBeginningOfLine",FALSE));
      te->setTerminalSizeHint( config->readBoolEntry("TerminalSizeHint",true) );
      te->setLineSpacing( config->readUnsignedNumEntry( "LineSpacing", 0 ) );
+
+     monitorSilenceSeconds=config->readUnsignedNumEntry("SilenceSeconds", 10);
+     for (TESession *ses = sessions.first(); ses; ses = sessions.next())
+       ses->setMonitorSilenceSeconds(monitorSilenceSeconds);
    }
 
    ColorSchema* sch = 0;
@@ -1666,6 +1672,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
 
   QString sessionId="session-"+QString::number(++sessionIdCounter);
   TESession* s = new TESession(te, QFile::encodeName(program),cmdArgs,emu,sessionId,cwd);
+  s->setMonitorSilenceSeconds(monitorSilenceSeconds);
   // If you add any new signal-slot connection below, think about doing it in konsolePart too
   connect( s,SIGNAL(done(TESession*,int)),
            this,SLOT(doneSession(TESession*,int)) );
@@ -2171,7 +2178,7 @@ void Konsole::detachSession() {
                                                 b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame,
                                                 schema,te->font(),te->isBellMode(),te->wordCharacters(),
                                                 te->blinkingCursor(),te->ctrlDrag(),te->isTerminalSizeHint(),
-                                                te->lineSpacing());
+                                                te->lineSpacing(),te->cutToBeginningOfLine());
   detached.append(konsolechild);
   konsolechild->show();
   konsolechild->run();

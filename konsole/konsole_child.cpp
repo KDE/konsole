@@ -20,8 +20,9 @@
 #include <netwm.h>
 
 KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar_location, int frame_style,
-                           ColorSchema* schema,QFont font,int bellmode,QString wordcharacters, 
-                           bool blinkingCursor, bool ctrlDrag, bool terminalSizeHint, int lineSpacing):KMainWindow()
+                           ColorSchema* schema,QFont font,int bellmode,QString wordcharacters,
+                           bool blinkingCursor, bool ctrlDrag, bool terminalSizeHint, int lineSpacing,
+                           bool cutToBeginningOfLine):KMainWindow()
 ,session_terminated(false)
 ,wallpaperSource(0)
 ,se(_se)
@@ -41,7 +42,7 @@ KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar
   te->setLineSpacing(lineSpacing);
   te->setBellMode(bellmode);
   te->setMinimumSize(150,70);
-
+  te->setCutToBeginningOfLine(cutToBeginningOfLine);
   te->setScrollbarLocation(scrollbar_location);
   te->setFrameStyle(frame_style);
 
