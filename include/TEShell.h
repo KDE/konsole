@@ -77,8 +77,7 @@ Q_OBJECT
   private:
 
     int              fd;
-    struct termios   tp;
-    int		     login_shell;
+    int		           login_shell;
     QSocketNotifier* mn;
 };
 

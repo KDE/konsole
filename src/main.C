@@ -915,6 +915,8 @@ int main(int argc, char* argv[])
   {
     if (!strcmp(argv[i],"-e") && i+1 < argc) // handle command
     {
+      if (login_shell) fprintf(stderr,"-e excludes -ls.\n");
+      login_shell = 0; // does not make sense here.
       eargs.clear();
       int j;
       for (j = 0; j+i+1 < argc; j++) eargs.append( argv[i+j+1] );
