@@ -1337,6 +1337,15 @@ void Konsole::slotTabbarToggleDynamicHide()
     switchToFlat();
 }
 
+
+// Check to see if the system-wide sound system is enabled.
+void Konsole::checkSoundSystem()
+{
+  KConfig *arts_config = new KConfig("kcmartsrc");
+  arts_config->setGroup("Arts");
+  b_soundSystemEnabled = arts_config->readBoolEntry("StartServer", false);
+}
+
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /* Configuration                                                             */
@@ -1495,6 +1504,11 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       n_scroll   = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
       n_tabbar   = QMIN(config->readUnsignedNumEntry("tabbar",TabBottom),2);
       n_bell = QMIN(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),2);
+
+      checkSoundSystem();
+      if ( !b_soundSystemEnabled && (n_bell == BELLNOTIFY) )
+         n_bell = BELLSYSTEM;
+      
       // Options that should be applied to all sessions /////////////
 
       // (1) set menu items and Konsole members

@@ -111,6 +111,8 @@ public:
   enum TabPosition { TabNone, TabTop, TabBottom };
   enum TabViewModes { ShowIconAndText = 0, ShowTextOnly = 1, ShowIconOnly = 2 };
 
+  enum { BELLSYSTEM=0, BELLNOTIFY=1, BELLVISUAL=2 };  // From TEWidget.h
+
 public slots:
   void activateSession(int position);
   void activateSession(QWidget*);
@@ -264,6 +266,8 @@ private:
 
   bool eventFilter( QObject *o, QEvent *e );
 
+  void checkSoundSystem();
+
   QPtrList<TEWidget> activeTEs();
 
   QPtrDict<TESession> action2session;
@@ -397,6 +401,9 @@ private:
   bool        b_histEnabled:1;
   bool        b_fullScripting:1;
   bool        b_showstartuptip:1;
+
+  bool        b_soundSystemEnabled;
+
   unsigned int m_histSize;
   int m_separator_id;
 
