@@ -75,13 +75,12 @@ konsoleFactory::~konsoleFactory()
   s_aboutData = 0;
 }
 
-KParts::Part *konsoleFactory::createPart(QWidget *parentWidget, const char *widgetName,
+KParts::Part *konsoleFactory::createPartObject(QWidget *parentWidget, const char *widgetName,
                                          QObject *parent, const char *name, const char*,
                                          const QStringList& )
 {
   kdDebug(1211) << "konsoleFactory::createPart parentWidget=" << parentWidget << " parent=" << parent << endl;
   KParts::Part *obj = new konsolePart(parentWidget, widgetName, parent, name);
-  emit objectCreated(obj);
   return obj;
 }
 
