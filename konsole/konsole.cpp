@@ -824,21 +824,21 @@ void Konsole::makeGUI()
    selectTabbar->plug(m_tabbarPopupMenu);
 
    KSelectAction *viewOptions = new KSelectAction(this);
-   viewOptions->setText(i18n("Tab Options"));
+   viewOptions->setText(i18n("Tab &Options"));
    QStringList options;
-   options << i18n("T&ext && Icons") << i18n("&Text Only") << i18n("&Icons Only");
+   options << i18n("&Text && Icons") << i18n("Text &Only") << i18n("&Icons Only");
    viewOptions->setItems(options);
    viewOptions->setCurrentItem(m_tabViewMode);
    viewOptions->plug(m_tabbarPopupMenu);
    connect(viewOptions, SIGNAL(activated(int)), this, SLOT(slotTabSetViewOptions(int)));
    slotTabSetViewOptions(m_tabViewMode);
 
-   KToggleAction *dynamicTabHideOption = new KToggleAction ( i18n( "Dynamic Hide" ), 0, this,
+   KToggleAction *dynamicTabHideOption = new KToggleAction ( i18n( "&Dynamic Hide" ), 0, this,
                                        SLOT( slotTabbarToggleDynamicHide() ), this);
    dynamicTabHideOption->setChecked(b_dynamicTabHide);
    dynamicTabHideOption->plug(m_tabbarPopupMenu);
 
-   KToggleAction *m_autoResizeTabs = new KToggleAction( i18n("Auto Resize Tabs"),
+   KToggleAction *m_autoResizeTabs = new KToggleAction( i18n("&Auto Resize Tabs"),
                  0, this, SLOT( slotToggleAutoResizeTabs() ), this);
    m_autoResizeTabs->setChecked(b_autoResizeTabs);
    m_autoResizeTabs->plug(m_tabbarPopupMenu);
