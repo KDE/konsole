@@ -1,6 +1,6 @@
 // [kwrited.C] A write(1) receiver for kde.
 
-#include <kuniqueapp.h>
+#include <kuniqueapplication.h>
 #include <kcmdlineargs.h>
 #include <klocale.h>
 #include <kglobal.h>

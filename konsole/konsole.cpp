@@ -93,7 +93,7 @@ Time to start a requirement list.
 
 #include <kfontdialog.h>
 #include <kglobal.h>
-#include <kstddirs.h>
+#include <kstandarddirs.h>
 #include <kconfig.h>
 #include <kurl.h>
 #include <qpainter.h>
@@ -105,7 +105,7 @@ Time to start a requirement list.
 #include <kpopupmenu.h>
 #include <klineeditdlg.h>
 #include <kdebug.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kipc.h>
 
 #include <qfontmetrics.h>

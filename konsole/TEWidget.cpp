@@ -64,7 +64,7 @@
 
 #include "TEWidget.moc"
 #include <krun.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kcursor.h>
 #include <kurl.h>
 #include <kdebug.h>

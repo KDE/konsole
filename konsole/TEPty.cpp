@@ -159,9 +159,9 @@ extern "C" {
 #include "TEPty.moc"
 
 
-#include <kapp.h>
+#include <kapplication.h>
 #include <kglobal.h>
-#include <kstddirs.h>
+#include <kstandarddirs.h>
 #include <kdebug.h>
 
 #ifndef HERE

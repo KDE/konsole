@@ -13,7 +13,7 @@
 #ifndef SESSION_H
 #define SESSION_H
 
-#include <kapp.h>
+#include <kapplication.h>
 #include <kmainwindow.h>
 #include <qstrlist.h>
 

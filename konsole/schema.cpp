@@ -51,12 +51,12 @@
 #include <stdlib.h>
 
 #include "schema.h"
-#include "kapp.h"
+#include "kapplication.h"
 
 #include <qfile.h>
 #include <qdir.h>
 #include <qdatetime.h> 
-#include <kstddirs.h>
+#include <kstandarddirs.h>
 #include <kglobal.h>
 #include <klocale.h>
 #include <kconfig.h>
