@@ -218,7 +218,7 @@ void TEScreen::index()
 {
   if (cuY == bmargin)
   {
-    if (tmargin == 0 && bmargin == lines-1) addHistLine(); // hist.history
+    if (tmargin == 0) addHistLine(); // hist.history
     scrollUp(tmargin,1);
   }
   else if (cuY < lines-1)
