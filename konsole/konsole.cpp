@@ -123,6 +123,7 @@ Time to start a requirement list.
 
 #define KONSOLEDEBUG    kdDebug(1211)
 
+// KonsoleFontSelectAction is now also used for selectSize!
 class KonsoleFontSelectAction : public KSelectAction {
 public:
     KonsoleFontSelectAction(const QString &text, int accel,
@@ -357,7 +358,7 @@ void Konsole::makeGUI()
                                         SLOT(slotRenameSession()), this);
    renameSession->plug(m_sessions);
 
-   clearHistory = new KAction(i18n("Clear &History"), "edittrash", 0, this,
+   clearHistory = new KAction(i18n("Clear &History"), "editdelete", 0, this,
                                        SLOT(slotClearHistory()), this);
    clearHistory->setEnabled( se->history().isOn() );
    clearHistory->plug(m_sessions);
@@ -367,7 +368,7 @@ void Konsole::makeGUI()
    closeSession->plug(m_sessions);
    
    m_sessions->insertSeparator();
-   KAction *clearAllSessionHistories = new KAction(i18n("Clear all H&istories"), "edittrash", 0,
+   KAction *clearAllSessionHistories = new KAction(i18n("Clear all H&istories"), "editdelete", 0,
      this, SLOT(slotClearAllSessionHistories()), this);
    clearAllSessionHistories->plug(m_sessions);
    m_sessions->insertSeparator();
@@ -428,14 +429,16 @@ void Konsole::makeGUI()
    m_options->insertSeparator();
 
    // Select size
-   selectSize = new KSelectAction(i18n("S&ize"), 0, this,
+   selectSize = new KonsoleFontSelectAction(i18n("S&ize"), 0, this,
                                   SLOT(slotSelectSize()), this);
    QStringList sizeitems;
    sizeitems << i18n("40x15 (&Small)")
       << i18n("80x24 (&VT100)")
       << i18n("80x25 (&IBM PC)")
       << i18n("80x40 (&XTerm)")
-      << i18n("80x52 (IBM V&GA)");
+      << i18n("80x52 (IBM V&GA)")
+      << ""
+      << i18n("&Custom...");
    selectSize->setItems(sizeitems);
    selectSize->plug(m_options);
 
@@ -1111,7 +1114,11 @@ void Konsole::slotSelectSize() {
     case 2: setColLin(80,25); break;
     case 3: setColLin(80,40); break;
     case 4: setColLin(80,52); break;
-    }
+    case 5: SizeDialog dlg(te->Columns(), te->Lines()+1, this);
+            if (dlg.exec())
+              setColLin(dlg.columns(),dlg.lines());
+            break;
+   }
 }
 
 
@@ -1123,14 +1130,16 @@ void Konsole::notifySize(int lines, int columns)
     selectSize->setCurrentItem(-1);
     if (columns==40&&lines==15)
         selectSize->setCurrentItem(0);
-    if (columns==80&&lines==24)
+    else if (columns==80&&lines==24)
         selectSize->setCurrentItem(1);
-    if (columns==80&&lines==25)
+    else if (columns==80&&lines==25)
         selectSize->setCurrentItem(2);
-    if (columns==80&&lines==40)
+    else if (columns==80&&lines==40)
         selectSize->setCurrentItem(3);
-    if (columns==80&&lines==52)
+    else if (columns==80&&lines==52)
         selectSize->setCurrentItem(4);
+    else
+        selectSize->setCurrentItem(5);
     selectSize->blockSignals(false);
     if (n_render >= 3) pixmap_menu_activated(n_render);
 }
@@ -1870,6 +1879,50 @@ void Konsole::slotHistoryType()
 void Konsole::slotClearHistory()
 {
   clearSessionHistory(*se);
+}
+
+//////////////////////////////////////////////////////////////////////
+
+SizeDialog::SizeDialog(unsigned int columns,
+                       unsigned int lines,
+                       QWidget *parent)
+  : KDialogBase(Plain, i18n("Size Configuration"),
+                Help | Default | Ok | Cancel, Ok,
+                parent)
+{
+  QFrame *mainFrame = plainPage();
+  
+  QHBoxLayout *hb = new QHBoxLayout(mainFrame);
+
+  m_columns = new QSpinBox(20,1000,1,mainFrame);
+  m_columns->setValue(columns);
+
+  m_lines = new QSpinBox(4,1000,1,mainFrame);
+  m_lines->setValue(lines);
+
+  hb->addWidget(new QLabel(i18n("Number of columns : "), mainFrame));
+  hb->addWidget(m_columns);
+  hb->addSpacing(10);
+  hb->addWidget(new QLabel(i18n("Number of lines : "), mainFrame));
+  hb->addWidget(m_lines);
+
+  setHelp("configure-size");
+}
+
+void SizeDialog::slotDefault()
+{
+  m_columns->setValue(80);
+  m_lines->setValue(24);
+}
+
+unsigned int SizeDialog::columns() const
+{
+  return m_columns->value();
+}
+
+unsigned int SizeDialog::lines() const
+{
+  return m_lines->value();
 }
 
 //////////////////////////////////////////////////////////////////////

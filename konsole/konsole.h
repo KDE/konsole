@@ -242,6 +242,24 @@ protected:
   QCheckBox* m_btnEnable;
 };
 
+class SizeDialog : public KDialogBase 
+{
+    Q_OBJECT
+public:
+  SizeDialog(unsigned int const columns,
+             unsigned int const lines,
+             QWidget *parent);
+
+public slots:
+  void slotDefault();
+
+  unsigned int columns() const;
+  unsigned int lines() const;
+
+protected:
+  QSpinBox*  m_columns;
+  QSpinBox*  m_lines;
+};
 
 
 #endif
