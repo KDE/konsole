@@ -67,8 +67,7 @@ QString KeyTrans::KeyEntry::text()
 */
 
 KeyTrans::KeyTrans(const QString& path)
-:m_hdr("")
-,m_path(path)
+:m_path(path)
 ,m_numb(0)
 ,m_fileRead(false)
 {
