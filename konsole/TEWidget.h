@@ -78,7 +78,7 @@ public:
     enum { BELLNONE=0, BELLSYSTEM=1, BELLVISUAL=2 };
     void Bell();
 
-    void setSelection(const QString &t,const bool useXselection);
+    void setSelection(const QString &t);
 
     virtual void setFont(const QFont &);
     void setVTFont(const QFont &);
@@ -90,7 +90,6 @@ public:
 
 public slots:
 
-    void copyClipboard();
     void pasteClipboard();
     void onClearSelection();
 
@@ -105,7 +104,7 @@ signals:
     void clearSelectionSignal();
     void beginSelectionSignal( const int x, const int y );
     void extendSelectionSignal( const int x, const int y );
-    void endSelectionSignal(const bool preserve_line_breaks,const bool useXselection);
+    void endSelectionSignal(const bool preserve_line_breaks);
 
 
 protected:

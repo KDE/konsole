@@ -364,9 +364,6 @@ void Konsole::makeGUI()
    connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
 
    // Edit Menu ----------------------------------------------------------------
-   KAction *copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0,
-     te, SLOT(copyClipboard()), this);
-   copyClipboard->plug(m_edit);
    KAction *pasteClipboard = new KAction(i18n("&Paste"), "editpaste", 0,
      te, SLOT(pasteClipboard()), this);
    pasteClipboard->plug(m_edit);
@@ -595,7 +592,6 @@ void Konsole::makeGUI()
    // Right mouse button menu
    showMenubar->plug ( m_rightButton );
    m_rightButton->insertSeparator();
-   copyClipboard->plug(m_rightButton);
    pasteClipboard->plug(m_rightButton);
    m_rightButton->insertSeparator();
    m_rightButton->insertItem(i18n("&Send Signal"), m_signals);

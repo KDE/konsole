@@ -923,7 +923,7 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
 //printf("release [%d,%d] %d\n",ev->x()/font_w,ev->y()/font_h,ev->button());
   if ( ev->button() == LeftButton)
   {
-    if ( actSel > 1 ) emit endSelectionSignal(preserve_line_breaks,true);
+    if ( actSel > 1 ) emit endSelectionSignal(preserve_line_breaks);
     actSel = 0;
 
     //FIXME: emits a release event even if the mouse is
@@ -987,7 +987,7 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
      endSel.setX(x);
      actSel = 2; // within selection
      emit extendSelectionSignal( endSel.x(), endSel.y() );
-     emit endSelectionSignal(preserve_line_breaks,true);
+     emit endSelectionSignal(preserve_line_breaks);
    }
 
   possibleTripleClick=true;
@@ -1015,7 +1015,7 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
 
   emit beginSelectionSignal( 0, iPntSel.y() );
   emit extendSelectionSignal( 0, iPntSel.y()+1 );
-  emit endSelectionSignal(preserve_line_breaks,true);
+  emit endSelectionSignal(preserve_line_breaks);
 }
 
 void TEWidget::focusInEvent( QFocusEvent * )
@@ -1094,24 +1094,20 @@ void TEWidget::emitSelection(bool useXselection,bool appendReturn)
   QApplication::clipboard()->setSelectionMode( false );
 }
 
-void TEWidget::setSelection(const QString& t,bool useXselection)
+void TEWidget::setSelection(const QString& t)
 {
   // Disconnect signal while WE set the clipboard
   QClipboard *cb = QApplication::clipboard();
   QObject::disconnect( cb, SIGNAL(selectionChanged()),
                      this, SLOT(onClearSelection()) );
 
-  cb->setSelectionMode( useXselection );
+  cb->setSelectionMode( true );
   QApplication::clipboard()->setText(t);
   cb->setSelectionMode( false );
+  QApplication::clipboard()->setText(t);
 
   QObject::connect( cb, SIGNAL(selectionChanged()),
                      this, SLOT(onClearSelection()) );
-}
-
-void TEWidget::copyClipboard()
-{
-  emit endSelectionSignal(true,false);
 }
 
 void TEWidget::pasteClipboard()
