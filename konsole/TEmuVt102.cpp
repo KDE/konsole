@@ -178,6 +178,8 @@ void TEmuVt102::reset()
 
 #define TY_VT52__(A  )  TY_CONSTR(8,A,0)
 
+#define TY_CSI_PG(A  )  TY_CONSTR(9,A,0)
+
 // Tokenizer --------------------------------------------------------------- --
 
 /* The tokenizers state
@@ -250,9 +252,9 @@ void TEmuVt102::initTokenizer()
 #define les(P,L,C) (p == (P) && s[L] < 256  && (tbl[s[(L)]] & (C)) == (C))
 #define eec(C)     (p >=  3  &&        cc                          == (C))
 #define ees(C)     (p >=  3  && cc < 256 &&    (tbl[  cc  ] & (C)) == (C))
-#define eps(C)     (p >=  3  && s[2] != '?' && cc < 256 && (tbl[  cc  ] & (C)) == (C))
+#define eps(C)     (p >=  3  && s[2] != '?' && s[2] != '>' && cc < 256 && (tbl[  cc  ] & (C)) == (C))
 #define epp( )     (p >=  3  && s[2] == '?'                              )
-#define egt(     ) (p ==  3  && s[2] == '>'                              )
+#define egt(     ) (p >=  3  && s[2] == '>'                              )
 #define Xpe        (ppos>=2  && pbuf[1] == ']'                           )
 #define Xte        (Xpe                        &&     cc           ==  7 )
 #define ces(C)     (            cc < 256 &&    (tbl[  cc  ] & (C)) == (C) && !Xte)
@@ -293,13 +295,13 @@ void TEmuVt102::onRcvChar(int cc)
     if (lec(2,0,ESC)) { tau( TY_ESC___(s[1]),    0,   0);       resetToken(); return; }
     if (les(3,1,SCS)) { tau( TY_ESC_CS(s[1],s[2]),    0,   0);  resetToken(); return; }
     if (lec(3,1,'#')) { tau( TY_ESC_DE(s[2]),    0,   0);       resetToken(); return; }
-//  if (egt(       )) { tau( TY_CSI_PG(cc       ),  '>',   0);  resetToken(); return; }
     if (eps(    CPN)) { tau( TY_CSI_PN(cc), argv[0],argv[1]);   resetToken(); return; }
     if (ees(    DIG)) { addDigit(cc-'0');                                     return; }
     if (eec(    ';')) { addArgument();                                        return; }
     for (i=0;i<=argc;i++)
-    if (epp(       ))   tau( TY_CSI_PR(cc,argv[i]),    0,   0);          else
-                        tau( TY_CSI_PS(cc,argv[i]),    0,   0);
+    if ( epp(     ))  { tau( TY_CSI_PR(cc,argv[i]),    0,   0); }
+    else if(egt(    ))   { tau( TY_CSI_PG(cc     ),    0,   0); } // spec. case for ESC]>0c or ESC]>c
+    else              { tau( TY_CSI_PS(cc,argv[i]),    0,   0); }
     resetToken();
   }
   else // mode VT52
@@ -623,10 +625,12 @@ void TEmuVt102::tau( int token, int p, int q )
     case TY_VT52__('J'      ) : scr->clearToEndOfScreen   (          ); break; //VT52
     case TY_VT52__('K'      ) : scr->clearToEndOfLine     (          ); break; //VT52
     case TY_VT52__('Y'      ) : scr->setCursorYX          (p-31,q-31 ); break; //VT52
-    case TY_VT52__('Z'      ) :      reportTerminalType   (          ); break; //VT52
+    case TY_VT52__('Z'      ) :      reportTerminalType   (           ); break; //VT52
     case TY_VT52__('<'      ) :          setMode      (MODE_Ansi     ); break; //VT52
     case TY_VT52__('='      ) :          setMode      (MODE_AppKeyPad); break; //VT52
     case TY_VT52__('>'      ) :        resetMode      (MODE_AppKeyPad); break; //VT52
+
+    case TY_CSI_PG('c'      ) :  reportSecondaryAttributes(          ); break; //VT100
 
     default : ReportErrorToken();    break;
   };
@@ -677,12 +681,25 @@ void TEmuVt102::reportCursorPosition()
 
 void TEmuVt102::reportTerminalType()
 {
-//FIXME: should change?
+  // Primary device attribute response (Request was: ^[[0c or ^[[c (from TT321 Users Guide))
+  //   VT220:  ^[[?63;1;2;3;6;7;8c   (list deps on emul. capabilities)
+  //   VT100:  ^[[?1;2c
+  //   VT101:  ^[[?1;0c
+  //   VT102:  ^[[?6v
   if (getMode(MODE_Ansi))
-//  sendString("\033[?1;2c");     // I'm a VT100 with AP0 //FIXME: send only in response to ^[[0c
-    sendString("\033[>0;115;0c"); // I'm a VT220          //FIXME: send only in response to ^[[>c
+    sendString("\033[?1;2c");     // I'm a VT100
   else
     sendString("\033/Z");         // I'm a VT52
+}
+
+void TEmuVt102::reportSecondaryAttributes()
+{
+  // Seconday device attribute response (Request was: ^[[>0c or ^[[>c)
+  if (getMode(MODE_Ansi))
+    sendString("\033[>0;115;0c"); // Why 115?  ;)
+  else
+    sendString("\033/Z");         // FIXME I don't think VT52 knows about it but kept for
+                                  // konsoles backward compatibility.
 }
 
 void TEmuVt102::reportTerminalParms(int p)

@@ -110,6 +110,7 @@ private:
   // 
 
   void reportTerminalType();
+  void reportSecondaryAttributes();
   void reportStatus();
   void reportAnswerBack();
   void reportCursorPosition();
