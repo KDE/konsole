@@ -96,6 +96,7 @@ Time to start a requirement list.
 #include <kpopupmenu.h>
 #include <klineeditdlg.h>
 #include <kdebug.h>
+#include <kapp.h>
 
 #include <qfontmetrics.h>
 
@@ -107,6 +108,8 @@ Time to start a requirement list.
 
 #include "konsole.h"
 #include "keytrans.h"
+
+
 
 
 #define KONSOLEDEBUG    kdDebug(1211)
@@ -165,6 +168,9 @@ Konsole::Konsole(const char* name,
   n_keytab = 0;
   n_render = 0;
 
+  // used to skip the query when closed by the session
+  // management
+  skip_exit_query = false;
 
   // create terminal emulation framework ////////////////////////////////////
 
@@ -388,8 +394,16 @@ void Konsole::makeMenu()
 
   // Open Session Warning on Quit
   // FIXME: Allocate KActionCollection as parent, not this - Martijn
+/*
   warnQuit = new KToggleAction (i18n("&Warn for Open Sessions on Quit"),
-                                0, this, SLOT(slotToggleQuitWarning()), this);
+                                0, this,
+                                SLOT(slotToggleQuitWarning()), this);
+*/
+
+  warnQuit = new KToggleAction (i18n("&Warn for Open Sessions on Quit"),
+                                0, this,
+                                NULL, this);
+
   warnQuit->plug (m_options);
   //m_options->insertSeparator();
 
@@ -427,24 +441,26 @@ void Konsole::makeMenu()
 }
 
 /**
-                Ask for Quit confirmation - Martijn Klingens
-                Asks for confirmation if there are still open shells when the 'Warn on
-                Quit' option is set.
+   Ask for Quit confirmation - Martijn Klingens
+   Asks for confirmation if there are still open shells when the 'Warn on
+   Quit' option is set.
  */
 bool Konsole::queryClose()
 {
-    if ( warnQuit && warnQuit->isChecked () ) {
+    if ( (!skip_exit_query) && warnQuit && warnQuit->isChecked () ) {
         if( (sessions.count()>1) &&
-            ( KMessageBox::warningYesNo( this, i18n( "You have open sessions (besides the current one).\n"
-                                                     "These will be killed if you continue.\n\n"
-                                                     "Are you sure you want to quit?" ) )
+            ( KMessageBox::warningYesNo( this,
+                                         i18n( "You have open sessions (besides the current one).\n"
+                                               "These will be killed if you continue.\n\n"
+                                               "Are you sure you want to quit?" ) )
               == KMessageBox::No )
-            )
+            ) {
             return FALSE;
         }
-        // If there is no warning requested or required or if warnQuit is a NULL
-        // pointer for some reason, just assume closing is safe
-        return  TRUE;
+    }
+    // If there is no warning requested or required or if warnQuit is a NULL
+    // pointer for some reason, just assume closing is safe
+    return  TRUE;
 }
 
 /**
@@ -524,8 +540,14 @@ void Konsole::readGlobalProperties(KConfig* config)
   QDir::setCurrent(config->readEntry("working directory", QDir::currentDirPath()));
 }
 
-void Konsole::saveProperties(KConfig* config)
-{
+void Konsole::saveProperties(KConfig* config) {
+    kdDebug() << "Save properties called\n";
+  if (config != KGlobal::config()) {
+      // called by the session manager
+      skip_exit_query = true;
+     kdDebug() << "Save properties called with a different config\n";
+  }
+
   config->writeEntry("history",b_scroll);
   config->writeEntry("has frame",b_framevis);
   config->writeEntry("Fullscreen",b_fullscreen);

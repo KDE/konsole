@@ -39,8 +39,10 @@
 class KRootPixmap;
 
 class Konsole : public KMainWindow
-{ Q_OBJECT
+{
+    Q_OBJECT
 
+    friend class KonsoleSessionManaged;
 public:
 
   Konsole(const char * name, const char* pgm, QStrList & _args, int histon, bool);
@@ -74,13 +76,14 @@ private slots:
 
 protected:
 
-	bool queryClose();
+ bool queryClose();
  void saveProperties(KConfig* config);
  void readProperties(KConfig* config);
  void saveGlobalProperties(KConfig* config);
  void readGlobalProperties(KConfig* config);
 
  void showFullScreen();
+ bool skip_exit_query;
 
 private slots:
 
@@ -148,7 +151,7 @@ private:
   KSelectAction *selectFont;
   KSelectAction *selectScrollbar;
 
-  KToggleAction	*warnQuit;			// Warn when closing this session on quit
+  KToggleAction *warnQuit;                      // Warn when closing this session on quit
 
   int         n_keytab;
   int         n_font;

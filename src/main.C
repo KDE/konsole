@@ -21,6 +21,7 @@
 #include <kaboutdata.h>
 #include <kcmdlineargs.h>
 #include <kimageio.h>
+#include <kdebug.h>
 #include <dcopclient.h>
 #include "konsole.h"
 
@@ -43,6 +44,24 @@ static KCmdLineOptions options[] =
    { "+[args]",    I18N_NOOP("Arguments for 'command'"), 0 },
    { 0, 0, 0 }
 };
+
+
+/**
+   The goal of this class is to prevent GUI confirmation
+   on the exit when the class is called from the session
+   manager.
+   It must be here, because this has to be called before
+   the KMainWindow's manager.
+ */
+class KonsoleSessionManaged: public KSessionManaged {
+public:
+    bool commitData( QSessionManager&) {
+        konsole->skip_exit_query = true;
+        return true;
+    };
+    Konsole *konsole;
+};
+
 
 
 /* --| main |------------------------------------------------------ */
@@ -188,7 +207,9 @@ int main(int argc, char* argv[])
   }
   else
   {
+      KonsoleSessionManaged *ksm = new KonsoleSessionManaged();
     Konsole*  m = new Konsole(wname,shell,eargs,histon,toolbaron);
+    ksm->konsole = m;
     m->setColLin(c,l); // will use default height and width if called with (0,0)
 
     if (welcome && false) // ME: disable the greeting, it mixes up the taskbar
