@@ -76,7 +76,7 @@ public:
         if (has_noxft) 
         {
             QStringList restartCommand = sm.restartCommand();
-            restartCommand.prepend("--noxft");
+            restartCommand.append("--noxft");
             sm.setRestartCommand(restartCommand);
         }
         return true;
