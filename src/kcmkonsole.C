@@ -265,46 +265,44 @@ SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
   bigWidget->setFrameStyle( QFrame::Panel | QFrame::Sunken );
   bigWidget->setAlignment( AlignCenter  );
 
-  QLabel *smlWidget = new QLabel( "This is work in progress.", bigWidget );
-  smlWidget->setFrameStyle( QFrame::Panel | QFrame::Sunken );
-  smlWidget->setAlignment( AlignCenter  );
-  smlWidget->setBackgroundMode(PaletteBase);
-
-  QGridLayout* topLayout = new QGridLayout( bigWidget, 3, 3, 5 ); 
-  lbox = new QListBox(bigWidget); //FIXME: QT does not react on setFrameStyle
-  //lbox->setFrameStyle( QFrame::Panel | QFrame::Sunken );
-//colorTableW = new ColorTable(bigWidget,0,TABLE_COLORS-1);
+  QGridLayout* topLayout = new QGridLayout( bigWidget, 4, 3, 5 ); 
   topLayout->setColStretch(0,1);
   topLayout->setColStretch(1,1);
   topLayout->setColStretch(2,1);
   topLayout->setRowStretch(0,1);
-  topLayout->setRowStretch(1,4);
-  topLayout->setRowStretch(2,1);
+  topLayout->setRowStretch(1,1);
+  topLayout->setRowStretch(2,8);
+  topLayout->setRowStretch(3,2);
 //topLayout->addWidget( colorTableW, 0, 0 );
-  topLayout->addMultiCellWidget( lbox, 0,1, 2,2 );
 
-  colorTableW[0] = new ColorTable(bigWidget, 0, 1);
-  colorTableW[1] = new ColorTable(bigWidget, 2, 9);
-  colorTableW[2] = new ColorTable(bigWidget,10,11);
-  colorTableW[3] = new ColorTable(bigWidget,12,19);
+  lbox = new QListBox(bigWidget); //FIXME: QT does not react on setFrameStyle
+  //lbox->setFrameStyle( QFrame::Panel | QFrame::Sunken );
+  QToolTip::add(lbox,i18n("color schema selection"));
+  topLayout->addMultiCellWidget( lbox, 2,2, 2,2 );
 
-  QToolTip::add(colorTableW[0],i18n("regular fore- and background"));
-  QToolTip::add(colorTableW[1],i18n("regular rgb color palette"));
-  QToolTip::add(colorTableW[2],i18n("intensive fore- and background"));
-  QToolTip::add(colorTableW[3],i18n("intensive rgb color palette"));
-/*
-  QGridLayout* clayout = new QGridLayout(2,2,5);
-  topLayout->addLayout( clayout, 0,0 );
-  clayout->setRowStretch(0,1);
-  clayout->setRowStretch(1,4);
-*/
+  colorTableW[0] = new ColorTable(bigWidget, 0, 0);
+  colorTableW[1] = new ColorTable(bigWidget, 1, 1);
+  colorTableW[2] = new ColorTable(bigWidget, 2, 9);
+  colorTableW[3] = new ColorTable(bigWidget,10,10);
+  colorTableW[4] = new ColorTable(bigWidget,11,11);
+  colorTableW[5] = new ColorTable(bigWidget,12,19);
+
+  QToolTip::add(colorTableW[0],i18n("regular foreground color"));
+  QToolTip::add(colorTableW[1],i18n("regular background color"));
+  QToolTip::add(colorTableW[2],i18n("regular rgb color palette"));
+  QToolTip::add(colorTableW[3],i18n("intensive foreground color"));
+  QToolTip::add(colorTableW[4],i18n("intensive background color"));
+  QToolTip::add(colorTableW[5],i18n("intensive rgb color palette"));
+
   topLayout->addWidget(colorTableW[0], 0,0);
-  topLayout->addWidget(colorTableW[2], 0,1);
   topLayout->addWidget(colorTableW[1], 1,0);
-  topLayout->addWidget(colorTableW[3], 1,1);
+  topLayout->addWidget(colorTableW[2], 2,0);
+  topLayout->addWidget(colorTableW[3], 0,1);
+  topLayout->addWidget(colorTableW[4], 1,1);
+  topLayout->addWidget(colorTableW[5], 2,1);
 
   QGridLayout* slayout = new QGridLayout(3,2,5);
-  topLayout->addLayout( slayout, 2,0 );
+  topLayout->addLayout( slayout, 3,0 );
   slayout->setColStretch(0,1);
   slayout->setColStretch(1,2);
 
@@ -347,8 +345,13 @@ SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
   QToolTip::add(sl2,i18n("Colourness"));
   QToolTip::add(ll2,i18n("Colourness"));
 
-//topLayout->addMultiCellWidget( smlWidget, 1,1, 0,1 );
-  topLayout->addMultiCellWidget( smlWidget, 2,2, 1,2 );
+  QLabel *smlWidget = new QLabel( i18n("This is work in progress."), bigWidget );
+  QToolTip::add(smlWidget,i18n("This is work in progress."));
+//smlWidget->setFrameStyle( QFrame::Panel | QFrame::Sunken );
+  smlWidget->setAlignment( AlignCenter  );
+//smlWidget->setBackgroundMode(PaletteBase);
+  topLayout->addMultiCellWidget( smlWidget, 3,3, 1,2 );
+
   ColorSchema::loadAllSchemas();
   for (int i = 0; i < ColorSchema::count(); i++)
   { ColorSchema* s = ColorSchema::find(i);
@@ -359,7 +362,8 @@ SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
   QObject::connect( lbox, SIGNAL( highlighted(int) ),
                     this, SLOT( setSchema(int) ) );
                   
-
+  lbox->setCurrentItem(0); // Konsole default
+  
   Contents
   ( i18n(
     "Color Schema Management"
@@ -374,7 +378,7 @@ SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
 
 void SchemaConfig::sl0ValueChanged(int n)
 { int i;
-  for (i = 0; i < 4; i++)
+  for (i = 0; i < 6; i++)
   {
     colorTableW[i]->scale = n / 100.0;
     colorTableW[i]->update();
@@ -383,7 +387,7 @@ void SchemaConfig::sl0ValueChanged(int n)
 
 void SchemaConfig::sl1ValueChanged(int n)
 { int i;
-  for (i = 0; i < 4; i++)
+  for (i = 0; i < 6; i++)
   {
     colorTableW[i]->shift = n / 100.0;
     colorTableW[i]->update();
@@ -392,7 +396,7 @@ void SchemaConfig::sl1ValueChanged(int n)
 
 void SchemaConfig::sl2ValueChanged(int n)
 { int i;
-  for (i = 0; i < 4; i++)
+  for (i = 0; i < 6; i++)
   {
     colorTableW[i]->color = n / 100.0;
     colorTableW[i]->update();
@@ -401,7 +405,7 @@ void SchemaConfig::sl2ValueChanged(int n)
 
 void SchemaConfig::setSchema(int n)
 { int i;
-  for (i = 0; i < 4; i++)
+  for (i = 0; i < 6; i++)
   {
     colorTableW[i]->setSchema(ColorSchema::find(n));
     colorTableW[i]->scale = 1.0;

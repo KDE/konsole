@@ -56,7 +56,7 @@ protected slots:
   void sl2ValueChanged(int n);
 private:
   QListBox* lbox;
-  ColorTable* colorTableW[4];
+  ColorTable* colorTableW[6];
   QSlider* sl0; //FIXME: name
   QSlider* sl1; //FIXME: name
   QSlider* sl2; //FIXME: name
