@@ -48,7 +48,7 @@ KWrited::KWrited() : QObject()
 
   pty = new KPty();
   pty->open();
-  pty->login(KUser().loginName().latin1(), getenv("DISPLAY"));
+  pty->login(KUser().loginName().local8Bit().data(), getenv("DISPLAY"));
   QSocketNotifier *sn = new QSocketNotifier(pty->masterFd(), QSocketNotifier::Read, this);
   connect(sn, SIGNAL(activated(int)), this, SLOT(block_in(int)));
 
