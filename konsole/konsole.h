@@ -96,8 +96,6 @@ protected:
  void saveGlobalProperties(KConfig* config);
  void readGlobalProperties(KConfig* config);
 
- void showFullScreen();
-
 private slots:
   void currentDesktopChanged(int desk);
   void slotBackgroundChanged(int desk);
@@ -201,7 +199,6 @@ private:
   KPopupMenu* m_options;
   KPopupMenu* m_schema;
   KPopupMenu* m_keytab;
-//  KPopupMenu* m_codec;
   KPopupMenu* m_toolbarSessionsCommands;
   KPopupMenu* m_signals;
   KPopupMenu* m_help;

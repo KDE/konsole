@@ -1254,43 +1254,6 @@ void Konsole::updateTitle()
   setIconText( te->currentSession->IconText() );
 }
 
-/*
-   Konsole::showFullScreen() differes from QWidget::showFullScreen() in that
-   we do not want to stay on top, since we want to be able to start X11 clients
-   from a full screen konsole.
-*/
-void Konsole::showFullScreen()
-{
-    if ( !isTopLevel() ) {
-//        KONSOLEDEBUG << "Not top level" << endl;
-        return;
-        }
-
-    if ( topData()->fullscreen ) {
-//        KONSOLEDEBUG << "TopData Fullscreen" << endl;
-        show();
-        raise();
-        return;
-    }
-    if ( topData()->normalGeometry.width() < 0 ) {
-//        KONSOLEDEBUG << "TopData NormalGeo" << endl;
-        topData()->normalGeometry = QRect( pos(), size() );
-        }
-//    KONSOLEDEBUG << "Passed all if's" << endl;
-    reparent( 0, WType_TopLevel | WStyle_Customize | WStyle_NoBorder, // | WStyle_StaysOnTop,
-              QPoint(0,0) );
-    topData()->fullscreen = 1;
-    resize( qApp->desktop()->size() );
-    raise();
-    show();
-#if defined(_WS_X11_)
-    extern void qt_wait_for_window_manager( QWidget* w ); // defined in qwidget_x11.cpp
-    qt_wait_for_window_manager( this );
-#endif
-
-    setActiveWindow();
-}
-
 void Konsole::initFullScreen()
 {
   //This function is to be called from main.C to initialize the state of the Konsole (fullscreen or not).  It doesn't appear to work
