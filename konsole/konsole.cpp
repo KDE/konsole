@@ -734,7 +734,7 @@ void Konsole::makeBasicGUI()
 
   m_clearTerminal = new KAction(i18n("C&lear Terminal"), 0, this,
                                 SLOT(slotClearTerminal()), m_shortcuts, "clear_terminal");
-  m_resetClearTerminal = new KAction(i18n("&Reset and Clear Terminal"), 0, this,
+  m_resetClearTerminal = new KAction(i18n("&Reset && Clear Terminal"), 0, this,
                                      SLOT(slotResetClearTerminal()), m_shortcuts, "reset_clear_terminal");
   m_findHistory = new KAction(i18n("&Find in History..."), "find", 0, this,
                               SLOT(slotFindHistory()), m_shortcuts, "find_history");
