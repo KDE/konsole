@@ -65,7 +65,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
   iconText = kapp->caption();
 
   //kdDebug(1211)<<"TESession ctor() sh->setSize()"<<endl;
-  sh->setPtySize(te->Lines(),te->Columns()); // not absolutely nessesary
+  sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
   //kdDebug(1211)<<"TESession ctor() connecting"<<endl;
   connect( sh,SIGNAL(block_in(const char*,int)),this,SLOT(onRcvBlock(const char*,int)) );
 
@@ -117,7 +117,7 @@ void TESession::run()
   QString cwd_save = QDir::currentDirPath();
   if (!initial_cwd.isEmpty())
      QDir::setCurrent(initial_cwd);
-  sh->setPtyXonXoff(xon_xoff);
+  sh->setXonXoff(xon_xoff);
   sh->run(QFile::encodeName(pgm),args,term.latin1(), add_to_utmp,
           ("DCOPRef("+appId+",konsole)").latin1(),
           ("DCOPRef("+appId+","+sessionId+")").latin1());

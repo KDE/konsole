@@ -44,15 +44,12 @@ Q_OBJECT
              const char* konsole_dcop = "", const char* konsole_dcop_session = "" );
     void setWriteable(bool writeable);
     QString error() { return m_strError; }
-
-    // Make public
-    void commClose() { KProcess::commClose(); }
-    void openMasterPty() { KProcess::openMasterPty(); }
+    void setXonXoff(bool on);
+    void setSize(int lines, int cols);
 
   public slots:
     void lockPty(bool lock);
     void send_bytes(const char* s, int len);
-    void setSize(int lines, int cols);
 
   signals:
 

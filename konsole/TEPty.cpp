@@ -73,8 +73,9 @@
 #include <kstandarddirs.h>
 #include <klocale.h>
 #include <kdebug.h>
+#include <kpty.h>
 
-#include <TEPty.h>
+#include "TEPty.h"
 
 
 void TEPty::donePty()
@@ -84,7 +85,12 @@ void TEPty::donePty()
 
 void TEPty::setSize(int lines, int cols)
 {
-  setPtySize(lines, cols);
+  pty()->setWinSize(lines, cols);
+}
+
+void TEPty::setXonXoff(bool on)
+{
+  pty()->setXonXoff(on);
 }
 
 /*!
@@ -108,7 +114,7 @@ int TEPty::run(const char* _pgm, QStrList & _args, const char* _term, bool _addu
   if (_konsole_dcop_session && _konsole_dcop_session[0]) 
      setEnvironment("KONSOLE_DCOP_SESSION", _konsole_dcop_session);
 
-  setUsePty(true, _addutmp);
+  setUsePty(All, _addutmp);
 
   if (!start(NotifyOnExit, (Communication) (Stdin | Stdout)))
      return -1;
@@ -121,11 +127,11 @@ int TEPty::run(const char* _pgm, QStrList & _args, const char* _term, bool _addu
 void TEPty::setWriteable(bool writeable)
 {
   struct stat sbuf;
-  stat(ptySlaveName(), &sbuf);
+  stat(pty()->ttyName(), &sbuf);
   if (writeable)
-    chmod(ptySlaveName(), sbuf.st_mode | S_IWGRP);
+    chmod(pty()->ttyName(), sbuf.st_mode | S_IWGRP);
   else
-    chmod(ptySlaveName(), sbuf.st_mode & ~(S_IWGRP|S_IWOTH));
+    chmod(pty()->ttyName(), sbuf.st_mode & ~(S_IWGRP|S_IWOTH));
 }
 
 /*!
@@ -140,6 +146,8 @@ TEPty::TEPty()
           this, SLOT(donePty()));
   connect(this, SIGNAL(wroteStdin(KProcess *)),
           this, SLOT(doSendJobs()));
+
+  setUsePty(All, false); // utmp will be overridden later
 }
 
 /*!

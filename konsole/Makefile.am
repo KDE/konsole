@@ -64,12 +64,6 @@ noinst_HEADERS = TEWidget.h TEPty.h TEmulation.h TEmuVt102.h konsole_child.h \
 	kwrited.h TEHistory.h keytrans.h default.keytab.h BlockArray.h \
         konsolebookmarkhandler.h konsolebookmarkmenu.h zmodem_dialog.h
 
-install-data-local:
-	@echo ""
-	@echo "konsole_grantpty is by default installed with SETUID root bit!"
-	@echo "This is needed for konsole to ensure that it can't be eavesdroped."
-	@echo ""
-
 # Not AUTO here, because there are some unused files
 METASOURCES = TEWidget.moc TEmuVt102.moc session.moc konsole.moc konsole_child.moc \
               TEmulation.moc TEPty.moc kwrited.moc konsole_part.moc konsolebookmarkhandler.moc \
