@@ -13,8 +13,9 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <kglobalsettings.h>
 #include <klineeditdlg.h>
-#include <qwmatrix.h> 
+#include <qwmatrix.h>
 
 #include "konsole_child.h"
 #include <netwm.h>
