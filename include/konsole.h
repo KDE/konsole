@@ -43,7 +43,7 @@ class Konsole : public KMainWindow
 
 public:
 
-  Konsole(const char * name, const char* pgm, QStrList & _args, int histon);
+  Konsole(const char * name, const char* pgm, QStrList & _args, int histon, bool);
   ~Konsole();
   void setColLin(int columns, int lines);
   void setFullScreen(bool on);
