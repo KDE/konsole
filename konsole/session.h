@@ -100,7 +100,7 @@ public:
 public slots:
 
   void run();
-  void done();
+  void done( int status );
   void terminate();
   void setUserTitle( int, const QString &caption );
   void ptyError();
@@ -114,6 +114,8 @@ public slots:
 
 signals:
 
+  void processExited( int status );
+  void receivedData( const QString& text );
   void done(TESession*);
   void updateTitle();
   void notifySessionState(TESession* session, int state);
@@ -127,6 +129,7 @@ signals:
   void zmodemDetected(TESession *);
 
 private slots:
+  void onRcvBlock( const char* buf, int len );
   void monitorTimerDone();
   void notifySessionState(int state);
 

@@ -60,7 +60,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
   //kdDebug(1211)<<"TESession ctor() sh->setSize()"<<endl;
   sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
   //kdDebug(1211)<<"TESession ctor() connecting"<<endl;
-  connect( sh,SIGNAL(block_in(const char*,int)),em,SLOT(onRcvBlock(const char*,int)) );
+  connect( sh,SIGNAL(block_in(const char*,int)),this,SLOT(onRcvBlock(const char*,int)) );
 
   connect( em,SIGNAL(ImageSizeChanged(int,int)),sh,SLOT(setSize(int,int)));
   connect( em,SIGNAL(sndBlock(const char*,int)),sh,SLOT(send_bytes(const char*,int)) );
@@ -171,7 +171,7 @@ bool TESession::closeSession()
   if (!sh->isRunning() || !sendSignal(SIGHUP))
   {
      // Forced close.
-     QTimer::singleShot(0, this, SLOT(done()));
+     QTimer::singleShot(0, this, SLOT(done( 1 )));
   }
   return true;
 }
@@ -202,7 +202,7 @@ TESession::~TESession()
 {
  //kdDebug(1211) << "disconnnecting..." << endl;
   QObject::disconnect( sh, SIGNAL( done(int) ),
-                       this, SLOT( done() ) );
+                       this, SLOT( done( int ) ) );
   delete em;
   delete sh;
 
@@ -220,7 +220,7 @@ void TESession::setListenToKeyPress(bool l)
   em->setListenToKeyPress(l);
 }
 
-void TESession::done()
+void TESession::done( int status )
 {
   if (!autoClose)
   {
@@ -228,6 +228,7 @@ void TESession::done()
     emit updateTitle();
     return;
   }
+  emit processExited( status );
   emit done(this);
 }
 
@@ -444,12 +445,12 @@ void TESession::startZModem(const QString &zmodem, const QString &dir, const QSt
   if (!dir.isEmpty())
      zmodemProc->setWorkingDirectory(dir);
   zmodemProc->start(KProcIO::NotifyOnExit, false);
-  
+
   // Override the read-processing of KProcIO
   disconnect(zmodemProc,SIGNAL (receivedStdout (KProcess *, char *, int)), 0, 0);
-  connect(zmodemProc,SIGNAL (receivedStdout (KProcess *, char *, int)), 
+  connect(zmodemProc,SIGNAL (receivedStdout (KProcess *, char *, int)),
           this, SLOT(zmodemSendBlock(KProcess *, char *, int)));
-  connect(zmodemProc,SIGNAL (receivedStderr (KProcess *, char *, int)), 
+  connect(zmodemProc,SIGNAL (receivedStderr (KProcess *, char *, int)),
           this, SLOT(zmodemStatus(KProcess *, char *, int)));
   connect(zmodemProc,SIGNAL (processExited(KProcess *)),
           this, SLOT(zmodemDone()));
@@ -459,8 +460,8 @@ void TESession::startZModem(const QString &zmodem, const QString &dir, const QSt
 
   zmodemProgress = new ZModemDialog(te->topLevelWidget(), false,
                                     i18n("ZModem Progress"));
-  
-  connect(zmodemProgress, SIGNAL(user1Clicked()), 
+
+  connect(zmodemProgress, SIGNAL(user1Clicked()),
           this, SLOT(zmodemDone()));
 
   zmodemProgress->show();
@@ -512,7 +513,7 @@ void TESession::zmodemDone()
     delete zmodemProc;
     zmodemProc = 0;
     zmodemBusy = false;
-  
+
     disconnect( sh,SIGNAL(block_in(const char*,int)), this ,SLOT(zmodemRcvBlock(const char*,int)) );
     connect( sh,SIGNAL(block_in(const char*,int)),em,SLOT(onRcvBlock(const char*,int)) );
 
@@ -561,5 +562,11 @@ QCStringList TESession::functionsDynamic()
     return funcs;
 }
 
+
+void TESession::onRcvBlock( const char* buf, int len )
+{
+    em->onRcvBlock( buf, len );
+    emit receivedData( QString::fromLatin1( buf, len ) );
+}
 
 #include "session.moc"

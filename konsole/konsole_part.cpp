@@ -146,6 +146,7 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
 ,colors(0)
 ,rootxpm(0)
 ,m_histSize(DEFAULT_HISTORY_SIZE)
+,m_runningShell( false )
 {
   parentWidget=_parentWidget;
   setInstance(konsoleFactory::instance());
@@ -160,6 +161,7 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
 
   QStrList eargs;
 
+
   const char* shell = getenv("SHELL");
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
   eargs.append(shell);
@@ -167,27 +169,8 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
 
   setWidget(te);
-  se = new TESession(te,shell,eargs,"xterm");
-  connect( se,SIGNAL(done(TESession*)),
-           this,SLOT(doneSession(TESession*)) );
-  connect( se,SIGNAL(openURLRequest(const QString &)),
-           this,SLOT(emitOpenURLRequest(const QString &)) );
   connect( te,SIGNAL(configureRequest(TEWidget*,int,int,int)),
            this,SLOT(configureRequest(TEWidget*,int,int,int)) );
-  connect( se, SIGNAL( updateTitle() ),
-           this, SLOT( updateTitle() ) );
-  connect( se, SIGNAL(restoreAllListenToKeyPress()),
-           this, SLOT(restoreAllListenToKeyPress()) );
-  // We ignore the following signals
-  //connect( se, SIGNAL(renameSession(TESession*,const QString&)),
-  //         this, SLOT(slotRenameSession(TESession*, const QString&)) );
-  //connect( se->getEmulation(), SIGNAL(changeColumns(int)),
-  //         this, SLOT(changeColumns(int)) );
-  //connect( se, SIGNAL(clearAllListenToKeyPress()),
-  //        this, SLOT(clearAllListenToKeyPress()) );
-  connect( se->getEmulation(),SIGNAL(ImageSizeChanged(int,int)), 
-           this,SLOT(notifySize(int,int)));
-
   rootxpm = new KRootPixmap(te);
 
   colors = new ColorSchemaList();
@@ -195,7 +178,6 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   colors->sort();
 
   readProperties();
-  se->setConnect(true);
 
   makeGUI();
 
@@ -210,7 +192,6 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
     m_schema->setItemChecked(i,false);
 
   m_schema->setItemChecked(curr_schema,true);
-  se->setSchemaNo(curr_schema);
 
   // insert keymaps into menu
   for (int i = 0; i < KeyTrans::count(); i++) {
@@ -221,9 +202,9 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   applySettingsToGUI();
 
   // kDebugInfo("Loading successful");
-  se->run();
 
-  connect( se, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
+  QTimer::singleShot( 0, this, SLOT( showShell() ) );
+
 }
 
 void konsolePart::doneSession(TESession*)
@@ -288,9 +269,7 @@ bool konsolePart::openURL( const KURL & url )
       struct stat buff;
       stat( QFile::encodeName( url.path() ), &buff );
       QString text = ( S_ISDIR( buff.st_mode ) ? url.path() : url.directory() );
-      KRun::shellQuote(text);
-      text = QString::fromLatin1("\001\013cd ") + text + '\n';
-      te->emitText( text );
+      showShellInDir( text );
   }
 
   emit completed();
@@ -302,7 +281,7 @@ void konsolePart::emitOpenURLRequest(const QString &cwd)
   KURL url;
   url.setPath(cwd);
   if (url==currentURL)
-    return; 
+    return;
   currentURL=url;
   m_extension->emitOpenURLRequest(url);
 }
@@ -437,7 +416,7 @@ void konsolePart::makeGUI()
   KAction *copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0,
                                         te, SLOT(copyClipboard()), actions);
   copyClipboard->plug(m_popupMenu);
-  
+
   KAction *pasteClipboard = new KAction(i18n("&Paste"), "editpaste", 0,
                                         te, SLOT(pasteClipboard()), actions);
   pasteClipboard->plug(m_popupMenu);
@@ -510,14 +489,17 @@ void konsolePart::readProperties()
     pixmap_menu_activated(sch->alignment());
   }
 
-  if (b_histEnabled && m_histSize)
-    se->setHistory(HistoryTypeBuffer(m_histSize));
-  else if (b_histEnabled && !m_histSize)
-    se->setHistory(HistoryTypeFile());
-  else
-    se->setHistory(HistoryTypeNone());
+  if ( se )
+  {
+    if (b_histEnabled && m_histSize)
+      se->setHistory(HistoryTypeBuffer(m_histSize));
+    else if (b_histEnabled && !m_histSize)
+      se->setHistory(HistoryTypeFile());
+    else
+      se->setHistory(HistoryTypeNone());
+  };
 
-  se->setKeymapNo(n_keytab);
+  if ( se ) se->setKeymapNo(n_keytab);
   te->setBellMode(n_bell);
   te->setBlinkingCursor(config->readBoolEntry("BlinkingCursor",false));
   te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
@@ -531,7 +513,7 @@ void konsolePart::readProperties()
   config->setDesktopGroup();
   te->setTerminalSizeHint( config->readBoolEntry("TerminalSizeHint",true) );
   config->setGroup("UTMP");
-  se->setAddToUtmp( config->readBoolEntry("AddToUtmp",true));
+  if ( se ) se->setAddToUtmp( config->readBoolEntry("AddToUtmp",true));
   delete config;
 }
 
@@ -564,7 +546,7 @@ void konsolePart::sendSignal(int sn)
 
 void konsolePart::closeCurrentSession()
 {
-  se->closeSession();
+  if ( se ) se->closeSession();
 }
 
 void konsolePart::slotToggleFrame()
@@ -575,6 +557,7 @@ void konsolePart::slotToggleFrame()
 
 void konsolePart::slotSelectScrollbar()
 {
+  if ( ! se ) return;
   n_scroll = selectScrollbar->currentItem();
   te->setScrollbarLocation(n_scroll);
 }
@@ -593,30 +576,31 @@ void konsolePart::slotSelectFont() {
 
 void konsolePart::setFont(int fontno)
 {
+  if ( ! se ) return;
   QFont f;
   if (fontno == DEFAULTFONT)
     f = defaultFont;
   else
-  if (fonts[fontno][0] == '-')
-  {
-    f.setRawName( fonts[fontno] );
-    f.setFixedPitch(true);
-    f.setStyleHint( QFont::TypeWriter );
-    if ( !f.exactMatch() && fontno != DEFAULTFONT)
+    if (fonts[fontno][0] == '-')
     {
-      // Ugly hack to prevent bug #20487
-      fontNotFound_par=fonts[fontno];
-      QTimer::singleShot(1,this,SLOT(fontNotFound()));
-      return;
+      f.setRawName( fonts[fontno] );
+      f.setFixedPitch(true);
+      f.setStyleHint( QFont::TypeWriter );
+      if ( !f.exactMatch() && fontno != DEFAULTFONT)
+      {
+        // Ugly hack to prevent bug #20487
+        fontNotFound_par=fonts[fontno];
+        QTimer::singleShot(1,this,SLOT(fontNotFound()));
+        return;
+      }
     }
-  }
-  else
-  {
-    f.setFamily("fixed");
-    f.setFixedPitch(true);
-    f.setStyleHint(QFont::TypeWriter);
-    f.setPixelSize(QString(fonts[fontno]).toInt());
-  }
+    else
+    {
+      f.setFamily("fixed");
+      f.setFixedPitch(true);
+      f.setStyleHint(QFont::TypeWriter);
+      f.setPixelSize(QString(fonts[fontno]).toInt());
+    }
 
 
   se->setFontNo(fontno);
@@ -632,6 +616,7 @@ void konsolePart::fontNotFound()
 
 void konsolePart::updateKeytabMenu()
 {
+  if ( ! se ) return;
   m_keytab->setItemChecked(n_keytab,false);
   m_keytab->setItemChecked(se->keymapNo(),true);
   n_keytab = se->keymapNo();
@@ -639,6 +624,7 @@ void konsolePart::updateKeytabMenu()
 
 void konsolePart::keytab_menu_activated(int item)
 {
+  if ( ! se ) return;
   se->setKeymapNo(item);
   updateKeytabMenu();
 }
@@ -689,6 +675,7 @@ void konsolePart::setSchema(int numb)
 
 void konsolePart::setSchema(ColorSchema* s)
 {
+  if (!se) return;
   if (!s) return;
 
   if (m_schema) {
@@ -767,6 +754,7 @@ void konsolePart::pixmap_menu_activated(int item)
 
 void konsolePart::slotHistoryType()
 {
+  if ( ! se ) return;
   HistoryTypeDialog dlg(se->history(), m_histSize, (KMainWindow*)parentWidget);
   if (dlg.exec()) {
     if (dlg.isOn()) {
@@ -815,12 +803,12 @@ void konsolePart::slotWordSeps() {
 
 void konsolePart::restoreAllListenToKeyPress()
 {
-    se->setListenToKeyPress(true);
+  if ( se ) se->setListenToKeyPress(true);
 }
 
 void konsolePart::updateTitle()
 {
-    emit setWindowCaption( se->fullTitle() );
+  if ( se ) emit setWindowCaption( se->fullTitle() );
 }
 
 void konsolePart::guiActivateEvent( KParts::GUIActivateEvent * )
@@ -933,6 +921,87 @@ konsoleBrowserExtension::~konsoleBrowserExtension()
 void konsoleBrowserExtension::emitOpenURLRequest(const KURL &url)
 {
   emit openURLRequest(url);
+}
+
+const char* sensibleShell()
+{
+  const char* shell = getenv("SHELL");
+  if (shell == NULL || *shell == '\0') shell = "/bin/sh";
+  return shell;
+}
+
+void konsolePart::startProgram( const QString& program,
+                                const QStrList& args )
+{
+  if ( se ) delete se;
+  se = new TESession(te, program, args, "xterm");
+  connect( se,SIGNAL(done(TESession*)),
+           this,SLOT(doneSession(TESession*)) );
+  connect( se,SIGNAL(openURLRequest(const QString &)),
+           this,SLOT(emitOpenURLRequest(const QString &)) );
+  connect( se, SIGNAL( updateTitle() ),
+           this, SLOT( updateTitle() ) );
+  connect( se, SIGNAL(restoreAllListenToKeyPress()),
+           this, SLOT(restoreAllListenToKeyPress()) );
+  connect( se, SIGNAL( processExited( int ) ),
+           this, SLOT( slotProcessExited( int ) ) );
+  connect( se, SIGNAL( receivedData( const QString& ) ),
+           this, SLOT( slotReceivedData( const QString& ) ) );
+
+  // We ignore the following signals
+  //connect( se, SIGNAL(renameSession(TESession*,const QString&)),
+  //         this, SLOT(slotRenameSession(TESession*, const QString&)) );
+  //connect( se->getEmulation(), SIGNAL(changeColumns(int)),
+  //         this, SLOT(changeColumns(int)) );
+  //connect( se, SIGNAL(clearAllListenToKeyPress()),
+  //        this, SLOT(clearAllListenToKeyPress()) );
+
+  se->setConnect(true);
+  se->setSchemaNo(curr_schema);
+  se->run();
+  connect( se, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
+  setFont( n_font ); // we do this here, to make TEWidget recalculate
+                     // its geometry..
+  te->emitText( QString::fromLatin1( "\014" ) );
+}
+
+void konsolePart::showShellInDir( const QString& dir )
+{
+  if ( ! m_runningShell )
+  {
+    const char* s = sensibleShell();
+    QStrList args;
+    args.append( s );
+    startProgram( s, args );
+    m_runningShell = true;
+  };
+
+  if ( ! dir.isNull() )
+  {
+      QString text = dir;
+      KRun::shellQuote(text);
+      text = QString::fromLatin1("\001\013cd ") + text + '\n';
+      te->emitText( text );
+  };
+}
+
+void konsolePart::showShell()
+{
+    if ( ! se ) showShellInDir( QString::null );
+}
+
+void konsolePart::sendInput( const QString& text )
+{
+    te->emitText( text );
+}
+
+void konsolePart::slotProcessExited( int status )
+{
+    emit processExited( status );
+}
+void konsolePart::slotReceivedData( const QString& s )
+{
+    emit receivedData( s );
 }
 
 #include "konsole_part.moc"

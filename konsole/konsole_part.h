@@ -34,6 +34,8 @@
 #include <kpopupmenu.h>
 #include <krootpixmap.h>
 
+#include <kde_terminal_interface.h>
+
 #include "schema.h"
 #include "session.h"
 
@@ -63,13 +65,16 @@ public:
 
 //////////////////////////////////////////////////////////////////////
 
-class konsolePart: public KParts::ReadOnlyPart
+class konsolePart: public KParts::ReadOnlyPart, public TerminalInterface
 {
     Q_OBJECT
 	public:
     konsolePart(QWidget *parentWidget, const char *widgetName, QObject * parent, const char *name, const char *classname = 0);
     virtual ~konsolePart();
 
+signals:
+    void processExited( int status );
+    void receivedData( const QString& s );
  protected:
     virtual bool openURL( const KURL & url );
     virtual bool openFile() {return false;} // never used
@@ -77,6 +82,10 @@ class konsolePart: public KParts::ReadOnlyPart
     virtual void guiActivateEvent( KParts::GUIActivateEvent * event );
 
  protected slots:
+    void showShell();
+    void slotProcessExited( int status );
+    void slotReceivedData( const QString& s );
+
     void doneSession(TESession*);
     void sessionDestroyed();
     void configureRequest(TEWidget*,int,int x,int y);
@@ -109,7 +118,7 @@ class konsolePart: public KParts::ReadOnlyPart
     void slotBlinkingCursor();
     void slotWordSeps();
     void fontNotFound();
-  
+
  private:
     konsoleBrowserExtension *m_extension;
     KURL currentURL;
@@ -163,7 +172,15 @@ class konsolePart: public KParts::ReadOnlyPart
     int         n_render;
     int         n_scroll;
     unsigned    m_histSize;
-	bool        m_streamEnabled;
+    bool        m_runningShell;
+    bool        m_streamEnabled;
+public:
+    // these are the implementations for the TermEmuInterface
+    // functions...
+    void startProgram( const QString& program,
+                       const QStrList& args );
+    void showShellInDir( const QString& dir );
+    void sendInput( const QString& text );
 };
 
 //////////////////////////////////////////////////////////////////////
