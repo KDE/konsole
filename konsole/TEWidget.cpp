@@ -1145,6 +1145,18 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
   QTimer::singleShot(QApplication::doubleClickInterval(),this,SLOT(tripleClickTimeout()));
 }
 
+void TEWidget::wheelEvent( QWheelEvent* ev )
+{
+  if (!mouse_marks)
+  {
+    QPoint tL  = contentsRect().topLeft();
+    int    tLx = tL.x();
+    int    tLy = tL.y();
+    QPoint pos = QPoint((ev->x()-tLx-bX)/font_w,(ev->y()-tLy-bY)/font_h);
+    emit mouseSignal( ev->delta() > 0 ? 4 : 5, pos.x() + 1, pos.y() + 1 );
+  }
+}
+
 void TEWidget::tripleClickTimeout()
 {
   possibleTripleClick=false;

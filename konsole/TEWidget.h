@@ -143,6 +143,7 @@ protected:
     void mousePressEvent( QMouseEvent* );
     void mouseReleaseEvent( QMouseEvent* );
     void mouseMoveEvent( QMouseEvent* );
+    void wheelEvent( QWheelEvent* );
 
     void focusInEvent( QFocusEvent * );
     void focusOutEvent( QFocusEvent * );

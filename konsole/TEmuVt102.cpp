@@ -786,6 +786,9 @@ void TEmuVt102::reportAnswerBack()
 void TEmuVt102::onMouse( int cb, int cx, int cy )
 { char tmp[20];
   if (!connected) return;
+  // normal buttons are passed as 0x20 + button,
+  // mouse wheel (buttons 4,5) as 0x60 + button
+  if (cb >= 4) cb += 0x40;
   sprintf(tmp,"\033[M%c%c%c",cb+040,cx+040,cy+040);
   sendString(tmp);
 }
