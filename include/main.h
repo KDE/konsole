@@ -52,6 +52,7 @@ private slots:
   void doneSession(TESession*,int);
   void opt_menu_activated(int item);
   void font_menu_activated(int item);
+  void schema_menu_activated(int item);
   void size_menu_activated(int item);
   void pixmap_menu_activated(int item);
   void about();

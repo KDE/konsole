@@ -223,7 +223,7 @@ void TEDemo::makeMenu()
 
   m_schema = new QPopupMenu;
   m_schema->setCheckable(TRUE);
-  connect(m_schema, SIGNAL(activated(int)), SLOT(setSchema(int)));
+  connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
 
   m_options = new QPopupMenu;
   m_options->setCheckable(TRUE);
@@ -360,12 +360,18 @@ void TEDemo::scrollbar_menu_activated(int item)
 
 void TEDemo::font_menu_activated(int item)
 {
+  assert(se);
   n_font = item;
-  if (se)
-  {
-    se->setFontNo(item);
-    activateSession((int)session2no.find(se)); // for attribute change
-  }
+  se->setFontNo(item);
+  activateSession((int)session2no.find(se)); // for attribute change
+}
+
+void TEDemo::schema_menu_activated(int item)
+{
+  assert(se);
+  //FIXME: save schema name
+  se->setSchemaNo(item);
+  activateSession((int)session2no.find(se)); // for attribute change
 }
 
 void TEDemo::setFont(int fontno)
@@ -760,8 +766,8 @@ ColorSchema* TEDemo::defaultSchema()
   res->path = "";
   res->numb = 0;
   res->title = "Konsole Default";
-  res->imagepath = "/opt/kde/share/wallpapers/gray2.jpg"; // background pixmap
-  res->alignment = 2;  // tiled
+  res->imagepath = ""; // background pixmap
+  res->alignment = 1;  // none
   for (int i = 0; i < TABLE_COLORS; i++)
     res->table[i] = default_table[i];
   return res;

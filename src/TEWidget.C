@@ -168,7 +168,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   font_a   = 1;
 
   setMouseMarks(TRUE);
-  setFont( QFont("fixed") );
+  setVTFont( QFont("fixed") );
 
   setColorTable(base_color_table); // init color table
 
