@@ -845,7 +845,7 @@ static void usage()
    "\n"
    " -e Command Parameter ... Execute command instead of shell\n"
    " -h ..................... This text\n"
-   " -ls .................... Start login session\n"
+   " -ls .................... Start login shell\n"
    " -nowelcome ............. Suppress greeting\n"
    " -sl <number> ........... Save number lines in scroll-back buffer\n"
    " -vt_sz CCxLL ........... terminal size in columns x lines \n"

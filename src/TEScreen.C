@@ -173,6 +173,9 @@ void TEScreen::setSelExtentXY(const int x, const int y)
   } 
   else
   { 
+    /* FIXME, HACK to correct for x too far to the right... */
+    if (( x == columns )|| (x == 0)) l--;
+
     sel_TL = sel_begin;
     sel_BR = l; 
   }

@@ -61,7 +61,7 @@
 #define MAX(a,b) ((a)>(b)?(a):(b))
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
-#define HCNT(Name) //{ static int cnt = 1; printf("%s(%d): %s %d\n",__FILE__,__LINE__,Name,cnt++); }
+#define HCNT(Name) // { static int cnt = 1; printf("%s(%d): %s %d\n",__FILE__,__LINE__,Name,cnt++); }
 
 #define loc(X,Y) ((Y)*columns+(X))
 
