@@ -2833,10 +2833,10 @@ SizeDialog::SizeDialog(const unsigned int columns,
   m_lines = new QSpinBox(4,1000,1,mainFrame);
   m_lines->setValue(lines);
 
-  hb->addWidget(new QLabel(i18n("Number of columns : "), mainFrame));
+  hb->addWidget(new QLabel(i18n("Number of columns:"), mainFrame));
   hb->addWidget(m_columns);
   hb->addSpacing(10);
-  hb->addWidget(new QLabel(i18n("Number of lines : "), mainFrame));
+  hb->addWidget(new QLabel(i18n("Number of lines:"), mainFrame));
   hb->addWidget(m_lines);
 
   setHelp("configure-size");
