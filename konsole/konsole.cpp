@@ -181,7 +181,7 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
                  const QString &_title, QCString type, const QString &_term, bool b_inRestore,
                  const QString &_cwd)
 :DCOPObject( "konsole" )
-,KMainWindow(0, name),
+,KMainWindow(0, name)
 ,m_defaultSession(0)
 ,m_defaultSessionFilename("")
 ,te(0)
