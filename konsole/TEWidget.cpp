@@ -288,7 +288,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
   bY = blX = -1;
 
   cb = QApplication::clipboard();
-  QObject::connect( (QObject*)cb, SIGNAL(dataChanged()),
+  QObject::connect( (QObject*)cb, SIGNAL(selectionChanged()),
                     this, SLOT(onClearSelection()) );
 
   scrollbar = new QScrollBar(this);
@@ -673,7 +673,9 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   }
   if ( ev->button() == MidButton )
   {
+    QApplication::clipboard()->setSelectionMode( true );
     emitSelection();
+    QApplication::clipboard()->setSelectionMode( false );
   }
   if ( ev->button() == RightButton ) // Configure
   {
@@ -971,13 +973,15 @@ void TEWidget::emitSelection()
 void TEWidget::setSelection(const QString& t)
 {
   // Disconnect signal while WE set the clipboard
-  QObject *cb = QApplication::clipboard();
-  QObject::disconnect( cb, SIGNAL(dataChanged()),
+  QClipboard *cb = QApplication::clipboard();
+  QObject::disconnect( cb, SIGNAL(selectionChanged()),
                      this, SLOT(onClearSelection()) );
 
+  cb->setSelectionMode( true );
   QApplication::clipboard()->setText(t);
+  cb->setSelectionMode( false );
 
-  QObject::connect( cb, SIGNAL(dataChanged()),
+  QObject::connect( cb, SIGNAL(selectionChanged()),
                      this, SLOT(onClearSelection()) );
 }
 
