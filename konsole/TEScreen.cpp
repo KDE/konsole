@@ -917,12 +917,15 @@ void TEScreen::clearImage(int loca, int loce, char c)
   {
     clearSelection();
   }
+  
   for (i = loca; i <= loce; i++)
   {
+    // Use the current colors but the default rendition
+    // Check with: echo -e '\033[41;33;07m\033[2Khello world\033[00m'
     image[i].c = c;
-    image[i].f = ef_fg; //DEFAULT_FORE_COLOR; //FIXME: xterm and linux/ansi
-    image[i].b = ef_bg; //DEFAULT_BACK_COLOR; //       many have different
-    image[i].r = ef_re; //DEFAULT_RENDITION;  //       ideas here.
+    image[i].f = cu_fg;
+    image[i].b = cu_bg;
+    image[i].r = DEFAULT_RENDITION;
   }
 
   for (i = loca/columns; i<=loce/columns; i++)
