@@ -23,6 +23,7 @@
 #include "konsole_part.h"
 
 #include <sys/stat.h>
+#include <stdlib.h>
 #include <kinstance.h>
 #include <klocale.h>
 #include <kaboutdata.h>
