@@ -186,26 +186,29 @@ void TEScreen::setMargins(int top, int bot)
 void TEScreen::index()
 //=IND
 {
-  if (cuY >= bmargin)
+  if (cuY == bmargin)
   {
     if (tmargin == 0 && bmargin == lines-1) addHistLine(); // hist.history
     scrollUp(tmargin,1);
   }
-  else
+  else if (cuY < lines-1)
     cuY += 1;
 }
 
 /*!
     Move the cursor up one line.
 
-    If cursor is on to margin, the region between the
+    If cursor is on the top margin, the region between the
     actual top and bottom margin is scrolled down instead.
 */
 
 void TEScreen::reverseIndex()
 //=RI
 {
-  if (cuY <= tmargin) scrollDown(tmargin,1); else cuY -= 1;
+  if (cuY == tmargin)
+     scrollDown(tmargin,1);
+  else if (cuY > 0)
+    cuY -= 1;
 }
 
 /*!
