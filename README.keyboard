@@ -1,0 +1,10 @@
+[README.keyboard]
+
+some keyboard configuration stuff is
+currently work in progress.
+
+See file other/default.Keytab for
+the build-in keyboard table.
+
+Files like these can be used to
+configure konsole, soon.
