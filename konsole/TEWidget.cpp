@@ -1205,7 +1205,7 @@ void TEWidget::calcGeometry()
 {
   //FIXME: set rimX == rimY == 0 when running in full screen mode.
 
-  scrollbar->resize(QApplication::style().scrollBarExtent().width(),
+  scrollbar->resize(QApplication::style().pixelMetric(QStyle::PM_ScrollBarExtent),
                     contentsRect().height());
   switch(scrollLoc)
   {
