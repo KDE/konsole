@@ -68,7 +68,7 @@ GeneralPage::GeneralPage(QWidget* parent) : PageFrame(parent)
   QLabel *bigWidget = new QLabel( "This is work in progress.", this );
   bigWidget->setFrameStyle( QFrame::Panel | QFrame::Sunken );
   bigWidget->setAlignment( AlignCenter  );
-  bigWidget->setBackgroundColor(QColor(0xdddddd));
+  bigWidget->setBackgroundMode(PaletteBase);
   Contents
   ( i18n( 
     "General Konsole settings"
@@ -91,7 +91,7 @@ SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
   QLabel *bigWidget = new QLabel( "This is work in progress.", this );
   bigWidget->setFrameStyle( QFrame::Panel | QFrame::Sunken );
   bigWidget->setAlignment( AlignCenter  );
-  bigWidget->setBackgroundColor(QColor(0xdddddd));
+  bigWidget->setBackgroundMode(PaletteBase);
   Contents
   ( i18n(
     "Color Schema Management"
@@ -115,7 +115,7 @@ SessionConfig::SessionConfig(QWidget* parent) : PageFrame(parent)
   QLabel *bigWidget = new QLabel( "This is work in progress.", this );
   bigWidget->setFrameStyle( QFrame::Panel | QFrame::Sunken );
   bigWidget->setAlignment( AlignCenter  );
-  bigWidget->setBackgroundColor(QColor(0xdddddd));
+  bigWidget->setBackgroundMode(PaletteBase);
   Contents
   ( i18n(
     "Session Management"
