@@ -10,6 +10,7 @@ Comment[xx]=xxKonsolexx
 
 [BellVisible]
 Name=Bell in visible session
+Name[ca]=Timbre a la sessió visible
 Name[cy]=Cloch yn y sesiwn gweladwy
 Name[da]=Klokke i synlig session
 Name[el]=Μεγαφωνάκι στην ορατή σύνοδο
@@ -24,6 +25,7 @@ Name[th]=ออดบนเซสชันที่มองเห็น
 Name[tr]=Görünen oturumda zil
 Name[xx]=xxBell in visible sessionxx
 Comment=Bell emitted within a visible session
+Comment[ca]=Timbre emès dins d'una sessió visible
 Comment[cy]=Gollyngwyd cloch mewn sesiwn gweledig
 Comment[da]=Klokke brugt indenfor en synlig session
 Comment[el]=Το μεγαφωνάκι ενεργοποιήθηκε σε μία ορατή σύνοδο
@@ -40,6 +42,7 @@ default_presentation=1
 
 [BellInvisible]
 Name=Bell in non-visible session
+Name[ca]=Timbre a la sessió no visible
 Name[cy]=Cloch mewn sesiwn anweledig
 Name[da]=Klokke i ikke-synlig session
 Name[el]=Μεγαφωνάκι στην μη ορατή σύνοδο
@@ -53,6 +56,7 @@ Name[sv]=Ljudsignal i osynlig session
 Name[th]=ออดบนเซสชันที่มองไม่เห็น
 Name[xx]=xxBell in non-visible sessionxx
 Comment=Bell emitted within a non-visible session
+Comment[ca]=Timbre emès dins d'una sessió no visible
 Comment[cy]=Gollyngwyd cloch mewn sesiwn anweledig
 Comment[da]=Klokke brugt indenfor en ikke-synlig session
 Comment[el]=Το μεγαφωνάκι ενεργοποιήθηκε σε μία μη ορατή σύνοδο
@@ -68,6 +72,7 @@ default_presentation=16
 
 [Activity]
 Name=Activity in monitored session
+Name[ca]=Activitat a la sessió monitoritzada
 Name[cy]=Gweithgarwch mewn sesiwn wedi'i fonitro
 Name[da]=Aktivitet i overvåget session
 Name[el]=Δραστηριότητα στην εποπτευόμενη σύνοδο
@@ -82,6 +87,7 @@ Name[th]=การกระทำบนเซสชันติดตามก�
 Name[tr]=İzlenen oturumda etkinlik
 Name[xx]=xxActivity in monitored sessionxx
 Comment=Activity detected in a monitored session
+Comment[ca]=Detectada activitat en una sessió monitoritzada
 Comment[cy]=Datgelwyd gweithgaredd mewn seswin wedi'i fonitro
 Comment[da]=Aktivitet detekteret i en overvåget session
 Comment[el]=Δραστηριότητα παρατηρήθηκε σε μια εποπτευόμενη σύνοδο
@@ -97,6 +103,7 @@ default_presentation=16
 
 [Silence]
 Name=Silence in monitored session
+Name[ca]=Silenci a la sessió monitoritzada
 Name[cy]=Distawrwydd mewn sesiwn wedi'i fonitro
 Name[da]=Stilhed i overvåget session
 Name[el]=Ησυχία στην εποπτευόμενη σύνοδο
@@ -110,6 +117,7 @@ Name[sv]=Tystnad i bevakad session
 Name[tr]=İzlenen oturumda sessizlik
 Name[xx]=xxSilence in monitored sessionxx
 Comment=Silence detected in a monitored session
+Comment[ca]=Detectat silenci en una sessió monitoritzada
 Comment[cy]=Datgelwyd distawrwydd mewn sesiwn wedi'i fonitro
 Comment[da]=Stilhed detekteret i en overvåget session
 Comment[el]=Ησυχία παρατηρήθηκε σε μια εποπτευόμενη σύνοδο
@@ -125,6 +133,7 @@ default_presentation=16
 
 [Finished]
 Name=Session finished with non-zero status
+Name[ca]=Sessió finalitzada amb un estatus no zero
 Name[cy]=Gorffenodd y sesiwn efo cyflwr di-sero
 Name[da]=Session afsluttet med ikke-nul status
 Name[el]=Η σύνοδος τελείωσε με μη μηδενική κατάσταση
@@ -139,6 +148,7 @@ Name[th]=เซสชันจบการทำงานได้สถาน�
 Name[tr]=Oturum sıfırdan farklı bir durumla çıktı
 Name[xx]=xxSession finished with non-zero statusxx
 Comment=A session has exited with non-zero status
+Comment[ca]=Una sessió ha eixit amb un estatus no zero
 Comment[cy]=Terfynnodd sesiwn efo cyflwr di-sero
 Comment[da]=En session er gået ud med ikke-nul status
 Comment[el]=Μια σύνοδος τελείωσε με μη μηδενική κατάσταση
