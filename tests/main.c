@@ -1974,7 +1974,7 @@ bye () {
   stty(0,&sgttyOrg);
 #endif
 #endif
-  exit();
+  exit(0);
 }
 
 #ifdef UNIX
