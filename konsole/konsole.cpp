@@ -1119,7 +1119,7 @@ void Konsole::slotSelectSize() {
     case 2: setColLin(80,25); break;
     case 3: setColLin(80,40); break;
     case 4: setColLin(80,52); break;
-    case 5: SizeDialog dlg(te->Columns(), te->Lines()+1, this);
+    case 5: SizeDialog dlg(te->Columns(), te->Lines(), this);
             if (dlg.exec())
               setColLin(dlg.columns(),dlg.lines());
             break;
