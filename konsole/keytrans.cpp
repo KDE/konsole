@@ -673,6 +673,11 @@ void KeyTrans::loadAll()
 {
   if (!numb2keymap)
     numb2keymap = new QIntDict<KeyTrans>;
+  else  {  // Needed for konsole_part.
+    numb2keymap->clear();
+    keytab_serial = 0;
+  }
+
   if (!syms)
     syms = new KeyTransSymbols;
 
