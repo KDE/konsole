@@ -1,3 +1,5 @@
+ 5 Sep 2000
+- (partially) fixed cut&paste problems.
  4 Sep 2000
 - made Shift-(Left|Right) to change sessions
 - fixed Ctrl-D being propagated to other sessions.

@@ -65,7 +65,7 @@
 #include <kdebug.h>
 #include <klocale.h>
 
-#define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
+#define HERE printf("%s(%d): %s\n",__FILE__,__LINE__,__FUNCTION__)
 #define HCNT(Name) // { static int cnt = 1; printf("%s(%d): %s %d\n",__FILE__,__LINE__,Name,cnt++); }
 
 #define loc(X,Y) ((Y)*columns+(X))
@@ -611,7 +611,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
 
   word_selection_mode = FALSE;
 
-// printf("press top left [%d,%d] by=%d\n",tLx,tLy, bY);
+//printf("press top left [%d,%d] by=%d\n",tLx,tLy, bY);
   if ( ev->button() == LeftButton)
   {
     QPoint pos = QPoint((ev->x()-tLx-blX)/font_w,(ev->y()-tLy-bY)/font_h);
@@ -643,12 +643,12 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
 void TEWidget::mouseMoveEvent(QMouseEvent* ev)
 {
   // for auto-hiding the cursor, we need mouseTracking
-  if (ev->state() == NoButton )
-    return;
+  if (ev->state() == NoButton ) return;
 
   if (actSel == 0) return;
-  if (ev->state() & MidButton)
-    return; // don't extend selection while pasting
+
+ // don't extend selection while pasting
+  if (ev->state() & MidButton) return;
 
   //if ( !contentsRect().contains(ev->pos()) ) return;
   QPoint tL  = contentsRect().topLeft();
@@ -736,11 +736,12 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
 
 void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
 {
-  // printf("release [%d,%d] %d\n",ev->x()/font_w,ev->y()/font_h,ev->button());
+//printf("release [%d,%d] %d\n",ev->x()/font_w,ev->y()/font_h,ev->button());
   if ( ev->button() == LeftButton)
   {
     if ( actSel > 1 ) emit endSelectionSignal(preserve_line_breaks);
     preserve_line_breaks = TRUE;
+    actSel = 0;
 
     //FIXME: emits a release event even if the mouse is
     //       outside the range. The procedure used in `mouseMoveEvent'

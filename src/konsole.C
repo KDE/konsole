@@ -25,9 +25,27 @@
 
 /*TODO:
   - allow to set coded
-  - officially declare this file to be hacked to death.
-    konsole/kwin session management, parts stuff, config, menues
-    are all in bad need for a complete rewrite.
+  - officially declare this file to be hacked to death. ;^)
+*/
+
+/*STATE:
+
+  konsole/kwin session management, parts stuff, config, menues
+  are all in bad need for a complete rewrite.
+
+  While the emulation core (TEmulation, TEVt102, TEScreen, TEWidget)
+  are pretty stable, the upper level material has certainly drifted.
+
+  Everything related to Sessions, Configuration has to be redesigned.
+
+Time to start a requirement list.
+
+  - Rework the Emulation::setConnect logic.
+    Together with session changing (Shift-Left/Right, Ctrl-D) it allows
+    key events to propagate to other sessions.
+  - Get rid of the unconfigurable, uncallable initial "Konsole" session.
+    Leads to code replication in konsole_part and other issues. Related
+    to the booting of konsole, thus matter of redesign.
 */
 
 /*FIXME:
