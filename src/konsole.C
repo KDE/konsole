@@ -209,8 +209,8 @@ Konsole::Konsole(const char* name, const char* _pgm,
 ,skip_exit_query(false) // used to skip the query when closed by the session management
 ,b_warnQuit(false)
 ,alreadyNoticedBackgroundChange_(false)
-,m_histSize(0)
-,b_histEnabled(false)
+,m_histSize(1000)
+,b_histEnabled(true)
 {
   //QTime time;
   //time.start();
@@ -803,8 +803,8 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    te->setColorTable(sch->table());
 
    // History
-   m_histSize = config->readNumEntry("history",0);
-   b_histEnabled = config->readBoolEntry("historyenabled",false);
+   m_histSize = config->readNumEntry("history",1000);
+   b_histEnabled = config->readBoolEntry("historyenabled",true);
    KONSOLEDEBUG << "Hist size : " << m_histSize << endl;
 
    if (m_menuCreated)
