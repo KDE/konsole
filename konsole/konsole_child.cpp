@@ -75,7 +75,7 @@ KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar
   connect( se,SIGNAL(updateTitle()), this,SLOT(updateTitle()) );
   connect( se,SIGNAL(renameSession(TESession*,const QString&)), this,SLOT(slotRenameSession(TESession*,const QString&)) );
   connect( se,SIGNAL(restoreAllListenToKeyPress()), this,SLOT(restoreAllListenToKeyPress()) );
-  connect(se,SIGNAL(changeColumns(int)), this,SLOT(changeColumns(int)) );
+  connect(se->getEmulation(),SIGNAL(changeColumns(int)), this,SLOT(changeColumns(int)) );
 
   connect( kapp,SIGNAL(backgroundChanged(int)),this, SLOT(slotBackgroundChanged(int)));
 
