@@ -181,12 +181,16 @@ int main(int argc, char* argv[])
      for(int i=0; i < args->count(); i++)
        eargs.append( args->arg(i) );
 
-     if (title.isEmpty())
+     if (title.isEmpty() && 
+         (kapp->caption() == kapp->aboutData()->programName()))
      {
-        title = (kapp->caption() == kapp->aboutData()->programName())
-           ? QFile::decodeName(shell)  // program executed in the title bar
-           : kapp->caption();  // `konsole' or -caption
+        title = QFile::decodeName(shell);  // program executed in the title bar
      }
+  }
+
+  if (title.isEmpty())
+  {
+     title = kapp->caption(); // `konsole' or -caption
   }
 
   QCString sz = "";
