@@ -1,6 +1,8 @@
 // [kwrited.C] A write(1) receiver for kde.
 
-#include <kapp.h>
+#include <kuniqueapp.h>
+#include <kcmdlineargs.h>
+#include <klocale.h>
 #include <kglobal.h>
 #include <kglobalsettings.h>
 #include <kwrited.h>
@@ -68,11 +70,23 @@ void KWrited::block_in(const char* txt, int len)
 
 int main(int argc, char* argv[])
 {
+  KCmdLineArgs::init(argc, argv, "kwrited", 
+	I18N_NOOP("KDE Daemon for receiving 'write' messages."),
+	"2.0.0");
+
+  KUniqueApplication::addCmdLineOptions();
+
+  if (!KUniqueApplication::start())
+  {
+     fprintf(stderr, i18n("kwrited is already running.").local8Bit());
+     exit(1);
+  }
+ 
   // WABA: Make sure not to enable session management.
   putenv("SESSION_MANAGER=");
 
-  KApplication app(argc, argv, "kwrited");
-  //FIXME: check if we have already have kwrited running.
+  KUniqueApplication app;
+
   KWrited pro;
   app.exec();
   return 0;
