@@ -541,36 +541,32 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
       paint.restore();
     }
 
-    if ((attr->r & RE_UNDERLINE) || color_table[attr->f].bold)
+    if (color_table[attr->f].bold && !printerBold)
     {
       paint.setClipRect(rect);
-      if (color_table[attr->f].bold && !printerBold)
+      // On screen we use overstrike for bold
+      paint.setBackgroundMode( TransparentMode );
+      int x = rect.x()+1;
+      if(!fixed_font)
       {
-        // On screen we use overstrike for bold
-        paint.setBackgroundMode( TransparentMode );
-        int x = rect.x()+1;
-        if(!fixed_font)
-        {
-          // The meaning of y differs between different versions of QPainter::drawText!!
-          int y = rect.y(); // top of rect
-          drawTextFixed(paint, x, y, str, attr);
-        }
-        else
-        {
-          // The meaning of y differs between different versions of QPainter::drawText!!
-          int y = rect.y()+a; // baseline
-
-          if (bidiEnabled)
-            paint.drawText(x,y, str, -1);
-          else
-            paint.drawText(x,y, str, -1, QPainter::LTR);
-        }
+        // The meaning of y differs between different versions of QPainter::drawText!!
+        int y = rect.y(); // top of rect
+        drawTextFixed(paint, x, y, str, attr);
       }
-      if (attr->r & RE_UNDERLINE)
-        paint.drawLine(rect.left(), rect.y()+a+1,
-                       rect.right(),rect.y()+a+1 );
+      else
+      {
+        // The meaning of y differs between different versions of QPainter::drawText!!
+        int y = rect.y()+a; // baseline
+        if (bidiEnabled)
+          paint.drawText(x,y, str, -1);
+        else
+          paint.drawText(x,y, str, -1, QPainter::LTR);
+      }
       paint.setClipping(false);
     }
+    if (attr->r & RE_UNDERLINE)
+      paint.drawLine(rect.left(), rect.y()+a+1,
+                     rect.right(),rect.y()+a+1 );
   }
 }
 
