@@ -100,7 +100,7 @@ void TEmuVt102::reset()
   //kdDebug(1211)<<"TEmuVt102::reset() resetCharSet()"<<endl;
   resetCharset(1);
   //kdDebug(1211)<<"TEmuVt102::reset() reset screen 1"<<endl;
-  screen[0]->reset();
+  screen[1]->reset();
   //kdDebug(1211)<<"TEmuVt102::reset() setCodec()"<<endl;
   setCodec(0);
   //kdDebug(1211)<<"TEmuVt102::reset() done"<<endl;
@@ -528,7 +528,7 @@ void TEmuVt102::tau( int token, int p, int q )
     case TY_CSI_PN('c'      ) :      reportTerminalType   (          ); break; //VT100
     case TY_CSI_PN('d'      ) : scr->setCursorY           (p         ); break; //LINUX
     case TY_CSI_PN('f'      ) : scr->setCursorYX          (p,       q); break; //VT100
-    case TY_CSI_PN('r'      ) : scr->setMargins           (p,       q); break; //VT100
+    case TY_CSI_PN('r'      ) :      setMargins           (p,       q); break; //VT100
     case TY_CSI_PN('y'      ) : /* IGNORED: Confidence test          */ break; //VT100
 
     case TY_CSI_PR('h',    1) :          setMode      (MODE_AppCuKeys); break; //VT100
@@ -573,6 +573,8 @@ void TEmuVt102::tau( int token, int p, int q )
 
     case TY_CSI_PR('h',   47) :          setMode      (MODE_AppScreen); break; //VT100
     case TY_CSI_PR('l',   47) :        resetMode      (MODE_AppScreen); break; //VT100
+    case TY_CSI_PR('s',   47) :         saveMode      (MODE_AppScreen); break; //XTERM
+    case TY_CSI_PR('r',   47) :      restoreMode      (MODE_AppScreen); break; //XTERM
 
     // XTerm defines the following modes:
     // SET_VT200_MOUSE             1000
@@ -604,16 +606,20 @@ void TEmuVt102::tau( int token, int p, int q )
     case TY_CSI_PR('r', 1003) :      restoreMode      (MODE_Mouse1000); break; //XTERM
 
     case TY_CSI_PR('h', 1047) :          setMode      (MODE_AppScreen); break; //XTERM
-    case TY_CSI_PR('l', 1047) :        resetMode      (MODE_AppScreen); break; //XTERM
+    case TY_CSI_PR('l', 1047) : screen[1]->clearEntireScreen(); resetMode(MODE_AppScreen); break; //XTERM
+    case TY_CSI_PR('s', 1047) :         saveMode      (MODE_AppScreen); break; //XTERM
+    case TY_CSI_PR('r', 1047) :      restoreMode      (MODE_AppScreen); break; //XTERM
 
     //FIXME: Unitoken: save translations
     case TY_CSI_PR('h', 1048) :      saveCursor           (          ); break; //XTERM
     case TY_CSI_PR('l', 1048) :      restoreCursor        (          ); break; //XTERM
+    case TY_CSI_PR('s', 1048) :      saveCursor           (          ); break; //XTERM
+    case TY_CSI_PR('r', 1048) :      restoreCursor        (          ); break; //XTERM
 
     //FIXME: every once new sequences like this pop up in xterm.
     //       Here's a guess of what they could mean.
-    case TY_CSI_PR('h', 1049) :          setMode      (MODE_AppScreen); break; //XTERM
-    case TY_CSI_PR('l', 1049) :        resetMode      (MODE_AppScreen); break; //XTERM
+    case TY_CSI_PR('h', 1049) : saveCursor(); screen[1]->clearEntireScreen(); setMode(MODE_AppScreen); break; //XTERM
+    case TY_CSI_PR('l', 1049) : resetMode(MODE_AppScreen); restoreCursor(); break; //XTERM
 
     //FIXME: when changing between vt52 and ansi mode evtl do some resetting.
     case TY_VT52__('A'      ) : scr->cursorUp             (         1); break; //VT52
@@ -942,6 +948,12 @@ void TEmuVt102::useCharset(int n)
   CHARSET.pound   = (CHARSET.charset[n&3] == 'A'); //This mode is obsolete
 }
 
+void TEmuVt102::setMargins(int t, int b)
+{
+  screen[0]->setMargins(t, b);
+  screen[1]->setMargins(t, b);
+}
+
 /*! Save the cursor position and the rendition attribute settings. */
 
 void TEmuVt102::saveCursor()
@@ -1001,10 +1013,10 @@ void TEmuVt102::setMode(int m)
   {
     case MODE_Mouse1000 : gui->setMouseMarks(FALSE);
     break;
+
     case MODE_AppScreen : screen[1]->clearSelection();
-                          screen[1]->clearEntireScreen();
                           setScreen(1);
-	  break;
+    break;
   }
   if (m < MODES_SCREEN || m == MODE_NewLine)
   {
@@ -1020,6 +1032,7 @@ void TEmuVt102::resetMode(int m)
   {
     case MODE_Mouse1000 : gui->setMouseMarks(TRUE);
     break;
+
     case MODE_AppScreen : screen[0]->clearSelection();
                           setScreen(0);
     break;

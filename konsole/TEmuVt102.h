@@ -128,6 +128,8 @@ protected:
   void saveCursor();
   void restoreCursor();
   void resetCharset(int scrno);
+  void setMargins(int t, int b);
+  
   CharCodes charset[2];
 
   DECpar currParm;
