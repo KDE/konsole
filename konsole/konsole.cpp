@@ -262,6 +262,7 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 ,m_newSessionButton(0)
 ,m_removeSessionButton(0)
 ,sessionNumberMapper(0)
+,sl_sessionShortCuts(0)
 {
   isRestored = b_inRestore;
   connect( &m_closeTimeout, SIGNAL(timeout()), this, SLOT(slotCouldNotClose()));
@@ -366,8 +367,6 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 
 Konsole::~Konsole()
 {
-    delete sessionNumberMapper;
-
     while (detached.count()) {
         KonsoleChild* child=detached.first();
         delete child;
@@ -2091,21 +2090,37 @@ void Konsole::reparseConfiguration()
   connect( sessionNumberMapper, SIGNAL( mapped( int ) ),
           this, SLOT( newSessionTabbar( int ) ) );
 
-  // Should be a better way to traverse KActionCollection
+  sl_sessionShortCuts.clear();
+  buildSessionMenus();
+
+  // FIXME: Should be a better way to traverse KActionCollection
   uint count = m_shortcuts->count();
   for ( uint i = 0; i < count; i++ )
   {
     KAction* action = m_shortcuts->action( i );
-    // Delete all session shortcuts...
+    bool b_foundSession = false;
     if ( QString(action->name()).startsWith("SSC_") ) {
-      delete action; // Remove Action and Accel
-      if ( i == 0 ) i = 0;
-      else i--;
-      count--; // = m_shortcuts->count();
+      QString name = QString(action->name());
+
+      // Check to see if shortcut's session has been loaded.
+      for ( QStringList::Iterator it = sl_sessionShortCuts.begin(); it != sl_sessionShortCuts.end(); ++it ) {
+        if ( QString::compare( *it, name ) == 0 ) {
+          b_foundSession = true;
+          break;
+        }
+      }
+      if ( ! b_foundSession ) {
+//       kdDebug()<< "Session "<<name<<" is not valid anymore... deleting"<<endl;
+        action->setShortcut( KShortcut() );   // Clear shortcut
+        m_shortcuts->writeShortcutSettings();
+        delete action;           // Remove Action and Accel
+        if ( i == 0 ) i = 0;     // Reset index
+        else i--;
+        count--;                 // = m_shortcuts->count();
+      }
     }
   }
 
-  buildSessionMenus();
   m_shortcuts->readShortcutSettings();
 
   if (tabwidget) {
@@ -3339,7 +3354,7 @@ void Konsole::addSessionCommand(const QString &path)
   QString name = comment;
   name.prepend("SSC_");  // Allows easy searching for Session ShortCuts
   name.replace(" ", "_");
-  QString cmd_id = QString("%1").arg(cmd_serial);
+  sl_sessionShortCuts << name;
 
   // Is there already this shortcut?
   KAction* sessionAction;

@@ -418,6 +418,7 @@ private:
   QPoint      m_newSessionButtonMousePressPos;
 
   QSignalMapper* sessionNumberMapper;
+  QStringList    sl_sessionShortCuts;
 };
 
 class QSpinBox;
