@@ -91,7 +91,6 @@ private:
   void addSession(TESession* s);
   void setColorPixmaps();
 
-  //  void setFrameVisible(bool);
   void setHistory(bool);
 
   void setSchema(const QString & path);
@@ -100,6 +99,7 @@ private:
 
   void addSessionCommand(const QString & path);
   void loadSessionCommands();
+  QSize calcSize(int columns, int lines);
 
 private:
 

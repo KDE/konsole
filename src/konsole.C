@@ -133,7 +133,9 @@ Konsole::Konsole(const char* name,
 
   // create applications /////////////////////////////////////////////////////
 
-  setCentralWidget(te);
+  //  setCentralWidget(te);
+  setView(te);
+
   makeMenu();
 
   setDockEnabled( toolBar(), QMainWindow::Left, FALSE );
@@ -207,6 +209,7 @@ Konsole::Konsole(const char* name,
   runSession(initial);
   // apply keytab
   keytab_menu_activated(n_keytab);
+  setColLin(0,0);
 }
 
 Konsole::~Konsole()
@@ -363,9 +366,30 @@ void Konsole::makeMenu()
   menubar->insertItem(i18n("Help"), m_help);
 }
 
-/*!
-    sets application window to a size
-    based on columns X lines of the te
+/**
+   This function calculates the size of the external widget
+   needed for the internal widget to be 
+ */
+QSize Konsole::calcSize(int columns, int lines) {
+    QSize size = te->calcSize(columns, lines);
+    if (toolBar()->isVisible()) {
+	if ((toolBar()->barPos()==KToolBar::Top) ||
+	    (toolBar()->barPos()==KToolBar::Bottom)) {
+	    size += QSize(0, toolBar()->size().height());
+	}
+	if ((toolBar()->barPos()==KToolBar::Left) ||
+	    (toolBar()->barPos()==KToolBar::Right)) {
+	    size += QSize(toolBar()->size().width(), 0);
+	}
+    }
+    if (menuBar()->isVisible()) {
+	size += QSize(0,toolBar()->size().height());	
+    }
+    return size;
+}
+
+/**
+    sets application window to a size based on columns X lines of the te
     guest widget. Call with (0,0) for setting default size.
 */
 
@@ -375,15 +399,12 @@ void Konsole::setColLin(int columns, int lines)
   {
     if (defaultSize.isNull()) // not in config file : set default value
     {
-      defaultSize = te->calcSize(80,24);
+      defaultSize = calcSize(80,24);
       notifySize(24,80); // set menu items (strange arg order !)
     }
-    te->resize(defaultSize);
-  }
-  else
-  {
-    QSize size = te->calcSize(columns, lines);
-    te->resize(size);
+    resize(defaultSize);    
+  } else {
+    resize(calcSize(columns, lines));
     notifySize(lines,columns); // set menu items (strange arg order !)
   }
 }
@@ -665,9 +686,7 @@ void Konsole::slotToggleFrame() {
 }
 
 
-void Konsole::setHistory(bool on)
-{
-//HERE; printf("setHistory: %s, having%s session.\n",on?"on":"off",se?"":" no");
+void Konsole::setHistory(bool on) {
   b_scroll = on;
   m_options->setItemChecked(3,b_scroll);
   if (se) se->setHistory( b_scroll );
@@ -675,12 +694,7 @@ void Konsole::setHistory(bool on)
 
 void Konsole::opt_menu_activated(int item)
 {
-  switch( item )
-  {
-    /*
-    case 2: setFrameVisible(!b_framevis);
-            break;
-    */
+  switch( item )  {
     case 3: setHistory(!b_scroll);
             break;
     case 5: setFullScreen(!b_fullscreen);
@@ -833,7 +847,6 @@ void Konsole::activateSession()
   }
   if (se) { se->setConnect(FALSE); }
   se = s;
-  //   if (!s) { fprintf(stderr,"session not found\n"); return; } // oops
   if (s->schemaNo()!=curr_schema)  {
     // the current schema has changed
     setSchema(s->schemaNo());
@@ -843,9 +856,7 @@ void Konsole::activateSession()
     // the schema was not changed
     ColorSchema* schema = ColorSchema::find(s->schemaNo());
     if (schema->usetransparency) {
-      setSchema(schema);
-      // ??? 
-      repaint();
+	rootxpm->repaint(true); // this is a must, otherwise you loose the bg.
     }
     s->setConnect(TRUE);
   }
@@ -1004,6 +1015,7 @@ void Konsole::loadSessionCommands()
   for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it )
     addSessionCommand(*it);
 }
+
 
 // --| Schema support |-------------------------------------------------------
 
