@@ -1,3 +1,10 @@
-[konsole-mainwindow#1 Toolbar style]
+# This must be in "Toolbar style" for session management to work
+# (KToolbar reads from this group explicitely in all cases)
+[Toolbar style]
 IconText=IconTextRight
+
+# This is simply the default value for the position
+# Position is no global setting, putting it in "Toolbar style" doesn't work
+[konsole-mainwindow#1 Toolbar style]
 Position=Bottom
+
