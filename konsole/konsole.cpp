@@ -398,17 +398,26 @@ void Konsole::makeGUI()
    m_edit->insertItem( i18n("&Send Signal"), m_signals );
 
    m_edit->insertSeparator();
+   KAction *clearTerminal = new KAction(i18n("&Clear Terminal"), 0, this,
+                                        SLOT(slotClearTerminal()), m_shortcuts, "clear_terminal");
+   clearTerminal->plug(m_edit);
+
+   KAction *resetclearTerminal = new KAction(i18n("&Reset and Clear Terminal"), 0, this,
+                                        SLOT(slotResetClearTerminal()), m_shortcuts, "reset_clear_terminal");
+   resetclearTerminal->plug(m_edit);
+
+   m_edit->insertSeparator();
    m_findHistory = new KAction(i18n("&Find in History..."), "find", 0, this,
                                SLOT(slotFindHistory()), m_shortcuts, "find_history");
    m_findHistory->setEnabled( se->history().isOn() );
    m_findHistory->plug(m_edit);
 
-   m_findNext = new KAction(i18n("&Find Next"), "next", 0, this,
+   m_findNext = new KAction(i18n("Find &Next"), "next", 0, this,
                                   SLOT(slotFindNext()), m_shortcuts, "find_next");
    m_findNext->setEnabled( se->history().isOn() );
    m_findNext->plug(m_edit);
 
-   m_findPrevious = new KAction(i18n("&Find Previous"), "previous", 0, this,
+   m_findPrevious = new KAction(i18n("&Find P&revious"), "previous", 0, this,
                                 SLOT(slotFindPrevious()), m_shortcuts, "find_previous");
    m_findPrevious->setEnabled( se->history().isOn() );
    m_findPrevious->plug(m_edit);
@@ -1435,7 +1444,23 @@ void Konsole::enterURL(const QString& URL)
   }
   else
     te->emitText(URL);
-  restoreAllListenToKeyPress();  
+  restoreAllListenToKeyPress();
+}
+
+void Konsole::slotClearTerminal()
+{
+  if (se) {
+    se->getEmulation()->clearEntireScreen();
+    se->getEmulation()->clearSelection();
+  }
+}
+
+void Konsole::slotResetClearTerminal()
+{
+  if (se) {
+    se->getEmulation()->reset();
+    se->getEmulation()->clearSelection();
+  }
 }
 
 void Konsole::sendSignal(int sn)

@@ -64,6 +64,7 @@ signals:
 
 public:
 
+  void clearEntireScreen();
   void reset();
 
   void onRcvChar(int cc);

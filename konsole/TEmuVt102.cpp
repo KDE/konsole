@@ -111,6 +111,11 @@ TEmuVt102::~TEmuVt102()
 /*!
 */
 
+void TEmuVt102::clearEntireScreen()
+{
+  scr->clearEntireScreen();
+}
+
 void TEmuVt102::reset()
 {
   //kdDebug(1211)<<"TEmuVt102::reset() resetToken()"<<endl;

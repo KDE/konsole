@@ -82,6 +82,9 @@ public:
   int keymapNo();
   QString keymap();
 
+  virtual void clearEntireScreen() =0;
+  virtual void reset() =0;
+
 protected:
 
   TEWidget* gui;

@@ -138,6 +138,8 @@ private slots:
   void allowPrevNext();
   void setSchema(int n);
   void sendSignal(int n);
+  void slotClearTerminal();
+  void slotResetClearTerminal();
   void slotToggleToolbar();
   void slotToggleMenubar();
   void slotRenameSession();
