@@ -895,6 +895,8 @@ void Konsole::makeTabWidget()
            SLOT(slotTabbarContextMenu(const QPoint &)));
 
   if (kapp->authorize("shell_access")) {
+    connect(tabwidget, SIGNAL(mouseDoubleClick()), SLOT(newSession()));
+
     m_newSessionButton = new QToolButton( tabwidget );
 //    // Looks kind of broken with most styles?
 //    newsession->setTextLabel("New");
