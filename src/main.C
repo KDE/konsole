@@ -461,8 +461,8 @@ void TEDemo::saveProperties(KConfig* config)
   config->writeEntry("class",name());
   config->writeEntry("defaultheight", height()); // for "save options". Not used by SM.
   config->writeEntry("defaultwidth", width());   // for "save options". Not used by SM.
-  config->writeEntry("kmenubar",                 //FIXME:Float
-                     menubar->menuBarPos() == KMenuBar::Bottom ? "bottom" : "top");
+  //config->writeEntry("kmenubar",                 //FIXME:Float
+  //                   menubar->menuBarPos() == KMenuBar::Bottom ? "bottom" : "top");
   // geometry (placement) done by KTMainWindow
   config->sync();
 }
@@ -492,17 +492,18 @@ HERE; printf("reading 'history' = %d\n",b_scroll);
 
   // not necessary for SM (KTMainWindow does it after), but useful for default settings
 /*FIXME: (merging) state of material below unclear*/
-  if (menubar->menuBarPos() != KMenuBar::Floating)
-  { QString entry = config->readEntry("kmenubar");
-    if (!entry.isEmpty() && entry == "floating")
-    {
-      menubar->setMenuBarPos(KMenuBar::Floating);
-      QString geo = config->readEntry("kmenubargeometry");
-      if (!geo.isEmpty()) menubar->setGeometry(KWM::setProperties(menubar->winId(), geo));
-    }
-    else if (!entry.isEmpty() && entry == "top") menubar->setMenuBarPos(KMenuBar::Top);
-    else if (!entry.isEmpty() && entry == "bottom") menubar->setMenuBarPos(KMenuBar::Bottom);
-  }
+// Commented out; kmenubar not movable any more (sven)
+//  if (menubar->menuBarPos() != KMenuBar::Floating)
+//  { QString entry = config->readEntry("kmenubar");
+//    if (!entry.isEmpty() && entry == "floating")
+//    {
+//      menubar->setMenuBarPos(KMenuBar::Floating);
+//      QString geo = config->readEntry("kmenubargeometry");
+//      if (!geo.isEmpty()) menubar->setGeometry(KWM::setProperties(menubar->winId(), geo));
+//    }
+//    else if (!entry.isEmpty() && entry == "top") menubar->setMenuBarPos(KMenuBar::Top);
+//    else if (!entry.isEmpty() && entry == "bottom") menubar->setMenuBarPos(KMenuBar::Bottom);
+//  }
   // (geometry stuff removed) done by KTMainWindow for SM, and not needed otherwise
 
   // Options that should be applied to all sessions /////////////
