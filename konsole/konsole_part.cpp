@@ -38,6 +38,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <krun.h>
+#include <kstdaction.h>
 
 extern "C"
 {
@@ -389,8 +390,7 @@ void konsolePart::makeGUI()
 
   // Save Settings
   m_options->insertSeparator();
-  KAction *saveSettings = new KAction( i18n("&Save Settings"), 0, 0, this,
-					     SLOT(saveProperties()), this);
+  KAction *saveSettings = KStdAction::saveOptions(this, SLOT(saveProperties()), this);
   saveSettings->plug(m_options);
   m_options->insertTearOffHandle();
 
