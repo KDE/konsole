@@ -344,7 +344,7 @@ void KeyTrans::readConfig()
    KeytabReader ktr(m_path,*buf);
    ktr.parseTo(this);
    delete buf;
-};
+}
 
 #define assertSyntax(Cond,Message) if (!(Cond)) { ReportError(Message); goto ERROR; }
 

@@ -61,7 +61,7 @@ extern "C"
   {
     return new konsoleFactory;
   }
-};
+}
 
 /**
  * We need one static instance of the factory for our C 'main' function
@@ -506,7 +506,7 @@ void konsolePart::applySettingsToGUI()
      blinkingCursor->setChecked(te->blinkingCursor());
   if (m_schema)
      m_schema->setItemChecked(curr_schema,true);
-};
+}
 
 void konsolePart::readProperties()
 {
