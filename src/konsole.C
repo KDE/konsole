@@ -332,7 +332,7 @@ void Konsole::makeMenu()
   selectScrollbar = new KSelectAction(i18n("Scrollbar"), 0, this,
 			     SLOT(slotSelectScrollbar()), this);
   QStringList scrollitems;
-  scrollitems << i18n("&Hide") << i18n("&Left") << i18n("Right");
+  scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
   selectScrollbar->setItems(scrollitems);
   selectScrollbar->plug(m_options);
   // Fullscreen
