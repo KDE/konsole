@@ -86,8 +86,11 @@ int main(int argc, char* argv[])
   KAboutData aboutData( PACKAGE, I18N_NOOP("Konsole"),
     VERSION, description, KAboutData::License_GPL_V2,
     "(c) 1997-2001, Lars Doelle");
-  aboutData.addAuthor("Chris Machemer",I18N_NOOP("Maintainer"), "machey@ptd.net");
+  aboutData.addAuthor("Waldo Bastian",I18N_NOOP("Maintainer"), "bastian@kde.org");
   aboutData.addAuthor("Lars Doelle",I18N_NOOP("Author"), "lars.doelle@on-line.de");
+  aboutData.addCredit("Chris Machemer",
+    I18N_NOOP("bug fixing"),
+    "machey@ceinetworks.com");
   aboutData.addCredit("Peter Silva",
     I18N_NOOP("decent marking"),
     "peter.silva@videotron.ca");
@@ -118,9 +121,6 @@ int main(int argc, char* argv[])
   aboutData.addCredit("Sven Fischer",
     I18N_NOOP("bug fixing"),
     "herpes@kawo2.rwth-aachen.de");
-  aboutData.addCredit("Waldo Bastian",
-    I18N_NOOP("bug fixing"),
-    "bastian@kde.org");
   aboutData.addCredit("Dale M. Flaven",
     I18N_NOOP("bug fixing"),
     "dflaven@netport.com");
