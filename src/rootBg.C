@@ -38,6 +38,7 @@
 #include "rootBg.h"
 #include <kglobal.h>
 #include <kstddirs.h>
+#include <kpixmapeffect.h>
 
 
 // By default, when you assign a background to your widget, the pixmap has
@@ -591,6 +592,16 @@ void RootPixmap::generateBackground(double r, double  g, double b)
 generateBackground(true,r,g,b);
 }
 
+/* This is the original code of Antonion
+   The code I (CT) used to replace this is Mosfet's intensity effect.
+
+   For some reason, when doing tests with kdelibs/kdetest/kcolortest, I can't 
+   see significant delay differences.
+
+   Anyways, for whatever reason, the KPixmapEffect::intensity method is *much*
+   faster in real-work test with Konsole (I compared changing sizes of
+   konsole by using Size menu)
+
 void RootPixmap::shadePixmap(QPixmap *pm, double r, double  g, double b)
 {
   QImage qimg=pm->convertToImage();
@@ -608,6 +619,18 @@ void RootPixmap::shadePixmap(QPixmap *pm, double r, double  g, double b)
   }
   pm->convertFromImage(qimg);
 
+}
+*/
+
+// new fading method - much faster (CT 02Aug1999)
+void RootPixmap::shadePixmap(QPixmap *pm, double r, double  g, double b)
+{
+  //use Mosfet's channelIntensity effects
+  QImage tmp = pm->convertToImage();
+  KPixmapEffect::channelIntensity(tmp, (float)r, KPixmapEffect::Red,   false);
+  KPixmapEffect::channelIntensity(tmp, (float)g, KPixmapEffect::Green, false);
+  KPixmapEffect::channelIntensity(tmp, (float)b, KPixmapEffect::Blue,  false);
+  pm->convertFromImage(tmp);
 }
 
 void RootPixmap::shadeColor(QColor *color, double r, double  g, double b)
