@@ -590,7 +590,7 @@ void Konsole::makeGUI()
 
    //help menu
    m_help->insertSeparator(1);
-   m_help->insertItem(SmallIcon( "idea" ), i18n("&Tip of the Day..."), 
+   m_help->insertItem(SmallIcon( "idea" ), i18n("&Tip of the Day"), 
             this, SLOT(showTip()), 0, -1, 2);
 
    //the different session menus
