@@ -8,7 +8,7 @@ TOOLBARDIR = $(DATADIR)/toolbar
 MIMEDIR = $(kde_mimedir)/text
 
 # set the include path for X, qt and KDE
-INCLUDES = $(all_includes) -I.
+INCLUDES = -I. $(all_includes)
 
 # you can add here more. This one gets installed
 bin_PROGRAMS = 	konsole konsole_grantpty kwrited #kcmkonsole
