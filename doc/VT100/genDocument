@@ -36,7 +36,7 @@ cat >> $RES << etx
 <h1><center>VT100</center></h1>
 <center><img src="vt100.gif"></center>
 
-<it>Please note that this text is under construction</it>
+<it>Please note that this text is under construction.</it>
 
 <h2>Preface</h2>
 
@@ -64,15 +64,19 @@ the other.
 <p>
 <hr>
 <p>
+I'm working towards a
+close integration of the konsole's source code with this document, but it
+is still a long way to go.
+<p>
 Currently, the body of this document is mainly a concept data base, that
 referes to the VT100 component of the emulation. Though the codes accepted by
 konsole are now clearly indicated, a comparison to the xterm and Linux console
 emulation is missing.
 <p>
 The konsole emulation sources is not linked closely with it's documentation,
-and, also accurate at the time of writing, it can still fall slightly appart.
-Work is currently in progress to fix this issue. A decent indexing is on the
-way also.
+and, also accurate at the time of writing, it can still fall slightly appart,
+though the codes accepted and produced by konsole should be properly listed.
+Work is currently in progress to fix this issue.
 
 
 
@@ -101,11 +105,13 @@ things with cathode ray tubes.
 <p>
 <pre>
 
-    +-----------+    bi-directional    +------------+    Printer
-    |           |    serial line       |            |--&gt; and/or 
-    |   UNIX    | -------------------&gt; |  Terminal  |    Display
-    |   host    | &lt;------------------- |   Device   |
-    |           |                      |            |&lt;-- Keyboard
+    +-----------+                      +------------+
+    |           |                      |            |
+    |           | -------------------&gt; |            |--&gt; Printer and/or Display
+    |   UNIX    |    bi-directional    |  Terminal  |
+    |   host    |    serial line       |   Device   |
+    |           | &lt;------------------- |            |&lt;-- Keyboard and Mouse
+    |           |                      |            |
     +-----------+                      +------------+
 </pre>
 <p>
@@ -137,10 +143,6 @@ available to whoever likes to hack on it, the program would be
 incomplete without a proper introduction into the code and it's
 concepts. Thus, this text is to complement the program and the
 source with the remaining informations to make a complete product.
-<p>
-Please note that this document is work in progress, and does not
-cover the whole application. So far, it focuses on the screen and
-on the protocol (the emulation in a stricter meaning).
 
 
 <h2>A first refinement</h2>
@@ -208,40 +210,11 @@ A plethora of additional (more or less usefull) commands are
 then added on this by every specific emulation, see below for
 the awful details.
 
-etx
-
-# -- Codes --------------------------------------------------------------------------
-
-header "Terminal Control Commands"
-
-cat >> $RES << etx
-
-The VT100 is an upward and downward software-compatible terminal;
-that is, previous Digital video terminals have Digital's private standards
-for control sequences. The American National Standards Institute has since
-standardized escape and control sequences in terminals in documents X3.41-1974
-and X3.64-1977.
-<p>
-The VT100 is compatible with both the previous Digital standard and
-ANSI standards.  Customers may use existing Digital software designed around
-the VT52 or new VT100 software.  The VT100 has a "VT52 compatible" mode in
-which the VT100 responds to control sequences like a VT52.  In this mode, most
-of the new VT100 features cannot be used.
-<p>
-Throughout this document references will be made to "VT52 mode" or
-"ANSI mode".  These two terms are used to indicate the VT100's software
-compatibility.
-<p>
-<em>NOTE</em>: The ANSI standards allow the manufacturer flexibility in implementing
-each function.  This document describes how the VT100 will respond to the
-implemented ANSI central function.
-<p>
-
 <!-- BEGIN: new section about the codes -->
 
-<h2>Method of description</h2>
+<h2>Parts of the model</h2>
 
-<em>All the following in this section is an outline</em>. <p>
+<it>All the following in this section is an outline</it>. <p>
 
 Parts of the terminal description
 <ul>
@@ -272,7 +245,10 @@ Parts of the terminal description
 
 
 <!-- END -->
+
 etx
+
+# -- Codes --------------------------------------------------------------------------
 
 header "Control Sequences"
 cat >> $RES << etx
@@ -451,8 +427,6 @@ cat >> $RES << etx
 
 <i>The following text is a collection of several sorts of definitions and
    explainations. It is incomplete in many respects and a working draft.
-   The author is well aware of the fact that this part of the document
-   is of few use without having proper indexes.
 </i>
    
 <p>
@@ -528,6 +502,34 @@ etx
 
 
 ./genTC.pl >> $RES
+
+
+header "On VT100"
+
+cat >> $RES << etx
+
+The VT100 is an upward and downward software-compatible terminal;
+that is, previous Digital video terminals have Digital's private standards
+for control sequences. The American National Standards Institute has since
+standardized escape and control sequences in terminals in documents X3.41-1974
+and X3.64-1977.
+<p>
+The VT100 is compatible with both the previous Digital standard and
+ANSI standards.  Customers may use existing Digital software designed around
+the VT52 or new VT100 software.  The VT100 has a "VT52 compatible" mode in
+which the VT100 responds to control sequences like a VT52.  In this mode, most
+of the new VT100 features cannot be used.
+<p>
+Throughout this document references will be made to "VT52 mode" or
+"ANSI mode".  These two terms are used to indicate the VT100's software
+compatibility.
+<p>
+<em>NOTE</em>: The ANSI standards allow the manufacturer flexibility in implementing
+each function.  This document describes how the VT100 will respond to the
+implemented ANSI central function.
+<p>
+
+etx
 
 header "Modes"
 

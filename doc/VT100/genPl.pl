@@ -247,6 +247,36 @@ sub clausify
       print("]");
     }
     #
+    # table.* - subcodes
+    #
+    #elsif ($#Fld == 2 && $Fld[1] eq 'table' && $Fld[2] eq 'XPS')
+    elsif ($#Fld >= 1 && $Fld[1] eq 'table')
+    {
+      my $text;
+      $flag = 0;
+      print("[");
+      foreach $text (split('\n', $t->{$p}))
+      {
+        print ",\n  " if ($flag);
+        $_ = $text;
+        s/^  //;
+        my $flag2 = 0;
+        my $col;
+        print("[");
+        foreach $col (split('\|', $_))
+        {
+          print ", " if ($flag2);
+          $_ = $col;
+          s/'/\\'/g;
+          print "\'$_\'";
+          $flag2 = 1;
+        }
+        print("]");
+        $flag = 1;
+      }
+      print("]");
+    }
+    #
     # other (text, tables)
     #
     else
