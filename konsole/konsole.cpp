@@ -779,6 +779,12 @@ void Konsole::saveProperties(KConfig* config) {
         config->writeEntry(key, sessions.current()->keymap());
         key = QString("Icon%1").arg(counter);
         config->writeEntry(key, sessions.current()->IconName());
+        key = QString("MonitorActivity%1").arg(counter);
+        config->writeEntry(key, sessions.current()->isMonitorActivity());
+        key = QString("MonitorSilence%1").arg(counter);
+        config->writeEntry(key, sessions.current()->isMonitorSilence());
+        key = QString("MasterMode%1").arg(counter);
+        config->writeEntry(key, sessions.current()->isMasterMode());
         if (sessions.current()==se)
 	  active=counter;
         sessions.next();
@@ -1766,11 +1772,29 @@ void Konsole::moveSessionRight()
   m_moveSessionRight->setEnabled(position+1<sessions.count()-1);
 }
 
+void Konsole::initMonitorActivity(bool state)
+{
+  monitorActivity->setChecked(state);
+  slotToggleMonitor();
+}
+
+void Konsole::initMonitorSilence(bool state)
+{
+  monitorSilence->setChecked(state);
+  slotToggleMonitor();
+}
+
 void Konsole::slotToggleMonitor()
 {
   se->setMonitorActivity( monitorActivity->isChecked() );
   se->setMonitorSilence( monitorSilence->isChecked() );
   notifySessionState(se,NOTIFYNORMAL);
+}
+
+void Konsole::initMasterMode(bool state)
+{
+  masterMode->setChecked(state);
+  slotToggleMasterMode();
 }
 
 void Konsole::slotToggleMasterMode()

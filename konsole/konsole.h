@@ -67,6 +67,9 @@ public:
   void initSessionFont(int fontNo);
   void initSessionTitle(const QString &_title);
   void initSessionKeyTab(const QString &keyTab);
+  void initMonitorActivity(bool on);
+  void initMonitorSilence(bool on);
+  void initMasterMode(bool on);
   void newSession(const QString &program, const QStrList &args, const QString &term, const QString &icon);
 
   void run();
