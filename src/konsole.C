@@ -501,7 +501,7 @@ void Konsole::saveProperties(KConfig* config)
   // bad! will no allow us to support multi windows
   config->writeEntry("menubar visible",b_menuvis);
   config->writeEntry("toolbar visible", b_toolbarvis);
-  config->writeEntry("toolbar position", toolBar()->barPos());
+  config->writeEntry("toolbar position", int(toolBar()->barPos()));
   config->writeEntry("history",b_scroll);
   config->writeEntry("has frame",b_framevis);
   config->writeEntry("Fullscreen",b_fullscreen);
@@ -818,7 +818,7 @@ void Konsole::setFullScreen(bool on)
 
 void Konsole::tecRef()
 {
-  kapp->invokeHTMLHelp(PACKAGE "/techref.html","");
+  kapp->invokeHTMLHelp(PACKAGE "/techref.html");
 }
 
 /* --| sessions |------------------------------------------------------------ */
