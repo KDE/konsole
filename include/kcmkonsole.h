@@ -6,6 +6,7 @@
 #include <qwidget.h>
 #include <qlabel.h>
 #include <qlistbox.h>
+#include <qslider.h>
 #include <kcontrol.h>
 #include "schema.h"
 
@@ -33,6 +34,10 @@ protected:
   void paintEvent(QPaintEvent* e);
 private:
   ColorSchema* schema;
+public:
+  float scale;
+  float shift;
+  float color;
 };
 
 class SchemaConfig : public PageFrame
@@ -42,9 +47,16 @@ public:
   ~SchemaConfig();
 protected slots: 
   void setSchema(int n);
+protected slots: 
+  void sl0ValueChanged(int n);
+  void sl1ValueChanged(int n);
+  void sl2ValueChanged(int n);
 private:
   QListBox* lbox;
   ColorTable* colorTableW;
+  QSlider* sl0; //FIXME: name
+  QSlider* sl1; //FIXME: name
+  QSlider* sl2; //FIXME: name
 };
 
 class SessionConfig : public PageFrame

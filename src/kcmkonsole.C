@@ -16,7 +16,7 @@
 #include "qlayout.h"
 #include "qpushbt.h"
 #include "qpixmap.h"
-#include "qtableview.h"
+#include "qslider.h"
 #include <kiconloader.h>
 
 #include <stdio.h>
@@ -71,6 +71,7 @@ GeneralPage::GeneralPage(QWidget* parent) : PageFrame(parent)
   bigWidget->setFrameStyle( QFrame::Panel | QFrame::Sunken );
   bigWidget->setAlignment( AlignCenter  );
   bigWidget->setBackgroundMode(PaletteBase);
+//bigWidget->setMinimumHeight(400);
   Contents
   ( i18n( 
     "General Konsole settings"
@@ -86,6 +87,120 @@ GeneralPage::~GeneralPage()
 {
 }
 
+//--| some algebra on colors |---------------------------------------------------
+
+/*
+   Please don't take this hack here too serious. It attempts
+   to do a sort of tv set control for color adjustments.
+
+   (The author hereby denies all rumours that this is an
+    indication of secret ongoing works on a tv emulator.
+    He also denies that konsole will be renamed to ktv. ;^)
+
+   The color adjustment made here are based on an RGB cube.
+   Black is at (0,0,0), while White is at (1,1,1).
+
+   Now we arrage a subcube from (a,a,a) to (b,b,b).
+   We treat the length of its diagonal as "contrast"
+   and the location of it's center as "brightness".
+
+   The diagonal of the subcube contains only different sorts of
+   gray. By mapping the brightness of the colors to it's gray
+   equivalent, we can make a sort of "color intensity" mapping
+   also, that has the full colors at one and the gray levels
+   at it's other end.
+*/
+
+class Tripel
+{
+public:
+  Tripel();
+  Tripel(float dia);
+  Tripel(float r, float g, float b);
+  Tripel(QColor c);
+public: // all [0..1]
+  float r;
+  float g;
+  float b;
+public:
+  QColor color();
+public:
+  Tripel scale(float f);
+  static Tripel add(const Tripel &a, const Tripel &b);
+  static Tripel linear(const Tripel &p0, const Tripel &p1, float f);
+  Tripel togray(float f);
+public:
+  void print();
+};
+
+Tripel::Tripel()
+{
+  r = 0;
+  g = 0;
+  b = 0;
+}
+
+Tripel::Tripel(float dia)
+{
+  r = dia;
+  g = dia;
+  b = dia;
+}
+
+Tripel::Tripel(float r, float g, float b)
+{
+  this->r = r;
+  this->g = g;
+  this->b = b;
+}
+
+Tripel::Tripel(QColor c)
+{
+  this->r = c.red  () / 255.0;
+  this->g = c.green() / 255.0;
+  this->b = c.blue () / 255.0;
+}
+
+QColor Tripel::color()
+{
+  return QColor(r*255,g*255,b*255);
+}
+
+void Tripel::print()
+{
+  printf("Tripel(%4.2f,%4.2f,%4.2f)\n",r,g,b);
+}
+
+Tripel Tripel::scale(float f)
+{
+  return Tripel(f*r,f*g,f*b);
+}
+
+Tripel Tripel::add(const Tripel &a, const Tripel &b)
+{
+  return Tripel(a.r+b.r, a.g+b.g, a.b+b.b);
+}
+
+Tripel Tripel::linear(const Tripel &p0, const Tripel &p1, float f)
+{
+  return Tripel
+  ( f*(p1.r - p0.r) + p0.r,
+    f*(p1.b - p0.b) + p0.b,
+    f*(p1.g - p0.g) + p0.g
+  );
+}
+
+Tripel Tripel::togray(float f)
+{
+  float rf = 0.25; // they've to total to 1.0
+  float bf = 0.30; // i've guessed these factors.
+  float gf = 0.45; //
+  Tripel rp = Tripel::linear(Tripel(rf*r),Tripel(r,0,0),f);
+  Tripel bp = Tripel::linear(Tripel(bf*b),Tripel(0,b,0),f);
+  Tripel gp = Tripel::linear(Tripel(gf*g),Tripel(0,0,g),f);
+  return Tripel::add( rp, Tripel::add( bp, gp ));
+}
+
 //--| Schema configuration |----------------------------------------------------
 
 
@@ -96,6 +211,7 @@ ColorTable::ColorTable(QWidget* parent) : QLabel(parent)
   setAlignment(AlignCenter);
   setBackgroundMode(PaletteBase);
   schema = (ColorSchema*)NULL;
+  scale = 1;
 }
 
 //void ColorTable::resizeEvent(QResizeEvent* e)
@@ -106,6 +222,7 @@ void ColorTable::setSchema(ColorSchema* s)
 {
   schema = s;
 setText("");
+  setBackgroundMode(schema?NoBackground:PaletteBase);
   if (!schema) return;
 char* pa = strrchr(s->path.data(),'/');
 setText(pa&&*pa?pa+1:"/* build-in schema */");
@@ -119,13 +236,20 @@ void ColorTable::paintEvent(QPaintEvent* e)
   QPainter paint;
   paint.begin( this );
   if (schema)
-  for (y = 0; y < TABLE_COLORS; y++)
+  for (y = 0; y < BASE_COLORS-2; y++)
   {
     QRect base = contentsRect();
-    int top = base.height()*(y+0)/TABLE_COLORS;
-    int bot = base.height()*(y+1)/TABLE_COLORS;
+    int top = base.height()*(y+0)/(BASE_COLORS-2);
+    int bot = base.height()*(y+1)/(BASE_COLORS-2);
     QRect rect(QPoint(base.left(),top),QPoint(base.right(),bot));
-    paint.fillRect(rect, schema->table[y].color );
+    QColor c0 = schema->table[y+2].color;
+    float off   = shift * (1 - scale);
+    Tripel t0(c0);
+    Tripel t2(off);
+    Tripel t3 = Tripel::add( t0.scale(scale), t2 );
+    Tripel t4 = t3.togray(color);
+    paint.fillRect(rect, t4.color() );
+/*
     for (x = 0; x < TABLE_COLORS; x++)
     {
       int bgn = base.width()*(x+0)/TABLE_COLORS;
@@ -134,6 +258,7 @@ void ColorTable::paintEvent(QPaintEvent* e)
                  QPoint((3*end+bgn)/4,(3*bot+top)/4));
       paint.fillRect(rect, schema->table[x].color );
     }
+*/
   }
   drawFrame(&paint);
   paint.end();
@@ -144,7 +269,6 @@ SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
   QLabel *bigWidget = new QLabel(this); //( "This is work in progress.", this );
   bigWidget->setFrameStyle( QFrame::Panel | QFrame::Sunken );
   bigWidget->setAlignment( AlignCenter  );
-  bigWidget->setBackgroundMode(PaletteBase);
 
   QLabel *smlWidget = new QLabel( "This is work in progress.", bigWidget );
   smlWidget->setFrameStyle( QFrame::Panel | QFrame::Sunken );
@@ -161,7 +285,35 @@ SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
   topLayout->setRowStretch(1,1);
   topLayout->addWidget( colorTableW, 0, 0 );
   topLayout->addWidget( lbox, 0, 1 );
-  topLayout->addMultiCellWidget( smlWidget, 1,1, 0,1 );
+
+  QGridLayout* slayout = new QGridLayout(3,2,5);
+  topLayout->addLayout( slayout, 1,0 );
+  slayout->setColStretch(0,1);
+  slayout->setColStretch(1,3);
+
+  sl0 = new QSlider(0,100,10,0,QSlider::Horizontal,bigWidget);
+  sl0->setTickmarks(QSlider::Below);
+  slayout->addWidget(new QLabel(i18n("contrast"),bigWidget),0,0);
+  slayout->addWidget(sl0,0,1);
+  QObject::connect( sl0, SIGNAL(valueChanged(int)),
+                    this, SLOT(sl0ValueChanged(int)) );
+
+  sl1 = new QSlider(0,100,10,0,QSlider::Horizontal,bigWidget);
+  sl1->setTickmarks(QSlider::Below);
+  slayout->addWidget(new QLabel(i18n("brightness"),bigWidget),1,0);
+  slayout->addWidget(sl1,1,1);
+  QObject::connect( sl1, SIGNAL(valueChanged(int)),
+                    this, SLOT(sl1ValueChanged(int)) );
+
+  sl2 = new QSlider(0,100,10,0,QSlider::Horizontal,bigWidget);
+  sl2->setTickmarks(QSlider::Below);
+  slayout->addWidget(new QLabel(i18n("colourness"),bigWidget),2,0);
+  slayout->addWidget(sl2,2,1);
+  QObject::connect( sl2, SIGNAL(valueChanged(int)),
+                    this, SLOT(sl2ValueChanged(int)) );
+
+//topLayout->addMultiCellWidget( smlWidget, 1,1, 0,1 );
+  topLayout->addWidget( smlWidget, 1,1 );
   ColorSchema::loadAllSchemas();
   for (int i = 0; i < ColorSchema::count(); i++)
   { ColorSchema* s = ColorSchema::find(i);
@@ -185,9 +337,33 @@ SchemaConfig::SchemaConfig(QWidget* parent) : PageFrame(parent)
   );
 }
 
+void SchemaConfig::sl0ValueChanged(int n)
+{
+  colorTableW->scale = n / 100.0;
+  colorTableW->update();
+}
+
+void SchemaConfig::sl1ValueChanged(int n)
+{
+  colorTableW->shift = n / 100.0;
+  colorTableW->update();
+}
+
+void SchemaConfig::sl2ValueChanged(int n)
+{
+  colorTableW->color = n / 100.0;
+  colorTableW->update();
+}
+
 void SchemaConfig::setSchema(int n)
 {
   colorTableW->setSchema(ColorSchema::find(n));
+  colorTableW->scale = 1.0;
+  sl0->setValue(100);
+  colorTableW->shift = 0.5;
+  sl1->setValue(50);
+  colorTableW->color = 1.0;
+  sl2->setValue(100);
 }
 
 SchemaConfig::~SchemaConfig()
@@ -226,13 +402,13 @@ KcmKonsole::KcmKonsole(int &argc, char **argv, const char *name)
 {
   if (runGUI())
   {
-//  if (!pages || pages->contains("general"))
-      addPage(general = new GeneralPage(dialog),
-              klocale->translate("&General"),
-              "kcmkonsole-not-written-yet.html");
 //  if (!pages || pages->contains("schemes"))
       addPage(schemes = new SchemaConfig(dialog),
               klocale->translate("&Color Schemes"),
+              "kcmkonsole-not-written-yet.html");
+//  if (!pages || pages->contains("general"))
+      addPage(general = new GeneralPage(dialog),
+              klocale->translate("&General"),
               "kcmkonsole-not-written-yet.html");
 //  if (!pages || pages->contains("sessions"))
       addPage(sessions = new SessionConfig(dialog),
