@@ -947,6 +947,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    }
    //KONSOLEDEBUG << "Doing the rest" << endl;
 
+   te->setTerminalSizeHint( config->readBoolEntry("TerminalSizeHint",true) );
    te->setLineSpacing( config->readUnsignedNumEntry( "LineSpacing", 0 ) );
    te->setScrollbarLocation(n_scroll);
    te->setBellMode(n_bell);

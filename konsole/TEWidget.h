@@ -88,6 +88,8 @@ public:
     // current session in this widget
     TESession *currentSession;
 
+    void setTerminalSizeHint(bool on) { terminalSizeHint=on; }
+
 public slots:
 
     void pasteClipboard();
@@ -167,6 +169,7 @@ private:
     ColorEntry color_table[TABLE_COLORS];
 
     bool resizing;
+    bool terminalSizeHint;
     bool mouse_marks;
 
     void makeImage();

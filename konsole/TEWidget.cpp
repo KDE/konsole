@@ -466,7 +466,7 @@ HCNT("setImage");
   if (!hasBlinker && blinkT->isActive()) { blinkT->stop(); blinking = FALSE; }
   delete [] disstrU;
 
-  if (resizing && 0)  // Some people find the debug info annoying.
+  if (resizing && terminalSizeHint)
   {
      if (!mResizeWidget)
      {
