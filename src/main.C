@@ -76,7 +76,9 @@
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
+#ifndef MIN
 inline int MIN(int A, int B) { return ((A>B) ? B : A); }
+#endif
 
 #undef PACKAGE
 #undef VERSION
