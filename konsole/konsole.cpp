@@ -321,7 +321,8 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
     setCentralWidget(te);
   }
 
-  b_histEnabled=histon;
+  if (!histon)
+    b_histEnabled=false;
 
   if (!menubaron)
     menubar->hide();
