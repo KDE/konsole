@@ -1196,10 +1196,51 @@ static bool isSpace(UINT16 c)
   return qc.isSpace();
 }
 
-QString TEScreen::getSelText(const bool preserve_line_breaks)
+QString TEScreen::getSelText(bool preserve_line_breaks)
+{
+  QString result;
+  QTextOStream stream(&result);
+  getSelText(preserve_line_breaks, &stream);
+  return result;
+}
+
+
+static QString makeString(int *m, int d, bool stripTrailingSpaces)
+{
+  QChar* qc = new QChar[d];
+
+  int last_space = -1;
+  int j = 0;
+
+  for (int i = 0; i < d; i++, j++)
+    {
+      if (m[i] == ' ')
+        {
+          if (last_space == -1)
+            last_space = j;
+        }
+      else
+        {
+          last_space = -1;
+        }
+      qc[j] = m[i];
+    }
+
+  if ((last_space != -1) && stripTrailingSpaces)
+    {
+      // Strip trailing spaces
+      j = last_space;
+    }
+
+  QString res(qc, j);
+  delete [] qc;
+  return res;
+}
+
+void TEScreen::getSelText(bool preserve_line_breaks, QTextStream *stream)
 {
   if (sel_begin == -1)
-     return QString::null; // Selection got clear while selecting.
+     return; // Selection got clear while selecting.
 
   int *m;			// buffer to fill.
   int s, d;			// source index, dest. index.
@@ -1213,11 +1254,28 @@ QString TEScreen::getSelText(const bool preserve_line_breaks)
 				// allocate buffer for maximum
 				// possible size...
   d = (sel_BR - sel_TL) / columns + 1;
-  m = new int[d * (columns + 1) + 2];
+  m = new int[columns + 3];
   d = 0;
+
+#define LINE_END	do { \
+                          assert(d <= columns); \
+                          *stream << makeString(m, d, true) << (preserve_line_breaks ? "\n" : " "); \
+                          d = 0; \
+                        } while(false)
+#define LINE_WRAP	do { \
+                          assert(d <= columns); \
+                          *stream << makeString(m, d, true); \
+                          d = 0; \
+                        } while(false)
+#define LINE_FLUSH	do { \
+                          assert(d <= columns); \
+                          *stream << makeString(m, d, false); \
+                          d = 0; \
+                        } while(false)
 
   if (columnmode) {
     bool newlineneeded=false;
+    preserve_line_breaks = true; // Just in case
 
     int sel_Left, sel_Right;
     if ( sel_TL % columns < sel_BR % columns ) {
@@ -1245,7 +1303,7 @@ QString TEScreen::getSelText(const bool preserve_line_breaks)
               m[d++] = c;
             s++;
           }
-          m[d++] = '\n';
+          LINE_END;
 
           hY++;
           s = hY * columns;
@@ -1261,14 +1319,14 @@ QString TEScreen::getSelText(const bool preserve_line_breaks)
 	else {
 	  s++;
 	  if (newlineneeded) {
-            m[d++] = '\n';
+            LINE_END;
 	    newlineneeded = false;
 	  }
 	}
       }
     }
     if (newlineneeded)
-      m[d++] = '\n';
+      LINE_END;
   }
   else
   {
@@ -1296,31 +1354,32 @@ QString TEScreen::getSelText(const bool preserve_line_breaks)
 
           if (s <= sel_BR)
           {			// The line break handling
+              bool wrap = false;
               if (eol % columns == 0)
               { 	        // That's either a full or empty line
-                  if (eol == 0)
-                  {		// empty line, not wrapped
-                      m[d++] = preserve_line_breaks ? '\n' : ' ';
-                  }
-                  else
-                  {		// We have a full line.
-                      if (!hist->isWrappedLine(hY))
-                      {		// line is not wrapped
-                          m[d++] = preserve_line_breaks ? '\n' : ' ';
-                      }
-                  }
+                  if ((eol != 0) && hist->isWrappedLine(hY))
+                     wrap = true;
               }
               else if ((eol + 1) % columns == 0)
               {
-                  if (!hist->isWrappedLine(hY))
-                  {
-                         m[d++] = preserve_line_breaks ? '\n' : ' ';
-                  }
+                  if (hist->isWrappedLine(hY))
+                     wrap = true;
+              }
+
+              if (wrap)
+              {
+                  LINE_WRAP;
               }
               else
-              {			// We have a short line here.
-                  m[d++] = preserve_line_breaks ? '\n' : ' ';
+              {
+                  LINE_END;
               }
+                 
+          }
+          else
+          {
+              // Flush trailing stuff
+              LINE_FLUSH;
           }
 
           hY++;
@@ -1361,21 +1420,32 @@ QString TEScreen::getSelText(const bool preserve_line_breaks)
 
         if (eol < sel_BR)
         {			// eol processing
+            bool wrap = false;
             if ((eol + 1) % columns == 0)
             {			// the whole line is filled
-                if (!line_wrapped[(eol - hist_BR)/columns])
-                {		// line is not wrapped
-                    m[d++] = preserve_line_breaks ? '\n' : ' ';
-                }
+                if (line_wrapped[(eol - hist_BR)/columns])
+                    wrap = true;
+            }
+            if (wrap)
+            {
+                LINE_WRAP;
             }
             else
-            {			// blank/partial line, not wrapped
-                m[d++] = preserve_line_breaks ? '\n' : ' ';
+            {
+                LINE_END;
             }
         }
-        else if (addNewLine && preserve_line_breaks)
+        else
         {
-            m[d++] = '\n';
+            // Flush trailing stuff
+            if (addNewLine && preserve_line_breaks)
+            {
+               LINE_END;
+            }
+            else
+            {
+               LINE_FLUSH;
+            }
         }
 
         s = (eol / columns + 1) * columns;
@@ -1383,53 +1453,17 @@ QString TEScreen::getSelText(const bool preserve_line_breaks)
     }
   }
 
-  QChar* qc = new QChar[d];
-
-  int last_space = -1;
-  int j = 0;
-
-  for (int i = 0; i < d; i++, j++)
-    {
-      if (m[i] == ' ')
-        {
-          if (last_space == -1)
-            last_space = j;
-        }
-      else
-        {
-          if ((m[i] == '\n') && (last_space != -1))
-            {
-              // Strip trailing spaces
-              j = last_space;
-            }
-          last_space = -1;
-        }
-      qc[j] = m[i];
-    }
-
-  if (last_space != -1)
-    {
-      // Strip trailing spaces
-      j = last_space;
-    }
-
-  QString res(qc, j);
+  assert(d == 0);
 
   delete [] m;
-  delete [] qc;
-
-  return res;
 }
 
-QString TEScreen::getHistory() {
+void TEScreen::streamHistory(QTextStream* stream) {
   sel_begin = 0;
   sel_BR = sel_begin;
   sel_TL = sel_begin;
   setSelExtentXY(columns-1,lines-1);
-  QString tmp=getSelText(true);
-  while (tmp.at(tmp.length()-2).unicode()==10 && tmp.at(tmp.length()-1).unicode()==10)
-    tmp.truncate(tmp.length()-1);
-  return tmp;
+  getSelText(true, stream);
 }
 
 QString TEScreen::getHistoryLine(int no)

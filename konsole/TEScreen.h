@@ -151,8 +151,8 @@ public: // these are all `Screen' operations
     /*! set the position of the history cursor. */
     void setHistCursor(int cursor);
     /*! return the position of the history cursor. */
-    int  getHistCursor();
 
+    int  getHistCursor();
     int  getHistLines ();
     void setScroll(const HistoryType&);
     const HistoryType& getScroll();
@@ -167,8 +167,9 @@ public: // these are all `Screen' operations
     void setBusySelecting(bool busy) { sel_busy = busy; }
     bool testIsSelected(const int x,const int y);
 
-    QString getSelText(const bool preserve_line_breaks);
-    QString getHistory();
+    QString getSelText(bool preserve_line_breaks);
+    void getSelText(bool preserve_line_breaks, QTextStream* stream);
+    void streamHistory(QTextStream* stream);
     QString getHistoryLine(int no);
 
     void checkSelection(int from, int to);

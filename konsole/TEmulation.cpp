@@ -362,7 +362,7 @@ void TEmulation::copySelection() {
 }
 
 void TEmulation::streamHistory(QTextStream* stream) {
-  *stream << scr->getHistory();
+  scr->streamHistory(stream);
 }
 
 void TEmulation::findTextBegin()
