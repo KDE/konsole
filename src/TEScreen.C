@@ -984,73 +984,136 @@ void TEScreen::setSelExtentXY(const int x, const int y)
 
 QString TEScreen::getSelText(const BOOL preserve_line_breaks)
 {
-  int *m;  	// buffer to fill.
-  int s,d; 	// source index, dest. index.
-  int hist_BR=loc(0,hist.getLines()-1);
-  int hY = sel_TL / columns ;
+  int *m;			// buffer to fill.
+  int s, d;			// source index, dest. index.
+  int hist_BR = loc(0, hist.getLines());
+  int hY = sel_TL / columns;
   int hX = sel_TL % columns;
-  int eol;	// end of line
-  s = sel_TL;   // tracks copy in source.
+  int eol;			// end of line
+
+  s = sel_TL;			// tracks copy in source.
+
+				// allocate buffer for maximum
+				// possible size...
+  d = (sel_BR - sel_TL) / columns + 1;
+  m = new int[d * (columns + 1) + 2];
   d = 0;
 
-  // allocate buffer for maximum possible size...
-  d = (sel_BR - sel_TL)/columns + 1 ;
-  m = new int[ d * (columns+1) + 2 ];
-  d = 0;
-
-  while ( s <= sel_BR )
-  {
-    if ( s < hist_BR+columns )
-    { 	// get lines from hist.history buffer.
-      eol=hist.getLineLen(hY);
-      if  ((hY == (sel_BR/columns)) && (eol >= (sel_BR%columns)) ) eol=sel_BR%columns+1;
-      while ( hX < eol )
-      {
-         m[d++] = hist.getCell(hY,hX++).c;
-         s++;
-      }
-
-      // see below for end of line processing...
-      if ( s <= sel_BR ) {
-	if ( (eol+1)%columns == 0) {
-	    if (hist.getCell(hY,columns-1).c == ' ') { m[d++]=' '; }
-	}
-        else {
-		m[d++]=((preserve_line_breaks||(eol%columns==0))?'\n':' ');
-                s = ((s+1)/columns + 1)*columns;
-        }
-      }
-      hY++;
-      hX=0;
-    }
-    else // or from screen image.
+  while (s <= sel_BR)
     {
-      eol = (s/columns + 1)*columns - 1 ;
-      if ( eol < sel_BR )
-      {
-        while ((eol > s) && isspace(image[eol-hist_BR-columns].c)) eol--  ;
-      }
-      else
-      {
-        eol = sel_BR ;
-      }
-      while (s <= eol)  m[d++] = image[s++-hist_BR-columns].c;
+      if (s < hist_BR)
+	{			// get lines from hist.history
+				// buffer.
+	  eol = hist.getLineLen(hY);
 
-      if (eol < sel_BR) {
-	if ( (eol+1)%columns == 0) {
-	    if (image[eol-hist_BR-columns].c == ' ') m[d++]=' ';
+	  if ((hY == (sel_BR / columns)) &&
+	      (eol >= (sel_BR % columns)))
+	    {
+	      eol = sel_BR % columns + 1;
+	    }
+	  
+	  while (hX < eol)
+	    {
+	      m[d++] = hist.getCell(hY, hX++).c;
+	      s++;
+	    }
+
+	  if (s <= sel_BR)
+	    {
+				// The line break handling
+				// It's different from the screen
+				// image case!
+	      if (eol % columns == 0)
+		{
+				// That's either a completely filled
+				// line or an empty line
+		  if (eol == 0)
+		    {
+		      m[d++] = '\n';
+		    }
+		  else
+		    {
+				// We have a full line.
+				// FIXME: How can we handle newlines
+				// at this position?!
+		    }
+		}
+	      else if ((eol + 1) % columns == 0)
+		{
+				// FIXME: We don't know if this was a
+				// space at the last position or a
+				// short line!!
+		  m[d++] = ' ';
+		}
+	      else
+		{
+				// We have a short line here. Put a
+				// newline or a space into the
+				// buffer.
+		  m[d++] = preserve_line_breaks ? '\n' : ' ';
+		}
+	    }
+
+	  hY++;
+	  hX = 0;
+	  s = hY * columns;
 	}
-        else m[d++]=((preserve_line_breaks||((eol%columns)==0))?'\n':' ');
+    else
+      {				// or from screen image.
+	eol = (s / columns + 1) * columns - 1;
+
+	if (eol < sel_BR)
+	  {
+	    while ((eol > s) &&
+		   isspace(image[eol - hist_BR].c))
+	      {
+		eol--;
+	      }
+	  }
+	else
+	  {
+	    eol = sel_BR;
+	  }
+
+	while (s <= eol)
+	  {
+	    m[d++] = image[s++ - hist_BR].c;
+	  }
+
+	if (eol < sel_BR)
+	  {
+				// eol processing see below ...
+	    if ((eol + 1) % columns == 0)
+	      {
+		if (image[eol - hist_BR].c == ' ')
+		  {
+		    m[d++] = ' ';
+		  }
+	      }
+	    else
+	      {
+		m[d++] = ((preserve_line_breaks ||
+			   ((eol % columns) == 0)) ?
+			  '\n' : ' ');
+	      }
+	  }
+
+	s = (eol / columns + 1) * columns;
       }
-      s = ( eol/columns + 1)*columns;
     }
-  }
 
   QChar* qc = new QChar[d];
+
   for (int i = 0; i < d; i++)
-    qc[i] = m[i];
-  QString res(qc,d);
-  delete m; delete qc;
+    {
+      qc[i] = m[i];
+    }
+  
+  QString res(qc, d);
+
+  delete m;
+  delete qc;
+
   return res;
 }
 /* above ... end of line processing for selection -- psilva
