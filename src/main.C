@@ -73,7 +73,7 @@ public:
 /* --| main |------------------------------------------------------ */
 int main(int argc, char* argv[])
 {
-  setuid(getuid()); setgid(getgid()); // drop privileges
+  setgid(getgid()); setuid(getuid()); // drop privileges
 
   // deal with shell/command ////////////////////////////
   bool login_shell = false;

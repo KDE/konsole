@@ -560,7 +560,7 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   close(fd);
 
   // drop privileges
-  setuid(getuid()); setgid(getgid());
+  setgid(getgid()); setuid(getuid()); 
 
   // propagate emulation
   if (term && term[0]) setenv("TERM",term,1);
