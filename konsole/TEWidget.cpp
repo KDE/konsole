@@ -1346,15 +1346,18 @@ void TEWidget::calcGeometry()
   switch(scrollLoc)
   {
     case SCRNONE :
+     bX = 1;
      columns = ( contentsRect().width() - 2 * rimX ) / font_w;
      scrollbar->hide();
      break;
     case SCRLEFT :
+     bX = 1+scrollbar->width();
      columns = ( contentsRect().width() - 2 * rimX - scrollbar->width()) / font_w;
      scrollbar->move(contentsRect().topLeft());
      scrollbar->show();
      break;
     case SCRRIGHT:
+     bX = 1;
      columns = ( contentsRect().width()  - 2 * rimX - scrollbar->width()) / font_w;
      scrollbar->move(contentsRect().topRight() - QPoint(scrollbar->width()-1,0));
      scrollbar->show();
@@ -1378,7 +1381,7 @@ QSize TEWidget::calcSize(int cols, int lins) const
   int frw = width() - contentsRect().width();
   int frh = height() - contentsRect().height();
   int scw = (scrollLoc==SCRNONE?0:scrollbar->width());
-  return QSize( font_w*cols + 2*rimX + frw + scw + bX*2, font_h*lins + 2*rimY + frh + bY*2 );
+  return QSize( font_w*cols + 2*rimX + frw + scw + 2, font_h*lins + 2*rimY + frh + 2 );
 }
 
 QSize TEWidget::sizeHint() const
