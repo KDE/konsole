@@ -92,6 +92,7 @@
   "\n"
   "key Left  +Shift   : prevSession\n"
   "key Right +Shift   : nextSession\n"
+  "key N +Control +Alt  : newSession\n"
   "key Up    +Shift   : scrollLineUp\n"
   "key Prior +Shift   : scrollPageUp\n"
   "key Down  +Shift   : scrollLineDown\n"
