@@ -826,11 +826,10 @@ void Konsole::addSession(TESession* s)
   QString title = i18n("%1 No %2").arg(s->Title()).arg(session_no);
   char buffer[30];
   sprintf(buffer,"%d",session_no);
-  KRadioAction *ra = new KRadioAction(title, 0, this, SLOT(activateSession()), this, buffer);
+  KRadioAction *ra = new KRadioAction(title, "openterm", 0, this, SLOT(activateSession()), this, buffer);
   ra->setExclusiveGroup("sessions");
   ra->setChecked(true);
 
-  ra->setIconSet(SmallIcon("konsole"));
   action2session.insert(ra, s);
   session2action.insert(s,ra);
   ra->plug(m_sessions);
