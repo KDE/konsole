@@ -26,6 +26,7 @@
 #include <stdlib.h>
 #include <kinstance.h>
 #include <klocale.h>
+#include <krun.h>
 #include <kaboutdata.h>
 #include <kaction.h>
 #include <kparts/partmanager.h>
@@ -216,10 +217,14 @@ bool konsolePart::openURL( const KURL & url )
       struct stat buff;
       stat( QFile::encodeName( url.path() ), &buff );
       QString text = ( S_ISDIR( buff.st_mode ) ? url.path() : url.directory() );
+#if 0
       text.replace(QRegExp("\\"), "\\\\"); // escape existing '\' first
       text.replace(QRegExp(" "), "\\ "); // escape spaces
       text.replace(QRegExp("("), "\\("); // and '('
       text.replace(QRegExp(")"), "\\)"); // and ')'
+      // misses ampersand etc.
+#endif
+      KRun::shellQuote(text);
       text = QString::fromLatin1("cd ") + text + '\n';
       QKeyEvent e(QEvent::KeyPress, 0,-1,0, text);
       initial->getEmulation()->onKeyPress(&e);
