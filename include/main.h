@@ -16,10 +16,11 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <kwmmapp.h>
+
 #include <ktmainwindow.h>
 //#include <ktopwidget.h>
 #include <ksimpleconfig.h>
+#include <kwmmapp.h>
 #include <qstrlist.h>
 
 #include "TEShell.h"

@@ -44,9 +44,8 @@
 /* TODO
 - don't reread the pixmap every time
 */
-#ifdef HAVE_CONFIG_H
+
 #include"config.h"
-#endif
 
 #include <qdir.h>
 #include <qevent.h>
@@ -57,12 +56,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include "main.h"
-
 #include <kcolordlg.h>
 #include <kfontdialog.h>
 #include <kglobal.h>
 #include <kstddirs.h>
+#include <kconfig.h>
 #include <kurl.h>
 #include <qpainter.h>
 
@@ -72,12 +70,13 @@
 #include <qptrdict.h>
 #include <qmessagebox.h>
 
+#include <locale.h>
+#include <klocale.h>
 #include <kwm.h>
 #include <sys/wait.h>
 #include <assert.h>
 
-#include <locale.h>
-#include <klocale.h>
+#include "main.h"
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
