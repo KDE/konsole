@@ -1420,7 +1420,7 @@ void Konsole::updateSchemaMenu()
   if (te && se)
   {
 //        KONSOLEDEBUG << "Current session has schema "
-//                << te->currentSession->schemaNo()
+//                << se->schemaNo()
 //                << endl;
         m_schema->setItemChecked(se->schemaNo(),true);
   }
@@ -1829,7 +1829,7 @@ void Konsole::runSession(TESession* s)
 {
     KRadioAction *ra = session2action.find(s);
     ra->setChecked(true);
-    activateSession();
+    activateSession(s);
 
     // give some time to get through the
     // resize events before starting up.
@@ -1871,19 +1871,14 @@ void Konsole::addSession(TESession* s)
   s->setTitle(newTitle);
 
   // create an action for the session
-  //  char buffer[30];
-  //  int acc = CTRL+SHIFT+Key_0+session_no; // Lars: keys stolen by kwin.
   KRadioAction *ra = new KRadioAction(newTitle.replace('&',"&&"),
                                       s->IconName(),
                                       0,
                                       this,
                                       SLOT(activateSession()),
                                       this);
-                                      //                                      buffer);
   ra->setExclusiveGroup("sessions");
   ra->setChecked(true);
-  // key accelerator
-  //  accel->connectItem(accel->insertItem(acc), ra, SLOT(activate()));
 
   action2session.insert(ra, s);
   session2action.insert(s,ra);
@@ -1981,8 +1976,8 @@ void Konsole::activateSession(TESession *s)
   {
      se->setConnect(false);
      if(se->isMasterMode())
-       for (TESession *se = sessions.first(); se; se = sessions.next())
-         se->setListenToKeyPress(false);
+       for (TESession *_se = sessions.first(); _se; _se = sessions.next())
+         _se->setListenToKeyPress(false);
 
      notifySessionState(se,NOTIFYNORMAL);
      // Delete the session if isn't in the session list any longer.
@@ -1999,7 +1994,6 @@ void Konsole::activateSession(TESession *s)
      setSchema(s->schemaNo());
   }
 
-  //  te->currentSession = se;
   if (s->fontNo() != n_font)
   {
       setFont(s->fontNo());
@@ -2007,8 +2001,8 @@ void Konsole::activateSession(TESession *s)
   notifySize(te->Lines(), te->Columns());  // set menu items (strange arg order !)
   s->setConnect(true);
   if(se->isMasterMode())
-    for (TESession *se = sessions.first(); se; se = sessions.next())
-      se->setListenToKeyPress(true);
+    for (TESession *_se = sessions.first(); _se; _se = sessions.next())
+      _se->setListenToKeyPress(true);
   updateTitle();
   if (!m_menuCreated)
      return;
@@ -2074,7 +2068,6 @@ void Konsole::newSessionToolbar(int i)
 {
   KSimpleConfig* co = no2command.find(i);
   if (co) {
-    setDefaultSession(*no2filename.find(i));
     newSession(co);
     resetScreenSessions();
   }
@@ -2274,8 +2267,8 @@ void Konsole::doneSession(TESession* s)
 
   s->setConnect(false);
   if(s->isMasterMode())
-    for (TESession *se = sessions.first(); se; se = sessions.next())
-      se->setListenToKeyPress(false);
+    for (TESession *_se = sessions.first(); _se; _se = sessions.next())
+      _se->setListenToKeyPress(false);
 
   delete s;
   if (s == se_previous)
@@ -3413,8 +3406,8 @@ QCStringList Konsole::functionsDynamic()
 void Konsole::enableFullScripting(bool b)
 {
     b_fullScripting = b;
-    for (TESession *se = sessions.first(); se; se = sessions.next())
-       se->enableFullScripting(b);
+    for (TESession *_se = sessions.first(); _se; _se = sessions.next())
+       _se->enableFullScripting(b);
 }
 
 void Konsole::enableFixedSize(bool b)
