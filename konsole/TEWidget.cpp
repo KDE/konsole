@@ -254,16 +254,11 @@ void TEWidget::fontChange(const QFont &)
 //printf("font_a: %d\n",font_a);
 //printf("rawname: %s\n",font().rawName().ascii());
 
-#if QT_VERSION < 300
-  fontMap = strcmp(QFont::encodingName(font().charSet()).ascii(),"iso10646")
-          ? vt100extended
-          : identicalMap;
-#else
 #if defined(Q_CC_GNU)
 #warning TODO: Review/fix vt100 extended font-mapping
 #endif
+
   fontMap = identicalMap;
-#endif
   emit changedFontMetricSignal( font_h, font_w );
   propagateSize();
   update();
