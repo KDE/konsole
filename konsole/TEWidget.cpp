@@ -801,7 +801,6 @@ HCNT("setImage");
   int    tLy = tL.y();
   hasBlinker = false;
 
-  bool lineDraw = false;
   int cf  = -1; // undefined
   int cb  = -1; // undefined
   int cr  = -1; // undefined
@@ -848,7 +847,8 @@ HCNT("setImage");
             continue;
         int p = 0;
         disstrU[p++] = c; //fontMap(c);
-        lineDraw = isLineChar(c);
+        bool lineDraw = isLineChar(c);
+        bool doubleWidth = (ext[x+1].c == 0);
         cr = ext[x].r;
         cb = ext[x].b;
         if (ext[x].f != cf) cf = ext[x].f;
@@ -857,13 +857,10 @@ HCNT("setImage");
         {
           c = ext[x+len].c;
           if (!c)
-          {
-            fixed_font = false;
             continue; // Skip trailing part of multi-col chars.
-          }
 
           if (ext[x+len].f != cf || ext[x+len].b != cb || ext[x+len].r != cr ||
-              !dirtyMask[x+len] || isLineChar(c) != lineDraw)
+              !dirtyMask[x+len] || isLineChar(c) != lineDraw || (ext[x+len+1].c == 0) != doubleWidth)
             break;
 
           disstrU[p++] = c; //fontMap(c);
@@ -890,6 +887,8 @@ HCNT("setImage");
         
         bool save_fixed_font = fixed_font;
         if (lineDraw)
+           fixed_font = false;
+        if (doubleWidth)
            fixed_font = false;
         drawAttrStr(paint,
                     QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
@@ -1055,6 +1054,7 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect, bool pm)
       if (c)
          disstrU[p++] = c; //fontMap(c);
       bool lineDraw = isLineChar(c);
+      bool doubleWidth = (image[loc(x,y)+1].c == 0);
       int cf = image[loc(x,y)].f;
       int cb = image[loc(x,y)].b;
       int cr = image[loc(x,y)].r;
@@ -1062,24 +1062,24 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect, bool pm)
              image[loc(x+len,y)].f == cf &&
              image[loc(x+len,y)].b == cb &&
              image[loc(x+len,y)].r == cr &&
+             (image[loc(x+len,y)+1].c == 0) == doubleWidth &&
              isLineChar( c = image[loc(x+len,y)].c) == lineDraw) // Assignment!
       {
         if (c)
           disstrU[p++] = c; //fontMap(c);
-        else
-          fixed_font = false;
+        if (doubleWidth) // assert((image[loc(x+len,y)+1].c == 0)), see above if condition
+          len++; // Skip trailing part of multi-column char
         len++;
       }
       if ((x+len < columns) && (!image[loc(x+len,y)].c))
-      {
-        fixed_font = false;
         len++; // Adjust for trailing part of multi-column char
-      }
 
       if (!isBlinkEvent || (cr & RE_BLINK))
       {
          bool save_fixed_font = fixed_font;
          if (lineDraw)
+            fixed_font = false;
+         if (doubleWidth)
             fixed_font = false;
          QString unistr(disstrU,p);
          drawAttrStr(paint,
