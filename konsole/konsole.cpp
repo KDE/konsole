@@ -300,10 +300,6 @@ DCOPObject( "konsole" )
   //KONSOLEDEBUG<<"Konsole ctor() ends "<<time.elapsed()<<" msecs elapsed"<<endl;
   //KONSOLEDEBUG<<"Konsole ctor(): done"<<endl;
 
-  // Register with DCOP
-  if ( !kapp->dcopClient()->isRegistered() ) {
-    kapp->dcopClient()->registerAs( "konsole" );
-  }
   kapp->dcopClient()->setDefaultObject( "konsole" );
 }
 
@@ -756,29 +752,6 @@ void Konsole::slotWarnQuit()
 };
 
 /**
-   This function calculates the size of the external widget
-   needed for the internal widget to be
- */
-QSize Konsole::calcSize(int columns, int lines) {
-    QSize size = te->calcSize(columns, lines);
-    if (!toolBar()->isHidden()) {
-        if ((toolBar()->barPos()==KToolBar::Top) ||
-            (toolBar()->barPos()==KToolBar::Bottom)) {
-            int height = toolBar()->sizeHint().height();
-            size += QSize(0, height);
-        }
-        if ((toolBar()->barPos()==KToolBar::Left) ||
-            (toolBar()->barPos()==KToolBar::Right)) {
-            size += QSize(toolBar()->sizeHint().width(), 0);
-        }
-    }
-    if (!menuBar()->isHidden()) {
-        size += QSize(0,menuBar()->heightForWidth(size.width()));
-    }
-    return size;
-}
-
-/**
     sets application window to a size based on columns X lines of the te
     guest widget. Call with (0,0) for setting default size.
 */
@@ -789,12 +762,12 @@ void Konsole::setColLin(int columns, int lines)
   {
     if (defaultSize.isEmpty()) // not in config file : set default value
     {
-      defaultSize = calcSize(80,24);
+      defaultSize = sizeForCentralWidgetSize(te->calcSize(80,24));
       notifySize(24,80); // set menu items (strange arg order !)
     }
     resize(defaultSize);
   } else {
-    resize(calcSize(columns, lines));
+    resize(sizeForCentralWidgetSize(te->calcSize(columns, lines)));
     notifySize(lines,columns); // set menu items (strange arg order !)
   }
 }

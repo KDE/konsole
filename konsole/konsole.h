@@ -178,8 +178,6 @@ private:
   void addSessionCommand(const QString & path);
   void loadSessionCommands();
   void addScreenSession(const QString & socket);
-  QSize calcSize(int columns, int lines);
-
 
   QPtrDict<TESession> action2session;
   QPtrDict<KRadioAction> session2action;
