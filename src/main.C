@@ -521,9 +521,9 @@ void TEDemo::desktopChange(int d)
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TEDemo::pixmap_menu_activated(int item)
+void TEDemo::pixmap_menu_activated(int item, bool regetbg)
 {
-  if (useTransparency)
+  if (useTransparency && regetbg)
 	{
 	// If we want a transparent window, let's get it.
 	ColorSchema *s=ColorSchema::find(curr_schema);
@@ -543,7 +543,7 @@ void TEDemo::pixmap_menu_activated(int item)
   QPixmap pm(pmPath.data());
   if (pm.isNull()) { pmPath = ""; item = 1; }
   // FIXME: respect scrollbar (instead of te->size)
-  n_render = item;
+  n_render= item;
   switch (item)
   {
     case 1: // none
@@ -701,7 +701,7 @@ void TEDemo::size_menu_activated(int item)
 
 void TEDemo::notifySize(int lines, int columns)
 {
-// printf("notifySize(%d,%d)\n",lines,columns);
+    //  printf("notifySize(%d,%d)\n",lines,columns);
 /*
   if (lines != lincol.height() || columns != lincol.width())
   { char buf[100];
@@ -715,7 +715,7 @@ void TEDemo::notifySize(int lines, int columns)
   m_size->setItemChecked(2,columns==80&&lines==25);
   m_size->setItemChecked(3,columns==80&&lines==40);
   m_size->setItemChecked(4,columns==80&&lines==52);
-  if (n_render >= 3) pixmap_menu_activated(n_render);
+  if (n_render >= 3) pixmap_menu_activated(n_render, false);
 }
 
 void TEDemo::setHeader()

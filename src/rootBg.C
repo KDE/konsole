@@ -230,7 +230,7 @@ void RootPixmap::generateBackground(bool shade, double r, double g, double b)
 
   bgPixmap = new QPixmap(w,h);
 
-  // printf("bb %dx%d\n",w,h);
+  //printf("bb %dx%d\n",w,h);
 
   if ( !wpPixmap || (wpMode == Centred) || (wpMode == CentredBrick) ||
        (wpMode == CentredWarp) || ( wpMode == CentredMaxpect) ) {
