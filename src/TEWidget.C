@@ -232,6 +232,7 @@ void TEWidget::fontChange(const QFont &)
 void TEWidget::setVTFont(const QFont& f)
 {
   QFrame::setFont(f);
+  fontChange(f);
 }
 
 void TEWidget::setFont(const QFont &)

@@ -34,6 +34,7 @@
 #include <qlabel.h>
 #include <qfile.h>
 #include <qsplitter.h>
+#include <kglobalsettings.h>
 
 #include <qdom.h>
 
@@ -46,7 +47,7 @@ extern "C"
    */
   void *init_libkonsolepart()
   {
-      printf(" \n\n\nKonsole in actions!!! \n\n\n");
+      kdDebug() << "Konsole in actions!!!" << endl;
     return new konsoleFactory;
   }
 };
@@ -126,6 +127,20 @@ konsolePart::konsolePart(QWidget *parentWidget, const char *widgetName, QObject 
   initial->getEmulation()->setKeytrans(0);
   te->currentSession = initial;
 
+  // At least set the font to the default, if we can't read in
+  // the settings
+  te->setVTFont(KGlobalSettings::fixedFont());
+ 
+  // Also set some usefull colors
+  ColorEntry ctable[TABLE_COLORS];
+  memcpy(ctable, te->getColorTable(), sizeof(ctable));
+  if (ctable)
+    {
+      ctable[DEFAULT_BACK_COLOR].color = KGlobalSettings::baseColor();
+      ctable[DEFAULT_FORE_COLOR].color = KGlobalSettings::textColor();
+      te->setColorTable(ctable); 
+    }
+  
   initial->setHistory(true);
 
   // setXMLFile("konsole_part.rc");
