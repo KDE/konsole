@@ -207,6 +207,8 @@ private:
 
     uint m_lineSpacing;
 
+    QRect       cursorRect; //for quick changing of cursor
+
 private slots:
     void drop_menu_activated(int item);
     void swapColorTable();

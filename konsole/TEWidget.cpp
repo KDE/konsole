@@ -357,6 +357,9 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
   QColor fColor=(((attr.r & RE_CURSOR) && hasFocus() && (!hasBlinkingCursor || !cursorBlinking)) ? color_table[attr.b].color : color_table[attr.f].color);
   QColor bColor=(((attr.r & RE_CURSOR) && hasFocus() && (!hasBlinkingCursor || !cursorBlinking)) ? color_table[attr.f].color : color_table[attr.b].color);
 
+  if (attr.r & RE_CURSOR)
+    cursorRect = rect;
+
   if (pm && color_table[attr.b].transparent && (!(attr.r & RE_CURSOR) || cursorBlinking))
   {
     paint.setBackgroundMode( TransparentMode );
@@ -597,7 +600,7 @@ void TEWidget::blinkEvent()
 void TEWidget::blinkCursorEvent()
 {
   cursorBlinking = !cursorBlinking;
-  repaint(FALSE);
+  repaint(cursorRect, FALSE);
 }
 
 /* ------------------------------------------------------------------------- */
@@ -1034,13 +1037,13 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
 
 void TEWidget::focusInEvent( QFocusEvent * )
 {
-  repaint(false);  // don't erase area
+  repaint(cursorRect, false);  // don't erase area
 }
 
 
 void TEWidget::focusOutEvent( QFocusEvent * )
 {
-  repaint(false);  // don't erase area
+  repaint(cursorRect, false);  // don't erase area
 }
 
 bool TEWidget::focusNextPrevChild( bool next )
