@@ -463,6 +463,7 @@ void KeyTransSymbols::defOprSyms()
   defOprSym("nextSession",   CMD_nextSession   );
   defOprSym("newSession",    CMD_newSession    );
   defOprSym("activateMenu",  CMD_activateMenu  );
+  defOprSym("renameSession",  CMD_renameSession );
   defOprSym("moveSessionLeft",  CMD_moveSessionLeft   );
   defOprSym("moveSessionRight", CMD_moveSessionRight  );
   defOprSym("scrollLock",    CMD_scrollLock);

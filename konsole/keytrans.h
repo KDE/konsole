@@ -41,6 +41,7 @@
 #define CMD_moveSessionRight 11
 #define CMD_scrollLock 12
 #define CMD_emitClipboard 13
+#define CMD_renameSession 14
 
 #define BITS(x,v) ((((v)!=0)<<(x)))
 

@@ -1488,6 +1488,7 @@ void Konsole::activateSession(TESession *s)
      QObject::disconnect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
      QObject::disconnect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
      QObject::disconnect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
+     QObject::disconnect( se->getEmulation(),SIGNAL(renameSession()), this,SLOT(slotRenameSession()) );
      QObject::disconnect( se->getEmulation(),SIGNAL(activateMenu()), this,SLOT(activateMenu()) );
      QObject::disconnect( se->getEmulation(),SIGNAL(moveSessionLeft()), this,SLOT(moveSessionLeft()) );
      QObject::disconnect( se->getEmulation(),SIGNAL(moveSessionRight()), this,SLOT(moveSessionRight()) );
@@ -1537,6 +1538,7 @@ void Konsole::allowPrevNext()
   QObject::connect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
   QObject::connect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
   QObject::connect( se->getEmulation(),SIGNAL(newSession()), this,SLOT(newSession()) );
+  QObject::connect( se->getEmulation(),SIGNAL(renameSession()), this,SLOT(slotRenameSession()) );
   QObject::connect( se->getEmulation(),SIGNAL(activateMenu()), this,SLOT(activateMenu()) );
   QObject::connect( se->getEmulation(),SIGNAL(moveSessionLeft()), this,SLOT(moveSessionLeft()) );
   QObject::connect( se->getEmulation(),SIGNAL(moveSessionRight()), this,SLOT(moveSessionRight()) );

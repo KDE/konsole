@@ -127,6 +127,7 @@
   "key Right +Shift +Control  : moveSessionRight\n"
   "key N +Control +Alt: newSession\n"
   "key M +Control +Alt: activateMenu\n"
+  "key S +Control +Alt: renameSession\n"
   "key Up    +Shift   : scrollLineUp\n"
   "key Prior +Shift   : scrollPageUp\n"
   "key Down  +Shift   : scrollLineDown\n"

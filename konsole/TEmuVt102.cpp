@@ -829,6 +829,7 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
     case CMD_prevSession    : emit prevSession();             return;
     case CMD_nextSession    : emit nextSession();             return;
     case CMD_newSession     : emit newSession();              return;
+    case CMD_renameSession  : emit renameSession();           return;
     case CMD_activateMenu   : emit activateMenu();            return;
     case CMD_moveSessionLeft : emit moveSessionLeft();        return;
     case CMD_moveSessionRight: emit moveSessionRight();       return;

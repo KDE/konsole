@@ -58,6 +58,7 @@ Operations are
   - moveSessionRight: move current session to right, if possible
   - newSession     : create a new session
   - activateMenu   : activate menubar
+  - renameSession  : rename current session
   - scrollUpLine   : scroll up   one line in the history log
   - scrollUpPage   : scroll up   one page in the history log
   - scrollDownLine : scroll down one line in the history log
