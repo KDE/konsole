@@ -747,8 +747,11 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
   >>           // This is a hack, but it works. So there.
 
   NO! this is correct X-On/X-Off behavior. Use Ctrl-Q to release.
-  This is most likely an application or usage problem. I'll remove
-  this section in a bit.
+  This is most likely an application or usage problem. Try Ctrl-S
+  (search) in emacs -nw for an example. Ctrl-S is to cause freeze
+  in the shell. If you experience it elsewhere (e.g. joe), please
+  report the problem to the author of the program.
+  I'll remove this section in a bit.
 */
 
   // revert to non-history when typing
