@@ -1,3 +1,6 @@
+16 Jan 2000
+- added privacy code 1049.
+- reverted to TERM=xterm.
 11 Jan 2000
 - upgraded xterm title hack to unicode.
 - upgraded copy/paste to handle unicode.

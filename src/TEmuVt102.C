@@ -423,6 +423,11 @@ void VT102Emulation::tau( int code, int p, int q )
     case TY_CSI_PR('h', 1048) :      saveCursor           (          ); break; //XTERM
     case TY_CSI_PR('l', 1048) :      restoreCursor        (          ); break; //XTERM
 
+    //FIXME: every once new sequences like this pop up in xterm.
+    //       Here's a guess of what they could mean.
+    case TY_CSI_PR('h', 1049) :          setMode      (MODE_AppScreen); break; //XTERM
+    case TY_CSI_PR('l', 1049) :        resetMode      (MODE_AppScreen); break; //XTERM
+
     //FIXME: when changing between vt52 and ansi mode evtl do some resetting.
     case TY_VT52__('A'      ) : scr->cursorUp             (         1); break; //VT52
     case TY_VT52__('B'      ) : scr->cursorDown           (         1); break; //VT52

@@ -29,6 +29,12 @@
     
     \par FIXME
 
+    NOTE that this module is part of a program and not a dump for
+    obsolete tty interfaces. The opening sequence can be reduced to
+    three or four lines, and, yes, i'll do this on a regular basis.
+    
+    \par FIXME
+
     [NOTE: much of the technical stuff below will be replaced by forkpty.]
 
     publish the SIGCHLD signal if not related to an instance.
@@ -356,11 +362,11 @@ void Shell::makeShell(const char* dev, QStrList & args, const char* term, int lo
   
   if (tt > 2) close(tt);
 
-  // Setup job control
+  // Setup job control ////////////////////////////////// 
 
-  // "There be dragons."
-  //   (Ancient world map)
-  
+  // This is pretty obscure stuff which makes the session
+  // to be the controlling terminal of a process group.
+
   if (setsid() < 0) perror("failed to set process group"); // (vital for bash)
 
 #if defined(TIOCSCTTY)  
