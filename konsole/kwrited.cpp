@@ -7,10 +7,12 @@
 #include <kcmdlineargs.h>
 #include <klocale.h>
 #include <kglobalsettings.h>
-#include "kwrited.h"
 #include <kdebug.h>
 #include <kcrash.h>
 #include <kpty.h>
+#include <kuser.h>
+
+#include "kwrited.h"
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -46,10 +48,7 @@ KWrited::KWrited() : QObject()
 
   pty = new KPty();
   pty->open();
-  const char *user = getlogin();
-  if (!user)
-    user = getenv("LOGNAME");
-  pty->login(user, getenv("DISPLAY"));
+  pty->login(KUser().loginName().latin1(), getenv("DISPLAY"));
   QSocketNotifier *sn = new QSocketNotifier(pty->masterFd(), QSocketNotifier::Read, this);
   connect(sn, SIGNAL(activated(int)), this, SLOT(block_in(int)));
 
