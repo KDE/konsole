@@ -2157,7 +2157,6 @@ KURL Konsole::baseURL() const
 void Konsole::enterURL(const QString& URL, const QString&)
 {
   QString path, login, host, newtext;
-  int i;
 
   if (URL.startsWith("file:")) {
     KURL uglyurl(URL);
@@ -2166,28 +2165,21 @@ void Konsole::enterURL(const QString& URL, const QString&)
     te->emitText("cd "+newtext+"\r");
   }
   else if (URL.contains("://", true)) {
-    i = URL.find("://", 0);
-    newtext = URL.left(i);
-    path = URL.mid(i + 3);
-    /*
-     * Is it protocol://user@host, or protocol://host ?
-     */
-    if (path.contains("@", true)) {
-      i = path.find("@", 0);
-      login = path.left(i);
-      host = path.mid(i + 1);
-      if (!login.isEmpty()) {
-	newtext = newtext + " -l " + login;
-      }
-    } else {
-      host = path;
-    }
-
+    KURL u(URL);
+    newtext = u.protocol();
+    bool isSSH = (newtext == "ssh");
+    if (u.port() && isSSH)
+       newtext += " -p " + QString().setNum(u.port());
+    if (u.hasUser())
+       newtext += " -l " + u.user();
+    
     /*
      * If we have a host, connect.
      */
-    if (!host.isEmpty()) {
-      newtext = newtext + " " + host;
+    if (u.hasHost()) {
+      newtext = newtext + " " + u.host();
+      if (u.port() && !isSSH)
+         newtext += QString(" %1").arg(u.port());
       se->setUserTitle(31,"");           // we don't know remote cwd
       te->emitText(newtext + "\r");
     }
@@ -2647,14 +2639,21 @@ void Konsole::newSession(const QString& sURL, const QString& title)
    }
    else if ((!url.protocol().isEmpty()) && (url.hasHost())) {
      protocol = url.protocol();
+     bool isSSH = (protocol == "ssh");
      args.append( protocol.latin1() ); /* argv[0] == command to run. */
      host = url.host();
+     if (url.port() && isSSH) {
+       args.append("-p");
+       args.append(QCString().setNum(url.port()));
+     }
      if (url.hasUser()) {
        login = url.user();
        args.append("-l");
        args.append(login.latin1());
      }
      args.append(host.latin1());
+     if (url.port() && !isSSH)
+       args.append(QCString().setNum(url.port()));
      newSession( NULL, protocol.latin1() /* protocol */, args /* arguments */,
                  QString::null /*term*/, QString::null /*icon*/,
  	        title.isEmpty() ? path : title /*title*/, QString::null /*cwd*/);
