@@ -77,3 +77,4 @@ GenericName[xx]=xx
 GenericName[zh_CN]=终端程序
 GenericName[zu]=Eyangaphakathi Iprogremu
 X-DCOP-ServiceType=Multi
+X-KDE-AuthorizeAction=shell access
