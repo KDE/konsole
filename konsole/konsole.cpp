@@ -223,6 +223,7 @@ DCOPObject( "konsole" )
   connect( kapp,SIGNAL(backgroundChanged(int)),this, SLOT(slotBackgroundChanged(int)));
 
   no2command.setAutoDelete(true);
+  no2tempFile.setAutoDelete(true);
   no2filename.setAutoDelete(true);
   menubar = menuBar();
 
@@ -307,6 +308,7 @@ Konsole::~Konsole()
     // Delete the session if isn't in the session list any longer.
     sessions.setAutoDelete(true);
 
+    resetScreenSessions();
     if (no2command.isEmpty())
        delete m_defaultSession;
 
@@ -1513,7 +1515,10 @@ QString Konsole::newSession()
 void Konsole::newSession(int i)
 {
   KSimpleConfig* co = no2command.find(i);
-  if (co) newSession(co);
+  if (co) {
+    newSession(co);
+    resetScreenSessions();
+  }
 }
 
 void Konsole::newSessionToolbar(int i)
@@ -1522,6 +1527,7 @@ void Konsole::newSessionToolbar(int i)
   if (co) {
     setDefaultSession(*no2filename.find(i));
     newSession(co);
+    resetScreenSessions();
   }
 }
 
@@ -1910,8 +1916,9 @@ void Konsole::loadSessionCommands()
 
 void Konsole::addScreenSession(const QString &socket)
 {
-  // In-memory only
-  KSimpleConfig *co = new KSimpleConfig(QString::null, true);
+  KTempFile *tmpFile = new KTempFile();
+  tmpFile->setAutoDelete(true);
+  KSimpleConfig *co = new KSimpleConfig(tmpFile->name());
   co->setDesktopGroup();
   co->writeEntry("Name", socket);
   QString txt = i18n("Screen is a program controlling screens!", "Screen at %1").arg(socket);
@@ -1922,6 +1929,7 @@ void Konsole::addScreenSession(const QString &socket)
   m_session->insertItem( SmallIconSet( icon ), txt, cmd_serial, cmd_serial - 1 );
   m_toolbarSessionsCommands->insertItem( SmallIconSet( icon ), txt, cmd_serial );
   no2command.insert(cmd_serial,co);
+  no2tempFile.insert(cmd_serial,tmpFile);
   no2filename.insert(cmd_serial,new QString(""));
 }
 
@@ -1953,6 +1961,13 @@ void Konsole::loadScreenSessions()
     }
     closedir(dir);
   }
+  resetScreenSessions();
+  for (QStringList::ConstIterator it = sessions.begin(); it != sessions.end(); ++it)
+    addScreenSession(*it);
+}
+
+void Konsole::resetScreenSessions()
+{
   if (cmd_first_screen == -1)
     cmd_first_screen = cmd_serial + 1;
   else
@@ -1962,12 +1977,11 @@ void Konsole::loadScreenSessions()
       m_session->removeItem(i);
       m_toolbarSessionsCommands->removeItem(i);
       no2command.remove(i);
+      no2tempFile.remove(i);
       no2filename.remove(i);
     }
     cmd_serial = cmd_first_screen - 1;
   }
-  for (QStringList::ConstIterator it = sessions.begin(); it != sessions.end(); ++it)
-    addScreenSession(*it);
 }
 
 // --| Schema support |-------------------------------------------------------

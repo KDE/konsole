@@ -148,7 +148,7 @@ private slots:
   void slotSelectFont();
   void slotSelectScrollbar();
   void loadScreenSessions();
-  
+
   void slotSaveSettings();
   void slotConfigure();
   void reparseConfiguration();
@@ -180,12 +180,14 @@ private:
   void addSessionCommand(const QString & path);
   void loadSessionCommands();
   void addScreenSession(const QString & socket);
+  void resetScreenSessions();
 
   QPtrDict<TESession> action2session;
   QPtrDict<KRadioAction> session2action;
   QPtrDict<KToolBarButton> session2button;
   QPtrList<TESession> sessions;
   QIntDict<KSimpleConfig> no2command;
+  QIntDict<KTempFile> no2tempFile;
   QIntDict<QString> no2filename;
   KSimpleConfig* m_defaultSession;
   QString m_defaultSessionFilename;
