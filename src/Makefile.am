@@ -32,7 +32,7 @@ kwrited_SOURCES	= kwrited.C
 kwrited_LDADD   = libkonsole.a $(LIB_KIMGIO) $(LIB_KDEUI) $(LIBUTEMPTER)
 kwrited_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
-konsole_SOURCES	= main.C schema.C session.C rootBg.C
+konsole_SOURCES	= main.C schema.C session.C krootpixmap.cpp
 konsole_LDADD   = libkonsole.a $(LIB_KIMGIO) $(LIB_KDEUI) $(LIBUTEMPTER)
 konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
@@ -55,7 +55,8 @@ install-exec-local:
 
 # just to make sure, automake makes them 
 METASOURCES =TEWidget.moc TEmuVt102.moc session.moc main.moc \
-	TEmulation.moc TEShell.moc kcmkonsole.moc kwrited.moc
+	TEmulation.moc TEShell.moc kcmkonsole.moc kwrited.moc \
+	krootpixmap.moc
 
 META_INCLUDES = $(srcdir)/../include
 

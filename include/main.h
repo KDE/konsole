@@ -28,13 +28,12 @@
 #include "TEmuVt102.h"
 #include "session.h"
 #include "schema.h"
-#include "rootBg.h"
 
 
 class QDragEnterEvent;
 class QDropEvent;
 
-class RootPixmap;
+class KRootPixmap;
 
 class TEDemo : public KTMainWindow
 { Q_OBJECT
@@ -55,7 +54,7 @@ private slots:
   void font_menu_activated(int item);
   void schema_menu_activated(int item);
   void size_menu_activated(int item);
-  void pixmap_menu_activated(int item, bool regetbg=true);
+  void pixmap_menu_activated(int item);
   void drop_menu_activated(int item);
   void about();
   void help();
@@ -64,14 +63,10 @@ private slots:
 
   void changeColumns(int);
   void notifySize(int,int);
-  void teChangedSize(int, int);
   void setHeader();
   void changeTitle(int, const char*s);
-  void desktopChange(int);
     
 protected:
-
- virtual void moveEvent ( QMoveEvent * );
 
  void saveProperties(KConfig* config);
  void readProperties(KConfig* config);
@@ -108,8 +103,7 @@ private:
   TEWidget*      te;
   TESession*     se;
 
-  RootPixmap*    rootxpm;
-  bool useTransparency;
+  KRootPixmap*   rootxpm;
 
   KMenuBar*   menubar;
   KStatusBar* statusbar;

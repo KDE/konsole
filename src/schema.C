@@ -40,10 +40,11 @@ ColorSchema* ColorSchema::readSchema(const char* path)
   res->imagepath = "";
   res->alignment = 1;
   res->usetransparency = false;
-  res->tr_r = 0.0;
-  res->tr_g = 0.0;
-  res->tr_b = 0.0;
-  //
+  res->tr_x = 0.0;
+  res->tr_r = 0;
+  res->tr_g = 0;
+  res->tr_b = 0;
+
   while (fscanf(sysin,"%80[^\n]\n",line) > 0)
   {
     if (strlen(line) > 5)
@@ -65,13 +66,15 @@ ColorSchema* ColorSchema::readSchema(const char* path)
         res->alignment = attr;
       }
       if (!strncmp(line,"transparency",12))
-      { float rr, rg, rb;
+      { float rx;
+        int rr, rg, rb;
 
-	// transparency needs 3 parameters, the ratio with which the original pixel
-	// color component is multiplied
-        if (sscanf(line,"transparency %g %g %g",&rr,&rg,&rb) != 3)
+	// Transparency needs 4 parameters: fade strength and the 3
+	// components of the fade color.
+        if (sscanf(line,"transparency %g %d %d %d",&rx,&rr,&rg,&rb) != 4)
           continue;
 	res->usetransparency=true;
+	res->tr_x=rx;
 	res->tr_r=rr;
 	res->tr_g=rg;
 	res->tr_b=rb;
@@ -168,7 +171,8 @@ ColorSchema* ColorSchema::defaultSchema()
   res->imagepath = ""; // background pixmap
   res->alignment = 1;  // none
   res->usetransparency = false; // not use pseudo-transparency by default
-  res->tr_r = res->tr_g = res->tr_b = 0.0; // just to be on the safe side
+  res->tr_r = res->tr_g = res->tr_b = 0; // just to be on the safe side
+  res->tr_x = 0.0;
   for (int i = 0; i < TABLE_COLORS; i++)
     res->table[i] = default_table[i];
   return res;

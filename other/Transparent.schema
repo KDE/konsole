@@ -2,7 +2,7 @@
 
 title Transparent Konsole
 
-transparency 0.5 0.5 0.5
+transparency 0.35 0 0 0
 
 # FIXME
 #

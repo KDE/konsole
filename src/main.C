@@ -64,6 +64,7 @@
 #include <qpainter.h>
 #include <kmenubar.h>
 #include <kmessagebox.h>
+#include <krootpixmap.h>
 
 #include <kimgio.h>
 
@@ -115,12 +116,8 @@ TEDemo::TEDemo(const QString& name, QStrList & _args, int login_shell) : KTMainW
   te = new TEWidget(this);
   te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
 
-  // Transparency routines want to know when te change size ...
-  connect ( te, SIGNAL( changedImageSizeSignal(int,int)),
-		SLOT( teChangedSize(int,int)) );
-
-  // ... and when user change desktop (Antonio) 
-  connect((KWMModuleApplication *)kapp, SIGNAL(desktopChange(int)), SLOT(desktopChange(int)));
+  // Transparency handler ///////////////////////////////////////////////////
+  rootxpm = new KRootPixmap(te);
 
   // create applications /////////////////////////////////////////////////////
 
@@ -487,63 +484,22 @@ void TEDemo::readProperties(KConfig* config)
   defaultSize.setHeight( config->readNumEntry("defaultheight", 0) );
 }
 
-/* --| *Event |------------------------------------------------------------ */
-
-void TEDemo::moveEvent (QMoveEvent *)
-{
-  // Get another area of the background 
-  if ((useTransparency)&&(rootxpm)) rootxpm->setBackgroundPixmap(te);	
-}
-
-void TEDemo::teChangedSize(int, int)
-{
-  // Get another area of the background 
-  if ((useTransparency)&&(rootxpm)) rootxpm->setBackgroundPixmap(te);	
-}
-
-void TEDemo::desktopChange(int d)
-{
-  if ((useTransparency)&&(d==KWM::desktop(winId()))&&(d!=rootxpm->desktopNum()+1))
-	{
-	// The user has changed desktop, it probably has another background,
-	// so we have to re-read it
-	// TODO : This should be optimized for oneDesktopMode (Antonio)
-
-	ColorSchema *s=ColorSchema::find(curr_schema);
-	if (rootxpm) delete rootxpm;
- 	rootxpm=new RootPixmap;
-	rootxpm->prepareBackground(s->tr_r,s->tr_g,s->tr_b);
-	rootxpm->setBackgroundPixmap(te);	
-	return;
-	};
-}
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TEDemo::pixmap_menu_activated(int item, bool regetbg)
+void TEDemo::pixmap_menu_activated(int item)
 {
-  if (useTransparency && regetbg)
-	{
-	// If we want a transparent window, let's get it.
-	ColorSchema *s=ColorSchema::find(curr_schema);
-	if (rootxpm) delete rootxpm;
- 	rootxpm=new RootPixmap;
-	// This is a new schema, so we should prepare the background 
-	// and (perhaps) tint it
-	rootxpm->prepareBackground(s->tr_r,s->tr_g,s->tr_b);
-	// Now, assign an area of the background to the te widget's background pixmap
-	// but we'll let RootPixmap do the dirty work of guessing which part and
-	// copy it
-	rootxpm->setBackgroundPixmap(te);
-	return;
-	};
-
   if (item <= 1) pmPath = "";
   QPixmap pm(pmPath.data());
-  if (pm.isNull()) { pmPath = ""; item = 1; }
+  if (pm.isNull()) { 
+    pmPath = ""; 
+    item = 1; 
+    te->setBackgroundColor(te->getDefaultBackColor());
+    return; 
+  }
   // FIXME: respect scrollbar (instead of te->size)
   n_render= item;
   switch (item)
@@ -716,7 +672,7 @@ void TEDemo::notifySize(int lines, int columns)
   m_size->setItemChecked(2,columns==80&&lines==25);
   m_size->setItemChecked(3,columns==80&&lines==40);
   m_size->setItemChecked(4,columns==80&&lines==52);
-  if (n_render >= 3) pixmap_menu_activated(n_render, false);
+  if (n_render >= 3) pixmap_menu_activated(n_render);
 }
 
 void TEDemo::setHeader()
@@ -954,14 +910,14 @@ void TEDemo::setSchema(const ColorSchema* s)
   pmPath = s->imagepath;
   te->setColorTable(s->table); //FIXME: set twice here to work around a bug
 
-  useTransparency=s->usetransparency;
-  if (useTransparency)
-  {
-      // we want to be notified when the user changes desktop, so let's connect to KWM
-      while (!KWM::isKWMInitialized()) sleep(1);
-      if (!KWM::isKWMModule(winId())) ((KWMModuleApplication *)kapp)->connectToKWM();   
+  if (s->usetransparency && rootxpm->checkAvail(true)) {
+    rootxpm->setFadeEffect(s->tr_x, QColor(s->tr_r, s->tr_g, s->tr_b));
+    rootxpm->start();
+  } else {
+    rootxpm->stop();
+    pixmap_menu_activated(s->alignment);
   }
-  pixmap_menu_activated(s->alignment);
+
   te->setColorTable(s->table);
   if (se) se->setSchemaNo(s->numb);
 }

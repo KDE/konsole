@@ -16,10 +16,8 @@ public:
   int        alignment;
   ColorEntry table[TABLE_COLORS];
   bool       usetransparency;
-  double     tr_r, tr_g, tr_b;  // The ratio with which the pixels color component
-			// is multiplied, i.e. if tr_r = tr_g = tr_b = 0.5, a
-			// pixel as (255,0,32) (a red pixel) will be converted to 
-			// (127,0,16)
+  double     tr_x;
+  int	     tr_r, tr_g, tr_b;
 public:
   static ColorSchema* readSchema(const char* path);
   static ColorSchema* find(const char* path);
