@@ -35,6 +35,7 @@ TESession::TESession(KMainWindow* main, TEWidget* te, const QString &_pgm, QStrL
   em = new TEmuVt102(te);
 
   term = _term;
+  iconName = "openterm";
   iconText = kapp->caption();
 
   //kdDebug(1211)<<"TESession ctor() sh->setSize()"<<endl;
@@ -208,10 +209,20 @@ const QString& TESession::Title()
   return title;
 }
 
+void TESession::setIconName(const QString& _iconName)
+{
+  iconName = _iconName;
+}
+
 void TESession::setIconText(const QString& _iconText)
 {
   iconText = _iconText;
   //kdDebug(1211)<<"Session setIconText " <<  iconText <<endl;
+}
+
+const QString& TESession::IconName()
+{
+  return iconName;
 }
 
 const QString& TESession::IconText()

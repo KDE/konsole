@@ -293,6 +293,7 @@ int main(int argc, char* argv[])
     QString sTitle;
     QString sPgm;
     QString sTerm;
+    QString sIcon;
 
     while (KMainWindow::canBeRestored(n))
     {
@@ -320,7 +321,9 @@ int main(int argc, char* argv[])
           sPgm = sessionconfig->readEntry(key, shell);
           key = QString("Term%1").arg(counter);
           sTerm = sessionconfig->readEntry(key);
-          m->newSession(sPgm, eargs, sTerm);
+          key = QString("Icon%1").arg(counter);
+          sIcon = sessionconfig->readEntry(key,"openterm");
+          m->newSession(sPgm, eargs, sTerm, sIcon);
           m->initSessionTitle(sTitle);
           key = QString("Schema%1").arg(counter);
           m->initSessionSchema(sessionconfig->readNumEntry(key));

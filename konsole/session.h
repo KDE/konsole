@@ -44,6 +44,7 @@ public:
   int fontNo();
   const QString& Term();
   const QString& Title();
+  const QString& IconName();
   const QString& IconText();
   QString fullTitle() const;
   int keymapNo();
@@ -62,6 +63,7 @@ public:
   void setKeymap(const QString& _id);
   void setFontNo(int fn);
   void setTitle(const QString& _title);
+  void setIconName(const QString& _iconName);
   void setIconText(const QString& _iconText);
   void kill(int signal);
 
@@ -100,6 +102,7 @@ private:
   int            font_no;
   QString        title;
   QString        userTitle;
+  QString        iconName;
   QString        iconText; // as set by: echo -en '\033]1;IconText\007
 
   QString        pgm;

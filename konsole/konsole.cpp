@@ -853,6 +853,8 @@ void Konsole::saveProperties(KConfig* config) {
         config->writeEntry(key, sessions.current()->Term());
         key = QString("KeyTab%1").arg(counter);
         config->writeEntry(key, sessions.current()->keymap());
+        key = QString("Icon%1").arg(counter);
+        config->writeEntry(key, sessions.current()->IconName());
         if (sessions.current()==se)
 	  active=counter;
         sessions.next();
@@ -1426,7 +1428,7 @@ void Konsole::addSession(TESession* s)
   //  char buffer[30];
   //  int acc = CTRL+SHIFT+Key_0+session_no; // Lars: keys stolen by kwin.
   KRadioAction *ra = new KRadioAction(newTitle,
-                                     "openterm",
+                                      s->IconName(),
                                       0,
                                       this,
                                       SLOT(activateSession()),
@@ -1562,10 +1564,10 @@ KSimpleConfig *Konsole::defaultSession()
   return m_defaultSession;
 }
 
-void Konsole::newSession(const QString &pgm, const QStrList &args, const QString &term)
+void Konsole::newSession(const QString &pgm, const QStrList &args, const QString &term, const QString &icon)
 {
   KSimpleConfig *co = defaultSession();
-  newSession(co, pgm, args, term);
+  newSession(co, pgm, args, term, icon);
 }
 
 void Konsole::newSession()
@@ -1590,43 +1592,43 @@ void Konsole::newSession(const QString &type)
   newSession(co);
 }
 
-TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &args, const QString &_term)
+TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &args, const QString &_term,const QString &_icon)
 {
   QString emu = "xterm";
+  QString icon = "openterm";
   QString key;
   QString sch = s_kconfigSchema;
   QString txt = s_title;
   unsigned int     fno = n_defaultFont;
   QStrList cmdArgs;
 
-  if (co)
-  {
+  if (co) {
      co->setDesktopGroup();
      emu = co->readEntry("Term", emu);
      key = co->readEntry("KeyTab", key);
      sch = co->readEntry("Schema", sch);
      txt = co->readEntry("Comment", txt);
      fno = co->readUnsignedNumEntry("Font", fno);
+     icon = co->readEntry("Icon", icon);
   }
 
   if (!_term.isEmpty())
      emu = _term;
 
-  if (!program.isEmpty())
-  {
+  if (!_icon.isEmpty())
+     icon = _icon;
+
+  if (!program.isEmpty()) {
      cmdArgs = args;
   }
-  else
-  {
+  else {
      program = QFile::decodeName(konsole_shell(cmdArgs));
 
-     if (co)
-     {
+     if (co) {
         co->setDesktopGroup();
         QString cmd = co->readEntry("Exec");
 
-        if (!cmd.isEmpty())
-        {
+        if (!cmd.isEmpty()) {
           cmdArgs.append("-c");
           cmdArgs.append(QFile::encodeName(cmd));
         }
@@ -1657,6 +1659,7 @@ TESession *Konsole::newSession(KSimpleConfig *co, QString program, const QStrLis
   else
     s->setKeymap(key);
   s->setTitle(txt);
+  s->setIconName(icon);
 
   if (b_histEnabled && m_histSize)
     s->setHistory(HistoryTypeBuffer(m_histSize));
@@ -1845,7 +1848,7 @@ void Konsole::notifySessionState(TESession* session, int state)
     case NOTIFYNORMAL  : if(session->isMasterMode())
                            ktb->setIcon("remote");
                          else
-                           ktb->setIcon("openterm");
+                           ktb->setIcon(session->IconName());
                          break;
     case NOTIFYBELL    : ktb->setIcon("bell");
                          break;
@@ -2041,7 +2044,7 @@ void Konsole::slotRenameSession() {
   if (dlg.exec()) {
     se->setTitle(dlg.text());
     ra->setText(dlg.text());
-    ra->setIcon("openterm"); // I don't know why it is needed here
+    ra->setIcon( se->IconName() ); // I don't know why it is needed here
     if(se->isMasterMode())
       session2button.find(se)->setIcon("remote");
     toolBar()->updateRects();
@@ -2058,7 +2061,7 @@ void Konsole::renameCurrentSession(const QString &name)
   KRadioAction *ra = session2action.find(se);
   se->setTitle(name);
   ra->setText(name);
-  ra->setIcon("openterm"); // I don't know why it is needed here
+  ra->setIcon( se->IconName() ); // I don't know why it is needed here
   if(se->isMasterMode())
     session2button.find(se)->setIcon("remote");
   toolBar()->updateRects();
@@ -2070,7 +2073,7 @@ void Konsole::initSessionTitle(const QString &_title) {
 
   se->setTitle(_title);
   ra->setText(_title);
-  ra->setIcon("openterm"); // I don't know why it is needed here
+  ra->setIcon( se->IconName() ); // I don't know why it is needed here
   toolBar()->updateRects();
   updateTitle();
 }

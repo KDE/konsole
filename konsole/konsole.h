@@ -66,7 +66,7 @@ public:
   void initSessionFont(int fontNo);
   void initSessionTitle(const QString &_title);
   void initSessionKeyTab(const QString &keyTab);
-  void newSession(const QString &program, const QStrList &args, const QString &term);
+  void newSession(const QString &program, const QStrList &args, const QString &term, const QString &icon);
 
   void run();
 
@@ -151,7 +151,7 @@ private slots:
 
 private:
   KSimpleConfig *defaultSession();
-  TESession *newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(), const QString &_term = QString::null);
+  TESession *newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(), const QString &_term = QString::null, const QString &_icon = QString::null);
   void readProperties(KConfig *config, const QString &schema);
   void applySettingsToGUI();
   void makeBasicGUI();
