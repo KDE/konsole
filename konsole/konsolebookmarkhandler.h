@@ -4,10 +4,11 @@
 #define KONSOLEBOOKMARKHANDLER_H
 
 #include <kbookmarkmanager.h>
-#include <kbookmarkmenu.h>
+#include <konsolebookmarkmenu.h>
 
 class QTextStream;
 class KPopupMenu;
+class KonsoleBookmarkMenu;
 
 class KonsoleBookmarkHandler : public QObject, public KBookmarkOwner
 {
@@ -19,13 +20,14 @@ public:
     QPopupMenu * popupMenu();
 
     // KBookmarkOwner interface:
-    virtual void openBookmarkURL( const QString& url ) { emit openURL( url ); }
+    virtual void openBookmarkURL( const QString& url, const QString& title )
+                                { emit openURL( url, title ); }
     virtual QString currentURL() const;
 
     KPopupMenu *menu() const { return m_menu; }
 
 signals:
-    void openURL( const QString& url );
+    void openURL( const QString& url, const QString& title );
 
 private slots:
     // for importing
@@ -42,8 +44,8 @@ private:
 
     Konsole *m_konsole;
     KPopupMenu *m_menu;
-    KBookmarkMenu *m_bookmarkMenu;
-
+    KonsoleBookmarkMenu *m_bookmarkMenu;
+    
     QTextStream *m_importStream;
 
 protected:

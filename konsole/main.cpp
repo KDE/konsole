@@ -36,8 +36,8 @@ static const char *description =
 //   { "T <title>",       0, 0 },
 static KCmdLineOptions options[] =
 {
-   { "name <name>",  I18N_NOOP("Set window class"), 0 },
-   { "ls",    I18N_NOOP("Start login shell"), 0 },
+   { "name <name>",     I18N_NOOP("Set window class"), 0 },
+   { "ls",              I18N_NOOP("Start login shell"), 0 },
    { "T <title>",       I18N_NOOP("Set the window title"), 0 },
    { "tn <terminal>",   I18N_NOOP("Specify terminal type as set in the TERM\nenvironment variable"), "xterm" },
    { "xwin",            I18N_NOOP("ignored"), 0 },
@@ -47,15 +47,16 @@ static KCmdLineOptions options[] =
    { "noframe",         I18N_NOOP("Do not display frame"), 0 },
    { "noscrollbar",     I18N_NOOP("Do not display scrollbar"), 0 },
    { "noxft",           I18N_NOOP("Do not use XFT (Anti-Aliasing)"), 0 },
-   { "vt_sz CCxLL",  I18N_NOOP("Terminal size in columns x lines"), 0 },
-   { "type <type>", I18N_NOOP("Open the given session type instead of the default shell"), 0 },
-   { "keytab <name>", I18N_NOOP("Use given .keytab file"), 0 },
-   { "profile <name>", I18N_NOOP("Start with given sessions profile"), 0 },
-   { "schema <name>", I18N_NOOP("Use given .schema file"), 0 },
-   { "workdir <dir>", I18N_NOOP("Change working directory of the konsole to 'dir'"), 0 },
-   { "!e <command>",  I18N_NOOP("Execute 'command' instead of shell"), 0 },
+   { "vt_sz CCxLL",     I18N_NOOP("Terminal size in columns x lines"), 0 },
+   { "type <type>",     I18N_NOOP("Open the given session type instead of the default shell"), 0 },
+   { "keytab <name>",   I18N_NOOP("Use given .keytab file"), 0 },
+   { "profile <name>",  I18N_NOOP("Start with given sessions profile"), 0 },
+   { "schema <name>",   I18N_NOOP("Use given .schema file"), 0 },
+   { "workdir <dir>",   I18N_NOOP("Change working directory of the konsole to 'dir'"), 0 },
+   { "url <url>",       I18N_NOOP("Open 'url' instead of shell"), 0 },
+   { "!e <command>",    I18N_NOOP("Execute 'command' instead of shell"), 0 },
    // WABA: All options after -e are treated as arguments.
-   { "+[args]",    I18N_NOOP("Arguments for 'command'"), 0 },
+   { "+[args]",         I18N_NOOP("Arguments for 'command'"), 0 },
    { 0, 0, 0 }
 };
 
@@ -236,6 +237,15 @@ int main(int argc, char* argv[])
      }
   }
 
+  QString url;
+  if(args->isSet("url")) {
+      if (args->isSet("ls") || args->isSet("e"))
+          KCmdLineArgs::usage(i18n("You can't use -url and -ls or -e.\n"));
+      url = QString::fromLatin1(args->getOption("url"));
+      if (title.isEmpty())
+          title = url;
+  }
+
   QCString sz = "";
   sz = args->getOption("vt_sz");
   histon = args->isSet("hist");
@@ -332,7 +342,7 @@ int main(int argc, char* argv[])
         sTerm = sessionconfig->readEntry("Term0");
         sIcon = sessionconfig->readEntry("Icon0","openterm");
         sCwd = sessionconfig->readEntry("Cwd0");
-        Konsole *m = new Konsole(wname,sPgm,eargs,histon,menubaron,toolbaron,frameon,scrollbaron,sIcon,sTitle,0/*type*/,sTerm,true,sCwd);
+        Konsole *m = new Konsole(wname,sPgm,eargs,histon,menubaron,toolbaron,frameon,scrollbaron,sIcon,sTitle,QString::null,0/*type*/,sTerm,true,sCwd);
 	m->restore(n);
         m->makeGUI();
         m->setSchema(sessionconfig->readEntry("Schema0"));
@@ -391,7 +401,7 @@ int main(int argc, char* argv[])
   }
   else
   {
-    Konsole*  m = new Konsole(wname,(shell ? QFile::decodeName(shell) : QString::null),eargs,histon,menubaron,toolbaron,frameon,scrollbaron,QString::null,title,type,term);
+    Konsole*  m = new Konsole(wname,(shell ? QFile::decodeName(shell) : QString::null),eargs,histon,menubaron,toolbaron,frameon,scrollbaron,QString::null,title,url,type,term);
     //3.8 :-(
     //exit(0);
 

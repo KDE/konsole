@@ -171,7 +171,7 @@ const char *fonts[] = {
 
 Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, int histon,
                  bool menubaron, bool toolbaron, bool frameon, bool scrollbaron, const QString &_icon,
-                 const QString &_title, QCString type, const QString &_term, bool b_inRestore,
+                 const QString &_title, const QString &_url, QCString type, const QString &_term, bool b_inRestore,
                  const QString &_cwd)
 :KMainWindow(0, name),
 DCOPObject( "konsole" )
@@ -311,7 +311,10 @@ DCOPObject( "konsole" )
   // activate and run first session //////////////////////////////////////////
   // FIXME: this slows it down if --type is given, but prevents a crash (malte)
   //KONSOLEDEBUG << "Konsole pgm: " << _program << endl;
-  newSession(co, _program, _args, _term, _icon, _title, _cwd);
+  if (_url.isEmpty())
+    newSession(co, _program, _args, _term, _icon, _title, _cwd);
+  else
+    newSession(_url, _title);
 
   //KONSOLEDEBUG<<"Konsole ctor() ends "<<time.elapsed()<<" msecs elapsed"<<endl;
 
@@ -449,10 +452,10 @@ void Konsole::makeGUI()
    if (ra!=0) ra->plug(m_view);
 
    //bookmarks menu
-   connect( bookmarkHandler, SIGNAL( openURL( const QString& )),
-            SLOT( enterURL( const QString& )));
-   connect( bookmarkHandlerSession, SIGNAL( openURL( const QString& )),
-            SLOT( newURLSession( const QString& )));
+   connect( bookmarkHandler, SIGNAL( openURL( const QString&, const QString& )),
+            SLOT( enterURL( const QString&, const QString& )));
+   connect( bookmarkHandlerSession, SIGNAL( openURL( const QString&, const QString& )),
+            SLOT( newSession( const QString&, const QString& )));
    connect(m_bookmarks, SIGNAL(aboutToShow()), SLOT(bookmarks_menu_check()));
    connect(m_bookmarksSession, SIGNAL(aboutToShow()), SLOT(bookmarks_menu_check()));
 
@@ -1509,7 +1512,7 @@ KURL Konsole::baseURL() const
    return url;
 }
 
-void Konsole::enterURL(const QString& URL)
+void Konsole::enterURL(const QString& URL, const QString&)
 {
   QString path, login, host, newtext;
   int i;
@@ -1941,55 +1944,38 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
 /*
  * Starts a new session based on URL.
  */
-void Konsole::newURLSession(const QString& URL)
+void Konsole::newSession(const QString& sURL, const QString& title)
 {
-  QStrList args;
-  QString protocol, path, login, host;
-  int i;
+   QStrList args;
+   QString protocol, path, login, host;
 
-
-  if (URL.startsWith("file:")) {
-    KSimpleConfig *co = no2command.find(1);
-    path = URL.mid(5);
-    newSession(co, QString::null, QStrList(), QString::null, QString::null,
-               QString::null, path);
-    return;
-  }
-  else if (URL.contains("://", true)) {
-    i = URL.find("://", 0);
-    protocol = URL.left(i);
-    args.append( protocol.latin1() ); /* argv[0] == command to run. */
-    path = URL.mid(i + 3);
-    /*
-     * Is it protocol://user@host, or protocol://host ?
-     */
-    if (path.contains("@", true)) {
-      i = path.find("@", 0);
-      login = path.left(i);
-      host = path.mid(i + 1);
-      if (!login.isEmpty()) {
-        args.append("-l");
-	args.append(login.latin1());
-      }
-    } else {
-      host = path;
-    }
-
-    /*
-     * If we have a host, connect.
-     */
-    if (!host.isEmpty()) {
-      args.append(host.latin1());
-      newSession(NULL, protocol.latin1() /* protocol */, args /* arguments */,
-	         QString::null /*term*/, QString::null /*icon*/,
-	         path /*title*/, QString::null /*cwd*/);
-      return;
-    }
-  }
-  /*
-   * We can't create a session without a protocol.
-   * We should ideally popup a warning.
-   */
+   KURL url = KURL(sURL);
+   if ((url.protocol() == "file") && (url.hasPath())) {
+     KSimpleConfig *co = defaultSession();
+     path = url.path();
+     newSession(co, QString::null, QStrList(), QString::null, QString::null,
+                title.isEmpty() ? path : title, path);
+     return;
+   }
+   else if ((!url.protocol().isEmpty()) && (url.hasHost())) {
+     protocol = url.protocol();
+     args.append( protocol.latin1() ); /* argv[0] == command to run. */
+     host = url.host();
+     if (url.hasUser()) {
+       login = url.user();
+       args.append("-l");
+       args.append(login.latin1());
+     }
+     args.append(host.latin1());
+     newSession( NULL, protocol.latin1() /* protocol */, args /* arguments */,
+                 QString::null /*term*/, QString::null /*icon*/,
+ 	        title.isEmpty() ? path : title /*title*/, QString::null /*cwd*/);
+     return;
+   }
+   /*
+    * We can't create a session without a protocol.
+    * We should ideally popup a warning.
+    */
 }
 
 void Konsole::closeCurrentSession()
@@ -2008,7 +1994,7 @@ void Konsole::doneChild(KonsoleChild* child, TESession* session)
 //       this routine might be called before
 //       session swap is completed.
 
-void Konsole::doneSession(TESession* s, int status)
+void Konsole::doneSession(TESession* s, int)
 {
 // qWarning("Konsole::doneSession(): Exited:%d ExitStatus:%d\n", WIFEXITED(status),WEXITSTATUS(status));
 #if 0 // die silently

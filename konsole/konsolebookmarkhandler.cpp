@@ -12,6 +12,7 @@
 #include <kstandarddirs.h>
 
 #include "konsole.h"
+#include "konsolebookmarkmenu.h"
 #include "konsolebookmarkhandler.h"
 
 KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel )
@@ -41,10 +42,10 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel 
              SLOT( slotBookmarksChanged(const QString &, const QString &) ) );
 
     if (toplevel) {
-        m_bookmarkMenu = new KBookmarkMenu( manager, this, m_menu,
+        m_bookmarkMenu = new KonsoleBookmarkMenu( manager, this, m_menu,
                                             konsole->actionCollection(), true );
     } else {
-        m_bookmarkMenu = new KBookmarkMenu( manager, this, m_menu,
+        m_bookmarkMenu = new KonsoleBookmarkMenu( manager, this, m_menu,
                                             NULL, false /* Not toplevel */
 					    ,false      /* No 'Add Bookmark' */);
     }
