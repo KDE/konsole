@@ -52,10 +52,10 @@ signals:
 public:
 
   virtual void onRcvByte(int);
-  virtual void setMode  (int) = NULL;
-  virtual void resetMode(int) = NULL;
+  virtual void setMode  (int) = 0;
+  virtual void resetMode(int) = 0;
 
-  virtual void sendString(const char*) = NULL;
+  virtual void sendString(const char*) = 0;
 
 public:
 

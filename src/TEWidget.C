@@ -255,7 +255,7 @@ HCNT("setImage");
   
   int lins = MIN(this->lines,  MAX(0,lines  ));
   int cols = MIN(this->columns,MAX(0,columns));
-  char disstr[cols];
+  char *disstr = new char[cols];
 
 //{ static int cnt = 0; printf("setImage %d\n",cnt++); }
   for (y = 0; y < lins; y++)
@@ -294,6 +294,7 @@ HCNT("setImage");
   setUpdatesEnabled(TRUE);
   if ( hasBlinker && !blinkT->isActive()) blinkT->start(1000); // 1000 ms
   if (!hasBlinker &&  blinkT->isActive()) { blinkT->stop(); blinking = FALSE; }
+  delete disstr;
 }
 
 // paint Event ////////////////////////////////////////////////////
@@ -341,7 +342,8 @@ HCNT("paintEvent");
 
   for (int y = luy; y <= rly; y++)
   for (int x = lux; x <= rlx; x++)
-  { char disstr[columns]; int len = 1;
+  char *disstr = 0;
+  { disstr = char char[columns]; int len = 1;
     disstr[0] = image[loc(x,y)].c; 
     int cf = image[loc(x,y)].f;
     int cb = image[loc(x,y)].b;
@@ -358,6 +360,7 @@ HCNT("paintEvent");
                 disstr, len, image[loc(x,y)], pm != NULL);
     x += len - 1;
   }
+  delete disstr;
   drawFrame( &paint );
   paint.end();
   setUpdatesEnabled(TRUE);

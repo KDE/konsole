@@ -164,7 +164,7 @@ void Emulation::onSelectionExtend(const int x, const int y) {
   showBulk();
 }
 
-void Emulation::setSelection(int preserve_line_breaks) {
+void Emulation::setSelection(const BOOL preserve_line_breaks) {
   if (!connected) return;
   char *t = scr->getSelText(preserve_line_breaks);
   if (t != NULL ) {

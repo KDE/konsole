@@ -495,10 +495,11 @@ void VT102Emulation::XtermHack()
   for (i = 2; i < ppos && '0'<=pbuf[i] && pbuf[i]<'9' ; i++)
     arg = 10*arg + (pbuf[i]-'0');
   if (pbuf[i] != ';') { ReportErrorToken(); return; }
-  char str[ppos-i-1];
+  char *str = new char[ppos-i-1];
   strncpy(str,(char*)pbuf+i+1,ppos-i-2);
   str[ppos-i-2]='\0';
   if (arg <= 2) emit changeTitle(arg,str);
+  delete str;
 }
 
 /* ------------------------------------------------------------------------- */
