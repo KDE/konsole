@@ -29,7 +29,7 @@
     and then larger again.
   - introduce the concept of "logical lines" for resizing and
     cut'n'paste.
-  - selecting lines that wraps insert a '\n' in the middle of the
+  - selecting lines that wrap insert a '\n' in the middle of the
     line when pasting. A related problem occures with resizing.
 
 * write configuration utility for configuration files.

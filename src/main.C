@@ -810,13 +810,11 @@ void Konsole::setFullScreen(bool on)
   if (on == b_fullscreen) return;
   if (on)
   {
-HERE;
     _saveGeometry = geometry();
     setGeometry(kapp->desktop()->geometry());
   }
   else
   {
-HERE;
     setGeometry(_saveGeometry);
   }
   b_fullscreen = on;

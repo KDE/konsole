@@ -6,8 +6,8 @@ CONTRIBUTORS. See ChangeLog also
   - improved/fixed selections
 - Lotzi Boloni <boloni@cs.purdue.edu>
   - Fast switch between sessions with the same schema.
-  -Toolbar for switch between sessions
-  -Renaming sessions
+  - Toolbar for switch between sessions
+  - Renaming sessions
 - Matthias Ettrich <ettrich@kde.org>
   - most of main.C donated via kvt.
   - rework of the session management
