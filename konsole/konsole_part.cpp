@@ -148,6 +148,7 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
 ,rootxpm(0)
 ,blinkingCursor(0)
 ,showFrame(0)
+,m_useKonsoleSettings(0)
 ,selectBell(0)
 ,selectLineSpacing(0)
 ,selectScrollbar(0)
@@ -156,6 +157,7 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
 ,m_signals(0)
 ,m_options(0)
 ,m_popupMenu(0)
+,b_useKonsoleSettings(false)
 ,m_histSize(DEFAULT_HISTORY_SIZE)
 ,m_runningShell( false )
 {
@@ -187,6 +189,12 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   colors = new ColorSchemaList();
   colors->checkSchemas();
   colors->sort();
+
+  // Check to see which config file we use: konsolepartrc or konsolerc
+  KConfig* config = new KConfig("konsolepartrc", true);
+  config->setDesktopGroup();
+  b_useKonsoleSettings = config->readBoolEntry("use_konsole_settings", false);
+  delete config;
 
   readProperties();
 
@@ -325,7 +333,8 @@ void konsolePart::makeGUI()
   if (!kapp->authorizeKAction("konsole_rmb"))
      return;
 
-  KActionCollection* actions = new KActionCollection(this);
+  actions = new KActionCollection( (KMainWindow*)parentWidget );
+  settingsActions = new KActionCollection( (KMainWindow*)parentWidget );
 
   // Send Signal Menu -------------------------------------------------------------
   if (kapp->authorizeKAction("send_signal"))
@@ -349,7 +358,7 @@ void konsolePart::makeGUI()
 
      // Scrollbar
      selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), 0, this,
-                                      SLOT(slotSelectScrollbar()), actions);
+                                      SLOT(slotSelectScrollbar()), settingsActions);
 
      QStringList scrollitems;
      scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
@@ -359,7 +368,7 @@ void konsolePart::makeGUI()
      // Select Bell
      m_options->insertSeparator();
      selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), 0 , this,
-                                 SLOT(slotSelectBell()), actions, "bell");
+                                 SLOT(slotSelectBell()), settingsActions, "bell");
 
      QStringList bellitems;
      bellitems << i18n("System &Bell")
@@ -369,17 +378,14 @@ void konsolePart::makeGUI()
      selectBell->setItems(bellitems);
      selectBell->plug(m_options);
 
-     KPopupMenu* m_fontsizes = new KPopupMenu( (KMainWindow*)parentWidget );
-     m_fontsizes->insertItem( SmallIconSet( "viewmag+" ), i18n( "&Enlarge Font" ), 0 );
-     m_fontsizes->insertItem( SmallIconSet( "viewmag-" ), i18n( "&Shrink Font"), 1 );
-     m_fontsizes->insertSeparator( );
-     m_fontsizes->insertItem( SmallIconSet( "font" ), i18n( "Se&lect..." ), 3 );
-     m_options->insertItem( SmallIconSet( "text" ), i18n("Font"), m_fontsizes );
-
-     connect(m_fontsizes, SIGNAL(activated(int)), SLOT(slotSelectFont(int)));
+      m_fontsizes = new KActionMenu( i18n( "Font" ), SmallIconSet( "text" ), settingsActions, 0L );
+      m_fontsizes->insert( new KAction( i18n( "&Enlarge Font" ), SmallIconSet( "viewmag+" ), 0, this, SLOT( biggerFont() ), settingsActions, "enlarge_font" ) );
+      m_fontsizes->insert( new KAction( i18n( "&Shrink Font" ), SmallIconSet( "viewmag-" ), 0, this, SLOT( smallerFont() ), settingsActions, "shrink_font" ) );
+      m_fontsizes->insert( new KAction( i18n( "Se&lect..." ), SmallIconSet( "font" ), 0, this, SLOT( slotSelectFont() ), settingsActions, "select_font" ) );
+      m_fontsizes->plug(m_options);
 
       // encoding menu, start with default checked !
-      selectSetEncoding = new KSelectAction( i18n( "&Encoding" ), SmallIconSet("charset" ), 0, this, SLOT(slotSetEncoding()), actions, "set_encoding" );
+      selectSetEncoding = new KSelectAction( i18n( "&Encoding" ), SmallIconSet("charset" ), 0, this, SLOT(slotSetEncoding()), settingsActions, "set_encoding" );
       QStringList list = KGlobal::charsets()->descriptiveEncodingNames();
       list.prepend( i18n( "Default" ) );
       selectSetEncoding->setItems(list);
@@ -407,24 +413,16 @@ void konsolePart::makeGUI()
 
 
      KAction *historyType = new KAction(i18n("&History..."), "history", 0, this,
-                                        SLOT(slotHistoryType()), actions, "history");
+                                        SLOT(slotHistoryType()), settingsActions, "history");
      historyType->plug(m_options);
      m_options->insertSeparator();
 
      // Select line spacing
-     selectLineSpacing =
-       new KSelectAction
-       (
-        i18n("Li&ne Spacing"),
-        SmallIconSet("leftjust"), // Non-code hack.
-        0,
-        this,
-        SLOT(slotSelectLineSpacing()),
-        this
-       );
+     selectLineSpacing = new KSelectAction(i18n("Li&ne Spacing"),
+        SmallIconSet("leftjust"), 0, this,
+        SLOT(slotSelectLineSpacing()), settingsActions );
 
      QStringList lineSpacingList;
-
      lineSpacingList
        << i18n("&0")
        << i18n("&1")
@@ -435,25 +433,30 @@ void konsolePart::makeGUI()
        << i18n("&6")
        << i18n("&7")
        << i18n("&8");
-
      selectLineSpacing->setItems(lineSpacingList);
      selectLineSpacing->plug(m_options);
 
      // Blinking Cursor
      blinkingCursor = new KToggleAction (i18n("Blinking &Cursor"),
-                                      0, this,SLOT(slotBlinkingCursor()), actions);
+                                      0, this,SLOT(slotBlinkingCursor()), settingsActions);
      blinkingCursor->plug(m_options);
 
      // Frame on/off
      showFrame = new KToggleAction(i18n("Show Fr&ame"), 0,
-                                this, SLOT(slotToggleFrame()), actions);
+                                this, SLOT(slotToggleFrame()), settingsActions);
      showFrame->setCheckedState(i18n("Hide Fr&ame"));
      showFrame->plug(m_options);
 
      // Word Connectors
      KAction *WordSeps = new KAction(i18n("Wor&d Connectors..."), 0, this,
-                                  SLOT(slotWordSeps()), actions);
+                                  SLOT(slotWordSeps()), settingsActions);
      WordSeps->plug(m_options);
+
+     // Use Konsole's Settings
+     m_options->insertSeparator();
+     m_useKonsoleSettings = new KToggleAction( i18n("&Use Konsole's Settings"),
+                          0, this, SLOT(slotUseKonsoleSettings()), 0, "use_konsole_settings" );
+     m_useKonsoleSettings->plug(m_options);
 
      // Save Settings
      m_options->insertSeparator();
@@ -499,6 +502,14 @@ void konsolePart::makeGUI()
 
 void konsolePart::applySettingsToGUI()
 {
+  m_useKonsoleSettings->setChecked( b_useKonsoleSettings );
+  setSettingsMenuEnabled( !b_useKonsoleSettings );
+
+  applyProperties();
+
+  if ( b_useKonsoleSettings )
+    return; // Don't change Settings menu items
+
   if (showFrame)
      showFrame->setChecked( b_framevis );
   if (selectScrollbar)
@@ -516,9 +527,52 @@ void konsolePart::applySettingsToGUI()
      selectSetEncoding->setCurrentItem(n_encoding);
 }
 
+void konsolePart::applyProperties()
+{
+   if ( !se ) return;
+
+   if ( b_histEnabled && m_histSize )
+      se->setHistory( HistoryTypeBuffer(m_histSize ) );
+   else if ( b_histEnabled && !m_histSize )
+      se->setHistory(HistoryTypeFile() );
+   else
+     se->setHistory( HistoryTypeNone() );
+   se->setKeymapNo( n_keytab );
+
+   // FIXME:  Move this somewhere else...
+   KConfig* config = new KConfig("konsolerc",true);
+   config->setGroup("UTMP");
+   se->setAddToUtmp( config->readBoolEntry("AddToUtmp",true));
+   delete config;
+
+   se->widget()->setVTFont( defaultFont );
+   se->setSchemaNo( curr_schema );
+   slotSetEncoding();
+}
+
+void konsolePart::setSettingsMenuEnabled( bool enable )
+{
+   uint count = settingsActions->count();
+   for ( uint i = 0; i < count; i++ )
+   {
+      settingsActions->action( i )->setEnabled( enable );
+   }
+
+   // FIXME: These are not in settingsActions.
+   //  When disabled, the icons are not 'grey-ed' out.
+   m_keytab->setEnabled( enable );
+   m_schema->setEnabled( enable );
+}
+
 void konsolePart::readProperties()
 {
-  KConfig* config = new KConfig("konsolepartrc",true);
+  KConfig* config;
+
+  if ( b_useKonsoleSettings )
+    config = new KConfig( "konsolerc", true );
+  else
+    config = new KConfig( "konsolepartrc", true );
+
   config->setDesktopGroup();
 
   b_framevis = config->readBoolEntry("has frame",false);
@@ -584,18 +638,23 @@ void konsolePart::saveProperties()
   KConfig* config = new KConfig("konsolepartrc");
   config->setDesktopGroup();
 
-  config->writeEntry("bellmode",n_bell);
-  config->writeEntry("BlinkingCursor", te->blinkingCursor());
-  config->writeEntry("defaultfont", (se->widget())->getVTFont());
-  config->writeEntry("history", se->history().getSize());
-  config->writeEntry("historyenabled", b_histEnabled);
-  config->writeEntry("keytab",n_keytab);
-  config->writeEntry("has frame",b_framevis);
-  config->writeEntry("LineSpacing", te->lineSpacing());
-  config->writeEntry("schema",s_kconfigSchema);
-  config->writeEntry("scrollbar",n_scroll);
-  config->writeEntry("wordseps",s_word_seps);
-  config->writeEntry("encoding",n_encoding);
+  if ( b_useKonsoleSettings ) { // Don't save Settings if using konsolerc
+    config->writeEntry("use_konsole_settings", m_useKonsoleSettings->isChecked());
+  } else {
+    config->writeEntry("bellmode",n_bell);
+    config->writeEntry("BlinkingCursor", te->blinkingCursor());
+    config->writeEntry("defaultfont", (se->widget())->getVTFont());
+    config->writeEntry("history", se->history().getSize());
+    config->writeEntry("historyenabled", b_histEnabled);
+    config->writeEntry("keytab",n_keytab);
+    config->writeEntry("has frame",b_framevis);
+    config->writeEntry("LineSpacing", te->lineSpacing());
+    config->writeEntry("schema",s_kconfigSchema);
+    config->writeEntry("scrollbar",n_scroll);
+    config->writeEntry("wordseps",s_word_seps);
+    config->writeEntry("encoding",n_encoding);
+    config->writeEntry("use_konsole_settings",m_useKonsoleSettings->isChecked());
+  }
 
   config->sync();
   delete config;
@@ -624,21 +683,14 @@ void konsolePart::slotSelectScrollbar()
   te->setScrollbarLocation(n_scroll);
 }
 
-void konsolePart::slotSelectFont( int option ) {
+void konsolePart::slotSelectFont() {
    if ( !se ) return;
 
-   if ( option == 0 )            // Enlarge
-      biggerFont();
-   else if ( option == 1 )       // Shrink
-      smallerFont();
-   else {                        // Select Font...
+   QFont font = se->widget()->getVTFont();
+   if ( KFontDialog::getFont( font, true ) != QDialog::Accepted )
+      return;
 
-      QFont font = se->widget()->getVTFont();
-      if ( KFontDialog::getFont( font, true ) != QDialog::Accepted )
-         return;
-
-      se->widget()->setVTFont( font );
-   }
+   se->widget()->setVTFont( font );
 }
 
 void konsolePart::biggerFont(void) {
@@ -867,6 +919,17 @@ void konsolePart::slotBlinkingCursor()
   te->setBlinkingCursor(blinkingCursor->isChecked());
 }
 
+void konsolePart::slotUseKonsoleSettings()
+{
+   b_useKonsoleSettings = m_useKonsoleSettings->isChecked();
+
+   setSettingsMenuEnabled( !b_useKonsoleSettings );
+
+   readProperties();
+
+   applySettingsToGUI();
+}
+
 void konsolePart::slotWordSeps() {
   bool ok;
 
@@ -1034,22 +1097,9 @@ void konsolePart::startProgram( const QString& program,
   //connect( se, SIGNAL(disableMasterModeConnections()),
   //        this, SLOT(disableMasterModeConnections()) );
 
-  if (b_histEnabled && m_histSize)
-    se->setHistory(HistoryTypeBuffer(m_histSize));
-  else if (b_histEnabled && !m_histSize)
-    se->setHistory(HistoryTypeFile());
-  else
-    se->setHistory(HistoryTypeNone());
-  se->setKeymapNo(n_keytab);
-  KConfig* config = new KConfig("konsolerc",true);
-  config->setGroup("UTMP");
-  se->setAddToUtmp( config->readBoolEntry("AddToUtmp",true));
-  delete config;
+  applyProperties();
 
   se->setConnect(true);
-  se->widget()->setVTFont(defaultFont);
-  se->setSchemaNo(curr_schema);
-  slotSetEncoding();
   se->run();
   connect( se, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
 //  setFont( n_font ); // we do this here, to make TEWidget recalculate

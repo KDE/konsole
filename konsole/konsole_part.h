@@ -37,6 +37,7 @@ class konsoleBrowserExtension;
 class QPushButton;
 class QSpinBox;
 class KPopupMenu;
+class KActionMenu;
 class QCheckBox;
 class KRootPixmap;
 class KToggleAction;
@@ -97,6 +98,8 @@ signals:
 
     void readProperties();
     void saveProperties();
+    void applyProperties();
+    void setSettingsMenuEnabled( bool );
 
     void sendSignal(int n);
     void closeCurrentSession();
@@ -105,7 +108,7 @@ signals:
 
     void slotToggleFrame();
     void slotSelectScrollbar();
-    void slotSelectFont(int);
+    void slotSelectFont();
     void schema_menu_check();
     void keytab_menu_activated(int item);
     void updateSchemaMenu();
@@ -116,6 +119,7 @@ signals:
     void slotSelectBell();
     void slotSelectLineSpacing();
     void slotBlinkingCursor();
+    void slotUseKonsoleSettings();
     void slotWordSeps();
     void slotSetEncoding();
     void biggerFont();
@@ -141,13 +145,19 @@ signals:
     ColorSchemaList* colors;
     KRootPixmap* rootxpm;
 
+    KActionCollection* actions;
+    KActionCollection* settingsActions;
+
     KToggleAction* blinkingCursor;
     KToggleAction* showFrame;
+    KToggleAction* m_useKonsoleSettings;
 
     KSelectAction* selectBell;
     KSelectAction* selectLineSpacing;
     KSelectAction* selectScrollbar;
     KSelectAction* selectSetEncoding;
+
+    KActionMenu* m_fontsizes;
 
     KPopupMenu* m_keytab;
     KPopupMenu* m_schema;
@@ -164,6 +174,7 @@ signals:
 
     bool        b_framevis:1;
     bool        b_histEnabled:1;
+    bool        b_useKonsoleSettings:1;
 
     int         curr_schema; // current schema no
     int         n_bell;
