@@ -16,6 +16,7 @@ Comment[es]=Consola Root
 Comment[fr]=Console administrateur
 Comment[is]=Skjáhermir ofurpaurs
 Comment[it]=Console di Root
+Comment[pl]=Konsola administratora
 Comment[pt_BR]=Console Raiz
 Comment[sk]=Rootovská konzola
 Exec=su
