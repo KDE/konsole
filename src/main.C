@@ -378,7 +378,6 @@ void TEDemo::scrollbar_menu_activated(int item)
 void TEDemo::font_menu_activated(int item)
 {
   assert(se);
-  n_font = item;
   se->setFontNo(item);
   activateSession((int)session2no.find(se)); // for attribute change
 }
@@ -406,7 +405,7 @@ void TEDemo::setFont(int fontno)
     te->setVTFont(f);
   }
   m_font->setItemChecked(n_font,FALSE);
-  m_font->setItemChecked(fontno,  TRUE);
+  m_font->setItemChecked(fontno, TRUE);
   n_font = fontno;
 }
 
