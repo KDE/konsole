@@ -1,0 +1,26 @@
+[Desktop Entry]
+Type=KonsoleApplication
+Name=Shell
+Name[da]=Skald
+Name[fi]=Komentotulkki
+Name[hr]=Ljuska
+Name[is]=Skel
+Name[no]=Skall
+Name[pt]=Linha de comandos
+Name[ro]=Interpretor
+Name[sl]=Ukazna lupina
+Name[sv]=Skal
+Comment=Shell
+Comment[da]=Skald
+Comment[fi]=Komentotulkki
+Comment[hr]=Ljuska
+Comment[hu]=Parancs értelmezõ
+Comment[is]=Skel
+Comment[no]=Skall
+Comment[pl]=Innymi s³owy pow³oka
+Comment[pt]=Linha de comandos
+Comment[ro]=Interpretor (Shell)
+Comment[sk]=Príkazový riadok
+Comment[sl]=Ukazna lupina
+Comment[sv]=Skal
+Exec=sh

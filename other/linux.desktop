@@ -1,0 +1,30 @@
+[Desktop Entry]
+Type=KonsoleApplication
+Name=Linux
+Name[pl]=Linuks
+Comment=Linux Console
+Comment[ca]=Consola Linux
+Comment[cs]=Linuxová konzole
+Comment[da]=Linux Konsol
+Comment[de]=Linux Konsole
+Comment[es]=Consola Linux
+Comment[fi]=Linux -konsoli
+Comment[fr]=Console Linux
+Comment[hr]=Linux konzola
+Comment[hu]=Linux Konzol
+Comment[is]=Aðalskjár Linux
+Comment[it]=Console Linux
+Comment[no]=Linux-konsoll
+Comment[pl]=Konsola linuksowa
+Comment[pt]=Consola de Linux
+Comment[pt_BR]=Console do Linux
+Comment[ro]=Consolã de Linux
+Comment[ru]=ëÏÎÓÏÌØ Linux
+Comment[sk]=Linuxová konzola
+Comment[sl]=Konzola z Linuxu
+Comment[sv]=Linux konsol
+Exec=bash
+Schema=/opt/kde/share/apps/konsole/Linux.schema
+#VGA
+Font=6
+Term=linux
