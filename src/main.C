@@ -250,16 +250,16 @@ void TEDemo::makeMenu()
 
   m_options->installEventFilter( this );
 
-  menubar->insertItem(i18n("File") , m_file);
+  menubar->insertItem(i18n("&File") , m_file);
 
 //FIXME: deactivated mainly because it flickers like crasy
 //       appears to do well otherwise
-  menubar->insertItem(i18n("New"), m_commands);
-  menubar->insertItem(i18n("Sessions"), m_sessions);
+  menubar->insertItem(i18n("&New"), m_commands);
+  menubar->insertItem(i18n("&Sessions"), m_sessions);
 
-  menubar->insertItem(i18n("Options"), m_options);
+  menubar->insertItem(i18n("&Options"), m_options);
   menubar->insertSeparator();
-  menubar->insertItem(i18n("Help"), m_help);
+  menubar->insertItem(i18n("&Help"), m_help);
 }
 
 /* ------------------------------------------------------------------------- */
