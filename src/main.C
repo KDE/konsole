@@ -31,6 +31,8 @@ static KCmdLineOptions options[] =
    { "name <name>",  I18N_NOOP("Set Window Class"), 0 },
    { "ls",  	I18N_NOOP("Start login shell"), 0 },
    { "nowelcome",       I18N_NOOP("Suppress greeting"), 0 },
+   { "title",           I18N_NOOP("Set the window title"), 0 },
+   { "xwin",            I18N_NOOP("ignored"), 0 },	
    { "nohist",          I18N_NOOP("Do not save lines in scroll-back buffer"), 0 },
    { "vt_sz CCxLL",  I18N_NOOP("Terminal size in columns x lines"), 0 },
    { "e <command>",  I18N_NOOP("Execute 'command' instead of shell"), 0 },
