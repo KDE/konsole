@@ -318,7 +318,7 @@ void Konsole::makeMenu()
   selectSize->setItems(sizeitems);
   selectSize->plug(m_options);
   // Select font
-  selectFont = new KSelectAction(i18n("Fonts"), 0, this,
+  selectFont = new KSelectAction(i18n("Font"), 0, this,
 				 SLOT(slotSelectFont()), this);
   QStringList it;
   it << i18n("&Normal")
