@@ -134,10 +134,8 @@ private:
   KPopupMenu* m_toolbarSessionsCommands;
 
   KToggleAction *showToolbar;
-  bool        b_toolbarvis;
   int         n_toolbarheight;
   KToggleAction *showMenubar;
-  bool        b_menuvis;
   KToggleAction *showScrollbar;
   bool        b_scroll;
   KToggleAction *showFrame;
@@ -153,9 +151,9 @@ private:
   int         n_render;
   QString     pmPath; // pixmap path
   QString     dropText;
-  QSize       defaultSize;
   int         curr_schema; // current schema no
   QFont       defaultFont;
+  QSize       defaultSize;
 
   const char* pgm;
   QStrList    args;

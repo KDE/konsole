@@ -191,8 +191,6 @@ Konsole::Konsole(const char* name,
 
   // set global options ///////////////////////////////////////////////////////
 
-  menubar->show();
-
   // construct initial session ///////////////////////////////////////////////
 //FIXME: call newSession here, somehow, instead the stuff below.
   // Please do it ! It forces to duplicate code... (David)
@@ -214,21 +212,30 @@ Konsole::Konsole(const char* name,
   addSession(initial);
 
   // read and apply default values ///////////////////////////////////////////
-
-  readProperties(KGlobal::config());
+  resize(321, 321); // Dummy.
+  QSize currentSize = size();
+  KConfig *config = KGlobal::config();
+  config->setGroup("options");
+  applyMainWindowSettings(config);
+  if (currentSize != size())
+     defaultSize = size();
+  config->setGroup("options");
+  readProperties(config);
 
   // activate and run first session //////////////////////////////////////////
 
   runSession(initial);
   // apply keytab
   keytab_menu_activated(n_keytab);
-
-  setColLin(0,0);
 }
 
 Konsole::~Konsole()
 {
 //FIXME: close all session properly and clean up
+    // Delete the session if isn't in the session list any longer.
+    if (sessions.find(se) == -1)
+       delete se; 
+    sessions.setAutoDelete(true);
 }
 
 /* ------------------------------------------------------------------------- */
@@ -384,7 +391,7 @@ void Konsole::makeMenu()
  */
 QSize Konsole::calcSize(int columns, int lines) {
     QSize size = te->calcSize(columns, lines);
-    if (b_toolbarvis) {
+    if (!toolBar()->isHidden()) {
  	if ((toolBar()->barPos()==KToolBar::Top) ||
 	    (toolBar()->barPos()==KToolBar::Bottom)) {
             int height = toolBar()->size().height();
@@ -398,7 +405,7 @@ QSize Konsole::calcSize(int columns, int lines) {
 	    size += QSize(toolBar()->size().width(), 0);
 	}
     }
-    if (b_menuvis) {
+    if (!menuBar()->isHidden()) {
 	size += QSize(0,menuBar()->size().height());	
     }
     return size;
@@ -411,9 +418,9 @@ QSize Konsole::calcSize(int columns, int lines) {
 
 void Konsole::setColLin(int columns, int lines)
 {
-  if (columns==0 && lines==0)
+  if ((columns==0) || (lines==0))
   {
-    if (defaultSize.isNull()) // not in config file : set default value
+    if (defaultSize.isEmpty()) // not in config file : set default value
     {
       defaultSize = calcSize(80,24);
       notifySize(24,80); // set menu items (strange arg order !)
@@ -463,8 +470,6 @@ void Konsole::saveProperties(KConfig* config)
   n_toolbarheight = toolBar()->size().height();
   config->setGroup("options");
   // bad! will no allow us to support multi windows
-  config->writeEntry("menubar visible",b_menuvis);
-  config->writeEntry("toolbar visible", b_toolbarvis);
   config->writeEntry("toolbar height", n_toolbarheight);
   config->writeEntry("history",b_scroll);
   config->writeEntry("has frame",b_framevis);
@@ -477,16 +482,7 @@ void Konsole::saveProperties(KConfig* config)
 
   if (args.count() > 0) config->writeEntry("konsolearguments", args);
   config->writeEntry("class",name());
-  config->writeEntry("defaultheight", height());
-  // for "save options". Not used by SM.
-  config->writeEntry("defaultwidth", width());
-  // for "save options". Not used by SM.
-  //config->writeEntry("kmenubar",                 //FIXME:Float
-  //                   menubar->menuBarPos() == KMenuBar::Bottom ? "bottom" : "top");
-  // geometry (placement) done by KMainWindow
-  config->sync();
 }
-
 
 
 // Called by constructor (with config = KGlobal::config())
@@ -494,10 +490,7 @@ void Konsole::saveProperties(KConfig* config)
 // So it has to apply the settings when reading them.
 void Konsole::readProperties(KConfig* config)
 {
-  config->setGroup("options"); // bad! will no allow us to support multi windows
 /*FIXME: (merging) state of material below unclear.*/
-  b_menuvis  = config->readBoolEntry("menubar visible",TRUE);
-  b_toolbarvis  = config->readBoolEntry("toolbar visible",TRUE);
   n_toolbarheight = config->readNumEntry("toolbar height",32); // Hack on hack...
 
   b_scroll = config->readBoolEntry("history",TRUE);
@@ -540,14 +533,8 @@ void Konsole::readProperties(KConfig* config)
   else
   { fprintf(stderr,"session 1 not found\n"); } // oops
 
-  // Default values for startup, changed by "save options". Not used by SM.
-  defaultSize.setWidth ( config->readNumEntry("defaultwidth", 0) );
-  defaultSize.setHeight( config->readNumEntry("defaultheight", 0) );
-
-  showToolbar->setChecked(b_toolbarvis);
-  slotToggleToolbar();
-  showMenubar->setChecked(b_menuvis);
-  slotToggleMenubar();
+  showToolbar->setChecked(!toolBar()->isHidden());
+  showMenubar->setChecked(!menuBar()->isHidden());
 }
 
 /* ------------------------------------------------------------------------- */
@@ -664,7 +651,7 @@ void Konsole::setFont(int fontno)
 }
 
 void Konsole::slotToggleMenubar() {
-  b_menuvis = showMenubar->isChecked();
+  bool b_menuvis = showMenubar->isChecked();
   if (b_menuvis) 
      menubar->show(); 
   else 
@@ -676,7 +663,7 @@ void Konsole::slotToggleMenubar() {
 }
 
 void Konsole::slotToggleToolbar() {
-  b_toolbarvis = showToolbar->isChecked();
+  bool b_toolbarvis = showToolbar->isChecked();
   if (b_toolbarvis)
      toolBar()->show();
   else
@@ -704,7 +691,12 @@ void Konsole::opt_menu_activated(int item)
             break;
     case 5: setFullScreen(!b_fullscreen);
             break;
-    case 8: saveProperties(KGlobal::config());
+    case 8: 
+            KConfig *config = KGlobal::config();
+            config->setGroup("options");
+            saveProperties(config);
+            saveMainWindowSettings(config);
+            config->sync();
             break;
   }
 }
@@ -879,6 +871,9 @@ void Konsole::activateSession(TESession *s)
   { se->setConnect(FALSE);
     QObject::disconnect( se->getEmulation(),SIGNAL(prevSession()), this,SLOT(prevSession()) );
     QObject::disconnect( se->getEmulation(),SIGNAL(nextSession()), this,SLOT(nextSession()) );
+    // Delete the session if isn't in the session list any longer.
+    if (sessions.find(se) == -1)
+       delete se; 
   }
   se = s;
   session2action.find(se)->setChecked(true);
