@@ -24,7 +24,7 @@
 #define __KONSOLE_PART_H__
 
 #include <kparts/browserextension.h>
-#include <klibloader.h>
+#include <kparts/factory.h>
 #include <kaction.h>
 #include <konsole.h>
 
@@ -33,16 +33,17 @@ class konsoleBrowserExtension;
 class QLabel;
 class TESession;
 
-class konsoleFactory : public KLibFactory
+class konsoleFactory : public KParts::Factory
 {
     Q_OBJECT
-	public:
+public:
     konsoleFactory();
     virtual ~konsoleFactory();
 
-    virtual QObject* create(QObject* parent = 0, const char* name = 0,
-			    const char* classname = "QObject",
-			    const QStringList &args = QStringList());
+    virtual KParts::Part* createPart(QWidget *parentWidget = 0, const char *widgetName = 0,
+                                     QObject* parent = 0, const char* name = 0,
+                                     const char* classname = "KParts::Part",
+                                     const QStringList &args = QStringList());
 
     static KInstance *instance();
 
@@ -54,7 +55,7 @@ class konsolePart: public KParts::ReadOnlyPart
 {
     Q_OBJECT
 	public:
-    konsolePart(QWidget *parent, const char *name);
+    konsolePart(QWidget *parentWidget, const char *widgetName, QObject * parent, const char *name);
     virtual ~konsolePart();
 
  protected:

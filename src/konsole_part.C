@@ -51,8 +51,7 @@ extern "C"
 };
 
 /**
- * We need one static instance of the factory for our C 'main'
- * function
+ * We need one static instance of the factory for our C 'main' function
  */
 KInstance *konsoleFactory::s_instance = 0L;
 
@@ -68,10 +67,12 @@ konsoleFactory::~konsoleFactory()
   s_instance = 0;
 }
 
-QObject *konsoleFactory::create(QObject *parent, const char *name, const char*,
-			       const QStringList& )
+KParts::Part *konsoleFactory::createPart(QWidget *parentWidget, const char *widgetName,
+                                         QObject *parent, const char *name, const char*,
+                                         const QStringList& )
 {
-  QObject *obj = new konsolePart((QWidget*)parent, name);
+  kdDebug() << "konsoleFactory::createPart parentWidget=" << parentWidget << " parent=" << parent << endl;
+  KParts::Part *obj = new konsolePart(parentWidget, widgetName, parent, name);
   emit objectCreated(obj);
   return obj;
 }
@@ -86,7 +87,7 @@ KInstance *konsoleFactory::instance()
   return s_instance;
 }
 
-konsolePart::konsolePart(QWidget *parent, const char *name)
+konsolePart::konsolePart(QWidget *parentWidget, const char *widgetName, QObject *parent, const char *name)
   : KParts::ReadOnlyPart(parent, name)
 {
   setInstance(konsoleFactory::instance());
@@ -104,13 +105,13 @@ konsolePart::konsolePart(QWidget *parent, const char *name)
   const char* shell = getenv("SHELL");
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
   eargs.append(shell);
-  te = new TEWidget(parent);
+  te = new TEWidget(parentWidget,widgetName);
   te->setFocusPolicy(QWidget::ClickFocus);
   te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
   te->setScrollbarLocation(TEWidget::SCRRIGHT);
   setWidget(te);
   // faking a KTMainwindow - TESession assumes that (wrong design!)
-  initial = new TESession((KTMainWindow*)parent,
+  initial = new TESession((KTMainWindow*)parentWidget,
                           te,shell,eargs,"xterm");
   connect( initial,SIGNAL(done(TESession*,int)),
            this,SLOT(doneSession(TESession*,int)) );
