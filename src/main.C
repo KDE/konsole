@@ -63,6 +63,7 @@
 #include <kconfig.h>
 #include <kurl.h>
 #include <qpainter.h>
+#include <kmenubar.h>
 
 #include <kimgio.h>
 
