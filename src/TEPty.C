@@ -64,7 +64,7 @@
 #include <config.h>
 #endif
 
-#if defined(HAVE_GRANTPT) && defined(HAVE_PTSNAME) && defined(HAVE_UNLOCKPT) && !defined(_XOPEN_SOURCE)
+#if defined(HAVE_GRANTPT) && defined(HAVE_PTSNAME) && defined(HAVE_UNLOCKPT) && !defined(_XOPEN_SOURCE) && !defined(__sun__)
 #define _XOPEN_SOURCE // make stdlib.h offer the above fcts
 #endif
 
