@@ -38,7 +38,8 @@ key Return+Shift     : "\EOM"
 
 # Backspace and Delete codes are preserving CTRL-H.
 
-key Backspace      : "\x7f"
+key Backspace-Alt    : "\x7f"
+key Backspace+Alt    : "\E\x7f"
 
 # cursor keys
 
