@@ -8,7 +8,7 @@
 **	http://www.kde.org/
 ** for more information.
 */
- 
+
 /*
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -54,7 +54,7 @@
 #include "kapplication.h"
 
 #include <qdir.h>
-#include <qdatetime.h> 
+#include <qdatetime.h>
 #include <kstandarddirs.h>
 #include <klocale.h>
 #include <kconfig.h>
@@ -103,26 +103,26 @@ static const ColorEntry default_table[TABLE_COLORS] =
  // gamma correction for the dim colors to compensate for bright X screens.
  // It contains the 8 ansiterm/xterm colors in 2 intensities.
 {
-    ColorEntry( QColor(0x00,0x00,0x00), 0, 0 ), ColorEntry( 
+    ColorEntry( QColor(0x00,0x00,0x00), 0, 0 ), ColorEntry(
 QColor(0xFF,0xFF,0xFF), 1, 0 ), // Dfore, Dback
-    ColorEntry( QColor(0x00,0x00,0x00), 0, 0 ), ColorEntry( 
+    ColorEntry( QColor(0x00,0x00,0x00), 0, 0 ), ColorEntry(
 QColor(0xB2,0x18,0x18), 0, 0 ), // Black, Red
-    ColorEntry( QColor(0x18,0xB2,0x18), 0, 0 ), ColorEntry( 
+    ColorEntry( QColor(0x18,0xB2,0x18), 0, 0 ), ColorEntry(
 QColor(0xB2,0x68,0x18), 0, 0 ), // Green, Yellow
-    ColorEntry( QColor(0x18,0x18,0xB2), 0, 0 ), ColorEntry( 
+    ColorEntry( QColor(0x18,0x18,0xB2), 0, 0 ), ColorEntry(
 QColor(0xB2,0x18,0xB2), 0, 0 ), // Blue,  Magenta
-    ColorEntry( QColor(0x18,0xB2,0xB2), 0, 0 ), ColorEntry( 
+    ColorEntry( QColor(0x18,0xB2,0xB2), 0, 0 ), ColorEntry(
 QColor(0xB2,0xB2,0xB2), 0, 0 ), // Cyan,  White
     // intensive
-    ColorEntry( QColor(0x00,0x00,0x00), 0, 1 ), ColorEntry( 
+    ColorEntry( QColor(0x00,0x00,0x00), 0, 1 ), ColorEntry(
 QColor(0xFF,0xFF,0xFF), 1, 0 ),
-    ColorEntry( QColor(0x68,0x68,0x68), 0, 0 ), ColorEntry( 
+    ColorEntry( QColor(0x68,0x68,0x68), 0, 0 ), ColorEntry(
 QColor(0xFF,0x54,0x54), 0, 0 ),
-    ColorEntry( QColor(0x54,0xFF,0x54), 0, 0 ), ColorEntry( 
+    ColorEntry( QColor(0x54,0xFF,0x54), 0, 0 ), ColorEntry(
 QColor(0xFF,0xFF,0x54), 0, 0 ),
-    ColorEntry( QColor(0x54,0x54,0xFF), 0, 0 ), ColorEntry( 
+    ColorEntry( QColor(0x54,0x54,0xFF), 0, 0 ), ColorEntry(
 QColor(0xFF,0x54,0xFF), 0, 0 ),
-    ColorEntry( QColor(0x54,0xFF,0xFF), 0, 0 ), ColorEntry( 
+    ColorEntry( QColor(0x54,0xFF,0xFF), 0, 0 ), ColorEntry(
 QColor(0xFF,0xFF,0xFF), 0, 0 )
 };
 
@@ -189,6 +189,10 @@ ColorSchema::ColorSchema(KConfig& c)
 }
 
 
+ColorSchema::~ColorSchema()
+{
+    delete lastRead;
+}
 
 void ColorSchema::clearSchema()
 {
@@ -266,7 +270,7 @@ void ColorSchema::readConfigColor(KConfig& c,
 void ColorSchema::writeConfig(const QString& path) const
 {
 //  KONSOLEDEBUG << "Writing schema " << fPath << " to file " << path << endl;
-    
+
   KConfig c(path,false,false);
 
   c.setGroup("SchemaGeneral");
@@ -465,7 +469,7 @@ ColorSchemaList::~ColorSchemaList()
 //now it works also if you give only the filename without path
 ColorSchema *ColorSchemaList::find(const QString& path)
 {
-   if (path.isEmpty()) 
+   if (path.isEmpty())
       return find(0);
    //KONSOLEDEBUG << "Looking for schema " << path << endl;
    //kdDebug(1211)<<"ColorSchema::find() count()=="<<count()<<endl;
@@ -475,9 +479,9 @@ ColorSchema *ColorSchemaList::find(const QString& path)
 
    while ((c=it.current()))
    {
-      if ((pathIsOnlyFileName) && ((*it)->path().endsWith(path))) 
+      if ((pathIsOnlyFileName) && ((*it)->path().endsWith(path)))
         return *it;
-      else if ((*it)->path() == path) 
+      else if ((*it)->path() == path)
         return *it;
       ++it;
    }
@@ -533,7 +537,7 @@ bool ColorSchemaList::updateAllSchemaTimes(const QDateTime& now)
 //      KONSOLEDEBUG << "Found new schema " << filename << endl;
 
       ColorSchema *newSchema = new ColorSchema(filename);
-      if (newSchema) 
+      if (newSchema)
       {
         append(newSchema);
         r=true;
@@ -598,10 +602,10 @@ bool ColorSchemaList::checkSchemas()
   // All schemas whose schema files can still be found
   // will have their lastRead timestamps updated to
   // now.
-  // 
+  //
   //
   QDateTime now = QDateTime::currentDateTime();
-  
+
 
   r = updateAllSchemaTimes(now);
   r = r || deleteOldSchemas(now);

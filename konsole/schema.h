@@ -8,7 +8,7 @@
 **	http://www.kde.org/
 ** for more information.
 */
- 
+
 /*
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -68,7 +68,7 @@ public:
 	* with the same settings as the default schema is returned.
 	*/
 	ColorSchema(const QString& pathname);
-
+    ~ColorSchema();
 	/**
 	* Construct a color schema from the given config file.
 	* (This is different from the constructor with a pathname
@@ -92,7 +92,7 @@ public:
 	bool hasSchemaFileChanged() const;
 
 	/**
-	* Actually read a schema file (using the path given 
+	* Actually read a schema file (using the path given
 	* to the constructor of the ColorSchema).
 	*/
 	bool rereadSchemaFile();
@@ -186,7 +186,7 @@ public:
 	* tampering with the ColorSchemaList.
 	*/
 	uint count() const { return QPtrList<ColorSchema>::count(); } ;
-	const ColorSchema *at(unsigned int i) 
+	const ColorSchema *at(unsigned int i)
 		{ return QPtrList<ColorSchema>::at(i); } ;
 
    void sort() {QPtrList<ColorSchema>::sort();};
