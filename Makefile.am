@@ -5,7 +5,8 @@ xdg_apps_DATA = konsole.desktop konsolesu.desktop
 kde_services_DATA = konsolepart.desktop kwrited.desktop konsole-script.desktop
 kde_servicetypes_DATA = terminalemulator.desktop
 
-update_DATA = konsole.upd schemaStrip.pl
+update_DATA = konsole.upd
+update_SCRIPTS = schemaStrip.pl
 updatedir = $(kde_datadir)/kconf_update
 
 autostart_DATA = kwrited.desktop
