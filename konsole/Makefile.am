@@ -49,10 +49,7 @@ noinst_HEADERS = TEWidget.h TEPty.h TEmulation.h TEmuVt102.h konsole_child.h \
         konsolebookmarkhandler.h konsolebookmarkmenu.h zmodem_dialog.h \
         printsettings.h
 
-# Not AUTO here, because there are some unused files
-METASOURCES = TEWidget.moc TEmuVt102.moc session.moc konsole.moc konsole_child.moc \
-              TEmulation.moc TEPty.moc kwrited.moc konsole_part.moc konsolebookmarkhandler.moc \
-              konsolebookmarkmenu.moc zmodem_dialog.moc printsettings.moc
+METASOURCES = AUTO
 
 messages: rc.cpp
 	rm -f schemas.cpp
