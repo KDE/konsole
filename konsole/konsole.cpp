@@ -766,10 +766,6 @@ void Konsole::makeGUI()
                          SLOT(slotTabRenameSession()) );
    m_tabPopupMenu->insertSeparator();
 
-   m_tabPopupMenu->insertItem( i18n("&Select Text Color..."), this,
-                         SLOT(slotTabSelectColor()) );
-   m_tabPopupMenu->insertSeparator();
-
    m_tabMonitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ), "idea", 0, this,
                                         SLOT( slotTabToggleMonitor() ), this);
    m_tabMonitorActivity->plug(m_tabPopupMenu);
@@ -783,11 +779,13 @@ void Konsole::makeGUI()
    m_tabMasterMode->plug(m_tabPopupMenu);
 
    m_tabPopupMenu->insertSeparator();
+   m_tabPopupMenu->insertItem( SmallIconSet("colors"), i18n("Select &Tab Color..."), this, SLOT(slotTabSelectColor()) );
+
+   m_tabPopupMenu->insertSeparator();
    m_tabPopupTabsMenu = new KPopupMenu( m_tabPopupMenu );
    m_tabPopupMenu->insertItem( i18n("Switch to Tab" ), m_tabPopupTabsMenu );
    connect( m_tabPopupTabsMenu, SIGNAL( activated ( int ) ),
             SLOT( activateSession( int ) ) );
-
 
    m_tabPopupMenu->insertSeparator();
    m_tabPopupMenu->insertItem( SmallIcon("fileclose"), i18n("C&lose Session"), this,
@@ -1779,8 +1777,7 @@ void Konsole::createSessionTab(TEWidget *widget, const QIconSet &iconSet,
     tabwidget->insertTab(widget, iconSet, QString::null, index);
     break;
   }
-  QColor c= QColor(0, 0, 0);
-  tabwidget->setTabColor(widget, c);
+  tabwidget->setTabColor(widget, QColor(0, 0, 0));
 }
 
 QIconSet Konsole::iconSetForSession(TESession *session) const
