@@ -254,6 +254,7 @@ Konsole::Konsole(const char* name, const QString& _program, QStrList & _args, in
 ,b_fullScripting(false)
 ,b_showstartuptip(true)
 ,m_histSize(DEFAULT_HISTORY_SIZE)
+,m_newSessionButton(0)
 {
   isRestored = b_inRestore;
   connect( kapp,SIGNAL(backgroundChanged(int)),this, SLOT(slotBackgroundChanged(int)));
@@ -896,18 +897,44 @@ void Konsole::makeTabWidget()
            SLOT(slotTabbarContextMenu(const QPoint &)));
 
   if (kapp->authorize("shell_access")) {
-    QToolButton* newsession = new QToolButton( tabwidget );
+    m_newSessionButton = new QToolButton( tabwidget );
 //    // Looks kind of broken with most styles?
 //    newsession->setTextLabel("New");
 //    newsession->setTextPosition(QToolButton::Right);
 //    newsession->setUsesTextLabel(true);
-    QToolTip::add(newsession,i18n("Click for new standard session\nClick and hold for session menu"));
-    newsession->setIconSet( SmallIcon( "tab_new" ) );
-    newsession->adjustSize();
-    newsession->setPopup( m_tabbarSessionsCommands );
-    connect(newsession, SIGNAL(clicked()), SLOT(newSession()));
-    tabwidget->setCornerWidget( newsession, BottomLeft );
+    QToolTip::add(m_newSessionButton,i18n("Click for new standard session\nClick and hold for session menu"));
+    m_newSessionButton->setIconSet( SmallIcon( "tab_new" ) );
+    m_newSessionButton->adjustSize();
+    m_newSessionButton->setPopup( m_tabbarSessionsCommands );
+    connect(m_newSessionButton, SIGNAL(clicked()), SLOT(newSession()));
+    tabwidget->setCornerWidget( m_newSessionButton, BottomLeft );
+    m_newSessionButton->installEventFilter(this);
   }
+}
+
+bool Konsole::eventFilter( QObject *o, QEvent *ev )
+{
+  if (o == m_newSessionButton)
+  {
+    // Popup the menu when the left mousebutton is pressed and the mouse
+    // is moved by a small distance.
+    if (ev->type() == QEvent::MouseButtonPress)
+    {
+      QMouseEvent* mev = static_cast<QMouseEvent*>(ev);
+      m_newSessionButtonMousePressPos = mev->pos();
+    }
+    else if (ev->type() == QEvent::MouseMove)
+    {
+      QMouseEvent* mev = static_cast<QMouseEvent*>(ev);
+      if ((mev->pos() - m_newSessionButtonMousePressPos).manhattanLength()
+            > KGlobalSettings::dndEventDelay())
+      {
+        m_newSessionButton->openPopup();
+        return true;
+      }
+    }
+  }
+  return KMainWindow::eventFilter(o, ev);
 }
 
 void Konsole::makeBasicGUI()
