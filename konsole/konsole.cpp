@@ -1275,7 +1275,7 @@ void Konsole::showFullScreen()
         topData()->normalGeometry = QRect( pos(), size() );
         }
 //    KONSOLEDEBUG << "Passed all if's" << endl;
-    reparent( 0, WType_TopLevel | WStyle_Customize | WStyle_NoBorderEx, // | WStyle_StaysOnTop,
+    reparent( 0, WType_TopLevel | WStyle_Customize | WStyle_NoBorder, // | WStyle_StaysOnTop,
               QPoint(0,0) );
     topData()->fullscreen = 1;
     resize( qApp->desktop()->size() );
