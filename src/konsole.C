@@ -747,11 +747,15 @@ void Konsole::readProperties(KConfig* config, const QString &schema)
    te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
    te->setColorTable(sch->table());
 
+
    if (m_menuCreated)
    {
       applySettingsToGUI();
       activateSession();
    };
+
+//   setFullScreen(b_fullscreen);
+   
 }
 
 void Konsole::applySettingsToGUI()
@@ -1040,15 +1044,22 @@ void Konsole::changeTitle(int, const QString& s)
 */
 void Konsole::showFullScreen()
 {
-    if ( !isTopLevel() )
+    if ( !isTopLevel() ) {
+        KONSOLEDEBUG << "Not top level" << endl;
         return;
+        }
+
     if ( topData()->fullscreen ) {
+        KONSOLEDEBUG << "TopData Fullscreen" << endl;
         show();
         raise();
         return;
     }
-    if ( topData()->normalGeometry.width() < 0 )
+    if ( topData()->normalGeometry.width() < 0 ) {
+        KONSOLEDEBUG << "TopData NormalGeo" << endl;
         topData()->normalGeometry = QRect( pos(), size() );
+        }
+    KONSOLEDEBUG << "Passed all if's" << endl;
     reparent( 0, WType_TopLevel | WStyle_Customize | WStyle_NoBorderEx, // | WStyle_StaysOnTop,
               QPoint(0,0) );
     topData()->fullscreen = 1;
@@ -1063,15 +1074,31 @@ void Konsole::showFullScreen()
     setActiveWindow();
 }
 
+void Konsole::initFullScreen()
+{
+  //This function is to be called from main.C to initialize the state of the Konsole (fullscreen or not).  It doesn't appear to work 
+  //from inside the Konsole constructor
+  setFullScreen(b_fullscreen);
+}
+
 void Konsole::setFullScreen(bool on)
 {
-  if (on == b_fullscreen) return;
-  if (on) showFullScreen(); else {
-    showNormal();
-    setCaption(title); // restore caption of window
-  }
-  b_fullscreen = on;
-  m_options->setItemChecked(5,b_fullscreen);
+//  if (on == b_fullscreen) {
+//    KONSOLEDEBUG << "On and b_Fullscreen both equal " << b_fullscreen << "." << endl;
+//    }
+    if (on) {
+      showFullScreen(); 
+      b_fullscreen = on;
+      }
+    else {
+      showNormal();
+      setCaption(title); // restore caption of window
+      b_fullscreen = false;
+      KONSOLEDEBUG << "On is false, b_fullscreen is " << b_fullscreen << ". Set to Normal view and set caption." << endl;
+    }
+//  return;
+    m_options->setItemChecked(5,b_fullscreen);
+
 }
 
 // --| help |------------------------------------------------------------------
@@ -1517,7 +1544,7 @@ void Konsole::setSchema(ColorSchema* s)
     pixmap_menu_activated(s->alignment());
   }
 
-        KONSOLEDEBUG << "Doing the rest" << endl;
+        KONSOLEDEBUG << "GCM 1 Doing the rest" << endl;
 
   te->setColorTable(s->table());
   if (se) se->setSchemaNo(s->numb());

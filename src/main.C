@@ -252,9 +252,11 @@ int main(int argc, char* argv[])
       QTimer::singleShot(5000,m,SLOT(setHeader()));
     }
     //2.5 sec
+    m->initFullScreen();
     m->show();
   }
   //2.6 sec
 
+  
   return a.exec();
 }

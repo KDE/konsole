@@ -50,6 +50,7 @@ public:
   ~Konsole();
   void setColLin(int columns, int lines);
   void setFullScreen(bool on);
+  void initFullScreen();
 
 protected:
 
