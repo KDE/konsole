@@ -16,3 +16,5 @@ install-data-local:
 uninstall-local:
 	rm -f $(kde_minidir)/konsole.xpm
 
+EXTRA_DIST = $(data_DATA) $(kde_icon_DATA) konsole-mini.xpm
+

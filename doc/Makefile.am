@@ -13,3 +13,6 @@
 # kde_wallpaperdir  Where general wallpapers should go to.
 
 SUBDIRS=sgml VT100
+
+EXTRA_DIST = More README.first framwork histBuffer missing.codes missing.keys
+
