@@ -58,7 +58,6 @@
 
 #include "TEWidget.moc"
 #include <kapp.h>
-#include <kmsgbox.h>
 #include <X11/Xlib.h>
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)

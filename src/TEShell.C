@@ -105,7 +105,6 @@
 
 #include <kapp.h>
 #include <kstddirs.h>
-#include <kmsgbox.h>
 
 #define HERE fprintf(stdout,"%s(%d): here\n",__FILE__,__LINE__)
 

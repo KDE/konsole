@@ -51,6 +51,7 @@
 #include <qdir.h>
 #include <qevent.h>
 #include <qdragobject.h>
+#include <qmessagebox.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -852,7 +853,8 @@ void TEDemo::doneSession(TESession* s, int )
     {char rcs[100]; sprintf(rcs,"%d.\n",WEXITSTATUS((status)));
       str = str + i18n("\nReturn code = ") + rcs;
     }
-    KMsgBox::message( this, i18n("Error"), str, KMsgBox::EXCLAMATION );
+    QMessageBox::warning(this, i18n("Error"), 
+			 str, i18n("&OK"));
   }
 #endif
   int no = (int)session2no.find(s);
