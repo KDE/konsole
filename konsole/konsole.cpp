@@ -566,9 +566,6 @@ void Konsole::makeGUI()
 
    m_options->insertTearOffHandle();
 
-   connect(m_options, SIGNAL(activated(int)), SLOT(opt_menu_activated(int)));
-   m_options->installEventFilter( this );
-
    //help menu
    m_help->setAccel(QKeySequence(),m_help->idAt(0));
    m_help->insertSeparator(1);
@@ -647,6 +644,19 @@ void Konsole::makeGUI()
                this, SLOT(nextSession()), m_shortcuts, "next_session");
    new KAction(i18n("New Session"), Qt::CTRL+Qt::ALT+Qt::Key_N, this, SLOT(newSession()), m_shortcuts, "new_session");
    new KAction(i18n("Activate Menu"), Qt::CTRL+Qt::ALT+Qt::Key_M, this, SLOT(activateMenu()), m_shortcuts, "activate_menu");
+
+   new KAction(i18n("Switch to Session 1"), 0, this, SLOT(switchToSession1()), m_shortcuts, "switch_to_session_1");
+   new KAction(i18n("Switch to Session 2"), 0, this, SLOT(switchToSession2()), m_shortcuts, "switch_to_session_2");
+   new KAction(i18n("Switch to Session 3"), 0, this, SLOT(switchToSession3()), m_shortcuts, "switch_to_session_3");
+   new KAction(i18n("Switch to Session 4"), 0, this, SLOT(switchToSession4()), m_shortcuts, "switch_to_session_4");
+   new KAction(i18n("Switch to Session 5"), 0, this, SLOT(switchToSession5()), m_shortcuts, "switch_to_session_5");
+   new KAction(i18n("Switch to Session 6"), 0, this, SLOT(switchToSession6()), m_shortcuts, "switch_to_session_6");
+   new KAction(i18n("Switch to Session 7"), 0, this, SLOT(switchToSession7()), m_shortcuts, "switch_to_session_7");
+   new KAction(i18n("Switch to Session 8"), 0, this, SLOT(switchToSession8()), m_shortcuts, "switch_to_session_8");
+   new KAction(i18n("Switch to Session 9"), 0, this, SLOT(switchToSession9()), m_shortcuts, "switch_to_session_9");
+   new KAction(i18n("Switch to Session 10"), 0, this, SLOT(switchToSession10()), m_shortcuts, "switch_to_session_10");
+   new KAction(i18n("Switch to Session 11"), 0, this, SLOT(switchToSession11()), m_shortcuts, "switch_to_session_11");
+   new KAction(i18n("Switch to Session 12"), 0, this, SLOT(switchToSession12()), m_shortcuts, "switch_to_session_12");
 
    m_shortcuts->readShortcutSettings();
 };

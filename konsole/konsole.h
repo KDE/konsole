@@ -171,6 +171,19 @@ private slots:
   void fontNotFound();
   void showTip();
 
+  void switchToSession1() { activateSession(1); }
+  void switchToSession2() { activateSession(2); }
+  void switchToSession3() { activateSession(3); }
+  void switchToSession4() { activateSession(4); }
+  void switchToSession5() { activateSession(5); }
+  void switchToSession6() { activateSession(6); }
+  void switchToSession7() { activateSession(7); }
+  void switchToSession8() { activateSession(8); }
+  void switchToSession9() { activateSession(9); }
+  void switchToSession10() { activateSession(10); }
+  void switchToSession11() { activateSession(11); }
+  void switchToSession12() { activateSession(12); }
+
 private:
   KSimpleConfig *defaultSession();
   QString newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(), const QString &_term = QString::null, const QString &_icon = QString::null, const QString &_title = QString::null, const QString &_cwd = QString::null);
