@@ -64,6 +64,7 @@ QString KeyTrans::KeyEntry::text()
 
 KeyTrans::KeyTrans()
 {
+  table.setAutoDelete(true);
   path = "";
   numb = 0;
 }
