@@ -1338,7 +1338,7 @@ void Konsole::checkSoundSystem()
 {
   KConfig *arts_config = new KConfig("kcmartsrc");
   arts_config->setGroup("Arts");
-  b_soundSystemEnabled = arts_config->readBoolEntry("StartServer", false);
+  b_soundSystemEnabled = arts_config->readBoolEntry("StartServer", true);
 }
 
 /* ------------------------------------------------------------------------- */
