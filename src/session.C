@@ -121,8 +121,7 @@ const char* TESession::emuName()
 
 void TESession::setSchemaNo(int sn)
 {
-  if (sn == NULL) schema_no = 0;
-  else schema_no = sn;
+  schema_no = sn;
 }
 
 void TESession::setKeymapNo(int kn)
