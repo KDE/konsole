@@ -410,8 +410,9 @@ extern "C" int kdemain(int argc, char* argv[])
 	// works only for the first one, but there won't be more.
         n++;
         m->activateSession( sessionconfig->readNumEntry("ActiveSession",0)+1 );
+        m->show();
         m->run();
-        m->setAutoClose(auto_close);
+	m->setAutoClose(auto_close);
     }
   }
   else
