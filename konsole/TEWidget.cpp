@@ -989,15 +989,12 @@ bool TEWidget::focusNextPrevChild( bool next )
 }
 
 
-int TEWidget::charClass(char ch) const
+int TEWidget::charClass(UINT16 ch) const
 {
-    // This might seem like overkill, but imagine if ch was a Unicode
-    // character (Qt 2.0 QChar) - it might then be sensible to separate
-    // the different language ranges, etc.
+    QChar qch=QChar(ch);
+    if ( qch.isSpace() ) return ' ';
 
-    if ( isspace(ch) ) return ' ';
-
-    if ( isalnum(ch) || word_characters.contains(ch) )
+    if ( qch.isLetterOrNumber() || word_characters.contains(qch, FALSE) )
     return 'a';
 
     // Everything else is weird
