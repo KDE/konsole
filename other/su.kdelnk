@@ -9,6 +9,7 @@ Comment[da]=Rootkonsol
 Comment[de]=Rootkonsole
 Comment[fr]=Console administrateur
 Comment[pt_BR]=Console Raiz
+Comment[sk]=Rootovská konzola
 Exec=su
 Schema=/opt/kde/share/apps/konsole/Linux.schema
 #VGA
