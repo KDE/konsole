@@ -139,7 +139,7 @@ Konsole::Konsole(const char* name,
   setDockEnabled( toolBar(), QMainWindow::Left, FALSE );
   setDockEnabled( toolBar(), QMainWindow::Right, FALSE );
   toolBar()->setFullSize( TRUE );
-  toolBar()->setIconText( KToolBar::IconTextRight);
+  //  toolBar()->setIconText( KToolBar::IconTextRight);
 
   // load session commands ///////////////////////////////////////////////////
 

@@ -98,6 +98,11 @@ rc_DATA = konsole_part.rc
 mimedir = $(kde_mimedir)/application
 mime_DATA = x-konsole.desktop
 
+# default toolbar configuration
+datadir =$(kde_confdir)
+data_DATA =konsolerc
+
+
 # specifying gofai as a handler for the above mimetype
 # also specifies the icon, and position in the kicker menus
 #kdelnkdir = $(kde_appsdir)/Utilities
@@ -105,4 +110,4 @@ mime_DATA = x-konsole.desktop
 # ... Hmm, it's already in applnk/ (David)
 
 # ??? no need to specify kdelnk_DATA here?
-EXTRA_DIST = $(mime_DATA)                                             
+EXTRA_DIST = $(mime_DATA) $(data_DATA)                                             
