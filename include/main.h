@@ -18,7 +18,6 @@
 
 
 #include <ktmainwindow.h>
-//#include <ktmainwindow.h>
 #include <ksimpleconfig.h>
 #include <qstrlist.h>
 
@@ -55,8 +54,6 @@ private slots:
   void size_menu_activated(int item);
   void pixmap_menu_activated(int item);
   void drop_menu_activated(int item);
-  void about();
-  void help();
   void tecRef();
   void newSession(int kind);
 

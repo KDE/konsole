@@ -163,7 +163,7 @@ TEDemo::TEDemo(const QString& name, QStrList & _args, int login_shell, int histo
 
   loadSessionCommands();
   m_file->insertSeparator();
-  m_file->insertItem( i18n("E&xit"), kapp, SLOT(quit()));
+  m_file->insertItem( i18n("&Quit"), kapp, SLOT(quit()));
 
   // load schema /////////////////////////////////////////////////////////////
 
@@ -411,11 +411,19 @@ void TEDemo::makeMenu()
   m_options->insertItem( i18n("&Save Options"), 8);
   connect(m_options, SIGNAL(activated(int)), SLOT(opt_menu_activated(int)));
 
-  QPopupMenu* m_help = new QPopupMenu;
-  m_help->insertItem( i18n("&About ..."), this, SLOT(about()));
-  m_help->insertItem( i18n("&User's Manual ..."), this, SLOT(help()));
-  m_help->insertItem( i18n("&Technical Reference ..."), this, SLOT(tecRef()));
-
+  QString aboutAuthor = i18n("%1 version %2 - an X terminal\n"
+                             "Copyright (c) 1997-1999 by\n"
+                             "Lars Doelle <lars.doelle@on-line.de>\n"
+                             "\n"
+                             "This program is free software under the\n"
+                             "terms of the GNU General Public License\n"
+                             "and comes WITHOUT ANY WARRANTY.\n"
+                             "See `LICENSE.readme´ for details.").arg(PACKAGE).arg(VERSION);
+  
+  QPopupMenu* m_help =  helpMenu(aboutAuthor, false);
+  m_help->insertItem( i18n("&Technical Reference ..."), this, SLOT(tecRef()), 
+                      0, -1, 1);
+    
   m_drop = new QPopupMenu;
   m_drop->insertItem( i18n("Paste"), 0);
   m_drop->insertItem( i18n("cd"),    1);
@@ -743,26 +751,6 @@ void TEDemo::changeTitle(int, const QString& s)
 }
 
 // --| help |------------------------------------------------------------------
-
-void TEDemo::about()
-//FIXME: make this a little nicer
-{
-    QString msg = i18n(
-	"%1 version %2 - an X terminal\n"
-	"Copyright (c) 1997-1999 by\n"
-        "Lars Doelle <lars.doelle@on-line.de>\n"
-	"\n"
-	"This program is free software under the\n"
-        "terms of the GNU General Public License\n"
-	"and comes WITHOUT ANY WARRANTY.\n"
-	"See `LICENSE.readme´ for details.").arg(PACKAGE).arg(VERSION);
-    KMessageBox::about( 0, msg);
-}
-
-void TEDemo::help()
-{
-  kapp->invokeHTMLHelp(PACKAGE "/konsole.html","");
-}
 
 void TEDemo::tecRef()
 {
