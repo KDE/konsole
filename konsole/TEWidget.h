@@ -100,6 +100,8 @@ public:
     void setTerminalSizeHint(bool on) { terminalSizeHint=on; }
     bool isTerminalSizeHint() { return terminalSizeHint; }
     void setTerminalSizeStartup(bool on) { terminalSizeStartup=on; }
+    
+    void print(QPainter &paint, bool friendly, bool exact);
 
 public slots:
 
@@ -132,8 +134,10 @@ protected:
     bool event( QEvent * );
 
     void drawAttrStr(QPainter &paint, QRect rect,
-                     QString& str, ca attr, bool pm, bool clear);
+                     QString& str, const ca *attr, bool pm, bool clear);
     void paintEvent( QPaintEvent * );
+
+    void paintContents(QPainter &paint, const QRect &rect, bool pm=false);
 
     void resizeEvent(QResizeEvent*);
 
@@ -220,6 +224,9 @@ private:
     bool ctrldrag;           // require Ctrl key for drag
     bool cuttobeginningofline; // triple click only selects forward
     bool isBlinkEvent; // paintEvent due to blinking.
+    bool isPrinting; // Paint job is intended for printer
+    bool printerFriendly; // paint printer friendly, save ink
+    bool printerBold; // Use a bold font instead of overstrike for bold
     QTimer* blinkT;  // active when hasBlinker
     QTimer* blinkCursorT;  // active when hasBlinkingCursor
 

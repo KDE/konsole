@@ -47,13 +47,13 @@ kwrited_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 # konsole kdeinit module
 konsole_la_SOURCES = TEPty.cpp BlockArray.cpp main.cpp konsole.cpp schema.cpp session.cpp TEWidget.cpp TEmuVt102.cpp \
      TEScreen.cpp TEmulation.cpp TEHistory.cpp keytrans.cpp konsoleiface.skel sessioniface.skel \
-     konsole_wcwidth.cpp konsolebookmarkhandler.cpp konsolebookmarkmenu.cpp konsole_child.cpp
+     konsole_wcwidth.cpp konsolebookmarkhandler.cpp konsolebookmarkmenu.cpp konsole_child.cpp printsettings.cpp
 konsole_la_LDFLAGS = $(all_libraries) -module -avoid-version
-konsole_la_LIBADD = $(LIB_KDEUI) $(LIB_KIO) $(LIBUTIL) $(XTESTLIB)
+konsole_la_LIBADD = $(LIB_KDEPRINT) $(LIBUTIL) $(XTESTLIB)
 
 # konsole executable
 konsole_SOURCES = dummy.cpp
-konsole_LDADD = konsole.la $(LIB_KIO)
+konsole_LDADD = konsole.la $(LIB_KDEPRINT)
 konsole_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 # kcmkonsole_SOURCES = kcmkonsole.cpp schema.cpp
@@ -82,7 +82,7 @@ install-exec-hook:
 # Not AUTO here, because there are some unused files
 METASOURCES = TEWidget.moc TEmuVt102.moc session.moc konsole.moc konsole_child.moc \
               TEmulation.moc TEPty.moc kwrited.moc konsole_part.moc konsolebookmarkhandler.moc \
-              konsolebookmarkmenu.moc
+              konsolebookmarkmenu.moc printsettings.moc
 
 messages: rc.cpp
 	rm -f schemas.cpp

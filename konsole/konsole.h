@@ -206,6 +206,8 @@ private slots:
   void biggerFont();
   void smallerFont();
 
+  void slotPrint();
+
 private:
   KSimpleConfig *defaultSession();
   QString newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(), const QString &_term = QString::null, const QString &_icon = QString::null, const QString &_title = QString::null, const QString &_cwd = QString::null);
@@ -292,6 +294,7 @@ private:
   KAction       *m_renameSession;
   KAction       *m_saveProfile;
   KAction       *m_closeSession;
+  KAction       *m_print;
   KAction       *m_quit;
 
   KActionCollection *m_shortcuts;
