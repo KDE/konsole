@@ -376,7 +376,7 @@ void Konsole::makeGUI()
    m_clearHistory->setEnabled( se->history().isOn() );
    m_clearHistory->plug(m_sessions);
 
-   m_saveHistory = new KAction(i18n("S&ave History As..."), "filesave", 0, this,
+   m_saveHistory = new KAction(i18n("S&ave History As..."), "filesaveas", 0, this,
                                        SLOT(slotSaveHistory()), this);
    m_saveHistory->setEnabled( se->history().isOn() );
    m_saveHistory->plug(m_sessions);
@@ -428,7 +428,7 @@ void Konsole::makeGUI()
    m_options->insertSeparator();
 
    // Menubar on/off
-   showMenubar = new KToggleAction ( i18n( "Show &Menubar" ), 0, this,
+   showMenubar = new KToggleAction ( i18n( "Show &Menubar" ), "showmenu", 0, this,
                                      SLOT( slotToggleMenubar() ), this );
    showMenubar->plug ( m_options );
 
