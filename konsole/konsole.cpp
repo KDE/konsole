@@ -794,7 +794,7 @@ void Konsole::makeBasicGUI()
   //help menu
   m_help->setAccel(QKeySequence(),m_help->idAt(0));
 
-  m_closeSession = new KAction(i18n("&Close Session"), "fileclose", 0, this,
+  m_closeSession = new KAction(i18n("C&lose Session"), "fileclose", 0, this,
                                SLOT(closeCurrentSession()), m_shortcuts, "close_session");
   m_quit = new KAction(i18n("&Quit"), "exit", 0, this, SLOT( close() ), m_shortcuts, "quit");
 

@@ -114,7 +114,7 @@ KonsoleChild::KonsoleChild(TESession* _se, int columns, int lines, int scrollbar
   renameSession->plug(m_rightButton);
 
   m_rightButton->insertSeparator();
-  KAction *closeSession = new KAction(i18n("&Close Session"), "fileclose", 0, this,
+  KAction *closeSession = new KAction(i18n("C&lose Session"), "fileclose", 0, this,
                                       SLOT(closeSession()), actions);
   closeSession->plug(m_rightButton );
   if (KGlobalSettings::insertTearOffHandle())
