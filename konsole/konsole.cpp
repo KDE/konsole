@@ -337,8 +337,8 @@ Konsole::~Konsole()
       sessions.next();
     }
 
-    // Wait a bit for all childs to clean themselves up. 
-#if KDE_VERSION >=305
+    // Wait a bit for all childs to clean themselves up.
+#if KDE_VERSION >=306
     while(sessions.count() && KProcessController::theKProcessController->waitForProcessExit(1))
         ;
 //#else
@@ -388,7 +388,7 @@ void Konsole::showTipOnStart()
 // This function consumes a lot of time, that's why it is called delayed on demand.
 // Be careful not to introduce function calls which lead to the execution of this
 // function when starting konsole
-// Be careful not to access stuff which is created in this function before this 
+// Be careful not to access stuff which is created in this function before this
 // function was called ! you can check this using m_menuCreated, aleXXX
 void Konsole::makeGUI()
 {
@@ -590,7 +590,7 @@ void Konsole::makeGUI()
 
    //help menu
    m_help->insertSeparator(1);
-   m_help->insertItem(SmallIcon( "idea" ), i18n("&Tip of the Day"), 
+   m_help->insertItem(SmallIcon( "idea" ), i18n("&Tip of the Day"),
             this, SLOT(showTip()), 0, -1, 2);
 
    //the different session menus
@@ -622,7 +622,7 @@ void Konsole::makeGUI()
    if (KGlobalSettings::insertTearOffHandle())
      m_rightButton->insertTearOffHandle();
 
-   
+
    delete colors;
    colors = new ColorSchemaList();
    //KONSOLEDEBUG<<"Konsole::makeGUI(): curr_schema "<<curr_schema<<" path: "<<s_schema<<endl;
@@ -827,7 +827,7 @@ bool Konsole::queryClose()
    if(skip_exit_query)
      // saving session - do not even think about doing any kind of cleanup here
        return true;
-        
+
    while (detached.count()) {
      KonsoleChild* child=detached.first();
      delete child;
@@ -870,7 +870,7 @@ void Konsole::slotCouldNotClose()
 {
     int result = KMessageBox::warningContinueCancel(this,
              i18n("The application running in Konsole does not respond to the close request. "
-                  "Do you want Konsole to close anyway?"), 
+                  "Do you want Konsole to close anyway?"),
              i18n("Application Does Not Respond"),
              i18n("Close"));
     if (result == KMessageBox::Continue)
@@ -980,7 +980,7 @@ void Konsole::saveProperties(KConfig* config) {
         config->writeEntry(key, sessions.current()->isMasterMode());
 
         QString cwd=sessions.current()->getCwd();
-        if (cwd.isEmpty()) 
+        if (cwd.isEmpty())
           cwd=sessions.current()->getInitial_cwd();
         key = QString("Cwd%1").arg(counter);
         config->writeEntry(key, cwd);
@@ -1038,19 +1038,19 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
      te->setWordCharacters(s_word_seps);
 
      te->setTerminalSizeHint( config->readBoolEntry("TerminalSizeHint",true) );
-     
+
      b_framevis = config->readBoolEntry("has frame",true);
      te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
 
      te->setBlinkingCursor(config->readBoolEntry("BlinkingCursor",false));
      te->setCtrlDrag(config->readBoolEntry("CtrlDrag",false));
-     te->setCutToBeginningOfLine(config->readBoolEntry("CutToBeginningOfLine",false));     
+     te->setCutToBeginningOfLine(config->readBoolEntry("CutToBeginningOfLine",false));
      te->setLineSpacing( config->readUnsignedNumEntry( "LineSpacing", 0 ) );
 
      monitorSilenceSeconds=config->readUnsignedNumEntry("SilenceSeconds", 10);
      for (TESession *ses = sessions.first(); ses; ses = sessions.next())
        ses->setMonitorSilenceSeconds(monitorSilenceSeconds);
-       
+
      b_xonXoff = config->readBoolEntry("XonXoff",false);
      config->setGroup("UTMP");
      b_addToUtmp = config->readBoolEntry("AddToUtmp",true);
@@ -1696,7 +1696,7 @@ void Konsole::listSessions()
   int counter=0;
   KPopupMenu* m_sessionList = new KPopupMenu(this);
   m_sessionList->insertTitle(i18n("Session List:"));
-#if KDE_VERSION >=305
+#if KDE_VERSION >=306
   m_sessionList->setKeyboardShortcutsEnabled(true);
 #endif
   for (TESession *ses = sessions.first(); ses; ses = sessions.next())
@@ -1782,7 +1782,7 @@ void Konsole::activateSession(TESession *s)
   updateTitle();
   if (!m_menuCreated)
      return;
-  
+
   updateKeytabMenu(); // act. the keytab for this session
   m_clearHistory->setEnabled( se->history().isOn() );
   m_findHistory->setEnabled( se->history().isOn() );
@@ -2312,7 +2312,7 @@ void Konsole::addSessionCommand(const QString &path)
 
   exec = KRun::binaryName(exec, false);
   QString pexec = KGlobal::dirs()->findExe(exec);
-  if (typ.isEmpty() || txt.isEmpty() || typ != "KonsoleApplication" 
+  if (typ.isEmpty() || txt.isEmpty() || typ != "KonsoleApplication"
       || ( !exec.isEmpty() && pexec.isEmpty() ) )
   {
     if (!path.isEmpty())
@@ -2573,7 +2573,7 @@ void Konsole::attachSession(TESession* session)
     ra->plug(m_view);
 
   int button_id=ra->itemId( ra->plug(toolBar()) );
-  KToolBarButton* ktb=toolBar()->getButton(button_id);  
+  KToolBarButton* ktb=toolBar()->getButton(button_id);
   connect(ktb,SIGNAL(doubleClicked(int)), this,SLOT(slotRenameSession(int)));
   session2button.insert(session,ktb);
 
@@ -2780,7 +2780,7 @@ void Konsole::slotFindNext()
     slotFindHistory();
     return;
   }
-  
+
   QString string;
   string = m_finddialog->getText();
   m_finddialog->setText(string.isEmpty() ? m_find_pattern : string);
@@ -3059,7 +3059,7 @@ bool Konsole::processDynamic(const QCString &fun, const QByteArray &data, QCStri
         QString arg0;
         QDataStream arg( data, IO_ReadOnly );
         arg >> arg0;
-        feedAllSessions(arg0);         
+        feedAllSessions(arg0);
         replyType = "void";
         return true;
       }
@@ -3068,7 +3068,7 @@ bool Konsole::processDynamic(const QCString &fun, const QByteArray &data, QCStri
         QString arg0;
         QDataStream arg( data, IO_ReadOnly );
         arg >> arg0;
-        sendAllSessions(arg0);         
+        sendAllSessions(arg0);
         replyType = "void";
         return true;
       }
