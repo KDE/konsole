@@ -13,6 +13,7 @@ Comment[xx]=xxKonsolexx
 [BellVisible]
 Name=Bell in visible session
 Name[ca]=Timbre a la sessió visible
+Name[cs]=Zvonek ve viditelné relaci
 Name[cy]=Cloch yn y sesiwn gweladwy
 Name[da]=Klokke i synlig session
 Name[el]=Μεγαφωνάκι στην ορατή σύνοδο
@@ -53,6 +54,7 @@ default_presentation=1
 [BellInvisible]
 Name=Bell in non-visible session
 Name[ca]=Timbre a la sessió no visible
+Name[cs]=Zvonek v neviditelné relaci
 Name[cy]=Cloch mewn sesiwn anweledig
 Name[da]=Klokke i ikke-synlig session
 Name[el]=Μεγαφωνάκι στην μη ορατή σύνοδο
