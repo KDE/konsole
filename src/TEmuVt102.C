@@ -738,14 +738,17 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
 
 //printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().length(),ev->text().length()?ev->text().ascii()[0]:0);
 
-/*NO! this is correct X-On/X-Off behavior, i think. Use Ctrl-Q to release.
-  If this is not the problem, it needs to be fixed in TEPty.C, but i doubt.
-  if ((ev->key()==Key_S) && (ev->state()==ControlButton))
-    return; // Ctrl+s will cause it to freeze up 
-            // (this is a tty problem, possibly)
-            // It's something to do with "ctrl+s" 
-            // toggling Scroll on the [real] console
-            // This is a hack, but it works. So there.
+/*THE UNKNOWN HACKER WROTE:
+  >> if ((ev->key()==Key_S) && (ev->state()==ControlButton))
+  >>   return; // Ctrl+s will cause it to freeze up 
+  >>           // (this is a tty problem, possibly)
+  >>           // It's something to do with "ctrl+s" 
+  >>           // toggling Scroll on the [real] console
+  >>           // This is a hack, but it works. So there.
+
+  NO! this is correct X-On/X-Off behavior. Use Ctrl-Q to release.
+  This is most likely an application or usage problem. I'll remove
+  this section in a bit.
 */
 
   // revert to non-history when typing
