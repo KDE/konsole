@@ -249,8 +249,8 @@ Konsole::Konsole(const char* name, const char* _pgm,
   resize(321, 321); // Dummy.
   QSize currentSize = size();
   KConfig * config = KGlobal::config();
-  applyMainWindowSettings(config);
   config->setGroup("options");
+  applyMainWindowSettings(config);
   if (currentSize != size())
      defaultSize = size();
   //kdDebug()<<"Konsole ctor(): readProps() type="<<type<<endl;
@@ -670,8 +670,9 @@ void Konsole::saveProperties(KConfig* config) {
     int counter=0;
     QString tmpTitle;
     QString tmpTwo;
-  if (config != KGlobal::config()) {
-      config->setGroup("options");
+    config->setGroup("options");
+
+    if (config != KGlobal::config()) {
       // called by the session manager
       skip_exit_query = true;
       config->writeEntry("numSes",sessions.count());
@@ -688,7 +689,6 @@ void Konsole::saveProperties(KConfig* config) {
         }
      kdDebug() << "Save properties called with a different config\n";
   }
-  config->setDesktopGroup();
   config->writeEntry("history",b_scroll);
   config->writeEntry("has frame",b_framevis);
   config->writeEntry("Fullscreen",b_fullscreen);
@@ -717,9 +717,9 @@ void Konsole::readProperties(KConfig* config)
 // default
 void Konsole::readProperties(KConfig* config, const QString &schema)
 {
+   config->setGroup("options");
    kdDebug()<<"Konsole::readProps()"<<endl;
    /*FIXME: (merging) state of material below unclear.*/
-   config->setDesktopGroup();
    b_scroll = config->readBoolEntry("history",TRUE);
    b_warnQuit=config->readBoolEntry( "WarnQuit", TRUE );
    n_oldkeytab=n_keytab;
