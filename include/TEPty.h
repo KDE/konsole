@@ -20,13 +20,13 @@
 #include <sys/types.h>
 #include <sys/ioctl.h>
 
-#include <qobject.h>
+#include <kprocess.h>
 #include <termios.h>
 #include <qsocketnotifier.h>
 #include <qtimer.h>
 #include <qstrlist.h>
 
-class TEPty: public QObject
+class TEPty: public KProcess
 {
 Q_OBJECT
 
@@ -43,8 +43,6 @@ Q_OBJECT
         instance before starting the execution of the client.
     */
     int run(const char* pgm, QStrList & args, const char* term, int addutmp);
-
-    void kill(int signal);
 
   public slots:
 
@@ -72,31 +70,31 @@ Q_OBJECT
     void send_string(const char* s);
 
     const char* deviceName();
-
+    
+  protected:
+      virtual int commSetupDoneC();
+      virtual int setupCommunication(Communication comm);
+  
+  protected slots:
+      void DataReceived(int, int& len);
+      void donePty();
+      
   private:
-
     void makePty(const char* dev, const char* pgm, QStrList & args, const char* term, int addutmp);
     int  openPty();
-    void donePty(int status);
-
-  private slots:
-
-    void DataReceived(int);
 
   private:
 
     struct winsize wsize;
-
-    int              fd;
-    pid_t            comm_pid;
-    QSocketNotifier* mn;
-
+    int fd;
     bool             needGrantPty;
     char ptynam[50]; // "/dev/ptyxx" | "/dev/ptmx"
     char ttynam[50]; // "/dev/ttyxx" | "/dev/pts/########..."
+    const char *pgm;
+    const char *term;
+    int addutmp;
 
 friend int chownpty(int,int);
-friend void catchChild(int);
 };
 
 #endif

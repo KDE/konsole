@@ -81,6 +81,7 @@ extern "C" {
 }
 #endif
 
+#include <errno.h>
 #include <assert.h>
 #include <fcntl.h>
 #include <grp.h>
@@ -148,8 +149,6 @@ template class QIntDict<TEPty>;
 
 FILE* syslog_file = NULL; //stdout;
 
-static QIntDict<TEPty> * ptys = 0L;
-
 #define PTY_FILENO 3
 #define BASE_CHOWN "konsole_grantpty"
 
@@ -158,11 +157,9 @@ int chownpty(int fd, int grant)
 // param grant: 1 to grant, 0 to revoke
 // returns 1 on success 0 on fail
 {
-  void(*tmp)(int) = signal(SIGCHLD,SIG_DFL);
   pid_t pid = fork();
   if (pid < 0)
   {
-    signal(SIGCHLD,tmp);
     return 0;
   }
   if (pid == 0)
@@ -177,17 +174,10 @@ int chownpty(int fd, int grant)
   { int w;
   retry:
     int rc = waitpid (pid, &w, 0);
-    if (rc != pid)
-    { // signal from other child, behave like catchChild.
-      // guess this gives quite some control chaos...
-      TEPty* sh = ptys->find(rc);
-      if (sh) { ptys->remove(rc); sh->donePty(w); }
+    if ((rc == -1) && (errno == EINTR))
       goto retry;
-    }
-    signal(SIGCHLD,tmp);
     return (rc != -1 && WIFEXITED(w) && WEXITSTATUS(w) == 0);
   }
-  signal(SIGCHLD,tmp);
   return 0; //dummy.
 }
 
@@ -206,16 +196,9 @@ void TEPty::setSize(int lines, int columns)
   ioctl(fd,TIOCSWINSZ,(char *)&wsize);
 }
 
-//! Catch a SIGCHLD signal and propagate that the child died.
-void catchChild(int)
-{ int status;
-  pid_t pid = waitpid(-1,&status,WNOHANG);
-  TEPty* sh = ptys->find(pid);
-  if (sh) { ptys->remove(pid); sh->donePty(status); }
-}
-
-void TEPty::donePty(int status)
+void TEPty::donePty()
 {
+  int status = exitStatus();
 #ifdef HAVE_UTEMPTER
   removeLineFromUtmp(ttynam, fd);
 #elif defined(USE_LOGIN)
@@ -236,16 +219,19 @@ const char* TEPty::deviceName()
 /*!
     start the client program.
 */
-int TEPty::run(const char* pgm, QStrList & args, const char* term, int addutmp)
+int TEPty::run(const char* _pgm, QStrList & _args, const char* _term, int _addutmp)
 {
-  if (!ptys)
-    ptys = new QIntDict<TEPty>;
+  arguments = _args;
+  arguments.prepend(_pgm);
+  term = _term;
+  addutmp = _addutmp;
 
-  comm_pid = fork();
-  if (comm_pid <  0) { fprintf(stderr,"Can't fork\n"); return -1; }
-  if (comm_pid == 0) makePty(ttynam,pgm,args,term,addutmp);
-  if (comm_pid >  0) ptys->insert(comm_pid,this);
+  if (!start(NotifyOnExit, (Communication) (Stdout | NoRead)))
+     return -1;
+
+  resume(); // Start...
   return 0;
+
 }
 
 int TEPty::openPty()
@@ -354,8 +340,8 @@ int TEPty::openPty()
 
 //! only used internally. See `run' for interface
 void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const char* term, int addutmp)
-{ int sig;
-// kdDebug() << "Making new terminal " << pgm << "\n";
+{ 
+  int sig;
   if (fd < 0) // no master pty could be opened
   {
   //FIXME:
@@ -418,6 +404,8 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   // getrlimit is a getdtablesize() equivalent, more portable (David Faure)
   struct rlimit rlp;
   getrlimit(RLIMIT_NOFILE, &rlp);
+  // We need to close all remaining fd's.
+  // Especially the one used by KProcess::start to see if we are running ok.
   for (int i = 0; i < (int)rlp.rlim_cur; i++)
     if (i != tt && i != fd) close(i); //FIXME: (result of merge) Check if not closing fd is OK)
 
@@ -500,7 +488,7 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
   ioctl(0,TIOCSWINSZ,(char *)&wsize);  // set screen size
 
   // finally, pass to the new program
-  // kdDebug() << "We are ready to run the program " << pgm << "\n";
+  //  kdDebug() << "We are ready to run the program " << pgm << "\n";
   execvp(pgm, argv);
   perror("exec failed");
   exit(1);                             // control should never come here.
@@ -512,11 +500,10 @@ void TEPty::makePty(const char* dev, const char* pgm, QStrList & args, const cha
 TEPty::TEPty()
 {
   fd = openPty();
-
-  signal(SIGCHLD,catchChild);
-
-  mn = new QSocketNotifier(fd, QSocketNotifier::Read);
-  connect( mn, SIGNAL(activated(int)), this, SLOT(DataReceived(int)) );
+  connect(this, SIGNAL(receivedStdout(int, int &)), 
+	  this, SLOT(DataReceived(int, int&)));
+  connect(this, SIGNAL(processExited(KProcess *)),
+          this, SLOT(donePty()));
 }
 
 /*!
@@ -526,14 +513,22 @@ TEPty::TEPty()
 */
 TEPty::~TEPty()
 {
-  delete mn;
-  close(fd);
 }
 
-/*! send signal to child */
-void TEPty::kill(int signal)
+int TEPty::setupCommunication(Communication comm)
 {
-  ::kill(comm_pid,signal);
+   if (fd <= 0) return 0;
+   out[0] = fd;
+   out[1] = dup(2); // Dummy
+   communication = comm;
+   return 1;
+}
+
+int TEPty::commSetupDoneC()
+{
+   const char *pgm = arguments.take(0);
+   makePty(ttynam, pgm,arguments,term,addutmp);
+   return 0; // Never reached.
 }
 
 /*! sends a character through the line */
@@ -555,14 +550,18 @@ void TEPty::send_bytes(const char* s, int len)
 }
 
 /*! indicates that a block of data is received */
-void TEPty::DataReceived(int)
-{ char buf[4096];
-  int n = read(fd, buf, 4096);
-  emit block_in(buf,n);
+void TEPty::DataReceived(int,int &len)
+{ 
+  char buf[4096];
+  len = read(fd, buf, 4096);
+  if (len < 0)
+     return;
+
+  emit block_in(buf,len);
   if (syslog_file) // if (debugging) ...
   {
     int i;
-    for (i = 0; i < n; i++) fputc(buf[i],syslog_file);
+    for (i = 0; i < len; i++) fputc(buf[i],syslog_file);
     fflush(syslog_file);
   }
 }
