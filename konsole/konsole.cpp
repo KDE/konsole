@@ -481,7 +481,6 @@ void Konsole::makeGUI()
       disconnect(m_bookmarks,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    if (m_bookmarksSession)
       disconnect(m_bookmarksSession,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
-   disconnect(m_tabPopupMenu,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
    //KONSOLEDEBUG<<"Konsole::makeGUI()"<<endl;
    if (m_tabbarSessionsCommands)
       connect(m_tabbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
@@ -804,10 +803,26 @@ void Konsole::makeGUI()
    m_shortcuts->readShortcutSettings();
 
    // Fill tab context menu
-   m_tabPopupMenu->insertItem( i18n("&Detach Session"), this,
-                         SLOT(slotTabDetachSession()) );
+   m_tabPopupMenu = new KPopupMenu( this );
+
+   m_tabDetachSession= new KAction( i18n("&Detach Session"), 0, this, SLOT(slotTabDetachSession()), this );
+   m_tabDetachSession->plug(m_tabPopupMenu);
+
    m_tabPopupMenu->insertItem( i18n("&Rename Session..."), this,
                          SLOT(slotTabRenameSession()) );
+   m_tabPopupMenu->insertSeparator();
+
+   m_tabMonitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ), "idea", 0, this,
+                                        SLOT( slotTabToggleMonitor() ), this);
+   m_tabMonitorActivity->plug(m_tabPopupMenu);
+
+   m_tabMonitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ), "ktip", 0, this,
+                                       SLOT( slotTabToggleMonitor() ), this);
+   m_tabMonitorSilence->plug(m_tabPopupMenu);
+
+   m_tabMasterMode = new KToggleAction ( i18n( "Send &Input to All Sessions" ), "remote", 0, this,
+                                    SLOT( slotTabToggleMasterMode() ), this);
+   m_tabMasterMode->plug(m_tabPopupMenu);
 
    m_tabPopupMenu->insertSeparator();
    m_tabPopupTabsMenu = new KPopupMenu( m_tabPopupMenu );
@@ -988,9 +1003,6 @@ void Konsole::makeBasicGUI()
 
   m_sessionList = new KPopupMenu(this);
   connect(m_sessionList, SIGNAL(activated(int)), SLOT(activateSession(int)));
-
-  m_tabPopupMenu = new KPopupMenu( this );
-  connect(m_tabPopupMenu,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
 }
 
 /**
@@ -1121,14 +1133,23 @@ void Konsole::configureRequest(TEWidget* _te, int state, int x, int y)
 
 void Konsole::slotTabContextMenu(QWidget* _te, const QPoint & pos)
 {
+   if (!m_menuCreated)
+      makeGUI();
+
+  m_contextMenuSession = sessions.at( tabwidget->indexOf( _te ) );
+
+  m_tabDetachSession->setEnabled( tabwidget->count()>1 );
+
+  m_tabMonitorActivity->setChecked( m_contextMenuSession->isMonitorActivity() );
+  m_tabMonitorSilence->setChecked( m_contextMenuSession->isMonitorSilence() );
+  m_tabMasterMode->setChecked( m_contextMenuSession->isMasterMode() );
+
   m_tabPopupTabsMenu->clear();
   int counter=0;
   for (TESession *ses = sessions.first(); ses; ses = sessions.next()) {
     QString title=ses->Title();
     m_tabPopupTabsMenu->insertItem(SmallIcon(ses->IconName()),title.replace('&',"&&"),counter++);
   }
-
-  m_contextMenuSession=sessions.at( tabwidget->indexOf( _te ) );
 
   m_tabPopupMenu->popup( pos );
 }
@@ -1147,6 +1168,22 @@ void Konsole::slotTabRenameSession() {
 
   if (ok)
     initSessionTitle(name,m_contextMenuSession);
+}
+
+void Konsole::slotTabToggleMonitor()
+{
+  m_contextMenuSession->setMonitorActivity( m_tabMonitorActivity->isChecked() );
+  m_contextMenuSession->setMonitorSilence( m_tabMonitorSilence->isChecked() );
+  notifySessionState( m_contextMenuSession, NOTIFYNORMAL );
+  if (m_contextMenuSession==se) {
+    monitorActivity->setChecked( m_tabMonitorActivity->isChecked() );
+    monitorSilence->setChecked( m_tabMonitorSilence->isChecked() );
+  }
+}
+
+void Konsole::slotTabToggleMasterMode()
+{
+  setMasterMode( m_tabMasterMode->isChecked(), m_contextMenuSession );
 }
 
 void Konsole::slotTabCloseSession()
@@ -2672,17 +2709,27 @@ void Konsole::initMasterMode(bool state)
 
 void Konsole::slotToggleMasterMode()
 {
-  bool _masterMode=masterMode->isChecked();
-  se->setMasterMode( _masterMode );
-  if(_masterMode)
+  setMasterMode( masterMode->isChecked() );
+}
+
+void Konsole::setMasterMode(bool _state, TESession* _se)
+{
+  if (!_se) _se=se;
+  if (_se->isMasterMode()==_state) return;
+
+  _se->setMasterMode( _state );
+  if (_se==se)
+    masterMode->setChecked( _state );
+
+  if(_state)
     for (TESession *ses = sessions.first(); ses; ses = sessions.next())
       ses->setListenToKeyPress(true);
   else {
     for (TESession *ses = sessions.first(); ses; ses = sessions.next())
       ses->setListenToKeyPress(false);
-    se->setListenToKeyPress(true);
+    _se->setListenToKeyPress(true);
   }
-  notifySessionState(se,NOTIFYNORMAL);
+  notifySessionState(_se,NOTIFYNORMAL);
 }
 
 void Konsole::notifySessionState(TESession* session, int state)

@@ -232,6 +232,8 @@ private slots:
   void slotTabDetachSession();
   void slotTabRenameSession();
   void slotTabCloseSession();
+  void slotTabToggleMonitor();
+  void slotTabToggleMasterMode();
 
 private:
   KSimpleConfig *defaultSession();
@@ -247,6 +249,7 @@ private:
 
   void setSchema(ColorSchema* s, TEWidget* tewidget=0);
   void setFont(int fontno=-1);
+  void setMasterMode(bool _state, TESession* _se=0);
 
   void buildSessionMenus();
   void addSessionCommand(const QString & path);
@@ -300,9 +303,9 @@ private:
   KPopupMenu* m_tabPopupTabsMenu;
 
   KAction *m_zmodemUpload;
-  KToggleAction *monitorActivity;
-  KToggleAction *monitorSilence;
-  KToggleAction *masterMode;
+  KToggleAction *monitorActivity, *m_tabMonitorActivity;
+  KToggleAction *monitorSilence, *m_tabMonitorSilence;
+  KToggleAction *masterMode, *m_tabMasterMode;
   KToggleAction *showMenubar;
   KToggleAction *m_fullscreen;
 
@@ -332,7 +335,8 @@ private:
   KAction       *m_closeSession;
   KAction       *m_print;
   KAction       *m_quit;
-
+  KAction       *m_tabDetachSession;
+  
   KActionCollection *m_shortcuts;
 
   KonsoleBookmarkHandler *bookmarkHandler;
