@@ -3,4 +3,4 @@
 # TODO. We should convert both schema and sessions
 #       to the method demonstrated for keytrans.
 
-../tests/quote ../other/default.Keytab > default.keytab.h
+../tests/quote ../other/README.default.Keytab > default.keytab.h

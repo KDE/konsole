@@ -3,13 +3,33 @@
 #include <stdio.h>
 #include <strings.h>
 
+int skip = 0;
+int empty = 1;
+
 void pchr(int c, int indent)
 {
+  if (skip)
+  {
+    skip = (c != '\n');
+    return;
+  }
   switch(c)
   {
-    case '\n':            printf("\\n\"\n%*s\"",indent,""); break;
-    case '"' : case '\\': printf("\\%c",c);               break;
-    default:              printf("%c",c);                 break;
+    case '\n':
+       if (!empty)
+           printf("\\n\"\n%*s\"",indent,"");
+       empty = 1;
+       break;
+    case '#' :
+       skip = 1;
+       break;
+    case '"' : case '\\': 
+       printf("\\");
+       // fallthrough
+    default:
+       printf("%c",c);
+       empty = 0;
+       break;
   }
 }
 
