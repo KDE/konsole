@@ -76,7 +76,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
 
   connect( em, SIGNAL( zmodemDetected() ), this, SLOT(slotZModemDetected()));
 
-  connect( sh,SIGNAL(done(int)), this,SLOT(done()) );
+  connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
   //kdDebug(1211)<<"TESession ctor() done"<<endl;
   if (!sh->error().isEmpty())
      QTimer::singleShot(0, this, SLOT(ptyError()));
