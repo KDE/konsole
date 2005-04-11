@@ -96,10 +96,10 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
 
 void TESession::ptyError()
 {
+  // FIXME:  sh->error() is always empty
   if ( sh->error().isEmpty() )
-    KMessageBox::detailedError( te->topLevelWidget(),
-       i18n("Konsole is unable to open a pseudo teletype!"),
-       i18n("Konsole needs to have read/write access to the system's PTYs.  The exact location of the PTYs depends on the Linux kernel version (2.4.x or 2.6.x), the kernel configuration and which dev-filesystem (devfs or udev) is being used.  \nUsing Linux kernel 2.6.x and udev this is typically /dev/pts/"), 
+    KMessageBox::error( te->topLevelWidget(),
+       i18n("Konsole is unable to open a PTY (pseudo teletype)!  This is likely due to an incorrect configuration of the PTY devices.  Konsole needs to have read/write access to the PTY devices."), 
        i18n("A fatal error has occurred!") );
   else
     KMessageBox::error(te->topLevelWidget(), sh->error());
