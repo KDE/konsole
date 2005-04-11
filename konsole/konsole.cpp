@@ -262,8 +262,6 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
   connect( &m_closeTimeout, SIGNAL(timeout()), this, SLOT(slotCouldNotClose()));
 
   no2command.setAutoDelete(true);
-  no2tempFile.setAutoDelete(true);
-  no2filename.setAutoDelete(true);
   menubar = menuBar();
 
   KAcceleratorManager::setNoAccel( menubar );
@@ -3075,11 +3073,8 @@ static void insertItemSorted(KPopupMenu *menu, const QIconSet &iconSet, const QS
 void Konsole::addSessionCommand(const QString &path)
 {
   KSimpleConfig* co;
-  QString filename=path;
-  if (path.isEmpty()) {
+  if (path.isEmpty())
     co = new KSimpleConfig(locate("appdata", "shell.desktop"), true /* read only */);
-    filename="shell.desktop";
-  }
   else
     co = new KSimpleConfig(path,true);
   co->setDesktopGroup();
@@ -3106,11 +3101,6 @@ void Konsole::addSessionCommand(const QString &path)
   }
 
   no2command.insert(++cmd_serial,co);
-
-  int j = filename.findRev('/');
-  if (j > -1)
-    filename = filename.mid(j+1);
-  no2filename.insert(cmd_serial,new QString(filename));
 
   // Add shortcuts only once and not for 'New Shell'.
   if ( ( b_sessionShortcutsMapped == true ) || ( cmd_serial == SESSION_NEW_SHELL_ID ) ) return;
@@ -3140,8 +3130,6 @@ void Konsole::addSessionCommand(const QString &path)
 void Konsole::loadSessionCommands()
 {
   no2command.clear();
-  no2tempFile.clear();
-  no2filename.clear();
 
   cmd_serial = 99;
   cmd_first_screen = -1;
@@ -3223,8 +3211,6 @@ void Konsole::addScreenSession(const QString &path, const QString &socket)
   m_session->insertItem( SmallIconSet( icon ), txt, cmd_serial, cmd_serial - 1 );
   m_tabbarSessionsCommands->insertItem( SmallIconSet( icon ), txt, cmd_serial );
   no2command.insert(cmd_serial,co);
-  no2tempFile.insert(cmd_serial,tmpFile);
-  no2filename.insert(cmd_serial,new QString(""));
 }
 
 void Konsole::loadScreenSessions()
@@ -3278,8 +3264,6 @@ void Konsole::resetScreenSessions()
       if (m_tabbarSessionsCommands)
          m_tabbarSessionsCommands->removeItem(i);
       no2command.remove(i);
-      no2tempFile.remove(i);
-      no2filename.remove(i);
     }
     cmd_serial = cmd_first_screen - 1;
   }

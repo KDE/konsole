@@ -279,9 +279,9 @@ private:
   QPtrDict<TESession> action2session;
   QPtrDict<KRadioAction> session2action;
   QPtrList<TESession> sessions;
-  QIntDict<KSimpleConfig> no2command;
-  QIntDict<KTempFile> no2tempFile;
-  QIntDict<QString> no2filename;
+
+  QIntDict<KSimpleConfig> no2command;     //QT4 - convert to QList
+
   KSimpleConfig* m_defaultSession;
   QString m_defaultSessionFilename;
 
