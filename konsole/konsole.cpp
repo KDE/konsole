@@ -1428,6 +1428,7 @@ void Konsole::saveProperties(KConfig* config) {
   }
   config->writeEntry("Fullscreen",b_fullscreen);
   config->writeEntry("defaultfont", (se->widget())->getVTFont());
+  s_kconfigSchema = colors->find( se->schemaNo() )->relPath();
   config->writeEntry("schema",s_kconfigSchema);
   config->writeEntry("scrollbar",n_scroll);
   config->writeEntry("tabbar",n_tabbar);
