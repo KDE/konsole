@@ -600,8 +600,8 @@ void Konsole::makeGUI()
 
 
       KPopupMenu* m_fontsizes = new KPopupMenu(this);
-      m_fontsizes->insertItem( SmallIconSet( "viewmag+" ), i18n( "&Enlarge Font" ), 0 );
-      m_fontsizes->insertItem( SmallIconSet( "viewmag-" ), i18n( "&Shrink Font" ), 1 );
+      m_fontsizes->insertItem( SmallIconSet( "fontsizeup" ), i18n( "&Enlarge Font" ), 0 );
+      m_fontsizes->insertItem( SmallIconSet( "fontsizedown" ), i18n( "&Shrink Font" ), 1 );
       m_fontsizes->insertSeparator( );
       m_fontsizes->insertItem( SmallIconSet( "font" ), i18n( "Se&lect..." ), 3 );
       m_options->insertItem( SmallIconSet( "text" ), i18n("Font"), m_fontsizes );
