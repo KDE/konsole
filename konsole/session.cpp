@@ -99,8 +99,8 @@ void TESession::ptyError()
   // FIXME:  sh->error() is always empty
   if ( sh->error().isEmpty() )
     KMessageBox::error( te->topLevelWidget(),
-       i18n("Konsole is unable to open a PTY (pseudo teletype)!  This is likely due to an incorrect configuration of the PTY devices.  Konsole needs to have read/write access to the PTY devices."), 
-       i18n("A fatal error has occurred!") );
+       i18n("Konsole is unable to open a PTY (pseudo teletype).  It is likely that this is due to an incorrect configuration of the PTY devices.  Konsole needs to have read/write access to the PTY devices."), 
+       i18n("A Fatal Error Has Occurred") );
   else
     KMessageBox::error(te->topLevelWidget(), sh->error());
   emit done(this);
