@@ -463,6 +463,8 @@ ColorSchemaList::ColorSchemaList() :
   defaultSchema = new ColorSchema();
   append(defaultSchema);
   setAutoDelete(true);
+
+  ColorSchema::serial=1;   // Needed for detached sessions
 }
 
 ColorSchemaList::~ColorSchemaList()
