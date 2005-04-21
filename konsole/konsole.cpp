@@ -3277,12 +3277,9 @@ void Konsole::setSchema(int numb, TEWidget* tewidget)
   ColorSchema* s = colors->find(numb);
   if (!s)
   {
-        kdWarning() << "No schema found. Using default." << endl;
-        s=(ColorSchema*)colors->at(0);
-  }
-  if (s->numb() != numb)
-  {
-        kdWarning() << "No schema with number " << numb << endl;
+    s = (ColorSchema*)colors->at(0);
+    kdWarning() << "No schema with serial #"<<numb<<", using "<<s->relPath()<<" (#"<<s->numb()<<")." << endl;
+    s_kconfigSchema = s->relPath();
   }
 
   if (s->hasSchemaFileChanged())
@@ -3298,7 +3295,7 @@ void Konsole::setSchema(const QString & path)
   if (!s)
   {
      s = (ColorSchema*)colors->at(0);  //the default one
-     kdWarning() << "Could not find schema named " <<path<<"; using "<<s->relPath()<<endl;
+     kdWarning() << "No schema with the name " <<path<<", using "<<s->relPath()<<endl;
      s_kconfigSchema = s->relPath();
   }
   if (s->hasSchemaFileChanged())
