@@ -28,10 +28,6 @@
 #include <stdio.h>
 #include <stddef.h>
 
-#ifndef HERE
-#define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
-#endif
-
 /* KeyEntry
 
    instances represent the individual assignments

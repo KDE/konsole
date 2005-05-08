@@ -14,10 +14,6 @@
 #include <qregexp.h>
 #include <qtextedit.h>
 
-#ifndef HERE
-#define HERE fprintf(stderr,"%s(%d): here\n",__FILE__,__LINE__)
-#endif
-
 /*! \class TESession
 
     Sessions are combinations of TEPTy and Emulations.

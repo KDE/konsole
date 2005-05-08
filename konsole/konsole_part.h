@@ -18,8 +18,8 @@
     Boston, MA 02111-1307, USA.
  */
 
-#ifndef __KONSOLE_PART_H__
-#define __KONSOLE_PART_H__
+#ifndef KONSOLE_PART_H
+#define KONSOLE_PART_H
 
 #include <kparts/browserextension.h>
 #include <kparts/factory.h>

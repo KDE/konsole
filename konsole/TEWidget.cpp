@@ -76,13 +76,6 @@
 #include <qlabel.h>
 #include <qtimer.h>
 
-#ifndef HERE
-#define HERE printf("%s(%d): %s\n",__FILE__,__LINE__,__FUNCTION__)
-#endif
-#ifndef HCNT
-#define HCNT(Name) // { static int cnt = 1; printf("%s(%d): %s %d\n",__FILE__,__LINE__,Name,cnt++); }
-#endif
-
 #ifndef loc
 #define loc(X,Y) ((Y)*columns+(X))
 #endif
@@ -796,7 +789,6 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
   QPainter paint;
   setUpdatesEnabled(false);
   paint.begin( this );
-HCNT("setImage");
 
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
@@ -977,7 +969,6 @@ void TEWidget::paintEvent( QPaintEvent* pe )
   setUpdatesEnabled(false);
   paint.begin( this );
   paint.setBackgroundMode( TransparentMode );
-HCNT("paintEvent");
 
   // Note that the actual widget size can be slightly larger
   // that the image (the size is truncated towards the smaller

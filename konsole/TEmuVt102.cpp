@@ -57,10 +57,6 @@
    - Diagnostics
 */
 
-#ifndef HERE
-#define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
-#endif
-
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /*                       Constructor / Destructor                            */

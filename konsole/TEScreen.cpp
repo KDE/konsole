@@ -47,10 +47,6 @@
 #include "konsole_wcwidth.h"
 #include "TEScreen.h"
 
-#ifndef HERE
-#define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
-#endif
-
 //FIXME: this is emulation specific. Use false for xterm, true for ANSI.
 //FIXME: see if we can get this from terminfo.
 #define BS_CLEARS false

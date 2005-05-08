@@ -19,10 +19,6 @@
 #include <errno.h>
 #include <kdebug.h>
 
-#ifndef HERE
-#define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
-#endif
-
 // Reasonable line size
 #define LINE_SIZE	1024
 
