@@ -26,6 +26,7 @@
 #define BITS_Alt        6
 #define BITS_AppScreen  7
 #define BITS_COUNT      8
+#define BITS_AnyMod     9
 
 #define CMD_none          -1
 #define CMD_send           0
@@ -63,6 +64,7 @@ class KeyTrans
             ~KeyEntry();
             bool matches(int key, int bits, int mask);
             bool metaspecified(void);
+            bool anymodspecified(void);
             QString text();
             int ref;
          private:

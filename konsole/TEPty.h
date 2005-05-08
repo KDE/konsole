@@ -46,6 +46,7 @@ Q_OBJECT
     QString error() { return m_strError; }
     void setXonXoff(bool on);
     void setSize(int lines, int cols);
+    void setErase(char erase);
 
   public slots:
     void useUtf8(bool on);

@@ -1187,6 +1187,20 @@ void TEmuVt102::setConnect(bool c)
   }
 }
 
+char TEmuVt102::getErase()
+{
+  int cmd = CMD_none; 
+  const char* txt; 
+  int len;
+  bool metaspecified;
+  
+  if (keytrans->findEntry(Qt::Key_Backspace, 0, &cmd, &txt, &len,
+      &metaspecified) && (cmd==CMD_send) && (len == 1))
+    return txt[0];
+    
+  return '\b';
+}
+
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /*                               Diagnostic                                  */

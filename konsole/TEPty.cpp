@@ -69,6 +69,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <errno.h>
+#include <termios.h>
                      
 #include <kstandarddirs.h>
 #include <klocale.h>
@@ -96,6 +97,21 @@ void TEPty::setXonXoff(bool on)
 void TEPty::useUtf8(bool on)
 {
   pty()->setUtf8Mode(on);
+}
+
+void TEPty::setErase(char erase)
+{
+  struct termios tios;
+  int fd = pty()->slaveFd();
+  
+  if(tcgetattr(fd, &tios))
+  {
+    qWarning("Uh oh.. can't get terminal attributes..");
+    return;
+  }
+  tios.c_cc[VERASE] = erase;
+  if(tcsetattr(fd, TCSANOW, &tios))
+    qWarning("Uh oh.. can't set terminal attributes..");
 }
 
 /*!

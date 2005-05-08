@@ -87,6 +87,8 @@ public:
   
   bool utf8() { return m_codec->mibEnum() == 106; }
 
+  virtual char getErase();
+
   virtual void setListenToKeyPress(bool l);
   void setColumns(int columns);
 

@@ -81,6 +81,8 @@ public:
   void resetModes();
 
   void setConnect(bool r);
+  
+  char getErase();
 
 private:
 

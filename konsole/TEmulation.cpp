@@ -476,6 +476,11 @@ void TEmulation::setConnect(bool c)
   }
 }
 
+char TEmulation::getErase()
+{
+  return '\b';
+}
+
 void TEmulation::setListenToKeyPress(bool l)
 {
   listenToKeyPress=l;

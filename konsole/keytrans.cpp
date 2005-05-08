@@ -49,7 +49,13 @@ bool KeyTrans::KeyEntry::matches(int _key, int _bits, int _mask)
 
 bool KeyTrans::KeyEntry::metaspecified(void)
 {
-  return (mask & (1 << BITS_Alt)) && (bits & (1 << BITS_Alt));
+  return ((mask & (1 << BITS_Alt))    && (bits & (1 << BITS_Alt))) ||
+         ((mask & (1 << BITS_AnyMod)) && (bits & (1 << BITS_AnyMod)));
+}
+
+bool KeyTrans::KeyEntry::anymodspecified(void)
+{
+  return (mask & (1 << BITS_AnyMod)) && (bits & (1 << BITS_AnyMod));
 }
 
 QString KeyTrans::KeyEntry::text()
@@ -114,12 +120,27 @@ bool KeyTrans::findEntry(int key, int bits, int* cmd, const char** txt, int* len
                bool* metaspecified)
 {
   if (!m_fileRead) readConfig();
+  
+  if (bits & ((1<<BITS_Shift)|(1<<BITS_Alt)|(1<<BITS_Control)))
+    bits |= (1<<BITS_AnyMod);
+  
   for (QPtrListIterator<KeyEntry> it(tableX); it.current(); ++it)
     if (it.current()->matches(key,bits,0xffff))
     {
       *cmd = it.current()->cmd;
-      *txt = it.current()->txt.ascii();
       *len = it.current()->txt.length();
+      if ((*cmd==CMD_send) && it.current()->anymodspecified() && (*len < 16))
+      {
+        static char buf[16];
+        char *c, mask = '1' + BITS(0, bits&(1<<BITS_Shift)) +
+          BITS(1, bits&(1<<BITS_Alt)) + BITS(2, bits&(1<<BITS_Control));
+        strcpy(buf, it.current()->txt.ascii());
+        c = strchr(buf, '*');
+        if (c) *c = mask;
+        *txt = buf;
+      }
+      else
+        *txt = it.current()->txt.ascii();
       *metaspecified = it.current()->metaspecified();
       return true;
     }
@@ -480,6 +501,8 @@ void KeyTransSymbols::defModSyms()
   defModSym("NewLine",    BITS_NewLine      );
   defModSym("AppCuKeys",  BITS_AppCuKeys    );
   defModSym("AppScreen",  BITS_AppScreen    );
+  // Special (Any Modifier)
+  defModSym("AnyMod",     BITS_AnyMod       );
 }
 
 void KeyTransSymbols::defKeySyms()
