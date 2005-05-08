@@ -3704,7 +3704,7 @@ void Konsole::slotFind()
   else
     if (m_find_found) {
       if (forward) {
-        if ( KMessageBox::questionYesNo( this,
+        if ( KMessageBox::questionYesNo( m_finddialog,
              i18n("End of history reached.\n" "Continue from the beginning?"),
   	     i18n("Find") ) == KMessageBox::Yes ) {
           m_find_first = true;
@@ -3712,7 +3712,7 @@ void Konsole::slotFind()
         }
       }
       else {
-        if ( KMessageBox::questionYesNo( this,
+        if ( KMessageBox::questionYesNo( m_finddialog,
              i18n("Beginning of history reached.\n" "Continue from the end?"),
   	     i18n("Find") ) == KMessageBox::Yes ) {
           m_find_first = true;
@@ -3721,7 +3721,7 @@ void Konsole::slotFind()
       }
     }
   else
-    KMessageBox::information( this,
+    KMessageBox::information( m_finddialog,
     	i18n( "Search string '%1' not found." ).arg(KStringHandler::csqueeze(m_find_pattern)),
 	i18n( "Find" ) );
 }
