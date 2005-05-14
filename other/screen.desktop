@@ -127,5 +127,5 @@ Comment[xx]=xxNew Screen Sessionxx
 Comment[zh_CN]=新建屏幕会话
 Comment[zh_TW]=新增螢幕工作階段
 Comment[zu]=Isiqendu Seskrini Esisha 
-Exec=screen 
+Exec=screen
 Cwd=
