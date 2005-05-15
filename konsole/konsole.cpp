@@ -1984,6 +1984,18 @@ void Konsole::reparseConfiguration()
 }
 
 // Called from emulation
+void Konsole::changeTabTextColor( int rgb )
+{
+    QColor color;
+    color.setRgb( rgb );
+    if ( !color.isValid() ) {
+        kdWarning()<<" Invalid RGB color "<<rgb<<endl;
+        return;
+    }
+    tabwidget->setTabColor( se->widget(), color );
+}
+
+// Called from emulation
 void Konsole::changeColLin(int columns, int lines)
 {
   if (b_allowResize && !b_fixedSize) {
@@ -2685,6 +2697,8 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
            this, SLOT(slotGetSessionSchema(TESession*, QString &)));
   connect( s, SIGNAL(setSessionSchema(TESession*, const QString &)),
            this, SLOT(slotSetSessionSchema(TESession*, const QString &)));
+  connect( s->getEmulation(),SIGNAL(changeTabTextColor(int)), 
+           this,SLOT(changeTabTextColor(int)) );
 
   s->widget()->setVTFont(defaultFont);// Hack to set font again after newSession
   s->setSchemaNo(schmno);
@@ -3387,6 +3401,7 @@ void Konsole::detachSession(TESession* _se) {
   disconnect( _se->getEmulation(),SIGNAL(ImageSizeChanged(int,int)), this,SLOT(notifySize(int,int)));
   disconnect( _se->getEmulation(),SIGNAL(changeColLin(int, int)), this,SLOT(changeColLin(int,int)) );
   disconnect( _se->getEmulation(),SIGNAL(changeColumns(int)), this,SLOT(changeColumns(int)) );
+  disconnect( _se->getEmulation(),SIGNAL(changeTabTextColor(int)), this,SLOT(changeTabTextColor(int)) );
 
   disconnect( _se,SIGNAL(updateTitle()), this,SLOT(updateTitle()) );
   disconnect( _se,SIGNAL(notifySessionState(TESession*,int)), this,SLOT(notifySessionState(TESession*,int)) );
@@ -3485,6 +3500,8 @@ void Konsole::attachSession(TESession* session)
   connect( session->getEmulation(),SIGNAL(ImageSizeChanged(int,int)), this,SLOT(notifySize(int,int)));
   connect( session->getEmulation(),SIGNAL(changeColumns(int)), this,SLOT(changeColumns(int)) );
   connect( session->getEmulation(),SIGNAL(changeColLin(int, int)), this,SLOT(changeColLin(int,int)) );
+
+  connect( session->getEmulation(),SIGNAL(changeTabTextColor(int)), this,SLOT(changeTabTextColor(int)) );
 
   activateSession(session);
 }

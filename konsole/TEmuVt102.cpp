@@ -511,6 +511,9 @@ switch( N )
 // resize = \e[8;<row>;<col>t
     case TY_CSI_PS('t',    8) : changeColLin( q /* col */, p /* lin */ ); break;
 
+// change tab text color : \e[28;<color>t  color: 0-16,777,215
+    case TY_CSI_PS('t',    28) : emit changeTabTextColor   ( p        ); break;
+
     case TY_CSI_PS('K',    0) : scr->clearToEndOfLine     (          ); break;
     case TY_CSI_PS('K',    1) : scr->clearToBeginOfLine   (          ); break;
     case TY_CSI_PS('K',    2) : scr->clearEntireLine      (          ); break;

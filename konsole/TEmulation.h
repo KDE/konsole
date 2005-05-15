@@ -72,6 +72,7 @@ signals:
   void changeTitle(int arg, const char* str);
   void notifySessionState(int state);
   void zmodemDetected();
+  void changeTabTextColor(int color);
 
 public:
 
