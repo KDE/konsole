@@ -799,12 +799,12 @@ void Konsole::makeGUI()
                          SLOT(slotTabRenameSession()) );
    m_tabPopupMenu->insertSeparator();
 
-   m_tabMonitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ), "idea", 0, this,
-                                        SLOT( slotTabToggleMonitor() ), this);
+  m_tabMonitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ), 
+      SmallIconSet("activity"), 0, this, SLOT( slotTabToggleMonitor() ), this );
    m_tabMonitorActivity->plug(m_tabPopupMenu);
 
-   m_tabMonitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ), "ktip", 0, this,
-                                       SLOT( slotTabToggleMonitor() ), this);
+  m_tabMonitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ), 
+      SmallIconSet("silence"), 0, this, SLOT( slotTabToggleMonitor() ), this );
    m_tabMonitorSilence->plug(m_tabPopupMenu);
 
    m_tabMasterMode = new KToggleAction ( i18n( "Send &Input to All Sessions" ), "remote", 0, this,
@@ -1061,10 +1061,15 @@ void Konsole::makeBasicGUI()
                                 SLOT(slotRenameSession()), m_shortcuts, "rename_session");
   m_zmodemUpload = new KAction(i18n("&ZModem Upload..."), Qt::CTRL+Qt::ALT+Qt::Key_U, this,
                                 SLOT(slotZModemUpload()), m_shortcuts, "zmodem_upload");
-  monitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ), "idea", 0, this,
-                                        SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_activity" );
-  monitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ), "ktip", 0, this,
-                                       SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_silence" );
+
+  monitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ),
+      SmallIconSet("activity"), 0, this,
+      SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_activity" );
+
+  monitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ),
+      SmallIconSet("silence"), 0, this,
+      SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_silence" );
+
   masterMode = new KToggleAction ( i18n( "Send &Input to All Sessions" ), "remote", 0, this,
                                    SLOT( slotToggleMasterMode() ), m_shortcuts, "send_input_to_all_sessions" );
 
@@ -3135,9 +3140,9 @@ void Konsole::notifySessionState(TESession* session, int state)
                          break;
     case NOTIFYBELL    : state_iconname = "bell";
                          break;
-    case NOTIFYACTIVITY: state_iconname = "idea";
+    case NOTIFYACTIVITY: state_iconname = "activity";
                          break;
-    case NOTIFYSILENCE : state_iconname = "ktip";
+    case NOTIFYSILENCE : state_iconname = "silence";
 			 break;
   }
   if (!state_iconname.isEmpty()
