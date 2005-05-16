@@ -84,6 +84,9 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
 
   connect( em, SIGNAL( zmodemDetected() ), this, SLOT(slotZModemDetected()));
 
+  connect( em, SIGNAL( changeTabTextColor( int ) ),
+           this, SLOT( changeTabTextColor( int ) ) );
+
   connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
   //kdDebug(1211)<<"TESession ctor() done"<<endl;
   if (!sh->error().isEmpty())
@@ -149,6 +152,11 @@ void TESession::run()
      initial_cwd=cwd_save;
 
   sh->setWriteable(false);  // We are reachable via kwrited.
+}
+
+void TESession::changeTabTextColor( int color )
+{
+    emit changeTabTextColor( this, color );
 }
 
 void TESession::setUserTitle( int what, const QString &caption )

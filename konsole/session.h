@@ -121,6 +121,7 @@ public slots:
   void done(int);
   void terminate();
   void setUserTitle( int, const QString &caption );
+  void changeTabTextColor( int );
   void ptyError();
   void slotZModemDetected();
   void emitZModemDetected();
@@ -138,6 +139,7 @@ signals:
   void done(TESession*);
   void updateTitle();
   void notifySessionState(TESession* session, int state);
+  void changeTabTextColor( TESession*, int );
 
   void disableMasterModeConnections();
   void enableMasterModeConnections();

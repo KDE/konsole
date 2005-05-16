@@ -1983,16 +1983,17 @@ void Konsole::reparseConfiguration()
   }
 }
 
-// Called from emulation
-void Konsole::changeTabTextColor( int rgb )
+// Called via emulation via session
+void Konsole::changeTabTextColor( TESession* ses, int rgb )
 {
+    if ( !ses ) return;
     QColor color;
     color.setRgb( rgb );
     if ( !color.isValid() ) {
         kdWarning()<<" Invalid RGB color "<<rgb<<endl;
         return;
     }
-    tabwidget->setTabColor( se->widget(), color );
+    tabwidget->setTabColor( ses->widget(), color );
 }
 
 // Called from emulation
@@ -2697,8 +2698,8 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
            this, SLOT(slotGetSessionSchema(TESession*, QString &)));
   connect( s, SIGNAL(setSessionSchema(TESession*, const QString &)),
            this, SLOT(slotSetSessionSchema(TESession*, const QString &)));
-  connect( s->getEmulation(),SIGNAL(changeTabTextColor(int)), 
-           this,SLOT(changeTabTextColor(int)) );
+  connect( s, SIGNAL(changeTabTextColor(TESession*, int)), 
+           this,SLOT(changeTabTextColor(TESession*, int)) );
 
   s->widget()->setVTFont(defaultFont);// Hack to set font again after newSession
   s->setSchemaNo(schmno);
@@ -3395,13 +3396,15 @@ void Konsole::detachSession(TESession* _se) {
   sessions.remove(_se);
   delete ra;
 
+  QColor se_tabtextcolor = tabwidget->tabColor( _se->widget() );
+
   disconnect( _se,SIGNAL(done(TESession*)),
               this,SLOT(doneSession(TESession*)) );
 
   disconnect( _se->getEmulation(),SIGNAL(ImageSizeChanged(int,int)), this,SLOT(notifySize(int,int)));
   disconnect( _se->getEmulation(),SIGNAL(changeColLin(int, int)), this,SLOT(changeColLin(int,int)) );
   disconnect( _se->getEmulation(),SIGNAL(changeColumns(int)), this,SLOT(changeColumns(int)) );
-  disconnect( _se->getEmulation(),SIGNAL(changeTabTextColor(int)), this,SLOT(changeTabTextColor(int)) );
+  disconnect( _se, SIGNAL(changeTabTextColor(TESession*, int)), this, SLOT(changeTabTextColor(TESession*, int)) );
 
   disconnect( _se,SIGNAL(updateTitle()), this,SLOT(updateTitle()) );
   disconnect( _se,SIGNAL(notifySessionState(TESession*,int)), this,SLOT(notifySessionState(TESession*,int)) );
@@ -3418,6 +3421,7 @@ void Konsole::detachSession(TESession* _se) {
   konsole->show();
   konsole->attachSession(_se);
   konsole->activateSession(_se);
+  konsole->changeTabTextColor( _se, se_tabtextcolor.rgb() );//restore prev color
 
   if (_se==se) {
     if (se == se_previous)
@@ -3501,7 +3505,7 @@ void Konsole::attachSession(TESession* session)
   connect( session->getEmulation(),SIGNAL(changeColumns(int)), this,SLOT(changeColumns(int)) );
   connect( session->getEmulation(),SIGNAL(changeColLin(int, int)), this,SLOT(changeColLin(int,int)) );
 
-  connect( session->getEmulation(),SIGNAL(changeTabTextColor(int)), this,SLOT(changeTabTextColor(int)) );
+  connect( session, SIGNAL(changeTabTextColor(TESession*, int)), this, SLOT(changeTabTextColor(TESession*, int)) );
 
   activateSession(session);
 }
