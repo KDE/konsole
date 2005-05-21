@@ -198,16 +198,16 @@ void TEmuVt102::reset()
 
 #define TY_CONSTR(T,A,N) ( ((((int)N) & 0xffff) << 16) | ((((int)A) & 0xff) << 8) | (((int)T) & 0xff) )
 
-#define TY_CHR___(   )  TY_CONSTR(0,0,0)
-#define TY_CTL___(A  )  TY_CONSTR(1,A,0)
-#define TY_ESC___(A  )  TY_CONSTR(2,A,0)
+#define TY_CHR(   )     TY_CONSTR(0,0,0)
+#define TY_CTL(A  )     TY_CONSTR(1,A,0)
+#define TY_ESC(A  )     TY_CONSTR(2,A,0)
 #define TY_ESC_CS(A,B)  TY_CONSTR(3,A,B)
 #define TY_ESC_DE(A  )  TY_CONSTR(4,A,0)
 #define TY_CSI_PS(A,N)  TY_CONSTR(5,A,N)
 #define TY_CSI_PN(A  )  TY_CONSTR(6,A,0)
 #define TY_CSI_PR(A,N)  TY_CONSTR(7,A,N)
 
-#define TY_VT52__(A  )  TY_CONSTR(8,A,0)
+#define TY_VT52(A  )    TY_CONSTR(8,A,0)
 
 #define TY_CSI_PG(A  )  TY_CONSTR(9,A,0)
 
@@ -311,7 +311,7 @@ void TEmuVt102::onRcvChar(int cc)
     // of course. Guess this originates from a weakly layered handling of the X-on
     // X-off protocol, which comes really below this level.
     if (cc == CNTL('X') || cc == CNTL('Z') || cc == ESC) resetToken(); //VT100: CAN or SUB
-    if (cc != ESC)    { tau( TY_CTL___(cc+'@' ),    0,   0); return; }
+    if (cc != ESC)    { tau( TY_CTL(cc+'@' ),    0,   0); return; }
   }
 
   pushToToken(cc); // advance the state
@@ -329,8 +329,8 @@ void TEmuVt102::onRcvChar(int cc)
     if (lec(3,2,'?')) {                                                       return; }
     if (lec(3,2,'>')) {                                                       return; }
     if (lec(3,2,'!')) {                                                       return; }
-    if (lun(       )) { tau( TY_CHR___(), applyCharset(cc), 0); resetToken(); return; }
-    if (lec(2,0,ESC)) { tau( TY_ESC___(s[1]),    0,   0);       resetToken(); return; }
+    if (lun(       )) { tau( TY_CHR(), applyCharset(cc), 0); resetToken(); return; }
+    if (lec(2,0,ESC)) { tau( TY_ESC(s[1]),    0,   0);       resetToken(); return; }
     if (les(3,1,SCS)) { tau( TY_ESC_CS(s[1],s[2]),    0,   0);  resetToken(); return; }
     if (lec(3,1,'#')) { tau( TY_ESC_DE(s[2]),    0,   0);       resetToken(); return; }
     if (eps(    CPN)) { tau( TY_CSI_PN(cc), argv[0],argv[1]);   resetToken(); return; }
@@ -350,11 +350,11 @@ void TEmuVt102::onRcvChar(int cc)
   else // mode VT52
   {
     if (lec(1,0,ESC))                                                      return;
-    if (les(1,0,CHR)) { tau( TY_CHR___(       ), s[0],   0); resetToken(); return; }
+    if (les(1,0,CHR)) { tau( TY_CHR(       ), s[0],   0); resetToken(); return; }
     if (lec(2,1,'Y'))                                                      return;
     if (lec(3,1,'Y'))                                                      return;
-    if (p < 4)        { tau( TY_VT52__(s[1]   ),    0,   0); resetToken(); return; }
-                        tau( TY_VT52__(s[1]   ), s[2],s[3]); resetToken(); return;
+    if (p < 4)        { tau( TY_VT52(s[1]   ),    0,   0); resetToken(); return; }
+                        tau( TY_VT52(s[1]   ), s[2],s[3]); resetToken(); return;
   }
 }
 
@@ -427,61 +427,61 @@ switch( N )
   switch (token)
   {
 
-    case TY_CHR___(         ) : scr->ShowCharacter        (p         ); break; //UTF16
+    case TY_CHR(         ) : scr->ShowCharacter        (p         ); break; //UTF16
 
     //             127 DEL    : ignored on input
 
-    case TY_CTL___('@'      ) : /* NUL: ignored                      */ break;
-    case TY_CTL___('A'      ) : /* SOH: ignored                      */ break;
-    case TY_CTL___('B'      ) : /* STX: ignored                      */ break;
-    case TY_CTL___('C'      ) : /* ETX: ignored                      */ break;
-    case TY_CTL___('D'      ) : /* EOT: ignored                      */ break;
-    case TY_CTL___('E'      ) :      reportAnswerBack     (          ); break; //VT100
-    case TY_CTL___('F'      ) : /* ACK: ignored                      */ break;
-    case TY_CTL___('G'      ) : emit notifySessionState(NOTIFYBELL);
+    case TY_CTL('@'      ) : /* NUL: ignored                      */ break;
+    case TY_CTL('A'      ) : /* SOH: ignored                      */ break;
+    case TY_CTL('B'      ) : /* STX: ignored                      */ break;
+    case TY_CTL('C'      ) : /* ETX: ignored                      */ break;
+    case TY_CTL('D'      ) : /* EOT: ignored                      */ break;
+    case TY_CTL('E'      ) :      reportAnswerBack     (          ); break; //VT100
+    case TY_CTL('F'      ) : /* ACK: ignored                      */ break;
+    case TY_CTL('G'      ) : emit notifySessionState(NOTIFYBELL);
                                 break; //VT100
-    case TY_CTL___('H'      ) : scr->BackSpace            (          ); break; //VT100
-    case TY_CTL___('I'      ) : scr->Tabulate             (          ); break; //VT100
-    case TY_CTL___('J'      ) : scr->NewLine              (          ); break; //VT100
-    case TY_CTL___('K'      ) : scr->NewLine              (          ); break; //VT100
-    case TY_CTL___('L'      ) : scr->NewLine              (          ); break; //VT100
-    case TY_CTL___('M'      ) : scr->Return               (          ); break; //VT100
+    case TY_CTL('H'      ) : scr->BackSpace            (          ); break; //VT100
+    case TY_CTL('I'      ) : scr->Tabulate             (          ); break; //VT100
+    case TY_CTL('J'      ) : scr->NewLine              (          ); break; //VT100
+    case TY_CTL('K'      ) : scr->NewLine              (          ); break; //VT100
+    case TY_CTL('L'      ) : scr->NewLine              (          ); break; //VT100
+    case TY_CTL('M'      ) : scr->Return               (          ); break; //VT100
 
-    case TY_CTL___('N'      ) :      useCharset           (         1); break; //VT100
-    case TY_CTL___('O'      ) :      useCharset           (         0); break; //VT100
+    case TY_CTL('N'      ) :      useCharset           (         1); break; //VT100
+    case TY_CTL('O'      ) :      useCharset           (         0); break; //VT100
 
-    case TY_CTL___('P'      ) : /* DLE: ignored                      */ break;
-    case TY_CTL___('Q'      ) : /* DC1: XON continue                 */ break; //VT100
-    case TY_CTL___('R'      ) : /* DC2: ignored                      */ break;
-    case TY_CTL___('S'      ) : /* DC3: XOFF halt                    */ break; //VT100
-    case TY_CTL___('T'      ) : /* DC4: ignored                      */ break;
-    case TY_CTL___('U'      ) : /* NAK: ignored                      */ break;
-    case TY_CTL___('V'      ) : /* SYN: ignored                      */ break;
-    case TY_CTL___('W'      ) : /* ETB: ignored                      */ break;
-    case TY_CTL___('X'      ) : scr->ShowCharacter        (    0x2592); break; //VT100
-    case TY_CTL___('Y'      ) : /* EM : ignored                      */ break;
-    case TY_CTL___('Z'      ) : scr->ShowCharacter        (    0x2592); break; //VT100
-    case TY_CTL___('['      ) : /* ESC: cannot be seen here.         */ break;
-    case TY_CTL___('\\'     ) : /* FS : ignored                      */ break;
-    case TY_CTL___(']'      ) : /* GS : ignored                      */ break;
-    case TY_CTL___('^'      ) : /* RS : ignored                      */ break;
-    case TY_CTL___('_'      ) : /* US : ignored                      */ break;
+    case TY_CTL('P'      ) : /* DLE: ignored                      */ break;
+    case TY_CTL('Q'      ) : /* DC1: XON continue                 */ break; //VT100
+    case TY_CTL('R'      ) : /* DC2: ignored                      */ break;
+    case TY_CTL('S'      ) : /* DC3: XOFF halt                    */ break; //VT100
+    case TY_CTL('T'      ) : /* DC4: ignored                      */ break;
+    case TY_CTL('U'      ) : /* NAK: ignored                      */ break;
+    case TY_CTL('V'      ) : /* SYN: ignored                      */ break;
+    case TY_CTL('W'      ) : /* ETB: ignored                      */ break;
+    case TY_CTL('X'      ) : scr->ShowCharacter        (    0x2592); break; //VT100
+    case TY_CTL('Y'      ) : /* EM : ignored                      */ break;
+    case TY_CTL('Z'      ) : scr->ShowCharacter        (    0x2592); break; //VT100
+    case TY_CTL('['      ) : /* ESC: cannot be seen here.         */ break;
+    case TY_CTL('\\'     ) : /* FS : ignored                      */ break;
+    case TY_CTL(']'      ) : /* GS : ignored                      */ break;
+    case TY_CTL('^'      ) : /* RS : ignored                      */ break;
+    case TY_CTL('_'      ) : /* US : ignored                      */ break;
 
-    case TY_ESC___('D'      ) : scr->index                (          ); break; //VT100
-    case TY_ESC___('E'      ) : scr->NextLine             (          ); break; //VT100
-    case TY_ESC___('H'      ) : scr->changeTabStop        (true      ); break; //VT100
-    case TY_ESC___('M'      ) : scr->reverseIndex         (          ); break; //VT100
-    case TY_ESC___('Z'      ) :      reportTerminalType   (          ); break;
-    case TY_ESC___('c'      ) :      reset                (          ); break;
+    case TY_ESC('D'      ) : scr->index                (          ); break; //VT100
+    case TY_ESC('E'      ) : scr->NextLine             (          ); break; //VT100
+    case TY_ESC('H'      ) : scr->changeTabStop        (true      ); break; //VT100
+    case TY_ESC('M'      ) : scr->reverseIndex         (          ); break; //VT100
+    case TY_ESC('Z'      ) :      reportTerminalType   (          ); break;
+    case TY_ESC('c'      ) :      reset                (          ); break;
 
-    case TY_ESC___('n'      ) :      useCharset           (         2); break;
-    case TY_ESC___('o'      ) :      useCharset           (         3); break;
-    case TY_ESC___('7'      ) :      saveCursor           (          ); break;
-    case TY_ESC___('8'      ) :      restoreCursor        (          ); break;
+    case TY_ESC('n'      ) :      useCharset           (         2); break;
+    case TY_ESC('o'      ) :      useCharset           (         3); break;
+    case TY_ESC('7'      ) :      saveCursor           (          ); break;
+    case TY_ESC('8'      ) :      restoreCursor        (          ); break;
 
-    case TY_ESC___('='      ) :          setMode      (MODE_AppKeyPad); break;
-    case TY_ESC___('>'      ) :        resetMode      (MODE_AppKeyPad); break;
-    case TY_ESC___('<'      ) :          setMode      (MODE_Ansi     ); break; //VT100
+    case TY_ESC('='      ) :          setMode      (MODE_AppKeyPad); break;
+    case TY_ESC('>'      ) :        resetMode      (MODE_AppKeyPad); break;
+    case TY_ESC('<'      ) :          setMode      (MODE_Ansi     ); break; //VT100
 
     case TY_ESC_CS('(',  '0') :      setCharset           (0,     '0'); break; //VT100
     case TY_ESC_CS('(',  'A') :      setCharset           (0,     'A'); break; //VT100
@@ -722,23 +722,23 @@ switch( N )
     case TY_CSI_PE('p'      ) : /* IGNORED: reset         (        ) */ break;
 
     //FIXME: when changing between vt52 and ansi mode evtl do some resetting.
-    case TY_VT52__('A'      ) : scr->cursorUp             (         1); break; //VT52
-    case TY_VT52__('B'      ) : scr->cursorDown           (         1); break; //VT52
-    case TY_VT52__('C'      ) : scr->cursorRight          (         1); break; //VT52
-    case TY_VT52__('D'      ) : scr->cursorLeft           (         1); break; //VT52
+    case TY_VT52('A'      ) : scr->cursorUp             (         1); break; //VT52
+    case TY_VT52('B'      ) : scr->cursorDown           (         1); break; //VT52
+    case TY_VT52('C'      ) : scr->cursorRight          (         1); break; //VT52
+    case TY_VT52('D'      ) : scr->cursorLeft           (         1); break; //VT52
 
-    case TY_VT52__('F'      ) :      setAndUseCharset     (0,     '0'); break; //VT52
-    case TY_VT52__('G'      ) :      setAndUseCharset     (0,     'B'); break; //VT52
+    case TY_VT52('F'      ) :      setAndUseCharset     (0,     '0'); break; //VT52
+    case TY_VT52('G'      ) :      setAndUseCharset     (0,     'B'); break; //VT52
 
-    case TY_VT52__('H'      ) : scr->setCursorYX          (1,1       ); break; //VT52
-    case TY_VT52__('I'      ) : scr->reverseIndex         (          ); break; //VT52
-    case TY_VT52__('J'      ) : scr->clearToEndOfScreen   (          ); break; //VT52
-    case TY_VT52__('K'      ) : scr->clearToEndOfLine     (          ); break; //VT52
-    case TY_VT52__('Y'      ) : scr->setCursorYX          (p-31,q-31 ); break; //VT52
-    case TY_VT52__('Z'      ) :      reportTerminalType   (           ); break; //VT52
-    case TY_VT52__('<'      ) :          setMode      (MODE_Ansi     ); break; //VT52
-    case TY_VT52__('='      ) :          setMode      (MODE_AppKeyPad); break; //VT52
-    case TY_VT52__('>'      ) :        resetMode      (MODE_AppKeyPad); break; //VT52
+    case TY_VT52('H'      ) : scr->setCursorYX          (1,1       ); break; //VT52
+    case TY_VT52('I'      ) : scr->reverseIndex         (          ); break; //VT52
+    case TY_VT52('J'      ) : scr->clearToEndOfScreen   (          ); break; //VT52
+    case TY_VT52('K'      ) : scr->clearToEndOfLine     (          ); break; //VT52
+    case TY_VT52('Y'      ) : scr->setCursorYX          (p-31,q-31 ); break; //VT52
+    case TY_VT52('Z'      ) :      reportTerminalType   (           ); break; //VT52
+    case TY_VT52('<'      ) :          setMode      (MODE_Ansi     ); break; //VT52
+    case TY_VT52('='      ) :          setMode      (MODE_AppKeyPad); break; //VT52
+    case TY_VT52('>'      ) :        resetMode      (MODE_AppKeyPad); break; //VT52
 
     case TY_CSI_PG('c'      ) :  reportSecondaryAttributes(          ); break; //VT100
 

@@ -194,8 +194,7 @@ void TEScreen::setMargins(int top, int bot)
   top = top - 1;              // Adjust to internal lineno
   bot = bot - 1;              // Adjust to internal lineno
   if ( !( 0 <= top && top < bot && bot < lines ) )
-  { fprintf(stderr,"%s(%d) : setRegion(%d,%d) : bad range.\n",
-                   __FILE__,__LINE__,top,bot);
+  { kdDebug()<<" setRegion("<<top<<","<<bot<<") : bad range."<<endl;
     return;                   // Default error action: ignore
   }
   tmargin = top;

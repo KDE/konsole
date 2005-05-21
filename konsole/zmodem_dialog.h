@@ -16,8 +16,8 @@
  *  Boston, MA 02111-1307, USA.
  **/
 
-#ifndef __zmodem_dialog_h__
-#define __zmodem_dialog_h__ 
+#ifndef ZMODEM_DIALOG_H
+#define ZMODEM_DIALOG_H
 
 #include <kdialogbase.h>
 
