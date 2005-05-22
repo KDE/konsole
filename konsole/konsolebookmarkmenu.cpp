@@ -16,16 +16,7 @@
     Boston, MA 02111-1307, USA.
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-
-#include <qfile.h>
-#include <qregexp.h>
-#include <qtextstream.h>
-
-#include <kmimetype.h>
 #include <kpopupmenu.h>
-#include <ksavefile.h>
 #include <kstandarddirs.h>
 #include <kaction.h>
 

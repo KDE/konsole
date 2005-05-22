@@ -20,9 +20,6 @@
 #define KONSOLEBOOKMARKMENU_H
 
 #include <qptrlist.h>
-#include <qptrstack.h>
-#include <qobject.h>
-#include <sys/types.h>
 #include <kbookmark.h>
 #include <kbookmarkmenu.h>
 

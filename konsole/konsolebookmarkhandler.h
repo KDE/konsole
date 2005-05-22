@@ -24,7 +24,6 @@
 #include <kbookmarkmanager.h>
 #include "konsolebookmarkmenu.h"
 
-class QTextStream;
 class KPopupMenu;
 class KonsoleBookmarkMenu;
 class KBookmarkManager;
@@ -49,19 +48,15 @@ public:
 
 private slots:
     void slotBookmarksChanged( const QString &, const QString & caller );
-    void slotEditBookmarks();
 
 signals:
     void openURL( const QString& url, const QString& title );
 
 private:
-    void importOldBookmarks( const QString& path, KBookmarkManager* manager );
-
     Konsole *m_konsole;
     KPopupMenu *m_menu;
     KonsoleBookmarkMenu *m_bookmarkMenu;
     QString m_file;
 };
-
 
 #endif // KONSOLEBOOKMARKHANDLER_H

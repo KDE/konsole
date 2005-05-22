@@ -18,18 +18,9 @@
 
 // Born as kdelibs/kio/kfile/kfilebookmarkhandler.cpp
 
-#include <stdio.h>
-#include <stdlib.h>
-
-#include <qdir.h>
-#include <qtextstream.h>
-
-#include <kbookmarkimporter.h>
-#include <kbookmarkdombuilder.h>
-#include <kmimetype.h>
 #include <kpopupmenu.h>
-#include <ksavefile.h>
 #include <kstandarddirs.h>
+#include <kshell.h>
 
 #include "konsole.h"
 #include "konsolebookmarkmenu.h"
@@ -42,20 +33,12 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel 
 {
     m_menu = new KPopupMenu( konsole, "bookmark menu" );
 
-    m_file = locate( "data", "kfile/bookmarks.xml" );
+    m_file = locate( "data", "konsole/bookmarks.xml" );
     if ( m_file.isEmpty() )
-        m_file = locateLocal( "data", "kfile/bookmarks.xml" );
+        m_file = locateLocal( "data", "konsole/bookmarks.xml" );
 
     KBookmarkManager *manager = KBookmarkManager::managerForFile( m_file, false);
     manager->setEditorOptions(kapp->caption(), false);
-
-    // import old bookmarks
-    if ( !KStandardDirs::exists( m_file ) ) {
-        QString oldFile = locate( "data", "kfile/bookmarks.html" );
-        if ( !oldFile.isEmpty() )
-            importOldBookmarks( oldFile, manager );
-    }
-
     manager->setUpdate( true );
     manager->setShowNSBookmarks( false );
     
@@ -77,16 +60,6 @@ KonsoleBookmarkHandler::~KonsoleBookmarkHandler()
     delete m_bookmarkMenu;
 }
 
-void KonsoleBookmarkHandler::slotEditBookmarks()
-{
-    KProcess proc;
-    proc << QString::fromLatin1("keditbookmarks");
-    proc << "--nobrowser";
-    proc << "--caption" << i18n("Konsole Bookmarks Editor");
-    proc << m_file;
-    proc.start(KProcess::DontCare);
-}
-
 QString KonsoleBookmarkHandler::currentURL() const
 {
     return m_konsole->baseURL().prettyURL();
@@ -98,23 +71,10 @@ QString KonsoleBookmarkHandler::currentTitle() const
     if (u.isLocalFile())
     {
        QString path = u.path();
-       QString home = QDir::homeDirPath();
-       if (path.startsWith(home))
-          path.replace(0, home.length(), "~");
+       path = KShell::tildeExpand(path);
        return path;
     }
     return u.prettyURL();
-}
-
-void KonsoleBookmarkHandler::importOldBookmarks( const QString& path,
-                                                 KBookmarkManager *manager )
-{
-    KBookmarkDomBuilder *builder = new KBookmarkDomBuilder( manager->root(), manager );
-    KNSBookmarkImporter importer( path );
-    builder->connectImporter( &importer );
-    importer.parseNSBookmarks();
-    delete builder;
-    manager->save();
 }
 
 void KonsoleBookmarkHandler::slotBookmarksChanged( const QString &,
