@@ -21,6 +21,10 @@
 #include <kpopupmenu.h>
 #include <kstandarddirs.h>
 #include <kshell.h>
+#include <kio/job.h>
+#include <kio/netaccess.h>
+#include <kdebug.h>
+#include <qfile.h>
 
 #include "konsole.h"
 #include "konsolebookmarkmenu.h"
@@ -32,6 +36,19 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel 
       m_konsole( konsole )
 {
     m_menu = new KPopupMenu( konsole, "bookmark menu" );
+
+    // KDE3.5 - Konsole's bookmarks are now in konsole/bookmarks.xml
+    // TODO: Consider removing for KDE4
+    QString new_bm_file = locateLocal( "data", "konsole/bookmarks.xml" );
+    if ( !QFile::exists( new_bm_file ) ) {
+        QString old_bm_file = locateLocal( "data", "kfile/bookmarks.xml" );
+        if ( QFile::exists( old_bm_file ) )
+            // We want sync here... 
+            if ( !KIO::NetAccess::copy( KURL( old_bm_file ), 
+                                   KURL ( new_bm_file ), 0 ) ) {
+                kdWarning()<<KIO::NetAccess::lastErrorString()<<endl;
+            }
+    }
 
     m_file = locate( "data", "konsole/bookmarks.xml" );
     if ( m_file.isEmpty() )
