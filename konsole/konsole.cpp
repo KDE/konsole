@@ -128,6 +128,7 @@ Time to start a requirement list.
 #include <kparts/componentfactory.h>
 #include <kcharsets.h>
 #include <kcolordialog.h>
+#include <kio/netaccess.h>
 
 #include "konsole.h"
 #include <netwm.h>
@@ -3766,9 +3767,13 @@ void Konsole::slotFindDone()
 
 void Konsole::slotSaveHistory()
 {
-  KURL url = KFileDialog::getSaveURL(QString::null, QString::null, 0L, i18n("Save History"));
-  if( url.isEmpty())
+  // FIXME - mostLocalURL can't handle non-existing files yet, so this
+  //         code doesn't work.
+  KURL s_url = KFileDialog::getSaveURL(QString::null, QString::null, 0L, i18n("Save History"));
+  if( s_url.isEmpty())
       return;
+  KURL url = KIO::NetAccess::mostLocalURL( s_url, 0 );
+
   if( !url.isLocalFile() ) {
     KMessageBox::sorry(this, i18n("This is not a local file.\n"));
     return;
