@@ -624,7 +624,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         if ( KMessageBox::questionYesNoList( 0, 
             i18n( "If you want to use the bitmap fonts distributed with Konsole, they must be installed.  After installation, you must restart Konsole to use them.  Do you want to install the fonts listed below into fonts:/Personal?" ), 
             sl_installFonts,
-            i18n( "Install Console Font?" ), 
+            i18n( "Install Bitmap Fonts?" ), 
             KGuiItem( i18n("&Install" ) ), 
             KStdGuiItem::no(), "installbdffonts" ) == KMessageBox::Yes )
         {

@@ -1309,7 +1309,7 @@ static unsigned int xkb_mask_modifier( XkbDescPtr xkb, const char *name )
     if( !xkb || !xkb->names )
 	return 0;
 
-    Atom atom = XInternAtom( xkb->dpy, name, TRUE );
+    Atom atom = XInternAtom( xkb->dpy, name, true );
     if (atom == None)
         return 0;
 
