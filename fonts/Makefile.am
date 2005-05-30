@@ -1,5 +1,5 @@
-fontdir = $(datadir)/fonts
-font_DATA =console8x16.pcf.gz console8x8.pcf.gz 9x15.pcf.gz
+fontdir = $(kde_datadir)/konsole/fonts
+font_DATA =console8x16.pcf.gz 9x15.pcf.gz
 
 EXTRA_DIST = $(font_DATA)
 
@@ -7,7 +7,12 @@ EXTRA_DIST = $(font_DATA)
 install-data-hook:
 	-mkfontdir $(DESTDIR)$(fontdir)
 
-# edit with xmbdfed console8x16.bdf
-fonts: $(srcdir)/console8x16.bdf
+console8x16.pcf.gz: $(srcdir)/console8x16.bdf
 	bdftopcf -o console8x16.pcf $(srcdir)/console8x16.bdf
-	gzip -c --best console8x16.pcf > $(srcdir)/console8x16.pcf.gz
+	gzip --best console8x16.pcf
+#	gzip -c --best console8x16.pcf > console8x16.pcf.gz
+
+9x15.pcf.gz: $(srcdir)/9x15.bdf
+	bdftopcf -o 9x15.pcf $(srcdir)/9x15.bdf
+	gzip --best 9x15.pcf
+#	gzip -c --best 9x15.pcf > 9x15.pcf.gz
