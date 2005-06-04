@@ -1,3 +1,22 @@
+
+<tip category="Konsole|Tab">
+<html>
+<p>...that right-clicking on any tab allows for the changing of the tab text color?
+</html>
+</tip>
+
+<tip category="Konsole|Tab">
+<html>
+<p>...that the tab text color can be changed with the code \e[28;COLORt (COLOR: 0-16,777,215)?
+</html>
+</tip>
+
+<tip category="Konsole">
+<html>
+<p>...that the code \e[8;ROW;COLUMNt will resize Konsole?
+</html>
+</tip>
+
 <tip category="Konsole">
 <html>
 <p>...that you can start a new standard session by pressing the "New" button in the tabbar?
