@@ -2066,7 +2066,8 @@ void Konsole::updateTitle()
   KRadioAction *ra = session2action.find(se);
   if (ra && (ra->icon() != icon))
     ra->setIcon(icon);
-  if (b_matchTabWinTitle && m_tabViewMode != ShowIconOnly)
+  if (m_tabViewMode == ShowIconOnly) tabwidget->changeTab( se->widget(), QString::null );
+  else if (b_matchTabWinTitle)
     tabwidget->changeTab( se->widget(), se->fullTitle() );
 }
 
