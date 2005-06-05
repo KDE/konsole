@@ -839,7 +839,7 @@ void Konsole::slotSetEncoding()
     qtc = KGlobal::charsets()->codecForName(enc, found);
     if(!found)
     {
-      kdDebug() << "Codec " << selectSetEncoding->currentText() << " not found!" << endl;
+      kdWarning() << "Codec " << selectSetEncoding->currentText() << " not found!" << endl;
       qtc = QTextCodec::codecForLocale();
     }
   }
