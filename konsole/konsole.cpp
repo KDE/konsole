@@ -2137,6 +2137,9 @@ void Konsole::updateTitle()
   KRadioAction *ra = session2action.find(se);
   if (ra && (ra->icon() != icon))
     ra->setIcon(icon);
+
+  if (m_tabViewMode == ShowIconOnly)
+    tabwidget->changeTab( se->widget(), QString::null );
 }
 
 void Konsole::initSessionFont(int fontNo) {
