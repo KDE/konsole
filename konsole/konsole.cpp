@@ -385,7 +385,7 @@ void Konsole::updateRMBMenu()
 {
    if (!m_rightButton) return;
    int index = 0;
-   if (!showMenubar->isChecked())
+   if (!showMenubar->isChecked() && m_options)
    {
       // Only show when menubar is hidden
       if (!showMenubar->isPlugged( m_rightButton ))
@@ -796,30 +796,32 @@ void Konsole::makeGUI()
    m_tabPopupMenu->insertItem( SmallIcon("fileclose"), i18n("C&lose Session"), this,
                           SLOT(slotTabCloseSession()) );
 
-   // Fill tab bar context menu
-   m_tabbarPopupMenu = new KPopupMenu( this );
-   selectTabbar->plug(m_tabbarPopupMenu);
+   if (m_options) {
+      // Fill tab bar context menu
+      m_tabbarPopupMenu = new KPopupMenu( this );
+      selectTabbar->plug(m_tabbarPopupMenu);
 
-   KSelectAction *viewOptions = new KSelectAction(this);
-   viewOptions->setText(i18n("Tab &Options"));
-   QStringList options;
-   options << i18n("&Text && Icons") << i18n("Text &Only") << i18n("&Icons Only");
-   viewOptions->setItems(options);
-   viewOptions->setCurrentItem(m_tabViewMode);
-   viewOptions->plug(m_tabbarPopupMenu);
-   connect(viewOptions, SIGNAL(activated(int)), this, SLOT(slotTabSetViewOptions(int)));
-   slotTabSetViewOptions(m_tabViewMode);
+      KSelectAction *viewOptions = new KSelectAction(this);
+      viewOptions->setText(i18n("Tab &Options"));
+      QStringList options;
+      options << i18n("&Text && Icons") << i18n("Text &Only") << i18n("&Icons Only");
+      viewOptions->setItems(options);
+      viewOptions->setCurrentItem(m_tabViewMode);
+      viewOptions->plug(m_tabbarPopupMenu);
+      connect(viewOptions, SIGNAL(activated(int)), this, SLOT(slotTabSetViewOptions(int)));
+      slotTabSetViewOptions(m_tabViewMode);
 
-   KToggleAction *dynamicTabHideOption = new KToggleAction ( i18n( "&Dynamic Hide" ), 0, this,
+      KToggleAction *dynamicTabHideOption = new KToggleAction ( i18n( "&Dynamic Hide" ), 0, this,
                                        SLOT( slotTabbarToggleDynamicHide() ), this);
-   dynamicTabHideOption->setChecked(b_dynamicTabHide);
-   dynamicTabHideOption->plug(m_tabbarPopupMenu);
+      dynamicTabHideOption->setChecked(b_dynamicTabHide);
+      dynamicTabHideOption->plug(m_tabbarPopupMenu);
 
-   KToggleAction *m_autoResizeTabs = new KToggleAction( i18n("&Auto Resize Tabs"),
+      KToggleAction *m_autoResizeTabs = new KToggleAction( i18n("&Auto Resize Tabs"),
                  0, this, SLOT( slotToggleAutoResizeTabs() ), this);
-   m_autoResizeTabs->setChecked(b_autoResizeTabs);
-   m_autoResizeTabs->plug(m_tabbarPopupMenu);
- }
+      m_autoResizeTabs->setChecked(b_autoResizeTabs);
+      m_autoResizeTabs->plug(m_tabbarPopupMenu);
+    }
+}
 
 void Konsole::slotSetEncoding()
 {
@@ -1305,7 +1307,7 @@ void Konsole::slotTabbarContextMenu(const QPoint & pos)
    if (!m_menuCreated)
       makeGUI();
 
-  m_tabbarPopupMenu->popup( pos );
+  if ( m_tabbarPopupMenu ) m_tabbarPopupMenu->popup( pos );
 }
 
 void Konsole::slotTabSetViewOptions(int mode)
@@ -2417,7 +2419,7 @@ void Konsole::activateSession(TESession *s)
   tabwidget->showPage( se->widget() );
   te = se->widget();
   if (m_menuCreated) {
-    selectBell->setCurrentItem(te->bellMode());
+    if (selectBell) selectBell->setCurrentItem(te->bellMode());
     updateSchemaMenu();
   }
 
@@ -2429,21 +2431,21 @@ void Konsole::activateSession(TESession *s)
   if (!m_menuCreated)
      return;
 
-  selectSetEncoding->setCurrentItem(se->encodingNo());
+  if (selectSetEncoding) selectSetEncoding->setCurrentItem(se->encodingNo());
   updateKeytabMenu(); // act. the keytab for this session
-  m_clearHistory->setEnabled( se->history().isOn() );
-  m_findHistory->setEnabled( se->history().isOn() );
-  m_findNext->setEnabled( se->history().isOn() );
-  m_findPrevious->setEnabled( se->history().isOn() );
+  if (m_clearHistory) m_clearHistory->setEnabled( se->history().isOn() );
+  if (m_findHistory) m_findHistory->setEnabled( se->history().isOn() );
+  if (m_findNext) m_findNext->setEnabled( se->history().isOn() );
+  if (m_findPrevious) m_findPrevious->setEnabled( se->history().isOn() );
   se->getEmulation()->findTextBegin();
-  m_saveHistory->setEnabled( se->history().isOn() );
-  monitorActivity->setChecked( se->isMonitorActivity() );
-  monitorSilence->setChecked( se->isMonitorSilence() );
+  if (m_saveHistory) m_saveHistory->setEnabled( se->history().isOn() );
+  if (monitorActivity) monitorActivity->setChecked( se->isMonitorActivity() );
+  if (monitorSilence) monitorSilence->setChecked( se->isMonitorSilence() );
   masterMode->setChecked( se->isMasterMode() );
   sessions.find(se);
   uint position=sessions.at();
-  m_moveSessionLeft->setEnabled(position>0);
-  m_moveSessionRight->setEnabled(position<sessions.count()-1);
+  if (m_moveSessionLeft) m_moveSessionLeft->setEnabled(position>0);
+  if (m_moveSessionRight) m_moveSessionRight->setEnabled(position<sessions.count()-1);
 }
 
 void Konsole::slotUpdateSessionConfig(TESession *session)
