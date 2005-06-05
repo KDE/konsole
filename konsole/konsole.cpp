@@ -2568,6 +2568,20 @@ void Konsole::newSession(int i)
 
 void Konsole::newSessionTabbar(int i)
 {
+  if (i == SESSION_NEW_WINDOW_ID)
+  {
+    // TODO: "type" isn't passed properly
+    Konsole* konsole = new Konsole(name(), b_histEnabled, !menubar->isHidden(), n_tabbar != TabNone, b_framevis,
+                                   n_scroll != TEWidget::SCRNONE, 0, false, 0);
+    konsole->newSession();
+    konsole->enableFullScripting(b_fullScripting);
+    konsole->enableFixedSize(b_fixedSize);
+    konsole->setColLin(0,0); // Use defaults
+    konsole->initFullScreen();
+    konsole->show();
+    return;
+  }
+
   KSimpleConfig* co = no2command.find(i);
   if (co) {
     newSession(co);
