@@ -628,11 +628,13 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
             KGuiItem( i18n("&Install" ) ), 
             KStdGuiItem::no(), "installbdffonts" ) == KMessageBox::Yes )
         {
-            // We are currently ignoring errors....
             for ( QStringList::iterator it = sl_installFonts.begin(); 
                   it != sl_installFonts.end(); ++it ) {
                 QString sf = "fonts/" + *it;
-                KIO::NetAccess::copy( locate( "appdata", sf ), "fonts:/Personal/", 0 );
+              if ( !KIO::NetAccess::copy( locate( "appdata", sf ), 
+                                          "fonts:/Personal/", 0 ) )
+                    KMessageBox::error( 0, i18n( "Could not install %1 into fonts:/Personal/" ).arg( *it ), i18n( "Error" ) );
+
             }
         }
 
