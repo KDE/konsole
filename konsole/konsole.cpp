@@ -237,6 +237,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 ,m_tabViewMode(ShowIconAndText)
 ,b_dynamicTabHide(false)
 ,b_autoResizeTabs(false)
+,b_installBitmapFonts(false)
 ,b_framevis(true)
 ,b_fullscreen(false)
 ,m_menuCreated(false)
@@ -599,15 +600,30 @@ void Konsole::makeGUI()
       selectBell->setItems(bellitems);
       selectBell->plug(m_options);
 
-
-      KPopupMenu* m_fontsizes = new KPopupMenu(this);
-      m_fontsizes->insertItem( SmallIconSet( "fontsizeup" ), i18n( "&Enlarge Font" ), 0 );
-      m_fontsizes->insertItem( SmallIconSet( "fontsizedown" ), i18n( "&Shrink Font" ), 1 );
-      m_fontsizes->insertSeparator( );
-      m_fontsizes->insertItem( SmallIconSet( "font" ), i18n( "Se&lect..." ), 3 );
-      m_options->insertItem( SmallIconSet( "text" ), i18n("Font"), m_fontsizes );
-      connect(m_fontsizes, SIGNAL(activated(int)), SLOT(slotSelectFont(int)));
-
+      checkBitmapFonts();
+      KActionMenu* m_fontsizes = new KActionMenu( i18n( "Font" ), 
+                                                  SmallIconSet( "text" ), 
+                                                  actions, 0L );
+      m_fontsizes->insert( new KAction( i18n( "&Enlarge Font" ), 
+                           SmallIconSet( "fontsizeup" ), 0, this, 
+                           SLOT( biggerFont() ), actions, 
+                           "enlarge_font" ) );
+      m_fontsizes->insert( new KAction( i18n( "&Shrink Font" ), 
+                           SmallIconSet( "fontsizedown" ), 0, this, 
+                           SLOT( smallerFont() ), actions, 
+                           "shrink_font" ) );
+      m_fontsizes->insert( new KAction( i18n( "Se&lect..." ), 
+                           SmallIconSet( "font" ), 0, this, 
+                           SLOT( slotSelectFont() ), actions, 
+                           "select_font" ) );
+      if ( b_installBitmapFonts )
+      {
+         m_fontsizes->insert( new KAction( i18n( "&Install Bitmap..." ), 
+                              SmallIconSet( "font" ), 0, this, 
+                              SLOT( slotInstallBitmapFonts() ), actions, 
+                              "install_fonts" ) );
+      }
+      m_fontsizes->plug(m_options);
 
       // encoding menu, start with default checked !
       selectSetEncoding = new KSelectAction( i18n( "&Encoding" ), SmallIconSet( "charset" ), 0, this, SLOT(slotSetEncoding()), actions, "set_encoding" );
@@ -1686,21 +1702,83 @@ void Konsole::slotSelectScrollbar() {
    activateSession(); // maybe helps in bg
 }
 
-void Konsole::slotSelectFont( int option ) {
+void Konsole::checkBitmapFonts()
+{
+    {
+        QFont f;
+        f.setRawName("-misc-console-medium-r-normal--16-160-72-72-c-80-iso10646-1");
+        QFontInfo fi( f );
+        if ( !fi.exactMatch() )
+            b_installBitmapFonts = true;
+    }
+    {
+        QFont f;
+        f.setRawName("-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1");
+        QFontInfo fi( f );
+        if ( !fi.exactMatch() )
+            b_installBitmapFonts = true;
+    }
+}
+
+// In KDE 3.5, Konsole only allows the user to pick a font via
+// KFontDialog.  This causes problems with the bdf/pcf files
+// distributed with Konsole (console8x16 and 9x15). 
+void Konsole::slotInstallBitmapFonts()
+{
+    if ( !b_installBitmapFonts )
+        return;
+
+    QStringList sl_installFonts;
+    {
+        QFont f;
+        f.setRawName("-misc-console-medium-r-normal--16-160-72-72-c-80-iso10646-1");
+        QFontInfo fi( f );
+        if ( !fi.exactMatch() )
+            sl_installFonts << "console8x16.pcf.gz";
+    }
+    {
+        QFont f;
+        f.setRawName("-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1");
+        QFontInfo fi( f );
+        if ( !fi.exactMatch() )
+            sl_installFonts << "9x15.pcf.gz";
+    }
+
+    if ( !sl_installFonts.isEmpty() )
+    {
+        if ( KMessageBox::questionYesNoList( this, 
+            i18n( "If you want to use the bitmap fonts distributed with Konsole, they must be installed.  After installation, you must restart Konsole to use them.  Do you want to install the fonts listed below into fonts:/Personal?" ), 
+            sl_installFonts,
+            i18n( "Install Bitmap Fonts?" ), 
+            KGuiItem( i18n("&Install" ) ), 
+            KStdGuiItem::no() ) == KMessageBox::Yes )
+        {
+            for ( QStringList::iterator it = sl_installFonts.begin(); 
+                  it != sl_installFonts.end(); ++it )
+            {
+                QString sf = "fonts/" + *it;
+                if ( KIO::NetAccess::copy( locate( "appdata", sf ), 
+                                            "fonts:/Personal/", 0 ) ) 
+                {
+                    b_installBitmapFonts = false;
+                    // TODO: Remove the Install from the Fonts sub-menu.
+                } else {
+                    KMessageBox::error( this, i18n( "Could not install %1 into fonts:/Personal/" ).arg( *it ), i18n( "Error" ) );
+                }
+            }
+        }
+    }
+
+}
+
+void Konsole::slotSelectFont() {
    if ( !se ) return;
 
-   if ( option == 0 )            // Enlarge
-      biggerFont();
-   else if ( option == 1 )       // Shrink
-      smallerFont();
-   else {                        // Select Font...
+   QFont font = se->widget()->getVTFont();
+   if ( KFontDialog::getFont( font, true ) != QDialog::Accepted )
+      return;
 
-      QFont font = se->widget()->getVTFont();
-      if ( KFontDialog::getFont( font, true ) != QDialog::Accepted )
-         return;
-
-      se->widget()->setVTFont( font );
-   }
+   se->widget()->setVTFont( font );
 //  activateSession(); // activates the current
 }
 

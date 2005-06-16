@@ -597,47 +597,6 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
     m->setAutoClose(auto_close);
   }
 
-    // In KDE 3.5, Konsole only allows the user to pick a font via
-    // KFontDialog.  This causes problems with the bdf/pcf files
-    // distributed with Konsole (console8x16 and 9x15). 
-    // Trying to automatically install the font causes problems with
-    // session management... Also trying to restart Konsole 
-    // automatically is problematic...
-    // So just notify user...
-    QStringList sl_installFonts;
-    {
-        QFont f;
-        f.setRawName("-misc-console-medium-r-normal--16-160-72-72-c-80-iso10646-1");
-        QFontInfo fi( f );
-        if ( !fi.exactMatch() )
-            sl_installFonts << "console8x16.pcf.gz";
-    }
-    {
-        QFont f;
-        f.setRawName("-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso10646-1");
-        QFontInfo fi( f );
-        if ( !fi.exactMatch() )
-            sl_installFonts << "9x15.pcf.gz";
-    }
-
-    if ( !sl_installFonts.isEmpty() )
-        if ( KMessageBox::questionYesNoList( 0, 
-            i18n( "If you want to use the bitmap fonts distributed with Konsole, they must be installed.  After installation, you must restart Konsole to use them.  Do you want to install the fonts listed below into fonts:/Personal?" ), 
-            sl_installFonts,
-            i18n( "Install Bitmap Fonts?" ), 
-            KGuiItem( i18n("&Install" ) ), 
-            KStdGuiItem::no(), "installbdffonts" ) == KMessageBox::Yes )
-        {
-            for ( QStringList::iterator it = sl_installFonts.begin(); 
-                  it != sl_installFonts.end(); ++it ) {
-                QString sf = "fonts/" + *it;
-              if ( !KIO::NetAccess::copy( locate( "appdata", sf ), 
-                                          "fonts:/Personal/", 0 ) )
-                    KMessageBox::error( 0, i18n( "Could not install %1 into fonts:/Personal/" ).arg( *it ), i18n( "Error" ) );
-
-            }
-        }
-
   int ret = a.exec();
 
  //// Temporary code, waiting for Qt to do this properly
