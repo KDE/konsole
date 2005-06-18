@@ -86,6 +86,7 @@ public:
   void setSchema(const QString & path);
   void setEncoding(int);
   void setSessionTitle(QString&, TESession* = 0);
+  void setSessionEncoding(const QString&, TESession* = 0);
 
   void enableFullScripting(bool b);
   void enableFixedSize(bool b);
@@ -294,6 +295,7 @@ private:
   TESession*     se_previous;
   TESession*     m_initialSession;
   ColorSchemaList* colors;
+  QString        s_encodingName;
 
   QPtrDict<KRootPixmap> rootxpms;
   KWinModule*    kWinModule;

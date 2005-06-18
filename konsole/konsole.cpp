@@ -1469,6 +1469,7 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("TabColor", tabwidget->tabColor(se->widget()));
 
   if (se) {
+    config->writeEntry("EncodingName", se->encoding());
     config->writeEntry("history", se->history().getSize());
     config->writeEntry("historyenabled", b_histEnabled);
   }
@@ -1595,6 +1596,8 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       b_autoResizeTabs = config->readBoolEntry("AutoResizeTabs", false);
       m_tabColor = config->readColorEntry("TabColor");
       if ( !m_tabColor.isValid() ) m_tabColor = QColor( Qt::black );
+
+      s_encodingName = config->readEntry( "EncodingName", "" ).lower();
    }
 
    if (m_menuCreated)
@@ -1615,6 +1618,7 @@ void Konsole::applySettingsToGUI()
       showMenubar->setChecked(!menuBar()->isHidden());
       selectScrollbar->setCurrentItem(n_scroll);
       selectBell->setCurrentItem(n_bell);
+      selectSetEncoding->setCurrentItem( se->encodingNo() );
       updateRMBMenu();
    }
    updateKeytabMenu();
@@ -2541,6 +2545,54 @@ void Konsole::slotResizeSession(TESession *session, QSize size)
   activateSession(oldSession);
 }
 
+// Set session encoding; don't use any menu items.
+// System's encoding list may change, so search for encoding string.
+// FIXME: A lot of duplicate code from slotSetSessionEncoding
+void Konsole::setSessionEncoding( const QString &encoding, TESession *session )
+{
+    if ( encoding.isEmpty() )
+        return;
+
+    if ( !session )
+        session = se;
+
+    // availableEncodingNames and descriptEncodingNames are NOT returned
+    // in the same order.
+    QStringList items = KGlobal::charsets()->descriptiveEncodingNames();
+    QString enc;
+
+    // For purposes of using 'find' add a space after name,
+    // otherwise 'iso 8859-1' will find 'iso 8859-13'
+    QString t_enc = encoding + " ";
+    unsigned int i = 0;
+
+    for( QStringList::ConstIterator it = items.begin(); it != items.end(); 
+         ++it, ++i)
+    {
+        if ( (*it).find( t_enc ) != -1 )
+        {
+            enc = *it;
+            break;
+        }
+    }
+    if (i >= items.count())
+        return;
+
+    bool found = false;
+    enc = KGlobal::charsets()->encodingForName(enc);
+    QTextCodec * qtc = KGlobal::charsets()->codecForName(enc, found);
+
+    //kdDebug()<<"setSessionEncoding="<<enc<<"; "<<i<<"; found="<<found<<endl;
+    if ( !found )
+        return;
+
+    session->setEncodingNo( i + 1 );    // Take into account Default
+    session->getEmulation()->setCodec(qtc);
+    if (se == session)
+        activateSession(se);
+
+}
+
 void Konsole::slotSetSessionEncoding(TESession *session, const QString &encoding)
 {
   if (!selectSetEncoding)
@@ -2567,7 +2619,7 @@ void Konsole::slotSetSessionEncoding(TESession *session, const QString &encoding
   if(!found)
      return;
 
-  session->setEncodingNo(i);
+  session->setEncodingNo( i + 1 );    // Take into account Default
   session->getEmulation()->setCodec(qtc);
   if (se == session)
      activateSession(se);
@@ -2819,6 +2871,8 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
     s->setHistory(HistoryTypeFile());
   else
     s->setHistory(HistoryTypeNone());
+
+  setSessionEncoding( s_encodingName, s );
 
   addSession(s);
   runSession(s); // activate and run
