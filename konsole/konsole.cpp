@@ -2631,6 +2631,10 @@ void Konsole::slotSetSessionEncoding(TESession *session, const QString &encoding
 {
   if (!selectSetEncoding)
      makeGUI();
+
+  if ( !selectSetEncoding )         // when action/settings=false
+    return;
+
   QStringList items = selectSetEncoding->items();
 
   QString enc;
@@ -3544,8 +3548,10 @@ void Konsole::setSchema(const QString & path)
 
 void Konsole::setEncoding(int index)
 {
-  selectSetEncoding->setCurrentItem(index);
-  slotSetEncoding();
+  if ( selectSetEncoding ) {
+    selectSetEncoding->setCurrentItem(index);
+    slotSetEncoding();
+  }
 }
 
 void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
