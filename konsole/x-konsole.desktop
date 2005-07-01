@@ -6,6 +6,7 @@ X-KDE-AutoEmbed=true
 Icon=konsole
 Patterns=*.shell;
 Comment=File to Open a Shell
+Comment[af]=Die lêer om oop te maak is 'n tolk
 Comment[az]=Qabığı Açacaq Fayl
 Comment[bg]=Файл за отваряне в конзолата
 Comment[bn]=শেল খোলার জন্য ফাইল
