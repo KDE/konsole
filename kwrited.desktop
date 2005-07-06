@@ -61,6 +61,7 @@ Name[zh_CN]=KDE Write 守护程序
 Name[zh_TW]=KDE Write 伺服程式
 Name[zu]=I-Daemon Yokubhala ye-KDE
 Comment=Watch for messages from local users sent with write(1) or wall(1)
+Comment[af]=Kyk uit vir boodskappe wat deur die plaaslike gebruikers met write(1) en wall(1) gestuur word
 Comment[bs]=Prati poruke od lokalnih korisnika poslane koristeći write(1) ili wall(1)
 Comment[ca]=Fes atenció als missatges dels usuaris locals enviats amb write(1) o wall(1)
 Comment[cy]=Gwylio am negeseuon oddiwrth defnyddwyr lleol a anfonwyd efo write(1) neu wall(1)
