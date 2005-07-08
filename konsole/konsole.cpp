@@ -1594,8 +1594,10 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       m_tabViewMode = TabViewModes(config->readNumEntry("TabViewMode", ShowIconAndText));
       b_dynamicTabHide = config->readBoolEntry("DynamicTabHide", false);
       b_autoResizeTabs = config->readBoolEntry("AutoResizeTabs", false);
+
+      // Do not set a default value; this allows the System-wide Scheme
+      // to set the tab text color.
       m_tabColor = config->readColorEntry("TabColor");
-      if ( !m_tabColor.isValid() ) m_tabColor = QColor( Qt::black );
 
       s_encodingName = config->readEntry( "EncodingName", "" ).lower();
    }
@@ -1890,7 +1892,8 @@ void Konsole::createSessionTab(TEWidget *widget, const QIconSet &iconSet,
     tabwidget->insertTab(widget, iconSet, QString::null, index);
     break;
   }
-  tabwidget->setTabColor(widget, m_tabColor);
+  if ( m_tabColor.isValid() )
+    tabwidget->setTabColor(widget, m_tabColor);
 }
 
 QIconSet Konsole::iconSetForSession(TESession *session) const
@@ -3129,8 +3132,8 @@ void Konsole::initMasterMode(bool state)
 
 void Konsole::initTabColor(QColor color)
 {
-  if ( !color.isValid() ) color = QColor( Qt::black );
-  tabwidget->setTabColor( se->widget(), color );
+  if ( color.isValid() )
+    tabwidget->setTabColor( se->widget(), color );
 }
 
 void Konsole::slotToggleMasterMode()
