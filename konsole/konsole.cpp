@@ -1757,7 +1757,7 @@ void Konsole::slotInstallBitmapFonts()
             sl_installFonts,
             i18n( "Install Bitmap Fonts?" ), 
             KGuiItem( i18n("&Install" ) ), 
-            KStdGuiItem::no() ) == KMessageBox::Yes )
+            i18n("Do Not Install") ) == KMessageBox::Yes )
         {
             for ( QStringList::iterator it = sl_installFonts.begin(); 
                   it != sl_installFonts.end(); ++it )
@@ -3894,7 +3894,7 @@ void Konsole::slotFind()
       if (forward) {
         if ( KMessageBox::questionYesNo( m_finddialog,
              i18n("End of history reached.\n" "Continue from the beginning?"),
-  	     i18n("Find") ) == KMessageBox::Yes ) {
+  	     i18n("Find"), KStdGuiItem::cont(), KStdGuiItem::cancel() ) == KMessageBox::Yes ) {
           m_find_first = true;
     	  slotFind();
         }
@@ -3902,7 +3902,7 @@ void Konsole::slotFind()
       else {
         if ( KMessageBox::questionYesNo( m_finddialog,
              i18n("Beginning of history reached.\n" "Continue from the end?"),
-  	     i18n("Find") ) == KMessageBox::Yes ) {
+  	     i18n("Find"), KStdGuiItem::cont(), KStdGuiItem::cancel() ) == KMessageBox::Yes ) {
           m_find_first = true;
    	  slotFind();
         }
@@ -3937,15 +3937,15 @@ void Konsole::slotSaveHistory()
     return;
   }
 
-  int query = KMessageBox::Yes;
+  int query = KMessageBox::Continue;
   QFileInfo info;
   QString name( url.path() );
   info.setFile( name );
   if( info.exists() )
-    query = KMessageBox::warningYesNoCancel( this,
-      i18n( "A file with this name already exists.\nDo you want to overwrite it?" ) );
+    query = KMessageBox::warningContinueCancel( this,
+      i18n( "A file with this name already exists.\nDo you want to overwrite it?" ), i18n("File Exists"), i18n("Overwrite") );
 
-  if (query==KMessageBox::Yes) {
+  if (query==KMessageBox::Continue) {
     QFile file(url.path());
     if(!file.open(IO_WriteOnly)) {
       KMessageBox::sorry(this, i18n("Unable to write to file."));
