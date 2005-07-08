@@ -1594,6 +1594,11 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
      while( ((x<columns-1) || (endSel.y()<lines-1 && m_line_wrapped[endSel.y()])) && charClass(image[i+1].c) == selClass )
      { i++; if (x<columns-1) x++; else {x=0; endSel.ry()++; } }
      endSel.setX(x);
+
+     // In word selection mode don't select @ (64) if at end of word.
+     if ( ( QChar( image[i].c ) == '@' ) && ( ( endSel.x() - bgnSel.x() ) > 0 ) )
+       endSel.setX( x - 1 );
+
      actSel = 2; // within selection
      emit extendSelectionSignal( endSel.x(), endSel.y() );
      emit endSelectionSignal(preserve_line_breaks);
