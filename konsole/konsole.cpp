@@ -3994,15 +3994,15 @@ void Konsole::slotSaveHistory()
     return;
   }
 
-  int query = KMessageBox::Yes;
+  int query = KMessageBox::Continue;
   QFileInfo info;
   QString name( url.path() );
   info.setFile( name );
   if( info.exists() )
-    query = KMessageBox::warningYesNoCancel( this,
+    query = KMessageBox::warningContinueCancel( this,
       i18n( "A file with this name already exists.\nDo you want to overwrite it?" ) );
 
-  if (query==KMessageBox::Yes) {
+  if (query==KMessageBox::Continue) {
     QFile file(url.path());
     if(!file.open(IO_WriteOnly)) {
       KMessageBox::sorry(this, i18n("Unable to write to file."));
