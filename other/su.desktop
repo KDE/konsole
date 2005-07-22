@@ -82,6 +82,7 @@ Comment[sv]=Nytt skal för root
 Comment[ta]=புதிய ஓடு ஷெல்
 Comment[tg]=Пӯстаи нав бо ҳуқуқи root
 Comment[uk]=Новий командна оболонка з правами root
+Comment[zh_CN]=新建 Root Shell
 Exec=su -
 Schema=BlackOnLightYellow.schema
 #Schema=Linux.schema
