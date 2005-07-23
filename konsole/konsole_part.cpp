@@ -234,7 +234,7 @@ void konsolePart::sessionDestroyed()
 //  kdDebug(1211) << "sessionDestroyed()" << endl;
   disconnect( se, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
   se = 0;
-  delete this;
+  // delete this;
 }
 
 void konsolePart::configureRequest(TEWidget*_te,int,int x,int y)
