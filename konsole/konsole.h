@@ -24,10 +24,15 @@
 
 #include <kwinmodule.h>
 
-#include <qstrlist.h>
-#include <qintdict.h>
-#include <qptrdict.h>
+#include <q3strlist.h>
+#include <q3intdict.h>
+#include <q3ptrdict.h>
 #include <qsignalmapper.h>
+//Added by qt3to4:
+#include <Q3CString>
+#include <Q3PtrList>
+#include <QEvent>
+#include <QLabel>
 
 #include "TEPty.h"
 #include "TEWidget.h"
@@ -57,7 +62,7 @@ class KTabWidget;
 class QToolButton;
 
 // Defined in main.C
-const char *konsole_shell(QStrList &args);
+const char *konsole_shell(Q3StrList &args);
 
 class Konsole : public KMainWindow, virtual public KonsoleIface
 {
@@ -68,7 +73,7 @@ public:
 
   Konsole(const char * name, int histon, bool menubaron, bool tabbaron,
     bool frameon, bool scrollbaron,
-    QCString type = 0, bool b_inRestore = false, const int wanted_tabbar = 0,
+    Q3CString type = 0, bool b_inRestore = false, const int wanted_tabbar = 0,
     const QString &workdir=QString::null);
 
   ~Konsole();
@@ -82,7 +87,7 @@ public:
   void initMonitorSilence(bool on);
   void initMasterMode(bool on);
   void initTabColor(QColor color);
-  void newSession(const QString &program, const QStrList &args, const QString &term, const QString &icon, const QString &title, const QString &cwd);
+  void newSession(const QString &program, const Q3StrList &args, const QString &term, const QString &icon, const QString &title, const QString &cwd);
   void setSchema(const QString & path);
   void setEncoding(int);
   void setSessionTitle(QString&, TESession* = 0);
@@ -107,8 +112,8 @@ public:
 
   KURL baseURL() const;
 
-  virtual bool processDynamic(const QCString &fun, const QByteArray &data, QCString& replyType, QByteArray &replyData);
-  virtual QCStringList functionsDynamic();
+  virtual bool processDynamic(const DCOPCString &fun, const QByteArray &data, DCOPCString& replyType, QByteArray &replyData);
+  virtual DCOPCStringList functionsDynamic();
 
   void callReadPropertiesInternal(KConfig *config, int number) { readPropertiesInternal(config,number); }
 
@@ -246,7 +251,7 @@ private slots:
   void slotSetEncoding();
 private:
   KSimpleConfig *defaultSession();
-  QString newSession(KSimpleConfig *co, QString pgm = QString::null, const QStrList &args = QStrList(),
+  QString newSession(KSimpleConfig *co, QString pgm = QString::null, const Q3StrList &args = Q3StrList(),
                      const QString &_term = QString::null, const QString &_icon = QString::null,
                      const QString &_title = QString::null, const QString &_cwd = QString::null);
   void readProperties(KConfig *config, const QString &schema, bool globalConfigOnly);
@@ -272,19 +277,19 @@ private:
 
   void initTEWidget(TEWidget* new_te, TEWidget* default_te);
 
-  void createSessionTab(TEWidget *widget, const QIconSet& iconSet,
+  void createSessionTab(TEWidget *widget, const QIcon& iconSet,
                         const QString &text, int index = -1);
-  QIconSet iconSetForSession(TESession *session) const;
+  QIcon iconSetForSession(TESession *session) const;
 
   bool eventFilter( QObject *o, QEvent *e );
 
-  QPtrList<TEWidget> activeTEs();
+  Q3PtrList<TEWidget> activeTEs();
 
-  QPtrDict<TESession> action2session;
-  QPtrDict<KRadioAction> session2action;
-  QPtrList<TESession> sessions;
+  Q3PtrDict<TESession> action2session;
+  Q3PtrDict<KRadioAction> session2action;
+  Q3PtrList<TESession> sessions;
 
-  QIntDict<KSimpleConfig> no2command;     //QT4 - convert to QList
+  Q3IntDict<KSimpleConfig> no2command;     //QT4 - convert to QList
 
   KSimpleConfig* m_defaultSession;
   QString m_defaultSessionFilename;
@@ -297,7 +302,7 @@ private:
   ColorSchemaList* colors;
   QString        s_encodingName;
 
-  QPtrDict<KRootPixmap> rootxpms;
+  Q3PtrDict<KRootPixmap> rootxpms;
   KWinModule*    kWinModule;
 
   KMenuBar*   menubar;

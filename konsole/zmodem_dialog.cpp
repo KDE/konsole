@@ -18,7 +18,7 @@
 
 #include "zmodem_dialog.h"
 
-#include <qtextedit.h>
+#include <q3textedit.h>
 
 #include <klocale.h>
 
@@ -29,7 +29,7 @@ ZModemDialog::ZModemDialog(QWidget *parent, bool modal, const QString &caption)
 {
   setEscapeButton(User1);
   enableButton(Close, false);
-  textEdit = new QTextEdit(this);
+  textEdit = new Q3TextEdit(this);
   textEdit->setMinimumSize(400, 100);
   setMainWidget(textEdit);
   connect(this, SIGNAL(user1Clicked()), this, SLOT(slotClose()));

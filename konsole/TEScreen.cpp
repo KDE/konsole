@@ -46,6 +46,8 @@
 
 #include "konsole_wcwidth.h"
 #include "TEScreen.h"
+//Added by qt3to4:
+#include <QTextStream>
 
 //FIXME: this is emulation specific. Use false for xterm, true for ANSI.
 //FIXME: see if we can get this from terminfo.
@@ -781,7 +783,7 @@ void TEScreen::compose(QString compose)
      
   QChar c(image[lastPos].c);
   compose.prepend(c);
-  compose.compose();
+  //compose.compose(); ### FIXME!
   image[lastPos].c = compose[0].unicode();
 }
 

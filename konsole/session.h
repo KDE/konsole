@@ -15,7 +15,9 @@
 
 #include <kapplication.h>
 #include <kmainwindow.h>
-#include <qstrlist.h>
+#include <q3strlist.h>
+//Added by qt3to4:
+#include <Q3CString>
 
 #include "TEPty.h"
 #include "TEWidget.h"
@@ -33,7 +35,7 @@ class TESession : public QObject, virtual public SessionIface
 public:
 
   TESession(TEWidget* w,
-            const QString &pgm, const QStrList & _args,
+            const QString &pgm, const Q3StrList & _args,
 	    const QString &term, ulong winId, const QString &sessionId="session-1",
 	    const QString &initial_cwd = QString::null);
   void changeWidget(TEWidget* w);
@@ -58,7 +60,7 @@ public:
   QString fullTitle() const;
   int keymapNo();
   QString keymap();
-  QStrList getArgs();
+  Q3StrList getArgs();
   QString getPgm();
   QString getCwd();
   QString getInitial_cwd() { return initial_cwd; }
@@ -95,8 +97,8 @@ public:
   QString sessionName() { return title; }
   int sessionPID() { return sh->pid(); }
 
-  virtual bool processDynamic(const QCString &fun, const QByteArray &data, QCString& replyType, QByteArray &replyData);
-  virtual QCStringList functionsDynamic();
+  virtual bool processDynamic(const DCOPCString &fun, const QByteArray &data, DCOPCString& replyType, QByteArray &replyData);
+  virtual DCOPCStringList functionsDynamic();
   void enableFullScripting(bool b) { fullScripting = b; }
 
   void startZModem(const QString &rz, const QString &dir, const QStringList &list);
@@ -197,7 +199,7 @@ private:
   QString	 stateIconName;
 
   QString        pgm;
-  QStrList       args;
+  Q3StrList       args;
 
   QString        term;
   ulong          winId;

@@ -13,9 +13,11 @@
 #ifndef TEHISTORY_H
 #define TEHISTORY_H
 
-#include <qcstring.h>
-#include <qptrvector.h>
+#include <q3cstring.h>
+#include <q3ptrvector.h>
 #include <qbitarray.h>
+//Added by qt3to4:
+#include <Q3MemArray>
 
 #include <ktempfile.h>
 
@@ -114,7 +116,7 @@ private:
 class HistoryScrollBuffer : public HistoryScroll
 {
 public:
-  typedef QMemArray<ca> histline;
+  typedef Q3MemArray<ca> histline;
 
   HistoryScrollBuffer(unsigned int maxNbLines = 1000);
   virtual ~HistoryScrollBuffer();
@@ -138,7 +140,7 @@ private:
   void normalize();
 
   bool m_hasScroll;
-  QPtrVector<histline> m_histBuffer;
+  Q3PtrVector<histline> m_histBuffer;
   QBitArray m_wrappedLine;
   unsigned int m_maxNbLines;
   unsigned int m_nbLines;
@@ -173,7 +175,7 @@ public:
 // BlockArray-based history
 //////////////////////////////////////////////////////////////////////
 #include "BlockArray.h"
-#include <qintdict.h>
+#include <q3intdict.h>
 class HistoryScrollBlockArray : public HistoryScroll
 {
 public:
@@ -190,7 +192,7 @@ public:
 
 protected:
   BlockArray m_blockArray;
-  QIntDict<size_t> m_lineLengths;
+  Q3IntDict<size_t> m_lineLengths;
 };
 
 //////////////////////////////////////////////////////////////////////

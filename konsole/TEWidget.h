@@ -16,8 +16,23 @@
 #include <qbitarray.h>
 #include <qwidget.h>
 #include <qcolor.h>
-#include <qkeycode.h>
+#include <qnamespace.h>
 #include <qscrollbar.h>
+#include <QFrame>
+#include <QInputMethodEvent>
+//Added by qt3to4:
+#include <QWheelEvent>
+#include <QFocusEvent>
+#include <QPaintEvent>
+#include <QKeyEvent>
+#include <QEvent>
+#include <QDropEvent>
+#include <QLabel>
+#include <QResizeEvent>
+#include <QDragEnterEvent>
+#include <QMouseEvent>
+//Should have been added by qt3to4:
+#include <Q3TextDrag>
 
 #include <kpopupmenu.h>
 
@@ -29,6 +44,7 @@ extern unsigned short vt100_graphics[32];
 class Konsole;
 class QLabel;
 class QTimer;
+class Q3Frame;
 
 class TEWidget : public QFrame
 // a widget representing attributed text
@@ -155,7 +171,7 @@ protected:
     void drawTextFixed(QPainter &paint, int x, int y,
                        QString& str, const ca *attr);
 
-    void drawAttrStr(QPainter &paint, QRect rect,
+    void drawAttrStr(QPainter &paint, const QRect& rect,
                      QString& str, const ca *attr, bool pm, bool clear);
     void paintEvent( QPaintEvent * );
 
@@ -185,7 +201,7 @@ protected:
     struct _dragInfo {
       DragState       state;
       QPoint          start;
-      QTextDrag       *dragObject;
+      Q3TextDrag       *dragObject;
     } dragInfo;
 
     virtual int charClass(UINT16) const;
@@ -194,9 +210,7 @@ protected:
 
     void mouseTripleClickEvent(QMouseEvent* ev);
 
-    void imStartEvent( QIMEvent *e );
-    void imComposeEvent( QIMEvent *e );
-    void imEndEvent( QIMEvent *e );
+    void inputMethodEvent ( QInputMethodEvent * e );
 
 protected slots:
 
@@ -273,7 +287,7 @@ private:
     static bool s_antialias;   // do we antialias or not
     static bool s_standalone;  // are we part of a standalone konsole?
 
-    QFrame *mResizeWidget;
+    Q3Frame *mResizeWidget;
     QLabel *mResizeLabel;
     QTimer *mResizeTimer;
 

@@ -42,7 +42,7 @@
 #define SCHEMA_include
 
 #include <qstring.h>
-#include <qptrlist.h>
+#include <q3ptrlist.h>
 
 #include "TECommon.h"
 
@@ -175,7 +175,7 @@ protected:
       // ColorSchema has a unique number.
 };
 
-class ColorSchemaList : protected QPtrList<ColorSchema>
+class ColorSchemaList : protected Q3PtrList<ColorSchema>
 {
 public:
 	/**
@@ -184,11 +184,11 @@ public:
 	* from QPtrList to prevent unsightly -- and perhaps dangerous --
 	* tampering with the ColorSchemaList.
 	*/
-	uint count() const { return QPtrList<ColorSchema>::count(); } ;
+	uint count() const { return Q3PtrList<ColorSchema>::count(); } ;
 	const ColorSchema *at(unsigned int i)
-		{ return QPtrList<ColorSchema>::at(i); } ;
+		{ return Q3PtrList<ColorSchema>::at(i); } ;
 
-   void sort() {QPtrList<ColorSchema>::sort();};
+   void sort() {Q3PtrList<ColorSchema>::sort();};
 
 	ColorSchemaList();
    virtual ~ColorSchemaList();
@@ -219,7 +219,7 @@ public:
 		return defaultSchema;
 	} ;
 protected:
-   virtual int compareItems(QPtrCollection::Item item1, QPtrCollection::Item item2);
+   virtual int compareItems(Q3PtrCollection::Item item1, Q3PtrCollection::Item item2);
 
 private:
 	/**

@@ -31,6 +31,8 @@
 
 #include "schema.h"
 #include "session.h"
+//Added by qt3to4:
+#include <Q3StrList>
 
 class KInstance;
 class konsoleBrowserExtension;
@@ -190,7 +192,7 @@ public:
     // these are the implementations for the TermEmuInterface
     // functions...
     void startProgram( const QString& program,
-                       const QStrList& args );
+                       const Q3StrList& args );
     void showShellInDir( const QString& dir );
     void sendInput( const QString& text );
 };

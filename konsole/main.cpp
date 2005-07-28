@@ -19,7 +19,10 @@
 
 #include <qdir.h>
 #include <qsessionmanager.h>
-#include <qwidgetlist.h>
+#include <qwidget.h>
+//Added by qt3to4:
+#include <Q3StrList>
+#include <Q3CString>
 
 #include <dcopclient.h>
 
@@ -99,7 +102,7 @@ static bool fixed_size = false;
 
 bool argb_visual = false;
 
-const char *konsole_shell(QStrList &args)
+const char *konsole_shell(Q3StrList &args)
 {
   const char* shell = getenv("SHELL");
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
@@ -158,7 +161,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   bool frameon = true;
   bool scrollbaron = true;
   bool showtip = true;
-  QCString wname = PACKAGE;
+  Q3CString wname = PACKAGE;
 
 
   KAboutData aboutData( PACKAGE, I18N_NOOP("Konsole"),
@@ -302,7 +305,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   }
   login_shell = args->isSet("ls");
 
-  QStrList eargs;
+  Q3StrList eargs;
 
   const char* shell = 0;
   if (!args->getOption("e").isEmpty())
@@ -322,7 +325,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
      showtip = false;
   }
 
-  QCString sz = "";
+  Q3CString sz = "";
   sz = args->getOption("vt_sz");
   histon = args->isSet("hist");
   menubaron = args->isSet("menubar");
@@ -337,7 +340,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   if (!full_script)
 	a.dcopClient()->setQtBridgeEnabled(false);
 
-  QCString type = "";
+  Q3CString type = "";
 
   if(args->isSet("type")) {
     type = args->getOption("type");
@@ -489,7 +492,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         sIcon = sessionconfig->readEntry("Icon0","konsole");
         sCwd = sessionconfig->readPathEntry("Cwd0");
         workDir = sessionconfig->readPathEntry("workdir");
-	n_tabbar = QMIN(sessionconfig->readUnsignedNumEntry("tabbar",Konsole::TabBottom),2);
+	n_tabbar = qMin(sessionconfig->readUnsignedNumEntry("tabbar",Konsole::TabBottom), 2u);
         Konsole *m = new Konsole(wname,histon,menubaron,tabbaron,frameon,scrollbaron,0/*type*/,true,n_tabbar, workDir);
 
         m->newSession(sPgm, eargs, sTerm, sIcon, sTitle, sCwd);
@@ -601,27 +604,27 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 
  //// Temporary code, waiting for Qt to do this properly
 
+#ifdef __GNUC__
+   #warning "I ported this hack directly: may be it's no longer needed?"
+#endif
   // Delete all toplevel widgets that have WDestructiveClose
-  QWidgetList *list = QApplication::topLevelWidgets();
+  QList<QWidget*> list = QApplication::topLevelWidgets();
+
   // remove all toplevel widgets that have a parent (i.e. they
   // got WTopLevel explicitly), they'll be deleted by the parent
-  list->first();
-  while( list->current())
+  QMutableListIterator<QWidget*> it(list);
+  while(it.hasNext())
   {
-    if( list->current()->parentWidget() != NULL || !list->current()->testWFlags( Qt::WDestructiveClose ) )
+    QWidget* widget = it.next();
+    if( widget->parentWidget() != NULL || !widget->testAttribute(Qt::WA_DeleteOnClose) )
     {
-        list->remove();
+        it.remove();
         continue;
     }
-    list->next();
   }
-  QWidgetListIt it(*list);
-  QWidget * w;
-  while( (w=it.current()) != 0 ) {
-     ++it;
+
+  foreach(QWidget* w, list)
      delete w;
-  }
-  delete list;
 
   return ret;
 }

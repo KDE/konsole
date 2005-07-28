@@ -1,7 +1,9 @@
 #ifndef KWRITED_H
 #define KWRITED_H
 
-#include <qtextedit.h>
+#include <q3textedit.h>
+//Added by qt3to4:
+#include <Q3CString>
 #include <kdedmodule.h>
 
 class KPty;
@@ -14,7 +16,7 @@ public:
 private slots:
   void block_in(int fd);
 private:
-  QTextEdit* wid;
+  Q3TextEdit* wid;
   KPty* pty;
 };
 
@@ -23,7 +25,7 @@ class KWritedModule : public KDEDModule
   Q_OBJECT
   K_DCOP
 public:
-  KWritedModule( const QCString& obj );
+  KWritedModule( const Q3CString& obj );
  ~KWritedModule();
 private:
   KWrited* pro;

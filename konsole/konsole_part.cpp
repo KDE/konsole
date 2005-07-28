@@ -25,7 +25,12 @@
 
 #include <qfile.h>
 #include <qlayout.h>
-#include <qwmatrix.h>
+#include <qmatrix.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <Q3StrList>
+#include <QFrame>
+#include <QHBoxLayout>
 
 #include <kaboutdata.h>
 #include <kcharsets.h>
@@ -139,7 +144,7 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
 
   m_streamEnabled = ( classname && strcmp( classname, "TerminalEmulator" ) == 0 );
 
-  QStrList eargs;
+  Q3StrList eargs;
 
 
   const char* shell = getenv("SHELL");
@@ -544,9 +549,9 @@ void konsolePart::readProperties()
 
   b_framevis = config->readBoolEntry("has frame",false);
   b_histEnabled = config->readBoolEntry("historyenabled",true);
-  n_bell = QMIN(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),3);
+  n_bell = qMin(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),3u);
   n_keytab=config->readNumEntry("keytab",0); // act. the keytab for this session
-  n_scroll = QMIN(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2);
+  n_scroll = qMin(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2u);
   m_histSize = config->readNumEntry("history",DEFAULT_HISTORY_SIZE);
   s_word_seps= config->readEntry("wordseps",":@-./_~");
 
@@ -817,7 +822,7 @@ void konsolePart::pixmap_menu_activated(int item)
             {
               float sx = (float)te->size().width() / pm.width();
               float sy = (float)te->size().height() / pm.height();
-              QWMatrix matrix;
+              QMatrix matrix;
               matrix.scale( sx, sy );
               te->setBackgroundPixmap(pm.xForm( matrix ));
             }
@@ -1038,7 +1043,7 @@ const char* sensibleShell()
 }
 
 void konsolePart::startProgram( const QString& program,
-                                const QStrList& args )
+                                const Q3StrList& args )
 {
   if ( se ) delete se;
   se = new TESession(te, program, args, "xterm", parentWidget->winId());
@@ -1078,7 +1083,7 @@ void konsolePart::showShellInDir( const QString& dir )
   if ( ! m_runningShell )
   {
     const char* s = sensibleShell();
-    QStrList args;
+    Q3StrList args;
     args.append( s );
     startProgram( s, args );
     m_runningShell = true;

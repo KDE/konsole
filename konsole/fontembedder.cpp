@@ -45,7 +45,7 @@ int main(int argc, char **argv)
         exit(1);
     }
     QFile inFile(argv[1]);
-    if (!inFile.open(IO_ReadOnly))
+    if (!inFile.open(QIODevice::ReadOnly))
     {
         qFatal("Can not open %s", argv[1]);
     }

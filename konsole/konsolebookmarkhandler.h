@@ -23,6 +23,9 @@
 
 #include <kbookmarkmanager.h>
 #include "konsolebookmarkmenu.h"
+//Added by qt3to4:
+#include <QTextStream>
+#include <QMenu>
 
 class KPopupMenu;
 class KonsoleBookmarkMenu;
@@ -36,7 +39,7 @@ public:
     KonsoleBookmarkHandler( Konsole *konsole, bool toplevel );
     ~KonsoleBookmarkHandler();
 
-    QPopupMenu * popupMenu();
+    QMenu * popupMenu();
 
     // KBookmarkOwner interface:
     virtual void openBookmarkURL( const QString& url, const QString& title )

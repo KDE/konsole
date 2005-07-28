@@ -55,13 +55,15 @@
 
 #include <qdir.h>
 #include <qdatetime.h>
+//Added by qt3to4:
+#include <Q3PtrList>
 #include <kstandarddirs.h>
 #include <klocale.h>
 #include <kconfig.h>
 #include <kdebug.h>
 
 
-typedef QPtrListIterator<ColorSchema> ColorSchemaListIterator;
+typedef Q3PtrListIterator<ColorSchema> ColorSchemaListIterator;
 
 
 // Number all the new color schema's (non-default) from 1.
@@ -456,7 +458,7 @@ void ColorSchema::updateLastRead(const QDateTime& dt)
 
 
 ColorSchemaList::ColorSchemaList() :
-  QPtrList<ColorSchema> ()
+  Q3PtrList<ColorSchema> ()
 {
 //  KONSOLEDEBUG << "Got new color list" << endl;
 
@@ -624,7 +626,7 @@ bool ColorSchemaList::checkSchemas()
   return r;
 }
 
-int ColorSchemaList::compareItems(QPtrCollection::Item item1, QPtrCollection::Item item2)
+int ColorSchemaList::compareItems(Q3PtrCollection::Item item1, Q3PtrCollection::Item item2)
 {
    ColorSchema* schema1=(ColorSchema*)item1;
    ColorSchema* schema2=(ColorSchema*)item2;

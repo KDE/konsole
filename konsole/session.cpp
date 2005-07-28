@@ -12,7 +12,10 @@
 #include <qfile.h>
 #include <qdir.h>
 #include <qregexp.h>
-#include <qtextedit.h>
+#include <q3textedit.h>
+//Added by qt3to4:
+#include <Q3StrList>
+#include <Q3CString>
 
 /*! \class TESession
 
@@ -24,7 +27,7 @@
     of the abilities of the framework - multible sessions.
 */
 
-TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args, const QString &_term, ulong _winId, const QString &_sessionId, const QString &_initial_cwd)
+TESession::TESession(TEWidget* _te, const QString &_pgm, const Q3StrList & _args, const QString &_term, ulong _winId, const QString &_sessionId, const QString &_initial_cwd)
    : DCOPObject( _sessionId.latin1() )
    , connected(true)
    , monitorActivity(false)
@@ -473,7 +476,7 @@ void TESession::clearHistory()
   }
 }
 
-QStrList TESession::getArgs()
+Q3StrList TESession::getArgs()
 {
   return args;
 }
@@ -618,12 +621,12 @@ void TESession::zmodemContinue()
 
 void TESession::zmodemStatus(KProcess *, char *data, int len)
 {
-  QCString msg(data, len+1);
+  Q3CString msg(data, len+1);
   while(!msg.isEmpty())
   {
      int i = msg.find('\015');
      int j = msg.find('\012');
-     QCString txt;
+     Q3CString txt;
      if ((i != -1) && ((j == -1) || (i < j)))
      {
        msg = msg.mid(i+1);
@@ -670,14 +673,14 @@ void TESession::zmodemDone()
 }
 
 
-bool TESession::processDynamic(const QCString &fun, const QByteArray &data, QCString& replyType, QByteArray &replyData)
+bool TESession::processDynamic(const DCOPCString &fun, const QByteArray &data, DCOPCString& replyType, QByteArray &replyData)
 {
     if (fullScripting)
     {
       if (fun == "feedSession(QString)")
       {
         QString arg0;
-        QDataStream arg( data, IO_ReadOnly );
+        QDataStream arg( data );
         arg >> arg0;
         feedSession(arg0);
         replyType = "void";
@@ -686,7 +689,7 @@ bool TESession::processDynamic(const QCString &fun, const QByteArray &data, QCSt
       else if (fun == "sendSession(QString)")
       {
         QString arg0;
-        QDataStream arg( data, IO_ReadOnly );
+        QDataStream arg( data );
         arg >> arg0;
         sendSession(arg0);
         replyType = "void";
@@ -697,9 +700,9 @@ bool TESession::processDynamic(const QCString &fun, const QByteArray &data, QCSt
 
 }
 
-QCStringList TESession::functionsDynamic()
+DCOPCStringList TESession::functionsDynamic()
 {
-    QCStringList funcs = SessionIface::functionsDynamic();
+    DCOPCStringList funcs = SessionIface::functionsDynamic();
     if (fullScripting)
     {
        funcs << "void feedSession(QString text)";

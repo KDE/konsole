@@ -18,6 +18,8 @@
 
 #include "TECommon.h"
 #include "TEHistory.h"
+//Added by qt3to4:
+#include <QTextStream>
 
 #define MODE_Origin    0
 #define MODE_Wrap      1

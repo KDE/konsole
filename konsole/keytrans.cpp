@@ -20,8 +20,10 @@
 #include "keytrans.h"
 #include <qbuffer.h>
 #include <qobject.h>
-#include <qintdict.h>
+#include <q3intdict.h>
 #include <qfile.h>
+//Added by qt3to4:
+#include <Q3CString>
 #include <kstandarddirs.h>
 #include <klocale.h>
 
@@ -105,7 +107,7 @@ KeyTrans::~KeyTrans()
 KeyTrans::KeyEntry* KeyTrans::addEntry(int ref, int key, int bits, int mask, int cmd, QString txt)
 // returns conflicting entry
 {
-  for (QPtrListIterator<KeyEntry> it(tableX); it.current(); ++it)
+  for (Q3PtrListIterator<KeyEntry> it(tableX); it.current(); ++it)
   {
     if (it.current()->matches(key,bits,mask))
     {
@@ -124,7 +126,7 @@ bool KeyTrans::findEntry(int key, int bits, int* cmd, const char** txt, int* len
   if (bits & ((1<<BITS_Shift)|(1<<BITS_Alt)|(1<<BITS_Control)))
     bits |= (1<<BITS_AnyMod);
   
-  for (QPtrListIterator<KeyEntry> it(tableX); it.current(); ++it)
+  for (Q3PtrListIterator<KeyEntry> it(tableX); it.current(); ++it)
     if (it.current()->matches(key,bits,0xffff))
     {
       *cmd = it.current()->cmd;
@@ -303,7 +305,7 @@ void KeytabReader::ReportToken() // diagnostic
     case SYMName   : printf("Name: %s",res.latin1()); break;
     case SYMOpr    : printf("Opr : %s",res.latin1()); break;
     case SYMString : printf("String len %d,%d ",res.length(),len);
-                     for (unsigned i = 0; i < res.length(); i++)
+                     for (int i = 0; i < res.length(); i++)
                        printf(" %02x(%c)",res.latin1()[i],res.latin1()[i]>=' '?res.latin1()[i]:'?');
                      break;
   }
@@ -329,9 +331,9 @@ protected:
   void defOprSym(const char* key, int val);
   void defModSym(const char* key, int val);
 public:
-  QDict<QObject> keysyms;
-  QDict<QObject> modsyms;
-  QDict<QObject> oprsyms;
+  Q3Dict<QObject> keysyms;
+  Q3Dict<QObject> modsyms;
+  Q3Dict<QObject> oprsyms;
 };
 
 static KeyTransSymbols * syms = 0L;
@@ -349,10 +351,10 @@ void KeyTrans::readConfig()
    QIODevice* buf(0);
    if (m_path=="[buildin]")
    {
-      QCString txt =
+      QByteArray txt =
 #include "default.keytab.h"
 ;
-      buf=new QBuffer(txt);
+      buf=new QBuffer(&txt);
    }
    else
    {
@@ -369,7 +371,7 @@ void KeytabReader::parseTo(KeyTrans* kt)
 {
   // Opening sequence
 
-  buf->open(IO_ReadOnly);
+  buf->open(QIODevice::ReadOnly);
   getCc();
   linno = 1;
   colno  = 1;
@@ -658,7 +660,7 @@ KeyTransSymbols::KeyTransSymbols()
 
 static int keytab_serial = 0; //FIXME: remove,localize
 
-static QIntDict<KeyTrans> * numb2keymap = 0L;
+static Q3IntDict<KeyTrans> * numb2keymap = 0L;
 
 KeyTrans* KeyTrans::find(int numb)
 {
@@ -668,7 +670,7 @@ KeyTrans* KeyTrans::find(int numb)
 
 KeyTrans* KeyTrans::find(const QString &id)
 {
-  QIntDictIterator<KeyTrans> it(*numb2keymap);
+  Q3IntDictIterator<KeyTrans> it(*numb2keymap);
   while(it.current())
   {
     if (it.current()->id() == id)
@@ -692,7 +694,7 @@ void KeyTrans::addKeyTrans()
 void KeyTrans::loadAll()
 {
   if (!numb2keymap)
-    numb2keymap = new QIntDict<KeyTrans>;
+    numb2keymap = new Q3IntDict<KeyTrans>;
   else  {  // Needed for konsole_part.
     numb2keymap->clear();
     keytab_serial = 0;

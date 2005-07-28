@@ -20,9 +20,9 @@
 
 #include <kprocess.h>
 #include <qsocketnotifier.h>
-#include <qstrlist.h>
-#include <qvaluelist.h>
-#include <qmemarray.h>
+#include <q3strlist.h>
+#include <q3valuelist.h>
+#include <q3memarray.h>
 
 class TEPty: public KProcess
 {
@@ -40,7 +40,7 @@ Q_OBJECT
      * the necessary connections to the signals and slots of the
      * instance before starting the execution of the client.
      */
-    int run( const char* pgm, QStrList & args, const char* term, ulong winid, bool _addutmp,
+    int run( const char* pgm, Q3StrList & args, const char* term, ulong winid, bool _addutmp,
              const char* konsole_dcop = "", const char* konsole_dcop_session = "" );
     void setWriteable(bool writeable);
     QString error() { return m_strError; }
@@ -100,10 +100,10 @@ Q_OBJECT
         buffer.duplicate(b,len);
         length = len;
       }
-      QMemArray<char> buffer;
+      Q3MemArray<char> buffer;
       int length;
     };
-    QValueList<SendJob> pendingSendJobs;
+    Q3ValueList<SendJob> pendingSendJobs;
     bool m_bufferFull;
 };
 

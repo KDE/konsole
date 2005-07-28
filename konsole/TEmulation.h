@@ -16,9 +16,12 @@
 #include "TEWidget.h"
 #include "TEScreen.h"
 #include <qtimer.h>
+//Added by qt3to4:
+#include <QTextStream>
+#include <QKeyEvent>
 #include <stdio.h>
 #include <qtextcodec.h>
-#include <qguardedptr.h>
+#include <qpointer.h>
 #include <keytrans.h>
 
 enum { NOTIFYNORMAL=0, NOTIFYBELL=1, NOTIFYACTIVITY=2, NOTIFYSILENCE=3 };
@@ -103,7 +106,7 @@ public:
 
 protected:
 
-  QGuardedPtr<TEWidget> gui;
+  QPointer<TEWidget> gui;
   TEScreen* scr;         // referes to one `screen'
   TEScreen* screen[2];   // 0 = primary, 1 = alternate
   void setScreen(int n); // set `scr' to `screen[n]'

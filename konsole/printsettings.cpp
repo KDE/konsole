@@ -23,6 +23,8 @@
 #include <klocale.h>
 #include <qcheckbox.h>
 #include <qlayout.h>
+//Added by qt3to4:
+#include <QVBoxLayout>
 
 PrintSettings::PrintSettings(QWidget *parent, const char *name)
 : KPrintDialogPage(parent, name)

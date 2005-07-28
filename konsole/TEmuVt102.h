@@ -17,6 +17,8 @@
 #include "TEScreen.h"
 #include "TEmulation.h"
 #include <stdio.h>
+//Added by qt3to4:
+#include <QKeyEvent>
 
 //
 

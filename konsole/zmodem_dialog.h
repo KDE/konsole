@@ -21,7 +21,7 @@
 
 #include <kdialogbase.h>
 
-class QTextEdit;
+class Q3TextEdit;
 
 class ZModemDialog : public KDialogBase
 {
@@ -43,7 +43,7 @@ public slots:
   void slotClose();
   
 private:
-  QTextEdit *textEdit;
+  Q3TextEdit *textEdit;
 };
 
 #endif

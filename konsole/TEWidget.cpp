@@ -52,9 +52,23 @@
 #include <qclipboard.h>
 #include <qstyle.h>
 #include <qfile.h>
-#include <qdragobject.h>
+#include <q3dragobject.h>
 #include <qlayout.h>
 #include <qregexp.h>
+//Added by qt3to4:
+#include <QPaintEvent>
+#include <QBoxLayout>
+#include <QResizeEvent>
+#include <QMouseEvent>
+#include <QFocusEvent>
+#include <Q3Frame>
+#include <QKeyEvent>
+#include <QEvent>
+#include <QWheelEvent>
+#include <QVBoxLayout>
+#include <QDropEvent>
+#include <QDragEnterEvent>
+#include <QPixmap>
 
 #include <math.h>
 #include <stdio.h>
@@ -160,12 +174,9 @@ void TEWidget::setColorTable(const ColorEntry table[])
     if (!argb_visual || (qAlpha(blend_color) == 0xff))
       setBackgroundColor(getDefaultBackColor());
     else {
-      float alpha = qAlpha(blend_color) / 255.;
-      int pixel = qAlpha(blend_color) << 24 |
-                  int(qRed(blend_color) * alpha) << 16 |
-                  int(qGreen(blend_color) * alpha) << 8  |
-                  int(qBlue(blend_color) * alpha);
-      setBackgroundColor(QColor(blend_color, pixel));
+
+      //### probably buggy
+      setBackgroundColor(blend_color);
     }
   update();
 }
@@ -379,7 +390,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
                     this, SLOT(onClearSelection()) );
 
   scrollbar = new QScrollBar(this);
-  scrollbar->setCursor( arrowCursor );
+  scrollbar->setCursor( Qt::ArrowCursor );
   connect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
 
   blinkT   = new QTimer(this);
@@ -397,7 +408,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
   setAcceptDrops(true); // attempt
   dragInfo.state = diNone;
 
-  setFocusPolicy( WheelFocus );
+  setFocusPolicy( Qt::WheelFocus );
 
   // im
   setInputMethodEnabled(true);  
@@ -405,8 +416,9 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
   if (!argb_visual)
   {
     // Looks better at startup with KRootPixmap based pseudo-transparancy
-    setBackgroundMode(NoBackground);
+   setAttribute(Qt::WA_NoBackground);
   }
+  setAttribute(Qt::WA_PaintOnScreen); //We have our own double-buffer, so...
 }
 
 //FIXME: make proper destructor
@@ -545,7 +557,7 @@ void TEWidget::drawTextFixed(QPainter &paint, int x, int y,
   QString drawstr;
   unsigned int nc=0;
   int w;
-  for(unsigned int i=0;i<str.length();i++)
+  for(int i=0;i<str.length();i++)
   {
     drawstr = str.at(i);
     // Add double of the width if next c is 0;
@@ -582,7 +594,7 @@ void TEWidget::drawTextFixed(QPainter &paint, int x, int y,
     attributed string draw primitive
 */
 
-void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
+void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
                            QString& str, const ca *attr, bool pm, bool clear)
 {
   int a = font_a + m_lineSpacing / 2;
@@ -598,7 +610,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
     if (color_table[attr->b].transparent)
     {
       if (pm)
-        paint.setBackgroundMode( TransparentMode );
+        paint.setBackgroundMode( Qt::TransparentMode );
       if (clear || (blinking && (attr->r & RE_BLINK)))
         erase(rect);
     }
@@ -623,7 +635,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
           col = a << 24 | r << 16 | g << 8 | b;
           int pixel = a << 24 | (r * a / 255) << 16 | (g * a / 255) << 8 | (b * a / 255);
 
-          paint.fillRect(rect, QColor(col, pixel));
+          paint.fillRect(rect, QColor(col));
         } else
           paint.fillRect(rect, color_table[attr->b].color);
     }
@@ -657,7 +669,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
 
   // Paint cursor
   if ((attr->r & RE_CURSOR) && !isPrinting) {
-    paint.setBackgroundMode( TransparentMode );
+    paint.setBackgroundMode( Qt::TransparentMode );
     int h = font_h - m_lineSpacing;
     QRect r(rect.x(),rect.y()+m_lineSpacing/2,rect.width(),h);
     if (hasFocus())
@@ -711,14 +723,19 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
     {
       // The meaning of y differs between different versions of QPainter::drawText!!
       int y = rect.y()+a; // baseline
+
+#ifdef __GNUC__
+   #warning "BiDi stuff killed, it should force TRL when !bidiEnabled"
+#endif
  
       if ( shadow ) {
         paint.setPen( Qt::black );
-        paint.drawText(x+1,y+1, str, -1, bidiEnabled ? QPainter::Auto : QPainter::LTR );
+
+        paint.drawText(x+1,y+1, str);
         paint.setPen(fColor);
       }
 
-      paint.drawText(x,y, str, -1, bidiEnabled ? QPainter::Auto : QPainter::LTR );
+      paint.drawText(x,y, str);
     }
 
     if (color_table[attr->f].bold && isPrinting)
@@ -731,7 +748,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
     {
       paint.setClipRect(rect);
       // On screen we use overstrike for bold
-      paint.setBackgroundMode( TransparentMode );
+      paint.setBackgroundMode( Qt::TransparentMode );
       int x = rect.x()+1;
       if(!fixed_font)
       {
@@ -743,10 +760,10 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
       {
         // The meaning of y differs between different versions of QPainter::drawText!!
         int y = rect.y()+a; // baseline
-        if (bidiEnabled)
+        //### if (bidiEnabled)
           paint.drawText(x,y, str, -1);
-        else
-          paint.drawText(x,y, str, -1, QPainter::LTR);
+        //else
+        //###   paint.drawText(x,y, str, -1, QPainter::LTR);
       }
       paint.setClipping(false);
     }
@@ -768,7 +785,7 @@ void TEWidget::setCursorPos(const int curx, const int cury)
     int xpos, ypos;
     ypos = bY + tLy + font_h*(cury-1) + font_a;
     xpos = bX + tLx + font_w*curx;
-    setMicroFocusHint(xpos, ypos, 0, font_h);
+    //setMicroFocusHint(xpos, ypos, 0, font_h); //### ???
     // fprintf(stderr, "x/y = %d/%d\txpos/ypos = %d/%d\n", curx, cury, xpos, ypos);
     m_cursorLine = cury;
     m_cursorCol = curx;
@@ -787,9 +804,6 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
 
   int y,x,len;
   const QPixmap* pm = backgroundPixmap();
-  QPainter paint;
-  setUpdatesEnabled(false);
-  paint.begin( this );
 
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
@@ -804,6 +818,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
   int cols = QMIN(this->columns,QMAX(0,columns));
   QChar *disstrU = new QChar[cols];
   char *dirtyMask = (char *) malloc(cols+2);
+  QRegion dirtyRegion;
 
 //{ static int cnt = 0; printf("setImage %d\n",cnt++); }
   for (y = 0; y < lins; y++)
@@ -885,9 +900,13 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
            fixed_font = false;
         if (doubleWidth)
            fixed_font = false;
+
+        dirtyRegion |= QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h);
+/*
         drawAttrStr(paint,
                     QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
                     unistr, &ext[x], pm != NULL, true);
+*/
         fixed_font = save_fixed_font;
         x += len - 1;
       }
@@ -898,9 +917,8 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
     // finally, make `image' become `newimg'.
     memcpy((void*)lcl,(const void*)ext,cols*sizeof(ca));
   }
-  drawFrame( &paint );
-  paint.end();
-  setUpdatesEnabled(true);
+  repaint(dirtyRegion);
+  
   if ( hasBlinker && !blinkT->isActive()) blinkT->start(1000); // 1000 ms
   if (!hasBlinker && blinkT->isActive()) { blinkT->stop(); blinking = false; }
   free(dirtyMask);
@@ -914,7 +932,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
      }
      if (!mResizeWidget)
      {
-        mResizeWidget = new QFrame(this);
+        mResizeWidget = new Q3Frame(this);
         QFont f = KGlobalSettings::generalFont();
         int fs = f.pointSize();
         if (fs == -1)
@@ -922,11 +940,11 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
         f.setPointSize((fs*3)/2);
         f.setBold(true);
         mResizeWidget->setFont(f);
-        mResizeWidget->setFrameShape((QFrame::Shape) (QFrame::Box|QFrame::Raised));
+        mResizeWidget->setFrameShape((Q3Frame::Shape) (Q3Frame::Box|Q3Frame::Raised));
         mResizeWidget->setMidLineWidth(4);
         QBoxLayout *l = new QVBoxLayout( mResizeWidget, 10);
         mResizeLabel = new QLabel(i18n("Size: XXX x XXX"), mResizeWidget);
-        l->addWidget(mResizeLabel, 1, AlignCenter);
+        l->addWidget(mResizeLabel, 1, Qt::AlignCenter);
         mResizeWidget->setMinimumWidth(mResizeLabel->fontMetrics().width(i18n("Size: XXX x XXX"))+20);
         mResizeWidget->setMinimumHeight(mResizeLabel->sizeHint().height()+20);
         mResizeTimer = new QTimer(this);
@@ -967,9 +985,8 @@ void TEWidget::paintEvent( QPaintEvent* pe )
 {
   const QPixmap* pm = backgroundPixmap();
   QPainter paint;
-  setUpdatesEnabled(false);
   paint.begin( this );
-  paint.setBackgroundMode( TransparentMode );
+  paint.setBackgroundMode( Qt::TransparentMode );
 
   // Note that the actual widget size can be slightly larger
   // that the image (the size is truncated towards the smaller
@@ -977,13 +994,13 @@ void TEWidget::paintEvent( QPaintEvent* pe )
   // can thus be larger than the image, but less then the size
   // of one character.
 
-  QRect rect = pe->rect().intersect(contentsRect());
-
-  paintContents(paint, rect, pm != 0);
+  foreach (QRect rect, (pe->region() & contentsRect()).rects())
+  {
+    paintContents(paint, rect, pm != 0);
+  }
 
   drawFrame( &paint );
   paint.end();
-  setUpdatesEnabled(true);
 }
 
 void TEWidget::print(QPainter &paint, bool friendly, bool exact)
@@ -1222,7 +1239,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
 {
 //printf("press [%d,%d] %d\n",ev->x()/font_w,ev->y()/font_h,ev->button());
 
-  if ( possibleTripleClick && (ev->button()==LeftButton) ) {
+  if ( possibleTripleClick && (ev->button()==Qt::LeftButton) ) {
     mouseTripleClickEvent(ev);
     return;
   }
@@ -1235,7 +1252,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   QPoint pos = QPoint((ev->x()-tLx-bX+(font_w/2))/font_w,(ev->y()-tLy-bY)/font_h);
 
 //printf("press top left [%d,%d] by=%d\n",tLx,tLy, bY);
-  if ( ev->button() == LeftButton)
+  if ( ev->button() == Qt::LeftButton)
   {
     line_selection_mode = false;
     word_selection_mode = false;
@@ -1246,7 +1263,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
     // The receiver of the testIsSelected() signal will adjust
     // 'selected' accordingly.
     emit testIsSelected(pos.x(), pos.y(), selected);
-    if ((!ctrldrag || ev->state() & ControlButton) && selected ) {
+    if ((!ctrldrag || ev->state() & Qt::ControlButton) && selected ) {
       // The user clicked inside selected text
       dragInfo.state = diPending;
       dragInfo.start = ev->pos();
@@ -1255,10 +1272,10 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       // No reason to ever start a drag event
       dragInfo.state = diNone;
 
-      preserve_line_breaks = !( ( ev->state() & ControlButton ) && !(ev->state() & AltButton) );
-      column_selection_mode = (ev->state() & AltButton) && (ev->state() & ControlButton);
+      preserve_line_breaks = !( ( ev->state() & Qt::ControlButton ) && !(ev->state() & Qt::AltButton) );
+      column_selection_mode = (ev->state() & Qt::AltButton) && (ev->state() & Qt::ControlButton);
 
-      if (mouse_marks || (ev->state() & ShiftButton))
+      if (mouse_marks || (ev->state() & Qt::ShiftButton))
       {
         emit clearSelectionSignal();
         pos.ry() += scrollbar->value();
@@ -1272,18 +1289,18 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       }
     }
   }
-  else if ( ev->button() == MidButton )
+  else if ( ev->button() == Qt::MidButton )
   {
-    if ( mouse_marks || (!mouse_marks && (ev->state() & ShiftButton)) )
-      emitSelection(true,ev->state() & ControlButton);
+    if ( mouse_marks || (!mouse_marks && (ev->state() & Qt::ShiftModifier)) )
+      emitSelection(true,ev->state() & Qt::ControlModifier);
     else
       emit mouseSignal( 1, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maxValue() );
   }
-  else if ( ev->button() == RightButton )
+  else if ( ev->button() == Qt::RightButton )
   {
-    if (mouse_marks || (ev->state() & ShiftButton)) {
+    if (mouse_marks || (ev->state() & Qt::ShiftModifier)) {
       configureRequestPoint = QPoint( ev->x(), ev->y() );
-      emit configureRequest( this, ev->state()&(ShiftButton|ControlButton), ev->x(), ev->y() );
+      emit configureRequest( this, ev->state()&(Qt::ShiftModifier|Qt::ControlModifier), ev->x(), ev->y() );
     }
     else
       emit mouseSignal( 2, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maxValue() );
@@ -1293,7 +1310,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
 void TEWidget::mouseMoveEvent(QMouseEvent* ev)
 {
   // for auto-hiding the cursor, we need mouseTracking
-  if (ev->state() == NoButton ) return;
+  if (ev->state() == Qt::NoButton ) return;
 
   if (dragInfo.state == diPending) {
     // we had a mouse down, but haven't confirmed a drag yet
@@ -1317,7 +1334,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
   if (actSel == 0) return;
 
  // don't extend selection while pasting
-  if (ev->state() & MidButton) return;
+  if (ev->state() & Qt::MidButton) return;
 
   extendSelection( ev->pos() );
 }
@@ -1509,7 +1526,7 @@ void TEWidget::extendSelection( QPoint pos )
 void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
 {
 //printf("release [%d,%d] %d\n",ev->x()/font_w,ev->y()/font_h,ev->button());
-  if ( ev->button() == LeftButton)
+  if ( ev->button() == Qt::LeftButton)
   {
     emit isBusySelecting(false); // Ok.. we can breath again.
     if(dragInfo.state == diPending)
@@ -1531,7 +1548,7 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
       int    tLx = tL.x();
       int    tLy = tL.y();
 
-      if (!mouse_marks && !(ev->state() & ShiftButton))
+      if (!mouse_marks && !(ev->state() & Qt::ShiftModifier))
         emit mouseSignal( 3, // release
                         (ev->x()-tLx-bX)/font_w + 1,
                         (ev->y()-tLy-bY)/font_h + 1 +scrollbar->value() -scrollbar->maxValue());
@@ -1539,8 +1556,8 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
     }
     dragInfo.state = diNone;
   }
-  if ( !mouse_marks && ((ev->button() == RightButton && !(ev->state() & ShiftButton))
-                        || ev->button() == MidButton) ) {
+  if ( !mouse_marks && ((ev->button() == Qt::RightButton && !(ev->modifiers() & Qt::ShiftModifier))
+                        || ev->button() == Qt::MidButton) ) {
     QPoint tL  = contentsRect().topLeft();
     int    tLx = tL.x();
     int    tLy = tL.y();
@@ -1552,7 +1569,7 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
 
 void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
 {
-  if ( ev->button() != LeftButton) return;
+  if ( ev->button() != Qt::LeftButton) return;
 
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
@@ -1560,7 +1577,7 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
   QPoint pos = QPoint((ev->x()-tLx-bX)/font_w,(ev->y()-tLy-bY)/font_h);
 
   // pass on double click as two clicks.
-  if (!mouse_marks && !(ev->state() & ShiftButton))
+  if (!mouse_marks && !(ev->modifiers() & Qt::ShiftModifier))
   {
     // Send just _ONE_ click event, since the first click of the double click
     // was already sent by the click handler!
@@ -1713,7 +1730,7 @@ void TEWidget::setWordCharacters(QString wc)
 void TEWidget::setMouseMarks(bool on)
 {
   mouse_marks = on;
-  setCursor( mouse_marks ? ibeamCursor : arrowCursor );
+  setCursor( mouse_marks ? Qt::IBeamCursor : Qt::ArrowCursor );
 }
 
 /* ------------------------------------------------------------------------- */
@@ -1735,8 +1752,8 @@ void TEWidget::emitText(QString text)
 void TEWidget::emitSelection(bool useXselection,bool appendReturn)
 // Paste Clipboard by simulating keypress events
 {
-  QApplication::clipboard()->setSelectionMode( useXselection );
-  QString text = QApplication::clipboard()->text();
+  QString text = QApplication::clipboard()->text(useXselection ? QClipboard::Selection :
+                                                                 QClipboard::Clipboard);
   if(appendReturn)
     text.append("\r");
   if ( ! text.isEmpty() )
@@ -1746,7 +1763,6 @@ void TEWidget::emitSelection(bool useXselection,bool appendReturn)
     emit keyPressedSignal(&e); // expose as a big fat keypress event
     emit clearSelectionSignal();
   }
-  QApplication::clipboard()->setSelectionMode( false );
 }
 
 void TEWidget::setSelection(const QString& t)
@@ -1756,9 +1772,7 @@ void TEWidget::setSelection(const QString& t)
   QObject::disconnect( cb, SIGNAL(selectionChanged()),
                      this, SLOT(onClearSelection()) );
 
-  cb->setSelectionMode( true );
-  cb->setText(t);
-  cb->setSelectionMode( false );
+  cb->setText(t, QClipboard::Selection);
 
   QObject::connect( cb, SIGNAL(selectionChanged()),
                      this, SLOT(onClearSelection()) );
@@ -1858,6 +1872,14 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
   return QFrame::eventFilter( obj, e );
 }
 
+void TEWidget::inputMethodEvent ( QInputMethodEvent * e )
+{
+#ifdef __GNUC__
+   #warning "FIXME: Port the IM stuff!"
+#endif
+}
+
+#if 0
 void TEWidget::imStartEvent( QIMEvent */*e*/ )
 {
   m_imStart = m_cursorCol;
@@ -1918,6 +1940,7 @@ void TEWidget::imEndEvent( QIMEvent *e )
   m_isIMEdit = m_isIMSel = false;
   repaint( repaintRect, true );
 }
+#endif
 
 // Override any Ctrl+<key> accelerator when pressed with the keyboard
 // focus in TEWidget, so that the key will be passed to the terminal instead.
@@ -1938,8 +1961,8 @@ bool TEWidget::event( QEvent *e )
     // Override any of the following accelerators:
     switch ( keyCodeQt )
     {
-      case Key_Tab:
-      case Key_Delete:
+      case Qt::Key_Tab:
+      case Qt::Key_Delete:
         ke->accept();
         return true;
     }
@@ -2020,7 +2043,7 @@ void TEWidget::clearImage()
 
 void TEWidget::calcGeometry()
 {
-  scrollbar->resize(QApplication::style().pixelMetric(QStyle::PM_ScrollBarExtent),
+  scrollbar->resize(QApplication::style()->pixelMetric(QStyle::PM_ScrollBarExtent),
                     contentsRect().height());
   switch(scrollLoc)
   {
@@ -2112,7 +2135,7 @@ void TEWidget::styleChange(QStyle &)
 
 void TEWidget::dragEnterEvent(QDragEnterEvent* e)
 {
-  e->accept(QTextDrag::canDecode(e) ||
+  e->accept(Q3TextDrag::canDecode(e) ||
       KURLDrag::canDecode(e));
 }
 
@@ -2174,7 +2197,7 @@ void TEWidget::dropEvent(QDropEvent* event)
       if (!justPaste) m_drop->popup(mapToGlobal(event->pos()));
     }
   }
-  if(justPaste && QTextDrag::decode(event, dropText)) {
+  if(justPaste && Q3TextDrag::decode(event, dropText)) {
     kdDebug(1211) << "Drop:" << dropText.local8Bit() << "\n";
     emit sendStringToEmu(dropText.local8Bit());
     // Paste it
@@ -2184,7 +2207,7 @@ void TEWidget::dropEvent(QDropEvent* event)
 void TEWidget::doDrag()
 {
   dragInfo.state = diDragging;
-  dragInfo.dragObject = new QTextDrag(QApplication::clipboard()->text(QClipboard::Selection), this);
+  dragInfo.dragObject = new Q3TextDrag(QApplication::clipboard()->text(QClipboard::Selection), this);
   dragInfo.dragObject->dragCopy();
   // Don't delete the QTextDrag object.  Qt will delete it when it's done with it.
 }

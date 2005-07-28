@@ -39,6 +39,9 @@
 #include "TEmuVt102.moc"
 
 #include <kdebug.h>
+//Added by qt3to4:
+#include <QKeyEvent>
+#include <Q3CString>
 
 /* VT102 Terminal Emulation
 
@@ -918,9 +921,9 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
                                      encodeMode(MODE_Ansi     , BITS_Ansi      ) + // OBSOLETE,
                                      encodeMode(MODE_AppCuKeys, BITS_AppCuKeys ) + // VT100 stuff
                                      encodeMode(MODE_AppScreen, BITS_AppScreen ) + // VT100 stuff
-                                     encodeStat(ControlButton , BITS_Control   ) +
-                                     encodeStat(ShiftButton   , BITS_Shift     ) +
-                                     encodeStat(AltButton     , BITS_Alt       ),
+                                     encodeStat(Qt::ControlModifier , BITS_Control   ) +
+                                     encodeStat(Qt::ShiftModifier   , BITS_Shift     ) +
+                                     encodeStat(Qt::AltModifier     , BITS_Alt       ),
                           &cmd, &txt, &len, &metaspecified ))
 //printf("cmd: %d, %s, %d\n",cmd,txt,len);
   if (connected)
@@ -938,21 +941,21 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
   {
     switch(ev->key())
     {
-    case Key_Down : gui->doScroll(+1); return;
-    case Key_Up : gui->doScroll(-1); return;
-    case Key_PageUp : gui->doScroll(-gui->Lines()/2); return;
-    case Key_PageDown : gui->doScroll(gui->Lines()/2); return;
+    case Qt::Key_Down : gui->doScroll(+1); return;
+    case Qt::Key_Up : gui->doScroll(-1); return;
+    case Qt::Key_PageUp : gui->doScroll(-gui->Lines()/2); return;
+    case Qt::Key_PageDown : gui->doScroll(gui->Lines()/2); return;
     }
   }
   
   // revert to non-history when typing
   if (scr->getHistCursor() != scr->getHistLines() && (!ev->text().isEmpty()
-    || ev->key()==Key_Down || ev->key()==Key_Up || ev->key()==Key_Left || ev->key()==Key_Right
-    || ev->key()==Key_PageUp || ev->key()==Key_PageDown))
+    || ev->key()==Qt::Key_Down || ev->key()==Qt::Key_Up || ev->key()==Qt::Key_Left || ev->key()==Qt::Key_Right
+    || ev->key()==Qt::Key_PageUp || ev->key()==Qt::Key_PageDown))
     scr->setHistCursor(scr->getHistLines());
 
   if (cmd==CMD_send) {
-    if ((ev->state() & AltButton) && !metaspecified ) sendString("\033");
+    if ((ev->state() & Qt::AltButton) && !metaspecified ) sendString("\033");
     emit sndBlock(txt,len);
     return;
   }
@@ -960,13 +963,13 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
   // fall back handling
   if (!ev->text().isEmpty())
   {
-    if (ev->state() & AltButton) sendString("\033"); // ESC, this is the ALT prefix
-    QCString s = m_codec->fromUnicode(ev->text());     // encode for application
+    if (ev->state() & Qt::AltButton) sendString("\033"); // ESC, this is the ALT prefix
+    Q3CString s = m_codec->fromUnicode(ev->text());     // encode for application
     // FIXME: In Qt 2, QKeyEvent::text() would return "\003" for Ctrl-C etc.
     //        while in Qt 3 it returns the actual key ("c" or "C") which caused
     //        the ControlButton to be ignored. This hack seems to work for
     //        latin1 locales at least. Please anyone find a clean solution (malte)
-    if (ev->state() & ControlButton)
+    if (ev->state() & Qt::ControlButton)
       s.fill(ev->ascii(), 1);
     emit sndBlock(s.data(),s.length());              // we may well have s.length() > 1 
     return;
@@ -1288,6 +1291,7 @@ DEALINGS IN THE SOFTWARE.
 #undef explicit
 
 #include <X11/keysym.h>
+#include <QX11Info>
 
 /* the XKB stuff is based on code created by Oswald Buddenhagen <ossi@kde.org> */
 static int xkb_init()
@@ -1296,7 +1300,7 @@ static int xkb_init()
     int xkb_lmaj = XkbMajorVersion;
     int xkb_lmin = XkbMinorVersion;
     return XkbLibraryVersion( &xkb_lmaj, &xkb_lmin )
-        && XkbQueryExtension( qt_xdisplay(), &xkb_opcode, &xkb_event, &xkb_error,
+        && XkbQueryExtension( QX11Info::display(), &xkb_opcode, &xkb_event, &xkb_error,
 			       &xkb_lmaj, &xkb_lmin );
 }
     
@@ -1330,7 +1334,7 @@ static unsigned int xkb_mask_modifier( XkbDescPtr xkb, const char *name )
 static unsigned int xkb_scrolllock_mask()
 {
     XkbDescPtr xkb;
-    if(( xkb = XkbGetKeyboard( qt_xdisplay(), XkbAllComponentsMask, XkbUseCoreKbd )) != NULL )
+    if(( xkb = XkbGetKeyboard( QX11Info::display(), XkbAllComponentsMask, XkbUseCoreKbd )) != NULL )
     {
         unsigned int mask = xkb_mask_modifier( xkb, "ScrollLock" );
         XkbFreeKeyboard( xkb, 0, True );
@@ -1343,8 +1347,8 @@ static unsigned int xkb_scrolllock_mask()
 static unsigned int xkb_scrolllock_mask()
 {
     int scrolllock_mask = 0;
-    XModifierKeymap* map = XGetModifierMapping( qt_xdisplay() );
-    KeyCode scrolllock_keycode = XKeysymToKeycode( qt_xdisplay(), XK_Scroll_Lock );
+    XModifierKeymap* map = XGetModifierMapping( QX11Info::display() );
+    KeyCode scrolllock_keycode = XKeysymToKeycode( QX11Info::display(), XK_Scroll_Lock );
     if( scrolllock_keycode == NoSymbol )
         return 0;
     for( int i = 0;
@@ -1372,7 +1376,7 @@ static int xkb_set_on()
        if( scrolllock_mask == 0 )
           return 0;
     }
-    XkbLockModifiers ( qt_xdisplay(), XkbUseCoreKbd, scrolllock_mask, scrolllock_mask);
+    XkbLockModifiers ( QX11Info::display(), XkbUseCoreKbd, scrolllock_mask, scrolllock_mask);
     return 1;
 }
     
@@ -1386,7 +1390,7 @@ static int xkb_set_off()
        if( scrolllock_mask == 0 )
           return 0;
     }
-    XkbLockModifiers ( qt_xdisplay(), XkbUseCoreKbd, scrolllock_mask, 0);
+    XkbLockModifiers ( QX11Info::display(), XkbUseCoreKbd, scrolllock_mask, 0);
     return 1;
 }
 

@@ -2,6 +2,8 @@
 
 #include <dcopclient.h>
 #include <qsocketnotifier.h>
+//Added by qt3to4:
+#include <Q3CString>
 
 #include <kuniqueapplication.h>
 #include <kcmdlineargs.h>
@@ -41,12 +43,12 @@
 
 KWrited::KWrited() : QObject()
 {
-  wid = new QTextEdit(0, "messages");
+  wid = new Q3TextEdit(0, "messages");
   wid->setFont(KGlobalSettings::fixedFont());
   wid->setMinimumWidth(wid->fontMetrics().maxWidth()*80 +
       wid->minimumSizeHint().width());
   wid->setReadOnly(true);
-  wid->setFocusPolicy(QWidget::NoFocus);
+  wid->setFocusPolicy(Qt::NoFocus);
 
   pty = new KPty();
   pty->open();
@@ -77,7 +79,7 @@ void KWrited::block_in(int fd)
   wid->raise();
 }
 
-KWritedModule::KWritedModule( const QCString& obj )
+KWritedModule::KWritedModule( const Q3CString& obj )
     : KDEDModule( obj )
 {
     KGlobal::locale()->insertCatalogue("konsole");
@@ -91,7 +93,7 @@ KWritedModule::~KWritedModule()
 }
 
 extern "C"
-KDE_EXPORT KDEDModule* create_kwrited( const QCString& obj )
+KDE_EXPORT KDEDModule* create_kwrited( const Q3CString& obj )
     {
     return new KWritedModule( obj );
     }

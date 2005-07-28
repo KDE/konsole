@@ -2,6 +2,7 @@
 #define SESSIONIFACE_H
 
 #include <dcopobject.h>
+#include <QSize>
 
 class SessionIface : virtual public DCOPObject
 {
