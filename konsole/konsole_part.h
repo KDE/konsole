@@ -1,4 +1,4 @@
-/*
+/* -*- C++ -*-
     This file is part of the KDE system
     Copyright (C)  1999,2000 Boloni Laszlo
 
@@ -66,7 +66,7 @@ public:
 
 //////////////////////////////////////////////////////////////////////
 
-class konsolePart: public KParts::ReadOnlyPart, public TerminalInterface
+class konsolePart: public KParts::ReadOnlyPart, public TerminalInterface, public ExtTerminalInterface
 {
     Q_OBJECT
 	public:
@@ -74,8 +74,9 @@ class konsolePart: public KParts::ReadOnlyPart, public TerminalInterface
     virtual ~konsolePart();
 
 signals:
-    void processExited();
+    void processExited( KProcess * );
     void receivedData( const QString& s );
+    void forkedChild();
  protected:
     virtual bool openURL( const KURL & url );
     virtual bool openFile() {return false;} // never used
@@ -84,8 +85,6 @@ signals:
 
  protected slots:
     void showShell();
-    void slotProcessExited();
-    void slotReceivedData( const QString& s );
 
     void doneSession(TESession*);
     void sessionDestroyed();
@@ -124,6 +123,8 @@ signals:
     void slotSetEncoding();
     void biggerFont();
     void smallerFont();
+
+    void autoShowShell();
 
  private:
     konsoleBrowserExtension *m_extension;
@@ -175,6 +176,8 @@ signals:
     bool        b_framevis:1;
     bool        b_histEnabled:1;
     bool        b_useKonsoleSettings:1;
+    bool        b_autoDestroy:1;
+    bool        b_autoStartShell:1;
 
     int         curr_schema; // current schema no
     int         n_bell;
@@ -191,8 +194,11 @@ public:
     // functions...
     void startProgram( const QString& program,
                        const QStrList& args );
+    void newSession();
     void showShellInDir( const QString& dir );
     void sendInput( const QString& text );
+    void setAutoDestroy( bool );
+    void setAutoStartShell( bool );
 };
 
 //////////////////////////////////////////////////////////////////////

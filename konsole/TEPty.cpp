@@ -241,4 +241,13 @@ void TEPty::lockPty(bool lock)
     resume();
 }
 
+int TEPty::commSetupDoneC ()
+{
+    int ok = KProcess::commSetupDoneC ();
+    if ( ok ) {
+        emit forkedChild();
+    }
+    return ok;
+}
+
 #include "TEPty.moc"

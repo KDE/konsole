@@ -1,4 +1,4 @@
-/* -------------------------------------------------------------------------- */
+/* ---*- C++ -*-------------------------------------------------------------- */
 /*                                                                            */
 /* [TEPty.h]                 Pseudo Terminal Device                           */
 /*                                                                            */
@@ -72,11 +72,19 @@ Q_OBJECT
     */
     void buffer_empty();
 
+    // this will be emitted in the child process
+    // after forking (and, obviously, before exec())
+    void forkedChild();
+
   public:
 
     void send_byte(char s);
     void send_string(const char* s);
     bool buffer_full() { return m_bufferFull; }
+
+    // override from KProcess to allow the client of konsolePart
+    // to set up things after fork() but before exec()
+    virtual int commSetupDoneC();
 
   protected slots:
       void dataReceived(KProcess *, char *buf, int len);

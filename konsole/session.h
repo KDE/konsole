@@ -33,10 +33,10 @@ class TESession : public QObject, virtual public SessionIface
 public:
 
   TESession(TEWidget* w,
-            const QString &pgm, const QStrList & _args,
 	    const QString &term, ulong winId, const QString &sessionId="session-1",
 	    const QString &initial_cwd = QString::null);
   void changeWidget(TEWidget* w);
+  void setPty( TEPty *_sh );
   TEWidget* widget() { return te; }
   ~TESession();
 
@@ -117,6 +117,7 @@ public:
 public slots:
 
   void run();
+  void setProgram( const QString &_pgm, const QStrList &_args );
   void done();
   void done(int);
   void terminate();
@@ -134,7 +135,8 @@ public slots:
 
 signals:
 
-  void processExited();
+  void processExited(KProcess *);
+  void forkedChild();
   void receivedData( const QString& text );
   void done(TESession*);
   void updateTitle();

@@ -24,8 +24,9 @@
     of the abilities of the framework - multible sessions.
 */
 
-TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args, const QString &_term, ulong _winId, const QString &_sessionId, const QString &_initial_cwd)
+TESession::TESession(TEWidget* _te, const QString &_term, ulong _winId, const QString &_sessionId, const QString &_initial_cwd)
    : DCOPObject( _sessionId.latin1() )
+   , sh(0)
    , connected(true)
    , monitorActivity(false)
    , monitorSilence(false)
@@ -38,8 +39,8 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
    , silence_seconds(10)
    , add_to_utmp(true)
    , xon_xoff(false)
-   , pgm(_pgm)
-   , args(_args)
+   , pgm(QString())
+   , args(QStrList())
    , sessionId(_sessionId)
    , cwd("")
    , initial_cwd(_initial_cwd)
@@ -49,7 +50,6 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
    , encoding_no(0)
 {
   //kdDebug(1211)<<"TESession ctor() new TEPty"<<endl;
-  sh = new TEPty();
   te = _te;
   //kdDebug(1211)<<"TESession ctor() new TEmuVt102"<<endl;
   em = new TEmuVt102(te);
@@ -64,19 +64,10 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
   winId = _winId;
   iconName = "konsole";
 
-  //kdDebug(1211)<<"TESession ctor() sh->setSize()"<<endl;
-  sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
-  sh->useUtf8(em->utf8());
-  //kdDebug(1211)<<"TESession ctor() connecting"<<endl;
-  connect( sh,SIGNAL(block_in(const char*,int)),this,SLOT(onRcvBlock(const char*,int)) );
-
-  connect( em,SIGNAL(sndBlock(const char*,int)),sh,SLOT(send_bytes(const char*,int)) );
-  connect( em,SIGNAL(lockPty(bool)),sh,SLOT(lockPty(bool)) );
-  connect( em,SIGNAL(useUtf8(bool)),sh,SLOT(useUtf8(bool)) );
+  setPty( new TEPty() );
 
   connect( em, SIGNAL( changeTitle( int, const QString & ) ),
            this, SLOT( setUserTitle( int, const QString & ) ) );
-
   connect( em, SIGNAL( notifySessionState(int) ),
            this, SLOT( notifySessionState(int) ) );
   monitorTimer = new QTimer(this);
@@ -87,8 +78,30 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStrList & _args,
   connect( em, SIGNAL( changeTabTextColor( int ) ),
            this, SLOT( changeTabTextColor( int ) ) );
 
-  connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
   //kdDebug(1211)<<"TESession ctor() done"<<endl;
+}
+
+void TESession::setPty(TEPty *_sh)
+{
+  if ( sh ) {
+    delete sh;
+  }
+  sh = _sh;
+  connect( sh, SIGNAL( forkedChild() ),
+           this, SIGNAL( forkedChild() ));
+
+  //kdDebug(1211)<<"TESession ctor() sh->setSize()"<<endl;
+  sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
+  sh->useUtf8(em->utf8());
+  //kdDebug(1211)<<"TESession ctor() connecting"<<endl;
+  connect( sh,SIGNAL(block_in(const char*,int)),this,SLOT(onRcvBlock(const char*,int)) );
+
+  connect( em,SIGNAL(sndBlock(const char*,int)),sh,SLOT(send_bytes(const char*,int)) );
+  connect( em,SIGNAL(lockPty(bool)),sh,SLOT(lockPty(bool)) );
+  connect( em,SIGNAL(useUtf8(bool)),sh,SLOT(useUtf8(bool)) );
+
+  connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
+
   if (!sh->error().isEmpty())
      QTimer::singleShot(0, this, SLOT(ptyError()));
 }
@@ -125,9 +138,15 @@ void TESession::changeWidget(TEWidget* w)
                    this,SLOT(onFontMetricChange(int,int)));
 }
 
+void TESession::setProgram( const QString &_pgm, const QStrList &_args )
+{
+    pgm = _pgm;
+    args = _args;
+}
+
 void TESession::run()
 {
-  //kdDebug(1211) << "Running the session!" << pgm << "\n";
+  kdDebug(1211) << "Running the session!" << pgm << "\n";
   //pgm = "pine";
   QString appId=kapp->dcopClient()->appId();
 
@@ -307,7 +326,7 @@ void TESession::setListenToKeyPress(bool l)
 }
 
 void TESession::done() {
-  emit processExited();
+  emit processExited(sh);
   emit done(this);
 }
 
@@ -333,7 +352,7 @@ void TESession::done(int exitStatus)
     else
       KNotifyClient::event(winId, "Finished", i18n("Session '%1' exited unexpectedly.").arg(title));
   }
-  emit processExited();
+  emit processExited(sh);
   emit done(this);
 }
 

@@ -2819,7 +2819,8 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
   te->setMinimumSize(150,70);
 
   QString sessionId="session-"+QString::number(++sessionIdCounter);
-  TESession* s = new TESession(te, QFile::encodeName(program),cmdArgs,emu,winId(),sessionId,cwd);
+  TESession* s = new TESession(te, emu,winId(),sessionId,cwd);
+  s->setProgram(QFile::encodeName(program),cmdArgs);
   s->setMonitorSilenceSeconds(monitorSilenceSeconds);
   s->enableFullScripting(b_fullScripting);
   // If you add any new signal-slot connection below, think about doing it in konsolePart too

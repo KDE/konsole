@@ -125,6 +125,8 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
 ,m_options(0)
 ,m_popupMenu(0)
 ,b_useKonsoleSettings(false)
+,b_autoDestroy(true)
+,b_autoStartShell(true)
 ,m_histSize(DEFAULT_HISTORY_SIZE)
 ,m_runningShell( false )
 {
@@ -211,13 +213,30 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
 
   applySettingsToGUI();
 
-  QTimer::singleShot( 0, this, SLOT( showShell() ) );
+  QTimer::singleShot( 0, this, SLOT( autoShowShell() ) );
+}
+
+void konsolePart::autoShowShell()
+{
+    // possibly clear the screen?
+    if (b_autoStartShell)
+        showShell();
+}
+
+void konsolePart::setAutoDestroy( bool enabled )
+{
+    b_autoDestroy = enabled;
+}
+
+void konsolePart::setAutoStartShell( bool enabled )
+{
+    b_autoStartShell = enabled;
 }
 
 void konsolePart::doneSession(TESession*)
 {
   // see doneSession in konsole.cpp
-  if (se)
+  if (se && b_autoDestroy)
   {
 //    kdDebug(1211) << "doneSession - disconnecting done" << endl;
     disconnect( se,SIGNAL(done(TESession*)),
@@ -234,7 +253,8 @@ void konsolePart::sessionDestroyed()
 //  kdDebug(1211) << "sessionDestroyed()" << endl;
   disconnect( se, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
   se = 0;
-  delete this;
+  if (b_autoDestroy)
+      delete this;
 }
 
 void konsolePart::configureRequest(TEWidget*_te,int,int x,int y)
@@ -1040,8 +1060,17 @@ const char* sensibleShell()
 void konsolePart::startProgram( const QString& program,
                                 const QStrList& args )
 {
+    kdDebug(1211) << "konsolePart::startProgram for " << program << endl;
+    if ( !se )
+        newSession();
+    se->setProgram( program, args );
+    se->run();
+}
+
+void konsolePart::newSession()
+{
   if ( se ) delete se;
-  se = new TESession(te, program, args, "xterm", parentWidget->winId());
+  se = new TESession(te, "xterm", parentWidget->winId());
   connect( se,SIGNAL(done(TESession*)),
            this,SLOT(doneSession(TESession*)) );
   connect( se,SIGNAL(openURLRequest(const QString &)),
@@ -1050,10 +1079,12 @@ void konsolePart::startProgram( const QString& program,
            this, SLOT( updateTitle() ) );
   connect( se, SIGNAL(enableMasterModeConnections()),
            this, SLOT(enableMasterModeConnections()) );
-  connect( se, SIGNAL( processExited() ),
-           this, SLOT( slotProcessExited() ) );
+  connect( se, SIGNAL( processExited(KProcess *) ),
+           this, SIGNAL( processExited(KProcess *) ) );
   connect( se, SIGNAL( receivedData( const QString& ) ),
-           this, SLOT( slotReceivedData( const QString& ) ) );
+           this, SIGNAL( receivedData( const QString& ) ) );
+  connect( se, SIGNAL( forkedChild() ),
+           this, SIGNAL( forkedChild() ));
 
   // We ignore the following signals
   //connect( se, SIGNAL(renameSession(TESession*,const QString&)),
@@ -1066,7 +1097,7 @@ void konsolePart::startProgram( const QString& program,
   applyProperties();
 
   se->setConnect(true);
-  se->run();
+  // se->run();
   connect( se, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
 //  setFont( n_font ); // we do this here, to make TEWidget recalculate
                      // its geometry..
@@ -1101,15 +1132,6 @@ void konsolePart::showShell()
 void konsolePart::sendInput( const QString& text )
 {
     te->emitText( text );
-}
-
-void konsolePart::slotProcessExited()
-{
-    emit processExited();
-}
-void konsolePart::slotReceivedData( const QString& s )
-{
-    emit receivedData( s );
 }
 
 #include "konsole_part.moc"
