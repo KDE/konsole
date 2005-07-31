@@ -51,18 +51,7 @@
 // We can't use the ARGB32 visual when embedded in another application
 bool argb_visual = false;
 
-extern "C"
-{
-  /**
-   * This function is the 'main' function of this part.  It takes
-   * the form 'void *init_lib<library name>()  It always returns a
-   * new factory object
-   */
-  KDE_EXPORT void *init_libkonsolepart()
-  {
-    return new konsoleFactory;
-  }
-}
+K_EXPORT_COMPONENT_FACTORY( libkonsolepart, konsoleFactory )
 
 /**
  * We need one static instance of the factory for our C 'main' function
