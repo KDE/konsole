@@ -105,6 +105,7 @@ Comment[ta]=உள் பயனர் அணுப்பியதுடன் wr
 Comment[tg]=Иттилоотҳоро аз корвандҳои маҳаллӣ, кир бо дастурҳои write(1) ё wall(1) фиристода шуда буданд, қабул мекунад
 Comment[tr]=Yerel kullanıcılarda write(1) veya wall(1) ile gönderilmiş mesajları izle
 Comment[uk]=Спостерігання за  повідомленнями від локальних користувачів, відісланих через write(1) або wall(1)
+Comment[zh_CN]=监视本地用户发出的 write(1) 或 wall(1)
 Type=Service
 ServiceTypes=KDEDModule
 X-KDE-ModuleType=Library
