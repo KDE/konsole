@@ -683,7 +683,7 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
     else
     {
        paint.setPen(fColor);
-       paint.drawRect(r);
+       paint.drawRect(rect.x(),rect.y()+m_lineSpacing/2,rect.width()-1,h-1);
     }
   }
 
