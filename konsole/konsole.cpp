@@ -486,6 +486,7 @@ void Konsole::makeGUI()
       m_signals->insertItem( i18n( "User Signal &1")   + " (USR1)", SIGUSR1);
       m_signals->insertItem( i18n( "User Signal &2")   + " (USR2)", SIGUSR2);
       connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
+      KAcceleratorManager::manage( m_signals );
    }
 
    // Edit Menu ----------------------------------------------------------------
@@ -551,12 +552,14 @@ void Konsole::makeGUI()
    // Schema Options Menu -----------------------------------------------------
    m_schema = new KPopupMenu(this);
    m_schema->setCheckable(true);
+   KAcceleratorManager::manage( m_schema );
    connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
    connect(m_schema, SIGNAL(aboutToShow()), SLOT(schema_menu_check()));
 
    // Keyboard Options Menu ---------------------------------------------------
    m_keytab = new KPopupMenu(this);
    m_keytab->setCheckable(true);
+   KAcceleratorManager::manage( m_keytab );
    connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
 
    //options menu
@@ -601,26 +604,26 @@ void Konsole::makeGUI()
       selectBell->plug(m_options);
 
       checkBitmapFonts();
-      KActionMenu* m_fontsizes = new KActionMenu( i18n( "Font" ), 
-                                                  SmallIconSet( "text" ), 
+      KActionMenu* m_fontsizes = new KActionMenu( i18n( "Font" ),
+                                                  SmallIconSet( "text" ),
                                                   actions, 0L );
-      m_fontsizes->insert( new KAction( i18n( "&Enlarge Font" ), 
-                           SmallIconSet( "fontsizeup" ), 0, this, 
-                           SLOT( biggerFont() ), actions, 
+      m_fontsizes->insert( new KAction( i18n( "&Enlarge Font" ),
+                           SmallIconSet( "fontsizeup" ), 0, this,
+                           SLOT( biggerFont() ), actions,
                            "enlarge_font" ) );
-      m_fontsizes->insert( new KAction( i18n( "&Shrink Font" ), 
-                           SmallIconSet( "fontsizedown" ), 0, this, 
-                           SLOT( smallerFont() ), actions, 
+      m_fontsizes->insert( new KAction( i18n( "&Shrink Font" ),
+                           SmallIconSet( "fontsizedown" ), 0, this,
+                           SLOT( smallerFont() ), actions,
                            "shrink_font" ) );
-      m_fontsizes->insert( new KAction( i18n( "Se&lect..." ), 
-                           SmallIconSet( "font" ), 0, this, 
-                           SLOT( slotSelectFont() ), actions, 
+      m_fontsizes->insert( new KAction( i18n( "Se&lect..." ),
+                           SmallIconSet( "font" ), 0, this,
+                           SLOT( slotSelectFont() ), actions,
                            "select_font" ) );
       if ( b_installBitmapFonts )
       {
-         m_fontsizes->insert( new KAction( i18n( "&Install Bitmap..." ), 
-                              SmallIconSet( "font" ), 0, this, 
-                              SLOT( slotInstallBitmapFonts() ), actions, 
+         m_fontsizes->insert( new KAction( i18n( "&Install Bitmap..." ),
+                              SmallIconSet( "font" ), 0, this,
+                              SLOT( slotInstallBitmapFonts() ), actions,
                               "install_fonts" ) );
       }
       m_fontsizes->plug(m_options);
@@ -777,6 +780,7 @@ void Konsole::makeGUI()
 
    // Fill tab context menu
    m_tabPopupMenu = new KPopupMenu( this );
+   KAcceleratorManager::manage( m_tabPopupMenu );
 
    m_tabDetachSession= new KAction( i18n("&Detach Session"), SmallIconSet("tab_breakoff"), 0, this, SLOT(slotTabDetachSession()), this );
    m_tabDetachSession->plug(m_tabPopupMenu);
@@ -785,12 +789,12 @@ void Konsole::makeGUI()
                          SLOT(slotTabRenameSession()) );
    m_tabPopupMenu->insertSeparator();
 
-  m_tabMonitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ), 
+  m_tabMonitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ),
       SmallIconSet("konsole"), 0, this, SLOT( slotTabToggleMonitor() ), this );
   m_tabMonitorActivity->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Activity" ), SmallIconSet( "activity" ) ) );
    m_tabMonitorActivity->plug(m_tabPopupMenu);
 
-  m_tabMonitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ), 
+  m_tabMonitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ),
       SmallIconSet("konsole"), 0, this, SLOT( slotTabToggleMonitor() ), this );
   m_tabMonitorSilence->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Silence" ), SmallIconSet( "silence" ) ) );
    m_tabMonitorSilence->plug(m_tabPopupMenu);
@@ -815,6 +819,7 @@ void Konsole::makeGUI()
    if (m_options) {
       // Fill tab bar context menu
       m_tabbarPopupMenu = new KPopupMenu( this );
+      KAcceleratorManager::manage( m_tabbarPopupMenu );
       selectTabbar->plug(m_tabbarPopupMenu);
 
       KSelectAction *viewOptions = new KSelectAction(this);
@@ -944,12 +949,16 @@ void Konsole::makeBasicGUI()
 {
   if (kapp->authorize("shell_access")) {
     m_tabbarSessionsCommands = new KPopupMenu( this );
+    KAcceleratorManager::manage( m_tabbarSessionsCommands );
     connect(m_tabbarSessionsCommands, SIGNAL(activated(int)), SLOT(newSessionTabbar(int)));
   }
 
   m_session = new KPopupMenu(this);
+  KAcceleratorManager::manage( m_session );
   m_edit = new KPopupMenu(this);
+  KAcceleratorManager::manage( m_edit );
   m_view = new KPopupMenu(this);
+  KAcceleratorManager::manage( m_view );
   if (kapp->authorizeKAction("bookmarks"))
   {
     bookmarkHandler = new KonsoleBookmarkHandler( this, true );
@@ -958,14 +967,18 @@ void Konsole::makeBasicGUI()
     bookmarks_menu_check();
   }
 
-  if (kapp->authorizeKAction("settings"))
+  if (kapp->authorizeKAction("settings")) {
      m_options = new KPopupMenu(this);
+     KAcceleratorManager::manage( m_options );
+  }
 
   if (kapp->authorizeKAction("help"))
      m_help = helpMenu(0, false);
 
-  if (kapp->authorizeKAction("konsole_rmb"))
+  if (kapp->authorizeKAction("konsole_rmb")) {
      m_rightButton = new KPopupMenu(this);
+     KAcceleratorManager::manage( m_rightButton );
+  }
 
   if (kapp->authorizeKAction("bookmarks"))
   {
@@ -1049,17 +1062,17 @@ void Konsole::makeBasicGUI()
                                 SLOT(slotRenameSession()), m_shortcuts, "rename_session");
 
   if (kapp->authorizeKAction("zmodem_upload"))
-    m_zmodemUpload = new KAction( i18n( "&ZModem Upload..." ), 
+    m_zmodemUpload = new KAction( i18n( "&ZModem Upload..." ),
                                   Qt::CTRL+Qt::ALT+Qt::Key_U, this,
-                                  SLOT( slotZModemUpload() ), 
+                                  SLOT( slotZModemUpload() ),
                                   m_shortcuts, "zmodem_upload" );
 
-  monitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ), 
+  monitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ),
       SmallIconSet("konsole"), 0, this,
       SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_activity" );
   monitorActivity->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Activity" ), SmallIconSet( "activity" ) ) );
 
-  monitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ), 
+  monitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ),
       SmallIconSet("konsole"), 0, this,
       SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_silence" );
   monitorSilence->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Silence" ), SmallIconSet( "silence" ) ) );
@@ -1125,6 +1138,7 @@ void Konsole::makeBasicGUI()
   m_shortcuts->readShortcutSettings();
 
   m_sessionList = new KPopupMenu(this);
+  KAcceleratorManager::manage( m_sessionList );
   connect(m_sessionList, SIGNAL(activated(int)), SLOT(activateSession(int)));
 }
 
@@ -1728,7 +1742,7 @@ void Konsole::checkBitmapFonts()
 
 // In KDE 3.5, Konsole only allows the user to pick a font via
 // KFontDialog.  This causes problems with the bdf/pcf files
-// distributed with Konsole (console8x16 and 9x15). 
+// distributed with Konsole (console8x16 and 9x15).
 void Konsole::slotInstallBitmapFonts()
 {
     if ( !b_installBitmapFonts )
@@ -1752,19 +1766,19 @@ void Konsole::slotInstallBitmapFonts()
 
     if ( !sl_installFonts.isEmpty() )
     {
-        if ( KMessageBox::questionYesNoList( this, 
-            i18n( "If you want to use the bitmap fonts distributed with Konsole, they must be installed.  After installation, you must restart Konsole to use them.  Do you want to install the fonts listed below into fonts:/Personal?" ), 
+        if ( KMessageBox::questionYesNoList( this,
+            i18n( "If you want to use the bitmap fonts distributed with Konsole, they must be installed.  After installation, you must restart Konsole to use them.  Do you want to install the fonts listed below into fonts:/Personal?" ),
             sl_installFonts,
-            i18n( "Install Bitmap Fonts?" ), 
-            KGuiItem( i18n("&Install" ) ), 
+            i18n( "Install Bitmap Fonts?" ),
+            KGuiItem( i18n("&Install" ) ),
             i18n("Do Not Install") ) == KMessageBox::Yes )
         {
-            for ( QStringList::iterator it = sl_installFonts.begin(); 
+            for ( QStringList::iterator it = sl_installFonts.begin();
                   it != sl_installFonts.end(); ++it )
             {
                 QString sf = "fonts/" + *it;
-                if ( KIO::NetAccess::copy( locate( "appdata", sf ), 
-                                            "fonts:/Personal/", 0 ) ) 
+                if ( KIO::NetAccess::copy( locate( "appdata", sf ),
+                                            "fonts:/Personal/", 0 ) )
                 {
                     b_installBitmapFonts = false;
                     // TODO: Remove the Install from the Fonts sub-menu.
@@ -2569,7 +2583,7 @@ void Konsole::setSessionEncoding( const QString &encoding, TESession *session )
     QString t_enc = encoding + " ";
     unsigned int i = 0;
 
-    for( QStringList::ConstIterator it = items.begin(); it != items.end(); 
+    for( QStringList::ConstIterator it = items.begin(); it != items.end();
          ++it, ++i)
     {
         if ( (*it).find( t_enc ) != -1 )
@@ -2854,7 +2868,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
            this, SLOT(slotGetSessionSchema(TESession*, QString &)));
   connect( s, SIGNAL(setSessionSchema(TESession*, const QString &)),
            this, SLOT(slotSetSessionSchema(TESession*, const QString &)));
-  connect( s, SIGNAL(changeTabTextColor(TESession*, int)), 
+  connect( s, SIGNAL(changeTabTextColor(TESession*, int)),
            this,SLOT(changeTabTextColor(TESession*, int)) );
 
   s->widget()->setVTFont(defaultFont);// Hack to set font again after newSession
