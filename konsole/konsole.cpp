@@ -498,6 +498,7 @@ void Konsole::makeGUI()
       m_signals->insertItem( i18n( "User Signal &1")   + " (USR1)", SIGUSR1);
       m_signals->insertItem( i18n( "User Signal &2")   + " (USR2)", SIGUSR2);
       connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
+      KAcceleratorManager::manage( m_signals );
    }
 
    // Edit Menu ----------------------------------------------------------------
@@ -563,12 +564,14 @@ void Konsole::makeGUI()
    // Schema Options Menu -----------------------------------------------------
    m_schema = new KPopupMenu(this);
    m_schema->setCheckable(true);
+   KAcceleratorManager::manage( m_schema );
    connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
    connect(m_schema, SIGNAL(aboutToShow()), SLOT(schema_menu_check()));
 
    // Keyboard Options Menu ---------------------------------------------------
    m_keytab = new KPopupMenu(this);
    m_keytab->setCheckable(true);
+   KAcceleratorManager::manage( m_keytab );
    connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
 
    //options menu
@@ -789,6 +792,7 @@ void Konsole::makeGUI()
 
    // Fill tab context menu
    m_tabPopupMenu = new KPopupMenu( this );
+   KAcceleratorManager::manage( m_tabPopupMenu );
 
    m_tabDetachSession= new KAction( i18n("&Detach Session"), SmallIconSet("tab_breakoff"), 0, this, SLOT(slotTabDetachSession()), this );
    m_tabDetachSession->plug(m_tabPopupMenu);
@@ -827,6 +831,7 @@ void Konsole::makeGUI()
    if (m_options) {
       // Fill tab bar context menu
       m_tabbarPopupMenu = new KPopupMenu( this );
+      KAcceleratorManager::manage( m_tabbarPopupMenu );
       selectTabbar->plug(m_tabbarPopupMenu);
 
       KSelectAction *viewOptions = new KSelectAction(this);
@@ -956,12 +961,16 @@ void Konsole::makeBasicGUI()
 {
   if (kapp->authorize("shell_access")) {
     m_tabbarSessionsCommands = new KPopupMenu( this );
+    KAcceleratorManager::manage( m_tabbarSessionsCommands );
     connect(m_tabbarSessionsCommands, SIGNAL(activated(int)), SLOT(newSessionTabbar(int)));
   }
 
   m_session = new KPopupMenu(this);
+  KAcceleratorManager::manage( m_session );
   m_edit = new KPopupMenu(this);
+  KAcceleratorManager::manage( m_edit );
   m_view = new KPopupMenu(this);
+  KAcceleratorManager::manage( m_view );
   if (kapp->authorizeKAction("bookmarks"))
   {
     bookmarkHandler = new KonsoleBookmarkHandler( this, true );
@@ -970,14 +979,18 @@ void Konsole::makeBasicGUI()
     bookmarks_menu_check();
   }
 
-  if (kapp->authorizeKAction("settings"))
+  if (kapp->authorizeKAction("settings")) {
      m_options = new KPopupMenu(this);
+     KAcceleratorManager::manage( m_options );
+  }
 
   if (kapp->authorizeKAction("help"))
      m_help = helpMenu(0, false);
 
-  if (kapp->authorizeKAction("konsole_rmb"))
+  if (kapp->authorizeKAction("konsole_rmb")) {
      m_rightButton = new KPopupMenu(this);
+     KAcceleratorManager::manage( m_rightButton );
+  }
 
   if (kapp->authorizeKAction("bookmarks"))
   {
@@ -1137,6 +1150,7 @@ void Konsole::makeBasicGUI()
   m_shortcuts->readShortcutSettings();
 
   m_sessionList = new KPopupMenu(this);
+  KAcceleratorManager::manage( m_sessionList );
   connect(m_sessionList, SIGNAL(activated(int)), SLOT(activateSession(int)));
 }
 
