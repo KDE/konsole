@@ -1,0 +1,631 @@
+<!DOCTYPE UI><UI version="3.0" stdsetdef="1">
+<class>SchemaDialog</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>SchemaDialog</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>420</width>
+            <height>423</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Konsole Schema Editor</string>
+    </property>
+    <property name="layoutMargin" stdset="0">
+    </property>
+    <property name="layoutSpacing" stdset="0">
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="margin">
+            <number>0</number>
+        </property>
+        <widget class="QLayoutWidget" row="0" column="0" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>Layout2</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>TextLabel1</cstring>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Title:</string>
+                    </property>
+                    <property name="buddy" stdset="0">
+                        <cstring>titleLine</cstring>
+                    </property>
+                </widget>
+                <widget class="QLineEdit">
+                    <property name="name">
+                        <cstring>titleLine</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>7</hsizetype>
+                            <vsizetype>5</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="QGroupBox" row="1" column="0" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>GroupBox1</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>5</hsizetype>
+                    <vsizetype>3</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="title">
+                <string>Colors</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel" row="0" column="0">
+                    <property name="name">
+                        <cstring>TextLabel8</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Shell co&amp;lor:</string>
+                    </property>
+                    <property name="buddy" stdset="0">
+                        <cstring>colorCombo</cstring>
+                    </property>
+                </widget>
+                <widget class="QCheckBox" row="2" column="0">
+                    <property name="name">
+                        <cstring>boldCheck</cstring>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Bold</string>
+                    </property>
+                </widget>
+                <spacer row="1" column="4">
+                    <property name="name" stdset="0">
+                        <cstring>Spacer5</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="KColorButton" row="1" column="3">
+                    <property name="name">
+                        <cstring>colorButton</cstring>
+                    </property>
+                    <property name="text">
+                        <string></string>
+                    </property>
+                </widget>
+                <widget class="QComboBox" row="1" column="2">
+                    <item>
+                        <property name="text">
+                            <string>Custom</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>System Background</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>System Foreground</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Random Hue</string>
+                        </property>
+                    </item>
+                    <property name="name">
+                        <cstring>typeCombo</cstring>
+                    </property>
+                </widget>
+                <spacer row="1" column="1">
+                    <property name="name" stdset="0">
+                        <cstring>Spacer2</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Fixed</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QCheckBox" row="2" column="2" rowspan="1" colspan="3">
+                    <property name="name">
+                        <cstring>transparentCheck</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Trans&amp;parent</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="0" column="2">
+                    <property name="name">
+                        <cstring>TextLabel1_2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Konsole color:</string>
+                    </property>
+                    <property name="buddy" stdset="0">
+                        <cstring>typeCombo</cstring>
+                    </property>
+                </widget>
+                <widget class="QComboBox" row="1" column="0">
+                    <item>
+                        <property name="text">
+                            <string>0 - Foreground Color</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>1 - Background Color</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>2 - Color 0 (black)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>3 - Color 1 (red)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>4 - Color 2 (green)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>5 - Color 3 (yellow)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>6 - Color 4 (blue)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>7 - Color 5 (magenta)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>8 - Color 6 (cyan)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>9 - Color 7 (white)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>10 - Foreground Intensive Color</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>11 - Background Intensive Color</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>12 - Color 0 Intensive (gray)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>13 - Color 1 Intensive (light red)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>14 - Color 2 Intensive (light green)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>15 - Color 3 Intensive (light yellow)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>16 - Color 4 Intensive (light blue)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>17 - Color 5 Intensive (light magenta)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>18 - Color 6 Intensive (light cyan)</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>19 - Color 7 Intensive (white)</string>
+                        </property>
+                    </item>
+                    <property name="name">
+                        <cstring>colorCombo</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>5</hsizetype>
+                            <vsizetype>5</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QGroupBox" row="2" column="0">
+            <property name="name">
+                <cstring>GroupBox2</cstring>
+            </property>
+            <property name="title">
+                <string>Schema</string>
+            </property>
+            <vbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QListBox">
+                    <property name="name">
+                        <cstring>schemaList</cstring>
+                    </property>
+                </widget>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>defaultSchemaCB</cstring>
+                    </property>
+                    <property name="text">
+                        <string>S&amp;et as default schema</string>
+                    </property>
+                </widget>
+                <widget class="QLayoutWidget">
+                    <property name="name">
+                        <cstring>Layout3</cstring>
+                    </property>
+                    <grid>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QPushButton" row="0" column="0">
+                            <property name="name">
+                                <cstring>saveButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>&amp;Save Schema...</string>
+                            </property>
+                        </widget>
+                        <widget class="QPushButton" row="1" column="0">
+                            <property name="name">
+                                <cstring>removeButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>&amp;Remove Schema</string>
+                            </property>
+                        </widget>
+                        <spacer row="0" column="1">
+                            <property name="name" stdset="0">
+                                <cstring>Spacer7</cstring>
+                            </property>
+                            <property name="orientation">
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property name="sizeType">
+                                <enum>Expanding</enum>
+                            </property>
+                            <property name="sizeHint">
+                                <size>
+                                    <width>20</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                    </grid>
+                </widget>
+            </vbox>
+        </widget>
+        <widget class="QGroupBox" row="2" column="1">
+            <property name="name">
+                <cstring>GroupBox13</cstring>
+            </property>
+            <property name="title">
+                <string>Background</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <spacer row="4" column="0">
+                    <property name="name" stdset="0">
+                        <cstring>Spacer1</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Fixed</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QLineEdit" row="1" column="0" rowspan="1" colspan="5">
+                    <property name="name">
+                        <cstring>backgndLine</cstring>
+                    </property>
+                </widget>
+                <widget class="QToolButton" row="1" column="5">
+                    <property name="name">
+                        <cstring>imageBrowse</cstring>
+                    </property>
+                    <property name="text">
+                        <string>...</string>
+                    </property>
+                </widget>
+                <widget class="QComboBox" row="0" column="3" rowspan="1" colspan="2">
+                    <item>
+                        <property name="text">
+                            <string>Tiled</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Centered</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Full</string>
+                        </property>
+                    </item>
+                    <property name="name">
+                        <cstring>modeCombo</cstring>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="0" column="0" rowspan="1" colspan="3">
+                    <property name="name">
+                        <cstring>TextLabel11</cstring>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Image:</string>
+                    </property>
+                    <property name="buddy" stdset="0">
+                        <cstring>modeCombo</cstring>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="5" column="1">
+                    <property name="name">
+                        <cstring>TextLabel6</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Min</string>
+                    </property>
+                </widget>
+                <widget class="QSlider" row="5" column="2" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>shadeSlide</cstring>
+                    </property>
+                    <property name="value">
+                        <number>50</number>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="5" column="4">
+                    <property name="name">
+                        <cstring>TextLabel5</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Max</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="4" column="1" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>TextLabel3</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Shade t&amp;o:</string>
+                    </property>
+                    <property name="buddy" stdset="0">
+                        <cstring>shadeColor</cstring>
+                    </property>
+                </widget>
+                <widget class="KColorButton" row="4" column="3" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>shadeColor</cstring>
+                    </property>
+                    <property name="text">
+                        <string></string>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="2" column="0" rowspan="1" colspan="5">
+                    <property name="name">
+                        <cstring>previewPixmap</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>0</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                        <size>
+                            <width>180</width>
+                            <height>120</height>
+                        </size>
+                    </property>
+                    <property name="maximumSize">
+                        <size>
+                            <width>180</width>
+                            <height>120</height>
+                        </size>
+                    </property>
+                    <property name="frameShape">
+                        <enum>Panel</enum>
+                    </property>
+                    <property name="frameShadow">
+                        <enum>Sunken</enum>
+                    </property>
+                    <property name="scaledContents">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <widget class="QCheckBox" row="3" column="0" rowspan="1" colspan="6">
+                    <property name="name">
+                        <cstring>transparencyCheck</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Tr&amp;ansparent</string>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <spacer row="3" column="0">
+            <property name="name" stdset="0">
+                <cstring>Spacer4</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Vertical</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+    </grid>
+</widget>
+<connections>
+    <connection>
+        <sender>transparencyCheck</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>shadeSlide</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>transparencyCheck</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>shadeColor</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>transparencyCheck</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>TextLabel3</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>transparencyCheck</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>TextLabel6</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>transparencyCheck</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>TextLabel5</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>transparencyCheck</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>TextLabel5</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>defaultSchemaCB</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>defaultSchemaCB</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>transparencyCheck</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>backgndLine</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>transparencyCheck</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>imageBrowse</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>titleLine</tabstop>
+    <tabstop>colorCombo</tabstop>
+    <tabstop>typeCombo</tabstop>
+    <tabstop>boldCheck</tabstop>
+    <tabstop>transparentCheck</tabstop>
+    <tabstop>colorButton</tabstop>
+    <tabstop>schemaList</tabstop>
+    <tabstop>defaultSchemaCB</tabstop>
+    <tabstop>saveButton</tabstop>
+    <tabstop>removeButton</tabstop>
+    <tabstop>modeCombo</tabstop>
+    <tabstop>backgndLine</tabstop>
+    <tabstop>transparencyCheck</tabstop>
+    <tabstop>shadeColor</tabstop>
+    <tabstop>shadeSlide</tabstop>
+</tabstops>
+<includes>
+    <include location="global" impldecl="in declaration">kcolorbutton.h</include>
+    <include location="local" impldecl="in declaration">kdialog.h</include>
+</includes>
+<layoutdefaults spacing="3" margin="6"/>
+<layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
+</UI>

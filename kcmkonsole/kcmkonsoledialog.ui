@@ -1,0 +1,397 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>KCMKonsoleDialog</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>KCMKonsoleDialog</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>507</width>
+            <height>490</height>
+        </rect>
+    </property>
+    <property name="layoutMargin" stdset="0">
+    </property>
+    <property name="layoutSpacing" stdset="0">
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="margin">
+            <number>0</number>
+        </property>
+        <widget class="QTabWidget" row="0" column="0">
+            <property name="name">
+                <cstring>TabWidget2</cstring>
+            </property>
+            <property name="margin">
+                <number>0</number>
+            </property>
+            <property name="layoutMargin" stdset="0">
+            </property>
+            <property name="layoutSpacing" stdset="0">
+            </property>
+            <widget class="QWidget">
+                <property name="name">
+                    <cstring>tab</cstring>
+                </property>
+                <attribute name="title">
+                    <string>&amp;General</string>
+                </attribute>
+                <grid>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <spacer row="2" column="0">
+                        <property name="name">
+                            <cstring>Spacer3</cstring>
+                        </property>
+                        <property name="orientation">
+                            <enum>Vertical</enum>
+                        </property>
+                        <property name="sizeType">
+                            <enum>Expanding</enum>
+                        </property>
+                        <property name="sizeHint">
+                            <size>
+                                <width>20</width>
+                                <height>20</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <widget class="QGroupBox" row="1" column="0">
+                        <property name="name">
+                            <cstring>GroupBox3</cstring>
+                        </property>
+                        <property name="title">
+                            <string>Double Click</string>
+                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QLabel" row="0" column="0">
+                                <property name="name">
+                                    <cstring>TextLabel1_3</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Consider the following characters &amp;part of a word when double clicking:</string>
+                                </property>
+                                <property name="buddy" stdset="0">
+                                    <cstring>word_connectorLE</cstring>
+                                </property>
+                            </widget>
+                            <widget class="QLineEdit" row="1" column="0">
+                                <property name="name">
+                                    <cstring>word_connectorLE</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>1</hsizetype>
+                                        <vsizetype>5</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                    <widget class="QGroupBox" row="0" column="0">
+                        <property name="name">
+                            <cstring>GroupBox2</cstring>
+                        </property>
+                        <property name="title">
+                            <string>Misc</string>
+                        </property>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QCheckBox" row="0" column="0" rowspan="1" colspan="3">
+                                <property name="name">
+                                    <cstring>terminalSizeHintCB</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Show terminal si&amp;ze after resizing</string>
+                                </property>
+                            </widget>
+                            <widget class="QCheckBox" row="1" column="0" rowspan="1" colspan="3">
+                                <property name="name">
+                                    <cstring>frameCB</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Show &amp;frame</string>
+                                </property>
+                            </widget>
+                            <widget class="QCheckBox" row="2" column="0" rowspan="1" colspan="3">
+                                <property name="name">
+                                    <cstring>warnCB</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Confirm quit when closing more than one session</string>
+                                </property>
+                            </widget>
+                            <widget class="QCheckBox" row="3" column="0" rowspan="1" colspan="3">
+                                <property name="name">
+                                    <cstring>blinkingCB</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Blinking cursor</string>
+                                </property>
+                            </widget>
+                            <widget class="QCheckBox" row="4" column="0" rowspan="1" colspan="3">
+                                <property name="name">
+                                    <cstring>ctrldragCB</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Require Ctrl key for drag and drop</string>
+                                </property>
+                            </widget>
+                            <widget class="QCheckBox" row="5" column="0" rowspan="1" colspan="3">
+                                <property name="name">
+                                    <cstring>cutToBeginningOfLineCB</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Triple click selects &amp;only from the current word forward</string>
+                                </property>
+                            </widget>
+                            <widget class="QCheckBox" row="6" column="0" rowspan="1" colspan="3">
+                                <property name="name">
+                                    <cstring>allowResizeCB</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Allow progr&amp;ams to resize terminal window</string>
+                                </property>
+                            </widget>
+                            <widget class="QCheckBox" row="7" column="0" rowspan="1" colspan="3">
+                                <property name="name">
+                                    <cstring>xonXoffCB</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Use Ctrl+S/Ctrl+Q flow control</string>
+                                </property>
+                            </widget>
+                            <spacer row="11" column="3">
+                                <property name="name">
+                                    <cstring>Spacer3</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>20</width>
+                                        <height>20</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <widget class="QCheckBox" row="8" column="0" rowspan="1" colspan="3">
+                                <property name="name">
+                                    <cstring>bidiCB</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Enable bidirectional text rendering</string>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" row="11" column="0">
+                                <property name="name">
+                                    <cstring>SilenceLabel</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>1</hsizetype>
+                                        <vsizetype>5</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="text">
+                                    <string>Seconds to detect s&amp;ilence:</string>
+                                </property>
+                                <property name="buddy" stdset="0">
+                                    <cstring>silence_secondsSB</cstring>
+                                </property>
+                            </widget>
+                            <widget class="KIntNumInput" row="11" column="1" rowspan="1" colspan="2">
+                                <property name="name">
+                                    <cstring>silence_secondsSB</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>1</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="minValue">
+                                    <number>1</number>
+                                </property>
+                            </widget>
+                            <widget class="KIntNumInput" row="10" column="2">
+                                <property name="name">
+                                    <cstring>line_spacingSB</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>1</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="minValue">
+                                    <number>0</number>
+                                </property>
+                                <property name="maxValue">
+                                    <number>8</number>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" row="10" column="0" rowspan="1" colspan="2">
+                                <property name="name">
+                                    <cstring>TextLabel1_4</cstring>
+                                </property>
+                                <property name="sizePolicy">
+                                    <sizepolicy>
+                                        <hsizetype>1</hsizetype>
+                                        <vsizetype>5</vsizetype>
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Line spacing:</string>
+                                </property>
+                                <property name="buddy" stdset="0">
+                                    <cstring>line_spacingSB</cstring>
+                                </property>
+                            </widget>
+                            <spacer row="10" column="3">
+                                <property name="name">
+                                    <cstring>Spacer2</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>20</width>
+                                        <height>20</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <widget class="QCheckBox" row="9" column="0" rowspan="1" colspan="4">
+                                <property name="name">
+                                    <cstring>matchTabWinTitleCB</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Set tab title to match window title</string>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                </grid>
+            </widget>
+            <widget class="QWidget">
+                <property name="name">
+                    <cstring>tab_2</cstring>
+                </property>
+                <attribute name="title">
+                    <string>&amp;Schema</string>
+                </attribute>
+                <vbox>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <widget class="SchemaEditor">
+                        <property name="name">
+                            <cstring>SchemaEditor1</cstring>
+                        </property>
+                    </widget>
+                </vbox>
+            </widget>
+            <widget class="QWidget">
+                <property name="name">
+                    <cstring>tab_3</cstring>
+                </property>
+                <attribute name="title">
+                    <string>S&amp;ession</string>
+                </attribute>
+                <vbox>
+                    <property name="name">
+                        <cstring>unnamed</cstring>
+                    </property>
+                    <widget class="SessionEditor">
+                        <property name="name">
+                            <cstring>SessionEditor1</cstring>
+                        </property>
+                    </widget>
+                </vbox>
+            </widget>
+        </widget>
+    </grid>
+</widget>
+<customwidgets>
+    <customwidget>
+        <class>SchemaEditor</class>
+        <header location="local">schemaeditor.h</header>
+        <sizehint>
+            <width>-1</width>
+            <height>-1</height>
+        </sizehint>
+        <container>0</container>
+        <sizepolicy>
+            <hordata>7</hordata>
+            <verdata>7</verdata>
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+        </sizepolicy>
+    </customwidget>
+    <customwidget>
+        <class>SessionEditor</class>
+        <header location="local">sessioneditor.h</header>
+        <sizehint>
+            <width>-1</width>
+            <height>-1</height>
+        </sizehint>
+        <container>0</container>
+        <sizepolicy>
+            <hordata>7</hordata>
+            <verdata>7</verdata>
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+        </sizepolicy>
+    </customwidget>
+</customwidgets>
+<includes>
+    <include location="global" impldecl="in declaration">kcolorbutton.h</include>
+    <include location="global" impldecl="in declaration">knuminput.h</include>
+    <include location="local" impldecl="in implementation">kdialog.h</include>
+</includes>
+<customwidgets>
+    <customwidget>
+        <class>KIntNumInput</class>
+        <header location="global">knuminput.h</header>
+        <container>0</container>
+    </customwidget>
+</customwidgets>
+<layoutdefaults spacing="3" margin="6"/>
+<layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
+<includehints>
+    <includehint>knuminput.h</includehint>
+    <includehint>knuminput.h</includehint>
+    <includehint>knuminput.h</includehint>
+    <includehint>knuminput.h</includehint>
+    <includehint>schemaeditor.h</includehint>
+    <includehint>sessioneditor.h</includehint>
+</includehints>
+</UI>
