@@ -146,7 +146,7 @@ void TESession::setProgram( const QString &_pgm, const QStrList &_args )
 
 void TESession::run()
 {
-  kdDebug(1211) << "Running the session!" << pgm << "\n";
+//  kdDebug(1211) << "Running the session!" << pgm << "\n";
   //pgm = "pine";
   QString appId=kapp->dcopClient()->appId();
 
