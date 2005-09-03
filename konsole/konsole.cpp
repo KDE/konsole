@@ -2512,7 +2512,18 @@ void Konsole::activateSession(TESession *s)
   if (se != s)
      se_previous = se;
   se = s;
-  session2action.find(se)->setChecked(true);
+
+// BR 106464 temporary fix... 
+//  only 2 sessions opened, 2nd session viewable, right-click on 1st tab and 
+//  select 'Detach', close original Konsole window... crash
+//  s is not set properly on original Konsole window
+  KRadioAction *ra = session2action.find(se);
+  if (!ra) {
+    se=sessions.first();        // Get new/correct TESession
+    ra = session2action.find(se);
+  }
+  ra->setChecked(true);
+
   QTimer::singleShot(1,this,SLOT(allowPrevNext())); // hack, hack, hack
 
   tabwidget->showPage( se->widget() );
