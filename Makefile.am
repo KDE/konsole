@@ -1,4 +1,4 @@
-SUBDIRS = konsole other doc fonts kcmkonsole
+SUBDIRS = konsole other doc fonts settings 
 
 xdg_apps_DATA = konsole.desktop konsolesu.desktop
 
