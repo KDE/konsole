@@ -2181,7 +2181,7 @@ void TEWidget::dropEvent(QDropEvent* event)
         QString tmp;
         if (url.isLocalFile()) {
           tmp = url.path(); // local URL : remove protocol. This helps "ln" & "cd" and doesn't harm the others
-        } else if ( url.protocol() == QString::fromLatin1( "mailto" ) ) {
+        } else if ( url.protocol() == QLatin1String( "mailto" ) ) {
 	  justPaste = true;
 	  break;
 	} else {

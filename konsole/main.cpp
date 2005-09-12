@@ -301,7 +301,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 
   QString term = "";
   if(args->isSet("tn")) {
-    term=QString::fromLatin1(args->getOption("tn"));
+    term=QLatin1String(args->getOption("tn"));
   }
   login_shell = args->isSet("ls");
 
