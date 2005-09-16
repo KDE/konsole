@@ -790,13 +790,13 @@ void Konsole::makeGUI()
    m_tabPopupMenu->insertSeparator();
 
   m_tabMonitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ),
-      SmallIconSet("konsole"), 0, this, SLOT( slotTabToggleMonitor() ), this );
-  m_tabMonitorActivity->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Activity" ), SmallIconSet( "activity" ) ) );
+      SmallIconSet("activity"), 0, this, SLOT( slotTabToggleMonitor() ), this );
+  m_tabMonitorActivity->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Activity" ) ) );
    m_tabMonitorActivity->plug(m_tabPopupMenu);
 
   m_tabMonitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ),
-      SmallIconSet("konsole"), 0, this, SLOT( slotTabToggleMonitor() ), this );
-  m_tabMonitorSilence->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Silence" ), SmallIconSet( "silence" ) ) );
+      SmallIconSet("silence"), 0, this, SLOT( slotTabToggleMonitor() ), this );
+  m_tabMonitorSilence->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Silence" ) ) );
    m_tabMonitorSilence->plug(m_tabPopupMenu);
 
    m_tabMasterMode = new KToggleAction ( i18n( "Send &Input to All Sessions" ), "remote", 0, this,
@@ -1068,14 +1068,14 @@ void Konsole::makeBasicGUI()
                                   m_shortcuts, "zmodem_upload" );
 
   monitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ),
-      SmallIconSet("konsole"), 0, this,
+      SmallIconSet("activity"), 0, this,
       SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_activity" );
-  monitorActivity->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Activity" ), SmallIconSet( "activity" ) ) );
+  monitorActivity->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Activity" ) ) );
 
   monitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ),
-      SmallIconSet("konsole"), 0, this,
+      SmallIconSet("silence"), 0, this,
       SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_silence" );
-  monitorSilence->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Silence" ), SmallIconSet( "silence" ) ) );
+  monitorSilence->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Silence" ) ) );
 
   masterMode = new KToggleAction ( i18n( "Send &Input to All Sessions" ), "remote", 0, this,
                                    SLOT( slotToggleMasterMode() ), m_shortcuts, "send_input_to_all_sessions" );
