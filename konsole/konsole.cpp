@@ -1466,6 +1466,7 @@ void Konsole::saveProperties(KConfig* config) {
   else
   {
      config->setDesktopGroup();
+     config->writeEntry("TabColor", tabwidget->tabColor(se->widget()));
   }
   config->writeEntry("Fullscreen",b_fullscreen);
   config->writeEntry("defaultfont", (se->widget())->getVTFont());
@@ -1480,7 +1481,6 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("TabViewMode", int(m_tabViewMode));
   config->writeEntry("DynamicTabHide", b_dynamicTabHide);
   config->writeEntry("AutoResizeTabs", b_autoResizeTabs);
-  config->writeEntry("TabColor", tabwidget->tabColor(se->widget()));
 
   if (se) {
     config->writeEntry("EncodingName", se->encoding());
@@ -1547,6 +1547,10 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
      config->setGroup("UTMP");
      b_addToUtmp = config->readBoolEntry("AddToUtmp",true);
      config->setDesktopGroup();
+
+     // Do not set a default value; this allows the System-wide Scheme
+     // to set the tab text color.
+     m_tabColor = config->readColorEntry("TabColor");
    }
 
    if (!globalConfigOnly)
@@ -1608,10 +1612,6 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       m_tabViewMode = TabViewModes(config->readNumEntry("TabViewMode", ShowIconAndText));
       b_dynamicTabHide = config->readBoolEntry("DynamicTabHide", false);
       b_autoResizeTabs = config->readBoolEntry("AutoResizeTabs", false);
-
-      // Do not set a default value; this allows the System-wide Scheme
-      // to set the tab text color.
-      m_tabColor = config->readColorEntry("TabColor");
 
       s_encodingName = config->readEntry( "EncodingName", "" ).lower();
    }
