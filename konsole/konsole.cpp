@@ -2513,6 +2513,15 @@ void Konsole::activateSession(TESession *s)
      se_previous = se;
   se = s;
 
+  // Set the required schema variables for the current session
+  ColorSchema* cs = colors->find( se->schemaNo() );
+  if (!cs)
+      cs = (ColorSchema*)colors->at(0);  //the default one
+  s_schema = cs->relPath();
+  curr_schema = cs->numb();
+  pmPath = cs->imagePath();
+  n_render = cs->alignment();
+
 // BR 106464 temporary fix... 
 //  only 2 sessions opened, 2nd session viewable, right-click on 1st tab and 
 //  select 'Detach', close original Konsole window... crash
