@@ -50,6 +50,7 @@ public:
     void              setColorTable(const ColorEntry table[]);
 
     void setScrollbarLocation(int loc);
+    int  getScrollbarLocation() { return scrollLoc; }
     enum { SCRNONE=0, SCRLEFT=1, SCRRIGHT=2 };
 
     void setScroll(int cursor, int lines);

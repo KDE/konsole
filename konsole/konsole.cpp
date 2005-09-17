@@ -1614,6 +1614,14 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       b_autoResizeTabs = config->readBoolEntry("AutoResizeTabs", false);
 
       s_encodingName = config->readEntry( "EncodingName", "" ).lower();
+
+      // The scrollbar location only needs to be changed when the given
+      // profile scrollbar entry differs from the konsolerc scrollbar entry.
+      QPtrList<TEWidget> tes = activeTEs();
+      for (TEWidget *_te = tes.first(); _te; _te = tes.next()) {
+        if (_te->getScrollbarLocation() != n_scroll) 
+           _te->setScrollbarLocation(n_scroll);
+      }
    }
 
    if (m_menuCreated)
