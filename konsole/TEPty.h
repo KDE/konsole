@@ -23,6 +23,7 @@
 #include <q3strlist.h>
 #include <q3valuelist.h>
 #include <q3memarray.h>
+#include <QList>
 
 class TEPty: public KProcess
 {
@@ -103,7 +104,7 @@ Q_OBJECT
       Q3MemArray<char> buffer;
       int length;
     };
-    Q3ValueList<SendJob> pendingSendJobs;
+    QList<SendJob> pendingSendJobs;
     bool m_bufferFull;
 };
 
