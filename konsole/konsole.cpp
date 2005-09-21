@@ -907,7 +907,7 @@ void Konsole::makeTabWidget()
     connect(tabwidget, SIGNAL(mouseDoubleClick()), SLOT(newSession()));
 
     m_newSessionButton = new QToolButton( tabwidget );
-    QToolTip::add(m_newSessionButton,i18n("Click for new standard session\nClick and hold for session menu"));
+    m_newSessionButton->setToolTip(i18n("Click for new standard session\nClick and hold for session menu"));
     m_newSessionButton->setIconSet( SmallIcon( "tab_new" ) );
     m_newSessionButton->adjustSize();
     m_newSessionButton->setPopup( m_tabbarSessionsCommands );
@@ -916,7 +916,7 @@ void Konsole::makeTabWidget()
     m_newSessionButton->installEventFilter(this);
 
     m_removeSessionButton = new QToolButton( tabwidget );
-    QToolTip::add(m_removeSessionButton,i18n("Close the current session"));
+    m_removeSessionButton->setToolTip(i18n("Close the current session"));
     m_removeSessionButton->setIconSet( SmallIconSet( "tab_remove" ) );
     m_removeSessionButton->adjustSize();
     m_removeSessionButton->setEnabled(false);
