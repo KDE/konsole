@@ -114,7 +114,7 @@ void KonsoleBookmarkMenu::fillBookmarkMenu()
         // create a normal URL item, with ID as a name
         KAction * action = new KAction( text, bm.icon(), 0,
                                         this, SLOT( slotBookmarkSelected() ),
-                                        m_actionCollection, bm.url().url().utf8() );
+                                        m_actionCollection, bm.url().url().toUtf8() );
 
         action->setStatusText( bm.url().prettyURL() );
 

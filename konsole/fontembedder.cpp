@@ -59,7 +59,7 @@ int main(int argc, char **argv)
     while (!input.atEnd())
     {
         QString line = input.readLine();
-        line = line.stripWhiteSpace();
+        line = line.trimmed();
         if (line.isEmpty())
             continue; //Skip empty lines
         if (line[0] == '#')

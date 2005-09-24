@@ -52,13 +52,13 @@ KWrited::KWrited() : QObject()
 
   pty = new KPty();
   pty->open();
-  pty->login(KUser().loginName().local8Bit().data(), getenv("DISPLAY"));
+  pty->login(KUser().loginName().toLocal8Bit().data(), getenv("DISPLAY"));
   QSocketNotifier *sn = new QSocketNotifier(pty->masterFd(), QSocketNotifier::Read, this);
   connect(sn, SIGNAL(activated(int)), this, SLOT(block_in(int)));
 
   QString txt = i18n("KWrited - Listening on Device %1").arg(pty->ttyName());
   wid->setCaption(txt);
-  puts(txt.local8Bit().data());
+  puts(txt.toLocal8Bit().data());
 }
 
 KWrited::~KWrited()

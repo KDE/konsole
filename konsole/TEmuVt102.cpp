@@ -955,7 +955,7 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
     scr->setHistCursor(scr->getHistLines());
 
   if (cmd==CMD_send) {
-    if ((ev->state() & Qt::AltButton) && !metaspecified ) sendString("\033");
+    if ((ev->state() & Qt::AltModifier) && !metaspecified ) sendString("\033");
     emit sndBlock(txt,len);
     return;
   }
@@ -963,13 +963,13 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
   // fall back handling
   if (!ev->text().isEmpty())
   {
-    if (ev->state() & Qt::AltButton) sendString("\033"); // ESC, this is the ALT prefix
+    if (ev->state() & Qt::AltModifier) sendString("\033"); // ESC, this is the ALT prefix
     Q3CString s = m_codec->fromUnicode(ev->text());     // encode for application
     // FIXME: In Qt 2, QKeyEvent::text() would return "\003" for Ctrl-C etc.
     //        while in Qt 3 it returns the actual key ("c" or "C") which caused
     //        the ControlButton to be ignored. This hack seems to work for
     //        latin1 locales at least. Please anyone find a clean solution (malte)
-    if (ev->state() & Qt::ControlButton)
+    if (ev->state() & Qt::ControlModifier)
       s.fill(ev->ascii(), 1);
     emit sndBlock(s.data(),s.length());              // we may well have s.length() > 1 
     return;

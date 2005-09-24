@@ -640,7 +640,7 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
           paint.fillRect(rect, color_table[attr->b].color);
     }
 
-    QString tmpStr = str.simplifyWhiteSpace();
+    QString tmpStr = str.simplified();
     if ( m_isIMEdit && !tmpStr.isEmpty() ) { // imput method edit area background color
       QRect tmpRect = rect;
       if ( str != m_imPreeditText ) {  // ugly hack
@@ -1263,7 +1263,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
     // The receiver of the testIsSelected() signal will adjust
     // 'selected' accordingly.
     emit testIsSelected(pos.x(), pos.y(), selected);
-    if ((!ctrldrag || ev->state() & Qt::ControlButton) && selected ) {
+    if ((!ctrldrag || ev->state() & Qt::ControlModifier) && selected ) {
       // The user clicked inside selected text
       dragInfo.state = diPending;
       dragInfo.start = ev->pos();
@@ -1272,10 +1272,10 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       // No reason to ever start a drag event
       dragInfo.state = diNone;
 
-      preserve_line_breaks = !( ( ev->state() & Qt::ControlButton ) && !(ev->state() & Qt::AltButton) );
-      column_selection_mode = (ev->state() & Qt::AltButton) && (ev->state() & Qt::ControlButton);
+      preserve_line_breaks = !( ( ev->state() & Qt::ControlModifier ) && !(ev->state() & Qt::AltModifier) );
+      column_selection_mode = (ev->state() & Qt::AltModifier) && (ev->state() & Qt::ControlModifier);
 
-      if (mouse_marks || (ev->state() & Qt::ShiftButton))
+      if (mouse_marks || (ev->state() & Qt::ShiftModifier))
       {
         emit clearSelectionSignal();
         pos.ry() += scrollbar->value();
@@ -1952,7 +1952,7 @@ bool TEWidget::event( QEvent *e )
     KKey key( ke );
     int keyCodeQt = key.keyCodeQt();
 
-    if ( !standalone() && (ke->state() == Qt::ControlButton) )
+    if ( !standalone() && (ke->state() == Qt::ControlModifier) )
     {
       ke->accept();
       return true;
@@ -2198,8 +2198,8 @@ void TEWidget::dropEvent(QDropEvent* event)
     }
   }
   if(justPaste && Q3TextDrag::decode(event, dropText)) {
-    kdDebug(1211) << "Drop:" << dropText.local8Bit() << "\n";
-    emit sendStringToEmu(dropText.local8Bit());
+    kdDebug(1211) << "Drop:" << dropText.toLocal8Bit() << "\n";
+    emit sendStringToEmu(dropText.toLocal8Bit());
     // Paste it
   }
 }
@@ -2219,7 +2219,7 @@ void TEWidget::drop_menu_activated(int item)
    case paste:
       if (m_dnd_file_count==1)
         KRun::shellQuote(dropText);
-      emit sendStringToEmu(dropText.local8Bit());
+      emit sendStringToEmu(dropText.toLocal8Bit());
       setActiveWindow();
       break;
    case cd:
@@ -2235,7 +2235,7 @@ void TEWidget::drop_menu_activated(int item)
          }
       }
       KRun::shellQuote(dropText);
-      emit sendStringToEmu(dropText.local8Bit());
+      emit sendStringToEmu(dropText.toLocal8Bit());
       emit sendStringToEmu("\n");
       setActiveWindow();
       break;
@@ -2252,7 +2252,7 @@ void TEWidget::drop_menu_activated(int item)
    if (item>cd && item<=mv) {
       if (m_dnd_file_count==1)
         KRun::shellQuote(dropText);
-      emit sendStringToEmu(dropText.local8Bit());
+      emit sendStringToEmu(dropText.toLocal8Bit());
       emit sendStringToEmu(" .\n");
       setActiveWindow();
    }

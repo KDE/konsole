@@ -84,10 +84,10 @@ KeyTrans::KeyTrans(const QString& path)
   else
   {
      m_id = m_path;
-     int i = m_id.findRev('/');
+     int i = m_id.lastIndexOf('/');
      if (i > -1)
         m_id = m_id.mid(i+1);
-     i = m_id.findRev('.');
+     i = m_id.lastIndexOf('.');
      if (i > -1)
         m_id = m_id.left(i);
   }

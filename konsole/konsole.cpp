@@ -3435,11 +3435,11 @@ void Konsole::loadScreenSessions()
      return;
   QByteArray screenDir = getenv("SCREENDIR");
   if (screenDir.isEmpty())
-    screenDir = QFile::encodeName(QDir::homeDirPath()) + "/.screen/";
+    screenDir = QFile::encodeName(QDir::homePath()) + "/.screen/";
   // Some distributions add a shell function called screen that sets
   // $SCREENDIR to ~/tmp. In this case the variable won't be set here.
   if (!QFile::exists(screenDir))
-    screenDir = QFile::encodeName(QDir::homeDirPath()) + "/tmp/";
+    screenDir = QFile::encodeName(QDir::homePath()) + "/tmp/";
   QStringList sessions;
   // Can't use QDir as it doesn't support FIFOs :(
   DIR *dir = opendir(screenDir);

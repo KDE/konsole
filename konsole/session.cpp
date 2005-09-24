@@ -134,7 +134,7 @@ void TESession::run()
   //pgm = "pine";
   QString appId=kapp->dcopClient()->appId();
 
-  QString cwd_save = QDir::currentDirPath();
+  QString cwd_save = QDir::currentPath();
   if (!initial_cwd.isEmpty())
      QDir::setCurrent(initial_cwd);
   sh->setXonXoff(xon_xoff);
@@ -183,7 +183,7 @@ void TESession::setUserTitle( int what, const QString &caption )
        renameSession(caption);
     if (what == 31) {
        cwd=caption;
-       cwd=cwd.replace( QRegExp("^~"), QDir::homeDirPath() );
+       cwd=cwd.replace( QRegExp("^~"), QDir::homePath() );
        emit openURLRequest(cwd);
     }    
     if (what == 32) { // change icon via \033]32;Icon\007

@@ -539,7 +539,7 @@ bool ColorSchemaList::updateAllSchemaTimes(const QDateTime& now)
   for (it=list.begin(); it!=list.end(); ++it)
   {
     QString filename=*it;
-    int j=filename.findRev('/');
+    int j=filename.lastIndexOf('/');
     if (j>-1)
       filename = filename.mid(8);
 

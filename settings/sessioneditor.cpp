@@ -317,7 +317,7 @@ void SessionEditor::saveCurrent()
   }
   else {
     // Only ask for a name for changed nameLine, considered a "save as"
-    fullpath = nameLine->text().stripWhiteSpace().simplifyWhiteSpace()+".desktop";
+    fullpath = nameLine->text().trimmed().simplified()+".desktop";
 
     bool ok;
     fullpath = KInputDialog::getText( i18n( "Save Session" ),
