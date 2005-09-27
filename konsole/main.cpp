@@ -22,7 +22,6 @@
 #include <qwidget.h>
 //Added by qt3to4:
 #include <Q3StrList>
-#include <Q3CString>
 
 #include <dcopclient.h>
 
@@ -161,7 +160,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   bool frameon = true;
   bool scrollbaron = true;
   bool showtip = true;
-  Q3CString wname = PACKAGE;
+  QByteArray wname = PACKAGE;
 
 
   KAboutData aboutData( PACKAGE, I18N_NOOP("Konsole"),
@@ -325,7 +324,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
      showtip = false;
   }
 
-  Q3CString sz = "";
+  QByteArray sz = "";
   sz = args->getOption("vt_sz");
   histon = args->isSet("hist");
   menubaron = args->isSet("menubar");
@@ -340,7 +339,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   if (!full_script)
 	a.dcopClient()->setQtBridgeEnabled(false);
 
-  Q3CString type = "";
+  QByteArray type = "";
 
   if(args->isSet("type")) {
     type = args->getOption("type");
