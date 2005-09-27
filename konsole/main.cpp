@@ -285,6 +285,9 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   KApplication a;
 #endif
 
+  QString dataPathBase = KStandardDirs::kde_default("data").append("konsole/");
+  KGlobal::dirs()->addResourceType("wallpaper", dataPathBase + "wallpapers");
+
   KImageIO::registerFormats(); // add io for additional image formats
   //2.1 secs
 

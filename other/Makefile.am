@@ -1,4 +1,4 @@
-SUBDIRS= icons
+SUBDIRS= icons wallpapers
 
 konsole_other_datadir = $(kde_datadir)/konsole
 konsole_other_data_DATA = BlackOnLightColor.schema BlackOnLightYellow.schema BlackOnWhite.schema \
