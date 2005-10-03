@@ -38,7 +38,7 @@ class KInstance;
 class konsoleBrowserExtension;
 class QPushButton;
 class QSpinBox;
-class KPopupMenu;
+class KMenu;
 class KActionMenu;
 class QCheckBox;
 class KRootPixmap;
@@ -161,11 +161,11 @@ signals:
 
     KActionMenu* m_fontsizes;
 
-    KPopupMenu* m_keytab;
-    KPopupMenu* m_schema;
-    KPopupMenu* m_signals;
-    KPopupMenu* m_options;
-    KPopupMenu* m_popupMenu;
+    KMenu* m_keytab;
+    KMenu* m_schema;
+    KMenu* m_signals;
+    KMenu* m_options;
+    KMenu* m_popupMenu;
 
     QFont       defaultFont;
 

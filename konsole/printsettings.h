@@ -29,7 +29,7 @@ class PrintSettings : public KPrintDialogPage
 {
 	Q_OBJECT
 public:
-	PrintSettings(QWidget *parent = 0, const char *name = 0);
+	PrintSettings(QWidget *parent = 0);
 	~PrintSettings();
 
 	void getOptions(QMap<QString,QString>& opts, bool incldef = false);

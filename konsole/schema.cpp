@@ -61,6 +61,7 @@
 #include <klocale.h>
 #include <kconfig.h>
 #include <kdebug.h>
+#include <krandom.h>
 
 
 typedef Q3PtrListIterator<ColorSchema> ColorSchemaListIterator;
@@ -358,7 +359,7 @@ bool ColorSchema::rereadSchemaFile()
           continue;
         if (!(0 <= fi && fi <= TABLE_COLORS)) continue;
         if (random_hue == -1)
-          random_hue = (KApplication::random()%32) * 11;
+          random_hue = (KRandom::random()%32) * 11;
         ch = random_hue;
         if (!(0 <= cs && cs <= 255         )) continue;
         if (!(0 <= cv && cv <= 255         )) continue;

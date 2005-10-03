@@ -26,8 +26,8 @@
 //Added by qt3to4:
 #include <QVBoxLayout>
 
-PrintSettings::PrintSettings(QWidget *parent, const char *name)
-: KPrintDialogPage(parent, name)
+PrintSettings::PrintSettings(QWidget *parent)
+: KPrintDialogPage(parent)
 {
 	setTitle(i18n("Options"));
 

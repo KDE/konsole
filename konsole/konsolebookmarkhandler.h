@@ -27,7 +27,7 @@
 #include <QTextStream>
 #include <QMenu>
 
-class KPopupMenu;
+class KMenu;
 class KonsoleBookmarkMenu;
 class KBookmarkManager;
 
@@ -47,7 +47,7 @@ public:
     virtual QString currentURL() const;
     virtual QString currentTitle() const;
 
-    KPopupMenu *menu() const { return m_menu; }
+    KMenu *menu() const { return m_menu; }
 
 private slots:
     void slotBookmarksChanged( const QString &, const QString & caller );
@@ -57,7 +57,7 @@ signals:
 
 private:
     Konsole *m_konsole;
-    KPopupMenu *m_menu;
+    KMenu *m_menu;
     KonsoleBookmarkMenu *m_bookmarkMenu;
     QString m_file;
 };

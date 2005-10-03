@@ -86,7 +86,7 @@
 #include <knotifyclient.h>
 #include <kglobalsettings.h>
 #include <kshortcut.h>
-#include <kurldrag.h>
+#include <k3urldrag.h>
 #include <kio/netaccess.h>
 #include <qlabel.h>
 #include <qtimer.h>
@@ -278,7 +278,7 @@ void TEWidget::fontChange(const QFont &)
       break;
   }
   }
-  
+
   if (font_w>200) // don't trust unrealistic value, fallback to QFontMetrics::maxWidth()
     font_w=fm.maxWidth();
   if (font_w<1)
@@ -411,8 +411,8 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
   setFocusPolicy( Qt::WheelFocus );
 
   // im
-  setInputMethodEnabled(true);  
-  
+  setInputMethodEnabled(true);
+
   if (!argb_visual)
   {
     // Looks better at startup with KRootPixmap based pseudo-transparancy
@@ -440,7 +440,7 @@ TEWidget::~TEWidget()
  It represents the 250x - 257x glyphs. If it's zero, we can't use it.
  if it's not, it's encoded as follows: imagine a 5x5 grid where the points are numbered
  0 to 24 left to top, top to bottom. Each point is represented by the corresponding bit.
-  
+
  Then, the pixels basically have the following interpretation:
  _|||_
  -...-
@@ -452,32 +452,32 @@ where _ = none
       | = vertical line.
       - = horizontal line.
  */
- 
+
 
 enum LineEncode
 {
     TopL  = (1<<1),
     TopC  = (1<<2),
     TopR  = (1<<3),
-    
+
     LeftT = (1<<5),
     Int11 = (1<<6),
     Int12 = (1<<7),
     Int13 = (1<<8),
     RightT = (1<<9),
-    
+
     LeftC = (1<<10),
     Int21 = (1<<11),
     Int22 = (1<<12),
     Int23 = (1<<13),
     RightC = (1<<14),
-    
+
     LeftB = (1<<15),
     Int31 = (1<<16),
     Int32 = (1<<17),
     Int33 = (1<<18),
     RightB = (1<<19),
-    
+
     BotL  = (1<<21),
     BotC  = (1<<22),
     BotR  = (1<<23)
@@ -494,7 +494,7 @@ static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code
     int ey = y + h - 1;
 
     Q_UINT32 toDraw = LineChars[code];
-    
+
     //Top lines:
     if (toDraw & TopL)
         paint.drawLine(cx-1, y, cx-1, cy-2);
@@ -526,7 +526,7 @@ static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code
         paint.drawLine(cx+2, cy, ex, cy);
     if (toDraw & RightB)
         paint.drawLine(cx+2, cy+1, ex, cy+1);
-    
+
     //Intersection points.
     if (toDraw & Int11)
         paint.drawPoint(cx-1, cy-1);
@@ -534,7 +534,7 @@ static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code
         paint.drawPoint(cx, cy-1);
     if (toDraw & Int13)
         paint.drawPoint(cx+1, cy-1);
-    
+
     if (toDraw & Int21)
         paint.drawPoint(cx-1, cy);
     if (toDraw & Int22)
@@ -571,7 +571,7 @@ void TEWidget::drawTextFixed(QPainter &paint, int x, int y,
       w = font_w*2;
       nc+=2;
     }
-    
+
     //Check for line-drawing char
     if (isLineChar(drawstr[0].unicode()))
     {
@@ -583,7 +583,7 @@ void TEWidget::drawTextFixed(QPainter &paint, int x, int y,
             continue;
         }
     }
-    
+
     paint.drawText(x,y, w, font_h, Qt::AlignHCenter | Qt::DontClip, drawstr, -1);
     x += w;
   }
@@ -627,7 +627,7 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
           Q_UINT8 dalpha = 255 - salpha;
 
           int a, r, g, b;
-          a = QMIN( (qAlpha (col) * salpha) / 255 + (qAlpha (blend_color) * dalpha) / 255, 255 ); 
+          a = QMIN( (qAlpha (col) * salpha) / 255 + (qAlpha (blend_color) * dalpha) / 255, 255 );
           r = QMIN( (qRed   (col) * salpha) / 255 + (qRed   (blend_color) * dalpha) / 255, 255 );
           g = QMIN( (qGreen (col) * salpha) / 255 + (qGreen (blend_color) * dalpha) / 255, 255 );
           b = QMIN( (qBlue  (col) * salpha) / 255 + (qBlue  (blend_color) * dalpha) / 255, 255 );
@@ -657,7 +657,7 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
       int w = font_w * (m_imSelEnd - m_imSelStart);
       int h = font_h;
 
-      QRect tmpRect = QRect( x, y, w, h ); 
+      QRect tmpRect = QRect( x, y, w, h );
       if ( str != m_imPreeditText ) {  // ugly hack
         tmpRect.setLeft( tmpRect.left() + font_w );
         tmpRect.setWidth( tmpRect.width() + font_w );
@@ -727,7 +727,7 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
 #ifdef __GNUC__
    #warning "BiDi stuff killed, it should force TRL when !bidiEnabled"
 #endif
- 
+
       if ( shadow ) {
         paint.setPen( Qt::black );
 
@@ -894,7 +894,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
           if ( ( m_imSelStart < m_imSelEnd ) )
             m_isIMSel = true;
 	}
-        
+
         bool save_fixed_font = fixed_font;
         if (lineDraw)
            fixed_font = false;
@@ -918,7 +918,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
     memcpy((void*)lcl,(const void*)ext,cols*sizeof(ca));
   }
   repaint(dirtyRegion);
-  
+
   if ( hasBlinker && !blinkT->isActive()) blinkT->start(1000); // 1000 ms
   if (!hasBlinker && blinkT->isActive()) { blinkT->stop(); blinking = false; }
   free(dirtyMask);
@@ -1936,7 +1936,7 @@ void TEWidget::imEndEvent( QIMEvent *e )
                              contentsRect().width(), contentsRect().height() );
   m_imStart = 0;
   m_imPreeditLength = 0;
- 
+
   m_isIMEdit = m_isIMSel = false;
   repaint( repaintRect, true );
 }
@@ -2136,7 +2136,7 @@ void TEWidget::styleChange(QStyle &)
 void TEWidget::dragEnterEvent(QDragEnterEvent* e)
 {
   e->accept(Q3TextDrag::canDecode(e) ||
-      KURLDrag::canDecode(e));
+      K3URLDrag::canDecode(e));
 }
 
 enum dropPopupOptions { paste, cd, cp, ln, mv };
@@ -2145,7 +2145,7 @@ void TEWidget::dropEvent(QDropEvent* event)
 {
    if (m_drop==0)
    {
-      m_drop = new KPopupMenu(this);
+      m_drop = new KMenu(this);
       m_drop->insertItem( i18n("Paste"), paste );
       m_drop->insertSeparator();
       m_drop->insertItem( "cd", cd );

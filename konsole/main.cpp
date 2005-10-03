@@ -36,6 +36,7 @@
 #include <kmessagebox.h>
 
 #include <config.h>
+#include <kauthorized.h>
 
 #include "konsole.h"
 
@@ -441,7 +442,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
     }
   }
 
-  if (!kapp->authorizeKAction("size"))
+  if (!KAuthorized::authorizeKAction("size"))
     fixed_size = true;
 
   // ///////////////////////////////////////////////

@@ -99,7 +99,7 @@ SchemaEditor::SchemaEditor(QWidget * parent, const char *name)
     transparencyCheck->setChecked(false);
 
 
-    KGlobal::locale()->insertCatalogue("konsole"); // For schema translations
+    KGlobal::locale()->insertCatalog("konsole"); // For schema translations
     connect(imageBrowse, SIGNAL(clicked()), this, SLOT(imageSelect()));
     connect(saveButton, SIGNAL(clicked()), this, SLOT(saveCurrent()));
     connect(removeButton, SIGNAL(clicked()), this, SLOT(removeCurrent()));

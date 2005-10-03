@@ -48,10 +48,11 @@
 #include <qcheckbox.h>
 #include <qspinbox.h>
 #include <qpushbutton.h>
-#include <kpopupmenu.h>
+#include <kmenu.h>
 #include <krootpixmap.h>
 #include <kconfig.h>
 #include <kaction.h>
+#include <kauthorized.h>
 
 // We can't use the ARGB32 visual when embedded in another application
 bool argb_visual = false;
@@ -113,7 +114,7 @@ KInstance *konsoleFactory::instance()
 #define DEFAULT_HISTORY_SIZE 1000
 
 konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject *parent, const char *name, const char *classname)
-  : KParts::ReadOnlyPart(parent, name)
+  : KParts::ReadOnlyPart(parent)
 ,te(0)
 ,se(0)
 ,colors(0)
@@ -302,16 +303,16 @@ void konsolePart::emitOpenURLRequest(const QString &cwd)
 
 void konsolePart::makeGUI()
 {
-  if (!kapp->authorizeKAction("konsole_rmb"))
+  if (!KAuthorized::authorizeKAction("konsole_rmb"))
      return;
 
   actions = new KActionCollection( (KMainWindow*)parentWidget );
   settingsActions = new KActionCollection( (KMainWindow*)parentWidget );
 
   // Send Signal Menu -------------------------------------------------------------
-  if (kapp->authorizeKAction("send_signal"))
+  if (KAuthorized::authorizeKAction("send_signal"))
   {
-     m_signals = new KPopupMenu((KMainWindow*)parentWidget);
+     m_signals = new KMenu((KMainWindow*)parentWidget);
      m_signals->insertItem( i18n( "&Suspend Task" )   + " (STOP)", SIGSTOP);
      m_signals->insertItem( i18n( "&Continue Task" )  + " (CONT)", SIGCONT);
      m_signals->insertItem( i18n( "&Hangup" )         + " (HUP)",   SIGHUP);
@@ -324,9 +325,9 @@ void konsolePart::makeGUI()
   }
 
   // Settings Menu ----------------------------------------------------------------
-  if (kapp->authorizeKAction("settings"))
+  if (KAuthorized::authorizeKAction("settings"))
   {
-     m_options = new KPopupMenu((KMainWindow*)parentWidget);
+     m_options = new KMenu((KMainWindow*)parentWidget);
 
      // Scrollbar
      selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), 0, this,
@@ -365,18 +366,18 @@ void konsolePart::makeGUI()
       selectSetEncoding->plug(m_options);
 
      // Keyboard Options Menu ---------------------------------------------------
-     if (kapp->authorizeKAction("keyboard"))
+     if (KAuthorized::authorizeKAction("keyboard"))
      {
-        m_keytab = new KPopupMenu((KMainWindow*)parentWidget);
+        m_keytab = new KMenu((KMainWindow*)parentWidget);
         m_keytab->setCheckable(true);
         connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
         m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
      }
 
      // Schema Options Menu -----------------------------------------------------
-     if (kapp->authorizeKAction("schema"))
+     if (KAuthorized::authorizeKAction("schema"))
      {
-        m_schema = new KPopupMenu((KMainWindow*)parentWidget);
+        m_schema = new KMenu((KMainWindow*)parentWidget);
         m_schema->setCheckable(true);
         connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
         connect(m_schema, SIGNAL(aboutToShow()), SLOT(schema_menu_check()));
@@ -432,7 +433,7 @@ void konsolePart::makeGUI()
 
      // Save Settings
      m_options->insertSeparator();
-     KAction *saveSettings = new KAction(i18n("&Save as Default"), "filesave", 0, this, 
+     KAction *saveSettings = new KAction(i18n("&Save as Default"), "filesave", 0, this,
                     SLOT(saveProperties()), actions, "save_default");
      saveSettings->plug(m_options);
      if (KGlobalSettings::insertTearOffHandle())
@@ -440,7 +441,7 @@ void konsolePart::makeGUI()
   }
 
   // Popup Menu -------------------------------------------------------------------
-  m_popupMenu = new KPopupMenu((KMainWindow*)parentWidget);
+  m_popupMenu = new KMenu((KMainWindow*)parentWidget);
   KAction* selectionEnd = new KAction(i18n("Set Selection End"), 0, te,
                                SLOT(setSelectionEnd()), actions, "selection_end");
   selectionEnd->plug(m_popupMenu);
@@ -1022,8 +1023,9 @@ bool HistoryTypeDialog::isOn() const
 }
 
 konsoleBrowserExtension::konsoleBrowserExtension(konsolePart *parent)
-  : KParts::BrowserExtension(parent, "konsoleBrowserExtension")
+  : KParts::BrowserExtension(parent )
 {
+    setObjectName( "konsoleBrowserExtension" );
 }
 
 konsoleBrowserExtension::~konsoleBrowserExtension()

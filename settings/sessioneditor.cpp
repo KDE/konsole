@@ -56,7 +56,7 @@ SessionEditor::SessionEditor(QWidget * parent, const char *name)
   oldSession=-1;
   loaded=false;
 
-  KGlobal::locale()->insertCatalogue("konsole"); // For schema and keytab translations
+  KGlobal::locale()->insertCatalog("konsole"); // For schema and keytab translations
   KGlobal::iconLoader()->addAppDir( "konsole" );
 
   directoryLine->setMode(KFile::Directory);

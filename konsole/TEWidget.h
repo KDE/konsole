@@ -34,7 +34,7 @@
 //Should have been added by qt3to4:
 #include <Q3TextDrag>
 
-#include <kpopupmenu.h>
+#include <kmenu.h>
 
 #include "TECommon.h"
 
@@ -277,7 +277,7 @@ private:
     QTimer* blinkT;  // active when hasBlinker
     QTimer* blinkCursorT;  // active when hasBlinkingCursor
 
-    KPopupMenu* m_drop;
+    KMenu* m_drop;
     QString dropText;
     int m_dnd_file_count;
 

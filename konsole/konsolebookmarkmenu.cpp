@@ -16,16 +16,17 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <kpopupmenu.h>
+#include <kmenu.h>
 #include <kstandarddirs.h>
 #include <kaction.h>
+#include <q3ptrlist.h>
 
 #include "konsole.h"
 #include "konsolebookmarkmenu.h"
 #include "konsolebookmarkhandler.h"
 
 KonsoleBookmarkMenu::KonsoleBookmarkMenu( KBookmarkManager* mgr,
-                     KonsoleBookmarkHandler * _owner, KPopupMenu * _parentMenu,
+                     KonsoleBookmarkHandler * _owner, KMenu * _parentMenu,
                      KActionCollection *collec, bool _isRoot, bool _add,
                      const QString & parentAddress )
 : KBookmarkMenu( mgr, _owner, _parentMenu, collec, _isRoot, _add,

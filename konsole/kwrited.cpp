@@ -82,14 +82,14 @@ void KWrited::block_in(int fd)
 KWritedModule::KWritedModule( const Q3CString& obj )
     : KDEDModule( obj )
 {
-    KGlobal::locale()->insertCatalogue("konsole");
+    KGlobal::locale()->insertCatalog("konsole");
     pro = new KWrited;
 }
 
 KWritedModule::~KWritedModule()
 {
     delete pro;
-    KGlobal::locale()->removeCatalogue("konsole");
+    KGlobal::locale()->removeCatalog("konsole");
 }
 
 extern "C"

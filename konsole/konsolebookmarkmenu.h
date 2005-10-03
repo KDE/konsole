@@ -36,7 +36,7 @@ class KActionMenu;
 class KActionCollection;
 class KBookmarkOwner;
 class KBookmarkMenu;
-class KPopupMenu;
+class KMenu;
 class KonsoleBookmarkMenu;
 
 class KonsoleBookmarkMenu : public KBookmarkMenu
@@ -45,7 +45,7 @@ class KonsoleBookmarkMenu : public KBookmarkMenu
 
 public:
     KonsoleBookmarkMenu( KBookmarkManager* mgr,
-                         KonsoleBookmarkHandler * _owner, KPopupMenu * _parentMenu,
+                         KonsoleBookmarkHandler * _owner, KMenu * _parentMenu,
                          KActionCollection *collec, bool _isRoot,
                          bool _add = true, const QString & parentAddress = "");
 
