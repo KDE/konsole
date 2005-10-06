@@ -405,7 +405,7 @@ Loop:
       ptrdiff_t bits = (ptrdiff_t)(syms->modsyms[res]) - 1;
       if (mask & (1 << bits))
       {
-        fprintf(stderr,"%s(%d,%d): mode name used multible times.\n",path.ascii(),slinno,scolno);
+        fprintf(stderr,"%s(%d,%d): mode name used multiple times.\n",path.ascii(),slinno,scolno);
       }
       else
       {
