@@ -145,6 +145,7 @@ Time to start a requirement list.
 #include <netwm.h>
 #include <QMenu>
 #include <kauthorized.h>
+#include <ktoolinvocation.h>
 #include "printsettings.h"
 
 #define KONSOLEDEBUG    kdDebug(1211)
@@ -2031,7 +2032,7 @@ void Konsole::slotConfigure()
 {
   QStringList args;
   args << "kcmkonsole";
-  KApplication::kdeinitExec( "kcmshell", args );
+  KToolInvocation::kdeinitExec( "kcmshell", args );
 }
 
 void Konsole::reparseConfiguration()
