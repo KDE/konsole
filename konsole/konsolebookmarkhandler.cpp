@@ -35,7 +35,7 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel 
       KBookmarkOwner(),
       m_konsole( konsole )
 {
-    m_menu = new KMenu( konsole, "bookmark menu" );
+    m_menu = new KMenu( konsole );
 
     // KDE3.5 - Konsole's bookmarks are now in konsole/bookmarks.xml
     // TODO: Consider removing for KDE4

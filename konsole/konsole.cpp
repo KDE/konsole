@@ -163,11 +163,11 @@ class KonsoleFontSelectAction : public KSelectAction {
 public:
     KonsoleFontSelectAction(const QString &text, int accel,
                             const QObject* receiver, const char* slot,
-                            QObject* parent, const char* name = 0 )
+                            KActionCollection* parent, const char* name = 0 )
         : KSelectAction(text, accel, receiver, slot, parent, name) {}
     KonsoleFontSelectAction( const QString &text, const QIcon& pix,
                              int accel, const QObject* receiver,
-                             const char* slot, QObject* parent,
+                             const char* slot, KActionCollection* parent,
                              const char* name = 0 )
         : KSelectAction(text, pix, accel, receiver, slot, parent, name) {}
 
@@ -796,7 +796,7 @@ void Konsole::makeGUI()
    m_tabPopupMenu = new KMenu( this );
    KAcceleratorManager::manage( m_tabPopupMenu );
 
-   m_tabDetachSession= new KAction( i18n("&Detach Session"), SmallIconSet("tab_breakoff"), 0, this, SLOT(slotTabDetachSession()), this );
+   m_tabDetachSession= new KAction( i18n("&Detach Session"), SmallIconSet("tab_breakoff"), 0, this, SLOT(slotTabDetachSession()), actionCollection(), 0 );
    m_tabDetachSession->plug(m_tabPopupMenu);
 
    m_tabPopupMenu->insertItem( i18n("&Rename Session..."), this,
@@ -804,17 +804,17 @@ void Konsole::makeGUI()
    m_tabPopupMenu->insertSeparator();
 
   m_tabMonitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ),
-      SmallIconSet("konsole"), 0, this, SLOT( slotTabToggleMonitor() ), this );
+      SmallIconSet("konsole"), 0, this, SLOT( slotTabToggleMonitor() ), actionCollection() );
   m_tabMonitorActivity->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Activity" ), SmallIconSet( "activity" ) ) );
    m_tabMonitorActivity->plug(m_tabPopupMenu);
 
   m_tabMonitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ),
-      SmallIconSet("konsole"), 0, this, SLOT( slotTabToggleMonitor() ), this );
+      SmallIconSet("konsole"), 0, this, SLOT( slotTabToggleMonitor() ), actionCollection() );
   m_tabMonitorSilence->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Silence" ), SmallIconSet( "silence" ) ) );
    m_tabMonitorSilence->plug(m_tabPopupMenu);
 
    m_tabMasterMode = new KToggleAction ( i18n( "Send &Input to All Sessions" ), "remote", 0, this,
-                                    SLOT( slotTabToggleMasterMode() ), this);
+                                    SLOT( slotTabToggleMasterMode() ), actionCollection());
    m_tabMasterMode->plug(m_tabPopupMenu);
 
    m_tabPopupMenu->insertSeparator();
@@ -836,7 +836,7 @@ void Konsole::makeGUI()
       KAcceleratorManager::manage( m_tabbarPopupMenu );
       selectTabbar->plug(m_tabbarPopupMenu);
 
-      KSelectAction *viewOptions = new KSelectAction(this);
+      KSelectAction *viewOptions = new KSelectAction(actionCollection());
       viewOptions->setText(i18n("Tab &Options"));
       QStringList options;
       options << i18n("&Text && Icons") << i18n("Text &Only") << i18n("&Icons Only");
@@ -847,12 +847,12 @@ void Konsole::makeGUI()
       slotTabSetViewOptions(m_tabViewMode);
 
       KToggleAction *dynamicTabHideOption = new KToggleAction ( i18n( "&Dynamic Hide" ), 0, this,
-                                       SLOT( slotTabbarToggleDynamicHide() ), this);
+                                       SLOT( slotTabbarToggleDynamicHide() ), actionCollection(), 0);
       dynamicTabHideOption->setChecked(b_dynamicTabHide);
       dynamicTabHideOption->plug(m_tabbarPopupMenu);
 
       KToggleAction *m_autoResizeTabs = new KToggleAction( i18n("&Auto Resize Tabs"),
-                 0, this, SLOT( slotToggleAutoResizeTabs() ), this);
+                 0, this, SLOT( slotToggleAutoResizeTabs() ), actionCollection(), 0);
       m_autoResizeTabs->setChecked(b_autoResizeTabs);
       m_autoResizeTabs->plug(m_tabbarPopupMenu);
     }
@@ -1117,7 +1117,7 @@ void Konsole::makeBasicGUI()
   m_quit = new KAction(i18n("&Quit"), "exit", 0, this, SLOT( close() ), m_shortcuts, "file_quit");
 
   KShortcut shortcut(Qt::CTRL+Qt::ALT+Qt::Key_N);
-  shortcut.append(KShortcut(Qt::CTRL+Qt::SHIFT+Qt::Key_N));
+  shortcut.append(KKeySequence(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_N)));
   new KAction(i18n("New Session"), shortcut, this, SLOT(newSession()), m_shortcuts, "new_session");
   new KAction(i18n("Activate Menu"), Qt::CTRL+Qt::ALT+Qt::Key_M, this, SLOT(activateMenu()), m_shortcuts, "activate_menu");
   new KAction(i18n("List Sessions"), 0, this, SLOT(listSessions()), m_shortcuts, "list_sessions");

@@ -422,7 +422,7 @@ void konsolePart::makeGUI()
 
      // Word Connectors
      KAction *WordSeps = new KAction(i18n("Wor&d Connectors..."), 0, this,
-                                  SLOT(slotWordSeps()), settingsActions);
+                                  SLOT(slotWordSeps()), settingsActions, 0);
      WordSeps->plug(m_options);
 
      // Use Konsole's Settings

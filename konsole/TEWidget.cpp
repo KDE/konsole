@@ -2159,43 +2159,41 @@ void TEWidget::dropEvent(QDropEvent* event)
     // * if there are only LOCAL urls, ask for paste or cp/ln/mv
     // * in all other cases, just paste
     //   (for non-local ones, or for a list of URLs, 'cd' is nonsense)
-  KURL::List urllist;
   m_dnd_file_count = 0;
   dropText = "";
   bool justPaste = true;
 
-  if(KURLDrag::decode(event, urllist)) {
+  KURL::List urllist = KURL::List::fromMimeData(event->mimeData());
+  if (urllist.count()) {
     justPaste =false;
-    if (!urllist.isEmpty()) {
-      KURL::List::Iterator it;
+    KURL::List::Iterator it;
 
-      m_drop->setItemEnabled( cd, true );
-      m_drop->setItemEnabled( ln, true );
+    m_drop->setItemEnabled( cd, true );
+    m_drop->setItemEnabled( ln, true );
 
-      for ( it = urllist.begin(); it != urllist.end(); ++it ) {
-        if(m_dnd_file_count++ > 0) {
-          dropText += " ";
-	  m_drop->setItemEnabled(cd,false);
-        }
-        KURL url = KIO::NetAccess::mostLocalURL( *it, 0 );
-        QString tmp;
-        if (url.isLocalFile()) {
-          tmp = url.path(); // local URL : remove protocol. This helps "ln" & "cd" and doesn't harm the others
-        } else if ( url.protocol() == QLatin1String( "mailto" ) ) {
-	  justPaste = true;
-	  break;
-	} else {
-          tmp = url.url();
-	  m_drop->setItemEnabled( cd, false );
-	  m_drop->setItemEnabled( ln, false );
-        }
-        if (urllist.count()>1)
-          KRun::shellQuote(tmp);
-        dropText += tmp;
+    for ( it = urllist.begin(); it != urllist.end(); ++it ) {
+      if(m_dnd_file_count++ > 0) {
+        dropText += " ";
+        m_drop->setItemEnabled(cd,false);
       }
-
-      if (!justPaste) m_drop->popup(mapToGlobal(event->pos()));
+      KURL url = KIO::NetAccess::mostLocalURL( *it, 0 );
+      QString tmp;
+      if (url.isLocalFile()) {
+        tmp = url.path(); // local URL : remove protocol. This helps "ln" & "cd" and doesn't harm the others
+      } else if ( url.protocol() == QLatin1String( "mailto" ) ) {
+        justPaste = true;
+        break;
+      } else {
+        tmp = url.url();
+        m_drop->setItemEnabled( cd, false );
+        m_drop->setItemEnabled( ln, false );
+      }
+      if (urllist.count()>1)
+        KRun::shellQuote(tmp);
+      dropText += tmp;
     }
+
+    if (!justPaste) m_drop->popup(mapToGlobal(event->pos()));
   }
   if(justPaste && Q3TextDrag::decode(event, dropText)) {
     kdDebug(1211) << "Drop:" << dropText.toLocal8Bit() << "\n";

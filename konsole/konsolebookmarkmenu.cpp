@@ -69,9 +69,8 @@ void KonsoleBookmarkMenu::slotAboutToShow2()
 void KonsoleBookmarkMenu::refill()
 {
   m_lstSubMenus.clear();
-  Q3PtrListIterator<KAction> it( m_actions );
-  for (; it.current(); ++it )
-    it.current()->unplug( m_parentMenu );
+  foreach (KAction* action, m_actions)
+    action->unplug( m_parentMenu );
   m_parentMenu->clear();
   m_actions.clear();
   fillBookmarkMenu();
@@ -117,7 +116,7 @@ void KonsoleBookmarkMenu::fillBookmarkMenu()
                                         this, SLOT( slotBookmarkSelected() ),
                                         m_actionCollection, bm.url().url().toUtf8() );
 
-        action->setStatusText( bm.url().prettyURL() );
+        action->setToolTip( bm.url().prettyURL() );
 
         action->plug( m_parentMenu );
         m_actions.append( action );
