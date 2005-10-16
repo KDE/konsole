@@ -1378,13 +1378,16 @@ void Konsole::slotTabSetViewOptions(int mode)
 
     switch(mode) {
       case ShowIconAndText:
-        tabwidget->changeTab(page, icon, title);
+        tabwidget->setTabIcon( i, icon );
+        tabwidget->setTabText( i, title );
         break;
       case ShowTextOnly:
-        tabwidget->changeTab(page, QIcon(), title);
+        tabwidget->setTabIcon( i, QIcon() );
+        tabwidget->setTabText( i, title );
         break;
       case ShowIconOnly:
-        tabwidget->changeTab(page, icon, QString::null);
+        tabwidget->setTabIcon( i, icon );
+        tabwidget->setTabText( i, QString() );
         break;
     }
   }
@@ -2182,6 +2185,8 @@ void Konsole::notifySize(int columns, int lines)
 
 void Konsole::updateTitle()
 {
+  int se_index = tabwidget->indexOf( se->widget() );
+
   setCaption( se->fullTitle() );
   setIconText( se->IconText() );
   tabwidget->setTabIconSet(se->widget(), iconSetForSession(se));
@@ -2189,9 +2194,10 @@ void Konsole::updateTitle()
   KRadioAction *ra = session2action.find(se);
   if (ra && (ra->icon() != icon))
     ra->setIcon(icon);
-  if (m_tabViewMode == ShowIconOnly) tabwidget->changeTab( se->widget(), QString::null );
+  if (m_tabViewMode == ShowIconOnly)
+    tabwidget->setTabText( se_index, QString() );
   else if (b_matchTabWinTitle)
-    tabwidget->changeTab( se->widget(), se->fullTitle() );
+    tabwidget->setTabText( se_index, se->fullTitle() );
 }
 
 void Konsole::initSessionFont(QFont font) {
@@ -3739,8 +3745,10 @@ void Konsole::slotRenameSession(TESession* ses, const QString &name)
   title=title.replace('&',"&&");
   ra->setText(title);
   ra->setIcon( ses->IconName() ); // I don't know why it is needed here
-  if (m_tabViewMode!=ShowIconOnly)
-    tabwidget->changeTab( ses->widget(), title );
+  if (m_tabViewMode!=ShowIconOnly) {
+    int se_index = tabwidget->indexOf( se->widget() );
+    tabwidget->setTabText( se_index, title );
+  }
   updateTitle();
 }
 
