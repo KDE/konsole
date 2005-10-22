@@ -1367,8 +1367,6 @@ void Konsole::slotTabSetViewOptions(int mode)
   m_tabViewMode = TabViewModes(mode);
 
   for(int i = 0; i < tabwidget->count(); i++) {
-
-    QWidget *page = tabwidget->page(i);
     QIcon icon = iconSetForSession(sessions.at(i));
     QString title;
     if (b_matchTabWinTitle)

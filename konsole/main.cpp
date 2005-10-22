@@ -454,7 +454,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   putenv((char*)"COLORTERM="); // to trigger mc's color detection
   KonsoleSessionManaged ksm;
 
-  if (a.isRestored() || !profile.isEmpty())
+  if (a.isSessionRestored() || !profile.isEmpty())
   {
     if (!shell)
        shell = konsole_shell(eargs);
@@ -486,6 +486,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         wname = sessionconfig->readEntry("class",wname).latin1();
 
         sPgm = sessionconfig->readEntry("Pgm0", shell);
+        //KDE4 ; change to QStringList readListEntry( const char *pKey, char sep = ',' ) const;
         sessionconfig->readListEntry("Args0", eargs);
         sTitle = sessionconfig->readEntry("Title0", title);
         sTerm = sessionconfig->readEntry("Term0");
@@ -525,6 +526,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
           key = QString("Title%1").arg(counter);
           sTitle = sessionconfig->readEntry(key, title);
           key = QString("Args%1").arg(counter);
+          //KDE4 ; change to QStringList readListEntry( const char *pKey, char sep = ',' ) const;
           sessionconfig->readListEntry(key, eargs);
           key = QString("Pgm%1").arg(counter);
           sPgm = sessionconfig->readEntry(key, shell);
