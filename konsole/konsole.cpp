@@ -3372,6 +3372,8 @@ void Konsole::loadSessionCommands()
 
 void Konsole::createSessionMenus()
 {
+//KDE4: no2command messed up... causing crashes
+/*
   KSimpleConfig *cfg = no2command[SESSION_NEW_SHELL_ID];
   QString txt = cfg->readEntry("Name");
   QString icon = cfg->readEntry("Icon", "konsole");
@@ -3405,7 +3407,7 @@ void Konsole::createSessionMenus()
     insertItemSorted(m_session, SmallIconSet(icon),
                      comment.replace('&',"&&"), it.currentKey());
   }
-
+*/
   if (m_bookmarksSession)
   {
     m_session->insertSeparator();
