@@ -193,7 +193,6 @@ private slots:
   void slotSelectBell();
   void slotSelectSize();
   void slotSelectFont();
-  void slotInstallBitmapFonts();
   void slotSelectScrollbar();
   void loadScreenSessions();
   void updateFullScreen(bool on);
@@ -273,7 +272,6 @@ private:
   void createSessionMenus();
   void addScreenSession(const QString & path, const QString & socket);
   void resetScreenSessions();
-  void checkBitmapFonts();
 
   void initTEWidget(TEWidget* new_te, TEWidget* default_te);
 
@@ -399,7 +397,6 @@ private:
   TabViewModes m_tabViewMode;
   bool        b_dynamicTabHide;
   bool        b_autoResizeTabs;
-  bool        b_installBitmapFonts;
 
   bool        b_framevis:1;
   bool        b_fullscreen:1;
