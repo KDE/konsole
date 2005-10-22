@@ -514,7 +514,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         m->initMonitorActivity(sessionconfig->readBoolEntry("MonitorActivity0",false));
         m->initMonitorSilence(sessionconfig->readBoolEntry("MonitorSilence0",false));
         m->initMasterMode(sessionconfig->readBoolEntry("MasterMode0",false));
-        m->initTabColor(sessionconfig->readColorEntry("TabColor"));
+        m->initTabColor(sessionconfig->readColorEntry("TabColor0"));
         counter++;
 
         // show() before 2nd+ sessions are created allows --profile to

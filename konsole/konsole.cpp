@@ -795,13 +795,13 @@ void Konsole::makeGUI()
    m_tabPopupMenu->insertSeparator();
 
   m_tabMonitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ),
-      SmallIconSet("konsole"), 0, this, SLOT( slotTabToggleMonitor() ), actionCollection() );
-  m_tabMonitorActivity->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Activity" ), SmallIconSet( "activity" ) ) );
+      SmallIconSet("activity"), 0, this, SLOT( slotTabToggleMonitor() ), actionCollection() );
+  m_tabMonitorActivity->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Activity" )) );
    m_tabMonitorActivity->plug(m_tabPopupMenu);
 
   m_tabMonitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ),
-      SmallIconSet("konsole"), 0, this, SLOT( slotTabToggleMonitor() ), actionCollection() );
-  m_tabMonitorSilence->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Silence" ), SmallIconSet( "silence" ) ) );
+      SmallIconSet("silence"), 0, this, SLOT( slotTabToggleMonitor() ), actionCollection() );
+  m_tabMonitorSilence->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Silence" ) ) );
    m_tabMonitorSilence->plug(m_tabPopupMenu);
 
    m_tabMasterMode = new KToggleAction ( i18n( "Send &Input to All Sessions" ), "remote", 0, this,
@@ -1073,14 +1073,14 @@ void Konsole::makeBasicGUI()
                                   m_shortcuts, "zmodem_upload" );
 
   monitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ),
-      SmallIconSet("konsole"), 0, this,
+      SmallIconSet("activity"), 0, this,
       SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_activity" );
-  monitorActivity->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Activity" ), SmallIconSet( "activity" ) ) );
+  monitorActivity->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Activity" ) ) );
 
   monitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ),
-      SmallIconSet("konsole"), 0, this,
+      SmallIconSet("silence"), 0, this,
       SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_silence" );
-  monitorSilence->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Silence" ), SmallIconSet( "silence" ) ) );
+  monitorSilence->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Silence" ) ) );
 
   masterMode = new KToggleAction ( i18n( "Send &Input to All Sessions" ), "remote", 0, this,
                                    SLOT( slotToggleMasterMode() ), m_shortcuts, "send_input_to_all_sessions" );
@@ -1480,6 +1480,7 @@ void Konsole::saveProperties(KConfig* config) {
   else
   {
      config->setDesktopGroup();
+     //config->writeEntry("TabColor", tabwidget->tabColor(se->widget()));
   }
   config->writeEntry("Fullscreen",b_fullscreen);
   config->writeEntry("defaultfont", (se->widget())->getVTFont());
@@ -1494,7 +1495,6 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("TabViewMode", int(m_tabViewMode));
   config->writeEntry("DynamicTabHide", b_dynamicTabHide);
   config->writeEntry("AutoResizeTabs", b_autoResizeTabs);
-  //config->writeEntry("TabColor", tabwidget->tabColor(se->widget()));
 
   if (se) {
     config->writeEntry("EncodingName", se->encoding());
@@ -1561,6 +1561,10 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
      config->setGroup("UTMP");
      b_addToUtmp = config->readBoolEntry("AddToUtmp",true);
      config->setDesktopGroup();
+
+     // Do not set a default value; this allows the System-wide Scheme
+     // to set the tab text color.
+     m_tabColor = config->readColorEntry("TabColor");
    }
 
    if (!globalConfigOnly)
@@ -1622,10 +1626,6 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       m_tabViewMode = TabViewModes(config->readNumEntry("TabViewMode", ShowIconAndText));
       b_dynamicTabHide = config->readBoolEntry("DynamicTabHide", false);
       b_autoResizeTabs = config->readBoolEntry("AutoResizeTabs", false);
-
-      // Do not set a default value; this allows the System-wide Scheme
-      // to set the tab text color.
-      m_tabColor = config->readColorEntry("TabColor");
 
       s_encodingName = config->readEntry( "EncodingName", "" ).lower();
    }
@@ -2459,7 +2459,27 @@ void Konsole::activateSession(TESession *s)
   if (se != s)
      se_previous = se;
   se = s;
-  session2action.find(se)->setChecked(true);
+
+  // Set the required schema variables for the current session
+  ColorSchema* cs = colors->find( se->schemaNo() );
+  if (!cs)
+      cs = (ColorSchema*)colors->at(0);  //the default one
+  s_schema = cs->relPath();
+  curr_schema = cs->numb();
+  pmPath = cs->imagePath();
+  n_render = cs->alignment();
+
+// BR 106464 temporary fix... 
+//  only 2 sessions opened, 2nd session viewable, right-click on 1st tab and 
+//  select 'Detach', close original Konsole window... crash
+//  s is not set properly on original Konsole window
+  KRadioAction *ra = session2action.find(se);
+  if (!ra) {
+    se=sessions.first();        // Get new/correct TESession
+    ra = session2action.find(se);
+  }
+  ra->setChecked(true);
+
   QTimer::singleShot(1,this,SLOT(allowPrevNext())); // hack, hack, hack
 
   if (tabwidget->currentWidget() != se->widget())
