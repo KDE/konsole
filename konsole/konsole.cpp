@@ -1651,14 +1651,13 @@ void Konsole::applySettingsToGUI()
    if (!m_menuCreated) return;
    if (m_options)
    {
-//      setFont();
       notifySize(te->Columns(), te->Lines());
       selectTabbar->setCurrentItem(n_tabbar);
       showMenubar->setChecked(!menuBar()->isHidden());
       selectScrollbar->setCurrentItem(n_scroll);
       selectBell->setCurrentItem(n_bell);
       selectSetEncoding->setCurrentItem( se->encodingNo() );
-      updateRMBMenu();
+//KDE4: Crashes Setup menu      updateRMBMenu();
    }
    updateKeytabMenu();
    tabwidget->setAutomaticResizeTabs( b_autoResizeTabs );
