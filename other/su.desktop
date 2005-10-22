@@ -83,6 +83,7 @@ Comment[tr]=Yeni Root Kabuk
 Comment[uk]=Новий командна оболонка з правами root
 Comment[xx]=xxNew Root Shellxx
 Comment[zh_CN]=新建 Root Shell
+Comment[zh_TW]=新增 Root Shell
 Exec=su -
 Schema=BlackOnLightYellow.schema
 #Schema=Linux.schema

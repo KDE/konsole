@@ -110,6 +110,7 @@ Comment[tr]=Yerel kullanıcılarda write(1) veya wall(1) ile gönderilmiş mesaj
 Comment[uk]=Спостерігання за  повідомленнями від локальних користувачів, відісланих через write(1) або wall(1)
 Comment[xx]=xxWatch for messages from local users sent with write(1) or wall(1)xx
 Comment[zh_CN]=监视本地用户发出的 write(1) 或 wall(1)
+Comment[zh_TW]=監控本地使用者以 write(1) 或 wall(1) 傳送的郵件
 Type=Service
 ServiceTypes=KDEDModule
 X-KDE-ModuleType=Library
