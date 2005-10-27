@@ -584,7 +584,7 @@ void TEWidget::drawTextFixed(QPainter &paint, int x, int y,
         }
     }
 
-    paint.drawText(x,y, w, font_h, Qt::AlignHCenter | Qt::DontClip, drawstr, -1);
+    paint.drawText(x,y, w, font_h, Qt::AlignHCenter | Qt::TextDontClip, drawstr, -1);
     x += w;
   }
 }

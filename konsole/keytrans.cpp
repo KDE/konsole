@@ -527,8 +527,8 @@ void KeyTransSymbols::defKeySyms()
   defKeySym("Up",           Qt::Key_Up          );
   defKeySym("Right",        Qt::Key_Right       );
   defKeySym("Down",         Qt::Key_Down        );
-  defKeySym("Prior",        Qt::Key_Prior       );
-  defKeySym("Next",         Qt::Key_Next        );
+  defKeySym("Prior",        Qt::Key_PageUp       );
+  defKeySym("Next",         Qt::Key_PageDown        );
   defKeySym("Shift",        Qt::Key_Shift       );
   defKeySym("Control",      Qt::Key_Control     );
   defKeySym("Meta",         Qt::Key_Meta        );
