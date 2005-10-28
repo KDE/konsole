@@ -2,7 +2,6 @@
 Encoding=UTF-8
 Type=KonsoleApplication
 Name=Root Midnight Commander
-Name[af]=Root Middernag Kommandeur
 Name[ar]=Midnight Commander للمستخدم الجذر
 Name[az]=Ali İstifadəçi Modunda Midnight Commander
 Name[bn]=রুট মিডনাইট কমান্ডার
@@ -56,7 +55,7 @@ Name[xx]=xxRoot Midnight Commanderxx
 Name[zu]=Umyaleli Waphakathi nobusuku
 Icon=konsolered
 Comment=New Root Midnight Commander
-Comment[af]=Nuwe Root Middernag Kommandeur
+Comment[af]=Nuwe Root Midnight Commander
 Comment[ar]=Midnight Commander جديد للمستخدم الجذر
 Comment[az]=Yeni Ali İstifadəçi Modunda Midnight Commander
 Comment[bn]=নতুন রুট মিডনাইট কমান্ডার

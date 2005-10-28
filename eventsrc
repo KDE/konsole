@@ -32,6 +32,7 @@ Comment[zh_TW]=Konsole 終端機程式
 
 [BellVisible]
 Name=Bell in visible session
+Name[af]=Klokkie in die sigbare sessie
 Name[ar]=جرس في جلسة مرئية
 Name[bg]=Камбана във видима сесия
 Name[bn]=প্রদর্শিত সেশন-এ ঘণ্টা
@@ -92,6 +93,7 @@ Name[xx]=xxBell in visible sessionxx
 Name[zh_CN]=可见会话中的响铃
 Name[zh_TW]=在可見的工作階段使用響鈴
 Comment=Bell emitted within a visible session
+Comment[af]=Klokkie word gelui in die sigbare sessie
 Comment[ar]=قرع جرس أثناء جلسة مرئية
 Comment[bg]=Камбана във видима сесия
 Comment[bn]=একটি দৃশ্যমান সেশন-এ ঘণ্টা বেজেছে
@@ -154,6 +156,7 @@ default_presentation=1
 
 [BellInvisible]
 Name=Bell in non-visible session
+Name[af]=Klokkie in nie-sigbare sessie
 Name[ar]=جرس في جلسة غير مرئية
 Name[bg]=Камбана в невидима сесия
 Name[bn]=আবৃত সেশন-এ ঘণ্টা
@@ -214,6 +217,7 @@ Name[xx]=xxBell in non-visible sessionxx
 Name[zh_CN]=不可见会话中的响铃
 Name[zh_TW]=在不可見的工作階段使用響鈴
 Comment=Bell emitted within a non-visible session
+Comment[af]=Klokkie word gelui in die nie-sigbare sessie
 Comment[ar]=قرع جرس أثناء جلسة غير مرئية
 Comment[bg]=Камбана в невидима сесия
 Comment[bn]=একটি অদৃশ্য সেশন-এ ঘণ্টা বেজেছে
@@ -275,6 +279,7 @@ default_presentation=16
 
 [Activity]
 Name=Activity in monitored session
+Name[af]=Aktiveer in gemonitorde sessie
 Name[ar]=نشاط في جلسة يتم مراقبتها
 Name[bg]=Активност в наблюдавана сесия
 Name[bs]=Aktivnost u nadgledanoj sesiji
@@ -333,6 +338,7 @@ Name[xx]=xxActivity in monitored sessionxx
 Name[zh_CN]=被监视会话中的活动
 Name[zh_TW]=活動於監視中的工作階段
 Comment=Activity detected in a monitored session
+Comment[af]=Aktiwiteit bespeur in 'n sessie wat gemonitor word
 Comment[ar]=التحقق من نشاط أثناء جلسة يتم مراقبتها
 Comment[bg]=Активност в наблюдавана сесия
 Comment[bs]=Aktivnost otkrivena u nadziranoj sesiji
@@ -391,6 +397,7 @@ default_presentation=16
 
 [Silence]
 Name=Silence in monitored session
+Name[af]=Stilte in gemonitorde sessie
 Name[ar]=سكوت في جلسة يتم مراقبتها
 Name[bg]=Пасивност в наблюдавана сесия
 Name[bs]=Tišina u nadgledanoj sesiji
@@ -449,6 +456,7 @@ Name[xx]=xxSilence in monitored sessionxx
 Name[zh_CN]=被监视会话中的缄默
 Name[zh_TW]=沉默於監視中工作階段
 Comment=Silence detected in a monitored session
+Comment[af]=Stilte bespeur in 'n sessie wat gemonitor word
 Comment[ar]=التحقق من السكوت أثناء جلسة يتم مراقبتها
 Comment[bg]=Пасивност в наблюдавана сесия
 Comment[bs]=Tišina otkrivena u nadziranoj sesiji
@@ -508,6 +516,7 @@ default_presentation=16
 
 [Finished]
 Name=Session finished with non-zero status
+Name[af]=Sessie het geëindig met nie-zero status
 Name[ar]=انتهت الجلسة في حالة غير صفرية
 Name[bg]=Сесия с код на изход различен от нула
 Name[bn]=সেশন নন-জিরো স্ট্যাটাস সমেত সমাপ্ত
@@ -568,6 +577,7 @@ Name[xx]=xxSession finished with non-zero statusxx
 Name[zh_CN]=非零状态完成的会话
 Name[zh_TW]=工作階段結束於非零狀態
 Comment=A session has exited with non-zero status
+Comment[af]='n Sessie het met 'n nie-zero status geëindig
 Comment[ar]=انتهت جلسة بحالة غير صفرية
 Comment[bg]=Сесия с код на изход различен от нула
 Comment[bn]=একটি সেশন নন-জিরো স্ট্যাটাস সমেত সমাপ্ত হয়েছে

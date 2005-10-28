@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=KonsoleApplication
 Name=Root Shell
+Name[af]=Root tolk
 Name[bn]=রুট শেল
 Name[br]=Shell gwrizienn
 Name[ca]=Intèrpret de comandaments root
@@ -43,6 +44,7 @@ Name[uk]=Командна оболонка з правами root
 Name[xx]=xxRoot Shellxx
 Icon=konsolered
 Comment=New Root Shell
+Comment[af]=Nuwe Root Tolk
 Comment[bn]=নতুন রুট শেল
 Comment[br]=Shell gwrizienn nevez
 Comment[ca]=Nou intèrpret de comandaments root

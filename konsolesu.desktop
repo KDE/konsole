@@ -8,6 +8,7 @@ MimeType=application/x-konsole
 Terminal=false
 
 Name=Terminal Program - Super User Mode
+Name[af]=Terminaal Program - Super Gebruiker Modus
 Name[ar]=برنامج الشاشة الطرفيَة - نمط المستخدم الجذري
 Name[az]=Terminal Programı - Ali İstifadəçi Modu
 Name[be]=Тэрмінал - рэжым адміністратара

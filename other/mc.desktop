@@ -2,7 +2,6 @@
 Encoding=UTF-8
 Type=KonsoleApplication
 Name=Midnight Commander
-Name[af]=Middernag Kommandeur
 Name[bn]=মিডনাইট কমান্ডার
 Name[eo]=Meznokta komandanto
 Name[fa]=فرمان‌دار نیمه شب
@@ -23,7 +22,7 @@ Name[xx]=xxMidnight Commanderxx
 Name[zu]=Umyaleli waphakathi nobusuku
 Icon=konsoleblue
 Comment=New Midnight Commander
-Comment[af]=Nuwe Middernag Kommandeur
+Comment[af]=Nuwe Midnight Commander
 Comment[ar]=Midnight Commander جديد
 Comment[az]=Yeni Midnight Commander
 Comment[be]=Новы Midnight Commander
