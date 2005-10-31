@@ -1,3 +1,4 @@
+#!/bin/sh
 RES=techref.html
 
 function header

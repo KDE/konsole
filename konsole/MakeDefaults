@@ -1,3 +1,4 @@
+#!/bin/sh
 # [MakeDefaults] Quote default configuration files
 
 # TODO. We should convert both schema and sessions
