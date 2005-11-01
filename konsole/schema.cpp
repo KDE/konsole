@@ -247,11 +247,10 @@ void ColorSchema::writeConfigColor(KConfig& c,
   const QString& name,
   const ColorEntry& e) const
 {
-  KConfigGroupSaver(&c,name);
-  c.setGroup(name);
-  c.writeEntry("Color",e.color);
-  c.writeEntry("Transparency",(bool) e.transparent);
-  c.writeEntry("Bold",(bool) e.bold);
+  KConfigGroup gruop(&c,name);
+  group.writeEntry("Color",e.color);
+  group.writeEntry("Transparency",(bool) e.transparent);
+  group.writeEntry("Bold",(bool) e.bold);
 }
 
 void ColorSchema::readConfigColor(KConfig& c,

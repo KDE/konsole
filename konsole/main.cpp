@@ -102,7 +102,7 @@ static bool fixed_size = false;
 
 bool argb_visual = false;
 
-const char *konsole_shell(Q3StrList &args)
+const char *konsole_shell(QStringList &args)
 {
   const char* shell = getenv("SHELL");
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
@@ -305,7 +305,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   }
   login_shell = args->isSet("ls");
 
-  Q3StrList eargs;
+  QStringList eargs;
 
   const char* shell = 0;
   if (!args->getOption("e").isEmpty())
@@ -486,8 +486,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         wname = sessionconfig->readEntry("class",wname).latin1();
 
         sPgm = sessionconfig->readEntry("Pgm0", shell);
-        //KDE4 ; change to QStringList readListEntry( const char *pKey, char sep = ',' ) const;
-        sessionconfig->readListEntry("Args0", eargs);
+        eargs = sessionconfig->readListEntry("Args0");
         sTitle = sessionconfig->readEntry("Title0", title);
         sTerm = sessionconfig->readEntry("Term0");
         sIcon = sessionconfig->readEntry("Icon0","konsole");
@@ -526,8 +525,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
           key = QString("Title%1").arg(counter);
           sTitle = sessionconfig->readEntry(key, title);
           key = QString("Args%1").arg(counter);
-          //KDE4 ; change to QStringList readListEntry( const char *pKey, char sep = ',' ) const;
-          sessionconfig->readListEntry(key, eargs);
+          eargs = sessionconfig->readListEntry(key);
           key = QString("Pgm%1").arg(counter);
           sPgm = sessionconfig->readEntry(key, shell);
           key = QString("Term%1").arg(counter);
