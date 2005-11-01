@@ -247,22 +247,21 @@ void ColorSchema::writeConfigColor(KConfig& c,
   const QString& name,
   const ColorEntry& e) const
 {
-  KConfigGroup gruop(&c,name);
-  group.writeEntry("Color",e.color);
-  group.writeEntry("Transparency",(bool) e.transparent);
-  group.writeEntry("Bold",(bool) e.bold);
+  KConfigGroup configGroup(&c,name);
+  configGroup.writeEntry("Color",e.color);
+  configGroup.writeEntry("Transparency",(bool) e.transparent);
+  configGroup.writeEntry("Bold",(bool) e.bold);
 }
 
 void ColorSchema::readConfigColor(KConfig& c,
   const QString& name,
   ColorEntry& e)
 {
-  KConfigGroupSaver(&c,name);
-  c.setGroup(name);
+  KConfigGroup configGroup(&c,name);
 
-  e.color = c.readColorEntry("Color");
-  e.transparent = c.readBoolEntry("Transparent",false);
-  e.bold = c.readBoolEntry("Bold",false);
+  e.color = configGroup.readColorEntry("Color");
+  e.transparent = configGroup.readBoolEntry("Transparent",false);
+  e.bold = configGroup.readBoolEntry("Bold",false);
 }
 
 
