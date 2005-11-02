@@ -108,6 +108,7 @@ Comment[sr]=Чека поруке од локалних корисника по�
 Comment[sr@Latn]=Čeka poruke od lokalnih korisnika poslatih pomoću write(1) ili wall(1)
 Comment[sv]=Titta efter meddelanden från lokala användare som skickas med write(1) eller wall(1)
 Comment[ta]=உள் பயனர் அணுப்பியதுடன் write(1) or wall(1) அதிலிருந்து பார்க்கவேண்டிய தகவல்கள்
+Comment[th]=เฝ้าดูข้อความจากผู้ใช้ท้องถิ่นที่ถูกส่งมาด้วย write(1) หรือ wall(1)
 Comment[tr]=Yerel kullanıcılarda write(1) veya wall(1) ile gönderilmiş mesajları izle
 Comment[tt]=Cirle qullanuçılar tarafınnan write(1)/wall(1) aşa cibärelgän xäbärlär kötä
 Comment[uk]=Спостерігання за  повідомленнями від локальних користувачів, відісланих через write(1) або wall(1)
