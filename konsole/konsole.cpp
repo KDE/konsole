@@ -1444,8 +1444,17 @@ void Konsole::saveProperties(KConfig* config) {
         config->writeEntry(key, colors->find( sessions.current()->schemaNo() )->relPath());
 	key = QString("Encoding%1").arg(counter);
 	config->writeEntry(key, sessions.current()->encodingNo());
+
         key = QString("Args%1").arg(counter);
-        config->writeEntry(key, sessions.current()->getArgs());
+//KDE4: Need to test this conversion q3strlist to qstringlist
+//        config->writeEntry(key, sessions.current()->getArgs());
+        QStringList args_sl;
+        Q3StrList args = sessions.current()->getArgs();
+        Q3StrListIterator it( args );
+        for (; it.current(); ++it)
+            args_sl << QString(it.current());
+        config->writeEntry(key, args_sl);
+
         key = QString("Pgm%1").arg(counter);
         config->writeEntry(key, sessions.current()->getPgm());
         key = QString("SessionFont%1").arg(counter);
