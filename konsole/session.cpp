@@ -12,8 +12,6 @@
 #include <qfile.h>
 #include <qdir.h>
 #include <qregexp.h>
-#include <q3textedit.h>
-//Added by qt3to4:
 #include <QStringList>
 #include <QByteArray>
 
