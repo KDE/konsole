@@ -14,8 +14,8 @@
 #include <qregexp.h>
 #include <q3textedit.h>
 //Added by qt3to4:
-#include <Q3StrList>
-#include <Q3CString>
+#include <QStringList>
+#include <QByteArray>
 
 /*! \class TESession
 
@@ -27,7 +27,7 @@
     of the abilities of the framework - multible sessions.
 */
 
-TESession::TESession(TEWidget* _te, const QString &_pgm, const Q3StrList & _args, const QString &_term, ulong _winId, const QString &_sessionId, const QString &_initial_cwd)
+TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _args, const QString &_term, ulong _winId, const QString &_sessionId, const QString &_initial_cwd)
    : DCOPObject( _sessionId.latin1() )
    , connected(true)
    , monitorActivity(false)
@@ -476,7 +476,7 @@ void TESession::clearHistory()
   }
 }
 
-Q3StrList TESession::getArgs()
+QStringList TESession::getArgs()
 {
   return args;
 }
@@ -621,12 +621,12 @@ void TESession::zmodemContinue()
 
 void TESession::zmodemStatus(KProcess *, char *data, int len)
 {
-  Q3CString msg(data, len+1);
+  QByteArray msg(data, len+1);
   while(!msg.isEmpty())
   {
      int i = msg.find('\015');
      int j = msg.find('\012');
-     Q3CString txt;
+     QByteArray txt;
      if ((i != -1) && ((j == -1) || (i < j)))
      {
        msg = msg.mid(i+1);

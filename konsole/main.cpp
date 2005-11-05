@@ -20,8 +20,8 @@
 #include <qdir.h>
 #include <qsessionmanager.h>
 #include <qwidget.h>
-//Added by qt3to4:
-#include <Q3StrList>
+
+#include <QStringList>
 
 #include <dcopclient.h>
 
@@ -102,7 +102,7 @@ static bool fixed_size = false;
 
 bool argb_visual = false;
 
-const char *konsole_shell(Q3StrList &args)
+const char *konsole_shell(QStringList &args)
 {
   const char* shell = getenv("SHELL");
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
@@ -305,7 +305,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   }
   login_shell = args->isSet("ls");
 
-  Q3StrList eargs;
+  QStringList eargs;
 
   const char* shell = 0;
   if (!args->getOption("e").isEmpty())

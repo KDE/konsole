@@ -85,7 +85,7 @@ Time to start a requirement list.
 //Added by qt3to4:
 #include <QMouseEvent>
 #include <QFrame>
-#include <Q3StrList>
+#include <QStringList>
 #include <QKeyEvent>
 #include <QEvent>
 #include <QTextStream>
@@ -1449,10 +1449,10 @@ void Konsole::saveProperties(KConfig* config) {
 //KDE4: Need to test this conversion q3strlist to qstringlist
 //        config->writeEntry(key, sessions.current()->getArgs());
         QStringList args_sl;
-        Q3StrList args = sessions.current()->getArgs();
-        Q3StrListIterator it( args );
-        for (; it.current(); ++it)
-            args_sl << QString(it.current());
+        QStringList args = sessions.current()->getArgs();
+        QStringListIterator it( args );
+        while(it.hasNext())
+            args_sl << QString(it.next());
         config->writeEntry(key, args_sl);
 
         key = QString("Pgm%1").arg(counter);
@@ -2659,7 +2659,7 @@ void Konsole::setDefaultSession(const QString &filename)
   m_defaultSessionFilename=filename;
 }
 
-void Konsole::newSession(const QString &pgm, const Q3StrList &args, const QString &term, const QString &icon, const QString &title, const QString &cwd)
+void Konsole::newSession(const QString &pgm, const QStringList &args, const QString &term, const QString &icon, const QString &title, const QString &cwd)
 {
   KSimpleConfig *co = defaultSession();
   newSession(co, pgm, args, term, icon, title, cwd);
@@ -2668,7 +2668,7 @@ void Konsole::newSession(const QString &pgm, const Q3StrList &args, const QStrin
 QString Konsole::newSession()
 {
   KSimpleConfig *co = defaultSession();
-  return newSession(co, QString::null, Q3StrList());
+  return newSession(co, QString::null, QStringList());
 }
 
 void Konsole::newSession(int i)
@@ -2727,7 +2727,7 @@ QString Konsole::newSession(const QString &type)
   return newSession(co);
 }
 
-QString Konsole::newSession(KSimpleConfig *co, QString program, const Q3StrList &args,
+QString Konsole::newSession(KSimpleConfig *co, QString program, const QStringList &args,
                             const QString &_term,const QString &_icon,
                             const QString &_title, const QString &_cwd)
 {
@@ -2738,7 +2738,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const Q3StrList 
   QString txt;
   QString cwd;
   QFont font = defaultFont;
-  Q3StrList cmdArgs;
+  QStringList cmdArgs;
 
   if (co) {
      co->setDesktopGroup();
@@ -2882,14 +2882,14 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const Q3StrList 
  */
 void Konsole::newSession(const QString& sURL, const QString& title)
 {
-   Q3StrList args;
+   QStringList args;
    QString protocol, path, login, host;
 
    KURL url = KURL(sURL);
    if ((url.protocol() == "file") && (url.hasPath())) {
      KSimpleConfig *co = defaultSession();
      path = url.path();
-     newSession(co, QString::null, Q3StrList(), QString::null, QString::null,
+     newSession(co, QString::null, QStringList(), QString::null, QString::null,
                 title.isEmpty() ? path : title, path);
      return;
    }

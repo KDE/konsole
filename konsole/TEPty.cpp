@@ -77,8 +77,7 @@
 #include <kpty.h>
 
 #include "TEPty.h"
-//Added by qt3to4:
-#include <Q3StrList>
+#include <QStringList>
 
 
 void TEPty::donePty()
@@ -119,16 +118,16 @@ void TEPty::setErase(char erase)
 /*!
     start the client program.
 */
-int TEPty::run(const char* _pgm, Q3StrList & _args, const char* _term, ulong winid, bool _addutmp,
+int TEPty::run(const char* _pgm, QStringList & _args, const char* _term, ulong winid, bool _addutmp,
                const char* _konsole_dcop, const char* _konsole_dcop_session)
 {
   clearArguments();
 
   setBinaryExecutable(_pgm);
 
-  Q3StrListIterator it( _args );
-  for (; it.current(); ++it )
-    arguments.append(it.current());
+  QStringListIterator it( _args );
+  while (it.hasNext())
+    arguments.append( it.next().toUtf8() );
 
   if (_term && _term[0])
      setEnvironment("TERM",_term);

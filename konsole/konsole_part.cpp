@@ -26,9 +26,8 @@
 #include <qfile.h>
 #include <qlayout.h>
 #include <qmatrix.h>
-//Added by qt3to4:
 #include <QPixmap>
-#include <Q3StrList>
+#include <QStringList>
 #include <QFrame>
 #include <QHBoxLayout>
 
@@ -145,7 +144,7 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
 
   m_streamEnabled = ( classname && strcmp( classname, "TerminalEmulator" ) == 0 );
 
-  Q3StrList eargs;
+  QStringList eargs;
 
 
   const char* shell = getenv("SHELL");
@@ -1045,7 +1044,7 @@ const char* sensibleShell()
 }
 
 void konsolePart::startProgram( const QString& program,
-                                const Q3StrList& args )
+                                const QStringList& args )
 {
   if ( se ) delete se;
   se = new TESession(te, program, args, "xterm", parentWidget->winId());
@@ -1085,7 +1084,7 @@ void konsolePart::showShellInDir( const QString& dir )
   if ( ! m_runningShell )
   {
     const char* s = sensibleShell();
-    Q3StrList args;
+    QStringList args;
     args.append( s );
     startProgram( s, args );
     m_runningShell = true;

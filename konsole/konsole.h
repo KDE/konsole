@@ -24,7 +24,7 @@
 
 #include <kwinmodule.h>
 
-#include <q3strlist.h>
+#include <qstringlist.h>
 #include <q3intdict.h>
 #include <q3ptrdict.h>
 #include <qsignalmapper.h>
@@ -62,7 +62,7 @@ class KTabWidget;
 class QToolButton;
 
 // Defined in main.C
-const char *konsole_shell(Q3StrList &args);
+const char *konsole_shell(QStringList &args);
 
 class Konsole : public KMainWindow, virtual public KonsoleIface
 {
@@ -87,7 +87,7 @@ public:
   void initMonitorSilence(bool on);
   void initMasterMode(bool on);
   void initTabColor(QColor color);
-  void newSession(const QString &program, const Q3StrList &args, const QString &term, const QString &icon, const QString &title, const QString &cwd);
+  void newSession(const QString &program, const QStringList &args, const QString &term, const QString &icon, const QString &title, const QString &cwd);
   void setSchema(const QString & path);
   void setEncoding(int);
   void setSessionTitle(QString&, TESession* = 0);
@@ -250,7 +250,7 @@ private slots:
   void slotSetEncoding();
 private:
   KSimpleConfig *defaultSession();
-  QString newSession(KSimpleConfig *co, QString pgm = QString::null, const Q3StrList &args = Q3StrList(),
+  QString newSession(KSimpleConfig *co, QString pgm = QString::null, const QStringList &args = QStringList(),
                      const QString &_term = QString::null, const QString &_icon = QString::null,
                      const QString &_title = QString::null, const QString &_cwd = QString::null);
   void readProperties(KConfig *config, const QString &schema, bool globalConfigOnly);

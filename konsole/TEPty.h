@@ -20,7 +20,7 @@
 
 #include <kprocess.h>
 #include <qsocketnotifier.h>
-#include <q3strlist.h>
+#include <qstringlist.h>
 #include <q3valuelist.h>
 #include <q3memarray.h>
 #include <QList>
@@ -41,7 +41,7 @@ Q_OBJECT
      * the necessary connections to the signals and slots of the
      * instance before starting the execution of the client.
      */
-    int run( const char* pgm, Q3StrList & args, const char* term, ulong winid, bool _addutmp,
+    int run( const char* pgm, QStringList & args, const char* term, ulong winid, bool _addutmp,
              const char* konsole_dcop = "", const char* konsole_dcop_session = "" );
     void setWriteable(bool writeable);
     QString error() { return m_strError; }

@@ -15,9 +15,8 @@
 
 #include <kapplication.h>
 #include <kmainwindow.h>
-#include <q3strlist.h>
-//Added by qt3to4:
-#include <Q3CString>
+#include <qstringlist.h>
+#include <QByteArray>
 
 #include "TEPty.h"
 #include "TEWidget.h"
@@ -35,7 +34,7 @@ class TESession : public QObject, virtual public SessionIface
 public:
 
   TESession(TEWidget* w,
-            const QString &pgm, const Q3StrList & _args,
+            const QString &pgm, const QStringList & _args,
 	    const QString &term, ulong winId, const QString &sessionId="session-1",
 	    const QString &initial_cwd = QString::null);
   void changeWidget(TEWidget* w);
@@ -60,7 +59,7 @@ public:
   QString fullTitle() const;
   int keymapNo();
   QString keymap();
-  Q3StrList getArgs();
+  QStringList getArgs();
   QString getPgm();
   QString getCwd();
   QString getInitial_cwd() { return initial_cwd; }
@@ -199,7 +198,7 @@ private:
   QString	 stateIconName;
 
   QString        pgm;
-  Q3StrList       args;
+  QStringList       args;
 
   QString        term;
   ulong          winId;
