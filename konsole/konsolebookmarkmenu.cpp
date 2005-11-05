@@ -19,7 +19,6 @@
 #include <kmenu.h>
 #include <kstandarddirs.h>
 #include <kaction.h>
-#include <q3ptrlist.h>
 
 #include "konsole.h"
 #include "konsolebookmarkmenu.h"
