@@ -67,6 +67,7 @@ Comment=Watch for messages from local users sent with write(1) or wall(1)
 Comment[af]=Kyk uit vir boodskappe vanaf plaaslike gebruikers wat met write(1) of wall(1) gestuur is
 Comment[bs]=Prati poruke od lokalnih korisnika poslane koristeći write(1) ili wall(1)
 Comment[ca]=Fes atenció als missatges dels usuaris locals enviats amb write(1) o wall(1)
+Comment[cs]=Sledování zpráv od místních uživatelů poslaných pomocí write(1) nebo wall(1)
 Comment[cy]=Gwylio am negeseuon oddiwrth defnyddwyr lleol a anfonwyd efo write(1) neu wall(1)
 Comment[da]=Kig efter beskeder fra lokale brugere sendt med write(1) eller wall(1)
 Comment[de]=Meldungen lokaler Benutzer überwachen, die über write(1) oder wall(1) ausgegeben wurden
