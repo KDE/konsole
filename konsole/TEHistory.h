@@ -17,7 +17,7 @@
 #include <q3ptrvector.h>
 #include <qbitarray.h>
 //Added by qt3to4:
-#include <Q3MemArray>
+#include <QVector>
 
 #include <ktempfile.h>
 
@@ -116,7 +116,7 @@ private:
 class HistoryScrollBuffer : public HistoryScroll
 {
 public:
-  typedef Q3MemArray<ca> histline;
+  typedef QVector<ca> histline;
 
   HistoryScrollBuffer(unsigned int maxNbLines = 1000);
   virtual ~HistoryScrollBuffer();

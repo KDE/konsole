@@ -220,7 +220,8 @@ void HistoryScrollBuffer::addCells(ca a[], int count)
 
   histline* newLine = new histline;
 
-  newLine->duplicate(a, count);
+  newLine->resize(count);
+  qCopy(a,a+count,newLine->begin());
   
   ++m_arrayIndex;
   if (m_arrayIndex >= m_maxNbLines) {
