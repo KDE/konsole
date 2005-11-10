@@ -1113,16 +1113,16 @@ void Konsole::makeBasicGUI()
   new KAction(i18n("Activate Menu"), Qt::CTRL+Qt::ALT+Qt::Key_M, this, SLOT(activateMenu()), m_shortcuts, "activate_menu");
   new KAction(i18n("List Sessions"), 0, this, SLOT(listSessions()), m_shortcuts, "list_sessions");
 
-  m_moveSessionLeft = new KAction(i18n("&Move Session Left"), QApplication::reverseLayout() ? "forward" : "back",
-                                        QApplication::reverseLayout() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Right : Qt::CTRL+Qt::SHIFT+Qt::Key_Left, this,
+  m_moveSessionLeft = new KAction(i18n("&Move Session Left"), QApplication::isRightToLeft() ? "forward" : "back",
+                                        QApplication::isRightToLeft() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Right : Qt::CTRL+Qt::SHIFT+Qt::Key_Left, this,
                                         SLOT(moveSessionLeft()), m_shortcuts, "move_session_left");
-  m_moveSessionRight = new KAction(i18n("M&ove Session Right"), QApplication::reverseLayout() ? "back" : "forward",
-                                        QApplication::reverseLayout() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Left : Qt::CTRL+Qt::SHIFT+Qt::Key_Right, this,
+  m_moveSessionRight = new KAction(i18n("M&ove Session Right"), QApplication::isRightToLeft() ? "back" : "forward",
+                                        QApplication::isRightToLeft() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Left : Qt::CTRL+Qt::SHIFT+Qt::Key_Right, this,
                                         SLOT(moveSessionRight()), m_shortcuts, "move_session_right");
 
-  new KAction(i18n("Go to Previous Session"), QApplication::reverseLayout() ? Qt::SHIFT+Qt::Key_Right : Qt::SHIFT+Qt::Key_Left,
+  new KAction(i18n("Go to Previous Session"), QApplication::isRightToLeft() ? Qt::SHIFT+Qt::Key_Right : Qt::SHIFT+Qt::Key_Left,
               this, SLOT(prevSession()), m_shortcuts, "previous_session");
-  new KAction(i18n("Go to Next Session"), QApplication::reverseLayout() ? Qt::SHIFT+Qt::Key_Left : Qt::SHIFT+Qt::Key_Right,
+  new KAction(i18n("Go to Next Session"), QApplication::isRightToLeft() ? Qt::SHIFT+Qt::Key_Left : Qt::SHIFT+Qt::Key_Right,
               this, SLOT(nextSession()), m_shortcuts, "next_session");
 
   for (int i=1;i<13;i++) { // Due to 12 function keys?

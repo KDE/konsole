@@ -724,7 +724,7 @@ void TestTokenizer(QBuffer &buf)
 {
   // opening sequence
 
-  buf.open(IO_ReadOnly);
+  buf.open(QIODevice::ReadOnly);
   cc = buf.getch();
   lineno = 1;
 
