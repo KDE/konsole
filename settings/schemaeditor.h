@@ -26,7 +26,7 @@
 #include <qwidget.h>
 //Added by qt3to4:
 #include <QPixmap>
-#include <Q3MemArray>
+#include <QVector>
 class QPixmap;
 class KSharedPixmap;
 
@@ -67,10 +67,10 @@ class SchemaEditor : public SchemaDialog
 	void updatePreview();
   private:
 	bool schMod;
-  	Q3MemArray<QColor> color;
-	Q3MemArray<int> type; // 0= custom, 1= sysfg, 2=sysbg, 3=rcolor
-	Q3MemArray<bool> transparent;
-	Q3MemArray<bool> bold;
+  	QVector<QColor> color;
+	QVector<int> type; // 0= custom, 1= sysfg, 2=sysbg, 3=rcolor
+	QVector<bool> transparent;
+	QVector<bool> bold;
 	QPixmap pix;
 	KSharedPixmap *spix;
 	QString defaultSchema;	
