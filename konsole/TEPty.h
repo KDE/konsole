@@ -22,7 +22,7 @@
 #include <qsocketnotifier.h>
 #include <qstringlist.h>
 #include <q3valuelist.h>
-#include <q3memarray.h>
+#include <QVector>
 #include <QList>
 
 class TEPty: public KProcess
@@ -98,10 +98,11 @@ Q_OBJECT
     struct SendJob {
       SendJob() {}
       SendJob(const char* b, int len) {
-        buffer.duplicate(b,len);
+		buffer.resize(len);
+		qCopy(b, b+len, buffer.begin());
         length = len;
       }
-      Q3MemArray<char> buffer;
+      QVector<char> buffer;
       int length;
     };
     QList<SendJob> pendingSendJobs;
