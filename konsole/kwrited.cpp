@@ -2,8 +2,6 @@
 
 #include <dcopclient.h>
 #include <qsocketnotifier.h>
-//Added by qt3to4:
-#include <Q3CString>
 
 #include <kuniqueapplication.h>
 #include <kcmdlineargs.h>
@@ -79,7 +77,7 @@ void KWrited::block_in(int fd)
   wid->raise();
 }
 
-KWritedModule::KWritedModule( const Q3CString& obj )
+KWritedModule::KWritedModule( const DCOPCString& obj )
     : KDEDModule( obj )
 {
     KGlobal::locale()->insertCatalog("konsole");
@@ -93,7 +91,7 @@ KWritedModule::~KWritedModule()
 }
 
 extern "C"
-KDE_EXPORT KDEDModule* create_kwrited( const Q3CString& obj )
+KDE_EXPORT KDEDModule* create_kwrited( const DCOPCString& obj )
     {
     return new KWritedModule( obj );
     }
