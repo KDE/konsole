@@ -200,7 +200,7 @@ void SchemaEditor::previewLoaded(bool l)
     if (l) {
 	QMatrix mat;
 	pix =
-	    spix->xForm(mat.
+	    spix->transformed(mat.
 			scale(180.0 / spix->QPixmap::width(),
 			      100.0 / spix->QPixmap::height()));
 	kdDebug(0) << "Loaded" << endl;

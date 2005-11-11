@@ -1721,7 +1721,7 @@ void Konsole::pixmap_menu_activated(int item, TEWidget* tewidget)
               float sy = (float)tewidget->size().height() / pm.height();
               QMatrix matrix;
               matrix.scale( sx, sy );
-              tewidget->setBackgroundPixmap(pm.xForm( matrix ));
+              tewidget->setBackgroundPixmap(pm.transformed( matrix ));
             }
     break;
     default: // oops

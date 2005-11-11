@@ -824,7 +824,7 @@ void konsolePart::pixmap_menu_activated(int item)
               float sy = (float)te->size().height() / pm.height();
               QMatrix matrix;
               matrix.scale( sx, sy );
-              te->setBackgroundPixmap(pm.xForm( matrix ));
+              te->setBackgroundPixmap(pm.transformed( matrix ));
             }
     break;
     default: // oops
