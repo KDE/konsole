@@ -632,6 +632,9 @@ void Konsole::makeGUI()
       selectSetEncoding = new KSelectAction( i18n( "&Encoding" ), SmallIconSet( "charset" ), 0, this, SLOT(slotSetEncoding()), actions, "set_encoding" );
       QStringList list = KGlobal::charsets()->descriptiveEncodingNames();
       list.prepend( i18n( "Default" ) );
+
+      // BR114535 : Remove jis7 due to infinite loop.
+      list.remove( i18n( "Japanese ( jis7 )" ) );
       selectSetEncoding->setItems(list);
       selectSetEncoding->setCurrentItem (0);
       selectSetEncoding->plug(m_options);
