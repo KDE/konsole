@@ -634,6 +634,8 @@ void Konsole::makeGUI()
       list.prepend( i18n( "Default" ) );
 
       // BR114535 : Remove jis7 due to infinite loop.
+      // If you fix this issue and remove the line below,  remember to 
+      // remove the line in setSessionEncoding() (search for jis7).
       list.remove( i18n( "Japanese ( jis7 )" ) );
       selectSetEncoding->setItems(list);
       selectSetEncoding->setCurrentItem (0);
@@ -1485,8 +1487,15 @@ void Konsole::saveProperties(KConfig* config) {
   config->writeEntry("DynamicTabHide", b_dynamicTabHide);
   config->writeEntry("AutoResizeTabs", b_autoResizeTabs);
 
+  if (selectSetEncoding)
+  {
+    QString encoding = KGlobal::charsets()->encodingForName(selectSetEncoding->currentText());
+    config->writeEntry("EncodingName", encoding);
+  } else {    // This will not always work (ie 'winsami' saves as 'ws2')
+    if (se) config->writeEntry("EncodingName", se->encoding());
+  }
+
   if (se) {
-    config->writeEntry("EncodingName", se->encoding());
     config->writeEntry("history", se->history().getSize());
     config->writeEntry("historyenabled", b_histEnabled);
   }
@@ -2604,37 +2613,28 @@ void Konsole::setSessionEncoding( const QString &encoding, TESession *session )
     if ( !session )
         session = se;
 
-    // availableEncodingNames and descriptEncodingNames are NOT returned
-    // in the same order.
-    QStringList items = KGlobal::charsets()->descriptiveEncodingNames();
-    QString enc;
-
-    // For purposes of using 'find' add a space after name,
-    // otherwise 'iso 8859-1' will find 'iso 8859-13'
-    QString t_enc = encoding + " ";
-    unsigned int i = 0;
-
-    for( QStringList::ConstIterator it = items.begin(); it != items.end();
-         ++it, ++i)
-    {
-        if ( (*it).find( t_enc ) != -1 )
-        {
-            enc = *it;
-            break;
-        }
-    }
-    if (i >= items.count())
-        return;
-
     bool found = false;
-    enc = KGlobal::charsets()->encodingForName(enc);
+    QString enc = KGlobal::charsets()->encodingForName(encoding);
     QTextCodec * qtc = KGlobal::charsets()->codecForName(enc, found);
-
-    //kdDebug()<<"setSessionEncoding="<<enc<<"; "<<i<<"; found="<<found<<endl;
-    if ( !found )
+    if ( !found || !qtc )
         return;
 
-    session->setEncodingNo( i + 1 );    // Take into account Default
+    // Encoding was found; now try to figure out which Encoding menu item
+    // it corresponds to.
+    int i = 0;
+    QStringList encodingNames = KGlobal::charsets()->descriptiveEncodingNames();
+    QStringList::Iterator it = encodingNames.begin();
+    while ( it != encodingNames.end() && 
+            KGlobal::charsets()->encodingForName(*it) != encoding )
+    {
+      i++; it++;
+    }
+
+    i++;                 // Take into account the first entry: Default
+    if ( i > 24 ) i--;   // Handle the removed jis7 entry
+    //kdDebug()<<"setSessionEncoding="<<encoding<<"; "<<i<<endl;
+
+    session->setEncodingNo( i );
     session->getEmulation()->setCodec(qtc);
     if (se == session)
         activateSession(se);
