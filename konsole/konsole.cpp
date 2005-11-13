@@ -632,11 +632,6 @@ void Konsole::makeGUI()
       selectSetEncoding = new KSelectAction( i18n( "&Encoding" ), SmallIconSet( "charset" ), 0, this, SLOT(slotSetEncoding()), actions, "set_encoding" );
       QStringList list = KGlobal::charsets()->descriptiveEncodingNames();
       list.prepend( i18n( "Default" ) );
-
-      // BR114535 : Remove jis7 due to infinite loop.
-      // If you fix this issue and remove the line below,  remember to 
-      // remove the line in setSessionEncoding() (search for jis7).
-      list.remove( i18n( "Japanese ( jis7 )" ) );
       selectSetEncoding->setItems(list);
       selectSetEncoding->setCurrentItem (0);
       selectSetEncoding->plug(m_options);
@@ -863,6 +858,14 @@ void Konsole::slotSetEncoding()
     bool found;
     QString enc = KGlobal::charsets()->encodingForName(selectSetEncoding->currentText());
     qtc = KGlobal::charsets()->codecForName(enc, found);
+
+    // BR114535 : Remove jis7 due to infinite loop.
+    if ( enc == "jis7" ) {
+      kdWarning()<<"Encoding Japanese (jis7) currently does not work!  BR114535"<<endl;
+      qtc = QTextCodec::codecForLocale();
+      selectSetEncoding->setCurrentItem( 0 );
+    }
+
     if(!found)
     {
       kdWarning() << "Codec " << selectSetEncoding->currentText() << " not found!" << endl;
@@ -2631,7 +2634,6 @@ void Konsole::setSessionEncoding( const QString &encoding, TESession *session )
     }
 
     i++;                 // Take into account the first entry: Default
-    if ( i > 24 ) i--;   // Handle the removed jis7 entry
     //kdDebug()<<"setSessionEncoding="<<encoding<<"; "<<i<<endl;
 
     session->setEncodingNo( i );
