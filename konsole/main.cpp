@@ -460,7 +460,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
        shell = konsole_shell(eargs);
 
     if (profile.isEmpty())
-      sessionconfig = a.sessionConfig();
+      sessionconfig = KGlobal::config();
     sessionconfig->setDesktopGroup();
     int n = 1;
 
