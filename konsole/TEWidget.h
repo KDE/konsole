@@ -44,7 +44,7 @@ extern unsigned short vt100_graphics[32];
 class Konsole;
 class QLabel;
 class QTimer;
-class Q3Frame;
+class QFrame;
 
 class TEWidget : public QFrame
 // a widget representing attributed text
@@ -287,7 +287,7 @@ private:
     static bool s_antialias;   // do we antialias or not
     static bool s_standalone;  // are we part of a standalone konsole?
 
-    Q3Frame *mResizeWidget;
+    QFrame *mResizeWidget;
     QLabel *mResizeLabel;
     QTimer *mResizeTimer;
 

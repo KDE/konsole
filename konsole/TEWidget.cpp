@@ -61,7 +61,7 @@
 #include <QResizeEvent>
 #include <QMouseEvent>
 #include <QFocusEvent>
-#include <Q3Frame>
+#include <QFrame>
 #include <QKeyEvent>
 #include <QEvent>
 #include <QWheelEvent>
@@ -932,7 +932,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
      }
      if (!mResizeWidget)
      {
-        mResizeWidget = new Q3Frame(this);
+        mResizeWidget = new QFrame(this);
         QFont f = KGlobalSettings::generalFont();
         int fs = f.pointSize();
         if (fs == -1)
@@ -940,7 +940,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
         f.setPointSize((fs*3)/2);
         f.setBold(true);
         mResizeWidget->setFont(f);
-        mResizeWidget->setFrameShape((Q3Frame::Shape) (Q3Frame::Box|Q3Frame::Raised));
+        mResizeWidget->setFrameShape((QFrame::Shape) (QFrame::Box|QFrame::Raised));
         mResizeWidget->setMidLineWidth(4);
         QBoxLayout *l = new QVBoxLayout( mResizeWidget, 10);
         mResizeLabel = new QLabel(i18n("Size: XXX x XXX"), mResizeWidget);

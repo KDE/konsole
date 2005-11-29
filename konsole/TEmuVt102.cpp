@@ -41,7 +41,7 @@
 #include <kdebug.h>
 //Added by qt3to4:
 #include <QKeyEvent>
-#include <Q3CString>
+#include <QByteArray>
 
 /* VT102 Terminal Emulation
 
@@ -964,7 +964,7 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
   if (!ev->text().isEmpty())
   {
     if (ev->state() & Qt::AltModifier) sendString("\033"); // ESC, this is the ALT prefix
-    Q3CString s = m_codec->fromUnicode(ev->text());     // encode for application
+    QByteArray s = m_codec->fromUnicode(ev->text());     // encode for application
     // FIXME: In Qt 2, QKeyEvent::text() would return "\003" for Ctrl-C etc.
     //        while in Qt 3 it returns the actual key ("c" or "C") which caused
     //        the ControlButton to be ignored. This hack seems to work for

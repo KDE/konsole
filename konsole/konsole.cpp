@@ -79,7 +79,6 @@ Time to start a requirement list.
 #include <qimage.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
-#include <q3hbox.h>
 #include <qtoolbutton.h>
 #include <qtooltip.h>
 //Added by qt3to4:

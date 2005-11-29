@@ -21,7 +21,6 @@
 #include <kprocess.h>
 #include <qsocketnotifier.h>
 #include <qstringlist.h>
-#include <q3valuelist.h>
 #include <QVector>
 #include <QList>
 
