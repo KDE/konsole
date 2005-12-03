@@ -2568,7 +2568,7 @@ void Konsole::activateSession(TESession *s)
   if (rootxpms[te])
     rootxpms[te]->start();
   notifySize(te->Columns(), te->Lines()); // set menu items
-  s->setConnect(true);
+  se->setConnect(true);
   updateTitle();
   if (!m_menuCreated)
      return;
