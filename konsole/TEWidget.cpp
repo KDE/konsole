@@ -2147,7 +2147,7 @@ void TEWidget::dropEvent(QDropEvent* event)
    {
       m_drop = new KMenu(this);
       m_drop->insertItem( i18n("Paste"), paste );
-      m_drop->insertSeparator();
+      m_drop->addSeparator();
       m_drop->insertItem( "cd", cd );
       m_drop->insertItem( "cp", cp );
       m_drop->insertItem( "ln", ln );

@@ -338,7 +338,7 @@ void konsolePart::makeGUI()
      selectScrollbar->plug(m_options);
 
      // Select Bell
-     m_options->insertSeparator();
+     m_options->addSeparator();
      selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), 0 , this,
                                  SLOT(slotSelectBell()), settingsActions, "bell");
 
@@ -387,7 +387,7 @@ void konsolePart::makeGUI()
      KAction *historyType = new KAction(i18n("&History..."), "history", 0, this,
                                         SLOT(slotHistoryType()), settingsActions, "history");
      historyType->plug(m_options);
-     m_options->insertSeparator();
+     m_options->addSeparator();
 
      // Select line spacing
      selectLineSpacing = new KSelectAction(i18n("Li&ne Spacing"),
@@ -425,13 +425,13 @@ void konsolePart::makeGUI()
      WordSeps->plug(m_options);
 
      // Use Konsole's Settings
-     m_options->insertSeparator();
+     m_options->addSeparator();
      m_useKonsoleSettings = new KToggleAction( i18n("&Use Konsole's Settings"),
                           0, this, SLOT(slotUseKonsoleSettings()), 0, "use_konsole_settings" );
      m_useKonsoleSettings->plug(m_options);
 
      // Save Settings
-     m_options->insertSeparator();
+     m_options->addSeparator();
      KAction *saveSettings = new KAction(i18n("&Save as Default"), "filesave", 0, this,
                     SLOT(saveProperties()), actions, "save_default");
      saveSettings->plug(m_options);
@@ -456,13 +456,13 @@ void konsolePart::makeGUI()
   if (m_signals)
   {
      m_popupMenu->insertItem(i18n("&Send Signal"), m_signals);
-     m_popupMenu->insertSeparator();
+     m_popupMenu->addSeparator();
   }
 
   if (m_options)
   {
      m_popupMenu->insertItem(i18n("S&ettings"), m_options);
-     m_popupMenu->insertSeparator();
+     m_popupMenu->addSeparator();
   }
 
   KAction *closeSession = new KAction(i18n("&Close Terminal Emulator"), "fileclose", 0, this,

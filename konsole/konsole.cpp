@@ -510,21 +510,21 @@ void Konsole::makeGUI()
       m_edit->insertItem( i18n("&Send Signal"), m_signals );
 
    if ( m_zmodemUpload ) {
-      m_edit->insertSeparator();
+      m_edit->addSeparator();
       m_zmodemUpload->plug( m_edit );
    }
 
-   m_edit->insertSeparator();
+   m_edit->addSeparator();
    m_clearTerminal->plug(m_edit);
 
    m_resetClearTerminal->plug(m_edit);
 
-   m_edit->insertSeparator();
+   m_edit->addSeparator();
    m_findHistory->plug(m_edit);
    m_findNext->plug(m_edit);
    m_findPrevious->plug(m_edit);
    m_saveHistory->plug(m_edit);
-   m_edit->insertSeparator();
+   m_edit->addSeparator();
    m_clearHistory->plug(m_edit);
    m_clearAllSessionHistories->plug(m_edit);
 
@@ -532,20 +532,20 @@ void Konsole::makeGUI()
    m_detachSession->plug(m_view);
    m_renameSession->plug(m_view);
 
-   m_view->insertSeparator();
+   m_view->addSeparator();
    monitorActivity->plug ( m_view );
    monitorSilence->plug ( m_view );
 
    masterMode->plug ( m_view );
 
-   m_view->insertSeparator();
+   m_view->addSeparator();
    m_moveSessionLeft->setEnabled( false );
    m_moveSessionLeft->plug(m_view);
 
    m_moveSessionRight->setEnabled( false );
    m_moveSessionRight->plug(m_view);
 
-   m_view->insertSeparator();
+   m_view->addSeparator();
    KRadioAction *ra = session2action.find(se);
    if (ra!=0) ra->plug(m_view);
 
@@ -597,11 +597,11 @@ void Konsole::makeGUI()
       selectScrollbar->plug(m_options);
 
       // Fullscreen
-      m_options->insertSeparator();
+      m_options->addSeparator();
       if (m_fullscreen)
       {
         m_fullscreen->plug(m_options);
-        m_options->insertSeparator();
+        m_options->addSeparator();
       }
 
       // Select Bell
@@ -668,17 +668,17 @@ void Konsole::makeGUI()
                                       SLOT(slotHistoryType()), actions, "history");
       historyType->plug(m_options);
 
-      m_options->insertSeparator();
+      m_options->addSeparator();
 
       KAction *save_settings = new KAction(i18n("&Save as Default"), "filesave", 0, this,
                                         SLOT(slotSaveSettings()), actions, "save_default");
       save_settings->plug(m_options);
 
-      m_options->insertSeparator();
+      m_options->addSeparator();
 
       m_saveProfile->plug(m_options);
 
-      m_options->insertSeparator();
+      m_options->addSeparator();
 
       KStdAction::configureNotifications(this, SLOT(slotConfigureNotifications()), actionCollection())->plug(m_options);
       KStdAction::keyBindings(this, SLOT(slotConfigureKeys()), actionCollection())->plug(m_options);
@@ -716,7 +716,7 @@ void Konsole::makeGUI()
       if (m_signals)
          m_rightButton->insertItem(i18n("&Send Signal"), m_signals);
 
-      m_rightButton->insertSeparator();
+      m_rightButton->addSeparator();
       if (m_tabbarSessionsCommands)
          m_rightButton->insertItem( i18n("New Sess&ion"), m_tabbarSessionsCommands, POPUP_NEW_SESSION_ID );
       m_detachSession->plug(m_rightButton);
@@ -724,7 +724,7 @@ void Konsole::makeGUI()
 
       if (m_bookmarks)
       {
-         m_rightButton->insertSeparator();
+         m_rightButton->addSeparator();
          m_rightButton->insertItem(i18n("&Bookmarks"), m_bookmarks);
       }
 
@@ -733,7 +733,7 @@ void Konsole::makeGUI()
          m_separator_id=m_rightButton->insertSeparator();
          m_rightButton->insertItem(i18n("S&ettings"), m_options, POPUP_SETTINGS_ID);
       }
-      m_rightButton->insertSeparator();
+      m_rightButton->addSeparator();
       m_closeSession->plug(m_rightButton );
       if (KGlobalSettings::insertTearOffHandle())
          m_rightButton->insertTearOffHandle();
@@ -791,7 +791,7 @@ void Konsole::makeGUI()
 
    m_tabPopupMenu->insertItem( i18n("&Rename Session..."), this,
                          SLOT(slotTabRenameSession()) );
-   m_tabPopupMenu->insertSeparator();
+   m_tabPopupMenu->addSeparator();
 
   m_tabMonitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ),
       SmallIconSet("activity"), 0, this, SLOT( slotTabToggleMonitor() ), actionCollection() );
@@ -807,16 +807,16 @@ void Konsole::makeGUI()
                                     SLOT( slotTabToggleMasterMode() ), actionCollection());
    m_tabMasterMode->plug(m_tabPopupMenu);
 
-   m_tabPopupMenu->insertSeparator();
+   m_tabPopupMenu->addSeparator();
    m_tabPopupMenu->insertItem( SmallIconSet("colors"), i18n("Select &Tab Color..."), this, SLOT(slotTabSelectColor()) );
 
-   m_tabPopupMenu->insertSeparator();
+   m_tabPopupMenu->addSeparator();
    m_tabPopupTabsMenu = new KMenu( m_tabPopupMenu );
    m_tabPopupMenu->insertItem( i18n("Switch to Tab" ), m_tabPopupTabsMenu );
    connect( m_tabPopupTabsMenu, SIGNAL( activated ( int ) ),
             SLOT( activateSession( int ) ) );
 
-   m_tabPopupMenu->insertSeparator();
+   m_tabPopupMenu->addSeparator();
    m_tabPopupMenu->insertItem( SmallIcon("fileclose"), i18n("C&lose Session"), this,
                           SLOT(slotTabCloseSession()) );
 
@@ -3206,14 +3206,14 @@ void Konsole::buildSessionMenus()
 
    if (KAuthorized::authorizeKAction("file_print"))
    {
-      m_session->insertSeparator();
+      m_session->addSeparator();
       m_print->plug(m_session);
    }
 
-   m_session->insertSeparator();
+   m_session->addSeparator();
    m_closeSession->plug(m_session);
 
-   m_session->insertSeparator();
+   m_session->addSeparator();
    m_quit->plug(m_session);
 }
 
@@ -3359,10 +3359,10 @@ void Konsole::createSessionMenus()
 */
   if (m_bookmarksSession)
   {
-    m_session->insertSeparator();
+    m_session->addSeparator();
     m_session->insertItem(SmallIconSet("keditbookmarks"),
                           i18n("New Shell at Bookmark"), m_bookmarksSession);
-    m_tabbarSessionsCommands->insertSeparator();
+    m_tabbarSessionsCommands->addSeparator();
     m_tabbarSessionsCommands->insertItem(SmallIconSet("keditbookmarks"),
                           i18n("Shell at Bookmark"), m_bookmarksSession);
   }
