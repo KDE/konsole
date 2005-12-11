@@ -789,7 +789,7 @@ void Konsole::makeGUI()
    m_tabDetachSession= new KAction( i18n("&Detach Session"), SmallIconSet("tab_breakoff"), 0, this, SLOT(slotTabDetachSession()), actionCollection(), 0 );
    m_tabDetachSession->plug(m_tabPopupMenu);
 
-   m_tabPopupMenu->insertItem( i18n("&Rename Session..."), this,
+   m_tabPopupMenu->addAction( i18n("&Rename Session..."), this,
                          SLOT(slotTabRenameSession()) );
    m_tabPopupMenu->addSeparator();
 
@@ -808,7 +808,7 @@ void Konsole::makeGUI()
    m_tabMasterMode->plug(m_tabPopupMenu);
 
    m_tabPopupMenu->addSeparator();
-   m_tabPopupMenu->insertItem( SmallIconSet("colors"), i18n("Select &Tab Color..."), this, SLOT(slotTabSelectColor()) );
+   m_tabPopupMenu->addAction( SmallIconSet("colors"), i18n("Select &Tab Color..."), this, SLOT(slotTabSelectColor()) );
 
    m_tabPopupMenu->addSeparator();
    m_tabPopupTabsMenu = new KMenu( m_tabPopupMenu );
@@ -817,7 +817,7 @@ void Konsole::makeGUI()
             SLOT( activateSession( int ) ) );
 
    m_tabPopupMenu->addSeparator();
-   m_tabPopupMenu->insertItem( SmallIcon("fileclose"), i18n("C&lose Session"), this,
+   m_tabPopupMenu->addAction( SmallIcon("fileclose"), i18n("C&lose Session"), this,
                           SLOT(slotTabCloseSession()) );
 
    if (m_options) {
