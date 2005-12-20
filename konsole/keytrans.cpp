@@ -23,7 +23,7 @@
 #include <q3intdict.h>
 #include <q3dict.h>
 #include <qfile.h>
-
+#include <q3dict.h>
 #include <kstandarddirs.h>
 #include <klocale.h>
 

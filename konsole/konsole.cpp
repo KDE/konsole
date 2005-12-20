@@ -2899,7 +2899,7 @@ void Konsole::newSession(const QString& sURL, const QString& title)
      host = url.host();
      if (url.port() && isSSH) {
        args.append("-p");
-       args.append(Q3CString().setNum(url.port()));
+       args.append(QByteArray().setNum(url.port()));
      }
      if (url.hasUser()) {
        login = url.user();
@@ -2908,7 +2908,7 @@ void Konsole::newSession(const QString& sURL, const QString& title)
      }
      args.append(host.latin1());
      if (url.port() && !isSSH)
-       args.append(Q3CString().setNum(url.port()));
+       args.append(QByteArray().setNum(url.port()));
      newSession( NULL, protocol.latin1() /* protocol */, args /* arguments */,
                  QString::null /*term*/, QString::null /*icon*/,
  	        title.isEmpty() ? path : title /*title*/, QString::null /*cwd*/);
