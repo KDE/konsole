@@ -32,7 +32,7 @@ fontembedder_LDFLAGS = $(all_libraries)
 fontembedder_LDADD = $(LIB_QT)
 
 # kwrited kded module
-kded_kwrited_la_SOURCES = kwrited.cpp TEPty.cpp kwrited.skel
+kded_kwrited_la_SOURCES = kwrited.cpp kwrited.skel
 kded_kwrited_la_LIBADD  = $(LIB_KDECORE) 
 kded_kwrited_la_LDFLAGS = $(all_libraries) -module -avoid-version
 
