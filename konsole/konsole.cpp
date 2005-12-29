@@ -932,7 +932,7 @@ bool Konsole::eventFilter( QObject *o, QEvent *ev )
       if ((mev->pos() - m_newSessionButtonMousePressPos).manhattanLength()
             > KGlobalSettings::dndEventDelay())
       {
-        m_newSessionButton->openPopup();
+        m_newSessionButton->showMenu();
         return true;
       }
     }
