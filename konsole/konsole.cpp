@@ -505,7 +505,6 @@ void Konsole::makeGUI()
    m_copyClipboard->plug(m_edit);
    m_pasteClipboard->plug(m_edit);
 
-   m_edit->setCheckable(true);
    if (m_signals)
       m_edit->insertItem( i18n("&Send Signal"), m_signals );
 
@@ -563,14 +562,12 @@ void Konsole::makeGUI()
 
    // Schema Options Menu -----------------------------------------------------
    m_schema = new KMenu(this);
-   m_schema->setCheckable(true);
    KAcceleratorManager::manage( m_schema );
    connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
    connect(m_schema, SIGNAL(aboutToShow()), SLOT(schema_menu_check()));
 
    // Keyboard Options Menu ---------------------------------------------------
    m_keytab = new KMenu(this);
-   m_keytab->setCheckable(true);
    KAcceleratorManager::manage( m_keytab );
    connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
 

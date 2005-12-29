@@ -368,7 +368,6 @@ void konsolePart::makeGUI()
      if (KAuthorized::authorizeKAction("keyboard"))
      {
         m_keytab = new KMenu((KMainWindow*)parentWidget);
-        m_keytab->setCheckable(true);
         connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
         m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
      }
@@ -377,7 +376,6 @@ void konsolePart::makeGUI()
      if (KAuthorized::authorizeKAction("schema"))
      {
         m_schema = new KMenu((KMainWindow*)parentWidget);
-        m_schema->setCheckable(true);
         connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
         connect(m_schema, SIGNAL(aboutToShow()), SLOT(schema_menu_check()));
         m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Sch&ema" ), m_schema);
