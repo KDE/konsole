@@ -367,7 +367,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
 ,colorsSwapped(false)
 ,rimX(1)
 ,rimY(1)
-,m_imPreeditText(QString::null)
+,m_imPreeditText(QString())
 ,m_imPreeditLength(0)
 ,m_imStart(0)
 ,m_imStartLine(0)
@@ -1892,7 +1892,7 @@ void TEWidget::imStartEvent( QIMEvent */*e*/ )
 
 void TEWidget::imComposeEvent( QIMEvent *e )
 {
-  QString text = QString::null;
+  QString text.clear();
   if ( m_imPreeditLength > 0 ) {
     text.fill( '\010', m_imPreeditLength );
   }
@@ -1916,7 +1916,7 @@ void TEWidget::imComposeEvent( QIMEvent *e )
 
 void TEWidget::imEndEvent( QIMEvent *e )
 {
-  QString text = QString::null;
+  QString text.clear();
   if ( m_imPreeditLength > 0 ) {
       text.fill( '\010', m_imPreeditLength );
   }

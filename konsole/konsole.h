@@ -74,7 +74,7 @@ public:
   Konsole(const char * name, int histon, bool menubaron, bool tabbaron,
     bool frameon, bool scrollbaron,
     Q3CString type = 0, bool b_inRestore = false, const int wanted_tabbar = 0,
-    const QString &workdir=QString::null);
+    const QString &workdir=QString());
 
   ~Konsole();
   void setColLin(int columns, int lines);
@@ -250,9 +250,9 @@ private slots:
   void slotSetEncoding();
 private:
   KSimpleConfig *defaultSession();
-  QString newSession(KSimpleConfig *co, QString pgm = QString::null, const QStringList &args = QStringList(),
-                     const QString &_term = QString::null, const QString &_icon = QString::null,
-                     const QString &_title = QString::null, const QString &_cwd = QString::null);
+  QString newSession(KSimpleConfig *co, QString pgm = QString(), const QStringList &args = QStringList(),
+                     const QString &_term = QString(), const QString &_icon = QString(),
+                     const QString &_title = QString(), const QString &_cwd = QString());
   void readProperties(KConfig *config, const QString &schema, bool globalConfigOnly);
   void applySettingsToGUI();
   void makeTabWidget();

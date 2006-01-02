@@ -381,7 +381,7 @@ void Konsole::setAutoClose(bool on)
 
 void Konsole::showTip()
 {
-   KTipDialog::showTip(this,QString::null,true);
+   KTipDialog::showTip(this,QString(),true);
 }
 
 void Konsole::showTipOnStart()
@@ -1083,7 +1083,7 @@ void Konsole::makeBasicGUI()
 
   showMenubar = new KToggleAction ( i18n( "Show &Menubar" ), "showmenu", 0, this,
                                     SLOT( slotToggleMenubar() ), m_shortcuts, "show_menubar" );
-  showMenubar->setCheckedState( KGuiItem( i18n("Hide &Menubar"), "showmenu", QString::null, QString::null ) );
+  showMenubar->setCheckedState( KGuiItem( i18n("Hide &Menubar"), "showmenu", QString(), QString() ) );
 
   m_fullscreen = KStdAction::fullScreen(0, 0, m_shortcuts, this );
   connect( m_fullscreen,SIGNAL(toggled(bool)), this,SLOT(updateFullScreen(bool)));
@@ -1406,7 +1406,7 @@ void Konsole::slotSaveSessionsProfile()
 
   QString prof = KInputDialog::getText( i18n( "Save Sessions Profile" ),
       i18n( "Enter name under which the profile should be saved:" ),
-      QString::null, &ok, this );
+      QString(), &ok, this );
   if ( ok ) {
     QString path = locateLocal( "data",
         QString::fromLatin1( "konsole/profiles/" ) + prof,
@@ -1526,7 +1526,7 @@ void Konsole::saveProperties(KConfig* config) {
 // So it has to apply the settings when reading them.
 void Konsole::readProperties(KConfig* config)
 {
-    readProperties(config, QString::null, false);
+    readProperties(config, QString(), false);
 }
 
 // If --type option was given, load the corresponding schema instead of
@@ -1852,7 +1852,7 @@ void Konsole::createSessionTab(TEWidget *widget, const QIcon &iconSet,
     tabwidget->insertTab(widget, QIcon(), text, index);
     break;
   case ShowIconOnly:
-    tabwidget->insertTab(widget, iconSet, QString::null, index);
+    tabwidget->insertTab(widget, iconSet, QString(), index);
     break;
   }
   //if ( m_tabColor.isValid() )
@@ -1965,7 +1965,7 @@ void Konsole::slotConfigure()
 void Konsole::reparseConfiguration()
 {
   KGlobal::config()->reparseConfiguration();
-  readProperties(KGlobal::config(), QString::null, true);
+  readProperties(KGlobal::config(), QString(), true);
 
   // The .desktop files may have been changed by user...
   b_sessionShortcutsMapped = false;
@@ -2664,7 +2664,7 @@ void Konsole::newSession(const QString &pgm, const QStringList &args, const QStr
 QString Konsole::newSession()
 {
   KSimpleConfig *co = defaultSession();
-  return newSession(co, QString::null, QStringList());
+  return newSession(co, QString(), QStringList());
 }
 
 void Konsole::newSession(int i)
@@ -2885,7 +2885,7 @@ void Konsole::newSession(const QString& sURL, const QString& title)
    if ((url.protocol() == "file") && (url.hasPath())) {
      KSimpleConfig *co = defaultSession();
      path = url.path();
-     newSession(co, QString::null, QStringList(), QString::null, QString::null,
+     newSession(co, QString(), QStringList(), QString(), QString(),
                 title.isEmpty() ? path : title, path);
      return;
    }
@@ -2907,8 +2907,8 @@ void Konsole::newSession(const QString& sURL, const QString& title)
      if (url.port() && !isSSH)
        args.append(QByteArray().setNum(url.port()));
      newSession( NULL, protocol.latin1() /* protocol */, args /* arguments */,
-                 QString::null /*term*/, QString::null /*icon*/,
- 	        title.isEmpty() ? path : title /*title*/, QString::null /*cwd*/);
+                 QString() /*term*/, QString() /*icon*/,
+ 	        title.isEmpty() ? path : title /*title*/, QString() /*cwd*/);
      return;
    }
    /*
@@ -3305,7 +3305,7 @@ void Konsole::loadSessionCommands()
   if (!KAuthorized::authorizeKAction("shell_access"))
      return;
 
-  addSessionCommand(QString::null);
+  addSessionCommand(QString());
 
   QStringList lst = KGlobal::dirs()->findAllResources("appdata", "*.desktop", false, true);
 
@@ -3919,7 +3919,7 @@ void Konsole::slotSaveHistory()
 {
   // FIXME - mostLocalURL can't handle non-existing files yet, so this
   //         code doesn't work.
-  KURL s_url = KFileDialog::getSaveURL(QString::null, QString::null, 0L, i18n("Save History"));
+  KURL s_url = KFileDialog::getSaveURL(QString(), QString(), 0L, i18n("Save History"));
   if( s_url.isEmpty())
       return;
   KURL url = KIO::NetAccess::mostLocalURL( s_url, 0 );
@@ -3975,12 +3975,12 @@ void Konsole::slotZModemUpload()
     return;
   }
 
-  QStringList files = KFileDialog::getOpenFileNames(QString::null, QString::null, this,
+  QStringList files = KFileDialog::getOpenFileNames(QString(), QString(), this,
   	i18n("Select Files to Upload"));
   if (files.isEmpty())
     return;
 
-  se->startZModem(zmodem, QString::null, files);
+  se->startZModem(zmodem, QString(), files);
 }
 
 void Konsole::slotZModemDetected(TESession *session)
@@ -4111,7 +4111,7 @@ KonsoleFind::KonsoleFind( QWidget *parent, const char *name, bool /*modal*/ )
 void KonsoleFind::slotEditRegExp()
 {
   if ( m_editorDialog == 0 )
-    m_editorDialog = KParts::ComponentFactory::createInstanceFromQuery<QDialog>( "KRegExpEditor/KRegExpEditor", QString::null, this );
+    m_editorDialog = KParts::ComponentFactory::createInstanceFromQuery<QDialog>( "KRegExpEditor/KRegExpEditor", QString(), this );
 
   assert( m_editorDialog );
 

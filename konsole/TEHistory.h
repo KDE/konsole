@@ -240,7 +240,7 @@ protected:
 class HistoryTypeFile : public HistoryType
 {
 public:
-  HistoryTypeFile(const QString& fileName=QString::null);
+  HistoryTypeFile(const QString& fileName=QString());
 
   virtual bool isOn() const;
   virtual const QString& getFileName() const;

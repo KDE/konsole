@@ -1099,7 +1099,7 @@ void konsolePart::showShellInDir( const QString& dir )
 
 void konsolePart::showShell()
 {
-    if ( ! se ) showShellInDir( QString::null );
+    if ( ! se ) showShellInDir( QString() );
 }
 
 void konsolePart::sendInput( const QString& text )

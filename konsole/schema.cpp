@@ -138,7 +138,7 @@ ColorSchema::ColorSchema(const QString& pathname)
   QString fPath = pathname.startsWith("/") ? pathname : locate("data", "konsole/"+pathname);
   if (fPath.isEmpty() || !QFile::exists(fPath))
   {
-    fRelPath = QString::null;
+    fRelPath.clear();
     setDefaultSchema();
   }
   else
@@ -154,7 +154,7 @@ ColorSchema::ColorSchema(const QString& pathname)
 
 ColorSchema::ColorSchema()
 :m_fileRead(false)
-,fRelPath(QString::null)
+,fRelPath(QString())
 ,lastRead(0L)
 {
   setDefaultSchema();
@@ -163,7 +163,7 @@ ColorSchema::ColorSchema()
 
 ColorSchema::ColorSchema(KConfig& c)
 :m_fileRead(false)
-,fRelPath(QString::null)
+,fRelPath(QString())
 ,lastRead(0L)
 {
   clearSchema();
@@ -237,7 +237,7 @@ void ColorSchema::setDefaultSchema()
       << i
       << " out of range."
       << endl;
-    return QString::null;
+    return QString();
   }
 
   return QString(colornames[i]);

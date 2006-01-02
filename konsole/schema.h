@@ -105,7 +105,7 @@ public:
 
 	/**
 	* Returns the (non-i18n) name of the i'th color,
-	* or QString::null if i is not a color name. This
+	* or QString() if i is not a color name. This
 	* should be used as a group name to store the
 	* information about the i'th color.
 	*/

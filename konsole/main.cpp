@@ -581,7 +581,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   else
   {
     Konsole*  m = new Konsole(wname,histon,menubaron,tabbaron,frameon,scrollbaron,type, false, 0, workDir);
-    m->newSession((shell ? QFile::decodeName(shell) : QString::null), eargs, term, QString::null, title, workDir);
+    m->newSession((shell ? QFile::decodeName(shell) : QString()), eargs, term, QString(), title, workDir);
     m->enableFullScripting(full_script);
     m->enableFixedSize(fixed_size);
     //3.8 :-(
