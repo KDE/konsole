@@ -483,7 +483,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         int session_count = sessionconfig->readNumEntry("numSes");
         int counter = 0;
 
-        wname = sessionconfig->readEntry("class",wname).latin1();
+        wname = sessionconfig->readEntry("class",QString(wname)).latin1();
 
         sPgm = sessionconfig->readEntry("Pgm0", shell);
         QStringList eargs_sl = sessionconfig->readListEntry("Args0");
@@ -533,24 +533,24 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
              eargs.append(eargs_sl.at(i).ascii());
 
           key = QString("Pgm%1").arg(counter);
-          sPgm = sessionconfig->readEntry(key, shell);
+          sPgm = sessionconfig->readEntry(key, QString(shell));
           key = QString("Term%1").arg(counter);
-          sTerm = sessionconfig->readEntry(key);
+          sTerm = sessionconfig->readEntry(key, QString());
           key = QString("Icon%1").arg(counter);
-          sIcon = sessionconfig->readEntry(key,"konsole");
+          sIcon = sessionconfig->readEntry(key,QString("konsole"));
           key = QString("Cwd%1").arg(counter);
           sCwd = sessionconfig->readPathEntry(key);
           m->newSession(sPgm, eargs, sTerm, sIcon, sTitle, sCwd);
           m->setSessionTitle(sTitle);  // Use title as is
           key = QString("Schema%1").arg(counter);
-          m->setSchema(sessionconfig->readEntry(key));
+          m->setSchema(sessionconfig->readEntry(key, QString()));
           key = QString("Encoding%1").arg(counter);
           m->setEncoding(sessionconfig->readNumEntry(key));
           key = QString("SessionFont%1").arg(counter);
           QFont tmpFont = KGlobalSettings::fixedFont();
           m->initSessionFont(sessionconfig->readFontEntry(key, &tmpFont));
           key = QString("KeyTab%1").arg(counter);
-          m->initSessionKeyTab(sessionconfig->readEntry(key));
+          m->initSessionKeyTab(sessionconfig->readEntry(key, QString()));
           key = QString("MonitorActivity%1").arg(counter);
           m->initMonitorActivity(sessionconfig->readBoolEntry(key,false));
           key = QString("MonitorSilence%1").arg(counter);
