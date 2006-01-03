@@ -165,7 +165,7 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   // Check to see which config file we use: konsolepartrc or konsolerc
   KConfig* config = new KConfig("konsolepartrc", true);
   config->setDesktopGroup();
-  b_useKonsoleSettings = config->readBoolEntry("use_konsole_settings", false);
+  b_useKonsoleSettings = config->readEntry("use_konsole_settings", QVariant(false)).toBool();
   delete config;
 
   readProperties();
@@ -512,7 +512,7 @@ void konsolePart::applyProperties()
    // FIXME:  Move this somewhere else...
    KConfig* config = new KConfig("konsolerc",true);
    config->setGroup("UTMP");
-   se->setAddToUtmp( config->readBoolEntry("AddToUtmp",true));
+   se->setAddToUtmp( config->readEntry("AddToUtmp", QVariant(true)).toBool());
    delete config;
 
    se->widget()->setVTFont( defaultFont );
@@ -545,8 +545,8 @@ void konsolePart::readProperties()
 
   config->setDesktopGroup();
 
-  b_framevis = config->readBoolEntry("has frame",false);
-  b_histEnabled = config->readBoolEntry("historyenabled",true);
+  b_framevis = config->readEntry("has frame", QVariant(false)).toBool();
+  b_histEnabled = config->readEntry("historyenabled", QVariant(true)).toBool();
   n_bell = qMin(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),3u);
   n_keytab=config->readNumEntry("keytab",0); // act. the keytab for this session
   n_scroll = qMin(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2u);
@@ -588,7 +588,7 @@ void konsolePart::readProperties()
   }
 
   te->setBellMode(n_bell);
-  te->setBlinkingCursor(config->readBoolEntry("BlinkingCursor",false));
+  te->setBlinkingCursor(config->readEntry("BlinkingCursor", QVariant(false)).toBool());
   te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
   te->setLineSpacing( config->readUnsignedNumEntry( "LineSpacing", 0 ) );
   te->setScrollbarLocation(n_scroll);
@@ -598,7 +598,7 @@ void konsolePart::readProperties()
 
   config = new KConfig("konsolerc",true);
   config->setDesktopGroup();
-  te->setTerminalSizeHint( config->readBoolEntry("TerminalSizeHint",true) );
+  te->setTerminalSizeHint( config->readEntry("TerminalSizeHint", QVariant(true)).toBool() );
   delete config;
 }
 

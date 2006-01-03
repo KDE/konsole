@@ -173,7 +173,7 @@ ColorSchema::ColorSchema(KConfig& c)
   m_title = c.readEntry("Title",i18n("[no title]"));
   m_imagePath = c.readEntry("ImagePath");
   m_alignment = c.readNumEntry("ImageAlignment",1);
-  m_useTransparency = c.readBoolEntry("UseTransparency",false);
+  m_useTransparency = c.readEntry("UseTransparency", QVariant(false)).toBool();
 
   m_tr_r = c.readNumEntry("TransparentR",0);
   m_tr_g = c.readNumEntry("TransparentG",0);
@@ -260,8 +260,8 @@ void ColorSchema::readConfigColor(KConfig& c,
   KConfigGroup configGroup(&c,name);
 
   e.color = configGroup.readColorEntry("Color");
-  e.transparent = configGroup.readBoolEntry("Transparent",false);
-  e.bold = configGroup.readBoolEntry("Bold",false);
+  e.transparent = configGroup.readEntry("Transparent", QVariant(false)).toBool();
+  e.bold = configGroup.readEntry("Bold", QVariant(false)).toBool();
 }
 
 

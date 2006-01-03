@@ -513,9 +513,9 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         QFont tmpFont = KGlobalSettings::fixedFont();
         m->initSessionFont(sessionconfig->readFontEntry("SessionFont0", &tmpFont));
         m->initSessionKeyTab(sessionconfig->readEntry("KeyTab0"));
-        m->initMonitorActivity(sessionconfig->readBoolEntry("MonitorActivity0",false));
-        m->initMonitorSilence(sessionconfig->readBoolEntry("MonitorSilence0",false));
-        m->initMasterMode(sessionconfig->readBoolEntry("MasterMode0",false));
+        m->initMonitorActivity(sessionconfig->readEntry("MonitorActivity0", QVariant(false)).toBool());
+        m->initMonitorSilence(sessionconfig->readEntry("MonitorSilence0", QVariant(false)).toBool());
+        m->initMasterMode(sessionconfig->readEntry("MasterMode0", QVariant(false)).toBool());
         m->initTabColor(sessionconfig->readColorEntry("TabColor0"));
         counter++;
 
@@ -552,11 +552,11 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
           key = QString("KeyTab%1").arg(counter);
           m->initSessionKeyTab(sessionconfig->readEntry(key, QString()));
           key = QString("MonitorActivity%1").arg(counter);
-          m->initMonitorActivity(sessionconfig->readBoolEntry(key,false));
+          m->initMonitorActivity(sessionconfig->readEntry(key, QVariant(false)).toBool());
           key = QString("MonitorSilence%1").arg(counter);
-          m->initMonitorSilence(sessionconfig->readBoolEntry(key,false));
+          m->initMonitorSilence(sessionconfig->readEntry(key, QVariant(false)).toBool());
           key = QString("MasterMode%1").arg(counter);
-          m->initMasterMode(sessionconfig->readBoolEntry(key,false));
+          m->initMasterMode(sessionconfig->readEntry(key, QVariant(false)).toBool());
           key = QString("TabColor%1").arg(counter);
           m->initTabColor(sessionconfig->readColorEntry(key));
           counter++;

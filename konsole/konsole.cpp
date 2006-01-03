@@ -315,7 +315,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
     n_tabbar = wanted_tabbar;
     KConfig *c = KApplication::kApplication()->sessionConfig();
     c->setDesktopGroup();
-    b_dynamicTabHide = c->readBoolEntry("DynamicTabHide", false);
+    b_dynamicTabHide = c->readEntry("DynamicTabHide", QVariant(false)).toBool();
   }
 
   if (!tabbaron)
@@ -1131,7 +1131,7 @@ void Konsole::makeBasicGUI()
   new KAction(i18n("Toggle Bidi"), Qt::CTRL+Qt::ALT+Qt::Key_B, this, SLOT(toggleBidi()), m_shortcuts, "toggle_bidi");
 
   // Should we load all *.desktop files now?  Required for Session shortcuts.
-  if ( KConfigGroup(KGlobal::config(), "General").readBoolEntry("SessionShortcutsEnabled", false) ) {
+  if ( KConfigGroup(KGlobal::config(), "General").readEntry("SessionShortcutsEnabled", QVariant(false)).toBool() ) {
     b_sessionShortcutsEnabled = true;
     loadSessionCommands();
     loadScreenSessions();
@@ -1540,19 +1540,19 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
    if (config==KGlobal::config())
    {
      config->setDesktopGroup();
-     b_warnQuit=config->readBoolEntry( "WarnQuit", true );
-     b_allowResize=config->readBoolEntry( "AllowResize", false);
-     b_bidiEnabled = config->readBoolEntry("EnableBidi",false);
+     b_warnQuit=config->readEntry( "WarnQuit", QVariant(true )).toBool();
+     b_allowResize=config->readEntry( "AllowResize", QVariant(false)).toBool();
+     b_bidiEnabled = config->readEntry("EnableBidi", QVariant(false)).toBool();
      s_word_seps= config->readEntry("wordseps",":@-./_~");
-     b_framevis = config->readBoolEntry("has frame",true);
+     b_framevis = config->readEntry("has frame", QVariant(true)).toBool();
      Q3PtrList<TEWidget> tes = activeTEs();
      for (TEWidget *_te = tes.first(); _te; _te = tes.next()) {
        _te->setWordCharacters(s_word_seps);
-       _te->setTerminalSizeHint( config->readBoolEntry("TerminalSizeHint",false) );
+       _te->setTerminalSizeHint( config->readEntry("TerminalSizeHint", QVariant(false)).toBool() );
        _te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
-       _te->setBlinkingCursor(config->readBoolEntry("BlinkingCursor",false));
-       _te->setCtrlDrag(config->readBoolEntry("CtrlDrag",true));
-       _te->setCutToBeginningOfLine(config->readBoolEntry("CutToBeginningOfLine",false));
+       _te->setBlinkingCursor(config->readEntry("BlinkingCursor", QVariant(false)).toBool());
+       _te->setCtrlDrag(config->readEntry("CtrlDrag", QVariant(true)).toBool());
+       _te->setCutToBeginningOfLine(config->readEntry("CutToBeginningOfLine", QVariant(false)).toBool());
        _te->setLineSpacing( config->readUnsignedNumEntry( "LineSpacing", 0 ) );
        _te->setBidiEnabled(b_bidiEnabled);
      }
@@ -1561,10 +1561,10 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
      for (TESession *ses = sessions.first(); ses; ses = sessions.next())
        ses->setMonitorSilenceSeconds(monitorSilenceSeconds);
 
-     b_xonXoff = config->readBoolEntry("XonXoff",false);
-     b_matchTabWinTitle = config->readBoolEntry("MatchTabWinTitle",false);
+     b_xonXoff = config->readEntry("XonXoff", QVariant(false)).toBool();
+     b_matchTabWinTitle = config->readEntry("MatchTabWinTitle", QVariant(false)).toBool();
      config->setGroup("UTMP");
-     b_addToUtmp = config->readBoolEntry("AddToUtmp",true);
+     b_addToUtmp = config->readEntry("AddToUtmp", QVariant(true)).toBool();
      config->setDesktopGroup();
 
      // Do not set a default value; this allows the System-wide Scheme
@@ -1575,7 +1575,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
    if (!globalConfigOnly)
    {
       n_defaultKeytab=KeyTrans::find(config->readEntry("keytab","default"))->numb(); // act. the keytab for this session
-      b_fullscreen = config->readBoolEntry("Fullscreen",false);
+      b_fullscreen = config->readEntry("Fullscreen", QVariant(false)).toBool();
       n_scroll   = qMin(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2u);
       n_tabbar   = qMin(config->readUnsignedNumEntry("tabbar",TabBottom),2u);
       n_bell = qMin(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),3u);
@@ -1625,12 +1625,12 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
 
       // History
       m_histSize = config->readNumEntry("history",DEFAULT_HISTORY_SIZE);
-      b_histEnabled = config->readBoolEntry("historyenabled",true);
+      b_histEnabled = config->readEntry("historyenabled", QVariant(true)).toBool();
 
       // Tab View Mode
       m_tabViewMode = TabViewModes(config->readNumEntry("TabViewMode", ShowIconAndText));
-      b_dynamicTabHide = config->readBoolEntry("DynamicTabHide", false);
-      b_autoResizeTabs = config->readBoolEntry("AutoResizeTabs", false);
+      b_dynamicTabHide = config->readEntry("DynamicTabHide", QVariant(false)).toBool();
+      b_autoResizeTabs = config->readEntry("AutoResizeTabs", QVariant(false)).toBool();
 
       s_encodingName = config->readEntry( "EncodingName", "" ).lower();
    }
@@ -2650,7 +2650,7 @@ void Konsole::setDefaultSession(const QString &filename)
   delete m_defaultSession;
   m_defaultSession = new KSimpleConfig(locate("appdata", filename), true /* read only */);
   m_defaultSession->setDesktopGroup();
-  b_showstartuptip = m_defaultSession->readBoolEntry("Tips", true);
+  b_showstartuptip = m_defaultSession->readEntry("Tips", QVariant(true)).toBool();
 
   m_defaultSessionFilename=filename;
 }
