@@ -49,7 +49,7 @@ void ZModemDialog::done()
 
 void ZModemDialog::slotClose()
 {
-  KDialogBase::slotClose();
+  KDialogBase::slotButtonClicked(KDialog::Close);
   delayedDestruct();
 }
 
