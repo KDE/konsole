@@ -519,6 +519,9 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         //FIXME: Verify this code when KDE4 supports tab colors... kvh
         QVariant v_tabColor = sessionconfig->readEntry("TabColor0");
         m->initTabColor( v_tabColor.value<QColor>() );
+        // -1 will be changed to the default history in konsolerc
+//        m->initHistory(sessionconfig->readNumEntry("History0", -1),
+//                       sessionconfig->readBoolEntry("HistoryEnabled0", true));
 
         counter++;
 
@@ -566,6 +569,15 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
           //FIXME: Verify this code when KDE4 supports tab colors... kvh
 //          QVariant v_tabColor = sessionconfig->readEntry(key));
 //          m->initTabColor( v_tabColor.value<QColor>() );
+
+/* Test this when the dialogs work again...kvh
+          // -1 will be changed to the default history in konsolerc
+          key = QString("History%1").arg(counter);
+          QString key2 = QString("HistoryEnabled%1").arg(counter);
+          m->initHistory(sessionconfig->readNumEntry(key, -1),
+                         sessionconfig->readBoolEntry(key2, true));
+*/
+
           counter++;
         }
         m->setDefaultSession( sessionconfig->readEntry("DefaultSession","shell.desktop") );
