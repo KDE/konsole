@@ -480,7 +480,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         if (!sessionconfig->hasKey("Pgm0"))
             sessionconfig->setDesktopGroup(); // Backwards compatible
 
-        int session_count = sessionconfig->readNumEntry("numSes");
+        int session_count = sessionconfig->readEntry("numSes").toInt();
         int counter = 0;
 
         wname = sessionconfig->readEntry("class",QString(wname)).latin1();
@@ -495,7 +495,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         sIcon = sessionconfig->readEntry("Icon0","konsole");
         sCwd = sessionconfig->readPathEntry("Cwd0");
         workDir = sessionconfig->readPathEntry("workdir");
-	n_tabbar = qMin(sessionconfig->readUnsignedNumEntry("tabbar",Konsole::TabBottom), 2u);
+        n_tabbar = qMin(sessionconfig->readEntry("tabbar", QVariant(Konsole::TabBottom)).toUInt(), 2u);
         Konsole *m = new Konsole(wname,histon,menubaron,tabbaron,frameon,scrollbaron,0/*type*/,true,n_tabbar, workDir);
 
         m->newSession(sPgm, eargs, sTerm, sIcon, sTitle, sCwd);
@@ -507,16 +507,19 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         if (!sessionconfig->hasKey("Pgm0"))
             sessionconfig->setDesktopGroup(); // Backwards compatible
         m->makeGUI();
-        m->setEncoding(sessionconfig->readNumEntry("Encoding0"));
+        m->setEncoding(sessionconfig->readEntry("Encoding0", QVariant(0)).toInt());
         m->setSchema(sessionconfig->readEntry("Schema0"));
         // Use konsolerc default as tmpFont instead?
-        QFont tmpFont = KGlobalSettings::fixedFont();
-        m->initSessionFont(sessionconfig->readFontEntry("SessionFont0", &tmpFont));
+        QVariant v_defaultFont = sessionconfig->readEntry("SessionFont0", QVariant(KGlobalSettings::fixedFont()));
+        m->initSessionFont( v_defaultFont.value<QFont>() );
         m->initSessionKeyTab(sessionconfig->readEntry("KeyTab0"));
         m->initMonitorActivity(sessionconfig->readEntry("MonitorActivity0", QVariant(false)).toBool());
         m->initMonitorSilence(sessionconfig->readEntry("MonitorSilence0", QVariant(false)).toBool());
         m->initMasterMode(sessionconfig->readEntry("MasterMode0", QVariant(false)).toBool());
-        m->initTabColor(sessionconfig->readColorEntry("TabColor0"));
+        //FIXME: Verify this code when KDE4 supports tab colors... kvh
+        QVariant v_tabColor = sessionconfig->readEntry("TabColor0");
+        m->initTabColor( v_tabColor.value<QColor>() );
+
         counter++;
 
         // show() before 2nd+ sessions are created allows --profile to
@@ -545,10 +548,11 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
           key = QString("Schema%1").arg(counter);
           m->setSchema(sessionconfig->readEntry(key, QString()));
           key = QString("Encoding%1").arg(counter);
-          m->setEncoding(sessionconfig->readNumEntry(key));
+          m->setEncoding(sessionconfig->readEntry(key, QVariant(0)).toInt());
           key = QString("SessionFont%1").arg(counter);
-          QFont tmpFont = KGlobalSettings::fixedFont();
-          m->initSessionFont(sessionconfig->readFontEntry(key, &tmpFont));
+          QVariant v_defaultFont = sessionconfig->readEntry(key, QVariant(KGlobalSettings::fixedFont()));
+          m->initSessionFont( v_defaultFont.value<QFont>() );
+
           key = QString("KeyTab%1").arg(counter);
           m->initSessionKeyTab(sessionconfig->readEntry(key, QString()));
           key = QString("MonitorActivity%1").arg(counter);
@@ -558,7 +562,10 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
           key = QString("MasterMode%1").arg(counter);
           m->initMasterMode(sessionconfig->readEntry(key, QVariant(false)).toBool());
           key = QString("TabColor%1").arg(counter);
-          m->initTabColor(sessionconfig->readColorEntry(key));
+//          m->initTabColor(sessionconfig->readColorEntry(key));
+          //FIXME: Verify this code when KDE4 supports tab colors... kvh
+//          QVariant v_tabColor = sessionconfig->readEntry(key));
+//          m->initTabColor( v_tabColor.value<QColor>() );
           counter++;
         }
         m->setDefaultSession( sessionconfig->readEntry("DefaultSession","shell.desktop") );
@@ -574,7 +581,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         }
 	// works only for the first one, but there won't be more.
         n++;
-        m->activateSession( sessionconfig->readNumEntry("ActiveSession",0) );
+        m->activateSession( sessionconfig->readEntry("ActiveSession", QVariant(0)).toInt() );
 	m->setAutoClose(auto_close);
     }
   }
