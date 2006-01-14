@@ -28,7 +28,6 @@
 #include <klocale.h>
 #include <kaboutdata.h>
 #include <kcmdlineargs.h>
-#include <kimageio.h>
 #include <kdebug.h>
 #include <kstandarddirs.h>
 #include <kglobalsettings.h>
@@ -287,9 +286,6 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 #else
   KApplication a;
 #endif
-
-  KImageIO::registerFormats(); // add io for additional image formats
-  //2.1 secs
 
   QString title;
   if(args->isSet("T")) {
