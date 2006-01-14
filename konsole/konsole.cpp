@@ -4010,7 +4010,7 @@ void Konsole::slotZModemDetected(TESession *session)
                    i18n("A ZModem file transfer attempt has been detected.\n"
                         "Please specify the folder you want to store the file(s):"),
                    this, "zmodem_dlg");
-  dlg.setButtonOK(KGuiItem( i18n("&Download"),
+  dlg.setButtonGuiItem(KDialog::Ok, KGuiItem( i18n("&Download"),
                        i18n("Start downloading file to specified folder."),
                        i18n("Start downloading file to specified folder.")));
   if (!dlg.exec())
