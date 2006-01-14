@@ -172,13 +172,13 @@ ColorSchema::ColorSchema(KConfig& c)
 
   m_title = c.readEntry("Title",i18n("[no title]"));
   m_imagePath = c.readEntry("ImagePath");
-  m_alignment = c.readNumEntry("ImageAlignment",1);
+  m_alignment = c.readEntry("ImageAlignment", QVariant(1)).toInt();
   m_useTransparency = c.readEntry("UseTransparency", QVariant(false)).toBool();
 
-  m_tr_r = c.readNumEntry("TransparentR",0);
-  m_tr_g = c.readNumEntry("TransparentG",0);
-  m_tr_b = c.readNumEntry("TransparentB",0);
-  m_tr_x = c.readDoubleNumEntry("TransparentX",0.0);
+  m_tr_r = c.readEntry("TransparentR", QVariant(0)).toInt();
+  m_tr_g = c.readEntry("TransparentG", QVariant(0)).toInt();
+  m_tr_b = c.readEntry("TransparentB", QVariant(0)).toInt();
+  m_tr_x = c.readEntry("TransparentX", QVariant(0.0)).toDouble();
 
   for (int i=0; i < TABLE_COLORS; i++)
   {
@@ -259,7 +259,9 @@ void ColorSchema::readConfigColor(KConfig& c,
 {
   KConfigGroup configGroup(&c,name);
 
-  e.color = configGroup.readColorEntry("Color");
+  QVariant v_color = configGroup.readEntry("Color");
+  e.color = v_color.value<QColor>();
+
   e.transparent = configGroup.readEntry("Transparent", QVariant(false)).toBool();
   e.bold = configGroup.readEntry("Bold", QVariant(false)).toBool();
 }
