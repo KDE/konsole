@@ -514,6 +514,9 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         m->initMonitorSilence(sessionconfig->readBoolEntry("MonitorSilence0",false));
         m->initMasterMode(sessionconfig->readBoolEntry("MasterMode0",false));
         m->initTabColor(sessionconfig->readColorEntry("TabColor0"));
+        // -1 will be changed to the default history in konsolerc
+        m->initHistory(sessionconfig->readNumEntry("History0", -1), 
+                       sessionconfig->readBoolEntry("HistoryEnabled0", true));
         counter++;
 
         // show() before 2nd+ sessions are created allows --profile to
@@ -553,6 +556,11 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
           m->initMasterMode(sessionconfig->readBoolEntry(key,false));
           key = QString("TabColor%1").arg(counter);
           m->initTabColor(sessionconfig->readColorEntry(key));
+          // -1 will be changed to the default history in konsolerc
+          key = QString("History%1").arg(counter);
+          QString key2 = QString("HistoryEnabled%1").arg(counter);
+          m->initHistory(sessionconfig->readNumEntry(key, -1), 
+                         sessionconfig->readBoolEntry(key2, true));
           counter++;
         }
         m->setDefaultSession( sessionconfig->readEntry("DefaultSession","shell.desktop") );

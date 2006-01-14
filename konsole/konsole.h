@@ -82,6 +82,7 @@ public:
   void initMonitorSilence(bool on);
   void initMasterMode(bool on);
   void initTabColor(QColor color);
+  void initHistory(int lines, bool enable);
   void newSession(const QString &program, const QStrList &args, const QString &term, const QString &icon, const QString &title, const QString &cwd);
   void setSchema(const QString & path);
   void setEncoding(int);

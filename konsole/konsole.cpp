@@ -1458,6 +1458,10 @@ void Konsole::saveProperties(KConfig* config) {
         config->writeEntry(key, sessions.current()->isMasterMode());
         key = QString("TabColor%1").arg(counter);
         config->writeEntry(key, tabwidget->tabColor((sessions.current())->widget()));
+        key = QString("History%1").arg(counter);
+        config->writeEntry(key, sessions.current()->history().getSize());
+        key = QString("HistoryEnabled%1").arg(counter);
+        config->writeEntry(key, sessions.current()->history().isOn());
 
         QString cwd=sessions.current()->getCwd();
         if (cwd.isEmpty())
@@ -3182,6 +3186,18 @@ void Konsole::initTabColor(QColor color)
 {
   if ( color.isValid() )
     tabwidget->setTabColor( se->widget(), color );
+}
+
+void Konsole::initHistory(int lines, bool enable)
+{
+   // If no History#= is given in the profile, use the history
+   // parameter saved in konsolerc.
+   if ( lines < 0 ) lines = m_histSize;
+
+   if ( enable )
+      se->setHistory( HistoryTypeBuffer( lines ) );
+   else
+      se->setHistory( HistoryTypeNone() );
 }
 
 void Konsole::slotToggleMasterMode()
