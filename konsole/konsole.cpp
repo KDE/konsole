@@ -1553,11 +1553,11 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
        _te->setBlinkingCursor(config->readEntry("BlinkingCursor", QVariant(false)).toBool());
        _te->setCtrlDrag(config->readEntry("CtrlDrag", QVariant(true)).toBool());
        _te->setCutToBeginningOfLine(config->readEntry("CutToBeginningOfLine", QVariant(false)).toBool());
-       _te->setLineSpacing( config->readUnsignedNumEntry( "LineSpacing", 0 ) );
+       _te->setLineSpacing( config->readEntry( "LineSpacing", QVariant(0)).toUInt() );
        _te->setBidiEnabled(b_bidiEnabled);
      }
 
-     monitorSilenceSeconds=config->readUnsignedNumEntry("SilenceSeconds", 10);
+     monitorSilenceSeconds=config->readEntry("SilenceSeconds", QVariant(10)).toUInt();
      for (TESession *ses = sessions.first(); ses; ses = sessions.next())
        ses->setMonitorSilenceSeconds(monitorSilenceSeconds);
 
@@ -1569,23 +1569,26 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
 
      // Do not set a default value; this allows the System-wide Scheme
      // to set the tab text color.
-     m_tabColor = config->readColorEntry("TabColor");
+//     m_tabColor = config->readColorEntry("TabColor");
+     //FIXME: Verify this code when KDE4 supports tab colors... kvh
+     QVariant v_tabColor = config->readEntry("TabColor");
+     m_tabColor = v_tabColor.value<QColor>();
    }
 
    if (!globalConfigOnly)
    {
       n_defaultKeytab=KeyTrans::find(config->readEntry("keytab","default"))->numb(); // act. the keytab for this session
       b_fullscreen = config->readEntry("Fullscreen", QVariant(false)).toBool();
-      n_scroll   = qMin(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2u);
-      n_tabbar   = qMin(config->readUnsignedNumEntry("tabbar",TabBottom),2u);
-      n_bell = qMin(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),3u);
-
+      n_scroll   = qMin(config->readEntry("scrollbar", QVariant(TEWidget::SCRRIGHT)).toUInt(),2u);
+      n_tabbar   = qMin(config->readEntry("tabbar", QVariant(TabBottom)).toUInt(),2u);
+      n_bell = qMin(config->readEntry("bellmode", QVariant(TEWidget::BELLSYSTEM)).toUInt(),3u);
+ 
       // Options that should be applied to all sessions /////////////
 
       // (1) set menu items and Konsole members
 
-      QFont tmpFont = KGlobalSettings::fixedFont();
-      defaultFont = config->readFontEntry("defaultfont", &tmpFont);
+      QVariant v_defaultFont = config->readEntry("defaultfont", QVariant(KGlobalSettings::fixedFont()));
+      defaultFont = v_defaultFont.value<QFont>();
 
       //set the schema
       s_kconfigSchema=config->readEntry("schema");
@@ -1624,11 +1627,11 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       }
 
       // History
-      m_histSize = config->readNumEntry("history",DEFAULT_HISTORY_SIZE);
+      m_histSize = config->readEntry("history", QVariant(DEFAULT_HISTORY_SIZE)).toInt();
       b_histEnabled = config->readEntry("historyenabled", QVariant(true)).toBool();
 
       // Tab View Mode
-      m_tabViewMode = TabViewModes(config->readNumEntry("TabViewMode", ShowIconAndText));
+      m_tabViewMode = TabViewModes(config->readEntry("TabViewMode", QVariant(ShowIconAndText)).toInt());
       b_dynamicTabHide = config->readEntry("DynamicTabHide", QVariant(false)).toBool();
       b_autoResizeTabs = config->readEntry("AutoResizeTabs", QVariant(false)).toBool();
 
@@ -2742,7 +2745,8 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStringLis
      key = co->readEntry("KeyTab", key);
      sch = co->readEntry("Schema", sch);
      txt = co->readEntry("Name");
-     font = co->readFontEntry("SessionFont", &font);
+     QVariant v_font = co->readEntry("defaultfont", QVariant(font));
+     font = v_font.value<QFont>();
      icon = co->readEntry("Icon", icon);
      cwd = co->readPathEntry("Cwd");
   }
