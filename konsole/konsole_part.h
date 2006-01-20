@@ -74,7 +74,7 @@ class konsolePart: public KParts::ReadOnlyPart, public TerminalInterface
     konsolePart(QWidget *parentWidget, const char *widgetName, QObject * parent, const char *name, const char *classname = 0);
     virtual ~konsolePart();
 
-signals:
+Q_SIGNALS:
     void processExited();
     void receivedData( const QString& s );
  protected:
@@ -83,7 +83,7 @@ signals:
     virtual bool closeURL() {return true;}
     virtual void guiActivateEvent( KParts::GUIActivateEvent * event );
 
- protected slots:
+ protected Q_SLOTS:
     void showShell();
     void slotProcessExited();
     void slotReceivedData( const QString& s );
@@ -94,7 +94,7 @@ signals:
     void updateTitle();
     void enableMasterModeConnections();
 
- private slots:
+ private Q_SLOTS:
     void emitOpenURLRequest(const QString &url);
 
     void readProperties();
@@ -206,7 +206,7 @@ public:
                     unsigned int histSize,
                     QWidget *parent);
 
-public slots:
+public Q_SLOTS:
   void slotDefault();
   void slotSetUnlimited();
   void slotHistEnable(bool);

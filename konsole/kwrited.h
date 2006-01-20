@@ -11,7 +11,7 @@ class KWrited : public QObject
 public:
   KWrited();
  ~KWrited();
-private slots:
+private Q_SLOTS:
   void block_in(int fd);
 private:
   Q3TextEdit* wid;

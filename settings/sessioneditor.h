@@ -39,14 +39,14 @@ class SessionEditor : public SessionDialog
     bool isModified() const { return sesMod; }
     void querySave();
 
-  signals:
+  Q_SIGNALS:
     void changed();
     void getList();
 
-  public slots:
+  public Q_SLOTS:
     void schemaListChanged(const QStringList &titles, const QStringList &filenames);
 
-  private slots:
+  private Q_SLOTS:
     void readSession(int);
     void saveCurrent();
     void removeCurrent();

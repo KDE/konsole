@@ -39,7 +39,7 @@ public:
    */
   void done();
 
-public slots:
+public Q_SLOTS:
   void slotClose();
   
 private:

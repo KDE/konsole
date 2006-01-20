@@ -55,11 +55,11 @@ public:
   ~TEmuVt102();
 
   virtual void onKeyPress(QKeyEvent*);
-public slots: // signals incoming from TEWidget
+public Q_SLOTS: // signals incoming from TEWidget
 
   void onMouse(int cb, int cx, int cy);
 
-signals:
+Q_SIGNALS:
 
   void changeTitle(int,const QString&);
 
@@ -69,7 +69,7 @@ public:
   void reset();
 
   void onRcvChar(int cc);
-public slots:
+public Q_SLOTS:
   void sendString(const char *);
 
 public:

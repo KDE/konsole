@@ -135,7 +135,7 @@ public:
 
     void setRim(int rim) { rimX=rim; rimY=rim; }
 
-public slots:
+public Q_SLOTS:
 
     void setSelectionEnd();
     void copyClipboard();
@@ -143,7 +143,7 @@ public slots:
     void pasteSelection();
     void onClearSelection();
 
-signals:
+Q_SIGNALS:
 
     void keyPressedSignal(QKeyEvent *e);
     void mouseSignal(int cb, int cx, int cy);
@@ -212,7 +212,7 @@ protected:
 
     void inputMethodEvent ( QInputMethodEvent * e );
 
-protected slots:
+protected Q_SLOTS:
 
     void scrollChanged(int value);
     void blinkEvent();
@@ -317,7 +317,7 @@ private:
 
     QRgb blend_color;
  
-private slots:
+private Q_SLOTS:
     void drop_menu_activated(int item);
     void swapColorTable();
     void tripleClickTimeout();  // resets possibleTripleClick

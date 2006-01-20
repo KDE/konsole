@@ -49,10 +49,10 @@ public:
 
     KMenu *menu() const { return m_menu; }
 
-private slots:
+private Q_SLOTS:
     void slotBookmarksChanged( const QString &, const QString & caller );
 
-signals:
+Q_SIGNALS:
     void openURL( const QString& url, const QString& title );
 
 private:

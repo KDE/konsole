@@ -47,11 +47,11 @@ class SchemaEditor : public SchemaDialog
     bool isModified() const { return schMod; }
     void querySave();
 
-  signals:
+  Q_SIGNALS:
   	void changed();
 	void schemaListChanged(const QStringList &titles, const QStringList &filenames);
 
-  public slots:
+  public Q_SLOTS:
   	void slotColorChanged(int);
   	void imageSelect();  	
 	void slotTypeChanged(int);
@@ -60,7 +60,7 @@ class SchemaEditor : public SchemaDialog
 	void removeCurrent();
 	void previewLoaded(bool l);		
 	void getList();
-  private slots:
+  private Q_SLOTS:
 	void show();
 	void schemaModified();
 	void loadAllSchema(QString currentFile="");

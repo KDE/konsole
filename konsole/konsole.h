@@ -121,7 +121,7 @@ public:
   enum TabPosition { TabNone, TabTop, TabBottom };
   enum TabViewModes { ShowIconAndText = 0, ShowTextOnly = 1, ShowIconOnly = 2 };
 
-public slots:
+public Q_SLOTS:
   void activateSession(int position);
   void activateSession(QWidget*);
   void slotUpdateSessionConfig(TESession *session);
@@ -139,7 +139,7 @@ protected:
  void saveProperties(KConfig* config);
  void readProperties(KConfig* config);
 
-private slots:
+private Q_SLOTS:
   void configureRequest(TEWidget*,int,int,int);
   void activateSession();
   void activateSession(TESession*);
@@ -443,7 +443,7 @@ public:
                     unsigned int histSize,
                     QWidget *parent);
 
-public slots:
+public Q_SLOTS:
 
   void slotHistEnable(bool);
   void slotDefault();
@@ -467,7 +467,7 @@ public:
              unsigned int const lines,
              QWidget *parent);
 
-public slots:
+public Q_SLOTS:
   void slotDefault();
 
   unsigned int columns() const;
@@ -485,7 +485,7 @@ public:
   KonsoleFind( QWidget *parent = 0, const char *name=0, bool modal=true );
   bool reg_exp() const;
 
-private slots:
+private Q_SLOTS:
   void slotEditRegExp();
 
 private:

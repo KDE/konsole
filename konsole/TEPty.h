@@ -48,12 +48,12 @@ Q_OBJECT
     void setSize(int lines, int cols);
     void setErase(char erase);
 
-  public slots:
+  public Q_SLOTS:
     void useUtf8(bool on);
     void lockPty(bool lock);
     void send_bytes(const char* s, int len);
 
-  signals:
+  Q_SIGNALS:
 
     /*!
         emitted when the client program terminates.
@@ -78,15 +78,15 @@ Q_OBJECT
     void send_string(const char* s);
     bool buffer_full() { return m_bufferFull; }
 
-  protected slots:
+  protected Q_SLOTS:
       void dataReceived(KProcess *, char *buf, int len);
-  public slots:
+  public Q_SLOTS:
       void donePty();
       
   private:
     void appendSendJob(const char* s, int len);
 
-  private slots:
+  private Q_SLOTS:
     void doSendJobs();
     void writeReady();
 

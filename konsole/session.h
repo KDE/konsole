@@ -115,7 +115,7 @@ public:
   QSize size();
   void setSize(QSize size);
 
-public slots:
+public Q_SLOTS:
 
   void run();
   void done();
@@ -133,7 +133,7 @@ public slots:
   void zmodemDone();
   void zmodemContinue();
 
-signals:
+Q_SIGNALS:
 
   void processExited();
   void receivedData( const QString& text );
@@ -155,7 +155,7 @@ signals:
   void getSessionSchema(TESession *session, QString &schema);
   void setSessionSchema(TESession *session, const QString &schema);
 
-private slots:
+private Q_SLOTS:
   void onRcvBlock( const char* buf, int len );
   void monitorTimerDone();
   void notifySessionState(int state);

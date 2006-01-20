@@ -49,16 +49,16 @@ public:
 
     void fillBookmarkMenu();
 
-public slots:
+public Q_SLOTS:
 
-signals:
+Q_SIGNALS:
 
-private slots:
+private Q_SLOTS:
 
 private:
     KonsoleBookmarkHandler * m_kOwner;
 
-protected slots:
+protected Q_SLOTS:
     void slotAboutToShow2();
     void slotBookmarkSelected();
 

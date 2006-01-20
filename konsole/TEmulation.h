@@ -46,7 +46,7 @@ public:
   virtual void findTextBegin();
   virtual bool findTextNext( const QString &str, bool forward, bool caseSensitive, bool regExp );
 
-public slots: // signals incoming from TEWidget
+public Q_SLOTS: // signals incoming from TEWidget
 
   virtual void onImageSizeChange(int lines, int columns);
   virtual void onHistoryCursorChange(int cursor);
@@ -60,11 +60,11 @@ public slots: // signals incoming from TEWidget
   virtual void isBusySelecting(bool busy);
   virtual void testIsSelected(const int x, const int y, bool &selected);
 
-public slots: // signals incoming from data source
+public Q_SLOTS: // signals incoming from data source
 
   void onRcvBlock(const char* txt,int len);
 
-signals:
+Q_SIGNALS:
 
   void lockPty(bool);
   void useUtf8(bool);
@@ -123,7 +123,7 @@ protected:
 
 // refreshing related material.
 // this is localized in the class.
-private slots: // triggered by timer
+private Q_SLOTS: // triggered by timer
 
   void showBulk();
 
