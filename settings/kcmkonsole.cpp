@@ -105,8 +105,8 @@ void KCMKonsole::load(bool useDefaults)
     dialog->xonXoffCB->setChecked(xonXoffOrig);
     dialog->blinkingCB->setChecked(config.readEntry("BlinkingCursor", QVariant(false)).toBool());
     dialog->frameCB->setChecked(config.readEntry("has frame", QVariant(true)).toBool());
-    dialog->line_spacingSB->setValue(config.readUnsignedNumEntry( "LineSpacing", 0 ));
-    dialog->silence_secondsSB->setValue(config.readUnsignedNumEntry( "SilenceSeconds", 10 ));
+    dialog->line_spacingSB->setValue(config.readEntry( "LineSpacing", 0 ));
+    dialog->silence_secondsSB->setValue(config.readEntry( "SilenceSeconds", 10 ));
     dialog->word_connectorLE->setText(config.readEntry("wordseps",":@-./_~"));
 
     dialog->SchemaEditor1->setSchema(config.readEntry("schema"));

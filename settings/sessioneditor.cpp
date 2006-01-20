@@ -216,7 +216,7 @@ void SessionEditor::readSession(int num)
         str = co->readEntry("Icon","konsole");
         previewIcon->setIcon(str);
 
-        i = co->readUnsignedNumEntry("Font",(unsigned int)-1);
+        i = co->readEntry("Font",(unsigned int)-1);
         fontCombo->setCurrentItem(i+1);
 
         str = co->readEntry("Term","xterm");
