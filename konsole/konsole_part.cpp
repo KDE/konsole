@@ -547,16 +547,16 @@ void konsolePart::readProperties()
 
   b_framevis = config->readEntry("has frame", QVariant(false)).toBool();
   b_histEnabled = config->readEntry("historyenabled", QVariant(true)).toBool();
-  n_bell = qMin(config->readUnsignedNumEntry("bellmode",TEWidget::BELLSYSTEM),3u);
-  n_keytab=config->readNumEntry("keytab",0); // act. the keytab for this session
-  n_scroll = qMin(config->readUnsignedNumEntry("scrollbar",TEWidget::SCRRIGHT),2u);
-  m_histSize = config->readNumEntry("history",DEFAULT_HISTORY_SIZE);
+  n_bell = qMin(config->readEntry("bellmode",uint(TEWidget::BELLSYSTEM)),3u);
+  n_keytab=config->readEntry("keytab",0); // act. the keytab for this session
+  n_scroll = qMin(config->readEntry("scrollbar",uint(TEWidget::SCRRIGHT)),2u);
+  m_histSize = config->readEntry("history",DEFAULT_HISTORY_SIZE);
   s_word_seps= config->readEntry("wordseps",":@-./_~");
 
-  n_encoding = config->readNumEntry("encoding",0);
+  n_encoding = config->readEntry("encoding",0);
 
   QFont tmpFont = KGlobalSettings::fixedFont();
-  defaultFont = config->readFontEntry("defaultfont", &tmpFont);
+  defaultFont = config->readEntry("defaultfont", tmpFont);
 
   QString schema = config->readEntry("Schema");
 
@@ -590,7 +590,7 @@ void konsolePart::readProperties()
   te->setBellMode(n_bell);
   te->setBlinkingCursor(config->readEntry("BlinkingCursor", QVariant(false)).toBool());
   te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
-  te->setLineSpacing( config->readUnsignedNumEntry( "LineSpacing", 0 ) );
+  te->setLineSpacing( config->readEntry( "LineSpacing", 0 ) );
   te->setScrollbarLocation(n_scroll);
   te->setWordCharacters(s_word_seps);
 
