@@ -3194,8 +3194,10 @@ void Konsole::initHistory(int lines, bool enable)
    // parameter saved in konsolerc.
    if ( lines < 0 ) lines = m_histSize;
 
-   if ( enable )
+   if ( enable && lines > 0 )
       se->setHistory( HistoryTypeBuffer( lines ) );
+   else if ( enable )  // Unlimited buffer
+      se->setHistory(HistoryTypeFile());
    else
       se->setHistory( HistoryTypeNone() );
 }
