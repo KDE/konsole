@@ -4025,7 +4025,7 @@ void Konsole::slotZModemDetected(TESession *session)
                         "<p>You may wish to install the 'rzsz' or 'lrzsz' package.\n"));
     return;
   }
-  KURLRequesterDlg dlg(KGlobalSettings::documentPath(),
+  KUrlRequesterDlg dlg(KGlobalSettings::documentPath(),
                    i18n("A ZModem file transfer attempt has been detected.\n"
                         "Please specify the folder you want to store the file(s):"),
                    this, "zmodem_dlg");
