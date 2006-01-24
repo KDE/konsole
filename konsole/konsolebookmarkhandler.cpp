@@ -45,7 +45,7 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel 
         if ( QFile::exists( old_bm_file ) )
             // We want sync here... 
             if ( !KIO::NetAccess::copy( KURL( old_bm_file ), 
-                                   KURL ( new_bm_file ), 0 ) ) {
+                                   KUrl ( new_bm_file ), 0 ) ) {
                 kdWarning()<<KIO::NetAccess::lastErrorString()<<endl;
             }
     }
@@ -84,7 +84,7 @@ QString KonsoleBookmarkHandler::currentURL() const
 
 QString KonsoleBookmarkHandler::currentTitle() const
 {
-    const KURL &u = m_konsole->baseURL();
+    const KUrl &u = m_konsole->baseURL();
     if (u.isLocalFile())
     {
        QString path = u.path();

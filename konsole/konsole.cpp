@@ -2251,9 +2251,9 @@ void Konsole::sendAllSessions(const QString &text)
   feedAllSessions(newtext);
 }
 
-KURL Konsole::baseURL() const
+KUrl Konsole::baseURL() const
 {
-   KURL url;
+   KUrl url;
    url.setPath(se->getCwd()+"/");
    return url;
 }
@@ -2263,13 +2263,13 @@ void Konsole::enterURL(const QString& URL, const QString&)
   QString path, login, host, newtext;
 
   if (URL.startsWith("file:")) {
-    KURL uglyurl(URL);
+    KUrl uglyurl(URL);
     newtext=uglyurl.path();
     KRun::shellQuote(newtext);
     te->emitText("cd "+newtext+"\r");
   }
   else if (URL.contains("://", true)) {
-    KURL u(URL);
+    KUrl u(URL);
     newtext = u.protocol();
     bool isSSH = (newtext == "ssh");
     if (u.port() && isSSH)
@@ -2891,7 +2891,7 @@ void Konsole::newSession(const QString& sURL, const QString& title)
    QStringList args;
    QString protocol, path, login, host;
 
-   KURL url = KURL(sURL);
+   KUrl url = KURL(sURL);
    if ((url.protocol() == "file") && (url.hasPath())) {
      KSimpleConfig *co = defaultSession();
      path = url.path();
@@ -3942,10 +3942,10 @@ void Konsole::slotSaveHistory()
 {
   // FIXME - mostLocalURL can't handle non-existing files yet, so this
   //         code doesn't work.
-  KURL s_url = KFileDialog::getSaveURL(QString(), QString(), 0L, i18n("Save History"));
+  KUrl s_url = KFileDialog::getSaveURL(QString(), QString(), 0L, i18n("Save History"));
   if( s_url.isEmpty())
       return;
-  KURL url = KIO::NetAccess::mostLocalURL( s_url, 0 );
+  KUrl url = KIO::NetAccess::mostLocalURL( s_url, 0 );
 
   if( !url.isLocalFile() ) {
     KMessageBox::sorry(this, i18n("This is not a local file.\n"));
@@ -4038,7 +4038,7 @@ void Konsole::slotZModemDetected(TESession *session)
   }
   else
   {
-     const KURL &url = dlg.selectedURL();
+     const KUrl &url = dlg.selectedURL();
      session->startZModem(zmodem, url.path(), QStringList());
   }
 }

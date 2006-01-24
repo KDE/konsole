@@ -111,7 +111,7 @@ public:
   void feedAllSessions(const QString &text);
   void sendAllSessions(const QString &text);
 
-  KURL baseURL() const;
+  KUrl baseURL() const;
 
   virtual bool processDynamic(const DCOPCString &fun, const QByteArray &data, DCOPCString& replyType, QByteArray &replyData);
   virtual DCOPCStringList functionsDynamic();

@@ -264,7 +264,7 @@ konsolePart::~konsolePart()
   //te is deleted by the framework
 }
 
-bool konsolePart::openURL( const KURL & url )
+bool konsolePart::openURL( const KUrl & url )
 {
   //kdDebug(1211) << "konsolePart::openURL " << url.prettyURL() << endl;
 
@@ -291,7 +291,7 @@ bool konsolePart::openURL( const KURL & url )
 
 void konsolePart::emitOpenURLRequest(const QString &cwd)
 {
-  KURL url;
+  KUrl url;
   url.setPath(cwd);
   if (url==currentURL)
     return;
@@ -1029,7 +1029,7 @@ konsoleBrowserExtension::~konsoleBrowserExtension()
 {
 }
 
-void konsoleBrowserExtension::emitOpenURLRequest(const KURL &url)
+void konsoleBrowserExtension::emitOpenURLRequest(const KUrl &url)
 {
   emit openURLRequest(url);
 }

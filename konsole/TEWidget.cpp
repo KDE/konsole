@@ -2163,10 +2163,10 @@ void TEWidget::dropEvent(QDropEvent* event)
   dropText = "";
   bool justPaste = true;
 
-  KURL::List urllist = KURL::List::fromMimeData(event->mimeData());
+  KUrl::List urllist = KUrl::List::fromMimeData(event->mimeData());
   if (urllist.count()) {
     justPaste =false;
-    KURL::List::Iterator it;
+    KUrl::List::Iterator it;
 
     m_drop->setItemEnabled( cd, true );
     m_drop->setItemEnabled( ln, true );
@@ -2176,7 +2176,7 @@ void TEWidget::dropEvent(QDropEvent* event)
         dropText += " ";
         m_drop->setItemEnabled(cd,false);
       }
-      KURL url = KIO::NetAccess::mostLocalURL( *it, 0 );
+      KUrl url = KIO::NetAccess::mostLocalURL( *it, 0 );
       QString tmp;
       if (url.isLocalFile()) {
         tmp = url.path(); // local URL : remove protocol. This helps "ln" & "cd" and doesn't harm the others
@@ -2227,7 +2227,7 @@ void TEWidget::drop_menu_activated(int item)
       {
          if ( !S_ISDIR(statbuf.st_mode) )
          {
-            KURL url;
+            KUrl url;
             url.setPath( dropText );
             dropText = url.directory( true, false ); // remove filename
          }

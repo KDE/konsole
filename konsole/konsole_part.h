@@ -78,7 +78,7 @@ Q_SIGNALS:
     void processExited();
     void receivedData( const QString& s );
  protected:
-    virtual bool openURL( const KURL & url );
+    virtual bool openURL( const KUrl & url );
     virtual bool openFile() {return false;} // never used
     virtual bool closeURL() {return true;}
     virtual void guiActivateEvent( KParts::GUIActivateEvent * event );
@@ -128,7 +128,7 @@ Q_SIGNALS:
 
  private:
     konsoleBrowserExtension *m_extension;
-    KURL currentURL;
+    KUrl currentURL;
 
     void makeGUI();
     void applySettingsToGUI();
@@ -230,7 +230,7 @@ class konsoleBrowserExtension : public KParts::BrowserExtension
     konsoleBrowserExtension(konsolePart *parent);
     virtual ~konsoleBrowserExtension();
 
-    void emitOpenURLRequest(const KURL &url);
+    void emitOpenURLRequest(const KUrl &url);
 };
 
 #endif
