@@ -482,7 +482,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         wname = sessionconfig->readEntry("class",QString(wname)).latin1();
 
         sPgm = sessionconfig->readEntry("Pgm0", shell);
-        QStringList eargs_sl = sessionconfig->readListEntry("Args0");
+        QStringList eargs_sl = sessionconfig->readEntry("Args0", QStringList());
         for (int i = 0; i < eargs_sl.size(); ++i)
            eargs.append(eargs_sl.at(i).ascii());
 
@@ -530,7 +530,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
           key = QString("Title%1").arg(counter);
           sTitle = sessionconfig->readEntry(key, title);
           key = QString("Args%1").arg(counter);
-          QStringList eargs_sl = sessionconfig->readListEntry("Args0");
+          QStringList eargs_sl = sessionconfig->readEntry("Args0",QStringList());
           for (int i = 0; i < eargs_sl.size(); ++i)
              eargs.append(eargs_sl.at(i).ascii());
 
