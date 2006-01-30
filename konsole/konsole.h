@@ -42,7 +42,7 @@
 #undef PACKAGE
 #undef VERSION
 #define PACKAGE "konsole"
-#define VERSION "1.6"
+#define VERSION "1.6.1"
 
 class KRootPixmap;
 class QLabel;
