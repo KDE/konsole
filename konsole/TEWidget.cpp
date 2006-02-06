@@ -1181,15 +1181,15 @@ void TEWidget::scrollChanged(int)
 
 void TEWidget::setScroll(int cursor, int slines)
 {
-  //kdDebug(1211)<<"TEWidget::setScroll() disconnect()"<<endl;
+  //kDebug(1211)<<"TEWidget::setScroll() disconnect()"<<endl;
   disconnect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
-  //kdDebug(1211)<<"TEWidget::setScroll() setRange()"<<endl;
+  //kDebug(1211)<<"TEWidget::setScroll() setRange()"<<endl;
   scrollbar->setRange(0,slines);
-  //kdDebug(1211)<<"TEWidget::setScroll() setSteps()"<<endl;
+  //kDebug(1211)<<"TEWidget::setScroll() setSteps()"<<endl;
   scrollbar->setSteps(1,lines);
   scrollbar->setValue(cursor);
   connect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
-  //kdDebug(1211)<<"TEWidget::setScroll() done"<<endl;
+  //kDebug(1211)<<"TEWidget::setScroll() done"<<endl;
 }
 
 void TEWidget::setScrollbarLocation(int loc)
@@ -2075,7 +2075,7 @@ void TEWidget::calcGeometry()
      columns = contentWidth / font_w;
 
      if (columns<1) {
-       kdDebug(1211) << "TEWidget::calcGeometry: columns=" << columns << endl;
+       kDebug(1211) << "TEWidget::calcGeometry: columns=" << columns << endl;
        columns=1;
      }
      lines = contentHeight / font_h;
@@ -2196,7 +2196,7 @@ void TEWidget::dropEvent(QDropEvent* event)
     if (!justPaste) m_drop->popup(mapToGlobal(event->pos()));
   }
   if(justPaste && Q3TextDrag::decode(event, dropText)) {
-    kdDebug(1211) << "Drop:" << dropText.toLocal8Bit() << "\n";
+    kDebug(1211) << "Drop:" << dropText.toLocal8Bit() << "\n";
     emit sendStringToEmu(dropText.toLocal8Bit());
     // Paste it
   }

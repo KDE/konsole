@@ -75,16 +75,16 @@
 
 TEmuVt102::TEmuVt102(TEWidget* gui) : TEmulation(gui)
 {
-  //kdDebug(1211)<<"TEmuVt102 ctor() connecting"<<endl;
+  //kDebug(1211)<<"TEmuVt102 ctor() connecting"<<endl;
   QObject::connect(gui,SIGNAL(mouseSignal(int,int,int)),
                    this,SLOT(onMouse(int,int,int)));
   QObject::connect(gui, SIGNAL(sendStringToEmu(const char*)),
 		   this, SLOT(sendString(const char*)));
-  //kdDebug(1211)<<"TEmuVt102 ctor() initToken..."<<endl;
+  //kDebug(1211)<<"TEmuVt102 ctor() initToken..."<<endl;
   initTokenizer();
-  //kdDebug(1211)<<"TEmuVt102 ctor() reset()"<<endl;
+  //kDebug(1211)<<"TEmuVt102 ctor() reset()"<<endl;
   reset();
-  //kdDebug(1211)<<"TEmuVt102 ctor() ctor done"<<endl;
+  //kDebug(1211)<<"TEmuVt102 ctor() ctor done"<<endl;
 }
 
 /*!
@@ -124,21 +124,21 @@ void TEmuVt102::clearEntireScreen()
 
 void TEmuVt102::reset()
 {
-  //kdDebug(1211)<<"TEmuVt102::reset() resetToken()"<<endl;
+  //kDebug(1211)<<"TEmuVt102::reset() resetToken()"<<endl;
   resetToken();
-  //kdDebug(1211)<<"TEmuVt102::reset() resetModes()"<<endl;
+  //kDebug(1211)<<"TEmuVt102::reset() resetModes()"<<endl;
   resetModes();
-  //kdDebug(1211)<<"TEmuVt102::reset() resetCharSet()"<<endl;
+  //kDebug(1211)<<"TEmuVt102::reset() resetCharSet()"<<endl;
   resetCharset(0);
-  //kdDebug(1211)<<"TEmuVt102::reset() reset screen0()"<<endl;
+  //kDebug(1211)<<"TEmuVt102::reset() reset screen0()"<<endl;
   screen[0]->reset();
-  //kdDebug(1211)<<"TEmuVt102::reset() resetCharSet()"<<endl;
+  //kDebug(1211)<<"TEmuVt102::reset() resetCharSet()"<<endl;
   resetCharset(1);
-  //kdDebug(1211)<<"TEmuVt102::reset() reset screen 1"<<endl;
+  //kDebug(1211)<<"TEmuVt102::reset() reset screen 1"<<endl;
   screen[1]->reset();
-  //kdDebug(1211)<<"TEmuVt102::reset() setCodec()"<<endl;
+  //kDebug(1211)<<"TEmuVt102::reset() setCodec()"<<endl;
   setCodec(0);
-  //kdDebug(1211)<<"TEmuVt102::reset() done"<<endl;
+  //kDebug(1211)<<"TEmuVt102::reset() done"<<endl;
 }
 
 /* ------------------------------------------------------------------------- */

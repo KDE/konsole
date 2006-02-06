@@ -147,7 +147,7 @@ Time to start a requirement list.
 #include <ktoolinvocation.h>
 #include "printsettings.h"
 
-#define KONSOLEDEBUG    kdDebug(1211)
+#define KONSOLEDEBUG    kDebug(1211)
 
 #define POPUP_NEW_SESSION_ID 121
 #define POPUP_SETTINGS_ID 212
@@ -861,7 +861,7 @@ void Konsole::slotSetEncoding()
     qtc = KGlobal::charsets()->codecForName(enc, found);
     if(!found)
     {
-      kdWarning() << "Codec " << selectSetEncoding->currentText() << " not found!" << endl;
+      kWarning() << "Codec " << selectSetEncoding->currentText() << " not found!" << endl;
       qtc = QTextCodec::codecForLocale();
     }
   }
@@ -1602,7 +1602,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       if (!sch)
       {
          sch = (ColorSchema*)colors->at(0);  //the default one
-         kdWarning() << "Could not find schema named " <<s_kconfigSchema<<"; using "<<sch->relPath()<<endl;
+         kWarning() << "Could not find schema named " <<s_kconfigSchema<<"; using "<<sch->relPath()<<endl;
          s_kconfigSchema = sch->relPath();
       }
       if (sch->hasSchemaFileChanged()) sch->rereadSchemaFile();
@@ -2025,7 +2025,7 @@ void Konsole::reparseConfiguration()
   if (!sch)
   {
      sch = (ColorSchema*)colors->at(0);  //the default one
-     kdWarning() << "Could not find schema named " <<s_kconfigSchema<<"; using "<<sch->relPath()<<endl;
+     kWarning() << "Could not find schema named " <<s_kconfigSchema<<"; using "<<sch->relPath()<<endl;
      s_kconfigSchema = sch->relPath();
   }
   if (sch->hasSchemaFileChanged()) sch->rereadSchemaFile();
@@ -2050,7 +2050,7 @@ void Konsole::changeTabTextColor( TESession* ses, int rgb )
     QColor color;
     color.setRgb( rgb );
     if ( !color.isValid() ) {
-        kdWarning()<<" Invalid RGB color "<<rgb<<endl;
+        kWarning()<<" Invalid RGB color "<<rgb<<endl;
         return;
     }
     //tabwidget->setTabColor( ses->widget(), color );
@@ -2581,7 +2581,7 @@ void Konsole::setSessionEncoding( const QString &encoding, TESession *session )
     enc = KGlobal::charsets()->encodingForName(enc);
     QTextCodec * qtc = KGlobal::charsets()->codecForName(enc, found);
 
-    //kdDebug()<<"setSessionEncoding="<<enc<<"; "<<i<<"; found="<<found<<endl;
+    //kDebug()<<"setSessionEncoding="<<enc<<"; "<<i<<"; found="<<found<<endl;
     if ( !found )
         return;
 
@@ -3287,7 +3287,7 @@ void Konsole::addSessionCommand(const QString &path)
   {
     if (!path.isEmpty())
        delete co;
-    kdWarning()<<"Unable to use "<<path.latin1()<<endl;
+    kWarning()<<"Unable to use "<<path.latin1()<<endl;
     return; // ignore
   }
 
@@ -3471,7 +3471,7 @@ void Konsole::setSchema(int numb, TEWidget* tewidget)
   if (!s)
   {
     s = (ColorSchema*)colors->at(0);
-    kdWarning() << "No schema with serial #"<<numb<<", using "<<s->relPath()<<" (#"<<s->numb()<<")." << endl;
+    kWarning() << "No schema with serial #"<<numb<<", using "<<s->relPath()<<" (#"<<s->numb()<<")." << endl;
     s_kconfigSchema = s->relPath();
   }
 
@@ -3488,7 +3488,7 @@ void Konsole::setSchema(const QString & path)
   if (!s)
   {
      s = (ColorSchema*)colors->at(0);  //the default one
-     kdWarning() << "No schema with the name " <<path<<", using "<<s->relPath()<<endl;
+     kWarning() << "No schema with the name " <<path<<", using "<<s->relPath()<<endl;
      s_kconfigSchema = s->relPath();
   }
   if (s->hasSchemaFileChanged())

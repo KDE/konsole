@@ -109,7 +109,7 @@ void KonsoleBookmarkMenu::fillBookmarkMenu()
       }
       else
       {
-        // kdDebug(1203) << "Creating URL bookmark menu item for " << bm.text() << endl;
+        // kDebug(1203) << "Creating URL bookmark menu item for " << bm.text() << endl;
         // create a normal URL item, with ID as a name
         KAction * action = new KAction( text, bm.icon(), 0,
                                         this, SLOT( slotBookmarkSelected() ),
@@ -123,7 +123,7 @@ void KonsoleBookmarkMenu::fillBookmarkMenu()
     }
     else
     {
-      // kdDebug(1203) << "Creating bookmark submenu named " << bm.text() << endl;
+      // kDebug(1203) << "Creating bookmark submenu named " << bm.text() << endl;
       KActionMenu * actionMenu = new KActionMenu( text, bm.icon(),
                                                   m_actionCollection, 0L );
       actionMenu->plug( m_parentMenu );

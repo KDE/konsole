@@ -95,7 +95,7 @@ KParts::Part *konsoleFactory::createPartObject(QWidget *parentWidget, const char
                                          QObject *parent, const char *name, const char *classname,
                                          const QStringList&)
 {
-//  kdDebug(1211) << "konsoleFactory::createPart parentWidget=" << parentWidget << " parent=" << parent << endl;
+//  kDebug(1211) << "konsoleFactory::createPart parentWidget=" << parentWidget << " parent=" << parent << endl;
   KParts::Part *obj = new konsolePart(parentWidget, widgetName, parent, name, classname);
   return obj;
 }
@@ -224,19 +224,19 @@ void konsolePart::doneSession(TESession*)
   // see doneSession in konsole.cpp
   if (se)
   {
-//    kdDebug(1211) << "doneSession - disconnecting done" << endl;
+//    kDebug(1211) << "doneSession - disconnecting done" << endl;
     disconnect( se,SIGNAL(done(TESession*)),
                 this,SLOT(doneSession(TESession*)) );
     se->setConnect(false);
     //QTimer::singleShot(100,se,SLOT(terminate()));
-//    kdDebug(1211) << "se->terminate()" << endl;
+//    kDebug(1211) << "se->terminate()" << endl;
     se->terminate();
   }
 }
 
 void konsolePart::sessionDestroyed()
 {
-//  kdDebug(1211) << "sessionDestroyed()" << endl;
+//  kDebug(1211) << "sessionDestroyed()" << endl;
   disconnect( se, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
   se = 0;
   delete this;
@@ -250,10 +250,10 @@ void konsolePart::configureRequest(TEWidget*_te,int,int x,int y)
 
 konsolePart::~konsolePart()
 {
-//  kdDebug(1211) << "konsolePart::~konsolePart() this=" << this << endl;
+//  kDebug(1211) << "konsolePart::~konsolePart() this=" << this << endl;
   if ( se ) {
     disconnect( se, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
-//    kdDebug(1211) << "Deleting se session" << endl;
+//    kDebug(1211) << "Deleting se session" << endl;
     delete se;
     se=0;
   }
@@ -266,7 +266,7 @@ konsolePart::~konsolePart()
 
 bool konsolePart::openURL( const KUrl & url )
 {
-  //kdDebug(1211) << "konsolePart::openURL " << url.prettyURL() << endl;
+  //kDebug(1211) << "konsolePart::openURL " << url.prettyURL() << endl;
 
   if (currentURL==url) {
     emit completed();
@@ -275,7 +275,7 @@ bool konsolePart::openURL( const KUrl & url )
 
   m_url = url;
   emit setWindowCaption( url.prettyURL() );
-//  kdDebug(1211) << "Set Window Caption to " << url.prettyURL() << "\n";
+//  kDebug(1211) << "Set Window Caption to " << url.prettyURL() << "\n";
   emit started( 0 );
 
   if ( url.isLocalFile() ) {
@@ -731,11 +731,11 @@ void konsolePart::setSchema(int numb)
 {
   ColorSchema* s = colors->find(numb);
   if (!s) {
-    kdWarning() << "No schema found. Using default." << endl;
+    kWarning() << "No schema found. Using default." << endl;
     s=(ColorSchema*)colors->at(0);
   }
   if (s->numb() != numb)  {
-    kdWarning() << "No schema with number " << numb << endl;
+    kWarning() << "No schema with number " << numb << endl;
   }
 
   if (s->hasSchemaFileChanged()) {
@@ -869,7 +869,7 @@ void konsolePart::slotSetEncoding()
   QTextCodec * qtc = KGlobal::charsets()->codecForName(enc, found);
   if(!found)
   {
-    kdDebug() << "Codec " << selectSetEncoding->currentText() << " not found!" << endl;
+    kDebug() << "Codec " << selectSetEncoding->currentText() << " not found!" << endl;
     qtc = QTextCodec::codecForLocale();
   }
 

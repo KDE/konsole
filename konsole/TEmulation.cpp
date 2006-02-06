@@ -458,9 +458,9 @@ void TEmulation::showBulk()
     free(image);
     //FIXME: check that we do not trigger other draw event here.
     gui->setLineWrapped( scr->getCookedLineWrapped() );
-    //kdDebug(1211)<<"TEmulation::showBulk(): setScroll()"<<endl;
+    //kDebug(1211)<<"TEmulation::showBulk(): setScroll()"<<endl;
     gui->setScroll(scr->getHistCursor(),scr->getHistLines());
-    //kdDebug(1211)<<"TEmulation::showBulk(): setScroll() done"<<endl;
+    //kDebug(1211)<<"TEmulation::showBulk(): setScroll() done"<<endl;
   }
 }
 
@@ -473,7 +473,7 @@ void TEmulation::bulkStart()
 
 void TEmulation::setConnect(bool c)
 {
-   //kdDebug(1211)<<"TEmulation::setConnect()"<<endl;
+   //kDebug(1211)<<"TEmulation::setConnect()"<<endl;
   connected = c;
   if ( connected)
   {
@@ -501,16 +501,16 @@ void TEmulation::setListenToKeyPress(bool l)
 
 void TEmulation::onImageSizeChange(int lines, int columns)
 {
-   //kdDebug(1211)<<"TEmulation::onImageSizeChange()"<<endl;
+   //kDebug(1211)<<"TEmulation::onImageSizeChange()"<<endl;
   screen[0]->resizeImage(lines,columns);
   screen[1]->resizeImage(lines,columns);
     
   if (!connected) return;
-   //kdDebug(1211)<<"TEmulation::onImageSizeChange() showBulk()"<<endl;
+   //kDebug(1211)<<"TEmulation::onImageSizeChange() showBulk()"<<endl;
   showBulk();
-   //kdDebug(1211)<<"TEmulation::onImageSizeChange() showBulk() done"<<endl;
+   //kDebug(1211)<<"TEmulation::onImageSizeChange() showBulk() done"<<endl;
   emit ImageSizeChanged(columns, lines);   // propagate event
-   //kdDebug(1211)<<"TEmulation::onImageSizeChange() done"<<endl;
+   //kDebug(1211)<<"TEmulation::onImageSizeChange() done"<<endl;
 }
 
 QSize TEmulation::imageSize()

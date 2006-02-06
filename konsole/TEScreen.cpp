@@ -196,7 +196,7 @@ void TEScreen::setMargins(int top, int bot)
   top = top - 1;              // Adjust to internal lineno
   bot = bot - 1;              // Adjust to internal lineno
   if ( !( 0 <= top && top < bot && bot < lines ) )
-  { kdDebug()<<" setRegion("<<top<<","<<bot<<") : bad range."<<endl;
+  { kDebug()<<" setRegion("<<top<<","<<bot<<") : bad range."<<endl;
     return;                   // Default error action: ignore
   }
   tmargin = top;
@@ -534,7 +534,7 @@ void TEScreen::effectiveRendition()
 
 ca* TEScreen::getCookedImage()
 {
-/*kdDebug() << "sel_begin=" << sel_begin << "(" << sel_begin/columns << "," << sel_begin%columns << ")"
+/*kDebug() << "sel_begin=" << sel_begin << "(" << sel_begin/columns << "," << sel_begin%columns << ")"
   << "  sel_TL=" << sel_TL << "(" << sel_TL/columns << "," << sel_TL%columns << ")"
   << "  sel_BR=" << sel_BR << "(" << sel_BR/columns << "," << sel_BR%columns << ")"
   << "  histcursor=" << histCursor << endl;*/
@@ -544,13 +544,13 @@ ca* TEScreen::getCookedImage()
   ca dft(' ',DEFAULT_FORE_COLOR,DEFAULT_BACK_COLOR,DEFAULT_RENDITION);
   merged[lines*columns] = dft;
 
-//  kdDebug(1211) << "InGetCookedImage" << endl;
+//  kDebug(1211) << "InGetCookedImage" << endl;
   for (y = 0; (y < lines) && (y < (hist->getLines()-histCursor)); y++)
   {
     int len = QMIN(columns,hist->getLineLen(y+histCursor));
     int yp  = y*columns;
 
-//    kdDebug(1211) << "InGetCookedImage - In first For.  Y =" << y << "histCursor = " << histCursor << endl;
+//    kDebug(1211) << "InGetCookedImage - In first For.  Y =" << y << "histCursor = " << histCursor << endl;
     hist->getCells(y+histCursor,0,len,merged+yp);
     for (x = len; x < columns; x++) merged[yp+x] = dft;
     if (sel_begin !=-1)
@@ -572,7 +572,7 @@ ca* TEScreen::getCookedImage()
     {
        int yp  = y*columns;
        int yr =  (y-hist->getLines()+histCursor)*columns;
-//       kdDebug(1211) << "InGetCookedImage - In second For.  Y =" << y << endl;
+//       kDebug(1211) << "InGetCookedImage - In second For.  Y =" << y << endl;
        for (x = 0; x < columns; x++)
        { int p = x + yp; int r = x + yr;
          merged[p] = image[r];
@@ -941,10 +941,10 @@ void TEScreen::moveImage(int dst, int loca, int loce)
 {
 //FIXME: check positions
   if (loce < loca) {
-    kdDebug(1211) << "WARNING!!! call to TEScreen:moveImage with loce < loca!" << endl;
+    kDebug(1211) << "WARNING!!! call to TEScreen:moveImage with loce < loca!" << endl;
     return;
   }
-  //kdDebug(1211) << "Using memmove to scroll up" << endl;
+  //kDebug(1211) << "Using memmove to scroll up" << endl;
   memmove(&image[dst],&image[loca],(loce-loca+1)*sizeof(ca));
   for (int i=0;i<=(loce-loca+1)/columns;i++)
     line_wrapped[(dst/columns)+i]=line_wrapped[(loca/columns)+i];
@@ -1140,7 +1140,7 @@ void TEScreen::clearSelection()
 
 void TEScreen::setSelBeginXY(const int x, const int y, const bool mode)
 {
-//  kdDebug(1211) << "setSelBeginXY(" << x << "," << y << ")" << endl;
+//  kDebug(1211) << "setSelBeginXY(" << x << "," << y << ")" << endl;
   sel_begin = loc(x,y+histCursor) ;
 
   /* FIXME, HACK to correct for x too far to the right... */
@@ -1153,7 +1153,7 @@ void TEScreen::setSelBeginXY(const int x, const int y, const bool mode)
 
 void TEScreen::setSelExtentXY(const int x, const int y)
 {
-//  kdDebug(1211) << "setSelExtentXY(" << x << "," << y << ")" << endl;
+//  kDebug(1211) << "setSelExtentXY(" << x << "," << y << ")" << endl;
   if (sel_begin == -1) return;
   int l =  loc(x,y + histCursor);
 

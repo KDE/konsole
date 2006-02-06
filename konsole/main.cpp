@@ -237,13 +237,13 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 
   // The following Qt options have no effect; warn users.
   if( qtargs->isSet("background") )
-      kdWarning() << "The Qt option -bg, --background has no effect." << endl;
+      kWarning() << "The Qt option -bg, --background has no effect." << endl;
   if( qtargs->isSet("foreground") )
-      kdWarning() << "The Qt option -fg, --foreground has no effect." << endl;
+      kWarning() << "The Qt option -fg, --foreground has no effect." << endl;
   if( qtargs->isSet("button") )
-      kdWarning() << "The Qt option -btn, --button has no effect." << endl;
+      kWarning() << "The Qt option -btn, --button has no effect." << endl;
   if( qtargs->isSet("font") )
-      kdWarning() << "The Qt option -fn, --font has no effect." << endl;
+      kWarning() << "The Qt option -fn, --font has no effect." << endl;
 
 #ifdef COMPOSITE
   char *display = 0;
@@ -252,7 +252,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 
   Display *dpy = XOpenDisplay( display );
   if ( !dpy ) {
-    kdError() << "cannot connect to X server " << display << endl;
+    kError() << "cannot connect to X server " << display << endl;
     exit( 1 );
   }
 

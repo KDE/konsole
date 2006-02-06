@@ -233,7 +233,7 @@ void ColorSchema::setDefaultSchema()
 {
   if ((i<0) || (i>=TABLE_COLORS))
   {
-    kdWarning() << "Request for color name "
+    kWarning() << "Request for color name "
       << i
       << " out of range."
       << endl;
@@ -305,7 +305,7 @@ bool ColorSchema::rereadSchemaFile()
   {
     int e = errno;
 
-    kdWarning() << "Schema file "
+    kWarning() << "Schema file "
       << fPath
       << " could not be opened ("
       << strerror(e)
@@ -443,7 +443,7 @@ bool ColorSchema::hasSchemaFileChanged() const
   }
   else
   {
-    kdWarning() << "Schema file no longer exists."
+    kWarning() << "Schema file no longer exists."
       << endl;
     return false;
   }
@@ -481,7 +481,7 @@ ColorSchema *ColorSchemaList::find(const QString& path)
    if (path.isEmpty())
       return find(0);
    //KONSOLEDEBUG << "Looking for schema " << path << endl;
-   //kdDebug(1211)<<"ColorSchema::find() count()=="<<count()<<endl;
+   //kDebug(1211)<<"ColorSchema::find() count()=="<<count()<<endl;
    ColorSchemaListIterator it(*this);
    ColorSchema *c;
 
@@ -503,7 +503,7 @@ ColorSchema *ColorSchemaList::find(const QString& path)
    //list is empty except the default schema
    if (count()==1)
    {
-      //kdDebug(1211)<<"ColorSchema::find() empty"<<endl;
+      //kDebug(1211)<<"ColorSchema::find() empty"<<endl;
       ColorSchema *newSchema = new ColorSchema(path);
       if (newSchema)
          append(newSchema);

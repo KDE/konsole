@@ -179,7 +179,7 @@ void SchemaEditor::updatePreview()
 	 else  //try to reload
 	{
            if(!spix->loadFromShared(QString("DESKTOP1")))
-              kdDebug(0) << "cannot load" << endl;
+              kDebug(0) << "cannot load" << endl;
 
 	}
       } else {
@@ -203,14 +203,14 @@ void SchemaEditor::previewLoaded(bool l)
 	    spix->transformed(mat.
 			scale(180.0 / spix->QPixmap::width(),
 			      100.0 / spix->QPixmap::height()));
-	kdDebug(0) << "Loaded" << endl;
+	kDebug(0) << "Loaded" << endl;
 	loaded = true;
 	if (transparencyCheck->isChecked()) {
 	    updatePreview();
 	}
 
     } else
-	kdDebug(0) << "error loading" << endl;
+	kDebug(0) << "error loading" << endl;
 
 }
 
@@ -296,7 +296,7 @@ void SchemaEditor::slotTypeChanged(int slot)
 
 void SchemaEditor::slotColorChanged(int slot)
 {
-    kdDebug(0) << slot << endl;
+    kDebug(0) << slot << endl;
     color[oldSlot] = colorButton->color();
     type[oldSlot] = typeCombo->currentItem();
     bold[oldSlot] = boldCheck->isChecked();

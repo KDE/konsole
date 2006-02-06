@@ -86,12 +86,12 @@ const Block* BlockArray::at(size_t i)
         return lastmap;
 
     if (i > index) {
-        kdDebug(1211) << "BlockArray::at() i > index\n";
+        kDebug(1211) << "BlockArray::at() i > index\n";
         return 0;
     }
     
 //     if (index - i >= length) {
-//         kdDebug(1211) << "BlockArray::at() index - i >= length\n";
+//         kDebug(1211) << "BlockArray::at() index - i >= length\n";
 //         return 0;
 //     }
 
@@ -127,7 +127,7 @@ bool BlockArray::setSize(size_t newsize)
 
 bool BlockArray::setHistorySize(size_t newsize)
 {
-//    kdDebug(1211) << "setHistorySize " << size << " " << newsize << endl;
+//    kDebug(1211) << "setHistorySize " << size << " " << newsize << endl;
 
     if (size == newsize)
         return false;

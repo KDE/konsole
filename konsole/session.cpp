@@ -49,10 +49,10 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _ar
    , zmodemProgress(0)
    , encoding_no(0)
 {
-  //kdDebug(1211)<<"TESession ctor() new TEPty"<<endl;
+  //kDebug(1211)<<"TESession ctor() new TEPty"<<endl;
   sh = new TEPty();
   te = _te;
-  //kdDebug(1211)<<"TESession ctor() new TEmuVt102"<<endl;
+  //kDebug(1211)<<"TESession ctor() new TEmuVt102"<<endl;
   em = new TEmuVt102(te);
   font_h = te-> fontHeight();
   font_w = te-> fontWidth();
@@ -65,10 +65,10 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _ar
   winId = _winId;
   iconName = "konsole";
 
-  //kdDebug(1211)<<"TESession ctor() sh->setSize()"<<endl;
+  //kDebug(1211)<<"TESession ctor() sh->setSize()"<<endl;
   sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
   sh->useUtf8(em->utf8());
-  //kdDebug(1211)<<"TESession ctor() connecting"<<endl;
+  //kDebug(1211)<<"TESession ctor() connecting"<<endl;
   connect( sh,SIGNAL(block_in(const char*,int)),this,SLOT(onRcvBlock(const char*,int)) );
 
   connect( em,SIGNAL(sndBlock(const char*,int)),sh,SLOT(send_bytes(const char*,int)) );
@@ -89,7 +89,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _ar
            this, SLOT( changeTabTextColor( int ) ) );
 
   connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
-  //kdDebug(1211)<<"TESession ctor() done"<<endl;
+  //kDebug(1211)<<"TESession ctor() done"<<endl;
   if (!sh->error().isEmpty())
      QTimer::singleShot(0, this, SLOT(ptyError()));
 }
@@ -128,7 +128,7 @@ void TESession::changeWidget(TEWidget* w)
 
 void TESession::run()
 {
-  //kdDebug(1211) << "Running the session!" << pgm << "\n";
+  //kDebug(1211) << "Running the session!" << pgm << "\n";
   //pgm = "pine";
   QString appId=kapp->dcopClient()->appId();
 
@@ -142,7 +142,7 @@ void TESession::run()
           ("DCOPRef("+appId+",konsole)").latin1(),
           ("DCOPRef("+appId+","+sessionId+")").latin1());
   if (result < 0) {     // Error in opening pseudo teletype
-    kdWarning()<<"Unable to open a pseudo teletype!"<<endl;
+    kWarning()<<"Unable to open a pseudo teletype!"<<endl;
     QTimer::singleShot(0, this, SLOT(ptyError()));
   }
   sh->setErase(em->getErase());
@@ -231,14 +231,14 @@ void TESession::notifySessionState(int state)
 
 void TESession::onContentSizeChange(int height, int width)
 {
-  //kdDebug(1211)<<"TESession::onContentSizeChange " << height << " " << width << endl;
+  //kDebug(1211)<<"TESession::onContentSizeChange " << height << " " << width << endl;
   em->onImageSizeChange( height/font_h, width/font_w );
   sh->setSize( height/font_h, width/font_w );
 }
 
 void TESession::onFontMetricChange(int height, int width)
 {
-  //kdDebug(1211)<<"TESession::onFontMetricChange " << height << " " << width << endl;
+  //kDebug(1211)<<"TESession::onFontMetricChange " << height << " " << width << endl;
   if (connected) {
     font_h = height;
     font_w = width;
@@ -286,7 +286,7 @@ void TESession::renameSession(const QString &name)
 
 TESession::~TESession()
 {
- //kdDebug(1211) << "disconnnecting..." << endl;
+ //kDebug(1211) << "disconnnecting..." << endl;
   QObject::disconnect( sh, SIGNAL( done(int) ),
                        this, SLOT( done(int) ) );
   delete em;
@@ -413,7 +413,7 @@ void TESession::setFontNo(int fn)
 void TESession::setTitle(const QString& _title)
 {
   title = _title;
-  //kdDebug(1211)<<"Session setTitle " <<  title <<endl;
+  //kDebug(1211)<<"Session setTitle " <<  title <<endl;
 }
 
 const QString& TESession::Title()
@@ -429,7 +429,7 @@ void TESession::setIconName(const QString& _iconName)
 void TESession::setIconText(const QString& _iconText)
 {
   iconText = _iconText;
-  //kdDebug(1211)<<"Session setIconText " <<  iconText <<endl;
+  //kDebug(1211)<<"Session setIconText " <<  iconText <<endl;
 }
 
 const QString& TESession::IconName()

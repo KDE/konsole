@@ -394,7 +394,7 @@ HistoryScrollBlockArray::~HistoryScrollBlockArray()
 
 int  HistoryScrollBlockArray::getLines()
 {
-//   kdDebug(1211) << "HistoryScrollBlockArray::getLines() : "
+//   kDebug(1211) << "HistoryScrollBlockArray::getLines() : "
 //             << m_lineLengths.count() << endl;
 
   return m_lineLengths.count();

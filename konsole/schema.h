@@ -52,7 +52,7 @@
 ** to define KONSOLEDEBUG but there is no "global.h" or central "konsole.h"
 ** file included by all parts of konsole, so this will have to do.
 */
-#define KONSOLEDEBUG	kdDebug(1211)
+#define KONSOLEDEBUG	kDebug(1211)
 #endif
 
 class QDateTime;

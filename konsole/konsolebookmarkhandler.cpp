@@ -46,7 +46,7 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel 
             // We want sync here... 
             if ( !KIO::NetAccess::copy( KURL( old_bm_file ), 
                                    KUrl ( new_bm_file ), 0 ) ) {
-                kdWarning()<<KIO::NetAccess::lastErrorString()<<endl;
+                kWarning()<<KIO::NetAccess::lastErrorString()<<endl;
             }
     }
 
