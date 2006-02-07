@@ -230,7 +230,7 @@
                                         <verstretch>0</verstretch>
                                     </sizepolicy>
                                 </property>
-                                <property name="minimum">
+                                <property name="minValue">
                                     <number>1</number>
                                 </property>
                             </widget>
@@ -246,10 +246,10 @@
                                         <verstretch>0</verstretch>
                                     </sizepolicy>
                                 </property>
-                                <property name="minimum">
+                                <property name="minValue">
                                     <number>0</number>
                                 </property>
-                                <property name="maximum">
+                                <property name="maxValue">
                                     <number>8</number>
                                 </property>
                             </widget>

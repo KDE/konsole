@@ -25,9 +25,9 @@
 #include <kapplication.h>
 #include <qwidget.h>
 //Added by qt3to4:
-#include <kpixmap.h>
+#include <QPixmap>
 #include <QVector>
-class KPixmap;
+class QPixmap;
 class KSharedPixmap;
 
 #include "schemadialog.h"
@@ -71,7 +71,7 @@ class SchemaEditor : public SchemaDialog
 	QVector<int> type; // 0= custom, 1= sysfg, 2=sysbg, 3=rcolor
 	QVector<bool> transparent;
 	QVector<bool> bold;
-	KPixmap pix;
+	QPixmap pix;
 	KSharedPixmap *spix;
 	QString defaultSchema;	
 	bool loaded;

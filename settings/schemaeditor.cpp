@@ -200,9 +200,9 @@ void SchemaEditor::previewLoaded(bool l)
     if (l) {
 	QMatrix mat;
 	pix =
-	    spix->pixmap().transformed(mat.
-			scale(180.0 / spix->pixmap().width(),
-			      100.0 / spix->pixmap().height()));
+	    spix->transformed(mat.
+			scale(180.0 / spix->QPixmap::width(),
+			      100.0 / spix->QPixmap::height()));
 	kDebug(0) << "Loaded" << endl;
 	loaded = true;
 	if (transparencyCheck->isChecked()) {
