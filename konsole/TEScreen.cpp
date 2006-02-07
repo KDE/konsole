@@ -1469,8 +1469,9 @@ void TEScreen::streamHistory(QTextStream* stream) {
   sel_begin = 0;
   sel_BR = sel_begin;
   sel_TL = sel_begin;
-  setSelExtentXY(columns-1,lines-1);
+  setSelExtentXY(columns-1,lines-1+hist->getLines()-histCursor);
   getSelText(true, stream);
+  clearSelection();
 }
 
 QString TEScreen::getHistoryLine(int no)
