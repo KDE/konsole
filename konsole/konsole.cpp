@@ -302,7 +302,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
   if (isRestored) {
     n_tabbar = wanted_tabbar;
     KConfig *c = KApplication::kApplication()->sessionConfig();
-    c->setDesktopGroup();
+//    c->setDesktopGroup();      // Reads from wrong group
     b_dynamicTabHide = c->readBoolEntry("DynamicTabHide", false);
   }
 
