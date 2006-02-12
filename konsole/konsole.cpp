@@ -2891,7 +2891,7 @@ void Konsole::newSession(const QString& sURL, const QString& title)
    QStringList args;
    QString protocol, path, login, host;
 
-   KUrl url = KURL(sURL);
+   KUrl url = KUrl(sURL);
    if ((url.protocol() == "file") && (url.hasPath())) {
      KSimpleConfig *co = defaultSession();
      path = url.path();
