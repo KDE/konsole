@@ -12,7 +12,7 @@
             <height>476</height>
         </rect>
     </property>
-    <property name="caption">
+    <property name="windowTitle">
         <string>Konsole Session Editor</string>
     </property>
     <property name="layoutMargin" stdset="0">
