@@ -627,10 +627,10 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
           Q_UINT8 dalpha = 255 - salpha;
 
           int a, r, g, b;
-          a = QMIN( (qAlpha (col) * salpha) / 255 + (qAlpha (blend_color) * dalpha) / 255, 255 );
-          r = QMIN( (qRed   (col) * salpha) / 255 + (qRed   (blend_color) * dalpha) / 255, 255 );
-          g = QMIN( (qGreen (col) * salpha) / 255 + (qGreen (blend_color) * dalpha) / 255, 255 );
-          b = QMIN( (qBlue  (col) * salpha) / 255 + (qBlue  (blend_color) * dalpha) / 255, 255 );
+          a = qMin( (qAlpha (col) * salpha) / 255 + (qAlpha (blend_color) * dalpha) / 255, 255 );
+          r = qMin( (qRed   (col) * salpha) / 255 + (qRed   (blend_color) * dalpha) / 255, 255 );
+          g = qMin( (qGreen (col) * salpha) / 255 + (qGreen (blend_color) * dalpha) / 255, 255 );
+          b = qMin( (qBlue  (col) * salpha) / 255 + (qBlue  (blend_color) * dalpha) / 255, 255 );
 
           col = a << 24 | r << 16 | g << 8 | b;
           int pixel = a << 24 | (r * a / 255) << 16 | (g * a / 255) << 8 | (b * a / 255);
@@ -814,8 +814,8 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
   int cb  = -1; // undefined
   int cr  = -1; // undefined
 
-  int lins = QMIN(this->lines,  QMAX(0,lines  ));
-  int cols = QMIN(this->columns,QMAX(0,columns));
+  int lins = qMin(this->lines,  qMax(0,lines  ));
+  int cols = qMin(this->columns,qMax(0,columns));
   QChar *disstrU = new QChar[cols];
   char *dirtyMask = (char *) malloc(cols+2);
   QRegion dirtyRegion;
@@ -1045,10 +1045,10 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect, bool pm)
   int    tLx = tL.x();
   int    tLy = tL.y();
 
-  int lux = QMIN(columns-1, QMAX(0,(rect.left()   - tLx - bX ) / font_w));
-  int luy = QMIN(lines-1,   QMAX(0,(rect.top()    - tLy - bY  ) / font_h));
-  int rlx = QMIN(columns-1, QMAX(0,(rect.right()  - tLx - bX ) / font_w));
-  int rly = QMIN(lines-1,   QMAX(0,(rect.bottom() - tLy - bY  ) / font_h));
+  int lux = qMin(columns-1, qMax(0,(rect.left()   - tLx - bX ) / font_w));
+  int luy = qMin(lines-1,   qMax(0,(rect.top()    - tLy - bY  ) / font_h));
+  int rlx = qMin(columns-1, qMax(0,(rect.right()  - tLx - bX ) / font_w));
+  int rly = qMin(lines-1,   qMax(0,(rect.bottom() - tLy - bY  ) / font_h));
 
   QChar *disstrU = new QChar[columns];
   for (int y = luy; y <= rly; y++)
@@ -1150,8 +1150,8 @@ void TEWidget::updateImageSize()
   int oldcol = columns;
   makeImage();
   // we copy the old image to reduce flicker
-  int lins = QMIN(oldlin,lines);
-  int cols = QMIN(oldcol,columns);
+  int lins = qMin(oldlin,lines);
+  int cols = qMin(oldcol,columns);
   if (oldimg)
   {
     for (int lin = 0; lin < lins; lin++)
