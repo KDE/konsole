@@ -2,8 +2,10 @@
 Encoding=UTF-8
 Type=KonsoleApplication
 Name=Screen Session
+Name[fr]=Session Screen
 Name[x-test]=xxScreen Sessionxx
 Comment=New Screen Session
+Comment[fr]=Nouvelle session Screen
 Comment[x-test]=xxNew Screen Sessionxx
 Exec=screen
 Cwd=

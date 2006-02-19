@@ -6,4 +6,5 @@ X-KDE-AutoEmbed=true
 Icon=konsole
 Patterns=*.shell;
 Comment=File to Open a Shell
+Comment[fr]=Fichier pour ouvrir un « shell »
 Comment[x-test]=xxFile to Open a Shellxx

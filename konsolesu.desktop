@@ -8,6 +8,7 @@ MimeType=application/x-konsole
 Terminal=false
 
 Name=Terminal Program - Super User Mode
+Name[fr]=Programme terminal - mode superutilisateur
 Name[x-test]=xxTerminal Program - Super User Modexx
 X-KDE-AuthorizeAction=shell_access
 Categories=Qt;KDE;System;TerminalEmulator;X-KDE-More;

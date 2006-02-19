@@ -2,8 +2,10 @@
 Encoding=UTF-8
 Type=KonsoleApplication
 Name=Linux Console
+Name[fr]=Console Linux
 Name[x-test]=xxLinux Consolexx
 Comment=New Linux Console
+Comment[fr]=Nouvelle console Linux
 Comment[x-test]=xxNew Linux Consolexx
 Exec=bash
 Schema=Linux.schema

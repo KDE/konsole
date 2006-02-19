@@ -1,8 +1,10 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=KDE Write Daemon
+Name[fr]=Démon de commande Write de KDE
 Name[x-test]=xxKDE Write Daemonxx
 Comment=Watch for messages from local users sent with write(1) or wall(1)
+Comment[fr]=Afficher les messages écrits par les autres utilisateurs locaux à l'aide de la commande « write(1) » ou « wall(1) »
 Comment[x-test]=xxWatch for messages from local users sent with write(1) or wall(1)xx
 Type=Service
 ServiceTypes=KDEDModule

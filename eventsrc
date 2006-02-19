@@ -5,37 +5,47 @@ Comment[x-test]=xxKonsolexx
 
 [BellVisible]
 Name=Bell in visible session
+Name[fr]=Cloche dans la session visible
 Name[x-test]=xxBell in visible sessionxx
 Comment=Bell emitted within a visible session
+Comment[fr]=Cloche émise dans une session visible
 Comment[x-test]=xxBell emitted within a visible sessionxx
 default_sound=KDE_Beep.ogg
 default_presentation=1
 
 [BellInvisible]
 Name=Bell in non-visible session
+Name[fr]=Cloche dans une session invisible
 Name[x-test]=xxBell in non-visible sessionxx
 Comment=Bell emitted within a non-visible session
+Comment[fr]=Cloche émise dans une session invisible
 Comment[x-test]=xxBell emitted within a non-visible sessionxx
 default_sound=KDE_Beep.ogg
 default_presentation=16
 
 [Activity]
 Name=Activity in monitored session
+Name[fr]=Activité dans la session surveillée
 Name[x-test]=xxActivity in monitored sessionxx
 Comment=Activity detected in a monitored session
+Comment[fr]=Activité détectée dans une session surveillée
 Comment[x-test]=xxActivity detected in a monitored sessionxx
 default_presentation=16
 
 [Silence]
 Name=Silence in monitored session
+Name[fr]=Inactivité dans la session surveillée
 Name[x-test]=xxSilence in monitored sessionxx
 Comment=Silence detected in a monitored session
+Comment[fr]=Inactivité détectée dans une session surveillée
 Comment[x-test]=xxSilence detected in a monitored sessionxx
 default_presentation=16
 
 [Finished]
 Name=Session finished with non-zero status
+Name[fr]=La session s'est terminée anormalement
 Name[x-test]=xxSession finished with non-zero statusxx
 Comment=A session has exited with non-zero status
+Comment[fr]=Une session s'est terminée anormalement
 Comment[x-test]=xxA session has exited with non-zero statusxx
 default_presentation=0

@@ -2,8 +2,10 @@
 Encoding=UTF-8
 Type=KonsoleApplication
 Name=Shell
+Name[fr]=Terminal
 Name[x-test]=xxShellxx
 Comment=New Shell
+Comment[fr]=Nouveau shell
 Comment[x-test]=xxNew Shellxx
 Exec=
 Cwd=

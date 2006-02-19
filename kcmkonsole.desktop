@@ -11,6 +11,7 @@ Name=Console
 Name[x-test]=xxConsolexx
 
 GenericName=All Konsole Settings
+GenericName[fr]=Configuration de Konsole
 GenericName[x-test]=xxAll Konsole Settingsxx
 
 Keywords=konsole,console,terminal
