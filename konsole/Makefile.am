@@ -66,7 +66,7 @@ messages: rc.cpp
 	for i in ../other/*.Keytab ../other/*.keytab; do \
 	  grep "^keyboard" $$i | sed -e 's#^keyboard \"\(.*\)\"$$#i18n(\"\1\")#' >> schemas.cpp ;\
 	done
-	$(XGETTEXT) rc.cpp *.cpp -o $(podir)/konsole.pot
+	$(XGETTEXT) *.cpp -o $(podir)/konsole.pot
 	rm -f schemas.cpp
 	rm -f tips.cpp
 
