@@ -1019,7 +1019,10 @@ void Konsole::makeBasicGUI()
   if (m_help)
      menubar->insertItem(i18n("Help"), m_help);
 
-  m_shortcuts = new KActionCollection(this);
+#ifdef __GCC__
+# warning "Please verify the casting to QWidget*"
+#endif
+  m_shortcuts = new KActionCollection((QWidget*)(this));
 
   m_copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0, this,
                                  SLOT(slotCopyClipboard()), m_shortcuts, "edit_copy");
@@ -4028,7 +4031,7 @@ void Konsole::slotZModemDetected(TESession *session)
   KUrlRequesterDlg dlg(KGlobalSettings::documentPath(),
                    i18n("A ZModem file transfer attempt has been detected.\n"
                         "Please specify the folder you want to store the file(s):"),
-                   this, "zmodem_dlg");
+                   this);
   dlg.setButtonGuiItem(KDialog::Ok, KGuiItem( i18n("&Download"),
                        i18n("Start downloading file to specified folder."),
                        i18n("Start downloading file to specified folder.")));
