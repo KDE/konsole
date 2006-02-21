@@ -1019,8 +1019,8 @@ void Konsole::makeBasicGUI()
   if (m_help)
      menubar->insertItem(i18n("Help"), m_help);
 
-#ifdef __GCC__
-# warning "Please verify the casting to QWidget*"
+#ifdef __GNUC__
+# warning "Please verify the casting to QWidget* for KActionCollection"
 #endif
   m_shortcuts = new KActionCollection((QWidget*)(this));
 
