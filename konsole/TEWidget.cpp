@@ -83,7 +83,7 @@
 #include <kcursor.h>
 #include <kdebug.h>
 #include <klocale.h>
-#include <knotifyclient.h>
+#include <knotification.h>
 #include <kglobalsettings.h>
 #include <kshortcut.h>
 #include <k3urldrag.h>
@@ -1998,12 +1998,12 @@ void TEWidget::Bell(bool visibleSession, QString message)
   if (m_bellMode==BELLNONE) return;
 
   if (m_bellMode==BELLSYSTEM) {
-    KNotifyClient::beep();
+    KNotification::beep();
   } else if (m_bellMode==BELLNOTIFY) {
     if (visibleSession)
-      KNotifyClient::event(winId(), "BellVisible", message);
+      KNotification::event("BellVisible", message,QPixmap(),this);
     else
-      KNotifyClient::event(winId(), "BellInvisible", message);
+      KNotification::event("BellInvisible", message,QPixmap(),this);
   } else if (m_bellMode==BELLVISUAL) {
     swapColorTable();
     QTimer::singleShot(200,this,SLOT(swapColorTable()));
