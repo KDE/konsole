@@ -3042,7 +3042,7 @@ void Konsole::slotMovedTab(int from, int to)
   ra->unplug(m_view);
   ra->plug(m_view,(m_view->count()-sessions.count()+1)+to);
 
-  if (to==tabwidget->currentPageIndex()) {
+  if (to==tabwidget->currentIndex()) {
     if (!m_menuCreated)
       makeGUI();
     m_moveSessionLeft->setEnabled(to>0);
