@@ -55,7 +55,7 @@ KWrited::KWrited() : QObject()
   connect(sn, SIGNAL(activated(int)), this, SLOT(block_in(int)));
 
   QString txt = i18n("KWrited - Listening on Device %1").arg(pty->ttyName());
-  wid->setCaption(txt);
+  wid->setWindowTitle(txt);
   puts(txt.toLocal8Bit().data());
 }
 
