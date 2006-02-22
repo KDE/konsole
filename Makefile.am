@@ -18,7 +18,7 @@ install-data-local:
 konsolehere_DATA = konsolehere.desktop
 konsoleheredir = $(kde_datadir)/konqueror/servicemenus
 
-misc_DATA = konsole.notifyrc eventsrc tips
+misc_DATA = konsole.notifyrc tips
 miscdir = $(kde_datadir)/konsole
 
 EXTRA_DIST = CONTRIBUTORS LICENSE.readme README.bugs \
