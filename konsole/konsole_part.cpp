@@ -305,10 +305,7 @@ void konsolePart::makeGUI()
   if (!KAuthorized::authorizeKAction("konsole_rmb"))
      return;
 
-#ifdef __GNUC__
-#warning "Verify the cast to (QWidget*) for KActionCollection"
-#endif
-  actions = new KActionCollection( (QWidget*)( parentWidget ) );
+  actions = actionCollection();
   settingsActions = new KActionCollection( (QWidget*)( parentWidget ) );
 
   // Send Signal Menu -------------------------------------------------------------

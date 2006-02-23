@@ -1591,7 +1591,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       n_scroll   = qMin(config->readEntry("scrollbar", QVariant(TEWidget::SCRRIGHT)).toUInt(),2u);
       n_tabbar   = qMin(config->readEntry("tabbar", QVariant(TabBottom)).toUInt(),2u);
       n_bell = qMin(config->readEntry("bellmode", QVariant(TEWidget::BELLSYSTEM)).toUInt(),3u);
- 
+
       // Options that should be applied to all sessions /////////////
 
       // (1) set menu items and Konsole members
@@ -2486,8 +2486,8 @@ void Konsole::activateSession(TESession *s)
   pmPath = cs->imagePath();
   n_render = cs->alignment();
 
-// BR 106464 temporary fix... 
-//  only 2 sessions opened, 2nd session viewable, right-click on 1st tab and 
+// BR 106464 temporary fix...
+//  only 2 sessions opened, 2nd session viewable, right-click on 1st tab and
 //  select 'Detach', close original Konsole window... crash
 //  s is not set properly on original Konsole window
   KRadioAction *ra = session2action.find(se);
@@ -2802,7 +2802,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStringLis
     tabwidget->setTabBarHidden( false );
 
   TEWidget* te_old = te;
-  te=new TEWidget(tabwidget);
+  te=new TEWidget(0 /*will become a child of the tabwidget*/);
 
   connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
            this, SLOT(configureRequest(TEWidget*,int,int,int)) );
