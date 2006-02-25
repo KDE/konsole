@@ -3621,6 +3621,19 @@ void Konsole::detachSession(TESession* _se) {
   sessions.remove(_se);
   delete ra;
 
+  if ( _se->isMasterMode() ) {
+    // Disable master mode when detaching master
+    setMasterMode(false);
+  } else {
+    QPtrListIterator<TESession> from_it(sessions);
+    for(; from_it.current(); ++from_it) {
+      TESession *from = from_it.current();
+      if(from->isMasterMode())
+        disconnect(from->widget(), SIGNAL(keyPressedSignal(QKeyEvent*)),
+	           _se->getEmulation(), SLOT(onKeyPress(QKeyEvent*)));
+    }
+  }
+
   QColor se_tabtextcolor = tabwidget->tabColor( _se->widget() );
 
   disconnect( _se,SIGNAL(done(TESession*)),
