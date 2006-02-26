@@ -868,8 +868,9 @@ void Konsole::slotSetEncoding()
 
     if(!found)
     {
-      kdWarning() << "Codec " << selectSetEncoding->currentText() << " not found!" << endl;
+      kdWarning() << "Codec " << selectSetEncoding->currentText() << " not found!  Using default..." << endl;
       qtc = QTextCodec::codecForLocale();
+      selectSetEncoding->setCurrentItem( 0 );
     }
   }
 
