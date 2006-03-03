@@ -15,7 +15,7 @@ kde4_add_plugin(kcm_konsole ${kcm_konsole_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kcm_konsole )
 
-target_link_libraries(kcm_konsole  ${QT_AND_KDECORE_LIBS} kdeui kio )
+target_link_libraries(kcm_konsole  ${LIB_KDE3SUPPORT} kdefx )
 
 install_targets(${LIB_INSTALL_DIR}/kde4 kcm_konsole )
 
