@@ -41,7 +41,7 @@ kde4_add_dcop_skels(konsole_KDEINIT_SRCS konsoleiface.h sessioniface.h )
 
 kde4_add_kdeinit_executable( konsole ${konsole_KDEINIT_SRCS})
 
-target_link_libraries(kdeinit_konsole  ${QT_AND_KDECORE_LIBS} kdeui kio kdeprint ${QT_QTGUI_LIBRARY} DCOP ${QT_QT3SUPPORT_LIBRARY} ${QT_QTXML_LIBRARY})
+target_link_libraries(kdeinit_konsole  ${QT_AND_KDECORE_LIBS} kdeui kio kdeprint ${QT_QTGUI_LIBRARY} DCOP ${QT_QT3SUPPORT_LIBRARY} ${QT_QTXML_LIBRARY} ${X11_XTest_LIB})
 
 install_targets(${LIB_INSTALL_DIR} kdeinit_konsole )
 
@@ -73,7 +73,7 @@ kde4_add_plugin(konsolepart WITH_PREFIX ${konsolepart_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} konsolepart )
 
-target_link_libraries(konsolepart  ${QT_AND_KDECORE_LIBS} kparts )
+target_link_libraries(konsolepart  ${QT_AND_KDECORE_LIBS} kparts  ${X11_XTest_LIB} )
 
 install_targets(${LIB_INSTALL_DIR}/kde4 konsolepart )
 
