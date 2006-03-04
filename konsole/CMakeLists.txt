@@ -11,7 +11,7 @@ kde4_automoc(${fontembedder_SRCS})
 
 kde4_add_executable(fontembedder ${fontembedder_SRCS})
 
-target_link_libraries(fontembedder  ${QT_AND_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} DCOP )
+target_link_libraries(fontembedder  ${LIB_KIO} )
 
 
 ########### next target ###############
@@ -41,7 +41,7 @@ kde4_add_dcop_skels(konsole_KDEINIT_SRCS konsoleiface.h sessioniface.h )
 
 kde4_add_kdeinit_executable( konsole ${konsole_KDEINIT_SRCS})
 
-target_link_libraries(kdeinit_konsole  ${QT_AND_KDECORE_LIBS} kdeui kio kdeprint ${QT_QTGUI_LIBRARY} DCOP ${QT_QT3SUPPORT_LIBRARY} ${QT_QTXML_LIBRARY} ${X11_XTest_LIB})
+target_link_libraries(kdeinit_konsole  ${LIB_KDE3SUPPORT} kdeprint  ${QT_QTXML_LIBRARY} ${X11_XTest_LIB})
 
 install_targets(${LIB_INSTALL_DIR} kdeinit_konsole )
 
@@ -73,7 +73,7 @@ kde4_add_plugin(konsolepart WITH_PREFIX ${konsolepart_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} konsolepart )
 
-target_link_libraries(konsolepart  ${QT_AND_KDECORE_LIBS} kparts  ${X11_XTest_LIB} )
+target_link_libraries(konsolepart  ${LIB_KDE3SUPPORT}  ${X11_XTest_LIB} )
 
 install_targets(${LIB_INSTALL_DIR}/kde4 konsolepart )
 
@@ -90,7 +90,7 @@ kde4_add_plugin(kded_kwrited ${kded_kwrited_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kded_kwrited )
 
-target_link_libraries(kded_kwrited  ${QT_AND_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} DCOP ${QT_QT3SUPPORT_LIBRARY})
+target_link_libraries(kded_kwrited  ${LIB_KDE3SUPPORT})
 
 install_targets(${LIB_INSTALL_DIR}/kde4 kded_kwrited )
 
