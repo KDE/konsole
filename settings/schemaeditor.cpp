@@ -430,7 +430,7 @@ void SchemaEditor::saveCurrent()
 			     (const char *) colorCombo->text(i).toUtf8());
 	    else {
 		int ch, cs, cv;
-		color[i].hsv(&ch, &cs, &cv);
+		color[i].getHsv(&ch, &cs, &cv);
 		scol.sprintf("rcolor %1d %3d %3d     %2d %1d # %s", i,
 			     cs, cv, transparent[i], bold[i],
 			     (const char *) colorCombo->text(i).toUtf8());
