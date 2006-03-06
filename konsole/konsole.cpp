@@ -763,7 +763,7 @@ void Konsole::makeGUI()
    {
       KeyTrans* ktr = KeyTrans::find(i);
       assert( ktr );
-      QString title=ktr->hdr().lower();
+      QString title=ktr->hdr().toLower();
       kt_titles << title;
       kt_map[title] = ktr;
    }
@@ -1644,7 +1644,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       b_dynamicTabHide = config->readEntry("DynamicTabHide", QVariant(false)).toBool();
       b_autoResizeTabs = config->readEntry("AutoResizeTabs", QVariant(false)).toBool();
 
-      s_encodingName = config->readEntry( "EncodingName", "" ).lower();
+      s_encodingName = config->readEntry( "EncodingName", "" ).toLower();
    }
 
    if (m_menuCreated)

@@ -201,7 +201,7 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
      {
         KeyTrans* ktr = KeyTrans::find(i);
         assert( ktr );
-        QString title=ktr->hdr().lower();
+        QString title=ktr->hdr().toLower();
         kt_titles << title;
         kt_map[title] = ktr;
      }
