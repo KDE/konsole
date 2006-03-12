@@ -16,7 +16,7 @@ install_files( ${SERVICETYPES_INSTALL_DIR} FILES terminalemulator.desktop )
 install_files( ${SERVICES_INSTALL_DIR} FILES konsolepart.desktop kwrited.desktop konsole-script.desktop )
 install_files( ${DATA_INSTALL_DIR}/konqueror/servicemenus FILES konsolehere.desktop )
 install_files( ${SERVICES_INSTALL_DIR}/kded FILES kwrited.desktop )
-install_files( ${DATA_INSTALL_DIR}/kconf_update FILES konsole.upd )
+install_files( ${DATA_INSTALL_DIR}/kconf_update FILES konsole.upd schemaStrip.pl )
 
 kde4_footer()
 
