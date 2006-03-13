@@ -4132,7 +4132,7 @@ unsigned int SizeDialog::lines() const
 //////////////////////////////////////////////////////////////////////
 
 KonsoleFind::KonsoleFind( QWidget *parent, const char *name, bool /*modal*/ )
-  : KEdFind( parent, name, false ), m_editorDialog(0), m_editRegExp(0)
+  : KEdFind( parent, false ), m_editorDialog(0), m_editRegExp(0)
 {
   QWidget* row = new QWidget((QWidget*)group );
   QHBoxLayout *hboxLayout1 = new QHBoxLayout(row);
