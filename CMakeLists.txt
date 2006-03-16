@@ -1,5 +1,7 @@
 kde4_header()
 
+project(konsole)
+
 add_subdirectory( konsole ) 
 add_subdirectory( other ) 
 add_subdirectory( doc ) 
