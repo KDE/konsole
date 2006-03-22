@@ -57,7 +57,6 @@ class KMenu;
 class KAction;
 class KToggleAction;
 class KSelectAction;
-class KRadioAction;
 class KTabWidget;
 class QToolButton;
 
@@ -285,7 +284,7 @@ private:
   Q3PtrList<TEWidget> activeTEs();
 
   Q3PtrDict<TESession> action2session;
-  Q3PtrDict<KRadioAction> session2action;
+  Q3PtrDict<KToggleAction> session2action;
   Q3PtrList<TESession> sessions;
 
   Q3IntDict<KSimpleConfig> no2command;     //QT4 - convert to QList
@@ -361,6 +360,8 @@ private:
   KAction       *m_tabDetachSession;
 
   KActionCollection *m_shortcuts;
+
+  QActionGroup  *m_sessionGroup;
 
   KonsoleBookmarkHandler *bookmarkHandler;
   KonsoleBookmarkHandler *bookmarkHandlerSession;

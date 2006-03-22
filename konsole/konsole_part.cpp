@@ -350,7 +350,7 @@ void konsolePart::makeGUI()
      selectBell->setItems(bellitems);
      selectBell->plug(m_options);
 
-      m_fontsizes = new KActionMenu( i18n( "Font" ), SmallIconSet( "text" ), settingsActions, 0L );
+      m_fontsizes = new KActionMenu( KIcon( "text" ), i18n( "Font" ), settingsActions, 0L );
       m_fontsizes->insert( new KAction( i18n( "&Enlarge Font" ), SmallIconSet( "viewmag+" ), 0, this, SLOT( biggerFont() ), settingsActions, "enlarge_font" ) );
       m_fontsizes->insert( new KAction( i18n( "&Shrink Font" ), SmallIconSet( "viewmag-" ), 0, this, SLOT( smallerFont() ), settingsActions, "shrink_font" ) );
       m_fontsizes->insert( new KAction( i18n( "Se&lect..." ), SmallIconSet( "font" ), 0, this, SLOT( slotSelectFont() ), settingsActions, "select_font" ) );

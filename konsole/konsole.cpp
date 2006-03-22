@@ -170,22 +170,22 @@ public:
                              const char* name = 0 )
         : KSelectAction(text, pix, accel, receiver, slot, parent, name) {}
 
-    virtual void slotActivated( int index );
+protected:
+    virtual void actionTriggered(QAction* action);
 };
 
-void KonsoleFontSelectAction::slotActivated(int index) {
+void KonsoleFontSelectAction::actionTriggered(QAction* action) {
     // emit even if it's already activated
-    if (currentItem() == index) {
-        KSelectAction::slotActivated();
-        return;
+    if (currentAction() == action) {
+        trigger();
     } else {
-        KSelectAction::slotActivated(index);
+        KSelectAction::actionTriggered(action);
     }
 }
 
 template class Q3PtrDict<TESession>;
 template class Q3IntDict<KSimpleConfig>;
-template class Q3PtrDict<KRadioAction>;
+template class Q3PtrDict<KToggleAction>;
 
 #define DEFAULT_HISTORY_SIZE 1000
 
@@ -272,6 +272,8 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 ,sl_sessionShortCuts(0)
 ,s_workDir(workdir)
 {
+  m_sessionGroup = new QActionGroup(this);
+
   isRestored = b_inRestore;
   connect( &m_closeTimeout, SIGNAL(timeout()), this, SLOT(slotCouldNotClose()));
 
@@ -545,7 +547,7 @@ void Konsole::makeGUI()
    m_moveSessionRight->plug(m_view);
 
    m_view->addSeparator();
-   KRadioAction *ra = session2action.find(se);
+   KToggleAction *ra = session2action.find(se);
    if (ra!=0) ra->plug(m_view);
 
    //bookmarks menu
@@ -612,8 +614,8 @@ void Konsole::makeGUI()
       selectBell->setItems(bellitems);
       selectBell->plug(m_options);
 
-      KActionMenu* m_fontsizes = new KActionMenu( i18n( "Font" ),
-                                                  SmallIconSet( "text" ),
+      KActionMenu* m_fontsizes = new KActionMenu( KIcon( "text" ),
+                                                  i18n( "Font" ),
                                                   actions, 0L );
       m_fontsizes->insert( new KAction( i18n( "&Enlarge Font" ),
                            SmallIconSet( "fontsizeup" ), 0, this,
@@ -823,7 +825,7 @@ void Konsole::makeGUI()
       KAcceleratorManager::manage( m_tabbarPopupMenu );
       selectTabbar->plug(m_tabbarPopupMenu);
 
-      KSelectAction *viewOptions = new KSelectAction(actionCollection());
+      KSelectAction *viewOptions = new KSelectAction(actionCollection(), 0);
       viewOptions->setText(i18n("Tab &Options"));
       QStringList options;
       options << i18n("&Text && Icons") << i18n("Text &Only") << i18n("&Icons Only");
@@ -1139,7 +1141,7 @@ void Konsole::makeBasicGUI()
     loadSessionCommands();
     loadScreenSessions();
   }
-  m_shortcuts->readShortcutSettings();
+  m_shortcuts->readSettings();
 
   m_sessionList = new KMenu(this);
   KAcceleratorManager::manage( m_sessionList );
@@ -1926,7 +1928,7 @@ void Konsole::slotConfigureNotifications()
 void Konsole::slotConfigureKeys()
 {
   KKeyDialog::configure(m_shortcuts);
-  m_shortcuts->writeShortcutSettings();
+  m_shortcuts->writeSettings();
 
   QStringList ctrlKeys;
 
@@ -2011,7 +2013,7 @@ void Konsole::reparseConfiguration()
       }
       if ( ! b_foundSession ) {
         action->setShortcut( KShortcut() );   // Clear shortcut
-        m_shortcuts->writeShortcutSettings();
+        m_shortcuts->writeSettings();
         delete action;           // Remove Action and Accel
         if ( i == 0 ) i = 0;     // Reset index
         else i--;
@@ -2020,7 +2022,7 @@ void Konsole::reparseConfiguration()
     }
   }
 
-  m_shortcuts->readShortcutSettings();
+  m_shortcuts->readSettings();
 
   // User may have changed Schema->Set as default schema
   s_kconfigSchema = KGlobal::config()->readEntry("schema");
@@ -2127,9 +2129,10 @@ void Konsole::updateTitle()
   setIconText( se->IconText() );
   tabwidget->setTabIconSet(se->widget(), iconSetForSession(se));
   QString icon = se->IconName();
-  KRadioAction *ra = session2action.find(se);
-  if (ra && (ra->icon() != icon))
-    ra->setIcon(icon);
+  KToggleAction *ra = session2action.find(se);
+  if (ra)
+    // FIXME KAction port - should check to see if icon() == KIcon(icon), but currently won't work (as creates two KIconEngines)
+    ra->setIconName(icon);
   if (m_tabViewMode == ShowIconOnly)
     tabwidget->setTabText( se_index, QString() );
   else if (b_matchTabWinTitle)
@@ -2318,7 +2321,7 @@ void Konsole::sendSignal(int sn)
 
 void Konsole::runSession(TESession* s)
 {
-    KRadioAction *ra = session2action.find(s);
+    KToggleAction *ra = session2action.find(s);
     ra->setChecked(true);
     activateSession(s);
 
@@ -2354,13 +2357,13 @@ void Konsole::addSession(TESession* s)
   s->setTitle(newTitle);
 
   // create an action for the session
-  KRadioAction *ra = new KRadioAction(newTitle.replace('&',"&&"),
+  KToggleAction *ra = new KToggleAction(newTitle.replace('&',"&&"),
                                       s->IconName(),
                                       0,
                                       this,
                                       SLOT(activateSession()),
                                       m_shortcuts);
-  ra->setExclusiveGroup("sessions");
+  ra->setActionGroup(m_sessionGroup);
   ra->setChecked(true);
 
   action2session.insert(ra, s);
@@ -2455,7 +2458,7 @@ void Konsole::activateSession()
   Q3PtrDictIterator<TESession> it( action2session ); // iterator for dict
   while ( it.current() )
   {
-    KRadioAction *ra = (KRadioAction*)it.currentKey();
+    KToggleAction *ra = (KToggleAction*)it.currentKey();
     if (ra->isChecked()) { s = it.current(); break; }
     ++it;
   }
@@ -2490,7 +2493,7 @@ void Konsole::activateSession(TESession *s)
 //  only 2 sessions opened, 2nd session viewable, right-click on 1st tab and
 //  select 'Detach', close original Konsole window... crash
 //  s is not set properly on original Konsole window
-  KRadioAction *ra = session2action.find(se);
+  KToggleAction *ra = session2action.find(se);
   if (!ra) {
     se=sessions.first();        // Get new/correct TESession
     ra = session2action.find(se);
@@ -2957,7 +2960,7 @@ void Konsole::doneSession(TESession* s)
   if (se_previous)
     activateSession(se_previous);
 
-  KRadioAction *ra = session2action.find(s);
+  KToggleAction *ra = session2action.find(s);
   ra->unplug(m_view);
   tabwidget->removePage( s->widget() );
   if (rootxpms[s->widget()]) {
@@ -3038,7 +3041,7 @@ void Konsole::slotMovedTab(int from, int to)
   sessions.remove(_se);
   sessions.insert(to,_se);
 
-  KRadioAction *ra = session2action.find(_se);
+  KToggleAction *ra = session2action.find(_se);
   ra->unplug(m_view);
   ra->plug(m_view,(m_view->count()-sessions.count()+1)+to);
 
@@ -3061,7 +3064,7 @@ void Konsole::moveSessionLeft()
   sessions.remove(position);
   sessions.insert(position-1,se);
 
-  KRadioAction *ra = session2action.find(se);
+  KToggleAction *ra = session2action.find(se);
   ra->unplug(m_view);
   ra->plug(m_view,(m_view->count()-sessions.count()+1)+position-1);
 
@@ -3089,7 +3092,7 @@ void Konsole::moveSessionRight()
   sessions.remove(position);
   sessions.insert(position+1,se);
 
-  KRadioAction *ra = session2action.find(se);
+  KToggleAction *ra = session2action.find(se);
   ra->unplug(m_view);
   ra->plug(m_view,(m_view->count()-sessions.count()+1)+position+1);
 
@@ -3196,9 +3199,9 @@ void Konsole::notifySessionState(TESession* session, int state)
       && m_tabViewMode != ShowTextOnly) {
 
     QPixmap normal = KGlobal::instance()->iconLoader()->loadIcon(state_iconname,
-                       KIcon::Small, 0, KIcon::DefaultState, 0L, true);
+                       K3Icon::Small, 0, K3Icon::DefaultState, 0L, true);
     QPixmap active = KGlobal::instance()->iconLoader()->loadIcon(state_iconname,
-                       KIcon::Small, 0, KIcon::ActiveState, 0L, true);
+                       K3Icon::Small, 0, K3Icon::ActiveState, 0L, true);
 
     // make sure they are not larger than 16x16
     if (normal.width() > 16 || normal.height() > 16)
@@ -3562,7 +3565,7 @@ void Konsole::slotDetachSession()
 void Konsole::detachSession(TESession* _se) {
   if (!_se) _se=se;
 
-  KRadioAction *ra = session2action.find(_se);
+  KToggleAction *ra = session2action.find(_se);
   ra->unplug(m_view);
   TEWidget* se_widget = _se->widget();
   session2action.remove(_se);
@@ -3665,10 +3668,10 @@ void Konsole::attachSession(TESession* session)
   }
 
   QString title=session->Title();
-  KRadioAction *ra = new KRadioAction(title.replace('&',"&&"), session->IconName(),
+  KToggleAction *ra = new KToggleAction(title.replace('&',"&&"), session->IconName(),
                                       0, this, SLOT(activateSession()), m_shortcuts);
 
-  ra->setExclusiveGroup("sessions");
+  ra->setActionGroup(m_sessionGroup);
   ra->setChecked(true);
 
   action2session.insert(ra, session);
@@ -3725,11 +3728,11 @@ void Konsole::slotRenameSession() {
 
 void Konsole::slotRenameSession(TESession* ses, const QString &name)
 {
-  KRadioAction *ra = session2action.find(ses);
+  KToggleAction *ra = session2action.find(ses);
   QString title=name;
   title=title.replace('&',"&&");
   ra->setText(title);
-  ra->setIcon( ses->IconName() ); // I don't know why it is needed here
+  ra->setIconName( ses->IconName() ); // I don't know why it is needed here
   if (m_tabViewMode!=ShowIconOnly) {
     int se_index = tabwidget->indexOf( se->widget() );
     tabwidget->setTabText( se_index, title );
