@@ -15,7 +15,7 @@ kde4_add_plugin(kcm_konsole ${kcm_konsole_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kcm_konsole )
 
-target_link_libraries(kcm_konsole  ${LIB_KDE3SUPPORT} kdefx )
+target_link_libraries(kcm_konsole  ${KDE4_KDE3SUPPORT_LIBS} kdefx )
 
 install_targets(${LIB_INSTALL_DIR}/kde4 kcm_konsole )
 
