@@ -11,7 +11,7 @@ kde4_automoc(${fontembedder_SRCS})
 
 kde4_add_executable(fontembedder ${fontembedder_SRCS})
 
-target_link_libraries(fontembedder  ${LIB_KIO} )
+target_link_libraries(fontembedder  ${KDE4_KIO_LIBS} )
 
 
 ########### next target ###############
