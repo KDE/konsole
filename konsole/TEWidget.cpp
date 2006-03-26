@@ -1263,7 +1263,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
     // The receiver of the testIsSelected() signal will adjust
     // 'selected' accordingly.
     emit testIsSelected(pos.x(), pos.y(), selected);
-    if ((!ctrldrag || ev->state() & Qt::ControlModifier) && selected ) {
+    if ((!ctrldrag || ev->modifiers() & Qt::ControlModifier) && selected ) {
       // The user clicked inside selected text
       dragInfo.state = diPending;
       dragInfo.start = ev->pos();
@@ -1272,10 +1272,10 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       // No reason to ever start a drag event
       dragInfo.state = diNone;
 
-      preserve_line_breaks = !( ( ev->state() & Qt::ControlModifier ) && !(ev->state() & Qt::AltModifier) );
-      column_selection_mode = (ev->state() & Qt::AltModifier) && (ev->state() & Qt::ControlModifier);
+      preserve_line_breaks = !( ( ev->modifiers() & Qt::ControlModifier ) && !(ev->modifiers() & Qt::AltModifier) );
+      column_selection_mode = (ev->modifiers() & Qt::AltModifier) && (ev->modifiers() & Qt::ControlModifier);
 
-      if (mouse_marks || (ev->state() & Qt::ShiftModifier))
+      if (mouse_marks || (ev->modifiers() & Qt::ShiftModifier))
       {
         emit clearSelectionSignal();
         pos.ry() += scrollbar->value();
@@ -1291,16 +1291,16 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   }
   else if ( ev->button() == Qt::MidButton )
   {
-    if ( mouse_marks || (!mouse_marks && (ev->state() & Qt::ShiftModifier)) )
-      emitSelection(true,ev->state() & Qt::ControlModifier);
+    if ( mouse_marks || (!mouse_marks && (ev->modifiers() & Qt::ShiftModifier)) )
+      emitSelection(true,ev->modifiers() & Qt::ControlModifier);
     else
       emit mouseSignal( 1, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maxValue() );
   }
   else if ( ev->button() == Qt::RightButton )
   {
-    if (mouse_marks || (ev->state() & Qt::ShiftModifier)) {
+    if (mouse_marks || (ev->modifiers() & Qt::ShiftModifier)) {
       configureRequestPoint = QPoint( ev->x(), ev->y() );
-      emit configureRequest( this, ev->state()&(Qt::ShiftModifier|Qt::ControlModifier), ev->x(), ev->y() );
+      emit configureRequest( this, ev->modifiers()&(Qt::ShiftModifier|Qt::ControlModifier), ev->x(), ev->y() );
     }
     else
       emit mouseSignal( 2, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maxValue() );
@@ -1310,7 +1310,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
 void TEWidget::mouseMoveEvent(QMouseEvent* ev)
 {
   // for auto-hiding the cursor, we need mouseTracking
-  if (ev->state() == Qt::NoButton ) return;
+  if (ev->modifiers() == Qt::NoButton ) return;
 
   if (dragInfo.state == diPending) {
     // we had a mouse down, but haven't confirmed a drag yet
@@ -1334,7 +1334,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
   if (actSel == 0) return;
 
  // don't extend selection while pasting
-  if (ev->state() & Qt::MidButton) return;
+  if (ev->modifiers() & Qt::MidButton) return;
 
   extendSelection( ev->pos() );
 }
@@ -1548,7 +1548,7 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
       int    tLx = tL.x();
       int    tLy = tL.y();
 
-      if (!mouse_marks && !(ev->state() & Qt::ShiftModifier))
+      if (!mouse_marks && !(ev->modifiers() & Qt::ShiftModifier))
         emit mouseSignal( 3, // release
                         (ev->x()-tLx-bX)/font_w + 1,
                         (ev->y()-tLy-bY)/font_h + 1 +scrollbar->value() -scrollbar->maxValue());
@@ -1952,7 +1952,7 @@ bool TEWidget::event( QEvent *e )
     KKey key( ke );
     int keyCodeQt = key.keyCodeQt();
 
-    if ( !standalone() && (ke->state() == Qt::ControlModifier) )
+    if ( !standalone() && (ke->modifiers() == Qt::ControlModifier) )
     {
       ke->accept();
       return true;
