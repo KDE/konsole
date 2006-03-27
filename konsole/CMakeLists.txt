@@ -40,7 +40,7 @@ kde4_add_dcop_skels(konsole_KDEINIT_SRCS konsoleiface.h sessioniface.h )
 
 kde4_add_kdeinit_executable( konsole ${konsole_KDEINIT_SRCS})
 
-target_link_libraries(kdeinit_konsole  ${KDE4_KDE3SUPPORT_LIBS} kdeprint  ${QT_QTXML_LIBRARY} ${X11_XTest_LIB})
+target_link_libraries(kdeinit_konsole  ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KDEPRINT_LIBS}  ${QT_QTXML_LIBRARY} ${X11_XTest_LIB})
 
 install_targets(${LIB_INSTALL_DIR} kdeinit_konsole )
 
