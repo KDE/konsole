@@ -227,6 +227,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 ,selectScrollbar(0)
 ,selectTabbar(0)
 ,selectBell(0)
+,selectSetEncoding(0)
 ,m_clearHistory(0)
 ,m_findHistory(0)
 ,m_saveHistory(0)
