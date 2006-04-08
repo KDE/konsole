@@ -210,6 +210,7 @@ void BlockArray::decreaseBuffer(size_t newsize)
 
     FILE *fion = fdopen(dup(ion), "w+b");
     if (!fion) {
+        delete [] buffer1;
         perror("fdopen/dup");
         return;
     }
