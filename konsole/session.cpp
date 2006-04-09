@@ -215,14 +215,16 @@ void TESession::notifySessionState(int state)
     te->Bell(em->isConnected(),i18n("Bell in session '%1'").arg(title));
   } else if (state==NOTIFYACTIVITY) {
     if (monitorSilence) {
-      monitorTimer->start(silence_seconds*1000,true);
+      monitorTimer->setSingleShot(true);
+      monitorTimer->start(silence_seconds);
     }
     if (!monitorActivity)
       return;
     if (!notifiedActivity) {
       KNotifyClient::event(winId, "Activity", i18n("Activity in session '%1'").arg(title));
       notifiedActivity=true;
-      monitorTimer->start(silence_seconds*1000,true);
+      monitorTimer->setSingleShot(true);
+      monitorTimer->start(silence_seconds*1000);
     }
   }
 
@@ -512,8 +514,10 @@ void TESession::setMonitorSilence(bool _monitor)
     return;
 
   monitorSilence=_monitor;
-  if (monitorSilence)
-    monitorTimer->start(silence_seconds*1000,true);
+  if (monitorSilence) {
+    monitorTimer->setSingleShot(true);
+    monitorTimer->start(silence_seconds*1000);
+  }
   else
     monitorTimer->stop();
 }
@@ -522,7 +526,8 @@ void TESession::setMonitorSilenceSeconds(int seconds)
 {
   silence_seconds=seconds;
   if (monitorSilence) {
-    monitorTimer->start(silence_seconds*1000,true);
+    monitorTimer->setSingleShot(true);
+    monitorTimer->start(silence_seconds*1000);
   }
 }
 
@@ -622,8 +627,8 @@ void TESession::zmodemStatus(KProcess *, char *data, int len)
   QByteArray msg(data, len+1);
   while(!msg.isEmpty())
   {
-     int i = msg.find('\015');
-     int j = msg.find('\012');
+     int i = msg.indexOf('\015');
+     int j = msg.indexOf('\012');
      QByteArray txt;
      if ((i != -1) && ((j == -1) || (i < j)))
      {

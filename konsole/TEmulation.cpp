@@ -318,7 +318,7 @@ void TEmulation::onRcvBlock(const char *s, int len)
        while(!result.length())
           result = decoder->toUnicode(&s[i],1);
        reslen = 1;
-       result.setLength(reslen);
+       result.resize(reslen);
        result[0] = QChar(s[i]);
     }
 
@@ -399,9 +399,9 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool caseSensit
     for (int i = (m_findPos==-1?0:m_findPos+1); i<(scr->getHistLines()+scr->getLines()); i++) {
       string = scr->getHistoryLine(i);
       if (regExp)
-        pos = string.find( QRegExp(str,caseSensitive) );
+        pos = string.indexOf( QRegExp(str,caseSensitive) );
       else
-        pos = string.find(str, 0, caseSensitive);
+        pos = string.indexOf(str, 0, caseSensitive?Qt::CaseSensitive:Qt::CaseInsensitive);
       if(pos!=-1) {
         m_findPos=i;
         if(i>scr->getHistLines())
@@ -417,9 +417,9 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool caseSensit
     for(int i = (m_findPos==-1?(scr->getHistLines()+scr->getLines()):m_findPos-1); i>=0; i--) {
       string = scr->getHistoryLine(i);
       if (regExp)
-        pos = string.find( QRegExp(str,caseSensitive) );
+        pos = string.indexOf( QRegExp(str,caseSensitive) );
       else
-        pos = string.find(str, 0, caseSensitive);
+        pos = string.indexOf(str, 0, caseSensitive?Qt::CaseSensitive:Qt::CaseInsensitive);
       if(pos!=-1) {
         m_findPos=i;
         if(i>scr->getHistLines())
@@ -466,9 +466,13 @@ void TEmulation::showBulk()
 
 void TEmulation::bulkStart()
 {
-   bulk_timer1.start(BULK_TIMEOUT1,true);
+   bulk_timer1.setSingleShot(true);
+   bulk_timer1.start(BULK_TIMEOUT1);
    if (!bulk_timer2.isActive())
-      bulk_timer2.start(BULK_TIMEOUT2, true);
+   {
+      bulk_timer2.setSingleShot(true);
+      bulk_timer2.start(BULK_TIMEOUT2);
+   }
 }
 
 void TEmulation::setConnect(bool c)

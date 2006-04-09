@@ -1210,7 +1210,8 @@ bool Konsole::queryClose()
       sessions.next();
     }
 
-    m_closeTimeout.start(1500, true);
+    m_closeTimeout.setSingleShot(true);
+    m_closeTimeout.start(1500);
     return false;
 }
 
@@ -2575,7 +2576,7 @@ void Konsole::setSessionEncoding( const QString &encoding, TESession *session )
     for( QStringList::ConstIterator it = items.begin(); it != items.end();
          ++it, ++i)
     {
-        if ( (*it).find( t_enc ) != -1 )
+        if ( (*it).indexOf( t_enc ) != -1 )
         {
             enc = *it;
             break;
@@ -2614,7 +2615,7 @@ void Konsole::slotSetSessionEncoding(TESession *session, const QString &encoding
   for(QStringList::ConstIterator it = items.begin();
       it != items.end(); ++it, ++i)
   {
-     if ((*it).find(encoding) != -1)
+     if ((*it).indexOf(encoding) != -1)
      {
         enc = *it;
         break;

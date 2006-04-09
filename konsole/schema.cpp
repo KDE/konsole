@@ -336,7 +336,7 @@ bool ColorSchema::rereadSchemaFile()
           continue;
 
         QString qline(line);
-        m_imagePath = locate("wallpaper", qline.mid( qline.find(" ",7)+1 ) );
+        m_imagePath = locate("wallpaper", qline.mid( qline.indexOf(" ",7)+1 ) );
         m_alignment = attr;
       }
       if (!strncmp(line,"transparency",12))
