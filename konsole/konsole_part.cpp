@@ -314,10 +314,10 @@ void konsolePart::makeGUI()
      m_signals = new KMenu((KMainWindow*)parentWidget);
      m_signals->insertItem( i18n( "&Suspend Task" )   + " (STOP)", SIGSTOP);
      m_signals->insertItem( i18n( "&Continue Task" )  + " (CONT)", SIGCONT);
-     m_signals->insertItem( i18n( "&Hangup" )         + " (HUP)",   SIGHUP);
-     m_signals->insertItem( i18n( "&Interrupt Task" ) + " (INT)",   SIGINT);
+     m_signals->insertItem( i18n( "&Hangup" )         + " (HUP)",  SIGHUP);
+     m_signals->insertItem( i18n( "&Interrupt Task" ) + " (INT)",  SIGINT);
      m_signals->insertItem( i18n( "&Terminate Task" ) + " (TERM)", SIGTERM);
-     m_signals->insertItem( i18n( "&Kill Task" )      + " (KILL)",  SIGKILL);
+     m_signals->insertItem( i18n( "&Kill Task" )      + " (KILL)", SIGKILL);
      m_signals->insertItem( i18n( "User Signal &1")   + " (USR1)", SIGUSR1);
      m_signals->insertItem( i18n( "User Signal &2")   + " (USR2)", SIGUSR2);
      connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
@@ -963,11 +963,11 @@ HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
   m_btnEnable    = new QCheckBox(i18n("&Enable"), mainFrame);
 
   QObject::connect(m_btnEnable, SIGNAL(toggled(bool)),
-                   this,      SLOT(slotHistEnable(bool)));
+                   this,     SLOT(slotHistEnable(bool)));
 
   m_size = new QSpinBox(0, 10 * 1000 * 1000, 100, mainFrame);
   m_size->setValue(histSize);
-  m_size->setSpecialValueText(i18n("Unlimited (number of lines)", "Unlimited"));
+  m_size->setSpecialValueText(i18nc("Unlimited (number of lines)", "Unlimited"));
 
   m_setUnlimited = new QPushButton(i18n("&Set Unlimited"), mainFrame);
   connect( m_setUnlimited,SIGNAL(clicked()), this,SLOT(slotSetUnlimited()) );

@@ -432,7 +432,7 @@ void TEScreen::resizeImage(int new_lines, int new_columns)
     }
     newwrapped[y]=false;
   }
-  int cpy_lines   = qMin(new_lines,  lines);
+  int cpy_lines   = qMin(new_lines, lines);
   int cpy_columns = qMin(new_columns,columns);
   // copy to new image
   for (int y = 0; y < cpy_lines; y++) {

@@ -1110,7 +1110,7 @@ void Konsole::makeBasicGUI()
   m_quit = new KAction(i18n("&Quit"), "exit", 0, this, SLOT( close() ), m_shortcuts, "file_quit");
 
   KShortcut shortcut(Qt::CTRL+Qt::ALT+Qt::Key_N);
-  shortcut.append(KKeySequence(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_N)));
+  shortcut.append(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_N));
   new KAction(i18n("New Session"), shortcut, this, SLOT(newSession()), m_shortcuts, "new_session");
   new KAction(i18n("Activate Menu"), Qt::CTRL+Qt::ALT+Qt::Key_M, this, SLOT(activateMenu()), m_shortcuts, "activate_menu");
   new KAction(i18n("List Sessions"), 0, this, SLOT(listSessions()), m_shortcuts, "list_sessions");
@@ -1128,7 +1128,7 @@ void Konsole::makeBasicGUI()
               this, SLOT(nextSession()), m_shortcuts, "next_session");
 
   for (int i=1;i<13;i++) { // Due to 12 function keys?
-     new KAction(i18n("Switch to Session %1").arg(i), 0, this, SLOT(switchToSession()), m_shortcuts, QString().sprintf("switch_to_session_%02d", i).latin1());
+     new KAction(i18n("Switch to Session %1", i), 0, this, SLOT(switchToSession()), m_shortcuts, QString().sprintf("switch_to_session_%02d", i).latin1());
   }
 
   new KAction(i18n("Enlarge Font"), 0, this, SLOT(biggerFont()), m_shortcuts, "bigger_font");
@@ -1939,9 +1939,10 @@ void Konsole::slotConfigureKeys()
     KShortcut shortcut = (m_shortcuts->action( i ))->shortcut();
     for( uint j = 0; j < shortcut.count(); j++)
     {
-      const KKey &key = shortcut.seq(j).key(0); // First Key of KeySequence
-      if (key.modFlags() == KKey::CTRL)
-        ctrlKeys += key.toString();
+      QKeySequence seq = shortcut.seq(j);
+      int key = seq.isEmpty() ? 0 : seq[0]; // First Key of KeySequence
+      if (key & Qt::KeyboardModifierMask == Qt::CTRL)
+        ctrlKeys += QKeySequence(key).toString();
     }
 
     // Are there any shortcuts for Session Menu entries?
@@ -2351,7 +2352,7 @@ void Konsole::addSession(TESession* s)
      if (!nameOk)
      {
        count++;
-       newTitle = i18n("abbreviation of number","%1 No. %2").arg(s->Title()).arg(count);
+       newTitle = i18nc("abbreviation of number","%1 No. %2", s->Title(), count);
      }
   }
   while (!nameOk);
@@ -3403,7 +3404,7 @@ void Konsole::addScreenSession(const QString &path, const QString &socket)
   KSimpleConfig *co = new KSimpleConfig(tmpFile->name());
   co->setDesktopGroup();
   co->writeEntry("Name", socket);
-  QString txt = i18n("Screen is a program controlling screens!", "Screen at %1").arg(socket);
+  QString txt = i18nc("Screen is a program controlling screens!", "Screen at %1", socket);
   co->writeEntry("Comment", txt);
   co->writePathEntry("Exec", QString::fromLatin1("SCREENDIR=%1 screen -r %2")
     .arg(path).arg(socket));
@@ -3768,7 +3769,7 @@ HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
 
   m_size = new QSpinBox(0, 10 * 1000 * 1000, 100, mainFrame);
   m_size->setValue(histSize);
-  m_size->setSpecialValueText(i18n("Unlimited (number of lines)", "Unlimited"));
+  m_size->setSpecialValueText(i18nc("Unlimited (number of lines)", "Unlimited"));
 
   m_label->setBuddy( m_size );
 
@@ -3946,7 +3947,7 @@ void Konsole::slotFind()
     }
   else
     KMessageBox::information( m_finddialog,
-    	i18n( "Search string '%1' not found." ).arg(KStringHandler::csqueeze(m_find_pattern)),
+    	i18n( "Search string '%1' not found." , KStringHandler::csqueeze(m_find_pattern)),
 	i18n( "Find" ) );
 }
 
@@ -4068,7 +4069,7 @@ void Konsole::slotPrint()
 {
   KPrinter printer;
   printer.addDialogPage(new PrintSettings());
-  if (printer.setup(this, i18n("Print %1").arg(se->Title())))
+  if (printer.setup(this, i18n("Print %1", se->Title())))
   {
     printer.setFullPage(false);
     printer.setCreator("Konsole");

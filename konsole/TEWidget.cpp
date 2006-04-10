@@ -129,8 +129,8 @@ static const ColorEntry base_color_table[TABLE_COLORS] =
   ColorEntry(QColor(0x00,0x00,0x00), 0, 0 ), ColorEntry( QColor(0xB2,0xB2,0xB2), 1, 0 ), // Dfore, Dback
   ColorEntry(QColor(0x00,0x00,0x00), 0, 0 ), ColorEntry( QColor(0xB2,0x18,0x18), 0, 0 ), // Black, Red
   ColorEntry(QColor(0x18,0xB2,0x18), 0, 0 ), ColorEntry( QColor(0xB2,0x68,0x18), 0, 0 ), // Green, Yellow
-  ColorEntry(QColor(0x18,0x18,0xB2), 0, 0 ), ColorEntry( QColor(0xB2,0x18,0xB2), 0, 0 ), // Blue,  Magenta
-  ColorEntry(QColor(0x18,0xB2,0xB2), 0, 0 ), ColorEntry( QColor(0xB2,0xB2,0xB2), 0, 0 ), // Cyan,  White
+  ColorEntry(QColor(0x18,0x18,0xB2), 0, 0 ), ColorEntry( QColor(0xB2,0x18,0xB2), 0, 0 ), // Blue, Magenta
+  ColorEntry(QColor(0x18,0xB2,0xB2), 0, 0 ), ColorEntry( QColor(0xB2,0xB2,0xB2), 0, 0 ), // Cyan, White
   // intensiv
   ColorEntry(QColor(0x00,0x00,0x00), 0, 1 ), ColorEntry( QColor(0xFF,0xFF,0xFF), 1, 0 ),
   ColorEntry(QColor(0x68,0x68,0x68), 0, 0 ), ColorEntry( QColor(0xFF,0x54,0x54), 0, 0 ),
@@ -814,7 +814,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
   int cb  = -1; // undefined
   int cr  = -1; // undefined
 
-  int lins = qMin(this->lines,  qMax(0,lines  ));
+  int lins = qMin(this->lines, qMax(0,lines  ));
   int cols = qMin(this->columns,qMax(0,columns));
   QChar *disstrU = new QChar[cols];
   char *dirtyMask = (char *) malloc(cols+2);
@@ -950,7 +950,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
         mResizeTimer = new QTimer(this);
         connect(mResizeTimer, SIGNAL(timeout()), mResizeWidget, SLOT(hide()));
      }
-     QString sizeStr = i18n("Size: %1 x %2").arg(columns).arg(lines);
+     QString sizeStr = i18n("Size: %1 x %2", columns, lines);
      mResizeLabel->setText(sizeStr);
      mResizeWidget->move((width()-mResizeWidget->width())/2,
                          (height()-mResizeWidget->height())/2+20);
@@ -1046,9 +1046,9 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect, bool pm)
   int    tLy = tL.y();
 
   int lux = qMin(columns-1, qMax(0,(rect.left()   - tLx - bX ) / font_w));
-  int luy = qMin(lines-1,   qMax(0,(rect.top()    - tLy - bY  ) / font_h));
+  int luy = qMin(lines-1,  qMax(0,(rect.top()    - tLy - bY  ) / font_h));
   int rlx = qMin(columns-1, qMax(0,(rect.right()  - tLx - bX ) / font_w));
-  int rly = qMin(lines-1,   qMax(0,(rect.bottom() - tLy - bY  ) / font_h));
+  int rly = qMin(lines-1,  qMax(0,(rect.bottom() - tLy - bY  ) / font_h));
 
   QChar *disstrU = new QChar[columns];
   for (int y = luy; y <= rly; y++)
@@ -1949,8 +1949,7 @@ bool TEWidget::event( QEvent *e )
   if ( e->type() == QEvent::AccelOverride )
   {
     QKeyEvent *ke = static_cast<QKeyEvent *>( e );
-    KKey key( ke );
-    int keyCodeQt = key.keyCodeQt();
+    int keyCodeQt = ke->key() | ke->modifiers();
 
     if ( !standalone() && (ke->modifiers() == Qt::ControlModifier) )
     {

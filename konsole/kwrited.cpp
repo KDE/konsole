@@ -54,7 +54,7 @@ KWrited::KWrited() : QObject()
   QSocketNotifier *sn = new QSocketNotifier(pty->masterFd(), QSocketNotifier::Read, this);
   connect(sn, SIGNAL(activated(int)), this, SLOT(block_in(int)));
 
-  QString txt = i18n("KWrited - Listening on Device %1").arg(pty->ttyName());
+  QString txt = i18n("KWrited - Listening on Device %1", pty->ttyName());
   wid->setWindowTitle(txt);
   puts(txt.toLocal8Bit().data());
 }
