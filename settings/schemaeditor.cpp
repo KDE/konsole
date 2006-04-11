@@ -419,21 +419,21 @@ void SchemaEditor::saveCurrent()
 		scol.sprintf("color %2d %3d %3d %3d %2d %1d # %s", i,
 			     color[i].red(), color[i].green(), color[i].blue(),
 			     transparent[i], bold[i],
-			     (const char *) colorCombo->text(i).toUtf8());
+			     (const char *) colorCombo->itemText(i).toUtf8());
 	    else if (type[i] == 1)
 		scol.sprintf("sysfg %2d             %2d %1d # %s", i,
 			     transparent[i], bold[i],
-			     (const char *) colorCombo->text(i).toUtf8());
+			     (const char *) colorCombo->itemText(i).toUtf8());
 	    else if (type[i] == 2)
 		scol.sprintf("sysbg %2d             %2d %1d # %s", i,
 			     transparent[i], bold[i],
-			     (const char *) colorCombo->text(i).toUtf8());
+			     (const char *) colorCombo->itemText(i).toUtf8());
 	    else {
 		int ch, cs, cv;
 		color[i].getHsv(&ch, &cs, &cv);
 		scol.sprintf("rcolor %1d %3d %3d     %2d %1d # %s", i,
 			     cs, cv, transparent[i], bold[i],
-			     (const char *) colorCombo->text(i).toUtf8());
+			     (const char *) colorCombo->itemText(i).toUtf8());
 	    }
 	    t << scol << endl;
 	}

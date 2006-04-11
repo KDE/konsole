@@ -2277,7 +2277,7 @@ void Konsole::enterURL(const QString& URL, const QString&)
     KRun::shellQuote(newtext);
     te->emitText("cd "+newtext+"\r");
   }
-  else if (URL.contains("://", true)) {
+  else if (URL.contains("://")) {
     KUrl u(URL);
     newtext = u.protocol();
     bool isSSH = (newtext == "ssh");

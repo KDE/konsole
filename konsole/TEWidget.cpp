@@ -2134,7 +2134,7 @@ void TEWidget::styleChange(QStyle &)
 
 void TEWidget::dragEnterEvent(QDragEnterEvent* e)
 {
-  e->accept(Q3TextDrag::canDecode(e) ||
+  e->setAccepted(Q3TextDrag::canDecode(e) ||
       K3URLDrag::canDecode(e));
 }
 

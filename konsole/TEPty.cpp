@@ -194,7 +194,7 @@ void TEPty::send_string(const char* s)
 
 void TEPty::writeReady()
 {
-  pendingSendJobs.remove(pendingSendJobs.begin());
+  pendingSendJobs.erase(pendingSendJobs.begin());
   m_bufferFull = false;
   doSendJobs();
 }
