@@ -335,13 +335,13 @@ void SessionEditor::saveCurrent()
   co->writePathEntry("Cwd",directoryLine->lineEdit()->text());
   co->writePathEntry("Exec",executeLine->text());
   co->writeEntry("Icon",previewIcon->icon());
-  if (fontCombo->currentItem()==0)
+  if (fontCombo->currentIndex()==0)
     co->writeEntry("Font","");
   else
-    co->writeEntry("Font",fontCombo->currentItem()-1);
+    co->writeEntry("Font",fontCombo->currentIndex()-1);
   co->writeEntry("Term",termLine->text());
-  co->writeEntry("KeyTab",*keytabFilename.at(keytabCombo->currentItem()));
-  co->writeEntry("Schema",*schemaFilename.at(schemaCombo->currentItem()));
+  co->writeEntry("KeyTab",*keytabFilename.at(keytabCombo->currentIndex()));
+  co->writeEntry("Schema",*schemaFilename.at(schemaCombo->currentIndex()));
   co->sync();
   delete co;
   sesMod=false;

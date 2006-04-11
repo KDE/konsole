@@ -298,7 +298,7 @@ void SchemaEditor::slotColorChanged(int slot)
 {
     kDebug(0) << slot << endl;
     color[oldSlot] = colorButton->color();
-    type[oldSlot] = typeCombo->currentItem();
+    type[oldSlot] = typeCombo->currentIndex();
     bold[oldSlot] = boldCheck->isChecked();
     transparent[oldSlot] = transparentCheck->isChecked();
 
@@ -389,7 +389,7 @@ void SchemaEditor::saveCurrent()
 	if (!backgndLine->text().isEmpty()) {
 	    QString smode;
 	    int mode;
-	    mode = modeCombo->currentItem();
+	    mode = modeCombo->currentIndex();
 	    if (mode == 0)
 		smode = "tile";
 	    if (mode == 1)
@@ -695,7 +695,7 @@ void SchemaEditor::readSchema(int num)
 	}
     }
     fclose(sysin);
-    int ii = colorCombo->currentItem();
+    int ii = colorCombo->currentIndex();
     transparentCheck->setChecked(transparent[ii]);
     boldCheck->setChecked(bold[ii]);
     typeCombo->setCurrentItem(type[ii]);
