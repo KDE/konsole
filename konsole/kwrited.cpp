@@ -19,8 +19,11 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <signal.h>
+
+#ifdef Q_WS_X11
 #include <X11/Xlib.h>
 #include <fixx11h.h>
+#endif
 
 #include <config.h>
 
