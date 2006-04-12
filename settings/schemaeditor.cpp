@@ -78,7 +78,9 @@ SchemaEditor::SchemaEditor(QWidget * parent, const char *name)
     defaultSchema = "";
     spix = new KSharedPixmap;
 
+#ifdef Q_WS_X11
     connect(spix, SIGNAL(done(bool)), SLOT(previewLoaded(bool)));
+#endif
 
     DCOPClient *client = kapp->dcopClient();
     if (!client->isAttached())
@@ -178,9 +180,10 @@ void SchemaEditor::updatePreview()
 	}
 	 else  //try to reload
 	{
+#ifdef Q_WS_X11
            if(!spix->loadFromShared(QString("DESKTOP1")))
               kDebug(0) << "cannot load" << endl;
-
+#endif
 	}
       } else {
 	QPixmap pm;
