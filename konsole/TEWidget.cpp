@@ -942,7 +942,8 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
         mResizeWidget->setFont(f);
         mResizeWidget->setFrameShape((QFrame::Shape) (QFrame::Box|QFrame::Raised));
         mResizeWidget->setMidLineWidth(4);
-        QBoxLayout *l = new QVBoxLayout( mResizeWidget, 10);
+        QBoxLayout *l = new QVBoxLayout(mResizeWidget);
+	l->setMargin(10);
         mResizeLabel = new QLabel(i18n("Size: XXX x XXX"), mResizeWidget);
         l->addWidget(mResizeLabel, 1, Qt::AlignCenter);
         mResizeWidget->setMinimumWidth(mResizeLabel->fontMetrics().width(i18n("Size: XXX x XXX"))+20);
@@ -1186,7 +1187,8 @@ void TEWidget::setScroll(int cursor, int slines)
   //kDebug(1211)<<"TEWidget::setScroll() setRange()"<<endl;
   scrollbar->setRange(0,slines);
   //kDebug(1211)<<"TEWidget::setScroll() setSteps()"<<endl;
-  scrollbar->setSteps(1,lines);
+  scrollbar->setSingleStep(1);
+  scrollbar->setPageStep(lines);
   scrollbar->setValue(cursor);
   connect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
   //kDebug(1211)<<"TEWidget::setScroll() done"<<endl;

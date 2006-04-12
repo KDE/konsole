@@ -40,7 +40,9 @@ PrintSettings::PrintSettings(QWidget *parent)
 
         m_printheader->hide(); // Not yet implemented.
 
-	QVBoxLayout	*l0 = new QVBoxLayout(this, 0, 10);
+	QVBoxLayout *l0 = new QVBoxLayout(this);
+	l0->setMargin(0);
+	l0->setSpacing(10);
 	l0->addWidget(m_printfriendly);
 	l0->addWidget(m_printexact);
 	l0->addWidget(m_printheader);
