@@ -349,12 +349,13 @@ void KeyTrans::readConfig()
    if (m_fileRead) return;
    m_fileRead=true;
    QIODevice* buf(0);
+   QByteArray* txt = 0;
    if (m_path=="[buildin]")
    {
-      QByteArray txt =
+      txt = new QByteArray(
 #include "default.keytab.h"
-;
-      buf=new QBuffer(&txt);
+);
+      buf=new QBuffer(txt);
    }
    else
    {
@@ -363,6 +364,7 @@ void KeyTrans::readConfig()
    KeytabReader ktr(m_path,*buf);
    ktr.parseTo(this);
    delete buf;
+   delete txt;
 }
 
 #define assertSyntax(Cond,Message) if (!(Cond)) { ReportError(Message); goto ERROR; }
