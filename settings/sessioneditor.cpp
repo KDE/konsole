@@ -101,7 +101,7 @@ void SessionEditor::loadAllKeytab()
   keytabCombo->clear();
   keytabFilename.clear();
 
-  keytabCombo->insertItem(i18n("XTerm (XFree 4.x.x)"),0);
+  keytabCombo->insertItem(0,i18n("XTerm (XFree 4.x.x)"));
   keytabFilename.append(new QString(""));
 
   int i=1;
@@ -117,7 +117,7 @@ void SessionEditor::loadAllKeytab()
     if (title.isNull() || title.isEmpty())
       title=i18n("untitled");
 
-    keytabCombo->insertItem(title,i);
+    keytabCombo->insertItem(i,title);
 
     i++;
   }
@@ -268,7 +268,7 @@ void SessionEditor::schemaListChanged(const QStringList &titles, const QStringLi
   schemaCombo->clear();
   schemaFilename.clear();
 
-  schemaCombo->insertItem(i18n("Konsole Default"),0);
+  schemaCombo->insertItem(0,i18n("Konsole Default"));
   schemaFilename.append(new QString(""));
 
   schemaCombo->insertStringList(titles, 1);

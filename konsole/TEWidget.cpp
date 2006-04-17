@@ -949,6 +949,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
         mResizeWidget->setMinimumWidth(mResizeLabel->fontMetrics().width(i18n("Size: XXX x XXX"))+20);
         mResizeWidget->setMinimumHeight(mResizeLabel->sizeHint().height()+20);
         mResizeTimer = new QTimer(this);
+	mResizeTimer->setSingleShot(true);
         connect(mResizeTimer, SIGNAL(timeout()), mResizeWidget, SLOT(hide()));
      }
      QString sizeStr = i18n("Size: %1 x %2", columns, lines);
@@ -956,7 +957,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
      mResizeWidget->move((width()-mResizeWidget->width())/2,
                          (height()-mResizeWidget->height())/2+20);
      mResizeWidget->show();
-     mResizeTimer->start(1000, true);
+     mResizeTimer->start(1000);
   }
 }
 
