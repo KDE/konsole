@@ -31,10 +31,12 @@
 #include "konsolebookmarkhandler.h"
 
 KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel )
-    : QObject( konsole, "KonsoleBookmarkHandler" ),
+    : QObject( konsole ),
       KBookmarkOwner(),
       m_konsole( konsole )
 {
+    setObjectName( "KonsoleBookmarkHandler" );
+
     m_menu = new KMenu( konsole );
 
     // KDE3.5 - Konsole's bookmarks are now in konsole/bookmarks.xml

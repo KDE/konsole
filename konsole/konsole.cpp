@@ -4143,7 +4143,8 @@ KonsoleFind::KonsoleFind( QWidget *parent, const char *name, bool /*modal*/ )
   QWidget* row = new QWidget((QWidget*)group );
   QHBoxLayout *hboxLayout1 = new QHBoxLayout(row);
   row->setLayout(hboxLayout1);
-  m_asRegExp = new QCheckBox( i18n("As &regular expression"), row, "asRegexp" );
+  m_asRegExp = new QCheckBox( i18n("As &regular expression"), row );
+  m_asRegExp->setObjectName( "asRegexp" );
 
   if (!KTrader::self()->query("KRegExpEditor/KRegExpEditor").isEmpty()) {
     m_editRegExp = new QPushButton( i18n("&Edit..."), row, "editRegExp" );
