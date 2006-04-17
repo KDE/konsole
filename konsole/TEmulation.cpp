@@ -399,7 +399,7 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool caseSensit
     for (int i = (m_findPos==-1?0:m_findPos+1); i<(scr->getHistLines()+scr->getLines()); i++) {
       string = scr->getHistoryLine(i);
       if (regExp)
-        pos = string.indexOf( QRegExp(str,caseSensitive) );
+        pos = string.indexOf( QRegExp(str, caseSensitive?Qt::CaseSensitive:Qt::CaseInsensitive) );
       else
         pos = string.indexOf(str, 0, caseSensitive?Qt::CaseSensitive:Qt::CaseInsensitive);
       if(pos!=-1) {
@@ -417,7 +417,7 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool caseSensit
     for(int i = (m_findPos==-1?(scr->getHistLines()+scr->getLines()):m_findPos-1); i>=0; i--) {
       string = scr->getHistoryLine(i);
       if (regExp)
-        pos = string.indexOf( QRegExp(str,caseSensitive) );
+        pos = string.indexOf( QRegExp(str, caseSensitive?Qt::CaseSensitive:Qt::CaseInsensitive) );
       else
         pos = string.indexOf(str, 0, caseSensitive?Qt::CaseSensitive:Qt::CaseInsensitive);
       if(pos!=-1) {
