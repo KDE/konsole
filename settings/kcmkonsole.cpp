@@ -52,7 +52,7 @@ KCMKonsole::KCMKonsole(QWidget * parent, const char *name, const QStringList&)
     dialog->line_spacingSB->setRange(0, 8, 1, false);
     dialog->line_spacingSB->setSpecialValueText(i18nc("normal line spacing", "Normal"));
     dialog->show();
-    topLayout->add(dialog);
+    topLayout->addWidget(dialog);
     load();
 
     KAboutData *ab=new KAboutData( "kcmkonsole", I18N_NOOP("KCM Konsole"),
