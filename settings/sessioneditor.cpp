@@ -217,7 +217,7 @@ void SessionEditor::readSession(int num)
         previewIcon->setIcon(str);
 
         i = co->readEntry("Font",(unsigned int)-1);
-        fontCombo->setCurrentItem(i+1);
+        fontCombo->setCurrentIndex(i+1);
 
         str = co->readEntry("Term","xterm");
         termLine->setText(str);
@@ -230,7 +230,7 @@ void SessionEditor::readSession(int num)
                 i = counter;
             counter++;
         }
-        keytabCombo->setCurrentItem(i);
+        keytabCombo->setCurrentIndex(i);
 
         str = co->readEntry("Schema","");
         i=0;
@@ -240,7 +240,7 @@ void SessionEditor::readSession(int num)
                 i = counter;
             counter++;
         }
-        schemaCombo->setCurrentItem(i);
+        schemaCombo->setCurrentIndex(i);
         delete co;
     }
     sesMod=false;
@@ -271,7 +271,7 @@ void SessionEditor::schemaListChanged(const QStringList &titles, const QStringLi
   schemaCombo->insertItem(0,i18n("Konsole Default"));
   schemaFilename.append(new QString(""));
 
-  schemaCombo->insertStringList(titles, 1);
+  schemaCombo->insertItems(1, titles);
   for (QStringList::const_iterator it = filenames.begin(); it != filenames.end(); ++it)
       schemaFilename.append(new QString(*it));
 
@@ -282,7 +282,7 @@ void SessionEditor::schemaListChanged(const QStringList &titles, const QStringLi
           item = i;
           break;
       }
-  schemaCombo->setCurrentItem(item);
+  schemaCombo->setCurrentIndex(item);
 }
 
 void SessionEditor::saveCurrent()

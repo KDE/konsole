@@ -308,7 +308,7 @@ void SchemaEditor::slotColorChanged(int slot)
     change = false; // Don't mark as modified
     transparentCheck->setChecked(transparent[slot]);
     boldCheck->setChecked(bold[slot]);
-    typeCombo->setCurrentItem(type[slot]);
+    typeCombo->setCurrentIndex(type[slot]);
     colorButton->setColor(color[slot]);
     oldSlot = slot;
     change = true;
@@ -351,7 +351,7 @@ void SchemaEditor::saveCurrent()
 {
 
     //This is to update the color table
-    colorCombo->setCurrentItem(0);
+    colorCombo->setCurrentIndex(0);
     slotColorChanged(0);
 
     QString fullpath;
@@ -604,7 +604,7 @@ void SchemaEditor::readSchema(int num)
 
 		QString qline(line);
 		backgndLine->setText(locate("wallpaper", qline.mid( qline.indexOf(" ",7)+1 ) ));
-		modeCombo->setCurrentItem(attr - 2);
+		modeCombo->setCurrentIndex(attr - 2);
 
 	    }
 
@@ -701,7 +701,7 @@ void SchemaEditor::readSchema(int num)
     int ii = colorCombo->currentIndex();
     transparentCheck->setChecked(transparent[ii]);
     boldCheck->setChecked(bold[ii]);
-    typeCombo->setCurrentItem(type[ii]);
+    typeCombo->setCurrentIndex(type[ii]);
     colorButton->setColor(color[ii]);
 
     bool inactive = type[ii] == 1 || type[ii] == 2;
