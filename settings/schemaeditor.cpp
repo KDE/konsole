@@ -489,6 +489,8 @@ QString SchemaEditor::readSchemaTitle(const QString & file)
 		return i18n(line + 6);
 	    }
 
+    fclose(sysin);
+
     return 0;
 }
 
