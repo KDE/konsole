@@ -2477,7 +2477,10 @@ void Konsole::activateSession(TESession *s)
      notifySessionState(se,NOTIFYNORMAL);
      // Delete the session if isn't in the session list any longer.
      if (sessions.find(se) == -1)
+     {
         delete se;
+	se = 0;
+     }
   }
   if (se != s)
      se_previous = se;
