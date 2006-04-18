@@ -154,6 +154,8 @@ QString SessionEditor::readKeymapTitle(const QString & file)
 	return temp;
       }
 
+  fclose(sysin);
+
   return 0;
 }
 
