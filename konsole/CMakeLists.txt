@@ -74,7 +74,7 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} konsolepart )
 
 target_link_libraries(konsolepart  ${KDE4_KDE3SUPPORT_LIBS}  ${X11_XTest_LIB} )
 
-install_targets(${LIB_INSTALL_DIR}/kde4 konsolepart )
+install_targets(${PLUGIN_INSTALL_DIR} konsolepart )
 
 
 ########### next target ###############
@@ -91,7 +91,7 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kded_kwrited )
 
 target_link_libraries(kded_kwrited  ${KDE4_KDE3SUPPORT_LIBS})
 
-install_targets(${LIB_INSTALL_DIR}/kde4 kded_kwrited )
+install_targets(${PLUGIN_INSTALL_DIR} kded_kwrited )
 
 
 ########### install files ###############
