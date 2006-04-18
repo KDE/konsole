@@ -357,7 +357,7 @@ bool ColorSchema::rereadSchemaFile()
       { int fi,ch,cs,cv,tr,bo;
         if(sscanf(line,"rcolor %d %d %d %d %d",&fi,&cs,&cv,&tr,&bo) != 5)
           continue;
-        if (!(0 <= fi && fi <= TABLE_COLORS)) continue;
+        if (!(0 <= fi && fi < TABLE_COLORS)) continue;
         if (random_hue == -1)
           random_hue = (KRandom::random()%32) * 11;
         ch = random_hue;
@@ -374,7 +374,7 @@ bool ColorSchema::rereadSchemaFile()
       { int fi,cr,cg,cb,tr,bo;
         if(sscanf(line,"color %d %d %d %d %d %d",&fi,&cr,&cg,&cb,&tr,&bo) != 6)
           continue;
-        if (!(0 <= fi && fi <= TABLE_COLORS)) continue;
+        if (!(0 <= fi && fi <  TABLE_COLORS)) continue;
         if (!(0 <= cr && cr <= 255         )) continue;
         if (!(0 <= cg && cg <= 255         )) continue;
         if (!(0 <= cb && cb <= 255         )) continue;
@@ -388,7 +388,7 @@ bool ColorSchema::rereadSchemaFile()
       { int fi,tr,bo;
         if(sscanf(line,"sysfg %d %d %d",&fi,&tr,&bo) != 3)
           continue;
-        if (!(0 <= fi && fi <= TABLE_COLORS)) continue;
+        if (!(0 <= fi && fi <  TABLE_COLORS)) continue;
         if (!(0 <= tr && tr <= 1           )) continue;
         if (!(0 <= bo && bo <= 1           )) continue;
         m_table[fi].color       = kapp->palette().active().text();
@@ -399,7 +399,7 @@ bool ColorSchema::rereadSchemaFile()
       { int fi,tr,bo;
         if(sscanf(line,"sysbg %d %d %d",&fi,&tr,&bo) != 3)
           continue;
-        if (!(0 <= fi && fi <= TABLE_COLORS)) continue;
+        if (!(0 <= fi && fi <  TABLE_COLORS)) continue;
         if (!(0 <= tr && tr <= 1           )) continue;
         if (!(0 <= bo && bo <= 1           )) continue;
         m_table[fi].color       = kapp->palette().active().base();
