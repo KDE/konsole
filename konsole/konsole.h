@@ -33,6 +33,7 @@
 #include <Q3PtrList>
 #include <QEvent>
 #include <QLabel>
+#include <QList>
 
 #include "TEPty.h"
 #include "TEWidget.h"
@@ -59,6 +60,7 @@ class KToggleAction;
 class KSelectAction;
 class KTabWidget;
 class QToolButton;
+class KTempFile;
 
 // Defined in main.C
 const char *konsole_shell(QStringList &args);
@@ -289,6 +291,7 @@ private:
 
   Q3IntDict<KSimpleConfig> no2command;     //QT4 - convert to QList
 
+  QList<KTempFile*> tempfiles;
   KSimpleConfig* m_defaultSession;
   QString m_defaultSessionFilename;
 

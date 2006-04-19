@@ -369,6 +369,10 @@ Konsole::~Konsole()
     if (no2command.isEmpty())
        delete m_defaultSession;
 
+    // the tempfiles have autodelete=true, so the actual files are removed here too
+    while (!tempfiles.isEmpty())
+        delete tempfiles.takeFirst();
+
     delete colors;
     colors=0;
 
@@ -3416,6 +3420,7 @@ void Konsole::addScreenSession(const QString &path, const QString &socket)
   m_session->insertItem( SmallIconSet( icon ), txt, cmd_serial, cmd_serial - 1 );
   m_tabbarSessionsCommands->insertItem( SmallIconSet( icon ), txt, cmd_serial );
   no2command.insert(cmd_serial,co);
+  tempfiles.append(tmpFile);
 }
 
 void Konsole::loadScreenSessions()
