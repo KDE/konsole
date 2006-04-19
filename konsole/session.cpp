@@ -26,7 +26,7 @@
 */
 
 TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _args, const QString &_term, ulong _winId, const QString &_sessionId, const QString &_initial_cwd)
-   : DCOPObject( _sessionId.latin1() )
+   : DCOPObject( _sessionId.toLatin1() )
    , connected(true)
    , monitorActivity(false)
    , monitorSilence(false)
@@ -137,10 +137,10 @@ void TESession::run()
      QDir::setCurrent(initial_cwd);
   sh->setXonXoff(xon_xoff);
 
-  int result = sh->run(QFile::encodeName(pgm), args, term.latin1(), 
+  int result = sh->run(QFile::encodeName(pgm), args, term.toLatin1(), 
           winId, add_to_utmp,
-          ("DCOPRef("+appId+",konsole)").latin1(),
-          ("DCOPRef("+appId+","+sessionId+")").latin1());
+          ("DCOPRef("+appId+",konsole)").toLatin1(),
+          ("DCOPRef("+appId+","+sessionId+")").toLatin1());
   if (result < 0) {     // Error in opening pseudo teletype
     kWarning()<<"Unable to open a pseudo teletype!"<<endl;
     QTimer::singleShot(0, this, SLOT(ptyError()));
