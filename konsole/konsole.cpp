@@ -1505,9 +1505,6 @@ void Konsole::saveProperties(KConfig* config) {
      //config->writeEntry("TabColor", tabwidget->tabColor(se->widget()));
   }
   config->writeEntry("Fullscreen",b_fullscreen);
-  config->writeEntry("defaultfont", (se->widget())->getVTFont());
-  s_kconfigSchema = colors->find( se->schemaNo() )->relPath();
-  config->writeEntry("schema",s_kconfigSchema);
   config->writeEntry("scrollbar",n_scroll);
   config->writeEntry("tabbar",n_tabbar);
   config->writeEntry("bellmode",n_bell);
@@ -1522,6 +1519,9 @@ void Konsole::saveProperties(KConfig* config) {
     config->writeEntry("EncodingName", se->encoding());
     config->writeEntry("history", se->history().getSize());
     config->writeEntry("historyenabled", b_histEnabled);
+    config->writeEntry("defaultfont", (se->widget())->getVTFont());
+    s_kconfigSchema = colors->find( se->schemaNo() )->relPath();
+    config->writeEntry("schema",s_kconfigSchema);
   }
 
   config->writeEntry("class",name());
