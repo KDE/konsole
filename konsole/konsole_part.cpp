@@ -530,7 +530,7 @@ void konsolePart::setSettingsMenuEnabled( bool enable )
 
    // FIXME: These are not in settingsActions.
    //  When disabled, the icons are not 'grey-ed' out.
-   m_keytab->setEnabled( enable );
+   if (m_keytab) m_keytab->setEnabled( enable );
    m_schema->setEnabled( enable );
 }
 
