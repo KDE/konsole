@@ -1533,8 +1533,10 @@ void Konsole::saveProperties(KConfig* config) {
   if (!s_workDir.isEmpty())
     config->writePathEntry("workdir", s_workDir);
 
-  // Set the new default font
-  defaultFont = se->widget()->getVTFont();
+  if (se) {
+    // Set the new default font
+    defaultFont = se->widget()->getVTFont();
+  }
 }
 
 
