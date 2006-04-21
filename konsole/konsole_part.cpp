@@ -965,7 +965,9 @@ HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
   QObject::connect(m_btnEnable, SIGNAL(toggled(bool)),
                    this,     SLOT(slotHistEnable(bool)));
 
-  m_size = new QSpinBox(0, 10 * 1000 * 1000, 100, mainFrame);
+  m_size = new QSpinBox(mainFrame);
+  m_size->setRange(0, 10 * 1000 * 1000);
+  m_size->setSingleStep(100);
   m_size->setValue(histSize);
   m_size->setSpecialValueText(i18nc("Unlimited (number of lines)", "Unlimited"));
 

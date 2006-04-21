@@ -3777,7 +3777,9 @@ HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
 
   m_label = new QLabel(i18n("&Number of lines: "), mainFrame);
 
-  m_size = new QSpinBox(0, 10 * 1000 * 1000, 100, mainFrame);
+  m_size = new QSpinBox(mainFrame);
+  m_size->setRange(0, 10 * 1000 * 1000);
+  m_size->setSingleStep(100);
   m_size->setValue(histSize);
   m_size->setSpecialValueText(i18nc("Unlimited (number of lines)", "Unlimited"));
 
@@ -4114,10 +4116,14 @@ SizeDialog::SizeDialog(const unsigned int columns,
 
   QHBoxLayout *hb = new QHBoxLayout(mainFrame);
 
-  m_columns = new QSpinBox(20,1000,1,mainFrame);
+  m_columns = new QSpinBox(mainFrame);
+  m_columns->setRange(20,1000);
+  m_columns->setSingleStep(1);
   m_columns->setValue(columns);
 
-  m_lines = new QSpinBox(4,1000,1,mainFrame);
+  m_lines = new QSpinBox(mainFrame);
+  m_lines->setRange(4,1000);
+  m_lines->setSingleStep(1);
   m_lines->setValue(lines);
 
   hb->addWidget(new QLabel(i18n("Number of columns:"), mainFrame));
