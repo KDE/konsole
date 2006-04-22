@@ -3217,9 +3217,9 @@ void Konsole::notifySessionState(TESession* session, int state)
 
     // make sure they are not larger than 16x16
     if (normal.width() > 16 || normal.height() > 16)
-      normal.convertFromImage(normal.convertToImage().scaled(16,16, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+      normal.convertFromImage(normal.toImage().scaled(16,16, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     if (active.width() > 16 || active.height() > 16)
-      active.convertFromImage(active.convertToImage().scaled(16,16, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+      active.convertFromImage(active.toImage().scaled(16,16, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
 
     QIcon iconset;
     iconset.setPixmap(normal, QIcon::Small, QIcon::Normal);

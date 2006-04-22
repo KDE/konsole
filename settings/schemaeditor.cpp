@@ -171,7 +171,7 @@ void SchemaEditor::updatePreview()
     if (transparencyCheck->isChecked()) {
 	if (loaded) {
 	    float rx = (100.0 - shadeSlide->value()) / 100;
-	    QImage ima(pix.convertToImage());
+	    QImage ima(pix.toImage());
 	    ima = KImageEffect::fade(ima, rx, shadeColor->color());
 	    QPixmap pm;
 	    pm.convertFromImage(ima);
