@@ -1314,21 +1314,14 @@ void Konsole::slotTabRenameSession() {
   renameSession(m_contextMenuSession);
 }
 
-#ifdef __GNUC__
-   #warning "No tab color support ATM"
-//See also Konsole::createSessionTab. detachSession, saveProperties, changeTabTextColor,
-//initTabColor
-#endif
-
 void Konsole::slotTabSelectColor()
 {
-#if 0
-  QColor color = tabwidget->tabColor( m_contextMenuSession->widget() );
-  int result = KColorDialog::getColor( color );
+  QColor defaultColor = tabwidget->palette().foreground().color();
+  QColor color = tabwidget->tabTextColor( tabwidget->indexOf( m_contextMenuSession->widget() ) );
+  int result = KColorDialog::getColor( color, defaultColor, this );
 
   if ( result == KColorDialog::Accepted )
-    tabwidget->setTabColor(m_contextMenuSession->widget(), color);
-#endif
+    tabwidget->setTabTextColor( tabwidget->indexOf( m_contextMenuSession->widget() ), color );
 }
 
 void Konsole::slotTabToggleMonitor()
@@ -1502,7 +1495,7 @@ void Konsole::saveProperties(KConfig* config) {
   else
   {
      config->setDesktopGroup();
-     //config->writeEntry("TabColor", tabwidget->tabColor(se->widget()));
+     config->writeEntry("TabColor", tabwidget->tabTextColor( tabwidget->indexOf(se->widget())));
   }
   config->writeEntry("Fullscreen",b_fullscreen);
   config->writeEntry("scrollbar",n_scroll);
@@ -1877,8 +1870,8 @@ void Konsole::createSessionTab(TEWidget *widget, const QIcon &iconSet,
     tabwidget->insertTab(widget, iconSet, QString(), index);
     break;
   }
-  //if ( m_tabColor.isValid() )
-  //  tabwidget->setTabColor(widget, m_tabColor);
+  if ( m_tabColor.isValid() )
+    tabwidget->setTabTextColor( tabwidget->indexOf(widget), m_tabColor );
 }
 
 QIcon Konsole::iconSetForSession(TESession *session) const
@@ -2067,7 +2060,7 @@ void Konsole::changeTabTextColor( TESession* ses, int rgb )
         kWarning()<<" Invalid RGB color "<<rgb<<endl;
         return;
     }
-    //tabwidget->setTabColor( ses->widget(), color );
+    tabwidget->setTabTextColor( tabwidget->indexOf(ses->widget()), color );
 }
 
 // Called from emulation
@@ -3148,7 +3141,7 @@ void Konsole::initMasterMode(bool state)
 void Konsole::initTabColor(QColor color)
 {
   if ( color.isValid() )
-   ; //tabwidget->setTabColor( se->widget(), color );
+    tabwidget->setTabTextColor( tabwidget->indexOf(se->widget()), color );
 }
 
 void Konsole::initHistory(int lines, bool enable)
@@ -3360,7 +3353,7 @@ void Konsole::loadSessionCommands()
 void Konsole::createSessionMenus()
 {
 //KDE4: no2command messed up... causing crashes
-/*
+
   KSimpleConfig *cfg = no2command[SESSION_NEW_SHELL_ID];
   QString txt = cfg->readEntry("Name");
   QString icon = cfg->readEntry("Icon", "konsole");
@@ -3394,7 +3387,7 @@ void Konsole::createSessionMenus()
     insertItemSorted(m_session, SmallIconSet(icon),
                      comment.replace('&',"&&"), it.currentKey());
   }
-*/
+
   if (m_bookmarksSession)
   {
     m_session->addSeparator();
@@ -3600,7 +3593,7 @@ void Konsole::detachSession(TESession* _se) {
     }
   }
 
-  //QColor se_tabtextcolor = tabwidget->tabColor( _se->widget() );
+  QColor se_tabtextcolor = tabwidget->tabTextColor( tabwidget->indexOf(_se->widget()) );
 
   disconnect( _se,SIGNAL(done(TESession*)),
               this,SLOT(doneSession(TESession*)) );
@@ -3625,7 +3618,7 @@ void Konsole::detachSession(TESession* _se) {
   konsole->show();
   konsole->attachSession(_se);
   konsole->activateSession(_se);
-  //konsole->changeTabTextColor( _se, se_tabtextcolor.rgb() );//restore prev color
+  konsole->changeTabTextColor( _se, se_tabtextcolor.rgb() );//restore prev color
 
   if (_se==se) {
     if (se == se_previous)
