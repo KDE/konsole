@@ -1313,7 +1313,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
 void TEWidget::mouseMoveEvent(QMouseEvent* ev)
 {
   // for auto-hiding the cursor, we need mouseTracking
-  if (ev->modifiers() == Qt::NoButton ) return;
+  if (ev->buttons() == Qt::NoButton ) return;
 
   if (dragInfo.state == diPending) {
     // we had a mouse down, but haven't confirmed a drag yet
@@ -1337,7 +1337,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
   if (actSel == 0) return;
 
  // don't extend selection while pasting
-  if (ev->modifiers() & Qt::MidButton) return;
+  if (ev->buttons() & Qt::MidButton) return;
 
   extendSelection( ev->pos() );
 }
