@@ -173,8 +173,7 @@ void SchemaEditor::updatePreview()
 	    float rx = (100.0 - shadeSlide->value()) / 100;
 	    QImage ima(pix.toImage());
 	    ima = KImageEffect::fade(ima, rx, shadeColor->color());
-	    QPixmap pm;
-	    pm.convertFromImage(ima);
+	    QPixmap pm = QPixmap::fromImage( ima );
 	    previewPixmap->setPixmap(pm);
 	    previewPixmap->setScaledContents(true);
 	}

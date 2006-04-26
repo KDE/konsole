@@ -805,8 +805,7 @@ void konsolePart::pixmap_menu_activated(int item)
             te->setBackgroundPixmap(pm);
     break;
     case 3: // center
-            { QPixmap bgPixmap;
-              bgPixmap.resize(te->size());
+            { QPixmap bgPixmap( te->size() );
               bgPixmap.fill(te->getDefaultBackColor());
               bitBlt( &bgPixmap, ( te->size().width() - pm.width() ) / 2,
                                 ( te->size().height() - pm.height() ) / 2,
