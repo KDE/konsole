@@ -1203,7 +1203,7 @@ static bool isSpace(UINT16 c)
 QString TEScreen::getSelText(bool preserve_line_breaks)
 {
   QString result;
-  QTextOStream stream(&result);
+  QTextStream stream(&result, QIODevice::ReadWrite);
   getSelText(preserve_line_breaks, &stream);
   return result;
 }
