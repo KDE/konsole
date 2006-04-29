@@ -54,7 +54,7 @@ class TEWidget : public QFrame
   friend class Konsole;
 public:
 
-    TEWidget(QWidget *parent=0, const char *name=0);
+    TEWidget(QWidget *parent=0);
     virtual ~TEWidget();
 
     void setBlendColor(const QRgb color) { blend_color = color; }
@@ -96,7 +96,7 @@ public:
 
     int  fontHeight()   { return font_h;   }
     int  fontWidth()    { return font_w; }
-    
+
     void calcGeometry();
     void propagateSize();
     void updateImageSize();
@@ -130,7 +130,7 @@ public:
 
     void setBidiEnabled(bool set) { bidiEnabled=set; }
     bool isBidiEnabled() { return bidiEnabled; }
-    
+
     void print(QPainter &paint, bool friendly, bool exact);
 
     void setRim(int rim) { rimX=rim; rimY=rim; }
@@ -316,7 +316,7 @@ private:
     bool m_isIMSel;
 
     QRgb blend_color;
- 
+
 private Q_SLOTS:
     void drop_menu_activated(int item);
     void swapColorTable();

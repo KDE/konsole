@@ -1132,7 +1132,7 @@ void Konsole::makeBasicGUI()
               this, SLOT(nextSession()), m_shortcuts, "next_session");
 
   for (int i=1;i<13;i++) { // Due to 12 function keys?
-     new KAction(i18n("Switch to Session %1", i), 0, this, SLOT(switchToSession()), m_shortcuts, QString().sprintf("switch_to_session_%02d", i).latin1());
+      new KAction(i18n("Switch to Session %1", i), 0, this, SLOT(switchToSession()), m_shortcuts, QString().sprintf("switch_to_session_%02d", i).toLatin1().constData());
   }
 
   new KAction(i18n("Enlarge Font"), 0, this, SLOT(biggerFont()), m_shortcuts, "bigger_font");
@@ -3871,7 +3871,9 @@ void Konsole::slotClearHistory()
 void Konsole::slotFindHistory()
 {
   if( !m_finddialog ) {
-    m_finddialog = new KonsoleFind( this, "konsolefind", false);
+    m_finddialog = new KonsoleFind( this );
+    m_finddialog->setObjectName( "konsolefind" );
+    m_finddialog->setModal( false );
     connect(m_finddialog,SIGNAL(search()),this,SLOT(slotFind()));
     connect(m_finddialog,SIGNAL(done()),this,SLOT(slotFindDone()));
   }
@@ -4145,7 +4147,7 @@ unsigned int SizeDialog::lines() const
 
 //////////////////////////////////////////////////////////////////////
 
-KonsoleFind::KonsoleFind( QWidget *parent, const char *name, bool /*modal*/ )
+KonsoleFind::KonsoleFind( QWidget *parent )
   : KEdFind( parent, false ), m_editorDialog(0), m_editRegExp(0)
 {
   QWidget* row = new QWidget((QWidget*)group );

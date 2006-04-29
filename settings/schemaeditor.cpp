@@ -401,8 +401,8 @@ void SchemaEditor::saveCurrent()
 
 	    QString image;
 	    image.sprintf("image %s %s",
-			  (const char *) smode.latin1(),
-			  (const char *) backgndLine->text().toUtf8());
+			  smode.toLatin1().constData(),
+			  backgndLine->text().toUtf8().constData());
 	    t << image << endl;
 	}
 	t << endl;

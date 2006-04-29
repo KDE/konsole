@@ -150,7 +150,8 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   const char* shell = getenv("SHELL");
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
   eargs.append(shell);
-  te = new TEWidget(parentWidget,widgetName);
+  te = new TEWidget(parentWidget);
+  te->setObjectName(widgetName);
   te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
 
   setWidget(te);

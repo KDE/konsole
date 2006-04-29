@@ -486,7 +486,7 @@ class KonsoleFind : public KEdFind
 {
     Q_OBJECT
 public:
-  KonsoleFind( QWidget *parent = 0, const char *name=0, bool modal=true );
+  KonsoleFind( QWidget *parent = 0 );
   bool reg_exp() const;
 
 private Q_SLOTS:

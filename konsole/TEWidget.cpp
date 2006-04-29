@@ -150,8 +150,13 @@ static const ColorEntry base_color_table[TABLE_COLORS] =
 void TEWidget::setDefaultBackColor(const QColor& color)
 {
   defaultBgColor = color;
-  if (qAlpha(blend_color) != 0xff && !backgroundPixmap())
-    setBackgroundColor(getDefaultBackColor());
+#warning backgroundPixmap returns always 0 in Qt4,  the logic needs to be a different now
+  if (qAlpha(blend_color) != 0xff /* && !backgroundPixmap() */)
+  {
+      QPalette p = palette();
+      p.setColor( backgroundRole(), getDefaultBackColor() );
+      setPalette( p );
+  }
 }
 
 QColor TEWidget::getDefaultBackColor()
@@ -169,14 +174,20 @@ const ColorEntry* TEWidget::getColorTable() const
 void TEWidget::setColorTable(const ColorEntry table[])
 {
   for (int i = 0; i < TABLE_COLORS; i++) color_table[i] = table[i];
-  const QPixmap* pm = backgroundPixmap();
+#warning backgroundPixmap is always 0 in Qt4
+  const QPixmap* pm = 0; // backgroundPixmap();
   if (!pm)
     if (!argb_visual || (qAlpha(blend_color) == 0xff))
-      setBackgroundColor(getDefaultBackColor());
-    else {
+    {
+        QPalette p = palette();
+        p.setColor( backgroundRole(), getDefaultBackColor() );
+        setPalette( p );
+    } else {
 
-      //### probably buggy
-      setBackgroundColor(blend_color);
+        //### probably buggy
+        QPalette p = palette();
+        p.setColor( backgroundRole(), blend_color );
+        setPalette( p );
     }
   update();
 }
@@ -326,8 +337,8 @@ void TEWidget::setFont(const QFont &)
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-TEWidget::TEWidget(QWidget *parent, const char *name)
-:QFrame(parent,name)
+TEWidget::TEWidget(QWidget *parent)
+:QFrame(parent)
 ,font_h(1)
 ,font_w(1)
 ,font_a(1)
@@ -411,7 +422,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name)
   setFocusPolicy( Qt::WheelFocus );
 
   // im
-  setInputMethodEnabled(true);
+  setAttribute(Qt::WA_InputMethodEnabled, true);
 
   if (!argb_visual)
   {
@@ -803,7 +814,6 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
      updateImageSize(); // Create image
 
   int y,x,len;
-  const QPixmap* pm = backgroundPixmap();
 
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
@@ -903,6 +913,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
 
         dirtyRegion |= QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h);
 /*
+  #warning pm (backgroundPixmap) is always NULL
         drawAttrStr(paint,
                     QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
                     unistr, &ext[x], pm != NULL, true);
@@ -1110,14 +1121,14 @@ void TEWidget::blinkEvent()
 {
   blinking = !blinking;
   isBlinkEvent = true;
-  repaint(false);
+  repaint();
   isBlinkEvent = false;
 }
 
 void TEWidget::blinkCursorEvent()
 {
   cursorBlinking = !cursorBlinking;
-  repaint(cursorRect, true);
+  repaint(cursorRect);
 }
 
 /* ------------------------------------------------------------------------- */
@@ -1694,14 +1705,15 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
 
 void TEWidget::focusInEvent( QFocusEvent * )
 {
-  repaint(cursorRect, true);  // *do* erase area, to get rid of the
-                              // hollow cursor rectangle.
+#warning Qt4 always double buffers,  so the _Do erase_ part is gone
+  repaint(cursorRect);  // *do* erase area, to get rid of the
+                        // hollow cursor rectangle.
 }
 
 
 void TEWidget::focusOutEvent( QFocusEvent * )
 {
-  repaint(cursorRect, true);  // don't erase area
+  repaint(cursorRect);  // don't erase area
 }
 
 bool TEWidget::focusNextPrevChild( bool next )
@@ -1718,7 +1730,7 @@ int TEWidget::charClass(UINT16 ch) const
     QChar qch=QChar(ch);
     if ( qch.isSpace() ) return ' ';
 
-    if ( qch.isLetterOrNumber() || word_characters.contains(qch, false) )
+    if ( qch.isLetterOrNumber() || word_characters.contains(qch, Qt::CaseInsensitive ) )
     return 'a';
 
     // Everything else is weird
@@ -1875,7 +1887,7 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
   return QFrame::eventFilter( obj, e );
 }
 
-void TEWidget::inputMethodEvent ( QInputMethodEvent * e )
+void TEWidget::inputMethodEvent ( QInputMethodEvent *  )
 {
 #ifdef __GNUC__
    #warning "FIXME: Port the IM stuff!"
@@ -2220,7 +2232,7 @@ void TEWidget::drop_menu_activated(int item)
       if (m_dnd_file_count==1)
         KRun::shellQuote(dropText);
       emit sendStringToEmu(dropText.toLocal8Bit());
-      setActiveWindow();
+      activateWindow();
       break;
    case cd:
      emit sendStringToEmu("cd ");
@@ -2237,7 +2249,7 @@ void TEWidget::drop_menu_activated(int item)
       KRun::shellQuote(dropText);
       emit sendStringToEmu(dropText.toLocal8Bit());
       emit sendStringToEmu("\n");
-      setActiveWindow();
+      activateWindow();
       break;
    case cp:
      emit sendStringToEmu("kfmclient copy " );
@@ -2254,7 +2266,7 @@ void TEWidget::drop_menu_activated(int item)
         KRun::shellQuote(dropText);
       emit sendStringToEmu(dropText.toLocal8Bit());
       emit sendStringToEmu(" .\n");
-      setActiveWindow();
+      activateWindow();
    }
 }
 
