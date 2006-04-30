@@ -211,12 +211,17 @@ void KeytabReader::getCc()
 {
   if (cc == '\n') { linno += 1; colno = 0; }
   if (cc < 0) return;
+  cc = buf->getch();
+  colno += 1;
+// kvh - The below causes Konsole to lockup/100% CPU; no prompt is displayed.
+/*
   char dch;
   if ( buf->getChar(&dch) )
   {
       cc = dch;
       colno += 1;
   }
+*/
 }
 
 void KeytabReader::getSymbol()
