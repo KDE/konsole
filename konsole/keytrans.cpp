@@ -211,8 +211,12 @@ void KeytabReader::getCc()
 {
   if (cc == '\n') { linno += 1; colno = 0; }
   if (cc < 0) return;
-  buf->getChar((char*)&cc);
-  colno += 1;
+  char dch;
+  if ( buf->getChar(&dch) )
+  {
+      cc = dch;
+      colno += 1;
+  }
 }
 
 void KeytabReader::getSymbol()

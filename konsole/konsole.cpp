@@ -1316,7 +1316,7 @@ void Konsole::slotTabRenameSession() {
 
 void Konsole::slotTabSelectColor()
 {
-  QColor defaultColor = tabwidget->palette().foreground().color();
+  QColor defaultColor = tabwidget->palette().color( QPalette::Foreground );
   QColor color = tabwidget->tabTextColor( tabwidget->indexOf( m_contextMenuSession->widget() ) );
   int result = KColorDialog::getColor( color, defaultColor, this );
 
