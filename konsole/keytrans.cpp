@@ -211,7 +211,7 @@ void KeytabReader::getCc()
 {
   if (cc == '\n') { linno += 1; colno = 0; }
   if (cc < 0) return;
-  cc = buf->getChar();
+  buf->getChar((char*)&cc);
   colno += 1;
 }
 
