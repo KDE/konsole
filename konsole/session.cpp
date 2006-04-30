@@ -7,6 +7,9 @@
 #include <knotifyclient.h>
 #include <klocale.h>
 #include <kprocio.h>
+#include <krun.h>
+#include <kshell.h>
+#include <kstandarddirs.h>
 
 #include <stdlib.h>
 #include <qfile.h>
@@ -128,8 +131,18 @@ void TESession::changeWidget(TEWidget* w)
 
 void TESession::run()
 {
-  //kDebug(1211) << "Running the session!" << pgm << "\n";
-  //pgm = "pine";
+  // Upon a KPty error, there is no description on what that error was...
+  // Check to see if the given program is executable.
+  QString exec = QFile::encodeName(pgm);
+  exec = KRun::binaryName(exec, false);
+  exec = KShell::tildeExpand(exec);
+  QString pexec = KGlobal::dirs()->findExe(exec);
+  if ( pexec.isEmpty() ) {
+    kdError()<<"can not execute "<<exec<<endl;
+    QTimer::singleShot(1, this, SLOT(done()));
+    return;
+  }
+
   QString appId=kapp->dcopClient()->appId();
 
   QString cwd_save = QDir::currentPath();
