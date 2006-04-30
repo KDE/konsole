@@ -3999,7 +3999,7 @@ void Konsole::slotSaveHistory()
     sessions.current()->getEmulation()->streamHistory( &textStream );
 
     file.close();
-    if(file.status()) {
+    if(file.error() != QFile::NoError) {
       KMessageBox::sorry(this, i18n("Could not save history."));
       return;
     }

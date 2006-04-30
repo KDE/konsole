@@ -122,10 +122,10 @@ bool KeyTrans::findEntry(int key, int bits, int* cmd, const char** txt, int* len
                bool* metaspecified)
 {
   if (!m_fileRead) readConfig();
-  
+
   if (bits & ((1<<BITS_Shift)|(1<<BITS_Alt)|(1<<BITS_Control)))
     bits |= (1<<BITS_AnyMod);
-  
+
   for (Q3PtrListIterator<KeyEntry> it(tableX); it.current(); ++it)
     if (it.current()->matches(key,bits,0xffff))
     {
@@ -211,7 +211,7 @@ void KeytabReader::getCc()
 {
   if (cc == '\n') { linno += 1; colno = 0; }
   if (cc < 0) return;
-  cc = buf->getch();
+  cc = buf->getChar();
   colno += 1;
 }
 
