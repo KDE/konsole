@@ -3072,12 +3072,15 @@ void Konsole::moveSessionLeft()
   ra->unplug(m_view);
   ra->plug(m_view,(m_view->count()-sessions.count()+1)+position-1);
 
+  QColor oldcolor = tabwidget->tabTextColor(tabwidget->indexOf(se->widget()));
+  
   tabwidget->blockSignals(true);
   tabwidget->removePage(se->widget());
   tabwidget->blockSignals(false);
   createSessionTab(se->widget(), iconSetForSession(se), se->Title(), position-1);
   tabwidget->showPage(se->widget());
-
+  tabwidget->setTabTextColor(tabwidget->indexOf(se->widget()),oldcolor);
+  
   if (!m_menuCreated)
     makeGUI();
   m_moveSessionLeft->setEnabled(position-1>0);
@@ -3100,12 +3103,15 @@ void Konsole::moveSessionRight()
   ra->unplug(m_view);
   ra->plug(m_view,(m_view->count()-sessions.count()+1)+position+1);
 
+  QColor oldcolor = tabwidget->tabTextColor(tabwidget->indexOf(se->widget()));
+  
   tabwidget->blockSignals(true);
   tabwidget->removePage(se->widget());
   tabwidget->blockSignals(false);
   createSessionTab(se->widget(), iconSetForSession(se), se->Title(), position+1);
   tabwidget->showPage(se->widget());
-
+  tabwidget->setTabTextColor(tabwidget->indexOf(se->widget()),oldcolor);
+  
   if (!m_menuCreated)
     makeGUI();
   m_moveSessionLeft->setEnabled(true);
