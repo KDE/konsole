@@ -317,8 +317,14 @@ private:
 
     QRgb blend_color;
 
+    QAction* m_pasteAction;
+    QAction* m_cdAction;
+    QAction* m_cpAction;
+    QAction* m_mvAction;
+    QAction* m_lnAction;
+
 private Q_SLOTS:
-    void drop_menu_activated(int item);
+    void drop_menu_activated(QAction*);
     void swapColorTable();
     void tripleClickTimeout();  // resets possibleTripleClick
 };

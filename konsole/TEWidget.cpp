@@ -595,7 +595,7 @@ void TEWidget::drawTextFixed(QPainter &paint, int x, int y,
         }
     }
 
-    paint.drawText(x,y, w, font_h, Qt::AlignHCenter | Qt::TextDontClip, drawstr, -1);
+    paint.drawText( QRect( x, y, w, font_h ), Qt::AlignHCenter | Qt::TextDontClip, drawstr );
     x += w;
   }
 }
@@ -772,7 +772,7 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
         // The meaning of y differs between different versions of QPainter::drawText!!
         int y = rect.y()+a; // baseline
         //### if (bidiEnabled)
-          paint.drawText(x,y, str, -1);
+          paint.drawText( QPoint( x, y ), str );
         //else
         //###   paint.drawText(x,y, str, -1, QPainter::LTR);
       }
@@ -1034,7 +1034,7 @@ void TEWidget::print(QPainter &paint, bool friendly, bool exact)
      pm.fill();
 
      QPainter pm_paint;
-     pm_paint.begin(&pm, this);
+     pm_paint.begin(&pm);
      paintContents(pm_paint, contentsRect(), true);
      pm_paint.end();
      paint.drawPixmap(0, 0, pm);
@@ -2159,14 +2159,19 @@ void TEWidget::dropEvent(QDropEvent* event)
 {
    if (m_drop==0)
    {
-      m_drop = new KMenu(this);
-      m_drop->insertItem( i18n("Paste"), paste );
+      m_drop = new KMenu( this );
+      m_pasteAction = m_drop->addAction( i18n( "Paste" ) );
       m_drop->addSeparator();
-      m_drop->insertItem( "cd", cd );
-      m_drop->insertItem( "cp", cp );
-      m_drop->insertItem( "ln", ln );
-      m_drop->insertItem( "mv", mv );
-      connect(m_drop, SIGNAL(activated(int)), SLOT(drop_menu_activated(int)));
+      m_cdAction = m_drop->addAction( i18n( "Change Directory" ) );
+      m_mvAction = m_drop->addAction( i18n( "Move Here" ) );
+      m_cpAction = m_drop->addAction( i18n( "Copy Here" ) );
+      m_lnAction = m_drop->addAction( i18n( "Link Here" ) );
+      m_pasteAction->setData( QVariant( paste ) );
+      m_cdAction->setData( QVariant( cd ) );
+      m_mvAction->setData( QVariant( mv ) );
+      m_cpAction->setData( QVariant( cp ) );
+      m_lnAction->setData( QVariant( ln ) );
+      connect(m_drop, SIGNAL(triggered(QAction*)), SLOT(drop_menu_activated(QAction*)));
    };
     // The current behaviour when url(s) are dropped is
     // * if there is only ONE url and if it's a LOCAL one, ask for paste or cd/cp/ln/mv
@@ -2182,13 +2187,13 @@ void TEWidget::dropEvent(QDropEvent* event)
     justPaste =false;
     KUrl::List::Iterator it;
 
-    m_drop->setItemEnabled( cd, true );
-    m_drop->setItemEnabled( ln, true );
+    m_cdAction->setEnabled( true );
+    m_lnAction->setEnabled( true );
 
     for ( it = urllist.begin(); it != urllist.end(); ++it ) {
       if(m_dnd_file_count++ > 0) {
         dropText += " ";
-        m_drop->setItemEnabled(cd,false);
+        m_cdAction->setEnabled( false );
       }
       KUrl url = KIO::NetAccess::mostLocalURL( *it, 0 );
       QString tmp;
@@ -2199,8 +2204,8 @@ void TEWidget::dropEvent(QDropEvent* event)
         break;
       } else {
         tmp = url.url();
-        m_drop->setItemEnabled( cd, false );
-        m_drop->setItemEnabled( ln, false );
+        m_cdAction->setEnabled( false );
+        m_lnAction->setEnabled( false );
       }
       if (urllist.count()>1)
         KRun::shellQuote(tmp);
@@ -2224,9 +2229,10 @@ void TEWidget::doDrag()
   // Don't delete the QTextDrag object.  Qt will delete it when it's done with it.
 }
 
-void TEWidget::drop_menu_activated(int item)
+void TEWidget::drop_menu_activated(QAction* action)
 {
-   switch (item)
+  int item = action->data().toInt();
+  switch (item)
   {
    case paste:
       if (m_dnd_file_count==1)
