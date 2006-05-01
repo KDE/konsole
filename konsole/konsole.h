@@ -362,15 +362,6 @@ private:
   KAction       *m_quit;
   KAction       *m_tabDetachSession;
 
-  QAction       *m_sigStop;
-  QAction       *m_sigCont;
-  QAction       *m_sigHup;
-  QAction       *m_sigInt;
-  QAction       *m_sigTerm;
-  QAction       *m_sigKill;
-  QAction       *m_sigUsr1;
-  QAction       *m_sigUsr2;
-
   KActionCollection *m_shortcuts;
 
   QActionGroup  *m_sessionGroup;

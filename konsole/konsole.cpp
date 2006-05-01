@@ -496,22 +496,22 @@ void Konsole::makeGUI()
    if ( KAuthorized::authorizeKAction( "send_signal" ) )
    {
       m_signals = new KMenu( i18n( "&Send Signal" ), this );
-      m_sigStop = m_signals->addAction( i18n( "&Suspend Task" ) + " (STOP)" );
-      m_sigCont = m_signals->addAction( i18n( "&Continue Task" ) + " (CONT)" );
-      m_sigHup = m_signals->addAction( i18n( "&Hangup" ) + " (HUP)" );
-      m_sigInt = m_signals->addAction( i18n( "&Interrupt Task" ) + " (INT)" );
-      m_sigTerm = m_signals->addAction( i18n( "&Terminate Task" ) + " (TERM)" );
-      m_sigKill = m_signals->addAction( i18n( "&Kill Task" ) + " (KILL)" );
-      m_sigUsr1 = m_signals->addAction( i18n( "User Signal &1" ) + " (USR1)" );
-      m_sigUsr2 = m_signals->addAction( i18n( "User Signal &2" ) + " (USR2)" );
-      m_sigStop->setData( QVariant( SIGSTOP ) );
-      m_sigCont->setData( QVariant( SIGCONT ) );
-      m_sigHup->setData( QVariant( SIGHUP ) );
-      m_sigInt->setData( QVariant( SIGINT ) );
-      m_sigTerm->setData( QVariant( SIGTERM ) );
-      m_sigKill->setData( QVariant( SIGKILL ) );
-      m_sigUsr1->setData( QVariant( SIGUSR1 ) );
-      m_sigUsr2->setData( QVariant( SIGUSR2 ) );
+      QAction* sigStop = m_signals->addAction( i18n( "&Suspend Task" ) + " (STOP)" );
+      QAction* sigCont = m_signals->addAction( i18n( "&Continue Task" ) + " (CONT)" );
+      QAction* sigHup = m_signals->addAction( i18n( "&Hangup" ) + " (HUP)" );
+      QAction* sigInt = m_signals->addAction( i18n( "&Interrupt Task" ) + " (INT)" );
+      QAction* sigTerm = m_signals->addAction( i18n( "&Terminate Task" ) + " (TERM)" );
+      QAction* sigKill = m_signals->addAction( i18n( "&Kill Task" ) + " (KILL)" );
+      QAction* sigUsr1 = m_signals->addAction( i18n( "User Signal &1" ) + " (USR1)" );
+      QAction* sigUsr2 = m_signals->addAction( i18n( "User Signal &2" ) + " (USR2)" );
+      sigStop->setData( QVariant( SIGSTOP ) );
+      sigCont->setData( QVariant( SIGCONT ) );
+      sigHup->setData( QVariant( SIGHUP ) );
+      sigInt->setData( QVariant( SIGINT ) );
+      sigTerm->setData( QVariant( SIGTERM ) );
+      sigKill->setData( QVariant( SIGKILL ) );
+      sigUsr1->setData( QVariant( SIGUSR1 ) );
+      sigUsr2->setData( QVariant( SIGUSR2 ) );
       connect( m_signals, SIGNAL(triggered(QAction*)), SLOT(sendSignal(QAction*)));
       KAcceleratorManager::manage( m_signals );
    }
