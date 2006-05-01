@@ -493,18 +493,26 @@ void Konsole::makeGUI()
    KActionCollection* actions = actionCollection();
 
    // Send Signal Menu
-   if (KAuthorized::authorizeKAction("send_signal"))
+   if ( KAuthorized::authorizeKAction( "send_signal" ) )
    {
-      m_signals = new KMenu( i18n("&Send Signal"), this );
-      m_signals->insertItem( i18n( "&Suspend Task" )   + " (STOP)", SIGSTOP);
-      m_signals->insertItem( i18n( "&Continue Task" )  + " (CONT)", SIGCONT);
-      m_signals->insertItem( i18n( "&Hangup" )         + " (HUP)", SIGHUP);
-      m_signals->insertItem( i18n( "&Interrupt Task" ) + " (INT)", SIGINT);
-      m_signals->insertItem( i18n( "&Terminate Task" ) + " (TERM)", SIGTERM);
-      m_signals->insertItem( i18n( "&Kill Task" )      + " (KILL)", SIGKILL);
-      m_signals->insertItem( i18n( "User Signal &1")   + " (USR1)", SIGUSR1);
-      m_signals->insertItem( i18n( "User Signal &2")   + " (USR2)", SIGUSR2);
-      connect(m_signals, SIGNAL(activated(int)), SLOT(sendSignal(int)));
+      m_signals = new KMenu( i18n( "&Send Signal" ), this );
+      m_sigStop = m_signals->addAction( i18n( "&Suspend Task" ) + " (STOP)" );
+      m_sigCont = m_signals->addAction( i18n( "&Continue Task" ) + " (CONT)" );
+      m_sigHup = m_signals->addAction( i18n( "&Hangup" ) + " (HUP)" );
+      m_sigInt = m_signals->addAction( i18n( "&Interrupt Task" ) + " (INT)" );
+      m_sigTerm = m_signals->addAction( i18n( "&Terminate Task" ) + " (TERM)" );
+      m_sigKill = m_signals->addAction( i18n( "&Kill Task" ) + " (KILL)" );
+      m_sigUsr1 = m_signals->addAction( i18n( "User Signal &1" ) + " (USR1)" );
+      m_sigUsr2 = m_signals->addAction( i18n( "User Signal &2" ) + " (USR2)" );
+      m_sigStop->setData( QVariant( SIGSTOP ) );
+      m_sigCont->setData( QVariant( SIGCONT ) );
+      m_sigHup->setData( QVariant( SIGHUP ) );
+      m_sigInt->setData( QVariant( SIGINT ) );
+      m_sigTerm->setData( QVariant( SIGTERM ) );
+      m_sigKill->setData( QVariant( SIGKILL ) );
+      m_sigUsr1->setData( QVariant( SIGUSR1 ) );
+      m_sigUsr2->setData( QVariant( SIGUSR2 ) );
+      connect( m_signals, SIGNAL(triggered(QAction*)), SLOT(sendSignal(QAction*)));
       KAcceleratorManager::manage( m_signals );
    }
 
@@ -2315,9 +2323,10 @@ void Konsole::slotResetClearTerminal()
   }
 }
 
-void Konsole::sendSignal(int sn)
+void Konsole::sendSignal( QAction* action )
 {
-  if (se) se->sendSignal(sn);
+    if ( se )
+      se->sendSignal( action->data().toInt() );
 }
 
 void Konsole::runSession(TESession* s)

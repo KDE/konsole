@@ -178,7 +178,7 @@ private Q_SLOTS:
   void moveSessionRight();
   void allowPrevNext();
   void setSchema(int n, TEWidget* tewidget=0);   // no slot necessary?
-  void sendSignal(int n);
+  void sendSignal(QAction*);
   void slotClearTerminal();
   void slotResetClearTerminal();
   void slotSelectTabbar();
@@ -361,6 +361,15 @@ private:
   KAction       *m_print;
   KAction       *m_quit;
   KAction       *m_tabDetachSession;
+
+  QAction       *m_sigStop;
+  QAction       *m_sigCont;
+  QAction       *m_sigHup;
+  QAction       *m_sigInt;
+  QAction       *m_sigTerm;
+  QAction       *m_sigKill;
+  QAction       *m_sigUsr1;
+  QAction       *m_sigUsr2;
 
   KActionCollection *m_shortcuts;
 
