@@ -492,10 +492,10 @@ void Konsole::makeGUI()
 
    KActionCollection* actions = actionCollection();
 
-   // Send Signal Menu -------------------------------------------------------------
+   // Send Signal Menu
    if (KAuthorized::authorizeKAction("send_signal"))
    {
-      m_signals = new KMenu(this);
+      m_signals = new KMenu( i18n("&Send Signal"), this );
       m_signals->insertItem( i18n( "&Suspend Task" )   + " (STOP)", SIGSTOP);
       m_signals->insertItem( i18n( "&Continue Task" )  + " (CONT)", SIGCONT);
       m_signals->insertItem( i18n( "&Hangup" )         + " (HUP)", SIGHUP);
@@ -508,54 +508,55 @@ void Konsole::makeGUI()
       KAcceleratorManager::manage( m_signals );
    }
 
-   // Edit Menu ----------------------------------------------------------------
-   m_copyClipboard->plug(m_edit);
-   m_pasteClipboard->plug(m_edit);
+   // Edit Menu
+   m_edit->addAction( m_copyClipboard );
+   m_edit->addAction( m_pasteClipboard );
 
-   if (m_signals)
-      m_edit->insertItem( i18n("&Send Signal"), m_signals );
+   if ( m_signals )
+      m_edit->addMenu( m_signals );
 
-   if ( m_zmodemUpload ) {
+   if ( m_zmodemUpload )
+   {
       m_edit->addSeparator();
-      m_zmodemUpload->plug( m_edit );
+      m_edit->addAction( m_zmodemUpload );
    }
 
    m_edit->addSeparator();
-   m_clearTerminal->plug(m_edit);
-
-   m_resetClearTerminal->plug(m_edit);
+   m_edit->addAction( m_clearTerminal );
+   m_edit->addAction( m_resetClearTerminal );
 
    m_edit->addSeparator();
-   m_findHistory->plug(m_edit);
-   m_findNext->plug(m_edit);
-   m_findPrevious->plug(m_edit);
-   m_saveHistory->plug(m_edit);
+   m_edit->addAction( m_findHistory );
+   m_edit->addAction( m_findNext );
+   m_edit->addAction( m_findPrevious );
+   m_edit->addAction( m_saveHistory );
+
    m_edit->addSeparator();
-   m_clearHistory->plug(m_edit);
-   m_clearAllSessionHistories->plug(m_edit);
+   m_edit->addAction( m_clearHistory );
+   m_edit->addAction( m_clearAllSessionHistories );
 
    // View Menu
-   m_detachSession->plug(m_view);
-   m_renameSession->plug(m_view);
+   m_view->addAction( m_detachSession );
+   m_view->addAction( m_renameSession );
 
    m_view->addSeparator();
-   monitorActivity->plug ( m_view );
-   monitorSilence->plug ( m_view );
-
-   masterMode->plug ( m_view );
+   m_view->addAction( monitorActivity );
+   m_view->addAction( monitorSilence );
+   m_view->addAction( masterMode );
 
    m_view->addSeparator();
    m_moveSessionLeft->setEnabled( false );
-   m_moveSessionLeft->plug(m_view);
+   m_view->addAction( m_moveSessionLeft );
 
    m_moveSessionRight->setEnabled( false );
-   m_moveSessionRight->plug(m_view);
+   m_view->addAction( m_moveSessionRight );
 
    m_view->addSeparator();
-   KToggleAction *ra = session2action.find(se);
-   if (ra!=0) ra->plug(m_view);
+   KToggleAction *ra = session2action.find( se );
+   if ( ra != 0 )
+       m_view->addAction( ra );
 
-   //bookmarks menu
+   // Bookmarks menu
    if (bookmarkHandler)
       connect( bookmarkHandler, SIGNAL( openURL( const QString&, const QString& )),
             SLOT( enterURL( const QString&, const QString& )));
@@ -578,33 +579,33 @@ void Konsole::makeGUI()
    KAcceleratorManager::manage( m_keytab );
    connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
 
-   //options menu
-   if (m_options)
+   // Options menu
+   if ( m_options )
    {
       // Menubar on/off
-      showMenubar->plug ( m_options );
+      m_options->addAction( showMenubar );
 
       // Tabbar
       selectTabbar = new KSelectAction(i18n("&Tab Bar"), 0, this,
                                        SLOT(slotSelectTabbar()), actions, "tabbar" );
       QStringList tabbaritems;
       tabbaritems << i18n("&Hide") << i18n("&Top") << i18n("&Bottom");
-      selectTabbar->setItems(tabbaritems);
-      selectTabbar->plug(m_options);
+      selectTabbar->setItems( tabbaritems );
+      m_options->addAction( selectTabbar );
 
       // Scrollbar
       selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), 0, this,
                                        SLOT(slotSelectScrollbar()), actions, "scrollbar" );
       QStringList scrollitems;
       scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
-      selectScrollbar->setItems(scrollitems);
-      selectScrollbar->plug(m_options);
+      selectScrollbar->setItems( scrollitems );
+      m_options->addAction( selectScrollbar );
 
       // Fullscreen
       m_options->addSeparator();
-      if (m_fullscreen)
+      if ( m_fullscreen )
       {
-        m_fullscreen->plug(m_options);
+        m_options->addAction( m_fullscreen );
         m_options->addSeparator();
       }
 
@@ -616,8 +617,8 @@ void Konsole::makeGUI()
                 << i18n("System &Notification")
                 << i18n("&Visible Bell")
                 << i18n("N&one");
-      selectBell->setItems(bellitems);
-      selectBell->plug(m_options);
+      selectBell->setItems( bellitems );
+      m_options->addAction( selectBell );
 
       KActionMenu* m_fontsizes = new KActionMenu( KIcon( "text" ),
                                                   i18n( "Font" ),
@@ -634,7 +635,7 @@ void Konsole::makeGUI()
                            SmallIconSet( "font" ), 0, this,
                            SLOT( slotSelectFont() ), actions,
                            "select_font" ) );
-      m_fontsizes->plug(m_options);
+      m_options->addAction( m_fontsizes );
 
       // encoding menu, start with default checked !
       selectSetEncoding = new KSelectAction( i18n( "&Encoding" ), SmallIconSet( "charset" ), 0, this, SLOT(slotSetEncoding()), actions, "set_encoding" );
@@ -642,7 +643,7 @@ void Konsole::makeGUI()
       list.prepend( i18n( "Default" ) );
       selectSetEncoding->setItems(list);
       selectSetEncoding->setCurrentItem (0);
-      selectSetEncoding->plug(m_options);
+      m_options->addAction( selectSetEncoding );
 
       if (KAuthorized::authorizeKAction("keyboard"))
          m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
@@ -664,81 +665,80 @@ void Konsole::makeGUI()
             << i18n("80x52 (IBM V&GA)")
             << ""
             << i18n("&Custom...");
-         selectSize->setItems(sizeitems);
-         selectSize->plug(m_options);
+         selectSize->setItems( sizeitems );
+         m_options->addAction( selectSize );
       }
 
       KAction *historyType = new KAction(i18n("Hist&ory..."), "history", 0, this,
                                       SLOT(slotHistoryType()), actions, "history");
-      historyType->plug(m_options);
+      m_options->addAction( historyType );
 
       m_options->addSeparator();
 
       KAction *save_settings = new KAction(i18n("&Save as Default"), "filesave", 0, this,
                                         SLOT(slotSaveSettings()), actions, "save_default");
-      save_settings->plug(m_options);
-
+      m_options->addAction( save_settings );
+      m_options->addSeparator();
+      m_options->addAction( m_saveProfile );
       m_options->addSeparator();
 
-      m_saveProfile->plug(m_options);
-
-      m_options->addSeparator();
-
-      KStdAction::configureNotifications(this, SLOT(slotConfigureNotifications()), actionCollection())->plug(m_options);
-      KStdAction::keyBindings(this, SLOT(slotConfigureKeys()), actionCollection())->plug(m_options);
-      KAction *configure = KStdAction::preferences(this, SLOT(slotConfigure()), actions);
-      configure->plug(m_options);
+      KAction *configureNotifications = KStdAction::configureNotifications( this, SLOT(slotConfigureNotifications()), actionCollection() );
+      KAction *configureKeys = KStdAction::keyBindings( this, SLOT(slotConfigureKeys()), actionCollection() );
+      KAction *configure = KStdAction::preferences( this, SLOT(slotConfigure()), actions );
+      m_options->addAction( configureNotifications );
+      m_options->addAction( configureKeys );
+      m_options->addAction( configure );
 
       if (KGlobalSettings::insertTearOffHandle())
          m_options->insertTearOffHandle();
    }
 
-   //help menu
-   if (m_help)
+   // Help menu
+   if ( m_help )
    {
       m_help->insertSeparator(1);
       m_help->insertItem(SmallIcon( "idea" ), i18n("&Tip of the Day"),
             this, SLOT(showTip()), 0, -1, 2);
    }
 
-   //the different session menus
+   // The different session menus
    buildSessionMenus();
 
    connect(m_session, SIGNAL(activated(int)), SLOT(newSession(int)));
 
    // Right mouse button menu
-   if (m_rightButton)
+   if ( m_rightButton )
    {
       updateRMBMenu(); // show menubar / exit fullscreen
 
       KAction* selectionEnd = new KAction(i18n("Set Selection End"), 0, this,
                                SLOT(slotSetSelectionEnd()), actions, "selection_end");
-      selectionEnd->plug(m_rightButton);
+      m_rightButton->addAction( selectionEnd );
 
-      m_copyClipboard->plug(m_rightButton);
-      m_pasteClipboard->plug(m_rightButton);
-      if (m_signals)
+      m_rightButton->addAction( m_copyClipboard );
+      m_rightButton->addAction( m_pasteClipboard );
+      if ( m_signals )
          m_rightButton->insertItem(i18n("&Send Signal"), m_signals);
 
       m_rightButton->addSeparator();
       if (m_tabbarSessionsCommands)
          m_rightButton->insertItem( i18n("New Sess&ion"), m_tabbarSessionsCommands, POPUP_NEW_SESSION_ID );
-      m_detachSession->plug(m_rightButton);
-      m_renameSession->plug(m_rightButton);
+      m_rightButton->addAction( m_detachSession );
+      m_rightButton->addAction( m_renameSession );
 
-      if (m_bookmarks)
+      if ( m_bookmarks )
       {
          m_rightButton->addSeparator();
          m_rightButton->insertItem(i18n("&Bookmarks"), m_bookmarks);
       }
 
-      if (m_options)
+      if ( m_options )
       {
          m_separator_id=m_rightButton->insertSeparator();
          m_rightButton->insertItem(i18n("S&ettings"), m_options, POPUP_SETTINGS_ID);
       }
       m_rightButton->addSeparator();
-      m_closeSession->plug(m_rightButton );
+      m_rightButton->addAction( m_closeSession );
       if (KGlobalSettings::insertTearOffHandle())
          m_rightButton->insertTearOffHandle();
    }
@@ -791,25 +791,25 @@ void Konsole::makeGUI()
    KAcceleratorManager::manage( m_tabPopupMenu );
 
    m_tabDetachSession= new KAction( i18n("&Detach Session"), SmallIconSet("tab_breakoff"), 0, this, SLOT(slotTabDetachSession()), actionCollection(), 0 );
-   m_tabDetachSession->plug(m_tabPopupMenu);
+   m_tabPopupMenu->addAction( m_tabDetachSession );
 
    m_tabPopupMenu->addAction( i18n("&Rename Session..."), this,
                          SLOT(slotTabRenameSession()) );
    m_tabPopupMenu->addSeparator();
 
-  m_tabMonitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ),
+   m_tabMonitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ),
       SmallIconSet("activity"), 0, this, SLOT( slotTabToggleMonitor() ), actionCollection() );
-  m_tabMonitorActivity->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Activity" )) );
-   m_tabMonitorActivity->plug(m_tabPopupMenu);
+   m_tabMonitorActivity->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Activity" )) );
+   m_tabPopupMenu->addAction( m_tabMonitorActivity );
 
-  m_tabMonitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ),
+   m_tabMonitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ),
       SmallIconSet("silence"), 0, this, SLOT( slotTabToggleMonitor() ), actionCollection() );
-  m_tabMonitorSilence->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Silence" ) ) );
-   m_tabMonitorSilence->plug(m_tabPopupMenu);
+   m_tabMonitorSilence->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Silence" ) ) );
+   m_tabPopupMenu->addAction( m_tabMonitorSilence );
 
    m_tabMasterMode = new KToggleAction ( i18n( "Send &Input to All Sessions" ), "remote", 0, this,
                                     SLOT( slotTabToggleMasterMode() ), actionCollection());
-   m_tabMasterMode->plug(m_tabPopupMenu);
+   m_tabPopupMenu->addAction( m_tabMasterMode );
 
    m_tabPopupMenu->addSeparator();
    m_tabPopupMenu->addAction( SmallIconSet("colors"), i18n("Select &Tab Color..."), this, SLOT(slotTabSelectColor()) );
@@ -828,7 +828,7 @@ void Konsole::makeGUI()
       // Fill tab bar context menu
       m_tabbarPopupMenu = new KMenu( this );
       KAcceleratorManager::manage( m_tabbarPopupMenu );
-      selectTabbar->plug(m_tabbarPopupMenu);
+      m_tabbarPopupMenu->addAction( selectTabbar );
 
       KSelectAction *viewOptions = new KSelectAction(actionCollection(), 0);
       viewOptions->setText(i18n("Tab &Options"));
@@ -836,19 +836,19 @@ void Konsole::makeGUI()
       options << i18n("&Text && Icons") << i18n("Text &Only") << i18n("&Icons Only");
       viewOptions->setItems(options);
       viewOptions->setCurrentItem(m_tabViewMode);
-      viewOptions->plug(m_tabbarPopupMenu);
+      m_tabbarPopupMenu->addAction( viewOptions );
       connect(viewOptions, SIGNAL(activated(int)), this, SLOT(slotTabSetViewOptions(int)));
       slotTabSetViewOptions(m_tabViewMode);
 
       KToggleAction *dynamicTabHideOption = new KToggleAction ( i18n( "&Dynamic Hide" ), 0, this,
                                        SLOT( slotTabbarToggleDynamicHide() ), actionCollection(), 0);
       dynamicTabHideOption->setChecked(b_dynamicTabHide);
-      dynamicTabHideOption->plug(m_tabbarPopupMenu);
+      m_tabbarPopupMenu->addAction( dynamicTabHideOption );
 
       KToggleAction *m_autoResizeTabs = new KToggleAction( i18n("&Auto Resize Tabs"),
                  0, this, SLOT( slotToggleAutoResizeTabs() ), actionCollection(), 0);
       m_autoResizeTabs->setChecked(b_autoResizeTabs);
-      m_autoResizeTabs->plug(m_tabbarPopupMenu);
+      m_tabbarPopupMenu->addAction( m_autoResizeTabs );
     }
 }
 
@@ -2376,8 +2376,8 @@ void Konsole::addSession(TESession* s)
      m_detachSession->setEnabled(true);
   }
 
-  if (m_menuCreated)
-     ra->plug(m_view);
+  if ( m_menuCreated )
+     m_view->addAction( ra );
 
   createSessionTab(te, SmallIconSet(s->IconName()), newTitle);
   setSchema(s->schemaNo());
@@ -2965,7 +2965,7 @@ void Konsole::doneSession(TESession* s)
     activateSession(se_previous);
 
   KToggleAction *ra = session2action.find(s);
-  ra->unplug(m_view);
+  m_view->removeAction( ra );
   tabwidget->removePage( s->widget() );
   if (rootxpms[s->widget()]) {
     delete rootxpms[s->widget()];
@@ -3046,7 +3046,7 @@ void Konsole::slotMovedTab(int from, int to)
   sessions.insert(to,_se);
 
   KToggleAction *ra = session2action.find(_se);
-  ra->unplug(m_view);
+  m_view->removeAction( ra );
   ra->plug(m_view,(m_view->count()-sessions.count()+1)+to);
 
   if (to==tabwidget->currentIndex()) {
@@ -3069,7 +3069,7 @@ void Konsole::moveSessionLeft()
   sessions.insert(position-1,se);
 
   KToggleAction *ra = session2action.find(se);
-  ra->unplug(m_view);
+  m_view->removeAction( ra );
   ra->plug(m_view,(m_view->count()-sessions.count()+1)+position-1);
 
   QColor oldcolor = tabwidget->tabTextColor(tabwidget->indexOf(se->widget()));
@@ -3100,7 +3100,7 @@ void Konsole::moveSessionRight()
   sessions.insert(position+1,se);
 
   KToggleAction *ra = session2action.find(se);
-  ra->unplug(m_view);
+  m_view->removeAction( ra );
   ra->plug(m_view,(m_view->count()-sessions.count()+1)+position+1);
 
   QColor oldcolor = tabwidget->tabTextColor(tabwidget->indexOf(se->widget()));
@@ -3243,14 +3243,14 @@ void Konsole::buildSessionMenus()
    if (KAuthorized::authorizeKAction("file_print"))
    {
       m_session->addSeparator();
-      m_print->plug(m_session);
+      m_session->addAction( m_print );
    }
 
    m_session->addSeparator();
-   m_closeSession->plug(m_session);
+   m_session->addAction( m_closeSession );
 
    m_session->addSeparator();
-   m_quit->plug(m_session);
+   m_session->addAction( m_quit );
 }
 
 static void insertItemSorted(KMenu *menu, const QIcon &iconSet, const QString &txt, int id)
@@ -3577,7 +3577,7 @@ void Konsole::detachSession(TESession* _se) {
   if (!_se) _se=se;
 
   KToggleAction *ra = session2action.find(_se);
-  ra->unplug(m_view);
+  m_view->removeAction( ra );
   TEWidget* se_widget = _se->widget();
   session2action.remove(_se);
   action2session.remove(ra);
@@ -3691,8 +3691,8 @@ void Konsole::attachSession(TESession* session)
   if (sessions.count()>1)
     m_detachSession->setEnabled(true);
 
-  if (m_menuCreated)
-    ra->plug(m_view);
+  if ( m_menuCreated )
+    m_view->addAction( ra );
 
   connect( session,SIGNAL(done(TESession*)),
            this,SLOT(doneSession(TESession*)) );
