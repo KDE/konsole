@@ -2921,7 +2921,7 @@ void Konsole::newSession(const QString& sURL, const QString& title)
    else if ((!url.protocol().isEmpty()) && (url.hasHost())) {
      protocol = url.protocol();
      bool isSSH = (protocol == "ssh");
-     args.append( protocol.latin1() ); /* argv[0] == command to run. */
+     args.append( protocol.toLatin1() ); /* argv[0] == command to run. */
      host = url.host();
      if (url.port() && isSSH) {
        args.append("-p");
@@ -2930,12 +2930,12 @@ void Konsole::newSession(const QString& sURL, const QString& title)
      if (url.hasUser()) {
        login = url.user();
        args.append("-l");
-       args.append(login.latin1());
+       args.append(login.toLatin1());
      }
-     args.append(host.latin1());
+     args.append(host.toLatin1());
      if (url.port() && !isSSH)
        args.append(QByteArray().setNum(url.port()));
-     newSession( NULL, protocol.latin1() /* protocol */, args /* arguments */,
+     newSession( NULL, protocol.toLatin1() /* protocol */, args /* arguments */,
                  QString() /*term*/, QString() /*icon*/,
  	        title.isEmpty() ? path : title /*title*/, QString() /*cwd*/);
      return;
@@ -3312,7 +3312,7 @@ void Konsole::addSessionCommand(const QString &path)
   {
     if (!path.isEmpty())
        delete co;
-    kWarning()<<"Unable to use "<<path.latin1()<<endl;
+    kWarning()<<"Unable to use "<<path.toLatin1()<<endl;
     return; // ignore
   }
 
@@ -3333,10 +3333,10 @@ void Konsole::addSessionCommand(const QString &path)
 
   // Is there already this shortcut?
   KAction* sessionAction;
-  if ( m_shortcuts->action( name.latin1() ) ) {
-    sessionAction = m_shortcuts->action( name.latin1() );
+  if ( m_shortcuts->action( name ) ) {
+    sessionAction = m_shortcuts->action( name );
   } else {
-    sessionAction = new KAction( comment, 0, this, 0, m_shortcuts, name.latin1() );
+    sessionAction = new KAction( comment, 0, this, 0, m_shortcuts, name.toLatin1() );
   }
   connect( sessionAction, SIGNAL( activated() ), sessionNumberMapper, SLOT( map() ) );
   sessionNumberMapper->setMapping( sessionAction, cmd_serial );

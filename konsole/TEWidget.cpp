@@ -296,14 +296,14 @@ void TEWidget::fontChange(const QFont &)
     font_w=1;
 
   font_a = fm.ascent();
-//printf("font: %s\n", font().toString().latin1());
+//printf("font: %s\n", font().toString().toLatin1().constData());
 //printf("fixed: %s\n", font().fixedPitch() ? "yes" : "no");
 //printf("fixed_font: %d\n", fixed_font);
 //printf("font_h: %d\n",font_h);
 //printf("font_w: %d\n",font_w);
 //printf("fw: %d\n",fw);
 //printf("font_a: %d\n",font_a);
-//printf("rawname: %s\n",font().rawName().ascii());
+//printf("rawname: %s\n",font().rawName().toAscii().constData());
 
 /*
 #if defined(Q_CC_GNU)
