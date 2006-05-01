@@ -275,6 +275,7 @@ void TEScreen::eraseChars(int n)
 void TEScreen::deleteChars(int n)
 {
   if (n == 0) n = 1; // Default
+  if (n > columns) n = columns - 1;
   int p = QMAX(0,QMIN(cuX+n,columns-1));
   moveImage(loc(cuX,cuY),loc(p,cuY),loc(columns-1,cuY));
   clearImage(loc(columns-n,cuY),loc(columns-1,cuY),' ');
