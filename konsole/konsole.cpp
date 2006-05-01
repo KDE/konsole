@@ -2668,8 +2668,11 @@ void Konsole::allowPrevNext()
 
 KSimpleConfig *Konsole::defaultSession()
 {
-  if (!m_defaultSession)
-    setDefaultSession("shell.desktop");
+  if (!m_defaultSession) {
+    KConfig * config = KGlobal::config();
+    config->setDesktopGroup();
+    setDefaultSession(config->readEntry("DefaultSession","shell.desktop"));
+  }
   return m_defaultSession;
 }
 
