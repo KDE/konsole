@@ -62,8 +62,8 @@ class SchemaListBoxText : public Q3ListBoxText
 };
 
 
-SchemaEditor::SchemaEditor(QWidget * parent, const char *name)
-:SchemaDialog(parent, name)
+SchemaEditor::SchemaEditor(QWidget * parent)
+:SchemaDialog(parent)
 {
     schMod= false;
     loaded = false;

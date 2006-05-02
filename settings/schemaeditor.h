@@ -33,10 +33,10 @@ class KSharedPixmap;
 /** SchemaEditor is the base class of the porject */
 class SchemaEditor : public SchemaDialog
 {
-  Q_OBJECT 
+  Q_OBJECT
   public:
     /** constructor */
-    SchemaEditor(QWidget* parent=0, const char *name=0);
+    SchemaEditor(QWidget* parent=0);
     /** destructor */
     ~SchemaEditor();
 
@@ -51,12 +51,12 @@ class SchemaEditor : public SchemaDialog
 
   public Q_SLOTS:
   	void slotColorChanged(int);
-  	void imageSelect();  	
+  	void imageSelect();
 	void slotTypeChanged(int);
 	void readSchema(int);
 	void saveCurrent();
 	void removeCurrent();
-	void previewLoaded(bool l);		
+	void previewLoaded(bool l);
 	void getList();
   private Q_SLOTS:
 	void show();
@@ -71,7 +71,7 @@ class SchemaEditor : public SchemaDialog
 	QVector<bool> bold;
 	QPixmap pix;
 	KSharedPixmap *spix;
-	QString defaultSchema;	
+	QString defaultSchema;
 	bool loaded;
 	bool schemaLoaded;
 	bool change;

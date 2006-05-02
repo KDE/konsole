@@ -102,7 +102,7 @@ void TESession::ptyError()
   // FIXME:  sh->error() is always empty
   if ( sh->error().isEmpty() )
     KMessageBox::error( te->topLevelWidget(),
-       i18n("Konsole is unable to open a PTY (pseudo teletype).  It is likely that this is due to an incorrect configuration of the PTY devices.  Konsole needs to have read/write access to the PTY devices."), 
+       i18n("Konsole is unable to open a PTY (pseudo teletype).  It is likely that this is due to an incorrect configuration of the PTY devices.  Konsole needs to have read/write access to the PTY devices."),
        i18n("A Fatal Error Has Occurred") );
   else
     KMessageBox::error(te->topLevelWidget(), sh->error());
@@ -150,7 +150,7 @@ void TESession::run()
      QDir::setCurrent(initial_cwd);
   sh->setXonXoff(xon_xoff);
 
-  int result = sh->run(QFile::encodeName(pgm), args, term.toLatin1(), 
+  int result = sh->run(QFile::encodeName(pgm), args, term.toLatin1(),
           winId, add_to_utmp,
           ("DCOPRef("+appId+",konsole)").toLatin1(),
           ("DCOPRef("+appId+","+sessionId+")").toLatin1());
@@ -196,7 +196,7 @@ void TESession::setUserTitle( int what, const QString &caption )
        cwd=caption;
        cwd=cwd.replace( QRegExp("^~"), QDir::homePath() );
        emit openURLRequest(cwd);
-    }    
+    }
     if (what == 32) { // change icon via \033]32;Icon\007
        iconName = caption;
        te->update();
@@ -409,7 +409,7 @@ void TESession::setEncodingNo(int index)
 {
   encoding_no = index;
 }
-  
+
 void TESession::setKeymapNo(int kn)
 {
   em->setKeymap(kn);
@@ -780,7 +780,7 @@ void TESession::setSize(QSize size)
 {
   if ((size.width() <= 1) || (size.height() <= 1))
      return;
-  
+
   emit resizeSession(this, size);
 }
 
