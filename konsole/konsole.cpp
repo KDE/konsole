@@ -1123,9 +1123,9 @@ void Konsole::makeBasicGUI()
 
   KShortcut shortcut(Qt::CTRL+Qt::ALT+Qt::Key_N);
   shortcut.append(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_N));
-  new KAction(i18n("New Session"), shortcut, this, SLOT(newSession()), m_shortcuts, "new_session");
-  new KAction(i18n("Activate Menu"), Qt::CTRL+Qt::ALT+Qt::Key_M, this, SLOT(activateMenu()), m_shortcuts, "activate_menu");
-  new KAction(i18n("List Sessions"), 0, this, SLOT(listSessions()), m_shortcuts, "list_sessions");
+  addAction(new KAction(i18n("New Session"), shortcut, this, SLOT(newSession()), m_shortcuts, "new_session"));
+  addAction(new KAction(i18n("Activate Menu"), Qt::CTRL+Qt::ALT+Qt::Key_M, this, SLOT(activateMenu()), m_shortcuts, "activate_menu"));
+  addAction(new KAction(i18n("List Sessions"), 0, this, SLOT(listSessions()), m_shortcuts, "list_sessions"));
 
   m_moveSessionLeft = new KAction(i18n("&Move Session Left"), QApplication::isRightToLeft() ? "forward" : "back",
                                         QApplication::isRightToLeft() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Right : Qt::CTRL+Qt::SHIFT+Qt::Key_Left, this,
@@ -1134,19 +1134,19 @@ void Konsole::makeBasicGUI()
                                         QApplication::isRightToLeft() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Left : Qt::CTRL+Qt::SHIFT+Qt::Key_Right, this,
                                         SLOT(moveSessionRight()), m_shortcuts, "move_session_right");
 
-  new KAction(i18n("Go to Previous Session"), QApplication::isRightToLeft() ? Qt::SHIFT+Qt::Key_Right : Qt::SHIFT+Qt::Key_Left,
-              this, SLOT(prevSession()), m_shortcuts, "previous_session");
-  new KAction(i18n("Go to Next Session"), QApplication::isRightToLeft() ? Qt::SHIFT+Qt::Key_Left : Qt::SHIFT+Qt::Key_Right,
-              this, SLOT(nextSession()), m_shortcuts, "next_session");
+  addAction(new KAction(i18n("Go to Previous Session"), QApplication::isRightToLeft() ? Qt::SHIFT+Qt::Key_Right : Qt::SHIFT+Qt::Key_Left,
+              this, SLOT(prevSession()), m_shortcuts, "previous_session"));
+  addAction(new KAction(i18n("Go to Next Session"), QApplication::isRightToLeft() ? Qt::SHIFT+Qt::Key_Left : Qt::SHIFT+Qt::Key_Right,
+              this, SLOT(nextSession()), m_shortcuts, "next_session"));
 
   for (int i=1;i<13;i++) { // Due to 12 function keys?
-      new KAction(i18n("Switch to Session %1", i), 0, this, SLOT(switchToSession()), m_shortcuts, QString().sprintf("switch_to_session_%02d", i).toLatin1().constData());
+      addAction(new KAction(i18n("Switch to Session %1", i), 0, this, SLOT(switchToSession()), m_shortcuts, QString().sprintf("switch_to_session_%02d", i).toLatin1().constData()));
   }
 
   new KAction(i18n("Enlarge Font"), 0, this, SLOT(biggerFont()), m_shortcuts, "bigger_font");
   new KAction(i18n("Shrink Font"), 0, this, SLOT(smallerFont()), m_shortcuts, "smaller_font");
 
-  new KAction(i18n("Toggle Bidi"), Qt::CTRL+Qt::ALT+Qt::Key_B, this, SLOT(toggleBidi()), m_shortcuts, "toggle_bidi");
+  addAction(new KAction(i18n("Toggle Bidi"), Qt::CTRL+Qt::ALT+Qt::Key_B, this, SLOT(toggleBidi()), m_shortcuts, "toggle_bidi"));
 
   // Should we load all *.desktop files now?  Required for Session shortcuts.
   if ( KConfigGroup(KGlobal::config(), "General").readEntry("SessionShortcutsEnabled", QVariant(false)).toBool() ) {
