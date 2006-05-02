@@ -286,9 +286,9 @@ void TEmulation::onKeyPress( QKeyEvent* ev )
     // routine will never be used, we simply emit plain ascii.
     emit sndBlock(ev->text().toAscii(),ev->text().length());
   }
-  else if (ev->ascii()>0)
+  else if (ev->text().toAscii().constData()>0)
   { unsigned char c[1];
-    c[0] = ev->ascii();
+    c[0] = ev->text().toAscii()[0];
     emit sndBlock((char*)c,1);
   }
 }
