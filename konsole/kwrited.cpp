@@ -41,10 +41,14 @@
 
 KWrited::KWrited() : QObject()
 {
+  int pref_width, pref_height;
+
   wid = new QTextEdit(0, "messages");
   wid->setFont(KGlobalSettings::fixedFont());
-  wid->setMinimumWidth(wid->fontMetrics().maxWidth()*80 +
-      wid->minimumSizeHint().width());
+  pref_width = (2 * KGlobalSettings::desktopGeometry(0).width()) / 3;
+  pref_height = wid->fontMetrics().lineSpacing() * 10;
+  wid->setMinimumWidth(pref_width);
+  wid->setMinimumHeight(pref_height);
   wid->setReadOnly(true);
   wid->setFocusPolicy(QWidget::NoFocus);
 
