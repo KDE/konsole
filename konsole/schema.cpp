@@ -391,7 +391,8 @@ bool ColorSchema::rereadSchemaFile()
         if (!(0 <= fi && fi <  TABLE_COLORS)) continue;
         if (!(0 <= tr && tr <= 1           )) continue;
         if (!(0 <= bo && bo <= 1           )) continue;
-        m_table[fi].color       = kapp->palette().active().text();
+        kapp->palette().setCurrentColorGroup( QPalette::Active );
+        m_table[fi].color       = kapp->palette().text().color();
         m_table[fi].transparent = tr;
         m_table[fi].bold        = bo;
       }
@@ -402,7 +403,7 @@ bool ColorSchema::rereadSchemaFile()
         if (!(0 <= fi && fi <  TABLE_COLORS)) continue;
         if (!(0 <= tr && tr <= 1           )) continue;
         if (!(0 <= bo && bo <= 1           )) continue;
-        m_table[fi].color       = kapp->palette().active().base();
+        m_table[fi].color       = kapp->palette().base().color();
         m_table[fi].transparent = tr;
         m_table[fi].bold        = bo;
       }

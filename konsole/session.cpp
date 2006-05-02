@@ -138,7 +138,7 @@ void TESession::run()
   exec = KShell::tildeExpand(exec);
   QString pexec = KGlobal::dirs()->findExe(exec);
   if ( pexec.isEmpty() ) {
-    kdError()<<"can not execute "<<exec<<endl;
+    kError()<<"can not execute "<<exec<<endl;
     QTimer::singleShot(1, this, SLOT(done()));
     return;
   }
@@ -664,9 +664,8 @@ void TESession::zmodemStatus(KProcess *, char *data, int len)
 
 void TESession::zmodemRcvBlock(const char *data, int len)
 {
-  QByteArray ba;
-  ba.duplicate(data, len);
-  zmodemProc->writeStdin(ba);
+  QByteArray ba( data, len );
+  zmodemProc->writeStdin( ba );
 //  qWarning("--> %d bytes", len);
 }
 
