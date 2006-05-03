@@ -2135,7 +2135,7 @@ void Konsole::updateTitle()
   int se_index = tabwidget->indexOf( se->widget() );
 
   setCaption( se->fullTitle() );
-  setIconText( se->IconText() );
+  setWindowIconText( se->IconText() );
   tabwidget->setTabIconSet(se->widget(), iconSetForSession(se));
   QString icon = se->IconName();
   KToggleAction *ra = session2action.find(se);
