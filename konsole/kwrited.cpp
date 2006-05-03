@@ -39,18 +39,19 @@
      see ../Makefile.am - kwrited doesn't seem to work well without utempter
 */
 
-KWrited::KWrited() : QObject()
+KWrited::KWrited() : QTextEdit()
 {
   int pref_width, pref_height;
 
-  wid = new QTextEdit(0, "messages");
-  wid->setFont(KGlobalSettings::fixedFont());
+  setFont(KGlobalSettings::fixedFont());
   pref_width = (2 * KGlobalSettings::desktopGeometry(0).width()) / 3;
-  pref_height = wid->fontMetrics().lineSpacing() * 10;
-  wid->setMinimumWidth(pref_width);
-  wid->setMinimumHeight(pref_height);
-  wid->setReadOnly(true);
-  wid->setFocusPolicy(QWidget::NoFocus);
+  pref_height = fontMetrics().lineSpacing() * 10;
+  setMinimumWidth(pref_width);
+  setMinimumHeight(pref_height);
+  setReadOnly(true);
+  setFocusPolicy(QWidget::NoFocus);
+  setWordWrap(QTextEdit::WidgetWidth);
+  setTextFormat(Qt::PlainText);
 
   pty = new KPty();
   pty->open();
@@ -59,7 +60,7 @@ KWrited::KWrited() : QObject()
   connect(sn, SIGNAL(activated(int)), this, SLOT(block_in(int)));
 
   QString txt = i18n("KWrited - Listening on Device %1").arg(pty->ttyName());
-  wid->setCaption(txt);
+  setCaption(txt);
   puts(txt.local8Bit().data());
 }
 
@@ -76,9 +77,25 @@ void KWrited::block_in(int fd)
   if (len <= 0)
      return;
 
-  wid->insert( QString::fromLocal8Bit( buf, len ).remove('\r') );
-  wid->show();
-  wid->raise();
+  insert( QString::fromLocal8Bit( buf, len ).remove('\r') );
+  show();
+  raise();
+}
+
+void KWrited::clearText()
+{
+   clear();
+}
+
+QPopupMenu *KWrited::createPopupMenu( const QPoint &pos )
+{
+   QPopupMenu *menu = QTextEdit::createPopupMenu( pos );
+
+   menu->insertItem( i18n( "Clear Messages" ),
+                     this, SLOT( clearText() ), 
+                     0, -1, 0 );
+
+   return menu;
 }
 
 KWritedModule::KWritedModule( const QCString& obj )
