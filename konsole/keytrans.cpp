@@ -209,12 +209,23 @@ KeytabReader::KeytabReader(QString p, QIODevice &d)
 
 void KeytabReader::getCc()
 {
-  if (cc == '\n') { linno += 1; colno = 0; }
-  if (cc < 0) return;
   char dch;
-  buf->getChar( &dch );
-  cc = dch;
-  colno += 1;
+
+  if (cc == '\n')
+  {
+    linno += 1;
+    colno = 0;
+  }
+
+  if(buf->getChar( &dch ))
+  {
+    cc = dch;
+    colno += 1;
+  }
+  else
+  {
+    cc = -1;
+  }
 }
 
 void KeytabReader::getSymbol()
