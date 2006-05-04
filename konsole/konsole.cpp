@@ -1043,13 +1043,14 @@ void Konsole::makeBasicGUI()
                                  SLOT(slotCopyClipboard()), m_shortcuts, "edit_copy");
   m_pasteClipboard = new KAction(i18n("&Paste"), "editpaste", Qt::SHIFT+Qt::Key_Insert, this,
                                  SLOT(slotPasteClipboard()), m_shortcuts, "edit_paste");
-  m_pasteSelection = new KAction(i18n("Paste Selection"), Qt::CTRL+Qt::SHIFT+Qt::Key_Insert, this,
-                                 SLOT(slotPasteSelection()), m_shortcuts, "pasteselection");
+  m_pasteSelection = new KAction(i18n("Paste Selection"), m_shortcuts, "pasteselection");
+  connect(m_pasteSelection, SIGNAL(triggered(bool) ), SLOT(slotPasteSelection()));
+  m_pasteSelection->setShortcut(Qt::CTRL+Qt::SHIFT+Qt::Key_Insert);
 
-  m_clearTerminal = new KAction(i18n("C&lear Terminal"), 0, this,
-                                SLOT(slotClearTerminal()), m_shortcuts, "clear_terminal");
-  m_resetClearTerminal = new KAction(i18n("&Reset && Clear Terminal"), 0, this,
-                                     SLOT(slotResetClearTerminal()), m_shortcuts, "reset_clear_terminal");
+  m_clearTerminal = new KAction(i18n("C&lear Terminal"), m_shortcuts, "clear_terminal");
+  connect(m_clearTerminal, SIGNAL(triggered(bool) ), SLOT(slotClearTerminal()));
+  m_resetClearTerminal = new KAction(i18n("&Reset && Clear Terminal"), m_shortcuts, "reset_clear_terminal");
+  connect(m_resetClearTerminal, SIGNAL(triggered(bool) ), SLOT(slotResetClearTerminal()));
   m_findHistory = new KAction(i18n("&Find in History..."), "find", 0, this,
                               SLOT(slotFindHistory()), m_shortcuts, "find_history");
   m_findHistory->setEnabled(b_histEnabled);
@@ -1077,8 +1078,9 @@ void Konsole::makeBasicGUI()
                                 SLOT(slotDetachSession()), m_shortcuts, "detach_session");
   m_detachSession->setEnabled(false);
 
-  m_renameSession = new KAction(i18n("&Rename Session..."), Qt::CTRL+Qt::ALT+Qt::Key_S, this,
-                                SLOT(slotRenameSession()), m_shortcuts, "rename_session");
+  m_renameSession = new KAction(i18n("&Rename Session..."), m_shortcuts, "rename_session");
+  connect(m_renameSession, SIGNAL(triggered(bool) ), SLOT(slotRenameSession()));
+  m_renameSession->setShortcut(Qt::CTRL+Qt::ALT+Qt::Key_S);
 
   if (KAuthorized::authorizeKAction("zmodem_upload"))
     m_zmodemUpload = new KAction( i18n( "&ZModem Upload..." ),
