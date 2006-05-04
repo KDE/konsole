@@ -1143,7 +1143,8 @@ void Konsole::makeBasicGUI()
       addAction(new KAction(i18n("Switch to Session %1", i), 0, this, SLOT(switchToSession()), m_shortcuts, QString().sprintf("switch_to_session_%02d", i).toLatin1().constData()));
   }
 
-  new KAction(i18n("Enlarge Font"), 0, this, SLOT(biggerFont()), m_shortcuts, "bigger_font");
+  KAction *action = new KAction(i18n("Enlarge Font"), m_shortcuts, "bigger_font");
+  connect(action, SIGNAL(triggered(bool) ), SLOT(biggerFont()));
   new KAction(i18n("Shrink Font"), 0, this, SLOT(smallerFont()), m_shortcuts, "smaller_font");
 
   addAction(new KAction(i18n("Toggle Bidi"), Qt::CTRL+Qt::ALT+Qt::Key_B, this, SLOT(toggleBidi()), m_shortcuts, "toggle_bidi"));
