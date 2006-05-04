@@ -719,8 +719,8 @@ void Konsole::makeGUI()
    {
       updateRMBMenu(); // show menubar / exit fullscreen
 
-      KAction* selectionEnd = new KAction(i18n("Set Selection End"), 0, this,
-                               SLOT(slotSetSelectionEnd()), actions, "selection_end");
+      KAction *selectionEnd = new KAction(i18n("Set Selection End"), actions, "selection_end");
+      connect(selectionEnd, SIGNAL(triggered(bool) ), SLOT(slotSetSelectionEnd()));
       m_rightButton->addAction( selectionEnd );
 
       m_rightButton->addAction( m_copyClipboard );

@@ -419,8 +419,8 @@ void konsolePart::makeGUI()
      showFrame->plug(m_options);
 
      // Word Connectors
-     KAction *WordSeps = new KAction(i18n("Wor&d Connectors..."), 0, this,
-                                  SLOT(slotWordSeps()), settingsActions, 0);
+     KAction *WordSeps = new KAction(i18n("Wor&d Connectors..."), settingsActions, 0);
+     connect(WordSeps, SIGNAL(triggered(bool) ), SLOT(slotWordSeps()));
      WordSeps->plug(m_options);
 
      // Use Konsole's Settings
@@ -440,8 +440,8 @@ void konsolePart::makeGUI()
 
   // Popup Menu -------------------------------------------------------------------
   m_popupMenu = new KMenu((KMainWindow*)parentWidget);
-  KAction* selectionEnd = new KAction(i18n("Set Selection End"), 0, te,
-                               SLOT(setSelectionEnd()), actions, "selection_end");
+  KAction *selectionEnd = new KAction(i18n("Set Selection End"), actions, "selection_end");
+  connect(selectionEnd, SIGNAL(triggered(bool) ), te, SLOT(setSelectionEnd()));
   selectionEnd->plug(m_popupMenu);
 
   KAction *copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0,
