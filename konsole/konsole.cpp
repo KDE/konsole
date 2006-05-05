@@ -672,14 +672,14 @@ void Konsole::makeGUI()
          m_options->addAction( selectSize );
       }
 
-      KAction *historyType = new KAction(i18n("Hist&ory..."), "history", 0, this,
-                                      SLOT(slotHistoryType()), actions, "history");
+      KAction *historyType = new KAction(KIcon("history"), i18n("Hist&ory..."), actions, "history");
+      connect(historyType, SIGNAL(triggered(bool) ), SLOT(slotHistoryType()));
       m_options->addAction( historyType );
 
       m_options->addSeparator();
 
-      KAction *save_settings = new KAction(i18n("&Save as Default"), "filesave", 0, this,
-                                        SLOT(slotSaveSettings()), actions, "save_default");
+      KAction *save_settings = new KAction(KIcon("filesave"), i18n("&Save as Default"), actions, "save_default");
+      connect(save_settings, SIGNAL(triggered(bool) ), SLOT(slotSaveSettings()));
       m_options->addAction( save_settings );
       m_options->addSeparator();
       m_options->addAction( m_saveProfile );
@@ -1034,10 +1034,11 @@ void Konsole::makeBasicGUI()
 #endif
   m_shortcuts = new KActionCollection((QWidget*)(this));
 
-  m_copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0, this,
-                                 SLOT(slotCopyClipboard()), m_shortcuts, "edit_copy");
-  m_pasteClipboard = new KAction(i18n("&Paste"), "editpaste", Qt::SHIFT+Qt::Key_Insert, this,
-                                 SLOT(slotPasteClipboard()), m_shortcuts, "edit_paste");
+  m_copyClipboard = new KAction(KIcon("editcopy"), i18n("&Copy"), m_shortcuts, "edit_copy");
+  connect(m_copyClipboard, SIGNAL(triggered(bool) ), SLOT(slotCopyClipboard()));
+  m_pasteClipboard = new KAction(KIcon("editpaste"), i18n("&Paste"), m_shortcuts, "edit_paste");
+  connect(m_pasteClipboard, SIGNAL(triggered(bool) ), SLOT(slotPasteClipboard()));
+  m_pasteClipboard->setShortcut(Qt::SHIFT+Qt::Key_Insert);
   m_pasteSelection = new KAction(i18n("Paste Selection"), m_shortcuts, "pasteselection");
   connect(m_pasteSelection, SIGNAL(triggered(bool) ), SLOT(slotPasteSelection()));
   m_pasteSelection->setShortcut(Qt::CTRL+Qt::SHIFT+Qt::Key_Insert);
@@ -1046,8 +1047,8 @@ void Konsole::makeBasicGUI()
   connect(m_clearTerminal, SIGNAL(triggered(bool) ), SLOT(slotClearTerminal()));
   m_resetClearTerminal = new KAction(i18n("&Reset && Clear Terminal"), m_shortcuts, "reset_clear_terminal");
   connect(m_resetClearTerminal, SIGNAL(triggered(bool) ), SLOT(slotResetClearTerminal()));
-  m_findHistory = new KAction(i18n("&Find in History..."), "find", 0, this,
-                              SLOT(slotFindHistory()), m_shortcuts, "find_history");
+  m_findHistory = new KAction(KIcon("find"), i18n("&Find in History..."), m_shortcuts, "find_history");
+  connect(m_findHistory, SIGNAL(triggered(bool) ), SLOT(slotFindHistory()));
   m_findHistory->setEnabled(b_histEnabled);
 
   m_findNext = new KAction(KIcon("next"), i18n("Find &Next"), m_shortcuts, "find_next");
@@ -1113,10 +1114,12 @@ void Konsole::makeBasicGUI()
      // Don't steal F1 (handbook) accel (esp. since it not visible in
      // "Configure Shortcuts").
 
-  m_closeSession = new KAction(i18n("C&lose Session"), "fileclose", 0, this,
-                               SLOT(closeCurrentSession()), m_shortcuts, "close_session");
-  m_print = new KAction(i18n("&Print Screen..."), "fileprint", 0, this, SLOT( slotPrint() ), m_shortcuts, "file_print");
-  m_quit = new KAction(i18n("&Quit"), "exit", 0, this, SLOT( close() ), m_shortcuts, "file_quit");
+  m_closeSession = new KAction(KIcon("fileclose"), i18n("C&lose Session"), m_shortcuts, "close_session");
+  connect(m_closeSession, SIGNAL(triggered(bool) ), SLOT(closeCurrentSession()));
+  m_print = new KAction(KIcon("fileprint"), i18n("&Print Screen..."), m_shortcuts, "file_print");
+  connect(m_print, SIGNAL(triggered(bool) ), SLOT( slotPrint() ));
+  m_quit = new KAction(KIcon("exit"), i18n("&Quit"), m_shortcuts, "file_quit");
+  connect(m_quit, SIGNAL(triggered(bool) ), SLOT( close() ));
 
   KShortcut shortcut(Qt::CTRL+Qt::ALT+Qt::Key_N);
   shortcut.append(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_N));
