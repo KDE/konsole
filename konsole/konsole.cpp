@@ -421,11 +421,7 @@ void Konsole::updateRMBMenu()
    }
    else
    {
-      if (showMenubar->isPlugged( m_rightButton ))
-      {
-         showMenubar->unplug ( m_rightButton );
-         m_rightButton->removeItemAt(index);
-      }
+      m_rightButton->removeAction( showMenubar );
       index = 0;
       m_rightButton->setItemVisible(POPUP_NEW_SESSION_ID,false);
       m_rightButton->setItemVisible(m_separator_id,false);
@@ -1055,24 +1051,24 @@ void Konsole::makeBasicGUI()
                               SLOT(slotFindHistory()), m_shortcuts, "find_history");
   m_findHistory->setEnabled(b_histEnabled);
 
-  m_findNext = new KAction(i18n("Find &Next"), "next", 0, this,
-                           SLOT(slotFindNext()), m_shortcuts, "find_next");
+  m_findNext = new KAction(KIcon("next"), i18n("Find &Next"), m_shortcuts, "find_next");
+  connect(m_findNext, SIGNAL(triggered(bool)), SLOT(slotFindNext()));
   m_findNext->setEnabled(b_histEnabled);
 
-  m_findPrevious = new KAction(i18n("Find Pre&vious"), "previous", 0, this,
-                               SLOT(slotFindPrevious()), m_shortcuts, "find_previous");
+  m_findPrevious = new KAction(KIcon("previous"), i18n("Find Pre&vious"), m_shortcuts, "find_previous");
+  connect(m_findPrevious, SIGNAL(triggered(bool)), SLOT(slotFindPrevious()));
   m_findPrevious->setEnabled( b_histEnabled );
 
-  m_saveHistory = new KAction(i18n("S&ave History As..."), "filesaveas", 0, this,
-                              SLOT(slotSaveHistory()), m_shortcuts, "save_history");
+  m_saveHistory = new KAction(KIcon("filesaveas"), i18n("S&ave History As..."), m_shortcuts, "save_history");
+  connect(m_saveHistory, SIGNAL(triggered(bool)), SLOT(slotSaveHistory()));
   m_saveHistory->setEnabled(b_histEnabled );
 
-  m_clearHistory = new KAction(i18n("Clear &History"), "history_clear", 0, this,
-                               SLOT(slotClearHistory()), m_shortcuts, "clear_history");
+  m_clearHistory = new KAction(KIcon("history_clear"), i18n("Clear &History"), m_shortcuts, "clear_history");
+  connect(m_clearHistory, SIGNAL(triggered(bool)), SLOT(slotClearHistory()));
   m_clearHistory->setEnabled(b_histEnabled);
 
-  m_clearAllSessionHistories = new KAction(i18n("Clear All H&istories"), "history_clear", 0,
-    this, SLOT(slotClearAllSessionHistories()), m_shortcuts, "clear_all_histories");
+  m_clearAllSessionHistories = new KAction(KIcon("history_clear"), i18n("Clear All H&istories"), m_shortcuts, "clear_all_histories");
+  connect(m_clearAllSessionHistories, SIGNAL(triggered(bool)), SLOT(slotClearAllSessionHistories()));
 
   m_detachSession = new KAction(i18n("&Detach Session"), SmallIconSet("tab_breakoff"), 0, this,
                                 SLOT(slotDetachSession()), m_shortcuts, "detach_session");
