@@ -1127,12 +1127,11 @@ void Konsole::makeBasicGUI()
   addAction(new KAction(i18n("Activate Menu"), Qt::CTRL+Qt::ALT+Qt::Key_M, this, SLOT(activateMenu()), m_shortcuts, "activate_menu"));
   addAction(new KAction(i18n("List Sessions"), 0, this, SLOT(listSessions()), m_shortcuts, "list_sessions"));
 
-  m_moveSessionLeft = new KAction(i18n("&Move Session Left"), QApplication::isRightToLeft() ? "forward" : "back",
-                                        QApplication::isRightToLeft() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Right : Qt::CTRL+Qt::SHIFT+Qt::Key_Left, this,
-                                        SLOT(moveSessionLeft()), m_shortcuts, "move_session_left");
+  m_moveSessionLeft = new KAction(KIcon(QApplication::isRightToLeft() ? "forward" : "back"), i18n("&Move Session Left"), m_shortcuts, "move_session_left");
+  connect(m_moveSessionLeft, SIGNAL(triggered(bool) ), SLOT(moveSessionLeft()));
+  m_moveSessionLeft->setShortcut(QApplication::isRightToLeft() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Right : Qt::CTRL+Qt::SHIFT+Qt::Key_Left);
   m_moveSessionRight = new KAction(i18n("M&ove Session Right"), QApplication::isRightToLeft() ? "back" : "forward",
-                                        QApplication::isRightToLeft() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Left : Qt::CTRL+Qt::SHIFT+Qt::Key_Right, this,
-                                        SLOT(moveSessionRight()), m_shortcuts, "move_session_right");
+                                        QApplication::isRightToLeft() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Left : Qt::CTRL+Qt::SHIFT+Qt::Key_Right, this, SLOT(moveSessionRight()), m_shortcuts, "move_session_right");
 
   addAction(new KAction(i18n("Go to Previous Session"), QApplication::isRightToLeft() ? Qt::SHIFT+Qt::Key_Right : Qt::SHIFT+Qt::Key_Left,
               this, SLOT(prevSession()), m_shortcuts, "previous_session"));
