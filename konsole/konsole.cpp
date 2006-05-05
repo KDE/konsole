@@ -442,8 +442,7 @@ void Konsole::updateRMBMenu()
    {
       if (m_fullscreen->isPlugged( m_rightButton ))
       {
-         m_fullscreen->unplug ( m_rightButton );
-         m_rightButton->removeItemAt(index);
+	 m_rightButton->removeAction( m_fullscreen );
       }
    }
 }
