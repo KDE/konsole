@@ -1364,6 +1364,7 @@ void Konsole::slotTabSetViewOptions(int mode)
     else
       title = sessions.at(i)->Title();
 
+    title=title.replace('&',"&&");
     switch(mode) {
       case ShowIconAndText:
         tabwidget->changeTab(page, icon, title);
@@ -2198,7 +2199,7 @@ void Konsole::updateTitle()
     ra->setIcon(icon);
   if (m_tabViewMode == ShowIconOnly) tabwidget->changeTab( se->widget(), QString::null );
   else if (b_matchTabWinTitle)
-    tabwidget->changeTab( se->widget(), se->fullTitle() );
+    tabwidget->changeTab( se->widget(), se->fullTitle().replace('&',"&&"));
 }
 
 void Konsole::initSessionFont(QFont font) {
@@ -3127,7 +3128,9 @@ void Konsole::moveSessionLeft()
   tabwidget->blockSignals(true);
   tabwidget->removePage(se->widget());
   tabwidget->blockSignals(false);
-  createSessionTab(se->widget(), iconSetForSession(se), se->Title(), position-1);
+  QString title = se->Title();
+  createSessionTab(se->widget(), iconSetForSession(se), 
+                   title.replace('&', "&&"), position-1);
   tabwidget->showPage(se->widget());
   tabwidget->setTabColor(se->widget(),oldcolor);
   
@@ -3158,7 +3161,9 @@ void Konsole::moveSessionRight()
   tabwidget->blockSignals(true);
   tabwidget->removePage(se->widget());
   tabwidget->blockSignals(false);
-  createSessionTab(se->widget(), iconSetForSession(se), se->Title(), position+1);
+  QString title = se->Title();
+  createSessionTab(se->widget(), iconSetForSession(se), 
+                   title.replace('&', "&&"), position+1);
   tabwidget->showPage(se->widget());
   tabwidget->setTabColor(se->widget(),oldcolor);
   
@@ -3671,6 +3676,7 @@ void Konsole::detachSession(TESession* _se) {
   konsole->attachSession(_se);
   konsole->activateSession(_se);
   konsole->changeTabTextColor( _se, se_tabtextcolor.rgb() );//restore prev color
+  konsole->slotTabSetViewOptions(m_tabViewMode);
 
   if (_se==se) {
     if (se == se_previous)
