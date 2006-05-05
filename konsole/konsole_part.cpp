@@ -336,7 +336,7 @@ void konsolePart::makeGUI()
      QStringList scrollitems;
      scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
      selectScrollbar->setItems(scrollitems);
-     selectScrollbar->plug(m_options);
+     m_options->addAction(selectScrollbar);
 
      // Select Bell
      m_options->addSeparator();
@@ -349,13 +349,13 @@ void konsolePart::makeGUI()
             << i18n("&Visible Bell")
             << i18n("N&one");
      selectBell->setItems(bellitems);
-     selectBell->plug(m_options);
+     m_options->addAction(selectBell);
 
       m_fontsizes = new KActionMenu( KIcon( "text" ), i18n( "Font" ), settingsActions, 0L );
       m_fontsizes->insert( new KAction( i18n( "&Enlarge Font" ), SmallIconSet( "viewmag+" ), 0, this, SLOT( biggerFont() ), settingsActions, "enlarge_font" ) );
       m_fontsizes->insert( new KAction( i18n( "&Shrink Font" ), SmallIconSet( "viewmag-" ), 0, this, SLOT( smallerFont() ), settingsActions, "shrink_font" ) );
       m_fontsizes->insert( new KAction( i18n( "Se&lect..." ), SmallIconSet( "font" ), 0, this, SLOT( slotSelectFont() ), settingsActions, "select_font" ) );
-      m_fontsizes->plug(m_options);
+      m_options->addAction(m_fontsizes);
 
       // encoding menu, start with default checked !
       selectSetEncoding = new KSelectAction( i18n( "&Encoding" ), SmallIconSet("charset" ), 0, this, SLOT(slotSetEncoding()), settingsActions, "set_encoding" );
@@ -363,7 +363,7 @@ void konsolePart::makeGUI()
       list.prepend( i18n( "Default" ) );
       selectSetEncoding->setItems(list);
       selectSetEncoding->setCurrentItem (0);
-      selectSetEncoding->plug(m_options);
+      m_options->addAction( selectSetEncoding );
 
      // Keyboard Options Menu ---------------------------------------------------
      if (KAuthorized::authorizeKAction("keyboard"))
@@ -385,7 +385,7 @@ void konsolePart::makeGUI()
 
      KAction *historyType = new KAction(i18n("&History..."), "history", 0, this,
                                         SLOT(slotHistoryType()), settingsActions, "history");
-     historyType->plug(m_options);
+     m_options->addAction( historyType );
      m_options->addSeparator();
 
      // Select line spacing
@@ -405,35 +405,35 @@ void konsolePart::makeGUI()
        << i18n("&7")
        << i18n("&8");
      selectLineSpacing->setItems(lineSpacingList);
-     selectLineSpacing->plug(m_options);
+     m_options->addAction( selectLineSpacing );
 
      // Blinking Cursor
      blinkingCursor = new KToggleAction (i18n("Blinking &Cursor"),
                                       0, this,SLOT(slotBlinkingCursor()), settingsActions);
-     blinkingCursor->plug(m_options);
+     m_options->addAction(blinkingCursor);
 
      // Frame on/off
      showFrame = new KToggleAction(i18n("Show Fr&ame"), 0,
                                 this, SLOT(slotToggleFrame()), settingsActions);
      showFrame->setCheckedState(i18n("Hide Fr&ame"));
-     showFrame->plug(m_options);
+     m_options->addAction(showFrame);
 
      // Word Connectors
      KAction *WordSeps = new KAction(i18n("Wor&d Connectors..."), settingsActions, 0);
      connect(WordSeps, SIGNAL(triggered(bool) ), SLOT(slotWordSeps()));
-     WordSeps->plug(m_options);
+     m_options->addAction( WordSeps );
 
      // Use Konsole's Settings
      m_options->addSeparator();
      m_useKonsoleSettings = new KToggleAction( i18n("&Use Konsole's Settings"),
                           0, this, SLOT(slotUseKonsoleSettings()), 0, "use_konsole_settings" );
-     m_useKonsoleSettings->plug(m_options);
+     m_options->addAction(m_useKonsoleSettings);
 
      // Save Settings
      m_options->addSeparator();
      KAction *saveSettings = new KAction(i18n("&Save as Default"), "filesave", 0, this,
                     SLOT(saveProperties()), actions, "save_default");
-     saveSettings->plug(m_options);
+     m_options->addAction( saveSettings );
      if (KGlobalSettings::insertTearOffHandle())
         m_options->insertTearOffHandle();
   }
@@ -442,15 +442,15 @@ void konsolePart::makeGUI()
   m_popupMenu = new KMenu((KMainWindow*)parentWidget);
   KAction *selectionEnd = new KAction(i18n("Set Selection End"), actions, "selection_end");
   connect(selectionEnd, SIGNAL(triggered(bool) ), te, SLOT(setSelectionEnd()));
-  selectionEnd->plug(m_popupMenu);
+  m_popupMenu->addAction( selectionEnd );
 
   KAction *copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0,
                                         te, SLOT(copyClipboard()), actions, "edit_copy");
-  copyClipboard->plug(m_popupMenu);
+  m_popupMenu->addAction( copyClipboard );
 
   KAction *pasteClipboard = new KAction(i18n("&Paste"), "editpaste", 0,
                                         te, SLOT(pasteClipboard()), actions, "edit_paste");
-  pasteClipboard->plug(m_popupMenu);
+  m_popupMenu->addAction( pasteClipboard );
 
   if (m_signals)
   {
@@ -466,7 +466,7 @@ void konsolePart::makeGUI()
 
   KAction *closeSession = new KAction(i18n("&Close Terminal Emulator"), "fileclose", 0, this,
                                       SLOT(closeCurrentSession()), actions, "close_session");
-  closeSession->plug(m_popupMenu);
+  m_popupMenu->addAction( closeSession );
   if (KGlobalSettings::insertTearOffHandle())
     m_popupMenu->insertTearOffHandle();
 }
