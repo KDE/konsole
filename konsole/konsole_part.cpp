@@ -383,8 +383,8 @@ void konsolePart::makeGUI()
      }
 
 
-     KAction *historyType = new KAction(i18n("&History..."), "history", 0, this,
-                                        SLOT(slotHistoryType()), settingsActions, "history");
+     KAction *historyType = new KAction(KIcon("history"), i18n("&History..."), settingsActions, "history");
+     connect(historyType, SIGNAL(triggered(bool)), SLOT(slotHistoryType()));
      m_options->addAction( historyType );
      m_options->addSeparator();
 
@@ -431,8 +431,8 @@ void konsolePart::makeGUI()
 
      // Save Settings
      m_options->addSeparator();
-     KAction *saveSettings = new KAction(i18n("&Save as Default"), "filesave", 0, this,
-                    SLOT(saveProperties()), actions, "save_default");
+     KAction *saveSettings = new KAction(KIcon("filesave"), i18n("&Save as Default"), actions, "save_default");
+     connect(saveSettings, SIGNAL(triggered(bool)), SLOT(saveProperties()));
      m_options->addAction( saveSettings );
      if (KGlobalSettings::insertTearOffHandle())
         m_options->insertTearOffHandle();
@@ -444,12 +444,12 @@ void konsolePart::makeGUI()
   connect(selectionEnd, SIGNAL(triggered(bool) ), te, SLOT(setSelectionEnd()));
   m_popupMenu->addAction( selectionEnd );
 
-  KAction *copyClipboard = new KAction(i18n("&Copy"), "editcopy", 0,
-                                        te, SLOT(copyClipboard()), actions, "edit_copy");
+  KAction *copyClipboard = new KAction(KIcon("editcopy"), i18n("&Copy"), actions, "edit_copy");
+  connect(copyClipboard, SIGNAL(triggered(bool)), te, SLOT(copyClipboard()));
   m_popupMenu->addAction( copyClipboard );
 
-  KAction *pasteClipboard = new KAction(i18n("&Paste"), "editpaste", 0,
-                                        te, SLOT(pasteClipboard()), actions, "edit_paste");
+  KAction *pasteClipboard = new KAction(KIcon("editpaste"), i18n("&Paste"), actions, "edit_paste");
+  connect(pasteClipboard, SIGNAL(triggered(bool)), te, SLOT(pasteClipboard()));
   m_popupMenu->addAction( pasteClipboard );
 
   if (m_signals)
@@ -464,8 +464,8 @@ void konsolePart::makeGUI()
      m_popupMenu->addSeparator();
   }
 
-  KAction *closeSession = new KAction(i18n("&Close Terminal Emulator"), "fileclose", 0, this,
-                                      SLOT(closeCurrentSession()), actions, "close_session");
+  KAction *closeSession = new KAction(KIcon("fileclose"), i18n("&Close Terminal Emulator"), actions, "close_session");
+  connect(closeSession, SIGNAL(triggered(bool)), SLOT(closeCurrentSession()));
   m_popupMenu->addAction( closeSession );
   if (KGlobalSettings::insertTearOffHandle())
     m_popupMenu->insertTearOffHandle();
