@@ -1147,9 +1147,11 @@ void Konsole::makeBasicGUI()
 
   KAction *action = new KAction(i18n("Enlarge Font"), m_shortcuts, "bigger_font");
   connect(action, SIGNAL(triggered(bool) ), SLOT(biggerFont()));
-  new KAction(i18n("Shrink Font"), 0, this, SLOT(smallerFont()), m_shortcuts, "smaller_font");
+  action = new KAction(i18n("Shrink Font"), m_shortcuts, "smaller_font");
+  connect(action, SIGNAL(triggered(bool) ), SLOT(smallerFont()));
 
-  addAction(new KAction(i18n("Toggle Bidi"), Qt::CTRL+Qt::ALT+Qt::Key_B, this, SLOT(toggleBidi()), m_shortcuts, "toggle_bidi"));
+  action = new KAction(i18n("Toggle Bidi"), Qt::CTRL+Qt::ALT+Qt::Key_B, this, SLOT(toggleBidi()), m_shortcuts, "toggle_bidi");
+  addAction(action);
 
   // Should we load all *.desktop files now?  Required for Session shortcuts.
   if ( KConfigGroup(KGlobal::config(), "General").readEntry("SessionShortcutsEnabled", QVariant(false)).toBool() ) {
@@ -3347,7 +3349,7 @@ void Konsole::addSessionCommand(const QString &path)
   if ( m_shortcuts->action( name ) ) {
     sessionAction = m_shortcuts->action( name );
   } else {
-    sessionAction = new KAction( comment, 0, this, 0, m_shortcuts, name.toLatin1() );
+    sessionAction = new KAction( comment, m_shortcuts, name );
   }
   connect( sessionAction, SIGNAL( activated() ), sessionNumberMapper, SLOT( map() ) );
   sessionNumberMapper->setMapping( sessionAction, cmd_serial );
