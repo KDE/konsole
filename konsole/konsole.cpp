@@ -1147,7 +1147,9 @@ void Konsole::makeBasicGUI()
   action = new KAction(i18n("Shrink Font"), m_shortcuts, "smaller_font");
   connect(action, SIGNAL(triggered(bool) ), SLOT(smallerFont()));
 
-  action = new KAction(i18n("Toggle Bidi"), Qt::CTRL+Qt::ALT+Qt::Key_B, this, SLOT(toggleBidi()), m_shortcuts, "toggle_bidi");
+  action = new KAction(i18n("Toggle Bidi"), m_shortcuts, "toggle_bidi");
+  connect(action, SIGNAL(triggered(bool) ), SLOT(toggleBidi()));
+  action->setShortcut(Qt::CTRL+Qt::ALT+Qt::Key_B);
   addAction(action);
 
   // Should we load all *.desktop files now?  Required for Session shortcuts.
