@@ -25,6 +25,8 @@ class SessionIface : virtual public DCOPObject
     virtual void setKeytab(const QString &keyboard) =0;
     virtual QSize size() =0;
     virtual void setSize(QSize size) =0;
+    virtual QString font() =0;
+    virtual void setFont(const QString &font) =0;
 };
 
 #endif // SESSIONIFACE_H

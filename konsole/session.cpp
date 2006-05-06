@@ -750,6 +750,20 @@ void TESession::setSchema(const QString &schema)
   emit setSessionSchema(this, schema);
 }
 
+QString TESession::font()
+{
+  return te->getVTFont().toString();
+}
+
+void TESession::setFont(const QString &font)
+{
+  QFont tmp;
+  if (tmp.fromString(font))
+    te->setVTFont(tmp);
+  else
+    kdWarning()<<"unknown font: "<<font<<endl;
+}
+
 QString TESession::encoding()
 {
   return em->codec()->name();
