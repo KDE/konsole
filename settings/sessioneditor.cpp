@@ -360,7 +360,7 @@ void SessionEditor::removeCurrent()
     int code = KMessageBox::warningContinueCancel(this,
       i18n("You are trying to remove a system session. Are you sure?"),
       i18n("Removing System Session"),
-      KGuiItem(i18n("&Delete"),"editdelete"));
+      KStdGuiItem::del());
     if (code != KMessageBox::Continue)
       return;
   }
