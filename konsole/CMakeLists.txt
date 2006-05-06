@@ -45,7 +45,7 @@ target_link_libraries(kdeinit_konsole  ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KDEPRINT_
 install_targets(${LIB_INSTALL_DIR} kdeinit_konsole )
 
 target_link_libraries( konsole kdeinit_konsole )
-install_targets(/bin konsole )
+install(TARGETS konsole DESTINATION bin)
 
 ########### next target ###############
 
