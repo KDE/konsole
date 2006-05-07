@@ -2,6 +2,7 @@
 
 #include <dcopclient.h>
 #include <qsocketnotifier.h>
+#include <QContextMenuEvent>
 
 #include <kuniqueapplication.h>
 #include <kcmdlineargs.h>
@@ -80,7 +81,7 @@ void KWrited::block_in(int fd)
   if (len <= 0)
      return;
 
-  insert( QString::fromLocal8Bit( buf, len ).remove('\r') );
+  insertPlainText( QString::fromLocal8Bit( buf, len ).remove('\r') );
   show();
   raise();
 }
