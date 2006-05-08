@@ -38,7 +38,7 @@
 typedef KGenericFactory<KCMKonsole, QWidget> ModuleFactory;
 K_EXPORT_COMPONENT_FACTORY( kcm_konsole, ModuleFactory("kcmkonsole") )
 
-KCMKonsole::KCMKonsole(QWidget * parent, const char *name, const QStringList&)
+KCMKonsole::KCMKonsole(QWidget * parent, const QStringList&)
 :KCModule(ModuleFactory::instance(), parent)
 {
     

@@ -18,7 +18,7 @@
 
 #include <kmenu.h>
 #include <kstandarddirs.h>
-#include <kaction.h>
+#include <kactionmenu.h>
 
 #include "konsole.h"
 #include "konsolebookmarkmenu.h"

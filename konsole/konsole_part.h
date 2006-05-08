@@ -53,8 +53,8 @@ public:
     konsoleFactory();
     virtual ~konsoleFactory();
 
-    virtual KParts::Part* createPartObject(QWidget *parentWidget = 0, const char *widgetName = 0,
-                                     QObject* parent = 0, const char* name = 0,
+    virtual KParts::Part* createPartObject(QWidget *parentWidget = 0,
+                                     QObject* parent = 0,
                                      const char* classname = "KParts::Part",
                                      const QStringList &args = QStringList());
 
@@ -71,7 +71,7 @@ class konsolePart: public KParts::ReadOnlyPart, public TerminalInterface
 {
     Q_OBJECT
 	public:
-    konsolePart(QWidget *parentWidget, const char *widgetName, QObject * parent, const char *name, const char *classname = 0);
+    konsolePart(QWidget *parentWidget, QObject * parent, const char *classname = 0);
     virtual ~konsolePart();
 
 Q_SIGNALS:

@@ -2249,7 +2249,7 @@ void TEWidget::drop_menu_activated(QAction* action)
          {
             KUrl url;
             url.setPath( dropText );
-            dropText = url.directory( true, false ); // remove filename
+            dropText = url.directory( KUrl::ObeyTrailingSlash ); // remove filename
          }
       }
       KRun::shellQuote(dropText);

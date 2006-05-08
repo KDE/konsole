@@ -78,6 +78,7 @@ Time to start a requirement list.
 #include <qcheckbox.h>
 #include <qimage.h>
 #include <qlayout.h>
+#include <qpainter.h>
 #include <qpushbutton.h>
 #include <qtoolbutton.h>
 #include <qtooltip.h>
@@ -102,7 +103,6 @@ Time to start a requirement list.
 #include <kfontdialog.h>
 #include <kkeydialog.h>
 #include <kstandarddirs.h>
-#include <qpainter.h>
 #include <kmenubar.h>
 #include <kmessagebox.h>
 #include <krootpixmap.h>
@@ -118,6 +118,11 @@ Time to start a requirement list.
 #include <kacceleratormanager.h>
 
 #include <kaction.h>
+#include <kactionmenu.h>
+#include <kactioncollection.h>
+#include <kselectaction.h>
+#include <ktoggleaction.h>
+#include <ktogglefullscreenaction.h>
 #include <kshell.h>
 #include <qlabel.h>
 #include <kmenu.h>

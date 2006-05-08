@@ -50,7 +50,10 @@
 #include <kmenu.h>
 #include <krootpixmap.h>
 #include <kconfig.h>
-#include <kaction.h>
+#include <kactioncollection.h>
+#include <kactionmenu.h>
+#include <kselectaction.h>
+#include <ktoggleaction.h>
 #include <kauthorized.h>
 
 // We can't use the ARGB32 visual when embedded in another application
@@ -91,12 +94,12 @@ konsoleFactory::~konsoleFactory()
   s_aboutData = 0;
 }
 
-KParts::Part *konsoleFactory::createPartObject(QWidget *parentWidget, const char *widgetName,
-                                         QObject *parent, const char *name, const char *classname,
+KParts::Part *konsoleFactory::createPartObject(QWidget *parentWidget,
+                                         QObject *parent, const char *classname,
                                          const QStringList&)
 {
 //  kDebug(1211) << "konsoleFactory::createPart parentWidget=" << parentWidget << " parent=" << parent << endl;
-  KParts::Part *obj = new konsolePart(parentWidget, widgetName, parent, name, classname);
+  KParts::Part *obj = new konsolePart(parentWidget, parent, classname);
   return obj;
 }
 
@@ -112,7 +115,7 @@ KInstance *konsoleFactory::instance()
 
 #define DEFAULT_HISTORY_SIZE 1000
 
-konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject *parent, const char *name, const char *classname)
+konsolePart::konsolePart(QWidget *_parentWidget, QObject *parent, const char *classname)
   : KParts::ReadOnlyPart(parent)
 ,te(0)
 ,se(0)
@@ -151,7 +154,6 @@ konsolePart::konsolePart(QWidget *_parentWidget, const char *widgetName, QObject
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
   eargs.append(shell);
   te = new TEWidget(parentWidget);
-  te->setObjectName(widgetName);
   te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
 
   setWidget(te);
