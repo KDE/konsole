@@ -332,8 +332,8 @@ void konsolePart::makeGUI()
      m_options = new KMenu((KMainWindow*)parentWidget);
 
      // Scrollbar
-     selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), 0, this,
-                                      SLOT(slotSelectScrollbar()), settingsActions);
+     selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), settingsActions, QString());
+     connect( selectScrollbar, SIGNAL( triggered( bool ) ), SLOT(slotSelectScrollbar()) );
 
      QStringList scrollitems;
      scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
@@ -354,9 +354,15 @@ void konsolePart::makeGUI()
      m_options->addAction(selectBell);
 
       m_fontsizes = new KActionMenu( KIcon( "text" ), i18n( "Font" ), settingsActions, 0L );
-      m_fontsizes->insert( new KAction( i18n( "&Enlarge Font" ), SmallIconSet( "viewmag+" ), 0, this, SLOT( biggerFont() ), settingsActions, "enlarge_font" ) );
-      m_fontsizes->insert( new KAction( i18n( "&Shrink Font" ), SmallIconSet( "viewmag-" ), 0, this, SLOT( smallerFont() ), settingsActions, "shrink_font" ) );
-      m_fontsizes->insert( new KAction( i18n( "Se&lect..." ), SmallIconSet( "font" ), 0, this, SLOT( slotSelectFont() ), settingsActions, "select_font" ) );
+      KAction * action = new KAction( KIcon( "viewmag+" ), i18n( "&Enlarge Font" ), settingsActions, "enlarge_font" );
+      connect(action, SIGNAL(triggered(bool)), SLOT(biggerFont()));
+      m_fontsizes->insert( action );
+      action = new KAction( KIcon( "viewmag-" ), i18n( "&Shrink Font" ), settingsActions, "shrink_font" );
+      connect(action, SIGNAL(triggered(bool)), SLOT(smallerFont()));
+      m_fontsizes->insert( action );
+      action = new KAction( KIcon( "font" ), i18n( "Se&lect..." ), settingsActions, "select_font" );
+      connect(action, SIGNAL(triggered(bool)), SLOT(slotSelectFont()));
+      m_fontsizes->insert( action );
       m_options->addAction(m_fontsizes);
 
       // encoding menu, start with default checked !
@@ -525,10 +531,9 @@ void konsolePart::applyProperties()
 
 void konsolePart::setSettingsMenuEnabled( bool enable )
 {
-   uint count = settingsActions->count();
-   for ( uint i = 0; i < count; i++ )
+   foreach ( KAction *a, settingsActions->actions() )
    {
-      settingsActions->action( i )->setEnabled( enable );
+      a->setEnabled( enable );
    }
 
    // FIXME: These are not in settingsActions.
