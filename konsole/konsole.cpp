@@ -1099,11 +1099,11 @@ void Konsole::makeBasicGUI()
       SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_silence" );
   monitorSilence->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Silence" ) ) );
 
-  masterMode = new KToggleAction ( i18n( "Send &Input to All Sessions" ), "remote", 0, this,
-                                   SLOT( slotToggleMasterMode() ), m_shortcuts, "send_input_to_all_sessions" );
+  masterMode = new KToggleAction(KIcon("remote"),  i18n( "Send &Input to All Sessions" ), m_shortcuts, "send_input_to_all_sessions" );
+  connect(masterMode, SIGNAL(triggered(bool) ), SLOT( slotToggleMasterMode() ));
 
-  showMenubar = new KToggleAction ( i18n( "Show &Menubar" ), "showmenu", 0, this,
-                                    SLOT( slotToggleMenubar() ), m_shortcuts, "show_menubar" );
+  showMenubar = new KToggleAction(KIcon("showmenu"),  i18n( "Show &Menubar" ), m_shortcuts, "show_menubar" );
+  connect(showMenubar, SIGNAL(triggered(bool) ), SLOT( slotToggleMenubar() ));
   showMenubar->setCheckedState( KGuiItem( i18n("Hide &Menubar"), "showmenu", QString(), QString() ) );
 
   m_fullscreen = KStdAction::fullScreen(0, 0, m_shortcuts, this );
