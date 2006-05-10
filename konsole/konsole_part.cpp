@@ -433,8 +433,8 @@ void konsolePart::makeGUI()
 
      // Use Konsole's Settings
      m_options->addSeparator();
-     m_useKonsoleSettings = new KToggleAction( i18n("&Use Konsole's Settings"),
-                          0, this, SLOT(slotUseKonsoleSettings()), 0, "use_konsole_settings" );
+     m_useKonsoleSettings = new KToggleAction( i18n("&Use Konsole's Settings"), 0, "use_konsole_settings" );
+     connect(m_useKonsoleSettings, SIGNAL(triggered(bool) ), SLOT(slotUseKonsoleSettings()));
      m_options->addAction(m_useKonsoleSettings);
 
      // Save Settings

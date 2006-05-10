@@ -848,13 +848,13 @@ void Konsole::makeGUI()
       connect(viewOptions, SIGNAL(activated(int)), this, SLOT(slotTabSetViewOptions(int)));
       slotTabSetViewOptions(m_tabViewMode);
 
-      KToggleAction *dynamicTabHideOption = new KToggleAction ( i18n( "&Dynamic Hide" ), 0, this,
-                                       SLOT( slotTabbarToggleDynamicHide() ), actionCollection(), 0);
+      KToggleAction *dynamicTabHideOption = new KToggleAction( i18n( "&Dynamic Hide" ), actionCollection(), QString());
+      connect(dynamicTabHideOption, SIGNAL(triggered(bool) ), SLOT( slotTabbarToggleDynamicHide() ));
       dynamicTabHideOption->setChecked(b_dynamicTabHide);
       m_tabbarPopupMenu->addAction( dynamicTabHideOption );
 
-      KToggleAction *m_autoResizeTabs = new KToggleAction( i18n("&Auto Resize Tabs"),
-                 0, this, SLOT( slotToggleAutoResizeTabs() ), actionCollection(), 0);
+      KToggleAction *m_autoResizeTabs = new KToggleAction( i18n("&Auto Resize Tabs"), actionCollection(), QString());
+      connect(m_autoResizeTabs, SIGNAL(triggered(bool) ), SLOT( slotToggleAutoResizeTabs() ));
       m_autoResizeTabs->setChecked(b_autoResizeTabs);
       m_tabbarPopupMenu->addAction( m_autoResizeTabs );
     }
