@@ -3706,8 +3706,9 @@ void Konsole::attachSession(TESession* session)
   }
 
   QString title=session->Title();
-  KToggleAction *ra = new KToggleAction(title.replace('&',"&&"), session->IconName(),
-                                      0, this, SLOT(activateSession()), m_shortcuts);
+  KToggleAction *ra = new KToggleAction(KIcon(session->IconName()), title.replace('&',"&&"),
+                                        m_shortcuts, QString());
+  connect(ra, SIGNAL(triggered(bool)), SLOT(activateSession()));
 
   ra->setActionGroup(m_sessionGroup);
   ra->setChecked(true);
