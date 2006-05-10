@@ -560,7 +560,7 @@ HistoryScroll* HistoryTypeBuffer::getScroll(HistoryScroll *old) const
           old->getCells(i, 0, size, tmp_line);
           newScroll->addCells(tmp_line, size);
           newScroll->addLine(old->isWrappedLine(i));
-          delete tmp_line;
+          delete [] tmp_line;
        }
        else
        {
@@ -610,7 +610,7 @@ HistoryScroll* HistoryTypeFile::getScroll(HistoryScroll *old) const
         old->getCells(i, 0, size, tmp_line);
         newScroll->addCells(tmp_line, size);
         newScroll->addLine(old->isWrappedLine(i));
-        delete tmp_line;
+        delete [] tmp_line;
      }
      else
      {
