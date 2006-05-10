@@ -1114,8 +1114,8 @@ void Konsole::makeBasicGUI()
                          SLOT( slotSaveSessionsProfile() ), m_shortcuts, "save_sessions_profile" );
 
   //help menu
-  if (m_help)
-     m_help->setAccel(QKeySequence(),m_help->idAt(0));
+  //if (m_help)
+   //  m_help->setAccel(QKeySequence());
      // Don't steal F1 (handbook) accel (esp. since it not visible in
      // "Configure Shortcuts").
 
@@ -3293,7 +3293,7 @@ static void insertItemSorted(KMenu *menu, const QIcon &iconSet, const QString &t
            index = -1; // Insert at end
            break;
         }
-        if (menu->text(menu->idAt(index)) > txt)
+        if (menu->actions()[index]->text() > txt)
            break; // Insert before this item
      }
   }
