@@ -2,6 +2,10 @@
 ServiceTypes=inode/directory
 Actions=openTerminalHere;
 X-KDE-AuthorizeAction=shell_access
+Encoding=UTF-8
+Type=Application
+
+Name=Konsole
 
 [Desktop Action openTerminalHere]
 Name=Open Terminal Here
