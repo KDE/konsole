@@ -19,10 +19,10 @@
 
 #include "keytrans.h"
 #include <qbuffer.h>
-#include <qobject.h>
+#include <QObject>
 #include <q3intdict.h>
 #include <q3dict.h>
-#include <qfile.h>
+#include <QFile>
 #include <q3dict.h>
 #include <kstandarddirs.h>
 #include <klocale.h>

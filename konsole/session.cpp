@@ -12,9 +12,9 @@
 #include <kstandarddirs.h>
 
 #include <stdlib.h>
-#include <qfile.h>
-#include <qdir.h>
-#include <qregexp.h>
+#include <QFile>
+#include <QDir>
+#include <QRegExp>
 #include <QStringList>
 #include <QByteArray>
 

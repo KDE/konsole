@@ -41,7 +41,7 @@
 #ifndef SCHEMA_include
 #define SCHEMA_include
 
-#include <qstring.h>
+#include <QString>
 #include <q3ptrlist.h>
 
 #include "TECommon.h"

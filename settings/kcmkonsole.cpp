@@ -15,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qcheckbox.h>
-#include <qlayout.h>
+#include <QCheckBox>
+#include <QLayout>
 #include <qstringlist.h>
 #include <qtabwidget.h>
 //Added by qt3to4:

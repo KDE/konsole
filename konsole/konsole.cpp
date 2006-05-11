@@ -74,14 +74,14 @@ Time to start a requirement list.
 
 #include <config.h>
 
-#include <qspinbox.h>
-#include <qcheckbox.h>
+#include <QSpinBox>
+#include <QCheckBox>
 #include <qimage.h>
-#include <qlayout.h>
+#include <QLayout>
 #include <qpainter.h>
-#include <qpushbutton.h>
+#include <QPushButton>
 #include <qtoolbutton.h>
-#include <qtooltip.h>
+#include <QToolTip>
 //Added by qt3to4:
 #include <QMouseEvent>
 #include <QFrame>
@@ -124,7 +124,7 @@ Time to start a requirement list.
 #include <ktoggleaction.h>
 #include <ktogglefullscreenaction.h>
 #include <kshell.h>
-#include <qlabel.h>
+#include <QLabel>
 #include <kmenu.h>
 #include <klocale.h>
 #include <sys/wait.h>

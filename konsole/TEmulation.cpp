@@ -67,7 +67,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <qregexp.h>
+#include <QRegExp>
 #include <qclipboard.h>
 #include <QApplication>
 #include <QClipboard>

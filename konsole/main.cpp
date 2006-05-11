@@ -17,9 +17,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <qdir.h>
+#include <QDir>
 #include <qsessionmanager.h>
-#include <qwidget.h>
+#include <QWidget>
 
 #include <QStringList>
 

@@ -24,7 +24,7 @@
 #include <kio/job.h>
 #include <kio/netaccess.h>
 #include <kdebug.h>
-#include <qfile.h>
+#include <QFile>
 
 #include "konsole.h"
 #include "konsolebookmarkmenu.h"

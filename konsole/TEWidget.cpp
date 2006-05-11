@@ -51,10 +51,10 @@
 #include <qpainter.h>
 #include <qclipboard.h>
 #include <qstyle.h>
-#include <qfile.h>
+#include <QFile>
 #include <q3dragobject.h>
-#include <qlayout.h>
-#include <qregexp.h>
+#include <QLayout>
+#include <QRegExp>
 //Added by qt3to4:
 #include <QPaintEvent>
 #include <QBoxLayout>
@@ -88,8 +88,8 @@
 #include <kshortcut.h>
 #include <k3urldrag.h>
 #include <kio/netaccess.h>
-#include <qlabel.h>
-#include <qtimer.h>
+#include <QLabel>
+#include <QTimer>
 
 #ifndef loc
 #define loc(X,Y) ((Y)*columns+(X))

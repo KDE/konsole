@@ -14,8 +14,8 @@
 #define TE_WIDGET_H
 
 #include <qbitarray.h>
-#include <qwidget.h>
-#include <qcolor.h>
+#include <QWidget>
+#include <QColor>
 #include <qnamespace.h>
 #include <qscrollbar.h>
 #include <QFrame>

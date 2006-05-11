@@ -7,7 +7,7 @@
 #define	_KONSOLE_WCWIDTH_H_
 
 #include <qglobal.h>
-#include <qstring.h>
+#include <QString>
 
 int konsole_wcwidth(Q_UINT16 ucs);
 #if 0

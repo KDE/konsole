@@ -23,15 +23,15 @@
 
 #include <dcopclient.h>
 
-#include <qlabel.h>
-#include <qlineedit.h>
+#include <QLabel>
+#include <QLineEdit>
 #include <qmatrix.h>
-#include <qcombobox.h>
+#include <QComboBox>
 //Added by qt3to4:
 #include <QPixmap>
 #include <QTextStream>
 #include <kdebug.h>
-#include <qcheckbox.h>
+#include <QCheckBox>
 #include <kstandarddirs.h>
 
 //#include <errno.h>

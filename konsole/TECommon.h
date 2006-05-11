@@ -17,7 +17,7 @@
 #ifndef TECOMMON_H
 #define TECOMMON_H
 
-#include <qcolor.h>
+#include <QColor>
 
 #ifndef UINT8
 typedef unsigned char UINT8;

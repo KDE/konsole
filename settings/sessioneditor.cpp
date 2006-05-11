@@ -18,8 +18,8 @@
 #include "sessioneditor.h"
 #include "sessioneditor.moc"
 
-#include <qlineedit.h>
-#include <qcombobox.h>
+#include <QLineEdit>
+#include <QComboBox>
 #include <kdebug.h>
 #include <kstandarddirs.h>
 

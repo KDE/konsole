@@ -23,8 +23,8 @@
 
 #include <assert.h>
 
-#include <qfile.h>
-#include <qlayout.h>
+#include <QFile>
+#include <QLayout>
 #include <qmatrix.h>
 #include <QPixmap>
 #include <QStringList>
@@ -42,11 +42,11 @@
 #include <kmessagebox.h>
 #include <krun.h>
 #include <kstdaction.h>
-#include <qlabel.h>
+#include <QLabel>
 
-#include <qcheckbox.h>
-#include <qspinbox.h>
-#include <qpushbutton.h>
+#include <QCheckBox>
+#include <QSpinBox>
+#include <QPushButton>
 #include <kmenu.h>
 #include <krootpixmap.h>
 #include <kconfig.h>

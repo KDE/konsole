@@ -13,7 +13,7 @@
 #ifndef KEYTRANS_H
 #define KEYTRANS_H
 
-#include <qstring.h>
+#include <QString>
 #include <q3ptrlist.h>
 #include <qiodevice.h>
 

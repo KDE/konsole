@@ -53,8 +53,8 @@
 #include "schema.h"
 #include "kapplication.h"
 
-#include <qdir.h>
-#include <qdatetime.h>
+#include <QDir>
+#include <QDateTime>
 //Added by qt3to4:
 #include <Q3PtrList>
 #include <kstandarddirs.h>

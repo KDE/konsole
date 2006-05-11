@@ -25,7 +25,7 @@
 #include <q3ptrlist.h>
 #include <qstringlist.h>
 #include <kapplication.h>
-#include <qwidget.h>
+#include <QWidget>
 
 #include "sessiondialog.h"
 

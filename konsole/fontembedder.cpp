@@ -1,4 +1,4 @@
-#include <qfile.h>
+#include <QFile>
 #include <qtextstream.h>
 #include <stdlib.h>
 #include <iostream>

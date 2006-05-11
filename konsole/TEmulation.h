@@ -15,7 +15,7 @@
 
 #include "TEWidget.h"
 #include "TEScreen.h"
-#include <qtimer.h>
+#include <QTimer>
 //Added by qt3to4:
 #include <QTextStream>
 #include <QKeyEvent>
