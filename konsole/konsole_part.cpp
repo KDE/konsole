@@ -416,13 +416,13 @@ void konsolePart::makeGUI()
      m_options->addAction( selectLineSpacing );
 
      // Blinking Cursor
-     blinkingCursor = new KToggleAction (i18n("Blinking &Cursor"),
-                                      0, this,SLOT(slotBlinkingCursor()), settingsActions);
+     blinkingCursor = new KToggleAction(i18n("Blinking &Cursor"), settingsActions, QString());
+     connect(blinkingCursor, SIGNAL(triggered(bool) ), SLOT(slotBlinkingCursor()));
      m_options->addAction(blinkingCursor);
 
      // Frame on/off
-     showFrame = new KToggleAction(i18n("Show Fr&ame"), 0,
-                                this, SLOT(slotToggleFrame()), settingsActions);
+     showFrame = new KToggleAction(i18n("Show Fr&ame"), settingsActions, QString());
+     connect(showFrame, SIGNAL(triggered(bool) ), SLOT(slotToggleFrame()));
      showFrame->setCheckedState(i18n("Hide Fr&ame"));
      m_options->addAction(showFrame);
 
