@@ -6,6 +6,7 @@ Actions=openTerminalHere;
 X-KDE-AuthorizeAction=shell_access
 
 Name=Konsole
+Name[x-test]=xxKonsolexx
 
 [Desktop Action openTerminalHere]
 Name=Open Terminal Here
