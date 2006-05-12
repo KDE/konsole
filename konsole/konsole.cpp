@@ -1089,14 +1089,13 @@ void Konsole::makeBasicGUI()
                                   SLOT( slotZModemUpload() ),
                                   m_shortcuts, "zmodem_upload" );
 
-  monitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ),
-      SmallIconSet("activity"), 0, this,
-      SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_activity" );
+  monitorActivity = new KToggleAction ( KIcon("activity"), i18n( "Monitor for &Activity" ),
+                                        m_shortcuts, "monitor_activity" );
+  connect(monitorActivity, SIGNAL(triggered(bool) ), SLOT( slotToggleMonitor() ));
   monitorActivity->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Activity" ) ) );
 
-  monitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ),
-      SmallIconSet("silence"), 0, this,
-      SLOT( slotToggleMonitor() ), m_shortcuts, "monitor_silence" );
+  monitorSilence = new KToggleAction ( KIcon("silence"), i18n( "Monitor for &Silence" ), m_shortcuts, "monitor_silence" );
+  connect(monitorSilence, SIGNAL(triggered(bool) ), SLOT( slotToggleMonitor() ));
   monitorSilence->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Silence" ) ) );
 
   masterMode = new KToggleAction(KIcon("remote"),  i18n( "Send &Input to All Sessions" ), m_shortcuts, "send_input_to_all_sessions" );
@@ -1135,8 +1134,9 @@ void Konsole::makeBasicGUI()
   m_moveSessionLeft = new KAction(KIcon(QApplication::isRightToLeft() ? "forward" : "back"), i18n("&Move Session Left"), m_shortcuts, "move_session_left");
   connect(m_moveSessionLeft, SIGNAL(triggered(bool) ), SLOT(moveSessionLeft()));
   m_moveSessionLeft->setShortcut(QApplication::isRightToLeft() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Right : Qt::CTRL+Qt::SHIFT+Qt::Key_Left);
-  m_moveSessionRight = new KAction(i18n("M&ove Session Right"), QApplication::isRightToLeft() ? "back" : "forward",
-                                        QApplication::isRightToLeft() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Left : Qt::CTRL+Qt::SHIFT+Qt::Key_Right, this, SLOT(moveSessionRight()), m_shortcuts, "move_session_right");
+  m_moveSessionRight = new KAction(KIcon(QApplication::isRightToLeft() ? "back" : "forward"), i18n("M&ove Session Right"), m_shortcuts, "move_session_right");
+  connect(m_moveSessionRight, SIGNAL(triggered(bool) ), SLOT(moveSessionRight()));
+  m_moveSessionRight->setShortcut(QApplication::isRightToLeft() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Left : Qt::CTRL+Qt::SHIFT+Qt::Key_Right);
 
   addAction(new KAction(i18n("Go to Previous Session"), QApplication::isRightToLeft() ? Qt::SHIFT+Qt::Key_Right : Qt::SHIFT+Qt::Key_Left,
               this, SLOT(prevSession()), m_shortcuts, "previous_session"));
