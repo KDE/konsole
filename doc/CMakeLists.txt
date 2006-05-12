@@ -1,4 +1,3 @@
-kde4_header()
 
 add_subdirectory( VT100 ) 
 
@@ -7,7 +6,6 @@ add_subdirectory( VT100 )
 ########### install files ###############
 
 
-kde4_footer()
 
 
 

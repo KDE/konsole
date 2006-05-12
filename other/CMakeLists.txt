@@ -1,4 +1,3 @@
-kde4_header()
 
 add_subdirectory( icons ) 
 
@@ -11,7 +10,6 @@ install_files( ${DATA_INSTALL_DIR}/konsole FILES BlackOnLightColor.schema BlackO
 
 kde4_install_icons( ${ICON_INSTALL_DIR} hicolor )
 
-kde4_footer()
 
 
 

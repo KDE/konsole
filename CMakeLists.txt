@@ -1,4 +1,3 @@
-kde4_header()
 
 project(konsole)
 
@@ -19,7 +18,6 @@ install_files( ${DATA_INSTALL_DIR}/konqueror/servicemenus FILES konsolehere.desk
 install_files( ${SERVICES_INSTALL_DIR}/kded FILES kwrited.desktop )
 install_files( ${KCONF_UPDATE_INSTALL_DIR} FILES konsole.upd schemaStrip.pl )
 
-kde4_footer()
 
 
 
