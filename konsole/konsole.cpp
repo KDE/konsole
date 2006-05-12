@@ -3413,6 +3413,14 @@ void Konsole::loadSessionCommands()
 
 void Konsole::createSessionMenus()
 {
+  if (no2command.isEmpty()) { // All sessions have been deleted
+    m_session->insertItem(SmallIconSet("window_new"),
+                          i18n("New &Window"), SESSION_NEW_WINDOW_ID);
+    m_tabbarSessionsCommands->insertItem(SmallIconSet("window_new"),
+                          i18n("New &Window"), SESSION_NEW_WINDOW_ID);
+    return;
+  }
+
   KSimpleConfig *cfg = no2command[SESSION_NEW_SHELL_ID];
   QString txt = cfg->readEntry("Name");
   QString icon = cfg->readEntry("Icon", "konsole");
