@@ -15,7 +15,7 @@
 
 #include <kapplication.h>
 #include <kmainwindow.h>
-#include <qstringlist.h>
+#include <QStringList>
 #include <QByteArray>
 
 #include "TEPty.h"

@@ -68,7 +68,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <QRegExp>
-#include <qclipboard.h>
+#include <QClipboard>
 #include <QApplication>
 #include <QClipboard>
 //Added by qt3to4:

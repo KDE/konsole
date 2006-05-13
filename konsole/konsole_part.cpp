@@ -25,7 +25,7 @@
 
 #include <QFile>
 #include <QLayout>
-#include <qmatrix.h>
+#include <QMatrix>
 #include <QPixmap>
 #include <QStringList>
 #include <QFrame>

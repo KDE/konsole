@@ -13,7 +13,7 @@
 #ifndef TE_WIDGET_H
 #define TE_WIDGET_H
 
-#include <qbitarray.h>
+#include <QBitArray>
 #include <QWidget>
 #include <QColor>
 #include <qnamespace.h>

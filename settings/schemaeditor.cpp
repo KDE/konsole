@@ -25,7 +25,7 @@
 
 #include <QLabel>
 #include <QLineEdit>
-#include <qmatrix.h>
+#include <QMatrix>
 #include <QComboBox>
 //Added by qt3to4:
 #include <QPixmap>
@@ -36,15 +36,15 @@
 
 //#include <errno.h>
 
-#include <qslider.h>
+#include <QSlider>
 #include <klocale.h>
 #include <kfiledialog.h>
 #include <kinputdialog.h>
-#include <qtoolbutton.h>
+#include <QToolButton>
 #include <kmessagebox.h>
 #include <ksharedpixmap.h>
 #include <kimageeffect.h>
-#include <qimage.h>
+#include <QImage>
 
 // SchemaListBoxText is a list box text item with schema filename
 class SchemaListBoxText : public Q3ListBoxText

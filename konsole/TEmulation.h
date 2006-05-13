@@ -20,8 +20,8 @@
 #include <QTextStream>
 #include <QKeyEvent>
 #include <stdio.h>
-#include <qtextcodec.h>
-#include <qpointer.h>
+#include <QTextCodec>
+#include <QPointer>
 #include <keytrans.h>
 
 enum { NOTIFYNORMAL=0, NOTIFYBELL=1, NOTIFYACTIVITY=2, NOTIFYSILENCE=3 };

@@ -19,8 +19,8 @@
 #include <config.h>
 
 #include <kprocess.h>
-#include <qsocketnotifier.h>
-#include <qstringlist.h>
+#include <QSocketNotifier>
+#include <QStringList>
 #include <QVector>
 #include <QList>
 

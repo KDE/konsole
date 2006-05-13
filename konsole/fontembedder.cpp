@@ -1,5 +1,5 @@
 #include <QFile>
-#include <qtextstream.h>
+#include <QTextStream>
 #include <stdlib.h>
 #include <iostream>
 #include <iomanip>

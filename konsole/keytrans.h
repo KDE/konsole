@@ -15,7 +15,7 @@
 
 #include <QString>
 #include <q3ptrlist.h>
-#include <qiodevice.h>
+#include <QIODevice>
 
 #define BITS_NewLine    0
 #define BITS_BsHack     1

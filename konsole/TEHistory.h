@@ -15,7 +15,7 @@
 
 #include <q3cstring.h>
 #include <q3ptrvector.h>
-#include <qbitarray.h>
+#include <QBitArray>
 //Added by qt3to4:
 #include <QVector>
 

@@ -47,10 +47,10 @@
 #include "TEWidget.h"
 #include "konsole_wcwidth.h"
 
-#include <qapplication.h>
-#include <qpainter.h>
-#include <qclipboard.h>
-#include <qstyle.h>
+#include <QApplication>
+#include <QPainter>
+#include <QClipboard>
+#include <QStyle>
 #include <QFile>
 #include <q3dragobject.h>
 #include <QLayout>

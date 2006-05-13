@@ -17,8 +17,8 @@
 
 #include <QCheckBox>
 #include <QLayout>
-#include <qstringlist.h>
-#include <qtabwidget.h>
+#include <QStringList>
+#include <QTabWidget>
 //Added by qt3to4:
 #include <QVBoxLayout>
 

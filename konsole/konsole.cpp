@@ -76,11 +76,11 @@ Time to start a requirement list.
 
 #include <QSpinBox>
 #include <QCheckBox>
-#include <qimage.h>
+#include <QImage>
 #include <QLayout>
-#include <qpainter.h>
+#include <QPainter>
 #include <QPushButton>
-#include <qtoolbutton.h>
+#include <QToolButton>
 #include <QToolTip>
 //Added by qt3to4:
 #include <QMouseEvent>

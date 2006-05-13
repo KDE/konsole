@@ -1,7 +1,7 @@
 // [kwrited.C] A write(1) receiver for kde.
 
 #include <dcopclient.h>
-#include <qsocketnotifier.h>
+#include <QSocketNotifier>
 #include <QContextMenuEvent>
 
 #include <kuniqueapplication.h>

@@ -18,7 +18,7 @@
 */
 
 #include "keytrans.h"
-#include <qbuffer.h>
+#include <QBuffer>
 #include <QObject>
 #include <q3intdict.h>
 #include <q3dict.h>

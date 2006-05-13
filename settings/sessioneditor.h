@@ -23,7 +23,7 @@
 #endif
 
 #include <q3ptrlist.h>
-#include <qstringlist.h>
+#include <QStringList>
 #include <kapplication.h>
 #include <QWidget>
 

@@ -24,10 +24,10 @@
 
 #include <kwinmodule.h>
 
-#include <qstringlist.h>
+#include <QStringList>
 #include <q3intdict.h>
 #include <q3ptrdict.h>
-#include <qsignalmapper.h>
+#include <QSignalMapper>
 //Added by qt3to4:
 #include <Q3CString>
 #include <Q3PtrList>
