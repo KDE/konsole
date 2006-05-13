@@ -845,6 +845,7 @@ void Konsole::makeGUI()
     }
 }
 
+// Called via menu
 void Konsole::slotSetEncoding()
 {
   if (!se) return;
@@ -2612,9 +2613,7 @@ void Konsole::slotResizeSession(TESession *session, QSize size)
   activateSession(oldSession);
 }
 
-// Set session encoding; don't use any menu items.
-// System's encoding list may change, so search for encoding string.
-// FIXME: A lot of duplicate code from slotSetSessionEncoding
+// Called by newSession and DCOP function below
 void Konsole::setSessionEncoding( const QString &encoding, TESession *session )
 {
     if ( encoding.isEmpty() )
@@ -2632,58 +2631,39 @@ void Konsole::setSessionEncoding( const QString &encoding, TESession *session )
     // Encoding was found; now try to figure out which Encoding menu item
     // it corresponds to.
     int i = 0;
+    bool found_encoding = false;
     QStringList encodingNames = KGlobal::charsets()->descriptiveEncodingNames();
-    QStringList::Iterator it = encodingNames.begin();
-    while ( it != encodingNames.end() && 
-            KGlobal::charsets()->encodingForName(*it) != encoding )
+    QStringList::ConstIterator it = encodingNames.begin();
+    QString t_encoding = encoding.lower();
+
+    while ( it != encodingNames.end() && !found_encoding )
     {
+      if ( QString::compare( KGlobal::charsets()->encodingForName(*it), 
+                             t_encoding ) == 0 ) {
+         found_encoding = true;
+      }
       i++; it++;
     }
 
-    i++;                 // Take into account the first entry: Default
-    //kdDebug()<<"setSessionEncoding="<<encoding<<"; "<<i<<endl;
+    // BR114535 : Remove jis7 due to infinite loop.
+    if ( enc == "jis7" ) {
+      kdWarning()<<"Encoding Japanese (jis7) currently does not work!  BR114535"<<endl;
+      return;
+    }
 
-    session->setEncodingNo( i );
-    session->getEmulation()->setCodec(qtc);
-    if (se == session)
+    if ( found_encoding )
+    {
+      session->setEncodingNo( i );
+      session->getEmulation()->setCodec(qtc);
+      if (se == session)
         activateSession(se);
-
+    }
 }
 
+// Called via DCOP only
 void Konsole::slotSetSessionEncoding(TESession *session, const QString &encoding)
 {
-  if (!selectSetEncoding)
-     makeGUI();
-
-  if ( !selectSetEncoding )         // when action/settings=false
-    return;
-
-  QStringList items = selectSetEncoding->items();
-
-  QString enc;
-  unsigned int i = 0;
-  for(QStringList::ConstIterator it = items.begin();
-      it != items.end(); ++it, ++i)
-  {
-     if ((*it).find(encoding) != -1)
-     {
-        enc = *it;
-        break;
-     }
-  }
-  if (i >= items.count())
-     return;
-
-  bool found = false;
-  enc = KGlobal::charsets()->encodingForName(enc);
-  QTextCodec * qtc = KGlobal::charsets()->codecForName(enc, found);
-  if(!found)
-     return;
-
-  session->setEncodingNo( i + 1 );    // Take into account Default
-  session->getEmulation()->setCodec(qtc);
-  if (se == session)
-     activateSession(se);
+   setSessionEncoding( encoding, session );
 }
 
 void Konsole::slotGetSessionSchema(TESession *session, QString &schema)
@@ -3575,6 +3555,7 @@ void Konsole::setSchema(const QString & path)
   if (s) setSchema(s);
 }
 
+// Called via main.cpp for session manager.
 void Konsole::setEncoding(int index)
 {
   if ( selectSetEncoding ) {
