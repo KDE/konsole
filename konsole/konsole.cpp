@@ -2379,7 +2379,7 @@ void Konsole::addSession(TESession* s)
   // create an action for the session
   KToggleAction *ra = new KToggleAction(KIcon(s->IconName()), newTitle.replace('&',"&&"),
                                         m_shortcuts, QString());
-  connect(ra, SIGNAL(toggled(true)), SLOT(activateSession()));
+  connect(ra, SIGNAL(toggled(bool)), SLOT(activateSession()));
   ra->setActionGroup(m_sessionGroup);
   ra->setChecked(true);
 
