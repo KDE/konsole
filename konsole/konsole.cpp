@@ -1721,7 +1721,9 @@ void Konsole::pixmap_menu_activated(int item, TEWidget* tewidget)
   if (pm.isNull()) {
     pmPath = "";
     item = 1;
-    tewidget->setBackgroundColor(tewidget->getDefaultBackColor());
+    QPalette palette;
+	palette.setColor( tewidget->backgroundRole(), tewidget->getDefaultBackColor() );
+	tewidget->setPalette(palette);
     return;
   }
   // FIXME: respect scrollbar (instead of te->size)
@@ -1730,7 +1732,11 @@ void Konsole::pixmap_menu_activated(int item, TEWidget* tewidget)
   {
     case 1: // none
     case 2: // tile
-            tewidget->setBackgroundPixmap(pm);
+			{
+              QPalette palette;
+		      palette.setBrush( tewidget->backgroundRole(), QBrush(pm) );
+		      tewidget->setPalette(palette);
+			}
     break;
     case 3: // center
             { QPixmap bgPixmap( tewidget->size() );
@@ -1740,7 +1746,9 @@ void Konsole::pixmap_menu_activated(int item, TEWidget* tewidget)
                       &pm, 0, 0,
                       pm.width(), pm.height() );
 
-              tewidget->setBackgroundPixmap(bgPixmap);
+              QPalette palette;
+		      palette.setBrush( tewidget->backgroundRole(), QBrush(bgPixmap) );
+		      tewidget->setPalette(palette);
             }
     break;
     case 4: // full
@@ -1749,7 +1757,10 @@ void Konsole::pixmap_menu_activated(int item, TEWidget* tewidget)
               float sy = (float)tewidget->size().height() / pm.height();
               QMatrix matrix;
               matrix.scale( sx, sy );
-              tewidget->setBackgroundPixmap(pm.transformed( matrix ));
+
+              QPalette palette;
+		      palette.setBrush( tewidget->backgroundRole(), QBrush(pm.transformed( matrix )) );
+		      tewidget->setPalette(palette);
             }
     break;
     default: // oops
