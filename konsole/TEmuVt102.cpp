@@ -1345,8 +1345,10 @@ static unsigned int xkb_scrolllock_mask()
     int scrolllock_mask = 0;
     XModifierKeymap* map = XGetModifierMapping( qt_xdisplay() );
     KeyCode scrolllock_keycode = XKeysymToKeycode( qt_xdisplay(), XK_Scroll_Lock );
-    if( scrolllock_keycode == NoSymbol )
+    if( scrolllock_keycode == NoSymbol ) {
+        XFreeModifiermap(map);
         return 0;
+    }
     for( int i = 0;
          i < 8;
          ++i )
@@ -1355,6 +1357,7 @@ static unsigned int xkb_scrolllock_mask()
                scrolllock_mask += 1 << i;
        }
 
+    XFreeModifiermap(map);
     return scrolllock_mask;
 }
 #endif
