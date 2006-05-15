@@ -623,7 +623,7 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
       if (pm)
         paint.setBackgroundMode( Qt::TransparentMode );
       if (clear || (blinking && (attr->r & RE_BLINK)))
-        erase(rect);
+        paint.eraseRect(rect);
     }
     else
     {
