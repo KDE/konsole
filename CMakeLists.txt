@@ -16,8 +16,8 @@ install_files( ${SERVICETYPES_INSTALL_DIR} FILES terminalemulator.desktop )
 install_files( ${SERVICES_INSTALL_DIR} FILES konsolepart.desktop kwrited.desktop konsole-script.desktop )
 install_files( ${DATA_INSTALL_DIR}/konqueror/servicemenus FILES konsolehere.desktop )
 install_files( ${SERVICES_INSTALL_DIR}/kded FILES kwrited.desktop )
-install_files( ${KCONF_UPDATE_INSTALL_DIR} FILES konsole.upd schemaStrip.pl )
-
+install_files( ${KCONF_UPDATE_INSTALL_DIR} FILES konsole.upd  )
+install_programs( ${KCONF_UPDATE_INSTALL_DIR} FILES schemaStrip.pl )
 
 
 
