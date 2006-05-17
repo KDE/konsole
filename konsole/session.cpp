@@ -220,7 +220,7 @@ void TESession::setUserTitle( int what, const QString &caption )
        te->update();
     }
 
-    emit updateTitle();
+    emit updateTitle(this);
 }
 
 QString TESession::fullTitle() const
@@ -348,7 +348,7 @@ void TESession::done(int exitStatus)
   if (!autoClose)
   {
     userTitle = i18n("<Finished>");
-    emit updateTitle();
+    emit updateTitle(this);
     return;
   }
   if (!wantedClose && (exitStatus || sh->signalled()))

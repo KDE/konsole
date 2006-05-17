@@ -139,7 +139,7 @@ signals:
   void forkedChild();
   void receivedData( const QString& text );
   void done(TESession*);
-  void updateTitle();
+  void updateTitle(TESession*);
   void notifySessionState(TESession* session, int state);
   void changeTabTextColor( TESession*, int );
 

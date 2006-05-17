@@ -163,7 +163,7 @@ private slots:
   void changeColLin(int columns, int lines);
   void notifySessionState(TESession* session,int state);
   void notifySize(int columns, int lines);
-  void updateTitle();
+  void updateTitle(TESession* _se=0);
   void prevSession();
   void nextSession();
   void activateMenu();

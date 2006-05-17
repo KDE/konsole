@@ -2189,18 +2189,25 @@ void Konsole::notifySize(int columns, int lines)
   if (n_render >= 3) pixmap_menu_activated(n_render);
 }
 
-void Konsole::updateTitle()
+void Konsole::updateTitle(TESession* _se)
 {
-  setCaption( se->fullTitle() );
-  setIconText( se->IconText() );
-  tabwidget->setTabIconSet(se->widget(), iconSetForSession(se));
-  QString icon = se->IconName();
-  KRadioAction *ra = session2action.find(se);
+  if ( !_se )
+    _se = se;
+
+  if (_se == se)
+  {
+    setCaption( _se->fullTitle() );
+    setIconText( _se->IconText() );
+  }
+  tabwidget->setTabIconSet(_se->widget(), iconSetForSession(_se));
+  QString icon = _se->IconName();
+  KRadioAction *ra = session2action.find(_se);
   if (ra && (ra->icon() != icon))
     ra->setIcon(icon);
-  if (m_tabViewMode == ShowIconOnly) tabwidget->changeTab( se->widget(), QString::null );
+  if (m_tabViewMode == ShowIconOnly) 
+    tabwidget->changeTab( _se->widget(), QString::null );
   else if (b_matchTabWinTitle)
-    tabwidget->changeTab( se->widget(), se->fullTitle().replace('&',"&&"));
+    tabwidget->changeTab( _se->widget(), _se->fullTitle().replace('&',"&&"));
 }
 
 void Konsole::initSessionFont(QFont font) {
@@ -2863,8 +2870,8 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStrList &
   // If you add any new signal-slot connection below, think about doing it in konsolePart too
   connect( s,SIGNAL(done(TESession*)),
            this,SLOT(doneSession(TESession*)) );
-  connect( s, SIGNAL( updateTitle() ),
-           this, SLOT( updateTitle() ) );
+  connect( s, SIGNAL( updateTitle(TESession*) ),
+           this, SLOT( updateTitle(TESession*) ) );
   connect( s, SIGNAL( notifySessionState(TESession*, int) ),
            this, SLOT( notifySessionState(TESession*, int)) );
   connect( s, SIGNAL(disableMasterModeConnections()),
@@ -3649,7 +3656,7 @@ void Konsole::detachSession(TESession* _se) {
   disconnect( _se->getEmulation(),SIGNAL(changeColumns(int)), this,SLOT(changeColumns(int)) );
   disconnect( _se, SIGNAL(changeTabTextColor(TESession*, int)), this, SLOT(changeTabTextColor(TESession*, int)) );
 
-  disconnect( _se,SIGNAL(updateTitle()), this,SLOT(updateTitle()) );
+  disconnect( _se,SIGNAL(updateTitle(TESession*)), this,SLOT(updateTitle(TESession*)) );
   disconnect( _se,SIGNAL(notifySessionState(TESession*,int)), this,SLOT(notifySessionState(TESession*,int)) );
   disconnect( _se,SIGNAL(disableMasterModeConnections()), this,SLOT(disableMasterModeConnections()) );
   disconnect( _se,SIGNAL(enableMasterModeConnections()), this,SLOT(enableMasterModeConnections()) );
@@ -3739,7 +3746,7 @@ void Konsole::attachSession(TESession* session)
   connect( session,SIGNAL(done(TESession*)),
            this,SLOT(doneSession(TESession*)) );
 
-  connect( session,SIGNAL(updateTitle()), this,SLOT(updateTitle()) );
+  connect( session,SIGNAL(updateTitle(TESession*)), this,SLOT(updateTitle(TESession*)) );
   connect( session,SIGNAL(notifySessionState(TESession*,int)), this,SLOT(notifySessionState(TESession*,int)) );
 
   connect( session,SIGNAL(disableMasterModeConnections()), this,SLOT(disableMasterModeConnections()) );
