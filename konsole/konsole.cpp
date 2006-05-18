@@ -3445,7 +3445,7 @@ void Konsole::addScreenSession(const QString &path, const QString &socket)
   KSimpleConfig *co = new KSimpleConfig(tmpFile->name());
   co->setDesktopGroup();
   co->writeEntry("Name", socket);
-  QString txt = i18nc("Screen is a program controlling screens!", "Screen at %1", socket);
+  QString txt = i18nc("Screen is a program for controlling screens", "Screen at %1", socket);
   co->writeEntry("Comment", txt);
   co->writePathEntry("Exec", QString::fromLatin1("SCREENDIR=%1 screen -r %2")
     .arg(path).arg(socket));
