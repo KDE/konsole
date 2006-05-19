@@ -280,7 +280,7 @@ void SessionEditor::schemaListChanged(const QStringList &titles, const QStringLi
   // Restore current item
   int item = 0;
   for (int i = 0; i < schemaCombo->count(); i++)
-      if (schemaCombo->text(i) == text) {
+      if (schemaCombo->itemText(i) == text) {
           item = i;
           break;
       }

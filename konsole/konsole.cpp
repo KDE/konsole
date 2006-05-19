@@ -1535,7 +1535,7 @@ void Konsole::saveProperties(KConfig* config) {
     config->writeEntry("schema",s_kconfigSchema);
   }
 
-  config->writeEntry("class",name());
+  config->writeEntry("class",QObject::objectName());
   if (config != KGlobal::config())
   {
       saveMainWindowSettings(config);
@@ -1975,7 +1975,7 @@ void Konsole::slotConfigureKeys()
     // Are there any shortcuts for Session Menu entries?
     if ( !b_sessionShortcutsEnabled &&
          m_shortcuts->action( i )->shortcut().count() &&
-         QString(m_shortcuts->action( i )->name()).startsWith("SSC_") ) {
+         m_shortcuts->action( i )->objectName().startsWith("SSC_") ) {
       b_sessionShortcutsEnabled = true;
       KConfigGroup group(KGlobal::config(), "General");
       group.writeEntry("SessionShortcutsEnabled", true);
@@ -2031,8 +2031,8 @@ void Konsole::reparseConfiguration()
   {
     KAction* action = m_shortcuts->action( i );
     bool b_foundSession = false;
-    if ( QString(action->name()).startsWith("SSC_") ) {
-      QString name = QString(action->name());
+    if ( action->objectName().startsWith("SSC_") ) {
+      QString name = action->objectName();
 
       // Check to see if shortcut's session has been loaded.
       for ( QStringList::Iterator it = sl_sessionShortCuts.begin(); it != sl_sessionShortCuts.end(); ++it ) {
@@ -2444,7 +2444,7 @@ void Konsole::listSessions()
 
 void Konsole::switchToSession()
 {
-  activateSession( QString( sender()->name() ).right( 2 ).toInt() -1 );
+  activateSession( sender()->objectName().right( 2 ).toInt() -1 );
 }
 
 void Konsole::activateSession(int position)
