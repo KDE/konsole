@@ -2408,7 +2408,7 @@ void Konsole::addSession(TESession* s)
 
   createSessionTab(te, SmallIconSet(s->IconName()), newTitle);
   setSchema(s->schemaNo());
-  tabwidget->setCurrentPage(tabwidget->count()-1);
+  tabwidget->setCurrentIndex(tabwidget->count()-1);
   disableMasterModeConnections(); // no duplicate connections, remove old
   enableMasterModeConnections();
   if( m_removeSessionButton )
