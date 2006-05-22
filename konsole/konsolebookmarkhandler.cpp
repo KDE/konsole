@@ -81,7 +81,7 @@ KonsoleBookmarkHandler::~KonsoleBookmarkHandler()
 
 QString KonsoleBookmarkHandler::currentURL() const
 {
-    return m_konsole->baseURL().prettyURL();
+    return m_konsole->baseURL().prettyUrl();
 }
 
 QString KonsoleBookmarkHandler::currentTitle() const
@@ -93,7 +93,7 @@ QString KonsoleBookmarkHandler::currentTitle() const
        path = KShell::tildeExpand(path);
        return path;
     }
-    return u.prettyURL();
+    return u.prettyUrl();
 }
 
 void KonsoleBookmarkHandler::slotBookmarksChanged( const QString &,

@@ -269,7 +269,7 @@ konsolePart::~konsolePart()
 
 bool konsolePart::openURL( const KUrl & url )
 {
-  //kDebug(1211) << "konsolePart::openURL " << url.prettyURL() << endl;
+  //kDebug(1211) << "konsolePart::openURL " << url.prettyUrl() << endl;
 
   if (currentURL==url) {
     emit completed();
@@ -277,8 +277,8 @@ bool konsolePart::openURL( const KUrl & url )
   }
 
   m_url = url;
-  emit setWindowCaption( url.prettyURL() );
-//  kDebug(1211) << "Set Window Caption to " << url.prettyURL() << "\n";
+  emit setWindowCaption( url.prettyUrl() );
+//  kDebug(1211) << "Set Window Caption to " << url.prettyUrl() << "\n";
   emit started( 0 );
 
   if ( url.isLocalFile() ) {

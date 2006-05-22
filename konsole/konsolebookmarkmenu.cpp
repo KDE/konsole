@@ -114,7 +114,7 @@ void KonsoleBookmarkMenu::fillBookmarkMenu()
         KAction *action = new KAction(KIcon(bm.icon()),  text, m_actionCollection, bm.url().url() );
         connect(action, SIGNAL(triggered(bool) ), SLOT( slotBookmarkSelected() ));
 
-        action->setToolTip( bm.url().prettyURL() );
+        action->setToolTip( bm.url().prettyUrl() );
 
         m_parentMenu->addAction( action );
         m_actions.append( action );
