@@ -1,6 +1,6 @@
 #include "session.h"
 #include "zmodem_dialog.h"
-
+#include <config-konsole.h>
 #include <kdebug.h>
 #include <dcopclient.h>
 #include <kmessagebox.h>
