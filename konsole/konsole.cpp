@@ -1968,7 +1968,7 @@ void Konsole::slotConfigureKeys()
     {
       QKeySequence seq = shortcut.seq(j);
       int key = seq.isEmpty() ? 0 : seq[0]; // First Key of KeySequence
-      if (key & Qt::KeyboardModifierMask == Qt::CTRL)
+      if ((key & Qt::KeyboardModifierMask) == Qt::ControlModifier)
         ctrlKeys += QKeySequence(key).toString();
     }
 
