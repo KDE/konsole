@@ -299,36 +299,48 @@ void TEmulation::onRcvBlock(const char *s, int len)
   emit notifySessionState(NOTIFYACTIVITY);
 
   bulkStart();
-  for (int i = 0; i < len; i++)
+
+  QString r;
+  int i, l;
+
+  for (i = 0; i < len; i++)
   {
-
-    QString result = decoder->toUnicode(&s[i],1);
-    int reslen = result.length();
-
     // If we get a control code halfway a multi-byte sequence
     // we flush the decoder and continue with the control code.
-    if ((s[i] < 32) && (s[i] > 0))
+    if ((unsigned char) s[i] < 32)
     {
-       // Flush decoder
-       while(!result.length())
-          result = decoder->toUnicode(&s[i],1);
-       reslen = 1;
-       result.setLength(reslen);
-       result[0] = QChar(s[i]);
+       if (!r.length()) {
+         QString tmp;
+         // Flush decoder
+         while(!tmp.length())
+             tmp = decoder->toUnicode(&s[i],1);
+       }
+
+
+       onRcvChar((unsigned char) s[i]);
+
+       if (s[i] == '\030' && (len-i-1 > 3) && (strncmp(s+i+1, "B00", 3) == 0))
+         emit zmodemDetected();
+
+       continue;
     }
+
+    // Otherwise, bulk decode until the next control code
+    for(l = i; l < len; ++l)
+      if ((unsigned char) s[l] < 32)
+         break;
+
+    r = decoder->toUnicode(&s[i],l-i+1);
+    int reslen = r.length();
 
     for (int j = 0; j < reslen; j++)
     {
-      if (result[j].category() == QChar::Mark_NonSpacing)
-         scr->compose(result.mid(j,1));
+      if (r[j].category() == QChar::Mark_NonSpacing)
+         scr->compose(r.mid(j,1));
       else
-         onRcvChar(result[j].unicode());
+         onRcvChar(r[j].unicode());
     }
-    if (s[i] == '\030')
-    {
-      if ((len-i-1 > 3) && (strncmp(s+i+1, "B00", 3) == 0))
-      	emit zmodemDetected();
-    }
+    i = l;
   }
 }
 
