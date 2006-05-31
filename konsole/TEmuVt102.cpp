@@ -18,6 +18,12 @@
 */
 #include "config.h"
 
+
+#if defined(__osf__) || defined(__APPLE__)
+#define AVOID_XKB
+#endif
+
+
 // this allows konsole to be compiled without XKB and XTEST extensions
 // even though it might be available on a particular system.
 #if defined(AVOID_XKB)
