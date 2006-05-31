@@ -2290,7 +2290,7 @@ void Konsole::sendAllSessions(const QString &text)
 KUrl Konsole::baseURL() const
 {
    KUrl url;
-   url.setPath(se->getCwd()+"/");
+   url.setPath(se->getCwd()+'/');
    return url;
 }
 
@@ -2317,7 +2317,7 @@ void Konsole::enterURL(const QString& URL, const QString&)
      * If we have a host, connect.
      */
     if (u.hasHost()) {
-      newtext = newtext + " " + u.host();
+      newtext = newtext + ' ' + u.host();
       if (u.port() && !isSSH)
          newtext += QString(" %1").arg(u.port());
       se->setUserTitle(31,"");           // we don't know remote cwd
@@ -2599,7 +2599,7 @@ void Konsole::setSessionEncoding( const QString &encoding, TESession *session )
 
     // For purposes of using 'find' add a space after name,
     // otherwise 'iso 8859-1' will find 'iso 8859-13'
-    QString t_enc = encoding + " ";
+    QString t_enc = encoding + ' ';
     int i = 0;
 
     for( QStringList::ConstIterator it = items.begin(); it != items.end();

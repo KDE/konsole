@@ -307,7 +307,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   if (!args->getOption("e").isEmpty())
   {
      if (args->isSet("ls"))
-        KCmdLineArgs::usage(i18n("You can't use BOTH -ls and -e.\n"));
+        KCmdLineArgs::usage(i18n("You can not use BOTH -ls and -e.\n"));
      shell = strdup(args->getOption("e"));
      eargs.append(shell);
      for(int i=0; i < args->count(); i++)

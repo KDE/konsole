@@ -194,7 +194,7 @@ private: // helper
     /*
        The state of the screen is more complex as one would
        expect first. The screem does really do part of the
-       emulation providing state informations in form of modes,
+       emulation providing state information in form of modes,
        margins, tabulators, cursor etc.
 
        Even more unexpected are variables to save and restore

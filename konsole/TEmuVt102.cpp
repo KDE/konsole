@@ -156,7 +156,7 @@ void TEmuVt102::reset()
 /* Incoming Bytes Event pipeline
 
    This section deals with decoding the incoming character stream.
-   Decoding means here, that the stream is first seperated into `tokens'
+   Decoding means here, that the stream is first separated into `tokens'
    which are then mapped to a `meaning' provided as operations by the
    `TEScreen' class or by the emulation class itself.
 
@@ -395,7 +395,7 @@ void TEmuVt102::XtermHack()
    arguments. One could consider to make up a proper table
    from the function below.
 
-   The technical reference manual provides more informations
+   The technical reference manual provides more information
    about this mapping.
 */
 
