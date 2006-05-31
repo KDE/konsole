@@ -922,7 +922,7 @@ void konsolePart::enableMasterModeConnections()
   if ( se ) se->setListenToKeyPress(true);
 }
 
-void konsolePart::updateTitle()
+void konsolePart::updateTitle(TESession *)
 {
   if ( se ) emit setWindowCaption( se->fullTitle() );
 }
@@ -1064,8 +1064,8 @@ void konsolePart::newSession()
            this,SLOT(doneSession(TESession*)) );
   connect( se,SIGNAL(openURLRequest(const QString &)),
            this,SLOT(emitOpenURLRequest(const QString &)) );
-  connect( se, SIGNAL( updateTitle() ),
-           this, SLOT( updateTitle() ) );
+  connect( se, SIGNAL( updateTitle(TESession*) ),
+           this, SLOT( updateTitle(TESession*) ) );
   connect( se, SIGNAL(enableMasterModeConnections()),
            this, SLOT(enableMasterModeConnections()) );
   connect( se, SIGNAL( processExited(KProcess *) ),

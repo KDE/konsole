@@ -89,7 +89,7 @@ signals:
     void doneSession(TESession*);
     void sessionDestroyed();
     void configureRequest(TEWidget*,int,int x,int y);
-    void updateTitle();
+    void updateTitle(TESession*);
     void enableMasterModeConnections();
 
  private slots:
