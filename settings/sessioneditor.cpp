@@ -312,6 +312,8 @@ void SessionEditor::saveCurrent()
     }
 
   }
+  if (sessionList->currentText().isEmpty())
+	return;
 
   QString fullpath;
   if (sessionList->currentText() == nameLine->text()) {
