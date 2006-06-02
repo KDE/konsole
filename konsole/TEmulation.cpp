@@ -313,9 +313,8 @@ void TEmulation::onRcvBlock(const char *s, int len)
          QString tmp;
          // Flush decoder
          while(!tmp.length())
-             tmp = decoder->toUnicode(&s[i],1);
+             tmp = decoder->toUnicode(" ",1);
        }
-
 
        onRcvChar((unsigned char) s[i]);
 
