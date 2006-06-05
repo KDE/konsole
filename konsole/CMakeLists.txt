@@ -35,7 +35,6 @@ set(konsole_KDEINIT_SRCS
 
 kde4_automoc(${konsole_KDEINIT_SRCS})
 
-kde4_add_dcop_skels(konsole_KDEINIT_SRCS konsoleiface.h sessioniface.h )
 
 kde4_add_kdeinit_executable( konsole ${konsole_KDEINIT_SRCS})
 
@@ -68,7 +67,6 @@ set(konsolepart_PART_SRCS
 
 kde4_automoc(${konsolepart_PART_SRCS})
 
-kde4_add_dcop_skels(konsolepart_PART_SRCS konsoleiface.h sessioniface.h )
 
 kde4_add_plugin(konsolepart WITH_PREFIX ${konsolepart_PART_SRCS})
 
@@ -88,7 +86,6 @@ set(kded_kwrited_PART_SRCS kwrited.cpp )
 
 kde4_automoc(${kded_kwrited_PART_SRCS})
 
-kde4_add_dcop_skels(kded_kwrited_PART_SRCS kwrited.h )
 
 kde4_add_plugin(kded_kwrited ${kded_kwrited_PART_SRCS})
 
