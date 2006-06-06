@@ -22,13 +22,12 @@
 #include "TEWidget.h"
 #include "TEmuVt102.h"
 
-#include "sessioniface.h"
 
 class KProcIO;
 class KProcess;
 class ZModemDialog;
 
-class TESession : public QObject, virtual public SessionIface
+class TESession : public QObject
 { Q_OBJECT
 
 public:
@@ -95,9 +94,11 @@ public:
   void renameSession(const QString &name);
   QString sessionName() { return title; }
   int sessionPID() { return sh->pid(); }
-
+#warning "kde4: port it"
+#if 0
   virtual bool processDynamic(const DCOPCString &fun, const QByteArray &data, DCOPCString& replyType, QByteArray &replyData);
   virtual DCOPCStringList functionsDynamic();
+#endif  
   void enableFullScripting(bool b) { fullScripting = b; }
 
   void startZModem(const QString &rz, const QString &dir, const QStringList &list);

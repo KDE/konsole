@@ -2,7 +2,6 @@
 #include "zmodem_dialog.h"
 #include <config-konsole.h>
 #include <kdebug.h>
-#include <dcopclient.h>
 #include <kmessagebox.h>
 #include <knotifyclient.h>
 #include <klocale.h>
@@ -17,6 +16,8 @@
 #include <QRegExp>
 #include <QStringList>
 #include <QByteArray>
+#include "sessionadaptor.h"
+#include <dbus/qdbus.h>
 
 /*! \class TESession
 
@@ -29,8 +30,7 @@
 */
 
 TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _args, const QString &_term, ulong _winId, const QString &_sessionId, const QString &_initial_cwd)
-   : DCOPObject( _sessionId.toLatin1() )
-   , connected(true)
+   : connected(true)
    , monitorActivity(false)
    , monitorSilence(false)
    , notifiedActivity(false)
@@ -52,6 +52,9 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _ar
    , zmodemProgress(0)
    , encoding_no(0)
 {
+	(void)new SessionAdaptor(this);
+	QDBus::sessionBus().registerObject(_sessionId.toLatin1(), this);
+	QDBus::sessionBus().busService()->requestName("org.kde.konsole", /*flags=*/0); 
   //kDebug(1211)<<"TESession ctor() new TEPty"<<endl;
   sh = new TEPty();
   te = _te;

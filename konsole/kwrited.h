@@ -27,9 +27,8 @@ private:
 class KWritedModule : public KDEDModule
 {
   Q_OBJECT
-  K_DCOP
 public:
-  KWritedModule( const DCOPCString& obj );
+  KWritedModule( const QString& obj );
  ~KWritedModule();
 private:
   KWrited* pro;

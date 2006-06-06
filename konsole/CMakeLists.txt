@@ -51,6 +51,8 @@ install(TARGETS konsole DESTINATION bin)
 ########### next target ###############
 
 set(konsolepart_PART_SRCS 
+   konsoleadaptor.cpp
+   sessionadaptor.cpp
    TEPty.cpp 
    BlockArray.cpp 
    konsole_part.cpp 

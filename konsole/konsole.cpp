@@ -93,9 +93,10 @@ Time to start a requirement list.
 #include <Q3PtrList>
 #include <QHBoxLayout>
 #include <QPixmap>
-
+#include <kservicetypetrader.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <dbus/qdbus.h>
 
 #include <kfiledialog.h>
 #include <kurlrequesterdlg.h>
@@ -111,7 +112,6 @@ Time to start a requirement list.
 #include <kinputdialog.h>
 #include <kdebug.h>
 #include <kipc.h>
-#include <dcopclient.h>
 #include <kglobalsettings.h>
 #include <knotifydialog.h>
 #include <kprinter.h>
@@ -151,7 +151,7 @@ Time to start a requirement list.
 #include <kauthorized.h>
 #include <ktoolinvocation.h>
 #include "printsettings.h"
-
+#include "konsoleadaptor.h"
 #define KONSOLEDEBUG    kDebug(1211)
 
 #define POPUP_NEW_SESSION_ID 121
@@ -196,8 +196,7 @@ template class Q3PtrDict<KToggleAction>;
 
 Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bool frameon, bool scrollbaron,
                  Q3CString type, bool b_inRestore, const int wanted_tabbar, const QString &workdir )
-:DCOPObject( "konsole" )
-,KMainWindow(0, name)
+:KMainWindow(0, name)
 ,m_defaultSession(0)
 ,m_defaultSessionFilename("")
 ,tabwidget(0)
@@ -278,6 +277,9 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 ,sl_sessionShortCuts(0)
 ,s_workDir(workdir)
 {
+	(void)new KonsoleAdaptor(this);
+	QDBus::sessionBus().registerObject(QLatin1String("/konsole"), this);
+	QDBus::sessionBus().busService()->requestName("org.kde.konsole", /*flags=*/0);
   m_sessionGroup = new QActionGroup(this);
 
   isRestored = b_inRestore;
@@ -349,9 +351,9 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
     if (te) te->setScrollbarLocation(TEWidget::SCRNONE);
   }
 
-//  connect(kapp, SIGNAL(kdisplayFontChanged()), this, SLOT(slotFontChanged()));
-
-  kapp->dcopClient()->setDefaultObject( "konsole" );
+//  connect(kapp, SIGNAL(kdisplayFontChanged()), this, SLOT(slotFontChanged()));	
+	QDBus::sessionBus().registerObject(QLatin1String("/konsole"), this);
+	QDBus::sessionBus().busService()->requestName("org.kde.konsole", /*flags=*/0);
 }
 
 
@@ -4210,7 +4212,7 @@ KonsoleFind::KonsoleFind( QWidget *parent )
 void KonsoleFind::slotEditRegExp()
 {
   if ( m_editorDialog == 0 )
-    m_editorDialog = KParts::ComponentFactory::createInstanceFromQuery<QDialog>( "KRegExpEditor/KRegExpEditor", QString(), this );
+    m_editorDialog = KServiceTypeTrader::createInstanceFromQuery<QDialog>( "KRegExpEditor/KRegExpEditor", QString(), this );
 
   assert( m_editorDialog );
 
@@ -4260,7 +4262,8 @@ void Konsole::smallerFont(void) {
     te->setVTFont( f );
     activateSession();
 }
-
+#warning "kde4: port it"
+#if 0
 bool Konsole::processDynamic(const DCOPCString &fun, const QByteArray &data, DCOPCString& replyType, QByteArray &replyData)
 {
     if (b_fullScripting)
@@ -4297,7 +4300,7 @@ DCOPCStringList Konsole::functionsDynamic()
     }
     return funcs;
 }
-
+#endif
 void Konsole::enableFullScripting(bool b)
 {
     b_fullScripting = b;

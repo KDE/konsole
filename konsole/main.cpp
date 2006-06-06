@@ -23,7 +23,6 @@
 
 #include <QStringList>
 
-#include <dcopclient.h>
 
 #include <klocale.h>
 #include <kaboutdata.h>
@@ -332,10 +331,11 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   full_script = args->isSet("script");
   auto_close = args->isSet("close");
   fixed_size = !args->isSet("resize");
-
+#warning "kde4: port it"
+#if 0
   if (!full_script)
 	a.dcopClient()->setQtBridgeEnabled(false);
-
+#endif
   QByteArray type = "";
 
   if(args->isSet("type")) {

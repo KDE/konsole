@@ -1,0 +1,37 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="org.kde.konsole">
+    <method name="sessionCount">
+      <arg type="i" direction="out"/>
+    </method>
+    <method name="currentSession">
+      <arg type="s" direction="out"/>
+    </method>
+    <method name="newSession">
+      <arg type="s" direction="out"/>
+    </method>
+    <method name="newSession">
+      <arg name="type" type="s" direction="in"/>
+	  <arg type="s" direction="out"/>
+    </method>
+    <method name="sessionId">
+      <arg name="position" type="i" direction="in"/>
+      <arg type="s" direction="out"/>
+    </method>
+    <method name="activateSession">
+      <arg name="sessionId" type="s" direction="in"/>
+    </method>
+	<method name="nextSession"/>
+	<method name="prevSession"/>
+	<method name="moveSessionLeft"/>
+	<method name="moveSessionRight"/>
+	<method name="fullScreen">
+		<arg type="b" direction="out"/>
+	</method>
+    <method name="setFullScreen">
+        <arg name="on" type="b" direction="in"/>
+    </method>
+	<method name="reparseConfiguration"/>
+  </interface>
+</node>

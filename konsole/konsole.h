@@ -43,7 +43,6 @@
 #include "konsolebookmarkmenu.h"
 #include "konsolebookmarkhandler.h"
 
-#include "konsoleiface.h"
 
 #undef PACKAGE
 #undef VERSION
@@ -65,7 +64,7 @@ class KTempFile;
 // Defined in main.C
 const char *konsole_shell(QStringList &args);
 
-class Konsole : public KMainWindow, virtual public KonsoleIface
+class Konsole : public KMainWindow
 {
     Q_OBJECT
 
@@ -113,10 +112,11 @@ public:
   void sendAllSessions(const QString &text);
 
   KUrl baseURL() const;
-
+#warning "kde4: port it"
+#if 0
   virtual bool processDynamic(const DCOPCString &fun, const QByteArray &data, DCOPCString& replyType, QByteArray &replyData);
   virtual DCOPCStringList functionsDynamic();
-
+#endif
   void callReadPropertiesInternal(KConfig *config, int number) { readPropertiesInternal(config,number); }
 
   enum TabPosition { TabNone, TabTop, TabBottom };

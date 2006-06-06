@@ -1,6 +1,5 @@
 // [kwrited.C] A write(1) receiver for kde.
 
-#include <dcopclient.h>
 #include <QSocketNotifier>
 #include <QContextMenuEvent>
 
@@ -100,7 +99,7 @@ void KWrited::contextMenuEvent(QContextMenuEvent * e)
    delete menu;
 }
 
-KWritedModule::KWritedModule( const DCOPCString& obj )
+KWritedModule::KWritedModule( const QString& obj )
     : KDEDModule( obj )
 {
     KGlobal::locale()->insertCatalog("konsole");
@@ -114,7 +113,7 @@ KWritedModule::~KWritedModule()
 }
 
 extern "C"
-KDE_EXPORT KDEDModule* create_kwrited( const DCOPCString& obj )
+KDE_EXPORT KDEDModule* create_kwrited( const QString& obj )
     {
     return new KWritedModule( obj );
     }

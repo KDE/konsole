@@ -1,0 +1,47 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="org.kde.konsole.session">
+    <method name="closeSession">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="sendSignal">
+		<arg type="b" direction="out"/>
+		<arg name="signal" type="b" direction="in"/>
+    </method>
+	<method name="clearHistory"/>
+    <method name="renameSession">
+        <arg name="name" type="s" direction="in"/>
+    </method>
+    <method name="sessionName">
+        <arg type="s" direction="out"/>
+    </method>
+    <method name="sessionPID">
+        <arg type="i" direction="out"/>
+    </method>
+    <method name="schema">
+        <arg type="s" direction="out"/>
+    </method>
+    <method name="setSchema">
+        <arg name="schema" type="s" direction="in"/>
+    </method>
+    <method name="encoding">
+        <arg type="s" direction="out"/>
+    </method>
+    <method name="setEncoding">
+        <arg name="encoding" type="s" direction="in"/>
+    </method>
+    <method name="keytab">
+        <arg type="s" direction="out"/>
+    </method>
+    <method name="setKeytab">
+        <arg name="encoding" type="s" direction="in"/>
+    </method>
+    <method name="font">
+        <arg type="s" direction="out"/>
+    </method>
+    <method name="setFont">
+        <arg name="encoding" type="s" direction="in"/>
+    </method>
+  </interface>
+</node>
