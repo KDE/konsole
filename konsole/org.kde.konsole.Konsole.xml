@@ -32,6 +32,8 @@
     <method name="setFullScreen">
       <arg name="on" type="b" direction="in"/>
     </method>
-    <method name="reparseConfiguration"/>
+    <method name="reparseConfiguration">
+    <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
+    </method>
   </interface>
 </node>

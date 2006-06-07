@@ -7,8 +7,8 @@
  * This is an auto-generated file.
  */
 
-#ifndef KONSOLEADAPTOR_H_256601149593325
-#define KONSOLEADAPTOR_H_256601149593325
+#ifndef KONSOLEADAPTOR_H_194211149671306
+#define KONSOLEADAPTOR_H_194211149671306
 
 #include <QtCore/QObject>
 #include <dbus/qdbus.h>
@@ -58,7 +58,9 @@ class KonsoleAdaptor: public QDBusAbstractAdaptor
 "    <method name=\"setFullScreen\" >\n"
 "      <arg direction=\"in\" type=\"b\" name=\"on\" />\n"
 "    </method>\n"
-"    <method name=\"reparseConfiguration\" />\n"
+"    <method name=\"reparseConfiguration\" >\n"
+"      <annotation value=\"true\" name=\"org.freedesktop.DBus.Method.NoReply\" />\n"
+"    </method>\n"
 "  </interface>\n"
         "")
 public:
@@ -76,7 +78,7 @@ public Q_SLOTS: // METHODS
     QString newSession();
     void nextSession();
     void prevSession();
-    void reparseConfiguration();
+    Q_ASYNC void reparseConfiguration();
     int sessionCount();
     QString sessionId(int position);
     void setFullScreen(bool on);
