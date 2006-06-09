@@ -19,7 +19,6 @@ private slots:
   void block_in(int fd);
   void clearText(void);
 private:
-  QTextEdit* wid;
   KPty* pty;
 };
 
