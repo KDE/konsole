@@ -113,6 +113,8 @@ public:
   void setKeytab(const QString &keytab);
   QSize size();
   void setSize(QSize size);
+  void setFont(const QString &font);
+  QString font();
 
 public slots:
 
