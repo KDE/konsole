@@ -35,8 +35,6 @@
    - add CORBA interface?
    - add session awareness.
    - add client complements.
-   - kwrited is disabled by default if built without utempter,
-     see ../Makefile.am - kwrited doesn't seem to work well without utempter
 */
 
 KWrited::KWrited() : QTextEdit()
