@@ -3064,7 +3064,8 @@ void Konsole::prevSession()
 {
   sessions.find(se); sessions.prev();
   if (!sessions.current()) sessions.last();
-  if (sessions.current()) activateSession(sessions.current());
+  if (sessions.current() && sessions.count() > 1)
+    activateSession(sessions.current());
 }
 
 /*! Cycle to next session (if any) */
@@ -3073,7 +3074,8 @@ void Konsole::nextSession()
 {
   sessions.find(se); sessions.next();
   if (!sessions.current()) sessions.first();
-  if (sessions.current()) activateSession(sessions.current());
+  if (sessions.current() && sessions.count() > 1)
+    activateSession(sessions.current());
 }
 
 void Konsole::slotMovedTab(int from, int to)
