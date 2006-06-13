@@ -18,7 +18,7 @@
 
 
 #include <kmainwindow.h>
-#include <kdialogbase.h>
+#include <kdialog.h>
 #include <ksimpleconfig.h>
 #include <keditcl.h>
 
@@ -439,7 +439,7 @@ private:
 
 class QSpinBox;
 
-class HistoryTypeDialog : public KDialogBase
+class HistoryTypeDialog : public KDialog
 {
     Q_OBJECT
 public:
@@ -463,7 +463,7 @@ protected:
   QPushButton*   m_setUnlimited;
 };
 
-class SizeDialog : public KDialogBase
+class SizeDialog : public KDialog
 {
     Q_OBJECT
 public:

@@ -19,11 +19,11 @@
 #ifndef ZMODEM_DIALOG_H
 #define ZMODEM_DIALOG_H
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 class Q3TextEdit;
 
-class ZModemDialog : public KDialogBase
+class ZModemDialog : public KDialog
 {
   Q_OBJECT
 public:

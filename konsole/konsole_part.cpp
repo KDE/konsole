@@ -969,15 +969,18 @@ bool konsolePart::doCloseStream()
 HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
                                      unsigned int histSize,
                                      QWidget *parent)
-  : KDialogBase(Plain, i18n("History Configuration"),
-                Help | Default | Ok | Cancel, Ok,
-                parent)
+  : KDialog( parent )
 {
-  QFrame *mainFrame = plainPage();
+  setCaption( i18n("History Configuration") );
+  setButtons( Help | Default | Ok | Cancel );
+  setDefaultButton( Ok );
+                
+  QFrame *mainFrame = new QFrame;
+  setMainWidget( mainFrame );
 
   QHBoxLayout *hb = new QHBoxLayout(mainFrame);
 
-  m_btnEnable    = new QCheckBox(i18n("&Enable"), mainFrame);
+  m_btnEnable = new QCheckBox(i18n("&Enable"), mainFrame);
 
   QObject::connect(m_btnEnable, SIGNAL(toggled(bool)),
                    this,     SLOT(slotHistEnable(bool)));

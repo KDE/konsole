@@ -23,11 +23,18 @@
 #include <klocale.h>
 
 ZModemDialog::ZModemDialog(QWidget *parent, bool modal, const QString &caption)
- : KDialogBase(parent, "zmodem_progress", modal, caption,
-   User1|Close, User1, true,
-   i18n("&Stop"))
+ : KDialog( parent )
 {
+  setObjectName( "zmodem_progress" );
+  setModal( modal );
+  setCaption( caption );
+  setButtons( User1|Close );
+  setButtonGuiItem( User1, i18n("&Stop") );
+
+  setDefaultButton( User1 );
   setEscapeButton(User1);
+
+  enableButtonSeparator( true );
   enableButton(Close, false);
   textEdit = new Q3TextEdit(this);
   textEdit->setMinimumSize(400, 100);
@@ -49,8 +56,8 @@ void ZModemDialog::done()
 
 void ZModemDialog::slotClose()
 {
-  KDialogBase::slotButtonClicked(KDialog::Close);
   delayedDestruct();
+  accept();
 }
 
 #include "zmodem_dialog.moc"

@@ -25,7 +25,7 @@
 #include <kparts/factory.h>
 
 
-#include <kdialogbase.h>
+#include <kdialog.h>
 
 #include <kde_terminal_interface.h>
 
@@ -198,7 +198,7 @@ public:
 
 //////////////////////////////////////////////////////////////////////
 
-class HistoryTypeDialog : public KDialogBase
+class HistoryTypeDialog : public KDialog
 {
     Q_OBJECT
 public:

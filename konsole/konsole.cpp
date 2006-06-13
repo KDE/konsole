@@ -3800,11 +3800,15 @@ void Konsole::slotClearAllSessionHistories() {
 HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
                                      unsigned int histSize,
                                      QWidget *parent)
-  : KDialogBase(Plain, i18n("History Configuration"),
-                Help | Default | Ok | Cancel, Ok,
-                parent, 0, true, true)
+  : KDialog( parent )
 {
-  QFrame *mainFrame = plainPage();
+  setCaption( i18n("History Configuration") );
+  setButtons( Help | Default | Ok | Cancel );
+  setModal( true );
+  enableButtonSeparator( true );
+
+  QFrame *mainFrame = new QFrame;
+  setMainWidget( mainFrame );
 
   QHBoxLayout *hb = new QHBoxLayout(mainFrame);
 
@@ -4146,11 +4150,13 @@ void Konsole::toggleBidi()
 SizeDialog::SizeDialog(const unsigned int columns,
                        const unsigned int lines,
                        QWidget *parent)
-  : KDialogBase(Plain, i18n("Size Configuration"),
-                Help | Default | Ok | Cancel, Ok,
-                parent)
+  : KDialog( parent )
 {
-  QFrame *mainFrame = plainPage();
+  setCaption( i18n("Size Configuration") );
+  setButtons( Help | Default | Ok | Cancel );
+                
+  QFrame *mainFrame = new QFrame;
+  setMainWidget( mainFrame );
 
   QHBoxLayout *hb = new QHBoxLayout(mainFrame);
 
