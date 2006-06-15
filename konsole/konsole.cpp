@@ -488,7 +488,7 @@ void Konsole::makeGUI()
    // not sure if this will be "fixed" in Qt, for now use this hack (malte)
    if(!(isRestored)) {
      if (sender() && sender()->inherits("QPopupMenu") &&
-       static_cast<const QMenu *>(sender())->count() == 1)
+       static_cast<const QMenu *>(sender())->actions().count() == 1)
        const_cast<QMenu *>(static_cast<const QMenu *>(sender()))->removeItemAt(0);
        }
 
@@ -596,16 +596,16 @@ void Konsole::makeGUI()
       m_options->addAction( showMenubar );
 
       // Tabbar
-      selectTabbar = new KSelectAction(i18n("&Tab Bar"), 0, this,
-                                       SLOT(slotSelectTabbar()), actions, "tabbar" );
+      selectTabbar = new KSelectAction(i18n("&Tab Bar"), actions, "tabbar" );
+      connect( selectTabbar, SIGNAL( triggered() ), this, SLOT( slotSelectTabbar() ) );
       QStringList tabbaritems;
       tabbaritems << i18n("&Hide") << i18n("&Top") << i18n("&Bottom");
       selectTabbar->setItems( tabbaritems );
       m_options->addAction( selectTabbar );
 
       // Scrollbar
-      selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), 0, this,
-                                       SLOT(slotSelectScrollbar()), actions, "scrollbar" );
+      selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), actions, "scrollbar" );
+      connect( selectScrollbar, SIGNAL( triggered() ), this, SLOT(slotSelectScrollbar() ) );
       QStringList scrollitems;
       scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
       selectScrollbar->setItems( scrollitems );
@@ -620,8 +620,9 @@ void Konsole::makeGUI()
       }
 
       // Select Bell
-      selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), 0 , this,
-                                  SLOT(slotSelectBell()), actions, "bell");
+      selectBell = new KSelectAction(i18n("&Bell"), actions, "bell");
+      selectBell->setIcon( KIcon( "bell") );
+      connect( selectBell, SIGNAL( triggered() ), this, SLOT(slotSelectBell()) );
       QStringList bellitems;
       bellitems << i18n("System &Bell")
                 << i18n("System &Notification")
@@ -633,22 +634,28 @@ void Konsole::makeGUI()
       KActionMenu* m_fontsizes = new KActionMenu( KIcon( "text" ),
                                                   i18n( "Font" ),
                                                   actions, 0L );
-      m_fontsizes->insert( new KAction( i18n( "&Enlarge Font" ),
-                           SmallIconSet( "fontsizeup" ), 0, this,
-                           SLOT( biggerFont() ), actions,
-                           "enlarge_font" ) );
-      m_fontsizes->insert( new KAction( i18n( "&Shrink Font" ),
-                           SmallIconSet( "fontsizedown" ), 0, this,
-                           SLOT( smallerFont() ), actions,
-                           "shrink_font" ) );
-      m_fontsizes->insert( new KAction( i18n( "Se&lect..." ),
-                           SmallIconSet( "font" ), 0, this,
-                           SLOT( slotSelectFont() ), actions,
-                           "select_font" ) );
+      KAction *action = new KAction( i18n( "&Enlarge Font" ), actions, "enlarge_font" );
+      action->setIcon( KIcon( "fontsizeup" ) );
+      connect( action, SIGNAL( triggered() ), this, SLOT( biggerFont() ) );
+      m_fontsizes->insert( action );
+
+      action = new KAction( i18n( "&Shrink Font" ), actions, "shrink_font" );
+      action->setIcon( KIcon( "fontsizedown" ) );
+      connect( action, SIGNAL( triggered() ), this, SLOT( smallerFont() ) );
+      m_fontsizes->insert( action );
+
+      action = new KAction( i18n( "Se&lect..." ), actions, "select_font" );
+      action->setIcon( KIcon( "font" ) );
+      connect( action, SIGNAL( triggered() ), this, SLOT( slotSelectFont() ) );
+      m_fontsizes->insert( action );
+
       m_options->addAction( m_fontsizes );
 
       // encoding menu, start with default checked !
-      selectSetEncoding = new KSelectAction( i18n( "&Encoding" ), SmallIconSet( "charset" ), 0, this, SLOT(slotSetEncoding()), actions, "set_encoding" );
+      selectSetEncoding = new KSelectAction( i18n( "&Encoding" ), actions, "set_encoding" );
+      selectSetEncoding->setIcon( KIcon( "charset" ) );
+      connect( selectSetEncoding, SIGNAL( triggered() ), this, SLOT(slotSetEncoding()) );
+
       QStringList list = KGlobal::charsets()->descriptiveEncodingNames();
       list.prepend( i18n( "Default" ) );
       selectSetEncoding->setItems(list);
@@ -700,7 +707,7 @@ void Konsole::makeGUI()
       m_options->addAction( configure );
 
       if (KGlobalSettings::insertTearOffHandle())
-         m_options->insertTearOffHandle();
+         m_options->setTearOffEnabled( true );
    }
 
    // Help menu
@@ -750,7 +757,7 @@ void Konsole::makeGUI()
       m_rightButton->addSeparator();
       m_rightButton->addAction( m_closeSession );
       if (KGlobalSettings::insertTearOffHandle())
-         m_rightButton->insertTearOffHandle();
+         m_rightButton->setTearOffEnabled( true );
    }
 
    delete colors;
@@ -763,7 +770,7 @@ void Konsole::makeGUI()
         curr_schema=sch->numb();
    else
         curr_schema = 0;
-   for (uint i=0; i<m_schema->count(); i++)
+   for (uint i=0; i<m_schema->actions().count(); i++)
       m_schema->setItemChecked(i,false);
 
    m_schema->setItemChecked(curr_schema,true);
@@ -800,25 +807,30 @@ void Konsole::makeGUI()
    m_tabPopupMenu = new KMenu( this );
    KAcceleratorManager::manage( m_tabPopupMenu );
 
-   m_tabDetachSession= new KAction( i18n("&Detach Session"), SmallIconSet("tab_breakoff"), 0, this, SLOT(slotTabDetachSession()), actionCollection(), 0 );
+   m_tabDetachSession= new KAction( i18n("&Detach Session"), actionCollection(), 0 );
+   m_tabDetachSession->setIcon( KIcon("tab_breakoff") );
+   connect( m_tabDetachSession, SIGNAL( triggered() ), this, SLOT(slotTabDetachSession()) );
    m_tabPopupMenu->addAction( m_tabDetachSession );
 
    m_tabPopupMenu->addAction( i18n("&Rename Session..."), this,
                          SLOT(slotTabRenameSession()) );
    m_tabPopupMenu->addSeparator();
 
-   m_tabMonitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ),
-      SmallIconSet("activity"), 0, this, SLOT( slotTabToggleMonitor() ), actionCollection() );
+   m_tabMonitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ), actionCollection(), "" );
+   m_tabMonitorActivity->setIcon( KIcon("activity") );
+   connect( m_tabMonitorActivity, SIGNAL( triggered() ), this, SLOT( slotTabToggleMonitor() ) );
    m_tabMonitorActivity->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Activity" )) );
    m_tabPopupMenu->addAction( m_tabMonitorActivity );
 
-   m_tabMonitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ),
-      SmallIconSet("silence"), 0, this, SLOT( slotTabToggleMonitor() ), actionCollection() );
+   m_tabMonitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ), actionCollection(), "" );
+   m_tabMonitorSilence->setIcon( KIcon("silence") );
+   connect( m_tabMonitorSilence, SIGNAL( triggered() ), this, SLOT( slotTabToggleMonitor() ) );
    m_tabMonitorSilence->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Silence" ) ) );
    m_tabPopupMenu->addAction( m_tabMonitorSilence );
 
-   m_tabMasterMode = new KToggleAction ( i18n( "Send &Input to All Sessions" ), "remote", 0, this,
-                                    SLOT( slotTabToggleMasterMode() ), actionCollection());
+   m_tabMasterMode = new KToggleAction ( i18n( "Send &Input to All Sessions" ), actionCollection(), "" );
+   m_tabMasterMode->setIcon( KIcon( "remote" ) );
+   connect( m_tabMasterMode, SIGNAL( triggered() ), this, SLOT( slotTabToggleMasterMode() ) );
    m_tabPopupMenu->addAction( m_tabMasterMode );
 
    m_tabPopupMenu->addSeparator();
@@ -916,7 +928,7 @@ void Konsole::makeTabWidget()
     m_newSessionButton->setToolTip(i18n("Click for new standard session\nClick and hold for session menu"));
     m_newSessionButton->setIcon( SmallIcon( "tab_new" ) );
     m_newSessionButton->adjustSize();
-    m_newSessionButton->setPopup( m_tabbarSessionsCommands );
+    m_newSessionButton->setMenu( m_tabbarSessionsCommands );
     connect(m_newSessionButton, SIGNAL(clicked()), SLOT(newSession()));
     tabwidget->setCornerWidget( m_newSessionButton, Qt::BottomLeftCorner );
     m_newSessionButton->installEventFilter(this);
@@ -1077,19 +1089,20 @@ void Konsole::makeBasicGUI()
   m_clearAllSessionHistories = new KAction(KIcon("history_clear"), i18n("Clear All H&istories"), m_shortcuts, "clear_all_histories");
   connect(m_clearAllSessionHistories, SIGNAL(triggered(bool)), SLOT(slotClearAllSessionHistories()));
 
-  m_detachSession = new KAction(i18n("&Detach Session"), SmallIconSet("tab_breakoff"), 0, this,
-                                SLOT(slotDetachSession()), m_shortcuts, "detach_session");
+  m_detachSession = new KAction(i18n("&Detach Session"), m_shortcuts, "detach_session");
+  m_detachSession->setIcon( KIcon("tab_breakoff") );
+  connect( m_detachSession, SIGNAL( triggered() ), this, SLOT(slotDetachSession()) );
   m_detachSession->setEnabled(false);
 
   m_renameSession = new KAction(i18n("&Rename Session..."), m_shortcuts, "rename_session");
   connect(m_renameSession, SIGNAL(triggered(bool) ), SLOT(slotRenameSession()));
   m_renameSession->setShortcut(Qt::CTRL+Qt::ALT+Qt::Key_S);
 
-  if (KAuthorized::authorizeKAction("zmodem_upload"))
-    m_zmodemUpload = new KAction( i18n( "&ZModem Upload..." ),
-                                  Qt::CTRL+Qt::ALT+Qt::Key_U, this,
-                                  SLOT( slotZModemUpload() ),
-                                  m_shortcuts, "zmodem_upload" );
+  if (KAuthorized::authorizeKAction("zmodem_upload")) {
+    m_zmodemUpload = new KAction( i18n( "&ZModem Upload..." ), m_shortcuts, "zmodem_upload" );
+    m_zmodemUpload->setShortcut( Qt::CTRL+Qt::ALT+Qt::Key_U );
+    connect( m_zmodemUpload, SIGNAL( triggered() ), this, SLOT( slotZModemUpload() ) );
+  }
 
   monitorActivity = new KToggleAction ( KIcon("activity"), i18n( "Monitor for &Activity" ),
                                         m_shortcuts, "monitor_activity" );
@@ -1111,8 +1124,9 @@ void Konsole::makeBasicGUI()
   connect( m_fullscreen,SIGNAL(toggled(bool)), this,SLOT(updateFullScreen(bool)));
   m_fullscreen->setChecked(b_fullscreen);
 
-  m_saveProfile = new KAction( i18n( "Save Sessions &Profile..." ), SmallIconSet("filesaveas"), 0, this,
-                         SLOT( slotSaveSessionsProfile() ), m_shortcuts, "save_sessions_profile" );
+  m_saveProfile = new KAction( i18n( "Save Sessions &Profile..." ), m_shortcuts, "save_sessions_profile" );
+  m_saveProfile->setIcon( KIcon("filesaveas") );
+  connect( m_saveProfile, SIGNAL( triggered() ), this, SLOT( slotSaveSessionsProfile() ) );
 
   //help menu
   //if (m_help)
@@ -1129,9 +1143,20 @@ void Konsole::makeBasicGUI()
 
   KShortcut shortcut(Qt::CTRL+Qt::ALT+Qt::Key_N);
   shortcut.append(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_N));
-  addAction(new KAction(i18n("New Session"), shortcut, this, SLOT(newSession()), m_shortcuts, "new_session"));
-  addAction(new KAction(i18n("Activate Menu"), Qt::CTRL+Qt::ALT+Qt::Key_M, this, SLOT(activateMenu()), m_shortcuts, "activate_menu"));
-  addAction(new KAction(i18n("List Sessions"), 0, this, SLOT(listSessions()), m_shortcuts, "list_sessions"));
+
+  KAction *action = new KAction(i18n("New Session"), m_shortcuts, "new_session");
+  action->setShortcut( shortcut );
+  connect( action, SIGNAL( triggered() ), this, SLOT(newSession()) );
+  addAction( action );
+
+  action = new KAction(i18n("Activate Menu"), m_shortcuts, "activate_menu");
+  action->setShortcut( Qt::CTRL+Qt::ALT+Qt::Key_M );
+  connect( action, SIGNAL( triggered() ), this, SLOT(activateMenu()) );
+  addAction( action );
+
+  action = new KAction(i18n("List Sessions"), m_shortcuts, "list_sessions");
+  connect( action, SIGNAL( triggered() ), this, SLOT(listSessions()) );
+  addAction( action );
 
   m_moveSessionLeft = new KAction(KIcon(QApplication::isRightToLeft() ? "forward" : "back"), i18n("&Move Session Left"), m_shortcuts, "move_session_left");
   connect(m_moveSessionLeft, SIGNAL(triggered(bool) ), SLOT(moveSessionLeft()));
@@ -1140,16 +1165,23 @@ void Konsole::makeBasicGUI()
   connect(m_moveSessionRight, SIGNAL(triggered(bool) ), SLOT(moveSessionRight()));
   m_moveSessionRight->setShortcut(QApplication::isRightToLeft() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Left : Qt::CTRL+Qt::SHIFT+Qt::Key_Right);
 
-  addAction(new KAction(i18n("Go to Previous Session"), QApplication::isRightToLeft() ? Qt::SHIFT+Qt::Key_Right : Qt::SHIFT+Qt::Key_Left,
-              this, SLOT(prevSession()), m_shortcuts, "previous_session"));
-  addAction(new KAction(i18n("Go to Next Session"), QApplication::isRightToLeft() ? Qt::SHIFT+Qt::Key_Left : Qt::SHIFT+Qt::Key_Right,
-              this, SLOT(nextSession()), m_shortcuts, "next_session"));
+  action = new KAction(i18n("Go to Previous Session"), m_shortcuts, "previous_session");
+  action->setShortcut( QApplication::isRightToLeft() ? Qt::SHIFT+Qt::Key_Right : Qt::SHIFT+Qt::Key_Left );
+  connect( action, SIGNAL( triggered() ), this, SLOT(prevSession()) );
+  addAction( action );
+
+  action = new KAction(i18n("Go to Next Session"), m_shortcuts, "next_session");
+  action->setShortcut( QApplication::isRightToLeft() ? Qt::SHIFT+Qt::Key_Left : Qt::SHIFT+Qt::Key_Right );
+  connect( action, SIGNAL( triggered() ), this, SLOT(nextSession()) );
+  addAction( action );
 
   for (int i=1;i<13;i++) { // Due to 12 function keys?
-      addAction(new KAction(i18n("Switch to Session %1", i), 0, this, SLOT(switchToSession()), m_shortcuts, QString().sprintf("switch_to_session_%02d", i).toLatin1().constData()));
+      action = new KAction(i18n("Switch to Session %1", i), m_shortcuts, QString().sprintf("switch_to_session_%02d", i).toLatin1().constData());
+      connect( action, SIGNAL( triggered() ), this, SLOT(switchToSession()) );
+      addAction( action );
   }
 
-  KAction *action = new KAction(i18n("Enlarge Font"), m_shortcuts, "bigger_font");
+  action = new KAction(i18n("Enlarge Font"), m_shortcuts, "bigger_font");
   connect(action, SIGNAL(triggered(bool) ), SLOT(biggerFont()));
   action = new KAction(i18n("Shrink Font"), m_shortcuts, "smaller_font");
   connect(action, SIGNAL(triggered(bool) ), SLOT(smallerFont()));
@@ -1891,13 +1923,13 @@ void Konsole::createSessionTab(TEWidget *widget, const QIcon &iconSet,
 {
   switch(m_tabViewMode) {
   case ShowIconAndText:
-    tabwidget->insertTab(widget, iconSet, text, index);
+    tabwidget->insertTab(index, widget, iconSet, text);
     break;
   case ShowTextOnly:
-    tabwidget->insertTab(widget, QIcon(), text, index);
+    tabwidget->insertTab(index, widget, text);
     break;
   case ShowIconOnly:
-    tabwidget->insertTab(widget, iconSet, QString(), index);
+    tabwidget->insertTab(index, widget, iconSet, QString());
     break;
   }
   if ( m_tabColor.isValid() )
@@ -1963,7 +1995,7 @@ void Konsole::slotConfigureKeys()
 
   QStringList ctrlKeys;
 
-  for ( uint i = 0; i < m_shortcuts->count(); i++ )
+  for ( uint i = 0; i < m_shortcuts->actions().count(); i++ )
   {
     KShortcut shortcut = (m_shortcuts->action( i ))->shortcut();
     for( uint j = 0; j < shortcut.count(); j++)
@@ -2028,7 +2060,7 @@ void Konsole::reparseConfiguration()
   buildSessionMenus();
 
   // FIXME: Should be a better way to traverse KActionCollection
-  uint count = m_shortcuts->count();
+  uint count = m_shortcuts->actions().count();
   for ( uint i = 0; i < count; i++ )
   {
     KAction* action = m_shortcuts->action( i );
@@ -2061,9 +2093,9 @@ void Konsole::reparseConfiguration()
   ColorSchema* sch = colors->find(s_kconfigSchema);
   if (!sch)
   {
-     sch = (ColorSchema*)colors->at(0);  //the default one
-     kWarning() << "Could not find schema named " <<s_kconfigSchema<<"; using "<<sch->relPath()<<endl;
-     s_kconfigSchema = sch->relPath();
+    sch = (ColorSchema*)colors->at(0);  //the default one
+    kWarning() << "Could not find schema named " <<s_kconfigSchema<<"; using "<<sch->relPath()<<endl;
+    s_kconfigSchema = sch->relPath();
   }
   if (sch->hasSchemaFileChanged()) sch->rereadSchemaFile();
   s_schema = sch->relPath();
@@ -2071,26 +2103,26 @@ void Konsole::reparseConfiguration()
   pmPath = sch->imagePath();
 
   for (TESession *_se = sessions.first(); _se; _se = sessions.next()) {
-     ColorSchema* s = colors->find( _se->schemaNo() );
-     if (s) {
-       if (s->hasSchemaFileChanged())
-         s->rereadSchemaFile();
-       setSchema(s,_se->widget());
-     }
+    ColorSchema* s = colors->find( _se->schemaNo() );
+    if (s) {
+      if (s->hasSchemaFileChanged())
+        s->rereadSchemaFile();
+      setSchema(s,_se->widget());
+    }
   }
 }
 
 // Called via emulation via session
 void Konsole::changeTabTextColor( TESession* ses, int rgb )
 {
-    if ( !ses ) return;
-    QColor color;
-    color.setRgb( rgb );
-    if ( !color.isValid() ) {
-        kWarning()<<" Invalid RGB color "<<rgb<<endl;
-        return;
-    }
-    tabwidget->setTabTextColor( tabwidget->indexOf(ses->widget()), color );
+  if ( !ses ) return;
+  QColor color;
+  color.setRgb( rgb );
+  if ( !color.isValid() ) {
+    kWarning()<<" Invalid RGB color "<<rgb<<endl;
+    return;
+  }
+  tabwidget->setTabTextColor( tabwidget->indexOf(ses->widget()), color );
 }
 
 // Called from emulation
@@ -2112,11 +2144,11 @@ void Konsole::changeColumns(int columns)
 }
 
 void Konsole::slotSelectSize() {
-    int item = selectSize->currentItem();
-    if (b_fullscreen)
-       setFullScreen( false );
+  int item = selectSize->currentItem();
+  if (b_fullscreen)
+    setFullScreen( false );
 
-    switch (item) {
+  switch (item) {
     case 0: setColLin(40,15); break;
     case 1: setColLin(80,24); break;
     case 2: setColLin(80,25); break;
@@ -2126,7 +2158,7 @@ void Konsole::slotSelectSize() {
             if (dlg.exec())
               setColLin(dlg.columns(),dlg.lines());
             break;
-   }
+  }
 }
 
 void Konsole::notifySize(int columns, int lines)
@@ -2136,17 +2168,17 @@ void Konsole::notifySize(int columns, int lines)
     selectSize->blockSignals(true);
     selectSize->setCurrentItem(-1);
     if (columns==40&&lines==15)
-        selectSize->setCurrentItem(0);
+      selectSize->setCurrentItem(0);
     else if (columns==80&&lines==24)
-        selectSize->setCurrentItem(1);
+      selectSize->setCurrentItem(1);
     else if (columns==80&&lines==25)
-        selectSize->setCurrentItem(2);
+      selectSize->setCurrentItem(2);
     else if (columns==80&&lines==40)
-        selectSize->setCurrentItem(3);
+      selectSize->setCurrentItem(3);
     else if (columns==80&&lines==52)
-        selectSize->setCurrentItem(4);
+      selectSize->setCurrentItem(4);
     else
-        selectSize->setCurrentItem(5);
+      selectSize->setCurrentItem(5);
     selectSize->blockSignals(false);
   }
 
@@ -2159,12 +2191,12 @@ void Konsole::updateTitle()
 
   setCaption( se->fullTitle() );
   setWindowIconText( se->IconText() );
-  tabwidget->setTabIconSet(se->widget(), iconSetForSession(se));
+  tabwidget->setTabIcon(tabwidget->indexOf( se->widget() ), iconSetForSession(se));
   QString icon = se->IconName();
   KToggleAction *ra = session2action.find(se);
   if (ra)
     // FIXME KAction port - should check to see if icon() == KIcon(icon), but currently won't work (as creates two KIconEngines)
-    ra->setIconName(icon);
+    ra->setIcon(KIcon(icon));
   if (m_tabViewMode == ShowIconOnly)
     tabwidget->setTabText( se_index, QString() );
   else if (b_matchTabWinTitle)
@@ -2203,10 +2235,10 @@ bool Konsole::fullScreen()
 void Konsole::setFullScreen(bool on)
 {
   if( on )
-      showFullScreen();
+    showFullScreen();
   else {
-      if( isFullScreen()) // showNormal() may also do unminimize, unmaximize etc. :(
-          showNormal();
+    if( isFullScreen()) // showNormal() may also do unminimize, unmaximize etc. :(
+      showNormal();
   }
 }
 
@@ -2218,7 +2250,7 @@ void Konsole::updateFullScreen( bool on )
     showFullScreen();
   else {
     if( isFullScreen()) // showNormal() may also do unminimize, unmaximize etc. :(
-        showNormal();
+      showNormal();
     updateTitle(); // restore caption of window
   }
   updateRMBMenu();
@@ -2247,7 +2279,7 @@ void Konsole::disableMasterModeConnections()
         TESession *to = to_it.current();
         if (to!=from)
           disconnect(from->widget(),SIGNAL(keyPressedSignal(QKeyEvent*)),
-                     to->getEmulation(),SLOT(onKeyPress(QKeyEvent*)));
+              to->getEmulation(),SLOT(onKeyPress(QKeyEvent*)));
       }
     }
   }
@@ -2264,7 +2296,7 @@ void Konsole::enableMasterModeConnections()
         TESession *to = to_it.current();
         if (to!=from) {
           connect(from->widget(),SIGNAL(keyPressedSignal(QKeyEvent*)),
-                  to->getEmulation(),SLOT(onKeyPress(QKeyEvent*)));
+              to->getEmulation(),SLOT(onKeyPress(QKeyEvent*)));
         }
       }
     }
@@ -2291,9 +2323,9 @@ void Konsole::sendAllSessions(const QString &text)
 
 KUrl Konsole::baseURL() const
 {
-   KUrl url;
-   url.setPath(se->getCwd()+'/');
-   return url;
+  KUrl url;
+  url.setPath(se->getCwd()+'/');
+  return url;
 }
 
 void Konsole::enterURL(const QString& URL, const QString&)
@@ -2311,9 +2343,9 @@ void Konsole::enterURL(const QString& URL, const QString&)
     newtext = u.protocol();
     bool isSSH = (newtext == "ssh");
     if (u.port() && isSSH)
-       newtext += " -p " + QString().setNum(u.port());
+      newtext += " -p " + QString().setNum(u.port());
     if (u.hasUser())
-       newtext += " -l " + u.user();
+      newtext += " -l " + u.user();
 
     /*
      * If we have a host, connect.
@@ -2321,7 +2353,7 @@ void Konsole::enterURL(const QString& URL, const QString&)
     if (u.hasHost()) {
       newtext = newtext + ' ' + u.host();
       if (u.port() && !isSSH)
-         newtext += QString(" %1").arg(u.port());
+        newtext += QString(" %1").arg(u.port());
       se->setUserTitle(31,"");           // we don't know remote cwd
       te->emitText(newtext + "\r");
     }
@@ -2348,19 +2380,19 @@ void Konsole::slotResetClearTerminal()
 
 void Konsole::sendSignal( QAction* action )
 {
-    if ( se )
-      se->sendSignal( action->data().toInt() );
+  if ( se )
+    se->sendSignal( action->data().toInt() );
 }
 
 void Konsole::runSession(TESession* s)
 {
-    KToggleAction *ra = session2action.find(s);
-    ra->setChecked(true);
-    activateSession(s);
+  KToggleAction *ra = session2action.find(s);
+  ra->setChecked(true);
+  activateSession(s);
 
-    // give some time to get through the
-    // resize events before starting up.
-    QTimer::singleShot(100,s,SLOT(run()));
+  // give some time to get through the
+  // resize events before starting up.
+  QTimer::singleShot(100,s,SLOT(run()));
 }
 
 void Konsole::addSession(TESession* s)
@@ -2370,20 +2402,20 @@ void Konsole::addSession(TESession* s)
   bool nameOk;
   int count = 1;
   do {
-     nameOk = true;
-     for (TESession *ses = sessions.first(); ses; ses = sessions.next())
-     {
-        if (newTitle == ses->Title())
-        {
-           nameOk = false;
-           break;
-        }
-     }
-     if (!nameOk)
-     {
-       count++;
-       newTitle = i18nc("abbreviation of number","%1 No. %2", s->Title(), count);
-     }
+    nameOk = true;
+    for (TESession *ses = sessions.first(); ses; ses = sessions.next())
+    {
+      if (newTitle == ses->Title())
+      {
+        nameOk = false;
+        break;
+      }
+    }
+    if (!nameOk)
+    {
+      count++;
+      newTitle = i18nc("abbreviation of number","%1 No. %2", s->Title(), count);
+    }
   }
   while (!nameOk);
 
@@ -2391,7 +2423,7 @@ void Konsole::addSession(TESession* s)
 
   // create an action for the session
   KToggleAction *ra = new KToggleAction(KIcon(s->IconName()), newTitle.replace('&',"&&"),
-                                        m_shortcuts, QString());
+      m_shortcuts, QString());
   connect(ra, SIGNAL(toggled(bool)), SLOT(activateSession()));
   ra->setActionGroup(m_sessionGroup);
   ra->setChecked(true);
@@ -2400,13 +2432,13 @@ void Konsole::addSession(TESession* s)
   session2action.insert(s,ra);
   sessions.append(s);
   if (sessions.count()>1) {
-     if (!m_menuCreated)
-        makeGUI();
-     m_detachSession->setEnabled(true);
+    if (!m_menuCreated)
+      makeGUI();
+    m_detachSession->setEnabled(true);
   }
 
   if ( m_menuCreated )
-     m_view->addAction( ra );
+    m_view->addAction( ra );
 
   createSessionTab(te, SmallIconSet(s->IconName()), newTitle);
   setSchema(s->schemaNo());
@@ -2479,8 +2511,8 @@ void Konsole::activateSession(const QString &sessionId)
 }
 
 /**
-   Activates a session from the menu
- */
+  Activates a session from the menu
+  */
 void Konsole::activateSession()
 {
   TESession* s = NULL;
@@ -2499,33 +2531,33 @@ void Konsole::activateSession(TESession *s)
 {
   if (se)
   {
-     se->setConnect(false);
-     se->setListenToKeyPress(true);
-     notifySessionState(se,NOTIFYNORMAL);
-     // Delete the session if isn't in the session list any longer.
-     if (sessions.find(se) == -1)
-     {
-        delete se;
-	se = 0;
-     }
+    se->setConnect(false);
+    se->setListenToKeyPress(true);
+    notifySessionState(se,NOTIFYNORMAL);
+    // Delete the session if isn't in the session list any longer.
+    if (sessions.find(se) == -1)
+    {
+      delete se;
+      se = 0;
+    }
   }
   if (se != s)
-     se_previous = se;
+    se_previous = se;
   se = s;
 
   // Set the required schema variables for the current session
   ColorSchema* cs = colors->find( se->schemaNo() );
   if (!cs)
-      cs = (ColorSchema*)colors->at(0);  //the default one
+    cs = (ColorSchema*)colors->at(0);  //the default one
   s_schema = cs->relPath();
   curr_schema = cs->numb();
   pmPath = cs->imagePath();
   n_render = cs->alignment();
 
-// BR 106464 temporary fix...
-//  only 2 sessions opened, 2nd session viewable, right-click on 1st tab and
-//  select 'Detach', close original Konsole window... crash
-//  s is not set properly on original Konsole window
+  // BR 106464 temporary fix...
+  //  only 2 sessions opened, 2nd session viewable, right-click on 1st tab and
+  //  select 'Detach', close original Konsole window... crash
+  //  s is not set properly on original Konsole window
   KToggleAction *ra = session2action.find(se);
   if (!ra) {
     se=sessions.first();        // Get new/correct TESession
@@ -2536,7 +2568,7 @@ void Konsole::activateSession(TESession *s)
   QTimer::singleShot(1,this,SLOT(allowPrevNext())); // hack, hack, hack
 
   if (tabwidget->currentWidget() != se->widget())
-    tabwidget->showPage( se->widget() );
+    tabwidget->setCurrentIndex( tabwidget->indexOf( se->widget() ) );
   te = se->widget();
   if (m_menuCreated) {
     if (selectBell) selectBell->setCurrentItem(te->bellMode());
@@ -2549,7 +2581,7 @@ void Konsole::activateSession(TESession *s)
   s->setConnect(true);
   updateTitle();
   if (!m_menuCreated)
-     return;
+    return;
 
   if (selectSetEncoding) selectSetEncoding->setCurrentItem(se->encodingNo());
   updateKeytabMenu(); // act. the keytab for this session
@@ -2571,14 +2603,14 @@ void Konsole::activateSession(TESession *s)
 void Konsole::slotUpdateSessionConfig(TESession *session)
 {
   if (session == se)
-     activateSession(se);
+    activateSession(se);
 }
 
 void Konsole::slotResizeSession(TESession *session, QSize size)
 {
   TESession *oldSession = se;
   if (se != session)
-     activateSession(session);
+    activateSession(session);
   setColLin(size.width(), size.height());
   activateSession(oldSession);
 }
@@ -2588,53 +2620,53 @@ void Konsole::slotResizeSession(TESession *session, QSize size)
 // FIXME: A lot of duplicate code from slotSetSessionEncoding
 void Konsole::setSessionEncoding( const QString &encoding, TESession *session )
 {
-    if ( encoding.isEmpty() )
-        return;
+  if ( encoding.isEmpty() )
+    return;
 
-    if ( !session )
-        session = se;
+  if ( !session )
+    session = se;
 
-    // availableEncodingNames and descriptEncodingNames are NOT returned
-    // in the same order.
-    QStringList items = KGlobal::charsets()->descriptiveEncodingNames();
-    QString enc;
+  // availableEncodingNames and descriptEncodingNames are NOT returned
+  // in the same order.
+  QStringList items = KGlobal::charsets()->descriptiveEncodingNames();
+  QString enc;
 
-    // For purposes of using 'find' add a space after name,
-    // otherwise 'iso 8859-1' will find 'iso 8859-13'
-    QString t_enc = encoding + ' ';
-    int i = 0;
+  // For purposes of using 'find' add a space after name,
+  // otherwise 'iso 8859-1' will find 'iso 8859-13'
+  QString t_enc = encoding + ' ';
+  int i = 0;
 
-    for( QStringList::ConstIterator it = items.begin(); it != items.end();
-         ++it, ++i)
+  for( QStringList::ConstIterator it = items.begin(); it != items.end();
+      ++it, ++i)
+  {
+    if ( (*it).indexOf( t_enc ) != -1 )
     {
-        if ( (*it).indexOf( t_enc ) != -1 )
-        {
-            enc = *it;
-            break;
-        }
+      enc = *it;
+      break;
     }
-    if (i >= items.count())
-        return;
+  }
+  if (i >= items.count())
+    return;
 
-    bool found = false;
-    enc = KGlobal::charsets()->encodingForName(enc);
-    QTextCodec * qtc = KGlobal::charsets()->codecForName(enc, found);
+  bool found = false;
+  enc = KGlobal::charsets()->encodingForName(enc);
+  QTextCodec * qtc = KGlobal::charsets()->codecForName(enc, found);
 
-    //kDebug()<<"setSessionEncoding="<<enc<<"; "<<i<<"; found="<<found<<endl;
-    if ( !found )
-        return;
+  //kDebug()<<"setSessionEncoding="<<enc<<"; "<<i<<"; found="<<found<<endl;
+  if ( !found )
+    return;
 
-    session->setEncodingNo( i + 1 );    // Take into account Default
-    session->getEmulation()->setCodec(qtc);
-    if (se == session)
-        activateSession(se);
+  session->setEncodingNo( i + 1 );    // Take into account Default
+  session->getEmulation()->setCodec(qtc);
+  if (se == session)
+    activateSession(se);
 
 }
 
 void Konsole::slotSetSessionEncoding(TESession *session, const QString &encoding)
 {
   if (!selectSetEncoding)
-     makeGUI();
+    makeGUI();
 
   if ( !selectSetEncoding )         // when action/settings=false
     return;
@@ -2646,25 +2678,25 @@ void Konsole::slotSetSessionEncoding(TESession *session, const QString &encoding
   for(QStringList::ConstIterator it = items.begin();
       it != items.end(); ++it, ++i)
   {
-     if ((*it).indexOf(encoding) != -1)
-     {
-        enc = *it;
-        break;
-     }
+    if ((*it).indexOf(encoding) != -1)
+    {
+      enc = *it;
+      break;
+    }
   }
   if (i >= items.count())
-     return;
+    return;
 
   bool found = false;
   enc = KGlobal::charsets()->encodingForName(enc);
   QTextCodec * qtc = KGlobal::charsets()->codecForName(enc, found);
   if(!found)
-     return;
+    return;
 
   session->setEncodingNo( i + 1 );    // Take into account Default
   session->getEmulation()->setCodec(qtc);
   if (se == session)
-     activateSession(se);
+    activateSession(se);
 }
 
 void Konsole::slotGetSessionSchema(TESession *session, QString &schema)
@@ -2723,8 +2755,8 @@ void Konsole::newSession(int i)
   if (i == SESSION_NEW_WINDOW_ID)
   {
     // TODO: "type" isn't passed properly
-    Konsole* konsole = new Konsole(name(), b_histEnabled, !menubar->isHidden(), n_tabbar != TabNone, b_framevis,
-                                   n_scroll != TEWidget::SCRNONE, 0, false, 0);
+    Konsole* konsole = new Konsole(objectName().toLatin1(), b_histEnabled, !menubar->isHidden(), n_tabbar != TabNone, b_framevis,
+        n_scroll != TEWidget::SCRNONE, 0, false, 0);
     konsole->newSession();
     konsole->enableFullScripting(b_fullScripting);
     konsole->enableFixedSize(b_fixedSize);
@@ -2746,8 +2778,8 @@ void Konsole::newSessionTabbar(int i)
   if (i == SESSION_NEW_WINDOW_ID)
   {
     // TODO: "type" isn't passed properly
-    Konsole* konsole = new Konsole(name(), b_histEnabled, !menubar->isHidden(), n_tabbar != TabNone, b_framevis,
-                                   n_scroll != TEWidget::SCRNONE, 0, false, 0);
+    Konsole* konsole = new Konsole(objectName().toLatin1(), b_histEnabled, !menubar->isHidden(), n_tabbar != TabNone, b_framevis,
+        n_scroll != TEWidget::SCRNONE, 0, false, 0);
     konsole->newSession();
     konsole->enableFullScripting(b_fullScripting);
     konsole->enableFixedSize(b_fixedSize);
@@ -2768,15 +2800,15 @@ QString Konsole::newSession(const QString &type)
 {
   KSimpleConfig *co;
   if (type.isEmpty())
-     co = defaultSession();
+    co = defaultSession();
   else
-     co = new KSimpleConfig(locate("appdata", type + ".desktop"), true /* read only */);
+    co = new KSimpleConfig(locate("appdata", type + ".desktop"), true /* read only */);
   return newSession(co);
 }
 
 QString Konsole::newSession(KSimpleConfig *co, QString program, const QStringList &args,
-                            const QString &_term,const QString &_icon,
-                            const QString &_title, const QString &_cwd)
+    const QString &_term,const QString &_icon,
+    const QString &_title, const QString &_cwd)
 {
   QString emu = "xterm";
   QString icon = "konsole";
@@ -2788,53 +2820,53 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStringLis
   QStringList cmdArgs;
 
   if (co) {
-     co->setDesktopGroup();
-     emu = co->readEntry("Term", emu);
-     key = co->readEntry("KeyTab", key);
-     sch = co->readEntry("Schema", sch);
-     txt = co->readEntry("Name");
-     QVariant v_font = co->readEntry("defaultfont", QVariant(font));
-     font = v_font.value<QFont>();
-     icon = co->readEntry("Icon", icon);
-     cwd = co->readPathEntry("Cwd");
+    co->setDesktopGroup();
+    emu = co->readEntry("Term", emu);
+    key = co->readEntry("KeyTab", key);
+    sch = co->readEntry("Schema", sch);
+    txt = co->readEntry("Name");
+    QVariant v_font = co->readEntry("defaultfont", QVariant(font));
+    font = v_font.value<QFont>();
+    icon = co->readEntry("Icon", icon);
+    cwd = co->readPathEntry("Cwd");
   }
 
   if (!_term.isEmpty())
-     emu = _term;
+    emu = _term;
 
   if (!_icon.isEmpty())
-     icon = _icon;
+    icon = _icon;
 
   if (!_title.isEmpty())
-     txt = _title;
+    txt = _title;
 
   // apply workdir only when the session config does not have a directory
   if (cwd.isEmpty())
-     cwd = s_workDir;
+    cwd = s_workDir;
   // bookmarks take precedence over workdir
   // however, --workdir option has precedence in the very first session
   if (!_cwd.isEmpty())
-     cwd = _cwd;
+    cwd = _cwd;
 
   if (!program.isEmpty()) {
-     cmdArgs = args;
+    cmdArgs = args;
   }
   else {
-     program = QFile::decodeName(konsole_shell(cmdArgs));
+    program = QFile::decodeName(konsole_shell(cmdArgs));
 
-     if (co) {
-        co->setDesktopGroup();
-        QString cmd = co->readPathEntry("Exec");
-        if (!cmd.isEmpty()) {
-          cmdArgs.append("-c");
-          cmdArgs.append(QFile::encodeName(cmd));
-        }
-     }
+    if (co) {
+      co->setDesktopGroup();
+      QString cmd = co->readPathEntry("Exec");
+      if (!cmd.isEmpty()) {
+        cmdArgs.append("-c");
+        cmdArgs.append(QFile::encodeName(cmd));
+      }
+    }
   }
 
   ColorSchema* schema = colors->find(sch);
   if (!schema)
-      schema=(ColorSchema*)colors->at(0);  //the default one
+    schema=(ColorSchema*)colors->at(0);  //the default one
   int schmno = schema->numb();
 
   if (sessions.count()==1 && n_tabbar!=TabNone)
@@ -2844,7 +2876,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStringLis
   te=new TEWidget(0 /*will become a child of the tabwidget*/);
 
   connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
-           this, SLOT(configureRequest(TEWidget*,int,int,int)) );
+      this, SLOT(configureRequest(TEWidget*,int,int,int)) );
   if (te_old) {
     initTEWidget(te, te_old);
   }
@@ -2863,37 +2895,37 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStringLis
   s->enableFullScripting(b_fullScripting);
   // If you add any new signal-slot connection below, think about doing it in konsolePart too
   connect( s,SIGNAL(done(TESession*)),
-           this,SLOT(doneSession(TESession*)) );
+      this,SLOT(doneSession(TESession*)) );
   connect( s, SIGNAL( updateTitle() ),
-           this, SLOT( updateTitle() ) );
+      this, SLOT( updateTitle() ) );
   connect( s, SIGNAL( notifySessionState(TESession*, int) ),
-           this, SLOT( notifySessionState(TESession*, int)) );
+      this, SLOT( notifySessionState(TESession*, int)) );
   connect( s, SIGNAL(disableMasterModeConnections()),
-           this, SLOT(disableMasterModeConnections()) );
+      this, SLOT(disableMasterModeConnections()) );
   connect( s, SIGNAL(enableMasterModeConnections()),
-           this, SLOT(enableMasterModeConnections()) );
+      this, SLOT(enableMasterModeConnections()) );
   connect( s, SIGNAL(renameSession(TESession*,const QString&)),
-           this, SLOT(slotRenameSession(TESession*, const QString&)) );
+      this, SLOT(slotRenameSession(TESession*, const QString&)) );
   connect( s->getEmulation(), SIGNAL(changeColumns(int)),
-           this, SLOT(changeColumns(int)) );
+      this, SLOT(changeColumns(int)) );
   connect( s->getEmulation(), SIGNAL(changeColLin(int,int)),
-           this, SLOT(changeColLin(int,int)) );
+      this, SLOT(changeColLin(int,int)) );
   connect( s->getEmulation(), SIGNAL(ImageSizeChanged(int,int)),
-           this, SLOT(notifySize(int,int)));
+      this, SLOT(notifySize(int,int)));
   connect( s, SIGNAL(zmodemDetected(TESession*)),
-           this, SLOT(slotZModemDetected(TESession*)));
+      this, SLOT(slotZModemDetected(TESession*)));
   connect( s, SIGNAL(updateSessionConfig(TESession*)),
-           this, SLOT(slotUpdateSessionConfig(TESession*)));
+      this, SLOT(slotUpdateSessionConfig(TESession*)));
   connect( s, SIGNAL(resizeSession(TESession*, QSize)),
-           this, SLOT(slotResizeSession(TESession*, QSize)));
+      this, SLOT(slotResizeSession(TESession*, QSize)));
   connect( s, SIGNAL(setSessionEncoding(TESession*, const QString &)),
-           this, SLOT(slotSetSessionEncoding(TESession*, const QString &)));
+      this, SLOT(slotSetSessionEncoding(TESession*, const QString &)));
   connect( s, SIGNAL(getSessionSchema(TESession*, QString &)),
-           this, SLOT(slotGetSessionSchema(TESession*, QString &)));
+      this, SLOT(slotGetSessionSchema(TESession*, QString &)));
   connect( s, SIGNAL(setSessionSchema(TESession*, const QString &)),
-           this, SLOT(slotSetSessionSchema(TESession*, const QString &)));
+      this, SLOT(slotSetSessionSchema(TESession*, const QString &)));
   connect( s, SIGNAL(changeTabTextColor(TESession*, int)),
-           this,SLOT(changeTabTextColor(TESession*, int)) );
+      this,SLOT(changeTabTextColor(TESession*, int)) );
 
   s->widget()->setVTFont(defaultFont);// Hack to set font again after newSession
   s->setSchemaNo(schmno);
@@ -2930,52 +2962,52 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStringLis
  */
 void Konsole::newSession(const QString& sURL, const QString& title)
 {
-   QStringList args;
-   QString protocol, path, login, host;
+  QStringList args;
+  QString protocol, path, login, host;
 
-   KUrl url = KUrl(sURL);
-   if ((url.protocol() == "file") && (url.hasPath())) {
-     KSimpleConfig *co = defaultSession();
-     path = url.path();
-     newSession(co, QString(), QStringList(), QString(), QString(),
-                title.isEmpty() ? path : title, path);
-     return;
-   }
-   else if ((!url.protocol().isEmpty()) && (url.hasHost())) {
-     protocol = url.protocol();
-     bool isSSH = (protocol == "ssh");
-     args.append( protocol.toLatin1() ); /* argv[0] == command to run. */
-     host = url.host();
-     if (url.port() && isSSH) {
-       args.append("-p");
-       args.append(QByteArray().setNum(url.port()));
-     }
-     if (url.hasUser()) {
-       login = url.user();
-       args.append("-l");
-       args.append(login.toLatin1());
-     }
-     args.append(host.toLatin1());
-     if (url.port() && !isSSH)
-       args.append(QByteArray().setNum(url.port()));
-     newSession( NULL, protocol.toLatin1() /* protocol */, args /* arguments */,
-                 QString() /*term*/, QString() /*icon*/,
- 	        title.isEmpty() ? path : title /*title*/, QString() /*cwd*/);
-     return;
-   }
-   /*
-    * We can't create a session without a protocol.
-    * We should ideally popup a warning.
-    */
+  KUrl url = KUrl(sURL);
+  if ((url.protocol() == "file") && (url.hasPath())) {
+    KSimpleConfig *co = defaultSession();
+    path = url.path();
+    newSession(co, QString(), QStringList(), QString(), QString(),
+        title.isEmpty() ? path : title, path);
+    return;
+  }
+  else if ((!url.protocol().isEmpty()) && (url.hasHost())) {
+    protocol = url.protocol();
+    bool isSSH = (protocol == "ssh");
+    args.append( protocol.toLatin1() ); /* argv[0] == command to run. */
+    host = url.host();
+    if (url.port() && isSSH) {
+      args.append("-p");
+      args.append(QByteArray().setNum(url.port()));
+    }
+    if (url.hasUser()) {
+      login = url.user();
+      args.append("-l");
+      args.append(login.toLatin1());
+    }
+    args.append(host.toLatin1());
+    if (url.port() && !isSSH)
+      args.append(QByteArray().setNum(url.port()));
+    newSession( NULL, protocol.toLatin1() /* protocol */, args /* arguments */,
+        QString() /*term*/, QString() /*icon*/,
+        title.isEmpty() ? path : title /*title*/, QString() /*cwd*/);
+    return;
+  }
+  /*
+   * We can't create a session without a protocol.
+   * We should ideally popup a warning.
+   */
 }
 
 void Konsole::confirmCloseCurrentSession()
 {
-   if (KMessageBox::warningContinueCancel(this,
-     i18n("Are you sure that you want to close the current session?"),
-     i18n("Close Confirmation"), KGuiItem(i18n("C&lose Session"),"tab_remove"),
-     "ConfirmCloseSession")==KMessageBox::Continue)
-       closeCurrentSession();
+  if (KMessageBox::warningContinueCancel(this,
+        i18n("Are you sure that you want to close the current session?"),
+        i18n("Close Confirmation"), KGuiItem(i18n("C&lose Session"),"tab_remove"),
+        "ConfirmCloseSession")==KMessageBox::Continue)
+    closeCurrentSession();
 }
 
 void Konsole::closeCurrentSession()
@@ -3005,7 +3037,7 @@ void Konsole::doneSession(TESession* s)
   }
   delete s->widget();
   if(m_removeSessionButton )
-      m_removeSessionButton->setEnabled(tabwidget->count()>1);
+    m_removeSessionButton->setEnabled(tabwidget->count()>1);
   session2action.remove(s);
   action2session.remove(ra);
   int sessionIndex = sessions.findRef(s);
@@ -3048,7 +3080,7 @@ void Konsole::doneSession(TESession* s)
   if (sessions.count()==1) {
     m_detachSession->setEnabled(false);
     if (b_dynamicTabHide && !tabwidget->isTabBarHidden())
-       tabwidget->setTabBarHidden(true);
+      tabwidget->setTabBarHidden(true);
   }
 }
 
@@ -3079,7 +3111,7 @@ void Konsole::slotMovedTab(int from, int to)
 
   KToggleAction *ra = session2action.find(_se);
   m_view->removeAction( ra );
-  ra->plug(m_view,(m_view->count()-sessions.count()+1)+to);
+  ra->plug(m_view,(m_view->actions().count()-sessions.count()+1)+to);
 
   if (to==tabwidget->currentIndex()) {
     if (!m_menuCreated)
@@ -3102,19 +3134,19 @@ void Konsole::moveSessionLeft()
 
   KToggleAction *ra = session2action.find(se);
   m_view->removeAction( ra );
-  ra->plug(m_view,(m_view->count()-sessions.count()+1)+position-1);
+  ra->plug(m_view,(m_view->actions().count()-sessions.count()+1)+position-1);
 
   QColor oldcolor = tabwidget->tabTextColor(tabwidget->indexOf(se->widget()));
-  
+
   tabwidget->blockSignals(true);
   tabwidget->removePage(se->widget());
   tabwidget->blockSignals(false);
   QString title = se->Title();
   createSessionTab(se->widget(), iconSetForSession(se), 
-                   title.replace('&', "&&"), position-1);
-  tabwidget->showPage(se->widget());
+      title.replace('&', "&&"), position-1);
+  tabwidget->setCurrentIndex( tabwidget->indexOf( se->widget() ));
   tabwidget->setTabTextColor(tabwidget->indexOf(se->widget()),oldcolor);
-  
+
   if (!m_menuCreated)
     makeGUI();
   m_moveSessionLeft->setEnabled(position-1>0);
@@ -3135,19 +3167,19 @@ void Konsole::moveSessionRight()
 
   KToggleAction *ra = session2action.find(se);
   m_view->removeAction( ra );
-  ra->plug(m_view,(m_view->count()-sessions.count()+1)+position+1);
+  ra->plug(m_view,(m_view->actions().count()-sessions.count()+1)+position+1);
 
   QColor oldcolor = tabwidget->tabTextColor(tabwidget->indexOf(se->widget()));
-  
+
   tabwidget->blockSignals(true);
   tabwidget->removePage(se->widget());
   tabwidget->blockSignals(false);
   QString title = se->Title();
   createSessionTab(se->widget(), iconSetForSession(se), 
-                   title.replace('&', "&&"), position+1);
-  tabwidget->showPage(se->widget());
+      title.replace('&', "&&"), position+1);
+  tabwidget->setCurrentIndex( tabwidget->indexOf( se->widget() ) );
   tabwidget->setTabTextColor(tabwidget->indexOf(se->widget()),oldcolor);
-  
+
   if (!m_menuCreated)
     makeGUI();
   m_moveSessionLeft->setEnabled(true);
@@ -3187,15 +3219,15 @@ void Konsole::initTabColor(QColor color)
 
 void Konsole::initHistory(int lines, bool enable)
 {
-return;
-   // If no History#= is given in the profile, use the history
-   // parameter saved in konsolerc.
-   if ( lines < 0 ) lines = m_histSize;
+  return;
+  // If no History#= is given in the profile, use the history
+  // parameter saved in konsolerc.
+  if ( lines < 0 ) lines = m_histSize;
 
-   if ( enable )
-      se->setHistory( HistoryTypeBuffer( lines ) );
-   else
-      se->setHistory( HistoryTypeNone() );
+  if ( enable )
+    se->setHistory( HistoryTypeBuffer( lines ) );
+  else
+    se->setHistory( HistoryTypeNone() );
 }
 
 void Konsole::slotToggleMasterMode()
@@ -3238,28 +3270,28 @@ void Konsole::notifySessionState(TESession* session, int state)
     case NOTIFYACTIVITY: state_iconname = "activity";
                          break;
     case NOTIFYSILENCE : state_iconname = "silence";
-			 break;
+                         break;
   }
   if (!state_iconname.isEmpty()
       && session->testAndSetStateIconName(state_iconname)
       && m_tabViewMode != ShowTextOnly) {
 
     QPixmap normal = KGlobal::instance()->iconLoader()->loadIcon(state_iconname,
-                       K3Icon::Small, 0, K3Icon::DefaultState, 0L, true);
+        K3Icon::Small, 0, K3Icon::DefaultState, 0L, true);
     QPixmap active = KGlobal::instance()->iconLoader()->loadIcon(state_iconname,
-                       K3Icon::Small, 0, K3Icon::ActiveState, 0L, true);
+        K3Icon::Small, 0, K3Icon::ActiveState, 0L, true);
 
     // make sure they are not larger than 16x16
     if (normal.width() > 16 || normal.height() > 16)
-	normal = normal.scaled(16,16, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+      normal = normal.scaled(16,16, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     if (active.width() > 16 || active.height() > 16)
-    	active = active.scaled(16,16, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+      active = active.scaled(16,16, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
     QIcon iconset;
-    iconset.setPixmap(normal, QIcon::Small, QIcon::Normal);
-    iconset.setPixmap(active, QIcon::Small, QIcon::Active);
+    iconset.addPixmap(normal, QIcon::Normal);
+    iconset.addPixmap(active, QIcon::Active);
 
-    tabwidget->setTabIconSet(session->widget(), iconset);
+    tabwidget->setTabIcon(tabwidget->indexOf( session->widget() ), iconset);
   }
 }
 
@@ -3267,48 +3299,48 @@ void Konsole::notifySessionState(TESession* session, int state)
 
 void Konsole::buildSessionMenus()
 {
-   m_session->clear();
-   if (m_tabbarSessionsCommands)
-      m_tabbarSessionsCommands->clear();
+  m_session->clear();
+  if (m_tabbarSessionsCommands)
+    m_tabbarSessionsCommands->clear();
 
-   loadSessionCommands();
-   loadScreenSessions();
+  loadSessionCommands();
+  loadScreenSessions();
 
-   createSessionMenus();
+  createSessionMenus();
 
-   if (KAuthorized::authorizeKAction("file_print"))
-   {
-      m_session->addSeparator();
-      m_session->addAction( m_print );
-   }
+  if (KAuthorized::authorizeKAction("file_print"))
+  {
+    m_session->addSeparator();
+    m_session->addAction( m_print );
+  }
 
-   m_session->addSeparator();
-   m_session->addAction( m_closeSession );
+  m_session->addSeparator();
+  m_session->addAction( m_closeSession );
 
-   m_session->addSeparator();
-   m_session->addAction( m_quit );
+  m_session->addSeparator();
+  m_session->addAction( m_quit );
 }
 
 static void insertItemSorted(KMenu *menu, const QIcon &iconSet, const QString &txt, int id)
 {
   const int defaultId = SESSION_NEW_SHELL_ID; // The id of the 'new' item.
   int index = menu->indexOf(defaultId);
-  int count = menu->count();
+  int count = menu->actions().count();
   if (index >= 0)
   {
-     index++; // Skip New Window
-     index++; // Skip separator
-     while(true)
-     {
-        index++;
-        if (index >= count)
-        {
-           index = -1; // Insert at end
-           break;
-        }
-        if (menu->actions()[index]->text() > txt)
-           break; // Insert before this item
-     }
+    index++; // Skip New Window
+    index++; // Skip separator
+    while(true)
+    {
+      index++;
+      if (index >= count)
+      {
+        index = -1; // Insert at end
+        break;
+      }
+      if (menu->actions()[index]->text() > txt)
+        break; // Insert before this item
+    }
   }
   menu->insertItem(iconSet, txt, id, index);
 }
@@ -3327,7 +3359,7 @@ void Konsole::addSessionCommand(const QString &path)
   // try to locate the binary
   QString exec= co->readPathEntry("Exec");
   if (exec.startsWith("su -c \'")) {
-     exec = exec.mid(7,exec.length()-8);
+    exec = exec.mid(7,exec.length()-8);
   }
 
   exec = KRun::binaryName(exec, false);
@@ -3338,7 +3370,7 @@ void Konsole::addSessionCommand(const QString &path)
       || ( !exec.isEmpty() && pexec.isEmpty() ) )
   {
     if (!path.isEmpty())
-       delete co;
+      delete co;
     kWarning()<<"Unable to use "<<path.toLatin1()<<endl;
     return; // ignore
   }
@@ -3410,8 +3442,8 @@ void Konsole::createSessionMenus()
                         i18n("New &Window"), SESSION_NEW_WINDOW_ID);
   m_tabbarSessionsCommands->insertItem(SmallIconSet("window_new"),
                         i18n("New &Window"), SESSION_NEW_WINDOW_ID);
-  m_session->insertSeparator();
-  m_tabbarSessionsCommands->insertSeparator();
+  m_session->addSeparator();
+  m_tabbarSessionsCommands->addSeparator();
 
   Q3IntDictIterator<KSimpleConfig> it( no2command );
   for ( ; it.current(); ++it ) {
@@ -3584,7 +3616,9 @@ void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
       rootxpms[tewidget]->setFadeEffect(s->tr_x(), QColor(s->tr_r(), s->tr_g(), s->tr_b()));
     } else {
       tewidget->setBlendColor(qRgba(s->tr_r(), s->tr_g(), s->tr_b(), int(s->tr_x() * 255)));
-      tewidget->setErasePixmap( QPixmap() ); // make sure any background pixmap is unset
+      QPalette palette;
+      palette.setBrush( tewidget->backgroundRole(), QBrush( QPixmap() ) );
+      tewidget->setPalette( palette ); // make sure any background pixmap is unset
     }
   } else {
       if (rootxpms[tewidget]) {
@@ -3651,7 +3685,7 @@ void Konsole::detachSession(TESession* _se) {
   disconnect( _se,SIGNAL(renameSession(TESession*,const QString&)), this,SLOT(slotRenameSession(TESession*,const QString&)) );
 
   // TODO: "type" isn't passed properly
-  Konsole* konsole = new Konsole(name(), b_histEnabled, !menubar->isHidden(), n_tabbar != TabNone, b_framevis,
+  Konsole* konsole = new Konsole( objectName().toLatin1(), b_histEnabled, !menubar->isHidden(), n_tabbar != TabNone, b_framevis,
                                  n_scroll != TEWidget::SCRNONE, 0, false, 0);
   konsole->enableFullScripting(b_fullScripting);
   // TODO; Make this work: konsole->enableFixedSize(b_fixedSize);
@@ -3781,7 +3815,7 @@ void Konsole::slotRenameSession(TESession* ses, const QString &name)
   QString title=name;
   title=title.replace('&',"&&");
   ra->setText(title);
-  ra->setIconName( ses->IconName() ); // I don't know why it is needed here
+  ra->setIcon( KIcon( ses->IconName() ) ); // I don't know why it is needed here
   if (m_tabViewMode!=ShowIconOnly) {
     int se_index = tabwidget->indexOf( se->widget() );
     tabwidget->setTabText( se_index, title );
