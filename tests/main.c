@@ -1913,7 +1913,7 @@ initterminal(pn) int pn; {
 #endif
 
 #ifdef SARG10
-  /* Set up neccesary TOPS-10 terminal parameters	*/
+  /* Set up necessary TOPS-10 terminal parameters	*/
 
   trmop(02041, `VT100`);	/* tty type vt100	*/
   trmop(02002, 0);	/* tty no tape	*/

@@ -26,7 +26,7 @@
     The stuff in here does not belong to the terminal emulation framework,
     but to main.cpp. It serves it's duty by providing a single reference
     to TEPTy/Emulation pairs. In fact, it is only there to demonstrate one
-    of the abilities of the framework - multible sessions.
+    of the abilities of the framework - multiple sessions.
 */
 
 TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _args, const QString &_term, ulong _winId, const QString &_sessionId, const QString &_initial_cwd)
@@ -72,7 +72,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _ar
   iconName = "konsole";
 
   //kDebug(1211)<<"TESession ctor() sh->setSize()"<<endl;
-  sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
+  sh->setSize(te->Lines(),te->Columns()); // not absolutely necessary
   sh->useUtf8(em->utf8());
   //kDebug(1211)<<"TESession ctor() connecting"<<endl;
   connect( sh,SIGNAL(block_in(const char*,int)),this,SLOT(onRcvBlock(const char*,int)) );
@@ -122,7 +122,7 @@ void TESession::changeWidget(TEWidget* w)
   em->changeGUI(w);
   font_h = te->fontHeight();
   font_w = te->fontWidth();
-  sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
+  sh->setSize(te->Lines(),te->Columns()); // not absolutely necessary
 
   te->setDefaultBackColor(modifiedBackground);
 

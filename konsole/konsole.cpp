@@ -32,7 +32,7 @@
 
 /*STATE:
 
-  konsole/kwin session management, parts stuff, config, menues
+  konsole/kwin session management, parts stuff, config, menus
   are all in bad need for a complete rewrite.
 
   While the emulation core (TEmulation, TEVt102, TEScreen, TEWidget)
@@ -366,7 +366,7 @@ Konsole::~Konsole()
       sessions.next();
     }
 
-    // Wait a bit for all childs to clean themselves up.
+    // Wait a bit for all children to clean themselves up.
     while(sessions.count() && KProcessController::theKProcessController->waitForProcessExit(1))
         ;
 
@@ -4364,7 +4364,7 @@ Q3PtrList<TEWidget> Konsole::activeTEs()
    if (sessions.count()>0)
      for (TESession *_se = sessions.first(); _se; _se = sessions.next())
         ret.append(_se->widget());
-   else if (te)  // check for startup initalization case in newSession()
+   else if (te)  // check for startup initialization case in newSession()
      ret.append(te);
    return ret;
 }

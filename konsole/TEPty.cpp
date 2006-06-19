@@ -23,7 +23,7 @@
     \brief Ptys provide a pseudo terminal connection to a program.
 
     Although closely related to pipes, these pseudo terminal connections have
-    some ability, that makes it nessesary to uses them. Most importent, they
+    some ability, that makes it necessary to uses them. Most importent, they
     know about changing screen sizes and UNIX job control.
 
     Within the terminal emulation framework, this class represents the
@@ -55,7 +55,7 @@
     over the (obsolete) predecessor.
 
     There's a sinister ioctl(2), signal(2) and job control stuff
-    nessesary to make everything work as it should.
+    necessary to make everything work as it should.
 
     Much of the stuff can be simplified by using openpty from glibc2.
     Compatibility issues with obsolete installations and other unixes
