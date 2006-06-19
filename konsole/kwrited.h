@@ -20,7 +20,6 @@ private Q_SLOTS:
   void block_in(int fd);
   void clearText(void);
 private:
-  Q3TextEdit* wid;
   KPty* pty;
 };
 
@@ -28,7 +27,7 @@ class KWritedModule : public KDEDModule
 {
   Q_OBJECT
 public:
-  KWritedModule( const QString& obj );
+  KWritedModule();
  ~KWritedModule();
 private:
   KWrited* pro;

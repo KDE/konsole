@@ -99,8 +99,8 @@ void KWrited::contextMenuEvent(QContextMenuEvent * e)
    delete menu;
 }
 
-KWritedModule::KWritedModule( const QString& obj )
-    : KDEDModule( obj )
+KWritedModule::KWritedModule()
+    : KDEDModule()
 {
     KGlobal::locale()->insertCatalog("konsole");
     pro = new KWrited;
@@ -113,9 +113,9 @@ KWritedModule::~KWritedModule()
 }
 
 extern "C"
-KDE_EXPORT KDEDModule* create_kwrited( const QString& obj )
+KDE_EXPORT KDEDModule* create_kwrited()
     {
-    return new KWritedModule( obj );
+    return new KWritedModule();
     }
 
 #include "kwrited.moc"
