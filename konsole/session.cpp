@@ -764,7 +764,7 @@ void TESession::setFont(const QString &font)
   if (tmp.fromString(font))
     te->setVTFont(tmp);
   else
-    kdWarning()<<"unknown font: "<<font<<endl;
+    kWarning()<<"unknown font: "<<font<<endl;
 }
 
 QString TESession::encoding()
