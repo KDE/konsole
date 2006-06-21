@@ -139,7 +139,7 @@ private slots:
   void activateSession();
   void activateSession(TESession*);
   void closeCurrentSession();
-  void confirmCloseCurrentSession();
+  void confirmCloseCurrentSession(TESession* _se=0);
   void doneSession(TESession*);
   void slotCouldNotClose();
   void toggleFullScreen();
