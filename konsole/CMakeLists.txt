@@ -31,7 +31,11 @@ set(konsole_KDEINIT_SRCS
    konsolebookmarkhandler.cpp 
    konsolebookmarkmenu.cpp 
    zmodem_dialog.cpp 
-   printsettings.cpp )
+   printsettings.cpp 
+   konsoleadaptor.cpp
+   sessionadaptor.cpp
+   konsolescriptingadaptor.cpp
+   sessionscriptingadaptor.cpp )
 
 kde4_automoc(${konsole_KDEINIT_SRCS})
 
@@ -53,6 +57,8 @@ install(TARGETS konsole DESTINATION bin)
 set(konsolepart_PART_SRCS 
    konsoleadaptor.cpp
    sessionadaptor.cpp
+   konsolescriptingadaptor.cpp
+   sessionscriptingadaptor.cpp
    TEPty.cpp 
    BlockArray.cpp 
    konsole_part.cpp 
@@ -84,18 +90,20 @@ install_targets(${PLUGIN_INSTALL_DIR} konsolepart )
 
 ########### next target ###############
 
-set(kded_kwrited_PART_SRCS kwrited.cpp )
+# kvh - Temp disable kwrited until KDED and dbus are completed.
 
-kde4_automoc(${kded_kwrited_PART_SRCS})
+#set(kded_kwrited_PART_SRCS kwrited.cpp )
+
+#kde4_automoc(${kded_kwrited_PART_SRCS})
 
 
-kde4_add_plugin(kded_kwrited ${kded_kwrited_PART_SRCS})
+#kde4_add_plugin(kded_kwrited ${kded_kwrited_PART_SRCS})
 
-kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kded_kwrited )
+#kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kded_kwrited )
 
-target_link_libraries(kded_kwrited  ${KDE4_KDE3SUPPORT_LIBS})
+#target_link_libraries(kded_kwrited  ${KDE4_KDE3SUPPORT_LIBS})
 
-install_targets(${PLUGIN_INSTALL_DIR} kded_kwrited )
+#install_targets(${PLUGIN_INSTALL_DIR} kded_kwrited )
 
 
 ########### install files ###############

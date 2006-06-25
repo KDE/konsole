@@ -17,7 +17,9 @@
 #include <QStringList>
 #include <QByteArray>
 #include "sessionadaptor.h"
+#include "sessionscriptingadaptor.h"
 #include <dbus/qdbus.h>
+#include <assert.h>
 
 /*! \class TESession
 
@@ -42,6 +44,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _ar
    , silence_seconds(10)
    , add_to_utmp(true)
    , xon_xoff(false)
+   , fullScripting(false)
    , pgm(_pgm)
    , args(_args)
    , sessionId(_sessionId)
@@ -53,7 +56,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _ar
    , encoding_no(0)
 {
 	(void)new SessionAdaptor(this);
-	QDBus::sessionBus().registerObject(_sessionId.toLatin1(), this);
+	QDBus::sessionBus().registerObject("/sessions/"+_sessionId, this);
 	QDBus::sessionBus().busService()->requestName("org.kde.konsole", /*flags=*/0);
   //kDebug(1211)<<"TESession ctor() new TEPty"<<endl;
   sh = new TEPty();
@@ -72,7 +75,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _ar
   iconName = "konsole";
 
   //kDebug(1211)<<"TESession ctor() sh->setSize()"<<endl;
-  sh->setSize(te->Lines(),te->Columns()); // not absolutely necessary
+  sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
   sh->useUtf8(em->utf8());
   //kDebug(1211)<<"TESession ctor() connecting"<<endl;
   connect( sh,SIGNAL(block_in(const char*,int)),this,SLOT(onRcvBlock(const char*,int)) );
@@ -122,7 +125,7 @@ void TESession::changeWidget(TEWidget* w)
   em->changeGUI(w);
   font_h = te->fontHeight();
   font_w = te->fontWidth();
-  sh->setSize(te->Lines(),te->Columns()); // not absolutely necessary
+  sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
 
   te->setDefaultBackColor(modifiedBackground);
 
@@ -145,9 +148,11 @@ void TESession::run()
     QTimer::singleShot(1, this, SLOT(done()));
     return;
   }
-
+#warning "broken"
+#if 0
   QString appId=kapp->dcopClient()->appId();
-
+#endif
+  QString appId("appId");
   QString cwd_save = QDir::currentPath();
   if (!initial_cwd.isEmpty())
      QDir::setCurrent(initial_cwd);
@@ -690,45 +695,12 @@ void TESession::zmodemDone()
   }
 }
 
-
-bool TESession::processDynamic(const DCOPCString &fun, const QByteArray &data, DCOPCString& replyType, QByteArray &replyData)
+void TESession::enableFullScripting(bool b)
 {
-    if (fullScripting)
-    {
-      if (fun == "feedSession(QString)")
-      {
-        QString arg0;
-        QDataStream arg( data );
-        arg >> arg0;
-        feedSession(arg0);
-        replyType = "void";
-        return true;
-      }
-      else if (fun == "sendSession(QString)")
-      {
-        QString arg0;
-        QDataStream arg( data );
-        arg >> arg0;
-        sendSession(arg0);
-        replyType = "void";
-        return true;
-      }
-    }
-    return SessionIface::processDynamic(fun, data, replyType, replyData);
-
+    assert(!(fullScripting && !b) && "fullScripting can't be disabled");
+    if (!fullScripting && b)
+        (void)new SessionScriptingAdaptor(this);
 }
-
-DCOPCStringList TESession::functionsDynamic()
-{
-    DCOPCStringList funcs = SessionIface::functionsDynamic();
-    if (fullScripting)
-    {
-       funcs << "void feedSession(QString text)";
-       funcs << "void sendSession(QString text)";
-    }
-    return funcs;
-}
-
 
 void TESession::onRcvBlock( const char* buf, int len )
 {

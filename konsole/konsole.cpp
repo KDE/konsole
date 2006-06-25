@@ -152,6 +152,8 @@ Time to start a requirement list.
 #include <ktoolinvocation.h>
 #include "printsettings.h"
 #include "konsoleadaptor.h"
+#include "konsolescriptingadaptor.h"
+
 #define KONSOLEDEBUG    kDebug(1211)
 
 #define POPUP_NEW_SESSION_ID 121
@@ -278,7 +280,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 ,s_workDir(workdir)
 {
 	(void)new KonsoleAdaptor(this);
-	QDBus::sessionBus().registerObject(QLatin1String("/konsole"), this);
+	QDBus::sessionBus().registerObject(QLatin1String("/Konsole"), this);
 	QDBus::sessionBus().busService()->requestName("org.kde.konsole", /*flags=*/0);
   m_sessionGroup = new QActionGroup(this);
 
@@ -351,9 +353,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
     if (te) te->setScrollbarLocation(TEWidget::SCRNONE);
   }
 
-//  connect(kapp, SIGNAL(kdisplayFontChanged()), this, SLOT(slotFontChanged()));	
-	QDBus::sessionBus().registerObject(QLatin1String("/konsole"), this);
-	QDBus::sessionBus().busService()->requestName("org.kde.konsole", /*flags=*/0);
+//  connect(kapp, SIGNAL(kdisplayFontChanged()), this, SLOT(slotFontChanged()));
 }
 
 
@@ -2889,7 +2889,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStringLis
 
   te->setMinimumSize(150,70);
 
-  QString sessionId="session-"+QString::number(++sessionIdCounter);
+  QString sessionId="session_"+QString::number(++sessionIdCounter);
   TESession* s = new TESession(te, QFile::encodeName(program),cmdArgs,emu,winId(),sessionId,cwd);
   s->setMonitorSilenceSeconds(monitorSilenceSeconds);
   s->enableFullScripting(b_fullScripting);
@@ -4302,47 +4302,12 @@ void Konsole::smallerFont(void) {
     te->setVTFont( f );
     activateSession();
 }
-#warning "kde4: port it"
-#if 0
-bool Konsole::processDynamic(const DCOPCString &fun, const QByteArray &data, DCOPCString& replyType, QByteArray &replyData)
-{
-    if (b_fullScripting)
-    {
-      if (fun == "feedAllSessions(QString)")
-      {
-        QString arg0;
-        QDataStream arg( data );
-        arg >> arg0;
-        feedAllSessions(arg0);
-        replyType = "void";
-        return true;
-      }
-      else if (fun == "sendAllSessions(QString)")
-      {
-        QString arg0;
-        QDataStream arg( data );
-        arg >> arg0;
-        sendAllSessions(arg0);
-        replyType = "void";
-        return true;
-      }
-    }
-    return KonsoleIface::processDynamic(fun, data, replyType, replyData);
-}
 
-DCOPCStringList Konsole::functionsDynamic()
-{
-    DCOPCStringList funcs = KonsoleIface::functionsDynamic();
-    if (b_fullScripting)
-    {
-      funcs << "void feedAllSessions(QString text)";
-      funcs << "void sendAllSessions(QString text)";
-    }
-    return funcs;
-}
-#endif
 void Konsole::enableFullScripting(bool b)
 {
+    assert(!(b_fullScripting && !b) && "fullScripting can't be disabled");
+    if (!b_fullScripting && b)
+        (void)new KonsoleScriptingAdaptor(this);
     b_fullScripting = b;
     for (TESession *_se = sessions.first(); _se; _se = sessions.next())
        _se->enableFullScripting(b);

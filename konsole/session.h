@@ -94,12 +94,7 @@ public:
   void renameSession(const QString &name);
   QString sessionName() { return title; }
   int sessionPID() { return sh->pid(); }
-#warning "kde4: port it"
-#if 0
-  virtual bool processDynamic(const DCOPCString &fun, const QByteArray &data, DCOPCString& replyType, QByteArray &replyData);
-  virtual DCOPCStringList functionsDynamic();
-#endif  
-  void enableFullScripting(bool b) { fullScripting = b; }
+  void enableFullScripting(bool b);
 
   void startZModem(const QString &rz, const QString &dir, const QStringList &list);
   void cancelZModem();

@@ -112,11 +112,6 @@ public:
   void sendAllSessions(const QString &text);
 
   KUrl baseURL() const;
-#warning "kde4: port it"
-#if 0
-  virtual bool processDynamic(const DCOPCString &fun, const QByteArray &data, DCOPCString& replyType, QByteArray &replyData);
-  virtual DCOPCStringList functionsDynamic();
-#endif
   void callReadPropertiesInternal(KConfig *config, int number) { readPropertiesInternal(config,number); }
 
   enum TabPosition { TabNone, TabTop, TabBottom };
