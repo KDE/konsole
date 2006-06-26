@@ -21,7 +21,7 @@
 #include "schemaeditor.h"
 #include "schemaeditor.moc"
 
-#include <dcopclient.h>
+#include <dbus/qdbus.h>
 
 #include <QLabel>
 #include <QLineEdit>
@@ -82,20 +82,8 @@ SchemaEditor::SchemaEditor(QWidget * parent)
     connect(spix, SIGNAL(done(bool)), SLOT(previewLoaded(bool)));
 #endif
 
-    DCOPClient *client = kapp->dcopClient();
-    if (!client->isAttached())
-	client->attach();
-    QByteArray data;
-
-    QDataStream args(&data, QIODevice::WriteOnly);
-
-
-    args.setVersion(QDataStream::Qt_3_1);
-    args << 1;
-    client->send("kdesktop", "KBackgroundIface", "setExport(int)", data);
-
-
-
+    QDBusInterfacePtr kdesktop("org.kde.kdesktop", "/Background", "org.kde.kdesktop.Background");
+    kdesktop->call( "setExport", 1 );
 
     transparencyCheck->setChecked(true);
     transparencyCheck->setChecked(false);

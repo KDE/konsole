@@ -22,7 +22,7 @@
 //Added by qt3to4:
 #include <QVBoxLayout>
 
-#include <dcopclient.h>
+#include <dbus/qdbus.h>
 
 #include <kaboutdata.h>
 #include <kconfig.h>
@@ -41,7 +41,7 @@ K_EXPORT_COMPONENT_FACTORY( kcm_konsole, ModuleFactory("kcmkonsole") )
 KCMKonsole::KCMKonsole(QWidget * parent, const QStringList&)
 :KCModule(ModuleFactory::instance(), parent)
 {
-    
+
     setQuickHelp( i18n("<h1>Konsole</h1> With this module you can configure Konsole, the KDE terminal"
 		" application. You can configure the generic Konsole options (which can also be "
 		"configured using the RMB) and you can edit the schemas and sessions "
@@ -153,10 +153,20 @@ void KCMKonsole::save()
 
     emit changed(false);
 
-    DCOPClient *dcc = kapp->dcopClient();
-    dcc->send("konsole-*", "konsole", "reparseConfiguration()", QByteArray());
-    dcc->send("kdesktop", "default", "configure()", QByteArray());
-    dcc->send("klauncher", "klauncher", "reparseConfiguration()", QByteArray());
+#ifdef __GNUC__
+#warning TODO port to a DBus signal
+#endif
+    // call("konsole-*", "konsole", "reparseConfiguration()", QByteArray());
+
+    // ### TODO check this (the object and interface don't exist yet at the time of this writing)
+    QDBusInterfacePtr kdesktop("org.kde.kdesktop", "/Desktop", "org.kde.kdesktop.Desktop");
+    if ( kdesktop->isValid() )
+        kdesktop->call( "configure" );
+
+    // ## Hmm, why do konsole sessions have something to do with klauncher's configuration? (David)
+    QDBusInterfacePtr klauncher("org.kde.klauncher", "/KLauncher", "org.kde.KLauncher");
+    if ( klauncher->isValid() )
+        klauncher->call( "reparseConfiguration" );
 
     if (xonXoffOrig != xonXoffNew)
     {
