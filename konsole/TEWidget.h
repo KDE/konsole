@@ -32,7 +32,8 @@
 #include <QDragEnterEvent>
 #include <QMouseEvent>
 //Should have been added by qt3to4:
-#include <Q3TextDrag>
+// #include <Q3TextDrag>
+#include <QDrag>
 
 #include <kmenu.h>
 
@@ -201,7 +202,7 @@ protected:
     struct _dragInfo {
       DragState       state;
       QPoint          start;
-      Q3TextDrag       *dragObject;
+      QDrag           *dragObject;
     } dragInfo;
 
     virtual int charClass(UINT16) const;

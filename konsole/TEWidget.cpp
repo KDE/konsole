@@ -52,7 +52,6 @@
 #include <QClipboard>
 #include <QStyle>
 #include <QFile>
-#include <q3dragobject.h>
 #include <QLayout>
 #include <QRegExp>
 //Added by qt3to4:
@@ -86,7 +85,6 @@
 #include <knotification.h>
 #include <kglobalsettings.h>
 #include <kshortcut.h>
-#include <k3urldrag.h>
 #include <kio/netaccess.h>
 #include <QLabel>
 #include <QTimer>
@@ -2147,10 +2145,10 @@ void TEWidget::styleChange(QStyle &)
 /*                                                                       */
 /* --------------------------------------------------------------------- */
 
-void TEWidget::dragEnterEvent(QDragEnterEvent* e)
+void TEWidget::dragEnterEvent(QDragEnterEvent* event)
 {
-  e->setAccepted(Q3TextDrag::canDecode(e) ||
-      K3URLDrag::canDecode(e));
+  if (event->mimeData()->hasFormat("text/plain"))
+      event->acceptProposedAction();
 }
 
 enum dropPopupOptions { paste, cd, cp, ln, mv };
@@ -2214,7 +2212,7 @@ void TEWidget::dropEvent(QDropEvent* event)
 
     if (!justPaste) m_drop->popup(mapToGlobal(event->pos()));
   }
-  if(justPaste && Q3TextDrag::decode(event, dropText)) {
+  if(justPaste && event->mimeData()->hasFormat("text/plain")) {
     kDebug(1211) << "Drop:" << dropText.toLocal8Bit() << "\n";
     emit sendStringToEmu(dropText.toLocal8Bit());
     // Paste it
@@ -2224,8 +2222,11 @@ void TEWidget::dropEvent(QDropEvent* event)
 void TEWidget::doDrag()
 {
   dragInfo.state = diDragging;
-  dragInfo.dragObject = new Q3TextDrag(QApplication::clipboard()->text(QClipboard::Selection), this);
-  dragInfo.dragObject->dragCopy();
+  dragInfo.dragObject = new QDrag(this);
+  QMimeData *mimeData = new QMimeData;
+  mimeData->setText(QApplication::clipboard()->text(QClipboard::Selection));
+//   dragInfo.dragObject->dragCopy();
+  dragInfo.dragObject->start(Qt::CopyAction);
   // Don't delete the QTextDrag object.  Qt will delete it when it's done with it.
 }
 
