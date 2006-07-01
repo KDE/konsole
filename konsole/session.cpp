@@ -75,7 +75,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _ar
   iconName = "konsole";
 
   //kDebug(1211)<<"TESession ctor() sh->setSize()"<<endl;
-  sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
+  sh->setSize(te->Lines(),te->Columns()); // not absolutely necessary
   sh->useUtf8(em->utf8());
   //kDebug(1211)<<"TESession ctor() connecting"<<endl;
   connect( sh,SIGNAL(block_in(const char*,int)),this,SLOT(onRcvBlock(const char*,int)) );
@@ -125,7 +125,7 @@ void TESession::changeWidget(TEWidget* w)
   em->changeGUI(w);
   font_h = te->fontHeight();
   font_w = te->fontWidth();
-  sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
+  sh->setSize(te->Lines(),te->Columns()); // not absolutely necessary
 
   te->setDefaultBackColor(modifiedBackground);
 
