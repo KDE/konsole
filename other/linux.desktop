@@ -143,7 +143,7 @@ Comment[zu]=Ikhonsoli Entsha ye-Linux
 Exec=bash
 Schema=Linux.schema
 #VGA
-Font=6
+#Font=6
 Term=linux
 KeyTab=linux
 Cwd=
