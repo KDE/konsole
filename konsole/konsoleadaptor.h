@@ -11,7 +11,7 @@
 #define KONSOLEADAPTOR_H_194211149671306
 
 #include <QtCore/QObject>
-#include <dbus/qdbus.h>
+#include <QtDBus/QtDBus>
 class QByteArray;
 template<class T> class QList;
 template<class Key, class Value> class QMap;
@@ -78,7 +78,7 @@ public Q_SLOTS: // METHODS
     QString newSession();
     void nextSession();
     void prevSession();
-    Q_ASYNC void reparseConfiguration();
+    Q_NOREPLY void reparseConfiguration();
     int sessionCount();
     QString sessionId(int position);
     void setFullScreen(bool on);

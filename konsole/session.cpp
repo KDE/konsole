@@ -18,7 +18,7 @@
 #include <QByteArray>
 #include "sessionadaptor.h"
 #include "sessionscriptingadaptor.h"
-#include <dbus/qdbus.h>
+#include <QtDBus/QtDBus>
 #include <assert.h>
 
 /*! \class TESession

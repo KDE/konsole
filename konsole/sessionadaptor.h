@@ -11,7 +11,7 @@
 #define SESSIONADAPTOR_H_252641149593211
 
 #include <QtCore/QObject>
-#include <dbus/qdbus.h>
+#include <QtDBus/QtDBus>
 class QByteArray;
 template<class T> class QList;
 template<class Key, class Value> class QMap;

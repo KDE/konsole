@@ -22,7 +22,7 @@
 //Added by qt3to4:
 #include <QVBoxLayout>
 
-#include <dbus/qdbus.h>
+#include <QtDBus/QtDBus>
 
 #include <kaboutdata.h>
 #include <kconfig.h>
@@ -159,14 +159,14 @@ void KCMKonsole::save()
     // call("konsole-*", "konsole", "reparseConfiguration()", QByteArray());
 
     // ### TODO check this (the object and interface don't exist yet at the time of this writing)
-    QDBusInterfacePtr kdesktop("org.kde.kdesktop", "/Desktop", "org.kde.kdesktop.Desktop");
-    if ( kdesktop->isValid() )
-        kdesktop->call( "configure" );
+    QDBusInterface kdesktop("org.kde.kdesktop", "/Desktop", "org.kde.kdesktop.Desktop");
+    if ( kdesktop.isValid() )
+        kdesktop.call( "configure" );
 
     // ## Hmm, why do konsole sessions have something to do with klauncher's configuration? (David)
-    QDBusInterfacePtr klauncher("org.kde.klauncher", "/KLauncher", "org.kde.KLauncher");
-    if ( klauncher->isValid() )
-        klauncher->call( "reparseConfiguration" );
+    QDBusInterface klauncher("org.kde.klauncher", "/KLauncher", "org.kde.KLauncher");
+    if ( klauncher.isValid() )
+        klauncher.call( "reparseConfiguration" );
 
     if (xonXoffOrig != xonXoffNew)
     {

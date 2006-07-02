@@ -11,7 +11,7 @@
 #define SESSIONSCRIPTINGADAPTOR_H_115611150842733
 
 #include <QtCore/QObject>
-#include <dbus/qdbus.h>
+#include <QtDBus/QtDBus>
 class QByteArray;
 template<class T> class QList;
 template<class Key, class Value> class QMap;

@@ -21,7 +21,7 @@
 #include "schemaeditor.h"
 #include "schemaeditor.moc"
 
-#include <dbus/qdbus.h>
+#include <QtDBus/QtDBus>
 
 #include <QLabel>
 #include <QLineEdit>
@@ -82,8 +82,8 @@ SchemaEditor::SchemaEditor(QWidget * parent)
     connect(spix, SIGNAL(done(bool)), SLOT(previewLoaded(bool)));
 #endif
 
-    QDBusInterfacePtr kdesktop("org.kde.kdesktop", "/Background", "org.kde.kdesktop.Background");
-    kdesktop->call( "setExport", 1 );
+    QDBusInterface kdesktop("org.kde.kdesktop", "/Background", "org.kde.kdesktop.Background");
+    kdesktop.call( "setExport", 1 );
 
     transparencyCheck->setChecked(true);
     transparencyCheck->setChecked(false);

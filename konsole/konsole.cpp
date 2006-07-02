@@ -96,7 +96,7 @@ Time to start a requirement list.
 #include <kservicetypetrader.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <dbus/qdbus.h>
+#include <QtDBus/QtDBus>
 
 #include <kfiledialog.h>
 #include <kurlrequesterdlg.h>
@@ -3839,7 +3839,7 @@ HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
   setCaption( i18n("History Configuration") );
   setButtons( Help | Default | Ok | Cancel );
   setModal( true );
-  enableButtonSeparator( true );
+  showButtonSeparator( true );
 
   QFrame *mainFrame = new QFrame;
   setMainWidget( mainFrame );
