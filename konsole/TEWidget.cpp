@@ -586,7 +586,8 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
                            QString& str, const ca *attr, bool pm, bool clear)
 {
   int a = font_a + m_lineSpacing / 2;
-  QColor fColor = printerFriendly ? Qt::black : color_table[attr->f].color;
+  QColor fColor = printerFriendly ? Qt::black : attr->f.color(color_table);
+  QColor bColor = attr->b.color(color_table);
   QString drawstr;
 
   if ((attr->r & RE_CURSOR) && !isPrinting)
@@ -595,7 +596,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
   // Paint background
   if (!printerFriendly)
   {
-    if (color_table[attr->b].transparent)
+    if (attr->isTransparent(color_table))
     {
       if (pm)
         paint.setBackgroundMode( TransparentMode );
@@ -604,12 +605,12 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
     }
     else
     {
-      if (pm || color_table[attr->b].color != color_table[ colorsSwapped ? DEFAULT_FORE_COLOR : DEFAULT_BACK_COLOR ].color
-          || clear || (blinking && (attr->r & RE_BLINK)))
+      if (pm || clear || (blinking && (attr->r & RE_BLINK)) ||
+          attr->b == cacol(CO_DFT, colorsSwapped ? DEFAULT_FORE_COLOR : DEFAULT_BACK_COLOR) )
 
         // draw background colors with 75% opacity
         if ( argb_visual && qAlpha(blend_color) < 0xff ) {
-          QRgb col = color_table[attr->b].color.rgb();
+          QRgb col = bColor.rgb();
 
           Q_UINT8 salpha = 192;
           Q_UINT8 dalpha = 255 - salpha;
@@ -625,7 +626,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
 
           paint.fillRect(rect, QColor(col, pixel));
         } else
-          paint.fillRect(rect, color_table[attr->b].color);
+          paint.fillRect(rect, bColor);
     }
 
     QString tmpStr = str.simplifyWhiteSpace();
@@ -664,8 +665,8 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
     {
        if (!cursorBlinking)
        {
-          paint.fillRect(r, color_table[attr->f].color);
-          fColor = color_table[attr->b].color;
+          paint.fillRect(r, fColor);
+          fColor = bColor;
        }
     }
     else
@@ -685,7 +686,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
     bool shadow = false;
     paint.setPen(fColor);
     int x = rect.x();
-    if (color_table[attr->f].bold && printerBold)
+    if (attr->isBold(color_table) && printerBold)
     {
       // When printing we use a bold font for bold
       paint.save();
@@ -721,13 +722,13 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
       paint.drawText(x,y, str, -1, bidiEnabled ? QPainter::Auto : QPainter::LTR );
     }
 
-    if (color_table[attr->f].bold && isPrinting)
+    if (attr->isBold(color_table) && isPrinting)
     {
       // When printing we use a bold font for bold
       paint.restore();
     }
 
-    if (color_table[attr->f].bold && !printerBold)
+    if (attr->isBold(color_table) && !printerBold)
     {
       paint.setClipRect(rect);
       // On screen we use overstrike for bold
@@ -796,9 +797,9 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
   int    tLy = tL.y();
   hasBlinker = false;
 
-  int cf  = -1; // undefined
-  int cb  = -1; // undefined
-  int cr  = -1; // undefined
+  cacol cf;       // undefined
+  cacol cb;       // undefined
+  int   cr  = -1; // undefined
 
   int lins = QMIN(this->lines,  QMAX(0,lines  ));
   int cols = QMIN(this->columns,QMAX(0,columns));
@@ -1049,9 +1050,9 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect, bool pm)
          disstrU[p++] = c; //fontMap(c);
       bool lineDraw = isLineChar(c);
       bool doubleWidth = (image[loc(x,y)+1].c == 0);
-      int cf = image[loc(x,y)].f;
-      int cb = image[loc(x,y)].b;
-      int cr = image[loc(x,y)].r;
+      cacol cf = image[loc(x,y)].f;
+      cacol cb = image[loc(x,y)].b;
+      int   cr = image[loc(x,y)].r;
       while (x+len <= rlx &&
              image[loc(x+len,y)].f == cf &&
              image[loc(x+len,y)].b == cb &&
@@ -2009,10 +2010,10 @@ void TEWidget::clearImage()
   // We initialize image[image_size] too. See makeImage()
   for (int i = 0; i <= image_size; i++)
   {
-    image[i].c = 0xff; //' ';
-    image[i].f = 0xff; //DEFAULT_FORE_COLOR;
-    image[i].b = 0xff; //DEFAULT_BACK_COLOR;
-    image[i].r = 0xff; //DEFAULT_RENDITION;
+    image[i].c = ' ';
+    image[i].f = cacol(CO_DFT,DEFAULT_FORE_COLOR);
+    image[i].b = cacol(CO_DFT,DEFAULT_BACK_COLOR);
+    image[i].r = DEFAULT_RENDITION;
   }
 }
 

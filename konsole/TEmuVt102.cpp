@@ -344,6 +344,17 @@ void TEmuVt102::onRcvChar(int cc)
     for (i=0;i<=argc;i++)
     if ( epp(     ))  { tau( TY_CSI_PR(cc,argv[i]),    0,   0); }
     else if(egt(    ))   { tau( TY_CSI_PG(cc     ),    0,   0); } // spec. case for ESC]>0c or ESC]>c
+    else if (cc == 'm' && argc - i >= 4 && (argv[i] == 38 || argv[i] == 48) && argv[i+1] == 2)
+    { // ESC[ ... 48;2;<red>;<green>;<blue> ... m -or- ESC[ ... 38;2;<red>;<green>;<blue> ... m
+      i += 2;
+      tau( TY_CSI_PS(cc, argv[i-2]), CO_RGB, (argv[i] << 16) | (argv[i+1] << 8) | argv[i+2]);
+      i += 2;
+    }
+    else if (cc == 'm' && argc - i >= 2 && (argv[i] == 38 || argv[i] == 48) && argv[i+1] == 5)
+    { // ESC[ ... 48;5;<index> ... m -or- ESC[ ... 38;5;<index> ... m
+      i += 2;
+      tau( TY_CSI_PS(cc, argv[i-2]), CO_256, argv[i]);
+    }
     else              { tau( TY_CSI_PS(cc,argv[i]),    0,   0); }
     resetToken();
   }
@@ -543,43 +554,49 @@ switch( N )
     case TY_CSI_PS('m',   25) : scr->resetRendition     (RE_BLINK    ); break;
     case TY_CSI_PS('m',   27) : scr->resetRendition     (RE_REVERSE  ); break;
 
-    case TY_CSI_PS('m',   30) : scr->setForeColor         (         0); break;
-    case TY_CSI_PS('m',   31) : scr->setForeColor         (         1); break;
-    case TY_CSI_PS('m',   32) : scr->setForeColor         (         2); break;
-    case TY_CSI_PS('m',   33) : scr->setForeColor         (         3); break;
-    case TY_CSI_PS('m',   34) : scr->setForeColor         (         4); break;
-    case TY_CSI_PS('m',   35) : scr->setForeColor         (         5); break;
-    case TY_CSI_PS('m',   36) : scr->setForeColor         (         6); break;
-    case TY_CSI_PS('m',   37) : scr->setForeColor         (         7); break;
-    case TY_CSI_PS('m',   39) : scr->setForeColorToDefault(          ); break;
+    case TY_CSI_PS('m',   30) : scr->setForeColor         (CO_SYS,  0); break;
+    case TY_CSI_PS('m',   31) : scr->setForeColor         (CO_SYS,  1); break;
+    case TY_CSI_PS('m',   32) : scr->setForeColor         (CO_SYS,  2); break;
+    case TY_CSI_PS('m',   33) : scr->setForeColor         (CO_SYS,  3); break;
+    case TY_CSI_PS('m',   34) : scr->setForeColor         (CO_SYS,  4); break;
+    case TY_CSI_PS('m',   35) : scr->setForeColor         (CO_SYS,  5); break;
+    case TY_CSI_PS('m',   36) : scr->setForeColor         (CO_SYS,  6); break;
+    case TY_CSI_PS('m',   37) : scr->setForeColor         (CO_SYS,  7); break;
 
-    case TY_CSI_PS('m',   40) : scr->setBackColor         (         0); break;
-    case TY_CSI_PS('m',   41) : scr->setBackColor         (         1); break;
-    case TY_CSI_PS('m',   42) : scr->setBackColor         (         2); break;
-    case TY_CSI_PS('m',   43) : scr->setBackColor         (         3); break;
-    case TY_CSI_PS('m',   44) : scr->setBackColor         (         4); break;
-    case TY_CSI_PS('m',   45) : scr->setBackColor         (         5); break;
-    case TY_CSI_PS('m',   46) : scr->setBackColor         (         6); break;
-    case TY_CSI_PS('m',   47) : scr->setBackColor         (         7); break;
-    case TY_CSI_PS('m',   49) : scr->setBackColorToDefault(          ); break;
+    case TY_CSI_PS('m',   38) : scr->setForeColor         (p,       q); break;
 
-    case TY_CSI_PS('m',   90) : scr->setForeColor         (         8); break;
-    case TY_CSI_PS('m',   91) : scr->setForeColor         (         9); break;
-    case TY_CSI_PS('m',   92) : scr->setForeColor         (        10); break;
-    case TY_CSI_PS('m',   93) : scr->setForeColor         (        11); break;
-    case TY_CSI_PS('m',   94) : scr->setForeColor         (        12); break;
-    case TY_CSI_PS('m',   95) : scr->setForeColor         (        13); break;
-    case TY_CSI_PS('m',   96) : scr->setForeColor         (        14); break;
-    case TY_CSI_PS('m',   97) : scr->setForeColor         (        15); break;
+    case TY_CSI_PS('m',   39) : scr->setForeColor         (CO_DFT,  0); break;
 
-    case TY_CSI_PS('m',  100) : scr->setBackColor         (         8); break;
-    case TY_CSI_PS('m',  101) : scr->setBackColor         (         9); break;
-    case TY_CSI_PS('m',  102) : scr->setBackColor         (        10); break;
-    case TY_CSI_PS('m',  103) : scr->setBackColor         (        11); break;
-    case TY_CSI_PS('m',  104) : scr->setBackColor         (        12); break;
-    case TY_CSI_PS('m',  105) : scr->setBackColor         (        13); break;
-    case TY_CSI_PS('m',  106) : scr->setBackColor         (        14); break;
-    case TY_CSI_PS('m',  107) : scr->setBackColor         (        15); break;
+    case TY_CSI_PS('m',   40) : scr->setBackColor         (CO_SYS,  0); break;
+    case TY_CSI_PS('m',   41) : scr->setBackColor         (CO_SYS,  1); break;
+    case TY_CSI_PS('m',   42) : scr->setBackColor         (CO_SYS,  2); break;
+    case TY_CSI_PS('m',   43) : scr->setBackColor         (CO_SYS,  3); break;
+    case TY_CSI_PS('m',   44) : scr->setBackColor         (CO_SYS,  4); break;
+    case TY_CSI_PS('m',   45) : scr->setBackColor         (CO_SYS,  5); break;
+    case TY_CSI_PS('m',   46) : scr->setBackColor         (CO_SYS,  6); break;
+    case TY_CSI_PS('m',   47) : scr->setBackColor         (CO_SYS,  7); break;
+
+    case TY_CSI_PS('m',   48) : scr->setBackColor         (p,       q); break;
+
+    case TY_CSI_PS('m',   49) : scr->setBackColor         (CO_DFT,  1); break;
+
+    case TY_CSI_PS('m',   90) : scr->setForeColor         (CO_SYS,  8); break;
+    case TY_CSI_PS('m',   91) : scr->setForeColor         (CO_SYS,  9); break;
+    case TY_CSI_PS('m',   92) : scr->setForeColor         (CO_SYS, 10); break;
+    case TY_CSI_PS('m',   93) : scr->setForeColor         (CO_SYS, 11); break;
+    case TY_CSI_PS('m',   94) : scr->setForeColor         (CO_SYS, 12); break;
+    case TY_CSI_PS('m',   95) : scr->setForeColor         (CO_SYS, 13); break;
+    case TY_CSI_PS('m',   96) : scr->setForeColor         (CO_SYS, 14); break;
+    case TY_CSI_PS('m',   97) : scr->setForeColor         (CO_SYS, 15); break;
+
+    case TY_CSI_PS('m',  100) : scr->setBackColor         (CO_SYS,  8); break;
+    case TY_CSI_PS('m',  101) : scr->setBackColor         (CO_SYS,  9); break;
+    case TY_CSI_PS('m',  102) : scr->setBackColor         (CO_SYS, 10); break;
+    case TY_CSI_PS('m',  103) : scr->setBackColor         (CO_SYS, 11); break;
+    case TY_CSI_PS('m',  104) : scr->setBackColor         (CO_SYS, 12); break;
+    case TY_CSI_PS('m',  105) : scr->setBackColor         (CO_SYS, 13); break;
+    case TY_CSI_PS('m',  106) : scr->setBackColor         (CO_SYS, 14); break;
+    case TY_CSI_PS('m',  107) : scr->setBackColor         (CO_SYS, 15); break;
 
     case TY_CSI_PS('n',    5) :      reportStatus         (          ); break;
     case TY_CSI_PS('n',    6) :      reportCursorPosition (          ); break;

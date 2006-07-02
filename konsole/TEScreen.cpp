@@ -67,15 +67,15 @@ TEScreen::TEScreen(int l, int c)
     histCursor(0),
     hist(new HistoryScrollNone()),
     cuX(0), cuY(0),
-    cu_fg(0), cu_bg(0), cu_re(0),
+    cu_fg(cacol()), cu_bg(cacol()), cu_re(0),
     tmargin(0), bmargin(0),
     tabstops(0),
     sel_begin(0), sel_TL(0), sel_BR(0),
     sel_busy(false),
     columnmode(false),
-    ef_fg(0), ef_bg(0), ef_re(0),
+    ef_fg(cacol()), ef_bg(cacol()), ef_re(0),
     sa_cuX(0), sa_cuY(0),
-    sa_cu_re(0), sa_cu_fg(0), sa_cu_bg(0),
+    sa_cu_re(0), sa_cu_fg(cacol()), sa_cu_bg(cacol()),
     lastPos(-1)
 {
   /*
@@ -425,8 +425,8 @@ void TEScreen::resizeImage(int new_lines, int new_columns)
     for (int x = 0; x < new_columns; x++)
     {
       newimg[y*new_columns+x].c = ' ';
-      newimg[y*new_columns+x].f = DEFAULT_FORE_COLOR;
-      newimg[y*new_columns+x].b = DEFAULT_BACK_COLOR;
+      newimg[y*new_columns+x].f = cacol(CO_DFT,DEFAULT_FORE_COLOR);
+      newimg[y*new_columns+x].b = cacol(CO_DFT,DEFAULT_BACK_COLOR);
       newimg[y*new_columns+x].r = DEFAULT_RENDITION;
     }
     newwrapped[y]=false;
@@ -494,7 +494,7 @@ void TEScreen::resizeImage(int new_lines, int new_columns)
 */
 
 void TEScreen::reverseRendition(ca* p)
-{ UINT8 f = p->f; UINT8 b = p->b;
+{ cacol f = p->f; cacol b = p->b;
   p->f = b; p->b = f; //p->r &= ~RE_TRANSPARENT;
 }
 
@@ -513,12 +513,7 @@ void TEScreen::effectiveRendition()
     ef_bg = cu_bg;
   }
   if (cu_re & RE_BOLD)
-  {
-    if (ef_fg < BASE_COLORS)
-      ef_fg += BASE_COLORS;
-    else
-      ef_fg -= BASE_COLORS;
-  }
+    ef_fg.toggleIntensive();
 }
 
 /*!
@@ -540,7 +535,7 @@ ca* TEScreen::getCookedImage()
 
   int x,y;
   ca* merged = (ca*)malloc((lines*columns+1)*sizeof(ca));
-  ca dft(' ',DEFAULT_FORE_COLOR,DEFAULT_BACK_COLOR,DEFAULT_RENDITION);
+  ca dft(' ',cacol(CO_DFT,DEFAULT_FORE_COLOR),cacol(CO_DFT,DEFAULT_BACK_COLOR),DEFAULT_RENDITION);
   merged[lines*columns] = dft;
 
 //  kdDebug(1211) << "InGetCookedImage" << endl;
@@ -1082,45 +1077,25 @@ void TEScreen::resetRendition(int re)
 
 void TEScreen::setDefaultRendition()
 {
-  setForeColorToDefault();
-  setBackColorToDefault();
+  setForeColor(CO_DFT,DEFAULT_FORE_COLOR);
+  setBackColor(CO_DFT,DEFAULT_BACK_COLOR);
   cu_re   = DEFAULT_RENDITION;
   effectiveRendition();
 }
 
 /*!
 */
-
-void TEScreen::setForeColor(int fgcolor)
+void TEScreen::setForeColor(int space, int color)
 {
-  cu_fg = (fgcolor&7)+((fgcolor&8) ? 4+8 : 2);
+  cu_fg = cacol(space, color);
   effectiveRendition();
 }
 
 /*!
 */
-
-void TEScreen::setBackColor(int bgcolor)
+void TEScreen::setBackColor(int space, int color)
 {
-  cu_bg = (bgcolor&7)+((bgcolor&8) ? 4+8 : 2);
-  effectiveRendition();
-}
-
-/*!
-*/
-
-void TEScreen::setBackColorToDefault()
-{
-  cu_bg = DEFAULT_BACK_COLOR;
-  effectiveRendition();
-}
-
-/*!
-*/
-
-void TEScreen::setForeColorToDefault()
-{
-  cu_fg = DEFAULT_FORE_COLOR;
+  cu_bg = cacol(space, color);
   effectiveRendition();
 }
 
