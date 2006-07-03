@@ -1135,7 +1135,7 @@ void Konsole::makeBasicGUI()
      // "Configure Shortcuts").
 
   m_closeSession = new KAction(KIcon("fileclose"), i18n("C&lose Session"), m_shortcuts, "close_session");
-  connect(m_closeSession, SIGNAL(triggered(bool) ), SLOT(closeCurrentSession()));
+  connect(m_closeSession, SIGNAL(triggered(bool) ), SLOT( confirmCloseCurrentSession() ));
   m_print = new KAction(KIcon("fileprint"), i18n("&Print Screen..."), m_shortcuts, "file_print");
   connect(m_print, SIGNAL(triggered(bool) ), SLOT( slotPrint() ));
   m_quit = new KAction(KIcon("exit"), i18n("&Quit"), m_shortcuts, "file_quit");
@@ -1393,7 +1393,7 @@ void Konsole::slotTabToggleMasterMode()
 
 void Konsole::slotTabCloseSession()
 {
-  m_contextMenuSession->closeSession();
+  confirmCloseCurrentSession(m_contextMenuSession);
 }
 
 void Konsole::slotTabbarContextMenu(const QPoint & pos)
@@ -3001,13 +3001,16 @@ void Konsole::newSession(const QString& sURL, const QString& title)
    */
 }
 
-void Konsole::confirmCloseCurrentSession()
+void Konsole::confirmCloseCurrentSession( TESession* _se )
 {
+   if ( !_se )
+      _se = se;
+
   if (KMessageBox::warningContinueCancel(this,
         i18n("Are you sure that you want to close the current session?"),
         i18n("Close Confirmation"), KGuiItem(i18n("C&lose Session"),"tab_remove"),
         "ConfirmCloseSession")==KMessageBox::Continue)
-    closeCurrentSession();
+    _se->closeSession();
 }
 
 void Konsole::closeCurrentSession()
