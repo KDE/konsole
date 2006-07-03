@@ -61,9 +61,7 @@
     Compatibility issues with obsolete installations and other unixes
     my prevent this.
 */
-#ifdef HAVE_CONFIG_H
 #include <config.h>
-#endif
 
 #include <sys/types.h>
 #include <sys/stat.h>
