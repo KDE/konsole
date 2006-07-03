@@ -281,7 +281,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 {
 	(void)new KonsoleAdaptor(this);
 	QDBus::sessionBus().registerObject(QLatin1String("/Konsole"), this);
-	QDBus::sessionBus().busService()->requestName("org.kde.konsole", /*flags=*/0);
+	QDBus::sessionBus().registerService("org.kde.konsole");
   m_sessionGroup = new QActionGroup(this);
 
   isRestored = b_inRestore;
