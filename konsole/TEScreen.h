@@ -112,12 +112,11 @@ public: // these are all `Screen' operations
     //
     void setRendition  (int rendition);
     void resetRendition(int rendition);
-    void setForeColor  (int fgcolor);
-    void setBackColor  (int bgcolor);
+    //
+    void setForeColor  (int space, int color);
+    void setBackColor  (int space, int color);
     //
     void setDefaultRendition();
-    void setForeColorToDefault();
-    void setBackColorToDefault();
     //
     // -------------------------------------
     //
@@ -220,8 +219,8 @@ private: // helper
 
     // cursor color and rendition info
 
-    UINT8 cu_fg;      // foreground
-    UINT8 cu_bg;      // background
+    cacol cu_fg;      // foreground
+    cacol cu_bg;      // background
     UINT8 cu_re;      // rendition
 
     // margins ----------------
@@ -247,8 +246,8 @@ private: // helper
 
     // effective colors and rendition ------------
 
-    UINT8 ef_fg;      // These are derived from
-    UINT8 ef_bg;      // the cu_* variables above
+    cacol ef_fg;      // These are derived from
+    cacol ef_bg;      // the cu_* variables above
     UINT8 ef_re;      // to speed up operation
 
     //
@@ -263,8 +262,8 @@ private: // helper
     // rendition info
 
     UINT8 sa_cu_re;
-    UINT8 sa_cu_fg;
-    UINT8 sa_cu_bg;
+    cacol sa_cu_fg;
+    cacol sa_cu_bg;
     
     // last position where we added a character
     int lastPos;
