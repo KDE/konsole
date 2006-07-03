@@ -3841,6 +3841,7 @@ HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
 {
   setCaption( i18n("History Configuration") );
   setButtons( Help | Default | Ok | Cancel );
+  setDefaultButton(Ok);
   setModal( true );
   showButtonSeparator( true );
 
@@ -3880,6 +3881,7 @@ HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
     m_size->setValue(histType.getSize());
     slotHistEnable(true);
   }
+  connect(this,SIGNAL(defaultClicked()),SLOT(slotDefault()));
   setHelp("configure-history");
 }
 
@@ -4096,7 +4098,7 @@ void Konsole::slotZModemUpload()
   if (se->zmodemIsBusy())
   {
     KMessageBox::sorry(this,
-         i18n("<p>The current session already has a ZModem file transfer in progress."));
+         i18n("<p>The current session already has a ZModem fi²le transfer in progress."));
     return;
   }
   QString zmodem = KGlobal::dirs()->findExe("sz");
@@ -4212,7 +4214,7 @@ SizeDialog::SizeDialog(const unsigned int columns,
   hb->addSpacing(10);
   hb->addWidget(new QLabel(i18n("Number of lines:"), mainFrame));
   hb->addWidget(m_lines);
-
+  connect(this, SIGNAL(defaultClicked()), SLOT(slotDefault()));
   setHelp("configure-size");
 }
 
