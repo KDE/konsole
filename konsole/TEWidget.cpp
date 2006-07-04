@@ -1644,7 +1644,7 @@ void TEWidget::wheelEvent( QWheelEvent* ev )
     return;
 
   if ( mouse_marks )
-    QApplication::sendEvent(scrollbar, ev);
+    scrollbar->event(ev);
   else
   {
     QPoint tL  = contentsRect().topLeft();
