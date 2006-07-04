@@ -10,14 +10,14 @@ add_subdirectory( settings )
 
 ########### install files ###############
 
-install_files( ${XDG_APPS_DIR} FILES konsole.desktop konsolesu.desktop )
-install_files( ${DATA_INSTALL_DIR}/konsole FILES konsole.notifyrc tips )
-install_files( ${SERVICETYPES_INSTALL_DIR} FILES terminalemulator.desktop )
-install_files( ${SERVICES_INSTALL_DIR} FILES konsolepart.desktop kwrited.desktop konsole-script.desktop )
-install_files( ${DATA_INSTALL_DIR}/konqueror/servicemenus FILES konsolehere.desktop )
-install_files( ${SERVICES_INSTALL_DIR}/kded FILES kwrited.desktop )
-install_files( ${KCONF_UPDATE_INSTALL_DIR} FILES konsole.upd  )
-install_programs( ${KCONF_UPDATE_INSTALL_DIR} FILES schemaStrip.pl )
+install( FILES konsole.desktop konsolesu.desktop  DESTINATION  ${XDG_APPS_DIR} )
+install( FILES konsole.notifyrc tips  DESTINATION  ${DATA_INSTALL_DIR}/konsole )
+install( FILES terminalemulator.desktop  DESTINATION  ${SERVICETYPES_INSTALL_DIR} )
+install( FILES konsolepart.desktop kwrited.desktop konsole-script.desktop  DESTINATION  ${SERVICES_INSTALL_DIR} )
+install( FILES konsolehere.desktop  DESTINATION  ${DATA_INSTALL_DIR}/konqueror/servicemenus )
+install( FILES kwrited.desktop  DESTINATION  ${SERVICES_INSTALL_DIR}/kded )
+install( FILES konsole.upd   DESTINATION  ${KCONF_UPDATE_INSTALL_DIR} )
+install(PROGRAMS schemaStrip.pl  DESTINATION  ${KCONF_UPDATE_INSTALL_DIR} )
 
 
 

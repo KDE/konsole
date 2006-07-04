@@ -47,7 +47,7 @@ if(X11_XTest_FOUND)
   target_link_libraries(kdeinit_konsole ${X11_XTest_LIB} )
 endif(X11_XTest_FOUND)
 
-install_targets(${LIB_INSTALL_DIR} kdeinit_konsole )
+install(TARGETS kdeinit_konsole  DESTINATION ${LIB_INSTALL_DIR} )
 
 target_link_libraries( konsole kdeinit_konsole )
 install(TARGETS konsole DESTINATION bin)
@@ -85,7 +85,7 @@ if(X11_XTest_LIB)
   target_link_libraries(konsolepart  ${X11_XTest_LIB}  )
 endif(X11_XTest_LIB)
 
-install_targets(${PLUGIN_INSTALL_DIR} konsolepart )
+install(TARGETS konsolepart  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 
 ########### next target ###############
@@ -103,12 +103,12 @@ install_targets(${PLUGIN_INSTALL_DIR} konsolepart )
 
 #target_link_libraries(kded_kwrited  ${KDE4_KDE3SUPPORT_LIBS})
 
-#install_targets(${PLUGIN_INSTALL_DIR} kded_kwrited )
+#install(TARGETS kded_kwrited  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 
 ########### install files ###############
 
-install_files( ${MIME_INSTALL_DIR}/application FILES x-konsole.desktop )
+install( FILES x-konsole.desktop  DESTINATION  ${MIME_INSTALL_DIR}/application )
 
 
 

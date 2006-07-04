@@ -15,12 +15,12 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kcm_konsole )
 
 target_link_libraries(kcm_konsole  ${KDE4_KDE3SUPPORT_LIBS} kdefx )
 
-install_targets(${PLUGIN_INSTALL_DIR} kcm_konsole )
+install(TARGETS kcm_konsole  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 
 ########### install files ###############
 
-install_files( ${APPLNK_INSTALL_DIR}/.hidden FILES kcmkonsole.desktop )
+install( FILES kcmkonsole.desktop  DESTINATION  ${APPLNK_INSTALL_DIR}/.hidden )
 
 
 

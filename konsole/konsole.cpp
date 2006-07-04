@@ -3359,7 +3359,7 @@ void Konsole::addSessionCommand(const QString &path)
   QString typ = co->readEntry("Type");
   QString txt = co->readEntry("Name");
 
-  // try to KStandardDirs::locate the binary
+  // try to locate the binary
   QString exec= co->readPathEntry("Exec");
   if (exec.startsWith("su -c \'")) {
     exec = exec.mid(7,exec.length()-8);
