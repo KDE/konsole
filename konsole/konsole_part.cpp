@@ -1096,7 +1096,6 @@ void konsolePart::startProgram( const QString& program,
   connect( se, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
 //  setFont( n_font ); // we do this here, to make TEWidget recalculate
                      // its geometry..
-  te->emitText( QLatin1String( "\014" ) );
 }
 
 void konsolePart::showShellInDir( const QString& dir )
