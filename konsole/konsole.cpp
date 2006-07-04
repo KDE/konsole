@@ -106,7 +106,6 @@ Time to start a requirement list.
 #include <kstandarddirs.h>
 #include <kmenubar.h>
 #include <kmessagebox.h>
-#include <krootpixmap.h>
 #include <krun.h>
 #include <kstdaction.h>
 #include <kinputdialog.h>
@@ -1671,16 +1670,9 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       if (te) {
         if (sch->useTransparency())
         {
-           if (!rootxpms[te])
-             rootxpms.insert( te, new KRootPixmap(te) );
-           rootxpms[te]->setFadeEffect(sch->tr_x(), QColor(sch->tr_r(), sch->tr_g(), sch->tr_b()));
         }
         else
         {
-           if (rootxpms[te]) {
-             delete rootxpms[te];
-             rootxpms.remove(te);
-           }
            pixmap_menu_activated(sch->alignment());
         }
 
@@ -1961,11 +1953,6 @@ void Konsole::slotSelectTabbar() {
       else
          tabwidget->setTabPosition( QTabWidget::Bottom );
    }
-
-/* FIXME: Still necessary ? */
-      Q3PtrDictIterator<KRootPixmap> it(rootxpms);
-      for (;it.current();++it)
-        it.current()->repaint(true);
 
   if (b_fixedSize)
   {
@@ -2575,8 +2562,6 @@ void Konsole::activateSession(TESession *s)
     updateSchemaMenu();
   }
 
-  if (rootxpms[te])
-    rootxpms[te]->start();
   notifySize(te->Columns(), te->Lines()); // set menu items
   s->setConnect(true);
   updateTitle();
@@ -3034,10 +3019,6 @@ void Konsole::doneSession(TESession* s)
   KToggleAction *ra = session2action.find(s);
   m_view->removeAction( ra );
   tabwidget->removePage( s->widget() );
-  if (rootxpms[s->widget()]) {
-    delete rootxpms[s->widget()];
-    rootxpms.remove(s->widget());
-  }
   delete s->widget();
   if(m_removeSessionButton )
     m_removeSessionButton->setEnabled(tabwidget->count()>1);
@@ -3614,9 +3595,6 @@ void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
 
   if (s->useTransparency()) {
     if (!argb_visual) {
-      if (!rootxpms[tewidget])
-        rootxpms.insert( tewidget, new KRootPixmap(tewidget) );
-      rootxpms[tewidget]->setFadeEffect(s->tr_x(), QColor(s->tr_r(), s->tr_g(), s->tr_b()));
     } else {
       tewidget->setBlendColor(qRgba(s->tr_r(), s->tr_g(), s->tr_b(), int(s->tr_x() * 255)));
       QPalette palette;
@@ -3624,10 +3602,6 @@ void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
       tewidget->setPalette( palette ); // make sure any background pixmap is unset
     }
   } else {
-      if (rootxpms[tewidget]) {
-        delete rootxpms[tewidget];
-        rootxpms.remove(tewidget);
-      }
        pixmap_menu_activated(s->alignment(), tewidget);
        tewidget->setBlendColor(qRgba(0, 0, 0, 0xff));
   }
@@ -3716,10 +3690,6 @@ void Konsole::detachSession(TESession* _se) {
     m_detachSession->setEnabled(false);
 
   tabwidget->removePage( se_widget );
-  if (rootxpms[se_widget]) {
-    delete rootxpms[se_widget];
-    rootxpms.remove(se_widget);
-  }
   delete se_widget;
   if (b_dynamicTabHide && tabwidget->count()==1)
     tabwidget->setTabBarHidden(true);

@@ -27,6 +27,7 @@
 #include <QLineEdit>
 #include <QMatrix>
 #include <QComboBox>
+#include <QDesktopWidget>
 //Added by qt3to4:
 #include <QPixmap>
 #include <QTextStream>
@@ -42,7 +43,6 @@
 #include <kinputdialog.h>
 #include <QToolButton>
 #include <kmessagebox.h>
-#include <ksharedpixmap.h>
 #include <kimageeffect.h>
 #include <QImage>
 
@@ -76,11 +76,6 @@ SchemaEditor::SchemaEditor(QWidget * parent)
     bold.resize(20);
     transparent.resize(20);
     defaultSchema = "";
-    spix = new KSharedPixmap;
-
-#ifdef Q_WS_X11
-    connect(spix, SIGNAL(done(bool)), SLOT(previewLoaded(bool)));
-#endif
 
     QDBusInterface kdesktop("org.kde.kdesktop", "/Background", "org.kde.kdesktop.Background");
     kdesktop.call( "setExport", 1 );
@@ -148,7 +143,6 @@ void SchemaEditor::setSchema(QString sch)
 
 SchemaEditor::~SchemaEditor()
 {
-    delete spix;
 }
 
 
@@ -167,10 +161,18 @@ void SchemaEditor::updatePreview()
 	}
 	 else  //try to reload
 	{
-#ifdef Q_WS_X11
-           if(!spix->loadFromShared(QString("DESKTOP1")))
-              kDebug(0) << "cannot load" << endl;
-#endif
+    QMatrix mat;
+    QDesktopWidget desktopWidget;
+    QPixmap pixmap = QPixmap::grabWidget( desktopWidget.screen( 0 ) );
+
+    pix = pixmap.transformed( mat.scale(180.0 / pixmap.width(),
+                              100.0 / pixmap.height()) );
+
+    kDebug(0) << "Loaded" << endl;
+    loaded = true;
+    if (transparencyCheck->isChecked()) {
+      updatePreview();
+    }
 	}
       } else {
 	QPixmap pm;
@@ -184,26 +186,6 @@ void SchemaEditor::updatePreview()
     }
 
 }
-
-void SchemaEditor::previewLoaded(bool l)
-{
-    if (l) {
-	QMatrix mat;
-	pix =
-	    spix->pixmap().transformed(mat.
-			scale(180.0 / spix->pixmap().width(),
-			      100.0 / spix->pixmap().height()));
-	kDebug(0) << "Loaded" << endl;
-	loaded = true;
-	if (transparencyCheck->isChecked()) {
-	    updatePreview();
-	}
-
-    } else
-	kDebug(0) << "error loading" << endl;
-
-}
-
 
 void SchemaEditor::getList()
 {

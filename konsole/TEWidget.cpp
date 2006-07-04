@@ -424,8 +424,6 @@ TEWidget::TEWidget(QWidget *parent)
 
   if (!argb_visual)
   {
-    // Looks better at startup with KRootPixmap based pseudo-transparency
-   setAttribute(Qt::WA_NoBackground);
   }
   setAttribute(Qt::WA_PaintOnScreen); //We have our own double-buffer, so...
 }

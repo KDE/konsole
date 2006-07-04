@@ -26,7 +26,6 @@
 #include <QWidget>
 #include <QPixmap>
 #include <QVector>
-class KSharedPixmap;
 
 #include "schemadialog.h"
 
@@ -56,7 +55,6 @@ class SchemaEditor : public SchemaDialog
 	void readSchema(int);
 	void saveCurrent();
 	void removeCurrent();
-	void previewLoaded(bool l);
 	void getList();
   private Q_SLOTS:
 	void show();
@@ -70,7 +68,6 @@ class SchemaEditor : public SchemaDialog
 	QVector<bool> transparent;
 	QVector<bool> bold;
 	QPixmap pix;
-	KSharedPixmap *spix;
 	QString defaultSchema;
 	bool loaded;
 	bool schemaLoaded;

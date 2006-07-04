@@ -49,7 +49,6 @@
 #define PACKAGE "konsole"
 #define VERSION "2.0alpha"
 
-class KRootPixmap;
 class QLabel;
 class QCheckBox;
 class KonsoleFind;
@@ -298,7 +297,6 @@ private:
   ColorSchemaList* colors;
   QString        s_encodingName;
 
-  Q3PtrDict<KRootPixmap> rootxpms;
   KWinModule*    kWinModule;
 
   KMenuBar*   menubar;

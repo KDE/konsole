@@ -48,7 +48,6 @@
 #include <QSpinBox>
 #include <QPushButton>
 #include <kmenu.h>
-#include <krootpixmap.h>
 #include <kconfig.h>
 #include <kactioncollection.h>
 #include <kactionmenu.h>
@@ -120,7 +119,6 @@ konsolePart::konsolePart(QWidget *_parentWidget, QObject *parent, const char *cl
 ,te(0)
 ,se(0)
 ,colors(0)
-,rootxpm(0)
 ,blinkingCursor(0)
 ,showFrame(0)
 ,m_useKonsoleSettings(0)
@@ -580,18 +578,8 @@ void konsolePart::readProperties()
   te->setColorTable(sch->table()); //FIXME: set twice here to work around a bug
 
   if (sch->useTransparency()) {
-    if (!rootxpm)
-      rootxpm = new KRootPixmap(te);
-    rootxpm->setFadeEffect(sch->tr_x(), QColor(sch->tr_r(), sch->tr_g(), sch->tr_b()));
-    rootxpm->start();
-    rootxpm->repaint(true);
   }
   else {
-    if (rootxpm) {
-      rootxpm->stop();
-      delete rootxpm;
-      rootxpm=0;
-    }
     pixmap_menu_activated(sch->alignment());
   }
 
@@ -768,18 +756,8 @@ void konsolePart::setSchema(ColorSchema* s)
   te->setColorTable(s->table()); //FIXME: set twice here to work around a bug
 
   if (s->useTransparency()) {
-    if (!rootxpm)
-      rootxpm = new KRootPixmap(te);
-    rootxpm->setFadeEffect(s->tr_x(), QColor(s->tr_r(), s->tr_g(), s->tr_b()));
-    rootxpm->start();
-    rootxpm->repaint(true);
   }
   else {
-    if (rootxpm) {
-      rootxpm->stop();
-      delete rootxpm;
-      rootxpm=0;
-    }
     pixmap_menu_activated(s->alignment());
   }
 

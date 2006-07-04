@@ -40,7 +40,6 @@ class QSpinBox;
 class KMenu;
 class KActionMenu;
 class QCheckBox;
-class KRootPixmap;
 class KToggleAction;
 class KSelectAction;
 
@@ -144,7 +143,6 @@ Q_SIGNALS:
     TEWidget* te;
     TESession* se;
     ColorSchemaList* colors;
-    KRootPixmap* rootxpm;
 
     KActionCollection* actions;
     KActionCollection* settingsActions;
