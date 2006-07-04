@@ -264,7 +264,7 @@ void SchemaEditor::imageSelect()
             start= list.last();
     }
 
-    KUrl url = KFileDialog::getImageOpenURL(start, 0, i18n("Select Background Image"));
+    KUrl url = KFileDialog::getImageOpenUrl(start, 0, i18n("Select Background Image"));
 // KUrl url=KFileDialog::getOpenURL(start,"",0,i18n("Select Background Image"));
     if(!url.path().isEmpty())
     {

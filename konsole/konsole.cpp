@@ -4057,7 +4057,7 @@ void Konsole::slotSaveHistory()
 {
   // FIXME - mostLocalURL can't handle non-existing files yet, so this
   //         code doesn't work.
-  KUrl s_url = KFileDialog::getSaveURL(QString(), QString(), 0L, i18n("Save History"));
+  KUrl s_url = KFileDialog::getSaveUrl(QString(), QString(), 0L, i18n("Save History"));
   if( s_url.isEmpty())
       return;
   KUrl url = KIO::NetAccess::mostLocalURL( s_url, 0 );
