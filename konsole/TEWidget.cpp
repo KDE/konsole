@@ -336,7 +336,7 @@ void TEWidget::setFont(const QFont &)
 /* ------------------------------------------------------------------------- */
 
 TEWidget::TEWidget(QWidget *parent)
-:QFrame(parent)
+:QFrame(parent,Qt::WNoAutoErase)
 ,font_h(1)
 ,font_w(1)
 ,font_a(1)
@@ -1012,6 +1012,48 @@ void TEWidget::paintEvent( QPaintEvent* pe )
   }
 
   drawFrame( &paint );
+
+  // Since we're using WNoAutoErase, we have to make sure that
+  // every single pixel is painted by the paint event.
+  // To do this, we must figure out which pixels are left in the
+  // area between the terminal image and the frame border.
+
+  // Calculate the contents rect excluding scroll bar.
+  QRect innerRect = contentsRect();
+  if( scrollLoc != SCRNONE )
+    innerRect.setWidth( innerRect.width() - scrollbar->width() );
+
+  innerRect.setWidth( innerRect.width() + 3 );
+  innerRect.setHeight( innerRect.height() );
+
+  // Calculate the emulation rect (area needed for actual terminal contents)
+  QRect emurect( contentsRect().topLeft(), QSize( columns * font_w + 2 * rimX, lines * font_h + 2 * rimY ));
+
+  // Now erase() the remaining pixels on all sides of the emulation
+
+  // Top
+  QRect er( innerRect );
+  er.setBottom( emurect.top() );
+  erase( er );
+
+  // Bottom
+  er.setBottom( innerRect.bottom() );
+  er.setTop( emurect.bottom() );
+  erase( er );
+
+  // Left
+  er.setTop( emurect.top() );
+  er.setBottom( emurect.bottom() - 1 );
+  er.setRight( emurect.left() );
+  erase( er );
+
+  // Right
+  er.setRight( innerRect.right() );
+  er.setTop( emurect.top() );
+  er.setBottom( emurect.bottom() - 1 );
+  er.setLeft( emurect.right() );
+  erase( er );
+
   paint.end();
 }
 
