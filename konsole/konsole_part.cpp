@@ -1049,7 +1049,7 @@ const char* sensibleShell()
 void konsolePart::startProgram( const QString& program,
                                 const QStrList& args )
 {
-    kdDebug(1211) << "konsolePart::startProgram for " << program << endl;
+//    kdDebug(1211) << "konsolePart::startProgram for " << program << endl;
     if ( !se )
         newSession();
     se->setProgram( program, args );
@@ -1090,7 +1090,6 @@ void konsolePart::newSession()
   connect( se, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
 //  setFont( n_font ); // we do this here, to make TEWidget recalculate
                      // its geometry..
-  te->emitText( QString::fromLatin1( "\014" ) );
 }
 
 void konsolePart::showShellInDir( const QString& dir )
