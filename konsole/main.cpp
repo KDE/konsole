@@ -396,7 +396,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   QString profile = "";
   if (args->isSet("profile")) {
     profile = args->getOption("profile");
-    QString path = locate( "data", "konsole/profiles/" + profile );
+    QString path = KStandardDirs::locate( "data", "konsole/profiles/" + profile );
     if ( QFile::exists( path ) )
       sessionconfig=new KConfig( path, true );
     else

@@ -125,10 +125,10 @@ void SessionEditor::loadAllKeytab()
 
 QString SessionEditor::readKeymapTitle(const QString & file)
 {
-  QString fPath = locate("data", "konsole/" + file);
+  QString fPath = KStandardDirs::locate("data", "konsole/" + file);
 
   if (fPath.isNull())
-    fPath = locate("data", file);
+    fPath = KStandardDirs::locate("data", file);
   removeButton->setEnabled( QFileInfo (fPath).isWritable () );
 
   if (fPath.isNull())
@@ -358,7 +358,7 @@ void SessionEditor::removeCurrent()
   QString base = ((SessionListBoxText *)sessionList->item( sessionList->currentItem() ))->filename();
 
   // Query if system sessions should be removed
-  if (locateLocal("data", "konsole/" + base.section('/', -1)) != base) {
+  if (KStandardDirs::locateLocal("data", "konsole/" + base.section('/', -1)) != base) {
     int code = KMessageBox::warningContinueCancel(this,
       i18n("You are trying to remove a system session. Are you sure?"),
       i18n("Removing System Session"),

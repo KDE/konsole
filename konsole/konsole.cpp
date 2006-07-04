@@ -1464,7 +1464,7 @@ void Konsole::slotSaveSessionsProfile()
       i18n( "Enter name under which the profile should be saved:" ),
       QString(), &ok, this );
   if ( ok ) {
-    QString path = locateLocal( "data",
+    QString path = KStandardDirs::locateLocal( "data",
         QString::fromLatin1( "konsole/profiles/" ) + prof,
         KGlobal::instance() );
 
@@ -2731,7 +2731,7 @@ KSimpleConfig *Konsole::defaultSession()
 void Konsole::setDefaultSession(const QString &filename)
 {
   delete m_defaultSession;
-  m_defaultSession = new KSimpleConfig(locate("appdata", filename), true /* read only */);
+  m_defaultSession = new KSimpleConfig(KStandardDirs::locate("appdata", filename), true /* read only */);
   m_defaultSession->setDesktopGroup();
   b_showstartuptip = m_defaultSession->readEntry("Tips", QVariant(true)).toBool();
 
@@ -2802,7 +2802,7 @@ QString Konsole::newSession(const QString &type)
   if (type.isEmpty())
     co = defaultSession();
   else
-    co = new KSimpleConfig(locate("appdata", type + ".desktop"), true /* read only */);
+    co = new KSimpleConfig(KStandardDirs::locate("appdata", type + ".desktop"), true /* read only */);
   return newSession(co);
 }
 
@@ -3145,7 +3145,7 @@ void Konsole::moveSessionLeft()
   tabwidget->removePage(se->widget());
   tabwidget->blockSignals(false);
   QString title = se->Title();
-  createSessionTab(se->widget(), iconSetForSession(se), 
+  createSessionTab(se->widget(), iconSetForSession(se),
       title.replace('&', "&&"), position-1);
   tabwidget->setCurrentIndex( tabwidget->indexOf( se->widget() ));
   tabwidget->setTabTextColor(tabwidget->indexOf(se->widget()),oldcolor);
@@ -3178,7 +3178,7 @@ void Konsole::moveSessionRight()
   tabwidget->removePage(se->widget());
   tabwidget->blockSignals(false);
   QString title = se->Title();
-  createSessionTab(se->widget(), iconSetForSession(se), 
+  createSessionTab(se->widget(), iconSetForSession(se),
       title.replace('&', "&&"), position+1);
   tabwidget->setCurrentIndex( tabwidget->indexOf( se->widget() ) );
   tabwidget->setTabTextColor(tabwidget->indexOf(se->widget()),oldcolor);
@@ -3352,14 +3352,14 @@ void Konsole::addSessionCommand(const QString &path)
 {
   KSimpleConfig* co;
   if (path.isEmpty())
-    co = new KSimpleConfig(locate("appdata", "shell.desktop"), true /* read only */);
+    co = new KSimpleConfig(KStandardDirs::locate("appdata", "shell.desktop"), true /* read only */);
   else
     co = new KSimpleConfig(path,true);
   co->setDesktopGroup();
   QString typ = co->readEntry("Type");
   QString txt = co->readEntry("Name");
 
-  // try to locate the binary
+  // try to KStandardDirs::locate the binary
   QString exec= co->readPathEntry("Exec");
   if (exec.startsWith("su -c \'")) {
     exec = exec.mid(7,exec.length()-8);
@@ -4193,7 +4193,7 @@ SizeDialog::SizeDialog(const unsigned int columns,
 {
   setCaption( i18n("Size Configuration") );
   setButtons( Help | Default | Ok | Cancel );
-                
+
   QFrame *mainFrame = new QFrame;
   setMainWidget( mainFrame );
 

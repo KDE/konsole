@@ -132,7 +132,7 @@ QString SchemaEditor::schema()
 void SchemaEditor::setSchema(QString sch)
 {
     defaultSchema = sch;
-    sch = locate("data", "konsole/"+sch);
+    sch = KStandardDirs::locate("data", "konsole/"+sch);
 
     int sc = -1;
     for (int i = 0; i < (int) schemaList->count(); i++)
@@ -309,7 +309,7 @@ void SchemaEditor::removeCurrent()
     QString base = ((SchemaListBoxText *) schemaList->item(i))->filename();
 
     // Query if system schemas should be removed
-    if (locateLocal("data", "konsole/" + base.section('/', -1)) != base) {
+    if (KStandardDirs::locateLocal("data", "konsole/" + base.section('/', -1)) != base) {
 	int code = KMessageBox::warningContinueCancel(this,
 	    i18n("You are trying to remove a system schema. Are you sure?"),
 	    i18n("Removing System Schema"),
@@ -455,10 +455,10 @@ QString SchemaEditor::readSchemaTitle(const QString & file)
      */
 
 
-    QString fPath = locate("data", "konsole/" + file);
+    QString fPath = KStandardDirs::locate("data", "konsole/" + file);
 
     if (fPath.isNull())
-	fPath = locate("data", file);
+	fPath = KStandardDirs::locate("data", file);
 
     if (fPath.isNull())
 	return 0;
@@ -536,11 +536,11 @@ void SchemaEditor::readSchema(int num)
 
     }
 
-    QString fPath = locate("data", "konsole/" +
+    QString fPath = KStandardDirs::locate("data", "konsole/" +
 			   ((SchemaListBoxText *) schemaList->item(num))->filename());
 
     if (fPath.isNull())
-	fPath = locate("data",
+	fPath = KStandardDirs::locate("data",
 		       ((SchemaListBoxText *) schemaList->item(num))->filename());
 
     if (fPath.isNull()) {
@@ -592,7 +592,7 @@ void SchemaEditor::readSchema(int num)
 		    continue;
 
 		QString qline(line);
-		backgndLine->setText(locate("wallpaper", qline.mid( qline.indexOf(" ",7)+1 ) ));
+		backgndLine->setText(KStandardDirs::locate("wallpaper", qline.mid( qline.indexOf(" ",7)+1 ) ));
 		modeCombo->setCurrentIndex(attr - 2);
 
 	    }

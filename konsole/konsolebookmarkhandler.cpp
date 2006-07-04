@@ -41,26 +41,26 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel 
 
     // KDE3.5 - Konsole's bookmarks are now in konsole/bookmarks.xml
     // TODO: Consider removing for KDE4
-    QString new_bm_file = locateLocal( "data", "konsole/bookmarks.xml" );
+    QString new_bm_file = KStandardDirs::locateLocal( "data", "konsole/bookmarks.xml" );
     if ( !QFile::exists( new_bm_file ) ) {
-        QString old_bm_file = locateLocal( "data", "kfile/bookmarks.xml" );
+        QString old_bm_file = KStandardDirs::locateLocal( "data", "kfile/bookmarks.xml" );
         if ( QFile::exists( old_bm_file ) )
-            // We want sync here... 
-            if ( !KIO::NetAccess::copy( KUrl( old_bm_file ), 
+            // We want sync here...
+            if ( !KIO::NetAccess::copy( KUrl( old_bm_file ),
                                    KUrl ( new_bm_file ), 0 ) ) {
                 kWarning()<<KIO::NetAccess::lastErrorString()<<endl;
             }
     }
 
-    m_file = locate( "data", "konsole/bookmarks.xml" );
+    m_file = KStandardDirs::locate( "data", "konsole/bookmarks.xml" );
     if ( m_file.isEmpty() )
-        m_file = locateLocal( "data", "konsole/bookmarks.xml" );
+        m_file = KStandardDirs::locateLocal( "data", "konsole/bookmarks.xml" );
 
     KBookmarkManager *manager = KBookmarkManager::managerForFile( m_file, false);
     manager->setEditorOptions(kapp->caption(), false);
     manager->setUpdate( true );
     manager->setShowNSBookmarks( false );
-    
+
     connect( manager, SIGNAL( changed(const QString &, const QString &) ),
              SLOT( slotBookmarksChanged(const QString &, const QString &) ) );
 

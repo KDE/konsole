@@ -135,7 +135,7 @@ ColorSchema::ColorSchema(const QString& pathname)
 {
   //start with a valid time, aleXXX
   *lastRead = QDateTime::currentDateTime();
-  QString fPath = pathname.startsWith("/") ? pathname : locate("data", "konsole/"+pathname);
+  QString fPath = pathname.startsWith("/") ? pathname : KStandardDirs::locate("data", "konsole/"+pathname);
   if (fPath.isEmpty() || !QFile::exists(fPath))
   {
     fRelPath.clear();
@@ -294,7 +294,7 @@ static int random_hue = -1;
 
 bool ColorSchema::rereadSchemaFile()
 {
-  QString fPath = fRelPath.isEmpty() ? "" : (fRelPath.startsWith("/") ? fRelPath : locate("data", "konsole/"+fRelPath));
+  QString fPath = fRelPath.isEmpty() ? "" : (fRelPath.startsWith("/") ? fRelPath : KStandardDirs::locate("data", "konsole/"+fRelPath));
   if (fPath.isEmpty() || !QFile::exists(fPath))
      return false;
 
@@ -336,7 +336,7 @@ bool ColorSchema::rereadSchemaFile()
           continue;
 
         QString qline(line);
-        m_imagePath = locate("wallpaper", qline.mid( qline.indexOf(" ",7)+1 ) );
+        m_imagePath = KStandardDirs::locate("wallpaper", qline.mid( qline.indexOf(" ",7)+1 ) );
         m_alignment = attr;
       }
       if (!strncmp(line,"transparency",12))
@@ -415,7 +415,7 @@ bool ColorSchema::rereadSchemaFile()
 
 bool ColorSchema::hasSchemaFileChanged() const
 {
-  QString fPath = fRelPath.isEmpty() ? "" : locate("data", "konsole/"+fRelPath);
+  QString fPath = fRelPath.isEmpty() ? "" : KStandardDirs::locate("data", "konsole/"+fRelPath);
 
   //KONSOLEDEBUG << "Checking schema file " << fPath << endl;
 
