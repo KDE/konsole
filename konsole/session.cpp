@@ -182,7 +182,7 @@ void TESession::run()
   int result = sh->run(QFile::encodeName(pgm), args, term.toLatin1(),
           winId, add_to_utmp,
           ("DCOPRef("+appId+", konsole)").toLatin1(),
-          ("DCOPRef("+appId+", "+sessionId+")").toLatin1());
+          ("DCOPRef("+appId+", "+sessionId+')').toLatin1());
   if (result < 0) {     // Error in opening pseudo teletype
     kWarning()<<"Unable to open a pseudo teletype!"<<endl;
     QTimer::singleShot(0, this, SLOT(ptyError()));
