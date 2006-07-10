@@ -1,3 +1,19 @@
+/*
+                               VTTEST.C
+
+         Written Novemeber 1983 - July 1984 by Per Lindberg,
+         Stockholm University Computer Center (QZ), Sweden.
+
+                  THE MAD PROGRAMMER STRIKES AGAIN!
+
+                   This software is (c) 1984 by QZ
+               Non-commercial use and copying allowed.
+
+If you are developing a commercial product, and use this program to do
+it, and that product is successful, please send a sum of money of your
+choice to the address below.
+
+*/
 #define VERSION "1.7b 1985-04-19"
 
 /* Choose one of these */
