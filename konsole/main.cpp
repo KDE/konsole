@@ -164,7 +164,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 
   KAboutData aboutData( PACKAGE, I18N_NOOP("Konsole"),
     VERSION, description, KAboutData::License_GPL_V2,
-    "(c) 1997-2004, Lars Doelle");
+    "Copyright (c) 1997-2006, Lars Doelle");
   aboutData.addAuthor("Kurt V. Hindenburg",I18N_NOOP("Maintainer"), "kurt.hindenburg@kdemail.net");
   aboutData.addAuthor("Lars Doelle",I18N_NOOP("Author"), "lars.doelle@on-line.de");
   aboutData.addCredit("Waldo Bastian",
