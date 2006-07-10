@@ -2230,7 +2230,7 @@ void TEWidget::dropEvent(QDropEvent* event)
 
     for ( it = urllist.begin(); it != urllist.end(); ++it ) {
       if(m_dnd_file_count++ > 0) {
-        dropText += " ";
+        dropText += ' ';
         m_cdAction->setEnabled( false );
       }
       KUrl url = KIO::NetAccess::mostLocalURL( *it, 0 );
