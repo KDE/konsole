@@ -4,6 +4,7 @@
    w = screen line width, default 80, must be > 0, max 132.
    l = how many lines to display, default 1000, must be > 0.
   Author: Frank da Cruz, Columbia University, 1995.
+  This is in the public domain as far as can be determined.
 */
 char *crlf = "\015\012";
 char *p = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]\

@@ -19,8 +19,7 @@
    You need to make sure that the size of the screen matches
    the one being debugged.
 
-   This code was written by Lars Doelle <lars.doelle@on-line.de> 
-   in 1998, no copyright is claimed.
+   This code was written by Lars Doelle <lars.doelle@on-line.de>.
    This code is in the public domain.
  
 */
