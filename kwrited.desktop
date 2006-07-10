@@ -8,7 +8,6 @@ Comment[fr]=Afficher les messages écrits par les autres utilisateurs locaux à 
 Comment[x-test]=xxWatch for messages from local users sent with write(1) or wall(1)xx
 Type=Service
 ServiceTypes=KDEDModule
-X-KDE-ModuleType=Library
 X-KDE-Library=kwrited
 X-KDE-FactoryName=kwrited
 X-KDE-Kded-autoload=true
