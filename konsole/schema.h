@@ -1,7 +1,7 @@
 /* schema.h
 **
-** Copyright (C) 1998-1999	by Lars Doelle
-** Copyright (C) 2000		by Adriaan de Groot
+** Copyright (C) 1998-1999	by Lars Doelle <lars.doelle@on-line.de>
+** Copyright (C) 2000		by Adriaan de Groot <groot@kde.org> 
 **
 ** A file that defines the objects for storing color schema's
 ** in konsole. This file is part of the KDE project, see
