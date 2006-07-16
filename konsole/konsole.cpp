@@ -644,17 +644,17 @@ void Konsole::makeGUI()
       KAction *action = new KAction( i18n( "&Enlarge Font" ), actions, "enlarge_font" );
       action->setIcon( KIcon( "fontsizeup" ) );
       connect( action, SIGNAL( triggered() ), this, SLOT( biggerFont() ) );
-      m_fontsizes->insert( action );
+      m_fontsizes->addAction( action );
 
       action = new KAction( i18n( "&Shrink Font" ), actions, "shrink_font" );
       action->setIcon( KIcon( "fontsizedown" ) );
       connect( action, SIGNAL( triggered() ), this, SLOT( smallerFont() ) );
-      m_fontsizes->insert( action );
+      m_fontsizes->addAction( action );
 
       action = new KAction( i18n( "Se&lect..." ), actions, "select_font" );
       action->setIcon( KIcon( "font" ) );
       connect( action, SIGNAL( triggered() ), this, SLOT( slotSelectFont() ) );
-      m_fontsizes->insert( action );
+      m_fontsizes->addAction( action );
 
       m_options->addAction( m_fontsizes );
 

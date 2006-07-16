@@ -354,13 +354,13 @@ void konsolePart::makeGUI()
       m_fontsizes = new KActionMenu( KIcon( "text" ), i18n( "Font" ), settingsActions, 0L );
       KAction * action = new KAction( KIcon( "viewmag+" ), i18n( "&Enlarge Font" ), settingsActions, "enlarge_font" );
       connect(action, SIGNAL(triggered(bool)), SLOT(biggerFont()));
-      m_fontsizes->insert( action );
+      m_fontsizes->addAction( action );
       action = new KAction( KIcon( "viewmag-" ), i18n( "&Shrink Font" ), settingsActions, "shrink_font" );
       connect(action, SIGNAL(triggered(bool)), SLOT(smallerFont()));
-      m_fontsizes->insert( action );
+      m_fontsizes->addAction( action );
       action = new KAction( KIcon( "font" ), i18n( "Se&lect..." ), settingsActions, "select_font" );
       connect(action, SIGNAL(triggered(bool)), SLOT(slotSelectFont()));
-      m_fontsizes->insert( action );
+      m_fontsizes->addAction( action );
       m_options->addAction(m_fontsizes);
 
       // encoding menu, start with default checked !
