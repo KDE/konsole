@@ -128,7 +128,7 @@ void KonsoleBookmarkMenu::fillBookmarkMenu()
       m_parentMenu->addAction( actionMenu );
       m_actions.append( actionMenu );
       KonsoleBookmarkMenu *subMenu = new KonsoleBookmarkMenu( m_pManager,
-                                         m_kOwner, actionMenu->popupMenu(),
+                                         m_kOwner, actionMenu->menu(),
                                          m_actionCollection, false,
                                          m_bAddBookmark, bm.address() );
       m_lstSubMenus.append( subMenu );
