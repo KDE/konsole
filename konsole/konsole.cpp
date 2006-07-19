@@ -174,15 +174,8 @@ extern bool argb_visual; // declared in main.cpp and konsole_part.cpp
 // KonsoleFontSelectAction is now also used for selectSize!
 class KonsoleFontSelectAction : public KSelectAction {
 public:
-    KonsoleFontSelectAction(const QString &text, int accel,
-                            const QObject* receiver, const char* slot,
-                            KActionCollection* parent, const char* name = 0 )
-        : KSelectAction(text, accel, receiver, slot, parent, name) {}
-    KonsoleFontSelectAction( const QString &text, const QIcon& pix,
-                             int accel, const QObject* receiver,
-                             const char* slot, KActionCollection* parent,
-                             const char* name = 0 )
-        : KSelectAction(text, pix, accel, receiver, slot, parent, name) {}
+    KonsoleFontSelectAction(const QString &text, KActionCollection* parent, const QString &name  = QString::null )
+        : KSelectAction(text, parent, name) {}
 
 protected:
     virtual void actionTriggered(QAction* action);
@@ -679,8 +672,8 @@ void Konsole::makeGUI()
       // Select size
       if (!b_fixedSize)
       {
-         selectSize = new KonsoleFontSelectAction(i18n("S&ize"), 0, this,
-                                  SLOT(slotSelectSize()), actions, "size");
+         selectSize = new KonsoleFontSelectAction(i18n("S&ize"), actions, "size");
+         connect(selectSize, SIGNAL(triggered(bool)), SLOT(slotSelectSize()));
          QStringList sizeitems;
          sizeitems << i18n("40x15 (&Small)")
             << i18n("80x24 (&VT100)")
