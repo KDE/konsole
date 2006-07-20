@@ -1345,7 +1345,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       }
       else
       {
-        emit mouseSignal( 0, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maximum() );
+        emit mouseSignal( 0, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maximum() , 0);
       }
     }
   }
@@ -1354,7 +1354,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
     if ( mouse_marks || (!mouse_marks && (ev->modifiers() & Qt::ShiftModifier)) )
       emitSelection(true,ev->modifiers() & Qt::ControlModifier);
     else
-      emit mouseSignal( 1, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maximum() );
+      emit mouseSignal( 1, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maximum() , 0);
   }
   else if ( ev->button() == Qt::RightButton )
   {
@@ -1363,7 +1363,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       emit configureRequest( this, ev->modifiers()&(Qt::ShiftModifier|Qt::ControlModifier), ev->x(), ev->y() );
     }
     else
-      emit mouseSignal( 2, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maximum() );
+      emit mouseSignal( 2, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maximum() , 0);
   }
 }
 
@@ -1372,6 +1372,28 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
   // for auto-hiding the cursor, we need mouseTracking
   if (ev->buttons() == Qt::NoButton ) return;
 
+  QPoint tL  = contentsRect().topLeft();
+      int    tLx = tL.x();
+      int    tLy = tL.y();
+
+      if (!mouse_marks && !(ev->modifiers() & Qt::ShiftModifier))
+      {
+	int button = 3;
+	if (ev->buttons() & Qt::LeftButton)
+		button = 0;
+	if (ev->buttons() & Qt::MidButton)
+		button = 1;
+	if (ev->buttons() & Qt::RightButton)
+		button = 2;
+	
+        emit mouseSignal( button, 
+                        (ev->x()-tLx-bX)/font_w + 1,
+                        (ev->y()-tLy-bY)/font_h + 1 +scrollbar->value() -scrollbar->maximum(),
+			 1 );
+      
+	return;
+      }
+      
   if (dragInfo.state == diPending) {
     // we had a mouse down, but haven't confirmed a drag yet
     // if the mouse has moved sufficiently, we will confirm
@@ -1611,7 +1633,7 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
       if (!mouse_marks && !(ev->modifiers() & Qt::ShiftModifier))
         emit mouseSignal( 3, // release
                         (ev->x()-tLx-bX)/font_w + 1,
-                        (ev->y()-tLy-bY)/font_h + 1 +scrollbar->value() -scrollbar->maximum());
+                        (ev->y()-tLy-bY)/font_h + 1 +scrollbar->value() -scrollbar->maximum() , 0);
       releaseMouse();
     }
     dragInfo.state = diNone;
@@ -1622,7 +1644,7 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
     int    tLx = tL.x();
     int    tLy = tL.y();
 
-    emit mouseSignal( 3, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maximum() );
+    emit mouseSignal( 3, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maximum() , 0);
     releaseMouse();
   }
 }
@@ -1641,7 +1663,7 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
   {
     // Send just _ONE_ click event, since the first click of the double click
     // was already sent by the click handler!
-    emit mouseSignal( 0, pos.x()+1, pos.y()+1 +scrollbar->value() -scrollbar->maximum() ); // left button
+    emit mouseSignal( 0, pos.x()+1, pos.y()+1 +scrollbar->value() -scrollbar->maximum(),0 ); // left button
     return;
   }
 
@@ -1698,7 +1720,7 @@ void TEWidget::wheelEvent( QWheelEvent* ev )
     int    tLx = tL.x();
     int    tLy = tL.y();
     QPoint pos = QPoint((ev->x()-tLx-bX)/font_w,(ev->y()-tLy-bY)/font_h);
-    emit mouseSignal( ev->delta() > 0 ? 4 : 5, pos.x() + 1, pos.y() + 1 +scrollbar->value() -scrollbar->maximum() );
+    emit mouseSignal( ev->delta() > 0 ? 4 : 5, pos.x() + 1, pos.y() + 1 +scrollbar->value() -scrollbar->maximum() , 0);
   }
 }
 

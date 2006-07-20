@@ -34,8 +34,11 @@
 #define MODE_AppCuKeys (MODES_SCREEN+1)
 #define MODE_AppKeyPad (MODES_SCREEN+2)
 #define MODE_Mouse1000 (MODES_SCREEN+3)
-#define MODE_Ansi      (MODES_SCREEN+4)
-#define MODE_total     (MODES_SCREEN+5)
+#define MODE_Mouse1001 (MODES_SCREEN+4)
+#define MODE_Mouse1002 (MODES_SCREEN+5)
+#define MODE_Mouse1003 (MODES_SCREEN+6)
+#define MODE_Ansi      (MODES_SCREEN+7)
+#define MODE_total     (MODES_SCREEN+8)
 
 struct DECpar
 {
@@ -65,7 +68,7 @@ public:
   virtual void onKeyPress(QKeyEvent*);
 public Q_SLOTS: // signals incoming from TEWidget
 
-  void onMouse(int cb, int cx, int cy);
+  void onMouse(int cb, int cx, int cy, int eventType);
 
 Q_SIGNALS:
 

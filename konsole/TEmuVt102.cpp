@@ -90,8 +90,8 @@
 TEmuVt102::TEmuVt102(TEWidget* gui) : TEmulation(gui)
 {
   //kDebug(1211)<<"TEmuVt102 ctor() connecting"<<endl;
-  QObject::connect(gui,SIGNAL(mouseSignal(int,int,int)),
-                   this,SLOT(onMouse(int,int,int)));
+  QObject::connect(gui,SIGNAL(mouseSignal(int,int,int,int)),
+                   this,SLOT(onMouse(int,int,int,int)));
   QObject::connect(gui, SIGNAL(sendStringToEmu(const char*)),
 		   this, SLOT(sendString(const char*)));
   //kDebug(1211)<<"TEmuVt102 ctor() initToken..."<<endl;
@@ -109,14 +109,14 @@ void TEmuVt102::changeGUI(TEWidget* newgui)
   if (static_cast<TEWidget *>( gui )==newgui) return;
 
   if ( gui ) {
-    QObject::disconnect(gui,SIGNAL(mouseSignal(int,int,int)),
-                        this,SLOT(onMouse(int,int,int)));
+    QObject::disconnect(gui,SIGNAL(mouseSignal(int,int,int,int)),
+                        this,SLOT(onMouse(int,int,int,int)));
     QObject::disconnect(gui, SIGNAL(sendStringToEmu(const char*)),
                         this, SLOT(sendString(const char*)));
   }
   TEmulation::changeGUI(newgui);
-  QObject::connect(gui,SIGNAL(mouseSignal(int,int,int)),
-                   this,SLOT(onMouse(int,int,int)));
+  QObject::connect(gui,SIGNAL(mouseSignal(int,int,int,int)),
+                   this,SLOT(onMouse(int,int,int,int)));
   QObject::connect(gui, SIGNAL(sendStringToEmu(const char*)),
 		   this, SLOT(sendString(const char*)));
 }
@@ -722,19 +722,19 @@ switch( N )
     case TY_CSI_PR('r', 1000) :      restoreMode      (MODE_Mouse1000); break; //XTERM
 
     case TY_CSI_PR('h', 1001) : /* IGNORED: hilite mouse tracking    */ break; //XTERM
-    case TY_CSI_PR('l', 1001) :        resetMode      (MODE_Mouse1000); break; //XTERM
+    case TY_CSI_PR('l', 1001) :        resetMode      (MODE_Mouse1001); break; //XTERM
     case TY_CSI_PR('s', 1001) : /* IGNORED: hilite mouse tracking    */ break; //XTERM
     case TY_CSI_PR('r', 1001) : /* IGNORED: hilite mouse tracking    */ break; //XTERM
 
-    case TY_CSI_PR('h', 1002) :          setMode      (MODE_Mouse1000); break; //XTERM
-    case TY_CSI_PR('l', 1002) :        resetMode      (MODE_Mouse1000); break; //XTERM
-    case TY_CSI_PR('s', 1002) :         saveMode      (MODE_Mouse1000); break; //XTERM
-    case TY_CSI_PR('r', 1002) :      restoreMode      (MODE_Mouse1000); break; //XTERM
+    case TY_CSI_PR('h', 1002) :          setMode      (MODE_Mouse1002); break; //XTERM
+    case TY_CSI_PR('l', 1002) :        resetMode      (MODE_Mouse1002); break; //XTERM
+    case TY_CSI_PR('s', 1002) :         saveMode      (MODE_Mouse1002); break; //XTERM
+    case TY_CSI_PR('r', 1002) :      restoreMode      (MODE_Mouse1002); break; //XTERM
 
-    case TY_CSI_PR('h', 1003) :          setMode      (MODE_Mouse1000); break; //XTERM
-    case TY_CSI_PR('l', 1003) :        resetMode      (MODE_Mouse1000); break; //XTERM
-    case TY_CSI_PR('s', 1003) :         saveMode      (MODE_Mouse1000); break; //XTERM
-    case TY_CSI_PR('r', 1003) :      restoreMode      (MODE_Mouse1000); break; //XTERM
+    case TY_CSI_PR('h', 1003) :          setMode      (MODE_Mouse1003); break; //XTERM
+    case TY_CSI_PR('l', 1003) :        resetMode      (MODE_Mouse1003); break; //XTERM
+    case TY_CSI_PR('s', 1003) :         saveMode      (MODE_Mouse1003); break; //XTERM
+    case TY_CSI_PR('r', 1003) :      restoreMode      (MODE_Mouse1003); break; //XTERM
 
     case TY_CSI_PR('h', 1047) :          setMode      (MODE_AppScreen); break; //XTERM
     case TY_CSI_PR('l', 1047) : screen[1]->clearEntireScreen(); resetMode(MODE_AppScreen); break; //XTERM
@@ -883,14 +883,23 @@ void TEmuVt102::reportAnswerBack()
     `x',`y' are 1-based.
     `ev' (event) indicates the button pressed (0-2)
                  or a general mouse release (3).
+
+    eventType represents the kind of mouse action that occurred:
+    	0 = Mouse button press or release
+	1 = Mouse drag
 */
 
-void TEmuVt102::onMouse( int cb, int cx, int cy )
+void TEmuVt102::onMouse( int cb, int cx, int cy , int eventType )
 { char tmp[20];
   if (!connected || cx<1 || cy<1) return;
   // normal buttons are passed as 0x20 + button,
   // mouse wheel (buttons 4,5) as 0x5c + button
   if (cb >= 4) cb += 0x3c;
+
+  //Mouse motion handling
+  if ( (getMode(MODE_Mouse1002) || getMode(MODE_Mouse1003)) && eventType == 1 )
+	  cb += 0x20; //add 32 to signify motion event
+
   sprintf(tmp,"\033[M%c%c%c",cb+0x20,cx+0x20,cy+0x20);
   sendString(tmp);
 }
@@ -1138,6 +1147,10 @@ void TEmuVt102::restoreCursor()
 void TEmuVt102::resetModes()
 {
   resetMode(MODE_Mouse1000); saveMode(MODE_Mouse1000);
+  resetMode(MODE_Mouse1001); saveMode(MODE_Mouse1001);
+  resetMode(MODE_Mouse1002); saveMode(MODE_Mouse1002);
+  resetMode(MODE_Mouse1003); saveMode(MODE_Mouse1003);
+
   resetMode(MODE_AppScreen); saveMode(MODE_AppScreen);
   // here come obsolete modes
   resetMode(MODE_AppCuKeys); saveMode(MODE_AppCuKeys);
@@ -1151,7 +1164,11 @@ void TEmuVt102::setMode(int m)
   currParm.mode[m] = true;
   switch (m)
   {
-    case MODE_Mouse1000 : if (connected) gui->setMouseMarks(false);
+    case MODE_Mouse1000:
+    case MODE_Mouse1001:
+    case MODE_Mouse1002:
+    case MODE_Mouse1003:
+ 	if (connected) gui->setMouseMarks(false);
     break;
 
     case MODE_AppScreen : screen[1]->clearSelection();
@@ -1170,7 +1187,11 @@ void TEmuVt102::resetMode(int m)
   currParm.mode[m] = false;
   switch (m)
   {
-    case MODE_Mouse1000 : if (connected) gui->setMouseMarks(true);
+    case MODE_Mouse1000 : 
+    case MODE_Mouse1001 :
+    case MODE_Mouse1002 :
+    case MODE_Mouse1003 :
+	    if (connected) gui->setMouseMarks(true);
     break;
 
     case MODE_AppScreen : screen[0]->clearSelection();
@@ -1209,10 +1230,14 @@ void TEmuVt102::setConnect(bool c)
   }
   if (c)
   { // refresh mouse mode
-    if (getMode(MODE_Mouse1000))
-      setMode(MODE_Mouse1000);
-    else
-      resetMode(MODE_Mouse1000);
+    int mouseModes[4] = {MODE_Mouse1000,MODE_Mouse1001,MODE_Mouse1002,MODE_Mouse1003};
+    for (int mode = 0 ; mode < 4 ; mode++)
+    {
+    	if (getMode(mouseModes[mode]))
+      		setMode(mouseModes[mode]);
+    	else
+      		resetMode(mouseModes[mode]);
+    }
 #if defined(HAVE_XKB)
     if (holdScreen)
       scrolllock_set_on();

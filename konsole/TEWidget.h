@@ -155,7 +155,14 @@ public Q_SLOTS:
 Q_SIGNALS:
 
     void keyPressedSignal(QKeyEvent *e);
-    void mouseSignal(int cb, int cx, int cy);
+    /** 
+     * A mouse event occurred.
+     * @param cb The mouse button (0 for left button, 1 for middle button, 2 for right button, 3 for release)
+     * @param cx The character column where the event occurred
+     * @param cy The character row where the event occurred
+     * @param eventType The type of event.  0 for a mouse press / release or 1 for mouse motion
+     */
+    void mouseSignal(int cb, int cx, int cy, int eventType);
     void changedFontMetricSignal(int height, int width);
     void changedContentSizeSignal(int height, int width);
     void changedHistoryCursor(int value);
