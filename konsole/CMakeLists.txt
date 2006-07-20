@@ -50,7 +50,7 @@ endif(X11_XTest_FOUND)
 install(TARGETS kdeinit_konsole  DESTINATION ${LIB_INSTALL_DIR} )
 
 target_link_libraries( konsole kdeinit_konsole )
-install(TARGETS konsole DESTINATION bin)
+install(TARGETS konsole DESTINATION ${BIN_INSTALL_DIR})
 
 ########### next target ###############
 
