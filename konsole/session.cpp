@@ -202,6 +202,66 @@ void TESession::changeTabTextColor( int color )
     emit changeTabTextColor( this, color );
 }
 
+bool TESession::hasChildren()
+{
+	int sessionPID=sh->pid();
+
+	//get ids of active processes from /proc and look at each process
+	//to see whether it's parent is the session process,
+	//in which case the session has active children
+	//
+	//This relies on scanning the whole of /proc, which may be expensive if there are an exceptionally
+	//large number of processes running.  If you can think of a better method - please implement it!	
+	
+	QDir procDir("/proc");
+	if (procDir.exists())
+	{
+		QStringList files=procDir.entryList();
+		for (int i=0;i<files.count();i++)
+		{
+			//directory entries in /proc which begin with and contain only digits are process ids
+			if ( files.at(i)[0].isDigit() )
+			{
+				int pid = files.at(i).toInt();
+				
+				// this assumes that child processes must have a pid > their parent processes
+				// so we don't need to consider processes with a lower pid
+				// I'm not absolutely sure whether this is valid or not though
+				
+				if ( pid <= sessionPID )
+					continue;
+				
+				QFile processInfo( QString("/proc/%1/stat").arg(pid) );
+				if ( processInfo.open( QIODevice::ReadOnly ) )
+				{
+					
+					//open process info file and extract parent id
+					QString infoText(processInfo.readAll());
+					//process info file looks like this:
+					//
+					//process_id (process_name) S process_parent_id
+					//... and we want the process_parent_id
+					QRegExp rx("^[\\d]+ \\(.*\\) .[\\s]");
+
+					if (rx.indexIn(infoText) != -1)
+					{
+						int offset = rx.matchedLength();
+						int endOfPPID = infoText.indexOf(' ',offset);
+						int ppid = infoText.mid(offset,endOfPPID-offset).toInt();
+
+						if ( ppid == sessionPID )
+							return true;
+					}
+					
+					processInfo.close();
+				}
+			}
+		}
+	}
+
+	return false;
+}
+
 void TESession::setUserTitle( int what, const QString &caption )
 {
     // (btw: what=0 changes title and icon, what=1 only icon, what=2 only title

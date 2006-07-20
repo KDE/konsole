@@ -48,6 +48,11 @@ public:
   TEWidget* widget() { return te; }
   ~TESession();
 
+  /** 
+   * Returns true if the session has created child processes which have not yet terminated 
+   * This call may be expensive if there are a large number of processes running. 
+   */
+  bool        hasChildren();
   void        setConnect(bool r);  // calls setListenToKeyPress(r)
   void        setListenToKeyPress(bool l);
   TEmulation* getEmulation();      // to control emulation

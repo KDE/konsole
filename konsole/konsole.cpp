@@ -905,6 +905,11 @@ void Konsole::makeTabWidget()
   tabwidget->setTabReorderingEnabled(true);
   tabwidget->setAutomaticResizeTabs( b_autoResizeTabs );
   tabwidget->setTabCloseActivatePrevious( true );
+  kDebug() << "setting hover close button" << endl;
+  tabwidget->setHoverCloseButton( true );
+  connect( tabwidget, SIGNAL(closeRequest(QWidget*)), this,
+                          SLOT(slotTabCloseSession()) );
+
 
   if (n_tabbar==TabTop)
     tabwidget->setTabPosition(QTabWidget::Top);
@@ -1236,12 +1241,11 @@ bool Konsole::queryClose()
 	    switch (
 		KMessageBox::warningYesNoCancel(
 	    	    this,
-            	    i18n( "You have open sessions (besides the current one). "
-                	  "These will be killed if you continue.\n"
-                	  "Are you sure you want to quit?" ),
-	    	    i18n("Really Quit?"),
+            	    i18n( "You are about to close %1 open sessions. \n"
+                	  "Are you sure you want to continue?" , sessions.count() ),
+	    	    i18n("Confirm close"),
 	    	    KStdGuiItem::quit(),
-	    	    KGuiItem(i18n("C&lose Session"),"fileclose")
+	    	    KGuiItem(i18n("C&lose Current Session Only"),"fileclose")
 		)
 	    ) {
 		case KMessageBox::Yes :
@@ -2991,12 +2995,27 @@ void Konsole::confirmCloseCurrentSession( TESession* _se )
 {
    if ( !_se )
       _se = se;
-
-  if (KMessageBox::warningContinueCancel(this,
-        i18n("Are you sure that you want to close the current session?"),
-        i18n("Close Confirmation"), KGuiItem(i18n("C&lose Session"),"tab_remove"),
-        "ConfirmCloseSession")==KMessageBox::Continue)
-    _se->closeSession();
+  
+   bool close = false;
+   
+   //if the session has created child processes which are still alive then prompt 
+   //before closing - otherwise just close the tab immediately
+   if ( _se->hasChildren() )
+   {
+	   //TODO:  It would be even better if this dialog said WHICH programs were running
+  	if (KMessageBox::warningContinueCancel(this,
+        	i18n("There are programs running in this session, are you sure you want to close it?"),
+        	i18n("Close Confirmation"), KGuiItem(i18n("C&lose Session"),"tab_remove"),
+        	"ConfirmCloseSession")==KMessageBox::Continue)
+		close = true;
+   }
+   else
+   {
+	   close = true;
+   }
+  
+   if ( close == true ) 
+   	 _se->closeSession();
 }
 
 void Konsole::closeCurrentSession()
