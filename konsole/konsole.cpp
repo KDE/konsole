@@ -3004,29 +3004,14 @@ void Konsole::confirmCloseCurrentSession( TESession* _se )
 {
    if ( !_se )
       _se = se;
-  
-   bool close = false;
    
-   //if the session has created child processes which are still alive then prompt 
-   //before closing - otherwise just close the tab immediately
-   if ( _se->hasChildren() )
-   {
-	   //TODO:  It would be even better if this dialog said WHICH programs were running
   	if (KMessageBox::warningContinueCancel(this,
-        	i18n("There are programs running in this session, are you sure you want to close it?"),
+        	i18n("Are you sure you want to close this session?"),
         	i18n("Close Confirmation"), KGuiItem(i18n("C&lose Session"),"tab_remove"),
         	"ConfirmCloseSession")==KMessageBox::Continue)
-		close = true;
-   }
-   else
-   {
-	   close = true;
-   }
-  
-   if ( close == true ) 
-   {
-   	 _se->closeSession();
-   }
+   	{
+		_se->closeSession();
+	}
 }
 
 void Konsole::closeCurrentSession()

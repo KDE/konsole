@@ -243,7 +243,9 @@ private Q_SLOTS:
   void slotTabDetachSession();
   void slotTabRenameSession();
   void slotTabSelectColor();
+  /** Close the tab whoose popup menu the user has selected */
   void slotTabCloseSession();
+  /** Close the tab containing the specified widget. */
   void slotTabCloseSession(QWidget* sessionWidget);
   void slotTabToggleMonitor();
   void slotTabToggleMasterMode();
