@@ -908,7 +908,7 @@ void Konsole::makeTabWidget()
   kDebug() << "setting hover close button" << endl;
   tabwidget->setHoverCloseButton( true );
   connect( tabwidget, SIGNAL(closeRequest(QWidget*)), this,
-                          SLOT(slotTabCloseSession()) );
+                          SLOT(slotTabCloseSession(QWidget*)) );
 
 
   if (n_tabbar==TabTop)
@@ -1398,6 +1398,15 @@ void Konsole::slotTabToggleMasterMode()
 void Konsole::slotTabCloseSession()
 {
   confirmCloseCurrentSession(m_contextMenuSession);
+}
+
+void Konsole::slotTabCloseSession(QWidget* sessionWidget)
+{
+	for (int i=0;i<sessions.count();i++)
+	{
+		if (sessions.at(i)->widget() == sessionWidget)
+			confirmCloseCurrentSession(sessions.at(i));
+	}
 }
 
 void Konsole::slotTabbarContextMenu(const QPoint & pos)
@@ -3015,7 +3024,9 @@ void Konsole::confirmCloseCurrentSession( TESession* _se )
    }
   
    if ( close == true ) 
+   {
    	 _se->closeSession();
+   }
 }
 
 void Konsole::closeCurrentSession()

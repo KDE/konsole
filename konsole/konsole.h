@@ -244,6 +244,7 @@ private Q_SLOTS:
   void slotTabRenameSession();
   void slotTabSelectColor();
   void slotTabCloseSession();
+  void slotTabCloseSession(QWidget* sessionWidget);
   void slotTabToggleMonitor();
   void slotTabToggleMasterMode();
   void slotTabbarContextMenu(const QPoint &);
