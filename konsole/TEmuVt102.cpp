@@ -89,6 +89,8 @@
 
 TEmuVt102::TEmuVt102(TEWidget* gui) : TEmulation(gui)
 {
+  titleUpdateTimer.setSingleShot(true);
+
   //kDebug(1211)<<"TEmuVt102 ctor() connecting"<<endl;
   QObject::connect(gui,SIGNAL(mouseSignal(int,int,int,int)),
                    this,SLOT(onMouse(int,int,int,int)));
