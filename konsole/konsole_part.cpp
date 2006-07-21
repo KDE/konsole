@@ -183,7 +183,7 @@ konsolePart::konsolePart(QWidget *_parentWidget, QObject *parent, const char *cl
      else
         curr_schema = 0;
 
-     for (uint i=0; i<m_schema->count(); i++)
+     for (uint i=0; i<m_schema->actions().count(); i++)
         m_schema->setItemChecked(i,false);
 
      m_schema->setItemChecked(curr_schema,true);

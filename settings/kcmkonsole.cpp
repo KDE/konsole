@@ -118,13 +118,13 @@ void KCMKonsole::save()
 {
     if (dialog->SchemaEditor1->isModified())
     {
-       dialog->TabWidget2->showPage(dialog->tab_2);
+       dialog->TabWidget2->setCurrentIndex(dialog->TabWidget2->indexOf(dialog->tab_2));
        dialog->SchemaEditor1->querySave();
     }
 
     if (dialog->SessionEditor1->isModified())
     {
-       dialog->TabWidget2->showPage(dialog->tab_3);
+       dialog->TabWidget2->setCurrentIndex(dialog->TabWidget2->indexOf(dialog->tab_3));
        dialog->SessionEditor1->querySave();
     }
 

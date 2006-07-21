@@ -137,7 +137,7 @@ void KonsoleBookmarkMenu::fillBookmarkMenu()
 
   if ( !m_bIsRoot && m_bAddBookmark )
   {
-      if ( m_parentMenu->count() > 0 )
+      if ( m_parentMenu->actions().count() > 0 )
           m_parentMenu->addSeparator();
     addAddBookmark();
     addNewFolder();
