@@ -1,5 +1,5 @@
 /*
-    This file is part of Konsole, an X terminal.                           
+    This file is part of Konsole, an X terminal.
     Copyright (C) 1996 by Matthias Ettrich <ettrich@kde.org>
     Copyright (C) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
 
@@ -15,7 +15,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
     02110-1301  USA.
 */
 /* The material contained in here more or less directly orginates from    */
@@ -109,6 +109,8 @@ Time to start a requirement list.
 #include <kfiledialog.h>
 #include <kurlrequesterdlg.h>
 
+#include <kfinddialog.h>
+#include <kfind.h>
 #include <kfontdialog.h>
 #include <kkeydialog.h>
 #include <kstandarddirs.h>
@@ -3944,22 +3946,28 @@ void Konsole::slotClearHistory()
 void Konsole::slotFindHistory()
 {
   if( !m_finddialog ) {
-    m_finddialog = new KonsoleFind( this );
-    m_finddialog->setObjectName( "konsolefind" );
-    m_finddialog->setModal( false );
-    connect(m_finddialog,SIGNAL(search()),this,SLOT(slotFind()));
-    connect(m_finddialog,SIGNAL(done()),this,SLOT(slotFindDone()));
+    m_finddialog = new KFindDialog(this);
+    m_finddialog->setButtons( KDialog::User1|KDialog::Close );
+    m_finddialog->setButtonGuiItem( KDialog::User1, KStdGuiItem::find() );
+    m_finddialog->setModal(false);
+    m_finddialog->setDefaultButton(KDialog::User1);
+
+    m_finddialog->setObjectName("konsolefind");
+    m_finddialog->setSupportsWholeWordsFind(false);
+    m_finddialog->setHasCursor(false);
+    m_finddialog->setHasSelection(false);
+
+    connect(m_finddialog, SIGNAL(user1Clicked()), this,SLOT(slotFind()));
+    connect(m_finddialog, SIGNAL(finished()), this,SLOT(slotFindDone()));
   }
 
-  QString string;
-  string = m_finddialog->getText();
-  m_finddialog->setText(string.isEmpty() ? m_find_pattern : string);
+  QString string = m_finddialog->pattern();
+  m_finddialog->setPattern(string.isEmpty() ? m_find_pattern : string);
 
   m_find_first = true;
   m_find_found = false;
 
   m_finddialog->show();
-  m_finddialog->result();
 }
 
 void Konsole::slotFindNext()
@@ -3970,8 +3978,8 @@ void Konsole::slotFindNext()
   }
 
   QString string;
-  string = m_finddialog->getText();
-  m_finddialog->setText(string.isEmpty() ? m_find_pattern : string);
+  string = m_finddialog->pattern();
+  m_finddialog->setPattern(string.isEmpty() ? m_find_pattern : string);
 
   slotFind();
 }
@@ -3984,12 +3992,18 @@ void Konsole::slotFindPrevious()
   }
 
   QString string;
-  string = m_finddialog->getText();
-  m_finddialog->setText(string.isEmpty() ? m_find_pattern : string);
+  string = m_finddialog->pattern();
+  m_finddialog->setPattern(string.isEmpty() ? m_find_pattern : string);
 
-  m_finddialog->setDirection( !m_finddialog->get_direction() );
+  long options = m_finddialog->options();
+  long reverseOptions = options;
+  if (options & KFind::FindBackwards)
+    reverseOptions &= ~KFind::FindBackwards;
+  else
+    reverseOptions |= KFind::FindBackwards;
+  m_finddialog->setOptions( reverseOptions );
   slotFind();
-  m_finddialog->setDirection( !m_finddialog->get_direction() );
+  m_finddialog->setOptions( options );
 }
 
 void Konsole::slotFind()
@@ -3999,20 +4013,22 @@ void Konsole::slotFind()
     m_find_first = false;
   }
 
-  bool forward = !m_finddialog->get_direction();
-  m_find_pattern = m_finddialog->getText();
+  bool forward = !(m_finddialog->options() & KFind::FindBackwards);
+  m_find_pattern = m_finddialog->pattern();
 
-  if (se->getEmulation()->findTextNext(m_find_pattern,forward,
-                          m_finddialog->case_sensitive(),m_finddialog->reg_exp()))
+  if (se->getEmulation()->findTextNext(m_find_pattern,
+                          forward,
+                          (m_finddialog->options() & Qt::CaseSensitive),
+                          (m_finddialog->options() & KFind::RegularExpression)))
     m_find_found = true;
   else
     if (m_find_found) {
       if (forward) {
         if ( KMessageBox::questionYesNo( m_finddialog,
              i18n("End of history reached.\n" "Continue from the beginning?"),
-  	     i18n("Find"), KStdGuiItem::cont(), KStdGuiItem::cancel() ) == KMessageBox::Yes ) {
+             i18n("Find"), KStdGuiItem::cont(), KStdGuiItem::cancel() ) == KMessageBox::Yes ) {
           m_find_first = true;
-    	  slotFind();
+          slotFind();
         }
       }
       else {
@@ -4218,47 +4234,6 @@ unsigned int SizeDialog::columns() const
 unsigned int SizeDialog::lines() const
 {
   return m_lines->value();
-}
-
-//////////////////////////////////////////////////////////////////////
-
-KonsoleFind::KonsoleFind( QWidget *parent )
-  : KEdFind( parent, false ), m_editorDialog(0), m_editRegExp(0)
-{
-  QWidget* row = new QWidget((QWidget*)group );
-  QHBoxLayout *hboxLayout1 = new QHBoxLayout(row);
-  row->setLayout(hboxLayout1);
-  m_asRegExp = new QCheckBox( i18n("As &regular expression"), row );
-  m_asRegExp->setObjectName( "asRegexp" );
-
-  if (!KServiceTypeTrader::self()->query("KRegExpEditor/KRegExpEditor").isEmpty()) {
-    m_editRegExp = new QPushButton( i18n("&Edit..."), row );
-    m_editRegExp->setObjectName("editRegExp");
-    connect( m_asRegExp, SIGNAL( toggled(bool) ), m_editRegExp, SLOT( setEnabled(bool) ) );
-    connect( m_editRegExp, SIGNAL( clicked() ), this, SLOT( slotEditRegExp() ) );
-    m_editRegExp->setEnabled( false );
-  }
-}
-
-void KonsoleFind::slotEditRegExp()
-{
-  if ( m_editorDialog == 0 )
-    m_editorDialog = KServiceTypeTrader::createInstanceFromQuery<QDialog>( "KRegExpEditor/KRegExpEditor", QString(), this );
-
-  assert( m_editorDialog );
-
-  KRegExpEditorInterface *iface = dynamic_cast<KRegExpEditorInterface *>( m_editorDialog );
-  assert( iface );
-
-  iface->setRegExp( getText() );
-  bool ret = m_editorDialog->exec();
-  if ( ret == QDialog::Accepted)
-    setText( iface->regExp() );
-}
-
-bool KonsoleFind::reg_exp() const
-{
-  return m_asRegExp->isChecked();
 }
 
 ///////////////////////////////////////////////////////////

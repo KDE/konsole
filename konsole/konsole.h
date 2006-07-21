@@ -29,7 +29,6 @@
 #include <kmainwindow.h>
 #include <kdialog.h>
 #include <ksimpleconfig.h>
-#include <keditcl.h>
 
 #include <kwinmodule.h>
 
@@ -60,7 +59,7 @@
 
 class QLabel;
 class QCheckBox;
-class KonsoleFind;
+class KFindDialog;
 class KMenu;
 class KAction;
 class KToggleAction;
@@ -374,7 +373,7 @@ private:
   KonsoleBookmarkHandler *bookmarkHandler;
   KonsoleBookmarkHandler *bookmarkHandlerSession;
 
-  KonsoleFind* m_finddialog;
+  KFindDialog* m_finddialog;
   bool         m_find_first;
   bool         m_find_found;
   QString      m_find_pattern;
@@ -485,22 +484,6 @@ public Q_SLOTS:
 protected:
   QSpinBox*  m_columns;
   QSpinBox*  m_lines;
-};
-
-class KonsoleFind : public KEdFind
-{
-    Q_OBJECT
-public:
-  KonsoleFind( QWidget *parent = 0 );
-  bool reg_exp() const;
-
-private Q_SLOTS:
-  void slotEditRegExp();
-
-private:
-  QCheckBox*    m_asRegExp;
-  QDialog*      m_editorDialog;
-  QPushButton*  m_editRegExp;
 };
 
 #endif
