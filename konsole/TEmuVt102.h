@@ -27,6 +27,8 @@
 #include <stdio.h>
 //Added by qt3to4:
 #include <QKeyEvent>
+#include <QHash>
+#include <QTimer>
 
 //
 
@@ -129,7 +131,7 @@ private:
 
   void onScrollLock();
   void scrollLock(const bool lock);
-
+  
 protected:
 
   unsigned short applyCharset(unsigned short c);
@@ -146,6 +148,18 @@ protected:
   DECpar currParm;
   DECpar saveParm;
   bool holdScreen;
+
+  //hash table and timer for buffering calls to the session instance to update the name of the session
+  //or window title.
+  //these calls occur when certain escape sequences are seen in the output from the terminal
+  QHash<int,QString> pendingTitleUpdates;
+  QTimer titleUpdateTimer;
+  
+protected slots:
+		
+  //causes changeTitle() to be emitted for each (int,QString) pair in pendingTitleUpdates
+  //used to buffer multiple title updates
+  void updateTitle();
 };
 
 #endif // ifndef ANSIEMU_H

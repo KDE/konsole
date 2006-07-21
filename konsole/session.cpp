@@ -264,11 +264,24 @@ bool TESession::hasChildren()
 
 void TESession::setUserTitle( int what, const QString &caption )
 {
+	bool modified = false; //set to true if anything is actually changed (eg. old title != new title )
+	
     // (btw: what=0 changes title and icon, what=1 only icon, what=2 only title
-    if ((what == 0) || (what == 2))
-       userTitle = caption;
+    if ((what == 0) || (what == 2)) {
+       	if ( userTitle != caption ) {
+			userTitle = caption;
+			modified = true;
+		}
+    }
+    
     if ((what == 0) || (what == 1))
-       iconText = caption;
+	{
+		if ( iconText != caption ) {
+       		iconText = caption;
+			modified = true;
+		}
+	}
+	
     if (what == 11) {
       QString colorString = caption.section(';',0,0);
       QColor backColor = QColor(colorString);
@@ -279,19 +292,30 @@ void TESession::setUserTitle( int what, const QString &caption )
 	}
       }
     }
-    if (what == 30)
-       renameSession(caption);
+    
+	if (what == 30) {
+		if ( title != caption ) {
+       		renameSession(caption);
+			return;
+		}
+	}
+	
     if (what == 31) {
        cwd=caption;
        cwd=cwd.replace( QRegExp("^~"), QDir::homePath() );
        emit openURLRequest(cwd);
-    }
+	}
+	
     if (what == 32) { // change icon via \033]32;Icon\007
-       iconName = caption;
-       te->update();
+    	if ( iconName != caption ) {
+	   		iconName = caption;
+       		te->update();
+			modified = true;
+		}
     }
 
-    emit updateTitle();
+	if ( modified )
+    	emit updateTitle();
 }
 
 QString TESession::fullTitle() const

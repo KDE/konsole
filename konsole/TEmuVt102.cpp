@@ -94,6 +94,8 @@ TEmuVt102::TEmuVt102(TEWidget* gui) : TEmulation(gui)
                    this,SLOT(onMouse(int,int,int,int)));
   QObject::connect(gui, SIGNAL(sendStringToEmu(const char*)),
 		   this, SLOT(sendString(const char*)));
+  QObject::connect(&titleUpdateTimer , SIGNAL(timeout()) , this , SLOT(updateTitle()));
+
   //kDebug(1211)<<"TEmuVt102 ctor() initToken..."<<endl;
   initTokenizer();
   //kDebug(1211)<<"TEmuVt102 ctor() reset()"<<endl;
@@ -396,8 +398,20 @@ void TEmuVt102::XtermHack()
   QString unistr(str,ppos-i-2);
   // arg == 1 doesn't change the title. In XTerm it only changes the icon name
   // (btw: arg=0 changes title and icon, arg=1 only icon, arg=2 only title
-  emit changeTitle(arg,unistr);
+//  emit changeTitle(arg,unistr);
+  pendingTitleUpdates[arg] = unistr;
+  titleUpdateTimer.start(20);
+
   delete [] str;
+}
+
+void TEmuVt102::updateTitle()
+{
+	QListIterator<int> iter( pendingTitleUpdates.keys() );
+	while (iter.hasNext()) {
+		int arg = iter.next();
+		emit changeTitle( arg , pendingTitleUpdates[arg] );	
+	}	
 }
 
 // Interpreting Codes ---------------------------------------------------------
