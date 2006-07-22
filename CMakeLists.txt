@@ -1,7 +1,9 @@
 
 project(konsole)
 
+if(NOT WIN32)
 add_subdirectory( konsole ) 
+endif(NOT WIN32)
 add_subdirectory( other ) 
 add_subdirectory( doc ) 
 add_subdirectory( settings ) 
