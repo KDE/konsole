@@ -323,7 +323,8 @@ void TEmuVt102::initTokenizer()
 // process an incoming unicode character
 
 void TEmuVt102::onRcvChar(int cc)
-{ int i;
+{ 
+  int i;
   if (cc == 127) return; //VT100: ignore.
 
   if (ces(    CTL))

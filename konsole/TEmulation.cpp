@@ -307,10 +307,48 @@ void TEmulation::onKeyPress( QKeyEvent* ev )
    We are doing code conversion from locale to unicode first.
 */
 
-void TEmulation::onRcvBlock(const char *s, int len)
+void TEmulation::onRcvBlock(const char* text, int length)
+{
+	emit notifySessionState(NOTIFYACTIVITY);
+
+	bulkStart();
+
+	QString unicodeText = decoder->toUnicode(text,length);
+	
+	//send characters to terminal emulator
+	for (int i=0;i<unicodeText.length();i++)
+	{
+		onRcvChar(unicodeText[i].unicode());
+	}
+
+	//look for z-modem indicator
+	//-- someone who understands more about z-modems that I do may be able to move
+	//this check into the above for loop?
+	for (int i=0;i<length;i++)
+	{
+		if (text[i] == '\030')
+    		{
+      			if ((length-i-1 > 3) && (strncmp(text+i+1, "B00", 3) == 0))
+      				emit zmodemDetected();
+    		}
+	}
+}
+
+//OLDER VERSION
+//This version of onRcvBlock was commented out because
+//	a)  It decoded incoming characters one-by-one, which is slow in the current version of Qt (4.2 tech preview)
+//	b)  It messed up decoding of non-ASCII characters, with the result that (for example) chinese characters
+//	    were not printed properly.
+//
+//There is something about stopping the decoder if "we get a control code halfway a multi-byte sequence" (see below)
+//which hasn't been ported into the newer function (above).  Hopefully someone who understands this better
+//can find an alternative way of handling the check.  
+
+
+/*void TEmulation::onRcvBlock(const char *s, int len)
 {
   emit notifySessionState(NOTIFYACTIVITY);
-
+  
   bulkStart();
   for (int i = 0; i < len; i++)
   {
@@ -343,7 +381,7 @@ void TEmulation::onRcvBlock(const char *s, int len)
       	emit zmodemDetected();
     }
   }
-}
+}*/
 
 // Selection --------------------------------------------------------------- --
 
