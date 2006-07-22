@@ -907,7 +907,6 @@ void Konsole::makeTabWidget()
   tabwidget->setTabReorderingEnabled(true);
   tabwidget->setAutomaticResizeTabs( b_autoResizeTabs );
   tabwidget->setTabCloseActivatePrevious( true );
-  kDebug() << "setting hover close button" << endl;
   tabwidget->setHoverCloseButton( true );
   connect( tabwidget, SIGNAL(closeRequest(QWidget*)), this,
                           SLOT(slotTabCloseSession(QWidget*)) );

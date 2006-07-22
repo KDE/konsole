@@ -1,7 +1,9 @@
 /*
     This file is part of Konsole, an X terminal.
+    
+    Copyright (C) 2006 by Robert Knight <robertknight@gmail.com>
     Copyright (C) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
-
+    
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation; either version 2 of the License, or
@@ -433,7 +435,12 @@ TEWidget::TEWidget(QWidget *parent)
   if (!argb_visual)
   {
   }
-  setAttribute(Qt::WA_PaintOnScreen); //We have our own double-buffer, so...
+  
+  //tell Qt to automatically fill the widget with the current background colour when
+  //repainting.
+  //the widget may then need to repaint over some of the area in a different colour
+  //but because of the double buffering there won't be any flicker
+  setAutoFillBackground(true); 
 }
 
 //FIXME: make proper destructor
@@ -566,7 +573,26 @@ static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code
 
 }
 
-void TEWidget::drawTextFixed(QPainter &paint, int x, int y,
+//TODO
+//The old version painted the text on a character-by-character basis, this is slow and should be 
+//avoided if at all possible.
+//
+//Investigate:
+//	- Why did the old version allow double the width for characters at column 0?  I cannot
+//	see any obvious visual differences
+//	- Implement line-drawing char stuff from old version if necessary, and find a test case for it.
+// 
+// -- Robert Knight <robertknight@gmail.com>
+
+void TEWidget::drawTextFixed(QPainter& paint, int x, int y, QString& str, const ca* attributes)
+{
+    paint.drawText( QRect( x, y, font_w*str.length(), font_h ), Qt::AlignHCenter | Qt::TextDontClip, str );
+}
+
+//OLD VERSION
+//
+
+/*void TEWidget::drawTextFixed(QPainter &paint, int x, int y,
                              QString& str, const ca *attr)
 {
   QString drawstr;
@@ -602,7 +628,7 @@ void TEWidget::drawTextFixed(QPainter &paint, int x, int y,
     paint.drawText( QRect( x, y, w, font_h ), Qt::AlignHCenter | Qt::TextDontClip, drawstr );
     x += w;
   }
-}
+}*/
 
 
 /*!
@@ -612,6 +638,13 @@ void TEWidget::drawTextFixed(QPainter &paint, int x, int y,
 void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
                            QString& str, const ca *attr, bool pm, bool clear)
 {
+  //draw text fragment.
+  //the basic process is:
+  //	1.  save current state of painter
+  //	2.  set painter properties and draw text
+  //	3.  restore state of painter
+  paint.save();
+
   int a = font_a + m_lineSpacing / 2;
   QColor fColor = printerFriendly ? Qt::black : attr->f.color(color_table);
   QColor bColor = attr->b.color(color_table);
@@ -627,8 +660,6 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
     {
       if (pm)
         paint.setBackgroundMode( Qt::TransparentMode );
-      if (clear || (blinking && (attr->r & RE_BLINK)))
-        paint.eraseRect(rect);
     }
     else
     {
@@ -704,6 +735,15 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
   }
 
   // Paint text
+  
+  //Check & apply BOLD font
+  if (attr->r & RE_BOLD)
+  {
+  		QFont currentFont = paint.font();
+		currentFont.setBold(true);
+  		paint.setFont( currentFont );
+  }
+  
   if (!(blinking && (attr->r & RE_BLINK)))
   {
     // ### Disabled for now, since it causes problems with characters
@@ -716,12 +756,11 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
     if (attr->isBold(color_table) && printerBold)
     {
       // When printing we use a bold font for bold
-      paint.save();
       QFont f = font();
       f.setBold(true);
       paint.setFont(f);
     }
-
+   
     if(!fixed_font)
     {
       // The meaning of y differs between different versions of QPainter::drawText!!
@@ -729,11 +768,14 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
 
       if ( shadow ) {
         paint.setPen( Qt::black );
+	
+	
         drawTextFixed(paint, x+1, y+1, str, attr);
         paint.setPen(fColor);
       }
 
-      drawTextFixed(paint, x, y, str, attr);
+      
+      	drawTextFixed(paint, x, y, str, attr);
     }
     else
     {
@@ -787,6 +829,9 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
       paint.drawLine(rect.left(), rect.y()+a+1,
                      rect.right(),rect.y()+a+1 );
   }
+
+  //restore painter to state prior to drawing text
+  paint.restore();
 }
 
 /*!
@@ -827,7 +872,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
 
   cacol cf;       // undefined
   cacol cb;       // undefined
-  int   cr  = -1; // undefined
+  UINT8 cr  = -1; // undefined
 
   int lins = qMin(this->lines, qMax(0,lines  ));
   int cols = qMin(this->columns,qMax(0,columns));
@@ -1115,7 +1160,7 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect, bool pm)
     Q_UINT16 c = image[loc(lux,y)].c;
     int x = lux;
     if(!c && x)
-      x--; // Search for start of multi-col char
+      x--; // Search for start of multi-column character
     for (; x <= rlx; x++)
     {
       int len = 1;
@@ -1127,7 +1172,8 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect, bool pm)
       bool doubleWidth = (image[loc(x,y)+1].c == 0);
       cacol cf = image[loc(x,y)].f;
       cacol cb = image[loc(x,y)].b;
-      int   cr = image[loc(x,y)].r;
+      UINT8 cr = image[loc(x,y)].r;
+	  
       while (x+len <= rlx &&
              image[loc(x+len,y)].f == cf &&
              image[loc(x+len,y)].b == cb &&
@@ -1138,11 +1184,11 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect, bool pm)
         if (c)
           disstrU[p++] = c; //fontMap(c);
         if (doubleWidth) // assert((image[loc(x+len,y)+1].c == 0)), see above if condition
-          len++; // Skip trailing part of multi-column char
+          len++; // Skip trailing part of multi-column character
         len++;
       }
       if ((x+len < columns) && (!image[loc(x+len,y)].c))
-        len++; // Adjust for trailing part of multi-column char
+        len++; // Adjust for trailing part of multi-column character
 
       if (!isBlinkEvent || (cr & RE_BLINK))
       {
@@ -1152,10 +1198,16 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect, bool pm)
          if (doubleWidth)
             fixed_font = false;
          QString unistr(disstrU,p);
-         drawAttrStr(paint,
-                QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
-                unistr, &image[loc(x,y)], pm, !(isBlinkEvent || isPrinting));
-         fixed_font = save_fixed_font;
+		 
+		 //paint text fragment
+         drawAttrStr(	paint,
+                		QRect( bX+tLx+font_w*x , bY+tLy+font_h*y , font_w*len , font_h),
+                		unistr, 
+						&image[loc(x,y)], 
+						pm, 
+						!(isBlinkEvent || isPrinting) 	);
+         
+		 fixed_font = save_fixed_font;
       }
       x += len - 1;
     }

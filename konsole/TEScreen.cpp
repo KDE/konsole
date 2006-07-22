@@ -508,7 +508,18 @@ void TEScreen::reverseRendition(ca* p)
 void TEScreen::effectiveRendition()
 // calculate rendition
 {
-  ef_re = cu_re & (RE_UNDERLINE | RE_BLINK);
+  //copy "current rendition" straight into "effective rendition", which is then later copied directly
+  //into the image[] array which holds the characters and their appearence properties.
+  //- The old version below filtered out all attributes other than underline and blink at this stage,
+  //so that they would not be copied into the image[] array and hence would not be visible by TEWidget
+  //which actually paints the screen using the information from the image[] array.  
+  //I don't know why it did this, but I'm fairly sure it was the wrong thing to do.  The net result
+  //was that bold text wasn't printed in bold by Konsole.
+  ef_re = cu_re;
+  
+  //OLD VERSION:
+  //ef_re = cu_re & (RE_UNDERLINE | RE_BLINK);
+  
   if (cu_re & RE_REVERSE)
   {
     ef_fg = cu_bg;

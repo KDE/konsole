@@ -124,6 +124,8 @@ protected:
 
   void setCodec(int c); // codec number, 0 = locale, 1=utf8
 
+  //decodes an incoming C-style character stream into a unicode QString using 
+  //the current text codec.  (this allows for rendering of non-ASCII characters in text files etc.)
   const QTextCodec* m_codec;
   QTextDecoder* decoder;
 

@@ -730,9 +730,14 @@ switch( N )
     // SET_BTN_EVENT_MOUSE         1002
     // SET_ANY_EVENT_MOUSE         1003
     //
-    // FIXME: Modes 1000,1002 and 1003 have subtle differences which we don't
-    // support yet, we treat them all the same.
-
+    
+    //Note about mouse modes:
+    //There are four mouse modes which xterm-compatible terminals can support - 1000,1001,1002,1003
+    //Konsole currently supports mode 1000 (basic mouse press and release) and mode 1002 (dragging the mouse).
+    //TODO:  Implementation of mouse modes 1001 (something called hilight tracking) and 
+    //1003 (a slight variation on dragging the mouse)
+    //
+ 
     case TY_CSI_PR('h', 1000) :          setMode      (MODE_Mouse1000); break; //XTERM
     case TY_CSI_PR('l', 1000) :        resetMode      (MODE_Mouse1000); break; //XTERM
     case TY_CSI_PR('s', 1000) :         saveMode      (MODE_Mouse1000); break; //XTERM
