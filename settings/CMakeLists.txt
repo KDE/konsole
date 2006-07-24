@@ -7,15 +7,15 @@ set(kcm_konsole_PART_SRCS schemaeditor.cpp sessioneditor.cpp kcmkonsole.cpp )
 
 kde4_automoc(${kcm_konsole_PART_SRCS})
 
-kde4_add_ui3_files(kcm_konsole_PART_SRCS schemadialog.ui sessiondialog.ui kcmkonsoledialog.ui )
+kde4_add_ui3_files(kcm_konsole_PART_SRCS schemadialog.ui sessiondialog.ui kcmkonsoledialog.ui)
 
 kde4_add_plugin(kcm_konsole ${kcm_konsole_PART_SRCS})
 
-kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kcm_konsole )
+kde4_install_libtool_file(${PLUGIN_INSTALL_DIR} kcm_konsole)
 
-target_link_libraries(kcm_konsole  ${KDE4_KDE3SUPPORT_LIBS} kdefx )
+target_link_libraries(kcm_konsole ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KDEFX_LIBS})
 
-install(TARGETS kcm_konsole  DESTINATION ${PLUGIN_INSTALL_DIR} )
+install(TARGETS kcm_konsole  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 
 ########### install files ###############
