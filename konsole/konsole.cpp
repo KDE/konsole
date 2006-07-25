@@ -300,7 +300,6 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 
   colors = new ColorSchemaList();
   colors->checkSchemas();
-  colors->sort();
 
   KeyTrans::loadAll();
 
@@ -1054,10 +1053,7 @@ void Konsole::makeBasicGUI()
   if (m_help)
      menubar->insertItem(i18n("Help"), m_help);
 
-#ifdef __GNUC__
-# warning "Please verify the casting to QWidget* for KActionCollection"
-#endif
-  m_shortcuts = new KActionCollection((QWidget*)(this));
+  m_shortcuts = new KActionCollection( (QObject*) this);
 
   m_copyClipboard = new KAction(KIcon("editcopy"), i18n("&Copy"), m_shortcuts, "edit_copy");
   connect(m_copyClipboard, SIGNAL(triggered(bool) ), SLOT(slotCopyClipboard()));
@@ -2423,13 +2419,13 @@ void Konsole::addSession(TESession* s)
 
   s->setTitle(newTitle);
 
-  // create an action for the session
+  // create a new toggle action for the session
   KToggleAction *ra = new KToggleAction(KIcon(s->IconName()), newTitle.replace('&',"&&"),
       m_shortcuts, QString());
-  connect(ra, SIGNAL(toggled(bool)), SLOT(activateSession()));
   ra->setActionGroup(m_sessionGroup);
-  ra->setChecked(true);
-
+  //ra->setChecked(true);
+  connect(ra, SIGNAL(toggled(bool)), SLOT(activateSession()));
+  
   action2session.insert(ra, s);
   session2action.insert(s,ra);
   sessions.append(s);
@@ -2927,7 +2923,9 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStringLis
   connect( s, SIGNAL(changeTabTextColor(TESession*, int)),
       this,SLOT(changeTabTextColor(TESession*, int)) );
 
-  s->widget()->setVTFont(defaultFont);// Hack to set font again after newSession
+  //REMOVEME
+  //s->widget()->setVTFont(defaultFont);// Hack to set font again after newSession
+  
   s->setSchemaNo(schmno);
   if (key.isEmpty())
     s->setKeymapNo(n_defaultKeytab);
@@ -4286,6 +4284,13 @@ void Konsole::enableFixedSize(bool b)
       delete m_fullscreen;
       m_fullscreen = 0;
     }
+}
+
+void Konsole::showEvent( QShowEvent* event )
+{
+	assert( tabwidget && tabwidget->currentWidget() );
+
+	tabwidget->currentWidget()->setFocus();
 }
 
 Q3PtrList<TEWidget> Konsole::activeTEs()

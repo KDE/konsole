@@ -632,29 +632,5 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 
   int ret = a.exec();
 
- //// Temporary code, waiting for Qt to do this properly
-
-#ifdef __GNUC__
-   #warning "I ported this hack directly: may be it's no longer needed?"
-#endif
-  // Delete all toplevel widgets that have WDestructiveClose
-  QList<QWidget*> list = QApplication::topLevelWidgets();
-
-  // remove all toplevel widgets that have a parent (i.e. they
-  // got WTopLevel explicitly), they'll be deleted by the parent
-  QMutableListIterator<QWidget*> it(list);
-  while(it.hasNext())
-  {
-    QWidget* widget = it.next();
-    if( widget->parentWidget() != NULL || !widget->testAttribute(Qt::WA_DeleteOnClose) )
-    {
-        it.remove();
-        continue;
-    }
-  }
-
-  foreach(QWidget* w, list)
-     delete w;
-
   return ret;
 }

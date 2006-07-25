@@ -99,15 +99,18 @@ Q_OBJECT
 
     QString m_strError;
 
-    struct SendJob {
-      SendJob() {}
-      SendJob(const char* b, int len) {
-		buffer.resize(len);
-		qCopy(b, b+len, buffer.begin());
-        length = len;
-      }
-      QVector<char> buffer;
-      int length;
+    class SendJob {
+	public:
+      		SendJob() {}
+      		SendJob(const char* b, int len) : buffer(len)
+		{
+			memcpy( buffer.data() , b , len );
+      		}
+	
+		const char* data() const { return buffer.constData(); }
+		int length() const { return buffer.size(); }	
+	private:
+      		QVector<char> buffer;
     };
     QList<SendJob> pendingSendJobs;
     bool m_bufferFull;

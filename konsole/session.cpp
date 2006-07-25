@@ -202,6 +202,13 @@ void TESession::changeTabTextColor( int color )
     emit changeTabTextColor( this, color );
 }
 
+// NOTE: TESession::hasChildren() was originally written so that the 'do you really want to close?'
+// prompt delivered when closing a session would only be shown if the session had running processes.
+// However, it was decided that stat-ing everything in /proc was very expensive, and others
+// disagreed with the basic idea.
+//
+// This code is left here in case anyone wants to know a way of figuring out
+// the PIDs of processes running in the terminal sessions :)
 bool TESession::hasChildren()
 {
 	int sessionPID=sh->pid();
@@ -284,6 +291,7 @@ void TESession::setUserTitle( int what, const QString &caption )
 	
     if (what == 11) {
       QString colorString = caption.section(';',0,0);
+      kDebug() << __FILE__ << __LINE__ << ": setting background colour to " << colorString << endl;
       QColor backColor = QColor(colorString);
       if (backColor.isValid()){// change color via \033]11;Color\007
 	if (backColor != modifiedBackground) {

@@ -142,6 +142,9 @@ protected:
  void saveProperties(KConfig* config);
  void readProperties(KConfig* config);
 
+ //virtual void focusInEvent(QFocusEvent* event);
+ virtual void showEvent(QShowEvent* event);
+
 private Q_SLOTS:
   void configureRequest(TEWidget*,int,int,int);
   void activateSession();

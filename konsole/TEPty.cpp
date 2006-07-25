@@ -214,9 +214,10 @@ void TEPty::doSendJobs() {
   }
   
   SendJob& job = pendingSendJobs.first();
-  if (!writeStdin(job.buffer.data(), job.length))
+
+  if (!writeStdin( job.data(), job.length() ))
   {
-    qWarning("Uh oh.. can't write data..");
+    qWarning("TEPty::doSendJobs - Could not send input data to terminal process.");
     return;
   }
   m_bufferFull = true;

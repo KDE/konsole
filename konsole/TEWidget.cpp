@@ -586,7 +586,7 @@ static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code
 
 void TEWidget::drawTextFixed(QPainter& paint, int x, int y, QString& str, const ca* attributes)
 {
-    paint.drawText( QRect( x, y, font_w*str.length(), font_h ), Qt::AlignHCenter | Qt::TextDontClip, str );
+    paint.drawText( QRect( x, y, font_w*str.length(), font_h ), /*Qt::AlignHCenter |*/ Qt::TextDontClip, str );
 }
 
 //OLD VERSION
@@ -886,6 +886,8 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
     const ca*       lcl = &image[y*this->columns];
     const ca* const ext = &newimg[y*columns];
 
+    bool updateLine = false;
+    
     // The dirty mask indicates which characters need repainting. We also
     // mark surrounding neighbours dirty, in case the character exceeds
     // its cell boundaries
@@ -961,16 +963,16 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
         if (doubleWidth)
            fixed_font = false;
 
-        dirtyRegion |= QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h);
-/*
-  #warning pm (backgroundPixmap) is always NULL
-        drawAttrStr(paint,
-                    QRect(bX+tLx+font_w*x,bY+tLy+font_h*y,font_w*len,font_h),
-                    unistr, &ext[x], pm != NULL, true);
-*/
-        fixed_font = save_fixed_font;
+	updateLine = true;
+        
+	fixed_font = save_fixed_font;
         x += len - 1;
       }
+    }
+	
+    if (updateLine)
+    {
+    	dirtyRegion |= QRect( bX+tLx , bY+tLy+font_h*y , font_w * cols , font_h ); 	
     }
 
     dirtyMask--; // Set back
@@ -978,7 +980,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
     // finally, make `image' become `newimg'.
     memcpy((void*)lcl,(const void*)ext,cols*sizeof(ca));
   }
-  repaint(dirtyRegion);
+  update(dirtyRegion);
 
   if ( hasBlinker && !blinkT->isActive()) blinkT->start(1000); // 1000 ms
   if (!hasBlinker && blinkT->isActive()) { blinkT->stop(); blinking = false; }

@@ -414,7 +414,9 @@ void TEmuVt102::updateTitle()
 	while (iter.hasNext()) {
 		int arg = iter.next();
 		emit changeTitle( arg , pendingTitleUpdates[arg] );	
-	}	
+	}
+
+    pendingTitleUpdates.clear();	
 }
 
 // Interpreting Codes ---------------------------------------------------------

@@ -292,7 +292,8 @@ void TEmulation::onKeyPress( QKeyEvent* ev )
     // Note that the text is proper unicode.
     // We should do a conversion here, but since this
     // routine will never be used, we simply emit plain ascii.
-    emit sndBlock(ev->text().toAscii(),ev->text().length());
+    //emit sndBlock(ev->text().toAscii(),ev->text().length());
+    emit sndBlock(ev->text().toUtf8(),ev->text().length());
   }
   else if (ev->text().toAscii().constData()>0)
   { unsigned char c[1];
