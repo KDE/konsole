@@ -93,7 +93,7 @@ static KCmdLineOptions options[] =
    { "schema <name> | <file>",  I18N_NOOP("Set schema to 'name' or use 'file'"), 0 },
    { "schemas",        0, 0 },
    { "schemata",       I18N_NOOP("List available schemata"), 0 },
-   { "script",         I18N_NOOP("Enable extended DCOP Qt functions"), 0 },
+//   { "script",         I18N_NOOP("Enable extended DCOP Qt functions"), 0 },
    { "workdir <dir>",  I18N_NOOP("Change working directory to 'dir'"), 0 },
    { "!e <command>",   I18N_NOOP("Execute 'command' instead of shell"), 0 },
    // WABA: All options after -e are treated as arguments.
@@ -103,7 +103,7 @@ static KCmdLineOptions options[] =
 
 static bool has_noxft = false;
 static bool login_shell = false;
-static bool full_script = false;
+//static bool full_script = false;
 static bool auto_close = true;
 static bool fixed_size = false;
 
@@ -143,8 +143,8 @@ public:
             restartCommand.append("--noxft");
         if (login_shell)
             restartCommand.append("--ls");
-        if (full_script)
-            restartCommand.append("--script");
+//        if (full_script)
+//            restartCommand.append("--script");
         if (!auto_close)
             restartCommand.append("--noclose");
         if (fixed_size)
@@ -236,7 +236,6 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 
   KCmdLineArgs::init( argc, argv, &aboutData );
   KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
-  //1.53 sec
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
   KCmdLineArgs *qtargs = KCmdLineArgs::parsedArgs("qt");
   has_noxft = !args->isSet("xft");
@@ -337,10 +336,10 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   frameon = args->isSet("frame");
   scrollbaron = args->isSet("scrollbar");
   wname = qtargs->getOption("name");
-  full_script = args->isSet("script");
+//  full_script = args->isSet("script");
   auto_close = args->isSet("close");
   fixed_size = !args->isSet("resize");
-#warning "kde4: port it"
+#warning "KDE4: Does DBUS have an equivalent function for dcopClient()->setQtBridgeEnabled()?"
 #if 0
   if (!full_script)
 	a.dcopClient()->setQtBridgeEnabled(false);
@@ -425,9 +424,6 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
      return 0;
   }
 
-
-  //FIXME: more: font
-
   args->clear();
 
   int c = 0, l = 0;
@@ -505,7 +501,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 
         m->newSession(sPgm, eargs, sTerm, sIcon, sTitle, sCwd);
 
-        m->enableFullScripting(full_script);
+//        m->enableFullScripting(full_script);
         m->enableFixedSize(fixed_size);
 	m->restore(n);
         sessionconfig->setGroup(QString("%1").arg(n));
@@ -606,10 +602,8 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   {
     Konsole*  m = new Konsole(wname,histon,menubaron,tabbaron,frameon,scrollbaron,type, false, 0, workDir);
     m->newSession((shell ? QFile::decodeName(shell) : QString()), eargs, term, QString(), title, workDir);
-    m->enableFullScripting(full_script);
+//    m->enableFullScripting(full_script);
     m->enableFixedSize(fixed_size);
-    //3.8 :-(
-    //exit(0);
 
     if (!keytab.isEmpty())
       m->initSessionKeyTab(keytab);
