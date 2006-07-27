@@ -200,7 +200,7 @@ template class Q3PtrDict<KToggleAction>;
 
 Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bool frameon, bool scrollbaron,
                  Q3CString type, bool b_inRestore, const int wanted_tabbar, const QString &workdir )
-:KMainWindow(0, name)
+:KMainWindow(0)
 ,m_defaultSession(0)
 ,m_defaultSessionFilename("")
 ,tabwidget(0)
@@ -281,6 +281,8 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 ,sl_sessionShortCuts(0)
 ,s_workDir(workdir)
 {
+    setObjectName( name );
+
 	(void)new KonsoleAdaptor(this);
 	QDBus::sessionBus().registerObject(QLatin1String("/Konsole"), this);
 	QDBus::sessionBus().registerService("org.kde.konsole");
