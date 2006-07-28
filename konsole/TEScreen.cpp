@@ -466,6 +466,13 @@ void TEScreen::resizeImage(int new_lines, int new_columns)
   clearSelection();
 }
 
+void TEScreen::setDefaultMargins()
+{
+	tmargin = 0;
+	bmargin = lines-1;
+}
+
+
 /*
    Clarifying rendition here and in TEWidget.
 

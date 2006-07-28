@@ -62,6 +62,9 @@ public: // these are all `Screen' operations
     void setCursorX  (int x);
     void setCursorYX (int y, int x);
     void setMargins  (int t, int b);
+    //sets the scrolling margins back to their default positions
+    void setDefaultMargins();
+    
     //
     // Cursor Movement with Scrolling
     //

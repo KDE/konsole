@@ -141,7 +141,10 @@ protected:
   void saveCursor();
   void restoreCursor();
   void resetCharset(int scrno);
+
   void setMargins(int t, int b);
+  //set margins for all screens back to their defaults
+  void setDefaultMargins();
 
   CharCodes charset[2];
 

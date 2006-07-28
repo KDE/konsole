@@ -55,6 +55,7 @@
 
 #include "config.h"
 #include "TEWidget.h"
+//#include "OverlayFrame.h"
 #include "konsole_wcwidth.h"
 
 #include <QApplication>
@@ -330,6 +331,7 @@ void TEWidget::setVTFont(const QFont& f)
   QFont font = f;
   if (!s_antialias)
     font.setStyleStrategy( QFont::NoAntialias );
+  
   QFrame::setFont(font);
   fontChange(font);
 }
@@ -586,7 +588,7 @@ static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code
 
 void TEWidget::drawTextFixed(QPainter& paint, int x, int y, QString& str, const ca* attributes)
 {
-    paint.drawText( QRect( x, y, font_w*str.length(), font_h ), /*Qt::AlignHCenter |*/ Qt::TextDontClip, str );
+    paint.drawText( QRect( x, y, font_w*str.length(), font_h ),  Qt::TextDontClip, str );
 }
 
 //OLD VERSION
@@ -852,6 +854,7 @@ void TEWidget::setCursorPos(const int curx, const int cury)
     m_cursorCol = curx;
 }
 
+
 /*!
     The image can only be set completely.
 
@@ -872,7 +875,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
 
   cacol cf;       // undefined
   cacol cb;       // undefined
-  UINT8 cr  = -1; // undefined
+  int cr  = -1;   // undefined
 
   int lins = qMin(this->lines, qMax(0,lines  ));
   int cols = qMin(this->columns,qMax(0,columns));
@@ -996,6 +999,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
      if (!mResizeWidget)
      {
         mResizeWidget = new QFrame(this);
+
         QFont f = KGlobalSettings::generalFont();
         int fs = f.pointSize();
         if (fs == -1)
@@ -1004,7 +1008,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
         f.setBold(true);
         mResizeWidget->setFont(f);
         mResizeWidget->setFrameShape((QFrame::Shape) (QFrame::Box|QFrame::Raised));
-        mResizeWidget->setMidLineWidth(4);
+        mResizeWidget->setMidLineWidth(2);
         QBoxLayout *l = new QVBoxLayout(mResizeWidget);
 	l->setMargin(10);
         mResizeLabel = new QLabel(i18n("Size: XXX x XXX"), mResizeWidget);
@@ -1020,7 +1024,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
      mResizeWidget->move((width()-mResizeWidget->width())/2,
                          (height()-mResizeWidget->height())/2+20);
      mResizeWidget->show();
-     mResizeTimer->start(1000);
+     mResizeTimer->start(3000);
   }
 }
 

@@ -36,6 +36,7 @@ set(konsole_KDEINIT_SRCS
    sessionadaptor.cpp
    konsolescriptingadaptor.cpp
    sessionscriptingadaptor.cpp )
+#   OverlayFrame.cpp )
 
 kde4_automoc(${konsole_KDEINIT_SRCS})
 
@@ -72,6 +73,7 @@ set(konsolepart_PART_SRCS
    TEmulation.cpp 
    TEHistory.cpp 
    keytrans.cpp )
+  # OverlayFrame.cpp )
 
 kde4_automoc(${konsolepart_PART_SRCS})
 

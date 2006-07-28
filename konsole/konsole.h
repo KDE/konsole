@@ -182,7 +182,7 @@ private Q_SLOTS:
   void moveSessionLeft();
   void moveSessionRight();
   void allowPrevNext();
-  void setSchema(int n, TEWidget* tewidget=0);   // no slot necessary?
+  void setSchema(int n, TEWidget* tewidget);   // no slot necessary?
   void sendSignal(QAction*);
   void slotClearTerminal();
   void slotResetClearTerminal();
@@ -346,7 +346,8 @@ private:
   KSelectAction *selectTabbar;
   KSelectAction *selectBell;
   KSelectAction *selectSetEncoding;
-
+  
+  
   KAction       *m_clearHistory;
   KAction       *m_findHistory;
   KAction       *m_findNext;

@@ -587,6 +587,7 @@ void Konsole::makeGUI()
    connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
    connect(m_schema, SIGNAL(aboutToShow()), SLOT(schema_menu_check()));
 
+
    // Keyboard Options Menu ---------------------------------------------------
    m_keytab = new KMenu(this);
    KAcceleratorManager::manage( m_keytab );
@@ -670,8 +671,10 @@ void Konsole::makeGUI()
 
       // Schema
       if (KAuthorized::authorizeKAction("schema"))
+      {
          m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Sch&ema" ), m_schema);
-
+      }
+      
       // Select size
       if (!b_fixedSize)
       {
@@ -1836,7 +1839,8 @@ void Konsole::slotSelectFont() {
 void Konsole::schema_menu_activated(int item)
 {
   if (!se) return;
-  setSchema(item);
+  setSchema(item,se->widget());
+  
   activateSession(); // activates the current
 }
 
@@ -2441,7 +2445,7 @@ void Konsole::addSession(TESession* s)
     m_view->addAction( ra );
 
   createSessionTab(te, SmallIconSet(s->IconName()), newTitle);
-  setSchema(s->schemaNo());
+  setSchema(s->schemaNo(),s->widget());
   tabwidget->setCurrentIndex(tabwidget->count()-1);
   disableMasterModeConnections(); // no duplicate connections, remove old
   enableMasterModeConnections();
@@ -3733,7 +3737,7 @@ void Konsole::attachSession(TESession* session)
   session->changeWidget(te);
   te->setFocus();
   createSessionTab(te, SmallIconSet(session->IconName()), session->Title());
-  setSchema(session->schemaNo());
+  setSchema(session->schemaNo() , te);
   if (session->isMasterMode()) {
     disableMasterModeConnections(); // no duplicate connections, remove old
     enableMasterModeConnections();
@@ -4288,7 +4292,7 @@ void Konsole::enableFixedSize(bool b)
     }
 }
 
-void Konsole::showEvent( QShowEvent* event )
+void Konsole::showEvent( QShowEvent* /*event*/ )
 {
 	assert( tabwidget && tabwidget->currentWidget() );
 

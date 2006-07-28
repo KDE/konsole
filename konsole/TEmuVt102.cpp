@@ -672,8 +672,15 @@ switch( N )
 
     case TY_CSI_PR('l',   2) :        resetMode      (MODE_Ansi     ); break; //VT100
 
-    case TY_CSI_PR('h',   3) :                setColumns (       132); break; //VT100
-    case TY_CSI_PR('l',   3) :                setColumns (        80); break; //VT100
+    case TY_CSI_PR('h',   3) : setColumns (132) ; 
+			       clearEntireScreen();
+			       setDefaultMargins(); 
+			       
+			       					       break; //VT100
+    case TY_CSI_PR('l',   3) : setColumns (80)  ; 
+			       clearEntireScreen(); 	
+			       setDefaultMargins();
+			       					       break; //VT100
 
     case TY_CSI_PR('h',   4) : /* IGNORED: soft scrolling           */ break; //VT100
     case TY_CSI_PR('l',   4) : /* IGNORED: soft scrolling           */ break; //VT100
@@ -1119,6 +1126,12 @@ void TEmuVt102::useCharset(int n)
   CHARSET.cu_cs   = n&3;
   CHARSET.graphic = (CHARSET.charset[n&3] == '0');
   CHARSET.pound   = (CHARSET.charset[n&3] == 'A'); //This mode is obsolete
+}
+
+void TEmuVt102::setDefaultMargins()
+{
+	screen[0]->setDefaultMargins();
+	screen[1]->setDefaultMargins();
 }
 
 void TEmuVt102::setMargins(int t, int b)
