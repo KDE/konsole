@@ -673,13 +673,13 @@ switch( N )
     case TY_CSI_PR('l',   2) :        resetMode      (MODE_Ansi     ); break; //VT100
 
     case TY_CSI_PR('h',   3) : setColumns (132) ; 
-			       clearEntireScreen();
-			       setDefaultMargins(); 
+			       			   clearEntireScreen();
+			       			   setDefaultMargins(); 
 			       
 			       					       break; //VT100
     case TY_CSI_PR('l',   3) : setColumns (80)  ; 
-			       clearEntireScreen(); 	
-			       setDefaultMargins();
+			       			   clearEntireScreen(); 	
+			       			   setDefaultMargins();
 			       					       break; //VT100
 
     case TY_CSI_PR('h',   4) : /* IGNORED: soft scrolling           */ break; //VT100

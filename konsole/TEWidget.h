@@ -191,7 +191,7 @@ protected:
                      QString& str, const ca *attr, bool pm, bool clear);
     void paintEvent( QPaintEvent * );
 
-    void paintContents(QPainter &paint, const QRect &rect, bool pm=false);
+    void paintContents(QPainter &paint, const QRect &rect);
 
     void resizeEvent(QResizeEvent*);
 
@@ -205,8 +205,6 @@ protected:
     void extendSelection( QPoint pos );
     void wheelEvent( QWheelEvent* );
 
-    void focusInEvent( QFocusEvent * );
-    void focusOutEvent( QFocusEvent * );
     bool focusNextPrevChild( bool next );
     // Dnd
     void dragEnterEvent(QDragEnterEvent* event);

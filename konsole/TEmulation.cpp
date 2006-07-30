@@ -310,6 +310,7 @@ void TEmulation::onKeyPress( QKeyEvent* ev )
 
 void TEmulation::onRcvBlock(const char* text, int length)
 {
+
 	emit notifySessionState(NOTIFYACTIVITY);
 
 	bulkStart();
@@ -557,11 +558,8 @@ void TEmulation::onImageSizeChange(int lines, int columns)
   screen[1]->resizeImage(lines,columns);
     
   if (!connected) return;
-   //kDebug(1211)<<"TEmulation::onImageSizeChange() showBulk()"<<endl;
-  showBulk();
-   //kDebug(1211)<<"TEmulation::onImageSizeChange() showBulk() done"<<endl;
+  
   emit ImageSizeChanged(columns, lines);   // propagate event
-   //kDebug(1211)<<"TEmulation::onImageSizeChange() done"<<endl;
 }
 
 QSize TEmulation::imageSize()

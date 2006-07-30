@@ -159,13 +159,10 @@ static const ColorEntry base_color_table[TABLE_COLORS] =
 void TEWidget::setDefaultBackColor(const QColor& color)
 {
   defaultBgColor = color;
-#warning backgroundPixmap returns always 0 in Qt4,  the logic needs to be a different now
-  if (qAlpha(blend_color) != 0xff /* && !backgroundPixmap() */)
-  {
-      QPalette p = palette();
-      p.setColor( backgroundRole(), getDefaultBackColor() );
-      setPalette( p );
-  }
+  
+  QPalette p = palette();
+  p.setColor( backgroundRole(), getDefaultBackColor() );
+  setPalette( p );
 }
 
 QColor TEWidget::getDefaultBackColor()
@@ -183,9 +180,10 @@ const ColorEntry* TEWidget::getColorTable() const
 void TEWidget::setColorTable(const ColorEntry table[])
 {
   for (int i = 0; i < TABLE_COLORS; i++) color_table[i] = table[i];
-#warning backgroundPixmap is always 0 in Qt4
-  const QPixmap* pm = 0; // backgroundPixmap();
+ 
+  const QPixmap* pm = 0; 
   if (!pm)
+  {
     if (!argb_visual || (qAlpha(blend_color) == 0xff))
     {
         QPalette p = palette();
@@ -198,6 +196,7 @@ void TEWidget::setColorTable(const ColorEntry table[])
         p.setColor( backgroundRole(), blend_color );
         setPalette( p );
     }
+  }
   update();
 }
 
@@ -586,7 +585,7 @@ static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code
 // 
 // -- Robert Knight <robertknight@gmail.com>
 
-void TEWidget::drawTextFixed(QPainter& paint, int x, int y, QString& str, const ca* attributes)
+void TEWidget::drawTextFixed(QPainter& paint, int x, int y, QString& str, const ca* /* attributes */)
 {
     paint.drawText( QRect( x, y, font_w*str.length(), font_h ),  Qt::TextDontClip, str );
 }
@@ -640,6 +639,7 @@ void TEWidget::drawTextFixed(QPainter& paint, int x, int y, QString& str, const 
 void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
                            QString& str, const ca *attr, bool pm, bool clear)
 {
+
   //draw text fragment.
   //the basic process is:
   //	1.  save current state of painter
@@ -682,7 +682,7 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
           b = qMin( (qBlue  (col) * salpha) / 255 + (qBlue  (blend_color) * dalpha) / 255, 255 );
 
           col = a << 24 | r << 16 | g << 8 | b;
-          int pixel = a << 24 | (r * a / 255) << 16 | (g * a / 255) << 8 | (b * a / 255);
+          //int pixel = a << 24 | (r * a / 255) << 16 | (g * a / 255) << 8 | (b * a / 255);
 
           paint.fillRect(rect, QColor(col));
         } else
@@ -863,6 +863,7 @@ void TEWidget::setCursorPos(const int curx, const int cury)
 
 void TEWidget::setImage(const ca* const newimg, int lines, int columns)
 {
+
   if (!image)
      updateImageSize(); // Create image
 
@@ -1052,7 +1053,6 @@ void TEWidget::setBlinkingCursor(bool blink)
 
 void TEWidget::paintEvent( QPaintEvent* pe )
 {
-  const QPixmap* pm = backgroundPixmap();
   QPainter paint;
   paint.begin( this );
   paint.setBackgroundMode( Qt::TransparentMode );
@@ -1065,7 +1065,7 @@ void TEWidget::paintEvent( QPaintEvent* pe )
 
   foreach (QRect rect, (pe->region() & contentsRect()).rects())
   {
-    paintContents(paint, rect, pm != 0);
+    paintContents(paint, rect);
   }
 
   drawFrame( &paint );
@@ -1132,13 +1132,13 @@ void TEWidget::print(QPainter &paint, bool friendly, bool exact)
 
      QPainter pm_paint;
      pm_paint.begin(&pm);
-     paintContents(pm_paint, contentsRect(), true);
+     paintContents(pm_paint, contentsRect());
      pm_paint.end();
      paint.drawPixmap(0, 0, pm);
    }
    else
    {
-     paintContents(paint, contentsRect(), true);
+     paintContents(paint, contentsRect());
    }
 
    printerFriendly = false;
@@ -1149,7 +1149,7 @@ void TEWidget::print(QPainter &paint, bool friendly, bool exact)
    blinking = save_blinking;
 }
 
-void TEWidget::paintContents(QPainter &paint, const QRect &rect, bool pm)
+void TEWidget::paintContents(QPainter &paint, const QRect &rect)
 {
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
@@ -1210,7 +1210,7 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect, bool pm)
                 		QRect( bX+tLx+font_w*x , bY+tLy+font_h*y , font_w*len , font_h),
                 		unistr, 
 						&image[loc(x,y)], 
-						pm, 
+						0, 
 						!(isBlinkEvent || isPrinting) 	);
          
 		 fixed_font = save_fixed_font;
@@ -1829,18 +1829,6 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
   iPntSel.ry() += scrollbar->value();
 }
 
-void TEWidget::focusInEvent( QFocusEvent * )
-{
-#warning Qt4 always double buffers,  so the _Do erase_ part is gone
-  repaint(cursorRect);  // *do* erase area, to get rid of the
-                        // hollow cursor rectangle.
-}
-
-
-void TEWidget::focusOutEvent( QFocusEvent * )
-{
-  repaint(cursorRect);  // don't erase area
-}
 
 bool TEWidget::focusNextPrevChild( bool next )
 {
@@ -1885,7 +1873,7 @@ void TEWidget::setMouseMarks(bool on)
 void TEWidget::emitText(QString text)
 {
   if (!text.isEmpty()) {
-    QKeyEvent e(QEvent::KeyPress, 0,-1,0, text);
+    QKeyEvent e(QEvent::KeyPress, 0, Qt::NoModifier, text);
     emit keyPressedSignal(&e); // expose as a big fat keypress event
   }
 }
@@ -1900,7 +1888,7 @@ void TEWidget::emitSelection(bool useXselection,bool appendReturn)
   if ( ! text.isEmpty() )
   {
     text.replace("\n", "\r");
-    QKeyEvent e(QEvent::KeyPress, 0,-1,0, text);
+    QKeyEvent e(QEvent::KeyPress, 0, Qt::NoModifier, text);
     emit keyPressedSignal(&e); // expose as a big fat keypress event
     emit clearSelectionSignal();
   }
