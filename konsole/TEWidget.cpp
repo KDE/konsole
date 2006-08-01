@@ -429,7 +429,6 @@ TEWidget::TEWidget(QWidget *parent)
   dragInfo.state = diNone;
 
   setFocusPolicy( Qt::WheelFocus );
-
   // im
   setAttribute(Qt::WA_InputMethodEnabled, true);
 
@@ -2223,10 +2222,18 @@ void TEWidget::makeImage()
 // calculate the needed size
 void TEWidget::setSize(int cols, int lins)
 {
-  int frw = width() - contentsRect().width();
-  int frh = height() - contentsRect().height();
-  int scw = (scrollLoc==SCRNONE?0:scrollbar->width());
-  m_size = QSize(font_w*cols + 2*rimX + frw + scw, font_h*lins + 2*rimY + frh + /* mysterious */ 1);
+
+   //int frw = width() - contentsRect().width();
+  //int frh = height() - contentsRect().height();
+  //int scw = (scrollLoc==SCRNONE?0:scrollbar->width());
+  //m_size = QSize(font_w*cols + 2*rimX + frw + scw, font_h*lins + 2*rimY + frh + /* mysterious */ 1);
+ 
+  int deltaColumns = cols - columns;
+  int deltaLines = lins - lines;
+
+  m_size = QSize( (deltaColumns * font_w) + width() ,
+				  (deltaLines * font_h) + height() );
+
   updateGeometry();
 }
 

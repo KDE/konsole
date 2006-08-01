@@ -316,7 +316,7 @@ private:
     int rimX;      // left/right rim width
     int rimY;      // top/bottom rim high
     QSize m_size;
-
+	
     QString m_imPreeditText;
     int m_imPreeditLength;
     int m_imStart;

@@ -1299,6 +1299,7 @@ void Konsole::slotCouldNotClose()
 
 void Konsole::setColLin(int columns, int lines)
 {
+
   if ((columns==0) || (lines==0))
   {
     if (b_fixedSize || defaultSize.isEmpty())
@@ -1319,7 +1320,18 @@ void Konsole::setColLin(int columns, int lines)
        te->setFixedSize(columns, lines);
     else
        te->setSize(columns, lines);
-    adjustSize();
+   
+	//The terminal emulator widget has now been resized to fit in the required number of lines and
+	//columns, so the main Konsole window now needs to be resized as well.
+	//Normally adjustSize() could be used for this. 
+	//
+	//However in the case of top-level widgets (such as the main Konsole window which
+	//we are resizing here), adjustSize() also constrains the size of the widget to 2/3rds of the size 
+	//of the desktop -- I don't know why.  Unfortunately this means that the new terminal may be smaller
+	//than the specified size, causing incorrect display in some applications.
+	//So here we ignore the desktop size and just resize to the suggested size.
+	resize( sizeHint() );
+	
     if (b_fixedSize)
       setFixedSize(sizeHint());
     notifySize(columns, lines);  // set menu items
