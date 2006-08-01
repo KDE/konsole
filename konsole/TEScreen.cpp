@@ -668,6 +668,7 @@ void TEScreen::clear()
 
 void TEScreen::BackSpace()
 {
+  cuX = qMin(columns-1,cuX); // nowrap!
   cuX = qMax(0,cuX-1);
   if (BS_CLEARS) image[loc(cuX,cuY)].c = ' ';
 }
