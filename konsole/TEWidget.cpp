@@ -221,6 +221,11 @@ void TEWidget::setColorTable(const ColorEntry table[])
 */
 
 static inline bool isLineChar(Q_UINT16 c) { return ((c & 0xFF80) == 0x2500);}
+static inline bool isLineCharString(const QString& string)
+{
+		return (string.length() > 0) && (isLineChar(string.at(0).unicode()));
+}
+						
 
 // assert for i in [0..31] : vt100extended(vt100_graphics[i]) == i.
 
@@ -572,6 +577,28 @@ static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code
 
 }
 
+void TEWidget::drawLineCharString(	QPainter& painter, int x, int y, const QString& str, 
+									const ca* attributes)
+{
+		const QPen& currentPen = painter.pen();
+		
+		if ( attributes->r & RE_BOLD )
+		{
+			QPen boldPen(currentPen);
+			boldPen.setWidth(3);
+			painter.setPen( boldPen );
+		}	
+		
+		for (int i=0 ; i < str.length(); i++)
+		{
+			uchar code = str[i].cell();
+        	if (LineChars[code])
+            	drawLineChar(painter, x + (font_w*i), y, font_w, font_h, code);
+		}
+
+		painter.setPen( currentPen );
+}
+
 //TODO
 //The old version painted the text on a character-by-character basis, this is slow and should be 
 //avoided if at all possible.
@@ -579,13 +606,15 @@ static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code
 //Investigate:
 //	- Why did the old version allow double the width for characters at column 0?  I cannot
 //	see any obvious visual differences
-//	- Implement line-drawing char stuff from old version if necessary, and find a test case for it.
 // 
 // -- Robert Knight <robertknight@gmail.com>
 
-void TEWidget::drawTextFixed(QPainter& paint, int x, int y, QString& str, const ca* /* attributes */)
+void TEWidget::drawTextFixed(QPainter& painter, int x, int y, QString& str, const ca* attributes)
 {
-    paint.drawText( QRect( x, y, font_w*str.length(), font_h ),  Qt::TextDontClip, str );
+	if ( str.length() == 0 )
+			return;
+		
+    painter.drawText( QRect( x, y, font_w*str.length(), font_h ),  Qt::TextDontClip, str );
 }
 
 //OLD VERSION
@@ -762,20 +791,26 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
     }
    
     if(!fixed_font)
-    {
-      // The meaning of y differs between different versions of QPainter::drawText!!
-      int y = rect.y(); // top of rect
-
-      if ( shadow ) {
-        paint.setPen( Qt::black );
-	
-	
-        drawTextFixed(paint, x+1, y+1, str, attr);
-        paint.setPen(fColor);
-      }
-
+	{  	
+	  int y = rect.y(); // top of rect
+		
+	  //check whether the string consists of normal text or line drawing
+	  //characters.
+	  if (isLineCharString( str ))
+	  {
+	  	drawLineCharString(paint,x,y,str,attr);
+	  }
+	  else
+	  {
+      	if ( shadow ) 
+		{
+        	paint.setPen( Qt::black );
+        	drawTextFixed(paint, x+1, y+1, str, attr);
+        	paint.setPen(fColor);
+      	}
       
       	drawTextFixed(paint, x, y, str, attr);
+	  }
     }
     else
     {

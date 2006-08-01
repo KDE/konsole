@@ -184,8 +184,14 @@ protected:
     bool eventFilter( QObject *, QEvent * );
     bool event( QEvent * );
 
+	//draws a string of normal text characters
+	//The painter's font and other attributes needed to draw the string
+	//should be set before drawTextFixed is called.
     void drawTextFixed(QPainter &paint, int x, int y,
                        QString& str, const ca *attr);
+
+	//draws a string of line-drawing characters
+	void drawLineCharString(QPainter& painter, int x, int y, const QString& str, const ca* attributes);
 
     void drawAttrStr(QPainter &paint, const QRect& rect,
                      QString& str, const ca *attr, bool pm, bool clear);
