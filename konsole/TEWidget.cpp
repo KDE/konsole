@@ -373,7 +373,6 @@ TEWidget::TEWidget(QWidget *parent)
 ,hasBlinkingCursor(false)
 ,ctrldrag(false)
 ,cuttobeginningofline(false)
-,isBlinkEvent(false)
 ,isPrinting(false)
 ,printerFriendly(false)
 ,printerBold(false)
@@ -985,7 +984,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
   }
   update(dirtyRegion);
 
-  if ( hasBlinker && !blinkT->isActive()) blinkT->start(1000); // 1000 ms
+  if ( hasBlinker && !blinkT->isActive()) blinkT->start( BLINK_DELAY ); 
   if (!hasBlinker && blinkT->isActive()) { blinkT->stop(); blinking = false; }
   free(dirtyMask);
   delete [] disstrU;
@@ -1195,9 +1194,7 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect)
       if ((x+len < columns) && (!image[loc(x+len,y)].c))
         len++; // Adjust for trailing part of multi-column character
 
-      if (!isBlinkEvent || (cr & RE_BLINK))
-      {
-         bool save_fixed_font = fixed_font;
+   	     bool save_fixed_font = fixed_font;
          if (lineDraw)
             fixed_font = false;
          if (doubleWidth)
@@ -1210,11 +1207,11 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect)
                 		unistr, 
 						&image[loc(x,y)], 
 						0, 
-						!(isBlinkEvent || isPrinting) 	);
+						!isPrinting );
          
 		 fixed_font = save_fixed_font;
-      }
-      x += len - 1;
+      
+	    x += len - 1;
     }
   }
   delete [] disstrU;
@@ -1223,9 +1220,10 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect)
 void TEWidget::blinkEvent()
 {
   blinking = !blinking;
-  isBlinkEvent = true;
+
+  //TODO:  Optimise to only repaint the areas of the widget where there is blinking text
+  //rather than repainting the whole widget.
   repaint();
-  isBlinkEvent = false;
 }
 
 void TEWidget::blinkCursorEvent()

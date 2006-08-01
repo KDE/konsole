@@ -283,7 +283,6 @@ private:
     bool hasBlinkingCursor;  // has blinking cursor enabled
     bool ctrldrag;           // require Ctrl key for drag
     bool cuttobeginningofline; // triple click only selects forward
-    bool isBlinkEvent; // paintEvent due to blinking.
     bool isPrinting; // Paint job is intended for printer
     bool printerFriendly; // paint printer friendly, save ink
     bool printerBold; // Use a bold font instead of overstrike for bold
@@ -336,6 +335,9 @@ private:
     QAction* m_cpAction;
     QAction* m_mvAction;
     QAction* m_lnAction;
+
+	//the delay in milliseconds between redrawing blinking text
+	static const int BLINK_DELAY = 750;
 
 private Q_SLOTS:
     void drop_menu_activated(QAction*);
