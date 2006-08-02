@@ -499,13 +499,16 @@ void TEmulation::showBulk()
   if (connected)
   {
     ca* image = scr->getCookedImage();    // get the image
-    gui->setImage(image,
+   
+    //TODO:  Setting line properties and image should be done in the same method call
+	//to ensure that the two don't get out of sync in the gui.	
+    gui->setLineProperties( scr->getCookedLineProperties() );
+	gui->setImage(image,
                   scr->getLines(),
                   scr->getColumns());     // actual refresh
     gui->setCursorPos(scr->getCursorX(), scr->getCursorY());	// set XIM position
     free(image);
     //FIXME: check that we do not trigger other draw event here.
-    gui->setLineWrapped( scr->getCookedLineWrapped() );
     //kDebug(1211)<<"TEmulation::showBulk(): setScroll()"<<endl;
     gui->setScroll(scr->getHistCursor(),scr->getHistLines());
     //kDebug(1211)<<"TEmulation::showBulk(): setScroll() done"<<endl;

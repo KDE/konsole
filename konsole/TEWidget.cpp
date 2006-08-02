@@ -772,6 +772,8 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
 		currentFont.setBold(true);
   		paint.setFont( currentFont );
   }
+
+  
   
   if (!(blinking && (attr->r & RE_BLINK)))
   {
@@ -1000,12 +1002,17 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
         if (doubleWidth)
            fixed_font = false;
 
-	updateLine = true;
+		updateLine = true;
         
-	fixed_font = save_fixed_font;
+		fixed_font = save_fixed_font;
         x += len - 1;
       }
     }
+
+	//both the top and bottom halves of double height lines must always be redrawn
+	//although both top and bottom halves contain the same characters, only the top one is actually 
+	//drawn.
+	updateLine |= (lineProperties[y] & LINE_DOUBLEHEIGHT);
 	
     if (updateLine)
     {
@@ -1236,16 +1243,47 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect)
             fixed_font = false;
          QString unistr(disstrU,p);
 		 
+		 if (y < lineProperties.size())
+		 {
+			if (lineProperties[y] & LINE_DOUBLEWIDTH)
+				paint.scale(2,1);
+			
+			if (lineProperties[y] & LINE_DOUBLEHEIGHT)
+  		 		paint.scale(1,2);
+		 }
+
+		 //calculate the area in which the text will be drawn
+		 QRect textArea = QRect( bX+tLx+font_w*x , bY+tLy+font_h*y , font_w*len , font_h);
+		
+		 //move the calculated area to take account of scaling applied to the painter.
+		 //the position of the area from the origin (0,0) is scaled by the opposite of whatever
+		 //transformation has been applied to the painter.  this ensures that 
+		 //painting does actually start from textArea.topLeft() (instead of textArea.topLeft() * painter-scale)	
+		 QMatrix inverted = paint.matrix().inverted();
+		 textArea.moveTopLeft( inverted.map(textArea.topLeft()) );
+		 
 		 //paint text fragment
          drawAttrStr(	paint,
-                		QRect( bX+tLx+font_w*x , bY+tLy+font_h*y , font_w*len , font_h),
+                		textArea,
                 		unistr, 
 						&image[loc(x,y)], 
 						0, 
 						!isPrinting );
          
 		 fixed_font = save_fixed_font;
-      
+     
+		 //reset back to single-width, single-height lines 
+		 paint.resetMatrix();
+
+		 if (y < lineProperties.size())
+		 {
+			//double-height lines are represented by two adjacent lines containing the same characters
+			//both lines will have the LINE_DOUBLEHEIGHT attribute.  If the current line has the LINE_DOUBLEHEIGHT
+			//attribute, we can therefore skip the next line
+			if (lineProperties[y] & LINE_DOUBLEHEIGHT)
+				y++;
+		 }
+		 
 	    x += len - 1;
     }
   }
@@ -1572,7 +1610,8 @@ void TEWidget::extendSelection( QPoint pos )
     i = loc(left.x(),left.y());
     if (i>=0 && i<=image_size) {
       selClass = charClass(image[i].c);
-      while ( ((left.x()>0) || (left.y()>0 && m_line_wrapped[left.y()-1])) && charClass(image[i-1].c) == selClass )
+      while ( ((left.x()>0) || (left.y()>0 && (lineProperties[left.y()-1] & LINE_WRAPPED) )) 
+					  && charClass(image[i-1].c) == selClass )
       { i--; if (left.x()>0) left.rx()--; else {left.rx()=columns-1; left.ry()--;} }
     }
 
@@ -1581,7 +1620,8 @@ void TEWidget::extendSelection( QPoint pos )
     i = loc(right.x(),right.y());
     if (i>=0 && i<=image_size) {
       selClass = charClass(image[i].c);
-      while( ((right.x()<columns-1) || (right.y()<lines-1 && m_line_wrapped[right.y()])) && charClass(image[i+1].c) == selClass )
+      while( ((right.x()<columns-1) || (right.y()<lines-1 && (lineProperties[right.y()] & LINE_WRAPPED) )) 
+					  && charClass(image[i+1].c) == selClass )
       { i++; if (right.x()<columns-1) right.rx()++; else {right.rx()=0; right.ry()++; } }
     }
 
@@ -1605,9 +1645,9 @@ void TEWidget::extendSelection( QPoint pos )
     QPoint above = above_not_below ? here : iPntSelCorr;
     QPoint below = above_not_below ? iPntSelCorr : here;
 
-    while (above.y()>0 && m_line_wrapped[above.y()-1])
+    while (above.y()>0 && (lineProperties[above.y()-1] & LINE_WRAPPED) )
       above.ry()--;
-    while (below.y()<lines-1 && m_line_wrapped[below.y()])
+    while (below.y()<lines-1 && (lineProperties[below.y()] & LINE_WRAPPED) )
       below.ry()++;
 
     above.setX(0);
@@ -1654,7 +1694,8 @@ void TEWidget::extendSelection( QPoint pos )
         selClass = charClass(image[i-1].c);
         if (selClass == ' ')
         {
-          while ( right.x() < columns-1 && charClass(image[i+1].c) == selClass && (right.y()<lines-1) && !m_line_wrapped[right.y()])
+          while ( right.x() < columns-1 && charClass(image[i+1].c) == selClass && (right.y()<lines-1) && 
+						  !(lineProperties[right.y()] & LINE_WRAPPED))
           { i++; right.rx()++; }
           if (right.x() < columns-1)
             right = left_not_right ? iPntSelCorr : here;
@@ -1772,7 +1813,8 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
   {
     // set the start...
      int x = bgnSel.x();
-     while ( ((x>0) || (bgnSel.y()>0 && m_line_wrapped[bgnSel.y()-1])) && charClass(image[i-1].c) == selClass )
+     while ( ((x>0) || (bgnSel.y()>0 && (lineProperties[bgnSel.y()-1] & LINE_WRAPPED) )) 
+					 && charClass(image[i-1].c) == selClass )
      { i--; if (x>0) x--; else {x=columns-1; bgnSel.ry()--;} }
      bgnSel.setX(x);
      emit beginSelectionSignal( bgnSel.x(), bgnSel.y(), false );
@@ -1780,7 +1822,8 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
      // set the end...
      i = loc( endSel.x(), endSel.y() );
      x = endSel.x();
-     while( ((x<columns-1) || (endSel.y()<lines-1 && m_line_wrapped[endSel.y()])) && charClass(image[i+1].c) == selClass )
+     while( ((x<columns-1) || (endSel.y()<lines-1 && (lineProperties[endSel.y()] & LINE_WRAPPED) )) 
+					 && charClass(image[i+1].c) == selClass )
      { i++; if (x<columns-1) x++; else {x=0; endSel.ry()++; } }
      endSel.setX(x);
 
@@ -1834,14 +1877,15 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
   actSel = 2; // within selection
   emit isBusySelecting(true); // Keep it steady...
 
-  while (iPntSel.y()>0 && m_line_wrapped[iPntSel.y()-1])
+  while (iPntSel.y()>0 && (lineProperties[iPntSel.y()-1] & LINE_WRAPPED) )
     iPntSel.ry()--;
   if (cuttobeginningofline) {
     // find word boundary start
     int i = loc(iPntSel.x(),iPntSel.y());
     int selClass = charClass(image[i].c);
     int x = iPntSel.x();
-    while ( ((x>0) || (iPntSel.y()>0 && m_line_wrapped[iPntSel.y()-1])) && charClass(image[i-1].c) == selClass )
+    while ( ((x>0) || (iPntSel.y()>0 && (lineProperties[iPntSel.y()-1] & LINE_WRAPPED) )) 
+					&& charClass(image[i-1].c) == selClass )
     { i--; if (x>0) x--; else {x=columns-1; iPntSel.ry()--;} }
 
     emit beginSelectionSignal( x, iPntSel.y(), false );
@@ -1852,7 +1896,7 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
     tripleSelBegin = QPoint( 0, iPntSel.y() );
   }
 
-  while (iPntSel.y()<lines-1 && m_line_wrapped[iPntSel.y()])
+  while (iPntSel.y()<lines-1 && (lineProperties[iPntSel.y()] & LINE_WRAPPED) )
     iPntSel.ry()++;
   emit extendSelectionSignal( columns-1, iPntSel.y() );
 

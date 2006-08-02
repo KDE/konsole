@@ -72,6 +72,12 @@ struct ColorEntry
 #define RE_INTENSIVE       (1 << 3) // Widget only
 #define RE_CURSOR          (1 << 4)
 
+typedef unsigned char LineProperty;
+
+static const int LINE_DEFAULT		= 0;
+static const int LINE_WRAPPED 	 	= (1 << 0);
+static const int LINE_DOUBLEWIDTH  	= (1 << 1);
+static const int LINE_DOUBLEHEIGHT	= (1 << 2);
 
 /* cacol is a union of the various color spaces.
 

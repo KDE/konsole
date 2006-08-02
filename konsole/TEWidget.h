@@ -96,7 +96,7 @@ public:
     void emitText(QString text);
 
     void setImage(const ca* const newimg, int lines, int columns);
-    void setLineWrapped(QBitArray line_wrapped) { m_line_wrapped=line_wrapped; }
+    void setLineProperties(QVector<LineProperty> properties) { lineProperties=properties; }
 
     void setCursorPos(const int curx, const int cury);
 
@@ -256,7 +256,7 @@ private:
     int contentWidth;
     ca *image; // [lines][columns]
     int image_size;
-    QBitArray m_line_wrapped;
+    QVector<LineProperty> lineProperties;
 
     ColorEntry color_table[TABLE_COLORS];
     QColor defaultBgColor;

@@ -149,8 +149,9 @@ public: // these are all `Screen' operations
     //
     void resizeImage(int new_lines, int new_columns);
     //
-    ca*  getCookedImage();
-    QBitArray getCookedLineWrapped();
+    ca*  	  getCookedImage();
+    QVector<LineProperty> getCookedLineProperties();
+	
 
     /*! return the number of lines. */
     int  getLines()   { return lines; }
@@ -183,6 +184,15 @@ public: // these are all `Screen' operations
 
     void checkSelection(int from, int to);
 
+	/** 
+	 * Sets or clears an attribute of the current line.
+	 * Possible properties are:
+	 * LINE_WRAPPED:	 Specifies that the line is wrapped.
+	 * LINE_DOUBLEWIDTH: Specifies that the characters in the current line should be double the normal width.
+	 * LINE_DOUBLEHEIGHT:Specifies that the characters in the current line should be double the normal height.
+	 */
+	void setLineProperty(LineProperty property , bool enable);
+
 private: // helper
 
     void clearImage(int loca, int loce, char c);
@@ -213,8 +223,10 @@ private: // helper
     int lines;
     int columns;
     ca *image; // [lines][columns]
-    QBitArray line_wrapped; // [lines]
-
+    //QBitArray line_wrapped; // [lines]
+	
+	QVector<LineProperty> lineProperties; // [lines]
+	
     // history buffer ---------------
 
     int histCursor;   // display position relative to start of the history buffer

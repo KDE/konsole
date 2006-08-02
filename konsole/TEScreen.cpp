@@ -98,7 +98,8 @@ TEScreen::TEScreen(int l, int c)
 
     histCursor = 0;
   */
-  line_wrapped.resize(lines+1);
+  lineProperties.resize(lines+1);
+  //line_wrapped.resize(lines+1);
   initTabStops();
   clearSelection();
   reset();
@@ -424,7 +425,7 @@ void TEScreen::resizeImage(int new_lines, int new_columns)
   // make new image
 
   ca* newimg = new ca[(new_lines+1)*new_columns];
-  QBitArray newwrapped(new_lines+1);
+  QVector<LineProperty> newLineProperties(new_lines+1);
   clearSelection();
 
   // clear new image
@@ -436,7 +437,7 @@ void TEScreen::resizeImage(int new_lines, int new_columns)
       newimg[y*new_columns+x].b = cacol(CO_DFT,DEFAULT_BACK_COLOR);
       newimg[y*new_columns+x].r = DEFAULT_RENDITION;
     }
-    newwrapped[y]=false;
+    newLineProperties[y] = 0;
   }
   int cpy_lines   = qMin(new_lines, lines);
   int cpy_columns = qMin(new_columns,columns);
@@ -449,11 +450,12 @@ void TEScreen::resizeImage(int new_lines, int new_columns)
       newimg[y*new_columns+x].b = image[loc(x,y)].b;
       newimg[y*new_columns+x].r = image[loc(x,y)].r;
     }
-    newwrapped[y]=line_wrapped[y];
+    newLineProperties[y]=lineProperties[y];
   }
   delete[] image;
   image = newimg;
-  line_wrapped = newwrapped;
+  //line_wrapped = newwrapped;
+  lineProperties = newLineProperties;
   lines = new_lines;
   columns = new_columns;
   cuX = qMin(cuX,columns-1);
@@ -576,7 +578,7 @@ ca* TEScreen::getCookedImage()
     for (x = 0; x < columns; x++)
       {
 #ifdef REVERSE_WRAPPED_LINES
-        if (hist->isWrappedLine(y+histCursor))
+        if (hist->isLINE_WRAPPED(y+histCursor))
           reverseRendition(&merged[p]);
 #endif
         if (testIsSelected(x,y)) {
@@ -596,7 +598,7 @@ ca* TEScreen::getCookedImage()
        { int p = x + yp; int r = x + yr;
          merged[p] = image[r];
 #ifdef REVERSE_WRAPPED_LINES
-         if (line_wrapped[y- hist->getLines() +histCursor])
+         if (lineProperties[y- hist->getLines() +histCursor] & LINE_WRAPPED)
            reverseRendition(&merged[p]);
 #endif
          if (sel_begin != -1 && testIsSelected(x,y))
@@ -619,16 +621,24 @@ ca* TEScreen::getCookedImage()
   return merged;
 }
 
-QBitArray TEScreen::getCookedLineWrapped()
+QVector<LineProperty> TEScreen::getCookedLineProperties()
 {
-  QBitArray result(lines);
+  QVector<LineProperty> result(lines);
 
   for (int y = 0; (y < lines) && (y < (hist->getLines()-histCursor)); y++)
-    result[y]=hist->isWrappedLine(y+histCursor);
-
+  {
+	//TODO Support for line properties other than wrapped lines
+    //result[y]=hist->isLINE_WRAPPED(y+histCursor);
+  
+	  if (hist->isWrappedLine(y+histCursor))
+	  {
+	  	result[y] = result[y] | LINE_WRAPPED;
+	  }
+  }
+  
   if (lines >= hist->getLines()-histCursor)
     for (int y = (hist->getLines()-histCursor); y < lines ; y++)
-      result[y]=line_wrapped[y- hist->getLines() +histCursor];
+      result[y]=lineProperties[y- hist->getLines() +histCursor];
 
   return result;
 }
@@ -763,7 +773,7 @@ void TEScreen::ShowCharacter(unsigned short c)
 
   if (cuX+w > columns) {
     if (getMode(MODE_Wrap)) {
-      line_wrapped[cuY]=true;
+      lineProperties[cuY] |= LINE_WRAPPED;
       NextLine();
     }
     else
@@ -923,6 +933,8 @@ int TEScreen::getCursorY()
     This is an internal helper functions. The parameter types are internal
     addresses of within the screen image and make use of the way how the
     screen matrix is mapped to the image vector.
+
+NOTE:  This only erases characters in the image, properties associated with individual lines are not affected.
 */
 
 void TEScreen::clearImage(int loca, int loce, char c)
@@ -946,8 +958,6 @@ void TEScreen::clearImage(int loca, int loce, char c)
     image[i].r = DEFAULT_RENDITION;
   }
 
-  for (i = loca/columns; i<=loce/columns; i++)
-    line_wrapped[i]=false;
 }
 
 /*! move image between (including) `loca' and `loce' to 'dst'.
@@ -967,7 +977,7 @@ void TEScreen::moveImage(int dst, int loca, int loce)
   //kDebug(1211) << "Using memmove to scroll up" << endl;
   memmove(&image[dst],&image[loca],(loce-loca+1)*sizeof(ca));
   for (int i=0;i<=(loce-loca+1)/columns;i++)
-    line_wrapped[(dst/columns)+i]=line_wrapped[(loca/columns)+i];
+    lineProperties[(dst/columns)+i]=lineProperties[(loca/columns)+i];
   if (lastPos != -1)
   {
      int diff = dst - loca; // Scroll by this amount
@@ -1405,14 +1415,14 @@ void TEScreen::getSelText(bool preserve_line_breaks, QTextStream *stream)
         {
             while ((eol > s) &&
                    (!image[eol - hist_BR].c || isSpace(image[eol - hist_BR].c)) &&
-                   !line_wrapped[(eol-hist_BR)/columns])
+                   !(lineProperties[(eol-hist_BR)/columns] & LINE_WRAPPED))
             {
                 eol--;
             }
         }
         else if (eol == sel_BR)
         {
-            if (!line_wrapped[(eol - hist_BR)/columns])
+            if (!(lineProperties[(eol - hist_BR)/columns] & LINE_WRAPPED))
 	        addNewLine = true;
         }
         else
@@ -1432,7 +1442,7 @@ void TEScreen::getSelText(bool preserve_line_breaks, QTextStream *stream)
             bool wrap = false;
             if ((eol + 1) % columns == 0)
             {			// the whole line is filled
-                if (line_wrapped[(eol - hist_BR)/columns])
+                if (lineProperties[(eol - hist_BR)/columns] & LINE_WRAPPED)
                     wrap = true;
             }
             if (wrap)
@@ -1495,13 +1505,13 @@ void TEScreen::addHistLine()
   { ca dft;
 
     int end = columns-1;
-    while (end >= 0 && image[end] == dft && !line_wrapped[0])
+    while (end >= 0 && image[end] == dft && !(lineProperties[0] & LINE_WRAPPED))
       end -= 1;
 
     int oldHistLines = hist->getLines();
 
     hist->addCells(image,end+1);
-    hist->addLine(line_wrapped[0]);
+    hist->addLine( lineProperties[0] & LINE_WRAPPED );
 
     int newHistLines = hist->getLines();
 
@@ -1588,4 +1598,16 @@ bool TEScreen::hasScroll()
 const HistoryType& TEScreen::getScroll()
 {
   return hist->getType();
+}
+
+void TEScreen::setLineProperty(LineProperty property , bool enable)
+{
+	if ( enable )
+	{
+		lineProperties[cuY] |= property;
+	}
+	else
+	{
+		lineProperties[cuY] &= ~property;
+	}
 }

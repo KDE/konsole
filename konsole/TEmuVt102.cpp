@@ -549,10 +549,22 @@ switch( N )
     case TY_ESC_CS('%', 'G') :      setCodec             (1         ); break; //LINUX
     case TY_ESC_CS('%', '@') :      setCodec             (0         ); break; //LINUX
 
-    case TY_ESC_DE('3'      ) : /* IGNORED: double high, top half    */ break;
-    case TY_ESC_DE('4'      ) : /* IGNORED: double high, bottom half */ break;
-    case TY_ESC_DE('5'      ) : /* IGNORED: single width, single high*/ break;
-    case TY_ESC_DE('6'      ) : /* IGNORED: double width, single high*/ break;
+    case TY_ESC_DE('3'      ) : /* Double height line, top half    */ 
+								scr->setLineProperty( LINE_DOUBLEWIDTH , true );
+								scr->setLineProperty( LINE_DOUBLEHEIGHT , true );
+									break;
+    case TY_ESC_DE('4'      ) : /* Double height line, bottom half */ 
+								scr->setLineProperty( LINE_DOUBLEWIDTH , true );
+								scr->setLineProperty( LINE_DOUBLEHEIGHT , true );
+									break;
+    case TY_ESC_DE('5'      ) : /* Single width, single height line*/
+								scr->setLineProperty( LINE_DOUBLEWIDTH , false);
+								scr->setLineProperty( LINE_DOUBLEHEIGHT , false);
+								break;
+    case TY_ESC_DE('6'      ) : /* Double width, single height line*/ 
+							    scr->setLineProperty( LINE_DOUBLEWIDTH , true);	
+								scr->setLineProperty( LINE_DOUBLEHEIGHT , false);
+								break;
     case TY_ESC_DE('8'      ) : scr->helpAlign            (          ); break;
 
 // resize = \e[8;<row>;<col>t
