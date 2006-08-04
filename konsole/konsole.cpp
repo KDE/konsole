@@ -155,6 +155,7 @@ Time to start a requirement list.
 #include <kio/netaccess.h>
 
 #include "konsole.h"
+#include "TerminalCharacterDecoder.h"
 #include <netwm.h>
 #include <QMenu>
 #include <kauthorized.h>
@@ -280,6 +281,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 ,sessionNumberMapper(0)
 ,sl_sessionShortCuts(0)
 ,s_workDir(workdir)
+,saveHistoryDialog(0)
 {
     setObjectName( name );
 
@@ -388,6 +390,9 @@ Konsole::~Konsole()
 
     delete kWinModule;
     kWinModule = 0;
+
+	//tidy up dialogs
+	delete saveHistoryDialog;
 }
 
 void Konsole::setAutoClose(bool on)
@@ -1086,7 +1091,7 @@ void Konsole::makeBasicGUI()
   m_findPrevious->setEnabled( b_histEnabled );
 
   m_saveHistory = new KAction(KIcon("filesaveas"), i18n("S&ave History As..."), m_shortcuts, "save_history");
-  connect(m_saveHistory, SIGNAL(triggered(bool)), SLOT(slotSaveHistory()));
+  connect(m_saveHistory, SIGNAL(triggered(bool)), SLOT(slotShowSaveHistoryDialog()));
   m_saveHistory->setEnabled(b_histEnabled );
 
   m_clearHistory = new KAction(KIcon("history_clear"), i18n("Clear &History"), m_shortcuts, "clear_history");
@@ -4071,10 +4076,9 @@ void Konsole::slotFindDone()
 }
 
 void Konsole::slotSaveHistory()
-{
-  // FIXME - mostLocalURL can't handle non-existing files yet, so this
-  //         code doesn't work.
-  KUrl s_url = KFileDialog::getSaveUrl(QString(), QString(), 0L, i18n("Save History"));
+{	
+  KUrl s_url = saveHistoryDialog->selectedUrl();
+		
   if( s_url.isEmpty())
       return;
   KUrl url = KIO::NetAccess::mostLocalURL( s_url, 0 );
@@ -4100,7 +4104,15 @@ void Konsole::slotSaveHistory()
     }
 
     QTextStream textStream(&file);
-    sessions.current()->getEmulation()->streamHistory( &textStream );
+	TerminalCharacterDecoder* decoder = 0;
+
+	if (saveHistoryDialog->currentMimeFilter() == "text/html")
+		decoder = new HTMLDecoder();
+	else
+		decoder = new PlainTextDecoder();
+	
+    sessions.current()->getEmulation()->streamHistory( &textStream , decoder);
+	delete decoder;
 
     file.close();
     if(file.error() != QFile::NoError) {
@@ -4108,6 +4120,29 @@ void Konsole::slotSaveHistory()
       return;
     }
   }
+}
+
+void Konsole::slotShowSaveHistoryDialog()
+{
+  // FIXME - mostLocalURL can't handle non-existing files yet, so this
+  //         code doesn't work.
+//  KUrl s_url = KFileDialog::getSaveUrl( QString(), 
+//				  						"text/plain text/html", 
+//										0L, i18n("Save History"));
+  if (!saveHistoryDialog)
+  {
+		 saveHistoryDialog = new KFileDialog( QString(":konsole") , QString() , this);
+		 saveHistoryDialog->setCaption( i18n("Save History As") );
+  		 QStringList mimeTypes;
+  		 mimeTypes << "text/plain";
+  		 mimeTypes << "text/html";
+  		 saveHistoryDialog->setMimeFilter(mimeTypes,"text/plain");
+  
+		 connect( saveHistoryDialog , SIGNAL(okClicked()), this , SLOT(slotSaveHistory()) ); 
+  }
+  
+  saveHistoryDialog->show();
+
 }
 
 void Konsole::slotZModemUpload()

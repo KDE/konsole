@@ -1,0 +1,101 @@
+/*
+    This file is part of Konsole, an X terminal.
+    
+    Copyright (C) 2006 by Robert Knight <robertknight@gmail.com>
+    
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+    02110-1301  USA.
+*/
+
+#ifndef TERMINAL_CHARACTER_DECODER_H
+#define TERMINAL_CHARACTER_DECODER_H
+
+#include "TECommon.h"
+
+class QTextStream;
+
+/**
+ * Base class for terminal character decoders
+ *
+ * The decoder converts lines of terminal characters which consist of a unicode character, foreground
+ * and background colours and other appearence-related properties into text strings.
+ *
+ * Derived classes may produce either plain text with no other colour or appearence information, or
+ * they may produce text which incorporates these additional properties. 
+ */
+class TerminalCharacterDecoder
+{
+public:
+	virtual ~TerminalCharacterDecoder() {}
+	
+	/**
+	 * Converts a line of terminal characters with associated properties into a text string
+	 * and writes the string into an output QTextStream.
+	 *
+	 * @param characters An array of characters of length @p count.
+	 * @param properties Additional properties which affect all characters in the line
+	 * @param output The output stream which receives the decoded text
+	 */
+	virtual void decodeLine(ca* const characters, 
+							int count,
+							LineProperty properties, 
+							QTextStream* output) = 0; 
+};
+
+/**
+ * A terminal character decoder which produces plain text, ignoring colours and other appearence-related
+ * properties of the original characters.
+ */
+class PlainTextDecoder : public TerminalCharacterDecoder
+{
+public:
+	PlainTextDecoder() {}
+
+	virtual void decodeLine(ca* const characters,
+							int count,
+							LineProperty properties,	
+							QTextStream* output);
+};
+
+/**
+ * A terminal character decoder which produces pretty HTML markup
+ */
+class HTMLDecoder : public TerminalCharacterDecoder
+{
+public:
+	/** 
+	 * Constructs an HTML decoder using a default black-on-white color scheme.
+	 */
+	HTMLDecoder();
+
+	/**
+	 * Sets the colour table which the decoder uses to produce the HTML colour codes in its
+	 * output
+	 */
+	void setColorTable( const ColorEntry* table );
+		
+	virtual void decodeLine(ca* const characters,
+							int count,
+							LineProperty properties,
+							QTextStream* output);	
+
+private:
+	void openSpan(QString& text , const QString& style);
+	void closeSpan(QString& text);
+
+	const ColorEntry* colorTable;
+};
+
+#endif

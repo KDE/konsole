@@ -60,6 +60,7 @@
 class QLabel;
 class QCheckBox;
 class KFindDialog;
+class KFileDialog;
 class KMenu;
 class KAction;
 class KToggleAction;
@@ -197,6 +198,7 @@ private Q_SLOTS:
   void slotClearHistory();
   void slotFindHistory();
   void slotSaveHistory();
+  void slotShowSaveHistoryDialog();
   void slotSelectBell();
   void slotSelectSize();
   void slotSelectFont();
@@ -378,6 +380,7 @@ private:
   KonsoleBookmarkHandler *bookmarkHandlerSession;
 
   KFindDialog* m_finddialog;
+  KFileDialog* saveHistoryDialog;
   bool         m_find_first;
   bool         m_find_found;
   QString      m_find_pattern;

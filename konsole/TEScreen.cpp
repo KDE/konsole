@@ -49,10 +49,12 @@
 #include <string.h>
 #include <ctype.h>
 
+#include <QTextStream>
+#include <QTime>
+
 #include "konsole_wcwidth.h"
 #include "TEScreen.h"
-//Added by qt3to4:
-#include <QTextStream>
+#include "TerminalCharacterDecoder.h"
 
 //FIXME: this is emulation specific. Use false for xterm, true for ANSI.
 //FIXME: see if we can get this from terminfo.
@@ -1251,8 +1253,103 @@ static QString makeString(int *m, int d, bool stripTrailingSpaces)
   return res;
 }
 
+
+void TEScreen::selectedText(QTextStream* stream , TerminalCharacterDecoder* decoder)
+{
+//	kDebug() << __FUNCTION__ << endl;
+
+	QTime time;
+	time.start();
+	
+	int top = sel_TL / columns;	
+	int left = sel_TL % columns;
+
+	int bottom = sel_BR / columns;
+	int right = sel_BR % columns;
+
+	for (int y=top;y<=bottom;y++)
+	{
+			int start = 0;
+			if ( y == top ) start = left;
+		
+			int count = -1;
+			if ( y == bottom) count = right - start + 1;
+
+			copyLineToStream( y,start,count,stream,decoder );
+			
+			if (y != bottom)
+				*stream << '\n';
+	}	
+
+	kDebug() << __FUNCTION__ << " retrieved " << (bottom-top) << " lines in " << time.elapsed() << " msecs."
+			<< endl;
+}
+
+
+void TEScreen::copyLineToStream(int line , int start, int count, 
+								QTextStream* stream, TerminalCharacterDecoder* decoder)
+{
+		//buffer to hold characters for decoding
+		//the buffer is static to avoid initialising every element on each call to copyLineToStream
+		//(which is unnecessary since all elements will be overwritten anyway)
+		static const int MAX_CHARS = 1024;
+		static ca characterBuffer[MAX_CHARS];
+		
+		assert( count < MAX_CHARS );
+		
+		//determine if the line is in the history buffer or the screen image
+		if (line < hist->getLines())
+		{
+			//retrieve line from history buffer
+			if (count == -1)
+					count = hist->getLineLen(line);
+			else
+					count = qMin(start+count,hist->getLineLen(line));
+			
+			hist->getCells(line,start,count,characterBuffer);
+		}
+		else
+		{
+			if ( count == -1 )
+					count = columns - start;
+
+			//retrieve line from screen image
+			for (int i=0;i<count;i++)
+			{
+					characterBuffer[i] = image[loc( start+i,line-hist->getLines() )];
+			}
+		}
+
+		//do not decode trailing whitespace characters
+		for (int i=count-1 ; i >= 0; i--)
+				if (QChar(characterBuffer[i].c).isSpace())
+						count--;
+				else
+						break;
+		
+		//decode line and write to text stream	
+		decoder->decodeLine( (ca*) characterBuffer , count, 0 , stream);
+}
+
+void TEScreen::getSelText(bool preserve_line_breaks, QTextStream* stream)
+{
+	TerminalCharacterDecoder* decoder = new PlainTextDecoder();
+	selectedText( stream , decoder );
+	delete decoder;
+	return;	
+}
+
+#if 0
 void TEScreen::getSelText(bool preserve_line_breaks, QTextStream *stream)
 {
+  //TESTING selectedText()
+  	//TerminalCharacterDecoder* decoder = new PlainTextDecoder();
+	TerminalCharacterDecoder* decoder = new HTMLDecoder();
+	selectedText( stream , decoder );
+	delete decoder;
+	return;
+  //END-TESTING
+	
   if (sel_begin == -1)
      return; // Selection got clear while selecting.
 
@@ -1476,13 +1573,15 @@ void TEScreen::getSelText(bool preserve_line_breaks, QTextStream *stream)
 
   delete [] m;
 }
+#endif
 
-void TEScreen::streamHistory(QTextStream* stream) {
+void TEScreen::streamHistory(QTextStream* stream , TerminalCharacterDecoder* decoder) {
   sel_begin = 0;
   sel_BR = sel_begin;
   sel_TL = sel_begin;
   setSelExtentXY(columns-1,lines-1+hist->getLines()-histCursor);
-  getSelText(true, stream);
+  //getSelText(true, stream, decoder);
+  selectedText(stream,decoder);
   clearSelection();
 }
 

@@ -41,6 +41,7 @@ struct ScreenParm
   int mode[MODES_SCREEN];
 };
 
+class TerminalCharacterDecoder;
 
 class TEScreen
 {
@@ -177,24 +178,61 @@ public: // these are all `Screen' operations
     void setBusySelecting(bool busy) { sel_busy = busy; }
     bool testIsSelected(const int x,const int y);
 
+	//deprecated: copies selected characters as plain text into a string
     QString getSelText(bool preserve_line_breaks);
+	//deprecated: copies selected characters as plain text into a stream
     void getSelText(bool preserve_line_breaks, QTextStream* stream);
-    void streamHistory(QTextStream* stream);
+    
+	/** 
+	 * Copies the entire history, including the characters currently on screen
+	 * into a text stream.
+	 *
+	 * @param stream An output stream which receives the history text
+	 * @param decoder A decoder which converts terminal characters into text.  PlainTextDecoder
+	 * 				  is the most commonly used decoder which coverts characters into plain
+	 * 				  text with no formatting.
+	 */
+	void streamHistory(QTextStream* stream , TerminalCharacterDecoder* decoder);
     QString getHistoryLine(int no);
+
+	/**
+	 * Copies the selected characters, set using @see setSelBeginXY and @see setSelExtentXY
+	 * into a stream using the specified character decoder.
+	 *
+	 * @param stream An output stream which receives the converted text
+	 * @param decoder A decoder which converts terminal characters into text.  PlainTextDecoder
+	 * 				  is the most commonly used decoder which coverts characters into plain
+	 * 				  text with no formatting.
+	 */
+	void selectedText(QTextStream* stream , TerminalCharacterDecoder* decoder);
 
     void checkSelection(int from, int to);
 
 	/** 
 	 * Sets or clears an attribute of the current line.
+	 * 
+	 * @param property The attribute to set or clear
 	 * Possible properties are:
 	 * LINE_WRAPPED:	 Specifies that the line is wrapped.
 	 * LINE_DOUBLEWIDTH: Specifies that the characters in the current line should be double the normal width.
 	 * LINE_DOUBLEHEIGHT:Specifies that the characters in the current line should be double the normal height.
+	 *
+	 * @param enable true to apply the attribute to the current line or false to remove it
 	 */
 	void setLineProperty(LineProperty property , bool enable);
 
 private: // helper
 
+	//copies a line of text from the screen or history into a stream using a specified character decoder
+	//line - the line number to copy, from 0 (the earliest line in the history) up to 
+	//		 hist->getLines() + lines - 1
+	//start - the first column on the line to copy
+	//count - the number of characters on the line to copy
+	//stream - the output stream to write the text into
+	//decoder - a decoder which coverts terminal characters (an ca array) into text
+	void copyLineToStream(int line, int start, int count, QTextStream* stream,
+						  TerminalCharacterDecoder* decoder);
+	
     void clearImage(int loca, int loce, char c);
     void moveImage(int dst, int loca, int loce);
     

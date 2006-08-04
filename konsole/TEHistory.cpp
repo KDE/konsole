@@ -24,6 +24,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <sys/types.h>
+#include <sys/mman.h>
 #include <unistd.h>
 #include <errno.h>
 #include <kdebug.h>
@@ -77,7 +78,8 @@ FIXME: There is noticeable decrease in speed, also. Perhaps,
 
 HistoryFile::HistoryFile()
   : ion(-1),
-    length(0)
+    length(0),
+	fileMap(0)
 {
   if (tmpFile.status() == 0)
   { 
@@ -88,10 +90,39 @@ HistoryFile::HistoryFile()
 
 HistoryFile::~HistoryFile()
 {
+	if (fileMap)
+		unmap();
+}
+
+void HistoryFile::map()
+{
+	assert( fileMap == 0 );
+
+	fileMap = (char*)mmap( 0 , length , PROT_READ , MAP_PRIVATE , ion , 0 );
+
+	assert( fileMap != MAP_FAILED );
+}
+
+void HistoryFile::unmap()
+{
+	int result = munmap( fileMap , length );
+	assert( result == 0 );
+
+	fileMap = 0;
+}
+
+bool HistoryFile::isMapped()
+{
+	return (fileMap != 0);
 }
 
 void HistoryFile::add(const unsigned char* bytes, int len)
 {
+  if ( fileMap )
+		  unmap();
+		
+  readWriteBalance++;
+
   int rc = 0;
 
   rc = lseek(ion,length,SEEK_SET); if (rc < 0) { perror("HistoryFile::add.seek"); return; }
@@ -101,12 +132,24 @@ void HistoryFile::add(const unsigned char* bytes, int len)
 
 void HistoryFile::get(unsigned char* bytes, int len, int loc)
 {
-  int rc = 0;
+  readWriteBalance--;
+  if ( !fileMap && readWriteBalance < MAP_THRESHOLD )
+		  map();
 
-  if (loc < 0 || len < 0 || loc + len > length)
-    fprintf(stderr,"getHist(...,%d,%d): invalid args.\n",len,loc);
-  rc = lseek(ion,loc,SEEK_SET); if (rc < 0) { perror("HistoryFile::get.seek"); return; }
-  rc = read(ion,bytes,len);     if (rc < 0) { perror("HistoryFile::get.read"); return; }
+  if ( fileMap )
+  {
+	for (int i=0;i<len;i++)
+			bytes[i]=fileMap[loc+i];
+  }
+  else
+  {	
+  	int rc = 0;
+
+  	if (loc < 0 || len < 0 || loc + len > length)
+    	fprintf(stderr,"getHist(...,%d,%d): invalid args.\n",len,loc);
+  	rc = lseek(ion,loc,SEEK_SET); if (rc < 0) { perror("HistoryFile::get.seek"); return; }
+  	rc = read(ion,bytes,len);     if (rc < 0) { perror("HistoryFile::get.read"); return; }
+  }
 }
 
 int HistoryFile::len()
@@ -180,7 +223,12 @@ int HistoryScrollFile::startOfLine(int lineno)
 {
   if (lineno <= 0) return 0;
   if (lineno <= getLines())
-    { int res;
+    { 
+	
+	if (!index.isMapped())
+			index.map();
+	
+	int res;
     index.get((unsigned char*)&res,sizeof(int),(lineno-1)*sizeof(int));
     return res;
     }
@@ -199,6 +247,9 @@ void HistoryScrollFile::addCells(ca text[], int count)
 
 void HistoryScrollFile::addLine(bool previousWrapped)
 {
+  if (index.isMapped())
+		  index.unmap();
+
   int locn = cells.len();
   index.add((unsigned char*)&locn,sizeof(int));
   unsigned char flags = previousWrapped ? 0x01 : 0x00;

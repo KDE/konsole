@@ -429,8 +429,8 @@ void TEmulation::copySelection() {
   QApplication::clipboard()->setText(t);
 }
 
-void TEmulation::streamHistory(QTextStream* stream) {
-  scr->streamHistory(stream);
+void TEmulation::streamHistory(QTextStream* stream , TerminalCharacterDecoder* decoder) {
+  scr->streamHistory(stream,decoder);
 }
 
 void TEmulation::findTextBegin()

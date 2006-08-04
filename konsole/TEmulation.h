@@ -49,7 +49,7 @@ public:
   const QTextCodec *codec() { return m_codec; }
   void setCodec(const QTextCodec *);
   virtual const HistoryType& history();
-  virtual void streamHistory(QTextStream*);
+  virtual void streamHistory(QTextStream*,TerminalCharacterDecoder* decoder);
 
   virtual void findTextBegin();
   virtual bool findTextNext( const QString &str, bool forward, bool caseSensitive, bool regExp );

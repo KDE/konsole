@@ -46,10 +46,30 @@ public:
   virtual void get(unsigned char* bytes, int len, int loc);
   virtual int  len();
 
+  //mmaps the file in read-only mode
+  void map();
+  //un-mmaps the file
+  void unmap();
+  //returns true if the file is mmap'ed
+  bool isMapped();
+
+
 private:
   int  ion;
   int  length;
   KTempFile tmpFile;
+
+  //pointer to start of mmap'ed file data, or 0 if the file is not mmap'ed
+  char* fileMap;
+ 
+  //incremented whenver 'add' is called and decremented whenever
+  //'get' is called.
+  //this is used to detect when a large number of lines are being read and processed from the history
+  //and automatically mmap the file for better performance
+  int readWriteBalance;
+
+  //when readWriteBalance goes below this threshold, the file will be mmap'ed automatically
+  static const int MAP_THRESHOLD = -1000;
 };
 #endif
 
