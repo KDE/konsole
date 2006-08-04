@@ -1256,11 +1256,6 @@ static QString makeString(int *m, int d, bool stripTrailingSpaces)
 
 void TEScreen::selectedText(QTextStream* stream , TerminalCharacterDecoder* decoder)
 {
-//	kDebug() << __FUNCTION__ << endl;
-
-	QTime time;
-	time.start();
-	
 	int top = sel_TL / columns;	
 	int left = sel_TL % columns;
 
@@ -1280,9 +1275,6 @@ void TEScreen::selectedText(QTextStream* stream , TerminalCharacterDecoder* deco
 			if (y != bottom)
 				*stream << '\n';
 	}	
-
-	kDebug() << __FUNCTION__ << " retrieved " << (bottom-top) << " lines in " << time.elapsed() << " msecs."
-			<< endl;
 }
 
 
@@ -1583,6 +1575,15 @@ void TEScreen::streamHistory(QTextStream* stream , TerminalCharacterDecoder* dec
   //getSelText(true, stream, decoder);
   selectedText(stream,decoder);
   clearSelection();
+}
+
+void TEScreen::streamHistory(QTextStream* stream, TerminalCharacterDecoder* decoder, int from, int to)
+{
+	sel_begin = loc(0,from);
+	sel_TL = sel_begin;
+	sel_BR = loc(columns-1,to);
+	selectedText(stream,decoder);
+	clearSelection();
 }
 
 QString TEScreen::getHistoryLine(int no)

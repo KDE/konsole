@@ -71,6 +71,8 @@
 #include "TEmulation.h"
 #include "TEWidget.h"
 #include "TEScreen.h"
+#include "TerminalCharacterDecoder.h"
+
 #include <kdebug.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -438,30 +440,114 @@ void TEmulation::findTextBegin()
   m_findPos = -1;
 }
 
-bool TEmulation::findTextNext( const QString &str, bool forward, bool caseSensitive, bool regExp )
+bool TEmulation::findTextNext( const QString &str, bool forward, bool isCaseSensitive, bool isRegExp )
 {
   int pos = -1;
   QString string;
 
-  if (forward) {
+  QTextStream searchStream(&string);
+
+  PlainTextDecoder decoder;
+ 
+  //setup first and last lines depending on search direction
+  int line = 0;
+  if (forward)
+  	line = (m_findPos == -1 ? 0 : m_findPos+1);
+  else
+	line = (m_findPos==-1?(scr->getHistLines()+scr->getLines()):m_findPos-1);
+
+  int lastLine = 0;
+  if (forward)
+		  lastLine = scr->getHistLines() + scr->getLines();
+  else
+		  lastLine = 0;
+		
+  //loop in blocks of 1000 lines   
+  int delta = forward ? 10000 : -10000;
+
+  //setup case sensitivity and regular expression if enabled
+  Qt::CaseSensitivity caseSensitivity = isCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive;
+  QRegExp regExp;
+
+  if (isRegExp)
+		  regExp = QRegExp(str,caseSensitivity);
+  
+  //loop through history in blocks of <delta> lines.
+  while ( line != lastLine )
+  {
+	int endLine = 0;
+	if (forward)
+		endLine = qMin(line+delta,lastLine);
+	else
+		endLine = qMax(line+delta,lastLine);
+		  
+	scr->streamHistory(&searchStream,&decoder, qMin(endLine,line) , qMax(endLine,line) );
+
+	pos = -1;
+		
+	if (forward)
+	{
+		if (isRegExp)
+				pos = string.indexOf(regExp);
+		else
+				pos = string.indexOf(str,0,caseSensitivity);
+	}
+	else
+	{
+		if (isRegExp)
+				pos = string.lastIndexOf(regExp);
+		else
+				pos = string.lastIndexOf(str, -1, caseSensitivity);
+	}
+
+	//if a match is found, position the cursor on that line and update the screen
+	if ( pos != -1 )
+	{
+		m_findPos = line + string.left(pos + 1).count(QChar('\n'));
+		
+		if ( m_findPos > scr->getHistLines() )
+				scr->setHistCursor(scr->getHistLines());
+		else
+				scr->setHistCursor(m_findPos);
+
+		scr->getHistoryLine(m_findPos);
+		
+		showBulk();
+		return true;
+	}
+
+	string.clear();	
+  	line = endLine;
+  }
+
+  return false;
+  
+		  
+ /* if (forward) {
     for (int i = (m_findPos==-1?0:m_findPos+1); i<(scr->getHistLines()+scr->getLines()); i++) {
-      string = scr->getHistoryLine(i);
+      //string = scr->getHistoryLine(i);
+
+	  scr->streamHistory(&searchStream,&decoder,from,to);
+			
       if (regExp)
         pos = string.indexOf( QRegExp(str, caseSensitive?Qt::CaseSensitive:Qt::CaseInsensitive) );
       else
         pos = string.indexOf(str, 0, caseSensitive?Qt::CaseSensitive:Qt::CaseInsensitive);
-      if(pos!=-1) {
+      
+	  //match found
+	  if(pos!=-1)
+	  {
         m_findPos=i;
         if(i>scr->getHistLines())
           scr->setHistCursor(scr->getHistLines());
         else
           scr->setHistCursor(i);
         showBulk();
-	return true;
+		return true;
       }
     }
-  }
-  else { // searching backwards
+  }*/
+ /* else { // searching backwards
     for(int i = (m_findPos==-1?(scr->getHistLines()+scr->getLines()):m_findPos-1); i>=0; i--) {
       string = scr->getHistoryLine(i);
       if (regExp)
@@ -478,9 +564,9 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool caseSensit
 	return true;
       }
     }
-  }
+  }*/
 
-  return false;
+ // return false;
 }
 
 // Refreshing -------------------------------------------------------------- --

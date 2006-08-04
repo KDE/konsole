@@ -193,6 +193,18 @@ public: // these are all `Screen' operations
 	 * 				  text with no formatting.
 	 */
 	void streamHistory(QTextStream* stream , TerminalCharacterDecoder* decoder);
+
+	/**
+	 * Copies part of the history, which may include the characters currently on screen
+	 * into a text stream.
+	 *
+	 * @param stream An output stream which receives the text
+	 * @param decoder A decoder which coverts terminal characters into text
+	 * @param from The first line in the history to retrieve
+	 * @param to The last line in the history to retrieve
+	 */
+	void streamHistory(QTextStream* stream , TerminalCharacterDecoder* decoder, int from, int to);
+	
     QString getHistoryLine(int no);
 
 	/**

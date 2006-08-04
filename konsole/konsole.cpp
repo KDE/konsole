@@ -4037,6 +4037,8 @@ void Konsole::slotFind()
   bool forward = !(m_finddialog->options() & KFind::FindBackwards);
   m_find_pattern = m_finddialog->pattern();
 
+  QTime time;
+  time.start();
   if (se->getEmulation()->findTextNext(m_find_pattern,
                           forward,
                           (m_finddialog->options() & Qt::CaseSensitive),
@@ -4062,9 +4064,13 @@ void Konsole::slotFind()
       }
     }
   else
+  {
+	kDebug() << __FUNCTION__ << ": search took " << time.elapsed() << " msecs." << endl;
+
     KMessageBox::information( m_finddialog,
     	i18n( "Search string '%1' not found." , KStringHandler::csqueeze(m_find_pattern)),
 	i18n( "Find" ) );
+  }
 }
 
 void Konsole::slotFindDone()
