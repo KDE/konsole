@@ -36,6 +36,7 @@
 #include <kdebug.h>
 #include <kfontdialog.h>
 #include <kglobalsettings.h>
+#include <kicon.h>
 #include <kiconloader.h>
 #include <kinputdialog.h>
 #include <klocale.h>

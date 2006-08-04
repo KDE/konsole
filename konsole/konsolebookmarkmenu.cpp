@@ -16,6 +16,7 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include <kicon.h>
 #include <kmenu.h>
 #include <kstandarddirs.h>
 #include <kactionmenu.h>

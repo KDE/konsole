@@ -143,6 +143,7 @@ Time to start a requirement list.
 #include <fcntl.h>
 #include <assert.h>
 
+#include <kicon.h>
 #include <kiconloader.h>
 #include <kstringhandler.h>
 #include <ktip.h>
