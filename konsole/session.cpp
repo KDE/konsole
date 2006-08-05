@@ -24,7 +24,7 @@
 #include <config-konsole.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
-#include <knotifyclient.h>
+#include <knotification.h>
 #include <klocale.h>
 #include <kprocio.h>
 #include <krun.h>
@@ -337,7 +337,7 @@ QString TESession::fullTitle() const
 void TESession::monitorTimerDone()
 {
   if (monitorSilence) {
-    KNotifyClient::event(winId, "Silence", i18n("Silence in session '%1'", title));
+    KNotification::event("Silence", i18n("Silence in session '%1'", title));
     emit notifySessionState(this,NOTIFYSILENCE);
   }
   notifiedActivity=false;
@@ -355,7 +355,7 @@ void TESession::notifySessionState(int state)
     if (!monitorActivity)
       return;
     if (!notifiedActivity) {
-      KNotifyClient::event(winId, "Activity", i18n("Activity in session '%1'", title));
+      KNotification::event("Activity", i18n("Activity in session '%1'", title));
       notifiedActivity=true;
       monitorTimer->setSingleShot(true);
       monitorTimer->start(silence_seconds*1000);
@@ -459,16 +459,16 @@ void TESession::done(int exitStatus)
   if (!wantedClose && (exitStatus || sh->signalled()))
   {
     if (sh->normalExit())
-      KNotifyClient::event(winId, "Finished", i18n("Session '%1' exited with status %2.", title, exitStatus));
+      KNotification::event("Finished", i18n("Session '%1' exited with status %2.", title, exitStatus));
     else if (sh->signalled())
     {
       if (sh->coreDumped())
-        KNotifyClient::event(winId, "Finished", i18n("Session '%1' exited with signal %2 and dumped core.", title, sh->exitSignal()));
+        KNotification::event("Finished", i18n("Session '%1' exited with signal %2 and dumped core.", title, sh->exitSignal()));
       else
-        KNotifyClient::event(winId, "Finished", i18n("Session '%1' exited with signal %2.", title, sh->exitSignal()));
+        KNotification::event("Finished", i18n("Session '%1' exited with signal %2.", title, sh->exitSignal()));
     }
     else
-      KNotifyClient::event(winId, "Finished", i18n("Session '%1' exited unexpectedly.", title));
+      KNotification::event("Finished", i18n("Session '%1' exited unexpectedly.", title));
   }
   emit processExited();
   emit done(this);
