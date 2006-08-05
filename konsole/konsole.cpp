@@ -4157,7 +4157,7 @@ void Konsole::slotZModemUpload()
   if (se->zmodemIsBusy())
   {
     KMessageBox::sorry(this,
-         i18n("<p>The current session already has a ZModem fi²le transfer in progress."));
+         i18n("<p>The current session already has a ZModem file transfer in progress."));
     return;
   }
   QString zmodem = KGlobal::dirs()->findExe("sz");
