@@ -325,7 +325,7 @@ void TEmulation::onRcvBlock(const char *s, int len)
     }
 
     // Otherwise, bulk decode until the next control code
-    for(l = i; l < len; ++l)
+    for(l = i; l < len-1; ++l)
       if ((unsigned char) s[l] < 32)
          break;
 
