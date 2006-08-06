@@ -122,7 +122,6 @@ Comment[zh_CN]=监视本地用户发出的 write(1) 或 wall(1)
 Comment[zh_TW]=監控本地使用者以 write(1) 或 wall(1) 傳送的郵件
 Type=Service
 ServiceTypes=KDEDModule
-X-KDE-ModuleType=Library
 X-KDE-Library=kwrited
 X-KDE-FactoryName=kwrited
 X-KDE-Kded-autoload=true
