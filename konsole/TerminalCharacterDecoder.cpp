@@ -69,7 +69,7 @@ void HTMLDecoder::decodeLine(ca* const characters, int count, LineProperty /*pro
 	{
 		QChar ch(characters[i].c);
 
-		//check if appearence of character is different from previous char
+		//check if appearance of character is different from previous char
 		if ( characters[i].r != lastRendition  ||
 		     characters[i].f != lastForeColor  ||
 			 characters[i].b != lastBackColor )

@@ -30,9 +30,9 @@ class QTextStream;
  * Base class for terminal character decoders
  *
  * The decoder converts lines of terminal characters which consist of a unicode character, foreground
- * and background colours and other appearence-related properties into text strings.
+ * and background colours and other appearance-related properties into text strings.
  *
- * Derived classes may produce either plain text with no other colour or appearence information, or
+ * Derived classes may produce either plain text with no other colour or appearance information, or
  * they may produce text which incorporates these additional properties. 
  */
 class TerminalCharacterDecoder
@@ -55,7 +55,7 @@ public:
 };
 
 /**
- * A terminal character decoder which produces plain text, ignoring colours and other appearence-related
+ * A terminal character decoder which produces plain text, ignoring colours and other appearance-related
  * properties of the original characters.
  */
 class PlainTextDecoder : public TerminalCharacterDecoder
