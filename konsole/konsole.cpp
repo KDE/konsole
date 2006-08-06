@@ -2207,7 +2207,7 @@ void Konsole::updateTitle(TESession* _se)
   if (m_tabViewMode == ShowIconOnly) 
     tabwidget->changeTab( _se->widget(), QString::null );
   else if (b_matchTabWinTitle)
-    tabwidget->changeTab( _se->widget(), _se->fullTitle().replace('&',"&&"));
+    tabwidget->setTabLabel( _se->widget(), _se->fullTitle().replace('&',"&&"));
 }
 
 void Konsole::initSessionFont(QFont font) {
@@ -3798,7 +3798,7 @@ void Konsole::slotRenameSession(TESession* ses, const QString &name)
   ra->setText(title);
   ra->setIcon( ses->IconName() ); // I don't know why it is needed here
   if (m_tabViewMode!=ShowIconOnly)
-    tabwidget->changeTab( ses->widget(), title );
+    tabwidget->setTabLabel( ses->widget(), title );
   updateTitle();
 }
 
