@@ -445,6 +445,7 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool isCaseSens
   int pos = -1;
   QString string;
 
+  //text stream to read history into string for pattern or regular expression searching
   QTextStream searchStream(&string);
 
   PlainTextDecoder decoder;
@@ -454,7 +455,7 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool isCaseSens
   if (forward)
   	line = (m_findPos == -1 ? 0 : m_findPos+1);
   else
-	line = (m_findPos==-1?(scr->getHistLines()+scr->getLines()):m_findPos-1);
+	line = (m_findPos == -1? (scr->getHistLines()+scr->getLines() ):m_findPos-1);
 
   int lastLine = 0;
   if (forward)
@@ -462,7 +463,9 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool isCaseSens
   else
 		  lastLine = 0;
 		
-  //loop in blocks of 1000 lines   
+  //read through and search history in blocks of 10K lines.
+  //this balances the need to retrieve lots of data from the history each time (for efficient searching)
+  //without using silly amounts of memory if the history is very large.    
   int delta = forward ? 10000 : -10000;
 
   //setup case sensitivity and regular expression if enabled
@@ -503,6 +506,8 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool isCaseSens
 	//if a match is found, position the cursor on that line and update the screen
 	if ( pos != -1 )
 	{
+		//work out how many lines into the current block of text the search result was found
+		//- looks a little painful, but it only has to be done once per search.
 		m_findPos = line + string.left(pos + 1).count(QChar('\n'));
 		
 		if ( m_findPos > scr->getHistLines() )
@@ -510,63 +515,20 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool isCaseSens
 		else
 				scr->setHistCursor(m_findPos);
 
+		//cause target line to be selected
 		scr->getHistoryLine(m_findPos);
-		
+	
+		//update display to show area of history containing selection	
 		showBulk();
 		return true;
 	}
 
+	//clear the current block of text and move to the next one
 	string.clear();	
   	line = endLine;
   }
 
   return false;
-  
-		  
- /* if (forward) {
-    for (int i = (m_findPos==-1?0:m_findPos+1); i<(scr->getHistLines()+scr->getLines()); i++) {
-      //string = scr->getHistoryLine(i);
-
-	  scr->streamHistory(&searchStream,&decoder,from,to);
-			
-      if (regExp)
-        pos = string.indexOf( QRegExp(str, caseSensitive?Qt::CaseSensitive:Qt::CaseInsensitive) );
-      else
-        pos = string.indexOf(str, 0, caseSensitive?Qt::CaseSensitive:Qt::CaseInsensitive);
-      
-	  //match found
-	  if(pos!=-1)
-	  {
-        m_findPos=i;
-        if(i>scr->getHistLines())
-          scr->setHistCursor(scr->getHistLines());
-        else
-          scr->setHistCursor(i);
-        showBulk();
-		return true;
-      }
-    }
-  }*/
- /* else { // searching backwards
-    for(int i = (m_findPos==-1?(scr->getHistLines()+scr->getLines()):m_findPos-1); i>=0; i--) {
-      string = scr->getHistoryLine(i);
-      if (regExp)
-        pos = string.indexOf( QRegExp(str, caseSensitive?Qt::CaseSensitive:Qt::CaseInsensitive) );
-      else
-        pos = string.indexOf(str, 0, caseSensitive?Qt::CaseSensitive:Qt::CaseInsensitive);
-      if(pos!=-1) {
-        m_findPos=i;
-        if(i>scr->getHistLines())
-          scr->setHistCursor(scr->getHistLines());
-        else
-          scr->setHistCursor(i);
-        showBulk();
-	return true;
-      }
-    }
-  }*/
-
- // return false;
 }
 
 // Refreshing -------------------------------------------------------------- --
@@ -594,10 +556,8 @@ void TEmulation::showBulk()
                   scr->getColumns());     // actual refresh
     gui->setCursorPos(scr->getCursorX(), scr->getCursorY());	// set XIM position
     free(image);
-    //FIXME: check that we do not trigger other draw event here.
-    //kDebug(1211)<<"TEmulation::showBulk(): setScroll()"<<endl;
-    gui->setScroll(scr->getHistCursor(),scr->getHistLines());
-    //kDebug(1211)<<"TEmulation::showBulk(): setScroll() done"<<endl;
+    
+	gui->setScroll(scr->getHistCursor(),scr->getHistLines());
   }
 }
 

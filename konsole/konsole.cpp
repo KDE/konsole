@@ -2965,6 +2965,11 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStringLis
   s->setAddToUtmp(b_addToUtmp);
   s->setXonXoff(b_xonXoff);
 
+  if (b_xonXoff)
+  { //set up a warning message when the user presses Ctrl+S to avoid confusion
+    connect( te,SIGNAL(flowControlKeyPressed(bool)),te,SLOT(outputSuspended(bool)) );
+  }
+
   if (b_histEnabled && m_histSize)
     s->setHistory(HistoryTypeBuffer(m_histSize));
   else if (b_histEnabled && !m_histSize)

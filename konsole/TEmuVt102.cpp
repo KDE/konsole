@@ -992,7 +992,6 @@ void TEmuVt102::onScrollLock()
 void TEmuVt102::onKeyPress( QKeyEvent* ev )
 {
   if (!listenToKeyPress) return; // someone else gets the keys
-  emit notifySessionState(NOTIFYNORMAL);
 
 //printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().length(),ev->text().length()?ev->text().ascii()[0]:0);
 

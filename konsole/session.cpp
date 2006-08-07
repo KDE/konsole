@@ -340,27 +340,39 @@ void TESession::monitorTimerDone()
     KNotification::event("Silence", i18n("Silence in session '%1'", title));
     emit notifySessionState(this,NOTIFYSILENCE);
   }
+  else
+  {
+    emit notifySessionState(this,NOTIFYNORMAL);
+  }
+  
   notifiedActivity=false;
 }
 
 void TESession::notifySessionState(int state)
 {
-  if (state==NOTIFYBELL) {
+  if (state==NOTIFYBELL) 
+  {
     te->Bell(em->isConnected(),i18n("Bell in session '%1'", title));
-  } else if (state==NOTIFYACTIVITY) {
+  } 
+  else if (state==NOTIFYACTIVITY) 
+  {
     if (monitorSilence) {
-      monitorTimer->setSingleShot(true);
-      monitorTimer->start(silence_seconds);
-    }
-    if (!monitorActivity)
-      return;
-    if (!notifiedActivity) {
-      KNotification::event("Activity", i18n("Activity in session '%1'", title));
-      notifiedActivity=true;
       monitorTimer->setSingleShot(true);
       monitorTimer->start(silence_seconds*1000);
     }
+    
+    if (!notifiedActivity) {
+      KNotification::event("Activity", i18n("Activity in session '%1'", title));
+      notifiedActivity=true;
+    }
+      monitorTimer->setSingleShot(true);
+      monitorTimer->start(silence_seconds*1000);
   }
+
+  if ( state==NOTIFYACTIVITY && !monitorActivity )
+          state = NOTIFYNORMAL;
+  if ( state==NOTIFYSILENCE && !monitorSilence )
+          state = NOTIFYNORMAL;
 
   emit notifySessionState(this, state);
 }

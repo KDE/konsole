@@ -76,6 +76,8 @@
 #include <QEvent>
 #include <QWheelEvent>
 #include <QVBoxLayout>
+#include <QGridLayout>
+#include <QSpacerItem>
 #include <QDropEvent>
 #include <QDragEnterEvent>
 #include <QPixmap>
@@ -385,6 +387,8 @@ TEWidget::TEWidget(QWidget *parent)
 ,m_isIMEdit(false)
 ,m_isIMSel(false)
 ,blend_color(qRgba(0,0,0,0xff))
+,outputSuspendedLabel(0)
+,gridLayout(0)
 {
   // The offsets are not yet calculated.
   // Do not calculate these too often to be more smoothly when resizing
@@ -426,7 +430,12 @@ TEWidget::TEWidget(QWidget *parent)
   //repainting.
   //the widget may then need to repaint over some of the area in a different colour
   //but because of the double buffering there won't be any flicker
-  setAutoFillBackground(true); 
+  setAutoFillBackground(true);
+
+  gridLayout = new QGridLayout(this);
+  gridLayout->setMargin(0);
+
+  setLayout( gridLayout ); 
 }
 
 //FIXME: make proper destructor
@@ -435,6 +444,9 @@ TEWidget::~TEWidget()
 {
   qApp->removeEventFilter( this );
   if (image) free(image);
+
+  delete gridLayout;
+  delete outputSuspendedLabel;
 }
 
 /* ------------------------------------------------------------------------- */
@@ -2024,6 +2036,14 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
   {
     QKeyEvent* ke = (QKeyEvent*)e;
 
+	if (ke->modifiers() & Qt::ControlModifier)
+	{
+		if ( ke->key() == Qt::Key_S )
+				emit flowControlKeyPressed(true /*output suspended*/);
+		if ( ke->key() == Qt::Key_Q )
+				emit flowControlKeyPressed(false /*output enabled*/);
+	}
+	
     actSel=0; // Key stroke implies a screen update, so TEWidget won't
               // know where the current selection is.
 
@@ -2457,6 +2477,50 @@ void TEWidget::drop_menu_activated(QAction* action)
       emit sendStringToEmu(" .\n");
       activateWindow();
    }
+}
+
+void TEWidget::outputSuspended(bool suspended)
+{
+	//create the label when this function is first called
+	if (!outputSuspendedLabel)
+	{
+            //This label includes a link to an English language website
+            //describing the 'flow control' (Xon/Xoff) feature found in almost all terminal emulators.
+            //If there isn't a suitable article available in the target language the link
+            //can simply be removed.
+			outputSuspendedLabel = new QLabel( i18n("<qt>Output has been "
+                                                "<a href=\"http://en.wikipedia.org/wiki/XON\">suspended</a>"
+                                                " by pressing Ctrl+S."
+											   "  Press <b>Ctrl+Q</b> to resume.</qt>"),
+											   this );
+
+             //fill label with a light yellow 'warning' colour
+            //FIXME - It would be better if there was a way of getting a suitable colour based
+            //on the current theme.  Last I looked however, the set of colours provided by the theme
+            //did not include anything suitable (most being varying shades of grey)
+
+            QPalette palette(outputSuspendedLabel->palette());
+            palette.setColor(QPalette::Base, QColor(255,250,150) );
+            outputSuspendedLabel->setPalette(palette);
+			outputSuspendedLabel->setAutoFillBackground(true);
+			outputSuspendedLabel->setBackgroundRole(QPalette::Base);
+
+            outputSuspendedLabel->setMargin(5);
+
+            //enable activation of "Xon/Xoff" link in label
+            outputSuspendedLabel->setTextInteractionFlags(Qt::LinksAccessibleByMouse | 
+                                                          Qt::LinksAccessibleByKeyboard);
+            outputSuspendedLabel->setOpenExternalLinks(true);
+
+            outputSuspendedLabel->setVisible(false);
+
+            gridLayout->addWidget(outputSuspendedLabel);       
+            gridLayout->addItem( new QSpacerItem(0,0,QSizePolicy::Expanding,QSizePolicy::Expanding),
+                                 1,0);
+
+    }
+
+	outputSuspendedLabel->setVisible(suspended);
 }
 
 uint TEWidget::lineSpacing() const

@@ -100,7 +100,13 @@ void HistoryFile::map()
 
 	fileMap = (char*)mmap( 0 , length , PROT_READ , MAP_PRIVATE , ion , 0 );
 
-	assert( fileMap != MAP_FAILED );
+    //if mmap'ing fails, fall back to the read-lseek combination
+    if ( fileMap == MAP_FAILED )
+    {
+            readWriteBalance = 0; 
+            fileMap = 0;
+            kDebug() << __FUNCTION__ << ": mmap'ing history failed.  errno = " << errno << endl;
+    }
 }
 
 void HistoryFile::unmap()
@@ -132,6 +138,10 @@ void HistoryFile::add(const unsigned char* bytes, int len)
 
 void HistoryFile::get(unsigned char* bytes, int len, int loc)
 {
+  //count number of get() calls vs. number of add() calls.  
+  //If there are many more get() calls compared with add() 
+  //calls (decided by using MAP_THRESHOLD) then mmap the log
+  //file to improve performance.
   readWriteBalance--;
   if ( !fileMap && readWriteBalance < MAP_THRESHOLD )
 		  map();

@@ -54,6 +54,7 @@ class Konsole;
 class QLabel;
 class QTimer;
 class QFrame;
+class QGridLayout;
 
 class TEWidget : public QFrame
 // a widget representing attributed text
@@ -151,10 +152,28 @@ public Q_SLOTS:
     void pasteClipboard();
     void pasteSelection();
     void onClearSelection();
+	/** 
+	 * Causes the widget to display or hide a message informing the user that terminal
+	 * output has been suspended (by using the flow control key combination Ctrl+S)
+	 *
+	 * @param suspended True if terminal output has been suspended and the warning message should
+	 *				 	be shown or false to indicate that terminal output has been resumed and that
+	 *				 	the warning message should disappear.
+	 */ 
+	void outputSuspended(bool suspended);
 
 Q_SIGNALS:
 
     void keyPressedSignal(QKeyEvent *e);
+
+    /**
+     * Emitted when the user presses the suspend or resume flow control key combinations 
+     * 
+     * @param suspend true if the user pressed Ctrl+S (the suspend output key combination) or
+     * false if the user pressed Ctrl+Q (the resume output key combination)
+     */
+    void flowControlKeyPressed(bool suspend);
+    
     /** 
      * A mouse event occurred.
      * @param cb The mouse button (0 for left button, 1 for middle button, 2 for right button, 3 for release)
@@ -242,6 +261,8 @@ private:
 
 //    QChar (*fontMap)(QChar); // possible vt100 font extension
 
+    QGridLayout* gridLayout;
+
     bool fixed_font; // has fixed pitch
     int  font_h;     // height
     int  font_w;     // width
@@ -310,6 +331,10 @@ private:
     QLabel *mResizeLabel;
     QTimer *mResizeTimer;
 
+	//widgets related to the warning message that appears when the user presses Ctrl+S to suspend
+	//terminal output - informing them what has happened and how to resume output
+	QLabel* outputSuspendedLabel; 
+    	
     uint m_lineSpacing;
 
     QRect       cursorRect; //for quick changing of cursor
