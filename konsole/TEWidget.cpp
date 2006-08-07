@@ -389,6 +389,7 @@ TEWidget::TEWidget(QWidget *parent)
 ,blend_color(qRgba(0,0,0,0xff))
 ,outputSuspendedLabel(0)
 ,gridLayout(0)
+,allowBell(true)
 {
   // The offsets are not yet calculated.
   // Do not calculate these too often to be more smoothly when resizing
@@ -2199,20 +2200,37 @@ void TEWidget::setBellMode(int mode)
   m_bellMode=mode;
 }
 
+void TEWidget::enableBell()
+{
+    allowBell = true;
+}
+
+
+
 void TEWidget::Bell(bool visibleSession, QString message)
 {
   if (m_bellMode==BELLNONE) return;
 
-  if (m_bellMode==BELLSYSTEM) {
-    KNotification::beep();
-  } else if (m_bellMode==BELLNOTIFY) {
-    if (visibleSession)
-      KNotification::event("BellVisible", message,QPixmap(),this);
-    else
-      KNotification::event("BellInvisible", message,QPixmap(),this);
-  } else if (m_bellMode==BELLVISUAL) {
-    swapColorTable();
-    QTimer::singleShot(200,this,SLOT(swapColorTable()));
+  //limit Bell sounds / visuals etc. to max 1 per second.
+  //...mainly for sound effects where rapid bells in sequence produce a horrible noise
+  if ( allowBell )
+  {
+    allowBell = false;
+    QTimer::singleShot(1000,this,SLOT(enableBell()));
+ 
+    kDebug() << __FUNCTION__ << endl;
+
+    if (m_bellMode==BELLSYSTEM) {
+                KNotification::beep();
+    } else if (m_bellMode==BELLNOTIFY) {
+        if (visibleSession)
+            KNotification::event("BellVisible", message,QPixmap(),this);
+        else
+            KNotification::event("BellInvisible", message,QPixmap(),this);
+    } else if (m_bellMode==BELLVISUAL) {
+        swapColorTable();
+        QTimer::singleShot(200,this,SLOT(swapColorTable()));
+    }
   }
 }
 

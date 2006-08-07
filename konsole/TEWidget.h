@@ -256,10 +256,15 @@ protected Q_SLOTS:
     void scrollChanged(int value);
     void blinkEvent();
     void blinkCursorEvent();
+    //Renables bell noises and visuals.  Used to disable further bells for a short period of time
+    //after emitting the first in a sequence of bell events.
+    void enableBell();
 
 private:
 
 //    QChar (*fontMap)(QChar); // possible vt100 font extension
+
+    bool allowBell;
 
     QGridLayout* gridLayout;
 
