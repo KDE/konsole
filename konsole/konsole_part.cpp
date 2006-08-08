@@ -865,7 +865,7 @@ void konsolePart::slotSetEncoding()
   QTextCodec * qtc = KGlobal::charsets()->codecForName(enc, found);
   if(!found)
   {
-    kDebug() << "Codec " << selectSetEncoding->currentText() << " not found!" << endl;
+    //kDebug(1211) << "Codec " << selectSetEncoding->currentText() << " not found!" << endl;
     qtc = QTextCodec::codecForLocale();
   }
 
@@ -953,7 +953,7 @@ HistoryTypeDialog::HistoryTypeDialog(const HistoryType& histType,
   setCaption( i18n("History Configuration") );
   setButtons( Help | Default | Ok | Cancel );
   setDefaultButton( Ok );
-                
+
   QFrame *mainFrame = new QFrame;
   setMainWidget( mainFrame );
 
