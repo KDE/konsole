@@ -1,8 +1,8 @@
 [Desktop Entry]
 Encoding=UTF-8
 Icon=konsole
-Type=Application
-Exec=kcmshell kcmkonsole
+Type=Service
+Exec=kcmshell konsole
 DocPath=kcontrol/kcmkonsole/index.html
 
 X-KDE-Library=konsole

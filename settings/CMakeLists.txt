@@ -20,8 +20,7 @@ install(TARGETS kcm_konsole  DESTINATION ${PLUGIN_INSTALL_DIR})
 
 ########### install files ###############
 
-install( FILES kcmkonsole.desktop  DESTINATION  ${APPLNK_INSTALL_DIR}/.hidden )
-
+install( FILES konsole.desktop DESTINATION ${SERVICES_INSTALL_DIR} )
 
 
 

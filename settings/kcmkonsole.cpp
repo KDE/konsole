@@ -36,7 +36,7 @@
 #include "kcmkonsole.h"
 
 typedef KGenericFactory<KCMKonsole, QWidget> ModuleFactory;
-K_EXPORT_COMPONENT_FACTORY( kcm_konsole, ModuleFactory("kcmkonsole") )
+K_EXPORT_COMPONENT_FACTORY( konsole, ModuleFactory("kcmkonsole") )
 
 KCMKonsole::KCMKonsole(QWidget * parent, const QStringList&)
 :KCModule(ModuleFactory::instance(), parent)
