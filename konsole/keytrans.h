@@ -61,7 +61,7 @@ class KeyTrans
       ~KeyTrans();
       bool findEntry(int key, int bits, int* cmd, const char** txt, int* len,
                      bool* metaspecified);
-      const QString& hdr()         {if (!m_fileRead) readConfig(); return m_hdr;}
+      const QString& hdr()         {if (!m_headerRead) readConfig(true); return m_hdr;}
       int numb()                   {return m_numb;}
       const QString& id() { return m_id;}
 
@@ -87,12 +87,15 @@ class KeyTrans
    private:
       KeyEntry* addEntry(int ref, int key, int bits, int mask, int cmd, QString txt);
       void addKeyTrans();
-      void readConfig();
+      //headerOnly - set to true to only read the header at the top of the file (which gives the name for display in menus and so on)
+      //and not the rest of the file
+      void readConfig(bool headerOnly = false);
       Q3PtrList<KeyEntry> tableX;
       QString m_hdr;
       QString m_path;
       QString m_id;
       int m_numb;
+      bool m_headerRead;
       bool m_fileRead;
       KeyTrans();
 };

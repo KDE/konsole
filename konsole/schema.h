@@ -94,8 +94,10 @@ public:
 	/**
 	* Actually read a schema file (using the path given
 	* to the constructor of the ColorSchema).
+    *
+    * @param readTitleOnly Set to true to only read the title and skip the rest of the file.
 	*/
-	bool rereadSchemaFile();
+	bool rereadSchemaFile(bool readTitleOnly = false);
 
 	/**
 	* Writes a ColorSchema to a config file with the
@@ -147,8 +149,8 @@ protected:
 		ColorEntry& e) ;
 
    public:
-      int numb()                       {if (!m_fileRead) rereadSchemaFile();return m_numb;};
-      const QString& title()           {if (!m_fileRead) rereadSchemaFile();return m_title;};
+      int numb()                       {/*if (!m_fileRead) rereadSchemaFile();*/return m_numb;};
+      const QString& title()           {if (!m_titleRead) rereadSchemaFile(true);return m_title;};
       const QString& imagePath()       {if (!m_fileRead) rereadSchemaFile();return m_imagePath;};
       int alignment()                  {if (!m_fileRead) rereadSchemaFile();return m_alignment;};
       const ColorEntry* table()        {if (!m_fileRead) rereadSchemaFile();return m_table;};
@@ -168,6 +170,7 @@ protected:
       ColorEntry m_table[TABLE_COLORS];
       bool       m_useTransparency:1;
       bool       m_fileRead:1;
+      bool       m_titleRead;
       double     m_tr_x;
       QString    fRelPath;	// File name of schema file
       QDateTime	*lastRead;	// Time last checked for updates

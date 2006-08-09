@@ -337,7 +337,8 @@ QString TESession::fullTitle() const
 void TESession::monitorTimerDone()
 {
   if (monitorSilence) {
-    KNotification::event("Silence", i18n("Silence in session '%1'", title));
+    KNotification::event("Silence", i18n("Silence in session '%1'", title), QPixmap(), te, 
+                    KNotification::CloseWhenWidgetActivated);
     emit notifySessionState(this,NOTIFYSILENCE);
   }
   else
@@ -362,7 +363,7 @@ void TESession::notifySessionState(int state)
     }
     
     if (!notifiedActivity) {
-      KNotification::event("Activity", i18n("Activity in session '%1'", title));
+      KNotification::event("Activity", i18n("Activity in session '%1'", title), QPixmap(), te, KNotification::CloseWhenWidgetActivated);
       notifiedActivity=true;
     }
       monitorTimer->setSingleShot(true);
@@ -470,17 +471,21 @@ void TESession::done(int exitStatus)
   }
   if (!wantedClose && (exitStatus || sh->signalled()))
   {
+    QString message;
+
     if (sh->normalExit())
-      KNotification::event("Finished", i18n("Session '%1' exited with status %2.", title, exitStatus));
+      message = i18n("Session '%1' exited with status %2.", title, exitStatus);
     else if (sh->signalled())
     {
       if (sh->coreDumped())
-        KNotification::event("Finished", i18n("Session '%1' exited with signal %2 and dumped core.", title, sh->exitSignal()));
+        message = i18n("Session '%1' exited with signal %2 and dumped core.", title, sh->exitSignal());
       else
-        KNotification::event("Finished", i18n("Session '%1' exited with signal %2.", title, sh->exitSignal()));
+        message = i18n("Session '%1' exited with signal %2.", title, sh->exitSignal());
     }
     else
-      KNotification::event("Finished", i18n("Session '%1' exited unexpectedly.", title));
+        message = i18n("Session '%1' exited unexpectedly.", title);
+
+    KNotification::event("Finished", message , QPixmap(), te , KNotification::CloseWhenWidgetActivated);
   }
   emit processExited();
   emit done(this);

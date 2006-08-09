@@ -469,9 +469,55 @@ void Konsole::updateRMBMenu()
 // function when starting konsole
 // Be careful not to access stuff which is created in this function before this
 // function was called ! you can check this using m_menuCreated, aleXXX
+
+
+
+// ^^ Loading the entire menu structure "on-demand" causes bugs.  For example, 
+// keyboard accelerators don't work until  the user opens one of the menus.  
+// It also prevents the menus from being painted properly the first time they are opened. 
+//
+// Konsole::makeGUI() currently takes about 150ms here (compiled in debug mode) with warm caches, and about
+// 500ms with cold caches.
+//
+// The more significant costs are
+//  - Loading lots more icons than we need (see below, delayed icon loading in
+//    kdelibs needs to be ported for KDE 4)
+//  - Qt loading its font database using FontConfig - and I'm running a flashy
+//    new version of FC with lots of patches in this area. 
+//    On my "out-of-the-box" Ubuntu setup loading any Qt 4 application results
+//    in > 2000 stats in /usr/share/fonts and friends.
+//
+// According to callgrind, the expensive parts were (in order of cost):
+//
+//      - Processing the keytab files just to get the keytab's name 
+//      [FIXED - Changed keytab reader to only parse the header at the 
+//               top of the file and then stop when calling KeyTrans->hdr()]
+//
+//      - Building the session menus:
+//           - Loading the icons via SmallIconSet is expensive at the time of
+//             writing because KIconLoader's on-demand loading of icons
+//             hasn't yet been ported for KDE4/Qt4.
+//           - Searching all of the system paths for the executable needed
+//             for each session.
+//
+//      - Rereading the colour schemas just to get the schema's name
+//      [FIXED - Changed colour schema parser to only look at the title at the top
+//       of the file when calling ColorSchema::title().  Also changed
+//       ColorSchema::numb() not to ever reparse the schema because
+//       whatever the "numb" property is, reparsing the schema doesn't
+//       affect it]
+//
+// So to improve startup performance, the above need to be fixed (in Konsole or
+// kdelibs as appropriate) and after that 
+//
+//-- Robert Knight.
+
 void Konsole::makeGUI()
 {
    if (m_menuCreated) return;
+
+   QTime makeGUITimer;
+   makeGUITimer.start();
 
    if (m_tabbarSessionsCommands)
       disconnect(m_tabbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(makeGUI()));
@@ -492,6 +538,8 @@ void Konsole::makeGUI()
       connect(m_tabbarSessionsCommands,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
    connect(m_session,SIGNAL(aboutToShow()),this,SLOT(loadScreenSessions()));
    m_menuCreated=true;
+
+   kDebug() << __FUNCTION__ << ": disconnect done - time = " << makeGUITimer.elapsed() << endl;
 
    // Remove the empty separator Qt inserts if the menu is empty on popup,
    // not sure if this will be "fixed" in Qt, for now use this hack (malte)
@@ -527,6 +575,8 @@ void Konsole::makeGUI()
       KAcceleratorManager::manage( m_signals );
    }
 
+   kDebug() << __FUNCTION__ << ": signals done - time = " << makeGUITimer.elapsed() << endl;
+   
    // Edit Menu
    m_edit->addAction( m_copyClipboard );
    m_edit->addAction( m_pasteClipboard );
@@ -575,6 +625,8 @@ void Konsole::makeGUI()
    if ( ra != 0 )
        m_view->addAction( ra );
 
+   kDebug() << __FUNCTION__ << ": Edit and View done - time = " << makeGUITimer.elapsed() << endl;
+   
    // Bookmarks menu
    if (bookmarkHandler)
       connect( bookmarkHandler, SIGNAL( openURL( const QString&, const QString& )),
@@ -587,6 +639,8 @@ void Konsole::makeGUI()
    if (m_bookmarksSession)
       connect(m_bookmarksSession, SIGNAL(aboutToShow()), SLOT(bookmarks_menu_check()));
 
+   kDebug() << __FUNCTION__ << ": Bookmarks done - time = " << makeGUITimer.elapsed() << endl;
+   
    // Schema Options Menu -----------------------------------------------------
    m_schema = new KMenu(this);
    KAcceleratorManager::manage( m_schema );
@@ -722,6 +776,8 @@ void Konsole::makeGUI()
          m_options->setTearOffEnabled( true );
    }
 
+   kDebug() << __FUNCTION__ << ": Options done - time = " << makeGUITimer.elapsed() << endl;
+   
    // Help menu
    if ( m_help )
    {
@@ -733,6 +789,8 @@ void Konsole::makeGUI()
    // The different session menus
    buildSessionMenus();
 
+   kDebug() << __FUNCTION__ << ": Session menus done - time = " << makeGUITimer.elapsed() << endl;
+   
    connect(m_session, SIGNAL(activated(int)), SLOT(newSession(int)));
 
    // Right mouse button menu
@@ -772,6 +830,7 @@ void Konsole::makeGUI()
          m_rightButton->setTearOffEnabled( true );
    }
 
+   kDebug() << __FUNCTION__ << ": RMB menu done - time = " << makeGUITimer.elapsed() << endl;
    delete colors;
    colors = new ColorSchemaList();
    colors->checkSchemas();
@@ -785,10 +844,14 @@ void Konsole::makeGUI()
    for (uint i=0; i<m_schema->actions().count(); i++)
       m_schema->setItemChecked(i,false);
 
+
+   kDebug() << __FUNCTION__ << ": Color schemas done - time = " << makeGUITimer.elapsed() << endl;
    m_schema->setItemChecked(curr_schema,true);
    while (se == NULL) {}
    se->setSchemaNo(curr_schema);
 
+   kDebug() << __FUNCTION__ << ": setSchemaNo done - time = " << makeGUITimer.elapsed() << endl;
+   
    // insert keymaps into menu
    // This sorting seems a bit cumbersome; but it is not called often.
    QStringList kt_titles;
@@ -811,6 +874,9 @@ void Konsole::makeGUI()
       m_keytab->insertItem(title.replace('&',"&&"),ktr->numb());
    }
 
+   kDebug() << __FUNCTION__ << ": keytrans done - time = " << makeGUITimer.elapsed() << endl;
+   
+   
    applySettingsToGUI();
    isRestored = false;
 
@@ -884,6 +950,8 @@ void Konsole::makeGUI()
       m_autoResizeTabs->setChecked(b_autoResizeTabs);
       m_tabbarPopupMenu->addAction( m_autoResizeTabs );
     }
+
+   kDebug() << __FUNCTION__ << ": took " << makeGUITimer.elapsed() << endl;
 }
 
 void Konsole::slotSetEncoding()

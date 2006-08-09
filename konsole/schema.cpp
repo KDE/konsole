@@ -292,11 +292,14 @@ void ColorSchema::writeConfig(const QString& path) const
 
 static int random_hue = -1;
 
-bool ColorSchema::rereadSchemaFile()
+bool ColorSchema::rereadSchemaFile(bool readTitleOnly)
 {
   QString fPath = fRelPath.isEmpty() ? "" : (fRelPath.startsWith("/") ? fRelPath : KStandardDirs::locate("data", "konsole/"+fRelPath));
   if (fPath.isEmpty() || !QFile::exists(fPath))
      return false;
+
+
+  kDebug() << __FUNCTION__ << ": called to read schema file - " << fPath << ", readTitleOnly = " << readTitleOnly << endl;
 
   //KONSOLEDEBUG << "Rereading schema file " << fPath << endl;
 
@@ -325,6 +328,8 @@ bool ColorSchema::rereadSchemaFile()
       if (!strncmp(line,"title",5))
       {
         m_title = i18n(line+6);
+        if (readTitleOnly) 
+            break;    
       }
       if (!strncmp(line,"image",5))
       { char rend[100], path[100]; int attr = 1;
@@ -409,7 +414,12 @@ bool ColorSchema::rereadSchemaFile()
     }
   }
   fclose(sysin);
-  m_fileRead=true;
+
+  if (!readTitleOnly)
+    m_fileRead=true;
+
+  m_titleRead = true;
+
   return true;
 }
 

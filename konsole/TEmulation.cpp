@@ -308,6 +308,7 @@ void TEmulation::onKeyPress( QKeyEvent* ev )
 
 /*
    We are doing code conversion from locale to unicode first.
+TODO: Character composition from the old code.  See #96536
 */
 
 void TEmulation::onRcvBlock(const char* text, int length)

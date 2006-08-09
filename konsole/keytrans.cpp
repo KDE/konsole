@@ -189,7 +189,7 @@ public:
 public:
   void getCc();
   void getSymbol();
-  void parseTo(KeyTrans* kt);
+  void parseTo(KeyTrans* kt,bool headerOnly=false);
   void ReportError(const char* msg);
   void ReportToken(); // diagnostic
 private:
@@ -365,10 +365,15 @@ static KeyTransSymbols * syms = 0L;
    - Comment :: '#' (any but \n)*
 */
 
-void KeyTrans::readConfig()
+void KeyTrans::readConfig(bool headerOnly)
 {
    if (m_fileRead) return;
-   m_fileRead=true;
+
+   m_headerRead = true;
+   
+   if (!headerOnly)
+        m_fileRead=true;
+
    QIODevice* buf(0);
    QByteArray* txt = 0;
    if (m_path=="[buildin]")
@@ -383,14 +388,14 @@ void KeyTrans::readConfig()
       buf=new QFile(m_path);
    };
    KeytabReader ktr(m_path,*buf);
-   ktr.parseTo(this);
+   ktr.parseTo(this,headerOnly);
    delete buf;
    delete txt;
 }
 
 #define assertSyntax(Cond,Message) if (!(Cond)) { ReportError(Message); goto ERROR; }
 
-void KeytabReader::parseTo(KeyTrans* kt)
+void KeytabReader::parseTo(KeyTrans* kt , bool headerOnly)
 {
   // Opening sequence
 
@@ -406,6 +411,13 @@ Loop:
   {
     getSymbol(); assertSyntax(sym == SYMString, "Header expected")
     kt->m_hdr = i18n(res.toLatin1());
+
+    if (headerOnly)
+    {
+            buf->close();
+            return;
+    }
+
     getSymbol(); assertSyntax(sym == SYMEol, "Text unexpected")
     getSymbol();                   // eoln
     goto Loop;

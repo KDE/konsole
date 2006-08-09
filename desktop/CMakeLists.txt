@@ -1,19 +1,13 @@
 
-project(konsole)
-
-if(NOT WIN32)
-add_subdirectory( konsole ) 
-endif(NOT WIN32)
-add_subdirectory( other ) 
-add_subdirectory( settings ) 
-add_subdirectory( desktop )
-
 
 ########### install files ###############
 
-install( FILES konsole.upd   DESTINATION  ${KCONF_UPDATE_INSTALL_DIR} )
-install(PROGRAMS schemaStrip.pl  DESTINATION  ${KCONF_UPDATE_INSTALL_DIR} )
-
+install( FILES konsole.desktop konsolesu.desktop  DESTINATION  ${XDG_APPS_DIR} )
+install( FILES terminalemulator.desktop  DESTINATION  ${SERVICETYPES_INSTALL_DIR} )
+install( FILES konsolepart.desktop kwrited.desktop konsole-script.desktop  DESTINATION  ${SERVICES_INSTALL_DIR} )
+install( FILES konsolehere.desktop  DESTINATION  ${DATA_INSTALL_DIR}/konqueror/servicemenus )
+install( FILES kwrited.desktop  DESTINATION  ${SERVICES_INSTALL_DIR}/kded )
+install( FILES konsole.notifyrc tips  DESTINATION  ${DATA_INSTALL_DIR}/konsole )
 
 
 #original Makefile.am contents follow:
