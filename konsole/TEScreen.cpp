@@ -96,6 +96,9 @@ TEScreen::TEScreen(int l, int c)
 {
   
   lineProperties.resize(lines+1);
+  for (int i=0;i<lines+1;i++)
+          lineProperties[i]=0;
+
   initTabStops();
   clearSelection();
   reset();

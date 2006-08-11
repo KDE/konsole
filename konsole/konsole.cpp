@@ -1059,7 +1059,7 @@ void Konsole::makeBasicGUI()
   }
 
   if (KAuthorized::authorizeKAction("help"))
-     m_help = helpMenu(0, false);
+     m_help = helpMenu(QString(), false);
 
   if (KAuthorized::authorizeKAction("konsole_rmb")) {
      m_rightButton = new KMenu(this);
@@ -3764,7 +3764,6 @@ void Konsole::detachSession(TESession* _se) {
   konsole->enableFullScripting(b_fullScripting);
   // TODO; Make this work: konsole->enableFixedSize(b_fixedSize);
   konsole->resize(size());
-  konsole->show();
   konsole->attachSession(_se);
   konsole->activateSession(_se);
   konsole->changeTabTextColor( _se, se_tabtextcolor.rgb() );//restore prev color
@@ -3793,6 +3792,9 @@ void Konsole::detachSession(TESession* _se) {
 
   if( m_removeSessionButton )
     m_removeSessionButton->setEnabled(tabwidget->count()>1);
+  
+  //show detached session
+  konsole->show();
 }
 
 void Konsole::attachSession(TESession* session)

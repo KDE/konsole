@@ -171,9 +171,9 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   QByteArray wname = PACKAGE;
 
 
-  KAboutData aboutData( PACKAGE, I18N_NOOP("Konsole"),
+  KAboutData aboutData( "konsole" /*PACKAGE*/, I18N_NOOP("Konsole"),
     VERSION, description, KAboutData::License_GPL_V2,
-    "Copyright (c) 1997-2006, Lars Doelle");
+    "Copyright (c) 1997-2006, Konsole Team", 0 , "http://konsole.kde.org");
   aboutData.addAuthor("Robert Knight",I18N_NOOP("Maintainer"), "robertknight@gmail.com");
   aboutData.addAuthor("Lars Doelle",I18N_NOOP("Author"), "lars.doelle@on-line.de");
   aboutData.addCredit("Kurt V. Hindenburg",
