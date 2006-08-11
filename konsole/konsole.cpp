@@ -3684,12 +3684,6 @@ void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
   if (!tewidget) tewidget=te;
 
   if (tewidget==te) {
-    if (m_schema)
-    {
-      m_schema->setItemChecked(curr_schema,false);
-      m_schema->setItemChecked(s->numb(),true);
-    }
-
     s_schema = s->relPath();
     curr_schema = s->numb();
     pmPath = s->imagePath();

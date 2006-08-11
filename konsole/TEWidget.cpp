@@ -337,6 +337,8 @@ void TEWidget::setFont(const QFont &)
 
 TEWidget::TEWidget(QWidget *parent)
 :QFrame(parent)
+,allowBell(true)
+,gridLayout(0)
 ,font_h(1)
 ,font_w(1)
 ,font_a(1)
@@ -371,6 +373,7 @@ TEWidget::TEWidget(QWidget *parent)
 ,mResizeWidget(0)
 ,mResizeLabel(0)
 ,mResizeTimer(0)
+,outputSuspendedLabel(0)
 ,m_lineSpacing(0)
 ,colorsSwapped(false)
 ,rimX(1)
@@ -385,11 +388,7 @@ TEWidget::TEWidget(QWidget *parent)
 ,m_cursorLine(0)
 ,m_cursorCol(0)
 ,m_isIMEdit(false)
-,m_isIMSel(false)
 ,blend_color(qRgba(0,0,0,0xff))
-,outputSuspendedLabel(0)
-,gridLayout(0)
-,allowBell(true)
 {
   // The offsets are not yet calculated.
   // Do not calculate these too often to be more smoothly when resizing
@@ -437,6 +436,7 @@ TEWidget::TEWidget(QWidget *parent)
   gridLayout->setMargin(0);
 
   setLayout( gridLayout ); 
+  setLineWidth(0);
 }
 
 //FIXME: make proper destructor
