@@ -250,7 +250,7 @@ void HistoryScrollFile::getCells(int lineno, int colno, int count, ca res[])
   cells.get((unsigned char*)res,count*sizeof(ca),startOfLine(lineno)+colno*sizeof(ca));
 }
 
-void HistoryScrollFile::addCells(ca text[], int count)
+void HistoryScrollFile::addCells(const ca text[], int count)
 {
   cells.add((unsigned char*)text,count*sizeof(ca));
 }
@@ -284,7 +284,24 @@ HistoryScrollBuffer::~HistoryScrollBuffer()
 {
 }
 
-void HistoryScrollBuffer::addCells(ca a[], int count)
+void HistoryScrollBuffer::addCells(const QVector<ca>& cells)
+{
+    histline* newLine = new histline(cells);
+
+    ++m_arrayIndex;
+    if (m_arrayIndex >= m_maxNbLines) {
+     m_arrayIndex = 0;
+     m_buffFilled = true;
+    }
+
+  // FIXME: See BR96605
+  if (m_nbLines < m_maxNbLines - 1) ++m_nbLines;
+
+  // m_histBuffer.remove(m_arrayIndex); // not necessary
+  m_histBuffer.insert(m_arrayIndex, newLine);
+  m_wrappedLine.clearBit(m_arrayIndex);
+}
+void HistoryScrollBuffer::addCells(const ca a[], int count)
 {
   //unsigned int nbLines = countLines(bytes, len);
 
@@ -441,7 +458,7 @@ void HistoryScrollNone::getCells(int, int, int, ca [])
 {
 }
 
-void HistoryScrollNone::addCells(ca [], int)
+void HistoryScrollNone::addCells(const ca [], int)
 {
 }
 
@@ -499,7 +516,7 @@ void HistoryScrollBlockArray::getCells(int lineno, int colno,
   memcpy(res, b->data + (colno * sizeof(ca)), count * sizeof(ca));
 }
 
-void HistoryScrollBlockArray::addCells(ca a[], int count)
+void HistoryScrollBlockArray::addCells(const ca a[], int count)
 {
   Block *b = m_blockArray.lastBlock();
   

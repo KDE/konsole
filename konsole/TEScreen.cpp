@@ -20,24 +20,22 @@
 
 /*! \class TEScreen
 
-    \brief The image manipulated by the emulation.
+    \brief The output image produced by the terminal emulation.
 
-    This class implements the operations of the terminal emulation framework.
-    It is a complete passive device, driven by the emulation decoder
-    (TEmuVT102). By this it forms in fact an ADT, that defines operations
-    on a rectangular image.
+    The terminal emulation ( TEmulation ) receives a serial stream of
+    input characters from the program currently running in the terminal,
+    and produces an image consisting of characters with associated attributes
+    (such as foreground and background colors).
 
-    It does neither know how to display its image nor about escape sequences.
-    It is further independent of the underlying toolkit. By this, one can even
-    use this module for an ordinary text surface.
+    In addition to the image which is visible on-screen, incoming lines are
+    added to an associated history scroll ( set using setScroll() ), so that
+    earlier output can be viewed.
 
-    Since the operations are called by a specific emulation decoder, one may
-    collect their different operations here.
+    getCookedImage() is used to retrieve the currently visible image
+    which is then used by the display widget to draw the output from the
+    terminal. 
 
-    The state manipulated by the operations is mainly kept in `image', though
-    it is a little more complex bejond this. See the header file of the class.
-
-    \sa TEWidget \sa VT102Emulation
+    \sa TEWidget \sa VT102Emulation \sa TEHistory
 */
 
 #include <stdio.h>
@@ -60,6 +58,14 @@
 //FIXME: see if we can get this from terminfo.
 #define BS_CLEARS false
 
+//Macro to convert x,y position on screen to position within an image.
+//
+//Originally the image was stored as one large contiguous block of 
+//memory, so a position within the image could be represented as an
+//offset from the beginning of the block.  Many internal parts
+//of this class still use this representation for parameters and so on,
+//notably moveImage() and clearImage().
+//This macro converts from an X,Y position into an image offset.
 #ifndef loc
 #define loc(X,Y) ((Y)*columns+(X))
 #endif
@@ -72,7 +78,8 @@
 TEScreen::TEScreen(int l, int c)
   : lines(l),
     columns(c),
-    image(new ca[(lines+1)*columns]),
+    screenLines(new ImageLine[lines+1] ),
+   // image(new ca[(lines+1)*columns]),
     histCursor(0),
     hist(new HistoryScrollNone()),
     cuX(0), cuY(0),
@@ -87,21 +94,8 @@ TEScreen::TEScreen(int l, int c)
     sa_cu_re(0), sa_cu_fg(cacol()), sa_cu_bg(cacol()),
     lastPos(-1)
 {
-  /*
-    this->lines   = lines;
-    this->columns = columns;
-
-    // we add +1 here as under some weired circumstances konsole crashes
-    // reading out of bound. As a crash is worse, we afford the minimum
-    // of added memory
-    image      = (ca*) malloc((lines+1)*columns*sizeof(ca));
-    tabstops   = NULL; initTabStops();
-    cuX = cuY = sa_cu_re = cu_re = sa_cu_fg = cu_fg = sa_cu_bg = cu_bg = 0;
-
-    histCursor = 0;
-  */
+  
   lineProperties.resize(lines+1);
-  //line_wrapped.resize(lines+1);
   initTabStops();
   clearSelection();
   reset();
@@ -112,7 +106,8 @@ TEScreen::TEScreen(int l, int c)
 
 TEScreen::~TEScreen()
 {
-  delete[] image;
+//  delete[] image;
+  delete[] screenLines;
   delete[] tabstops;
   delete hist;
 }
@@ -287,7 +282,10 @@ void TEScreen::deleteChars(int n)
   if (n == 0) n = 1; // Default
   if (n > columns) n = columns - 1;
   int p = qMax(0,qMin(cuX+n,columns-1));
-  moveImage(loc(cuX,cuY),loc(p,cuY),loc(columns-1,cuY));
+
+  //##  moveImage(loc(cuX,cuY),loc(p,cuY),loc(columns-1,cuY));
+
+  screenLines[cuY].remove(cuX,p-cuX);
   clearImage(loc(columns-n,cuY),loc(columns-1,cuY),' ');
 }
 
@@ -299,9 +297,11 @@ void TEScreen::deleteChars(int n)
 void TEScreen::insertChars(int n)
 {
   if (n == 0) n = 1; // Default
-  int p = qMax(0,qMin(columns-1-n,columns-1));
+ // int p = qMax(0,qMin(columns-1-n,columns-1));
   int q = qMax(0,qMin(cuX+n,columns-1));
-  moveImage(loc(q,cuY),loc(cuX,cuY),loc(p,cuY));
+
+  screenLines[cuY].insert(cuX,q-cuX,ca());
+ //## moveImage(loc(q,cuY),loc(cuX,cuY),loc(p,cuY));
   clearImage(loc(cuX,cuY),loc(q-1,cuY),' ');
 }
 
@@ -401,7 +401,7 @@ void TEScreen::restoreCursor()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-/*! Assing a new size to the screen.
+/*! Resize the screen image
 
     The topmost left position is maintained, while lower lines
     or right hand side columns might be removed or filled with
@@ -409,6 +409,10 @@ void TEScreen::restoreCursor()
 
     The region setting is reset to the whole screen and the
     tab positions reinitialized.
+
+    If the new image is narrower than the old image then text on lines
+    which extends past the end of the new image is preserved so that it becomes
+    visible again if the screen is later resized to make it larger.
 */
 
 void TEScreen::resizeImage(int new_lines, int new_columns)
@@ -424,40 +428,23 @@ void TEScreen::resizeImage(int new_lines, int new_columns)
     }
   }
 
-  // make new image
+  // create new screen lines and copy from old to new
+  
+   ImageLine* newScreenLines = new ImageLine[new_lines+1];
+   for (int i=0; i < qMin(lines-1,new_lines+1) ;i++)
+           newScreenLines[i]=screenLines[i];
+   for (int i=lines;(i > 0) && (i<new_lines+1);i++)
+           newScreenLines[i].resize( new_columns );
+   
+  lineProperties.resize(new_lines+1);
+  for (int i=lines;(i > 0) && (i<new_lines+1);i++)
+          lineProperties[i] = 0;
 
-  ca* newimg = new ca[(new_lines+1)*new_columns];
-  QVector<LineProperty> newLineProperties(new_lines+1);
   clearSelection();
+ 
+  delete[] screenLines; 
+  screenLines = newScreenLines;
 
-  // clear new image
-  for (int y = 0; y < new_lines; y++) {
-    for (int x = 0; x < new_columns; x++)
-    {
-      newimg[y*new_columns+x].c = ' ';
-      newimg[y*new_columns+x].f = cacol(CO_DFT,DEFAULT_FORE_COLOR);
-      newimg[y*new_columns+x].b = cacol(CO_DFT,DEFAULT_BACK_COLOR);
-      newimg[y*new_columns+x].r = DEFAULT_RENDITION;
-    }
-    newLineProperties[y] = 0;
-  }
-  int cpy_lines   = qMin(new_lines, lines);
-  int cpy_columns = qMin(new_columns,columns);
-  // copy to new image
-  for (int y = 0; y < cpy_lines; y++) {
-    for (int x = 0; x < cpy_columns; x++)
-    {
-      newimg[y*new_columns+x].c = image[loc(x,y)].c;
-      newimg[y*new_columns+x].f = image[loc(x,y)].f;
-      newimg[y*new_columns+x].b = image[loc(x,y)].b;
-      newimg[y*new_columns+x].r = image[loc(x,y)].r;
-    }
-    newLineProperties[y]=lineProperties[y];
-  }
-  delete[] image;
-  image = newimg;
-  //line_wrapped = newwrapped;
-  lineProperties = newLineProperties;
   lines = new_lines;
   columns = new_columns;
   cuX = qMin(cuX,columns-1);
@@ -541,6 +528,7 @@ void TEScreen::effectiveRendition()
     ef_fg = cu_fg;
     ef_bg = cu_bg;
   }
+ 
   if (cu_re & RE_BOLD)
     ef_fg.toggleIntensive();
 }
@@ -567,13 +555,11 @@ ca* TEScreen::getCookedImage()
   ca dft(' ',cacol(CO_DFT,DEFAULT_FORE_COLOR),cacol(CO_DFT,DEFAULT_BACK_COLOR),DEFAULT_RENDITION);
   merged[lines*columns] = dft;
 
-//  kDebug(1211) << "InGetCookedImage" << endl;
   for (y = 0; (y < lines) && (y < (hist->getLines()-histCursor)); y++)
   {
     int len = qMin(columns,hist->getLineLen(y+histCursor));
     int yp  = y*columns;
 
-//    kDebug(1211) << "InGetCookedImage - In first For.  Y =" << y << "histCursor = " << histCursor << endl;
     hist->getCells(y+histCursor,0,len,merged+yp);
     for (x = len; x < columns; x++) merged[yp+x] = dft;
     if (sel_begin !=-1)
@@ -595,10 +581,11 @@ ca* TEScreen::getCookedImage()
     {
        int yp  = y*columns;
        int yr =  (y-hist->getLines()+histCursor)*columns;
-//       kDebug(1211) << "InGetCookedImage - In second For.  Y =" << y << endl;
        for (x = 0; x < columns; x++)
        { int p = x + yp; int r = x + yr;
-         merged[p] = image[r];
+
+         merged[p] = screenLines[r/columns].value(r%columns,dft);
+
 #ifdef REVERSE_WRAPPED_LINES
          if (lineProperties[y- hist->getLines() +histCursor] & LINE_WRAPPED)
            reverseRendition(&merged[p]);
@@ -682,7 +669,12 @@ void TEScreen::BackSpace()
 {
   cuX = qMin(columns-1,cuX); // nowrap!
   cuX = qMax(0,cuX-1);
-  if (BS_CLEARS) image[loc(cuX,cuY)].c = ' ';
+ // if (BS_CLEARS) image[loc(cuX,cuY)].c = ' ';
+
+  if (screenLines[cuY].size() < cuX+1)
+          screenLines[cuY].resize(cuX+1);
+
+  if (BS_CLEARS) screenLines[cuY][cuX].c = ' ';
 }
 
 /*!
@@ -784,39 +776,62 @@ void TEScreen::ShowCharacter(unsigned short c)
 
   if (getMode(MODE_Insert)) insertChars(w);
 
-  int i = loc(cuX,cuY);
+ // int i = loc(cuX,cuY);
 
-  checkSelection(i, i); // check if selection is still valid.
+  lastPos = loc(cuX,cuY);
 
-  image[i].c = c;
-  image[i].f = ef_fg;
-  image[i].b = ef_bg;
-  image[i].r = ef_re;
+ // checkSelection(i, i); // check if selection is still valid.
+  checkSelection(cuX,cuY);
+
+  int size = screenLines[cuY].size();
+  if (size == 0 && cuY > 0)
+  {
+          screenLines[cuY].resize( qMax(screenLines[cuY-1].size() , cuX+1) );
+  }
+  else
+  {
+    if (size < cuX+1)
+    {
+          screenLines[cuY].resize(cuX+1);
+    }
+  }
+
+  ca& currentChar = screenLines[cuY][cuX];
   
-  lastPos = i;
+  currentChar.c = c;
+  currentChar.f = ef_fg;
+  currentChar.b = ef_bg;
+  currentChar.r = ef_re;
+
+  int i = 0;
 
   cuX += w--;
 
   while(w)
   {
      i++;
-     image[i].c = 0;
-     image[i].f = ef_fg;
-     image[i].b = ef_bg;
-     image[i].r = ef_re;
+
+     ca& ch = screenLines[cuY][cuX + i];
+     ch.c = 0;
+     ch.f = ef_fg;
+     ch.b = ef_bg;
+     ch.r = ef_re;
+
      w--;
   }
 }
 
-void TEScreen::compose(QString compose)
+void TEScreen::compose(QString /*compose*/)
 {
-  if (lastPos == -1)
+   Q_ASSERT( 0 /*Not implemented yet*/ );
+
+/*  if (lastPos == -1)
      return;
      
   QChar c(image[lastPos].c);
   compose.prepend(c);
   //compose.compose(); ### FIXME!
-  image[lastPos].c = compose[0].unicode();
+  image[lastPos].c = compose[0].unicode();*/
 }
 
 // Region commands -------------------------------------------------------------
@@ -836,6 +851,7 @@ void TEScreen::scrollUp(int n)
 void TEScreen::scrollUp(int from, int n)
 {
   if (n <= 0 || from + n > bmargin) return;
+  
   //FIXME: make sure `tmargin', `bmargin', `from', `n' is in bounds.
   moveImage(loc(0,from),loc(0,from+n),loc(columns-1,bmargin));
   clearImage(loc(0,bmargin-n+1),loc(columns-1,bmargin),' ');
@@ -930,7 +946,7 @@ int TEScreen::getCursorY()
     it is never modified by them.
 */
 
-/*! fill screen between (including) `loca' and `loce' with spaces.
+/*! fill screen between (including) `loca' (start) and `loce' (end) with spaces.
 
     This is an internal helper functions. The parameter types are internal
     addresses of within the screen image and make use of the way how the
@@ -940,7 +956,7 @@ NOTE:  This only erases characters in the image, properties associated with indi
 */
 
 void TEScreen::clearImage(int loca, int loce, char c)
-{ int i;
+{ 
   int scr_TL=loc(0,hist->getLines());
   //FIXME: check positions
 
@@ -949,40 +965,84 @@ void TEScreen::clearImage(int loca, int loce, char c)
   {
     clearSelection();
   }
-  
-  for (i = loca; i <= loce; i++)
-  {
-    // Use the current colors but the default rendition
-    // Check with: echo -e '\033[41;33;07m\033[2Khello world\033[00m'
-    image[i].c = c;
-    image[i].f = cu_fg;
-    image[i].b = cu_bg;
-    image[i].r = DEFAULT_RENDITION;
-  }
 
+  int topLine = loca/columns;
+  int bottomLine = loce/columns;
+
+  ca clearCh(c,cu_fg,cu_bg,DEFAULT_RENDITION);
+  
+  //if the character being used to clear the area is the same as the
+  //default character, the affected lines can simply be shrunk.
+  bool isDefaultCh = (clearCh == ca());
+
+  for (int y=topLine;y<=bottomLine;y++)
+  {
+        int endCol = ( y == bottomLine) ? loce%columns : columns-1;
+        int startCol = ( y == topLine ) ? loca%columns : 0;
+
+        QVector<ca>& line = screenLines[y];
+
+        if ( isDefaultCh && endCol == columns-1 )
+        {
+            line.resize(startCol);
+        }
+        else
+        {
+            if (line.size() < endCol + 1)
+                line.resize(endCol+1);
+
+            ca* data = line.data();
+            for (int i=startCol;i<=endCol;i++)
+                data[i]=clearCh;
+        }
+  }
 }
 
-/*! move image between (including) `loca' and `loce' to 'dst'.
+/*! move image between (including) `sourceBegin' and `sourceEnd' to 'dest'.
+    
+    The 'dest', 'sourceBegin' and 'sourceEnd' parameters can be generated using
+    the loc(column,line) macro.
+
+NOTE:  moveImage() can only move whole lines.
 
     This is an internal helper functions. The parameter types are internal
     addresses of within the screen image and make use of the way how the
     screen matrix is mapped to the image vector.
 */
 
-void TEScreen::moveImage(int dst, int loca, int loce)
+void TEScreen::moveImage(int dest, int sourceBegin, int sourceEnd)
 {
 //FIXME: check positions
-  if (loce < loca) {
-    kDebug(1211) << "WARNING!!! call to TEScreen:moveImage with loce < loca!" << endl;
+  if (sourceEnd < sourceBegin) {
+    kDebug(1211) << "WARNING!!! call to TEScreen:moveImage with sourceEnd < sourceBegin!" << endl;
     return;
   }
-  //kDebug(1211) << "Using memmove to scroll up" << endl;
-  memmove(&image[dst],&image[loca],(loce-loca+1)*sizeof(ca));
-  for (int i=0;i<=(loce-loca+1)/columns;i++)
-    lineProperties[(dst/columns)+i]=lineProperties[(loca/columns)+i];
+ 
+  int lines=(sourceEnd-sourceBegin)/columns;
+
+  //move screen image and line properties:
+  //areas being copied may overlap, so it matters that we do the copy in the right
+  //order (forwards if destination-line < source-line or backwards otherwise)
+  if (dest < sourceBegin)
+  {
+    for (int i=0;i<=lines;i++)
+    {
+        screenLines[ (dest/columns)+i ] = screenLines[ (sourceBegin/columns)+i ];
+        lineProperties[(dest/columns)+i]=lineProperties[(sourceBegin/columns)+i];
+    }
+  }
+  else
+  {
+    for (int i=lines;i>=0;i--)
+    {
+        screenLines[ (dest/columns)+i ] = screenLines[ (sourceBegin/columns)+i ];
+        lineProperties[(dest/columns)+i]=lineProperties[(sourceBegin/columns)+i];
+    }
+  }
+
   if (lastPos != -1)
   {
-     int diff = dst - loca; // Scroll by this amount
+     int diff = dest - sourceBegin; // Scroll by this amount
      lastPos += diff;
      if ((lastPos < 0) || (lastPos >= (lines*columns)))
         lastPos = -1;
@@ -991,10 +1051,10 @@ void TEScreen::moveImage(int dst, int loca, int loce)
   {
      // Adjust selection to follow scroll.
      bool beginIsTL = (sel_begin == sel_TL);
-     int diff = dst - loca; // Scroll by this amount
+     int diff = dest - sourceBegin; // Scroll by this amount
      int scr_TL=loc(0,hist->getLines());
-     int srca = loca+scr_TL; // Translate index from screen to global
-     int srce = loce+scr_TL; // Translate index from screen to global
+     int srca = sourceBegin+scr_TL; // Translate index from screen to global
+     int srce = sourceEnd+scr_TL; // Translate index from screen to global
      int desta = srca+diff;
      int deste = srce+diff;
 
@@ -1202,7 +1262,7 @@ bool TEScreen::testIsSelected(const int x,const int y)
   }
 }
 
-static bool isSpace(UINT16 c)
+/*static bool isSpace(UINT16 c)
 {
   if ((c > 32) && (c < 127))
      return false;
@@ -1210,7 +1270,7 @@ static bool isSpace(UINT16 c)
      return true;
   QChar qc(c);
   return qc.isSpace();
-}
+}*/
 
 QString TEScreen::getSelText(bool preserve_line_breaks)
 {
@@ -1220,7 +1280,7 @@ QString TEScreen::getSelText(bool preserve_line_breaks)
   return result;
 }
 
-
+/*
 static QString makeString(int *m, int d, bool stripTrailingSpaces)
 {
   QChar* qc = new QChar[d];
@@ -1251,7 +1311,7 @@ static QString makeString(int *m, int d, bool stripTrailingSpaces)
   QString res(qc, j);
   delete [] qc;
   return res;
-}
+}*/
 
 
 void TEScreen::selectedText(QTextStream* stream , TerminalCharacterDecoder* decoder)
@@ -1308,8 +1368,9 @@ void TEScreen::copyLineToStream(int line , int start, int count,
 			//retrieve line from screen image
 			for (int i=0;i<count;i++)
 			{
-					characterBuffer[i] = image[loc( start+i,line-hist->getLines() )];
-			}
+				//	characterBuffer[i] = image[loc( start+i,line-hist->getLines() )];
+			    characterBuffer[i] = screenLines[line-hist->getLines()][start+i];
+            }
 		}
 
 		//do not decode trailing whitespace characters
@@ -1602,15 +1663,10 @@ void TEScreen::addHistLine()
   // we have to take care about scrolling, too...
 
   if (hasScroll())
-  { ca dft;
-
-    int end = columns-1;
-    while (end >= 0 && image[end] == dft && !(lineProperties[0] & LINE_WRAPPED))
-      end -= 1;
-
+  {
     int oldHistLines = hist->getLines();
 
-    hist->addCells(image,end+1);
+    hist->addCells(screenLines[0]);
     hist->addLine( lineProperties[0] & LINE_WRAPPED );
 
     int newHistLines = hist->getLines();

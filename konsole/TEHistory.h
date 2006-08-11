@@ -98,7 +98,14 @@ public:
   ca   getCell(int lineno, int colno) { ca res; getCells(lineno,colno,1,&res); return res; }
 
   // adding lines.
-  virtual void addCells(ca a[], int count) = 0;
+  virtual void addCells(const ca a[], int count) = 0;
+  // convenience method - this is virtual so that subclasses can take advantage
+  // of QVector's implicit copying
+  virtual void addCells(const QVector<ca>& cells)
+  {
+    addCells(cells.data(),cells.size());
+  }
+
   virtual void addLine(bool previousWrapped=false) = 0;
 
   const HistoryType& getType() { return *m_histType; }
@@ -125,7 +132,7 @@ public:
   virtual void getCells(int lineno, int colno, int count, ca res[]);
   virtual bool isWrappedLine(int lineno);
 
-  virtual void addCells(ca a[], int count);
+  virtual void addCells(const ca a[], int count);
   virtual void addLine(bool previousWrapped=false);
 
 private:
@@ -154,7 +161,8 @@ public:
   virtual void getCells(int lineno, int colno, int count, ca res[]);
   virtual bool isWrappedLine(int lineno);
 
-  virtual void addCells(ca a[], int count);
+  virtual void addCells(const ca a[], int count);
+  virtual void addCells(const QVector<ca>& cells);
   virtual void addLine(bool previousWrapped=false);
 
   void setMaxNbLines(unsigned int nbLines);
@@ -195,7 +203,7 @@ public:
   virtual void getCells(int lineno, int colno, int count, ca res[]);
   virtual bool isWrappedLine(int lineno);
 
-  virtual void addCells(ca a[], int count);
+  virtual void addCells(const ca a[], int count);
   virtual void addLine(bool previousWrapped=false);
 };
 
@@ -215,7 +223,7 @@ public:
   virtual void getCells(int lineno, int colno, int count, ca res[]);
   virtual bool isWrappedLine(int lineno);
 
-  virtual void addCells(ca a[], int count);
+  virtual void addCells(const ca a[], int count);
   virtual void addLine(bool previousWrapped=false);
 
 protected:

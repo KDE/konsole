@@ -25,6 +25,7 @@
 #include "TEHistory.h"
 //Added by qt3to4:
 #include <QTextStream>
+#include <QVarLengthArray>
 
 #define MODE_Origin    0
 #define MODE_Wrap      1
@@ -89,7 +90,7 @@ public: // these are all `Screen' operations
     void eraseChars  (int n);
     void deleteChars (int n);
     void insertChars (int n);
-    void deleteLines (int n);
+    void deleteLines (int n); 
     void insertLines (int n);
     //
     // -------------------------------------
@@ -144,13 +145,20 @@ public: // these are all `Screen' operations
     // Show character
     void ShowCharacter(unsigned short c);
     
-    // Do composition with last shown character
+    // Do composition with last shown character FIXME: Not implemented yet for KDE 4
     void compose(QString compose);
     
     //
     void resizeImage(int new_lines, int new_columns);
+    
     //
     ca*  	  getCookedImage();
+
+    /** 
+     * Returns the additional attributes associated with lines in the image.
+     * The most important attribute is LINE_WRAPPED which specifies that the line is wrapped,
+     * other attributes control the size of characters in the line.
+     */
     QVector<LineProperty> getCookedLineProperties();
 	
 
@@ -272,10 +280,12 @@ private: // helper
 
     int lines;
     int columns;
-    ca *image; // [lines][columns]
-    //QBitArray line_wrapped; // [lines]
-	
-	QVector<LineProperty> lineProperties; // [lines]
+
+
+    typedef QVector<ca> ImageLine;      // [0..columns]
+    ImageLine*          screenLines;    // [lines]
+
+    QVarLengthArray<LineProperty,64> lineProperties;    
 	
     // history buffer ---------------
 
