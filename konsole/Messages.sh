@@ -1,6 +1,6 @@
 #! /bin/sh
 rm -f schemas.cpp
-(cd ../desktops && $PREPARETIPS > ../konsole/tips.cpp)
+(cd ../desktop && $PREPARETIPS > ../konsole/tips.cpp)
 for i in ../other/*.schema; do
 grep "^title" $i | cut -d':' -f2- | sed -e 's#^title \(.*\)$#i18n(\"\1\")#' >> schemas.cpp
 done
