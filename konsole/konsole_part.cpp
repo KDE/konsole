@@ -914,7 +914,7 @@ void konsolePart::enableMasterModeConnections()
 
 void konsolePart::updateTitle()
 {
-  if ( se ) emit setWindowCaption( se->fullTitle() );
+  if ( se ) emit setWindowCaption( se->displayTitle() );
 }
 
 void konsolePart::guiActivateEvent( KParts::GUIActivateEvent * )

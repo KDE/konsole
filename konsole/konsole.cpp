@@ -157,15 +157,18 @@ Time to start a requirement list.
 #include <kcharsets.h>
 #include <kcolordialog.h>
 #include <kio/netaccess.h>
-
-#include "konsole.h"
-#include "TerminalCharacterDecoder.h"
 #include <netwm.h>
 #include <kauthorized.h>
 #include <ktoolinvocation.h>
+
 #include "printsettings.h"
 #include "konsoleadaptor.h"
 #include "konsolescriptingadaptor.h"
+
+//#include "SessionTabWidget.h"
+#include "TerminalCharacterDecoder.h"
+
+#include "konsole.h"
 
 #define KONSOLEDEBUG    kDebug(1211)
 
@@ -258,11 +261,10 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 ,m_findHistory(0)
 ,m_saveHistory(0)
 ,m_detachSession(0)
-,m_moveSessionLeft(0)
-,m_moveSessionRight(0)
 ,bookmarkHandler(0)
 ,bookmarkHandlerSession(0)
 ,m_finddialog(0)
+,saveHistoryDialog(0)
 ,m_find_pattern("")
 ,cmd_serial(0)
 ,cmd_first_screen(-1)
@@ -298,7 +300,6 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 ,sessionNumberMapper(0)
 ,sl_sessionShortCuts(0)
 ,s_workDir(workdir)
-,saveHistoryDialog(0)
 {
     setObjectName( name );
 
@@ -433,52 +434,6 @@ void Konsole::showTipOnStart()
 /*  Make menu                                                                */
 /* ------------------------------------------------------------------------- */
 
-void Konsole::updateRMBMenu()
-{
-   if (!m_rightButton) return;
-   int index = 0;
-   if (!showMenubar->isChecked() && m_options)
-   {
-      // Only show when menubar is hidden
-      if (!showMenubar->isPlugged( m_rightButton ))
-      {
-         showMenubar->plug ( m_rightButton, index );
-         m_rightButton->insertSeparator( index+1 );
-      }
-      index = 2;
-      m_rightButton->setItemVisible(POPUP_NEW_SESSION_ID,true);
-      if (m_separator_id != -1)
-         m_rightButton->setItemVisible(m_separator_id,true);
-      m_rightButton->setItemVisible(POPUP_SETTINGS_ID,true);
-   }
-   else
-   {
-      m_rightButton->removeAction( showMenubar );
-      index = 0;
-      m_rightButton->setItemVisible(POPUP_NEW_SESSION_ID,false);
-      m_rightButton->setItemVisible(m_separator_id,false);
-      m_rightButton->setItemVisible(POPUP_SETTINGS_ID,false);
-   }
-
-   if (!m_fullscreen)
-      return;
-   if (b_fullscreen)
-   {
-      if (!m_fullscreen->isPlugged( m_rightButton ))
-      {
-         m_fullscreen->plug ( m_rightButton, index );
-         m_rightButton->insertSeparator( index+1 );
-      }
-   }
-   else
-   {
-      if (m_fullscreen->isPlugged( m_rightButton ))
-      {
-	 m_rightButton->removeAction( m_fullscreen );
-      }
-   }
-}
-
 // Note about Konsole::makeGUI() - originally this was called to load the menus "on demand" (when
 // the user moused over them for the first time).  This is not viable for the future. 
 // because it causes bugs:
@@ -596,18 +551,13 @@ void Konsole::makeGUI()
    m_view->addAction( m_detachSession );
    m_view->addAction( m_renameSession );
 
+   //Monitor for Activity / Silence
    m_view->addSeparator();
    m_view->addAction( monitorActivity );
    m_view->addAction( monitorSilence );
+   //Send Input to All Sessions
    m_view->addAction( masterMode );
-
-   m_view->addSeparator();
-   m_moveSessionLeft->setEnabled( false );
-   m_view->addAction( m_moveSessionLeft );
-
-   m_moveSessionRight->setEnabled( false );
-   m_view->addAction( m_moveSessionRight );
-
+   
    m_view->addSeparator();
    KToggleAction *ra = session2action.find( se );
    if ( ra != 0 )
@@ -784,34 +734,33 @@ void Konsole::makeGUI()
    // Right mouse button menu
    if ( m_rightButton )
    {
-      updateRMBMenu(); // show menubar / exit fullscreen
-
+      //Copy, Paste 
+      m_rightButton->addAction( m_copyClipboard );
+      m_rightButton->addAction( m_pasteClipboard );
+      
       KAction *selectionEnd = new KAction(i18n("Set Selection End"), actions, "selection_end");
       connect(selectionEnd, SIGNAL(triggered(bool) ), SLOT(slotSetSelectionEnd()));
       m_rightButton->addAction( selectionEnd );
 
-      m_rightButton->addAction( m_copyClipboard );
-      m_rightButton->addAction( m_pasteClipboard );
-      if ( m_signals )
-         m_rightButton->insertItem(i18n("&Send Signal"), m_signals);
-
       m_rightButton->addSeparator();
+      
+      //New Session menu
       if (m_tabbarSessionsCommands)
          m_rightButton->insertItem( i18n("New Sess&ion"), m_tabbarSessionsCommands, POPUP_NEW_SESSION_ID );
+      
+      //Detach Session, Rename Session
       m_rightButton->addAction( m_detachSession );
       m_rightButton->addAction( m_renameSession );
 
-      if ( m_bookmarks )
-      {
-         m_rightButton->addSeparator();
-         m_rightButton->insertItem(i18n("&Bookmarks"), m_bookmarks);
-      }
+      m_rightButton->addSeparator();
 
-      if ( m_options )
-      {
-         m_separator_id=m_rightButton->insertSeparator();
-         m_rightButton->insertItem(i18n("S&ettings"), m_options, POPUP_SETTINGS_ID);
-      }
+      //Hide / Show Menu Bar
+      m_rightButton->addAction( showMenubar );
+
+      //Exit Fullscreen
+      m_rightButton->addAction( m_fullscreen );
+
+      //Close Session
       m_rightButton->addSeparator();
       m_rightButton->addAction( m_closeSession );
       if (KGlobalSettings::insertTearOffHandle())
@@ -835,7 +784,9 @@ void Konsole::makeGUI()
 
    kDebug() << __FUNCTION__ << ": Color schemas done - time = " << makeGUITimer.elapsed() << endl;
    m_schema->setItemChecked(curr_schema,true);
-   while (se == NULL) {}
+   
+   Q_ASSERT( se != 0 );
+
    se->setSchemaNo(curr_schema);
 
    kDebug() << __FUNCTION__ << ": setSchemaNo done - time = " << makeGUITimer.elapsed() << endl;
@@ -928,6 +879,7 @@ void Konsole::slotSetEncoding()
 
 void Konsole::makeTabWidget()
 {
+  //tabwidget = new SessionTabWidget(this);
   tabwidget = new KTabWidget(this);
   tabwidget->setTabReorderingEnabled(true);
   tabwidget->setAutomaticResizeTabs( b_autoResizeTabs );
@@ -1144,9 +1096,9 @@ void Konsole::makeBasicGUI()
   masterMode = new KToggleAction(KIcon("remote"),  i18n( "Send &Input to All Sessions" ), m_shortcuts, "send_input_to_all_sessions" );
   connect(masterMode, SIGNAL(triggered(bool) ), SLOT( slotToggleMasterMode() ));
 
-  showMenubar = new KToggleAction(KIcon("showmenu"),  i18n( "Show &Menubar" ), m_shortcuts, "show_menubar" );
+  showMenubar = new KToggleAction(KIcon("showmenu"),  i18n( "&Show Menu Bar" ), m_shortcuts, "show_menubar" );
   connect(showMenubar, SIGNAL(triggered(bool) ), SLOT( slotToggleMenubar() ));
-  showMenubar->setCheckedState( KGuiItem( i18n("Hide &Menubar"), "showmenu", QString(), QString() ) );
+  showMenubar->setCheckedState( KGuiItem( i18n("&Hide Menu Bar"), "showmenu", QString(), QString() ) );
 
   m_fullscreen = KStdAction::fullScreen(0, 0, m_shortcuts, this );
   connect( m_fullscreen,SIGNAL(toggled(bool)), this,SLOT(updateFullScreen(bool)));
@@ -1185,13 +1137,6 @@ void Konsole::makeBasicGUI()
   action = new KAction(i18n("List Sessions"), m_shortcuts, "list_sessions");
   connect( action, SIGNAL( triggered() ), this, SLOT(listSessions()) );
   addAction( action );
-
-  m_moveSessionLeft = new KAction(KIcon(QApplication::isRightToLeft() ? "forward" : "back"), i18n("&Move Session Left"), m_shortcuts, "move_session_left");
-  connect(m_moveSessionLeft, SIGNAL(triggered(bool) ), SLOT(moveSessionLeft()));
-  m_moveSessionLeft->setShortcut(QApplication::isRightToLeft() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Right : Qt::CTRL+Qt::SHIFT+Qt::Key_Left);
-  m_moveSessionRight = new KAction(KIcon(QApplication::isRightToLeft() ? "back" : "forward"), i18n("M&ove Session Right"), m_shortcuts, "move_session_right");
-  connect(m_moveSessionRight, SIGNAL(triggered(bool) ), SLOT(moveSessionRight()));
-  m_moveSessionRight->setShortcut(QApplication::isRightToLeft() ? Qt::CTRL+Qt::SHIFT+Qt::Key_Left : Qt::CTRL+Qt::SHIFT+Qt::Key_Right);
 
   action = new KAction(i18n("Go to Previous Session"), m_shortcuts, "previous_session");
   action->setShortcut( QApplication::isRightToLeft() ? Qt::SHIFT+Qt::Key_Right : Qt::SHIFT+Qt::Key_Left );
@@ -1262,23 +1207,18 @@ bool Konsole::queryClose()
    {
         if(sessions.count()>1) {
 	    switch (
-		KMessageBox::warningYesNoCancel(
+		KMessageBox::warningContinueCancel(
 	    	    this,
             	    i18n( "You are about to close %1 open sessions. \n"
                 	  "Are you sure you want to continue?" , sessions.count() ),
 	    	    i18n("Confirm close"),
-	    	    KStdGuiItem::quit(),
-	    	    KGuiItem(i18n("C&lose Current Session Only"),"fileclose")
+	    	    KStdGuiItem::quit() /*, KGuiItem(i18n("C&lose Current Session Only"),"fileclose" )*/
 		)
 	    ) {
 		case KMessageBox::Yes :
-		break;
-		case KMessageBox::No :
-		    { closeCurrentSession();
-		        return false;
-		    }
-		break;
-		case KMessageBox::Cancel : return false;
+		    break;
+		case KMessageBox::Cancel : 
+            return false;
 	    }
 	}
     }
@@ -1491,7 +1431,7 @@ void Konsole::slotTabSetViewOptions(int mode)
     QIcon icon = iconSetForSession(sessions.at(i));
     QString title;
     if (b_matchTabWinTitle)
-      title = sessions.at(i)->fullTitle();
+      title = sessions.at(i)->displayTitle();
     else
       title = sessions.at(i)->Title();
 
@@ -1792,7 +1732,6 @@ void Konsole::applySettingsToGUI()
       selectScrollbar->setCurrentItem(n_scroll);
       selectBell->setCurrentItem(n_bell);
       selectSetEncoding->setCurrentItem( se->encodingNo() );
-//KDE4: Crashes Setup menu      updateRMBMenu();
    }
    updateKeytabMenu();
    tabwidget->setAutomaticResizeTabs( b_autoResizeTabs );
@@ -1969,7 +1908,6 @@ void Konsole::slotToggleMenubar() {
     setCaption(i18n("Use the right mouse button to bring back the menu"));
     QTimer::singleShot(5000,this,SLOT(updateTitle()));
   }
-  updateRMBMenu();
 }
 
 void Konsole::initTEWidget(TEWidget* new_te, TEWidget* default_te)
@@ -2257,7 +2195,9 @@ void Konsole::updateTitle()
 {
   int se_index = tabwidget->indexOf( se->widget() );
 
-  setCaption( se->fullTitle() );
+  setPlainCaption( se->displayTitle() );
+
+  //setCaption( se->fullTitle() );
   setWindowIconText( se->IconText() );
   tabwidget->setTabIcon(tabwidget->indexOf( se->widget() ), iconSetForSession(se));
   QString icon = se->IconName();
@@ -2268,7 +2208,7 @@ void Konsole::updateTitle()
   if (m_tabViewMode == ShowIconOnly)
     tabwidget->setTabText( se_index, QString() );
   else if (b_matchTabWinTitle)
-    tabwidget->setTabText( se_index, se->fullTitle().replace('&', "&&") );
+    tabwidget->setTabText( se_index, se->displayTitle().replace('&', "&&") );
 }
 
 void Konsole::initSessionFont(QFont font) {
@@ -2321,7 +2261,6 @@ void Konsole::updateFullScreen( bool on )
       showNormal();
     updateTitle(); // restore caption of window
   }
-  updateRMBMenu();
   te->setFrameStyle( b_framevis && !b_fullscreen ?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
 }
 
@@ -2662,9 +2601,6 @@ void Konsole::activateSession(TESession *s)
   masterMode->setChecked( se->isMasterMode() );
   sessions.find(se);
   uint position=sessions.at();
-  if (m_moveSessionLeft) m_moveSessionLeft->setEnabled(position>0);
-  if (m_moveSessionRight) m_moveSessionRight->setEnabled(position<sessions.count()-1);
-
  }
 
 void Konsole::slotUpdateSessionConfig(TESession *session)
@@ -3187,9 +3123,7 @@ void Konsole::doneSession(TESession* s)
   }
   else {
     sessions.find(se);
-    uint position=sessions.at();
-    m_moveSessionLeft->setEnabled(position>0);
-    m_moveSessionRight->setEnabled(position<sessions.count()-1);
+  //  uint position=sessions.at();
   }
   if (sessions.count()==1) {
     m_detachSession->setEnabled(false);
@@ -3230,8 +3164,6 @@ void Konsole::slotMovedTab(int from, int to)
   if (to==tabwidget->currentIndex()) {
     if (!m_menuCreated)
       makeGUI();
-    m_moveSessionLeft->setEnabled(to>0);
-    m_moveSessionRight->setEnabled(to<(int)sessions.count()-1);
   }
 }
 
@@ -3263,8 +3195,6 @@ void Konsole::moveSessionLeft()
 
   if (!m_menuCreated)
     makeGUI();
-  m_moveSessionLeft->setEnabled(position-1>0);
-  m_moveSessionRight->setEnabled(true);
 }
 
 /* Move session back in session list if possible */
@@ -3296,8 +3226,6 @@ void Konsole::moveSessionRight()
 
   if (!m_menuCreated)
     makeGUI();
-  m_moveSessionLeft->setEnabled(true);
-  m_moveSessionRight->setEnabled(position+1<sessions.count()-1);
 }
 
 void Konsole::initMonitorActivity(bool state)

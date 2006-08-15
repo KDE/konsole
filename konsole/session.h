@@ -63,12 +63,22 @@ public:
   int schemaNo();
   int encodingNo();
   int fontNo();
-  const QString& Term();
-  const QString& SessionId();
-  const QString& Title();
-  const QString& IconName();
-  const QString& IconText();
-  QString fullTitle() const;
+  const QString& Term() const;
+  const QString& SessionId() const;
+  const QString& Title() const;
+  const QString& IconName() const;
+  const QString& IconText() const;
+
+  /** 
+   * Return the session title set by the user (ie. the program running in the terminal), or an
+   * empty string if the user has not set a custom title
+   */
+  QString userTitle() const;
+  /** 
+   * Returns the title of the session for display in UI widgets (eg. window captions)
+   */
+  QString displayTitle() const;
+
   int keymapNo();
   QString keymap();
   QStringList getArgs();
@@ -199,7 +209,7 @@ private:
   int            font_w;
 
   QString        title;
-  QString        userTitle;
+  QString        _userTitle;
   QString        iconName;
   QString        iconText; // as set by: echo -en '\033]1;IconText\007
   bool           add_to_utmp;

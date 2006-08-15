@@ -37,6 +37,7 @@ set(konsole_KDEINIT_SRCS
    konsolescriptingadaptor.cpp
    sessionscriptingadaptor.cpp 
    TerminalCharacterDecoder.cpp )
+#   SessionTabWidget.cpp )
 #   OverlayFrame.cpp )
 
 kde4_automoc(${konsole_KDEINIT_SRCS})

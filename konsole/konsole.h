@@ -67,6 +67,7 @@ class KFileDialog;
 class KFindDialog;
 class KMenu;
 class KSelectAction;
+//class SessionTabWidget;
 class KTabWidget;
 class KTempFile;
 class KToggleAction;
@@ -170,7 +171,6 @@ private Q_SLOTS:
   void newSessionTabbar(int kind);
   void updateSchemaMenu();
   void updateKeytabMenu();
-  void updateRMBMenu();
 
   void changeTabTextColor(TESession*, int);
   void changeColumns(int);
@@ -314,7 +314,8 @@ private:
   KSimpleConfig* m_defaultSession;
   QString m_defaultSessionFilename;
 
-  KTabWidget* tabwidget;
+  //SessionTabWidget* tabwidget;
+  KTabWidget*    tabwidget;
   TEWidget*      te;     // the visible TEWidget, either sole one or one of many
   TESession*     se;
   TESession*     se_previous;
@@ -379,8 +380,6 @@ private:
   KAction       *m_findPrevious;
   KAction       *m_saveHistory;
   KAction       *m_detachSession;
-  KAction       *m_moveSessionLeft;
-  KAction       *m_moveSessionRight;
 
   KAction       *m_copyClipboard;
   KAction       *m_pasteClipboard;

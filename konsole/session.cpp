@@ -275,8 +275,8 @@ void TESession::setUserTitle( int what, const QString &caption )
 	
     // (btw: what=0 changes title and icon, what=1 only icon, what=2 only title
     if ((what == 0) || (what == 2)) {
-       	if ( userTitle != caption ) {
-			userTitle = caption;
+       	if ( _userTitle != caption ) {
+			_userTitle = caption;
 			modified = true;
 		}
     }
@@ -326,13 +326,26 @@ void TESession::setUserTitle( int what, const QString &caption )
     	emit updateTitle();
 }
 
-QString TESession::fullTitle() const
+QString TESession::userTitle() const
+{
+    return _userTitle;
+}
+
+QString TESession::displayTitle() const
+{
+    if (!_userTitle.isEmpty())
+        return _userTitle;
+    else
+        return Title();
+}
+
+/*QString TESession::fullTitle() const
 {
     QString res = title;
-    if ( !userTitle.isEmpty() )
-        res = userTitle + " - " + res;
+    if ( !_userTitle.isEmpty() )
+        res = _userTitle + " - " + res;
     return res;
-}
+}*/
 
 void TESession::monitorTimerDone()
 {
@@ -465,7 +478,7 @@ void TESession::done(int exitStatus)
 {
   if (!autoClose)
   {
-    userTitle = i18n("<Finished>");
+    _userTitle = i18n("<Finished>");
     emit updateTitle();
     return;
   }
@@ -528,12 +541,12 @@ int TESession::fontNo()
   return font_no;
 }
 
-const QString & TESession::Term()
+const QString & TESession::Term() const
 {
   return term;
 }
 
-const QString & TESession::SessionId()
+const QString & TESession::SessionId() const
 {
   return sessionId;
 }
@@ -569,7 +582,7 @@ void TESession::setTitle(const QString& _title)
   //kDebug(1211)<<"Session setTitle " <<  title <<endl;
 }
 
-const QString& TESession::Title()
+const QString& TESession::Title() const
 {
   return title;
 }
@@ -585,12 +598,12 @@ void TESession::setIconText(const QString& _iconText)
   //kDebug(1211)<<"Session setIconText " <<  iconText <<endl;
 }
 
-const QString& TESession::IconName()
+const QString& TESession::IconName() const
 {
   return iconName;
 }
 
-const QString& TESession::IconText()
+const QString& TESession::IconText() const
 {
   return iconText;
 }
