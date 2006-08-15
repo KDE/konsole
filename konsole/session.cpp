@@ -448,9 +448,6 @@ void TESession::renameSession(const QString &name)
 
 TESession::~TESession()
 {
- //kDebug(1211) << "disconnnecting..." << endl;
-  QObject::disconnect( sh, SIGNAL( done(int) ),
-                       this, SLOT( done(int) ) );
   delete em;
   delete sh;
 

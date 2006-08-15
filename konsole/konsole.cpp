@@ -3074,7 +3074,6 @@ void Konsole::closeCurrentSession()
 
 void Konsole::doneSession(TESession* s)
 {
-
   if (s == se_previous)
     se_previous = 0;
 
