@@ -1368,11 +1368,16 @@ void TEScreen::copyLineToStream(int line , int start, int count,
 			if ( count == -1 )
 					count = columns - start;
 
+            ca* data = screenLines[line-hist->getLines()].data();
+            int length = screenLines[line-hist->getLines()].count();
+
+            count = qMin(count,length);
+
 			//retrieve line from screen image
-			for (int i=0;i<count;i++)
+			for (int i=0;i+start < count;i++)
 			{
 				//	characterBuffer[i] = image[loc( start+i,line-hist->getLines() )];
-			    characterBuffer[i] = screenLines[line-hist->getLines()][start+i];
+			    characterBuffer[i] = data[start+i];
             }
 		}
 
