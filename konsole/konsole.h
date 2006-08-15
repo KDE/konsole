@@ -57,17 +57,19 @@
 #define PACKAGE "konsole"
 #define VERSION "2.0alpha"
 
-class QLabel;
 class QCheckBox;
-class KFindDialog;
-class KFileDialog;
-class KMenu;
+class QLabel;
+class QToolButton;
+
 class KAction;
-class KToggleAction;
+class KColorCells;
+class KFileDialog;
+class KFindDialog;
+class KMenu;
 class KSelectAction;
 class KTabWidget;
-class QToolButton;
 class KTempFile;
+class KToggleAction;
 
 // Defined in main.C
 const char *konsole_shell(QStringList &args);
@@ -247,6 +249,8 @@ private Q_SLOTS:
   void slotTabDetachSession();
   void slotTabRenameSession();
   void slotTabSelectColor();
+  /** Update "Select Tab Color" menu widget to reflect color of active tab*/
+  void slotTabPrepareColorCells();
   /** Close the tab whoose popup menu the user has selected */
   void slotTabCloseSession();
   /** Close the tab containing the specified widget. */
@@ -331,14 +335,28 @@ private:
   KMenu* m_help;
   KMenu* m_rightButton;
   KMenu* m_sessionList;
+
+  //-- Session Tabs Context Menu -------
+  void setupTabContextMenu();
+
   KMenu* m_tabPopupMenu;
+  //NOTE:  The widgets and actions related to tab colour selection may never
+  //be created at all if a suitable palette of colours is not found
+  KMenu* m_tabSelectColorMenu;
+  KColorCells* m_tabColorCells;
+  QWidgetAction *m_tabColorSelector;
   KMenu* m_tabPopupTabsMenu;
   KMenu* m_tabbarPopupMenu;
+  KToggleAction* m_tabMonitorActivity;
+  KToggleAction* m_tabMonitorSilence;
+  KToggleAction* m_tabMasterMode;
+  //------------------------------------
+
 
   KAction *m_zmodemUpload;
-  KToggleAction *monitorActivity, *m_tabMonitorActivity;
-  KToggleAction *monitorSilence, *m_tabMonitorSilence;
-  KToggleAction *masterMode, *m_tabMasterMode;
+  KToggleAction *monitorActivity;
+  KToggleAction *monitorSilence;
+  KToggleAction *masterMode;
   KToggleAction *showMenubar;
   KToggleAction *m_fullscreen;
 
@@ -349,7 +367,7 @@ private:
   KSelectAction *selectBell;
   KSelectAction *selectSetEncoding;
   
-  
+
   KAction       *m_clearHistory;
   KAction       *m_findHistory;
   KAction       *m_findNext;

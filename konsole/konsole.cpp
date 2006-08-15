@@ -80,6 +80,9 @@ Time to start a requirement list.
     attributes has to be set, e.g. in session swapping.
 */
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include <config.h>
 
 #include <QSpinBox>
@@ -91,6 +94,7 @@ Time to start a requirement list.
 #include <QToolButton>
 #include <QToolTip>
 //Added by qt3to4:
+#include <QMenu>
 #include <QMouseEvent>
 #include <QFrame>
 #include <QStringList>
@@ -102,8 +106,6 @@ Time to start a requirement list.
 #include <QHBoxLayout>
 #include <QPixmap>
 #include <kservicetypetrader.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <QtDBus/QtDBus>
 
 #include <kfiledialog.h>
@@ -123,6 +125,7 @@ Time to start a requirement list.
 #include <kipc.h>
 #include <kglobalsettings.h>
 #include <knotifydialog.h>
+#include <kpalette.h>
 #include <kprinter.h>
 #include <kacceleratormanager.h>
 
@@ -158,7 +161,6 @@ Time to start a requirement list.
 #include "konsole.h"
 #include "TerminalCharacterDecoder.h"
 #include <netwm.h>
-#include <QMenu>
 #include <kauthorized.h>
 #include <ktoolinvocation.h>
 #include "printsettings.h"
@@ -226,6 +228,20 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 ,m_signals(0)
 ,m_help(0)
 ,m_rightButton(0)
+,m_sessionList(0)
+
+//Session Tabs Context Menu
+    ,m_tabPopupMenu(0)
+    ,m_tabSelectColorMenu(0)
+    ,m_tabColorCells(0)
+    ,m_tabColorSelector(0)
+    ,m_tabPopupTabsMenu(0)
+    ,m_tabbarPopupMenu(0)
+    ,m_tabMonitorActivity(0)
+    ,m_tabMonitorSilence(0)
+    ,m_tabMasterMode(0)
+//--
+
 ,m_zmodemUpload(0)
 ,monitorActivity(0)
 ,monitorSilence(0)
@@ -852,49 +868,8 @@ void Konsole::makeGUI()
    applySettingsToGUI();
    isRestored = false;
 
-
    // Fill tab context menu
-   m_tabPopupMenu = new KMenu( this );
-   KAcceleratorManager::manage( m_tabPopupMenu );
-
-   m_tabDetachSession= new KAction( i18n("&Detach Session"), actionCollection(), 0 );
-   m_tabDetachSession->setIcon( KIcon("tab_breakoff") );
-   connect( m_tabDetachSession, SIGNAL( triggered() ), this, SLOT(slotTabDetachSession()) );
-   m_tabPopupMenu->addAction( m_tabDetachSession );
-
-   m_tabPopupMenu->addAction( i18n("&Rename Session..."), this,
-                         SLOT(slotTabRenameSession()) );
-   m_tabPopupMenu->addSeparator();
-
-   m_tabMonitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ), actionCollection(), "" );
-   m_tabMonitorActivity->setIcon( KIcon("activity") );
-   connect( m_tabMonitorActivity, SIGNAL( triggered() ), this, SLOT( slotTabToggleMonitor() ) );
-   m_tabMonitorActivity->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Activity" )) );
-   m_tabPopupMenu->addAction( m_tabMonitorActivity );
-
-   m_tabMonitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ), actionCollection(), "" );
-   m_tabMonitorSilence->setIcon( KIcon("silence") );
-   connect( m_tabMonitorSilence, SIGNAL( triggered() ), this, SLOT( slotTabToggleMonitor() ) );
-   m_tabMonitorSilence->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Silence" ) ) );
-   m_tabPopupMenu->addAction( m_tabMonitorSilence );
-
-   m_tabMasterMode = new KToggleAction ( i18n( "Send &Input to All Sessions" ), actionCollection(), "" );
-   m_tabMasterMode->setIcon( KIcon( "remote" ) );
-   connect( m_tabMasterMode, SIGNAL( triggered() ), this, SLOT( slotTabToggleMasterMode() ) );
-   m_tabPopupMenu->addAction( m_tabMasterMode );
-
-   m_tabPopupMenu->addSeparator();
-   m_tabPopupMenu->addAction( SmallIconSet("colors"), i18n("Select &Tab Color..."), this, SLOT(slotTabSelectColor()) );
-
-   m_tabPopupMenu->addSeparator();
-   m_tabPopupTabsMenu = new KMenu( m_tabPopupMenu );
-   m_tabPopupMenu->insertItem( i18n("Switch to Tab" ), m_tabPopupTabsMenu );
-   connect( m_tabPopupTabsMenu, SIGNAL( activated ( int ) ),
-            SLOT( activateSession( int ) ) );
-
-   m_tabPopupMenu->addSeparator();
-   m_tabPopupMenu->addAction( SmallIcon("fileclose"), i18n("C&lose Session"), this,
-                          SLOT(slotTabCloseSession()) );
+   setupTabContextMenu();
 
    if (m_options) {
       // Fill tab bar context menu
@@ -1431,12 +1406,43 @@ void Konsole::slotTabRenameSession() {
 
 void Konsole::slotTabSelectColor()
 {
-  QColor defaultColor = tabwidget->palette().color( QPalette::Foreground );
-  QColor color = tabwidget->tabTextColor( tabwidget->indexOf( m_contextMenuSession->widget() ) );
-  int result = KColorDialog::getColor( color, defaultColor, this );
+  QColor color;
 
-  if ( result == KColorDialog::Accepted )
-    tabwidget->setTabTextColor( tabwidget->indexOf( m_contextMenuSession->widget() ), color );
+  //If the color palette is available apply the current selected color to the tab, otherwise
+  //default back to showing KDE's color dialog instead.
+  if ( m_tabColorCells )
+  {
+    color = m_tabColorCells->color(m_tabColorCells->getSelected());
+
+    if (!color.isValid())
+            return;
+  }
+  else
+  {
+    QColor defaultColor = tabwidget->palette().color( QPalette::Foreground );
+    QColor tempColor = tabwidget->tabTextColor( tabwidget->indexOf( m_contextMenuSession->widget() ) );
+
+    if ( KColorDialog::getColor(tempColor,defaultColor,this) == KColorDialog::Accepted )
+        color = tempColor;
+    else
+        return;
+  }
+
+  tabwidget->setTabTextColor( tabwidget->indexOf( m_contextMenuSession->widget() ), color );
+}
+
+void Konsole::slotTabPrepareColorCells()
+{
+    //set selected color in palette widget to color of active tab
+
+    QColor activeTabColor = tabwidget->tabTextColor( tabwidget->indexOf( m_contextMenuSession->widget() ) );
+
+    for (int i=0;i<m_tabColorCells->numCells();i++)
+        if ( activeTabColor == m_tabColorCells->color(i) )
+        {
+            m_tabColorCells->setSelected(i);
+            break;
+        }
 }
 
 void Konsole::slotTabToggleMonitor()
@@ -4422,6 +4428,93 @@ Q3PtrList<TEWidget> Konsole::activeTEs()
    else if (te)  // check for startup initialization case in newSession()
      ret.append(te);
    return ret;
+}
+
+void Konsole::setupTabContextMenu()
+{
+   m_tabPopupMenu = new KMenu( this );
+   KAcceleratorManager::manage( m_tabPopupMenu );
+
+   m_tabDetachSession= new KAction( i18n("&Detach Session"), actionCollection(), 0 );
+   m_tabDetachSession->setIcon( KIcon("tab_breakoff") );
+   connect( m_tabDetachSession, SIGNAL( triggered() ), this, SLOT(slotTabDetachSession()) );
+   m_tabPopupMenu->addAction( m_tabDetachSession );
+
+   m_tabPopupMenu->addAction( i18n("&Rename Session..."), this,
+                         SLOT(slotTabRenameSession()) );
+   m_tabPopupMenu->addSeparator();
+
+   m_tabMonitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ), actionCollection(), "" );
+   m_tabMonitorActivity->setIcon( KIcon("activity") );
+   connect( m_tabMonitorActivity, SIGNAL( triggered() ), this, SLOT( slotTabToggleMonitor() ) );
+   m_tabMonitorActivity->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Activity" )) );
+   m_tabPopupMenu->addAction( m_tabMonitorActivity );
+
+   m_tabMonitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ), actionCollection(), "" );
+   m_tabMonitorSilence->setIcon( KIcon("silence") );
+   connect( m_tabMonitorSilence, SIGNAL( triggered() ), this, SLOT( slotTabToggleMonitor() ) );
+   m_tabMonitorSilence->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Silence" ) ) );
+   m_tabPopupMenu->addAction( m_tabMonitorSilence );
+
+   m_tabMasterMode = new KToggleAction ( i18n( "Send &Input to All Sessions" ), actionCollection(), "" );
+   m_tabMasterMode->setIcon( KIcon( "remote" ) );
+   connect( m_tabMasterMode, SIGNAL( triggered() ), this, SLOT( slotTabToggleMasterMode() ) );
+   m_tabPopupMenu->addAction( m_tabMasterMode );
+
+   //Create a colour selection palette and fill it with a range of suitable colours
+   QString paletteName;
+   QStringList availablePalettes = KPalette::getPaletteList();
+
+   if (availablePalettes.contains("40.colors")) //FIXME:  Should this be translated?
+        paletteName = "40.colors";
+
+   KPalette palette(paletteName);
+   
+   //If the palette of colours was found, create a palette menu displaying those colors
+   //which the user chooses from when they activate the "Select Tab Color" sub-menu.
+   //
+   //If the palette is empty, default back to the old behaviour where the user is shown
+   //a color dialog when they click the "Select Tab Color" menu item. 
+   if ( palette.nrColors() > 0 )
+   { 
+        m_tabColorCells = new KColorCells(this,palette.nrColors()/8,8);
+        
+        for (int i=0;i<palette.nrColors();i++) 
+            m_tabColorCells->setColor(i,palette.color(i));
+   
+
+        m_tabSelectColorMenu = new KMenu(this);
+        connect( m_tabSelectColorMenu, SIGNAL(aboutToShow()) , this, SLOT(slotTabPrepareColorCells()) );
+        m_tabColorSelector = new QWidgetAction(m_tabSelectColorMenu);
+        m_tabColorSelector->setDefaultWidget(m_tabColorCells);
+       
+         
+        m_tabSelectColorMenu->addAction( m_tabColorSelector );
+
+        connect(m_tabColorCells,SIGNAL(colorSelected(int)),this,SLOT(slotTabSelectColor()));   
+        connect(m_tabColorCells,SIGNAL(colorSelected(int)),m_tabPopupMenu,SLOT(hide()));
+        m_tabPopupMenu->addSeparator();
+        QAction* action = m_tabPopupMenu->addMenu(m_tabSelectColorMenu);
+        action->setIcon( SmallIconSet("colors") );
+        action->setText( i18n("Select &Tab Color") );
+   }
+   else
+   {
+        m_tabPopupMenu->addAction( SmallIconSet("colors"),i18n("Select &Tab Color..."),this,
+                        SLOT(slotTabSelectColor()));
+   }
+
+
+   m_tabPopupMenu->addSeparator();
+   m_tabPopupTabsMenu = new KMenu( m_tabPopupMenu );
+   m_tabPopupMenu->insertItem( i18n("Switch to Tab" ), m_tabPopupTabsMenu );
+   connect( m_tabPopupTabsMenu, SIGNAL( activated ( int ) ),
+            SLOT( activateSession( int ) ) );
+
+   m_tabPopupMenu->addSeparator();
+   m_tabPopupMenu->addAction( SmallIcon("fileclose"), i18n("C&lose Session"), this,
+                          SLOT(slotTabCloseSession()) );
+
 }
 
 #include "konsole.moc"
