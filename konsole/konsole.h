@@ -301,7 +301,12 @@ private:
 
   Q3PtrDict<TESession> action2session;
   Q3PtrDict<KToggleAction> session2action;
+
   Q3PtrList<TESession> sessions;
+
+  //stores association between sessions and the configuration
+  //entry used to create it
+  QHash<TESession*,KSimpleConfig*> sessionConfigMap;
 
   Q3IntDict<KSimpleConfig> no2command;     //QT4 - convert to QList
 

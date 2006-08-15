@@ -2813,8 +2813,15 @@ void Konsole::newSession(const QString &pgm, const QStringList &args, const QStr
 
 QString Konsole::newSession()
 {
-  KSimpleConfig *co = defaultSession();
-  return newSession(co, QString(), QStringList());
+    if ( se && sessionConfigMap.contains(se) )
+    {
+        return newSession( sessionConfigMap[se],QString(),QStringList() );
+    }
+    else
+    {
+        KSimpleConfig *co = defaultSession();
+        return newSession(co, QString(), QStringList());
+    }
 }
 
 void Konsole::newSession(int i)
@@ -2886,12 +2893,15 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStringLis
   QFont font = defaultFont;
   QStringList cmdArgs;
 
+  QString sessionTypeName;
+
   if (co) {
     co->setDesktopGroup();
     emu = co->readEntry("Term", emu);
     key = co->readEntry("KeyTab", key);
     sch = co->readEntry("Schema", sch);
-    txt = co->readEntry("Name");
+    sessionTypeName = co->readEntry("Name");
+    txt = sessionTypeName;
     QVariant v_font = co->readEntry("defaultfont", QVariant(font));
     font = v_font.value<QFont>();
     icon = co->readEntry("Icon", icon);
@@ -2907,9 +2917,15 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStringLis
   if (!_title.isEmpty())
     txt = _title;
 
+  //the new session will start with the same dir as the active session 
+  //if they are the same type
+  if ( se && se->Title().startsWith(sessionTypeName) )
+          cwd = se->getCwd();
+
   // apply workdir only when the session config does not have a directory
-  if (cwd.isEmpty())
-    cwd = s_workDir;
+  if ( cwd.isEmpty() )
+        cwd = s_workDir;
+
   // bookmarks take precedence over workdir
   // however, --workdir option has precedence in the very first session
   if (!_cwd.isEmpty())
@@ -2958,6 +2974,10 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStringLis
 
   QString sessionId="session_"+QString::number(++sessionIdCounter);
   TESession* s = new TESession(te, QFile::encodeName(program),cmdArgs,emu,winId(),sessionId,cwd);
+
+  if ( co )
+    sessionConfigMap[s] = co;
+
   s->setMonitorSilenceSeconds(monitorSilenceSeconds);
   s->enableFullScripting(b_fullScripting);
   // If you add any new signal-slot connection below, think about doing it in konsolePart too
@@ -3029,7 +3049,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStringLis
   addSession(s);
   runSession(s); // activate and run
 
-  //FIXME - Remove after port to LiveUI
+  //Load remaining menus (if they haven't been created yet) //FIXME - Remove after port to LiveUI
   //
   //This is temporarily here to prevent a few bugs whilst Konsole's menu setup
   //is ported to LiveUI for KDE 4.  Namely to make accelerators work when Konsole
@@ -3133,6 +3153,7 @@ void Konsole::doneSession(TESession* s)
     m_removeSessionButton->setEnabled(tabwidget->count()>1);
   session2action.remove(s);
   action2session.remove(ra);
+  sessionConfigMap.remove(s);
   int sessionIndex = sessions.findRef(s);
   sessions.remove(s);
   delete ra; // will the toolbar die?
