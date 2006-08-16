@@ -249,6 +249,8 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 ,monitorActivity(0)
 ,monitorSilence(0)
 ,masterMode(0)
+,moveSessionLeftAction(0)
+,moveSessionRightAction(0)
 ,showMenubar(0)
 ,m_fullscreen(0)
 ,selectSize(0)
@@ -276,6 +278,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 ,sessionIdCounter(0)
 ,monitorSilenceSeconds(10)
 ,s_kconfigSchema("")
+,_closing(false)
 ,m_tabViewMode(ShowIconAndText)
 ,b_dynamicTabHide(false)
 ,b_autoResizeTabs(false)
@@ -1223,6 +1226,8 @@ bool Konsole::queryClose()
 	}
     }
 
+   _closing = true;
+
     // WABA: Don't close if there are any sessions left.
     // Tell them to go away.
     sessions.first();
@@ -1251,6 +1256,8 @@ void Konsole::slotCouldNotClose()
             doneSession(sessions.current());
         }
     }
+    else
+        _closing = false;
 }
 
 /**
@@ -3102,8 +3109,9 @@ void Konsole::doneSession(TESession* s)
   if (s == se)
   { // pick a new session
     se = 0;
-    if (sessions.count())
+    if (sessions.count() && !_closing)
     {
+     kDebug() << __FUNCTION__ << ": searching for session to activate" << endl;
       se = sessions.at(sessionIndex ? sessionIndex - 1 : 0);
 
       session2action.find(se)->setChecked(true);
@@ -4408,6 +4416,18 @@ void Konsole::setupTabContextMenu()
    m_tabMasterMode->setIcon( KIcon( "remote" ) );
    connect( m_tabMasterMode, SIGNAL( triggered() ), this, SLOT( slotTabToggleMasterMode() ) );
    m_tabPopupMenu->addAction( m_tabMasterMode );
+
+
+   moveSessionLeftAction = new KAction( actionCollection() , "moveSessionLeftAction" );
+   moveSessionLeftAction->setShortcut(Qt::CTRL+Qt::SHIFT+Qt::Key_Left);
+   connect( moveSessionLeftAction , SIGNAL( triggered() ), this , SLOT(moveSessionLeft()) );
+
+   moveSessionRightAction = new KAction( actionCollection() , "moveSessionRightAction" );
+   moveSessionRightAction->setShortcut(Qt::CTRL+Qt::SHIFT+Qt::Key_Right);
+   connect( moveSessionRightAction , SIGNAL( triggered() ), this , SLOT (moveSessionRight()) );
+
+   addAction(moveSessionLeftAction);
+   addAction(moveSessionRightAction);
 
    //Create a colour selection palette and fill it with a range of suitable colours
    QString paletteName;

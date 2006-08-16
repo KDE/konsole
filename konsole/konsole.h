@@ -363,6 +363,10 @@ private:
   KToggleAction *monitorActivity;
   KToggleAction *monitorSilence;
   KToggleAction *masterMode;
+
+  KAction* moveSessionLeftAction;
+  KAction* moveSessionRightAction;
+
   KToggleAction *showMenubar;
   KToggleAction *m_fullscreen;
 
@@ -431,6 +435,7 @@ private:
   QRect       _saveGeometry;
 
   QTimer      m_closeTimeout;
+  bool        _closing; //Set to true when the applications begins to close
 
   TabViewModes m_tabViewMode;
   bool        b_dynamicTabHide;
