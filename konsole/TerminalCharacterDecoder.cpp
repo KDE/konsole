@@ -84,8 +84,10 @@ void HTMLDecoder::decodeLine(ca* const characters, int count, LineProperty /*pro
 			//build up style string
 			QString style;
 
-			if ( lastRendition & RE_BOLD || characters[i].isBold(colorTable) )
+			if ( lastRendition & RE_BOLD ||
+                             (colorTable && characters[i].isBold(colorTable)) )
 					style.append("font-weight:bold;");
+
 
 			if ( lastRendition & RE_UNDERLINE )
 					style.append("font-decoration:underline;");
