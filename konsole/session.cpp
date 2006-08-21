@@ -77,8 +77,8 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _ar
    , encoding_no(0)
 {
 	(void)new SessionAdaptor(this);
-	QDBus::sessionBus().registerObject(QLatin1String("/Session")/*"/sessions/"+_sessionId*/, this);
-	QDBus::sessionBus().registerService("org.kde.konsole");
+	QDBusConnection::sessionBus().registerObject(QLatin1String("/Session")/*"/sessions/"+_sessionId*/, this);
+	QDBusConnection::sessionBus().registerService("org.kde.konsole");
   //kDebug(1211)<<"TESession ctor() new TEPty"<<endl;
   sh = new TEPty();
   te = _te;

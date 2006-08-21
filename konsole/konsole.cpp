@@ -93,10 +93,12 @@ Time to start a requirement list.
 #include <QPushButton>
 #include <QToolButton>
 #include <QToolTip>
+#include <QTime>
 //Added by qt3to4:
 #include <QMenu>
 #include <QMouseEvent>
 #include <QFrame>
+#include <QTime>
 #include <QStringList>
 #include <QKeyEvent>
 #include <QEvent>
@@ -307,8 +309,8 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
     setObjectName( name );
 
 	(void)new KonsoleAdaptor(this);
-	QDBus::sessionBus().registerObject(QLatin1String("/Konsole"), this);
-	QDBus::sessionBus().registerService("org.kde.konsole");
+	QDBusConnection::sessionBus().registerObject(QLatin1String("/Konsole"), this);
+	QDBusConnection::sessionBus().registerService("org.kde.konsole");
   m_sessionGroup = new QActionGroup(this);
 
   isRestored = b_inRestore;
@@ -438,10 +440,10 @@ void Konsole::showTipOnStart()
 /* ------------------------------------------------------------------------- */
 
 // Note about Konsole::makeGUI() - originally this was called to load the menus "on demand" (when
-// the user moused over them for the first time).  This is not viable for the future. 
+// the user moused over them for the first time).  This is not viable for the future.
 // because it causes bugs:
-// Keyboard accelerators don't work until  the user opens one of the menus.  
-// It also prevents the menus from being painted properly the first time they are opened. 
+// Keyboard accelerators don't work until  the user opens one of the menus.
+// It also prevents the menus from being painted properly the first time they are opened.
 //
 // Theoretically the reason for loading "on demand" was for performance reasons
 // makeGUI() takes about 150ms with a warm cache, and triggers IO that results in slowdown
@@ -522,7 +524,7 @@ void Konsole::makeGUI()
    }
 
    kDebug() << __FUNCTION__ << ": signals done - time = " << makeGUITimer.elapsed() << endl;
-   
+
    // Edit Menu
    m_edit->addAction( m_copyClipboard );
    m_edit->addAction( m_pasteClipboard );
@@ -560,14 +562,14 @@ void Konsole::makeGUI()
    m_view->addAction( monitorSilence );
    //Send Input to All Sessions
    m_view->addAction( masterMode );
-   
+
    m_view->addSeparator();
    KToggleAction *ra = session2action.find( se );
    if ( ra != 0 )
        m_view->addAction( ra );
 
    kDebug() << __FUNCTION__ << ": Edit and View done - time = " << makeGUITimer.elapsed() << endl;
-   
+
    // Bookmarks menu
    if (bookmarkHandler)
       connect( bookmarkHandler, SIGNAL( openURL( const QString&, const QString& )),
@@ -581,7 +583,7 @@ void Konsole::makeGUI()
       connect(m_bookmarksSession, SIGNAL(aboutToShow()), SLOT(bookmarks_menu_check()));
 
    kDebug() << __FUNCTION__ << ": Bookmarks done - time = " << makeGUITimer.elapsed() << endl;
-   
+
    // Schema Options Menu -----------------------------------------------------
    m_schema = new KMenu(this);
    KAcceleratorManager::manage( m_schema );
@@ -675,7 +677,7 @@ void Konsole::makeGUI()
       {
          m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Sch&ema" ), m_schema);
       }
-      
+
       // Select size
       if (!b_fixedSize)
       {
@@ -718,7 +720,7 @@ void Konsole::makeGUI()
    }
 
    kDebug() << __FUNCTION__ << ": Options done - time = " << makeGUITimer.elapsed() << endl;
-   
+
    // Help menu
    if ( m_help )
    {
@@ -731,26 +733,26 @@ void Konsole::makeGUI()
    buildSessionMenus();
 
    kDebug() << __FUNCTION__ << ": Session menus done - time = " << makeGUITimer.elapsed() << endl;
-   
+
    connect(m_session, SIGNAL(activated(int)), SLOT(newSession(int)));
 
    // Right mouse button menu
    if ( m_rightButton )
    {
-      //Copy, Paste 
+      //Copy, Paste
       m_rightButton->addAction( m_copyClipboard );
       m_rightButton->addAction( m_pasteClipboard );
-      
+
       KAction *selectionEnd = new KAction(i18n("Set Selection End"), actions, "selection_end");
       connect(selectionEnd, SIGNAL(triggered(bool) ), SLOT(slotSetSelectionEnd()));
       m_rightButton->addAction( selectionEnd );
 
       m_rightButton->addSeparator();
-      
+
       //New Session menu
       if (m_tabbarSessionsCommands)
          m_rightButton->insertItem( i18n("New Sess&ion"), m_tabbarSessionsCommands, POPUP_NEW_SESSION_ID );
-      
+
       //Detach Session, Rename Session
       m_rightButton->addAction( m_detachSession );
       m_rightButton->addAction( m_renameSession );
@@ -787,13 +789,13 @@ void Konsole::makeGUI()
 
    kDebug() << __FUNCTION__ << ": Color schemas done - time = " << makeGUITimer.elapsed() << endl;
    m_schema->setItemChecked(curr_schema,true);
-   
+
    Q_ASSERT( se != 0 );
 
    se->setSchemaNo(curr_schema);
 
    kDebug() << __FUNCTION__ << ": setSchemaNo done - time = " << makeGUITimer.elapsed() << endl;
-   
+
    // insert keymaps into menu
    // This sorting seems a bit cumbersome; but it is not called often.
    QStringList kt_titles;
@@ -817,8 +819,8 @@ void Konsole::makeGUI()
    }
 
    kDebug() << __FUNCTION__ << ": keytrans done - time = " << makeGUITimer.elapsed() << endl;
-   
-   
+
+
    applySettingsToGUI();
    isRestored = false;
 
@@ -1220,7 +1222,7 @@ bool Konsole::queryClose()
 	    ) {
 		case KMessageBox::Yes :
 		    break;
-		case KMessageBox::Cancel : 
+		case KMessageBox::Cancel :
             return false;
 	    }
 	}
@@ -1288,18 +1290,18 @@ void Konsole::setColLin(int columns, int lines)
        te->setFixedSize(columns, lines);
     else
        te->setSize(columns, lines);
-   
+
 	//The terminal emulator widget has now been resized to fit in the required number of lines and
 	//columns, so the main Konsole window now needs to be resized as well.
-	//Normally adjustSize() could be used for this. 
+	//Normally adjustSize() could be used for this.
 	//
 	//However in the case of top-level widgets (such as the main Konsole window which
-	//we are resizing here), adjustSize() also constrains the size of the widget to 2/3rds of the size 
+	//we are resizing here), adjustSize() also constrains the size of the widget to 2/3rds of the size
 	//of the desktop -- I don't know why.  Unfortunately this means that the new terminal may be smaller
 	//than the specified size, causing incorrect display in some applications.
 	//So here we ignore the desktop size and just resize to the suggested size.
 	resize( sizeHint() );
-	
+
     if (b_fixedSize)
       setFixedSize(sizeHint());
     notifySize(columns, lines);  // set menu items
@@ -1850,7 +1852,7 @@ void Konsole::schema_menu_activated(int item)
 {
   if (!se) return;
   setSchema(item,se->widget());
-  
+
   activateSession(); // activates the current
 }
 
@@ -2441,7 +2443,7 @@ void Konsole::addSession(TESession* s)
   ra->setActionGroup(m_sessionGroup);
   //ra->setChecked(true);
   connect(ra, SIGNAL(toggled(bool)), SLOT(activateSession()));
-  
+
   action2session.insert(ra, s);
   session2action.insert(s,ra);
   sessions.append(s);
@@ -2860,7 +2862,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStringLis
   if (!_title.isEmpty())
     txt = _title;
 
-  //the new session will start with the same dir as the active session 
+  //the new session will start with the same dir as the active session
   //if they are the same type
   if ( se && se->Title().startsWith(sessionTypeName) )
           cwd = se->getCwd();
@@ -2959,7 +2961,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStringLis
 
   //REMOVEME
   //s->widget()->setVTFont(defaultFont);// Hack to set font again after newSession
-  
+
   s->setSchemaNo(schmno);
   if (key.isEmpty())
     s->setKeymapNo(n_defaultKeytab);
@@ -2999,7 +3001,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStringLis
   //is first started up, and to prevent painting problems when the menu
   //is first moused over.
   //
-  //Konsole 1.6.4 loads part of the menu on startup, and the bulk "on-demand" when 
+  //Konsole 1.6.4 loads part of the menu on startup, and the bulk "on-demand" when
   //the user mouses over any of the menus for the first time, theoretically for
   //performance reasons, although this causes bugs (see comments above definition
   //of makeGUI() ).
@@ -3060,7 +3062,7 @@ void Konsole::confirmCloseCurrentSession( TESession* _se )
 {
    if ( !_se )
       _se = se;
-   
+
   	if (KMessageBox::warningContinueCancel(this,
         	i18n("Are you sure you want to close this session?"),
         	i18n("Close Confirmation"), KGuiItem(i18n("C&lose Session"),"tab_remove"),
@@ -3754,7 +3756,7 @@ void Konsole::detachSession(TESession* _se) {
 
   if( m_removeSessionButton )
     m_removeSessionButton->setEnabled(tabwidget->count()>1);
-  
+
   //show detached session
   konsole->show();
 }
@@ -4105,9 +4107,9 @@ void Konsole::slotFindDone()
 }
 
 void Konsole::slotSaveHistory()
-{	
+{
   KUrl s_url = saveHistoryDialog->selectedUrl();
-		
+
   if( s_url.isEmpty())
       return;
   KUrl url = KIO::NetAccess::mostLocalURL( s_url, 0 );
@@ -4139,7 +4141,7 @@ void Konsole::slotSaveHistory()
 		decoder = new HTMLDecoder();
 	else
 		decoder = new PlainTextDecoder();
-	
+
     sessions.current()->getEmulation()->streamHistory( &textStream , decoder);
 	delete decoder;
 
@@ -4155,8 +4157,8 @@ void Konsole::slotShowSaveHistoryDialog()
 {
   // FIXME - mostLocalURL can't handle non-existing files yet, so this
   //         code doesn't work.
-//  KUrl s_url = KFileDialog::getSaveUrl( QString(), 
-//				  						"text/plain text/html", 
+//  KUrl s_url = KFileDialog::getSaveUrl( QString(),
+//				  						"text/plain text/html",
 //										0L, i18n("Save History"));
   if (!saveHistoryDialog)
   {
@@ -4166,10 +4168,10 @@ void Konsole::slotShowSaveHistoryDialog()
   		 mimeTypes << "text/plain";
   		 mimeTypes << "text/html";
   		 saveHistoryDialog->setMimeFilter(mimeTypes,"text/plain");
-  
-		 connect( saveHistoryDialog , SIGNAL(okClicked()), this , SLOT(slotSaveHistory()) ); 
+
+		 connect( saveHistoryDialog , SIGNAL(okClicked()), this , SLOT(slotSaveHistory()) );
   }
-  
+
   saveHistoryDialog->show();
 
 }
@@ -4437,29 +4439,29 @@ void Konsole::setupTabContextMenu()
         paletteName = "40.colors";
 
    KPalette palette(paletteName);
-   
+
    //If the palette of colours was found, create a palette menu displaying those colors
    //which the user chooses from when they activate the "Select Tab Color" sub-menu.
    //
    //If the palette is empty, default back to the old behaviour where the user is shown
-   //a color dialog when they click the "Select Tab Color" menu item. 
+   //a color dialog when they click the "Select Tab Color" menu item.
    if ( palette.nrColors() > 0 )
-   { 
+   {
         m_tabColorCells = new KColorCells(this,palette.nrColors()/8,8);
-        
-        for (int i=0;i<palette.nrColors();i++) 
+
+        for (int i=0;i<palette.nrColors();i++)
             m_tabColorCells->setColor(i,palette.color(i));
-   
+
 
         m_tabSelectColorMenu = new KMenu(this);
         connect( m_tabSelectColorMenu, SIGNAL(aboutToShow()) , this, SLOT(slotTabPrepareColorCells()) );
         m_tabColorSelector = new QWidgetAction(m_tabSelectColorMenu);
         m_tabColorSelector->setDefaultWidget(m_tabColorCells);
-       
-         
+
+
         m_tabSelectColorMenu->addAction( m_tabColorSelector );
 
-        connect(m_tabColorCells,SIGNAL(colorSelected(int)),this,SLOT(slotTabSelectColor()));   
+        connect(m_tabColorCells,SIGNAL(colorSelected(int)),this,SLOT(slotTabSelectColor()));
         connect(m_tabColorCells,SIGNAL(colorSelected(int)),m_tabPopupMenu,SLOT(hide()));
         m_tabPopupMenu->addSeparator();
         QAction* action = m_tabPopupMenu->addMenu(m_tabSelectColorMenu);
