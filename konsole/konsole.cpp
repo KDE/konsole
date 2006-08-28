@@ -4112,7 +4112,7 @@ void Konsole::slotSaveHistory()
 
   if( s_url.isEmpty())
       return;
-  KUrl url = KIO::NetAccess::mostLocalURL( s_url, 0 );
+  KUrl url = KIO::NetAccess::mostLocalUrl( s_url, 0 );
 
   if( !url.isLocalFile() ) {
     KMessageBox::sorry(this, i18n("This is not a local file.\n"));
@@ -4236,7 +4236,7 @@ void Konsole::slotZModemDetected(TESession *session)
   }
   else
   {
-     const KUrl &url = dlg.selectedURL();
+     const KUrl &url = dlg.selectedUrl();
      session->startZModem(zmodem, url.path(), QStringList());
   }
 }

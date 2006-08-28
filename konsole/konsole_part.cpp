@@ -1032,7 +1032,7 @@ konsoleBrowserExtension::~konsoleBrowserExtension()
 
 void konsoleBrowserExtension::emitOpenURLRequest(const KUrl &url)
 {
-  emit openURLRequest(url);
+  emit openUrlRequest(url);
 }
 
 const char* sensibleShell()

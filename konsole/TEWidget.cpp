@@ -2413,7 +2413,7 @@ void TEWidget::dropEvent(QDropEvent* event)
         dropText += ' ';
         m_cdAction->setEnabled( false );
       }
-      KUrl url = KIO::NetAccess::mostLocalURL( *it, 0 );
+      KUrl url = KIO::NetAccess::mostLocalUrl( *it, 0 );
       QString tmp;
       if (url.isLocalFile()) {
         tmp = url.path(); // local URL : remove protocol. This helps "ln" & "cd" and doesn't harm the others
