@@ -1,9 +1,7 @@
 
 project(konsole)
 
-if(NOT WIN32)
 add_subdirectory( konsole ) 
-endif(NOT WIN32)
 add_subdirectory( other ) 
 add_subdirectory( settings ) 
 add_subdirectory( desktop )
