@@ -266,7 +266,7 @@ konsolePart::~konsolePart()
   //te is deleted by the framework
 }
 
-bool konsolePart::openURL( const KUrl & url )
+bool konsolePart::openUrl( const KUrl & url )
 {
   //kDebug(1211) << "konsolePart::openURL " << url.prettyUrl() << endl;
 

@@ -77,9 +77,9 @@ Q_SIGNALS:
     void processExited();
     void receivedData( const QString& s );
  protected:
-    virtual bool openURL( const KUrl & url );
+    virtual bool openUrl( const KUrl & url );
     virtual bool openFile() {return false;} // never used
-    virtual bool closeURL() {return true;}
+    virtual bool closeUrl() {return true;}
     virtual void guiActivateEvent( KParts::GUIActivateEvent * event );
 
  protected Q_SLOTS:
