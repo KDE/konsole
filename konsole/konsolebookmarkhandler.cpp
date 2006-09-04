@@ -24,16 +24,17 @@
 #include <kio/job.h>
 #include <kio/netaccess.h>
 #include <kdebug.h>
+#include <kbookmarkmenu.h>
 #include <QFile>
 
 #include "konsole.h"
-#include "konsolebookmarkmenu.h"
 #include "konsolebookmarkhandler.h"
 
 KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel )
     : QObject( konsole ),
       KBookmarkOwner(),
-      m_konsole( konsole )
+      m_konsole( konsole ),
+      m_toplevel(toplevel)
 {
     setObjectName( "KonsoleBookmarkHandler" );
 
@@ -61,16 +62,16 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel 
     manager->setUpdate( true );
     manager->setShowNSBookmarks( false );
 
-    connect( manager, SIGNAL( changed(const QString &, const QString &) ),
-             SLOT( slotBookmarksChanged(const QString &, const QString &) ) );
-
     if (toplevel) {
-        m_bookmarkMenu = new KonsoleBookmarkMenu( manager, this, m_menu,
-                                            konsole->actionCollection(), true );
+        m_bookmarkMenu = new KBookmarkMenu( manager, this, m_menu,
+                                            konsole->actionCollection() );
+        connect( m_bookmarkMenu, SIGNAL( openBookmark( KBookmark, Qt::MouseButtons, Qt::KeyboardModifiers ) ),
+                 this, SLOT( openBookmark( KBookmark, Qt::MouseButtons, Qt::KeyboardModifiers )));
     } else {
-        m_bookmarkMenu = new KonsoleBookmarkMenu( manager, this, m_menu,
-                                            NULL, false /* Not toplevel */
-					    ,false      /* No 'Add Bookmark' */);
+        m_bookmarkMenu = new KBookmarkMenu( manager, this, m_menu,
+                                            NULL);
+        connect( m_bookmarkMenu, SIGNAL( openBookmark( KBookmark, Qt::MouseButtons, Qt::KeyboardModifiers ) ),
+                 this, SLOT( openBookmark( KBookmark, Qt::MouseButtons, Qt::KeyboardModifiers )));
     }
 }
 
@@ -79,7 +80,22 @@ KonsoleBookmarkHandler::~KonsoleBookmarkHandler()
     delete m_bookmarkMenu;
 }
 
-QString KonsoleBookmarkHandler::currentURL() const
+void KonsoleBookmarkHandler::openBookmark( KBookmark bm, Qt::MouseButtons, Qt::KeyboardModifiers )
+{
+    emit openUrl( bm.url().url(), bm.text() );
+}
+
+bool KonsoleBookmarkHandler::addBookmarkEntry() const
+{
+    return m_toplevel;
+}
+
+bool KonsoleBookmarkHandler::editBookmarkEntry() const
+{
+    return m_toplevel;
+}
+
+QString KonsoleBookmarkHandler::currentUrl() const
 {
     return m_konsole->baseURL().prettyUrl();
 }
@@ -94,13 +110,6 @@ QString KonsoleBookmarkHandler::currentTitle() const
        return path;
     }
     return u.prettyUrl();
-}
-
-void KonsoleBookmarkHandler::slotBookmarksChanged( const QString &,
-                                                   const QString &)
-{
-    // This is called when someone changes bookmarks in konsole....
-    m_bookmarkMenu->slotBookmarksChanged("");
 }
 
 #include "konsolebookmarkhandler.moc"

@@ -48,7 +48,6 @@
 #include "TEmuVt102.h"
 #include "session.h"
 #include "schema.h"
-#include "konsolebookmarkmenu.h"
 #include "konsolebookmarkhandler.h"
 
 
@@ -60,6 +59,7 @@
 class QCheckBox;
 class QLabel;
 class QToolButton;
+class QWidgetAction;
 
 class KAction;
 class KColorCells;

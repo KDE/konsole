@@ -34,7 +34,6 @@ set(konsole_KDEINIT_SRCS
    keytrans.cpp 
    konsole_wcwidth.cpp 
    konsolebookmarkhandler.cpp 
-   konsolebookmarkmenu.cpp 
    zmodem_dialog.cpp 
    printsettings.cpp 
    konsoleadaptor.cpp

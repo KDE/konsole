@@ -22,13 +22,12 @@
 #define KONSOLEBOOKMARKHANDLER_H
 
 #include <kbookmarkmanager.h>
-#include "konsolebookmarkmenu.h"
 //Added by qt3to4:
 #include <QTextStream>
 #include <QMenu>
 
 class KMenu;
-class KonsoleBookmarkMenu;
+class KBookmarkMenu;
 class KBookmarkManager;
 
 class KonsoleBookmarkHandler : public QObject, public KBookmarkOwner
@@ -41,25 +40,25 @@ public:
 
     QMenu * popupMenu();
 
-    // KBookmarkOwner interface:
-    virtual void openBookmarkURL( const QString& url, const QString& title )
-                                { emit openUrl( url, title ); }
-    virtual QString currentURL() const;
+    virtual QString currentUrl() const;
     virtual QString currentTitle() const;
+    virtual bool addBookmarkEntry() const;
+    virtual bool editBookmarkEntry() const;
 
     KMenu *menu() const { return m_menu; }
 
-private Q_SLOTS:
-    void slotBookmarksChanged( const QString &, const QString & caller );
-
 Q_SIGNALS:
-    void openUrl( const QString& url, const QString& title );
+    void openUrl( const QString&, const QString& );
+
+private Q_SLOTS:
+    void openBookmark( KBookmark bm, Qt::MouseButtons, Qt::KeyboardModifiers );
 
 private:
     Konsole *m_konsole;
     KMenu *m_menu;
-    KonsoleBookmarkMenu *m_bookmarkMenu;
+    KBookmarkMenu *m_bookmarkMenu;
     QString m_file;
+    bool m_toplevel;
 };
 
 #endif // KONSOLEBOOKMARKHANDLER_H
