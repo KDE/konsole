@@ -268,7 +268,7 @@ konsolePart::~konsolePart()
 
 bool konsolePart::openUrl( const KUrl & url )
 {
-  //kDebug(1211) << "konsolePart::openURL " << url.prettyUrl() << endl;
+  //kDebug(1211) << "konsolePart::openUrl " << url.prettyUrl() << endl;
 
   if (currentURL==url) {
     emit completed();
@@ -1049,7 +1049,7 @@ void konsolePart::startProgram( const QString& program,
   se = new TESession(te, program, args, "xterm", parentWidget->winId());
   connect( se,SIGNAL(done(TESession*)),
            this,SLOT(doneSession(TESession*)) );
-  connect( se,SIGNAL(openURLRequest(const QString &)),
+  connect( se,SIGNAL(openUrlRequest(const QString &)),
            this,SLOT(emitOpenURLRequest(const QString &)) );
   connect( se, SIGNAL( updateTitle() ),
            this, SLOT( updateTitle() ) );

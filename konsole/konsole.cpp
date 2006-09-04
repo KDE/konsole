@@ -572,10 +572,10 @@ void Konsole::makeGUI()
 
    // Bookmarks menu
    if (bookmarkHandler)
-      connect( bookmarkHandler, SIGNAL( openURL( const QString&, const QString& )),
+      connect( bookmarkHandler, SIGNAL( openUrl( const QString&, const QString& )),
             SLOT( enterURL( const QString&, const QString& )));
    if (bookmarkHandlerSession)
-      connect( bookmarkHandlerSession, SIGNAL( openURL( const QString&, const QString& )),
+      connect( bookmarkHandlerSession, SIGNAL( openUrl( const QString&, const QString& )),
             SLOT( newSession( const QString&, const QString& )));
    if (m_bookmarks)
       connect(m_bookmarks, SIGNAL(aboutToShow()), SLOT(bookmarks_menu_check()));

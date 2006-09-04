@@ -167,7 +167,7 @@ Q_SIGNALS:
   void enableMasterModeConnections();
   void renameSession(TESession* ses, const QString &name);
 
-  void openURLRequest(const QString &cwd);
+  void openUrlRequest(const QString &cwd);
 
   void zmodemDetected(TESession *);
   void updateSessionConfig(TESession *);

@@ -43,7 +43,7 @@ public:
 
     // KBookmarkOwner interface:
     virtual void openBookmarkURL( const QString& url, const QString& title )
-                                { emit openURL( url, title ); }
+                                { emit openUrl( url, title ); }
     virtual QString currentURL() const;
     virtual QString currentTitle() const;
 
@@ -53,7 +53,7 @@ private Q_SLOTS:
     void slotBookmarksChanged( const QString &, const QString & caller );
 
 Q_SIGNALS:
-    void openURL( const QString& url, const QString& title );
+    void openUrl( const QString& url, const QString& title );
 
 private:
     Konsole *m_konsole;

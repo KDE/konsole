@@ -311,7 +311,7 @@ void TESession::setUserTitle( int what, const QString &caption )
     if (what == 31) {
        cwd=caption;
        cwd=cwd.replace( QRegExp("^~"), QDir::homePath() );
-       emit openURLRequest(cwd);
+       emit openUrlRequest(cwd);
 	}
 	
     if (what == 32) { // change icon via \033]32;Icon\007
