@@ -1374,9 +1374,8 @@ void TEScreen::copyLineToStream(int line , int start, int count,
             count = qMin(count,length);
 
 			//retrieve line from screen image
-			for (int i=0;i+start < count;i++)
+			for (int i=0;i < count;i++)
 			{
-				//	characterBuffer[i] = image[loc( start+i,line-hist->getLines() )];
 			    characterBuffer[i] = data[start+i];
             }
 		}
