@@ -64,9 +64,15 @@ class TEmuVt102 : public TEmulation
 public:
 
   TEmuVt102(TEWidget* gui);
-  void changeGUI(TEWidget* newgui);
   ~TEmuVt102();
 
+  /** Reimplemented to enable handling of mouse input from the view */
+  virtual void addView(TEWidget* view);
+  /** Reimplemented to disconnect mouse input signals from the view */
+  virtual void removeView(TEWidget* view);
+
+  void changeGUI(TEWidget* newgui);
+  
   virtual void onKeyPress(QKeyEvent*);
 public Q_SLOTS: // signals incoming from TEWidget
 
@@ -100,6 +106,23 @@ public:
   char getErase();
 
 private:
+
+  //Scrolls the all views on this emulation.
+  //Lines may be positive (to scroll down) or negative (to scroll up) 
+  void scrollView( int lines );
+  //Scrolls all the views on this emulation by a given number of pages - where a page
+  //is half the number of visible lines.  Page Up and Page Down scroll by -1 and +1 pages
+  //respectively.
+  void scrollViewPages( int pages );
+
+  //Enables or disables mouse marking in all the views on this emulation
+  void setViewMouseMarks( bool marks );
+
+  //Enables or disables Vt102 specific handling of input from the view 
+  //(including xterm-style mouse input for example)
+  //
+  //See also - TEmulation::connectView()
+  void setReceiveViewInput( TEWidget* view , bool enable );
 
   void resetToken();
 #define MAXPBUF 80

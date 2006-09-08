@@ -18,29 +18,33 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
     02110-1301  USA.
 */
-      
-#include "session.h"
-#include "zmodem_dialog.h"
+
+#include <assert.h>
+#include <stdlib.h>
+
+#include <QApplication>
+#include <QByteArray>
+#include <QDir>
+#include <QFile>
+#include <QRegExp>
+#include <QStringList>
+#include <QtDBus/QtDBus>
+
 #include <config-konsole.h>
 #include <kdebug.h>
+#include <klocale.h>
 #include <kmessagebox.h>
 #include <knotification.h>
-#include <klocale.h>
 #include <kprocio.h>
 #include <krun.h>
 #include <kshell.h>
 #include <kstandarddirs.h>
 
-#include <stdlib.h>
-#include <QFile>
-#include <QDir>
-#include <QRegExp>
-#include <QStringList>
-#include <QByteArray>
 #include "sessionadaptor.h"
 #include "sessionscriptingadaptor.h"
-#include <QtDBus/QtDBus>
-#include <assert.h>
+#include "zmodem_dialog.h"
+
+#include "session.h"
 
 /*! \class TESession
 
@@ -53,7 +57,10 @@
 */
 
 TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _args, const QString &_term, ulong _winId, const QString &_sessionId, const QString &_initial_cwd)
-   : connected(true)
+   : sh(0)
+   , te(0)
+   , em(0)
+   , connected(true)
    , monitorActivity(false)
    , monitorSilence(false)
    , notifiedActivity(false)
@@ -81,14 +88,15 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _ar
 	QDBusConnection::sessionBus().registerService("org.kde.konsole");
   //kDebug(1211)<<"TESession ctor() new TEPty"<<endl;
   sh = new TEPty();
-  te = _te;
-  //kDebug(1211)<<"TESession ctor() new TEmuVt102"<<endl;
-  em = new TEmuVt102(te);
-  font_h = te-> fontHeight();
-  font_w = te-> fontWidth();
-  QObject::connect(te,SIGNAL(changedContentSizeSignal(int,int)),
+  
+  addView(_te);
+
+  em = new TEmuVt102( primaryView() );
+  font_h = primaryView()-> fontHeight();
+  font_w = primaryView()-> fontWidth();
+  QObject::connect(primaryView(),SIGNAL(changedContentSizeSignal(int,int)),
                    this,SLOT(onContentSizeChange(int,int)));
-  QObject::connect(te,SIGNAL(changedFontMetricSignal(int,int)),
+  QObject::connect(primaryView(),SIGNAL(changedFontMetricSignal(int,int)),
                    this,SLOT(onFontMetricChange(int,int)));
 
   term = _term;
@@ -96,7 +104,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _ar
   iconName = "konsole";
 
   //kDebug(1211)<<"TESession ctor() sh->setSize()"<<endl;
-  sh->setSize(te->Lines(),te->Columns()); // not absolutely necessary
+  sh->setSize(primaryView()->Lines(),primaryView()->Columns()); // not absolutely necessary
   sh->useUtf8(em->utf8());
   //kDebug(1211)<<"TESession ctor() connecting"<<endl;
   connect( sh,SIGNAL(block_in(const char*,int)),this,SLOT(onRcvBlock(const char*,int)) );
@@ -128,17 +136,45 @@ void TESession::ptyError()
 {
   // FIXME:  sh->error() is always empty
   if ( sh->error().isEmpty() )
-    KMessageBox::error( te->topLevelWidget(),
+    KMessageBox::error( QApplication::activeWindow() ,
        i18n("Konsole is unable to open a PTY (pseudo teletype).  It is likely that this is due to an incorrect configuration of the PTY devices.  Konsole needs to have read/write access to the PTY devices."),
        i18n("A Fatal Error Has Occurred") );
   else
-    KMessageBox::error(te->topLevelWidget(), sh->error());
+    KMessageBox::error(QApplication::activeWindow(), sh->error());
   emit done(this);
+}
+
+TEWidget* TESession::primaryView()
+{
+    if (!_views.isEmpty())
+        return _views.first();
+    else
+        return 0;
+}
+
+void TESession::addView(TEWidget* widget)
+{
+     Q_ASSERT( !_views.contains(widget) );
+
+    _views.append(widget);
+
+    if ( em != 0 )
+        em->addView(widget);
+}
+
+void TESession::removeView(TEWidget* widget)
+{
+    _views.removeAll(widget);
+
+    if ( em != 0 )
+        em->removeView(widget);
 }
 
 void TESession::changeWidget(TEWidget* w)
 {
-  QObject::disconnect(te,SIGNAL(changedContentSizeSignal(int,int)),
+  Q_ASSERT(0); //Method not updated yet to handle multiple views
+
+/*  QObject::disconnect(te,SIGNAL(changedContentSizeSignal(int,int)),
                      this,SLOT(onContentSizeChange(int,int)));
   QObject::disconnect(te,SIGNAL(changedFontMetricSignal(int,int)),
                      this,SLOT(onFontMetricChange(int,int)));
@@ -153,7 +189,7 @@ void TESession::changeWidget(TEWidget* w)
   QObject::connect(te,SIGNAL(changedContentSizeSignal(int,int)),
                    this,SLOT(onContentSizeChange(int,int)));
   QObject::connect(te,SIGNAL(changedFontMetricSignal(int,int)),
-                   this,SLOT(onFontMetricChange(int,int)));
+                   this,SLOT(onFontMetricChange(int,int)));*/
 }
 
 void TESession::run()
@@ -296,7 +332,10 @@ void TESession::setUserTitle( int what, const QString &caption )
       if (backColor.isValid()){// change color via \033]11;Color\007
 	if (backColor != modifiedBackground) {
 	    modifiedBackground = backColor;
-	    te->setDefaultBackColor(backColor);
+	    
+        QListIterator<TEWidget*> viewIter(_views);
+        while (viewIter.hasNext())
+            viewIter.next()->setDefaultBackColor(backColor);
 	}
       }
     }
@@ -317,7 +356,10 @@ void TESession::setUserTitle( int what, const QString &caption )
     if (what == 32) { // change icon via \033]32;Icon\007
     	if ( iconName != caption ) {
 	   		iconName = caption;
-       		te->update();
+
+            QListIterator< TEWidget* > viewIter(_views);
+            while (viewIter.hasNext())
+       		    viewIter.next()->update();
 			modified = true;
 		}
     }
@@ -349,8 +391,14 @@ QString TESession::displayTitle() const
 
 void TESession::monitorTimerDone()
 {
+  //FIXME: The idea here is that the notification popup will appear to tell the user than output from
+  //the terminal has stopped and the popup will disappear when the user activates the session.
+  //
+  //This breaks with the addition of multiple views of a session.  The popup should disappear
+  //when any of the views of the session becomes active
   if (monitorSilence) {
-    KNotification::event("Silence", i18n("Silence in session '%1'", title), QPixmap(), te, 
+    KNotification::event("Silence", i18n("Silence in session '%1'", title), QPixmap(), 
+                    QApplication::activeWindow(), 
                     KNotification::CloseWhenWidgetActivated);
     emit notifySessionState(this,NOTIFYSILENCE);
   }
@@ -364,9 +412,11 @@ void TESession::monitorTimerDone()
 
 void TESession::notifySessionState(int state)
 {
+  Q_ASSERT( primaryView() );
+
   if (state==NOTIFYBELL) 
   {
-    te->Bell(em->isConnected(),i18n("Bell in session '%1'", title));
+    primaryView()->Bell(em->isConnected(),i18n("Bell in session '%1'", title));
   } 
   else if (state==NOTIFYACTIVITY) 
   {
@@ -375,8 +425,11 @@ void TESession::notifySessionState(int state)
       monitorTimer->start(silence_seconds*1000);
     }
     
+    //FIXME:  See comments in TESession::monitorTimerDone()
     if (!notifiedActivity) {
-      KNotification::event("Activity", i18n("Activity in session '%1'", title), QPixmap(), te, KNotification::CloseWhenWidgetActivated);
+      KNotification::event("Activity", i18n("Activity in session '%1'", title), QPixmap(),
+                      QApplication::activeWindow(), 
+      KNotification::CloseWhenWidgetActivated);
       notifiedActivity=true;
     }
       monitorTimer->setSingleShot(true);
@@ -426,9 +479,11 @@ bool TESession::closeSession()
 
 void TESession::feedSession(const QString &text)
 {
+  Q_ASSERT( primaryView() );
+
   emit disableMasterModeConnections();
   setListenToKeyPress(true);
-  te->emitText(text);
+  primaryView()->emitText(text);
   setListenToKeyPress(false);
   emit enableMasterModeConnections();
 }
@@ -495,7 +550,10 @@ void TESession::done(int exitStatus)
     else
         message = i18n("Session '%1' exited unexpectedly.", title);
 
-    KNotification::event("Finished", message , QPixmap(), te , KNotification::CloseWhenWidgetActivated);
+    //FIXME: See comments in TESession::monitorTimerDone()
+    KNotification::event("Finished", message , QPixmap(),
+                         QApplication::activeWindow(), 
+                         KNotification::CloseWhenWidgetActivated);
   }
   emit processExited();
   emit done(this);
@@ -757,7 +815,7 @@ void TESession::startZModem(const QString &zmodem, const QString &dir, const QSt
   connect( sh,SIGNAL(block_in(const char*,int)), this, SLOT(zmodemRcvBlock(const char*,int)) );
   connect( sh,SIGNAL(buffer_empty()), this, SLOT(zmodemContinue()));
 
-  zmodemProgress = new ZModemDialog(te->topLevelWidget(), false,
+  zmodemProgress = new ZModemDialog(QApplication::activeWindow(), false,
                                     i18n("ZModem Progress"));
 
   connect(zmodemProgress, SIGNAL(user1Clicked()),
@@ -850,7 +908,9 @@ void TESession::onRcvBlock( const char* buf, int len )
 
 void TESession::print( QPainter &paint, bool friendly, bool exact )
 {
-    te->print(paint, friendly, exact);
+    Q_ASSERT( primaryView() );
+
+    primaryView()->print(paint, friendly, exact);
 }
 
 QString TESession::schema()
@@ -867,14 +927,18 @@ void TESession::setSchema(const QString &schema)
 
 QString TESession::font()
 {
-  return te->getVTFont().toString();
+  Q_ASSERT( primaryView() );
+
+  return primaryView()->getVTFont().toString();
 }
 
 void TESession::setFont(const QString &font)
 {
+  Q_ASSERT( primaryView() );
+
   QFont tmp;
   if (tmp.fromString(font))
-    te->setVTFont(tmp);
+    primaryView()->setVTFont(tmp);
   else
     kWarning()<<"unknown font: "<<font<<endl;
 }

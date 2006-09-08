@@ -101,7 +101,8 @@
 */
 
 TEmulation::TEmulation(TEWidget* w)
-: gui(w),
+: //gui(w),
+  //gui(0),
   scr(0),
   connected(false),
   listenToKeyPress(false),
@@ -111,38 +112,42 @@ TEmulation::TEmulation(TEWidget* w)
   m_findPos(-1)
 {
 
-  screen[0] = new TEScreen(gui->Lines(),gui->Columns());
-  screen[1] = new TEScreen(gui->Lines(),gui->Columns());
+  screen[0] = new TEScreen(w->Lines(),w->Columns());
+  screen[1] = new TEScreen(w->Lines(),w->Columns());
   scr = screen[0];
 
   QObject::connect(&bulk_timer1, SIGNAL(timeout()), this, SLOT(showBulk()) );
   QObject::connect(&bulk_timer2, SIGNAL(timeout()), this, SLOT(showBulk()) );
-  connectGUI();
+  
+  addView(w);
+  //connectGUI();
+  
   setKeymap(0); // Default keymap
 }
 
 /*!
 */
 
-void TEmulation::connectGUI()
+void TEmulation::connectView(TEWidget* view)
 {
-  QObject::connect(gui,SIGNAL(changedHistoryCursor(int)),
+
+  QObject::connect(view,SIGNAL(changedHistoryCursor(int)),
                    this,SLOT(onHistoryCursorChange(int)));
-  QObject::connect(gui,SIGNAL(keyPressedSignal(QKeyEvent*)),
+  QObject::connect(view,SIGNAL(keyPressedSignal(QKeyEvent*)),
                    this,SLOT(onKeyPress(QKeyEvent*)));
-  QObject::connect(gui,SIGNAL(beginSelectionSignal(const int,const int,const bool)),
+  QObject::connect(view,SIGNAL(beginSelectionSignal(const int,const int,const bool)),
 		   this,SLOT(onSelectionBegin(const int,const int,const bool)) );
-  QObject::connect(gui,SIGNAL(extendSelectionSignal(const int,const int)),
+  QObject::connect(view,SIGNAL(extendSelectionSignal(const int,const int)),
 		   this,SLOT(onSelectionExtend(const int,const int)) );
-  QObject::connect(gui,SIGNAL(endSelectionSignal(const bool)),
+  QObject::connect(view,SIGNAL(endSelectionSignal(const bool)),
 		   this,SLOT(setSelection(const bool)) );
-  QObject::connect(gui,SIGNAL(copySelectionSignal()),
+  QObject::connect(view,SIGNAL(copySelectionSignal()),
 		   this,SLOT(copySelection()) );
-  QObject::connect(gui,SIGNAL(clearSelectionSignal()),
+  QObject::connect(view,SIGNAL(clearSelectionSignal()),
 		   this,SLOT(clearSelection()) );
-  QObject::connect(gui,SIGNAL(isBusySelecting(bool)),
+  QObject::connect(view,SIGNAL(isBusySelecting(bool)),
 		   this,SLOT(isBusySelecting(bool)) );
-  QObject::connect(gui,SIGNAL(testIsSelected(const int, const int, bool &)),
+  QObject::connect(view,SIGNAL(testIsSelected(const int, const int, bool &)),
 		   this,SLOT(testIsSelected(const int, const int, bool &)) );
 }
 
@@ -151,7 +156,9 @@ void TEmulation::connectGUI()
 
 void TEmulation::changeGUI(TEWidget* newgui)
 {
-  if (static_cast<TEWidget *>( gui )==newgui) return;
+  Q_ASSERT( 0 ); //Not yet implemented
+
+  /*if (static_cast<TEWidget *>( gui )==newgui) return;
 
   if ( gui ) {
     QObject::disconnect(gui,SIGNAL(changedHistoryCursor(int)),
@@ -174,7 +181,8 @@ void TEmulation::changeGUI(TEWidget* newgui)
                      this,SLOT(testIsSelected(const int, const int, bool &)) );
   }
   gui=newgui;
-  connectGUI();
+  connectView(gui);
+  //connectGUI();*/
 }
 
 /*!
@@ -405,7 +413,13 @@ void TEmulation::onSelectionExtend(const int x, const int y) {
 void TEmulation::setSelection(const bool preserve_line_breaks) {
   if (!connected) return;
   QString t = scr->getSelText(preserve_line_breaks);
-  if (!t.isNull()) gui->setSelection(t);
+  if (!t.isNull()) 
+  {
+    QListIterator< QPointer<TEWidget> > viewIter(_views);
+
+    while (viewIter.hasNext())    
+        viewIter.next()->setSelection(t);
+  }
 }
 
 void TEmulation::isBusySelecting(bool busy)
@@ -540,12 +554,47 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool isCaseSens
 /*!
 */
 
+void TEmulation::addView(TEWidget* widget)
+{
+    Q_ASSERT( !_views.contains(widget) );
+    _views << widget;
+    connectView(widget);
+}
+
+void TEmulation::removeView(TEWidget* widget)
+{
+    Q_ASSERT(0); // Not implemented yet
+    _views.removeAll(widget);
+}
+
 void TEmulation::showBulk()
 {
   bulk_timer1.stop();
   bulk_timer2.stop();
 
   if (connected)
+  {
+    ca* image = scr->getCookedImage();
+    QVector<LineProperty> lineProperties = scr->getCookedLineProperties();
+
+    QListIterator< QPointer<TEWidget> > viewIter(_views);
+
+    while (viewIter.hasNext())
+    {
+        QPointer<TEWidget> view = viewIter.next();
+
+        view->setLineProperties( lineProperties );
+	    view->setImage(image,
+                  scr->getLines(),
+                  scr->getColumns());     // actual refresh
+        view->setCursorPos(scr->getCursorX(), scr->getCursorY());	// set XIM position
+	    view->setScroll(scr->getHistCursor(),scr->getHistLines());
+    }
+    
+    free(image);
+  }
+
+  /*if (connected)
   {
     ca* image = scr->getCookedImage();    // get the image
    
@@ -559,7 +608,7 @@ void TEmulation::showBulk()
     free(image);
     
 	gui->setScroll(scr->getHistCursor(),scr->getHistLines());
-  }
+  }*/
 }
 
 void TEmulation::bulkStart()

@@ -91,26 +91,52 @@ TEmuVt102::TEmuVt102(TEWidget* gui) : TEmulation(gui)
 {
   titleUpdateTimer.setSingleShot(true);
 
-  //kDebug(1211)<<"TEmuVt102 ctor() connecting"<<endl;
-  QObject::connect(gui,SIGNAL(mouseSignal(int,int,int,int)),
-                   this,SLOT(onMouse(int,int,int,int)));
-  QObject::connect(gui, SIGNAL(sendStringToEmu(const char*)),
-		   this, SLOT(sendString(const char*)));
+  setReceiveViewInput(gui,true);  
   QObject::connect(&titleUpdateTimer , SIGNAL(timeout()) , this , SLOT(updateTitle()));
 
-  //kDebug(1211)<<"TEmuVt102 ctor() initToken..."<<endl;
   initTokenizer();
-  //kDebug(1211)<<"TEmuVt102 ctor() reset()"<<endl;
   reset();
-  //kDebug(1211)<<"TEmuVt102 ctor() ctor done"<<endl;
+}
+
+void TEmuVt102::setReceiveViewInput(TEWidget* view , bool enable)
+{
+   if (enable)
+   {
+        QObject::connect(view,SIGNAL(mouseSignal(int,int,int,int)),
+                  this,SLOT(onMouse(int,int,int,int)));
+        QObject::connect(view, SIGNAL(sendStringToEmu(const char*)),
+ 		   this, SLOT(sendString(const char*)));
+   }
+   else
+   {
+        QObject::disconnect(view,SIGNAL(mouseSignal(int,int,int,int)),
+                  this,SLOT(onMouse(int,int,int,int)));
+        QObject::disconnect(view, SIGNAL(sendStringToEmu(const char*)),
+ 		   this, SLOT(sendString(const char*)));
+   }
+}
+
+void TEmuVt102::addView(TEWidget* view)
+{
+    kDebug() << __FUNCTION__ << endl;
+
+    TEmulation::addView(view);
+    setReceiveViewInput(view,true);
+}
+
+void TEmuVt102::removeView(TEWidget* view)
+{
+    TEmulation::removeView(view);
+    setReceiveViewInput(view,false);
 }
 
 /*!
 */
 
-void TEmuVt102::changeGUI(TEWidget* newgui)
+void TEmuVt102::changeGUI(TEWidget* /*newgui*/)
 {
-  if (static_cast<TEWidget *>( gui )==newgui) return;
+    Q_ASSERT(0); //Not implemented yet
+/*  if (static_cast<TEWidget *>( gui )==newgui) return;
 
   if ( gui ) {
     QObject::disconnect(gui,SIGNAL(mouseSignal(int,int,int,int)),
@@ -122,7 +148,7 @@ void TEmuVt102::changeGUI(TEWidget* newgui)
   QObject::connect(gui,SIGNAL(mouseSignal(int,int,int,int)),
                    this,SLOT(onMouse(int,int,int,int)));
   QObject::connect(gui, SIGNAL(sendStringToEmu(const char*)),
-		   this, SLOT(sendString(const char*)));
+		   this, SLOT(sendString(const char*)));*/
 }
 
 /*!
@@ -981,6 +1007,26 @@ void TEmuVt102::onScrollLock()
   scrollLock(switchlock);
 }
 
+void TEmuVt102::scrollView( int lines )
+{
+    QListIterator<QPointer<TEWidget> > viewIter(_views);
+
+    while (viewIter.hasNext())
+        viewIter.next()->doScroll( lines );
+}
+
+void TEmuVt102::scrollViewPages( int pages )
+{
+    QListIterator< QPointer<TEWidget> > viewIter(_views);
+
+    while (viewIter.hasNext())
+    {
+        TEWidget* display = viewIter.next();
+        display->doScroll( pages * (display->Lines() / 2) );
+    }
+}
+
+
 #define encodeMode(M,B) BITS(B,getMode(M))
 #define encodeStat(M,B) BITS(B,((ev->modifiers() & (M)) == (M)))
 
@@ -1013,10 +1059,10 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
   {
   switch(cmd) // ... and execute if found.
   {
-    case CMD_scrollPageUp   : gui->doScroll(-gui->Lines()/2); return;
-    case CMD_scrollPageDown : gui->doScroll(+gui->Lines()/2); return;
-    case CMD_scrollLineUp   : gui->doScroll(-1             ); return;
-    case CMD_scrollLineDown : gui->doScroll(+1             ); return;
+    case CMD_scrollPageUp   : scrollViewPages(-1); return;
+    case CMD_scrollPageDown : scrollViewPages(+1); return;
+    case CMD_scrollLineUp   : scrollView(-1             ); return;
+    case CMD_scrollLineDown : scrollView(+1             ); return;
     case CMD_scrollLock     : onScrollLock(                ); return;
   }
   }
@@ -1024,10 +1070,10 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
   {
     switch(ev->key())
     {
-    case Qt::Key_Down : gui->doScroll(+1); return;
-    case Qt::Key_Up : gui->doScroll(-1); return;
-    case Qt::Key_PageUp : gui->doScroll(-gui->Lines()/2); return;
-    case Qt::Key_PageDown : gui->doScroll(gui->Lines()/2); return;
+    case Qt::Key_Down : scrollView(+1); return;
+    case Qt::Key_Up : scrollView(-1); return;
+    case Qt::Key_PageUp : scrollViewPages(-1); return;
+    case Qt::Key_PageDown : scrollViewPages(+1); return;
     }
   }
   
@@ -1208,6 +1254,13 @@ void TEmuVt102::resetModes()
   holdScreen = false;
 }
 
+void TEmuVt102::setViewMouseMarks(bool marks)
+{
+    QListIterator< QPointer<TEWidget> > viewIter(_views);
+    while (viewIter.hasNext())
+            viewIter.next()->setMouseMarks(marks);
+}
+
 void TEmuVt102::setMode(int m)
 {
   currParm.mode[m] = true;
@@ -1217,7 +1270,7 @@ void TEmuVt102::setMode(int m)
     case MODE_Mouse1001:
     case MODE_Mouse1002:
     case MODE_Mouse1003:
- 	if (connected) gui->setMouseMarks(false);
+ 	if (connected) setViewMouseMarks(false);
     break;
 
     case MODE_AppScreen : screen[1]->clearSelection();
@@ -1240,7 +1293,7 @@ void TEmuVt102::resetMode(int m)
     case MODE_Mouse1001 :
     case MODE_Mouse1002 :
     case MODE_Mouse1003 :
-	    if (connected) gui->setMouseMarks(true);
+	    if (connected) setViewMouseMarks(true);
     break;
 
     case MODE_AppScreen : screen[0]->clearSelection();
@@ -1272,9 +1325,12 @@ bool TEmuVt102::getMode(int m)
 void TEmuVt102::setConnect(bool c)
 {
   TEmulation::setConnect(c);
-  if (gui)
+
+  QListIterator< QPointer<TEWidget> > viewIter(_views);
+  
+  while (viewIter.hasNext())
   {
-    QObject::disconnect(gui, SIGNAL(sendStringToEmu(const char*)),
+    QObject::disconnect(viewIter.next(), SIGNAL(sendStringToEmu(const char*)),
                         this, SLOT(sendString(const char*)));
   }
   if (c)
@@ -1293,8 +1349,14 @@ void TEmuVt102::setConnect(bool c)
     else
       scrolllock_set_off();
 #endif
-    QObject::connect(gui, SIGNAL(sendStringToEmu(const char*)),
-                     this, SLOT(sendString(const char*)));
+
+    QListIterator< QPointer<TEWidget> > viewIter2(_views);
+
+    while (viewIter2.hasNext())
+    {
+        QObject::connect(viewIter2.next(), SIGNAL(sendStringToEmu(const char*)),
+                         this, SLOT(sendString(const char*)));
+    }
   }
 }
 

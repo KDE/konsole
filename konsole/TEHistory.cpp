@@ -94,6 +94,9 @@ HistoryFile::~HistoryFile()
 		unmap();
 }
 
+//TODO:  Mapping the entire file in will cause problems if the history file becomes exceedingly large,
+//(ie. larger than available memory).  HistoryFile::map() should only map in sections of the file at a time,
+//to avoid this.
 void HistoryFile::map()
 {
 	assert( fileMap == 0 );

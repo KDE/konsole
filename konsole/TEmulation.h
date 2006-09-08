@@ -40,8 +40,22 @@ class TEmulation : public QObject
 public:
 
   TEmulation(TEWidget* gui);
-  virtual void changeGUI(TEWidget* newgui);
   ~TEmulation();
+
+  virtual void changeGUI(TEWidget* newgui);
+
+  /** 
+   * Adds a new view for this emulation.
+   *
+   * When the emulation output changes, the view will be updated to display the new output.
+   */
+  virtual void addView(TEWidget* widget);
+  /**
+   * Removes a view from this emulation.
+   *
+   * @p widget will no longer be updated when the emulation output changes.
+   */
+  virtual void removeView(TEWidget* widget);
 
 public:
   QSize imageSize();
@@ -114,7 +128,10 @@ public:
 
 protected:
 
-  QPointer<TEWidget> gui;
+  QList< QPointer<TEWidget> > _views;
+
+  //QPointer<TEWidget> gui;
+  
   TEScreen* scr;         // referes to one `screen'
   TEScreen* screen[2];   // 0 = primary, 1 = alternate
   void setScreen(int n); // set `scr' to `screen[n]'
@@ -139,7 +156,8 @@ private Q_SLOTS: // triggered by timer
 
 private:
 
-  void connectGUI();
+  void connectView(TEWidget* widget);
+  //void connectGUI();
 
   void bulkStart();
 

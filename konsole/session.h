@@ -44,15 +44,48 @@ public:
             const QString &pgm, const QStringList & _args,
 	    const QString &term, ulong winId, const QString &sessionId="session-1",
 	    const QString &initial_cwd = QString());
-  void changeWidget(TEWidget* w);
-  TEWidget* widget() { return te; }
+
   ~TESession();
+
+  TEWidget* widget() { Q_ASSERT( primaryView() ) ; return primaryView(); }
+  void changeWidget(TEWidget* w);
+  
+  /** 
+   * Adds a new view for this session.    
+   * 
+   * The viewing widget will display the output from the terminal and input from the viewing widget 
+   * (key presses, mouse activity etc.) will be sent to the terminal.
+   *
+   * Currently each view on the session is required to be the same size.  ie.  They must all display
+   * the same number of lines and columns.  
+   */
+  void addView(TEWidget* widget);
+  /** 
+   * Removes a view from this session.  
+   *
+   * @p widget will no longer display output from or send input
+   * to the terminal 
+   */
+  void removeView(TEWidget* widget);
+
+  /**
+   * Returns the primary view for this session.
+   *
+   * The primary view is the first view added to the session, which is used by the emulation
+   * if it needs to determine the size of the view - ie. the number of lines and columns which
+   * the view can display. 
+   *
+   * If the primary view is removed from the session using removeView(), the next view which is still
+   * attached will become the primary view.
+   */
+  TEWidget* primaryView();
 
   /** 
    * Returns true if the session has created child processes which have not yet terminated 
    * This call may be expensive if there are a large number of processes running. 
    */
   bool        hasChildren();
+
   void        setConnect(bool r);  // calls setListenToKeyPress(r)
   void        setListenToKeyPress(bool l);
   TEmulation* getEmulation();      // to control emulation
@@ -83,6 +116,8 @@ public:
   QString keymap();
   QStringList getArgs();
   QString getPgm();
+
+  /** Returns the session's current working directory. */
   QString getCwd();
   QString getInitial_cwd() { return initial_cwd; }
   void setInitial_cwd(const QString& _cwd) { initial_cwd=_cwd; }
@@ -188,6 +223,8 @@ private:
   TEPty*         sh;
   TEWidget*      te;
   TEmulation*    em;
+
+  QList<TEWidget*> _views;
 
   bool           connected;
   bool           monitorActivity;

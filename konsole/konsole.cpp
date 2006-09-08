@@ -24,12 +24,10 @@
 
 /*! \class Konsole
 
-    \brief Konsole's main class and program
+    \brief The Konsole main window which hosts the terminal emulator displays.
 
-    The class Konsole handles the application level. Mainly, it is responsible
-    for the configuration, taken from several files, from the command line
-    and from the user. It hardly does anything interesting.
-    Everything is created as late as possible to make it startup fast.
+    This class is also responsible for setting up Konsole's menus, managing
+    terminal sessions and applying settings.
 */
 
 /*TODO:
@@ -75,9 +73,6 @@ Time to start a requirement list.
     should be rebalanced. Much more material now comes from configuration
     files and the overall routines should better respect this.
   - Font+Size list should go to a configuration file, too.
-  - Controlling the widget is currently done by individual attributes.
-    This lead to quite some amount of flicker when a whole bunch of
-    attributes has to be set, e.g. in session swapping.
 */
 
 #include <stdio.h>
@@ -2919,7 +2914,7 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStringLis
 
   QString sessionId="session_"+QString::number(++sessionIdCounter);
   TESession* s = new TESession(te, QFile::encodeName(program),cmdArgs,emu,winId(),sessionId,cwd);
-
+  
   if ( co )
     sessionConfigMap[s] = co;
 
@@ -4435,7 +4430,7 @@ void Konsole::setupTabContextMenu()
    QString paletteName;
    QStringList availablePalettes = KPalette::getPaletteList();
 
-   if (availablePalettes.contains("40.colors")) //FIXME:  Should this be translated?
+   if (availablePalettes.contains("40.colors"))
         paletteName = "40.colors";
 
    KPalette palette(paletteName);

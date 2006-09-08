@@ -56,12 +56,17 @@ class QTimer;
 class QFrame;
 class QGridLayout;
 
+/**
+ * A widget which displays output from a terminal emulation and sends input keypresses and mouse activity
+ * to the terminal.
+ *
+ * TEWidget does not know anything about the emulations to which it is connected.  When the emulation receives new 
+ * output from the program running in the terminal, it will update the display by calling setImage().
+ */
 class TEWidget : public QFrame
-// a widget representing attributed text
 {
    Q_OBJECT
 
-  friend class Konsole;
 public:
 
     TEWidget(QWidget *parent=0);

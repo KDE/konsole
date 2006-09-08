@@ -65,7 +65,7 @@ private:
   //incremented whenver 'add' is called and decremented whenever
   //'get' is called.
   //this is used to detect when a large number of lines are being read and processed from the history
-  //and automatically mmap the file for better performance
+  //and automatically mmap the file for better performance (saves the overhead of many lseek-read calls).
   int readWriteBalance;
 
   //when readWriteBalance goes below this threshold, the file will be mmap'ed automatically

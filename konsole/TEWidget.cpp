@@ -1007,7 +1007,8 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
 	//both the top and bottom halves of double height lines must always be redrawn
 	//although both top and bottom halves contain the same characters, only the top one is actually 
 	//drawn.
-	updateLine |= (lineProperties[y] & LINE_DOUBLEHEIGHT);
+    if (lineProperties.count() > y)
+        updateLine |= (lineProperties[y] & LINE_DOUBLEHEIGHT);
 	
     if (updateLine)
     {
