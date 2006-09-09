@@ -119,7 +119,6 @@ Time to start a requirement list.
 #include <kstdaction.h>
 #include <kinputdialog.h>
 #include <kdebug.h>
-#include <kipc.h>
 #include <kglobalsettings.h>
 #include <knotifydialog.h>
 #include <kpalette.h>
