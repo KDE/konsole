@@ -789,7 +789,7 @@ void TEWidget::setCursorPos(const int curx, const int cury)
     int xpos, ypos;
     ypos = bY + tLy + font_h*(cury-1) + font_a;
     xpos = bX + tLx + font_w*curx;
-    /* The hasFocus() check if to avoid crashes in QXIMInputContext on some systems.
+    /* The hasFocus() check is to avoid crashes in QXIMInputContext on some systems.
     See http://lists.kde.org/?l=kde-core-devel&m=115770546313922&w=2 . */
     if (hasFocus())
       setMicroFocusHint(xpos, ypos, 0, font_h);
