@@ -506,7 +506,7 @@ void TEScreen::reverseRendition(ca* p)
 void TEScreen::effectiveRendition()
 // calculate rendition
 {
-  ef_re = cu_re & (RE_UNDERLINE | RE_BLINK | RE_BOLD);
+  ef_re = cu_re & (RE_UNDERLINE | RE_BLINK);
   if (cu_re & RE_REVERSE)
   {
     ef_fg = cu_bg;

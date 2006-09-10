@@ -684,19 +684,6 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
     }
   }
 
-  // Paint text
-  if (attr->r & RE_BOLD)
-  {
-    QFont currentFont = paint.font();
-    currentFont.setBold(true);
-    paint.setFont( currentFont );
-  } else {
-    QFont currentFont = paint.font();
-    currentFont.setBold(false);
-    paint.setFont( currentFont );
-  }
-
-
   if (!(blinking && (attr->r & RE_BLINK)))
   {
     // ### Disabled for now, since it causes problems with characters
