@@ -68,26 +68,29 @@
    - evtl. the bulk operations could be made more transparent.
 */
 
-#include "TEmulation.h"
-#include "TEWidget.h"
-#include "TEScreen.h"
-#include "TerminalCharacterDecoder.h"
-
-#include <kdebug.h>
+// System
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <QRegExp>
-#include <QClipboard>
+
+// Qt
 #include <QApplication>
 #include <QClipboard>
-//Added by qt3to4:
-#include <QTextStream>
+#include <QClipboard>
 #include <QKeyEvent>
+#include <QRegExp>
+#include <QTextStream>
 
-#include <assert.h>
+// KDE
+#include <kdebug.h>
 
-#include "TEmulation.moc"
+// Konsole
+#include "TEScreen.h"
+#include "TEWidget.h"
+#include "TerminalCharacterDecoder.h"
+
+#include "TEmulation.h"
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
@@ -149,40 +152,6 @@ void TEmulation::connectView(TEWidget* view)
 		   this,SLOT(isBusySelecting(bool)) );
   QObject::connect(view,SIGNAL(testIsSelected(const int, const int, bool &)),
 		   this,SLOT(testIsSelected(const int, const int, bool &)) );
-}
-
-/*!
-*/
-
-void TEmulation::changeGUI(TEWidget* newgui)
-{
-  Q_ASSERT( 0 ); //Not yet implemented
-
-  /*if (static_cast<TEWidget *>( gui )==newgui) return;
-
-  if ( gui ) {
-    QObject::disconnect(gui,SIGNAL(changedHistoryCursor(int)),
-                     this,SLOT(onHistoryCursorChange(int)));
-    QObject::disconnect(gui,SIGNAL(keyPressedSignal(QKeyEvent*)),
-                     this,SLOT(onKeyPress(QKeyEvent*)));
-    QObject::disconnect(gui,SIGNAL(beginSelectionSignal(const int,const int,const bool)),
-                     this,SLOT(onSelectionBegin(const int,const int,const bool)) );
-    QObject::disconnect(gui,SIGNAL(extendSelectionSignal(const int,const int)),
-                     this,SLOT(onSelectionExtend(const int,const int)) );
-    QObject::disconnect(gui,SIGNAL(endSelectionSignal(const bool)),
-                     this,SLOT(setSelection(const bool)) );
-    QObject::disconnect(gui,SIGNAL(copySelectionSignal()),
-                     this,SLOT(copySelection()) );
-    QObject::disconnect(gui,SIGNAL(clearSelectionSignal()),
-                     this,SLOT(clearSelection()) );
-    QObject::disconnect(gui,SIGNAL(isBusySelecting(bool)),
-                     this,SLOT(isBusySelecting(bool)) );
-    QObject::disconnect(gui,SIGNAL(testIsSelected(const int, const int, bool &)),
-                     this,SLOT(testIsSelected(const int, const int, bool &)) );
-  }
-  gui=newgui;
-  connectView(gui);
-  //connectGUI();*/
 }
 
 /*!
@@ -680,3 +649,5 @@ void TEmulation::setColumns(int columns)
   //       Can we put this straight or explain it at least?
   emit changeColumns(columns);
 }
+
+#include "TEmulation.moc"

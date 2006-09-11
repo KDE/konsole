@@ -130,26 +130,7 @@ void TEmuVt102::removeView(TEWidget* view)
     setReceiveViewInput(view,false);
 }
 
-/*!
-*/
 
-void TEmuVt102::changeGUI(TEWidget* /*newgui*/)
-{
-    Q_ASSERT(0); //Not implemented yet
-/*  if (static_cast<TEWidget *>( gui )==newgui) return;
-
-  if ( gui ) {
-    QObject::disconnect(gui,SIGNAL(mouseSignal(int,int,int,int)),
-                        this,SLOT(onMouse(int,int,int,int)));
-    QObject::disconnect(gui, SIGNAL(sendStringToEmu(const char*)),
-                        this, SLOT(sendString(const char*)));
-  }
-  TEmulation::changeGUI(newgui);
-  QObject::connect(gui,SIGNAL(mouseSignal(int,int,int,int)),
-                   this,SLOT(onMouse(int,int,int,int)));
-  QObject::connect(gui, SIGNAL(sendStringToEmu(const char*)),
-		   this, SLOT(sendString(const char*)));*/
-}
 
 /*!
 */

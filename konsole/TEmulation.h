@@ -21,28 +21,45 @@
 #ifndef EMULATION_H
 #define EMULATION_H
 
-#include "TEWidget.h"
-#include "TEScreen.h"
-#include <QTimer>
-//Added by qt3to4:
-#include <QTextStream>
-#include <QKeyEvent>
-#include <stdio.h>
-#include <QTextCodec>
-#include <QPointer>
+// System
 #include <keytrans.h>
+#include <stdio.h>
+
+// Qt 
+#include <QKeyEvent>
+#include <QPointer>
+#include <QTextCodec>
+#include <QTextStream>
+#include <QTimer>
+
+// Konsole
+#include "TEScreen.h"
+#include "TEWidget.h"
 
 enum { NOTIFYNORMAL=0, NOTIFYBELL=1, NOTIFYACTIVITY=2, NOTIFYSILENCE=3 };
 
+/**
+ * Base class for terminal emulation back-ends.
+ *
+ * The back-end is responsible for decoding the incoming character stream from the terminal
+ * program and producing an output image of characters which it then sends to connected
+ * views by calling their TEWidget::setImage() method.
+ *
+ * The emulation also is also responsible for converting input from the connected views such
+ * as keypresses and mouse activity into a character string which can be sent
+ * to the terminal program.
+ *
+ * As new lines of text are added to the output, older lines are transferred to a history
+ * store, which can be set using the setHistory() method.
+ */
 class TEmulation : public QObject
 { Q_OBJECT
 
 public:
-
+  
+  //Construct a new emulation and adds connects it to the view 'gui'
   TEmulation(TEWidget* gui);
   ~TEmulation();
-
-  virtual void changeGUI(TEWidget* newgui);
 
   /** 
    * Adds a new view for this emulation.
@@ -58,32 +75,87 @@ public:
   virtual void removeView(TEWidget* widget);
 
 public:
+  /** Returns the size of the screen image which the emulation produces */
   QSize imageSize();
-  virtual void setHistory(const HistoryType&);
-  const QTextCodec *codec() { return m_codec; }
-  void setCodec(const QTextCodec *);
-  virtual const HistoryType& history();
-  virtual void streamHistory(QTextStream*,TerminalCharacterDecoder* decoder);
 
+  /** 
+   * Sets the history store used by this emulation.  When new lines
+   * are added to the output, older lines at the top of the screen are transferred to a history
+   * store.   
+   *
+   * The number of lines which are kept and the storage location depend on the 
+   * type of store.
+   */
+  virtual void setHistory(const HistoryType&);
+  /** Returns the history store used by this emulation.  See setHistory() */
+  virtual const HistoryType& history();
+  
+  /** 
+   * Writes the entire output history, including the current image into a text stream.
+   *
+   * @param stream The text stream into which the output history will be written.
+   * @param decoder A decoder which converts lines of terminal characters with 
+   * appearence attributes into output text.
+   */
+  virtual void streamHistory(QTextStream* stream,TerminalCharacterDecoder* decoder);
+  
+  /** Returns the codec used to decode incoming characters.  See setCodec() */
+  const QTextCodec *codec() { return m_codec; }
+  /** Sets the codec used to decode incoming characters.  */
+  void setCodec(const QTextCodec *);
+
+  /** 
+   * Initiates a text-search of the output history.  This sets the current search position
+   * to the start of the output 
+   */
   virtual void findTextBegin();
+  /** 
+   * Searches the output history for the next occurrence of a particular string or pattern and 
+   * scrolls the the screen to the first occurrence found.
+   *
+   * @param str The string or pattern to search for within the output history
+   * @param forward @c true to search forward or @c false to search backwards in the output history.
+   * @param caseSensitive @c true for a case-sensitive search or @c false for a case-insensitive search.
+   * @param regExp @c true to treat @p str as a regular expression or @c false to treat
+   * str as plain text.
+   *
+   * @returns true if a match is found or false otherwise.
+   */ 
   virtual bool findTextNext( const QString &str, bool forward, bool caseSensitive, bool regExp );
 
 public Q_SLOTS: // signals incoming from TEWidget
 
+  /** Change the size of the emulation's image */
   virtual void onImageSizeChange(int lines, int columns);
+  
   virtual void onHistoryCursorChange(int cursor);
+  
+  /** 
+   * Interprets a key press event.  
+   * This should be reimplemented in sub-classes to emit an appropriate character
+   * sequence via sndBlock() 
+   */
   virtual void onKeyPress(QKeyEvent*);
  
+  /** Clear the current selection */
   virtual void clearSelection();
+
+  /** Copy the current selection to the clipboard */
   virtual void copySelection();
+
+  /** Begin a new selection at column @p x, row @p y. TODO:  What does columnmode do? */
   virtual void onSelectionBegin(const int x, const int y, const bool columnmode);
+  /** Extend the current selection to column @p x, row @p y. */
   virtual void onSelectionExtend(const int x, const int y);
+  /** Calls the TEWidget::setSelection() method of each associated view with the currently selected text */
   virtual void setSelection(const bool preserve_line_breaks);
+   
   virtual void isBusySelecting(bool busy);
   virtual void testIsSelected(const int x, const int y, bool &selected);
 
 public Q_SLOTS: // signals incoming from data source
 
+  /** Processes an incoming block of text, triggering an update of connected views if necessary. */
   void onRcvBlock(const char* txt,int len);
 
 Q_SIGNALS:
@@ -100,8 +172,11 @@ Q_SIGNALS:
   void changeTabTextColor(int color);
 
 public:
-
-  virtual void onRcvChar(int);
+  /** 
+   * Processes an incoming character.  See onRcvBlock()
+   * @p ch A unicode character code. 
+   */
+  virtual void onRcvChar(int ch);
 
   virtual void setMode  (int) = 0;
   virtual void resetMode(int) = 0;

@@ -75,94 +75,93 @@ Time to start a requirement list.
   - Font+Size list should go to a configuration file, too.
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-
+// System
+#include <assert.h>
 #include <config.h>
-
-#include <QSpinBox>
-#include <QCheckBox>
-#include <QImage>
-#include <QLayout>
-#include <QPainter>
-#include <QPushButton>
-#include <QToolButton>
-#include <QToolTip>
-#include <QTime>
-//Added by qt3to4:
-#include <QMenu>
-#include <QMouseEvent>
-#include <QFrame>
-#include <QTime>
-#include <QStringList>
-#include <QKeyEvent>
-#include <QEvent>
-#include <QTextStream>
-#include <Q3CString>
-#include <Q3PtrList>
-#include <QHBoxLayout>
-#include <QPixmap>
-#include <kservicetypetrader.h>
-#include <QtDBus/QtDBus>
-
-#include <kfiledialog.h>
-#include <kurlrequesterdlg.h>
-
-#include <kfinddialog.h>
-#include <kfind.h>
-#include <kfontdialog.h>
-#include <kkeydialog.h>
-#include <kstandarddirs.h>
-#include <kmenubar.h>
-#include <kmessagebox.h>
-#include <krun.h>
-#include <kstdaction.h>
-#include <kinputdialog.h>
-#include <kdebug.h>
-#include <kglobalsettings.h>
-#include <knotifydialog.h>
-#include <kpalette.h>
-#include <kprinter.h>
-#include <kacceleratormanager.h>
-
-#include <kaction.h>
-#include <kactionmenu.h>
-#include <kactioncollection.h>
-#include <kselectaction.h>
-#include <ktoggleaction.h>
-#include <ktogglefullscreenaction.h>
-#include <kshell.h>
-#include <QLabel>
-#include <kmenu.h>
-#include <klocale.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
-#include <signal.h>
 #include <dirent.h>
 #include <fcntl.h>
-#include <assert.h>
+#include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
 
-#include <kicon.h>
-#include <kiconloader.h>
-#include <kstringhandler.h>
-#include <ktip.h>
-#include <kprocctrl.h>
-#include <ktabwidget.h>
-#include <kregexpeditorinterface.h>
-#include <kparts/componentfactory.h>
+// Qt
+#include <Q3CString>
+#include <Q3PtrList>
+#include <QCheckBox>
+#include <QEvent>
+#include <QFrame>
+#include <QHBoxLayout>
+#include <QImage>
+#include <QKeyEvent>
+#include <QLabel>
+#include <QLayout>
+#include <QMenu>
+#include <QMouseEvent>
+#include <QPainter>
+#include <QPixmap>
+#include <QPushButton>
+#include <QSpinBox>
+#include <QStringList>
+#include <QTextStream>
+#include <QTime>
+#include <QTime>
+#include <QToolButton>
+#include <QToolTip>
+#include <QtDBus/QtDBus>
+
+// KDE
+#include <kacceleratormanager.h>
+#include <kaction.h>
+#include <kactioncollection.h>
+#include <kactionmenu.h>
+#include <kauthorized.h>
 #include <kcharsets.h>
 #include <kcolordialog.h>
+#include <kdebug.h>
+#include <kfiledialog.h>
+#include <kfind.h>
+#include <kfinddialog.h>
+#include <kfontdialog.h>
+#include <kglobalsettings.h>
+#include <kicon.h>
+#include <kiconloader.h>
+#include <kinputdialog.h>
+#include <kio/copyjob.h>
 #include <kio/netaccess.h>
-#include <netwm.h>
-#include <kauthorized.h>
+#include <kkeydialog.h>
+#include <klocale.h>
+#include <kmenu.h>
+#include <kmenubar.h>
+#include <kmessagebox.h>
+#include <knotifydialog.h>
+#include <kpalette.h>
+#include <kparts/componentfactory.h>
+#include <kprinter.h>
+#include <kprocctrl.h>
+#include <kregexpeditorinterface.h>
+#include <krun.h>
+#include <kselectaction.h>
+#include <kservicetypetrader.h>
+#include <kshell.h>
+#include <kstandarddirs.h>
+#include <kstdaction.h>
+#include <kstringhandler.h>
+#include <ktabwidget.h>
+#include <ktempfile.h>
+#include <ktip.h>
+#include <ktoggleaction.h>
+#include <ktogglefullscreenaction.h>
 #include <ktoolinvocation.h>
+#include <kurlrequesterdlg.h>
+#include <netwm.h>
 
-#include "printsettings.h"
+// Konsole
+#include "TerminalCharacterDecoder.h"
 #include "konsoleadaptor.h"
 #include "konsolescriptingadaptor.h"
-
-//#include "SessionTabWidget.h"
-#include "TerminalCharacterDecoder.h"
+#include "printsettings.h"
 
 #include "konsole.h"
 
@@ -4102,27 +4101,30 @@ void Konsole::slotFindDone()
 
 void Konsole::slotSaveHistory()
 {
-  KUrl s_url = saveHistoryDialog->selectedUrl();
+  KUrl originalUrl = saveHistoryDialog->selectedUrl();
 
-  if( s_url.isEmpty())
+  if( originalUrl.isEmpty())
       return;
-  KUrl url = KIO::NetAccess::mostLocalUrl( s_url, 0 );
+  KUrl localUrl = KIO::NetAccess::mostLocalUrl( originalUrl, 0 );
 
-  if( !url.isLocalFile() ) {
-    KMessageBox::sorry(this, i18n("This is not a local file.\n"));
-    return;
+  KTempFile* tempFile = 0;
+
+  if( !localUrl.isLocalFile() ) {
+    tempFile = new KTempFile(QString("konsole_history"));
+    localUrl = KUrl::fromPath(tempFile->name());
   }
 
   int query = KMessageBox::Continue;
   QFileInfo info;
-  QString name( url.path() );
+  QString name( localUrl.path() );
   info.setFile( name );
   if( info.exists() )
     query = KMessageBox::warningContinueCancel( this,
       i18n( "A file with this name already exists.\nDo you want to overwrite it?" ), i18n("File Exists"), i18n("Overwrite") );
 
-  if (query==KMessageBox::Continue) {
-    QFile file(url.path());
+  if (query==KMessageBox::Continue) 
+  {
+    QFile file(localUrl.path());
     if(!file.open(QIODevice::WriteOnly)) {
       KMessageBox::sorry(this, i18n("Unable to write to file."));
       return;
@@ -4144,6 +4146,13 @@ void Konsole::slotSaveHistory()
       KMessageBox::sorry(this, i18n("Could not save history."));
       return;
     }
+
+    if (tempFile)
+    {
+        KIO::CopyJob* job = KIO::copy(localUrl,originalUrl,true);
+    }
+
+    delete tempFile;
   }
 }
 

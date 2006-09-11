@@ -58,11 +58,22 @@ struct CharCodes
   bool sa_pound;   // saved pound
 };
 
+/**
+ * Provides an xterm compatible terminal emulation based on the DEC VT102 terminal.
+ * A full description of this terminal can be found at http://vt100.net/docs/vt102-ug/
+ * 
+ * In addition, various additional xterm escape sequences are supported to provide 
+ * features such as mouse input handling.
+ * See http://rtfm.etla.org/xterm/ctlseq.html for a description of xterm's escape
+ * sequences. 
+ *
+ */
 class TEmuVt102 : public TEmulation
 { Q_OBJECT
 
 public:
 
+  /** Constructs a new emulation and connects to the view @p gui*/
   TEmuVt102(TEWidget* gui);
   ~TEmuVt102();
 
@@ -71,16 +82,51 @@ public:
   /** Reimplemented to disconnect mouse input signals from the view */
   virtual void removeView(TEWidget* view);
 
-  void changeGUI(TEWidget* newgui);
-  
+  /** 
+   * Converts information about a key press event into a character sequence which is emitted via 
+   * sndBlock()
+   */  
   virtual void onKeyPress(QKeyEvent*);
+
 public Q_SLOTS: // signals incoming from TEWidget
 
+  /** 
+   * Converts information about a mouse event into an xterm-compatible escape
+   * sequence and emits the character sequence via sendString()
+   */
   void onMouse(int cb, int cx, int cy, int eventType);
 
 Q_SIGNALS:
 
-  void changeTitle(int,const QString&);
+  /**
+   * Emitted when the program running in the terminal wishes to update the 
+   * session's title.  This also allows terminal programs to customise other
+   * aspects of the terminal emulation display. 
+   *
+   * This signal is emitted when the escape sequence "\033]ARG;VALUE\007"
+   * is received in the input string, where ARG is a number specifying what
+   * should change and VALUE is a string specifying the new value.
+   *
+   * TODO:  The name of this method is not very accurate since this method
+   * is used to perform a whole range of tasks besides just setting
+   * the user-title of the session.    
+   *
+   * @param title Specifies what to change.
+   *    0 - Set window icon text and session title to @p newTitle
+   *    1 - Set window icon text to @p newTitle
+   *    2 - Set session title to @p newTitle
+   *    11 - Set the session's default background color to @p newTitle,
+   *         where @p newTitle can be an HTML-style string (#RRGGBB) or a named
+   *         color (eg 'red', 'blue').  
+   *         See http://doc.trolltech.com/4.2/qcolor.html#setNamedColor for more
+   *         details.
+   *    31 - Supposedly treats @p newTitle as a URL and opens it (NOT IMPLEMENTED)
+   *    32 - Sets the icon associated with the session.  @p newTitle is the name 
+   *    of the icon to use, which can be the name of any icon in the current KDE icon
+   *    theme (eg: 'konsole', 'kate', 'folder_home')
+   * @param newTitle Specifies the new title 
+   */
+  void changeTitle(int title,const QString& newTitle);
 
 public:
 
@@ -107,8 +153,8 @@ public:
 
 private:
 
-  //Scrolls the all views on this emulation.
-  //Lines may be positive (to scroll down) or negative (to scroll up) 
+  //Scrolls all the views on this emulation.
+  //lines may be positive (to scroll down) or negative (to scroll up) 
   void scrollView( int lines );
   //Scrolls all the views on this emulation by a given number of pages - where a page
   //is half the number of visible lines.  Page Up and Page Down scroll by -1 and +1 pages
