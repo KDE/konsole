@@ -227,8 +227,8 @@ inline bool ca::isTransparent(const ColorEntry* base) const
 
 inline bool ca::isBold(const ColorEntry* base) const
 {
-  return (b.t == CO_DFT) && base[b.u+0+(b.v?BASE_COLORS:0)].bold
-      || (b.t == CO_SYS) && base[b.u+2+(b.v?BASE_COLORS:0)].bold;
+  return (f.t == CO_DFT) && base[f.u+0+(f.v?BASE_COLORS:0)].bold 
+      || (f.t == CO_SYS) && base[f.u+2+(f.v?BASE_COLORS:0)].bold; 
 }
 
 #endif // TECOMMON_H
