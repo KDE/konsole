@@ -3838,16 +3838,16 @@ void Konsole::slotRenameSession() {
   renameSession(se);
 }
 
-void Konsole::slotRenameSession(TESession* ses, const QString &name)
+void Konsole::slotRenameSession(TESession* session, const QString &name)
 {
-  KToggleAction *ra = session2action.find(ses);
+  KToggleAction *ra = session2action.find(session);
   QString title=name;
   title=title.replace('&',"&&");
   ra->setText(title);
-  ra->setIcon( KIcon( ses->IconName() ) ); // I don't know why it is needed here
+  ra->setIcon( KIcon( session->IconName() ) ); // I don't know why it is needed here
   if (m_tabViewMode!=ShowIconOnly) {
-    int se_index = tabwidget->indexOf( se->widget() );
-    tabwidget->setTabText( se_index, title );
+    int sessionTabIndex = tabwidget->indexOf( session->widget() );
+    tabwidget->setTabText( sessionTabIndex, title );
   }
   updateTitle();
 }
