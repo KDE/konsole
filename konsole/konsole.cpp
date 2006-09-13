@@ -4120,7 +4120,7 @@ void Konsole::slotSaveHistory()
   info.setFile( name );
   if( info.exists() )
     query = KMessageBox::warningContinueCancel( this,
-      i18n( "A file with this name already exists.\nDo you want to overwrite it?" ), i18n("File Exists"), i18n("Overwrite") );
+      i18n( "A file with this name already exists.\nDo you want to overwrite it?" ), i18n("File Exists"), KGuiItem(i18n("Overwrite")) );
 
   if (query==KMessageBox::Continue) 
   {

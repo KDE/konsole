@@ -29,7 +29,7 @@ ZModemDialog::ZModemDialog(QWidget *parent, bool modal, const QString &caption)
   setModal( modal );
   setCaption( caption );
   setButtons( User1|Close );
-  setButtonGuiItem( User1, i18n("&Stop") );
+  setButtonGuiItem( User1, KGuiItem(i18n("&Stop")) );
 
   setDefaultButton( User1 );
   setEscapeButton(User1);
