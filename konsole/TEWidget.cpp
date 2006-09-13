@@ -2217,7 +2217,7 @@ void TEWidget::Bell(bool visibleSession, QString message)
   if ( allowBell )
   {
     allowBell = false;
-    QTimer::singleShot(1000,this,SLOT(enableBell()));
+    QTimer::singleShot(500,this,SLOT(enableBell()));
  
     kDebug() << __FUNCTION__ << endl;
 

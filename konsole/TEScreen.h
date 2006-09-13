@@ -176,7 +176,7 @@ public: // these are all `Screen' operations
      * Resizes the image to a new fixed size of @p new_lines by @p new_columns.  
      * In the case that @p new_columns is smaller than the current number of columns,
      * existing lines are not truncated.  This prevents characters from being lost
-     * if the terminal display resized smaller and then larger again.
+     * if the terminal display is resized smaller and then larger again.
      *
      * (note that in versions of Konsole prior to KDE 4, existing lines were
      *  truncated when making the screen image smaller)
@@ -222,15 +222,16 @@ public: // these are all `Screen' operations
      */
     void setSelectionStart(const int column, const int line, const bool columnmode);
     /**
-     * Sets the end of the current selection.  If this is before the selection start
-     * specified with setSelectionStart() then the selection will be normalized (ie.
-     * the start of the selection will always occur before the end of the selection). 
+     * Sets the end of the current selection.
      *
      * @param column The column index of the last character in the selection.
      * @param line The line index of the last character in the selection. 
      */ 
     void setSelectionEnd(const int column, const int line);
+    
+    /** Clears the current selection */
     void clearSelection();
+
     void setBusySelecting(bool busy) { sel_busy = busy; }
 
     /**
@@ -241,6 +242,7 @@ public: // these are all `Screen' operations
     /** 
      * Convenience method.  Returns the currently selected text. 
      * @param preserve_line_breaks TODO: Not yet handled in KDE 4.  See comments near definition. 
+     * (Currently the resulting string always includes line-breaks) 
      */
     QString selectedText(bool preserve_line_breaks);
 	    
@@ -288,6 +290,9 @@ public: // these are all `Screen' operations
 	 * LINE_WRAPPED:	 Specifies that the line is wrapped.
 	 * LINE_DOUBLEWIDTH: Specifies that the characters in the current line should be double the normal width.
 	 * LINE_DOUBLEHEIGHT:Specifies that the characters in the current line should be double the normal height.
+     *                   Double-height lines are formed of two lines containing the same characters,
+     *                   with both having the LINE_DOUBLEHEIGHT attribute.  This allows other parts of the 
+     *                   code to work on the assumption that all lines are the same height.
 	 *
 	 * @param enable true to apply the attribute to the current line or false to remove it
 	 */
@@ -305,8 +310,15 @@ private: // helper
 	void copyLineToStream(int line, int start, int count, QTextStream* stream,
 						  TerminalCharacterDecoder* decoder);
 	
+    //fills a section of the screen image with the character 'c'
+    //the parameters are specified as offsets from the start of the screen image.
+    //the loc(x,y) macro can be used to generate these values from a column,line pair.
     void clearImage(int loca, int loce, char c);
-    void moveImage(int dst, int loca, int loce);
+
+    //move screen image between 'sourceBegin' and 'sourceEnd' to 'dest'.
+    //the parameters are specified as offsets from the start of the screen image.
+    //the loc(x,y) macro can be used to generate these values from a column,line pair.
+    void moveImage(int dest, int sourceBegin, int sourceEnd);
     
     void scrollUp(int from, int i);
     void scrollDown(int from, int i);

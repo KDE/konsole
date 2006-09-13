@@ -1002,17 +1002,15 @@ NOTE:  moveImage() can only move whole lines.
 
 void TEScreen::moveImage(int dest, int sourceBegin, int sourceEnd)
 {
-//FIXME: check positions
-  if (sourceEnd < sourceBegin) {
-    kDebug(1211) << "WARNING!!! call to TEScreen:moveImage with sourceEnd < sourceBegin!" << endl;
-    return;
-  }
+  Q_ASSERT( sourceBegin <= sourceEnd );
  
   int lines=(sourceEnd-sourceBegin)/columns;
 
   //move screen image and line properties:
-  //areas being copied may overlap, so it matters that we do the copy in the right
-  //order (forwards if destination-line < source-line or backwards otherwise)
+  //the source and destination areas of the image may overlap, 
+  //so it matters that we do the copy in the right order - 
+  //forwards if dest < sourceBegin or backwards otherwise.
+  //(search the web for 'memmove implementation' for details)
   if (dest < sourceBegin)
   {
     for (int i=0;i<=lines;i++)
@@ -1037,9 +1035,10 @@ void TEScreen::moveImage(int dest, int sourceBegin, int sourceEnd)
      if ((lastPos < 0) || (lastPos >= (lines*columns)))
         lastPos = -1;
   }
+     
+  // Adjust selection to follow scroll.
   if (sel_begin != -1)
   {
-     // Adjust selection to follow scroll.
      bool beginIsTL = (sel_begin == sel_TL);
      int diff = dest - sourceBegin; // Scroll by this amount
      int scr_TL=loc(0,hist->getLines());

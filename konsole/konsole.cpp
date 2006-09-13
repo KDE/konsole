@@ -766,6 +766,7 @@ void Konsole::makeGUI()
    }
 
    kDebug() << __FUNCTION__ << ": RMB menu done - time = " << makeGUITimer.elapsed() << endl;
+ 
    delete colors;
    colors = new ColorSchemaList();
    colors->checkSchemas();
@@ -2195,22 +2196,36 @@ void Konsole::notifySize(int columns, int lines)
 
 void Konsole::updateTitle()
 {
+  //setting window titles, tab text etc. will always trigger a repaint of the affected widget
+  //so we take care not to update titles, tab text etc. if the new and old text is the same.
+
   int se_index = tabwidget->indexOf( se->widget() );
 
-  setPlainCaption( se->displayTitle() );
+  if ( windowTitle() != se->displayTitle() )
+        setPlainCaption( se->displayTitle() );
 
-  //setCaption( se->fullTitle() );
-  setWindowIconText( se->IconText() );
-  tabwidget->setTabIcon(tabwidget->indexOf( se->widget() ), iconSetForSession(se));
-  QString icon = se->IconName();
+  if ( windowIconText() != se->IconText() )
+        setWindowIconText( se->IconText() );
+ 
+  //FIXME:  May trigger redundant repaint of tabwidget tab icons if the icon hasn't changed 
+  QIcon icon = iconSetForSession(se);
+  tabwidget->setTabIcon(se_index, icon);
+  
+  QString iconName = se->IconName();
   KToggleAction *ra = session2action.find(se);
   if (ra)
+  {
     // FIXME KAction port - should check to see if icon() == KIcon(icon), but currently won't work (as creates two KIconEngines)
-    ra->setIcon(KIcon(icon));
-  if (m_tabViewMode == ShowIconOnly)
-    tabwidget->setTabText( se_index, QString() );
-  else if (b_matchTabWinTitle)
-    tabwidget->setTabText( se_index, se->displayTitle().replace('&', "&&") );
+    ra->setIcon(KIcon(iconName));
+  }
+
+  QString newTabText;
+  
+  if ( m_tabViewMode != ShowIconOnly && b_matchTabWinTitle)
+        newTabText = se->displayTitle().replace('&', "&&");
+
+  if (tabwidget->tabText(se_index) != newTabText)
+        tabwidget->setTabText(se_index,newTabText);
 }
 
 void Konsole::initSessionFont(QFont font) {
