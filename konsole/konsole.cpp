@@ -374,7 +374,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
     if (te) te->setScrollbarLocation(TEWidget::SCRNONE);
   }
 
-//  connect(kapp, SIGNAL(kdisplayFontChanged()), this, SLOT(slotFontChanged()));
+//  connect(KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()), this, SLOT(slotFontChanged()));
 }
 
 
