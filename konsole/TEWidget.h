@@ -25,6 +25,7 @@
 #include <qwidget.h>
 #include <qcolor.h>
 #include <qkeycode.h>
+#include <qtimer.h>
 #include <qscrollbar.h>
 
 #include <kpopupmenu.h>
@@ -256,6 +257,8 @@ private:
     QScrollBar* scrollbar;
     int         scrollLoc;
     QString     word_characters;
+    QTimer      bellTimer; //used to rate-limit bell events.  started when a bell event occurs,
+                           //and prevents further bell events until it stops
     int         m_bellMode;
 
     bool blinking;   // hide text in paintEvent

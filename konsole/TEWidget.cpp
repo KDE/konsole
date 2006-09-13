@@ -2025,16 +2025,32 @@ void TEWidget::setBellMode(int mode)
 
 void TEWidget::Bell(bool visibleSession, QString message)
 {
+  if (bellTimer.isActive())
+          return;
+
+  //minimum delay in milliseconds between each bell event
+  //for the 3 different types of bells.
+  const int BELLSYSTEM_DELAY = 100;
+  const int BELLNOTIFY_DELAY = 500; //longer to avoid horrible noise with several audible system
+                                    //notifications in close succession
+  const int BELLVISUAL_DELAY = 500; //longer to avoid ugly flickering with several flashes in close
+                                    //succession
+
   if (m_bellMode==BELLNONE) return;
 
   if (m_bellMode==BELLSYSTEM) {
+    bellTimer.start(BELLSYSTEM_DELAY,true);
     KNotifyClient::beep();
   } else if (m_bellMode==BELLNOTIFY) {
+    bellTimer.start(BELLNOTIFY_DELAY,true);
+
     if (visibleSession)
       KNotifyClient::event(winId(), "BellVisible", message);
     else
       KNotifyClient::event(winId(), "BellInvisible", message);
   } else if (m_bellMode==BELLVISUAL) {
+    bellTimer.start(BELLVISUAL_DELAY,true);
+    
     swapColorTable();
     QTimer::singleShot(200,this,SLOT(swapColorTable()));
   }
