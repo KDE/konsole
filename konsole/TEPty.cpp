@@ -240,7 +240,7 @@ void TEPty::send_bytes(const char* s, int len)
 /*! indicates that a block of data is received */
 void TEPty::dataReceived(KProcess *,char *buf, int len)
 {
-  kDebug() << __FUNCTION__ << ": received " << len << " bytes - '" << buf << "'" << endl;
+ // kDebug() << __FUNCTION__ << ": received " << len << " bytes - '" << buf << "'" << endl;
 
   emit block_in(buf,len);
 }

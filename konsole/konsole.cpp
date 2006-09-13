@@ -4138,7 +4138,7 @@ void Konsole::slotSaveHistory()
 	else
 		decoder = new PlainTextDecoder();
 
-    sessions.current()->getEmulation()->streamHistory( &textStream , decoder);
+    sessions.current()->getEmulation()->writeToStream( &textStream , decoder);
 	delete decoder;
 
     file.close();

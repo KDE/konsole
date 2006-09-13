@@ -369,19 +369,19 @@ void TEmulation::onRcvBlock(const char* text, int length)
 
 void TEmulation::onSelectionBegin(const int x, const int y, const bool columnmode) {
   if (!connected) return;
-  scr->setSelBeginXY(x,y,columnmode);
+  scr->setSelectionStart(x,y,columnmode);
   showBulk();
 }
 
 void TEmulation::onSelectionExtend(const int x, const int y) {
   if (!connected) return;
-  scr->setSelExtentXY(x,y);
+  scr->setSelectionEnd(x,y);
   showBulk();
 }
 
 void TEmulation::setSelection(const bool preserve_line_breaks) {
   if (!connected) return;
-  QString t = scr->getSelText(preserve_line_breaks);
+  QString t = scr->selectedText(preserve_line_breaks);
   if (!t.isNull()) 
   {
     QListIterator< QPointer<TEWidget> > viewIter(_views);
@@ -400,7 +400,7 @@ void TEmulation::isBusySelecting(bool busy)
 void TEmulation::testIsSelected(const int x, const int y, bool &selected)
 {
   if (!connected) return;
-  selected=scr->testIsSelected(x,y);
+  selected=scr->isSelected(x,y);
 }
 
 void TEmulation::clearSelection() {
@@ -411,12 +411,12 @@ void TEmulation::clearSelection() {
 
 void TEmulation::copySelection() {
   if (!connected) return;
-  QString t = scr->getSelText(true);
+  QString t = scr->selectedText(true);
   QApplication::clipboard()->setText(t);
 }
 
-void TEmulation::streamHistory(QTextStream* stream , TerminalCharacterDecoder* decoder) {
-  scr->streamHistory(stream,decoder);
+void TEmulation::writeToStream(QTextStream* stream , TerminalCharacterDecoder* decoder) {
+  scr->writeToStream(stream,decoder);
 }
 
 void TEmulation::findTextBegin()
@@ -468,7 +468,7 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool isCaseSens
 	else
 		endLine = qMax(line+delta,lastLine);
 		  
-	scr->streamHistory(&searchStream,&decoder, qMin(endLine,line) , qMax(endLine,line) );
+	scr->writeToStream(&searchStream,&decoder, qMin(endLine,line) , qMax(endLine,line) );
 
 	pos = -1;
 		

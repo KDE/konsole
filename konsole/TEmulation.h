@@ -91,13 +91,14 @@ public:
   virtual const HistoryType& history();
   
   /** 
-   * Writes the entire output history, including the current image into a text stream.
+   * Copies the entire output history to a text stream.
    *
    * @param stream The text stream into which the output history will be written.
    * @param decoder A decoder which converts lines of terminal characters with 
-   * appearence attributes into output text.
+   * appearence attributes into output text.  PlainTextDecoder is the most commonly
+   * used decoder.
    */
-  virtual void streamHistory(QTextStream* stream,TerminalCharacterDecoder* decoder);
+  virtual void writeToStream(QTextStream* stream,TerminalCharacterDecoder* decoder);
   
   /** Returns the codec used to decode incoming characters.  See setCodec() */
   const QTextCodec *codec() { return m_codec; }

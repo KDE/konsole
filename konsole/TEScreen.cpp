@@ -18,25 +18,6 @@
     02110-1301  USA.
 */
 
-/*! \class TEScreen
-
-    \brief The output image produced by the terminal emulation.
-
-    The terminal emulation ( TEmulation ) receives a serial stream of
-    input characters from the program currently running in the terminal,
-    and produces an image consisting of characters with associated attributes
-    (such as foreground and background colors).
-
-    In addition to the image which is visible on-screen, incoming lines are
-    added to an associated history scroll ( set using setScroll() ), so that
-    earlier output can be viewed.
-
-    getCookedImage() is used to retrieve the currently visible image
-    which is then used by the display widget to draw the output from the
-    terminal. 
-
-    \sa TEWidget \sa VT102Emulation \sa TEHistory
-*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -62,8 +43,9 @@
 //
 //Originally the image was stored as one large contiguous block of 
 //memory, so a position within the image could be represented as an
-//offset from the beginning of the block.  Many internal parts
-//of this class still use this representation for parameters and so on,
+//offset from the beginning of the block.  For efficiency reasons this
+//is no longer the case.  
+//Many internal parts of this class still use this representation for parameters and so on,
 //notably moveImage() and clearImage().
 //This macro converts from an X,Y position into an image offset.
 #ifndef loc
@@ -536,6 +518,11 @@ void TEScreen::effectiveRendition()
     ef_fg.toggleIntensive();
 }
 
+/**ca* TEScreen::image()
+{
+
+}**/
+
 /*!
     returns the image.
 
@@ -572,7 +559,7 @@ ca* TEScreen::getCookedImage()
         if (hist->isLINE_WRAPPED(y+histCursor))
           reverseRendition(&merged[p]);
 #endif
-        if (testIsSelected(x,y)) {
+        if (isSelected(x,y)) {
           int p=x + yp;
           reverseRendition(&merged[p]); // for selection
     }
@@ -593,7 +580,7 @@ ca* TEScreen::getCookedImage()
          if (lineProperties[y- hist->getLines() +histCursor] & LINE_WRAPPED)
            reverseRendition(&merged[p]);
 #endif
-         if (sel_begin != -1 && testIsSelected(x,y))
+         if (sel_begin != -1 && isSelected(x,y))
            reverseRendition(&merged[p]); // for selection
        }
 
@@ -1213,7 +1200,7 @@ void TEScreen::clearSelection()
   sel_begin = -1;
 }
 
-void TEScreen::setSelBeginXY(const int x, const int y, const bool mode)
+void TEScreen::setSelectionStart(const int x, const int y, const bool mode)
 {
 //  kDebug(1211) << "setSelBeginXY(" << x << "," << y << ")" << endl;
   sel_begin = loc(x,y+histCursor) ;
@@ -1226,7 +1213,7 @@ void TEScreen::setSelBeginXY(const int x, const int y, const bool mode)
   columnmode = mode;
 }
 
-void TEScreen::setSelExtentXY(const int x, const int y)
+void TEScreen::setSelectionEnd(const int x, const int y)
 {
 //  kDebug(1211) << "setSelExtentXY(" << x << "," << y << ")" << endl;
   if (sel_begin == -1) return;
@@ -1247,7 +1234,7 @@ void TEScreen::setSelExtentXY(const int x, const int y)
   }
 }
 
-bool TEScreen::testIsSelected(const int x,const int y)
+bool TEScreen::isSelected(const int x,const int y)
 {
   if (columnmode) {
     int sel_Left,sel_Right;
@@ -1275,11 +1262,19 @@ bool TEScreen::testIsSelected(const int x,const int y)
   return qc.isSpace();
 }*/
 
-QString TEScreen::getSelText(bool preserve_line_breaks)
+//FIXME:  preserve_line_breaks not handled yet.
+//        I considered removing this parameter altogether, requiring 
+//        writeToStream() to be used if text needs to be retrieved as 
+//        it appears on screen.
+//        -- needs more thought on the issue first though.
+QString TEScreen::selectedText(bool preserve_line_breaks)
 {
   QString result;
   QTextStream stream(&result, QIODevice::ReadWrite);
-  getSelText(preserve_line_breaks, &stream);
+  
+  PlainTextDecoder decoder;
+  writeSelectionToStream(&stream,&decoder);
+  
   return result;
 }
 
@@ -1317,7 +1312,7 @@ static QString makeString(int *m, int d, bool stripTrailingSpaces)
 }*/
 
 
-void TEScreen::selectedText(QTextStream* stream , TerminalCharacterDecoder* decoder)
+void TEScreen::writeSelectionToStream(QTextStream* stream , TerminalCharacterDecoder* decoder)
 {
 	int top = sel_TL / columns;	
 	int left = sel_TL % columns;
@@ -1389,14 +1384,6 @@ void TEScreen::copyLineToStream(int line , int start, int count,
 		
 		//decode line and write to text stream	
 		decoder->decodeLine( (ca*) characterBuffer , count, 0 , stream);
-}
-
-void TEScreen::getSelText(bool preserve_line_breaks, QTextStream* stream)
-{
-	TerminalCharacterDecoder* decoder = new PlainTextDecoder();
-	selectedText( stream , decoder );
-	delete decoder;
-	return;	
 }
 
 #if 0
@@ -1635,22 +1622,23 @@ void TEScreen::getSelText(bool preserve_line_breaks, QTextStream *stream)
 }
 #endif
 
-void TEScreen::streamHistory(QTextStream* stream , TerminalCharacterDecoder* decoder) {
+void TEScreen::writeToStream(QTextStream* stream , TerminalCharacterDecoder* decoder) {
   sel_begin = 0;
   sel_BR = sel_begin;
   sel_TL = sel_begin;
-  setSelExtentXY(columns-1,lines-1+hist->getLines()-histCursor);
-  //getSelText(true, stream, decoder);
-  selectedText(stream,decoder);
+  setSelectionEnd(columns-1,lines-1+hist->getLines()-histCursor);
+  
+  writeSelectionToStream(stream,decoder);
+  
   clearSelection();
 }
 
-void TEScreen::streamHistory(QTextStream* stream, TerminalCharacterDecoder* decoder, int from, int to)
+void TEScreen::writeToStream(QTextStream* stream, TerminalCharacterDecoder* decoder, int from, int to)
 {
 	sel_begin = loc(0,from);
 	sel_TL = sel_begin;
 	sel_BR = loc(columns-1,to);
-	selectedText(stream,decoder);
+	writeSelectionToStream(stream,decoder);
 	clearSelection();
 }
 
@@ -1659,7 +1647,7 @@ QString TEScreen::getHistoryLine(int no)
   sel_begin = loc(0,no);
   sel_TL = sel_begin;
   sel_BR = loc(columns-1,no);
-  return getSelText(false);
+  return selectedText(false);
 }
 
 void TEScreen::addHistLine()
