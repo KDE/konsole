@@ -4126,6 +4126,7 @@ void Konsole::slotSaveHistory()
 
   if( !localUrl.isLocalFile() ) {
     tempFile = new KTempFile(QString("konsole_history"));
+    tempFile->setAutoDelete(true);
     localUrl = KUrl::fromPath(tempFile->name());
   }
 
@@ -4165,9 +4166,7 @@ void Konsole::slotSaveHistory()
     }
 
     if (tempFile)
-    {
-        KIO::CopyJob* job = KIO::copy(localUrl,originalUrl,true);
-    }
+        KIO::NetAccess::file_copy(localUrl, originalUrl);
 
     delete tempFile;
   }
