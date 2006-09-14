@@ -47,7 +47,7 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel 
         QString old_bm_file = KStandardDirs::locateLocal( "data", "kfile/bookmarks.xml" );
         if ( QFile::exists( old_bm_file ) )
             // We want sync here...
-            if ( !KIO::NetAccess::copy( KUrl( old_bm_file ),
+            if ( !KIO::NetAccess::file_copy( KUrl( old_bm_file ),
                                    KUrl ( new_bm_file ), 0 ) ) {
                 kWarning()<<KIO::NetAccess::lastErrorString()<<endl;
             }
