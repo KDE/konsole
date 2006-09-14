@@ -4142,6 +4142,7 @@ void Konsole::slotSaveHistory()
     QFile file(localUrl.path());
     if(!file.open(QIODevice::WriteOnly)) {
       KMessageBox::sorry(this, i18n("Unable to write to file."));
+      delete tempFile;
       return;
     }
 
@@ -4159,6 +4160,7 @@ void Konsole::slotSaveHistory()
     file.close();
     if(file.error() != QFile::NoError) {
       KMessageBox::sorry(this, i18n("Could not save history."));
+      delete tempFile;
       return;
     }
 
