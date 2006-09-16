@@ -578,14 +578,18 @@ void Konsole::makeGUI()
    kDebug() << __FUNCTION__ << ": Bookmarks done - time = " << makeGUITimer.elapsed() << endl;
 
    // Schema Options Menu -----------------------------------------------------
-   m_schema = new KMenu(this);
+   m_schema = new KMenu(i18n( "Sch&ema" ),this);
+   m_schema->setIcon( SmallIconSet("colorize") );
+   
    KAcceleratorManager::manage( m_schema );
    connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
    connect(m_schema, SIGNAL(aboutToShow()), SLOT(schema_menu_check()));
 
 
    // Keyboard Options Menu ---------------------------------------------------
-   m_keytab = new KMenu(this);
+   m_keytab = new KMenu( i18n("&Keyboard") , this);
+   m_keytab->setIcon(SmallIconSet( "key_bindings" ));
+
    KAcceleratorManager::manage( m_keytab );
    connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
 
@@ -663,13 +667,11 @@ void Konsole::makeGUI()
       m_options->addAction( selectSetEncoding );
 
       if (KAuthorized::authorizeKAction("keyboard"))
-         m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
-
+        m_options->addMenu(m_keytab);
+      
       // Schema
       if (KAuthorized::authorizeKAction("schema"))
-      {
-         m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Sch&ema" ), m_schema);
-      }
+        m_options->addMenu(m_schema);
 
       // Select size
       if (!b_fixedSize)
@@ -777,7 +779,7 @@ void Konsole::makeGUI()
         curr_schema=sch->numb();
    else
         curr_schema = 0;
-   for (uint i=0; i<m_schema->actions().count(); i++)
+   for (int i=0; i<m_schema->actions().count(); i++)
       m_schema->setItemChecked(i,false);
 
 
@@ -1411,7 +1413,7 @@ void Konsole::slotTabCloseSession()
 
 void Konsole::slotTabCloseSession(QWidget* sessionWidget)
 {
-	for (int i=0;i<sessions.count();i++)
+	for (uint i=0;i<sessions.count();i++)
 	{
 		if (sessions.at(i)->widget() == sessionWidget)
 			confirmCloseCurrentSession(sessions.at(i));
@@ -2004,10 +2006,10 @@ void Konsole::slotConfigureKeys()
 
   QStringList ctrlKeys;
 
-  for ( uint i = 0; i < m_shortcuts->actions().count(); i++ )
+  for ( int i = 0; i < m_shortcuts->actions().count(); i++ )
   {
-    KShortcut shortcut = (m_shortcuts->action( i ))->shortcut();
-    for( uint j = 0; j < shortcut.count(); j++)
+    KShortcut shortcut = (m_shortcuts->actions().value( i ))->shortcut();
+    for( int j = 0; j < shortcut.count(); j++)
     {
       QKeySequence seq = shortcut.seq(j);
       int key = seq.isEmpty() ? 0 : seq[0]; // First Key of KeySequence
@@ -2017,8 +2019,8 @@ void Konsole::slotConfigureKeys()
 
     // Are there any shortcuts for Session Menu entries?
     if ( !b_sessionShortcutsEnabled &&
-         m_shortcuts->action( i )->shortcut().count() &&
-         m_shortcuts->action( i )->objectName().startsWith("SSC_") ) {
+         m_shortcuts->actions().value( i )->shortcut().count() &&
+         m_shortcuts->actions().value( i )->objectName().startsWith("SSC_") ) {
       b_sessionShortcutsEnabled = true;
       KConfigGroup group(KGlobal::config(), "General");
       group.writeEntry("SessionShortcutsEnabled", true);
@@ -2072,7 +2074,7 @@ void Konsole::reparseConfiguration()
   uint count = m_shortcuts->actions().count();
   for ( uint i = 0; i < count; i++ )
   {
-    KAction* action = m_shortcuts->action( i );
+    KAction* action = m_shortcuts->actions().value( i );
     bool b_foundSession = false;
     if ( action->objectName().startsWith("SSC_") ) {
       QString name = action->objectName();
@@ -2617,8 +2619,8 @@ void Konsole::activateSession(TESession *s)
   if (monitorSilence) monitorSilence->setChecked( se->isMonitorSilence() );
   masterMode->setChecked( se->isMasterMode() );
   sessions.find(se);
-  uint position=sessions.at();
- }
+ 
+}
 
 void Konsole::slotUpdateSessionConfig(TESession *session)
 {
@@ -3169,14 +3171,18 @@ void Konsole::nextSession()
 
 void Konsole::slotMovedTab(int from, int to)
 {
-
   TESession* _se = sessions.take(from);
   sessions.remove(_se);
   sessions.insert(to,_se);
 
+  //get the action for the shell with a tab at position to+1
+  KToggleAction* nextSessionAction = session2action.find(sessions.at(to + 1)); 
+
   KToggleAction *ra = session2action.find(_se);
+  Q_ASSERT( ra );
+
   m_view->removeAction( ra );
-  ra->plug(m_view,(m_view->actions().count()-sessions.count()+1)+to);
+  m_view->insertAction( nextSessionAction , ra );
 
   if (to==tabwidget->currentIndex()) {
     if (!m_menuCreated)
@@ -3196,8 +3202,12 @@ void Konsole::moveSessionLeft()
   sessions.insert(position-1,se);
 
   KToggleAction *ra = session2action.find(se);
+
+  //get the action for the session just after the current session's new position
+  KToggleAction* nextSessionAction = session2action.find(sessions.at(position));
+
   m_view->removeAction( ra );
-  ra->plug(m_view,(m_view->actions().count()-sessions.count()+1)+position-1);
+  m_view->insertAction( nextSessionAction , ra );
 
   QColor oldcolor = tabwidget->tabTextColor(tabwidget->indexOf(se->widget()));
 
@@ -3226,9 +3236,12 @@ void Konsole::moveSessionRight()
   sessions.remove(position);
   sessions.insert(position+1,se);
 
+  //get the action for the session just after the current session's new position
+  KToggleAction* nextSessionAction = session2action.find(sessions.at(position+2));
+
   KToggleAction *ra = session2action.find(se);
   m_view->removeAction( ra );
-  ra->plug(m_view,(m_view->actions().count()-sessions.count()+1)+position+1);
+  m_view->insertAction( nextSessionAction , ra );
 
   QColor oldcolor = tabwidget->tabTextColor(tabwidget->indexOf(se->widget()));
 
