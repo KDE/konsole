@@ -126,8 +126,7 @@ KeyTrans::KeyEntry* KeyTrans::addEntry(int ref, int key, int bits, int mask, int
   return (KeyEntry*)NULL;
 }
 
-bool KeyTrans::findEntry(int key, int bits, int* cmd, const char** txt, int* len,
-               bool* metaspecified)
+bool KeyTrans::findEntry(int key, int bits, int* cmd, QByteArray &txt, bool* metaspecified)
 {
   if (!m_fileRead) readConfig();
 
@@ -138,8 +137,7 @@ bool KeyTrans::findEntry(int key, int bits, int* cmd, const char** txt, int* len
     if (it.current()->matches(key,bits,0xffff))
     {
       *cmd = it.current()->cmd;
-      *len = it.current()->txt.length();
-      if ((*cmd==CMD_send) && it.current()->anymodspecified() && (*len < 16))
+      if ((*cmd==CMD_send) && it.current()->anymodspecified() && (it.current()->txt.length() < 16))
       {
         static char buf[16];
         char *c, mask = '1' + BITS(0, bits&(1<<BITS_Shift)) +
@@ -147,10 +145,10 @@ bool KeyTrans::findEntry(int key, int bits, int* cmd, const char** txt, int* len
         strcpy(buf, it.current()->txt.toAscii().constData());
         c = strchr(buf, '*');
         if (c) *c = mask;
-        *txt = buf;
+        txt = buf;
       }
       else
-        *txt = it.current()->txt.toAscii().constData();
+        txt = it.current()->txt.toAscii();
       *metaspecified = it.current()->metaspecified();
       return true;
     }

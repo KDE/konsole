@@ -1024,8 +1024,7 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
 
   // lookup in keyboard translation table ...
   int cmd = CMD_none; 
-  const char* txt; 
-  int len;
+  QByteArray txt; 
   bool metaspecified;
   if (keytrans->findEntry(ev->key(), encodeMode(MODE_NewLine  , BITS_NewLine   ) + // OLD,
                                      encodeMode(MODE_Ansi     , BITS_Ansi      ) + // OBSOLETE,
@@ -1034,7 +1033,7 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
                                      encodeStat(Qt::ControlModifier , BITS_Control   ) +
                                      encodeStat(Qt::ShiftModifier   , BITS_Shift     ) +
                                      encodeStat(Qt::AltModifier     , BITS_Alt       ),
-                          &cmd, &txt, &len, &metaspecified ))
+                          &cmd, txt, &metaspecified ))
 //printf("cmd: %d, %s, %d\n",cmd,txt,len);
   if (connected)
   {
@@ -1066,7 +1065,7 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
 
   if (cmd==CMD_send) {
     if ((ev->modifiers() & Qt::AltModifier) && !metaspecified ) sendString("\033");
-    emit sndBlock(txt,len);
+    emit sndBlock(txt.constData(), txt.length());
     return;
   }
 
@@ -1344,12 +1343,11 @@ void TEmuVt102::setConnect(bool c)
 char TEmuVt102::getErase()
 {
   int cmd = CMD_none; 
-  const char* txt; 
-  int len;
+  QByteArray txt; 
   bool metaspecified;
   
-  if (keytrans->findEntry(Qt::Key_Backspace, 0, &cmd, &txt, &len,
-      &metaspecified) && (cmd==CMD_send) && (len == 1))
+  if (keytrans->findEntry(Qt::Key_Backspace, 0, &cmd, txt,
+      &metaspecified) && (cmd==CMD_send) && (txt.length() == 1))
     return txt[0];
     
   return '\b';
