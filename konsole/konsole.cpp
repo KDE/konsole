@@ -1206,15 +1206,18 @@ bool Konsole::queryClose()
 
    if ( b_warnQuit)
    {
+		KGuiItem closeTabsButton(i18n("Close sessions"),KStdGuiItem::quit().iconName());
+		
         if(sessions.count()>1) {
 	    switch (
 		KMessageBox::warningContinueCancel(
 	    	    this,
             	    i18n( "You are about to close %1 open sessions. \n"
                 	  "Are you sure you want to continue?" , sessions.count() ),
-	    	    i18n("Confirm close"),
-	    	    KStdGuiItem::quit() /*, KGuiItem(i18n("C&lose Current Session Only"),"fileclose" )*/
-		)
+	    	    i18n("Confirm close") ,
+				closeTabsButton,
+				QString(),
+				KMessageBox::PlainCaption)
 	    ) {
 		case KMessageBox::Yes :
 		    break;
@@ -1632,7 +1635,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
      b_allowResize=config->readEntry( "AllowResize", QVariant(false)).toBool();
      b_bidiEnabled = config->readEntry("EnableBidi", QVariant(false)).toBool();
      s_word_seps= config->readEntry("wordseps",":@-./_~");
-     b_framevis = config->readEntry("has frame", QVariant(true)).toBool();
+     b_framevis = config->readEntry("has frame", QVariant(false)).toBool();
      Q3PtrList<TEWidget> tes = activeTEs();
      for (TEWidget *_te = tes.first(); _te; _te = tes.next()) {
        _te->setWordCharacters(s_word_seps);
@@ -1649,8 +1652,8 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
      for (TESession *ses = sessions.first(); ses; ses = sessions.next())
        ses->setMonitorSilenceSeconds(monitorSilenceSeconds);
 
-     b_xonXoff = config->readEntry("XonXoff", QVariant(false)).toBool();
-     b_matchTabWinTitle = config->readEntry("MatchTabWinTitle", QVariant(false)).toBool();
+     b_xonXoff = config->readEntry("XonXoff", QVariant(true)).toBool();
+     b_matchTabWinTitle = config->readEntry("MatchTabWinTitle", QVariant(true)).toBool();
      config->setGroup("UTMP");
      b_addToUtmp = config->readEntry("AddToUtmp", QVariant(true)).toBool();
      config->setDesktopGroup();
@@ -2223,8 +2226,13 @@ void Konsole::updateTitle()
 
   QString newTabText;
   
-  if ( m_tabViewMode != ShowIconOnly && b_matchTabWinTitle)
+  if ( m_tabViewMode != ShowIconOnly )
+  {
+  	if ( b_matchTabWinTitle )
         newTabText = se->displayTitle().replace('&', "&&");
+	else
+		newTabText = se->Title();
+  }
 
   if (tabwidget->tabText(se_index) != newTabText)
         tabwidget->setTabText(se_index,newTabText);
