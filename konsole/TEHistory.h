@@ -21,7 +21,6 @@
 #ifndef TEHISTORY_H
 #define TEHISTORY_H
 
-#include <q3cstring.h>
 #include <q3ptrvector.h>
 #include <QBitArray>
 //Added by qt3to4:
