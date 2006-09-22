@@ -156,6 +156,7 @@ Time to start a requirement list.
 #include <ktoolinvocation.h>
 #include <kurlrequesterdlg.h>
 #include <netwm.h>
+#include <knotifyconfigwidget.h>
 
 // Konsole
 #include "TerminalCharacterDecoder.h"
@@ -1999,7 +2000,7 @@ void Konsole::slotSaveSettings()
 
 void Konsole::slotConfigureNotifications()
 {
-   KNotifyDialog::configure(this, "Notification Configuration Dialog");
+	KNotifyConfigWidget::configure(this);
 }
 
 void Konsole::slotConfigureKeys()
