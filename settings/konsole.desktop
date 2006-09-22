@@ -6,7 +6,11 @@ Exec=kcmshell konsole
 DocPath=kcontrol/kcmkonsole/index.html
 
 X-KDE-Library=konsole
+X-KDE-FactoryName=konsole
 X-KDE-ParentApp=kcontrol
+
+ServiceTypes=KCModule
+
 Name=Konsole
 Name[x-test]=xxKonsolexx
 Comment=Konsole configuration module

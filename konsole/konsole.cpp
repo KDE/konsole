@@ -2050,7 +2050,7 @@ void Konsole::slotConfigureKeys()
 void Konsole::slotConfigure()
 {
   QStringList args;
-  args << "kcmkonsole";
+  args << "konsole";
   KToolInvocation::kdeinitExec( "kcmshell", args );
 }
 
