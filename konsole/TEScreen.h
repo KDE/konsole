@@ -415,6 +415,8 @@ private: // helper
     // modes
 
     ScreenParm saveParm;
+
+    static ca defaultChar;
 };
 
 #endif // TESCREEN_H

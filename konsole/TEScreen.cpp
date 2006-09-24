@@ -52,6 +52,9 @@
 #define loc(X,Y) ((Y)*columns+(X))
 #endif
 
+
+ca TEScreen::defaultChar = ca(' ',cacol(CO_DFT,DEFAULT_FORE_COLOR),cacol(CO_DFT,DEFAULT_BACK_COLOR),DEFAULT_RENDITION);
+
 //#define REVERSE_WRAPPED_LINES  // for wrapped line debug
 
 /*! creates a `TEScreen' of `lines' lines and `columns' columns.
@@ -542,8 +545,7 @@ ca* TEScreen::getCookedImage()
 
   int x,y;
   ca* merged = (ca*)malloc((lines*columns+1)*sizeof(ca));
-  ca dft(' ',cacol(CO_DFT,DEFAULT_FORE_COLOR),cacol(CO_DFT,DEFAULT_BACK_COLOR),DEFAULT_RENDITION);
-  merged[lines*columns] = dft;
+  merged[lines*columns] = defaultChar;
 
   for (y = 0; (y < lines) && (y < (hist->getLines()-histCursor)); y++)
   {
@@ -551,7 +553,7 @@ ca* TEScreen::getCookedImage()
     int yp  = y*columns;
 
     hist->getCells(y+histCursor,0,len,merged+yp);
-    for (x = len; x < columns; x++) merged[yp+x] = dft;
+    for (x = len; x < columns; x++) merged[yp+x] = defaultChar;
     if (sel_begin !=-1)
     for (x = 0; x < columns; x++)
       {
@@ -574,7 +576,7 @@ ca* TEScreen::getCookedImage()
        for (x = 0; x < columns; x++)
        { int p = x + yp; int r = x + yr;
 
-         merged[p] = screenLines[r/columns].value(r%columns,dft);
+         merged[p] = screenLines[r/columns].value(r%columns,defaultChar);
 
 #ifdef REVERSE_WRAPPED_LINES
          if (lineProperties[y- hist->getLines() +histCursor] & LINE_WRAPPED)
@@ -787,7 +789,7 @@ void TEScreen::ShowCharacter(unsigned short c)
   }
 
   ca& currentChar = screenLines[cuY][cuX];
-  
+
   currentChar.c = c;
   currentChar.f = ef_fg;
   currentChar.b = ef_bg;
@@ -800,7 +802,10 @@ void TEScreen::ShowCharacter(unsigned short c)
   while(w)
   {
      i++;
-
+   
+     if ( screenLines[cuY].size() < cuX + i + 1 )
+         screenLines[cuY].resize(cuX+i+1);
+     
      ca& ch = screenLines[cuY][cuX + i];
      ch.c = 0;
      ch.f = ef_fg;
