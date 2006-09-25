@@ -270,10 +270,7 @@ void TEScreen::deleteChars(int n)
   if (n == 0) n = 1; // Default
   if (n > columns) n = columns - 1;
   int p = qMax(0,qMin(cuX+n,columns-1));
-
-  //##  moveImage(loc(cuX,cuY),loc(p,cuY),loc(columns-1,cuY));
-
-  screenLines[cuY].remove(cuX,p-cuX);
+  
   clearImage(loc(columns-n,cuY),loc(columns-1,cuY),' ');
 }
 
@@ -289,7 +286,6 @@ void TEScreen::insertChars(int n)
   int q = qMax(0,qMin(cuX+n,columns-1));
 
   screenLines[cuY].insert(cuX,q-cuX,ca());
- //## moveImage(loc(q,cuY),loc(cuX,cuY),loc(p,cuY));
   clearImage(loc(cuX,cuY),loc(q-1,cuY),' ');
 }
 
