@@ -27,13 +27,21 @@
 #include <kapplication.h>
 #include <QWidget>
 
-#include "sessiondialog.h"
+#include "ui_sessiondialog.h"
+
+class SessionDialog : public QWidget, public Ui::SessionDialog
+{
+public:
+  SessionDialog( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
 
 class SessionEditor : public SessionDialog
 {
   Q_OBJECT 
   public:
-    SessionEditor(QWidget* parent=0, const char *name=0);
+    SessionEditor(QWidget* parent=0);
     ~SessionEditor();
  
     bool isModified() const { return sesMod; }

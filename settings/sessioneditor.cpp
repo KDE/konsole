@@ -49,8 +49,8 @@ class SessionListBoxText : public Q3ListBoxText
     QString m_filename;
 };
 
-SessionEditor::SessionEditor(QWidget * parent, const char *name)
-:SessionDialog(parent, name)
+SessionEditor::SessionEditor(QWidget * parent)
+:SessionDialog(parent)
 {
   sesMod=false;
   oldSession=-1;
