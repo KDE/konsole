@@ -46,18 +46,9 @@
 
 #include "session.h"
 
-/*! \class TESession
 
-    Sessions are combinations of TEPTy and Emulations.
-
-    The stuff in here does not belong to the terminal emulation framework,
-    but to main.cpp. It serves it's duty by providing a single reference
-    to TEPTy/Emulation pairs. In fact, it is only there to demonstrate one
-    of the abilities of the framework - multiple sessions.
-*/
-
-TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _args, const QString &_term, ulong _winId, const QString &_sessionId, const QString &_initial_cwd)
-   : sh(0)
+TESession::TESession() : 
+     sh(0)
    , te(0)
    , em(0)
    , connected(true)
@@ -71,17 +62,82 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _ar
    , font_no(3)
    , silence_seconds(10)
    , add_to_utmp(true)
-   , xon_xoff(false)
+   , xon_xoff(true)
    , fullScripting(false)
-   , pgm(_pgm)
-   , args(_args)
-   , sessionId(_sessionId)
-   , cwd("")
-   , initial_cwd(_initial_cwd)
+   , sessionId(0)
    , zmodemBusy(false)
    , zmodemProc(0)
    , zmodemProgress(0)
    , encoding_no(0)
+{
+    //prepare DBus communication
+    (void)new SessionAdaptor(this);
+    	
+    QDBusConnection::sessionBus().registerObject(QLatin1String("/Session"), this);
+	QDBusConnection::sessionBus().registerService("org.kde.konsole");
+
+    //create teletype for I/O with shell process
+    sh = new TEPty();
+
+    //create emulation backend
+    em = new TEmuVt102();
+
+    connect( em, SIGNAL( changeTitle( int, const QString & ) ),
+           this, SLOT( setUserTitle( int, const QString & ) ) );
+    connect( em, SIGNAL( notifySessionState(int) ),
+           this, SLOT( notifySessionState(int) ) );
+    connect( em, SIGNAL( zmodemDetected() ), this, SLOT(slotZModemDetected()));
+    connect( em, SIGNAL( changeTabTextColor( int ) ),
+           this, SLOT( changeTabTextColor( int ) ) );
+
+   
+    //connect teletype to emulation backend 
+    sh->useUtf8(em->utf8());
+    
+    connect( sh,SIGNAL(block_in(const char*,int)),this,SLOT(onRcvBlock(const char*,int)) );
+    connect( em,SIGNAL(sndBlock(const char*,int)),sh,SLOT(send_bytes(const char*,int)) );
+    connect( em,SIGNAL(lockPty(bool)),sh,SLOT(lockPty(bool)) );
+    connect( em,SIGNAL(useUtf8(bool)),sh,SLOT(useUtf8(bool)) );
+
+    
+    connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
+ 
+    //setup timer for monitoring session activity
+    monitorTimer = new QTimer(this);
+    connect(monitorTimer, SIGNAL(timeout()), this, SLOT(monitorTimerDone()));
+
+    //TODO: Investigate why a single-shot timer is used here 
+    if (!sh->error().isEmpty())
+        QTimer::singleShot(0, this, SLOT(ptyError()));
+}
+
+void TESession::setProgram(const QString& program)
+{
+    pgm = program;
+}
+
+void TESession::setArguments(const QStringList& arguments)
+{
+    args = arguments;
+}
+
+/*! \class TESession
+
+    Sessions are combinations of TEPTy and Emulations.
+
+    The stuff in here does not belong to the terminal emulation framework,
+    but to main.cpp. It serves it's duty by providing a single reference
+    to TEPTy/Emulation pairs. In fact, it is only there to demonstrate one
+    of the abilities of the framework - multiple sessions.
+*/
+
+#if 0
+TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _args, const QString &_term, ulong _winId, const QString &_sessionId, const QString &_initial_cwd)
+   : TESession()
+   , pgm(_pgm)
+   , args(_args)
+   , sessionId(_sessionId)
+   , initial_cwd(_initial_cwd)
 {
 	(void)new SessionAdaptor(this);
 	QDBusConnection::sessionBus().registerObject(QLatin1String("/Session")/*"/sessions/"+_sessionId*/, this);
@@ -131,6 +187,7 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _ar
   if (!sh->error().isEmpty())
      QTimer::singleShot(0, this, SLOT(ptyError()));
 }
+#endif
 
 void TESession::ptyError()
 {
@@ -160,6 +217,20 @@ void TESession::addView(TEWidget* widget)
 
     if ( em != 0 )
         em->addView(widget);
+
+    //temporary test
+    //if this is the first view then connect its resizing events
+    //to resizing of the emulation
+    if ( _views.count() == 1 )
+    {
+        font_h = primaryView()-> fontHeight();
+        font_w = primaryView()-> fontWidth();
+        QObject::connect(primaryView(),SIGNAL(changedContentSizeSignal(int,int)),
+                   this,SLOT(onContentSizeChange(int,int)));
+        QObject::connect(primaryView(),SIGNAL(changedFontMetricSignal(int,int)),
+                   this,SLOT(onFontMetricChange(int,int)));
+
+    }
 }
 
 void TESession::removeView(TEWidget* widget)
@@ -194,6 +265,12 @@ void TESession::changeWidget(TEWidget* w)
 
 void TESession::run()
 {
+  //check that everything is in place to run the session
+  if (pgm.isEmpty())
+      kDebug() << "TESession::run() - program to run not set." << endl;
+  if (args.isEmpty())
+      kDebug() << "TESession::run() - no command line arguments specified." << endl;
+  
   // Upon a KPty error, there is no description on what that error was...
   // Check to see if the given program is executable.
   QString exec = QFile::encodeName(pgm);

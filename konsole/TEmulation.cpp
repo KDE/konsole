@@ -103,9 +103,7 @@
 /*!
 */
 
-TEmulation::TEmulation(TEWidget* w)
-: //gui(w),
-  //gui(0),
+TEmulation::TEmulation() :
   scr(0),
   connected(false),
   listenToKeyPress(false),
@@ -115,16 +113,14 @@ TEmulation::TEmulation(TEWidget* w)
   m_findPos(-1)
 {
 
-  screen[0] = new TEScreen(w->Lines(),w->Columns());
-  screen[1] = new TEScreen(w->Lines(),w->Columns());
+  //initialize screens with a default size
+  screen[0] = new TEScreen(40,80);
+  screen[1] = new TEScreen(40,80);
   scr = screen[0];
 
   QObject::connect(&bulk_timer1, SIGNAL(timeout()), this, SLOT(showBulk()) );
   QObject::connect(&bulk_timer2, SIGNAL(timeout()), this, SLOT(showBulk()) );
-  
-  addView(w);
-  //connectGUI();
-  
+   
   setKeymap(0); // Default keymap
 }
 
@@ -527,6 +523,7 @@ void TEmulation::addView(TEWidget* widget)
 {
     Q_ASSERT( !_views.contains(widget) );
     _views << widget;
+
     connectView(widget);
 }
 

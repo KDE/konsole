@@ -1046,7 +1046,14 @@ void konsolePart::startProgram( const QString& program,
                                 const QStringList& args )
 {
   if ( se ) delete se;
-  se = new TESession(te, program, args, "xterm", parentWidget->winId());
+
+#warning "Add setup for TESession" 
+  se = new TESession();
+  se->setProgram(program);
+  se->setArguments(args);
+  se->addView(te);
+
+//  se = new TESession(te, program, args, "xterm", parentWidget->winId());
   connect( se,SIGNAL(done(TESession*)),
            this,SLOT(doneSession(TESession*)) );
   connect( se,SIGNAL(openUrlRequest(const QString &)),

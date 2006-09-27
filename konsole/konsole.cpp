@@ -2765,7 +2765,6 @@ void Konsole::setDefaultSession(const QString &filename)
   m_defaultSession = new KSimpleConfig(KStandardDirs::locate("appdata", filename), true /* read only */);
   m_defaultSession->setDesktopGroup();
   b_showstartuptip = m_defaultSession->readEntry("Tips", QVariant(true)).toBool();
-
   m_defaultSessionFilename=filename;
 }
 
@@ -2937,7 +2936,12 @@ QString Konsole::newSession(KSimpleConfig *co, QString program, const QStringLis
   te->setMinimumSize(150,70);
 
   QString sessionId="session_"+QString::number(++sessionIdCounter);
-  TESession* s = new TESession(te, QFile::encodeName(program),cmdArgs,emu,winId(),sessionId,cwd);
+
+  TESession* s = new TESession();
+  s->setProgram( QFile::encodeName(program) );
+  s->setArguments( cmdArgs );
+  s->setWorkingDirectory( cwd );
+  s->addView(te);
   
   if ( co )
     sessionConfigMap[s] = co;
@@ -3313,7 +3317,23 @@ void Konsole::initHistory(int lines, bool enable)
 
 void Konsole::slotToggleMasterMode()
 {
-  setMasterMode( masterMode->isChecked() );
+  if ( masterMode->isChecked() )
+  {
+      if ( KMessageBox::warningYesNo( this , 
+                  i18n("Enabling this option will cause each key press to be sent to all running"
+                      " sessions.  Are you sure you want to continue?") ,
+                  i18n("Send Input to All Sessions"), 
+                  KStdGuiItem::yes() , 
+                  KStdGuiItem::no(),
+                  i18n("Remember my answer and do not ask again.")) == KMessageBox::Yes )
+      {
+        setMasterMode( masterMode->isChecked() );
+      }
+      else
+      {
+        masterMode->setChecked(false);
+      }
+  }
 }
 
 void Konsole::setMasterMode(bool _state, TESession* _se)

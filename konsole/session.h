@@ -35,16 +35,24 @@ class KProcIO;
 class KProcess;
 class ZModemDialog;
 
+/**
+ * TESession represents a Konsole session.
+ * This consists of a pseudo-teletype (or PTY) which handles I/O between the terminal
+ * process and Konsole, and a terminal emulation ( TEmulation and subclasses ) which
+ * processes the output stream from the PTY and produces a character image which
+ * is then shown on displays which are connected to the session.
+ *
+ * Each TESession can be connected to one or more views by using the addView() method.
+ * The attached views can then display output from the program running in the terminal
+ * or send input to the program in the terminal in the form of keypresses and mouse
+ * activity.
+ */
 class TESession : public QObject
 { Q_OBJECT
 
 public:
 
-  TESession(TEWidget* w,
-            const QString &pgm, const QStringList & _args,
-	    const QString &term, ulong winId, const QString &sessionId="session-1",
-	    const QString &initial_cwd = QString());
-
+  TESession();
   ~TESession();
 
   TEWidget* widget() { Q_ASSERT( primaryView() ) ; return primaryView(); }
@@ -117,11 +125,27 @@ public:
   QStringList getArgs();
   QString getPgm();
 
+  /** 
+   * Sets the command line arguments which the session's program will be passed when
+   * run() is called.
+   */
+  void setArguments(const QStringList& arguments);
+  /** Sets the program to be executed when run() is called. */
+  void setProgram(const QString& program);
+
   /** Returns the session's current working directory. */
   QString getCwd();
   QString getInitial_cwd() { return initial_cwd; }
-  void setInitial_cwd(const QString& _cwd) { initial_cwd=_cwd; }
+  
+  /** 
+   * Sets the initial working directory for the session when it is run 
+   * This has no effect once the session has been started.
+   */
+  void setWorkingDirectory( const QString& dir ) { initial_cwd = dir; }
+  //void setInitial_cwd(const QString& _cwd) { initial_cwd=_cwd; }
 
+  
+  
   void setHistory(const HistoryType&);
   const HistoryType& history();
 

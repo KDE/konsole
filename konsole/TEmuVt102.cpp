@@ -87,11 +87,10 @@
 /*!
 */
 
-TEmuVt102::TEmuVt102(TEWidget* gui) : TEmulation(gui)
+TEmuVt102::TEmuVt102() : TEmulation()
 {
   titleUpdateTimer.setSingleShot(true);
 
-  setReceiveViewInput(gui,true);  
   QObject::connect(&titleUpdateTimer , SIGNAL(timeout()) , this , SLOT(updateTitle()));
 
   initTokenizer();

@@ -58,7 +58,9 @@ class TEmulation : public QObject
 public:
   
   //Construct a new emulation and adds connects it to the view 'gui'
-  TEmulation(TEWidget* gui);
+ 
+   TEmulation();
+  // TEmulation(TEWidget* gui);
   ~TEmulation();
 
   /** 

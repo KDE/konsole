@@ -73,8 +73,8 @@ class TEmuVt102 : public TEmulation
 
 public:
 
-  /** Constructs a new emulation and connects to the view @p gui*/
-  TEmuVt102(TEWidget* gui);
+  /** Constructs a new emulation */
+  TEmuVt102();
   ~TEmuVt102();
 
   /** Reimplemented to enable handling of mouse input from the view */
