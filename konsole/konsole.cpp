@@ -202,7 +202,7 @@ template class Q3PtrDict<KToggleAction>;
 #define DEFAULT_HISTORY_SIZE 1000
 
 Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bool frameon, bool scrollbaron,
-                 Q3CString type, bool b_inRestore, const int wanted_tabbar, const QString &workdir )
+                 const QString &type, bool b_inRestore, const int wanted_tabbar, const QString &workdir )
 :KMainWindow(0)
 ,m_defaultSession(0)
 ,m_defaultSessionFilename("")

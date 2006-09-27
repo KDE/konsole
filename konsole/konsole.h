@@ -84,7 +84,7 @@ public:
 
   Konsole(const char * name, int histon, bool menubaron, bool tabbaron,
     bool frameon, bool scrollbaron,
-    Q3CString type = 0, bool b_inRestore = false, const int wanted_tabbar = 0,
+    const QString &type = "", bool b_inRestore = false, const int wanted_tabbar = 0,
     const QString &workdir=QString());
 
   ~Konsole();
