@@ -21,7 +21,6 @@
 #ifndef KWRITED_H
 #define KWRITED_H
 
-#include <q3textedit.h>
 #include <kdedmodule.h>
 #include <QTextEdit>
 #include <QMenu>
