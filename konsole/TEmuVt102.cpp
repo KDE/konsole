@@ -117,8 +117,6 @@ void TEmuVt102::setReceiveViewInput(TEWidget* view , bool enable)
 
 void TEmuVt102::addView(TEWidget* view)
 {
-    kDebug() << __FUNCTION__ << endl;
-
     TEmulation::addView(view);
     setReceiveViewInput(view,true);
 }

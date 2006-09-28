@@ -40,7 +40,8 @@ set(konsole_KDEINIT_SRCS
    sessionadaptor.cpp
    konsolescriptingadaptor.cpp
    sessionscriptingadaptor.cpp 
-   TerminalCharacterDecoder.cpp )
+   TerminalCharacterDecoder.cpp
+   SessionManager.cpp )
 #   SessionTabWidget.cpp )
 #   OverlayFrame.cpp )
 
@@ -49,13 +50,17 @@ kde4_automoc(${konsole_KDEINIT_SRCS})
 
 kde4_add_kdeinit_executable( konsole ${konsole_KDEINIT_SRCS})
 
-target_link_libraries(kdeinit_konsole ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KDEPRINT_LIBS} ${QT_QTXML_LIBRARY} knotifyconfig )
+target_link_libraries(kdeinit_konsole  ${KDE4_KDEPRINT_LIBS} ${QT_QTXML_LIBRARY} knotifyconfig )
+
+# target_link_libraries(kdeinit_konsole ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KDEPRINT_LIBS} ${QT_QTXML_LIBRARY} knotifyconfig )
+
 if(X11_XTest_FOUND)
   target_link_libraries(kdeinit_konsole ${X11_XTest_LIB} )
 endif(X11_XTest_FOUND)
 
 install(TARGETS kdeinit_konsole  DESTINATION ${LIB_INSTALL_DIR} )
 
+    
 target_link_libraries( konsole kdeinit_konsole )
 install(TARGETS konsole DESTINATION ${BIN_INSTALL_DIR})
 
@@ -79,7 +84,8 @@ set(konsolepart_PART_SRCS
    TEmulation.cpp 
    TEHistory.cpp 
    keytrans.cpp 
-   TerminalCharacterDecoder.cpp )
+   TerminalCharacterDecoder.cpp
+   SessionManager.cpp )
   # OverlayFrame.cpp )
 
 kde4_automoc(${konsolepart_PART_SRCS})

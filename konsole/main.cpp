@@ -46,6 +46,7 @@
 #include <kauthorized.h>
 
 #include "konsole.h"
+#include "SessionManager.h"
 
 // COMPOSITE disabled by default because the QApplication constructor
 // needed to enable the ARGB32 visual has undesired side effects.
@@ -502,7 +503,14 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         n_tabbar = qMin(sessionconfig->readEntry("tabbar", QVariant(Konsole::TabBottom)).toUInt(), 2u);
         Konsole *m = new Konsole(wname,histon,menubaron,tabbaron,frameon,scrollbaron,0/*type*/,true,n_tabbar, workDir);
 
-        m->newSession(sPgm, eargs, sTerm, sIcon, sTitle, sCwd);
+
+        SessionManager* sessionManager = new SessionManager();
+        m->setSessionManager(sessionManager);
+
+        kDebug() << "WARNING:  Not using appropriate properties for new session" << endl;
+        m->newSession( sessionManager->defaultSessionType() );
+        
+        //m->newSession(sPgm, eargs, sTerm, sIcon, sTitle, sCwd);
 
 //        m->enableFullScripting(full_script);
         m->enableFixedSize(fixed_size);
@@ -550,7 +558,12 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
           sIcon = sessionconfig->readEntry(key,QString("konsole"));
           key = QString("Cwd%1").arg(counter);
           sCwd = sessionconfig->readPathEntry(key);
-          m->newSession(sPgm, eargs, sTerm, sIcon, sTitle, sCwd);
+          
+          //TODO: Make use of command, program type, icon etc. here
+          m->newSession();
+          
+          //m->newSession(sPgm, eargs, sTerm, sIcon, sTitle, sCwd);
+          
           m->setSessionTitle(sTitle);  // Use title as is
           key = QString("Schema%1").arg(counter);
           m->setSchema(sessionconfig->readEntry(key, QString()));
@@ -604,7 +617,15 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   else
   {
     Konsole*  m = new Konsole(wname,histon,menubaron,tabbaron,frameon,scrollbaron,type, false, 0, workDir);
-    m->newSession((shell ? QFile::decodeName(shell) : QString()), eargs, term, QString(), title, workDir);
+
+   SessionManager* sessionManager = new SessionManager();
+   m->setSessionManager(sessionManager);
+
+   kDebug() <<  "* WARNING - Code to create new session not done yet" << endl;
+   //TODO : Make use of session properties
+   m->newSession();
+   
+ //   m->newSession((shell ? QFile::decodeName(shell) : QString()), eargs, term, QString(), title, workDir);
 //    m->enableFullScripting(full_script);
     m->enableFixedSize(fixed_size);
 

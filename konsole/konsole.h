@@ -72,6 +72,9 @@ class KTabWidget;
 class KTempFile;
 class KToggleAction;
 
+class SessionInfo;
+class SessionManager;
+
 // Defined in main.C
 const char *konsole_shell(QStringList &args);
 
@@ -99,7 +102,7 @@ public:
   void initMasterMode(bool on);
   void initTabColor(QColor color);
   void initHistory(int lines, bool enable);
-  void newSession(const QString &program, const QStringList &args, const QString &term, const QString &icon, const QString &title, const QString &cwd);
+//  void newSession(const QString &program, const QStringList &args, const QString &term, const QString &icon, const QString &title, const QString &cwd);
   void setSchema(const QString & path);
   void setEncoding(int);
   void setSessionTitle(QString&, TESession* = 0);
@@ -115,7 +118,8 @@ public:
   int sessionCount() { return sessions.count(); }
 
   QString currentSession();
-  QString newSession(const QString &type);
+  void newSession(const QString &type);
+  TESession* newSession(SessionInfo* type);
   QString sessionId(const int position);
 
   void activateSession(const QString& sessionId);
@@ -128,6 +132,11 @@ public:
   enum TabPosition { TabNone, TabTop, TabBottom };
   enum TabViewModes { ShowIconAndText = 0, ShowTextOnly = 1, ShowIconOnly = 2 };
 
+  /** Sets a session manager used to create and manage running sessions in this widget */
+  void setSessionManager(SessionManager* manager);
+  /** Returns the active session manager */
+  SessionManager* sessionManager();
+
 public Q_SLOTS:
   void activateSession(int position);
   void activateSession(QWidget*);
@@ -138,7 +147,7 @@ public Q_SLOTS:
   void slotSetSessionSchema(TESession *session, const QString &schema);
 
   void makeGUI();
-  QString newSession();
+  void newSession();
 
 protected:
 
@@ -167,8 +176,9 @@ private Q_SLOTS:
   void attachSession(TESession*);
   void slotDetachSession();
   void bookmarks_menu_check();
-  void newSession(int kind);
-  void newSessionTabbar(int kind);
+  
+  void slotNewSessionAction(QAction* action);
+  
   void updateSchemaMenu();
   void updateKeytabMenu();
 
@@ -266,9 +276,9 @@ private Q_SLOTS:
   void slotSetEncoding();
 private:
   KSimpleConfig *defaultSession();
-  QString newSession(KSimpleConfig *co, QString pgm = QString(), const QStringList &args = QStringList(),
+/*  QString newSession(KSimpleConfig *co, QString pgm = QString(), const QStringList &args = QStringList(),
                      const QString &_term = QString(), const QString &_icon = QString(),
-                     const QString &_title = QString(), const QString &_cwd = QString());
+                     const QString &_title = QString(), const QString &_cwd = QString()); */
   void readProperties(KConfig *config, const QString &schema, bool globalConfigOnly);
   void applySettingsToGUI();
   void makeTabWidget();
@@ -283,7 +293,7 @@ private:
   void setMasterMode(bool _state, TESession* _se=0);
 
   void buildSessionMenus();
-  void addSessionCommand(const QString & path);
+  void addSessionCommand( SessionInfo* info );
   void loadSessionCommands();
   void createSessionMenus();
   void addScreenSession(const QString & path, const QString & socket);
@@ -307,8 +317,6 @@ private:
   //stores association between sessions and the configuration
   //entry used to create it
   QHash<TESession*,KSimpleConfig*> sessionConfigMap;
-
-  Q3IntDict<KSimpleConfig> no2command;     //QT4 - convert to QList
 
   QList<KTempFile*> tempfiles;
   KSimpleConfig* m_defaultSession;
@@ -449,7 +457,6 @@ private:
   bool        b_allowResize:1; // Whether application may resize
   bool        b_fixedSize:1; // Whether user may resize
   bool        b_addToUtmp:1;
-  bool        b_xonXoff:1;
   bool        b_bidiEnabled:1;
 
   bool        b_histEnabled:1;
@@ -473,6 +480,8 @@ private:
   QString  s_workDir;
 
   QColor    m_tabColor;
+
+  SessionManager* _sessionManager;
 };
 
 class QSpinBox;

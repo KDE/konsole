@@ -3,6 +3,8 @@
 
 class KSimpleConfig;
 
+class TESession;
+
 /** 
  * Provides information about a type of 
  * session, including the title of the session
@@ -14,7 +16,7 @@ class KSimpleConfig;
  * isAvailable() method is called.
  * 
  */ 
-class SessionInfo
+class SessionInfo 
 {
 public:
     /** 
@@ -27,14 +29,6 @@ public:
     SessionInfo(const QString& path);
 
     ~SessionInfo();
-
-    /**
-     * Constructs a new SessionInfo to provide
-     * information on a session type.
-     *
-     * @p config Specifies the configuration information loaded from a .desktop file to use
-     */
-//    SessionInfo(const KConfig* config);
     
     /** 
      * Returns the path to the session's
@@ -53,7 +47,7 @@ public:
      * Returns the command that will be executed
      * when the session is run
      *
-     * @p stripSu For commands of the form
+     * @param stripSu For commands of the form
      * "su -flags 'commandname'", specifies whether
      * to return the whole command string or just
      * the 'commandname' part
@@ -61,8 +55,19 @@ public:
      * eg.  If the command string is 
      * "su -c 'screen'", command(true) will
      * just return "screen"
+     *
+     * @param stripArguments Specifies whether the arguments should be 
+     * removed from the returned string.  Anything after the first space
+     * character in the command string is considered an argument 
      */
-    QString command(bool stripSu) const;
+    QString command(bool stripSu , bool stripArguments = true) const;
+    
+    /** 
+     * Extracts the arguments from the command string for this session.  The first
+     * argument is always the command name
+     */
+    QStringList arguments() const;
+    
     /** 
      * Returns true if the session will run as
      * root
@@ -78,15 +83,39 @@ public:
      */
     bool isAvailable() const;
 
+    /** 
+     * Returns the terminal-type string which is made available to 
+     * programs running in sessions of this type via the $TERM environment variable.
+     *
+     * This defaults to "xterm"
+     */
     QString terminal() const;
+
+    /** Returns the path of the default keyboard setup file for sessions of this type */
     QString keyboardSetup() const;
+
+    /** Returns the path of the default colour scheme for sessions of this type */
     QString colorScheme() const;
-    QFont defaultFont() const;
+
+    /** 
+     * Returns the default font for sessions of this type.
+     * If no font is specified in the session's configuration file, @p font will be returned.
+     */
+    QFont defaultFont( const QFont& font ) const;
+
+    /** Returns the default working directory for sessions of this type */
     QString defaultWorkingDirectory() const;
 
+    /** 
+     * Returns the text that should be displayed in menus or in other UI widgets
+     * which are used to create new instances of this type of session
+     */
+    QString newSessionText() const;
+    
 private:
     KConfig* _config;
-}
+    QString  _path;
+};
 
 /** 
  * Creates new terminal sessions using information in configuration files.  
@@ -94,17 +123,22 @@ private:
  * availableSessionTypes().  Call createSession() to create a new session.  
  * The session will automatically notify the SessionManager when it finishes running.  
  */ 
-class SessionManager 
+class SessionManager : public QObject
 {
+Q_OBJECT 
+
 public:
-    ~SessionManager();
-   
+    SessionManager();
+    virtual ~SessionManager();
+    
     /**
      * Returns a list of session information
      * objects which describe the kinds
      * of session which are available
      */
-    QList<SessionInfo> availableSessionTypes();
+    QList<SessionInfo*> availableSessionTypes();
+
+    SessionInfo* defaultSessionType();
     
     /** 
      * Creates a new session of the specified type.
@@ -132,8 +166,10 @@ protected Q_SLOTS:
     void sessionTerminated( TESession* session );
 
 private:
-    QList<SessionInfo> _types; 
+    QList<SessionInfo*> _types; 
     QList<TESession*> _sessions;
+
+    SessionInfo* _defaultSessionType;
 };
 
 #endif //SESSIONMANAGER_H

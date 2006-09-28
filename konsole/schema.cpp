@@ -299,7 +299,7 @@ bool ColorSchema::rereadSchemaFile(bool readTitleOnly)
      return false;
 
 
-  kDebug() << __FUNCTION__ << ": called to read schema file - " << fPath << ", readTitleOnly = " << readTitleOnly << endl;
+  //kDebug() << __FUNCTION__ << ": called to read schema file - " << fPath << ", readTitleOnly = " << readTitleOnly << endl;
 
   //KONSOLEDEBUG << "Rereading schema file " << fPath << endl;
 
