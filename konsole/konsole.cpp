@@ -2837,8 +2837,7 @@ TESession* Konsole::newSession(SessionInfo* type)
     }
 
     //create a session and attach the display to it
-    TESession* session = sessionManager()->createSession( type->path() , 
-                                                          type->defaultWorkingDirectory() );
+    TESession* session = sessionManager()->createSession( type->path() );
    
     session->setAddToUtmp(b_addToUtmp);
     session->setXonXoff(true);
@@ -2934,8 +2933,12 @@ void Konsole::newSession(const QString& sURL, const QString& /*title*/)
 
     //TODO - Make use of session properties here
 
-    Q_ASSERT( 0 /* WARNING - New Session from URL Not Enabled Yet */ );
-    
+    sessionManager()->addSetting( SessionManager::InitialWorkingDirectory , 
+                                  SessionManager::SingleShot ,
+                                  path );
+   
+    newSession();
+
    /* newSession(co, QString(), QStringList(), QString(), QString(),
         title.isEmpty() ? path : title, path);*/
     return;

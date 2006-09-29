@@ -1,8 +1,11 @@
 #ifndef SESSIONMANAGER_H
 #define SESSIONMANAGER_H
 
-class KSimpleConfig;
 
+#include <QVariant>
+#include <QList>
+
+class KSimpleConfig;
 class TESession;
 
 /** 
@@ -130,6 +133,27 @@ Q_OBJECT
 public:
     SessionManager();
     virtual ~SessionManager();
+   
+    /** document me */
+    enum Setting
+    {
+        Font                     = 0,
+        InitialWorkingDirectory  = 1
+    };
+
+    /** document me */
+
+    //The values of these settings are significant, higher priority sources
+    //have higher values
+    enum Source
+    {
+        ApplicationDefault  = 0,
+        GlobalConfig        = 1,
+        SessionConfig       = 2,
+        Commandline         = 3,
+        Action              = 4,
+        SingleShot          = 5
+    };
     
     /**
      * Returns a list of session information
@@ -138,20 +162,58 @@ public:
      */
     QList<SessionInfo*> availableSessionTypes();
 
+    /** 
+     * Returns a SessionInfo object describing the default type of session, as
+     * which is created if createSession() is called with an empty configPath
+     */
     SessionInfo* defaultSessionType();
     
+    /**
+     * 
+     * Adds a setting which will be considered when creating new sessions.
+     * Each setting ( such as terminal font , initial working directory etc. )
+     * can be specified by multiple different sources.  The 
+     *
+     * For example, the working directory in which a new session starts is specified
+     * in the configuration file for that session type, but can be overridden
+     * by creating a new session from a bookmark or specifying what to use on
+     * the command line.
+     * 
+     * The active value for a setting (ie. the one which will actually be used when
+     * creating the session) can be found using activeSetting()
+     * 
+     * @p setting The setting to change
+     * @p source Specifies where the setting came from.  
+     * @p value The new value for this setting,source pair
+     */
+    void addSetting( Setting setting , Source source , const QVariant& value );
+   
+
     /** 
-     * Creates a new session of the specified type.
+     * Returns the value for a particular setting which will be used
+     * when a new session is created.
+     *
+     * Values for settings come from different places, such as the command-line,
+     * config files and menu options.
+     *
+     * The active setting is the value for the setting which comes from the source
+     * with the highest priority.  For example, a setting specified on the command-line
+     * when Konsole is launched will take priority over a setting specified in a 
+     * configuration file.
+     */
+    QVariant activeSetting( Setting setting ) const; 
+    
+    /** 
+     * Creates a new session of the specified type, using the settings specified
+     * using addSetting() and from the configuration file for this session type.
+     *
      * The new session has no views associated with it.  A new TEWidget view
      * must be created in order to display the output from the terminal session.
      *
      * @param type Specifies the type of session to create.  Passing an empty
      *             string will create a session using the default configuration.
-     * @param initialDir Specifies the initial working directory for the new 
-     *        session.  This may be an empty string, in which case the default
-     *        directory 
      */
-    TESession* createSession(QString configPath = QString() , const QString& initialDir = QString());
+    TESession* createSession(QString configPath = QString());
     
     /**
      * Returns a list of active sessions.
@@ -166,10 +228,18 @@ protected Q_SLOTS:
     void sessionTerminated( TESession* session );
 
 private:
+    //fills the settings store with the settings from the session config file 
+    void pushSessionSettings( const SessionInfo*  info );
+    
     QList<SessionInfo*> _types; 
     QList<TESession*> _sessions;
 
     SessionInfo* _defaultSessionType;
+
+
+    typedef QPair<Source,QVariant> SourceVariant;
+    
+    QHash< Setting , QList< SourceVariant > >  _settings;
 };
 
 #endif //SESSIONMANAGER_H

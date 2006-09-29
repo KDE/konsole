@@ -184,7 +184,12 @@ SessionManager::~SessionManager()
         delete infoIter.next();
 }
 
-TESession* SessionManager::createSession(QString configPath , const QString& initialDir)
+void SessionManager::pushSessionSettings( const SessionInfo* info )
+{
+    addSetting( InitialWorkingDirectory , SessionConfig , info->defaultWorkingDirectory() );
+}
+
+TESession* SessionManager::createSession(QString configPath )
 {
     TESession* session = 0;
 
@@ -201,22 +206,20 @@ TESession* SessionManager::createSession(QString configPath , const QString& ini
 
         if ( info->path() == configPath )
         {
+            //supply settings from session config
+            pushSessionSettings( info );
+
             //configuration information found, create a new session based on this
             session = new TESession();
 
             QListIterator<QString> iter(info->arguments());
             while (iter.hasNext())
                 kDebug() << "running " << info->command(false) << ": argument " << iter.next() << endl;
-            
+           
+            session->setWorkingDirectory( activeSetting(InitialWorkingDirectory).toString() ); 
             session->setProgram( info->command(false) );
             session->setArguments( info->arguments() );
             
-            //use initial directory 
-            if ( initialDir.isEmpty() )
-                session->setWorkingDirectory( info->defaultWorkingDirectory() );
-            else
-                session->setWorkingDirectory( initialDir );
-
             session->setTitle( info->name() );
             session->setIconName( info->icon() );
             
@@ -250,6 +253,36 @@ QList<SessionInfo*> SessionManager::availableSessionTypes()
 SessionInfo* SessionManager::defaultSessionType()
 {
     return _defaultSessionType;
+}
+
+
+void SessionManager::addSetting( Setting setting, Source source, const QVariant& value)
+{
+    _settings[setting] << SourceVariant(source,value);
+}
+
+QVariant SessionManager::activeSetting( Setting setting ) const
+{
+    QListIterator<SourceVariant>  sourceIter( _settings[setting] );
+
+    
+    Source highestPrioritySource = ApplicationDefault;
+    QVariant value;
+    
+    while (sourceIter.hasNext())
+    {
+        QPair<Source,QVariant> sourceSettingPair = sourceIter.next();
+        
+        if ( sourceSettingPair.first >= highestPrioritySource )
+        {
+            value = sourceSettingPair.second;
+            highestPrioritySource = sourceSettingPair.first;        
+        }
+    } 
+
+    kDebug() << "active setting for " << setting << ": " << value << endl;
+    
+    return value;
 }
 
 #include <SessionManager.moc>
