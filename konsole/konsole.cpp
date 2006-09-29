@@ -4057,8 +4057,8 @@ void Konsole::slotSaveHistory()
     if (tempFile)
         KIO::NetAccess::file_copy(localUrl, originalUrl);
 
-    delete tempFile;
   }
+  delete tempFile;
 }
 
 void Konsole::slotShowSaveHistoryDialog()
