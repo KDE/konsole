@@ -105,20 +105,18 @@ install(TARGETS konsolepart  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 ########### next target ###############
 
-# kvh - Temp disable kwrited until KDED and dbus are completed.
+set(kded_kwrited_PART_SRCS kwrited.cpp )
 
-#set(kded_kwrited_PART_SRCS kwrited.cpp )
-
-#kde4_automoc(${kded_kwrited_PART_SRCS})
+kde4_automoc(${kded_kwrited_PART_SRCS})
 
 
-#kde4_add_plugin(kded_kwrited ${kded_kwrited_PART_SRCS})
+kde4_add_plugin(kded_kwrited ${kded_kwrited_PART_SRCS})
 
-#kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kded_kwrited )
+kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kded_kwrited )
 
-#target_link_libraries(kded_kwrited  ${KDE4_KDE3SUPPORT_LIBS})
+target_link_libraries(kded_kwrited  ${KDE4_KDE3SUPPORT_LIBS})
 
-#install(TARGETS kded_kwrited  DESTINATION ${PLUGIN_INSTALL_DIR} )
+install(TARGETS kded_kwrited  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 
 ########### install files ###############
