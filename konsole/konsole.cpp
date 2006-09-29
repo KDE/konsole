@@ -1630,19 +1630,19 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
    if (config==KGlobal::config())
    {
      config->setDesktopGroup();
-     b_warnQuit=config->readEntry( "WarnQuit", QVariant(true )).toBool();
-     b_allowResize=config->readEntry( "AllowResize", QVariant(false)).toBool();
-     b_bidiEnabled = config->readEntry("EnableBidi", QVariant(false)).toBool();
+     b_warnQuit=config->readEntry( "WarnQuit", true );
+     b_allowResize=config->readEntry( "AllowResize", false);
+     b_bidiEnabled = config->readEntry("EnableBidi", false);
      s_word_seps= config->readEntry("wordseps",":@-./_~");
-     b_framevis = config->readEntry("has frame", QVariant(false)).toBool();
+     b_framevis = config->readEntry("has frame", false);
      Q3PtrList<TEWidget> tes = activeTEs();
      for (TEWidget *_te = tes.first(); _te; _te = tes.next()) {
        _te->setWordCharacters(s_word_seps);
-       _te->setTerminalSizeHint( config->readEntry("TerminalSizeHint", QVariant(false)).toBool() );
+       _te->setTerminalSizeHint( config->readEntry("TerminalSizeHint", false));
        _te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
-       _te->setBlinkingCursor(config->readEntry("BlinkingCursor", QVariant(false)).toBool());
-       _te->setCtrlDrag(config->readEntry("CtrlDrag", QVariant(true)).toBool());
-       _te->setCutToBeginningOfLine(config->readEntry("CutToBeginningOfLine", QVariant(false)).toBool());
+       _te->setBlinkingCursor(config->readEntry("BlinkingCursor", false));
+       _te->setCtrlDrag(config->readEntry("CtrlDrag", true));
+       _te->setCutToBeginningOfLine(config->readEntry("CutToBeginningOfLine", false));
        _te->setLineSpacing( config->readEntry( "LineSpacing", QVariant(0)).toUInt() );
        _te->setBidiEnabled(b_bidiEnabled);
      }
@@ -1710,12 +1710,12 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
 
       // History
       m_histSize = config->readEntry("history", QVariant(DEFAULT_HISTORY_SIZE)).toInt();
-      b_histEnabled = config->readEntry("historyenabled", QVariant(true)).toBool();
+      b_histEnabled = config->readEntry("historyenabled", true);
 
       // Tab View Mode
       m_tabViewMode = TabViewModes(config->readEntry("TabViewMode", QVariant(ShowIconAndText)).toInt());
-      b_dynamicTabHide = config->readEntry("DynamicTabHide", QVariant(false)).toBool();
-      b_autoResizeTabs = config->readEntry("AutoResizeTabs", QVariant(false)).toBool();
+      b_dynamicTabHide = config->readEntry("DynamicTabHide", false);
+      b_autoResizeTabs = config->readEntry("AutoResizeTabs", false);
 
       s_encodingName = config->readEntry( "EncodingName", "" ).toLower();
    }
