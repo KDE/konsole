@@ -177,7 +177,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   aboutData.addAuthor("Lars Doelle",I18N_NOOP("Author"), "lars.doelle@on-line.de");
   aboutData.addCredit("Kurt V. Hindenburg",
     I18N_NOOP("bug fixing and improvements"), 
-    "kurt.hindenburg@kdemail.net");
+    "kurt.hindenburg@gmail.com");
   aboutData.addCredit("Waldo Bastian",
     I18N_NOOP("bug fixing and improvements"),
     "bastian@kde.org");
