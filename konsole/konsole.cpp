@@ -143,7 +143,7 @@ Time to start a requirement list.
 #include <kstdaction.h>
 #include <kstringhandler.h>
 #include <ktabwidget.h>
-#include <ktempfile.h>
+#include <ktemporaryfile.h>
 #include <ktip.h>
 #include <ktoggleaction.h>
 #include <ktogglefullscreenaction.h>
@@ -3432,9 +3432,9 @@ void Konsole::createSessionMenus()
 
 void Konsole::addScreenSession(const QString &path, const QString &socket)
 {
-  KTempFile *tmpFile = new KTempFile();
-  tmpFile->setAutoDelete(true);
-  KSimpleConfig *co = new KSimpleConfig(tmpFile->name());
+  KTemporaryFile *tmpFile = new KTemporaryFile();
+  tmpFile->open();
+  KSimpleConfig *co = new KSimpleConfig(tmpFile->fileName());
   co->setDesktopGroup();
   co->writeEntry("Name", socket);
   QString txt = i18nc("Screen is a program for controlling screens", "Screen at %1", socket);
@@ -4024,12 +4024,13 @@ void Konsole::slotSaveHistory()
       return;
   KUrl localUrl = KIO::NetAccess::mostLocalUrl( originalUrl, 0 );
 
-  KTempFile* tempFile = 0;
+  KTemporaryFile* tempFile = 0;
 
   if( !localUrl.isLocalFile() ) {
-    tempFile = new KTempFile(QString("konsole_history"));
-    tempFile->setAutoDelete(true);
-    localUrl = KUrl::fromPath(tempFile->name());
+    tempFile = new KTemporaryFile();
+    tempFile->setPrefix("konsole_history");
+    tempFile->open();
+    localUrl = KUrl::fromPath(tempFile->fileName());
   }
 
   int query = KMessageBox::Continue;

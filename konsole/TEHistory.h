@@ -26,7 +26,7 @@
 //Added by qt3to4:
 #include <QVector>
 
-#include <ktempfile.h>
+#include <ktemporaryfile.h>
 
 #include "TECommon.h"
 
@@ -56,7 +56,7 @@ public:
 private:
   int  ion;
   int  length;
-  KTempFile tmpFile;
+  KTemporaryFile tmpFile;
 
   //pointer to start of mmap'ed file data, or 0 if the file is not mmap'ed
   char* fileMap;

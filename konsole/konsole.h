@@ -69,7 +69,7 @@ class KMenu;
 class KSelectAction;
 //class SessionTabWidget;
 class KTabWidget;
-class KTempFile;
+class KTemporaryFile;
 class KToggleAction;
 
 class SessionInfo;
@@ -318,7 +318,7 @@ private:
   //entry used to create it
   QHash<TESession*,KSimpleConfig*> sessionConfigMap;
 
-  QList<KTempFile*> tempfiles;
+  QList<KTemporaryFile*> tempfiles;
   KSimpleConfig* m_defaultSession;
   QString m_defaultSessionFilename;
 

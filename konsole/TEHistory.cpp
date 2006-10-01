@@ -81,9 +81,9 @@ HistoryFile::HistoryFile()
     length(0),
 	fileMap(0)
 {
-  if (tmpFile.status() == 0)
+  if (tmpFile.open())
   { 
-    tmpFile.unlink();
+    tmpFile.setAutoRemove(true);
     ion = tmpFile.handle();
   }
 }
