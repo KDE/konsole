@@ -1165,11 +1165,15 @@ void Konsole::makeBasicGUI()
   addAction(action);
 
   // Should we load all *.desktop files now?  Required for Session shortcuts.
-  if ( KConfigGroup(KGlobal::config(), "General").readEntry("SessionShortcutsEnabled", QVariant(false)).toBool() ) {
+  // --> answer: No, because the Konsole main window won't have an associated SessionManger
+  //     at this stage of program execution, so it isn't possible to load session type information.
+  // TODO: Reimplement and test session shorcuts
+ 
+  /*if ( KConfigGroup(KGlobal::config(), "General").readEntry("SessionShortcutsEnabled", QVariant(false)).toBool() ) {
     b_sessionShortcutsEnabled = true;
     loadSessionCommands();
     loadScreenSessions();
-  }
+  }*/
   m_shortcuts->readSettings();
 
   m_sessionList = new KMenu(this);
