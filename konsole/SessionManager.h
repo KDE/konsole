@@ -138,7 +138,10 @@ public:
     enum Setting
     {
         Font                     = 0,
-        InitialWorkingDirectory  = 1
+        InitialWorkingDirectory  = 1,
+        ColorScheme              = 2,
+        HistoryEnabled           = 3,
+        HistorySize              = 4  // set to 0 for unlimited history ( stored in a file )
     };
 
     /** document me */

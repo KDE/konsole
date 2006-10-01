@@ -529,8 +529,9 @@ void TEmulation::addView(TEWidget* widget)
 
 void TEmulation::removeView(TEWidget* widget)
 {
-    Q_ASSERT(0); // Not implemented yet
     _views.removeAll(widget);
+
+    disconnect(widget);
 }
 
 void TEmulation::showBulk()

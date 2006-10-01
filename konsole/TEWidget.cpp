@@ -1347,7 +1347,12 @@ void TEWidget::updateImageSize()
   //      `emu' will call back via `setImage'.
 
   resizing = (oldlin!=lines) || (oldcol!=columns);
-  emit changedContentSizeSignal(contentHeight, contentWidth); // expose resizeEvent
+
+  if ( resizing )
+  {
+    emit changedContentSizeSignal(contentHeight, contentWidth); // expose resizeEvent
+  }
+  
   resizing = false;
 }
 

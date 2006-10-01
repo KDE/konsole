@@ -218,19 +218,13 @@ void TESession::addView(TEWidget* widget)
     if ( em != 0 )
         em->addView(widget);
 
-    //temporary test
-    //if this is the first view then connect its resizing events
-    //to resizing of the emulation
-    if ( _views.count() == 1 )
-    {
-        font_h = primaryView()-> fontHeight();
-        font_w = primaryView()-> fontWidth();
-        QObject::connect(primaryView(),SIGNAL(changedContentSizeSignal(int,int)),
+    font_h = primaryView()-> fontHeight();
+    font_w = primaryView()-> fontWidth();
+        
+    QObject::connect( widget ,SIGNAL(changedContentSizeSignal(int,int)),
                    this,SLOT(onContentSizeChange(int,int)));
-        QObject::connect(primaryView(),SIGNAL(changedFontMetricSignal(int,int)),
+    QObject::connect( widget ,SIGNAL(changedFontMetricSignal(int,int)),
                    this,SLOT(onFontMetricChange(int,int)));
-
-    }
 }
 
 void TESession::removeView(TEWidget* widget)
@@ -523,9 +517,13 @@ void TESession::notifySessionState(int state)
 
 void TESession::onContentSizeChange(int height, int width)
 {
+  kDebug() << __FUNCTION__ << endl;
+
+  updateTerminalSize();
+
   //kDebug(1211)<<"TESession::onContentSizeChange " << height << " " << width << endl;
-  em->onImageSizeChange( height/font_h, width/font_w );
-  sh->setSize( height/font_h, width/font_w );
+//  em->onImageSizeChange( height/font_h, width/font_w );
+//  sh->setSize( height/font_h, width/font_w );
 }
 
 void TESession::onFontMetricChange(int height, int width)
@@ -535,6 +533,31 @@ void TESession::onFontMetricChange(int height, int width)
     font_h = height;
     font_w = width;
   }
+}
+
+void TESession::updateTerminalSize()
+{
+    QListIterator<TEWidget*> viewIter(_views);
+
+    int minLines = -1;
+    int minColumns = -1;
+
+    //select smallest number of lines and columns that will fit in all visible views
+    while ( viewIter.hasNext() )
+    {
+        TEWidget* view = viewIter.next();
+        if ( view->isHidden() == false )
+        {
+            minLines = (minLines == -1) ? view->Lines() : qMin( minLines , view->Lines() );
+            minColumns = (minColumns == -1) ? view->Columns() : qMin( minColumns , view->Columns() );
+        }
+    }  
+
+    if ( minLines != -1 && minColumns != -1 )
+    {
+        em->onImageSizeChange( minLines , minColumns );
+        sh->setSize( minLines , minColumns );
+    }
 }
 
 bool TESession::sendSignal(int signal)

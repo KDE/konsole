@@ -187,6 +187,7 @@ SessionManager::~SessionManager()
 void SessionManager::pushSessionSettings( const SessionInfo* info )
 {
     addSetting( InitialWorkingDirectory , SessionConfig , info->defaultWorkingDirectory() );
+    addSetting( ColorScheme , SessionConfig , info->colorScheme() );
 }
 
 TESession* SessionManager::createSession(QString configPath )
@@ -208,7 +209,7 @@ TESession* SessionManager::createSession(QString configPath )
         {
             //supply settings from session config
             pushSessionSettings( info );
-
+            
             //configuration information found, create a new session based on this
             session = new TESession();
 

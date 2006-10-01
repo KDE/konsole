@@ -244,6 +244,8 @@ private Q_SLOTS:
 
 private:
 
+  void updateTerminalSize();
+
   TEPty*         sh;
   TEWidget*      te;
   TEmulation*    em;

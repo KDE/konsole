@@ -2783,6 +2783,7 @@ void Konsole::slotNewSessionAction(QAction* action)
     // TODO: "type" isn't passed properly
     Konsole* konsole = new Konsole(objectName().toLatin1(), b_histEnabled, !menubar->isHidden(), n_tabbar != TabNone, b_framevis,
         n_scroll != TEWidget::SCRNONE, 0, false, 0);
+    konsole->setSessionManager( sessionManager() );
     konsole->newSession();
     konsole->enableFullScripting(b_fullScripting);
     konsole->enableFixedSize(b_fixedSize);
@@ -3629,10 +3630,15 @@ void Konsole::detachSession(TESession* _se) {
   // TODO: "type" isn't passed properly
   Konsole* konsole = new Konsole( objectName().toLatin1(), b_histEnabled, !menubar->isHidden(), n_tabbar != TabNone, b_framevis,
                                  n_scroll != TEWidget::SCRNONE, 0, false, 0);
+
+  konsole->setSessionManager(sessionManager());
+
   konsole->enableFullScripting(b_fullScripting);
   // TODO; Make this work: konsole->enableFixedSize(b_fixedSize);
   konsole->resize(size());
   konsole->attachSession(_se);
+  _se->removeView( _se->primaryView() );
+  
   konsole->activateSession(_se);
   konsole->changeTabTextColor( _se, se_tabtextcolor.rgb() );//restore prev color
   konsole->slotTabSetViewOptions(m_tabViewMode);
@@ -3680,7 +3686,7 @@ void Konsole::attachSession(TESession* session)
   te->resize(se_widget->size());
   te->setSize(se_widget->Columns(), se_widget->Lines());
   initTEWidget(te, se_widget);
-  session->changeWidget(te);
+  session->addView(te);
   te->setFocus();
   createSessionTab(te, SmallIconSet(session->IconName()), session->Title());
   setSchema(session->schemaNo() , te);
