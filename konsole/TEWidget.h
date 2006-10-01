@@ -101,6 +101,7 @@ public:
     void emitSelection(bool useXselection,bool appendReturn);
     void emitText(QString text);
 
+    void scrollImage(int lines,const QRect& region);
     void setImage(const ca* const newimg, int lines, int columns);
     void setLineProperties(QVector<LineProperty> properties) { lineProperties=properties; }
 

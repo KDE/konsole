@@ -884,6 +884,54 @@ void TEWidget::setCursorPos(const int curx, const int cury)
     m_cursorCol = curx;
 }
 
+//scrolls the image by 'lines', down if lines > 0 or up otherwise.
+//
+//the terminal emulation keeps track of the scrolling of the character image as it receives input,
+//and when the view is updated, it calls scrollImage() with the final scroll amount.  this improves
+//performance because scrolling the display is much cheaper than re-rendering all the text for the part
+//of the image which has moved up or down.  instead only new lines have to be drawn
+//
+//note:  it is important that the area of the display which is scrolled aligns properly with
+//the character grid - which has a top left point at (0,1) , a cell width of font_w and a cell height
+//of font_h).    
+void TEWidget::scrollImage(int lines , const QRect& region)
+{
+    if ( lines == 0 || image == 0 || abs(lines) >= this->lines ) return;
+
+    kDebug() << " scrolling " << lines << " lines, with region = " << region.top() << "," << region.bottom()
+            << endl;
+
+    QRect scrollRect;
+
+    //scroll internal image
+    if ( lines > 0 )
+    {   
+        //scrolling down
+        memmove( image , &image[lines*this->columns] , ( this->lines - lines ) * this->columns * sizeof(ca) );
+ 
+        //set region of display to scroll, making sure that
+        //the region aligns correctly to the character grid 
+        scrollRect = QRect( 0,1, this->columns * font_w , (this->lines - lines) * font_h );
+    }
+    else
+    {
+        //scrolling up
+        kDebug() << "scrolling up " << abs(lines) << " lines." << endl;
+
+        memmove( &image[ abs(lines)*this->columns] , image , 
+                        (this->lines - abs(lines) ) * this->columns * sizeof(ca) );
+
+        //set region of the display to scroll, making sure that
+        //the region aligns correctly to the character grid
+        
+        QPoint topPoint( 0 , 1 + abs(lines)*font_h );
+
+        scrollRect = QRect( topPoint , QSize( this->columns*font_w , (this->lines - abs(lines)) * font_h ));
+    }
+
+    //scroll the display
+    scroll( 0 , font_h * (-lines) , scrollRect );
+}
 
 /*!
     The image can only be set completely.
@@ -913,6 +961,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
   QChar *disstrU = new QChar[cols];
   char *dirtyMask = (char *) malloc(cols+2);
   QRegion dirtyRegion;
+
 
 //{ static int cnt = 0; printf("setImage %d\n",cnt++); }
   for (y = 0; y < lins; y++)
@@ -1002,6 +1051,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
 		fixed_font = save_fixed_font;
         x += len - 1;
       }
+      
     }
 
 	//both the top and bottom halves of double height lines must always be redrawn
@@ -1012,7 +1062,9 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
 	
     if (updateLine)
     {
-    	dirtyRegion |= QRect( bX+tLx , bY+tLy+font_h*y , font_w * cols , font_h ); 	
+        QRect dirtyRect = QRect( bX+tLx , bY+tLy+font_h*y , font_w * cols , font_h ); 	
+    
+        dirtyRegion |= dirtyRect;
     }
 
     dirtyMask--; // Set back

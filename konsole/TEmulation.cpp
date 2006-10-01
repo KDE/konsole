@@ -550,14 +550,23 @@ void TEmulation::showBulk()
     {
         QPointer<TEWidget> view = viewIter.next();
 
+        QRect scrollRegion;
+        scrollRegion.setTop( scr->topMargin() );
+        scrollRegion.setBottom( scr->bottomMargin() );
+        scrollRegion.setLeft( 0 );
+        scrollRegion.setRight( scr->getColumns() );
+
+        view->scrollImage( - scr->scrolledLines() , scrollRegion );
+    
         view->setLineProperties( lineProperties );
 	    view->setImage(image,
                   scr->getLines(),
                   scr->getColumns());     // actual refresh
         view->setCursorPos(scr->getCursorX(), scr->getCursorY());	// set XIM position
-	    view->setScroll(scr->getHistCursor(),scr->getHistLines());
+	    view->setScroll(scr->getHistCursor(),scr->getHistLines()); 
     }
-    
+  
+    scr->resetScrolledLines();  
     free(image);
   }
 

@@ -64,6 +64,7 @@ TEScreen::TEScreen(int l, int c)
   : lines(l),
     columns(c),
     screenLines(new ImageLine[lines+1] ),
+    _scrolledLines(0),
    // image(new ca[(lines+1)*columns]),
     histCursor(0),
     hist(new HistoryScrollNone()),
@@ -194,6 +195,17 @@ void TEScreen::setMargins(int top, int bot)
   bmargin = bot;
   cuX = 0;
   cuY = getMode(MODE_Origin) ? top : 0;
+
+  resetScrolledLines();
+}
+
+int TEScreen::topMargin() const
+{
+    return tmargin;
+}
+int TEScreen::bottomMargin() const
+{
+    return bmargin;
 }
 
 /*!
@@ -823,6 +835,16 @@ void TEScreen::compose(QString /*compose*/)
   image[lastPos].c = compose[0].unicode();*/
 }
 
+int TEScreen::scrolledLines() const
+{
+        return _scrolledLines;
+}
+
+void TEScreen::resetScrolledLines()
+{
+    _scrolledLines = 0;
+}
+
 // Region commands -------------------------------------------------------------
 
 void TEScreen::scrollUp(int n)
@@ -840,7 +862,9 @@ void TEScreen::scrollUp(int n)
 void TEScreen::scrollUp(int from, int n)
 {
   if (n <= 0 || from + n > bmargin) return;
-  
+
+  _scrolledLines -= n;
+
   //FIXME: make sure `tmargin', `bmargin', `from', `n' is in bounds.
   moveImage(loc(0,from),loc(0,from+n),loc(columns-1,bmargin));
   clearImage(loc(0,bmargin-n+1),loc(columns-1,bmargin),' ');
@@ -859,6 +883,9 @@ void TEScreen::scrollDown(int n)
 
 void TEScreen::scrollDown(int from, int n)
 {
+
+  _scrolledLines += n;
+
 //FIXME: make sure `tmargin', `bmargin', `from', `n' is in bounds.
   if (n <= 0) return;
   if (from > bmargin) return;
@@ -1719,6 +1746,8 @@ void TEScreen::addHistLine()
 
 void TEScreen::setHistCursor(int cursor)
 {
+  _scrolledLines += histCursor-cursor;
+
   histCursor = cursor; //FIXME:rangecheck
 }
 

@@ -88,6 +88,9 @@ public: // these are all `Screen' operations
     void setCursorX  (int x);
     void setCursorYX (int y, int x);
     void setMargins  (int t, int b);
+    int topMargin() const;
+    int bottomMargin() const;
+
     //sets the scrolling margins back to their default positions
     void setDefaultMargins();
     
@@ -298,6 +301,19 @@ public: // these are all `Screen' operations
 	 */
 	void setLineProperty(LineProperty property , bool enable);
 
+
+    /** 
+     * Returns the number of lines that the image has been scrolled up or down by,
+     * a positive return value indicates that the image has been scrolled up,
+     * a negative return value indicates that the image has been scrolled down. 
+     */
+    int scrolledLines() const;
+    /** 
+     * Resets the count of the number of lines that the image has been scrolled up or down by,
+     * see scrolledLines()
+     */
+    void resetScrolledLines();
+
 private: // helper
 
 	//copies a line of text from the screen or history into a stream using a specified character decoder
@@ -348,6 +364,8 @@ private: // helper
 
     typedef QVector<ca> ImageLine;      // [0..columns]
     ImageLine*          screenLines;    // [lines]
+
+    int _scrolledLines;
 
     QVarLengthArray<LineProperty,64> lineProperties;    
 	

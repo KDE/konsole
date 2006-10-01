@@ -443,8 +443,21 @@ void Konsole::showTipOnStart()
 //        writing because KIconLoader's on-demand loading of icons
 //        hasn't yet been ported for KDE4/Qt4.
 //      - Searching all of the system paths for the executable needed
-//        for each session.
+//        for each session, can be a problem if PATH environment variable contains many directories.
+//        This can be made both more efficient and deferred until menus which list the various
+//        types of schema are opened.
 //      - IO related to colour schema files
+//        adding some debug statements to the colour schema reading code, it seems that they are 
+//        parsed multiple times unnecessarily when starting Konsole.
+//
+//        The only colour schema that needs to be parsed on startup is the one for the first
+//        session which is created.  There appears to be some code which is supposed to prevent
+//        repeat parsing of a color schema file if it hasn't changed - but that isn't working properly
+//        (not looked at in-depth yet).  
+//        When revealing the schema menu, only the schema titles
+//        need to be extracted.  Only when a schema is then chosen (either for previewing or for
+//        actual use in the terminal) does it need to be parsed fully.
+//
 //
 //-- Robert Knight.
 
@@ -1265,9 +1278,14 @@ void Konsole::slotCouldNotClose()
 }
 
 /**
-    sets application window to a size based on columns X lines of the te
-    guest widget. Call with (0,0) for setting default size.
-*/
+ * Adjusts the size of the Konsole main window so that the
+ * active terminal display has enough room to display the specified number of lines and
+ * columns.
+ */
+
+//Implementation note:  setColLin() works by intructing the terminal display widget 
+//to resize itself to accomodate the specified number of lines and columns, and then resizes
+//the Konsole window to its sizeHint().
 
 void Konsole::setColLin(int columns, int lines)
 {
