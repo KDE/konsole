@@ -240,7 +240,6 @@ private Q_SLOTS:
   void monitorTimerDone();
   void notifySessionState(int state);
   void onContentSizeChange(int height, int width);
-  void onFontMetricChange(int height, int width);
 
 private:
 
@@ -267,9 +266,6 @@ private:
   int            schema_no;
   int            font_no;
   int            silence_seconds;
-
-  int            font_h;
-  int            font_w;
 
   QString        title;
   QString        _userTitle;

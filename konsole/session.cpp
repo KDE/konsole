@@ -218,13 +218,8 @@ void TESession::addView(TEWidget* widget)
     if ( em != 0 )
         em->addView(widget);
 
-    font_h = primaryView()-> fontHeight();
-    font_w = primaryView()-> fontWidth();
-        
     QObject::connect( widget ,SIGNAL(changedContentSizeSignal(int,int)),
                    this,SLOT(onContentSizeChange(int,int)));
-    QObject::connect( widget ,SIGNAL(changedFontMetricSignal(int,int)),
-                   this,SLOT(onFontMetricChange(int,int)));
 }
 
 void TESession::removeView(TEWidget* widget)
@@ -238,23 +233,6 @@ void TESession::removeView(TEWidget* widget)
 void TESession::changeWidget(TEWidget* w)
 {
   Q_ASSERT(0); //Method not updated yet to handle multiple views
-
-/*  QObject::disconnect(te,SIGNAL(changedContentSizeSignal(int,int)),
-                     this,SLOT(onContentSizeChange(int,int)));
-  QObject::disconnect(te,SIGNAL(changedFontMetricSignal(int,int)),
-                     this,SLOT(onFontMetricChange(int,int)));
-  te=w;
-  em->changeGUI(w);
-  font_h = te->fontHeight();
-  font_w = te->fontWidth();
-  sh->setSize(te->Lines(),te->Columns()); // not absolutely necessary
-
-  te->setDefaultBackColor(modifiedBackground);
-
-  QObject::connect(te,SIGNAL(changedContentSizeSignal(int,int)),
-                   this,SLOT(onContentSizeChange(int,int)));
-  QObject::connect(te,SIGNAL(changedFontMetricSignal(int,int)),
-                   this,SLOT(onFontMetricChange(int,int)));*/
 }
 
 void TESession::run()
@@ -517,22 +495,7 @@ void TESession::notifySessionState(int state)
 
 void TESession::onContentSizeChange(int height, int width)
 {
-  kDebug() << __FUNCTION__ << endl;
-
   updateTerminalSize();
-
-  //kDebug(1211)<<"TESession::onContentSizeChange " << height << " " << width << endl;
-//  em->onImageSizeChange( height/font_h, width/font_w );
-//  sh->setSize( height/font_h, width/font_w );
-}
-
-void TESession::onFontMetricChange(int height, int width)
-{
-  //kDebug(1211)<<"TESession::onFontMetricChange " << height << " " << width << endl;
-  if (connected) {
-    font_h = height;
-    font_w = width;
-  }
 }
 
 void TESession::updateTerminalSize()
@@ -542,7 +505,7 @@ void TESession::updateTerminalSize()
     int minLines = -1;
     int minColumns = -1;
 
-    //select smallest number of lines and columns that will fit in all visible views
+    //select largest number of lines and columns that will fit in all visible views
     while ( viewIter.hasNext() )
     {
         TEWidget* view = viewIter.next();
