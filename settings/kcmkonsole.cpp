@@ -47,12 +47,13 @@ KCMKonsole::KCMKonsole(QWidget * parent, const QStringList&)
 		"configured using the RMB) and you can edit the schemas and sessions "
 		"available to Konsole."));
 
-    QVBoxLayout *topLayout = new QVBoxLayout(this);
-    dialog = new KCMKonsoleDialog(this);
+    //QVBoxLayout *topLayout = new QVBoxLayout(this);
+    dialog = new Ui::KCMKonsoleDialog();
+    dialog->setupUi( this );
     dialog->line_spacingSB->setRange(0, 8, 1, false);
     dialog->line_spacingSB->setSpecialValueText(i18nc("normal line spacing", "Normal"));
-    dialog->show();
-    topLayout->addWidget(dialog);
+    //dialog->show();
+    //topLayout->addWidget(this );
     load();
 
     KAboutData *ab=new KAboutData( "kcmkonsole", I18N_NOOP("KCM Konsole"),

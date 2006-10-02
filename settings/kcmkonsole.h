@@ -20,7 +20,7 @@
 
 #include <kcmodule.h>
 
-#include "kcmkonsoledialog.h"
+#include "ui_kcmkonsoledialog.h"
 
 class QFont;
 class QStringList;
@@ -39,7 +39,7 @@ public:
 	void save();
 	void defaults();
 private:
-	KCMKonsoleDialog *dialog;
+	Ui::KCMKonsoleDialog *dialog;
 	bool xonXoffOrig;
 	bool bidiOrig;
 };
