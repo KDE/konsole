@@ -60,18 +60,13 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel 
     KBookmarkManager *manager = KBookmarkManager::managerForFile( m_file, false);
     manager->setEditorOptions(kapp->caption(), false);
     manager->setUpdate( true );
-    manager->setShowNSBookmarks( false );
 
     if (toplevel) {
         m_bookmarkMenu = new KBookmarkMenu( manager, this, m_menu,
                                             konsole->actionCollection() );
-        connect( m_bookmarkMenu, SIGNAL( openBookmark( KBookmark, Qt::MouseButtons, Qt::KeyboardModifiers ) ),
-                 this, SLOT( openBookmark( KBookmark, Qt::MouseButtons, Qt::KeyboardModifiers )));
     } else {
         m_bookmarkMenu = new KBookmarkMenu( manager, this, m_menu,
                                             NULL);
-        connect( m_bookmarkMenu, SIGNAL( openBookmark( KBookmark, Qt::MouseButtons, Qt::KeyboardModifiers ) ),
-                 this, SLOT( openBookmark( KBookmark, Qt::MouseButtons, Qt::KeyboardModifiers )));
     }
 }
 
