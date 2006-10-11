@@ -3355,7 +3355,7 @@ void Konsole::addSessionCommand( SessionInfo* info )
   QString actionText = info->newSessionText();   
   
   if (actionText.isEmpty())
-    actionText=i18n("New %1").arg(info->name());
+    actionText=i18n("New %1", info->name());
 
   QString name = actionText;
   name.prepend("SSC_");  // Allows easy searching for Session ShortCuts
