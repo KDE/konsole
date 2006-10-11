@@ -21,11 +21,15 @@
 #ifndef SESSION_H
 #define SESSION_H
 
-#include <kapplication.h>
-#include <kmainwindow.h>
+// Qt
 #include <QStringList>
 #include <QByteArray>
 
+// KDE
+#include <kapplication.h>
+#include <kmainwindow.h>
+
+// Konsole
 #include "TEPty.h"
 #include "TEWidget.h"
 #include "TEmuVt102.h"

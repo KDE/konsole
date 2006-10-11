@@ -21,11 +21,13 @@
 #ifndef TESCREEN_H
 #define TESCREEN_H
 
-#include "TECommon.h"
-#include "TEHistory.h"
-//Added by qt3to4:
+// Qt
 #include <QTextStream>
 #include <QVarLengthArray>
+
+// Konsole
+#include "TECommon.h"
+#include "TEHistory.h"
 
 #define MODE_Origin    0
 #define MODE_Wrap      1

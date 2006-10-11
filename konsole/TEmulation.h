@@ -22,7 +22,6 @@
 #define EMULATION_H
 
 // System
-#include <keytrans.h>
 #include <stdio.h>
 
 // Qt 
@@ -33,6 +32,7 @@
 #include <QTimer>
 
 // Konsole
+#include <keytrans.h>
 #include "TEScreen.h"
 #include "TEWidget.h"
 

@@ -205,6 +205,11 @@ SessionManager::~SessionManager()
         delete infoIter.next();
 }
 
+const QList<TESession*> SessionManager::sessions()
+{
+    return _sessions;
+}
+
 void SessionManager::pushSessionSettings( const SessionInfo* info )
 {
     addSetting( InitialWorkingDirectory , SessionConfig , info->defaultWorkingDirectory() );

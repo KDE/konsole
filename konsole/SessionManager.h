@@ -242,7 +242,7 @@ public:
     /**
      * Returns a list of active sessions.
      */
-    QList<TESession*> sessions();
+    const QList<TESession*> sessions();
 
 protected Q_SLOTS:
 

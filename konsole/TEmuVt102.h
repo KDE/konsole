@@ -21,16 +21,20 @@
 #ifndef VT102EMU_H
 #define VT102EMU_H
 
-#include "TEWidget.h"
-#include "TEScreen.h"
-#include "TEmulation.h"
+// Standard Library
 #include <stdio.h>
-//Added by qt3to4:
+
+// Qt 
 #include <QKeyEvent>
 #include <QHash>
 #include <QTimer>
 
-//
+// Konsole
+#include "TEWidget.h"
+#include "TEScreen.h"
+#include "TEmulation.h"
+
+
 
 #define MODE_AppScreen (MODES_SCREEN+0)
 #define MODE_AppCuKeys (MODES_SCREEN+1)

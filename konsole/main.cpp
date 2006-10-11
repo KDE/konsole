@@ -55,6 +55,7 @@
 #include <kmessagebox.h>
 #include <config.h>
 #include <kauthorized.h>
+#include <ksimpleconfig.h>
 
 // Konsole
 #include "konsole.h"

@@ -19,9 +19,11 @@
     02110-1301  USA.
 */
 
+// Standard
 #include <assert.h>
 #include <stdlib.h>
 
+// Qt
 #include <QApplication>
 #include <QByteArray>
 #include <QDir>
@@ -30,7 +32,7 @@
 #include <QStringList>
 #include <QtDBus/QtDBus>
 
-#include <config-konsole.h>
+// KDE
 #include <kdebug.h>
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -40,6 +42,8 @@
 #include <kshell.h>
 #include <kstandarddirs.h>
 
+// Konsole
+#include <config-konsole.h>
 #include "sessionadaptor.h"
 #include "sessionscriptingadaptor.h"
 #include "zmodem_dialog.h"

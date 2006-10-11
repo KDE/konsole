@@ -18,48 +18,39 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
     02110-1301  USA.
 */
-/* The material contained in here more or less directly orginates from    */
-/* kvt, which is copyright (c) 1996 by Matthias Ettrich <ettrich@kde.org> */
-/*                                                                        */
 
 #ifndef KONSOLE_H
 #define KONSOLE_H
 
-
-#include <kmainwindow.h>
-#include <kdialog.h>
-#include <ksimpleconfig.h>
-
-#include <kwinmodule.h>
-
+// Qt 
 #include <QStringList>
-#include <q3intdict.h>
-#include <q3ptrdict.h>
-#include <QSignalMapper>
-//Added by qt3to4:
-#include <Q3CString>
+#include <Q3PtrDict>
 #include <Q3PtrList>
-#include <QEvent>
-#include <QLabel>
 #include <QList>
 
+// KDE
+#include <kmainwindow.h>
+#include <kdialog.h>
+
+// Konsole
 #include "TEPty.h"
-#include "TEWidget.h"
 #include "TEmuVt102.h"
 #include "session.h"
 #include "schema.h"
 #include "konsolebookmarkhandler.h"
-
 
 #undef PACKAGE
 #undef VERSION
 #define PACKAGE "konsole"
 #define VERSION "1.9"
 
+
 class QCheckBox;
+class QEvent;
 class QLabel;
 class QToolButton;
 class QWidgetAction;
+class QSignalMapper;
 
 class KAction;
 class KColorCells;
@@ -67,11 +58,13 @@ class KFileDialog;
 class KFindDialog;
 class KMenu;
 class KSelectAction;
-//class SessionTabWidget;
+class KSimpleConfig;
 class KTabWidget;
 class KTemporaryFile;
 class KToggleAction;
+class KWinModule;
 
+class TEWidget;
 class SessionInfo;
 class SessionManager;
 
@@ -163,7 +156,6 @@ private Q_SLOTS:
   void closeCurrentSession();
   void confirmCloseCurrentSession(TESession* _se=0);
   void doneSession(TESession*);
-  void slotCouldNotClose();
   void toggleFullScreen();
   bool fullScreen();
   void setFullScreen(bool on);
@@ -311,10 +303,6 @@ private:
   Q3PtrDict<KToggleAction> session2action;
 
   Q3PtrList<TESession> sessions;
-
-  //stores association between sessions and the configuration
-  //entry used to create it
-  QHash<TESession*,KSimpleConfig*> sessionConfigMap;
 
   QList<KTemporaryFile*> tempfiles;
   KSimpleConfig* m_defaultSession;

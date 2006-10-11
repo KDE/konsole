@@ -38,24 +38,24 @@
 #undef HAVE_XKB
 #endif
 
+// Standard 
+#include <stdio.h>
+#include <unistd.h>
+#include <assert.h>
+
+// Qt
+#include <QKeyEvent>
+#include <QByteArray>
+
+// KDE
+#include <kdebug.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 
+// Konsole
 #include "TEmuVt102.h"
 #include "TEWidget.h"
 #include "TEScreen.h"
-
-#include <stdio.h>
-#include <unistd.h>
-
-#include <assert.h>
-
-#include "TEmuVt102.moc"
-
-#include <kdebug.h>
-//Added by qt3to4:
-#include <QKeyEvent>
-#include <QByteArray>
 
 /* VT102 Terminal Emulation
 
@@ -1550,3 +1550,5 @@ static void scrolllock_set_off()
     xkb_set_off();
 }
 #endif // defined(HAVE_XKB)
+
+#include "TEmuVt102.moc"

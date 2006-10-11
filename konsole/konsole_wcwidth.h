@@ -6,6 +6,7 @@
 #ifndef	_KONSOLE_WCWIDTH_H_
 #define	_KONSOLE_WCWIDTH_H_
 
+// Qt
 #include <qglobal.h>
 #include <QString>
 

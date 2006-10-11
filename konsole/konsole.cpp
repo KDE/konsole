@@ -1,7 +1,9 @@
 /*
-    This file is part of Konsole, an X terminal.
-    Copyright (C) 1996 by Matthias Ettrich <ettrich@kde.org>
+    This file is part of the Konsole Terminal.
+    
+    Copyright (C) 2006 Robert Knight <robertknight@gmail.com>
     Copyright (C) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
+    Copyright (C) 1996 by Matthias Ettrich <ettrich@kde.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,9 +20,6 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
     02110-1301  USA.
 */
-/* The material contained in here more or less directly orginates from    */
-/* kvt, which is copyright (c) 1996 by Matthias Ettrich <ettrich@kde.org> */
-/*                                                                        */
 
 /*! \class Konsole
 
@@ -28,45 +27,6 @@
 
     This class is also responsible for setting up Konsole's menus, managing
     terminal sessions and applying settings.
-*/
-
-/*STATE:
-
-  konsole/kwin session management, parts stuff, config, menus
-  are all in bad need for a complete rewrite.
-
-  While the emulation core (TEmulation, TEVt102, TEScreen, TEWidget)
-  are pretty stable, the upper level material has certainly drifted.
-
-  Everything related to Sessions, Configuration has to be redesigned.
-  It seems that the konsole now falls apart into individual sessions
-  and a session manager.
-
-Time to start a requirement list.
-
-  - Rework the Emulation::setConnect logic.
-    Together with session changing (Shift-Left/Right, Ctrl-D) it allows
-    key events to propagate to other sessions.
-
-  - Get rid of the unconfigurable, uncallable initial "Konsole" session.
-    Leads to code replication in konsole_part and other issues. Related
-    to the booting of konsole, thus matter of redesign.
-*/
-
-/*FIXME:
-  - All the material in here badly sufferes from the fact that the
-    configuration can originate from many places, so all is duplicated
-    and falls out of service. Especially the command line is badly broken.
-    The sources are:
-    - command line
-    - menu
-    - configuration files
-    - other events (e.g. resizing)
-    We have to find a single-place method to better maintain this.
-  - In general, the material contained in here and in session.C
-    should be rebalanced. Much more material now comes from configuration
-    files and the overall routines should better respect this.
-  - Font+Size list should go to a configuration file, too.
 */
 
 // System
@@ -81,7 +41,6 @@ Time to start a requirement list.
 #include <sys/wait.h>
 
 // Qt
-#include <Q3CString>
 #include <Q3PtrList>
 #include <QCheckBox>
 #include <QEvent>
@@ -96,6 +55,7 @@ Time to start a requirement list.
 #include <QPainter>
 #include <QPixmap>
 #include <QPushButton>
+#include <QSignalMapper>
 #include <QSpinBox>
 #include <QStringList>
 #include <QTextStream>
@@ -151,6 +111,7 @@ Time to start a requirement list.
 #include <kurlrequesterdlg.h>
 #include <netwm.h>
 #include <knotifyconfigwidget.h>
+#include <kwinmodule.h>
 
 // Konsole
 #include "SessionManager.h"
@@ -303,7 +264,6 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
   m_sessionGroup = new QActionGroup(this);
 
   isRestored = b_inRestore;
-  connect( &m_closeTimeout, SIGNAL(timeout()), this, SLOT(slotCouldNotClose()));
 
   menubar = menuBar();
 
@@ -376,18 +336,16 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 
 Konsole::~Konsole()
 {
-    sessions.first();
-    while(sessions.current())
-    {
-      sessions.current()->closeSession();
-      sessions.next();
-    }
+    QListIterator<TESession*> sessionIter( sessionManager()->sessions() );
 
+    while ( sessionIter.hasNext() )
+    {
+        sessionIter.next()->closeSession();
+    }
+    
     // Wait a bit for all children to clean themselves up.
     while(sessions.count() && KProcessController::theKProcessController->waitForProcessExit(1))
         ;
-
-    sessions.setAutoDelete(true);
 
     resetScreenSessions();
        
@@ -1236,6 +1194,8 @@ bool Konsole::queryClose()
 				KMessageBox::PlainCaption)
 	    ) {
 		case KMessageBox::Yes :
+            return true;
+            
 		    break;
 		case KMessageBox::Cancel :
             return false;
@@ -1243,38 +1203,7 @@ bool Konsole::queryClose()
 	}
     }
 
-   _closing = true;
-
-    // WABA: Don't close if there are any sessions left.
-    // Tell them to go away.
-    sessions.first();
-    while(sessions.current())
-    {
-      sessions.current()->closeSession();
-      sessions.next();
-    }
-
-    m_closeTimeout.setSingleShot(true);
-    m_closeTimeout.start(1500);
-    return false;
-}
-
-void Konsole::slotCouldNotClose()
-{
-    int result = KMessageBox::warningContinueCancel(this,
-             i18n("The application running in Konsole does not respond to the close request. "
-                  "Do you want Konsole to close anyway?"),
-             i18n("Application Does Not Respond"),
-             KStdGuiItem::close());
-    if (result == KMessageBox::Continue)
-    {
-        while(sessions.first())
-        {
-            doneSession(sessions.current());
-        }
-    }
-    else
-        _closing = false;
+   return true;
 }
 
 /**
@@ -3038,7 +2967,6 @@ void Konsole::doneSession(TESession* s)
     m_removeSessionButton->setEnabled(tabwidget->count()>1);
   session2action.remove(s);
   action2session.remove(ra);
-  sessionConfigMap.remove(s);
   int sessionIndex = sessions.findRef(s);
   sessions.remove(s);
   delete ra; // will the toolbar die?
@@ -4095,11 +4023,6 @@ void Konsole::slotSaveHistory()
 
 void Konsole::slotShowSaveHistoryDialog()
 {
-  // FIXME - mostLocalURL can't handle non-existing files yet, so this
-  //         code doesn't work.
-//  KUrl s_url = KFileDialog::getSaveUrl( QString(),
-//				  						"text/plain text/html",
-//										0L, i18n("Save History"));
   if (!saveHistoryDialog)
   {
 		 saveHistoryDialog = new KFileDialog( QString(":konsole") , QString() , this);

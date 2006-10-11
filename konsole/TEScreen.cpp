@@ -19,18 +19,22 @@
 */
 
 
+// Standard
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <kdebug.h>
-
 #include <assert.h>
 #include <string.h>
 #include <ctype.h>
 
+// Qt
 #include <QTextStream>
 #include <QTime>
 
+// KDE
+#include <kdebug.h>
+
+// Konsole
 #include "konsole_wcwidth.h"
 #include "TEScreen.h"
 #include "TerminalCharacterDecoder.h"
