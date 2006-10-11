@@ -187,13 +187,12 @@ public:
     QList<SessionInfo*> availableSessionTypes();
 
     /** 
-     * Returns a SessionInfo object describing the default type of session, as
-     * which is created if createSession() is called with an empty configPath
+     * Returns a SessionInfo object describing the default type of session, which is used
+     * if createSession() is called with an empty configPath argument.
      */
     SessionInfo* defaultSessionType();
     
     /**
-     * 
      * Adds a setting which will be considered when creating new sessions.
      * Each setting ( such as terminal font , initial working directory etc. )
      * can be specified by multiple different sources.  The 
@@ -232,7 +231,8 @@ public:
      * using addSetting() and from the configuration file for this session type.
      *
      * The new session has no views associated with it.  A new TEWidget view
-     * must be created in order to display the output from the terminal session.
+     * must be created in order to display the output from the terminal session and 
+     * send keyboard or mouse input to it.
      *
      * @param type Specifies the type of session to create.  Passing an empty
      *             string will create a session using the default configuration.

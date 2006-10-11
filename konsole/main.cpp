@@ -22,17 +22,29 @@
 /* kvt, which is copyright (c) 1996 by Matthias Ettrich <ettrich@kde.org> */
 /*                                                                        */
 
+// Standard Library / Unix
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+// Qt
 #include <QDir>
-#include <qsessionmanager.h>
+#include <QSessionManager>
 #include <QWidget>
-
 #include <QStringList>
 
+// X11
+#if defined(Q_WS_X11) && defined(HAVE_XRENDER)
+    #define TRUE_TRANSPARENCY_SUPPORT
+#endif
 
+#ifdef TRUE_TRANSPARENCY_SUPPORT
+    #include <X11/Xlib.h>
+    #include <X11/extensions/Xrender.h>
+    #include <fixx11h.h>
+#endif
+
+// KDE
 #include <klocale.h>
 #include <kaboutdata.h>
 #include <kcmdlineargs.h>
@@ -41,31 +53,17 @@
 #include <kglobalsettings.h>
 #include <kio/netaccess.h>
 #include <kmessagebox.h>
-
 #include <config.h>
 #include <kauthorized.h>
 
+// Konsole
 #include "konsole.h"
 #include "SessionManager.h"
 
-// COMPOSITE disabled by default because the QApplication constructor
-// needed to enable the ARGB32 visual has undesired side effects.
-#if 0
-#if defined(Q_WS_X11) && defined(HAVE_XRENDER) && QT_VERSION >= 0x030300
-# define COMPOSITE
-#endif
-#endif
-
-#ifdef COMPOSITE
-# include <X11/Xlib.h>
-# include <X11/extensions/Xrender.h>
-# include <fixx11h.h>
-#endif
 
 static const char description[] =
-  I18N_NOOP("X terminal for use with KDE.");
+  I18N_NOOP("The KDE Terminal");
 
-//   { "T <title>",      0, 0 },
 static KCmdLineOptions options[] =
 {
    { "name <name>",    I18N_NOOP("Set window class"), 0 },
@@ -80,9 +78,6 @@ static KCmdLineOptions options[] =
    { "noframe",        I18N_NOOP("Do not display frame"), 0 },
    { "noscrollbar",    I18N_NOOP("Do not display scrollbar"), 0 },
    { "noxft",          I18N_NOOP("Do not use Xft (anti-aliasing)"), 0 },
-#ifdef COMPOSITE
-   { "noargb",         I18N_NOOP("Do not use the ARGB32 visual (transparency)"), 0 },
-#endif
    { "vt_sz CCxLL",    I18N_NOOP("Terminal size in columns x lines"), 0 },
    { "noresize",       I18N_NOOP("Terminal size is fixed"), 0 },
    { "type <type>",    I18N_NOOP("Start with given session type"), 0 },
@@ -107,30 +102,28 @@ static bool login_shell = false;
 //static bool full_script = false;
 static bool auto_close = true;
 static bool fixed_size = false;
+bool true_transparency = false;
 
-bool argb_visual = false;
 
-const char *konsole_shell(QStringList &args)
-{
-  const char* shell = getenv("SHELL");
-  if (shell == NULL || *shell == '\0') shell = "/bin/sh";
-  if (login_shell)
-  {
-    char* t = (char*)strrchr(shell,'/');
-    if (t) // see sh(1)
-    {
-      t = strdup(t);
-      *t = '-';
-      args.append(t);
-      free(t);
-    }
-    else
-      args.append(shell);
-  }
-  else
-    args.append(shell);
-  return shell;
-}
+//prototypes
+const char* konsole_shell(QStringList& args);
+
+// Retrieve information about display needed to enable true transparency.  This will
+// search for a display, visual format and colormap which can be passed to the KApplication
+// constructor to enable the use of true transparency in the application.  If compositing
+// support is not available then 'display', 'visual' and 'colormap' will be set to null. 
+// 
+// displayName - The name of the display to use, will use the default display
+//               if this is an empty string.
+// display     - Out parameter. Receives a pointer to the X display to use
+// visual      - Out parameter. Receives a pointer to the X visual to use
+// colormap    - Out parameter. Set to the X colormap to use
+
+#ifdef TRUE_TRANSPARENCY_SUPPORT
+void getDisplayInfo( const QString& displayName , Display*& display , 
+                     Visual*& visual, Colormap& colormap);
+#endif
+
 
 /**
    The goal of this class is to add "--noxft" and "--ls" to the restoreCommand
@@ -162,7 +155,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 {
   setgid(getgid()); setuid(getuid()); // drop privileges
 
-  // deal with shell/command ////////////////////////////
+  // deal with shell/command 
   bool histon = true;
   bool menubaron = true;
   bool tabbaron = true;
@@ -172,71 +165,68 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   QByteArray wname = PACKAGE;
 
 
-  KAboutData aboutData( "konsole" /*PACKAGE*/, I18N_NOOP("Konsole"),
-    VERSION, description, KAboutData::License_GPL_V2,
-    "Copyright (c) 1997-2006, Konsole Team", 0 , "http://konsole.kde.org");
+  KAboutData aboutData( "konsole" , I18N_NOOP("Konsole") , VERSION , description , 
+                        KAboutData::License_GPL , I18N_NOOP("(C) 1997-2006 , Konsole Developers") );
   aboutData.addAuthor("Robert Knight",I18N_NOOP("Maintainer"), "robertknight@gmail.com");
   aboutData.addAuthor("Lars Doelle",I18N_NOOP("Author"), "lars.doelle@on-line.de");
   aboutData.addCredit("Kurt V. Hindenburg",
-    I18N_NOOP("bug fixing and improvements"), 
+    I18N_NOOP("Bug fixes and general improvements"), 
     "kurt.hindenburg@kdemail.net");
   aboutData.addCredit("Waldo Bastian",
-    I18N_NOOP("bug fixing and improvements"),
+    I18N_NOOP("Bug fixes and general improvements"),
     "bastian@kde.org");
   aboutData.addCredit("Stephan Binner",
-    I18N_NOOP("bug fixing and improvements"),
+    I18N_NOOP("Bug fixes and general improvements"),
     "binner@kde.org");
   aboutData.addCredit("Chris Machemer",
-    I18N_NOOP("bug fixing"),
+    I18N_NOOP("Bug fixes"),
     "machey@ceinetworks.com");
   aboutData.addCredit("Stephan Kulow",
-    I18N_NOOP("Solaris support and work on history"),
+    I18N_NOOP("Solaris support and history"),
     "coolo@kde.org");
   aboutData.addCredit("Alexander Neundorf",
-    I18N_NOOP("faster startup, bug fixing"),
+    I18N_NOOP("Bug fixes and improved startup performance"),
     "neundorf@kde.org");
   aboutData.addCredit("Peter Silva",
-    I18N_NOOP("decent marking"),
+    I18N_NOOP("Marking improvements"),
     "peter.silva@videotron.ca");
   aboutData.addCredit("Lotzi Boloni",
-    I18N_NOOP("partification\n"
+    I18N_NOOP("Embedded Konsole\n"
     "Toolbar and session names"),
     "boloni@cs.purdue.edu");
   aboutData.addCredit("David Faure",
-    I18N_NOOP("partification\n"
-    "overall improvements"),
+    I18N_NOOP("Embedded Konsole\n"
+    "General improvements"),
     "David.Faure@insa-lyon.fr");
   aboutData.addCredit("Antonio Larrosa",
-    I18N_NOOP("transparency"),
+    I18N_NOOP("Visual effects"),
     "larrosa@kde.org");
   aboutData.addCredit("Matthias Ettrich",
-    I18N_NOOP("most of main.C donated via kvt\n"
-    "overall improvements"),
+    I18N_NOOP("Code from the kvt project\n"
+    "General improvements"),
     "ettrich@kde.org");
   aboutData.addCredit("Warwick Allison",
-    I18N_NOOP("schema and selection improvements"),
+    I18N_NOOP("Schema and text selection improvements"),
     "warwick@troll.no");
   aboutData.addCredit("Dan Pilone",
-    I18N_NOOP("SGI Port"),
+    I18N_NOOP("SGI port"),
     "pilone@slac.com");
   aboutData.addCredit("Kevin Street",
     I18N_NOOP("FreeBSD port"),
     "street@iname.com");
   aboutData.addCredit("Sven Fischer",
-    I18N_NOOP("bug fixing"),
+    I18N_NOOP("Bug fixes"),
     "herpes@kawo2.rwth-aachen.de");
   aboutData.addCredit("Dale M. Flaven",
-    I18N_NOOP("bug fixing"),
+    I18N_NOOP("Bug fixes"),
     "dflaven@netport.com");
   aboutData.addCredit("Martin Jones",
-    I18N_NOOP("bug fixing"),
+    I18N_NOOP("Bug fixes"),
     "mjones@powerup.com.au");
   aboutData.addCredit("Lars Knoll",
-    I18N_NOOP("bug fixing"),
+    I18N_NOOP("Bug fixes"),
     "knoll@mpi-hd.mpg.de");
-  aboutData.addCredit("",I18N_NOOP("Thanks to many others.\n"
-    "The above list only reflects the contributors\n"
-    "I managed to keep track of."));
+  aboutData.addCredit("",I18N_NOOP("Thanks to many others.\n"));
 
   KCmdLineArgs::init( argc, argv, &aboutData );
   KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
@@ -256,48 +246,22 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   if( qtargs->isSet("font") )
       kWarning() << "The Qt option -fn, --font has no effect." << endl;
 
-#ifdef COMPOSITE
-  char *display = 0;
-  if ( qtargs->isSet("display"))
-    display = qtargs->getOption( "display" ).data();
+#ifdef TRUE_TRANSPARENCY_SUPPORT
+  Colormap colormap  = 0;
+  Visual*  visual    = 0;
+  Display* display   = 0;
 
-  Display *dpy = XOpenDisplay( display );
-  if ( !dpy ) {
-    kError() << "cannot connect to X server " << display << endl;
-    exit( 1 );
-  }
-
-  int screen = DefaultScreen( dpy );
-  Colormap colormap = 0;
-  Visual *visual = 0;
-  int event_base, error_base;
-
-  if ( args->isSet("argb") && XRenderQueryExtension( dpy, &event_base, &error_base ) )
-  {
-    int nvi;
-    XVisualInfo templ;
-    templ.screen  = screen;
-    templ.depth   = 32;
-    templ.c_class = TrueColor;
-    XVisualInfo *xvi = XGetVisualInfo( dpy, VisualScreenMask | VisualDepthMask
-		  | VisualClassMask, &templ, &nvi );
-
-    for ( int i = 0; i < nvi; i++ ) {
-      XRenderPictFormat *format = XRenderFindVisualFormat( dpy, xvi[i].visual );
-      if ( format->type == PictTypeDirect && format->direct.alphaMask ) {
-        visual = xvi[i].visual;
-        colormap = XCreateColormap( dpy, RootWindow( dpy, screen ), visual, AllocNone );
-        argb_visual = true;
-        break;
-      }
-    }
-  }
-
-  KApplication a( dpy, Qt::HANDLE( visual ), Qt::HANDLE( colormap ) );
+  getDisplayInfo( qtargs->getOption("display") , display , visual , colormap );
+  KApplication a( display , Qt::HANDLE( visual ), Qt::HANDLE( colormap ) );
 #else
   KApplication a;
 #endif
 
+  //create session manager to keep track of available session types
+  //and active terminal sessions
+  SessionManager* sessionManager = new SessionManager();
+  
+  
   QString title;
   if(args->isSet("T")) {
     title = QFile::decodeName(args->getOption("T"));
@@ -354,17 +318,13 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
     type = args->getOption("type");
   }
   if(args->isSet("types")) {
-    QStringList types = KGlobal::dirs()->findAllResources("appdata", "*.desktop", false, true);
-    types.sort();
-    for(QStringList::ConstIterator it = types.begin();
-        it != types.end(); ++it)
+    
+    QListIterator<SessionInfo*> infoIter(sessionManager->availableSessionTypes());
+    while (infoIter.hasNext())
     {
-       QString file = *it;
-       file = file.mid(file.lastIndexOf('/')+1);
-       if (file.endsWith(".desktop"))
-          file = file.left(file.length()-8);
-       printf("%s\n", QFile::encodeName(file).data());
+        printf("%s\n",QFileInfo(infoIter.next()->path()).baseName().toAscii().data());
     }
+    
     return 0;
   }
   if(args->isSet("schemas") || args->isSet("schemata")) {
@@ -504,7 +464,6 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         Konsole *m = new Konsole(wname,histon,menubaron,tabbaron,frameon,scrollbaron,0/*type*/,true,n_tabbar, workDir);
 
 
-        SessionManager* sessionManager = new SessionManager();
         m->setSessionManager(sessionManager);
 
         kDebug() << "WARNING:  Not using appropriate properties for new session" << endl;
@@ -618,7 +577,6 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   {
     Konsole*  m = new Konsole(wname,histon,menubaron,tabbaron,frameon,scrollbaron,type, false, 0, workDir);
 
-   SessionManager* sessionManager = new SessionManager();
    m->setSessionManager(sessionManager);
 
    kDebug() <<  "* WARNING - Code to create new session not done yet" << endl;
@@ -652,3 +610,70 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 
   return ret;
 }
+
+const char *konsole_shell(QStringList &args)
+{
+  const char* shell = getenv("SHELL");
+  if (shell == NULL || *shell == '\0') shell = "/bin/sh";
+  if (login_shell)
+  {
+    char* t = (char*)strrchr(shell,'/');
+    if (t) // see sh(1)
+    {
+      t = strdup(t);
+      *t = '-';
+      args.append(t);
+      free(t);
+    }
+    else
+      args.append(shell);
+  }
+  else
+    args.append(shell);
+  return shell;
+}
+
+
+#ifdef TRUE_TRANSPARENCY_SUPPORT
+void getDisplayInfo( const QString& displayName , Display*& dpy , Visual*& visual, Colormap& colormap )
+{
+  dpy = 0;
+  visual = 0;
+  colormap = 0;
+
+  char *display = 0;
+
+  if ( !displayName.isEmpty() )
+      display = displayName.toAscii().data();
+
+  dpy = XOpenDisplay( display );
+  if ( !dpy ) {
+    kError() << "cannot connect to X server " << display << endl;
+    exit( 1 );
+  }
+
+  int screen = DefaultScreen( dpy );
+  int event_base, error_base;
+
+  if ( XRenderQueryExtension( dpy, &event_base, &error_base ) )
+  {
+    int nvi;
+    XVisualInfo templ;
+    templ.screen  = screen;
+    templ.depth   = 32;
+    templ.c_class = TrueColor;
+    XVisualInfo *xvi = XGetVisualInfo( dpy, VisualScreenMask | VisualDepthMask
+		  | VisualClassMask, &templ, &nvi );
+
+    for ( int i = 0; i < nvi; i++ ) {
+      XRenderPictFormat *format = XRenderFindVisualFormat( dpy, xvi[i].visual );
+      if ( format->type == PictTypeDirect && format->direct.alphaMask ) {
+        visual = xvi[i].visual;
+        colormap = XCreateColormap( dpy, RootWindow( dpy, screen ), visual, AllocNone );
+        true_transparency = true;
+        break;
+      }
+    }
+  }
+}
+#endif

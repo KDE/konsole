@@ -114,7 +114,7 @@
                   "abcdefgjijklmnopqrstuvwxyz" \
                   "0123456789./+@"
 
-extern bool argb_visual; // declared in main.cpp and konsole_part.cpp
+extern bool true_transparency; // declared in main.cpp and konsole_part.cpp
 
 // scroll increment used when dragging selection at top/bottom of window.
 
@@ -168,7 +168,7 @@ void TEWidget::setColorTable(const ColorEntry table[])
   const QPixmap* pm = 0; 
   if (!pm)
   {
-    if (!argb_visual || (qAlpha(blend_color) == 0xff))
+    if (!true_transparency || (qAlpha(blend_color) == 0xff))
     {
         QPalette p = palette();
         p.setColor( backgroundRole(), getDefaultBackColor() );
@@ -422,10 +422,6 @@ TEWidget::TEWidget(QWidget *parent)
   // im
   setAttribute(Qt::WA_InputMethodEnabled, true);
 
-  if (!argb_visual)
-  {
-  }
-  
   //tell Qt to automatically fill the widget with the current background colour when
   //repainting.
   //the widget may then need to repaint over some of the area in a different colour
@@ -691,7 +687,7 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
           attr->b == cacol(CO_DFT, colorsSwapped ? DEFAULT_FORE_COLOR : DEFAULT_BACK_COLOR) )
 
         // draw background colors with 75% opacity
-        if ( argb_visual && qAlpha(blend_color) < 0xff ) {
+        if ( true_transparency && qAlpha(blend_color) < 0xff ) {
           QRgb col = bColor.rgb();
 
           Q_UINT8 salpha = 192;

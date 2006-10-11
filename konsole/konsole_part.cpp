@@ -56,8 +56,8 @@
 #include <ktoggleaction.h>
 #include <kauthorized.h>
 
-// We can't use the ARGB32 visual when embedded in another application
-bool argb_visual = false;
+// True transparency is not available in the embedded Konsole
+bool true_transparency = false;
 
 extern "C"
 {

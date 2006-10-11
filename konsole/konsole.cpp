@@ -169,7 +169,7 @@ Time to start a requirement list.
 #define SESSION_NEW_WINDOW_ID 1
 #define SESSION_NEW_SHELL_ID 100
 
-extern bool argb_visual; // declared in main.cpp and konsole_part.cpp
+extern bool true_transparency; // declared in main.cpp and konsole_part.cpp
 
 // KonsoleFontSelectAction is now also used for selectSize!
 class KonsoleFontSelectAction : public KSelectAction {
@@ -999,7 +999,7 @@ void Konsole::makeBasicGUI()
   }
 
   if (KAuthorized::authorizeKAction("help"))
-     m_help = helpMenu(QString(), false);
+     m_help = helpMenu(); //helpMenu(QString(), false);
 
   if (KAuthorized::authorizeKAction("konsole_rmb")) {
      m_rightButton = new KMenu(this);
@@ -3578,7 +3578,7 @@ void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
   tewidget->setColorTable(s->table()); //FIXME: set twice here to work around a bug
 
   if (s->useTransparency()) {
-    if (!argb_visual) {
+    if (!true_transparency) {
     } else {
       tewidget->setBlendColor(qRgba(s->tr_r(), s->tr_g(), s->tr_b(), int(s->tr_x() * 255)));
       QPalette palette;

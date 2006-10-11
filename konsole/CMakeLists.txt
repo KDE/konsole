@@ -42,18 +42,18 @@ set(konsole_KDEINIT_SRCS
    sessionscriptingadaptor.cpp 
    TerminalCharacterDecoder.cpp
    SessionManager.cpp )
-#   SessionTabWidget.cpp )
-#   OverlayFrame.cpp )
 
 kde4_automoc(${konsole_KDEINIT_SRCS})
-
 
 kde4_add_kdeinit_executable( konsole ${konsole_KDEINIT_SRCS})
 
 target_link_libraries(kdeinit_konsole  ${KDE4_KDEPRINT_LIBS} ${QT_QTXML_LIBRARY} knotifyconfig )
 
-# target_link_libraries(kdeinit_konsole ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KDEPRINT_LIBS} ${QT_QTXML_LIBRARY} knotifyconfig )
-
+# XRender library for true transparency support    
+if(X11_Xrender_FOUND)
+    target_link_libraries(kdeinit_konsole ${X11_Xrender_LIB} )
+endif(X11_Xrender_FOUND)
+    
 if(X11_XTest_FOUND)
   target_link_libraries(kdeinit_konsole ${X11_XTest_LIB} )
 endif(X11_XTest_FOUND)
@@ -86,7 +86,6 @@ set(konsolepart_PART_SRCS
    keytrans.cpp 
    TerminalCharacterDecoder.cpp
    SessionManager.cpp )
-  # OverlayFrame.cpp )
 
 kde4_automoc(${konsolepart_PART_SRCS})
 

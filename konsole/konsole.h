@@ -54,7 +54,7 @@
 #undef PACKAGE
 #undef VERSION
 #define PACKAGE "konsole"
-#define VERSION "2.0alpha"
+#define VERSION "1.9"
 
 class QCheckBox;
 class QLabel;
@@ -75,8 +75,6 @@ class KToggleAction;
 class SessionInfo;
 class SessionManager;
 
-// Defined in main.C
-const char *konsole_shell(QStringList &args);
 
 class Konsole : public KMainWindow
 {
