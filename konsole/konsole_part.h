@@ -21,17 +21,18 @@
 #ifndef KONSOLE_PART_H
 #define KONSOLE_PART_H
 
+// Qt
+#include <QStringList>
+
+// KDE
 #include <kparts/browserextension.h>
 #include <kparts/factory.h>
-
-
 #include <kdialog.h>
-
 #include <kde_terminal_interface.h>
 
+// Konsole
 #include "schema.h"
-#include "session.h"
-#include <QStringList>
+#include "TESession.h"
 
 class KInstance;
 class konsoleBrowserExtension;

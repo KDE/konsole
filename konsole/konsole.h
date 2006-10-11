@@ -35,7 +35,7 @@
 // Konsole
 #include "TEPty.h"
 #include "TEmuVt102.h"
-#include "session.h"
+#include "TESession.h"
 #include "schema.h"
 #include "konsolebookmarkhandler.h"
 

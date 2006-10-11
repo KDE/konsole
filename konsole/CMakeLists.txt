@@ -25,7 +25,7 @@ set(konsole_KDEINIT_SRCS
    main.cpp 
    konsole.cpp 
    schema.cpp 
-   session.cpp 
+   TESession.cpp 
    TEWidget.cpp 
    TEmuVt102.cpp 
    TEScreen.cpp 
@@ -75,7 +75,7 @@ set(konsolepart_PART_SRCS
    BlockArray.cpp 
    konsole_part.cpp 
    schema.cpp 
-   session.cpp 
+   TESession.cpp 
    zmodem_dialog.cpp 
    TEWidget.cpp 
    TEmuVt102.cpp 

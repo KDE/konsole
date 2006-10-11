@@ -48,7 +48,7 @@
 #include "sessionscriptingadaptor.h"
 #include "zmodem_dialog.h"
 
-#include "session.h"
+#include "TESession.h"
 
 
 TESession::TESession() : 
@@ -1044,4 +1044,4 @@ void TESession::setSize(QSize size)
   emit resizeSession(this, size);
 }
 
-#include "session.moc"
+#include "TESession.moc"

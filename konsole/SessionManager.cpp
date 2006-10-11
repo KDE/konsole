@@ -33,7 +33,7 @@
 #include <kstandarddirs.h>
 
 // Konsole
-#include "session.h"
+#include "TESession.h"
 #include "SessionManager.h"
 
 
