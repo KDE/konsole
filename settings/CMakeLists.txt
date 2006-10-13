@@ -5,7 +5,7 @@
 
 set(kcm_konsole_PART_SRCS schemaeditor.cpp sessioneditor.cpp kcmkonsole.cpp )
 
-kde4_automoc(${kcm_konsole_PART_SRCS})
+kde4_automoc(kcm_konsole ${kcm_konsole_PART_SRCS})
 
 kde4_add_ui3_files(kcm_konsole_PART_SRCS schemadialog.ui )
 
