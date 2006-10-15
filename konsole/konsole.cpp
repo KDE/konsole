@@ -256,11 +256,10 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 ,s_workDir(workdir)
 ,_sessionManager(0)
 {
-    setObjectName( name );
+  setObjectName( name );
 
-	(void)new KonsoleAdaptor(this);
-	QDBusConnection::sessionBus().registerObject(QLatin1String("/Konsole"), this);
-	QDBusConnection::sessionBus().registerService("org.kde.konsole");
+  (void)new KonsoleAdaptor(this);
+  QDBusConnection::sessionBus().registerObject(QLatin1String("/Konsole"), this);
   m_sessionGroup = new QActionGroup(this);
 
   isRestored = b_inRestore;

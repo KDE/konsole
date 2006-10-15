@@ -78,7 +78,6 @@ TESession::TESession() :
     (void)new SessionAdaptor(this);
     	
     QDBusConnection::sessionBus().registerObject(QLatin1String("/Session"), this);
-	QDBusConnection::sessionBus().registerService("org.kde.konsole");
 
     //create teletype for I/O with shell process
     sh = new TEPty();
