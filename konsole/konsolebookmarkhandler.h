@@ -51,7 +51,7 @@ Q_SIGNALS:
     void openUrl( const QString&, const QString& );
 
 private Q_SLOTS:
-    void openBookmark( KBookmark bm, Qt::MouseButtons, Qt::KeyboardModifiers );
+    void openBookmark( const KBookmark & bm, Qt::MouseButtons, Qt::KeyboardModifiers );
 
 private:
     Konsole *m_konsole;

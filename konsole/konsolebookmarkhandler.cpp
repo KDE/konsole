@@ -57,7 +57,7 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel 
     if ( m_file.isEmpty() )
         m_file = KStandardDirs::locateLocal( "data", "konsole/bookmarks.xml" );
 
-    KBookmarkManager *manager = KBookmarkManager::managerForFile( m_file, false);
+    KBookmarkManager *manager = KBookmarkManager::managerForFile( m_file, "konsole", false);
     manager->setEditorOptions(kapp->caption(), false);
     manager->setUpdate( true );
 
@@ -75,7 +75,7 @@ KonsoleBookmarkHandler::~KonsoleBookmarkHandler()
     delete m_bookmarkMenu;
 }
 
-void KonsoleBookmarkHandler::openBookmark( KBookmark bm, Qt::MouseButtons, Qt::KeyboardModifiers )
+void KonsoleBookmarkHandler::openBookmark( const KBookmark & bm, Qt::MouseButtons, Qt::KeyboardModifiers )
 {
     emit openUrl( bm.url().url(), bm.text() );
 }
