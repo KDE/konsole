@@ -41,7 +41,9 @@ set(konsole_KDEINIT_SRCS
    konsolescriptingadaptor.cpp
    sessionscriptingadaptor.cpp 
    TerminalCharacterDecoder.cpp
-   SessionManager.cpp )
+   SessionManager.cpp
+   ViewSplitter.cpp
+   ViewContainer.cpp  )
 
 kde4_automoc(konsole ${konsole_KDEINIT_SRCS})
 
