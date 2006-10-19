@@ -128,52 +128,52 @@ static const int LINE_DOUBLEHEIGHT	= (1 << 2);
 class cacol
 {
 public:
-  cacol();
-  cacol(UINT8 space, int color);
+  cacol() : t(0), u(0), v(0), w(0) {}
+  cacol(UINT8 ty, int co) : t(ty), u(0), v(0), w(0)
+  {
+    if (CO_DFT == t) {
+      u = co & 1;
+    } else if (CO_SYS == t) {
+      u = co & 7;
+      v = (co >> 3) & 1;
+    } else if (CO_256 == t) {
+      u = co & 255;
+    } else if (CO_RGB == t) {
+      u = co >> 16;
+      v = co >> 8;
+      w = co;
+    }
+#if 0
+    // Doesn't work with gcc 3.3.4
+    switch (t)
+    {
+      case CO_UND:                                break;
+      case CO_DFT: u = co&  1;                    break;
+      case CO_SYS: u = co&  7; v = (co>>3)&1;     break;
+      case CO_256: u = co&255;                    break;
+      case CO_RGB: u = co>>16; v = co>>8; w = co; break;
+      default    : t = 0;                         break;
+    }
+#endif
+  }
   UINT8 t; // color space indicator
   UINT8 u; // various bytes representing the data in the respective ...
   UINT8 v; // ... color space. C++ does not do unions, so we cannot ...
   UINT8 w; // ... express ourselfs here, properly.
   void toggleIntensive(); // Hack or helper?
   QColor color(const ColorEntry* base) const;
-  friend bool operator == (cacol a, cacol b);
-  friend bool operator != (cacol a, cacol b);
+  friend bool operator == (const cacol& a, const cacol& b);
+  friend bool operator != (const cacol& a, const cacol& b);
 };
 
-#if 0
-inline cacol::cacol(UINT8 _t, UINT8 _u, UINT8 _v, UINT8 _w)
-: t(_t), u(_u), v(_v), w(_w)
-{
-}
-#else
-inline cacol::cacol(UINT8 ty, int co)
-: t(ty), u(0), v(0), w(0)
-{
-  switch (t)
-  {
-    case CO_UND:                                break;
-    case CO_DFT: u = co&  1;                    break;
-    case CO_SYS: u = co&  7; v = (co>>3)&1;     break;
-    case CO_256: u = co&255;                    break;
-    case CO_RGB: u = co>>16; v = co>>8; w = co; break;
-    default    : t = 0;                         break;
-  }
-}
-#endif
-
-inline cacol::cacol() // undefined, really
-: t(CO_UND), u(0), v(0), w(0)
-{
-}
-
-inline bool operator == (cacol a, cacol b)
+inline bool operator == (const cacol& a, const cacol& b)
 { 
-  return a.t == b.t && a.u == b.u && a.v == b.v && a.w == b.w;
+  return *reinterpret_cast<const Q_UINT32*>(&a.t) == *reinterpret_cast<const Q_UINT32*>(&b.t);
 }
 
-inline bool operator != (cacol a, cacol b)
+inline bool operator != (const cacol& a, const cacol& b)
 {
-  return a.t != b.t || a.u != b.u || a.v != b.v || a.w != b.w;
+  return *reinterpret_cast<const Q_UINT32*>(&a.t) != *reinterpret_cast<const Q_UINT32*>(&b.t);
 }
 
 inline const QColor color256(UINT8 u, const ColorEntry* base)
@@ -235,18 +235,18 @@ public:
   bool   isTransparent(const ColorEntry* base) const;
   bool   isBold(const ColorEntry* base) const;
 public:
-  friend bool operator == (ca a, ca b);
-  friend bool operator != (ca a, ca b);
+  friend bool operator == (const ca& a, const ca& b);
+  friend bool operator != (const ca& a, const ca& b);
 };
 
-inline bool operator == (ca a, ca b)
+inline bool operator == (const ca& a, const ca& b)
 { 
-  return a.c == b.c && a.f == b.f && a.b == b.b && a.r == b.r;
+  return a.c == b.c && a.r == b.r && a.f == b.f && a.b == b.b;
 }
 
-inline bool operator != (ca a, ca b)
+inline bool operator != (const ca& a, const ca& b)
 {
-  return a.c != b.c || a.f != b.f || a.b != b.b || a.r != b.r;
+  return a.c != b.c || a.r != b.r || a.f != b.f || a.b != b.b;
 }
 
 inline bool ca::isTransparent(const ColorEntry* base) const

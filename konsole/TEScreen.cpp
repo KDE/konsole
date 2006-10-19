@@ -73,7 +73,7 @@ TEScreen::TEScreen(int l, int c)
     histCursor(0),
     hist(new HistoryScrollNone()),
     cuX(0), cuY(0),
-    cu_fg(cacol()), cu_bg(cacol()), cu_re(0),
+    cu_re(0),
     tmargin(0), bmargin(0),
     tabstops(0),
     sel_begin(0), sel_TL(0), sel_BR(0),
@@ -81,7 +81,7 @@ TEScreen::TEScreen(int l, int c)
     columnmode(false),
     ef_fg(cacol()), ef_bg(cacol()), ef_re(0),
     sa_cuX(0), sa_cuY(0),
-    sa_cu_re(0), sa_cu_fg(cacol()), sa_cu_bg(cacol()),
+    sa_cu_re(0),
     lastPos(-1)
 {
   
