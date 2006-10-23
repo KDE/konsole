@@ -67,6 +67,7 @@ class KWinModule;
 class TEWidget;
 class SessionInfo;
 class SessionManager;
+class ViewSplitter;
 
 
 class Konsole : public KMainWindow
@@ -309,7 +310,7 @@ private:
   QString m_defaultSessionFilename;
 
   //SessionTabWidget* tabwidget;
-  KTabWidget*    tabwidget;
+  // KTabWidget*    tabwidget;
   TEWidget*      te;     // the visible TEWidget, either sole one or one of many
   TESession*     se;
   TESession*     se_previous;
@@ -468,6 +469,8 @@ private:
   QColor    m_tabColor;
 
   SessionManager* _sessionManager;
+
+  ViewSplitter* _view;
 };
 
 class QSpinBox;

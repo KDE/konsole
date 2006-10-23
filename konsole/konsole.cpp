@@ -102,7 +102,7 @@
 #include <kstandarddirs.h>
 #include <kstdaction.h>
 #include <kstringhandler.h>
-#include <ktabwidget.h>
+//#include <ktabwidget.h>
 #include <ktemporaryfile.h>
 #include <ktip.h>
 #include <ktoggleaction.h>
@@ -119,6 +119,8 @@
 #include "konsoleadaptor.h"
 #include "konsolescriptingadaptor.h"
 #include "printsettings.h"
+#include "ViewSplitter.h"
+#include "ViewContainer.h"
 
 #include "konsole.h"
 
@@ -162,7 +164,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 :KMainWindow(0)
 ,m_defaultSession(0)
 ,m_defaultSessionFilename("")
-,tabwidget(0)
+//,tabwidget(0)
 ,te(0)
 ,se(0)
 ,se_previous(0)
@@ -310,10 +312,17 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
     n_tabbar = TabNone;
 
   makeTabWidget();
-  setCentralWidget(tabwidget);
 
-  if (b_dynamicTabHide || n_tabbar==TabNone)
-    tabwidget->setTabBarHidden(true);
+  _view = new ViewSplitter();
+  _view->addContainer( new TabbedViewContainer() , Qt::Horizontal );
+
+  setCentralWidget(_view);
+
+//  setCentralWidget(tabwidget);
+
+// SPLIT-VIEW Disabled
+//  if (b_dynamicTabHide || n_tabbar==TabNone)
+//    tabwidget->setTabBarHidden(true);
 
   if (!histon)
     b_histEnabled=false;
@@ -846,8 +855,10 @@ void Konsole::slotSetEncoding()
 
 void Konsole::makeTabWidget()
 {
-  //tabwidget = new SessionTabWidget(this);
-  tabwidget = new KTabWidget(this);
+ //SPLIT-VIEW Disabled
+/*  //tabwidget = new SessionTabWidget(this);
+  tabwidget = new KTabWidget(0);
+ // tabwidget->show();
   tabwidget->setTabReorderingEnabled(true);
   tabwidget->setAutomaticResizeTabs( b_autoResizeTabs );
   tabwidget->setTabCloseActivatePrevious( true );
@@ -894,7 +905,7 @@ void Konsole::makeTabWidget()
     connect(m_removeSessionButton, SIGNAL(clicked()), SLOT(confirmCloseCurrentSession()));
     tabwidget->setCornerWidget( m_removeSessionButton, Qt::BottomRightCorner );
 
-  }
+  }*/
 }
 
 bool Konsole::eventFilter( QObject *o, QEvent *ev )
@@ -1275,6 +1286,8 @@ void Konsole::slotTabContextMenu(QWidget* _te, const QPoint & pos)
    if (!m_menuCreated)
       makeGUI();
 
+   //SPLIT-VIEW Disabled
+  /*
   m_contextMenuSession = sessions.at( tabwidget->indexOf( _te ) );
 
   m_tabDetachSession->setEnabled( tabwidget->count()>1 );
@@ -1290,7 +1303,7 @@ void Konsole::slotTabContextMenu(QWidget* _te, const QPoint & pos)
     m_tabPopupTabsMenu->insertItem(SmallIconSet(ses->IconName()),title.replace('&',"&&"),counter++);
   }
 
-  m_tabPopupMenu->popup( pos );
+  m_tabPopupMenu->popup( pos );*/
 }
 
 void Konsole::slotTabDetachSession() {
@@ -1303,6 +1316,9 @@ void Konsole::slotTabRenameSession() {
 
 void Konsole::slotTabSelectColor()
 {
+/* 
+  SPLIT-VIEW Disabled
+
   QColor color;
 
   //If the color palette is available apply the current selected color to the tab, otherwise
@@ -1325,12 +1341,15 @@ void Konsole::slotTabSelectColor()
         return;
   }
 
-  tabwidget->setTabTextColor( tabwidget->indexOf( m_contextMenuSession->widget() ), color );
+  tabwidget->setTabTextColor( tabwidget->indexOf( m_contextMenuSession->widget() ), color );*/
 }
 
 void Konsole::slotTabPrepareColorCells()
 {
-    //set selected color in palette widget to color of active tab
+/*    
+   SPLIT-VIEW Disabled
+
+   //set selected color in palette widget to color of active tab
 
     QColor activeTabColor = tabwidget->tabTextColor( tabwidget->indexOf( m_contextMenuSession->widget() ) );
 
@@ -1339,7 +1358,7 @@ void Konsole::slotTabPrepareColorCells()
         {
             m_tabColorCells->setSelected(i);
             break;
-        }
+        } */
 }
 
 void Konsole::slotTabToggleMonitor()
@@ -1365,11 +1384,13 @@ void Konsole::slotTabCloseSession()
 
 void Konsole::slotTabCloseSession(QWidget* sessionWidget)
 {
-	for (uint i=0;i<sessions.count();i++)
+/*	SPLIT-VIEW Disabled
+ 
+    for (uint i=0;i<sessions.count();i++)
 	{
 		if (sessions.at(i)->widget() == sessionWidget)
 			confirmCloseCurrentSession(sessions.at(i));
-	}
+	}*/
 }
 
 void Konsole::slotTabbarContextMenu(const QPoint & pos)
@@ -1382,7 +1403,8 @@ void Konsole::slotTabbarContextMenu(const QPoint & pos)
 
 void Konsole::slotTabSetViewOptions(int mode)
 {
-  m_tabViewMode = TabViewModes(mode);
+  //SPLIT-VIEW Disabled
+ /* m_tabViewMode = TabViewModes(mode);
 
   for(int i = 0; i < tabwidget->count(); i++) {
     QIcon icon = iconSetForSession(sessions.at(i));
@@ -1407,23 +1429,25 @@ void Konsole::slotTabSetViewOptions(int mode)
         tabwidget->setTabText( i, QString() );
         break;
     }
-  }
+  }*/
 }
 
 void Konsole::slotToggleAutoResizeTabs()
 {
-  b_autoResizeTabs = !b_autoResizeTabs;
+  //SPLIT-VIEW Disabled
+  /*b_autoResizeTabs = !b_autoResizeTabs;
 
-  tabwidget->setAutomaticResizeTabs( b_autoResizeTabs );
+  tabwidget->setAutomaticResizeTabs( b_autoResizeTabs );*/
 }
 
 void Konsole::slotTabbarToggleDynamicHide()
 {
-  b_dynamicTabHide=!b_dynamicTabHide;
+  //SPLIT-VIEW Disabled
+ /* b_dynamicTabHide=!b_dynamicTabHide;
   if (b_dynamicTabHide && tabwidget->count()==1)
     tabwidget->setTabBarHidden(true);
   else
-    tabwidget->setTabBarHidden(false);
+    tabwidget->setTabBarHidden(false);*/
 }
 
 /* ------------------------------------------------------------------------- */
@@ -1485,8 +1509,9 @@ void Konsole::saveProperties(KConfig* config) {
 
         key = QString("Pgm%1").arg(counter);
         config->writeEntry(key, sessions.current()->getPgm());
-        key = QString("SessionFont%1").arg(counter);
-        config->writeEntry(key, (sessions.current()->widget())->getVTFont());
+// SPLIT-VIEW Disabled
+//        key = QString("SessionFont%1").arg(counter);
+//        config->writeEntry(key, (sessions.current()->widget())->getVTFont());
         key = QString("Term%1").arg(counter);
         config->writeEntry(key, sessions.current()->Term());
         key = QString("KeyTab%1").arg(counter);
@@ -1523,7 +1548,9 @@ void Konsole::saveProperties(KConfig* config) {
   else
   {
      config->setDesktopGroup();
-     config->writeEntry("TabColor", tabwidget->tabTextColor( tabwidget->indexOf(se->widget())));
+
+    // SPLIT-VIEW Disabled
+    // config->writeEntry("TabColor", tabwidget->tabTextColor( tabwidget->indexOf(se->widget())));
   }
   config->writeEntry("Fullscreen",b_fullscreen);
   config->writeEntry("scrollbar",n_scroll);
@@ -1540,7 +1567,9 @@ void Konsole::saveProperties(KConfig* config) {
     config->writeEntry("EncodingName", se->encoding());
     config->writeEntry("history", se->history().getSize());
     config->writeEntry("historyenabled", b_histEnabled);
-    config->writeEntry("defaultfont", (se->widget())->getVTFont());
+
+  // SPLIT-VIEW Disabled
+  //  config->writeEntry("defaultfont", (se->widget())->getVTFont());
     s_kconfigSchema = colors->find( se->schemaNo() )->relPath();
     config->writeEntry("schema",s_kconfigSchema);
   }
@@ -1556,7 +1585,8 @@ void Konsole::saveProperties(KConfig* config) {
 
   if (se) {
     // Set the new default font
-    defaultFont = se->widget()->getVTFont();
+    // SPLIT-VIEW Disabled
+    //defaultFont = se->widget()->getVTFont();
   }
 }
 
@@ -1690,7 +1720,9 @@ void Konsole::applySettingsToGUI()
       selectSetEncoding->setCurrentItem( se->encodingNo() );
    }
    updateKeytabMenu();
-   tabwidget->setAutomaticResizeTabs( b_autoResizeTabs );
+
+  // SPLIT-VIEW Disabled
+  // tabwidget->setAutomaticResizeTabs( b_autoResizeTabs );
 }
 
 
@@ -1785,22 +1817,25 @@ void Konsole::slotSelectScrollbar() {
 }
 
 void Konsole::slotSelectFont() {
-   if ( !se ) return;
+   /* SPLIT-VIEW Disabled
+    if ( !se ) return;
 
    QFont font = se->widget()->getVTFont();
    if ( KFontDialog::getFont( font, true ) != QDialog::Accepted )
       return;
 
    se->widget()->setVTFont( font );
-//  activateSession(); // activates the current
+//  activateSession(); // activates the current*/
 }
 
 void Konsole::schema_menu_activated(int item)
 {
-  if (!se) return;
+  //SPLIT-VIEW Disabled
+
+  /*if (!se) return;
   setSchema(item,se->widget());
 
-  activateSession(); // activates the current
+  activateSession(); // activates the current*/
 }
 
 /* slot */ void Konsole::schema_menu_check()
@@ -1888,7 +1923,8 @@ void Konsole::initTEWidget(TEWidget* new_te, TEWidget* default_te)
 void Konsole::createSessionTab(TEWidget *widget, const QIcon &iconSet,
                                const QString &text, int index)
 {
-  switch(m_tabViewMode) {
+    //SPLIT-VIEW Disabled
+ /* switch(m_tabViewMode) {
   case ShowIconAndText:
     tabwidget->insertTab(index, widget, iconSet, text);
     break;
@@ -1900,7 +1936,7 @@ void Konsole::createSessionTab(TEWidget *widget, const QIcon &iconSet,
     break;
   }
   if ( m_tabColor.isValid() )
-    tabwidget->setTabTextColor( tabwidget->indexOf(widget), m_tabColor );
+    tabwidget->setTabTextColor( tabwidget->indexOf(widget), m_tabColor );*/
 }
 
 QIcon Konsole::iconSetForSession(TESession *session) const
@@ -1918,7 +1954,8 @@ void Konsole::slotSelectTabbar() {
    if (m_menuCreated)
       n_tabbar = selectTabbar->currentItem();
 
-   if ( n_tabbar == TabNone ) {     // Hide tabbar
+//SPLIT-VIEW Disabled
+/*   if ( n_tabbar == TabNone ) {     // Hide tabbar
       tabwidget->setTabBarHidden( true );
    } else {
       if ( tabwidget->isTabBarHidden() )
@@ -1927,7 +1964,7 @@ void Konsole::slotSelectTabbar() {
          tabwidget->setTabPosition( QTabWidget::Top );
       else
          tabwidget->setTabPosition( QTabWidget::Bottom );
-   }
+   }*/
 
   if (b_fixedSize)
   {
@@ -2064,27 +2101,30 @@ void Konsole::reparseConfiguration()
   curr_schema = sch->numb();
   pmPath = sch->imagePath();
 
-  for (TESession *_se = sessions.first(); _se; _se = sessions.next()) {
+//SPLIT-VIEW Disabled
+/*  for (TESession *_se = sessions.first(); _se; _se = sessions.next()) {
     ColorSchema* s = colors->find( _se->schemaNo() );
     if (s) {
       if (s->hasSchemaFileChanged())
         s->rereadSchemaFile();
       setSchema(s,_se->widget());
     }
-  }
+  }*/
 }
 
 // Called via emulation via session
 void Konsole::changeTabTextColor( TESession* ses, int rgb )
 {
-  if ( !ses ) return;
+  //SPLIT-VIEW Disabled
+
+  /*if ( !ses ) return;
   QColor color;
   color.setRgb( rgb );
   if ( !color.isValid() ) {
     kWarning()<<" Invalid RGB color "<<rgb<<endl;
     return;
   }
-  tabwidget->setTabTextColor( tabwidget->indexOf(ses->widget()), color );
+  tabwidget->setTabTextColor( tabwidget->indexOf(ses->widget()), color );*/
 }
 
 // Called from emulation
@@ -2149,10 +2189,12 @@ void Konsole::notifySize(int columns, int lines)
 
 void Konsole::updateTitle()
 {
+  //SPLIT-VIEW Disabled
+
   //setting window titles, tab text etc. will always trigger a repaint of the affected widget
   //so we take care not to update titles, tab text etc. if the new and old text is the same.
 
-  int se_index = tabwidget->indexOf( se->widget() );
+ /* int se_index = tabwidget->indexOf( se->widget() );
 
   if ( windowTitle() != se->displayTitle() )
         setPlainCaption( se->displayTitle() );
@@ -2183,7 +2225,7 @@ void Konsole::updateTitle()
   }
 
   if (tabwidget->tabText(se_index) != newTabText)
-        tabwidget->setTabText(se_index,newTabText);
+        tabwidget->setTabText(se_index,newTabText); */
 }
 
 void Konsole::initSessionFont(QFont font) {
@@ -2252,7 +2294,9 @@ void Konsole::updateFullScreen( bool on )
 
 void Konsole::disableMasterModeConnections()
 {
-  Q3PtrListIterator<TESession> from_it(sessions);
+ //SPLIT-VIEW Disabled
+ 
+/*  Q3PtrListIterator<TESession> from_it(sessions);
   for (; from_it.current(); ++from_it) {
     TESession *from = from_it.current();
     if (from->isMasterMode()) {
@@ -2264,12 +2308,14 @@ void Konsole::disableMasterModeConnections()
               to->getEmulation(),SLOT(onKeyPress(QKeyEvent*)));
       }
     }
-  }
+  }*/
 }
 
 void Konsole::enableMasterModeConnections()
 {
-  Q3PtrListIterator<TESession> from_it(sessions);
+ //SPLIT-VIEW Disabled
+ 
+ /* Q3PtrListIterator<TESession> from_it(sessions);
   for (; from_it.current(); ++from_it) {
     TESession *from = from_it.current();
     if (from->isMasterMode()) {
@@ -2283,7 +2329,7 @@ void Konsole::enableMasterModeConnections()
       }
     }
     from->setListenToKeyPress(true);
-  }
+  }*/
 }
 
 void Konsole::feedAllSessions(const QString &text)
@@ -2422,13 +2468,19 @@ void Konsole::addSession(TESession* s)
   if ( m_menuCreated )
     m_view->addAction( ra );
 
-  createSessionTab(te, SmallIconSet(s->IconName()), newTitle);
-  setSchema(s->schemaNo(),s->widget());
-  tabwidget->setCurrentIndex(tabwidget->count()-1);
+  //SPLIT-VIEW Disabled
+  //createSessionTab(te, SmallIconSet(s->IconName()), newTitle);
+  
+  //SPLIT-VIEW Disabled
+  //setSchema(s->schemaNo(),s->widget());
+  //tabwidget->setCurrentIndex(tabwidget->count()-1);
+ 
   disableMasterModeConnections(); // no duplicate connections, remove old
   enableMasterModeConnections();
-  if( m_removeSessionButton )
-    m_removeSessionButton->setEnabled(tabwidget->count()>1);
+ 
+ // SPLIT-VIEW Disabled
+ // if( m_removeSessionButton )
+ //   m_removeSessionButton->setEnabled(tabwidget->count()>1);
 }
 
 QString Konsole::currentSession()
@@ -2472,8 +2524,9 @@ void Konsole::activateSession(int position)
 
 void Konsole::activateSession(QWidget* w)
 {
-  activateSession(tabwidget->indexOf(w));
-  w->setFocus();
+  //SPLIT-VIEW Disabled
+/*  activateSession(tabwidget->indexOf(w));
+  w->setFocus();*/
 }
 
 void Konsole::activateSession(const QString &sessionId)
@@ -2513,8 +2566,9 @@ void Konsole::activateSession(TESession *s)
 {
   if (se)
   {
-    se->setConnect(false);
-    se->setListenToKeyPress(true);
+   // SPLIT-VIEW Disabled
+   // se->setConnect(false);
+   // se->setListenToKeyPress(true);
     notifySessionState(se,NOTIFYNORMAL);
     // Delete the session if isn't in the session list any longer.
     if (sessions.find(se) == -1)
@@ -2549,13 +2603,14 @@ void Konsole::activateSession(TESession *s)
 
   QTimer::singleShot(1,this,SLOT(allowPrevNext())); // hack, hack, hack
 
-  if (tabwidget->currentWidget() != se->widget())
+  //SPLIT-VIEW Disabled
+  /*if (tabwidget->currentWidget() != se->widget())
     tabwidget->setCurrentIndex( tabwidget->indexOf( se->widget() ) );
   te = se->widget();
   if (m_menuCreated) {
     if (selectBell) selectBell->setCurrentItem(te->bellMode());
     updateSchemaMenu();
-  }
+  }*/
 
   notifySize(te->Columns(), te->Lines()); // set menu items
   s->setConnect(true);
@@ -2687,7 +2742,9 @@ void Konsole::slotGetSessionSchema(TESession *session, QString &schema)
 void Konsole::slotSetSessionSchema(TESession *session, const QString &schema)
 {
   ColorSchema* s = colors->find( schema );
-  setSchema(s, session->widget());
+  
+  //SPLIT-VIEW Disabled
+  //setSchema(s, session->widget());
 }
 
 void Konsole::allowPrevNext()
@@ -2787,6 +2844,8 @@ TESession* Konsole::newSession(SessionInfo* type)
         initTEWidget(display,te);
     }
 
+    _view->activeSplitter()->activeContainer()->addView(display);
+
     //create a session and attach the display to it
     TESession* session = sessionManager()->createSession( type->path() );
    
@@ -2801,7 +2860,7 @@ TESession* Konsole::newSession(SessionInfo* type)
     else
         session->setHistory(HistoryTypeNone());
 
-    session->addView( display ); 
+    session->addView( display );
 
     //set color scheme
     ColorSchema* sessionScheme = colors->find( type->colorScheme() );
@@ -2960,10 +3019,12 @@ void Konsole::doneSession(TESession* s)
 
   KToggleAction *ra = session2action.find(s);
   m_view->removeAction( ra );
-  tabwidget->removePage( s->widget() );
-  delete s->widget();
-  if(m_removeSessionButton )
-    m_removeSessionButton->setEnabled(tabwidget->count()>1);
+
+// SPLIT-VIEW Disabled
+//  tabwidget->removePage( s->widget() );
+//  delete s->widget();
+//  if(m_removeSessionButton )
+//    m_removeSessionButton->setEnabled(tabwidget->count()>1);
   session2action.remove(s);
   action2session.remove(ra);
   int sessionIndex = sessions.findRef(s);
@@ -3004,8 +3065,10 @@ void Konsole::doneSession(TESession* s)
   }
   if (sessions.count()==1) {
     m_detachSession->setEnabled(false);
-    if (b_dynamicTabHide && !tabwidget->isTabBarHidden())
-      tabwidget->setTabBarHidden(true);
+  
+  // SPLIT-VIEW Disabled
+  //  if (b_dynamicTabHide && !tabwidget->isTabBarHidden())
+  //    tabwidget->setTabBarHidden(true);
   }
 }
 
@@ -3029,7 +3092,8 @@ void Konsole::nextSession()
 
 void Konsole::slotMovedTab(int from, int to)
 {
-  TESession* _se = sessions.take(from);
+  //SPLIT-VIEW Disabled
+ /* TESession* _se = sessions.take(from);
   sessions.remove(_se);
   sessions.insert(to,_se);
 
@@ -3045,7 +3109,7 @@ void Konsole::slotMovedTab(int from, int to)
   if (to==tabwidget->currentIndex()) {
     if (!m_menuCreated)
       makeGUI();
-  }
+  }*/
 }
 
 /* Move session forward in session list if possible */
@@ -3067,16 +3131,17 @@ void Konsole::moveSessionLeft()
   m_view->removeAction( ra );
   m_view->insertAction( nextSessionAction , ra );
 
-  QColor oldcolor = tabwidget->tabTextColor(tabwidget->indexOf(se->widget()));
+  QColor oldcolor; // SPLIT-VIEW Disabled = tabwidget->tabTextColor(tabwidget->indexOf(se->widget()));
 
-  tabwidget->blockSignals(true);
-  tabwidget->removePage(se->widget());
-  tabwidget->blockSignals(false);
-  QString title = se->Title();
+ // SPLIT-VIEW Disabled
+ // tabwidget->blockSignals(true);
+ // tabwidget->removePage(se->widget());
+ // tabwidget->blockSignals(false);
+ /* QString title = se->Title();
   createSessionTab(se->widget(), iconSetForSession(se),
       title.replace('&', "&&"), position-1);
   tabwidget->setCurrentIndex( tabwidget->indexOf( se->widget() ));
-  tabwidget->setTabTextColor(tabwidget->indexOf(se->widget()),oldcolor);
+  tabwidget->setTabTextColor(tabwidget->indexOf(se->widget()),oldcolor);*/
 
   if (!m_menuCreated)
     makeGUI();
@@ -3101,7 +3166,8 @@ void Konsole::moveSessionRight()
   m_view->removeAction( ra );
   m_view->insertAction( nextSessionAction , ra );
 
-  QColor oldcolor = tabwidget->tabTextColor(tabwidget->indexOf(se->widget()));
+  //SPLIT-VIEW Disabled
+  /*QColor oldcolor = tabwidget->tabTextColor(tabwidget->indexOf(se->widget()));
 
   tabwidget->blockSignals(true);
   tabwidget->removePage(se->widget());
@@ -3111,7 +3177,7 @@ void Konsole::moveSessionRight()
       title.replace('&', "&&"), position+1);
   tabwidget->setCurrentIndex( tabwidget->indexOf( se->widget() ) );
   tabwidget->setTabTextColor(tabwidget->indexOf(se->widget()),oldcolor);
-
+*/
   if (!m_menuCreated)
     makeGUI();
 }
@@ -3143,8 +3209,9 @@ void Konsole::initMasterMode(bool state)
 
 void Konsole::initTabColor(QColor color)
 {
-  if ( color.isValid() )
-    tabwidget->setTabTextColor( tabwidget->indexOf(se->widget()), color );
+ // SPLIT-VIEW Disabled
+ // if ( color.isValid() )
+ //   tabwidget->setTabTextColor( tabwidget->indexOf(se->widget()), color );
 }
 
 void Konsole::initHistory(int lines, bool enable)
@@ -3237,7 +3304,8 @@ void Konsole::notifySessionState(TESession* session, int state)
     iconset.addPixmap(normal, QIcon::Normal);
     iconset.addPixmap(active, QIcon::Active);
 
-    tabwidget->setTabIcon(tabwidget->indexOf( session->widget() ), iconset);
+   // SPLIT-VIEW Disabled
+   // tabwidget->setTabIcon(tabwidget->indexOf( session->widget() ), iconset);
   }
 }
 
@@ -3518,12 +3586,14 @@ void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
   }
 
   tewidget->setColorTable(s->table());
-  Q3PtrListIterator<TESession> ses_it(sessions);
+
+  //SPLIT-VIEW Disabled
+/*  Q3PtrListIterator<TESession> ses_it(sessions);
   for (; ses_it.current(); ++ses_it)
     if (tewidget==ses_it.current()->widget()) {
       ses_it.current()->setSchemaNo(s->numb());
       break;
-    }
+    }*/
 }
 
 void Konsole::slotDetachSession()
@@ -3532,7 +3602,9 @@ void Konsole::slotDetachSession()
 }
 
 void Konsole::detachSession(TESession* _se) {
-  if (!_se) _se=se;
+   //SPLIT-VIEW Disabled
+
+  /*if (!_se) _se=se;
 
   KToggleAction *ra = session2action.find(_se);
   m_view->removeAction( ra );
@@ -3613,12 +3685,14 @@ void Konsole::detachSession(TESession* _se) {
     m_removeSessionButton->setEnabled(tabwidget->count()>1);
 
   //show detached session
-  konsole->show();
+  konsole->show();*/
 }
 
 void Konsole::attachSession(TESession* session)
 {
-  if (b_dynamicTabHide && sessions.count()==1 && n_tabbar!=TabNone)
+  //SPLIT-VIEW Disabled
+
+  /*if (b_dynamicTabHide && sessions.count()==1 && n_tabbar!=TabNone)
     tabwidget->setTabBarHidden(false);
 
   TEWidget* se_widget = session->widget();
@@ -3672,7 +3746,7 @@ void Konsole::attachSession(TESession* session)
 
   connect( session, SIGNAL(changeTabTextColor(TESession*, int)), this, SLOT(changeTabTextColor(TESession*, int)) );
 
-  activateSession(session);
+  activateSession(session);*/
 }
 
 void Konsole::setSessionTitle( QString& title, TESession* ses )
@@ -3702,7 +3776,9 @@ void Konsole::slotRenameSession() {
 
 void Konsole::slotRenameSession(TESession* session, const QString &name)
 {
-  KToggleAction *ra = session2action.find(session);
+  //SPLIT-VIEW Disabled
+
+ /* KToggleAction *ra = session2action.find(session);
   QString title=name;
   title=title.replace('&',"&&");
   ra->setText(title);
@@ -3711,7 +3787,7 @@ void Konsole::slotRenameSession(TESession* session, const QString &name)
     int sessionTabIndex = tabwidget->indexOf( session->widget() );
     tabwidget->setTabText( sessionTabIndex, title );
   }
-  updateTitle();
+  updateTitle();*/
 }
 
 
@@ -4243,19 +4319,24 @@ void Konsole::enableFixedSize(bool b)
 
 void Konsole::showEvent( QShowEvent* /*event*/ )
 {
-	assert( tabwidget && tabwidget->currentWidget() );
-
-	tabwidget->currentWidget()->setFocus();
+// SPLIT-VIEW Disabled
+//	assert( tabwidget && tabwidget->currentWidget() );
+//	tabwidget->currentWidget()->setFocus();
 }
 
 Q3PtrList<TEWidget> Konsole::activeTEs()
 {
    Q3PtrList<TEWidget> ret;
-   if (sessions.count()>0)
+ 
+ /*
+  SPLIT-VIEW Disabled
+
+  if (sessions.count()>0)
      for (TESession *_se = sessions.first(); _se; _se = sessions.next())
         ret.append(_se->widget());
    else if (te)  // check for startup initialization case in newSession()
-     ret.append(te);
+     ret.append(te); */
+   
    return ret;
 }
 

@@ -233,10 +233,10 @@ void TESession::removeView(TEWidget* widget)
         em->removeView(widget);
 }
 
-void TESession::changeWidget(TEWidget* w)
+/*void TESession::changeWidget(TEWidget* w)
 {
   Q_ASSERT(0); //Method not updated yet to handle multiple views
-}
+}*/
 
 void TESession::run()
 {

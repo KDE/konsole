@@ -49,7 +49,7 @@ As already mentioned in the code, creation and management of new sessions
 will be moved into a new class, SessionManager.  There is one SessionManager per
 application.
 
-The SessionManager provides methods to set default settings for new sessions that
+The SessionManager provides a method to set default settings for new sessions that
 are created.  These methods will also have a parameter that specifies
 where the setting came from.  When a new session is created, for each setting, SessionManager
 will pick the one from the most important source.
@@ -58,9 +58,9 @@ surprise.
 
 eg.  if the following code was executed:
 
-     sessionManager()->setDefaultFont( SessionManager::CommandLine , fontA );
-     sessionManager()->setDefaultFont( SessionManager::SessionConfig , fontB );
-     sessionManager()->setDefaultFont( SessionManager::GlobalSettings , fontC );
+     sessionManager()->addSetting( SessionManager::DefaultFont , SessionManager::CommandLine , fontA );
+     sessionManager()->addSetting( SessionManager::DefaultFont , SessionManager::SessionConfig , fontB );
+     sessionManager()->addSetting( SessionManager::DefaultFont , SessionManager::GlobalSettings , fontC );
 
 when session manager came to create a new session, it would use
 fontA, because that setting came from the source with the highest priority.
@@ -69,8 +69,8 @@ It is also possible to have single-shot sources of settings which are only
 considered for the next session which is created and then discarded after that.
 
 eg. 
-    sessionManager()->setDefaultDirectory( SessionManager::KonsoleDefault , getenv("HOME") );
-    sessionManager()->setDefaultDirectory( SessionManager::SingleShot , path );
+    sessionManager()->addSetting( SessionManager::InitialDir , SessionManager::KonsoleDefault , getenv("HOME") );
+    sessionManager()->addSetting( SessionManager::SingleShot , path );
 
 If two sessions were created after this, the first would start in directory 'path',
 and the second would start in the user's home directory.
@@ -113,36 +113,35 @@ and from whom it receives screen image updates.
 
 
 
-View Containers
-======================
+View Splitters and Containers
+=================================
 In the old design there is a single tab widget per Konsole window which holds
 all of the terminal displays in that window
 
-In the new design the main window contains a QSplitter, which can contain
-one or more ViewContainer children.  ViewContainer is an abstract base class
-for containers which can hold one or more terminal displays.  The existing
-tab widget will be moved into a subclass of ViewContainer, TabbedViewContainer.
-The reason for this is that tabs have some shortcomings as a way of viewing
+In the new design the main window contains a view splitter (ViewSplitter class) derived from QSplitter.
+A view splitter widget can contain one or more view containers (ViewContainer interface).  View containers are widgets which hold
+one or more terminal displays and provide some means for the user to navigate between them (such as
+tabs or a list).  View splitter widgets can also hold view splitter children, allowing for a hierarchy
+of view splitters and containers.
+
+
+
+                                --> [ Terminal Display ] 
+             -->  ViewContainer --> [ Terminal Display ]
+                                --> [ Terminal Display ]
+                                
+                                --> ViewContainer --> [ Terminal Display ]
+ViewSplitter -->  ViewSplitter  --> ViewContainer --> [ Terminal Display ] 
+
+The existing tab widget which is used to navigate between displays in a Konsole window will be replaced
+with a TabbedViewContainer class.
+
+The reason for allowing different types of view container is that tabs have some shortcomings as a way of viewing
 the active terminal displays and switching between them - it would be useful
 to have the possibility of introducing a replacement or alternative in the future.
 
 Moving the view management out of the main window should cut down lots of code
 related to handling signals and slots for various UI actions in the main Konsole window.
-
-ViewContainer provides methods to:
-    - add and remove display widgets from the view
-    - set whether any navigation aids (eg. the tabbar) are visible
-    - set and retrieve the currently active display
-    
-   
-and emits signals to inform the parent window
-    - of the title and icon to display
-    - if the user has selected to close a display
-    - that the user has selected to change the current display
-
-
-Initially I do not plan to explictly add support for recursively splitting the view,
-unless users request it via bug reports etc.
 
 
 Related Cleanup

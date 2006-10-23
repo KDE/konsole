@@ -59,8 +59,8 @@ public:
   TESession();
   ~TESession();
 
-  TEWidget* widget() { Q_ASSERT( primaryView() ) ; return primaryView(); }
-  void changeWidget(TEWidget* w);
+//  TEWidget* widget() { Q_ASSERT( primaryView() ) ; return primaryView(); }
+//  void changeWidget(TEWidget* w);
   
   /** 
    * Adds a new view for this session.    

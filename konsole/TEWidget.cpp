@@ -1398,7 +1398,8 @@ void TEWidget::updateImageSize()
 
   if ( resizing )
   {
-    emit changedContentSizeSignal(contentHeight, contentWidth); // expose resizeEvent
+    if ( isVisible() )
+        emit changedContentSizeSignal(contentHeight, contentWidth); // expose resizeEvent
   }
   
   resizing = false;
