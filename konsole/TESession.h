@@ -55,6 +55,13 @@ class TESession : public QObject
 { Q_OBJECT
 
 public:
+  Q_PROPERTY(QString sessionName READ sessionName)
+  Q_PROPERTY(QString encoding READ encoding WRITE setEncoding)
+  Q_PROPERTY(int sessionPid READ sessionPid)
+  Q_PROPERTY(QString font READ font WRITE setFont)
+  Q_PROPERTY(QString keytab READ keytab WRITE setKeytab)
+  Q_PROPERTY(QString schema READ schema WRITE setSchema)
+  Q_PROPERTY(QSize size READ size WRITE setSize)
 
   TESession();
   ~TESession();
@@ -171,15 +178,15 @@ public:
   bool sendSignal(int signal);
 
   void setAutoClose(bool b) { autoClose = b; }
+  void renameSession(const QString &name);
 
   // Additional functions for DCOP
   bool closeSession();
   void clearHistory();
   void feedSession(const QString &text);
   void sendSession(const QString &text);
-  void renameSession(const QString &name);
   QString sessionName() { return title; }
-  int sessionPID() { return sh->pid(); }
+  int sessionPid() { return sh->pid(); }
   void enableFullScripting(bool b);
 
   void startZModem(const QString &rz, const QString &dir, const QStringList &list);
@@ -300,6 +307,8 @@ private:
 
   QColor         modifiedBackground; // as set by: echo -en '\033]11;Color\007
   int            encoding_no;
+
+  static int lastSessionId;
 };
 
 #endif

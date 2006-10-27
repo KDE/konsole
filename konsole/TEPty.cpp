@@ -126,7 +126,7 @@ void TEPty::setErase(char erase)
     start the client program.
 */
 int TEPty::run(const char* _pgm, QStringList & _args, const char* _term, ulong winid, bool _addutmp,
-               const char* _konsole_dcop, const char* _konsole_dcop_session)
+               const char* _konsole_dbus_service, const char* _konsole_dbus_session)
 {
   clearArguments();
 
@@ -138,10 +138,10 @@ int TEPty::run(const char* _pgm, QStringList & _args, const char* _term, ulong w
 
   if (_term && _term[0])
      setEnvironment("TERM",_term);
-  if (_konsole_dcop && _konsole_dcop[0])
-     setEnvironment("KONSOLE_DCOP",_konsole_dcop);
-  if (_konsole_dcop_session && _konsole_dcop_session[0])
-     setEnvironment("KONSOLE_DCOP_SESSION", _konsole_dcop_session);
+  if (_konsole_dbus_service && _konsole_dbus_service[0])
+     setEnvironment("KONSOLE_DBUS_SERVICE",_konsole_dbus_service);
+  if (_konsole_dbus_session && _konsole_dbus_session[0])
+     setEnvironment("KONSOLE_DBUS_SESSION", _konsole_dbus_session);
   setEnvironment("WINDOWID", QString::number(winid));
 
   setUsePty(All, _addutmp);

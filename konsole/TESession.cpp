@@ -50,6 +50,7 @@
 
 #include "TESession.h"
 
+int TESession::lastSessionId = 0;
 
 TESession::TESession() : 
      sh(0)
@@ -68,7 +69,6 @@ TESession::TESession() :
    , add_to_utmp(true)
    , xon_xoff(true)
    , fullScripting(false)
-   , sessionId(0)
    , zmodemBusy(false)
    , zmodemProc(0)
    , zmodemProgress(0)
@@ -76,8 +76,9 @@ TESession::TESession() :
 {
     //prepare DBus communication
     (void)new SessionAdaptor(this);
-    	
-    QDBusConnection::sessionBus().registerObject(QLatin1String("/Session"), this);
+
+    sessionId = QLatin1String("session") + QString::number(++lastSessionId);    	
+    QDBusConnection::sessionBus().registerObject(QLatin1String("/Sessions/")+sessionId, this);
 
     //create teletype for I/O with shell process
     sh = new TEPty();
@@ -257,11 +258,8 @@ void TESession::run()
     QTimer::singleShot(1, this, SLOT(done()));
     return;
   }
-#warning "broken"
-#if 0
-  QString appId=kapp->dcopClient()->appId();
-#endif
-  QString appId("appId");
+
+  QString dbusService = QDBusConnection::sessionBus().baseService();
   QString cwd_save = QDir::currentPath();
   if (!initial_cwd.isEmpty())
      QDir::setCurrent(initial_cwd);
@@ -269,8 +267,8 @@ void TESession::run()
 
   int result = sh->run(QFile::encodeName(pgm), args, term.toLatin1(),
           winId, add_to_utmp,
-          ("DCOPRef("+appId+", konsole)").toLatin1(),
-          ("DCOPRef("+appId+", "+sessionId+')').toLatin1());
+          dbusService.toLatin1(),
+          (QLatin1String("/Sessions/") + sessionId).toLatin1());
   if (result < 0) {     // Error in opening pseudo teletype
     kWarning()<<"Unable to open a pseudo teletype!"<<endl;
     QTimer::singleShot(0, this, SLOT(ptyError()));
