@@ -20,20 +20,26 @@
 */
 
 // Qt
+#include <QHash>
 #include <QLineEdit>
 #include <QTabWidget>
 
 // Konsole
+#include "NavigationItem.h"
 #include "ViewContainer.h"
 
-void ViewContainer::addView(QWidget* view)
+void ViewContainer::addView(QWidget* view , NavigationItem* item)
 {
     _views << view;
+    _navigation[view] = item;
+
     viewAdded(view);
 }
 void ViewContainer::removeView(QWidget* view)
 {
     _views.removeAll(view);
+    _navigation.remove(view);
+
     viewRemoved(view);
 }
 
@@ -42,7 +48,17 @@ const QList<QWidget*> ViewContainer::views()
     return _views;
 }
 
-int TabbedViewContainer::debug = 0;
+NavigationItem* ViewContainer::navigationItem( QWidget* widget )
+{
+    Q_ASSERT( _navigation.contains(widget) );
+
+    return _navigation[widget];    
+}
+
+QList<QWidget*> ViewContainer::widgetsForItem(NavigationItem* item) const
+{
+    return _navigation.keys(item);
+}
 
 TabbedViewContainer::TabbedViewContainer()
 {
@@ -56,7 +72,10 @@ TabbedViewContainer::~TabbedViewContainer()
 
 void TabbedViewContainer::viewAdded( QWidget* view )
 {
-    _tabWidget->addTab( view , "Tab " + QString::number(++debug) );
+    NavigationItem* item = navigationItem(view);
+    connect( item , SIGNAL( titleChanged(NavigationItem*) ) , this , SLOT( updateTitle(NavigationItem*) ) );
+
+    _tabWidget->addTab( view , item->icon() , item->title() );
 }
 void TabbedViewContainer::viewRemoved( QWidget* view )
 {
@@ -64,6 +83,20 @@ void TabbedViewContainer::viewRemoved( QWidget* view )
 
     _tabWidget->removeTab( _tabWidget->indexOf(view) );
 }
+
+void TabbedViewContainer::updateTitle(NavigationItem* item) 
+{
+    QList<QWidget*> items = widgetsForItem(item);
+    QListIterator<QWidget*> itemIter(items);
+
+    while ( itemIter.hasNext() )
+    {
+        int index = _tabWidget->indexOf( itemIter.next() );
+        _tabWidget->setTabText( index , item->title() );
+    }
+
+}
+
 QWidget* TabbedViewContainer::containerWidget() const
 {
     return _tabWidget;

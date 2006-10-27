@@ -23,10 +23,12 @@
 #define VIEWCONTAINER_H
 
 #include <QObject>
+#include <QHash>
 #include <QList>
 
 class QTabWidget;
 class QWidget;
+class NavigationItem;
 
 /**
  * An interface for container widgets which can hold one or more views.
@@ -50,10 +52,13 @@ public:
     virtual QWidget* containerWidget() const = 0;
 
     /** Adds a new view to the container widget */
-    void addView(QWidget* view);
+    void addView(QWidget* view , NavigationItem* navigationItem);
     /** Removes a view from the container */
     void removeView(QWidget* view);
 
+    /** Returns the navigation item associated with a particular view in the container */
+    NavigationItem* navigationItem(  QWidget* view );   
+    
     /** Returns a list of the contained views */
     const QList<QWidget*> views();
    
@@ -79,9 +84,11 @@ protected:
      */
     virtual void viewRemoved(QWidget* view) = 0;
     
-
+    /** Returns the widgets which are associated with a particular navigation item */
+    QList<QWidget*> widgetsForItem( NavigationItem* item ) const;
 private:
     QList<QWidget*> _views;
+    QHash<QWidget*,NavigationItem*> _navigation;
 };
 
 /** 
@@ -90,6 +97,8 @@ private:
  */
 class TabbedViewContainer : public ViewContainer  
 {
+    Q_OBJECT
+
 public:
     TabbedViewContainer();
     virtual ~TabbedViewContainer();
@@ -101,11 +110,13 @@ protected:
     virtual void viewAdded( QWidget* view );
     virtual void viewRemoved( QWidget* view ); 
 
+private slots:
+    void updateTitle(NavigationItem* item);
+
 private:
+
     QTabWidget* _tabWidget;  
-
-    static int debug; 
-
 };
+
 
 #endif //VIEWCONTAINER_H

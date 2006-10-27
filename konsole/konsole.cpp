@@ -121,6 +121,7 @@
 #include "printsettings.h"
 #include "ViewSplitter.h"
 #include "ViewContainer.h"
+#include "NavigationItem.h"
 
 #include "konsole.h"
 
@@ -2844,8 +2845,7 @@ TESession* Konsole::newSession(SessionInfo* type)
         initTEWidget(display,te);
     }
 
-    _view->activeSplitter()->activeContainer()->addView(display);
-
+    
     //create a session and attach the display to it
     TESession* session = sessionManager()->createSession( type->path() );
    
@@ -2860,6 +2860,8 @@ TESession* Konsole::newSession(SessionInfo* type)
     else
         session->setHistory(HistoryTypeNone());
 
+    NavigationItem* item = new SessionNavigationItem(session);
+    _view->activeSplitter()->activeContainer()->addView(display,item);
     session->addView( display );
 
     //set color scheme

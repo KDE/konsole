@@ -43,7 +43,8 @@ set(konsole_KDEINIT_SRCS
    TerminalCharacterDecoder.cpp
    SessionManager.cpp
    ViewSplitter.cpp
-   ViewContainer.cpp  )
+   ViewContainer.cpp  
+   NavigationItem.cpp )
 
 kde4_automoc(${konsole_KDEINIT_SRCS})
 
