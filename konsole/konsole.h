@@ -68,7 +68,7 @@ class TEWidget;
 class SessionInfo;
 class SessionManager;
 
-
+class KonsoleAdaptor;
 class Konsole : public KMainWindow
 {
     Q_OBJECT
@@ -109,7 +109,7 @@ public:
   int sessionCount() { return sessions.count(); }
 
   QString currentSession();
-  void newSession(const QString &type);
+  QString newSession(const QString &type);
   TESession* newSession(SessionInfo* type);
   QString sessionId(const int position);
 
@@ -138,7 +138,7 @@ public Q_SLOTS:
   void slotSetSessionSchema(TESession *session, const QString &schema);
 
   void makeGUI();
-  void newSession();
+  QString newSession();
 
 protected:
 
@@ -468,6 +468,7 @@ private:
   QColor    m_tabColor;
 
   SessionManager* _sessionManager;
+  friend class KonsoleAdaptor;
 };
 
 class QSpinBox;
