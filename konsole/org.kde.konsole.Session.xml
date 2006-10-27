@@ -10,38 +10,14 @@
       <arg name="signal" type="b" direction="in"/>
     </method>
     <method name="clearHistory"/>
-    <method name="renameSession">
-      <arg name="name" type="s" direction="in"/>
-    </method>
-    <method name="sessionName">
-      <arg type="s" direction="out"/>
-    </method>
-    <method name="sessionPID">
-      <arg type="i" direction="out"/>
-    </method>
-    <method name="schema">
-      <arg type="s" direction="out"/>
-    </method>
-    <method name="setSchema">
-      <arg name="schema" type="s" direction="in"/>
-    </method>
-    <method name="encoding">
-      <arg type="s" direction="out"/>
-    </method>
-    <method name="setEncoding">
-      <arg name="encoding" type="s" direction="in"/>
-    </method>
-    <method name="keytab">
-      <arg type="s" direction="out"/>
-    </method>
-    <method name="setKeytab">
-      <arg name="encoding" type="s" direction="in"/>
-    </method>
-    <method name="font">
-      <arg type="s" direction="out"/>
-    </method>
-    <method name="setFont">
-      <arg name="encoding" type="s" direction="in"/>
-    </method>
+    <property name="sessionName" type="s" access="read"/>
+    <property name="sessionPid" type="i" access="read"/>
+    <property name="schema" type="s" access="readwrite"/>
+    <property name="encoding" type="s" access="readwrite"/>
+    <property name="keytab" type="s" access="readwrite"/>
+    <property name="font" type="s" access="readwrite"/>
+    <property name="size" type="(ii)" access="readwrite">
+      <annotation name="com.trolltech.QtDBus.QtTypeName" value="QSize"/>
+    </property>
   </interface>
 </node>
