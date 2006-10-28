@@ -1,4 +1,8 @@
 
+// KDE
+#include <kdebug.h>
+#include <kiconloader.h>
+
 // Konsole
 #include "NavigationItem.h"
 
@@ -37,16 +41,21 @@ SessionNavigationItem::SessionNavigationItem(TESession* session)
 {
 
     setTitle( _session->displayTitle() );   
-    setIcon( QIcon(_session->IconName()) ); 
+    setIcon( SmallIconSet(_session->IconName()) ); 
 
     connect( _session , SIGNAL( updateTitle() ) , this , SLOT( updateTitle() ) );
 }
 
 void SessionNavigationItem::updateTitle()
 {
-    setTitle( _session->displayTitle() );
+    kDebug() << " session title update " << endl;
+    kDebug() << " session icon update " << endl;
 
+    setTitle( _session->displayTitle() );
+    setIcon( SmallIconSet(_session->IconName()) );
+    
     emit titleChanged(this);
+    emit iconChanged(this);
 }
 
 #include "NavigationItem.moc"

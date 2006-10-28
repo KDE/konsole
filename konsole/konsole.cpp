@@ -190,9 +190,6 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 
 //Session Tabs Context Menu
     ,m_tabPopupMenu(0)
-    ,m_tabSelectColorMenu(0)
-    ,m_tabColorCells(0)
-    ,m_tabColorSelector(0)
     ,m_tabPopupTabsMenu(0)
     ,m_tabbarPopupMenu(0)
     ,m_tabMonitorActivity(0)
@@ -1315,53 +1312,6 @@ void Konsole::slotTabRenameSession() {
   renameSession(m_contextMenuSession);
 }
 
-void Konsole::slotTabSelectColor()
-{
-/* 
-  SPLIT-VIEW Disabled
-
-  QColor color;
-
-  //If the color palette is available apply the current selected color to the tab, otherwise
-  //default back to showing KDE's color dialog instead.
-  if ( m_tabColorCells )
-  {
-    color = m_tabColorCells->color(m_tabColorCells->getSelected());
-
-    if (!color.isValid())
-            return;
-  }
-  else
-  {
-    QColor defaultColor = tabwidget->palette().color( QPalette::Foreground );
-    QColor tempColor = tabwidget->tabTextColor( tabwidget->indexOf( m_contextMenuSession->widget() ) );
-
-    if ( KColorDialog::getColor(tempColor,defaultColor,this) == KColorDialog::Accepted )
-        color = tempColor;
-    else
-        return;
-  }
-
-  tabwidget->setTabTextColor( tabwidget->indexOf( m_contextMenuSession->widget() ), color );*/
-}
-
-void Konsole::slotTabPrepareColorCells()
-{
-/*    
-   SPLIT-VIEW Disabled
-
-   //set selected color in palette widget to color of active tab
-
-    QColor activeTabColor = tabwidget->tabTextColor( tabwidget->indexOf( m_contextMenuSession->widget() ) );
-
-    for (int i=0;i<m_tabColorCells->numCells();i++)
-        if ( activeTabColor == m_tabColorCells->color(i) )
-        {
-            m_tabColorCells->setSelected(i);
-            break;
-        } */
-}
-
 void Konsole::slotTabToggleMonitor()
 {
   m_contextMenuSession->setMonitorActivity( m_tabMonitorActivity->isChecked() );
@@ -1637,6 +1587,7 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
      b_addToUtmp = config->readEntry("AddToUtmp", QVariant(true)).toBool();
      config->setDesktopGroup();
 
+     // SPLIT_VIEW Disabled
      // Do not set a default value; this allows the System-wide Scheme
      // to set the tab text color.
 //     m_tabColor = config->readColorEntry("TabColor");
@@ -4344,6 +4295,8 @@ Q3PtrList<TEWidget> Konsole::activeTEs()
 
 void Konsole::setupTabContextMenu()
 {
+/* SPLIT-VIEW Disabled
+ 
    m_tabPopupMenu = new KMenu( this );
    KAcceleratorManager::manage( m_tabPopupMenu );
 
@@ -4385,50 +4338,6 @@ void Konsole::setupTabContextMenu()
    addAction(moveSessionLeftAction);
    addAction(moveSessionRightAction);
 
-   //Create a colour selection palette and fill it with a range of suitable colours
-   QString paletteName;
-   QStringList availablePalettes = KPalette::getPaletteList();
-
-   if (availablePalettes.contains("40.colors"))
-        paletteName = "40.colors";
-
-   KPalette palette(paletteName);
-
-   //If the palette of colours was found, create a palette menu displaying those colors
-   //which the user chooses from when they activate the "Select Tab Color" sub-menu.
-   //
-   //If the palette is empty, default back to the old behaviour where the user is shown
-   //a color dialog when they click the "Select Tab Color" menu item.
-   if ( palette.nrColors() > 0 )
-   {
-        m_tabColorCells = new KColorCells(this,palette.nrColors()/8,8);
-
-        for (int i=0;i<palette.nrColors();i++)
-            m_tabColorCells->setColor(i,palette.color(i));
-
-
-        m_tabSelectColorMenu = new KMenu(this);
-        connect( m_tabSelectColorMenu, SIGNAL(aboutToShow()) , this, SLOT(slotTabPrepareColorCells()) );
-        m_tabColorSelector = new QWidgetAction(m_tabSelectColorMenu);
-        m_tabColorSelector->setDefaultWidget(m_tabColorCells);
-
-
-        m_tabSelectColorMenu->addAction( m_tabColorSelector );
-
-        connect(m_tabColorCells,SIGNAL(colorSelected(int)),this,SLOT(slotTabSelectColor()));
-        connect(m_tabColorCells,SIGNAL(colorSelected(int)),m_tabPopupMenu,SLOT(hide()));
-        m_tabPopupMenu->addSeparator();
-        QAction* action = m_tabPopupMenu->addMenu(m_tabSelectColorMenu);
-        action->setIcon( SmallIconSet("colors") );
-        action->setText( i18n("Select &Tab Color") );
-   }
-   else
-   {
-        m_tabPopupMenu->addAction( SmallIconSet("colors"),i18n("Select &Tab Color..."),this,
-                        SLOT(slotTabSelectColor()));
-   }
-
-
    m_tabPopupMenu->addSeparator();
    m_tabPopupTabsMenu = new KMenu( m_tabPopupMenu );
    m_tabPopupMenu->insertItem( i18n("Switch to Tab" ), m_tabPopupTabsMenu );
@@ -4438,7 +4347,7 @@ void Konsole::setupTabContextMenu()
    m_tabPopupMenu->addSeparator();
    m_tabPopupMenu->addAction( SmallIcon("fileclose"), i18n("C&lose Session"), this,
                           SLOT(slotTabCloseSession()) );
-
+*/
 }
 
 #include "konsole.moc"

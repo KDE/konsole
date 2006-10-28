@@ -22,13 +22,24 @@
 #ifndef VIEWCONTAINER_H
 #define VIEWCONTAINER_H
 
+// Qt
 #include <QObject>
 #include <QHash>
 #include <QList>
 
-class QTabWidget;
 class QWidget;
 class NavigationItem;
+
+// TabbedViewContainer
+    // Qt
+    class QAction;
+    class QPoint;
+    class QWidgetAction;
+
+    // KDE
+    class KTabWidget;
+    class KColorCells;
+    class KMenu;
 
 /**
  * An interface for container widgets which can hold one or more views.
@@ -112,10 +123,20 @@ protected:
 
 private slots:
     void updateTitle(NavigationItem* item);
+    void selectTabColor();
+    void prepareColorCells();
+    void showContextMenu(QWidget* widget , const QPoint& position);
 
 private:
+    KTabWidget* _tabWidget; 
+    QList<QAction*> _viewActions;
 
-    QTabWidget* _tabWidget;  
+    KMenu*          _tabContextMenu;
+    KMenu*          _tabSelectColorMenu;
+    QWidgetAction*  _tabColorSelector; 
+    KColorCells*    _tabColorCells;
+
+    int _contextMenuTab;
 };
 
 

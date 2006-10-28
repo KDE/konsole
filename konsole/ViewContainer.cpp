@@ -23,6 +23,15 @@
 #include <QHash>
 #include <QLineEdit>
 #include <QTabWidget>
+#include <QWidgetAction>
+
+// KDE 
+#include <kcolordialog.h>
+#include <kiconloader.h>
+#include <klocale.h>
+#include <kmenu.h>
+#include <kpalette.h>
+#include <ktabwidget.h>
 
 // Konsole
 #include "NavigationItem.h"
@@ -60,21 +69,102 @@ QList<QWidget*> ViewContainer::widgetsForItem(NavigationItem* item) const
     return _navigation.keys(item);
 }
 
-TabbedViewContainer::TabbedViewContainer()
+TabbedViewContainer::TabbedViewContainer() :  
+    _tabContextMenu(0) 
+   ,_tabSelectColorMenu(0)
+   ,_tabColorSelector(0)
+   ,_tabColorCells(0)
+   ,_contextMenuTab(0) 
 {
-    _tabWidget = new QTabWidget();
+    _tabWidget = new KTabWidget();
+    
+     //Create a colour selection palette and fill it with a range of suitable colours
+     QString paletteName;
+     QStringList availablePalettes = KPalette::getPaletteList();
+
+     if (availablePalettes.contains("40.colors"))
+        paletteName = "40.colors";
+
+    KPalette palette(paletteName);
+
+    //If the palette of colours was found, create a palette menu displaying those colors
+    //which the user chooses from when they activate the "Select Tab Color" sub-menu.
+    //
+    //If the palette is empty, default back to the old behaviour where the user is shown
+    //a color dialog when they click the "Select Tab Color" menu item.
+    if ( palette.nrColors() > 0 )
+    {
+        _tabColorCells = new KColorCells(_tabWidget,palette.nrColors()/8,8);
+
+        for (int i=0;i<palette.nrColors();i++)
+            _tabColorCells->setColor(i,palette.color(i));
+
+
+        _tabSelectColorMenu = new KMenu(_tabWidget);
+        connect( _tabSelectColorMenu, SIGNAL(aboutToShow()) , this, SLOT(prepareColorCells()) );
+        _tabColorSelector = new QWidgetAction(_tabSelectColorMenu);
+        _tabColorSelector->setDefaultWidget(_tabColorCells);
+
+        _tabSelectColorMenu->addAction( _tabColorSelector );
+
+        connect(_tabColorCells,SIGNAL(colorSelected(int)),this,SLOT(selectTabColor()));
+        connect(_tabColorCells,SIGNAL(colorSelected(int)),_tabContextMenu,SLOT(hide()));
+        
+        QAction* action = _tabSelectColorMenu->menuAction(); 
+            //_tabPopupMenu->addMenu(_tabSelectColorMenu);
+        action->setIcon( SmallIconSet("colors") );
+        action->setText( i18n("Select &Tab Color") );
+
+        _viewActions << action;
+    }
+    else
+    {
+      //  _viewActions << new KAction( SmallIconSet("colors"),i18n("Select &Tab Color..."),this,
+      //                  SLOT(slotTabSelectColor()));
+    }
+
+   _tabContextMenu = new KMenu(_tabWidget);   
+
+   connect( _tabWidget , SIGNAL(contextMenu(QWidget*,const QPoint&)),
+                         SLOT(showContextMenu(QWidget*,const QPoint&))); 
 }
 
 TabbedViewContainer::~TabbedViewContainer()
 {
+    delete _tabContextMenu;
     delete _tabWidget;
+}
+
+void TabbedViewContainer::showContextMenu(QWidget* /*widget*/ , const QPoint& position)
+{
+    //TODO - Use the tab under the mouse, not just the active tab
+    _contextMenuTab = _tabWidget->currentIndex();
+    NavigationItem* item = navigationItem(_tabWidget->currentWidget());
+   
+    _tabContextMenu->clear();
+    _tabContextMenu->addActions( item->contextMenuActions(_viewActions) );
+    _tabContextMenu->popup( position );
+}
+
+void TabbedViewContainer::prepareColorCells()
+{
+ //set selected color in palette widget to color of active tab
+
+    QColor activeTabColor = _tabWidget->tabTextColor( _contextMenuTab );
+
+    for (int i=0;i<_tabColorCells->numCells();i++)
+        if ( activeTabColor == _tabColorCells->color(i) )
+        {
+            _tabColorCells->setSelected(i);
+            break;
+        } 
 }
 
 void TabbedViewContainer::viewAdded( QWidget* view )
 {
     NavigationItem* item = navigationItem(view);
-    connect( item , SIGNAL( titleChanged(NavigationItem*) ) , this , SLOT( updateTitle(NavigationItem*) ) );
-
+    connect( item , SIGNAL(titleChanged(NavigationItem*)) , this , SLOT(updateTitle(NavigationItem*))); 
+    connect( item , SIGNAL(iconChanged(NavigationItem*) ) , this ,SLOT(updateTitle(NavigationItem*)));          
     _tabWidget->addTab( view , item->icon() , item->title() );
 }
 void TabbedViewContainer::viewRemoved( QWidget* view )
@@ -93,6 +183,7 @@ void TabbedViewContainer::updateTitle(NavigationItem* item)
     {
         int index = _tabWidget->indexOf( itemIter.next() );
         _tabWidget->setTabText( index , item->title() );
+        _tabWidget->setTabIcon( index , item->icon() );
     }
 
 }
@@ -105,6 +196,33 @@ QWidget* TabbedViewContainer::containerWidget() const
 QWidget* TabbedViewContainer::activeView() const
 {
     return _tabWidget->widget(_tabWidget->currentIndex());
+}
+
+void TabbedViewContainer::selectTabColor()
+{
+  QColor color;
+  
+  //If the color palette is available apply the current selected color to the tab, otherwise
+  //default back to showing KDE's color dialog instead.
+  if ( _tabColorCells )
+  {
+    color = _tabColorCells->color(_tabColorCells->getSelected());
+
+    if (!color.isValid())
+            return;
+  }
+  else
+  {
+    QColor defaultColor = _tabWidget->palette().color( QPalette::Foreground );
+    QColor tempColor = _tabWidget->tabTextColor( _contextMenuTab );
+
+    if ( KColorDialog::getColor(tempColor,defaultColor,_tabWidget) == KColorDialog::Accepted )
+        color = tempColor;
+    else
+        return;
+  }
+
+  _tabWidget->setTabTextColor( _contextMenuTab , color );
 }
 
 #include "ViewContainer.moc"

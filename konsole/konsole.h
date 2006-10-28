@@ -249,9 +249,6 @@ private Q_SLOTS:
   void slotTabContextMenu(QWidget*, const QPoint &);
   void slotTabDetachSession();
   void slotTabRenameSession();
-  void slotTabSelectColor();
-  /** Update "Select Tab Color" menu widget to reflect color of active tab*/
-  void slotTabPrepareColorCells();
   /** Close the tab whoose popup menu the user has selected */
   void slotTabCloseSession();
   /** Close the tab containing the specified widget. */
@@ -341,11 +338,6 @@ private:
   void setupTabContextMenu();
 
   KMenu* m_tabPopupMenu;
-  //NOTE:  The widgets and actions related to tab colour selection may never
-  //be created at all if a suitable palette of colours is not found
-  KMenu* m_tabSelectColorMenu;
-  KColorCells* m_tabColorCells;
-  QWidgetAction *m_tabColorSelector;
   KMenu* m_tabPopupTabsMenu;
   KMenu* m_tabbarPopupMenu;
   KToggleAction* m_tabMonitorActivity;
