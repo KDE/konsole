@@ -31,7 +31,7 @@ public:
 
     QString title() const;
     QIcon icon() const;
-    virtual QList<QAction*> contextMenuActions( QList<QAction*> viewActions ) const;
+    virtual QList<QAction*> contextMenuActions( QList<QAction*> viewActions ) ;
 
 signals:
     void titleChanged( NavigationItem* item );
@@ -64,8 +64,13 @@ public:
      */
     SessionNavigationItem(TESession* session);
 
+    virtual QList<QAction*> contextMenuActions( QList<QAction*> viewActions ) ;
+
 private slots:
     void updateTitle();
+
+    //context menu action receivers
+    void renameSession();
 
 private:
     TESession* _session;

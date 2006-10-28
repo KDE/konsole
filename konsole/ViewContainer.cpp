@@ -135,11 +135,11 @@ TabbedViewContainer::~TabbedViewContainer()
     delete _tabWidget;
 }
 
-void TabbedViewContainer::showContextMenu(QWidget* /*widget*/ , const QPoint& position)
+void TabbedViewContainer::showContextMenu(QWidget* widget , const QPoint& position)
 {
     //TODO - Use the tab under the mouse, not just the active tab
-    _contextMenuTab = _tabWidget->currentIndex();
-    NavigationItem* item = navigationItem(_tabWidget->currentWidget());
+    _contextMenuTab = _tabWidget->indexOf(widget);
+    NavigationItem* item = navigationItem( widget );
    
     _tabContextMenu->clear();
     _tabContextMenu->addActions( item->contextMenuActions(_viewActions) );
