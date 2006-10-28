@@ -2724,11 +2724,11 @@ void Konsole::setDefaultSession(const QString &filename)
   m_defaultSessionFilename=filename;
 }
 
-void Konsole::newSession()
+QString Konsole::newSession()
 {
     Q_ASSERT( sessionManager() && sessionManager()->defaultSessionType() );
 
-    newSession( sessionManager()->defaultSessionType() );
+    return QLatin1String("/Sessions/") + newSession( sessionManager()->defaultSessionType() )->SessionId();
 }
 
 void Konsole::slotNewSessionAction(QAction* action)
@@ -2761,10 +2761,10 @@ void Konsole::slotNewSessionAction(QAction* action)
   }
 }
 
-void Konsole::newSession(const QString &type)
+QString Konsole::newSession(const QString &type)
 {
   if (type.isEmpty())
-    newSession();
+    return newSession();
   else
   {
     QListIterator<SessionInfo*> sessionTypeIter(sessionManager()->availableSessionTypes());
@@ -2772,9 +2772,10 @@ void Konsole::newSession(const QString &type)
     {
         SessionInfo* info = sessionTypeIter.next();
         if ( info->name() == type )
-            newSession(info);
+            return QLatin1String("/Sessions/") + newSession(info)->SessionId();
     }
   }
+  return QString();
 }
 
 TESession* Konsole::newSession(SessionInfo* type)
@@ -2811,8 +2812,10 @@ TESession* Konsole::newSession(SessionInfo* type)
     else
         session->setHistory(HistoryTypeNone());
 
-    NavigationItem* item = new SessionNavigationItem(session);
-    _view->activeSplitter()->activeContainer()->addView(display,item);
+    NavigationItem* item = session->navigationItem();
+    ViewContainer* container = _view->activeSplitter()->activeContainer();
+    container->addView(display,item);
+    container->setActiveView(display);
     session->addView( display );
 
     //set color scheme

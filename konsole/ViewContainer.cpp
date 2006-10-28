@@ -198,6 +198,11 @@ QWidget* TabbedViewContainer::activeView() const
     return _tabWidget->widget(_tabWidget->currentIndex());
 }
 
+void TabbedViewContainer::setActiveView(QWidget* view)
+{
+    _tabWidget->setCurrentWidget(view);
+}
+
 void TabbedViewContainer::selectTabColor()
 {
   QColor color;

@@ -38,6 +38,7 @@
 class KProcIO;
 class KProcess;
 class ZModemDialog;
+class NavigationItem;
 
 /**
  * TESession represents a Konsole session.
@@ -55,13 +56,17 @@ class TESession : public QObject
 { Q_OBJECT
 
 public:
+  Q_PROPERTY(QString sessionName READ sessionName)
+  Q_PROPERTY(QString encoding READ encoding WRITE setEncoding)
+  Q_PROPERTY(int sessionPid READ sessionPid)
+  Q_PROPERTY(QString font READ font WRITE setFont)
+  Q_PROPERTY(QString keytab READ keytab WRITE setKeytab)
+  Q_PROPERTY(QString schema READ schema WRITE setSchema)
+  Q_PROPERTY(QSize size READ size WRITE setSize)
 
   TESession();
   ~TESession();
 
-//  TEWidget* widget() { Q_ASSERT( primaryView() ) ; return primaryView(); }
-//  void changeWidget(TEWidget* w);
-  
   /** 
    * Adds a new view for this session.    
    * 
@@ -89,9 +94,22 @@ public:
    *
    * If the primary view is removed from the session using removeView(), the next view which is still
    * attached will become the primary view.
+   *
+   * TODO:  Remove this method and ensure that TESession works even if there are no views
+   * attached.
    */
   TEWidget* primaryView();
 
+  /**
+   * Returns the navigation item for this session.
+   * The navigation item provides information about the session such as associated title and icon
+   * for use by widgets which allow the user to select between views belonging to different sessions.
+   *
+   * The navigation item also provides actions which can be placed in a menu
+   * to allow the user to control various aspects of the session.
+   */
+  NavigationItem* navigationItem();
+  
   /** 
    * Returns true if the session has created child processes which have not yet terminated 
    * This call may be expensive if there are a large number of processes running. 
@@ -171,15 +189,15 @@ public:
   bool sendSignal(int signal);
 
   void setAutoClose(bool b) { autoClose = b; }
+  void renameSession(const QString &name);
 
   // Additional functions for DCOP
   bool closeSession();
   void clearHistory();
   void feedSession(const QString &text);
   void sendSession(const QString &text);
-  void renameSession(const QString &name);
   QString sessionName() { return title; }
-  int sessionPID() { return sh->pid(); }
+  int sessionPid() { return sh->pid(); }
   void enableFullScripting(bool b);
 
   void startZModem(const QString &rz, const QString &dir, const QStringList &list);
@@ -300,6 +318,10 @@ private:
 
   QColor         modifiedBackground; // as set by: echo -en '\033]11;Color\007
   int            encoding_no;
+
+  NavigationItem* navItem;
+
+  static int lastSessionId;
 };
 
 #endif

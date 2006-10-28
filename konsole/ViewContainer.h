@@ -79,6 +79,11 @@ public:
      */ 
     virtual QWidget* activeView() const = 0;
 
+    /**
+     * Changes the focus to the specified view and updates
+     * navigation aids to reflect the change.
+     */
+    virtual void setActiveView(QWidget* widget) = 0;
 signals:
     /** Emitted when the container is deleted */
     void destroyed(ViewContainer* container);
@@ -116,6 +121,7 @@ public:
     
     virtual QWidget* containerWidget() const;
     virtual QWidget* activeView() const;
+    virtual void setActiveView(QWidget* view);
 
 protected:
     virtual void viewAdded( QWidget* view );

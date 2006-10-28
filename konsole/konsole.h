@@ -69,7 +69,7 @@ class SessionInfo;
 class SessionManager;
 class ViewSplitter;
 
-
+class KonsoleAdaptor;
 class Konsole : public KMainWindow
 {
     Q_OBJECT
@@ -110,7 +110,7 @@ public:
   int sessionCount() { return sessions.count(); }
 
   QString currentSession();
-  void newSession(const QString &type);
+  QString newSession(const QString &type);
   TESession* newSession(SessionInfo* type);
   QString sessionId(const int position);
 
@@ -139,7 +139,7 @@ public Q_SLOTS:
   void slotSetSessionSchema(TESession *session, const QString &schema);
 
   void makeGUI();
-  void newSession();
+  QString newSession();
 
 protected:
 
@@ -463,6 +463,7 @@ private:
   SessionManager* _sessionManager;
 
   ViewSplitter* _view;
+  friend class KonsoleAdaptor;
 };
 
 class QSpinBox;
