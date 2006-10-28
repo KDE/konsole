@@ -12,6 +12,10 @@ kde4_add_executable(fontembedder ${fontembedder_SRCS})
 
 target_link_libraries(fontembedder  ${KDE4_KIO_LIBS} )
 
+qt4_add_dbus_adaptor( konsoleadaptors_SRCS org.kde.konsole.Konsole.xml konsole.h Konsole )
+qt4_add_dbus_adaptor( konsoleadaptors_SRCS org.kde.konsole.KonsoleScripting.xml konsole.h Konsole )
+qt4_add_dbus_adaptor( sessionadaptors_SRCS org.kde.konsole.Session.xml TESession.h TESession )
+qt4_add_dbus_adaptor( sessionadaptors_SRCS org.kde.konsole.SessionScripting.xml TESession.h TESession )
 
 if(KONSOLE_GENERATE_LINEFONT)
 	add_custom_command(OUTPUT ${CMAKE_SOURCE_DIR}/linefont.h COMMAND ${CMAKE_CURRENT_BINARY_DIR}/fontembedder ARGS ${CMAKE_SOURCE_DIR}/linefont.src DEPENDS ${CMAKE_SOURCE_DIR}/linefont.src )
@@ -20,6 +24,8 @@ endif(KONSOLE_GENERATE_LINEFONT)
 ########### next target ###############
 
 set(konsole_KDEINIT_SRCS 
+   ${konsoleadaptors_SRCS}
+   ${sessionadaptors_SRCS}
    TEPty.cpp 
    BlockArray.cpp 
    main.cpp 
@@ -36,10 +42,6 @@ set(konsole_KDEINIT_SRCS
    konsolebookmarkhandler.cpp 
    zmodem_dialog.cpp 
    printsettings.cpp 
-   konsoleadaptor.cpp
-   sessionadaptor.cpp
-   konsolescriptingadaptor.cpp
-   sessionscriptingadaptor.cpp 
    TerminalCharacterDecoder.cpp
    SessionManager.cpp
    ViewSplitter.cpp
@@ -69,8 +71,7 @@ install(TARGETS konsole DESTINATION ${BIN_INSTALL_DIR})
 ########### next target ###############
 
 set(konsolepart_PART_SRCS 
-   sessionadaptor.cpp
-   sessionscriptingadaptor.cpp
+   ${sessionadaptors_SRCS}
    TEPty.cpp 
    BlockArray.cpp 
    konsole_part.cpp 
