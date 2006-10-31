@@ -73,8 +73,11 @@ public:
    * The viewing widget will display the output from the terminal and input from the viewing widget 
    * (key presses, mouse activity etc.) will be sent to the terminal.
    *
-   * Currently each view on the session is required to be the same size.  ie.  They must all display
-   * the same number of lines and columns.  
+   * Since terminal applications assume a single terminal screen, all views of a session
+   * will display the same number of lines and columns.
+   *
+   * When the TESession instance is destroyed, any views which are still attached will also
+   * be deleted.
    */
   void addView(TEWidget* widget);
   /** 

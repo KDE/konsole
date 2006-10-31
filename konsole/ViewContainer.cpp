@@ -42,7 +42,16 @@ void ViewContainer::addView(QWidget* view , NavigationItem* item)
     _views << view;
     _navigation[view] = item;
 
+    connect( view , SIGNAL(destroyed(QObject*)) , this , SLOT( viewDestroyed(QObject*) ) );
+
     viewAdded(view);
+}
+void ViewContainer::viewDestroyed(QObject* object)
+{
+    QWidget* widget = static_cast<QWidget*>(object);
+
+    _views.removeAll(widget);
+    _navigation.remove(widget);
 }
 void ViewContainer::removeView(QWidget* view)
 {
@@ -164,7 +173,7 @@ void TabbedViewContainer::viewAdded( QWidget* view )
 {
     NavigationItem* item = navigationItem(view);
     connect( item , SIGNAL(titleChanged(NavigationItem*)) , this , SLOT(updateTitle(NavigationItem*))); 
-    connect( item , SIGNAL(iconChanged(NavigationItem*) ) , this ,SLOT(updateTitle(NavigationItem*)));          
+    connect( item , SIGNAL(iconChanged(NavigationItem*) ) , this ,SLOT(updateIcon(NavigationItem*)));          
     _tabWidget->addTab( view , item->icon() , item->title() );
 }
 void TabbedViewContainer::viewRemoved( QWidget* view )
@@ -174,8 +183,23 @@ void TabbedViewContainer::viewRemoved( QWidget* view )
     _tabWidget->removeTab( _tabWidget->indexOf(view) );
 }
 
+void TabbedViewContainer::updateIcon(NavigationItem* item)
+{
+    kDebug() << __FUNCTION__ << ": icon changed." << endl;
+
+    QList<QWidget*> items = widgetsForItem(item);
+    QListIterator<QWidget*> itemIter(items);
+    
+    while ( itemIter.hasNext() )
+    {
+        int index = _tabWidget->indexOf( itemIter.next() );
+        _tabWidget->setTabIcon( index , item->icon() );
+    }
+}
 void TabbedViewContainer::updateTitle(NavigationItem* item) 
 {
+    kDebug() << __FUNCTION__ << ": title changed." << endl;
+
     QList<QWidget*> items = widgetsForItem(item);
     QListIterator<QWidget*> itemIter(items);
 
@@ -183,7 +207,6 @@ void TabbedViewContainer::updateTitle(NavigationItem* item)
     {
         int index = _tabWidget->indexOf( itemIter.next() );
         _tabWidget->setTabText( index , item->title() );
-        _tabWidget->setTabIcon( index , item->icon() );
     }
 
 }

@@ -6,6 +6,9 @@
 #include <QList>
 #include <QString>
 
+// KDE
+#include <kactioncollection.h>
+
 class QAction;
 
 //Terminal Session Navigation
@@ -36,7 +39,7 @@ public:
 signals:
     void titleChanged( NavigationItem* item );
     void iconChanged( NavigationItem* item );
-    
+
 protected:
     void setTitle( const QString& title );
     void setIcon( const QIcon& icon );
@@ -68,12 +71,31 @@ public:
 
 private slots:
     void updateTitle();
+    void sessionStateChange(TESession* session , int state);
 
     //context menu action receivers
+    void closeSession();
     void renameSession();
-
+    void toggleMonitorActivity(bool monitor);
+    void toggleMonitorSilence(bool monitor);
+   
 private:
+    void buildContextMenuActions();
+
+    //session for which this item provides navigation info
     TESession* _session;
+
+    //list of actions for a context menu
+    QList<QAction*> _actionList;
+    
+    //used by contextMenuActions() to locate the position in _actionList 
+    //to insert the view actions
+    QAction* _viewSeparator;
+
+    //the name of the icon for the session in its current state (eg. active , silent , normal )
+    QString _stateIconName;
+
+    KActionCollection _collection;
 };
 
 

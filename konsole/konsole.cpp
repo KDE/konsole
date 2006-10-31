@@ -349,12 +349,15 @@ Konsole::~Konsole()
         sessionIter.next()->closeSession();
     }
     
-    // Wait a bit for all children to clean themselves up.
-    while(sessions.count() && KProcessController::theKProcessController->waitForProcessExit(1))
-        ;
+    //wait for the session processes to terminate
+    while(sessionManager()->sessions().count() && 
+            KProcessController::theKProcessController->waitForProcessExit(1))
+    {
+        //do nothing
+    }
 
     resetScreenSessions();
-       
+        
     delete m_defaultSession;
 
     // the tempfiles have autodelete=true, so the actual files are removed here too
@@ -1853,7 +1856,7 @@ void Konsole::slotToggleMenubar() {
   }
 }
 
-void Konsole::initTEWidget(TEWidget* new_te, TEWidget* default_te)
+/*void Konsole::initTEWidget(TEWidget* new_te, TEWidget* default_te)
 {
   new_te->setWordCharacters(default_te->wordCharacters());
   new_te->setTerminalSizeHint(default_te->isTerminalSizeHint());
@@ -1870,7 +1873,7 @@ void Konsole::initTEWidget(TEWidget* new_te, TEWidget* default_te)
   new_te->setBellMode(default_te->bellMode());
 
   new_te->setMinimumSize(150,70);
-}
+}*/
 
 void Konsole::createSessionTab(TEWidget *widget, const QIcon &iconSet,
                                const QString &text, int index)
@@ -2785,17 +2788,17 @@ TESession* Konsole::newSession(SessionInfo* type)
     display->setMinimumSize(150,70);
     
     //copy settings from previous display if available, otherwise load them anew
-    if ( !te ) 
-    { 
+  //  if ( !te ) 
+  //  { 
         readProperties(KGlobal::config(), "", true);
         display->setVTFont( type->defaultFont( defaultFont ) );
         display->setScrollbarLocation(n_scroll);
         display->setBellMode(n_bell);
-    }
-    else
-    {
-        initTEWidget(display,te);
-    }
+  //  }
+  //  else
+  //  {
+  //      initTEWidget(display,te);
+  //  }
 
     
     //create a session and attach the display to it
@@ -3226,7 +3229,7 @@ void Konsole::setMasterMode(bool _state, TESession* _se)
 
 void Konsole::notifySessionState(TESession* session, int state)
 {
-  QString state_iconname;
+ /* QString state_iconname;
   switch(state)
   {
     case NOTIFYNORMAL  : if(session->isMasterMode())
@@ -3247,7 +3250,7 @@ void Konsole::notifySessionState(TESession* session, int state)
 
     QPixmap normal = KGlobal::instance()->iconLoader()->loadIcon(state_iconname,
         K3Icon::Small, 0, K3Icon::DefaultState, 0L, true);
-    QPixmap active = KGlobal::instance()->iconLoader()->loadIcon(state_iconname,
+    QPixmap active = KGlobal::instance()->iconLoader()->loadIconstate_iconname,
         K3Icon::Small, 0, K3Icon::ActiveState, 0L, true);
 
     // make sure they are not larger than 16x16
@@ -3262,7 +3265,7 @@ void Konsole::notifySessionState(TESession* session, int state)
 
    // SPLIT-VIEW Disabled
    // tabwidget->setTabIcon(tabwidget->indexOf( session->widget() ), iconset);
-  }
+  }*/
 }
 
 // --| Session support |-------------------------------------------------------

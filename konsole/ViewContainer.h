@@ -102,6 +102,10 @@ protected:
     
     /** Returns the widgets which are associated with a particular navigation item */
     QList<QWidget*> widgetsForItem( NavigationItem* item ) const;
+
+private slots:
+    void viewDestroyed(QObject* view);
+
 private:
     QList<QWidget*> _views;
     QHash<QWidget*,NavigationItem*> _navigation;
@@ -129,6 +133,8 @@ protected:
 
 private slots:
     void updateTitle(NavigationItem* item);
+    void updateIcon(NavigationItem* item);
+
     void selectTabColor();
     void prepareColorCells();
     void showContextMenu(QWidget* widget , const QPoint& position);

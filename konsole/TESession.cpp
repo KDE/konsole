@@ -582,6 +582,10 @@ TESession::~TESession()
   delete sh;
   delete navItem;
   delete zmodemProc;
+
+  QListIterator<TEWidget*> viewIter(_views);
+  while (viewIter.hasNext())
+      viewIter.next()->deleteLater();
 }
 
 void TESession::setConnect(bool c)
@@ -800,6 +804,8 @@ void TESession::setMonitorActivity(bool _monitor)
 {
   monitorActivity=_monitor;
   notifiedActivity=false;
+
+  notifySessionState(NOTIFYNORMAL);
 }
 
 void TESession::setMonitorSilence(bool _monitor)
@@ -814,6 +820,8 @@ void TESession::setMonitorSilence(bool _monitor)
   }
   else
     monitorTimer->stop();
+
+  notifySessionState(NOTIFYNORMAL);
 }
 
 void TESession::setMonitorSilenceSeconds(int seconds)

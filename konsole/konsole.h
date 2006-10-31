@@ -287,7 +287,7 @@ private:
   void addScreenSession(const QString & path, const QString & socket);
   void resetScreenSessions();
 
-  void initTEWidget(TEWidget* new_te, TEWidget* default_te);
+//  void initTEWidget(TEWidget* new_te, TEWidget* default_te);
 
   void createSessionTab(TEWidget *widget, const QIcon& iconSet,
                         const QString &text, int index = -1);
