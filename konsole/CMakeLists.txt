@@ -93,7 +93,6 @@ kde4_automoc(${konsolepart_PART_SRCS})
 
 kde4_add_plugin(konsolepart WITH_PREFIX ${konsolepart_PART_SRCS})
 
-kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} konsolepart )
 
 target_link_libraries(konsolepart  ${KDE4_KDE3SUPPORT_LIBS}  )
 if(X11_XTest_LIB)
@@ -112,7 +111,6 @@ kde4_automoc(${kded_kwrited_PART_SRCS})
 
 kde4_add_plugin(kded_kwrited ${kded_kwrited_PART_SRCS})
 
-kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kded_kwrited )
 
 target_link_libraries(kded_kwrited  ${KDE4_KDE3SUPPORT_LIBS})
 

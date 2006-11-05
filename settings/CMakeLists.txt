@@ -13,7 +13,6 @@ kde4_add_ui_files(kcm_konsole_PART_SRCS kcmkonsoledialog.ui sessiondialog.ui )
 
 kde4_add_plugin(kcm_konsole ${kcm_konsole_PART_SRCS})
 
-kde4_install_libtool_file(${PLUGIN_INSTALL_DIR} kcm_konsole)
 
 target_link_libraries(kcm_konsole ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KDEFX_LIBS})
 
