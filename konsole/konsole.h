@@ -260,6 +260,7 @@ private Q_SLOTS:
   void slotTabbarToggleDynamicHide();
   void slotToggleAutoResizeTabs();
   void slotFontChanged();
+  void slotToggleSplitView(bool split);
 
   void slotSetEncoding();
 private:
@@ -286,6 +287,8 @@ private:
   void createSessionMenus();
   void addScreenSession(const QString & path, const QString & socket);
   void resetScreenSessions();
+
+  TEWidget* createSessionView(TESession* session);
 
 //  void initTEWidget(TEWidget* new_te, TEWidget* default_te);
 

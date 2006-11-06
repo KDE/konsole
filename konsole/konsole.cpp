@@ -525,6 +525,10 @@ void Konsole::makeGUI()
    m_view->addAction( m_detachSession );
    m_view->addAction( m_renameSession );
 
+   KToggleAction* splitView = new KToggleAction("Split View",0,"split-view");
+   connect( splitView , SIGNAL(toggled(bool)) , this , SLOT(slotToggleSplitView(bool)) );
+   m_view->addAction( splitView ); 
+   
    //Monitor for Activity / Silence
    m_view->addSeparator();
    m_view->addAction( monitorActivity );
@@ -750,21 +754,22 @@ void Konsole::makeGUI()
    colors->checkSchemas();
    colors->sort();
    updateSchemaMenu();
-   ColorSchema *sch=colors->find(s_schema);
+   
+   /*ColorSchema *sch=colors->find(s_schema);
    if (sch)
         curr_schema=sch->numb();
    else
         curr_schema = 0;
-   for (int i=0; i<m_schema->actions().count(); i++)
-      m_schema->setItemChecked(i,false);
+   //for (int i=0; i<m_schema->actions().count(); i++)
+   //   m_schema->setItemChecked(i,false);
 
-
-   kDebug() << __FUNCTION__ << ": Color schemas done - time = " << makeGUITimer.elapsed() << endl;
    m_schema->setItemChecked(curr_schema,true);
+*/
+   kDebug() << __FUNCTION__ << ": Color schemas done - time = " << makeGUITimer.elapsed() << endl;
 
    Q_ASSERT( se != 0 );
 
-   se->setSchemaNo(curr_schema);
+ //  se->setSchemaNo(curr_schema);
 
    kDebug() << __FUNCTION__ << ": setSchemaNo done - time = " << makeGUITimer.elapsed() << endl;
 
@@ -1447,7 +1452,8 @@ void Konsole::saveProperties(KConfig* config) {
 
         config->writeEntry(key, sessions.current()->Title());
         key = QString("Schema%1").arg(counter);
-        config->writeEntry(key, colors->find( sessions.current()->schemaNo() )->relPath());
+        config->writeEntry(key,sessions.current()->schema()->relPath());
+     //   config->writeEntry(key, colors->find( sessions.current()->schemaNo() )->relPath());
 	key = QString("Encoding%1").arg(counter);
 	config->writeEntry(key, sessions.current()->encodingNo());
 
@@ -1524,7 +1530,7 @@ void Konsole::saveProperties(KConfig* config) {
 
   // SPLIT-VIEW Disabled
   //  config->writeEntry("defaultfont", (se->widget())->getVTFont());
-    s_kconfigSchema = colors->find( se->schemaNo() )->relPath();
+    s_kconfigSchema = se->schema()->relPath();
     config->writeEntry("schema",s_kconfigSchema);
   }
 
@@ -1805,18 +1811,33 @@ void Konsole::schema_menu_activated(int item)
 void Konsole::updateSchemaMenu()
 {
   m_schema->clear();
+  
+  ColorSchema* activeColorScheme = se->schema();
+ 
+  kDebug() << "active color scheme: " << activeColorScheme->title() << endl;
+  
   for (int i = 0; i < (int) colors->count(); i++)
   {
      ColorSchema* s = (ColorSchema*)colors->at(i);
-    assert( s );
-    QString title=s->title();
-    m_schema->insertItem(title.replace('&',"&&"),s->numb(),0);
+     assert( s );
+     
+     QString title=s->title();
+     //KAction* action = m_schema->insertItem(title.replace('&',"&&"),s->numb(),0);
+  
+     QAction* action = m_schema->addAction(title.replace('&',"&&"));
+     
+     if ( s == activeColorScheme )
+     {
+         kDebug() << "found active scheme" << endl;
+         action->setChecked(true);
+     }
   }
 
-  if (te && se)
+  //SPLIT-VIEW Disabled
+ /* if (te && se)
   {
         m_schema->setItemChecked(se->schemaNo(),true);
-  }
+  }*/
 
 }
 
@@ -2536,8 +2557,9 @@ void Konsole::activateSession(TESession *s)
     se_previous = se;
   se = s;
 
+  //SPLIT-VIEW Disabled
   // Set the required schema variables for the current session
-  ColorSchema* cs = colors->find( se->schemaNo() );
+  ColorSchema* cs = 0 /*colors->find( se->schemaNo() )*/;
   if (!cs)
     cs = (ColorSchema*)colors->at(0);  //the default one
   s_schema = cs->relPath();
@@ -2545,18 +2567,22 @@ void Konsole::activateSession(TESession *s)
   pmPath = cs->imagePath();
   n_render = cs->alignment();
 
+  //SPLIT-VIEW Disabled
   // BR 106464 temporary fix...
   //  only 2 sessions opened, 2nd session viewable, right-click on 1st tab and
   //  select 'Detach', close original Konsole window... crash
   //  s is not set properly on original Konsole window
-  KToggleAction *ra = session2action.find(se);
-  if (!ra) {
-    se=sessions.first();        // Get new/correct TESession
-    ra = session2action.find(se);
-  }
-  ra->setChecked(true);
+  //KToggleAction *ra = session2action.find(se);
+  //if (!ra) {
+  //  se=sessions.first();        // Get new/correct TESession
+  //  ra = session2action.find(se);
+  //}
+  //ra->setChecked(true);
 
-  QTimer::singleShot(1,this,SLOT(allowPrevNext())); // hack, hack, hack
+  //If you have to resort to adding a hack, please please explain
+  //clearly why the hack is there. -- Robert Knight
+  //
+  //QTimer::singleShot(1,this,SLOT(allowPrevNext())); // hack, hack, hack
 
   //SPLIT-VIEW Disabled
   /*if (tabwidget->currentWidget() != se->widget())
@@ -2567,6 +2593,11 @@ void Konsole::activateSession(TESession *s)
     updateSchemaMenu();
   }*/
 
+  if (m_menuCreated)
+  {
+      updateSchemaMenu();
+  }
+  
   notifySize(te->Columns(), te->Lines()); // set menu items
   s->setConnect(true);
   updateTitle();
@@ -2689,9 +2720,10 @@ void Konsole::slotSetSessionEncoding(TESession *session, const QString &encoding
 
 void Konsole::slotGetSessionSchema(TESession *session, QString &schema)
 {
-  int no = session->schemaNo();
-  ColorSchema* s = colors->find( no );
-  schema = s->relPath();
+// SPLIT-VIEW Disabled
+//  int no = session->schemaNo();
+//  ColorSchema* s = colors->find( no );
+//  schema = s->relPath();
 }
 
 void Konsole::slotSetSessionSchema(TESession *session, const QString &schema)
@@ -2781,26 +2813,22 @@ QString Konsole::newSession(const QString &type)
   return QString();
 }
 
-TESession* Konsole::newSession(SessionInfo* type)
+TEWidget* Konsole::createSessionView(TESession* session /*session*/)
 {
     //create a new display
     TEWidget* display = new TEWidget(0);
+ 
     display->setMinimumSize(150,70);
     
-    //copy settings from previous display if available, otherwise load them anew
-  //  if ( !te ) 
-  //  { 
-        readProperties(KGlobal::config(), "", true);
-        display->setVTFont( type->defaultFont( defaultFont ) );
-        display->setScrollbarLocation(n_scroll);
-        display->setBellMode(n_bell);
-  //  }
-  //  else
-  //  {
-  //      initTEWidget(display,te);
-  //  }
-
+    readProperties(KGlobal::config(), "", true);
+    display->setVTFont( defaultFont );//type->defaultFont( defaultFont ) );
+    display->setScrollbarLocation(n_scroll);
+    display->setBellMode(n_bell);
     
+    return display;
+}
+TESession* Konsole::newSession(SessionInfo* type)
+{
     //create a session and attach the display to it
     TESession* session = sessionManager()->createSession( type->path() );
    
@@ -2817,6 +2845,7 @@ TESession* Konsole::newSession(SessionInfo* type)
 
     NavigationItem* item = session->navigationItem();
     ViewContainer* container = _view->activeSplitter()->activeContainer();
+    TEWidget* display = createSessionView(session);  
     container->addView(display,item);
     container->setActiveView(display);
     session->addView( display );
@@ -2827,7 +2856,10 @@ TESession* Konsole::newSession(SessionInfo* type)
         sessionScheme=(ColorSchema*)colors->at(0);  //the default one
     int schemeId = sessionScheme->numb();
 
-    session->setSchemaNo(schemeId);
+    session->setSchema(sessionScheme);
+
+    //session->setSchemaNo(schemeId); 
+    //display->setColorTable(sessionScheme->table()); 
     
     //setup keyboard
     QString key = type->keyboardSetup();
@@ -2868,10 +2900,13 @@ TESession* Konsole::newSession(SessionInfo* type)
       this, SLOT(slotResizeSession(TESession*, QSize)));
     connect( session, SIGNAL(setSessionEncoding(TESession*, const QString &)),
       this, SLOT(slotSetSessionEncoding(TESession*, const QString &)));
-    connect( session, SIGNAL(getSessionSchema(TESession*, QString &)),
-      this, SLOT(slotGetSessionSchema(TESession*, QString &)));
-    connect( session, SIGNAL(setSessionSchema(TESession*, const QString &)),
-      this, SLOT(slotSetSessionSchema(TESession*, const QString &)));
+    
+    //SPLIT-VIEW Disabled
+    //connect( session, SIGNAL(getSessionSchema(TESession*, QString &)),
+    //  this, SLOT(slotGetSessionSchema(TESession*, QString &)));
+    //connect( session, SIGNAL(setSessionSchema(TESession*, const QString &)),
+    //  this, SLOT(slotSetSessionSchema(TESession*, const QString &)));
+    
     connect( session, SIGNAL(changeTabTextColor(TESession*, int)),
       this,SLOT(changeTabTextColor(TESession*, int)) );
 
@@ -4273,6 +4308,35 @@ void Konsole::enableFixedSize(bool b)
     {
       delete m_fullscreen;
       m_fullscreen = 0;
+    }
+}
+
+void Konsole::slotToggleSplitView(bool splitView)
+{
+    if (splitView)
+    {
+        TabbedViewContainer* container = new TabbedViewContainer();
+
+        QListIterator<TESession*> sessionIter(sessionManager()->sessions());
+        while (sessionIter.hasNext())
+        {
+            TESession* session = sessionIter.next();
+ 
+            NavigationItem* item = session->navigationItem();
+            TEWidget* display = createSessionView(session);  
+            container->addView(display,item);
+            container->setActiveView(display);
+            session->addView( display );
+        }
+            _view->addContainer(container,Qt::Vertical);
+    }
+    else
+    {
+        ViewContainer* container = _view->activeSplitter()->activeContainer();
+
+       
+        
+        delete container;
     }
 }
 

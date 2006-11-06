@@ -45,6 +45,7 @@
 // Konsole
 #include <config-konsole.h>
 #include "NavigationItem.h"
+#include "schema.h"
 #include "sessionadaptor.h"
 #include "sessionscriptingadaptor.h"
 #include "zmodem_dialog.h"
@@ -64,7 +65,7 @@ TESession::TESession() :
    , masterMode(false)
    , autoClose(true)
    , wantedClose(false)
-   , schema_no(0)
+   //, schema_no(0)
    , font_no(3)
    , silence_seconds(10)
    , add_to_utmp(true)
@@ -75,6 +76,7 @@ TESession::TESession() :
    , zmodemProgress(0)
    , encoding_no(0)
    , navItem(0)
+   , _colorScheme(0)
 {
     //prepare DBus communication
     (void)new SessionAdaptor(this);
@@ -233,6 +235,13 @@ void TESession::addView(TEWidget* widget)
     if ( em != 0 )
         em->addView(widget);
 
+    //update color scheme of view to match session
+    if (_colorScheme)
+    {
+        widget->setColorTable(_colorScheme->table());
+    }
+    
+    //connect view signals and slots
     QObject::connect( widget ,SIGNAL(changedContentSizeSignal(int,int)),
                    this,SLOT(onContentSizeChange(int,int)));
 }
@@ -650,10 +659,10 @@ TEmulation* TESession::getEmulation()
 
 // following interfaces might be misplaced ///
 
-int TESession::schemaNo()
-{
-  return schema_no;
-}
+//int TESession::schemaNo()
+//{
+//  return schema_no;
+//}
 
 int TESession::encodingNo()
 {
@@ -685,10 +694,10 @@ const QString & TESession::SessionId() const
   return sessionId;
 }
 
-void TESession::setSchemaNo(int sn)
+/*void TESession::setSchemaNo(int sn)
 {
   schema_no = sn;
-}
+}*/
 
 void TESession::setEncodingNo(int index)
 {
@@ -996,16 +1005,33 @@ void TESession::print( QPainter &paint, bool friendly, bool exact )
     primaryView()->print(paint, friendly, exact);
 }
 
-QString TESession::schema()
+ColorSchema* TESession::schema()
+{
+    return _colorScheme;
+}
+
+/*QString TESession::schema()
 {
   QString currentSchema;
   emit getSessionSchema(this, currentSchema);
   return currentSchema;
-}
+}*/
 
-void TESession::setSchema(const QString &schema)
+//void TESession::setSchema(const QString &schema)
+//{
+//  emit setSessionSchema(this, schema);
+//}
+
+void TESession::setSchema(ColorSchema* schema)
 {
-  emit setSessionSchema(this, schema);
+    _colorScheme = schema;
+
+    //update color scheme for attached views
+    QListIterator<TEWidget*> viewIter(_views);
+    while (viewIter.hasNext())
+    {
+        viewIter.next()->setColorTable(schema->table());
+    }
 }
 
 QString TESession::font()

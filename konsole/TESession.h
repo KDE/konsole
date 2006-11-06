@@ -38,6 +38,8 @@
 class KProcIO;
 class KProcess;
 class ZModemDialog;
+
+class ColorSchema;
 class NavigationItem;
 
 /**
@@ -61,7 +63,7 @@ public:
   Q_PROPERTY(int sessionPid READ sessionPid)
   Q_PROPERTY(QString font READ font WRITE setFont)
   Q_PROPERTY(QString keytab READ keytab WRITE setKeytab)
-  Q_PROPERTY(QString schema READ schema WRITE setSchema)
+ // Q_PROPERTY(QString schema READ schema WRITE setSchema)
   Q_PROPERTY(QSize size READ size WRITE setSize)
 
   TESession();
@@ -178,7 +180,7 @@ public:
   void setMonitorSilence(bool);
   void setMonitorSilenceSeconds(int seconds);
   void setMasterMode(bool);
-  void setSchemaNo(int sn);
+//  void setSchemaNo(int sn);
   void setEncodingNo(int index);
   void setKeymapNo(int kn);
   void setKeymap(const QString& _id);
@@ -209,8 +211,12 @@ public:
 
   void print(QPainter &paint, bool friendly, bool exact);
 
-  QString schema();
-  void setSchema(const QString &schema);
+ // QString schema();
+ // void setSchema(const QString &schema);
+  
+  ColorSchema* schema();
+  void setSchema(ColorSchema* schema);
+  
   QString encoding();
   void setEncoding(const QString &encoding);
   QString keytab();
@@ -257,8 +263,10 @@ Q_SIGNALS:
   void updateSessionConfig(TESession *);
   void resizeSession(TESession *session, QSize size);
   void setSessionEncoding(TESession *session, const QString &encoding);
-  void getSessionSchema(TESession *session, QString &schema);
-  void setSessionSchema(TESession *session, const QString &schema);
+
+// SPLIT-VIEW Disabled
+//  void getSessionSchema(TESession *session, QString &schema);
+//  void setSessionSchema(TESession *session, const QString &schema);
 
 private Q_SLOTS:
   void onRcvBlock( const char* buf, int len );
@@ -288,7 +296,8 @@ private:
   //FIXME: using the indices here
   // is propably very bad. We should
   // use a persistent reference instead.
-  int            schema_no;
+  //
+ //REMOVED - !! int            schema_no;
   int            font_no;
   int            silence_seconds;
 
@@ -324,6 +333,8 @@ private:
 
   NavigationItem* navItem;
 
+  ColorSchema*   _colorScheme;
+  
   static int lastSessionId;
 };
 
