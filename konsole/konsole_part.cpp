@@ -523,8 +523,11 @@ void konsolePart::applyProperties()
    se->setAddToUtmp( config->readEntry("AddToUtmp", QVariant(true)).toBool());
    delete config;
 
-   se->widget()->setVTFont( defaultFont );
-   se->setSchemaNo( curr_schema );
+   //SPLIT-VIEW Fix
+   //se->widget()->setVTFont( defaultFont );
+   se->primaryView()->setVTFont( defaultFont );
+
+   //se->setSchemaNo( curr_schema );
    slotSetEncoding();
 }
 
@@ -609,7 +612,8 @@ void konsolePart::saveProperties()
   } else {
     config->writeEntry("bellmode",n_bell);
     config->writeEntry("BlinkingCursor", te->blinkingCursor());
-    config->writeEntry("defaultfont", (se->widget())->getVTFont());
+    //SPLIT-VIEW Fix
+    config->writeEntry("defaultfont", (se->primaryView())->getVTFont());
     config->writeEntry("history", se->history().getSize());
     config->writeEntry("historyenabled", b_histEnabled);
     config->writeEntry("keytab",n_keytab);
@@ -652,11 +656,14 @@ void konsolePart::slotSelectScrollbar()
 void konsolePart::slotSelectFont() {
    if ( !se ) return;
 
-   QFont font = se->widget()->getVTFont();
+   //SPLIT-VIEW Fix
+   //QFont font = se->widget()->getVTFont();
+   QFont font = se->primaryView()->getVTFont();
    if ( KFontDialog::getFont( font, true ) != QDialog::Accepted )
       return;
 
-   se->widget()->setVTFont( font );
+   se->primaryView()->setVTFont( font );
+   //se->widget()->setVTFont( font );
 }
 
 void konsolePart::biggerFont(void) {
@@ -763,7 +770,9 @@ void konsolePart::setSchema(ColorSchema* s)
   }
 
   te->setColorTable(s->table());
-  se->setSchemaNo(s->numb());
+  
+  //SPLIT-VIEW Fix
+  //se->setSchemaNo(s->numb());
 }
 
 void konsolePart::notifySize(int /* columns */, int /* lines */)
