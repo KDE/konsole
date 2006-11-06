@@ -1,0 +1,53 @@
+TODO before merging with /trunk
+===============================
+
+- [DONE] Kill views when the associated session dies
+- [DONE] Single top-bottom split-view menu action
+- [DONE] Use correct color scheme in terminal display
+
+- Prompt user when closing a session.  Ensure the same close prompt
+  is shown no matter how the user closes the session.
+
+- Ensure that when a new session is created, new views are created in all active containers.
+  
+- Tab context menu
+    - Send Input to All Sessions
+
+- Tab-bar context menu
+    - Auto-resize tabs
+    - Dynamic hide
+    - Tab options
+        - Text & icons
+        - Text only
+        - Icons only
+    - Tab-bar options
+        - Hide
+        - Top
+        - Bottom
+
+- Storage of view containers and views in Konsole class 
+- Split-view functionality 
+ 
+- Rename session
+    - Allow renaming session by double-clicking on tab widget
+    - Update items in the 'View' menu
+    - Support case when "Set tab title to match window title" option is ENABLED
+    - Support case when "Set tab title to match window title" option is DISABLED (ie.
+            just session title should be shown)
+
+    
+- Terminal display context menu (when right-clicking in main terminal area)
+    - Set Selection End
+    - Copy
+    - Paste
+    - Send Signal
+    - Detach Session
+    - Rename Session
+    - Bookmarks
+    - Close Session
+  
+- All code tagged 'SPLIT-VIEW Disabled' in konsole.cpp
+
+- UI review of terminal display context menu 
+
+- Update color scheme menu correctly when switching from session to session

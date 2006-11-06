@@ -525,8 +525,11 @@ void Konsole::makeGUI()
    m_view->addAction( m_detachSession );
    m_view->addAction( m_renameSession );
 
-   KToggleAction* splitView = new KToggleAction("Split View",0,"split-view");
+   m_view->addSeparator();
+   
+   KToggleAction* splitView = new KToggleAction(KIcon("view_top_bottom"),i18n("Split View"),0,"split-view");
    connect( splitView , SIGNAL(toggled(bool)) , this , SLOT(slotToggleSplitView(bool)) );
+   splitView->setCheckedState( KGuiItem( i18n( "&Remove Split" ) , KIcon("view_remove") ) );
    m_view->addAction( splitView ); 
    
    //Monitor for Activity / Silence
