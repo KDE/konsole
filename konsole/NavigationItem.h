@@ -69,6 +69,7 @@ public:
 
     virtual QList<QAction*> contextMenuActions( QList<QAction*> viewActions ) ;
 
+    TESession* session() { return _session; }
 private slots:
     void updateTitle();
     void sessionStateChange(TESession* session , int state);
