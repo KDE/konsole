@@ -27,9 +27,18 @@
 #include <QPixmap>
 #include <QVector>
 
-#include "schemadialog.h"
+#include "ui_schemadialog.h"
 
-/** SchemaEditor is the base class of the porject */
+class SchemaDialog : public QWidget, public Ui::SchemaDialog
+{
+public:
+  SchemaDialog( QWidget *parent ) : QWidget( parent ) {
+    setupUi( this );
+  }
+};
+
+
+/** SchemaEditor is the base class of the project */
 class SchemaEditor : public SchemaDialog
 {
   Q_OBJECT
