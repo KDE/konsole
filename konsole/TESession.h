@@ -273,6 +273,8 @@ private Q_SLOTS:
   void monitorTimerDone();
   void notifySessionState(int state);
   void onContentSizeChange(int height, int width);
+  //automatically detach views from sessions when view is destroyed
+  void viewDestroyed(QObject* view);
 
 private:
 

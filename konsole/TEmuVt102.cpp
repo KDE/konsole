@@ -987,7 +987,7 @@ void TEmuVt102::onScrollLock()
 
 void TEmuVt102::scrollView( int lines )
 {
-    QListIterator<QPointer<TEWidget> > viewIter(_views);
+    QListIterator<TEWidget* > viewIter(_views);
 
     while (viewIter.hasNext())
         viewIter.next()->doScroll( lines );
@@ -995,7 +995,7 @@ void TEmuVt102::scrollView( int lines )
 
 void TEmuVt102::scrollViewPages( int pages )
 {
-    QListIterator< QPointer<TEWidget> > viewIter(_views);
+    QListIterator< TEWidget* > viewIter(_views);
 
     while (viewIter.hasNext())
     {
@@ -1233,7 +1233,7 @@ void TEmuVt102::resetModes()
 
 void TEmuVt102::setViewMouseMarks(bool marks)
 {
-    QListIterator< QPointer<TEWidget> > viewIter(_views);
+    QListIterator< TEWidget* > viewIter(_views);
     while (viewIter.hasNext())
             viewIter.next()->setMouseMarks(marks);
 }
@@ -1303,7 +1303,7 @@ void TEmuVt102::setConnect(bool c)
 {
   TEmulation::setConnect(c);
 
-  QListIterator< QPointer<TEWidget> > viewIter(_views);
+  QListIterator< TEWidget* > viewIter(_views);
   
   while (viewIter.hasNext())
   {
@@ -1327,7 +1327,7 @@ void TEmuVt102::setConnect(bool c)
       scrolllock_set_off();
 #endif
 
-    QListIterator< QPointer<TEWidget> > viewIter2(_views);
+    QListIterator< TEWidget* > viewIter2(_views);
 
     while (viewIter2.hasNext())
     {

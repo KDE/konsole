@@ -26,7 +26,7 @@
 
 // Qt 
 #include <QKeyEvent>
-#include <QPointer>
+//#include <QPointer>
 #include <QTextCodec>
 #include <QTextStream>
 #include <QTimer>
@@ -206,7 +206,7 @@ public:
 
 protected:
 
-  QList< QPointer<TEWidget> > _views;
+  QList<TEWidget*> _views; //QPointer<TEWidget> > _views;
 
   //QPointer<TEWidget> gui;
   

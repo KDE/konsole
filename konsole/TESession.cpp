@@ -244,6 +244,17 @@ void TESession::addView(TEWidget* widget)
     //connect view signals and slots
     QObject::connect( widget ,SIGNAL(changedContentSizeSignal(int,int)),
                    this,SLOT(onContentSizeChange(int,int)));
+
+    QObject::connect( widget ,SIGNAL(destroyed(QObject*)) , this , SLOT(viewDestroyed(QObject*)) );
+}
+
+void TESession::viewDestroyed(QObject* view)
+{
+    TEWidget* display = (TEWidget*)view;
+    
+    Q_ASSERT( _views.contains(display) );
+
+    removeView(display);
 }
 
 void TESession::removeView(TEWidget* widget)

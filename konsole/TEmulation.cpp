@@ -380,7 +380,7 @@ void TEmulation::setSelection(const bool preserve_line_breaks) {
   QString t = scr->selectedText(preserve_line_breaks);
   if (!t.isNull()) 
   {
-    QListIterator< QPointer<TEWidget> > viewIter(_views);
+    QListIterator< TEWidget* > viewIter(_views);
 
     while (viewIter.hasNext())    
         viewIter.next()->setSelection(t);
@@ -529,6 +529,8 @@ void TEmulation::addView(TEWidget* widget)
 
 void TEmulation::removeView(TEWidget* widget)
 {
+    Q_ASSERT( _views.contains(widget) );
+
     _views.removeAll(widget);
 
     disconnect(widget);
@@ -544,11 +546,11 @@ void TEmulation::showBulk()
     ca* image = scr->getCookedImage();
     QVector<LineProperty> lineProperties = scr->getCookedLineProperties();
 
-    QListIterator< QPointer<TEWidget> > viewIter(_views);
+    QListIterator<TEWidget*> viewIter(_views); // QPointer<TEWidget> > viewIter(_views);
 
     while (viewIter.hasNext())
     {
-        QPointer<TEWidget> view = viewIter.next();
+        TEWidget* view = viewIter.next();
 
         QRect scrollRegion;
         scrollRegion.setTop( scr->topMargin() );

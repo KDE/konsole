@@ -4328,32 +4328,12 @@ void Konsole::slotToggleSplitView(bool splitView)
             container->setActiveView(display);
             session->addView( display );
         }
-            _view->addContainer(container,Qt::Vertical);
+        
+        _view->addContainer(container,Qt::Vertical);
     }
     else
     {
         ViewContainer* container = _view->activeSplitter()->activeContainer();
-
-        QList<QWidget*> views = container->views();
-       
-        QListIterator<QWidget*> viewIter(views);
-        while (viewIter.hasNext())
-        {
-            QWidget* view = viewIter.next();
-            SessionNavigationItem* sessionNav = dynamic_cast<SessionNavigationItem*>
-                                                (container->navigationItem(view));
-
-            if ( sessionNav )
-            {
-                TESession* session = sessionNav->session();
-                
-                if ( session )
-                {
-                    session->removeView( (TEWidget*)view );
-                }
-            }
-        }
-        
         delete container;
     }
 }
