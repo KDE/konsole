@@ -727,7 +727,8 @@ void konsolePart::updateSchemaMenu()
   }
 
   if (te && se) {
-    m_schema->setItemChecked(se->schemaNo(),true);
+      //SPLIT-VIEW Fix
+      //  m_schema->setItemChecked(se->schemaNo(),true);
   }
 }
 

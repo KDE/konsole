@@ -27,7 +27,9 @@
 #include <QHash>
 #include <QList>
 
+class QStackedWidget;
 class QWidget;
+
 class NavigationItem;
 
 // TabbedViewContainer
@@ -149,6 +151,27 @@ private:
     KColorCells*    _tabColorCells;
 
     int _contextMenuTab;
+};
+
+/**
+ * A plain view container with no navigation display
+ */
+class StackedViewContainer : public ViewContainer
+{
+public:
+    StackedViewContainer();
+    virtual ~StackedViewContainer();
+
+    virtual QWidget* containerWidget() const;
+    virtual QWidget* activeView() const;
+    virtual void setActiveView(QWidget* view);
+
+protected:
+    virtual void viewAdded( QWidget* view );
+    virtual void viewRemoved( QWidget* view );
+
+private:
+    QStackedWidget* _stackWidget;
 };
 
 

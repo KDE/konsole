@@ -22,6 +22,7 @@
 // Qt
 #include <QHash>
 #include <QLineEdit>
+#include <QStackedWidget>
 #include <QTabWidget>
 #include <QWidgetAction>
 
@@ -252,5 +253,32 @@ void TabbedViewContainer::selectTabColor()
 
   _tabWidget->setTabTextColor( _contextMenuTab , color );
 }
+
+StackedViewContainer::StackedViewContainer()
+{
+    _stackWidget = new QStackedWidget;
+}
+StackedViewContainer::~StackedViewContainer()
+{
+    delete _stackWidget;
+}
+QWidget* StackedViewContainer::containerWidget() const
+{
+    return _stackWidget;
+}
+QWidget* StackedViewContainer::activeView() const
+{
+    return _stackWidget->currentWidget();
+}
+void StackedViewContainer::setActiveView(QWidget* view)
+{
+   _stackWidget->setCurrentWidget(view); 
+}
+void StackedViewContainer::viewAdded( QWidget* view )
+{
+    _stackWidget->addWidget(view);
+}
+void StackedViewContainer::viewRemoved( QWidget* view )
+{}
 
 #include "ViewContainer.moc"

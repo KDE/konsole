@@ -4318,7 +4318,8 @@ void Konsole::slotToggleSplitView(bool splitView)
 {
     if (splitView)
     {
-        TabbedViewContainer* container = new TabbedViewContainer();
+        ViewContainer* container = new TabbedViewContainer();
+        _view->addContainer(container,Qt::Vertical);
 
         QListIterator<TESession*> sessionIter(sessionManager()->sessions());
         while (sessionIter.hasNext())
@@ -4332,7 +4333,6 @@ void Konsole::slotToggleSplitView(bool splitView)
             session->addView( display );
         }
         
-        _view->addContainer(container,Qt::Vertical);
     }
     else
     {

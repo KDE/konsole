@@ -87,7 +87,8 @@ set(konsolepart_PART_SRCS
    TEHistory.cpp 
    keytrans.cpp 
    TerminalCharacterDecoder.cpp
-   SessionManager.cpp )
+   SessionManager.cpp 
+   NavigationItem.cpp )
 
 kde4_automoc(${konsolepart_PART_SRCS})
 
