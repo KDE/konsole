@@ -289,6 +289,7 @@ private:
   void resetScreenSessions();
 
   TEWidget* createSessionView(TESession* session);
+  void createViews(TESession* session);
 
 //  void initTEWidget(TEWidget* new_te, TEWidget* default_te);
 

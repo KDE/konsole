@@ -10,6 +10,10 @@ TODO before merging with /trunk
 - Prompt user when closing a session.  Ensure the same close prompt
   is shown no matter how the user closes the session.
 
+- Resizing a split view is currently quite slow, presumably because of the work
+  done in TEWidget::resizeEvent() for each view.
+  Find some way to fix this situation.
+  
 - Ensure that when a new session is created, new views are created in all active containers.
  
 - Update colour scheme of all views when user selects a new scheme via the Settings menu.

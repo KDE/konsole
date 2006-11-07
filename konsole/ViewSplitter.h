@@ -75,6 +75,11 @@ public:
      * is the ViewSplitter widget at the top of the hierarchy.
      */
     ViewContainer* activeContainer() const; 
+   
+    /**
+     * Returns a list of the containers held by this splitter
+     */
+    QList<ViewContainer*> containers() const {return _containers;}
     
 signals:
     /** Signal emitted when the last child widget is removed from the splitter */

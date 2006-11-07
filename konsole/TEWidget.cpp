@@ -433,6 +433,11 @@ TEWidget::TEWidget(QWidget *parent)
 
   setLayout( gridLayout ); 
   setLineWidth(0);
+
+  //set up a warning message when the user presses Ctrl+S to avoid confusion
+  connect( this,SIGNAL(flowControlKeyPressed(bool)),this,SLOT(outputSuspended(bool)) );
+
+
 }
 
 //FIXME: make proper destructor

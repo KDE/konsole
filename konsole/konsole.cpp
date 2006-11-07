@@ -2830,6 +2830,25 @@ TEWidget* Konsole::createSessionView(TESession* session /*session*/)
     
     return display;
 }
+
+void Konsole::createViews(TESession* session)
+{
+    NavigationItem* item = session->navigationItem();
+    ViewContainer* const activeContainer = _view->activeSplitter()->activeContainer();
+    QListIterator<ViewContainer*> containerIter(_view->containers());
+
+    while (containerIter.hasNext())
+    {
+        ViewContainer* container = containerIter.next(); 
+        TEWidget* display = createSessionView(session);  
+        container->addView(display,item);
+
+        if ( container == activeContainer )
+            container->setActiveView(display);
+        session->addView( display );
+    }
+}
+
 TESession* Konsole::newSession(SessionInfo* type)
 {
     //create a session and attach the display to it
@@ -2846,12 +2865,7 @@ TESession* Konsole::newSession(SessionInfo* type)
     else
         session->setHistory(HistoryTypeNone());
 
-    NavigationItem* item = session->navigationItem();
-    ViewContainer* container = _view->activeSplitter()->activeContainer();
-    TEWidget* display = createSessionView(session);  
-    container->addView(display,item);
-    container->setActiveView(display);
-    session->addView( display );
+    createViews( session );
 
     //set color scheme
     ColorSchema* sessionScheme = colors->find( type->colorScheme() );
@@ -2914,11 +2928,10 @@ TESession* Konsole::newSession(SessionInfo* type)
       this,SLOT(changeTabTextColor(TESession*, int)) );
 
 
-    //set up a warning message when the user presses Ctrl+S to avoid confusion
-    connect( display,SIGNAL(flowControlKeyPressed(bool)),display,SLOT(outputSuspended(bool)) );
-
+    
+  //SPLIT-VIEW Fix
   //activate and run
-  te = display;
+  te = session->primaryView(); //display;
 
   addSession(session);
   runSession(session);
