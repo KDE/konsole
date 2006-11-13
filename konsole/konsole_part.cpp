@@ -1046,8 +1046,9 @@ void konsolePart::startProgram( const QString& program,
                                 const QStringList& args )
 {
   if ( se ) delete se;
-
+#ifdef __GNUC__
 #warning "Add setup for TESession" 
+#endif  
   se = new TESession();
   se->setProgram(program);
   se->setArguments(args);
