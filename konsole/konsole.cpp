@@ -1007,10 +1007,10 @@ void Konsole::makeBasicGUI()
   connect(m_copyClipboard, SIGNAL(triggered(bool) ), SLOT(slotCopyClipboard()));
   m_pasteClipboard = new KAction(KIcon("editpaste"), i18n("&Paste"), m_shortcuts, "edit_paste");
   connect(m_pasteClipboard, SIGNAL(triggered(bool) ), SLOT(slotPasteClipboard()));
-  m_pasteClipboard->setShortcut(Qt::SHIFT+Qt::Key_Insert);
+  m_pasteClipboard->setShortcut( QKeySequence(Qt::SHIFT+Qt::Key_Insert) );
   m_pasteSelection = new KAction(i18n("Paste Selection"), m_shortcuts, "pasteselection");
   connect(m_pasteSelection, SIGNAL(triggered(bool) ), SLOT(slotPasteSelection()));
-  m_pasteSelection->setShortcut(Qt::CTRL+Qt::SHIFT+Qt::Key_Insert);
+  m_pasteSelection->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Insert) );
 
   m_clearTerminal = new KAction(i18n("C&lear Terminal"), m_shortcuts, "clear_terminal");
   connect(m_clearTerminal, SIGNAL(triggered(bool) ), SLOT(slotClearTerminal()));
@@ -1046,11 +1046,11 @@ void Konsole::makeBasicGUI()
 
   m_renameSession = new KAction(i18n("&Rename Session..."), m_shortcuts, "rename_session");
   connect(m_renameSession, SIGNAL(triggered(bool) ), SLOT(slotRenameSession()));
-  m_renameSession->setShortcut(Qt::CTRL+Qt::ALT+Qt::Key_S);
+  m_renameSession->setShortcut( QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_S) );
 
   if (KAuthorized::authorizeKAction("zmodem_upload")) {
     m_zmodemUpload = new KAction( i18n( "&ZModem Upload..." ), m_shortcuts, "zmodem_upload" );
-    m_zmodemUpload->setShortcut( Qt::CTRL+Qt::ALT+Qt::Key_U );
+    m_zmodemUpload->setShortcut( QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_U) );
     connect( m_zmodemUpload, SIGNAL( triggered() ), this, SLOT( slotZModemUpload() ) );
   }
 
@@ -1091,16 +1091,13 @@ void Konsole::makeBasicGUI()
   m_quit = new KAction(KIcon("exit"), i18n("&Quit"), m_shortcuts, "file_quit");
   connect(m_quit, SIGNAL(triggered(bool) ), SLOT( close() ));
 
-  KShortcut shortcut(Qt::CTRL+Qt::ALT+Qt::Key_N);
-  shortcut.append(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_N));
-
   KAction *action = new KAction(i18n("New Session"), m_shortcuts, "new_session");
-  action->setShortcut( shortcut );
+  action->setShortcut( QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_N, Qt::CTRL+Qt::SHIFT+Qt::Key_N) );
   connect( action, SIGNAL( triggered() ), this, SLOT(newSession()) );
   addAction( action );
 
   action = new KAction(i18n("Activate Menu"), m_shortcuts, "activate_menu");
-  action->setShortcut( Qt::CTRL+Qt::ALT+Qt::Key_M );
+  action->setShortcut( QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_M) );
   connect( action, SIGNAL( triggered() ), this, SLOT(activateMenu()) );
   addAction( action );
 
@@ -1109,12 +1106,14 @@ void Konsole::makeBasicGUI()
   addAction( action );
 
   action = new KAction(i18n("Go to Previous Session"), m_shortcuts, "previous_session");
-  action->setShortcut( QApplication::isRightToLeft() ? Qt::SHIFT+Qt::Key_Right : Qt::SHIFT+Qt::Key_Left );
+  action->setShortcut( QApplication::isRightToLeft() ? 
+                       QKeySequence(Qt::SHIFT+Qt::Key_Right) : QKeySequence(Qt::SHIFT+Qt::Key_Left) );
   connect( action, SIGNAL( triggered() ), this, SLOT(prevSession()) );
   addAction( action );
 
   action = new KAction(i18n("Go to Next Session"), m_shortcuts, "next_session");
-  action->setShortcut( QApplication::isRightToLeft() ? Qt::SHIFT+Qt::Key_Left : Qt::SHIFT+Qt::Key_Right );
+  action->setShortcut( QApplication::isRightToLeft() ?
+                       QKeySequence(Qt::SHIFT+Qt::Key_Left) : QKeySequence(Qt::SHIFT+Qt::Key_Right) );
   connect( action, SIGNAL( triggered() ), this, SLOT(nextSession()) );
   addAction( action );
 
@@ -1131,7 +1130,7 @@ void Konsole::makeBasicGUI()
 
   action = new KAction(i18n("Toggle Bidi"), m_shortcuts, "toggle_bidi");
   connect(action, SIGNAL(triggered(bool) ), SLOT(toggleBidi()));
-  action->setShortcut(Qt::CTRL+Qt::ALT+Qt::Key_B);
+  action->setShortcut( QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_B) );
   addAction(action);
 
   // Should we load all *.desktop files now?  Required for Session shortcuts.
@@ -1960,17 +1959,21 @@ void Konsole::slotConfigureKeys()
   for ( int i = 0; i < m_shortcuts->actions().count(); i++ )
   {
     KShortcut shortcut = (m_shortcuts->actions().value( i ))->shortcut();
-    for( int j = 0; j < shortcut.count(); j++)
+    foreach( const QKeySequence seq, shortcut.toList() )
     {
-      QKeySequence seq = shortcut.seq(j);
       int key = seq.isEmpty() ? 0 : seq[0]; // First Key of KeySequence
       if ((key & Qt::KeyboardModifierMask) == Qt::ControlModifier)
-        ctrlKeys += QKeySequence(key).toString();
+        if (seq.count() == 1)
+          ctrlKeys << QKeySequence(key).toString();
+        else {
+          ctrlKeys << i18nc("keyboard key %1, as first key out of a short key sequence %2)",
+          "%1, as first key of %2", QKeySequence(key).toString(), seq.toString());
+        }
     }
 
     // Are there any shortcuts for Session Menu entries?
     if ( !b_sessionShortcutsEnabled &&
-         m_shortcuts->actions().value( i )->shortcut().count() &&
+         !m_shortcuts->actions().value( i )->shortcut().isEmpty() &&
          m_shortcuts->actions().value( i )->objectName().startsWith("SSC_") ) {
       b_sessionShortcutsEnabled = true;
       KConfigGroup group(KGlobal::config(), "General");
@@ -4293,11 +4296,11 @@ void Konsole::setupTabContextMenu()
 
 
    moveSessionLeftAction = new KAction( actionCollection() , "moveSessionLeftAction" );
-   moveSessionLeftAction->setShortcut(Qt::CTRL+Qt::SHIFT+Qt::Key_Left);
+   moveSessionLeftAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Left) );
    connect( moveSessionLeftAction , SIGNAL( triggered() ), this , SLOT(moveSessionLeft()) );
 
    moveSessionRightAction = new KAction( actionCollection() , "moveSessionRightAction" );
-   moveSessionRightAction->setShortcut(Qt::CTRL+Qt::SHIFT+Qt::Key_Right);
+   moveSessionRightAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Right) );
    connect( moveSessionRightAction , SIGNAL( triggered() ), this , SLOT (moveSessionRight()) );
 
    addAction(moveSessionLeftAction);
