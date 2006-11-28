@@ -894,7 +894,7 @@ void TEWidget::scrollImage(int lines , const QRect& region)
 {
     if ( lines == 0 || image == 0 || abs(lines) >= this->lines ) return;
 
-    kDebug() << " scrolling " << lines << " lines, with region = " << region.top() << "," << region.bottom()
+    kDebug(1211) << " scrolling " << lines << " lines, with region = " << region.top() << "," << region.bottom()
             << endl;
 
     QRect scrollRect;
@@ -912,7 +912,7 @@ void TEWidget::scrollImage(int lines , const QRect& region)
     else
     {
         //scrolling up
-        kDebug() << "scrolling up " << abs(lines) << " lines." << endl;
+        kDebug(1211) << "scrolling up " << abs(lines) << " lines." << endl;
 
         memmove( &image[ abs(lines)*this->columns] , image , 
                         (this->lines - abs(lines) ) * this->columns * sizeof(ca) );
@@ -2272,7 +2272,7 @@ void TEWidget::Bell(bool visibleSession, QString message)
     allowBell = false;
     QTimer::singleShot(500,this,SLOT(enableBell()));
  
-    kDebug() << __FUNCTION__ << endl;
+    kDebug(1211) << __FUNCTION__ << endl;
 
     if (m_bellMode==BELLSYSTEM) {
                 KNotification::beep();
