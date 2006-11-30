@@ -4,6 +4,7 @@ TODO before merging with /trunk
 - [DONE] Kill views when the associated session dies
 - [DONE] Single top-bottom split-view menu action
 - [DONE] Use correct color scheme in terminal display
+- [DONE] Ensure that when a new session is created, new views are created in all active containers.
 
 - Fix all the parts of konsole_part marked "SPLIT-VIEW Fix"
 
@@ -14,7 +15,6 @@ TODO before merging with /trunk
   done in TEWidget::resizeEvent() for each view.
   Find some way to fix this situation.
   
-- Ensure that when a new session is created, new views are created in all active containers.
  
 - Update colour scheme of all views when user selects a new scheme via the Settings menu.
 

@@ -1290,7 +1290,7 @@ void Konsole::configureRequest(TEWidget* _te, int state, int x, int y)
      menu->popup(_te->mapToGlobal(QPoint(x,y)));
 }
 
-void Konsole::slotTabContextMenu(QWidget* _te, const QPoint & pos)
+void Konsole::slotTabContextMenu(QWidget* /*_te*/, const QPoint & /*pos*/)
 {
    if (!m_menuCreated)
       makeGUI();
@@ -1308,8 +1308,8 @@ void Konsole::slotTabContextMenu(QWidget* _te, const QPoint & pos)
   m_tabPopupTabsMenu->clear();
   int counter=0;
   for (TESession *ses = sessions.first(); ses; ses = sessions.next()) {
-    QString title=ses->Title();
-    m_tabPopupTabsMenu->insertItem(SmallIconSet(ses->IconName()),title.replace('&',"&&"),counter++);
+    QString title=ses->title();
+    m_tabPopupTabsMenu->insertItem(SmallIconSet(ses->iconName()),title.replace('&',"&&"),counter++);
   }
 
   m_tabPopupMenu->popup( pos );*/
@@ -1344,7 +1344,7 @@ void Konsole::slotTabCloseSession()
   confirmCloseCurrentSession(m_contextMenuSession);
 }
 
-void Konsole::slotTabCloseSession(QWidget* sessionWidget)
+void Konsole::slotTabCloseSession(QWidget* /*sessionWidget*/)
 {
 /*	SPLIT-VIEW Disabled
  
@@ -1363,7 +1363,7 @@ void Konsole::slotTabbarContextMenu(const QPoint & pos)
   if ( m_tabbarPopupMenu ) m_tabbarPopupMenu->popup( pos );
 }
 
-void Konsole::slotTabSetViewOptions(int mode)
+void Konsole::slotTabSetViewOptions(int /*mode*/)
 {
   //SPLIT-VIEW Disabled
  /* m_tabViewMode = TabViewModes(mode);
@@ -1374,7 +1374,7 @@ void Konsole::slotTabSetViewOptions(int mode)
     if (b_matchTabWinTitle)
       title = sessions.at(i)->displayTitle();
     else
-      title = sessions.at(i)->Title();
+      title = sessions.at(i)->title();
 
     title=title.replace('&',"&&");
     switch(mode) {
@@ -1453,7 +1453,7 @@ void Konsole::saveProperties(KConfig* config) {
      {
         key = QString("Title%1").arg(counter);
 
-        config->writeEntry(key, sessions.current()->Title());
+        config->writeEntry(key, sessions.current()->title());
         key = QString("Schema%1").arg(counter);
         config->writeEntry(key,sessions.current()->schema()->relPath());
      //   config->writeEntry(key, colors->find( sessions.current()->schemaNo() )->relPath());
@@ -1480,7 +1480,7 @@ void Konsole::saveProperties(KConfig* config) {
         key = QString("KeyTab%1").arg(counter);
         config->writeEntry(key, sessions.current()->keymap());
         key = QString("Icon%1").arg(counter);
-        config->writeEntry(key, sessions.current()->IconName());
+        config->writeEntry(key, sessions.current()->iconName());
         key = QString("MonitorActivity%1").arg(counter);
         config->writeEntry(key, sessions.current()->isMonitorActivity());
         key = QString("MonitorSilence%1").arg(counter);
@@ -1792,7 +1792,7 @@ void Konsole::slotSelectFont() {
 //  activateSession(); // activates the current*/
 }
 
-void Konsole::schema_menu_activated(int item)
+void Konsole::schema_menu_activated(int /*item*/)
 {
   //SPLIT-VIEW Disabled
 
@@ -1899,8 +1899,8 @@ void Konsole::slotToggleMenubar() {
   new_te->setMinimumSize(150,70);
 }*/
 
-void Konsole::createSessionTab(TEWidget *widget, const QIcon &iconSet,
-                               const QString &text, int index)
+void Konsole::createSessionTab(TEWidget * /*widget*/, const QIcon &/*iconSet*/,
+                               const QString &/*text*/, int /*index*/)
 {
     //SPLIT-VIEW Disabled
  /* switch(m_tabViewMode) {
@@ -1922,7 +1922,7 @@ QIcon Konsole::iconSetForSession(TESession *session) const
 {
   if (m_tabViewMode == ShowTextOnly)
     return QIcon();
-  return SmallIconSet(session->isMasterMode() ? "remote" : session->IconName());
+  return SmallIconSet(session->isMasterMode() ? "remote" : session->iconName());
 }
 
 
@@ -2092,7 +2092,7 @@ void Konsole::reparseConfiguration()
 }
 
 // Called via emulation via session
-void Konsole::changeTabTextColor( TESession* ses, int rgb )
+void Konsole::changeTabTextColor( TESession* /*ses*/, int /*rgb*/ )
 {
   //SPLIT-VIEW Disabled
 
@@ -2178,19 +2178,19 @@ void Konsole::updateTitle()
   if ( windowTitle() != se->displayTitle() )
         setPlainCaption( se->displayTitle() );
 
-  if ( windowIconText() != se->IconText() )
-        setWindowIconText( se->IconText() );
+  if ( windowIconText() != se->iconText() )
+        setWindowIconText( se->iconText() );
  
   //FIXME:  May trigger redundant repaint of tabwidget tab icons if the icon hasn't changed 
   QIcon icon = iconSetForSession(se);
   tabwidget->setTabIcon(se_index, icon);
   
-  QString iconName = se->IconName();
+  QString iconName = se->iconName();
   KToggleAction *ra = session2action.find(se);
   if (ra)
   {
     // FIXME KAction port - should check to see if icon() == KIcon(icon), but currently won't work (as creates two KIconEngines)
-    ra->setIcon(KIcon(iconName));
+    ra->setIcon(KIcon(iconName());
   }
 
   QString newTabText;
@@ -2200,7 +2200,7 @@ void Konsole::updateTitle()
   	if ( b_matchTabWinTitle )
         newTabText = se->displayTitle().replace('&', "&&");
 	else
-		newTabText = se->Title();
+		newTabText = se->title();
   }
 
   if (tabwidget->tabText(se_index) != newTabText)
@@ -2404,7 +2404,7 @@ void Konsole::runSession(TESession* s)
 
 void Konsole::addSession(TESession* s)
 {
-  QString newTitle = s->Title();
+  QString newTitle = s->title();
 
   bool nameOk;
   int count = 1;
@@ -2412,7 +2412,7 @@ void Konsole::addSession(TESession* s)
     nameOk = true;
     for (TESession *ses = sessions.first(); ses; ses = sessions.next())
     {
-      if (newTitle == ses->Title())
+      if (newTitle == ses->title())
       {
         nameOk = false;
         break;
@@ -2421,7 +2421,7 @@ void Konsole::addSession(TESession* s)
     if (!nameOk)
     {
       count++;
-      newTitle = i18nc("abbreviation of number","%1 No. %2", s->Title(), count);
+      newTitle = i18nc("abbreviation of number","%1 No. %2", s->title(), count);
     }
   }
   while (!nameOk);
@@ -2429,7 +2429,7 @@ void Konsole::addSession(TESession* s)
   s->setTitle(newTitle);
 
   // create a new toggle action for the session
-  KToggleAction *ra = new KToggleAction(KIcon(s->IconName()), newTitle.replace('&',"&&"),
+  KToggleAction *ra = new KToggleAction(KIcon(s->iconName()), newTitle.replace('&',"&&"),
       m_shortcuts, QString());
   ra->setActionGroup(m_sessionGroup);
   //ra->setChecked(true);
@@ -2448,7 +2448,7 @@ void Konsole::addSession(TESession* s)
     m_view->addAction( ra );
 
   //SPLIT-VIEW Disabled
-  //createSessionTab(te, SmallIconSet(s->IconName()), newTitle);
+  //createSessionTab(te, SmallIconSet(s->iconName()), newTitle);
   
   //SPLIT-VIEW Disabled
   //setSchema(s->schemaNo(),s->widget());
@@ -2482,8 +2482,8 @@ void Konsole::listSessions()
   m_sessionList->addTitle(i18n("Session List"));
   m_sessionList->setKeyboardShortcutsEnabled(true);
   for (TESession *ses = sessions.first(); ses; ses = sessions.next()) {
-    QString title=ses->Title();
-    m_sessionList->insertItem(SmallIconSet(ses->IconName()),title.replace('&',"&&"),counter++);
+    QString title=ses->title();
+    m_sessionList->insertItem(SmallIconSet(ses->iconName()),title.replace('&',"&&"),counter++);
   }
   m_sessionList->adjustSize();
   m_sessionList->popup(mapToGlobal(QPoint((width()/2)-(m_sessionList->width()/2),(height()/2)-(m_sessionList->height()/2))));
@@ -2501,7 +2501,7 @@ void Konsole::activateSession(int position)
   activateSession( sessions.at(position) );
 }
 
-void Konsole::activateSession(QWidget* w)
+void Konsole::activateSession(QWidget* /*w*/)
 {
   //SPLIT-VIEW Disabled
 /*  activateSession(tabwidget->indexOf(w));
@@ -2721,7 +2721,7 @@ void Konsole::slotSetSessionEncoding(TESession *session, const QString &encoding
     activateSession(se);
 }
 
-void Konsole::slotGetSessionSchema(TESession *session, QString &schema)
+void Konsole::slotGetSessionSchema(TESession * /*session*/, QString & /*schema*/)
 {
 // SPLIT-VIEW Disabled
 //  int no = session->schemaNo();
@@ -2729,9 +2729,9 @@ void Konsole::slotGetSessionSchema(TESession *session, QString &schema)
 //  schema = s->relPath();
 }
 
-void Konsole::slotSetSessionSchema(TESession *session, const QString &schema)
+void Konsole::slotSetSessionSchema(TESession * /*session*/, const QString & /*schema*/)
 {
-  ColorSchema* s = colors->find( schema );
+  //ColorSchema* s = colors->find( schema );
   
   //SPLIT-VIEW Disabled
   //setSchema(s, session->widget());
@@ -2816,7 +2816,7 @@ QString Konsole::newSession(const QString &type)
   return QString();
 }
 
-TEWidget* Konsole::createSessionView(TESession* session /*session*/)
+TEWidget* Konsole::createSessionView()
 {
     //create a new display
     TEWidget* display = new TEWidget(0);
@@ -2840,7 +2840,7 @@ void Konsole::createViews(TESession* session)
     while (containerIter.hasNext())
     {
         ViewContainer* container = containerIter.next(); 
-        TEWidget* display = createSessionView(session);  
+        TEWidget* display = createSessionView();  
         container->addView(display,item);
 
         if ( container == activeContainer )
@@ -2871,13 +2871,9 @@ TESession* Konsole::newSession(SessionInfo* type)
     ColorSchema* sessionScheme = colors->find( type->colorScheme() );
     if (!sessionScheme)
         sessionScheme=(ColorSchema*)colors->at(0);  //the default one
-    int schemeId = sessionScheme->numb();
 
     session->setSchema(sessionScheme);
 
-    //session->setSchemaNo(schemeId); 
-    //display->setColorTable(sessionScheme->table()); 
-    
     //setup keyboard
     QString key = type->keyboardSetup();
     if (key.isEmpty())
@@ -2926,8 +2922,6 @@ TESession* Konsole::newSession(SessionInfo* type)
     
     connect( session, SIGNAL(changeTabTextColor(TESession*, int)),
       this,SLOT(changeTabTextColor(TESession*, int)) );
-
-
     
   //SPLIT-VIEW Fix
   //activate and run
@@ -3100,7 +3094,7 @@ void Konsole::nextSession()
   if (sessions.current()) activateSession(sessions.current());
 }
 
-void Konsole::slotMovedTab(int from, int to)
+void Konsole::slotMovedTab(int /*from*/, int /*to*/)
 {
   //SPLIT-VIEW Disabled
  /* TESession* _se = sessions.take(from);
@@ -3147,7 +3141,7 @@ void Konsole::moveSessionLeft()
  // tabwidget->blockSignals(true);
  // tabwidget->removePage(se->widget());
  // tabwidget->blockSignals(false);
- /* QString title = se->Title();
+ /* QString title = se->title();
   createSessionTab(se->widget(), iconSetForSession(se),
       title.replace('&', "&&"), position-1);
   tabwidget->setCurrentIndex( tabwidget->indexOf( se->widget() ));
@@ -3182,7 +3176,7 @@ void Konsole::moveSessionRight()
   tabwidget->blockSignals(true);
   tabwidget->removePage(se->widget());
   tabwidget->blockSignals(false);
-  QString title = se->Title();
+  QString title = se->title();
   createSessionTab(se->widget(), iconSetForSession(se),
       title.replace('&', "&&"), position+1);
   tabwidget->setCurrentIndex( tabwidget->indexOf( se->widget() ) );
@@ -3217,7 +3211,7 @@ void Konsole::initMasterMode(bool state)
   slotToggleMasterMode();
 }
 
-void Konsole::initTabColor(QColor color)
+void Konsole::initTabColor(QColor /*color*/)
 {
  // SPLIT-VIEW Disabled
  // if ( color.isValid() )
@@ -3278,7 +3272,7 @@ void Konsole::setMasterMode(bool _state, TESession* _se)
   notifySessionState(_se,NOTIFYNORMAL);
 }
 
-void Konsole::notifySessionState(TESession* session, int state)
+void Konsole::notifySessionState(TESession* /*session*/, int /*state*/)
 {
  /* QString state_iconname;
   switch(state)
@@ -3286,7 +3280,7 @@ void Konsole::notifySessionState(TESession* session, int state)
     case NOTIFYNORMAL  : if(session->isMasterMode())
                            state_iconname = "remote";
                          else
-                           state_iconname = session->IconName();
+                           state_iconname = session->iconName();
                          break;
     case NOTIFYBELL    : state_iconname = "bell";
                          break;
@@ -3611,7 +3605,7 @@ void Konsole::slotDetachSession()
   detachSession();
 }
 
-void Konsole::detachSession(TESession* _se) {
+void Konsole::detachSession(TESession* /*_se*/) {
    //SPLIT-VIEW Disabled
 
   /*if (!_se) _se=se;
@@ -3698,7 +3692,7 @@ void Konsole::detachSession(TESession* _se) {
   konsole->show();*/
 }
 
-void Konsole::attachSession(TESession* session)
+void Konsole::attachSession(TESession* /*session*/)
 {
   //SPLIT-VIEW Disabled
 
@@ -3717,15 +3711,15 @@ void Konsole::attachSession(TESession* session)
   initTEWidget(te, se_widget);
   session->addView(te);
   te->setFocus();
-  createSessionTab(te, SmallIconSet(session->IconName()), session->Title());
+  createSessionTab(te, SmallIconSet(session->iconName()), session->title());
   setSchema(session->schemaNo() , te);
   if (session->isMasterMode()) {
     disableMasterModeConnections(); // no duplicate connections, remove old
     enableMasterModeConnections();
   }
 
-  QString title=session->Title();
-  KToggleAction *ra = new KToggleAction(KIcon(session->IconName()), title.replace('&',"&&"),
+  QString title=session->title();
+  KToggleAction *ra = new KToggleAction(KIcon(session->iconName()), title.replace('&',"&&"),
                                         m_shortcuts, QString());
   connect(ra, SIGNAL(triggered(bool)), SLOT(activateSession()));
 
@@ -3768,7 +3762,7 @@ void Konsole::setSessionTitle( QString& title, TESession* ses )
 }
 
 void Konsole::renameSession(TESession* ses) {
-  QString title = ses->Title();
+  QString title = ses->title();
   bool ok;
 
   title = KInputDialog::getText( i18n( "Rename Session" ),
@@ -3784,15 +3778,15 @@ void Konsole::slotRenameSession() {
   renameSession(se);
 }
 
-void Konsole::slotRenameSession(TESession* session, const QString &name)
+void Konsole::slotRenameSession(TESession* /*session*/, const QString & /*name*/)
 {
   //SPLIT-VIEW Disabled
 
  /* KToggleAction *ra = session2action.find(session);
   QString title=name;
   title=title.replace('&',"&&");
-  ra->setText(title);
-  ra->setIcon( KIcon( session->IconName() ) ); // I don't know why it is needed here
+  ra->setText(title();
+  ra->setIcon( KIcon( session->iconName() ) ); // I don't know why it is needed here
   if (m_tabViewMode!=ShowIconOnly) {
     int sessionTabIndex = tabwidget->indexOf( session->widget() );
     tabwidget->setTabText( sessionTabIndex, title );
@@ -4193,7 +4187,7 @@ void Konsole::slotPrint()
 {
   KPrinter printer;
   printer.addDialogPage(new PrintSettings());
-  if (printer.setup(this, i18n("Print %1", se->Title())))
+  if (printer.setup(this, i18n("Print %1", se->title())))
   {
     printer.setFullPage(false);
     printer.setCreator("Konsole");
@@ -4340,25 +4334,17 @@ void Konsole::slotToggleSplitView(bool splitView)
             TESession* session = sessionIter.next();
  
             NavigationItem* item = session->navigationItem();
-            TEWidget* display = createSessionView(session);  
+            TEWidget* display = createSessionView();  
             container->addView(display,item);
             container->setActiveView(display);
             session->addView( display );
         }
-        
     }
     else
     {
         ViewContainer* container = _view->activeSplitter()->activeContainer();
         delete container;
     }
-}
-
-void Konsole::showEvent( QShowEvent* /*event*/ )
-{
-// SPLIT-VIEW Disabled
-//	assert( tabwidget && tabwidget->currentWidget() );
-//	tabwidget->currentWidget()->setFocus();
 }
 
 Q3PtrList<TEWidget> Konsole::activeTEs()

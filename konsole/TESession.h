@@ -133,9 +133,9 @@ public:
   int fontNo();
   const QString& Term() const;
   const QString& SessionId() const;
-  const QString& Title() const;
-  const QString& IconName() const;
-  const QString& IconText() const;
+  const QString& title() const;
+  const QString& iconName() const;
+  const QString& iconText() const;
 
   /** 
    * Return the session title set by the user (ie. the program running in the terminal), or an
@@ -201,8 +201,8 @@ public:
   void clearHistory();
   void feedSession(const QString &text);
   void sendSession(const QString &text);
-  QString sessionName() { return title; }
-  int sessionPid() { return sh->pid(); }
+  QString sessionName() { return _title; }
+  int sessionPid() { return _shellProcess->pid(); }
   void enableFullScripting(bool b);
 
   void startZModem(const QString &rz, const QString &dir, const QStringList &list);
@@ -280,9 +280,8 @@ private:
 
   void updateTerminalSize();
 
-  TEPty*         sh;
-  TEWidget*      te;
-  TEmulation*    em;
+  TEPty*         _shellProcess;
+  TEmulation*    _emulation;
 
   QList<TEWidget*> _views;
 
@@ -299,22 +298,21 @@ private:
   // is propably very bad. We should
   // use a persistent reference instead.
   //
- //REMOVED - !! int            schema_no;
-  int            font_no;
-  int            silence_seconds;
+  int            _fontNo;
+  int            _silenceSeconds;
 
-  QString        title;
+  QString        _title;
   QString        _userTitle;
-  QString        iconName;
-  QString        iconText; // as set by: echo -en '\033]1;IconText\007
-  bool           add_to_utmp;
-  bool           xon_xoff;
-  bool           fullScripting;
+  QString        _iconName;
+  QString        _iconText; // as set by: echo -en '\033]1;IconText\007
+  bool           _addToUtmp;
+  bool           _flowControl;
+  bool           _fullScripting;
 
   QString	 stateIconName;
 
-  QString        pgm;
-  QStringList       args;
+  QString        _program;
+  QStringList    _arguments;
 
   QString        term;
   ulong          winId;
@@ -333,7 +331,7 @@ private:
   QColor         modifiedBackground; // as set by: echo -en '\033]11;Color\007
   int            encoding_no;
 
-  NavigationItem* navItem;
+  NavigationItem* _navigationItem;
 
   ColorSchema*   _colorScheme;
   

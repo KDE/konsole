@@ -440,8 +440,6 @@ TEWidget::TEWidget(QWidget *parent)
 
 }
 
-//FIXME: make proper destructor
-// Here's a start (David)
 TEWidget::~TEWidget()
 {
   qApp->removeEventFilter( this );
@@ -1388,6 +1386,7 @@ void TEWidget::updateImageSize()
   // we copy the old image to reduce flicker
   int lins = qMin(oldlin,lines);
   int cols = qMin(oldcol,columns);
+
   if (oldimg)
   {
     for (int lin = 0; lin < lins; lin++)

@@ -47,7 +47,7 @@ SessionNavigationItem::SessionNavigationItem(TESession* session)
     , _collection(this)
 {
     setTitle( _session->displayTitle() );   
-    setIcon( SmallIconSet(_session->IconName()) ); 
+    setIcon( SmallIconSet(_session->iconName()) ); 
 
     connect( _session , SIGNAL( updateTitle() ) , this , SLOT( updateTitle() ) );
     connect( _session , SIGNAL( notifySessionState(TESession*,int) ) , this , 
@@ -136,7 +136,7 @@ void SessionNavigationItem::sessionStateChange(TESession* /* session */ , int st
             if ( _session->isMasterMode() )
                 stateIconName = "remote";
             else
-                stateIconName = _session->IconName();
+                stateIconName = _session->iconName();
             break;
         case NOTIFYBELL:
             stateIconName = "bell";
@@ -166,7 +166,7 @@ void SessionNavigationItem::sessionStateChange(TESession* /* session */ , int st
 
 void SessionNavigationItem::renameSession()
 {
-    QString newTitle = _session->Title();
+    QString newTitle = _session->title();
 
     bool success;
 
@@ -188,7 +188,7 @@ void SessionNavigationItem::updateTitle()
     kDebug() << " session icon update " << endl;
 
     setTitle( _session->displayTitle() );
-    setIcon( SmallIconSet(_session->IconName()) );
+    setIcon( SmallIconSet(_session->iconName()) );
     
     emit titleChanged(this);
     emit iconChanged(this);

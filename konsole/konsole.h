@@ -147,8 +147,6 @@ protected:
  void saveProperties(KConfig* config);
  void readProperties(KConfig* config);
 
- //virtual void focusInEvent(QFocusEvent* event);
- virtual void showEvent(QShowEvent* event);
 
 private Q_SLOTS:
   void configureRequest(TEWidget*,int,int,int);
@@ -288,7 +286,7 @@ private:
   void addScreenSession(const QString & path, const QString & socket);
   void resetScreenSessions();
 
-  TEWidget* createSessionView(TESession* session);
+  TEWidget* createSessionView();
   void createViews(TESession* session);
 
 //  void initTEWidget(TEWidget* new_te, TEWidget* default_te);
