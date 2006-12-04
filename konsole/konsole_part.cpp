@@ -530,7 +530,7 @@ void konsolePart::applyProperties()
 
 void konsolePart::setSettingsMenuEnabled( bool enable )
 {
-   foreach ( KAction *a, settingsActions->actions() )
+   foreach ( QAction *a, settingsActions->actions() )
    {
       a->setEnabled( enable );
    }
@@ -1047,8 +1047,8 @@ void konsolePart::startProgram( const QString& program,
 {
   if ( se ) delete se;
 #ifdef __GNUC__
-#warning "Add setup for TESession" 
-#endif  
+#warning "Add setup for TESession"
+#endif
   se = new TESession();
   se->setProgram(program);
   se->setArguments(args);

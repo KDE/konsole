@@ -1,6 +1,6 @@
 /*
     This file is part of the Konsole Terminal.
-    
+
     Copyright (C) 2006 Robert Knight <robertknight@gmail.com>
     Copyright (C) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
     Copyright (C) 1996 by Matthias Ettrich <ettrich@kde.org>
@@ -341,13 +341,13 @@ Konsole::~Konsole()
     {
         sessionIter.next()->closeSession();
     }
-    
+
     // Wait a bit for all children to clean themselves up.
     while(sessions.count() && KProcessController::theKProcessController->waitForProcessExit(1))
         ;
 
     resetScreenSessions();
-       
+
     delete m_defaultSession;
 
     // the tempfiles have autodelete=true, so the actual files are removed here too
@@ -404,13 +404,13 @@ void Konsole::showTipOnStart()
 //        This can be made both more efficient and deferred until menus which list the various
 //        types of schema are opened.
 //      - IO related to colour schema files
-//        adding some debug statements to the colour schema reading code, it seems that they are 
+//        adding some debug statements to the colour schema reading code, it seems that they are
 //        parsed multiple times unnecessarily when starting Konsole.
 //
 //        The only colour schema that needs to be parsed on startup is the one for the first
 //        session which is created.  There appears to be some code which is supposed to prevent
 //        repeat parsing of a color schema file if it hasn't changed - but that isn't working properly
-//        (not looked at in-depth yet).  
+//        (not looked at in-depth yet).
 //        When revealing the schema menu, only the schema titles
 //        need to be extracted.  Only when a schema is then chosen (either for previewing or for
 //        actual use in the terminal) does it need to be parsed fully.
@@ -546,7 +546,7 @@ void Konsole::makeGUI()
    // Schema Options Menu -----------------------------------------------------
    m_schema = new KMenu(i18n( "Sch&ema" ),this);
    m_schema->setIcon( SmallIconSet("colorize") );
-   
+
    KAcceleratorManager::manage( m_schema );
    connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
    connect(m_schema, SIGNAL(aboutToShow()), SLOT(schema_menu_check()));
@@ -634,7 +634,7 @@ void Konsole::makeGUI()
 
       if (KAuthorized::authorizeKAction("keyboard"))
         m_options->addMenu(m_keytab);
-      
+
       // Schema
       if (KAuthorized::authorizeKAction("schema"))
         m_options->addMenu(m_schema);
@@ -734,7 +734,7 @@ void Konsole::makeGUI()
    }
 
    kDebug() << __FUNCTION__ << ": RMB menu done - time = " << makeGUITimer.elapsed() << endl;
- 
+
    delete colors;
    colors = new ColorSchemaList();
    colors->checkSchemas();
@@ -1106,7 +1106,7 @@ void Konsole::makeBasicGUI()
   addAction( action );
 
   action = new KAction(i18n("Go to Previous Session"), m_shortcuts, "previous_session");
-  action->setShortcut( QApplication::isRightToLeft() ? 
+  action->setShortcut( QApplication::isRightToLeft() ?
                        QKeySequence(Qt::SHIFT+Qt::Key_Right) : QKeySequence(Qt::SHIFT+Qt::Key_Left) );
   connect( action, SIGNAL( triggered() ), this, SLOT(prevSession()) );
   addAction( action );
@@ -1137,7 +1137,7 @@ void Konsole::makeBasicGUI()
   // --> answer: No, because the Konsole main window won't have an associated SessionManger
   //     at this stage of program execution, so it isn't possible to load session type information.
   // TODO: Reimplement and test session shorcuts
- 
+
   /*if ( KConfigGroup(KGlobal::config(), "General").readEntry("SessionShortcutsEnabled", QVariant(false)).toBool() ) {
     b_sessionShortcutsEnabled = true;
     loadSessionCommands();
@@ -1179,7 +1179,7 @@ bool Konsole::queryClose()
    if ( b_warnQuit)
    {
 		KGuiItem closeTabsButton(i18n("Close sessions"),KStdGuiItem::quit().iconName());
-		
+
         if(sessions.count()>1) {
 	    switch (
 		KMessageBox::warningContinueCancel(
@@ -1193,7 +1193,7 @@ bool Konsole::queryClose()
 	    ) {
 		case KMessageBox::Yes :
             return true;
-            
+
 		    break;
 		case KMessageBox::Cancel :
             return false;
@@ -1210,7 +1210,7 @@ bool Konsole::queryClose()
  * columns.
  */
 
-//Implementation note:  setColLin() works by intructing the terminal display widget 
+//Implementation note:  setColLin() works by intructing the terminal display widget
 //to resize itself to accomodate the specified number of lines and columns, and then resizes
 //the Konsole window to its sizeHint().
 
@@ -1704,7 +1704,7 @@ void Konsole::bookmarks_menu_check()
   if ( se )
       state = !(se->getCwd().isEmpty());
 
-  KAction *addBookmark = actionCollection()->action( "add_bookmark" );
+  QAction *addBookmark = actionCollection()->action( "add_bookmark" );
   if ( !addBookmark )
   {
       return;
@@ -1958,7 +1958,11 @@ void Konsole::slotConfigureKeys()
 
   for ( int i = 0; i < m_shortcuts->actions().count(); i++ )
   {
-    KShortcut shortcut = (m_shortcuts->actions().value( i ))->shortcut();
+    KAction *kaction = qobject_cast<KAction*>(m_shortcuts->actions().value( i ));
+    KShortcut shortcut;
+    if (kaction!=0) {
+        shortcut = kaction->activeShortcut();
+    }
     foreach( const QKeySequence seq, shortcut.toList() )
     {
       int key = seq.isEmpty() ? 0 : seq[0]; // First Key of KeySequence
@@ -2028,7 +2032,7 @@ void Konsole::reparseConfiguration()
   uint count = m_shortcuts->actions().count();
   for ( uint i = 0; i < count; i++ )
   {
-    KAction* action = m_shortcuts->actions().value( i );
+    QAction* action = m_shortcuts->actions().value( i );
     bool b_foundSession = false;
     if ( action->objectName().startsWith("SSC_") ) {
       QString name = action->objectName();
@@ -2040,8 +2044,9 @@ void Konsole::reparseConfiguration()
           break;
         }
       }
-      if ( ! b_foundSession ) {
-        action->setShortcut( KShortcut() );   // Clear shortcut
+      KAction *kaction = qobject_cast<KAction*>(action);
+      if ( kaction!=0 && ! b_foundSession ) {
+        kaction->setActiveShortcut( KShortcut() );   // Clear shortcut
         m_shortcuts->writeSettings();
         delete action;           // Remove Action and Accel
         if ( i == 0 ) i = 0;     // Reset index
@@ -2162,11 +2167,11 @@ void Konsole::updateTitle()
 
   if ( windowIconText() != se->IconText() )
         setWindowIconText( se->IconText() );
- 
-  //FIXME:  May trigger redundant repaint of tabwidget tab icons if the icon hasn't changed 
+
+  //FIXME:  May trigger redundant repaint of tabwidget tab icons if the icon hasn't changed
   QIcon icon = iconSetForSession(se);
   tabwidget->setTabIcon(se_index, icon);
-  
+
   QString iconName = se->IconName();
   KToggleAction *ra = session2action.find(se);
   if (ra)
@@ -2176,7 +2181,7 @@ void Konsole::updateTitle()
   }
 
   QString newTabText;
-  
+
   if ( m_tabViewMode != ShowIconOnly )
   {
   	if ( b_matchTabWinTitle )
@@ -2578,7 +2583,7 @@ void Konsole::activateSession(TESession *s)
   if (monitorSilence) monitorSilence->setChecked( se->isMonitorSilence() );
   masterMode->setChecked( se->isMasterMode() );
   sessions.find(se);
- 
+
 }
 
 void Konsole::slotUpdateSessionConfig(TESession *session)
@@ -2743,7 +2748,7 @@ void Konsole::slotNewSessionAction(QAction* action)
   }
 
   QListIterator<SessionInfo*> sessionIter(sessionManager()->availableSessionTypes());
-  
+
   while (sessionIter.hasNext())
   {
       SessionInfo* info = sessionIter.next();
@@ -2777,10 +2782,10 @@ TESession* Konsole::newSession(SessionInfo* type)
     //create a new display
     TEWidget* display = new TEWidget(0);
     display->setMinimumSize(150,70);
-    
+
     //copy settings from previous display if available, otherwise load them anew
-    if ( !te ) 
-    { 
+    if ( !te )
+    {
         readProperties(KGlobal::config(), "", true);
         display->setVTFont( type->defaultFont( defaultFont ) );
         display->setScrollbarLocation(n_scroll);
@@ -2793,7 +2798,7 @@ TESession* Konsole::newSession(SessionInfo* type)
 
     //create a session and attach the display to it
     TESession* session = sessionManager()->createSession( type->path() );
-   
+
     session->setAddToUtmp(b_addToUtmp);
     session->setXonXoff(true);
     setSessionEncoding( s_encodingName, session );
@@ -2805,7 +2810,7 @@ TESession* Konsole::newSession(SessionInfo* type)
     else
         session->setHistory(HistoryTypeNone());
 
-    session->addView( display ); 
+    session->addView( display );
 
     //set color scheme
     ColorSchema* sessionScheme = colors->find( type->colorScheme() );
@@ -2814,12 +2819,12 @@ TESession* Konsole::newSession(SessionInfo* type)
     int schemeId = sessionScheme->numb();
 
     session->setSchemaNo(schemeId);
-    
+
     //setup keyboard
     QString key = type->keyboardSetup();
     if (key.isEmpty())
         session->setKeymapNo(n_defaultKeytab);
-    else 
+    else
     {
         // TODO: Fixes BR77018, see BR83000.
         if (key.endsWith(".keytab"))
@@ -2888,10 +2893,10 @@ void Konsole::newSession(const QString& sURL, const QString& /*title*/)
 
     //TODO - Make use of session properties here
 
-    sessionManager()->addSetting( SessionManager::InitialWorkingDirectory , 
+    sessionManager()->addSetting( SessionManager::InitialWorkingDirectory ,
                                   SessionManager::SingleShot ,
                                   path );
-   
+
     newSession();
 
    /* newSession(co, QString(), QStringList(), QString(), QString(),
@@ -2915,14 +2920,14 @@ void Konsole::newSession(const QString& sURL, const QString& /*title*/)
     args.append(host.toLatin1());
     if (url.port() && !isSSH)
       args.append(QByteArray().setNum(url.port()));
-    
+
     //TODO : Make use of session properties here
 #if 0
         newSession( NULL, protocol.toLatin1() /* protocol */, args /* arguments */,
         QString() /*term*/, QString() /*icon*/,
         title.isEmpty() ? path : title /*title*/, QString() /*cwd*/);
 #endif
-        
+
     return;
   }
   /*
@@ -3038,7 +3043,7 @@ void Konsole::slotMovedTab(int from, int to)
   sessions.insert(to,_se);
 
   //get the action for the shell with a tab at position to+1
-  KToggleAction* nextSessionAction = session2action.find(sessions.at(to + 1)); 
+  KToggleAction* nextSessionAction = session2action.find(sessions.at(to + 1));
 
   KToggleAction *ra = session2action.find(_se);
   Q_ASSERT( ra );
@@ -3168,11 +3173,11 @@ void Konsole::slotToggleMasterMode()
 {
   if ( masterMode->isChecked() )
   {
-      if ( KMessageBox::warningYesNo( this , 
+      if ( KMessageBox::warningYesNo( this ,
                   i18n("Enabling this option will cause each key press to be sent to all running"
                       " sessions.  Are you sure you want to continue?") ,
-                  i18n("Send Input to All Sessions"), 
-                  KStdGuiItem::yes() , 
+                  i18n("Send Input to All Sessions"),
+                  KStdGuiItem::yes() ,
                   KStdGuiItem::no(),
                   i18n("Remember my answer and do not ask again.")) == KMessageBox::Yes )
       {
@@ -3283,8 +3288,8 @@ void Konsole::addSessionCommand( SessionInfo* info )
   if ( ( b_sessionShortcutsMapped == true ) || ( cmd_serial == SESSION_NEW_SHELL_ID ) ) return;
 
   // Add an empty shortcut for each Session.
-  QString actionText = info->newSessionText();   
-  
+  QString actionText = info->newSessionText();
+
   if (actionText.isEmpty())
     actionText=i18n("New %1", info->name());
 
@@ -3294,7 +3299,7 @@ void Konsole::addSessionCommand( SessionInfo* info )
   sl_sessionShortCuts << name;
 
   // Is there already this shortcut?
-  KAction* sessionAction;
+  QAction* sessionAction;
   if ( m_shortcuts->action( name ) ) {
     sessionAction = m_shortcuts->action( name );
   } else {
@@ -3327,15 +3332,15 @@ void Konsole::createSessionMenus()
     //and produce a sorted list
     QListIterator<SessionInfo*> sessionTypeIter(sessionManager()->availableSessionTypes());
     SessionInfo* defaultSession = sessionManager()->defaultSessionType();
-    
+
     QMap<QString,SessionInfo*> sortedNames;
-    
+
     while ( sessionTypeIter.hasNext() )
     {
         SessionInfo* info = sessionTypeIter.next();
-    
+
         if ( info != defaultSession )
-        { 
+        {
             sortedNames.insert(info->newSessionText(),info);
         }
     }
@@ -3343,15 +3348,15 @@ void Konsole::createSessionMenus()
     //add menu action for default session at top
     QIcon defaultIcon = SmallIconSet(defaultSession->icon());
     QAction* shellMenuAction = m_session->addAction( defaultIcon , defaultSession->newSessionText() );
-    QAction* shellTabAction = m_tabbarSessionsCommands->addAction( defaultIcon , 
+    QAction* shellTabAction = m_tabbarSessionsCommands->addAction( defaultIcon ,
                                 defaultSession->newSessionText() );
-   
+
     shellMenuAction->setData( defaultSession->name() );
     shellTabAction->setData( defaultSession->name() );
-    
+
     m_session->addSeparator();
     m_tabbarSessionsCommands->addSeparator();
-        
+
     //then add the others in alphabetical order
     //TODO case-sensitive.  not ideal?
     QMapIterator<QString,SessionInfo*> nameIter( sortedNames );
@@ -3359,8 +3364,8 @@ void Konsole::createSessionMenus()
     {
         SessionInfo* info = nameIter.next().value();
         QIcon icon = SmallIconSet(info->icon());
-        
-        QAction* menuAction = m_session->addAction( icon  , info->newSessionText() ); 
+
+        QAction* menuAction = m_session->addAction( icon  , info->newSessionText() );
         QAction* tabAction = m_tabbarSessionsCommands->addAction( icon , info->newSessionText() );
 
         menuAction->setData( info->name() );
@@ -3372,7 +3377,7 @@ void Konsole::createSessionMenus()
         m_session->addSeparator();
         m_session->insertItem(SmallIconSet("keditbookmarks"),
                           i18n("New Shell at Bookmark"), m_bookmarksSession);
-    
+
         m_tabbarSessionsCommands->addSeparator();
         m_tabbarSessionsCommands->insertItem(SmallIconSet("keditbookmarks"),
                           i18n("Shell at Bookmark"), m_bookmarksSession);
@@ -3587,7 +3592,7 @@ void Konsole::detachSession(TESession* _se) {
   konsole->resize(size());
   konsole->attachSession(_se);
   _se->removeView( _se->primaryView() );
-  
+
   konsole->activateSession(_se);
   konsole->changeTabTextColor( _se, se_tabtextcolor.rgb() );//restore prev color
   konsole->slotTabSetViewOptions(m_tabViewMode);
@@ -3990,7 +3995,7 @@ void Konsole::slotSaveHistory()
     query = KMessageBox::warningContinueCancel( this,
       i18n( "A file with this name already exists.\nDo you want to overwrite it?" ), i18n("File Exists"), KGuiItem(i18n("Overwrite")) );
 
-  if (query==KMessageBox::Continue) 
+  if (query==KMessageBox::Continue)
   {
     QFile file(localUrl.path());
     if(!file.open(QIODevice::WriteOnly)) {
