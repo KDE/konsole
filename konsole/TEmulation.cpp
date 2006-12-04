@@ -270,11 +270,6 @@ void TEmulation::onKeyPress( QKeyEvent* ev )
     //emit sndBlock(ev->text().toAscii(),ev->text().length());
     emit sndBlock(ev->text().toUtf8(),ev->text().length());
   }
-  else if (ev->text().toAscii().constData()>0)
-  { unsigned char c[1];
-    c[0] = ev->text().toAscii()[0];
-    emit sndBlock((char*)c,1);
-  }
 }
 
 // Unblocking, Byte to Unicode translation --------------------------------- --
