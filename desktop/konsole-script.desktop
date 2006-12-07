@@ -13,6 +13,6 @@ Name[x-test]=xxKonsolexx
 GenericName=Terminal Program
 GenericName[fr]=Terminal
 GenericName[x-test]=xxTerminal Programxx
-X-DCOP-ServiceType=Multi
+X-DBUS-StartupType=Multi
 X-KDE-AuthorizeAction=shell_access
 Categories=Qt;KDE;System;TerminalEmulator;

@@ -341,7 +341,7 @@ void konsolePart::makeGUI()
 
      // Select Bell
      m_options->addSeparator();
-     selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), 0 , this,
+     selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), KShortcut(0) , this,
                                  SLOT(slotSelectBell()), settingsActions, "bell");
 
      QStringList bellitems;
@@ -365,7 +365,7 @@ void konsolePart::makeGUI()
       m_options->addAction(m_fontsizes);
 
       // encoding menu, start with default checked !
-      selectSetEncoding = new KSelectAction( i18n( "&Encoding" ), SmallIconSet("charset" ), 0, this, SLOT(slotSetEncoding()), settingsActions, "set_encoding" );
+      selectSetEncoding = new KSelectAction( i18n( "&Encoding" ), SmallIconSet("charset" ), KShortcut(0), this, SLOT(slotSetEncoding()), settingsActions, "set_encoding" );
       QStringList list = KGlobal::charsets()->descriptiveEncodingNames();
       list.prepend( i18n( "Default" ) );
       selectSetEncoding->setItems(list);
@@ -397,7 +397,7 @@ void konsolePart::makeGUI()
 
      // Select line spacing
      selectLineSpacing = new KSelectAction(i18n("Li&ne Spacing"),
-        SmallIconSet("leftjust"), 0, this,
+        SmallIconSet("leftjust"), KShortcut(0), this,
         SLOT(slotSelectLineSpacing()), settingsActions );
 
      QStringList lineSpacingList;
@@ -533,7 +533,7 @@ void konsolePart::applyProperties()
 
 void konsolePart::setSettingsMenuEnabled( bool enable )
 {
-   foreach ( KAction *a, settingsActions->actions() )
+   foreach ( QAction *a, settingsActions->actions() )
    {
       a->setEnabled( enable );
    }
@@ -1056,8 +1056,9 @@ void konsolePart::startProgram( const QString& program,
                                 const QStringList& args )
 {
   if ( se ) delete se;
-
-#warning "Add setup for TESession" 
+#ifdef __GNUC__
+#warning "Add setup for TESession"
+#endif
   se = new TESession();
   se->setProgram(program);
   se->setArguments(args);

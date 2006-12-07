@@ -63,7 +63,7 @@ public:
   Q_PROPERTY(int sessionPid READ sessionPid)
   Q_PROPERTY(QString font READ font WRITE setFont)
   Q_PROPERTY(QString keytab READ keytab WRITE setKeytab)
- // Q_PROPERTY(QString schema READ schema WRITE setSchema)
+  Q_PROPERTY(ColorSchema* schema READ schema WRITE setSchema)
   Q_PROPERTY(QSize size READ size WRITE setSize)
 
   TESession();
