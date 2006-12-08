@@ -4057,7 +4057,8 @@ void Konsole::slotSaveHistory()
     }
 
     QTextStream textStream(&file);
-    sessions.current()->getEmulation()->streamHistory( &textStream );
+    assert( se && se->getEmulation() );
+    se->getEmulation()->streamHistory( &textStream );
 
     file.close();
     if(file.status()) {
