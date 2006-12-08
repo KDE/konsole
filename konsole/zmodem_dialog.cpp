@@ -40,6 +40,7 @@ ZModemDialog::ZModemDialog(QWidget *parent, bool modal, const QString &caption)
   textEdit->setMinimumSize(400, 100);
   setMainWidget(textEdit);
   connect(this, SIGNAL(user1Clicked()), this, SLOT(slotClose()));
+  connect(this,SIGNAL(closeClicked()),this,SLOT(slotClose()));
 }
 
 void ZModemDialog::addProgressText(const QString &txt)
