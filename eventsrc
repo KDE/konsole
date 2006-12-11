@@ -153,7 +153,7 @@ Comment[uk]=Пролунав дзвінок у видимому сеансі
 Comment[vi]=Chuông phát ra trong một phiên chạy nhìn thấy
 Comment[zh_CN]=可见会话中发生的响铃
 Comment[zh_TW]=在可見的工作階段使用響鈴
-default_sound=KDE_Beep.ogg
+default_sound=KDE_Beep_Connect.ogg
 default_presentation=1
 
 [BellInvisible]
@@ -280,7 +280,7 @@ Comment[uk]=Пролунав дзвінок у невидимому сеансі
 Comment[vi]=Chuông phát ra trong một phiên chạy không nhìn thấy
 Comment[zh_CN]=不可见会话中发生的响铃
 Comment[zh_TW]=在不可見的工作階段使用響鈴
-default_sound=KDE_Beep.ogg
+default_sound=KDE_Beep_Connect.ogg
 default_presentation=16
 
 [Activity]

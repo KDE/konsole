@@ -1,3 +1,14 @@
+
+2 December 2006
+- Fixed calculation of colour values in 256 colour mode.  Previous values were
+a little too dim
+
+============================================================================
+
+Lots happened here...
+
+============================================================================
+
 8 Jun 2001
 -Increased version to 1.0.2
 -Added Control-Alt-N shortcut key to create new sessions
