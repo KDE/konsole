@@ -610,7 +610,7 @@ void TEWidget::drawTextFixed(QPainter& painter, int x, int y, QString& str, cons
 	if ( str.length() == 0 )
 			return;
 		
-    painter.drawText( QRect( x, y, font_w*str.length(), font_h ),  Qt::TextDontClip, str );
+    painter.drawText( QRect( x, y, font_w*str.length(), font_h ),  Qt::TextDontClip , str );
 }
 
 //OLD VERSION
@@ -897,10 +897,7 @@ void TEWidget::setCursorPos(const int curx, const int cury)
 //of font_h).    
 void TEWidget::scrollImage(int lines , const QRect& region)
 {
-    if ( lines == 0 || image == 0 || abs(lines) >= this->lines ) return;
-
-  //  kDebug(1211) << " scrolling " << lines << " lines, with region = " << region.top() << "," << region.bottom()
-  //          << endl;
+    if ( lines == 0 || image == 0 || abs(lines) >= this->usedLines ) return;
 
     QRect scrollRect;
 
@@ -908,26 +905,24 @@ void TEWidget::scrollImage(int lines , const QRect& region)
     if ( lines > 0 )
     {   
         //scrolling down
-        memmove( image , &image[lines*this->columns] , ( this->lines - lines ) * this->columns * sizeof(ca) );
+        memmove( image , &image[lines*this->usedColumns] , ( this->usedLines - lines ) * this->usedColumns * sizeof(ca) );
  
         //set region of display to scroll, making sure that
         //the region aligns correctly to the character grid 
-        scrollRect = QRect( bX ,bY, this->columns * font_w , (this->lines - lines) * font_h );
+        scrollRect = QRect( bX ,bY, this->usedColumns * font_w , (this->usedLines - lines) * font_h );
     }
     else
     {
         //scrolling up
-        kDebug(1211) << "scrolling up " << abs(lines) << " lines." << endl;
-
-        memmove( &image[ abs(lines)*this->columns] , image , 
-                        (this->lines - abs(lines) ) * this->columns * sizeof(ca) );
+        memmove( &image[ abs(lines)*this->usedColumns] , image , 
+                        (this->usedLines - abs(lines) ) * this->usedColumns * sizeof(ca) );
 
         //set region of the display to scroll, making sure that
         //the region aligns correctly to the character grid
         
-        QPoint topPoint( 0 , 1 + abs(lines)*font_h );
+        QPoint topPoint( bX , bY + abs(lines)*font_h );
 
-        scrollRect = QRect( topPoint , QSize( this->columns*font_w , (this->lines - abs(lines)) * font_h ));
+        scrollRect = QRect( topPoint , QSize( this->usedColumns*font_w , (this->usedLines - abs(lines)) * font_h ));
     }
 
     //scroll the display
