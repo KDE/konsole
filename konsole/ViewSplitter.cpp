@@ -73,6 +73,26 @@ void ViewSplitter::unregisterContainer( ViewContainer* container )
     disconnect( container , 0 , this , 0 );
 }
 
+void ViewSplitter::updateSizes()
+{
+    int space;
+
+    if ( orientation() == Qt::Horizontal )
+    {
+        space = width() / count();
+    }
+    else
+    {
+        space = height() / count();
+    }
+
+    QList<int> widgetSizes;
+    for (int i=0;i<count();i++)
+        widgetSizes << space;
+
+    setSizes(widgetSizes);
+}
+
 void ViewSplitter::addContainer( ViewContainer* container , 
                                  Qt::Orientation containerOrientation )
 {
@@ -86,6 +106,8 @@ void ViewSplitter::addContainer( ViewContainer* container ,
 
         if ( splitter->orientation() != containerOrientation )
             splitter->setOrientation( containerOrientation );
+        
+        splitter->updateSizes();
     }
     else
     {
@@ -103,6 +125,7 @@ void ViewSplitter::addContainer( ViewContainer* container ,
         newSplitter->addWidget(oldContainer->containerWidget());
         newSplitter->addWidget(container->containerWidget());
         newSplitter->setOrientation(containerOrientation); 
+        newSplitter->updateSizes();
          
         splitter->insertWidget(oldContainerIndex,newSplitter);
     }

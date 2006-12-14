@@ -605,7 +605,7 @@ void TEWidget::drawLineCharString(	QPainter& painter, int x, int y, const QStrin
 // 
 // -- Robert Knight <robertknight@gmail.com>
 
-void TEWidget::drawTextFixed(QPainter& painter, int x, int y, QString& str, const ca* attributes)
+void TEWidget::drawTextFixed(QPainter& painter, int x, int y, QString& str, const ca* /*attributes*/)
 {
 	if ( str.length() == 0 )
 			return;
@@ -895,7 +895,7 @@ void TEWidget::setCursorPos(const int curx, const int cury)
 //note:  it is important that the area of the display which is scrolled aligns properly with
 //the character grid - which has a top left point at (0,1) , a cell width of font_w and a cell height
 //of font_h).    
-void TEWidget::scrollImage(int lines , const QRect& region)
+void TEWidget::scrollImage(int lines , const QRect& /*region*/)
 {
     if ( lines == 0 || image == 0 || abs(lines) >= this->usedLines ) return;
 
@@ -1487,21 +1487,20 @@ void TEWidget::setScrollbarLocation(int loc)
 
 void TEWidget::mousePressEvent(QMouseEvent* ev)
 {
-//printf("press [%d,%d] %d\n",ev->x()/font_w,ev->y()/font_h,ev->button());
-
   if ( possibleTripleClick && (ev->button()==Qt::LeftButton) ) {
     mouseTripleClickEvent(ev);
     return;
   }
 
   if ( !contentsRect().contains(ev->pos()) ) return;
-  QPoint tL  = contentsRect().topLeft();
-  int    tLx = tL.x();
-  int    tLy = tL.y();
 
-  QPoint pos = QPoint((ev->x()-tLx-bX+(font_w/2))/font_w,(ev->y()-tLy-bY)/font_h);
+  int charLine;
+  int charColumn;
+  characterPosition(ev->pos(),charLine,charColumn);
+  QPoint pos = QPoint(charColumn,charLine);
 
-//printf("press top left [%d,%d] by=%d\n",tLx,tLy, bY);
+  //kDebug() << " mouse pressed at column = " << pos.x() << " , line = " << pos.y() << endl;
+
   if ( ev->button() == Qt::LeftButton)
   {
     line_selection_mode = false;
@@ -1535,7 +1534,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       }
       else
       {
-        emit mouseSignal( 0, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maximum() , 0);
+        emit mouseSignal( 0, charColumn + 1, charLine + 1 +scrollbar->value() -scrollbar->maximum() , 0);
       }
     }
   }
@@ -1544,7 +1543,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
     if ( mouse_marks || (!mouse_marks && (ev->modifiers() & Qt::ShiftModifier)) )
       emitSelection(true,ev->modifiers() & Qt::ControlModifier);
     else
-      emit mouseSignal( 1, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maximum() , 0);
+      emit mouseSignal( 1, charColumn +1, charLine +1 +scrollbar->value() -scrollbar->maximum() , 0);
   }
   else if ( ev->button() == Qt::RightButton )
   {
@@ -1553,7 +1552,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       emit configureRequest( this, ev->modifiers()&(Qt::ShiftModifier|Qt::ControlModifier), ev->x(), ev->y() );
     }
     else
-      emit mouseSignal( 2, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maximum() , 0);
+      emit mouseSignal( 2, charColumn +1, charLine +1 +scrollbar->value() -scrollbar->maximum() , 0);
   }
 }
 
@@ -1561,13 +1560,9 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
 {
   // for auto-hiding the cursor, we need mouseTracking
   if (ev->buttons() == Qt::NoButton ) return;
-
-  QPoint tL  = contentsRect().topLeft();
-      int    tLx = tL.x();
-      int    tLy = tL.y();
-
-      if (!mouse_marks && !(ev->modifiers() & Qt::ShiftModifier))
-      {
+  
+  if (!mouse_marks && !(ev->modifiers() & Qt::ShiftModifier))
+  {
 	int button = 3;
 	if (ev->buttons() & Qt::LeftButton)
 		button = 0;
@@ -1575,14 +1570,19 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
 		button = 1;
 	if (ev->buttons() & Qt::RightButton)
 		button = 2;
-	
+
+        int charLine = 0;
+        int charColumn = 0;
+
+        characterPosition(ev->pos(),charLine,charColumn); 
+
         emit mouseSignal( button, 
-                        (ev->x()-tLx-bX)/font_w + 1,
-                        (ev->y()-tLy-bY)/font_h + 1 +scrollbar->value() -scrollbar->maximum(),
+                        charColumn + 1,
+                        charLine + 1 +scrollbar->value() -scrollbar->maximum(),
 			 1 );
       
 	return;
-      }
+  }
       
   if (dragInfo.state == diPending) {
     // we had a mouse down, but haven't confirmed a drag yet
@@ -1631,14 +1631,14 @@ void TEWidget::extendSelection( QPoint pos )
   // Adjust position within text area bounds. See FIXME above.
   QPoint oldpos = pos;
   if ( pos.x() < tLx+bX )                  pos.setX( tLx+bX );
-  if ( pos.x() > tLx+bX+columns*font_w-1 ) pos.setX( tLx+bX+columns*font_w );
+  if ( pos.x() > tLx+bX+usedColumns*font_w-1 ) pos.setX( tLx+bX+usedColumns*font_w );
   if ( pos.y() < tLy+bY )                   pos.setY( tLy+bY );
-  if ( pos.y() > tLy+bY+lines*font_h-1 )    pos.setY( tLy+bY+lines*font_h-1 );
+  if ( pos.y() > tLy+bY+usedLines*font_h-1 )    pos.setY( tLy+bY+usedLines*font_h-1 );
 
   // check if we produce a mouse move event by this
   if ( pos != oldpos ) cursor().setPos(mapToGlobal(pos));
 
-  if ( pos.y() == tLy+bY+lines*font_h-1 )
+  if ( pos.y() == tLy+bY+usedLines*font_h-1 )
   {
     scrollbar->setValue(scrollbar->value()+yMouseScroll); // scrollforward
   }
@@ -1647,7 +1647,11 @@ void TEWidget::extendSelection( QPoint pos )
     scrollbar->setValue(scrollbar->value()-yMouseScroll); // scrollback
   }
 
-  QPoint here = QPoint((pos.x()-tLx-bX+(font_w/2))/font_w,(pos.y()-tLy-bY)/font_h);
+  int charColumn = 0;
+  int charLine = 0;
+  characterPosition(pos,charLine,charColumn);
+
+  QPoint here = QPoint(charColumn,charLine); //QPoint((pos.x()-tLx-bX+(font_w/2))/font_w,(pos.y()-tLy-bY)/font_h);
   QPoint ohere;
   QPoint iPntSelCorr = iPntSel;
   iPntSelCorr.ry() -= scrollbar->value();
@@ -1674,7 +1678,7 @@ void TEWidget::extendSelection( QPoint pos )
       selClass = charClass(image[i].c);
       while ( ((left.x()>0) || (left.y()>0 && (lineProperties[left.y()-1] & LINE_WRAPPED) )) 
 					  && charClass(image[i-1].c) == selClass )
-      { i--; if (left.x()>0) left.rx()--; else {left.rx()=columns-1; left.ry()--;} }
+      { i--; if (left.x()>0) left.rx()--; else {left.rx()=usedColumns-1; left.ry()--;} }
     }
 
     // Find left (left_not_right ? from start : from here)
@@ -1682,9 +1686,9 @@ void TEWidget::extendSelection( QPoint pos )
     i = loc(right.x(),right.y());
     if (i>=0 && i<=image_size) {
       selClass = charClass(image[i].c);
-      while( ((right.x()<columns-1) || (right.y()<lines-1 && (lineProperties[right.y()] & LINE_WRAPPED) )) 
+      while( ((right.x()<usedColumns-1) || (right.y()<usedLines-1 && (lineProperties[right.y()] & LINE_WRAPPED) )) 
 					  && charClass(image[i+1].c) == selClass )
-      { i++; if (right.x()<columns-1) right.rx()++; else {right.rx()=0; right.ry()++; } }
+      { i++; if (right.x()<usedColumns-1) right.rx()++; else {right.rx()=0; right.ry()++; } }
     }
 
     // Pick which is start (ohere) and which is extension (here)
@@ -1709,11 +1713,11 @@ void TEWidget::extendSelection( QPoint pos )
 
     while (above.y()>0 && (lineProperties[above.y()-1] & LINE_WRAPPED) )
       above.ry()--;
-    while (below.y()<lines-1 && (lineProperties[below.y()] & LINE_WRAPPED) )
+    while (below.y()<usedLines-1 && (lineProperties[below.y()] & LINE_WRAPPED) )
       below.ry()++;
 
     above.setX(0);
-    below.setX(columns-1);
+    below.setX(usedColumns-1);
 
     // Pick which is start (ohere) and which is extension (here)
     if ( above_not_below )
@@ -1756,10 +1760,10 @@ void TEWidget::extendSelection( QPoint pos )
         selClass = charClass(image[i-1].c);
         if (selClass == ' ')
         {
-          while ( right.x() < columns-1 && charClass(image[i+1].c) == selClass && (right.y()<lines-1) && 
+          while ( right.x() < usedColumns-1 && charClass(image[i+1].c) == selClass && (right.y()<usedLines-1) && 
 						  !(lineProperties[right.y()] & LINE_WRAPPED))
           { i++; right.rx()++; }
-          if (right.x() < columns-1)
+          if (right.x() < usedColumns-1)
             right = left_not_right ? iPntSelCorr : here;
           else
             right.rx()++;  // will be balanced later because of offset=-1;
@@ -1800,7 +1804,10 @@ void TEWidget::extendSelection( QPoint pos )
 
 void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
 {
-//printf("release [%d,%d] %d\n",ev->x()/font_w,ev->y()/font_h,ev->button());
+    int charLine;
+    int charColumn;
+    characterPosition(ev->pos(),charLine,charColumn);
+
   if ( ev->button() == Qt::LeftButton)
   {
     emit isBusySelecting(false); // Ok.. we can breath again.
@@ -1819,37 +1826,46 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
       //       outside the range. The procedure used in `mouseMoveEvent'
       //       applies here, too.
 
-      QPoint tL  = contentsRect().topLeft();
-      int    tLx = tL.x();
-      int    tLy = tL.y();
-
       if (!mouse_marks && !(ev->modifiers() & Qt::ShiftModifier))
         emit mouseSignal( 3, // release
-                        (ev->x()-tLx-bX)/font_w + 1,
-                        (ev->y()-tLy-bY)/font_h + 1 +scrollbar->value() -scrollbar->maximum() , 0);
+                        charColumn + 1,
+                        charLine + 1 +scrollbar->value() -scrollbar->maximum() , 0);
       releaseMouse();
     }
     dragInfo.state = diNone;
   }
   if ( !mouse_marks && ((ev->button() == Qt::RightButton && !(ev->modifiers() & Qt::ShiftModifier))
-                        || ev->button() == Qt::MidButton) ) {
-    QPoint tL  = contentsRect().topLeft();
-    int    tLx = tL.x();
-    int    tLy = tL.y();
-
-    emit mouseSignal( 3, (ev->x()-tLx-bX)/font_w +1, (ev->y()-tLy-bY)/font_h +1 +scrollbar->value() -scrollbar->maximum() , 0);
+                        || ev->button() == Qt::MidButton) ) 
+  {
+    emit mouseSignal( 3, charColumn + 1, charLine + 1 +scrollbar->value() -scrollbar->maximum() , 0);
     releaseMouse();
   }
+}
+
+void TEWidget::characterPosition(QPoint widgetPoint,int& line,int& column)
+{
+    column = (widgetPoint.x()-contentsRect().left()-bX) / font_w;
+    line = (widgetPoint.y()-contentsRect().top()-bY) / font_h;
+
+    Q_ASSERT( line >= 0 && column >= 0 );
+
+    if ( line >= usedLines )
+        line = usedLines-1;
+
+    if ( column >= usedColumns )
+        column = usedColumns-1;
 }
 
 void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
 {
   if ( ev->button() != Qt::LeftButton) return;
+  
+  int charLine = 0;
+  int charColumn = 0;
 
-  QPoint tL  = contentsRect().topLeft();
-  int    tLx = tL.x();
-  int    tLy = tL.y();
-  QPoint pos = QPoint((ev->x()-tLx-bX)/font_w,(ev->y()-tLy-bY)/font_h);
+  characterPosition(ev->pos(),charLine,charColumn);
+
+  QPoint pos(charColumn,charLine);
 
   // pass on double click as two clicks.
   if (!mouse_marks && !(ev->modifiers() & Qt::ShiftModifier))
@@ -1877,16 +1893,16 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
      int x = bgnSel.x();
      while ( ((x>0) || (bgnSel.y()>0 && (lineProperties[bgnSel.y()-1] & LINE_WRAPPED) )) 
 					 && charClass(image[i-1].c) == selClass )
-     { i--; if (x>0) x--; else {x=columns-1; bgnSel.ry()--;} }
+     { i--; if (x>0) x--; else {x=usedColumns-1; bgnSel.ry()--;} }
      bgnSel.setX(x);
      emit beginSelectionSignal( bgnSel.x(), bgnSel.y(), false );
 
      // set the end...
      i = loc( endSel.x(), endSel.y() );
      x = endSel.x();
-     while( ((x<columns-1) || (endSel.y()<lines-1 && (lineProperties[endSel.y()] & LINE_WRAPPED) )) 
+     while( ((x<usedColumns-1) || (endSel.y()<usedLines-1 && (lineProperties[endSel.y()] & LINE_WRAPPED) )) 
 					 && charClass(image[i+1].c) == selClass )
-     { i++; if (x<columns-1) x++; else {x=0; endSel.ry()++; } }
+     { i++; if (x<usedColumns-1) x++; else {x=0; endSel.ry()++; } }
      endSel.setX(x);
 
      // In word selection mode don't select @ (64) if at end of word.
@@ -1911,11 +1927,11 @@ void TEWidget::wheelEvent( QWheelEvent* ev )
     scrollbar->event(ev);
   else
   {
-    QPoint tL  = contentsRect().topLeft();
-    int    tLx = tL.x();
-    int    tLy = tL.y();
-    QPoint pos = QPoint((ev->x()-tLx-bX)/font_w,(ev->y()-tLy-bY)/font_h);
-    emit mouseSignal( ev->delta() > 0 ? 4 : 5, pos.x() + 1, pos.y() + 1 +scrollbar->value() -scrollbar->maximum() , 0);
+    int charLine;
+    int charColumn;
+    characterPosition( ev->pos() , charLine , charColumn );
+    
+    emit mouseSignal( ev->delta() > 0 ? 4 : 5, charColumn + 1, charLine + 1 +scrollbar->value() -scrollbar->maximum() , 0);
   }
 }
 
@@ -1926,10 +1942,10 @@ void TEWidget::tripleClickTimeout()
 
 void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
 {
-  QPoint tL  = contentsRect().topLeft();
-  int    tLx = tL.x();
-  int    tLy = tL.y();
-  iPntSel = QPoint((ev->x()-tLx-bX)/font_w,(ev->y()-tLy-bY)/font_h);
+  int charLine;
+  int charColumn;
+  characterPosition(ev->pos(),charLine,charColumn);
+  iPntSel = QPoint(charColumn,charLine);
 
   emit clearSelectionSignal();
 

@@ -93,6 +93,8 @@ private:
     // removes signals and slots
     void unregisterContainer( ViewContainer* container );
 
+    void updateSizes();
+
 private slots:
     // Called to indicate that a child ViewContainer has been deleted
     void containerDestroyed( ViewContainer* object );

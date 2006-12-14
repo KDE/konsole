@@ -268,6 +268,10 @@ protected Q_SLOTS:
 
 private:
 
+    // maps a point on the widget to the position ( ie. line and column ) of the character
+    // at that point.
+    void characterPosition(QPoint widgetPoint,int& line,int& column);
+
 //    QChar (*fontMap)(QChar); // possible vt100 font extension
 
     bool allowBell;
