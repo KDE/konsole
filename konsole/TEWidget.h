@@ -282,11 +282,20 @@ private:
     int bX;    // offset
     int bY;    // offset
 
-    int lines;
-    int columns;
+    int lines;      // the number of lines that can be displayed in the widget
+    int columns;    // the number of columns that can be displayed in the widget
+    
+    int usedLines;  // the number of lines that are actually being used
+                    // this is updated when the widget's image is changed using setImage()
+
+    int usedColumns; // the number of columns that are actually being used
+                     // this is updated when the widget's image is changed using setImage()
+    
     int contentHeight;
     int contentWidth;
     ca *image; // [lines][columns]
+               // only the area [usedLines][usedColumns] in the image contains valid data
+
     int image_size;
     QVector<LineProperty> lineProperties;
 

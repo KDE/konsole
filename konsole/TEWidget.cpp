@@ -344,6 +344,8 @@ TEWidget::TEWidget(QWidget *parent)
 ,font_a(1)
 ,lines(1)
 ,columns(1)
+,usedLines(1)
+,usedColumns(1)
 ,contentHeight(1)
 ,contentWidth(1)
 ,image(0)
@@ -897,8 +899,8 @@ void TEWidget::scrollImage(int lines , const QRect& region)
 {
     if ( lines == 0 || image == 0 || abs(lines) >= this->lines ) return;
 
-    kDebug(1211) << " scrolling " << lines << " lines, with region = " << region.top() << "," << region.bottom()
-            << endl;
+  //  kDebug(1211) << " scrolling " << lines << " lines, with region = " << region.top() << "," << region.bottom()
+  //          << endl;
 
     QRect scrollRect;
 
@@ -910,7 +912,7 @@ void TEWidget::scrollImage(int lines , const QRect& region)
  
         //set region of display to scroll, making sure that
         //the region aligns correctly to the character grid 
-        scrollRect = QRect( 0,1, this->columns * font_w , (this->lines - lines) * font_h );
+        scrollRect = QRect( bX ,bY, this->columns * font_w , (this->lines - lines) * font_h );
     }
     else
     {
@@ -955,32 +957,32 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
   cacol cb;       // undefined
   int cr  = -1;   // undefined
 
-  int lins = qMin(this->lines, qMax(0,lines  ));
-  int cols = qMin(this->columns,qMax(0,columns));
-  QChar *disstrU = new QChar[cols];
-  char *dirtyMask = (char *) malloc(cols+2);
+  int linesToUpdate = qMin(this->lines, qMax(0,lines  ));
+  int columnsToUpdate = qMin(this->columns,qMax(0,columns));
+
+  
+  QChar *disstrU = new QChar[columnsToUpdate];
+  char *dirtyMask = (char *) malloc(columnsToUpdate+2);
   QRegion dirtyRegion;
 
-
-//{ static int cnt = 0; printf("setImage %d\n",cnt++); }
-  for (y = 0; y < lins; y++)
+  for (y = 0; y < linesToUpdate; y++)
   {
-    const ca*       lcl = &image[y*this->columns];
-    const ca* const ext = &newimg[y*columns];
+    const ca*       currentLine = &image[y*this->columns];
+    const ca* const newLine = &newimg[y*columns];
 
     bool updateLine = false;
     
     // The dirty mask indicates which characters need repainting. We also
     // mark surrounding neighbours dirty, in case the character exceeds
     // its cell boundaries
-    memset(dirtyMask, 0, cols+2);
+    memset(dirtyMask, 0, columnsToUpdate+2);
     // Two extra so that we don't have to have to care about start and end conditions
-    for (x = 0; x < cols; x++)
+    for (x = 0; x < columnsToUpdate; x++)
     {
 	if ( ( (m_imPreeditLength > 0) && ( ( m_imStartLine == y )
 	      && ( ( m_imStart < m_imEnd ) && ( ( x > m_imStart ) ) && ( x < m_imEnd ) )
               || ( ( m_imSelStart < m_imSelEnd ) && ( ( x > m_imSelStart ) ) ) ) )
-            || ext[x] != lcl[x])
+            || newLine[x] != currentLine[x])
       {
          dirtyMask[x] = dirtyMask[x+1] = dirtyMask[x+2] = 1;
       }
@@ -988,33 +990,34 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
     dirtyMask++; // Position correctly
 
     if (!resizing) // not while resizing, we're expecting a paintEvent
-    for (x = 0; x < cols; x++)
+    for (x = 0; x < columnsToUpdate; x++)
     {
-      hasBlinker |= (ext[x].r & RE_BLINK);
+      hasBlinker |= (newLine[x].r & RE_BLINK);
+    
       // Start drawing if this character or the next one differs.
       // We also take the next one into account to handle the situation
       // where characters exceed their cell width.
       if (dirtyMask[x])
       {
-        Q_UINT16 c = ext[x+0].c;
+        Q_UINT16 c = newLine[x+0].c;
         if ( !c )
             continue;
         int p = 0;
         disstrU[p++] = c; //fontMap(c);
         bool lineDraw = isLineChar(c);
-        bool doubleWidth = (ext[x+1].c == 0);
-        cr = ext[x].r;
-        cb = ext[x].b;
-        if (ext[x].f != cf) cf = ext[x].f;
-        int lln = cols - x;
+        bool doubleWidth = (newLine[x+1].c == 0);
+        cr = newLine[x].r;
+        cb = newLine[x].b;
+        if (newLine[x].f != cf) cf = newLine[x].f;
+        int lln = columnsToUpdate - x;
         for (len = 1; len < lln; len++)
         {
-          c = ext[x+len].c;
+          c = newLine[x+len].c;
           if (!c)
             continue; // Skip trailing part of multi-col chars.
 
-          if (ext[x+len].f != cf || ext[x+len].b != cb || ext[x+len].r != cr ||
-              !dirtyMask[x+len] || isLineChar(c) != lineDraw || (ext[x+len+1].c == 0) != doubleWidth)
+          if (newLine[x+len].f != cf || newLine[x+len].b != cb || newLine[x+len].r != cr ||
+              !dirtyMask[x+len] || isLineChar(c) != lineDraw || (newLine[x+len+1].c == 0) != doubleWidth)
             break;
 
           disstrU[p++] = c; //fontMap(c);
@@ -1061,7 +1064,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
 	
     if (updateLine)
     {
-        QRect dirtyRect = QRect( bX+tLx , bY+tLy+font_h*y , font_w * cols , font_h ); 	
+        QRect dirtyRect = QRect( bX+tLx , bY+tLy+font_h*y , font_w * columnsToUpdate , font_h ); 	
     
         dirtyRegion |= dirtyRect;
     }
@@ -1069,8 +1072,24 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
     dirtyMask--; // Set back
 
     // finally, make `image' become `newimg'.
-    memcpy((void*)lcl,(const void*)ext,cols*sizeof(ca));
+    memcpy((void*)currentLine,(const void*)newLine,columnsToUpdate*sizeof(ca));
   }
+ 
+  // if the new image is smaller than the previous image, then ensure that the area
+  // outside the new image is cleared 
+  if ( linesToUpdate < usedLines )
+  {
+    dirtyRegion |= QRect( bX+tLx , bY+tLy+font_h*linesToUpdate , font_w * this->columns , font_h * (usedLines-linesToUpdate) );
+  }
+  usedLines = linesToUpdate;
+  
+  if ( columnsToUpdate < usedColumns )
+  {
+    dirtyRegion |= QRect( bX+tLx+columnsToUpdate*font_w , bY+tLy , font_w * (usedColumns-columnsToUpdate) , font_h * this->lines );
+  }
+  usedColumns = columnsToUpdate;
+
+  // redraw the display
   update(dirtyRegion);
 
   if ( hasBlinker && !blinkT->isActive()) blinkT->start( BLINK_DELAY ); 
@@ -1143,12 +1162,6 @@ void TEWidget::paintEvent( QPaintEvent* pe )
   QPainter paint;
   paint.begin( this );
   paint.setBackgroundMode( Qt::TransparentMode );
-
-  // Note that the actual widget size can be slightly larger
-  // that the image (the size is truncated towards the smaller
-  // number of characters in `resizeEvent'. The paint rectangle
-  // can thus be larger than the image, but less then the size
-  // of one character.
 
   foreach (QRect rect, (pe->region() & contentsRect()).rects())
   {
@@ -1242,12 +1255,12 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect)
   int    tLx = tL.x();
   int    tLy = tL.y();
 
-  int lux = qMin(columns-1, qMax(0,(rect.left()   - tLx - bX ) / font_w));
-  int luy = qMin(lines-1,  qMax(0,(rect.top()    - tLy - bY  ) / font_h));
-  int rlx = qMin(columns-1, qMax(0,(rect.right()  - tLx - bX ) / font_w));
-  int rly = qMin(lines-1,  qMax(0,(rect.bottom() - tLy - bY  ) / font_h));
+  int lux = qMin(usedColumns-1, qMax(0,(rect.left()   - tLx - bX ) / font_w));
+  int luy = qMin(usedLines-1,  qMax(0,(rect.top()    - tLy - bY  ) / font_h));
+  int rlx = qMin(usedColumns-1, qMax(0,(rect.right()  - tLx - bX ) / font_w));
+  int rly = qMin(usedLines-1,  qMax(0,(rect.bottom() - tLy - bY  ) / font_h));
 
-  QChar *disstrU = new QChar[columns];
+  QChar *disstrU = new QChar[usedColumns];
   for (int y = luy; y <= rly; y++)
   {
     Q_UINT16 c = image[loc(lux,y)].c;
@@ -1280,7 +1293,7 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect)
           len++; // Skip trailing part of multi-column character
         len++;
       }
-      if ((x+len < columns) && (!image[loc(x+len,y)].c))
+      if ((x+len < usedColumns) && (!image[loc(x+len,y)].c))
         len++; // Adjust for trailing part of multi-column character
 
    	     bool save_fixed_font = fixed_font;
@@ -1319,13 +1332,13 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect)
          
 		 fixed_font = save_fixed_font;
      
-		 //reset back to single-width, single-height lines 
+		 //reset back to single-width, single-height usedLines 
 		 paint.resetMatrix();
 
 		 if (y < lineProperties.size())
 		 {
-			//double-height lines are represented by two adjacent lines containing the same characters
-			//both lines will have the LINE_DOUBLEHEIGHT attribute.  If the current line has the LINE_DOUBLEHEIGHT
+			//double-height usedLines are represented by two adjacent usedLines containing the same characters
+			//both usedLines will have the LINE_DOUBLEHEIGHT attribute.  If the current line has the LINE_DOUBLEHEIGHT
 			//attribute, we can therefore skip the next line
 			if (lineProperties[y] & LINE_DOUBLEHEIGHT)
 				y++;
@@ -2367,6 +2380,7 @@ void TEWidget::calcGeometry()
 
 void TEWidget::makeImage()
 {
+  
   calcGeometry();
   image_size=lines*columns;
   // We over-commit 1 character so that we can be more relaxed in dealing with
