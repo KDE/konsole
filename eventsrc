@@ -1,7 +1,7 @@
 [!Global!]
 IconName=konsole
 Comment=Konsole
-Comment[ar]=سطر الأوامر
+Comment[ar]=مطراف سطر الأوامر
 Comment[be]=Кансоля
 Comment[bg]=Конзола
 Comment[bn]=কনসোল
@@ -32,7 +32,7 @@ Comment[zh_TW]=Konsole 終端機程式
 [BellVisible]
 Name=Bell in visible session
 Name[af]=Klokkie in die sigbare sessie
-Name[ar]=جرس في جلسة مرئية
+Name[ar]=جرس في الجلسة المشاهدة
 Name[bg]=Камбана във видима сесия
 Name[bn]=প্রদর্শিত সেশন-এ ঘণ্টা
 Name[bs]=Zvono u vidljivoj sesiji
