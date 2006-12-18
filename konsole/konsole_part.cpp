@@ -42,7 +42,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <krun.h>
-#include <kstdaction.h>
+#include <kstandardaction.h>
 #include <QLabel>
 
 #include <QCheckBox>

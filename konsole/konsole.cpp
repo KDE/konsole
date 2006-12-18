@@ -100,7 +100,7 @@
 #include <kservicetypetrader.h>
 #include <kshell.h>
 #include <kstandarddirs.h>
-#include <kstdaction.h>
+#include <kstandardaction.h>
 #include <kstringhandler.h>
 #include <ktabwidget.h>
 #include <ktemporaryfile.h>
@@ -669,9 +669,9 @@ void Konsole::makeGUI()
       m_options->addAction( m_saveProfile );
       m_options->addSeparator();
 
-      KAction *configureNotifications = KStdAction::configureNotifications( this, SLOT(slotConfigureNotifications()), actionCollection() );
-      KAction *configureKeys = KStdAction::keyBindings( this, SLOT(slotConfigureKeys()), actionCollection() );
-      KAction *configure = KStdAction::preferences( this, SLOT(slotConfigure()), actions );
+      KAction *configureNotifications = KStandardAction::configureNotifications( this, SLOT(slotConfigureNotifications()), actionCollection() );
+      KAction *configureKeys = KStandardAction::keyBindings( this, SLOT(slotConfigureKeys()), actionCollection() );
+      KAction *configure = KStandardAction::preferences( this, SLOT(slotConfigure()), actions );
       m_options->addAction( configureNotifications );
       m_options->addAction( configureKeys );
       m_options->addAction( configure );
@@ -1070,7 +1070,7 @@ void Konsole::makeBasicGUI()
   connect(showMenubar, SIGNAL(triggered(bool) ), SLOT( slotToggleMenubar() ));
   showMenubar->setCheckedState( KGuiItem( i18n("&Hide Menu Bar"), "showmenu", QString(), QString() ) );
 
-  m_fullscreen = KStdAction::fullScreen(0, 0, m_shortcuts, this );
+  m_fullscreen = KStandardAction::fullScreen(0, 0, m_shortcuts, this );
   connect( m_fullscreen,SIGNAL(toggled(bool)), this,SLOT(updateFullScreen(bool)));
   m_fullscreen->setChecked(b_fullscreen);
 
