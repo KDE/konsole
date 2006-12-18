@@ -1963,7 +1963,7 @@ void Konsole::slotConfigureKeys()
     if (kaction!=0) {
         shortcut = kaction->activeShortcut();
     }
-    foreach( const QKeySequence seq, shortcut.toList() )
+    foreach( const QKeySequence seq, shortcut )
     {
       int key = seq.isEmpty() ? 0 : seq[0]; // First Key of KeySequence
       if ((key & Qt::KeyboardModifierMask) == Qt::ControlModifier)
