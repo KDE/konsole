@@ -76,10 +76,10 @@ SchemaEditor::SchemaEditor(QWidget * parent)
     bold.resize(20);
     transparent.resize(20);
     defaultSchema = "";
-
+#ifdef Q_WS_X11
     QDBusInterface kdesktop("org.kde.kdesktop", "/Background", "org.kde.kdesktop.Background");
     kdesktop.call( "setExport", 1 );
-
+#endif
     transparencyCheck->setChecked(true);
     transparencyCheck->setChecked(false);
 
