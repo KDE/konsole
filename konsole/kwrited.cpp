@@ -18,9 +18,22 @@
     02110-1301  USA.
 */
 
+// System
+#include <iostream>
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <signal.h>
+
+// X11
+#include <X11/Xlib.h>
+#include <fixx11h.h>
+
+// Qt
 #include <dcopclient.h>
 #include <qsocketnotifier.h>
 
+// KDE 
 #include <kuniqueapplication.h>
 #include <kcmdlineargs.h>
 #include <klocale.h>
@@ -31,15 +44,8 @@
 #include <kuser.h>
 #include <kglobal.h>
 
+// kwrited
 #include "kwrited.h"
-
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <signal.h>
-#include <X11/Xlib.h>
-#include <fixx11h.h>
-
 #include <config.h>
 
 /* TODO
@@ -77,7 +83,8 @@ KWrited::KWrited() : QTextEdit()
 
   QString txt = i18n("KWrited - Listening on Device %1").arg(pty->ttyName());
   setCaption(txt);
-  puts(txt.local8Bit().data());
+  
+  kdDebug() << txt << endl;
 }
 
 KWrited::~KWrited()
