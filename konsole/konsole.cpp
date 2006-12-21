@@ -1961,7 +1961,7 @@ void Konsole::slotConfigureKeys()
     KAction *kaction = qobject_cast<KAction*>(m_shortcuts->actions().value( i ));
     KShortcut shortcut;
     if (kaction!=0) {
-        shortcut = kaction->activeShortcut();
+        shortcut = kaction->shortcut();
     }
     foreach( const QKeySequence seq, shortcut )
     {
@@ -2046,7 +2046,7 @@ void Konsole::reparseConfiguration()
       }
       KAction *kaction = qobject_cast<KAction*>(action);
       if ( kaction!=0 && ! b_foundSession ) {
-        kaction->setActiveShortcut( KShortcut() );   // Clear shortcut
+        kaction->setShortcut( KShortcut(), KAction::ActiveShortcut );   // Clear shortcut
         m_shortcuts->writeSettings();
         delete action;           // Remove Action and Accel
         if ( i == 0 ) i = 0;     // Reset index
