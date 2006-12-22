@@ -45,6 +45,9 @@
 #include <kmessagebox.h>
 #include <kimageeffect.h>
 #include <QImage>
+#ifdef Q_WS_X11
+#include <kdesktop_background_interface.h>
+#endif
 
 // SchemaListBoxText is a list box text item with schema filename
 class SchemaListBoxText : public Q3ListBoxText
@@ -77,8 +80,15 @@ SchemaEditor::SchemaEditor(QWidget * parent)
     transparent.resize(20);
     defaultSchema = "";
 #ifdef Q_WS_X11
-    QDBusInterface kdesktop("org.kde.kdesktop", "/Background", "org.kde.kdesktop.Background");
-    kdesktop.call( "setExport", 1 );
+    int konq_screen_number = KApplication::desktop()->primaryScreen();
+    QByteArray appname;
+    if (konq_screen_number == 0)
+        appname = "org.kde.kdesktop";
+    else
+        appname = "org.kde.kdesktop-screen-" + QByteArray::number( konq_screen_number);
+    org::kde::kdesktop::Background desktop(appname, "/Background", QDBusConnection::sessionBus());
+    desktop.setExport(1);
+    
 #endif
     transparencyCheck->setChecked(true);
     transparencyCheck->setChecked(false);
