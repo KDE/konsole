@@ -5,6 +5,13 @@
 
 set(kcm_konsole_PART_SRCS schemaeditor.cpp sessioneditor.cpp kcmkonsole.cpp )
 
+if(Q_WS_X11)
+ set(kdesktop_xml  ${CMAKE_SOURCE_DIR}/workspace/kdesktop/org.kde.kdesktop.Desktop.xml)
+ QT4_ADD_DBUS_INTERFACE( kcm_konsole_PART_SRCS ${kdesktop_xml} kdesktop_interface )
+ set(kdesktop_background_xml  ${CMAKE_SOURCE_DIR}/workspace/kdesktop/org.kde.kdesktop.Background.xml)
+ QT4_ADD_DBUS_INTERFACE( kcm_konsole_PART_SRCS ${kdesktop_background_xml} kdesktop_background_interface )
+endif(Q_WS_X11)
+
 kde4_automoc(${kcm_konsole_PART_SRCS})
 
 kde4_add_ui_files(kcm_konsole_PART_SRCS kcmkonsoledialog.ui sessiondialog.ui schemadialog.ui )

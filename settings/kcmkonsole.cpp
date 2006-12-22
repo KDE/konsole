@@ -35,6 +35,11 @@
 #include "sessioneditor.h"
 #include "kcmkonsole.h"
 
+#ifdef Q_WS_X11
+#include <QDesktopWidget>
+#include "kdesktop_interface.h"
+#endif
+
 typedef KGenericFactory<KCMKonsole, QWidget> ModuleFactory;
 K_EXPORT_COMPONENT_FACTORY( konsole, ModuleFactory("kcmkonsole") )
 
@@ -158,12 +163,21 @@ void KCMKonsole::save()
 #warning TODO port to a DBus signal
 #endif
     // call("konsole-*", "konsole", "reparseConfiguration()", QByteArray());
+    QDBusMessage message =
+        QDBusMessage::createSignal("/Konsole", "org.kde.konsole.Konsole", "reloadConfig");
+    QDBusConnection::sessionBus().send(message);
 
+#ifdef Q_WS_X11
     // ### TODO check this (the object and interface don't exist yet at the time of this writing)
-    QDBusInterface kdesktop("org.kde.kdesktop", "/Desktop", "org.kde.kdesktop.Desktop");
-    if ( kdesktop.isValid() )
-        kdesktop.call( "configure" );
-
+    int konq_screen_number = KApplication::desktop()->primaryScreen();
+    QByteArray appname;
+    if (konq_screen_number == 0)
+        appname = "org.kde.kdesktop";
+    else
+        appname = "org.kde.kdesktop-screen-" + QByteArray::number( konq_screen_number);
+    org::kde::kdesktop::Desktop desktop(appname, "/Desktop", QDBusConnection::sessionBus());
+    desktop.configure();    
+#endif
     // ## Hmm, why do konsole sessions have something to do with klauncher's configuration? (David)
     QDBusInterface klauncher("org.kde.klauncher", "/KLauncher", "org.kde.KLauncher");
     if ( klauncher.isValid() )

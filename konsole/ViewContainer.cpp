@@ -122,14 +122,14 @@ TabbedViewContainer::TabbedViewContainer() :
         
         QAction* action = _tabSelectColorMenu->menuAction(); 
             //_tabPopupMenu->addMenu(_tabSelectColorMenu);
-        action->setIcon( SmallIconSet("colors") );
+        action->setIcon( KIcon("colors") );
         action->setText( i18n("Select &Tab Color") );
 
         _viewActions << action;
     }
     else
     {
-      //  _viewActions << new KAction( SmallIconSet("colors"),i18n("Select &Tab Color..."),this,
+      //  _viewActions << new KAction( KIcon("colors"),i18n("Select &Tab Color..."),this,
       //                  SLOT(slotTabSelectColor()));
     }
 

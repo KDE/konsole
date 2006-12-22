@@ -140,12 +140,13 @@ public Q_SLOTS:
 
   void makeGUI();
   QString newSession();
-
 protected:
 
  bool queryClose();
  void saveProperties(KConfig* config);
  void readProperties(KConfig* config);
+
+
 
 
 private Q_SLOTS:

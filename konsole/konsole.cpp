@@ -100,7 +100,7 @@
 #include <kservicetypetrader.h>
 #include <kshell.h>
 #include <kstandarddirs.h>
-#include <kstdaction.h>
+#include <kstandardaction.h>
 #include <kstringhandler.h>
 //#include <ktabwidget.h>
 #include <ktemporaryfile.h>
@@ -259,7 +259,10 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
   setObjectName( name );
 
   (void)new KonsoleAdaptor(this);
-  QDBusConnection::sessionBus().registerObject(QLatin1String("/Konsole"), this);
+  QDBusConnection dbus = QDBusConnection::sessionBus();
+  dbus.registerObject("/Konsole", this);
+  dbus.connect(QString(), "/Konsole", "org.kde.konsole.Konsole", "reloadConfig", this, SLOT(reparseConfiguration()));
+
   m_sessionGroup = new QActionGroup(this);
 
   isRestored = b_inRestore;
@@ -406,7 +409,7 @@ void Konsole::showTipOnStart()
 // with a cold cache.
 // Callgrind & wall-clock analysis suggests the expensive parts of this function are:
 //
-//      - Loading the icons for sessions via SmallIconSet is expensive at the time of
+//      - Loading the icons for sessions via KIcon is expensive at the time of
 //        writing because KIconLoader's on-demand loading of icons
 //        hasn't yet been ported for KDE4/Qt4.
 //      - Searching all of the system paths for the executable needed
@@ -562,7 +565,7 @@ void Konsole::makeGUI()
 
    // Schema Options Menu -----------------------------------------------------
    m_schema = new KMenu(i18n( "Sch&ema" ),this);
-   m_schema->setIcon( SmallIconSet("colorize") );
+   m_schema->setIcon( KIcon("colorize") );
 
    KAcceleratorManager::manage( m_schema );
    connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
@@ -571,7 +574,7 @@ void Konsole::makeGUI()
 
    // Keyboard Options Menu ---------------------------------------------------
    m_keytab = new KMenu( i18n("&Keyboard") , this);
-   m_keytab->setIcon(SmallIconSet( "key_bindings" ));
+   m_keytab->setIcon(KIcon( "key_bindings" ));
 
    KAcceleratorManager::manage( m_keytab );
    connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
@@ -686,9 +689,9 @@ void Konsole::makeGUI()
       m_options->addAction( m_saveProfile );
       m_options->addSeparator();
 
-      KAction *configureNotifications = KStdAction::configureNotifications( this, SLOT(slotConfigureNotifications()), actionCollection() );
-      KAction *configureKeys = KStdAction::keyBindings( this, SLOT(slotConfigureKeys()), actionCollection() );
-      KAction *configure = KStdAction::preferences( this, SLOT(slotConfigure()), actions );
+      KAction *configureNotifications = KStandardAction::configureNotifications( this, SLOT(slotConfigureNotifications()), actionCollection() );
+      KAction *configureKeys = KStandardAction::keyBindings( this, SLOT(slotConfigureKeys()), actionCollection() );
+      KAction *configure = KStandardAction::preferences( this, SLOT(slotConfigure()), actions );
       m_options->addAction( configureNotifications );
       m_options->addAction( configureKeys );
       m_options->addAction( configure );
@@ -907,7 +910,7 @@ void Konsole::makeTabWidget()
 
     m_removeSessionButton = new QToolButton( tabwidget );
     m_removeSessionButton->setToolTip(i18n("Close the current session"));
-    m_removeSessionButton->setIcon( SmallIconSet( "tab_remove" ) );
+    m_removeSessionButton->setIcon( KIcon( "tab_remove" ) );
     m_removeSessionButton->adjustSize();
     m_removeSessionButton->setAutoRaise(true);
     m_removeSessionButton->setEnabled(false);
@@ -1090,7 +1093,7 @@ void Konsole::makeBasicGUI()
   connect(showMenubar, SIGNAL(triggered(bool) ), SLOT( slotToggleMenubar() ));
   showMenubar->setCheckedState( KGuiItem( i18n("&Hide Menu Bar"), "showmenu", QString(), QString() ) );
 
-  m_fullscreen = KStdAction::fullScreen(0, 0, m_shortcuts, this );
+  m_fullscreen = KStandardAction::fullScreen(0, 0, m_shortcuts, this );
   connect( m_fullscreen,SIGNAL(toggled(bool)), this,SLOT(updateFullScreen(bool)));
   m_fullscreen->setChecked(b_fullscreen);
 
@@ -1307,8 +1310,8 @@ void Konsole::slotTabContextMenu(QWidget* /*_te*/, const QPoint & /*pos*/)
   m_tabPopupTabsMenu->clear();
   int counter=0;
   for (TESession *ses = sessions.first(); ses; ses = sessions.next()) {
-    QString title=ses->title();
-    m_tabPopupTabsMenu->insertItem(SmallIconSet(ses->iconName()),title.replace('&',"&&"),counter++);
+    QString title=ses->Title();
+    m_tabPopupTabsMenu->insertItem(KIcon(ses->IconName()),title.replace('&',"&&"),counter++);
   }
 
   m_tabPopupMenu->popup( pos );*/
@@ -1921,7 +1924,8 @@ QIcon Konsole::iconSetForSession(TESession *session) const
 {
   if (m_tabViewMode == ShowTextOnly)
     return QIcon();
-  return SmallIconSet(session->isMasterMode() ? "remote" : session->iconName());
+
+  return KIcon(session->isMasterMode() ? "remote" : session->iconName());
 }
 
 
@@ -1977,9 +1981,9 @@ void Konsole::slotConfigureKeys()
     KAction *kaction = qobject_cast<KAction*>(m_shortcuts->actions().value( i ));
     KShortcut shortcut;
     if (kaction!=0) {
-        shortcut = kaction->activeShortcut();
+        shortcut = kaction->shortcut();
     }
-    foreach( const QKeySequence seq, shortcut.toList() )
+    foreach( const QKeySequence seq, shortcut )
     {
       int key = seq.isEmpty() ? 0 : seq[0]; // First Key of KeySequence
       if ((key & Qt::KeyboardModifierMask) == Qt::ControlModifier)
@@ -2062,7 +2066,7 @@ void Konsole::reparseConfiguration()
       }
       KAction *kaction = qobject_cast<KAction*>(action);
       if ( kaction!=0 && ! b_foundSession ) {
-        kaction->setActiveShortcut( KShortcut() );   // Clear shortcut
+        kaction->setShortcut( KShortcut(), KAction::ActiveShortcut );   // Clear shortcut
         m_shortcuts->writeSettings();
         delete action;           // Remove Action and Accel
         if ( i == 0 ) i = 0;     // Reset index
@@ -2491,7 +2495,7 @@ void Konsole::listSessions()
   m_sessionList->setKeyboardShortcutsEnabled(true);
   for (TESession *ses = sessions.first(); ses; ses = sessions.next()) {
     QString title=ses->title();
-    m_sessionList->insertItem(SmallIconSet(ses->iconName()),title.replace('&',"&&"),counter++);
+    m_sessionList->insertItem(KIcon(ses->iconName()),title.replace('&',"&&"),counter++);
   }
   m_sessionList->adjustSize();
   m_sessionList->popup(mapToGlobal(QPoint((width()/2)-(m_sessionList->width()/2),(height()/2)-(m_sessionList->height()/2))));
@@ -3417,7 +3421,7 @@ void Konsole::createSessionMenus()
     }
 
     //add menu action for default session at top
-    QIcon defaultIcon = SmallIconSet(defaultSession->icon());
+    QIcon defaultIcon = KIcon(defaultSession->icon());
     QAction* shellMenuAction = m_session->addAction( defaultIcon , defaultSession->newSessionText() );
     QAction* shellTabAction = m_tabbarSessionsCommands->addAction( defaultIcon ,
                                 defaultSession->newSessionText() );
@@ -3434,7 +3438,7 @@ void Konsole::createSessionMenus()
     while ( nameIter.hasNext() )
     {
         SessionInfo* info = nameIter.next().value();
-        QIcon icon = SmallIconSet(info->icon());
+        QIcon icon = KIcon(info->icon());
 
         QAction* menuAction = m_session->addAction( icon  , info->newSessionText() );
         QAction* tabAction = m_tabbarSessionsCommands->addAction( icon , info->newSessionText() );
@@ -3446,11 +3450,11 @@ void Konsole::createSessionMenus()
     if (m_bookmarksSession)
     {
         m_session->addSeparator();
-        m_session->insertItem(SmallIconSet("keditbookmarks"),
+        m_session->insertItem(KIcon("keditbookmarks"),
                           i18n("New Shell at Bookmark"), m_bookmarksSession);
 
         m_tabbarSessionsCommands->addSeparator();
-        m_tabbarSessionsCommands->insertItem(SmallIconSet("keditbookmarks"),
+        m_tabbarSessionsCommands->insertItem(KIcon("keditbookmarks"),
                           i18n("Shell at Bookmark"), m_bookmarksSession);
     }
 }
@@ -3468,8 +3472,8 @@ void Konsole::addScreenSession(const QString &path, const QString &socket)
     .arg(path).arg(socket));
   QString icon = "konsole";
   cmd_serial++;
-  m_session->insertItem( SmallIconSet( icon ), txt, cmd_serial, cmd_serial - 1 );
-  m_tabbarSessionsCommands->insertItem( SmallIconSet( icon ), txt, cmd_serial );
+  m_session->insertItem( KIcon( icon ), txt, cmd_serial, cmd_serial - 1 );
+  m_tabbarSessionsCommands->insertItem( KIcon( icon ), txt, cmd_serial );
   tempfiles.append(tmpFile);
 }
 
@@ -3719,7 +3723,7 @@ void Konsole::attachSession(TESession* /*session*/)
   initTEWidget(te, se_widget);
   session->addView(te);
   te->setFocus();
-  createSessionTab(te, SmallIconSet(session->iconName()), session->title());
+  createSessionTab(te, KIcon(session->IconName()), session->Title());
   setSchema(session->schemaNo() , te);
   if (session->isMasterMode()) {
     disableMasterModeConnections(); // no duplicate connections, remove old
@@ -4415,6 +4419,50 @@ void Konsole::setupTabContextMenu()
 
    addAction(moveSessionLeftAction);
    addAction(moveSessionRightAction);
+
+   //Create a colour selection palette and fill it with a range of suitable colours
+   QString paletteName;
+   QStringList availablePalettes = KPalette::getPaletteList();
+
+   if (availablePalettes.contains("40.colors"))
+        paletteName = "40.colors";
+
+   KPalette palette(paletteName);
+
+   //If the palette of colours was found, create a palette menu displaying those colors
+   //which the user chooses from when they activate the "Select Tab Color" sub-menu.
+   //
+   //If the palette is empty, default back to the old behaviour where the user is shown
+   //a color dialog when they click the "Select Tab Color" menu item.
+   if ( palette.nrColors() > 0 )
+   {
+        m_tabColorCells = new KColorCells(this,palette.nrColors()/8,8);
+
+        for (int i=0;i<palette.nrColors();i++)
+            m_tabColorCells->setColor(i,palette.color(i));
+
+
+        m_tabSelectColorMenu = new KMenu(this);
+        connect( m_tabSelectColorMenu, SIGNAL(aboutToShow()) , this, SLOT(slotTabPrepareColorCells()) );
+        m_tabColorSelector = new QWidgetAction(m_tabSelectColorMenu);
+        m_tabColorSelector->setDefaultWidget(m_tabColorCells);
+
+
+        m_tabSelectColorMenu->addAction( m_tabColorSelector );
+
+        connect(m_tabColorCells,SIGNAL(colorSelected(int)),this,SLOT(slotTabSelectColor()));
+        connect(m_tabColorCells,SIGNAL(colorSelected(int)),m_tabPopupMenu,SLOT(hide()));
+        m_tabPopupMenu->addSeparator();
+        QAction* action = m_tabPopupMenu->addMenu(m_tabSelectColorMenu);
+        action->setIcon( KIcon("colors") );
+        action->setText( i18n("Select &Tab Color") );
+   }
+   else
+   {
+        m_tabPopupMenu->addAction( KIcon("colors"),i18n("Select &Tab Color..."),this,
+                        SLOT(slotTabSelectColor()));
+   }
+
 
    m_tabPopupMenu->addSeparator();
    m_tabPopupTabsMenu = new KMenu( m_tabPopupMenu );

@@ -47,7 +47,7 @@ SessionNavigationItem::SessionNavigationItem(TESession* session)
     , _collection(this)
 {
     setTitle( _session->displayTitle() );   
-    setIcon( SmallIconSet(_session->iconName()) ); 
+    setIcon( KIcon(_session->iconName()) ); 
 
     connect( _session , SIGNAL( updateTitle() ) , this , SLOT( updateTitle() ) );
     connect( _session , SIGNAL( notifySessionState(TESession*,int) ) , this , 
@@ -188,7 +188,7 @@ void SessionNavigationItem::updateTitle()
     kDebug() << " session icon update " << endl;
 
     setTitle( _session->displayTitle() );
-    setIcon( SmallIconSet(_session->iconName()) );
+    setIcon( KIcon(_session->iconName()) );
     
     emit titleChanged(this);
     emit iconChanged(this);

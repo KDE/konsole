@@ -35,5 +35,6 @@
     <method name="reparseConfiguration">
     <annotation name="org.freedesktop.DBus.Method.NoReply" value="true"/>
     </method>
+    <signal name="reloadConfig"/>
   </interface>
 </node>

@@ -1810,7 +1810,7 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
 
   if ( ev->button() == Qt::LeftButton)
   {
-    emit isBusySelecting(false); // Ok.. we can breath again.
+    emit isBusySelecting(false); 
     if(dragInfo.state == diPending)
     {
       // We had a drag event pending but never confirmed.  Kill selection
@@ -1834,6 +1834,8 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
     }
     dragInfo.state = diNone;
   }
+  
+  
   if ( !mouse_marks && ((ev->button() == Qt::RightButton && !(ev->modifiers() & Qt::ShiftModifier))
                         || ev->button() == Qt::MidButton) ) 
   {
@@ -1889,25 +1891,47 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
   // find word boundaries...
   int selClass = charClass(image[i].c);
   {
-    // set the start...
+     // find the start of the word
      int x = bgnSel.x();
      while ( ((x>0) || (bgnSel.y()>0 && (lineProperties[bgnSel.y()-1] & LINE_WRAPPED) )) 
 					 && charClass(image[i-1].c) == selClass )
-     { i--; if (x>0) x--; else {x=usedColumns-1; bgnSel.ry()--;} }
+     {  
+       i--; 
+       if (x>0) 
+           x--; 
+       else 
+       {
+           x=usedColumns-1; 
+           bgnSel.ry()--;
+       } 
+     }
+
      bgnSel.setX(x);
      emit beginSelectionSignal( bgnSel.x(), bgnSel.y(), false );
 
-     // set the end...
+     // find the end of the word
      i = loc( endSel.x(), endSel.y() );
      x = endSel.x();
      while( ((x<usedColumns-1) || (endSel.y()<usedLines-1 && (lineProperties[endSel.y()] & LINE_WRAPPED) )) 
 					 && charClass(image[i+1].c) == selClass )
-     { i++; if (x<usedColumns-1) x++; else {x=0; endSel.ry()++; } }
+     { 
+         i++; 
+         if (x<usedColumns-1) 
+             x++; 
+         else 
+         {  
+             x=0; 
+             endSel.ry()++; 
+         } 
+     }
+
      endSel.setX(x);
 
      // In word selection mode don't select @ (64) if at end of word.
      if ( ( QChar( image[i].c ) == '@' ) && ( ( endSel.x() - bgnSel.x() ) > 0 ) )
        endSel.setX( x - 1 );
+
+     kDebug() << "word selection , start = " << bgnSel << " , end = " << endSel << endl;
 
      actSel = 2; // within selection
      emit extendSelectionSignal( endSel.x(), endSel.y() );

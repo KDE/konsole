@@ -42,7 +42,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <krun.h>
-#include <kstdaction.h>
+#include <kstandardaction.h>
 #include <QLabel>
 
 #include <QCheckBox>
@@ -341,9 +341,8 @@ void konsolePart::makeGUI()
 
      // Select Bell
      m_options->addSeparator();
-     selectBell = new KSelectAction(i18n("&Bell"), SmallIconSet( "bell"), KShortcut(0) , this,
-                                 SLOT(slotSelectBell()), settingsActions, "bell");
-
+     selectBell = new KSelectAction(KIcon( "bell" ), i18n("&Bell"), settingsActions, "bell");
+     connect(selectBell, SIGNAL(triggered(bool)), this, SLOT(slotSelectBell()));
      QStringList bellitems;
      bellitems << i18n("System &Bell")
             << i18n("System &Notification")
@@ -365,7 +364,8 @@ void konsolePart::makeGUI()
       m_options->addAction(m_fontsizes);
 
       // encoding menu, start with default checked !
-      selectSetEncoding = new KSelectAction( i18n( "&Encoding" ), SmallIconSet("charset" ), KShortcut(0), this, SLOT(slotSetEncoding()), settingsActions, "set_encoding" );
+      selectSetEncoding = new KSelectAction( KIcon("charset" ), i18n( "&Encoding" ), settingsActions, "set_encoding" );
+      connect(selectSetEncoding, SIGNAL(triggered(bool)), this, SLOT(slotSetEncoding()));
       QStringList list = KGlobal::charsets()->descriptiveEncodingNames();
       list.prepend( i18n( "Default" ) );
       selectSetEncoding->setItems(list);
@@ -377,7 +377,7 @@ void konsolePart::makeGUI()
      {
         m_keytab = new KMenu((KMainWindow*)parentWidget);
         connect(m_keytab, SIGNAL(activated(int)), SLOT(keytab_menu_activated(int)));
-        m_options->insertItem( SmallIconSet( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
+        m_options->insertItem( KIcon( "key_bindings" ), i18n( "&Keyboard" ), m_keytab );
      }
 
      // Schema Options Menu -----------------------------------------------------
@@ -386,7 +386,7 @@ void konsolePart::makeGUI()
         m_schema = new KMenu((KMainWindow*)parentWidget);
         connect(m_schema, SIGNAL(activated(int)), SLOT(schema_menu_activated(int)));
         connect(m_schema, SIGNAL(aboutToShow()), SLOT(schema_menu_check()));
-        m_options->insertItem( SmallIconSet( "colorize" ), i18n( "Sch&ema" ), m_schema);
+        m_options->insertItem( KIcon( "colorize" ), i18n( "Sch&ema" ), m_schema);
      }
 
 
@@ -396,9 +396,8 @@ void konsolePart::makeGUI()
      m_options->addSeparator();
 
      // Select line spacing
-     selectLineSpacing = new KSelectAction(i18n("Li&ne Spacing"),
-        SmallIconSet("leftjust"), KShortcut(0), this,
-        SLOT(slotSelectLineSpacing()), settingsActions );
+     selectLineSpacing = new KSelectAction(KIcon("leftjust"), i18n("Li&ne Spacing"), settingsActions, "linespacing");
+     connect(selectLineSpacing, SIGNAL(triggered(bool)), this, SLOT(slotSelectLineSpacing()));
 
      QStringList lineSpacingList;
      lineSpacingList
