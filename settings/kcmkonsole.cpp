@@ -163,6 +163,10 @@ void KCMKonsole::save()
 #warning TODO port to a DBus signal
 #endif
     // call("konsole-*", "konsole", "reparseConfiguration()", QByteArray());
+    QDBusMessage message =
+        QDBusMessage::createSignal("/Konsole", "org.kde.konsole.Konsole", "reloadConfig");
+    QDBusConnection::sessionBus().send(message);
+
 #ifdef Q_WS_X11
     // ### TODO check this (the object and interface don't exist yet at the time of this writing)
     int konq_screen_number = KApplication::desktop()->primaryScreen();

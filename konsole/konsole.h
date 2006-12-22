@@ -139,7 +139,6 @@ public Q_SLOTS:
 
   void makeGUI();
   QString newSession();
-
 protected:
 
  bool queryClose();
@@ -148,6 +147,8 @@ protected:
 
  //virtual void focusInEvent(QFocusEvent* event);
  virtual void showEvent(QShowEvent* event);
+
+
 
 private Q_SLOTS:
   void configureRequest(TEWidget*,int,int,int);

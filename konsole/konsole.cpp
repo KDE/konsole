@@ -259,7 +259,10 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
   setObjectName( name );
 
   (void)new KonsoleAdaptor(this);
-  QDBusConnection::sessionBus().registerObject(QLatin1String("/Konsole"), this);
+  QDBusConnection dbus = QDBusConnection::sessionBus();
+  dbus.registerObject("/Konsole", this);
+  dbus.connect(QString(), "/Konsole", "org.kde.konsole.Konsole", "reloadConfig", this, SLOT(reparseConfiguration()));
+
   m_sessionGroup = new QActionGroup(this);
 
   isRestored = b_inRestore;
@@ -2011,6 +2014,7 @@ void Konsole::slotConfigure()
 
 void Konsole::reparseConfiguration()
 {
+kdDebug()<<" Konsole::reparseConfiguration*****************\n";
   KGlobal::config()->reparseConfiguration();
   readProperties(KGlobal::config(), QString(), true);
 
