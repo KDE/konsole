@@ -317,11 +317,17 @@ void TEWidget::fontChange(const QFont &)
 void TEWidget::setVTFont(const QFont& f)
 {
   QFont font = f;
-  if (!s_antialias)
-    font.setStyleStrategy( QFont::NoAntialias );
+
+  QFontMetrics metrics(font);
+
+  if ( metrics.height() < height() && metrics.maxWidth() < width() )
+  {
+    if (!s_antialias)
+        font.setStyleStrategy( QFont::NoAntialias );
   
-  QFrame::setFont(font);
-  fontChange(font);
+    QFrame::setFont(font);
+    fontChange(font);
+  }
 }
 
 void TEWidget::setFont(const QFont &)
