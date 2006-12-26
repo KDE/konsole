@@ -515,6 +515,8 @@ void TEmulation::setListenToKeyPress(bool l)
 
 void TEmulation::onImageSizeChange(int lines, int columns)
 {
+  assert( lines > 0 && columns > 0 );
+
    //kdDebug(1211)<<"TEmulation::onImageSizeChange()"<<endl;
   screen[0]->resizeImage(lines,columns);
   screen[1]->resizeImage(lines,columns);

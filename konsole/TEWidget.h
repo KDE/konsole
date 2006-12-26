@@ -108,9 +108,20 @@ public:
 
     void setSelection(const QString &t);
 
+    /** 
+     * Reimplemented.  Has no effect.  Use setVTFont() to change the font
+     * used to draw characters in the display.
+     */
     virtual void setFont(const QFont &);
+
+    /** Returns the font used to draw characters in the display */
     QFont getVTFont() { return font(); }
-    void setVTFont(const QFont &);
+
+    /** 
+     * Sets the font used to draw the display.  Has no effect if @p font
+     * is larger than the size of the display itself.    
+     */
+    void setVTFont(const QFont& font);
 
     void setMouseMarks(bool on);
     static void setAntialias( bool enable ) { s_antialias = enable; }
