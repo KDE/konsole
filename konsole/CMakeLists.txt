@@ -121,3 +121,5 @@ install(TARGETS kded_kwrited  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 install( FILES x-konsole.desktop  DESTINATION  ${MIME_INSTALL_DIR}/application )
 
+install( FILES org.kde.konsole.Konsole.xml org.kde.konsole.KonsoleScripting.xml org.kde.konsole.Session.xml org.kde.konsole.SessionScripting.xml DESTINATION ${DBUS_INTERFACES_DIR} )
+
