@@ -44,6 +44,8 @@ class ViewSplitter : public QSplitter
 Q_OBJECT
 
 public:
+    ViewSplitter(QWidget* parent) : QSplitter(parent) {}
+
     /**
      * Locates the child ViewSplitter widget which currently has the focus
      * and inserts the container into it.   

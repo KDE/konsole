@@ -111,7 +111,7 @@ void ViewSplitter::addContainer( ViewContainer* container ,
     }
     else
     {
-        ViewSplitter* newSplitter = new ViewSplitter();
+        ViewSplitter* newSplitter = new ViewSplitter(this);
         connect( newSplitter , SIGNAL(empty(ViewSplitter*)) , splitter , SLOT(childEmpty(ViewSplitter*)) );
 
         ViewContainer* oldContainer = splitter->activeContainer();

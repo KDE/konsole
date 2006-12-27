@@ -28,7 +28,12 @@
 
 extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
 {
-    KAboutData about("konsole",i18n("Konsole").toLocal8Bit().data(),KONSOLE_VERSION);
+    KAboutData about(   "konsole",
+                        I18N_NOOP("Konsole"),
+                        KONSOLE_VERSION,
+                        I18N_NOOP("Terminal emulator for KDE"),
+                        KAboutData::License_GPL_V2
+                    );
     KCmdLineArgs::init(argc,argv,&about);
     KUniqueApplication::addCmdLineOptions();
 

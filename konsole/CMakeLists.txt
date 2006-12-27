@@ -61,6 +61,10 @@ set(konsole_KDEINIT_SRCS
         TEHistory.cpp
         TEScreen.cpp
         TEWidget.cpp
+        ViewContainer.cpp
+        ViewManager.cpp
+        ViewSplitter.cpp
+        konsolebookmarkhandler.cpp
         zmodem_dialog.cpp
         keytrans.cpp
         BlockArray.cpp

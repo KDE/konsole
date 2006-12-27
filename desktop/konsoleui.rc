@@ -1,0 +1,33 @@
+<!DOCTYPE kpartgui>
+
+<kpartgui name="konsole">
+    <MenuBar>
+        <Menu name="file"><text>File</text>
+            <Action name="new-tab" />
+            <Action name="new-window" />
+            <Separator/>
+            <DefineGroup name="new-session-operations"/>
+            <Separator/>
+            <Action name="close-session"/>
+            <Action name="exit" />
+        </Menu>
+        <Menu name="edit"><text>Edit</text>
+            <DefineGroup name="edit-operations"/>
+        </Menu>
+        <Menu name="view"><text>View</text>
+            <DefineGroup name="view-operations"/>
+        </Menu>
+        <Action name="bookmark">
+        </Menu>
+        <Menu name="settings"><text>Settings</text>
+            <DefineGroup name="session-settings"/>
+            <Separator/>
+            <Action name="configure-notifications"/>
+            <Action name="configure-shortcuts"/>
+            <Action name="configure-application"/>
+        </Menu>
+        <Menu name="help"><text>Help</text>
+
+        </Menu>
+    </MenuBar>
+</kpartgui>

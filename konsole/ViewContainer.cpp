@@ -35,7 +35,6 @@
 #include <ktabwidget.h>
 
 // Konsole
-#include "NavigationItem.h"
 #include "ViewContainer.h"
 
 void ViewContainer::addView(QWidget* view , NavigationItem* item)
@@ -149,10 +148,10 @@ void TabbedViewContainer::showContextMenu(QWidget* widget , const QPoint& positi
 {
     //TODO - Use the tab under the mouse, not just the active tab
     _contextMenuTab = _tabWidget->indexOf(widget);
-    NavigationItem* item = navigationItem( widget );
+    //NavigationItem* item = navigationItem( widget );
    
     _tabContextMenu->clear();
-    _tabContextMenu->addActions( item->contextMenuActions(_viewActions) );
+//    _tabContextMenu->addActions( item->contextMenuActions(_viewActions) );
     _tabContextMenu->popup( position );
 }
 
@@ -172,10 +171,10 @@ void TabbedViewContainer::prepareColorCells()
 
 void TabbedViewContainer::viewAdded( QWidget* view )
 {
-    NavigationItem* item = navigationItem(view);
-    connect( item , SIGNAL(titleChanged(NavigationItem*)) , this , SLOT(updateTitle(NavigationItem*))); 
-    connect( item , SIGNAL(iconChanged(NavigationItem*) ) , this ,SLOT(updateIcon(NavigationItem*)));          
-    _tabWidget->addTab( view , item->icon() , item->title() );
+ //   NavigationItem* item = navigationItem(view);
+   // connect( item , SIGNAL(titleChanged(NavigationItem*)) , this , SLOT(updateTitle(NavigationItem*))); 
+   // connect( item , SIGNAL(iconChanged(NavigationItem*) ) , this ,SLOT(updateIcon(NavigationItem*)));          
+    _tabWidget->addTab( view , "Tab" ); //, item->icon() , item->title() );
 }
 void TabbedViewContainer::viewRemoved( QWidget* view )
 {
@@ -193,8 +192,8 @@ void TabbedViewContainer::updateIcon(NavigationItem* item)
     
     while ( itemIter.hasNext() )
     {
-        int index = _tabWidget->indexOf( itemIter.next() );
-        _tabWidget->setTabIcon( index , item->icon() );
+        //int index = _tabWidget->indexOf( itemIter.next() );
+      //  _tabWidget->setTabIcon( index , item->icon() );
     }
 }
 void TabbedViewContainer::updateTitle(NavigationItem* item) 
@@ -206,8 +205,8 @@ void TabbedViewContainer::updateTitle(NavigationItem* item)
 
     while ( itemIter.hasNext() )
     {
-        int index = _tabWidget->indexOf( itemIter.next() );
-        _tabWidget->setTabText( index , item->title() );
+        //int index = _tabWidget->indexOf( itemIter.next() );
+        //_tabWidget->setTabText( index , item->title() );
     }
 
 }
@@ -278,7 +277,7 @@ void StackedViewContainer::viewAdded( QWidget* view )
 {
     _stackWidget->addWidget(view);
 }
-void StackedViewContainer::viewRemoved( QWidget* view )
+void StackedViewContainer::viewRemoved( QWidget* /*view*/ )
 {}
 
 #include "ViewContainer.moc"

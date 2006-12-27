@@ -53,3 +53,5 @@ SessionManager* KonsoleApp::sessionManager()
 {
     return _sessionManager;
 }
+
+#include "KonsoleApp.moc"

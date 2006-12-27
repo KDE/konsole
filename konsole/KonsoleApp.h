@@ -17,6 +17,9 @@
     02110-1301  USA.
 */
 
+#ifndef KONSOLEAPP_H
+#define KONSOLEAPP_H
+
 // KDE 
 #include <KUniqueApplication>
 
@@ -28,6 +31,8 @@ class SessionManager;
  */
 class KonsoleApp : public KUniqueApplication
 {
+Q_OBJECT
+
 public:
     /** Constructs a new Konsole application. */
     KonsoleApp();
@@ -46,3 +51,5 @@ private:
     SessionManager* _sessionManager;
       
 };
+
+#endif //KONSOLEAPP_H

@@ -18,19 +18,24 @@
 
 // Born as kdelibs/kio/kfile/kfilebookmarkhandler.cpp
 
-#include <kmenu.h>
-#include <kstandarddirs.h>
-#include <kshell.h>
-#include <kio/job.h>
-#include <kio/netaccess.h>
-#include <kdebug.h>
-#include <kbookmarkmenu.h>
+// Qt
 #include <QFile>
 
-#include "konsole.h"
+// KDE
+#include <kshell.h>
+#include <kdebug.h>
+
+#include <KMainWindow>
+#include <KMenu>
+#include <KStandardDirs>
+#include <KIO/Job>
+#include <KIO/NetAccess>
+#include <KBookmarkMenu>
+
+// Konsole
 #include "konsolebookmarkhandler.h"
 
-KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel )
+KonsoleBookmarkHandler::KonsoleBookmarkHandler( KMainWindow* konsole, KMenu* menu, bool toplevel )
     : QObject( konsole ),
       KBookmarkOwner(),
       m_konsole( konsole ),
@@ -38,7 +43,7 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel 
 {
     setObjectName( "KonsoleBookmarkHandler" );
 
-    m_menu = new KMenu( konsole );
+    m_menu = menu;
 
     // KDE3.5 - Konsole's bookmarks are now in konsole/bookmarks.xml
     // TODO: Consider removing for KDE4
@@ -58,7 +63,9 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel 
         m_file = KStandardDirs::locateLocal( "data", "konsole/bookmarks.xml" );
 
     KBookmarkManager *manager = KBookmarkManager::managerForFile( m_file, "konsole", false);
-    manager->setEditorOptions(kapp->caption(), false);
+    
+    //TODO: Replace KApp with KonsoleApp::self()
+    //manager->setEditorOptions(KApp->caption(), false);
     manager->setUpdate( true );
 
     if (toplevel) {
@@ -92,12 +99,14 @@ bool KonsoleBookmarkHandler::editBookmarkEntry() const
 
 QString KonsoleBookmarkHandler::currentUrl() const
 {
-    return m_konsole->baseURL().prettyUrl();
+    qWarning() << __FILE__ << ":" << __FUNCTION__ << ": Needs to be implemented";
+    return QString(); //m_konsole->baseURL().prettyUrl();
 }
 
 QString KonsoleBookmarkHandler::currentTitle() const
 {
-    const KUrl &u = m_konsole->baseURL();
+    qWarning() << __FILE__ << ":" << __FUNCTION__ << ": Needs to be implemented";
+    const KUrl &u = QString(); //m_konsole->baseURL();
     if (u.isLocalFile())
     {
        QString path = u.path();

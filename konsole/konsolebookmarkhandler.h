@@ -29,13 +29,14 @@
 class KMenu;
 class KBookmarkMenu;
 class KBookmarkManager;
+class KMainWindow;
 
 class KonsoleBookmarkHandler : public QObject, public KBookmarkOwner
 {
     Q_OBJECT
 
 public:
-    KonsoleBookmarkHandler( Konsole *konsole, bool toplevel );
+    KonsoleBookmarkHandler( KMainWindow* konsole, KMenu* menu, bool toplevel );
     ~KonsoleBookmarkHandler();
 
     QMenu * popupMenu();
@@ -54,7 +55,7 @@ private Q_SLOTS:
     void openBookmark( const KBookmark & bm, Qt::MouseButtons, Qt::KeyboardModifiers );
 
 private:
-    Konsole *m_konsole;
+    KMainWindow *m_konsole;
     KMenu *m_menu;
     KBookmarkMenu *m_bookmarkMenu;
     QString m_file;
