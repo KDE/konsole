@@ -44,7 +44,6 @@
 
 // Konsole
 #include <config-konsole.h>
-#include "NavigationItem.h"
 #include "schema.h"
 #include "sessionadaptor.h"
 #include "sessionscriptingadaptor.h"
@@ -218,11 +217,13 @@ TEWidget* TESession::primaryView()
 
 NavigationItem* TESession::navigationItem()
 {
-    if (!_navigationItem)
+    /*if (!_navigationItem)
     {
         _navigationItem = new SessionNavigationItem(this);
     }
-    return _navigationItem;
+    return _navigationItem;*/
+    assert(0);
+    return 0;
 }
 
 void TESession::addView(TEWidget* widget)
@@ -599,7 +600,6 @@ TESession::~TESession()
 {
   delete _emulation;
   delete _shellProcess;
-  delete _navigationItem;
   delete zmodemProc;
 
   QListIterator<TEWidget*> viewIter(_views);

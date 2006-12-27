@@ -22,11 +22,13 @@
 #ifndef SESSIONMANAGER_H
 #define SESSIONMANAGER_H
 
-
-#include <QVariant>
+#include <QHash>
 #include <QList>
+#include <QPair>
+#include <QVariant>
 
 class KSimpleConfig;
+class KConfig;
 class TESession;
 
 /** 

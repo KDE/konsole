@@ -23,30 +23,51 @@ endif(KONSOLE_GENERATE_LINEFONT)
 
 ########### next target ###############
 
-set(konsole_KDEINIT_SRCS 
-   ${konsoleadaptors_SRCS}
-   ${sessionadaptors_SRCS}
-   TEPty.cpp 
-   BlockArray.cpp 
-   main.cpp 
-   konsole.cpp 
-   schema.cpp 
-   TESession.cpp 
-   TEWidget.cpp 
-   TEmuVt102.cpp 
-   TEScreen.cpp 
-   TEmulation.cpp 
-   TEHistory.cpp 
-   keytrans.cpp 
-   konsole_wcwidth.cpp 
-   konsolebookmarkhandler.cpp 
-   zmodem_dialog.cpp 
-   printsettings.cpp 
-   TerminalCharacterDecoder.cpp
-   SessionManager.cpp
-   ViewSplitter.cpp
-   ViewContainer.cpp  
-   NavigationItem.cpp )
+#set(konsole_KDEINIT_SRCS 
+#   ${konsoleadaptors_SRCS}
+#   ${sessionadaptors_SRCS}
+#   TEPty.cpp 
+#   BlockArray.cpp 
+#   main.cpp 
+#   konsole.cpp 
+#   schema.cpp 
+#   TESession.cpp 
+#   TEWidget.cpp 
+#   TEmuVt102.cpp 
+#   TEScreen.cpp 
+#   TEmulation.cpp 
+#   TEHistory.cpp 
+#   keytrans.cpp 
+#   konsole_wcwidth.cpp 
+#   konsolebookmarkhandler.cpp 
+#   zmodem_dialog.cpp 
+#   printsettings.cpp 
+#   TerminalCharacterDecoder.cpp
+#   SessionManager.cpp
+#   ViewSplitter.cpp
+#   ViewContainer.cpp  
+#   NavigationItem.cpp )
+
+set(konsole_KDEINIT_SRCS
+        ${sessionadaptors_SRCS}
+        start.cpp
+        KonsoleApp.cpp
+        KonsoleMainWindow.cpp
+        SessionManager.cpp
+        TESession.cpp
+        TEPty.cpp
+        TEmulation.cpp
+        TEmuVt102.cpp
+        TEHistory.cpp
+        TEScreen.cpp
+        TEWidget.cpp
+        zmodem_dialog.cpp
+        keytrans.cpp
+        BlockArray.cpp
+        TerminalCharacterDecoder.cpp
+        schema.cpp
+        konsole_wcwidth.cpp
+   ) 
 
 kde4_automoc(${konsole_KDEINIT_SRCS})
 
@@ -87,8 +108,7 @@ set(konsolepart_PART_SRCS
    TEHistory.cpp 
    keytrans.cpp 
    TerminalCharacterDecoder.cpp
-   SessionManager.cpp 
-   NavigationItem.cpp )
+   SessionManager.cpp ) 
 
 kde4_automoc(${konsolepart_PART_SRCS})
 
