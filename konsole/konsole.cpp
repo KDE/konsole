@@ -1181,7 +1181,7 @@ bool Konsole::queryClose()
 
    if ( b_warnQuit)
    {
-		KGuiItem closeTabsButton(i18n("Close sessions"),KStdGuiItem::quit().iconName());
+		KGuiItem closeTabsButton(i18n("Close sessions"),KStandardGuiItem::quit().iconName());
 
         if(sessions.count()>1) {
 	    switch (
@@ -3181,8 +3181,8 @@ void Konsole::slotToggleMasterMode()
                   i18n("Enabling this option will cause each key press to be sent to all running"
                       " sessions.  Are you sure you want to continue?") ,
                   i18n("Send Input to All Sessions"),
-                  KStdGuiItem::yes() ,
-                  KStdGuiItem::no(),
+                  KStandardGuiItem::yes() ,
+                  KStandardGuiItem::no(),
                   i18n("Remember my answer and do not ask again.")) == KMessageBox::Yes )
       {
         setMasterMode( masterMode->isChecked() );
@@ -3861,7 +3861,7 @@ void Konsole::slotFindHistory()
   if( !m_finddialog ) {
     m_finddialog = new KFindDialog(this);
     m_finddialog->setButtons( KDialog::User1|KDialog::Close );
-    m_finddialog->setButtonGuiItem( KDialog::User1, KStdGuiItem::find() );
+    m_finddialog->setButtonGuiItem( KDialog::User1, KStandardGuiItem::find() );
     m_finddialog->setModal(false);
     m_finddialog->setDefaultButton(KDialog::User1);
 
@@ -3941,7 +3941,7 @@ void Konsole::slotFind()
       if (forward) {
         if ( KMessageBox::questionYesNo( m_finddialog,
              i18n("End of history reached.\n" "Continue from the beginning?"),
-             i18n("Find"), KStdGuiItem::cont(), KStdGuiItem::cancel() ) == KMessageBox::Yes ) {
+             i18n("Find"), KStandardGuiItem::cont(), KStandardGuiItem::cancel() ) == KMessageBox::Yes ) {
           m_find_first = true;
           slotFind();
         }
@@ -3949,7 +3949,7 @@ void Konsole::slotFind()
       else {
         if ( KMessageBox::questionYesNo( m_finddialog,
              i18n("Beginning of history reached.\n" "Continue from the end?"),
-  	     i18n("Find"), KStdGuiItem::cont(), KStdGuiItem::cancel() ) == KMessageBox::Yes ) {
+  	     i18n("Find"), KStandardGuiItem::cont(), KStandardGuiItem::cancel() ) == KMessageBox::Yes ) {
           m_find_first = true;
    	  slotFind();
         }

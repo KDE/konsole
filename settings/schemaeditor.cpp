@@ -305,7 +305,7 @@ void SchemaEditor::removeCurrent()
 	int code = KMessageBox::warningContinueCancel(this,
 	    i18n("You are trying to remove a system schema. Are you sure?"),
 	    i18n("Removing System Schema"),
-	    KStdGuiItem::del());
+	    KStandardGuiItem::del());
 	if (code != KMessageBox::Continue)
 	    return;
     }
@@ -493,8 +493,8 @@ void SchemaEditor::querySave()
                          i18n("The schema has been modified.\n"
 			"Do you want to save the changes?"),
 			i18n("Schema Modified"),
-			KStdGuiItem::save(),
-			KStdGuiItem::discard());
+			KStandardGuiItem::save(),
+			KStandardGuiItem::discard());
     if (result == KMessageBox::Yes)
     {
         saveCurrent();
