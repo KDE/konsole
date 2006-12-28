@@ -46,8 +46,6 @@
    of cells and line/column indexed read access to the scroll
    at constant costs.
 
-KDE4: Can we use QTemporaryFile here, instead of KTempFile?
-
 FIXME: some complain about the history buffer comsuming the
        memory of their machines. This problem is critical
        since the history does not behave gracefully in cases
