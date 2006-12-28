@@ -12,6 +12,10 @@ if(Q_WS_X11)
  QT4_ADD_DBUS_INTERFACE( kcm_konsole_PART_SRCS ${kdesktop_background_xml} kdesktop_background_interface )
 endif(Q_WS_X11)
 
+set(klauncher_xml  ${DBUS_INTERFACES_DIR}/org.kde.KLauncher.xml)
+QT4_ADD_DBUS_INTERFACE( kcm_konsole_PART_SRCS ${klauncher_xml} klauncher_interface )
+
+
 kde4_automoc(${kcm_konsole_PART_SRCS})
 
 kde4_add_ui_files(kcm_konsole_PART_SRCS kcmkonsoledialog.ui sessiondialog.ui schemadialog.ui )

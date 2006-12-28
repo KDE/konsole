@@ -39,6 +39,7 @@
 #include <QDesktopWidget>
 #include "kdesktop_interface.h"
 #endif
+#include "klauncher_interface.h"
 
 typedef KGenericFactory<KCMKonsole, QWidget> ModuleFactory;
 K_EXPORT_COMPONENT_FACTORY( konsole, ModuleFactory("kcmkonsole") )
@@ -179,9 +180,8 @@ void KCMKonsole::save()
     desktop.configure();    
 #endif
     // ## Hmm, why do konsole sessions have something to do with klauncher's configuration? (David)
-    QDBusInterface klauncher("org.kde.klauncher", "/KLauncher", "org.kde.KLauncher");
-    if ( klauncher.isValid() )
-        klauncher.call( "reparseConfiguration" );
+    org::kde::KLauncher klauncher("org.kde.klauncher", "/KLauncher", QDBusConnection::sessionBus());
+    klauncher.reparseConfiguration();
 
     if (xonXoffOrig != xonXoffNew)
     {
