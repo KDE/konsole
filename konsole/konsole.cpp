@@ -89,7 +89,6 @@
 #include <kmenu.h>
 #include <kmenubar.h>
 #include <kmessagebox.h>
-#include <knotifydialog.h>
 #include <kpalette.h>
 #include <kparts/componentfactory.h>
 #include <kprinter.h>
