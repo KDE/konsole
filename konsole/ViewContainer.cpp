@@ -37,10 +37,9 @@
 // Konsole
 #include "ViewContainer.h"
 
-void ViewContainer::addView(QWidget* view , NavigationItem* item)
+void ViewContainer::addView(QWidget* view) //, NavigationItem* item)
 {
     _views << view;
-    _navigation[view] = item;
 
     connect( view , SIGNAL(destroyed(QObject*)) , this , SLOT( viewDestroyed(QObject*) ) );
 
@@ -52,6 +51,9 @@ void ViewContainer::viewDestroyed(QObject* object)
 
     _views.removeAll(widget);
     _navigation.remove(widget);
+
+    if (_views.count() == 0)
+        emit empty(this);
 }
 void ViewContainer::removeView(QWidget* view)
 {
@@ -59,6 +61,9 @@ void ViewContainer::removeView(QWidget* view)
     _navigation.remove(view);
 
     viewRemoved(view);
+
+    if (_views.count() == 0)
+        emit empty(this);
 }
 
 const QList<QWidget*> ViewContainer::views()
@@ -78,14 +83,16 @@ QList<QWidget*> ViewContainer::widgetsForItem(NavigationItem* item) const
     return _navigation.keys(item);
 }
 
-TabbedViewContainer::TabbedViewContainer() :  
-    _tabContextMenu(0) 
+TabbedViewContainer::TabbedViewContainer(QObject* parent) :
+    ViewContainer(parent)  
+   ,_tabContextMenu(0) 
    ,_tabSelectColorMenu(0)
    ,_tabColorSelector(0)
    ,_tabColorCells(0)
    ,_contextMenuTab(0) 
 {
     _tabWidget = new KTabWidget();
+    _tabContextMenu = new KMenu(_tabWidget);   
     
      //Create a colour selection palette and fill it with a range of suitable colours
      QString paletteName;
@@ -132,7 +139,6 @@ TabbedViewContainer::TabbedViewContainer() :
       //                  SLOT(slotTabSelectColor()));
     }
 
-   _tabContextMenu = new KMenu(_tabWidget);   
 
    connect( _tabWidget , SIGNAL(contextMenu(QWidget*,const QPoint&)),
                          SLOT(showContextMenu(QWidget*,const QPoint&))); 
@@ -253,7 +259,7 @@ void TabbedViewContainer::selectTabColor()
   _tabWidget->setTabTextColor( _contextMenuTab , color );
 }
 
-StackedViewContainer::StackedViewContainer()
+StackedViewContainer::StackedViewContainer(QObject* parent) : ViewContainer(parent)
 {
     _stackWidget = new QStackedWidget;
 }
@@ -277,7 +283,9 @@ void StackedViewContainer::viewAdded( QWidget* view )
 {
     _stackWidget->addWidget(view);
 }
-void StackedViewContainer::viewRemoved( QWidget* /*view*/ )
-{}
+void StackedViewContainer::viewRemoved( QWidget* view )
+{
+    _stackWidget->removeWidget(view);
+}
 
 #include "ViewContainer.moc"

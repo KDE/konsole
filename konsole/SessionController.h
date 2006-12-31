@@ -7,64 +7,84 @@
 #include <QString>
 
 // KDE
-#include <kactioncollection.h>
+#include <KActionCollection>
+#include <KXMLGUIClient>
 
 class QAction;
 
 class TESession;
+class TEWidget;
+
+/** 
+ * Provides information (such as the title and icon) associated with  
+ */
+/*class ViewProperties : public QObject 
+{
+    
+public:
+    ViewProperties(QObject* parent) : QObject(parent) {}
+
+    QIcon icon();
+    QString title();
+
+signals:
+    void iconChanged(const QIcon& icon);
+    void titleChanged(const QString& title);
+
+protected:
+    void setTitle(const QString& title);
+    void setIcon(const QIcon& icon);
+
+private:
+    QIcon _icon;
+    QString _title;
+};*/
 
 /**
+ * Provides the actions associated with a session in the Konsole main menu
+ * and exposes information such as the title and icon associated with the session to view containers.
  *
+ * Each view should have one SessionController associated with it
  */
-class SessionController : public QObject
+class SessionController : /*public ViewProperties ,*/ public QObject , public KXMLGUIClient
 {
 Q_OBJECT
     
 public:
-    enum MonitorType
-    {
-        Silence,
-        Activity
-    };
-
-    SessionController();
-
-    /** Returns the current title of the session */
-    QString title() const;
-    /** Returns the icon currently associated with the session */
-    QIcon icon() const;
-   
-
-
-    /** 
-     * Attempt to rename the session, prompting the user for a new name 
-     * Returns the new name of the session, or the previous name if the session name was not changed 
+    /**
+     * Constructs a new SessionController which operates on @p session and @p view.
      */
-    QString rename(); 
-    /** 
-     * Enable monitoring for certain types of events in the session 
-     * @param type The type of event to monitor in the session 
-     */
-    void monitor(MonitorType type); 
-    void sendToAllSessions();
+    SessionController(TESession* session , TEWidget* view, QObject* parent);
+
+    /** Reimplemented to watch for events happening to the view */
+    virtual bool eventFilter(QObject* watched , QEvent* event);
 
 signals:
-    /** Emitted whenever the title of the session changes */
-    void titleChanged( Controller* item );
-    /** Emitted whenver the icon associated with the session changes */
-    void iconChanged( Controller* item );
+    /**
+     * Emitted when the view associated with the controller is focused.  
+     * This can be used by other classes to plug the controller's actions into a window's
+     * menus. 
+     */
+    void focused( SessionController* controller );
 
-protected:
-    /** Sets the title returned by title() */
-    void setTitle( const QString& title );
-    /** Sets the icon returned by icon() */
-    void setIcon( const QIcon& icon );
+private slots:
+    void copy();
+    void paste();
+    void clear();
+    void clearAndReset();
+    void searchHistory();
+    void findNextInHistory();
+    void findPreviousInHistory();
+    void saveHistory();
+    void clearHistory();
+    void closeSession();
 
-
-    
 private:
-    QString _title;
-    QIcon _icon;
+    void setupActions();
+
+private:
+    TESession* _session;
+    TEWidget*  _view;
 };
 
 #endif //SESSIONCONTROLLER_H

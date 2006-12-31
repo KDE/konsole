@@ -246,7 +246,6 @@ TESession* SessionManager::createSession(QString configPath )
             session->setWorkingDirectory( activeSetting(InitialWorkingDirectory).toString() ); 
             session->setProgram( info->command(false) );
             session->setArguments( info->arguments() );
-            
             session->setTitle( info->name() );
             session->setIconName( info->icon() );
             
@@ -267,7 +266,7 @@ TESession* SessionManager::createSession(QString configPath )
 
 void SessionManager::sessionTerminated(TESession* session)
 {
-    kDebug() << __FILE__ << ": session finished " << endl;
+//    kDebug() << __FILE__ << ": session finished " << endl;
 
     _sessions.remove(session);
 }
@@ -307,8 +306,6 @@ QVariant SessionManager::activeSetting( Setting setting ) const
         }
     } 
 
-    kDebug() << "active setting for " << setting << ": " << value << endl;
-    
     return value;
 }
 

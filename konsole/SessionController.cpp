@@ -1,197 +1,125 @@
 
+// KDE
+#include <KAction>
+#include <KLocale>
+#include <kdebug.h>
 
 // Konsole
-#include "NavigationItem.h"
+#include "TESession.h"
+#include "TEWidget.h"
+#include "SessionController.h"
 
-// Terminal Session Navigation
-    // KDE
-    #include <kaction.h>
-    #include <kdebug.h>
-    #include <kinputdialog.h>
-    #include <klocale.h>
-    #include <kicon.h>
-    #include <kiconloader.h>
-    #include <ktoggleaction.h>
-
-    // Konsole
-    #include "TESession.h"
-
-NavigationItem::NavigationItem()
+SessionController::SessionController(TESession* session , TEWidget* view, QObject* parent)
+    : QObject(parent)
+        /*ViewProperties(parent) */
+    , KXMLGUIClient()
+    , _session(session)
+    , _view(view)
 {
+    setupActions();
+
+    view->installEventFilter(this);
 }
 
-QString NavigationItem::title() const
+bool SessionController::eventFilter(QObject* watched , QEvent* event)
 {
-    return _title;
-}
-QIcon NavigationItem::icon() const
-{
-    return _icon;
-}
-void NavigationItem::setTitle( const QString& title )
-{
-    _title = title;
-}
-void NavigationItem::setIcon( const QIcon& icon )
-{
-    _icon = icon;
+    if ( watched == _view )
+    {
+        if ( event->type() == QEvent::FocusIn )
+        {
+            emit focused(this);
+        }
+    }
+
+    return false;
 }
 
-QList<QAction*> NavigationItem::contextMenuActions( QList<QAction*> viewActions ) 
+void SessionController::setupActions()
 {
-    return viewActions;
-}
+    KAction* action = 0;
 
-SessionNavigationItem::SessionNavigationItem(TESession* session)
-    : _session(session)
-    , _collection(this)
-{
-    setTitle( _session->displayTitle() );   
-    setIcon( KIcon(_session->iconName()) ); 
+    setXMLFile("konsoleui.rc");
 
-    connect( _session , SIGNAL( updateTitle() ) , this , SLOT( updateTitle() ) );
-    connect( _session , SIGNAL( notifySessionState(TESession*,int) ) , this , 
-            SLOT( sessionStateChange(TESession*,int) ) );
+    // Close Session
+    action = new KAction( i18n("&Close Tab") , actionCollection() , "close-session" );
+    connect( action , SIGNAL(triggered()) , this , SLOT(closeSession()) );
 
-    //setup context menu
-    buildContextMenuActions();
-}
-
-
-QList<QAction*> SessionNavigationItem::contextMenuActions( QList<QAction*> viewActions )
-{
-    _actionList.contains(_viewSeparator);
-
-    QList<QAction*> actions = _actionList;
-
-    int index = actions.indexOf(_viewSeparator);
-    for (int i=0;i<viewActions.count();i++)
-        actions.insert(index+i+1,viewActions[i]);
+    // Copy and Paste
+    action = new KAction( i18n("&Copy") , actionCollection() , "copy" );
+    connect( action , SIGNAL(triggered()) , this , SLOT(copy()) );
     
-    return actions;
+    action = new KAction( i18n("&Paste") , actionCollection() , "paste" );
+    connect( action , SIGNAL(triggered()) , this , SLOT(paste()) );
+
+    // Clear and Clear+Reset
+    action = new KAction( i18n("C&lear Display") , actionCollection() , "clear" );
+    connect( action , SIGNAL(triggered()) , this , SLOT(clear()) );
+    
+    action = new KAction( i18n("Clear and Reset") , actionCollection() , "clear-and-reset" );
+    connect( action , SIGNAL(triggered()) , this , SLOT(clearAndReset()) );
+
+
+    // History
+    action = new KAction( i18n("Search History") , actionCollection() , "search-history" );
+    connect( action , SIGNAL(triggered()) , this , SLOT(searchHistory()) );
+    
+    action = new KAction( i18n("Find Next") , actionCollection() , "find-next" );
+    connect( action , SIGNAL(triggered()) , this , SLOT(findNextInHistory()) );
+    
+    action = new KAction( i18n("Find Previous") , actionCollection() , "find-previous" );
+    connect( action , SIGNAL(triggered()) , this , SLOT(findPreviousInHistory()) );
+    
+    action = new KAction( i18n("Save History") , actionCollection() , "save-history" );
+    connect( action , SIGNAL(triggered()) , this , SLOT(saveHistory()) );
+    
+    action = new KAction( i18n("Clear History") , actionCollection() , "clear-history" );
+    connect( action , SIGNAL(triggered()) , this , SLOT(clearHistory()) );
 }
 
-void  SessionNavigationItem::buildContextMenuActions() 
-{
-    QAction* monitorSeparator = new QAction(this);
-    monitorSeparator->setSeparator(true);
-    _viewSeparator = new QAction(this);
-    _viewSeparator->setSeparator(true);
-    QAction* closeSeparator = new QAction(this);
-    closeSeparator->setSeparator(true);
-
-    KAction* renameAction =  new KAction(i18n("&Rename Session"),&_collection,"rename_session");
-    connect( renameAction , SIGNAL(triggered()) , this , SLOT( renameSession() ) );
-   // _actionList << new QAction("&Detach Session...",this);
-    _actionList << renameAction;
-    _actionList << monitorSeparator;
-    
-    KToggleAction* monitorActivityAction = new KToggleAction( KIcon("activity") , 
-                                                i18n("Monitor for &Activity"),
-                                                &_collection , "monitor_activity");
-
-    monitorActivityAction->setCheckedState( KGuiItem(i18n("Stop Monitoring for &Activity")));
-    
-    connect( monitorActivityAction , SIGNAL(toggled(bool)) , this , SLOT(toggleMonitorActivity(bool)));
-    
-    _actionList << monitorActivityAction;
-    
-    KToggleAction* monitorSilenceAction = new KToggleAction( KIcon("silence") , i18n("Monitor for &Silence"),
-                                        &_collection , "monitor_silence" );
-    monitorSilenceAction->setCheckedState( KGuiItem(i18n("Stop Monitoring for &Silence")));
-    
-    connect( monitorSilenceAction , SIGNAL(toggled(bool)) , this , SLOT(toggleMonitorSilence(bool)));
-    _actionList << monitorSilenceAction;
-    
-   // _actionList << new KToggleAction("Send &Input to All Sessions",this);
-    _actionList << _viewSeparator;
-   // _actionList << viewActions;
-    _actionList << closeSeparator;
-
-    KAction* closeAction = new KAction( i18n("&Close Session") ,&_collection , "close_session");
-    connect( closeAction , SIGNAL(triggered()) , this , SLOT( closeSession() ) );
-    _actionList << closeAction;
-}
-
-void SessionNavigationItem::toggleMonitorActivity(bool monitor)
-{
-    _session->setMonitorActivity(monitor);    
-}
-void SessionNavigationItem::toggleMonitorSilence(bool monitor)
-{
-    _session->setMonitorSilence(monitor);
-}
-void SessionNavigationItem::closeSession()
+void SessionController::closeSession()
 {
     _session->closeSession();
 }
 
-void SessionNavigationItem::sessionStateChange(TESession* /* session */ , int state)
+void SessionController::copy()
 {
-    QString stateIconName;
-
-    switch ( state )
-    {
-        case NOTIFYNORMAL:
-            if ( _session->isMasterMode() )
-                stateIconName = "remote";
-            else
-                stateIconName = _session->iconName();
-            break;
-        case NOTIFYBELL:
-            stateIconName = "bell";
-            break;
-        case NOTIFYACTIVITY:
-            stateIconName = "activity";
-            break;
-        case NOTIFYSILENCE:
-            stateIconName = "silence";
-            break;
-    }
-
-    if ( stateIconName != _stateIconName )
-    {
-        _stateIconName = stateIconName;
-        
-        QPixmap iconPixmap = KGlobal::instance()->iconLoader()->loadIcon(stateIconName,K3Icon::Small,0,
-                        K3Icon::DefaultState,0L,true);
-
-        QIcon iconSet;
-        iconSet.addPixmap(iconPixmap,QIcon::Normal);
-
-        setIcon(iconSet);
-        emit iconChanged(this);
-    }
+    _view->copyClipboard(); 
 }
 
-void SessionNavigationItem::renameSession()
+void SessionController::paste()
 {
-    QString newTitle = _session->title();
-
-    bool success;
-
-    newTitle = KInputDialog::getText( i18n("Rename Session"), i18n("Session Name:") , 
-                                   newTitle , 
-                                   &success );
-
-    if ( success )
-    {
-        _session->setTitle(newTitle);
-
-        updateTitle();
-    }
+    _view->pasteClipboard();
 }
 
-void SessionNavigationItem::updateTitle()
+void SessionController::clear()
 {
-    kDebug() << " session title update " << endl;
-    kDebug() << " session icon update " << endl;
+    TEmulation* emulation = _session->getEmulation();
 
-    setTitle( _session->displayTitle() );
-    setIcon( KIcon(_session->iconName()) );
-    
-    emit titleChanged(this);
-    emit iconChanged(this);
+    emulation->clearEntireScreen();
+    emulation->clearSelection();
+}
+void SessionController::clearAndReset()
+{
+    TEmulation* emulation = _session->getEmulation();
+
+    emulation->reset();
+    emulation->clearSelection();
+}
+void SessionController::searchHistory()
+{
+}
+void SessionController::findNextInHistory()
+{
+}
+void SessionController::findPreviousInHistory()
+{
+}
+void SessionController::saveHistory()
+{
+}
+void SessionController::clearHistory()
+{
+    _session->clearHistory();
 }
 
-#include "NavigationItem.moc"
+#include "SessionController.moc"

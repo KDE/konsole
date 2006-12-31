@@ -59,13 +59,14 @@ class ViewContainer : public QObject
 Q_OBJECT
     
 public:
+    ViewContainer(QObject* parent) : QObject(parent) {}
     virtual ~ViewContainer() { emit destroyed(this); }
 
     /** Returns the widget which contains the view widgets */
     virtual QWidget* containerWidget() const = 0;
 
     /** Adds a new view to the container widget */
-    void addView(QWidget* view , NavigationItem* navigationItem);
+    void addView(QWidget* view); //NavigationItem* navigationItem);
     /** Removes a view from the container */
     void removeView(QWidget* view);
 
@@ -89,6 +90,9 @@ public:
 signals:
     /** Emitted when the container is deleted */
     void destroyed(ViewContainer* container);
+
+    /** Emitted when the container has no more children */
+    void empty(ViewContainer* container);
 
 protected:
     /** 
@@ -122,7 +126,7 @@ class TabbedViewContainer : public ViewContainer
     Q_OBJECT
 
 public:
-    TabbedViewContainer();
+    TabbedViewContainer(QObject* parent);
     virtual ~TabbedViewContainer();
     
     virtual QWidget* containerWidget() const;
@@ -159,7 +163,7 @@ private:
 class StackedViewContainer : public ViewContainer
 {
 public:
-    StackedViewContainer();
+    StackedViewContainer(QObject* parent);
     virtual ~StackedViewContainer();
 
     virtual QWidget* containerWidget() const;

@@ -47,7 +47,7 @@
 #include "schema.h"
 #include "sessionadaptor.h"
 #include "sessionscriptingadaptor.h"
-#include "zmodem_dialog.h"
+#include "ZModemDialog.h"
 
 #include "TESession.h"
 
@@ -548,7 +548,8 @@ void TESession::updateTerminalSize()
         }
     }  
 
-    if ( minLines != -1 && minColumns != -1 )
+    // backend emulation must have a terminal of at least 1 column x 1 line in size
+    if ( minLines > 0 && minColumns > 0 )
     {
         _emulation->onImageSizeChange( minLines , minColumns );
         _shellProcess->setSize( minLines , minColumns );

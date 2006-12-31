@@ -1,5 +1,5 @@
 /*
-    This file is part of Konsole, an X terminal.
+    This file is part of Konsole, a terminal emulator for KDE.
     
     Copyright (C) 2006 by Robert Knight <robertknight@gmail.com>
     Copyright (C) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
@@ -899,7 +899,7 @@ void TEWidget::setCursorPos(const int curx, const int cury)
 //of the image which has moved up or down.  instead only new lines have to be drawn
 //
 //note:  it is important that the area of the display which is scrolled aligns properly with
-//the character grid - which has a top left point at (0,1) , a cell width of font_w and a cell height
+//the character grid - which has a top left point at (bX,bY) , a cell width of font_w and a cell height
 //of font_h).    
 void TEWidget::scrollImage(int lines , const QRect& /*region*/)
 {
@@ -909,7 +909,9 @@ void TEWidget::scrollImage(int lines , const QRect& /*region*/)
 
     //scroll internal image
     if ( lines > 0 )
-    {   
+    {
+        assert( (lines*this->usedColumns) < image_size ); 
+
         //scrolling down
         memmove( image , &image[lines*this->usedColumns] , ( this->usedLines - lines ) * this->usedColumns * sizeof(ca) );
  
@@ -943,9 +945,11 @@ void TEWidget::scrollImage(int lines , const QRect& /*region*/)
 
 void TEWidget::setImage(const ca* const newimg, int lines, int columns)
 {
-
   if (!image)
      updateImageSize(); // Create image
+
+  assert( this->usedLines <= this->lines );
+  assert( this->usedColumns <= this->columns );
 
   int y,x,len;
 
@@ -958,10 +962,9 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
   cacol cb;       // undefined
   int cr  = -1;   // undefined
 
-  int linesToUpdate = qMin(this->lines, qMax(0,lines  ));
-  int columnsToUpdate = qMin(this->columns,qMax(0,columns));
+  const int linesToUpdate = qMin(this->lines, qMax(0,lines  ));
+  const int columnsToUpdate = qMin(this->columns,qMax(0,columns));
 
-  
   QChar *disstrU = new QChar[columnsToUpdate];
   char *dirtyMask = (char *) malloc(columnsToUpdate+2);
   QRegion dirtyRegion;
@@ -1276,7 +1279,7 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect)
       if (c)
          disstrU[p++] = c; //fontMap(c);
       bool lineDraw = isLineChar(c);
-      bool doubleWidth = (image[loc(x,y)+1].c == 0);
+      bool doubleWidth = (image[ qMin(loc(x,y)+1,image_size) ].c == 0);
       cacol cf = image[loc(x,y)].f;
       cacol cb = image[loc(x,y)].b;
       UINT8 cr = image[loc(x,y)].r;
@@ -1285,7 +1288,7 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect)
              image[loc(x+len,y)].f == cf &&
              image[loc(x+len,y)].b == cb &&
              image[loc(x+len,y)].r == cr &&
-             (image[loc(x+len,y)+1].c == 0) == doubleWidth &&
+             (image[ qMin(loc(x+len,y)+1,image_size) ].c == 0) == doubleWidth &&
              isLineChar( c = image[loc(x+len,y)].c) == lineDraw) // Assignment!
       {
         if (c)
@@ -1333,14 +1336,14 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect)
          
 		 fixed_font = save_fixed_font;
      
-		 //reset back to single-width, single-height usedLines 
+		 //reset back to single-width, single-height lines 
 		 paint.resetMatrix();
 
 		 if (y < lineProperties.size())
 		 {
-			//double-height usedLines are represented by two adjacent usedLines containing the same characters
-			//both usedLines will have the LINE_DOUBLEHEIGHT attribute.  If the current line has the LINE_DOUBLEHEIGHT
-			//attribute, we can therefore skip the next line
+			//double-height lines are represented by two adjacent lines containing the same characters
+			//both lines will have the LINE_DOUBLEHEIGHT attribute.  
+            //If the current line has the LINE_DOUBLEHEIGHT attribute, we can therefore skip the next line
 			if (lineProperties[y] & LINE_DOUBLEHEIGHT)
 				y++;
 		 }
@@ -1416,11 +1419,25 @@ void TEWidget::updateImageSize()
 
   if ( resizing )
   {
-    if ( isVisible() )
-        emit changedContentSizeSignal(contentHeight, contentWidth); // expose resizeEvent
+    emit changedContentSizeSignal(contentHeight, contentWidth); // expose resizeEvent
   }
   
   resizing = false;
+}
+
+//showEvent and hideEvent are reimplemented here so that it appears to other classes that the 
+//display has been resized when the display is hidden or shown.
+//
+//this allows  
+//TODO: Perhaps it would be better to have separate signals for show and hide instead of using
+//the same signal as the one for a content size change 
+void TEWidget::showEvent(QShowEvent*)
+{
+    emit changedContentSizeSignal(contentHeight,contentWidth);
+}
+void TEWidget::hideEvent(QHideEvent*)
+{
+    emit changedContentSizeSignal(contentHeight,contentWidth);
 }
 
 /* ------------------------------------------------------------------------- */
@@ -1432,6 +1449,11 @@ void TEWidget::updateImageSize()
 void TEWidget::scrollChanged(int)
 {
   emit changedHistoryCursor(scrollbar->value()); //expose
+}
+
+int TEWidget::scrollPosition()
+{
+    return scrollbar->value();
 }
 
 void TEWidget::setScroll(int cursor, int slines)
@@ -2141,6 +2163,7 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
   if ( (e->type() == QEvent::Accel ||
        e->type() == QEvent::AccelAvailable ) && qApp->focusWidget() == this )
   {
+
       static_cast<QKeyEvent *>( e )->ignore();
       return false;
   }
@@ -2409,13 +2432,13 @@ void TEWidget::calcGeometry()
 
   if (!isFixedSize)
   {
-     columns = contentWidth / font_w;
-
-     if (columns<1) {
-       kDebug(1211) << "TEWidget::calcGeometry: columns=" << columns << endl;
-       columns=1;
-     }
-     lines = contentHeight / font_h;
+     // ensure that display is always at least one column wide
+     columns = qMax(1,contentWidth / font_w);
+     usedColumns = qMin(usedColumns,columns);
+     
+     // ensure that display is always at least one line high
+     lines = qMax(1,contentHeight / font_h);
+     usedLines = qMin(usedLines,lines);
   }
 }
 
@@ -2423,7 +2446,14 @@ void TEWidget::makeImage()
 {
   
   calcGeometry();
+
+  // confirm that array will be of non-zero size, since the painting code 
+  // assumes a non-zero array length
+  assert( lines > 0 && columns > 0 );
+  assert( usedLines <= lines && usedColumns <= columns );
+
   image_size=lines*columns;
+  
   // We over-commit 1 character so that we can be more relaxed in dealing with
   // certain boundary conditions: image[image_size] is a valid but unused position
   image = (ca*) malloc((image_size+1)*sizeof(ca));
@@ -2433,12 +2463,6 @@ void TEWidget::makeImage()
 // calculate the needed size
 void TEWidget::setSize(int cols, int lins)
 {
-
-   //int frw = width() - contentsRect().width();
-  //int frh = height() - contentsRect().height();
-  //int scw = (scrollLoc==SCRNONE?0:scrollbar->width());
-  //m_size = QSize(font_w*cols + 2*rimX + frw + scw, font_h*lins + 2*rimY + frh + /* mysterious */ 1);
- 
   int deltaColumns = cols - columns;
   int deltaLines = lins - lines;
 
@@ -2451,8 +2475,13 @@ void TEWidget::setSize(int cols, int lins)
 void TEWidget::setFixedSize(int cols, int lins)
 {
   isFixedSize = true;
-  columns = cols;
-  lines = lins;
+  
+  //ensure that display is at least 1 line by 1 column in size
+  columns = qMax(1,cols);
+  lines = qMax(1,lins);
+  usedColumns = qMin(usedColumns,columns);
+  usedLines = qMin(usedLines,lines);
+
   if (image)
   {
      free(image);

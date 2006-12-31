@@ -538,14 +538,29 @@ void TEmulation::showBulk()
 
   if (connected)
   {
-    ca* image = scr->getCookedImage();
-    QVector<LineProperty> lineProperties = scr->getCookedLineProperties();
+    ca* image = 0; 
+    QVector<LineProperty> lineProperties; 
+    QListIterator<TEWidget*> viewIter(_views);
 
-    QListIterator<TEWidget*> viewIter(_views); // QPointer<TEWidget> > viewIter(_views);
+    const int originalHistCursor = scr->getHistCursor();
+
+    // keep track of the scroll position of the previous view 
+    // this allows each view to show a different scroll position,
+    // but avoids repeatedly getting a new character image and line property set from
+    // the TEScreen if the views are showing the same image
+    int prevHistCursor = -1;
 
     while (viewIter.hasNext())
     {
         TEWidget* view = viewIter.next();
+
+        if ( prevHistCursor == -1 || prevHistCursor != view->scrollPosition() )
+        {
+            prevHistCursor = view->scrollPosition();
+            scr->setHistCursor(prevHistCursor);
+            image = scr->getCookedImage();
+            lineProperties = scr->getCookedLineProperties(); 
+        }
 
         QRect scrollRegion;
         scrollRegion.setTop( scr->topMargin() );
@@ -566,22 +581,6 @@ void TEmulation::showBulk()
     scr->resetScrolledLines();  
     free(image);
   }
-
-  /*if (connected)
-  {
-    ca* image = scr->getCookedImage();    // get the image
-   
-    //TODO:  Setting line properties and image should be done in the same method call
-	//to ensure that the two don't get out of sync in the gui.	
-    gui->setLineProperties( scr->getCookedLineProperties() );
-	gui->setImage(image,
-                  scr->getLines(),
-                  scr->getColumns());     // actual refresh
-    gui->setCursorPos(scr->getCursorX(), scr->getCursorY());	// set XIM position
-    free(image);
-    
-	gui->setScroll(scr->getHistCursor(),scr->getHistLines());
-  }*/
 }
 
 void TEmulation::bulkStart()
@@ -597,7 +596,6 @@ void TEmulation::bulkStart()
 
 void TEmulation::setConnect(bool c)
 {
-   //kDebug(1211)<<"TEmulation::setConnect()"<<endl;
   connected = c;
   if ( connected)
   {
@@ -635,6 +633,10 @@ void TEmulation::onImageSizeChange(int lines, int columns)
   if (!connected) return;
   
   emit ImageSizeChanged(columns, lines);   // propagate event
+
+  // temporary - schedule an update
+  //bulkStart(); 
+  showBulk();
 }
 
 QSize TEmulation::imageSize()

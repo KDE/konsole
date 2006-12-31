@@ -16,7 +16,7 @@
  *  Boston, MA 02110-1301, USA.
  **/
 
-#include "zmodem_dialog.h"
+#include "ZModemDialog.h"
 
 #include <q3textedit.h>
 
@@ -61,4 +61,4 @@ void ZModemDialog::slotClose()
   accept();
 }
 
-#include "zmodem_dialog.moc"
+#include "ZModemDialog.moc"

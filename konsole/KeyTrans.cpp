@@ -25,7 +25,7 @@
    FIXME: some bug crept in, disallowing '\0' to be emitted.
 */
 
-#include "keytrans.h"
+#include "KeyTrans.h"
 #include <QBuffer>
 #include <QObject>
 #include <q3intdict.h>

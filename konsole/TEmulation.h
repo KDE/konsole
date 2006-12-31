@@ -32,7 +32,7 @@
 #include <QTimer>
 
 // Konsole
-#include <keytrans.h>
+#include "KeyTrans.h"
 #include "TEScreen.h"
 #include "TEWidget.h"
 
@@ -75,6 +75,13 @@ public:
    * @p widget will no longer be updated when the emulation output changes.
    */
   virtual void removeView(TEWidget* widget);
+
+  /**
+   * Updates all views associated with this emulation immediately.
+   * Usually the emulation will send a new image to the associated views when the content changes,
+   * automatically.  
+   */
+  //virtual void updateViews();
 
 public:
   /** Returns the size of the screen image which the emulation produces */

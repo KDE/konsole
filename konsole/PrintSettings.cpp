@@ -18,7 +18,7 @@
  *  Boston, MA 02110-1301, USA.
  **/
 
-#include "printsettings.h"
+#include "PrintSettings.h"
 
 #include <klocale.h>
 #include <QCheckBox>

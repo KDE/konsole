@@ -19,6 +19,9 @@
     02110-1301  USA.
 */
 
+// KDE
+#include "kdebug.h"
+
 // Konsole
 #include "ViewContainer.h"
 #include "ViewSplitter.h"
@@ -62,6 +65,7 @@ void ViewSplitter::registerContainer( ViewContainer* container )
     //qDebug() << __FUNCTION__ << ": adding container " << ((QTabWidget*)container->containerWidget())->tabText(0);
     
     connect( container , SIGNAL(destroyed(ViewContainer*)) , this , SLOT( containerDestroyed(ViewContainer*) ) );
+    connect( container , SIGNAL(empty(ViewContainer*)) , this , SLOT( containerEmpty(ViewContainer*) ) );
 }
 
 void ViewSplitter::unregisterContainer( ViewContainer* container )
@@ -96,7 +100,6 @@ void ViewSplitter::updateSizes()
 void ViewSplitter::addContainer( ViewContainer* container , 
                                  Qt::Orientation containerOrientation )
 {
-    
    ViewSplitter* splitter = activeSplitter();   
     
     if ( splitter->count() < 2 || containerOrientation == splitter->orientation() )
@@ -129,6 +132,21 @@ void ViewSplitter::addContainer( ViewContainer* container ,
          
         splitter->insertWidget(oldContainerIndex,newSplitter);
     }
+
+}
+
+void ViewSplitter::containerEmpty(ViewContainer* object)
+{
+    QListIterator<ViewContainer*> containerIter(_containers);
+    
+    int children = 0;
+    while (containerIter.hasNext())
+    {
+        children += containerIter.next()->views().count();
+    }
+
+    if ( children == 0 )
+        emit allContainersEmpty(); 
 }
 
 void ViewSplitter::containerDestroyed(ViewContainer* object)
@@ -137,8 +155,6 @@ void ViewSplitter::containerDestroyed(ViewContainer* object)
     
     _containers.removeAll(object);
 
-    //qDebug() << __FUNCTION__ << ": remaining widgets = " << count();
-    
     if ( count() == 0 )
     {
         emit empty(this);

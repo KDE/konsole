@@ -55,13 +55,17 @@ class QLabel;
 class QTimer;
 class QFrame;
 class QGridLayout;
+class QShowEvent;
+class QHideEvent;
 
 /**
  * A widget which displays output from a terminal emulation and sends input keypresses and mouse activity
  * to the terminal.
  *
- * TEWidget does not know anything about the emulations to which it is connected.  When the emulation receives new 
- * output from the program running in the terminal, it will update the display by calling setImage().
+ * TEWidget does not know anything about the terminal emulation whoose output it is displaying.
+ *
+ * When the terminal emulation receives new output from the program running in the terminal, 
+ * it will update the display by calling setImage().
  */
 class TEWidget : public QFrame
 {
@@ -85,6 +89,7 @@ public:
 
     void setScroll(int cursor, int lines);
     void doScroll(int lines);
+    int  scrollPosition();
 
     bool blinkingCursor() { return hasBlinkingCursor; }
     void setBlinkingCursor(bool blink);
@@ -235,6 +240,8 @@ protected:
 
     void paintContents(QPainter &paint, const QRect &rect);
 
+    void showEvent(QShowEvent*);
+    void hideEvent(QHideEvent*);
     void resizeEvent(QResizeEvent*);
 
     void fontChange(const QFont &font);
@@ -300,11 +307,13 @@ private:
     int lines;      // the number of lines that can be displayed in the widget
     int columns;    // the number of columns that can be displayed in the widget
     
-    int usedLines;  // the number of lines that are actually being used
-                    // this is updated when the widget's image is changed using setImage()
+    int usedLines;  // the number of lines that are actually being used, this will be less
+                    // than 'lines' if the character image provided with setImage() is smaller
+                    // than the maximum image size which can be displayed
 
-    int usedColumns; // the number of columns that are actually being used
-                     // this is updated when the widget's image is changed using setImage()
+    int usedColumns; // the number of columns that are actually being used, this will be less
+                     // than 'columns' if the character image provided with setImage() is smaller
+                     // than the maximum image size which can be displayed
     
     int contentHeight;
     int contentWidth;

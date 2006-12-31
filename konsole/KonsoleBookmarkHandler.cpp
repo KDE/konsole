@@ -33,7 +33,7 @@
 #include <KBookmarkMenu>
 
 // Konsole
-#include "konsolebookmarkhandler.h"
+#include "KonsoleBookmarkHandler.h"
 
 KonsoleBookmarkHandler::KonsoleBookmarkHandler( KMainWindow* konsole, KMenu* menu, bool toplevel )
     : QObject( konsole ),
@@ -116,4 +116,4 @@ QString KonsoleBookmarkHandler::currentTitle() const
     return u.prettyUrl();
 }
 
-#include "konsolebookmarkhandler.moc"
+#include "KonsoleBookmarkHandler.moc"

@@ -53,6 +53,8 @@ set(konsole_KDEINIT_SRCS
         start.cpp
         KonsoleApp.cpp
         KonsoleMainWindow.cpp
+        SessionController.cpp
+        SessionList.cpp
         SessionManager.cpp
         TESession.cpp
         TEPty.cpp
@@ -64,11 +66,12 @@ set(konsole_KDEINIT_SRCS
         ViewContainer.cpp
         ViewManager.cpp
         ViewSplitter.cpp
-        konsolebookmarkhandler.cpp
-        zmodem_dialog.cpp
-        keytrans.cpp
+        KonsoleBookmarkHandler.cpp
+        ZModemDialog.cpp
+        KeyTrans.cpp
         BlockArray.cpp
         TerminalCharacterDecoder.cpp
+        IncrementalSearchBar.cpp
         schema.cpp
         konsole_wcwidth.cpp
    ) 
@@ -103,14 +106,14 @@ set(konsolepart_PART_SRCS
    konsole_part.cpp 
    schema.cpp 
    TESession.cpp 
-   zmodem_dialog.cpp 
+   ZModemDialog.cpp 
    TEWidget.cpp 
    TEmuVt102.cpp 
    TEScreen.cpp 
    konsole_wcwidth.cpp 
    TEmulation.cpp 
    TEHistory.cpp 
-   keytrans.cpp 
+   KeyTrans.cpp 
    TerminalCharacterDecoder.cpp
    SessionManager.cpp ) 
 

@@ -108,9 +108,9 @@ void TEmuVt102::setReceiveViewInput(TEWidget* view , bool enable)
    }
    else
    {
-        QObject::disconnect(view,SIGNAL(mouseSignal(int,int,int,int)),
+        QObject::disconnect(view,0,
                   this,SLOT(onMouse(int,int,int,int)));
-        QObject::disconnect(view, SIGNAL(sendStringToEmu(const char*)),
+        QObject::disconnect(view,0,
  		   this, SLOT(sendString(const char*)));
    }
 }

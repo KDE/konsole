@@ -6,19 +6,37 @@
             <Action name="new-tab" />
             <Action name="new-window" />
             <Separator/>
-            <DefineGroup name="new-session-operations"/>
+            <ActionList name="new-session-types"/>
             <Separator/>
             <Action name="close-session"/>
             <Action name="exit" />
         </Menu>
         <Menu name="edit"><text>Edit</text>
-            <DefineGroup name="edit-operations"/>
+            <Action name="copy"/>
+            <Action name="paste"/>
+            <Separator/>
+            <Action name="zmodem-upload"/>
+            <Separator/>
+            <Action name="clear"/>
+            <Action name="clear-and-reset"/>
+        </Menu>
+        <Menu name="history"><text>History</text>
+            <Action name="search-history"/>
+            <Action name="find-next"/>
+            <Action name="find-previous"/>
+            <Action name="save-history"/>
+            <Separator/>
+            <Action name="clear-history"/>
         </Menu>
         <Menu name="view"><text>View</text>
-            <DefineGroup name="view-operations"/>
+            <Action name="monitor-activity"/>
+            <Action name="monitor-silence" />
+            <Separator/>
+            <Action name="split-view"/>
+            <Action name="detach-view"/>
+            <Action name="merge-windows"/>
         </Menu>
-        <Action name="bookmark">
-        </Menu>
+        <Action name="bookmark"/>
         <Menu name="settings"><text>Settings</text>
             <DefineGroup name="session-settings"/>
             <Separator/>

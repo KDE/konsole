@@ -87,6 +87,14 @@ signals:
     /** Signal emitted when the last child widget is removed from the splitter */
     void empty(ViewSplitter* splitter);
 
+    /** 
+     * Signal emitted when the containers held by this splitter become empty, this
+     * differs from the empty() signal which is only emitted when all of the containers
+     * are deleted.  This signal is emitted even if there are still container widgets.
+     *
+     * TODO: This does not yet work recursively (ie. when splitters inside splitters have empty containers)  
+     */
+    void allContainersEmpty();
 private:
     // Adds container to splitter's internal list and
     // connects signals and slots
@@ -100,6 +108,10 @@ private:
 private slots:
     // Called to indicate that a child ViewContainer has been deleted
     void containerDestroyed( ViewContainer* object );
+
+    // Called to indicate that a child ViewContainer is empty
+    void containerEmpty( ViewContainer* object );
+
     // Called to indicate that a child ViewSplitter is empty
     // (ie. all child widgets have been deleted)
     void childEmpty( ViewSplitter* splitter );
