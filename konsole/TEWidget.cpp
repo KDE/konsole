@@ -1455,6 +1455,10 @@ int TEWidget::scrollPosition()
 {
     return scrollbar->value();
 }
+bool TEWidget::scrollAtEnd()
+{
+    return (scrollbar->value() == scrollbar->maximum());
+}
 
 void TEWidget::setScroll(int cursor, int slines)
 {

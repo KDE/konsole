@@ -37,42 +37,43 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
 void SessionController::setupActions()
 {
     KAction* action = 0;
+    KActionCollection* collection = actionCollection();
 
     setXMLFile("konsoleui.rc");
-
+    
     // Close Session
-    action = new KAction( i18n("&Close Tab") , actionCollection() , "close-session" );
+    action = new KAction( KIcon("fileclose"), i18n("&Close Tab") , collection , "close-session" );
     connect( action , SIGNAL(triggered()) , this , SLOT(closeSession()) );
-
+    
     // Copy and Paste
-    action = new KAction( i18n("&Copy") , actionCollection() , "copy" );
+    action = new KAction( KIcon("editcopy") , i18n("&Copy") , collection , "copy" );
     connect( action , SIGNAL(triggered()) , this , SLOT(copy()) );
     
-    action = new KAction( i18n("&Paste") , actionCollection() , "paste" );
+    action = new KAction( KIcon("editpaste") , i18n("&Paste") , collection , "paste" );
     connect( action , SIGNAL(triggered()) , this , SLOT(paste()) );
 
     // Clear and Clear+Reset
-    action = new KAction( i18n("C&lear Display") , actionCollection() , "clear" );
+    action = new KAction( i18n("C&lear Display") , collection , "clear" );
     connect( action , SIGNAL(triggered()) , this , SLOT(clear()) );
     
-    action = new KAction( i18n("Clear and Reset") , actionCollection() , "clear-and-reset" );
+    action = new KAction( i18n("Clear and Reset") , collection , "clear-and-reset" );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearAndReset()) );
 
 
     // History
-    action = new KAction( i18n("Search History") , actionCollection() , "search-history" );
+    action = new KAction( KIcon("find") , i18n("Search History") , collection , "search-history" );
     connect( action , SIGNAL(triggered()) , this , SLOT(searchHistory()) );
     
-    action = new KAction( i18n("Find Next") , actionCollection() , "find-next" );
+    action = new KAction( KIcon("next") , i18n("Find Next") , collection , "find-next" );
     connect( action , SIGNAL(triggered()) , this , SLOT(findNextInHistory()) );
     
-    action = new KAction( i18n("Find Previous") , actionCollection() , "find-previous" );
+    action = new KAction( KIcon("previous") , i18n("Find Previous") , collection , "find-previous" );
     connect( action , SIGNAL(triggered()) , this , SLOT(findPreviousInHistory()) );
     
-    action = new KAction( i18n("Save History") , actionCollection() , "save-history" );
+    action = new KAction( i18n("Save History") , collection , "save-history" );
     connect( action , SIGNAL(triggered()) , this , SLOT(saveHistory()) );
     
-    action = new KAction( i18n("Clear History") , actionCollection() , "clear-history" );
+    action = new KAction( i18n("Clear History") , collection , "clear-history" );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearHistory()) );
 }
 

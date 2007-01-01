@@ -1,5 +1,8 @@
-TODO before merging with /trunk
-===============================
+
+== NOTE: This TODO refers to the old Konsole code, before the start of a new front-end
+         using KonsoleApp and KonsoleMainWindow.  Some parts do not apply to the new
+         front-end
+=========================================================================================
 
 - [DONE] Kill views when the associated session dies
 - [DONE] Single top-bottom split-view menu action

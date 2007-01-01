@@ -34,8 +34,9 @@
 
 // Konsole
 #include "TESession.h"
+#include "TEHistory.h"
 #include "SessionManager.h"
-
+#include "schema.h"
 
 SessionInfo::SessionInfo(const QString& path)
 {
@@ -193,6 +194,9 @@ SessionManager::SessionManager()
             _defaultSessionType = newType;
     }
 
+    // load the colour scheme list
+    _colorSchemeList = new ColorSchemaList();
+
     Q_ASSERT( _types.count() > 0 );
     Q_ASSERT( _defaultSessionType != 0 );
 }
@@ -203,6 +207,8 @@ SessionManager::~SessionManager()
     
     while (infoIter.hasNext())
         delete infoIter.next();
+
+    delete _colorSchemeList;
 }
 
 const QList<TESession*> SessionManager::sessions()
@@ -248,7 +254,11 @@ TESession* SessionManager::createSession(QString configPath )
             session->setArguments( info->arguments() );
             session->setTitle( info->name() );
             session->setIconName( info->icon() );
+            session->setSchema( _colorSchemeList->find(activeSetting(ColorScheme).toString()) );
             
+                //temporary
+                session->setHistory( HistoryTypeBuffer(1000) );
+
             //ask for notification when session dies
             connect( session , SIGNAL(done(TESession*)) , SLOT(sessionTerminated(TESession*)) ); 
 

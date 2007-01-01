@@ -61,23 +61,25 @@ ViewManager* KonsoleMainWindow::viewManager()
 
 void KonsoleMainWindow::setupActions()
 {
+    KActionCollection* collection = actionCollection();
+
     // File Menu
-    KAction* newTabAction = new KAction( i18n("New &Tab") , actionCollection() , "new-tab" ); 
-    KAction* newWindowAction = new KAction( i18n("New &Window") , actionCollection() , "new-window" );
+    KAction* newTabAction = new KAction( KIcon("openterm") , i18n("New &Tab") , collection , "new-tab" ); 
+    KAction* newWindowAction = new KAction( KIcon("window_new") , i18n("New &Window") , collection , "new-window" );
 
     connect( newTabAction , SIGNAL(triggered()) , this , SLOT(newTab()) );
     connect( newWindowAction , SIGNAL(triggered()) , this , SLOT(newWindow()) );
 
-    KStandardAction::quit( KonsoleApp::self() , SLOT(quit()) , actionCollection() ,"exit");
+    KStandardAction::quit( KonsoleApp::self() , SLOT(quit()) , collection ,"exit");
 
     // Bookmark Menu
-    KActionMenu* bookmarkMenu = new KActionMenu(i18n("&Bookmarks"), actionCollection(),"bookmark");
+    KActionMenu* bookmarkMenu = new KActionMenu(i18n("&Bookmarks"), collection,"bookmark");
     new KonsoleBookmarkHandler( this , bookmarkMenu->menu() , true );
 
     // Settings Menu
-    KStandardAction::configureNotifications( 0 , 0 , actionCollection() , "configure-notifications" );
-    KStandardAction::keyBindings( this , SLOT(showShortcutsDialog()) , actionCollection() , "configure-shortcuts" );
-    KStandardAction::preferences( this , SLOT(showPreferencesDialog()) , actionCollection() , 
+    KStandardAction::configureNotifications( 0 , 0 , collection , "configure-notifications" );
+    KStandardAction::keyBindings( this , SLOT(showShortcutsDialog()) , collection , "configure-shortcuts" );
+    KStandardAction::preferences( this , SLOT(showPreferencesDialog()) , collection , 
                                   "configure-application" ); 
 }
 

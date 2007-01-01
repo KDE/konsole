@@ -24,6 +24,8 @@
 #include <QHash>
 #include <QObject>
 
+class KToggleAction;
+
 class KonsoleMainWindow;
 class TESession;
 class TEWidget;
@@ -86,11 +88,16 @@ private:
     void unregisterView(TEWidget* view);
 
     ViewContainer* createContainer();
+    // creates a new terminal display
     TEWidget* createTerminalDisplay();
+    // applies the view-specific settings such as colour scheme associated
+    // with 'session' to 'view'
+    void loadViewSettings(TEWidget* view , TESession* session);
     SessionController* createController(TESession* session , TEWidget* display);
 
 private:
     KonsoleMainWindow*          _mainWindow;
+    KToggleAction*              _splitViewAction;
     ViewSplitter*               _viewSplitter;
     SessionController*          _pluggedController;
     QHash<TEWidget*,TESession*> _sessionMap;

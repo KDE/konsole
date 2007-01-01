@@ -64,8 +64,6 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( KMainWindow* konsole, KMenu* men
 
     KBookmarkManager *manager = KBookmarkManager::managerForFile( m_file, "konsole", false);
     
-    //TODO: Replace KApp with KonsoleApp::self()
-    //manager->setEditorOptions(KApp->caption(), false);
     manager->setUpdate( true );
 
     if (toplevel) {

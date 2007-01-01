@@ -31,6 +31,8 @@ class KSimpleConfig;
 class KConfig;
 class TESession;
 
+class ColorSchemaList;
+
 /** 
  * Provides information about a type of 
  * session, including the title of the session
@@ -262,10 +264,11 @@ private:
 
     SessionInfo* _defaultSessionType;
 
-
     typedef QPair<Source,QVariant> SourceVariant;
     
     QHash< Setting , QList< SourceVariant > >  _settings;
+
+    ColorSchemaList* _colorSchemeList;
 };
 
 #endif //SESSIONMANAGER_H

@@ -59,6 +59,9 @@ public:
     /** Reimplemented to watch for events happening to the view */
     virtual bool eventFilter(QObject* watched , QEvent* event);
 
+    TESession* session() { return _session; }
+    TEWidget*  view()    { return _view;    }
+
 signals:
     /**
      * Emitted when the view associated with the controller is focused.  

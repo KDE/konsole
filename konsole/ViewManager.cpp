@@ -17,6 +17,9 @@
     02110-1301  USA.
 */
 
+// System
+#include <assert.h>
+
 // KDE
 #include <kdebug.h>
 #include <KLocale>
@@ -27,6 +30,7 @@
 #include "KonsoleMainWindow.h"
 #include "TESession.h"
 #include "TEWidget.h"
+#include "schema.h"
 #include "SessionController.h"
 #include "SessionManager.h"
 #include "ViewContainer.h"
@@ -60,19 +64,21 @@ ViewManager::~ViewManager()
 
 void ViewManager::setupActions()
 {
-    KToggleAction* splitViewAction = new KToggleAction( i18n("&Split View"), 
-                                            _mainWindow->actionCollection() , "split-view" );
-    splitViewAction->setCheckedState( KGuiItem(i18n("&Remove Split")) );
-    connect( splitViewAction , SIGNAL(toggled(bool)) , this , SLOT(splitView(bool)));
+    KActionCollection* collection = _mainWindow->actionCollection();
+
+    _splitViewAction = new KToggleAction( KIcon("view_top_bottom"),i18n("&Split View"), 
+                                            collection , "split-view" );
+    _splitViewAction->setCheckedState( KGuiItem(i18n("&Remove Split") , KIcon("view_remove") ) );
+    connect( _splitViewAction , SIGNAL(toggled(bool)) , this , SLOT(splitView(bool)));
 
 
-    KAction* detachViewAction = new KAction( i18n("&Detach View"),
-                                           _mainWindow->actionCollection() , "detach-view" );
+    KAction* detachViewAction = new KAction( KIcon("view_remove") , i18n("&Detach View"),
+                                           collection , "detach-view" );
 
     connect( detachViewAction , SIGNAL(triggered()) , this , SLOT(detachActiveView()) );
 
     KAction* mergeAction = new KAction( i18n("&Merge Windows"),
-                                           _mainWindow->actionCollection() , "merge-windows" );
+                                           collection , "merge-windows" );
     connect( mergeAction , SIGNAL(triggered()) , _mainWindow , SLOT(mergeWindows()) );
 }
 
@@ -101,6 +107,10 @@ void ViewManager::detachActiveView()
          container->views().count() == 0 )
     {
         delete container;
+
+        // this will need to be removed if Konsole is modified so the menu item to
+        // split the view is no longer one toggle-able item
+        _splitViewAction->setChecked(false);
     }
 
 }
@@ -126,7 +136,11 @@ void ViewManager::viewFocused( SessionController* controller )
         if ( _pluggedController )
             _mainWindow->guiFactory()->removeClient(_pluggedController);
 
+        // update the menus in the main window to use the actions from the active
+        // controller 
         _mainWindow->guiFactory()->addClient(controller);
+        // update the caption of the main window to match that of the focused session
+        _mainWindow->setPlainCaption( controller->session()->displayTitle() );
 
         _pluggedController = controller;
     }
@@ -145,7 +159,8 @@ void ViewManager::splitView(bool splitView)
         while (existingViewIter.hasNext())
         {
             TESession* session = _sessionMap[(TEWidget*)existingViewIter.next()];
-            TEWidget* display = createTerminalDisplay(); 
+            TEWidget* display = createTerminalDisplay();
+            loadViewSettings(display,session); 
             createController(session,display);
 
             _sessionMap[display] = session;
@@ -189,6 +204,7 @@ void ViewManager::createView(TESession* session)
     {
         ViewContainer* container = containerIter.next();
         TEWidget* display = createTerminalDisplay();
+        loadViewSettings(display,session);
         createController(session,display);
 
         _sessionMap[display] = session; 
@@ -218,9 +234,16 @@ void ViewManager::merge(ViewManager* otherManager)
 
     while ( otherViewIter.hasNext() )
     {
-        QWidget* view = otherViewIter.next();
+        TEWidget* view = dynamic_cast<TEWidget*>(otherViewIter.next());
+        
+        assert(view);
+
         otherContainer->removeView(view);
         activeContainer->addView(view);
+
+        // transfer the session map entries
+        _sessionMap.insert(view,otherManager->_sessionMap[view]);
+        otherManager->_sessionMap.remove(view);
     } 
 }
 
@@ -238,6 +261,13 @@ TEWidget* ViewManager::createTerminalDisplay()
    display->setScrollbarLocation(TEWidget::SCRRIGHT);
 
    return display;
+}
+
+void ViewManager::loadViewSettings(TEWidget* view , TESession* session)
+{
+    // load colour scheme
+    view->setColorTable( session->schema()->table() );
+
 }
 
 #include "ViewManager.moc"

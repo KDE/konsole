@@ -542,38 +542,32 @@ void TEmulation::showBulk()
     QVector<LineProperty> lineProperties; 
     QListIterator<TEWidget*> viewIter(_views);
 
-    const int originalHistCursor = scr->getHistCursor();
-
-    // keep track of the scroll position of the previous view 
-    // this allows each view to show a different scroll position,
-    // but avoids repeatedly getting a new character image and line property set from
-    // the TEScreen if the views are showing the same image
-    int prevHistCursor = -1;
+    image = scr->getCookedImage();
+    lineProperties = scr->getCookedLineProperties(); 
 
     while (viewIter.hasNext())
     {
         TEWidget* view = viewIter.next();
-
-        if ( prevHistCursor == -1 || prevHistCursor != view->scrollPosition() )
-        {
-            prevHistCursor = view->scrollPosition();
-            scr->setHistCursor(prevHistCursor);
-            image = scr->getCookedImage();
-            lineProperties = scr->getCookedLineProperties(); 
-        }
-
+        
         QRect scrollRegion;
         scrollRegion.setTop( scr->topMargin() );
         scrollRegion.setBottom( scr->bottomMargin() );
         scrollRegion.setLeft( 0 );
         scrollRegion.setRight( scr->getColumns() );
 
+        // this is an optimisation to avoid the view having to redraw the entire display
+        // when the output is simply scrolled by a few lines.
+        // scr->scrolledLines() is a guess as to how much the output has scrolled by since
+        // the last call to scr->resetScrolledLines().  It does not matter if this count is
+        // wrong since the final output from the view will always be the image set with
+        // setImage() below.
         view->scrollImage( - scr->scrolledLines() , scrollRegion );
-    
+   
+        // update the display 
         view->setLineProperties( lineProperties );
 	    view->setImage(image,
                   scr->getLines(),
-                  scr->getColumns());     // actual refresh
+                  scr->getColumns());     
         view->setCursorPos(scr->getCursorX(), scr->getCursorY());	// set XIM position
 	    view->setScroll(scr->getHistCursor(),scr->getHistLines()); 
     }

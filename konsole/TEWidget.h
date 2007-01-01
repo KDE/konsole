@@ -90,6 +90,7 @@ public:
     void setScroll(int cursor, int lines);
     void doScroll(int lines);
     int  scrollPosition();
+    bool scrollAtEnd();
 
     bool blinkingCursor() { return hasBlinkingCursor; }
     void setBlinkingCursor(bool blink);
