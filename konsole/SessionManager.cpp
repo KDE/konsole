@@ -249,13 +249,14 @@ TESession* SessionManager::createSession(QString configPath )
             while (iter.hasNext())
                 kDebug() << "running " << info->command(false) << ": argument " << iter.next() << endl;
            
-            session->setWorkingDirectory( activeSetting(InitialWorkingDirectory).toString() ); 
+            session->setInitialWorkingDirectory( activeSetting(InitialWorkingDirectory).toString() ); 
             session->setProgram( info->command(false) );
             session->setArguments( info->arguments() );
             session->setTitle( info->name() );
             session->setIconName( info->icon() );
             session->setSchema( _colorSchemeList->find(activeSetting(ColorScheme).toString()) );
-            
+            session->setTerminalType( info->terminal() );
+
                 //temporary
                 session->setHistory( HistoryTypeBuffer(1000) );
 
@@ -276,8 +277,6 @@ TESession* SessionManager::createSession(QString configPath )
 
 void SessionManager::sessionTerminated(TESession* session)
 {
-//    kDebug() << __FILE__ << ": session finished " << endl;
-
     _sessions.remove(session);
 }
 

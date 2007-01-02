@@ -25,6 +25,7 @@
 #include <QList>
 #include <QSplitter>
 
+class QFocusEvent;
 class ViewContainer;
 
 /**
@@ -95,6 +96,10 @@ signals:
      * TODO: This does not yet work recursively (ie. when splitters inside splitters have empty containers)  
      */
     void allContainersEmpty();
+
+protected:
+    //virtual void focusEvent(QFocusEvent* event);
+
 private:
     // Adds container to splitter's internal list and
     // connects signals and slots

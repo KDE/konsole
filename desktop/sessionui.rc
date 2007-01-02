@@ -1,0 +1,28 @@
+<!DOCTYPE kpartgui>
+
+<kpartgui name="session">
+    <MenuBar>
+        <Menu name="file"><text>File</text>
+            <Action name="close-session" group="session-operations"/>
+        </Menu>
+        <Menu name="edit"><text>Edit</text>
+            <Action name="copy" group="session-edit-operations" />
+            <Action name="paste" group="session-edit-operations" />
+            <Separator group="session-edit-operations"/>
+            <Action name="clear" group="session-edit-operations" />
+            <Action name="clear-and-reset" group="session-edit-operations" />
+        </Menu>
+        <Menu name="history"><text>History</text>
+            <Action name="search-history" group="session-history-operations"/>
+            <Action name="find-next" group="session-history-operations"/>
+            <Action name="find-previous" group="session-history-operations"/>
+            <Action name="save-history" group="session-history-operations"/>
+            <Separator group="session-history-operations"/>
+            <Action name="clear-history" group="session-history-operations"/>
+        </Menu>
+        <Menu name="view"><text>View</text>
+            <Action name="monitor-silence" group="session-view-operations" />
+            <Action name="monitor-activity" group="session-view-operations" />
+        </Menu>
+    </MenuBar>
+</kpartgui>

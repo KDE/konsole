@@ -87,10 +87,6 @@ void KonsoleApp::createSession(const QString& key , ViewManager* view)
 {
     TESession* session = _sessionManager->createSession(key);
     session->setConnect(true);
-
-    //temporary - test history feature
-    //session->setHistory( HistoryTypeBuffer(1000) );
-
     session->run();
     view->createView(session);
 }

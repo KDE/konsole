@@ -1,7 +1,7 @@
 /*
     This file is part of the Konsole Terminal.
     
-    Copyright (C) 2006 Robert Knight <robertknight@gmail.com>
+    Copyright (C) 2006-2007 Robert Knight <robertknight@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,10 +36,12 @@
 
 // Konsole
 #include "ViewContainer.h"
+#include "ViewProperties.h"
 
-void ViewContainer::addView(QWidget* view) //, NavigationItem* item)
+void ViewContainer::addView(QWidget* view , ViewProperties* item)
 {
     _views << view;
+    _navigation[view] = item;
 
     connect( view , SIGNAL(destroyed(QObject*)) , this , SLOT( viewDestroyed(QObject*) ) );
 
@@ -71,14 +73,14 @@ const QList<QWidget*> ViewContainer::views()
     return _views;
 }
 
-NavigationItem* ViewContainer::navigationItem( QWidget* widget )
+ViewProperties* ViewContainer::viewProperties( QWidget* widget )
 {
     Q_ASSERT( _navigation.contains(widget) );
 
     return _navigation[widget];    
 }
 
-QList<QWidget*> ViewContainer::widgetsForItem(NavigationItem* item) const
+QList<QWidget*> ViewContainer::widgetsForItem(ViewProperties* item) const
 {
     return _navigation.keys(item);
 }
@@ -177,10 +179,10 @@ void TabbedViewContainer::prepareColorCells()
 
 void TabbedViewContainer::viewAdded( QWidget* view )
 {
- //   NavigationItem* item = navigationItem(view);
-   // connect( item , SIGNAL(titleChanged(NavigationItem*)) , this , SLOT(updateTitle(NavigationItem*))); 
-   // connect( item , SIGNAL(iconChanged(NavigationItem*) ) , this ,SLOT(updateIcon(NavigationItem*)));          
-    _tabWidget->addTab( view , "Tab" ); //, item->icon() , item->title() );
+    ViewProperties* item = viewProperties(view);
+    connect( item , SIGNAL(titleChanged(ViewProperties*)) , this , SLOT(updateTitle(ViewProperties*))); 
+    connect( item , SIGNAL(iconChanged(ViewProperties*) ) , this ,SLOT(updateIcon(ViewProperties*)));          
+    _tabWidget->addTab( view , item->icon() , item->title() );
 }
 void TabbedViewContainer::viewRemoved( QWidget* view )
 {
@@ -189,7 +191,7 @@ void TabbedViewContainer::viewRemoved( QWidget* view )
     _tabWidget->removeTab( _tabWidget->indexOf(view) );
 }
 
-void TabbedViewContainer::updateIcon(NavigationItem* item)
+void TabbedViewContainer::updateIcon(ViewProperties* item)
 {
     kDebug() << __FUNCTION__ << ": icon changed." << endl;
 
@@ -198,11 +200,11 @@ void TabbedViewContainer::updateIcon(NavigationItem* item)
     
     while ( itemIter.hasNext() )
     {
-        //int index = _tabWidget->indexOf( itemIter.next() );
-      //  _tabWidget->setTabIcon( index , item->icon() );
+        int index = _tabWidget->indexOf( itemIter.next() );
+        _tabWidget->setTabIcon( index , item->icon() );
     }
 }
-void TabbedViewContainer::updateTitle(NavigationItem* item) 
+void TabbedViewContainer::updateTitle(ViewProperties* item) 
 {
     kDebug() << __FUNCTION__ << ": title changed." << endl;
 
@@ -211,8 +213,8 @@ void TabbedViewContainer::updateTitle(NavigationItem* item)
 
     while ( itemIter.hasNext() )
     {
-        //int index = _tabWidget->indexOf( itemIter.next() );
-        //_tabWidget->setTabText( index , item->title() );
+        int index = _tabWidget->indexOf( itemIter.next() );
+        _tabWidget->setTabText( index , item->title() );
     }
 
 }

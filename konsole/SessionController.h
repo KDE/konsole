@@ -10,35 +10,13 @@
 #include <KActionCollection>
 #include <KXMLGUIClient>
 
+// Konsole
+#include "ViewProperties.h"
+
 class QAction;
 
 class TESession;
 class TEWidget;
-
-/** 
- * Provides information (such as the title and icon) associated with  
- */
-/*class ViewProperties : public QObject 
-{
-    
-public:
-    ViewProperties(QObject* parent) : QObject(parent) {}
-
-    QIcon icon();
-    QString title();
-
-signals:
-    void iconChanged(const QIcon& icon);
-    void titleChanged(const QString& title);
-
-protected:
-    void setTitle(const QString& title);
-    void setIcon(const QIcon& icon);
-
-private:
-    QIcon _icon;
-    QString _title;
-};*/
 
 /**
  * Provides the actions associated with a session in the Konsole main menu
@@ -46,7 +24,7 @@ private:
  *
  * Each view should have one SessionController associated with it
  */
-class SessionController : /*public ViewProperties ,*/ public QObject , public KXMLGUIClient
+class SessionController : public ViewProperties , public KXMLGUIClient
 {
 Q_OBJECT
     
@@ -81,6 +59,11 @@ private slots:
     void saveHistory();
     void clearHistory();
     void closeSession();
+    void monitorActivity(bool monitor);
+    void monitorSilence(bool monitor);
+
+    void sessionStateChanged(TESession* session,int state);
+    void sessionTitleChanged();
 
 private:
     void setupActions();
@@ -88,6 +71,12 @@ private:
 private:
     TESession* _session;
     TEWidget*  _view;
+    KIcon      _sessionIcon;
+    QString    _sessionIconName;
+    int        _previousState;
+
+    static KIcon _activityIcon;
+    static KIcon _silenceIcon;
 };
 
 #endif //SESSIONCONTROLLER_H

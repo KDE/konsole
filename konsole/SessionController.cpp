@@ -1,7 +1,9 @@
 
 // KDE
 #include <KAction>
+#include <KIcon>
 #include <KLocale>
+#include <KToggleAction>
 #include <kdebug.h>
 
 // Konsole
@@ -9,16 +11,29 @@
 #include "TEWidget.h"
 #include "SessionController.h"
 
+KIcon SessionController::_activityIcon;
+KIcon SessionController::_silenceIcon;
+
 SessionController::SessionController(TESession* session , TEWidget* view, QObject* parent)
-    : QObject(parent)
-        /*ViewProperties(parent) */
+    : ViewProperties(parent)
     , KXMLGUIClient()
     , _session(session)
     , _view(view)
+    , _previousState(-1)
 {
+    setXMLFile("sessionui.rc");
     setupActions();
 
+    sessionTitleChanged();
+    
     view->installEventFilter(this);
+
+    // listen to activity / silence notifications from session
+    connect( _session , SIGNAL(notifySessionState(TESession*,int)) , this ,
+            SLOT(sessionStateChanged(TESession*,int) ));
+
+    // list to title and icon changes
+    connect( _session , SIGNAL(updateTitle()) , this , SLOT(sessionTitleChanged()) );
 }
 
 bool SessionController::eventFilter(QObject* watched , QEvent* event)
@@ -39,8 +54,6 @@ void SessionController::setupActions()
     KAction* action = 0;
     KActionCollection* collection = actionCollection();
 
-    setXMLFile("konsoleui.rc");
-    
     // Close Session
     action = new KAction( KIcon("fileclose"), i18n("&Close Tab") , collection , "close-session" );
     connect( action , SIGNAL(triggered()) , this , SLOT(closeSession()) );
@@ -59,6 +72,12 @@ void SessionController::setupActions()
     action = new KAction( i18n("Clear and Reset") , collection , "clear-and-reset" );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearAndReset()) );
 
+    // Monitor
+    action = new KToggleAction( i18n("Monitor for &Activity") , collection , "monitor-activity" );
+    connect( action , SIGNAL(toggled(bool)) , this , SLOT(monitorActivity(bool)) );
+
+    action = new KToggleAction( i18n("Monitor for &Silence") , collection , "monitor-silence" );
+    connect( action , SIGNAL(toggled(bool)) , this , SLOT(monitorSilence(bool)) );
 
     // History
     action = new KAction( KIcon("find") , i18n("Search History") , collection , "search-history" );
@@ -121,6 +140,64 @@ void SessionController::saveHistory()
 void SessionController::clearHistory()
 {
     _session->clearHistory();
+}
+void SessionController::monitorActivity(bool monitor)
+{
+    _session->setMonitorActivity(monitor);
+}
+void SessionController::monitorSilence(bool monitor)
+{
+    _session->setMonitorSilence(monitor); 
+}
+void SessionController::sessionTitleChanged()
+{
+        if ( _sessionIconName != _session->iconName() )
+        { 
+            _sessionIconName = _session->iconName();
+            _sessionIcon = KIcon( _sessionIconName );
+            setIcon( _sessionIcon );
+        }
+           
+       setTitle( _session->displayTitle() ); 
+}
+void SessionController::sessionStateChanged(TESession* /*session*/ , int state)
+{
+    //TODO - Share icons across sessions ( possible using a static QHash<QString,QIcon> variable 
+    // to create a cache of icons mapped from icon names? )
+
+    if ( state == _previousState )
+        return;
+
+    _previousState = state;
+
+    if ( state == NOTIFYACTIVITY )
+    {
+        if (_activityIcon.isNull())
+        {
+            _activityIcon = KIcon("activity");
+        }
+
+        setIcon(_activityIcon);
+    } 
+    else if ( state == NOTIFYSILENCE )
+    {
+        if (_silenceIcon.isNull())
+        {
+            _silenceIcon = KIcon("silence");
+        }
+
+        setIcon(_silenceIcon);
+    }
+    else if ( state == NOTIFYNORMAL )
+    {
+        if ( _sessionIconName != _session->iconName() )
+        { 
+            _sessionIconName = _session->iconName();
+            _sessionIcon = KIcon( _sessionIconName );
+        }
+            
+        setIcon( _sessionIcon );
+    }
 }
 
 #include "SessionController.moc"

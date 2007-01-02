@@ -65,6 +65,7 @@ set(konsole_KDEINIT_SRCS
         TEWidget.cpp
         ViewContainer.cpp
         ViewManager.cpp
+        ViewProperties.cpp
         ViewSplitter.cpp
         KonsoleBookmarkHandler.cpp
         ZModemDialog.cpp

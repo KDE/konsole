@@ -83,7 +83,7 @@ private slots:
 
 private:
     void setupActions();
-
+    void focusActiveView();
     void registerView(TEWidget* view);
     void unregisterView(TEWidget* view);
 

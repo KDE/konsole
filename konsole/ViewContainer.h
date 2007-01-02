@@ -30,7 +30,7 @@
 class QStackedWidget;
 class QWidget;
 
-class NavigationItem;
+class ViewProperties;
 
 // TabbedViewContainer
     // Qt
@@ -66,12 +66,13 @@ public:
     virtual QWidget* containerWidget() const = 0;
 
     /** Adds a new view to the container widget */
-    void addView(QWidget* view); //NavigationItem* navigationItem);
+    void addView(QWidget* view , ViewProperties* navigationItem);
+ 
     /** Removes a view from the container */
     void removeView(QWidget* view);
 
-    /** Returns the navigation item associated with a particular view in the container */
-    NavigationItem* navigationItem(  QWidget* view );   
+    /** Returns the ViewProperties instance associated with a particular view in the container */
+    ViewProperties* viewProperties(  QWidget* view );   
     
     /** Returns a list of the contained views */
     const QList<QWidget*> views();
@@ -107,14 +108,14 @@ protected:
     virtual void viewRemoved(QWidget* view) = 0;
     
     /** Returns the widgets which are associated with a particular navigation item */
-    QList<QWidget*> widgetsForItem( NavigationItem* item ) const;
+    QList<QWidget*> widgetsForItem( ViewProperties* item ) const;
 
 private slots:
     void viewDestroyed(QObject* view);
 
 private:
     QList<QWidget*> _views;
-    QHash<QWidget*,NavigationItem*> _navigation;
+    QHash<QWidget*,ViewProperties*> _navigation;
 };
 
 /** 
@@ -138,8 +139,8 @@ protected:
     virtual void viewRemoved( QWidget* view ); 
 
 private slots:
-    void updateTitle(NavigationItem* item);
-    void updateIcon(NavigationItem* item);
+    void updateTitle(ViewProperties* item);
+    void updateIcon(ViewProperties* item);
 
     void selectTabColor();
     void prepareColorCells();

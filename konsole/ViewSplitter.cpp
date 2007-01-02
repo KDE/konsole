@@ -19,6 +19,9 @@
     02110-1301  USA.
 */
 
+// Qt
+#include <QFocusEvent>
+
 // KDE
 #include "kdebug.h"
 
@@ -135,7 +138,7 @@ void ViewSplitter::addContainer( ViewContainer* container ,
 
 }
 
-void ViewSplitter::containerEmpty(ViewContainer* object)
+void ViewSplitter::containerEmpty(ViewContainer* /*object*/)
 {
     QListIterator<ViewContainer*> containerIter(_containers);
     

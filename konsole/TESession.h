@@ -40,7 +40,6 @@ class KProcess;
 class ZModemDialog;
 
 class ColorSchema;
-class NavigationItem;
 
 /**
  * TESession represents a Konsole session.
@@ -105,16 +104,6 @@ public:
    */
   TEWidget* primaryView();
 
-  /**
-   * Returns the navigation item for this session.
-   * The navigation item provides information about the session such as associated title and icon
-   * for use by widgets which allow the user to select between views belonging to different sessions.
-   *
-   * The navigation item also provides actions which can be placed in a menu
-   * to allow the user to control various aspects of the session.
-   */
-  NavigationItem* navigationItem();
-  
   /** 
    * Returns true if the session has created child processes which have not yet terminated 
    * This call may be expensive if there are a large number of processes running. 
@@ -131,7 +120,21 @@ public:
   int schemaNo();
   int encodingNo();
   int fontNo();
-  const QString& Term() const;
+
+  /** 
+   * Returns the value of the TERM environment variable which will be used in the session's
+   * environment when it is started using the run() method.
+   * Defaults to "xterm".
+   */  
+  const QString& terminalType() const;
+  /** 
+   * Sets the value of the TERM variable which will be used in the session's environment
+   * when it is started using the run() method.  Changing this once the session has been
+   * started using run() has no effect
+   * Defaults to "xterm" if not set explicitly
+   */
+  void setTerminalType(const QString& terminalType);
+
   const QString& SessionId() const;
   const QString& title() const;
   const QString& iconName() const;
@@ -161,18 +164,15 @@ public:
   void setProgram(const QString& program);
 
   /** Returns the session's current working directory. */
-  QString getCwd();
-  QString getInitial_cwd() { return initial_cwd; }
+  QString currentWorkingDirectory();
+  QString initialWorkingDirectory() { return initial_cwd; }
   
   /** 
    * Sets the initial working directory for the session when it is run 
    * This has no effect once the session has been started.
    */
-  void setWorkingDirectory( const QString& dir ) { initial_cwd = dir; }
-  //void setInitial_cwd(const QString& _cwd) { initial_cwd=_cwd; }
-
-  
-  
+  void setInitialWorkingDirectory( const QString& dir ) { initial_cwd = dir; }
+ 
   void setHistory(const HistoryType&);
   const HistoryType& history();
 
@@ -180,11 +180,15 @@ public:
   void setMonitorSilence(bool);
   void setMonitorSilenceSeconds(int seconds);
   void setMasterMode(bool);
-//  void setSchemaNo(int sn);
-  void setEncodingNo(int index);
-  void setKeymapNo(int kn);
+  
+    //TODO - Remove these functions which use indicies to reference keyboard layouts,
+    //       encodings etc. and replace them either with methods that uses pointers or references
+    //       to the font object / keyboard layout object etc. or a QString key
+    void setEncodingNo(int index);
+    void setKeymapNo(int kn);
+    void setFontNo(int fn);
+  
   void setKeymap(const QString& _id);
-  void setFontNo(int fn);
   void setTitle(const QString& _title);
   void setIconName(const QString& _iconName);
   void setIconText(const QString& _iconText);
@@ -196,7 +200,6 @@ public:
   void setAutoClose(bool b) { autoClose = b; }
   void renameSession(const QString &name);
 
-  // Additional functions for DCOP
   bool closeSession();
   void clearHistory();
   void feedSession(const QString &text);
@@ -330,8 +333,6 @@ private:
 
   QColor         modifiedBackground; // as set by: echo -en '\033]11;Color\007
   int            encoding_no;
-
-  NavigationItem* _navigationItem;
 
   ColorSchema*   _colorScheme;
   

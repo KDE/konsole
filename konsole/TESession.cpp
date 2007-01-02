@@ -73,7 +73,6 @@ TESession::TESession() :
    , zmodemProc(0)
    , zmodemProgress(0)
    , encoding_no(0)
-   , _navigationItem(0)
    , _colorScheme(0)
 {
     //prepare DBus communication
@@ -213,17 +212,6 @@ TEWidget* TESession::primaryView()
         return _views.first();
     else
         return 0;
-}
-
-NavigationItem* TESession::navigationItem()
-{
-    /*if (!_navigationItem)
-    {
-        _navigationItem = new SessionNavigationItem(this);
-    }
-    return _navigationItem;*/
-    assert(0);
-    return 0;
 }
 
 void TESession::addView(TEWidget* widget)
@@ -462,14 +450,6 @@ QString TESession::displayTitle() const
         return title();
 }
 
-/*QString TESession::fullTitle() const
-{
-    QString res = _title;
-    if ( !_userTitle.isEmpty() )
-        res = _userTitle + " - " + res;
-    return res;
-}*/
-
 void TESession::monitorTimerDone()
 {
   //FIXME: The idea here is that the notification popup will appear to tell the user than output from
@@ -525,7 +505,7 @@ void TESession::notifySessionState(int state)
   emit notifySessionState(this, state);
 }
 
-void TESession::onContentSizeChange(int height, int width)
+void TESession::onContentSizeChange(int /*height*/, int /*width*/)
 {
   updateTerminalSize();
 }
@@ -670,11 +650,6 @@ TEmulation* TESession::getEmulation()
 
 // following interfaces might be misplaced ///
 
-//int TESession::schemaNo()
-//{
-//  return schema_no;
-//}
-
 int TESession::encodingNo()
 {
   return encoding_no;
@@ -695,20 +670,20 @@ int TESession::fontNo()
   return _fontNo;
 }
 
-const QString & TESession::Term() const
+const QString& TESession::terminalType() const
 {
   return term;
+}
+
+void TESession::setTerminalType(const QString& terminalType)
+{
+    term = terminalType;
 }
 
 const QString & TESession::SessionId() const
 {
   return sessionId;
 }
-
-/*void TESession::setSchemaNo(int sn)
-{
-  schema_no = sn;
-}*/
 
 void TESession::setEncodingNo(int index)
 {
@@ -804,7 +779,7 @@ QString TESession::getPgm()
   return _program;
 }
 
-QString TESession::getCwd()
+QString TESession::currentWorkingDirectory()
 {
 #ifdef HAVE_PROC_CWD
   if (cwd.isEmpty()) {
@@ -1020,18 +995,6 @@ ColorSchema* TESession::schema()
 {
     return _colorScheme;
 }
-
-/*QString TESession::schema()
-{
-  QString currentSchema;
-  emit getSessionSchema(this, currentSchema);
-  return currentSchema;
-}*/
-
-//void TESession::setSchema(const QString &schema)
-//{
-//  emit setSessionSchema(this, schema);
-//}
 
 void TESession::setSchema(ColorSchema* schema)
 {

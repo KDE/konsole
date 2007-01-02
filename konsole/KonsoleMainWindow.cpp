@@ -46,11 +46,11 @@ KonsoleMainWindow::KonsoleMainWindow()
     setupActions();
 
     // create view manager
+    setXMLFile("konsoleui.rc");
     _viewManager = new ViewManager(this);
-    connect( _viewManager , SIGNAL(empty()) , this , SLOT(deleteLater()) );
+    connect( _viewManager , SIGNAL(empty()) , this , SLOT(close()) );
 
     // create menus
-    setXMLFile("konsoleui.rc");
     createGUI();
 }
 

@@ -126,7 +126,22 @@ void ViewManager::sessionFinished( TESession* session )
             _sessionMap.remove(view);
             delete view;
         }
-    } 
+    }
+
+    focusActiveView(); 
+}
+
+void ViewManager::focusActiveView()
+{
+    ViewContainer* container = _viewSplitter->activeContainer(); 
+    if ( container )
+    {
+        QWidget* activeView = container->activeView();
+        if ( activeView )
+        {
+            activeView->setFocus(Qt::MouseFocusReason);
+        }
+    }
 }
 
 void ViewManager::viewFocused( SessionController* controller )
@@ -161,12 +176,11 @@ void ViewManager::splitView(bool splitView)
             TESession* session = _sessionMap[(TEWidget*)existingViewIter.next()];
             TEWidget* display = createTerminalDisplay();
             loadViewSettings(display,session); 
-            createController(session,display);
+            ViewProperties* properties = createController(session,display);
 
             _sessionMap[display] = session;
 
-            container->addView(display);
-            container->setActiveView(display);
+            container->addView(display,properties);
             session->addView( display );
         }
 
@@ -205,10 +219,10 @@ void ViewManager::createView(TESession* session)
         ViewContainer* container = containerIter.next();
         TEWidget* display = createTerminalDisplay();
         loadViewSettings(display,session);
-        createController(session,display);
+        ViewProperties* properties = createController(session,display);
 
         _sessionMap[display] = session; 
-        container->addView(display);
+        container->addView(display,properties);
         session->addView(display);
 
         display->setFocus(Qt::MouseFocusReason);
@@ -238,8 +252,9 @@ void ViewManager::merge(ViewManager* otherManager)
         
         assert(view);
 
+        ViewProperties* properties = otherContainer->viewProperties(view);
         otherContainer->removeView(view);
-        activeContainer->addView(view);
+        activeContainer->addView(view,properties);
 
         // transfer the session map entries
         _sessionMap.insert(view,otherManager->_sessionMap[view]);

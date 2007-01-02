@@ -8,29 +8,17 @@
             <Separator/>
             <ActionList name="new-session-types"/>
             <Separator/>
-            <Action name="close-session"/>
+            <DefineGroup name="session-operations"/>
             <Action name="exit" />
         </Menu>
         <Menu name="edit"><text>Edit</text>
-            <Action name="copy"/>
-            <Action name="paste"/>
-            <Separator/>
-            <Action name="zmodem-upload"/>
-            <Separator/>
-            <Action name="clear"/>
-            <Action name="clear-and-reset"/>
+            <DefineGroup name="session-edit-operations" />
         </Menu>
         <Menu name="history"><text>History</text>
-            <Action name="search-history"/>
-            <Action name="find-next"/>
-            <Action name="find-previous"/>
-            <Action name="save-history"/>
-            <Separator/>
-            <Action name="clear-history"/>
+            <DefineGroup name="session-history-operations"/>            
         </Menu>
         <Menu name="view"><text>View</text>
-            <Action name="monitor-activity"/>
-            <Action name="monitor-silence" />
+            <DefineGroup name="session-view-operations"/> 
             <Separator/>
             <Action name="split-view"/>
             <Action name="detach-view"/>
@@ -49,3 +37,4 @@
         </Menu>
     </MenuBar>
 </kpartgui>
+
