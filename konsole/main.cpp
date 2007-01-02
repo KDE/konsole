@@ -56,6 +56,7 @@
 #include <config.h>
 #include <kauthorized.h>
 #include <ksimpleconfig.h>
+#include <ksessionmanager.h>
 
 // Konsole
 #include "konsole.h"
@@ -130,7 +131,7 @@ void getDisplayInfo( const QString& displayName , Display*& display ,
    The goal of this class is to add "--noxft" and "--ls" to the restoreCommand
    if konsole was started with any of those options.
  */
-class KonsoleSessionManaged: public KSessionManaged {
+class KonsoleSessionManager: public KSessionManager {
 public:
     bool saveState( QSessionManager&sm) {
         QStringList restartCommand = sm.restartCommand();
@@ -420,7 +421,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   signal(SIGHUP, SIG_IGN);
 
   putenv((char*)"COLORTERM="); // to trigger mc's color detection
-  KonsoleSessionManaged ksm;
+  KonsoleSessionManager ksm;
 
   if (a.isSessionRestored() || !profile.isEmpty())
   {
