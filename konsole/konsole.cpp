@@ -107,7 +107,7 @@
 #include <ktoggleaction.h>
 #include <ktogglefullscreenaction.h>
 #include <ktoolinvocation.h>
-#include <kurlrequesterdlg.h>
+#include <kurlrequesterdialog.h>
 #include <netwm.h>
 #include <knotifyconfigwidget.h>
 #include <kwinmodule.h>
@@ -4097,7 +4097,7 @@ void Konsole::slotZModemDetected(TESession *session)
                         "<p>You may wish to install the 'rzsz' or 'lrzsz' package.\n"));
     return;
   }
-  KUrlRequesterDlg dlg(KGlobalSettings::documentPath(),
+  KUrlRequesterDialog dlg(KGlobalSettings::documentPath(),
                    i18n("A ZModem file transfer attempt has been detected.\n"
                         "Please specify the folder you want to store the file(s):"),
                    this);
