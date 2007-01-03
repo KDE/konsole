@@ -58,7 +58,10 @@ class QGridLayout;
 class QShowEvent;
 class QHideEvent;
 class TerminalImageFilterChain;
-
+namespace Filter
+{
+    class HotSpot;
+};
 /**
  * A widget which displays output from a terminal emulation and sends input keypresses and mouse activity
  * to the terminal.
@@ -241,6 +244,7 @@ protected:
     void paintEvent( QPaintEvent * );
 
     void paintContents(QPainter &paint, const QRect &rect);
+    void paintFilters(QPainter& painter);
 
     void showEvent(QShowEvent*);
     void hideEvent(QHideEvent*);
@@ -414,6 +418,7 @@ private:
     QAction* m_lnAction;
 
     TerminalImageFilterChain* _filterChain;
+    QRect _mouseOverHotspotArea;
 
 	//the delay in milliseconds between redrawing blinking text
 	static const int BLINK_DELAY = 750;

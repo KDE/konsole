@@ -390,6 +390,9 @@ TEWidget::TEWidget(QWidget *parent)
 ,_filterChain(new TerminalImageFilterChain())
 {
     _filterChain->addFilter( new UrlFilter() );
+    RegExpFilter* ref = new RegExpFilter();
+    ref->setRegExp( QRegExp("kde") );
+    _filterChain->addFilter( ref );
 
   // The offsets are not yet calculated.
   // Do not calculate these too often to be more smoothly when resizing
@@ -414,6 +417,8 @@ TEWidget::TEWidget(QWidget *parent)
 
   qApp->installEventFilter( this ); //FIXME: see below
   KCursor::setAutoHideCursor( this, true );
+
+  setMouseTracking(true);
 
   // Init DnD ////////////////////////////////////////////////////////////////
   setAcceptDrops(true); // attempt
@@ -1170,6 +1175,7 @@ void TEWidget::paintEvent( QPaintEvent* pe )
   {
     paintContents(paint, rect);
   }
+  paintFilters(paint);
 
   drawFrame( &paint );
 
@@ -1252,6 +1258,45 @@ void TEWidget::print(QPainter &paint, bool friendly, bool exact)
    blinking = save_blinking;
 }
 
+void TEWidget::paintFilters(QPainter& painter)
+{
+    QList<Filter::HotSpot*> spots = _filterChain->hotSpots();
+    QListIterator<Filter::HotSpot*> iter(spots);
+    while (iter.hasNext())
+    {
+        Filter::HotSpot* spot = iter.next();
+        // Links need to be underlined
+        if ( spot->type() == Filter::HotSpot::Link )
+        {
+            QFontMetrics metrics(font());
+            
+            QRect r;
+            r.setCoords(spot->startColumn()*font_w , spot->startLine()*font_h,
+                             spot->endColumn()*font_w , (spot->endLine()+1)*font_h);
+        
+            // find the baseline (which is the invisible line that the characters in the font sit on,
+            // with some having tails dangling below)
+            int baseline = r.bottom() - metrics.descent();
+            // find the position of the underline below that
+            int underlinePos = baseline + metrics.underlinePos();
+
+            if ( r.contains( mapFromGlobal(QCursor::pos()) ) )
+                painter.drawLine( r.left() , underlinePos , 
+                                  r.right() , underlinePos );
+        }
+        // Marker hotspots simply have a transparent rectanglular shape
+        // drawn on top of them
+        else if ( spot->type() == Filter::HotSpot::Marker )
+        {
+            QRect r;
+            r.setCoords(spot->startColumn()*font_w , spot->startLine()*font_h,
+                             spot->endColumn()*font_w , (spot->endLine()+1)*font_h);
+
+            //TODO - Do not use a hardcoded colour for this
+            painter.fillRect(r,QBrush(QColor(255,0,0,120)));
+        }
+    }
+}
 void TEWidget::paintContents(QPainter &paint, const QRect &rect)
 {
   QPoint tL  = contentsRect().topLeft();
@@ -1589,9 +1634,35 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
 
 void TEWidget::mouseMoveEvent(QMouseEvent* ev)
 {
+  int charLine = 0;
+  int charColumn = 0;
+
+  characterPosition(ev->pos(),charLine,charColumn); 
+
+  // handle filters
+  // change link hot-spot appearence on mouse-over
+  Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine,charColumn);
+  if ( spot && spot->type() == Filter::HotSpot::Link)
+  {
+    _mouseOverHotspotArea.setCoords( qMin(spot->startColumn() , spot->endColumn()) * font_w,
+                                     spot->startLine() * font_h,
+                                     qMax(spot->startColumn() , spot->endColumn()) * font_h,
+                                     (spot->endLine()+1) * font_h );
+    update( _mouseOverHotspotArea );
+  }
+  else if ( _mouseOverHotspotArea.isValid() )
+  {
+        update( _mouseOverHotspotArea );
+        // set hotspot area to an invalid rectangle
+        _mouseOverHotspotArea = QRect();
+  }
+  
   // for auto-hiding the cursor, we need mouseTracking
   if (ev->buttons() == Qt::NoButton ) return;
-  
+
+  // if the terminal is interested in mouse movements 
+  // then emit a mouse movement signal, unless the shift
+  // key is being held down, which overrides this.
   if (!mouse_marks && !(ev->modifiers() & Qt::ShiftModifier))
   {
 	int button = 3;
@@ -1602,11 +1673,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
 	if (ev->buttons() & Qt::RightButton)
 		button = 2;
 
-        int charLine = 0;
-        int charColumn = 0;
-
-        characterPosition(ev->pos(),charLine,charColumn); 
-
+        
         emit mouseSignal( button, 
                         charColumn + 1,
                         charLine + 1 +scrollbar->value() -scrollbar->maximum(),
@@ -1614,6 +1681,8 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
       
 	return;
   }
+
+  
       
   if (dragInfo.state == diPending) {
     // we had a mouse down, but haven't confirmed a drag yet

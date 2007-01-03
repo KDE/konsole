@@ -86,7 +86,17 @@ Filter::HotSpot* FilterChain::hotSpotAt(int line , int column) const
     return 0;
 }
 
-//QList<Filter::HotSpot*> FilterChain::hotSpots() const;
+QList<Filter::HotSpot*> FilterChain::hotSpots() const
+{
+    QList<Filter::HotSpot*> list;
+    QListIterator<Filter*> iter(*this);
+    while (iter.hasNext())
+    {
+        Filter* filter = iter.next();
+        list << filter->hotSpots();
+    }
+    return list;
+}
 //QList<Filter::HotSpot*> FilterChain::hotSpotsAtLine(int line) const;
 
 void TerminalImageFilterChain::addImage(const ca* const image , int lines , int columns)
@@ -202,7 +212,7 @@ Filter::HotSpot::HotSpot(int startLine , int startColumn , int endLine , int end
     , _startColumn(startColumn)
     , _endLine(endLine)
     , _endColumn(endColumn)
-    , _type(NoType)
+    , _type(NotSpecified)
 {
 }
 QList<QAction*> Filter::HotSpot::actions()
@@ -240,11 +250,12 @@ RegExpFilter::RegExpFilter()
 
 RegExpFilter::HotSpot::HotSpot(int startLine,int startColumn,int endLine,int endColumn)
     : Filter::HotSpot(startLine,startColumn,endLine,endColumn)
-{}
+{
+    setType(Marker);
+}
 
 void RegExpFilter::HotSpot::activate()
 {
-    qDebug() << "regexp hotspot activated";
 }
 
 void RegExpFilter::HotSpot::setCapturedTexts(const QStringList& texts)
@@ -314,7 +325,7 @@ UrlFilter::HotSpot::HotSpot(int startLine,int startColumn,int endLine,int endCol
 : RegExpFilter::HotSpot(startLine,startColumn,endLine,endColumn)
 , _urlObject(new FilterObject(this))
 {
-    setType(LinkType);
+    setType(Link);
 }
 void UrlFilter::HotSpot::activate()
 {

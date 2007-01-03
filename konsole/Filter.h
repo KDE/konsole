@@ -41,11 +41,11 @@ public:
        enum Type
        {
             // the type of the hotspot is not specified
-            NoType,
+            NotSpecified,
             // this hotspot represents a clickable link
-            LinkType,
+            Link,
             // this hotspot represents a marker
-            MarkerType
+            Marker
        }; 
 
        int startLine() const;
