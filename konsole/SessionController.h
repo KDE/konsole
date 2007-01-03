@@ -12,11 +12,10 @@
 
 // Konsole
 #include "ViewProperties.h"
-
 class QAction;
-
 class TESession;
 class TEWidget;
+class UrlFilter;
 
 /**
  * Provides the actions associated with a session in the Konsole main menu
@@ -33,6 +32,7 @@ public:
      * Constructs a new SessionController which operates on @p session and @p view.
      */
     SessionController(TESession* session , TEWidget* view, QObject* parent);
+    ~SessionController();
 
     /** Reimplemented to watch for events happening to the view */
     virtual bool eventFilter(QObject* watched , QEvent* event);
@@ -74,9 +74,12 @@ private:
     KIcon      _sessionIcon;
     QString    _sessionIconName;
     int        _previousState;
+    
+    UrlFilter* _viewUrlFilter;
 
     static KIcon _activityIcon;
     static KIcon _silenceIcon;
+
 };
 
 #endif //SESSIONCONTROLLER_H

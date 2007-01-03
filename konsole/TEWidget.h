@@ -62,6 +62,8 @@ namespace Filter
 {
     class HotSpot;
 };
+class FilterChain;
+
 /**
  * A widget which displays output from a terminal emulation and sends input keypresses and mouse activity
  * to the terminal.
@@ -95,6 +97,19 @@ public:
     void doScroll(int lines);
     int  scrollPosition();
     bool scrollAtEnd();
+
+    /** 
+     * Returns the display's filter chain.  When the image for the display is updated,
+     * the text is passed through each filter in the chain.  Each filter can define
+     * hotspots which correspond to certain strings (such as URLs or particular words).
+     * Depending on the type of the hotspots created by the filter ( returned by Filter::Hotspot::type() )
+     * the view will draw visual cues such as underlines on mouse-over for links or translucent
+     * rectangles for markers.
+     *
+     * To add a new filter to the view, call:
+     *      viewWidget->filterChain()->addFilter( filterObject );
+     */
+    FilterChain* filterChain() const;
 
     bool blinkingCursor() { return hasBlinkingCursor; }
     void setBlinkingCursor(bool blink);

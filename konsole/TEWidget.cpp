@@ -389,11 +389,6 @@ TEWidget::TEWidget(QWidget *parent)
 ,blend_color(qRgba(0,0,0,0xff))
 ,_filterChain(new TerminalImageFilterChain())
 {
-    _filterChain->addFilter( new UrlFilter() );
-    RegExpFilter* ref = new RegExpFilter();
-    ref->setRegExp( QRegExp("kde") );
-    _filterChain->addFilter( ref );
-
   // The offsets are not yet calculated.
   // Do not calculate these too often to be more smoothly when resizing
   // konsole in opaque mode.
@@ -1258,6 +1253,11 @@ void TEWidget::print(QPainter &paint, bool friendly, bool exact)
    blinking = save_blinking;
 }
 
+FilterChain* TEWidget::filterChain() const
+{
+    return _filterChain;
+}
+
 void TEWidget::paintFilters(QPainter& painter)
 {
     QList<Filter::HotSpot*> spots = _filterChain->hotSpots();
@@ -1911,7 +1911,14 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
     Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine,charColumn);
     if ( spot )
     {
-        spot->activate();
+        if ( ev->button() == Qt::LeftButton )
+        {
+            spot->activate();
+        }
+        else if ( ev->button() == Qt::RightButton )
+        {
+            //TODO - Show context menu with appropriate actions for hotspot.
+        }
     }
 
   if ( ev->button() == Qt::LeftButton)

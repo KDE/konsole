@@ -7,6 +7,7 @@
 #include <kdebug.h>
 
 // Konsole
+#include "Filter.h"
 #include "TESession.h"
 #include "TEWidget.h"
 #include "SessionController.h"
@@ -34,6 +35,16 @@ SessionController::SessionController(TESession* session , TEWidget* view, QObjec
 
     // list to title and icon changes
     connect( _session , SIGNAL(updateTitle()) , this , SLOT(sessionTitleChanged()) );
+
+    // install filter on the view to highlight URLs
+    _viewUrlFilter = new UrlFilter();
+    view->filterChain()->addFilter( _viewUrlFilter );
+}
+
+SessionController::~SessionController()
+{   
+    // delete filters
+    delete _viewUrlFilter;
 }
 
 bool SessionController::eventFilter(QObject* watched , QEvent* event)
