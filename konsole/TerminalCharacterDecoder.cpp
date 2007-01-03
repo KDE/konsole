@@ -25,7 +25,21 @@
 
 #include "TerminalCharacterDecoder.h"
 
-void PlainTextDecoder::decodeLine(ca* const characters, int count, LineProperty /*properties*/,
+PlainTextDecoder::PlainTextDecoder()
+ : _includeTrailingWhitespace(true)
+{
+
+}
+void PlainTextDecoder::setTrailingWhitespace(bool enable)
+{
+    _includeTrailingWhitespace = enable;
+}
+bool PlainTextDecoder::trailingWhitespace() const
+{
+    return _includeTrailingWhitespace;
+}
+
+void PlainTextDecoder::decodeLine(const ca* const characters, int count, LineProperty /*properties*/,
 							 QTextStream* output)
 {
 	//TODO should we ignore or respect the LINE_WRAPPED line property?
@@ -35,8 +49,23 @@ void PlainTextDecoder::decodeLine(ca* const characters, int count, LineProperty 
 	//(since QTextStream always deals with QStrings internally anyway)
 	QString plainText;
 	plainText.reserve(count);
-	
-	for (int i=0;i<count;i++)
+   
+    int outputCount = count;
+
+    // if inclusion of trailing whitespace is disabled then find the end of the
+    // line
+    if ( !_includeTrailingWhitespace )
+    {
+        for (int i = count-1 ; i >= 0 ; i--)
+        {
+            if ( characters[i].c != ' '  )
+                break;
+            else
+                outputCount--;
+        }
+    }
+
+	for (int i=0;i<outputCount;i++)
 	{
 		plainText.append( QChar(characters[i].c) );
 	}
@@ -51,7 +80,7 @@ HTMLDecoder::HTMLDecoder() :
 }
 
 //TODO: Support for LineProperty (mainly double width , double height)
-void HTMLDecoder::decodeLine(ca* const characters, int count, LineProperty /*properties*/,
+void HTMLDecoder::decodeLine(const ca* const characters, int count, LineProperty /*properties*/,
 							QTextStream* output)
 {
 	QString text;

@@ -73,6 +73,7 @@ set(konsole_KDEINIT_SRCS
         BlockArray.cpp
         TerminalCharacterDecoder.cpp
         IncrementalSearchBar.cpp
+        Filter.cpp
         schema.cpp
         konsole_wcwidth.cpp
    ) 

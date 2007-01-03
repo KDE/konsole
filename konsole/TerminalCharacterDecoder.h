@@ -48,7 +48,7 @@ public:
 	 * @param properties Additional properties which affect all characters in the line
 	 * @param output The output stream which receives the decoded text
 	 */
-	virtual void decodeLine(ca* const characters, 
+	virtual void decodeLine(const ca* const characters, 
 							int count,
 							LineProperty properties, 
 							QTextStream* output) = 0; 
@@ -61,12 +61,26 @@ public:
 class PlainTextDecoder : public TerminalCharacterDecoder
 {
 public:
-	PlainTextDecoder() {}
+	PlainTextDecoder(); 
 
-	virtual void decodeLine(ca* const characters,
+    /** 
+     * Set whether trailing whitespace at the end of lines should be included 
+     * in the output.
+     * Defaults to true.
+     */
+    void setTrailingWhitespace(bool enable);
+    /**
+     * Returns whether trailing whitespace at the end of lines is included
+     * in the output.
+     */
+    bool trailingWhitespace() const;
+
+	virtual void decodeLine(const ca* const characters,
 							int count,
 							LineProperty properties,	
 							QTextStream* output);
+private:
+    bool _includeTrailingWhitespace;
 };
 
 /**
@@ -86,7 +100,7 @@ public:
 	 */
 	void setColorTable( const ColorEntry* table );
 		
-	virtual void decodeLine(ca* const characters,
+	virtual void decodeLine(const ca* const characters,
 							int count,
 							LineProperty properties,
 							QTextStream* output);	

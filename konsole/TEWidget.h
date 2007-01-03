@@ -57,6 +57,7 @@ class QFrame;
 class QGridLayout;
 class QShowEvent;
 class QHideEvent;
+class TerminalImageFilterChain;
 
 /**
  * A widget which displays output from a terminal emulation and sends input keypresses and mouse activity
@@ -411,6 +412,8 @@ private:
     QAction* m_cpAction;
     QAction* m_mvAction;
     QAction* m_lnAction;
+
+    TerminalImageFilterChain* _filterChain;
 
 	//the delay in milliseconds between redrawing blinking text
 	static const int BLINK_DELAY = 750;

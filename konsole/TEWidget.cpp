@@ -88,6 +88,7 @@
 
 // Konsole
 #include "config.h"
+#include "Filter.h"
 #include "TEWidget.h"
 #include "konsole_wcwidth.h"
 
@@ -386,7 +387,10 @@ TEWidget::TEWidget(QWidget *parent)
 ,m_cursorCol(0)
 ,m_isIMEdit(false)
 ,blend_color(qRgba(0,0,0,0xff))
+,_filterChain(new TerminalImageFilterChain())
 {
+    _filterChain->addFilter( new UrlFilter() );
+
   // The offsets are not yet calculated.
   // Do not calculate these too often to be more smoothly when resizing
   // konsole in opaque mode.
@@ -442,6 +446,7 @@ TEWidget::~TEWidget()
 
   delete gridLayout;
   delete outputSuspendedLabel;
+  delete _filterChain;
 }
 
 /* ------------------------------------------------------------------------- */
@@ -934,6 +939,13 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
 {
   if (!image)
      updateImageSize(); // Create image
+
+    //TEMPORARY: This is for testing only, this could potentially be expensive,
+    //so a mechanism must be added to only process filters as needed
+#warning "Temporary addition to test filters.  Don't do this in the final code"
+    _filterChain->reset();
+    _filterChain->addImage(newimg,lines,columns);
+    _filterChain->process();
 
   assert( this->usedLines <= this->lines );
   assert( this->usedColumns <= this->columns );
@@ -1826,6 +1838,12 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
     int charLine;
     int charColumn;
     characterPosition(ev->pos(),charLine,charColumn);
+
+    Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine,charColumn);
+    if ( spot )
+    {
+        spot->activate();
+    }
 
   if ( ev->button() == Qt::LeftButton)
   {
