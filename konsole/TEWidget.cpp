@@ -41,66 +41,55 @@
    \sa TEScreen \sa Emulation
 */
 
-/* FIXME:
-   - 'image' may also be used uninitialized (it isn't in fact) in resizeEvent
-   - 'font_a' not used in mouse events
-   - add destructor
-*/
-
-/* TODO
-   - evtl. be sensitive to `paletteChange' while using default colors.
-   - set different 'rounding' styles? I.e. have a mode to show clipped
-     chars?
-*/
-
-#include "config.h"
-#include "TEWidget.h"
-//#include "OverlayFrame.h"
-#include "konsole_wcwidth.h"
-
-#include <QApplication>
-#include <QPainter>
-#include <QClipboard>
-#include <QStyle>
-#include <QFile>
-#include <QLayout>
-#include <QRegExp>
-//Added by qt3to4:
-#include <QPaintEvent>
-#include <QBoxLayout>
-#include <QResizeEvent>
-#include <QMouseEvent>
-#include <QFocusEvent>
-#include <QFrame>
-#include <QKeyEvent>
-#include <QEvent>
-#include <QWheelEvent>
-#include <QVBoxLayout>
-#include <QGridLayout>
-#include <QSpacerItem>
-#include <QDropEvent>
-#include <QDragEnterEvent>
-#include <QPixmap>
-
+// System
+#include <assert.h>
+#include <ctype.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <ctype.h>
 #include <sys/stat.h>
+#include <unistd.h>
 
-#include <assert.h>
-
-#include <krun.h>
-#include <kcursor.h>
-#include <kdebug.h>
-#include <klocale.h>
-#include <knotification.h>
-#include <kglobalsettings.h>
-#include <kshortcut.h>
-#include <kio/netaccess.h>
+// Qt
+#include <QApplication>
+#include <QBoxLayout>
+#include <QClipboard>
+#include <QDragEnterEvent>
+#include <QDropEvent>
+#include <QEvent>
+#include <QFile>
+#include <QFocusEvent>
+#include <QFrame>
+#include <QGridLayout>
+#include <QKeyEvent>
 #include <QLabel>
+#include <QLayout>
+#include <QMouseEvent>
+#include <QPaintEvent>
+#include <QPainter>
+#include <QPixmap>
+#include <QRegExp>
+#include <QResizeEvent>
+#include <QSpacerItem>
+#include <QStyle>
 #include <QTimer>
+#include <QVBoxLayout>
+#include <QWheelEvent>
+
+// KDE
+#include <KRun>
+#include <KCursor>
+#include <kdebug.h>
+#include <KLocale>
+#include <KNotification>
+#include <KGlobalSettings>
+#include <KShortcut>
+#include <KIO/NetAccess>
+
+// Konsole
+#include "config.h"
+#include "TEWidget.h"
+#include "konsole_wcwidth.h"
 
 #ifndef loc
 #define loc(X,Y) ((Y)*columns+(X))
@@ -444,8 +433,6 @@ TEWidget::TEWidget(QWidget *parent)
 
   //set up a warning message when the user presses Ctrl+S to avoid confusion
   connect( this,SIGNAL(flowControlKeyPressed(bool)),this,SLOT(outputSuspended(bool)) );
-
-
 }
 
 TEWidget::~TEWidget()
