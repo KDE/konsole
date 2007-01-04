@@ -1962,7 +1962,10 @@ void TEWidget::characterPosition(QPoint widgetPoint,int& line,int& column)
     column = (widgetPoint.x()-contentsRect().left()-bX) / font_w;
     line = (widgetPoint.y()-contentsRect().top()-bY) / font_h;
 
-    Q_ASSERT( line >= 0 && column >= 0 );
+    if ( line < 0 )
+        line = 0;
+    if ( column < 0 )
+        column = 0;
 
     if ( line >= usedLines )
         line = usedLines-1;
