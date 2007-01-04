@@ -27,6 +27,7 @@
 #include <KService>
 #include <KToolInvocation>
 #include <kstandardaction.h>
+#include <KXMLGUIFactory>
 
 // Konsole
 #include "KonsoleApp.h"
@@ -39,6 +40,11 @@
 KonsoleMainWindow::KonsoleMainWindow()
  : KMainWindow()
 {
+    // add a small amount of space between the top of the window and the main widget
+    // to prevent the menu bar and main widget borders touching (which looks very ugly) in styles
+    // where the menu bar has a lower border
+    setContentsMargins(0,2,0,0);
+    
     // create main window widgets
     setupWidgets();
 

@@ -23,16 +23,16 @@
 #include <QHash>
 #include <QLineEdit>
 #include <QStackedWidget>
-#include <QTabWidget>
+#include <QToolButton>
 #include <QWidgetAction>
 
 // KDE 
-#include <kcolordialog.h>
-#include <kiconloader.h>
-#include <klocale.h>
-#include <kmenu.h>
-#include <kpalette.h>
-#include <ktabwidget.h>
+#include <KColorDialog>
+#include <KIconLoader>
+#include <KLocale>
+#include <KMenu>
+#include <KPalette>
+#include <KTabWidget>
 
 // Konsole
 #include "ViewContainer.h"
@@ -86,7 +86,8 @@ QList<QWidget*> ViewContainer::widgetsForItem(ViewProperties* item) const
 }
 
 TabbedViewContainer::TabbedViewContainer(QObject* parent) :
-    ViewContainer(parent)  
+    ViewContainer(parent)
+   ,_newSessionButton(0) 
    ,_tabContextMenu(0) 
    ,_tabSelectColorMenu(0)
    ,_tabColorSelector(0)
@@ -95,7 +96,21 @@ TabbedViewContainer::TabbedViewContainer(QObject* parent) :
 {
     _tabWidget = new KTabWidget();
     _tabContextMenu = new KMenu(_tabWidget);   
-    
+
+    _newSessionButton = new QToolButton(_tabWidget);
+    _newSessionButton->setAutoRaise(true);
+    _newSessionButton->setIcon( KIcon("tab_new") );
+    _newSessionButton->setText( i18n("New") );
+    _newSessionButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    _newSessionButton->setPopupMode(QToolButton::MenuButtonPopup);
+
+    QToolButton* closeButton = new QToolButton(_tabWidget);
+    closeButton->setIcon( KIcon("tab_remove") );
+    closeButton->setAutoRaise(true);
+
+    _tabWidget->setCornerWidget(_newSessionButton,Qt::TopLeftCorner);
+    _tabWidget->setCornerWidget(closeButton,Qt::TopRightCorner);
+
      //Create a colour selection palette and fill it with a range of suitable colours
      QString paletteName;
      QStringList availablePalettes = KPalette::getPaletteList();
@@ -152,6 +167,10 @@ TabbedViewContainer::~TabbedViewContainer()
     delete _tabWidget;
 }
 
+void TabbedViewContainer::setNewSessionMenu(QMenu* menu)
+{
+    _newSessionButton->setMenu(menu);
+}
 void TabbedViewContainer::showContextMenu(QWidget* widget , const QPoint& position)
 {
     //TODO - Use the tab under the mouse, not just the active tab

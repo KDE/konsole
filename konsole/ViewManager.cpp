@@ -50,8 +50,6 @@ ViewManager::ViewManager(KonsoleMainWindow* mainWindow)
     _viewSplitter = new ViewSplitter(_mainWindow);
     _mainWindow->setCentralWidget(_viewSplitter);
 
-    // create the default container
-    _viewSplitter->addContainer( createContainer() , Qt::Vertical );
 
     // emit a signal when all of the views held by this view manager are destroyed
     connect( _viewSplitter , SIGNAL(allContainersEmpty()) , this , SIGNAL(empty()) );
@@ -197,6 +195,9 @@ void ViewManager::splitView(bool splitView)
             delete container;
         }
     }
+
+    // ensure that the active view is focused after the split / unsplit
+    _viewSplitter->activeContainer()->activeView()->setFocus(Qt::OtherFocusReason);
 }
 
 SessionController* ViewManager::createController(TESession* session , TEWidget* view)
@@ -209,6 +210,12 @@ SessionController* ViewManager::createController(TESession* session , TEWidget* 
 
 void ViewManager::createView(TESession* session)
 {
+    // create the default container
+    if (_viewSplitter->containers().count() == 0)
+    {
+        _viewSplitter->addContainer( createContainer() , Qt::Vertical );
+    }
+
     connect( session , SIGNAL(done(TESession*)) , this , SLOT(sessionFinished(TESession*)) );
     
     ViewContainer* const activeContainer = _viewSplitter->activeContainer();
@@ -234,7 +241,22 @@ void ViewManager::createView(TESession* session)
 
 ViewContainer* ViewManager::createContainer()
 {
-    return new TabbedViewContainer(_viewSplitter); 
+    TabbedViewContainer* container = new TabbedViewContainer(_viewSplitter); 
+    
+    if ( _mainWindow->factory() )
+    {
+        QMenu* menu = (QMenu*)_mainWindow->factory()->container("new-session-popup",_mainWindow);
+        
+        if ( menu )
+            container->setNewSessionMenu(menu);
+    }
+    else
+    {
+        kDebug() << __FILE__ << __LINE__ << ": ViewManager attempted to create a view before" <<
+          " the main window GUI was created - unable to create popup menus for container." << endl;  
+    }
+
+    return container;
 }
 
 void ViewManager::merge(ViewManager* otherManager)

@@ -37,6 +37,8 @@ class ViewProperties;
     class QAction;
     class QPoint;
     class QWidgetAction;
+    class QToolButton;
+    class QMenu;
 
     // KDE
     class KTabWidget;
@@ -134,6 +136,8 @@ public:
     virtual QWidget* activeView() const;
     virtual void setActiveView(QWidget* view);
 
+    void setNewSessionMenu(QMenu* menu);
+
 protected:
     virtual void viewAdded( QWidget* view );
     virtual void viewRemoved( QWidget* view ); 
@@ -149,6 +153,9 @@ private slots:
 private:
     KTabWidget* _tabWidget; 
     QList<QAction*> _viewActions;
+
+    QToolButton*    _newSessionButton;
+    QMenu*          _newSessionMenu;
 
     KMenu*          _tabContextMenu;
     KMenu*          _tabSelectColorMenu;
