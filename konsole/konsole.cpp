@@ -3234,9 +3234,9 @@ void Konsole::notifySessionState(TESession* session, int state)
       && session->testAndSetStateIconName(state_iconname)
       && m_tabViewMode != ShowTextOnly) {
 
-    QPixmap normal = kapp->iconLoader()->loadIcon(state_iconname,
+    QPixmap normal = KIconLoader::global()->loadIcon(state_iconname,
         K3Icon::Small, 0, K3Icon::DefaultState, 0L, true);
-    QPixmap active = kapp->iconLoader()->loadIcon(state_iconname,
+    QPixmap active = KIconLoader::global()->loadIcon(state_iconname,
         K3Icon::Small, 0, K3Icon::ActiveState, 0L, true);
 
     // make sure they are not larger than 16x16

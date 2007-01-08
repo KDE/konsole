@@ -57,7 +57,7 @@ SessionEditor::SessionEditor(QWidget * parent)
   loaded=false;
 
   KGlobal::locale()->insertCatalog("konsole"); // For schema and keytab translations
-  kapp->iconLoader()->addAppDir( "konsole" );
+  KIconLoader::global()->addAppDir( "konsole" );
 
   directoryLine->setMode(KFile::Directory);
   connect(sessionList, SIGNAL(highlighted(int)), this, SLOT(readSession(int)));
