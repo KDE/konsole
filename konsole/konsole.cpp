@@ -134,8 +134,8 @@ extern bool true_transparency; // declared in main.cpp and konsole_part.cpp
 // KonsoleFontSelectAction is now also used for selectSize!
 class KonsoleFontSelectAction : public KSelectAction {
 public:
-    KonsoleFontSelectAction(const QString &text, KActionCollection* parent, const QString &name  = QString::null )
-        : KSelectAction(text, parent, name) {}
+    KonsoleFontSelectAction(const QString &text, QObject *parent )
+        : KSelectAction(text, parent) {}
 
 protected:
     virtual void actionTriggered(QAction* action);
@@ -568,7 +568,8 @@ void Konsole::makeGUI()
       m_options->addAction( showMenubar );
 
       // Tabbar
-      selectTabbar = new KSelectAction(i18n("&Tab Bar"), actions, "tabbar" );
+      selectTabbar = new KSelectAction(i18n("&Tab Bar"), this );
+      actions->addAction( "tabbar", selectTabbar );
       connect( selectTabbar, SIGNAL( triggered() ), this, SLOT( slotSelectTabbar() ) );
       QStringList tabbaritems;
       tabbaritems << i18n("&Hide") << i18n("&Top") << i18n("&Bottom");
@@ -576,7 +577,8 @@ void Konsole::makeGUI()
       m_options->addAction( selectTabbar );
 
       // Scrollbar
-      selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), actions, "scrollbar" );
+      selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), this );
+      actions->addAction( "scrollbar", selectScrollbar );
       connect( selectScrollbar, SIGNAL( triggered() ), this, SLOT(slotSelectScrollbar() ) );
       QStringList scrollitems;
       scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
@@ -592,7 +594,8 @@ void Konsole::makeGUI()
       }
 
       // Select Bell
-      selectBell = new KSelectAction(i18n("&Bell"), actions, "bell");
+      selectBell = new KSelectAction(i18n("&Bell"), this);
+      actions->addAction( "bell", selectBell );
       selectBell->setIcon( KIcon( "bell") );
       connect( selectBell, SIGNAL( triggered() ), this, SLOT(slotSelectBell()) );
       QStringList bellitems;
@@ -605,26 +608,31 @@ void Konsole::makeGUI()
 
       KActionMenu* m_fontsizes = new KActionMenu( KIcon( "text" ),
                                                   i18n( "Font" ),
-                                                  actions, 0L );
-      KAction *action = new KAction( i18n( "&Enlarge Font" ), actions, "enlarge_font" );
+                                                  this );
+      actions->addAction( m_fontsizes->objectName(), m_fontsizes );
+      QAction *action = actions->addAction( "enlarge_font" );
       action->setIcon( KIcon( "fontsizeup" ) );
+      action->setText( i18n( "&Enlarge Font" ) );
       connect( action, SIGNAL( triggered() ), this, SLOT( biggerFont() ) );
       m_fontsizes->addAction( action );
 
-      action = new KAction( i18n( "&Shrink Font" ), actions, "shrink_font" );
+      action = actions->addAction( "shrink_font" );
       action->setIcon( KIcon( "fontsizedown" ) );
+      action->setText( i18n( "&Shrink Font" ) );
       connect( action, SIGNAL( triggered() ), this, SLOT( smallerFont() ) );
       m_fontsizes->addAction( action );
 
-      action = new KAction( i18n( "Se&lect..." ), actions, "select_font" );
+      action = actions->addAction( "select_font" );
       action->setIcon( KIcon( "font" ) );
+      action->setText( i18n( "Se&lect..." ) );
       connect( action, SIGNAL( triggered() ), this, SLOT( slotSelectFont() ) );
       m_fontsizes->addAction( action );
 
       m_options->addAction( m_fontsizes );
 
       // encoding menu, start with default checked !
-      selectSetEncoding = new KSelectAction( i18n( "&Encoding" ), actions, "set_encoding" );
+      selectSetEncoding = new KSelectAction( i18n( "&Encoding" ), this );
+      actions->addAction( "set_encoding", selectSetEncoding );
       selectSetEncoding->setIcon( KIcon( "charset" ) );
       connect( selectSetEncoding, SIGNAL( triggered() ), this, SLOT(slotSetEncoding()) );
 
@@ -644,7 +652,8 @@ void Konsole::makeGUI()
       // Select size
       if (!b_fixedSize)
       {
-         selectSize = new KonsoleFontSelectAction(i18n("S&ize"), actions, "size");
+         selectSize = new KonsoleFontSelectAction(i18n("S&ize"), this);
+         actions->addAction("size", selectSize);
          connect(selectSize, SIGNAL(triggered(bool)), SLOT(slotSelectSize()));
          QStringList sizeitems;
          sizeitems << i18n("40x15 (&Small)")
@@ -658,22 +667,29 @@ void Konsole::makeGUI()
          m_options->addAction( selectSize );
       }
 
-      KAction *historyType = new KAction(KIcon("history"), i18n("Hist&ory..."), actions, "history");
+      QAction *historyType = actions->addAction("history");
+      historyType->setIcon(KIcon("history"));
+      historyType->setText(i18n("Hist&ory..."));
       connect(historyType, SIGNAL(triggered(bool) ), SLOT(slotHistoryType()));
       m_options->addAction( historyType );
 
       m_options->addSeparator();
 
-      KAction *save_settings = new KAction(KIcon("filesave"), i18n("&Save as Default"), actions, "save_default");
+      QAction *save_settings = actions->addAction("save_default");
+      save_settings->setIcon(KIcon("filesave"));
+      save_settings->setText(i18n("&Save as Default"));
       connect(save_settings, SIGNAL(triggered(bool) ), SLOT(slotSaveSettings()));
       m_options->addAction( save_settings );
       m_options->addSeparator();
       m_options->addAction( m_saveProfile );
       m_options->addSeparator();
 
-      KAction *configureNotifications = KStandardAction::configureNotifications( this, SLOT(slotConfigureNotifications()), actionCollection() );
-      KAction *configureKeys = KStandardAction::keyBindings( this, SLOT(slotConfigureKeys()), actionCollection() );
-      KAction *configure = KStandardAction::preferences( this, SLOT(slotConfigure()), actions );
+      QAction *configureNotifications = actionCollection()->addAction( KStandardAction::ConfigureNotifications,
+                                                                       this, SLOT(slotConfigureNotifications()) );
+      QAction *configureKeys = actionCollection()->addAction( KStandardAction::KeyBindings,
+                                                              this, SLOT(slotConfigureKeys()) );
+      QAction *configure = actionCollection()->addAction( KStandardAction::Preferences,
+                                                          this, SLOT(slotConfigure()) );
       m_options->addAction( configureNotifications );
       m_options->addAction( configureKeys );
       m_options->addAction( configure );
@@ -706,7 +722,8 @@ void Konsole::makeGUI()
       m_rightButton->addAction( m_copyClipboard );
       m_rightButton->addAction( m_pasteClipboard );
 
-      KAction *selectionEnd = new KAction(i18n("Set Selection End"), actions, "selection_end");
+      QAction *selectionEnd = actions->addAction("selection_end");
+      selectionEnd->setText(i18n("Set Selection End"));
       connect(selectionEnd, SIGNAL(triggered(bool) ), SLOT(slotSetSelectionEnd()));
       m_rightButton->addAction( selectionEnd );
 
@@ -797,7 +814,8 @@ void Konsole::makeGUI()
       KAcceleratorManager::manage( m_tabbarPopupMenu );
       m_tabbarPopupMenu->addAction( selectTabbar );
 
-      KSelectAction *viewOptions = new KSelectAction(actionCollection(), 0);
+      KSelectAction *viewOptions = new KSelectAction(this);
+      actionCollection()->addAction( viewOptions->objectName(), viewOptions);
       viewOptions->setText(i18n("Tab &Options"));
       QStringList options;
       options << i18n("&Text && Icons") << i18n("Text &Only") << i18n("&Icons Only");
@@ -807,12 +825,14 @@ void Konsole::makeGUI()
       connect(viewOptions, SIGNAL(activated(int)), this, SLOT(slotTabSetViewOptions(int)));
       slotTabSetViewOptions(m_tabViewMode);
 
-      KToggleAction *dynamicTabHideOption = new KToggleAction( i18n( "&Dynamic Hide" ), actionCollection(), QString());
+      KToggleAction *dynamicTabHideOption = new KToggleAction( i18n( "&Dynamic Hide" ), this );
+      actionCollection()->addAction( dynamicTabHideOption->objectName(), dynamicTabHideOption );
       connect(dynamicTabHideOption, SIGNAL(triggered(bool) ), SLOT( slotTabbarToggleDynamicHide() ));
       dynamicTabHideOption->setChecked(b_dynamicTabHide);
       m_tabbarPopupMenu->addAction( dynamicTabHideOption );
 
-      KToggleAction *m_autoResizeTabs = new KToggleAction( i18n("&Auto Resize Tabs"), actionCollection(), QString());
+      KToggleAction *m_autoResizeTabs = new KToggleAction( i18n("&Auto Resize Tabs"), this );
+      actionCollection()->addAction( m_autoResizeTabs->objectName(), m_autoResizeTabs );
       connect(m_autoResizeTabs, SIGNAL(triggered(bool) ), SLOT( slotToggleAutoResizeTabs() ));
       m_autoResizeTabs->setChecked(b_autoResizeTabs);
       m_tabbarPopupMenu->addAction( m_autoResizeTabs );
@@ -1005,78 +1025,97 @@ void Konsole::makeBasicGUI()
 
   m_shortcuts = new KActionCollection( (QObject*) this);
 
-  m_copyClipboard = new KAction(KIcon("editcopy"), i18n("&Copy"), m_shortcuts, "edit_copy");
+  m_copyClipboard = new KAction(KIcon("editcopy"), i18n("&Copy"), this);
+  m_shortcuts->addAction("edit_copy", m_copyClipboard);
   connect(m_copyClipboard, SIGNAL(triggered(bool) ), SLOT(slotCopyClipboard()));
-  m_pasteClipboard = new KAction(KIcon("editpaste"), i18n("&Paste"), m_shortcuts, "edit_paste");
+  m_pasteClipboard = new KAction(KIcon("editpaste"), i18n("&Paste"), this);
+  m_shortcuts->addAction("edit_paste", m_pasteClipboard);
   connect(m_pasteClipboard, SIGNAL(triggered(bool) ), SLOT(slotPasteClipboard()));
   m_pasteClipboard->setShortcut( QKeySequence(Qt::SHIFT+Qt::Key_Insert) );
-  m_pasteSelection = new KAction(i18n("Paste Selection"), m_shortcuts, "pasteselection");
+  m_pasteSelection = new KAction(i18n("Paste Selection"), this);
+  m_shortcuts->addAction("pasteselection", m_pasteSelection);
   connect(m_pasteSelection, SIGNAL(triggered(bool) ), SLOT(slotPasteSelection()));
   m_pasteSelection->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Insert) );
 
-  m_clearTerminal = new KAction(i18n("C&lear Terminal"), m_shortcuts, "clear_terminal");
+  m_clearTerminal = new KAction(i18n("C&lear Terminal"), this);
+  m_shortcuts->addAction("clear_terminal", m_clearTerminal);
   connect(m_clearTerminal, SIGNAL(triggered(bool) ), SLOT(slotClearTerminal()));
-  m_resetClearTerminal = new KAction(i18n("&Reset && Clear Terminal"), m_shortcuts, "reset_clear_terminal");
+  m_resetClearTerminal = new KAction(i18n("&Reset && Clear Terminal"), this);
+  m_shortcuts->addAction("reset_clear_terminal", m_resetClearTerminal);
   connect(m_resetClearTerminal, SIGNAL(triggered(bool) ), SLOT(slotResetClearTerminal()));
-  m_findHistory = new KAction(KIcon("find"), i18n("&Find in History..."), m_shortcuts, "find_history");
+  m_findHistory = new KAction(KIcon("find"), i18n("&Find in History..."), this);
+  m_shortcuts->addAction("find_history", m_findHistory);
   connect(m_findHistory, SIGNAL(triggered(bool) ), SLOT(slotFindHistory()));
   m_findHistory->setEnabled(b_histEnabled);
 
-  m_findNext = new KAction(KIcon("next"), i18n("Find &Next"), m_shortcuts, "find_next");
+  m_findNext = new KAction(KIcon("next"), i18n("Find &Next"), this);
+  m_shortcuts->addAction("find_next", m_findNext);
   connect(m_findNext, SIGNAL(triggered(bool)), SLOT(slotFindNext()));
   m_findNext->setEnabled(b_histEnabled);
 
-  m_findPrevious = new KAction(KIcon("previous"), i18n("Find Pre&vious"), m_shortcuts, "find_previous");
+  m_findPrevious = new KAction(KIcon("previous"), i18n("Find Pre&vious"), this);
+  m_shortcuts->addAction("find_previous", m_findPrevious);
   connect(m_findPrevious, SIGNAL(triggered(bool)), SLOT(slotFindPrevious()));
   m_findPrevious->setEnabled( b_histEnabled );
 
-  m_saveHistory = new KAction(KIcon("filesaveas"), i18n("S&ave History As..."), m_shortcuts, "save_history");
+  m_saveHistory = new KAction(KIcon("filesaveas"), i18n("S&ave History As..."), this);
+  m_shortcuts->addAction("save_history", m_saveHistory);
   connect(m_saveHistory, SIGNAL(triggered(bool)), SLOT(slotShowSaveHistoryDialog()));
   m_saveHistory->setEnabled(b_histEnabled );
 
-  m_clearHistory = new KAction(KIcon("history_clear"), i18n("Clear &History"), m_shortcuts, "clear_history");
+  m_clearHistory = new KAction(KIcon("history_clear"), i18n("Clear &History"), this);
+  m_shortcuts->addAction("clear_history", m_clearHistory);
   connect(m_clearHistory, SIGNAL(triggered(bool)), SLOT(slotClearHistory()));
   m_clearHistory->setEnabled(b_histEnabled);
 
-  m_clearAllSessionHistories = new KAction(KIcon("history_clear"), i18n("Clear All H&istories"), m_shortcuts, "clear_all_histories");
+  m_clearAllSessionHistories = new KAction(KIcon("history_clear"), i18n("Clear All H&istories"), this);
+  m_shortcuts->addAction("clear_all_histories", m_clearAllSessionHistories);
   connect(m_clearAllSessionHistories, SIGNAL(triggered(bool)), SLOT(slotClearAllSessionHistories()));
 
-  m_detachSession = new KAction(i18n("&Detach Session"), m_shortcuts, "detach_session");
+  m_detachSession = new KAction(i18n("&Detach Session"), this);
+  m_shortcuts->addAction("detach_session", m_detachSession);
   m_detachSession->setIcon( KIcon("tab_breakoff") );
   connect( m_detachSession, SIGNAL( triggered() ), this, SLOT(slotDetachSession()) );
   m_detachSession->setEnabled(false);
 
-  m_renameSession = new KAction(i18n("&Rename Session..."), m_shortcuts, "rename_session");
+  m_renameSession = new KAction(i18n("&Rename Session..."), this);
+  m_shortcuts->addAction("rename_session", m_renameSession);
   connect(m_renameSession, SIGNAL(triggered(bool) ), SLOT(slotRenameSession()));
   m_renameSession->setShortcut( QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_S) );
 
   if (KAuthorized::authorizeKAction("zmodem_upload")) {
-    m_zmodemUpload = new KAction( i18n( "&ZModem Upload..." ), m_shortcuts, "zmodem_upload" );
+    m_zmodemUpload = new KAction( i18n( "&ZModem Upload..." ), this );
+    m_shortcuts->addAction( "zmodem_upload", m_zmodemUpload );
     m_zmodemUpload->setShortcut( QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_U) );
     connect( m_zmodemUpload, SIGNAL( triggered() ), this, SLOT( slotZModemUpload() ) );
   }
 
-  monitorActivity = new KToggleAction ( KIcon("activity"), i18n( "Monitor for &Activity" ),
-                                        m_shortcuts, "monitor_activity" );
+  monitorActivity = new KToggleAction ( KIcon("activity"), i18n( "Monitor for &Activity" ), this );
+  m_shortcuts->addAction( "monitor_activity", monitorActivity );
   connect(monitorActivity, SIGNAL(triggered(bool) ), SLOT( slotToggleMonitor() ));
   monitorActivity->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Activity" ) ) );
 
-  monitorSilence = new KToggleAction ( KIcon("silence"), i18n( "Monitor for &Silence" ), m_shortcuts, "monitor_silence" );
+  monitorSilence = new KToggleAction ( KIcon("silence"), i18n( "Monitor for &Silence" ), this );
+  m_shortcuts->addAction( "monitor_silence", monitorSilence );
   connect(monitorSilence, SIGNAL(triggered(bool) ), SLOT( slotToggleMonitor() ));
   monitorSilence->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Silence" ) ) );
 
-  masterMode = new KToggleAction(KIcon("remote"),  i18n( "Send &Input to All Sessions" ), m_shortcuts, "send_input_to_all_sessions" );
+  masterMode = new KToggleAction(KIcon("remote"),  i18n( "Send &Input to All Sessions" ), this );
+  m_shortcuts->addAction( "send_input_to_all_sessions", masterMode );
   connect(masterMode, SIGNAL(triggered(bool) ), SLOT( slotToggleMasterMode() ));
 
-  showMenubar = new KToggleAction(KIcon("showmenu"),  i18n( "&Show Menu Bar" ), m_shortcuts, "show_menubar" );
+  showMenubar = new KToggleAction(KIcon("showmenu"),  i18n( "&Show Menu Bar" ), this);
+  m_shortcuts->addAction( "show_menubar", showMenubar );
   connect(showMenubar, SIGNAL(triggered(bool) ), SLOT( slotToggleMenubar() ));
   showMenubar->setCheckedState( KGuiItem( i18n("&Hide Menu Bar"), "showmenu", QString(), QString() ) );
 
-  m_fullscreen = KStandardAction::fullScreen(0, 0, m_shortcuts, this );
+  m_fullscreen = KStandardAction::fullScreen(0, 0, this, this);
+  m_shortcuts->addAction( m_fullscreen->objectName(), m_fullscreen );
   connect( m_fullscreen,SIGNAL(toggled(bool)), this,SLOT(updateFullScreen(bool)));
   m_fullscreen->setChecked(b_fullscreen);
 
-  m_saveProfile = new KAction( i18n( "Save Sessions &Profile..." ), m_shortcuts, "save_sessions_profile" );
+  m_saveProfile = new KAction( i18n( "Save Sessions &Profile..." ), this );
+  m_shortcuts->addAction( "save_sessions_profile", m_saveProfile );
   m_saveProfile->setIcon( KIcon("filesaveas") );
   connect( m_saveProfile, SIGNAL( triggered() ), this, SLOT( slotSaveSessionsProfile() ) );
 
@@ -1086,51 +1125,63 @@ void Konsole::makeBasicGUI()
      // Don't steal F1 (handbook) accel (esp. since it not visible in
      // "Configure Shortcuts").
 
-  m_closeSession = new KAction(KIcon("fileclose"), i18n("C&lose Session"), m_shortcuts, "close_session");
+  m_closeSession = new KAction(KIcon("fileclose"), i18n("C&lose Session"), this);
+  m_shortcuts->addAction("close_session", m_closeSession);
   connect(m_closeSession, SIGNAL(triggered(bool) ), SLOT( confirmCloseCurrentSession() ));
-  m_print = new KAction(KIcon("fileprint"), i18n("&Print Screen..."), m_shortcuts, "file_print");
+  m_print = new KAction(KIcon("fileprint"), i18n("&Print Screen..."), this);
+  m_shortcuts->addAction("file_print", m_print);
   connect(m_print, SIGNAL(triggered(bool) ), SLOT( slotPrint() ));
-  m_quit = new KAction(KIcon("exit"), i18n("&Quit"), m_shortcuts, "file_quit");
+  m_quit = new KAction(KIcon("exit"), i18n("&Quit"), this);
+  m_shortcuts->addAction("file_quit", m_quit);
   connect(m_quit, SIGNAL(triggered(bool) ), SLOT( close() ));
 
-  KAction *action = new KAction(i18n("New Session"), m_shortcuts, "new_session");
+  KAction *action = new KAction(i18n("New Session"), this);
+  m_shortcuts->addAction("new_session", action);
   action->setShortcut( QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_N, Qt::CTRL+Qt::SHIFT+Qt::Key_N) );
   connect( action, SIGNAL( triggered() ), this, SLOT(newSession()) );
   addAction( action );
 
-  action = new KAction(i18n("Activate Menu"), m_shortcuts, "activate_menu");
+  action = new KAction(i18n("Activate Menu"), this);
+  m_shortcuts->addAction("activate_menu", action);
   action->setShortcut( QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_M) );
   connect( action, SIGNAL( triggered() ), this, SLOT(activateMenu()) );
   addAction( action );
 
-  action = new KAction(i18n("List Sessions"), m_shortcuts, "list_sessions");
+  action = new KAction(i18n("List Sessions"), this);
+  m_shortcuts->addAction("list_sessions", action);
   connect( action, SIGNAL( triggered() ), this, SLOT(listSessions()) );
   addAction( action );
 
-  action = new KAction(i18n("Go to Previous Session"), m_shortcuts, "previous_session");
+  action = new KAction(i18n("Go to Previous Session"), this);
+  m_shortcuts->addAction("previous_session", action);
   action->setShortcut( QApplication::isRightToLeft() ?
                        QKeySequence(Qt::SHIFT+Qt::Key_Right) : QKeySequence(Qt::SHIFT+Qt::Key_Left) );
   connect( action, SIGNAL( triggered() ), this, SLOT(prevSession()) );
   addAction( action );
 
-  action = new KAction(i18n("Go to Next Session"), m_shortcuts, "next_session");
+  action = new KAction(i18n("Go to Next Session"), this);
+  m_shortcuts->addAction("next_session", action);
   action->setShortcut( QApplication::isRightToLeft() ?
                        QKeySequence(Qt::SHIFT+Qt::Key_Left) : QKeySequence(Qt::SHIFT+Qt::Key_Right) );
   connect( action, SIGNAL( triggered() ), this, SLOT(nextSession()) );
   addAction( action );
 
   for (int i=1;i<13;i++) { // Due to 12 function keys?
-      action = new KAction(i18n("Switch to Session %1", i), m_shortcuts, QString().sprintf("switch_to_session_%02d", i).toLatin1().constData());
+      action = new KAction(i18n("Switch to Session %1", i), this);
+      m_shortcuts->addAction(QString().sprintf("switch_to_session_%02d", i).toLatin1().constData(), action);
       connect( action, SIGNAL( triggered() ), this, SLOT(switchToSession()) );
       addAction( action );
   }
 
-  action = new KAction(i18n("Enlarge Font"), m_shortcuts, "bigger_font");
+  action = new KAction(i18n("Enlarge Font"), this);
+  m_shortcuts->addAction("bigger_font", action);
   connect(action, SIGNAL(triggered(bool) ), SLOT(biggerFont()));
-  action = new KAction(i18n("Shrink Font"), m_shortcuts, "smaller_font");
+  action = new KAction(i18n("Shrink Font"), this);
+  m_shortcuts->addAction("smaller_font", action);
   connect(action, SIGNAL(triggered(bool) ), SLOT(smallerFont()));
 
-  action = new KAction(i18n("Toggle Bidi"), m_shortcuts, "toggle_bidi");
+  action = new KAction(i18n("Toggle Bidi"), this);
+  m_shortcuts->addAction("toggle_bidi", action);
   connect(action, SIGNAL(triggered(bool) ), SLOT(toggleBidi()));
   action->setShortcut( QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_B) );
   addAction(action);
@@ -2415,8 +2466,8 @@ void Konsole::addSession(TESession* s)
   s->setTitle(newTitle);
 
   // create a new toggle action for the session
-  KToggleAction *ra = new KToggleAction(KIcon(s->IconName()), newTitle.replace('&',"&&"),
-      m_shortcuts, QString());
+  KToggleAction *ra = new KToggleAction(KIcon(s->IconName()), newTitle.replace('&',"&&"), this);
+  m_shortcuts->addAction(ra->objectName(), ra);
   ra->setActionGroup(m_sessionGroup);
   //ra->setChecked(true);
   connect(ra, SIGNAL(toggled(bool)), SLOT(activateSession()));
@@ -3306,7 +3357,8 @@ void Konsole::addSessionCommand( SessionInfo* info )
   if ( m_shortcuts->action( name ) ) {
     sessionAction = m_shortcuts->action( name );
   } else {
-    sessionAction = new KAction( actionText, m_shortcuts, name );
+    sessionAction = new KAction( actionText, this );
+    m_shortcuts->addAction( name, sessionAction );
   }
   connect( sessionAction, SIGNAL( activated() ), sessionNumberMapper, SLOT( map() ) );
   sessionNumberMapper->setMapping( sessionAction, cmd_serial );
@@ -3653,8 +3705,8 @@ void Konsole::attachSession(TESession* session)
   }
 
   QString title=session->Title();
-  KToggleAction *ra = new KToggleAction(KIcon(session->IconName()), title.replace('&',"&&"),
-                                        m_shortcuts, QString());
+  KToggleAction *ra = new KToggleAction(KIcon(session->IconName()), title.replace('&',"&&"), this);
+  m_shortcuts->addAction(ra->objectName(), ra);
   connect(ra, SIGNAL(triggered(bool)), SLOT(activateSession()));
 
   ra->setActionGroup(m_sessionGroup);
@@ -4276,7 +4328,8 @@ void Konsole::setupTabContextMenu()
    m_tabPopupMenu = new KMenu( this );
    KAcceleratorManager::manage( m_tabPopupMenu );
 
-   m_tabDetachSession= new KAction( i18n("&Detach Session"), actionCollection(), 0 );
+   m_tabDetachSession= new KAction( i18n("&Detach Session"), this );
+   actionCollection()->addAction( m_tabDetachSession->objectName(), m_tabDetachSession );
    m_tabDetachSession->setIcon( KIcon("tab_breakoff") );
    connect( m_tabDetachSession, SIGNAL( triggered() ), this, SLOT(slotTabDetachSession()) );
    m_tabPopupMenu->addAction( m_tabDetachSession );
@@ -4285,29 +4338,32 @@ void Konsole::setupTabContextMenu()
                          SLOT(slotTabRenameSession()) );
    m_tabPopupMenu->addSeparator();
 
-   m_tabMonitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ), actionCollection(), "" );
+   m_tabMonitorActivity = new KToggleAction ( i18n( "Monitor for &Activity" ), this );
+   actionCollection()->addAction( m_tabMonitorActivity->objectName(), m_tabMonitorActivity );
    m_tabMonitorActivity->setIcon( KIcon("activity") );
    connect( m_tabMonitorActivity, SIGNAL( triggered() ), this, SLOT( slotTabToggleMonitor() ) );
    m_tabMonitorActivity->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Activity" )) );
    m_tabPopupMenu->addAction( m_tabMonitorActivity );
 
-   m_tabMonitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ), actionCollection(), "" );
+   m_tabMonitorSilence = new KToggleAction ( i18n( "Monitor for &Silence" ), this );
+   actionCollection()->addAction( m_tabMonitorSilence->objectName(), m_tabMonitorSilence );
    m_tabMonitorSilence->setIcon( KIcon("silence") );
    connect( m_tabMonitorSilence, SIGNAL( triggered() ), this, SLOT( slotTabToggleMonitor() ) );
    m_tabMonitorSilence->setCheckedState( KGuiItem( i18n( "Stop Monitoring for &Silence" ) ) );
    m_tabPopupMenu->addAction( m_tabMonitorSilence );
 
-   m_tabMasterMode = new KToggleAction ( i18n( "Send &Input to All Sessions" ), actionCollection(), "" );
+   m_tabMasterMode = new KToggleAction ( i18n( "Send &Input to All Sessions" ), this );
+   actionCollection()->addAction( m_tabMasterMode->objectName(), m_tabMasterMode );
    m_tabMasterMode->setIcon( KIcon( "remote" ) );
    connect( m_tabMasterMode, SIGNAL( triggered() ), this, SLOT( slotTabToggleMasterMode() ) );
    m_tabPopupMenu->addAction( m_tabMasterMode );
 
 
-   moveSessionLeftAction = new KAction( actionCollection() , "moveSessionLeftAction" );
+   moveSessionLeftAction = actionCollection()->addAction( "moveSessionLeftAction" );
    moveSessionLeftAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Left) );
    connect( moveSessionLeftAction , SIGNAL( triggered() ), this , SLOT(moveSessionLeft()) );
 
-   moveSessionRightAction = new KAction( actionCollection() , "moveSessionRightAction" );
+   moveSessionRightAction = actionCollection()->addAction( "moveSessionRightAction" );
    moveSessionRightAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Right) );
    connect( moveSessionRightAction , SIGNAL( triggered() ), this , SLOT (moveSessionRight()) );
 

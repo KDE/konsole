@@ -22,7 +22,7 @@
 #ifndef KONSOLE_H
 #define KONSOLE_H
 
-// Qt 
+// Qt
 #include <QStringList>
 #include <Q3PtrDict>
 #include <Q3PtrList>
@@ -167,9 +167,9 @@ private Q_SLOTS:
   void attachSession(TESession*);
   void slotDetachSession();
   void bookmarks_menu_check();
-  
+
   void slotNewSessionAction(QAction* action);
-  
+
   void updateSchemaMenu();
   void updateKeytabMenu();
 
@@ -354,13 +354,13 @@ private:
   //------------------------------------
 
 
-  KAction *m_zmodemUpload;
+  QAction *m_zmodemUpload;
   KToggleAction *monitorActivity;
   KToggleAction *monitorSilence;
   KToggleAction *masterMode;
 
-  KAction* moveSessionLeftAction;
-  KAction* moveSessionRightAction;
+  QAction* moveSessionLeftAction;
+  QAction* moveSessionRightAction;
 
   KToggleAction *showMenubar;
   KToggleAction *m_fullscreen;
@@ -371,27 +371,27 @@ private:
   KSelectAction *selectTabbar;
   KSelectAction *selectBell;
   KSelectAction *selectSetEncoding;
-  
 
-  KAction       *m_clearHistory;
-  KAction       *m_findHistory;
-  KAction       *m_findNext;
-  KAction       *m_findPrevious;
-  KAction       *m_saveHistory;
-  KAction       *m_detachSession;
 
-  KAction       *m_copyClipboard;
-  KAction       *m_pasteClipboard;
-  KAction       *m_pasteSelection;
-  KAction       *m_clearTerminal;
-  KAction       *m_resetClearTerminal;
-  KAction       *m_clearAllSessionHistories;
-  KAction       *m_renameSession;
-  KAction       *m_saveProfile;
-  KAction       *m_closeSession;
-  KAction       *m_print;
-  KAction       *m_quit;
-  KAction       *m_tabDetachSession;
+  QAction       *m_clearHistory;
+  QAction       *m_findHistory;
+  QAction       *m_findNext;
+  QAction       *m_findPrevious;
+  QAction       *m_saveHistory;
+  QAction       *m_detachSession;
+
+  QAction       *m_copyClipboard;
+  QAction       *m_pasteClipboard;
+  QAction       *m_pasteSelection;
+  QAction       *m_clearTerminal;
+  QAction       *m_resetClearTerminal;
+  QAction       *m_clearAllSessionHistories;
+  QAction       *m_renameSession;
+  QAction       *m_saveProfile;
+  QAction       *m_closeSession;
+  QAction       *m_print;
+  QAction       *m_quit;
+  QAction       *m_tabDetachSession;
 
   KActionCollection *m_shortcuts;
 
