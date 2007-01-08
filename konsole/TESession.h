@@ -90,6 +90,11 @@ public:
   void removeView(TEWidget* widget);
 
   /**
+   * Returns the views connected to this session
+   */
+  QList<TEWidget*> views() const;
+
+  /**
    * Returns the primary view for this session.
    *
    * The primary view is the first view added to the session, which is used by the emulation

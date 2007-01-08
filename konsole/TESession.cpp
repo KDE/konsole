@@ -214,6 +214,11 @@ TEWidget* TESession::primaryView()
         return 0;
 }
 
+QList<TEWidget*> TESession::views() const
+{
+    return _views;
+}
+
 void TESession::addView(TEWidget* widget)
 {
      Q_ASSERT( !_views.contains(widget) );

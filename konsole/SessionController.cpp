@@ -29,6 +29,10 @@ SessionController::SessionController(TESession* session , TEWidget* view, QObjec
     
     view->installEventFilter(this);
 
+    // destroy session controller if either the view or the session are destroyed
+    connect( _session , SIGNAL(destroyed()) , this , SLOT(deleteLater()) );
+    connect( _view , SIGNAL(destroyed()) , this , SLOT(deleteLater()) );
+
     // listen to activity / silence notifications from session
     connect( _session , SIGNAL(notifySessionState(TESession*,int)) , this ,
             SLOT(sessionStateChanged(TESession*,int) ));

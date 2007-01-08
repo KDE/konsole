@@ -45,6 +45,10 @@ class ViewProperties;
     class KColorCells;
     class KMenu;
 
+// ListViewContainer
+    class QSplitter;
+    class QListWidget;
+
 /**
  * An interface for container widgets which can hold one or more views.
  *
@@ -97,6 +101,12 @@ signals:
     /** Emitted when the container has no more children */
     void empty(ViewContainer* container);
 
+    /** Emitted when the user requests to close the a view */
+    void closeRequest(QWidget* activeView);
+
+    /** Emitted when the active view changes */
+    void activeViewChanged( QWidget* view );
+
 protected:
     /** 
      * Performs the task of adding the view widget
@@ -137,7 +147,7 @@ public:
     virtual void setActiveView(QWidget* view);
 
     void setNewSessionMenu(QMenu* menu);
-
+     
 protected:
     virtual void viewAdded( QWidget* view );
     virtual void viewRemoved( QWidget* view ); 
@@ -145,7 +155,7 @@ protected:
 private slots:
     void updateTitle(ViewProperties* item);
     void updateIcon(ViewProperties* item);
-
+    void closeTabClicked();
     void selectTabColor();
     void prepareColorCells();
     void showContextMenu(QWidget* widget , const QPoint& position);
@@ -186,5 +196,35 @@ private:
     QStackedWidget* _stackWidget;
 };
 
+/**
+ * A view container which uses a list instead of tabs to provide navigation
+ * between sessions.
+ */
+class ListViewContainer : public ViewContainer
+{
+Q_OBJECT
+
+public:
+    ListViewContainer(QObject* parent);
+    virtual ~ListViewContainer();
+
+    virtual QWidget* containerWidget() const;
+    virtual QWidget* activeView() const;
+    virtual void setActiveView(QWidget* view);
+
+protected:
+    virtual void viewAdded( QWidget* view );
+    virtual void viewRemoved( QWidget* view );
+
+private slots:
+    void rowChanged( int row );
+    void updateTitle( ViewProperties* );
+    void updateIcon( ViewProperties* );
+
+private:
+    QStackedWidget* _stackWidget;
+    QSplitter* _splitter;
+    QListWidget* _listWidget;
+};
 
 #endif //VIEWCONTAINER_H

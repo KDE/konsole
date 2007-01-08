@@ -23,6 +23,7 @@
 // Qt
 #include <QHash>
 #include <QObject>
+#include <QPointer>
 
 class KToggleAction;
 
@@ -79,6 +80,8 @@ private slots:
     // called when a session terminates - the view manager will delete any
     // views associated with the session
     void sessionFinished( TESession* session );
+    // called when the container requests to close a particular view
+    void viewCloseRequest(QWidget* widget);
 
     void viewFocused( SessionController* controller );
 
@@ -100,7 +103,7 @@ private:
     KonsoleMainWindow*          _mainWindow;
     KToggleAction*              _splitViewAction;
     ViewSplitter*               _viewSplitter;
-    SessionController*          _pluggedController;
+    QPointer<SessionController> _pluggedController;
     QHash<TEWidget*,TESession*> _sessionMap;
     
 };

@@ -22,6 +22,10 @@ class UrlFilter;
  * and exposes information such as the title and icon associated with the session to view containers.
  *
  * Each view should have one SessionController associated with it
+ *
+ * The SessionController will delete itself if either the view or the session is destroyed, for 
+ * this reason it is recommended that other classes which need a pointer to a SessionController
+ * use QPointer<SessionController> rather than SessionController* 
  */
 class SessionController : public ViewProperties , public KXMLGUIClient
 {

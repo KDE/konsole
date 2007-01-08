@@ -1,4 +1,41 @@
 
+Monday - 8th Jan 07
+===================
+    - More reliable syncing of menus when selected view changes.
+      Currently the _pluggedController in ViewManager is only changed if the newly
+      selected view gets the focus, and that might not happen automatically in some circumstances.
+
+      Add a signal to ViewContainer which is emitted when the selected view changes.
+
+    - Calling viewRemoved() in ViewContainer::viewDestroyed() causes crashes at exit.
+      Start Konsole, create several shells then click X button on main window to close --> crash.
+      Debug this.
+    
+    - Midnight Commander not always set to the right size when creating a new view
+
+    - Using ListViewContainer as view container:
+
+      1.  Create a new shell
+      2.  Split the view
+      3.  Detach the view
+      4.  In the newly created main window, select View -> Merge Windows
+      5.  The new main window now has two list view items for the same terminal display (as expected)
+      6.  Trying to activate the second entry in the list causes a crash
+
+    - Using ListViewContainer as view container:
+
+      1.  Create a new shell
+      2.  Split the view
+      3.  Unsplit the view using View -> Remove split.  Causes a crash
+
+    - Cannot create a selection when the view is split.  
+        
+        1.  Create a new shell
+        2.  Split the view
+        3.  Try to select a block of text with the mouse in one of the views
+        4.  The selection will disappear instantly 
+
+
 == NOTE: This TODO refers to the old Konsole code, before the start of a new front-end
          using KonsoleApp and KonsoleMainWindow.  Some parts do not apply to the new
          front-end

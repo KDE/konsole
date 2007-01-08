@@ -22,6 +22,8 @@
 // Qt
 #include <QHash>
 #include <QLineEdit>
+#include <QListWidget>
+#include <QSplitter>
 #include <QStackedWidget>
 #include <QToolButton>
 #include <QWidgetAction>
@@ -53,6 +55,8 @@ void ViewContainer::viewDestroyed(QObject* object)
 
     _views.removeAll(widget);
     _navigation.remove(widget);
+
+    viewRemoved(widget);
 
     if (_views.count() == 0)
         emit empty(this);
@@ -107,6 +111,7 @@ TabbedViewContainer::TabbedViewContainer(QObject* parent) :
     QToolButton* closeButton = new QToolButton(_tabWidget);
     closeButton->setIcon( KIcon("tab_remove") );
     closeButton->setAutoRaise(true);
+    connect( closeButton , SIGNAL(clicked()) , this , SLOT(closeTabClicked()) );
 
     _tabWidget->setCornerWidget(_newSessionButton,Qt::TopLeftCorner);
     _tabWidget->setCornerWidget(closeButton,Qt::TopRightCorner);
@@ -159,6 +164,11 @@ TabbedViewContainer::TabbedViewContainer(QObject* parent) :
 
    connect( _tabWidget , SIGNAL(contextMenu(QWidget*,const QPoint&)),
                          SLOT(showContextMenu(QWidget*,const QPoint&))); 
+}
+
+void TabbedViewContainer::closeTabClicked()
+{
+    emit closeRequest(_tabWidget->currentWidget());
 }
 
 TabbedViewContainer::~TabbedViewContainer()
@@ -307,6 +317,97 @@ void StackedViewContainer::viewAdded( QWidget* view )
 void StackedViewContainer::viewRemoved( QWidget* view )
 {
     _stackWidget->removeWidget(view);
+}
+
+ListViewContainer::ListViewContainer(QObject* parent)
+    : ViewContainer(parent)
+{
+    _splitter = new QSplitter;
+    _stackWidget = new QStackedWidget;
+    _listWidget = new QListWidget;
+    _listWidget->setTextElideMode( Qt::ElideLeft );
+    _listWidget->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
+    _splitter->addWidget(_listWidget);
+    _splitter->addWidget(_stackWidget);
+
+    
+    connect( _listWidget , SIGNAL(currentRowChanged(int)) , this , SLOT(rowChanged(int)) ); 
+}
+
+ListViewContainer::~ListViewContainer()
+{
+    delete _listWidget;
+    delete _stackWidget;
+    delete _splitter;
+}
+
+QWidget* ListViewContainer::containerWidget() const
+{
+    return _splitter;
+}
+
+QWidget* ListViewContainer::activeView() const
+{
+    return _stackWidget->currentWidget();
+}
+
+void ListViewContainer::viewAdded( QWidget* view )
+{
+    _stackWidget->addWidget(view);
+
+    ViewProperties* properties = viewProperties(view);
+
+    QListWidgetItem* item = new QListWidgetItem(_listWidget);
+    item->setText( properties->title() );
+    item->setIcon( properties->icon() );
+
+
+    connect( properties , SIGNAL(titleChanged(ViewProperties*)) , this , SLOT(updateTitle(ViewProperties*)));
+    connect( properties , SIGNAL(iconChanged(ViewProperties*)) , this , SLOT(updateIcon(ViewProperties*)));
+}
+
+void ListViewContainer::viewRemoved( QWidget* view )
+{
+    int index = _stackWidget->indexOf(view);
+    _stackWidget->removeWidget(view);
+    delete _listWidget->takeItem( index );
+}
+
+void ListViewContainer::setActiveView( QWidget* view )
+{
+    _stackWidget->setCurrentWidget(view);
+    _listWidget->setCurrentRow(_stackWidget->indexOf(view));
+}
+
+void ListViewContainer::rowChanged( int row )
+{
+    _stackWidget->setCurrentIndex( row );
+
+    emit activeViewChanged( _stackWidget->currentWidget() );
+}
+
+void ListViewContainer::updateTitle( ViewProperties* properties )
+{
+    QList<QWidget*> items = widgetsForItem(properties);
+    QListIterator<QWidget*> itemIter(items);
+
+    while ( itemIter.hasNext() )
+    {
+        int index = _stackWidget->indexOf( itemIter.next() );
+        _listWidget->item( index )->setText( properties->title() );
+    }
+}
+
+void ListViewContainer::updateIcon( ViewProperties* properties )
+{
+    QList<QWidget*> items = widgetsForItem(properties);
+    QListIterator<QWidget*> itemIter(items);
+
+    while ( itemIter.hasNext() )
+    {
+        int index = _stackWidget->indexOf( itemIter.next() );
+        _listWidget->item( index )->setIcon( properties->icon() );
+    }
 }
 
 #include "ViewContainer.moc"

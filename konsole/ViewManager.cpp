@@ -241,8 +241,8 @@ void ViewManager::createView(TESession* session)
 
 ViewContainer* ViewManager::createContainer()
 {
-    TabbedViewContainer* container = new TabbedViewContainer(_viewSplitter); 
-    
+    /*TabbedViewContainer* container = new TabbedViewContainer(_viewSplitter); 
+
     if ( _mainWindow->factory() )
     {
         QMenu* menu = (QMenu*)_mainWindow->factory()->container("new-session-popup",_mainWindow);
@@ -252,11 +252,35 @@ ViewContainer* ViewManager::createContainer()
     }
     else
     {
-        kDebug() << __FILE__ << __LINE__ << ": ViewManager attempted to create a view before" <<
+       kDebug() << __FILE__ << __LINE__ << ": ViewManager attempted to create a view before" <<
           " the main window GUI was created - unable to create popup menus for container." << endl;  
     }
 
+    // connect signals and slots
+    connect( container , SIGNAL(closeRequest(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)) );
+*/
+    ViewContainer* container = new ListViewContainer(_viewSplitter);
     return container;
+}
+
+void ViewManager::viewCloseRequest(QWidget* view)
+{
+    // 1. detach view from session
+    // 2. if the session has no views left, close it
+
+    TEWidget* display = (TEWidget*)view;
+    TESession* session = _sessionMap[ display ];
+    if ( session )
+    {
+        delete display;
+        
+        if ( session->views().count() == 0 )
+            session->closeSession();
+    }
+    else
+    {
+        kDebug() << __FILE__ << __LINE__ << ": received close request from unknown view." << endl;
+    }
 }
 
 void ViewManager::merge(ViewManager* otherManager)
