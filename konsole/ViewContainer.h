@@ -159,6 +159,7 @@ private slots:
     void selectTabColor();
     void prepareColorCells();
     void showContextMenu(QWidget* widget , const QPoint& position);
+    void currentTabChanged(int index);
 
 private:
     KTabWidget* _tabWidget; 

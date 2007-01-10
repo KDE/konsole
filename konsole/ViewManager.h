@@ -84,6 +84,7 @@ private slots:
     void viewCloseRequest(QWidget* widget);
 
     void viewFocused( SessionController* controller );
+    void viewActivated( QWidget* view );
 
 private:
     void setupActions();

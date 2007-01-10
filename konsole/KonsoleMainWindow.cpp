@@ -70,23 +70,27 @@ void KonsoleMainWindow::setupActions()
     KActionCollection* collection = actionCollection();
 
     // File Menu
-    KAction* newTabAction = new KAction( KIcon("openterm") , i18n("New &Tab") , collection , "new-tab" ); 
-    KAction* newWindowAction = new KAction( KIcon("window_new") , i18n("New &Window") , collection , "new-window" );
+    QAction* newTabAction = collection->addAction("new-tab"); 
+    newTabAction->setIcon( KIcon("openterm") );
+    newTabAction->setText( i18n("New &Tab") );
+
+    QAction* newWindowAction = collection->addAction("new-window"); 
+    newWindowAction->setIcon( KIcon("window_new") );
+    newWindowAction->setText( i18n("New &Window") );
 
     connect( newTabAction , SIGNAL(triggered()) , this , SLOT(newTab()) );
     connect( newWindowAction , SIGNAL(triggered()) , this , SLOT(newWindow()) );
 
-    KStandardAction::quit( KonsoleApp::self() , SLOT(quit()) , collection ,"exit");
+    KStandardAction::quit( KonsoleApp::self() , SLOT(quit()) , collection );
 
     // Bookmark Menu
-    KActionMenu* bookmarkMenu = new KActionMenu(i18n("&Bookmarks"), collection,"bookmark");
-    new KonsoleBookmarkHandler( this , bookmarkMenu->menu() , true );
+    //KActionMenu* bookmarkMenu = new KActionMenu(i18n("&Bookmarks"), collection,"bookmark");
+    //new KonsoleBookmarkHandler( this , bookmarkMenu->menu() , true );
 
     // Settings Menu
-    KStandardAction::configureNotifications( 0 , 0 , collection , "configure-notifications" );
-    KStandardAction::keyBindings( this , SLOT(showShortcutsDialog()) , collection , "configure-shortcuts" );
-    KStandardAction::preferences( this , SLOT(showPreferencesDialog()) , collection , 
-                                  "configure-application" ); 
+    KStandardAction::configureNotifications( 0 , 0 , collection  );
+    KStandardAction::keyBindings( this , SLOT(showShortcutsDialog()) , collection  );
+    KStandardAction::preferences( this , SLOT(showPreferencesDialog()) , collection ); 
 }
 
 void KonsoleMainWindow::setSessionList(SessionList* list)

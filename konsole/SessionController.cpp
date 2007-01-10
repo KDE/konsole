@@ -66,48 +66,66 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
 
 void SessionController::setupActions()
 {
-    KAction* action = 0;
+    QAction* action = 0;
     KActionCollection* collection = actionCollection();
 
     // Close Session
-    action = new KAction( KIcon("fileclose"), i18n("&Close Tab") , collection , "close-session" );
+    action = collection->addAction("close-session"); 
+    action->setIcon( KIcon("fileclose") );
+    action->setText( i18n("&Close Tab") );
     connect( action , SIGNAL(triggered()) , this , SLOT(closeSession()) );
     
     // Copy and Paste
-    action = new KAction( KIcon("editcopy") , i18n("&Copy") , collection , "copy" );
+    action = collection->addAction("copy");
+    action->setIcon( KIcon("editcopy") );
+    action->setText( i18n("&Copy") );
     connect( action , SIGNAL(triggered()) , this , SLOT(copy()) );
     
-    action = new KAction( KIcon("editpaste") , i18n("&Paste") , collection , "paste" );
+    action = collection->addAction("paste");
+    action->setIcon( KIcon("editpaste") );
+    action->setText( i18n("&Paste") );
     connect( action , SIGNAL(triggered()) , this , SLOT(paste()) );
 
     // Clear and Clear+Reset
-    action = new KAction( i18n("C&lear Display") , collection , "clear" );
+    action = collection->addAction("clear");
+    action->setText( i18n("C&lear Display") );
     connect( action , SIGNAL(triggered()) , this , SLOT(clear()) );
     
-    action = new KAction( i18n("Clear and Reset") , collection , "clear-and-reset" );
+    action = collection->addAction("clear-and-reset");
+    action->setText( i18n("Clear and Reset") );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearAndReset()) );
 
     // Monitor
-    action = new KToggleAction( i18n("Monitor for &Activity") , collection , "monitor-activity" );
+    action = collection->addAction("monitor-activity");
+    action->setText( i18n("Monitor for &Activity") );
     connect( action , SIGNAL(toggled(bool)) , this , SLOT(monitorActivity(bool)) );
 
-    action = new KToggleAction( i18n("Monitor for &Silence") , collection , "monitor-silence" );
+    action = collection->addAction("monitor-silence");
+    action->setText( i18n("Monitor for &Silence") );
     connect( action , SIGNAL(toggled(bool)) , this , SLOT(monitorSilence(bool)) );
 
     // History
-    action = new KAction( KIcon("find") , i18n("Search History") , collection , "search-history" );
+    action = collection->addAction("search-history");
+    action->setIcon( KIcon("find") );
+    action->setText( i18n("Search History") );
     connect( action , SIGNAL(triggered()) , this , SLOT(searchHistory()) );
     
-    action = new KAction( KIcon("next") , i18n("Find Next") , collection , "find-next" );
+    action = collection->addAction("find-next");
+    action->setIcon( KIcon("next") );
+    action->setText( i18n("Find Next") );
     connect( action , SIGNAL(triggered()) , this , SLOT(findNextInHistory()) );
     
-    action = new KAction( KIcon("previous") , i18n("Find Previous") , collection , "find-previous" );
+    action = collection->addAction("find-previous");
+    action->setIcon( KIcon("previous") );
+    action->setText( i18n("Find Previous") );
     connect( action , SIGNAL(triggered()) , this , SLOT(findPreviousInHistory()) );
     
-    action = new KAction( i18n("Save History") , collection , "save-history" );
+    action = collection->addAction("save-history");
+    action->setText( i18n("Save History") );
     connect( action , SIGNAL(triggered()) , this , SLOT(saveHistory()) );
     
-    action = new KAction( i18n("Clear History") , collection , "clear-history" );
+    action = collection->addAction("clear-history");
+    action->setText( i18n("Clear History") );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearHistory()) );
 }
 

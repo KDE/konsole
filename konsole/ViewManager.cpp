@@ -64,19 +64,21 @@ void ViewManager::setupActions()
 {
     KActionCollection* collection = _mainWindow->actionCollection();
 
-    _splitViewAction = new KToggleAction( KIcon("view_top_bottom"),i18n("&Split View"), 
-                                            collection , "split-view" );
+    _splitViewAction = new KToggleAction( KIcon("view_top_bottom"),i18n("&Split View") , this);
     _splitViewAction->setCheckedState( KGuiItem(i18n("&Remove Split") , KIcon("view_remove") ) );
+    collection->addAction("split-view",_splitViewAction);
     connect( _splitViewAction , SIGNAL(toggled(bool)) , this , SLOT(splitView(bool)));
 
 
-    KAction* detachViewAction = new KAction( KIcon("view_remove") , i18n("&Detach View"),
-                                           collection , "detach-view" );
+    QAction* detachViewAction = collection->addAction("detach-view");
+    detachViewAction->setIcon( KIcon("view_remove") );
+    detachViewAction->setText( i18n("&Detach View") );
 
     connect( detachViewAction , SIGNAL(triggered()) , this , SLOT(detachActiveView()) );
 
-    KAction* mergeAction = new KAction( i18n("&Merge Windows"),
-                                           collection , "merge-windows" );
+    QAction* mergeAction = collection->addAction("merge-windows");
+    mergeAction->setText( i18n("&Merge Windows") );
+        
     connect( mergeAction , SIGNAL(triggered()) , _mainWindow , SLOT(mergeWindows()) );
 }
 
@@ -140,6 +142,11 @@ void ViewManager::focusActiveView()
             activeView->setFocus(Qt::MouseFocusReason);
         }
     }
+}
+
+void ViewManager::viewActivated( QWidget* view )
+{
+    view->setFocus(Qt::MouseFocusReason);
 }
 
 void ViewManager::viewFocused( SessionController* controller )
@@ -267,7 +274,7 @@ void ViewManager::viewCloseRequest(QWidget* view)
 {
     // 1. detach view from session
     // 2. if the session has no views left, close it
-
+    
     TEWidget* display = (TEWidget*)view;
     TESession* session = _sessionMap[ display ];
     if ( session )

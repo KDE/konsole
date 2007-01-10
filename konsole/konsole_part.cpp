@@ -21,6 +21,11 @@
 
 #include "konsole_part.h"
 
+#include "KeyTrans.h"
+#include "schema.h"
+#include "TESession.h"
+#include "TEWidget.h"
+
 #include <assert.h>
 
 #include <QFile>
@@ -55,6 +60,7 @@
 #include <kselectaction.h>
 #include <ktoggleaction.h>
 #include <kauthorized.h>
+#include <kinstance.h>
 
 // True transparency is not available in the embedded Konsole
 bool true_transparency = false;
@@ -331,7 +337,8 @@ void konsolePart::makeGUI()
      m_options = new KMenu((KMainWindow*)parentWidget);
 
      // Scrollbar
-     selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), settingsActions, QString());
+     selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), this);
+     settingsActions->addAction(selectScrollbar->objectName(), selectScrollbar);
      connect( selectScrollbar, SIGNAL( triggered( bool ) ), SLOT(slotSelectScrollbar()) );
 
      QStringList scrollitems;
@@ -341,7 +348,8 @@ void konsolePart::makeGUI()
 
      // Select Bell
      m_options->addSeparator();
-     selectBell = new KSelectAction(KIcon( "bell" ), i18n("&Bell"), settingsActions, "bell");
+     selectBell = new KSelectAction(KIcon( "bell" ), i18n("&Bell"), this);
+     settingsActions->addAction("bell", selectBell);
      connect(selectBell, SIGNAL(triggered(bool)), this, SLOT(slotSelectBell()));
      QStringList bellitems;
      bellitems << i18n("System &Bell")
@@ -351,26 +359,34 @@ void konsolePart::makeGUI()
      selectBell->setItems(bellitems);
      m_options->addAction(selectBell);
 
-      m_fontsizes = new KActionMenu( KIcon( "text" ), i18n( "Font" ), settingsActions, 0L );
-      KAction * action = new KAction( KIcon( "viewmag+" ), i18n( "&Enlarge Font" ), settingsActions, "enlarge_font" );
-      connect(action, SIGNAL(triggered(bool)), SLOT(biggerFont()));
-      m_fontsizes->addAction( action );
-      action = new KAction( KIcon( "viewmag-" ), i18n( "&Shrink Font" ), settingsActions, "shrink_font" );
-      connect(action, SIGNAL(triggered(bool)), SLOT(smallerFont()));
-      m_fontsizes->addAction( action );
-      action = new KAction( KIcon( "font" ), i18n( "Se&lect..." ), settingsActions, "select_font" );
-      connect(action, SIGNAL(triggered(bool)), SLOT(slotSelectFont()));
-      m_fontsizes->addAction( action );
-      m_options->addAction(m_fontsizes);
+     m_fontsizes = new KActionMenu( KIcon( "text" ), i18n( "Font" ), this );
+     settingsActions->addAction( m_fontsizes->objectName(), m_fontsizes );
+     QAction *action = settingsActions->addAction( "enlarge_font" );
+     action->setIcon( KIcon( "viewmag+" ) );
+     action->setText( i18n( "&Enlarge Font" ) );
+     connect(action, SIGNAL(triggered(bool)), SLOT(biggerFont()));
+     m_fontsizes->addAction( action );
+     action = settingsActions->addAction( "shrink_font" );
+     action->setIcon( KIcon( "viewmag-" ) );
+     action->setText( i18n( "&Shrink Font" ) );
+     connect(action, SIGNAL(triggered(bool)), SLOT(smallerFont()));
+     m_fontsizes->addAction( action );
+     action = settingsActions->addAction( "select_font" );
+     action->setIcon( KIcon( "font" ) );
+     action->setText( i18n( "Se&lect..." ) );
+     connect(action, SIGNAL(triggered(bool)), SLOT(slotSelectFont()));
+     m_fontsizes->addAction( action );
+     m_options->addAction(m_fontsizes);
 
-      // encoding menu, start with default checked !
-      selectSetEncoding = new KSelectAction( KIcon("charset" ), i18n( "&Encoding" ), settingsActions, "set_encoding" );
-      connect(selectSetEncoding, SIGNAL(triggered(bool)), this, SLOT(slotSetEncoding()));
-      QStringList list = KGlobal::charsets()->descriptiveEncodingNames();
-      list.prepend( i18n( "Default" ) );
-      selectSetEncoding->setItems(list);
-      selectSetEncoding->setCurrentItem (0);
-      m_options->addAction( selectSetEncoding );
+     // encoding menu, start with default checked !
+     selectSetEncoding = new KSelectAction( KIcon("charset" ), i18n( "&Encoding" ), this );
+     settingsActions->addAction( "set_encoding", selectSetEncoding );
+     connect(selectSetEncoding, SIGNAL(triggered(bool)), this, SLOT(slotSetEncoding()));
+     QStringList list = KGlobal::charsets()->descriptiveEncodingNames();
+     list.prepend( i18n( "Default" ) );
+     selectSetEncoding->setItems(list);
+     selectSetEncoding->setCurrentItem (0);
+     m_options->addAction( selectSetEncoding );
 
      // Keyboard Options Menu ---------------------------------------------------
      if (KAuthorized::authorizeKAction("keyboard"))
@@ -390,13 +406,16 @@ void konsolePart::makeGUI()
      }
 
 
-     KAction *historyType = new KAction(KIcon("history"), i18n("&History..."), settingsActions, "history");
+     QAction *historyType = settingsActions->addAction("history");
+     historyType->setIcon(KIcon("history"));
+     historyType->setText(i18n("&History..."));
      connect(historyType, SIGNAL(triggered(bool)), SLOT(slotHistoryType()));
      m_options->addAction( historyType );
      m_options->addSeparator();
 
      // Select line spacing
-     selectLineSpacing = new KSelectAction(KIcon("leftjust"), i18n("Li&ne Spacing"), settingsActions, "linespacing");
+     selectLineSpacing = new KSelectAction(KIcon("leftjust"), i18n("Li&ne Spacing"), this);
+     settingsActions->addAction("linespacing", selectLineSpacing);
      connect(selectLineSpacing, SIGNAL(triggered(bool)), this, SLOT(slotSelectLineSpacing()));
 
      QStringList lineSpacingList;
@@ -414,30 +433,36 @@ void konsolePart::makeGUI()
      m_options->addAction( selectLineSpacing );
 
      // Blinking Cursor
-     blinkingCursor = new KToggleAction(i18n("Blinking &Cursor"), settingsActions, QString());
+     blinkingCursor = new KToggleAction(i18n("Blinking &Cursor"), this);
+     settingsActions->addAction(blinkingCursor->objectName(), blinkingCursor);
      connect(blinkingCursor, SIGNAL(triggered(bool) ), SLOT(slotBlinkingCursor()));
      m_options->addAction(blinkingCursor);
 
      // Frame on/off
-     showFrame = new KToggleAction(i18n("Show Fr&ame"), settingsActions, QString());
+     showFrame = new KToggleAction(i18n("Show Fr&ame"), this);
+     settingsActions->addAction(showFrame->objectName(), showFrame);
      connect(showFrame, SIGNAL(triggered(bool) ), SLOT(slotToggleFrame()));
      showFrame->setCheckedState(KGuiItem(i18n("Hide Fr&ame")));
      m_options->addAction(showFrame);
 
      // Word Connectors
-     KAction *WordSeps = new KAction(i18n("Wor&d Connectors..."), settingsActions, 0);
+     KAction *WordSeps = new KAction(i18n("Wor&d Connectors..."), this);
+     settingsActions->addAction(WordSeps->objectName(), WordSeps);
      connect(WordSeps, SIGNAL(triggered(bool) ), SLOT(slotWordSeps()));
      m_options->addAction( WordSeps );
 
      // Use Konsole's Settings
      m_options->addSeparator();
-     m_useKonsoleSettings = new KToggleAction( i18n("&Use Konsole's Settings"), 0, "use_konsole_settings" );
+     m_useKonsoleSettings = new KToggleAction( i18n("&Use Konsole's Settings"), this );
+     settingsActions->addAction( "use_konsole_settings", m_useKonsoleSettings );
      connect(m_useKonsoleSettings, SIGNAL(triggered(bool) ), SLOT(slotUseKonsoleSettings()));
      m_options->addAction(m_useKonsoleSettings);
 
      // Save Settings
      m_options->addSeparator();
-     KAction *saveSettings = new KAction(KIcon("filesave"), i18n("&Save as Default"), actions, "save_default");
+     QAction *saveSettings = actions->addAction("save_default");
+     saveSettings->setIcon(KIcon("filesave"));
+     saveSettings->setText(i18n("&Save as Default"));
      connect(saveSettings, SIGNAL(triggered(bool)), SLOT(saveProperties()));
      m_options->addAction( saveSettings );
      if (KGlobalSettings::insertTearOffHandle())
@@ -446,15 +471,20 @@ void konsolePart::makeGUI()
 
   // Popup Menu -------------------------------------------------------------------
   m_popupMenu = new KMenu((KMainWindow*)parentWidget);
-  KAction *selectionEnd = new KAction(i18n("Set Selection End"), actions, "selection_end");
+  QAction *selectionEnd = actions->addAction("selection_end");
+  selectionEnd->setText(i18n("Set Selection End"));
   connect(selectionEnd, SIGNAL(triggered(bool) ), te, SLOT(setSelectionEnd()));
   m_popupMenu->addAction( selectionEnd );
 
-  KAction *copyClipboard = new KAction(KIcon("editcopy"), i18n("&Copy"), actions, "edit_copy");
+  QAction *copyClipboard = actions->addAction("edit_copy");
+  copyClipboard->setIcon(KIcon("editcopy"));
+  copyClipboard->setText(i18n("&Copy"));
   connect(copyClipboard, SIGNAL(triggered(bool)), te, SLOT(copyClipboard()));
   m_popupMenu->addAction( copyClipboard );
 
-  KAction *pasteClipboard = new KAction(KIcon("editpaste"), i18n("&Paste"), actions, "edit_paste");
+  QAction *pasteClipboard = actions->addAction("edit_paste");
+  pasteClipboard->setIcon(KIcon("editpaste"));
+  pasteClipboard->setText(i18n("&Paste"));
   connect(pasteClipboard, SIGNAL(triggered(bool)), te, SLOT(pasteClipboard()));
   m_popupMenu->addAction( pasteClipboard );
 
@@ -470,7 +500,9 @@ void konsolePart::makeGUI()
      m_popupMenu->addSeparator();
   }
 
-  KAction *closeSession = new KAction(KIcon("fileclose"), i18n("&Close Terminal Emulator"), actions, "close_session");
+  QAction *closeSession = actions->addAction("close_session");
+  closeSession->setIcon(KIcon("fileclose"));
+  closeSession->setText(i18n("&Close Terminal Emulator"));
   connect(closeSession, SIGNAL(triggered(bool)), SLOT(closeCurrentSession()));
   m_popupMenu->addAction( closeSession );
   if (KGlobalSettings::insertTearOffHandle())

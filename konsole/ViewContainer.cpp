@@ -220,6 +220,13 @@ void TabbedViewContainer::viewRemoved( QWidget* view )
     _tabWidget->removeTab( _tabWidget->indexOf(view) );
 }
 
+void TabbedViewContainer::currentTabChanged(int index)
+{
+    Q_ASSERT( index >= 0 && index < _tabWidget->count() );
+
+    emit activeViewChanged(_tabWidget->widget(index));
+}
+
 void TabbedViewContainer::updateIcon(ViewProperties* item)
 {
     kDebug() << __FUNCTION__ << ": icon changed." << endl;
