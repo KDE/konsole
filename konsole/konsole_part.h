@@ -30,10 +30,6 @@
 #include <kdialog.h>
 #include <kde_terminal_interface.h>
 
-// Konsole
-#include "schema.h"
-#include "TESession.h"
-
 class KInstance;
 class konsoleBrowserExtension;
 class QPushButton;
@@ -43,6 +39,12 @@ class KActionMenu;
 class QCheckBox;
 class KToggleAction;
 class KSelectAction;
+class ColorSchema;
+class ColorSchemaList;
+class HistoryType;
+class KAboutData;
+class TESession;
+class TEWidget;
 
 namespace KParts { class GUIActivateEvent; }
 

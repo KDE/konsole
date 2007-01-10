@@ -21,6 +21,11 @@
 
 #include "konsole_part.h"
 
+#include "keytrans.h"
+#include "schema.h"
+#include "TESession.h"
+#include "TEWidget.h"
+
 #include <assert.h>
 
 #include <QFile>
@@ -55,6 +60,7 @@
 #include <kselectaction.h>
 #include <ktoggleaction.h>
 #include <kauthorized.h>
+#include <kinstance.h>
 
 // True transparency is not available in the embedded Konsole
 bool true_transparency = false;
