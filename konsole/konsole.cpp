@@ -2064,7 +2064,6 @@ void Konsole::slotConfigure()
 
 void Konsole::reparseConfiguration()
 {
-kdDebug()<<" Konsole::reparseConfiguration*****************\n";
   KGlobal::config()->reparseConfiguration();
   readProperties(KGlobal::config(), QString(), true);
 
