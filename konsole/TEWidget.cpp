@@ -303,7 +303,7 @@ void TEWidget::fontChange(const QFont &)
 //printf("rawname: %s\n",font().rawName().toAscii().constData());
 
 /*
-#if defined(Q_CC_GNU)
+#ifdef __GNUC__
 #warning TODO: Review/fix vt100 extended font-mapping
 #endif
 */
