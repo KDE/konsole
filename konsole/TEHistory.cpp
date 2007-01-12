@@ -327,7 +327,7 @@ void HistoryScrollBuffer::addCells(const ca a[], int count)
   m_wrappedLine.clearBit(m_arrayIndex);
 }
 
-void HistoryScrollBuffer::normalize()
+/*void HistoryScrollBuffer::normalize()
 {
   if (!m_buffFilled || !m_arrayIndex) return;
   Q3PtrVector<histline> newHistBuffer;
@@ -353,7 +353,7 @@ void HistoryScrollBuffer::normalize()
   m_arrayIndex = m_maxNbLines;
   m_buffFilled = false;
   m_nbLines = m_maxNbLines-2;
-}
+}*/
 
 void HistoryScrollBuffer::addLine(bool previousWrapped)
 {
@@ -399,19 +399,40 @@ void HistoryScrollBuffer::getCells(int lineno, int colno, int count, ca res[])
     return;
   }
 
-  assert((colno < (int) l->size()) || (count == 0));
+  assert(colno <= (int) l->size() - count);
     
   memcpy(res, l->data() + colno, count * sizeof(ca));
 }
 
 void HistoryScrollBuffer::setMaxNbLines(unsigned int nbLines)
 {
-  normalize();
+  Q3PtrVector<histline> newHistBuffer(nbLines);
+  QBitArray newWrappedLine(nbLines);
+  
+  size_t preservedLines = (nbLines > m_nbLines ? m_nbLines : nbLines); //min
+
+  // delete any lines that will be lost
+  size_t lineOld;
+  for(lineOld = 0; lineOld < m_nbLines - preservedLines; ++lineOld) {
+     delete m_histBuffer[adjustLineNb(lineOld)];
+  }
+
+  // copy the lines to new arrays
+  size_t indexNew = 0;
+  while(indexNew < preservedLines) {
+     newHistBuffer.insert(indexNew, m_histBuffer[adjustLineNb(lineOld)]);
+     newWrappedLine.setBit(indexNew, m_wrappedLine[adjustLineNb(lineOld)]);
+     ++lineOld; 
+     ++indexNew;
+  }
+  m_arrayIndex = preservedLines - 1;
+  
+  m_histBuffer = newHistBuffer;
+  m_wrappedLine = newWrappedLine;
+
   m_maxNbLines = nbLines;
-  m_histBuffer.resize(m_maxNbLines);
-  m_wrappedLine.resize(m_maxNbLines);
-  if (m_nbLines > m_maxNbLines - 2)
-     m_nbLines = m_maxNbLines -2;
+  if (m_nbLines > m_maxNbLines)
+     m_nbLines = m_maxNbLines;
 
   delete m_histType;
   m_histType = new HistoryTypeBuffer(nbLines);
@@ -419,10 +440,10 @@ void HistoryScrollBuffer::setMaxNbLines(unsigned int nbLines)
 
 int HistoryScrollBuffer::adjustLineNb(int lineno)
 {
-  if (m_buffFilled)
-      return (lineno + m_arrayIndex + 2) % m_maxNbLines;
-  else
-      return lineno ? lineno + 1 : 0;
+   // lineno = 0:               oldest line
+   // lineno = getLines() - 1:  newest line
+
+   return (m_arrayIndex + lineno - (m_nbLines - 1) + m_maxNbLines) % m_maxNbLines;
 }
 
 
