@@ -142,16 +142,11 @@ public:
 private:
   int adjustLineNb(int lineno);
 
-  // Normalize buffer so that the size can be changed.
-  void normalize();
-
-  bool m_hasScroll;
   QPtrVector<histline> m_histBuffer;
   QBitArray m_wrappedLine;
   unsigned int m_maxNbLines;
   unsigned int m_nbLines;
   unsigned int m_arrayIndex;
-  bool         m_buffFilled;
 
 };
 

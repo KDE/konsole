@@ -207,24 +207,23 @@ void HistoryScrollFile::addLine(bool previousWrapped)
 // History Scroll Buffer //////////////////////////////////////
 HistoryScrollBuffer::HistoryScrollBuffer(unsigned int maxNbLines)
   : HistoryScroll(new HistoryTypeBuffer(maxNbLines)),
+    m_histBuffer(maxNbLines),
+    m_wrappedLine(maxNbLines),
     m_maxNbLines(maxNbLines),
     m_nbLines(0),
-    m_arrayIndex(0),
-    m_buffFilled(false)
+    m_arrayIndex(maxNbLines - 1)
 {
-  m_histBuffer.setAutoDelete(true);
-  m_histBuffer.resize(maxNbLines);
-  m_wrappedLine.resize(maxNbLines);
 }
 
 HistoryScrollBuffer::~HistoryScrollBuffer()
 {
+   for(size_t line = 0; line < m_nbLines; ++line) {
+      delete m_histBuffer[adjustLineNb(line)];   
+   }
 }
 
 void HistoryScrollBuffer::addCells(ca a[], int count)
 {
-  //unsigned int nbLines = countLines(bytes, len);
-
   histline* newLine = new histline;
 
   newLine->duplicate(a, count);
@@ -232,43 +231,13 @@ void HistoryScrollBuffer::addCells(ca a[], int count)
   ++m_arrayIndex;
   if (m_arrayIndex >= m_maxNbLines) {
      m_arrayIndex = 0;
-     m_buffFilled = true;
-    }
+  }
 
-  // FIXME: See BR96605
-  if (m_nbLines < m_maxNbLines - 1) ++m_nbLines;
+  if (m_nbLines < m_maxNbLines) ++m_nbLines;
 
-  // m_histBuffer.remove(m_arrayIndex); // not necessary
+  delete m_histBuffer[m_arrayIndex];
   m_histBuffer.insert(m_arrayIndex, newLine);
   m_wrappedLine.clearBit(m_arrayIndex);
-}
-
-void HistoryScrollBuffer::normalize()
-{
-  if (!m_buffFilled || !m_arrayIndex) return;
-  QPtrVector<histline> newHistBuffer;
-  newHistBuffer.resize(m_maxNbLines);
-  QBitArray newWrappedLine;
-  newWrappedLine.resize(m_maxNbLines);
-  for(int i = 0; i < (int) m_maxNbLines-2; i++)
-  {
-     int lineno = adjustLineNb(i);
-     newHistBuffer.insert(i+1, m_histBuffer[lineno]);
-     newWrappedLine.setBit(i+1, m_wrappedLine[lineno]);
-  }
-  m_histBuffer.setAutoDelete(false);
-  // Qt 2.3: QVector copy assignment is buggy :-(
-  //  m_histBuffer = newHistBuffer;
-  for(int i = 0; i < (int) m_maxNbLines; i++)
-  {
-     m_histBuffer.insert(i, newHistBuffer[i]);
-     m_wrappedLine.setBit(i, newWrappedLine[i]);
-  }
-  m_histBuffer.setAutoDelete(true);
-
-  m_arrayIndex = m_maxNbLines;
-  m_buffFilled = false;
-  m_nbLines = m_maxNbLines-2;
 }
 
 void HistoryScrollBuffer::addLine(bool previousWrapped)
@@ -315,19 +284,40 @@ void HistoryScrollBuffer::getCells(int lineno, int colno, int count, ca res[])
     return;
   }
 
-  assert((colno < (int) l->size()) || (count == 0));
+  assert(colno <= (int) l->size() - count);
     
   memcpy(res, l->data() + colno, count * sizeof(ca));
 }
 
 void HistoryScrollBuffer::setMaxNbLines(unsigned int nbLines)
 {
-  normalize();
+  QPtrVector<histline> newHistBuffer(nbLines);
+  QBitArray newWrappedLine(nbLines);
+  
+  size_t preservedLines = (nbLines > m_nbLines ? m_nbLines : nbLines); //min
+
+  // delete any lines that will be lost
+  size_t lineOld;
+  for(lineOld = 0; lineOld < m_nbLines - preservedLines; ++lineOld) {
+     delete m_histBuffer[adjustLineNb(lineOld)];
+  }
+
+  // copy the lines to new arrays
+  size_t indexNew = 0;
+  while(indexNew < preservedLines) {
+     newHistBuffer.insert(indexNew, m_histBuffer[adjustLineNb(lineOld)]);
+     newWrappedLine.setBit(indexNew, m_wrappedLine[adjustLineNb(lineOld)]);
+     ++lineOld; 
+     ++indexNew;
+  }
+  m_arrayIndex = preservedLines - 1;
+  
+  m_histBuffer = newHistBuffer;
+  m_wrappedLine = newWrappedLine;
+
   m_maxNbLines = nbLines;
-  m_histBuffer.resize(m_maxNbLines);
-  m_wrappedLine.resize(m_maxNbLines);
-  if (m_nbLines > m_maxNbLines - 2)
-     m_nbLines = m_maxNbLines -2;
+  if (m_nbLines > m_maxNbLines)
+     m_nbLines = m_maxNbLines;
 
   delete m_histType;
   m_histType = new HistoryTypeBuffer(nbLines);
@@ -335,10 +325,10 @@ void HistoryScrollBuffer::setMaxNbLines(unsigned int nbLines)
 
 int HistoryScrollBuffer::adjustLineNb(int lineno)
 {
-  if (m_buffFilled)
-      return (lineno + m_arrayIndex + 2) % m_maxNbLines;
-  else
-      return lineno ? lineno + 1 : 0;
+   // lineno = 0:               oldest line
+   // lineno = getLines() - 1:  newest line
+
+   return (m_arrayIndex + lineno - (m_nbLines - 1) + m_maxNbLines) % m_maxNbLines;
 }
 
 
