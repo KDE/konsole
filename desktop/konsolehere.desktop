@@ -6,10 +6,12 @@ Actions=openTerminalHere;
 X-KDE-AuthorizeAction=shell_access
 
 Name=Konsole
+Name[el]=Κονσόλα
 Name[x-test]=xxKonsolexx
 
 [Desktop Action openTerminalHere]
 Name=Open Terminal Here
+Name[el]=Άνοιγμα τερματικού εδώ
 Name[fr]=Ouvrir un terminal ici
 Name[x-test]=xxOpen Terminal Herexx
 Icon=konsole

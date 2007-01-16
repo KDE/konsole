@@ -5,6 +5,7 @@ Name=Midnight Commander
 Name[x-test]=xxMidnight Commanderxx
 Icon=konsoleblue
 Comment=New Midnight Commander
+Comment[el]=Νέος Midnight Commander
 Comment[fr]=Nouveau Midnight Commander
 Comment[x-test]=xxNew Midnight Commanderxx
 Exec=mc -c

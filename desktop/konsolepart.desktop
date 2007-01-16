@@ -12,6 +12,7 @@ X-KDE-BrowserView-ToggableView-Orientation=horizontal
 X-KDE-BrowserView-FollowActive=true
 
 Name=Terminal Emulator
+Name[el]=Προσομοιωτής τερματικού
 Name[fr]=Émulateur de terminal
 Name[x-test]=xxTerminal Emulatorxx
 X-KDE-AuthorizeAction=shell_access

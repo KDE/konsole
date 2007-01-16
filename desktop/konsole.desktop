@@ -8,9 +8,11 @@ Terminal=false
 X-KDE-StartupNotify=true
 
 Name=Konsole
+Name[el]=Κονσόλα
 Name[x-test]=xxKonsolexx
 
 GenericName=Terminal Program
+GenericName[el]=Πρόγραμμα τερματικού
 GenericName[fr]=Terminal
 GenericName[x-test]=xxTerminal Programxx
 X-DBUS-StartupType=Multi

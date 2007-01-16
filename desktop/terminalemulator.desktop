@@ -4,5 +4,6 @@ Type=ServiceType
 X-KDE-ServiceType=TerminalEmulator
 X-KDE-Derived=KParts/ReadOnlyPart
 Name=Terminal Emulator
+Name[el]=Προσομοιωτής τερματικού
 Name[fr]=Émulateur de terminal
 Name[x-test]=xxTerminal Emulatorxx
