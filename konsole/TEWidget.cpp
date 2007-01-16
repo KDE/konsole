@@ -394,9 +394,12 @@ TEWidget::TEWidget(QWidget *parent)
   // konsole in opaque mode.
   bY = bX = 1;
 
-  cb = QApplication::clipboard();
-  QObject::connect( (QObject*)cb, SIGNAL(selectionChanged()),
-                    this, SLOT(onClearSelection()) );
+  //Selection is no longer cleared automatically 
+  //when the selection changes
+  //
+  //cb = QApplication::clipboard();
+  //QObject::connect( (QObject*)cb, SIGNAL(selectionChanged()),
+  //                  this, SLOT(onClearSelection()) );
 
   scrollbar = new QScrollBar(this);
   scrollbar->setCursor( Qt::ArrowCursor );
@@ -1908,6 +1911,7 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
     int charColumn;
     characterPosition(ev->pos(),charLine,charColumn);
 
+    // handle filters
     Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine,charColumn);
     if ( spot )
     {
@@ -1932,7 +1936,10 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
     else
     {
       if ( actSel > 1 )
+      {
           emit endSelectionSignal(preserve_line_breaks);
+      }
+
       actSel = 0;
 
       //FIXME: emits a release event even if the mouse is
@@ -1943,6 +1950,7 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
         emit mouseSignal( 3, // release
                         charColumn + 1,
                         charLine + 1 +scrollbar->value() -scrollbar->maximum() , 0);
+
       releaseMouse();
     }
     dragInfo.state = diNone;
@@ -2047,7 +2055,6 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
      if ( ( QChar( image[i].c ) == '@' ) && ( ( endSel.x() - bgnSel.x() ) > 0 ) )
        endSel.setX( x - 1 );
 
-     kDebug() << "word selection , start = " << bgnSel << " , end = " << endSel << endl;
 
      actSel = 2; // within selection
      emit extendSelectionSignal( endSel.x(), endSel.y() );
@@ -2192,13 +2199,16 @@ void TEWidget::setSelection(const QString& t)
 {
   // Disconnect signal while WE set the clipboard
   QClipboard *cb = QApplication::clipboard();
-  QObject::disconnect( cb, SIGNAL(selectionChanged()),
-                     this, SLOT(onClearSelection()) );
+  
+  // We no longer clear the selection when it is changed by another application
+  //
+  //QObject::disconnect( cb, SIGNAL(selectionChanged()),
+  //                   this, SLOT(onClearSelection()) );
 
   cb->setText(t, QClipboard::Selection);
 
-  QObject::connect( cb, SIGNAL(selectionChanged()),
-                     this, SLOT(onClearSelection()) );
+  //QObject::connect( cb, SIGNAL(selectionChanged()),
+  //                   this, SLOT(onClearSelection()) );
 }
 
 void TEWidget::copyClipboard()
@@ -2291,16 +2301,20 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
     // here.
     return true;
   }
-  if ( e->type() == QEvent::Enter )
-  {
-    QObject::disconnect( (QObject*)cb, SIGNAL(dataChanged()),
-      this, SLOT(onClearSelection()) );
-  }
-  if ( e->type() == QEvent::Leave )
-  {
-    QObject::connect( (QObject*)cb, SIGNAL(dataChanged()),
-      this, SLOT(onClearSelection()) );
-  }
+  
+  // We no longer clear the selection when the clipboard changes
+  //
+  //if ( e->type() == QEvent::Enter )
+  //{
+  //  QObject::disconnect( (QObject*)cb, SIGNAL(dataChanged()),
+  //    this, SLOT(onClearSelection()) );
+  //}
+  //if ( e->type() == QEvent::Leave )
+  //{
+  //  QObject::connect( (QObject*)cb, SIGNAL(dataChanged()),
+  //    this, SLOT(onClearSelection()) );
+  //}*/
+  
   return QFrame::eventFilter( obj, e );
 }
 
@@ -2676,7 +2690,7 @@ void TEWidget::doDrag()
   dragInfo.dragObject = new QDrag(this);
   QMimeData *mimeData = new QMimeData;
   mimeData->setText(QApplication::clipboard()->text(QClipboard::Selection));
-//   dragInfo.dragObject->dragCopy();
+  dragInfo.dragObject->setMimeData(mimeData);
   dragInfo.dragObject->start(Qt::CopyAction);
   // Don't delete the QTextDrag object.  Qt will delete it when it's done with it.
 }
