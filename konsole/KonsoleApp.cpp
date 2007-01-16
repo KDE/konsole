@@ -87,8 +87,12 @@ void KonsoleApp::createSession(const QString& key , ViewManager* view)
 {
     TESession* session = _sessionManager->createSession(key);
     session->setConnect(true);
-    session->run();
+    
+    // create view before starting the session process so that the session doesn't suffer
+    // a change in terminal size right after the session starts.  some applications such as GNU Screen
+    // and Midnight Commander don't like this happening
     view->createView(session);
+    session->run();
 }
 
 #include "KonsoleApp.moc"

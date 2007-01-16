@@ -167,8 +167,17 @@ TabbedViewContainer::TabbedViewContainer(QObject* parent) :
     }
 
 
+   connect( _tabWidget , SIGNAL(currentChanged(int)) , this , SLOT(currentTabChanged(int)) );
    connect( _tabWidget , SIGNAL(contextMenu(QWidget*,const QPoint&)),
                          SLOT(showContextMenu(QWidget*,const QPoint&))); 
+}
+
+void TabbedViewContainer::currentTabChanged(int tab)
+{
+    if ( tab >= 0 )
+    {
+        emit activeViewChanged( _tabWidget->widget(tab) );
+    }
 }
 
 void TabbedViewContainer::closeTabClicked()
@@ -223,13 +232,6 @@ void TabbedViewContainer::viewRemoved( QWidget* view )
     Q_ASSERT( _tabWidget->indexOf(view) != -1 );
 
     _tabWidget->removeTab( _tabWidget->indexOf(view) );
-}
-
-void TabbedViewContainer::currentTabChanged(int index)
-{
-    Q_ASSERT( index >= 0 && index < _tabWidget->count() );
-
-    emit activeViewChanged(_tabWidget->widget(index));
 }
 
 void TabbedViewContainer::updateIcon(ViewProperties* item)

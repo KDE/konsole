@@ -6,9 +6,8 @@ Tuesday - 16th Jan 07
 
       Add a signal to ViewContainer which is emitted when the selected view changes.
 
-      [PARTIAL-FIXED Works with ListViewContainer, just need to make TabbedViewContainer emit
-       a viewActivated() signal]
-
+      [FIXED - ViewContainers emit an activeViewChanged() signal when the user switches to a different view]
+          
     - Open multiple views on a single session and make a selection in one or more of them
       the selection disappears when releasing the mouse
 
