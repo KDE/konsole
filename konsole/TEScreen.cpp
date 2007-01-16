@@ -1381,9 +1381,9 @@ void TEScreen::copyLineToStream(int line , int start, int count,
 		{
 			//retrieve line from history buffer
 			if (count == -1)
-					count = hist->getLineLen(line);
+					count = hist->getLineLen(line)-start;
 			else
-					count = qMin(start+count,hist->getLineLen(line));
+					count = qMin(start+count,hist->getLineLen(line))-start;
 			
 			hist->getCells(line,start,count,characterBuffer);
 		}
