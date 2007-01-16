@@ -36,6 +36,18 @@
 #include "Filter.h"
 #include "TerminalCharacterDecoder.h"
 
+FilterChain::~FilterChain()
+{
+    QMutableListIterator<Filter*> iter(*this);
+    
+    while ( iter.hasNext() )
+    {
+        Filter* filter = iter.next();
+        iter.remove();
+        delete filter;
+    }
+}
+
 void FilterChain::addFilter(Filter* filter)
 {
     append(filter);

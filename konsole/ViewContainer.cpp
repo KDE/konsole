@@ -40,6 +40,11 @@
 #include "ViewContainer.h"
 #include "ViewProperties.h"
 
+ViewContainer::~ViewContainer()
+{
+    emit destroyed(this);
+
+}
 void ViewContainer::addView(QWidget* view , ViewProperties* item)
 {
     _views << view;
@@ -173,8 +178,8 @@ void TabbedViewContainer::closeTabClicked()
 
 TabbedViewContainer::~TabbedViewContainer()
 {
-    delete _tabContextMenu;
-    delete _tabWidget;
+    _tabContextMenu->deleteLater();
+    _tabWidget->deleteLater();
 }
 
 void TabbedViewContainer::setNewSessionMenu(QMenu* menu)
@@ -330,22 +335,19 @@ ListViewContainer::ListViewContainer(QObject* parent)
     : ViewContainer(parent)
 {
     _splitter = new QSplitter;
-    _stackWidget = new QStackedWidget;
-    _listWidget = new QListWidget;
+    _stackWidget = new QStackedWidget(_splitter);
+    _listWidget = new QListWidget(_splitter);
     _listWidget->setTextElideMode( Qt::ElideLeft );
     _listWidget->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     _splitter->addWidget(_listWidget);
     _splitter->addWidget(_stackWidget);
-
-    
+        
     connect( _listWidget , SIGNAL(currentRowChanged(int)) , this , SLOT(rowChanged(int)) ); 
 }
 
 ListViewContainer::~ListViewContainer()
 {
-    delete _listWidget;
-    delete _stackWidget;
-    delete _splitter;
+    _splitter->deleteLater();
 }
 
 QWidget* ListViewContainer::containerWidget() const
@@ -388,9 +390,13 @@ void ListViewContainer::setActiveView( QWidget* view )
 
 void ListViewContainer::rowChanged( int row )
 {
-    _stackWidget->setCurrentIndex( row );
+    // row may be -1 if the last row has been removed from the model
+    if ( row >= 0 )
+    {
+        _stackWidget->setCurrentIndex( row );
 
-    emit activeViewChanged( _stackWidget->currentWidget() );
+        emit activeViewChanged( _stackWidget->currentWidget() );
+    }
 }
 
 void ListViewContainer::updateTitle( ViewProperties* properties )

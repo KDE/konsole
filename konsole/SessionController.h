@@ -41,7 +41,9 @@ public:
     /** Reimplemented to watch for events happening to the view */
     virtual bool eventFilter(QObject* watched , QEvent* event);
 
+    /** Returns the session associated with this controller */
     TESession* session() { return _session; }
+    /** Returns the view associated with this controller */
     TEWidget*  view()    { return _view;    }
 
 signals:
@@ -53,6 +55,7 @@ signals:
     void focused( SessionController* controller );
 
 private slots:
+    // menu item handlers
     void copy();
     void paste();
     void clear();

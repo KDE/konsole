@@ -66,7 +66,13 @@ Q_OBJECT
     
 public:
     ViewContainer(QObject* parent) : QObject(parent) {}
-    virtual ~ViewContainer() { emit destroyed(this); }
+
+    /** 
+     * Called when the ViewContainer is destroyed.  When reimplementing this in 
+     * subclasses, use object->deleteLater() to delete any widgets or other objects
+     * instead of 'delete object'.
+     */
+    virtual ~ViewContainer();
 
     /** Returns the widget which contains the view widgets */
     virtual QWidget* containerWidget() const = 0;
@@ -160,6 +166,7 @@ private slots:
     void prepareColorCells();
     void showContextMenu(QWidget* widget , const QPoint& position);
     void currentTabChanged(int index);
+
 
 private:
     KTabWidget* _tabWidget; 

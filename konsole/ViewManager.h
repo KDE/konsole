@@ -42,6 +42,9 @@ class ViewSplitter;
  * KonsoleMainWindow widget passed as an argument to the constructor.
  *
  * To create new terminal displays inside the container widget, use the createView() method.
+ *
+ * ViewContainers can be merged together, that is, the views contained in one container can be moved
+ * into another using the merge() method.
  */
 class ViewManager : public QObject
 {
@@ -75,7 +78,9 @@ signals:
     void viewDetached(TESession* session);
 
 private slots:
+    // called when the "Split View" menu item is selected
     void splitView(bool splitView);
+    // called when the "Detach View" menu item is selected
     void detachActiveView();
     // called when a session terminates - the view manager will delete any
     // views associated with the session
@@ -83,7 +88,13 @@ private slots:
     // called when the container requests to close a particular view
     void viewCloseRequest(QWidget* widget);
 
+    // controller detects when an associated view is given the focus
+    // and emits a signal.  ViewManager listens for that signal
+    // and then plugs the action into the UI
     void viewFocused( SessionController* controller );
+
+    // called when the active view in a ViewContainer changes, so
+    // that we can plug the appropriate actions into the UI
     void viewActivated( QWidget* view );
 
 private:

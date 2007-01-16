@@ -144,9 +144,15 @@ void ViewManager::focusActiveView()
     }
 }
 
+
 void ViewManager::viewActivated( QWidget* view )
 {
-    view->setFocus(Qt::MouseFocusReason);
+    Q_ASSERT( view != 0 );
+
+    // focus the activated view, this will cause the SessionController
+    // to notify the world that the view has been focused and the appropriate UI
+    // actions will be plugged in.
+    view->setFocus(Qt::OtherFocusReason);
 }
 
 void ViewManager::viewFocused( SessionController* controller )
@@ -163,6 +169,8 @@ void ViewManager::viewFocused( SessionController* controller )
         _mainWindow->setPlainCaption( controller->session()->displayTitle() );
 
         _pluggedController = controller;
+
+        kDebug() << "Plugged actions for " << controller->session()->displayTitle() << endl;
     }
 }
 
@@ -267,6 +275,8 @@ ViewContainer* ViewManager::createContainer()
     connect( container , SIGNAL(closeRequest(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)) );
 */
     ViewContainer* container = new ListViewContainer(_viewSplitter);
+
+    connect( container , SIGNAL(activeViewChanged(QWidget*)) , this , SLOT(viewActivated(QWidget*)));
     return container;
 }
 

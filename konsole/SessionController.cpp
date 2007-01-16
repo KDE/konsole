@@ -41,14 +41,11 @@ SessionController::SessionController(TESession* session , TEWidget* view, QObjec
     connect( _session , SIGNAL(updateTitle()) , this , SLOT(sessionTitleChanged()) );
 
     // install filter on the view to highlight URLs
-    _viewUrlFilter = new UrlFilter();
-    view->filterChain()->addFilter( _viewUrlFilter );
+    view->filterChain()->addFilter( new UrlFilter() );
 }
 
 SessionController::~SessionController()
 {   
-    // delete filters
-    delete _viewUrlFilter;
 }
 
 bool SessionController::eventFilter(QObject* watched , QEvent* event)
