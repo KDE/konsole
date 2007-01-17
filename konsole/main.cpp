@@ -554,8 +554,8 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
           // -1 will be changed to the default history in konsolerc
           key = QString("History%1").arg(counter);
           QString key2 = QString("HistoryEnabled%1").arg(counter);
-          m->initHistory(sessionconfig->readNumEntry(key, -1),
-                         sessionconfig->readBoolEntry(key2, true));
+          m->initHistory(sessionconfig->readEntry(key, -1),
+                         sessionconfig->readEntry(key2, true));
 */
 
           counter++;
