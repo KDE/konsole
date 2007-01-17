@@ -119,6 +119,7 @@ SchemaEditor::SchemaEditor(QWidget * parent)
 
     connect(defaultSchemaCB, SIGNAL(toggled(bool)), this, SIGNAL(changed()));
     removeButton->setEnabled( schemaList->currentItem() );
+    load();
 }
 
 
@@ -207,10 +208,9 @@ void SchemaEditor::getList()
     }
 }
 
-void SchemaEditor::show()
+void SchemaEditor::load()
 {
     getList();
-    SchemaDialog::show();
 }
 
 

@@ -66,11 +66,11 @@ class SchemaEditor : public SchemaDialog
 	void removeCurrent();
 	void getList();
   private Q_SLOTS:
-	void show();
 	void schemaModified();
 	void loadAllSchema(QString currentFile="");
 	void updatePreview();
   private:
+	void load();
 	bool schMod;
   	QVector<QColor> color;
 	QVector<int> type; // 0= custom, 1= sysfg, 2=sysbg, 3=rcolor
