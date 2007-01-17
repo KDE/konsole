@@ -74,6 +74,7 @@ SessionEditor::SessionEditor(QWidget * parent)
   connect(fontCombo, SIGNAL(activated(int)), this, SLOT(sessionModified()));
   connect(keytabCombo, SIGNAL(activated(int)), this, SLOT(sessionModified()));
   connect(schemaCombo, SIGNAL(activated(int)), this, SLOT(sessionModified()));
+  load();
 }
 
 SessionEditor::~SessionEditor()
@@ -82,7 +83,7 @@ SessionEditor::~SessionEditor()
     schemaFilename.setAutoDelete(true);
 }
 
-void SessionEditor::show()
+void SessionEditor::load()
 {
   removeButton->setEnabled(sessionList->count()>1);
   if (! loaded) {

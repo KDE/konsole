@@ -61,7 +61,7 @@ class SessionEditor : public SessionDialog
     void sessionModified();
 
   private: 
-    void show();
+    void load();
     void loadAllKeytab();
     void loadAllSession(QString currentFile="");
     QString readKeymapTitle(const QString& filename);
