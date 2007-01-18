@@ -54,7 +54,7 @@
 int TESession::lastSessionId = 0;
 
 TESession::TESession() : 
-     _shellProcess(0)
+    _shellProcess(0)
    , _emulation(0)
    , connected(true)
    , monitorActivity(false)
@@ -69,6 +69,8 @@ TESession::TESession() :
    , _addToUtmp(true)
    , _flowControl(true)
    , _fullScripting(false)
+   , winId(0)
+   , _sessionId(0)
    , zmodemBusy(false)
    , zmodemProc(0)
    , zmodemProgress(0)
@@ -78,8 +80,10 @@ TESession::TESession() :
     //prepare DBus communication
     (void)new SessionAdaptor(this);
 
-    sessionId = QLatin1String("session") + QString::number(++lastSessionId);    	
-    QDBusConnection::sessionBus().registerObject(QLatin1String("/Sessions/")+sessionId, this);
+    // TODO
+    // numeric session identifier exposed via DBus isn't very user-friendly, but is this an issue? 
+    _sessionId = ++lastSessionId; 
+    QDBusConnection::sessionBus().registerObject(QLatin1String("/Sessions/session")+QString::number(_sessionId), this);
 
     //create teletype for I/O with shell process
     _shellProcess = new TEPty();
@@ -292,7 +296,7 @@ void TESession::run()
   int result = _shellProcess->run(QFile::encodeName(_program), _arguments, term.toLatin1(),
           winId, _addToUtmp,
           dbusService.toLatin1(),
-          (QLatin1String("/Sessions/") + sessionId).toLatin1());
+          (QLatin1String("/Sessions/") + QString::number(_sessionId)).toLatin1());
   if (result < 0) {     // Error in opening pseudo teletype
     kWarning()<<"Unable to open a pseudo teletype!"<<endl;
     QTimer::singleShot(0, this, SLOT(ptyError()));
@@ -685,9 +689,9 @@ void TESession::setTerminalType(const QString& terminalType)
     term = terminalType;
 }
 
-const QString & TESession::SessionId() const
+int TESession::sessionId() const
 {
-  return sessionId;
+  return _sessionId;
 }
 
 void TESession::setEncodingNo(int index)

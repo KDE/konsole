@@ -140,7 +140,7 @@ public:
    */
   void setTerminalType(const QString& terminalType);
 
-  const QString& SessionId() const;
+  int sessionId() const;
   const QString& title() const;
   const QString& iconName() const;
   const QString& iconText() const;
@@ -288,6 +288,8 @@ private:
 
   void updateTerminalSize();
 
+  int            _uniqueIdentifier;
+
   TEPty*         _shellProcess;
   TEmulation*    _emulation;
 
@@ -324,7 +326,7 @@ private:
 
   QString        term;
   ulong          winId;
-  QString        sessionId;
+  int           _sessionId;
 
   QString        cwd;
   QString        initial_cwd;
@@ -342,6 +344,7 @@ private:
   ColorSchema*   _colorScheme;
   
   static int lastSessionId;
+  
 };
 
 #endif

@@ -74,6 +74,7 @@ set(konsole_KDEINIT_SRCS
         TerminalCharacterDecoder.cpp
         IncrementalSearchBar.cpp
         Filter.cpp
+        SessionListWidget.cpp
         schema.cpp
         konsole_wcwidth.cpp
    ) 

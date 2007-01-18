@@ -32,13 +32,20 @@ void ViewProperties::setIcon(const QIcon& icon)
     _icon = icon;
     emit iconChanged(this);
 }
-QString ViewProperties::title()
+void ViewProperties::setIdentifier(int id)
+{
+    _id = id;
+}
+QString ViewProperties::title() const
 {
     return _title;
 }
-QIcon ViewProperties::icon()
+QIcon ViewProperties::icon() const
 {
     return _icon;
 }
-
+int ViewProperties::identifier() const
+{
+    return _id;
+}
 #include "ViewProperties.moc"

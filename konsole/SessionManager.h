@@ -265,7 +265,7 @@ private:
     SessionInfo* _defaultSessionType;
 
     typedef QPair<Source,QVariant> SourceVariant;
-    
+
     QHash< Setting , QList< SourceVariant > >  _settings;
 
     ColorSchemaList* _colorSchemeList;

@@ -22,6 +22,7 @@
 // Qt
 #include <QHash>
 #include <QLineEdit>
+#include <QLinearGradient>
 #include <QListWidget>
 #include <QSplitter>
 #include <QStackedWidget>
@@ -39,6 +40,9 @@
 // Konsole
 #include "ViewContainer.h"
 #include "ViewProperties.h"
+
+// TODO Perhaps move everything which is Konsole-specific into different files
+#include "SessionListWidget.h"
 
 ViewContainer::~ViewContainer()
 {
@@ -338,9 +342,10 @@ ListViewContainer::ListViewContainer(QObject* parent)
 {
     _splitter = new QSplitter;
     _stackWidget = new QStackedWidget(_splitter);
-    _listWidget = new QListWidget(_splitter);
+    _listWidget = new SessionListWidget(_splitter);
     _listWidget->setTextElideMode( Qt::ElideLeft );
     _listWidget->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
+    _listWidget->setDragDropMode(QAbstractItemView::DragDrop);
     _splitter->addWidget(_listWidget);
     _splitter->addWidget(_stackWidget);
         
@@ -362,6 +367,26 @@ QWidget* ListViewContainer::activeView() const
     return _stackWidget->currentWidget();
 }
 
+QBrush ListViewContainer::randomItemBackground(int r)
+{
+    int i = r%6;
+
+    //and now for something truly unpleasant:
+    static const int r1[] = {255,190,190,255,190,255};
+    static const int r2[] = {255,180,180,255,180,255};
+    static const int b1[] = {190,255,190,255,255,190};
+    static const int b2[] = {180,255,180,255,255,180};
+    static const int g1[] = {190,190,255,190,255,255};
+    static const int g2[] = {180,180,255,180,255,255};
+
+    // hardcoded assumes item height is 32px
+    QLinearGradient gradient( QPoint(0,0) , QPoint(0,32) );
+    gradient.setColorAt(0,QColor(r1[i],g1[i],b1[i],100));
+    gradient.setColorAt(0.5,QColor(r2[i],g2[i],b2[i],100));
+    gradient.setColorAt(1,QColor(r1[i],g1[i],b1[i],100));
+    return QBrush(gradient);
+}
+
 void ListViewContainer::viewAdded( QWidget* view )
 {
     _stackWidget->addWidget(view);
@@ -372,7 +397,9 @@ void ListViewContainer::viewAdded( QWidget* view )
     item->setText( properties->title() );
     item->setIcon( properties->icon() );
 
-
+    const int randomIndex = _listWidget->count();
+    item->setData( Qt::BackgroundRole , randomItemBackground(randomIndex) );
+   
     connect( properties , SIGNAL(titleChanged(ViewProperties*)) , this , SLOT(updateTitle(ViewProperties*)));
     connect( properties , SIGNAL(iconChanged(ViewProperties*)) , this , SLOT(updateIcon(ViewProperties*)));
 }

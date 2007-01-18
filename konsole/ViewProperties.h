@@ -40,9 +40,17 @@ public:
     ViewProperties(QObject* parent) : QObject(parent) {}
 
     /** Returns the icon associated with a view */
-    QIcon icon();
+    QIcon icon() const;
     /** Returns the title associated with a view */
-    QString title();
+    QString title() const;
+
+    /** 
+     * A unique identifier representing the data displayed by the view associated with this
+     * ViewProperties instance.
+     *
+     * This can be used when dragging and dropping views between windows so that
+     */
+    int identifier() const;
 
 signals:
     /** Emitted when the icon for a view changes */
@@ -61,10 +69,15 @@ protected:
      * an iconChanged() signal to be emitted
      */
     void setIcon(const QIcon& icon);
+    /**
+     * Subclasses may call this method to change the identifier.  
+     */
+    void setIdentifier(int id);
 
 private:
     QIcon _icon;
     QString _title;
+    int _id;
 };
 
 #endif //VIEWPROPERTIES_H

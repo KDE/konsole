@@ -102,6 +102,9 @@ private:
     void focusActiveView();
     void registerView(TEWidget* view);
     void unregisterView(TEWidget* view);
+    // takes a view from a view container owned by a different manager and places it in 
+    // newContainer owned by this manager
+    void takeView(ViewManager* otherManager , ViewContainer* otherContainer, ViewContainer* newContainer, TEWidget* view); 
 
     ViewContainer* createContainer();
     // creates a new terminal display

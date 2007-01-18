@@ -170,7 +170,7 @@ void ViewManager::viewFocused( SessionController* controller )
 
         _pluggedController = controller;
 
-        kDebug() << "Plugged actions for " << controller->session()->displayTitle() << endl;
+        //kDebug() << "Plugged actions for " << controller->session()->displayTitle() << endl;
     }
 }
 
@@ -315,14 +315,22 @@ void ViewManager::merge(ViewManager* otherManager)
         
         assert(view);
 
-        ViewProperties* properties = otherContainer->viewProperties(view);
-        otherContainer->removeView(view);
-        activeContainer->addView(view,properties);
-
-        // transfer the session map entries
-        _sessionMap.insert(view,otherManager->_sessionMap[view]);
-        otherManager->_sessionMap.remove(view);
+        takeView(otherManager,otherContainer,activeContainer,view);
     } 
+}
+
+
+void ViewManager::takeView(ViewManager* otherManager , ViewContainer* otherContainer, 
+                           ViewContainer* newContainer, TEWidget* view)
+{
+    ViewProperties* properties = otherContainer->viewProperties(view);
+    otherContainer->removeView(view);
+
+    newContainer->addView(view,properties);
+
+    // transfer the session map entries
+    _sessionMap.insert(view,otherManager->_sessionMap[view]);
+    otherManager->_sessionMap.remove(view);
 }
 
 TEWidget* ViewManager::createTerminalDisplay()

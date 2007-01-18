@@ -22,9 +22,11 @@ SessionController::SessionController(TESession* session , TEWidget* view, QObjec
     , _view(view)
     , _previousState(-1)
 {
+    // handle user interface related to session (menus etc.)
     setXMLFile("sessionui.rc");
     setupActions();
 
+    setIdentifier(_session->sessionId());
     sessionTitleChanged();
     
     view->installEventFilter(this);
@@ -93,12 +95,13 @@ void SessionController::setupActions()
     connect( action , SIGNAL(triggered()) , this , SLOT(clearAndReset()) );
 
     // Monitor
-    action = collection->addAction("monitor-activity");
-    action->setText( i18n("Monitor for &Activity") );
+    KToggleAction* toggleAction = 0;
+    toggleAction = new KToggleAction(i18n("Monitor for &Activity"),this);  
+    action = collection->addAction("monitor-activity",toggleAction);
     connect( action , SIGNAL(toggled(bool)) , this , SLOT(monitorActivity(bool)) );
 
-    action = collection->addAction("monitor-silence");
-    action->setText( i18n("Monitor for &Silence") );
+    toggleAction = new KToggleAction(i18n("Monitor for &Silence"),this);  
+    action = collection->addAction("monitor-silence",toggleAction);
     connect( action , SIGNAL(toggled(bool)) , this , SLOT(monitorSilence(bool)) );
 
     // History
@@ -173,6 +176,7 @@ void SessionController::clearHistory()
 }
 void SessionController::monitorActivity(bool monitor)
 {
+    qDebug() << "Monitoring for Activity";
     _session->setMonitorActivity(monitor);
 }
 void SessionController::monitorSilence(bool monitor)

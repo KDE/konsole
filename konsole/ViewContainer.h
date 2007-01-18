@@ -230,6 +230,8 @@ private slots:
     void updateIcon( ViewProperties* );
 
 private:
+    QBrush randomItemBackground(int randomIndex);
+
     QStackedWidget* _stackWidget;
     QSplitter* _splitter;
     QListWidget* _listWidget;
