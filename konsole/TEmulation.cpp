@@ -406,8 +406,18 @@ void TEmulation::copySelection() {
   QApplication::clipboard()->setText(t);
 }
 
-void TEmulation::writeToStream(QTextStream* stream , TerminalCharacterDecoder* decoder) {
-  scr->writeToStream(stream,decoder);
+void TEmulation::writeToStream(QTextStream* stream , 
+                               TerminalCharacterDecoder* decoder , 
+                               int startLine ,
+                               int endLine) 
+{
+  scr->writeToStream(stream,decoder,startLine,endLine);
+}
+
+int TEmulation::lines()
+{
+    // sum number of lines currently on screen plus number of lines in history
+    return scr->getLines() + scr->getHistLines();
 }
 
 void TEmulation::findTextBegin()

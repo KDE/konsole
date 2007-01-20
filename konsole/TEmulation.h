@@ -107,8 +107,13 @@ public:
    * appearence attributes into output text.  PlainTextDecoder is the most commonly
    * used decoder.
    */
-  virtual void writeToStream(QTextStream* stream,TerminalCharacterDecoder* decoder);
+  virtual void writeToStream(QTextStream* stream,TerminalCharacterDecoder* decoder,int startLine,int endLine);
   
+  /**
+   * Returns the total number of lines
+   */ 
+  int lines();
+
   /** Returns the codec used to decode incoming characters.  See setCodec() */
   const QTextCodec *codec() { return m_codec; }
   /** Sets the codec used to decode incoming characters.  */

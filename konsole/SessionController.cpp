@@ -4,6 +4,7 @@
 #include <KIcon>
 #include <KLocale>
 #include <KToggleAction>
+
 #include <kdebug.h>
 
 // Konsole
@@ -11,6 +12,17 @@
 #include "TESession.h"
 #include "TEWidget.h"
 #include "SessionController.h"
+
+// for SaveHistoryTask
+#include <KUrl>
+#include <KFileDialog>
+#include <KJob>
+#include <KMessageBox>
+#include "TerminalCharacterDecoder.h"
+
+// used an old-style include below because #include <KIO/Job> does not work
+// at the time of writing
+#include <kio/job.h>
 
 KIcon SessionController::_activityIcon;
 KIcon SessionController::_silenceIcon;
@@ -169,6 +181,10 @@ void SessionController::findPreviousInHistory()
 }
 void SessionController::saveHistory()
 {
+    SessionTask* task = new SaveHistoryTask();
+    task->setAutoDelete(true);
+    task->addSession( _session );   
+    task->execute();
 }
 void SessionController::clearHistory()
 {
@@ -176,7 +192,6 @@ void SessionController::clearHistory()
 }
 void SessionController::monitorActivity(bool monitor)
 {
-    qDebug() << "Monitoring for Activity";
     _session->setMonitorActivity(monitor);
 }
 void SessionController::monitorSilence(bool monitor)
@@ -232,6 +247,151 @@ void SessionController::sessionStateChanged(TESession* /*session*/ , int state)
             
         setIcon( _sessionIcon );
     }
+}
+
+SessionTask::SessionTask()
+    : _autoDelete(false)
+{
+}
+void SessionTask::setAutoDelete(bool enable)
+{
+    _autoDelete = enable;
+}
+bool SessionTask::autoDelete() const
+{
+    return _autoDelete;
+}
+void SessionTask::addSession(TESession* session)
+{
+    _sessions << session;
+}
+QList<SessionTask::SessionPtr> SessionTask::sessions() const
+{
+    return _sessions;
+}
+
+SaveHistoryTask::SaveHistoryTask()
+    : SessionTask()
+{
+}
+SaveHistoryTask::~SaveHistoryTask()
+{
+}
+
+void SaveHistoryTask::execute()
+{
+    QListIterator<SessionPtr> iter(sessions());
+
+    // TODO - prompt the user if the file already exists, currently existing files
+    //        are always overwritten
+
+    // TODO - think about the UI when saving multiple history sessions, if there are more than two or
+    //        three then providing a URL for each one will be tedious
+
+    // TODO - show a warning ( preferably passive ) if saving the history output fails
+    //
+    
+     KFileDialog* dialog = new KFileDialog( QString(":konsole") /* check this */, 
+                                               QString() , 0 /* no parent widget */);
+     QStringList mimeTypes;
+     mimeTypes << "text/plain";
+     mimeTypes << "text/html";
+     dialog->setMimeFilter(mimeTypes,"text/plain");
+
+    while ( iter.hasNext() )
+    {
+        SessionPtr session = iter.next();
+
+        dialog->setCaption( i18n("Save Output from %1",session->title()) );
+            
+        int result = dialog->exec();
+
+        if ( result != QDialog::Accepted )
+            continue;
+
+        KUrl url = dialog->selectedUrl(); 
+
+        if ( !url.isValid() )
+        { // UI:  Can we make this friendlier?
+            KMessageBox::sorry( 0 , i18n("%1 is an invalid URL, the output could not be saved.") );
+            continue;
+        }
+
+        KIO::TransferJob* job = KIO::put( url, 
+                                          -1,   // no special permissions
+                                          true, // overwrite existing files
+                                          false,// do not resume an existing transfer
+                                          !url.isLocalFile() // show progress information only for remote
+                                                             // URLs
+                                                             //
+                                                             // a better solution would be to show progress
+                                                             // information after a certain period of time
+                                                             // instead, since the overall speed of transfer
+                                                             // depends on factors other than just the protocol
+                                                             // used
+                                        );
+
+
+        SaveJob jobInfo;
+        jobInfo.session = session;
+        jobInfo.lastLineFetched = -1;
+
+        if ( dialog->currentMimeFilter() == "text/html" )
+           jobInfo.decoder = new HTMLDecoder();
+        else
+           jobInfo.decoder = new PlainTextDecoder();
+
+        _jobSession.insert(job,jobInfo);
+
+        connect( job , SIGNAL(dataReq(KIO::Job*,QByteArray&)),
+                 this, SLOT(jobDataRequested(KIO::Job*,QByteArray&)) );
+        connect( job , SIGNAL(result(KJob*)),
+                 this, SLOT(jobResult(KJob*)) );
+    }
+
+    dialog->deleteLater();   
+}
+void SaveHistoryTask::jobDataRequested(KIO::Job* job , QByteArray& data)
+{
+    // TODO - Report progress information for the job
+
+    // PERFORMANCE:  Do some tests and tweak this value to get faster saving
+    const int LINES_PER_REQUEST = 500;
+
+    SaveJob& info = _jobSession[job];   
+
+    if ( info.session )
+    {
+        int sessionLines = info.session->getEmulation()->lines();
+
+        int copyUpToLine = qMin( info.lastLineFetched + LINES_PER_REQUEST , sessionLines );
+
+        QTextStream stream(&data,QIODevice::ReadWrite);
+        info.session->getEmulation()->writeToStream( &stream , info.decoder , info.lastLineFetched+1 , copyUpToLine );
+
+        info.lastLineFetched = copyUpToLine;
+    }
+}
+void SaveHistoryTask::jobResult(KJob* job)
+{
+    if ( job->error() )
+    {
+        KMessageBox::sorry( 0 , i18n("A problem occurred when saving the output.\n%1",job->errorString()) );
+    }
+
+    SaveJob& info = _jobSession[job];
+
+    _jobSession.remove(job);
+    
+    delete info.decoder;
+    
+    if ( autoDelete() )
+        deleteLater();
+}
+
+void SearchHistoryTask::execute()
+{
+    // not yet implemented
 }
 
 #include "SessionController.moc"
