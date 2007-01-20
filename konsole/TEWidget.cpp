@@ -700,6 +700,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
     bool shadow = false;
     paint.setPen(fColor);
     int x = rect.x();
+    
     if (attr->isBold(color_table) && printerBold)
     {
       // When printing we use a bold font for bold
@@ -742,7 +743,7 @@ void TEWidget::drawAttrStr(QPainter &paint, QRect rect,
       paint.restore();
     }
 
-    if (attr->isBold(color_table) && !printerBold)
+    if ( attr->isBold(color_table) && !printerBold)
     {
       paint.setClipRect(rect);
       // On screen we use overstrike for bold

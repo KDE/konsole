@@ -48,11 +48,11 @@
 
 // COMPOSITE disabled by default because the QApplication constructor
 // needed to enable the ARGB32 visual has undesired side effects.
-#if 0
+//#if 0
 #if defined(Q_WS_X11) && defined(HAVE_XRENDER) && QT_VERSION >= 0x030300
-# define COMPOSITE
+#define COMPOSITE
 #endif
-#endif
+//#endif
 
 #ifdef COMPOSITE
 # include <X11/Xlib.h>
@@ -79,7 +79,7 @@ static KCmdLineOptions options[] =
    { "noscrollbar",     I18N_NOOP("Do not display scrollbar"), 0 },
    { "noxft",           I18N_NOOP("Do not use Xft (anti-aliasing)"), 0 },
 #ifdef COMPOSITE
-   { "noargb",          I18N_NOOP("Do not use the ARGB32 visual (transparency)"), 0 },
+   { "real-transparency",  I18N_NOOP("Enable experimental support for real transparency"), 0 },
 #endif
    { "vt_sz CCxLL",     I18N_NOOP("Terminal size in columns x lines"), 0 },
    { "noresize",        I18N_NOOP("Terminal size is fixed"), 0 },
@@ -271,7 +271,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   Visual *visual = 0;
   int event_base, error_base;
 
-  if ( args->isSet("argb") && XRenderQueryExtension( dpy, &event_base, &error_base ) )
+  if ( args->isSet("real-transparency") && XRenderQueryExtension( dpy, &event_base, &error_base ) )
   {
     int nvi;
     XVisualInfo templ;
@@ -286,6 +286,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
       if ( format->type == PictTypeDirect && format->direct.alphaMask ) {
         visual = xvi[i].visual;
         colormap = XCreateColormap( dpy, RootWindow( dpy, screen ), visual, AllocNone );
+        kdDebug() << "found visual with alpha support" << endl;
         argb_visual = true;
         break;
       }
