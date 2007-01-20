@@ -384,7 +384,10 @@ void SaveHistoryTask::jobResult(KJob* job)
     _jobSession.remove(job);
     
     delete info.decoder;
-    
+  
+    // notify the world that the task is done 
+    emit completed();
+
     if ( autoDelete() )
         deleteLater();
 }
