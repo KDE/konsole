@@ -24,6 +24,7 @@
 // at the time of writing
 #include <kio/job.h>
 
+
 KIcon SessionController::_activityIcon;
 KIcon SessionController::_silenceIcon;
 
@@ -265,7 +266,7 @@ void SessionTask::addSession(TESession* session)
 {
     _sessions << session;
 }
-QList<SessionTask::SessionPtr> SessionTask::sessions() const
+QList<SessionPtr> SessionTask::sessions() const
 {
     return _sessions;
 }
@@ -395,6 +396,33 @@ void SaveHistoryTask::jobResult(KJob* job)
 void SearchHistoryTask::execute()
 {
     // not yet implemented
+}
+
+SearchHistoryThread::SearchHistoryThread(SessionPtr session , QObject* parent)
+    : QThread(parent)
+    , _session(session)
+    , _lastLineFetched(-1)
+    , _decoder( new PlainTextDecoder() )
+{
+}
+
+SearchHistoryThread::~SearchHistoryThread()
+{
+    delete _decoder;
+}
+
+void SearchHistoryThread::setRegExp(const QRegExp& expression)
+{
+    _regExp = expression;
+}
+QRegExp SearchHistoryThread::regExp() const
+{
+    return _regExp;
+}
+
+void SearchHistoryThread::run() 
+{
+       
 }
 
 #include "SessionController.moc"

@@ -1375,22 +1375,38 @@ void TEScreen::copyLineToStream(int line , int start, int count,
 		static ca characterBuffer[MAX_CHARS];
 		
 		assert( count < MAX_CHARS );
-		
+
 		//determine if the line is in the history buffer or the screen image
 		if (line < hist->getLines())
 		{
+            const int lineLength = hist->getLineLen(line);
+
+            // ensure that start position is before end of line
+            start = qMin(start,lineLength-1);
+
 			//retrieve line from history buffer
 			if (count == -1)
-					count = hist->getLineLen(line)-start;
+            {
+					count = lineLength-start;
+            }
 			else
-					count = qMin(start+count,hist->getLineLen(line))-start;
-			
+            {
+					count = qMin(start+count,lineLength)-start;
+            }
+
+            // safety checks
+            assert( start >= 0 );
+            assert( count >= 0 );    
+            assert( (start+count) <= hist->getLineLen(line) );
+
 			hist->getCells(line,start,count,characterBuffer);
 		}
 		else
 		{
 			if ( count == -1 )
 					count = columns - start;
+
+            assert( count >= 0 );
 
             ca* data = screenLines[line-hist->getLines()].data();
             int length = screenLines[line-hist->getLines()].count();

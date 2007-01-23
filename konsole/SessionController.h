@@ -6,6 +6,7 @@
 #include <QList>
 #include <QPointer>
 #include <QString>
+#include <QThread>
 
 // KDE
 #include <KActionCollection>
@@ -22,10 +23,13 @@ class UrlFilter;
 class TerminalCharacterDecoder;
 class KJob;
 
+
 namespace KIO
 {
     class Job;
 };
+
+typedef QPointer<TESession> SessionPtr;
 
 /**
  * Provides the actions associated with a session in the Konsole main menu
@@ -143,7 +147,6 @@ signals:
    void completed();
 
 protected:
-   typedef QPointer<TESession> SessionPtr;
 
    /** Returns a list of sessions in the group */
    QList< SessionPtr > sessions() const;
@@ -196,6 +199,7 @@ private:
     QHash<KJob*,SaveJob> _jobSession;
 };
 
+class SearchHistoryThread;
 /**
  * A task which searches through the output of sessions for matches for a given regular expression.
  * 
@@ -234,8 +238,34 @@ signals:
      * @param endColumn The column in the output where the matched text ends 
      */
     void foundMatch(TESession* session , int startLine , int startColumn , int endLine , int endColumn );
-    
+   
 private:
+   
+
+private:
+    QRegExp _regExp;
+};
+
+class SearchHistoryThread : public QThread
+{
+Q_OBJECT
+
+public:
+    SearchHistoryThread(SessionPtr session , QObject* parent);
+    virtual ~SearchHistoryThread();
+
+    void setRegExp(const QRegExp& expression);
+    QRegExp regExp() const;
+
+signals:
+    void foundMatch(TESession* session , int startLine , int startColumn , int endLine , int endColumn );
+
+protected:
+    virtual void run();
+private:
+    SessionPtr _session;
+    int _lastLineFetched;
+    TerminalCharacterDecoder* _decoder;
     QRegExp _regExp;
 };
 
