@@ -120,6 +120,7 @@
 #include "printsettings.h"
 
 #include "konsole.h"
+#include <kconfiggroup.h>
 
 #define KONSOLEDEBUG    kDebug(1211)
 
@@ -284,9 +285,9 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
   // read and apply default values ///////////////////////////////////////////
   resize(321, 321); // Dummy.
   QSize currentSize = size();
-  KConfig * config = KGlobal::config();
+  KSharedConfig::Ptr config = KGlobal::config();
   config->setDesktopGroup();
-  applyMainWindowSettings(config);
+  applyMainWindowSettings(config.data());
   if (currentSize != size())
      defaultSize = size();
 
@@ -297,7 +298,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 
   co->setDesktopGroup();
   QString schema = co->readEntry("Schema");
-  readProperties(config, schema, false);
+  readProperties(config.data(), schema, false);
 
   makeBasicGUI();
 
@@ -1494,7 +1495,7 @@ void Konsole::slotSaveSessionsProfile()
   if ( ok ) {
     QString path = KStandardDirs::locateLocal( "data",
         QString::fromLatin1( "konsole/profiles/" ) + prof,
-        KGlobal::instance() );
+        KGlobal::mainComponent() );
 
     if ( QFile::exists( path ) )
       QFile::remove( path );
@@ -1510,7 +1511,7 @@ void Konsole::saveProperties(KConfig* config) {
   uint active=0;
   QString key;
 
-  if (config != KGlobal::config())
+  if (config != KGlobal::config().data())
   {
      // called by the session manager
      config->writeEntry("numSes",sessions.count());
@@ -1598,7 +1599,7 @@ void Konsole::saveProperties(KConfig* config) {
   }
 
   config->writeEntry("class",QObject::objectName());
-  if (config != KGlobal::config())
+  if (config != KGlobal::config().data())
   {
       saveMainWindowSettings(config);
   }
@@ -1629,7 +1630,7 @@ void Konsole::readProperties(KConfig* config)
 void Konsole::readProperties(KConfig* config, const QString &schema, bool globalConfigOnly)
 {
 
-   if (config==KGlobal::config())
+   if (config==KGlobal::config().data())
    {
      config->setDesktopGroup();
      b_warnQuit=config->readEntry( "WarnQuit", true );
@@ -1990,10 +1991,10 @@ void Konsole::slotSelectTabbar() {
 
 void Konsole::slotSaveSettings()
 {
-  KConfig *config = KGlobal::config();
+  KSharedConfig::Ptr config = KGlobal::config();
   config->setDesktopGroup();
-  saveProperties(config);
-  saveMainWindowSettings(config);
+  saveProperties(config.data());
+  saveMainWindowSettings(config.data());
   config->sync();
 }
 
@@ -2065,7 +2066,7 @@ void Konsole::slotConfigure()
 void Konsole::reparseConfiguration()
 {
   KGlobal::config()->reparseConfiguration();
-  readProperties(KGlobal::config(), QString(), true);
+  readProperties(KGlobal::config().data(), QString(), true);
 
   // The .desktop files may have been changed by user...
   b_sessionShortcutsMapped = false;
@@ -2760,7 +2761,7 @@ void Konsole::allowPrevNext()
 KSimpleConfig *Konsole::defaultSession()
 {
   if (!m_defaultSession) {
-    KConfig * config = KGlobal::config();
+    KSharedConfig::Ptr config = KGlobal::config();
     config->setDesktopGroup();
     setDefaultSession(config->readEntry("DefaultSession","shell.desktop"));
   }
@@ -2839,7 +2840,7 @@ TESession* Konsole::newSession(SessionInfo* type)
     //copy settings from previous display if available, otherwise load them anew
     if ( !te )
     {
-        readProperties(KGlobal::config(), "", true);
+        readProperties(KGlobal::config().data(), "", true);
         display->setVTFont( type->defaultFont( defaultFont ) );
         display->setScrollbarLocation(n_scroll);
         display->setBellMode(n_bell);

@@ -291,7 +291,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
        eargs.append( args->arg(i) );
 
      if (title.isEmpty() &&
-         (kapp->caption() == kapp->aboutData()->programName()))
+         (KGlobal::caption() == KGlobal::mainComponent().aboutData()->programName()))
      {
         title = QFile::decodeName(shell);  // program executed in the title bar
      }

@@ -60,7 +60,7 @@
 #include <kselectaction.h>
 #include <ktoggleaction.h>
 #include <kauthorized.h>
-#include <kinstance.h>
+#include <kcomponentdata.h>
 
 // True transparency is not available in the embedded Konsole
 bool true_transparency = false;
@@ -81,7 +81,7 @@ extern "C"
 /**
  * We need one static instance of the factory for our C 'main' function
  */
-KInstance *konsoleFactory::s_instance = 0L;
+KComponentData *konsoleFactory::s_instance = 0L;
 KAboutData *konsoleFactory::s_aboutData = 0;
 
 konsoleFactory::konsoleFactory()
@@ -109,14 +109,14 @@ KParts::Part *konsoleFactory::createPartObject(QWidget *parentWidget,
   return obj;
 }
 
-KInstance *konsoleFactory::instance()
+const KComponentData &konsoleFactory::componentData()
 {
   if ( !s_instance )
     {
       s_aboutData = new KAboutData("konsole", I18N_NOOP("Konsole"), "1.5");
-      s_instance = new KInstance( s_aboutData );
+      s_instance = new KComponentData( s_aboutData );
     }
-  return s_instance;
+  return *s_instance;
 }
 
 #define DEFAULT_HISTORY_SIZE 1000
@@ -142,7 +142,7 @@ konsolePart::konsolePart(QWidget *_parentWidget, QObject *parent, const char *cl
 ,m_runningShell( false )
 {
   parentWidget=_parentWidget;
-  setInstance(konsoleFactory::instance());
+  setComponentData(konsoleFactory::componentData());
 
   m_extension = new konsoleBrowserExtension(this);
 

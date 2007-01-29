@@ -58,7 +58,7 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( Konsole *konsole, bool toplevel 
         m_file = KStandardDirs::locateLocal( "data", "konsole/bookmarks.xml" );
 
     KBookmarkManager *manager = KBookmarkManager::managerForFile( m_file, "konsole", false);
-    manager->setEditorOptions(kapp->caption(), false);
+    manager->setEditorOptions(KGlobal::caption(), false);
     manager->setUpdate( true );
 
     if (toplevel) {

@@ -167,7 +167,7 @@ QString SessionInfo::defaultWorkingDirectory() const
 SessionManager::SessionManager()
 {
     //locate default session
-   KConfig* appConfig = KGlobal::config();
+   KSharedConfig::Ptr appConfig = KGlobal::config();
    appConfig->setDesktopGroup();
 
    QString defaultSessionFilename = appConfig->readEntry("DefaultSession","shell.desktop");

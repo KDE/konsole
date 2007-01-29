@@ -62,6 +62,7 @@
 #include <kconfig.h>
 #include <kdebug.h>
 #include <krandom.h>
+#include <kconfiggroup.h>
 
 
 typedef Q3PtrListIterator<ColorSchema> ColorSchemaListIterator;
