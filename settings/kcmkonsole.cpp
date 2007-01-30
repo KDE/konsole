@@ -44,7 +44,7 @@ typedef KGenericFactory<KCMKonsole, QWidget> ModuleFactory;
 K_EXPORT_COMPONENT_FACTORY( konsole, ModuleFactory("kcmkonsole") )
 
 KCMKonsole::KCMKonsole(QWidget * parent, const QStringList&)
-:KCModule(ModuleFactory::instance(), parent)
+:KCModule(ModuleFactory::componentData(), parent)
 {
 
     setQuickHelp( i18n("<h1>Konsole</h1> With this module you can configure Konsole, the KDE terminal"

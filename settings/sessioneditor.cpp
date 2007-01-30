@@ -57,7 +57,9 @@ SessionEditor::SessionEditor(QWidget * parent)
   loaded=false;
 
   KGlobal::locale()->insertCatalog("konsole"); // For schema and keytab translations
-  KGlobal::iconLoader()->addAppDir( "konsole" );
+  
+  //TODO - Look at this later
+  //KGlobal::iconLoader()->addAppDir( "konsole" );
 
   directoryLine->setMode(KFile::Directory);
   connect(sessionList, SIGNAL(highlighted(int)), this, SLOT(readSession(int)));
@@ -255,8 +257,8 @@ void SessionEditor::querySave()
                          i18n("The session has been modified.\n"
 			"Do you want to save the changes?"),
 			i18n("Session Modified"),
-			KStdGuiItem::save(),
-			KStdGuiItem::discard());
+			KStandardGuiItem::save(),
+			KStandardGuiItem::discard());
     if (result == KMessageBox::Yes)
     {
         saveCurrent();
@@ -305,7 +307,7 @@ void SessionEditor::saveCurrent()
             i18n( "The Execute entry is not a valid command.\n"
 			"You can still save this session, but it will not show up in Konsole's Session list." ),
 			i18n( "Invalid Execute Entry" ),
-			KStdGuiItem::save() );
+			KStandardGuiItem::save() );
     if ( result != KMessageBox::Continue )
     {
         return;
@@ -362,7 +364,7 @@ void SessionEditor::removeCurrent()
     int code = KMessageBox::warningContinueCancel(this,
       i18n("You are trying to remove a system session. Are you sure?"),
       i18n("Removing System Session"),
-      KStdGuiItem::del());
+      KStandardGuiItem::del());
     if (code != KMessageBox::Continue)
       return;
   }

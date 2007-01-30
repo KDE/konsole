@@ -19,48 +19,53 @@
 
  */
 
-#include "konsole_part.h"
+// System
+#include <assert.h>
 
+// Qt 
+#include <QCheckBox>
+#include <QFile>
+#include <QFrame>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QLayout>
+#include <QMatrix>
+#include <QPixmap>
+#include <QPushButton>
+#include <QSpinBox>
+#include <QStringList>
+
+// KDE
+#include <KAboutData>
+#include <KCharsets>
+#include <KFontDialog>
+#include <KGlobalSettings>
+#include <KIcon>
+#include <KIconLoader>
+#include <KInputDialog>
+#include <KLocale>
+#include <KMessageBox>
+#include <KRun>
+#include <KStandardAction>
+#include <KMenu>
+#include <KConfig>
+#include <KActionCollection>
+#include <KActionMenu>
+#include <KSelectAction>
+#include <KToggleAction>
+#include <KAuthorized>
+#include <KInstance>
+#include <kdebug.h>
+
+// Konsole
+#include "konsole_part.h"
 #include "KeyTrans.h"
 #include "schema.h"
 #include "TESession.h"
 #include "TEWidget.h"
 
-#include <assert.h>
 
-#include <QFile>
-#include <QLayout>
-#include <QMatrix>
-#include <QPixmap>
-#include <QStringList>
-#include <QFrame>
-#include <QHBoxLayout>
 
-#include <kaboutdata.h>
-#include <kcharsets.h>
-#include <kdebug.h>
-#include <kfontdialog.h>
-#include <kglobalsettings.h>
-#include <kicon.h>
-#include <kiconloader.h>
-#include <kinputdialog.h>
-#include <klocale.h>
-#include <kmessagebox.h>
-#include <krun.h>
-#include <kstandardaction.h>
-#include <QLabel>
-
-#include <QCheckBox>
-#include <QSpinBox>
-#include <QPushButton>
-#include <kmenu.h>
-#include <kconfig.h>
-#include <kactioncollection.h>
-#include <kactionmenu.h>
-#include <kselectaction.h>
-#include <ktoggleaction.h>
-#include <kauthorized.h>
-#include <kinstance.h>
 
 // True transparency is not available in the embedded Konsole
 bool true_transparency = false;
@@ -81,8 +86,8 @@ extern "C"
 /**
  * We need one static instance of the factory for our C 'main' function
  */
-KInstance *konsoleFactory::s_instance = 0L;
-KAboutData *konsoleFactory::s_aboutData = 0;
+KComponentData* konsoleFactory::s_instance = 0L;
+KAboutData* konsoleFactory::s_aboutData = 0;
 
 konsoleFactory::konsoleFactory()
 {
@@ -109,14 +114,14 @@ KParts::Part *konsoleFactory::createPartObject(QWidget *parentWidget,
   return obj;
 }
 
-KInstance *konsoleFactory::instance()
+const KComponentData& konsoleFactory::componentData()
 {
   if ( !s_instance )
     {
       s_aboutData = new KAboutData("konsole", I18N_NOOP("Konsole"), "1.5");
-      s_instance = new KInstance( s_aboutData );
+      s_instance = new KComponentData( s_aboutData );
     }
-  return s_instance;
+  return *s_instance;
 }
 
 #define DEFAULT_HISTORY_SIZE 1000
@@ -142,7 +147,7 @@ konsolePart::konsolePart(QWidget *_parentWidget, QObject *parent, const char *cl
 ,m_runningShell( false )
 {
   parentWidget=_parentWidget;
-  setInstance(konsoleFactory::instance());
+  setComponentData(konsoleFactory::componentData());
 
   m_extension = new konsoleBrowserExtension(this);
 

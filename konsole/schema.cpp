@@ -46,23 +46,27 @@
 ** a particular m_number, but remember that find may return NULL.
 */
 
+// System
 #include <stdio.h>
 #include <errno.h>
 #include <stdlib.h>
 
-#include "schema.h"
-#include "kapplication.h"
-
+// Qt
 #include <QDir>
 #include <QDateTime>
-//Added by qt3to4:
 #include <Q3PtrList>
-#include <kstandarddirs.h>
-#include <klocale.h>
-#include <kconfig.h>
-#include <kdebug.h>
-#include <krandom.h>
 
+// KDE
+#include <KApplication>
+#include <KStandardDirs>
+#include <KLocale>
+#include <KConfig>
+#include <KRandom>
+#include <kconfiggroup.h>
+#include <kdebug.h>
+
+// Konsole
+#include "schema.h"
 
 typedef Q3PtrListIterator<ColorSchema> ColorSchemaListIterator;
 

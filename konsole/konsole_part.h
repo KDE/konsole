@@ -34,7 +34,7 @@
 #include "schema.h"
 #include "TESession.h"
 
-class KInstance;
+class KComponentData;
 class konsoleBrowserExtension;
 class QPushButton;
 class QSpinBox;
@@ -58,10 +58,10 @@ public:
                                      const char* classname = "KParts::Part",
                                      const QStringList &args = QStringList());
 
-    static KInstance *instance();
+    static const KComponentData& componentData();
 
  private:
-    static KInstance *s_instance;
+    static KComponentData *s_instance;
     static KAboutData *s_aboutData;
 };
 
