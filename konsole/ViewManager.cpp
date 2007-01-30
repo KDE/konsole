@@ -155,18 +155,31 @@ void ViewManager::viewActivated( QWidget* view )
     view->setFocus(Qt::OtherFocusReason);
 }
 
+void ViewManager::activeViewTitleChanged(ViewProperties* properties)
+{
+    // set a plain caption (ie. without the automatic addition of " - AppName" at the end)
+    // to make the taskbar entry cleaner and easier to read
+    _mainWindow->setPlainCaption( properties->title() );
+}
+
 void ViewManager::viewFocused( SessionController* controller )
 {
     if ( _pluggedController != controller )
     {
         if ( _pluggedController )
+        {
             _mainWindow->guiFactory()->removeClient(_pluggedController);
+            disconnect( controller , SIGNAL(titleChanged(ViewProperties*)),
+                        this , SLOT(activeViewTitleChanged(ViewProperties*)) );
+        }
 
         // update the menus in the main window to use the actions from the active
         // controller 
         _mainWindow->guiFactory()->addClient(controller);
+        
         // update the caption of the main window to match that of the focused session
-        _mainWindow->setPlainCaption( controller->session()->displayTitle() );
+        connect( controller , SIGNAL(titleChanged(ViewProperties*)),
+                 this       , SLOT(activeViewTitleChanged(ViewProperties*)) );        
 
         _pluggedController = controller;
 
@@ -274,7 +287,7 @@ ViewContainer* ViewManager::createContainer()
     // connect signals and slots
     connect( container , SIGNAL(closeRequest(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)) );
 */
-    ViewContainer* container = new ListViewContainer(_viewSplitter);
+    ViewContainer* container = new StackedViewContainer(_viewSplitter);
 
     connect( container , SIGNAL(activeViewChanged(QWidget*)) , this , SLOT(viewActivated(QWidget*)));
     return container;

@@ -32,6 +32,7 @@ class TESession;
 class TEWidget;
 
 class SessionController;
+class ViewProperties;
 class ViewContainer;
 class ViewSplitter;
 
@@ -97,6 +98,8 @@ private slots:
     // that we can plug the appropriate actions into the UI
     void viewActivated( QWidget* view );
 
+    // called when the title of the active view changes
+    void activeViewTitleChanged( ViewProperties* );
 private:
     void setupActions();
     void focusActiveView();
