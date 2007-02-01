@@ -36,5 +36,12 @@
 
         </Menu>
     </MenuBar>
+
+    <Menu name="new-session-popup">
+        <Action name="new-tab" />
+        <Action name="new-window" />
+        <Separator/>
+        <ActionList name="new-session-types"/> 
+    </Menu>
 </kpartgui>
 

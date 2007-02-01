@@ -24,5 +24,8 @@
             <Action name="monitor-silence" group="session-view-operations" />
             <Action name="monitor-activity" group="session-view-operations" />
         </Menu>
+        <Menu name="debug"><text>Debug</text>
+            <Action name="debug-process"/>
+        </Menu>
     </MenuBar>
 </kpartgui>

@@ -86,6 +86,8 @@ private slots:
     void sessionStateChanged(TESession* session,int state);
     void sessionTitleChanged();
 
+    // debugging slots
+    void debugProcess();
 private:
     void setupActions();
 

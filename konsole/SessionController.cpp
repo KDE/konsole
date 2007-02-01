@@ -12,6 +12,7 @@
 #include "TESession.h"
 #include "TEWidget.h"
 #include "SessionController.h"
+#include "ProcessInfo.h"
 
 // for SaveHistoryTask
 #include <KUrl>
@@ -140,6 +141,36 @@ void SessionController::setupActions()
     action = collection->addAction("clear-history");
     action->setText( i18n("Clear History") );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearHistory()) );
+
+    action = collection->addAction("debug-process");
+    action->setText( "Get Foreground Process" );
+    connect( action , SIGNAL(triggered()) , this , SLOT(debugProcess()) );
+}
+
+void SessionController::debugProcess()
+{
+    ProcessInfo* sessionProcess = ProcessInfo::newInstance(_session->sessionPid());
+    sessionProcess->update();
+
+    bool ok = false;
+    int fpid = sessionProcess->foregroundPid(&ok);
+
+    if ( ok )
+    {
+        ProcessInfo* fp = ProcessInfo::newInstance(fpid);
+        fp->update();
+
+        QString name = fp->name(&ok);
+
+        if ( ok )
+        {
+            _session->setTitle(name);
+            sessionTitleChanged();
+        }
+
+        delete fp;
+    }
+    delete sessionProcess;
 }
 
 void SessionController::closeSession()
@@ -207,8 +238,9 @@ void SessionController::sessionTitleChanged()
             _sessionIcon = KIcon( _sessionIconName );
             setIcon( _sessionIcon );
         }
-           
-       setTitle( _session->displayTitle() ); 
+         
+       //TODO - use _session->displayTitle() here. 
+       setTitle( _session->title() ); 
 }
 void SessionController::sessionStateChanged(TESession* /*session*/ , int state)
 {
@@ -369,6 +401,16 @@ void SaveHistoryTask::jobDataRequested(KIO::Job* job , QByteArray& data)
 
         QTextStream stream(&data,QIODevice::ReadWrite);
         info.session->getEmulation()->writeToStream( &stream , info.decoder , info.lastLineFetched+1 , copyUpToLine );
+
+        // if there are still more lines to process after this request then insert a new line character
+        // to ensure that the next block of lines begins on a new line       
+        //
+        // FIXME - There is still an extra new-line at the end of the save data.   
+        if ( copyUpToLine < sessionLines )
+        {
+            stream << '\n';
+        }
+
 
         info.lastLineFetched = copyUpToLine;
     }
