@@ -343,6 +343,19 @@ ListViewContainer::ListViewContainer(QObject* parent)
     _splitter = new QSplitter;
     _stackWidget = new QStackedWidget(_splitter);
     _listWidget = new SessionListWidget(_splitter);
+
+    // elide left is used because the most informative part of the session name is often
+    // the rightmost part
+    //
+    // this means you get entries looking like:
+    //
+    // ...dirA ...dirB ...dirC  ( helpful )
+    //
+    // instead of
+    //
+    // johnSmith@comput... johnSmith@comput...  ( not so helpful )
+    //
+
     _listWidget->setTextElideMode( Qt::ElideLeft );
     _listWidget->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     _listWidget->setDragDropMode(QAbstractItemView::DragDrop);

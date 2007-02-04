@@ -133,6 +133,12 @@ void ViewManager::sessionFinished( TESession* session )
 
 void ViewManager::focusActiveView()
 {
+    // give the active view in a container the focus.  this ensures 
+    // that controller associated with that view is activated and the session-specific
+    // menu items are replaced with the ones for the newly focused view
+
+    // see the viewFocused() method
+
     ViewContainer* container = _viewSplitter->activeContainer(); 
     if ( container )
     {
@@ -164,8 +170,13 @@ void ViewManager::activeViewTitleChanged(ViewProperties* properties)
 
 void ViewManager::viewFocused( SessionController* controller )
 {
+    // if a view is given the focus which is different to the one for which menu items
+    // are currently being shown then unplug the current session-specific menu items
+    // and plug in the ones for the newly focused session
+
     if ( _pluggedController != controller )
     {
+        // remove existing session specific menu items if there are any
         if ( _pluggedController )
         {
             _mainWindow->guiFactory()->removeClient(_pluggedController);
@@ -230,6 +241,8 @@ void ViewManager::splitView(bool splitView)
 
 SessionController* ViewManager::createController(TESession* session , TEWidget* view)
 {
+    // create a new controller for the session, and ensure that this view manager
+    // is notified when the view gains the focus
     SessionController* controller = new SessionController(session,view,this);
     connect( controller , SIGNAL(focused(SessionController*)) , this , SLOT(viewFocused(SessionController*)) );
 
@@ -244,8 +257,13 @@ void ViewManager::createView(TESession* session)
         _viewSplitter->addContainer( createContainer() , Qt::Vertical );
     }
 
+    // notify this view manager when the session finishes so that its view
+    // can be deleted
     connect( session , SIGNAL(done(TESession*)) , this , SLOT(sessionFinished(TESession*)) );
-    
+   
+    // iterate over the view containers owned by this view manager
+    // and create a new terminal display for the session in each of them, along with
+    // a controller for the session/display pair 
     ViewContainer* const activeContainer = _viewSplitter->activeContainer();
     QListIterator<ViewContainer*> containerIter(_viewSplitter->containers());
 
@@ -269,8 +287,8 @@ void ViewManager::createView(TESession* session)
 
 ViewContainer* ViewManager::createContainer()
 {
-    /*TabbedViewContainer* container = new TabbedViewContainer(_viewSplitter); 
-
+    ViewContainer* container = new TabbedViewContainer(_viewSplitter); 
+/*
     if ( _mainWindow->factory() )
     {
         QMenu* menu = (QMenu*)_mainWindow->factory()->container("new-session-popup",_mainWindow);
@@ -283,11 +301,10 @@ ViewContainer* ViewManager::createContainer()
        kDebug() << __FILE__ << __LINE__ << ": ViewManager attempted to create a view before" <<
           " the main window GUI was created - unable to create popup menus for container." << endl;  
     }
+*/
 
     // connect signals and slots
     connect( container , SIGNAL(closeRequest(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)) );
-*/
-    ViewContainer* container = new StackedViewContainer(_viewSplitter);
 
     connect( container , SIGNAL(activeViewChanged(QWidget*)) , this , SLOT(viewActivated(QWidget*)));
     return container;
@@ -315,6 +332,12 @@ void ViewManager::viewCloseRequest(QWidget* view)
 
 void ViewManager::merge(ViewManager* otherManager)
 {
+    // iterate over the views in otherManager's active container and take them from that
+    // manager and put them in the active container in this manager
+    //
+    // TODO - This currently does not consider views in containers other than
+    //        the active one in the other manager
+    //
     ViewSplitter* otherSplitter = otherManager->_viewSplitter;
     ViewContainer* otherContainer = otherSplitter->activeContainer();
 
@@ -336,6 +359,9 @@ void ViewManager::merge(ViewManager* otherManager)
 void ViewManager::takeView(ViewManager* otherManager , ViewContainer* otherContainer, 
                            ViewContainer* newContainer, TEWidget* view)
 {
+    // FIXME - the controller associated with the display which is being moved
+    //         may have signals which are connected to otherManager.  they need
+    //         to be redirected to slots in this view manager
     ViewProperties* properties = otherContainer->viewProperties(view);
     otherContainer->removeView(view);
 

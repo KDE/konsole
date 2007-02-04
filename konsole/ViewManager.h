@@ -37,10 +37,19 @@ class ViewContainer;
 class ViewSplitter;
 
 /** 
- * Manages the views and view container widgets in a KonsoleMainWindow.
+ * Manages the views and view container widgets in a Konsole window.  Each Konsole window
+ * has one ViewManager.
+ * The view manager is responsible for creating new terminal displays for sessions and the 
+ * controllers which connect the view and session to provide the menu actions associated with
+ * the view, as well as exposing basic information ( such as associated title and icon ) to
+ * the view. 
+ *
+ * Each Konsole window contains a number of view containers, which are instances of ViewContainer.
+ * Each view container may contain one or more views, along with a navigation widget
+ * (eg. tabs or a list) which allows the user to choose between the views in that container.  
  * 
- * When a ViewManager is instantiated, it adds a container widget for terminal displays to the 
- * KonsoleMainWindow widget passed as an argument to the constructor.
+ * When a ViewManager is instantiated, it creates a new view container and adds it to the 
+ * main window associated with the ViewManager which is specified in the constructor.
  *
  * To create new terminal displays inside the container widget, use the createView() method.
  *
@@ -109,12 +118,17 @@ private:
     // newContainer owned by this manager
     void takeView(ViewManager* otherManager , ViewContainer* otherContainer, ViewContainer* newContainer, TEWidget* view); 
 
+    // creates a new container which can hold terminal displays
     ViewContainer* createContainer();
     // creates a new terminal display
     TEWidget* createTerminalDisplay();
     // applies the view-specific settings such as colour scheme associated
     // with 'session' to 'view'
     void loadViewSettings(TEWidget* view , TESession* session);
+
+    // creates a new controller for a session/display pair which provides the menu
+    // actions associated with that view, and exposes basic information
+    // about the session ( such as title and associated icon ) to the display.
     SessionController* createController(TESession* session , TEWidget* display);
 
 private:

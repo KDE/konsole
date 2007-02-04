@@ -34,6 +34,9 @@
  * using ProcessInfo::newInstance(),
  * passing the process identifier of the process you are interested in.
  *
+ * After creating a new instance, call the update() method to take a 
+ * snapshot of the current state of the process.
+ *
  * Before calling any additional methods, check that the process state
  * was read successfully using the isValid() method.
  *
@@ -186,6 +189,8 @@ private:
  * Implementation of ProcessInfo which does nothing.
  * Used on platforms where a suitable ProcessInfo subclass is not 
  * available.
+ *
+ * isValid() will always return false for instances of NullProcessInfo
  */
 class NullProcessInfo : public ProcessInfo
 {
@@ -205,11 +210,16 @@ public:
     UnixProcessInfo(int pid,bool readEnvironment = false);
 
 protected:
+    // reads the /proc/<pid>/stat file to get status information
+    // about the process, also uses readEnvironment() and readArguments()
+    // to read other files in /proc/<pid>
     virtual bool readProcessInfo(int pid , bool readEnvironment);
 
 private:
-    bool readEnvironment(int pid);
-    bool readArguments(int pid);
+    bool readEnvironment(int pid);  // read the /proc/<pid/environ file
+                                    // to get environment bindings
+    bool readArguments(int pid);    // read the /proc/<pid>/cmdline file
+                                    // to get command-line arguments
 
 };
 

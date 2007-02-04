@@ -94,10 +94,6 @@ QString ProcessInfo::name(bool* ok) const
     return _name;
 }
 
-
-
-
-
 void ProcessInfo::setPid(int pid)
 {
     _pid = pid;
@@ -136,6 +132,8 @@ UnixProcessInfo::UnixProcessInfo(int pid,bool enableEnvironmentRead)
 
 bool UnixProcessInfo::readProcessInfo(int pid , bool enableEnvironmentRead)
 {
+    // indicies of various fields within the process status file which
+    // contain various information about the process
     const int PARENT_PID_FIELD = 3;
     const int PROCESS_NAME_FIELD = 1;
     const int GROUP_PROCESS_FIELD = 7;
@@ -143,7 +141,15 @@ bool UnixProcessInfo::readProcessInfo(int pid , bool enableEnvironmentRead)
     QString parentPidString;
     QString processNameString;
     QString foregroundPidString;
-    
+
+    // read process status file ( /proc/<pid/stat )
+    //
+    // the expected file format is a list of fields separated by spaces, using
+    // parenthesies to escape fields such as the process name which may itself contain
+    // spaces:
+    //
+    // FIELD FIELD (FIELD WITH SPACES) FIELD FIELD
+    //
     QFile processInfo( QString("/proc/%1/stat").arg(pid) );
     if ( processInfo.open(QIODevice::ReadOnly) )
     {
@@ -236,8 +242,11 @@ bool NullProcessInfo::readProcessInfo(int /*pid*/ , bool /*enableEnvironmentRead
 
 bool UnixProcessInfo::readArguments(int pid)
 {
-    QFile argumentsFile( QString("/proc/%1/cmdline").arg(pid) );
+    // read command-line arguments file found at /proc/<pid>/cmdline
+    // the expected format is a list of strings delimited by null characters,
+    // and ending in a double null character pair.
 
+    QFile argumentsFile( QString("/proc/%1/cmdline").arg(pid) );
     if ( argumentsFile.open(QIODevice::ReadOnly) )
     {
         QTextStream stream(&argumentsFile);
@@ -257,8 +266,11 @@ bool UnixProcessInfo::readArguments(int pid)
 
 bool UnixProcessInfo::readEnvironment(int pid)
 {
-    QFile environmentFile( QString("/proc/%1/environ").arg(pid) );
+    // read environment bindings file found at /proc/<pid>/environ
+    // the expected format is a list of KEY=VALUE strings delimited by null
+    // characters and ending in a double null character pair.
 
+    QFile environmentFile( QString("/proc/%1/environ").arg(pid) );
     if ( environmentFile.open(QIODevice::ReadOnly) )
     {
         QTextStream stream(&environmentFile);

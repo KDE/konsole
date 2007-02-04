@@ -142,6 +142,7 @@ void SessionController::setupActions()
     action->setText( i18n("Clear History") );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearHistory()) );
 
+    // debugging tools
     action = collection->addAction("debug-process");
     action->setText( "Get Foreground Process" );
     connect( action , SIGNAL(triggered()) , this , SLOT(debugProcess()) );
@@ -149,6 +150,8 @@ void SessionController::setupActions()
 
 void SessionController::debugProcess()
 {
+    // testing facility to retrieve process information about 
+    // currently active process in the shell
     ProcessInfo* sessionProcess = ProcessInfo::newInstance(_session->sessionPid());
     sessionProcess->update();
 
@@ -331,6 +334,9 @@ void SaveHistoryTask::execute()
      mimeTypes << "text/html";
      dialog->setMimeFilter(mimeTypes,"text/plain");
 
+     // iterate over each session in the task and display a dialog to allow the user to choose where
+     // to save that session's history.
+     // then start a KIO job to transfer the data from the history to the chosen URL
     while ( iter.hasNext() )
     {
         SessionPtr session = iter.next();
@@ -367,7 +373,10 @@ void SaveHistoryTask::execute()
 
         SaveJob jobInfo;
         jobInfo.session = session;
-        jobInfo.lastLineFetched = -1;
+        jobInfo.lastLineFetched = -1;  // when each request for data comes in from the KIO subsystem
+                                       // lastLineFetched is used to keep track of how much of the history
+                                       // has already been sent, and where the next request should continue
+                                       // from
 
         if ( dialog->currentMimeFilter() == "text/html" )
            jobInfo.decoder = new HTMLDecoder();
@@ -393,6 +402,7 @@ void SaveHistoryTask::jobDataRequested(KIO::Job* job , QByteArray& data)
 
     SaveJob& info = _jobSession[job];   
 
+    // transfer LINES_PER_REQUEST lines from the session's history to the save location
     if ( info.session )
     {
         int sessionLines = info.session->getEmulation()->lines();

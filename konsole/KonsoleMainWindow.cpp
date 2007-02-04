@@ -129,6 +129,10 @@ void KonsoleMainWindow::showPreferencesDialog()
 
 void KonsoleMainWindow::mergeWindows()
 {
+    // merges all of the open Konsole windows into this window
+    // by merging the view manager associated with the other Konsole windows
+    // into this window's view manager
+
     QListIterator<QWidget*> topLevelIter( KonsoleApp::topLevelWidgets() );
 
     while (topLevelIter.hasNext())
