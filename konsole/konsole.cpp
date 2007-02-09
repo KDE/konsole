@@ -306,7 +306,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
     n_tabbar = wanted_tabbar;
     KConfig *c = KApplication::kApplication()->sessionConfig();
     c->setDesktopGroup();
-    b_dynamicTabHide = c->readEntry("DynamicTabHide", QVariant(false)).toBool();
+    b_dynamicTabHide = c->readEntry("DynamicTabHide", false);
   }
 
   if (!tabbaron)
@@ -1646,17 +1646,17 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
        _te->setBlinkingCursor(config->readEntry("BlinkingCursor", false));
        _te->setCtrlDrag(config->readEntry("CtrlDrag", true));
        _te->setCutToBeginningOfLine(config->readEntry("CutToBeginningOfLine", false));
-       _te->setLineSpacing( config->readEntry( "LineSpacing", QVariant(0)).toUInt() );
+       _te->setLineSpacing( config->readEntry( "LineSpacing", unsigned(0)) );
        _te->setBidiEnabled(b_bidiEnabled);
      }
 
-     monitorSilenceSeconds=config->readEntry("SilenceSeconds", QVariant(10)).toUInt();
+     monitorSilenceSeconds=config->readEntry("SilenceSeconds", unsigned(10));
      for (TESession *ses = sessions.first(); ses; ses = sessions.next())
        ses->setMonitorSilenceSeconds(monitorSilenceSeconds);
 
-     b_matchTabWinTitle = config->readEntry("MatchTabWinTitle", QVariant(true)).toBool();
+     b_matchTabWinTitle = config->readEntry("MatchTabWinTitle", true);
      config->setGroup("UTMP");
-     b_addToUtmp = config->readEntry("AddToUtmp", QVariant(true)).toBool();
+     b_addToUtmp = config->readEntry("AddToUtmp", true);
      config->setDesktopGroup();
 
      // Do not set a default value; this allows the System-wide Scheme
@@ -1670,17 +1670,16 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
    if (!globalConfigOnly)
    {
       n_defaultKeytab=KeyTrans::find(config->readEntry("keytab","default"))->numb(); // act. the keytab for this session
-      b_fullscreen = config->readEntry("Fullscreen", QVariant(false)).toBool();
-      n_scroll   = qMin(config->readEntry("scrollbar", QVariant(TEWidget::SCRRIGHT)).toUInt(),2u);
-      n_tabbar   = qMin(config->readEntry("tabbar", QVariant(TabBottom)).toUInt(),2u);
-      n_bell = qMin(config->readEntry("bellmode", QVariant(TEWidget::BELLSYSTEM)).toUInt(),3u);
+      b_fullscreen = config->readEntry("Fullscreen", false);
+      n_scroll   = qMin(config->readEntry("scrollbar", unsigned(TEWidget::SCRRIGHT)),2u);
+      n_tabbar   = qMin(config->readEntry("tabbar", unsigned(TabBottom)),2u);
+      n_bell = qMin(config->readEntry("bellmode", unsigned(TEWidget::BELLSYSTEM)),3u);
 
       // Options that should be applied to all sessions /////////////
 
       // (1) set menu items and Konsole members
 
-      QVariant v_defaultFont = config->readEntry("defaultfont", QVariant(KGlobalSettings::fixedFont()));
-      defaultFont = v_defaultFont.value<QFont>();
+      defaultFont = config->readEntry("defaultfont", KGlobalSettings::fixedFont());
 
       //set the schema
       s_kconfigSchema=config->readEntry("schema");
@@ -1712,11 +1711,11 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       }
 
       // History
-      m_histSize = config->readEntry("history", QVariant(DEFAULT_HISTORY_SIZE)).toInt();
+      m_histSize = config->readEntry("history", int(DEFAULT_HISTORY_SIZE));
       b_histEnabled = config->readEntry("historyenabled", true);
 
       // Tab View Mode
-      m_tabViewMode = TabViewModes(config->readEntry("TabViewMode", QVariant(ShowIconAndText)).toInt());
+      m_tabViewMode = TabViewModes(config->readEntry("TabViewMode", int(ShowIconAndText)));
       b_dynamicTabHide = config->readEntry("DynamicTabHide", false);
       b_autoResizeTabs = config->readEntry("AutoResizeTabs", false);
 
@@ -2773,7 +2772,7 @@ void Konsole::setDefaultSession(const QString &filename)
   delete m_defaultSession;
   m_defaultSession = new KSimpleConfig(KStandardDirs::locate("appdata", filename), true /* read only */);
   m_defaultSession->setDesktopGroup();
-  b_showstartuptip = m_defaultSession->readEntry("Tips", QVariant(true)).toBool();
+  b_showstartuptip = m_defaultSession->readEntry("Tips", true);
   m_defaultSessionFilename=filename;
 }
 

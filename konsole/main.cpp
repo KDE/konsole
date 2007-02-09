@@ -464,7 +464,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         sIcon = sessionconfig->readEntry("Icon0","konsole");
         sCwd = sessionconfig->readPathEntry("Cwd0");
         workDir = sessionconfig->readPathEntry("workdir");
-        n_tabbar = qMin(sessionconfig->readEntry("tabbar", QVariant(Konsole::TabBottom)).toUInt(), 2u);
+        n_tabbar = qMin(sessionconfig->readEntry("tabbar", unsigned(Konsole::TabBottom)), 2u);
         Konsole *m = new Konsole(wname,histon,menubaron,tabbaron,frameon,scrollbaron,0/*type*/,true,n_tabbar, workDir);
 
 
@@ -482,18 +482,15 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         if (!sessionconfig->hasKey("Pgm0"))
             sessionconfig->setDesktopGroup(); // Backwards compatible
         m->makeGUI();
-        m->setEncoding(sessionconfig->readEntry("Encoding0", QVariant(0)).toInt());
+        m->setEncoding(sessionconfig->readEntry("Encoding0", int(0)));
         m->setSchema(sessionconfig->readEntry("Schema0"));
         // Use konsolerc default as tmpFont instead?
-        QVariant v_defaultFont = sessionconfig->readEntry("SessionFont0", QVariant(KGlobalSettings::fixedFont()));
-        m->initSessionFont( v_defaultFont.value<QFont>() );
+        m->initSessionFont(sessionconfig->readEntry("SessionFont0", KGlobalSettings::fixedFont()));
         m->initSessionKeyTab(sessionconfig->readEntry("KeyTab0"));
-        m->initMonitorActivity(sessionconfig->readEntry("MonitorActivity0", QVariant(false)).toBool());
-        m->initMonitorSilence(sessionconfig->readEntry("MonitorSilence0", QVariant(false)).toBool());
-        m->initMasterMode(sessionconfig->readEntry("MasterMode0", QVariant(false)).toBool());
-        //FIXME: Verify this code when KDE4 supports tab colors... kvh
-        QVariant v_tabColor = sessionconfig->readEntry("TabColor0");
-        m->initTabColor( v_tabColor.value<QColor>() );
+        m->initMonitorActivity(sessionconfig->readEntry("MonitorActivity0", false));
+        m->initMonitorSilence(sessionconfig->readEntry("MonitorSilence0", false));
+        m->initMasterMode(sessionconfig->readEntry("MasterMode0", false));
+        m->initTabColor( sessionconfig->readEntry("TabColor0", QColor()));
         // -1 will be changed to the default history in konsolerc
 //        m->initHistory(sessionconfig->readNumEntry("History0", -1),
 //                       sessionconfig->readBoolEntry("HistoryEnabled0", true));
@@ -531,19 +528,18 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
           key = QString("Schema%1").arg(counter);
           m->setSchema(sessionconfig->readEntry(key, QString()));
           key = QString("Encoding%1").arg(counter);
-          m->setEncoding(sessionconfig->readEntry(key, QVariant(0)).toInt());
+          m->setEncoding(sessionconfig->readEntry(key, int(0)));
           key = QString("SessionFont%1").arg(counter);
-          QVariant v_defaultFont = sessionconfig->readEntry(key, QVariant(KGlobalSettings::fixedFont()));
-          m->initSessionFont( v_defaultFont.value<QFont>() );
+          m->initSessionFont( sessionconfig->readEntry(key, KGlobalSettings::fixedFont()));
 
           key = QString("KeyTab%1").arg(counter);
           m->initSessionKeyTab(sessionconfig->readEntry(key, QString()));
           key = QString("MonitorActivity%1").arg(counter);
-          m->initMonitorActivity(sessionconfig->readEntry(key, QVariant(false)).toBool());
+          m->initMonitorActivity(sessionconfig->readEntry(key, false));
           key = QString("MonitorSilence%1").arg(counter);
-          m->initMonitorSilence(sessionconfig->readEntry(key, QVariant(false)).toBool());
+          m->initMonitorSilence(sessionconfig->readEntry(key, false));
           key = QString("MasterMode%1").arg(counter);
-          m->initMasterMode(sessionconfig->readEntry(key, QVariant(false)).toBool());
+          m->initMasterMode(sessionconfig->readEntry(key, false));
           key = QString("TabColor%1").arg(counter);
 //          m->initTabColor(sessionconfig->readColorEntry(key));
           //FIXME: Verify this code when KDE4 supports tab colors... kvh
@@ -573,7 +569,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         }
 	// works only for the first one, but there won't be more.
         n++;
-        m->activateSession( sessionconfig->readEntry("ActiveSession", QVariant(0)).toInt() );
+        m->activateSession( sessionconfig->readEntry("ActiveSession", int(0)) );
 	m->setAutoClose(auto_close);
     }
   }
