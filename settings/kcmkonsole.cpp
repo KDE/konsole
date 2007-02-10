@@ -100,18 +100,18 @@ void KCMKonsole::load(bool useDefaults)
     config.setDesktopGroup();
     config.setReadDefaults(useDefaults);
 
-    dialog->terminalSizeHintCB->setChecked(config.readEntry("TerminalSizeHint", QVariant(false)).toBool());
-    bidiOrig = config.readEntry("EnableBidi", QVariant(false)).toBool();
+    dialog->terminalSizeHintCB->setChecked(config.readEntry("TerminalSizeHint", false));
+    bidiOrig = config.readEntry("EnableBidi", false);
     dialog->bidiCB->setChecked(bidiOrig);
-    dialog->matchTabWinTitleCB->setChecked(config.readEntry("MatchTabWinTitle", QVariant(false)).toBool());
-    dialog->warnCB->setChecked(config.readEntry("WarnQuit", QVariant(true)).toBool());
-    dialog->ctrldragCB->setChecked(config.readEntry("CtrlDrag", QVariant(true)).toBool());
-    dialog->cutToBeginningOfLineCB->setChecked(config.readEntry("CutToBeginningOfLine", QVariant(false)).toBool());
-    dialog->allowResizeCB->setChecked(config.readEntry("AllowResize", QVariant(false)).toBool());
-    xonXoffOrig = config.readEntry("XonXoff", QVariant(false)).toBool();
+    dialog->matchTabWinTitleCB->setChecked(config.readEntry("MatchTabWinTitle", false));
+    dialog->warnCB->setChecked(config.readEntry("WarnQuit", true));
+    dialog->ctrldragCB->setChecked(config.readEntry("CtrlDrag", true));
+    dialog->cutToBeginningOfLineCB->setChecked(config.readEntry("CutToBeginningOfLine", false));
+    dialog->allowResizeCB->setChecked(config.readEntry("AllowResize", false));
+    xonXoffOrig = config.readEntry("XonXoff", false);
     dialog->xonXoffCB->setChecked(xonXoffOrig);
-    dialog->blinkingCB->setChecked(config.readEntry("BlinkingCursor", QVariant(false)).toBool());
-    dialog->frameCB->setChecked(config.readEntry("has frame", QVariant(true)).toBool());
+    dialog->blinkingCB->setChecked(config.readEntry("BlinkingCursor", false));
+    dialog->frameCB->setChecked(config.readEntry("has frame", true));
     dialog->line_spacingSB->setValue(config.readEntry( "LineSpacing", 0 ));
     dialog->silence_secondsSB->setValue(config.readEntry( "SilenceSeconds", 10 ));
     dialog->word_connectorLE->setText(config.readEntry("wordseps",":@-./_~"));
