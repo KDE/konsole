@@ -177,7 +177,7 @@ SessionManager::SessionManager()
     //
     //the sessions are only parsed completely when a session of this type 
     //is actually created
-    QList<QString> files = KGlobal::dirs()->findAllResources("appdata", "*.desktop", false, true);
+    QList<QString> files = KGlobal::dirs()->findAllResources("appdata", "*.desktop", KStandardDirs::NoDuplicates);
 
     QListIterator<QString> fileIter(files);
    

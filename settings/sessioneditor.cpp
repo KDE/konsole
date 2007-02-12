@@ -162,7 +162,7 @@ QString SessionEditor::readKeymapTitle(const QString & file)
 
 void SessionEditor::loadAllSession(QString currentFile)
 {
-  QStringList list = KGlobal::dirs()->findAllResources("data", "konsole/*.desktop", false, true);
+  QStringList list = KGlobal::dirs()->findAllResources("data", "konsole/*.desktop", KStandardDirs::NoDuplicates);
   sessionList->clear();
 
   Q3ListBoxItem* currentItem = 0;
