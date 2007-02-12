@@ -1362,7 +1362,7 @@ void Konsole::slotTabSelectColor()
   //default back to showing KDE's color dialog instead.
   if ( m_tabColorCells )
   {
-    color = m_tabColorCells->color(m_tabColorCells->getSelected());
+    color = m_tabColorCells->color(m_tabColorCells->selectedIndex());
 
     if (!color.isValid())
             return;
@@ -1387,7 +1387,7 @@ void Konsole::slotTabPrepareColorCells()
 
     QColor activeTabColor = tabwidget->tabTextColor( tabwidget->indexOf( m_contextMenuSession->widget() ) );
 
-    for (int i=0;i<m_tabColorCells->numCells();i++)
+    for (int i=0;i<m_tabColorCells->count();i++)
         if ( activeTabColor == m_tabColorCells->color(i) )
         {
             m_tabColorCells->setSelected(i);
@@ -2019,13 +2019,14 @@ void Konsole::slotConfigureKeys()
     foreach( const QKeySequence seq, shortcut )
     {
       int key = seq.isEmpty() ? 0 : seq[0]; // First Key of KeySequence
-      if ((key & Qt::KeyboardModifierMask) == Qt::ControlModifier)
+      if ((key & Qt::KeyboardModifierMask) == Qt::ControlModifier) {
         if (seq.count() == 1)
           ctrlKeys << QKeySequence(key).toString();
         else {
           ctrlKeys << i18nc("keyboard key %1, as first key out of a short key sequence %2)",
           "%1, as first key of %2", QKeySequence(key).toString(), seq.toString());
         }
+      }
     }
 
     // Are there any shortcuts for Session Menu entries?
