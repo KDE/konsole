@@ -40,6 +40,13 @@
  * Before calling any additional methods, check that the process state
  * was read successfully using the isValid() method.
  *
+ * Each accessor method which provides information about the process state ( such as pid(), 
+ * currentDir(), name() ) takes a pointer to a boolean as an argument.  If the information
+ * requested was read successfully then the boolean is set to true, otherwise it is set
+ * to false, in which case the return value from the function should be ignored.
+ * If this boolean is set to false, it may indicate an error reading the process information,
+ * or it may indicate that the information is not available on the current platform. 
+ *
  * eg.
  *
  * @code
@@ -48,9 +55,18 @@
  *
  *   if ( info.isValid() )
  *   {
- *      qDebug() << "process name - " << info.name();
- *      qDebug() << "parent process - " << info.parentPid();
- *      qDebug() << "foreground process - " << info.foregroundPid();
+ *      bool ok;
+ *      QString value = info.name(&ok);
+ *
+ *      if ( ok ) qDebug() << "process name - " << name;
+ *
+ *      int parentPid = info.parentPid(&ok);
+ *
+ *      if ( ok ) qDebug() << "parent process - " << parentPid;
+ *
+ *      int foregroundPid = info.foregroundPid(&ok);
+ *
+ *      if ( ok ) qDebug() << "foreground process - " << foregroundPid;
  *   }
  * @endcode
  */
@@ -87,11 +103,23 @@ public:
 
     /** Returns true if the process state was read successfully */ 
     bool isValid() const;
-    /** Returns the process id */
+    /** 
+     * Returns the process id.  
+     *
+     * @param ok Set to true if the process id was read successfully or false otherwise 
+     */
     int pid(bool* ok) const;
-    /** Returns the id of the parent process */
+    /** 
+     * Returns the id of the parent process id was read successfully or false otherwise
+     * 
+     * @param ok Set to true if the parent process id
+     */
     int parentPid(bool* ok) const;
-    /*** Returns the id of the current foreground process */
+    /*** 
+     * Returns the id of the current foreground process 
+     *
+     * @param ok Set to true if the foreground process id was read successfully or false otherwise
+     */
     int foregroundPid(bool* ok) const;
     /** Returns the name of the current process */
     QString name(bool* ok) const;
@@ -100,7 +128,9 @@ public:
      * Returns the command-line arguments which the process
      * was started with.
      *
-     * The first argument name used to launch the process.
+     * The first argument is the name used to launch the process.
+     *
+     * @param ok Set to true if the arguments were read successfully or false otherwise.
      */
     QVector<QString> arguments(bool* ok) const;
     /**
@@ -108,9 +138,17 @@ public:
      * was started with.
      * In the returned map, the key is the name of the environment variable,
      * and the value is the corresponding value.
+     *
+     * @param ok Set to true if the environment bindings were read successfully or false otherwise
      */
     QMap<QString,QString> environment(bool* ok) const;
 
+    /**
+     * Returns the current working directory of the process
+     *
+     * @param ok Set to true if the current working directory was read successfully or false otherwise
+     */
+    QString currentDir(bool* ok) const;
 
 protected:
     /** 
@@ -141,6 +179,9 @@ protected:
     void setForegroundPid(int pid);
     /** Sets the name of the process as returned by name() */
     void setName(const QString& name);
+    /** Sets the current working directory for the process */
+    void setCurrentDir(const QString& dir);
+
     /** 
      * Adds a commandline argument for the process, as returned
      * by arguments()
@@ -166,7 +207,8 @@ private:
         FOREGROUND_PID      = 4,
         ARGUMENTS           = 8,
         ENVIRONMENT         = 16,
-        NAME                = 32
+        NAME                = 32,
+        CURRENT_DIR         = 64
     };
 
 
@@ -180,6 +222,7 @@ private:
     int _parentPid;
     int _foregroundPid;
     QString _name;
+    QString _currentDir;
 
     QVector<QString> _arguments;
     QMap<QString,QString> _environment;
@@ -221,6 +264,8 @@ private:
     bool readArguments(int pid);    // read the /proc/<pid>/cmdline file
                                     // to get command-line arguments
 
+    bool readCurrentDir(int pid);   // read the /proc/<pid>/cwd symlink to
+                                    // get the current working directory of the process
 };
 
 #endif //PROCESSINFO_H

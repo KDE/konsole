@@ -546,8 +546,7 @@ bool ColorSchemaList::updateAllSchemaTimes(const QDateTime& now)
 {
 //  KONSOLEDEBUG << "Updating time stamps" << endl;
 
-  QStringList list;
-  KGlobal::dirs()->findAllResources("data", "konsole/*.schema", false, true, list);
+  QStringList list = KGlobal::dirs()->findAllResources("data", "konsole/*.schema");
   QStringList::ConstIterator it;
   bool r = false;
 

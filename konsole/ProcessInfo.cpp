@@ -20,6 +20,7 @@
 // Qt
 #include <QDebug>
 #include <QFile>
+#include <QFileInfo>
 #include <QTextStream>
 #include <QStringList>
 
@@ -110,6 +111,18 @@ void ProcessInfo::setForegroundPid(int pid)
     _foregroundPid = pid;
     _fields |= FOREGROUND_PID;
 }
+QString ProcessInfo::currentDir(bool* ok) const
+{
+    *ok = _fields & CURRENT_DIR;
+
+    return _currentDir;
+}
+void ProcessInfo::setCurrentDir(const QString& dir)
+{
+    _fields |= CURRENT_DIR;
+    _currentDir = dir;
+}
+
 void ProcessInfo::setName(const QString& name)
 {
     _name = name;
@@ -206,7 +219,9 @@ bool UnixProcessInfo::readProcessInfo(int pid , bool enableEnvironmentRead)
     if (processNameString.isEmpty()) return false;
 
     if (!readArguments(pid)) return false;
-    
+   
+    if (!readCurrentDir(pid)) return false;
+
     if ( enableEnvironmentRead )
     {
         if (!readEnvironment(pid)) return false;
@@ -262,6 +277,20 @@ bool UnixProcessInfo::readArguments(int pid)
     }
 
     return true;
+}
+
+bool UnixProcessInfo::readCurrentDir(int pid)
+{
+    QFileInfo info( QString("/proc/%1/cwd").arg(pid) );
+    if ( info.isSymLink() )
+    {
+        setCurrentDir( info.symLinkTarget() );
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 bool UnixProcessInfo::readEnvironment(int pid)
