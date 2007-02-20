@@ -278,6 +278,7 @@ TESession* SessionManager::createSession(QString configPath )
 void SessionManager::sessionTerminated(TESession* session)
 {
     _sessions.remove(session);
+    session->deleteLater();
 }
 
 QList<SessionInfo*> SessionManager::availableSessionTypes()
