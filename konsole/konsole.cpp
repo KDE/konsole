@@ -152,7 +152,7 @@ void KonsoleFontSelectAction::actionTriggered(QAction* action) {
 }
 
 template class Q3PtrDict<TESession>;
-template class Q3IntDict<KSimpleConfig>;
+template class Q3IntDict<KConfig>;
 template class Q3PtrDict<KToggleAction>;
 
 #define DEFAULT_HISTORY_SIZE 1000
@@ -286,27 +286,24 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
   resize(321, 321); // Dummy.
   QSize currentSize = size();
   KSharedConfig::Ptr config = KGlobal::config();
-  config->setDesktopGroup();
-  applyMainWindowSettings(config.data());
+  applyMainWindowSettings(KConfigGroup(config, "Desktop Entry"));
   if (currentSize != size())
      defaultSize = size();
 
-  KSimpleConfig *co;
   if (!type.isEmpty())
     setDefaultSession(type+".desktop");
-  co = defaultSession();
+  KConfig *co = defaultSession();
+  KConfigGroup desktopEntryGroup = co->group("Desktop Entry");
 
-  co->setDesktopGroup();
-  QString schema = co->readEntry("Schema");
-  readProperties(config.data(), schema, false);
+  QString schema = desktopEntryGroup.readEntry("Schema");
+  readProperties(desktopEntryGroup, schema, false, true);
 
   makeBasicGUI();
 
   if (isRestored) {
     n_tabbar = wanted_tabbar;
     KConfig *c = KApplication::kApplication()->sessionConfig();
-    c->setDesktopGroup();
-    b_dynamicTabHide = c->readEntry("DynamicTabHide", false);
+    b_dynamicTabHide = c->group("Desktop Entry").readEntry("DynamicTabHide", false);
   }
 
   if (!tabbaron)
@@ -1500,112 +1497,107 @@ void Konsole::slotSaveSessionsProfile()
     if ( QFile::exists( path ) )
       QFile::remove( path );
 
-    KSimpleConfig cfg( path );
+    KConfig cfg( path, KConfig::OnlyLocal);
     savePropertiesInternal(&cfg,1);
-    saveMainWindowSettings(&cfg);
+    saveMainWindowSettings(KConfigGroup(&cfg, "1"));
   }
 }
 
-void Konsole::saveProperties(KConfig* config) {
+void Konsole::saveProperties(KConfigGroup& config) {
   uint counter=0;
   uint active=0;
   QString key;
 
-  if (config != KGlobal::config().data())
+  // called by the session manager
+  config.writeEntry("numSes",sessions.count());
+  sessions.first();
+  while(counter < sessions.count())
   {
-     // called by the session manager
-     config->writeEntry("numSes",sessions.count());
-     sessions.first();
-     while(counter < sessions.count())
-     {
-        key = QString("Title%1").arg(counter);
+    key = QString("Title%1").arg(counter);
 
-        config->writeEntry(key, sessions.current()->Title());
-        key = QString("Schema%1").arg(counter);
-        config->writeEntry(key, colors->find( sessions.current()->schemaNo() )->relPath());
-	key = QString("Encoding%1").arg(counter);
-	config->writeEntry(key, sessions.current()->encodingNo());
+    config.writeEntry(key, sessions.current()->Title());
+    key = QString("Schema%1").arg(counter);
+    config.writeEntry(key, colors->find( sessions.current()->schemaNo() )->relPath());
+    key = QString("Encoding%1").arg(counter);
+    config.writeEntry(key, sessions.current()->encodingNo());
 
-        key = QString("Args%1").arg(counter);
+    key = QString("Args%1").arg(counter);
 //KDE4: Need to test this conversion q3strlist to qstringlist
-//        config->writeEntry(key, sessions.current()->getArgs());
-        QStringList args_sl;
-        QStringList args = sessions.current()->getArgs();
-        QStringListIterator it( args );
-        while(it.hasNext())
-            args_sl << QString(it.next());
-        config->writeEntry(key, args_sl);
+//        config.writeEntry(key, sessions.current()->getArgs());
+    QStringList args_sl;
+    QStringList args = sessions.current()->getArgs();
+    QStringListIterator it( args );
+    while(it.hasNext())
+      args_sl << QString(it.next());
+    config.writeEntry(key, args_sl);
 
-        key = QString("Pgm%1").arg(counter);
-        config->writeEntry(key, sessions.current()->getPgm());
-        key = QString("SessionFont%1").arg(counter);
-        config->writeEntry(key, (sessions.current()->widget())->getVTFont());
-        key = QString("Term%1").arg(counter);
-        config->writeEntry(key, sessions.current()->Term());
-        key = QString("KeyTab%1").arg(counter);
-        config->writeEntry(key, sessions.current()->keymap());
-        key = QString("Icon%1").arg(counter);
-        config->writeEntry(key, sessions.current()->IconName());
-        key = QString("MonitorActivity%1").arg(counter);
-        config->writeEntry(key, sessions.current()->isMonitorActivity());
-        key = QString("MonitorSilence%1").arg(counter);
-        config->writeEntry(key, sessions.current()->isMonitorSilence());
-        key = QString("MasterMode%1").arg(counter);
-        config->writeEntry(key, sessions.current()->isMasterMode());
-        //key = QString("TabColor%1").arg(counter);
-        //config->writeEntry(key, tabwidget->tabColor((sessions.current())->widget()));
+    key = QString("Pgm%1").arg(counter);
+    config.writeEntry(key, sessions.current()->getPgm());
+    key = QString("SessionFont%1").arg(counter);
+    config.writeEntry(key, (sessions.current()->widget())->getVTFont());
+    key = QString("Term%1").arg(counter);
+    config.writeEntry(key, sessions.current()->Term());
+    key = QString("KeyTab%1").arg(counter);
+    config.writeEntry(key, sessions.current()->keymap());
+    key = QString("Icon%1").arg(counter);
+    config.writeEntry(key, sessions.current()->IconName());
+    key = QString("MonitorActivity%1").arg(counter);
+    config.writeEntry(key, sessions.current()->isMonitorActivity());
+    key = QString("MonitorSilence%1").arg(counter);
+    config.writeEntry(key, sessions.current()->isMonitorSilence());
+    key = QString("MasterMode%1").arg(counter);
+    config.writeEntry(key, sessions.current()->isMasterMode());
+    //key = QString("TabColor%1").arg(counter);
+    //config.writeEntry(key, tabwidget->tabColor((sessions.current())->widget()));
 /* Test this when dialogs work again
-        key = QString("History%1").arg(counter);
-        config->writeEntry(key, sessions.current()->history().getSize());
-        key = QString("HistoryEnabled%1").arg(counter);
-        config->writeEntry(key, sessions.current()->history().isOn());
+   key = QString("History%1").arg(counter);
+   config.writeEntry(key, sessions.current()->history().getSize());
+   key = QString("HistoryEnabled%1").arg(counter);
+   config.writeEntry(key, sessions.current()->history().isOn());
 */
 
-        QString cwd=sessions.current()->getCwd();
-        if (cwd.isEmpty())
-          cwd=sessions.current()->getInitial_cwd();
-        key = QString("Cwd%1").arg(counter);
-        config->writePathEntry(key, cwd);
+    QString cwd=sessions.current()->getCwd();
+    if (cwd.isEmpty())
+      cwd=sessions.current()->getInitial_cwd();
+    key = QString("Cwd%1").arg(counter);
+    config.writePathEntry(key, cwd);
 
-        if (sessions.current()==se)
-	  active=counter;
-        sessions.next();
-        counter++;
-     }
+    if (sessions.current()==se)
+      active=counter;
+    sessions.next();
+    counter++;
+    config.writeEntry("ActiveSession", active);
   }
-  else
-  {
-     config->setDesktopGroup();
-     config->writeEntry("TabColor", tabwidget->tabTextColor( tabwidget->indexOf(se->widget())));
-  }
-  config->writeEntry("Fullscreen",b_fullscreen);
-  config->writeEntry("scrollbar",n_scroll);
-  config->writeEntry("tabbar",n_tabbar);
-  config->writeEntry("bellmode",n_bell);
-  config->writeEntry("keytab",KeyTrans::find(n_defaultKeytab)->id());
-  config->writeEntry("ActiveSession", active);
-  config->writeEntry("DefaultSession", m_defaultSessionFilename);
-  config->writeEntry("TabViewMode", int(m_tabViewMode));
-  config->writeEntry("DynamicTabHide", b_dynamicTabHide);
-  config->writeEntry("AutoResizeTabs", b_autoResizeTabs);
+
+  saveMainWindowSettings(config);
+  savePropertiesHelper( config );
+}
+
+void Konsole::savePropertiesHelper( KConfigGroup& group )
+{
+  group.writeEntry("Fullscreen",b_fullscreen);
+  group.writeEntry("scrollbar",n_scroll);
+  group.writeEntry("tabbar",n_tabbar);
+  group.writeEntry("bellmode",n_bell);
+  group.writeEntry("keytab",KeyTrans::find(n_defaultKeytab)->id());
+  group.writeEntry("DefaultSession", m_defaultSessionFilename);
+  group.writeEntry("TabViewMode", int(m_tabViewMode));
+  group.writeEntry("DynamicTabHide", b_dynamicTabHide);
+  group.writeEntry("AutoResizeTabs", b_autoResizeTabs);
 
   if (se) {
-    config->writeEntry("EncodingName", se->encoding());
-    config->writeEntry("history", se->history().getSize());
-    config->writeEntry("historyenabled", b_histEnabled);
-    config->writeEntry("defaultfont", (se->widget())->getVTFont());
+    group.writeEntry("EncodingName", se->encoding());
+    group.writeEntry("history", se->history().getSize());
+    group.writeEntry("historyenabled", b_histEnabled);
+    group.writeEntry("defaultfont", (se->widget())->getVTFont());
     s_kconfigSchema = colors->find( se->schemaNo() )->relPath();
-    config->writeEntry("schema",s_kconfigSchema);
+    group.writeEntry("schema",s_kconfigSchema);
   }
 
-  config->writeEntry("class",QObject::objectName());
-  if (config != KGlobal::config().data())
-  {
-      saveMainWindowSettings(config);
-  }
+  group.writeEntry("class",QObject::objectName());
 
   if (!s_workDir.isEmpty())
-    config->writePathEntry("workdir", s_workDir);
+    group.writePathEntry("workdir", s_workDir);
 
   if (se) {
     // Set the new default font
@@ -1614,75 +1606,75 @@ void Konsole::saveProperties(KConfig* config) {
 }
 
 
-// Called by constructor (with config = KGlobal::config())
-// and by session-management (with config = sessionconfig).
+// Called by session-management (with config = sessionconfig).
 // So it has to apply the settings when reading them.
-void Konsole::readProperties(KConfig* config)
+void Konsole::readProperties(const KConfigGroup& config)
 {
-    readProperties(config, QString(), false);
+    readProperties(config, QString(), false, false);
 }
 
+// Called by constructor (with config = KGlobal::config() and readGlobalConfig=true)
+// and by session-management (with config = sessionconfig) and readGlobalConfig=false)
+//
 // If --type option was given, load the corresponding schema instead of
 // default
 //
 // When globalConfigOnly is true only the options that are shared among all
 // konsoles are being read.
-void Konsole::readProperties(KConfig* config, const QString &schema, bool globalConfigOnly)
+void Konsole::readProperties(const KConfigGroup& config, const QString &schema, bool globalConfigOnly, bool readGlobalConfig)
 {
-
-   if (config==KGlobal::config().data())
+   if (readGlobalConfig)
    {
-     config->setDesktopGroup();
-     b_warnQuit=config->readEntry( "WarnQuit", true );
-     b_allowResize=config->readEntry( "AllowResize", false);
-     b_bidiEnabled = config->readEntry("EnableBidi", false);
-     s_word_seps= config->readEntry("wordseps",":@-./_~");
-     b_framevis = config->readEntry("has frame", false);
+     b_warnQuit=config.readEntry( "WarnQuit", true );
+     b_allowResize=config.readEntry( "AllowResize", false);
+     b_bidiEnabled = config.readEntry("EnableBidi", false);
+     s_word_seps= config.readEntry("wordseps",":@-./_~");
+     b_framevis = config.readEntry("has frame", false);
      Q3PtrList<TEWidget> tes = activeTEs();
      for (TEWidget *_te = tes.first(); _te; _te = tes.next()) {
        _te->setWordCharacters(s_word_seps);
-       _te->setTerminalSizeHint( config->readEntry("TerminalSizeHint", false));
+       _te->setTerminalSizeHint( config.readEntry("TerminalSizeHint", false));
        _te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
-       _te->setBlinkingCursor(config->readEntry("BlinkingCursor", false));
-       _te->setCtrlDrag(config->readEntry("CtrlDrag", true));
-       _te->setCutToBeginningOfLine(config->readEntry("CutToBeginningOfLine", false));
-       _te->setLineSpacing( config->readEntry( "LineSpacing", unsigned(0)) );
+       _te->setBlinkingCursor(config.readEntry("BlinkingCursor", false));
+       _te->setCtrlDrag(config.readEntry("CtrlDrag", true));
+       _te->setCutToBeginningOfLine(config.readEntry("CutToBeginningOfLine", false));
+       _te->setLineSpacing( config.readEntry( "LineSpacing", unsigned(0)) );
        _te->setBidiEnabled(b_bidiEnabled);
      }
 
-     monitorSilenceSeconds=config->readEntry("SilenceSeconds", unsigned(10));
+     monitorSilenceSeconds=config.readEntry("SilenceSeconds", unsigned(10));
      for (TESession *ses = sessions.first(); ses; ses = sessions.next())
        ses->setMonitorSilenceSeconds(monitorSilenceSeconds);
 
-     b_matchTabWinTitle = config->readEntry("MatchTabWinTitle", true);
-     config->setGroup("UTMP");
-     b_addToUtmp = config->readEntry("AddToUtmp", true);
-     config->setDesktopGroup();
+     b_matchTabWinTitle = config.readEntry("MatchTabWinTitle", true);
+     KConfigGroup utmpGroup = config;
+     utmpGroup.changeGroup("UTMP");
+     b_addToUtmp = utmpGroup.readEntry("AddToUtmp", true);
 
      // Do not set a default value; this allows the System-wide Scheme
      // to set the tab text color.
-//     m_tabColor = config->readColorEntry("TabColor");
+//     m_tabColor = config.readColorEntry("TabColor");
      //FIXME: Verify this code when KDE4 supports tab colors... kvh
-     QVariant v_tabColor = config->readEntry("TabColor");
+     QVariant v_tabColor = config.readEntry("TabColor");
      m_tabColor = v_tabColor.value<QColor>();
    }
 
    if (!globalConfigOnly)
    {
-      n_defaultKeytab=KeyTrans::find(config->readEntry("keytab","default"))->numb(); // act. the keytab for this session
-      b_fullscreen = config->readEntry("Fullscreen", false);
-      n_scroll   = qMin(config->readEntry("scrollbar", unsigned(TEWidget::SCRRIGHT)),2u);
-      n_tabbar   = qMin(config->readEntry("tabbar", unsigned(TabBottom)),2u);
-      n_bell = qMin(config->readEntry("bellmode", unsigned(TEWidget::BELLSYSTEM)),3u);
+      n_defaultKeytab=KeyTrans::find(config.readEntry("keytab","default"))->numb(); // act. the keytab for this session
+      b_fullscreen = config.readEntry("Fullscreen", false);
+      n_scroll   = qMin(config.readEntry("scrollbar", unsigned(TEWidget::SCRRIGHT)),2u);
+      n_tabbar   = qMin(config.readEntry("tabbar", unsigned(TabBottom)),2u);
+      n_bell = qMin(config.readEntry("bellmode", unsigned(TEWidget::BELLSYSTEM)),3u);
 
       // Options that should be applied to all sessions /////////////
 
       // (1) set menu items and Konsole members
 
-      defaultFont = config->readEntry("defaultfont", KGlobalSettings::fixedFont());
+      defaultFont = config.readEntry("defaultfont", KGlobalSettings::fixedFont());
 
       //set the schema
-      s_kconfigSchema=config->readEntry("schema");
+      s_kconfigSchema=config.readEntry("schema");
       ColorSchema* sch = colors->find(schema.isEmpty() ? s_kconfigSchema : schema);
       if (!sch)
       {
@@ -1711,22 +1703,22 @@ void Konsole::readProperties(KConfig* config, const QString &schema, bool global
       }
 
       // History
-      m_histSize = config->readEntry("history", int(DEFAULT_HISTORY_SIZE));
-      b_histEnabled = config->readEntry("historyenabled", true);
+      m_histSize = config.readEntry("history", int(DEFAULT_HISTORY_SIZE));
+      b_histEnabled = config.readEntry("historyenabled", true);
 
       // Tab View Mode
-      m_tabViewMode = TabViewModes(config->readEntry("TabViewMode", int(ShowIconAndText)));
-      b_dynamicTabHide = config->readEntry("DynamicTabHide", false);
-      b_autoResizeTabs = config->readEntry("AutoResizeTabs", false);
+      m_tabViewMode = TabViewModes(config.readEntry("TabViewMode", int(ShowIconAndText)));
+      b_dynamicTabHide = config.readEntry("DynamicTabHide", false);
+      b_autoResizeTabs = config.readEntry("AutoResizeTabs", false);
 
-      s_encodingName = config->readEntry( "EncodingName", "" ).toLower();
+      s_encodingName = config.readEntry( "EncodingName", "" ).toLower();
    }
 
    if (m_menuCreated)
    {
       applySettingsToGUI();
       activateSession();
-   };
+   }
 }
 
 void Konsole::applySettingsToGUI()
@@ -1991,9 +1983,10 @@ void Konsole::slotSelectTabbar() {
 void Konsole::slotSaveSettings()
 {
   KSharedConfig::Ptr config = KGlobal::config();
-  config->setDesktopGroup();
-  saveProperties(config.data());
-  saveMainWindowSettings(config.data());
+  KConfigGroup group( config->group("Desktop Entry") );
+  group.writeEntry("TabColor", tabwidget->tabTextColor( tabwidget->indexOf(se->widget())));
+  savePropertiesHelper(group);
+  saveMainWindowSettings(group);
   config->sync();
 }
 
@@ -2066,7 +2059,8 @@ void Konsole::slotConfigure()
 void Konsole::reparseConfiguration()
 {
   KGlobal::config()->reparseConfiguration();
-  readProperties(KGlobal::config().data(), QString(), true);
+  KConfigGroup desktopEntryGroup = KGlobal::config()->group("Desktop Entry");
+  readProperties(desktopEntryGroup, QString(), true, true);
 
   // The .desktop files may have been changed by user...
   b_sessionShortcutsMapped = false;
@@ -2758,12 +2752,11 @@ void Konsole::allowPrevNext()
   notifySessionState(se,NOTIFYNORMAL);
 }
 
-KSimpleConfig *Konsole::defaultSession()
+KConfig *Konsole::defaultSession()
 {
   if (!m_defaultSession) {
     KSharedConfig::Ptr config = KGlobal::config();
-    config->setDesktopGroup();
-    setDefaultSession(config->readEntry("DefaultSession","shell.desktop"));
+    setDefaultSession(config->group("Desktop Entry").readEntry("DefaultSession","shell.desktop"));
   }
   return m_defaultSession;
 }
@@ -2771,9 +2764,8 @@ KSimpleConfig *Konsole::defaultSession()
 void Konsole::setDefaultSession(const QString &filename)
 {
   delete m_defaultSession;
-  m_defaultSession = new KSimpleConfig(KStandardDirs::locate("appdata", filename), true /* read only */);
-  m_defaultSession->setDesktopGroup();
-  b_showstartuptip = m_defaultSession->readEntry("Tips", true);
+  m_defaultSession = new KConfig(KStandardDirs::locate("appdata", filename) );
+  b_showstartuptip = m_defaultSession->group("Desktop Entry").readEntry("Tips", true);
   m_defaultSessionFilename=filename;
 }
 
@@ -2840,7 +2832,8 @@ TESession* Konsole::newSession(SessionInfo* type)
     //copy settings from previous display if available, otherwise load them anew
     if ( !te )
     {
-        readProperties(KGlobal::config().data(), "", true);
+        KConfigGroup desktopEntryGroup = KGlobal::config()->group("Desktop Entry");
+        readProperties(desktopEntryGroup, "", true, true);
         display->setVTFont( type->defaultFont( defaultFont ) );
         display->setScrollbarLocation(n_scroll);
         display->setBellMode(n_bell);
@@ -3443,12 +3436,12 @@ void Konsole::addScreenSession(const QString &path, const QString &socket)
 {
   KTemporaryFile *tmpFile = new KTemporaryFile();
   tmpFile->open();
-  KSimpleConfig *co = new KSimpleConfig(tmpFile->fileName());
-  co->setDesktopGroup();
-  co->writeEntry("Name", socket);
+  KConfig co(tmpFile->fileName(), KConfig::OnlyLocal);
+  KConfigGroup group(&co, "Desktop Entry");
+  group.writeEntry("Name", socket);
   QString txt = i18nc("Screen is a program for controlling screens", "Screen at %1", socket);
-  co->writeEntry("Comment", txt);
-  co->writePathEntry("Exec", QString::fromLatin1("SCREENDIR=%1 screen -r %2")
+  group.writeEntry("Comment", txt);
+  group.writePathEntry("Exec", QString::fromLatin1("SCREENDIR=%1 screen -r %2")
     .arg(path).arg(socket));
   QString icon = "konsole";
   cmd_serial++;

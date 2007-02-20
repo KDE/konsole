@@ -25,25 +25,25 @@
 
 #include <QVariant>
 #include <QList>
-
-class KSimpleConfig;
+class KConfigGroup;
+class KDesktopFile;
 class TESession;
 
-/** 
- * Provides information about a type of 
+/**
+ * Provides information about a type of
  * session, including the title of the session
  * type, whether or not the session will run
  * as root and whether or not the binary
  * for the session is available.
  *
- * The availability of the session type is not determined until the 
+ * The availability of the session type is not determined until the
  * isAvailable() method is called.
- * 
- */ 
-class SessionInfo 
+ *
+ */
+class SessionInfo
 {
 public:
-    /** 
+    /**
      * Construct a new SessionInfo
      * to provide information on a session type.
      *
@@ -53,8 +53,8 @@ public:
     SessionInfo(const QString& path);
 
     ~SessionInfo();
-    
-    /** 
+
+    /**
      * Returns the path to the session's
      * config file
      */
@@ -62,12 +62,12 @@ public:
 
     /** Returns the title of the session type */
     QString name() const;
-    /** 
+    /**
      * Returns the path of an icon associated
      * with this session type
      */
     QString icon() const;
-    /** 
+    /**
      * Returns the command that will be executed
      * when the session is run
      *
@@ -75,24 +75,24 @@ public:
      * "su -flags 'commandname'", specifies whether
      * to return the whole command string or just
      * the 'commandname' part
-     * 
-     * eg.  If the command string is 
+     *
+     * eg.  If the command string is
      * "su -c 'screen'", command(true) will
      * just return "screen"
      *
-     * @param stripArguments Specifies whether the arguments should be 
+     * @param stripArguments Specifies whether the arguments should be
      * removed from the returned string.  Anything after the first space
-     * character in the command string is considered an argument 
+     * character in the command string is considered an argument
      */
     QString command(bool stripSu , bool stripArguments = true) const;
-    
-    /** 
+
+    /**
      * Extracts the arguments from the command string for this session.  The first
      * argument is always the command name
      */
     QStringList arguments() const;
-    
-    /** 
+
+    /**
      * Returns true if the session will run as
      * root
      */
@@ -101,14 +101,14 @@ public:
      * Searches the user's PATH for the binary
      * specified in the command string.
      *
-     * TODO:  isAvailable() assumes and does not yet verify the 
-     * existence of additional binaries(usually 'su' or 'sudo') required 
+     * TODO:  isAvailable() assumes and does not yet verify the
+     * existence of additional binaries(usually 'su' or 'sudo') required
      * to run the command as root.
      */
     bool isAvailable() const;
 
-    /** 
-     * Returns the terminal-type string which is made available to 
+    /**
+     * Returns the terminal-type string which is made available to
      * programs running in sessions of this type via the $TERM environment variable.
      *
      * This defaults to "xterm"
@@ -121,7 +121,7 @@ public:
     /** Returns the path of the default colour scheme for sessions of this type */
     QString colorScheme() const;
 
-    /** 
+    /**
      * Returns the default font for sessions of this type.
      * If no font is specified in the session's configuration file, @p font will be returned.
      */
@@ -130,31 +130,32 @@ public:
     /** Returns the default working directory for sessions of this type */
     QString defaultWorkingDirectory() const;
 
-    /** 
+    /**
      * Returns the text that should be displayed in menus or in other UI widgets
      * which are used to create new instances of this type of session
      */
     QString newSessionText() const;
-    
+
 private:
-    KConfig* _config;
+    KDesktopFile* _desktopFile;
+    KConfigGroup* _config;
     QString  _path;
 };
 
-/** 
- * Creates new terminal sessions using information in configuration files.  
- * Information about the available session kinds can be obtained using 
- * availableSessionTypes().  Call createSession() to create a new session.  
- * The session will automatically notify the SessionManager when it finishes running.  
- */ 
+/**
+ * Creates new terminal sessions using information in configuration files.
+ * Information about the available session kinds can be obtained using
+ * availableSessionTypes().  Call createSession() to create a new session.
+ * The session will automatically notify the SessionManager when it finishes running.
+ */
 class SessionManager : public QObject
 {
-Q_OBJECT 
+Q_OBJECT
 
 public:
     SessionManager();
     virtual ~SessionManager();
-   
+
     /** document me */
     enum Setting
     {
@@ -178,7 +179,7 @@ public:
         Action              = 4,
         SingleShot          = 5
     };
-    
+
     /**
      * Returns a list of session information
      * objects which describe the kinds
@@ -186,33 +187,33 @@ public:
      */
     QList<SessionInfo*> availableSessionTypes();
 
-    /** 
+    /**
      * Returns a SessionInfo object describing the default type of session, which is used
      * if createSession() is called with an empty configPath argument.
      */
     SessionInfo* defaultSessionType();
-    
+
     /**
      * Adds a setting which will be considered when creating new sessions.
      * Each setting ( such as terminal font , initial working directory etc. )
-     * can be specified by multiple different sources.  The 
+     * can be specified by multiple different sources.  The
      *
      * For example, the working directory in which a new session starts is specified
      * in the configuration file for that session type, but can be overridden
      * by creating a new session from a bookmark or specifying what to use on
      * the command line.
-     * 
+     *
      * The active value for a setting (ie. the one which will actually be used when
      * creating the session) can be found using activeSetting()
-     * 
+     *
      * @p setting The setting to change
-     * @p source Specifies where the setting came from.  
+     * @p source Specifies where the setting came from.
      * @p value The new value for this setting,source pair
      */
     void addSetting( Setting setting , Source source , const QVariant& value );
-   
 
-    /** 
+
+    /**
      * Returns the value for a particular setting which will be used
      * when a new session is created.
      *
@@ -221,24 +222,24 @@ public:
      *
      * The active setting is the value for the setting which comes from the source
      * with the highest priority.  For example, a setting specified on the command-line
-     * when Konsole is launched will take priority over a setting specified in a 
+     * when Konsole is launched will take priority over a setting specified in a
      * configuration file.
      */
-    QVariant activeSetting( Setting setting ) const; 
-    
-    /** 
+    QVariant activeSetting( Setting setting ) const;
+
+    /**
      * Creates a new session of the specified type, using the settings specified
      * using addSetting() and from the configuration file for this session type.
      *
      * The new session has no views associated with it.  A new TEWidget view
-     * must be created in order to display the output from the terminal session and 
+     * must be created in order to display the output from the terminal session and
      * send keyboard or mouse input to it.
      *
      * @param type Specifies the type of session to create.  Passing an empty
      *             string will create a session using the default configuration.
      */
     TESession* createSession(QString configPath = QString());
-    
+
     /**
      * Returns a list of active sessions.
      */
@@ -247,22 +248,22 @@ public:
 protected Q_SLOTS:
 
     /**
-     * Called to inform the manager that a session has finished executing 
+     * Called to inform the manager that a session has finished executing
      */
     void sessionTerminated( TESession* session );
 
 private:
-    //fills the settings store with the settings from the session config file 
+    //fills the settings store with the settings from the session config file
     void pushSessionSettings( const SessionInfo*  info );
-    
-    QList<SessionInfo*> _types; 
+
+    QList<SessionInfo*> _types;
     QList<TESession*> _sessions;
 
     SessionInfo* _defaultSessionType;
 
 
     typedef QPair<Source,QVariant> SourceVariant;
-    
+
     QHash< Setting , QList< SourceVariant > >  _settings;
 };
 

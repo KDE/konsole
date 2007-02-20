@@ -96,10 +96,10 @@ void KCMKonsole::load()
 
 void KCMKonsole::load(bool useDefaults)
 {
-    KConfig config("konsolerc", true);
-    config.setDesktopGroup();
-    config.setReadDefaults(useDefaults);
+    KConfig configFile("konsolerc");
+    configFile.setReadDefaults(useDefaults);
 
+    const KConfigGroup config = configFile.group("Desktop Entry"); // DF: strange name for a config group
     dialog->terminalSizeHintCB->setChecked(config.readEntry("TerminalSizeHint", false));
     bidiOrig = config.readEntry("EnableBidi", false);
     dialog->bidiCB->setChecked(bidiOrig);
@@ -135,8 +135,8 @@ void KCMKonsole::save()
        dialog->SessionEditor1->querySave();
     }
 
-    KConfig config("konsolerc");
-    config.setDesktopGroup();
+    KConfig configFile("konsolerc");
+    KConfigGroup config = configFile.group("Desktop Entry"); // DF: strange name for a config group
 
     config.writeEntry("TerminalSizeHint", dialog->terminalSizeHintCB->isChecked());
     bool bidiNew = dialog->bidiCB->isChecked();
@@ -177,7 +177,7 @@ void KCMKonsole::save()
     else
         appname = "org.kde.kdesktop-screen-" + QByteArray::number( konq_screen_number);
     org::kde::kdesktop::Desktop desktop(appname, "/Desktop", QDBusConnection::sessionBus());
-    desktop.configure();    
+    desktop.configure();
 #endif
     // ## Hmm, why do konsole sessions have something to do with klauncher's configuration? (David)
     org::kde::KLauncher klauncher("org.kde.klauncher", "/KLauncher", QDBusConnection::sessionBus());

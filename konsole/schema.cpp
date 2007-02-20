@@ -272,7 +272,7 @@ void ColorSchema::writeConfig(const QString& path) const
 {
 //  KONSOLEDEBUG << "Writing schema " << relPath << " to file " << path << endl;
 
-  KConfig c(path,false,false);
+  KConfig c( path, KConfig::NoGlobals );
 
   c.setGroup("SchemaGeneral");
   c.writeEntry("Title",m_title);

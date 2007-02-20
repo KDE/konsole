@@ -29,8 +29,9 @@
 #include <klocale.h>
 #include <krun.h>
 #include <kshell.h>
-#include <ksimpleconfig.h>
+#include <kconfig.h>
 #include <kstandarddirs.h>
+#include <kdesktopfile.h>
 
 // Konsole
 #include "TESession.h"
@@ -43,17 +44,17 @@ SessionInfo::SessionInfo(const QString& path)
 
     QString fullPath = KStandardDirs::locate("appdata",fileName);
     Q_ASSERT( QFile::exists(fullPath) );
-    
-    _config = new KSimpleConfig( fullPath , true );
-    _config->setDesktopGroup();
-   
+
+    _desktopFile = new KDesktopFile( fullPath);
+    _config = new KConfigGroup( _desktopFile->desktopGroup() );
+
     _path = path;
 
 }
 SessionInfo::~SessionInfo()
 {
-    delete _config;
-    _config = 0;
+    delete _config; _config = 0;
+    delete _desktopFile; _desktopFile = 0;
 }
 
 QString SessionInfo::name() const
@@ -76,24 +77,24 @@ bool SessionInfo::isRootSession() const
 
 QString SessionInfo::command(bool stripRoot , bool stripArguments) const
 {
-    QString fullCommand = _config->readEntry("Exec"); 
-    
-    //if the .desktop file for this session doesn't specify a binary to run 
+    QString fullCommand = _config->readEntry("Exec");
+
+    //if the .desktop file for this session doesn't specify a binary to run
     //(eg. No 'Exec' entry or empty 'Exec' entry) then use the user's standard SHELL
     if ( fullCommand.isEmpty() )
         fullCommand = getenv("SHELL");
-    
+
     if ( isRootSession() && stripRoot )
     {
         //command is of the form "su -flags 'commandname'"
         //we need to strip out and return just the command name part.
         fullCommand = fullCommand.section('\'',1,1);
-    } 
+    }
 
     if ( fullCommand.isEmpty() )
         fullCommand = getenv("SHELL");
-       
-    if ( stripArguments ) 
+
+    if ( stripArguments )
         return fullCommand.section(QChar(' '),0,0);
     else
         return fullCommand;
@@ -105,20 +106,20 @@ QStringList SessionInfo::arguments() const
 
     //FIXME:  This wll fail where single arguments contain spaces (because slashes or quotation
     //marks are used) - eg. vi My\ File\ Name
-    return commandString.split(QChar(' '));    
+    return commandString.split(QChar(' '));
 }
 
 bool SessionInfo::isAvailable() const
 {
-    //TODO:  Is it necessary to cache the result of the search? 
-    
+    //TODO:  Is it necessary to cache the result of the search?
+
     QString binary = KRun::binaryName( command(true) , false );
     binary = KShell::tildeExpand(binary);
 
     QString fullBinaryPath = KGlobal::dirs()->findExe(binary);
 
     if ( fullBinaryPath.isEmpty() )
-        return false;        
+        return false;
     else
         return true;
 }
@@ -132,7 +133,7 @@ QString SessionInfo::path() const
 QString SessionInfo::newSessionText() const
 {
     QString commentEntry = _config->readEntry("Comment");
-    
+
     if ( commentEntry.isEmpty() )
         return i18n("New %1",name());
     else
@@ -168,27 +169,27 @@ SessionManager::SessionManager()
 {
     //locate default session
    KSharedConfig::Ptr appConfig = KGlobal::config();
-   appConfig->setDesktopGroup();
+   const KConfigGroup group = appConfig->group( "Desktop Entry" );
 
-   QString defaultSessionFilename = appConfig->readEntry("DefaultSession","shell.desktop");
+   QString defaultSessionFilename = group.readEntry("DefaultSession","shell.desktop");
 
     //locate config files and extract the most important properties of them from
     //the config files.
     //
-    //the sessions are only parsed completely when a session of this type 
+    //the sessions are only parsed completely when a session of this type
     //is actually created
     QList<QString> files = KGlobal::dirs()->findAllResources("appdata", "*.desktop", KStandardDirs::NoDuplicates);
 
     QListIterator<QString> fileIter(files);
-   
+
     while (fileIter.hasNext())
-    { 
+    {
 
         QString configFile = fileIter.next();
         SessionInfo* newType = new SessionInfo(configFile);
-        
-        _types << newType; 
-        
+
+        _types << newType;
+
         if ( QFileInfo(configFile).fileName() == defaultSessionFilename )
             _defaultSessionType = newType;
     }
@@ -200,7 +201,7 @@ SessionManager::SessionManager()
 SessionManager::~SessionManager()
 {
     QListIterator<SessionInfo*> infoIter(_types);
-    
+
     while (infoIter.hasNext())
         delete infoIter.next();
 }
@@ -226,7 +227,7 @@ TESession* SessionManager::createSession(QString configPath )
 
     //search for SessionInfo object built from this config path
     QListIterator<SessionInfo*> iter(_types);
-    
+
     while (iter.hasNext())
     {
         const SessionInfo* const info = iter.next();
@@ -235,33 +236,33 @@ TESession* SessionManager::createSession(QString configPath )
         {
             //supply settings from session config
             pushSessionSettings( info );
-            
+
             //configuration information found, create a new session based on this
             session = new TESession();
 
             QListIterator<QString> iter(info->arguments());
             while (iter.hasNext())
                 kDebug() << "running " << info->command(false) << ": argument " << iter.next() << endl;
-           
-            session->setWorkingDirectory( activeSetting(InitialWorkingDirectory).toString() ); 
+
+            session->setWorkingDirectory( activeSetting(InitialWorkingDirectory).toString() );
             session->setProgram( info->command(false) );
             session->setArguments( info->arguments() );
-            
+
             session->setTitle( info->name() );
             session->setIconName( info->icon() );
-            
+
             //ask for notification when session dies
-            connect( session , SIGNAL(done(TESession*)) , SLOT(sessionTerminated(TESession*)) ); 
+            connect( session , SIGNAL(done(TESession*)) , SLOT(sessionTerminated(TESession*)) );
 
-            //add session to active list            
-            _sessions << session;    
+            //add session to active list
+            _sessions << session;
 
-            break;      
+            break;
         }
     }
 
     Q_ASSERT( session );
-    
+
     return session;
 }
 
@@ -274,7 +275,7 @@ void SessionManager::sessionTerminated(TESession* session)
 
 QList<SessionInfo*> SessionManager::availableSessionTypes()
 {
-    return _types;   
+    return _types;
 }
 
 SessionInfo* SessionManager::defaultSessionType()
@@ -292,23 +293,23 @@ QVariant SessionManager::activeSetting( Setting setting ) const
 {
     QListIterator<SourceVariant>  sourceIter( _settings[setting] );
 
-    
+
     Source highestPrioritySource = ApplicationDefault;
     QVariant value;
-    
+
     while (sourceIter.hasNext())
     {
         QPair<Source,QVariant> sourceSettingPair = sourceIter.next();
-        
+
         if ( sourceSettingPair.first >= highestPrioritySource )
         {
             value = sourceSettingPair.second;
-            highestPrioritySource = sourceSettingPair.first;        
+            highestPrioritySource = sourceSettingPair.first;
         }
-    } 
+    }
 
     kDebug() << "active setting for " << setting << ": " << value << endl;
-    
+
     return value;
 }
 

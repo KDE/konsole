@@ -171,10 +171,8 @@ konsolePart::konsolePart(QWidget *_parentWidget, QObject *parent, const char *cl
   colors->sort();
 
   // Check to see which config file we use: konsolepartrc or konsolerc
-  KConfig* config = new KConfig("konsolepartrc", true);
-  config->setDesktopGroup();
-  b_useKonsoleSettings = config->readEntry("use_konsole_settings", false);
-  delete config;
+  KConfig config("konsolepartrc");
+  b_useKonsoleSettings = config.group("Desktop Entry").readEntry("use_konsole_settings", false);
 
   readProperties();
 
@@ -190,7 +188,7 @@ konsolePart::konsolePart(QWidget *_parentWidget, QObject *parent, const char *cl
      else
         curr_schema = 0;
 
-     for (uint i=0; i<m_schema->actions().count(); i++)
+     for (int i=0; i<m_schema->actions().count(); i++)
         m_schema->setItemChecked(i,false);
 
      m_schema->setItemChecked(curr_schema,true);
@@ -549,10 +547,8 @@ void konsolePart::applyProperties()
    se->setKeymapNo( n_keytab );
 
    // FIXME:  Move this somewhere else...
-   KConfig* config = new KConfig("konsolerc",true);
-   config->setGroup("UTMP");
-   se->setAddToUtmp( config->readEntry("AddToUtmp", true));
-   delete config;
+   KConfig config("konsolerc");
+   se->setAddToUtmp( config.group("UTMP").readEntry("AddToUtmp", true));
 
    se->widget()->setVTFont( defaultFont );
    se->setSchemaNo( curr_schema );
@@ -577,28 +573,28 @@ void konsolePart::readProperties()
   KConfig* config;
 
   if ( b_useKonsoleSettings )
-    config = new KConfig( "konsolerc", true );
+    config = new KConfig( "konsolerc" );
   else
-    config = new KConfig( "konsolepartrc", true );
+    config = new KConfig( "konsolepartrc" );
 
-  config->setDesktopGroup();
+  KConfigGroup cg = config->group("Desktop Entry");
 
-  b_framevis = config->readEntry("has frame", false);
-  b_histEnabled = config->readEntry("historyenabled", true);
-  n_bell = qMin(config->readEntry("bellmode",uint(TEWidget::BELLSYSTEM)),3u);
-  n_keytab=config->readEntry("keytab",0); // act. the keytab for this session
-  n_scroll = qMin(config->readEntry("scrollbar",uint(TEWidget::SCRRIGHT)),2u);
-  m_histSize = config->readEntry("history",DEFAULT_HISTORY_SIZE);
-  s_word_seps= config->readEntry("wordseps",":@-./_~");
+  b_framevis = cg.readEntry("has frame", false);
+  b_histEnabled = cg.readEntry("historyenabled", true);
+  n_bell = qMin(cg.readEntry("bellmode",uint(TEWidget::BELLSYSTEM)),3u);
+  n_keytab=cg.readEntry("keytab",0); // act. the keytab for this session
+  n_scroll = qMin(cg.readEntry("scrollbar",uint(TEWidget::SCRRIGHT)),2u);
+  m_histSize = cg.readEntry("history",DEFAULT_HISTORY_SIZE);
+  s_word_seps= cg.readEntry("wordseps",":@-./_~");
 
-  n_encoding = config->readEntry("encoding",0);
+  n_encoding = cg.readEntry("encoding",0);
 
   QFont tmpFont = KGlobalSettings::fixedFont();
-  defaultFont = config->readEntry("defaultfont", tmpFont);
+  defaultFont = cg.readEntry("defaultfont", tmpFont);
 
-  QString schema = config->readEntry("Schema");
+  QString schema = cg.readEntry("Schema");
 
-  s_kconfigSchema=config->readEntry("schema");
+  s_kconfigSchema=cg.readEntry("schema");
   ColorSchema* sch = colors->find(schema.isEmpty() ? s_kconfigSchema : schema);
   if (!sch) {
     sch=(ColorSchema*)colors->at(0);  //the default one
@@ -616,16 +612,18 @@ void konsolePart::readProperties()
   }
 
   te->setBellMode(n_bell);
-  te->setBlinkingCursor(config->readEntry("BlinkingCursor", false));
+  te->setBlinkingCursor(cg.readEntry("BlinkingCursor", false));
   te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
-  te->setLineSpacing( config->readEntry( "LineSpacing", 0 ) );
+  te->setLineSpacing( cg.readEntry( "LineSpacing", 0 ) );
   te->setScrollbarLocation(n_scroll);
   te->setWordCharacters(s_word_seps);
 
-  delete config;
-
-  config = new KConfig("konsolerc",true);
-  config->setDesktopGroup();
+  if ( !b_useKonsoleSettings )
+  {
+      delete config;
+      config = new KConfig("konsolerc");
+  }
+  cg = config->group("Desktop Entry");
   te->setTerminalSizeHint( config->readEntry("TerminalSizeHint", true) );
   delete config;
 }
@@ -633,24 +631,24 @@ void konsolePart::readProperties()
 void konsolePart::saveProperties()
 {
   KConfig* config = new KConfig("konsolepartrc");
-  config->setDesktopGroup();
+  KConfigGroup cg = config->group("Desktop Entry");
 
   if ( b_useKonsoleSettings ) { // Don't save Settings if using konsolerc
-    config->writeEntry("use_konsole_settings", m_useKonsoleSettings->isChecked());
+    cg.writeEntry("use_konsole_settings", m_useKonsoleSettings->isChecked());
   } else {
-    config->writeEntry("bellmode",n_bell);
-    config->writeEntry("BlinkingCursor", te->blinkingCursor());
-    config->writeEntry("defaultfont", (se->widget())->getVTFont());
-    config->writeEntry("history", se->history().getSize());
-    config->writeEntry("historyenabled", b_histEnabled);
-    config->writeEntry("keytab",n_keytab);
-    config->writeEntry("has frame",b_framevis);
-    config->writeEntry("LineSpacing", te->lineSpacing());
-    config->writeEntry("schema",s_kconfigSchema);
-    config->writeEntry("scrollbar",n_scroll);
-    config->writeEntry("wordseps",s_word_seps);
-    config->writeEntry("encoding",n_encoding);
-    config->writeEntry("use_konsole_settings",m_useKonsoleSettings->isChecked());
+    cg.writeEntry("bellmode",n_bell);
+    cg.writeEntry("BlinkingCursor", te->blinkingCursor());
+    cg.writeEntry("defaultfont", (se->widget())->getVTFont());
+    cg.writeEntry("history", se->history().getSize());
+    cg.writeEntry("historyenabled", b_histEnabled);
+    cg.writeEntry("keytab",n_keytab);
+    cg.writeEntry("has frame",b_framevis);
+    cg.writeEntry("LineSpacing", te->lineSpacing());
+    cg.writeEntry("schema",s_kconfigSchema);
+    cg.writeEntry("scrollbar",n_scroll);
+    cg.writeEntry("wordseps",s_word_seps);
+    cg.writeEntry("encoding",n_encoding);
+    cg.writeEntry("use_konsole_settings",m_useKonsoleSettings->isChecked());
   }
 
   config->sync();

@@ -58,7 +58,7 @@ class KFileDialog;
 class KFindDialog;
 class KMenu;
 class KSelectAction;
-class KSimpleConfig;
+class KConfig;
 class KTabWidget;
 class KTemporaryFile;
 class KToggleAction;
@@ -142,8 +142,10 @@ public Q_SLOTS:
 protected:
 
  bool queryClose();
- void saveProperties(KConfig* config);
- void readProperties(KConfig* config);
+ // \reimp
+ void saveProperties(KConfigGroup& config);
+ // \reimp
+ void readProperties(const KConfigGroup& config);
 
  //virtual void focusInEvent(QFocusEvent* event);
  virtual void showEvent(QShowEvent* event);
@@ -266,11 +268,11 @@ private Q_SLOTS:
 
   void slotSetEncoding();
 private:
-  KSimpleConfig *defaultSession();
-/*  QString newSession(KSimpleConfig *co, QString pgm = QString(), const QStringList &args = QStringList(),
+  KConfig *defaultSession();
+/*  QString newSession(KConfig *co, QString pgm = QString(), const QStringList &args = QStringList(),
                      const QString &_term = QString(), const QString &_icon = QString(),
                      const QString &_title = QString(), const QString &_cwd = QString()); */
-  void readProperties(KConfig *config, const QString &schema, bool globalConfigOnly);
+  void readProperties(const KConfigGroup &config, const QString &schema, bool globalConfigOnly, bool readGlobalConfig);
   void applySettingsToGUI();
   void makeTabWidget();
   void makeBasicGUI();
@@ -279,6 +281,7 @@ private:
   void detachSession(TESession* _se=0);
   void setColorPixmaps();
   void renameSession(TESession* ses);
+  void savePropertiesHelper(KConfigGroup& config);
 
   void setSchema(ColorSchema* s, TEWidget* tewidget=0);
   void setMasterMode(bool _state, TESession* _se=0);
@@ -306,7 +309,7 @@ private:
   Q3PtrList<TESession> sessions;
 
   QList<KTemporaryFile*> tempfiles;
-  KSimpleConfig* m_defaultSession;
+  KConfig* m_defaultSession;
   QString m_defaultSessionFilename;
 
   //SessionTabWidget* tabwidget;

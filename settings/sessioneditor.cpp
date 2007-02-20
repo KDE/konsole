@@ -33,6 +33,7 @@
 #include <kiconloader.h>
 #include <krun.h>
 #include <kshell.h>
+#include <kdesktopfile.h>
 
 // SessionListBoxText is a list box text item with session filename
 class SessionListBoxText : public Q3ListBoxText
@@ -170,10 +171,8 @@ void SessionEditor::loadAllSession(QString currentFile)
 
     QString name = (*it);
 
-    KSimpleConfig* co = new KSimpleConfig(name,true);
-    co->setDesktopGroup();
-    QString sesname = co->readEntry("Name",i18n("Unnamed"));
-    delete co;
+    KDesktopFile co( name );
+    QString sesname = co.desktopGroup().readEntry("Name",i18n("Unnamed"));
 
     sessionList->insertItem(new SessionListBoxText(sesname, name));
 
@@ -190,7 +189,6 @@ void SessionEditor::readSession(int num)
 {
     int i,counter;
     QString str;
-    KSimpleConfig* co;
 
     if(sesMod) {
         disconnect(sessionList, SIGNAL(highlighted(int)), this, SLOT(readSession(int)));
@@ -204,28 +202,28 @@ void SessionEditor::readSession(int num)
     if( sessionList->item(num) )
     {
         removeButton->setEnabled( QFileInfo ( ((SessionListBoxText *)sessionList->item(num))->filename() ).isWritable () );
-        co = new KSimpleConfig( ((SessionListBoxText *)sessionList->item(num))->filename(),true);
+        KDesktopFile desktopFile( ((SessionListBoxText *)sessionList->item(num))->filename());
+        KConfigGroup co = desktopFile.desktopGroup();
 
-        co->setDesktopGroup();
-        str = co->readEntry("Name");
+        str = co.readEntry("Name");
         nameLine->setText(str);
 
-        str = co->readPathEntry("Cwd");
+        str = co.readPathEntry("Cwd");
         directoryLine->lineEdit()->setText(str);
 
-        str = co->readPathEntry("Exec");
+        str = co.readPathEntry("Exec");
         executeLine->setText(str);
 
-        str = co->readEntry("Icon","konsole");
+        str = co.readEntry("Icon","konsole");
         previewIcon->setIcon(str);
 
-        i = co->readEntry("Font",(unsigned int)-1);
+        i = co.readEntry("Font",(unsigned int)-1);
         fontCombo->setCurrentIndex(i+1);
 
-        str = co->readEntry("Term","xterm");
+        str = co.readEntry("Term","xterm");
         termLine->setText(str);
 
-        str = co->readEntry("KeyTab","");
+        str = co.readEntry("KeyTab","");
         i=0;
         counter=0;
         for (QString *it = keytabFilename.first(); it != 0; it = keytabFilename.next()) {
@@ -235,7 +233,7 @@ void SessionEditor::readSession(int num)
         }
         keytabCombo->setCurrentIndex(i);
 
-        str = co->readEntry("Schema","");
+        str = co.readEntry("Schema","");
         i=0;
         counter=0;
         for (QString *it = schemaFilename.first(); it != 0; it = schemaFilename.next()) {
@@ -244,7 +242,6 @@ void SessionEditor::readSession(int num)
             counter++;
         }
         schemaCombo->setCurrentIndex(i);
-        delete co;
     }
     sesMod=false;
     oldSession=num;
@@ -333,22 +330,21 @@ void SessionEditor::saveCurrent()
   if (fullpath[0] != '/')
     fullpath = KGlobal::dirs()->saveLocation("data", "konsole/") + fullpath;
 
-  KSimpleConfig* co = new KSimpleConfig(fullpath);
-  co->setDesktopGroup();
-  co->writeEntry("Type","KonsoleApplication");
-  co->writeEntry("Name",nameLine->text());
-  co->writePathEntry("Cwd",directoryLine->lineEdit()->text());
-  co->writePathEntry("Exec",executeLine->text());
-  co->writeEntry("Icon",previewIcon->icon());
+  KDesktopFile desktopFile(fullpath);
+  KConfigGroup co = desktopFile.desktopGroup();
+  co.writeEntry("Type","KonsoleApplication");
+  co.writeEntry("Name",nameLine->text());
+  co.writePathEntry("Cwd",directoryLine->lineEdit()->text());
+  co.writePathEntry("Exec",executeLine->text());
+  co.writeEntry("Icon",previewIcon->icon());
   if (fontCombo->currentIndex()==0)
-    co->writeEntry("Font","");
+    co.writeEntry("Font","");
   else
-    co->writeEntry("Font",fontCombo->currentIndex()-1);
-  co->writeEntry("Term",termLine->text());
-  co->writeEntry("KeyTab",*keytabFilename.at(keytabCombo->currentIndex()));
-  co->writeEntry("Schema",*schemaFilename.at(schemaCombo->currentIndex()));
-  co->sync();
-  delete co;
+    co.writeEntry("Font",fontCombo->currentIndex()-1);
+  co.writeEntry("Term",termLine->text());
+  co.writeEntry("KeyTab",*keytabFilename.at(keytabCombo->currentIndex()));
+  co.writeEntry("Schema",*schemaFilename.at(schemaCombo->currentIndex()));
+  desktopFile.sync();
   sesMod=false;
   loadAllSession(fullpath.section('/',-1));
   removeButton->setEnabled(sessionList->count()>1);
