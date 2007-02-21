@@ -1,3 +1,8 @@
+macro_optional_find_package(XKB)
+macro_bool_to_01(X11_Xrender_FOUND HAVE_XRENDER)
+if (CMAKE_SYSTEM_NAME MATCHES Linux)
+   set (HAVE_PROC_CWD 1)
+endif (CMAKE_SYSTEM_NAME MATCHES Linux)
 configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsole.h )
 
 OPTION(KONSOLE_GENERATE_LINEFONT "Konsole: regenerate linefont file" OFF)
@@ -53,6 +58,7 @@ set(konsole_KDEINIT_SRCS
         start.cpp
         KonsoleApp.cpp
         KonsoleMainWindow.cpp
+        ProcessInfo.cpp
         SessionController.cpp
         SessionList.cpp
         SessionManager.cpp
