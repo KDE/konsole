@@ -53,11 +53,11 @@
 #include <kglobalsettings.h>
 #include <kio/netaccess.h>
 #include <kmessagebox.h>
-#include <config.h>
 #include <kauthorized.h>
-#include <ksimpleconfig.h>
+#include <kconfig.h>
 
 // Konsole
+#include "config-konsole.h"
 #include "konsole.h"
 #include "SessionManager.h"
 
@@ -112,8 +112,8 @@ const char* konsole_shell(QStringList& args);
 // Retrieve information about display needed to enable true transparency.  This will
 // search for a display, visual format and colormap which can be passed to the KApplication
 // constructor to enable the use of true transparency in the application.  If compositing
-// support is not available then 'display', 'visual' and 'colormap' will be set to null. 
-// 
+// support is not available then 'display', 'visual' and 'colormap' will be set to null.
+//
 // displayName - The name of the display to use, will use the default display
 //               if this is an empty string.
 // display     - Out parameter. Receives a pointer to the X display to use
@@ -121,7 +121,7 @@ const char* konsole_shell(QStringList& args);
 // colormap    - Out parameter. Set to the X colormap to use
 
 #ifdef TRUE_TRANSPARENCY_SUPPORT
-void getDisplayInfo( const QString& displayName , Display*& display , 
+void getDisplayInfo( const QString& displayName , Display*& display ,
                      Visual*& visual, Colormap& colormap);
 #endif
 
@@ -156,7 +156,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 {
   setgid(getgid()); setuid(getuid()); // drop privileges
 
-  // deal with shell/command 
+  // deal with shell/command
   bool histon = true;
   bool menubaron = true;
   bool tabbaron = true;
@@ -166,12 +166,12 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   QByteArray wname = PACKAGE;
 
 
-  KAboutData aboutData( "konsole" , I18N_NOOP("Konsole") , VERSION , description , 
+  KAboutData aboutData( "konsole" , I18N_NOOP("Konsole") , VERSION , description ,
                         KAboutData::License_GPL , I18N_NOOP("(C) 1997-2006 , Konsole Developers") );
   aboutData.addAuthor("Robert Knight",I18N_NOOP("Maintainer"), "robertknight@gmail.com");
   aboutData.addAuthor("Lars Doelle",I18N_NOOP("Author"), "lars.doelle@on-line.de");
   aboutData.addCredit("Kurt V. Hindenburg",
-    I18N_NOOP("Bug fixes and general improvements"), 
+    I18N_NOOP("Bug fixes and general improvements"),
     "kurt.hindenburg@gmail.com");
   aboutData.addCredit("Waldo Bastian",
     I18N_NOOP("Bug fixes and general improvements"),
@@ -261,8 +261,8 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   //create session manager to keep track of available session types
   //and active terminal sessions
   SessionManager* sessionManager = new SessionManager();
-  
-  
+
+
   QString title;
   if(args->isSet("T")) {
     title = QFile::decodeName(args->getOption("T"));
@@ -310,7 +310,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   fixed_size = !args->isSet("resize");
 #ifdef __GNUC__
 #warning "KDE4: Does DBUS have an equivalent function for dcopClient()->setQtBridgeEnabled()?"
-#endif  
+#endif
 #if 0
   if (!full_script)
 	a.dcopClient()->setQtBridgeEnabled(false);
@@ -321,13 +321,13 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
     type = args->getOption("type");
   }
   if(args->isSet("types")) {
-    
+
     QListIterator<SessionInfo*> infoIter(sessionManager->availableSessionTypes());
     while (infoIter.hasNext())
     {
         printf("%s\n",QFileInfo(infoIter.next()->path()).baseName().toAscii().data());
     }
-    
+
     return 0;
   }
   if(args->isSet("schemas") || args->isSet("schemata")) {
@@ -373,13 +373,13 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
     profile = args->getOption("profile");
     QString path = KStandardDirs::locate( "data", "konsole/profiles/" + profile );
     if ( QFile::exists( path ) )
-      sessionconfig=new KConfig( path, true );
+      sessionconfig=new KConfig( path);
     else
       profile = "";
   }
   if (args->isSet("profiles"))
   {
-     QStringList profiles = KGlobal::dirs()->findAllResources("data", "konsole/profiles/*", false, true);
+     QStringList profiles = KGlobal::dirs()->findAllResources("data", "konsole/profiles/*", KStandardDirs::NoDuplicates);
      profiles.sort();
      for(QStringList::ConstIterator it = profiles.begin();
          it != profiles.end(); ++it)
@@ -429,7 +429,6 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 
     if (profile.isEmpty())
       sessionconfig = a.sessionConfig();
-    sessionconfig->setDesktopGroup();
     int n = 1;
 
     QString key;
@@ -444,26 +443,26 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
     // should use one group / mainwindow
     while (KMainWindow::canBeRestored(n) || !profile.isEmpty())
     {
-        sessionconfig->setGroup(QString("%1").arg(n));
-        if (!sessionconfig->hasKey("Pgm0"))
-            sessionconfig->setDesktopGroup(); // Backwards compatible
+        KConfigGroup group = sessionconfig->group(QString::number(n));
+        if (!group.hasKey("Pgm0"))
+            group = sessionconfig->group("Desktop Entry"); // Backwards compatible
 
-        int session_count = sessionconfig->readEntry("numSes").toInt();
+        int session_count = group.readEntry("numSes").toInt();
         int counter = 0;
 
-        wname = sessionconfig->readEntry("class",QString(wname)).toLatin1();
+        wname = group.readEntry("class",QString(wname)).toLatin1();
 
-        sPgm = sessionconfig->readEntry("Pgm0", shell);
-        QStringList eargs_sl = sessionconfig->readEntry("Args0", QStringList());
+        sPgm = group.readEntry("Pgm0", shell);
+        QStringList eargs_sl = group.readEntry("Args0", QStringList());
         for (int i = 0; i < eargs_sl.size(); ++i)
            eargs.append(eargs_sl.at(i).toAscii());
 
-        sTitle = sessionconfig->readEntry("Title0", title);
-        sTerm = sessionconfig->readEntry("Term0");
-        sIcon = sessionconfig->readEntry("Icon0","konsole");
-        sCwd = sessionconfig->readPathEntry("Cwd0");
-        workDir = sessionconfig->readPathEntry("workdir");
-        n_tabbar = qMin(sessionconfig->readEntry("tabbar", QVariant(Konsole::TabBottom)).toUInt(), 2u);
+        sTitle = group.readEntry("Title0", title);
+        sTerm = group.readEntry("Term0");
+        sIcon = group.readEntry("Icon0","konsole");
+        sCwd = group.readPathEntry("Cwd0");
+        workDir = group.readPathEntry("workdir");
+        n_tabbar = qMin(group.readEntry("tabbar", unsigned(Konsole::TabBottom)), 2u);
         Konsole *m = new Konsole(wname,histon,menubaron,tabbaron,frameon,scrollbaron,0/*type*/,true,n_tabbar, workDir);
 
 
@@ -471,31 +470,26 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 
         kDebug() << "WARNING:  Not using appropriate properties for new session" << endl;
         m->newSession( sessionManager->defaultSessionType() );
-        
+
         //m->newSession(sPgm, eargs, sTerm, sIcon, sTitle, sCwd);
 
 //        m->enableFullScripting(full_script);
         m->enableFixedSize(fixed_size);
 	m->restore(n);
-        sessionconfig->setGroup(QString("%1").arg(n));
-        if (!sessionconfig->hasKey("Pgm0"))
-            sessionconfig->setDesktopGroup(); // Backwards compatible
+
         m->makeGUI();
-        m->setEncoding(sessionconfig->readEntry("Encoding0", QVariant(0)).toInt());
-        m->setSchema(sessionconfig->readEntry("Schema0"));
+        m->setEncoding(group.readEntry("Encoding0", int(0)));
+        m->setSchema(group.readEntry("Schema0"));
         // Use konsolerc default as tmpFont instead?
-        QVariant v_defaultFont = sessionconfig->readEntry("SessionFont0", QVariant(KGlobalSettings::fixedFont()));
-        m->initSessionFont( v_defaultFont.value<QFont>() );
-        m->initSessionKeyTab(sessionconfig->readEntry("KeyTab0"));
-        m->initMonitorActivity(sessionconfig->readEntry("MonitorActivity0", QVariant(false)).toBool());
-        m->initMonitorSilence(sessionconfig->readEntry("MonitorSilence0", QVariant(false)).toBool());
-        m->initMasterMode(sessionconfig->readEntry("MasterMode0", QVariant(false)).toBool());
-        //FIXME: Verify this code when KDE4 supports tab colors... kvh
-        QVariant v_tabColor = sessionconfig->readEntry("TabColor0");
-        m->initTabColor( v_tabColor.value<QColor>() );
+        m->initSessionFont(group.readEntry("SessionFont0", KGlobalSettings::fixedFont()));
+        m->initSessionKeyTab(group.readEntry("KeyTab0"));
+        m->initMonitorActivity(group.readEntry("MonitorActivity0", false));
+        m->initMonitorSilence(group.readEntry("MonitorSilence0", false));
+        m->initMasterMode(group.readEntry("MasterMode0", false));
+        m->initTabColor( group.readEntry("TabColor0", QColor()));
         // -1 will be changed to the default history in konsolerc
-//        m->initHistory(sessionconfig->readNumEntry("History0", -1),
-//                       sessionconfig->readBoolEntry("HistoryEnabled0", true));
+//        m->initHistory(group.readNumEntry("History0", -1),
+//                       group.readBoolEntry("HistoryEnabled0", true));
 
         counter++;
 
@@ -506,60 +500,59 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         while (counter < session_count)
         {
           key = QString("Title%1").arg(counter);
-          sTitle = sessionconfig->readEntry(key, title);
+          sTitle = group.readEntry(key, title);
           key = QString("Args%1").arg(counter);
-          QStringList eargs_sl = sessionconfig->readEntry("Args0",QStringList());
+          QStringList eargs_sl = group.readEntry("Args0",QStringList());
           for (int i = 0; i < eargs_sl.size(); ++i)
              eargs.append(eargs_sl.at(i).toAscii());
 
           key = QString("Pgm%1").arg(counter);
-          sPgm = sessionconfig->readEntry(key, QString(shell));
+          sPgm = group.readEntry(key, QString(shell));
           key = QString("Term%1").arg(counter);
-          sTerm = sessionconfig->readEntry(key, QString());
+          sTerm = group.readEntry(key, QString());
           key = QString("Icon%1").arg(counter);
-          sIcon = sessionconfig->readEntry(key,QString("konsole"));
+          sIcon = group.readEntry(key,QString("konsole"));
           key = QString("Cwd%1").arg(counter);
-          sCwd = sessionconfig->readPathEntry(key);
-          
+          sCwd = group.readPathEntry(key);
+
           //TODO: Make use of command, program type, icon etc. here
           m->newSession();
-          
+
           //m->newSession(sPgm, eargs, sTerm, sIcon, sTitle, sCwd);
-          
+
           m->setSessionTitle(sTitle);  // Use title as is
           key = QString("Schema%1").arg(counter);
-          m->setSchema(sessionconfig->readEntry(key, QString()));
+          m->setSchema(group.readEntry(key, QString()));
           key = QString("Encoding%1").arg(counter);
-          m->setEncoding(sessionconfig->readEntry(key, QVariant(0)).toInt());
+          m->setEncoding(group.readEntry(key, int(0)));
           key = QString("SessionFont%1").arg(counter);
-          QVariant v_defaultFont = sessionconfig->readEntry(key, QVariant(KGlobalSettings::fixedFont()));
-          m->initSessionFont( v_defaultFont.value<QFont>() );
+          m->initSessionFont( group.readEntry(key, KGlobalSettings::fixedFont()));
 
           key = QString("KeyTab%1").arg(counter);
-          m->initSessionKeyTab(sessionconfig->readEntry(key, QString()));
+          m->initSessionKeyTab(group.readEntry(key, QString()));
           key = QString("MonitorActivity%1").arg(counter);
-          m->initMonitorActivity(sessionconfig->readEntry(key, QVariant(false)).toBool());
+          m->initMonitorActivity(group.readEntry(key, false));
           key = QString("MonitorSilence%1").arg(counter);
-          m->initMonitorSilence(sessionconfig->readEntry(key, QVariant(false)).toBool());
+          m->initMonitorSilence(group.readEntry(key, false));
           key = QString("MasterMode%1").arg(counter);
-          m->initMasterMode(sessionconfig->readEntry(key, QVariant(false)).toBool());
+          m->initMasterMode(group.readEntry(key, false));
           key = QString("TabColor%1").arg(counter);
-//          m->initTabColor(sessionconfig->readColorEntry(key));
+//          m->initTabColor(group.readColorEntry(key));
           //FIXME: Verify this code when KDE4 supports tab colors... kvh
-//          QVariant v_tabColor = sessionconfig->readEntry(key));
+//          QVariant v_tabColor = group.readEntry(key));
 //          m->initTabColor( v_tabColor.value<QColor>() );
 
 /* Test this when the dialogs work again...kvh
           // -1 will be changed to the default history in konsolerc
           key = QString("History%1").arg(counter);
           QString key2 = QString("HistoryEnabled%1").arg(counter);
-          m->initHistory(sessionconfig->readNumEntry(key, -1),
-                         sessionconfig->readBoolEntry(key2, true));
+          m->initHistory(group.readEntry(key, -1),
+                         group.readEntry(key2, true));
 */
 
           counter++;
         }
-        m->setDefaultSession( sessionconfig->readEntry("DefaultSession","shell.desktop") );
+        m->setDefaultSession( group.readEntry("DefaultSession","shell.desktop") );
 
         m->initFullScreen();
         if ( !profile.isEmpty() ) {
@@ -572,7 +565,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         }
 	// works only for the first one, but there won't be more.
         n++;
-        m->activateSession( sessionconfig->readEntry("ActiveSession", QVariant(0)).toInt() );
+        m->activateSession( group.readEntry("ActiveSession", int(0)) );
 	m->setAutoClose(auto_close);
     }
   }
@@ -585,7 +578,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
    kDebug() <<  "* WARNING - Code to create new session not done yet" << endl;
    //TODO : Make use of session properties
    m->newSession();
-   
+
  //   m->newSession((shell ? QFile::decodeName(shell) : QString()), eargs, term, QString(), title, workDir);
 //    m->enableFullScripting(full_script);
     m->enableFixedSize(fixed_size);
