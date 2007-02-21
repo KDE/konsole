@@ -171,6 +171,17 @@ void SessionController::debugProcess()
             sessionTitleChanged();
         }
 
+        QString currentDir = fp->currentDir(&ok);
+
+        if ( ok )
+        {
+            qDebug() << currentDir;
+        }
+        else
+        {
+            qDebug() << "could not read current dir of foreground process";
+        }
+
         delete fp;
     }
     delete sessionProcess;
