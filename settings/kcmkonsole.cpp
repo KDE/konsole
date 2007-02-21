@@ -19,8 +19,8 @@
 #include <QLayout>
 #include <QStringList>
 #include <QTabWidget>
-//Added by qt3to4:
 #include <QVBoxLayout>
+#include <QApplication>
 
 #include <QtDBus/QtDBus>
 
@@ -39,6 +39,7 @@
 #include <QDesktopWidget>
 #include "kdesktop_interface.h"
 #endif
+#include "klauncher_interface.h"
 
 typedef KGenericFactory<KCMKonsole, QWidget> ModuleFactory;
 K_EXPORT_COMPONENT_FACTORY( konsole, ModuleFactory("kcmkonsole") )
@@ -95,22 +96,22 @@ void KCMKonsole::load()
 
 void KCMKonsole::load(bool useDefaults)
 {
-    KConfig config("konsolerc", true);
-    config.setDesktopGroup();
-    config.setReadDefaults(useDefaults);
+    KConfig configFile("konsolerc");
+    configFile.setReadDefaults(useDefaults);
 
-    dialog->terminalSizeHintCB->setChecked(config.readEntry("TerminalSizeHint", QVariant(false)).toBool());
-    bidiOrig = config.readEntry("EnableBidi", QVariant(false)).toBool();
+    const KConfigGroup config = configFile.group("Desktop Entry"); // DF: strange name for a config group
+    dialog->terminalSizeHintCB->setChecked(config.readEntry("TerminalSizeHint", false));
+    bidiOrig = config.readEntry("EnableBidi", false);
     dialog->bidiCB->setChecked(bidiOrig);
-    dialog->matchTabWinTitleCB->setChecked(config.readEntry("MatchTabWinTitle", QVariant(false)).toBool());
-    dialog->warnCB->setChecked(config.readEntry("WarnQuit", QVariant(true)).toBool());
-    dialog->ctrldragCB->setChecked(config.readEntry("CtrlDrag", QVariant(true)).toBool());
-    dialog->cutToBeginningOfLineCB->setChecked(config.readEntry("CutToBeginningOfLine", QVariant(false)).toBool());
-    dialog->allowResizeCB->setChecked(config.readEntry("AllowResize", QVariant(false)).toBool());
-    xonXoffOrig = config.readEntry("XonXoff", QVariant(false)).toBool();
+    dialog->matchTabWinTitleCB->setChecked(config.readEntry("MatchTabWinTitle", false));
+    dialog->warnCB->setChecked(config.readEntry("WarnQuit", true));
+    dialog->ctrldragCB->setChecked(config.readEntry("CtrlDrag", true));
+    dialog->cutToBeginningOfLineCB->setChecked(config.readEntry("CutToBeginningOfLine", false));
+    dialog->allowResizeCB->setChecked(config.readEntry("AllowResize", false));
+    xonXoffOrig = config.readEntry("XonXoff", false);
     dialog->xonXoffCB->setChecked(xonXoffOrig);
-    dialog->blinkingCB->setChecked(config.readEntry("BlinkingCursor", QVariant(false)).toBool());
-    dialog->frameCB->setChecked(config.readEntry("has frame", QVariant(true)).toBool());
+    dialog->blinkingCB->setChecked(config.readEntry("BlinkingCursor", false));
+    dialog->frameCB->setChecked(config.readEntry("has frame", true));
     dialog->line_spacingSB->setValue(config.readEntry( "LineSpacing", 0 ));
     dialog->silence_secondsSB->setValue(config.readEntry( "SilenceSeconds", 10 ));
     dialog->word_connectorLE->setText(config.readEntry("wordseps",":@-./_~"));
@@ -134,8 +135,8 @@ void KCMKonsole::save()
        dialog->SessionEditor1->querySave();
     }
 
-    KConfig config("konsolerc");
-    config.setDesktopGroup();
+    KConfig configFile("konsolerc");
+    KConfigGroup config = configFile.group("Desktop Entry"); // DF: strange name for a config group
 
     config.writeEntry("TerminalSizeHint", dialog->terminalSizeHintCB->isChecked());
     bool bidiNew = dialog->bidiCB->isChecked();
@@ -169,19 +170,18 @@ void KCMKonsole::save()
 
 #ifdef Q_WS_X11
     // ### TODO check this (the object and interface don't exist yet at the time of this writing)
-    int konq_screen_number = KApplication::desktop()->primaryScreen();
+    int konq_screen_number = QApplication::desktop()->primaryScreen();
     QByteArray appname;
     if (konq_screen_number == 0)
         appname = "org.kde.kdesktop";
     else
         appname = "org.kde.kdesktop-screen-" + QByteArray::number( konq_screen_number);
     org::kde::kdesktop::Desktop desktop(appname, "/Desktop", QDBusConnection::sessionBus());
-    desktop.configure();    
+    desktop.configure();
 #endif
     // ## Hmm, why do konsole sessions have something to do with klauncher's configuration? (David)
-    QDBusInterface klauncher("org.kde.klauncher", "/KLauncher", "org.kde.KLauncher");
-    if ( klauncher.isValid() )
-        klauncher.call( "reparseConfiguration" );
+    org::kde::KLauncher klauncher("org.kde.klauncher", "/KLauncher", QDBusConnection::sessionBus());
+    klauncher.reparseConfiguration();
 
     if (xonXoffOrig != xonXoffNew)
     {

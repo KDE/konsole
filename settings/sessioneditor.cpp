@@ -33,12 +33,13 @@
 #include <kiconloader.h>
 #include <krun.h>
 #include <kshell.h>
+#include <kdesktopfile.h>
 
 // SessionListBoxText is a list box text item with session filename
-class SessionListBoxText : public Q3ListBoxText
+class SessionListBoxText : public QListWidgetItem
 {
   public:
-    SessionListBoxText(const QString &title, const QString &filename): Q3ListBoxText(title)
+    SessionListBoxText(const QString &title, const QString &filename): QListWidgetItem(title)
     {
       m_filename = filename;
     };
@@ -57,9 +58,7 @@ SessionEditor::SessionEditor(QWidget * parent)
   loaded=false;
 
   KGlobal::locale()->insertCatalog("konsole"); // For schema and keytab translations
-  
-  //TODO - Look at this later
-  //KGlobal::iconLoader()->addAppDir( "konsole" );
+  KIconLoader::global()->addAppDir( "konsole" );
 
   directoryLine->setMode(KFile::Directory);
   connect(sessionList, SIGNAL(highlighted(int)), this, SLOT(readSession(int)));
@@ -76,6 +75,7 @@ SessionEditor::SessionEditor(QWidget * parent)
   connect(fontCombo, SIGNAL(activated(int)), this, SLOT(sessionModified()));
   connect(keytabCombo, SIGNAL(activated(int)), this, SLOT(sessionModified()));
   connect(schemaCombo, SIGNAL(activated(int)), this, SLOT(sessionModified()));
+  load();
 }
 
 SessionEditor::~SessionEditor()
@@ -84,14 +84,14 @@ SessionEditor::~SessionEditor()
     schemaFilename.setAutoDelete(true);
 }
 
-void SessionEditor::show()
+void SessionEditor::load()
 {
   removeButton->setEnabled(sessionList->count()>1);
   if (! loaded) {
     loadAllKeytab();
     loadAllSession();
     readSession(0);
-    sessionList->setCurrentItem(0);
+    sessionList->setCurrentRow(0);
     loaded = true;
   }
   SessionDialog::show();
@@ -163,26 +163,24 @@ QString SessionEditor::readKeymapTitle(const QString & file)
 
 void SessionEditor::loadAllSession(QString currentFile)
 {
-  QStringList list = KGlobal::dirs()->findAllResources("data", "konsole/*.desktop", false, true);
+  QStringList list = KGlobal::dirs()->findAllResources("data", "konsole/*.desktop", KStandardDirs::NoDuplicates);
   sessionList->clear();
 
-  Q3ListBoxItem* currentItem = 0;
+  QListWidgetItem* currentItem = 0;
   for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it) {
 
     QString name = (*it);
 
-    KSimpleConfig* co = new KSimpleConfig(name,true);
-    co->setDesktopGroup();
-    QString sesname = co->readEntry("Name",i18n("Unnamed"));
-    delete co;
+    KDesktopFile co( name );
+    QString sesname = co.desktopGroup().readEntry("Name",i18n("Unnamed"));
 
-    sessionList->insertItem(new SessionListBoxText(sesname, name));
+    sessionList->addItem(new SessionListBoxText(sesname, name));
 
     if (currentFile==name.section('/',-1))
       currentItem = sessionList->item( sessionList->count()-1 );
   }
-  sessionList->sort();
-  sessionList->setCurrentItem(0);  // select the first added item correctly too
+  sessionList->model()->sort(0);
+  sessionList->setCurrentRow(0);  // select the first added item correctly too
   sessionList->setCurrentItem(currentItem);
   emit getList();
 }
@@ -191,42 +189,41 @@ void SessionEditor::readSession(int num)
 {
     int i,counter;
     QString str;
-    KSimpleConfig* co;
 
     if(sesMod) {
         disconnect(sessionList, SIGNAL(highlighted(int)), this, SLOT(readSession(int)));
 
-        sessionList->setCurrentItem(oldSession);
+        sessionList->setCurrentRow(oldSession);
         querySave();
-        sessionList->setCurrentItem(num);
+        sessionList->setCurrentRow(num);
         connect(sessionList, SIGNAL(highlighted(int)), this, SLOT(readSession(int)));
         sesMod=false;
     }
     if( sessionList->item(num) )
     {
         removeButton->setEnabled( QFileInfo ( ((SessionListBoxText *)sessionList->item(num))->filename() ).isWritable () );
-        co = new KSimpleConfig( ((SessionListBoxText *)sessionList->item(num))->filename(),true);
+        KDesktopFile desktopFile( ((SessionListBoxText *)sessionList->item(num))->filename());
+        KConfigGroup co = desktopFile.desktopGroup();
 
-        co->setDesktopGroup();
-        str = co->readEntry("Name");
+        str = co.readEntry("Name");
         nameLine->setText(str);
 
-        str = co->readPathEntry("Cwd");
+        str = co.readPathEntry("Cwd");
         directoryLine->lineEdit()->setText(str);
 
-        str = co->readPathEntry("Exec");
+        str = co.readPathEntry("Exec");
         executeLine->setText(str);
 
-        str = co->readEntry("Icon","konsole");
+        str = co.readEntry("Icon","konsole");
         previewIcon->setIcon(str);
 
-        i = co->readEntry("Font",(unsigned int)-1);
+        i = co.readEntry("Font",(unsigned int)-1);
         fontCombo->setCurrentIndex(i+1);
 
-        str = co->readEntry("Term","xterm");
+        str = co.readEntry("Term","xterm");
         termLine->setText(str);
 
-        str = co->readEntry("KeyTab","");
+        str = co.readEntry("KeyTab","");
         i=0;
         counter=0;
         for (QString *it = keytabFilename.first(); it != 0; it = keytabFilename.next()) {
@@ -236,7 +233,7 @@ void SessionEditor::readSession(int num)
         }
         keytabCombo->setCurrentIndex(i);
 
-        str = co->readEntry("Schema","");
+        str = co.readEntry("Schema","");
         i=0;
         counter=0;
         for (QString *it = schemaFilename.first(); it != 0; it = schemaFilename.next()) {
@@ -245,7 +242,6 @@ void SessionEditor::readSession(int num)
             counter++;
         }
         schemaCombo->setCurrentIndex(i);
-        delete co;
     }
     sesMod=false;
     oldSession=num;
@@ -314,12 +310,12 @@ void SessionEditor::saveCurrent()
     }
 
   }
-  if (sessionList->currentText().isEmpty())
+  if (sessionList->currentItem()->text().isEmpty())
 	return;
 
   QString fullpath;
-  if (sessionList->currentText() == nameLine->text()) {
-    fullpath = ( ((SessionListBoxText *)sessionList->item( sessionList->currentItem() ))->filename() ).section('/',-1);
+  if (sessionList->currentItem()->text() == nameLine->text()) {
+    fullpath = ( ((SessionListBoxText *)sessionList->currentItem())->filename() ).section('/',-1);
   }
   else {
     // Only ask for a name for changed nameLine, considered a "save as"
@@ -334,22 +330,21 @@ void SessionEditor::saveCurrent()
   if (fullpath[0] != '/')
     fullpath = KGlobal::dirs()->saveLocation("data", "konsole/") + fullpath;
 
-  KSimpleConfig* co = new KSimpleConfig(fullpath);
-  co->setDesktopGroup();
-  co->writeEntry("Type","KonsoleApplication");
-  co->writeEntry("Name",nameLine->text());
-  co->writePathEntry("Cwd",directoryLine->lineEdit()->text());
-  co->writePathEntry("Exec",executeLine->text());
-  co->writeEntry("Icon",previewIcon->icon());
+  KDesktopFile desktopFile(fullpath);
+  KConfigGroup co = desktopFile.desktopGroup();
+  co.writeEntry("Type","KonsoleApplication");
+  co.writeEntry("Name",nameLine->text());
+  co.writePathEntry("Cwd",directoryLine->lineEdit()->text());
+  co.writePathEntry("Exec",executeLine->text());
+  co.writeEntry("Icon",previewIcon->icon());
   if (fontCombo->currentIndex()==0)
-    co->writeEntry("Font","");
+    co.writeEntry("Font","");
   else
-    co->writeEntry("Font",fontCombo->currentIndex()-1);
-  co->writeEntry("Term",termLine->text());
-  co->writeEntry("KeyTab",*keytabFilename.at(keytabCombo->currentIndex()));
-  co->writeEntry("Schema",*schemaFilename.at(schemaCombo->currentIndex()));
-  co->sync();
-  delete co;
+    co.writeEntry("Font",fontCombo->currentIndex()-1);
+  co.writeEntry("Term",termLine->text());
+  co.writeEntry("KeyTab",*keytabFilename.at(keytabCombo->currentIndex()));
+  co.writeEntry("Schema",*schemaFilename.at(schemaCombo->currentIndex()));
+  desktopFile.sync();
   sesMod=false;
   loadAllSession(fullpath.section('/',-1));
   removeButton->setEnabled(sessionList->count()>1);
@@ -357,7 +352,7 @@ void SessionEditor::saveCurrent()
 
 void SessionEditor::removeCurrent()
 {
-  QString base = ((SessionListBoxText *)sessionList->item( sessionList->currentItem() ))->filename();
+  QString base = ((SessionListBoxText *)sessionList->currentItem())->filename();
 
   // Query if system sessions should be removed
   if (KStandardDirs::locateLocal("data", "konsole/" + base.section('/', -1)) != base) {
@@ -378,7 +373,7 @@ void SessionEditor::removeCurrent()
   removeButton->setEnabled(sessionList->count()>1);
   loadAllSession();
   readSession(0);
-  sessionList->setCurrentItem(0);
+  sessionList->setCurrentRow(0);
 }
 
 void SessionEditor::sessionModified()

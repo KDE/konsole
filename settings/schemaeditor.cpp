@@ -21,39 +21,38 @@
 #include "schemaeditor.h"
 #include "schemaeditor.moc"
 
-#include <QtDBus/QtDBus>
-
-#include <QLabel>
-#include <QLineEdit>
-#include <QMatrix>
-#include <QComboBox>
-#include <QDesktopWidget>
-//Added by qt3to4:
-#include <QPixmap>
-#include <QTextStream>
 #include <kdebug.h>
-#include <QCheckBox>
 #include <kstandarddirs.h>
-
-//#include <errno.h>
-
-#include <QSlider>
 #include <klocale.h>
 #include <kfiledialog.h>
 #include <kinputdialog.h>
-#include <QToolButton>
 #include <kmessagebox.h>
 #include <kimageeffect.h>
+
+#include <QtDBus/QtDBus>
+
+#include <QLabel>
+#include <QApplication>
+#include <QLineEdit>
 #include <QImage>
+#include <QMatrix>
+#include <QComboBox>
+#include <QDesktopWidget>
+#include <QPixmap>
+#include <QTextStream>
+#include <QCheckBox>
+#include <QSlider>
+#include <QToolButton>
+
 #ifdef Q_WS_X11
 #include <kdesktop_background_interface.h>
 #endif
 
 // SchemaListBoxText is a list box text item with schema filename
-class SchemaListBoxText : public Q3ListBoxText
+class SchemaListBoxText : public QListWidgetItem
 {
   public:
-    SchemaListBoxText(const QString &title, const QString &filename): Q3ListBoxText(title)
+    SchemaListBoxText(const QString &title, const QString &filename): QListWidgetItem(title)
     {
       m_filename = filename;
     };
@@ -80,7 +79,7 @@ SchemaEditor::SchemaEditor(QWidget * parent)
     transparent.resize(20);
     defaultSchema = "";
 #ifdef Q_WS_X11
-    int konq_screen_number = KApplication::desktop()->primaryScreen();
+    int konq_screen_number = QApplication::desktop()->primaryScreen();
     QByteArray appname;
     if (konq_screen_number == 0)
         appname = "org.kde.kdesktop";
@@ -119,6 +118,7 @@ SchemaEditor::SchemaEditor(QWidget * parent)
 
     connect(defaultSchemaCB, SIGNAL(toggled(bool)), this, SIGNAL(changed()));
     removeButton->setEnabled( schemaList->currentItem() );
+    load();
 }
 
 
@@ -126,7 +126,7 @@ QString SchemaEditor::schema()
 {
     QString filename = defaultSchema;
 
-    int i = schemaList->currentItem();
+    int i = schemaList->currentRow();
     if (defaultSchemaCB->isChecked() && i>=0)
       filename = ((SchemaListBoxText *) schemaList->item(i))->filename();
 
@@ -147,7 +147,7 @@ void SchemaEditor::setSchema(QString sch)
     oldSchema = sc;
     if (sc == -1)
 	sc = 0;
-    schemaList->setCurrentItem(sc);
+    schemaList->setCurrentRow(sc);
 //    readSchema(sc);
 }
 
@@ -207,10 +207,9 @@ void SchemaEditor::getList()
     }
 }
 
-void SchemaEditor::show()
+void SchemaEditor::load()
 {
     getList();
-    SchemaDialog::show();
 }
 
 
@@ -221,7 +220,7 @@ void SchemaEditor::loadAllSchema(QString currentFile)
     disconnect(schemaList, SIGNAL(highlighted(int)), this, SLOT(readSchema(int)));
     schemaList->clear();
 
-    Q3ListBoxItem* currentItem = 0;
+    QListWidgetItem* currentItem = 0;
     for (it = list.begin(); it != list.end(); ++it) {
 
 	QString name = (*it);
@@ -229,18 +228,20 @@ void SchemaEditor::loadAllSchema(QString currentFile)
 	QString title = readSchemaTitle(name);
 
 	// Only insert new items so that local items override global
-	if (schemaList->findItem(title, Q3ListBox::ExactMatch) == 0) {
+	if (schemaList->findItems(title, Qt::MatchExactly).isEmpty()) {
 	    if (title.isNull() || title.isEmpty())
 		title=i18n("untitled");
 
-		schemaList->insertItem(new SchemaListBoxText(title, name));
+		schemaList->addItem(new SchemaListBoxText(title, name));
 	    if (currentFile==name.section('/',-1))
                 currentItem = schemaList->item( schemaList->count()-1 );
 	}
     }
-    schemaList->sort();
-    schemaList->setCurrentItem(0);   // select the first added item correctly too
+    schemaList->model()->sort(0);
+    schemaList->setCurrentRow(0);   // select the first added item correctly too
     schemaList->setCurrentItem(currentItem);
+
+    //FIXME - This signal/slot is broken following Q3ListBox -> QListWidget change
     connect(schemaList, SIGNAL(highlighted(int)), this, SLOT(readSchema(int)));
     schemaListChanged();
 }
@@ -295,7 +296,7 @@ void SchemaEditor::slotColorChanged(int slot)
 
 void SchemaEditor::removeCurrent()
 {
-    int i = schemaList->currentItem();
+    int i = schemaList->currentRow();
     if(i==-1)
         return;
     QString base = ((SchemaListBoxText *) schemaList->item(i))->filename();
@@ -334,8 +335,8 @@ void SchemaEditor::saveCurrent()
     slotColorChanged(0);
 
     QString fullpath;
-    if (schemaList->currentText() == titleLine->text()) {
-	int i = schemaList->currentItem();
+    if (schemaList->currentItem()->text() == titleLine->text()) {
+	int i = schemaList->currentRow();
 	fullpath = ((SchemaListBoxText *) schemaList->item(i))->filename().section('/',-1);
     }
     else {
@@ -519,9 +520,9 @@ void SchemaEditor::readSchema(int num)
 
 	if(schMod) {
 	    disconnect(schemaList, SIGNAL(highlighted(int)), this, SLOT(readSchema(int)));
-	    schemaList->setCurrentItem(oldSchema);
+	    schemaList->setCurrentRow(oldSchema);
 	    querySave();
-	    schemaList->setCurrentItem(num);
+	    schemaList->setCurrentRow(num);
 	    connect(schemaList, SIGNAL(highlighted(int)), this, SLOT(readSchema(int)));
 	    schMod=false;
 	}
@@ -656,7 +657,7 @@ void SchemaEditor::readSchema(int num)
 		    continue;
 		if (!(0 <= bo && bo <= 1))
 		    continue;
-		color[fi] = kapp->palette().active().text();
+		color[fi] = qApp->palette().active().text();
 		transparent[fi] = tr;
 		bold[fi] = bo;
 		type[fi] = 1;
@@ -671,7 +672,7 @@ void SchemaEditor::readSchema(int num)
 		    continue;
 		if (!(0 <= bo && bo <= 1))
 		    continue;
-		color[fi] = kapp->palette().active().base();
+		color[fi] = qApp->palette().active().base();
 		transparent[fi] = tr;
 		bold[fi] = bo;
 		type[fi] = 2;

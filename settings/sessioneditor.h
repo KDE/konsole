@@ -18,13 +18,8 @@
 #ifndef SESSIONEDITOR_H
 #define SESSIONEDITOR_H
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <q3ptrlist.h>
 #include <QStringList>
-#include <kapplication.h>
 #include <QWidget>
 
 #include "ui_sessiondialog.h"
@@ -61,7 +56,7 @@ class SessionEditor : public SessionDialog
     void sessionModified();
 
   private: 
-    void show();
+    void load();
     void loadAllKeytab();
     void loadAllSession(QString currentFile="");
     QString readKeymapTitle(const QString& filename);

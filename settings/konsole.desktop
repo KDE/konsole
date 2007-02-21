@@ -12,10 +12,13 @@ X-KDE-ParentApp=kcontrol
 ServiceTypes=KCModule
 
 Name=Konsole
+Name[el]=Κονσόλα
 Name[x-test]=xxKonsolexx
 Comment=Konsole configuration module
+Comment[el]=Άρθρωμα ρύθμισης Κονσόλας
 Comment[fr]=Configuration de Konsole
 Comment[x-test]=xxKonsole configuration modulexx
 Keywords=konsole,schema,konsole background,colors,background,terminal application,terminal
+Keywords[el]=κονσόλα,σχήμα,φόντο κονσόλας,χρώματα,φόντο,εφαρμογή τερματικού,τερματικό
 Keywords[fr]=konsole,modèle,fond,couleurs,terminal
 Keywords[x-test]=xxkonsole,schema,konsole background,colors,background,terminal application,terminalxx

@@ -18,11 +18,6 @@
 #ifndef SCHEMAEDITOR_H
 #define SCHEMAEDITOR_H
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#include <kapplication.h>
 #include <QWidget>
 #include <QPixmap>
 #include <QVector>
@@ -66,11 +61,11 @@ class SchemaEditor : public SchemaDialog
 	void removeCurrent();
 	void getList();
   private Q_SLOTS:
-	void show();
 	void schemaModified();
 	void loadAllSchema(QString currentFile="");
 	void updatePreview();
   private:
+	void load();
 	bool schMod;
   	QVector<QColor> color;
 	QVector<int> type; // 0= custom, 1= sysfg, 2=sysbg, 3=rcolor
