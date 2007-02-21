@@ -45,6 +45,7 @@ struct ScreenParm
 };
 
 class TerminalCharacterDecoder;
+class ScreenCursor;
 
 /**
     \brief An image of characters with associated attributes.
@@ -189,14 +190,14 @@ public: // these are all `Screen' operations
     void resizeImage(int new_lines, int new_columns);
     
     // Return current on screen image.  Result array is [getLines()][getColumns()]
-    ca*  	  getCookedImage();
+    ca*  	  getCookedImage(const ScreenCursor& cursor);
 
     /** 
      * Returns the additional attributes associated with lines in the image.
      * The most important attribute is LINE_WRAPPED which specifies that the line is wrapped,
      * other attributes control the size of characters in the line.
      */
-    QVector<LineProperty> getCookedLineProperties();
+    QVector<LineProperty> getCookedLineProperties(const ScreenCursor& cursor);
 	
 
     /*! return the number of lines. */
@@ -221,18 +222,20 @@ public: // these are all `Screen' operations
     /** 
      * Sets the start of the selection.
      *
+     * @param cursor TODO: Document me
      * @param column The column index of the first character in the selection.
      * @param line The line index of the first character in the selection.
-     * @param columnmode TODO: Document me!
+     * @param columnmode TODO: Document me
      */
-    void setSelectionStart(const int column, const int line, const bool columnmode);
+    void setSelectionStart(/*const ScreenCursor& cursor ,*/ const int column, const int line, const bool columnmode);
+    
     /**
      * Sets the end of the current selection.
      *
      * @param column The column index of the last character in the selection.
      * @param line The line index of the last character in the selection. 
      */ 
-    void setSelectionEnd(const int column, const int line);
+    void setSelectionEnd(/*const ScreenCursor& cursor ,*/ const int column, const int line);
     
     /** Clears the current selection */
     void clearSelection();
@@ -241,8 +244,12 @@ public: // these are all `Screen' operations
 
     /**
      * Returns true if the character at (@p column, @p line) is part of the current selection.
+     *
+     * @param cursor  TODO: Document me
+     * @param column  TODO: Document me
+     * @param line    TODO: Document me
      */ 
-    bool isSelected(const int column,const int line);
+    bool isSelected(/*const ScreenCursor& cursor ,*/ const int column,const int line);
 
     /** 
      * Convenience method.  Returns the currently selected text. 
@@ -260,7 +267,7 @@ public: // these are all `Screen' operations
 	 * 				  is the most commonly used decoder which coverts characters into plain
 	 * 				  text with no formatting.
 	 */
-	void writeToStream(QTextStream* stream , TerminalCharacterDecoder* decoder);
+	//void writeToStream(QTextStream* stream , TerminalCharacterDecoder* decoder);
 
 	/**
 	 * Copies part of the output to a stream.
@@ -438,5 +445,29 @@ private: // helper
 
     static ca defaultChar;
 };
+
+class ScreenCursor
+{
+friend class TEScreen;
+
+public:
+    ScreenCursor();
+
+    void setCursor(int line);
+    int cursor() const;
+
+    bool atEnd() const;
+
+    bool operator==(const ScreenCursor& other) const;
+
+private:
+    int _cursor;
+    int _scrolledLines;
+};
+
+inline uint qHash(const ScreenCursor& cursor)
+{
+    return qHash(cursor.cursor());
+}
 
 #endif // TESCREEN_H

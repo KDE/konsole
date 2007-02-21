@@ -31,6 +31,7 @@
 #include <QRegExp>
 #include <QStringList>
 #include <QtDBus/QtDBus>
+#include <QTime>
 
 // KDE
 #include <kdebug.h>
@@ -309,12 +310,16 @@ void TESession::run()
      initial_cwd=cwd_save;
 
   _shellProcess->setWriteable(false);  // We are reachable via kwrited.
+
 }
 
 void TESession::changeTabTextColor( int color )
 {
     emit changeTabTextColor( this, color );
 }
+
+
+
 
 // NOTE: TESession::hasChildren() was originally written so that the 'do you really want to close?'
 // prompt delivered when closing a session would only be shown if the session had running processes.
