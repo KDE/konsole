@@ -43,8 +43,6 @@
 #include <fixx11h.h>
 #endif
 
-#include <config.h>
-
 /* TODO
    for anyone who likes to do improvements here, go ahead.
    - check FIXMEs below

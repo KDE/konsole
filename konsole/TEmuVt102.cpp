@@ -24,7 +24,7 @@
 
    \sa TEWidget \sa TEScreen
 */
-#include "config.h"
+#include "config-konsole.h"
 
 
 #if defined(__osf__) || defined(__APPLE__)

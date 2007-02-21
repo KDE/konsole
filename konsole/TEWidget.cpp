@@ -53,7 +53,6 @@
      chars?
 */
 
-#include "config.h"
 #include "TEWidget.h"
 //#include "OverlayFrame.h"
 #include "konsole_wcwidth.h"

@@ -53,12 +53,12 @@
 #include <kglobalsettings.h>
 #include <kio/netaccess.h>
 #include <kmessagebox.h>
-#include <config.h>
 #include <kauthorized.h>
 #include <kconfig.h>
 #include <ksessionmanager.h>
 
 // Konsole
+#include "config-konsole.h"
 #include "konsole.h"
 #include "SessionManager.h"
 

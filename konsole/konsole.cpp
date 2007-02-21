@@ -31,7 +31,6 @@
 
 // System
 #include <assert.h>
-#include <config.h>
 #include <dirent.h>
 #include <fcntl.h>
 #include <signal.h>
