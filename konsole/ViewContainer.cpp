@@ -108,6 +108,7 @@ TabbedViewContainer::TabbedViewContainer(QObject* parent) :
    ,_contextMenuTab(0) 
 {
     _tabWidget = new KTabWidget();
+    _tabWidget->setDrawTabFrame(false);
     _tabContextMenu = new KMenu(_tabWidget);   
 
     _newSessionButton = new QToolButton(_tabWidget);
@@ -216,7 +217,7 @@ void TabbedViewContainer::prepareColorCells()
 
     QColor activeTabColor = _tabWidget->tabTextColor( _contextMenuTab );
 
-    for (int i=0;i<_tabColorCells->numCells();i++)
+    for (int i=0;i<_tabColorCells->count();i++)
         if ( activeTabColor == _tabColorCells->color(i) )
         {
             _tabColorCells->setSelected(i);
@@ -289,7 +290,7 @@ void TabbedViewContainer::selectTabColor()
   //default back to showing KDE's color dialog instead.
   if ( _tabColorCells )
   {
-    color = _tabColorCells->color(_tabColorCells->getSelected());
+    color = _tabColorCells->color(_tabColorCells->selectedIndex());
 
     if (!color.isValid())
             return;
