@@ -19,8 +19,8 @@
 #include <QLayout>
 #include <QStringList>
 #include <QTabWidget>
-//Added by qt3to4:
 #include <QVBoxLayout>
+#include <QApplication>
 
 #include <QtDBus/QtDBus>
 
@@ -170,7 +170,7 @@ void KCMKonsole::save()
 
 #ifdef Q_WS_X11
     // ### TODO check this (the object and interface don't exist yet at the time of this writing)
-    int konq_screen_number = KApplication::desktop()->primaryScreen();
+    int konq_screen_number = QApplication::desktop()->primaryScreen();
     QByteArray appname;
     if (konq_screen_number == 0)
         appname = "org.kde.kdesktop";

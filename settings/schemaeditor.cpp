@@ -21,30 +21,29 @@
 #include "schemaeditor.h"
 #include "schemaeditor.moc"
 
-#include <QtDBus/QtDBus>
-
-#include <QLabel>
-#include <QLineEdit>
-#include <QMatrix>
-#include <QComboBox>
-#include <QDesktopWidget>
-//Added by qt3to4:
-#include <QPixmap>
-#include <QTextStream>
 #include <kdebug.h>
-#include <QCheckBox>
 #include <kstandarddirs.h>
-
-//#include <errno.h>
-
-#include <QSlider>
 #include <klocale.h>
 #include <kfiledialog.h>
 #include <kinputdialog.h>
-#include <QToolButton>
 #include <kmessagebox.h>
 #include <kimageeffect.h>
+
+#include <QtDBus/QtDBus>
+
+#include <QLabel>
+#include <QApplication>
+#include <QLineEdit>
 #include <QImage>
+#include <QMatrix>
+#include <QComboBox>
+#include <QDesktopWidget>
+#include <QPixmap>
+#include <QTextStream>
+#include <QCheckBox>
+#include <QSlider>
+#include <QToolButton>
+
 #ifdef Q_WS_X11
 #include <kdesktop_background_interface.h>
 #endif
@@ -80,7 +79,7 @@ SchemaEditor::SchemaEditor(QWidget * parent)
     transparent.resize(20);
     defaultSchema = "";
 #ifdef Q_WS_X11
-    int konq_screen_number = KApplication::desktop()->primaryScreen();
+    int konq_screen_number = QApplication::desktop()->primaryScreen();
     QByteArray appname;
     if (konq_screen_number == 0)
         appname = "org.kde.kdesktop";
@@ -656,7 +655,7 @@ void SchemaEditor::readSchema(int num)
 		    continue;
 		if (!(0 <= bo && bo <= 1))
 		    continue;
-		color[fi] = kapp->palette().active().text();
+		color[fi] = qApp->palette().active().text();
 		transparent[fi] = tr;
 		bold[fi] = bo;
 		type[fi] = 1;
@@ -671,7 +670,7 @@ void SchemaEditor::readSchema(int num)
 		    continue;
 		if (!(0 <= bo && bo <= 1))
 		    continue;
-		color[fi] = kapp->palette().active().base();
+		color[fi] = qApp->palette().active().base();
 		transparent[fi] = tr;
 		bold[fi] = bo;
 		type[fi] = 2;

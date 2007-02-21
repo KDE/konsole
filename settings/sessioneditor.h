@@ -18,13 +18,8 @@
 #ifndef SESSIONEDITOR_H
 #define SESSIONEDITOR_H
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <q3ptrlist.h>
 #include <QStringList>
-#include <kapplication.h>
 #include <QWidget>
 
 #include "ui_sessiondialog.h"
