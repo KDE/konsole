@@ -21,8 +21,6 @@
 #ifndef TE_PTY_H
 #define TE_PTY_H
 
-#include <config.h>
-
 #include <kprocess.h>
 #include <QSocketNotifier>
 #include <QStringList>

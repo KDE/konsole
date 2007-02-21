@@ -70,14 +70,13 @@
     Compatibility issues with obsolete installations and other unixes
     my prevent this.
 */
-#include <config.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <errno.h>
 #include <termios.h>
-                     
+
 #include <kstandarddirs.h>
 #include <klocale.h>
 #include <kdebug.h>
