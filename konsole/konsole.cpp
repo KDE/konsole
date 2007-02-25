@@ -4392,8 +4392,8 @@ void Konsole::setupTabContextMenu()
 
         m_tabSelectColorMenu->addAction( m_tabColorSelector );
 
-        connect(m_tabColorCells,SIGNAL(colorSelected(int)),this,SLOT(slotTabSelectColor()));
-        connect(m_tabColorCells,SIGNAL(colorSelected(int)),m_tabPopupMenu,SLOT(hide()));
+        connect(m_tabColorCells,SIGNAL(colorSelected(int,QColor)),this,SLOT(slotTabSelectColor()));
+        connect(m_tabColorCells,SIGNAL(colorSelected(int,QColor)),m_tabPopupMenu,SLOT(hide()));
         m_tabPopupMenu->addSeparator();
         QAction* action = m_tabPopupMenu->addMenu(m_tabSelectColorMenu);
         action->setIcon( KIcon("colors") );
