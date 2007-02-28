@@ -546,29 +546,31 @@ void TEScreen::effectiveRendition()
 
 */
 
-ca* TEScreen::getCookedImage()
+ca* TEScreen::getCookedImage(const ScreenCursor& viewCursor)
 {
+  const int viewHistoryCursor = viewCursor.cursor();
+
 /*kDebug() << "sel_begin=" << sel_begin << "(" << sel_begin/columns << "," << sel_begin%columns << ")"
   << "  sel_TL=" << sel_TL << "(" << sel_TL/columns << "," << sel_TL%columns << ")"
   << "  sel_BR=" << sel_BR << "(" << sel_BR/columns << "," << sel_BR%columns << ")"
-  << "  histcursor=" << histCursor << endl;*/
+  << "  histcursor=" << viewHistoryCursor << endl;*/
 
   int x,y;
   ca* merged = (ca*)malloc((lines*columns+1)*sizeof(ca));
   merged[lines*columns] = defaultChar;
 
-  for (y = 0; (y < lines) && (y < (hist->getLines()-histCursor)); y++)
+  for (y = 0; (y < lines) && (y < (hist->getLines()-viewHistoryCursor)); y++)
   {
-    int len = qMin(columns,hist->getLineLen(y+histCursor));
+    int len = qMin(columns,hist->getLineLen(y+viewHistoryCursor));
     int yp  = y*columns;
 
-    hist->getCells(y+histCursor,0,len,merged+yp);
+    hist->getCells(y+viewHistoryCursor,0,len,merged+yp);
     for (x = len; x < columns; x++) merged[yp+x] = defaultChar;
     if (sel_begin !=-1)
     for (x = 0; x < columns; x++)
       {
 #ifdef REVERSE_WRAPPED_LINES
-        if (hist->isLINE_WRAPPED(y+histCursor))
+        if (hist->isLINE_WRAPPED(y+viewHistoryCursor))
           reverseRendition(&merged[p]);
 #endif
         if (isSelected(x,y)) {
@@ -577,19 +579,23 @@ ca* TEScreen::getCookedImage()
     }
   }
   }
-  if (lines >= hist->getLines()-histCursor)
+  if (lines >= hist->getLines()-viewHistoryCursor)
   {
-    for (y = (hist->getLines()-histCursor); y < lines ; y++)
+    for (y = (hist->getLines()-viewHistoryCursor); y < lines ; y++)
     {
        int yp  = y*columns;
-       int yr =  (y-hist->getLines()+histCursor)*columns;
+       int yr =  (y-hist->getLines()+viewHistoryCursor)*columns;
        for (x = 0; x < columns; x++)
        { int p = x + yp; int r = x + yr;
+
+         // sanity checks
+         assert( p >= 0 );
+         assert( p < (lines*columns+1) );
 
          merged[p] = screenLines[r/columns].value(r%columns,defaultChar);
 
 #ifdef REVERSE_WRAPPED_LINES
-         if (lineProperties[y- hist->getLines() +histCursor] & LINE_WRAPPED)
+         if (lineProperties[y- hist->getLines() +viewHistoryCursor] & LINE_WRAPPED)
            reverseRendition(&merged[p]);
 #endif
          if (sel_begin != -1 && isSelected(x,y))
@@ -604,32 +610,34 @@ ca* TEScreen::getCookedImage()
     for (int i = 0; i < lines*columns; i++)
       reverseRendition(&merged[i]); // for reverse display
   }
-//  if (getMode(MODE_Cursor) && (cuY+(hist->getLines()-histCursor) < lines)) // cursor visible
+//  if (getMode(MODE_Cursor) && (cuY+(hist->getLines()-viewHistoryCursor) < lines)) // cursor visible
 
-  int loc_ = loc(cuX, cuY+hist->getLines()-histCursor);
+  int loc_ = loc(cuX, cuY+hist->getLines()-viewHistoryCursor);
   if(getMode(MODE_Cursor) && loc_ < columns*lines)
-    merged[loc(cuX,cuY+(hist->getLines()-histCursor))].r|=RE_CURSOR;
+    merged[loc(cuX,cuY+(hist->getLines()-viewHistoryCursor))].r|=RE_CURSOR;
   return merged;
 }
 
-QVector<LineProperty> TEScreen::getCookedLineProperties()
+QVector<LineProperty> TEScreen::getCookedLineProperties(const ScreenCursor& viewCursor)
 {
+  const int viewHistoryCursor = viewCursor.cursor();
+
   QVector<LineProperty> result(lines);
 
-  for (int y = 0; (y < lines) && (y < (hist->getLines()-histCursor)); y++)
+  for (int y = 0; (y < lines) && (y < (hist->getLines()-viewHistoryCursor)); y++)
   {
 	//TODO Support for line properties other than wrapped lines
-    //result[y]=hist->isLINE_WRAPPED(y+histCursor);
+    //result[y]=hist->isLINE_WRAPPED(y+viewHistoryCursor);
   
-	  if (hist->isWrappedLine(y+histCursor))
+	  if (hist->isWrappedLine(y+viewHistoryCursor))
 	  {
 	  	result[y] = result[y] | LINE_WRAPPED;
 	  }
   }
   
-  if (lines >= hist->getLines()-histCursor)
-    for (int y = (hist->getLines()-histCursor); y < lines ; y++)
-      result[y]=lineProperties[y- hist->getLines() +histCursor];
+  if (lines >= hist->getLines()-viewHistoryCursor)
+    for (int y = (hist->getLines()-viewHistoryCursor); y < lines ; y++)
+      result[y]=lineProperties[y- hist->getLines() +viewHistoryCursor];
 
   return result;
 }
@@ -1229,7 +1237,7 @@ void TEScreen::clearSelection()
   sel_begin = -1;
 }
 
-void TEScreen::setSelectionStart(const int x, const int y, const bool mode)
+void TEScreen::setSelectionStart(/*const ScreenCursor& viewCursor ,*/ const int x, const int y, const bool mode)
 {
 //  kDebug(1211) << "setSelBeginXY(" << x << "," << y << ")" << endl;
   sel_begin = loc(x,y+histCursor) ;
@@ -1242,7 +1250,7 @@ void TEScreen::setSelectionStart(const int x, const int y, const bool mode)
   columnmode = mode;
 }
 
-void TEScreen::setSelectionEnd(const int x, const int y)
+void TEScreen::setSelectionEnd(/*const ScreenCursor& viewCursor ,*/ const int x, const int y)
 {
 //  kDebug(1211) << "setSelExtentXY(" << x << "," << y << ")" << endl;
   if (sel_begin == -1) return;
@@ -1263,7 +1271,7 @@ void TEScreen::setSelectionEnd(const int x, const int y)
   }
 }
 
-bool TEScreen::isSelected(const int x,const int y)
+bool TEScreen::isSelected(/* const ScreenCursor& viewCursor ,*/ const int x,const int y)
 {
   if (columnmode) {
     int sel_Left,sel_Right;
@@ -1411,12 +1419,10 @@ void TEScreen::copyLineToStream(int line , int start, int count,
             ca* data = screenLines[line-hist->getLines()].data();
             int length = screenLines[line-hist->getLines()].count();
 
-            count = qMin(count,length);
-
 			//retrieve line from screen image
-			for (int i=0;i < count;i++)
+			for (int i=start;i < qMin(start+count,length);i++)
 			{
-			    characterBuffer[i] = data[start+i];
+			    characterBuffer[i-start] = data[i];
             }
 		}
 
@@ -1431,7 +1437,11 @@ void TEScreen::copyLineToStream(int line , int start, int count,
 		decoder->decodeLine( (ca*) characterBuffer , count, 0 , stream);
 }
 
-void TEScreen::writeToStream(QTextStream* stream , TerminalCharacterDecoder* decoder) {
+// Method below has been removed because of its reliance on 'histCursor'
+// and I want to restrict the methods which have knowledge of the scroll position
+// to just those which deal with selection and supplying final screen images.
+//
+/*void TEScreen::writeToStream(QTextStream* stream , TerminalCharacterDecoder* decoder) {
   sel_begin = 0;
   sel_BR = sel_begin;
   sel_TL = sel_begin;
@@ -1440,7 +1450,7 @@ void TEScreen::writeToStream(QTextStream* stream , TerminalCharacterDecoder* dec
   writeSelectionToStream(stream,decoder);
   
   clearSelection();
-}
+}*/
 
 void TEScreen::writeToStream(QTextStream* stream, TerminalCharacterDecoder* decoder, int from, int to)
 {
@@ -1572,4 +1582,31 @@ void TEScreen::setLineProperty(LineProperty property , bool enable)
 	{
 		lineProperties[cuY] &= ~property;
 	}
+}
+
+ScreenCursor::ScreenCursor()
+: _cursor(0)
+{
+}
+
+void ScreenCursor::setCursor(int line)
+{
+    if ( line > 0 )
+        _cursor = line;
+}
+
+int ScreenCursor::cursor() const
+{
+    return _cursor;
+}
+
+bool ScreenCursor::atEnd() const
+{
+    // not implemented yet
+    assert(0);
+}
+
+bool ScreenCursor::operator==(const ScreenCursor& other) const
+{
+    return other.cursor() == cursor();
 }

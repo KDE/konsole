@@ -2,6 +2,7 @@
     This file is part of Konsole, an X terminal.
     Copyright (C) 1996 by Matthias Ettrich <ettrich@kde.org>
     Copyright (C) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
+    Copyright (C) 2007 Robert Knight <robertknight@gmail.com> 
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -130,8 +131,8 @@ TEmulation::TEmulation() :
 void TEmulation::connectView(TEWidget* view)
 {
 
-  QObject::connect(view,SIGNAL(changedHistoryCursor(int)),
-                   this,SLOT(onHistoryCursorChange(int)));
+  QObject::connect(view,SIGNAL(changedHistoryCursor(TEWidget*,int)),
+                   this,SLOT(onHistoryCursorChange(TEWidget*,int)));
   QObject::connect(view,SIGNAL(keyPressedSignal(QKeyEvent*)),
                    this,SLOT(onKeyPress(QKeyEvent*)));
   QObject::connect(view,SIGNAL(beginSelectionSignal(const int,const int,const bool)),
@@ -281,13 +282,22 @@ TODO: Character composition from the old code.  See #96536
 
 void TEmulation::onRcvBlock(const char* text, int length)
 {
-
 	emit notifySessionState(NOTIFYACTIVITY);
 
 	bulkStart();
 
-	QString unicodeText = decoder->toUnicode(text,length);
+    int pos = 0;
+
+#warning "knight - Debugging code.  Remember to fix this."
+
+    for ( pos = 0 ; pos < length ; pos += 512 )
+    {
+    //qDebug() << "input-length: " << length;
+
+	QString unicodeText = decoder->toUnicode(text+pos,qMin(length-pos,512));
 	
+    //qDebug() << "output-length: " << unicodeText.length();
+
 	//send characters to terminal emulator
 	for (int i=0;i<unicodeText.length();i++)
 	{
@@ -305,6 +315,7 @@ void TEmulation::onRcvBlock(const char* text, int length)
       				emit zmodemDetected();
     		}
 	}
+    }
 }
 
 //OLDER VERSION
@@ -360,7 +371,7 @@ void TEmulation::onRcvBlock(const char* text, int length)
 
 void TEmulation::onSelectionBegin(const int x, const int y, const bool columnmode) {
   if (!connected) return;
-  scr->setSelectionStart(x,y,columnmode);
+  scr->setSelectionStart( x,y,columnmode);
   showBulk();
 }
 
@@ -552,13 +563,32 @@ void TEmulation::showBulk()
     QVector<LineProperty> lineProperties; 
     QListIterator<TEWidget*> viewIter(_views);
 
-    image = scr->getCookedImage();
-    lineProperties = scr->getCookedLineProperties(); 
+    //image = scr->getCookedImage();
+
+    QHash<ScreenCursor,ca*> imageTable;
+    QHash<ScreenCursor,QVector<LineProperty> > lineTable;
 
     while (viewIter.hasNext())
     {
         TEWidget* view = viewIter.next();
-        
+       
+        ca* image = 0;
+        ScreenCursor& cursor = _cursors[view];
+
+        if (!imageTable.contains(cursor))
+        {
+            image = scr->getCookedImage(cursor);
+            imageTable.insert(cursor,image);
+
+            lineProperties = scr->getCookedLineProperties(cursor); 
+            lineTable.insert(cursor,lineProperties);
+        }
+        else
+        {
+            image = imageTable.value(cursor);
+            lineProperties = lineTable.value(cursor);
+        }
+
         QRect scrollRegion;
         scrollRegion.setTop( scr->topMargin() );
         scrollRegion.setBottom( scr->bottomMargin() );
@@ -579,11 +609,20 @@ void TEmulation::showBulk()
                   scr->getLines(),
                   scr->getColumns());     
         view->setCursorPos(scr->getCursorX(), scr->getCursorY());	// set XIM position
-	    view->setScroll(scr->getHistCursor(),scr->getHistLines()); 
+	    
+        //TODO - Update cursor
+        view->setScroll(_cursors[view].cursor(),scr->getHistLines()); 
     }
   
     scr->resetScrolledLines();  
-    free(image);
+  
+    // free character image 
+    QListIterator<ScreenCursor> iter(imageTable.keys());
+    while ( iter.hasNext() )
+    {
+        free( imageTable[iter.next()] );
+    }
+
   }
 }
 
@@ -648,10 +687,13 @@ QSize TEmulation::imageSize()
   return QSize(scr->getColumns(), scr->getLines());
 }
 
-void TEmulation::onHistoryCursorChange(int cursor)
+void TEmulation::onHistoryCursorChange(TEWidget* view,int cursor)
 {
   if (!connected) return;
-  scr->setHistCursor(cursor);
+ 
+   
+  _cursors[view].setCursor(cursor);
+  //scr->setHistCursor(cursor);
 
   bulkStart();
 }

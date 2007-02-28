@@ -149,6 +149,7 @@ void Filter::getLineColumn(int position , int& startLine , int& startColumn)
 {
     for (int i = 0 ; i < _linePositions.count() ; i++)
     {
+        //qDebug() << "line position at " << i << " = " << _linePositions[i];
         int nextLine = 0;
 
         if ( i == _linePositions.count()-1 )
@@ -160,7 +161,7 @@ void Filter::getLineColumn(int position , int& startLine , int& startColumn)
             nextLine = _linePositions[i+1];
         }
 
-        if ( _linePositions[i] <= position && position <= nextLine ) 
+        if ( _linePositions[i] <= position && position < nextLine ) 
         {
             startLine = i;
             startColumn = position - _linePositions[i];
@@ -296,6 +297,10 @@ void RegExpFilter::process()
     int pos = 0;
     QString& text = buffer();
 
+    // empty regexp does not match
+    if ( _searchText.isEmpty() )
+        return;
+
     while(pos >= 0)
     {
         pos = _searchText.indexIn(text,pos);
@@ -308,8 +313,13 @@ void RegExpFilter::process()
             int startColumn = 0;
             int endColumn = 0;
 
+            //qDebug() << "pos from " << pos << " to " << pos + _searchText.matchedLength();
+            
             getLineColumn(pos,startLine,startColumn);
             getLineColumn(pos + _searchText.matchedLength(),endLine,endColumn);
+
+            //qDebug() << "start " << startLine << " / " << startColumn;
+            //qDebug() << "end " << endLine << " / " << endColumn;
 
             RegExpFilter::HotSpot* spot = newHotSpot(startLine,startColumn,
                                            endLine,endColumn);
@@ -317,6 +327,7 @@ void RegExpFilter::process()
 
             addHotSpot( spot );  
             pos += _searchText.matchedLength();
+
         }
     }    
 }

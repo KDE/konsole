@@ -23,6 +23,7 @@
 // Qt
 #include <QWidget>
 
+class QCheckBox;
 class QLabel;
 class QLineEdit;
 class QProgressBar;
@@ -103,6 +104,13 @@ public:
     /** 
      * Sets an indicator for the user as to whether or not a match for the 
      * current search text was found in the document.
+     *
+     * The indicator will not be shown if the search text is empty ( because
+     * the user has not yet entered a query ).
+     *
+     * @param match True if a match was found or false otherwise.  If true,
+     * and the search text is non-empty, an indicator that no matches were
+     * found will be shown.
      */
     void setFoundMatch( bool match );
 
@@ -116,11 +124,20 @@ public:
 
     /** Returns the current search text */
     QString searchText();
-    /** Returns whether matches for the current search text should be highlighted in the document */
+    /** 
+     * Returns whether matches for the current search text should be highlighted in the document. 
+     * Always returns true if the highlight matches checkbox is not visible. 
+     */
     bool highlightMatches();
-    /** Returns whether matching for the current search text should be case sensitive */
+    /** 
+     * Returns whether matching for the current search text should be case sensitive.
+     * Always returns false if the match case checkbox is not visible.
+     */
     bool matchCase();
-    /** Returns whether the current search text should be treated as plain text or a regular expression */
+    /** 
+     * Returns whether the current search text should be treated as plain text or a regular expression 
+     * Always returns false if the match regular expression checkbox is not visible.
+     */
     bool matchRegExp();
 
 signals:
@@ -154,9 +171,9 @@ protected:
 
 private:
     bool _foundMatch;
-    bool _matchCase;
-    bool _matchRegExp;
-    bool _highlightMatches;
+    QCheckBox* _matchCaseBox;
+    QCheckBox* _matchRegExpBox;
+    QCheckBox* _highlightBox;
 
     QLineEdit* _searchEdit;
     QLabel* _continueLabel;

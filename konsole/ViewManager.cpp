@@ -191,6 +191,7 @@ void ViewManager::viewFocused( SessionController* controller )
             disconnect( controller , SIGNAL(titleChanged(ViewProperties*)),
                         this , SLOT(activeViewTitleChanged(ViewProperties*)) );
             disconnect( _mainWindow->bookmarkHandler() , 0 , controller , 0 );
+            _pluggedController->setSearchBar( 0 );
         }
         
         _pluggedController = controller;
@@ -297,10 +298,11 @@ void ViewManager::createView(TESession* session)
         container->addView(display,properties);
         session->addView(display);
 
-        display->setFocus(Qt::MouseFocusReason);
-
-        if ( container == activeContainer )
+        if ( container == activeContainer ) 
+        {
             container->setActiveView(display);
+            display->setFocus( Qt::OtherFocusReason );
+        }
     }
 }
 

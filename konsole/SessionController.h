@@ -22,6 +22,7 @@ class TESession;
 class TEWidget;
 class IncrementalSearchBar;
 class UrlFilter;
+class RegExpFilter;
 
 // SaveHistoryTask
 class TerminalCharacterDecoder;
@@ -115,6 +116,7 @@ private slots:
     // other
     void sessionStateChanged(TESession* session,int state);
     void sessionTitleChanged();
+    void searchTextChanged(const QString& text);
     void searchClosed(); // called when the user clicks on the
                          // history search bar's close button 
 
@@ -122,6 +124,7 @@ private slots:
     void debugProcess();
 private:
     void setupActions();
+    void removeSearchFilter(); // remove and delete the current search filter if set
 
 private:
     TESession* _session;
@@ -131,8 +134,9 @@ private:
     int        _previousState;
 
     UrlFilter* _viewUrlFilter;
+    RegExpFilter* _searchFilter; 
 
-    KToggleAction* _historyToggleAction;
+    KToggleAction* _searchToggleAction;
 
     static KIcon _activityIcon;
     static KIcon _silenceIcon;
@@ -263,6 +267,7 @@ public:
 
     virtual void execute();
 
+
 signals:
     /** 
      * Emitted when a match for the regular expression is found in a session's output.
@@ -276,9 +281,6 @@ signals:
      */
     void foundMatch(TESession* session , int startLine , int startColumn , int endLine , int endColumn );
    
-private:
-   
-
 private:
     QRegExp _regExp;
 };

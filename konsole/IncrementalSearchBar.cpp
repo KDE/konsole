@@ -36,9 +36,9 @@
 IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     : QWidget(parent)
     , _foundMatch(false)
-    , _matchCase(false)
-    , _matchRegExp(false)
-    , _highlightMatches(true)
+    , _matchCaseBox(0)
+    , _matchRegExpBox(0)
+    , _highlightBox(0)
     , _searchEdit(0)
     , _continueLabel(0)
 {
@@ -85,34 +85,31 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     findPrev->setToolTip("Find the previous match for the current search phrase");
     connect( findPrev , SIGNAL(clicked()) , this , SIGNAL(findPreviousClicked()) );
 
-    QCheckBox* highlightMatches = 0;
     if ( features & HighlightMatches )
     {
-        highlightMatches = new QCheckBox( i18n("Highlight Matches") , this );
-        highlightMatches->setObjectName("highlight-matches-box");
-        highlightMatches->setToolTip("Sets whether matching text should be highlighted");
-        highlightMatches->setChecked(_highlightMatches);
-        connect( highlightMatches , SIGNAL(toggled(bool)) , this , 
+        _highlightBox = new QCheckBox( i18n("Highlight Matches") , this );
+        _highlightBox->setObjectName("highlight-matches-box");
+        _highlightBox->setToolTip("Sets whether matching text should be highlighted");
+        _highlightBox->setChecked(true);
+        connect( _highlightBox , SIGNAL(toggled(bool)) , this , 
                  SIGNAL(highlightMatchesToggled(bool)) );
     }
 
-    QCheckBox* matchCase = 0;
     if ( features & MatchCase )
     {
-        matchCase = new QCheckBox( i18n("Match Case") , this );
-        matchCase->setObjectName("match-case-box");
-        matchCase->setToolTip("Sets whether the searching is case sensitive");
-        connect( matchCase , SIGNAL(toggled(bool)) , this , SIGNAL(matchCaseToggled(bool)) );
+        _matchCaseBox = new QCheckBox( i18n("Match Case") , this );
+        _matchCaseBox->setObjectName("match-case-box");
+        _matchCaseBox->setToolTip("Sets whether the searching is case sensitive");
+        connect( _matchCaseBox , SIGNAL(toggled(bool)) , this , SIGNAL(matchCaseToggled(bool)) );
     }
 
-    QCheckBox* matchRegExp = 0;
     if ( features & RegExp )
     {
-        matchRegExp = new QCheckBox( i18n("Match Regular Expression") , this );
-        matchRegExp->setObjectName("match-regexp-box");
-        matchRegExp->setToolTip("Sets whether the search phrase is interpreted as normal text or"
+        _matchRegExpBox = new QCheckBox( i18n("Match Regular Expression") , this );
+        _matchRegExpBox->setObjectName("match-regexp-box");
+        _matchRegExpBox->setToolTip("Sets whether the search phrase is interpreted as normal text or"
                 " as a regular expression");
-        connect( matchRegExp , SIGNAL(toggled(bool)) , this , SIGNAL(matchRegExpToggled(bool)) );
+        connect( _matchRegExpBox , SIGNAL(toggled(bool)) , this , SIGNAL(matchRegExpToggled(bool)) );
     }
 
     QProgressBar* _progress = new QProgressBar(this);
@@ -130,9 +127,9 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     layout->addWidget(findPrev);
 
     // optional features
-    if ( features & HighlightMatches ) layout->addWidget(highlightMatches);
-    if ( features & MatchCase        ) layout->addWidget(matchCase);
-    if ( features & RegExp           ) layout->addWidget(matchRegExp);
+    if ( features & HighlightMatches ) layout->addWidget(_highlightBox);
+    if ( features & MatchCase        ) layout->addWidget(_matchCaseBox);
+    if ( features & RegExp           ) layout->addWidget(_matchRegExpBox);
     
     layout->addWidget(_progress);
     layout->addWidget(_continueLabel);
@@ -149,15 +146,36 @@ QString IncrementalSearchBar::searchText()
 }
 bool IncrementalSearchBar::highlightMatches()
 {
-    return _highlightMatches;
+    if ( !_highlightBox )
+    {
+        return true;
+    }
+    else
+    {
+        return _highlightBox->isChecked();
+    }
 }
 bool IncrementalSearchBar::matchCase()
 {
-    return _matchCase;
+    if ( !_matchCaseBox )
+    {
+        return false;
+    }
+    else
+    {
+        return _matchCaseBox->isChecked();
+    }
 }
 bool IncrementalSearchBar::matchRegExp()
 {
-    return _matchRegExp;
+    if ( !_matchRegExpBox )
+    {
+        return false;
+    }
+    else
+    {
+        return _matchRegExpBox->isChecked();
+    }
 }
 
 bool IncrementalSearchBar::eventFilter(QObject* watched , QEvent* event)
@@ -190,7 +208,7 @@ void IncrementalSearchBar::setFoundMatch( bool match )
 {
     //FIXME - Hard coded colour used here - is there a better alternative?
 
-    if ( !match )
+    if ( !match && !_searchEdit->text().isEmpty() )
     {
         _searchEdit->setStyleSheet( "QLineEdit{ background-color: #FF7777 }" );
     }

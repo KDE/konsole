@@ -143,7 +143,7 @@ public Q_SLOTS: // signals incoming from TEWidget
   /** Change the size of the emulation's image */
   virtual void onImageSizeChange(int lines, int columns);
   
-  virtual void onHistoryCursorChange(int cursor);
+  virtual void onHistoryCursorChange(TEWidget* view,int cursor);
   
   /** 
    * Interprets a key press event.  
@@ -219,6 +219,7 @@ public:
 protected:
 
   QList<TEWidget*> _views; //QPointer<TEWidget> > _views;
+  QHash<TEWidget*,ScreenCursor> _cursors;
 
   //QPointer<TEWidget> gui;
   
@@ -236,13 +237,15 @@ protected:
   const QTextCodec* m_codec;
   QTextDecoder* decoder;
 
-  KeyTrans* keytrans;
+  KeyTrans* keytrans; // the keyboard layout
 
 // refreshing related material.
 // this is localized in the class.
-private Q_SLOTS: // triggered by timer
+private Q_SLOTS: 
 
-  void showBulk();
+  // triggered by timer, causes the emulation to send an updated screen image to each
+  // view
+  void showBulk(); 
 
 private:
 

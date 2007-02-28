@@ -39,7 +39,8 @@ SessionController::SessionController(TESession* session , TEWidget* view, QObjec
     , _view(view)
     , _previousState(-1)
     , _viewUrlFilter(0)
-    , _historyToggleAction(0)
+    , _searchFilter(0)
+    , _searchToggleAction(0)
 {
     // handle user interface related to session (menus etc.)
     setXMLFile("sessionui.rc");
@@ -104,18 +105,40 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
     return false;
 }
 
+void SessionController::removeSearchFilter()
+{
+    if (!_searchFilter)
+        return;
+
+    _view->filterChain()->removeFilter(_searchFilter);
+    delete _searchFilter;
+    _searchFilter = 0;
+}
+
 void SessionController::setSearchBar(IncrementalSearchBar* searchBar) 
 {
+    // disconnect the existing search bar
     if ( _searchBar ) 
     {
         disconnect( this , 0 , _searchBar , 0 );
+        disconnect( _searchBar , 0 , this , 0 );
     }
 
-    _searchBar = searchBar;
+    // remove any existing search filter
+    removeSearchFilter(); 
 
-    connect( _searchBar , SIGNAL(closeClicked()) , this , SLOT(searchClosed()) );
-    connect( _searchBar , SIGNAL(findNextClicked()) , this , SLOT(findNextInHistory()) );
-    connect( _searchBar , SIGNAL(findPreviousClicked()) , this , SLOT(findPreviousInHistory()) );
+    // connect new search bar
+    _searchBar = searchBar;
+    if ( _searchBar )
+    {
+        connect( _searchBar , SIGNAL(closeClicked()) , this , SLOT(searchClosed()) );
+        connect( _searchBar , SIGNAL(findNextClicked()) , this , SLOT(findNextInHistory()) );
+        connect( _searchBar , SIGNAL(findPreviousClicked()) , this , SLOT(findPreviousInHistory()) ); 
+  
+        // if the search bar was previously active 
+        // then re-enter search mode 
+        searchHistory( _searchToggleAction->isChecked() ); 
+    } 
 }
 IncrementalSearchBar* SessionController::searchBar() const
 {
@@ -169,9 +192,9 @@ void SessionController::setupActions()
     connect( action , SIGNAL(toggled(bool)) , this , SLOT(monitorSilence(bool)) );
 
     // History
-    _historyToggleAction = new KToggleAction(i18n("Search History"),this);
-    _historyToggleAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_F) );
-    action = collection->addAction("search-history" , _historyToggleAction);
+    _searchToggleAction = new KToggleAction(i18n("Search History"),this);
+    _searchToggleAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_F) );
+    action = collection->addAction("search-history" , _searchToggleAction);
     connect( action , SIGNAL(toggled(bool)) , this , SLOT(searchHistory(bool)) );
     
     action = collection->addAction("find-next");
@@ -275,19 +298,72 @@ void SessionController::clearAndReset()
 }
 void SessionController::searchClosed()
 {
-    _historyToggleAction->setChecked(false);
+    _searchToggleAction->setChecked(false);
 }
+
+// searchHistory() may be called either as a result of clicking a menu item or 
+// as a result of changing the search bar widget
 void SessionController::searchHistory(bool showSearchBar)
 {
     if ( _searchBar )
     {
         _searchBar->setVisible(showSearchBar);
 
-        if (!showSearchBar)
+        if (showSearchBar)
         {
+            Q_ASSERT( !_searchFilter );
+
+            _searchFilter = new RegExpFilter();
+            _view->filterChain()->addFilter(_searchFilter);
+            connect( _searchBar , SIGNAL(searchChanged(const QString&)) , this , 
+                    SLOT(searchTextChanged(const QString&)) );         
+   
+            // invoke search for matches for the current search text 
+            const QString& currentSearchText = _searchBar->searchText();
+            if (!currentSearchText.isEmpty())
+            {
+                searchTextChanged(currentSearchText);
+            }
+
+            //SessionTask* task = new SearchHistoryTask();
+            //task->setAutoDelete(true);
+            //task->addSession( _session );
+            //task->execute();
+        }
+        else
+        {
+            disconnect( _searchBar , SIGNAL(searchChanged(const QString&)) , this ,
+                    SLOT(searchTextChanged(const QString&)) );
+
+            removeSearchFilter();
+            
             _view->setFocus( Qt::ActiveWindowFocusReason );
         }
     }
+}
+void SessionController::searchTextChanged(const QString& text)
+{
+    Q_ASSERT( _searchBar );
+
+    Qt::CaseSensitivity caseHandling = _searchBar->matchCase() ? Qt::CaseSensitive : Qt::CaseInsensitive;
+    QRegExp::PatternSyntax syntax = _searchBar->matchRegExp() ? QRegExp::RegExp : QRegExp::FixedString;
+    
+    QRegExp regExp( text.trimmed() ,  caseHandling , syntax );
+    _searchFilter->setRegExp(regExp);
+
+    _view->processFilters();
+
+    // color search bar to indicate whether a match was found    
+    if ( _searchFilter->hotSpots().count() > 0 )
+    {
+        _searchBar->setFoundMatch(true);
+    } 
+    else 
+    {
+        _searchBar->setFoundMatch(false);
+    }    
+    // TODO - Optimise by only updating affected regions
+    _view->update();
 }
 void SessionController::findNextInHistory()
 {

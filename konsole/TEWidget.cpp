@@ -932,6 +932,13 @@ void TEWidget::scrollImage(int lines , const QRect& /*region*/)
     scroll( 0 , font_h * (-lines) , scrollRect );
 }
 
+void TEWidget::processFilters() 
+{
+    _filterChain->reset();
+    _filterChain->addImage(image,lines,columns);
+    _filterChain->process();
+}
+
 /*!
     The image can only be set completely.
 
@@ -943,12 +950,6 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
   if (!image)
      updateImageSize(); // Create image
 
-    //TEMPORARY: This is for testing only, this could potentially be expensive,
-    //so a mechanism must be added to only process filters as needed
-#warning "Temporary addition to test filters.  Don't do this in the final code"
-    _filterChain->reset();
-    _filterChain->addImage(newimg,lines,columns);
-    _filterChain->process();
 
   assert( this->usedLines <= this->lines );
   assert( this->usedColumns <= this->columns );
@@ -1094,6 +1095,12 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
     dirtyRegion |= QRect( bX+tLx+columnsToUpdate*font_w , bY+tLy , font_w * (usedColumns-columnsToUpdate) , font_h * this->lines );
   }
   usedColumns = columnsToUpdate;
+
+  // handle filters on the view
+  //TEMPORARY: This is for testing only, this could potentially be expensive,
+  //so a mechanism must be added to only process filters as needed
+#warning "Temporary addition to test filters.  Don't do this in the final code"
+    processFilters();
 
   // redraw the display
   update(dirtyRegion);
@@ -1263,40 +1270,55 @@ FilterChain* TEWidget::filterChain() const
 
 void TEWidget::paintFilters(QPainter& painter)
 {
+    // iterate over hotspots identified by the display's currently active filters 
+    // and draw appropriate visuals to indicate the presence of the hotspot
+
     QList<Filter::HotSpot*> spots = _filterChain->hotSpots();
     QListIterator<Filter::HotSpot*> iter(spots);
     while (iter.hasNext())
     {
         Filter::HotSpot* spot = iter.next();
-        // Links need to be underlined
-        if ( spot->type() == Filter::HotSpot::Link )
+
+        for ( int line = spot->startLine() ; line <= spot->endLine() ; line++ )
         {
-            QFontMetrics metrics(font());
-            
+            int startColumn = 0;
+            int endColumn = columns; // TODO use number of columns which are actually occupied
+                                     // on this line rather than the width of the display in columns
+
+            if ( line == spot->startLine() )
+                startColumn = spot->startColumn();
+            if ( line == spot->endLine() )
+                endColumn = spot->endColumn();
+
             QRect r;
-            r.setCoords(spot->startColumn()*font_w , spot->startLine()*font_h,
-                             spot->endColumn()*font_w , (spot->endLine()+1)*font_h);
+            r.setCoords( startColumn*font_w , line*font_h,
+                             endColumn*font_w  - 1, (line+1)*font_h - 1 ); // subtract one pixel from
+                                                                           // the right and bottom so that
+                                                                           // we do not overdraw adjacent
+                                                                           // hotspots
+
+            // Links need to be underlined
+            if ( spot->type() == Filter::HotSpot::Link )
+            {
+                QFontMetrics metrics(font());
         
-            // find the baseline (which is the invisible line that the characters in the font sit on,
-            // with some having tails dangling below)
-            int baseline = r.bottom() - metrics.descent();
-            // find the position of the underline below that
-            int underlinePos = baseline + metrics.underlinePos();
+                // find the baseline (which is the invisible line that the characters in the font sit on,
+                // with some having tails dangling below)
+                int baseline = r.bottom() - metrics.descent();
+                // find the position of the underline below that
+                int underlinePos = baseline + metrics.underlinePos();
 
-            if ( r.contains( mapFromGlobal(QCursor::pos()) ) )
-                painter.drawLine( r.left() , underlinePos , 
-                                  r.right() , underlinePos );
-        }
-        // Marker hotspots simply have a transparent rectanglular shape
-        // drawn on top of them
-        else if ( spot->type() == Filter::HotSpot::Marker )
-        {
-            QRect r;
-            r.setCoords(spot->startColumn()*font_w , spot->startLine()*font_h,
-                             spot->endColumn()*font_w , (spot->endLine()+1)*font_h);
-
+                if ( r.contains( mapFromGlobal(QCursor::pos()) ) )
+                    painter.drawLine( r.left() , underlinePos , 
+                                      r.right() , underlinePos );
+            }
+            // Marker hotspots simply have a transparent rectanglular shape
+            // drawn on top of them
+            else if ( spot->type() == Filter::HotSpot::Marker )
+            {
             //TODO - Do not use a hardcoded colour for this
-            painter.fillRect(r,QBrush(QColor(255,0,0,120)));
+                painter.fillRect(r,QBrush(QColor(255,0,0,120)));
+            }
         }
     }
 }
@@ -1495,7 +1517,7 @@ void TEWidget::hideEvent(QHideEvent*)
 
 void TEWidget::scrollChanged(int)
 {
-  emit changedHistoryCursor(scrollbar->value()); //expose
+  emit changedHistoryCursor(this,scrollbar->value()); //expose
 }
 
 int TEWidget::scrollPosition()
