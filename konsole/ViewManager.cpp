@@ -70,6 +70,7 @@ void ViewManager::setupActions()
 
     _splitViewAction = new KToggleAction( KIcon("view_top_bottom"),i18n("&Split View") , this);
     _splitViewAction->setCheckedState( KGuiItem(i18n("&Remove Split") , KIcon("view_remove") ) );
+    _splitViewAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_S) );
     collection->addAction("split-view",_splitViewAction);
     connect( _splitViewAction , SIGNAL(toggled(bool)) , this , SLOT(splitView(bool)));
 
@@ -77,6 +78,9 @@ void ViewManager::setupActions()
     QAction* detachViewAction = collection->addAction("detach-view");
     detachViewAction->setIcon( KIcon("view_remove") );
     detachViewAction->setText( i18n("&Detach View") );
+    // Ctrl+Shift+D is not used as a shortcut by default because it is too close
+    // to Ctrl+D - which will terminate the session in many cases
+    detachViewAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_T) );
 
     connect( detachViewAction , SIGNAL(triggered()) , this , SLOT(detachActiveView()) );
 

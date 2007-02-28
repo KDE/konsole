@@ -131,17 +131,20 @@ void SessionController::setupActions()
     action = collection->addAction("close-session"); 
     action->setIcon( KIcon("fileclose") );
     action->setText( i18n("&Close Tab") );
+    action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_W) );
     connect( action , SIGNAL(triggered()) , this , SLOT(closeSession()) );
     
     // Copy and Paste
     action = collection->addAction("copy");
     action->setIcon( KIcon("editcopy") );
     action->setText( i18n("&Copy") );
+    action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_C) );
     connect( action , SIGNAL(triggered()) , this , SLOT(copy()) );
     
     action = collection->addAction("paste");
     action->setIcon( KIcon("editpaste") );
     action->setText( i18n("&Paste") );
+    action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_V) );
     connect( action , SIGNAL(triggered()) , this , SLOT(paste()) );
 
     // Clear and Clear+Reset
@@ -156,26 +159,31 @@ void SessionController::setupActions()
     // Monitor
     KToggleAction* toggleAction = 0;
     toggleAction = new KToggleAction(i18n("Monitor for &Activity"),this);  
+    toggleAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_A) );
     action = collection->addAction("monitor-activity",toggleAction);
     connect( action , SIGNAL(toggled(bool)) , this , SLOT(monitorActivity(bool)) );
 
     toggleAction = new KToggleAction(i18n("Monitor for &Silence"),this);  
+    toggleAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_I) );
     action = collection->addAction("monitor-silence",toggleAction);
     connect( action , SIGNAL(toggled(bool)) , this , SLOT(monitorSilence(bool)) );
 
     // History
     _historyToggleAction = new KToggleAction(i18n("Search History"),this);
+    _historyToggleAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_F) );
     action = collection->addAction("search-history" , _historyToggleAction);
     connect( action , SIGNAL(toggled(bool)) , this , SLOT(searchHistory(bool)) );
     
     action = collection->addAction("find-next");
     action->setIcon( KIcon("next") );
     action->setText( i18n("Find Next") );
+    action->setShortcut( QKeySequence(Qt::Key_F3) );
     connect( action , SIGNAL(triggered()) , this , SLOT(findNextInHistory()) );
     
     action = collection->addAction("find-previous");
     action->setIcon( KIcon("previous") );
     action->setText( i18n("Find Previous") );
+    action->setShortcut( QKeySequence(Qt::SHIFT + Qt::Key_F3) );
     connect( action , SIGNAL(triggered()) , this , SLOT(findPreviousInHistory()) );
     
     action = collection->addAction("save-history");
@@ -188,6 +196,7 @@ void SessionController::setupActions()
 
     action = collection->addAction("clear-history-and-reset");
     action->setText( i18n("Clear History && Reset") );
+    action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_X) );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearHistoryAndReset()) );
 
     // debugging tools
