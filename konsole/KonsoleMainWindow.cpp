@@ -86,7 +86,7 @@ void KonsoleMainWindow::setupActions()
 
     // Bookmark Menu
     KActionMenu* bookmarkMenu = new KActionMenu(i18n("&Bookmarks") , collection );
-    _bookmarkHandler = new KonsoleBookmarkHandler( this , bookmarkMenu->menu() , true );
+    _bookmarkHandler = new KonsoleBookmarkHandler( collection , bookmarkMenu->menu() , true );
     collection->addAction("bookmark" , bookmarkMenu);
 
     // Settings Menu

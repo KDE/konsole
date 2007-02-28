@@ -1,5 +1,7 @@
-/* This file was part of the KDE libraries
-    Copyright (C) 2002 Carsten Pfeiffer <pfeiffer@kde.org>
+/*  This file was part of the KDE libraries
+    
+    Copyright 2002 Carsten Pfeiffer <pfeiffer@kde.org>
+    Copyright 2007 Robert Knight <robertknight@gmail.com> 
 
     library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -28,7 +30,6 @@
 #include <KDebug>
 #include <KIO/Job>
 #include <KIO/NetAccess>
-#include <KMainWindow>
 #include <KMenu>
 #include <KStandardDirs>
 
@@ -36,10 +37,9 @@
 #include "KonsoleBookmarkHandler.h"
 #include "SessionController.h"
 
-KonsoleBookmarkHandler::KonsoleBookmarkHandler( KMainWindow* konsole, KMenu* menu, bool toplevel )
-    : QObject( konsole ),
+KonsoleBookmarkHandler::KonsoleBookmarkHandler( KActionCollection* collection, KMenu* menu, bool toplevel )
+    : QObject( collection ),
       KBookmarkOwner(),
-      m_konsole( konsole ),
       m_toplevel(toplevel),
       m_controller( 0 )
 {
@@ -70,7 +70,7 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( KMainWindow* konsole, KMenu* men
 
     if (toplevel) {
         m_bookmarkMenu = new KBookmarkMenu( manager, this, m_menu,
-                                            konsole->actionCollection() );
+                                            collection );
     } else {
         m_bookmarkMenu = new KBookmarkMenu( manager, this, m_menu,
                                             NULL);
@@ -105,7 +105,7 @@ QString KonsoleBookmarkHandler::currentUrl() const
     }
     else
     {
-        return QString(); //m_konsole->baseURL().prettyUrl();
+        return QString(); 
     }
 }
 

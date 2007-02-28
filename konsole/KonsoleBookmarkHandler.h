@@ -21,10 +21,7 @@
 #ifndef KONSOLEBOOKMARKHANDLER_H
 #define KONSOLEBOOKMARKHANDLER_H
 
-#include <kbookmarkmanager.h>
-//Added by qt3to4:
-#include <QTextStream>
-#include <QMenu>
+#include <KBookmarkManager>
 
 class KMenu;
 class KBookmarkMenu;
@@ -33,12 +30,31 @@ class KMainWindow;
 
 class SessionController;
 
+/**
+ * This class handles the communication between the bookmark menu and the active session,
+ * providing a suggested title and URL when the user clicks the "Add Bookmark" item in
+ * the bookmarks menu.
+ *
+ * The bookmark handler is associated with a session controller, which is used to 
+ * determine the working URL of the current session.  When the user changes the active
+ * view, the bookmark handler's controller should be changed using setController()
+ *
+ * When the user selects a bookmark, the openUrl() signal is emitted.
+ */
 class KonsoleBookmarkHandler : public QObject, public KBookmarkOwner
 {
     Q_OBJECT
 
 public:
-    KonsoleBookmarkHandler( KMainWindow* konsole, KMenu* menu, bool toplevel );
+
+    /**
+     * Constructs a new bookmark handler for Konsole bookmarks.
+     *
+     * @param collection The collection which the boomark menu's actions should be added to
+     * @param menu The menu which the bookmark actions should be added to
+     * @param toplevel TODO: Document me
+     */
+    KonsoleBookmarkHandler( KActionCollection* collection , KMenu* menu, bool toplevel );
     ~KonsoleBookmarkHandler();
 
     QMenu * popupMenu();
@@ -48,6 +64,9 @@ public:
     virtual bool addBookmarkEntry() const;
     virtual bool editBookmarkEntry() const;
 
+    /** 
+     * Returns the menu which this bookmark handler inserts its actions into.
+     */
     KMenu *menu() const { return m_menu; }
 
     /**
@@ -62,13 +81,18 @@ public:
     SessionController* controller() const;
 
 Q_SIGNALS:
+    /**
+     * Emitted when the user selects a bookmark from the bookmark menu.
+     *
+     * @param url The url of the bookmark which was selected by the user.
+     * @param text TODO: Document me
+     */
     void openUrl( const QString& url , const QString& text );
 
 private Q_SLOTS:
     void openBookmark( const KBookmark & bm, Qt::MouseButtons, Qt::KeyboardModifiers );
 
 private:
-    KMainWindow* m_konsole;
     KMenu* m_menu;
     KBookmarkMenu* m_bookmarkMenu;
     QString m_file;
