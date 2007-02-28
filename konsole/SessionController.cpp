@@ -261,13 +261,17 @@ void SessionController::clearAndReset()
 void SessionController::searchClosed()
 {
     _historyToggleAction->setChecked(false);
-    _view->setFocus( Qt::ActiveWindowFocusReason );
 }
 void SessionController::searchHistory(bool showSearchBar)
 {
     if ( _searchBar )
     {
         _searchBar->setVisible(showSearchBar);
+
+        if (!showSearchBar)
+        {
+            _view->setFocus( Qt::ActiveWindowFocusReason );
+        }
     }
 }
 void SessionController::findNextInHistory()
