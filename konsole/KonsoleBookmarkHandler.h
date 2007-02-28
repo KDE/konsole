@@ -3,7 +3,8 @@
 
     library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
-    License as published by the Free Software Foundation, version 2.
+    License as published by the Free Software Foundation, version 2 
+    or (at your option) any later version.
 
     This library is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -26,7 +27,7 @@
 class KMenu;
 class KBookmarkMenu;
 class KBookmarkManager;
-class KMainWindow;
+class KActionCollection;
 
 class SessionController;
 
@@ -87,7 +88,7 @@ Q_SIGNALS:
      * @param url The url of the bookmark which was selected by the user.
      * @param text TODO: Document me
      */
-    void openUrl( const QString& url , const QString& text );
+    void openUrl( const KUrl& url ); 
 
 private Q_SLOTS:
     void openBookmark( const KBookmark & bm, Qt::MouseButtons, Qt::KeyboardModifiers );

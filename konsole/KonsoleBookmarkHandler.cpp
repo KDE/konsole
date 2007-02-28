@@ -5,7 +5,8 @@
 
     library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
-    License as published by the Free Software Foundation, version 2.
+    License as published by the Free Software Foundation, version 2
+    or ( at your option ), any later version.
 
     This library is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -84,7 +85,7 @@ KonsoleBookmarkHandler::~KonsoleBookmarkHandler()
 
 void KonsoleBookmarkHandler::openBookmark( const KBookmark & bm, Qt::MouseButtons, Qt::KeyboardModifiers )
 {
-    emit openUrl( bm.url().url(), bm.text() );
+    emit openUrl( bm.url() );
 }
 
 bool KonsoleBookmarkHandler::addBookmarkEntry() const

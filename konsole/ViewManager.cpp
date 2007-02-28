@@ -183,6 +183,7 @@ void ViewManager::viewFocused( SessionController* controller )
             _mainWindow->guiFactory()->removeClient(_pluggedController);
             disconnect( controller , SIGNAL(titleChanged(ViewProperties*)),
                         this , SLOT(activeViewTitleChanged(ViewProperties*)) );
+            disconnect( _mainWindow->bookmarkHandler() , 0 , controller , 0 );
         }
         
         _pluggedController = controller;
@@ -193,6 +194,8 @@ void ViewManager::viewFocused( SessionController* controller )
       
         // make the bookmark menu operate on the currently focused session 
         _mainWindow->bookmarkHandler()->setController(controller);
+        connect( _mainWindow->bookmarkHandler() , SIGNAL(openUrl(const KUrl&)) , controller , 
+                SLOT(openUrl(const KUrl&)) );
 
         // update the caption of the main window to match that of the focused session
         connect( controller , SIGNAL(titleChanged(ViewProperties*)),

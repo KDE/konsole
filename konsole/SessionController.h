@@ -14,7 +14,9 @@
 
 // Konsole
 #include "ViewProperties.h"
+
 class QAction;
+class KUrl;
 class TESession;
 class TEWidget;
 class UrlFilter;
@@ -62,6 +64,7 @@ public:
 
     // reimplemented
     virtual KUrl url() const;
+
 signals:
     /**
      * Emitted when the view associated with the controller is focused.  
@@ -69,6 +72,17 @@ signals:
      * menus. 
      */
     void focused( SessionController* controller );
+
+public slots:
+    /**
+     * Issues a command to the session to navigate to the specified URL.
+     * This may not succeed if the foreground program does not understand 
+     * the command sent to it ( 'cd path' for local URLs ) or is not 
+     * responding to input.
+     * 
+     * TODO: Only handles URLs using the file:/// protocol at present.
+     */
+    void openUrl( const KUrl& url ); 
 
 private slots:
     // menu item handlers

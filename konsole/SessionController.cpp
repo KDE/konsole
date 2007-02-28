@@ -3,7 +3,9 @@
 #include <KAction>
 #include <KIcon>
 #include <KLocale>
+#include <KRun>
 #include <KToggleAction>
+#include <KUrl>
 
 #include <kdebug.h>
 
@@ -67,6 +69,23 @@ SessionController::~SessionController()
 KUrl SessionController::url() const
 {
     return KUrl( _session->currentWorkingDirectory() + '/' ); 
+}
+
+void SessionController::openUrl( const KUrl& url ) 
+{
+    // handle local paths
+    if ( url.protocol() == "file" )
+    {
+        QString path = url.path();
+        KRun::shellQuote(path);
+        _view->emitText("cd " + path + '\r');
+    }
+    else
+    {
+        //TODO Implement handling for other Url types
+        qWarning() << __FILE__ << ":" << __FUNCTION__ << "Handling for Urls that use protocols other"
+            << " than file:// not implemented yet";
+    }
 }
 
 bool SessionController::eventFilter(QObject* watched , QEvent* event)
