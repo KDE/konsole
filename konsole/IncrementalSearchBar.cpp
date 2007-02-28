@@ -38,7 +38,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     , _foundMatch(false)
     , _matchCase(false)
     , _matchRegExp(false)
-    , _highlightMatches(false)
+    , _highlightMatches(true)
     , _searchEdit(0)
     , _continueLabel(0)
 {
@@ -53,15 +53,16 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
 
     QLabel* findLabel = new QLabel(i18n("Find"),this);
     _searchEdit = new QLineEdit(this);
+    _searchEdit->installEventFilter(this);
     _searchEdit->setObjectName("search-edit");
     _searchEdit->setToolTip("Enter the text to search for here");
 
-    // text box may be a minimum of 3 characters wide and a maximum of 10 characters wide
-    // (since the maxWidth metric is used here, more characters probably will fit in than 3
+    // text box may be a minimum of 6 characters wide and a maximum of 10 characters wide
+    // (since the maxWidth metric is used here, more characters probably will fit in than 6
     //  and 10)
     QFontMetrics metrics(_searchEdit->font());
     int maxWidth = metrics.maxWidth();
-    _searchEdit->setMinimumWidth(maxWidth*3);
+    _searchEdit->setMinimumWidth(maxWidth*6);
     _searchEdit->setMaximumWidth(maxWidth*10);
 
     connect( _searchEdit , SIGNAL(textChanged(const QString&)) , this , SIGNAL(searchChanged(const QString&)));
@@ -90,6 +91,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
         highlightMatches = new QCheckBox( i18n("Highlight Matches") , this );
         highlightMatches->setObjectName("highlight-matches-box");
         highlightMatches->setToolTip("Sets whether matching text should be highlighted");
+        highlightMatches->setChecked(_highlightMatches);
         connect( highlightMatches , SIGNAL(toggled(bool)) , this , 
                  SIGNAL(highlightMatchesToggled(bool)) );
     }
@@ -158,10 +160,30 @@ bool IncrementalSearchBar::matchRegExp()
     return _matchRegExp;
 }
 
+bool IncrementalSearchBar::eventFilter(QObject* watched , QEvent* event)
+{
+    if ( watched == _searchEdit )
+    {
+        if ( event->type() == QEvent::KeyPress )
+        {
+            QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
+
+            if ( keyEvent->key() == Qt::Key_Escape )
+            {
+                emit closeClicked();
+                return true;
+            }
+        }        
+    }
+        
+    return QWidget::eventFilter(watched,event);
+}
+
 void IncrementalSearchBar::showEvent(QShowEvent* /*event*/)
 {
     //TODO - Check if this is the correct reason value to use here
     _searchEdit->setFocus( Qt::ActiveWindowFocusReason );
+    _searchEdit->selectAll();
 }
 
 void IncrementalSearchBar::setFoundMatch( bool match )

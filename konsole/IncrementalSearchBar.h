@@ -150,6 +150,7 @@ signals:
 
 protected:
     virtual void showEvent( QShowEvent* event );
+    virtual bool eventFilter( QObject* watched , QEvent* event );
 
 private:
     bool _foundMatch;
