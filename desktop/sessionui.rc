@@ -19,6 +19,7 @@
             <Action name="save-history" group="session-history-operations"/>
             <Separator group="session-history-operations"/>
             <Action name="clear-history" group="session-history-operations"/>
+            <Action name="clear-history-and-reset" group="session-history-operations"/>
         </Menu>
         <Menu name="view"><text>View</text>
             <Action name="monitor-silence" group="session-view-operations" />

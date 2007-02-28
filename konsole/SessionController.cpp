@@ -114,6 +114,8 @@ void SessionController::setSearchBar(IncrementalSearchBar* searchBar)
     _searchBar = searchBar;
 
     connect( _searchBar , SIGNAL(closeClicked()) , this , SLOT(searchClosed()) );
+    connect( _searchBar , SIGNAL(findNextClicked()) , this , SLOT(findNextInHistory()) );
+    connect( _searchBar , SIGNAL(findPreviousClicked()) , this , SLOT(findPreviousInHistory()) );
 }
 IncrementalSearchBar* SessionController::searchBar() const
 {
@@ -183,6 +185,10 @@ void SessionController::setupActions()
     action = collection->addAction("clear-history");
     action->setText( i18n("Clear History") );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearHistory()) );
+
+    action = collection->addAction("clear-history-and-reset");
+    action->setText( i18n("Clear History && Reset") );
+    connect( action , SIGNAL(triggered()) , this , SLOT(clearHistoryAndReset()) );
 
     // debugging tools
     action = collection->addAction("debug-process");
@@ -276,9 +282,11 @@ void SessionController::searchHistory(bool showSearchBar)
 }
 void SessionController::findNextInHistory()
 {
+    qDebug() << "find next";
 }
 void SessionController::findPreviousInHistory()
 {
+    qDebug() << "find previous";
 }
 void SessionController::saveHistory()
 {
@@ -290,6 +298,11 @@ void SessionController::saveHistory()
 void SessionController::clearHistory()
 {
     _session->clearHistory();
+}
+void SessionController::clearHistoryAndReset()
+{
+    clearAndReset();
+    clearHistory();
 }
 void SessionController::monitorActivity(bool monitor)
 {

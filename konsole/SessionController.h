@@ -103,17 +103,20 @@ private slots:
     void clear();
     void clearAndReset();
     void searchHistory(bool showSearchBar);
-    void searchClosed();
     void findNextInHistory();
     void findPreviousInHistory();
     void saveHistory();
     void clearHistory();
+    void clearHistoryAndReset();
     void closeSession();
     void monitorActivity(bool monitor);
     void monitorSilence(bool monitor);
 
+    // other
     void sessionStateChanged(TESession* session,int state);
     void sessionTitleChanged();
+    void searchClosed(); // called when the user clicks on the
+                         // history search bar's close button 
 
     // debugging slots
     void debugProcess();
