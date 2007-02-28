@@ -169,17 +169,17 @@ ColorSchema::ColorSchema(KConfig& c)
 {
   clearSchema();
 
-  c.setGroup("SchemaGeneral");
+  KConfigGroup cg(&c, "SchemaGeneral");
 
-  m_title = c.readEntry("Title",i18n("[no title]"));
-  m_imagePath = c.readEntry("ImagePath");
-  m_alignment = c.readEntry("ImageAlignment", int(1));
-  m_useTransparency = c.readEntry("UseTransparency", false);
+  m_title = cg.readEntry("Title",i18n("[no title]"));
+  m_imagePath = cg.readEntry("ImagePath");
+  m_alignment = cg.readEntry("ImageAlignment", int(1));
+  m_useTransparency = cg.readEntry("UseTransparency", false);
 
-  m_tr_r = c.readEntry("TransparentR", int(0));
-  m_tr_g = c.readEntry("TransparentG", int(0));
-  m_tr_b = c.readEntry("TransparentB", int(0));
-  m_tr_x = c.readEntry("TransparentX", double(0.0));
+  m_tr_r = cg.readEntry("TransparentR", int(0));
+  m_tr_g = cg.readEntry("TransparentG", int(0));
+  m_tr_b = cg.readEntry("TransparentB", int(0));
+  m_tr_x = cg.readEntry("TransparentX", double(0.0));
 
   for (int i=0; i < TABLE_COLORS; i++)
   {
@@ -273,17 +273,17 @@ void ColorSchema::writeConfig(const QString& path) const
 //  KONSOLEDEBUG << "Writing schema " << relPath << " to file " << path << endl;
 
   KConfig c( path, KConfig::NoGlobals );
+  KConfigGroup cg(&c, "SchemaGeneral");
 
-  c.setGroup("SchemaGeneral");
-  c.writeEntry("Title",m_title);
-  c.writeEntry("ImagePath",m_imagePath);
-  c.writeEntry("ImageAlignment",m_alignment);
-  c.writeEntry("UseTransparency",m_useTransparency);
+  cg.writeEntry("Title",m_title);
+  cg.writeEntry("ImagePath",m_imagePath);
+  cg.writeEntry("ImageAlignment",m_alignment);
+  cg.writeEntry("UseTransparency",m_useTransparency);
 
-  c.writeEntry("TransparentR",m_tr_r);
-  c.writeEntry("TransparentG",m_tr_g);
-  c.writeEntry("TransparentB",m_tr_b);
-  c.writeEntry("TransparentX",m_tr_x);
+  cg.writeEntry("TransparentR",m_tr_r);
+  cg.writeEntry("TransparentG",m_tr_g);
+  cg.writeEntry("TransparentB",m_tr_b);
+  cg.writeEntry("TransparentX",m_tr_x);
 
   for (int i=0; i < TABLE_COLORS; i++)
   {
