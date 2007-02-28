@@ -19,6 +19,11 @@
 
 #include "ViewProperties.h"
 
+KUrl ViewProperties::url() const
+{
+    return KUrl();
+}
+
 void ViewProperties::setTitle(const QString& title)
 {
     if ( title != _title )

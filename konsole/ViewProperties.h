@@ -24,6 +24,8 @@
 #include <QIcon>
 #include <QObject>
 
+// KDE
+#include <KUrl>
 
 /** 
  * Encapsulates user-visible information about the terminal session currently being displayed in a view,
@@ -43,6 +45,12 @@ public:
     QIcon icon() const;
     /** Returns the title associated with a view */
     QString title() const;
+
+    /** 
+     * Returns the URL current associated with a view.
+     * The default implementation returns an empty URL. 
+     */
+    virtual KUrl url() const;
 
     /** 
      * A unique identifier representing the data displayed by the view associated with this
