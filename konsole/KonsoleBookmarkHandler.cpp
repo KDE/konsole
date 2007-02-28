@@ -23,23 +23,25 @@
 
 // KDE
 #include <kshell.h>
-#include <kdebug.h>
 
+#include <KBookmarkMenu>
+#include <KDebug>
+#include <KIO/Job>
+#include <KIO/NetAccess>
 #include <KMainWindow>
 #include <KMenu>
 #include <KStandardDirs>
-#include <KIO/Job>
-#include <KIO/NetAccess>
-#include <KBookmarkMenu>
 
 // Konsole
 #include "KonsoleBookmarkHandler.h"
+#include "SessionController.h"
 
 KonsoleBookmarkHandler::KonsoleBookmarkHandler( KMainWindow* konsole, KMenu* menu, bool toplevel )
     : QObject( konsole ),
       KBookmarkOwner(),
       m_konsole( konsole ),
-      m_toplevel(toplevel)
+      m_toplevel(toplevel),
+      m_controller( 0 )
 {
     setObjectName( "KonsoleBookmarkHandler" );
 
@@ -97,14 +99,19 @@ bool KonsoleBookmarkHandler::editBookmarkEntry() const
 
 QString KonsoleBookmarkHandler::currentUrl() const
 {
-    qWarning() << __FILE__ << ":" << __FUNCTION__ << ": Needs to be implemented";
-    return QString(); //m_konsole->baseURL().prettyUrl();
+    if ( m_controller )
+    {
+        return m_controller->url().prettyUrl();
+    }
+    else
+    {
+        return QString(); //m_konsole->baseURL().prettyUrl();
+    }
 }
 
 QString KonsoleBookmarkHandler::currentTitle() const
 {
-    qWarning() << __FILE__ << ":" << __FUNCTION__ << ": Needs to be implemented";
-    const KUrl &u = QString(); //m_konsole->baseURL();
+    const KUrl &u = m_controller ? m_controller->url() : KUrl(); 
     if (u.isLocalFile())
     {
        QString path = u.path();
@@ -112,6 +119,15 @@ QString KonsoleBookmarkHandler::currentTitle() const
        return path;
     }
     return u.prettyUrl();
+}
+
+void KonsoleBookmarkHandler::setController( SessionController* controller ) 
+{
+    m_controller = controller;
+}
+SessionController* KonsoleBookmarkHandler::controller() const
+{
+    return m_controller;
 }
 
 #include "KonsoleBookmarkHandler.moc"

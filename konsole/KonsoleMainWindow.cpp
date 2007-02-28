@@ -38,7 +38,8 @@
 #include "ViewSplitter.h"
 
 KonsoleMainWindow::KonsoleMainWindow()
- : KMainWindow()
+ : KMainWindow() ,
+   _bookmarkHandler(0)
 {
     // add a small amount of space between the top of the window and the main widget
     // to prevent the menu bar and main widget borders touching (which looks very ugly) in styles
@@ -84,13 +85,19 @@ void KonsoleMainWindow::setupActions()
     KStandardAction::quit( KonsoleApp::self() , SLOT(quit()) , collection );
 
     // Bookmark Menu
-    //KActionMenu* bookmarkMenu = new KActionMenu(i18n("&Bookmarks"), collection,"bookmark");
-    //new KonsoleBookmarkHandler( this , bookmarkMenu->menu() , true );
+    KActionMenu* bookmarkMenu = new KActionMenu(i18n("&Bookmarks") , collection );
+    _bookmarkHandler = new KonsoleBookmarkHandler( this , bookmarkMenu->menu() , true );
+    collection->addAction("bookmark" , bookmarkMenu);
 
     // Settings Menu
     KStandardAction::configureNotifications( 0 , 0 , collection  );
     KStandardAction::keyBindings( this , SLOT(showShortcutsDialog()) , collection  );
     KStandardAction::preferences( this , SLOT(showPreferencesDialog()) , collection ); 
+}
+
+KonsoleBookmarkHandler* KonsoleMainWindow::bookmarkHandler() const
+{
+    return _bookmarkHandler;
 }
 
 void KonsoleMainWindow::setSessionList(SessionList* list)

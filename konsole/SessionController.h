@@ -60,6 +60,8 @@ public:
     /** Returns the view associated with this controller */
     TEWidget*  view()    { return _view;    }
 
+    // reimplemented
+    virtual KUrl url() const;
 signals:
     /**
      * Emitted when the view associated with the controller is focused.  

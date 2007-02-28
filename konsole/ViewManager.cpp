@@ -27,6 +27,7 @@
 #include <KXMLGUIFactory>
 
 // Konsole
+#include "KonsoleBookmarkHandler.h"
 #include "KonsoleMainWindow.h"
 #include "TESession.h"
 #include "TEWidget.h"
@@ -183,16 +184,20 @@ void ViewManager::viewFocused( SessionController* controller )
             disconnect( controller , SIGNAL(titleChanged(ViewProperties*)),
                         this , SLOT(activeViewTitleChanged(ViewProperties*)) );
         }
+        
+        _pluggedController = controller;
 
         // update the menus in the main window to use the actions from the active
         // controller 
         _mainWindow->guiFactory()->addClient(controller);
-        
+      
+        // make the bookmark menu operate on the currently focused session 
+        _mainWindow->bookmarkHandler()->setController(controller);
+
         // update the caption of the main window to match that of the focused session
         connect( controller , SIGNAL(titleChanged(ViewProperties*)),
                  this       , SLOT(activeViewTitleChanged(ViewProperties*)) );        
 
-        _pluggedController = controller;
 
         //kDebug() << "Plugged actions for " << controller->session()->displayTitle() << endl;
     }

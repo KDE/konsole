@@ -25,6 +25,7 @@
 class ViewSplitter;
 class ViewManager;
 class SessionList;
+class KonsoleBookmarkHandler;
 
 /**
  * The main window.  This contains the menus and an area which contains the terminal displays.
@@ -56,6 +57,11 @@ class KonsoleMainWindow : public KMainWindow
         /** Sets the list of sessions to be displayed in the File menu */
         void setSessionList(SessionList* list);
 
+        /**
+         * Returns the bookmark handler associated with this window.
+         */
+        KonsoleBookmarkHandler* bookmarkHandler() const;
+
     public slots:
         /** 
          * Merges all of the KonsoleMainWindow widgets in the application into this window.
@@ -86,6 +92,7 @@ class KonsoleMainWindow : public KMainWindow
 
     private:
         ViewManager*  _viewManager;
+        KonsoleBookmarkHandler* _bookmarkHandler;
 };
 
 #endif // KONSOLEMAINWINDOW_H

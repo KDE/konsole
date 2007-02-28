@@ -64,6 +64,11 @@ SessionController::~SessionController()
 {   
 }
 
+KUrl SessionController::url() const
+{
+    return KUrl( _session->currentWorkingDirectory() + '/' ); 
+}
+
 bool SessionController::eventFilter(QObject* watched , QEvent* event)
 {
     if ( watched == _view )

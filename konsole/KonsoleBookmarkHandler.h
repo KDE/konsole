@@ -31,6 +31,8 @@ class KBookmarkMenu;
 class KBookmarkManager;
 class KMainWindow;
 
+class SessionController;
+
 class KonsoleBookmarkHandler : public QObject, public KBookmarkOwner
 {
     Q_OBJECT
@@ -48,18 +50,30 @@ public:
 
     KMenu *menu() const { return m_menu; }
 
+    /**
+     * Sets the controller used to retrieve the current session URL when
+     * the "Add Bookmark" menu item is selected.
+     */
+    void setController( SessionController* controller );
+    /**
+     * Returns the controller used to retrieve the current session URL when
+     * the "Add Bookmark" menu item is selected.
+     */
+    SessionController* controller() const;
+
 Q_SIGNALS:
-    void openUrl( const QString&, const QString& );
+    void openUrl( const QString& url , const QString& text );
 
 private Q_SLOTS:
     void openBookmark( const KBookmark & bm, Qt::MouseButtons, Qt::KeyboardModifiers );
 
 private:
-    KMainWindow *m_konsole;
-    KMenu *m_menu;
-    KBookmarkMenu *m_bookmarkMenu;
+    KMainWindow* m_konsole;
+    KMenu* m_menu;
+    KBookmarkMenu* m_bookmarkMenu;
     QString m_file;
     bool m_toplevel;
+    SessionController* m_controller;
 };
 
 #endif // KONSOLEBOOKMARKHANDLER_H
