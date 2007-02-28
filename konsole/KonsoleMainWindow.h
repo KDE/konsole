@@ -22,6 +22,7 @@
 
 #include <KMainWindow>
 
+class IncrementalSearchBar;
 class ViewSplitter;
 class ViewManager;
 class SessionList;
@@ -52,7 +53,13 @@ class KonsoleMainWindow : public KMainWindow
          * Returns the view manager associated with this window.  The view manager can be used to 
          * create new views on particular session objects inside this window.
          */
-        ViewManager* viewManager();
+        ViewManager* viewManager() const;
+
+        /**
+         * Returns the search bar.
+         * TODO - More documentation
+         */
+        IncrementalSearchBar* searchBar() const;
 
         /** Sets the list of sessions to be displayed in the File menu */
         void setSessionList(SessionList* list);
@@ -93,6 +100,7 @@ class KonsoleMainWindow : public KMainWindow
     private:
         ViewManager*  _viewManager;
         KonsoleBookmarkHandler* _bookmarkHandler;
+        IncrementalSearchBar* _searchBar;
 };
 
 #endif // KONSOLEMAINWINDOW_H

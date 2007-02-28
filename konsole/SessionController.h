@@ -16,9 +16,11 @@
 #include "ViewProperties.h"
 
 class QAction;
+class KToggleAction;
 class KUrl;
 class TESession;
 class TEWidget;
+class IncrementalSearchBar;
 class UrlFilter;
 
 // SaveHistoryTask
@@ -62,6 +64,16 @@ public:
     /** Returns the view associated with this controller */
     TEWidget*  view()    { return _view;    }
 
+    /** 
+     * Sets the widget used for searches through the session's history. 
+     * The widget will be shown when the user clicks on the "Search History" menu action.
+     */
+    void setSearchBar( IncrementalSearchBar* searchBar );
+    /** 
+     * see setSearchBar()
+     */
+    IncrementalSearchBar* searchBar() const;
+
     // reimplemented
     virtual KUrl url() const;
 
@@ -90,7 +102,8 @@ private slots:
     void paste();
     void clear();
     void clearAndReset();
-    void searchHistory();
+    void searchHistory(bool showSearchBar);
+    void searchClosed();
     void findNextInHistory();
     void findPreviousInHistory();
     void saveHistory();
@@ -113,12 +126,15 @@ private:
     KIcon      _sessionIcon;
     QString    _sessionIconName;
     int        _previousState;
-    
+
     UrlFilter* _viewUrlFilter;
+
+    KToggleAction* _historyToggleAction;
 
     static KIcon _activityIcon;
     static KIcon _silenceIcon;
 
+    QPointer<IncrementalSearchBar> _searchBar;
 };
 
 /** 
@@ -285,6 +301,7 @@ private:
     int _lastLineFetched;
     TerminalCharacterDecoder* _decoder;
     QRegExp _regExp;
+
 };
 
 #endif //SESSIONCONTROLLER_H

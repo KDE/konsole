@@ -23,6 +23,7 @@
 // Qt
 #include <QWidget>
 
+class QLabel;
 class QLineEdit;
 class QProgressBar;
 
@@ -146,6 +147,9 @@ signals:
     void matchRegExpToggled(bool);
     /** Emitted when the close button is clicked */
     void closeClicked();
+
+protected:
+    virtual void showEvent( QShowEvent* event );
 
 private:
     bool _foundMatch;

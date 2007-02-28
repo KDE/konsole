@@ -80,6 +80,8 @@ public:
      */
     void merge(ViewManager* manager);
 
+    QWidget* widget() const;
+
 signals:
     /** Emitted when the last view is removed from the view manager */
     void empty();

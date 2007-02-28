@@ -17,6 +17,9 @@
     02110-1301  USA.
 */
 
+// Qt
+#include <QVBoxLayout>
+
 // KDE
 #include <KAction>
 #include <KActionCollection>
@@ -30,6 +33,7 @@
 #include <KXMLGUIFactory>
 
 // Konsole
+#include "IncrementalSearchBar.h"
 #include "KonsoleApp.h"
 #include "KonsoleBookmarkHandler.h"
 #include "KonsoleMainWindow.h"
@@ -45,10 +49,8 @@ KonsoleMainWindow::KonsoleMainWindow()
     // to prevent the menu bar and main widget borders touching (which looks very ugly) in styles
     // where the menu bar has a lower border
     setContentsMargins(0,2,0,0);
+   
     
-    // create main window widgets
-    setupWidgets();
-
     // create actions for menus
     setupActions();
 
@@ -57,13 +59,22 @@ KonsoleMainWindow::KonsoleMainWindow()
     _viewManager = new ViewManager(this);
     connect( _viewManager , SIGNAL(empty()) , this , SLOT(close()) );
 
+    // create main window widgets
+    setupWidgets();
+
     // create menus
     createGUI();
+
 }
 
-ViewManager* KonsoleMainWindow::viewManager()
+ViewManager* KonsoleMainWindow::viewManager() const
 {
     return _viewManager;
+}
+
+IncrementalSearchBar* KonsoleMainWindow::searchBar() const
+{
+    return _searchBar;
 }
 
 void KonsoleMainWindow::setupActions()
@@ -155,8 +166,20 @@ void KonsoleMainWindow::mergeWindows()
 
 void KonsoleMainWindow::setupWidgets()
 {
+    QWidget* widget = new QWidget(this);
+    QVBoxLayout* layout = new QVBoxLayout();
 
+    _searchBar = new IncrementalSearchBar( IncrementalSearchBar::AllFeatures , this);
+    _searchBar->setVisible(false);
 
+    layout->addWidget( _viewManager->widget() );
+    layout->addWidget( _searchBar );
+    layout->setMargin(0);
+    layout->setSpacing(0);
+
+    widget->setLayout(layout);
+    
+    setCentralWidget(widget);
 }
 
 #include "KonsoleMainWindow.moc"

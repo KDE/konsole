@@ -49,8 +49,6 @@ ViewManager::ViewManager(KonsoleMainWindow* mainWindow)
 
     // create main view area
     _viewSplitter = new ViewSplitter(_mainWindow);
-    _mainWindow->setCentralWidget(_viewSplitter);
-
 
     // emit a signal when all of the views held by this view manager are destroyed
     connect( _viewSplitter , SIGNAL(allContainersEmpty()) , this , SIGNAL(empty()) );
@@ -59,6 +57,11 @@ ViewManager::ViewManager(KonsoleMainWindow* mainWindow)
 
 ViewManager::~ViewManager()
 {
+}
+
+QWidget* ViewManager::widget() const
+{
+    return _viewSplitter;
 }
 
 void ViewManager::setupActions()
@@ -197,9 +200,13 @@ void ViewManager::viewFocused( SessionController* controller )
         connect( _mainWindow->bookmarkHandler() , SIGNAL(openUrl(const KUrl&)) , controller , 
                 SLOT(openUrl(const KUrl&)) );
 
+        // associated main window's search bar with session
+        controller->setSearchBar( _mainWindow->searchBar() );
+
         // update the caption of the main window to match that of the focused session
         connect( controller , SIGNAL(titleChanged(ViewProperties*)),
                  this       , SLOT(activeViewTitleChanged(ViewProperties*)) );        
+
 
 
         //kDebug() << "Plugged actions for " << controller->session()->displayTitle() << endl;

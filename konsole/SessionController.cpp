@@ -11,6 +11,7 @@
 
 // Konsole
 #include "Filter.h"
+#include "IncrementalSearchBar.h"
 #include "TESession.h"
 #include "TEWidget.h"
 #include "SessionController.h"
@@ -37,6 +38,8 @@ SessionController::SessionController(TESession* session , TEWidget* view, QObjec
     , _session(session)
     , _view(view)
     , _previousState(-1)
+    , _viewUrlFilter(0)
+    , _historyToggleAction(0)
 {
     // handle user interface related to session (menus etc.)
     setXMLFile("sessionui.rc");
@@ -101,6 +104,22 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
     return false;
 }
 
+void SessionController::setSearchBar(IncrementalSearchBar* searchBar) 
+{
+    if ( _searchBar ) 
+    {
+        disconnect( this , 0 , _searchBar , 0 );
+    }
+
+    _searchBar = searchBar;
+
+    connect( _searchBar , SIGNAL(closeClicked()) , this , SLOT(searchClosed()) );
+}
+IncrementalSearchBar* SessionController::searchBar() const
+{
+    return _searchBar;
+}
+
 void SessionController::setupActions()
 {
     QAction* action = 0;
@@ -143,10 +162,9 @@ void SessionController::setupActions()
     connect( action , SIGNAL(toggled(bool)) , this , SLOT(monitorSilence(bool)) );
 
     // History
-    action = collection->addAction("search-history");
-    action->setIcon( KIcon("find") );
-    action->setText( i18n("Search History") );
-    connect( action , SIGNAL(triggered()) , this , SLOT(searchHistory()) );
+    _historyToggleAction = new KToggleAction(i18n("Search History"),this);
+    action = collection->addAction("search-history" , _historyToggleAction);
+    connect( action , SIGNAL(toggled(bool)) , this , SLOT(searchHistory(bool)) );
     
     action = collection->addAction("find-next");
     action->setIcon( KIcon("next") );
@@ -240,8 +258,17 @@ void SessionController::clearAndReset()
     emulation->reset();
     emulation->clearSelection();
 }
-void SessionController::searchHistory()
+void SessionController::searchClosed()
 {
+    _historyToggleAction->setChecked(false);
+    _view->setFocus( Qt::ActiveWindowFocusReason );
+}
+void SessionController::searchHistory(bool showSearchBar)
+{
+    if ( _searchBar )
+    {
+        _searchBar->setVisible(showSearchBar);
+    }
 }
 void SessionController::findNextInHistory()
 {

@@ -23,6 +23,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QProgressBar>
+#include <QShowEvent>
 #include <QToolButton>
 
 // KDE
@@ -41,7 +42,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     , _searchEdit(0)
     , _continueLabel(0)
 {
-    QHBoxLayout* layout = new QHBoxLayout(parent);
+    QHBoxLayout* layout = new QHBoxLayout(this);
   
     QToolButton* close = new QToolButton(this);
     close->setAutoRaise(true);
@@ -140,6 +141,12 @@ bool IncrementalSearchBar::matchCase()
 bool IncrementalSearchBar::matchRegExp()
 {
     return _matchRegExp;
+}
+
+void IncrementalSearchBar::showEvent(QShowEvent* event)
+{
+    //TODO - Check if this is the correct reason value to use here
+    _searchEdit->setFocus( Qt::ActiveWindowFocusReason );
 }
 
 void IncrementalSearchBar::setFoundMatch( bool match )
