@@ -82,6 +82,7 @@
 #include <QKeyEvent>
 #include <QRegExp>
 #include <QTextStream>
+#include <QThread>
 
 // KDE
 #include <kdebug.h>
@@ -131,8 +132,8 @@ TEmulation::TEmulation() :
 void TEmulation::connectView(TEWidget* view)
 {
 
-  QObject::connect(view,SIGNAL(changedHistoryCursor(TEWidget*,int)),
-                   this,SLOT(onHistoryCursorChange(TEWidget*,int)));
+  QObject::connect(view,SIGNAL(changedHistoryCursor(int)),
+                   this,SLOT(onHistoryCursorChange(int)));
   QObject::connect(view,SIGNAL(keyPressedSignal(QKeyEvent*)),
                    this,SLOT(onKeyPress(QKeyEvent*)));
   QObject::connect(view,SIGNAL(beginSelectionSignal(const int,const int,const bool)),
@@ -474,6 +475,8 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool isCaseSens
   //loop through history in blocks of <delta> lines.
   while ( line != lastLine )
   {
+    QApplication::processEvents();
+
 	int endLine = 0;
 	if (forward)
 		endLine = qMin(line+delta,lastLine);
@@ -512,10 +515,11 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool isCaseSens
 				scr->setHistCursor(m_findPos);
 
 		//cause target line to be selected
-		scr->getHistoryLine(m_findPos);
+		//scr->getHistoryLine(m_findPos);
 	
 		//update display to show area of history containing selection	
-		showBulk();
+        showBulk();
+
 		return true;
 	}
 
@@ -559,35 +563,13 @@ void TEmulation::showBulk()
 
   if (connected)
   {
-    ca* image = 0; 
-    QVector<LineProperty> lineProperties; 
+    ca* image = scr->getCookedImage(); 
+    QVector<LineProperty> lineProperties = scr->getCookedLineProperties(); 
     QListIterator<TEWidget*> viewIter(_views);
-
-    //image = scr->getCookedImage();
-
-    QHash<ScreenCursor,ca*> imageTable;
-    QHash<ScreenCursor,QVector<LineProperty> > lineTable;
 
     while (viewIter.hasNext())
     {
         TEWidget* view = viewIter.next();
-       
-        ca* image = 0;
-        ScreenCursor& cursor = _cursors[view];
-
-        if (!imageTable.contains(cursor))
-        {
-            image = scr->getCookedImage(cursor);
-            imageTable.insert(cursor,image);
-
-            lineProperties = scr->getCookedLineProperties(cursor); 
-            lineTable.insert(cursor,lineProperties);
-        }
-        else
-        {
-            image = imageTable.value(cursor);
-            lineProperties = lineTable.value(cursor);
-        }
 
         QRect scrollRegion;
         scrollRegion.setTop( scr->topMargin() );
@@ -611,18 +593,11 @@ void TEmulation::showBulk()
         view->setCursorPos(scr->getCursorX(), scr->getCursorY());	// set XIM position
 	    
         //TODO - Update cursor
-        view->setScroll(_cursors[view].cursor(),scr->getHistLines()); 
+        view->setScroll(scr->getHistCursor(),scr->getHistLines()); 
     }
   
     scr->resetScrolledLines();  
-  
-    // free character image 
-    QListIterator<ScreenCursor> iter(imageTable.keys());
-    while ( iter.hasNext() )
-    {
-        free( imageTable[iter.next()] );
-    }
-
+    free(image);
   }
 }
 
@@ -687,13 +662,11 @@ QSize TEmulation::imageSize()
   return QSize(scr->getColumns(), scr->getLines());
 }
 
-void TEmulation::onHistoryCursorChange(TEWidget* view,int cursor)
+void TEmulation::onHistoryCursorChange(int cursor)
 {
   if (!connected) return;
- 
    
-  _cursors[view].setCursor(cursor);
-  //scr->setHistCursor(cursor);
+  scr->setHistCursor(cursor);
 
   bulkStart();
 }

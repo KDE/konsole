@@ -140,6 +140,8 @@ public:
      */
     bool matchRegExp();
 
+    // reimplemented
+    virtual void setVisible( bool visible );
 signals:
     /** Emitted when the text entered in the search box is altered */
     void searchChanged( const QString& text );
@@ -166,7 +168,6 @@ signals:
     void closeClicked();
 
 protected:
-    virtual void showEvent( QShowEvent* event );
     virtual bool eventFilter( QObject* watched , QEvent* event );
 
 private:

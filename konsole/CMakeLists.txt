@@ -55,34 +55,35 @@ endif(KONSOLE_GENERATE_LINEFONT)
 
 set(konsole_KDEINIT_SRCS
         ${sessionadaptors_SRCS}
-        start.cpp
+        BlockArray.cpp
+        Filter.cpp
+        HistorySizeDialog.cpp
+        IncrementalSearchBar.cpp
+        KeyTrans.cpp
         KonsoleApp.cpp
+        KonsoleBookmarkHandler.cpp
         KonsoleMainWindow.cpp
         ProcessInfo.cpp
         SessionController.cpp
         SessionList.cpp
+        SessionListWidget.cpp
         SessionManager.cpp
-        TESession.cpp
-        TEPty.cpp
-        TEmulation.cpp
-        TEmuVt102.cpp
         TEHistory.cpp
+        TEPty.cpp
         TEScreen.cpp
+        TESession.cpp
         TEWidget.cpp
+        TEmuVt102.cpp
+        TEmulation.cpp
+        TerminalCharacterDecoder.cpp
         ViewContainer.cpp
         ViewManager.cpp
         ViewProperties.cpp
         ViewSplitter.cpp
-        KonsoleBookmarkHandler.cpp
         ZModemDialog.cpp
-        KeyTrans.cpp
-        BlockArray.cpp
-        TerminalCharacterDecoder.cpp
-        IncrementalSearchBar.cpp
-        Filter.cpp
-        SessionListWidget.cpp
-        schema.cpp
         konsole_wcwidth.cpp
+        schema.cpp
+        start.cpp
    ) 
 
 kde4_automoc(${konsole_KDEINIT_SRCS})

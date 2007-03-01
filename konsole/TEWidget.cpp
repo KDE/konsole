@@ -1517,7 +1517,7 @@ void TEWidget::hideEvent(QHideEvent*)
 
 void TEWidget::scrollChanged(int)
 {
-  emit changedHistoryCursor(this,scrollbar->value()); //expose
+  emit changedHistoryCursor(scrollbar->value()); //expose
 }
 
 int TEWidget::scrollPosition()

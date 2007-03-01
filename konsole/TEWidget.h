@@ -227,7 +227,7 @@ Q_SIGNALS:
     void mouseSignal(int cb, int cx, int cy, int eventType);
     void changedFontMetricSignal(int height, int width);
     void changedContentSizeSignal(int height, int width);
-    void changedHistoryCursor( TEWidget* , int value);
+    void changedHistoryCursor( int value);
     void configureRequest( TEWidget*, int state, int x, int y );
 
     void copySelectionSignal();

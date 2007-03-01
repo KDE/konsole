@@ -11,6 +11,7 @@
 
 // Konsole
 #include "Filter.h"
+#include "HistorySizeDialog.h"
 #include "IncrementalSearchBar.h"
 #include "TESession.h"
 #include "TEWidget.h"
@@ -31,6 +32,7 @@
 
 KIcon SessionController::_activityIcon;
 KIcon SessionController::_silenceIcon;
+QPointer<SearchHistoryThread> SearchHistoryTask::_thread;
 
 SessionController::SessionController(TESession* session , TEWidget* view, QObject* parent)
     : ViewProperties(parent)
@@ -192,10 +194,10 @@ void SessionController::setupActions()
     connect( action , SIGNAL(toggled(bool)) , this , SLOT(monitorSilence(bool)) );
 
     // History
-    _searchToggleAction = new KToggleAction(i18n("Search History"),this);
+    _searchToggleAction = new KAction(i18n("Search History"),this);
     _searchToggleAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_F) );
     action = collection->addAction("search-history" , _searchToggleAction);
-    connect( action , SIGNAL(toggled(bool)) , this , SLOT(searchHistory(bool)) );
+    connect( action , SIGNAL(triggered()) , this , SLOT(searchHistory()) );
     
     action = collection->addAction("find-next");
     action->setIcon( KIcon("next") );
@@ -212,7 +214,11 @@ void SessionController::setupActions()
     action = collection->addAction("save-history");
     action->setText( i18n("Save History") );
     connect( action , SIGNAL(triggered()) , this , SLOT(saveHistory()) );
-    
+   
+    action = collection->addAction("history-options");
+    action->setText( i18n("History Options") );
+    connect( action , SIGNAL(triggered()) , this , SLOT(historyOptions()) );
+
     action = collection->addAction("clear-history");
     action->setText( i18n("Clear History") );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearHistory()) );
@@ -298,7 +304,12 @@ void SessionController::clearAndReset()
 }
 void SessionController::searchClosed()
 {
-    _searchToggleAction->setChecked(false);
+    searchHistory(false); 
+}
+
+void SessionController::searchHistory()
+{
+    searchHistory(true);
 }
 
 // searchHistory() may be called either as a result of clicking a menu item or 
@@ -311,7 +322,7 @@ void SessionController::searchHistory(bool showSearchBar)
 
         if (showSearchBar)
         {
-            Q_ASSERT( !_searchFilter );
+            removeSearchFilter();
 
             _searchFilter = new RegExpFilter();
             _view->filterChain()->addFilter(_searchFilter);
@@ -349,6 +360,20 @@ void SessionController::searchTextChanged(const QString& text)
     QRegExp::PatternSyntax syntax = _searchBar->matchRegExp() ? QRegExp::RegExp : QRegExp::FixedString;
     
     QRegExp regExp( text.trimmed() ,  caseHandling , syntax );
+
+    if ( !regExp.isEmpty() )
+    {
+        SearchHistoryTask* task = new SearchHistoryTask(this); 
+       
+        task->setRegExp(regExp);
+        task->setMatchCase( _searchBar->matchCase() );
+        task->setMatchRegExp( _searchBar->matchRegExp() );
+        task->setSearchDirection( SearchHistoryTask::Forwards ); 
+        task->setAutoDelete(true);
+        task->addSession( _session );   
+        task->execute();
+    }
+
     _searchFilter->setRegExp(regExp);
 
     _view->processFilters();
@@ -372,6 +397,13 @@ void SessionController::findNextInHistory()
 void SessionController::findPreviousInHistory()
 {
     qDebug() << "find previous";
+}
+void SessionController::historyOptions()
+{
+    HistorySizeDialog* dialog = new HistorySizeDialog(_view);
+    dialog->exec();
+
+    delete dialog;
 }
 void SessionController::saveHistory()
 {
@@ -449,8 +481,9 @@ void SessionController::sessionStateChanged(TESession* /*session*/ , int state)
     }
 }
 
-SessionTask::SessionTask()
-    : _autoDelete(false)
+SessionTask::SessionTask(QObject* parent)
+    :  QObject(parent)
+    ,  _autoDelete(false)
 {
 }
 void SessionTask::setAutoDelete(bool enable)
@@ -611,9 +644,81 @@ void SaveHistoryTask::jobResult(KJob* job)
 
 void SearchHistoryTask::execute()
 {
-    // not yet implemented
+    Q_ASSERT( sessions().first() );
+
+    TEmulation* emulation = sessions().first()->getEmulation();
+
+    if ( !_regExp.isEmpty() )
+    {
+        emulation->findTextBegin();
+        emulation->findTextNext(_regExp.pattern() , true , false , false );
+    }
 }
 
+#if 0
+void SearchHistoryTask::execute()
+{
+    // not yet implemented
+    
+    Q_ASSERT( sessions().count() == 1 );
+
+    if ( _thread && _thread->isRunning() )
+    {
+        _thread->wait();
+    }
+    else
+    {
+        _thread = new SearchHistoryThread( sessions().first() , 0 ); //, this );
+    }
+
+    _thread->setRegExp(regExp());
+    _thread->start();
+}
+#endif 
+
+SearchHistoryTask::SearchHistoryTask(QObject* parent)
+    : SessionTask(parent)
+    , _matchRegExp(false)
+    , _matchCase(false)
+    , _direction(Forwards)
+{
+
+}
+
+void SearchHistoryTask::setMatchCase( bool matchCase )
+{
+    _matchCase = matchCase;
+}
+bool SearchHistoryTask::matchCase() const
+{
+    return _matchCase;
+}
+void SearchHistoryTask::setMatchRegExp( bool matchRegExp )
+{
+    _matchRegExp = matchRegExp;
+}
+bool SearchHistoryTask::matchRegExp() const
+{
+    return _matchRegExp;
+}
+void SearchHistoryTask::setSearchDirection( SearchDirection direction )
+{
+    _direction = direction;
+}
+SearchHistoryTask::SearchDirection SearchHistoryTask::searchDirection() const
+{
+    return _direction;
+}
+void SearchHistoryTask::setRegExp(const QRegExp& expression)
+{
+    _regExp = expression;
+}
+QRegExp SearchHistoryTask::regExp() const
+{
+    return _regExp;
+}
+
+#if 0
 SearchHistoryThread::SearchHistoryThread(SessionPtr session , QObject* parent)
     : QThread(parent)
     , _session(session)
@@ -624,11 +729,13 @@ SearchHistoryThread::SearchHistoryThread(SessionPtr session , QObject* parent)
 
 SearchHistoryThread::~SearchHistoryThread()
 {
+    qDebug() << "thread died";
     delete _decoder;
 }
 
 void SearchHistoryThread::setRegExp(const QRegExp& expression)
 {
+    _session->getEmulation()->findTextBegin();
     _regExp = expression;
 }
 QRegExp SearchHistoryThread::regExp() const
@@ -638,7 +745,16 @@ QRegExp SearchHistoryThread::regExp() const
 
 void SearchHistoryThread::run() 
 {
-       
+    //QTextStream stream(&data,QIODevice::ReadWrite);
+    //_session->getEmulation()->writeToStream( &stream , _decoder , 0 ,  );
+
+    TEmulation* emulation = _session->getEmulation();
+
+    qDebug() << "searching for " << _regExp.pattern();
+    emulation->findTextNext(_regExp.pattern() , true , false , false );
+
+    qDebug() << "search complete";
 }
+#endif
 
 #include "SessionController.moc"

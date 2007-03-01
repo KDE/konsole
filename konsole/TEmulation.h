@@ -143,7 +143,7 @@ public Q_SLOTS: // signals incoming from TEWidget
   /** Change the size of the emulation's image */
   virtual void onImageSizeChange(int lines, int columns);
   
-  virtual void onHistoryCursorChange(TEWidget* view,int cursor);
+  virtual void onHistoryCursorChange(int cursor);
   
   /** 
    * Interprets a key press event.  

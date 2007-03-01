@@ -87,7 +87,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
 
     if ( features & HighlightMatches )
     {
-        _highlightBox = new QCheckBox( i18n("Highlight Matches") , this );
+        _highlightBox = new QCheckBox( i18n("Highlight all") , this );
         _highlightBox->setObjectName("highlight-matches-box");
         _highlightBox->setToolTip("Sets whether matching text should be highlighted");
         _highlightBox->setChecked(true);
@@ -197,11 +197,16 @@ bool IncrementalSearchBar::eventFilter(QObject* watched , QEvent* event)
     return QWidget::eventFilter(watched,event);
 }
 
-void IncrementalSearchBar::showEvent(QShowEvent* /*event*/)
+void IncrementalSearchBar::setVisible(bool visible)
 {
-    //TODO - Check if this is the correct reason value to use here
-    _searchEdit->setFocus( Qt::ActiveWindowFocusReason );
-    _searchEdit->selectAll();
+    QWidget::setVisible(visible);
+
+    if ( visible )
+    {
+        //TODO - Check if this is the correct reason value to use here
+        _searchEdit->setFocus( Qt::ActiveWindowFocusReason );
+        _searchEdit->selectAll();
+    }
 }
 
 void IncrementalSearchBar::setFoundMatch( bool match )

@@ -103,10 +103,12 @@ private slots:
     void paste();
     void clear();
     void clearAndReset();
+    void searchHistory();
     void searchHistory(bool showSearchBar);
     void findNextInHistory();
     void findPreviousInHistory();
     void saveHistory();
+    void historyOptions();
     void clearHistory();
     void clearHistoryAndReset();
     void closeSession();
@@ -136,7 +138,7 @@ private:
     UrlFilter* _viewUrlFilter;
     RegExpFilter* _searchFilter; 
 
-    KToggleAction* _searchToggleAction;
+    KAction* _searchToggleAction;
 
     static KIcon _activityIcon;
     static KIcon _silenceIcon;
@@ -158,7 +160,7 @@ class SessionTask : public QObject
 Q_OBJECT
 
 public:
-   SessionTask();
+   SessionTask(QObject* parent = 0);
 
    /** 
     * Sets whether the task automatically deletes itself when the task has been finished.
@@ -245,7 +247,15 @@ class SearchHistoryThread;
  * A task which searches through the output of sessions for matches for a given regular expression.
  * 
  * TODO - Implementation requirements:
+ *          Must provide progress feedback to the user when searching very large output logs.
+ *
+ *          Multi-threading?
  *          - The search is performed asynchronously in another thread when execute() is called.
+ *            *** Not done yet - currently we do everything in the main thread and rely on calling QApplication::processEvents() every so often
+ *                inside TEmulation::findTextNext() to prevent the interface from becoming unresponsive.
+ *                The actual searching is currently done in the TEmulation class and was not originally designed with multi-threading in mind.
+ *
+ *
  *          - Remember where the search got to when it reaches the end of the output in each session
  *            calling execute() subsequently should continue the search.
  *            This allows the class to be used for both the "Search history for text" 
@@ -258,15 +268,27 @@ class SearchHistoryTask : public SessionTask
 Q_OBJECT
 
 public:
-    SearchHistoryTask();
+    enum SearchDirection
+    {
+        Forwards,
+        Backwards  
+    };
+
+    SearchHistoryTask(QObject* parent);
 
     /** Sets the regular expression which is searched for when execute() is called */
     void setRegExp(const QRegExp& regExp);
     /** Returns the regular expression which is searched for when execute() is called */
     QRegExp regExp() const;
+    
+    void setMatchCase(bool matchCase);
+    bool matchCase() const;
+    void setMatchRegExp(bool matchRegExp);
+    bool matchRegExp() const;
+    void setSearchDirection( SearchDirection direction );
+    SearchDirection searchDirection() const;
 
     virtual void execute();
-
 
 signals:
     /** 
@@ -283,8 +305,14 @@ signals:
    
 private:
     QRegExp _regExp;
+    bool _matchRegExp;
+    bool _matchCase;
+    SearchDirection _direction;
+
+    static QPointer<SearchHistoryThread> _thread;
 };
 
+#if 0
 class SearchHistoryThread : public QThread
 {
 Q_OBJECT
@@ -308,5 +336,6 @@ private:
     QRegExp _regExp;
 
 };
+#endif 
 
 #endif //SESSIONCONTROLLER_H

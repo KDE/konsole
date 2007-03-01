@@ -190,14 +190,14 @@ public: // these are all `Screen' operations
     void resizeImage(int new_lines, int new_columns);
     
     // Return current on screen image.  Result array is [getLines()][getColumns()]
-    ca*  	  getCookedImage(const ScreenCursor& cursor);
+    ca*  	  getCookedImage();
 
     /** 
      * Returns the additional attributes associated with lines in the image.
      * The most important attribute is LINE_WRAPPED which specifies that the line is wrapped,
      * other attributes control the size of characters in the line.
      */
-    QVector<LineProperty> getCookedLineProperties(const ScreenCursor& cursor);
+    QVector<LineProperty> getCookedLineProperties();
 	
 
     /*! return the number of lines. */

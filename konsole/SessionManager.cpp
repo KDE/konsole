@@ -259,7 +259,8 @@ TESession* SessionManager::createSession(QString configPath )
             session->setTerminalType( info->terminal() );
 
                 //temporary
-                session->setHistory( HistoryTypeBuffer(1000) );
+                //session->setHistory( HistoryTypeBuffer(1000) );
+                session->setHistory( HistoryTypeFile() );
 
             //ask for notification when session dies
             connect( session , SIGNAL(done(TESession*)) , SLOT(sessionTerminated(TESession*)) );

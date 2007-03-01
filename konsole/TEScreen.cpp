@@ -546,14 +546,14 @@ void TEScreen::effectiveRendition()
 
 */
 
-ca* TEScreen::getCookedImage(const ScreenCursor& viewCursor)
+ca* TEScreen::getCookedImage()
 {
-  const int viewHistoryCursor = viewCursor.cursor();
-
 /*kDebug() << "sel_begin=" << sel_begin << "(" << sel_begin/columns << "," << sel_begin%columns << ")"
   << "  sel_TL=" << sel_TL << "(" << sel_TL/columns << "," << sel_TL%columns << ")"
   << "  sel_BR=" << sel_BR << "(" << sel_BR/columns << "," << sel_BR%columns << ")"
   << "  histcursor=" << viewHistoryCursor << endl;*/
+
+  int viewHistoryCursor = histCursor;
 
   int x,y;
   ca* merged = (ca*)malloc((lines*columns+1)*sizeof(ca));
@@ -618,9 +618,9 @@ ca* TEScreen::getCookedImage(const ScreenCursor& viewCursor)
   return merged;
 }
 
-QVector<LineProperty> TEScreen::getCookedLineProperties(const ScreenCursor& viewCursor)
+QVector<LineProperty> TEScreen::getCookedLineProperties()
 {
-  const int viewHistoryCursor = viewCursor.cursor();
+  const int viewHistoryCursor = histCursor;
 
   QVector<LineProperty> result(lines);
 
@@ -1250,7 +1250,7 @@ void TEScreen::setSelectionStart(/*const ScreenCursor& viewCursor ,*/ const int 
   columnmode = mode;
 }
 
-void TEScreen::setSelectionEnd(/*const ScreenCursor& viewCursor ,*/ const int x, const int y)
+void TEScreen::setSelectionEnd( const int x, const int y)
 {
 //  kDebug(1211) << "setSelExtentXY(" << x << "," << y << ")" << endl;
   if (sel_begin == -1) return;
@@ -1271,7 +1271,7 @@ void TEScreen::setSelectionEnd(/*const ScreenCursor& viewCursor ,*/ const int x,
   }
 }
 
-bool TEScreen::isSelected(/* const ScreenCursor& viewCursor ,*/ const int x,const int y)
+bool TEScreen::isSelected( const int x,const int y)
 {
   if (columnmode) {
     int sel_Left,sel_Right;
@@ -1357,6 +1357,9 @@ void TEScreen::writeSelectionToStream(QTextStream* stream , TerminalCharacterDec
 	int bottom = sel_BR / columns;
 	int right = sel_BR % columns;
 
+    //qDebug() << "sel_TL = " << sel_TL;
+    //qDebug() << "columns = " << columns;
+
 	for (int y=top;y<=bottom;y++)
 	{
 			int start = 0;
@@ -1390,7 +1393,7 @@ void TEScreen::copyLineToStream(int line , int start, int count,
             const int lineLength = hist->getLineLen(line);
 
             // ensure that start position is before end of line
-            start = qMin(start,lineLength-1);
+            start = qMin(start,qMax(0,lineLength-1));
 
 			//retrieve line from history buffer
 			if (count == -1)
