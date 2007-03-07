@@ -167,6 +167,8 @@ QString SessionInfo::defaultWorkingDirectory() const
 }
 
 SessionManager::SessionManager()
+    : _defaultSessionType(0),
+      _colorSchemeList(0)
 {
     //locate default session
    KSharedConfigPtr appConfig = KGlobal::config();
