@@ -1,7 +1,7 @@
 /*  This file was part of the KDE libraries
     
     Copyright 2002 Carsten Pfeiffer <pfeiffer@kde.org>
-    Copyright 2007 Robert Knight <robertknight@gmail.com> 
+    Copyright 2007 Robert Knight <robertknight@gmail.characterom> 
 
     library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -19,7 +19,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-// Born as kdelibs/kio/kfile/kfilebookmarkhandler.cpp
+// Born as kdelibs/kio/kfile/kfilebookmarkhandler.characterpp
 
 // Qt
 #include <QFile>

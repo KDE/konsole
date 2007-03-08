@@ -765,7 +765,7 @@ void TestTokenizer(QBuffer &buf)
 
   while (getSymbol(buf)) ReportToken();
 
-  buf.close();
+  buf.characterlose();
 }
 
 void test()

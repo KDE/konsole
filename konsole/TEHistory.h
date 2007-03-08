@@ -90,17 +90,17 @@ public:
   // access to history
   virtual int  getLines() = 0;
   virtual int  getLineLen(int lineno) = 0;
-  virtual void getCells(int lineno, int colno, int count, ca res[]) = 0;
+  virtual void getCells(int lineno, int colno, int count, Character res[]) = 0;
   virtual bool isWrappedLine(int lineno) = 0;
 
   // backward compatibility (obsolete)
-  ca   getCell(int lineno, int colno) { ca res; getCells(lineno,colno,1,&res); return res; }
+  Character   getCell(int lineno, int colno) { Character res; getCells(lineno,colno,1,&res); return res; }
 
   // adding lines.
-  virtual void addCells(const ca a[], int count) = 0;
+  virtual void addCells(const Character a[], int count) = 0;
   // convenience method - this is virtual so that subclasses can take advantage
   // of QVector's implicit copying
-  virtual void addCells(const QVector<ca>& cells)
+  virtual void addCells(const QVector<Character>& cells)
   {
     addCells(cells.data(),cells.size());
   }
@@ -128,10 +128,10 @@ public:
 
   virtual int  getLines();
   virtual int  getLineLen(int lineno);
-  virtual void getCells(int lineno, int colno, int count, ca res[]);
+  virtual void getCells(int lineno, int colno, int count, Character res[]);
   virtual bool isWrappedLine(int lineno);
 
-  virtual void addCells(const ca a[], int count);
+  virtual void addCells(const Character a[], int count);
   virtual void addLine(bool previousWrapped=false);
 
 private:
@@ -139,7 +139,7 @@ private:
 
   QString m_logFileName;
   HistoryFile index; // lines Row(int)
-  HistoryFile cells; // text  Row(ca)
+  HistoryFile cells; // text  Row(Character)
   HistoryFile lineflags; // flags Row(unsigned char)
 };
 
@@ -150,18 +150,18 @@ private:
 class HistoryScrollBuffer : public HistoryScroll
 {
 public:
-  typedef QVector<ca> histline;
+  typedef QVector<Character> histline;
 
   HistoryScrollBuffer(unsigned int maxNbLines = 1000);
   virtual ~HistoryScrollBuffer();
 
   virtual int  getLines();
   virtual int  getLineLen(int lineno);
-  virtual void getCells(int lineno, int colno, int count, ca res[]);
+  virtual void getCells(int lineno, int colno, int count, Character res[]);
   virtual bool isWrappedLine(int lineno);
 
-  virtual void addCells(const ca a[], int count);
-  virtual void addCells(const QVector<ca>& cells);
+  virtual void addCells(const Character a[], int count);
+  virtual void addCells(const QVector<Character>& cells);
   virtual void addLine(bool previousWrapped=false);
 
   void setMaxNbLines(unsigned int nbLines);
@@ -195,10 +195,10 @@ public:
 
   virtual int  getLines();
   virtual int  getLineLen(int lineno);
-  virtual void getCells(int lineno, int colno, int count, ca res[]);
+  virtual void getCells(int lineno, int colno, int count, Character res[]);
   virtual bool isWrappedLine(int lineno);
 
-  virtual void addCells(const ca a[], int count);
+  virtual void addCells(const Character a[], int count);
   virtual void addLine(bool previousWrapped=false);
 };
 
@@ -215,10 +215,10 @@ public:
 
   virtual int  getLines();
   virtual int  getLineLen(int lineno);
-  virtual void getCells(int lineno, int colno, int count, ca res[]);
+  virtual void getCells(int lineno, int colno, int count, Character res[]);
   virtual bool isWrappedLine(int lineno);
 
-  virtual void addCells(const ca a[], int count);
+  virtual void addCells(const Character a[], int count);
   virtual void addLine(bool previousWrapped=false);
 
 protected:

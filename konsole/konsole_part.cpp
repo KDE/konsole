@@ -54,7 +54,6 @@
 #include <KSelectAction>
 #include <KToggleAction>
 #include <KAuthorized>
-#include <KInstance>
 #include <kdebug.h>
 
 // Konsole

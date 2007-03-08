@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2007 by Robert Knight <robertknight@gmail.com>
+    Copyright (C) 2007 by Robert Knight <robertknight@gmail.characterom>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@
 #include <QMultiHash>
 #include <QRegExp>
 
-class ca;
+class Character;
 
 /**
  * A filter processes blocks of text looking for certain patterns (such as URLs or keywords from a list)
@@ -99,6 +99,14 @@ public:
        virtual void activate() = 0; 
        /** Returns a list of actions associated with the hotspot which can be used in a menu or toolbar */
        virtual QList<QAction*> actions();
+
+       /** 
+        * Returns the text of a tooltip to be shown when the mouse moves over the hotspot, or
+        * an empty string if there is no tooltip associated with this hotspot.
+        *
+        * The default implementation returns an empty string. 
+        */
+       virtual QString tooltip() const;
 
     protected:
        /** Sets the type of a hotspot.  This should only be set once */
@@ -225,6 +233,8 @@ public:
          * the capturedTexts() method.
          */
         virtual void activate();
+
+        virtual QString tooltip() const;
     private:
         FilterObject* _urlObject;
     };
@@ -310,6 +320,6 @@ public:
      * @param lines The number of lines in the terminal image
      * @param columns The number of columns in the terminal image
      */
-    void addImage(const ca* const image , int lines , int columns);  
+    void addImage(const Character* const image , int lines , int columns);  
 };
 #endif //FILTER_H

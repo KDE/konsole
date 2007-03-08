@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2007 by Robert Knight <robertknight@gmail.com>
+    Copyright (C) 2007 by Robert Knight <robertknight@gmail.characterom>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -111,7 +111,7 @@ QList<Filter::HotSpot*> FilterChain::hotSpots() const
 }
 //QList<Filter::HotSpot*> FilterChain::hotSpotsAtLine(int line) const;
 
-void TerminalImageFilterChain::addImage(const ca* const image , int lines , int columns)
+void TerminalImageFilterChain::addImage(const Character* const image , int lines , int columns)
 {
     if (empty())
         return;
@@ -227,6 +227,10 @@ Filter::HotSpot::HotSpot(int startLine , int startColumn , int endLine , int end
     , _endColumn(endColumn)
     , _type(NotSpecified)
 {
+}
+QString Filter::HotSpot::tooltip() const
+{
+    return QString();
 }
 QList<QAction*> Filter::HotSpot::actions()
 {
@@ -349,6 +353,12 @@ UrlFilter::HotSpot::HotSpot(int startLine,int startColumn,int endLine,int endCol
 , _urlObject(new FilterObject(this))
 {
     setType(Link);
+}
+QString UrlFilter::HotSpot::tooltip() const
+{
+    QString url = capturedTexts().first();
+
+    return i18n("Click to open '%1' in your browser.",url);
 }
 void UrlFilter::HotSpot::activate()
 {

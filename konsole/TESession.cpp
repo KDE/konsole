@@ -136,7 +136,7 @@ void TESession::setArguments(const QStringList& arguments)
     Sessions are combinations of TEPTy and Emulations.
 
     The stuff in here does not belong to the terminal emulation framework,
-    but to main.cpp. It serves it's duty by providing a single reference
+    but to main.characterpp. It serves it's duty by providing a single reference
     to TEPTy/Emulation pairs. In fact, it is only there to demonstrate one
     of the abilities of the framework - multiple sessions.
 */
@@ -232,6 +232,9 @@ void TESession::addView(TEWidget* widget)
 
     if ( _emulation != 0 )
         _emulation->addView(widget);
+
+    widget->setScreenWindow(_emulation->createWindow());
+
 
     //update color scheme of view to match session
     if (_colorScheme)

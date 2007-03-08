@@ -73,6 +73,7 @@
 #include <QSpacerItem>
 #include <QStyle>
 #include <QTimer>
+#include <QToolTip>
 #include <QVBoxLayout>
 #include <QWheelEvent>
 
@@ -91,6 +92,7 @@
 #include "Filter.h"
 #include "TEWidget.h"
 #include "konsole_wcwidth.h"
+#include "ScreenWindow.h"
 
 #ifndef loc
 #define loc(X,Y) ((Y)*columns+(X))
@@ -104,7 +106,7 @@
                   "abcdefgjijklmnopqrstuvwxyz" \
                   "0123456789./+@"
 
-extern bool true_transparency; // declared in main.cpp and konsole_part.cpp
+extern bool true_transparency; // declared in main.characterpp and konsole_part.characterpp
 
 // scroll increment used when dragging selection at top/bottom of window.
 
@@ -129,6 +131,15 @@ bool TEWidget::s_standalone = false;
    ANSI  (bgr) Black   Red     Green   Yellow  Blue    Magenta Cyan    White
    IBMPC (rgb) Black   Blue    Green   Cyan    Red     Magenta Yellow  White
 */
+
+ScreenWindow* TEWidget::screenWindow() const
+{
+    return _screenWindow;
+}
+void TEWidget::setScreenWindow(ScreenWindow* window)
+{
+    _screenWindow = window;
+}
 
 void TEWidget::setDefaultBackColor(const QColor& color)
 {
@@ -290,7 +301,7 @@ void TEWidget::fontChange(const QFont &)
 //printf("font_w: %d\n",font_w);
 //printf("fw: %d\n",fw);
 //printf("font_a: %d\n",font_a);
-//printf("rawname: %s\n",font().rawName().toAscii().constData());
+//printf("rawname: %s\n",font().renditionawName().toAscii().constData());
 
 /*
 #if defined(Q_CC_GNU)
@@ -333,6 +344,7 @@ void TEWidget::setFont(const QFont &)
 
 TEWidget::TEWidget(QWidget *parent)
 :QFrame(parent)
+,_screenWindow(0)
 ,allowBell(true)
 ,gridLayout(0)
 ,font_h(1)
@@ -575,11 +587,11 @@ static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code
 }
 
 void TEWidget::drawLineCharString(	QPainter& painter, int x, int y, const QString& str, 
-									const ca* attributes)
+									const Character* attributes)
 {
 		const QPen& currentPen = painter.pen();
 		
-		if ( attributes->r & RE_BOLD )
+		if ( attributes->rendition & RE_BOLD )
 		{
 			QPen boldPen(currentPen);
 			boldPen.setWidth(3);
@@ -606,7 +618,7 @@ void TEWidget::drawLineCharString(	QPainter& painter, int x, int y, const QStrin
 // 
 // -- Robert Knight <robertknight@gmail.com>
 
-void TEWidget::drawTextFixed(QPainter& painter, int x, int y, QString& str, const ca* /*attributes*/)
+void TEWidget::drawTextFixed(QPainter& painter, int x, int y, QString& str, const Character* /*attributes*/)
 {
 	if ( str.length() == 0 )
 			return;
@@ -618,7 +630,7 @@ void TEWidget::drawTextFixed(QPainter& painter, int x, int y, QString& str, cons
 //
 
 /*void TEWidget::drawTextFixed(QPainter &paint, int x, int y,
-                             QString& str, const ca *attr)
+                             QString& str, const Character *attr)
 {
   QString drawstr;
   unsigned int nc=0;
@@ -641,7 +653,7 @@ void TEWidget::drawTextFixed(QPainter& painter, int x, int y, QString& str, cons
     //Check for line-drawing char
     if (isLineChar(drawstr[0].unicode()))
     {
-        uchar code = drawstr[0].cell();
+        uchar code = drawstr[0].characterell();
         if (LineChars[code])
         {
             drawLineChar(paint, x, y, w, font_h, code);
@@ -661,7 +673,7 @@ void TEWidget::drawTextFixed(QPainter& painter, int x, int y, QString& str, cons
 */
 
 void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
-                           QString& str, const ca *attr, bool pm, bool clear)
+                           QString& str, const Character *attr, bool pm, bool clear)
 {
 
   //draw text fragment.
@@ -672,11 +684,11 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
   paint.save();
 
   int a = font_a + m_lineSpacing / 2;
-  QColor fColor = printerFriendly ? Qt::black : attr->f.color(color_table);
-  QColor bColor = attr->b.color(color_table);
+  QColor fColor = printerFriendly ? Qt::black : attr->foregroundColor.color(color_table);
+  QColor bColor = attr->backgroundColor.color(color_table);
   QString drawstr;
 
-  if ((attr->r & RE_CURSOR) && !isPrinting)
+  if ((attr->rendition & RE_CURSOR) && !isPrinting)
     cursorRect = rect;
 
   // Paint background
@@ -689,8 +701,8 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
     }
     else
     {
-      if (pm || clear || (blinking && (attr->r & RE_BLINK)) ||
-          attr->b == cacol(CO_DFT, colorsSwapped ? DEFAULT_FORE_COLOR : DEFAULT_BACK_COLOR) )
+      if (pm || clear || (blinking && (attr->rendition & RE_BLINK)) ||
+          attr->backgroundColor == CharacterColor(COLOR_SPACE_DEFAULT, colorsSwapped ? DEFAULT_FORE_COLOR : DEFAULT_BACK_COLOR) )
 
         // draw background colors with 75% opacity
         if ( true_transparency && qAlpha(blend_color) < 0xff ) {
@@ -741,7 +753,7 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
   }
 
   // Paint cursor
-  if ((attr->r & RE_CURSOR) && !isPrinting) {
+  if ((attr->rendition & RE_CURSOR) && !isPrinting) {
     paint.setBackgroundMode( Qt::TransparentMode );
     int h = font_h - m_lineSpacing;
     QRect r(rect.x(),rect.y()+m_lineSpacing/2,rect.width(),h);
@@ -763,7 +775,7 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
   // Paint text
   
   //Check & apply BOLD font
-  if (attr->r & RE_BOLD)
+  if (attr->rendition & RE_BOLD)
   {
   		QFont currentFont = paint.font();
 		currentFont.setBold(true);
@@ -772,7 +784,7 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
 
   
   
-  if (!(blinking && (attr->r & RE_BLINK)))
+  if (!(blinking && (attr->rendition & RE_BLINK)))
   {
     // ### Disabled for now, since it causes problems with characters
     // that use the full width and/or height of the character cells.
@@ -859,7 +871,7 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
       }
       paint.setClipping(false);
     }
-    if (attr->r & RE_UNDERLINE)
+    if (attr->rendition & RE_UNDERLINE)
       paint.drawLine(rect.left(), rect.y()+a+1,
                      rect.right(),rect.y()+a+1 );
   }
@@ -908,7 +920,7 @@ void TEWidget::scrollImage(int lines , const QRect& /*region*/)
         assert( (lines*this->usedColumns) < image_size ); 
 
         //scrolling down
-        memmove( image , &image[lines*this->usedColumns] , ( this->usedLines - lines ) * this->usedColumns * sizeof(ca) );
+        memmove( image , &image[lines*this->usedColumns] , ( this->usedLines - lines ) * this->usedColumns * sizeof(Character) );
  
         //set region of display to scroll, making sure that
         //the region aligns correctly to the character grid 
@@ -918,7 +930,7 @@ void TEWidget::scrollImage(int lines , const QRect& /*region*/)
     {
         //scrolling up
         memmove( &image[ abs(lines)*this->usedColumns] , image , 
-                        (this->usedLines - abs(lines) ) * this->usedColumns * sizeof(ca) );
+                        (this->usedLines - abs(lines) ) * this->usedColumns * sizeof(Character) );
 
         //set region of the display to scroll, making sure that
         //the region aligns correctly to the character grid
@@ -945,8 +957,14 @@ void TEWidget::processFilters()
     The size of the new image may or may not match the size of the widget.
 */
 
-void TEWidget::setImage(const ca* const newimg, int lines, int columns)
+void TEWidget::updateImage() //setImage(const Character* const newimg, int lines, int columns)
 {
+  const Character* const newimg = _screenWindow->getImage();
+  int lines = _screenWindow->windowLines();
+  int columns = _screenWindow->windowColumns();
+
+  setScroll( _screenWindow->currentLine() , _screenWindow->lineCount() );
+
   if (!image)
      updateImageSize(); // Create image
 
@@ -961,8 +979,8 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
   int    tLy = tL.y();
   hasBlinker = false;
 
-  cacol cf;       // undefined
-  cacol cb;       // undefined
+  CharacterColor cf;       // undefined
+  CharacterColor cb;       // undefined
   int cr  = -1;   // undefined
 
   const int linesToUpdate = qMin(this->lines, qMax(0,lines  ));
@@ -974,8 +992,8 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
 
   for (y = 0; y < linesToUpdate; y++)
   {
-    const ca*       currentLine = &image[y*this->columns];
-    const ca* const newLine = &newimg[y*columns];
+    const Character*       currentLine = &image[y*this->columns];
+    const Character* const newLine = &newimg[y*columns];
 
     bool updateLine = false;
     
@@ -999,32 +1017,32 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
     if (!resizing) // not while resizing, we're expecting a paintEvent
     for (x = 0; x < columnsToUpdate; x++)
     {
-      hasBlinker |= (newLine[x].r & RE_BLINK);
+      hasBlinker |= (newLine[x].rendition & RE_BLINK);
     
       // Start drawing if this character or the next one differs.
       // We also take the next one into account to handle the situation
       // where characters exceed their cell width.
       if (dirtyMask[x])
       {
-        Q_UINT16 c = newLine[x+0].c;
+        Q_UINT16 c = newLine[x+0].character;
         if ( !c )
             continue;
         int p = 0;
         disstrU[p++] = c; //fontMap(c);
         bool lineDraw = isLineChar(c);
-        bool doubleWidth = (newLine[x+1].c == 0);
-        cr = newLine[x].r;
-        cb = newLine[x].b;
-        if (newLine[x].f != cf) cf = newLine[x].f;
+        bool doubleWidth = (newLine[x+1].character == 0);
+        cr = newLine[x].rendition;
+        cb = newLine[x].backgroundColor;
+        if (newLine[x].foregroundColor != cf) cf = newLine[x].foregroundColor;
         int lln = columnsToUpdate - x;
         for (len = 1; len < lln; len++)
         {
-          c = newLine[x+len].c;
+          c = newLine[x+len].character;
           if (!c)
             continue; // Skip trailing part of multi-col chars.
 
-          if (newLine[x+len].f != cf || newLine[x+len].b != cb || newLine[x+len].r != cr ||
-              !dirtyMask[x+len] || isLineChar(c) != lineDraw || (newLine[x+len+1].c == 0) != doubleWidth)
+          if (newLine[x+len].foregroundColor != cf || newLine[x+len].backgroundColor != cb || newLine[x+len].rendition != cr ||
+              !dirtyMask[x+len] || isLineChar(c) != lineDraw || (newLine[x+len+1].character == 0) != doubleWidth)
             break;
 
           disstrU[p++] = c; //fontMap(c);
@@ -1079,7 +1097,7 @@ void TEWidget::setImage(const ca* const newimg, int lines, int columns)
     dirtyMask--; // Set back
 
     // finally, make `image' become `newimg'.
-    memcpy((void*)currentLine,(const void*)newLine,columnsToUpdate*sizeof(ca));
+    memcpy((void*)currentLine,(const void*)newLine,columnsToUpdate*sizeof(Character));
   }
  
   // if the new image is smaller than the previous image, then ensure that the area
@@ -1336,7 +1354,7 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect)
   QChar *disstrU = new QChar[usedColumns];
   for (int y = luy; y <= rly; y++)
   {
-    Q_UINT16 c = image[loc(lux,y)].c;
+    Q_UINT16 c = image[loc(lux,y)].character;
     int x = lux;
     if(!c && x)
       x--; // Search for start of multi-column character
@@ -1344,29 +1362,29 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect)
     {
       int len = 1;
       int p = 0;
-      c = image[loc(x,y)].c;
+      c = image[loc(x,y)].character;
       if (c)
          disstrU[p++] = c; //fontMap(c);
       bool lineDraw = isLineChar(c);
-      bool doubleWidth = (image[ qMin(loc(x,y)+1,image_size) ].c == 0);
-      cacol cf = image[loc(x,y)].f;
-      cacol cb = image[loc(x,y)].b;
-      UINT8 cr = image[loc(x,y)].r;
+      bool doubleWidth = (image[ qMin(loc(x,y)+1,image_size) ].character == 0);
+      CharacterColor cf = image[loc(x,y)].foregroundColor;
+      CharacterColor cb = image[loc(x,y)].backgroundColor;
+      UINT8 cr = image[loc(x,y)].rendition;
 	  
       while (x+len <= rlx &&
-             image[loc(x+len,y)].f == cf &&
-             image[loc(x+len,y)].b == cb &&
-             image[loc(x+len,y)].r == cr &&
-             (image[ qMin(loc(x+len,y)+1,image_size) ].c == 0) == doubleWidth &&
-             isLineChar( c = image[loc(x+len,y)].c) == lineDraw) // Assignment!
+             image[loc(x+len,y)].foregroundColor == cf &&
+             image[loc(x+len,y)].backgroundColor == cb &&
+             image[loc(x+len,y)].rendition == cr &&
+             (image[ qMin(loc(x+len,y)+1,image_size) ].character == 0) == doubleWidth &&
+             isLineChar( c = image[loc(x+len,y)].character) == lineDraw) // Assignment!
       {
         if (c)
           disstrU[p++] = c; //fontMap(c);
-        if (doubleWidth) // assert((image[loc(x+len,y)+1].c == 0)), see above if condition
+        if (doubleWidth) // assert((image[loc(x+len,y)+1].character == 0)), see above if condition
           len++; // Skip trailing part of multi-column character
         len++;
       }
-      if ((x+len < usedColumns) && (!image[loc(x+len,y)].c))
+      if ((x+len < usedColumns) && (!image[loc(x+len,y)].character))
         len++; // Adjust for trailing part of multi-column character
 
    	     bool save_fixed_font = fixed_font;
@@ -1465,7 +1483,7 @@ void TEWidget::propagateSize()
 
 void TEWidget::updateImageSize()
 {
-  ca* oldimg = image;
+  Character* oldimg = image;
   int oldlin = lines;
   int oldcol = columns;
   makeImage();
@@ -1477,7 +1495,7 @@ void TEWidget::updateImageSize()
   {
     for (int lin = 0; lin < lins; lin++)
       memcpy((void*)&image[columns*lin],
-             (void*)&oldimg[oldcol*lin],cols*sizeof(ca));
+             (void*)&oldimg[oldcol*lin],cols*sizeof(Character));
     free(oldimg); //FIXME: try new,delete
   }
 
@@ -1517,7 +1535,9 @@ void TEWidget::hideEvent(QHideEvent*)
 
 void TEWidget::scrollChanged(int)
 {
-  emit changedHistoryCursor(scrollbar->value()); //expose
+  _screenWindow->scrollTo( scrollbar->value() );
+  updateImage();
+  //emit changedHistoryCursor(scrollbar->value()); //expose
 }
 
 int TEWidget::scrollPosition()
@@ -1610,9 +1630,13 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
     emit isBusySelecting(true); // Keep it steady...
     // Drag only when the Control key is hold
     bool selected = false;
+    
     // The receiver of the testIsSelected() signal will adjust
     // 'selected' accordingly.
-    emit testIsSelected(pos.x(), pos.y(), selected);
+    //emit testIsSelected(pos.x(), pos.y(), selected);
+    
+    selected = _screenWindow->isSelected(pos.x(),pos.y());
+
     if ((!ctrldrag || ev->modifiers() & Qt::ControlModifier) && selected ) {
       // The user clicked inside selected text
       dragInfo.state = diPending;
@@ -1627,7 +1651,12 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
 
       if (mouse_marks || (ev->modifiers() & Qt::ShiftModifier))
       {
-        emit clearSelectionSignal();
+        _screenWindow->clearSelection();
+
+#warning "Temporary"
+        updateImage();
+
+        //emit clearSelectionSignal();
         pos.ry() += scrollbar->value();
         iPntSel = pntSel = pos;
         actSel = 1; // left mouse button pressed but nothing selected yet.
@@ -1673,10 +1702,23 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
                                      spot->startLine() * font_h,
                                      qMax(spot->startColumn() , spot->endColumn()) * font_h,
                                      (spot->endLine()+1) * font_h );
+
+    setCursor( Qt::PointingHandCursor );
+
+    // display tooltips when mousing over links
+    // TODO: Extend this to work with filter types other than links
+    const QString& tooltip = spot->tooltip();
+    if ( !tooltip.isEmpty() )
+    {
+        QToolTip::showText( mapToGlobal(ev->pos()) , tooltip , this , _mouseOverHotspotArea );
+    }
+
     update( _mouseOverHotspotArea );
   }
   else if ( _mouseOverHotspotArea.isValid() )
   {
+        unsetCursor();
+
         update( _mouseOverHotspotArea );
         // set hotspot area to an invalid rectangle
         _mouseOverHotspotArea = QRect();
@@ -1718,7 +1760,8 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
         ev->y() > dragInfo.start.y() + distance || ev->y() < dragInfo.start.y() - distance) {
       // we've left the drag square, we can start a real drag operation now
       emit isBusySelecting(false); // Ok.. we can breath again.
-      emit clearSelectionSignal();
+      _screenWindow->clearSelection();
+      //emit clearSelectionSignal();
       doDrag();
     }
     return;
@@ -1800,9 +1843,9 @@ void TEWidget::extendSelection( QPoint pos )
     QPoint left = left_not_right ? here : iPntSelCorr;
     i = loc(left.x(),left.y());
     if (i>=0 && i<=image_size) {
-      selClass = charClass(image[i].c);
+      selClass = charClass(image[i].character);
       while ( ((left.x()>0) || (left.y()>0 && (lineProperties[left.y()-1] & LINE_WRAPPED) )) 
-					  && charClass(image[i-1].c) == selClass )
+					  && charClass(image[i-1].character) == selClass )
       { i--; if (left.x()>0) left.rx()--; else {left.rx()=usedColumns-1; left.ry()--;} }
     }
 
@@ -1810,9 +1853,9 @@ void TEWidget::extendSelection( QPoint pos )
     QPoint right = left_not_right ? iPntSelCorr : here;
     i = loc(right.x(),right.y());
     if (i>=0 && i<=image_size) {
-      selClass = charClass(image[i].c);
+      selClass = charClass(image[i].character);
       while( ((right.x()<usedColumns-1) || (right.y()<usedLines-1 && (lineProperties[right.y()] & LINE_WRAPPED) )) 
-					  && charClass(image[i+1].c) == selClass )
+					  && charClass(image[i+1].character) == selClass )
       { i++; if (right.x()<usedColumns-1) right.rx()++; else {right.rx()=0; right.ry()++; } }
     }
 
@@ -1882,10 +1925,10 @@ void TEWidget::extendSelection( QPoint pos )
     {
       i = loc(right.x(),right.y());
       if (i>=0 && i<=image_size) {
-        selClass = charClass(image[i-1].c);
+        selClass = charClass(image[i-1].character);
         if (selClass == ' ')
         {
-          while ( right.x() < usedColumns-1 && charClass(image[i+1].c) == selClass && (right.y()<usedLines-1) && 
+          while ( right.x() < usedColumns-1 && charClass(image[i+1].character) == selClass && (right.y()<usedLines-1) && 
 						  !(lineProperties[right.y()] & LINE_WRAPPED))
           { i++; right.rx()++; }
           if (right.x() < usedColumns-1)
@@ -1912,19 +1955,37 @@ void TEWidget::extendSelection( QPoint pos )
   if (here == ohere) return; // It's not left, it's not right.
 
   if ( actSel < 2 || swapping )
+  {
     if ( column_selection_mode && !line_selection_mode && !word_selection_mode )
-      emit beginSelectionSignal( ohere.x(), ohere.y(), true );
+    {
+       _screenWindow->setSelectionStart( ohere.x() , ohere.y() , true );
+      //emit beginSelectionSignal( ohere.x(), ohere.y(), true );
+    }
     else
-      emit beginSelectionSignal( ohere.x()-1-offset, ohere.y(), false );
+    {
+       _screenWindow->setSelectionStart( ohere.x()-1-offset , ohere.y() , false );
+       //emit beginSelectionSignal( ohere.x()-1-offset, ohere.y(), false );
+    }
+
+  }
 
   actSel = 2; // within selection
   pntSel = here;
   pntSel.ry() += scrollbar->value();
 
   if ( column_selection_mode && !line_selection_mode && !word_selection_mode )
-    emit extendSelectionSignal( here.x(), here.y() );
+  {
+    _screenWindow->setSelectionEnd( here.x() , here.y() );
+    //emit extendSelectionSignal( here.x(), here.y() );
+  }
   else
-    emit extendSelectionSignal( here.x()+offset, here.y() );
+  {
+    _screenWindow->setSelectionEnd( here.x()+offset , here.y() );
+    //emit extendSelectionSignal( here.x()+offset, here.y() );
+  }
+
+#warning "Temporary"
+  updateImage();
 }
 
 void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
@@ -1953,13 +2014,15 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
     if(dragInfo.state == diPending)
     {
       // We had a drag event pending but never confirmed.  Kill selection
-      emit clearSelectionSignal();
+      _screenWindow->clearSelection();
+      //emit clearSelectionSignal();
     }
     else
     {
       if ( actSel > 1 )
       {
-          emit endSelectionSignal(preserve_line_breaks);
+          setSelection( _screenWindow->selectedText(preserve_line_breaks) );
+          //emit endSelectionSignal(preserve_line_breaks);
       }
 
       actSel = 0;
@@ -2004,6 +2067,11 @@ void TEWidget::characterPosition(QPoint widgetPoint,int& line,int& column)
         column = usedColumns-1;
 }
 
+void TEWidget::updateLineProperties()
+{
+    lineProperties = _screenWindow->getLineProperties();    
+}
+
 void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
 {
   if ( ev->button() != Qt::LeftButton) return;
@@ -2024,8 +2092,8 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
     return;
   }
 
-
-  emit clearSelectionSignal();
+  _screenWindow->clearSelection();
+  //emit clearSelectionSignal();
   QPoint bgnSel = pos;
   QPoint endSel = pos;
   int i = loc(bgnSel.x(),bgnSel.y());
@@ -2035,12 +2103,12 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
   word_selection_mode = true;
 
   // find word boundaries...
-  int selClass = charClass(image[i].c);
+  int selClass = charClass(image[i].character);
   {
      // find the start of the word
      int x = bgnSel.x();
      while ( ((x>0) || (bgnSel.y()>0 && (lineProperties[bgnSel.y()-1] & LINE_WRAPPED) )) 
-					 && charClass(image[i-1].c) == selClass )
+					 && charClass(image[i-1].character) == selClass )
      {  
        i--; 
        if (x>0) 
@@ -2053,13 +2121,14 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
      }
 
      bgnSel.setX(x);
-     emit beginSelectionSignal( bgnSel.x(), bgnSel.y(), false );
+     _screenWindow->setSelectionStart( bgnSel.x() , bgnSel.y() , false );
+     //emit beginSelectionSignal( bgnSel.x(), bgnSel.y(), false );
 
      // find the end of the word
      i = loc( endSel.x(), endSel.y() );
      x = endSel.x();
      while( ((x<usedColumns-1) || (endSel.y()<usedLines-1 && (lineProperties[endSel.y()] & LINE_WRAPPED) )) 
-					 && charClass(image[i+1].c) == selClass )
+					 && charClass(image[i+1].character) == selClass )
      { 
          i++; 
          if (x<usedColumns-1) 
@@ -2074,13 +2143,17 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
      endSel.setX(x);
 
      // In word selection mode don't select @ (64) if at end of word.
-     if ( ( QChar( image[i].c ) == '@' ) && ( ( endSel.x() - bgnSel.x() ) > 0 ) )
+     if ( ( QChar( image[i].character ) == '@' ) && ( ( endSel.x() - bgnSel.x() ) > 0 ) )
        endSel.setX( x - 1 );
 
 
      actSel = 2; // within selection
-     emit extendSelectionSignal( endSel.x(), endSel.y() );
-     emit endSelectionSignal(preserve_line_breaks);
+     
+     _screenWindow->setSelectionEnd( endSel.x() , endSel.y() );
+     //emit extendSelectionSignal( endSel.x(), endSel.y() );
+    
+     setSelection( _screenWindow->selectedText(preserve_line_breaks) ); 
+     //emit endSelectionSignal(preserve_line_breaks);
    }
 
   possibleTripleClick=true;
@@ -2116,7 +2189,8 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
   characterPosition(ev->pos(),charLine,charColumn);
   iPntSel = QPoint(charColumn,charLine);
 
-  emit clearSelectionSignal();
+  _screenWindow->clearSelection();
+  //emit clearSelectionSignal();
 
   line_selection_mode = true;
   word_selection_mode = false;
@@ -2129,25 +2203,30 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
   if (cuttobeginningofline) {
     // find word boundary start
     int i = loc(iPntSel.x(),iPntSel.y());
-    int selClass = charClass(image[i].c);
+    int selClass = charClass(image[i].character);
     int x = iPntSel.x();
     while ( ((x>0) || (iPntSel.y()>0 && (lineProperties[iPntSel.y()-1] & LINE_WRAPPED) )) 
-					&& charClass(image[i-1].c) == selClass )
+					&& charClass(image[i-1].character) == selClass )
     { i--; if (x>0) x--; else {x=columns-1; iPntSel.ry()--;} }
 
-    emit beginSelectionSignal( x, iPntSel.y(), false );
+    _screenWindow->setSelectionStart( x , iPntSel.y() , false );
+    //emit beginSelectionSignal( x, iPntSel.y(), false );
     tripleSelBegin = QPoint( x, iPntSel.y() );
   }
   else {
-    emit beginSelectionSignal( 0, iPntSel.y(), false );
+    _screenWindow->setSelectionStart( 0 , iPntSel.y() , false );
+    //emit beginSelectionSignal( 0, iPntSel.y(), false );
     tripleSelBegin = QPoint( 0, iPntSel.y() );
   }
 
   while (iPntSel.y()<lines-1 && (lineProperties[iPntSel.y()] & LINE_WRAPPED) )
     iPntSel.ry()++;
-  emit extendSelectionSignal( columns-1, iPntSel.y() );
+  
+  _screenWindow->setSelectionEnd( columns - 1 , iPntSel.y() );
+  //emit extendSelectionSignal( columns-1, iPntSel.y() );
 
-  emit endSelectionSignal(preserve_line_breaks);
+  setSelection(_screenWindow->selectedText(preserve_line_breaks));
+  //emit endSelectionSignal(preserve_line_breaks);
 
   iPntSel.ry() += scrollbar->value();
 }
@@ -2213,7 +2292,9 @@ void TEWidget::emitSelection(bool useXselection,bool appendReturn)
     text.replace("\n", "\r");
     QKeyEvent e(QEvent::KeyPress, 0, Qt::NoModifier, text);
     emit keyPressedSignal(&e); // expose as a big fat keypress event
-    emit clearSelectionSignal();
+    
+    _screenWindow->clearSelection();
+    //emit clearSelectionSignal();
   }
 }
 
@@ -2250,7 +2331,8 @@ void TEWidget::pasteSelection()
 
 void TEWidget::onClearSelection()
 {
-  emit clearSelectionSignal();
+  _screenWindow->clearSelection();
+  //emit clearSelectionSignal();
 }
 
 /* ------------------------------------------------------------------------- */
@@ -2360,7 +2442,7 @@ void TEWidget::imStartEvent( QIMEvent */*e*/ )
 
 void TEWidget::imComposeEvent( QIMEvent *e )
 {
-  QString text.clear();
+  QString text.characterlear();
   if ( m_imPreeditLength > 0 ) {
     text.fill( '\010', m_imPreeditLength );
   }
@@ -2384,7 +2466,7 @@ void TEWidget::imComposeEvent( QIMEvent *e )
 
 void TEWidget::imEndEvent( QIMEvent *e )
 {
-  QString text.clear();
+  QString text.characterlear();
   if ( m_imPreeditLength > 0 ) {
       text.fill( '\010', m_imPreeditLength );
   }
@@ -2516,10 +2598,10 @@ void TEWidget::clearImage()
   // We initialize image[image_size] too. See makeImage()
   for (int i = 0; i <= image_size; i++)
   {
-    image[i].c = ' ';
-    image[i].f = cacol(CO_DFT,DEFAULT_FORE_COLOR);
-    image[i].b = cacol(CO_DFT,DEFAULT_BACK_COLOR);
-    image[i].r = DEFAULT_RENDITION;
+    image[i].character = ' ';
+    image[i].foregroundColor = CharacterColor(COLOR_SPACE_DEFAULT,DEFAULT_FORE_COLOR);
+    image[i].backgroundColor = CharacterColor(COLOR_SPACE_DEFAULT,DEFAULT_BACK_COLOR);
+    image[i].rendition = DEFAULT_RENDITION;
   }
 }
 
@@ -2580,7 +2662,7 @@ void TEWidget::makeImage()
   
   // We over-commit 1 character so that we can be more relaxed in dealing with
   // certain boundary conditions: image[image_size] is a valid but unused position
-  image = (ca*) malloc((image_size+1)*sizeof(ca));
+  image = (Character*) malloc((image_size+1)*sizeof(Character));
   clearImage();
 }
 

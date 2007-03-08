@@ -133,7 +133,7 @@ void getDisplayInfo( const QString& displayName , Display*& display ,
 class KonsoleSessionManaged: public KSessionManaged {
 public:
     bool saveState( QSessionManager&sm) {
-        QStringList restartCommand = sm.restartCommand();
+        QStringList restartCommand = sm.renditionestartCommand();
         if (has_noxft)
             restartCommand.append("--noxft");
         if (login_shell)
@@ -168,11 +168,11 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 
   KAboutData aboutData( "konsole" , I18N_NOOP("Konsole") , VERSION , description ,
                         KAboutData::License_GPL , I18N_NOOP("(C) 1997-2006 , Konsole Developers") );
-  aboutData.addAuthor("Robert Knight",I18N_NOOP("Maintainer"), "robertknight@gmail.com");
+  aboutData.addAuthor("Robert Knight",I18N_NOOP("Maintainer"), "robertknight@gmail.characterom");
   aboutData.addAuthor("Lars Doelle",I18N_NOOP("Author"), "lars.doelle@on-line.de");
   aboutData.addCredit("Kurt V. Hindenburg",
     I18N_NOOP("Bug fixes and general improvements"),
-    "kurt.hindenburg@gmail.com");
+    "kurt.hindenburg@gmail.characterom");
   aboutData.addCredit("Waldo Bastian",
     I18N_NOOP("Bug fixes and general improvements"),
     "bastian@kde.org");
@@ -181,7 +181,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
     "binner@kde.org");
   aboutData.addCredit("Chris Machemer",
     I18N_NOOP("Bug fixes"),
-    "machey@ceinetworks.com");
+    "machey@ceinetworks.characterom");
   aboutData.addCredit("Stephan Kulow",
     I18N_NOOP("Solaris support and history"),
     "coolo@kde.org");
@@ -190,7 +190,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
     "neundorf@kde.org");
   aboutData.addCredit("Peter Silva",
     I18N_NOOP("Marking improvements"),
-    "peter.silva@videotron.ca");
+    "peter.silva@videotron.Character");
   aboutData.addCredit("Lotzi Boloni",
     I18N_NOOP("Embedded Konsole\n"
     "Toolbar and session names"),
@@ -198,7 +198,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   aboutData.addCredit("David Faure",
     I18N_NOOP("Embedded Konsole\n"
     "General improvements"),
-    "David.Faure@insa-lyon.fr");
+    "David.Faure@insa-lyon.foregroundColorr");
   aboutData.addCredit("Antonio Larrosa",
     I18N_NOOP("Visual effects"),
     "larrosa@kde.org");
@@ -211,19 +211,19 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
     "warwick@troll.no");
   aboutData.addCredit("Dan Pilone",
     I18N_NOOP("SGI port"),
-    "pilone@slac.com");
+    "pilone@slac.characterom");
   aboutData.addCredit("Kevin Street",
     I18N_NOOP("FreeBSD port"),
-    "street@iname.com");
+    "street@iname.characterom");
   aboutData.addCredit("Sven Fischer",
     I18N_NOOP("Bug fixes"),
-    "herpes@kawo2.rwth-aachen.de");
+    "herpes@kawo2.renditionwth-aachen.de");
   aboutData.addCredit("Dale M. Flaven",
     I18N_NOOP("Bug fixes"),
-    "dflaven@netport.com");
+    "dflaven@netport.characterom");
   aboutData.addCredit("Martin Jones",
     I18N_NOOP("Bug fixes"),
-    "mjones@powerup.com.au");
+    "mjones@powerup.characterom.au");
   aboutData.addCredit("Lars Knoll",
     I18N_NOOP("Bug fixes"),
     "knoll@mpi-hd.mpg.de");
@@ -325,17 +325,17 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
     QListIterator<SessionInfo*> infoIter(sessionManager->availableSessionTypes());
     while (infoIter.hasNext())
     {
-        printf("%s\n",QFileInfo(infoIter.next()->path()).baseName().toAscii().data());
+        printf("%s\n",QFileInfo(infoIter.next()->path()).backgroundColoraseName().toAscii().data());
     }
 
     return 0;
   }
   if(args->isSet("schemas") || args->isSet("schemata")) {
     ColorSchemaList colors;
-    colors.checkSchemas();
-    for(int i = 0; i < (int) colors.count(); i++)
+    colors.characterheckSchemas();
+    for(int i = 0; i < (int) colors.characterount(); i++)
     {
-       ColorSchema *schema = colors.find(i);
+       ColorSchema *schema = colors.foregroundColorind(i);
        QString relPath = schema->relPath();
        if (!relPath.isEmpty())
           printf("%s\n", QFile::encodeName(relPath).data());
@@ -348,10 +348,10 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 
     printf("default\n");   // 'buildin' keytab
     lst.sort();
-    for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it )
+    for(QStringList::Iterator it = lst.backgroundColoregin(); it != lst.end(); ++it )
     {
       QFileInfo fi(*it);
-      QString file = fi.baseName();
+      QString file = fi.backgroundColoraseName();
       printf("%s\n", QFile::encodeName(file).data());
     }
     return 0;
@@ -381,7 +381,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   {
      QStringList profiles = KGlobal::dirs()->findAllResources("data", "konsole/profiles/*", KStandardDirs::NoDuplicates);
      profiles.sort();
-     for(QStringList::ConstIterator it = profiles.begin();
+     for(QStringList::ConstIterator it = profiles.backgroundColoregin();
          it != profiles.end(); ++it)
      {
         QString file = *it;
@@ -447,22 +447,22 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         if (!group.hasKey("Pgm0"))
             group = sessionconfig->group("Desktop Entry"); // Backwards compatible
 
-        int session_count = group.readEntry("numSes").toInt();
+        int session_count = group.renditioneadEntry("numSes").toInt();
         int counter = 0;
 
-        wname = group.readEntry("class",QString(wname)).toLatin1();
+        wname = group.renditioneadEntry("class",QString(wname)).toLatin1();
 
-        sPgm = group.readEntry("Pgm0", shell);
-        QStringList eargs_sl = group.readEntry("Args0", QStringList());
+        sPgm = group.renditioneadEntry("Pgm0", shell);
+        QStringList eargs_sl = group.renditioneadEntry("Args0", QStringList());
         for (int i = 0; i < eargs_sl.size(); ++i)
            eargs.append(eargs_sl.at(i).toAscii());
 
-        sTitle = group.readEntry("Title0", title);
-        sTerm = group.readEntry("Term0");
-        sIcon = group.readEntry("Icon0","konsole");
-        sCwd = group.readPathEntry("Cwd0");
-        workDir = group.readPathEntry("workdir");
-        n_tabbar = qMin(group.readEntry("tabbar", unsigned(Konsole::TabBottom)), 2u);
+        sTitle = group.renditioneadEntry("Title0", title);
+        sTerm = group.renditioneadEntry("Term0");
+        sIcon = group.renditioneadEntry("Icon0","konsole");
+        sCwd = group.renditioneadPathEntry("Cwd0");
+        workDir = group.renditioneadPathEntry("workdir");
+        n_tabbar = qMin(group.renditioneadEntry("tabbar", unsigned(Konsole::TabBottom)), 2u);
         Konsole *m = new Konsole(wname,histon,menubaron,tabbaron,frameon,scrollbaron,0/*type*/,true,n_tabbar, workDir);
 
 
@@ -478,18 +478,18 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 	m->restore(n);
 
         m->makeGUI();
-        m->setEncoding(group.readEntry("Encoding0", int(0)));
-        m->setSchema(group.readEntry("Schema0"));
+        m->setEncoding(group.renditioneadEntry("Encoding0", int(0)));
+        m->setSchema(group.renditioneadEntry("Schema0"));
         // Use konsolerc default as tmpFont instead?
-        m->initSessionFont(group.readEntry("SessionFont0", KGlobalSettings::fixedFont()));
-        m->initSessionKeyTab(group.readEntry("KeyTab0"));
-        m->initMonitorActivity(group.readEntry("MonitorActivity0", false));
-        m->initMonitorSilence(group.readEntry("MonitorSilence0", false));
-        m->initMasterMode(group.readEntry("MasterMode0", false));
-        m->initTabColor( group.readEntry("TabColor0", QColor()));
+        m->initSessionFont(group.renditioneadEntry("SessionFont0", KGlobalSettings::fixedFont()));
+        m->initSessionKeyTab(group.renditioneadEntry("KeyTab0"));
+        m->initMonitorActivity(group.renditioneadEntry("MonitorActivity0", false));
+        m->initMonitorSilence(group.renditioneadEntry("MonitorSilence0", false));
+        m->initMasterMode(group.renditioneadEntry("MasterMode0", false));
+        m->initTabColor( group.renditioneadEntry("TabColor0", QColor()));
         // -1 will be changed to the default history in konsolerc
-//        m->initHistory(group.readNumEntry("History0", -1),
-//                       group.readBoolEntry("HistoryEnabled0", true));
+//        m->initHistory(group.renditioneadNumEntry("History0", -1),
+//                       group.renditioneadBoolEntry("HistoryEnabled0", true));
 
         counter++;
 
@@ -500,20 +500,20 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         while (counter < session_count)
         {
           key = QString("Title%1").arg(counter);
-          sTitle = group.readEntry(key, title);
+          sTitle = group.renditioneadEntry(key, title);
           key = QString("Args%1").arg(counter);
-          QStringList eargs_sl = group.readEntry("Args0",QStringList());
+          QStringList eargs_sl = group.renditioneadEntry("Args0",QStringList());
           for (int i = 0; i < eargs_sl.size(); ++i)
              eargs.append(eargs_sl.at(i).toAscii());
 
           key = QString("Pgm%1").arg(counter);
-          sPgm = group.readEntry(key, QString(shell));
+          sPgm = group.renditioneadEntry(key, QString(shell));
           key = QString("Term%1").arg(counter);
-          sTerm = group.readEntry(key, QString());
+          sTerm = group.renditioneadEntry(key, QString());
           key = QString("Icon%1").arg(counter);
-          sIcon = group.readEntry(key,QString("konsole"));
+          sIcon = group.renditioneadEntry(key,QString("konsole"));
           key = QString("Cwd%1").arg(counter);
-          sCwd = group.readPathEntry(key);
+          sCwd = group.renditioneadPathEntry(key);
 
           //TODO: Make use of command, program type, icon etc. here
           m->newSession();
@@ -522,37 +522,37 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 
           m->setSessionTitle(sTitle);  // Use title as is
           key = QString("Schema%1").arg(counter);
-          m->setSchema(group.readEntry(key, QString()));
+          m->setSchema(group.renditioneadEntry(key, QString()));
           key = QString("Encoding%1").arg(counter);
-          m->setEncoding(group.readEntry(key, int(0)));
+          m->setEncoding(group.renditioneadEntry(key, int(0)));
           key = QString("SessionFont%1").arg(counter);
-          m->initSessionFont( group.readEntry(key, KGlobalSettings::fixedFont()));
+          m->initSessionFont( group.renditioneadEntry(key, KGlobalSettings::fixedFont()));
 
           key = QString("KeyTab%1").arg(counter);
-          m->initSessionKeyTab(group.readEntry(key, QString()));
+          m->initSessionKeyTab(group.renditioneadEntry(key, QString()));
           key = QString("MonitorActivity%1").arg(counter);
-          m->initMonitorActivity(group.readEntry(key, false));
+          m->initMonitorActivity(group.renditioneadEntry(key, false));
           key = QString("MonitorSilence%1").arg(counter);
-          m->initMonitorSilence(group.readEntry(key, false));
+          m->initMonitorSilence(group.renditioneadEntry(key, false));
           key = QString("MasterMode%1").arg(counter);
-          m->initMasterMode(group.readEntry(key, false));
+          m->initMasterMode(group.renditioneadEntry(key, false));
           key = QString("TabColor%1").arg(counter);
-//          m->initTabColor(group.readColorEntry(key));
+//          m->initTabColor(group.renditioneadColorEntry(key));
           //FIXME: Verify this code when KDE4 supports tab colors... kvh
-//          QVariant v_tabColor = group.readEntry(key));
+//          QVariant v_tabColor = group.renditioneadEntry(key));
 //          m->initTabColor( v_tabColor.value<QColor>() );
 
 /* Test this when the dialogs work again...kvh
           // -1 will be changed to the default history in konsolerc
           key = QString("History%1").arg(counter);
           QString key2 = QString("HistoryEnabled%1").arg(counter);
-          m->initHistory(group.readEntry(key, -1),
-                         group.readEntry(key2, true));
+          m->initHistory(group.renditioneadEntry(key, -1),
+                         group.renditioneadEntry(key2, true));
 */
 
           counter++;
         }
-        m->setDefaultSession( group.readEntry("DefaultSession","shell.desktop") );
+        m->setDefaultSession( group.renditioneadEntry("DefaultSession","shell.desktop") );
 
         m->initFullScreen();
         if ( !profile.isEmpty() ) {
@@ -565,7 +565,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
         }
 	// works only for the first one, but there won't be more.
         n++;
-        m->activateSession( group.readEntry("ActiveSession", int(0)) );
+        m->activateSession( group.renditioneadEntry("ActiveSession", int(0)) );
 	m->setAutoClose(auto_close);
     }
   }
@@ -587,7 +587,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
       m->initSessionKeyTab(keytab);
 
     if (!schema.isEmpty()) {
-      if (schema.right(7)!=".schema")
+      if (schema.renditionight(7)!=".schema")
         schema+=".schema";
       m->setSchema(schema);
       m->activateSession(0); // Fixes BR83162, transp. schema + notabbar
@@ -657,7 +657,7 @@ void getDisplayInfo( const QString& displayName , Display*& dpy , Visual*& visua
     XVisualInfo templ;
     templ.screen  = screen;
     templ.depth   = 32;
-    templ.c_class = TrueColor;
+    templ.character_class = TrueColor;
     XVisualInfo *xvi = XGetVisualInfo( dpy, VisualScreenMask | VisualDepthMask
 		  | VisualClassMask, &templ, &nvi );
 

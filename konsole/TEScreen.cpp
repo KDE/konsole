@@ -57,7 +57,7 @@
 #endif
 
 
-ca TEScreen::defaultChar = ca(' ',cacol(CO_DFT,DEFAULT_FORE_COLOR),cacol(CO_DFT,DEFAULT_BACK_COLOR),DEFAULT_RENDITION);
+Character TEScreen::defaultChar = Character(' ',CharacterColor(COLOR_SPACE_DEFAULT,DEFAULT_FORE_COLOR),CharacterColor(COLOR_SPACE_DEFAULT,DEFAULT_BACK_COLOR),DEFAULT_RENDITION);
 
 //#define REVERSE_WRAPPED_LINES  // for wrapped line debug
 
@@ -69,7 +69,7 @@ TEScreen::TEScreen(int l, int c)
     columns(c),
     screenLines(new ImageLine[lines+1] ),
     _scrolledLines(0),
-   // image(new ca[(lines+1)*columns]),
+   // image(new Character[(lines+1)*columns]),
     histCursor(0),
     hist(new HistoryScrollNone()),
     cuX(0), cuY(0),
@@ -79,7 +79,7 @@ TEScreen::TEScreen(int l, int c)
     sel_begin(0), sel_TL(0), sel_BR(0),
     sel_busy(false),
     columnmode(false),
-    ef_fg(cacol()), ef_bg(cacol()), ef_re(0),
+    ef_fg(CharacterColor()), ef_bg(CharacterColor()), ef_re(0),
     sa_cuX(0), sa_cuY(0),
     sa_cu_re(0),
     lastPos(-1)
@@ -496,9 +496,9 @@ void TEScreen::setDefaultMargins()
    into RE_BOLD and RE_INTENSIVE.
 */
 
-void TEScreen::reverseRendition(ca* p)
-{ cacol f = p->f; cacol b = p->b;
-  p->f = b; p->b = f; //p->r &= ~RE_TRANSPARENT;
+void TEScreen::reverseRendition(Character* p)
+{ CharacterColor f = p->foregroundColor; CharacterColor b = p->backgroundColor;
+  p->foregroundColor = b; p->backgroundColor = f; //p->r &= ~RE_TRANSPARENT;
 }
 
 void TEScreen::effectiveRendition()
@@ -531,7 +531,7 @@ void TEScreen::effectiveRendition()
     ef_fg.toggleIntensive();
 }
 
-/**ca* TEScreen::image()
+/**Character* TEScreen::image()
 {
 
 }**/
@@ -546,17 +546,17 @@ void TEScreen::effectiveRendition()
 
 */
 
-ca* TEScreen::getCookedImage()
+Character* TEScreen::getCookedImage( int startLine )
 {
 /*kDebug() << "sel_begin=" << sel_begin << "(" << sel_begin/columns << "," << sel_begin%columns << ")"
   << "  sel_TL=" << sel_TL << "(" << sel_TL/columns << "," << sel_TL%columns << ")"
   << "  sel_BR=" << sel_BR << "(" << sel_BR/columns << "," << sel_BR%columns << ")"
   << "  histcursor=" << viewHistoryCursor << endl;*/
 
-  int viewHistoryCursor = histCursor;
+  int viewHistoryCursor = startLine;
 
   int x,y;
-  ca* merged = (ca*)malloc((lines*columns+1)*sizeof(ca));
+  Character* merged = (Character*)malloc((lines*columns+1)*sizeof(Character));
   merged[lines*columns] = defaultChar;
 
   for (y = 0; (y < lines) && (y < (hist->getLines()-viewHistoryCursor)); y++)
@@ -573,7 +573,7 @@ ca* TEScreen::getCookedImage()
         if (hist->isLINE_WRAPPED(y+viewHistoryCursor))
           reverseRendition(&merged[p]);
 #endif
-        if (isSelected(x,y)) {
+        if (isSelected(x,y+viewHistoryCursor)) {
           int p=x + yp;
           reverseRendition(&merged[p]); // for selection
     }
@@ -598,7 +598,7 @@ ca* TEScreen::getCookedImage()
          if (lineProperties[y- hist->getLines() +viewHistoryCursor] & LINE_WRAPPED)
            reverseRendition(&merged[p]);
 #endif
-         if (sel_begin != -1 && isSelected(x,y))
+         if (sel_begin != -1 && isSelected(x,y+viewHistoryCursor))
            reverseRendition(&merged[p]); // for selection
        }
 
@@ -614,13 +614,13 @@ ca* TEScreen::getCookedImage()
 
   int loc_ = loc(cuX, cuY+hist->getLines()-viewHistoryCursor);
   if(getMode(MODE_Cursor) && loc_ < columns*lines)
-    merged[loc(cuX,cuY+(hist->getLines()-viewHistoryCursor))].r|=RE_CURSOR;
+    merged[loc(cuX,cuY+(hist->getLines()-viewHistoryCursor))].rendition|=RE_CURSOR;
   return merged;
 }
 
-QVector<LineProperty> TEScreen::getCookedLineProperties()
+QVector<LineProperty> TEScreen::getCookedLineProperties( int startLine )
 {
-  const int viewHistoryCursor = histCursor;
+  const int viewHistoryCursor = startLine;
 
   QVector<LineProperty> result(lines);
 
@@ -679,12 +679,12 @@ void TEScreen::BackSpace()
 {
   cuX = qMin(columns-1,cuX); // nowrap!
   cuX = qMax(0,cuX-1);
- // if (BS_CLEARS) image[loc(cuX,cuY)].c = ' ';
+ // if (BS_CLEARS) image[loc(cuX,cuY)].character = ' ';
 
   if (screenLines[cuY].size() < cuX+1)
           screenLines[cuY].resize(cuX+1);
 
-  if (BS_CLEARS) screenLines[cuY][cuX].c = ' ';
+  if (BS_CLEARS) screenLines[cuY][cuX].character = ' ';
 }
 
 /*!
@@ -806,12 +806,12 @@ void TEScreen::ShowCharacter(unsigned short c)
     }
   }
 
-  ca& currentChar = screenLines[cuY][cuX];
+  Character& currentChar = screenLines[cuY][cuX];
 
-  currentChar.c = c;
-  currentChar.f = ef_fg;
-  currentChar.b = ef_bg;
-  currentChar.r = ef_re;
+  currentChar.character = c;
+  currentChar.foregroundColor = ef_fg;
+  currentChar.backgroundColor = ef_bg;
+  currentChar.rendition = ef_re;
 
   int i = 0;
 
@@ -824,11 +824,11 @@ void TEScreen::ShowCharacter(unsigned short c)
      if ( screenLines[cuY].size() < cuX + i + 1 )
          screenLines[cuY].resize(cuX+i+1);
      
-     ca& ch = screenLines[cuY][cuX + i];
-     ch.c = 0;
-     ch.f = ef_fg;
-     ch.b = ef_bg;
-     ch.r = ef_re;
+     Character& ch = screenLines[cuY][cuX + i];
+     ch.character = 0;
+     ch.foregroundColor = ef_fg;
+     ch.backgroundColor = ef_bg;
+     ch.rendition = ef_re;
 
      w--;
   }
@@ -841,10 +841,10 @@ void TEScreen::compose(QString /*compose*/)
 /*  if (lastPos == -1)
      return;
      
-  QChar c(image[lastPos].c);
+  QChar c(image[lastPos].character);
   compose.prepend(c);
   //compose.compose(); ### FIXME!
-  image[lastPos].c = compose[0].unicode();*/
+  image[lastPos].character = compose[0].unicode();*/
 }
 
 int TEScreen::scrolledLines() const
@@ -997,18 +997,18 @@ void TEScreen::clearImage(int loca, int loce, char c)
   int topLine = loca/columns;
   int bottomLine = loce/columns;
 
-  ca clearCh(c,cu_fg,cu_bg,DEFAULT_RENDITION);
+  Character clearCh(c,cu_fg,cu_bg,DEFAULT_RENDITION);
   
   //if the character being used to clear the area is the same as the
   //default character, the affected lines can simply be shrunk.
-  bool isDefaultCh = (clearCh == ca());
+  bool isDefaultCh = (clearCh == Character());
 
   for (int y=topLine;y<=bottomLine;y++)
   {
         int endCol = ( y == bottomLine) ? loce%columns : columns-1;
         int startCol = ( y == topLine ) ? loca%columns : 0;
 
-        QVector<ca>& line = screenLines[y];
+        QVector<Character>& line = screenLines[y];
 
         if ( isDefaultCh && endCol == columns-1 )
         {
@@ -1019,7 +1019,7 @@ void TEScreen::clearImage(int loca, int loce, char c)
             if (line.size() < endCol + 1)
                 line.resize(endCol+1);
 
-            ca* data = line.data();
+            Character* data = line.data();
             for (int i=startCol;i<=endCol;i++)
                 data[i]=clearCh;
         }
@@ -1202,8 +1202,8 @@ void TEScreen::resetRendition(int re)
 
 void TEScreen::setDefaultRendition()
 {
-  setForeColor(CO_DFT,DEFAULT_FORE_COLOR);
-  setBackColor(CO_DFT,DEFAULT_BACK_COLOR);
+  setForeColor(COLOR_SPACE_DEFAULT,DEFAULT_FORE_COLOR);
+  setBackColor(COLOR_SPACE_DEFAULT,DEFAULT_BACK_COLOR);
   cu_re   = DEFAULT_RENDITION;
   effectiveRendition();
 }
@@ -1212,7 +1212,7 @@ void TEScreen::setDefaultRendition()
 */
 void TEScreen::setForeColor(int space, int color)
 {
-  cu_fg = cacol(space, color);
+  cu_fg = CharacterColor(space, color);
   effectiveRendition();
 }
 
@@ -1220,7 +1220,7 @@ void TEScreen::setForeColor(int space, int color)
 */
 void TEScreen::setBackColor(int space, int color)
 {
-  cu_bg = cacol(space, color);
+  cu_bg = CharacterColor(space, color);
   effectiveRendition();
 }
 
@@ -1240,7 +1240,7 @@ void TEScreen::clearSelection()
 void TEScreen::setSelectionStart(/*const ScreenCursor& viewCursor ,*/ const int x, const int y, const bool mode)
 {
 //  kDebug(1211) << "setSelBeginXY(" << x << "," << y << ")" << endl;
-  sel_begin = loc(x,y+histCursor) ;
+  sel_begin = loc(x,y); //+histCursor) ;
 
   /* FIXME, HACK to correct for x too far to the right... */
   if (x == columns) sel_begin--;
@@ -1254,7 +1254,7 @@ void TEScreen::setSelectionEnd( const int x, const int y)
 {
 //  kDebug(1211) << "setSelExtentXY(" << x << "," << y << ")" << endl;
   if (sel_begin == -1) return;
-  int l =  loc(x,y + histCursor);
+  int l =  loc(x,y); // + histCursor);
 
   if (l < sel_begin)
   {
@@ -1281,10 +1281,12 @@ bool TEScreen::isSelected( const int x,const int y)
       sel_Left = sel_BR; sel_Right = sel_TL;
     }
     return ( x >= sel_Left % columns ) && ( x <= sel_Right % columns ) &&
-           ( y+histCursor >= sel_TL / columns ) && ( y+histCursor <= sel_BR / columns );
+           ( y >= sel_TL / columns ) && ( y <= sel_BR / columns );
+            //( y+histCursor >= sel_TL / columns ) && ( y+histCursor <= sel_BR / columns );
   }
   else {
-  int pos = loc(x,y+histCursor);
+  //int pos = loc(x,y+histCursor);
+  int pos = loc(x,y);
   return ( pos >= sel_TL && pos <= sel_BR );
   }
 }
@@ -1383,7 +1385,7 @@ void TEScreen::copyLineToStream(int line , int start, int count,
 		//the buffer is static to avoid initialising every element on each call to copyLineToStream
 		//(which is unnecessary since all elements will be overwritten anyway)
 		static const int MAX_CHARS = 1024;
-		static ca characterBuffer[MAX_CHARS];
+		static Character characterBuffer[MAX_CHARS];
 		
 		assert( count < MAX_CHARS );
 
@@ -1419,7 +1421,7 @@ void TEScreen::copyLineToStream(int line , int start, int count,
 
             assert( count >= 0 );
 
-            ca* data = screenLines[line-hist->getLines()].data();
+            Character* data = screenLines[line-hist->getLines()].data();
             int length = screenLines[line-hist->getLines()].count();
 
 			//retrieve line from screen image
@@ -1431,13 +1433,13 @@ void TEScreen::copyLineToStream(int line , int start, int count,
 
 		//do not decode trailing whitespace characters
 		for (int i=count-1 ; i >= 0; i--)
-				if (QChar(characterBuffer[i].c).isSpace())
+				if (QChar(characterBuffer[i].character).isSpace())
 						count--;
 				else
 						break;
 		
 		//decode line and write to text stream	
-		decoder->decodeLine( (ca*) characterBuffer , count, 0 , stream);
+		decoder->decodeLine( (Character*) characterBuffer , count, 0 , stream);
 }
 
 // Method below has been removed because of its reliance on 'histCursor'
@@ -1587,6 +1589,7 @@ void TEScreen::setLineProperty(LineProperty property , bool enable)
 	}
 }
 
+#if 0
 ScreenCursor::ScreenCursor()
 : _cursor(0)
 {
@@ -1611,5 +1614,7 @@ bool ScreenCursor::atEnd() const
 
 bool ScreenCursor::operator==(const ScreenCursor& other) const
 {
-    return other.cursor() == cursor();
+    return other.characterursor() == cursor();
 }
+
+#endif 

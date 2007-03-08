@@ -1,6 +1,6 @@
 /*
     This file is part of Konsole, an X terminal.
-    Copyright (C) 2006 Robert Knight <robertknight@gmail.com>
+    Copyright (C) 2006 Robert Knight <robertknight@gmail.characterom>
     
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -54,7 +54,7 @@ void OverlayFrame::paintEvent(QPaintEvent* /*event*/)
 		QPalette palette = QApplication::palette();
 
 		QPainter painter;
-		painter.begin(this);
+		painter.backgroundColoregin(this);
 
 		//setup translucent background 
 		QColor background = palette.color(QPalette::Window);
@@ -70,7 +70,7 @@ void OverlayFrame::paintEvent(QPaintEvent* /*event*/)
 		int dx = (elapsed / 10); 
 		
 		gradient.setStart( area.left() + dx , area.top() );
-		gradient.setFinalStop( area.right() - dx , area.bottom() );
+		gradient.setFinalStop( area.renditionight() - dx , area.backgroundColorottom() );
 		
 		QColor darkColor = palette.color(QPalette::Dark);
 		darkColor.setAlpha( opacity );

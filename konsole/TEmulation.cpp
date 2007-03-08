@@ -27,7 +27,7 @@
    This class is responsible to scan the escapes sequences of the terminal
    emulation and to map it to their corresponding semantic complements.
    Thus this module knows mainly about decoding escapes sequences and
-   is a stateless device w.r.t. the semantics.
+   is a stateless device w.rendition.t. the semantics.
 
    It is also responsible to refresh the TEWidget by certain rules.
 
@@ -91,7 +91,7 @@
 #include "TEScreen.h"
 #include "TEWidget.h"
 #include "TerminalCharacterDecoder.h"
-
+#include "ScreenWindow.h"
 #include "TEmulation.h"
 
 /* ------------------------------------------------------------------------- */
@@ -106,7 +106,7 @@
 */
 
 TEmulation::TEmulation() :
-  scr(0),
+  currentScreen(0),
   connected(false),
   listenToKeyPress(false),
   m_codec(0),
@@ -118,7 +118,7 @@ TEmulation::TEmulation() :
   //initialize screens with a default size
   screen[0] = new TEScreen(40,80);
   screen[1] = new TEScreen(40,80);
-  scr = screen[0];
+  currentScreen = screen[0];
 
   QObject::connect(&bulk_timer1, SIGNAL(timeout()), this, SLOT(showBulk()) );
   QObject::connect(&bulk_timer2, SIGNAL(timeout()), this, SLOT(showBulk()) );
@@ -126,17 +126,31 @@ TEmulation::TEmulation() :
   setKeymap(0); // Default keymap
 }
 
+ScreenWindow* TEmulation::createWindow()
+{
+    ScreenWindow* window = new ScreenWindow();
+    window->setScreen(currentScreen);
+    _windows << window;
+    return window;
+}
+
 /*!
 */
 
 void TEmulation::connectView(TEWidget* view)
 {
+  #warning "Temporary - ideally the emulation should not be responsible for connecting its updateViews notification to the views themselves."
+  QObject::connect(this,SIGNAL(updateViews()),
+                   view,SLOT(updateImage()));
+  QObject::connect(this,SIGNAL(updateViews()),
+                   view,SLOT(updateLineProperties()));
 
-  QObject::connect(view,SIGNAL(changedHistoryCursor(int)),
-                   this,SLOT(onHistoryCursorChange(int)));
   QObject::connect(view,SIGNAL(keyPressedSignal(QKeyEvent*)),
                    this,SLOT(onKeyPress(QKeyEvent*)));
-  QObject::connect(view,SIGNAL(beginSelectionSignal(const int,const int,const bool)),
+/*
+  QObject::connect(view,SIGNAL(changedHistoryCursor(int)),
+                   this,SLOT(onHistoryCursorChange(int)));
+    QObject::connect(view,SIGNAL(beginSelectionSignal(const int,const int,const bool)),
 		   this,SLOT(onSelectionBegin(const int,const int,const bool)) );
   QObject::connect(view,SIGNAL(extendSelectionSignal(const int,const int)),
 		   this,SLOT(onSelectionExtend(const int,const int)) );
@@ -150,6 +164,7 @@ void TEmulation::connectView(TEWidget* view)
 		   this,SLOT(isBusySelecting(bool)) );
   QObject::connect(view,SIGNAL(testIsSelected(const int, const int, bool &)),
 		   this,SLOT(testIsSelected(const int, const int, bool &)) );
+*/
 }
 
 /*!
@@ -157,6 +172,13 @@ void TEmulation::connectView(TEWidget* view)
 
 TEmulation::~TEmulation()
 {
+  QListIterator<ScreenWindow*> windowIter(_windows);
+
+  while (windowIter.hasNext())
+  {
+    delete windowIter.next();
+  }
+
   delete screen[0];
   delete screen[1];
   delete decoder;
@@ -167,9 +189,9 @@ TEmulation::~TEmulation()
 
 void TEmulation::setScreen(int n)
 {
-  TEScreen *old = scr;
-  scr = screen[n&1];
-  if (scr != old)
+  TEScreen *old = currentScreen;
+  currentScreen = screen[n&1];
+  if (currentScreen != old)
      old->setBusySelecting(false);
 }
 
@@ -239,13 +261,13 @@ void TEmulation::onRcvChar(int c)
   c &= 0xff;
   switch (c)
   {
-    case '\b'      : scr->BackSpace();                 break;
-    case '\t'      : scr->Tabulate();                  break;
-    case '\n'      : scr->NewLine();                   break;
-    case '\r'      : scr->Return();                    break;
+    case '\b'      : currentScreen->BackSpace();                 break;
+    case '\t'      : currentScreen->Tabulate();                  break;
+    case '\n'      : currentScreen->NewLine();                   break;
+    case '\r'      : currentScreen->Return();                    break;
     case 0x07      : emit notifySessionState(NOTIFYBELL);
                      break;
-    default        : scr->ShowCharacter(c);            break;
+    default        : currentScreen->ShowCharacter(c);            break;
   };
 }
 
@@ -262,8 +284,8 @@ void TEmulation::onKeyPress( QKeyEvent* ev )
 {
   if (!listenToKeyPress) return; // someone else gets the keys
   emit notifySessionState(NOTIFYNORMAL);
-  if (scr->getHistCursor() != scr->getHistLines() && !ev->text().isEmpty())
-    scr->setHistCursor(scr->getHistLines());
+  if (currentScreen->getHistCursor() != currentScreen->getHistLines() && !ev->text().isEmpty())
+    currentScreen->setHistCursor(currentScreen->getHistLines());
   if (!ev->text().isEmpty())
   { // A block of text
     // Note that the text is proper unicode.
@@ -355,8 +377,8 @@ void TEmulation::onRcvBlock(const char* text, int length)
 
     for (int j = 0; j < reslen; j++)
     {
-      if (result[j].category() == QChar::Mark_NonSpacing)
-         scr->compose(result.mid(j,1));
+      if (result[j].characterategory() == QChar::Mark_NonSpacing)
+         currentScreen->compose(result.mid(j,1));
       else
          onRcvChar(result[j].unicode());
     }
@@ -370,21 +392,22 @@ void TEmulation::onRcvBlock(const char* text, int length)
 
 // Selection --------------------------------------------------------------- --
 
+#if 0
 void TEmulation::onSelectionBegin(const int x, const int y, const bool columnmode) {
   if (!connected) return;
-  scr->setSelectionStart( x,y,columnmode);
+  currentScreen->setSelectionStart( x,y,columnmode);
   showBulk();
 }
 
 void TEmulation::onSelectionExtend(const int x, const int y) {
   if (!connected) return;
-  scr->setSelectionEnd(x,y);
+  currentScreen->setSelectionEnd(x,y);
   showBulk();
 }
 
 void TEmulation::setSelection(const bool preserve_line_breaks) {
   if (!connected) return;
-  QString t = scr->selectedText(preserve_line_breaks);
+  QString t = currentScreen->selectedText(preserve_line_breaks);
   if (!t.isNull()) 
   {
     QListIterator< TEWidget* > viewIter(_views);
@@ -394,27 +417,28 @@ void TEmulation::setSelection(const bool preserve_line_breaks) {
   }
 }
 
-void TEmulation::isBusySelecting(bool busy)
-{
-  if (!connected) return;
-  scr->setBusySelecting(busy);
-}
-
 void TEmulation::testIsSelected(const int x, const int y, bool &selected)
 {
   if (!connected) return;
-  selected=scr->isSelected(x,y);
+  selected=currentScreen->isSelected(x,y);
 }
 
 void TEmulation::clearSelection() {
   if (!connected) return;
-  scr->clearSelection();
+  currentScreen->clearSelection();
   showBulk();
 }
 
+#endif 
+
+void TEmulation::isBusySelecting(bool busy)
+{
+  if (!connected) return;
+  currentScreen->setBusySelecting(busy);
+}
 void TEmulation::copySelection() {
   if (!connected) return;
-  QString t = scr->selectedText(true);
+  QString t = currentScreen->selectedText(true);
   QApplication::clipboard()->setText(t);
 }
 
@@ -423,13 +447,13 @@ void TEmulation::writeToStream(QTextStream* stream ,
                                int startLine ,
                                int endLine) 
 {
-  scr->writeToStream(stream,decoder,startLine,endLine);
+  currentScreen->writeToStream(stream,decoder,startLine,endLine);
 }
 
 int TEmulation::lines()
 {
     // sum number of lines currently on screen plus number of lines in history
-    return scr->getLines() + scr->getHistLines();
+    return currentScreen->getLines() + currentScreen->getHistLines();
 }
 
 void TEmulation::findTextBegin()
@@ -452,11 +476,11 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool isCaseSens
   if (forward)
   	line = (m_findPos == -1 ? 0 : m_findPos+1);
   else
-	line = (m_findPos == -1? (scr->getHistLines()+scr->getLines() ):m_findPos-1);
+	line = (m_findPos == -1? (currentScreen->getHistLines()+currentScreen->getLines() ):m_findPos-1);
 
   int lastLine = 0;
   if (forward)
-		  lastLine = scr->getHistLines() + scr->getLines();
+		  lastLine = currentScreen->getHistLines() + currentScreen->getLines();
   else
 		  lastLine = 0;
 		
@@ -483,7 +507,7 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool isCaseSens
 	else
 		endLine = qMax(line+delta,lastLine);
 		  
-	scr->writeToStream(&searchStream,&decoder, qMin(endLine,line) , qMax(endLine,line) );
+	currentScreen->writeToStream(&searchStream,&decoder, qMin(endLine,line) , qMax(endLine,line) );
 
 	pos = -1;
 		
@@ -509,13 +533,13 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool isCaseSens
 		//- looks a little painful, but it only has to be done once per search.
 		m_findPos = line + string.left(pos + 1).count(QChar('\n'));
 		
-		if ( m_findPos > scr->getHistLines() )
-				scr->setHistCursor(scr->getHistLines());
+		if ( m_findPos > currentScreen->getHistLines() )
+				currentScreen->setHistCursor(currentScreen->getHistLines());
 		else
-				scr->setHistCursor(m_findPos);
+				currentScreen->setHistCursor(m_findPos);
 
 		//cause target line to be selected
-		//scr->getHistoryLine(m_findPos);
+		//currentScreen->getHistoryLine(m_findPos);
 	
 		//update display to show area of history containing selection	
         showBulk();
@@ -558,13 +582,25 @@ void TEmulation::removeView(TEWidget* widget)
 
 void TEmulation::showBulk()
 {
+    bulk_timer1.stop();
+    bulk_timer2.stop();
+
+
+    emit updateViews();
+}
+
+#if 0
+void TEmulation::showBulk()
+{
   bulk_timer1.stop();
   bulk_timer2.stop();
 
   if (connected)
   {
-    ca* image = scr->getCookedImage(); 
-    QVector<LineProperty> lineProperties = scr->getCookedLineProperties(); 
+#warning "Temporary - getCookedImage to be moved"
+    Character* image = currentScreen->getCookedImage(0); 
+#warning "Temporary - getCookedLineProperties to be moved"
+    QVector<LineProperty> lineProperties = currentScreen->getCookedLineProperties(0); 
     QListIterator<TEWidget*> viewIter(_views);
 
     while (viewIter.hasNext())
@@ -572,34 +608,35 @@ void TEmulation::showBulk()
         TEWidget* view = viewIter.next();
 
         QRect scrollRegion;
-        scrollRegion.setTop( scr->topMargin() );
-        scrollRegion.setBottom( scr->bottomMargin() );
+        scrollRegion.setTop( currentScreen->topMargin() );
+        scrollRegion.setBottom( currentScreen->bottomMargin() );
         scrollRegion.setLeft( 0 );
-        scrollRegion.setRight( scr->getColumns() );
+        scrollRegion.setRight( currentScreen->getColumns() );
 
         // this is an optimisation to avoid the view having to redraw the entire display
         // when the output is simply scrolled by a few lines.
-        // scr->scrolledLines() is a guess as to how much the output has scrolled by since
-        // the last call to scr->resetScrolledLines().  It does not matter if this count is
+        // currentScreen->scrolledLines() is a guess as to how much the output has scrolled by since
+        // the last call to currentScreen->resetScrolledLines().  It does not matter if this count is
         // wrong since the final output from the view will always be the image set with
         // setImage() below.
-        view->scrollImage( - scr->scrolledLines() , scrollRegion );
+        view->scrollImage( - currentScreen->scrolledLines() , scrollRegion );
    
         // update the display 
         view->setLineProperties( lineProperties );
 	    view->setImage(image,
-                  scr->getLines(),
-                  scr->getColumns());     
-        view->setCursorPos(scr->getCursorX(), scr->getCursorY());	// set XIM position
+                  currentScreen->getLines(),
+                  currentScreen->getColumns());     
+        view->setCursorPos(currentScreen->getCursorX(), currentScreen->getCursorY());	// set XIM position
 	    
         //TODO - Update cursor
-        view->setScroll(scr->getHistCursor(),scr->getHistLines()); 
+        view->setScroll(currentScreen->getHistCursor(),currentScreen->getHistLines()); 
     }
   
-    scr->resetScrolledLines();  
+    currentScreen->resetScrolledLines();  
     free(image);
   }
 }
+#endif 
 
 void TEmulation::bulkStart()
 {
@@ -659,14 +696,14 @@ void TEmulation::onImageSizeChange(int lines, int columns)
 
 QSize TEmulation::imageSize()
 {
-  return QSize(scr->getColumns(), scr->getLines());
+  return QSize(currentScreen->getColumns(), currentScreen->getLines());
 }
 
 void TEmulation::onHistoryCursorChange(int cursor)
 {
   if (!connected) return;
    
-  scr->setHistCursor(cursor);
+  currentScreen->setHistCursor(cursor);
 
   bulkStart();
 }

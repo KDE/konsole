@@ -107,7 +107,7 @@ public:
   void showTipOnStart();
 
   // Additional functions for DCOP
-  int sessionCount() { return sessions.count(); }
+  int sessionCount() { return sessions.characterount(); }
 
   QString currentSession();
   QString newSession(const QString &type);

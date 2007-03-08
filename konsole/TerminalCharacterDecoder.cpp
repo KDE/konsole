@@ -1,7 +1,7 @@
 /*
     This file is part of Konsole, an X terminal.
     
-    Copyright (C) 2006 by Robert Knight <robertknight@gmail.com>
+    Copyright (C) 2006 by Robert Knight <robertknight@gmail.characterom>
     
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -39,7 +39,7 @@ bool PlainTextDecoder::trailingWhitespace() const
     return _includeTrailingWhitespace;
 }
 
-void PlainTextDecoder::decodeLine(const ca* const characters, int count, LineProperty /*properties*/,
+void PlainTextDecoder::decodeLine(const Character* const characters, int count, LineProperty /*properties*/,
 							 QTextStream* output)
 {
 	//TODO should we ignore or respect the LINE_WRAPPED line property?
@@ -58,7 +58,7 @@ void PlainTextDecoder::decodeLine(const ca* const characters, int count, LinePro
     {
         for (int i = count-1 ; i >= 0 ; i--)
         {
-            if ( characters[i].c != ' '  )
+            if ( characters[i].character != ' '  )
                 break;
             else
                 outputCount--;
@@ -67,7 +67,7 @@ void PlainTextDecoder::decodeLine(const ca* const characters, int count, LinePro
 
 	for (int i=0;i<outputCount;i++)
 	{
-		plainText.append( QChar(characters[i].c) );
+		plainText.append( QChar(characters[i].character) );
 	}
 
 	*output << plainText;
@@ -80,7 +80,7 @@ HTMLDecoder::HTMLDecoder() :
 }
 
 //TODO: Support for LineProperty (mainly double width , double height)
-void HTMLDecoder::decodeLine(const ca* const characters, int count, LineProperty /*properties*/,
+void HTMLDecoder::decodeLine(const Character* const characters, int count, LineProperty /*properties*/,
 							QTextStream* output)
 {
 	QString text;
@@ -88,27 +88,27 @@ void HTMLDecoder::decodeLine(const ca* const characters, int count, LineProperty
 	bool innerSpanOpen = false;
 	int spaceCount = 0;
 	UINT8 lastRendition = DEFAULT_RENDITION;
-	cacol lastForeColor;
-	cacol lastBackColor;
+	CharacterColor lastForeColor;
+	CharacterColor lastBackColor;
 	
 	//open monospace span
 	openSpan(text,"font-family:monospace");
 	
 	for (int i=0;i<count;i++)
 	{
-		QChar ch(characters[i].c);
+		QChar ch(characters[i].character);
 
 		//check if appearance of character is different from previous char
-		if ( characters[i].r != lastRendition  ||
-		     characters[i].f != lastForeColor  ||
-			 characters[i].b != lastBackColor )
+		if ( characters[i].rendition != lastRendition  ||
+		     characters[i].foregroundColor != lastForeColor  ||
+			 characters[i].backgroundColor != lastBackColor )
 		{
 			if ( innerSpanOpen )
 					closeSpan(text);
 
-			lastRendition = characters[i].r;
-			lastForeColor = characters[i].f;
-			lastBackColor = characters[i].b;
+			lastRendition = characters[i].rendition;
+			lastForeColor = characters[i].foregroundColor;
+			lastBackColor = characters[i].backgroundColor;
 			
 			//build up style string
 			QString style;

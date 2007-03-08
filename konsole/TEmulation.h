@@ -36,6 +36,8 @@
 #include "TEScreen.h"
 #include "TEWidget.h"
 
+class ScreenWindow;
+
 enum { NOTIFYNORMAL=0, NOTIFYBELL=1, NOTIFYACTIVITY=2, NOTIFYSILENCE=3 };
 
 /**
@@ -76,12 +78,8 @@ public:
    */
   virtual void removeView(TEWidget* widget);
 
-  /**
-   * Updates all views associated with this emulation immediately.
-   * Usually the emulation will send a new image to the associated views when the content changes,
-   * automatically.  
-   */
-  //virtual void updateViews();
+  //TODO Document me
+  ScreenWindow* createWindow();
 
 public:
   /** Returns the size of the screen image which the emulation produces */
@@ -153,20 +151,20 @@ public Q_SLOTS: // signals incoming from TEWidget
   virtual void onKeyPress(QKeyEvent*);
  
   /** Clear the current selection */
-  virtual void clearSelection();
+  //virtual void clearSelection();
 
   /** Copy the current selection to the clipboard */
   virtual void copySelection();
 
   /** Begin a new selection at column @p x, row @p y. TODO:  What does columnmode do? */
-  virtual void onSelectionBegin(const int x, const int y, const bool columnmode);
+  //virtual void onSelectionBegin(const int x, const int y, const bool columnmode);
   /** Extend the current selection to column @p x, row @p y. */
-  virtual void onSelectionExtend(const int x, const int y);
+  //virtual void onSelectionExtend(const int x, const int y);
   /** Calls the TEWidget::setSelection() method of each associated view with the currently selected text */
-  virtual void setSelection(const bool preserve_line_breaks);
+  //virtual void setSelection(const bool preserve_line_breaks);
    
   virtual void isBusySelecting(bool busy);
-  virtual void testIsSelected(const int x, const int y, bool &selected);
+  //virtual void testIsSelected(const int x, const int y, bool &selected);
 
 public Q_SLOTS: // signals incoming from data source
 
@@ -185,6 +183,8 @@ Q_SIGNALS:
   void notifySessionState(int state);
   void zmodemDetected();
   void changeTabTextColor(int color);
+
+  void updateViews();
 
 public:
   /** 
@@ -219,11 +219,11 @@ public:
 protected:
 
   QList<TEWidget*> _views; //QPointer<TEWidget> > _views;
-  QHash<TEWidget*,ScreenCursor> _cursors;
+  QList<ScreenWindow*> _windows;
 
   //QPointer<TEWidget> gui;
   
-  TEScreen* scr;         // referes to one `screen'
+  TEScreen* currentScreen;         // referes to one `screen'
   TEScreen* screen[2];   // 0 = primary, 1 = alternate
   void setScreen(int n); // set `scr' to `screen[n]'
 
@@ -250,7 +250,6 @@ private Q_SLOTS:
 private:
 
   void connectView(TEWidget* widget);
-  //void connectGUI();
 
   void bulkStart();
 
@@ -260,6 +259,8 @@ private:
   QTimer bulk_timer2;
   
   int    m_findPos;
+
+
 };
 
 #endif // ifndef EMULATION_H

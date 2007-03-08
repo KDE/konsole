@@ -64,6 +64,7 @@ set(konsole_KDEINIT_SRCS
         KonsoleBookmarkHandler.cpp
         KonsoleMainWindow.cpp
         ProcessInfo.cpp
+        ScreenWindow.cpp
         SessionController.cpp
         SessionList.cpp
         SessionListWidget.cpp
@@ -85,6 +86,8 @@ set(konsole_KDEINIT_SRCS
         schema.cpp
         start.cpp
    ) 
+
+set_source_files_properties(${konsole_KDEINIT_SRCS} PROPERTIES COMPILE_FLAGS "-Wuninitialized")
 
 kde4_automoc(${konsole_KDEINIT_SRCS})
 
@@ -126,7 +129,10 @@ set(konsolepart_PART_SRCS
    KeyTrans.cpp 
    TerminalCharacterDecoder.cpp
    SessionManager.cpp 
+   ScreenWindow.cpp
    Filter.cpp ) 
+
+set_source_files_properties(${konsolepart_PART_SRCS} PROPERTIES COMPILE_FLAGS -Wuninitialized)
 
 kde4_automoc(${konsolepart_PART_SRCS})
 

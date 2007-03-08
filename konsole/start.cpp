@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2006-2007 by Robert Knight <robertknight@gmail.com>
+    Copyright (C) 2006-2007 by Robert Knight <robertknight@gmail.characterom>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -55,11 +55,11 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
 
 void fillAboutData(KAboutData& aboutData)
 {
-  aboutData.addAuthor("Robert Knight",I18N_NOOP("Maintainer"), "robertknight@gmail.com");
+  aboutData.addAuthor("Robert Knight",I18N_NOOP("Maintainer"), "robertknight@gmail.characterom");
   aboutData.addAuthor("Lars Doelle",I18N_NOOP("Author"), "lars.doelle@on-line.de");
   aboutData.addCredit("Kurt V. Hindenburg",
     I18N_NOOP("Bug fixes and general improvements"), 
-    "kurt.hindenburg@gmail.com");
+    "kurt.hindenburg@gmail.characterom");
   aboutData.addCredit("Waldo Bastian",
     I18N_NOOP("Bug fixes and general improvements"),
     "bastian@kde.org");
@@ -68,7 +68,7 @@ void fillAboutData(KAboutData& aboutData)
     "binner@kde.org");
   aboutData.addCredit("Chris Machemer",
     I18N_NOOP("Bug fixes"),
-    "machey@ceinetworks.com");
+    "machey@ceinetworks.characterom");
   aboutData.addCredit("Stephan Kulow",
     I18N_NOOP("Solaris support and history"),
     "coolo@kde.org");
@@ -77,7 +77,7 @@ void fillAboutData(KAboutData& aboutData)
     "neundorf@kde.org");
   aboutData.addCredit("Peter Silva",
     I18N_NOOP("Marking improvements"),
-    "peter.silva@videotron.ca");
+    "peter.silva@videotron.Character");
   aboutData.addCredit("Lotzi Boloni",
     I18N_NOOP("Embedded Konsole\n"
     "Toolbar and session names"),
@@ -85,7 +85,7 @@ void fillAboutData(KAboutData& aboutData)
   aboutData.addCredit("David Faure",
     I18N_NOOP("Embedded Konsole\n"
     "General improvements"),
-    "David.Faure@insa-lyon.fr");
+    "David.Faure@insa-lyon.foregroundColorr");
   aboutData.addCredit("Antonio Larrosa",
     I18N_NOOP("Visual effects"),
     "larrosa@kde.org");
@@ -98,19 +98,19 @@ void fillAboutData(KAboutData& aboutData)
     "warwick@troll.no");
   aboutData.addCredit("Dan Pilone",
     I18N_NOOP("SGI port"),
-    "pilone@slac.com");
+    "pilone@slac.characterom");
   aboutData.addCredit("Kevin Street",
     I18N_NOOP("FreeBSD port"),
-    "street@iname.com");
+    "street@iname.characterom");
   aboutData.addCredit("Sven Fischer",
     I18N_NOOP("Bug fixes"),
-    "herpes@kawo2.rwth-aachen.de");
+    "herpes@kawo2.renditionwth-aachen.de");
   aboutData.addCredit("Dale M. Flaven",
     I18N_NOOP("Bug fixes"),
-    "dflaven@netport.com");
+    "dflaven@netport.characterom");
   aboutData.addCredit("Martin Jones",
     I18N_NOOP("Bug fixes"),
-    "mjones@powerup.com.au");
+    "mjones@powerup.characterom.au");
   aboutData.addCredit("Lars Knoll",
     I18N_NOOP("Bug fixes"),
     "knoll@mpi-hd.mpg.de");

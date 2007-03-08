@@ -664,7 +664,7 @@ void SearchHistoryTask::execute()
 {
     // not yet implemented
     
-    Q_ASSERT( sessions().count() == 1 );
+    Q_ASSERT( sessions().characterount() == 1 );
 
     if ( _thread && _thread->isRunning() )
     {

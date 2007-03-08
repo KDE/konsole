@@ -63,6 +63,7 @@ namespace Filter
     class HotSpot;
 };
 class FilterChain;
+class ScreenWindow;
 
 /**
  * A widget which displays output from a terminal emulation and sends input keypresses and mouse activity
@@ -128,9 +129,7 @@ public:
     void emitText(QString text);
 
     void scrollImage(int lines,const QRect& region);
-    void setImage(const ca* const newimg, int lines, int columns);
-    void setLineProperties(QVector<LineProperty> properties) { lineProperties=properties; }
-
+    
     void setCursorPos(const int curx, const int cury);
 
     int  Lines()   { return lines;   }
@@ -188,7 +187,13 @@ public:
 
     void setRim(int rim) { rimX=rim; rimY=rim; }
 
+    void setScreenWindow( ScreenWindow* window );
+    ScreenWindow* screenWindow() const;
+
 public Q_SLOTS:
+
+    void updateImage(); //setImage(const Character* const newimg, int lines, int columns);
+    void updateLineProperties(); //setLineProperties(QVector<LineProperty> properties) { lineProperties=properties; }
 
     void setSelectionEnd();
     void copyClipboard();
@@ -250,13 +255,13 @@ protected:
 	//The painter's font and other attributes needed to draw the string
 	//should be set before drawTextFixed is called.
     void drawTextFixed(QPainter &paint, int x, int y,
-                       QString& str, const ca *attr);
+                       QString& str, const Character *attr);
 
 	//draws a string of line-drawing characters
-	void drawLineCharString(QPainter& painter, int x, int y, const QString& str, const ca* attributes);
+	void drawLineCharString(QPainter& painter, int x, int y, const QString& str, const Character* attributes);
 
     void drawAttrStr(QPainter &paint, const QRect& rect,
-                     QString& str, const ca *attr, bool pm, bool clear);
+                     QString& str, const Character *attr, bool pm, bool clear);
     void paintEvent( QPaintEvent * );
 
     void paintContents(QPainter &paint, const QRect &rect);
@@ -314,6 +319,8 @@ private:
 
 //    QChar (*fontMap)(QChar); // possible vt100 font extension
 
+    ScreenWindow* _screenWindow;
+
     bool allowBell;
 
     QGridLayout* gridLayout;
@@ -339,7 +346,7 @@ private:
     
     int contentHeight;
     int contentWidth;
-    ca *image; // [lines][columns]
+    Character *image; // [lines][columns]
                // only the area [usedLines][usedColumns] in the image contains valid data
 
     int image_size;

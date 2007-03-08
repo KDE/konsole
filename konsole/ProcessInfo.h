@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2007 by Robert Knight <robertknight@gmail.com>
+    Copyright (C) 2007 by Robert Knight <robertknight@gmail.characterom>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -64,7 +64,7 @@
  *
  *      if ( ok ) qDebug() << "parent process - " << parentPid;
  *
- *      int foregroundPid = info.foregroundPid(&ok);
+ *      int foregroundPid = info.foregroundColororegroundPid(&ok);
  *
  *      if ( ok ) qDebug() << "foreground process - " << foregroundPid;
  *   }

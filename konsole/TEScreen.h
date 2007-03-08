@@ -45,7 +45,6 @@ struct ScreenParm
 };
 
 class TerminalCharacterDecoder;
-class ScreenCursor;
 
 /**
     \brief An image of characters with associated attributes.
@@ -190,14 +189,14 @@ public: // these are all `Screen' operations
     void resizeImage(int new_lines, int new_columns);
     
     // Return current on screen image.  Result array is [getLines()][getColumns()]
-    ca*  	  getCookedImage();
+    Character*  	  getCookedImage( int line );
 
     /** 
      * Returns the additional attributes associated with lines in the image.
      * The most important attribute is LINE_WRAPPED which specifies that the line is wrapped,
      * other attributes control the size of characters in the line.
      */
-    QVector<LineProperty> getCookedLineProperties();
+    QVector<LineProperty> getCookedLineProperties( int line );
 	
 
     /*! return the number of lines. */
@@ -331,7 +330,7 @@ private: // helper
 	//start - the first column on the line to copy
 	//count - the number of characters on the line to copy
 	//stream - the output stream to write the text into
-	//decoder - a decoder which coverts terminal characters (an ca array) into text
+	//decoder - a decoder which coverts terminal characters (an Character array) into text
 	void copyLineToStream(int line, int start, int count, QTextStream* stream,
 						  TerminalCharacterDecoder* decoder);
 	
@@ -353,7 +352,7 @@ private: // helper
     void initTabStops();
 
     void effectiveRendition();
-    void reverseRendition(ca* p);
+    void reverseRendition(Character* p);
 
     /*
        The state of the screen is more complex as one would
@@ -371,7 +370,7 @@ private: // helper
     int columns;
 
 
-    typedef QVector<ca> ImageLine;      // [0..columns]
+    typedef QVector<Character> ImageLine;      // [0..characterolumns]
     ImageLine*          screenLines;    // [lines]
 
     int _scrolledLines;
@@ -390,8 +389,8 @@ private: // helper
 
     // cursor color and rendition info
 
-    cacol cu_fg;      // foreground
-    cacol cu_bg;      // background
+    CharacterColor cu_fg;      // foreground
+    CharacterColor cu_bg;      // background
     UINT8 cu_re;      // rendition
 
     // margins ----------------
@@ -417,8 +416,8 @@ private: // helper
 
     // effective colors and rendition ------------
 
-    cacol ef_fg;      // These are derived from
-    cacol ef_bg;      // the cu_* variables above
+    CharacterColor ef_fg;      // These are derived from
+    CharacterColor ef_bg;      // the cu_* variables above
     UINT8 ef_re;      // to speed up operation
 
     //
@@ -433,8 +432,8 @@ private: // helper
     // rendition info
 
     UINT8 sa_cu_re;
-    cacol sa_cu_fg;
-    cacol sa_cu_bg;
+    CharacterColor sa_cu_fg;
+    CharacterColor sa_cu_bg;
     
     // last position where we added a character
     int lastPos;
@@ -443,9 +442,10 @@ private: // helper
 
     ScreenParm saveParm;
 
-    static ca defaultChar;
+    static Character defaultChar;
 };
 
+#if 0 
 class ScreenCursor
 {
 friend class TEScreen;
@@ -467,7 +467,8 @@ private:
 
 inline uint qHash(const ScreenCursor& cursor)
 {
-    return qHash(cursor.cursor());
+    return qHash(cursor.characterursor());
 }
+#endif 
 
 #endif // TESCREEN_H

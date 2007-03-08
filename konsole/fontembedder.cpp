@@ -36,7 +36,7 @@ static Q_UINT32 charVal(QChar val)
 
 static Q_UINT32 readGlyphLine(QTextStream& input)
 {
-    QString line = input.readLine();
+    QString line = input.renditioneadLine();
     while (line.length() < 5)
         line += ' ';
 
@@ -78,7 +78,7 @@ int main(int argc, char **argv)
 
     while (!input.atEnd())
     {
-        QString line = input.readLine();
+        QString line = input.renditioneadLine();
         line = line.trimmed();
         if (line.isEmpty())
             continue; //Skip empty lines

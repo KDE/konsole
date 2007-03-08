@@ -1,7 +1,7 @@
 /*
     This file is part of the Konsole Terminal.
     
-    Copyright (C) 2006 Robert Knight <robertknight@gmail.com>
+    Copyright (C) 2006 Robert Knight <robertknight@gmail.characterom>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

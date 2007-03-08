@@ -1,7 +1,7 @@
 /*
     This file is part of Konsole, an X terminal.
     
-    Copyright (C) 2006 by Robert Knight <robertknight@gmail.com>
+    Copyright (C) 2006 by Robert Knight <robertknight@gmail.characterom>
     
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
@@ -48,7 +48,7 @@ public:
 	 * @param properties Additional properties which affect all characters in the line
 	 * @param output The output stream which receives the decoded text
 	 */
-	virtual void decodeLine(const ca* const characters, 
+	virtual void decodeLine(const Character* const characters, 
 							int count,
 							LineProperty properties, 
 							QTextStream* output) = 0; 
@@ -75,7 +75,7 @@ public:
      */
     bool trailingWhitespace() const;
 
-	virtual void decodeLine(const ca* const characters,
+	virtual void decodeLine(const Character* const characters,
 							int count,
 							LineProperty properties,	
 							QTextStream* output);
@@ -100,7 +100,7 @@ public:
 	 */
 	void setColorTable( const ColorEntry* table );
 		
-	virtual void decodeLine(const ca* const characters,
+	virtual void decodeLine(const Character* const characters,
 							int count,
 							LineProperty properties,
 							QTextStream* output);	

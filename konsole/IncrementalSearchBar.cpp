@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2006-2007 by Robert Knight <robertknight@gmail.com>
+    Copyright (C) 2006-2007 by Robert Knight <robertknight@gmail.characterom>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -71,7 +71,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     findNext->setObjectName("find-next-button");
     findNext->setText(i18n("Next"));
     findNext->setAutoRaise(true);
-    findNext->setIcon( KIcon("next") );
+    findNext->setIcon( KIcon("find-next") );
     findNext->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     findNext->setToolTip("Find the next match for the current search phrase");
     connect( findNext , SIGNAL(clicked()) , this , SIGNAL(findNextClicked()) );
@@ -80,7 +80,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     findPrev->setObjectName("find-previous-button");
     findPrev->setText(i18n("Previous"));
     findPrev->setAutoRaise(true);
-    findPrev->setIcon( KIcon("previous") );
+    findPrev->setIcon( KIcon("find-previous") );
     findPrev->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     findPrev->setToolTip("Find the previous match for the current search phrase");
     connect( findPrev , SIGNAL(clicked()) , this , SIGNAL(findPreviousClicked()) );

@@ -66,7 +66,7 @@ struct ColorEntry
 #define DEFAULT_BACK_COLOR 1
 
 //a standard set of colors using black text on a white background.
-//defined in TEWidget.cpp
+//defined in TEWidget.characterpp
 
 static const ColorEntry base_color_table[TABLE_COLORS] =
 // The following are almost IBM standard color codes, with some slight
@@ -103,7 +103,7 @@ static const int LINE_WRAPPED 	 	= (1 << 0);
 static const int LINE_DOUBLEWIDTH  	= (1 << 1);
 static const int LINE_DOUBLEHEIGHT	= (1 << 2);
 
-/* cacol is a union of the various color spaces.
+/* CharacterColor is a union of the various color spaces.
 
    Assignment is as follows:
 
@@ -119,26 +119,26 @@ static const int LINE_DOUBLEHEIGHT	= (1 << 2);
    default foreground and default background colour.
 */
 
-#define CO_UND 0
-#define CO_DFT 1
-#define CO_SYS 2
-#define CO_256 3
-#define CO_RGB 4
+#define COLOR_SPACE_UNDEFINED   0
+#define COLOR_SPACE_DEFAULT     1
+#define COLOR_SPACE_SYSTEM      2
+#define COLOR_SPACE_256         3
+#define COLOR_SPACE_RGB         4
 
-class cacol
+class CharacterColor
 {
 public:
-  cacol() : t(0), u(0), v(0), w(0) {}
-  cacol(UINT8 ty, int co) : t(ty), u(0), v(0), w(0)
+  CharacterColor() : t(0), u(0), v(0), w(0) {}
+  CharacterColor(UINT8 ty, int co) : t(ty), u(0), v(0), w(0)
   {
-    if (CO_DFT == t) {
+    if (COLOR_SPACE_DEFAULT == t) {
       u = co & 1;
-    } else if (CO_SYS == t) {
+    } else if (COLOR_SPACE_SYSTEM == t) {
       u = co & 7;
       v = (co >> 3) & 1;
-    } else if (CO_256 == t) {
+    } else if (COLOR_SPACE_256 == t) {
       u = co & 255;
-    } else if (CO_RGB == t) {
+    } else if (COLOR_SPACE_RGB == t) {
       u = co >> 16;
       v = co >> 8;
       w = co;
@@ -147,11 +147,11 @@ public:
     // Doesn't work with gcc 3.3.4
     switch (t)
     {
-      case CO_UND:                                break;
-      case CO_DFT: u = co&  1;                    break;
-      case CO_SYS: u = co&  7; v = (co>>3)&1;     break;
-      case CO_256: u = co&255;                    break;
-      case CO_RGB: u = co>>16; v = co>>8; w = co; break;
+      case COLOR_SPACE_UNDEFINED:                                break;
+      case COLOR_SPACE_DEFAULT: u = co&  1;                    break;
+      case COLOR_SPACE_SYSTEM: u = co&  7; v = (co>>3)&1;     break;
+      case COLOR_SPACE_256: u = co&255;                    break;
+      case COLOR_SPACE_RGB: u = co>>16; v = co>>8; w = co; break;
       default    : t = 0;                         break;
     }
 #endif
@@ -162,16 +162,16 @@ public:
   UINT8 w; // ... express ourselfs here, properly.
   void toggleIntensive(); // Hack or helper?
   QColor color(const ColorEntry* base) const;
-  friend bool operator == (const cacol& a, const cacol& b);
-  friend bool operator != (const cacol& a, const cacol& b);
+  friend bool operator == (const CharacterColor& a, const CharacterColor& b);
+  friend bool operator != (const CharacterColor& a, const CharacterColor& b);
 };
 
-inline bool operator == (const cacol& a, const cacol& b)
+inline bool operator == (const CharacterColor& a, const CharacterColor& b)
 { 
   return *reinterpret_cast<const Q_UINT32*>(&a.t) == *reinterpret_cast<const Q_UINT32*>(&b.t);
 }
 
-inline bool operator != (const cacol& a, const cacol& b)
+inline bool operator != (const CharacterColor& a, const CharacterColor& b)
 {
   return *reinterpret_cast<const Q_UINT32*>(&a.t) != *reinterpret_cast<const Q_UINT32*>(&b.t);
 }
@@ -191,43 +191,43 @@ inline const QColor color256(UINT8 u, const ColorEntry* base)
   int gray = u*10+8; return QColor(gray,gray,gray);
 }
 
-inline QColor cacol::color(const ColorEntry* base) const
+inline QColor CharacterColor::color(const ColorEntry* base) const
 {
   switch (t)
   {
-    case CO_DFT: return base[u+0+(v?BASE_COLORS:0)].color;
-    case CO_SYS: return base[u+2+(v?BASE_COLORS:0)].color;
-    case CO_256: return color256(u,base);
-    case CO_RGB: return QColor(u,v,w);
+    case COLOR_SPACE_DEFAULT: return base[u+0+(v?BASE_COLORS:0)].color;
+    case COLOR_SPACE_SYSTEM: return base[u+2+(v?BASE_COLORS:0)].color;
+    case COLOR_SPACE_256: return color256(u,base);
+    case COLOR_SPACE_RGB: return QColor(u,v,w);
     default    : return QColor(255,0,0); // diagnostic catch all
   }
 }
 
-inline void cacol::toggleIntensive()
+inline void CharacterColor::toggleIntensive()
 {
-  if (t == CO_SYS || t == CO_DFT)
+  if (t == COLOR_SPACE_SYSTEM || t == COLOR_SPACE_DEFAULT)
   {
     v = !v;
   }
 }
 
-/*! \class ca
+/*! \class Character
  *  \brief a character with rendition attributes.
 */
 
-class ca
+class Character
 {
 public:
-  inline ca(UINT16 _c = ' ',
-            cacol  _f = cacol(CO_DFT,DEFAULT_FORE_COLOR),
-            cacol  _b = cacol(CO_DFT,DEFAULT_BACK_COLOR),
+  inline Character(UINT16 _c = ' ',
+            CharacterColor  _f = CharacterColor(COLOR_SPACE_DEFAULT,DEFAULT_FORE_COLOR),
+            CharacterColor  _b = CharacterColor(COLOR_SPACE_DEFAULT,DEFAULT_BACK_COLOR),
             UINT8  _r = DEFAULT_RENDITION)
-       : c(_c), r(_r), f(_f), b(_b) {}
+       : character(_c), rendition(_r), foregroundColor(_f), backgroundColor(_b) {}
 public:
-  UINT16 c; // character
-  UINT8  r; // rendition
-  cacol  f; // foreground color
-  cacol  b; // background color
+  UINT16 character; // character
+  UINT8  rendition; // rendition
+  CharacterColor  foregroundColor; // foreground color
+  CharacterColor  backgroundColor; // background color
 public:
   //FIXME: following a hack to cope with various color spaces
   // it brings the rendition pipeline further out of balance,
@@ -235,30 +235,40 @@ public:
   bool   isTransparent(const ColorEntry* base) const;
   bool   isBold(const ColorEntry* base) const;
 public:
-  friend bool operator == (const ca& a, const ca& b);
-  friend bool operator != (const ca& a, const ca& b);
+  friend bool operator == (const Character& a, const Character& b);
+  friend bool operator != (const Character& a, const Character& b);
 };
 
-inline bool operator == (const ca& a, const ca& b)
+inline bool operator == (const Character& a, const Character& b)
 { 
-  return a.c == b.c && a.r == b.r && a.f == b.f && a.b == b.b;
+  return a.character == b.character && 
+         a.rendition == b.rendition && 
+         a.foregroundColor == b.foregroundColor && 
+         a.backgroundColor == b.backgroundColor;
 }
 
-inline bool operator != (const ca& a, const ca& b)
+inline bool operator != (const Character& a, const Character& b)
 {
-  return a.c != b.c || a.r != b.r || a.f != b.f || a.b != b.b;
+  return    a.character != b.character || 
+            a.rendition != b.rendition || 
+            a.foregroundColor != b.foregroundColor || 
+            a.backgroundColor != b.backgroundColor;
 }
 
-inline bool ca::isTransparent(const ColorEntry* base) const
+inline bool Character::isTransparent(const ColorEntry* base) const
 {
-  return ((b.t == CO_DFT) && base[b.u+0+(b.v?BASE_COLORS:0)].transparent)
-      || ((b.t == CO_SYS) && base[b.u+2+(b.v?BASE_COLORS:0)].transparent);
+  return ((backgroundColor.t == COLOR_SPACE_DEFAULT) && 
+          base[backgroundColor.u+0+(backgroundColor.v?BASE_COLORS:0)].transparent)
+      || ((backgroundColor.t == COLOR_SPACE_SYSTEM) && 
+          base[backgroundColor.u+2+(backgroundColor.v?BASE_COLORS:0)].transparent);
 }
 
-inline bool ca::isBold(const ColorEntry* base) const
+inline bool Character::isBold(const ColorEntry* base) const
 {
-  return (b.t == CO_DFT) && base[b.u+0+(b.v?BASE_COLORS:0)].bold
-      || (b.t == CO_SYS) && base[b.u+2+(b.v?BASE_COLORS:0)].bold;
+  return (backgroundColor.t == COLOR_SPACE_DEFAULT) && 
+            base[backgroundColor.u+0+(backgroundColor.v?BASE_COLORS:0)].bold
+      || (backgroundColor.t == COLOR_SPACE_SYSTEM) && 
+            base[backgroundColor.u+2+(backgroundColor.v?BASE_COLORS:0)].bold;
 }
 
 #endif // TECOMMON_H
