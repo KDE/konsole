@@ -113,13 +113,13 @@ TabbedViewContainer::TabbedViewContainer(QObject* parent) :
 
     _newSessionButton = new QToolButton(_tabWidget);
     _newSessionButton->setAutoRaise(true);
-    _newSessionButton->setIcon( KIcon("tab_new") );
+    _newSessionButton->setIcon( KIcon("tab-new") );
     _newSessionButton->setText( i18n("New") );
     _newSessionButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     _newSessionButton->setPopupMode(QToolButton::MenuButtonPopup);
 
     QToolButton* closeButton = new QToolButton(_tabWidget);
-    closeButton->setIcon( KIcon("tab_remove") );
+    closeButton->setIcon( KIcon("tab-remove") );
     closeButton->setAutoRaise(true);
     connect( closeButton , SIGNAL(clicked()) , this , SLOT(closeTabClicked()) );
 

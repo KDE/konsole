@@ -87,7 +87,7 @@ void KonsoleMainWindow::setupActions()
     newTabAction->setText( i18n("New &Tab") );
 
     QAction* newWindowAction = collection->addAction("new-window"); 
-    newWindowAction->setIcon( KIcon("window_new") );
+    newWindowAction->setIcon( KIcon("window-new") );
     newWindowAction->setText( i18n("New &Window") );
 
     connect( newTabAction , SIGNAL(triggered()) , this , SLOT(newTab()) );

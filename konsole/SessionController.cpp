@@ -154,20 +154,20 @@ void SessionController::setupActions()
 
     // Close Session
     action = collection->addAction("close-session"); 
-    action->setIcon( KIcon("fileclose") );
+    action->setIcon( KIcon("window-close") ); // FIXME: Not the best icon for this
     action->setText( i18n("&Close Tab") );
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_W) );
     connect( action , SIGNAL(triggered()) , this , SLOT(closeSession()) );
     
     // Copy and Paste
     action = collection->addAction("copy");
-    action->setIcon( KIcon("editcopy") );
+    action->setIcon( KIcon("edit-copy") );
     action->setText( i18n("&Copy") );
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_C) );
     connect( action , SIGNAL(triggered()) , this , SLOT(copy()) );
     
     action = collection->addAction("paste");
-    action->setIcon( KIcon("editpaste") );
+    action->setIcon( KIcon("edit-paste") );
     action->setText( i18n("&Paste") );
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_V) );
     connect( action , SIGNAL(triggered()) , this , SLOT(paste()) );
@@ -179,6 +179,7 @@ void SessionController::setupActions()
     
     action = collection->addAction("clear-and-reset");
     action->setText( i18n("Clear and Reset") );
+    action->setIcon( KIcon("history-clear") );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearAndReset()) );
 
     // Monitor
@@ -196,17 +197,18 @@ void SessionController::setupActions()
     // History
     _searchToggleAction = new KAction(i18n("Search History"),this);
     _searchToggleAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_F) );
+    _searchToggleAction->setIcon( KIcon("edit-find") );
     action = collection->addAction("search-history" , _searchToggleAction);
     connect( action , SIGNAL(triggered()) , this , SLOT(searchHistory()) );
     
     action = collection->addAction("find-next");
-    action->setIcon( KIcon("next") );
+    action->setIcon( KIcon("find-next") );
     action->setText( i18n("Find Next") );
     action->setShortcut( QKeySequence(Qt::Key_F3) );
     connect( action , SIGNAL(triggered()) , this , SLOT(findNextInHistory()) );
     
     action = collection->addAction("find-previous");
-    action->setIcon( KIcon("previous") );
+    action->setIcon( KIcon("find-previous") );
     action->setText( i18n("Find Previous") );
     action->setShortcut( QKeySequence(Qt::SHIFT + Qt::Key_F3) );
     connect( action , SIGNAL(triggered()) , this , SLOT(findPreviousInHistory()) );
@@ -217,6 +219,7 @@ void SessionController::setupActions()
    
     action = collection->addAction("history-options");
     action->setText( i18n("History Options") );
+    action->setIcon( KIcon("configure") );
     connect( action , SIGNAL(triggered()) , this , SLOT(historyOptions()) );
 
     action = collection->addAction("clear-history");
@@ -292,15 +295,16 @@ void SessionController::clear()
 {
     TEmulation* emulation = _session->getEmulation();
 
+#warning "Find a way to reimplement clearing the selection - this is now done in ScreenWindow not TEmulation"
     emulation->clearEntireScreen();
-    emulation->clearSelection();
+    //emulation->clearSelection();
 }
 void SessionController::clearAndReset()
 {
     TEmulation* emulation = _session->getEmulation();
 
     emulation->reset();
-    emulation->clearSelection();
+    //emulation->clearSelection();
 }
 void SessionController::searchClosed()
 {
