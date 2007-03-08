@@ -360,12 +360,12 @@ void konsolePart::makeGUI()
      m_fontsizes = new KActionMenu( KIcon( "text" ), i18n( "Font" ), this );
      settingsActions->addAction( m_fontsizes->objectName(), m_fontsizes );
      QAction *action = settingsActions->addAction( "enlarge_font" );
-     action->setIcon( KIcon( "viewmag+" ) );
+     action->setIcon( KIcon( "zoom-in" ) );
      action->setText( i18n( "&Enlarge Font" ) );
      connect(action, SIGNAL(triggered(bool)), SLOT(biggerFont()));
      m_fontsizes->addAction( action );
      action = settingsActions->addAction( "shrink_font" );
-     action->setIcon( KIcon( "viewmag-" ) );
+     action->setIcon( KIcon( "zoom-out" ) );
      action->setText( i18n( "&Shrink Font" ) );
      connect(action, SIGNAL(triggered(bool)), SLOT(smallerFont()));
      m_fontsizes->addAction( action );
@@ -377,7 +377,7 @@ void konsolePart::makeGUI()
      m_options->addAction(m_fontsizes);
 
      // encoding menu, start with default checked !
-     selectSetEncoding = new KSelectAction( KIcon("charset" ), i18n( "&Encoding" ), this );
+     selectSetEncoding = new KSelectAction( KIcon("character-set" ), i18n( "&Encoding" ), this );
      settingsActions->addAction( "set_encoding", selectSetEncoding );
      connect(selectSetEncoding, SIGNAL(triggered(bool)), this, SLOT(slotSetEncoding()));
      QStringList list = KGlobal::charsets()->descriptiveEncodingNames();
@@ -459,7 +459,7 @@ void konsolePart::makeGUI()
      // Save Settings
      m_options->addSeparator();
      QAction *saveSettings = actions->addAction("save_default");
-     saveSettings->setIcon(KIcon("filesave"));
+     saveSettings->setIcon(KIcon("document-save"));
      saveSettings->setText(i18n("&Save as Default"));
      connect(saveSettings, SIGNAL(triggered(bool)), SLOT(saveProperties()));
      m_options->addAction( saveSettings );
@@ -475,13 +475,13 @@ void konsolePart::makeGUI()
   m_popupMenu->addAction( selectionEnd );
 
   QAction *copyClipboard = actions->addAction("edit_copy");
-  copyClipboard->setIcon(KIcon("editcopy"));
+  copyClipboard->setIcon(KIcon("edit-copy"));
   copyClipboard->setText(i18n("&Copy"));
   connect(copyClipboard, SIGNAL(triggered(bool)), te, SLOT(copyClipboard()));
   m_popupMenu->addAction( copyClipboard );
 
   QAction *pasteClipboard = actions->addAction("edit_paste");
-  pasteClipboard->setIcon(KIcon("editpaste"));
+  pasteClipboard->setIcon(KIcon("edit-paste"));
   pasteClipboard->setText(i18n("&Paste"));
   connect(pasteClipboard, SIGNAL(triggered(bool)), te, SLOT(pasteClipboard()));
   m_popupMenu->addAction( pasteClipboard );
@@ -499,7 +499,7 @@ void konsolePart::makeGUI()
   }
 
   QAction *closeSession = actions->addAction("close_session");
-  closeSession->setIcon(KIcon("fileclose"));
+  closeSession->setIcon(KIcon("window-close"));
   closeSession->setText(i18n("&Close Terminal Emulator"));
   connect(closeSession, SIGNAL(triggered(bool)), SLOT(closeCurrentSession()));
   m_popupMenu->addAction( closeSession );

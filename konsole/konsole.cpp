@@ -630,7 +630,7 @@ void Konsole::makeGUI()
       // encoding menu, start with default checked !
       selectSetEncoding = new KSelectAction( i18n( "&Encoding" ), this );
       actions->addAction( "set_encoding", selectSetEncoding );
-      selectSetEncoding->setIcon( KIcon( "charset" ) );
+      selectSetEncoding->setIcon( KIcon( "character-set" ) );
       connect( selectSetEncoding, SIGNAL( triggered() ), this, SLOT(slotSetEncoding()) );
 
       QStringList list = KGlobal::charsets()->descriptiveEncodingNames();
@@ -673,7 +673,7 @@ void Konsole::makeGUI()
       m_options->addSeparator();
 
       QAction *save_settings = actions->addAction("save_default");
-      save_settings->setIcon(KIcon("filesave"));
+      save_settings->setIcon(KIcon("document-save"));
       save_settings->setText(i18n("&Save as Default"));
       connect(save_settings, SIGNAL(triggered(bool) ), SLOT(slotSaveSettings()));
       m_options->addAction( save_settings );
@@ -896,7 +896,7 @@ void Konsole::makeTabWidget()
     m_newSessionButton = new QToolButton( tabwidget );
     m_newSessionButton->setPopupMode( QToolButton::MenuButtonPopup );
     m_newSessionButton->setToolTip(i18n("Click for new standard session\nClick and hold for session menu"));
-    m_newSessionButton->setIcon( SmallIcon( "tab_new" ) );
+    m_newSessionButton->setIcon( SmallIcon( "tab-new" ) );
     m_newSessionButton->setAutoRaise( true );
     m_newSessionButton->adjustSize();
     m_newSessionButton->setMenu( m_tabbarSessionsCommands );
@@ -906,7 +906,7 @@ void Konsole::makeTabWidget()
 
     m_removeSessionButton = new QToolButton( tabwidget );
     m_removeSessionButton->setToolTip(i18n("Close the current session"));
-    m_removeSessionButton->setIcon( KIcon( "tab_remove" ) );
+    m_removeSessionButton->setIcon( KIcon( "tab-remove" ) );
     m_removeSessionButton->adjustSize();
     m_removeSessionButton->setAutoRaise(true);
     m_removeSessionButton->setEnabled(false);
@@ -1022,10 +1022,10 @@ void Konsole::makeBasicGUI()
 
   m_shortcuts = new KActionCollection( (QObject*) this);
 
-  m_copyClipboard = new KAction(KIcon("editcopy"), i18n("&Copy"), this);
+  m_copyClipboard = new KAction(KIcon("edit-copy"), i18n("&Copy"), this);
   m_shortcuts->addAction("edit_copy", m_copyClipboard);
   connect(m_copyClipboard, SIGNAL(triggered(bool) ), SLOT(slotCopyClipboard()));
-  m_pasteClipboard = new KAction(KIcon("editpaste"), i18n("&Paste"), this);
+  m_pasteClipboard = new KAction(KIcon("edit-paste"), i18n("&Paste"), this);
   m_shortcuts->addAction("edit_paste", m_pasteClipboard);
   connect(m_pasteClipboard, SIGNAL(triggered(bool) ), SLOT(slotPasteClipboard()));
   m_pasteClipboard->setShortcut( QKeySequence(Qt::SHIFT+Qt::Key_Insert) );
@@ -1040,32 +1040,32 @@ void Konsole::makeBasicGUI()
   m_resetClearTerminal = new KAction(i18n("&Reset && Clear Terminal"), this);
   m_shortcuts->addAction("reset_clear_terminal", m_resetClearTerminal);
   connect(m_resetClearTerminal, SIGNAL(triggered(bool) ), SLOT(slotResetClearTerminal()));
-  m_findHistory = new KAction(KIcon("find"), i18n("&Find in History..."), this);
+  m_findHistory = new KAction(KIcon("edit-find"), i18n("&Find in History..."), this);
   m_shortcuts->addAction("find_history", m_findHistory);
   connect(m_findHistory, SIGNAL(triggered(bool) ), SLOT(slotFindHistory()));
   m_findHistory->setEnabled(b_histEnabled);
 
-  m_findNext = new KAction(KIcon("next"), i18n("Find &Next"), this);
+  m_findNext = new KAction(KIcon("find-next"), i18n("Find &Next"), this);
   m_shortcuts->addAction("find_next", m_findNext);
   connect(m_findNext, SIGNAL(triggered(bool)), SLOT(slotFindNext()));
   m_findNext->setEnabled(b_histEnabled);
 
-  m_findPrevious = new KAction(KIcon("previous"), i18n("Find Pre&vious"), this);
+  m_findPrevious = new KAction(KIcon("find-previous"), i18n("Find Pre&vious"), this);
   m_shortcuts->addAction("find_previous", m_findPrevious);
   connect(m_findPrevious, SIGNAL(triggered(bool)), SLOT(slotFindPrevious()));
   m_findPrevious->setEnabled( b_histEnabled );
 
-  m_saveHistory = new KAction(KIcon("filesaveas"), i18n("S&ave History As..."), this);
+  m_saveHistory = new KAction(KIcon("document-save-as"), i18n("S&ave History As..."), this);
   m_shortcuts->addAction("save_history", m_saveHistory);
   connect(m_saveHistory, SIGNAL(triggered(bool)), SLOT(slotShowSaveHistoryDialog()));
   m_saveHistory->setEnabled(b_histEnabled );
 
-  m_clearHistory = new KAction(KIcon("history_clear"), i18n("Clear &History"), this);
+  m_clearHistory = new KAction(KIcon("history-clear"), i18n("Clear &History"), this);
   m_shortcuts->addAction("clear_history", m_clearHistory);
   connect(m_clearHistory, SIGNAL(triggered(bool)), SLOT(slotClearHistory()));
   m_clearHistory->setEnabled(b_histEnabled);
 
-  m_clearAllSessionHistories = new KAction(KIcon("history_clear"), i18n("Clear All H&istories"), this);
+  m_clearAllSessionHistories = new KAction(KIcon("history-clear"), i18n("Clear All H&istories"), this);
   m_shortcuts->addAction("clear_all_histories", m_clearAllSessionHistories);
   connect(m_clearAllSessionHistories, SIGNAL(triggered(bool)), SLOT(slotClearAllSessionHistories()));
 
@@ -1101,10 +1101,10 @@ void Konsole::makeBasicGUI()
   m_shortcuts->addAction( "send_input_to_all_sessions", masterMode );
   connect(masterMode, SIGNAL(triggered(bool) ), SLOT( slotToggleMasterMode() ));
 
-  showMenubar = new KToggleAction(KIcon("showmenu"),  i18n( "&Show Menu Bar" ), this);
+  showMenubar = new KToggleAction(KIcon("show-menu"),  i18n( "&Show Menu Bar" ), this);
   m_shortcuts->addAction( "show_menubar", showMenubar );
   connect(showMenubar, SIGNAL(triggered(bool) ), SLOT( slotToggleMenubar() ));
-  showMenubar->setCheckedState( KGuiItem( i18n("&Hide Menu Bar"), "showmenu", QString(), QString() ) );
+  showMenubar->setCheckedState( KGuiItem( i18n("&Hide Menu Bar"), "show-menu", QString(), QString() ) );
 
   m_fullscreen = KStandardAction::fullScreen(0, 0, this, this);
   m_shortcuts->addAction( m_fullscreen->objectName(), m_fullscreen );
@@ -1113,7 +1113,7 @@ void Konsole::makeBasicGUI()
 
   m_saveProfile = new KAction( i18n( "Save Sessions &Profile..." ), this );
   m_shortcuts->addAction( "save_sessions_profile", m_saveProfile );
-  m_saveProfile->setIcon( KIcon("filesaveas") );
+  m_saveProfile->setIcon( KIcon("document-save-as") );
   connect( m_saveProfile, SIGNAL( triggered() ), this, SLOT( slotSaveSessionsProfile() ) );
 
   //help menu
@@ -1122,13 +1122,13 @@ void Konsole::makeBasicGUI()
      // Don't steal F1 (handbook) accel (esp. since it not visible in
      // "Configure Shortcuts").
 
-  m_closeSession = new KAction(KIcon("fileclose"), i18n("C&lose Session"), this);
+  m_closeSession = new KAction(KIcon("window-close"), i18n("C&lose Session"), this);
   m_shortcuts->addAction("close_session", m_closeSession);
   connect(m_closeSession, SIGNAL(triggered(bool) ), SLOT( confirmCloseCurrentSession() ));
-  m_print = new KAction(KIcon("fileprint"), i18n("&Print Screen..."), this);
+  m_print = new KAction(KIcon("document-print"), i18n("&Print Screen..."), this);
   m_shortcuts->addAction("file_print", m_print);
   connect(m_print, SIGNAL(triggered(bool) ), SLOT( slotPrint() ));
-  m_quit = new KAction(KIcon("exit"), i18n("&Quit"), this);
+  m_quit = new KAction(KIcon("application-exit"), i18n("&Quit"), this);
   m_shortcuts->addAction("file_quit", m_quit);
   connect(m_quit, SIGNAL(triggered(bool) ), SLOT( close() ));
 
@@ -2989,7 +2989,7 @@ void Konsole::confirmCloseCurrentSession( TESession* _se )
 
   	if (KMessageBox::warningContinueCancel(this,
         	i18n("Are you sure you want to close this session?"),
-        	i18n("Close Confirmation"), KGuiItem(i18n("C&lose Session"),"tab_remove"),
+        	i18n("Close Confirmation"), KGuiItem(i18n("C&lose Session"),"tab-remove"),
         	"ConfirmCloseSession")==KMessageBox::Continue)
    	{
 		_se->closeSession();
@@ -4413,7 +4413,7 @@ void Konsole::setupTabContextMenu()
             SLOT( activateSession( int ) ) );
 
    m_tabPopupMenu->addSeparator();
-   m_tabPopupMenu->addAction( SmallIcon("fileclose"), i18n("C&lose Session"), this,
+   m_tabPopupMenu->addAction( SmallIcon("window-close"), i18n("C&lose Session"), this,
                           SLOT(slotTabCloseSession()) );
 
 }
