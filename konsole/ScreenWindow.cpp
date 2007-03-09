@@ -24,15 +24,16 @@
 #include "TEScreen.h"
 #include "ScreenWindow.h"
 
-ScreenWindow::ScreenWindow()
-    : _currentLine(0)
+ScreenWindow::ScreenWindow(QObject* parent)
+    : QObject(parent)
+    , _currentLine(0)
     , _trackOutput(true)
 {
 }
 
 void ScreenWindow::setScreen(TEScreen* screen)
 {
-    Q_ASSERT( _screen );
+    Q_ASSERT( screen );
 
     _screen = screen;
 }
@@ -136,3 +137,14 @@ void ScreenWindow::resetScrollCount()
     _scrollCount = 0;
 }
 
+void ScreenWindow::notifyOutputChanged()
+{
+    if ( _trackOutput )
+    {
+        scrollTo( _screen->getHistLines() );
+    }
+
+    emit outputChanged();
+}
+
+#include "ScreenWindow.moc"

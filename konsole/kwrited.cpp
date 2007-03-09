@@ -96,7 +96,7 @@ void KWrited::block_in(int fd)
   if (len <= 0)
      return;
 
-  insertPlainText( QString::fromLocal8Bit( buf, len ).renditionemove('\r') );
+  insertPlainText( QString::fromLocal8Bit( buf, len ).remove('\r') );
   show();
   raise();
 }

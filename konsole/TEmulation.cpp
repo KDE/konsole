@@ -131,6 +131,9 @@ ScreenWindow* TEmulation::createWindow()
     ScreenWindow* window = new ScreenWindow();
     window->setScreen(currentScreen);
     _windows << window;
+
+    connect(this , SIGNAL(updateViews()),
+            window , SLOT(notifyOutputChanged()) );
     return window;
 }
 
@@ -140,10 +143,10 @@ ScreenWindow* TEmulation::createWindow()
 void TEmulation::connectView(TEWidget* view)
 {
   #warning "Temporary - ideally the emulation should not be responsible for connecting its updateViews notification to the views themselves."
-  QObject::connect(this,SIGNAL(updateViews()),
-                   view,SLOT(updateImage()));
-  QObject::connect(this,SIGNAL(updateViews()),
-                   view,SLOT(updateLineProperties()));
+  //QObject::connect(this,SIGNAL(updateViews()),
+  //                 view,SLOT(updateImage()));
+  //QObject::connect(this,SIGNAL(updateViews()),
+  //                 view,SLOT(updateLineProperties()));
 
   QObject::connect(view,SIGNAL(keyPressedSignal(QKeyEvent*)),
                    this,SLOT(onKeyPress(QKeyEvent*)));

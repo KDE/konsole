@@ -29,11 +29,28 @@ class TEScreen;
  * Provides a window onto a section of a terminal screen.
  * This window can then be rendered by a terminal display widget ( TEWidget ).
  *
+ * To use the screen window, create a new ScreenWindow() instance and associated it with 
+ * a terminal screen using setScreen().
+ * Use the scrollTo() method to scroll the window up and down on the screen.
+ * Call the getImage() method to retrieve the character image which is currently visible in the window.
+ *
+ * setTrackOutput() controls whether the window moves to the bottom of the associated screen when new
+ * lines are added to it.
+ *
+ * Whenever the output from the underlying screen is changed, the notifyOutputChanged() slot should
+ * be called.  This in turn will update the window's position and emit the outputChanged() signal
+ * if necessary.
  */
-class ScreenWindow //: public QObject
+class ScreenWindow : public QObject
 {
+Q_OBJECT
+
 public:
-    ScreenWindow();
+    /** 
+     * Constructs a new screen window with the given parent.
+     * A screen must be specified by calling setScreen() before calling getImage() or getLineProperties()
+     */
+    ScreenWindow(QObject* parent = 0);
 
     /** Sets the screen which this window looks onto */
     void setScreen(TEScreen* screen);
@@ -48,6 +65,11 @@ public:
      * copies the characters from the appropriate part of the screen into the buffer.
      * It is the caller's responsibility to free the buffer when they have finished using
      * it.
+     *
+     * TODO: Fix this and use new[] / delete[] to allocate/free this buffer.
+     *
+     * The buffer is allocated using malloc() and must therefore be freed using the free() 
+     * call as opposed to delete[]
      */
     Character* getImage();
     /**
@@ -106,11 +128,14 @@ public:
     /** 
      * Specifies whether the window should automatically move to the bottom
      * of the screen when new output is added.
+     *
+     * If this is set to true, the window will be moved to the bottom of the associated screen ( see 
+     * screen() ) when the notifyOutputChanged() method is called.
      */
     void setTrackOutput(bool trackOutput);
     /** 
      * Returns whether the window automatically moves to the bottom of the screen as
-     * new output is added
+     * new output is added.  See setTrackOutput()
      */
     bool trackOutput() const;
 
@@ -121,11 +146,19 @@ public:
      */
     QString selectedText( bool preserveLineBreaks ) const;
 
-//signals:
-    /**
-     * Emitted when the number of lines or columns in the associated screen changes
+public slots:
+    /** 
+     * Notifies the window that the contents of the associated terminal screen have changed.
+     * This moves the window to the bottom of the screen if trackOutput() is true and causes
+     * the outputChanged() signal to be emitted.
      */
-  //  void screenSizeChanged();
+    void notifyOutputChanged();
+
+signals:
+    /**
+     * Emitted when the contents of the associated terminal screen ( see screen() ) changes. 
+     */
+    void outputChanged();
 
 private:
     TEScreen* _screen; // see setScreen() , screen()

@@ -138,7 +138,17 @@ ScreenWindow* TEWidget::screenWindow() const
 }
 void TEWidget::setScreenWindow(ScreenWindow* window)
 {
+    // disconnect existing screen window if any
+    if ( _screenWindow )
+    {
+        disconnect( _screenWindow , 0 , this , 0 );
+    }
+
     _screenWindow = window;
+
+#warning "The order here is not specified - does it matter whether updateImage or updateLineProperties comes first?"
+    connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateImage()) );
+    connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateLineProperties()) );
 }
 
 void TEWidget::setDefaultBackColor(const QColor& color)
@@ -1536,6 +1546,11 @@ void TEWidget::hideEvent(QHideEvent*)
 void TEWidget::scrollChanged(int)
 {
   _screenWindow->scrollTo( scrollbar->value() );
+
+  const bool atEndOfOutput = (scrollbar->value() == scrollbar->maximum());
+
+  _screenWindow->setTrackOutput( atEndOfOutput );
+
   updateImage();
   //emit changedHistoryCursor(scrollbar->value()); //expose
 }

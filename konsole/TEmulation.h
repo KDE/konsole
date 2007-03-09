@@ -78,7 +78,11 @@ public:
    */
   virtual void removeView(TEWidget* widget);
 
-  //TODO Document me
+  /**
+   * Creates a new window onto the output from this emulation.  The contents
+   * of the window are then rendered by views which are set to use this window using the
+   * TEWidget::setScreenWindow() method.
+   */
   ScreenWindow* createWindow();
 
 public:
