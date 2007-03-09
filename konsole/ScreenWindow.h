@@ -160,6 +160,11 @@ signals:
      */
     void outputChanged();
 
+    /**
+     * Emitted when the selection is changed.
+     */
+    void selectionChanged();
+
 private:
     TEScreen* _screen; // see setScreen() , screen()
 

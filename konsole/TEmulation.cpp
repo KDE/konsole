@@ -132,6 +132,10 @@ ScreenWindow* TEmulation::createWindow()
     window->setScreen(currentScreen);
     _windows << window;
 
+    //FIXME - Used delayed updates when the selection changes
+    connect(window , SIGNAL(selectionChanged()),
+            this , SIGNAL(updateViews()));
+
     connect(this , SIGNAL(updateViews()),
             window , SLOT(notifyOutputChanged()) );
     return window;

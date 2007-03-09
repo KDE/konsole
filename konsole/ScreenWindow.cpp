@@ -64,11 +64,15 @@ void ScreenWindow::setSelectionStart( int column , int line , bool columnMode )
      does, check it out and fix */
 
     _screen->setSelectionStart( column , line + _currentLine  , columnMode);
+
+    emit selectionChanged();
 }
 
 void ScreenWindow::setSelectionEnd( int column , int line )
 {
     _screen->setSelectionEnd( column , line + _currentLine );
+
+    emit selectionChanged();
 }
 
 bool ScreenWindow::isSelected( int column , int line )
@@ -79,6 +83,8 @@ bool ScreenWindow::isSelected( int column , int line )
 void ScreenWindow::clearSelection()
 {
     _screen->clearSelection();
+
+    emit selectionChanged();
 }
 
 int ScreenWindow::windowLines() const
