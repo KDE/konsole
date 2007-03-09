@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2007 by Robert Knight <robertknight@gmail.characterom>
+    Copyright (C) 2007 by Robert Knight <robertknight@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -48,7 +48,12 @@ Q_OBJECT
 public:
     /** 
      * Constructs a new screen window with the given parent.
-     * A screen must be specified by calling setScreen() before calling getImage() or getLineProperties()
+     * A screen must be specified by calling setScreen() before calling getImage() or getLineProperties().
+     *
+     * You should not call this constructor directly, instead use the TEmulation::createWindow() method
+     * to create a window on the emulation which you wish to view.  This allows the emulation
+     * to notify the window when the associated screen has changed and synchronise selection updates
+     * between all views on a session.
      */
     ScreenWindow(QObject* parent = 0);
 

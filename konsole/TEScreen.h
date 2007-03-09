@@ -370,7 +370,7 @@ private: // helper
     int columns;
 
 
-    typedef QVector<Character> ImageLine;      // [0..characterolumns]
+    typedef QVector<Character> ImageLine;      // [0..columns]
     ImageLine*          screenLines;    // [lines]
 
     int _scrolledLines;

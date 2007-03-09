@@ -168,11 +168,11 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 
   KAboutData aboutData( "konsole" , I18N_NOOP("Konsole") , VERSION , description ,
                         KAboutData::License_GPL , I18N_NOOP("(C) 1997-2006 , Konsole Developers") );
-  aboutData.addAuthor("Robert Knight",I18N_NOOP("Maintainer"), "robertknight@gmail.characterom");
+  aboutData.addAuthor("Robert Knight",I18N_NOOP("Maintainer"), "robertknight@gmail.com");
   aboutData.addAuthor("Lars Doelle",I18N_NOOP("Author"), "lars.doelle@on-line.de");
   aboutData.addCredit("Kurt V. Hindenburg",
     I18N_NOOP("Bug fixes and general improvements"),
-    "kurt.hindenburg@gmail.characterom");
+    "kurt.hindenburg@gmail.com");
   aboutData.addCredit("Waldo Bastian",
     I18N_NOOP("Bug fixes and general improvements"),
     "bastian@kde.org");
@@ -181,7 +181,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
     "binner@kde.org");
   aboutData.addCredit("Chris Machemer",
     I18N_NOOP("Bug fixes"),
-    "machey@ceinetworks.characterom");
+    "machey@ceinetworks.com");
   aboutData.addCredit("Stephan Kulow",
     I18N_NOOP("Solaris support and history"),
     "coolo@kde.org");
@@ -211,19 +211,19 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
     "warwick@troll.no");
   aboutData.addCredit("Dan Pilone",
     I18N_NOOP("SGI port"),
-    "pilone@slac.characterom");
+    "pilone@slac.com");
   aboutData.addCredit("Kevin Street",
     I18N_NOOP("FreeBSD port"),
-    "street@iname.characterom");
+    "street@iname.com");
   aboutData.addCredit("Sven Fischer",
     I18N_NOOP("Bug fixes"),
     "herpes@kawo2.renditionwth-aachen.de");
   aboutData.addCredit("Dale M. Flaven",
     I18N_NOOP("Bug fixes"),
-    "dflaven@netport.characterom");
+    "dflaven@netport.com");
   aboutData.addCredit("Martin Jones",
     I18N_NOOP("Bug fixes"),
-    "mjones@powerup.characterom.au");
+    "mjones@powerup.com.au");
   aboutData.addCredit("Lars Knoll",
     I18N_NOOP("Bug fixes"),
     "knoll@mpi-hd.mpg.de");
@@ -333,7 +333,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   if(args->isSet("schemas") || args->isSet("schemata")) {
     ColorSchemaList colors;
     colors.characterheckSchemas();
-    for(int i = 0; i < (int) colors.characterount(); i++)
+    for(int i = 0; i < (int) colors.count(); i++)
     {
        ColorSchema *schema = colors.foregroundColorind(i);
        QString relPath = schema->relPath();

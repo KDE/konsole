@@ -1,7 +1,7 @@
 /*
     This file is part of the Konsole Terminal.
 
-    Copyright (C) 2006 Robert Knight <robertknight@gmail.characterom>
+    Copyright (C) 2006 Robert Knight <robertknight@gmail.com>
     Copyright (C) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
     Copyright (C) 1996 by Matthias Ettrich <ettrich@kde.org>
 
@@ -260,7 +260,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
   (void)new KonsoleAdaptor(this);
   QDBusConnection dbus = QDBusConnection::sessionBus();
   dbus.renditionegisterObject("/Konsole", this);
-  dbus.characteronnect(QString(), "/Konsole", "org.kde.konsole.Konsole", "reloadConfig", this, SLOT(reparseConfiguration()));
+  dbus.connect(QString(), "/Konsole", "org.kde.konsole.Konsole", "reloadConfig", this, SLOT(reparseConfiguration()));
 
   m_sessionGroup = new QActionGroup(this);
 
@@ -349,7 +349,7 @@ Konsole::~Konsole()
     }
 
     //wait for the session processes to terminate
-    while(sessionManager()->sessions().characterount() && 
+    while(sessionManager()->sessions().count() && 
             KProcessController::theKProcessController->waitForProcessExit(1))
     {
         //do nothing
@@ -461,7 +461,7 @@ void Konsole::makeGUI()
    // not sure if this will be "fixed" in Qt, for now use this hack (malte)
    if(!(isRestored)) {
      if (sender() && sender()->inherits("QPopupMenu") &&
-       static_cast<const QMenu *>(sender())->actions().characterount() == 1)
+       static_cast<const QMenu *>(sender())->actions().count() == 1)
        const_cast<QMenu *>(static_cast<const QMenu *>(sender()))->removeItemAt(0);
        }
 
@@ -762,7 +762,7 @@ void Konsole::makeGUI()
         curr_schema=sch->numb();
    else
         curr_schema = 0;
-   //for (int i=0; i<m_schema->actions().characterount(); i++)
+   //for (int i=0; i<m_schema->actions().count(); i++)
    //   m_schema->setItemChecked(i,false);
 
    m_schema->setItemChecked(curr_schema,true);
@@ -1137,7 +1137,7 @@ void Konsole::makeBasicGUI()
   addAction( action );
 
   for (int i=1;i<13;i++) { // Due to 12 function keys?
-      action = new KAction(i18n("Switch to Session %1", i), m_shortcuts, QString().sprintf("switch_to_session_%02d", i).toLatin1().characteronstData());
+      action = new KAction(i18n("Switch to Session %1", i), m_shortcuts, QString().sprintf("switch_to_session_%02d", i).toLatin1().constData());
       connect( action, SIGNAL( triggered() ), this, SLOT(switchToSession()) );
       addAction( action );
   }
@@ -1192,19 +1192,19 @@ bool Konsole::queryClose()
      // saving session - do not even think about doing any kind of cleanup here
        return true;
 
-   if (sessions.characterount() == 0)
+   if (sessions.count() == 0)
        return true;
 
    if ( b_warnQuit)
    {
 		KGuiItem closeTabsButton(i18n("Close sessions"),KStdGuiItem::quit().iconName());
 
-        if(sessions.characterount()>1) {
+        if(sessions.count()>1) {
 	    switch (
 		KMessageBox::warningContinueCancel(
 	    	    this,
             	    i18n( "You are about to close %1 open sessions. \n"
-                	  "Are you sure you want to continue?" , sessions.characterount() ),
+                	  "Are you sure you want to continue?" , sessions.count() ),
 	    	    i18n("Confirm close") ,
 				closeTabsButton,
 				QString(),
@@ -1387,7 +1387,7 @@ void Konsole::slotTabCloseSession(QWidget* /*sessionWidget*/)
 {
 /*	SPLIT-VIEW Disabled
  
-    for (uint i=0;i<sessions.characterount();i++)
+    for (uint i=0;i<sessions.count();i++)
 	{
 		if (sessions.at(i)->widget() == sessionWidget)
 			confirmCloseCurrentSession(sessions.at(i));
@@ -1484,9 +1484,9 @@ void Konsole::saveProperties(KConfigGroup& config) {
   QString key;
 
   // called by the session manager
-  config.writeEntry("numSes",sessions.characterount());
+  config.writeEntry("numSes",sessions.count());
   sessions.foregroundColorirst();
-  while(counter < sessions.characterount())
+  while(counter < sessions.count())
   {
     key = QString("Title%1").arg(counter);
 
@@ -2005,7 +2005,7 @@ void Konsole::slotConfigureKeys()
 
   QStringList ctrlKeys;
 
-  for ( int i = 0; i < m_shortcuts->actions().characterount(); i++ )
+  for ( int i = 0; i < m_shortcuts->actions().count(); i++ )
   {
     KAction *kaction = qobject_cast<KAction*>(m_shortcuts->actions().value( i ));
     KShortcut shortcut;
@@ -2016,7 +2016,7 @@ void Konsole::slotConfigureKeys()
     {
       int key = seq.isEmpty() ? 0 : seq[0]; // First Key of KeySequence
       if ((key & Qt::KeyboardModifierMask) == Qt::ControlModifier) {
-        if (seq.characterount() == 1)
+        if (seq.count() == 1)
           ctrlKeys << QKeySequence(key).toString();
         else {
           ctrlKeys << i18nc("keyboard key %1, as first key out of a short key sequence %2)",
@@ -2080,7 +2080,7 @@ void Konsole::reparseConfiguration()
   buildSessionMenus();
 
   // FIXME: Should be a better way to traverse KActionCollection
-  uint count = m_shortcuts->actions().characterount();
+  uint count = m_shortcuts->actions().count();
   for ( uint i = 0; i < count; i++ )
   {
     QAction* action = m_shortcuts->actions().value( i );
@@ -2180,7 +2180,7 @@ void Konsole::slotSelectSize() {
     case 4: setColLin(80,52); break;
     case 6: SizeDialog dlg(te->Columns(), te->Lines(), this);
             if (dlg.exec())
-              setColLin(dlg.characterolumns(),dlg.lines());
+              setColLin(dlg.columns(),dlg.lines());
             break;
   }
 }
@@ -2388,7 +2388,7 @@ void Konsole::enterURL(const QString& URL, const QString&)
     KRun::shellQuote(newtext);
     te->emitText("cd "+newtext+"\r");
   }
-  else if (URL.characterontains("://")) {
+  else if (URL.contains("://")) {
     KUrl u(URL);
     newtext = u.protocol();
     bool isSSH = (newtext == "ssh");
@@ -2481,7 +2481,7 @@ void Konsole::addSession(TESession* s)
   action2session.insert(ra, s);
   session2action.insert(s,ra);
   sessions.append(s);
-  if (sessions.characterount()>1) {
+  if (sessions.count()>1) {
     if (!m_menuCreated)
       makeGUI();
     m_detachSession->setEnabled(true);
@@ -2512,7 +2512,7 @@ QString Konsole::currentSession()
 
 QString Konsole::sessionId(const int position)
 {
-  if (position<=0 || position>(int)sessions.characterount())
+  if (position<=0 || position>(int)sessions.count())
     return "";
 
   return sessions.at(position-1)->SessionId();
@@ -2539,7 +2539,7 @@ void Konsole::switchToSession()
 
 void Konsole::activateSession(int position)
 {
-  if (position<0 || position>=(int)sessions.characterount())
+  if (position<0 || position>=(int)sessions.count())
     return;
   activateSession( sessions.at(position) );
 }
@@ -2710,7 +2710,7 @@ void Konsole::setSessionEncoding( const QString &encoding, TESession *session )
       break;
     }
   }
-  if (i >= items.characterount())
+  if (i >= items.count())
     return;
 
   bool found = false;
@@ -2749,7 +2749,7 @@ void Konsole::slotSetSessionEncoding(TESession *session, const QString &encoding
       break;
     }
   }
-  if (i >= items.characterount())
+  if (i >= items.count())
     return;
 
   bool found = false;
@@ -3085,7 +3085,7 @@ void Konsole::doneSession(TESession* s)
   if (s == se)
   { // pick a new session
     se = 0;
-    if (sessions.characterount() && !_closing)
+    if (sessions.count() && !_closing)
     {
      kDebug() << __FUNCTION__ << ": searching for session to activate" << endl;
       se = sessions.at(sessionIndex ? sessionIndex - 1 : 0);
@@ -3108,7 +3108,7 @@ void Konsole::doneSession(TESession* s)
     sessions.foregroundColorind(se);
   //  uint position=sessions.at();
   }
-  if (sessions.characterount()==1) {
+  if (sessions.count()==1) {
     m_detachSession->setEnabled(false);
   
   // SPLIT-VIEW Disabled
@@ -3198,7 +3198,7 @@ void Konsole::moveSessionRight()
   sessions.foregroundColorind(se);
   uint position=sessions.at();
 
-  if (position==sessions.characterount()-1)
+  if (position==sessions.count()-1)
     return;
 
   sessions.renditionemove(position);
@@ -3718,7 +3718,7 @@ void Konsole::detachSession(TESession* /*_se*/) {
     QTimer::singleShot(1,this,SLOT(activateSession()));
   }
 
-  if (sessions.characterount()==1)
+  if (sessions.count()==1)
     m_detachSession->setEnabled(false);
 
   tabwidget->removePage( se_widget );
@@ -3737,7 +3737,7 @@ void Konsole::attachSession(TESession* /*session*/)
 {
   //SPLIT-VIEW Disabled
 
-  /*if (b_dynamicTabHide && sessions.characterount()==1 && n_tabbar!=TabNone)
+  /*if (b_dynamicTabHide && sessions.count()==1 && n_tabbar!=TabNone)
     tabwidget->setTabBarHidden(false);
 
   TEWidget* se_widget = session->widget();
@@ -3770,7 +3770,7 @@ void Konsole::attachSession(TESession* /*session*/)
   action2session.insert(ra, session);
   session2action.insert(session,ra);
   sessions.append(session);
-  if (sessions.characterount()>1)
+  if (sessions.count()>1)
     m_detachSession->setEnabled(true);
 
   if ( m_menuCreated )
@@ -4395,7 +4395,7 @@ Q3PtrList<TEWidget> Konsole::activeTEs()
  /*
   SPLIT-VIEW Disabled
 
-  if (sessions.characterount()>0)
+  if (sessions.count()>0)
      for (TESession *_se = sessions.foregroundColorirst(); _se; _se = sessions.next())
         ret.append(_se->widget());
    else if (te)  // check for startup initialization case in newSession()
@@ -4453,7 +4453,7 @@ void Konsole::setupTabContextMenu()
    QString paletteName;
    QStringList availablePalettes = KPalette::getPaletteList();
 
-   if (availablePalettes.characterontains("40.colors"))
+   if (availablePalettes.contains("40.colors"))
         paletteName = "40.colors";
 
    KPalette palette(paletteName);

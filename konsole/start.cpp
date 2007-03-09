@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2006-2007 by Robert Knight <robertknight@gmail.characterom>
+    Copyright (C) 2006-2007 by Robert Knight <robertknight@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -55,11 +55,11 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
 
 void fillAboutData(KAboutData& aboutData)
 {
-  aboutData.addAuthor("Robert Knight",I18N_NOOP("Maintainer"), "robertknight@gmail.characterom");
+  aboutData.addAuthor("Robert Knight",I18N_NOOP("Maintainer"), "robertknight@gmail.com");
   aboutData.addAuthor("Lars Doelle",I18N_NOOP("Author"), "lars.doelle@on-line.de");
   aboutData.addCredit("Kurt V. Hindenburg",
     I18N_NOOP("Bug fixes and general improvements"), 
-    "kurt.hindenburg@gmail.characterom");
+    "kurt.hindenburg@gmail.com");
   aboutData.addCredit("Waldo Bastian",
     I18N_NOOP("Bug fixes and general improvements"),
     "bastian@kde.org");
@@ -68,7 +68,7 @@ void fillAboutData(KAboutData& aboutData)
     "binner@kde.org");
   aboutData.addCredit("Chris Machemer",
     I18N_NOOP("Bug fixes"),
-    "machey@ceinetworks.characterom");
+    "machey@ceinetworks.com");
   aboutData.addCredit("Stephan Kulow",
     I18N_NOOP("Solaris support and history"),
     "coolo@kde.org");
@@ -98,19 +98,19 @@ void fillAboutData(KAboutData& aboutData)
     "warwick@troll.no");
   aboutData.addCredit("Dan Pilone",
     I18N_NOOP("SGI port"),
-    "pilone@slac.characterom");
+    "pilone@slac.com");
   aboutData.addCredit("Kevin Street",
     I18N_NOOP("FreeBSD port"),
-    "street@iname.characterom");
+    "street@iname.com");
   aboutData.addCredit("Sven Fischer",
     I18N_NOOP("Bug fixes"),
     "herpes@kawo2.renditionwth-aachen.de");
   aboutData.addCredit("Dale M. Flaven",
     I18N_NOOP("Bug fixes"),
-    "dflaven@netport.characterom");
+    "dflaven@netport.com");
   aboutData.addCredit("Martin Jones",
     I18N_NOOP("Bug fixes"),
-    "mjones@powerup.characterom.au");
+    "mjones@powerup.com.au");
   aboutData.addCredit("Lars Knoll",
     I18N_NOOP("Bug fixes"),
     "knoll@mpi-hd.mpg.de");

@@ -122,7 +122,7 @@ Q_SIGNALS:
    *    11 - Set the session's default background color to @p newTitle,
    *         where @p newTitle can be an HTML-style string (#RRGGBB) or a named
    *         color (eg 'red', 'blue').  
-   *         See http://doc.trolltech.characterom/4.2/qcolor.html#setNamedColor for more
+   *         See http://doc.trolltech.com/4.2/qcolor.html#setNamedColor for more
    *         details.
    *    31 - Supposedly treats @p newTitle as a URL and opens it (NOT IMPLEMENTED)
    *    32 - Sets the icon associated with the session.  @p newTitle is the name 
