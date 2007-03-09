@@ -234,9 +234,10 @@ void TabbedViewContainer::viewAdded( QWidget* view )
 }
 void TabbedViewContainer::viewRemoved( QWidget* view )
 {
-    Q_ASSERT( _tabWidget->indexOf(view) != -1 );
+    const int index = _tabWidget->indexOf(view);
 
-    _tabWidget->removeTab( _tabWidget->indexOf(view) );
+    if ( index != -1 )
+        _tabWidget->removeTab( index );
 }
 
 void TabbedViewContainer::updateIcon(ViewProperties* item)

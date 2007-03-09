@@ -1668,9 +1668,6 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       {
         _screenWindow->clearSelection();
 
-#warning "Temporary"
-        updateImage();
-
         //emit clearSelectionSignal();
         pos.ry() += scrollbar->value();
         iPntSel = pntSel = pos;
@@ -1999,8 +1996,6 @@ void TEWidget::extendSelection( QPoint pos )
     //emit extendSelectionSignal( here.x()+offset, here.y() );
   }
 
-#warning "Temporary"
-  updateImage();
 }
 
 void TEWidget::mouseReleaseEvent(QMouseEvent* ev)

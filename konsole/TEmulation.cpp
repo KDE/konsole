@@ -194,8 +194,17 @@ void TEmulation::setScreen(int n)
 {
   TEScreen *old = currentScreen;
   currentScreen = screen[n&1];
-  if (currentScreen != old)
+  if (currentScreen != old) 
+  {
      old->setBusySelecting(false);
+
+     // tell all windows onto this emulation to switch to the newly active screen
+     QListIterator<ScreenWindow*> windowIter(_windows);
+     while ( windowIter.hasNext() )
+     {
+         windowIter.next()->setScreen(currentScreen);
+     }
+  }
 }
 
 void TEmulation::setHistory(const HistoryType& t)
