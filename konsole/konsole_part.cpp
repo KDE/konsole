@@ -279,7 +279,7 @@ bool konsolePart::openUrl( const KUrl & url )
     return true;
   }
 
-  m_url = url;
+  setUrl(url);
   emit setWindowCaption( url.prettyUrl() );
 //  kDebug(1211) << "Set Window Caption to " << url.prettyUrl() << "\n";
   emit started( 0 );
