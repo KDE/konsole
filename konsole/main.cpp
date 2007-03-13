@@ -542,8 +542,16 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
           sTitle = sessionconfig->readEntry(key, title);
           key = QString("Args%1").arg(counter);
           sessionconfig->readListEntry(key, eargs);
+
           key = QString("Pgm%1").arg(counter);
-          sPgm = sessionconfig->readEntry(key, shell);
+          
+          // if the -e option is passed on the command line, this overrides the program specified 
+          // in the profile file
+          if ( args->isSet("e") )
+            sPgm = (shell ? QFile::decodeName(shell) : QString::null);
+          else
+            sPgm = sessionconfig->readEntry(key, shell);
+
           key = QString("Term%1").arg(counter);
           sTerm = sessionconfig->readEntry(key);
           key = QString("Icon%1").arg(counter);
