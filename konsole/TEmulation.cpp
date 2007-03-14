@@ -65,10 +65,6 @@
    a fixed rate.
 */
 
-/* FIXME
-   - evtl. the bulk operations could be made more transparent.
-*/
-
 // System
 #include <assert.h>
 #include <stdio.h>
@@ -132,7 +128,7 @@ ScreenWindow* TEmulation::createWindow()
 
     //FIXME - Used delayed updates when the selection changes
     connect(window , SIGNAL(selectionChanged()),
-            this , SLOT(bulkStart()));
+            this , SLOT(bufferedUpdate()));
 
     connect(this , SIGNAL(updateViews()),
             window , SLOT(notifyOutputChanged()) );
@@ -297,7 +293,7 @@ void TEmulation::onReceiveBlock(const char* text, int length)
 {
 	emit notifySessionState(NOTIFYACTIVITY);
 
-	bulkStart();
+	bufferedUpdate();
 
     int pos = 0;
 
@@ -346,7 +342,7 @@ void TEmulation::onReceiveBlock(const char* text, int length)
 {
   emit notifySessionState(NOTIFYACTIVITY);
   
-  bulkStart();
+  bufferedUpdate();
   for (int i = 0; i < len; i++)
   {
 
@@ -604,7 +600,7 @@ void TEmulation::showBulk()
 }
 #endif 
 
-void TEmulation::bulkStart()
+void TEmulation::bufferedUpdate()
 {
    bulk_timer1.setSingleShot(true);
    bulk_timer1.start(BULK_TIMEOUT1);
@@ -638,17 +634,10 @@ void TEmulation::onImageSizeChange(int lines, int columns)
   Q_ASSERT( lines > 0 );
   Q_ASSERT( columns > 0 );
 
-   //kDebug(1211)<<"TEmulation::onImageSizeChange()"<<endl;
   screen[0]->resizeImage(lines,columns);
   screen[1]->resizeImage(lines,columns);
-    
-  
-  emit ImageSizeChanged(columns, lines);   // propagate event
 
-#warning "Look into removing the showBulk() call."
-  // temporary - schedule an update
-  //bulkStart(); 
-  showBulk();
+  bufferedUpdate();
 }
 
 QSize TEmulation::imageSize()
@@ -660,14 +649,14 @@ void TEmulation::onHistoryCursorChange(int cursor)
 {
   currentScreen->setHistCursor(cursor);
 
-  bulkStart();
+  bufferedUpdate();
 }
 
 void TEmulation::setColumns(int columns)
 {
   //FIXME: this goes strange ways.
   //       Can we put this straight or explain it at least?
-  emit changeColumns(columns);
+  emit setColumnCount(columns);
 }
 
 #include "TEmulation.moc"

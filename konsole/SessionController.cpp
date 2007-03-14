@@ -232,9 +232,9 @@ void SessionController::setupActions()
     connect( action , SIGNAL(triggered()) , this , SLOT(clearHistoryAndReset()) );
 
     // debugging tools
-    action = collection->addAction("debug-process");
-    action->setText( "Get Foreground Process" );
-    connect( action , SIGNAL(triggered()) , this , SLOT(debugProcess()) );
+    //action = collection->addAction("debug-process");
+    //action->setText( "Get Foreground Process" );
+    //connect( action , SIGNAL(triggered()) , this , SLOT(debugProcess()) );
 }
 
 void SessionController::debugProcess()
@@ -295,16 +295,13 @@ void SessionController::clear()
 {
     TEmulation* emulation = _session->getEmulation();
 
-#warning "Find a way to reimplement clearing the selection - this is now done in ScreenWindow not TEmulation"
     emulation->clearEntireScreen();
-    //emulation->clearSelection();
 }
 void SessionController::clearAndReset()
 {
     TEmulation* emulation = _session->getEmulation();
 
     emulation->reset();
-    //emulation->clearSelection();
 }
 void SessionController::searchClosed()
 {

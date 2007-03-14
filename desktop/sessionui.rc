@@ -18,6 +18,8 @@
             <Action name="find-previous" group="session-history-operations"/>
             <Action name="save-history" group="session-history-operations"/>
             <Separator group="session-history-operations"/>
+            <Action name="history-options" group="session-history-operations"/>
+            <Separator group="session-history-operations"/>
             <Action name="clear-history" group="session-history-operations"/>
             <Action name="clear-history-and-reset" group="session-history-operations"/>
         </Menu>
@@ -25,8 +27,8 @@
             <Action name="monitor-silence" group="session-view-operations" />
             <Action name="monitor-activity" group="session-view-operations" />
         </Menu>
-        <Menu name="debug"><text>Debug</text>
+        <!--<Menu name="debug"><text>Debug</text>
             <Action name="debug-process"/>
-        </Menu>
+        </Menu>!-->
     </MenuBar>
 </kpartgui>

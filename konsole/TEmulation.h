@@ -174,9 +174,8 @@ Q_SIGNALS:
   void lockPty(bool);
   void useUtf8(bool);
   void sendBlock(const char* txt,int len);
-  void ImageSizeChanged(int lines, int columns);
-  void changeColumns(int columns);
-  void changeColLin(int columns, int lines);
+  void setColumnCount(int columns);
+  void setScreenSize(int columns, int lines);
   void changeTitle(int arg, const char* str);
   void notifySessionState(int state);
   void zmodemDetected();
@@ -254,6 +253,14 @@ protected:
 
   KeyTrans* keytrans; // the keyboard layout
 
+protected Q_SLOTS:
+  /** 
+   * Schedules an update of attached views.
+   * Repeated calls to bufferedUpdate() in close succession will result in only a single update,
+   * much like the Qt buffered update of widgets. 
+   */
+  void bufferedUpdate();
+
 // refreshing related material.
 // this is localized in the class.
 private Q_SLOTS: 
@@ -261,7 +268,6 @@ private Q_SLOTS:
   // triggered by timer, causes the emulation to send an updated screen image to each
   // view
   void showBulk(); 
-  void bulkStart();
 
 private:
 

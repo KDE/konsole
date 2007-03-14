@@ -50,7 +50,6 @@
 // KDE
 #include <kdebug.h>
 #include <klocale.h>
-#include <kmessagebox.h>
 
 // Konsole
 #include "TEmuVt102.h"
@@ -144,6 +143,8 @@ TEmuVt102::~TEmuVt102()
 void TEmuVt102::clearEntireScreen()
 {
   currentScreen->clearEntireScreen();
+
+  bufferedUpdate(); 
 }
 
 void TEmuVt102::reset()
@@ -163,6 +164,8 @@ void TEmuVt102::reset()
   //kDebug(1211)<<"TEmuVt102::reset() setCodec()"<<endl;
   setCodec(0);
   //kDebug(1211)<<"TEmuVt102::reset() done"<<endl;
+ 
+  bufferedUpdate();
 }
 
 /* ------------------------------------------------------------------------- */
@@ -574,10 +577,10 @@ switch( N )
     case TY_ESC_DE('8'      ) : currentScreen->helpAlign            (          ); break;
 
 // resize = \e[8;<row>;<col>t
-    case TY_CSI_PS('t',   8) : changeColLin( q /* col */, p /* lin */ ); break;
+    case TY_CSI_PS('t',   8) : setScreenSize( q /* colums */, p /* lines */ );    break;
 
 // change tab text color : \e[28;<color>t  color: 0-16,777,215
-    case TY_CSI_PS('t',   28) : emit changeTabTextColor   ( p        ); break;
+    case TY_CSI_PS('t',   28) : emit changeTabTextColor   ( p        );          break;
 
     case TY_CSI_PS('K',   0) : currentScreen->clearToEndOfLine     (          ); break;
     case TY_CSI_PS('K',   1) : currentScreen->clearToBeginOfLine   (          ); break;
