@@ -58,25 +58,10 @@ class TEmulation : public QObject
 { Q_OBJECT
 
 public:
-  
-  //Construct a new emulation and adds connects it to the view 'gui'
  
+   /** Constructs a new terminal emulation */ 
    TEmulation();
-  // TEmulation(TEWidget* gui);
   ~TEmulation();
-
-  /** 
-   * Adds a new view for this emulation.
-   *
-   * When the emulation output changes, the view will be updated to display the new output.
-   */
-  virtual void addView(TEWidget* widget);
-  /**
-   * Removes a view from this emulation.
-   *
-   * @p widget will no longer be updated when the emulation output changes.
-   */
-  virtual void removeView(TEWidget* widget);
 
   /**
    * Creates a new window onto the output from this emulation.  The contents
@@ -154,6 +139,17 @@ public Q_SLOTS: // signals incoming from TEWidget
    */
   virtual void onKeyPress(QKeyEvent*);
  
+  /** 
+   * Converts information about a mouse event into an xterm-compatible escape
+   * sequence and emits the character sequence via sendString()
+   */
+  virtual void onMouse(int buttons, int column, int line, int eventType);
+  
+  /**
+   * Sends a string of characters to the foreground terminal process
+   */
+  virtual void sendString(const char *) = 0;
+
   /** Clear the current selection */
   //virtual void clearSelection();
 
@@ -169,6 +165,7 @@ public Q_SLOTS: // signals incoming from TEWidget
    
   virtual void isBusySelecting(bool busy);
   //virtual void testIsSelected(const int x, const int y, bool &selected);
+
 
 public Q_SLOTS: // signals incoming from data source
 
@@ -188,7 +185,18 @@ Q_SIGNALS:
   void zmodemDetected();
   void changeTabTextColor(int color);
 
+  /** 
+   * This is emitted when the program running in the shell indicates whether or
+   * not it is interested in mouse events.
+   *
+   * @param usesMouse This will be true if the program wants to be informed about
+   * mouse events or false otherwise.
+   */
+  void programUsesMouse(bool usesMouse);
+
+  /** Emitted to trigger an update of attached views */
   void updateViews();
+
 
 public:
   /** 
@@ -200,10 +208,9 @@ public:
   virtual void setMode  (int) = 0;
   virtual void resetMode(int) = 0;
 
-  virtual void sendString(const char*) = 0;
-
-  virtual void setConnect(bool r);
-  bool isConnected() { return connected; }
+  //REMOVED
+  //virtual void setConnect(bool r);
+  //bool isConnected() { return connected; }
   
   bool utf8() { return m_codec->mibEnum() == 106; }
 
@@ -222,16 +229,23 @@ public:
 
 protected:
 
-  QList<TEWidget*> _views; //QPointer<TEWidget> > _views;
   QList<ScreenWindow*> _windows;
-
-  //QPointer<TEWidget> gui;
   
-  TEScreen* currentScreen;         // referes to one `screen'
-  TEScreen* screen[2];   // 0 = primary, 1 = alternate
-  void setScreen(int n); // set `scr' to `screen[n]'
+  TEScreen* currentScreen;  // pointer to the screen which is currently active, 
+                            // this is one of the elements in the screen[] array
 
-  bool   connected;    // communicate with widget
+  TEScreen* screen[2];      // 0 = primary screen ( used by most programs, including the shell
+                            //                      scrollbars are enabled in this mode )
+                            // 1 = alternate      ( used by vi , emacs etc.
+                            //                      scrollbars are not enabled in this mode )
+                            
+  /** 
+   * Sets the active screen
+   *
+   * @param index 0 to switch to the primary screen, or 1 to switch to the alternate screen
+   */
+  void setScreen(int index); 
+
   bool   listenToKeyPress;  // listen to input
 
   void setCodec(int c); // codec number, 0 = locale, 1=utf8
@@ -250,11 +264,6 @@ private Q_SLOTS:
   // triggered by timer, causes the emulation to send an updated screen image to each
   // view
   void showBulk(); 
-
-private:
-
-  void connectView(TEWidget* widget);
-
   void bulkStart();
 
 private:

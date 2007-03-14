@@ -170,7 +170,6 @@ public:
      */
     void setVTFont(const QFont& font);
 
-    void setMouseMarks(bool on);
     static void setAntialias( bool enable ) { s_antialias = enable; }
     static bool antialias()                 { return s_antialias;   }
     static void setStandalone( bool standalone ) { s_standalone = standalone; }
@@ -209,6 +208,22 @@ public Q_SLOTS:
 	 *				 	the warning message should disappear.
 	 */ 
 	void outputSuspended(bool suspended);
+
+    /**
+     * Sets whether the program whoose output is being displayed in the view
+     * is interested in mouse events.
+     *
+     * If this is set to true, mouse signals will be emitted by the view when the user clicks, drags
+     * or otherwise moves the mouse inside the view.
+     * The user interaction needed to create selections will also change, and the user will be required
+     * to hold down the shift key to create a selection or perform other mouse activities inside the 
+     * view area - since the program running in the terminal is being allowed to handle normal mouse
+     * events itself.
+     *
+     * @param usesMouse Set to true if the program running in the terminal is interested in mouse events
+     * or false otherwise.
+     */
+    void setUsesMouse(bool usesMouse);
 
 Q_SIGNALS:
 

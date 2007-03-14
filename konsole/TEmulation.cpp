@@ -89,7 +89,6 @@
 
 // Konsole
 #include "TEScreen.h"
-#include "TEWidget.h"
 #include "TerminalCharacterDecoder.h"
 #include "ScreenWindow.h"
 #include "TEmulation.h"
@@ -107,7 +106,6 @@
 
 TEmulation::TEmulation() :
   currentScreen(0),
-  connected(false),
   listenToKeyPress(false),
   m_codec(0),
   decoder(0),
@@ -134,44 +132,11 @@ ScreenWindow* TEmulation::createWindow()
 
     //FIXME - Used delayed updates when the selection changes
     connect(window , SIGNAL(selectionChanged()),
-            this , SIGNAL(updateViews()));
+            this , SLOT(bulkStart()));
 
     connect(this , SIGNAL(updateViews()),
             window , SLOT(notifyOutputChanged()) );
     return window;
-}
-
-/*!
-*/
-
-void TEmulation::connectView(TEWidget* view)
-{
-  #warning "Temporary - ideally the emulation should not be responsible for connecting its updateViews notification to the views themselves."
-  //QObject::connect(this,SIGNAL(updateViews()),
-  //                 view,SLOT(updateImage()));
-  //QObject::connect(this,SIGNAL(updateViews()),
-  //                 view,SLOT(updateLineProperties()));
-
-  QObject::connect(view,SIGNAL(keyPressedSignal(QKeyEvent*)),
-                   this,SLOT(onKeyPress(QKeyEvent*)));
-/*
-  QObject::connect(view,SIGNAL(changedHistoryCursor(int)),
-                   this,SLOT(onHistoryCursorChange(int)));
-    QObject::connect(view,SIGNAL(beginSelectionSignal(const int,const int,const bool)),
-		   this,SLOT(onSelectionBegin(const int,const int,const bool)) );
-  QObject::connect(view,SIGNAL(extendSelectionSignal(const int,const int)),
-		   this,SLOT(onSelectionExtend(const int,const int)) );
-  QObject::connect(view,SIGNAL(endSelectionSignal(const bool)),
-		   this,SLOT(setSelection(const bool)) );
-  QObject::connect(view,SIGNAL(copySelectionSignal()),
-		   this,SLOT(copySelection()) );
-  QObject::connect(view,SIGNAL(clearSelectionSignal()),
-		   this,SLOT(clearSelection()) );
-  QObject::connect(view,SIGNAL(isBusySelecting(bool)),
-		   this,SLOT(isBusySelecting(bool)) );
-  QObject::connect(view,SIGNAL(testIsSelected(const int, const int, bool &)),
-		   this,SLOT(testIsSelected(const int, const int, bool &)) );
-*/
 }
 
 /*!
@@ -215,7 +180,6 @@ void TEmulation::setHistory(const HistoryType& t)
 {
   screen[0]->setScroll(t);
 
-  if (!connected) return;
   showBulk();
 }
 
@@ -310,6 +274,16 @@ void TEmulation::onKeyPress( QKeyEvent* ev )
     //emit sndBlock(ev->text().toAscii(),ev->text().length());
     emit sndBlock(ev->text().toUtf8(),ev->text().length());
   }
+}
+
+void TEmulation::sendString(const char*)
+{
+    // default implementation does nothing
+}
+
+void TEmulation::onMouse(int /*buttons*/, int /*column*/, int /*row*/, int /*eventType*/)
+{
+    // default implementation does nothing
 }
 
 // Unblocking, Byte to Unicode translation --------------------------------- --
@@ -449,11 +423,9 @@ void TEmulation::clearSelection() {
 
 void TEmulation::isBusySelecting(bool busy)
 {
-  if (!connected) return;
   currentScreen->setBusySelecting(busy);
 }
 void TEmulation::copySelection() {
-  if (!connected) return;
   QString t = currentScreen->selectedText(true);
   QApplication::clipboard()->setText(t);
 }
@@ -578,24 +550,6 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool isCaseSens
 
 /*!
 */
-
-void TEmulation::addView(TEWidget* widget)
-{
-    Q_ASSERT( !_views.contains(widget) );
-    _views << widget;
-
-    connectView(widget);
-}
-
-void TEmulation::removeView(TEWidget* widget)
-{
-    Q_ASSERT( _views.contains(widget) );
-
-    _views.removeAll(widget);
-
-    disconnect(widget);
-}
-
 void TEmulation::showBulk()
 {
     bulk_timer1.stop();
@@ -665,15 +619,6 @@ void TEmulation::bulkStart()
    }
 }
 
-void TEmulation::setConnect(bool c)
-{
-  connected = c;
-  if ( connected)
-  {
-    showBulk();
-  }
-}
-
 char TEmulation::getErase()
 {
   return '\b';
@@ -701,10 +646,10 @@ void TEmulation::onImageSizeChange(int lines, int columns)
   screen[0]->resizeImage(lines,columns);
   screen[1]->resizeImage(lines,columns);
     
-  if (!connected) return;
   
   emit ImageSizeChanged(columns, lines);   // propagate event
 
+#warning "Look into removing the showBulk() call."
   // temporary - schedule an update
   //bulkStart(); 
   showBulk();
@@ -717,8 +662,6 @@ QSize TEmulation::imageSize()
 
 void TEmulation::onHistoryCursorChange(int cursor)
 {
-  if (!connected) return;
-   
   currentScreen->setHistCursor(cursor);
 
   bulkStart();

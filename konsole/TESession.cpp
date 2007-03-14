@@ -211,6 +211,7 @@ void TESession::ptyError()
   emit done(this);
 }
 
+#warning "Remove me.  Behaviour of TESession should be the same whether there are any views connected to the session or not.  The concept of a 'primary view' was used in porting from the old one-display-widget-per-session setup."
 TEWidget* TESession::primaryView()
 {
     if (!_views.isEmpty())
@@ -231,7 +232,20 @@ void TESession::addView(TEWidget* widget)
     _views.append(widget);
 
     if ( _emulation != 0 )
-        _emulation->addView(widget);
+    {
+        // connect emulation - view signals and slots
+        connect( widget , SIGNAL(keyPressedSignal(QKeyEvent*)) , _emulation ,
+               SLOT(onKeyPress(QKeyEvent*)) );
+        connect( widget , SIGNAL(mouseSignal(int,int,int,int)) , _emulation , 
+               SLOT(onMouse(int,int,int,int)) );
+        connect( widget , SIGNAL(sendStringToEmu(const char*)) , _emulation ,
+               SLOT(sendString(const char*)) ); 
+
+        // allow emulation to notify view when the foreground process indicates whether
+        // or not it is interested in mouse signals
+        connect( _emulation , SIGNAL(programUsesMouse(bool)) , widget , 
+               SLOT(setUsesMouse(bool)) );
+    }
 
     widget->setScreenWindow(_emulation->createWindow());
 
@@ -247,6 +261,7 @@ void TESession::addView(TEWidget* widget)
                    this,SLOT(onContentSizeChange(int,int)));
 
     QObject::connect( widget ,SIGNAL(destroyed(QObject*)) , this , SLOT(viewDestroyed(QObject*)) );
+
 }
 
 void TESession::viewDestroyed(QObject* view)
@@ -263,7 +278,18 @@ void TESession::removeView(TEWidget* widget)
     _views.removeAll(widget);
 
     if ( _emulation != 0 )
-        _emulation->removeView(widget);
+    {
+        // disconnect
+        //  - key presses signals from widget 
+        //  - mouse activity signals from widget
+        //  - string sending signals from widget
+        //
+        //  ... and any other signals connected in addView()
+        disconnect( widget, 0, _emulation, 0);
+        
+        // disconnect state change signals emitted by emulation
+        disconnect( _emulation , 0 , widget , 0);
+    }
 }
 
 /*void TESession::changeWidget(TEWidget* w)
@@ -494,7 +520,7 @@ void TESession::notifySessionState(int state)
 
   if (state==NOTIFYBELL) 
   {
-    primaryView()->Bell(_emulation->isConnected(),i18n("Bell in session '%1'", _title));
+    primaryView()->Bell( true /*_emulation->isConnected()*/ ,i18n("Bell in session '%1'", _title));
   } 
   else if (state==NOTIFYACTIVITY) 
   {
@@ -605,12 +631,12 @@ TESession::~TESession()
       viewIter.next()->deleteLater();
 }
 
-void TESession::setConnect(bool c)
+/*void TESession::setConnect(bool c)
 {
   connected=c;
   _emulation->setConnect(c);
   setListenToKeyPress(c);
-}
+}*/
 
 void TESession::setListenToKeyPress(bool l)
 {

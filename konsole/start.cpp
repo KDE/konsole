@@ -27,8 +27,19 @@
 // bump the version to 2.0 before the KDE 4 release
 #define KONSOLE_VERSION "1.9"
 
+// fills the KAboutData structure with information about contributors to 
+// Konsole
 void fillAboutData(KAboutData& aboutData);
 
+// ***
+// 
+// Entry point into the Konsole terminal application.  
+//
+// If another Konsole instance
+// is already executing then the existing instance is asked to create a new main
+// window and the current process returns immediately.
+//
+// ***
 extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
 {
     KAboutData about(   "konsole",

@@ -80,26 +80,12 @@ public:
   /** Constructs a new emulation */
   TEmuVt102();
   ~TEmuVt102();
-
-  /** Reimplemented to enable handling of mouse input from the view */
-  virtual void addView(TEWidget* view);
-  /** Reimplemented to disconnect mouse input signals from the view */
-  virtual void removeView(TEWidget* view);
-
-  /** 
-   * Converts information about a key press event into a character sequence which is emitted via 
-   * sndBlock()
-   */  
+  
+public Q_SLOTS: 
+  virtual void sendString(const char*);
   virtual void onKeyPress(QKeyEvent*);
-
-public Q_SLOTS: // signals incoming from TEWidget
-
-  /** 
-   * Converts information about a mouse event into an xterm-compatible escape
-   * sequence and emits the character sequence via sendString()
-   */
-  void onMouse(int cb, int cx, int cy, int eventType);
-
+  virtual void onMouse( int buttons, int column, int line , int eventType );
+  
 Q_SIGNALS:
 
   /**
@@ -138,9 +124,9 @@ public:
   void reset();
 
   void onRcvChar(int cc);
-public Q_SLOTS:
-  void sendString(const char *);
 
+public Q_SLOTS:
+    
 public:
 
   bool getMode    (int m);
@@ -165,14 +151,17 @@ private:
   //respectively.
   void scrollViewPages( int pages );
 
-  //Enables or disables mouse marking in all the views on this emulation
-  void setViewMouseMarks( bool marks );
+  //REMOVED Enables or disables mouse marking in all the views on this emulation
+  //REMOVED void setViewMouseMarks( bool marks );
 
+
+  //REMOVED 
+  //
   //Enables or disables Vt102 specific handling of input from the view 
   //(including xterm-style mouse input for example)
   //
   //See also - TEmulation::connectView()
-  void setReceiveViewInput( TEWidget* view , bool enable );
+  //void setReceiveViewInput( TEWidget* view , bool enable );
 
   void resetToken();
 #define MAXPBUF 80

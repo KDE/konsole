@@ -237,7 +237,10 @@ void konsolePart::doneSession(TESession*)
 //    kDebug(1211) << "doneSession - disconnecting done" << endl;
     disconnect( se,SIGNAL(done(TESession*)),
                 this,SLOT(doneSession(TESession*)) );
-    se->setConnect(false);
+    
+    se->setListenToKeyPress(true);
+    //se->setConnect(false);
+    
     //QTimer::singleShot(100,se,SLOT(terminate()));
 //    kDebug(1211) << "se->terminate()" << endl;
     se->terminate();
@@ -283,7 +286,7 @@ bool konsolePart::openUrl( const KUrl & url )
     return true;
   }
 
-  m_url = url;
+  currentURL = url;
   emit setWindowCaption( url.prettyUrl() );
 //  kDebug(1211) << "Set Window Caption to " << url.prettyUrl() << "\n";
   emit started( 0 );
@@ -1121,7 +1124,8 @@ void konsolePart::startProgram( const QString& program,
 
   applyProperties();
 
-  se->setConnect(true);
+  //se->setConnect(true);
+  se->setListenToKeyPress(true);
   se->run();
   connect( se, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
 //  setFont( n_font ); // we do this here, to make TEWidget recalculate

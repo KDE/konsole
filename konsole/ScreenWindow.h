@@ -130,6 +130,23 @@ public:
     /** Scrolls the window so that @p line is at the top of the window */
     void scrollTo( int line );
 
+    enum RelativeScrollMode
+    {
+        ScrollLines,
+        ScrollPages
+    };
+
+    /** 
+     * Scrolls the window relative to its current position on the screen.
+     *
+     * @param mode Specifies whether @p amount refers to the number of lines or the number
+     * of pages to scroll.    
+     * @param amount The number of lines or pages ( depending on @p mode ) to scroll by.  If
+     * this number is positive, the view is scrolled down.  If this number is negative, the view
+     * is scrolled up.
+     */
+    void scrollBy( RelativeScrollMode mode , int amount );
+
     /** 
      * Specifies whether the window should automatically move to the bottom
      * of the screen when new output is added.

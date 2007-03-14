@@ -115,7 +115,7 @@ public:
    */
   bool        hasChildren();
 
-  void        setConnect(bool r);  // calls setListenToKeyPress(r)
+  //void        setConnect(bool r);  // calls setListenToKeyPress(r)
   void        setListenToKeyPress(bool l);
   TEmulation* getEmulation();      // to control emulation
   bool        isSecure();

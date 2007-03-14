@@ -54,7 +54,6 @@
 
 // Konsole
 #include "TEmuVt102.h"
-#include "TEWidget.h"
 #include "TEScreen.h"
 
 /* VT102 Terminal Emulation
@@ -97,6 +96,7 @@ TEmuVt102::TEmuVt102() : TEmulation()
   reset();
 }
 
+#if 0
 void TEmuVt102::setReceiveViewInput(TEWidget* view , bool enable)
 {
    if (enable)
@@ -114,7 +114,9 @@ void TEmuVt102::setReceiveViewInput(TEWidget* view , bool enable)
  		   this, SLOT(sendString(const char*)));
    }
 }
+#endif
 
+#if 0
 void TEmuVt102::addView(TEWidget* view)
 {
     TEmulation::addView(view);
@@ -126,7 +128,7 @@ void TEmuVt102::removeView(TEWidget* view)
     TEmulation::removeView(view);
     setReceiveViewInput(view,false);
 }
-
+#endif 
 
 
 /*!
@@ -939,7 +941,7 @@ void TEmuVt102::reportAnswerBack()
 
 void TEmuVt102::onMouse( int cb, int cx, int cy , int eventType )
 { char tmp[20];
-  if (!connected || cx<1 || cy<1) return;
+  if (  cx<1 || cy<1 ) return;
   // normal buttons are passed as 0x20 + button,
   // mouse wheel (buttons 4,5) as 0x5c + button
   if (cb >= 4) cb += 0x3c;
@@ -985,26 +987,6 @@ void TEmuVt102::onScrollLock()
   scrollLock(switchlock);
 }
 
-void TEmuVt102::scrollView( int lines )
-{
-    QListIterator<TEWidget* > viewIter(_views);
-
-    while (viewIter.hasNext())
-        viewIter.next()->doScroll( lines );
-}
-
-void TEmuVt102::scrollViewPages( int pages )
-{
-    QListIterator< TEWidget* > viewIter(_views);
-
-    while (viewIter.hasNext())
-    {
-        TEWidget* display = viewIter.next();
-        display->doScroll( pages * (display->Lines() / 2) );
-    }
-}
-
-
 #define encodeMode(M,B) BITS(B,getMode(M))
 #define encodeStat(M,B) BITS(B,((ev->modifiers() & (M)) == (M)))
 
@@ -1032,25 +1014,24 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
                                      encodeStat(Qt::AltModifier     , BITS_Alt       ),
                           &cmd, txt, &metaspecified ))
 //printf("cmd: %d, %s, %d\n",cmd,txt,len);
-  if (connected)
-  {
+  
   switch(cmd) // ... and execute if found.
   {
-    case CMD_scrollPageUp   : scrollViewPages(-1); return;
-    case CMD_scrollPageDown : scrollViewPages(+1); return;
-    case CMD_scrollLineUp   : scrollView(-1             ); return;
-    case CMD_scrollLineDown : scrollView(+1             ); return;
+    #warning "Add functionality elsewhere to handle scrolling of views when up/down/page-up/page-down keys are pressed."
+    //case CMD_scrollPageUp   : scrollViewPages(-1); return;
+    //case CMD_scrollPageDown : scrollViewPages(+1); return;
+    //case CMD_scrollLineUp   : scrollView(-1             ); return;
+    //case CMD_scrollLineDown : scrollView(+1             ); return;
     case CMD_scrollLock     : onScrollLock(                ); return;
-  }
   }
   if (holdScreen)
   {
     switch(ev->key())
     {
-    case Qt::Key_Down : scrollView(+1); return;
-    case Qt::Key_Up : scrollView(-1); return;
-    case Qt::Key_PageUp : scrollViewPages(-1); return;
-    case Qt::Key_PageDown : scrollViewPages(+1); return;
+    //case Qt::Key_Down : scrollView(+1); return;
+    //case Qt::Key_Up : scrollView(-1); return;
+    //case Qt::Key_PageUp : scrollViewPages(-1); return;
+    //case Qt::Key_PageDown : scrollViewPages(+1); return;
     }
   }
   
@@ -1231,13 +1212,6 @@ void TEmuVt102::resetModes()
   holdScreen = false;
 }
 
-void TEmuVt102::setViewMouseMarks(bool marks)
-{
-    QListIterator< TEWidget* > viewIter(_views);
-    while (viewIter.hasNext())
-            viewIter.next()->setMouseMarks(marks);
-}
-
 void TEmuVt102::setMode(int m)
 {
   currParm.mode[m] = true;
@@ -1247,7 +1221,7 @@ void TEmuVt102::setMode(int m)
     case MODE_Mouse1001:
     case MODE_Mouse1002:
     case MODE_Mouse1003:
- 	if (connected) setViewMouseMarks(false);
+ 	    emit programUsesMouse(false); 
     break;
 
     case MODE_AppScreen : screen[1]->clearSelection();
@@ -1270,7 +1244,7 @@ void TEmuVt102::resetMode(int m)
     case MODE_Mouse1001 :
     case MODE_Mouse1002 :
     case MODE_Mouse1003 :
-	    if (connected) setViewMouseMarks(true);
+	    emit programUsesMouse(true); 
     break;
 
     case MODE_AppScreen : screen[0]->clearSelection();
@@ -1299,7 +1273,8 @@ bool TEmuVt102::getMode(int m)
   return currParm.mode[m];
 }
 
-void TEmuVt102::setConnect(bool c)
+#warning "Code to handle signal/slot connections has already been moved elsewhere, but mouse mode refreshing part below has not yet been looked at.  Neither has the part inside the HAVE_XKB define which calls scrolllock_set_xyz."
+/*void TEmuVt102::setConnect(bool c)
 {
   TEmulation::setConnect(c);
 
@@ -1335,7 +1310,7 @@ void TEmuVt102::setConnect(bool c)
                          this, SLOT(sendString(const char*)));
     }
   }
-}
+}*/
 
 char TEmuVt102::getErase()
 {

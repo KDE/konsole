@@ -112,6 +112,18 @@ int ScreenWindow::currentLine() const
     return _currentLine;
 }
 
+void ScreenWindow::scrollBy( RelativeScrollMode mode , int amount )
+{
+    if ( mode == ScrollLines )
+    {
+        scrollTo( currentLine() + amount );
+    }
+    else if ( mode == ScrollPages )
+    {
+        scrollTo( currentLine() + amount * ( windowLines() / 2 ) ); 
+    }
+}
+
 void ScreenWindow::scrollTo( int line )
 {
     const int delta = line - _currentLine;

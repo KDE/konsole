@@ -432,7 +432,7 @@ TEWidget::TEWidget(QWidget *parent)
   blinkCursorT   = new QTimer(this);
   connect(blinkCursorT, SIGNAL(timeout()), this, SLOT(blinkCursorEvent()));
 
-  setMouseMarks(true);
+  setUsesMouse(true);
   setColorTable(base_color_table); // init color table
 
   qApp->installEventFilter( this ); //FIXME: see below
@@ -2268,7 +2268,7 @@ void TEWidget::setWordCharacters(QString wc)
 	word_characters = wc;
 }
 
-void TEWidget::setMouseMarks(bool on)
+void TEWidget::setUsesMouse(bool on)
 {
   mouse_marks = on;
   setCursor( mouse_marks ? Qt::IBeamCursor : Qt::ArrowCursor );
