@@ -277,7 +277,7 @@ Q_SIGNALS:
 //  void setSessionSchema(TESession *session, const QString &schema);
 
 private Q_SLOTS:
-  void onRcvBlock( const char* buf, int len );
+  void onReceiveBlock( const char* buf, int len );
   void monitorTimerDone();
   void notifySessionState(int state);
   void onContentSizeChange(int height, int width);

@@ -2326,7 +2326,10 @@ void TEWidget::setSelection(const QString& t)
 
 void TEWidget::copyClipboard()
 {
-  emit copySelectionSignal();
+  Q_ASSERT( _screenWindow );
+
+  QString text = _screenWindow->selectedText(true);
+  QApplication::clipboard()->setText(text);
 }
 
 void TEWidget::pasteClipboard()

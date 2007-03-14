@@ -104,8 +104,8 @@ TESession::TESession() :
     //connect teletype to emulation backend 
     _shellProcess->useUtf8(_emulation->utf8());
     
-    connect( _shellProcess,SIGNAL(block_in(const char*,int)),this,SLOT(onRcvBlock(const char*,int)) );
-    connect( _emulation,SIGNAL(sndBlock(const char*,int)),_shellProcess,SLOT(send_bytes(const char*,int)) );
+    connect( _shellProcess,SIGNAL(block_in(const char*,int)),this,SLOT(onReceiveBlock(const char*,int)) );
+    connect( _emulation,SIGNAL(sendBlock(const char*,int)),_shellProcess,SLOT(send_bytes(const char*,int)) );
     connect( _emulation,SIGNAL(lockPty(bool)),_shellProcess,SLOT(lockPty(bool)) );
     connect( _emulation,SIGNAL(useUtf8(bool)),_shellProcess,SLOT(useUtf8(bool)) );
 
@@ -173,9 +173,9 @@ TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _ar
   _shellProcess->setSize(primaryView()->Lines(),primaryView()->Columns()); // not absolutely necessary
   _shellProcess->useUtf8(_emulation->utf8());
   //kDebug(1211)<<"TESession ctor() connecting"<<endl;
-  connect( _shellProcess,SIGNAL(block_in(const char*,int)),this,SLOT(onRcvBlock(const char*,int)) );
+  connect( _shellProcess,SIGNAL(block_in(const char*,int)),this,SLOT(onReceiveBlock(const char*,int)) );
 
-  connect( _emulation,SIGNAL(sndBlock(const char*,int)),_shellProcess,SLOT(send_bytes(const char*,int)) );
+  connect( _emulation,SIGNAL(sendBlock(const char*,int)),_shellProcess,SLOT(send_bytes(const char*,int)) );
   connect( _emulation,SIGNAL(lockPty(bool)),_shellProcess,SLOT(lockPty(bool)) );
   connect( _emulation,SIGNAL(useUtf8(bool)),_shellProcess,SLOT(useUtf8(bool)) );
 
@@ -932,7 +932,7 @@ void TESession::startZModem(const QString &zmodem, const QString &dir, const QSt
   connect(zmodemProc,SIGNAL (processExited(KProcess *)),
           this, SLOT(zmodemDone()));
 
-  disconnect( _shellProcess,SIGNAL(block_in(const char*,int)), this, SLOT(onRcvBlock(const char*,int)) );
+  disconnect( _shellProcess,SIGNAL(block_in(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)) );
   connect( _shellProcess,SIGNAL(block_in(const char*,int)), this, SLOT(zmodemRcvBlock(const char*,int)) );
   connect( _shellProcess,SIGNAL(buffer_empty()), this, SLOT(zmodemContinue()));
 
@@ -1006,7 +1006,7 @@ void TESession::zmodemDone()
 
     disconnect( _shellProcess,SIGNAL(block_in(const char*,int)), this ,SLOT(zmodemRcvBlock(const char*,int)) );
     disconnect( _shellProcess,SIGNAL(buffer_empty()), this, SLOT(zmodemContinue()));
-    connect( _shellProcess,SIGNAL(block_in(const char*,int)), this, SLOT(onRcvBlock(const char*,int)) );
+    connect( _shellProcess,SIGNAL(block_in(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)) );
 
     _shellProcess->send_bytes("\030\030\030\030", 4); // Abort
     _shellProcess->send_bytes("\001\013\n", 3); // Try to get prompt back
@@ -1021,9 +1021,9 @@ void TESession::enableFullScripting(bool b)
         (void)new SessionScriptingAdaptor(this);
 }
 
-void TESession::onRcvBlock( const char* buf, int len )
+void TESession::onReceiveBlock( const char* buf, int len )
 {
-    _emulation->onRcvBlock( buf, len );
+    _emulation->onReceiveBlock( buf, len );
     emit receivedData( QString::fromLatin1( buf, len ) );
 }
 

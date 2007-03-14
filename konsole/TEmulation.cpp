@@ -54,7 +54,7 @@
    We use a refreshing algorithm here that has been adoped from rxvt/kvt.
 
    By this, refreshing is driven by a timer, which is (re)started whenever
-   a new bunch of data to be interpreted by the emulation arives at `onRcvBlock'.
+   a new bunch of data to be interpreted by the emulation arives at `onReceiveBlock'.
    As soon as no more data arrive for `BULK_TIMEOUT' milliseconds, we trigger
    refresh. This rule suits both bulk display operation as done by curses as
    well as individual characters typed.
@@ -234,7 +234,7 @@ int TEmulation::keymapNo()
 /*!
 */
 
-void TEmulation::onRcvChar(int c)
+void TEmulation::onReceiveChar(int c)
 // process application unicode input to terminal
 // this is a trivial scanner
 {
@@ -271,8 +271,8 @@ void TEmulation::onKeyPress( QKeyEvent* ev )
     // Note that the text is proper unicode.
     // We should do a conversion here, but since this
     // routine will never be used, we simply emit plain ascii.
-    //emit sndBlock(ev->text().toAscii(),ev->text().length());
-    emit sndBlock(ev->text().toUtf8(),ev->text().length());
+    //emit sendBlock(ev->text().toAscii(),ev->text().length());
+    emit sendBlock(ev->text().toUtf8(),ev->text().length());
   }
 }
 
@@ -293,7 +293,7 @@ void TEmulation::onMouse(int /*buttons*/, int /*column*/, int /*row*/, int /*eve
 TODO: Character composition from the old code.  See #96536
 */
 
-void TEmulation::onRcvBlock(const char* text, int length)
+void TEmulation::onReceiveBlock(const char* text, int length)
 {
 	emit notifySessionState(NOTIFYACTIVITY);
 
@@ -314,7 +314,7 @@ void TEmulation::onRcvBlock(const char* text, int length)
 	//send characters to terminal emulator
 	for (int i=0;i<unicodeText.length();i++)
 	{
-		onRcvChar(unicodeText[i].unicode());
+		onReceiveChar(unicodeText[i].unicode());
 	}
 
 	//look for z-modem indicator
@@ -424,10 +424,6 @@ void TEmulation::clearSelection() {
 void TEmulation::isBusySelecting(bool busy)
 {
   currentScreen->setBusySelecting(busy);
-}
-void TEmulation::copySelection() {
-  QString t = currentScreen->selectedText(true);
-  QApplication::clipboard()->setText(t);
 }
 
 void TEmulation::writeToStream(QTextStream* stream , 

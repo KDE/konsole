@@ -123,7 +123,7 @@ public:
   void clearEntireScreen();
   void reset();
 
-  void onRcvChar(int cc);
+  void onReceiveChar(int cc);
 
 public Q_SLOTS:
     

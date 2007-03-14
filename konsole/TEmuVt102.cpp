@@ -180,7 +180,7 @@ void TEmuVt102::reset()
 
    The pipeline proceeds as follows:
 
-   - Tokenizing the ESC codes (onRcvChar)
+   - Tokenizing the ESC codes (onReceiveChar)
    - VT100 code page translation of plain characters (applyCharset)
    - Interpretation of ESC codes (tau)
 
@@ -328,7 +328,7 @@ void TEmuVt102::initTokenizer()
 
 // process an incoming unicode character
 
-void TEmuVt102::onRcvChar(int cc)
+void TEmuVt102::onReceiveChar(int cc)
 { 
   int i;
   if (cc == 127) return; //VT100: ignore.
@@ -350,7 +350,7 @@ void TEmuVt102::onRcvChar(int cc)
   if (getMode(MODE_Ansi)) // decide on proper action
   {
     if (lec(1,0,ESC)) {                                                       return; }
-    if (lec(1,0,ESC+128)) { s[0] = ESC; onRcvChar('[');                       return; }
+    if (lec(1,0,ESC+128)) { s[0] = ESC; onReceiveChar('[');                   return; }
     if (les(2,1,GRP)) {                                                       return; }
     if (Xte         ) { XtermHack();                            resetToken(); return; }
     if (Xpe         ) {                                                       return; }
@@ -849,7 +849,7 @@ switch( N )
 
 void TEmuVt102::sendString(const char* s)
 {
-  emit sndBlock(s,strlen(s));
+  emit sendBlock(s,strlen(s));
 }
 
 // Replies ----------------------------------------------------------------- --
@@ -1043,7 +1043,7 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
 
   if (cmd==CMD_send) {
     if ((ev->modifiers() & Qt::AltModifier) && !metaspecified ) sendString("\033");
-    emit sndBlock(txt.constData(), txt.length());
+    emit sendBlock(txt.constData(), txt.length());
     return;
   }
 
@@ -1058,7 +1058,7 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
     //        latin1 locales at least. Please anyone find a clean solution (malte)
     if (ev->modifiers() & Qt::ControlModifier)
       s.fill(ev->text().toAscii()[0], 1);
-    emit sndBlock(s.data(),s.length());              // we may well have s.length() > 1 
+    emit sendBlock(s.data(),s.length());              // we may well have s.length() > 1 
     return;
   }
 }

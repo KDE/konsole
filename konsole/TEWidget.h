@@ -250,7 +250,6 @@ Q_SIGNALS:
     void changedHistoryCursor( int value);
     void configureRequest( TEWidget*, int state, int x, int y );
 
-    void copySelectionSignal();
     void clearSelectionSignal();
     void beginSelectionSignal( const int x, const int y, const bool columnmode );
     void extendSelectionSignal( const int x, const int y );

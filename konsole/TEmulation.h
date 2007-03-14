@@ -153,9 +153,6 @@ public Q_SLOTS: // signals incoming from TEWidget
   /** Clear the current selection */
   //virtual void clearSelection();
 
-  /** Copy the current selection to the clipboard */
-  virtual void copySelection();
-
   /** Begin a new selection at column @p x, row @p y. TODO:  What does columnmode do? */
   //virtual void onSelectionBegin(const int x, const int y, const bool columnmode);
   /** Extend the current selection to column @p x, row @p y. */
@@ -170,13 +167,13 @@ public Q_SLOTS: // signals incoming from TEWidget
 public Q_SLOTS: // signals incoming from data source
 
   /** Processes an incoming block of text, triggering an update of connected views if necessary. */
-  void onRcvBlock(const char* txt,int len);
+  void onReceiveBlock(const char* txt,int len);
 
 Q_SIGNALS:
 
   void lockPty(bool);
   void useUtf8(bool);
-  void sndBlock(const char* txt,int len);
+  void sendBlock(const char* txt,int len);
   void ImageSizeChanged(int lines, int columns);
   void changeColumns(int columns);
   void changeColLin(int columns, int lines);
@@ -200,10 +197,10 @@ Q_SIGNALS:
 
 public:
   /** 
-   * Processes an incoming character.  See onRcvBlock()
+   * Processes an incoming character.  See onReceiveBlock()
    * @p ch A unicode character code. 
    */
-  virtual void onRcvChar(int ch);
+  virtual void onReceiveChar(int ch);
 
   virtual void setMode  (int) = 0;
   virtual void resetMode(int) = 0;
