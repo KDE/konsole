@@ -28,6 +28,7 @@ ScreenWindow::ScreenWindow(QObject* parent)
     : QObject(parent)
     , _currentLine(0)
     , _trackOutput(true)
+    , _scrollCount(0)
 {
 }
 

@@ -920,6 +920,7 @@ void TEWidget::setCursorPos(const int curx, const int cury)
 //of font_h).    
 void TEWidget::scrollImage(int lines , const QRect& /*region*/)
 {
+    //qDebug() << "scrolling image by " << lines << " lines";
     if ( lines == 0 || image == 0 || abs(lines) >= this->usedLines ) return;
 
     QRect scrollRect;
@@ -935,6 +936,8 @@ void TEWidget::scrollImage(int lines , const QRect& /*region*/)
         //set region of display to scroll, making sure that
         //the region aligns correctly to the character grid 
         scrollRect = QRect( bX ,bY, this->usedColumns * font_w , (this->usedLines - lines) * font_h );
+
+     //   qDebug() << "scrolled down " << lines << " lines";
     }
     else
     {
@@ -948,6 +951,7 @@ void TEWidget::scrollImage(int lines , const QRect& /*region*/)
         QPoint topPoint( bX , bY + abs(lines)*font_h );
 
         scrollRect = QRect( topPoint , QSize( this->usedColumns*font_w , (this->usedLines - abs(lines)) * font_h ));
+       // qDebug() << "scrolled up " << lines << " lines";
     }
 
     //scroll the display
@@ -969,6 +973,11 @@ void TEWidget::processFilters()
 
 void TEWidget::updateImage() //setImage(const Character* const newimg, int lines, int columns)
 {
+  // optimization - scroll the existing image where possible and avoid expensive text drawing
+  // for parts of the image that can simply be moved up or down
+  scrollImage( _screenWindow->scrollCount() , QRect() );
+  _screenWindow->resetScrollCount();
+
   const Character* const newimg = _screenWindow->getImage();
   int lines = _screenWindow->windowLines();
   int columns = _screenWindow->windowColumns();
