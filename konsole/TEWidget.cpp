@@ -147,8 +147,8 @@ void TEWidget::setScreenWindow(ScreenWindow* window)
     _screenWindow = window;
 
 #warning "The order here is not specified - does it matter whether updateImage or updateLineProperties comes first?"
-    connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateImage()) );
     connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateLineProperties()) );
+    connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateImage()) );
 }
 
 void TEWidget::setDefaultBackColor(const QColor& color)
@@ -2291,6 +2291,7 @@ void TEWidget::setUsesMouse(bool on)
 
 #undef KeyPress
 
+#if 0
 void TEWidget::emitText(QString text)
 {
   if (!text.isEmpty()) {
@@ -2298,6 +2299,8 @@ void TEWidget::emitText(QString text)
     emit keyPressedSignal(&e); // expose as a big fat keypress event
   }
 }
+#endif
+
 
 void TEWidget::emitSelection(bool useXselection,bool appendReturn)
 // Paste Clipboard by simulating keypress events
@@ -2571,7 +2574,7 @@ void TEWidget::enableBell()
 
 
 
-void TEWidget::Bell(bool visibleSession, QString message)
+void TEWidget::bell(const QString& message)
 {
   if (m_bellMode==BELLNONE) return;
 
@@ -2587,11 +2590,8 @@ void TEWidget::Bell(bool visibleSession, QString message)
     if (m_bellMode==BELLSYSTEM) {
                 KNotification::beep();
     } else if (m_bellMode==BELLNOTIFY) {
-        if (visibleSession)
             KNotification::event("BellVisible", message,QPixmap(),this);
-        else
-            KNotification::event("BellInvisible", message,QPixmap(),this);
-    } else if (m_bellMode==BELLVISUAL) {
+      } else if (m_bellMode==BELLVISUAL) {
         swapColorTable();
         QTimer::singleShot(200,this,SLOT(swapColorTable()));
     }

@@ -126,7 +126,6 @@ public:
     uint lineSpacing() const;
 
     void emitSelection(bool useXselection,bool appendReturn);
-    void emitText(QString text);
 
     void scrollImage(int lines,const QRect& region);
     
@@ -151,7 +150,6 @@ public:
     void setBellMode(int mode);
     int bellMode() { return m_bellMode; }
     enum { BELLSYSTEM=0, BELLNOTIFY=1, BELLVISUAL=2, BELLNONE=3 };
-    void Bell(bool visibleSession, QString message);
 
     void setSelection(const QString &t);
 
@@ -224,6 +222,12 @@ public Q_SLOTS:
      * or false otherwise.
      */
     void setUsesMouse(bool usesMouse);
+    
+    /** 
+     * Shows a notification that a bell event has occurred in the terminal.
+     * TODO: More documentation here
+     */
+    void bell(const QString& message);
 
 Q_SIGNALS:
 

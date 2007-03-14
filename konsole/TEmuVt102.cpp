@@ -993,6 +993,15 @@ void TEmuVt102::onScrollLock()
 #define encodeMode(M,B) BITS(B,getMode(M))
 #define encodeStat(M,B) BITS(B,((ev->modifiers() & (M)) == (M)))
 
+void TEmuVt102::sendText( const QString& text )
+{
+  if (!text.isEmpty()) {
+    QKeyEvent event(QEvent::KeyPress, 0, Qt::NoModifier, text);
+    onKeyPress(&event); // expose as a big fat keypress event
+  }
+
+}
+
 /*
    Keyboard event handling has been simplified somewhat by pushing
    the complications towards a configuration file [see KeyTrans class].

@@ -133,6 +133,12 @@ public Q_SLOTS: // signals incoming from TEWidget
   virtual void onHistoryCursorChange(int cursor);
   
   /** 
+   * Interprets a sequence of characters and sends the result to the terminal.
+   * This is equivalent to calling onKeyPress for each character in @p text in succession.
+   */
+  virtual void sendText(const QString& text) = 0;
+
+  /** 
    * Interprets a key press event.  
    * This should be reimplemented in sub-classes to emit an appropriate character
    * sequence via sndBlock() 

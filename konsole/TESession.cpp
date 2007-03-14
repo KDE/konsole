@@ -211,15 +211,6 @@ void TESession::ptyError()
   emit done(this);
 }
 
-#warning "Remove me.  Behaviour of TESession should be the same whether there are any views connected to the session or not.  The concept of a 'primary view' was used in porting from the old one-display-widget-per-session setup."
-TEWidget* TESession::primaryView()
-{
-    if (!_views.isEmpty())
-        return _views.first();
-    else
-        return 0;
-}
-
 QList<TEWidget*> TESession::views() const
 {
     return _views;
@@ -516,11 +507,9 @@ void TESession::monitorTimerDone()
 
 void TESession::notifySessionState(int state)
 {
-  Q_ASSERT( primaryView() );
-
   if (state==NOTIFYBELL) 
   {
-    primaryView()->Bell( true /*_emulation->isConnected()*/ ,i18n("Bell in session '%1'", _title));
+      emit bellRequest( i18n("Bell in session '%1'",_title) );
   } 
   else if (state==NOTIFYACTIVITY) 
   {
@@ -598,11 +587,9 @@ bool TESession::closeSession()
 
 void TESession::feedSession(const QString &text)
 {
-  Q_ASSERT( primaryView() );
-
   emit disableMasterModeConnections();
   setListenToKeyPress(true);
-  primaryView()->emitText(text);
+  _emulation->sendText(text);
   setListenToKeyPress(false);
   emit enableMasterModeConnections();
 }
@@ -1027,13 +1014,6 @@ void TESession::onReceiveBlock( const char* buf, int len )
     emit receivedData( QString::fromLatin1( buf, len ) );
 }
 
-void TESession::print( QPainter &paint, bool friendly, bool exact )
-{
-    Q_ASSERT( primaryView() );
-
-    primaryView()->print(paint, friendly, exact);
-}
-
 ColorSchema* TESession::schema()
 {
     return _colorScheme;
@@ -1049,24 +1029,6 @@ void TESession::setSchema(ColorSchema* schema)
     {
         viewIter.next()->setColorTable(schema->table());
     }
-}
-
-QString TESession::font()
-{
-  Q_ASSERT( primaryView() );
-
-  return primaryView()->getVTFont().toString();
-}
-
-void TESession::setFont(const QString &font)
-{
-  Q_ASSERT( primaryView() );
-
-  QFont tmp;
-  if (tmp.fromString(font))
-    primaryView()->setVTFont(tmp);
-  else
-    kWarning()<<"unknown font: "<<font<<endl;
 }
 
 QString TESession::encoding()

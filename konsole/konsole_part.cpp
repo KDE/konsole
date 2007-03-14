@@ -557,10 +557,12 @@ void konsolePart::applyProperties()
    KConfig config("konsolerc");
    se->setAddToUtmp( config.group("UTMP").readEntry("AddToUtmp", true));
 
-   //SPLIT-VIEW Fix
-   //se->widget()->setVTFont( defaultFont );
-   se->primaryView()->setVTFont( defaultFont );
-
+   QListIterator<TEWidget*> viewIter(se->views());
+   while ( viewIter.hasNext() )
+   {
+      viewIter.next()->setVTFont( defaultFont ); 
+   }
+   
    //se->setSchemaNo( curr_schema );
    slotSetEncoding();
 }
@@ -649,7 +651,8 @@ void konsolePart::saveProperties()
     cg.writeEntry("bellmode",n_bell);
     cg.writeEntry("BlinkingCursor", te->blinkingCursor());
     //SPLIT-VIEW Fix
-    cg.writeEntry("defaultfont", (se->primaryView())->getVTFont());
+    //FIXME: record default font for part
+    //cg.writeEntry("defaultfont", (se->primaryView())->getVTFont());
     cg.writeEntry("history", se->history().getSize());
     cg.writeEntry("historyenabled", b_histEnabled);
     cg.writeEntry("keytab",n_keytab);
@@ -692,14 +695,11 @@ void konsolePart::slotSelectScrollbar()
 void konsolePart::slotSelectFont() {
    if ( !se ) return;
 
-   //SPLIT-VIEW Fix
-   //QFont font = se->widget()->getVTFont();
-   QFont font = se->primaryView()->getVTFont();
+   QFont font = te->getVTFont();
    if ( KFontDialog::getFont( font, true ) != QDialog::Accepted )
       return;
 
-   se->primaryView()->setVTFont( font );
-   //se->widget()->setVTFont( font );
+   te->setVTFont(font);
 }
 
 void konsolePart::biggerFont(void) {
@@ -1148,7 +1148,7 @@ void konsolePart::showShellInDir( const QString& dir )
       QString text = dir;
       KRun::shellQuote(text);
       text = QLatin1String("cd ") + text + '\n';
-      te->emitText( text );
+      se->getEmulation()->sendText( text );
   };
 }
 
@@ -1159,7 +1159,7 @@ void konsolePart::showShell()
 
 void konsolePart::sendInput( const QString& text )
 {
-    te->emitText( text );
+    se->getEmulation()->sendText( text );
 }
 
 void konsolePart::slotProcessExited()

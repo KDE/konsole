@@ -60,7 +60,6 @@ public:
   Q_PROPERTY(QString sessionName READ sessionName)
   Q_PROPERTY(QString encoding READ encoding WRITE setEncoding)
   Q_PROPERTY(int sessionPid READ sessionPid)
-  Q_PROPERTY(QString font READ font WRITE setFont)
   Q_PROPERTY(QString keytab READ keytab WRITE setKeytab)
   Q_PROPERTY(ColorSchema* schema READ schema WRITE setSchema)
   Q_PROPERTY(QSize size READ size WRITE setSize)
@@ -93,21 +92,6 @@ public:
    * Returns the views connected to this session
    */
   QList<TEWidget*> views() const;
-
-  /**
-   * Returns the primary view for this session.
-   *
-   * The primary view is the first view added to the session, which is used by the emulation
-   * if it needs to determine the size of the view - ie. the number of lines and columns which
-   * the view can display. 
-   *
-   * If the primary view is removed from the session using removeView(), the next view which is still
-   * attached will become the primary view.
-   *
-   * TODO:  Remove this method and ensure that TESession works even if there are no views
-   * attached.
-   */
-  TEWidget* primaryView();
 
   /** 
    * Returns true if the session has created child processes which have not yet terminated 
@@ -217,8 +201,6 @@ public:
   void cancelZModem();
   bool zmodemIsBusy() { return zmodemBusy; }
 
-  void print(QPainter &paint, bool friendly, bool exact);
-
  // QString schema();
  // void setSchema(const QString &schema);
   
@@ -231,9 +213,7 @@ public:
   void setKeytab(const QString &keytab);
   QSize size();
   void setSize(QSize size);
-  void setFont(const QString &font);
-  QString font();
-
+  
 public Q_SLOTS:
 
   void run();
@@ -259,6 +239,8 @@ Q_SIGNALS:
   void done(TESession*);
   void updateTitle();
   void notifySessionState(TESession* session, int state);
+  /** Emitted when a bell event occurs in the session. */
+  void bellRequest( const QString& message );
   void changeTabTextColor( TESession*, int );
 
   void disableMasterModeConnections();

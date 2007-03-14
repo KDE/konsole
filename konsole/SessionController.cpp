@@ -84,7 +84,7 @@ void SessionController::openUrl( const KUrl& url )
     {
         QString path = url.path();
         KRun::shellQuote(path);
-        _view->emitText("cd " + path + '\r');
+        _session->getEmulation()->sendText("cd " + path + '\r');
     }
     else
     {
@@ -101,6 +101,14 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
         if ( event->type() == QEvent::FocusIn )
         {
             emit focused(this);
+
+            connect( _session , SIGNAL(bellRequest(const QString&)) ,
+                    _view , SLOT(bell(const QString&)) );
+        }
+        if ( event->type() == QEvent::FocusOut )
+        {
+            disconnect( _session , SIGNAL(bellRequest(const QString&)) ,
+                     _view , SLOT(bell(const QString&)) );
         }
     }
 

@@ -82,7 +82,11 @@ public:
   ~TEmuVt102();
   
 public Q_SLOTS: 
+
+  /** Sends a raw character string to the terminal */
   virtual void sendString(const char*);
+
+  virtual void sendText(const QString& text);
   virtual void onKeyPress(QKeyEvent*);
   virtual void onMouse( int buttons, int column, int line , int eventType );
   
