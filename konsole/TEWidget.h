@@ -88,11 +88,16 @@ public:
     void setDefaultBackColor(const QColor& color);
     QColor getDefaultBackColor();
 
-    const ColorEntry* getColorTable() const;
+    const ColorEntry* colorTable() const;
     void              setColorTable(const ColorEntry table[]);
 
     void setScrollbarLocation(int loc);
-    enum { SCRNONE=0, SCRLEFT=1, SCRRIGHT=2 };
+    enum 
+    { 
+        SCROLLBAR_NONE=0, 
+        SCROLLBAR_LEFT=1, 
+        SCROLLBAR_RIGHT=2 
+    };
 
     void setScroll(int cursor, int lines);
     void doScroll(int lines);
@@ -127,7 +132,6 @@ public:
 
     void emitSelection(bool useXselection,bool appendReturn);
 
-    void scrollImage(int lines,const QRect& region);
     
     void setCursorPos(const int curx, const int cury);
 
@@ -231,6 +235,9 @@ public Q_SLOTS:
 
 Q_SIGNALS:
 
+    /**
+     * Emitted when the user presses a key whilst the terminal widget has focus.
+     */
     void keyPressedSignal(QKeyEvent *e);
 
     /**
@@ -254,13 +261,8 @@ Q_SIGNALS:
     void changedHistoryCursor( int value);
     void configureRequest( TEWidget*, int state, int x, int y );
 
-    void clearSelectionSignal();
-    void beginSelectionSignal( const int x, const int y, const bool columnmode );
-    void extendSelectionSignal( const int x, const int y );
-    void endSelectionSignal(const bool preserve_line_breaks);
-    void isBusySelecting(bool);
-    void testIsSelected(const int x, const int y, bool &selected /* result */);
-  void sendStringToEmu(const char*);
+   void isBusySelecting(bool);
+   void sendStringToEmu(const char*);
 
 protected:
 
@@ -335,7 +337,13 @@ private:
     // at that point.
     void characterPosition(QPoint widgetPoint,int& line,int& column);
 
-//    QChar (*fontMap)(QChar); // possible vt100 font extension
+    // shows a notification window in the middle of the widget indicating the terminal's
+    // current size in columns and lines
+    void showResizeNotification();
+
+    // scrolls the image by a number of lines.  'lines' may be positive ( to scroll the image down ) 
+    // or negative ( to scroll the image up )
+    void scrollImage(int lines);
 
     ScreenWindow* _screenWindow;
 

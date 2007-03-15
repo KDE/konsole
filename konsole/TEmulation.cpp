@@ -537,58 +537,8 @@ void TEmulation::showBulk()
     bulk_timer1.stop();
     bulk_timer2.stop();
 
-
     emit updateViews();
 }
-
-#if 0
-void TEmulation::showBulk()
-{
-  bulk_timer1.stop();
-  bulk_timer2.stop();
-
-  if (connected)
-  {
-#warning "Temporary - getCookedImage to be moved"
-    Character* image = currentScreen->getCookedImage(0); 
-#warning "Temporary - getCookedLineProperties to be moved"
-    QVector<LineProperty> lineProperties = currentScreen->getCookedLineProperties(0); 
-    QListIterator<TEWidget*> viewIter(_views);
-
-    while (viewIter.hasNext())
-    {
-        TEWidget* view = viewIter.next();
-
-        QRect scrollRegion;
-        scrollRegion.setTop( currentScreen->topMargin() );
-        scrollRegion.setBottom( currentScreen->bottomMargin() );
-        scrollRegion.setLeft( 0 );
-        scrollRegion.setRight( currentScreen->getColumns() );
-
-        // this is an optimisation to avoid the view having to redraw the entire display
-        // when the output is simply scrolled by a few lines.
-        // currentScreen->scrolledLines() is a guess as to how much the output has scrolled by since
-        // the last call to currentScreen->resetScrolledLines().  It does not matter if this count is
-        // wrong since the final output from the view will always be the image set with
-        // setImage() below.
-        view->scrollImage( - currentScreen->scrolledLines() , scrollRegion );
-   
-        // update the display 
-        view->setLineProperties( lineProperties );
-	    view->setImage(image,
-                  currentScreen->getLines(),
-                  currentScreen->getColumns());     
-        view->setCursorPos(currentScreen->getCursorX(), currentScreen->getCursorY());	// set XIM position
-	    
-        //TODO - Update cursor
-        view->setScroll(currentScreen->getHistCursor(),currentScreen->getHistLines()); 
-    }
-  
-    currentScreen->resetScrolledLines();  
-    free(image);
-  }
-}
-#endif 
 
 void TEmulation::bufferedUpdate()
 {

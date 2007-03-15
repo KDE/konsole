@@ -595,7 +595,7 @@ void konsolePart::readProperties()
   b_histEnabled = cg.readEntry("historyenabled", true);
   n_bell = qMin(cg.readEntry("bellmode",uint(TEWidget::BELLSYSTEM)),3u);
   n_keytab=cg.readEntry("keytab",0); // act. the keytab for this session
-  n_scroll = qMin(cg.readEntry("scrollbar",uint(TEWidget::SCRRIGHT)),2u);
+  n_scroll = qMin(cg.readEntry("scrollbar",uint(TEWidget::SCROLLBAR_RIGHT)),2u);
   m_histSize = cg.readEntry("history",DEFAULT_HISTORY_SIZE);
   s_word_seps= cg.readEntry("wordseps",":@-./_~");
 

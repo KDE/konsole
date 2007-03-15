@@ -404,7 +404,7 @@ TEWidget* ViewManager::createTerminalDisplay()
    display->setCutToBeginningOfLine(true);
    display->setTerminalSizeStartup(false);
    display->setSize(80,40);
-   display->setScrollbarLocation(TEWidget::SCRRIGHT);
+   display->setScrollbarLocation(TEWidget::SCROLLBAR_RIGHT);
 
    return display;
 }

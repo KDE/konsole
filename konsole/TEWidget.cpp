@@ -167,7 +167,7 @@ QColor TEWidget::getDefaultBackColor()
   return color_table[DEFAULT_BACK_COLOR].color;
 }
 
-const ColorEntry* TEWidget::getColorTable() const
+const ColorEntry* TEWidget::colorTable() const
 {
   return color_table;
 }
@@ -376,7 +376,7 @@ TEWidget::TEWidget(QWidget *parent)
 ,line_selection_mode(false)
 ,preserve_line_breaks(true)
 ,column_selection_mode(false)
-,scrollLoc(SCRNONE)
+,scrollLoc(SCROLLBAR_NONE)
 ,word_characters(":@-./_~")
 ,m_bellMode(BELLSYSTEM)
 ,blinking(false)
@@ -918,9 +918,8 @@ void TEWidget::setCursorPos(const int curx, const int cury)
 //note:  it is important that the area of the display which is scrolled aligns properly with
 //the character grid - which has a top left point at (bX,bY) , a cell width of font_w and a cell height
 //of font_h).    
-void TEWidget::scrollImage(int lines , const QRect& /*region*/)
+void TEWidget::scrollImage(int lines)
 {
-    //qDebug() << "scrolling image by " << lines << " lines";
     if ( lines == 0 || image == 0 || abs(lines) >= this->usedLines ) return;
 
     QRect scrollRect;
@@ -930,18 +929,18 @@ void TEWidget::scrollImage(int lines , const QRect& /*region*/)
     {
         assert( (lines*this->usedColumns) < image_size ); 
 
-        //scrolling down
+        //scroll internal image down
         memmove( image , &image[lines*this->usedColumns] , ( this->usedLines - lines ) * this->usedColumns * sizeof(Character) );
  
         //set region of display to scroll, making sure that
         //the region aligns correctly to the character grid 
         scrollRect = QRect( bX ,bY, this->usedColumns * font_w , (this->usedLines - lines) * font_h );
 
-     //   qDebug() << "scrolled down " << lines << " lines";
+        //qDebug() << "scrolled down " << lines << " lines";
     }
     else
     {
-        //scrolling up
+        //scroll internal image up
         memmove( &image[ abs(lines)*this->usedColumns] , image , 
                         (this->usedLines - abs(lines) ) * this->usedColumns * sizeof(Character) );
 
@@ -951,10 +950,11 @@ void TEWidget::scrollImage(int lines , const QRect& /*region*/)
         QPoint topPoint( bX , bY + abs(lines)*font_h );
 
         scrollRect = QRect( topPoint , QSize( this->usedColumns*font_w , (this->usedLines - abs(lines)) * font_h ));
-       // qDebug() << "scrolled up " << lines << " lines";
+        
+        //qDebug() << "scrolled up " << lines << " lines";
     }
 
-    //scroll the display
+    //scroll the display vertically to match internal image
     scroll( 0 , font_h * (-lines) , scrollRect );
 }
 
@@ -965,17 +965,11 @@ void TEWidget::processFilters()
     _filterChain->process();
 }
 
-/*!
-    The image can only be set completely.
-
-    The size of the new image may or may not match the size of the widget.
-*/
-
-void TEWidget::updateImage() //setImage(const Character* const newimg, int lines, int columns)
+void TEWidget::updateImage() 
 {
   // optimization - scroll the existing image where possible and avoid expensive text drawing
   // for parts of the image that can simply be moved up or down
-  scrollImage( _screenWindow->scrollCount() , QRect() );
+  scrollImage( _screenWindow->scrollCount() );
   _screenWindow->resetScrollCount();
 
   const Character* const newimg = _screenWindow->getImage();
@@ -986,7 +980,6 @@ void TEWidget::updateImage() //setImage(const Character* const newimg, int lines
 
   if (!image)
      updateImageSize(); // Create image
-
 
   assert( this->usedLines <= this->lines );
   assert( this->usedColumns <= this->columns );
@@ -1008,6 +1001,8 @@ void TEWidget::updateImage() //setImage(const Character* const newimg, int lines
   QChar *disstrU = new QChar[columnsToUpdate];
   char *dirtyMask = (char *) malloc(columnsToUpdate+2);
   QRegion dirtyRegion;
+
+  int dirtyLineCount = 0;
 
   for (y = 0; y < linesToUpdate; y++)
   {
@@ -1093,7 +1088,7 @@ void TEWidget::updateImage() //setImage(const Character* const newimg, int lines
            fixed_font = false;
 
 		updateLine = true;
-        
+
 		fixed_font = save_fixed_font;
         x += len - 1;
       }
@@ -1108,6 +1103,7 @@ void TEWidget::updateImage() //setImage(const Character* const newimg, int lines
 	
     if (updateLine)
     {
+        dirtyLineCount++;
         QRect dirtyRect = QRect( bX+tLx , bY+tLy+font_h*y , font_w * columnsToUpdate , font_h ); 	
     
         dirtyRegion |= dirtyRect;
@@ -1118,7 +1114,9 @@ void TEWidget::updateImage() //setImage(const Character* const newimg, int lines
     // finally, make `image' become `newimg'.
     memcpy((void*)currentLine,(const void*)newLine,columnsToUpdate*sizeof(Character));
   }
- 
+
+  //qDebug() << "dirty line count = " << dirtyLineCount;
+
   // if the new image is smaller than the previous image, then ensure that the area
   // outside the new image is cleared 
   if ( linesToUpdate < usedLines )
@@ -1133,12 +1131,6 @@ void TEWidget::updateImage() //setImage(const Character* const newimg, int lines
   }
   usedColumns = columnsToUpdate;
 
-  // handle filters on the view
-  //TEMPORARY: This is for testing only, this could potentially be expensive,
-  //so a mechanism must be added to only process filters as needed
-#warning "Temporary addition to test filters.  Don't do this in the final code"
-    processFilters();
-
   // redraw the display
   update(dirtyRegion);
 
@@ -1147,6 +1139,11 @@ void TEWidget::updateImage() //setImage(const Character* const newimg, int lines
   free(dirtyMask);
   delete [] disstrU;
 
+  showResizeNotification();
+}
+
+void TEWidget::showResizeNotification()
+{
   if (resizing && terminalSizeHint)
   {
      if (terminalSizeStartup) {
@@ -1183,6 +1180,7 @@ void TEWidget::updateImage() //setImage(const Character* const newimg, int lines
      mResizeWidget->show();
      mResizeTimer->start(3000);
   }
+
 }
 
 void TEWidget::setBlinkingCursor(bool blink)
@@ -1227,7 +1225,7 @@ void TEWidget::paintEvent( QPaintEvent* pe )
 
   // Calculate the contents rect excluding scroll bar.
   QRect innerRect = contentsRect();
-  if( scrollLoc != SCRNONE )
+  if( scrollLoc != SCROLLBAR_NONE )
     innerRect.setWidth( innerRect.width() - scrollbar->width() );
 
   innerRect.setWidth( innerRect.width() + 3 );
@@ -2635,18 +2633,18 @@ void TEWidget::calcGeometry()
                     contentsRect().height());
   switch(scrollLoc)
   {
-    case SCRNONE :
+    case SCROLLBAR_NONE :
      bX = rimX;
      contentWidth = contentsRect().width() - 2 * rimX;
      scrollbar->hide();
      break;
-    case SCRLEFT :
+    case SCROLLBAR_LEFT :
      bX = rimX+scrollbar->width();
      contentWidth = contentsRect().width() - 2 * rimX - scrollbar->width();
      scrollbar->move(contentsRect().topLeft());
      scrollbar->show();
      break;
-    case SCRRIGHT:
+    case SCROLLBAR_RIGHT:
      bX = rimX;
      contentWidth = contentsRect().width()  - 2 * rimX - scrollbar->width();
      scrollbar->move(contentsRect().topRight() - QPoint(scrollbar->width()-1,0));
@@ -2672,7 +2670,6 @@ void TEWidget::calcGeometry()
 
 void TEWidget::makeImage()
 {
-  
   calcGeometry();
 
   // confirm that array will be of non-zero size, since the painting code 
