@@ -64,7 +64,7 @@ class KTemporaryFile;
 class KToggleAction;
 class KWinModule;
 
-class TEWidget;
+class TerminalDisplay;
 class SessionInfo;
 class SessionManager;
 class ViewSplitter;
@@ -152,7 +152,7 @@ protected:
 
 
 private Q_SLOTS:
-  void configureRequest(TEWidget*,int,int,int);
+  void configureRequest(TerminalDisplay*,int,int,int);
   void activateSession();
   void activateSession(TESession*);
   void closeCurrentSession();
@@ -162,7 +162,7 @@ private Q_SLOTS:
   bool fullScreen();
   void setFullScreen(bool on);
   void schema_menu_activated(int item);
-  void pixmap_menu_activated(int item, TEWidget* tewidget=0);
+  void pixmap_menu_activated(int item, TerminalDisplay* tewidget=0);
   void keytab_menu_activated(int item);
   void schema_menu_check();
   void attachSession(TESession*);
@@ -187,7 +187,7 @@ private Q_SLOTS:
   void moveSessionLeft();
   void moveSessionRight();
   void allowPrevNext();
-  void setSchema(int n, TEWidget* tewidget);   // no slot necessary?
+  void setSchema(int n, TerminalDisplay* tewidget);   // no slot necessary?
   void sendSignal(QAction*);
   void slotClearTerminal();
   void slotResetClearTerminal();
@@ -280,7 +280,7 @@ private:
   void renameSession(TESession* ses);
   void savePropertiesHelper(KConfigGroup& config);
 
-  void setSchema(ColorSchema* s, TEWidget* tewidget=0);
+  void setSchema(ColorSchema* s, TerminalDisplay* tewidget=0);
   void setMasterMode(bool _state, TESession* _se=0);
 
   void buildSessionMenus();
@@ -290,18 +290,18 @@ private:
   void addScreenSession(const QString & path, const QString & socket);
   void resetScreenSessions();
 
-  TEWidget* createSessionView();
+  TerminalDisplay* createSessionView();
   void createViews(TESession* session);
 
-//  void initTEWidget(TEWidget* new_te, TEWidget* default_te);
+//  void initTerminalDisplay(TerminalDisplay* new_te, TerminalDisplay* default_te);
 
-  void createSessionTab(TEWidget *widget, const QIcon& iconSet,
+  void createSessionTab(TerminalDisplay *widget, const QIcon& iconSet,
                         const QString &text, int index = -1);
   QIcon iconSetForSession(TESession *session) const;
 
   bool eventFilter( QObject *o, QEvent *e );
 
-  Q3PtrList<TEWidget> activeTEs();
+  Q3PtrList<TerminalDisplay> activeTEs();
 
   Q3PtrDict<TESession> action2session;
   Q3PtrDict<KToggleAction> session2action;
@@ -314,7 +314,7 @@ private:
 
   //SessionTabWidget* tabwidget;
   // KTabWidget*    tabwidget;
-  TEWidget*      te;     // the visible TEWidget, either sole one or one of many
+  TerminalDisplay*      te;     // the visible TerminalDisplay, either sole one or one of many
   TESession*     se;
   TESession*     se_previous;
   TESession*     m_initialSession;

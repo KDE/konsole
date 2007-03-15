@@ -235,7 +235,7 @@ public:
      * Creates a new session of the specified type, using the settings specified
      * using addSetting() and from the configuration file for this session type.
      *
-     * The new session has no views associated with it.  A new TEWidget view
+     * The new session has no views associated with it.  A new TerminalDisplay view
      * must be created in order to display the output from the terminal session and
      * send keyboard or mouse input to it.
      *

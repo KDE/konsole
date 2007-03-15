@@ -142,7 +142,7 @@ void TESession::setArguments(const QStringList& arguments)
 */
 
 #if 0
-TESession::TESession(TEWidget* _te, const QString &_pgm, const QStringList & _args, const QString &_term, ulong _winId, const QString &_sessionId, const QString &_initial_cwd)
+TESession::TESession(TerminalDisplay* _te, const QString &_pgm, const QStringList & _args, const QString &_term, ulong _winId, const QString &_sessionId, const QString &_initial_cwd)
    : TESession()
    , _program(_pgm)
    , _arguments(_args)
@@ -211,12 +211,12 @@ void TESession::ptyError()
   emit done(this);
 }
 
-QList<TEWidget*> TESession::views() const
+QList<TerminalDisplay*> TESession::views() const
 {
     return _views;
 }
 
-void TESession::addView(TEWidget* widget)
+void TESession::addView(TerminalDisplay* widget)
 {
      Q_ASSERT( !_views.contains(widget) );
 
@@ -257,14 +257,14 @@ void TESession::addView(TEWidget* widget)
 
 void TESession::viewDestroyed(QObject* view)
 {
-    TEWidget* display = (TEWidget*)view;
+    TerminalDisplay* display = (TerminalDisplay*)view;
     
     Q_ASSERT( _views.contains(display) );
 
     removeView(display);
 }
 
-void TESession::removeView(TEWidget* widget)
+void TESession::removeView(TerminalDisplay* widget)
 {
     _views.removeAll(widget);
 
@@ -283,7 +283,7 @@ void TESession::removeView(TEWidget* widget)
     }
 }
 
-/*void TESession::changeWidget(TEWidget* w)
+/*void TESession::changeWidget(TerminalDisplay* w)
 {
   Q_ASSERT(0); //Method not updated yet to handle multiple views
 }*/
@@ -436,7 +436,7 @@ void TESession::setUserTitle( int what, const QString &caption )
 	if (backColor != modifiedBackground) {
 	    modifiedBackground = backColor;
 	    
-        QListIterator<TEWidget*> viewIter(_views);
+        QListIterator<TerminalDisplay*> viewIter(_views);
         while (viewIter.hasNext())
             viewIter.next()->setDefaultBackColor(backColor);
 	}
@@ -460,7 +460,7 @@ void TESession::setUserTitle( int what, const QString &caption )
     	if ( _iconName != caption ) {
 	   		_iconName = caption;
 
-            QListIterator< TEWidget* > viewIter(_views);
+            QListIterator< TerminalDisplay* > viewIter(_views);
             while (viewIter.hasNext())
        		    viewIter.next()->update();
 			modified = true;
@@ -544,7 +544,7 @@ void TESession::onContentSizeChange(int /*height*/, int /*width*/)
 
 void TESession::updateTerminalSize()
 {
-    QListIterator<TEWidget*> viewIter(_views);
+    QListIterator<TerminalDisplay*> viewIter(_views);
 
     int minLines = -1;
     int minColumns = -1;
@@ -552,7 +552,7 @@ void TESession::updateTerminalSize()
     //select largest number of lines and columns that will fit in all visible views
     while ( viewIter.hasNext() )
     {
-        TEWidget* view = viewIter.next();
+        TerminalDisplay* view = viewIter.next();
         if ( view->isHidden() == false )
         {
             minLines = (minLines == -1) ? view->Lines() : qMin( minLines , view->Lines() );
@@ -613,7 +613,7 @@ TESession::~TESession()
   delete _shellProcess;
   delete zmodemProc;
 
-  QListIterator<TEWidget*> viewIter(_views);
+  QListIterator<TerminalDisplay*> viewIter(_views);
   while (viewIter.hasNext())
       viewIter.next()->deleteLater();
 }
@@ -1024,7 +1024,7 @@ void TESession::setSchema(ColorSchema* schema)
     _colorScheme = schema;
 
     //update color scheme for attached views
-    QListIterator<TEWidget*> viewIter(_views);
+    QListIterator<TerminalDisplay*> viewIter(_views);
     while (viewIter.hasNext())
     {
         viewIter.next()->setColorTable(schema->table());

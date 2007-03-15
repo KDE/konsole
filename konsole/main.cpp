@@ -234,8 +234,8 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
   KCmdLineArgs *qtargs = KCmdLineArgs::parsedArgs("qt");
   has_noxft = !args->isSet("xft");
-  TEWidget::setAntialias( !has_noxft );
-  TEWidget::setStandalone( true );
+  TerminalDisplay::setAntialias( !has_noxft );
+  TerminalDisplay::setStandalone( true );
 
   // The following Qt options have no effect; warn users.
   if( qtargs->isSet("background") )

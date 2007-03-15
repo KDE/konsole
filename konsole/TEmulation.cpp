@@ -22,21 +22,21 @@
 
 /*! \class TEmulation
 
-    \brief Mediator between TEWidget and TEScreen.
+    \brief Mediator between TerminalDisplay and TEScreen.
 
    This class is responsible to scan the escapes sequences of the terminal
    emulation and to map it to their corresponding semantic complements.
    Thus this module knows mainly about decoding escapes sequences and
    is a stateless device w.rendition.t. the semantics.
 
-   It is also responsible to refresh the TEWidget by certain rules.
+   It is also responsible to refresh the TerminalDisplay by certain rules.
 
-   \sa TEWidget \sa TEScreen
+   \sa TerminalDisplay \sa TEScreen
 
    \par A note on refreshing
 
    Although the modifications to the current screen image could immediately
-   be propagated via `TEWidget' to the graphical surface, we have chosen
+   be propagated via `TerminalDisplay' to the graphical surface, we have chosen
    another way here.
 
    The reason for doing so is twofold.
@@ -386,7 +386,7 @@ void TEmulation::setSelection(const bool preserve_line_breaks) {
   QString t = currentScreen->selectedText(preserve_line_breaks);
   if (!t.isNull()) 
   {
-    QListIterator< TEWidget* > viewIter(_views);
+    QListIterator< TerminalDisplay* > viewIter(_views);
 
     while (viewIter.hasNext())    
         viewIter.next()->setSelection(t);
@@ -563,7 +563,7 @@ void TEmulation::setListenToKeyPress(bool l)
 
 // ---------------------------------------------------------------------------
 
-/*!  triggered by image size change of the TEWidget `gui'.
+/*!  triggered by image size change of the TerminalDisplay `gui'.
 
     This event is simply propagated to the attached screens
     and to the related serial line.

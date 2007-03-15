@@ -52,7 +52,7 @@ class TerminalCharacterDecoder;
     The terminal emulation ( TEmulation ) receives a serial stream of
     characters from the program currently running in the terminal.
     From this stream it creates an image of characters which is ultimately
-    rendered by the display widget ( TEWidget ).  Some types of emulation
+    rendered by the display widget ( TerminalDisplay ).  Some types of emulation
     may have more than one screen image. 
 
     getCookedImage() is used to retrieve the currently visible image

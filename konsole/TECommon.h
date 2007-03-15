@@ -19,7 +19,7 @@
 */
 
 /*! \file TECommon.h
-    \brief Definitions shared between TEScreen and TEWidget.
+    \brief Definitions shared between TEScreen and TerminalDisplay.
 */
 
 #ifndef TECOMMON_H
@@ -66,7 +66,7 @@ struct ColorEntry
 #define DEFAULT_BACK_COLOR 1
 
 //a standard set of colors using black text on a white background.
-//defined in TEWidget.characterpp
+//defined in TerminalDisplay.characterpp
 
 static const ColorEntry base_color_table[TABLE_COLORS] =
 // The following are almost IBM standard color codes, with some slight

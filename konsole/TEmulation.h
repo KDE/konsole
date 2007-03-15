@@ -34,7 +34,7 @@
 // Konsole
 #include "KeyTrans.h"
 #include "TEScreen.h"
-#include "TEWidget.h"
+#include "TerminalDisplay.h"
 
 class ScreenWindow;
 
@@ -45,7 +45,7 @@ enum { NOTIFYNORMAL=0, NOTIFYBELL=1, NOTIFYACTIVITY=2, NOTIFYSILENCE=3 };
  *
  * The back-end is responsible for decoding the incoming character stream from the terminal
  * program and producing an output image of characters which it then sends to connected
- * views by calling their TEWidget::setImage() method.
+ * views by calling their TerminalDisplay::setImage() method.
  *
  * The emulation also is also responsible for converting input from the connected views such
  * as keypresses and mouse activity into a character string which can be sent
@@ -66,7 +66,7 @@ public:
   /**
    * Creates a new window onto the output from this emulation.  The contents
    * of the window are then rendered by views which are set to use this window using the
-   * TEWidget::setScreenWindow() method.
+   * TerminalDisplay::setScreenWindow() method.
    */
   ScreenWindow* createWindow();
 
@@ -125,7 +125,7 @@ public:
    */ 
   virtual bool findTextNext( const QString &str, bool forward, bool caseSensitive, bool regExp );
 
-public Q_SLOTS: // signals incoming from TEWidget
+public Q_SLOTS: // signals incoming from TerminalDisplay
 
   /** Change the size of the emulation's image */
   virtual void onImageSizeChange(int lines, int columns);
@@ -163,7 +163,7 @@ public Q_SLOTS: // signals incoming from TEWidget
   //virtual void onSelectionBegin(const int x, const int y, const bool columnmode);
   /** Extend the current selection to column @p x, row @p y. */
   //virtual void onSelectionExtend(const int x, const int y);
-  /** Calls the TEWidget::setSelection() method of each associated view with the currently selected text */
+  /** Calls the TerminalDisplay::setSelection() method of each associated view with the currently selected text */
   //virtual void setSelection(const bool preserve_line_breaks);
    
   virtual void isBusySelecting(bool busy);

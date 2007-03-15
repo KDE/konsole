@@ -29,7 +29,7 @@ class KToggleAction;
 
 class KonsoleMainWindow;
 class TESession;
-class TEWidget;
+class TerminalDisplay;
 
 class SessionController;
 class ViewProperties;
@@ -114,31 +114,31 @@ private slots:
 private:
     void setupActions();
     void focusActiveView();
-    void registerView(TEWidget* view);
-    void unregisterView(TEWidget* view);
+    void registerView(TerminalDisplay* view);
+    void unregisterView(TerminalDisplay* view);
     // takes a view from a view container owned by a different manager and places it in 
     // newContainer owned by this manager
-    void takeView(ViewManager* otherManager , ViewContainer* otherContainer, ViewContainer* newContainer, TEWidget* view); 
+    void takeView(ViewManager* otherManager , ViewContainer* otherContainer, ViewContainer* newContainer, TerminalDisplay* view); 
 
     // creates a new container which can hold terminal displays
     ViewContainer* createContainer();
     // creates a new terminal display
-    TEWidget* createTerminalDisplay();
+    TerminalDisplay* createTerminalDisplay();
     // applies the view-specific settings such as colour scheme associated
     // with 'session' to 'view'
-    void loadViewSettings(TEWidget* view , TESession* session);
+    void loadViewSettings(TerminalDisplay* view , TESession* session);
 
     // creates a new controller for a session/display pair which provides the menu
     // actions associated with that view, and exposes basic information
     // about the session ( such as title and associated icon ) to the display.
-    SessionController* createController(TESession* session , TEWidget* display);
+    SessionController* createController(TESession* session , TerminalDisplay* display);
 
 private:
     KonsoleMainWindow*          _mainWindow;
     KToggleAction*              _splitViewAction;
     ViewSplitter*               _viewSplitter;
     QPointer<SessionController> _pluggedController;
-    QHash<TEWidget*,TESession*> _sessionMap;
+    QHash<TerminalDisplay*,TESession*> _sessionMap;
     
 };
 

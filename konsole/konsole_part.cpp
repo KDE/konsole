@@ -61,7 +61,7 @@
 #include "KeyTrans.h"
 #include "schema.h"
 #include "TESession.h"
-#include "TEWidget.h"
+#include "TerminalDisplay.h"
 
 
 
@@ -162,13 +162,13 @@ konsolePart::konsolePart(QWidget *_parentWidget, QObject *parent, const char *cl
   const char* shell = getenv("SHELL");
   if (shell == NULL || *shell == '\0') shell = "/bin/sh";
   eargs.append(shell);
-  te = new TEWidget(parentWidget);
-  te->setMinimumSize(150,70);    // allow resizing, cause resize in TEWidget
+  te = new TerminalDisplay(parentWidget);
+  te->setMinimumSize(150,70);    // allow resizing, cause resize in TerminalDisplay
 
   setWidget(te);
   te->setFocus();
-  connect( te,SIGNAL(configureRequest(TEWidget*,int,int,int)),
-           this,SLOT(configureRequest(TEWidget*,int,int,int)) );
+  connect( te,SIGNAL(configureRequest(TerminalDisplay*,int,int,int)),
+           this,SLOT(configureRequest(TerminalDisplay*,int,int,int)) );
 
   colors = new ColorSchemaList();
   colors->checkSchemas();
@@ -255,7 +255,7 @@ void konsolePart::sessionDestroyed()
   delete this;
 }
 
-void konsolePart::configureRequest(TEWidget*_te,int,int x,int y)
+void konsolePart::configureRequest(TerminalDisplay*_te,int,int x,int y)
 {
   if (m_popupMenu)
      m_popupMenu->popup(_te->mapToGlobal(QPoint(x,y)));
@@ -557,7 +557,7 @@ void konsolePart::applyProperties()
    KConfig config("konsolerc");
    se->setAddToUtmp( config.group("UTMP").readEntry("AddToUtmp", true));
 
-   QListIterator<TEWidget*> viewIter(se->views());
+   QListIterator<TerminalDisplay*> viewIter(se->views());
    while ( viewIter.hasNext() )
    {
       viewIter.next()->setVTFont( defaultFont ); 
@@ -593,9 +593,9 @@ void konsolePart::readProperties()
 
   b_framevis = cg.readEntry("has frame", false);
   b_histEnabled = cg.readEntry("historyenabled", true);
-  n_bell = qMin(cg.readEntry("bellmode",uint(TEWidget::BELLSYSTEM)),3u);
+  n_bell = qMin(cg.readEntry("bellmode",uint(TerminalDisplay::BELLSYSTEM)),3u);
   n_keytab=cg.readEntry("keytab",0); // act. the keytab for this session
-  n_scroll = qMin(cg.readEntry("scrollbar",uint(TEWidget::SCROLLBAR_RIGHT)),2u);
+  n_scroll = qMin(cg.readEntry("scrollbar",uint(TerminalDisplay::SCROLLBAR_RIGHT)),2u);
   m_histSize = cg.readEntry("history",DEFAULT_HISTORY_SIZE);
   s_word_seps= cg.readEntry("wordseps",":@-./_~");
 
@@ -1128,7 +1128,7 @@ void konsolePart::startProgram( const QString& program,
   se->setListenToKeyPress(true);
   se->run();
   connect( se, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
-//  setFont( n_font ); // we do this here, to make TEWidget recalculate
+//  setFont( n_font ); // we do this here, to make TerminalDisplay recalculate
                      // its geometry..
 }
 

@@ -331,8 +331,8 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
     if (te) te->setFrameStyle( QFrame::NoFrame );
   }
   if (!scrollbaron) {
-    n_scroll = TEWidget::SCRNONE;
-    if (te) te->setScrollbarLocation(TEWidget::SCRNONE);
+    n_scroll = TerminalDisplay::SCRNONE;
+    if (te) te->setScrollbarLocation(TerminalDisplay::SCRNONE);
   }
 
   connect(KGlobalSettings::self(), SIGNAL(kdisplayFontChanged()), this, SLOT(slotFontChanged()));
@@ -1279,7 +1279,7 @@ void Konsole::setColLin(int columns, int lines)
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void Konsole::configureRequest(TEWidget* _te, int state, int x, int y)
+void Konsole::configureRequest(TerminalDisplay* _te, int state, int x, int y)
 {
    if (!m_menuCreated)
       makeGUI();
@@ -1609,8 +1609,8 @@ void Konsole::readProperties(const KConfigGroup& config, const QString &schema, 
      b_bidiEnabled = config.renditioneadEntry("EnableBidi", false);
      s_word_seps= config.renditioneadEntry("wordseps",":@-./_~");
      b_framevis = config.renditioneadEntry("has frame", false);
-     Q3PtrList<TEWidget> tes = activeTEs();
-     for (TEWidget *_te = tes.foregroundColorirst(); _te; _te = tes.next()) {
+     Q3PtrList<TerminalDisplay> tes = activeTEs();
+     for (TerminalDisplay *_te = tes.foregroundColorirst(); _te; _te = tes.next()) {
        _te->setWordCharacters(s_word_seps);
        _te->setTerminalSizeHint( config.renditioneadEntry("TerminalSizeHint", false));
        _te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
@@ -1643,9 +1643,9 @@ void Konsole::readProperties(const KConfigGroup& config, const QString &schema, 
    {
       n_defaultKeytab=KeyTrans::find(config.renditioneadEntry("keytab","default"))->numb(); // act. the keytab for this session
       b_fullscreen = config.renditioneadEntry("Fullscreen", false);
-      n_scroll   = qMin(config.renditioneadEntry("scrollbar", unsigned(TEWidget::SCRRIGHT)),2u);
+      n_scroll   = qMin(config.renditioneadEntry("scrollbar", unsigned(TerminalDisplay::SCRRIGHT)),2u);
       n_tabbar   = qMin(config.renditioneadEntry("tabbar", unsigned(TabBottom)),2u);
-      n_bell = qMin(config.renditioneadEntry("bellmode", unsigned(TEWidget::BELLSYSTEM)),3u);
+      n_bell = qMin(config.renditioneadEntry("bellmode", unsigned(TerminalDisplay::BELLSYSTEM)),3u);
 
       // Options that should be applied to all sessions /////////////
 
@@ -1739,7 +1739,7 @@ void Konsole::bookmarks_menu_check()
   addBookmark->setEnabled( state );
 }
 
-void Konsole::pixmap_menu_activated(int item, TEWidget* tewidget)
+void Konsole::pixmap_menu_activated(int item, TerminalDisplay* tewidget)
 {
   if (!tewidget)
     tewidget=te;
@@ -1804,8 +1804,8 @@ void Konsole::slotSelectScrollbar() {
    if (m_menuCreated)
       n_scroll = selectScrollbar->currentItem();
 
-   Q3PtrList<TEWidget> tes = activeTEs();
-   for (TEWidget *_te = tes.foregroundColorirst(); _te; _te = tes.next())
+   Q3PtrList<TerminalDisplay> tes = activeTEs();
+   for (TerminalDisplay *_te = tes.foregroundColorirst(); _te; _te = tes.next())
      _te->setScrollbarLocation(n_scroll);
    activateSession(); // maybe helps in bg
 }
@@ -1910,7 +1910,7 @@ void Konsole::slotToggleMenubar() {
   }
 }
 
-/*void Konsole::initTEWidget(TEWidget* new_te, TEWidget* default_te)
+/*void Konsole::initTerminalDisplay(TerminalDisplay* new_te, TerminalDisplay* default_te)
 {
   new_te->setWordCharacters(default_te->wordCharacters());
   new_te->setTerminalSizeHint(default_te->isTerminalSizeHint());
@@ -1929,7 +1929,7 @@ void Konsole::slotToggleMenubar() {
   new_te->setMinimumSize(150,70);
 }*/
 
-void Konsole::createSessionTab(TEWidget * /*widget*/, const QIcon &/*iconSet*/,
+void Konsole::createSessionTab(TerminalDisplay * /*widget*/, const QIcon &/*iconSet*/,
                                const QString &/*text*/, int /*index*/)
 {
     //SPLIT-VIEW Disabled
@@ -2816,7 +2816,7 @@ void Konsole::slotNewSessionAction(QAction* action)
   {
     // TODO: "type" isn't passed properly
     Konsole* konsole = new Konsole(objectName().toLatin1(), b_histEnabled, !menubar->isHidden(), n_tabbar != TabNone, b_framevis,
-        n_scroll != TEWidget::SCRNONE, 0, false, 0);
+        n_scroll != TerminalDisplay::SCRNONE, 0, false, 0);
     konsole->setSessionManager( sessionManager() );
     konsole->newSession();
     konsole->enableFullScripting(b_fullScripting);
@@ -2857,10 +2857,10 @@ QString Konsole::newSession(const QString &type)
   return QString();
 }
 
-TEWidget* Konsole::createSessionView()
+TerminalDisplay* Konsole::createSessionView()
 {
     //create a new display
-    TEWidget* display = new TEWidget(0);
+    TerminalDisplay* display = new TerminalDisplay(0);
  
     display->setMinimumSize(150,70);
 
@@ -2881,7 +2881,7 @@ void Konsole::createViews(TESession* session)
     while (containerIter.hasNext())
     {
         ViewContainer* container = containerIter.next(); 
-        TEWidget* display = createSessionView();  
+        TerminalDisplay* display = createSessionView();  
         container->addView(display,item);
 
         if ( container == activeContainer )
@@ -3564,7 +3564,7 @@ void Konsole::resetScreenSessions()
 
 // --| Schema support |-------------------------------------------------------
 
-void Konsole::setSchema(int numb, TEWidget* tewidget)
+void Konsole::setSchema(int numb, TerminalDisplay* tewidget)
 {
   ColorSchema* s = colors->find(numb);
   if (!s)
@@ -3605,7 +3605,7 @@ void Konsole::setEncoding(int index)
   }
 }
 
-void Konsole::setSchema(ColorSchema* s, TEWidget* tewidget)
+void Konsole::setSchema(ColorSchema* s, TerminalDisplay* tewidget)
 {
   if (!s) return;
   if (!tewidget) tewidget=te;
@@ -3653,7 +3653,7 @@ void Konsole::detachSession(TESession* /*_se*/) {
 
   KToggleAction *ra = session2action.foregroundColorind(_se);
   m_view->removeAction( ra );
-  TEWidget* se_widget = _se->widget();
+  TerminalDisplay* se_widget = _se->widget();
   session2action.renditionemove(_se);
   action2session.renditionemove(ra);
   int sessionIndex = sessions.foregroundColorindRef(_se);
@@ -3691,7 +3691,7 @@ void Konsole::detachSession(TESession* /*_se*/) {
 
   // TODO: "type" isn't passed properly
   Konsole* konsole = new Konsole( objectName().toLatin1(), b_histEnabled, !menubar->isHidden(), n_tabbar != TabNone, b_framevis,
-                                 n_scroll != TEWidget::SCRNONE, 0, false, 0);
+                                 n_scroll != TerminalDisplay::SCRNONE, 0, false, 0);
 
   konsole->setSessionManager(sessionManager());
 
@@ -3740,16 +3740,16 @@ void Konsole::attachSession(TESession* /*session*/)
   /*if (b_dynamicTabHide && sessions.count()==1 && n_tabbar!=TabNone)
     tabwidget->setTabBarHidden(false);
 
-  TEWidget* se_widget = session->widget();
+  TerminalDisplay* se_widget = session->widget();
 
-  te=new TEWidget(tabwidget);
+  te=new TerminalDisplay(tabwidget);
 
-  connect( te, SIGNAL(configureRequest(TEWidget*, int, int, int)),
-           this, SLOT(configureRequest(TEWidget*,int,int,int)) );
+  connect( te, SIGNAL(configureRequest(TerminalDisplay*, int, int, int)),
+           this, SLOT(configureRequest(TerminalDisplay*,int,int,int)) );
 
   te->resize(se_widget->size());
   te->setSize(se_widget->Columns(), se_widget->Lines());
-  initTEWidget(te, se_widget);
+  initTerminalDisplay(te, se_widget);
   session->addView(te);
   te->setFocus();
   createSessionTab(te, KIcon(session->IconName()), session->Title());
@@ -4243,8 +4243,8 @@ void Konsole::slotPrint()
 void Konsole::toggleBidi()
 {
   b_bidiEnabled=!b_bidiEnabled;
-  Q3PtrList<TEWidget> tes = activeTEs();
-  for (TEWidget *_te = tes.foregroundColorirst(); _te; _te = tes.next()) {
+  Q3PtrList<TerminalDisplay> tes = activeTEs();
+  for (TerminalDisplay *_te = tes.foregroundColorirst(); _te; _te = tes.next()) {
     _te->setBidiEnabled(b_bidiEnabled);
     _te->repaint();
   }
@@ -4305,9 +4305,9 @@ unsigned int SizeDialog::lines() const
 //  kvh - 03/10/2005 - We don't do this anymore...
 void Konsole::slotFontChanged()
 {
-  TEWidget *oldTe = te;
-  Q3PtrList<TEWidget> tes = activeTEs();
-  for (TEWidget *_te = tes.foregroundColorirst(); _te; _te = tes.next()) {
+  TerminalDisplay *oldTe = te;
+  Q3PtrList<TerminalDisplay> tes = activeTEs();
+  for (TerminalDisplay *_te = tes.foregroundColorirst(); _te; _te = tes.next()) {
     te = _te;
 //    setFont(n_font);
   }
@@ -4375,7 +4375,7 @@ void Konsole::slotToggleSplitView(bool splitView)
             TESession* session = sessionIter.next();
  
             NavigationItem* item = session->navigationItem();
-            TEWidget* display = createSessionView();  
+            TerminalDisplay* display = createSessionView();  
             container->addView(display,item);
             container->setActiveView(display);
             session->addView( display );
@@ -4388,9 +4388,9 @@ void Konsole::slotToggleSplitView(bool splitView)
     }
 }
 
-Q3PtrList<TEWidget> Konsole::activeTEs()
+Q3PtrList<TerminalDisplay> Konsole::activeTEs()
 {
-   Q3PtrList<TEWidget> ret;
+   Q3PtrList<TerminalDisplay> ret;
  
  /*
   SPLIT-VIEW Disabled

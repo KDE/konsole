@@ -31,7 +31,7 @@
 
 // Konsole
 #include "TEPty.h"
-#include "TEWidget.h"
+#include "TerminalDisplay.h"
 #include "TEmuVt102.h"
 
 
@@ -79,19 +79,19 @@ public:
    * When the TESession instance is destroyed, any views which are still attached will also
    * be deleted.
    */
-  void addView(TEWidget* widget);
+  void addView(TerminalDisplay* widget);
   /** 
    * Removes a view from this session.  
    *
    * @p widget will no longer display output from or send input
    * to the terminal 
    */
-  void removeView(TEWidget* widget);
+  void removeView(TerminalDisplay* widget);
 
   /**
    * Returns the views connected to this session
    */
-  QList<TEWidget*> views() const;
+  QList<TerminalDisplay*> views() const;
 
   /** 
    * Returns true if the session has created child processes which have not yet terminated 
@@ -275,7 +275,7 @@ private:
   TEPty*         _shellProcess;
   TEmulation*    _emulation;
 
-  QList<TEWidget*> _views;
+  QList<TerminalDisplay*> _views;
 
   bool           connected;
   bool           monitorActivity;

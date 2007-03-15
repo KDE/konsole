@@ -20,7 +20,7 @@
     02110-1301  USA.
 */
 
-/*! \class TEWidget
+/*! \class TerminalDisplay
 
     \brief Visible screen contents
 
@@ -90,7 +90,7 @@
 // Konsole
 #include "config.h"
 #include "Filter.h"
-#include "TEWidget.h"
+#include "TerminalDisplay.h"
 #include "konsole_wcwidth.h"
 #include "ScreenWindow.h"
 
@@ -111,8 +111,8 @@ extern bool true_transparency; // declared in main.characterpp and konsole_part.
 // scroll increment used when dragging selection at top/bottom of window.
 
 // static
-bool TEWidget::s_antialias = true;
-bool TEWidget::s_standalone = false;
+bool TerminalDisplay::s_antialias = true;
+bool TerminalDisplay::s_standalone = false;
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
@@ -132,11 +132,11 @@ bool TEWidget::s_standalone = false;
    IBMPC (rgb) Black   Blue    Green   Cyan    Red     Magenta Yellow  White
 */
 
-ScreenWindow* TEWidget::screenWindow() const
+ScreenWindow* TerminalDisplay::screenWindow() const
 {
     return _screenWindow;
 }
-void TEWidget::setScreenWindow(ScreenWindow* window)
+void TerminalDisplay::setScreenWindow(ScreenWindow* window)
 {
     // disconnect existing screen window if any
     if ( _screenWindow )
@@ -151,7 +151,7 @@ void TEWidget::setScreenWindow(ScreenWindow* window)
     connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateImage()) );
 }
 
-void TEWidget::setDefaultBackColor(const QColor& color)
+void TerminalDisplay::setDefaultBackColor(const QColor& color)
 {
   defaultBgColor = color;
   
@@ -160,19 +160,19 @@ void TEWidget::setDefaultBackColor(const QColor& color)
   setPalette( p );
 }
 
-QColor TEWidget::getDefaultBackColor()
+QColor TerminalDisplay::getDefaultBackColor()
 {
   if (defaultBgColor.isValid())
     return defaultBgColor;
   return color_table[DEFAULT_BACK_COLOR].color;
 }
 
-const ColorEntry* TEWidget::colorTable() const
+const ColorEntry* TerminalDisplay::colorTable() const
 {
   return color_table;
 }
 
-void TEWidget::setColorTable(const ColorEntry table[])
+void TerminalDisplay::setColorTable(const ColorEntry table[])
 {
   for (int i = 0; i < TABLE_COLORS; i++) color_table[i] = table[i];
  
@@ -278,12 +278,12 @@ static QChar identicalMap(QChar c)
 }
 */
 
-void TEWidget::fontChange(const QFont &)
+void TerminalDisplay::fontChange(const QFont &)
 {
   QFontMetrics fm(font());
   font_h = fm.height() + m_lineSpacing;
 
-  // waba TEWidget 1.123:
+  // waba TerminalDisplay 1.123:
   // "Base character width on widest ASCII character. This prevents too wide
   //  characters in the presence of double wide (e.g. Japanese) characters."
   // Get the width from representative normal width characters
@@ -325,7 +325,7 @@ void TEWidget::fontChange(const QFont &)
   update();
 }
 
-void TEWidget::setVTFont(const QFont& f)
+void TerminalDisplay::setVTFont(const QFont& f)
 {
   QFont font = f;
 
@@ -341,7 +341,7 @@ void TEWidget::setVTFont(const QFont& f)
   }
 }
 
-void TEWidget::setFont(const QFont &)
+void TerminalDisplay::setFont(const QFont &)
 {
   // ignore font change request if not coming from konsole itself
 }
@@ -352,7 +352,7 @@ void TEWidget::setFont(const QFont &)
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-TEWidget::TEWidget(QWidget *parent)
+TerminalDisplay::TerminalDisplay(QWidget *parent)
 :QFrame(parent)
 ,_screenWindow(0)
 ,allowBell(true)
@@ -464,7 +464,7 @@ TEWidget::TEWidget(QWidget *parent)
   connect( this,SIGNAL(flowControlKeyPressed(bool)),this,SLOT(outputSuspended(bool)) );
 }
 
-TEWidget::~TEWidget()
+TerminalDisplay::~TerminalDisplay()
 {
   qApp->removeEventFilter( this );
   if (image) free(image);
@@ -596,7 +596,7 @@ static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code
 
 }
 
-void TEWidget::drawLineCharString(	QPainter& painter, int x, int y, const QString& str, 
+void TerminalDisplay::drawLineCharString(	QPainter& painter, int x, int y, const QString& str, 
 									const Character* attributes)
 {
 		const QPen& currentPen = painter.pen();
@@ -628,7 +628,7 @@ void TEWidget::drawLineCharString(	QPainter& painter, int x, int y, const QStrin
 // 
 // -- Robert Knight <robertknight@gmail.com>
 
-void TEWidget::drawTextFixed(QPainter& painter, int x, int y, QString& str, const Character* /*attributes*/)
+void TerminalDisplay::drawTextFixed(QPainter& painter, int x, int y, QString& str, const Character* /*attributes*/)
 {
 	if ( str.length() == 0 )
 			return;
@@ -639,7 +639,7 @@ void TEWidget::drawTextFixed(QPainter& painter, int x, int y, QString& str, cons
 //OLD VERSION
 //
 
-/*void TEWidget::drawTextFixed(QPainter &paint, int x, int y,
+/*void TerminalDisplay::drawTextFixed(QPainter &paint, int x, int y,
                              QString& str, const Character *attr)
 {
   QString drawstr;
@@ -682,7 +682,7 @@ void TEWidget::drawTextFixed(QPainter& painter, int x, int y, QString& str, cons
     attributed string draw primitive
 */
 
-void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
+void TerminalDisplay::drawAttrStr(QPainter &paint, const QRect& rect,
                            QString& str, const Character *attr, bool pm, bool clear)
 {
 
@@ -893,7 +893,7 @@ void TEWidget::drawAttrStr(QPainter &paint, const QRect& rect,
 /*!
     Set XIM Position
 */
-void TEWidget::setCursorPos(const int curx, const int cury)
+void TerminalDisplay::setCursorPos(const int curx, const int cury)
 {
     QPoint tL  = contentsRect().topLeft();
     int    tLx = tL.x();
@@ -918,7 +918,7 @@ void TEWidget::setCursorPos(const int curx, const int cury)
 //note:  it is important that the area of the display which is scrolled aligns properly with
 //the character grid - which has a top left point at (bX,bY) , a cell width of font_w and a cell height
 //of font_h).    
-void TEWidget::scrollImage(int lines)
+void TerminalDisplay::scrollImage(int lines)
 {
     if ( lines == 0 || image == 0 || abs(lines) >= this->usedLines ) return;
 
@@ -958,14 +958,14 @@ void TEWidget::scrollImage(int lines)
     scroll( 0 , font_h * (-lines) , scrollRect );
 }
 
-void TEWidget::processFilters() 
+void TerminalDisplay::processFilters() 
 {
     _filterChain->reset();
     _filterChain->addImage(image,lines,columns);
     _filterChain->process();
 }
 
-void TEWidget::updateImage() 
+void TerminalDisplay::updateImage() 
 {
   // optimization - scroll the existing image where possible and avoid expensive text drawing
   // for parts of the image that can simply be moved up or down
@@ -1142,7 +1142,7 @@ void TEWidget::updateImage()
   showResizeNotification();
 }
 
-void TEWidget::showResizeNotification()
+void TerminalDisplay::showResizeNotification()
 {
   if (resizing && terminalSizeHint)
   {
@@ -1183,7 +1183,7 @@ void TEWidget::showResizeNotification()
 
 }
 
-void TEWidget::setBlinkingCursor(bool blink)
+void TerminalDisplay::setBlinkingCursor(bool blink)
 {
   hasBlinkingCursor=blink;
   if (blink && !blinkCursorT->isActive()) blinkCursorT->start(1000);
@@ -1205,7 +1205,7 @@ void TEWidget::setBlinkingCursor(bool blink)
     image is used and the painting bound by the PaintEvent box.
 */
 
-void TEWidget::paintEvent( QPaintEvent* pe )
+void TerminalDisplay::paintEvent( QPaintEvent* pe )
 {
   QPainter paint;
   paint.begin( this );
@@ -1262,7 +1262,7 @@ void TEWidget::paintEvent( QPaintEvent* pe )
   paint.end();
 }
 
-void TEWidget::print(QPainter &paint, bool friendly, bool exact)
+void TerminalDisplay::print(QPainter &paint, bool friendly, bool exact)
 {
    bool save_fixed_font = fixed_font;
    bool save_blinking = blinking;
@@ -1298,12 +1298,12 @@ void TEWidget::print(QPainter &paint, bool friendly, bool exact)
    blinking = save_blinking;
 }
 
-FilterChain* TEWidget::filterChain() const
+FilterChain* TerminalDisplay::filterChain() const
 {
     return _filterChain;
 }
 
-void TEWidget::paintFilters(QPainter& painter)
+void TerminalDisplay::paintFilters(QPainter& painter)
 {
     // iterate over hotspots identified by the display's currently active filters 
     // and draw appropriate visuals to indicate the presence of the hotspot
@@ -1357,7 +1357,7 @@ void TEWidget::paintFilters(QPainter& painter)
         }
     }
 }
-void TEWidget::paintContents(QPainter &paint, const QRect &rect)
+void TerminalDisplay::paintContents(QPainter &paint, const QRect &rect)
 {
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
@@ -1458,7 +1458,7 @@ void TEWidget::paintContents(QPainter &paint, const QRect &rect)
   delete [] disstrU;
 }
 
-void TEWidget::blinkEvent()
+void TerminalDisplay::blinkEvent()
 {
   blinking = !blinking;
 
@@ -1467,7 +1467,7 @@ void TEWidget::blinkEvent()
   repaint();
 }
 
-void TEWidget::blinkCursorEvent()
+void TerminalDisplay::blinkCursorEvent()
 {
   cursorBlinking = !cursorBlinking;
   repaint(cursorRect);
@@ -1479,12 +1479,12 @@ void TEWidget::blinkCursorEvent()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TEWidget::resizeEvent(QResizeEvent*)
+void TerminalDisplay::resizeEvent(QResizeEvent*)
 {
   updateImageSize();
 }
 
-void TEWidget::propagateSize()
+void TerminalDisplay::propagateSize()
 {
   if (isFixedSize)
   {
@@ -1498,7 +1498,7 @@ void TEWidget::propagateSize()
      updateImageSize();
 }
 
-void TEWidget::updateImageSize()
+void TerminalDisplay::updateImageSize()
 {
   Character* oldimg = image;
   int oldlin = lines;
@@ -1535,11 +1535,11 @@ void TEWidget::updateImageSize()
 //this allows  
 //TODO: Perhaps it would be better to have separate signals for show and hide instead of using
 //the same signal as the one for a content size change 
-void TEWidget::showEvent(QShowEvent*)
+void TerminalDisplay::showEvent(QShowEvent*)
 {
     emit changedContentSizeSignal(contentHeight,contentWidth);
 }
-void TEWidget::hideEvent(QHideEvent*)
+void TerminalDisplay::hideEvent(QHideEvent*)
 {
     emit changedContentSizeSignal(contentHeight,contentWidth);
 }
@@ -1550,7 +1550,7 @@ void TEWidget::hideEvent(QHideEvent*)
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TEWidget::scrollChanged(int)
+void TerminalDisplay::scrollChanged(int)
 {
   _screenWindow->scrollTo( scrollbar->value() );
 
@@ -1562,30 +1562,30 @@ void TEWidget::scrollChanged(int)
   //emit changedHistoryCursor(scrollbar->value()); //expose
 }
 
-int TEWidget::scrollPosition()
+int TerminalDisplay::scrollPosition()
 {
     return scrollbar->value();
 }
-bool TEWidget::scrollAtEnd()
+bool TerminalDisplay::scrollAtEnd()
 {
     return (scrollbar->value() == scrollbar->maximum());
 }
 
-void TEWidget::setScroll(int cursor, int slines)
+void TerminalDisplay::setScroll(int cursor, int slines)
 {
-  //kDebug(1211)<<"TEWidget::setScroll() disconnect()"<<endl;
+  //kDebug(1211)<<"TerminalDisplay::setScroll() disconnect()"<<endl;
   disconnect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
-  //kDebug(1211)<<"TEWidget::setScroll() setRange()"<<endl;
+  //kDebug(1211)<<"TerminalDisplay::setScroll() setRange()"<<endl;
   scrollbar->setRange(0,slines);
-  //kDebug(1211)<<"TEWidget::setScroll() setSteps()"<<endl;
+  //kDebug(1211)<<"TerminalDisplay::setScroll() setSteps()"<<endl;
   scrollbar->setSingleStep(1);
   scrollbar->setPageStep(lines);
   scrollbar->setValue(cursor);
   connect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
-  //kDebug(1211)<<"TEWidget::setScroll() done"<<endl;
+  //kDebug(1211)<<"TerminalDisplay::setScroll() done"<<endl;
 }
 
-void TEWidget::setScrollbarLocation(int loc)
+void TerminalDisplay::setScrollbarLocation(int loc)
 {
   if (scrollLoc == loc) return; // quickly
   bY = bX = 1;
@@ -1614,10 +1614,10 @@ void TEWidget::setScrollbarLocation(int loc)
     whenever the mouse has left the text area.
 
     Two reasons to do so:
-    1) QT does not allow the `grabMouse' to confine-to the TEWidget.
+    1) QT does not allow the `grabMouse' to confine-to the TerminalDisplay.
        Thus a `XGrapPointer' would have to be used instead.
     2) Even if so, this would not help too much, since the text area
-       of the TEWidget is normally not identical with it's bounds.
+       of the TerminalDisplay is normally not identical with it's bounds.
 
     The disadvantage of the current handling is, that the mouse can visibly
     leave the bounds of the widget and is then moved back. Because of the
@@ -1628,7 +1628,7 @@ void TEWidget::setScrollbarLocation(int loc)
 /*!
 */
 
-void TEWidget::mousePressEvent(QMouseEvent* ev)
+void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
 {
   if ( possibleTripleClick && (ev->button()==Qt::LeftButton) ) {
     mouseTripleClickEvent(ev);
@@ -1705,7 +1705,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   }
 }
 
-void TEWidget::mouseMoveEvent(QMouseEvent* ev)
+void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
 {
   int charLine = 0;
   int charColumn = 0;
@@ -1798,12 +1798,12 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
   extendSelection( ev->pos() );
 }
 
-void TEWidget::setSelectionEnd()
+void TerminalDisplay::setSelectionEnd()
 {
   extendSelection( configureRequestPoint );
 }
 
-void TEWidget::extendSelection( QPoint pos )
+void TerminalDisplay::extendSelection( QPoint pos )
 {
   //if ( !contentsRect().contains(ev->pos()) ) return;
   QPoint tL  = contentsRect().topLeft();
@@ -2005,7 +2005,7 @@ void TEWidget::extendSelection( QPoint pos )
 
 }
 
-void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
+void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
 {
     int charLine;
     int charColumn;
@@ -2067,7 +2067,7 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
   }
 }
 
-void TEWidget::characterPosition(QPoint widgetPoint,int& line,int& column)
+void TerminalDisplay::characterPosition(QPoint widgetPoint,int& line,int& column)
 {
     column = (widgetPoint.x()-contentsRect().left()-bX) / font_w;
     line = (widgetPoint.y()-contentsRect().top()-bY) / font_h;
@@ -2084,12 +2084,12 @@ void TEWidget::characterPosition(QPoint widgetPoint,int& line,int& column)
         column = usedColumns-1;
 }
 
-void TEWidget::updateLineProperties()
+void TerminalDisplay::updateLineProperties()
 {
     lineProperties = _screenWindow->getLineProperties();    
 }
 
-void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
+void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
 {
   if ( ev->button() != Qt::LeftButton) return;
   
@@ -2177,7 +2177,7 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
   QTimer::singleShot(QApplication::doubleClickInterval(),this,SLOT(tripleClickTimeout()));
 }
 
-void TEWidget::wheelEvent( QWheelEvent* ev )
+void TerminalDisplay::wheelEvent( QWheelEvent* ev )
 {
   if (ev->orientation() != Qt::Vertical)
     return;
@@ -2194,12 +2194,12 @@ void TEWidget::wheelEvent( QWheelEvent* ev )
   }
 }
 
-void TEWidget::tripleClickTimeout()
+void TerminalDisplay::tripleClickTimeout()
 {
   possibleTripleClick=false;
 }
 
-void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
+void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
 {
   int charLine;
   int charColumn;
@@ -2249,7 +2249,7 @@ void TEWidget::mouseTripleClickEvent(QMouseEvent* ev)
 }
 
 
-bool TEWidget::focusNextPrevChild( bool next )
+bool TerminalDisplay::focusNextPrevChild( bool next )
 {
   if (next)
     return false; // This disables changing the active part in konqueror
@@ -2258,7 +2258,7 @@ bool TEWidget::focusNextPrevChild( bool next )
 }
 
 
-int TEWidget::charClass(UINT16 ch) const
+int TerminalDisplay::charClass(UINT16 ch) const
 {
     QChar qch=QChar(ch);
     if ( qch.isSpace() ) return ' ';
@@ -2270,12 +2270,12 @@ int TEWidget::charClass(UINT16 ch) const
     return 1;
 }
 
-void TEWidget::setWordCharacters(QString wc)
+void TerminalDisplay::setWordCharacters(QString wc)
 {
 	word_characters = wc;
 }
 
-void TEWidget::setUsesMouse(bool on)
+void TerminalDisplay::setUsesMouse(bool on)
 {
   mouse_marks = on;
   setCursor( mouse_marks ? Qt::IBeamCursor : Qt::ArrowCursor );
@@ -2290,7 +2290,7 @@ void TEWidget::setUsesMouse(bool on)
 #undef KeyPress
 
 #if 0
-void TEWidget::emitText(QString text)
+void TerminalDisplay::emitText(QString text)
 {
   if (!text.isEmpty()) {
     QKeyEvent e(QEvent::KeyPress, 0, Qt::NoModifier, text);
@@ -2300,7 +2300,7 @@ void TEWidget::emitText(QString text)
 #endif
 
 
-void TEWidget::emitSelection(bool useXselection,bool appendReturn)
+void TerminalDisplay::emitSelection(bool useXselection,bool appendReturn)
 // Paste Clipboard by simulating keypress events
 {
   QString text = QApplication::clipboard()->text(useXselection ? QClipboard::Selection :
@@ -2318,7 +2318,7 @@ void TEWidget::emitSelection(bool useXselection,bool appendReturn)
   }
 }
 
-void TEWidget::setSelection(const QString& t)
+void TerminalDisplay::setSelection(const QString& t)
 {
   // Disconnect signal while WE set the clipboard
   QClipboard *cb = QApplication::clipboard();
@@ -2334,7 +2334,7 @@ void TEWidget::setSelection(const QString& t)
   //                   this, SLOT(onClearSelection()) );
 }
 
-void TEWidget::copyClipboard()
+void TerminalDisplay::copyClipboard()
 {
   Q_ASSERT( _screenWindow );
 
@@ -2342,17 +2342,17 @@ void TEWidget::copyClipboard()
   QApplication::clipboard()->setText(text);
 }
 
-void TEWidget::pasteClipboard()
+void TerminalDisplay::pasteClipboard()
 {
   emitSelection(false,false);
 }
 
-void TEWidget::pasteSelection()
+void TerminalDisplay::pasteSelection()
 {
   emitSelection(true,false);
 }
 
-void TEWidget::onClearSelection()
+void TerminalDisplay::onClearSelection()
 {
   _screenWindow->clearSelection();
   //emit clearSelectionSignal();
@@ -2378,12 +2378,12 @@ void TEWidget::onClearSelection()
 // For auto-hide, we need to get keypress-events, but we only get them when
 // we have focus.
 
-void TEWidget::doScroll(int lines)
+void TerminalDisplay::doScroll(int lines)
 {
   scrollbar->setValue(scrollbar->value()+lines);
 }
 
-bool TEWidget::eventFilter( QObject *obj, QEvent *e )
+bool TerminalDisplay::eventFilter( QObject *obj, QEvent *e )
 {
   if ( (e->type() == QEvent::Accel ||
        e->type() == QEvent::AccelAvailable ) && qApp->focusWidget() == this )
@@ -2406,7 +2406,7 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
 				emit flowControlKeyPressed(false /*output enabled*/);
 	}
 	
-    actSel=0; // Key stroke implies a screen update, so TEWidget won't
+    actSel=0; // Key stroke implies a screen update, so TerminalDisplay won't
               // know where the current selection is.
 
     if (hasBlinkingCursor) {
@@ -2445,7 +2445,7 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
   return QFrame::eventFilter( obj, e );
 }
 
-void TEWidget::inputMethodEvent ( QInputMethodEvent *  )
+void TerminalDisplay::inputMethodEvent ( QInputMethodEvent *  )
 {
 #ifdef __GNUC__
    #warning "FIXME: Port the IM stuff!"
@@ -2453,7 +2453,7 @@ void TEWidget::inputMethodEvent ( QInputMethodEvent *  )
 }
 
 #if 0
-void TEWidget::imStartEvent( QIMEvent */*e*/ )
+void TerminalDisplay::imStartEvent( QIMEvent */*e*/ )
 {
   m_imStart = m_cursorCol;
   m_imStartLine = m_cursorLine;
@@ -2463,7 +2463,7 @@ void TEWidget::imStartEvent( QIMEvent */*e*/ )
   m_isIMEdit = m_isIMSel = false;
 }
 
-void TEWidget::imComposeEvent( QIMEvent *e )
+void TerminalDisplay::imComposeEvent( QIMEvent *e )
 {
   QString text.characterlear();
   if ( m_imPreeditLength > 0 ) {
@@ -2487,7 +2487,7 @@ void TEWidget::imComposeEvent( QIMEvent *e )
   }
 }
 
-void TEWidget::imEndEvent( QIMEvent *e )
+void TerminalDisplay::imEndEvent( QIMEvent *e )
 {
   QString text.characterlear();
   if ( m_imPreeditLength > 0 ) {
@@ -2516,8 +2516,8 @@ void TEWidget::imEndEvent( QIMEvent *e )
 #endif
 
 // Override any Ctrl+<key> accelerator when pressed with the keyboard
-// focus in TEWidget, so that the key will be passed to the terminal instead.
-bool TEWidget::event( QEvent *e )
+// focus in TerminalDisplay, so that the key will be passed to the terminal instead.
+bool TerminalDisplay::event( QEvent *e )
 {
   if ( e->type() == QEvent::AccelOverride )
   {
@@ -2548,7 +2548,7 @@ bool TEWidget::event( QEvent *e )
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TEWidget::frameChanged()
+void TerminalDisplay::frameChanged()
 {
   propagateSize();
   update();
@@ -2560,19 +2560,19 @@ void TEWidget::frameChanged()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TEWidget::setBellMode(int mode)
+void TerminalDisplay::setBellMode(int mode)
 {
   m_bellMode=mode;
 }
 
-void TEWidget::enableBell()
+void TerminalDisplay::enableBell()
 {
     allowBell = true;
 }
 
 
 
-void TEWidget::bell(const QString& message)
+void TerminalDisplay::bell(const QString& message)
 {
   if (m_bellMode==BELLNONE) return;
 
@@ -2596,7 +2596,7 @@ void TEWidget::bell(const QString& message)
   }
 }
 
-void TEWidget::swapColorTable()
+void TerminalDisplay::swapColorTable()
 {
   ColorEntry color = color_table[1];
   color_table[1]=color_table[0];
@@ -2611,7 +2611,7 @@ void TEWidget::swapColorTable()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TEWidget::clearImage()
+void TerminalDisplay::clearImage()
 // initialize the image
 // for internal use only
 {
@@ -2627,7 +2627,7 @@ void TEWidget::clearImage()
 
 // Create Image ///////////////////////////////////////////////////////
 
-void TEWidget::calcGeometry()
+void TerminalDisplay::calcGeometry()
 {
   scrollbar->resize(QApplication::style()->pixelMetric(QStyle::PM_ScrollBarExtent),
                     contentsRect().height());
@@ -2668,7 +2668,7 @@ void TEWidget::calcGeometry()
   }
 }
 
-void TEWidget::makeImage()
+void TerminalDisplay::makeImage()
 {
   calcGeometry();
 
@@ -2686,7 +2686,7 @@ void TEWidget::makeImage()
 }
 
 // calculate the needed size
-void TEWidget::setSize(int cols, int lins)
+void TerminalDisplay::setSize(int cols, int lins)
 {
   int deltaColumns = cols - columns;
   int deltaLines = lins - lines;
@@ -2697,7 +2697,7 @@ void TEWidget::setSize(int cols, int lins)
   updateGeometry();
 }
 
-void TEWidget::setFixedSize(int cols, int lins)
+void TerminalDisplay::setFixedSize(int cols, int lins)
 {
   isFixedSize = true;
   
@@ -2716,12 +2716,12 @@ void TEWidget::setFixedSize(int cols, int lins)
   QFrame::setFixedSize(m_size);
 }
 
-QSize TEWidget::sizeHint() const
+QSize TerminalDisplay::sizeHint() const
 {
   return m_size;
 }
 
-void TEWidget::styleChange(QStyle &)
+void TerminalDisplay::styleChange(QStyle &)
 {
     propagateSize();
 }
@@ -2733,7 +2733,7 @@ void TEWidget::styleChange(QStyle &)
 /*                                                                       */
 /* --------------------------------------------------------------------- */
 
-void TEWidget::dragEnterEvent(QDragEnterEvent* event)
+void TerminalDisplay::dragEnterEvent(QDragEnterEvent* event)
 {
   if (event->mimeData()->hasFormat("text/plain"))
       event->acceptProposedAction();
@@ -2741,7 +2741,7 @@ void TEWidget::dragEnterEvent(QDragEnterEvent* event)
 
 enum dropPopupOptions { paste, cd, cp, ln, mv };
 
-void TEWidget::dropEvent(QDropEvent* event)
+void TerminalDisplay::dropEvent(QDropEvent* event)
 {
    if (m_drop==0)
    {
@@ -2807,7 +2807,7 @@ void TEWidget::dropEvent(QDropEvent* event)
   }
 }
 
-void TEWidget::doDrag()
+void TerminalDisplay::doDrag()
 {
   dragInfo.state = diDragging;
   dragInfo.dragObject = new QDrag(this);
@@ -2818,7 +2818,7 @@ void TEWidget::doDrag()
   // Don't delete the QTextDrag object.  Qt will delete it when it's done with it.
 }
 
-void TEWidget::drop_menu_activated(QAction* action)
+void TerminalDisplay::drop_menu_activated(QAction* action)
 {
   int item = action->data().toInt();
   switch (item)
@@ -2865,7 +2865,7 @@ void TEWidget::drop_menu_activated(QAction* action)
    }
 }
 
-void TEWidget::outputSuspended(bool suspended)
+void TerminalDisplay::outputSuspended(bool suspended)
 {
 	//create the label when this function is first called
 	if (!outputSuspendedLabel)
@@ -2909,15 +2909,15 @@ void TEWidget::outputSuspended(bool suspended)
 	outputSuspendedLabel->setVisible(suspended);
 }
 
-uint TEWidget::lineSpacing() const
+uint TerminalDisplay::lineSpacing() const
 {
   return m_lineSpacing;
 }
 
-void TEWidget::setLineSpacing(uint i)
+void TerminalDisplay::setLineSpacing(uint i)
 {
   m_lineSpacing = i;
   setVTFont(font()); // Trigger an update.
 }
 
-#include "TEWidget.moc"
+#include "TerminalDisplay.moc"

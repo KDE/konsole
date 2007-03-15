@@ -30,7 +30,7 @@
 #include "KonsoleBookmarkHandler.h"
 #include "KonsoleMainWindow.h"
 #include "TESession.h"
-#include "TEWidget.h"
+#include "TerminalDisplay.h"
 #include "schema.h"
 #include "SessionController.h"
 #include "SessionManager.h"
@@ -94,7 +94,7 @@ void ViewManager::detachActiveView()
 {
     // find the currently active view and remove it from its container 
     ViewContainer* container = _viewSplitter->activeContainer();
-    TEWidget* activeView = dynamic_cast<TEWidget*>(container->activeView());
+    TerminalDisplay* activeView = dynamic_cast<TerminalDisplay*>(container->activeView());
 
     if (!activeView)
         return;
@@ -125,9 +125,9 @@ void ViewManager::detachActiveView()
 
 void ViewManager::sessionFinished( TESession* session )
 {
-    QList<TEWidget*> children = _viewSplitter->findChildren<TEWidget*>();
+    QList<TerminalDisplay*> children = _viewSplitter->findChildren<TerminalDisplay*>();
 
-    foreach ( TEWidget* view , children )
+    foreach ( TerminalDisplay* view , children )
     {
         if ( _sessionMap[view] == session )
         {
@@ -230,8 +230,8 @@ void ViewManager::splitView(bool splitView)
 
         while (existingViewIter.hasNext())
         {
-            TESession* session = _sessionMap[(TEWidget*)existingViewIter.next()];
-            TEWidget* display = createTerminalDisplay();
+            TESession* session = _sessionMap[(TerminalDisplay*)existingViewIter.next()];
+            TerminalDisplay* display = createTerminalDisplay();
             loadViewSettings(display,session); 
             ViewProperties* properties = createController(session,display);
 
@@ -259,7 +259,7 @@ void ViewManager::splitView(bool splitView)
     _viewSplitter->activeContainer()->activeView()->setFocus(Qt::OtherFocusReason);
 }
 
-SessionController* ViewManager::createController(TESession* session , TEWidget* view)
+SessionController* ViewManager::createController(TESession* session , TerminalDisplay* view)
 {
     // create a new controller for the session, and ensure that this view manager
     // is notified when the view gains the focus
@@ -290,7 +290,7 @@ void ViewManager::createView(TESession* session)
     while ( containerIter.hasNext() )
     {
         ViewContainer* container = containerIter.next();
-        TEWidget* display = createTerminalDisplay();
+        TerminalDisplay* display = createTerminalDisplay();
         loadViewSettings(display,session);
         ViewProperties* properties = createController(session,display);
 
@@ -336,7 +336,7 @@ void ViewManager::viewCloseRequest(QWidget* view)
     // 1. detach view from session
     // 2. if the session has no views left, close it
     
-    TEWidget* display = (TEWidget*)view;
+    TerminalDisplay* display = (TerminalDisplay*)view;
     TESession* session = _sessionMap[ display ];
     if ( session )
     {
@@ -368,7 +368,7 @@ void ViewManager::merge(ViewManager* otherManager)
 
     while ( otherViewIter.hasNext() )
     {
-        TEWidget* view = dynamic_cast<TEWidget*>(otherViewIter.next());
+        TerminalDisplay* view = dynamic_cast<TerminalDisplay*>(otherViewIter.next());
         
         assert(view);
 
@@ -378,7 +378,7 @@ void ViewManager::merge(ViewManager* otherManager)
 
 
 void ViewManager::takeView(ViewManager* otherManager , ViewContainer* otherContainer, 
-                           ViewContainer* newContainer, TEWidget* view)
+                           ViewContainer* newContainer, TerminalDisplay* view)
 {
     // FIXME - the controller associated with the display which is being moved
     //         may have signals which are connected to otherManager.  they need
@@ -393,9 +393,9 @@ void ViewManager::takeView(ViewManager* otherManager , ViewContainer* otherConta
     otherManager->_sessionMap.remove(view);
 }
 
-TEWidget* ViewManager::createTerminalDisplay()
+TerminalDisplay* ViewManager::createTerminalDisplay()
 {
-   TEWidget* display = new TEWidget(0);
+   TerminalDisplay* display = new TerminalDisplay(0);
 
    //TODO Temporary settings used here
    display->setBellMode(0);
@@ -404,12 +404,12 @@ TEWidget* ViewManager::createTerminalDisplay()
    display->setCutToBeginningOfLine(true);
    display->setTerminalSizeStartup(false);
    display->setSize(80,40);
-   display->setScrollbarLocation(TEWidget::SCROLLBAR_RIGHT);
+   display->setScrollbarLocation(TerminalDisplay::SCROLLBAR_RIGHT);
 
    return display;
 }
 
-void ViewManager::loadViewSettings(TEWidget* view , TESession* session)
+void ViewManager::loadViewSettings(TerminalDisplay* view , TESession* session)
 {
     // load colour scheme
     view->setColorTable( session->schema()->table() );

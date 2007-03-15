@@ -463,9 +463,9 @@ void TEScreen::setDefaultMargins()
 
 
 /*
-   Clarifying rendition here and in TEWidget.
+   Clarifying rendition here and in TerminalDisplay.
 
-   currently, TEWidget's color table is
+   currently, TerminalDisplay's color table is
      0       1       2 .. 9    10 .. 17
      dft_fg, dft_bg, dim 0..7, intensive 0..7
 
@@ -474,7 +474,7 @@ void TEScreen::setDefaultMargins()
    - 1..8 = ansi specified color
 
    re_fg, re_bg contain values 0..17
-   due to the TEWidget's color table
+   due to the TerminalDisplay's color table
 
    rendition attributes are
 
@@ -507,7 +507,7 @@ void TEScreen::effectiveRendition()
   //copy "current rendition" straight into "effective rendition", which is then later copied directly
   //into the image[] array which holds the characters and their appearance properties.
   //- The old version below filtered out all attributes other than underline and blink at this stage,
-  //so that they would not be copied into the image[] array and hence would not be visible by TEWidget
+  //so that they would not be copied into the image[] array and hence would not be visible by TerminalDisplay
   //which actually paints the screen using the information from the image[] array.  
   //I don't know why it did this, but I'm fairly sure it was the wrong thing to do.  The net result
   //was that bold text wasn't printed in bold by Konsole.

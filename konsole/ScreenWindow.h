@@ -27,7 +27,7 @@ class TEScreen;
 
 /**
  * Provides a window onto a section of a terminal screen.
- * This window can then be rendered by a terminal display widget ( TEWidget ).
+ * This window can then be rendered by a terminal display widget ( TerminalDisplay ).
  *
  * To use the screen window, create a new ScreenWindow() instance and associated it with 
  * a terminal screen using setScreen().

@@ -30,7 +30,7 @@
 #include <QTimer>
 
 // Konsole
-#include "TEWidget.h"
+#include "TerminalDisplay.h"
 #include "TEScreen.h"
 #include "TEmulation.h"
 
@@ -165,7 +165,7 @@ private:
   //(including xterm-style mouse input for example)
   //
   //See also - TEmulation::connectView()
-  //void setReceiveViewInput( TEWidget* view , bool enable );
+  //void setReceiveViewInput( TerminalDisplay* view , bool enable );
 
   void resetToken();
 #define MAXPBUF 80

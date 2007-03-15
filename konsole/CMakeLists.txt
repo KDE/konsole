@@ -37,7 +37,7 @@ endif(KONSOLE_GENERATE_LINEFONT)
 #   konsole.cpp 
 #   schema.cpp 
 #   TESession.cpp 
-#   TEWidget.cpp 
+#   TerminalDisplay.cpp 
 #   TEmuVt102.cpp 
 #   TEScreen.cpp 
 #   TEmulation.cpp 
@@ -73,7 +73,7 @@ set(konsole_KDEINIT_SRCS
         TEPty.cpp
         TEScreen.cpp
         TESession.cpp
-        TEWidget.cpp
+        TerminalDisplay.cpp
         TEmuVt102.cpp
         TEmulation.cpp
         TerminalCharacterDecoder.cpp
@@ -120,7 +120,7 @@ set(konsolepart_PART_SRCS
    schema.cpp 
    TESession.cpp 
    ZModemDialog.cpp 
-   TEWidget.cpp 
+   TerminalDisplay.cpp 
    TEmuVt102.cpp 
    TEScreen.cpp 
    konsole_wcwidth.cpp 

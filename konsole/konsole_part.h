@@ -90,7 +90,7 @@ Q_SIGNALS:
 
     void doneSession(TESession*);
     void sessionDestroyed();
-    void configureRequest(TEWidget*,int,int x,int y);
+    void configureRequest(TerminalDisplay*,int,int x,int y);
     void updateTitle();
     void enableMasterModeConnections();
 
@@ -141,7 +141,7 @@ Q_SIGNALS:
 	bool doCloseStream();
 
     QWidget* parentWidget;
-    TEWidget* te;
+    TerminalDisplay* te;
     TESession* se;
     ColorSchemaList* colors;
 

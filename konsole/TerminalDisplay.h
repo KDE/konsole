@@ -69,19 +69,19 @@ class ScreenWindow;
  * A widget which displays output from a terminal emulation and sends input keypresses and mouse activity
  * to the terminal.
  *
- * TEWidget does not know anything about the terminal emulation whoose output it is displaying.
+ * TerminalDisplay does not know anything about the terminal emulation whoose output it is displaying.
  *
  * When the terminal emulation receives new output from the program running in the terminal, 
  * it will update the display by calling setImage().
  */
-class TEWidget : public QFrame
+class TerminalDisplay : public QFrame
 {
    Q_OBJECT
 
 public:
 
-    TEWidget(QWidget *parent=0);
-    virtual ~TEWidget();
+    TerminalDisplay(QWidget *parent=0);
+    virtual ~TerminalDisplay();
 
     void setBlendColor(const QRgb color) { blend_color = color; }
 
@@ -259,7 +259,7 @@ Q_SIGNALS:
     void changedFontMetricSignal(int height, int width);
     void changedContentSizeSignal(int height, int width);
     void changedHistoryCursor( int value);
-    void configureRequest( TEWidget*, int state, int x, int y );
+    void configureRequest( TerminalDisplay*, int state, int x, int y );
 
    void isBusySelecting(bool);
    void sendStringToEmu(const char*);

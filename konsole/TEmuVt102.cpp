@@ -22,7 +22,7 @@
 
    \brief Actual Emulation for Konsole
 
-   \sa TEWidget \sa TEScreen
+   \sa TerminalDisplay \sa TEScreen
 */
 #include "config-konsole.h"
 
@@ -96,7 +96,7 @@ TEmuVt102::TEmuVt102() : TEmulation()
 }
 
 #if 0
-void TEmuVt102::setReceiveViewInput(TEWidget* view , bool enable)
+void TEmuVt102::setReceiveViewInput(TerminalDisplay* view , bool enable)
 {
    if (enable)
    {
@@ -116,13 +116,13 @@ void TEmuVt102::setReceiveViewInput(TEWidget* view , bool enable)
 #endif
 
 #if 0
-void TEmuVt102::addView(TEWidget* view)
+void TEmuVt102::addView(TerminalDisplay* view)
 {
     TEmulation::addView(view);
     setReceiveViewInput(view,true);
 }
 
-void TEmuVt102::removeView(TEWidget* view)
+void TEmuVt102::removeView(TerminalDisplay* view)
 {
     TEmulation::removeView(view);
     setReceiveViewInput(view,false);
@@ -1094,7 +1094,7 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
    in the pipeline. It only applies to tokens, which represent
    plain characters.
 
-   This conversion it eventually continued in TEWidget.C, since 
+   This conversion it eventually continued in TerminalDisplay.C, since 
    it might involve VT100 enhanced fonts, which have these
    particular glyphs allocated in (0x00-0x1f) in their code page.
 */
@@ -1290,7 +1290,7 @@ bool TEmuVt102::getMode(int m)
 {
   TEmulation::setConnect(c);
 
-  QListIterator< TEWidget* > viewIter(_views);
+  QListIterator< TerminalDisplay* > viewIter(_views);
   
   while (viewIter.hasNext())
   {
@@ -1314,7 +1314,7 @@ bool TEmuVt102::getMode(int m)
       scrolllock_set_off();
 #endif
 
-    QListIterator< TEWidget* > viewIter2(_views);
+    QListIterator< TerminalDisplay* > viewIter2(_views);
 
     while (viewIter2.hasNext())
     {

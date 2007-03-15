@@ -14,7 +14,7 @@
 #include "HistorySizeDialog.h"
 #include "IncrementalSearchBar.h"
 #include "TESession.h"
-#include "TEWidget.h"
+#include "TerminalDisplay.h"
 #include "SessionController.h"
 #include "ProcessInfo.h"
 
@@ -34,7 +34,7 @@ KIcon SessionController::_activityIcon;
 KIcon SessionController::_silenceIcon;
 QPointer<SearchHistoryThread> SearchHistoryTask::_thread;
 
-SessionController::SessionController(TESession* session , TEWidget* view, QObject* parent)
+SessionController::SessionController(TESession* session , TerminalDisplay* view, QObject* parent)
     : ViewProperties(parent)
     , KXMLGUIClient()
     , _session(session)

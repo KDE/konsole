@@ -19,7 +19,7 @@ class QAction;
 class KToggleAction;
 class KUrl;
 class TESession;
-class TEWidget;
+class TerminalDisplay;
 class IncrementalSearchBar;
 class UrlFilter;
 class RegExpFilter;
@@ -54,7 +54,7 @@ public:
     /**
      * Constructs a new SessionController which operates on @p session and @p view.
      */
-    SessionController(TESession* session , TEWidget* view, QObject* parent);
+    SessionController(TESession* session , TerminalDisplay* view, QObject* parent);
     ~SessionController();
 
     /** Reimplemented to watch for events happening to the view */
@@ -63,7 +63,7 @@ public:
     /** Returns the session associated with this controller */
     TESession* session() { return _session; }
     /** Returns the view associated with this controller */
-    TEWidget*  view()    { return _view;    }
+    TerminalDisplay*  view()    { return _view;    }
 
     /** 
      * Sets the widget used for searches through the session's history. 
@@ -130,7 +130,7 @@ private:
 
 private:
     TESession* _session;
-    TEWidget*  _view;
+    TerminalDisplay*  _view;
     KIcon      _sessionIcon;
     QString    _sessionIconName;
     int        _previousState;
