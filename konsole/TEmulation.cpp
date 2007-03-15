@@ -189,6 +189,7 @@ void TEmulation::setCodec(const QTextCodec * qtc)
   m_codec = qtc;
   delete decoder;
   decoder = m_codec->makeDecoder();
+
   emit useUtf8(utf8());
 }
 
@@ -294,18 +295,8 @@ void TEmulation::onReceiveBlock(const char* text, int length)
 	emit notifySessionState(NOTIFYACTIVITY);
 
 	bufferedUpdate();
-
-    int pos = 0;
-
-#warning "knight - Debugging code.  Remember to fix this."
-
-    for ( pos = 0 ; pos < length ; pos += 512 )
-    {
-    //qDebug() << "input-length: " << length;
-
-	QString unicodeText = decoder->toUnicode(text+pos,qMin(length-pos,512));
-	
-    //qDebug() << "output-length: " << unicodeText.length();
+    	
+    QString unicodeText = decoder->toUnicode(text,length);
 
 	//send characters to terminal emulator
 	for (int i=0;i<unicodeText.length();i++)
@@ -324,7 +315,6 @@ void TEmulation::onReceiveBlock(const char* text, int length)
       				emit zmodemDetected();
     		}
 	}
-    }
 }
 
 //OLDER VERSION
