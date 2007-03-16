@@ -27,8 +27,11 @@
 
 class KToggleAction;
 
+namespace Konsole
+{
+
 class KonsoleMainWindow;
-class TESession;
+class Session;
 class TerminalDisplay;
 
 class SessionController;
@@ -72,7 +75,7 @@ public:
      * Creates a new view to display the outout from and deliver input to @p session.
      * Constructs a new container to hold the views if no container has yet been created.
      */
-    void createView(TESession* session);
+    void createView(Session* session);
 
     /**
      * Merges views from another view manager into this manager.
@@ -87,7 +90,7 @@ signals:
     void empty();
 
     /** Emitted when a session is detached from a view owned by this ViewManager */
-    void viewDetached(TESession* session);
+    void viewDetached(Session* session);
 
 private slots:
     // called when the "Split View" menu item is selected
@@ -96,7 +99,7 @@ private slots:
     void detachActiveView();
     // called when a session terminates - the view manager will delete any
     // views associated with the session
-    void sessionFinished( TESession* session );
+    void sessionFinished( Session* session );
     // called when the container requests to close a particular view
     void viewCloseRequest(QWidget* widget);
 
@@ -126,20 +129,22 @@ private:
     TerminalDisplay* createTerminalDisplay();
     // applies the view-specific settings such as colour scheme associated
     // with 'session' to 'view'
-    void loadViewSettings(TerminalDisplay* view , TESession* session);
+    void loadViewSettings(TerminalDisplay* view , Session* session);
 
     // creates a new controller for a session/display pair which provides the menu
     // actions associated with that view, and exposes basic information
     // about the session ( such as title and associated icon ) to the display.
-    SessionController* createController(TESession* session , TerminalDisplay* display);
+    SessionController* createController(Session* session , TerminalDisplay* display);
 
 private:
     KonsoleMainWindow*          _mainWindow;
     KToggleAction*              _splitViewAction;
     ViewSplitter*               _viewSplitter;
     QPointer<SessionController> _pluggedController;
-    QHash<TerminalDisplay*,TESession*> _sessionMap;
+    QHash<TerminalDisplay*,Session*> _sessionMap;
     
+};
+
 };
 
 #endif

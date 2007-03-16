@@ -27,6 +27,9 @@
 // KDE
 #include <KUrl>
 
+namespace Konsole
+{
+
 /** 
  * Encapsulates user-visible information about the terminal session currently being displayed in a view,
  * such as the icon and title associated with that session.
@@ -86,6 +89,8 @@ private:
     QIcon _icon;
     QString _title;
     int _id;
+};
+
 };
 
 #endif //VIEWPROPERTIES_H

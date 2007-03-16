@@ -13,7 +13,7 @@
 #include "Filter.h"
 #include "HistorySizeDialog.h"
 #include "IncrementalSearchBar.h"
-#include "TESession.h"
+#include "Session.h"
 #include "TerminalDisplay.h"
 #include "SessionController.h"
 #include "ProcessInfo.h"
@@ -29,12 +29,13 @@
 // at the time of writing
 #include <kio/job.h>
 
+using namespace Konsole;
 
 KIcon SessionController::_activityIcon;
 KIcon SessionController::_silenceIcon;
 QPointer<SearchHistoryThread> SearchHistoryTask::_thread;
 
-SessionController::SessionController(TESession* session , TerminalDisplay* view, QObject* parent)
+SessionController::SessionController(Session* session , TerminalDisplay* view, QObject* parent)
     : ViewProperties(parent)
     , KXMLGUIClient()
     , _session(session)
@@ -58,8 +59,8 @@ SessionController::SessionController(TESession* session , TerminalDisplay* view,
     connect( _view , SIGNAL(destroyed()) , this , SLOT(deleteLater()) );
 
     // listen to activity / silence notifications from session
-    connect( _session , SIGNAL(notifySessionState(TESession*,int)) , this ,
-            SLOT(sessionStateChanged(TESession*,int) ));
+    connect( _session , SIGNAL(notifySessionState(Session*,int)) , this ,
+            SLOT(sessionStateChanged(Session*,int) ));
 
     // list to title and icon changes
     connect( _session , SIGNAL(updateTitle()) , this , SLOT(sessionTitleChanged()) );
@@ -301,13 +302,13 @@ void SessionController::paste()
 
 void SessionController::clear()
 {
-    TEmulation* emulation = _session->getEmulation();
+    Emulation* emulation = _session->getEmulation();
 
     emulation->clearEntireScreen();
 }
 void SessionController::clearAndReset()
 {
-    TEmulation* emulation = _session->getEmulation();
+    Emulation* emulation = _session->getEmulation();
 
     emulation->reset();
 }
@@ -450,7 +451,7 @@ void SessionController::sessionTitleChanged()
        //TODO - use _session->displayTitle() here. 
        setTitle( _session->title() ); 
 }
-void SessionController::sessionStateChanged(TESession* /*session*/ , int state)
+void SessionController::sessionStateChanged(Session* /*session*/ , int state)
 {
     //TODO - Share icons across sessions ( possible using a static QHash<QString,QIcon> variable 
     // to create a cache of icons mapped from icon names? )
@@ -503,7 +504,7 @@ bool SessionTask::autoDelete() const
 {
     return _autoDelete;
 }
-void SessionTask::addSession(TESession* session)
+void SessionTask::addSession(Session* session)
 {
     _sessions << session;
 }
@@ -655,7 +656,7 @@ void SearchHistoryTask::execute()
 {
     Q_ASSERT( sessions().first() );
 
-    TEmulation* emulation = sessions().first()->getEmulation();
+    Emulation* emulation = sessions().first()->getEmulation();
 
     if ( !_regExp.isEmpty() )
     {
@@ -757,7 +758,7 @@ void SearchHistoryThread::run()
     //QTextStream stream(&data,QIODevice::ReadWrite);
     //_session->getEmulation()->writeToStream( &stream , _decoder , 0 ,  );
 
-    TEmulation* emulation = _session->getEmulation();
+    Emulation* emulation = _session->getEmulation();
 
     qDebug() << "searching for " << _regExp.pattern();
     emulation->findTextNext(_regExp.pattern() , true , false , false );

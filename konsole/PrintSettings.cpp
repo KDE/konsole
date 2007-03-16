@@ -18,13 +18,18 @@
  *  Boston, MA 02110-1301, USA.
  **/
 
-#include "PrintSettings.h"
-
-#include <klocale.h>
+// Qt
 #include <QCheckBox>
 #include <QLayout>
-//Added by qt3to4:
 #include <QVBoxLayout>
+
+// KDE
+#include <klocale.h>
+
+// Konsole    
+#include "PrintSettings.h"
+
+using namespace Konsole;
 
 PrintSettings::PrintSettings(QWidget *parent)
 : KPrintDialogPage(parent)

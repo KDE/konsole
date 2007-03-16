@@ -23,6 +23,9 @@
 
 class Q3TextEdit;
 
+namespace Konsole
+{
+
 class ZModemDialog : public KDialog
 {
   Q_OBJECT
@@ -44,6 +47,8 @@ public Q_SLOTS:
   
 private:
   Q3TextEdit *textEdit;
+};
+
 };
 
 #endif

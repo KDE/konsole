@@ -18,13 +18,20 @@
     02110-1301  USA.
 */
 
-#include "BlockArray.h"
+// System
 #include <assert.h>
 #include <sys/mman.h>
 #include <sys/param.h>
 #include <unistd.h>
 #include <stdio.h>
+
+// KDE
 #include <kdebug.h>
+
+// Konsole
+#include "BlockArray.h"
+
+using namespace Konsole;
 
 static int blocksize = 0;
 

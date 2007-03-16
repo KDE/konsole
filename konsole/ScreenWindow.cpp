@@ -21,8 +21,10 @@
 #include <QtDebug>
 
 // Konsole
-#include "TEScreen.h"
+#include "Screen.h"
 #include "ScreenWindow.h"
+
+using namespace Konsole;
 
 ScreenWindow::ScreenWindow(QObject* parent)
     : QObject(parent)
@@ -32,14 +34,14 @@ ScreenWindow::ScreenWindow(QObject* parent)
 {
 }
 
-void ScreenWindow::setScreen(TEScreen* screen)
+void ScreenWindow::setScreen(Screen* screen)
 {
     Q_ASSERT( screen );
 
     _screen = screen;
 }
 
-TEScreen* ScreenWindow::screen() const
+Screen* ScreenWindow::screen() const
 {
     return _screen;
 }

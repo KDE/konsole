@@ -17,10 +17,10 @@ kde4_add_executable(fontembedder ${fontembedder_SRCS})
 
 target_link_libraries(fontembedder  ${KDE4_KIO_LIBS} )
 
-qt4_add_dbus_adaptor( konsoleadaptors_SRCS org.kde.konsole.Konsole.xml konsole.h Konsole )
-qt4_add_dbus_adaptor( konsoleadaptors_SRCS org.kde.konsole.KonsoleScripting.xml konsole.h Konsole )
-qt4_add_dbus_adaptor( sessionadaptors_SRCS org.kde.konsole.Session.xml TESession.h TESession )
-qt4_add_dbus_adaptor( sessionadaptors_SRCS org.kde.konsole.SessionScripting.xml TESession.h TESession )
+#qt4_add_dbus_adaptor( konsoleadaptors_SRCS org.kde.konsole.Konsole.xml konsole.h Konsole )
+#qt4_add_dbus_adaptor( konsoleadaptors_SRCS org.kde.konsole.KonsoleScripting.xml konsole.h Konsole )
+#qt4_add_dbus_adaptor( sessionadaptors_SRCS org.kde.konsole.Session.xml Session.h Session )
+#qt4_add_dbus_adaptor( sessionadaptors_SRCS org.kde.konsole.SessionScripting.xml Session.h Session )
 
 if(KONSOLE_GENERATE_LINEFONT)
 	add_custom_command(OUTPUT ${CMAKE_SOURCE_DIR}/linefont.h COMMAND ${CMAKE_CURRENT_BINARY_DIR}/fontembedder ARGS ${CMAKE_SOURCE_DIR}/linefont.src DEPENDS ${CMAKE_SOURCE_DIR}/linefont.src )
@@ -31,17 +31,17 @@ endif(KONSOLE_GENERATE_LINEFONT)
 #set(konsole_KDEINIT_SRCS 
 #   ${konsoleadaptors_SRCS}
 #   ${sessionadaptors_SRCS}
-#   TEPty.cpp 
+#   Pty.cpp 
 #   BlockArray.cpp 
 #   main.cpp 
 #   konsole.cpp 
 #   schema.cpp 
-#   TESession.cpp 
+#   Session.cpp 
 #   TerminalDisplay.cpp 
-#   TEmuVt102.cpp 
-#   TEScreen.cpp 
-#   TEmulation.cpp 
-#   TEHistory.cpp 
+#   Vt102Emulation.cpp 
+#   Screen.cpp 
+#   Emulation.cpp 
+#   History.cpp 
 #   keytrans.cpp 
 #   konsole_wcwidth.cpp 
 #   konsolebookmarkhandler.cpp 
@@ -69,13 +69,13 @@ set(konsole_KDEINIT_SRCS
         SessionList.cpp
         SessionListWidget.cpp
         SessionManager.cpp
-        TEHistory.cpp
-        TEPty.cpp
-        TEScreen.cpp
-        TESession.cpp
+        History.cpp
+        Pty.cpp
+        Screen.cpp
+        Session.cpp
         TerminalDisplay.cpp
-        TEmuVt102.cpp
-        TEmulation.cpp
+        Vt102Emulation.cpp
+        Emulation.cpp
         TerminalCharacterDecoder.cpp
         ViewContainer.cpp
         ViewManager.cpp
@@ -85,6 +85,7 @@ set(konsole_KDEINIT_SRCS
         konsole_wcwidth.cpp
         schema.cpp
         start.cpp
+        XKB.cpp
    ) 
 
 set_source_files_properties(${konsole_KDEINIT_SRCS} PROPERTIES COMPILE_FLAGS "-Wuninitialized")
@@ -113,24 +114,26 @@ install(TARGETS konsole DESTINATION ${BIN_INSTALL_DIR})
 ########### next target ###############
 
 set(konsolepart_PART_SRCS 
-   ${sessionadaptors_SRCS}
-   TEPty.cpp 
+#${sessionadaptors_SRCS}
+   Pty.cpp 
    BlockArray.cpp 
    konsole_part.cpp 
    schema.cpp 
-   TESession.cpp 
+   Session.cpp 
    ZModemDialog.cpp 
    TerminalDisplay.cpp 
-   TEmuVt102.cpp 
-   TEScreen.cpp 
+   Vt102Emulation.cpp 
+   Screen.cpp 
    konsole_wcwidth.cpp 
-   TEmulation.cpp 
-   TEHistory.cpp 
+   Emulation.cpp 
+   History.cpp 
    KeyTrans.cpp 
    TerminalCharacterDecoder.cpp
    SessionManager.cpp 
    ScreenWindow.cpp
-   Filter.cpp ) 
+   Filter.cpp 
+   XKB.cpp   
+) 
 
 set_source_files_properties(${konsolepart_PART_SRCS} PROPERTIES COMPILE_FLAGS -Wuninitialized)
 

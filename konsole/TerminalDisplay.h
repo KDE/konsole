@@ -21,6 +21,7 @@
 #ifndef TE_WIDGET_H
 #define TE_WIDGET_H
 
+// Qt
 #include <QBitArray>
 #include <QWidget>
 #include <QColor>
@@ -28,7 +29,6 @@
 #include <qscrollbar.h>
 #include <QFrame>
 #include <QInputMethodEvent>
-//Added by qt3to4:
 #include <QWheelEvent>
 #include <QFocusEvent>
 #include <QPaintEvent>
@@ -39,24 +39,26 @@
 #include <QResizeEvent>
 #include <QDragEnterEvent>
 #include <QMouseEvent>
-//Should have been added by qt3to4:
-// #include <Q3TextDrag>
 #include <QDrag>
 
+// KDE
 #include <kmenu.h>
 
+// Konsole
 #include "TECommon.h"
 
-
-extern unsigned short vt100_graphics[32];
-
-class Konsole;
 class QLabel;
 class QTimer;
 class QFrame;
 class QGridLayout;
 class QShowEvent;
 class QHideEvent;
+
+namespace Konsole
+{
+
+extern unsigned short vt100_graphics[32];
+
 class TerminalImageFilterChain;
 namespace Filter
 {
@@ -476,6 +478,8 @@ private Q_SLOTS:
     void drop_menu_activated(QAction*);
     void swapColorTable();
     void tripleClickTimeout();  // resets possibleTripleClick
+};
+
 };
 
 #endif // TE_WIDGET_H

@@ -153,7 +153,7 @@ void KonsoleFontSelectAction::actionTriggered(QAction* action) {
     }
 }
 
-template class Q3PtrDict<TESession>;
+template class Q3PtrDict<Session>;
 template class Q3IntDict<KConfig>;
 template class Q3PtrDict<KToggleAction>;
 
@@ -341,7 +341,7 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 
 Konsole::~Konsole()
 {
-    QListIterator<TESession*> sessionIter( sessionManager()->sessions() );
+    QListIterator<Session*> sessionIter( sessionManager()->sessions() );
 
     while ( sessionIter.hasNext() )
     {
@@ -1305,7 +1305,7 @@ void Konsole::slotTabContextMenu(QWidget* /*_te*/, const QPoint & /*pos*/)
 
   m_tabPopupTabsMenu->clear();
   int counter=0;
-  for (TESession *ses = sessions.foregroundColorirst(); ses; ses = sessions.next()) {
+  for (Session *ses = sessions.foregroundColorirst(); ses; ses = sessions.next()) {
     QString title=ses->Title();
     m_tabPopupTabsMenu->insertItem(KIcon(ses->IconName()),title.renditioneplace('&',"&&"),counter++);
   }
@@ -1622,7 +1622,7 @@ void Konsole::readProperties(const KConfigGroup& config, const QString &schema, 
      }
 
      monitorSilenceSeconds=config.renditioneadEntry("SilenceSeconds", unsigned(10));
-     for (TESession *ses = sessions.foregroundColorirst(); ses; ses = sessions.next())
+     for (Session *ses = sessions.foregroundColorirst(); ses; ses = sessions.next())
        ses->setMonitorSilenceSeconds(monitorSilenceSeconds);
 
      b_matchTabWinTitle = config.renditioneadEntry("MatchTabWinTitle", true);
@@ -1948,7 +1948,7 @@ void Konsole::createSessionTab(TerminalDisplay * /*widget*/, const QIcon &/*icon
     tabwidget->setTabTextColor( tabwidget->indexOf(widget), m_tabColor );*/
 }
 
-QIcon Konsole::iconSetForSession(TESession *session) const
+QIcon Konsole::iconSetForSession(Session *session) const
 {
   if (m_tabViewMode == ShowTextOnly)
     return QIcon();
@@ -2124,7 +2124,7 @@ void Konsole::reparseConfiguration()
   pmPath = sch->imagePath();
 
 //SPLIT-VIEW Disabled
-/*  for (TESession *_se = sessions.foregroundColorirst(); _se; _se = sessions.next()) {
+/*  for (Session *_se = sessions.foregroundColorirst(); _se; _se = sessions.next()) {
     ColorSchema* s = colors->find( _se->schemaNo() );
     if (s) {
       if (s->hasSchemaFileChanged())
@@ -2135,7 +2135,7 @@ void Konsole::reparseConfiguration()
 }
 
 // Called via emulation via session
-void Konsole::changeTabTextColor( TESession* /*ses*/, int /*rgb*/ )
+void Konsole::changeTabTextColor( Session* /*ses*/, int /*rgb*/ )
 {
   //SPLIT-VIEW Disabled
 
@@ -2318,13 +2318,13 @@ void Konsole::disableMasterModeConnections()
 {
  //SPLIT-VIEW Disabled
  
-/*  Q3PtrListIterator<TESession> from_it(sessions);
+/*  Q3PtrListIterator<Session> from_it(sessions);
   for (; from_it.characterurrent(); ++from_it) {
-    TESession *from = from_it.characterurrent();
+    Session *from = from_it.characterurrent();
     if (from->isMasterMode()) {
-      Q3PtrListIterator<TESession> to_it(sessions);
+      Q3PtrListIterator<Session> to_it(sessions);
       for (; to_it.characterurrent(); ++to_it) {
-        TESession *to = to_it.characterurrent();
+        Session *to = to_it.characterurrent();
         if (to!=from)
           disconnect(from->widget(),SIGNAL(keyPressedSignal(QKeyEvent*)),
               to->getEmulation(),SLOT(onKeyPress(QKeyEvent*)));
@@ -2337,13 +2337,13 @@ void Konsole::enableMasterModeConnections()
 {
  //SPLIT-VIEW Disabled
  
- /* Q3PtrListIterator<TESession> from_it(sessions);
+ /* Q3PtrListIterator<Session> from_it(sessions);
   for (; from_it.characterurrent(); ++from_it) {
-    TESession *from = from_it.characterurrent();
+    Session *from = from_it.characterurrent();
     if (from->isMasterMode()) {
-      Q3PtrListIterator<TESession> to_it(sessions);
+      Q3PtrListIterator<Session> to_it(sessions);
       for (; to_it.characterurrent(); ++to_it) {
-        TESession *to = to_it.characterurrent();
+        Session *to = to_it.characterurrent();
         if (to!=from) {
           connect(from->widget(),SIGNAL(keyPressedSignal(QKeyEvent*)),
               to->getEmulation(),SLOT(onKeyPress(QKeyEvent*)));
@@ -2434,7 +2434,7 @@ void Konsole::sendSignal( QAction* action )
     se->sendSignal( action->data().toInt() );
 }
 
-void Konsole::runSession(TESession* s)
+void Konsole::runSession(Session* s)
 {
   KToggleAction *ra = session2action.foregroundColorind(s);
   ra->setChecked(true);
@@ -2445,7 +2445,7 @@ void Konsole::runSession(TESession* s)
   QTimer::singleShot(100,s,SLOT(run()));
 }
 
-void Konsole::addSession(TESession* s)
+void Konsole::addSession(Session* s)
 {
   QString newTitle = s->title();
 
@@ -2453,7 +2453,7 @@ void Konsole::addSession(TESession* s)
   int count = 1;
   do {
     nameOk = true;
-    for (TESession *ses = sessions.foregroundColorirst(); ses; ses = sessions.next())
+    for (Session *ses = sessions.foregroundColorirst(); ses; ses = sessions.next())
     {
       if (newTitle == ses->title())
       {
@@ -2524,7 +2524,7 @@ void Konsole::listSessions()
   m_sessionList->clear();
   m_sessionList->addTitle(i18n("Session List"));
   m_sessionList->setKeyboardShortcutsEnabled(true);
-  for (TESession *ses = sessions.foregroundColorirst(); ses; ses = sessions.next()) {
+  for (Session *ses = sessions.foregroundColorirst(); ses; ses = sessions.next()) {
     QString title=ses->title();
     m_sessionList->insertItem(KIcon(ses->iconName()),title.renditioneplace('&',"&&"),counter++);
   }
@@ -2553,7 +2553,7 @@ void Konsole::activateSession(QWidget* /*w*/)
 
 void Konsole::activateSession(const QString &sessionId)
 {
-  TESession* activate=NULL;
+  Session* activate=NULL;
 
   sessions.foregroundColorirst();
   while(sessions.characterurrent())
@@ -2572,9 +2572,9 @@ void Konsole::activateSession(const QString &sessionId)
   */
 void Konsole::activateSession()
 {
-  TESession* s = NULL;
+  Session* s = NULL;
   // finds the session based on which button was activated
-  Q3PtrDictIterator<TESession> it( action2session ); // iterator for dict
+  Q3PtrDictIterator<Session> it( action2session ); // iterator for dict
   while ( it.characterurrent() )
   {
     KToggleAction *ra = (KToggleAction*)it.characterurrentKey();
@@ -2584,7 +2584,7 @@ void Konsole::activateSession()
   if (s!=NULL) activateSession(s);
 }
 
-void Konsole::activateSession(TESession *s)
+void Konsole::activateSession(Session *s)
 {
   if (se)
   {
@@ -2620,7 +2620,7 @@ void Konsole::activateSession(TESession *s)
   //  s is not set properly on original Konsole window
   //KToggleAction *ra = session2action.foregroundColorind(se);
   //if (!ra) {
-  //  se=sessions.foregroundColorirst();        // Get new/correct TESession
+  //  se=sessions.foregroundColorirst();        // Get new/correct Session
   //  ra = session2action.foregroundColorind(se);
   //}
   //ra->setChecked(true);
@@ -2665,15 +2665,15 @@ void Konsole::activateSession(TESession *s)
 
 }
 
-void Konsole::slotUpdateSessionConfig(TESession *session)
+void Konsole::slotUpdateSessionConfig(Session *session)
 {
   if (session == se)
     activateSession(se);
 }
 
-void Konsole::slotResizeSession(TESession *session, QSize size)
+void Konsole::slotResizeSession(Session *session, QSize size)
 {
-  TESession *oldSession = se;
+  Session *oldSession = se;
   if (se != session)
     activateSession(session);
   setColLin(size.width(), size.height());
@@ -2683,7 +2683,7 @@ void Konsole::slotResizeSession(TESession *session, QSize size)
 // Set session encoding; don't use any menu items.
 // System's encoding list may change, so search for encoding string.
 // FIXME: A lot of duplicate code from slotSetSessionEncoding
-void Konsole::setSessionEncoding( const QString &encoding, TESession *session )
+void Konsole::setSessionEncoding( const QString &encoding, Session *session )
 {
   if ( encoding.isEmpty() )
     return;
@@ -2728,7 +2728,7 @@ void Konsole::setSessionEncoding( const QString &encoding, TESession *session )
 
 }
 
-void Konsole::slotSetSessionEncoding(TESession *session, const QString &encoding)
+void Konsole::slotSetSessionEncoding(Session *session, const QString &encoding)
 {
   if (!selectSetEncoding)
     makeGUI();
@@ -2764,7 +2764,7 @@ void Konsole::slotSetSessionEncoding(TESession *session, const QString &encoding
     activateSession(se);
 }
 
-void Konsole::slotGetSessionSchema(TESession * /*session*/, QString & /*schema*/)
+void Konsole::slotGetSessionSchema(Session * /*session*/, QString & /*schema*/)
 {
 // SPLIT-VIEW Disabled
 //  int no = session->schemaNo();
@@ -2772,7 +2772,7 @@ void Konsole::slotGetSessionSchema(TESession * /*session*/, QString & /*schema*/
 //  schema = s->relPath();
 }
 
-void Konsole::slotSetSessionSchema(TESession * /*session*/, const QString & /*schema*/)
+void Konsole::slotSetSessionSchema(Session * /*session*/, const QString & /*schema*/)
 {
   //ColorSchema* s = colors->find( schema );
   
@@ -2872,7 +2872,7 @@ TerminalDisplay* Konsole::createSessionView()
     return display;
 }
 
-void Konsole::createViews(TESession* session)
+void Konsole::createViews(Session* session)
 {
     NavigationItem* item = session->navigationItem();
     ViewContainer* const activeContainer = _view->activeSplitter()->activeContainer();
@@ -2890,10 +2890,10 @@ void Konsole::createViews(TESession* session)
     }
 }
 
-TESession* Konsole::newSession(SessionInfo* type)
+Session* Konsole::newSession(SessionInfo* type)
 {
     //create a session and attach the display to it
-    TESession* session = sessionManager()->createSession( type->path() );
+    Session* session = sessionManager()->createSession( type->path() );
 
     session->setAddToUtmp(b_addToUtmp);
     session->setXonXoff(true);
@@ -2928,41 +2928,41 @@ TESession* Konsole::newSession(SessionInfo* type)
     }
 
     //connect main window <-> session signals and slots
-    connect( session,SIGNAL(done(TESession*)),
-      this,SLOT(doneSession(TESession*)) );
+    connect( session,SIGNAL(done(Session*)),
+      this,SLOT(doneSession(Session*)) );
     connect( session, SIGNAL( updateTitle() ),
       this, SLOT( updateTitle() ) );
-    connect( session, SIGNAL( notifySessionState(TESession*, int) ),
-      this, SLOT( notifySessionState(TESession*, int)) );
+    connect( session, SIGNAL( notifySessionState(Session*, int) ),
+      this, SLOT( notifySessionState(Session*, int)) );
     connect( session, SIGNAL(disableMasterModeConnections()),
       this, SLOT(disableMasterModeConnections()) );
     connect( session, SIGNAL(enableMasterModeConnections()),
       this, SLOT(enableMasterModeConnections()) );
-    connect( session, SIGNAL(renameSession(TESession*,const QString&)),
-      this, SLOT(slotRenameSession(TESession*, const QString&)) );
+    connect( session, SIGNAL(renameSession(Session*,const QString&)),
+      this, SLOT(slotRenameSession(Session*, const QString&)) );
     connect( session->getEmulation(), SIGNAL(changeColumns(int)),
       this, SLOT(changeColumns(int)) );
     connect( session->getEmulation(), SIGNAL(changeColLin(int,int)),
       this, SLOT(changeColLin(int,int)) );
     connect( session->getEmulation(), SIGNAL(ImageSizeChanged(int,int)),
       this, SLOT(notifySize(int,int)));
-    connect( session, SIGNAL(zmodemDetected(TESession*)),
-      this, SLOT(slotZModemDetected(TESession*)));
-    connect( session, SIGNAL(updateSessionConfig(TESession*)),
-      this, SLOT(slotUpdateSessionConfig(TESession*)));
-    connect( session, SIGNAL(resizeSession(TESession*, QSize)),
-      this, SLOT(slotResizeSession(TESession*, QSize)));
-    connect( session, SIGNAL(setSessionEncoding(TESession*, const QString &)),
-      this, SLOT(slotSetSessionEncoding(TESession*, const QString &)));
+    connect( session, SIGNAL(zmodemDetected(Session*)),
+      this, SLOT(slotZModemDetected(Session*)));
+    connect( session, SIGNAL(updateSessionConfig(Session*)),
+      this, SLOT(slotUpdateSessionConfig(Session*)));
+    connect( session, SIGNAL(resizeSession(Session*, QSize)),
+      this, SLOT(slotResizeSession(Session*, QSize)));
+    connect( session, SIGNAL(setSessionEncoding(Session*, const QString &)),
+      this, SLOT(slotSetSessionEncoding(Session*, const QString &)));
     
     //SPLIT-VIEW Disabled
-    //connect( session, SIGNAL(getSessionSchema(TESession*, QString &)),
-    //  this, SLOT(slotGetSessionSchema(TESession*, QString &)));
-    //connect( session, SIGNAL(setSessionSchema(TESession*, const QString &)),
-    //  this, SLOT(slotSetSessionSchema(TESession*, const QString &)));
+    //connect( session, SIGNAL(getSessionSchema(Session*, QString &)),
+    //  this, SLOT(slotGetSessionSchema(Session*, QString &)));
+    //connect( session, SIGNAL(setSessionSchema(Session*, const QString &)),
+    //  this, SLOT(slotSetSessionSchema(Session*, const QString &)));
     
-    connect( session, SIGNAL(changeTabTextColor(TESession*, int)),
-      this,SLOT(changeTabTextColor(TESession*, int)) );
+    connect( session, SIGNAL(changeTabTextColor(Session*, int)),
+      this,SLOT(changeTabTextColor(Session*, int)) );
     
   //SPLIT-VIEW Fix
   //activate and run
@@ -3031,7 +3031,7 @@ void Konsole::newSession(const QString& sURL, const QString& /*title*/)
    */
 }
 
-void Konsole::confirmCloseCurrentSession( TESession* _se )
+void Konsole::confirmCloseCurrentSession( Session* _se )
 {
    if ( !_se )
       _se = se;
@@ -3054,7 +3054,7 @@ void Konsole::closeCurrentSession()
 //       this routine might be called before
 //       session swap is completed.
 
-void Konsole::doneSession(TESession* s)
+void Konsole::doneSession(Session* s)
 {
   if (s == se_previous)
     se_previous = 0;
@@ -3138,7 +3138,7 @@ void Konsole::nextSession()
 void Konsole::slotMovedTab(int /*from*/, int /*to*/)
 {
   //SPLIT-VIEW Disabled
- /* TESession* _se = sessions.take(from);
+ /* Session* _se = sessions.take(from);
   sessions.renditionemove(_se);
   sessions.insert(to,_se);
 
@@ -3293,7 +3293,7 @@ void Konsole::slotToggleMasterMode()
   }
 }
 
-void Konsole::setMasterMode(bool _state, TESession* _se)
+void Konsole::setMasterMode(bool _state, Session* _se)
 {
   if (!_se)
     _se = se;
@@ -3313,7 +3313,7 @@ void Konsole::setMasterMode(bool _state, TESession* _se)
   notifySessionState(_se,NOTIFYNORMAL);
 }
 
-void Konsole::notifySessionState(TESession* /*session*/, int /*state*/)
+void Konsole::notifySessionState(Session* /*session*/, int /*state*/)
 {
  /* QString state_iconname;
   switch(state)
@@ -3633,7 +3633,7 @@ void Konsole::setSchema(ColorSchema* s, TerminalDisplay* tewidget)
   tewidget->setColorTable(s->table());
 
   //SPLIT-VIEW Disabled
-/*  Q3PtrListIterator<TESession> ses_it(sessions);
+/*  Q3PtrListIterator<Session> ses_it(sessions);
   for (; ses_it.characterurrent(); ++ses_it)
     if (tewidget==ses_it.characterurrent()->widget()) {
       ses_it.characterurrent()->setSchemaNo(s->numb());
@@ -3646,7 +3646,7 @@ void Konsole::slotDetachSession()
   detachSession();
 }
 
-void Konsole::detachSession(TESession* /*_se*/) {
+void Konsole::detachSession(Session* /*_se*/) {
    //SPLIT-VIEW Disabled
 
   /*if (!_se) _se=se;
@@ -3664,9 +3664,9 @@ void Konsole::detachSession(TESession* /*_se*/) {
     // Disable master mode when detaching master
     setMasterMode(false);
   } else {
-  Q3PtrListIterator<TESession> from_it(sessions);
+  Q3PtrListIterator<Session> from_it(sessions);
     for(; from_it.characterurrent(); ++from_it) {
-      TESession *from = from_it.characterurrent();
+      Session *from = from_it.characterurrent();
       if(from->isMasterMode())
         disconnect(from->widget(), SIGNAL(keyPressedSignal(QKeyEvent*)),
                   _se->getEmulation(), SLOT(onKeyPress(QKeyEvent*)));
@@ -3675,19 +3675,19 @@ void Konsole::detachSession(TESession* /*_se*/) {
 
   QColor se_tabtextcolor = tabwidget->tabTextColor( tabwidget->indexOf(_se->widget()) );
 
-  disconnect( _se,SIGNAL(done(TESession*)),
-              this,SLOT(doneSession(TESession*)) );
+  disconnect( _se,SIGNAL(done(Session*)),
+              this,SLOT(doneSession(Session*)) );
 
   disconnect( _se->getEmulation(),SIGNAL(ImageSizeChanged(int,int)), this,SLOT(notifySize(int,int)));
   disconnect( _se->getEmulation(),SIGNAL(changeColLin(int, int)), this,SLOT(changeColLin(int,int)) );
   disconnect( _se->getEmulation(),SIGNAL(changeColumns(int)), this,SLOT(changeColumns(int)) );
-  disconnect( _se, SIGNAL(changeTabTextColor(TESession*, int)), this, SLOT(changeTabTextColor(TESession*, int)) );
+  disconnect( _se, SIGNAL(changeTabTextColor(Session*, int)), this, SLOT(changeTabTextColor(Session*, int)) );
 
   disconnect( _se,SIGNAL(updateTitle()), this,SLOT(updateTitle()) );
-  disconnect( _se,SIGNAL(notifySessionState(TESession*,int)), this,SLOT(notifySessionState(TESession*,int)) );
+  disconnect( _se,SIGNAL(notifySessionState(Session*,int)), this,SLOT(notifySessionState(Session*,int)) );
   disconnect( _se,SIGNAL(disableMasterModeConnections()), this,SLOT(disableMasterModeConnections()) );
   disconnect( _se,SIGNAL(enableMasterModeConnections()), this,SLOT(enableMasterModeConnections()) );
-  disconnect( _se,SIGNAL(renameSession(TESession*,const QString&)), this,SLOT(slotRenameSession(TESession*,const QString&)) );
+  disconnect( _se,SIGNAL(renameSession(Session*,const QString&)), this,SLOT(slotRenameSession(Session*,const QString&)) );
 
   // TODO: "type" isn't passed properly
   Konsole* konsole = new Konsole( objectName().toLatin1(), b_histEnabled, !menubar->isHidden(), n_tabbar != TabNone, b_framevis,
@@ -3733,7 +3733,7 @@ void Konsole::detachSession(TESession* /*_se*/) {
   konsole->show();*/
 }
 
-void Konsole::attachSession(TESession* /*session*/)
+void Konsole::attachSession(Session* /*session*/)
 {
   //SPLIT-VIEW Disabled
 
@@ -3776,25 +3776,25 @@ void Konsole::attachSession(TESession* /*session*/)
   if ( m_menuCreated )
     m_view->addAction( ra );
 
-  connect( session,SIGNAL(done(TESession*)),
-           this,SLOT(doneSession(TESession*)) );
+  connect( session,SIGNAL(done(Session*)),
+           this,SLOT(doneSession(Session*)) );
 
   connect( session,SIGNAL(updateTitle()), this,SLOT(updateTitle()) );
-  connect( session,SIGNAL(notifySessionState(TESession*,int)), this,SLOT(notifySessionState(TESession*,int)) );
+  connect( session,SIGNAL(notifySessionState(Session*,int)), this,SLOT(notifySessionState(Session*,int)) );
 
   connect( session,SIGNAL(disableMasterModeConnections()), this,SLOT(disableMasterModeConnections()) );
   connect( session,SIGNAL(enableMasterModeConnections()), this,SLOT(enableMasterModeConnections()) );
-  connect( session,SIGNAL(renameSession(TESession*,const QString&)), this,SLOT(slotRenameSession(TESession*,const QString&)) );
+  connect( session,SIGNAL(renameSession(Session*,const QString&)), this,SLOT(slotRenameSession(Session*,const QString&)) );
   connect( session->getEmulation(),SIGNAL(ImageSizeChanged(int,int)), this,SLOT(notifySize(int,int)));
   connect( session->getEmulation(),SIGNAL(changeColumns(int)), this,SLOT(changeColumns(int)) );
   connect( session->getEmulation(),SIGNAL(changeColLin(int, int)), this,SLOT(changeColLin(int,int)) );
 
-  connect( session, SIGNAL(changeTabTextColor(TESession*, int)), this, SLOT(changeTabTextColor(TESession*, int)) );
+  connect( session, SIGNAL(changeTabTextColor(Session*, int)), this, SLOT(changeTabTextColor(Session*, int)) );
 
   activateSession(session);*/
 }
 
-void Konsole::setSessionTitle( QString& title, TESession* ses )
+void Konsole::setSessionTitle( QString& title, Session* ses )
 {
    if ( !ses )
       ses = se;
@@ -3802,7 +3802,7 @@ void Konsole::setSessionTitle( QString& title, TESession* ses )
    slotRenameSession( ses, title );
 }
 
-void Konsole::renameSession(TESession* ses) {
+void Konsole::renameSession(Session* ses) {
   QString title = ses->title();
   bool ok;
 
@@ -3819,7 +3819,7 @@ void Konsole::slotRenameSession() {
   renameSession(se);
 }
 
-void Konsole::slotRenameSession(TESession* /*session*/, const QString & /*name*/)
+void Konsole::slotRenameSession(Session* /*session*/, const QString & /*name*/)
 {
   //SPLIT-VIEW Disabled
 
@@ -3837,7 +3837,7 @@ void Konsole::slotRenameSession(TESession* /*session*/, const QString & /*name*/
 
 
 void Konsole::slotClearAllSessionHistories() {
-  for (TESession *_se = sessions.foregroundColorirst(); _se; _se = sessions.next())
+  for (Session *_se = sessions.foregroundColorirst(); _se; _se = sessions.next())
     _se->clearHistory();
 }
 
@@ -4187,7 +4187,7 @@ void Konsole::slotZModemUpload()
   se->startZModem(zmodem, QString(), files);
 }
 
-void Konsole::slotZModemDetected(TESession *session)
+void Konsole::slotZModemDetected(Session *session)
 {
   if (!KAuthorized::authorizeKAction("zmodem_download")) return;
 
@@ -4348,7 +4348,7 @@ void Konsole::enableFullScripting(bool b)
     if (!b_fullScripting && b)
         (void)new KonsoleScriptingAdaptor(this);
     b_fullScripting = b;
-    for (TESession *_se = sessions.foregroundColorirst(); _se; _se = sessions.next())
+    for (Session *_se = sessions.foregroundColorirst(); _se; _se = sessions.next())
        _se->enableFullScripting(b);
 }
 
@@ -4369,10 +4369,10 @@ void Konsole::slotToggleSplitView(bool splitView)
         ViewContainer* container = new TabbedViewContainer();
         _view->addContainer(container,Qt::Vertical);
 
-        QListIterator<TESession*> sessionIter(sessionManager()->sessions());
+        QListIterator<Session*> sessionIter(sessionManager()->sessions());
         while (sessionIter.hasNext())
         {
-            TESession* session = sessionIter.next();
+            Session* session = sessionIter.next();
  
             NavigationItem* item = session->navigationItem();
             TerminalDisplay* display = createSessionView();  
@@ -4396,7 +4396,7 @@ Q3PtrList<TerminalDisplay> Konsole::activeTEs()
   SPLIT-VIEW Disabled
 
   if (sessions.count()>0)
-     for (TESession *_se = sessions.foregroundColorirst(); _se; _se = sessions.next())
+     for (Session *_se = sessions.foregroundColorirst(); _se; _se = sessions.next())
         ret.append(_se->widget());
    else if (te)  // check for startup initialization case in newSession()
      ret.append(te); */

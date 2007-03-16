@@ -22,8 +22,10 @@
 #include <QApplication>
 #include <QPainter>
 
-// local
+// Konsole
 #include "OverlayFrame.h"
+
+using namespace Konsole;
 
 void OverlayFrame::setVisible( bool visible )
 {

@@ -29,6 +29,9 @@ class KBookmarkMenu;
 class KBookmarkManager;
 class KActionCollection;
 
+namespace Konsole
+{
+
 class SessionController;
 
 /**
@@ -99,6 +102,8 @@ private:
     QString m_file;
     bool m_toplevel;
     SessionController* m_controller;
+};
+
 };
 
 #endif // KONSOLEBOOKMARKHANDLER_H

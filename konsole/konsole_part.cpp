@@ -60,14 +60,8 @@
 #include "konsole_part.h"
 #include "KeyTrans.h"
 #include "schema.h"
-#include "TESession.h"
+#include "Session.h"
 #include "TerminalDisplay.h"
-
-
-
-
-// True transparency is not available in the embedded Konsole
-bool true_transparency = false;
 
 extern "C"
 {
@@ -78,9 +72,15 @@ extern "C"
    */
   KDE_EXPORT void *init_libkonsolepart()
   {
-    return new konsoleFactory;
+    return new Konsole::konsoleFactory;
   }
 }
+using namespace Konsole;
+
+// True transparency is not available in the embedded Konsole
+bool true_transparency = false;
+
+
 
 /**
  * We need one static instance of the factory for our C 'main' function
@@ -229,14 +229,14 @@ konsolePart::konsolePart(QWidget *_parentWidget, QObject *parent, const char *cl
   QTimer::singleShot( 0, this, SLOT( showShell() ) );
 }
 
-void konsolePart::doneSession(TESession*)
+void konsolePart::doneSession(Session*)
 {
   // see doneSession in konsole.cpp
   if (se)
   {
 //    kDebug(1211) << "doneSession - disconnecting done" << endl;
-    disconnect( se,SIGNAL(done(TESession*)),
-                this,SLOT(doneSession(TESession*)) );
+    disconnect( se,SIGNAL(done(Session*)),
+                this,SLOT(doneSession(Session*)) );
     
     se->setListenToKeyPress(true);
     //se->setConnect(false);
@@ -1093,16 +1093,16 @@ void konsolePart::startProgram( const QString& program,
 {
   if ( se ) delete se;
 #ifdef __GNUC__
-#warning "Add setup for TESession"
+#warning "Add setup for Session"
 #endif
-  se = new TESession();
+  se = new Session();
   se->setProgram(program);
   se->setArguments(args);
   se->addView(te);
 
-//  se = new TESession(te, program, args, "xterm", parentWidget->winId());
-  connect( se,SIGNAL(done(TESession*)),
-           this,SLOT(doneSession(TESession*)) );
+//  se = new Session(te, program, args, "xterm", parentWidget->winId());
+  connect( se,SIGNAL(done(Session*)),
+           this,SLOT(doneSession(Session*)) );
   connect( se,SIGNAL(openUrlRequest(const QString &)),
            this,SLOT(emitOpenURLRequest(const QString &)) );
   connect( se, SIGNAL( updateTitle() ),
@@ -1115,8 +1115,8 @@ void konsolePart::startProgram( const QString& program,
            this, SLOT( slotReceivedData( const QString& ) ) );
 
   // We ignore the following signals
-  //connect( se, SIGNAL(renameSession(TESession*,const QString&)),
-  //         this, SLOT(slotRenameSession(TESession*, const QString&)) );
+  //connect( se, SIGNAL(renameSession(Session*,const QString&)),
+  //         this, SLOT(slotRenameSession(Session*, const QString&)) );
   //connect( se->getEmulation(), SIGNAL(changeColumns(int)),
   //         this, SLOT(changeColumns(int)) );
   //connect( se, SIGNAL(disableMasterModeConnections()),

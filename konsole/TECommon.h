@@ -19,13 +19,17 @@
 */
 
 /*! \file TECommon.h
-    \brief Definitions shared between TEScreen and TerminalDisplay.
+    \brief Definitions shared between Screen and TerminalDisplay.
 */
 
 #ifndef TECOMMON_H
 #define TECOMMON_H
 
+// Qt
 #include <QColor>
+
+namespace Konsole
+{
 
 #ifndef UINT8
 typedef unsigned char UINT8;
@@ -270,5 +274,7 @@ inline bool Character::isBold(const ColorEntry* base) const
       || (backgroundColor.t == COLOR_SPACE_SYSTEM) && 
             base[backgroundColor.u+2+(backgroundColor.v?BASE_COLORS:0)].bold;
 }
+
+};
 
 #endif // TECOMMON_H

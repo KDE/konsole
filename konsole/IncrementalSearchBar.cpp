@@ -33,6 +33,8 @@
 // Konsole
 #include "IncrementalSearchBar.h"
 
+using namespace Konsole;
+
 IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     : QWidget(parent)
     , _foundMatch(false)

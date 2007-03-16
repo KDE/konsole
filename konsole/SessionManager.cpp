@@ -34,10 +34,12 @@
 #include <kdesktopfile.h>
 
 // Konsole
-#include "TESession.h"
-#include "TEHistory.h"
+#include "Session.h"
+#include "History.h"
 #include "SessionManager.h"
 #include "schema.h"
+
+using namespace Konsole;
 
 SessionInfo::SessionInfo(const QString& path)
 {
@@ -214,7 +216,7 @@ SessionManager::~SessionManager()
     delete _colorSchemeList;
 }
 
-const QList<TESession*> SessionManager::sessions()
+const QList<Session*> SessionManager::sessions()
 {
     return _sessions;
 }
@@ -225,9 +227,9 @@ void SessionManager::pushSessionSettings( const SessionInfo* info )
     addSetting( ColorScheme , SessionConfig , info->colorScheme() );
 }
 
-TESession* SessionManager::createSession(QString configPath )
+Session* SessionManager::createSession(QString configPath )
 {
-    TESession* session = 0;
+    Session* session = 0;
 
     //select default session type if not specified
     if ( configPath.isEmpty() )
@@ -246,7 +248,7 @@ TESession* SessionManager::createSession(QString configPath )
             pushSessionSettings( info );
 
             //configuration information found, create a new session based on this
-            session = new TESession();
+            session = new Session();
 
             QListIterator<QString> iter(info->arguments());
             while (iter.hasNext())
@@ -265,7 +267,7 @@ TESession* SessionManager::createSession(QString configPath )
                 session->setHistory( HistoryTypeFile() );
 
             //ask for notification when session dies
-            connect( session , SIGNAL(done(TESession*)) , SLOT(sessionTerminated(TESession*)) );
+            connect( session , SIGNAL(done(Session*)) , SLOT(sessionTerminated(Session*)) );
 
             //add session to active list
             _sessions << session;
@@ -279,7 +281,7 @@ TESession* SessionManager::createSession(QString configPath )
     return session;
 }
 
-void SessionManager::sessionTerminated(TESession* session)
+void SessionManager::sessionTerminated(Session* session)
 {
     _sessions.remove(session);
     session->deleteLater();

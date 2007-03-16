@@ -30,30 +30,33 @@
 #include <kmainwindow.h>
 
 // Konsole
-#include "TEPty.h"
+#include "Pty.h"
 #include "TerminalDisplay.h"
-#include "TEmuVt102.h"
+#include "Vt102Emulation.h"
 
 
 class KProcIO;
 class KProcess;
-class ZModemDialog;
 
+namespace Konsole
+{
+
+class ZModemDialog;
 class ColorSchema;
 
 /**
- * TESession represents a Konsole session.
+ * Session represents a Konsole session.
  * This consists of a pseudo-teletype (or PTY) which handles I/O between the terminal
- * process and Konsole, and a terminal emulation ( TEmulation and subclasses ) which
+ * process and Konsole, and a terminal emulation ( Emulation and subclasses ) which
  * processes the output stream from the PTY and produces a character image which
  * is then shown on displays which are connected to the session.
  *
- * Each TESession can be connected to one or more views by using the addView() method.
+ * Each Session can be connected to one or more views by using the addView() method.
  * The attached views can then display output from the program running in the terminal
  * or send input to the program in the terminal in the form of keypresses and mouse
  * activity.
  */
-class TESession : public QObject
+class Session : public QObject
 { Q_OBJECT
 
 public:
@@ -64,8 +67,8 @@ public:
   Q_PROPERTY(ColorSchema* schema READ schema WRITE setSchema)
   Q_PROPERTY(QSize size READ size WRITE setSize)
 
-  TESession();
-  ~TESession();
+  Session();
+  ~Session();
 
   /** 
    * Adds a new view for this session.    
@@ -76,7 +79,7 @@ public:
    * Since terminal applications assume a single terminal screen, all views of a session
    * will display the same number of lines and columns.
    *
-   * When the TESession instance is destroyed, any views which are still attached will also
+   * When the Session instance is destroyed, any views which are still attached will also
    * be deleted.
    */
   void addView(TerminalDisplay* widget);
@@ -101,7 +104,7 @@ public:
 
   //void        setConnect(bool r);  // calls setListenToKeyPress(r)
   void        setListenToKeyPress(bool l);
-  TEmulation* getEmulation();      // to control emulation
+  Emulation* getEmulation();      // to control emulation
   bool        isSecure();
   bool        isMonitorActivity();
   bool        isMonitorSilence();
@@ -236,27 +239,27 @@ Q_SIGNALS:
 
   void processExited();
   void receivedData( const QString& text );
-  void done(TESession*);
+  void done(Session*);
   void updateTitle();
-  void notifySessionState(TESession* session, int state);
+  void notifySessionState(Session* session, int state);
   /** Emitted when a bell event occurs in the session. */
   void bellRequest( const QString& message );
-  void changeTabTextColor( TESession*, int );
+  void changeTabTextColor( Session*, int );
 
   void disableMasterModeConnections();
   void enableMasterModeConnections();
-  void renameSession(TESession* ses, const QString &name);
+  void renameSession(Session* ses, const QString &name);
 
   void openUrlRequest(const QString &cwd);
 
-  void zmodemDetected(TESession *);
-  void updateSessionConfig(TESession *);
-  void resizeSession(TESession *session, QSize size);
-  void setSessionEncoding(TESession *session, const QString &encoding);
+  void zmodemDetected(Session *);
+  void updateSessionConfig(Session *);
+  void resizeSession(Session *session, QSize size);
+  void setSessionEncoding(Session *session, const QString &encoding);
 
 // SPLIT-VIEW Disabled
-//  void getSessionSchema(TESession *session, QString &schema);
-//  void setSessionSchema(TESession *session, const QString &schema);
+//  void getSessionSchema(Session *session, QString &schema);
+//  void setSessionSchema(Session *session, const QString &schema);
 
 private Q_SLOTS:
   void onReceiveBlock( const char* buf, int len );
@@ -272,8 +275,8 @@ private:
 
   int            _uniqueIdentifier;
 
-  TEPty*         _shellProcess;
-  TEmulation*    _emulation;
+  Pty*         _shellProcess;
+  Emulation*    _emulation;
 
   QList<TerminalDisplay*> _views;
 
@@ -327,6 +330,8 @@ private:
   
   static int lastSessionId;
   
+};
+
 };
 
 #endif

@@ -9,6 +9,8 @@
 #include "SessionList.h"
 #include "SessionManager.h"
 
+using namespace Konsole;
+
 SessionList::SessionList(SessionManager* manager , QObject* parent)
     : QObject(parent)
     , _manager(manager)

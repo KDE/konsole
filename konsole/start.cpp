@@ -27,6 +27,8 @@
 // bump the version to 2.0 before the KDE 4 release
 #define KONSOLE_VERSION "1.9"
 
+using namespace Konsole;
+
 // fills the KAboutData structure with information about contributors to 
 // Konsole
 void fillAboutData(KAboutData& aboutData);

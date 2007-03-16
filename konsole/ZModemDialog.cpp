@@ -16,11 +16,16 @@
  *  Boston, MA 02110-1301, USA.
  **/
 
-#include "ZModemDialog.h"
-
+// Qt
 #include <q3textedit.h>
 
+// KDE
 #include <klocale.h>
+
+// Konsole 
+#include "ZModemDialog.h"
+
+using namespace Konsole;
 
 ZModemDialog::ZModemDialog(QWidget *parent, bool modal, const QString &caption)
  : KDialog( parent )

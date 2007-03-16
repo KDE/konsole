@@ -32,6 +32,8 @@
 // Konsole
 #include "HistorySizeDialog.h"
 
+using namespace Konsole;
+
 HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     :  KDialog(parent)
     ,  _mode( FixedSizeHistory )

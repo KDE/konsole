@@ -23,6 +23,9 @@
 #include <QMap>
 #include <QVector>
 
+namespace Konsole
+{
+
 /**
  * Takes a snapshot of the state of a process and provides access to 
  * information such as the process name, parent process,
@@ -268,4 +271,5 @@ private:
                                     // get the current working directory of the process
 };
 
+};
 #endif //PROCESSINFO_H

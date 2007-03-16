@@ -19,7 +19,7 @@
 */
 
 #include <iostream>
-#include "TEHistory.h"
+#include "History.h"
 #include <stdlib.h>
 #include <assert.h>
 #include <stdio.h>
@@ -31,6 +31,8 @@
 
 // Reasonable line size
 #define LINE_SIZE	1024
+
+using namespace Konsole;
 
 /*
    An arbitrary long scroll.

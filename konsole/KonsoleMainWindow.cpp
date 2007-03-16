@@ -41,6 +41,8 @@
 #include "ViewManager.h"
 #include "ViewSplitter.h"
 
+using namespace Konsole;
+
 KonsoleMainWindow::KonsoleMainWindow()
  : KMainWindow() ,
    _bookmarkHandler(0)

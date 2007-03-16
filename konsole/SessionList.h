@@ -7,6 +7,10 @@
 
 class QAction;
 class QActionGroup;
+
+namespace Konsole
+{
+
 class SessionManager;
 
 /** 
@@ -45,5 +49,7 @@ private:
     SessionManager* _manager;
     QActionGroup*   _group;
 }; 
+
+};
 
 #endif

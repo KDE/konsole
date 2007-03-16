@@ -23,6 +23,9 @@
 // KDE
 #include <KDialog>
 
+namespace Konsole
+{
+
 /**
  * A dialog which allows the user to select the number of lines of output
  * which are remembered for a session. 
@@ -75,6 +78,8 @@ private:
     
     HistoryMode _mode;
     int _lineCount;
+};
+
 };
 
 #endif // HISTORYSIZEDIALOG_H

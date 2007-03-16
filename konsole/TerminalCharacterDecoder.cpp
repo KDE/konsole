@@ -19,11 +19,16 @@
     02110-1301  USA.
 */
 
-#include <kdebug.h>
-
+// Qt
 #include <QTextStream>
 
+// KDE
+#include <kdebug.h>
+
+// Konsole
 #include "TerminalCharacterDecoder.h"
+
+using namespace Konsole;
 
 PlainTextDecoder::PlainTextDecoder()
  : _includeTrailingWhitespace(true)

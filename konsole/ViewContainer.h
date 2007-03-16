@@ -30,7 +30,6 @@
 class QStackedWidget;
 class QWidget;
 
-class ViewProperties;
 
 // TabbedViewContainer
     // Qt
@@ -49,6 +48,9 @@ class ViewProperties;
     class QSplitter;
     class QListWidget;
 
+namespace Konsole
+{
+    class ViewProperties;
 /**
  * An interface for container widgets which can hold one or more views.
  *
@@ -237,4 +239,5 @@ private:
     QListWidget* _listWidget;
 };
 
+};
 #endif //VIEWCONTAINER_H

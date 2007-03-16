@@ -25,6 +25,9 @@
 
 class QCheckBox;
 
+namespace Konsole
+{
+
 class PrintSettings : public KPrintDialogPage
 {
 	Q_OBJECT
@@ -39,6 +42,8 @@ private:
 	QCheckBox	*m_printfriendly;
 	QCheckBox	*m_printexact;
 	QCheckBox	*m_printheader;
+};
+
 };
 
 #endif

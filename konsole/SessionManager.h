@@ -29,8 +29,11 @@
 class KConfigGroup;
 class KDesktopFile;
 class KConfig;
-class TESession;
 
+namespace Konsole
+{
+
+class Session;
 class ColorSchemaList;
 
 /** 
@@ -242,26 +245,26 @@ public:
      * @param type Specifies the type of session to create.  Passing an empty
      *             string will create a session using the default configuration.
      */
-    TESession* createSession(QString configPath = QString());
+    Session* createSession(QString configPath = QString());
 
     /**
      * Returns a list of active sessions.
      */
-    const QList<TESession*> sessions();
+    const QList<Session*> sessions();
 
 protected Q_SLOTS:
 
     /**
      * Called to inform the manager that a session has finished executing
      */
-    void sessionTerminated( TESession* session );
+    void sessionTerminated( Session* session );
 
 private:
     //fills the settings store with the settings from the session config file
     void pushSessionSettings( const SessionInfo*  info );
 
     QList<SessionInfo*> _types;
-    QList<TESession*> _sessions;
+    QList<Session*> _sessions;
 
     SessionInfo* _defaultSessionType;
 
@@ -272,4 +275,5 @@ private:
     ColorSchemaList* _colorSchemeList;
 };
 
+};
 #endif //SESSIONMANAGER_H

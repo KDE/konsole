@@ -33,8 +33,11 @@
 
 // Konsole
 #include "KeyTrans.h"
-#include "TEScreen.h"
+#include "Screen.h"
 #include "TerminalDisplay.h"
+
+namespace Konsole
+{
 
 class ScreenWindow;
 
@@ -54,14 +57,14 @@ enum { NOTIFYNORMAL=0, NOTIFYBELL=1, NOTIFYACTIVITY=2, NOTIFYSILENCE=3 };
  * As new lines of text are added to the output, older lines are transferred to a history
  * store, which can be set using the setHistory() method.
  */
-class TEmulation : public QObject
+class Emulation : public QObject
 { Q_OBJECT
 
 public:
  
    /** Constructs a new terminal emulation */ 
-   TEmulation();
-  ~TEmulation();
+   Emulation();
+  ~Emulation();
 
   /**
    * Creates a new window onto the output from this emulation.  The contents
@@ -233,10 +236,10 @@ protected:
 
   QList<ScreenWindow*> _windows;
   
-  TEScreen* currentScreen;  // pointer to the screen which is currently active, 
+  Screen* currentScreen;  // pointer to the screen which is currently active, 
                             // this is one of the elements in the screen[] array
 
-  TEScreen* screen[2];      // 0 = primary screen ( used by most programs, including the shell
+  Screen* screen[2];      // 0 = primary screen ( used by most programs, including the shell
                             //                      scrollbars are enabled in this mode )
                             // 1 = alternate      ( used by vi , emacs etc.
                             //                      scrollbars are not enabled in this mode )
@@ -282,6 +285,8 @@ private:
   
   int    m_findPos;
 
+
+};
 
 };
 

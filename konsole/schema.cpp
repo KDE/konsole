@@ -68,8 +68,9 @@
 // Konsole
 #include "schema.h"
 
-typedef Q3PtrListIterator<ColorSchema> ColorSchemaListIterator;
+using namespace Konsole;
 
+typedef Q3PtrListIterator<ColorSchema> ColorSchemaListIterator;
 
 // Number all the new color schema's (non-default) from 1.
 //

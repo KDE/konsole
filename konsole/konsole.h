@@ -33,9 +33,9 @@
 #include <kdialog.h>
 
 // Konsole
-#include "TEPty.h"
-#include "TEmuVt102.h"
-#include "TESession.h"
+#include "Pty.h"
+#include "Vt102Emulation.h"
+#include "Session.h"
 #include "schema.h"
 #include "konsolebookmarkhandler.h"
 
@@ -97,8 +97,8 @@ public:
 //  void newSession(const QString &program, const QStringList &args, const QString &term, const QString &icon, const QString &title, const QString &cwd);
   void setSchema(const QString & path);
   void setEncoding(int);
-  void setSessionTitle(QString&, TESession* = 0);
-  void setSessionEncoding(const QString&, TESession* = 0);
+  void setSessionTitle(QString&, Session* = 0);
+  void setSessionEncoding(const QString&, Session* = 0);
 
   void enableFullScripting(bool b);
   void enableFixedSize(bool b);
@@ -111,7 +111,7 @@ public:
 
   QString currentSession();
   QString newSession(const QString &type);
-  TESession* newSession(SessionInfo* type);
+  Session* newSession(SessionInfo* type);
   QString sessionId(const int position);
 
   void activateSession(const QString& sessionId);
@@ -132,11 +132,11 @@ public:
 public Q_SLOTS:
   void activateSession(int position);
   void activateSession(QWidget*);
-  void slotUpdateSessionConfig(TESession *session);
-  void slotResizeSession(TESession*, QSize);
-  void slotSetSessionEncoding(TESession *session, const QString &encoding);
-  void slotGetSessionSchema(TESession *session, QString &schema);
-  void slotSetSessionSchema(TESession *session, const QString &schema);
+  void slotUpdateSessionConfig(Session *session);
+  void slotResizeSession(Session*, QSize);
+  void slotSetSessionEncoding(Session *session, const QString &encoding);
+  void slotGetSessionSchema(Session *session, QString &schema);
+  void slotSetSessionSchema(Session *session, const QString &schema);
 
   void makeGUI();
   QString newSession();
@@ -154,10 +154,10 @@ protected:
 private Q_SLOTS:
   void configureRequest(TerminalDisplay*,int,int,int);
   void activateSession();
-  void activateSession(TESession*);
+  void activateSession(Session*);
   void closeCurrentSession();
-  void confirmCloseCurrentSession(TESession* _se=0);
-  void doneSession(TESession*);
+  void confirmCloseCurrentSession(Session* _se=0);
+  void doneSession(Session*);
   void toggleFullScreen();
   bool fullScreen();
   void setFullScreen(bool on);
@@ -165,7 +165,7 @@ private Q_SLOTS:
   void pixmap_menu_activated(int item, TerminalDisplay* tewidget=0);
   void keytab_menu_activated(int item);
   void schema_menu_check();
-  void attachSession(TESession*);
+  void attachSession(Session*);
   void slotDetachSession();
   void bookmarks_menu_check();
   
@@ -174,10 +174,10 @@ private Q_SLOTS:
   void updateSchemaMenu();
   void updateKeytabMenu();
 
-  void changeTabTextColor(TESession*, int);
+  void changeTabTextColor(Session*, int);
   void changeColumns(int);
   void changeColLin(int columns, int lines);
-  void notifySessionState(TESession* session,int state);
+  void notifySessionState(Session* session,int state);
   void notifySize(int columns, int lines);
   void updateTitle();
   void prevSession();
@@ -194,7 +194,7 @@ private Q_SLOTS:
   void slotSelectTabbar();
   void slotToggleMenubar();
   void slotRenameSession();
-  void slotRenameSession(TESession* ses, const QString &name);
+  void slotRenameSession(Session* ses, const QString &name);
   void slotToggleMonitor();
   void slotToggleMasterMode();
   void slotClearAllSessionHistories();
@@ -240,7 +240,7 @@ private Q_SLOTS:
   void biggerFont();
   void smallerFont();
 
-  void slotZModemDetected(TESession *session);
+  void slotZModemDetected(Session *session);
   void slotZModemUpload();
 
   void slotPrint();
@@ -273,15 +273,15 @@ private:
   void applySettingsToGUI();
   void makeTabWidget();
   void makeBasicGUI();
-  void runSession(TESession* s);
-  void addSession(TESession* s);
-  void detachSession(TESession* _se=0);
+  void runSession(Session* s);
+  void addSession(Session* s);
+  void detachSession(Session* _se=0);
   void setColorPixmaps();
-  void renameSession(TESession* ses);
+  void renameSession(Session* ses);
   void savePropertiesHelper(KConfigGroup& config);
 
   void setSchema(ColorSchema* s, TerminalDisplay* tewidget=0);
-  void setMasterMode(bool _state, TESession* _se=0);
+  void setMasterMode(bool _state, Session* _se=0);
 
   void buildSessionMenus();
   void addSessionCommand( SessionInfo* info );
@@ -291,22 +291,22 @@ private:
   void resetScreenSessions();
 
   TerminalDisplay* createSessionView();
-  void createViews(TESession* session);
+  void createViews(Session* session);
 
 //  void initTerminalDisplay(TerminalDisplay* new_te, TerminalDisplay* default_te);
 
   void createSessionTab(TerminalDisplay *widget, const QIcon& iconSet,
                         const QString &text, int index = -1);
-  QIcon iconSetForSession(TESession *session) const;
+  QIcon iconSetForSession(Session *session) const;
 
   bool eventFilter( QObject *o, QEvent *e );
 
   Q3PtrList<TerminalDisplay> activeTEs();
 
-  Q3PtrDict<TESession> action2session;
+  Q3PtrDict<Session> action2session;
   Q3PtrDict<KToggleAction> session2action;
 
-  Q3PtrList<TESession> sessions;
+  Q3PtrList<Session> sessions;
 
   QList<KTemporaryFile*> tempfiles;
   KConfig* m_defaultSession;
@@ -315,9 +315,9 @@ private:
   //SessionTabWidget* tabwidget;
   // KTabWidget*    tabwidget;
   TerminalDisplay*      te;     // the visible TerminalDisplay, either sole one or one of many
-  TESession*     se;
-  TESession*     se_previous;
-  TESession*     m_initialSession;
+  Session*     se;
+  Session*     se_previous;
+  Session*     m_initialSession;
   ColorSchemaList* colors;
   QString        s_encodingName;
 
@@ -454,7 +454,7 @@ private:
   unsigned int m_histSize;
   int m_separator_id;
 
-  TESession*  m_contextMenuSession;
+  Session*  m_contextMenuSession;
 
   QToolButton* m_newSessionButton;
   QToolButton* m_removeSessionButton;

@@ -31,8 +31,8 @@
 
 // Konsole
 #include "TerminalDisplay.h"
-#include "TEScreen.h"
-#include "TEmulation.h"
+#include "Screen.h"
+#include "Emulation.h"
 
 
 
@@ -45,6 +45,9 @@
 #define MODE_Mouse1003 (MODES_SCREEN+6)
 #define MODE_Ansi      (MODES_SCREEN+7)
 #define MODE_total     (MODES_SCREEN+8)
+
+namespace Konsole
+{
 
 struct DECpar
 {
@@ -72,14 +75,14 @@ struct CharCodes
  * sequences. 
  *
  */
-class TEmuVt102 : public TEmulation
+class Vt102Emulation : public Emulation
 { Q_OBJECT
 
 public:
 
   /** Constructs a new emulation */
-  TEmuVt102();
-  ~TEmuVt102();
+  Vt102Emulation();
+  ~Vt102Emulation();
   
 public Q_SLOTS: 
 
@@ -164,7 +167,7 @@ private:
   //Enables or disables Vt102 specific handling of input from the view 
   //(including xterm-style mouse input for example)
   //
-  //See also - TEmulation::connectView()
+  //See also - Emulation::connectView()
   //void setReceiveViewInput( TerminalDisplay* view , bool enable );
 
   void resetToken();
@@ -229,6 +232,8 @@ protected slots:
   //causes changeTitle() to be emitted for each (int,QString) pair in pendingTitleUpdates
   //used to buffer multiple title updates
   void updateTitle();
+};
+
 };
 
 #endif // ifndef ANSIEMU_H

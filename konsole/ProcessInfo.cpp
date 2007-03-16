@@ -27,6 +27,7 @@
 // Konsole
 #include "ProcessInfo.h"
 
+using namespace Konsole;
 
 ProcessInfo::ProcessInfo(int pid , bool enableEnvironmentRead)
     : _fields( ARGUMENTS | ENVIRONMENT ) // arguments and environments

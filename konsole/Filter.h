@@ -27,6 +27,9 @@
 #include <QMultiHash>
 #include <QRegExp>
 
+namespace Konsole
+{
+
 class Character;
 
 /**
@@ -322,4 +325,6 @@ public:
      */
     void addImage(const Character* const image , int lines , int columns);  
 };
+
+}
 #endif //FILTER_H

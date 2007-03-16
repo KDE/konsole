@@ -32,10 +32,9 @@
 
 // Konsole
 #include "schema.h"
-#include "TESession.h"
+#include "Session.h"
 
 class KComponentData;
-class konsoleBrowserExtension;
 class QPushButton;
 class QSpinBox;
 class KMenu;
@@ -45,6 +44,11 @@ class KToggleAction;
 class KSelectAction;
 
 namespace KParts { class GUIActivateEvent; }
+
+namespace Konsole
+{
+
+    class konsoleBrowserExtension;
 
 class konsoleFactory : public KParts::Factory
 {
@@ -88,7 +92,7 @@ Q_SIGNALS:
     void slotProcessExited();
     void slotReceivedData( const QString& s );
 
-    void doneSession(TESession*);
+    void doneSession(Session*);
     void sessionDestroyed();
     void configureRequest(TerminalDisplay*,int,int x,int y);
     void updateTitle();
@@ -142,7 +146,7 @@ Q_SIGNALS:
 
     QWidget* parentWidget;
     TerminalDisplay* te;
-    TESession* se;
+    Session* se;
     ColorSchemaList* colors;
 
     KActionCollection* actions;
@@ -230,6 +234,8 @@ class konsoleBrowserExtension : public KParts::BrowserExtension
     virtual ~konsoleBrowserExtension();
 
     void emitOpenURLRequest(const KUrl &url);
+};
+
 };
 
 #endif

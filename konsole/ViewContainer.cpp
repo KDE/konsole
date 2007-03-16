@@ -44,6 +44,8 @@
 // TODO Perhaps move everything which is Konsole-specific into different files
 #include "SessionListWidget.h"
 
+using namespace Konsole;
+
 ViewContainer::~ViewContainer()
 {
     emit destroyed(this);

@@ -19,6 +19,8 @@
 
 #include "ViewProperties.h"
 
+using namespace Konsole;
+
 KUrl ViewProperties::url() const
 {
     return KUrl();

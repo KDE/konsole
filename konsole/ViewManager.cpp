@@ -29,7 +29,7 @@
 // Konsole
 #include "KonsoleBookmarkHandler.h"
 #include "KonsoleMainWindow.h"
-#include "TESession.h"
+#include "Session.h"
 #include "TerminalDisplay.h"
 #include "schema.h"
 #include "SessionController.h"
@@ -37,6 +37,8 @@
 #include "ViewContainer.h"
 #include "ViewSplitter.h"
 #include "ViewManager.h"
+
+using namespace Konsole;
 
 ViewManager::ViewManager(KonsoleMainWindow* mainWindow)
     : QObject(mainWindow)
@@ -123,7 +125,7 @@ void ViewManager::detachActiveView()
 
 }
 
-void ViewManager::sessionFinished( TESession* session )
+void ViewManager::sessionFinished( Session* session )
 {
     QList<TerminalDisplay*> children = _viewSplitter->findChildren<TerminalDisplay*>();
 
@@ -230,7 +232,7 @@ void ViewManager::splitView(bool splitView)
 
         while (existingViewIter.hasNext())
         {
-            TESession* session = _sessionMap[(TerminalDisplay*)existingViewIter.next()];
+            Session* session = _sessionMap[(TerminalDisplay*)existingViewIter.next()];
             TerminalDisplay* display = createTerminalDisplay();
             loadViewSettings(display,session); 
             ViewProperties* properties = createController(session,display);
@@ -259,7 +261,7 @@ void ViewManager::splitView(bool splitView)
     _viewSplitter->activeContainer()->activeView()->setFocus(Qt::OtherFocusReason);
 }
 
-SessionController* ViewManager::createController(TESession* session , TerminalDisplay* view)
+SessionController* ViewManager::createController(Session* session , TerminalDisplay* view)
 {
     // create a new controller for the session, and ensure that this view manager
     // is notified when the view gains the focus
@@ -269,7 +271,7 @@ SessionController* ViewManager::createController(TESession* session , TerminalDi
     return controller;
 }
 
-void ViewManager::createView(TESession* session)
+void ViewManager::createView(Session* session)
 {
     // create the default container
     if (_viewSplitter->containers().count() == 0)
@@ -279,7 +281,7 @@ void ViewManager::createView(TESession* session)
 
     // notify this view manager when the session finishes so that its view
     // can be deleted
-    connect( session , SIGNAL(done(TESession*)) , this , SLOT(sessionFinished(TESession*)) );
+    connect( session , SIGNAL(done(Session*)) , this , SLOT(sessionFinished(Session*)) );
    
     // iterate over the view containers owned by this view manager
     // and create a new terminal display for the session in each of them, along with
@@ -337,7 +339,7 @@ void ViewManager::viewCloseRequest(QWidget* view)
     // 2. if the session has no views left, close it
     
     TerminalDisplay* display = (TerminalDisplay*)view;
-    TESession* session = _sessionMap[ display ];
+    Session* session = _sessionMap[ display ];
     if ( session )
     {
         delete display;
@@ -409,7 +411,7 @@ TerminalDisplay* ViewManager::createTerminalDisplay()
    return display;
 }
 
-void ViewManager::loadViewSettings(TerminalDisplay* view , TESession* session)
+void ViewManager::loadViewSettings(TerminalDisplay* view , Session* session)
 {
     // load colour scheme
     view->setColorTable( session->schema()->table() );

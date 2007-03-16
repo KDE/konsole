@@ -15,10 +15,20 @@
 // Konsole
 #include "ViewProperties.h"
 
+namespace KIO
+{
+    class Job;
+};
+
 class QAction;
 class KToggleAction;
 class KUrl;
-class TESession;
+class KJob;
+
+namespace Konsole
+{
+
+class Session;
 class TerminalDisplay;
 class IncrementalSearchBar;
 class UrlFilter;
@@ -26,15 +36,9 @@ class RegExpFilter;
 
 // SaveHistoryTask
 class TerminalCharacterDecoder;
-class KJob;
 
 
-namespace KIO
-{
-    class Job;
-};
-
-typedef QPointer<TESession> SessionPtr;
+typedef QPointer<Session> SessionPtr;
 
 /**
  * Provides the actions associated with a session in the Konsole main menu
@@ -54,14 +58,14 @@ public:
     /**
      * Constructs a new SessionController which operates on @p session and @p view.
      */
-    SessionController(TESession* session , TerminalDisplay* view, QObject* parent);
+    SessionController(Session* session , TerminalDisplay* view, QObject* parent);
     ~SessionController();
 
     /** Reimplemented to watch for events happening to the view */
     virtual bool eventFilter(QObject* watched , QEvent* event);
 
     /** Returns the session associated with this controller */
-    TESession* session() { return _session; }
+    Session* session() { return _session; }
     /** Returns the view associated with this controller */
     TerminalDisplay*  view()    { return _view;    }
 
@@ -116,7 +120,7 @@ private slots:
     void monitorSilence(bool monitor);
 
     // other
-    void sessionStateChanged(TESession* session,int state);
+    void sessionStateChanged(Session* session,int state);
     void sessionTitleChanged();
     void searchTextChanged(const QString& text);
     void searchClosed(); // called when the user clicks on the
@@ -129,7 +133,7 @@ private:
     void removeSearchFilter(); // remove and delete the current search filter if set
 
 private:
-    TESession* _session;
+    Session* _session;
     TerminalDisplay*  _view;
     KIcon      _sessionIcon;
     QString    _sessionIconName;
@@ -172,7 +176,7 @@ public:
    bool autoDelete() const;
 
    /** Adds a new session to the group */
-   void addSession(TESession* session);
+   void addSession(Session* session);
 
    /** 
     * Executes the task on each of the sessions in the group.
@@ -252,8 +256,8 @@ class SearchHistoryThread;
  *          Multi-threading?
  *          - The search is performed asynchronously in another thread when execute() is called.
  *            *** Not done yet - currently we do everything in the main thread and rely on calling QApplication::processEvents() every so often
- *                inside TEmulation::findTextNext() to prevent the interface from becoming unresponsive.
- *                The actual searching is currently done in the TEmulation class and was not originally designed with multi-threading in mind.
+ *                inside Emulation::findTextNext() to prevent the interface from becoming unresponsive.
+ *                The actual searching is currently done in the Emulation class and was not originally designed with multi-threading in mind.
  *
  *
  *          - Remember where the search got to when it reaches the end of the output in each session
@@ -301,7 +305,7 @@ signals:
      * @param endLine The line in the output where the matched text ends
      * @param endColumn The column in the output where the matched text ends 
      */
-    void foundMatch(TESession* session , int startLine , int startColumn , int endLine , int endColumn );
+    void foundMatch(Session* session , int startLine , int startColumn , int endLine , int endColumn );
    
 private:
     QRegExp _regExp;
@@ -325,7 +329,7 @@ public:
     QRegExp regExp() const;
 
 signals:
-    void foundMatch(TESession* session , int startLine , int startColumn , int endLine , int endColumn );
+    void foundMatch(Session* session , int startLine , int startColumn , int endLine , int endColumn );
 
 protected:
     virtual void run();
@@ -337,5 +341,7 @@ private:
 
 };
 #endif 
+
+};
 
 #endif //SESSIONCONTROLLER_H

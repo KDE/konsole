@@ -22,6 +22,9 @@
 
 #include <KMainWindow>
 
+namespace Konsole
+{
+
 class IncrementalSearchBar;
 class ViewSplitter;
 class ViewManager;
@@ -101,6 +104,8 @@ class KonsoleMainWindow : public KMainWindow
         ViewManager*  _viewManager;
         KonsoleBookmarkHandler* _bookmarkHandler;
         IncrementalSearchBar* _searchBar;
+};
+
 };
 
 #endif // KONSOLEMAINWINDOW_H

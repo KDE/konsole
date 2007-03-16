@@ -18,11 +18,11 @@
     02110-1301  USA.
 */
 
-/*! \class TEmuVt102
+/*! \class Vt102Emulation
 
    \brief Actual Emulation for Konsole
 
-   \sa TerminalDisplay \sa TEScreen
+   \sa TerminalDisplay \sa Screen
 */
 #include "config-konsole.h"
 
@@ -44,6 +44,7 @@
 #include <assert.h>
 
 // Qt
+#include <QEvent>
 #include <QKeyEvent>
 #include <QByteArray>
 
@@ -52,8 +53,15 @@
 #include <klocale.h>
 
 // Konsole
-#include "TEmuVt102.h"
-#include "TEScreen.h"
+#include "Vt102Emulation.h"
+#include "Screen.h"
+
+#if defined(HAVE_XKB)
+void scrolllock_set_off();
+void scrolllock_set_on();
+#endif
+
+using namespace Konsole;
 
 /* VT102 Terminal Emulation
 
@@ -85,7 +93,7 @@
 /*!
 */
 
-TEmuVt102::TEmuVt102() : TEmulation()
+Vt102Emulation::Vt102Emulation() : Emulation()
 {
   titleUpdateTimer.setSingleShot(true);
 
@@ -96,7 +104,7 @@ TEmuVt102::TEmuVt102() : TEmulation()
 }
 
 #if 0
-void TEmuVt102::setReceiveViewInput(TerminalDisplay* view , bool enable)
+void Vt102Emulation::setReceiveViewInput(TerminalDisplay* view , bool enable)
 {
    if (enable)
    {
@@ -116,15 +124,15 @@ void TEmuVt102::setReceiveViewInput(TerminalDisplay* view , bool enable)
 #endif
 
 #if 0
-void TEmuVt102::addView(TerminalDisplay* view)
+void Vt102Emulation::addView(TerminalDisplay* view)
 {
-    TEmulation::addView(view);
+    Emulation::addView(view);
     setReceiveViewInput(view,true);
 }
 
-void TEmuVt102::removeView(TerminalDisplay* view)
+void Vt102Emulation::removeView(TerminalDisplay* view)
 {
-    TEmulation::removeView(view);
+    Emulation::removeView(view);
     setReceiveViewInput(view,false);
 }
 #endif 
@@ -133,37 +141,37 @@ void TEmuVt102::removeView(TerminalDisplay* view)
 /*!
 */
 
-TEmuVt102::~TEmuVt102()
+Vt102Emulation::~Vt102Emulation()
 {
 }
 
 /*!
 */
 
-void TEmuVt102::clearEntireScreen()
+void Vt102Emulation::clearEntireScreen()
 {
   currentScreen->clearEntireScreen();
 
   bufferedUpdate(); 
 }
 
-void TEmuVt102::reset()
+void Vt102Emulation::reset()
 {
-  //kDebug(1211)<<"TEmuVt102::reset() resetToken()"<<endl;
+  //kDebug(1211)<<"Vt102Emulation::reset() resetToken()"<<endl;
   resetToken();
-  //kDebug(1211)<<"TEmuVt102::reset() resetModes()"<<endl;
+  //kDebug(1211)<<"Vt102Emulation::reset() resetModes()"<<endl;
   resetModes();
-  //kDebug(1211)<<"TEmuVt102::reset() resetCharSet()"<<endl;
+  //kDebug(1211)<<"Vt102Emulation::reset() resetCharSet()"<<endl;
   resetCharset(0);
-  //kDebug(1211)<<"TEmuVt102::reset() reset screen0()"<<endl;
+  //kDebug(1211)<<"Vt102Emulation::reset() reset screen0()"<<endl;
   screen[0]->reset();
-  //kDebug(1211)<<"TEmuVt102::reset() resetCharSet()"<<endl;
+  //kDebug(1211)<<"Vt102Emulation::reset() resetCharSet()"<<endl;
   resetCharset(1);
-  //kDebug(1211)<<"TEmuVt102::reset() reset screen 1"<<endl;
+  //kDebug(1211)<<"Vt102Emulation::reset() reset screen 1"<<endl;
   screen[1]->reset();
-  //kDebug(1211)<<"TEmuVt102::reset() setCodec()"<<endl;
+  //kDebug(1211)<<"Vt102Emulation::reset() setCodec()"<<endl;
   setCodec(0);
-  //kDebug(1211)<<"TEmuVt102::reset() done"<<endl;
+  //kDebug(1211)<<"Vt102Emulation::reset() done"<<endl;
  
   bufferedUpdate();
 }
@@ -179,7 +187,7 @@ void TEmuVt102::reset()
    This section deals with decoding the incoming character stream.
    Decoding means here, that the stream is first separated into `tokens'
    which are then mapped to a `meaning' provided as operations by the
-   `TEScreen' class or by the emulation class itself.
+   `Screen' class or by the emulation class itself.
 
    The pipeline proceeds as follows:
 
@@ -252,23 +260,23 @@ void TEmuVt102::reset()
    Note that they are kept internal in the tokenizer.
 */
 
-void TEmuVt102::resetToken()
+void Vt102Emulation::resetToken()
 {
   ppos = 0; argc = 0; argv[0] = 0; argv[1] = 0;
 }
 
-void TEmuVt102::addDigit(int dig)
+void Vt102Emulation::addDigit(int dig)
 {
   argv[argc] = 10*argv[argc] + dig;
 }
 
-void TEmuVt102::addArgument()
+void Vt102Emulation::addArgument()
 {
   argc = qMin(argc+1,MAXARGS-1);
   argv[argc] = 0;
 }
 
-void TEmuVt102::pushToToken(int cc)
+void Vt102Emulation::pushToToken(int cc)
 {
   pbuf[ppos] = cc;
   ppos = qMin(ppos+1,MAXPBUF-1);
@@ -284,7 +292,7 @@ void TEmuVt102::pushToToken(int cc)
 #define GRP 32
 #define CPS 64
 
-void TEmuVt102::initTokenizer()
+void Vt102Emulation::initTokenizer()
 { int i; UINT8* s;
   for(i =  0;                      i < 256; i++) tbl[ i]  = 0;
   for(i =  0;                      i <  32; i++) tbl[ i] |= CTL;
@@ -331,7 +339,7 @@ void TEmuVt102::initTokenizer()
 
 // process an incoming unicode character
 
-void TEmuVt102::onReceiveChar(int cc)
+void Vt102Emulation::onReceiveChar(int cc)
 { 
   int i;
   if (cc == 127) return; //VT100: ignore.
@@ -400,7 +408,7 @@ void TEmuVt102::onReceiveChar(int cc)
   }
 }
 
-void TEmuVt102::XtermHack()
+void Vt102Emulation::XtermHack()
 { int i,arg = 0;
   for (i = 2; i < ppos && '0'<=pbuf[i] && pbuf[i]<'9' ; i++)
     arg = 10*arg + (pbuf[i]-'0');
@@ -417,7 +425,7 @@ void TEmuVt102::XtermHack()
   delete [] str;
 }
 
-void TEmuVt102::updateTitle()
+void Vt102Emulation::updateTitle()
 {
 	QListIterator<int> iter( pendingTitleUpdates.keys() );
 	while (iter.hasNext()) {
@@ -446,7 +454,7 @@ void TEmuVt102::updateTitle()
    about this mapping.
 */
 
-void TEmuVt102::tau( int token, int p, int q )
+void Vt102Emulation::tau( int token, int p, int q )
 {
 #if 0
 int N = (token>>0)&0xff;
@@ -850,7 +858,7 @@ switch( N )
 /*!
 */
 
-void TEmuVt102::sendString(const char* s)
+void Vt102Emulation::sendString(const char* s)
 {
   emit sendBlock(s,strlen(s));
 }
@@ -862,7 +870,7 @@ void TEmuVt102::sendString(const char* s)
 /*!
 */
 
-void TEmuVt102::reportCursorPosition()
+void Vt102Emulation::reportCursorPosition()
 { char tmp[20];
   sprintf(tmp,"\033[%d;%dR",currentScreen->getCursorY()+1,currentScreen->getCursorX()+1);
   sendString(tmp);
@@ -876,7 +884,7 @@ void TEmuVt102::reportCursorPosition()
 /*!
 */
 
-void TEmuVt102::reportTerminalType()
+void Vt102Emulation::reportTerminalType()
 {
   // Primary device attribute response (Request was: ^[[0c or ^[[c (from TT321 Users Guide))
   //   VT220:  ^[[?63;1;2;3;6;7;8c   (list deps on emul. capabilities)
@@ -889,7 +897,7 @@ void TEmuVt102::reportTerminalType()
     sendString("\033/Z");         // I'm a VT52
 }
 
-void TEmuVt102::reportSecondaryAttributes()
+void Vt102Emulation::reportSecondaryAttributes()
 {
   // Seconday device attribute response (Request was: ^[[>0c or ^[[>c)
   if (getMode(MODE_Ansi))
@@ -899,7 +907,7 @@ void TEmuVt102::reportSecondaryAttributes()
                                   // konsoles backward compatibility.
 }
 
-void TEmuVt102::reportTerminalParms(int p)
+void Vt102Emulation::reportTerminalParms(int p)
 // DECREPTPARM
 { char tmp[100];
   sprintf(tmp,"\033[%d;1;1;112;112;1;0x",p); // not really true.
@@ -909,7 +917,7 @@ void TEmuVt102::reportTerminalParms(int p)
 /*!
 */
 
-void TEmuVt102::reportStatus()
+void Vt102Emulation::reportStatus()
 {
   sendString("\033[0n"); //VT100. Device status report. 0 = Ready.
 }
@@ -919,7 +927,7 @@ void TEmuVt102::reportStatus()
 
 #define ANSWER_BACK "" // This is really obsolete VT100 stuff.
 
-void TEmuVt102::reportAnswerBack()
+void Vt102Emulation::reportAnswerBack()
 {
   sendString(ANSWER_BACK);
 }
@@ -942,7 +950,7 @@ void TEmuVt102::reportAnswerBack()
 	1 = Mouse drag
 */
 
-void TEmuVt102::onMouse( int cb, int cx, int cy , int eventType )
+void Vt102Emulation::onMouse( int cb, int cx, int cy , int eventType )
 { char tmp[20];
   if (  cx<1 || cy<1 ) return;
   // normal buttons are passed as 0x20 + button,
@@ -959,12 +967,8 @@ void TEmuVt102::onMouse( int cb, int cx, int cy , int eventType )
 
 // Keyboard Handling ------------------------------------------------------- --
 
-#if defined(HAVE_XKB)
-static void scrolllock_set_off();
-static void scrolllock_set_on();
-#endif
 
-void TEmuVt102::scrollLock(const bool lock)
+void Vt102Emulation::scrollLock(const bool lock)
 {
   if (lock)
   {
@@ -984,7 +988,7 @@ void TEmuVt102::scrollLock(const bool lock)
 #endif
 }
 
-void TEmuVt102::onScrollLock()
+void Vt102Emulation::onScrollLock()
 {
   bool switchlock = !holdScreen;
   scrollLock(switchlock);
@@ -993,11 +997,14 @@ void TEmuVt102::onScrollLock()
 #define encodeMode(M,B) BITS(B,getMode(M))
 #define encodeStat(M,B) BITS(B,((ev->modifiers() & (M)) == (M)))
 
-void TEmuVt102::sendText( const QString& text )
+void Vt102Emulation::sendText( const QString& text )
 {
   if (!text.isEmpty()) {
-    QKeyEvent event(QEvent::KeyPress, 0, Qt::NoModifier, text);
-    onKeyPress(&event); // expose as a big fat keypress event
+    QKeyEvent event(QEvent::KeyPress, 
+                    0, 
+                    Qt::NoModifier, 
+                    text);
+    //onKeyPress(&event); // expose as a big fat keypress event
   }
 
 }
@@ -1007,7 +1014,7 @@ void TEmuVt102::sendText( const QString& text )
    the complications towards a configuration file [see KeyTrans class].
 */
 
-void TEmuVt102::onKeyPress( QKeyEvent* ev )
+void Vt102Emulation::onKeyPress( QKeyEvent* ev )
 {
   if (!listenToKeyPress) return; // someone else gets the keys
 
@@ -1103,7 +1110,7 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
 
 // Apply current character map.
 
-unsigned short TEmuVt102::applyCharset(unsigned short c)
+unsigned short Vt102Emulation::applyCharset(unsigned short c)
 {
   if (CHARSET.graphic && 0x5f <= c && c <= 0x7e) return vt100_graphics[c-0x5f];
   if (CHARSET.pound                && c == '#' ) return 0xa3; //This mode is obsolete
@@ -1118,7 +1125,7 @@ unsigned short TEmuVt102::applyCharset(unsigned short c)
    the following two are different.
 */
 
-void TEmuVt102::resetCharset(int scrno)
+void Vt102Emulation::resetCharset(int scrno)
 {
   charset[scrno].cu_cs   = 0;
   strncpy(charset[scrno].charset,"BBBB",4);
@@ -1131,7 +1138,7 @@ void TEmuVt102::resetCharset(int scrno)
 /*!
 */
 
-void TEmuVt102::setCharset(int n, int cs) // on both screens.
+void Vt102Emulation::setCharset(int n, int cs) // on both screens.
 {
   charset[0].charset[n&3] = cs; useCharset(charset[0].cu_cs);
   charset[1].charset[n&3] = cs; useCharset(charset[1].cu_cs);
@@ -1140,7 +1147,7 @@ void TEmuVt102::setCharset(int n, int cs) // on both screens.
 /*!
 */
 
-void TEmuVt102::setAndUseCharset(int n, int cs)
+void Vt102Emulation::setAndUseCharset(int n, int cs)
 {
   CHARSET.charset[n&3] = cs;
   useCharset(n&3);
@@ -1149,20 +1156,20 @@ void TEmuVt102::setAndUseCharset(int n, int cs)
 /*!
 */
 
-void TEmuVt102::useCharset(int n)
+void Vt102Emulation::useCharset(int n)
 {
   CHARSET.cu_cs   = n&3;
   CHARSET.graphic = (CHARSET.charset[n&3] == '0');
   CHARSET.pound   = (CHARSET.charset[n&3] == 'A'); //This mode is obsolete
 }
 
-void TEmuVt102::setDefaultMargins()
+void Vt102Emulation::setDefaultMargins()
 {
 	screen[0]->setDefaultMargins();
 	screen[1]->setDefaultMargins();
 }
 
-void TEmuVt102::setMargins(int t, int b)
+void Vt102Emulation::setMargins(int t, int b)
 {
   screen[0]->setMargins(t, b);
   screen[1]->setMargins(t, b);
@@ -1170,7 +1177,7 @@ void TEmuVt102::setMargins(int t, int b)
 
 /*! Save the cursor position and the rendition attribute settings. */
 
-void TEmuVt102::saveCursor()
+void Vt102Emulation::saveCursor()
 {
   CHARSET.sa_graphic = CHARSET.graphic;
   CHARSET.sa_pound   = CHARSET.pound; //This mode is obsolete
@@ -1182,7 +1189,7 @@ void TEmuVt102::saveCursor()
 
 /*! Restore the cursor position and the rendition attribute settings. */
 
-void TEmuVt102::restoreCursor()
+void Vt102Emulation::restoreCursor()
 {
   CHARSET.graphic = CHARSET.sa_graphic;
   CHARSET.pound   = CHARSET.sa_pound; //This mode is obsolete
@@ -1209,7 +1216,7 @@ void TEmuVt102::restoreCursor()
 
 // "Mode" related part of the state. These are all booleans.
 
-void TEmuVt102::resetModes()
+void Vt102Emulation::resetModes()
 {
   resetMode(MODE_Mouse1000); saveMode(MODE_Mouse1000);
   resetMode(MODE_Mouse1001); saveMode(MODE_Mouse1001);
@@ -1224,7 +1231,7 @@ void TEmuVt102::resetModes()
   holdScreen = false;
 }
 
-void TEmuVt102::setMode(int m)
+void Vt102Emulation::setMode(int m)
 {
   currParm.mode[m] = true;
   switch (m)
@@ -1247,7 +1254,7 @@ void TEmuVt102::setMode(int m)
   }
 }
 
-void TEmuVt102::resetMode(int m)
+void Vt102Emulation::resetMode(int m)
 {
   currParm.mode[m] = false;
   switch (m)
@@ -1270,25 +1277,25 @@ void TEmuVt102::resetMode(int m)
   }
 }
 
-void TEmuVt102::saveMode(int m)
+void Vt102Emulation::saveMode(int m)
 {
   saveParm.mode[m] = currParm.mode[m];
 }
 
-void TEmuVt102::restoreMode(int m)
+void Vt102Emulation::restoreMode(int m)
 {
   if(saveParm.mode[m]) setMode(m); else resetMode(m);
 }
 
-bool TEmuVt102::getMode(int m)
+bool Vt102Emulation::getMode(int m)
 {
   return currParm.mode[m];
 }
 
 #warning "Code to handle signal/slot connections has already been moved elsewhere, but mouse mode refreshing part below has not yet been looked at.  Neither has the part inside the HAVE_XKB define which calls scrolllock_set_xyz."
-/*void TEmuVt102::setConnect(bool c)
+/*void Vt102Emulation::setConnect(bool c)
 {
-  TEmulation::setConnect(c);
+  Emulation::setConnect(c);
 
   QListIterator< TerminalDisplay* > viewIter(_views);
   
@@ -1324,7 +1331,7 @@ bool TEmuVt102::getMode(int m)
   }
 }*/
 
-char TEmuVt102::getErase()
+char Vt102Emulation::getErase()
 {
   int cmd = CMD_none; 
   QByteArray txt; 
@@ -1368,7 +1375,7 @@ static void hexdump(int* s, int len)
   }
 }
 
-void TEmuVt102::scan_buffer_report()
+void Vt102Emulation::scan_buffer_report()
 {
   if (ppos == 0 || ppos == 1 && (pbuf[0] & 0xff) >= 32) return;
   printf("token: "); hexdump(pbuf,ppos); printf("\n");
@@ -1377,165 +1384,11 @@ void TEmuVt102::scan_buffer_report()
 /*!
 */
 
-void TEmuVt102::ReportErrorToken()
+void Vt102Emulation::ReportErrorToken()
 {
 #ifndef NDEBUG
   printf("undecodable "); scan_buffer_report();
 #endif
 }
 
-/*
- Originally comes from NumLockX http://dforce.sh.charactervut.characterz/~seli/en/numlockx
-
- NumLockX
- 
- Copyright (C) 2000-2001 Lubos Lunak        <l.lunak@kde.org>
- Copyright (C) 2001      Oswald Buddenhagen <ossi@kde.org>
-
-Permission is hereby granted, free of charge, to any person obtaining a
-copy of this software and associated documentation files (the "Software"),
-to deal in the Software without restriction, including without limitation
-the rights to use, copy, modify, merge, publish, distribute, sublicense,
-and/or sell copies of the Software, and to permit persons to whom the
-Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-DEALINGS IN THE SOFTWARE.
-
-****************************************************************************/
-
-#if defined(HAVE_XKB)
-
-#include <X11/Xlib.h>
-
-#define explicit myexplicit
-#include <X11/XKBlib.h>
-#undef explicit
-
-#include <X11/keysym.h>
-#include <QX11Info>
-
-/* the XKB stuff is based on code created by Oswald Buddenhagen <ossi@kde.org> */
-static int xkb_init()
-{
-    int xkb_opcode, xkb_event, xkb_error;
-    int xkb_lmaj = XkbMajorVersion;
-    int xkb_lmin = XkbMinorVersion;
-    return XkbLibraryVersion( &xkb_lmaj, &xkb_lmin )
-        && XkbQueryExtension( QX11Info::display(), &xkb_opcode, &xkb_event, &xkb_error,
-			       &xkb_lmaj, &xkb_lmin );
-}
-    
-#if 0
-// This method doesn't work in all cases. The atom "ScrollLock" doesn't seem
-// to exist on all XFree versions (at least it's not here with my 3.3.6) - DF
-static unsigned int xkb_mask_modifier( XkbDescPtr xkb, const char *name )
-{
-    int i;
-    if( !xkb || !xkb->names )
-	return 0;
-
-    Atom atom = XInternAtom( xkb->dpy, name, true );
-    if (atom == None)
-        return 0;
-
-    for( i = 0;
-         i < XkbNumVirtualMods;
-	 i++ )
-    {
-	if (atom == xkb->names->vmods[i] )
-	{
-	    unsigned int mask;
-	    XkbVirtualModsToReal( xkb, 1 << i, &mask );
-	    return mask;
-	}
-    }
-    return 0;
-}
-
-static unsigned int xkb_scrolllock_mask()
-{
-    XkbDescPtr xkb;
-    if(( xkb = XkbGetKeyboard( QX11Info::display(), XkbAllComponentsMask, XkbUseCoreKbd )) != NULL )
-    {
-        unsigned int mask = xkb_mask_modifier( xkb, "ScrollLock" );
-        XkbFreeKeyboard( xkb, 0, True );
-        return mask;
-    }
-    return 0;
-}
-
-#else
-static unsigned int xkb_scrolllock_mask()
-{
-    int scrolllock_mask = 0;
-    XModifierKeymap* map = XGetModifierMapping( QX11Info::display() );
-    KeyCode scrolllock_keycode = XKeysymToKeycode( QX11Info::display(), XK_Scroll_Lock );
-    if( scrolllock_keycode == NoSymbol ) {
-        XFreeModifiermap(map);
-        return 0;
-    }
-    for( int i = 0;
-         i < 8;
-         ++i )
-        {
-       if( map->modifiermap[ map->max_keypermod * i ] == scrolllock_keycode )
-               scrolllock_mask += 1 << i;
-       }
-
-    XFreeModifiermap(map);
-    return scrolllock_mask;
-}
-#endif
-
-
-static unsigned int scrolllock_mask = 0;
-        
-static int xkb_set_on()
-{
-    if (!scrolllock_mask)
-    {
-       if( !xkb_init())
-          return 0;
-       scrolllock_mask = xkb_scrolllock_mask();
-       if( scrolllock_mask == 0 )
-          return 0;
-    }
-    XkbLockModifiers ( QX11Info::display(), XkbUseCoreKbd, scrolllock_mask, scrolllock_mask);
-    return 1;
-}
-    
-static int xkb_set_off()
-{
-    if (!scrolllock_mask)
-    {
-       if( !xkb_init())
-          return 0;
-       scrolllock_mask = xkb_scrolllock_mask();
-       if( scrolllock_mask == 0 )
-          return 0;
-    }
-    XkbLockModifiers ( QX11Info::display(), XkbUseCoreKbd, scrolllock_mask, 0);
-    return 1;
-}
-
-static void scrolllock_set_on()
-{
-    xkb_set_on();
-}
-
-static void scrolllock_set_off()
-{
-    xkb_set_off();
-}
-#endif // defined(HAVE_XKB)
-
-#include "TEmuVt102.moc"
+#include "Vt102Emulation.moc"

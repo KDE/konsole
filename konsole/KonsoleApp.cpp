@@ -24,11 +24,13 @@
 #include "KeyTrans.h"
 #include "KonsoleApp.h"
 #include "KonsoleMainWindow.h"
-#include "TESession.h"
+#include "Session.h"
 #include "ViewManager.h"
 
 // temporary - testing history feature
-#include "TEHistory.h"
+#include "History.h"
+
+using namespace Konsole;
 
 // global variable to determine whether or not true transparency should be used
 // this should be made into a static class variable of KonsoleApp
@@ -56,7 +58,7 @@ KonsoleMainWindow* KonsoleApp::newMainWindow()
 
     connect( window , SIGNAL(requestSession(const QString&,ViewManager*)), 
                       this , SLOT(createSession(const QString&,ViewManager*)));
-    connect( window->viewManager() , SIGNAL(viewDetached(TESession*)) , this , SLOT(detachView(TESession*)) );
+    connect( window->viewManager() , SIGNAL(viewDetached(Session*)) , this , SLOT(detachView(Session*)) );
 
     return window;
 }
@@ -76,7 +78,7 @@ SessionManager* KonsoleApp::sessionManager()
     return _sessionManager;
 }
 
-void KonsoleApp::detachView(TESession* session)
+void KonsoleApp::detachView(Session* session)
 {
     KonsoleMainWindow* window = newMainWindow();
     window->viewManager()->createView(session);
@@ -85,7 +87,7 @@ void KonsoleApp::detachView(TESession* session)
 
 void KonsoleApp::createSession(const QString& key , ViewManager* view)
 {
-    TESession* session = _sessionManager->createSession(key);
+    Session* session = _sessionManager->createSession(key);
     session->setListenToKeyPress(true); 
     //session->setConnect(true);
     

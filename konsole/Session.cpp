@@ -46,15 +46,18 @@
 // Konsole
 #include <config-konsole.h>
 #include "schema.h"
-#include "sessionadaptor.h"
-#include "sessionscriptingadaptor.h"
+//TODO - Re-add adaptors
+//#include "sessionadaptor.h"
+//#include "sessionscriptingadaptor.h"
 #include "ZModemDialog.h"
 
-#include "TESession.h"
+#include "Session.h"
 
-int TESession::lastSessionId = 0;
+using namespace Konsole;
 
-TESession::TESession() : 
+int Session::lastSessionId = 0;
+
+Session::Session() : 
     _shellProcess(0)
    , _emulation(0)
    , connected(true)
@@ -79,18 +82,18 @@ TESession::TESession() :
    , _colorScheme(0)
 {
     //prepare DBus communication
-    (void)new SessionAdaptor(this);
+    //TODO - Re-add Session adaptor
 
     // TODO
     // numeric session identifier exposed via DBus isn't very user-friendly, but is this an issue? 
     _sessionId = ++lastSessionId; 
-    QDBusConnection::sessionBus().registerObject(QLatin1String("/Sessions/session")+QString::number(_sessionId), this);
+    //QDBusConnection::sessionBus().registerObject(QLatin1String("/Sessions/session")+QString::number(_sessionId), this);
 
     //create teletype for I/O with shell process
-    _shellProcess = new TEPty();
+    _shellProcess = new Pty();
 
     //create emulation backend
-    _emulation = new TEmuVt102();
+    _emulation = new Vt102Emulation();
 
     connect( _emulation, SIGNAL( changeTitle( int, const QString & ) ),
            this, SLOT( setUserTitle( int, const QString & ) ) );
@@ -121,17 +124,17 @@ TESession::TESession() :
         QTimer::singleShot(0, this, SLOT(ptyError()));
 }
 
-void TESession::setProgram(const QString& program)
+void Session::setProgram(const QString& program)
 {
     _program = program;
 }
 
-void TESession::setArguments(const QStringList& arguments)
+void Session::setArguments(const QStringList& arguments)
 {
     _arguments = arguments;
 }
 
-/*! \class TESession
+/*! \class Session
 
     Sessions are combinations of TEPTy and Emulations.
 
@@ -142,8 +145,8 @@ void TESession::setArguments(const QStringList& arguments)
 */
 
 #if 0
-TESession::TESession(TerminalDisplay* _te, const QString &_pgm, const QStringList & _args, const QString &_term, ulong _winId, const QString &_sessionId, const QString &_initial_cwd)
-   : TESession()
+Session::Session(TerminalDisplay* _te, const QString &_pgm, const QStringList & _args, const QString &_term, ulong _winId, const QString &_sessionId, const QString &_initial_cwd)
+   : Session()
    , _program(_pgm)
    , _arguments(_args)
    , sessionId(_sessionId)
@@ -152,12 +155,12 @@ TESession::TESession(TerminalDisplay* _te, const QString &_pgm, const QStringLis
 	(void)new SessionAdaptor(this);
 	QDBusConnection::sessionBus().registerObject(QLatin1String("/Session")/*"/sessions/"+_sessionId*/, this);
 	QDBusConnection::sessionBus().registerService("org.kde.konsole");
-  //kDebug(1211)<<"TESession ctor() new TEPty"<<endl;
-  _shellProcess = new TEPty();
+  //kDebug(1211)<<"Session ctor() new Pty"<<endl;
+  _shellProcess = new Pty();
   
   addView(_te);
 
-  _emulation = new TEmuVt102( primaryView() );
+  _emulation = new Vt102Emulation( primaryView() );
   font_h = primaryView()-> fontHeight();
   font_w = primaryView()-> fontWidth();
   QObject::connect(primaryView(),SIGNAL(changedContentSizeSignal(int,int)),
@@ -169,10 +172,10 @@ TESession::TESession(TerminalDisplay* _te, const QString &_pgm, const QStringLis
   winId = _winId;
   _iconName = "konsole";
 
-  //kDebug(1211)<<"TESession ctor() _shellProcess->setSize()"<<endl;
+  //kDebug(1211)<<"Session ctor() _shellProcess->setSize()"<<endl;
   _shellProcess->setSize(primaryView()->Lines(),primaryView()->Columns()); // not absolutely necessary
   _shellProcess->useUtf8(_emulation->utf8());
-  //kDebug(1211)<<"TESession ctor() connecting"<<endl;
+  //kDebug(1211)<<"Session ctor() connecting"<<endl;
   connect( _shellProcess,SIGNAL(block_in(const char*,int)),this,SLOT(onReceiveBlock(const char*,int)) );
 
   connect( _emulation,SIGNAL(sendBlock(const char*,int)),_shellProcess,SLOT(send_bytes(const char*,int)) );
@@ -193,13 +196,13 @@ TESession::TESession(TerminalDisplay* _te, const QString &_pgm, const QStringLis
            this, SLOT( changeTabTextColor( int ) ) );
 
   connect( _shellProcess,SIGNAL(done(int)), this,SLOT(done(int)) );
-  //kDebug(1211)<<"TESession ctor() done"<<endl;
+  //kDebug(1211)<<"Session ctor() done"<<endl;
   if (!_shellProcess->error().isEmpty())
      QTimer::singleShot(0, this, SLOT(ptyError()));
 }
 #endif
 
-void TESession::ptyError()
+void Session::ptyError()
 {
   // FIXME:  _shellProcess->error() is always empty
   if ( _shellProcess->error().isEmpty() )
@@ -211,12 +214,12 @@ void TESession::ptyError()
   emit done(this);
 }
 
-QList<TerminalDisplay*> TESession::views() const
+QList<TerminalDisplay*> Session::views() const
 {
     return _views;
 }
 
-void TESession::addView(TerminalDisplay* widget)
+void Session::addView(TerminalDisplay* widget)
 {
      Q_ASSERT( !_views.contains(widget) );
 
@@ -255,7 +258,7 @@ void TESession::addView(TerminalDisplay* widget)
 
 }
 
-void TESession::viewDestroyed(QObject* view)
+void Session::viewDestroyed(QObject* view)
 {
     TerminalDisplay* display = (TerminalDisplay*)view;
     
@@ -264,7 +267,7 @@ void TESession::viewDestroyed(QObject* view)
     removeView(display);
 }
 
-void TESession::removeView(TerminalDisplay* widget)
+void Session::removeView(TerminalDisplay* widget)
 {
     _views.removeAll(widget);
 
@@ -283,18 +286,18 @@ void TESession::removeView(TerminalDisplay* widget)
     }
 }
 
-/*void TESession::changeWidget(TerminalDisplay* w)
+/*void Session::changeWidget(TerminalDisplay* w)
 {
   Q_ASSERT(0); //Method not updated yet to handle multiple views
 }*/
 
-void TESession::run()
+void Session::run()
 {
   //check that everything is in place to run the session
   if (_program.isEmpty())
-      kDebug() << "TESession::run() - program to run not set." << endl;
+      kDebug() << "Session::run() - program to run not set." << endl;
   if (_arguments.isEmpty())
-      kDebug() << "TESession::run() - no command line arguments specified." << endl;
+      kDebug() << "Session::run() - no command line arguments specified." << endl;
   
   // Upon a KPty error, there is no description on what that error was...
   // Check to see if the given program is executable.
@@ -333,7 +336,7 @@ void TESession::run()
 
 }
 
-void TESession::changeTabTextColor( int color )
+void Session::changeTabTextColor( int color )
 {
     emit changeTabTextColor( this, color );
 }
@@ -341,14 +344,14 @@ void TESession::changeTabTextColor( int color )
 
 
 
-// NOTE: TESession::hasChildren() was originally written so that the 'do you really want to close?'
+// NOTE: Session::hasChildren() was originally written so that the 'do you really want to close?'
 // prompt delivered when closing a session would only be shown if the session had running processes.
 // However, it was decided that stat-ing everything in /proc was very expensive, and others
 // disagreed with the basic idea.
 //
 // This code is left here in case anyone wants to know a way of figuring out
 // the PIDs of processes running in the terminal sessions :)
-bool TESession::hasChildren()
+bool Session::hasChildren()
 {
 	int sessionPID=_shellProcess->pid();
 
@@ -408,7 +411,7 @@ bool TESession::hasChildren()
 	return false;
 }
 
-void TESession::setUserTitle( int what, const QString &caption )
+void Session::setUserTitle( int what, const QString &caption )
 {
 	bool modified = false; //set to true if anything is actually changed (eg. old _title != new _title )
 	
@@ -471,12 +474,12 @@ void TESession::setUserTitle( int what, const QString &caption )
     	emit updateTitle();
 }
 
-QString TESession::userTitle() const
+QString Session::userTitle() const
 {
     return _userTitle;
 }
 
-QString TESession::displayTitle() const
+QString Session::displayTitle() const
 {
     if (!_userTitle.isEmpty())
         return _userTitle;
@@ -484,7 +487,7 @@ QString TESession::displayTitle() const
         return title();
 }
 
-void TESession::monitorTimerDone()
+void Session::monitorTimerDone()
 {
   //FIXME: The idea here is that the notification popup will appear to tell the user than output from
   //the terminal has stopped and the popup will disappear when the user activates the session.
@@ -505,7 +508,7 @@ void TESession::monitorTimerDone()
   notifiedActivity=false;
 }
 
-void TESession::notifySessionState(int state)
+void Session::notifySessionState(int state)
 {
   if (state==NOTIFYBELL) 
   {
@@ -518,7 +521,7 @@ void TESession::notifySessionState(int state)
       monitorTimer->start(_silenceSeconds*1000);
     }
     
-    //FIXME:  See comments in TESession::monitorTimerDone()
+    //FIXME:  See comments in Session::monitorTimerDone()
     if (!notifiedActivity) {
       KNotification::event("Activity", i18n("Activity in session '%1'", _title), QPixmap(),
                       QApplication::activeWindow(), 
@@ -537,12 +540,12 @@ void TESession::notifySessionState(int state)
   emit notifySessionState(this, state);
 }
 
-void TESession::onContentSizeChange(int /*height*/, int /*width*/)
+void Session::onContentSizeChange(int /*height*/, int /*width*/)
 {
   updateTerminalSize();
 }
 
-void TESession::updateTerminalSize()
+void Session::updateTerminalSize()
 {
     QListIterator<TerminalDisplay*> viewIter(_views);
 
@@ -568,12 +571,12 @@ void TESession::updateTerminalSize()
     }
 }
 
-bool TESession::sendSignal(int signal)
+bool Session::sendSignal(int signal)
 {
   return _shellProcess->kill(signal);
 }
 
-bool TESession::closeSession()
+bool Session::closeSession()
 {
   autoClose = true;
   wantedClose = true;
@@ -585,7 +588,7 @@ bool TESession::closeSession()
   return true;
 }
 
-void TESession::feedSession(const QString &text)
+void Session::feedSession(const QString &text)
 {
   emit disableMasterModeConnections();
   setListenToKeyPress(true);
@@ -594,20 +597,20 @@ void TESession::feedSession(const QString &text)
   emit enableMasterModeConnections();
 }
 
-void TESession::sendSession(const QString &text)
+void Session::sendSession(const QString &text)
 {
   QString newtext=text;
   newtext.append("\r");
   feedSession(newtext);
 }
 
-void TESession::renameSession(const QString &name)
+void Session::renameSession(const QString &name)
 {
   _title=name;
   emit renameSession(this,name);
 }
 
-TESession::~TESession()
+Session::~Session()
 {
   delete _emulation;
   delete _shellProcess;
@@ -618,24 +621,24 @@ TESession::~TESession()
       viewIter.next()->deleteLater();
 }
 
-/*void TESession::setConnect(bool c)
+/*void Session::setConnect(bool c)
 {
   connected=c;
   _emulation->setConnect(c);
   setListenToKeyPress(c);
 }*/
 
-void TESession::setListenToKeyPress(bool l)
+void Session::setListenToKeyPress(bool l)
 {
   _emulation->setListenToKeyPress(l);
 }
 
-void TESession::done() {
+void Session::done() {
   emit processExited();
   emit done(this);
 }
 
-void TESession::done(int exitStatus)
+void Session::done(int exitStatus)
 {
   if (!autoClose)
   {
@@ -659,7 +662,7 @@ void TESession::done(int exitStatus)
     else
         message = i18n("Session '%1' exited unexpectedly.", _title);
 
-    //FIXME: See comments in TESession::monitorTimerDone()
+    //FIXME: See comments in Session::monitorTimerDone()
     KNotification::event("Finished", message , QPixmap(),
                          QApplication::activeWindow(), 
                          KNotification::CloseWhenWidgetActivated);
@@ -668,106 +671,106 @@ void TESession::done(int exitStatus)
   emit done(this);
 }
 
-void TESession::terminate()
+void Session::terminate()
 {
   delete this;
 }
 
-TEmulation* TESession::getEmulation()
+Emulation* Session::getEmulation()
 {
   return _emulation;
 }
 
 // following interfaces might be misplaced ///
 
-int TESession::encodingNo()
+int Session::encodingNo()
 {
   return encoding_no;
 }
 
-int TESession::keymapNo()
+int Session::keymapNo()
 {
   return _emulation->keymapNo();
 }
 
-QString TESession::keymap()
+QString Session::keymap()
 {
   return _emulation->keymap();
 }
 
-int TESession::fontNo()
+int Session::fontNo()
 {
   return _fontNo;
 }
 
-const QString& TESession::terminalType() const
+const QString& Session::terminalType() const
 {
   return term;
 }
 
-void TESession::setTerminalType(const QString& terminalType)
+void Session::setTerminalType(const QString& terminalType)
 {
     term = terminalType;
 }
 
-int TESession::sessionId() const
+int Session::sessionId() const
 {
   return _sessionId;
 }
 
-void TESession::setEncodingNo(int index)
+void Session::setEncodingNo(int index)
 {
   encoding_no = index;
 }
 
-void TESession::setKeymapNo(int kn)
+void Session::setKeymapNo(int kn)
 {
   _emulation->setKeymap(kn);
 }
 
-void TESession::setKeymap(const QString &id)
+void Session::setKeymap(const QString &id)
 {
   _emulation->setKeymap(id);
 }
 
-void TESession::setFontNo(int fn)
+void Session::setFontNo(int fn)
 {
   _fontNo = fn;
 }
 
-void TESession::setTitle(const QString& title)
+void Session::setTitle(const QString& title)
 {
   _title = title;
   //kDebug(1211)<<"Session setTitle " <<  _title <<endl;
 }
 
-const QString& TESession::title() const
+const QString& Session::title() const
 {
   return _title;
 }
 
-void TESession::setIconName(const QString& iconName)
+void Session::setIconName(const QString& iconName)
 {
   _iconName = iconName;
 }
 
-void TESession::setIconText(const QString& iconText)
+void Session::setIconText(const QString& iconText)
 {
   _iconText = iconText;
   //kDebug(1211)<<"Session setIconText " <<  _iconText <<endl;
 }
 
-const QString& TESession::iconName() const
+const QString& Session::iconName() const
 {
   return _iconName;
 }
 
-const QString& TESession::iconText() const
+const QString& Session::iconText() const
 {
   return _iconText;
 }
 
-bool TESession::testAndSetStateIconName (const QString& newname)
+bool Session::testAndSetStateIconName (const QString& newname)
 {
   if (newname != stateIconName)
     {
@@ -777,17 +780,17 @@ bool TESession::testAndSetStateIconName (const QString& newname)
   return false;
 }
 
-void TESession::setHistory(const HistoryType &hType)
+void Session::setHistory(const HistoryType &hType)
 {
   _emulation->setHistory(hType);
 }
 
-const HistoryType& TESession::history()
+const HistoryType& Session::history()
 {
   return _emulation->history();
 }
 
-void TESession::clearHistory()
+void Session::clearHistory()
 {
   if (history().isOn()) {
     int histSize = history().getSize();
@@ -799,17 +802,17 @@ void TESession::clearHistory()
   }
 }
 
-QStringList TESession::getArgs()
+QStringList Session::getArgs()
 {
   return _arguments;
 }
 
-QString TESession::getPgm()
+QString Session::getPgm()
 {
   return _program;
 }
 
-QString TESession::currentWorkingDirectory()
+QString Session::currentWorkingDirectory()
 {
 #ifdef HAVE_PROC_CWD
   if (cwd.isEmpty()) {
@@ -821,11 +824,11 @@ QString TESession::currentWorkingDirectory()
   return cwd;
 }
 
-bool TESession::isMonitorActivity() { return monitorActivity; }
-bool TESession::isMonitorSilence() { return monitorSilence; }
-bool TESession::isMasterMode() { return masterMode; }
+bool Session::isMonitorActivity() { return monitorActivity; }
+bool Session::isMonitorSilence() { return monitorSilence; }
+bool Session::isMasterMode() { return masterMode; }
 
-void TESession::setMonitorActivity(bool _monitor)
+void Session::setMonitorActivity(bool _monitor)
 {
   monitorActivity=_monitor;
   notifiedActivity=false;
@@ -833,7 +836,7 @@ void TESession::setMonitorActivity(bool _monitor)
   notifySessionState(NOTIFYNORMAL);
 }
 
-void TESession::setMonitorSilence(bool _monitor)
+void Session::setMonitorSilence(bool _monitor)
 {
   if (monitorSilence==_monitor)
     return;
@@ -849,7 +852,7 @@ void TESession::setMonitorSilence(bool _monitor)
   notifySessionState(NOTIFYNORMAL);
 }
 
-void TESession::setMonitorSilenceSeconds(int seconds)
+void Session::setMonitorSilenceSeconds(int seconds)
 {
   _silenceSeconds=seconds;
   if (monitorSilence) {
@@ -858,22 +861,22 @@ void TESession::setMonitorSilenceSeconds(int seconds)
   }
 }
 
-void TESession::setMasterMode(bool _master)
+void Session::setMasterMode(bool _master)
 {
   masterMode=_master;
 }
 
-void TESession::setAddToUtmp(bool set)
+void Session::setAddToUtmp(bool set)
 {
   _addToUtmp = set;
 }
 
-void TESession::setXonXoff(bool set)
+void Session::setXonXoff(bool set)
 {
   _flowControl = set;
 }
 
-void TESession::slotZModemDetected()
+void Session::slotZModemDetected()
 {
   if (!zmodemBusy)
   {
@@ -882,18 +885,18 @@ void TESession::slotZModemDetected()
   }
 }
 
-void TESession::emitZModemDetected()
+void Session::emitZModemDetected()
 {
   emit zmodemDetected(this);
 }
 
-void TESession::cancelZModem()
+void Session::cancelZModem()
 {
   _shellProcess->send_bytes("\030\030\030\030", 4); // Abort
   zmodemBusy = false;
 }
 
-void TESession::startZModem(const QString &zmodem, const QString &dir, const QStringList &list)
+void Session::startZModem(const QString &zmodem, const QString &dir, const QStringList &list)
 {
   zmodemBusy = true;
   zmodemProc = new KProcIO;
@@ -932,7 +935,7 @@ void TESession::startZModem(const QString &zmodem, const QString &dir, const QSt
   zmodemProgress->show();
 }
 
-void TESession::zmodemSendBlock(KProcess *, char *data, int len)
+void Session::zmodemSendBlock(KProcess *, char *data, int len)
 {
   _shellProcess->send_bytes(data, len);
 //  qWarning("<-- %d bytes", len);
@@ -943,13 +946,13 @@ void TESession::zmodemSendBlock(KProcess *, char *data, int len)
   }
 }
 
-void TESession::zmodemContinue()
+void Session::zmodemContinue()
 {
   zmodemProc->resume();
 //  qWarning("ZModem resume");
 }
 
-void TESession::zmodemStatus(KProcess *, char *data, int len)
+void Session::zmodemStatus(KProcess *, char *data, int len)
 {
   QByteArray msg(data, len+1);
   while(!msg.isEmpty())
@@ -976,14 +979,14 @@ void TESession::zmodemStatus(KProcess *, char *data, int len)
   }
 }
 
-void TESession::zmodemRcvBlock(const char *data, int len)
+void Session::zmodemRcvBlock(const char *data, int len)
 {
   QByteArray ba( data, len );
   zmodemProc->writeStdin( ba );
 //  qWarning("--> %d bytes", len);
 }
 
-void TESession::zmodemDone()
+void Session::zmodemDone()
 {
   if (zmodemProc)
   {
@@ -1001,25 +1004,27 @@ void TESession::zmodemDone()
   }
 }
 
-void TESession::enableFullScripting(bool b)
+void Session::enableFullScripting(bool b)
 {
-    assert(!(_fullScripting && !b) && "_fullScripting can't be disabled");
-    if (!_fullScripting && b)
-        (void)new SessionScriptingAdaptor(this);
+  assert( 0 );
+  // TODO Re-add adaptors
+  //  assert(!(_fullScripting && !b) && "_fullScripting can't be disabled");
+  //  if (!_fullScripting && b)
+  //      (void)new SessionScriptingAdaptor(this);
 }
 
-void TESession::onReceiveBlock( const char* buf, int len )
+void Session::onReceiveBlock( const char* buf, int len )
 {
     _emulation->onReceiveBlock( buf, len );
     emit receivedData( QString::fromLatin1( buf, len ) );
 }
 
-ColorSchema* TESession::schema()
+ColorSchema* Session::schema()
 {
     return _colorScheme;
 }
 
-void TESession::setSchema(ColorSchema* schema)
+void Session::setSchema(ColorSchema* schema)
 {
     _colorScheme = schema;
 
@@ -1031,33 +1036,33 @@ void TESession::setSchema(ColorSchema* schema)
     }
 }
 
-QString TESession::encoding()
+QString Session::encoding()
 {
   return _emulation->codec()->name();
 }
 
-void TESession::setEncoding(const QString &encoding)
+void Session::setEncoding(const QString &encoding)
 {
   emit setSessionEncoding(this, encoding);
 }
 
-QString TESession::keytab()
+QString Session::keytab()
 {
    return keymap();
 }
 
-void TESession::setKeytab(const QString &keytab)
+void Session::setKeytab(const QString &keytab)
 {
    setKeymap(keytab);
    emit updateSessionConfig(this);
 }
 
-QSize TESession::size()
+QSize Session::size()
 {
   return _emulation->imageSize();
 }
 
-void TESession::setSize(QSize size)
+void Session::setSize(QSize size)
 {
   if ((size.width() <= 1) || (size.height() <= 1))
      return;
@@ -1065,4 +1070,4 @@ void TESession::setSize(QSize size)
   emit resizeSession(this, size);
 }
 
-#include "TESession.moc"
+#include "Session.moc"

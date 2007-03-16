@@ -38,6 +38,8 @@
 #include "KonsoleBookmarkHandler.h"
 #include "SessionController.h"
 
+using namespace Konsole;
+
 KonsoleBookmarkHandler::KonsoleBookmarkHandler( KActionCollection* collection, KMenu* menu, bool toplevel )
     : QObject( collection ),
       KBookmarkOwner(),

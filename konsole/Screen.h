@@ -27,7 +27,7 @@
 
 // Konsole
 #include "TECommon.h"
-#include "TEHistory.h"
+#include "History.h"
 
 #define MODE_Origin    0
 #define MODE_Wrap      1
@@ -36,6 +36,9 @@
 #define MODE_Cursor    4
 #define MODE_NewLine   5
 #define MODES_SCREEN   6
+
+namespace Konsole
+{
 
 /*!
 */
@@ -49,7 +52,7 @@ class TerminalCharacterDecoder;
 /**
     \brief An image of characters with associated attributes.
 
-    The terminal emulation ( TEmulation ) receives a serial stream of
+    The terminal emulation ( Emulation ) receives a serial stream of
     characters from the program currently running in the terminal.
     From this stream it creates an image of characters which is ultimately
     rendered by the display widget ( TerminalDisplay ).  Some types of emulation
@@ -69,12 +72,12 @@ class TerminalCharacterDecoder;
     using selectedText().  When getCookedImage() is used to retrieve the the visible image,
     characters which are part of the selection have their colours inverted.   
 */
-class TEScreen
+class Screen
 {
 public:
     /** Construct a new screen image of size @p lines by @p columns. */
-    TEScreen(int lines, int columns);
-    ~TEScreen();
+    Screen(int lines, int columns);
+    ~Screen();
 
 public: // these are all `Screen' operations
     //
@@ -448,7 +451,7 @@ private: // helper
 #if 0 
 class ScreenCursor
 {
-friend class TEScreen;
+friend class Screen;
 
 public:
     ScreenCursor();
@@ -470,5 +473,7 @@ inline uint qHash(const ScreenCursor& cursor)
     return qHash(cursor.characterursor());
 }
 #endif 
+
+};
 
 #endif // TESCREEN_H

@@ -26,6 +26,10 @@
 #include <QSplitter>
 
 class QFocusEvent;
+
+namespace Konsole
+{
+
 class ViewContainer;
 
 /**
@@ -125,5 +129,6 @@ private:
     QList<ViewContainer*> _containers;
 };
 
+};
 #endif //VIEWSPLITTER_H
 

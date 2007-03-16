@@ -27,7 +27,7 @@
 */
 
 
-/*! \class TEPty
+/*! \class Pty
 
     \brief Ptys provide a pseudo terminal connection to a program.
 
@@ -48,7 +48,7 @@
 
     publish the SIGCHLD signal if not related to an instance.
 
-    clearify TEPty::done vs. TEPty::~TEPty semantics.
+    clearify Pty::done vs. Pty::~Pty semantics.
     check if pty is restartable via run after done.
 
     \par Pseudo terminals
@@ -71,42 +71,48 @@
     my prevent this.
 */
 
+// System
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <errno.h>
 #include <termios.h>
 
-#include <kstandarddirs.h>
-#include <klocale.h>
-#include <kdebug.h>
-#include <kpty.h>
-
-#include "TEPty.h"
+// Qt
 #include <QStringList>
 
+// KDE
+#include <KStandardDirs>
+#include <KLocale>
+#include <KDebug>
+#include <KPty>
 
-void TEPty::donePty()
+// Konsole
+#include "Pty.h"
+
+using namespace Konsole;
+
+void Pty::donePty()
 {
   emit done(exitStatus());
 }
 
-void TEPty::setSize(int lines, int cols)
+void Pty::setSize(int lines, int cols)
 {
   pty()->setWinSize(lines, cols);
 }
 
-void TEPty::setXonXoff(bool on)
+void Pty::setXonXoff(bool on)
 {
   pty()->setXonXoff(on);
 }
 
-void TEPty::useUtf8(bool on)
+void Pty::useUtf8(bool on)
 {
   pty()->setUtf8Mode(on);
 }
 
-void TEPty::setErase(char erase)
+void Pty::setErase(char erase)
 {
   struct termios tios;
   int fd = pty()->slaveFd();
@@ -124,7 +130,7 @@ void TEPty::setErase(char erase)
 /*!
     start the client program.
 */
-int TEPty::run(const char* _pgm, QStringList & _args, const char* _term, ulong winid, bool _addutmp,
+int Pty::run(const char* _pgm, QStringList & _args, const char* _term, ulong winid, bool _addutmp,
                const char* _konsole_dbus_service, const char* _konsole_dbus_session)
 {
   clearArguments();
@@ -153,7 +159,7 @@ int TEPty::run(const char* _pgm, QStringList & _args, const char* _term, ulong w
 
 }
 
-void TEPty::setWriteable(bool writeable)
+void Pty::setWriteable(bool writeable)
 {
   struct stat sbuf;
   stat(pty()->ttyName(), &sbuf);
@@ -166,7 +172,7 @@ void TEPty::setWriteable(bool writeable)
 /*!
     Create an instance.
 */
-TEPty::TEPty()
+Pty::Pty()
 {
   m_bufferFull = false;
   connect(this, SIGNAL(receivedStdout(KProcess *, char *, int )),
@@ -182,30 +188,30 @@ TEPty::TEPty()
 /*!
     Destructor.
 */
-TEPty::~TEPty()
+Pty::~Pty()
 {
 }
 
 /*! sends a character through the line */
-void TEPty::send_byte(char c)
+void Pty::send_byte(char c)
 {
   send_bytes(&c,1);
 }
 
 /*! sends a 0 terminated string through the line */
-void TEPty::send_string(const char* s)
+void Pty::send_string(const char* s)
 {
   send_bytes(s,strlen(s));
 }
 
-void TEPty::writeReady()
+void Pty::writeReady()
 {
   pendingSendJobs.erase(pendingSendJobs.begin());
   m_bufferFull = false;
   doSendJobs();
 }
 
-void TEPty::doSendJobs() {
+void Pty::doSendJobs() {
   if(pendingSendJobs.isEmpty())
   {
      emit buffer_empty();
@@ -217,19 +223,19 @@ void TEPty::doSendJobs() {
   
   if (!writeStdin( job.data(), job.length() ))
   {
-    qWarning("TEPty::doSendJobs - Could not send input data to terminal process.");
+    qWarning("Pty::doSendJobs - Could not send input data to terminal process.");
     return;
   }
   m_bufferFull = true;
 }
 
-void TEPty::appendSendJob(const char* s, int len)
+void Pty::appendSendJob(const char* s, int len)
 {
   pendingSendJobs.append(SendJob(s,len));
 }
 
 /*! sends len bytes through the line */
-void TEPty::send_bytes(const char* s, int len)
+void Pty::send_bytes(const char* s, int len)
 {
   appendSendJob(s,len);
   if (!m_bufferFull)
@@ -237,14 +243,14 @@ void TEPty::send_bytes(const char* s, int len)
 }
 
 /*! indicates that a block of data is received */
-void TEPty::dataReceived(KProcess *,char *buf, int len)
+void Pty::dataReceived(KProcess *,char *buf, int len)
 {
  // kDebug() << __FUNCTION__ << ": received " << len << " bytes - '" << buf << "'" << endl;
 
   emit block_in(buf,len);
 }
 
-void TEPty::lockPty(bool lock)
+void Pty::lockPty(bool lock)
 {
   if (lock)
     suspend();
@@ -252,4 +258,4 @@ void TEPty::lockPty(bool lock)
     resume();
 }
 
-#include "TEPty.moc"
+#include "Pty.moc"

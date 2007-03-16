@@ -21,14 +21,21 @@
 #ifndef TEHISTORY_H
 #define TEHISTORY_H
 
+// Qt
 #include <q3ptrvector.h>
 #include <QBitArray>
-//Added by qt3to4:
 #include <QVector>
+#include <q3intdict.h>
 
+// KDE
 #include <ktemporaryfile.h>
 
+// Konsole
+#include "BlockArray.h"
 #include "TECommon.h"
+
+namespace Konsole
+{
 
 #if 1
 /*
@@ -205,8 +212,6 @@ public:
 //////////////////////////////////////////////////////////////////////
 // BlockArray-based history
 //////////////////////////////////////////////////////////////////////
-#include "BlockArray.h"
-#include <q3intdict.h>
 class HistoryScrollBlockArray : public HistoryScroll
 {
 public:
@@ -299,5 +304,7 @@ protected:
 };
 
 #endif
+
+};
 
 #endif // TEHISTORY_H

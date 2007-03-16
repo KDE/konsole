@@ -29,6 +29,8 @@
 #include "ViewContainer.h"
 #include "ViewSplitter.h"
 
+using namespace Konsole;
+
 void ViewSplitter::childEmpty(ViewSplitter* splitter)
 {
  //   qDebug() << __FUNCTION__ << ": deleting child splitter " ;

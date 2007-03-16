@@ -24,11 +24,15 @@
 #include <KUniqueApplication>
 
 class KCmdLineArgs;
+
+namespace Konsole
+{
+
 class SessionList;
 class SessionManager;
 class ViewManager;
 class KonsoleMainWindow;
-class TESession;
+class Session;
 
 /**
  * The Konsole Application.
@@ -70,7 +74,7 @@ public:
 
 private slots:
     void createSession(const QString& key, ViewManager* view);
-    void detachView(TESession* session);
+    void detachView(Session* session);
 
 private:
     KCmdLineArgs*   _arguments;
@@ -78,4 +82,5 @@ private:
     SessionList*    _sessionList;
 };
 
+};
 #endif //KONSOLEAPP_H

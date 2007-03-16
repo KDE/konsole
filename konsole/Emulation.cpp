@@ -20,9 +20,9 @@
     02110-1301  USA.
 */
 
-/*! \class TEmulation
+/*! \class Emulation
 
-    \brief Mediator between TerminalDisplay and TEScreen.
+    \brief Mediator between TerminalDisplay and Screen.
 
    This class is responsible to scan the escapes sequences of the terminal
    emulation and to map it to their corresponding semantic complements.
@@ -31,7 +31,7 @@
 
    It is also responsible to refresh the TerminalDisplay by certain rules.
 
-   \sa TerminalDisplay \sa TEScreen
+   \sa TerminalDisplay \sa Screen
 
    \par A note on refreshing
 
@@ -84,14 +84,16 @@
 #include <kdebug.h>
 
 // Konsole
-#include "TEScreen.h"
+#include "Screen.h"
 #include "TerminalCharacterDecoder.h"
 #include "ScreenWindow.h"
-#include "TEmulation.h"
+#include "Emulation.h"
+
+using namespace Konsole;
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
-/*                               TEmulation                                  */
+/*                               Emulation                                  */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
@@ -100,7 +102,7 @@
 /*!
 */
 
-TEmulation::TEmulation() :
+Emulation::Emulation() :
   currentScreen(0),
   listenToKeyPress(false),
   m_codec(0),
@@ -110,8 +112,8 @@ TEmulation::TEmulation() :
 {
 
   //initialize screens with a default size
-  screen[0] = new TEScreen(40,80);
-  screen[1] = new TEScreen(40,80);
+  screen[0] = new Screen(40,80);
+  screen[1] = new Screen(40,80);
   currentScreen = screen[0];
 
   QObject::connect(&bulk_timer1, SIGNAL(timeout()), this, SLOT(showBulk()) );
@@ -120,7 +122,7 @@ TEmulation::TEmulation() :
   setKeymap(0); // Default keymap
 }
 
-ScreenWindow* TEmulation::createWindow()
+ScreenWindow* Emulation::createWindow()
 {
     ScreenWindow* window = new ScreenWindow();
     window->setScreen(currentScreen);
@@ -138,7 +140,7 @@ ScreenWindow* TEmulation::createWindow()
 /*!
 */
 
-TEmulation::~TEmulation()
+Emulation::~Emulation()
 {
   QListIterator<ScreenWindow*> windowIter(_windows);
 
@@ -155,9 +157,9 @@ TEmulation::~TEmulation()
 /*! change between primary and alternate screen
 */
 
-void TEmulation::setScreen(int n)
+void Emulation::setScreen(int n)
 {
-  TEScreen *old = currentScreen;
+  Screen *old = currentScreen;
   currentScreen = screen[n&1];
   if (currentScreen != old) 
   {
@@ -172,19 +174,19 @@ void TEmulation::setScreen(int n)
   }
 }
 
-void TEmulation::setHistory(const HistoryType& t)
+void Emulation::setHistory(const HistoryType& t)
 {
   screen[0]->setScroll(t);
 
   showBulk();
 }
 
-const HistoryType& TEmulation::history()
+const HistoryType& Emulation::history()
 {
   return screen[0]->getScroll();
 }
 
-void TEmulation::setCodec(const QTextCodec * qtc)
+void Emulation::setCodec(const QTextCodec * qtc)
 {
   m_codec = qtc;
   delete decoder;
@@ -193,28 +195,28 @@ void TEmulation::setCodec(const QTextCodec * qtc)
   emit useUtf8(utf8());
 }
 
-void TEmulation::setCodec(int c)
+void Emulation::setCodec(int c)
 {
   setCodec(c ? QTextCodec::codecForName("utf8")
            : QTextCodec::codecForLocale());
 }
 
-void TEmulation::setKeymap(int no)
+void Emulation::setKeymap(int no)
 {
   keytrans = KeyTrans::find(no);
 }
 
-void TEmulation::setKeymap(const QString &id)
+void Emulation::setKeymap(const QString &id)
 {
   keytrans = KeyTrans::find(id);
 }
 
-QString TEmulation::keymap()
+QString Emulation::keymap()
 {
   return keytrans->id();
 }
 
-int TEmulation::keymapNo()
+int Emulation::keymapNo()
 {
   return keytrans->numb();
 }
@@ -231,7 +233,7 @@ int TEmulation::keymapNo()
 /*!
 */
 
-void TEmulation::onReceiveChar(int c)
+void Emulation::onReceiveChar(int c)
 // process application unicode input to terminal
 // this is a trivial scanner
 {
@@ -257,7 +259,7 @@ void TEmulation::onReceiveChar(int c)
 /*!
 */
 
-void TEmulation::onKeyPress( QKeyEvent* ev )
+void Emulation::onKeyPress( QKeyEvent* ev )
 {
   if (!listenToKeyPress) return; // someone else gets the keys
   emit notifySessionState(NOTIFYNORMAL);
@@ -273,12 +275,12 @@ void TEmulation::onKeyPress( QKeyEvent* ev )
   }
 }
 
-void TEmulation::sendString(const char*)
+void Emulation::sendString(const char*)
 {
     // default implementation does nothing
 }
 
-void TEmulation::onMouse(int /*buttons*/, int /*column*/, int /*row*/, int /*eventType*/)
+void Emulation::onMouse(int /*buttons*/, int /*column*/, int /*row*/, int /*eventType*/)
 {
     // default implementation does nothing
 }
@@ -290,7 +292,7 @@ void TEmulation::onMouse(int /*buttons*/, int /*column*/, int /*row*/, int /*eve
 TODO: Character composition from the old code.  See #96536
 */
 
-void TEmulation::onReceiveBlock(const char* text, int length)
+void Emulation::onReceiveBlock(const char* text, int length)
 {
 	emit notifySessionState(NOTIFYACTIVITY);
 
@@ -328,7 +330,7 @@ void TEmulation::onReceiveBlock(const char* text, int length)
 //can find an alternative way of handling the check.  
 
 
-/*void TEmulation::onRcvBlock(const char *s, int len)
+/*void Emulation::onRcvBlock(const char *s, int len)
 {
   emit notifySessionState(NOTIFYACTIVITY);
   
@@ -369,19 +371,19 @@ void TEmulation::onReceiveBlock(const char* text, int length)
 // Selection --------------------------------------------------------------- --
 
 #if 0
-void TEmulation::onSelectionBegin(const int x, const int y, const bool columnmode) {
+void Emulation::onSelectionBegin(const int x, const int y, const bool columnmode) {
   if (!connected) return;
   currentScreen->setSelectionStart( x,y,columnmode);
   showBulk();
 }
 
-void TEmulation::onSelectionExtend(const int x, const int y) {
+void Emulation::onSelectionExtend(const int x, const int y) {
   if (!connected) return;
   currentScreen->setSelectionEnd(x,y);
   showBulk();
 }
 
-void TEmulation::setSelection(const bool preserve_line_breaks) {
+void Emulation::setSelection(const bool preserve_line_breaks) {
   if (!connected) return;
   QString t = currentScreen->selectedText(preserve_line_breaks);
   if (!t.isNull()) 
@@ -393,13 +395,13 @@ void TEmulation::setSelection(const bool preserve_line_breaks) {
   }
 }
 
-void TEmulation::testIsSelected(const int x, const int y, bool &selected)
+void Emulation::testIsSelected(const int x, const int y, bool &selected)
 {
   if (!connected) return;
   selected=currentScreen->isSelected(x,y);
 }
 
-void TEmulation::clearSelection() {
+void Emulation::clearSelection() {
   if (!connected) return;
   currentScreen->clearSelection();
   showBulk();
@@ -407,12 +409,12 @@ void TEmulation::clearSelection() {
 
 #endif 
 
-void TEmulation::isBusySelecting(bool busy)
+void Emulation::isBusySelecting(bool busy)
 {
   currentScreen->setBusySelecting(busy);
 }
 
-void TEmulation::writeToStream(QTextStream* stream , 
+void Emulation::writeToStream(QTextStream* stream , 
                                TerminalCharacterDecoder* decoder , 
                                int startLine ,
                                int endLine) 
@@ -420,18 +422,18 @@ void TEmulation::writeToStream(QTextStream* stream ,
   currentScreen->writeToStream(stream,decoder,startLine,endLine);
 }
 
-int TEmulation::lines()
+int Emulation::lines()
 {
     // sum number of lines currently on screen plus number of lines in history
     return currentScreen->getLines() + currentScreen->getHistLines();
 }
 
-void TEmulation::findTextBegin()
+void Emulation::findTextBegin()
 {
   m_findPos = -1;
 }
 
-bool TEmulation::findTextNext( const QString &str, bool forward, bool isCaseSensitive, bool isRegExp )
+bool Emulation::findTextNext( const QString &str, bool forward, bool isCaseSensitive, bool isRegExp )
 {
   int pos = -1;
   QString string;
@@ -532,7 +534,7 @@ bool TEmulation::findTextNext( const QString &str, bool forward, bool isCaseSens
 
 /*!
 */
-void TEmulation::showBulk()
+void Emulation::showBulk()
 {
     bulk_timer1.stop();
     bulk_timer2.stop();
@@ -540,7 +542,7 @@ void TEmulation::showBulk()
     emit updateViews();
 }
 
-void TEmulation::bufferedUpdate()
+void Emulation::bufferedUpdate()
 {
    bulk_timer1.setSingleShot(true);
    bulk_timer1.start(BULK_TIMEOUT1);
@@ -551,12 +553,12 @@ void TEmulation::bufferedUpdate()
    }
 }
 
-char TEmulation::getErase()
+char Emulation::getErase()
 {
   return '\b';
 }
 
-void TEmulation::setListenToKeyPress(bool l)
+void Emulation::setListenToKeyPress(bool l)
 {
   listenToKeyPress=l;
 }
@@ -569,7 +571,7 @@ void TEmulation::setListenToKeyPress(bool l)
     and to the related serial line.
 */
 
-void TEmulation::onImageSizeChange(int lines, int columns)
+void Emulation::onImageSizeChange(int lines, int columns)
 {
   Q_ASSERT( lines > 0 );
   Q_ASSERT( columns > 0 );
@@ -580,23 +582,23 @@ void TEmulation::onImageSizeChange(int lines, int columns)
   bufferedUpdate();
 }
 
-QSize TEmulation::imageSize()
+QSize Emulation::imageSize()
 {
   return QSize(currentScreen->getColumns(), currentScreen->getLines());
 }
 
-void TEmulation::onHistoryCursorChange(int cursor)
+void Emulation::onHistoryCursorChange(int cursor)
 {
   currentScreen->setHistCursor(cursor);
 
   bufferedUpdate();
 }
 
-void TEmulation::setColumns(int columns)
+void Emulation::setColumns(int columns)
 {
   //FIXME: this goes strange ways.
   //       Can we put this straight or explain it at least?
   emit setColumnCount(columns);
 }
 
-#include "TEmulation.moc"
+#include "Emulation.moc"

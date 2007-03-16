@@ -24,6 +24,9 @@
 #include <QFrame>
 #include <QTimer>
 
+namespace Konsole
+{
+
 /** 
  * A translucent frame which is useful as an overlay on top of other widgets
  * to display status information and so on.
@@ -55,6 +58,8 @@ private:
 	QTimer displayTimer;
 	int elapsed;
 	
+};
+
 };
 
 #endif //OVERLAY_FRAME_H

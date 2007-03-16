@@ -58,6 +58,9 @@
 class QDateTime;
 class KConfig;
 
+namespace Konsole
+{
+
 class ColorSchema
 {
 friend class ColorSchemaList; //only for resetting serial to one when deleting the list
@@ -241,6 +244,8 @@ private:
 	* the defaultSchema, with serial number 0.
 	*/
 	ColorSchema *defaultSchema;
-} ;
+};
+
+};
 
 #endif

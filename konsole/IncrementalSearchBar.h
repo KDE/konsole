@@ -28,6 +28,9 @@ class QLabel;
 class QLineEdit;
 class QProgressBar;
 
+namespace Konsole
+{
+
 /** 
  * A widget which allows users to search incrementally through a document for a 
  * a text string or regular expression.
@@ -182,4 +185,5 @@ private:
 
 };
 
+};
 #endif // INCREMENTALSEARCHBAR_H

@@ -23,7 +23,10 @@
 // Qt
 #include <QObject>
 
-class TEScreen;
+namespace Konsole
+{
+
+class Screen;
 
 /**
  * Provides a window onto a section of a terminal screen.
@@ -50,7 +53,7 @@ public:
      * Constructs a new screen window with the given parent.
      * A screen must be specified by calling setScreen() before calling getImage() or getLineProperties().
      *
-     * You should not call this constructor directly, instead use the TEmulation::createWindow() method
+     * You should not call this constructor directly, instead use the Emulation::createWindow() method
      * to create a window on the emulation which you wish to view.  This allows the emulation
      * to notify the window when the associated screen has changed and synchronise selection updates
      * between all views on a session.
@@ -58,9 +61,9 @@ public:
     ScreenWindow(QObject* parent = 0);
 
     /** Sets the screen which this window looks onto */
-    void setScreen(TEScreen* screen);
+    void setScreen(Screen* screen);
     /** Returns the screen which this window looks onto */
-    TEScreen* screen() const;
+    Screen* screen() const;
 
     /** 
      * Returns the image of characters which are currently visible through this window
@@ -188,7 +191,7 @@ signals:
     void selectionChanged();
 
 private:
-    TEScreen* _screen; // see setScreen() , screen()
+    Screen* _screen; // see setScreen() , screen()
 
     int  _currentLine; // see scrollTo() , currentLine()
     bool _trackOutput; // see setTrackOutput() , trackOutput() 
@@ -196,4 +199,5 @@ private:
                        // the last call to resetScrollCount()
 };
 
+};
 #endif // SCREENWINDOW_H

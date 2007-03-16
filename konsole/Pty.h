@@ -27,14 +27,17 @@
 #include <QVector>
 #include <QList>
 
-class TEPty: public KProcess
+namespace Konsole
+{
+
+class Pty: public KProcess
 {
 Q_OBJECT
 
   public:
 
-    TEPty();
-    ~TEPty();
+    Pty();
+    ~Pty();
 
   public:
 
@@ -112,6 +115,8 @@ Q_OBJECT
     };
     QList<SendJob> pendingSendJobs;
     bool m_bufferFull;
+};
+
 };
 
 #endif
