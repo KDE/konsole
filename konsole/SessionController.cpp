@@ -6,7 +6,7 @@
 #include <KRun>
 #include <KToggleAction>
 #include <KUrl>
-
+#include <KXMLGUIFactory>
 #include <kdebug.h>
 
 // Konsole
@@ -57,6 +57,10 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     // destroy session controller if either the view or the session are destroyed
     connect( _session , SIGNAL(destroyed()) , this , SLOT(deleteLater()) );
     connect( _view , SIGNAL(destroyed()) , this , SLOT(deleteLater()) );
+
+    // listen for popup menu requests
+    connect( _view , SIGNAL(configureRequest(TerminalDisplay*,int,int,int)) , this,
+            SLOT(showDisplayContextMenu(TerminalDisplay*,int,int,int)) );
 
     // listen to activity / silence notifications from session
     connect( _session , SIGNAL(notifySessionState(Session*,int)) , this ,
@@ -451,6 +455,16 @@ void SessionController::sessionTitleChanged()
        //TODO - use _session->displayTitle() here. 
        setTitle( _session->title() ); 
 }
+
+void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , int state, int x, int y)
+{
+    QMenu* popup = dynamic_cast<QMenu*>(factory()->container("session-popup-menu",this));
+    
+    Q_ASSERT( popup );
+
+    popup->exec( _view->mapToGlobal(QPoint(x,y)) );
+}
+
 void SessionController::sessionStateChanged(Session* /*session*/ , int state)
 {
     //TODO - Share icons across sessions ( possible using a static QHash<QString,QIcon> variable 
@@ -513,8 +527,8 @@ QList<SessionPtr> SessionTask::sessions() const
     return _sessions;
 }
 
-SaveHistoryTask::SaveHistoryTask()
-    : SessionTask()
+SaveHistoryTask::SaveHistoryTask(QObject* parent)
+    : SessionTask(parent)
 {
 }
 SaveHistoryTask::~SaveHistoryTask()

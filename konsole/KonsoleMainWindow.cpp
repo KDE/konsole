@@ -27,6 +27,7 @@
 #include <KKeyDialog>
 #include <KLocale>
 #include <KMenu>
+#include <KMenuBar>
 #include <KService>
 #include <KToolInvocation>
 #include <kstandardaction.h>
@@ -101,6 +102,11 @@ void KonsoleMainWindow::setupActions()
     KActionMenu* bookmarkMenu = new KActionMenu(i18n("&Bookmarks") , collection );
     _bookmarkHandler = new KonsoleBookmarkHandler( collection , bookmarkMenu->menu() , true );
     collection->addAction("bookmark" , bookmarkMenu);
+
+    // View Menu
+    QAction* hideMenuBarAction = collection->addAction("hide-menubar");
+    hideMenuBarAction->setText( i18n("Hide MenuBar") );
+    connect( hideMenuBarAction , SIGNAL(triggered()) , menuBar() , SLOT(hide()) );
 
     // Settings Menu
     KStandardAction::configureNotifications( 0 , 0 , collection  );

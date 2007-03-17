@@ -23,6 +23,8 @@
             <Action name="split-view"/>
             <Action name="detach-view"/>
             <Action name="merge-windows"/>
+            <Separator/>
+            <Action name="hide-menubar"/>
         </Menu>
         <Action name="bookmark"/>
         <Menu name="settings"><text>Settings</text>

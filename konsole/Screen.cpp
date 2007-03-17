@@ -1590,33 +1590,3 @@ void Screen::setLineProperty(LineProperty property , bool enable)
 		lineProperties[cuY] &= ~property;
 	}
 }
-
-#if 0
-ScreenCursor::ScreenCursor()
-: _cursor(0)
-{
-}
-
-void ScreenCursor::setCursor(int line)
-{
-    if ( line > 0 )
-        _cursor = line;
-}
-
-int ScreenCursor::cursor() const
-{
-    return _cursor;
-}
-
-bool ScreenCursor::atEnd() const
-{
-    // not implemented yet
-    assert(0);
-}
-
-bool ScreenCursor::operator==(const ScreenCursor& other) const
-{
-    return other.characterursor() == cursor();
-}
-
-#endif 

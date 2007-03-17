@@ -448,32 +448,6 @@ private: // helper
     static Character defaultChar;
 };
 
-#if 0 
-class ScreenCursor
-{
-friend class Screen;
-
-public:
-    ScreenCursor();
-
-    void setCursor(int line);
-    int cursor() const;
-
-    bool atEnd() const;
-
-    bool operator==(const ScreenCursor& other) const;
-
-private:
-    int _cursor;
-    int _scrolledLines;
-};
-
-inline uint qHash(const ScreenCursor& cursor)
-{
-    return qHash(cursor.characterursor());
-}
-#endif 
-
 };
 
 #endif // TESCREEN_H

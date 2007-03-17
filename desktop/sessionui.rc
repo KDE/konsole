@@ -31,4 +31,11 @@
             <Action name="debug-process"/>
         </Menu>!-->
     </MenuBar>
+    <Menu name="session-popup-menu">
+        <Action name="copy"/>
+        <Action name="paste"/>
+        <Action name="clear-history-and-reset"/>
+        <Separator/>
+        <Action name="close-session"/>
+    </Menu>
 </kpartgui>

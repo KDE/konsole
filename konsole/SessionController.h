@@ -120,6 +120,7 @@ private slots:
     void monitorSilence(bool monitor);
 
     // other
+    void showDisplayContextMenu(TerminalDisplay* display , int state , int x , int y);
     void sessionStateChanged(Session* session,int state);
     void sessionTitleChanged();
     void searchTextChanged(const QString& text);
@@ -128,19 +129,20 @@ private slots:
 
     // debugging slots
     void debugProcess();
+
 private:
     void setupActions();
     void removeSearchFilter(); // remove and delete the current search filter if set
 
 private:
-    Session* _session;
-    TerminalDisplay*  _view;
+    Session*            _session;
+    TerminalDisplay*    _view;
     KIcon      _sessionIcon;
     QString    _sessionIconName;
     int        _previousState;
 
-    UrlFilter* _viewUrlFilter;
-    RegExpFilter* _searchFilter; 
+    UrlFilter*      _viewUrlFilter;
+    RegExpFilter*   _searchFilter; 
 
     KAction* _searchToggleAction;
 
@@ -214,7 +216,7 @@ Q_OBJECT
   
 public:
     /** Constructs a new task to save session output to URLs */
-    SaveHistoryTask();
+    SaveHistoryTask(QObject* parent = 0);
     virtual ~SaveHistoryTask();
 
     /**
@@ -278,7 +280,7 @@ public:
         Backwards  
     };
 
-    SearchHistoryTask(QObject* parent);
+    SearchHistoryTask(QObject* parent = 0);
 
     /** Sets the regular expression which is searched for when execute() is called */
     void setRegExp(const QRegExp& regExp);
