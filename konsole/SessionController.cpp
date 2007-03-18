@@ -597,7 +597,8 @@ void SaveHistoryTask::execute()
         jobInfo.lastLineFetched = -1;  // when each request for data comes in from the KIO subsystem
                                        // lastLineFetched is used to keep track of how much of the history
                                        // has already been sent, and where the next request should continue
-                                       // from
+                                       // from.  
+                                       // this is set to -1 to indicate the job has just been started
 
         if ( dialog->currentMimeFilter() == "text/html" )
            jobInfo.decoder = new HTMLDecoder();
@@ -626,9 +627,14 @@ void SaveHistoryTask::jobDataRequested(KIO::Job* job , QByteArray& data)
     // transfer LINES_PER_REQUEST lines from the session's history to the save location
     if ( info.session )
     {
+        // note:  when retrieving lines from the emulation, the first line is at index 0.
+        
         int sessionLines = info.session->getEmulation()->lines();
 
-        int copyUpToLine = qMin( info.lastLineFetched + LINES_PER_REQUEST , sessionLines );
+        if ( sessionLines-1 == info.lastLineFetched )
+            return; // if there is no more data to transfer then stop the job
+
+        int copyUpToLine = qMin( info.lastLineFetched + LINES_PER_REQUEST , sessionLines-1 );
 
         QTextStream stream(&data,QIODevice::ReadWrite);
         info.session->getEmulation()->writeToStream( &stream , info.decoder , info.lastLineFetched+1 , copyUpToLine );
@@ -637,7 +643,7 @@ void SaveHistoryTask::jobDataRequested(KIO::Job* job , QByteArray& data)
         // to ensure that the next block of lines begins on a new line       
         //
         // FIXME - There is still an extra new-line at the end of the save data.   
-        if ( copyUpToLine < sessionLines )
+        if ( copyUpToLine <= sessionLines-1 )
         {
             stream << '\n';
         }
@@ -678,27 +684,6 @@ void SearchHistoryTask::execute()
         emulation->findTextNext(_regExp.pattern() , true , false , false );
     }
 }
-
-#if 0
-void SearchHistoryTask::execute()
-{
-    // not yet implemented
-    
-    Q_ASSERT( sessions().count() == 1 );
-
-    if ( _thread && _thread->isRunning() )
-    {
-        _thread->wait();
-    }
-    else
-    {
-        _thread = new SearchHistoryThread( sessions().first() , 0 ); //, this );
-    }
-
-    _thread->setRegExp(regExp());
-    _thread->start();
-}
-#endif 
 
 SearchHistoryTask::SearchHistoryTask(QObject* parent)
     : SessionTask(parent)
@@ -741,44 +726,5 @@ QRegExp SearchHistoryTask::regExp() const
 {
     return _regExp;
 }
-
-#if 0
-SearchHistoryThread::SearchHistoryThread(SessionPtr session , QObject* parent)
-    : QThread(parent)
-    , _session(session)
-    , _lastLineFetched(-1)
-    , _decoder( new PlainTextDecoder() )
-{
-}
-
-SearchHistoryThread::~SearchHistoryThread()
-{
-    qDebug() << "thread died";
-    delete _decoder;
-}
-
-void SearchHistoryThread::setRegExp(const QRegExp& expression)
-{
-    _session->getEmulation()->findTextBegin();
-    _regExp = expression;
-}
-QRegExp SearchHistoryThread::regExp() const
-{
-    return _regExp;
-}
-
-void SearchHistoryThread::run() 
-{
-    //QTextStream stream(&data,QIODevice::ReadWrite);
-    //_session->getEmulation()->writeToStream( &stream , _decoder , 0 ,  );
-
-    Emulation* emulation = _session->getEmulation();
-
-    qDebug() << "searching for " << _regExp.pattern();
-    emulation->findTextNext(_regExp.pattern() , true , false , false );
-
-    qDebug() << "search complete";
-}
-#endif
 
 #include "SessionController.moc"

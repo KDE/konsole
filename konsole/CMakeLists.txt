@@ -60,9 +60,9 @@ set(konsole_KDEINIT_SRCS
         HistorySizeDialog.cpp
         IncrementalSearchBar.cpp
         KeyTrans.cpp
-        KonsoleApp.cpp
-        KonsoleBookmarkHandler.cpp
-        KonsoleMainWindow.cpp
+        Application.cpp
+        BookmarkHandler.cpp
+        MainWindow.cpp
         ProcessInfo.cpp
         ScreenWindow.cpp
         SessionController.cpp

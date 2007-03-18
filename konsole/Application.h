@@ -31,7 +31,7 @@ namespace Konsole
 class SessionList;
 class SessionManager;
 class ViewManager;
-class KonsoleMainWindow;
+class MainWindow;
 class Session;
 
 /**
@@ -45,13 +45,13 @@ class Session;
  *
  * The factory used to create new terminal sessions can be retrieved using the sessionManager() accessor.
  */
-class KonsoleApp : public KUniqueApplication
+class Application : public KUniqueApplication
 {
 Q_OBJECT
 
 public:
     /** Constructs a new Konsole application. */
-    KonsoleApp();
+    Application();
 
     /** Creates a new main window and opens a default terminal session */
     virtual int newInstance();
@@ -60,14 +60,14 @@ public:
      * Creates a new, empty main window and returns a pointer to the created window 
      * 
      * DESIGN ISSUE:  This is the only way that new main windows should be created because
-     *                KonsoleApp needs to connect up certain signals from the window to itself
-     *                perhaps it would be better if KonsoleMainWindow hooked itself up to KonsoleApp
+     *                Application needs to connect up certain signals from the window to itself
+     *                perhaps it would be better if MainWindow hooked itself up to Application
      *                rather than the other way round?  
      */
-    KonsoleMainWindow* newMainWindow();
+    MainWindow* newMainWindow();
 
-    /** Returns the KonsoleApp instance */
-    static KonsoleApp* self();
+    /** Returns the Application instance */
+    static Application* self();
 
     /** Returns the session manager */
     SessionManager* sessionManager();

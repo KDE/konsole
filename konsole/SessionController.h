@@ -318,32 +318,6 @@ private:
     static QPointer<SearchHistoryThread> _thread;
 };
 
-#if 0
-class SearchHistoryThread : public QThread
-{
-Q_OBJECT
-
-public:
-    SearchHistoryThread(SessionPtr session , QObject* parent);
-    virtual ~SearchHistoryThread();
-
-    void setRegExp(const QRegExp& expression);
-    QRegExp regExp() const;
-
-signals:
-    void foundMatch(Session* session , int startLine , int startColumn , int endLine , int endColumn );
-
-protected:
-    virtual void run();
-private:
-    SessionPtr _session;
-    int _lastLineFetched;
-    TerminalCharacterDecoder* _decoder;
-    QRegExp _regExp;
-
-};
-#endif 
-
 };
 
 #endif //SESSIONCONTROLLER_H

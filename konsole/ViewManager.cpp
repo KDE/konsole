@@ -27,8 +27,8 @@
 #include <KXMLGUIFactory>
 
 // Konsole
-#include "KonsoleBookmarkHandler.h"
-#include "KonsoleMainWindow.h"
+#include "BookmarkHandler.h"
+#include "MainWindow.h"
 #include "Session.h"
 #include "TerminalDisplay.h"
 #include "schema.h"
@@ -40,7 +40,7 @@
 
 using namespace Konsole;
 
-ViewManager::ViewManager(KonsoleMainWindow* mainWindow)
+ViewManager::ViewManager(MainWindow* mainWindow)
     : QObject(mainWindow)
     , _mainWindow(mainWindow)
     , _viewSplitter(0)

@@ -395,8 +395,8 @@ private:
 
   QActionGroup  *m_sessionGroup;
 
-  KonsoleBookmarkHandler *bookmarkHandler;
-  KonsoleBookmarkHandler *bookmarkHandlerSession;
+  BookmarkHandler *bookmarkHandler;
+  BookmarkHandler *bookmarkHandlerSession;
 
   KFindDialog* m_finddialog;
   KFileDialog* saveHistoryDialog;

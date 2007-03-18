@@ -963,7 +963,7 @@ void Konsole::makeBasicGUI()
   KAcceleratorManager::manage( m_view );
   if (KAuthorized::authorizeKAction("bookmarks"))
   {
-    bookmarkHandler = new KonsoleBookmarkHandler( this, true );
+    bookmarkHandler = new BookmarkHandler( this, true );
     m_bookmarks = bookmarkHandler->menu();
     // call manually to disable accelerator c-b for add-bookmark initially.
     bookmarks_menu_check();
@@ -985,7 +985,7 @@ void Konsole::makeBasicGUI()
   if (KAuthorized::authorizeKAction("bookmarks"))
   {
     // Bookmarks that open new sessions.
-    bookmarkHandlerSession = new KonsoleBookmarkHandler( this, false );
+    bookmarkHandlerSession = new BookmarkHandler( this, false );
     m_bookmarksSession = bookmarkHandlerSession->menu();
   }
 

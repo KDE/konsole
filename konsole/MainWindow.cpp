@@ -35,16 +35,16 @@
 
 // Konsole
 #include "IncrementalSearchBar.h"
-#include "KonsoleApp.h"
-#include "KonsoleBookmarkHandler.h"
-#include "KonsoleMainWindow.h"
+#include "Application.h"
+#include "BookmarkHandler.h"
+#include "MainWindow.h"
 #include "SessionList.h"
 #include "ViewManager.h"
 #include "ViewSplitter.h"
 
 using namespace Konsole;
 
-KonsoleMainWindow::KonsoleMainWindow()
+MainWindow::MainWindow()
  : KMainWindow() ,
    _bookmarkHandler(0)
 {
@@ -70,17 +70,17 @@ KonsoleMainWindow::KonsoleMainWindow()
 
 }
 
-ViewManager* KonsoleMainWindow::viewManager() const
+ViewManager* MainWindow::viewManager() const
 {
     return _viewManager;
 }
 
-IncrementalSearchBar* KonsoleMainWindow::searchBar() const
+IncrementalSearchBar* MainWindow::searchBar() const
 {
     return _searchBar;
 }
 
-void KonsoleMainWindow::setupActions()
+void MainWindow::setupActions()
 {
     KActionCollection* collection = actionCollection();
 
@@ -96,11 +96,11 @@ void KonsoleMainWindow::setupActions()
     connect( newTabAction , SIGNAL(triggered()) , this , SLOT(newTab()) );
     connect( newWindowAction , SIGNAL(triggered()) , this , SLOT(newWindow()) );
 
-    KStandardAction::quit( KonsoleApp::self() , SLOT(quit()) , collection );
+    KStandardAction::quit( Application::self() , SLOT(quit()) , collection );
 
     // Bookmark Menu
     KActionMenu* bookmarkMenu = new KActionMenu(i18n("&Bookmarks") , collection );
-    _bookmarkHandler = new KonsoleBookmarkHandler( collection , bookmarkMenu->menu() , true );
+    _bookmarkHandler = new BookmarkHandler( collection , bookmarkMenu->menu() , true );
     collection->addAction("bookmark" , bookmarkMenu);
 
     // View Menu
@@ -114,12 +114,12 @@ void KonsoleMainWindow::setupActions()
     KStandardAction::preferences( this , SLOT(showPreferencesDialog()) , collection ); 
 }
 
-KonsoleBookmarkHandler* KonsoleMainWindow::bookmarkHandler() const
+BookmarkHandler* MainWindow::bookmarkHandler() const
 {
     return _bookmarkHandler;
 }
 
-void KonsoleMainWindow::setSessionList(SessionList* list)
+void MainWindow::setSessionList(SessionList* list)
 {
     unplugActionList("new-session-types");
     plugActionList( "new-session-types" , list->actions() );
@@ -128,42 +128,42 @@ void KonsoleMainWindow::setSessionList(SessionList* list)
             SLOT(sessionSelected(const QString&)) );
 }
 
-void KonsoleMainWindow::newTab()
+void MainWindow::newTab()
 {
     emit requestSession(QString(),_viewManager);
 }
 
-void KonsoleMainWindow::newWindow()
+void MainWindow::newWindow()
 {
-    KonsoleApp::self()->newInstance();
+    Application::self()->newInstance();
 }
 
-void KonsoleMainWindow::showShortcutsDialog()
+void MainWindow::showShortcutsDialog()
 {
     KKeyDialog::configure( actionCollection() );
 }
 
-void KonsoleMainWindow::sessionSelected(const QString& key)
+void MainWindow::sessionSelected(const QString& key)
 {
     emit requestSession(key,_viewManager);
 }
 
-void KonsoleMainWindow::showPreferencesDialog()
+void MainWindow::showPreferencesDialog()
 {
     KToolInvocation::startServiceByDesktopName("konsole",QString());
 }
 
-void KonsoleMainWindow::mergeWindows()
+void MainWindow::mergeWindows()
 {
     // merges all of the open Konsole windows into this window
     // by merging the view manager associated with the other Konsole windows
     // into this window's view manager
 
-    QListIterator<QWidget*> topLevelIter( KonsoleApp::topLevelWidgets() );
+    QListIterator<QWidget*> topLevelIter( Application::topLevelWidgets() );
 
     while (topLevelIter.hasNext())
     {
-        KonsoleMainWindow* window = dynamic_cast<KonsoleMainWindow*>(topLevelIter.next());
+        MainWindow* window = dynamic_cast<MainWindow*>(topLevelIter.next());
         if ( window && window != this )
         {
             _viewManager->merge( window->_viewManager );
@@ -172,7 +172,7 @@ void KonsoleMainWindow::mergeWindows()
     }
 }
 
-void KonsoleMainWindow::setupWidgets()
+void MainWindow::setupWidgets()
 {
     QWidget* widget = new QWidget(this);
     QVBoxLayout* layout = new QVBoxLayout();
@@ -190,4 +190,4 @@ void KonsoleMainWindow::setupWidgets()
     setCentralWidget(widget);
 }
 
-#include "KonsoleMainWindow.moc"
+#include "MainWindow.moc"

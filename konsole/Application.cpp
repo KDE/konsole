@@ -22,8 +22,8 @@
 #include "SessionList.h"
 #include "SessionManager.h"
 #include "KeyTrans.h"
-#include "KonsoleApp.h"
-#include "KonsoleMainWindow.h"
+#include "Application.h"
+#include "MainWindow.h"
 #include "Session.h"
 #include "ViewManager.h"
 
@@ -33,10 +33,10 @@
 using namespace Konsole;
 
 // global variable to determine whether or not true transparency should be used
-// this should be made into a static class variable of KonsoleApp
+// this should be made into a static class variable of Application
 int true_transparency = true;
 
-KonsoleApp::KonsoleApp()
+Application::Application()
     : _sessionList(0)
 {
     // create session manager
@@ -46,14 +46,14 @@ KonsoleApp::KonsoleApp()
     KeyTrans::loadAll();
 };
 
-KonsoleApp* KonsoleApp::self()
+Application* Application::self()
 {
-    return (KonsoleApp*)KApp;
+    return (Application*)KApp;
 }
 
-KonsoleMainWindow* KonsoleApp::newMainWindow()
+MainWindow* Application::newMainWindow()
 {
-    KonsoleMainWindow* window = new KonsoleMainWindow();
+    MainWindow* window = new MainWindow();
     window->setSessionList( new SessionList(sessionManager(),window) );
 
     connect( window , SIGNAL(requestSession(const QString&,ViewManager*)), 
@@ -63,9 +63,9 @@ KonsoleMainWindow* KonsoleApp::newMainWindow()
     return window;
 }
 
-int KonsoleApp::newInstance()
+int Application::newInstance()
 {
-    KonsoleMainWindow* window = newMainWindow();
+    MainWindow* window = newMainWindow();
 
     createSession( QString() , window->viewManager() );
     window->show();
@@ -73,19 +73,19 @@ int KonsoleApp::newInstance()
     return 0;
 }
 
-SessionManager* KonsoleApp::sessionManager()
+SessionManager* Application::sessionManager()
 {
     return _sessionManager;
 }
 
-void KonsoleApp::detachView(Session* session)
+void Application::detachView(Session* session)
 {
-    KonsoleMainWindow* window = newMainWindow();
+    MainWindow* window = newMainWindow();
     window->viewManager()->createView(session);
     window->show();
 }
 
-void KonsoleApp::createSession(const QString& key , ViewManager* view)
+void Application::createSession(const QString& key , ViewManager* view)
 {
     Session* session = _sessionManager->createSession(key);
     session->setListenToKeyPress(true); 
@@ -98,4 +98,4 @@ void KonsoleApp::createSession(const QString& key , ViewManager* view)
     session->run();
 }
 
-#include "KonsoleApp.moc"
+#include "Application.moc"

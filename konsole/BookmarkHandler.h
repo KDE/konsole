@@ -45,7 +45,7 @@ class SessionController;
  *
  * When the user selects a bookmark, the openUrl() signal is emitted.
  */
-class KonsoleBookmarkHandler : public QObject, public KBookmarkOwner
+class BookmarkHandler : public QObject, public KBookmarkOwner
 {
     Q_OBJECT
 
@@ -58,8 +58,8 @@ public:
      * @param menu The menu which the bookmark actions should be added to
      * @param toplevel TODO: Document me
      */
-    KonsoleBookmarkHandler( KActionCollection* collection , KMenu* menu, bool toplevel );
-    ~KonsoleBookmarkHandler();
+    BookmarkHandler( KActionCollection* collection , KMenu* menu, bool toplevel );
+    ~BookmarkHandler();
 
     QMenu * popupMenu();
 

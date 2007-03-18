@@ -29,28 +29,28 @@ class IncrementalSearchBar;
 class ViewSplitter;
 class ViewManager;
 class SessionList;
-class KonsoleBookmarkHandler;
+class BookmarkHandler;
 
 /**
  * The main window.  This contains the menus and an area which contains the terminal displays.
  *
  * The main window does not create the views or the container widgets which hold the views.
- * This is done by the ViewManager class.  When a KonsoleMainWindow is instantiated, it creates
+ * This is done by the ViewManager class.  When a MainWindow is instantiated, it creates
  * a new ViewManager.  The ViewManager can then be used to create new terminal displays
  * inside the window.
  *
- * Do not construct new main windows directly, use KonsoleApp's newMainWindow() method.
+ * Do not construct new main windows directly, use Application's newMainWindow() method.
  */
-class KonsoleMainWindow : public KMainWindow
+class MainWindow : public KMainWindow
 {
     Q_OBJECT
 
     public:
         /** 
-         * Constructs a new main window.  Do not create new main windows directly, use KonsoleApp's
+         * Constructs a new main window.  Do not create new main windows directly, use Application's
          * newMainWindow() method instead.
          */
-        KonsoleMainWindow();
+        MainWindow();
 
         /**
          * Returns the view manager associated with this window.  The view manager can be used to 
@@ -70,12 +70,12 @@ class KonsoleMainWindow : public KMainWindow
         /**
          * Returns the bookmark handler associated with this window.
          */
-        KonsoleBookmarkHandler* bookmarkHandler() const;
+        BookmarkHandler* bookmarkHandler() const;
 
     public slots:
         /** 
-         * Merges all of the KonsoleMainWindow widgets in the application into this window.
-         * Note:  Only the active container in other KonsoleMainWindow widgets are considered,
+         * Merges all of the MainWindow widgets in the application into this window.
+         * Note:  Only the active container in other MainWindow widgets are considered,
          * other containers are currently just deleted
          */
         void mergeWindows();
@@ -102,7 +102,7 @@ class KonsoleMainWindow : public KMainWindow
 
     private:
         ViewManager*  _viewManager;
-        KonsoleBookmarkHandler* _bookmarkHandler;
+        BookmarkHandler* _bookmarkHandler;
         IncrementalSearchBar* _searchBar;
 };
 

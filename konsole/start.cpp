@@ -22,7 +22,7 @@
 #include <KCmdLineArgs>
 #include <KLocale>
 
-#include "KonsoleApp.h"
+#include "Application.h"
 
 // bump the version to 2.0 before the KDE 4 release
 #define KONSOLE_VERSION "1.9"
@@ -62,7 +62,7 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
         exit(0);
     }
 
-    KonsoleApp app;
+    Application app;
     return app.exec();    
 }
 

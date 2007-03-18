@@ -59,7 +59,9 @@ public:
      * A unique identifier representing the data displayed by the view associated with this
      * ViewProperties instance.
      *
-     * This can be used when dragging and dropping views between windows so that
+     * TODO: Finish implementation and documentation 
+     *
+     * This can be used when dragging and dropping views between windows so that [ FINISH ME ]
      */
     int identifier() const;
 

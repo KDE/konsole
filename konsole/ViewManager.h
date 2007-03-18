@@ -30,7 +30,7 @@ class KToggleAction;
 namespace Konsole
 {
 
-class KonsoleMainWindow;
+class MainWindow;
 class Session;
 class TerminalDisplay;
 
@@ -68,7 +68,7 @@ public:
      * Constructs a new view manager associated with @p mainWindow, and
      * adds a view container widget to the main window
      */
-    ViewManager(KonsoleMainWindow* mainWindow);
+    ViewManager(MainWindow* mainWindow);
     ~ViewManager();
 
     /**
@@ -137,7 +137,7 @@ private:
     SessionController* createController(Session* session , TerminalDisplay* display);
 
 private:
-    KonsoleMainWindow*          _mainWindow;
+    MainWindow*          _mainWindow;
     KToggleAction*              _splitViewAction;
     ViewSplitter*               _viewSplitter;
     QPointer<SessionController> _pluggedController;

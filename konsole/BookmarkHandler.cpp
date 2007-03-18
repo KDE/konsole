@@ -35,18 +35,18 @@
 #include <KStandardDirs>
 
 // Konsole
-#include "KonsoleBookmarkHandler.h"
+#include "BookmarkHandler.h"
 #include "SessionController.h"
 
 using namespace Konsole;
 
-KonsoleBookmarkHandler::KonsoleBookmarkHandler( KActionCollection* collection, KMenu* menu, bool toplevel )
+BookmarkHandler::BookmarkHandler( KActionCollection* collection, KMenu* menu, bool toplevel )
     : QObject( collection ),
       KBookmarkOwner(),
       m_toplevel(toplevel),
       m_controller( 0 )
 {
-    setObjectName( "KonsoleBookmarkHandler" );
+    setObjectName( "BookmarkHandler" );
 
     m_menu = menu;
 
@@ -80,27 +80,27 @@ KonsoleBookmarkHandler::KonsoleBookmarkHandler( KActionCollection* collection, K
     }
 }
 
-KonsoleBookmarkHandler::~KonsoleBookmarkHandler()
+BookmarkHandler::~BookmarkHandler()
 {
     delete m_bookmarkMenu;
 }
 
-void KonsoleBookmarkHandler::openBookmark( const KBookmark & bm, Qt::MouseButtons, Qt::KeyboardModifiers )
+void BookmarkHandler::openBookmark( const KBookmark & bm, Qt::MouseButtons, Qt::KeyboardModifiers )
 {
     emit openUrl( bm.url() );
 }
 
-bool KonsoleBookmarkHandler::addBookmarkEntry() const
+bool BookmarkHandler::addBookmarkEntry() const
 {
     return m_toplevel;
 }
 
-bool KonsoleBookmarkHandler::editBookmarkEntry() const
+bool BookmarkHandler::editBookmarkEntry() const
 {
     return m_toplevel;
 }
 
-QString KonsoleBookmarkHandler::currentUrl() const
+QString BookmarkHandler::currentUrl() const
 {
     if ( m_controller )
     {
@@ -112,7 +112,7 @@ QString KonsoleBookmarkHandler::currentUrl() const
     }
 }
 
-QString KonsoleBookmarkHandler::currentTitle() const
+QString BookmarkHandler::currentTitle() const
 {
     const KUrl &u = m_controller ? m_controller->url() : KUrl(); 
     if (u.isLocalFile())
@@ -124,13 +124,13 @@ QString KonsoleBookmarkHandler::currentTitle() const
     return u.prettyUrl();
 }
 
-void KonsoleBookmarkHandler::setController( SessionController* controller ) 
+void BookmarkHandler::setController( SessionController* controller ) 
 {
     m_controller = controller;
 }
-SessionController* KonsoleBookmarkHandler::controller() const
+SessionController* BookmarkHandler::controller() const
 {
     return m_controller;
 }
 
-#include "KonsoleBookmarkHandler.moc"
+#include "BookmarkHandler.moc"
