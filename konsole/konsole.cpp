@@ -70,6 +70,7 @@
 #include <kactioncollection.h>
 #include <kactionmenu.h>
 #include <kauthorized.h>
+#include <kprocesscontroller.h>
 #include <kcharsets.h>
 #include <kcolordialog.h>
 #include <kdebug.h>
@@ -91,7 +92,6 @@
 #include <kpalette.h>
 #include <kparts/componentfactory.h>
 #include <kprinter.h>
-#include <kprocctrl.h>
 #include <kregexpeditorinterface.h>
 #include <krun.h>
 #include <kselectaction.h>
