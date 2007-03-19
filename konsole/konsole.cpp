@@ -342,7 +342,7 @@ Konsole::~Konsole()
     }
 
     // Wait a bit for all children to clean themselves up.
-    while(sessions.count() && KProcessController::theKProcessController->waitForProcessExit(1))
+    while(sessions.count() && KProcessController::instance()->waitForProcessExit(1))
         ;
 
     resetScreenSessions();
