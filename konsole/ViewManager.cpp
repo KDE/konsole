@@ -211,10 +211,13 @@ void ViewManager::viewFocused( SessionController* controller )
         controller->setSearchBar( _mainWindow->searchBar() );
 
         // update the caption of the main window to match that of the focused session
+        activeViewTitleChanged(controller);
+
+        // listen for future changes in the focused session's title
         connect( controller , SIGNAL(titleChanged(ViewProperties*)),
                  this       , SLOT(activeViewTitleChanged(ViewProperties*)) );        
-
-
+        
+    
 
         //kDebug() << "Plugged actions for " << controller->session()->displayTitle() << endl;
     }
