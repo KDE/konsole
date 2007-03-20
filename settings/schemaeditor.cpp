@@ -55,9 +55,9 @@ class SchemaListBoxText : public Q3ListBoxText
     SchemaListBoxText(const QString &title, const QString &filename): Q3ListBoxText(title)
     {
       m_filename = filename;
-    };
+    }
 
-    const QString filename() { return m_filename; };
+    const QString filename() { return m_filename; }
 
   private:
     QString m_filename;

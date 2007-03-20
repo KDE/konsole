@@ -83,7 +83,7 @@ public:
 	*/
 	ColorSchema();
 
-	QString relPath() const { return fRelPath; } ;
+	QString relPath() const { return fRelPath; } 
 
 	/**
 	* Check if the schema file whose pathname was given
@@ -149,17 +149,17 @@ protected:
 		ColorEntry& e) ;
 
    public:
-      int numb()                       {/*if (!m_fileRead) rereadSchemaFile();*/return m_numb;};
-      const QString& title()           {if (!m_titleRead) rereadSchemaFile(true);return m_title;};
-      const QString& imagePath()       {if (!m_fileRead) rereadSchemaFile();return m_imagePath;};
-      int alignment()                  {if (!m_fileRead) rereadSchemaFile();return m_alignment;};
-      const ColorEntry* table()        {if (!m_fileRead) rereadSchemaFile();return m_table;};
-      bool useTransparency()           {if (!m_fileRead) rereadSchemaFile();return m_useTransparency;};
-      double tr_x()                    {if (!m_fileRead) rereadSchemaFile();return m_tr_x;};
-      int tr_r()                       {if (!m_fileRead) rereadSchemaFile();return m_tr_r;};
-      int tr_g()                       {if (!m_fileRead) rereadSchemaFile();return m_tr_g;};
-      int tr_b()                       {if (!m_fileRead) rereadSchemaFile();return m_tr_b;};
-      QDateTime* getLastRead()   {return lastRead;};	// Time last checked for updates
+      int numb()                       {/*if (!m_fileRead) rereadSchemaFile();*/return m_numb;}
+      const QString& title()           {if (!m_titleRead) rereadSchemaFile(true);return m_title;}
+      const QString& imagePath()       {if (!m_fileRead) rereadSchemaFile();return m_imagePath;}
+      int alignment()                  {if (!m_fileRead) rereadSchemaFile();return m_alignment;}
+      const ColorEntry* table()        {if (!m_fileRead) rereadSchemaFile();return m_table;}
+      bool useTransparency()           {if (!m_fileRead) rereadSchemaFile();return m_useTransparency;}
+      double tr_x()                    {if (!m_fileRead) rereadSchemaFile();return m_tr_x;}
+      int tr_r()                       {if (!m_fileRead) rereadSchemaFile();return m_tr_r;}
+      int tr_g()                       {if (!m_fileRead) rereadSchemaFile();return m_tr_g;}
+      int tr_b()                       {if (!m_fileRead) rereadSchemaFile();return m_tr_b;}
+      QDateTime* getLastRead()   {return lastRead;}	// Time last checked for updates
 
    private:
       int        m_numb;
@@ -187,11 +187,11 @@ public:
 	* from QPtrList to prevent unsightly -- and perhaps dangerous --
 	* tampering with the ColorSchemaList.
 	*/
-	uint count() const { return Q3PtrList<ColorSchema>::count(); } ;
+	uint count() const { return Q3PtrList<ColorSchema>::count(); } 
 	const ColorSchema *at(unsigned int i)
-		{ return Q3PtrList<ColorSchema>::at(i); } ;
+		{ return Q3PtrList<ColorSchema>::at(i); } 
 
-   void sort() {Q3PtrList<ColorSchema>::sort();};
+   void sort() {Q3PtrList<ColorSchema>::sort();}
 
 	ColorSchemaList();
    virtual ~ColorSchemaList();
@@ -220,7 +220,7 @@ public:
 		ColorSchema *p = find(path);
 		if (p) return p;
 		return defaultSchema;
-	} ;
+	} 
 protected:
    virtual int compareItems(Q3PtrCollection::Item item1, Q3PtrCollection::Item item2);
 

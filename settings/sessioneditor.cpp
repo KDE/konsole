@@ -42,9 +42,9 @@ class SessionListBoxText : public Q3ListBoxText
     SessionListBoxText(const QString &title, const QString &filename): Q3ListBoxText(title)
     {
       m_filename = filename;
-    };
+    }
 
-    const QString filename() { return m_filename; };
+    const QString filename() { return m_filename; }
 
   private:
     QString m_filename;
