@@ -623,7 +623,7 @@ void konsolePart::readProperties()
       delete config;
       config = new KConfig("konsolerc");
   }
-  KConfigGroup cg = config->group("Desktop Entry");
+  cg = config->group("Desktop Entry");
   te->setTerminalSizeHint( cg.readEntry("TerminalSizeHint", true) );
   delete config;
 }
