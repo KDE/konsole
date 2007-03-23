@@ -136,6 +136,7 @@ QColor(0xFF,0xFF,0xFF), 0, 0 )
 
 ColorSchema::ColorSchema(const QString& pathname)
 :m_fileRead(false)
+,m_titleRead(false)
 ,lastRead(new QDateTime())
 {
   //start with a valid time, aleXXX
@@ -159,6 +160,7 @@ ColorSchema::ColorSchema(const QString& pathname)
 
 ColorSchema::ColorSchema()
 :m_fileRead(false)
+,m_titleRead(false)
 ,fRelPath(QString())
 ,lastRead(0L)
 {
@@ -168,6 +170,7 @@ ColorSchema::ColorSchema()
 
 ColorSchema::ColorSchema(KConfig& c)
 :m_fileRead(false)
+,m_titleRead(false)
 ,fRelPath(QString())
 ,lastRead(0L)
 {
