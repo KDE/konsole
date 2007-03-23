@@ -263,8 +263,7 @@ void Emulation::onKeyPress( QKeyEvent* ev )
 {
   if (!listenToKeyPress) return; // someone else gets the keys
   emit notifySessionState(NOTIFYNORMAL);
-  if (currentScreen->getHistCursor() != currentScreen->getHistLines() && !ev->text().isEmpty())
-    currentScreen->setHistCursor(currentScreen->getHistLines());
+  
   if (!ev->text().isEmpty())
   { // A block of text
     // Note that the text is proper unicode.
@@ -504,11 +503,15 @@ bool Emulation::findTextNext( const QString &str, bool forward, bool isCaseSensi
 		//work out how many lines into the current block of text the search result was found
 		//- looks a little painful, but it only has to be done once per search.
 		m_findPos = line + string.left(pos + 1).count(QChar('\n'));
-		
-		if ( m_findPos > currentScreen->getHistLines() )
-				currentScreen->setHistCursor(currentScreen->getHistLines());
-		else
-				currentScreen->setHistCursor(m_findPos);
+
+//TODO - Reimplement moving active view to focus on current match now that
+//       that multiple views can show different parts of the screen at the same
+//       time.
+//
+//		if ( m_findPos > currentScreen->getHistLines() )
+//				currentScreen->setHistCursor(currentScreen->getHistLines());
+//		else
+//				currentScreen->setHistCursor(m_findPos);
 
 		//cause target line to be selected
 		//currentScreen->getHistoryLine(m_findPos);
@@ -540,6 +543,8 @@ void Emulation::showBulk()
     bulk_timer2.stop();
 
     emit updateViews();
+
+    currentScreen->resetScrolledLines();
 }
 
 void Emulation::bufferedUpdate()
@@ -585,13 +590,6 @@ void Emulation::onImageSizeChange(int lines, int columns)
 QSize Emulation::imageSize()
 {
   return QSize(currentScreen->getColumns(), currentScreen->getLines());
-}
-
-void Emulation::onHistoryCursorChange(int cursor)
-{
-  currentScreen->setHistCursor(cursor);
-
-  bufferedUpdate();
 }
 
 void Emulation::setColumns(int columns)

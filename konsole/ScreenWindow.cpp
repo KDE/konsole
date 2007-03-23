@@ -48,6 +48,7 @@ Screen* ScreenWindow::screen() const
 
 Character* ScreenWindow::getImage()
 {
+
     return _screen->getCookedImage(_currentLine);
 }
 
@@ -150,6 +151,8 @@ bool ScreenWindow::trackOutput() const
 
 int ScreenWindow::scrollCount() const
 {
+   // qDebug() << "window returning scroll count of " << _scrollCount;
+
     return _scrollCount;
 }
 
@@ -160,12 +163,15 @@ void ScreenWindow::resetScrollCount()
 
 void ScreenWindow::notifyOutputChanged()
 {
+    // move window to the bottom of the screen and update scroll count
+    // if this window is currently tracking the bottom of the screen
     if ( _trackOutput )
-    {
-        scrollTo( _screen->getHistLines() );
+    { 
+        _scrollCount -= _screen->scrolledLines();
+        _currentLine = _screen->getHistLines();
     }
 
-    emit outputChanged();
+    emit outputChanged(); 
 }
 
 #include "ScreenWindow.moc"

@@ -71,8 +71,6 @@ Screen::Screen(int l, int c)
     columns(c),
     screenLines(new ImageLine[lines+1] ),
     _scrolledLines(0),
-   // image(new Character[(lines+1)*columns]),
-    histCursor(0),
     hist(new HistoryScrollNone()),
     cuX(0), cuY(0),
     cu_re(0),
@@ -101,7 +99,6 @@ Screen::Screen(int l, int c)
 
 Screen::~Screen()
 {
-//  delete[] image;
   delete[] screenLines;
   delete[] tabstops;
   delete hist;
@@ -202,7 +199,6 @@ void Screen::setMargins(int top, int bot)
   cuX = 0;
   cuY = getMode(MODE_Origin) ? top : 0;
 
-  resetScrolledLines();
 }
 
 int Screen::topMargin() const
@@ -856,6 +852,8 @@ int Screen::scrolledLines() const
 
 void Screen::resetScrolledLines()
 {
+    //qDebug() << "scrolled lines reset";
+
     _scrolledLines = 0;
 }
 
@@ -879,6 +877,8 @@ void Screen::scrollUp(int from, int n)
 
   _scrolledLines -= n;
 
+  //qDebug() << "Screen::scrollUp( from: " << from << " , n: " << n << ")";
+
   //FIXME: make sure `tmargin', `bmargin', `from', `n' is in bounds.
   moveImage(loc(0,from),loc(0,from+n),loc(columns-1,bmargin));
   clearImage(loc(0,bmargin-n+1),loc(columns-1,bmargin),' ');
@@ -898,6 +898,8 @@ void Screen::scrollDown(int n)
 void Screen::scrollDown(int from, int n)
 {
 
+  //qDebug() << "Screen::scrollDown( from: " << from << " , n: " << n << ")";
+  
   _scrolledLines += n;
 
 //FIXME: make sure `tmargin', `bmargin', `from', `n' is in bounds.
@@ -1042,6 +1044,10 @@ NOTE:  moveImage() can only move whole lines.
 
 void Screen::moveImage(int dest, int sourceBegin, int sourceEnd)
 {
+  //qDebug() << "moving image from (" << (sourceBegin/columns) 
+  //    << "," << (sourceEnd/columns) << ") to " <<
+  //    (dest/columns);
+
   Q_ASSERT( sourceBegin <= sourceEnd );
  
   int lines=(sourceEnd-sourceBegin)/columns;
@@ -1478,8 +1484,6 @@ QString Screen::getHistoryLine(int no)
 
 void Screen::addHistLine()
 {
-  assert(hasScroll() || histCursor == 0);
-
   // add to hist buffer
   // we have to take care about scrolling, too...
 
@@ -1494,24 +1498,14 @@ void Screen::addHistLine()
 
     bool beginIsTL = (sel_begin == sel_TL);
 
-    // adjust history cursor
+    // Adjust selection for the new point of reference
     if (newHistLines > oldHistLines)
     {
-       histCursor++;
-       // Adjust selection for the new point of reference
        if (sel_begin != -1)
        {
           sel_TL += columns;
           sel_BR += columns;
        }
-    }
-
-    // Scroll up if user is looking at the history and we can scroll up
-    if ((histCursor > 0) &&  // We can scroll up and...
-        ((histCursor != newHistLines) || // User is looking at history...
-          sel_busy)) // or user is selecting text.
-    {
-       histCursor--;
     }
 
     if (sel_begin != -1)
@@ -1542,19 +1536,6 @@ void Screen::addHistLine()
     }
   }
 
-  if (!hasScroll()) histCursor = 0; //FIXME: a poor workaround
-}
-
-void Screen::setHistCursor(int cursor)
-{
-  _scrolledLines += histCursor-cursor;
-
-  histCursor = cursor; //FIXME:rangecheck
-}
-
-int Screen::getHistCursor()
-{
-  return histCursor;
 }
 
 int Screen::getHistLines()
@@ -1566,7 +1547,6 @@ void Screen::setScroll(const HistoryType& t)
 {
   clearSelection();
   hist = t.getScroll(hist);
-  histCursor = hist->getLines();
 }
 
 bool Screen::hasScroll()

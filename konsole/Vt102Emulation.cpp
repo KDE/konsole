@@ -1054,12 +1054,6 @@ void Vt102Emulation::onKeyPress( QKeyEvent* ev )
     }
   }
   
-  // revert to non-history when typing
-  if (currentScreen->getHistCursor() != currentScreen->getHistLines() && (!ev->text().isEmpty()
-    || ev->key()==Qt::Key_Down || ev->key()==Qt::Key_Up || ev->key()==Qt::Key_Left || ev->key()==Qt::Key_Right
-    || ev->key()==Qt::Key_PageUp || ev->key()==Qt::Key_PageDown))
-    currentScreen->setHistCursor(currentScreen->getHistLines());
-
   if (cmd==CMD_send) {
     if ((ev->modifiers() & Qt::AltModifier) && !metaspecified ) sendString("\033");
     emit sendBlock(txt.constData(), txt.length());

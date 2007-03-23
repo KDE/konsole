@@ -969,8 +969,9 @@ void TerminalDisplay::processFilters()
 
 void TerminalDisplay::updateImage() 
 {
-  // optimization - scroll the existing image where possible and avoid expensive text drawing
-  // for parts of the image that can simply be moved up or down
+  // optimization - scroll the existing image where possible and 
+  // avoid expensive text drawing for parts of the image that 
+  // can simply be moved up or down
   scrollImage( _screenWindow->scrollCount() );
   _screenWindow->resetScrollCount();
 
@@ -1004,6 +1005,9 @@ void TerminalDisplay::updateImage()
   char *dirtyMask = (char *) malloc(columnsToUpdate+2);
   QRegion dirtyRegion;
 
+  // debugging variable, this records the number of lines that are found to
+  // be 'dirty' ( ie. have changed from the old image to the new image ) and
+  // which therefore need to be repainted
   int dirtyLineCount = 0;
 
   for (y = 0; y < linesToUpdate; y++)
@@ -1020,8 +1024,11 @@ void TerminalDisplay::updateImage()
     // Two extra so that we don't have to have to care about start and end conditions
     for (x = 0; x < columnsToUpdate; x++)
     {
-	if ( ( (m_imPreeditLength > 0) && ( ( m_imStartLine == y )
-	      && ( ( m_imStart < m_imEnd ) && ( ( x > m_imStart ) ) && ( x < m_imEnd ) )
+	if ( ( (m_imPreeditLength > 0) && 
+           ( ( m_imStartLine == y ) && 
+             ( ( m_imStart < m_imEnd ) && 
+               ( ( x > m_imStart ) ) && 
+               ( x < m_imEnd ) )
               || ( ( m_imSelStart < m_imSelEnd ) && ( ( x > m_imSelStart ) ) ) ) )
             || newLine[x] != currentLine[x])
       {
@@ -1053,12 +1060,17 @@ void TerminalDisplay::updateImage()
         int lln = columnsToUpdate - x;
         for (len = 1; len < lln; len++)
         {
-          c = newLine[x+len].character;
-          if (!c)
-            continue; // Skip trailing part of multi-col chars.
+            const Character& ch = newLine[x+len];
 
-          if (newLine[x+len].foregroundColor != cf || newLine[x+len].backgroundColor != cb || newLine[x+len].rendition != cr ||
-              !dirtyMask[x+len] || isLineChar(c) != lineDraw || (newLine[x+len+1].character == 0) != doubleWidth)
+            if (!ch.character)
+                continue; // Skip trailing part of multi-col chars.
+
+            if (  ch.foregroundColor != cf || 
+                  ch.backgroundColor != cb || 
+                  ch.rendition != cr ||
+                  !dirtyMask[x+len] || 
+                  isLineChar(c) != lineDraw || 
+                  (newLine[x+len+1].character == 0) != doubleWidth )
             break;
 
           disstrU[p++] = c; //fontMap(c);
@@ -1068,20 +1080,29 @@ void TerminalDisplay::updateImage()
 
         // for XIM on the spot input style
         m_isIMEdit = m_isIMSel = false;
-        if ( m_imStartLine == y ) {
-          if ( ( m_imStart < m_imEnd ) && ( x >= m_imStart-1 ) && ( x + int( unistr.length() ) <= m_imEnd ) )
+
+        if ( m_imStartLine == y ) 
+        {
+          if (  ( m_imStart < m_imEnd ) && 
+                ( x >= m_imStart-1 ) && 
+                ( x + int( unistr.length() ) <= m_imEnd ) 
+             )
+                m_isIMEdit = true;
+
+          if ( ( m_imSelStart < m_imSelEnd ) && 
+               ( x >= m_imStart-1 ) && 
+               ( x + int( unistr.length() ) <= m_imEnd ) 
+             )
+                m_isIMSel = true;
+	    }
+        else if ( m_imStartLine < y ) 
+        {  // for word warp
+          if ( m_imStart < m_imEnd )
             m_isIMEdit = true;
 
-          if ( ( m_imSelStart < m_imSelEnd ) && ( x >= m_imStart-1 ) && ( x + int( unistr.length() ) <= m_imEnd ) )
+          if (  m_imSelStart < m_imSelEnd )
             m_isIMSel = true;
-	}
-        else if ( m_imStartLine < y ) {  // for word worp
-          if ( ( m_imStart < m_imEnd ) )
-            m_isIMEdit = true;
-
-          if ( ( m_imSelStart < m_imSelEnd ) )
-            m_isIMSel = true;
-	}
+	    }
 
         bool save_fixed_font = fixed_font;
         if (lineDraw)
@@ -1098,42 +1119,60 @@ void TerminalDisplay::updateImage()
     }
 
 	//both the top and bottom halves of double height lines must always be redrawn
-	//although both top and bottom halves contain the same characters, only the top one is actually 
+	//although both top and bottom halves contain the same characters, only 
+    //the top one is actually 
 	//drawn.
     if (lineProperties.count() > y)
         updateLine |= (lineProperties[y] & LINE_DOUBLEHEIGHT);
-	
+
+    // if the characters on the line are different in the old and the new image
+    // then this line must be repainted.    
     if (updateLine)
     {
         dirtyLineCount++;
-        QRect dirtyRect = QRect( bX+tLx , bY+tLy+font_h*y , font_w * columnsToUpdate , font_h ); 	
+
+        // add the area occupied by this line to the region which needs to be
+        // repainted
+        QRect dirtyRect = QRect( bX+tLx , 
+                                 bY+tLy+font_h*y , 
+                                 font_w * columnsToUpdate , 
+                                 font_h ); 	
     
         dirtyRegion |= dirtyRect;
     }
 
     dirtyMask--; // Set back
 
-    // finally, make `image' become `newimg'.
+    // replace the line of characters in the old image with the 
+    // current line of the new image 
     memcpy((void*)currentLine,(const void*)newLine,columnsToUpdate*sizeof(Character));
   }
 
+  // debugging - display a count of the number of lines that will need 
+  // to be repainted
   //qDebug() << "dirty line count = " << dirtyLineCount;
 
   // if the new image is smaller than the previous image, then ensure that the area
   // outside the new image is cleared 
   if ( linesToUpdate < usedLines )
   {
-    dirtyRegion |= QRect( bX+tLx , bY+tLy+font_h*linesToUpdate , font_w * this->columns , font_h * (usedLines-linesToUpdate) );
+    dirtyRegion |= QRect(   bX+tLx , 
+                            bY+tLy+font_h*linesToUpdate , 
+                            font_w * this->columns , 
+                            font_h * (usedLines-linesToUpdate) );
   }
   usedLines = linesToUpdate;
   
   if ( columnsToUpdate < usedColumns )
   {
-    dirtyRegion |= QRect( bX+tLx+columnsToUpdate*font_w , bY+tLy , font_w * (usedColumns-columnsToUpdate) , font_h * this->lines );
+    dirtyRegion |= QRect(   bX+tLx+columnsToUpdate*font_w , 
+                            bY+tLy , 
+                            font_w * (usedColumns-columnsToUpdate) , 
+                            font_h * this->lines );
   }
   usedColumns = columnsToUpdate;
 
-  // redraw the display
+  // update the parts of the display which have changed
   update(dirtyRegion);
 
   if ( hasBlinker && !blinkT->isActive()) blinkT->start( BLINK_DELAY ); 
@@ -1166,7 +1205,7 @@ void TerminalDisplay::showResizeNotification()
         mResizeWidget->setFrameShape((QFrame::Shape) (QFrame::Box|QFrame::Raised));
         mResizeWidget->setMidLineWidth(2);
         QBoxLayout *l = new QVBoxLayout(mResizeWidget);
-	l->setMargin(10);
+	    l->setMargin(10);
         mResizeLabel = new QLabel(i18n("Size: XXX x XXX"), mResizeWidget);
         l->addWidget(mResizeLabel, 1, Qt::AlignCenter);
         mResizeWidget->setMinimumWidth(mResizeLabel->fontMetrics().width(i18n("Size: XXX x XXX"))+20);
@@ -1182,7 +1221,6 @@ void TerminalDisplay::showResizeNotification()
      mResizeWidget->show();
      mResizeTimer->start(3000);
   }
-
 }
 
 void TerminalDisplay::setBlinkingCursor(bool blink)
@@ -1575,16 +1613,25 @@ bool TerminalDisplay::scrollAtEnd()
 
 void TerminalDisplay::setScroll(int cursor, int slines)
 {
-  //kDebug(1211)<<"TerminalDisplay::setScroll() disconnect()"<<endl;
+  // update scrollbar if the range or value has changed,
+  // otherwise return
+  //
+  // setting the range or value of a scrollbar will always trigger
+  // a repaint, so it should be avoided if it is not necessary
+  if ( scrollbar->minimum() == 0         &&
+       scrollbar->maximum() == slines    &&
+       scrollbar->value()   == cursor )
+  {
+        //qDebug() << "no change in scrollbar - skipping update";
+        return;
+  }
+
   disconnect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
-  //kDebug(1211)<<"TerminalDisplay::setScroll() setRange()"<<endl;
   scrollbar->setRange(0,slines);
-  //kDebug(1211)<<"TerminalDisplay::setScroll() setSteps()"<<endl;
   scrollbar->setSingleStep(1);
   scrollbar->setPageStep(lines);
   scrollbar->setValue(cursor);
   connect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
-  //kDebug(1211)<<"TerminalDisplay::setScroll() done"<<endl;
 }
 
 void TerminalDisplay::setScrollbarLocation(int loc)

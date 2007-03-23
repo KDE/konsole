@@ -207,11 +207,6 @@ public: // these are all `Screen' operations
     /*! return the number of columns. */
     int  getColumns() { return columns; }
 
-    /*! set the position of the history cursor. */
-    void setHistCursor(int cursor);
-    /*! return the position of the history cursor. */
-
-    int  getHistCursor();
     int  getHistLines ();
     void setScroll(const HistoryType&);
     const HistoryType& getScroll();
@@ -315,6 +310,8 @@ public: // these are all `Screen' operations
 
     /** 
      * Returns the number of lines that the image has been scrolled up or down by,
+     * since the last call to resetScrolledLines().
+     *
      * a positive return value indicates that the image has been scrolled up,
      * a negative return value indicates that the image has been scrolled down. 
      */
@@ -382,7 +379,6 @@ private: // helper
 	
     // history buffer ---------------
 
-    int histCursor;   // display position relative to start of the history buffer
     HistoryScroll *hist;
     
     // cursor location

@@ -133,8 +133,6 @@ public Q_SLOTS: // signals incoming from TerminalDisplay
   /** Change the size of the emulation's image */
   virtual void onImageSizeChange(int lines, int columns);
   
-  virtual void onHistoryCursorChange(int cursor);
-  
   /** 
    * Interprets a sequence of characters and sends the result to the terminal.
    * This is equivalent to calling onKeyPress for each character in @p text in succession.
