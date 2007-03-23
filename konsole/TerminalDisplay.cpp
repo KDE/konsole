@@ -1150,7 +1150,7 @@ void TerminalDisplay::updateImage()
 
   // debugging - display a count of the number of lines that will need 
   // to be repainted
-  //qDebug() << "dirty line count = " << dirtyLineCount;
+  // qDebug() << "dirty line count = " << dirtyLineCount;
 
   // if the new image is smaller than the previous image, then ensure that the area
   // outside the new image is cleared 

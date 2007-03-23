@@ -327,3 +327,122 @@ bool UnixProcessInfo::readEnvironment(int pid)
 
     return true;
 }
+
+SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
+ : _process(process)
+{
+    bool ok = false;
+
+    // check that this is a SSH process
+    const QString& name = _process.name(&ok);
+
+    if ( !ok || name != "ssh" )
+    {
+        if ( !ok )
+            qDebug() << "Could not read process info";
+        else
+            qDebug() << "Process is not a SSH process";
+
+        return;
+    }
+
+    // read arguments
+    const QVector<QString>& args = _process.arguments(&ok); 
+
+    // SSH options
+    // these are taken from the SSH manual ( accessed via 'man ssh' )
+    
+    // options which take no arguments
+    static const QString noOptionsArguments("1246AaCfgkMNnqsTtVvXxY"); 
+    // options which take one argument
+    static const QString singleOptionArguments("bcDeFiLlmOopRSw");
+
+    if ( ok )
+    {
+         // find the username, host and command arguments
+         //
+         // the username/host is assumed to be the first argument 
+         // which is not an option
+         // ( ie. does not start with a dash '-' character )
+         // or an argument to a previous option.
+         //
+         // the command, if specified, is assumed to be the argument following
+         // the username and host
+         //
+         // note that we skip the argument at index 0 because that is the
+         // program name ( expected to be 'ssh' in this case )
+         for ( int i = 1 ; i < args.count() ; i++ )
+         {
+            // if this argument is an option then skip it, plus any 
+            // following arguments which refer to this option
+            if ( args[i].startsWith('-') )
+            {
+                QChar argChar = ( args[i].length() > 1 ) ? args[i][1] : '\0';
+
+                if ( noOptionsArguments.contains(argChar) )
+                    continue;
+                else if ( singleOptionArguments.contains(argChar) )
+                {
+                    i++;
+                    continue;
+                }
+            }
+
+            // check whether the host has been found yet
+            // if not, this must be the username/host argument 
+            if ( _host.isEmpty() )
+            {
+                // found username and host argument
+                qDebug() << "[username] and host: " << args[i];
+
+                // check to see if only a hostname is specified, or whether
+                // both a username and host are specified ( in which case they
+                // are separated by an '@' character:  username@host )
+            
+                int separatorPosition = args[i].indexOf('@');
+                if ( separatorPosition != -1 )
+                {
+                    // username and host specified
+                    _user = args[i].left(separatorPosition);
+                    _host = args[i].mid(separatorPosition+1);
+
+                    qDebug() << "found user: " << _user;
+                    qDebug() << "found host: " << _host;
+                }
+                else
+                {
+                    // just the host specified
+                    _host = args[i];
+                    qDebug() << "found only host: " << _host;
+                }
+            }
+            else
+            {
+                // host has already been found, this must be the command argument
+                _command = args[i];
+
+                qDebug() << "found command: " << _command;
+            }
+
+         }
+    }
+    else
+    {
+        qDebug() << "Could not read arguments";
+        
+        return;
+    }
+}
+
+QString SSHProcessInfo::userName() const
+{
+    return _user;
+}
+QString SSHProcessInfo::host() const
+{
+    return _host;
+}
+QString SSHProcessInfo::command() const
+{
+    return _command;
+}

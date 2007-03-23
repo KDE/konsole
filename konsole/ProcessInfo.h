@@ -54,20 +54,20 @@ namespace Konsole
  *
  * @code
  *   ProcessInfo* info = ProcessInfo::newInstance(pid);
- *   info.update();
+ *   info->update();
  *
- *   if ( info.isValid() )
+ *   if ( info->isValid() )
  *   {
  *      bool ok;
- *      QString value = info.name(&ok);
+ *      QString value = info->name(&ok);
  *
  *      if ( ok ) qDebug() << "process name - " << name;
  *
- *      int parentPid = info.parentPid(&ok);
+ *      int parentPid = info->parentPid(&ok);
  *
  *      if ( ok ) qDebug() << "parent process - " << parentPid;
  *
- *      int foregroundPid = info.foregroundColororegroundPid(&ok);
+ *      int foregroundPid = info->foregroundColororegroundPid(&ok);
  *
  *      if ( ok ) qDebug() << "foreground process - " << foregroundPid;
  *   }
@@ -269,6 +269,44 @@ private:
 
     bool readCurrentDir(int pid);   // read the /proc/<pid>/cwd symlink to
                                     // get the current working directory of the process
+};
+
+/** 
+ * Lightweight class which provides additional information about SSH processes.
+ */
+class SSHProcessInfo
+{
+public:
+    /** 
+     * Constructs a new SSHProcessInfo instance which provides additional
+     * information about the specified SSH process.
+     *
+     * @param process A ProcessInfo instance for a SSH process.
+     */
+    SSHProcessInfo(const ProcessInfo& process);
+
+    /** 
+     * Returns the user name which the user initially logged into on
+     * the remote computer.
+     */
+    QString userName() const;
+
+    /**
+     * Returns the host which the user has connected to.
+     */
+    QString host() const;
+
+    /** 
+     * Returns the command which the user specified to execute on the 
+     * remote computer when starting the SSH process.
+     */
+    QString command() const;
+
+private:
+    const ProcessInfo& _process;
+    QString _user;
+    QString _host;
+    QString _command;
 };
 
 };

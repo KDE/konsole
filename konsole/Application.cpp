@@ -27,9 +27,6 @@
 #include "Session.h"
 #include "ViewManager.h"
 
-// temporary - testing history feature
-#include "History.h"
-
 using namespace Konsole;
 
 // global variable to determine whether or not true transparency should be used
