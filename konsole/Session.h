@@ -96,22 +96,19 @@ public:
    */
   QList<TerminalDisplay*> views() const;
 
-  /** 
-   * Returns true if the session has created child processes which have not yet terminated 
-   * This call may be expensive if there are a large number of processes running. 
-   */
-  bool        hasChildren();
-
-  //void        setConnect(bool r);  // calls setListenToKeyPress(r)
   void        setListenToKeyPress(bool l);
-  Emulation* getEmulation();      // to control emulation
-  bool        isSecure();
-  bool        isMonitorActivity();
-  bool        isMonitorSilence();
-  bool        isMasterMode();
-  int schemaNo();
-  int encodingNo();
-  int fontNo();
+
+  /**
+   * Returns the terminal emulation instance being used to encode / decode 
+   * characters to / from the process.
+   */
+  Emulation*  emulation() const;      // to control emulation
+  bool        isSecure()  const;
+  bool        isMonitorActivity() const;
+  bool        isMonitorSilence()  const;
+  bool        isMasterMode()      const;
+  int         encodingNo()        const;
+  int         fontNo()            const;
 
   /** 
    * Returns the value of the TERM environment variable which will be used in the session's
@@ -142,8 +139,8 @@ public:
    */
   QString displayTitle() const;
 
-  int keymapNo();
-  QString keymap();
+  int keymapNo() const;
+  QString keymap() const;
   QStringList getArgs();
   QString getPgm();
 
@@ -157,13 +154,13 @@ public:
 
   /** Returns the session's current working directory. */
   QString currentWorkingDirectory();
-  QString initialWorkingDirectory() { return initial_cwd; }
+  QString initialWorkingDirectory() { return _initial_cwd; }
   
   /** 
    * Sets the initial working directory for the session when it is run 
    * This has no effect once the session has been started.
    */
-  void setInitialWorkingDirectory( const QString& dir ) { initial_cwd = dir; }
+  void setInitialWorkingDirectory( const QString& dir ) { _initial_cwd = dir; }
  
   void setHistory(const HistoryType&);
   const HistoryType& history();
@@ -197,17 +194,21 @@ public:
   void feedSession(const QString &text);
   void sendSession(const QString &text);
   QString sessionName() { return _title; }
+  
+  /** 
+   * Returns the process id of the terminal process. 
+   * This is the id used by the system API to refer to the process.
+   */
   int sessionPid() { return _shellProcess->pid(); }
   void enableFullScripting(bool b);
 
   void startZModem(const QString &rz, const QString &dir, const QStringList &list);
   void cancelZModem();
-  bool zmodemIsBusy() { return zmodemBusy; }
+  bool zmodemIsBusy() { return _zmodemBusy; }
 
- // QString schema();
- // void setSchema(const QString &schema);
-  
+  /** Returns the colour scheme currently in use by views on this session */
   ColorSchema* schema();
+  /** Sets the colour scheme used by views on this session */
   void setSchema(ColorSchema* schema);
   
   QString encoding();
@@ -257,10 +258,6 @@ Q_SIGNALS:
   void resizeSession(Session *session, QSize size);
   void setSessionEncoding(Session *session, const QString &encoding);
 
-// SPLIT-VIEW Disabled
-//  void getSessionSchema(Session *session, QString &schema);
-//  void setSessionSchema(Session *session, const QString &schema);
-
 private Q_SLOTS:
   void onReceiveBlock( const char* buf, int len );
   void monitorTimerDone();
@@ -304,27 +301,27 @@ private:
   bool           _flowControl;
   bool           _fullScripting;
 
-  QString	 stateIconName;
+  QString	     _stateIconName;
 
   QString        _program;
   QStringList    _arguments;
 
-  QString        term;
-  ulong          winId;
-  int           _sessionId;
+  QString        _term;
+  ulong          _winId;
+  int            _sessionId;
 
-  QString        cwd;
-  QString        initial_cwd;
+  QString        _cwd;
+  QString        _initial_cwd;
 
   // ZModem
-  bool           zmodemBusy;
-  KProcIO*       zmodemProc;
-  ZModemDialog*  zmodemProgress;
+  bool           _zmodemBusy;
+  KProcIO*       _zmodemProc;
+  ZModemDialog*  _zmodemProgress;
 
   // Color/Font Changes by ESC Sequences
 
-  QColor         modifiedBackground; // as set by: echo -en '\033]11;Color\007
-  int            encoding_no;
+  QColor         _modifiedBackground; // as set by: echo -en '\033]11;Color\007
+  int            _encoding_no;
 
   ColorSchema*   _colorScheme;
   

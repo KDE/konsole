@@ -89,13 +89,15 @@ void SessionController::openUrl( const KUrl& url )
     {
         QString path = url.path();
         KRun::shellQuote(path);
-        _session->getEmulation()->sendText("cd " + path + '\r');
+        _session->emulation()->sendText("cd " + path + '\r');
     }
     else
     {
         //TODO Implement handling for other Url types
-        qWarning() << __FILE__ << ":" << __FUNCTION__ << "Handling for Urls that use protocols other"
-            << " than file:// not implemented yet";
+        qWarning() << __FILE__ << ":" 
+                   << __FUNCTION__ 
+                   << "Handling for Urls that use protocols other"
+                   << " than file:// not implemented yet";
     }
 }
 
@@ -306,13 +308,13 @@ void SessionController::paste()
 
 void SessionController::clear()
 {
-    Emulation* emulation = _session->getEmulation();
+    Emulation* emulation = _session->emulation();
 
     emulation->clearEntireScreen();
 }
 void SessionController::clearAndReset()
 {
-    Emulation* emulation = _session->getEmulation();
+    Emulation* emulation = _session->emulation();
 
     emulation->reset();
 }
@@ -624,22 +626,26 @@ void SaveHistoryTask::jobDataRequested(KIO::Job* job , QByteArray& data)
 
     SaveJob& info = _jobSession[job];   
 
-    // transfer LINES_PER_REQUEST lines from the session's history to the save location
+    // transfer LINES_PER_REQUEST lines from the session's history 
+    // to the save location
     if ( info.session )
     {
-        // note:  when retrieving lines from the emulation, the first line is at index 0.
+        // note:  when retrieving lines from the emulation, 
+        // the first line is at index 0.
         
-        int sessionLines = info.session->getEmulation()->lines();
+        int sessionLines = info.session->emulation()->lines();
 
         if ( sessionLines-1 == info.lastLineFetched )
             return; // if there is no more data to transfer then stop the job
 
-        int copyUpToLine = qMin( info.lastLineFetched + LINES_PER_REQUEST , sessionLines-1 );
+        int copyUpToLine = qMin( info.lastLineFetched + LINES_PER_REQUEST , 
+                                 sessionLines-1 );
 
         QTextStream stream(&data,QIODevice::ReadWrite);
-        info.session->getEmulation()->writeToStream( &stream , info.decoder , info.lastLineFetched+1 , copyUpToLine );
+        info.session->emulation()->writeToStream( &stream , info.decoder , info.lastLineFetched+1 , copyUpToLine );
 
-        // if there are still more lines to process after this request then insert a new line character
+        // if there are still more lines to process after this request 
+        // then insert a new line character
         // to ensure that the next block of lines begins on a new line       
         //
         // FIXME - There is still an extra new-line at the end of the save data.   
@@ -676,7 +682,7 @@ void SearchHistoryTask::execute()
 {
     Q_ASSERT( sessions().first() );
 
-    Emulation* emulation = sessions().first()->getEmulation();
+    Emulation* emulation = sessions().first()->emulation();
 
     if ( !_regExp.isEmpty() )
     {

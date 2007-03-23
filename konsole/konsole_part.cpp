@@ -917,7 +917,7 @@ void konsolePart::slotSetEncoding()
 
   n_encoding = selectSetEncoding->currentItem();
   se->setEncodingNo(selectSetEncoding->currentItem());
-  se->getEmulation()->setCodec(qtc);
+  se->emulation()->setCodec(qtc);
 }
 
 void konsolePart::slotSelectLineSpacing()
@@ -1117,7 +1117,7 @@ void konsolePart::startProgram( const QString& program,
   // We ignore the following signals
   //connect( se, SIGNAL(renameSession(Session*,const QString&)),
   //         this, SLOT(slotRenameSession(Session*, const QString&)) );
-  //connect( se->getEmulation(), SIGNAL(changeColumns(int)),
+  //connect( se->emulation(), SIGNAL(changeColumns(int)),
   //         this, SLOT(changeColumns(int)) );
   //connect( se, SIGNAL(disableMasterModeConnections()),
   //        this, SLOT(disableMasterModeConnections()) );
@@ -1148,7 +1148,7 @@ void konsolePart::showShellInDir( const QString& dir )
       QString text = dir;
       KRun::shellQuote(text);
       text = QLatin1String("cd ") + text + '\n';
-      se->getEmulation()->sendText( text );
+      se->emulation()->sendText( text );
   };
 }
 
@@ -1159,7 +1159,7 @@ void konsolePart::showShell()
 
 void konsolePart::sendInput( const QString& text )
 {
-    se->getEmulation()->sendText( text );
+    se->emulation()->sendText( text );
 }
 
 void konsolePart::slotProcessExited()

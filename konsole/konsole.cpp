@@ -2722,7 +2722,7 @@ void Konsole::setSessionEncoding( const QString &encoding, Session *session )
     return;
 
   session->setEncodingNo( i + 1 );    // Take into account Default
-  session->getEmulation()->setCodec(qtc);
+  session->emulation()->setCodec(qtc);
   if (se == session)
     activateSession(se);
 
@@ -2759,7 +2759,7 @@ void Konsole::slotSetSessionEncoding(Session *session, const QString &encoding)
     return;
 
   session->setEncodingNo( i + 1 );    // Take into account Default
-  session->getEmulation()->setCodec(qtc);
+  session->emulation()->setCodec(qtc);
   if (se == session)
     activateSession(se);
 }
@@ -2940,11 +2940,11 @@ Session* Konsole::newSession(SessionInfo* type)
       this, SLOT(enableMasterModeConnections()) );
     connect( session, SIGNAL(renameSession(Session*,const QString&)),
       this, SLOT(slotRenameSession(Session*, const QString&)) );
-    connect( session->getEmulation(), SIGNAL(changeColumns(int)),
+    connect( session->emulation(), SIGNAL(changeColumns(int)),
       this, SLOT(changeColumns(int)) );
-    connect( session->getEmulation(), SIGNAL(changeColLin(int,int)),
+    connect( session->emulation(), SIGNAL(changeColLin(int,int)),
       this, SLOT(changeColLin(int,int)) );
-    connect( session->getEmulation(), SIGNAL(ImageSizeChanged(int,int)),
+    connect( session->emulation(), SIGNAL(ImageSizeChanged(int,int)),
       this, SLOT(notifySize(int,int)));
     connect( session, SIGNAL(zmodemDetected(Session*)),
       this, SLOT(slotZModemDetected(Session*)));

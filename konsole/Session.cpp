@@ -1,10 +1,11 @@
-/* ----------------------------------------------------------------------- */
 /*
-    This file is part of Konsole, an X terminal.
+    This file is part of Konsole, an X _terminal.
+
+    Copyright (C) 2006-2007 by Robert Knight <robertknight@gmail.com>
     Copyright (C) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
 
     This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
+    it under the _terms of the GNU General Public License as published by
     the Free Software Foundation; either version 2 of the License, or
     (at your option) any later version.
 
@@ -34,14 +35,14 @@
 #include <QTime>
 
 // KDE
-#include <kdebug.h>
-#include <klocale.h>
-#include <kmessagebox.h>
-#include <knotification.h>
-#include <kprocio.h>
-#include <krun.h>
+#include <KDebug>
+#include <KLocale>
+#include <KMessageBox>
+#include <KNotification>
+#include <KProcIO>
+#include <KRun>
 #include <kshell.h>
-#include <kstandarddirs.h>
+#include <KStandardDirs>
 
 // Konsole
 #include <config-konsole.h>
@@ -73,12 +74,12 @@ Session::Session() :
    , _addToUtmp(true)
    , _flowControl(true)
    , _fullScripting(false)
-   , winId(0)
+   , _winId(0)
    , _sessionId(0)
-   , zmodemBusy(false)
-   , zmodemProc(0)
-   , zmodemProgress(0)
-   , encoding_no(0)
+   , _zmodemBusy(false)
+   , _zmodemProc(0)
+   , _zmodemProgress(0)
+   , _encoding_no(0)
    , _colorScheme(0)
 {
     //prepare DBus communication
@@ -107,8 +108,10 @@ Session::Session() :
     //connect teletype to emulation backend 
     _shellProcess->useUtf8(_emulation->utf8());
     
-    connect( _shellProcess,SIGNAL(block_in(const char*,int)),this,SLOT(onReceiveBlock(const char*,int)) );
-    connect( _emulation,SIGNAL(sendBlock(const char*,int)),_shellProcess,SLOT(send_bytes(const char*,int)) );
+    connect( _shellProcess,SIGNAL(block_in(const char*,int)),this,
+            SLOT(onReceiveBlock(const char*,int)) );
+    connect( _emulation,SIGNAL(sendBlock(const char*,int)),_shellProcess,
+            SLOT(send_bytes(const char*,int)) );
     connect( _emulation,SIGNAL(lockPty(bool)),_shellProcess,SLOT(lockPty(bool)) );
     connect( _emulation,SIGNAL(useUtf8(bool)),_shellProcess,SLOT(useUtf8(bool)) );
 
@@ -134,83 +137,21 @@ void Session::setArguments(const QStringList& arguments)
     _arguments = arguments;
 }
 
-/*! \class Session
-
-    Sessions are combinations of TEPTy and Emulations.
-
-    The stuff in here does not belong to the terminal emulation framework,
-    but to main.characterpp. It serves it's duty by providing a single reference
-    to TEPTy/Emulation pairs. In fact, it is only there to demonstrate one
-    of the abilities of the framework - multiple sessions.
-*/
-
-#if 0
-Session::Session(TerminalDisplay* _te, const QString &_pgm, const QStringList & _args, const QString &_term, ulong _winId, const QString &_sessionId, const QString &_initial_cwd)
-   : Session()
-   , _program(_pgm)
-   , _arguments(_args)
-   , sessionId(_sessionId)
-   , initial_cwd(_initial_cwd)
-{
-	(void)new SessionAdaptor(this);
-	QDBusConnection::sessionBus().registerObject(QLatin1String("/Session")/*"/sessions/"+_sessionId*/, this);
-	QDBusConnection::sessionBus().registerService("org.kde.konsole");
-  //kDebug(1211)<<"Session ctor() new Pty"<<endl;
-  _shellProcess = new Pty();
-  
-  addView(_te);
-
-  _emulation = new Vt102Emulation( primaryView() );
-  font_h = primaryView()-> fontHeight();
-  font_w = primaryView()-> fontWidth();
-  QObject::connect(primaryView(),SIGNAL(changedContentSizeSignal(int,int)),
-                   this,SLOT(onContentSizeChange(int,int)));
-  QObject::connect(primaryView(),SIGNAL(changedFontMetricSignal(int,int)),
-                   this,SLOT(onFontMetricChange(int,int)));
-
-  term = _term;
-  winId = _winId;
-  _iconName = "konsole";
-
-  //kDebug(1211)<<"Session ctor() _shellProcess->setSize()"<<endl;
-  _shellProcess->setSize(primaryView()->Lines(),primaryView()->Columns()); // not absolutely necessary
-  _shellProcess->useUtf8(_emulation->utf8());
-  //kDebug(1211)<<"Session ctor() connecting"<<endl;
-  connect( _shellProcess,SIGNAL(block_in(const char*,int)),this,SLOT(onReceiveBlock(const char*,int)) );
-
-  connect( _emulation,SIGNAL(sendBlock(const char*,int)),_shellProcess,SLOT(send_bytes(const char*,int)) );
-  connect( _emulation,SIGNAL(lockPty(bool)),_shellProcess,SLOT(lockPty(bool)) );
-  connect( _emulation,SIGNAL(useUtf8(bool)),_shellProcess,SLOT(useUtf8(bool)) );
-
-  connect( _emulation, SIGNAL( changeTitle( int, const QString & ) ),
-           this, SLOT( setUserTitle( int, const QString & ) ) );
-
-  connect( _emulation, SIGNAL( notifySessionState(int) ),
-           this, SLOT( notifySessionState(int) ) );
-  monitorTimer = new QTimer(this);
-  connect(monitorTimer, SIGNAL(timeout()), this, SLOT(monitorTimerDone()));
-
-  connect( _emulation, SIGNAL( zmodemDetected() ), this, SLOT(slotZModemDetected()));
-
-  connect( _emulation, SIGNAL( changeTabTextColor( int ) ),
-           this, SLOT( changeTabTextColor( int ) ) );
-
-  connect( _shellProcess,SIGNAL(done(int)), this,SLOT(done(int)) );
-  //kDebug(1211)<<"Session ctor() done"<<endl;
-  if (!_shellProcess->error().isEmpty())
-     QTimer::singleShot(0, this, SLOT(ptyError()));
-}
-#endif
-
 void Session::ptyError()
 {
   // FIXME:  _shellProcess->error() is always empty
   if ( _shellProcess->error().isEmpty() )
+  {
     KMessageBox::error( QApplication::activeWindow() ,
-       i18n("Konsole is unable to open a PTY (pseudo teletype).  It is likely that this is due to an incorrect configuration of the PTY devices.  Konsole needs to have read/write access to the PTY devices."),
+       i18n("Konsole is unable to open a PTY (pseudo teletype)."  
+            "It is likely that this is due to an incorrect configuration" 
+            "of the PTY devices.  Konsole needs to have read/write access" 
+            "to the PTY devices."),
        i18n("A Fatal Error Has Occurred") );
+  }
   else
     KMessageBox::error(QApplication::activeWindow(), _shellProcess->error());
+  
   emit done(this);
 }
 
@@ -235,14 +176,13 @@ void Session::addView(TerminalDisplay* widget)
         connect( widget , SIGNAL(sendStringToEmu(const char*)) , _emulation ,
                SLOT(sendString(const char*)) ); 
 
-        // allow emulation to notify view when the foreground process indicates whether
-        // or not it is interested in mouse signals
+        // allow emulation to notify view when the foreground process 
+        // indicates whether or not it is interested in mouse signals
         connect( _emulation , SIGNAL(programUsesMouse(bool)) , widget , 
                SLOT(setUsesMouse(bool)) );
     }
 
     widget->setScreenWindow(_emulation->createWindow());
-
 
     //update color scheme of view to match session
     if (_colorScheme)
@@ -251,10 +191,11 @@ void Session::addView(TerminalDisplay* widget)
     }
     
     //connect view signals and slots
-    QObject::connect( widget ,SIGNAL(changedContentSizeSignal(int,int)),
-                   this,SLOT(onContentSizeChange(int,int)));
+    QObject::connect( widget ,SIGNAL(changedContentSizeSignal(int,int)),this,
+                    SLOT(onContentSizeChange(int,int)));
 
-    QObject::connect( widget ,SIGNAL(destroyed(QObject*)) , this , SLOT(viewDestroyed(QObject*)) );
+    QObject::connect( widget ,SIGNAL(destroyed(QObject*)) , this , 
+                    SLOT(viewDestroyed(QObject*)) );
 
 }
 
@@ -286,11 +227,6 @@ void Session::removeView(TerminalDisplay* widget)
     }
 }
 
-/*void Session::changeWidget(TerminalDisplay* w)
-{
-  Q_ASSERT(0); //Method not updated yet to handle multiple views
-}*/
-
 void Session::run()
 {
   //check that everything is in place to run the session
@@ -313,24 +249,29 @@ void Session::run()
 
   QString dbusService = QDBusConnection::sessionBus().baseService();
   QString cwd_save = QDir::currentPath();
-  if (!initial_cwd.isEmpty())
-     QDir::setCurrent(initial_cwd);
+  if (!_initial_cwd.isEmpty())
+     QDir::setCurrent(_initial_cwd);
   _shellProcess->setXonXoff(_flowControl);
 
-  int result = _shellProcess->run(QFile::encodeName(_program), _arguments, term.toLatin1(),
-          winId, _addToUtmp,
-          dbusService.toLatin1(),
-          (QLatin1String("/Sessions/") + QString::number(_sessionId)).toLatin1());
+  int result = _shellProcess->run(QFile::encodeName(_program), 
+                                  _arguments, 
+                                  _term.toLatin1(),
+                                  _winId, 
+                                  _addToUtmp,
+                                  dbusService.toLatin1(),
+                                  (QLatin1String("/Sessions/") + 
+                                   QString::number(_sessionId)).toLatin1());
+
   if (result < 0) {     // Error in opening pseudo teletype
     kWarning()<<"Unable to open a pseudo teletype!"<<endl;
     QTimer::singleShot(0, this, SLOT(ptyError()));
   }
   _shellProcess->setErase(_emulation->getErase());
 
-  if (!initial_cwd.isEmpty())
+  if (!_initial_cwd.isEmpty())
      QDir::setCurrent(cwd_save);
   else
-     initial_cwd=cwd_save;
+     _initial_cwd=cwd_save;
 
   _shellProcess->setWriteable(false);  // We are reachable via kwrited.
 
@@ -339,76 +280,6 @@ void Session::run()
 void Session::changeTabTextColor( int color )
 {
     emit changeTabTextColor( this, color );
-}
-
-
-
-
-// NOTE: Session::hasChildren() was originally written so that the 'do you really want to close?'
-// prompt delivered when closing a session would only be shown if the session had running processes.
-// However, it was decided that stat-ing everything in /proc was very expensive, and others
-// disagreed with the basic idea.
-//
-// This code is left here in case anyone wants to know a way of figuring out
-// the PIDs of processes running in the terminal sessions :)
-bool Session::hasChildren()
-{
-	int sessionPID=_shellProcess->pid();
-
-	//get ids of active processes from /proc and look at each process
-	//to see whether it's parent is the session process,
-	//in which case the session has active children
-	//
-	//This relies on scanning the whole of /proc, which may be expensive if there are an exceptionally
-	//large number of processes running.  If you can think of a better method - please implement it!	
-	
-	QDir procDir("/proc");
-	if (procDir.exists())
-	{
-		QStringList files=procDir.entryList();
-		for (int i=0;i<files.count();i++)
-		{
-			//directory entries in /proc which begin with and contain only digits are process ids
-			if ( files.at(i)[0].isDigit() )
-			{
-				int pid = files.at(i).toInt();
-				
-				// this assumes that child processes must have a pid > their parent processes
-				// so we don't need to consider processes with a lower pid
-				// I'm not absolutely sure whether this is valid or not though
-				
-				if ( pid <= sessionPID )
-					continue;
-				
-				QFile processInfo( QString("/proc/%1/stat").arg(pid) );
-				if ( processInfo.open( QIODevice::ReadOnly ) )
-				{
-					
-					//open process info file and extract parent id
-					QString infoText(processInfo.readAll());
-					//process info file looks like this:
-					//
-					//process_id (process_name) S process_parent_id
-					//... and we want the process_parent_id
-					QRegExp rx("^[\\d]+ \\(.*\\) .[\\s]");
-
-					if (rx.indexIn(infoText) != -1)
-					{
-						int offset = rx.matchedLength();
-						int endOfPPID = infoText.indexOf(' ',offset);
-						int ppid = infoText.mid(offset,endOfPPID-offset).toInt();
-
-						if ( ppid == sessionPID )
-							return true;
-					}
-					
-					processInfo.close();
-				}
-			}
-		}
-	}
-
-	return false;
 }
 
 void Session::setUserTitle( int what, const QString &caption )
@@ -436,8 +307,8 @@ void Session::setUserTitle( int what, const QString &caption )
       kDebug() << __FILE__ << __LINE__ << ": setting background colour to " << colorString << endl;
       QColor backColor = QColor(colorString);
       if (backColor.isValid()){// change color via \033]11;Color\007
-	if (backColor != modifiedBackground) {
-	    modifiedBackground = backColor;
+	if (backColor != _modifiedBackground) {
+	    _modifiedBackground = backColor;
 	    
         QListIterator<TerminalDisplay*> viewIter(_views);
         while (viewIter.hasNext())
@@ -454,9 +325,9 @@ void Session::setUserTitle( int what, const QString &caption )
 	}
 	
     if (what == 31) {
-       cwd=caption;
-       cwd=cwd.replace( QRegExp("^~"), QDir::homePath() );
-       emit openUrlRequest(cwd);
+       _cwd=caption;
+       _cwd=_cwd.replace( QRegExp("^~"), QDir::homePath() );
+       emit openUrlRequest(_cwd);
 	}
 	
     if (what == 32) { // change icon via \033]32;Icon\007
@@ -490,7 +361,7 @@ QString Session::displayTitle() const
 void Session::monitorTimerDone()
 {
   //FIXME: The idea here is that the notification popup will appear to tell the user than output from
-  //the terminal has stopped and the popup will disappear when the user activates the session.
+  //the _terminal has stopped and the popup will disappear when the user activates the session.
   //
   //This breaks with the addition of multiple views of a session.  The popup should disappear
   //when any of the views of the session becomes active
@@ -563,7 +434,7 @@ void Session::updateTerminalSize()
         }
     }  
 
-    // backend emulation must have a terminal of at least 1 column x 1 line in size
+    // backend emulation must have a _terminal of at least 1 column x 1 line in size
     if ( minLines > 0 && minColumns > 0 )
     {
         _emulation->onImageSizeChange( minLines , minColumns );
@@ -614,7 +485,7 @@ Session::~Session()
 {
   delete _emulation;
   delete _shellProcess;
-  delete zmodemProc;
+  delete _zmodemProc;
 
   QListIterator<TerminalDisplay*> viewIter(_views);
   while (viewIter.hasNext())
@@ -676,41 +547,41 @@ void Session::terminate()
   delete this;
 }
 
-Emulation* Session::getEmulation()
+Emulation* Session::emulation() const
 {
   return _emulation;
 }
 
 // following interfaces might be misplaced ///
 
-int Session::encodingNo()
+int Session::encodingNo() const
 {
-  return encoding_no;
+  return _encoding_no;
 }
 
-int Session::keymapNo()
+int Session::keymapNo() const
 {
   return _emulation->keymapNo();
 }
 
-QString Session::keymap()
+QString Session::keymap() const
 {
   return _emulation->keymap();
 }
 
-int Session::fontNo()
+int Session::fontNo() const
 {
   return _fontNo;
 }
 
 const QString& Session::terminalType() const
 {
-  return term;
+  return _term;
 }
 
-void Session::setTerminalType(const QString& terminalType)
+void Session::setTerminalType(const QString& _terminalType)
 {
-    term = terminalType;
+    _term = _terminalType;
 }
 
 int Session::sessionId() const
@@ -720,7 +591,7 @@ int Session::sessionId() const
 
 void Session::setEncodingNo(int index)
 {
-  encoding_no = index;
+  _encoding_no = index;
 }
 
 void Session::setKeymapNo(int kn)
@@ -772,9 +643,9 @@ const QString& Session::iconText() const
 
 bool Session::testAndSetStateIconName (const QString& newname)
 {
-  if (newname != stateIconName)
+  if (newname != _stateIconName)
     {
-      stateIconName = newname;
+      _stateIconName = newname;
       return true;
     }
   return false;
@@ -815,18 +686,18 @@ QString Session::getPgm()
 QString Session::currentWorkingDirectory()
 {
 #ifdef HAVE_PROC_CWD
-  if (cwd.isEmpty()) {
-    QFileInfo Cwd(QString("/proc/%1/cwd").arg(_shellProcess->pid()));
+  if (_cwd.isEmpty()) {
+    QFileInfo Cwd(QString("/proc/%1/_cwd").arg(_shellProcess->pid()));
     if(Cwd.isSymLink())
       return Cwd.readLink();
   }
 #endif /* HAVE_PROC_CWD */
-  return cwd;
+  return _cwd;
 }
 
-bool Session::isMonitorActivity() { return monitorActivity; }
-bool Session::isMonitorSilence() { return monitorSilence; }
-bool Session::isMasterMode() { return masterMode; }
+bool Session::isMonitorActivity() const { return monitorActivity; }
+bool Session::isMonitorSilence()  const { return monitorSilence; }
+bool Session::isMasterMode()      const { return masterMode; }
 
 void Session::setMonitorActivity(bool _monitor)
 {
@@ -878,10 +749,10 @@ void Session::setXonXoff(bool set)
 
 void Session::slotZModemDetected()
 {
-  if (!zmodemBusy)
+  if (!_zmodemBusy)
   {
     QTimer::singleShot(10, this, SLOT(emitZModemDetected()));
-    zmodemBusy = true;
+    _zmodemBusy = true;
   }
 }
 
@@ -893,46 +764,46 @@ void Session::emitZModemDetected()
 void Session::cancelZModem()
 {
   _shellProcess->send_bytes("\030\030\030\030", 4); // Abort
-  zmodemBusy = false;
+  _zmodemBusy = false;
 }
 
 void Session::startZModem(const QString &zmodem, const QString &dir, const QStringList &list)
 {
-  zmodemBusy = true;
-  zmodemProc = new KProcIO;
+  _zmodemBusy = true;
+  _zmodemProc = new KProcIO;
 
-  (*zmodemProc) << zmodem << "-v";
+  (*_zmodemProc) << zmodem << "-v";
   for(QStringList::ConstIterator it = list.begin();
       it != list.end();
       ++it)
   {
-     (*zmodemProc) << (*it);
+     (*_zmodemProc) << (*it);
   }
 
   if (!dir.isEmpty())
-     zmodemProc->setWorkingDirectory(dir);
-  zmodemProc->start(KProcIO::NotifyOnExit, false);
+     _zmodemProc->setWorkingDirectory(dir);
+  _zmodemProc->start(KProcIO::NotifyOnExit, false);
 
   // Override the read-processing of KProcIO
-  disconnect(zmodemProc,SIGNAL (receivedStdout (KProcess *, char *, int)), 0, 0);
-  connect(zmodemProc,SIGNAL (receivedStdout (KProcess *, char *, int)),
+  disconnect(_zmodemProc,SIGNAL (receivedStdout (KProcess *, char *, int)), 0, 0);
+  connect(_zmodemProc,SIGNAL (receivedStdout (KProcess *, char *, int)),
           this, SLOT(zmodemSendBlock(KProcess *, char *, int)));
-  connect(zmodemProc,SIGNAL (receivedStderr (KProcess *, char *, int)),
+  connect(_zmodemProc,SIGNAL (receivedStderr (KProcess *, char *, int)),
           this, SLOT(zmodemStatus(KProcess *, char *, int)));
-  connect(zmodemProc,SIGNAL (processExited(KProcess *)),
+  connect(_zmodemProc,SIGNAL (processExited(KProcess *)),
           this, SLOT(zmodemDone()));
 
   disconnect( _shellProcess,SIGNAL(block_in(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)) );
   connect( _shellProcess,SIGNAL(block_in(const char*,int)), this, SLOT(zmodemRcvBlock(const char*,int)) );
   connect( _shellProcess,SIGNAL(buffer_empty()), this, SLOT(zmodemContinue()));
 
-  zmodemProgress = new ZModemDialog(QApplication::activeWindow(), false,
+  _zmodemProgress = new ZModemDialog(QApplication::activeWindow(), false,
                                     i18n("ZModem Progress"));
 
-  connect(zmodemProgress, SIGNAL(user1Clicked()),
+  connect(_zmodemProgress, SIGNAL(user1Clicked()),
           this, SLOT(zmodemDone()));
 
-  zmodemProgress->show();
+  _zmodemProgress->show();
 }
 
 void Session::zmodemSendBlock(KProcess *, char *data, int len)
@@ -941,14 +812,14 @@ void Session::zmodemSendBlock(KProcess *, char *data, int len)
 //  qWarning("<-- %d bytes", len);
   if (_shellProcess->buffer_full())
   {
-    zmodemProc->suspend();
+    _zmodemProc->suspend();
 //    qWarning("ZModem suspend");
   }
 }
 
 void Session::zmodemContinue()
 {
-  zmodemProc->resume();
+  _zmodemProc->resume();
 //  qWarning("ZModem resume");
 }
 
@@ -975,24 +846,24 @@ void Session::zmodemStatus(KProcess *, char *data, int len)
        msg.truncate(0);
      }
      if (!txt.isEmpty())
-       zmodemProgress->addProgressText(QString::fromLocal8Bit(txt));
+       _zmodemProgress->addProgressText(QString::fromLocal8Bit(txt));
   }
 }
 
 void Session::zmodemRcvBlock(const char *data, int len)
 {
   QByteArray ba( data, len );
-  zmodemProc->writeStdin( ba );
+  _zmodemProc->writeStdin( ba );
 //  qWarning("--> %d bytes", len);
 }
 
 void Session::zmodemDone()
 {
-  if (zmodemProc)
+  if (_zmodemProc)
   {
-    delete zmodemProc;
-    zmodemProc = 0;
-    zmodemBusy = false;
+    delete _zmodemProc;
+    _zmodemProc = 0;
+    _zmodemBusy = false;
 
     disconnect( _shellProcess,SIGNAL(block_in(const char*,int)), this ,SLOT(zmodemRcvBlock(const char*,int)) );
     disconnect( _shellProcess,SIGNAL(buffer_empty()), this, SLOT(zmodemContinue()));
@@ -1000,7 +871,7 @@ void Session::zmodemDone()
 
     _shellProcess->send_bytes("\030\030\030\030", 4); // Abort
     _shellProcess->send_bytes("\001\013\n", 3); // Try to get prompt back
-    zmodemProgress->done();
+    _zmodemProgress->done();
   }
 }
 
