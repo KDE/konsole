@@ -53,7 +53,6 @@ MainWindow::MainWindow()
     // where the menu bar has a lower border
     setContentsMargins(0,2,0,0);
    
-    
     // create actions for menus
     setupActions();
 
@@ -67,7 +66,6 @@ MainWindow::MainWindow()
 
     // create menus
     createGUI();
-
 }
 
 ViewManager* MainWindow::viewManager() const

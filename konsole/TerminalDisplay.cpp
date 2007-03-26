@@ -403,7 +403,10 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
   // konsole in opaque mode.
   bY = bX = 1;
 
+  // create scrollbar for scrolling output up and down
+  // set the scrollbar's slider to occupy the whole area of the scrollbar initially
   scrollbar = new QScrollBar(this);
+  setScroll(0,0); 
   scrollbar->setCursor( Qt::ArrowCursor );
   connect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
 
@@ -1572,12 +1575,13 @@ void TerminalDisplay::scrollChanged(int)
 {
   _screenWindow->scrollTo( scrollbar->value() );
 
+  // if the thumb has been moved to the bottom of the scrollbar then set
+  // the display to automatically track new output, that is, scroll down automatically
+  // to how new lines as they are added
   const bool atEndOfOutput = (scrollbar->value() == scrollbar->maximum());
-
   _screenWindow->setTrackOutput( atEndOfOutput );
 
   updateImage();
-  //emit changedHistoryCursor(scrollbar->value()); //expose
 }
 
 int TerminalDisplay::scrollPosition()

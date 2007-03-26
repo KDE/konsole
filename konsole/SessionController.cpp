@@ -74,7 +74,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 }
 
 SessionController::~SessionController()
-{   
+{ 
 }
 
 KUrl SessionController::url() const
@@ -107,15 +107,18 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
     {
         if ( event->type() == QEvent::FocusIn )
         {
+            // notify the world that the view associated with this session has been focused
+            // used by the view manager to update the title of the MainWindow widget containing the view
             emit focused(this);
 
+            // when the view is focused, set bell events from the associated session to be delivered
+            // by the focused view
+       
+            // first, disconnect any other views which are listening for bell signals from the session 
+            disconnect( _session , SIGNAL(bellRequest(const QString&)) , 0 , 0 );
+            // second, connect the newly focused view to listen for the session's bell signal
             connect( _session , SIGNAL(bellRequest(const QString&)) ,
                     _view , SLOT(bell(const QString&)) );
-        }
-        if ( event->type() == QEvent::FocusOut )
-        {
-            disconnect( _session , SIGNAL(bellRequest(const QString&)) ,
-                     _view , SLOT(bell(const QString&)) );
         }
     }
 
