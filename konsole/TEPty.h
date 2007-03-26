@@ -21,13 +21,13 @@
 #ifndef TE_PTY_H
 #define TE_PTY_H
 
-#include <kprocess.h>
+#include <k3process.h>
 #include <QSocketNotifier>
 #include <QStringList>
 #include <QVector>
 #include <QList>
 
-class TEPty: public KProcess
+class TEPty: public K3Process
 {
 Q_OBJECT
 
@@ -82,7 +82,7 @@ Q_OBJECT
     bool buffer_full() { return m_bufferFull; }
 
   protected Q_SLOTS:
-      void dataReceived(KProcess *, char *buf, int len);
+      void dataReceived(K3Process *, char *buf, int len);
   public Q_SLOTS:
       void donePty();
       

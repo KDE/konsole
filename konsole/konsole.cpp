@@ -70,7 +70,7 @@
 #include <kactioncollection.h>
 #include <kactionmenu.h>
 #include <kauthorized.h>
-#include <kprocesscontroller.h>
+#include <k3processcontroller.h>
 #include <kcharsets.h>
 #include <kcolordialog.h>
 #include <kdebug.h>
@@ -342,7 +342,7 @@ Konsole::~Konsole()
     }
 
     // Wait a bit for all children to clean themselves up.
-    while(sessions.count() && KProcessController::instance()->waitForProcessExit(1))
+    while(sessions.count() && K3ProcessController::instance()->waitForProcessExit(1))
         ;
 
     resetScreenSessions();

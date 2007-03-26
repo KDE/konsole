@@ -35,8 +35,8 @@
 #include "TEmuVt102.h"
 
 
-class KProcIO;
-class KProcess;
+class K3ProcIO;
+class K3Process;
 class ZModemDialog;
 
 /**
@@ -218,8 +218,8 @@ public Q_SLOTS:
   void slotZModemDetected();
   void emitZModemDetected();
 
-  void zmodemStatus(KProcess *, char *data, int len);
-  void zmodemSendBlock(KProcess *, char *data, int len);
+  void zmodemStatus(K3Process *, char *data, int len);
+  void zmodemSendBlock(K3Process *, char *data, int len);
   void zmodemRcvBlock(const char *data, int len);
   void zmodemDone();
   void zmodemContinue();
@@ -300,7 +300,7 @@ private:
 
   // ZModem
   bool           zmodemBusy;
-  KProcIO*       zmodemProc;
+  K3ProcIO*       zmodemProc;
   ZModemDialog*  zmodemProgress;
 
   // Color/Font Changes by ESC Sequences
