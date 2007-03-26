@@ -90,6 +90,48 @@ void ViewManager::setupActions()
     mergeAction->setText( i18n("&Merge Windows") );
         
     connect( mergeAction , SIGNAL(triggered()) , _mainWindow , SLOT(mergeWindows()) );
+
+
+    QAction* nextViewAction = collection->addAction("next-view");
+    nextViewAction->setText( i18n("Next View") );
+    nextViewAction->setShortcut( QKeySequence(Qt::SHIFT+Qt::Key_Right) );
+    connect( nextViewAction, SIGNAL(triggered()) , this , SLOT(nextView()) );
+    _mainWindow->addAction(nextViewAction);
+
+    QAction* previousViewAction = collection->addAction("previous-view");
+    previousViewAction->setText( i18n("Previous View") );
+    previousViewAction->setShortcut( QKeySequence(Qt::SHIFT+Qt::Key_Left) );
+    connect( previousViewAction, SIGNAL(triggered()) , this , SLOT(previousView()) );
+    _mainWindow->addAction(previousViewAction);
+
+    QAction* nextContainerAction = collection->addAction("next-container");
+    nextContainerAction->setText( i18n("Next View Container") );
+    nextContainerAction->setShortcut( QKeySequence(Qt::SHIFT+Qt::Key_Tab) );
+    connect( nextContainerAction , SIGNAL(triggered()) , this , SLOT(nextContainer()) );
+    _mainWindow->addAction(nextContainerAction);
+}
+
+void ViewManager::nextContainer()
+{
+    _viewSplitter->activateNextContainer();
+}
+
+void ViewManager::nextView()
+{
+    ViewContainer* container = _viewSplitter->activeContainer();
+
+    Q_ASSERT( container );
+
+    container->activateNextView();
+}
+
+void ViewManager::previousView()
+{
+    ViewContainer* container = _viewSplitter->activeContainer();
+
+    Q_ASSERT( container );
+
+    container->activatePreviousView();
 }
 
 void ViewManager::detachActiveView()

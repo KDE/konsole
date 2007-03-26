@@ -73,14 +73,16 @@ public:
   /** 
    * Adds a new view for this session.    
    * 
-   * The viewing widget will display the output from the terminal and input from the viewing widget 
-   * (key presses, mouse activity etc.) will be sent to the terminal.
+   * The viewing widget will display the output from the terminal and 
+   * input from the viewing widget (key presses, mouse activity etc.) 
+   * will be sent to the terminal.
    *
-   * Since terminal applications assume a single terminal screen, all views of a session
-   * will display the same number of lines and columns.
+   * Since terminal applications assume a single terminal screen, 
+   * all views of a session will display the same number of lines and 
+   * columns.
    *
-   * When the Session instance is destroyed, any views which are still attached will also
-   * be deleted.
+   * When the Session instance is destroyed, any views which are still 
+   * attached will also be deleted.
    */
   void addView(TerminalDisplay* widget);
   /** 
@@ -111,15 +113,18 @@ public:
   int         fontNo()            const;
 
   /** 
-   * Returns the value of the TERM environment variable which will be used in the session's
-   * environment when it is started using the run() method.
+   * Returns the value of the TERM environment variable which will 
+   * be used in the session's environment when it is started using 
+   * the run() method.
+   * 
    * Defaults to "xterm".
    */  
   const QString& terminalType() const;
   /** 
-   * Sets the value of the TERM variable which will be used in the session's environment
-   * when it is started using the run() method.  Changing this once the session has been
-   * started using run() has no effect
+   * Sets the value of the TERM variable which will be used in the 
+   * session's environment when it is started using the run() method.  
+   * Changing this once the session has been started using run() has no effect.
+   *
    * Defaults to "xterm" if not set explicitly
    */
   void setTerminalType(const QString& terminalType);
@@ -130,8 +135,8 @@ public:
   const QString& iconText() const;
 
   /** 
-   * Return the session title set by the user (ie. the program running in the terminal), or an
-   * empty string if the user has not set a custom title
+   * Return the session title set by the user (ie. the program running 
+   * in the terminal), or an empty string if the user has not set a custom title
    */
   QString userTitle() const;
   /** 
@@ -171,8 +176,9 @@ public:
   void setMasterMode(bool);
   
     //TODO - Remove these functions which use indicies to reference keyboard layouts,
-    //       encodings etc. and replace them either with methods that uses pointers or references
-    //       to the font object / keyboard layout object etc. or a QString key
+    //       encodings etc. and replace them either with methods that 
+    //       use pointers or references to the font object / keyboard 
+    //       layout object etc. or a QString key
     void setEncodingNo(int index);
     void setKeymapNo(int kn);
     void setFontNo(int fn);

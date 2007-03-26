@@ -88,10 +88,12 @@ void MainWindow::setupActions()
     QAction* newTabAction = collection->addAction("new-tab"); 
     newTabAction->setIcon( KIcon("openterm") );
     newTabAction->setText( i18n("New &Tab") );
+    newTabAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_N) );
 
     QAction* newWindowAction = collection->addAction("new-window"); 
     newWindowAction->setIcon( KIcon("window-new") );
     newWindowAction->setText( i18n("New &Window") );
+    newWindowAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_M) );
 
     connect( newTabAction , SIGNAL(triggered()) , this , SLOT(newTab()) );
     connect( newWindowAction , SIGNAL(triggered()) , this , SLOT(newWindow()) );

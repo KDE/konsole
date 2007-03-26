@@ -73,6 +73,8 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     // using that for now
     lineCountBox->setValue( 1000 );
 
+    lineCountBox->setSingleStep( 100 );
+
     QLabel* lineCountLabel = new QLabel(i18n("lines"),this);
     QHBoxLayout* lineCountLayout = new QHBoxLayout();
 

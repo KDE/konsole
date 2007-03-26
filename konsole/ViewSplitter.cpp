@@ -166,6 +166,46 @@ void ViewSplitter::containerDestroyed(ViewContainer* object)
     }
 }
 
+void ViewSplitter::activateNextContainer()
+{
+    ViewContainer* active = activeContainer();
+
+    int index = _containers.indexOf(active);
+
+    if ( index == -1 )
+        return;
+
+    if ( index == _containers.count() -1 )
+        index = 0;
+    else
+        index++;
+
+    setActiveContainer( _containers.at(index) );
+}
+
+void ViewSplitter::activatePreviousContainer() 
+{
+    ViewContainer* active = activeContainer();
+
+    int index = _containers.indexOf(active);
+
+    if ( index == 0 )
+       index = _containers.count() - 1;
+    else
+       index--;
+
+    setActiveContainer( _containers.at(index) ); 
+}
+
+
+void ViewSplitter::setActiveContainer(ViewContainer* container)
+{
+    QWidget* activeView = container->activeView();
+    
+    if ( activeView )
+        activeView->setFocus( Qt::OtherFocusReason );
+}
+
 ViewContainer* ViewSplitter::activeContainer() const
 {
    if ( QWidget* focusW = focusWidget() )

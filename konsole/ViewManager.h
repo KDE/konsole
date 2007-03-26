@@ -114,6 +114,16 @@ private slots:
 
     // called when the title of the active view changes
     void activeViewTitleChanged( ViewProperties* );
+
+    // called when "Next View" shortcut is activated
+    void nextView();
+
+    // called when "Previous View" shortcut is activated
+    void previousView();
+
+    // called when "Next View Container" shortcut is activated
+    void nextContainer();
+
 private:
     void setupActions();
     void focusActiveView();

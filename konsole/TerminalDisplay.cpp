@@ -306,22 +306,7 @@ void TerminalDisplay::fontChange(const QFont &)
     font_w=1;
 
   font_a = fm.ascent();
-//printf("font: %s\n", font().toString().toLatin1().constData());
-//printf("fixed: %s\n", font().fixedPitch() ? "yes" : "no");
-//printf("fixed_font: %d\n", fixed_font);
-//printf("font_h: %d\n",font_h);
-//printf("font_w: %d\n",font_w);
-//printf("fw: %d\n",fw);
-//printf("font_a: %d\n",font_a);
-//printf("rawname: %s\n",font().renditionawName().toAscii().constData());
 
-/*
-#if defined(Q_CC_GNU)
-#warning TODO: Review/fix vt100 extended font-mapping
-#endif
-*/
-
-//  fontMap = identicalMap;
   emit changedFontMetricSignal( font_h, font_w );
   propagateSize();
   update();
@@ -418,13 +403,6 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
   // konsole in opaque mode.
   bY = bX = 1;
 
-  //Selection is no longer cleared automatically 
-  //when the selection changes
-  //
-  //cb = QApplication::clipboard();
-  //QObject::connect( (QObject*)cb, SIGNAL(selectionChanged()),
-  //                  this, SLOT(onClearSelection()) );
-
   scrollbar = new QScrollBar(this);
   scrollbar->setCursor( Qt::ArrowCursor );
   connect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
@@ -442,7 +420,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 
   setMouseTracking(true);
 
-  // Init DnD ////////////////////////////////////////////////////////////////
+  // Init DnD 
   setAcceptDrops(true); // attempt
   dragInfo.state = diNone;
 

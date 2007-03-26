@@ -102,6 +102,18 @@ public:
      * navigation aids to reflect the change.
      */
     virtual void setActiveView(QWidget* widget) = 0;
+
+
+    /**
+     * Changes the active view to the next view 
+     */
+    void activateNextView();
+
+    /**
+     * Changes the active view to the previous view
+     */
+    void activatePreviousView();
+
 signals:
     /** Emitted when the container is deleted */
     void destroyed(ViewContainer* container);

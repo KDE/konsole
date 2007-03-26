@@ -82,12 +82,27 @@ public:
      * is the ViewSplitter widget at the top of the hierarchy.
      */
     ViewContainer* activeContainer() const; 
-   
+
+    /**
+     * Gives the focus to the active view in the specified container 
+     */
+    void setActiveContainer(ViewContainer* container);
+
     /**
      * Returns a list of the containers held by this splitter
      */
     QList<ViewContainer*> containers() const {return _containers;}
-    
+   
+    /**
+     * Gives the focus to the active view in the next container
+     */
+    void activateNextContainer();
+
+   /**
+    * Gives the focus to the active view in the previous container
+    */
+   void activatePreviousContainer();
+
 signals:
     /** Signal emitted when the last child widget is removed from the splitter */
     void empty(ViewSplitter* splitter);

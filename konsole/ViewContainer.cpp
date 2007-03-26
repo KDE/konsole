@@ -88,6 +88,40 @@ const QList<QWidget*> ViewContainer::views()
     return _views;
 }
 
+void ViewContainer::activateNextView()
+{
+    QWidget* active = activeView();
+
+    int index = _views.indexOf(active);
+
+    if ( index == -1 )
+        return;
+
+    if ( index == _views.count() - 1 )
+        index = 0;
+    else
+        index++;
+
+    setActiveView( _views.at(index) );
+}
+
+void ViewContainer::activatePreviousView()
+{
+    QWidget* active = activeView();
+
+    int index = _views.indexOf(active);
+
+    if ( index == -1 ) 
+        return;
+
+    if ( index == 0 )
+        index = _views.count() - 1;
+    else
+        index--;
+
+    setActiveView( _views.at(index) );
+}
+
 ViewProperties* ViewContainer::viewProperties( QWidget* widget )
 {
     Q_ASSERT( _navigation.contains(widget) );
