@@ -144,7 +144,6 @@ TabbedViewContainer::TabbedViewContainer(QObject* parent) :
    ,_contextMenuTab(0) 
 {
     _tabWidget = new KTabWidget();
-    _tabWidget->setDrawTabFrame(false);
     _tabContextMenu = new KMenu(_tabWidget);   
 
     _newSessionButton = new QToolButton(_tabWidget);

@@ -26,8 +26,8 @@
 #include <QByteArray>
 
 // KDE
-#include <kapplication.h>
-#include <kmainwindow.h>
+#include <KApplication>
+#include <KMainWindow>
 
 // Konsole
 #include "Pty.h"
@@ -35,8 +35,8 @@
 #include "Vt102Emulation.h"
 
 
-class KProcIO;
-class KProcess;
+class K3ProcIO;
+class K3Process;
 
 namespace Konsole
 {
@@ -236,8 +236,8 @@ public Q_SLOTS:
   void slotZModemDetected();
   void emitZModemDetected();
 
-  void zmodemStatus(KProcess *, char *data, int len);
-  void zmodemSendBlock(KProcess *, char *data, int len);
+  void zmodemStatus(K3Process *, char *data, int len);
+  void zmodemSendBlock(K3Process *, char *data, int len);
   void zmodemRcvBlock(const char *data, int len);
   void zmodemDone();
   void zmodemContinue();
@@ -321,7 +321,7 @@ private:
 
   // ZModem
   bool           _zmodemBusy;
-  KProcIO*       _zmodemProc;
+  K3ProcIO*       _zmodemProc;
   ZModemDialog*  _zmodemProgress;
 
   // Color/Font Changes by ESC Sequences

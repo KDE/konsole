@@ -175,11 +175,11 @@ void Pty::setWriteable(bool writeable)
 Pty::Pty()
 {
   m_bufferFull = false;
-  connect(this, SIGNAL(receivedStdout(KProcess *, char *, int )),
-	  this, SLOT(dataReceived(KProcess *,char *, int)));
-  connect(this, SIGNAL(processExited(KProcess *)),
+  connect(this, SIGNAL(receivedStdout(K3Process *, char *, int )),
+	  this, SLOT(dataReceived(K3Process *,char *, int)));
+  connect(this, SIGNAL(processExited(K3Process *)),
           this, SLOT(donePty()));
-  connect(this, SIGNAL(wroteStdin(KProcess *)),
+  connect(this, SIGNAL(wroteStdin(K3Process *)),
           this, SLOT(writeReady()));
 
   setUsePty(All, false); // utmp will be overridden later
@@ -243,7 +243,7 @@ void Pty::send_bytes(const char* s, int len)
 }
 
 /*! indicates that a block of data is received */
-void Pty::dataReceived(KProcess *,char *buf, int len)
+void Pty::dataReceived(K3Process *,char *buf, int len)
 {
  // kDebug() << __FUNCTION__ << ": received " << len << " bytes - '" << buf << "'" << endl;
 

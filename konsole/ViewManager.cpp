@@ -92,15 +92,21 @@ void ViewManager::setupActions()
     connect( mergeAction , SIGNAL(triggered()) , _mainWindow , SLOT(mergeWindows()) );
 
 
-    QAction* nextViewAction = collection->addAction("next-view");
-    nextViewAction->setText( i18n("Next View") );
-    nextViewAction->setShortcut( QKeySequence(Qt::SHIFT+Qt::Key_Right) );
+    KAction* nextViewAction = new KAction( i18n("Next View") , this );
+    collection->addAction("next-view",nextViewAction);
+    KShortcut nextViewShortcut = nextViewAction->shortcut();
+    nextViewShortcut.setAlternate( QKeySequence(Qt::SHIFT+Qt::Key_Right) );
+    nextViewShortcut.setPrimary( QKeySequence(Qt::CTRL+Qt::Key_PageUp) );
+    nextViewAction->setShortcut(nextViewShortcut); 
     connect( nextViewAction, SIGNAL(triggered()) , this , SLOT(nextView()) );
     _mainWindow->addAction(nextViewAction);
 
-    QAction* previousViewAction = collection->addAction("previous-view");
-    previousViewAction->setText( i18n("Previous View") );
-    previousViewAction->setShortcut( QKeySequence(Qt::SHIFT+Qt::Key_Left) );
+    KAction* previousViewAction = new KAction( i18n("Previous View") , this );
+    collection->addAction("previous-view",previousViewAction);
+    KShortcut previousViewShortcut = previousViewAction->shortcut();
+    previousViewShortcut.setPrimary( QKeySequence(Qt::SHIFT+Qt::Key_Left) );
+    previousViewShortcut.setAlternate( QKeySequence(Qt::CTRL+Qt::Key_PageDown) );
+    previousViewAction->setShortcut(previousViewShortcut);
     connect( previousViewAction, SIGNAL(triggered()) , this , SLOT(previousView()) );
     _mainWindow->addAction(previousViewAction);
 

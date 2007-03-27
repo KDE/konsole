@@ -2431,6 +2431,12 @@ bool TerminalDisplay::eventFilter( QObject *obj, QEvent *e )
 
 	if (ke->modifiers() & Qt::ControlModifier)
 	{
+        /*if ( ke->key() == Qt::Key_PageUp || ke->key() == Qt::Key_PageDown) 
+        {
+            static_cast<QKeyEvent*>(e)->ignore();
+            return false;
+        }*/
+
 		if ( ke->key() == Qt::Key_S )
 				emit flowControlKeyPressed(true /*output suspended*/);
 		if ( ke->key() == Qt::Key_Q )
@@ -2459,19 +2465,6 @@ bool TerminalDisplay::eventFilter( QObject *obj, QEvent *e )
     // here.
     return true;
   }
-  
-  // We no longer clear the selection when the clipboard changes
-  //
-  //if ( e->type() == QEvent::Enter )
-  //{
-  //  QObject::disconnect( (QObject*)cb, SIGNAL(dataChanged()),
-  //    this, SLOT(onClearSelection()) );
-  //}
-  //if ( e->type() == QEvent::Leave )
-  //{
-  //  QObject::connect( (QObject*)cb, SIGNAL(dataChanged()),
-  //    this, SLOT(onClearSelection()) );
-  //}*/
   
   return QFrame::eventFilter( obj, e );
 }

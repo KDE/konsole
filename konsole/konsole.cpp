@@ -350,7 +350,7 @@ Konsole::~Konsole()
 
     //wait for the session processes to terminate
     while(sessionManager()->sessions().count() && 
-            KProcessController::theKProcessController->waitForProcessExit(1))
+            K3ProcessController::theK3ProcessController->waitForProcessExit(1))
     {
         //do nothing
     }
