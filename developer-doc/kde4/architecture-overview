@@ -1,0 +1,84 @@
+
+Architectural Overview of Konsole for KDE 4.0
+
+Authors:        Robert Knight <robertknight@gmail.com>
+Last Updated:   14-02-2007
+Summary:        This document describes the basic architecture of Konsole for KDE 4.0
+
+=====================================================================================
+
+
+Contents:
+    1.  Introduction
+    2.  Back-end
+    3.  Front-end
+    3.1 Terminal display
+    3.2 User interface
+
+
+=====================================================================================
+
+1.  Introduction
+
+Konsole consists of two main components, the back-end, which performs the terminal
+emulation, and the front-end, which renders the terminal display, handles user input
+and provides the user interface.
+
+2.  Back-end
+
+The back-end provides the interface for the terminal emulation and an implementation of 
+a DEC VT102 terminal.
+
+The task of the back-end is to take a serial stream of characters arriving from the 
+program currently running in the terminal, decode and interpret them to produce
+an image of characters which can be rendered by the front-end.  The incoming
+stream of characters can be encoded in a variety of formats, and may include
+'escape-sequences'.  These are special sequences of characters which can:
+    - Turn various formatting options on or off ( text color, bold, underline etc. )
+    - Move the cursor around ( new characters are inserted at the current cursor position )
+    - Insert, delete or replace lines on screen
+    - Change various aspects of the terminal state 
+    - ... and other tasks
+
+When the back-end receives input from the program running in the terminal, it first decodes
+it into the standard Unicode format used internally.  This is done in a generic fashion which
+is independant of the kind of terminal actually being emulated.  Once the characters have
+been decoded into a format that Konsole can understand, the interpretation of the characters is
+performed by an implementation of a specific type of terminal.  The terminal emulation has
+access to one or more screens, which act as a canvas which the emulation can draw characters
+on, with various associated formatting information.  Each screen may have a history scroll
+associated with it.  When new lines are added to the screen, older lines will be transferred
+to the history scroll.  Different history scroll implementations are available, and the number
+of lines they can store and where they store those lines varies between them.  The history scroll
+provides the facility which allows the user to scroll the display up and down to look at previous
+output.
+
+The terminal emulation is aware of the displays which are connected to it, and when it 
+receives input, it schedules an update of the attached displays.  If several batches
+of input are received in quick succession, only one update will be performed.  The update
+itself consists of the emulation getting the final character image from the current screen
+and sending it to the terminal display, which can then render the updates.
+
+The back-end is also responsible for encoding key-presses and other input from the user
+and sending it as a serial character stream to the standard input of the program
+currently running in the terminal.  The translation of key-presses into character
+sequences which are sent to the terminal is customiseable using so-called 'keytrans' files,
+a number of which are provided with Konsole.
+
+Key Classes:    TEmulation  - The generic terminal emulation implementation
+                TEmuVt102   - The DEC VT102 + xterm extensions implementation
+                TEScreen    - The screen which acts as a canvas for the emulation to draw on
+                TEHistory   - Interface for history scroll classes
+
+3.  Front-end
+
+The front-end consists primarily of the user interface and the terminal displays.
+
+3.1  Terminal display
+
+The terminal display is a widget which renders an image of characters on screen or to another device
+such as a printer.  Each back-end may have one or more terminal displays connected to it.
+
+3.2  User interface
+
+

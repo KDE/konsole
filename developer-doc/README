@@ -1,0 +1,108 @@
+
+Developer Documentation for Konsole
+
+Authors:        Robert Knight < robertknight@gmail.com >
+Last Updated:   14-02-2007
+Summary:        Introduction to Konsole developer documentation
+===============================================================
+
+Contents:
+
+1.      Introduction
+2.      Documentation format
+3.      Documentation layout (aka. 'Where to find things')
+4.      Contributing to Konsole
+    4.1     Discussion and help
+    4.2     Submitting code
+    4.2.1   API documentation guidelines
+    4.2.2   Code style guidelines
+
+===============================================================
+
+1.  Introduction
+
+The document explains the format used for Konsole documentation
+since KDE 4.  Any queries about 
+
+2.  Documentation format
+
+To try and make it easier for developers to find the information they need
+about Konsole, the use of a standard document template which answers the following
+questions is encouraged:
+    
+    - What is this document?
+    - Who wrote it?
+    - When was it last updated?
+    - What is it about?
+    - Where can I find information about <subject> within this document?
+
+The current template can be found in kde4/developer-documentation-template
+
+There is older documentation in the old-documents/ folder which does
+not follow this format.  This is kept as a reference.  Assistance
+in tidying up documentation from that directory by using the documentation
+template would be appreciated.
+
+3.  Documentation layout
+
+    kde4/           - Documentation which is relevant to the KDE 4.0x release of Konsole
+    kde4/historic   - Documentation which was prepared during the KDE 4.0x development
+                      cycle but which is no longer relevant.
+    old-documents/  - An assortment of documentation which was created during earlier
+                      releases of Konsole.  There is useful inforamtion here, particularly
+                      about the type of terminal which Konsole emulates, but it is not
+                      organised.
+
+4.  Contributing to Konsole
+
+Help with Konsole's development, whether it involves code, user interface suggestions or 
+other resources is greatly appreciated.
+
+4.1 Discussion and help
+
+Discussion about Konsole development takes place primarily on the Konsole mailing list,
+at konsole-devel@kde.org.  If you need help with Konsole development or wish to discuss
+implementation of a feature, fixes to bugs etc., then this is an appropriate place to
+do that.
+
+4.2  Submitting code
+
+Patches can be submitted for Konsole in a number of places:
+
+    - For bugfixes, we recommend that you attach the patch to the relevant bug report on bugs.kde.org
+    - For new features, a patch can be attached to a relevant wishlist report on bugs.kde.org if 
+      there is one, and/or submitted to konsole-devel@kde.org
+   
+    If your patch adds new methods or classes then please ensure that there is API documentation for
+    them in the code.  Looking at the header files for existing classes should give you an idea of 
+    what is asked for.  
+
+   
+4.2.1  API documentation guidelines
+
+   Good API documentation in the code is very helpful for other developers.  Here are a few guidelines on 
+   writing API documentation for Konsole:
+
+        - All classes should have documentation which describes the basic function of the class.
+          Usage examples are appreciated.
+        - All public and protected methods should have API documentation which describes what
+          the method does and what the returned value (if any) means.
+          Parameter documentation is encouraged if the method has more than a couple of parameters
+          or if the use of a parameter is not immediately clear from its name and type.
+        - All public and protected enumerations and constants should have API documentation which
+          describes what the various values mean.
+        - The usage of brief standard comments next to private methods is encouraged to
+          provide a quick explanation of what that method does.
+
+4.2.2   Code style guidelines
+
+    Generally speaking, the code follows the style of API used in Qt classes, and favours 
+    verbosity.  The naming of methods and classes follows the Qt style, roughly speaking.  
+
+    Earlier Konsole code had a proliferation of two-letter variable names, which made it hard
+    to read and understand in some places, and let directly to bugs in others.  Descriptive naming
+    and sensible use of comments are strongly encouraged in new code.
+
+
+    
+
