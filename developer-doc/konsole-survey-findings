@@ -130,7 +130,9 @@ Raw data:
         - Email
 
 5.  The vast majority ( 90% ) of respondants used Bash as their
-    primary shell.  Zsh was used by 6% ( 103 ) respondants.
+    primary shell.  Zsh was used by 4% of respondants.
+    Alternatives mentioned in the "other" section included ksh,
+    Midnight Commander and Python.
 
 6.  In decending order, the most popular interactive terminal programs
     were:
@@ -139,27 +141,67 @@ Raw data:
         - man / info
         - vi / vim
         - GNU Screen
-        - gdb
         - Midnight Commander
+        - gdb
 
-7.  Users primarily chose between one of 4 colour choices:
-        - Black on White ( 24% )
-        - White on Black ( 29% )
-        - Linux console ( Silver on Black ) ( 21% )
-        - Light on transparent ( 19% )
+7.  Asked for their preferred colour scheme for Konsole sessions,
+    users primarily chose between one of 4 colour choices supplied
+    with Konsole.
+     
+        - Black on White ( 25% )
+        - White on Black ( 28% )
+        - Linux console ( Silver on Black ) ( 22% )
+        - Light on transparent ( 18% )
 
-8.  [ TODO ]
+8.  Additional comments for Question 7.  A large number of respondants
+    answered this question.
+
+    Popular alternative colour choices mentioned included:
+
+    - Green on Black ( Matrix-like ) 
+      (Probably the most popular colour not mentioned on the original list)
+    - Dark background, transparent  
+    - Dark text, transparent background ( Relatively popular ) 
+    - Black text on a light, but non-white background
+      (To reduce glare from monitor)
+      This light colour was most often Yellow.
+      (Probably the second most popular choice)
+
+      Grey background was sometimes used.
+
+    - Light text on a dark background
+    - Yellow text on a dark blue background
+
+    - Several respondants mentioned the use of a random background colour
+    - Many respondants indicated that true transparency would be highly
+      desireable.
+    - Many respondants also said that true transparency was not useful
+      for them.
+    - With transparency, the most appropriate colour scheme depeonds on
+      the desktop background.
+    - Several respondants said that a white background was too glaring.
+    - Several respondants requested a custom background colour (often 
+      one with a redish hue) for root sessions.
+
+    Problems mentioned:
+
+    - Standard Konsole colours not working well with 'emerge' coloured
+      output.
+    - Default BLUE colour ( I think this refers to the Linux console colour
+      scheme ) does not work well in Vim or other applications.
+    - Existing colour scheme editor is hard to use.
+    - Existing 'fake transparency' has performance issues.
 
 9.  The majority of respondants do not change their colour scheme
     depending on the computer they are logged into, but a significant
-    minority ( 17% ) did.
+    minority ( 22% ) did.
 
 10. The majority of respondants do not change their colour scheme
-    depending on the program running in the terminal, with 10% 
+    depending on the program running in the terminal, with 12% 
     claiming that they did.
 
-11. The majority ( 80% ) of respondants used a colour scheme which
-    came with Konsole.  20% used a custom colour scheme.
+11. The majority ( 77.5% ) of respondants used a colour scheme which
+    came with Konsole.  22% used a custom colour scheme.
 
 12. The most favoured graphical enhancements to Konsole were, in
     descending order:
@@ -178,18 +220,76 @@ Raw data:
     ( typically bash ) was the most frequently used session by far.
 
     The "Root Shell" and "Linux Console" sessions were the next
-    most frequently used types.
+    most frequently used types, followed distantly by Screen.
 
 14. The majority of respondants (84%) had not created their own custom
-    session types, although 15% ( 283 ) had.
+    session types, although 16% ( 283 ) had.
 
-15. [ TODO ]
+15. Popular uses for custom session types:
+        
+        - SSH: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+               XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+               XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+               XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+               XXXXXXXXXXXXXXXXXXXXXXXX
+
+        ( Often used custom colours to distinguish between machines )
+        ( Some of these turned on 'send to all sessions' - very useful
+          for performing the same command across many machines )
+        ( Users with many SSH session types complained of the menu
+          growing too large.
+          They would also appreciate the ability to bookmark all open
+          SSH sessions )
+
+        - Other remote connection: XXXXXXXXXXXXXXXXXXXXXX
+
+        ( Including databases, telnet )
+
+        - Interactive Interpreter (Python,Ruby etc.): XXXXXXXXXXXXXXXX
+                                                      XXXXXXXXXXXXX
+
+        ipython was a popular choice, also irb ( ruby ).
+                        
+        - Custom shell: XXXXX        
+        - Custom Screen-based: XXX
+        - Tabs opened in specific directories: XXXXXX
+        - Custom environment (eg. a 'KDE 4 development environment'):
+            X
+        - Customise the default: XXXXXXXXXXXXXXXXXXX
+
+          - Often to change colours or font size
+          - Or to make the default a login shell ( eg. bash --login )
+
+        - Disable various UI features (scrollbars,menu bar etc.): XXXXX
+                                                                  XXXXX
+                                                                  X
+        - Custom root shell: XXXXXXXXXX
+
+        A number of respondants did not understand the concept of a 
+        'Session' in Konsole.
+        Others found it easier to use scripts to set up different
+        environments.
+        Some respondants actually discovered this feature as a result
+        of answering the survey question.
+
+        Invoking a session without a keyboard shortcut requires use of 
+        the mouse.  This is inefficient.  A number of respondants suggested
+        that sessions should be activated automatically when certain programs
+        are started etc.
+
+        Some people need to interface with machines or applications which
+        work better with different terminal, keyboard or encoding settings.
+
+        A notable number of respondants complained that the user interface
+        for creating new sessions or modifying the default session type
+        was hard to understand.
 
 16. Around half of respondants ( 42% ) did use GNU Screen, a slightly larger
     proportion ( 57% ) did not.
 
 17. The most favoured candidate for better integration with Konsole was
     the SSH program ( 43% ), followed by Vim ( 16% ) and GNU Screen ( 11% ).
+    Others mentioned include Konqueror,mc,nano and emacs
 
 18. The rankings did not give clear answers about the ease of performing
     various tasks in Konsole, but the additional comments ( Q #19 ) gave
