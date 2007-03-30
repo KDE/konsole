@@ -297,8 +297,12 @@ Raw data:
 
 19. [ TODO ]
 
-20. Around half of the respondants only had one Konsole window open at once,
-    with a third having 2 windows open at once, and 25% with more than 2.
+20. Typical number of Konsole windows open:
+    
+        1    ( 40% )
+        2    ( 29% )
+        3-4  ( 19% )
+        More ( 11% )
 
 21. Around half of the respondants used small Konsole windows occupying 
     a quarter of the screen or less.  A significant number ( one third )
@@ -306,28 +310,38 @@ Raw data:
     vertically maximized Konsoles occupying half of the screen, and a further
     7% used horizontally maximised Konsoles.
 
-22. Around half of the respondants typically had 2-3 tabs open at once,
+22. 40% of the respondants typically had 2-3 tabs open at once,
     26% typically had 4-5 tabs open, 10% typically had 6-7 tabs open.
     Only 7% had more.  15% claimed to only have one tab opened typically.
 
 23. The preferred default naming for tabs were, in descending order:
 
-    - Foreground program ( 25% )
-    - Computer logged into ( 18% )
+    - Foreground program ( 24% )
+    - Computer logged into ( 20% )
     - Current directory ( 17% )
-    - Session number ( 13% )
+    - Session number ( 12% )
     - Window title set by session program ( 12% )
 
-    [ TODO - Report popular 'other' suggestions for default naming ]
+    Most user suggestions were a mix of the above, depending on context.
+    Popular user suggestions:
 
-24. The majority of respondants ( 70% ) did not typically rename the tabs
-    manually after they were created, although a significant minority ( 23% ) did.
+    - computer:dir ( Might be hard to implement )
+    - mix of dir and program
+    - according to bookmark name
+    - computer:program ( Again, might be hard to implement )
+    - customiseable per session type
+    - session type name
+    - user@computer
 
-    112 respondants ( 5.9% ) did not know how to rename tabs.
+24. The majority of respondants ( 68% ) did not typically rename the tabs
+    manually after they were created, although a significant minority ( 25% ) did.
+
+    6% did not know how to rename tabs.
 
 25. The majority of respondants ( 63% ) did not change the tab font
-    colour manually.  A significant minority ( 10% ) did.  A significant percentage
-    ( 24% ) did not know how to change the tab colour.
+    colour manually.  A significant minority ( 12% ) did occassionally.  
+    A significant percentage
+    ( 22% ) did not know how to change the tab colour.
 
     This could be attributed to poor wording of the question, which asked about
     "tab colour", when it meant "tab font colour".
@@ -335,10 +349,16 @@ Raw data:
 26. The most popular methods for choosing tab icons were:
 
     - According to foreground program ( 48% )
-    - According to session type ( 33% )
+    - According to session type ( 35% )
     - Random coloured icon for each new tab ( 7% )
-    
-    [ TODO - Report popular 'other' suggestions for icon selection ]
+
+    Popular user suggestions:
+
+    - According to machine logged into
+    - Disable tab icons
+      (Probably the most popular actually)
+    - Don't care
+
 
 27. [ TODO ]
 
