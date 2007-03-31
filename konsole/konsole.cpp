@@ -84,7 +84,6 @@
 #include <kinputdialog.h>
 #include <kio/copyjob.h>
 #include <kio/netaccess.h>
-#include <kkeydialog.h>
 #include <klocale.h>
 #include <kmenu.h>
 #include <kmenubar.h>
@@ -97,6 +96,7 @@
 #include <kselectaction.h>
 #include <kservicetypetrader.h>
 #include <kshell.h>
+#include <kshortcutsdialog.h>
 #include <kstandarddirs.h>
 #include <kstandardaction.h>
 #include <kstringhandler.h>
@@ -1996,7 +1996,7 @@ void Konsole::slotConfigureNotifications()
 
 void Konsole::slotConfigureKeys()
 {
-  KKeyDialog::configure(m_shortcuts);
+  KShortcutsDialog::configure(m_shortcuts);
   m_shortcuts->writeSettings();
 
   QStringList ctrlKeys;
