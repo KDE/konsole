@@ -1238,6 +1238,7 @@ bool Konsole::queryClose()
                 	  "Are you sure you want to continue?" , sessions.count() ),
 	    	    i18n("Confirm close") ,
 				closeTabsButton,
+				KStandardGuiItem::cancel(),
 				QString(),
 				KMessageBox::PlainCaption)
 	    ) {
@@ -2990,6 +2991,7 @@ void Konsole::confirmCloseCurrentSession( TESession* _se )
   	if (KMessageBox::warningContinueCancel(this,
         	i18n("Are you sure you want to close this session?"),
         	i18n("Close Confirmation"), KGuiItem(i18n("C&lose Session"),"tab-remove"),
+        	KStandardGuiItem::cancel(),
         	"ConfirmCloseSession")==KMessageBox::Continue)
    	{
 		_se->closeSession();
