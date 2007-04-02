@@ -682,7 +682,7 @@ void konsolePart::slotSelectFont() {
    if ( !se ) return;
 
    QFont font = se->widget()->getVTFont();
-   if ( KFontDialog::getFont( font, true ) != QDialog::Accepted )
+   if ( KFontDialog::getFont( font, KFontChooser::FixedFontsOnly ) != QDialog::Accepted )
       return;
 
    se->widget()->setVTFont( font );
