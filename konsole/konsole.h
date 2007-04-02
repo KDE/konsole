@@ -62,7 +62,6 @@ class KConfig;
 class KTabWidget;
 class KTemporaryFile;
 class KToggleAction;
-class KWinModule;
 
 class TEWidget;
 class SessionInfo;
@@ -320,8 +319,6 @@ private:
   TESession*     m_initialSession;
   ColorSchemaList* colors;
   QString        s_encodingName;
-
-  KWinModule*    kWinModule;
 
   KMenuBar*   menubar;
   KStatusBar* statusbar;

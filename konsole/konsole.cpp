@@ -109,7 +109,7 @@
 #include <kurlrequesterdialog.h>
 #include <netwm.h>
 #include <knotifyconfigwidget.h>
-#include <kwinmodule.h>
+#include <kwm.h>
 
 // Konsole
 #include "SessionManager.h"
@@ -167,7 +167,6 @@ Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bo
 ,se_previous(0)
 ,m_initialSession(0)
 ,colors(0)
-,kWinModule(0)
 ,menubar(0)
 ,statusbar(0)
 ,m_session(0)
@@ -355,9 +354,6 @@ Konsole::~Konsole()
 
     delete colors;
     colors=0;
-
-    delete kWinModule;
-    kWinModule = 0;
 
 	//tidy up dialogs
 	delete saveHistoryDialog;
