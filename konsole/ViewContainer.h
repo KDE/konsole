@@ -44,6 +44,9 @@ class QWidget;
     class KColorCells;
     class KMenu;
 
+// TabbedViewContainerV2
+    class QTabBar;
+
 // ListViewContainer
     class QSplitter;
     class QListWidget;
@@ -195,6 +198,32 @@ private:
     KColorCells*    _tabColorCells;
 
     int _contextMenuTab;
+};
+
+/** 
+ * An alternative tabbed view container which uses a QTabBar and QStackedWidget
+ * combination for navigation instead of QTabWidget
+ */
+class TabbedViewContainerV2 : public ViewContainer
+{
+    Q_OBJECT
+
+public:
+    TabbedViewContainerV2(QObject* parent);
+    virtual ~TabbedViewContainerV2();
+
+    virtual QWidget* containerWidget() const;
+    virtual QWidget* activeView() const;
+    virtual void setActiveView(QWidget* view);
+
+protected:
+    virtual void viewAdded(QWidget* view);
+    virtual void viewRemoved(QWidget* view);
+
+private:
+    QTabBar* _tabBar;
+    QStackedWidget* _stackWidget;
+    QWidget* _containerWidget;
 };
 
 /**

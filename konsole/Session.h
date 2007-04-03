@@ -140,7 +140,8 @@ public:
    */
   QString userTitle() const;
   /** 
-   * Returns the title of the session for display in UI widgets (eg. window captions)
+   * Returns the title of the session for display in UI widgets 
+   * (eg. window captions)
    */
   QString displayTitle() const;
 

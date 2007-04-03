@@ -59,6 +59,7 @@ set(konsole_KDEINIT_SRCS
         Filter.cpp
         HistorySizeDialog.cpp
         IncrementalSearchBar.cpp
+        KeyboardTranslator.cpp
         KeyTrans.cpp
         Application.cpp
         BookmarkHandler.cpp

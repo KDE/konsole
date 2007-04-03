@@ -26,7 +26,9 @@
 #include <QListWidget>
 #include <QSplitter>
 #include <QStackedWidget>
+#include <QTabBar>
 #include <QToolButton>
+#include <QVBoxLayout>
 #include <QWidgetAction>
 
 // KDE 
@@ -343,6 +345,61 @@ void TabbedViewContainer::selectTabColor()
   }
 
   _tabWidget->setTabTextColor( _contextMenuTab , color );
+}
+
+TabbedViewContainerV2::TabbedViewContainerV2(QObject* parent) : ViewContainer(parent)
+{
+    _containerWidget = new QWidget;
+    _stackWidget = new QStackedWidget();
+    _tabBar = new QTabBar();
+    _tabBar->setDrawBase(true);
+
+    QVBoxLayout* layout = new QVBoxLayout;
+    layout->setSpacing(0);
+    layout->setMargin(0);
+    layout->addWidget(_tabBar);
+    layout->addWidget(_stackWidget);
+
+    _containerWidget->setLayout(layout);
+}
+TabbedViewContainerV2::~TabbedViewContainerV2()
+{
+    _containerWidget->deleteLater();
+}
+QWidget* TabbedViewContainerV2::containerWidget() const
+{
+    return _containerWidget;
+}
+QWidget* TabbedViewContainerV2::activeView() const
+{
+    return _stackWidget->currentWidget();
+}
+void TabbedViewContainerV2::setActiveView(QWidget* view)
+{
+    const int index = _stackWidget->indexOf(view);
+
+    Q_ASSERT( index != -1 );
+
+   _stackWidget->setCurrentWidget(view);
+   _tabBar->setCurrentTab(index); 
+}
+void TabbedViewContainerV2::viewAdded( QWidget* view )
+{
+    _stackWidget->addWidget(view);
+    
+    ViewProperties* item = viewProperties(view);
+    //connect( item , SIGNAL(titleChanged(ViewProperties*)) , this , SLOT(updateTitle(ViewProperties*))); 
+    //connect( item , SIGNAL(iconChanged(ViewProperties*) ) , this ,SLOT(updateIcon(ViewProperties*)));          
+    _tabBar->addTab( item->icon() , item->title() );
+}
+void TabbedViewContainerV2::viewRemoved( QWidget* view )
+{
+    const int index = _stackWidget->indexOf(view);
+
+    Q_ASSERT( index != -1 );
+
+    _stackWidget->removeWidget(view);
+    _tabBar->removeTab(index);
 }
 
 StackedViewContainer::StackedViewContainer(QObject* parent) : ViewContainer(parent)

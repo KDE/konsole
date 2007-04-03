@@ -361,7 +361,7 @@ void ViewManager::createView(Session* session)
 
 ViewContainer* ViewManager::createContainer()
 {
-    ViewContainer* container = new TabbedViewContainer(_viewSplitter); 
+    ViewContainer* container = new TabbedViewContainerV2(_viewSplitter); 
 /*
     if ( _mainWindow->factory() )
     {

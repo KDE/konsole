@@ -1,7 +1,7 @@
 /*
     This source file is part of Konsole, a terminal emulator.
 
-    Copyright (C) 2006 by Robert Knight <robertknight@gmail.com>
+    Copyright (C) 2006-7 by Robert Knight <robertknight@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -160,6 +160,10 @@ class SessionManager : public QObject
 Q_OBJECT
 
 public:
+    /** 
+     * Constructs a new session manager and loads information about the available 
+     * session types.
+     */
     SessionManager();
     virtual ~SessionManager();
 
