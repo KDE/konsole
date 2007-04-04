@@ -661,6 +661,29 @@ void TerminalDisplay::drawTextFixed(QPainter& painter, int x, int y, QString& st
   }
 }*/
 
+void TerminalDisplay::setKeyboardCursorShape(KeyboardCursorShape shape)
+{
+    _cursorShape = shape;
+}
+TerminalDisplay::KeyboardCursorShape TerminalDisplay::keyboardCursorShape() const
+{
+    return _cursorShape;
+}
+void TerminalDisplay::setKeyboardCursorColor(bool useForegroundColor, const QColor& color)
+{
+    if (useForegroundColor)
+        _cursorColor = QColor(); // an invalid color means that
+                                 // the foreground color of the
+                                 // current character should
+                                 // be used
+
+    else
+        _cursorColor = color;
+}
+QColor TerminalDisplay::keyboardCursorColor() const
+{
+    return _cursorColor;
+}
 
 /*!
     attributed string draw primitive
@@ -753,18 +776,25 @@ void TerminalDisplay::drawAttrStr(QPainter &paint, const QRect& rect,
     QRect r(rect.x(),rect.y()+_lineSpacing/2,rect.width(),h);
     if (!_cursorBlinking)
     {
-       paint.setPen(fColor);
+       if ( _cursorColor.isValid() )
+           paint.setPen(_cursorColor);
+       else
+           paint.setPen(fColor);
 
        if ( _cursorShape == BlockCursor )
        {
             paint.drawRect(rect.x(),rect.y()+_lineSpacing/2,rect.width()-1,h-1);
             if ( hasFocus() )
             {
-                paint.fillRect(r,fColor);
+                paint.fillRect(r, _cursorColor.isValid() ? _cursorColor : fColor);
             }
-            // invert the colour used to draw the text to ensure that the character at
-            // the cursor position is readable
-            fColor = bColor;
+
+            if ( !_cursorColor.isValid() )
+            {
+                // invert the colour used to draw the text to ensure that the character at
+                // the cursor position is readable
+                fColor = bColor;
+            }
        }
        else if ( _cursorShape == UnderlineCursor )
             paint.drawLine(rect.left(),rect.top()+h-1,rect.right(),rect.top()+h-1);

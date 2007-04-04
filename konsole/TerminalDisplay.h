@@ -196,6 +196,28 @@ public:
     KeyboardCursorShape keyboardCursorShape() const;
 
     /**
+     * Sets the color used to draw the keyboard cursor.  
+     *
+     * The keyboard cursor defaults to using the foreground color of the character
+     * underneath it.
+     *
+     * @param useForegroundColor If true, the cursor color will change to match
+     * the foreground color of the character underneath it as it is moved, in this
+     * case, the @p color parameter is ignored and the color of the character
+     * under the cursor is inverted to ensure that it is still readable.
+     * @param color The color to use to draw the cursor.  This is only taken into
+     * account if @p useForegroundColor is false.
+     */
+    void setKeyboardCursorColor(bool useForegroundColor , const QColor& color);
+
+    /** 
+     * Returns the color of the keyboard cursor, or an invalid color if the keyboard
+     * cursor color is set to change according to the foreground color of the character
+     * underneath it. 
+     */
+    QColor keyboardCursorColor() const;
+
+    /**
      * Returns the number of lines of text which can be displayed in the widget.
      *
      * This will depend upon the height of the widget and the current font.
@@ -641,6 +663,7 @@ private:
     QRect _mouseOverHotspotArea;
 
     KeyboardCursorShape _cursorShape;
+    QColor _cursorColor;
 
 	//the delay in milliseconds between redrawing blinking text
 	static const int BLINK_DELAY = 500;
