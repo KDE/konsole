@@ -592,7 +592,7 @@ void konsolePart::readProperties()
 
   b_framevis = cg.readEntry("has frame", false);
   b_histEnabled = cg.readEntry("historyenabled", true);
-  n_bell = qMin(cg.readEntry("bellmode",uint(TerminalDisplay::BELLSYSTEM)),3u);
+  n_bell = qMin(cg.readEntry("bellmode",uint(TerminalDisplay::BELL_SYSTEM)),3u);
   n_keytab=cg.readEntry("keytab",0); // act. the keytab for this session
   
   // TODO Find a more elegant way to read the scroll-bar enum value from the configuration

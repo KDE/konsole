@@ -1,5 +1,5 @@
 /*
-    This file is part of Konsole, an X terminal.
+    Copyright (C) 2007 by Robert Knight <robertknight@gmail.com>
     Copyright (C) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
 
     This program is free software; you can redistribute it and/or modify
@@ -18,8 +18,8 @@
     02110-1301  USA.
 */
 
-#ifndef TE_WIDGET_H
-#define TE_WIDGET_H
+#ifndef TERMINALDISPLAY_H
+#define TERMINALDISPLAY_H
 
 // Qt
 #include <QBitArray>
@@ -71,10 +71,10 @@ class ScreenWindow;
  * A widget which displays output from a terminal emulation and sends input keypresses and mouse activity
  * to the terminal.
  *
- * TerminalDisplay does not know anything about the terminal emulation whoose output it is displaying.
- *
  * When the terminal emulation receives new output from the program running in the terminal, 
- * it will update the display by calling setImage().
+ * it will update the display by calling updateImage().
+ *
+ * TODO More documentation
  */
 class TerminalDisplay : public QFrame
 {
@@ -135,6 +135,11 @@ public:
      *      viewWidget->filterChain()->addFilter( filterObject );
      */
     FilterChain* filterChain() const;
+
+    /** 
+     * Updates the filters in the display's filter chain.  This will cause
+     * the hotspots to be updated to match the current image.
+     */  
     void processFilters();
 
     /** Returns true if the cursor is set to blink or false otherwise. */
@@ -155,25 +160,91 @@ public:
 
     void setCursorPos(const int curx, const int cury);
 
+    /**
+     * Returns the number of lines of text which can be displayed in the widget.
+     *
+     * This will depend upon the height of the widget and the current font.
+     * See fontHeight()
+     */
     int  lines()   { return _lines;   }
+    /**
+     * Returns the number of characters of text which can be displayed on
+     * each line in the widget.
+     *
+     * This will depend upon the width of the widget and the current font.
+     * See fontWidth()
+     */
     int  columns() { return _columns; }
 
+    /**
+     * Returns the height of the characters in the font used to draw the text in the display.
+     */
     int  fontHeight()   { return _fontHeight;   }
+    /**
+     * Returns the width of the characters in the display.  
+     * This assumes the use of a fixed-width font.
+     */
     int  fontWidth()    { return _fontWidth; }
 
-    void calcGeometry();
-    void propagateSize();
-    void updateImageSize();
     void setSize(int cols, int lins);
     void setFixedSize(int cols, int lins);
     QSize sizeHint() const;
 
+    /**
+     * Sets which characters, in addition to letters and numbers, 
+     * are regarded as being part of a word for the purposes
+     * of selecting words in the display by double clicking on them.
+     *
+     * The word boundaries occur at the first and last characters which
+     * are either a letter, number, or a character in @p wc
+     *
+     * @param wc An array of characters which are to be considered parts
+     * of a word ( in addition to letters and numbers ).
+     */
     void setWordCharacters(QString wc);
+    /** 
+     * Returns the characters which are considered part of a word for the 
+     * purpose of selecting words in the display with the mouse.
+     *
+     * @see setWordCharacters()
+     */
     QString wordCharacters() { return _wordCharacters; }
 
+    /** 
+     * Sets the type of effect used to alert the user when a 'bell' occurs in the 
+     * terminal session.
+     *
+     * The terminal session can trigger the bell effect by calling bell() with
+     * the alert message.
+     */
     void setBellMode(int mode);
+    /** 
+     * Returns the type of effect used to alert the user when a 'bell' occurs in
+     * the terminal session.
+     * 
+     * See setBellMode()
+     */
     int bellMode() { return _bellMode; }
-    enum { BELLSYSTEM=0, BELLNOTIFY=1, BELLVISUAL=2, BELLNONE=3 };
+
+    /**
+     * This enum describes the different types of sounds and visual effects which
+     * can be used to alert the user when a 'bell' occurs in the terminal
+     * session.
+     */
+    enum BellMode
+    { 
+        /** A system beep. */
+        BELL_SYSTEM=0, 
+        /** 
+         * KDE notification.  This may play a sound, show a passive popup
+         * or perform some other action depending on the user's settings.
+         */
+        BELL_NOTIFY=1, 
+        /** A silent, visual bell (eg. inverting the display's colors briefly) */
+        BELL_VISUAL=2, 
+        /** No bell effects */
+        BELL_NONE=3 
+    };
 
     void setSelection(const QString &t);
 
@@ -197,8 +268,24 @@ public:
     static void setStandalone( bool standalone ) { s_standalone = standalone; }
     static bool standalone()                { return s_standalone;   }
 
+    /**
+     * Sets whether or not the current height and width of the 
+     * terminal in lines and columns is displayed whilst the widget
+     * is being resized.
+     */
     void setTerminalSizeHint(bool on) { _terminalSizeHint=on; }
+    /** 
+     * Returns whether or not the current height and width of
+     * the terminal in lines and columns is displayed whilst the widget
+     * is being resized.
+     */
     bool isTerminalSizeHint() { return _terminalSizeHint; }
+    /** 
+     * Sets whether the terminal size display is shown briefly
+     * after the widget is first shown.
+     *
+     * See setTerminalSizeHint() , isTerminalSizeHint()
+     */
     void setTerminalSizeStartup(bool on) { _terminalSizeStartup=on; }
 
     void setBidiEnabled(bool set) { _bidiEnabled=set; }
@@ -208,13 +295,30 @@ public:
 
     void setRim(int rim) { _rimX=rim; _rimY=rim; }
 
+    /**
+     * Sets the terminal screen section which is displayed in this widget.
+     * When updateImage() is called, the display fetches the latest character image from the
+     * the associated terminal screen window.
+     *
+     * In terms of the model-view paradigm, the ScreenWindow is the model which is rendered
+     * by the TerminalDisplay.
+     */
     void setScreenWindow( ScreenWindow* window );
+    /** Returns the terminal screen section which is displayed in this widget.  See setScreenWindow() */
     ScreenWindow* screenWindow() const;
 
 public Q_SLOTS:
 
-    void updateImage(); //setImage(const Character* const newimg, int lines, int columns);
-    void updateLineProperties(); //setLineProperties(QVector<LineProperty> properties) { lineProperties=properties; }
+    /** 
+     * Causes the terminal display to fetch the latest character image from the associated
+     * terminal screen ( see setScreenWindow() ) and redraw the display.
+     */
+    void updateImage(); 
+    /**
+     * Causes the terminal display to fetch the latest line status flags from the 
+     * associated terminal screen ( see setScreenWindow() ).  
+     */ 
+    void updateLineProperties();
 
     void setSelectionEnd();
     void copyClipboard();
@@ -370,6 +474,9 @@ private:
     // or negative ( to scroll the image up )
     void scrollImage(int lines);
 
+    void calcGeometry();
+    void propagateSize();
+    void updateImageSize();
     void makeImage();
     
     // the window onto the terminal screen which this display
@@ -503,4 +610,4 @@ private:
 
 };
 
-#endif // TE_WIDGET_H
+#endif // TERMINALDISPLAY_H

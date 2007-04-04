@@ -365,7 +365,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_columnSelectionMode(false)
 ,_scrollbarLocation(SCROLLBAR_NONE)
 ,_wordCharacters(":@-./_~")
-,_bellMode(BELLSYSTEM)
+,_bellMode(BELL_SYSTEM)
 ,_blinking(false)
 ,_cursorBlinking(false)
 ,_hasBlinkingCursor(false)
@@ -2572,7 +2572,7 @@ void TerminalDisplay::enableBell()
 
 void TerminalDisplay::bell(const QString& message)
 {
-  if (_bellMode==BELLNONE) return;
+  if (_bellMode==BELL_NONE) return;
 
   //limit Bell sounds / visuals etc. to max 1 per second.
   //...mainly for sound effects where rapid bells in sequence produce a horrible noise
@@ -2583,11 +2583,11 @@ void TerminalDisplay::bell(const QString& message)
  
     kDebug(1211) << __FUNCTION__ << endl;
 
-    if (_bellMode==BELLSYSTEM) {
+    if (_bellMode==BELL_SYSTEM) {
                 KNotification::beep();
-    } else if (_bellMode==BELLNOTIFY) {
+    } else if (_bellMode==BELL_NOTIFY) {
             KNotification::event("BellVisible", message,QPixmap(),this);
-      } else if (_bellMode==BELLVISUAL) {
+      } else if (_bellMode==BELL_VISUAL) {
         swapColorTable();
         QTimer::singleShot(200,this,SLOT(swapColorTable()));
     }
