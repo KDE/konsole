@@ -7,6 +7,8 @@ configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsol
 
 OPTION(KONSOLE_GENERATE_LINEFONT "Konsole: regenerate linefont file" OFF)
 
+add_definitions (-DQT3_SUPPORT)
+
 ########### next target ###############
 
 set(fontembedder_SRCS fontembedder.cpp )
