@@ -161,6 +161,41 @@ public:
     void setCursorPos(const int curx, const int cury);
 
     /**
+     * This enum describes the available shapes for the keyboard cursor.
+     * See setKeyboardCursorShape()
+     */
+    enum KeyboardCursorShape
+    {
+        /** A rectangular block which covers the entire area of the cursor character. */
+        BlockCursor,
+        /** 
+         * A single flat line which occupies the space at the bottom of the cursor
+         * character's area.
+         */
+        UnderlineCursor,
+        /** 
+         * An cursor shaped like the capital letter 'I', similar to the IBeam 
+         * cursor used in Qt/KDE text editors.
+         */
+        IBeamCursor
+    };
+    /** 
+     * Sets the shape of the keyboard cursor.  This is the cursor drawn   
+     * at the position in the terminal where keyboard input will appear.
+     *
+     * In addition the terminal display widget also has a cursor for 
+     * the mouse pointer, which can be set using the QWidget::setCursor()
+     * method.
+     *
+     * Defaults to BlockCursor
+     */
+    void setKeyboardCursorShape(KeyboardCursorShape shape);
+    /**
+     * Returns the shape of the keyboard cursor.  See setKeyboardCursorShape()
+     */
+    KeyboardCursorShape keyboardCursorShape() const;
+
+    /**
      * Returns the number of lines of text which can be displayed in the widget.
      *
      * This will depend upon the height of the widget and the current font.
@@ -406,6 +441,7 @@ protected:
 
     void drawAttrStr(QPainter &paint, const QRect& rect,
                      QString& str, const Character *attr, bool pm, bool clear);
+    
     void paintEvent( QPaintEvent * );
 
     void paintContents(QPainter &paint, const QRect &rect);
@@ -604,8 +640,10 @@ private:
     TerminalImageFilterChain* _filterChain;
     QRect _mouseOverHotspotArea;
 
+    KeyboardCursorShape _cursorShape;
+
 	//the delay in milliseconds between redrawing blinking text
-	static const int BLINK_DELAY = 750;
+	static const int BLINK_DELAY = 500;
 };
 
 };

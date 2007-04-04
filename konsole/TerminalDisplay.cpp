@@ -397,6 +397,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_isIMEdit(false)
 ,_blendColor(qRgba(0,0,0,0xff))
 ,_filterChain(new TerminalImageFilterChain())
+,_cursorShape(BlockCursor)
 {
   // The offsets are not yet calculated.
   // Do not calculate these too often to be more smoothly when _resizing
@@ -750,18 +751,26 @@ void TerminalDisplay::drawAttrStr(QPainter &paint, const QRect& rect,
     paint.setBackgroundMode( Qt::TransparentMode );
     int h = _fontHeight - _lineSpacing;
     QRect r(rect.x(),rect.y()+_lineSpacing/2,rect.width(),h);
-    if (hasFocus())
-    {
-       if (!_cursorBlinking)
-       {
-          paint.fillRect(r, fColor);
-          fColor = bColor;
-       }
-    }
-    else
+    if (!_cursorBlinking)
     {
        paint.setPen(fColor);
-       paint.drawRect(rect.x(),rect.y()+_lineSpacing/2,rect.width()-1,h-1);
+
+       if ( _cursorShape == BlockCursor )
+       {
+            paint.drawRect(rect.x(),rect.y()+_lineSpacing/2,rect.width()-1,h-1);
+            if ( hasFocus() )
+            {
+                paint.fillRect(r,fColor);
+            }
+            // invert the colour used to draw the text to ensure that the character at
+            // the cursor position is readable
+            fColor = bColor;
+       }
+       else if ( _cursorShape == UnderlineCursor )
+            paint.drawLine(rect.left(),rect.top()+h-1,rect.right(),rect.top()+h-1);
+       else if ( _cursorShape == IBeamCursor )
+            paint.drawLine(rect.left(),rect.top(),rect.left(),rect.top()+h-1);
+    
     }
   }
 
