@@ -429,8 +429,8 @@ void Session::updateTerminalSize()
         TerminalDisplay* view = viewIter.next();
         if ( view->isHidden() == false )
         {
-            minLines = (minLines == -1) ? view->Lines() : qMin( minLines , view->Lines() );
-            minColumns = (minColumns == -1) ? view->Columns() : qMin( minColumns , view->Columns() );
+            minLines = (minLines == -1) ? view->lines() : qMin( minLines , view->lines() );
+            minColumns = (minColumns == -1) ? view->columns() : qMin( minColumns , view->columns() );
         }
     }  
 

@@ -81,30 +81,47 @@ class TerminalDisplay : public QFrame
    Q_OBJECT
 
 public:
-
+    /** Constructs a new terminal display widget with the specified parent. */
     TerminalDisplay(QWidget *parent=0);
     virtual ~TerminalDisplay();
 
-    void setBlendColor(const QRgb color) { blend_color = color; }
+    void setBlendColor(const QRgb color) { _blendColor = color; }
 
+    /** Sets the default background color for the display. */
     void setDefaultBackColor(const QColor& color);
-    QColor getDefaultBackColor();
+    /** Returns the default background color for the display */
+    QColor defaultBackColor();
 
+    /** Returns the terminal color palette used by the display. */
     const ColorEntry* colorTable() const;
-    void              setColorTable(const ColorEntry table[]);
+    /** Sets the terminal color palette used by the display. */
+    void setColorTable(const ColorEntry table[]);
 
-    void setScrollbarLocation(int loc);
-    enum 
+    /** 
+     * This enum describes the location where the scroll bar is positioned in the display widget.
+     */
+    enum ScrollBarLocation 
     { 
+        /** Do not show the scroll bar. */
         SCROLLBAR_NONE=0, 
+        /** Show the scroll bar on the left side of the display. */
         SCROLLBAR_LEFT=1, 
+        /** Show the scroll bar on the right side of the display. */
         SCROLLBAR_RIGHT=2 
     };
+    /** 
+     * Specifies whether the terminal display has a vertical scroll bar, and if so whether it
+     * is shown on the left or right side of the display.
+     */
+    void setScrollBarLocation(ScrollBarLocation loc);
 
+    /** 
+     * Sets the current position and range of the display's scroll bar.
+     *
+     * @param cursor The position of the scroll bar's thumb.
+     * @param lines The maximum value of the scroll bar.
+     */
     void setScroll(int cursor, int lines);
-    void doScroll(int lines);
-    int  scrollPosition();
-    bool scrollAtEnd();
 
     /** 
      * Returns the display's filter chain.  When the image for the display is updated,
@@ -120,28 +137,29 @@ public:
     FilterChain* filterChain() const;
     void processFilters();
 
-    bool blinkingCursor() { return hasBlinkingCursor; }
+    /** Returns true if the cursor is set to blink or false otherwise. */
+    bool blinkingCursor() { return _hasBlinkingCursor; }
+    /** Specifies whether or not the cursor blinks. */
     void setBlinkingCursor(bool blink);
 
-    void setCtrlDrag(bool enable) { ctrldrag=enable; }
-    bool ctrlDrag() { return ctrldrag; }
+    void setCtrlDrag(bool enable) { _ctrlDrag=enable; }
+    bool ctrlDrag() { return _ctrlDrag; }
 
-    void setCutToBeginningOfLine(bool enable) { cuttobeginningofline=enable; }
-    bool cutToBeginningOfLine() { return cuttobeginningofline; }
+    void setCutToBeginningOfLine(bool enable) { _cutToBeginningOfLine=enable; }
+    bool cutToBeginningOfLine() { return _cutToBeginningOfLine; }
 
     void setLineSpacing(uint);
     uint lineSpacing() const;
 
     void emitSelection(bool useXselection,bool appendReturn);
 
-    
     void setCursorPos(const int curx, const int cury);
 
-    int  Lines()   { return lines;   }
-    int  Columns() { return columns; }
+    int  lines()   { return _lines;   }
+    int  columns() { return _columns; }
 
-    int  fontHeight()   { return font_h;   }
-    int  fontWidth()    { return font_w; }
+    int  fontHeight()   { return _fontHeight;   }
+    int  fontWidth()    { return _fontWidth; }
 
     void calcGeometry();
     void propagateSize();
@@ -151,10 +169,10 @@ public:
     QSize sizeHint() const;
 
     void setWordCharacters(QString wc);
-    QString wordCharacters() { return word_characters; }
+    QString wordCharacters() { return _wordCharacters; }
 
     void setBellMode(int mode);
-    int bellMode() { return m_bellMode; }
+    int bellMode() { return _bellMode; }
     enum { BELLSYSTEM=0, BELLNOTIFY=1, BELLVISUAL=2, BELLNONE=3 };
 
     void setSelection(const QString &t);
@@ -179,16 +197,16 @@ public:
     static void setStandalone( bool standalone ) { s_standalone = standalone; }
     static bool standalone()                { return s_standalone;   }
 
-    void setTerminalSizeHint(bool on) { terminalSizeHint=on; }
-    bool isTerminalSizeHint() { return terminalSizeHint; }
-    void setTerminalSizeStartup(bool on) { terminalSizeStartup=on; }
+    void setTerminalSizeHint(bool on) { _terminalSizeHint=on; }
+    bool isTerminalSizeHint() { return _terminalSizeHint; }
+    void setTerminalSizeStartup(bool on) { _terminalSizeStartup=on; }
 
-    void setBidiEnabled(bool set) { bidiEnabled=set; }
-    bool isBidiEnabled() { return bidiEnabled; }
+    void setBidiEnabled(bool set) { _bidiEnabled=set; }
+    bool isBidiEnabled() { return _bidiEnabled; }
 
     void print(QPainter &paint, bool friendly, bool exact);
 
-    void setRim(int rim) { rimX=rim; rimY=rim; }
+    void setRim(int rim) { _rimX=rim; _rimY=rim; }
 
     void setScreenWindow( ScreenWindow* window );
     ScreenWindow* screenWindow() const;
@@ -333,6 +351,11 @@ protected Q_SLOTS:
     //after emitting the first in a sequence of bell events.
     void enableBell();
 
+private Q_SLOTS:
+    void drop_menu_activated(QAction*);
+    void swapColorTable();
+    void tripleClickTimeout();  // resets possibleTripleClick
+
 private:
 
     // maps a point on the widget to the position ( ie. line and column ) of the character
@@ -347,137 +370,135 @@ private:
     // or negative ( to scroll the image up )
     void scrollImage(int lines);
 
+    void makeImage();
+    
+    // the window onto the terminal screen which this display
+    // is currently showing.  
     ScreenWindow* _screenWindow;
 
-    bool allowBell;
+    bool _allowBell;
 
-    QGridLayout* gridLayout;
+    QGridLayout* _gridLayout;
 
-    bool fixed_font; // has fixed pitch
-    int  font_h;     // height
-    int  font_w;     // width
-    int  font_a;     // ascend
+    bool _fixedFont; // has fixed pitch
+    int  _fontHeight;     // height
+    int  _fontWidth;     // width
+    int  _fontAscent;     // ascend
 
-    int bX;    // offset
-    int bY;    // offset
+    int _bX;    // offset
+    int _bY;    // offset
 
-    int lines;      // the number of lines that can be displayed in the widget
-    int columns;    // the number of columns that can be displayed in the widget
+    int _lines;      // the number of lines that can be displayed in the widget
+    int _columns;    // the number of columns that can be displayed in the widget
     
-    int usedLines;  // the number of lines that are actually being used, this will be less
+    int _usedLines;  // the number of lines that are actually being used, this will be less
                     // than 'lines' if the character image provided with setImage() is smaller
                     // than the maximum image size which can be displayed
 
-    int usedColumns; // the number of columns that are actually being used, this will be less
+    int _usedColumns; // the number of columns that are actually being used, this will be less
                      // than 'columns' if the character image provided with setImage() is smaller
                      // than the maximum image size which can be displayed
     
-    int contentHeight;
-    int contentWidth;
-    Character *image; // [lines][columns]
+    int _contentHeight;
+    int _contentWidth;
+    Character* _image; // [lines][columns]
                // only the area [usedLines][usedColumns] in the image contains valid data
 
-    int image_size;
-    QVector<LineProperty> lineProperties;
+    int _imageSize;
+    QVector<LineProperty> _lineProperties;
 
-    ColorEntry color_table[TABLE_COLORS];
-    QColor defaultBgColor;
+    ColorEntry _colorTable[TABLE_COLORS];
+    QColor _defaultBgColor;
 
-    bool resizing;
-    bool terminalSizeHint,terminalSizeStartup;
-    bool bidiEnabled;
-    bool mouse_marks;
+    bool _resizing;
+    bool _terminalSizeHint;
+    bool _terminalSizeStartup;
+    bool _bidiEnabled;
+    bool _mouseMarks;
 
-    void makeImage();
+    QPoint  _iPntSel; // initial selection point
+    QPoint  _pntSel; // current selection point
+    QPoint  _tripleSelBegin; // help avoid flicker
+    int     _actSel; // selection state
+    bool    _wordSelectionMode;
+    bool    _lineSelectionMode;
+    bool    _preserveLineBreaks;
+    bool    _columnSelectionMode;
 
-    QPoint iPntSel; // initial selection point
-    QPoint pntSel; // current selection point
-    QPoint tripleSelBegin; // help avoid flicker
-    int    actSel; // selection state
-    bool    word_selection_mode;
-    bool    line_selection_mode;
-    bool    preserve_line_breaks;
-    bool    column_selection_mode;
+    QClipboard*  _clipboard;
+    QScrollBar* _scrollBar;
+    ScrollBarLocation _scrollbarLocation;
+    QString     _wordCharacters;
+    int         _bellMode;
 
-    QClipboard*    cb;
-    QScrollBar* scrollbar;
-    int         scrollLoc;
-    QString     word_characters;
-    int         m_bellMode;
+    bool _blinking;   // hide text in paintEvent
+    bool _hasBlinker; // has characters to blink
+    bool _cursorBlinking;     // hide cursor in paintEvent
+    bool _hasBlinkingCursor;  // has blinking cursor enabled
+    bool _ctrlDrag;           // require Ctrl key for drag
+    bool _cutToBeginningOfLine; // triple click only selects forward
+    bool _isPrinting; // Paint job is intended for printer
+    bool _printerFriendly; // paint printer friendly, save ink
+    bool _printerBold; // Use a bold font instead of overstrike for bold
+    bool _isFixedSize; //Columns / lines are locked.
+    QTimer* _blinkTimer;  // active when hasBlinker
+    QTimer* _blinkCursorTimer;  // active when hasBlinkingCursor
 
-    bool blinking;   // hide text in paintEvent
-    bool hasBlinker; // has characters to blink
-    bool cursorBlinking;     // hide cursor in paintEvent
-    bool hasBlinkingCursor;  // has blinking cursor enabled
-    bool ctrldrag;           // require Ctrl key for drag
-    bool cuttobeginningofline; // triple click only selects forward
-    bool isPrinting; // Paint job is intended for printer
-    bool printerFriendly; // paint printer friendly, save ink
-    bool printerBold; // Use a bold font instead of overstrike for bold
-    bool isFixedSize; //Columns / lines are locked.
-    QTimer* blinkT;  // active when hasBlinker
-    QTimer* blinkCursorT;  // active when hasBlinkingCursor
+    KMenu* _drop;
+    QString _dropText;
+    int _dndFileCount;
 
-    KMenu* m_drop;
-    QString dropText;
-    int m_dnd_file_count;
-
-    bool possibleTripleClick;  // is set in mouseDoubleClickEvent and deleted
+    bool _possibleTripleClick;  // is set in mouseDoubleClickEvent and deleted
                                // after QApplication::doubleClickInterval() delay
 
     static bool s_antialias;   // do we antialias or not
     static bool s_standalone;  // are we part of a standalone konsole?
 
-    QFrame *mResizeWidget;
-    QLabel *mResizeLabel;
-    QTimer *mResizeTimer;
+    QFrame* _resizeWidget;
+    QLabel* _resizeLabel;
+    QTimer* _resizeTimer;
 
 	//widgets related to the warning message that appears when the user presses Ctrl+S to suspend
 	//terminal output - informing them what has happened and how to resume output
-	QLabel* outputSuspendedLabel; 
+	QLabel* _outputSuspendedLabel; 
     	
-    uint m_lineSpacing;
+    uint _lineSpacing;
 
-    QRect       cursorRect; //for quick changing of cursor
+    QRect       _cursorRect; //for quick changing of cursor
 
-    QPoint configureRequestPoint;  // remember right mouse button click position
-    bool colorsSwapped; // true during visual bell
+    QPoint _configureRequestPoint;  // remember right mouse button click position
+    bool _colorsInverted; // true during visual bell
 
     // the rim should normally be 1, 0 only when running in full screen mode.
-    int rimX;      // left/right rim width
-    int rimY;      // top/bottom rim high
-    QSize m_size;
+    int _rimX;      // left/right rim width
+    int _rimY;      // top/bottom rim high
+    QSize _size;
 	
-    QString m_imPreeditText;
-    int m_imPreeditLength;
-    int m_imStart;
-    int m_imStartLine;
-    int m_imEnd;
-    int m_imSelStart;
-    int m_imSelEnd;
-    int m_cursorLine;
-    int m_cursorCol;
-    bool m_isIMEdit;
-    bool m_isIMSel;
+    QString _imPreeditText;
+    int _imPreeditLength;
+    int _imStart;
+    int _imStartLine;
+    int _imEnd;
+    int _imSelStart;
+    int _imSelEnd;
+    int _cursorLine;
+    int _cursorCol;
+    bool _isIMEdit;
+    bool _isIMSel;
 
-    QRgb blend_color;
+    QRgb _blendColor;
 
-    QAction* m_pasteAction;
-    QAction* m_cdAction;
-    QAction* m_cpAction;
-    QAction* m_mvAction;
-    QAction* m_lnAction;
+    QAction* _pasteAction;
+    QAction* _cdAction;
+    QAction* _cpAction;
+    QAction* _mvAction;
+    QAction* _lnAction;
 
     TerminalImageFilterChain* _filterChain;
     QRect _mouseOverHotspotArea;
 
 	//the delay in milliseconds between redrawing blinking text
 	static const int BLINK_DELAY = 750;
-
-private Q_SLOTS:
-    void drop_menu_activated(QAction*);
-    void swapColorTable();
-    void tripleClickTimeout();  // resets possibleTripleClick
 };
 
 };

@@ -217,18 +217,18 @@ class KeyboardTranslatorReader
 {
 public:
     /** Constructs a new reader which parses the given @p source */
-    KeyboardTranslatorReader( QIODevice* source );
+    KeyboardTranslatorReader( QIODevice* source ) {};
 
     /** Returns true if there is another entry in the source stream */
-    bool hasNextEntry();
+    bool hasNextEntry() { return false; };
     /** Returns the next entry found in the source stream */
-    KeyboardTranslator::Entry nextEntry();
+    KeyboardTranslator::Entry nextEntry() { return KeyboardTranslator::Entry(Qt::Key_unknown,Qt::NoModifier,KeyboardTranslator::NoState,"",KeyboardTranslator::NoCommand); };
 
     /** 
      * Returns true if an error occurred whilst parsing the input or
      * false if no error occurred.
      */
-    bool parseError();
+    bool parseError() { return false; };
 };
 
 /**
@@ -283,7 +283,7 @@ inline KeyboardTranslator::Command KeyboardTranslator::Entry::command() const
 {
     return _command;
 }
-inline char* KeyboardTranslator::Entry::text() const
+inline const char* KeyboardTranslator::Entry::text() const
 {
     return _text;
 }

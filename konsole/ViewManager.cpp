@@ -457,7 +457,7 @@ TerminalDisplay* ViewManager::createTerminalDisplay()
    display->setCutToBeginningOfLine(true);
    display->setTerminalSizeStartup(false);
    display->setSize(80,40);
-   display->setScrollbarLocation(TerminalDisplay::SCROLLBAR_RIGHT);
+   display->setScrollBarLocation(TerminalDisplay::SCROLLBAR_RIGHT);
 
    return display;
 }

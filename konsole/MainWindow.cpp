@@ -24,7 +24,7 @@
 #include <KAction>
 #include <KActionCollection>
 #include <KActionMenu>
-#include <KKeyDialog>
+#include <KShortcutsDialog>
 #include <KLocale>
 #include <KMenu>
 #include <KMenuBar>
@@ -140,7 +140,7 @@ void MainWindow::newWindow()
 
 void MainWindow::showShortcutsDialog()
 {
-    KKeyDialog::configure( actionCollection() );
+    KShortcutsDialog::configure( actionCollection() );
 }
 
 void MainWindow::sessionSelected(const QString& key)

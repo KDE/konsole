@@ -61,7 +61,6 @@
 #include "KeyTrans.h"
 #include "schema.h"
 #include "Session.h"
-#include "TerminalDisplay.h"
 
 extern "C"
 {
@@ -595,7 +594,22 @@ void konsolePart::readProperties()
   b_histEnabled = cg.readEntry("historyenabled", true);
   n_bell = qMin(cg.readEntry("bellmode",uint(TerminalDisplay::BELLSYSTEM)),3u);
   n_keytab=cg.readEntry("keytab",0); // act. the keytab for this session
-  n_scroll = qMin(cg.readEntry("scrollbar",uint(TerminalDisplay::SCROLLBAR_RIGHT)),2u);
+  
+  // TODO Find a more elegant way to read the scroll-bar enum value from the configuration
+  switch ( qMin(cg.readEntry("scrollbar",uint(TerminalDisplay::SCROLLBAR_RIGHT)),2u) )
+  {
+    case TerminalDisplay::SCROLLBAR_NONE:
+        n_scroll = TerminalDisplay::SCROLLBAR_NONE;
+        break;
+    case TerminalDisplay::SCROLLBAR_LEFT:
+        n_scroll = TerminalDisplay::SCROLLBAR_LEFT;
+        break;
+    case TerminalDisplay::SCROLLBAR_RIGHT:
+        n_scroll = TerminalDisplay::SCROLLBAR_RIGHT;
+        break;
+  }
+
+
   m_histSize = cg.readEntry("history",DEFAULT_HISTORY_SIZE);
   s_word_seps= cg.readEntry("wordseps",":@-./_~");
 
@@ -627,7 +641,9 @@ void konsolePart::readProperties()
   te->setBlinkingCursor(cg.readEntry("BlinkingCursor", false));
   te->setFrameStyle( b_framevis?(QFrame::WinPanel|QFrame::Sunken):QFrame::NoFrame );
   te->setLineSpacing( cg.readEntry( "LineSpacing", 0 ) );
-  te->setScrollbarLocation(n_scroll);
+
+  te->setScrollBarLocation( n_scroll );
+
   te->setWordCharacters(s_word_seps);
 
   if ( !b_useKonsoleSettings )
@@ -636,7 +652,7 @@ void konsolePart::readProperties()
       config = new KConfig("konsolerc");
   }
   cg = config->group("Desktop Entry");
-  te->setTerminalSizeHint( config->readEntry("TerminalSizeHint", true) );
+  te->setTerminalSizeHint( cg.readEntry("TerminalSizeHint", true) );
   delete config;
 }
 
@@ -659,7 +675,7 @@ void konsolePart::saveProperties()
     cg.writeEntry("has frame",b_framevis);
     cg.writeEntry("LineSpacing", te->lineSpacing());
     cg.writeEntry("schema",s_kconfigSchema);
-    cg.writeEntry("scrollbar",n_scroll);
+    cg.writeEntry("scrollbar",(int)n_scroll);
     cg.writeEntry("wordseps",s_word_seps);
     cg.writeEntry("encoding",n_encoding);
     cg.writeEntry("use_konsole_settings",m_useKonsoleSettings->isChecked());
@@ -688,15 +704,15 @@ void konsolePart::slotToggleFrame()
 void konsolePart::slotSelectScrollbar()
 {
   if ( ! se ) return;
-  n_scroll = selectScrollbar->currentItem();
-  te->setScrollbarLocation(n_scroll);
+  n_scroll = (TerminalDisplay::ScrollBarLocation)selectScrollbar->currentItem();
+  te->setScrollBarLocation(n_scroll);
 }
 
 void konsolePart::slotSelectFont() {
    if ( !se ) return;
 
    QFont font = te->getVTFont();
-   if ( KFontDialog::getFont( font, true ) != QDialog::Accepted )
+   if ( KFontDialog::getFont( font, KFontChooser::FixedFontsOnly ) != QDialog::Accepted )
       return;
 
    te->setVTFont(font);
@@ -828,7 +844,7 @@ void konsolePart::pixmap_menu_activated(int item)
     pmPath = "";
     item = 1;
     QPalette palette;
-    palette.setColor(te->backgroundRole(), te->getDefaultBackColor());
+    palette.setColor(te->backgroundRole(), te->defaultBackColor());
     te->setPalette(palette);
     return;
   }
@@ -845,7 +861,7 @@ void konsolePart::pixmap_menu_activated(int item)
     break;
     case 3: // center
             { QPixmap bgPixmap( te->size() );
-              bgPixmap.fill(te->getDefaultBackColor());
+              bgPixmap.fill(te->defaultBackColor());
               bitBlt( &bgPixmap, ( te->size().width() - pm.width() ) / 2,
                                 ( te->size().height() - pm.height() ) / 2,
                       &pm, 0, 0,

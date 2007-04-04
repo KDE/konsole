@@ -33,6 +33,7 @@
 // Konsole
 #include "schema.h"
 #include "Session.h"
+#include "TerminalDisplay.h"
 
 class KComponentData;
 class QPushButton;
@@ -184,7 +185,7 @@ Q_SIGNALS:
     int         n_bell;
     int         n_keytab;
     int         n_render;
-    int         n_scroll;
+    TerminalDisplay::ScrollBarLocation n_scroll;
     unsigned    m_histSize;
     bool        m_runningShell;
     bool        m_streamEnabled;

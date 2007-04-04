@@ -98,7 +98,7 @@ KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(const QString& nam
     QFile source(_paths[name]); // TODO get correct path here
     source.open(QIODevice::ReadOnly);
 
-    KeyboardTranslatorReader reader(device);
+    KeyboardTranslatorReader reader(&source);
     while ( reader.hasNextEntry() )
         translator->addEntry(reader.nextEntry());
 
@@ -141,10 +141,6 @@ QList<QString> KeyboardTranslatorManager::availableTranslators() const
 {
     return _translators.keys();
 }
-
-char* KeyboardTranslator::Entry::_textBuffer = 0;
-int KeyboardTranslator::Entry::_textBufferUsedLength = 0;
-int KeyboardTranslator::Entry::_textBufferSize = 0;
 
 KeyboardTranslator::Entry::Entry( int keyCode,
                                   Qt::KeyboardModifier modifiers,
