@@ -283,7 +283,7 @@ Session* SessionManager::createSession(QString configPath )
 
 void SessionManager::sessionTerminated(Session* session)
 {
-    _sessions.remove(session);
+    _sessions.removeAll(session);
     session->deleteLater();
 }
 

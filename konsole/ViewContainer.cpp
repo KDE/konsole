@@ -381,7 +381,7 @@ void TabbedViewContainerV2::setActiveView(QWidget* view)
     Q_ASSERT( index != -1 );
 
    _stackWidget->setCurrentWidget(view);
-   _tabBar->setCurrentTab(index); 
+   _tabBar->setCurrentIndex(index); 
 }
 void TabbedViewContainerV2::viewAdded( QWidget* view )
 {

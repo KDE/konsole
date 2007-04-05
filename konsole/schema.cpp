@@ -55,6 +55,7 @@
 #include <QDir>
 #include <QDateTime>
 #include <Q3PtrList>
+#include <QPalette>
 
 // KDE
 #include <KApplication>

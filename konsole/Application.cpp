@@ -75,6 +75,11 @@ SessionManager* Application::sessionManager()
     return _sessionManager;
 }
 
+Application::~Application()
+{
+    delete _sessionManager;
+}
+
 void Application::detachView(Session* session)
 {
     MainWindow* window = newMainWindow();

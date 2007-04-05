@@ -217,7 +217,7 @@ void TerminalDisplay::setColorTable(const ColorEntry table[])
    QCodec.
 */
 
-static inline bool isLineChar(Q_UINT16 c) { return ((c & 0xFF80) == 0x2500);}
+static inline bool isLineChar(quint16 c) { return ((c & 0xFF80) == 0x2500);}
 static inline bool isLineCharString(const QString& string)
 {
 		return (string.length() > 0) && (isLineChar(string.at(0).unicode()));
@@ -522,7 +522,7 @@ static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code
     int ex = x + w - 1;
     int ey = y + h - 1;
 
-    Q_UINT32 toDraw = LineChars[code];
+    quint32 toDraw = LineChars[code];
 
     //Top _lines:
     if (toDraw & TopL)
@@ -725,8 +725,8 @@ void TerminalDisplay::drawAttrStr(QPainter &paint, const QRect& rect,
         if ( true_transparency && qAlpha(_blendColor) < 0xff ) {
           QRgb col = bColor.rgb();
 
-          Q_UINT8 salpha = 192;
-          Q_UINT8 dalpha = 255 - salpha;
+          quint8 salpha = 192;
+          quint8 dalpha = 255 - salpha;
 
           int a, r, g, b;
           a = qMin( (qAlpha (col) * salpha) / 255 + (qAlpha (_blendColor) * dalpha) / 255, 255 );
@@ -1067,7 +1067,7 @@ void TerminalDisplay::updateImage()
       // where characters exceed their cell width.
       if (dirtyMask[x])
       {
-        Q_UINT16 c = newLine[x+0].character;
+        quint16 c = newLine[x+0].character;
         if ( !c )
             continue;
         int p = 0;
@@ -1433,7 +1433,7 @@ void TerminalDisplay::paintContents(QPainter &paint, const QRect &rect)
   QChar *disstrU = new QChar[_usedColumns];
   for (int y = luy; y <= rly; y++)
   {
-    Q_UINT16 c = _image[loc(lux,y)].character;
+    quint16 c = _image[loc(lux,y)].character;
     int x = lux;
     if(!c && x)
       x--; // Search for start of multi-column character
@@ -2435,8 +2435,7 @@ void TerminalDisplay::onClearSelection()
 
 bool TerminalDisplay::eventFilter( QObject *obj, QEvent *e )
 {
-  if ( (e->type() == QEvent::Accel ||
-       e->type() == QEvent::AccelAvailable ) && qApp->focusWidget() == this )
+  if ( e->type() == QEvent::Shortcut && qApp->focusWidget() == this )
   {
 
       static_cast<QKeyEvent *>( e )->ignore();
@@ -2556,7 +2555,7 @@ void TerminalDisplay::imEndEvent( QIMEvent *e )
 // focus in TerminalDisplay, so that the key will be passed to the terminal instead.
 bool TerminalDisplay::event( QEvent *e )
 {
-  if ( e->type() == QEvent::AccelOverride )
+  if ( e->type() == QEvent::ShortcutOverride )
   {
     QKeyEvent *ke = static_cast<QKeyEvent *>( e );
     int keyCodeQt = ke->key() | ke->modifiers();

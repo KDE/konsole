@@ -172,12 +172,12 @@ public:
 
 inline bool operator == (const CharacterColor& a, const CharacterColor& b)
 { 
-  return *reinterpret_cast<const Q_UINT32*>(&a.t) == *reinterpret_cast<const Q_UINT32*>(&b.t);
+  return *reinterpret_cast<const quint32*>(&a.t) == *reinterpret_cast<const quint32*>(&b.t);
 }
 
 inline bool operator != (const CharacterColor& a, const CharacterColor& b)
 {
-  return *reinterpret_cast<const Q_UINT32*>(&a.t) != *reinterpret_cast<const Q_UINT32*>(&b.t);
+  return *reinterpret_cast<const quint32*>(&a.t) != *reinterpret_cast<const quint32*>(&b.t);
 }
 
 inline const QColor color256(UINT8 u, const ColorEntry* base)
