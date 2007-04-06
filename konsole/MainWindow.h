@@ -93,6 +93,7 @@ class MainWindow : public KMainWindow
         void newTab();
         void newWindow();
         void showPreferencesDialog();
+        void showRemoteConnectionDialog();
         void showShortcutsDialog();
         void sessionSelected(const QString&);
 

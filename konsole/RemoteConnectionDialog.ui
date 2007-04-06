@@ -1,0 +1,204 @@
+<ui version="4.0" >
+ <class>RemoteConnectionDialog</class>
+ <widget class="QWidget" name="RemoteConnectionDialog" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>610</width>
+    <height>160</height>
+   </rect>
+  </property>
+  <property name="sizePolicy" >
+   <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="windowTitle" >
+   <string>Remote Connection</string>
+  </property>
+  <layout class="QVBoxLayout" >
+   <item>
+    <layout class="QHBoxLayout" >
+     <item>
+      <widget class="QLabel" name="userLabel" >
+       <property name="text" >
+        <string>User:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="userEdit" />
+     </item>
+     <item>
+      <widget class="QLabel" name="hostLabel" >
+       <property name="text" >
+        <string>Host:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="hostEdit" >
+       <property name="minimumSize" >
+        <size>
+         <width>180</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="lookupHostButton" >
+       <property name="text" >
+        <string>Lookup...</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
+     <item>
+      <widget class="QLabel" name="backgroundColorLabel" >
+       <property name="text" >
+        <string>Background color:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="selectBackgroundButton" >
+       <property name="text" >
+        <string>Select...</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="saveAsCustomCheckBox" >
+     <property name="text" >
+      <string>Save as custom session</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" native="1" name="sessionWidget" >
+     <layout class="QHBoxLayout" >
+      <property name="leftMargin" >
+       <number>0</number>
+      </property>
+      <property name="topMargin" >
+       <number>0</number>
+      </property>
+      <property name="rightMargin" >
+       <number>0</number>
+      </property>
+      <property name="bottomMargin" >
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="sessionNameLabel" >
+        <property name="enabled" >
+         <bool>false</bool>
+        </property>
+        <property name="text" >
+         <string>Name:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="sessionNameEdit" >
+        <property name="enabled" >
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="sessionEditButton" >
+        <property name="enabled" >
+         <bool>false</bool>
+        </property>
+        <property name="text" >
+         <string>Edit...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer>
+        <property name="orientation" >
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" >
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="0" />
+ <includes/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>saveAsCustomCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>sessionNameEdit</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>252</x>
+     <y>76</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>141</x>
+     <y>104</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>saveAsCustomCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>sessionEditButton</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>252</x>
+     <y>76</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>275</x>
+     <y>104</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>saveAsCustomCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>sessionNameLabel</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>304</x>
+     <y>89</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>28</x>
+     <y>128</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

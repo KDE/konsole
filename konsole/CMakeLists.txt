@@ -77,6 +77,7 @@ set(konsole_KDEINIT_SRCS
         TerminalDisplay.cpp
         Vt102Emulation.cpp
         Emulation.cpp
+        RemoteConnectionDialog.cpp
         TerminalCharacterDecoder.cpp
         ViewContainer.cpp
         ViewManager.cpp
@@ -89,8 +90,10 @@ set(konsole_KDEINIT_SRCS
         XKB.cpp
    ) 
 
-set_source_files_properties(${konsole_KDEINIT_SRCS} PROPERTIES COMPILE_FLAGS "-Wuninitialized")
 
+kde4_add_ui_files(konsole_KDEINIT_SRCS
+                  RemoteConnectionDialog.ui
+                 )
 kde4_automoc(${konsole_KDEINIT_SRCS})
 
 kde4_add_kdeinit_executable( konsole ${konsole_KDEINIT_SRCS})

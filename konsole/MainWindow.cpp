@@ -34,10 +34,11 @@
 #include <KXMLGUIFactory>
 
 // Konsole
-#include "IncrementalSearchBar.h"
 #include "Application.h"
 #include "BookmarkHandler.h"
+#include "IncrementalSearchBar.h"
 #include "MainWindow.h"
+#include "RemoteConnectionDialog.h"
 #include "SessionList.h"
 #include "ViewManager.h"
 #include "ViewSplitter.h"
@@ -87,15 +88,22 @@ void MainWindow::setupActions()
     newTabAction->setIcon( KIcon("openterm") );
     newTabAction->setText( i18n("New &Tab") );
     newTabAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_N) );
+    connect( newTabAction , SIGNAL(triggered()) , this , SLOT(newTab()) );
 
     QAction* newWindowAction = collection->addAction("new-window"); 
     newWindowAction->setIcon( KIcon("window-new") );
     newWindowAction->setText( i18n("New &Window") );
     newWindowAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_M) );
-
-    connect( newTabAction , SIGNAL(triggered()) , this , SLOT(newTab()) );
     connect( newWindowAction , SIGNAL(triggered()) , this , SLOT(newWindow()) );
 
+    QAction* remoteConnectionAction = collection->addAction("remote-connection");
+    remoteConnectionAction->setText( i18n("Remote Connection...") );
+    remoteConnectionAction->setIcon( KIcon("network") );
+    remoteConnectionAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_R) );
+    connect( remoteConnectionAction , SIGNAL(triggered()) , this , SLOT(showRemoteConnectionDialog()) ); 
+
+    QAction* customSessionAction = collection->addAction("custom-session");
+    customSessionAction->setText( i18n("Custom Session...") );
     KStandardAction::quit( Application::self() , SLOT(quit()) , collection );
 
     // Bookmark Menu
@@ -151,6 +159,13 @@ void MainWindow::sessionSelected(const QString& key)
 void MainWindow::showPreferencesDialog()
 {
     KToolInvocation::startServiceByDesktopName("konsole",QString());
+}
+
+void MainWindow::showRemoteConnectionDialog()
+{
+    RemoteConnectionDialog dialog(this);
+    if ( dialog.exec() == QDialog::Accepted )
+        emit requestSession(dialog.sessionKey(),_viewManager);
 }
 
 void MainWindow::mergeWindows()

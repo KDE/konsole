@@ -168,6 +168,41 @@ QString SessionInfo::defaultWorkingDirectory() const
     return _config->readPathEntry("Cwd");
 }
 
+CustomCommandSessionInfo::CustomCommandSessionInfo(const QString& path)
+ : SessionInfo(path)
+{
+}
+
+void CustomCommandSessionInfo::setName(const QString& name)
+{
+    _name = name;
+}
+
+QString CustomCommandSessionInfo::name() const
+{
+    return _name;
+}
+
+void CustomCommandSessionInfo::setCommand(const QString& command)
+{
+    _command = command;
+}
+
+QString CustomCommandSessionInfo::command(bool,bool) const
+{
+    return _command;
+}
+
+void CustomCommandSessionInfo::setArguments(const QStringList& arguments)
+{
+    _arguments = arguments;
+}
+
+QStringList CustomCommandSessionInfo::arguments() const
+{
+    return _arguments;
+}
+
 SessionManager::SessionManager()
     : _defaultSessionType(0),
       _colorSchemeList(0)
@@ -193,7 +228,7 @@ SessionManager::SessionManager()
         QString configFile = fileIter.next();
         SessionInfo* newType = new SessionInfo(configFile);
 
-        _types << newType;
+        addSessionType( newType );
 
         if ( QFileInfo(configFile).fileName() == defaultSessionFilename )
             _defaultSessionType = newType;
@@ -208,7 +243,7 @@ SessionManager::SessionManager()
 
 SessionManager::~SessionManager()
 {
-    QListIterator<SessionInfo*> infoIter(_types);
+    QListIterator<SessionInfo*> infoIter(_types.values());
 
     while (infoIter.hasNext())
         delete infoIter.next();
@@ -227,22 +262,18 @@ void SessionManager::pushSessionSettings( const SessionInfo* info )
     addSetting( ColorScheme , SessionConfig , info->colorScheme() );
 }
 
-Session* SessionManager::createSession(QString configPath )
+Session* SessionManager::createSession(QString key )
 {
     Session* session = 0;
+    
+    const SessionInfo* info = 0;
 
-    //select default session type if not specified
-    if ( configPath.isEmpty() )
-        configPath = _defaultSessionType->path();
+    if ( key.isEmpty() )
+        info = _defaultSessionType;
+    else
+        info = _types[key];
 
-    //search for SessionInfo object built from this config path
-    QListIterator<SessionInfo*> iter(_types);
-
-    while (iter.hasNext())
-    {
-        const SessionInfo* const info = iter.next();
-
-        if ( info->path() == configPath )
+        if ( true )
         {
             //supply settings from session config
             pushSessionSettings( info );
@@ -272,9 +303,7 @@ Session* SessionManager::createSession(QString configPath )
             //add session to active list
             _sessions << session;
 
-            break;
         }
-    }
 
     Q_ASSERT( session );
 
@@ -287,9 +316,17 @@ void SessionManager::sessionTerminated(Session* session)
     session->deleteLater();
 }
 
-QList<SessionInfo*> SessionManager::availableSessionTypes()
+QList<QString> SessionManager::availableSessionTypes()
 {
-    return _types;
+    return _types.keys();
+}
+
+SessionInfo* SessionManager::sessionType(const QString& key) const
+{
+    if ( _types.contains(key) )
+        return _types[key];
+    else
+        return 0;
 }
 
 SessionInfo* SessionManager::defaultSessionType()
@@ -323,6 +360,24 @@ QVariant SessionManager::activeSetting( Setting setting ) const
     }
 
     return value;
+}
+
+QString SessionManager::addSessionType(SessionInfo* type)
+{
+    QString key;
+
+    for ( int counter = 0;;counter++ )
+    {
+        if ( !_types.contains(type->path() + QString::number(counter)) )
+        {
+            key = type->path() + QString::number(counter);
+            break;
+        }
+    }
+    
+    _types.insert(key,type);
+
+    return key;
 }
 
 #include <SessionManager.moc>

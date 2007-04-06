@@ -19,16 +19,17 @@ SessionList::SessionList(SessionManager* manager , QObject* parent)
 
     _group = new QActionGroup(this);
 
-    QListIterator<SessionInfo*> iter(manager->availableSessionTypes());
+    QListIterator<QString> iter(manager->availableSessionTypes());
 
     while (iter.hasNext())
     {
-        SessionInfo* info = iter.next();
+        const QString& key = iter.next();
+        SessionInfo* info = manager->sessionType(key);
 
         QAction* action = new QAction(_group);
         action->setText( info->name() );
         action->setIcon( KIcon(info->icon()) );
-        action->setData( info->path() );
+        action->setData( key );
     }
 
     connect( _group , SIGNAL(triggered(QAction*)) , this , SLOT(triggered(QAction*)) );

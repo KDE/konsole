@@ -24,6 +24,7 @@
 
 #include <QHash>
 #include <QList>
+#include <QStringList>
 #include <QPair>
 #include <QVariant>
 class KConfigGroup;
@@ -58,8 +59,8 @@ public:
      * for this type of session
      */
     SessionInfo(const QString& path);
-
-    ~SessionInfo();
+    
+    virtual ~SessionInfo();
 
     /**
      * Returns the path to the session's
@@ -68,12 +69,12 @@ public:
     QString path() const;
 
     /** Returns the title of the session type */
-    QString name() const;
+    virtual QString name() const;
     /**
      * Returns the path of an icon associated
      * with this session type
      */
-    QString icon() const;
+    virtual QString icon() const;
     /**
      * Returns the command that will be executed
      * when the session is run
@@ -91,19 +92,19 @@ public:
      * removed from the returned string.  Anything after the first space
      * character in the command string is considered an argument
      */
-    QString command(bool stripSu , bool stripArguments = true) const;
+    virtual QString command(bool stripSu , bool stripArguments = true) const;
 
     /**
      * Extracts the arguments from the command string for this session.  The first
      * argument is always the command name
      */
-    QStringList arguments() const;
+    virtual QStringList arguments() const;
 
     /**
      * Returns true if the session will run as
      * root
      */
-    bool isRootSession() const;
+    virtual bool isRootSession() const;
     /**
      * Searches the user's PATH for the binary
      * specified in the command string.
@@ -112,7 +113,7 @@ public:
      * existence of additional binaries(usually 'su' or 'sudo') required
      * to run the command as root.
      */
-    bool isAvailable() const;
+    virtual bool isAvailable() const;
 
     /**
      * Returns the terminal-type string which is made available to
@@ -120,33 +121,61 @@ public:
      *
      * This defaults to "xterm"
      */
-    QString terminal() const;
+    virtual QString terminal() const;
 
     /** Returns the path of the default keyboard setup file for sessions of this type */
-    QString keyboardSetup() const;
+    virtual QString keyboardSetup() const;
 
     /** Returns the path of the default colour scheme for sessions of this type */
-    QString colorScheme() const;
+    virtual QString colorScheme() const;
 
     /**
      * Returns the default font for sessions of this type.
      * If no font is specified in the session's configuration file, @p font will be returned.
      */
-    QFont defaultFont( const QFont& font ) const;
+    virtual QFont defaultFont( const QFont& font ) const;
 
     /** Returns the default working directory for sessions of this type */
-    QString defaultWorkingDirectory() const;
+    virtual QString defaultWorkingDirectory() const;
 
     /**
      * Returns the text that should be displayed in menus or in other UI widgets
      * which are used to create new instances of this type of session
      */
-    QString newSessionText() const;
+    virtual QString newSessionText() const;
 
 private:
     KDesktopFile* _desktopFile;
     KConfigGroup* _config;
     QString  _path;
+};
+
+/**
+ * A session type which is based upon the settings from a configuration file
+ * ( as with SessionInfo )
+ * but allows the name, command and arguments to be customised.
+ */
+class CustomCommandSessionInfo : public SessionInfo
+{
+public:
+    CustomCommandSessionInfo(const QString& path);
+
+    /** Sets the name of the session type. */
+    virtual void setName(const QString& name);
+    /** Sets the command to be run when sessions of this type are started. */
+    virtual void setCommand(const QString& command);
+    /** Sets the arguments to run when sessions of this type are started. */
+    virtual void setArguments(const QStringList& arguments);
+
+    // reimplemented 
+    virtual QString name() const;
+    virtual QString command(bool stripSu , bool stripArguments) const;
+    virtual QStringList arguments() const;
+
+private:
+    QString _name;
+    QString _command;
+    QStringList _arguments;
 };
 
 /**
@@ -192,11 +221,20 @@ public:
     };
 
     /**
-     * Returns a list of session information
-     * objects which describe the kinds
-     * of session which are available
+     * Returns a list of keys for registered session types.      
      */
-    QList<SessionInfo*> availableSessionTypes();
+    QList<QString> availableSessionTypes();
+    /**
+     * Returns the session information object for the session type with the specified
+     * key.
+     */
+    SessionInfo* sessionType(const QString& key) const;
+
+    /**
+     * Registers a new type of session and returns the key
+     * which can be passed to createSession() to create new instances of the session.
+     */
+    QString addSessionType(SessionInfo* type);
 
     /**
      * Returns a SessionInfo object describing the default type of session, which is used
@@ -240,7 +278,9 @@ public:
 
     /**
      * Creates a new session of the specified type, using the settings specified
-     * using addSetting() and from the configuration file for this session type.
+     * using addSetting() and from session type associated with the specified key.
+     * The session type must have been previously registered using addSessionType()
+     * or upon construction of the SessionManager. 
      *
      * The new session has no views associated with it.  A new TerminalDisplay view
      * must be created in order to display the output from the terminal session and
@@ -249,7 +289,7 @@ public:
      * @param type Specifies the type of session to create.  Passing an empty
      *             string will create a session using the default configuration.
      */
-    Session* createSession(QString configPath = QString());
+    Session* createSession(QString key = QString());
 
     /**
      * Returns a list of active sessions.
@@ -267,7 +307,7 @@ private:
     //fills the settings store with the settings from the session config file
     void pushSessionSettings( const SessionInfo*  info );
 
-    QList<SessionInfo*> _types;
+    QHash<QString,SessionInfo*> _types;
     QList<Session*> _sessions;
 
     SessionInfo* _defaultSessionType;
