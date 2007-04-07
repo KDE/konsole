@@ -342,8 +342,10 @@ void SessionEditor::saveCurrent()
   else
     co.writeEntry("Font",fontCombo->currentIndex()-1);
   co.writeEntry("Term",termLine->text());
-  co.writeEntry("KeyTab",*keytabFilename.at(keytabCombo->currentIndex()));
-  co.writeEntry("Schema",*schemaFilename.at(schemaCombo->currentIndex()));
+  if (keytabFilename.at(keytabCombo->currentIndex()))
+    co.writeEntry("KeyTab",*keytabFilename.at(keytabCombo->currentIndex()));
+  if (schemaFilename.at(schemaCombo->currentIndex()))
+    co.writeEntry("Schema",*schemaFilename.at(schemaCombo->currentIndex()));
   desktopFile.sync();
   sesMod=false;
   loadAllSession(fullpath.section('/',-1));
