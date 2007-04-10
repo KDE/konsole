@@ -509,7 +509,7 @@ static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code
     int ex = x + w - 1;
     int ey = y + h - 1;
 
-    Q_UINT32 toDraw = LineChars[code];
+    quint32 toDraw = LineChars[code];
 
     //Top lines:
     if (toDraw & TopL)
