@@ -7,7 +7,7 @@
 #define	_KONSOLE_WCWIDTH_H_
 
 // Qt
-#include <qglobal.h>
+#include <QtCore/QBool>
 #include <QString>
 
 int konsole_wcwidth(Q_UINT16 ucs);

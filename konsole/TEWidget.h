@@ -24,8 +24,8 @@
 #include <QBitArray>
 #include <QWidget>
 #include <QColor>
-#include <qnamespace.h>
-#include <qscrollbar.h>
+#include <QtCore/QCOORD>
+#include <QtGui/QScrollBar>
 #include <QFrame>
 #include <QInputMethodEvent>
 //Added by qt3to4:

@@ -22,7 +22,7 @@
 #define KEYTRANS_H
 
 #include <QString>
-#include <q3ptrlist.h>
+#include <Qt3Support/Q3PtrList>
 #include <QIODevice>
 
 #define BITS_NewLine    0

@@ -18,7 +18,7 @@
 #ifndef SESSIONEDITOR_H
 #define SESSIONEDITOR_H
 
-#include <q3ptrlist.h>
+#include <Qt3Support/Q3PtrList>
 #include <QStringList>
 #include <QWidget>
 

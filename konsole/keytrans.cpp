@@ -28,10 +28,10 @@
 #include "keytrans.h"
 #include <QBuffer>
 #include <QObject>
-#include <q3intdict.h>
-#include <q3dict.h>
+#include <Qt3Support/Q3IntDict>
+#include <Qt3Support/Q3Dict>
 #include <QFile>
-#include <q3dict.h>
+#include <Qt3Support/Q3Dict>
 #include <kstandarddirs.h>
 #include <klocale.h>
 
@@ -773,7 +773,6 @@ void test()
   // Opening sequence
 
   QCString txt =
-#include "default.keytab.h"
   ;
   QBuffer buf(txt);
   if (0) TestTokenizer(buf);

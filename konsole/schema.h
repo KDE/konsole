@@ -42,7 +42,7 @@
 #define SCHEMA_include
 
 #include <QString>
-#include <q3ptrlist.h>
+#include <Qt3Support/Q3PtrList>
 
 #include "TECommon.h"
 

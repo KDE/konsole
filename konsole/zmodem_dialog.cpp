@@ -18,7 +18,7 @@
 
 #include "zmodem_dialog.h"
 
-#include <q3textedit.h>
+#include <Qt3Support/Q3TextEdit>
 
 #include <klocale.h>
 

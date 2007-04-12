@@ -21,7 +21,7 @@
 #ifndef TEHISTORY_H
 #define TEHISTORY_H
 
-#include <q3ptrvector.h>
+#include <Qt3Support/Q3PtrVector>
 #include <QBitArray>
 //Added by qt3to4:
 #include <QVector>
@@ -210,7 +210,7 @@ public:
 // BlockArray-based history
 //////////////////////////////////////////////////////////////////////
 #include "BlockArray.h"
-#include <q3intdict.h>
+#include <Qt3Support/Q3IntDict>
 class HistoryScrollBlockArray : public HistoryScroll
 {
 public:
