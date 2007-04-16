@@ -48,21 +48,7 @@
 #include <kdesktop_background_interface.h>
 #endif
 
-// SchemaListBoxText is a list box text item with schema filename
-class SchemaListBoxText : public Q3ListBoxText
-{
-  public:
-    SchemaListBoxText(const QString &title, const QString &filename): Q3ListBoxText(title)
-    {
-      m_filename = filename;
-    }
-
-    const QString filename() { return m_filename; }
-
-  private:
-    QString m_filename;
-};
-
+const int kFilenameRole = Qt::UserRole;
 
 SchemaEditor::SchemaEditor(QWidget * parent)
 :SchemaDialog(parent)
@@ -99,7 +85,7 @@ SchemaEditor::SchemaEditor(QWidget * parent)
     connect(removeButton, SIGNAL(clicked()), this, SLOT(removeCurrent()));
     connect(colorCombo, SIGNAL(activated(int)), this, SLOT(slotColorChanged(int)));
     connect(typeCombo, SIGNAL(activated(int)), this, SLOT(slotTypeChanged(int)));
-    connect(schemaList, SIGNAL(highlighted(int)), this, SLOT(readSchema(int)));
+    connect(schemaList, SIGNAL(currentRowChanged(int)), this, SLOT(readSchema(int)));
     connect(shadeColor, SIGNAL(changed(const QColor&)), this, SLOT(updatePreview()));
     connect(shadeSlide, SIGNAL(valueChanged(int)), this, SLOT(updatePreview()));
     connect(transparencyCheck, SIGNAL(toggled(bool)), this, SLOT(updatePreview()));
@@ -117,7 +103,7 @@ SchemaEditor::SchemaEditor(QWidget * parent)
     connect(backgndLine, SIGNAL(textChanged(const QString&)), this, SLOT(schemaModified()));
 
     connect(defaultSchemaCB, SIGNAL(toggled(bool)), this, SIGNAL(changed()));
-    removeButton->setEnabled( schemaList->currentItem() );
+    removeButton->setEnabled( schemaList->currentRow() );
     load();
 }
 
@@ -126,9 +112,9 @@ QString SchemaEditor::schema()
 {
     QString filename = defaultSchema;
 
-    int i = schemaList->currentItem();
+    int i = schemaList->currentRow();
     if (defaultSchemaCB->isChecked() && i>=0)
-      filename = ((SchemaListBoxText *) schemaList->item(i))->filename();
+      filename = schemaList->item(i)->data(kFilenameRole).toString();
 
     return filename.section('/',-1);
 }
@@ -141,13 +127,13 @@ void SchemaEditor::setSchema(QString sch)
 
     int sc = -1;
     for (int i = 0; i < (int) schemaList->count(); i++)
-	if (sch == ((SchemaListBoxText *) schemaList->item(i))->filename())
+	if (sch == schemaList->item(i)->data(kFilenameRole).toString())
 	    sc = i;
 
     oldSchema = sc;
     if (sc == -1)
 	sc = 0;
-    schemaList->setCurrentItem(sc);
+    schemaList->setCurrentRow(sc);
 //    readSchema(sc);
 }
 
@@ -217,10 +203,10 @@ void SchemaEditor::loadAllSchema(QString currentFile)
 {
     QStringList list = KGlobal::dirs()->findAllResources("data", "konsole/*.schema");
     QStringList::ConstIterator it;
-    disconnect(schemaList, SIGNAL(highlighted(int)), this, SLOT(readSchema(int)));
+    disconnect(schemaList, SIGNAL(currentRowChanged(int)), this, SLOT(readSchema(int)));
     schemaList->clear();
 
-    Q3ListBoxItem* currentItem = 0;
+    QListWidgetItem * currentItem = 0;
     for (it = list.begin(); it != list.end(); ++it) {
 
 	QString name = (*it);
@@ -228,19 +214,22 @@ void SchemaEditor::loadAllSchema(QString currentFile)
 	QString title = readSchemaTitle(name);
 
 	// Only insert new items so that local items override global
-	if (schemaList->findItem(title, Q3ListBox::ExactMatch) == 0) {
+	if (schemaList->findItems(title, Qt::MatchExactly).size() == 0) {
 	    if (title.isNull() || title.isEmpty())
 		title=i18n("untitled");
 
-		schemaList->insertItem(new SchemaListBoxText(title, name));
+		QListWidgetItem * newItem = new QListWidgetItem(title, schemaList);
+		newItem->setData(Qt::UserRole, name);
+		// just add it, we're going to sort anyway
+		schemaList->addItem(newItem);
 	    if (currentFile==name.section('/',-1))
                 currentItem = schemaList->item( schemaList->count()-1 );
 	}
     }
-    schemaList->sort();
-    schemaList->setCurrentItem(0);   // select the first added item correctly too
+    schemaList->sortItems();
+    schemaList->setCurrentRow(0);   // select the first added item correctly too
     schemaList->setCurrentItem(currentItem);
-    connect(schemaList, SIGNAL(highlighted(int)), this, SLOT(readSchema(int)));
+    connect(schemaList, SIGNAL(currentRowChanged(int)), this, SLOT(readSchema(int)));
     schemaListChanged();
 }
 
@@ -294,10 +283,10 @@ void SchemaEditor::slotColorChanged(int slot)
 
 void SchemaEditor::removeCurrent()
 {
-    int i = schemaList->currentItem();
+    int i = schemaList->currentRow();
     if(i==-1)
         return;
-    QString base = ((SchemaListBoxText *) schemaList->item(i))->filename();
+    QString base = schemaList->item(i)->data(kFilenameRole).toString();
 
     // Query if system schemas should be removed
     if (KStandardDirs::locateLocal("data", "konsole/" + base.section('/', -1)) != base) {
@@ -333,9 +322,9 @@ void SchemaEditor::saveCurrent()
     slotColorChanged(0);
 
     QString fullpath;
-    if (schemaList->currentText() == titleLine->text()) {
-	int i = schemaList->currentItem();
-	fullpath = ((SchemaListBoxText *) schemaList->item(i))->filename().section('/',-1);
+    if (schemaList->currentItem()->text() == titleLine->text()) {
+	int i = schemaList->currentRow();
+	fullpath = schemaList->item(i)->data(kFilenameRole).toString().section('/',-1);
     }
     else {
 	// Only ask for a name for changed titleLine, considered a "save as"
@@ -475,12 +464,12 @@ QString SchemaEditor::readSchemaTitle(const QString & file)
 void SchemaEditor::schemaListChanged()
 {
     QStringList titles, filenames;
-    SchemaListBoxText *item;
+    QListWidgetItem * item;
 
     for (int index = 0; index < (int) schemaList->count(); index++) {
-      item = (SchemaListBoxText *) schemaList->item(index);
+      item = schemaList->item(index);
       titles.append(item->text());
-      filenames.append(item->filename().section('/', -1));
+      filenames.append(item->data(kFilenameRole).toString().section('/', -1));
     }
 
     emit schemaListChanged(titles, filenames);
@@ -512,27 +501,27 @@ void SchemaEditor::readSchema(int num)
 
 	if (defaultSchemaCB->isChecked()) {
 
-	    defaultSchema = ((SchemaListBoxText *) schemaList->item(oldSchema))->filename();
+	    defaultSchema = schemaList->item(oldSchema)->data(kFilenameRole).toString();
 
 	}
 
 	if(schMod) {
-	    disconnect(schemaList, SIGNAL(highlighted(int)), this, SLOT(readSchema(int)));
-	    schemaList->setCurrentItem(oldSchema);
+	    disconnect(schemaList, SIGNAL(currentRowChanged(int)), this, SLOT(readSchema(int)));
+	    schemaList->setCurrentRow(oldSchema);
 	    querySave();
-	    schemaList->setCurrentItem(num);
-	    connect(schemaList, SIGNAL(highlighted(int)), this, SLOT(readSchema(int)));
+	    schemaList->setCurrentRow(num);
+	    connect(schemaList, SIGNAL(currentRowChanged(int)), this, SLOT(readSchema(int)));
 	    schMod=false;
 	}
 
     }
 
-    QString fPath = KStandardDirs::locate("data", "konsole/" +
-			   ((SchemaListBoxText *) schemaList->item(num))->filename());
+    QString fPath = KStandardDirs::locate("data", QString("konsole/") +
+			   schemaList->item(num)->data(kFilenameRole).toString());
 
     if (fPath.isNull())
 	fPath = KStandardDirs::locate("data",
-		       ((SchemaListBoxText *) schemaList->item(num))->filename());
+		       schemaList->item(num)->data(kFilenameRole).toString());
 
     if (fPath.isNull()) {
 	KMessageBox::error(this, i18n("Cannot find the schema."),

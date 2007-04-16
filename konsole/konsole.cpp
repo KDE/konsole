@@ -563,7 +563,7 @@ void Konsole::makeGUI()
       // Tabbar
       selectTabbar = new KSelectAction(i18n("&Tab Bar"), this );
       actions->addAction( "tabbar", selectTabbar );
-      connect( selectTabbar, SIGNAL( triggered() ), this, SLOT( slotSelectTabbar() ) );
+      connect( selectTabbar, SIGNAL( triggered(QAction *) ), this, SLOT( slotSelectTabbar() ) );
       QStringList tabbaritems;
       tabbaritems << i18n("&Hide") << i18n("&Top") << i18n("&Bottom");
       selectTabbar->setItems( tabbaritems );
@@ -572,7 +572,7 @@ void Konsole::makeGUI()
       // Scrollbar
       selectScrollbar = new KSelectAction(i18n("Sc&rollbar"), this );
       actions->addAction( "scrollbar", selectScrollbar );
-      connect( selectScrollbar, SIGNAL( triggered() ), this, SLOT(slotSelectScrollbar() ) );
+      connect( selectScrollbar, SIGNAL( triggered(QAction *) ), this, SLOT(slotSelectScrollbar() ) );
       QStringList scrollitems;
       scrollitems << i18n("&Hide") << i18n("&Left") << i18n("&Right");
       selectScrollbar->setItems( scrollitems );
@@ -872,9 +872,9 @@ void Konsole::makeTabWidget()
 
 
   if (n_tabbar==TabTop)
-    tabwidget->setTabPosition(QTabWidget::Top);
+    tabwidget->setTabPosition(QTabWidget::North);
   else
-    tabwidget->setTabPosition(QTabWidget::Bottom);
+    tabwidget->setTabPosition(QTabWidget::South);
 
   KAcceleratorManager::setNoAccel( tabwidget );
 
@@ -1964,9 +1964,9 @@ void Konsole::slotSelectTabbar() {
       if ( tabwidget->isTabBarHidden() )
          tabwidget->setTabBarHidden( false );
       if ( n_tabbar == TabTop )
-         tabwidget->setTabPosition( QTabWidget::Top );
+         tabwidget->setTabPosition( QTabWidget::North );
       else
-         tabwidget->setTabPosition( QTabWidget::Bottom );
+         tabwidget->setTabPosition( QTabWidget::South );
    }
 
   if (b_fixedSize)

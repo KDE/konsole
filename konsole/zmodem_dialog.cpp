@@ -18,7 +18,7 @@
 
 #include "zmodem_dialog.h"
 
-#include <Qt3Support/Q3TextEdit>
+#include <QtGui/QTextEdit>
 
 #include <klocale.h>
 
@@ -36,7 +36,7 @@ ZModemDialog::ZModemDialog(QWidget *parent, bool modal, const QString &caption)
 
   showButtonSeparator( true );
   enableButton(Close, false);
-  textEdit = new Q3TextEdit(this);
+  textEdit = new QTextEdit(this);
   textEdit->setMinimumSize(400, 100);
   setMainWidget(textEdit);
   connect(this, SIGNAL(user1Clicked()), this, SLOT(slotClose()));
@@ -45,8 +45,7 @@ ZModemDialog::ZModemDialog(QWidget *parent, bool modal, const QString &caption)
 
 void ZModemDialog::addProgressText(const QString &txt)
 {
-  int p = textEdit->paragraphs();
-  textEdit->insertParagraph(txt, p);
+	textEdit->insertPlainText(txt);
 }
 
 void ZModemDialog::done()
