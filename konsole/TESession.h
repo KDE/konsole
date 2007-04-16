@@ -27,7 +27,7 @@
 
 // KDE
 #include <kapplication.h>
-#include <kmainwindow.h>
+#include <kxmlguiwindow.h>
 
 // Konsole
 #include "TEPty.h"
@@ -68,22 +68,22 @@ public:
 
   TEWidget* widget() { Q_ASSERT( primaryView() ) ; return primaryView(); }
   void changeWidget(TEWidget* w);
-  
-  /** 
-   * Adds a new view for this session.    
-   * 
-   * The viewing widget will display the output from the terminal and input from the viewing widget 
+
+  /**
+   * Adds a new view for this session.
+   *
+   * The viewing widget will display the output from the terminal and input from the viewing widget
    * (key presses, mouse activity etc.) will be sent to the terminal.
    *
    * Currently each view on the session is required to be the same size.  ie.  They must all display
-   * the same number of lines and columns.  
+   * the same number of lines and columns.
    */
   void addView(TEWidget* widget);
-  /** 
-   * Removes a view from this session.  
+  /**
+   * Removes a view from this session.
    *
    * @p widget will no longer display output from or send input
-   * to the terminal 
+   * to the terminal
    */
   void removeView(TEWidget* widget);
 
@@ -92,16 +92,16 @@ public:
    *
    * The primary view is the first view added to the session, which is used by the emulation
    * if it needs to determine the size of the view - ie. the number of lines and columns which
-   * the view can display. 
+   * the view can display.
    *
    * If the primary view is removed from the session using removeView(), the next view which is still
    * attached will become the primary view.
    */
   TEWidget* primaryView();
 
-  /** 
-   * Returns true if the session has created child processes which have not yet terminated 
-   * This call may be expensive if there are a large number of processes running. 
+  /**
+   * Returns true if the session has created child processes which have not yet terminated
+   * This call may be expensive if there are a large number of processes running.
    */
   bool        hasChildren();
 
@@ -121,12 +121,12 @@ public:
   const QString& IconName() const;
   const QString& IconText() const;
 
-  /** 
+  /**
    * Return the session title set by the user (ie. the program running in the terminal), or an
    * empty string if the user has not set a custom title
    */
   QString userTitle() const;
-  /** 
+  /**
    * Returns the title of the session for display in UI widgets (eg. window captions)
    */
   QString displayTitle() const;
@@ -136,7 +136,7 @@ public:
   QStringList getArgs();
   QString getPgm();
 
-  /** 
+  /**
    * Sets the command line arguments which the session's program will be passed when
    * run() is called.
    */
@@ -147,16 +147,16 @@ public:
   /** Returns the session's current working directory. */
   QString getCwd();
   QString getInitial_cwd() { return initial_cwd; }
-  
-  /** 
-   * Sets the initial working directory for the session when it is run 
+
+  /**
+   * Sets the initial working directory for the session when it is run
    * This has no effect once the session has been started.
    */
   void setWorkingDirectory( const QString& dir ) { initial_cwd = dir; }
   //void setInitial_cwd(const QString& _cwd) { initial_cwd=_cwd; }
 
-  
-  
+
+
   void setHistory(const HistoryType&);
   const HistoryType& history();
 

@@ -158,7 +158,7 @@ template class Q3PtrDict<KToggleAction>;
 
 Konsole::Konsole(const char* name, int histon, bool menubaron, bool tabbaron, bool frameon, bool scrollbaron,
                  const QString &type, bool b_inRestore, const int wanted_tabbar, const QString &workdir )
-:KMainWindow(0)
+:KXmlGuiWindow(0)
 ,m_defaultSession(0)
 ,m_defaultSessionFilename("")
 ,tabwidget(0)
@@ -940,7 +940,7 @@ bool Konsole::eventFilter( QObject *o, QEvent *ev )
       return true;
     }
   }
-  return KMainWindow::eventFilter(o, ev);
+  return KXmlGuiWindow::eventFilter(o, ev);
 }
 
 void Konsole::makeBasicGUI()

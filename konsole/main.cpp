@@ -442,7 +442,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 
     // TODO: Session management stores everything in same group,
     // should use one group / mainwindow
-    while (KMainWindow::canBeRestored(n) || !profile.isEmpty())
+    while (KXmlGuiWindow::canBeRestored(n) || !profile.isEmpty())
     {
         KConfigGroup group = sessionconfig->group(QString::number(n));
         if (!group.hasKey("Pgm0"))

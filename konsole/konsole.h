@@ -29,7 +29,7 @@
 #include <QList>
 
 // KDE
-#include <kmainwindow.h>
+#include <kxmlguiwindow.h>
 #include <kdialog.h>
 
 // Konsole
@@ -68,7 +68,7 @@ class SessionInfo;
 class SessionManager;
 
 class KonsoleAdaptor;
-class Konsole : public KMainWindow
+class Konsole : public KXmlGuiWindow
 {
     Q_OBJECT
 
