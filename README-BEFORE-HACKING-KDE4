@@ -1,0 +1,28 @@
+Most of the front-end code ( including the Konsole part, the Konsole application main window,
+menus, various additional dialogs and settings dialogs ) is being replaced entirely in
+the konsole-split-view branch.  It is not being done directly in the 'konsole' directory
+because other KDE 4 developers require a functional terminal whilst the replacment front-end
+is being worked on.
+
+The konsole-split-view branch can be obtained and built by navigating to your 
+kdebase/apps directory ( which currently contains the existing 'konsole' folder )
+and then running:
+
+> svn co svn://anonsvn.kde.org/home/kde/branches/work/konsole-split-view
+
+Or for contributors who have SVN read-write access:
+
+> svn co https://svn.kde.org/home/kde/branches/work/konsole-split-view
+
+You will then need to edit the CMakeLists.txt file in the 'kdebase/apps' 
+directory and replace this line:
+
+> add_subdirectory( konsole )
+
+with this line
+
+> add_subdirectory( konsole-split-view )
+
+
+Happy hacking :)
+Robert Knight < robertknight@gmail.com >
