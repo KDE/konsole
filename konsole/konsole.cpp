@@ -1067,7 +1067,7 @@ void Konsole::makeBasicGUI()
 
   m_detachSession = new KAction(i18n("&Detach Session"), this);
   m_shortcuts->addAction("detach_session", m_detachSession);
-  m_detachSession->setIcon( KIcon("tab_breakoff") );
+  m_detachSession->setIcon( KIcon("tab-breakoff") );
   connect( m_detachSession, SIGNAL( triggered() ), this, SLOT(slotDetachSession()) );
   m_detachSession->setEnabled(false);
 
@@ -4320,7 +4320,7 @@ void Konsole::setupTabContextMenu()
 
    m_tabDetachSession= new KAction( i18n("&Detach Session"), this );
    actionCollection()->addAction( m_tabDetachSession->objectName(), m_tabDetachSession );
-   m_tabDetachSession->setIcon( KIcon("tab_breakoff") );
+   m_tabDetachSession->setIcon( KIcon("tab-breakoff") );
    connect( m_tabDetachSession, SIGNAL( triggered() ), this, SLOT(slotTabDetachSession()) );
    m_tabPopupMenu->addAction( m_tabDetachSession );
 
