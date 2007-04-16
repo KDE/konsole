@@ -528,7 +528,7 @@ void Konsole::makeGUI()
    
    KToggleAction* splitView = new KToggleAction(KIcon("view_top_bottom"),i18n("Split View"),0,"split-view");
    connect( splitView , SIGNAL(toggled(bool)) , this , SLOT(slotToggleSplitView(bool)) );
-   splitView->setCheckedState( KGuiItem( i18n( "&Remove Split" ) , KIcon("view_remove") ) );
+   splitView->setCheckedState( KGuiItem( i18n( "&Remove Split" ) , KIcon("view-remove") ) );
    m_view->addAction( splitView ); 
    
    //Monitor for Activity / Silence
@@ -1022,9 +1022,9 @@ void Konsole::makeBasicGUI()
 
   m_shortcuts = new KActionCollection( (QObject*) this);
 
-  m_copyClipboard = new KAction(KIcon("editcopy"), i18n("&Copy"), m_shortcuts, "edit_copy");
+  m_copyClipboard = new KAction(KIcon("edit-copy"), i18n("&Copy"), m_shortcuts, "edit_copy");
   connect(m_copyClipboard, SIGNAL(triggered(bool) ), SLOT(slotCopyClipboard()));
-  m_pasteClipboard = new KAction(KIcon("editpaste"), i18n("&Paste"), m_shortcuts, "edit_paste");
+  m_pasteClipboard = new KAction(KIcon("edit-paste"), i18n("&Paste"), m_shortcuts, "edit_paste");
   connect(m_pasteClipboard, SIGNAL(triggered(bool) ), SLOT(slotPasteClipboard()));
   m_pasteClipboard->setShortcut( QKeySequence(Qt::SHIFT+Qt::Key_Insert) );
   m_pasteSelection = new KAction(i18n("Paste Selection"), m_shortcuts, "pasteselection");
@@ -1051,15 +1051,15 @@ void Konsole::makeBasicGUI()
   connect(m_saveHistory, SIGNAL(triggered(bool)), SLOT(slotShowSaveHistoryDialog()));
   m_saveHistory->setEnabled(b_histEnabled );
 
-  m_clearHistory = new KAction(KIcon("history_clear"), i18n("Clear &History"), m_shortcuts, "clear_history");
+  m_clearHistory = new KAction(KIcon("history-clear"), i18n("Clear &History"), m_shortcuts, "clear_history");
   connect(m_clearHistory, SIGNAL(triggered(bool)), SLOT(slotClearHistory()));
   m_clearHistory->setEnabled(b_histEnabled);
 
-  m_clearAllSessionHistories = new KAction(KIcon("history_clear"), i18n("Clear All H&istories"), m_shortcuts, "clear_all_histories");
+  m_clearAllSessionHistories = new KAction(KIcon("history-clear"), i18n("Clear All H&istories"), m_shortcuts, "clear_all_histories");
   connect(m_clearAllSessionHistories, SIGNAL(triggered(bool)), SLOT(slotClearAllSessionHistories()));
 
   m_detachSession = new KAction(i18n("&Detach Session"), m_shortcuts, "detach_session");
-  m_detachSession->setIcon( KIcon("tab_breakoff") );
+  m_detachSession->setIcon( KIcon("tab-breakoff") );
   connect( m_detachSession, SIGNAL( triggered() ), this, SLOT(slotDetachSession()) );
   m_detachSession->setEnabled(false);
 
