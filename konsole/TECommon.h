@@ -70,7 +70,7 @@ struct ColorEntry
 #define DEFAULT_BACK_COLOR 1
 
 //a standard set of colors using black text on a white background.
-//defined in TerminalDisplay.characterpp
+//defined in TerminalDisplay.cpp
 
 static const ColorEntry base_color_table[TABLE_COLORS] =
 // The following are almost IBM standard color codes, with some slight

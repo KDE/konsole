@@ -21,7 +21,6 @@
 
 // Qt
 #include <QFileInfo>
-#include <QFont>
 #include <QList>
 #include <QString>
 
@@ -34,21 +33,23 @@
 #include <kdesktopfile.h>
 
 // Konsole
+#include "ColorScheme.h"
 #include "Session.h"
 #include "History.h"
 #include "SessionManager.h"
-#include "schema.h"
 
 using namespace Konsole;
 
+SessionManager* SessionManager::_instance = 0;
+
 SessionInfo::SessionInfo(const QString& path)
 {
-    QString fileName = QFileInfo(path).fileName();
+    //QString fileName = QFileInfo(path).fileName();
 
-    QString fullPath = KStandardDirs::locate("appdata",fileName);
-    Q_ASSERT( QFile::exists(fullPath) );
+    //QString fullPath = KStandardDirs::locate("data","konsole/"+fileName);
+    //Q_ASSERT( QFile::exists(fullPath) );
 
-    _desktopFile = new KDesktopFile( fullPath);
+    _desktopFile = new KDesktopFile(path);
     _config = new KConfigGroup( _desktopFile->desktopGroup() );
 
     _path = path;
@@ -58,6 +59,40 @@ SessionInfo::~SessionInfo()
 {
     delete _config; _config = 0;
     delete _desktopFile; _desktopFile = 0;
+}
+
+void SessionInfo::setParent( SessionInfo* parent )
+{
+    _parent = parent;
+}
+SessionInfo* SessionInfo::parent() const
+{
+    return _parent;
+}
+void SessionInfo::setProperty( Property property , const QVariant& value )
+{
+    _properties[property] = value;
+}
+QVariant SessionInfo::property( Property property ) const
+{
+    if ( _properties.contains(property) )
+    {
+        return _properties[property];
+    }
+    else
+    {
+        switch ( property )
+        {
+            case Name:
+                return name();
+                break;
+            case Icon:
+                return icon();
+                break;
+            default:
+                return QVariant();
+        }
+    }
 }
 
 QString SessionInfo::name() const
@@ -154,12 +189,24 @@ QString SessionInfo::keyboardSetup() const
 QString SessionInfo::colorScheme() const
 {
     //TODO Pick a default color scheme
-    return _config->readEntry("Schema");
+    return _config->readEntry("Schema").replace(".schema",QString::null);
 }
-QFont SessionInfo::defaultFont(const QFont& font) const
+QFont SessionInfo::defaultFont() const
 {
-    if (_config->hasKey("defaultfont"))
-        return QVariant(_config->readEntry("defaultfont")).value<QFont>();
+    //TODO Use system default font here
+    const QFont& font = QFont("Monospace");
+
+    if (_config->hasKey("Font"))
+    {
+        // it is possible for the Font key to exist, but to be empty, in which
+        // case '_config->readEntry("Font")' will return the default application
+        // font, which will most likely not be suitable for use in the terminal
+        QString fontEntry = _config->readEntry("Font");
+        if (!fontEntry.isEmpty())
+            return QVariant(fontEntry).value<QFont>();
+        else
+            return font;
+    }
     else
         return font;
 }
@@ -168,48 +215,47 @@ QString SessionInfo::defaultWorkingDirectory() const
     return _config->readPathEntry("Cwd");
 }
 
-CustomCommandSessionInfo::CustomCommandSessionInfo(const QString& path)
- : SessionInfo(path)
-{
-}
+/*MutableSessionInfo::MutableSessionInfo(const QString& path)
+ : SessionInfo(path) {}
 
-void CustomCommandSessionInfo::setName(const QString& name)
-{
-    _name = name;
-}
+void MutableSessionInfo::setName(const QString& name) { _name = name; }
 
-QString CustomCommandSessionInfo::name() const
-{
-    return _name;
-}
+QString MutableSessionInfo::name() const { return _name; }
 
-void CustomCommandSessionInfo::setCommand(const QString& command)
-{
-    _command = command;
-}
+void MutableSessionInfo::setCommand(const QString& command) { _command = command; }
+QString MutableSessionInfo::command(bool,bool) const { return _command; }
 
-QString CustomCommandSessionInfo::command(bool,bool) const
-{
-    return _command;
-}
+void MutableSessionInfo::setArguments(const QStringList& arguments){  _arguments = arguments; }
+QStringList MutableSessionInfo::arguments() const { return _arguments; }
 
-void CustomCommandSessionInfo::setArguments(const QStringList& arguments)
-{
-    _arguments = arguments;
-}
+void MutableSessionInfo::setTerminal(const QString& terminal) { _terminal = terminal; }
+QString MutableSessionInfo::terminal() const { return _terminal; }
 
-QStringList CustomCommandSessionInfo::arguments() const
-{
-    return _arguments;
-}
+void MutableSessionInfo::setKeyboardSetup(const QString& keyboard) { _keyboardSetup = keyboard; }
+QString MutableSessionInfo::keyboardSetup() const { return _keyboardSetup; }
+
+void MutableSessionInfo::setColorScheme(const QString& colorScheme) { _colorScheme = colorScheme; }
+QString MutableSessionInfo::colorScheme() const { return _colorScheme; }
+
+void MutableSessionInfo::setDefaultWorkingDirectory(const QString& dir) { _defaultWorkingDirectory = dir; }
+QString MutableSessionInfo::defaultWorkingDirectory() const { return _defaultWorkingDirectory; }
+
+void MutableSessionInfo::setNewSessionText(const QString& text) { _newSessionText = text; }
+QString MutableSessionInfo::newSessionText() const { return _newSessionText; }
+
+void MutableSessionInfo::setDefaultFont(const QFont& font) { _defaultFont = font; }
+QFont MutableSessionInfo::defaultFont() const { return _defaultFont ; }
+
+void MutableSessionInfo::setIcon(const QString& icon) { _icon = icon; }
+QString MutableSessionInfo::icon() const { return _icon; }
+*/
 
 SessionManager::SessionManager()
-    : _defaultSessionType(0),
-      _colorSchemeList(0)
 {
     //locate default session
-   KSharedConfigPtr appConfig = KGlobal::config();
-   const KConfigGroup group = appConfig->group( "Desktop Entry" );
+    KSharedConfigPtr appConfig = KGlobal::config();
+    //KConfig* appConfig = new KConfig("konsolerc");
+    const KConfigGroup group = appConfig->group( "Desktop Entry" );
 
    QString defaultSessionFilename = group.readEntry("DefaultSession","shell.desktop");
 
@@ -218,7 +264,7 @@ SessionManager::SessionManager()
     //
     //the sessions are only parsed completely when a session of this type
     //is actually created
-    QList<QString> files = KGlobal::dirs()->findAllResources("appdata", "*.desktop", KStandardDirs::NoDuplicates);
+    QList<QString> files = KGlobal::dirs()->findAllResources("data", "konsole/*.desktop", KStandardDirs::NoDuplicates);
 
     QListIterator<QString> fileIter(files);
 
@@ -228,17 +274,18 @@ SessionManager::SessionManager()
         QString configFile = fileIter.next();
         SessionInfo* newType = new SessionInfo(configFile);
 
-        addSessionType( newType );
+        QString sessionKey = addSessionType( newType );
 
         if ( QFileInfo(configFile).fileName() == defaultSessionFilename )
-            _defaultSessionType = newType;
+            _defaultSessionType = sessionKey;
     }
 
-    // load the colour scheme list
-    _colorSchemeList = new ColorSchemaList();
-
     Q_ASSERT( _types.count() > 0 );
-    Q_ASSERT( _defaultSessionType != 0 );
+    Q_ASSERT( !_defaultSessionType.isEmpty() );
+
+    // now that the session types have been loaded,
+    // get the list of favorite sessions
+    loadFavorites();
 }
 
 SessionManager::~SessionManager()
@@ -248,7 +295,13 @@ SessionManager::~SessionManager()
     while (infoIter.hasNext())
         delete infoIter.next();
 
-    delete _colorSchemeList;
+    // failure to call KGlobal::config()->sync() here results in a crash on exit and
+    // configuraton information not being saved to disk.
+    // my understanding of the documentation is that KConfig is supposed to save
+    // the data automatically when the application exits.  need to discuss this
+    // with people who understand KConfig better.
+    qWarning() << "Manually syncing configuration information - this should be done automatically.";
+    KGlobal::config()->sync();
 }
 
 const QList<Session*> SessionManager::sessions()
@@ -269,7 +322,7 @@ Session* SessionManager::createSession(QString key )
     const SessionInfo* info = 0;
 
     if ( key.isEmpty() )
-        info = _defaultSessionType;
+        info = defaultSessionType();
     else
         info = _types[key];
 
@@ -280,6 +333,7 @@ Session* SessionManager::createSession(QString key )
 
             //configuration information found, create a new session based on this
             session = new Session();
+            session->setType(key);
 
             QListIterator<QString> iter(info->arguments());
             while (iter.hasNext())
@@ -290,7 +344,8 @@ Session* SessionManager::createSession(QString key )
             session->setArguments( info->arguments() );
             session->setTitle( info->name() );
             session->setIconName( info->icon() );
-            session->setSchema( _colorSchemeList->find(activeSetting(ColorScheme).toString()) );
+
+            //session->setSchema( _colorSchemeList->find(activeSetting(ColorScheme).toString()) );
             session->setTerminalType( info->terminal() );
 
                 //temporary
@@ -316,24 +371,31 @@ void SessionManager::sessionTerminated(Session* session)
     session->deleteLater();
 }
 
-QList<QString> SessionManager::availableSessionTypes()
+QList<QString> SessionManager::availableSessionTypes() const
 {
     return _types.keys();
 }
 
 SessionInfo* SessionManager::sessionType(const QString& key) const
 {
+    if ( key.isEmpty() )
+        return defaultSessionType();
+
     if ( _types.contains(key) )
         return _types[key];
     else
         return 0;
 }
 
-SessionInfo* SessionManager::defaultSessionType()
+SessionInfo* SessionManager::defaultSessionType() const
+{
+    return _types[_defaultSessionType];
+}
+
+QString SessionManager::defaultSessionKey() const
 {
     return _defaultSessionType;
 }
-
 
 void SessionManager::addSetting( Setting setting, Source source, const QVariant& value)
 {
@@ -377,7 +439,123 @@ QString SessionManager::addSessionType(SessionInfo* type)
     
     _types.insert(key,type);
 
+    emit sessionTypeAdded(key);
+
     return key;
 }
 
-#include <SessionManager.moc>
+void SessionManager::deleteSessionType(const QString& key)
+{
+    SessionInfo* type = sessionType(key);
+
+    setFavorite(key,false);
+
+    if ( type )
+    {
+        _types.remove(key);
+        delete type;
+    }
+
+    emit sessionTypeRemoved(key); 
+
+    qWarning() << __FUNCTION__ << "TODO: Make this change persistant.";
+    //TODO Store this information persistantly
+}
+void SessionManager::setDefaultSessionType(const QString& key)
+{
+   Q_ASSERT ( _types.contains(key) );
+
+   _defaultSessionType = key;
+
+   SessionInfo* info = sessionType(key);
+  
+   Q_ASSERT( QFile::exists(info->path()) );
+   QFileInfo fileInfo(info->path());
+
+   qDebug() << "setting default session type to " << fileInfo.fileName();
+
+   KConfigGroup group = KGlobal::config()->group("Desktop Entry");
+   group.writeEntry("DefaultSession",fileInfo.fileName());
+}
+QSet<QString> SessionManager::favorites() const
+{
+    return _favorites;
+}
+void SessionManager::setFavorite(const QString& key , bool favorite)
+{
+    Q_ASSERT( _types.contains(key) );
+
+    if ( favorite && !_favorites.contains(key) )
+    {
+        qDebug() << "adding favorite - " << key;
+
+        _favorites.insert(key);
+        emit favoriteStatusChanged(key,favorite);
+    
+        saveFavorites();
+    }
+    else if ( !favorite && _favorites.contains(key) )
+    {
+        qDebug() << "removing favorite - " << key;
+        _favorites.remove(key);
+        emit favoriteStatusChanged(key,favorite);
+    
+        saveFavorites();
+    }
+
+}
+void SessionManager::loadFavorites()
+{
+    KSharedConfigPtr appConfig = KGlobal::config();
+    KConfigGroup favoriteGroup = appConfig->group("Favorite Sessions");
+
+    qDebug() << "loading favorites";
+
+    if ( favoriteGroup.hasKey("Favorites") )
+    {
+        qDebug() << "found favorites key";
+       QStringList list = favoriteGroup.readEntry("Favorites",QStringList());
+
+       qDebug() << "found " << list.count() << "entries";
+
+       QListIterator<QString> lit(list);
+       while (lit.hasNext())
+           qDebug() << "entry: " << lit.next();
+
+       QHashIterator<QString,SessionInfo*> iter(_types);
+       while ( iter.hasNext() )
+       {
+            iter.next();
+            if ( list.contains( iter.value()->name() ) )
+                _favorites.insert( iter.key() );
+       } 
+    }
+}
+void SessionManager::saveFavorites()
+{
+    KSharedConfigPtr appConfig = KGlobal::config();
+    KConfigGroup favoriteGroup = appConfig->group("Favorite Sessions");
+
+    QStringList names;
+    QSetIterator<QString> keyIter(_favorites);
+    while ( keyIter.hasNext() )
+    {
+        const QString& key = keyIter.next();
+
+        Q_ASSERT( _types.contains(key) && sessionType(key) != 0 );
+
+        names << sessionType(key)->name();
+    }
+
+    favoriteGroup.writeEntry("Favorites",names);
+}
+void SessionManager::setInstance(SessionManager* instance)
+{
+    _instance = instance;
+}
+SessionManager* SessionManager::instance()
+{
+    return _instance;
+}
+
+#include "SessionManager.moc"

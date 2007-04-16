@@ -295,10 +295,8 @@ void Screen::deleteChars(int n)
 void Screen::insertChars(int n)
 {
   if (n == 0) n = 1; // Default
- // int p = qMax(0,qMin(columns-1-n,columns-1));
-  int q = qMax(0,qMin(cuX+n,columns-1));
-
-  clearImage(loc(cuX,cuY),loc(q-1,cuY),' ');
+  
+  screenLines[cuY].insert(cuX,n);
 }
 
 /*! delete `n' lines starting from (including) the cursor position.
@@ -1546,7 +1544,7 @@ int Screen::getHistLines()
 void Screen::setScroll(const HistoryType& t)
 {
   clearSelection();
-  hist = t.getScroll(hist);
+  hist = t.scroll(hist);
 }
 
 bool Screen::hasScroll()

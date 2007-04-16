@@ -28,6 +28,8 @@ namespace Konsole
 class IncrementalSearchBar;
 class ViewSplitter;
 class ViewManager;
+class ViewProperties;
+class SessionController;
 class SessionList;
 class BookmarkHandler;
 
@@ -92,11 +94,15 @@ class MainWindow : public KMainWindow
     private slots:
         void newTab();
         void newWindow();
+        void showCustomSessionDialog();
         void showPreferencesDialog();
         void showRemoteConnectionDialog();
         void showShortcutsDialog();
         void sessionSelected(const QString&);
+        void activeViewChanged(SessionController* controller);
+        void activeViewTitleChanged(ViewProperties*);
 
+        void sessionListChanged(const QList<QAction*>& actions);
     private:
         void setupActions();
         void setupWidgets();
@@ -105,6 +111,7 @@ class MainWindow : public KMainWindow
         ViewManager*  _viewManager;
         BookmarkHandler* _bookmarkHandler;
         IncrementalSearchBar* _searchBar;
+        SessionController* _pluggedController;
 };
 
 };

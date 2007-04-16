@@ -36,6 +36,9 @@
         <Action name="paste"/>
         <Action name="clear-history-and-reset"/>
         <Separator/>
+        <Action name="show-menubar"/>
+        <Action name="edit-current-session" />
+        <Separator/>
         <Action name="close-session"/>
     </Menu>
 </kpartgui>

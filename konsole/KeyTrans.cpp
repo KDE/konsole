@@ -25,18 +25,22 @@
    FIXME: some bug crept in, disallowing '\0' to be emitted.
 */
 
-#include "KeyTrans.h"
+// System
+#include <stdio.h>
+#include <stddef.h>
+
+// Qt
 #include <QBuffer>
+#include <QHash>
 #include <QObject>
-#include <q3intdict.h>
-#include <q3dict.h>
 #include <QFile>
-#include <q3dict.h>
+
+// KDE
 #include <kstandarddirs.h>
 #include <klocale.h>
 
-#include <stdio.h>
-#include <stddef.h>
+// Konsole
+#include "KeyTrans.h"
 
 /* KeyEntry
 
@@ -84,7 +88,6 @@ KeyTrans::KeyTrans(const QString& path)
 ,m_numb(0)
 ,m_fileRead(false)
 {
-  tableX.setAutoDelete(true);
   if (m_path=="[buildin]")
   {
      m_id = "default";
@@ -110,18 +113,33 @@ KeyTrans::KeyTrans()
 
 KeyTrans::~KeyTrans()
 {
+    QListIterator<KeyEntry*> tableIter(tableX);
+    while ( tableIter.hasNext() )
+        delete tableIter.next();    
 }
 
 KeyTrans::KeyEntry* KeyTrans::addEntry(int ref, int key, int bits, int mask, int cmd, QString txt)
 // returns conflicting entry
 {
-  for (Q3PtrListIterator<KeyEntry> it(tableX); it.current(); ++it)
+  QListIterator<KeyEntry*> tableIter(tableX);
+  while ( tableIter.hasNext() )
+  {
+    KeyEntry* nextEntry = tableIter.next();
+
+    if ( nextEntry->matches(key,bits,mask) )
+    {
+        return nextEntry;
+    }
+  } 
+
+  /*for (Q3PtrListIterator<KeyEntry> it(tableX); it.current(); ++it)
   {
     if (it.current()->matches(key,bits,mask))
     {
       return it.current();
     }
-  }
+  }*/
+
   tableX.append(new KeyEntry(ref,key,bits,mask,cmd,txt));
   return (KeyEntry*)NULL;
 }
@@ -133,25 +151,31 @@ bool KeyTrans::findEntry(int key, int bits, int* cmd, QByteArray &txt, bool* met
   if (bits & ((1<<BITS_Shift)|(1<<BITS_Alt)|(1<<BITS_Control)))
     bits |= (1<<BITS_AnyMod);
 
-  for (Q3PtrListIterator<KeyEntry> it(tableX); it.current(); ++it)
-    if (it.current()->matches(key,bits,0xffff))
+  QListIterator<KeyEntry*> tableIter(tableX);
+  while ( tableIter.hasNext() )
+  {
+      KeyEntry* current = tableIter.next();
+
+    if (current->matches(key,bits,0xffff))
     {
-      *cmd = it.current()->cmd;
-      if ((*cmd==CMD_send) && it.current()->anymodspecified() && (it.current()->txt.length() < 16))
+      *cmd = current->cmd;
+      if ((*cmd==CMD_send) && current->anymodspecified() && (current->txt.length() < 16))
       {
         static char buf[16];
         char *c, mask = '1' + BITS(0, bits&(1<<BITS_Shift)) +
           BITS(1, bits&(1<<BITS_Alt)) + BITS(2, bits&(1<<BITS_Control));
-        strcpy(buf, it.current()->txt.toAscii().constData());
+        strcpy(buf, current->txt.toAscii().constData());
         c = strchr(buf, '*');
         if (c) *c = mask;
         txt = buf;
       }
       else
-        txt = it.current()->txt.toAscii();
-      *metaspecified = it.current()->metaspecified();
+        txt = current->txt.toAscii();
+      *metaspecified = current->metaspecified();
       return true;
     }
+  }
+
   return false;
 }
 
@@ -350,9 +374,9 @@ protected:
   void defOprSym(const char* key, int val);
   void defModSym(const char* key, int val);
 public:
-  Q3Dict<QObject> keysyms;
-  Q3Dict<QObject> modsyms;
-  Q3Dict<QObject> oprsyms;
+  QHash<QString,QObject*> keysyms;
+  QHash<QString,QObject*> modsyms;
+  QHash<QString,QObject*> oprsyms;
 };
 
 static KeyTransSymbols * syms = 0L;
@@ -693,24 +717,38 @@ KeyTransSymbols::KeyTransSymbols()
 
 static int keytab_serial = 0; //FIXME: remove,localize
 
-static Q3IntDict<KeyTrans> * numb2keymap = 0L;
+static QHash<int,KeyTrans*> * numb2keymap = 0L;
 
 KeyTrans* KeyTrans::find(int numb)
 {
-  KeyTrans* res = numb2keymap->find(numb);
-  return res ? res : numb2keymap->find(0);
+  if ( numb2keymap->contains(numb) )
+      return numb2keymap->value(numb);
+  else
+      return numb2keymap->value(0);
 }
 
 KeyTrans* KeyTrans::find(const QString &id)
 {
-  Q3IntDictIterator<KeyTrans> it(*numb2keymap);
+  QHashIterator<int,KeyTrans*> iter(*numb2keymap);
+
+  while ( iter.hasNext() )
+  {
+    iter.next();
+
+    if ( iter.value()->id() == id )
+        return iter.value();
+  }
+
+  return numb2keymap->value(0);
+
+  /*Q3IntDictIterator<KeyTrans> it(*numb2keymap);
   while(it.current())
   {
     if (it.current()->id() == id)
        return it.current();
     ++it;
   }
-  return numb2keymap->find(0);
+  return numb2keymap->find(0);*/
 }
 
 int KeyTrans::count()
@@ -727,7 +765,7 @@ void KeyTrans::addKeyTrans()
 void KeyTrans::loadAll()
 {
   if (!numb2keymap)
-    numb2keymap = new Q3IntDict<KeyTrans>;
+    numb2keymap = new QHash<int,KeyTrans*>;
   else  {  // Needed for konsole_part.
     numb2keymap->clear();
     keytab_serial = 0;

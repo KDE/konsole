@@ -1,0 +1,108 @@
+<ui version="4.0" >
+ <class>SessionTypeDialog</class>
+ <widget class="QWidget" name="SessionTypeDialog" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>515</width>
+    <height>315</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" >
+   <property name="leftMargin" >
+    <number>0</number>
+   </property>
+   <property name="topMargin" >
+    <number>0</number>
+   </property>
+   <property name="rightMargin" >
+    <number>0</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>0</number>
+   </property>
+   <item row="0" column="1" >
+    <widget class="QPushButton" name="newSessionButton" >
+     <property name="text" >
+      <string>New Session...</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1" >
+    <widget class="QPushButton" name="editSessionButton" >
+     <property name="enabled" >
+      <bool>false</bool>
+     </property>
+     <property name="text" >
+      <string>Edit Session...</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1" >
+    <widget class="QPushButton" name="deleteSessionButton" >
+     <property name="enabled" >
+      <bool>false</bool>
+     </property>
+     <property name="text" >
+      <string>Delete Session...</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1" >
+    <widget class="QPushButton" name="setAsDefaultButton" >
+     <property name="enabled" >
+      <bool>false</bool>
+     </property>
+     <property name="text" >
+      <string>Set as Default</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1" >
+    <spacer>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" >
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item rowspan="5" row="0" column="0" >
+    <widget class="QTableView" name="sessionTable" >
+     <property name="frameShadow" >
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="alternatingRowColors" >
+      <bool>true</bool>
+     </property>
+     <property name="selectionMode" >
+      <enum>QAbstractItemView::SingleSelection</enum>
+     </property>
+     <property name="selectionBehavior" >
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <property name="verticalScrollMode" >
+      <enum>QAbstractItemView::ScrollPerPixel</enum>
+     </property>
+     <property name="horizontalScrollMode" >
+      <enum>QAbstractItemView::ScrollPerPixel</enum>
+     </property>
+     <property name="showGrid" >
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <includes/>
+ <resources/>
+ <connections/>
+</ui>

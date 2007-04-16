@@ -26,7 +26,8 @@
 
 class QIODevice;
 
-
+namespace Konsole
+{
 
 /** 
  * A convertor which maps between key sequences pressed by the user and the
@@ -260,6 +261,11 @@ public:
      */
     QList<QString> availableTranslators() const;
 
+    /** Sets the global KeyboardTranslatorManager instance. */
+    static void setInstance(KeyboardTranslatorManager* instance);
+    /** Returns the global KeyboardTranslatorManager instance. */
+    KeyboardTranslatorManager* instance();
+
 private:
     void findTranslators(); // locate the available translators
     KeyboardTranslator* loadTranslator(const QString& name); // loads the translator 
@@ -269,6 +275,7 @@ private:
                                                      // instance
     QHash<QString,QString> _paths; // maps translator-name -> .keytab file path
 
+    static KeyboardTranslatorManager* _instance;
 };
 
 inline int KeyboardTranslator::Entry::keyCode() const
@@ -293,4 +300,4 @@ inline KeyboardTranslator::State KeyboardTranslator::Entry::state() const
 }
 
 
-
+}

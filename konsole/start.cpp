@@ -33,6 +33,11 @@ using namespace Konsole;
 // Konsole
 void fillAboutData(KAboutData& aboutData);
 
+static KCmdLineOptions options[] =
+{
+    { "background-mode" , I18N_NOOP("TODO: More documentation") , 0 }
+};
+
 // ***
 // 
 // Entry point into the Konsole terminal application.  
@@ -53,6 +58,7 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
     fillAboutData(about);
 
     KCmdLineArgs::init(argc,argv,&about);
+    KCmdLineArgs::addCmdLineOptions(options);
     KUniqueApplication::addCmdLineOptions();
 
     // create a new application instance if there are no running Konsole instances,

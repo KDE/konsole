@@ -657,7 +657,7 @@ void SchemaEditor::readSchema(int num)
 		    continue;
 		if (!(0 <= bo && bo <= 1))
 		    continue;
-		color[fi] = qApp->palette().active().text();
+		color[fi] = qApp->palette().color(QPalette::Active,QPalette::Text);
 		transparent[fi] = tr;
 		bold[fi] = bo;
 		type[fi] = 1;
@@ -672,7 +672,7 @@ void SchemaEditor::readSchema(int num)
 		    continue;
 		if (!(0 <= bo && bo <= 1))
 		    continue;
-		color[fi] = qApp->palette().active().base();
+		color[fi] = qApp->palette().color(QPalette::Active,QPalette::Base);
 		transparent[fi] = tr;
 		bold[fi] = bo;
 		type[fi] = 2;

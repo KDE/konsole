@@ -108,13 +108,12 @@ using namespace Konsole;
                   "abcdefgjijklmnopqrstuvwxyz" \
                   "0123456789./+@"
 
-extern bool true_transparency; // declared in main.characterpp and konsole_part.characterpp
-
 // scroll increment used when dragging selection at top/bottom of window.
 
 // static
 bool TerminalDisplay::s_antialias = true;
 bool TerminalDisplay::s_standalone = false;
+bool TerminalDisplay::HAVE_TRANSPARENCY = false;
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
@@ -181,7 +180,7 @@ void TerminalDisplay::setColorTable(const ColorEntry table[])
   const QPixmap* pm = 0; 
   if (!pm)
   {
-    if (!true_transparency || (qAlpha(_blendColor) == 0xff))
+    if (!HAVE_TRANSPARENCY || (qAlpha(_blendColor) == 0xff))
     {
         QPalette p = palette();
         p.setColor( backgroundRole(), defaultBackColor() );
@@ -325,6 +324,7 @@ void TerminalDisplay::setVTFont(const QFont& f)
   
     QFrame::setFont(font);
     fontChange(font);
+
   }
 }
 
@@ -399,6 +399,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_filterChain(new TerminalImageFilterChain())
 ,_cursorShape(BlockCursor)
 {
+
   // The offsets are not yet calculated.
   // Do not calculate these too often to be more smoothly when _resizing
   // konsole in opaque mode.
@@ -722,7 +723,7 @@ void TerminalDisplay::drawAttrStr(QPainter &paint, const QRect& rect,
           attr->backgroundColor == CharacterColor(COLOR_SPACE_DEFAULT, _colorsInverted ? DEFAULT_FORE_COLOR : DEFAULT_BACK_COLOR) )
 
         // draw background colors with 75% opacity
-        if ( true_transparency && qAlpha(_blendColor) < 0xff ) {
+        if ( HAVE_TRANSPARENCY && qAlpha(_blendColor) < 0xff ) {
           QRgb col = bColor.rgb();
 
           quint8 salpha = 192;
@@ -930,16 +931,17 @@ void TerminalDisplay::setCursorPos(const int curx, const int cury)
     _cursorCol = curx;
 }
 
-//scrolls the _image by '_lines', down if _lines > 0 or up otherwise.
+// scrolls the _image by '_lines', down if _lines > 0 or up otherwise.
 //
-//the terminal emulation keeps track of the scrolling of the character _image as it receives input,
-//and when the view is updated, it calls scrollImage() with the final scroll amount.  this improves
-//performance because scrolling the display is much cheaper than re-rendering all the text for the part
-//of the _image which has moved up or down.  instead only new _lines have to be drawn
+// the terminal emulation keeps track of the scrolling of the character 
+// _image as it receives input, and when the view is updated, it calls scrollImage() 
+// with the final scroll amount.  this improves performance because scrolling the 
+// display is much cheaper than re-rendering all the text for the part
+// of the _image which has moved up or down.  instead only new _lines have to be drawn
 //
-//note:  it is important that the area of the display which is scrolled aligns properly with
-//the character grid - which has a top left point at (_bX,_bY) , a cell width of _fontWidth and a cell height
-//of _fontHeight).    
+// note:  it is important that the area of the display which is scrolled aligns properly with
+// the character grid - which has a top left point at (_bX,_bY) , 
+// a cell width of _fontWidth and a cell height of _fontHeight).    
 void TerminalDisplay::scrollImage(int _lines)
 {
     if ( _lines == 0 || _image == 0 || abs(_lines) >= this->_usedLines ) return;
@@ -952,11 +954,16 @@ void TerminalDisplay::scrollImage(int _lines)
         assert( (_lines*this->_usedColumns) < _imageSize ); 
 
         //scroll internal _image down
-        memmove( _image , &_image[_lines*this->_usedColumns] , ( this->_usedLines - _lines ) * this->_usedColumns * sizeof(Character) );
+        memmove( _image , &_image[_lines*this->_usedColumns] , 
+                        ( this->_usedLines - _lines ) * 
+                          this->_usedColumns * 
+                          sizeof(Character) );
  
         //set region of display to scroll, making sure that
         //the region aligns correctly to the character grid 
-        scrollRect = QRect( _bX ,_bY, this->_usedColumns * _fontWidth , (this->_usedLines - _lines) * _fontHeight );
+        scrollRect = QRect( _bX ,_bY, 
+                            this->_usedColumns * _fontWidth , 
+                            (this->_usedLines - _lines) * _fontHeight );
 
         //qDebug() << "scrolled down " << _lines << " _lines";
     }
@@ -964,14 +971,18 @@ void TerminalDisplay::scrollImage(int _lines)
     {
         //scroll internal _image up
         memmove( &_image[ abs(_lines)*this->_usedColumns] , _image , 
-                        (this->_usedLines - abs(_lines) ) * this->_usedColumns * sizeof(Character) );
+                        (this->_usedLines - abs(_lines) ) * 
+                         this->_usedColumns * 
+                         sizeof(Character) );
 
         //set region of the display to scroll, making sure that
         //the region aligns correctly to the character grid
         
         QPoint topPoint( _bX , _bY + abs(_lines)*_fontHeight );
 
-        scrollRect = QRect( topPoint , QSize( this->_usedColumns*_fontWidth , (this->_usedLines - abs(_lines)) * _fontHeight ));
+        scrollRect = QRect( topPoint , 
+                     QSize( this->_usedColumns*_fontWidth , 
+                            (this->_usedLines - abs(_lines)) * _fontHeight ));
         
         //qDebug() << "scrolled up " << _lines << " _lines";
     }
@@ -995,7 +1006,7 @@ void TerminalDisplay::updateImage()
   scrollImage( _screenWindow->scrollCount() );
   _screenWindow->resetScrollCount();
 
-  const Character* const newimg = _screenWindow->getImage();
+  Character* const newimg = _screenWindow->getImage();
   int _lines = _screenWindow->windowLines();
   int _columns = _screenWindow->windowColumns();
 
@@ -1167,6 +1178,9 @@ void TerminalDisplay::updateImage()
     // current line of the new _image 
     memcpy((void*)currentLine,(const void*)newLine,columnsToUpdate*sizeof(Character));
   }
+
+  // free the image from the screen window
+  free(newimg);
 
   // debugging - display a count of the number of _lines that will need 
   // to be repainted
@@ -1745,7 +1759,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
         pos.ry() += _scrollBar->value();
         _iPntSel = _pntSel = pos;
         _actSel = 1; // left mouse button pressed but nothing selected yet.
-        grabMouse(   /*crossCursor*/  ); // handle with care!
+        
       }
       else
       {
@@ -2722,13 +2736,15 @@ void TerminalDisplay::makeImage()
 }
 
 // calculate the needed size
-void TerminalDisplay::setSize(int cols, int lins)
+void TerminalDisplay::setSize(int columns, int lines)
 {
-  int deltaColumns = cols - _columns;
-  int deltaLines = lins - _lines;
+  //FIXME - Not quite correct, a small amount of additional space
+  // will be used for margins, the scrollbar etc.
+  // we need to allow for this so that '_size' does allow
+  // enough room for the specified number of columns and lines to fit
 
-  _size = QSize( (deltaColumns * _fontWidth) + width() ,
-				  (deltaLines * _fontHeight) + height() );
+  _size = QSize( columns * _fontWidth  ,
+				 lines * _fontHeight   );
 
   updateGeometry();
 }
@@ -2907,7 +2923,8 @@ void TerminalDisplay::outputSuspended(bool suspended)
 	if (!_outputSuspendedLabel)
 	{
             //This label includes a link to an English language website
-            //describing the 'flow control' (Xon/Xoff) feature found in almost all terminal emulators.
+            //describing the 'flow control' (Xon/Xoff) feature found in almost 
+            //all terminal emulators.
             //If there isn't a suitable article available in the target language the link
             //can simply be removed.
 			_outputSuspendedLabel = new QLabel( i18n("<qt>Output has been "
@@ -2918,7 +2935,8 @@ void TerminalDisplay::outputSuspended(bool suspended)
 
              //fill label with a light yellow 'warning' colour
             //FIXME - It would be better if there was a way of getting a suitable colour based
-            //on the current theme.  Last I looked however, the set of colours provided by the theme
+            //on the current theme.  Last I looked however, the set of colours 
+            //provided by the theme
             //did not include anything suitable (most being varying shades of grey)
 
             QPalette palette(_outputSuspendedLabel->palette());
@@ -2937,7 +2955,8 @@ void TerminalDisplay::outputSuspended(bool suspended)
             _outputSuspendedLabel->setVisible(false);
 
             _gridLayout->addWidget(_outputSuspendedLabel);       
-            _gridLayout->addItem( new QSpacerItem(0,0,QSizePolicy::Expanding,QSizePolicy::Expanding),
+            _gridLayout->addItem( new QSpacerItem(0,0,QSizePolicy::Expanding,
+                                                      QSizePolicy::Expanding),
                                  1,0);
 
     }

@@ -19,28 +19,43 @@
 
 #include "kdebug.h"
 
+// KDE
+#include <KAction>
+#include <KCmdLineArgs>
+#include <KWM>
+
+// Konsole
+#include "ColorScheme.h"
 #include "SessionList.h"
 #include "SessionManager.h"
 #include "KeyTrans.h"
+#include "KeyboardTranslator.h"
 #include "Application.h"
 #include "MainWindow.h"
 #include "Session.h"
+#include "TerminalDisplay.h"
 #include "ViewManager.h"
 
 using namespace Konsole;
 
-// global variable to determine whether or not true transparency should be used
-// this should be made into a static class variable of Application
-int true_transparency = true;
-
 Application::Application()
     : _sessionList(0)
+    , _backgroundInstance(0)
 {
     // create session manager
-    _sessionManager = new SessionManager();
+    SessionManager::setInstance( new SessionManager() );
 
-    // load keyboard layouts
+    // create color scheme manager
+    ColorSchemeManager::setInstance( new ColorSchemeManager() );
+
+    // new keyboard translator manager
+    KeyboardTranslatorManager::setInstance( new KeyboardTranslatorManager() );
+
+    // old keyboard translator manager
     KeyTrans::loadAll();
+
+    // check for compositing functionality
+    TerminalDisplay::setTransparencyEnabled( KWM::compositingActive() );
 };
 
 Application* Application::self()
@@ -51,7 +66,7 @@ Application* Application::self()
 MainWindow* Application::newMainWindow()
 {
     MainWindow* window = new MainWindow();
-    window->setSessionList( new SessionList(sessionManager(),window) );
+    window->setSessionList( new SessionList(window) );
 
     connect( window , SIGNAL(requestSession(const QString&,ViewManager*)), 
                       this , SLOT(createSession(const QString&,ViewManager*)));
@@ -62,22 +77,64 @@ MainWindow* Application::newMainWindow()
 
 int Application::newInstance()
 {
+    KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
+   
+    // create a new window and session to run in it 
     MainWindow* window = newMainWindow();
-
     createSession( QString() , window->viewManager() );
-    window->show();
+
+    // if the background-mode argument is supplied, start the background session
+    // ( or bring to the front if it already exists )
+    if ( args->isSet("background-mode") )
+    {
+        if ( _backgroundInstance )
+        {
+            return 0;
+        }
+
+        KAction* action = new KAction(window);
+        KShortcut shortcut = action->shortcut();
+        action->setObjectName("Konsole Background Mode");
+        //TODO - Customisable key sequence for this
+        action->setGlobalShortcut( KShortcut(QKeySequence(Qt::Key_F12)) );
+
+        _backgroundInstance = window;
+        
+        connect( action , SIGNAL(triggered()) , this , SLOT(toggleBackgroundInstance()) );
+    }
+    else
+    {
+        window->show();
+    }
 
     return 0;
 }
 
-SessionManager* Application::sessionManager()
+void Application::toggleBackgroundInstance()
 {
-    return _sessionManager;
+    Q_ASSERT( _backgroundInstance );
+
+    if ( !_backgroundInstance->isVisible() )
+    {
+        _backgroundInstance->show();
+        // ensure that the active terminal display has the focus.
+        // without this, an odd problem occurred where the focus widgetwould change
+        // each time the background instance was shown 
+        _backgroundInstance->viewManager()->activeView()->setFocus();
+    }
+    else 
+    {
+        _backgroundInstance->hide();
+    }
 }
 
 Application::~Application()
 {
-    delete _sessionManager;
+    delete SessionManager::instance();
+    delete ColorSchemeManager::instance();
+
+    SessionManager::setInstance(0);
+    ColorSchemeManager::setInstance(0);
 }
 
 void Application::detachView(Session* session)
@@ -89,7 +146,7 @@ void Application::detachView(Session* session)
 
 void Application::createSession(const QString& key , ViewManager* view)
 {
-    Session* session = _sessionManager->createSession(key);
+    Session* session = SessionManager::instance()->createSession(key);
     session->setListenToKeyPress(true); 
     //session->setConnect(true);
     

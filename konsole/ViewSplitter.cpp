@@ -31,6 +31,12 @@
 
 using namespace Konsole;
 
+ViewSplitter::ViewSplitter(QWidget* parent)
+    : QSplitter(parent)
+    , _recursiveSplitting(true)
+{
+}
+
 void ViewSplitter::childEmpty(ViewSplitter* splitter)
 {
  //   qDebug() << __FUNCTION__ << ": deleting child splitter " ;
@@ -102,12 +108,23 @@ void ViewSplitter::updateSizes()
     setSizes(widgetSizes);
 }
 
+void ViewSplitter::setRecursiveSplitting(bool recursive)
+{
+    _recursiveSplitting = recursive;
+}
+bool ViewSplitter::recursiveSplitting() const
+{
+    return _recursiveSplitting;
+}
+
 void ViewSplitter::addContainer( ViewContainer* container , 
                                  Qt::Orientation containerOrientation )
 {
    ViewSplitter* splitter = activeSplitter();   
     
-    if ( splitter->count() < 2 || containerOrientation == splitter->orientation() )
+    if ( splitter->count() < 2 || 
+         containerOrientation == splitter->orientation() ||
+         !_recursiveSplitting )
     {
         splitter->registerContainer(container); 
         splitter->addWidget(container->containerWidget());
@@ -134,7 +151,8 @@ void ViewSplitter::addContainer( ViewContainer* container ,
         newSplitter->addWidget(container->containerWidget());
         newSplitter->setOrientation(containerOrientation); 
         newSplitter->updateSizes();
-         
+        newSplitter->show();
+
         splitter->insertWidget(oldContainerIndex,newSplitter);
     }
 

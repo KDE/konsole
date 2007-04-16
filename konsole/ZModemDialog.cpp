@@ -17,10 +17,10 @@
  **/
 
 // Qt
-#include <q3textedit.h>
+#include <QTextEdit>
 
 // KDE
-#include <klocale.h>
+#include <KLocale>
 
 // Konsole 
 #include "ZModemDialog.h"
@@ -41,17 +41,20 @@ ZModemDialog::ZModemDialog(QWidget *parent, bool modal, const QString &caption)
 
   showButtonSeparator( true );
   enableButton(Close, false);
-  textEdit = new Q3TextEdit(this);
-  textEdit->setMinimumSize(400, 100);
-  setMainWidget(textEdit);
+  _textEdit = new QTextEdit(this);
+  _textEdit->setMinimumSize(400, 100);
+  _textEdit->setReadOnly(true);
+  setMainWidget(_textEdit);
   connect(this, SIGNAL(user1Clicked()), this, SLOT(slotClose()));
   connect(this,SIGNAL(closeClicked()),this,SLOT(slotClose()));
 }
 
 void ZModemDialog::addProgressText(const QString &txt)
 {
-  int p = textEdit->paragraphs();
-  textEdit->insertParagraph(txt, p);
+  QTextCursor cursor = _textEdit->textCursor();
+
+  cursor.insertBlock();
+  cursor.insertText(txt);
 }
 
 void ZModemDialog::done()

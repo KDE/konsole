@@ -41,8 +41,8 @@
 #ifndef SCHEMA_include
 #define SCHEMA_include
 
+#include <QList>
 #include <QString>
-#include <q3ptrlist.h>
 
 #include "TECommon.h"
 
@@ -153,7 +153,7 @@ protected:
 
    public:
       int numb()                       {/*if (!m_fileRead) rereadSchemaFile();*/return m_numb;};
-      const QString& title()           {if (!m_titleRead) rereadSchemaFile(true);return m_title;};
+      const QString& title() const     {if (!m_titleRead) rereadSchemaFile(true);return m_title;};
       const QString& imagePath()       {if (!m_fileRead) rereadSchemaFile();return m_imagePath;};
       int alignment()                  {if (!m_fileRead) rereadSchemaFile();return m_alignment;};
       const ColorEntry* table()        {if (!m_fileRead) rereadSchemaFile();return m_table;};
@@ -181,7 +181,7 @@ protected:
       // ColorSchema has a unique number.
 };
 
-class ColorSchemaList : protected Q3PtrList<ColorSchema>
+class ColorSchemaList : protected QList<ColorSchema*>
 {
 public:
 	/**
@@ -190,11 +190,11 @@ public:
 	* from QPtrList to prevent unsightly -- and perhaps dangerous --
 	* tampering with the ColorSchemaList.
 	*/
-	uint count() const { return Q3PtrList<ColorSchema>::count(); } ;
-	const ColorSchema *at(unsigned int i)
-		{ return Q3PtrList<ColorSchema>::at(i); } ;
+	int count() const { return QList<ColorSchema*>::count(); } ;
+	const ColorSchema *at( int i)
+		{ return QList<ColorSchema*>::at(i); } ;
 
-   void sort() {Q3PtrList<ColorSchema>::sort();};
+   void sort() { qSort(begin(),end()); };
 
 	ColorSchemaList();
    virtual ~ColorSchemaList();
@@ -224,8 +224,6 @@ public:
 		if (p) return p;
 		return defaultSchema;
 	} ;
-protected:
-   virtual int compareItems(Q3PtrCollection::Item item1, Q3PtrCollection::Item item2);
 
 private:
 	/**

@@ -22,11 +22,15 @@
 #ifndef SESSIONMANAGER_H
 #define SESSIONMANAGER_H
 
+// Qt
+#include <QFont>
 #include <QHash>
 #include <QList>
+#include <QSet>
 #include <QStringList>
 #include <QPair>
 #include <QVariant>
+
 class KConfigGroup;
 class KDesktopFile;
 class KConfig;
@@ -35,7 +39,6 @@ namespace Konsole
 {
 
 class Session;
-class ColorSchemaList;
 
 /** 
  * Provides information about a type of 
@@ -51,6 +54,28 @@ class ColorSchemaList;
 class SessionInfo
 {
 public:
+
+    enum Property
+    {
+        // General session options
+        Name,
+        Title,
+        Icon,
+        Command,
+        Arguments,
+        Environment,
+        Directory,
+
+        // Appearence
+        Font,
+        ColorScheme,
+
+        // Keyboard
+        KeyBindings,
+
+        // Terminal Features
+    };
+
     /**
      * Construct a new SessionInfo
      * to provide information on a session type.
@@ -62,6 +87,15 @@ public:
     
     virtual ~SessionInfo();
 
+    /** Sets the parent session type. */
+    void setParent( SessionInfo* parent );
+    /** Returns the parent session type. */
+    SessionInfo* parent() const;
+    /** Sets the value of a property. */
+    virtual void setProperty( Property property , const QVariant& value );
+    /** Retrieves the value of a property. */
+    virtual QVariant property( Property property ) const;
+
     /**
      * Returns the path to the session's
      * config file
@@ -69,12 +103,12 @@ public:
     QString path() const;
 
     /** Returns the title of the session type */
-    virtual QString name() const;
+    QString name() const;
     /**
      * Returns the path of an icon associated
      * with this session type
      */
-    virtual QString icon() const;
+    QString icon() const;
     /**
      * Returns the command that will be executed
      * when the session is run
@@ -92,19 +126,19 @@ public:
      * removed from the returned string.  Anything after the first space
      * character in the command string is considered an argument
      */
-    virtual QString command(bool stripSu , bool stripArguments = true) const;
+    QString command(bool stripSu , bool stripArguments = true) const;
 
     /**
      * Extracts the arguments from the command string for this session.  The first
      * argument is always the command name
      */
-    virtual QStringList arguments() const;
+    QStringList arguments() const;
 
     /**
      * Returns true if the session will run as
      * root
      */
-    virtual bool isRootSession() const;
+    bool isRootSession() const;
     /**
      * Searches the user's PATH for the binary
      * specified in the command string.
@@ -113,7 +147,7 @@ public:
      * existence of additional binaries(usually 'su' or 'sudo') required
      * to run the command as root.
      */
-    virtual bool isAvailable() const;
+    bool isAvailable() const;
 
     /**
      * Returns the terminal-type string which is made available to
@@ -121,61 +155,36 @@ public:
      *
      * This defaults to "xterm"
      */
-    virtual QString terminal() const;
+    QString terminal() const;
 
     /** Returns the path of the default keyboard setup file for sessions of this type */
-    virtual QString keyboardSetup() const;
+    QString keyboardSetup() const;
 
     /** Returns the path of the default colour scheme for sessions of this type */
-    virtual QString colorScheme() const;
+    QString colorScheme() const;
 
     /**
      * Returns the default font for sessions of this type.
      * If no font is specified in the session's configuration file, @p font will be returned.
      */
-    virtual QFont defaultFont( const QFont& font ) const;
+    QFont defaultFont() const;
 
     /** Returns the default working directory for sessions of this type */
-    virtual QString defaultWorkingDirectory() const;
+    QString defaultWorkingDirectory() const;
 
     /**
      * Returns the text that should be displayed in menus or in other UI widgets
      * which are used to create new instances of this type of session
      */
-    virtual QString newSessionText() const;
+    QString newSessionText() const;
 
 private:
+    SessionInfo* _parent;
     KDesktopFile* _desktopFile;
     KConfigGroup* _config;
     QString  _path;
-};
 
-/**
- * A session type which is based upon the settings from a configuration file
- * ( as with SessionInfo )
- * but allows the name, command and arguments to be customised.
- */
-class CustomCommandSessionInfo : public SessionInfo
-{
-public:
-    CustomCommandSessionInfo(const QString& path);
-
-    /** Sets the name of the session type. */
-    virtual void setName(const QString& name);
-    /** Sets the command to be run when sessions of this type are started. */
-    virtual void setCommand(const QString& command);
-    /** Sets the arguments to run when sessions of this type are started. */
-    virtual void setArguments(const QStringList& arguments);
-
-    // reimplemented 
-    virtual QString name() const;
-    virtual QString command(bool stripSu , bool stripArguments) const;
-    virtual QStringList arguments() const;
-
-private:
-    QString _name;
-    QString _command;
-    QStringList _arguments;
+    QHash<Property,QVariant> _properties;
 };
 
 /**
@@ -183,6 +192,11 @@ private:
  * Information about the available session kinds can be obtained using
  * availableSessionTypes().  Call createSession() to create a new session.
  * The session will automatically notify the SessionManager when it finishes running.
+ *
+ * Session types in the manager have a concept of favorite status, which can be used
+ * by widgets and dialogs in the application decide which sessions to list and
+ * how to display them.  The favorite status of a session type can be altered using
+ * setFavorite() and retrieved using isFavorite() 
  */
 class SessionManager : public QObject
 {
@@ -223,16 +237,21 @@ public:
     /**
      * Returns a list of keys for registered session types.      
      */
-    QList<QString> availableSessionTypes();
+    QList<QString> availableSessionTypes() const;
     /**
      * Returns the session information object for the session type with the specified
-     * key.
+     * key or 0 if no session type with the specified key exists.
+     *
+     * If @p key is empty, a pointer to the default session type is returned.
      */
     SessionInfo* sessionType(const QString& key) const;
 
     /**
      * Registers a new type of session and returns the key
      * which can be passed to createSession() to create new instances of the session.
+     *
+     * The favorite status of the session ( as returned by isFavorite() ) is set
+     * to false by default.
      */
     QString addSessionType(SessionInfo* type);
 
@@ -240,7 +259,12 @@ public:
      * Returns a SessionInfo object describing the default type of session, which is used
      * if createSession() is called with an empty configPath argument.
      */
-    SessionInfo* defaultSessionType();
+    SessionInfo* defaultSessionType() const;
+
+    /**
+     * Returns the key for the default session type.
+     */
+    QString defaultSessionKey() const;
 
     /**
      * Adds a setting which will be considered when creating new sessions.
@@ -296,6 +320,52 @@ public:
      */
     const QList<Session*> sessions();
 
+    /**
+     * Deletes the session type with the specified key.
+     * The configuration file associated with the session type is
+     * deleted if possible.
+     */
+    void deleteSessionType(const QString& key);
+
+    /**
+     * Sets the session type with the specified key
+     * as the default type.
+     */
+    void setDefaultSessionType(const QString& key);
+
+    /**
+     * Returns the set of keys for the user's favorite session types.
+     */
+    QSet<QString> favorites() const;
+
+    /**
+     * Specifies whether a session type should be included in the user's
+     * list of favorite sessions.
+     */
+    void setFavorite(const QString& key , bool favorite);
+
+    /**
+     * Sets the global session manager instance.
+     */
+    static void setInstance(SessionManager* instance);
+    /**
+     * Returns the session manager instance.
+     */
+    static SessionManager* instance();
+
+signals:
+    /** Emitted when a session type is added to the manager. */
+    void sessionTypeAdded(const QString& key);
+    /** Emitted when a session type is removed from the manager. */
+    void sessionTypeRemoved(const QString& key);
+    /** 
+     * Emitted when the favorite status of a session type changes. 
+     * 
+     * @param key The key for the session type
+     * @param favorite Specifies whether the session is a favorite or not 
+     */
+    void favoriteStatusChanged(const QString& key , bool favorite);
+
 protected Q_SLOTS:
 
     /**
@@ -306,17 +376,23 @@ protected Q_SLOTS:
 private:
     //fills the settings store with the settings from the session config file
     void pushSessionSettings( const SessionInfo*  info );
+    //loads the set of favorite sessions 
+    void loadFavorites();
+    //saves the set of favorite sessions
+    void saveFavorites();
 
     QHash<QString,SessionInfo*> _types;
     QList<Session*> _sessions;
 
-    SessionInfo* _defaultSessionType;
-
+    QString _defaultSessionType;
+    
     typedef QPair<Source,QVariant> SourceVariant;
 
     QHash< Setting , QList< SourceVariant > >  _settings;
 
-    ColorSchemaList* _colorSchemeList;
+    QSet<QString> _favorites;
+
+    static SessionManager* _instance;
 };
 
 };

@@ -25,7 +25,11 @@
 #include <QObject>
 #include <QPointer>
 
+class QSignalMapper;
+
+class KActionCollection;
 class KToggleAction;
+class KXMLGUIFactory;
 
 namespace Konsole
 {
@@ -40,24 +44,22 @@ class ViewContainer;
 class ViewSplitter;
 
 /** 
- * Manages the views and view container widgets in a Konsole window.  Each Konsole window
- * has one ViewManager.
- * The view manager is responsible for creating new terminal displays for sessions and the 
- * controllers which connect the view and session to provide the menu actions associated with
- * the view, as well as exposing basic information ( such as associated title and icon ) to
- * the view. 
+ * Manages the terminal display widgets in a Konsole window or part.
  *
- * Each Konsole window contains a number of view containers, which are instances of ViewContainer.
- * Each view container may contain one or more views, along with a navigation widget
- * (eg. tabs or a list) which allows the user to choose between the views in that container.  
- * 
- * When a ViewManager is instantiated, it creates a new view container and adds it to the 
- * main window associated with the ViewManager which is specified in the constructor.
+ * When a view manager is created, it constructs a splitter widget ( accessed via 
+ * widget() ) to hold one or more view containers.  Each view container holds
+ * one or more terminal displays and a navigation widget ( eg. tabs or a list )
+ * to allow the user to navigate between the displays in that container.
  *
- * To create new terminal displays inside the container widget, use the createView() method.
+ * The view manager provides facilities to construct display widgets for a terminal
+ * session and also to construct the SessionController which provides the menus and other
+ * user interface elements specific to that display/session pair.
  *
- * ViewContainers can be merged together, that is, the views contained in one container can be moved
- * into another using the merge() method.
+ * The view manager provides a number of actions ( defined in the 'konsoleui.rc' XML file )
+ * to manipulate the views and view containers - for example, actions to split the view
+ * left/right or top/bottom, detach a view from the current window and navigate between
+ * views and containers.  These actions are added to the collection specified in the 
+ * constructor.
  */
 class ViewManager : public QObject
 {
@@ -65,10 +67,11 @@ Q_OBJECT
 
 public:
     /** 
-     * Constructs a new view manager associated with @p mainWindow, and
-     * adds a view container widget to the main window
+     * Constructs a new view manager with the specified @p parent.  
+     * View-related actions defined in 'konsoleui.rc' are created
+     * and added to the specified @p collection.    
      */
-    ViewManager(MainWindow* mainWindow);
+    ViewManager(QObject* parent , KActionCollection* collection);
     ~ViewManager();
 
     /**
@@ -83,7 +86,25 @@ public:
      */
     void merge(ViewManager* manager);
 
+    /** 
+     * Return the main widget for the view manager which
+     * holds all of the views managed by this ViewManager instance.
+     */
     QWidget* widget() const;
+
+    /**
+     * Returns the view manager's active view.
+     */
+    QWidget* activeView() const;
+
+    /**
+     * Returns the list of view properties for views in the active container.
+     * Each view widget is associated with a ViewProperties instance which
+     * provides access to basic information about the session being
+     * displayed in the view, such as title, current directory and 
+     * associated icon.     
+     */
+    QList<ViewProperties*> viewProperties() const;
 
 signals:
     /** Emitted when the last view is removed from the view manager */
@@ -92,9 +113,26 @@ signals:
     /** Emitted when a session is detached from a view owned by this ViewManager */
     void viewDetached(Session* session);
 
+    /** 
+     * Emitted when the active view changes. 
+     * @param controller The controller associated with the active view 
+     */
+    void activeViewChanged(SessionController* controller);
+
+    /**
+     * Emitted when the list of view properties ( as returned by viewProperties() ) changes.
+     * This occurs when views are added to or removed from the active container, or 
+     * if the active container is changed.
+     */
+    void viewPropertiesChanged(const QList<ViewProperties*>& propertiesList);
+
 private slots:
-    // called when the "Split View" menu item is selected
-    void splitView(bool splitView);
+    // called when the "Split View Left/Right" menu item is selected
+    void splitLeftRight();
+    void splitTopBottom();
+    void closeActiveView();
+    void closeOtherViews();
+
     // called when the "Detach View" menu item is selected
     void detachActiveView();
     // called when a session terminates - the view manager will delete any
@@ -106,14 +144,11 @@ private slots:
     // controller detects when an associated view is given the focus
     // and emits a signal.  ViewManager listens for that signal
     // and then plugs the action into the UI
-    void viewFocused( SessionController* controller );
+    //void viewFocused( SessionController* controller );
 
     // called when the active view in a ViewContainer changes, so
     // that we can plug the appropriate actions into the UI
     void viewActivated( QWidget* view );
-
-    // called when the title of the active view changes
-    void activeViewTitleChanged( ViewProperties* );
 
     // called when "Next View" shortcut is activated
     void nextView();
@@ -124,6 +159,10 @@ private slots:
     // called when "Next View Container" shortcut is activated
     void nextContainer();
 
+    // called when the views in a container owned by this view manager
+    // changes
+    void containerViewsChanged(QObject* container);
+
 private:
     void setupActions();
     void focusActiveView();
@@ -132,7 +171,8 @@ private:
     // takes a view from a view container owned by a different manager and places it in 
     // newContainer owned by this manager
     void takeView(ViewManager* otherManager , ViewContainer* otherContainer, ViewContainer* newContainer, TerminalDisplay* view); 
-
+    void splitView(Qt::Orientation orientation);
+    
     // creates a new container which can hold terminal displays
     ViewContainer* createContainer();
     // creates a new terminal display
@@ -148,11 +188,12 @@ private:
 
 private:
     MainWindow*          _mainWindow;
-    KToggleAction*              _splitViewAction;
+//    KToggleAction*              _splitViewAction;
     ViewSplitter*               _viewSplitter;
     QPointer<SessionController> _pluggedController;
     QHash<TerminalDisplay*,Session*> _sessionMap;
-    
+    KActionCollection*  _actionCollection;
+    QSignalMapper* _containerSignalMapper;
 };
 
 };

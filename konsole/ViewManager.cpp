@@ -20,6 +20,9 @@
 // System
 #include <assert.h>
 
+// Qt
+#include <QSignalMapper>
+
 // KDE
 #include <kdebug.h>
 #include <KLocale>
@@ -28,10 +31,9 @@
 
 // Konsole
 #include "BookmarkHandler.h"
-#include "MainWindow.h"
+#include "ColorScheme.h"
 #include "Session.h"
 #include "TerminalDisplay.h"
-#include "schema.h"
 #include "SessionController.h"
 #include "SessionManager.h"
 #include "ViewContainer.h"
@@ -40,25 +42,48 @@
 
 using namespace Konsole;
 
-ViewManager::ViewManager(MainWindow* mainWindow)
-    : QObject(mainWindow)
-    , _mainWindow(mainWindow)
+ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
+    : QObject(parent)
     , _viewSplitter(0)
-    , _pluggedController(0)
+    , _actionCollection(collection)
+    , _containerSignalMapper(new QSignalMapper(this))
 {
+    // create main view area
+    _viewSplitter = new ViewSplitter(0);   
+    // the ViewSplitter class supports both recursive and non-recursive splitting,
+    // in non-recursive mode, all containers are inserted into the same top-level splitter
+    // widget, and all the divider lines between the containers have the same orientation
+    //
+    // the ViewManager class is not currently able to handle a ViewSplitter in recursive-splitting
+    // mode 
+    _viewSplitter->setRecursiveSplitting(false);
+
     // setup actions which relating to the view
     setupActions();
-
-    // create main view area
-    _viewSplitter = new ViewSplitter(_mainWindow);
 
     // emit a signal when all of the views held by this view manager are destroyed
     connect( _viewSplitter , SIGNAL(allContainersEmpty()) , this , SIGNAL(empty()) );
     connect( _viewSplitter , SIGNAL(empty(ViewSplitter*)) , this , SIGNAL(empty()) );
+
+    // listen for addition or removal of views from associated containers
+    connect( _containerSignalMapper , SIGNAL(mapped(QObject*)) , this , 
+            SLOT(containerViewsChanged(QObject*)) ); 
 }
 
 ViewManager::~ViewManager()
 {
+}
+QWidget* ViewManager::activeView() const
+{
+    ViewContainer* container = _viewSplitter->activeContainer();
+    if ( container )
+    {
+        return container->activeView();
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 QWidget* ViewManager::widget() const
@@ -68,53 +93,69 @@ QWidget* ViewManager::widget() const
 
 void ViewManager::setupActions()
 {
-    KActionCollection* collection = _mainWindow->actionCollection();
-
-    _splitViewAction = new KToggleAction( KIcon("view-top-bottom"),i18n("&Split View") , this);
-    _splitViewAction->setCheckedState( KGuiItem(i18n("&Remove Split") , KIcon("view-remove") ) );
-    _splitViewAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_S) );
-    collection->addAction("split-view",_splitViewAction);
-    connect( _splitViewAction , SIGNAL(toggled(bool)) , this , SLOT(splitView(bool)));
-
-
-    QAction* detachViewAction = collection->addAction("detach-view");
-    detachViewAction->setIcon( KIcon("tab-breakoff") );
-    detachViewAction->setText( i18n("&Detach View") );
-    // Ctrl+Shift+D is not used as a shortcut by default because it is too close
-    // to Ctrl+D - which will terminate the session in many cases
-    detachViewAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_T) );
-
-    connect( detachViewAction , SIGNAL(triggered()) , this , SLOT(detachActiveView()) );
-
-    QAction* mergeAction = collection->addAction("merge-windows");
-    mergeAction->setText( i18n("&Merge Windows") );
-        
-    connect( mergeAction , SIGNAL(triggered()) , _mainWindow , SLOT(mergeWindows()) );
-
+    KActionCollection* collection = _actionCollection;
 
     KAction* nextViewAction = new KAction( i18n("Next View") , this );
-    collection->addAction("next-view",nextViewAction);
+    KAction* previousViewAction = new KAction( i18n("Previous View") , this );
+    QAction* nextContainerAction = new QAction( i18n("Next View Container") , this);
+    
+    if ( collection )
+    {
+        KAction* splitLeftRightAction = new KAction( KIcon("view-left-right"),
+                                                      i18n("Split View Left/Right"),
+                                                      this );
+        splitLeftRightAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_L) );
+        collection->addAction("split-view-left-right",splitLeftRightAction);
+        connect( splitLeftRightAction , SIGNAL(triggered()) , this , SLOT(splitLeftRight()) );
+
+        KAction* splitTopBottomAction = new KAction( KIcon("view-top-bottom") , 
+                                             i18n("Split View Top/Bottom"),this);
+        splitTopBottomAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_T) );
+        collection->addAction("split-view-top-bottom",splitTopBottomAction);
+        connect( splitTopBottomAction , SIGNAL(triggered()) , this , SLOT(splitTopBottom()));
+
+        KAction* closeActiveAction = new KAction( i18n("Close Active") , this );
+        closeActiveAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_S) );
+        collection->addAction("close-active-view",closeActiveAction);
+        connect( closeActiveAction , SIGNAL(triggered()) , this , SLOT(closeActiveView()) );
+
+        KAction* closeOtherAction = new KAction( i18n("Close Others") , this );
+        closeOtherAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_O) );
+        collection->addAction("close-other-views",closeOtherAction);
+        connect( closeOtherAction , SIGNAL(triggered()) , this , SLOT(closeOtherViews()) );
+
+        QAction* detachViewAction = collection->addAction("detach-view");
+        detachViewAction->setIcon( KIcon("tab-breakoff") );
+        detachViewAction->setText( i18n("&Detach View") );
+        // Ctrl+Shift+D is not used as a shortcut by default because it is too close
+        // to Ctrl+D - which will terminate the session in many cases
+        detachViewAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_H) );
+
+        connect( detachViewAction , SIGNAL(triggered()) , this , SLOT(detachActiveView()) );
+    
+        collection->addAction("next-view",nextViewAction);
+        collection->addAction("previous-view",previousViewAction);
+        collection->addAction("next-container",nextContainerAction);
+
+    }
+
     KShortcut nextViewShortcut = nextViewAction->shortcut();
     nextViewShortcut.setAlternate( QKeySequence(Qt::SHIFT+Qt::Key_Right) );
     nextViewShortcut.setPrimary( QKeySequence(Qt::CTRL+Qt::Key_PageUp) );
     nextViewAction->setShortcut(nextViewShortcut); 
     connect( nextViewAction, SIGNAL(triggered()) , this , SLOT(nextView()) );
-    _mainWindow->addAction(nextViewAction);
+    _viewSplitter->addAction(nextViewAction);
 
-    KAction* previousViewAction = new KAction( i18n("Previous View") , this );
-    collection->addAction("previous-view",previousViewAction);
     KShortcut previousViewShortcut = previousViewAction->shortcut();
     previousViewShortcut.setPrimary( QKeySequence(Qt::SHIFT+Qt::Key_Left) );
     previousViewShortcut.setAlternate( QKeySequence(Qt::CTRL+Qt::Key_PageDown) );
     previousViewAction->setShortcut(previousViewShortcut);
     connect( previousViewAction, SIGNAL(triggered()) , this , SLOT(previousView()) );
-    _mainWindow->addAction(previousViewAction);
+    _viewSplitter->addAction(previousViewAction);
 
-    QAction* nextContainerAction = collection->addAction("next-container");
-    nextContainerAction->setText( i18n("Next View Container") );
     nextContainerAction->setShortcut( QKeySequence(Qt::SHIFT+Qt::Key_Tab) );
     connect( nextContainerAction , SIGNAL(triggered()) , this , SLOT(nextContainer()) );
-    _mainWindow->addAction(nextContainerAction);
+    _viewSplitter->addAction(nextContainerAction);
 }
 
 void ViewManager::nextContainer()
@@ -168,7 +209,7 @@ void ViewManager::detachActiveView()
 
         // this will need to be removed if Konsole is modified so the menu item to
         // split the view is no longer one toggle-able item
-        _splitViewAction->setChecked(false);
+        //_splitViewAction->setChecked(false);
     }
 
 }
@@ -219,61 +260,18 @@ void ViewManager::viewActivated( QWidget* view )
     view->setFocus(Qt::OtherFocusReason);
 }
 
-void ViewManager::activeViewTitleChanged(ViewProperties* properties)
+void ViewManager::splitLeftRight()
 {
-    // set a plain caption (ie. without the automatic addition of " - AppName" at the end)
-    // to make the taskbar entry cleaner and easier to read
-    _mainWindow->setPlainCaption( properties->title() );
+    splitView(Qt::Horizontal);
+}
+void ViewManager::splitTopBottom()
+{
+    splitView(Qt::Vertical);
 }
 
-void ViewManager::viewFocused( SessionController* controller )
+void ViewManager::splitView(Qt::Orientation orientation)
 {
-    // if a view is given the focus which is different to the one for which menu items
-    // are currently being shown then unplug the current session-specific menu items
-    // and plug in the ones for the newly focused session
-
-    if ( _pluggedController != controller )
-    {
-        // remove existing session specific menu items if there are any
-        if ( _pluggedController )
-        {
-            _mainWindow->guiFactory()->removeClient(_pluggedController);
-            disconnect( controller , SIGNAL(titleChanged(ViewProperties*)),
-                        this , SLOT(activeViewTitleChanged(ViewProperties*)) );
-            disconnect( _mainWindow->bookmarkHandler() , 0 , controller , 0 );
-            _pluggedController->setSearchBar( 0 );
-        }
-        
-        _pluggedController = controller;
-
-        // update the menus in the main window to use the actions from the active
-        // controller 
-        _mainWindow->guiFactory()->addClient(controller);
-      
-        // make the bookmark menu operate on the currently focused session 
-        _mainWindow->bookmarkHandler()->setController(controller);
-        connect( _mainWindow->bookmarkHandler() , SIGNAL(openUrl(const KUrl&)) , controller , 
-                SLOT(openUrl(const KUrl&)) );
-
-        // associated main window's search bar with session
-        controller->setSearchBar( _mainWindow->searchBar() );
-
-        // update the caption of the main window to match that of the focused session
-        activeViewTitleChanged(controller);
-
-        // listen for future changes in the focused session's title
-        connect( controller , SIGNAL(titleChanged(ViewProperties*)),
-                 this       , SLOT(activeViewTitleChanged(ViewProperties*)) );        
-        
-    
-
-        //kDebug() << "Plugged actions for " << controller->session()->displayTitle() << endl;
-    }
-}
-
-void ViewManager::splitView(bool splitView)
-{
-    if (splitView)
+    if ( true )
     {
         // iterate over each session which has a view in the current active
         // container and create a new view for that session in a new container 
@@ -294,7 +292,7 @@ void ViewManager::splitView(bool splitView)
             session->addView( display );
         }
 
-        _viewSplitter->addContainer(container,Qt::Vertical);
+        _viewSplitter->addContainer(container,orientation);
     }
     else
     {
@@ -312,12 +310,31 @@ void ViewManager::splitView(bool splitView)
     _viewSplitter->activeContainer()->activeView()->setFocus(Qt::OtherFocusReason);
 }
 
+void ViewManager::closeActiveView()
+{
+    ViewContainer* container = _viewSplitter->activeContainer();
+        
+    delete container;
+}
+void ViewManager::closeOtherViews()
+{
+    ViewContainer* active = _viewSplitter->activeContainer();
+
+    QListIterator<ViewContainer*> iter(_viewSplitter->containers());
+    while ( iter.hasNext() )
+    {
+        ViewContainer* next = iter.next();
+        if ( next != active )
+            delete next;
+    }
+}
+
 SessionController* ViewManager::createController(Session* session , TerminalDisplay* view)
 {
     // create a new controller for the session, and ensure that this view manager
     // is notified when the view gains the focus
     SessionController* controller = new SessionController(session,view,this);
-    connect( controller , SIGNAL(focused(SessionController*)) , this , SLOT(viewFocused(SessionController*)) );
+    connect( controller , SIGNAL(focused(SessionController*)) , this , SIGNAL(activeViewChanged(SessionController*)) );
 
     return controller;
 }
@@ -361,27 +378,30 @@ void ViewManager::createView(Session* session)
 
 ViewContainer* ViewManager::createContainer()
 {
-    ViewContainer* container = new TabbedViewContainerV2(_viewSplitter); 
-/*
-    if ( _mainWindow->factory() )
-    {
-        QMenu* menu = (QMenu*)_mainWindow->factory()->container("new-session-popup",_mainWindow);
-        
-        if ( menu )
-            container->setNewSessionMenu(menu);
-    }
-    else
-    {
-       kDebug() << __FILE__ << __LINE__ << ": ViewManager attempted to create a view before" <<
-          " the main window GUI was created - unable to create popup menus for container." << endl;  
-    }
-*/
+    ViewContainer* container = new TabbedViewContainerV2(_viewSplitter);
 
     // connect signals and slots
+    connect( container , SIGNAL(viewAdded(QWidget*,ViewProperties*)) , _containerSignalMapper ,
+           SLOT(map()) );
+    connect( container , SIGNAL(viewRemoved(QWidget*)) , _containerSignalMapper ,
+           SLOT(map()) ); 
+    _containerSignalMapper->setMapping(container,container);
+
     connect( container , SIGNAL(closeRequest(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)) );
 
     connect( container , SIGNAL(activeViewChanged(QWidget*)) , this , SLOT(viewActivated(QWidget*)));
+    
     return container;
+}
+
+void ViewManager::containerViewsChanged(QObject* container)
+{
+    qDebug() << "Container views changed";
+
+    if ( container == _viewSplitter->activeContainer() )
+    {
+        emit viewPropertiesChanged( viewProperties() );
+    } 
 }
 
 void ViewManager::viewCloseRequest(QWidget* view)
@@ -452,11 +472,9 @@ TerminalDisplay* ViewManager::createTerminalDisplay()
 
    //TODO Temporary settings used here
    display->setBellMode(0);
-   display->setVTFont( QFont("Monospace") );
    display->setTerminalSizeHint(false);
    display->setCutToBeginningOfLine(true);
    display->setTerminalSizeStartup(false);
-   display->setSize(80,40);
    display->setScrollBarLocation(TerminalDisplay::SCROLLBAR_RIGHT);
 
    return display;
@@ -464,9 +482,41 @@ TerminalDisplay* ViewManager::createTerminalDisplay()
 
 void ViewManager::loadViewSettings(TerminalDisplay* view , Session* session)
 {
-    // load colour scheme
-    view->setColorTable( session->schema()->table() );
+    SessionInfo* info = SessionManager::instance()->sessionType(session->type());
+    Q_ASSERT( info );
 
+    const ColorScheme* colorScheme = ColorSchemeManager::instance()->
+                                            findColorScheme(info->colorScheme());
+    
+    Q_ASSERT( colorScheme );
+
+    // load colour scheme
+    view->setColorTable(colorScheme->colorTable());
+    
+    // load font, fall back to system monospace font if not specified
+    view->setVTFont(info->defaultFont());
+   
+    // set initial size
+    // temporary default used for now
+    view->setSize(80,40);
+}
+
+QList<ViewProperties*> ViewManager::viewProperties() const
+{
+    QList<ViewProperties*> list;
+
+    ViewContainer* container = _viewSplitter->activeContainer();
+
+    Q_ASSERT( container );
+
+    QListIterator<QWidget*> viewIter(container->views());
+    while ( viewIter.hasNext() )
+    {
+        ViewProperties* properties = container->viewProperties(viewIter.next());        Q_ASSERT( properties );
+        list << properties; 
+    } 
+
+    return list;
 }
 
 #include "ViewManager.moc"

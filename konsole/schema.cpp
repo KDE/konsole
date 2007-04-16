@@ -54,7 +54,6 @@
 // Qt
 #include <QDir>
 #include <QDateTime>
-#include <Q3PtrList>
 #include <QPalette>
 
 // KDE
@@ -71,7 +70,7 @@
 
 using namespace Konsole;
 
-typedef Q3PtrListIterator<ColorSchema> ColorSchemaListIterator;
+typedef QListIterator<ColorSchema*> ColorSchemaListIterator;
 
 // Number all the new color schema's (non-default) from 1.
 //
@@ -134,6 +133,11 @@ QColor(0xFF,0x54,0xFF), 0, 0 ),
     ColorEntry( QColor(0x54,0xFF,0xFF), 0, 0 ), ColorEntry(
 QColor(0xFF,0xFF,0xFF), 0, 0 )
 };
+
+bool operator<(const ColorSchema& one , const ColorSchema& two) 
+{
+    return -1 * QString::compare(one.title(),two.title());
+}
 
 ColorSchema::ColorSchema(const QString& pathname)
 :m_fileRead(false)
@@ -478,13 +482,12 @@ void ColorSchema::updateLastRead(const QDateTime& dt)
 
 
 ColorSchemaList::ColorSchemaList() :
-  Q3PtrList<ColorSchema> ()
+  QList<ColorSchema*> ()
 {
 //  KONSOLEDEBUG << "Got new color list" << endl;
 
   defaultSchema = new ColorSchema();
   append(defaultSchema);
-  setAutoDelete(true);
 
   ColorSchema::serial=1;   // Needed for detached sessions
 }
@@ -492,6 +495,11 @@ ColorSchemaList::ColorSchemaList() :
 ColorSchemaList::~ColorSchemaList()
 {
    ColorSchema::serial=1;
+
+   // free the colour schemes
+   QListIterator iter(*this);
+   while ( iter.hasNext() )
+       delete iter.next();
 }
 
 
@@ -646,11 +654,5 @@ bool ColorSchemaList::checkSchemas()
   return r;
 }
 
-int ColorSchemaList::compareItems(Q3PtrCollection::Item item1, Q3PtrCollection::Item item2)
-{
-   ColorSchema* schema1=(ColorSchema*)item1;
-   ColorSchema* schema2=(ColorSchema*)item2;
-   return -1*QString::compare(schema1->title(),schema2->title());
-}
 
 

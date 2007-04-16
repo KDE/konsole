@@ -24,7 +24,6 @@
 #include <KLocale>
 
 // Konsole
-#include "Application.h"
 #include "SessionManager.h"
 
 #include "ui_RemoteConnectionDialog.h"
@@ -45,7 +44,10 @@ RemoteConnectionDialog::RemoteConnectionDialog(QWidget* parent)
     // set initial UI state
     _ui->userEdit->setFocus(Qt::OtherFocusReason);
 }
-
+RemoteConnectionDialog::~RemoteConnectionDialog()
+{
+    delete _ui;
+}
 QString RemoteConnectionDialog::user() const
 {
     return _ui->userEdit->text();
@@ -61,19 +63,20 @@ QString RemoteConnectionDialog::service() const
 
 QString RemoteConnectionDialog::sessionKey() const
 {
-    SessionManager* manager = Application::self()->sessionManager();
+    SessionManager* manager = SessionManager::instance();
 
-    CustomCommandSessionInfo* customSession = 
-        new CustomCommandSessionInfo(manager->defaultSessionType()->path());
+    /*MutableSessionInfo* customSession = 
+        new MutableSessionInfo(manager->defaultSessionType()->path());
     customSession->setCommand( service() );
     customSession->setName( i18n("%1 at %2",user(),host()) );
     customSession->setArguments( QStringList() << customSession->command(true,true) << 
             user() + '@' + host() );
+*/
+   //QString key = manager->addSessionType( customSession ); 
 
-    QString key = manager->addSessionType( customSession ); 
+    //qDebug() << "session key = " << key;
 
-    qDebug() << "session key = " << key;
-
-    return key;
+    return QString();
+    //return key;
 }
 

@@ -23,6 +23,9 @@
 // KDE
 #include <KDialog>
 
+class QAbstractButton;
+class QSpinBox;
+
 namespace Konsole
 {
 
@@ -75,9 +78,10 @@ public:
     void setLineCount(int lines);
 
 private:
-    
-    HistoryMode _mode;
-    int _lineCount;
+    QAbstractButton* _noHistoryButton;
+    QAbstractButton* _fixedHistoryButton;
+    QAbstractButton* _unlimitedHistoryButton;
+    QSpinBox* _lineCountBox;    
 };
 
 };

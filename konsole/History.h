@@ -22,10 +22,9 @@
 #define TEHISTORY_H
 
 // Qt
-#include <q3ptrvector.h>
 #include <QBitArray>
+#include <QHash>
 #include <QVector>
-#include <q3intdict.h>
 
 // KDE
 #include <ktemporaryfile.h>
@@ -157,7 +156,7 @@ private:
 class HistoryScrollBuffer : public HistoryScroll
 {
 public:
-  typedef QVector<Character> histline;
+  typedef QVector<Character> HistoryLine;
 
   HistoryScrollBuffer(unsigned int maxNbLines = 1000);
   virtual ~HistoryScrollBuffer();
@@ -172,20 +171,38 @@ public:
   virtual void addLine(bool previousWrapped=false);
 
   void setMaxNbLines(unsigned int nbLines);
-  unsigned int maxNbLines() { return m_maxNbLines; }
+  unsigned int maxNbLines() { return _maxLineCount; }
   
 
 private:
-  int adjustLineNb(int lineno);
+  int bufferIndex(int lineNumber);
 
-  Q3PtrVector<histline> m_histBuffer;
-  QBitArray m_wrappedLine;
-  unsigned int m_maxNbLines;
-  unsigned int m_nbLines;
-  unsigned int m_arrayIndex;
-  bool         m_buffFilled;
-
+  HistoryLine* _historyBuffer;
+  int _maxLineCount;
+  int _usedLines;  
+  int _head;
+  
+  //QVector<histline*> m_histBuffer;
+  //QBitArray m_wrappedLine;
+  //unsigned int m_maxNbLines;
+  //unsigned int m_nbLines;
+  //unsigned int m_arrayIndex;
+  //bool         m_buffFilled;
 };
+
+/*class HistoryScrollBufferV2 : public HistoryScroll
+{
+public:
+  virtual int  getLines();
+  virtual int  getLineLen(int lineno);
+  virtual void getCells(int lineno, int colno, int count, Character res[]);
+  virtual bool isWrappedLine(int lineno);
+
+  virtual void addCells(const Character a[], int count);
+  virtual void addCells(const QVector<Character>& cells);
+  virtual void addLine(bool previousWrapped=false);
+
+};*/
 
 #endif
 
@@ -228,7 +245,7 @@ public:
 
 protected:
   BlockArray m_blockArray;
-  Q3IntDict<size_t> m_lineLengths;
+  QHash<int,size_t> m_lineLengths;
 };
 
 //////////////////////////////////////////////////////////////////////
@@ -241,10 +258,22 @@ public:
   HistoryType();
   virtual ~HistoryType();
 
-  virtual bool isOn()                const = 0;
-  virtual unsigned int getSize()     const = 0;
+  /**
+   * Returns true if the history is enabled ( can store lines of output )
+   * or false otherwise. 
+   */
+  virtual bool isEnabled()           const = 0;
+  /**
+   * Returns true if the history size is unlimited.
+   */
+  bool isUnlimited() const { return maximumLineCount() == 0; }
+  /**
+   * Returns the maximum number of lines which this history type
+   * can store or 0 if the history can store an unlimited number of lines.
+   */
+  virtual int maximumLineCount()    const = 0;
 
-  virtual HistoryScroll* getScroll(HistoryScroll *) const = 0;
+  virtual HistoryScroll* scroll(HistoryScroll *) const = 0;
 };
 
 class HistoryTypeNone : public HistoryType
@@ -252,10 +281,10 @@ class HistoryTypeNone : public HistoryType
 public:
   HistoryTypeNone();
 
-  virtual bool isOn() const;
-  virtual unsigned int getSize() const;
+  virtual bool isEnabled() const;
+  virtual int maximumLineCount() const;
 
-  virtual HistoryScroll* getScroll(HistoryScroll *) const;
+  virtual HistoryScroll* scroll(HistoryScroll *) const;
 };
 
 class HistoryTypeBlockArray : public HistoryType
@@ -263,26 +292,26 @@ class HistoryTypeBlockArray : public HistoryType
 public:
   HistoryTypeBlockArray(size_t size);
   
-  virtual bool isOn() const;
-  virtual unsigned int getSize() const;
+  virtual bool isEnabled() const;
+  virtual int maximumLineCount() const;
 
-  virtual HistoryScroll* getScroll(HistoryScroll *) const;
+  virtual HistoryScroll* scroll(HistoryScroll *) const;
 
 protected:
   size_t m_size;
 };
 
-#if 1 // Disabled for now 
+#if 1 
 class HistoryTypeFile : public HistoryType
 {
 public:
   HistoryTypeFile(const QString& fileName=QString());
 
-  virtual bool isOn() const;
+  virtual bool isEnabled() const;
   virtual const QString& getFileName() const;
-  virtual unsigned int getSize() const;
+  virtual int maximumLineCount() const;
 
-  virtual HistoryScroll* getScroll(HistoryScroll *) const;
+  virtual HistoryScroll* scroll(HistoryScroll *) const;
 
 protected:
   QString m_fileName;
@@ -294,10 +323,10 @@ class HistoryTypeBuffer : public HistoryType
 public:
   HistoryTypeBuffer(unsigned int nbLines);
   
-  virtual bool isOn() const;
-  virtual unsigned int getSize() const;
+  virtual bool isEnabled() const;
+  virtual int maximumLineCount() const;
 
-  virtual HistoryScroll* getScroll(HistoryScroll *) const;
+  virtual HistoryScroll* scroll(HistoryScroll *) const;
 
 protected:
   unsigned int m_nbLines;

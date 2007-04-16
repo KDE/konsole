@@ -10,6 +10,7 @@
 
 // KDE
 #include <KActionCollection>
+#include <KIcon>
 #include <KXMLGUIClient>
 
 // Konsole
@@ -107,6 +108,7 @@ private slots:
     void paste();
     void clear();
     void clearAndReset();
+    void editCurrentSession();
     void searchHistory();
     void searchHistory(bool showSearchBar);
     void findNextInHistory();
@@ -126,6 +128,10 @@ private slots:
     void searchTextChanged(const QString& text);
     void searchClosed(); // called when the user clicks on the
                          // history search bar's close button 
+
+    void snapshot(); // called periodically as the user types
+                     // to take a snapshot of the state of the
+                     // foreground process in the terminal
 
     // debugging slots
     void debugProcess();

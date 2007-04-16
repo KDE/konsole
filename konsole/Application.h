@@ -27,7 +27,7 @@ class KCmdLineArgs;
 
 namespace Konsole
 {
-
+class ColorSchemeManager;
 class SessionList;
 class SessionManager;
 class ViewManager;
@@ -71,17 +71,17 @@ public:
     /** Returns the Application instance */
     static Application* self();
 
-    /** Returns the session manager */
-    SessionManager* sessionManager();
-
 private slots:
     void createSession(const QString& key, ViewManager* view);
     void detachView(Session* session);
 
+    void toggleBackgroundInstance();
+
 private:
     KCmdLineArgs*   _arguments;
-    SessionManager* _sessionManager;
     SessionList*    _sessionList;
+    
+    MainWindow* _backgroundInstance;
 };
 
 };

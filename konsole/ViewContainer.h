@@ -26,6 +26,7 @@
 #include <QObject>
 #include <QHash>
 #include <QList>
+#include <QTabBar>
 
 class QStackedWidget;
 class QWidget;
@@ -44,9 +45,6 @@ class QWidget;
     class KColorCells;
     class KMenu;
 
-// TabbedViewContainerV2
-    class QTabBar;
-
 // ListViewContainer
     class QSplitter;
     class QListWidget;
@@ -60,7 +58,7 @@ namespace Konsole
  * The container widget typically displays a list of the views which
  * it has and provides a means of switching between them.  
  *
- * Subclasses should reimplement the viewAdded() and viewRemoved() functions
+ * Subclasses should reimplement the addViewWidget() and removeViewWidget() functions
  * to actually add or remove view widgets from the container widget, as well
  * as updating any navigation aids.
  * 
@@ -130,17 +128,23 @@ signals:
     /** Emitted when the active view changes */
     void activeViewChanged( QWidget* view );
 
+    /** Emitted when a view is added to the container. */
+    void viewAdded(QWidget* view , ViewProperties* properties);
+
+    /** Emitted when a view is removed from the container. */
+    void viewRemoved(QWidget* view);
+
 protected:
     /** 
      * Performs the task of adding the view widget
      * to the container widget.
      */
-    virtual void viewAdded(QWidget* view) = 0;
+    virtual void addViewWidget(QWidget* view) = 0;
     /**
      * Performs the task of removing the view widget
      * from the container widget.
      */
-    virtual void viewRemoved(QWidget* view) = 0;
+    virtual void removeViewWidget(QWidget* view) = 0;
     
     /** Returns the widgets which are associated with a particular navigation item */
     QList<QWidget*> widgetsForItem( ViewProperties* item ) const;
@@ -172,8 +176,8 @@ public:
     void setNewSessionMenu(QMenu* menu);
      
 protected:
-    virtual void viewAdded( QWidget* view );
-    virtual void viewRemoved( QWidget* view ); 
+    virtual void addViewWidget( QWidget* view );
+    virtual void removeViewWidget( QWidget* view ); 
 
 private slots:
     void updateTitle(ViewProperties* item);
@@ -200,6 +204,18 @@ private:
     int _contextMenuTab;
 };
 
+// internal class,
+// to allow for tweaks to the tab bar required by TabbedViewContainerV2.
+// does not actually do anything currently
+class ViewContainerTabBar : public QTabBar
+{
+public:
+    ViewContainerTabBar(QWidget* parent = 0);
+
+protected:
+    virtual QSize tabSizeHint(int index) const;
+};
+
 /** 
  * An alternative tabbed view container which uses a QTabBar and QStackedWidget
  * combination for navigation instead of QTabWidget
@@ -217,11 +233,15 @@ public:
     virtual void setActiveView(QWidget* view);
 
 protected:
-    virtual void viewAdded(QWidget* view);
-    virtual void viewRemoved(QWidget* view);
+    virtual void addViewWidget(QWidget* view);
+    virtual void removeViewWidget(QWidget* view);
+
+private slots:
+    void updateTitle(ViewProperties* item);
+    void updateIcon(ViewProperties* item);
 
 private:
-    QTabBar* _tabBar;
+    ViewContainerTabBar* _tabBar;
     QStackedWidget* _stackWidget;
     QWidget* _containerWidget;
 };
@@ -240,8 +260,8 @@ public:
     virtual void setActiveView(QWidget* view);
 
 protected:
-    virtual void viewAdded( QWidget* view );
-    virtual void viewRemoved( QWidget* view );
+    virtual void addViewWidget( QWidget* view );
+    virtual void removeViewWidget( QWidget* view );
 
 private:
     QStackedWidget* _stackWidget;
@@ -264,8 +284,8 @@ public:
     virtual void setActiveView(QWidget* view);
 
 protected:
-    virtual void viewAdded( QWidget* view );
-    virtual void viewRemoved( QWidget* view );
+    virtual void addViewWidget( QWidget* view );
+    virtual void removeViewWidget( QWidget* view );
 
 private slots:
     void rowChanged( int row );

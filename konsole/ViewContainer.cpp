@@ -24,6 +24,7 @@
 #include <QLineEdit>
 #include <QLinearGradient>
 #include <QListWidget>
+#include <QPushButton>
 #include <QSplitter>
 #include <QStackedWidget>
 #include <QTabBar>
@@ -60,7 +61,9 @@ void ViewContainer::addView(QWidget* view , ViewProperties* item)
 
     connect( view , SIGNAL(destroyed(QObject*)) , this , SLOT( viewDestroyed(QObject*) ) );
 
-    viewAdded(view);
+    addViewWidget(view);
+
+    emit viewAdded(view,item);
 }
 void ViewContainer::viewDestroyed(QObject* object)
 {
@@ -69,20 +72,24 @@ void ViewContainer::viewDestroyed(QObject* object)
     _views.removeAll(widget);
     _navigation.remove(widget);
 
-    viewRemoved(widget);
+    removeViewWidget(widget);
 
     if (_views.count() == 0)
         emit empty(this);
+
+    emit viewRemoved(widget);
 }
 void ViewContainer::removeView(QWidget* view)
 {
     _views.removeAll(view);
     _navigation.remove(view);
 
-    viewRemoved(view);
+    removeViewWidget(view);
 
     if (_views.count() == 0)
         emit empty(this);
+
+    emit viewRemoved(view);
 }
 
 const QList<QWidget*> ViewContainer::views()
@@ -262,14 +269,14 @@ void TabbedViewContainer::prepareColorCells()
         } 
 }
 
-void TabbedViewContainer::viewAdded( QWidget* view )
+void TabbedViewContainer::addViewWidget( QWidget* view )
 {
     ViewProperties* item = viewProperties(view);
     connect( item , SIGNAL(titleChanged(ViewProperties*)) , this , SLOT(updateTitle(ViewProperties*))); 
     connect( item , SIGNAL(iconChanged(ViewProperties*) ) , this ,SLOT(updateIcon(ViewProperties*)));          
     _tabWidget->addTab( view , item->icon() , item->title() );
 }
-void TabbedViewContainer::viewRemoved( QWidget* view )
+void TabbedViewContainer::removeViewWidget( QWidget* view )
 {
     const int index = _tabWidget->indexOf(view);
 
@@ -347,11 +354,21 @@ void TabbedViewContainer::selectTabColor()
   _tabWidget->setTabTextColor( _contextMenuTab , color );
 }
 
+ViewContainerTabBar::ViewContainerTabBar(QWidget* parent)
+    : QTabBar(parent)
+{
+}
+
+QSize ViewContainerTabBar::tabSizeHint(int index) const
+{
+     return QTabBar::tabSizeHint(index);
+}
+
 TabbedViewContainerV2::TabbedViewContainerV2(QObject* parent) : ViewContainer(parent)
 {
     _containerWidget = new QWidget;
     _stackWidget = new QStackedWidget();
-    _tabBar = new QTabBar();
+    _tabBar = new ViewContainerTabBar();
     _tabBar->setDrawBase(true);
 
     QVBoxLayout* layout = new QVBoxLayout;
@@ -383,16 +400,17 @@ void TabbedViewContainerV2::setActiveView(QWidget* view)
    _stackWidget->setCurrentWidget(view);
    _tabBar->setCurrentIndex(index); 
 }
-void TabbedViewContainerV2::viewAdded( QWidget* view )
+void TabbedViewContainerV2::addViewWidget( QWidget* view )
 {
     _stackWidget->addWidget(view);
-    
+    _stackWidget->updateGeometry();
+
     ViewProperties* item = viewProperties(view);
-    //connect( item , SIGNAL(titleChanged(ViewProperties*)) , this , SLOT(updateTitle(ViewProperties*))); 
-    //connect( item , SIGNAL(iconChanged(ViewProperties*) ) , this ,SLOT(updateIcon(ViewProperties*)));          
+    connect( item , SIGNAL(titleChanged(ViewProperties*)) , this , SLOT(updateTitle(ViewProperties*))); 
+    connect( item , SIGNAL(iconChanged(ViewProperties*) ) , this ,SLOT(updateIcon(ViewProperties*)));          
     _tabBar->addTab( item->icon() , item->title() );
 }
-void TabbedViewContainerV2::viewRemoved( QWidget* view )
+void TabbedViewContainerV2::removeViewWidget( QWidget* view )
 {
     const int index = _stackWidget->indexOf(view);
 
@@ -400,6 +418,27 @@ void TabbedViewContainerV2::viewRemoved( QWidget* view )
 
     _stackWidget->removeWidget(view);
     _tabBar->removeTab(index);
+}
+
+void TabbedViewContainerV2::updateTitle(ViewProperties* item)
+{
+    QListIterator<QWidget*> iter(widgetsForItem(item));
+    while ( iter.hasNext() )
+    {
+        const int index = _stackWidget->indexOf( iter.next() );
+        _tabBar->setTabText( index , item->title() );
+    }
+}
+void TabbedViewContainerV2::updateIcon(ViewProperties* item)
+{
+    qDebug() << "Tab icon changed.";
+
+    QListIterator<QWidget*> iter(widgetsForItem(item));
+    while ( iter.hasNext() )
+    {
+        const int index = _stackWidget->indexOf( iter.next() );
+        _tabBar->setTabIcon( index , item->icon() );
+    }
 }
 
 StackedViewContainer::StackedViewContainer(QObject* parent) : ViewContainer(parent)
@@ -422,11 +461,11 @@ void StackedViewContainer::setActiveView(QWidget* view)
 {
    _stackWidget->setCurrentWidget(view); 
 }
-void StackedViewContainer::viewAdded( QWidget* view )
+void StackedViewContainer::addViewWidget( QWidget* view )
 {
     _stackWidget->addWidget(view);
 }
-void StackedViewContainer::viewRemoved( QWidget* view )
+void StackedViewContainer::removeViewWidget( QWidget* view )
 {
     _stackWidget->removeWidget(view);
 }
@@ -494,7 +533,7 @@ QBrush ListViewContainer::randomItemBackground(int r)
     return QBrush(gradient);
 }
 
-void ListViewContainer::viewAdded( QWidget* view )
+void ListViewContainer::addViewWidget( QWidget* view )
 {
     _stackWidget->addWidget(view);
 
@@ -511,7 +550,7 @@ void ListViewContainer::viewAdded( QWidget* view )
     connect( properties , SIGNAL(iconChanged(ViewProperties*)) , this , SLOT(updateIcon(ViewProperties*)));
 }
 
-void ListViewContainer::viewRemoved( QWidget* view )
+void ListViewContainer::removeViewWidget( QWidget* view )
 {
     int index = _stackWidget->indexOf(view);
     _stackWidget->removeWidget(view);

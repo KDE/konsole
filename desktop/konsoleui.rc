@@ -5,6 +5,8 @@
         <Menu name="file"><text>File</text>
             <Action name="new-tab" />
             <Action name="new-window" />
+            <Action name="remote-connection" />
+            <Action name="custom-session" />
             <Separator/>
             <ActionList name="new-session-types"/>
             <Separator/>
@@ -20,7 +22,11 @@
         <Menu name="view"><text>View</text>
             <DefineGroup name="session-view-operations"/> 
             <Separator/>
-            <Action name="split-view"/>
+            <Action name="split-view-left-right"/>
+            <Action name="split-view-top-bottom"/>
+            <Action name="close-active-view"/>
+            <Action name="close-other-views"/>
+            <Separator/>
             <Action name="detach-view"/>
             <Action name="merge-windows"/>
             <Separator/>
@@ -32,7 +38,6 @@
             <Separator/>
             <Action name="configure-notifications"/>
             <Action name="configure-shortcuts"/>
-            <Action name="configure-application"/>
         </Menu>
         <Menu name="help"><text>Help</text>
 

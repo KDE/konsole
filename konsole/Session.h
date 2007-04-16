@@ -42,7 +42,7 @@ namespace Konsole
 {
 
 class ZModemDialog;
-class ColorSchema;
+class ColorScheme;
 
 /**
  * Session represents a Konsole session.
@@ -64,11 +64,21 @@ public:
   Q_PROPERTY(QString encoding READ encoding WRITE setEncoding)
   Q_PROPERTY(int sessionPid READ sessionPid)
   Q_PROPERTY(QString keytab READ keytab WRITE setKeytab)
-  Q_PROPERTY(ColorSchema* schema READ schema WRITE setSchema)
   Q_PROPERTY(QSize size READ size WRITE setSize)
 
   Session();
   ~Session();
+
+  /** 
+   * Sets the type of this session. 
+   * TODO: More documentation
+   */
+  void setType(const QString& typeKey);
+  /** 
+   * Returns the type of this session. 
+   * TODO: More documentation 
+   */
+  QString type() const;
 
   /** 
    * Adds a new view for this session.    
@@ -213,11 +223,6 @@ public:
   void cancelZModem();
   bool zmodemIsBusy() { return _zmodemBusy; }
 
-  /** Returns the colour scheme currently in use by views on this session */
-  ColorSchema* schema();
-  /** Sets the colour scheme used by views on this session */
-  void setSchema(ColorSchema* schema);
-  
   QString encoding();
   void setEncoding(const QString &encoding);
   QString keytab();
@@ -330,8 +335,8 @@ private:
   QColor         _modifiedBackground; // as set by: echo -en '\033]11;Color\007
   int            _encoding_no;
 
-  ColorSchema*   _colorScheme;
-  
+  QString        _type;
+
   static int lastSessionId;
   
 };

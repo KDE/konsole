@@ -49,7 +49,7 @@ class ViewSplitter : public QSplitter
 Q_OBJECT
 
 public:
-    ViewSplitter(QWidget* parent) : QSplitter(parent) {}
+    ViewSplitter(QWidget* parent = 0); 
 
     /**
      * Locates the child ViewSplitter widget which currently has the focus
@@ -103,6 +103,29 @@ public:
     */
    void activatePreviousContainer();
 
+   /**
+    * Specifies whether the view may be split recursively.
+    * 
+    * If this is false, all containers will be placed into the same
+    * top-level splitter.  Adding a container with an orientation
+    * which is different to that specified when adding the previous
+    * containers will change the orientation for all dividers 
+    * between containers.
+    *
+    * If this is true, adding a container to the view splitter with
+    * an orientation different to the orientation of the previous
+    * area will result in the previously active container being
+    * replaced with a new splitter containing the active container
+    * and the newly added container.  
+    */
+   void setRecursiveSplitting(bool recursive);
+
+   /** 
+    * Returns whether the view may be split recursively.
+    * See setRecursiveSplitting() 
+    */
+   bool recursiveSplitting() const;
+
 signals:
     /** Signal emitted when the last child widget is removed from the splitter */
     void empty(ViewSplitter* splitter);
@@ -142,6 +165,7 @@ private slots:
 
 private:
     QList<ViewContainer*> _containers;
+    bool _recursiveSplitting;
 };
 
 };

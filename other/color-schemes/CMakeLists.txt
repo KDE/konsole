@@ -7,7 +7,8 @@ install( FILES
          WhiteOnBlack.schema  	
          README.default.Schema 
          syscolor.schema 
-         Linux.schema 
+         Linux.schema
+         Linux.colorscheme 
          XTerm.schema 
          vim.schema    
          DarkPicture.schema 

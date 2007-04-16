@@ -10,6 +10,7 @@
 #include <kdebug.h>
 
 // Konsole
+#include "EditSessionDialog.h"
 #include "Filter.h"
 #include "HistorySizeDialog.h"
 #include "IncrementalSearchBar.h"
@@ -46,7 +47,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _searchToggleAction(0)
 {
     // handle user interface related to session (menus etc.)
-    setXMLFile("sessionui.rc");
+    setXMLFile("konsole/sessionui.rc");
     setupActions();
 
     setIdentifier(_session->sessionId());
@@ -66,38 +67,98 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     connect( _session , SIGNAL(notifySessionState(Session*,int)) , this ,
             SLOT(sessionStateChanged(Session*,int) ));
 
-    // list to title and icon changes
+    // listen to title and icon changes
     connect( _session , SIGNAL(updateTitle()) , this , SLOT(sessionTitleChanged()) );
 
     // install filter on the view to highlight URLs
     view->filterChain()->addFilter( new UrlFilter() );
+
+    // take a snapshot of the session state every so often when
+    // user activity occurs
+    QTimer* activityTimer = new QTimer(this);
+    activityTimer->setSingleShot(true);
+    activityTimer->setInterval(2000);
+    connect( _view , SIGNAL(keyPressedSignal(QKeyEvent*)) , activityTimer , SLOT(start()) );
+    connect( activityTimer , SIGNAL(timeout()) , this , SLOT(snapshot()) );
 }
 
 SessionController::~SessionController()
 { 
 }
 
+void SessionController::snapshot()
+{
+    qDebug() << "session" << _session->title() << "snapshot";
+}
+
 KUrl SessionController::url() const
 {
-    return KUrl( _session->currentWorkingDirectory() + '/' ); 
+    ProcessInfo* info = ProcessInfo::newInstance(_session->sessionPid());
+    info->update();
+
+    QString path;
+    if ( info->isValid() )
+    {
+        bool ok = false;
+
+        // check if foreground process is bookmark-able
+        int pid = info->foregroundPid(&ok);
+        if ( ok )
+        {
+            ProcessInfo* foregroundInfo = ProcessInfo::newInstance(pid);
+            foregroundInfo->update();
+
+            // for remote connections, save the user and host
+            // bright ideas to get the directory at the other end are welcome :)
+            if ( foregroundInfo->name(&ok) == "ssh" && ok )
+            {
+                SSHProcessInfo sshInfo(*foregroundInfo);
+                path = "ssh://" + sshInfo.userName() + '@' + sshInfo.host();
+            }
+
+            path = foregroundInfo->currentDir(&ok);
+
+            if (!ok)
+                path = QString::null;
+
+            delete foregroundInfo;
+        }
+        else // otherwise use the current working directory of the shell process
+        {
+            path = info->currentDir(&ok); 
+            if (!ok)
+                path = QString::null;
+        }
+    }
+
+    delete info;
+    return KUrl( path ); 
 }
 
 void SessionController::openUrl( const KUrl& url ) 
 {
     // handle local paths
-    if ( url.protocol() == "file" )
+    if ( url.isLocalFile() )
     {
-        QString path = url.path();
+        QString path = url.toLocalFile();
         KRun::shellQuote(path);
+
         _session->emulation()->sendText("cd " + path + '\r');
+    }
+    else if ( url.protocol() == "ssh" )
+    {
+        _session->emulation()->sendText("ssh ");
+
+        if ( url.hasUser() )
+            _session->emulation()->sendText(url.user() + '@');
+        if ( url.hasHost() )
+            _session->emulation()->sendText(url.host() + '\r');
     }
     else
     {
         //TODO Implement handling for other Url types
-        qWarning() << __FILE__ << ":" 
-                   << __FUNCTION__ 
-                   << "Handling for Urls that use protocols other"
-                   << " than file:// not implemented yet";
+        qWarning() << "Unable to open bookmark at url" << url << ", I do not know"
+           << " how to handle the protocol " << url.protocol(); 
     }
 }
 
@@ -249,6 +310,11 @@ void SessionController::setupActions()
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_X) );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearHistoryAndReset()) );
 
+    // Edit Session
+    action = collection->addAction("edit-current-session");
+    action->setText( i18n("Edit Current Session...") );
+    connect( action , SIGNAL(triggered()) , this , SLOT(editCurrentSession()) );
+
     // debugging tools
     //action = collection->addAction("debug-process");
     //action->setText( "Get Foreground Process" );
@@ -292,6 +358,13 @@ void SessionController::debugProcess()
         delete fp;
     }
     delete sessionProcess;
+}
+
+void SessionController::editCurrentSession()
+{
+    EditSessionDialog dialog(_view);
+    dialog.setSessionType(_session->type());
+    int result = dialog.exec();
 }
 
 void SessionController::closeSession()
@@ -420,7 +493,30 @@ void SessionController::findPreviousInHistory()
 void SessionController::historyOptions()
 {
     HistorySizeDialog* dialog = new HistorySizeDialog(_view);
-    dialog->exec();
+    const HistoryType& currentHistory = _session->history();
+
+    if ( currentHistory.isEnabled() )
+    {
+        if ( currentHistory.isUnlimited() )
+            dialog->setMode( HistorySizeDialog::UnlimitedHistory );
+        else
+        {
+            dialog->setMode( HistorySizeDialog::FixedSizeHistory );
+            dialog->setLineCount( currentHistory.maximumLineCount() );
+        }
+    }
+    else
+        dialog->setMode( HistorySizeDialog::NoHistory );
+
+    if ( dialog->exec() == QDialog::Accepted )
+    {
+        if ( dialog->mode() == HistorySizeDialog::NoHistory )
+            _session->setHistory( HistoryTypeNone() );
+        else if ( dialog->mode() == HistorySizeDialog::FixedSizeHistory )
+            _session->setHistory( HistoryTypeBuffer(dialog->lineCount()) );
+        else if ( dialog->mode() == HistorySizeDialog::UnlimitedHistory )
+            _session->setHistory( HistoryTypeFile() );       
+    }
 
     delete dialog;
 }
@@ -463,11 +559,20 @@ void SessionController::sessionTitleChanged()
 
 void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , int state, int x, int y)
 {
-    QMenu* popup = dynamic_cast<QMenu*>(factory()->container("session-popup-menu",this));
+    if ( factory() )
+    {
+        QMenu* popup = dynamic_cast<QMenu*>(factory()->container("session-popup-menu",this));
     
-    Q_ASSERT( popup );
+        Q_ASSERT( popup );
 
-    popup->exec( _view->mapToGlobal(QPoint(x,y)) );
+        popup->exec( _view->mapToGlobal(QPoint(x,y)) );
+    }
+    else
+    {
+        qWarning() << "Unable to display popup menu for session" 
+                   << _session->title() 
+                   << ", no GUI factory available to build the popup.";
+    }
 }
 
 void SessionController::sessionStateChanged(Session* /*session*/ , int state)

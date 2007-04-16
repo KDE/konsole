@@ -11,8 +11,6 @@ class QActionGroup;
 namespace Konsole
 {
 
-class SessionManager;
-
 /** 
  * SessionList provides a list of actions which represent types of session that a SessionManager can 
  * create.  These actions can be plugged into a GUI 
@@ -26,10 +24,7 @@ Q_OBJECT
 
 public:
     /** Constructs a new session list which displays sessions that can be created by @p manager */
-    SessionList(SessionManager* manager , QObject* parent);
-
-    /** Returns the session manager */
-    SessionManager* manager();
+    SessionList(QObject* parent);
 
     /** 
      * Returns a list of actions representing the types of sessions which can be created by
@@ -40,13 +35,22 @@ public:
     QList<QAction*> actions();
 
 signals:
+   /** 
+    * Emitted when the user selects an action from the list.
+    * 
+    * @param key The session type key associated with the selected action.
+    */
    void sessionSelected(const QString& key);
+   /**
+    * Emitted when the list of actions changes.
+    */
+   void actionsChanged(const QList<QAction*>& actions);
 
 private slots:
     void triggered(QAction* action);
+    void favoriteChanged(const QString& key , bool isFavorite);
 
 private:
-    SessionManager* _manager;
     QActionGroup*   _group;
 }; 
 

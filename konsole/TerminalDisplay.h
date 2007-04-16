@@ -667,6 +667,13 @@ private:
 
 	//the delay in milliseconds between redrawing blinking text
 	static const int BLINK_DELAY = 500;
+    static bool HAVE_TRANSPARENCY;
+
+public:
+    static void setTransparencyEnabled(bool enable)
+    {
+        HAVE_TRANSPARENCY = enable;
+    }
 };
 
 };

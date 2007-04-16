@@ -35,6 +35,7 @@ class RemoteConnectionDialog : public KDialog
 {
 public:
     RemoteConnectionDialog(QWidget* parent = 0 );
+    ~RemoteConnectionDialog();
 
     QString user() const;
     QString host() const;

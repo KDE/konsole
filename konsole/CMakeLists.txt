@@ -56,6 +56,8 @@ endif(KONSOLE_GENERATE_LINEFONT)
 set(konsole_KDEINIT_SRCS
         ${sessionadaptors_SRCS}
         BlockArray.cpp
+        ColorScheme.cpp
+        EditSessionDialog.cpp
         Filter.cpp
         HistorySizeDialog.cpp
         IncrementalSearchBar.cpp
@@ -70,6 +72,7 @@ set(konsole_KDEINIT_SRCS
         SessionList.cpp
         SessionListWidget.cpp
         SessionManager.cpp
+        SessionTypeDialog.cpp
         History.cpp
         Pty.cpp
         Screen.cpp
@@ -85,13 +88,14 @@ set(konsole_KDEINIT_SRCS
         ViewSplitter.cpp
         ZModemDialog.cpp
         konsole_wcwidth.cpp
-        schema.cpp
         start.cpp
         XKB.cpp
    ) 
 
 
 kde4_add_ui_files(konsole_KDEINIT_SRCS
+                  EditSessionDialog.ui
+                  SessionTypeDialog.ui
                   RemoteConnectionDialog.ui
                  )
 kde4_automoc(${konsole_KDEINIT_SRCS})
@@ -119,35 +123,49 @@ install(TARGETS konsole DESTINATION ${BIN_INSTALL_DIR})
 
 set(konsolepart_PART_SRCS 
 #${sessionadaptors_SRCS}
-   Pty.cpp 
-   BlockArray.cpp 
-   konsole_part.cpp 
-   schema.cpp 
-   Session.cpp 
-   ZModemDialog.cpp 
-   TerminalDisplay.cpp 
-   Vt102Emulation.cpp 
-   Screen.cpp 
-   konsole_wcwidth.cpp 
+   BlockArray.cpp
+   BookmarkHandler.cpp 
+   ColorScheme.cpp
+   EditSessionDialog.cpp
    Emulation.cpp 
-   History.cpp 
-   KeyTrans.cpp 
-   TerminalCharacterDecoder.cpp
-   SessionManager.cpp 
-   ScreenWindow.cpp
    Filter.cpp 
+   History.cpp
+   HistorySizeDialog.cpp
+   IncrementalSearchBar.cpp 
+   KeyTrans.cpp 
+   MainWindow.cpp
+   Part.cpp
+   ProcessInfo.cpp
+   Pty.cpp 
+   RemoteConnectionDialog.cpp
+   Screen.cpp 
+   ScreenWindow.cpp
+   Session.cpp
+   SessionController.cpp
+   SessionList.cpp
+   SessionListWidget.cpp 
+   SessionManager.cpp
+   SessionTypeDialog.cpp
+   TerminalCharacterDecoder.cpp
+   TerminalDisplay.cpp
+   ViewContainer.cpp
+   ViewManager.cpp
+   ViewProperties.cpp 
+   ViewSplitter.cpp
+   Vt102Emulation.cpp 
    XKB.cpp   
+   ZModemDialog.cpp 
+   konsole_wcwidth.cpp 
 ) 
 
-set_source_files_properties(${konsolepart_PART_SRCS} PROPERTIES COMPILE_FLAGS -Wuninitialized)
 
 kde4_automoc(${konsolepart_PART_SRCS})
 
-
 kde4_add_plugin(konsolepart WITH_PREFIX ${konsolepart_PART_SRCS})
 
+set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
 
-target_link_libraries(konsolepart  ${KDE4_KDE3SUPPORT_LIBS}  )
+target_link_libraries(konsolepart ${KDE4_KDEUI_LIBS} ${KDE4_KPARTS_LIBS} )
 if(X11_XTest_LIB)
   target_link_libraries(konsolepart  ${X11_XTest_LIB}  )
 endif(X11_XTest_LIB)

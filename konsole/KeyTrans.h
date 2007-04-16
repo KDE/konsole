@@ -21,8 +21,8 @@
 #ifndef KEYTRANS_H
 #define KEYTRANS_H
 
+#include <QList>
 #include <QString>
-#include <q3ptrlist.h>
 #include <QIODevice>
 
 #define BITS_NewLine    0
@@ -89,7 +89,7 @@ class KeyTrans
       //headerOnly - set to true to only read the header at the top of the file (which gives the name for display in menus and so on)
       //and not the rest of the file
       void readConfig(bool headerOnly = false);
-      Q3PtrList<KeyEntry> tableX;
+      QList<KeyEntry*> tableX;
       QString m_hdr;
       QString m_path;
       QString m_id;

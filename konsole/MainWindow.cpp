@@ -18,6 +18,7 @@
 */
 
 // Qt
+#include <QApplication>
 #include <QVBoxLayout>
 
 // KDE
@@ -34,12 +35,17 @@
 #include <KXMLGUIFactory>
 
 // Konsole
-#include "Application.h"
+#ifndef KONSOLE_PART
+    #include "Application.h"
+#endif
+
 #include "BookmarkHandler.h"
 #include "IncrementalSearchBar.h"
 #include "MainWindow.h"
 #include "RemoteConnectionDialog.h"
+#include "SessionController.h"
 #include "SessionList.h"
+#include "SessionTypeDialog.h"
 #include "ViewManager.h"
 #include "ViewSplitter.h"
 
@@ -47,7 +53,8 @@ using namespace Konsole;
 
 MainWindow::MainWindow()
  : KMainWindow() ,
-   _bookmarkHandler(0)
+   _bookmarkHandler(0),
+   _pluggedController(0)
 {
     // add a small amount of space between the top of the window and the main widget
     // to prevent the menu bar and main widget borders touching (which looks very ugly) in styles
@@ -58,9 +65,15 @@ MainWindow::MainWindow()
     setupActions();
 
     // create view manager
-    setXMLFile("konsoleui.rc");
-    _viewManager = new ViewManager(this);
+    // the directory ('konsole') is included in the path here so that the XML
+    // file can be found when this code is being used in the Konsole part.
+    setXMLFile("konsole/konsoleui.rc");
+    _viewManager = new ViewManager(this,actionCollection());
     connect( _viewManager , SIGNAL(empty()) , this , SLOT(close()) );
+    connect( _viewManager , SIGNAL(activeViewChanged(SessionController*)) , this ,
+            SLOT(activeViewChanged(SessionController*)) );
+    connect( _viewManager , SIGNAL(viewPropertiesChanged(const QList<ViewProperties*>&)) ,
+           bookmarkHandler() , SLOT(setViews(const QList<ViewProperties*>&)) ); 
 
     // create main window widgets
     setupWidgets();
@@ -72,6 +85,44 @@ MainWindow::MainWindow()
 ViewManager* MainWindow::viewManager() const
 {
     return _viewManager;
+}
+
+void MainWindow::activeViewChanged(SessionController* controller)
+{
+    if ( _pluggedController == controller )
+        return;
+
+    // associated bookmark menu with current session
+    bookmarkHandler()->setActiveView(controller);
+    disconnect( bookmarkHandler() , SIGNAL(openUrl(const KUrl&)) , 0 , 0 );
+    connect( bookmarkHandler() , SIGNAL(openUrl(const KUrl&)) , controller ,
+             SLOT(openUrl(const KUrl&)) );
+
+    // set the current session's search bar
+    controller->setSearchBar( searchBar() );
+
+    // listen for title changes from the current session
+    if ( _pluggedController )
+    {
+        disconnect( _pluggedController , SIGNAL(titleChanged(ViewProperties*)) 
+                     , this , SLOT(activeViewTitleChanged(ViewProperties*)) );
+    }
+
+    connect( controller , SIGNAL(titleChanged(ViewProperties*)) , 
+            this , SLOT(activeViewTitleChanged(ViewProperties*)) );
+
+    guiFactory()->removeClient(_pluggedController);
+    guiFactory()->addClient(controller);
+
+    // update session title to match newly activated session
+    activeViewTitleChanged(controller);
+
+    _pluggedController = controller;
+}
+
+void MainWindow::activeViewTitleChanged(ViewProperties* properties)
+{
+    setPlainCaption(properties->title());
 }
 
 IncrementalSearchBar* MainWindow::searchBar() const
@@ -104,22 +155,32 @@ void MainWindow::setupActions()
 
     QAction* customSessionAction = collection->addAction("custom-session");
     customSessionAction->setText( i18n("Custom Session...") );
+    connect( customSessionAction , SIGNAL(triggered()) , this , SLOT(showCustomSessionDialog()) );
+   
+#ifndef KONSOLE_PART 
     KStandardAction::quit( Application::self() , SLOT(quit()) , collection );
+#endif
 
     // Bookmark Menu
     KActionMenu* bookmarkMenu = new KActionMenu(i18n("&Bookmarks") , collection );
-    _bookmarkHandler = new BookmarkHandler( collection , bookmarkMenu->menu() , true );
+    _bookmarkHandler = new BookmarkHandler( collection , bookmarkMenu->menu() , true , this );
     collection->addAction("bookmark" , bookmarkMenu);
+
+    //TODO - The 'Add Bookmark' menu action currently has a Ctrl+B shortcut by
+    // default which cannot be overridden
 
     // View Menu
     QAction* hideMenuBarAction = collection->addAction("hide-menubar");
     hideMenuBarAction->setText( i18n("Hide MenuBar") );
     connect( hideMenuBarAction , SIGNAL(triggered()) , menuBar() , SLOT(hide()) );
 
+    QAction* mergeAction = collection->addAction("merge-windows");
+    mergeAction->setText( i18n("&Merge Windows") );
+    connect( mergeAction , SIGNAL(triggered()) , this , SLOT(mergeWindows()) );
+
     // Settings Menu
     KStandardAction::configureNotifications( 0 , 0 , collection  );
     KStandardAction::keyBindings( this , SLOT(showShortcutsDialog()) , collection  );
-    KStandardAction::preferences( this , SLOT(showPreferencesDialog()) , collection ); 
 }
 
 BookmarkHandler* MainWindow::bookmarkHandler() const
@@ -129,11 +190,19 @@ BookmarkHandler* MainWindow::bookmarkHandler() const
 
 void MainWindow::setSessionList(SessionList* list)
 {
-    unplugActionList("new-session-types");
-    plugActionList( "new-session-types" , list->actions() );
+    sessionListChanged(list->actions());
 
     connect( list , SIGNAL(sessionSelected(const QString&)) , this , 
             SLOT(sessionSelected(const QString&)) );
+
+    connect( list , SIGNAL(actionsChanged(const QList<QAction*>&)) , this ,
+            SLOT(sessionListChanged(const QList<QAction*>&)) );
+}
+
+void MainWindow::sessionListChanged(const QList<QAction*>& actions)
+{
+    unplugActionList("new-session-types");
+    plugActionList("new-session-types",actions);
 }
 
 void MainWindow::newTab()
@@ -143,7 +212,9 @@ void MainWindow::newTab()
 
 void MainWindow::newWindow()
 {
+#ifndef KONSOLE_PART
     Application::self()->newInstance();
+#endif
 }
 
 void MainWindow::showShortcutsDialog()
@@ -155,10 +226,17 @@ void MainWindow::sessionSelected(const QString& key)
 {
     emit requestSession(key,_viewManager);
 }
-
+void MainWindow::showCustomSessionDialog()
+{
+    SessionTypeDialog dialog(this);
+    dialog.exec();
+}
 void MainWindow::showPreferencesDialog()
 {
-    KToolInvocation::startServiceByDesktopName("konsole",QString());
+    Q_ASSERT(0); // not implemented
+
+    // code to invoke the old preferences dialog
+    //KToolInvocation::startServiceByDesktopName("konsole",QString());
 }
 
 void MainWindow::showRemoteConnectionDialog()
@@ -174,11 +252,11 @@ void MainWindow::mergeWindows()
     // by merging the view manager associated with the other Konsole windows
     // into this window's view manager
 
-    QListIterator<QWidget*> topLevelIter( Application::topLevelWidgets() );
+    QListIterator<QWidget*> topLevelIter( QApplication::topLevelWidgets() );
 
     while (topLevelIter.hasNext())
     {
-        MainWindow* window = dynamic_cast<MainWindow*>(topLevelIter.next());
+        MainWindow* window = qobject_cast<MainWindow*>(topLevelIter.next());
         if ( window && window != this )
         {
             _viewManager->merge( window->_viewManager );

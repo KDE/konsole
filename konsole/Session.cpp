@@ -46,7 +46,7 @@
 
 // Konsole
 #include <config-konsole.h>
-#include "schema.h"
+#include "ColorScheme.h"
 //TODO - Re-add adaptors
 //#include "sessionadaptor.h"
 //#include "sessionscriptingadaptor.h"
@@ -80,7 +80,6 @@ Session::Session() :
    , _zmodemProc(0)
    , _zmodemProgress(0)
    , _encoding_no(0)
-   , _colorScheme(0)
 {
     //prepare DBus communication
     //TODO - Re-add Session adaptor
@@ -126,6 +125,9 @@ Session::Session() :
     if (!_shellProcess->error().isEmpty())
         QTimer::singleShot(0, this, SLOT(ptyError()));
 }
+
+void Session::setType(const QString& type) { _type = type; }
+QString Session::type() const { return _type; }
 
 void Session::setProgram(const QString& program)
 {
@@ -184,12 +186,6 @@ void Session::addView(TerminalDisplay* widget)
 
     widget->setScreenWindow(_emulation->createWindow());
 
-    //update color scheme of view to match session
-    if (_colorScheme)
-    {
-        widget->setColorTable(_colorScheme->table());
-    }
-    
     //connect view signals and slots
     QObject::connect( widget ,SIGNAL(changedContentSizeSignal(int,int)),this,
                     SLOT(onContentSizeChange(int,int)));
@@ -663,8 +659,8 @@ const HistoryType& Session::history()
 
 void Session::clearHistory()
 {
-  if (history().isOn()) {
-    int histSize = history().getSize();
+  if (history().isEnabled()) {
+    int histSize = history().maximumLineCount();
     setHistory(HistoryTypeNone());
     if (histSize)
       setHistory(HistoryTypeBuffer(histSize));
@@ -685,14 +681,9 @@ QString Session::getPgm()
 
 QString Session::currentWorkingDirectory()
 {
-#ifdef HAVE_PROC_CWD
-  if (_cwd.isEmpty()) {
-    QFileInfo Cwd(QString("/proc/%1/_cwd").arg(_shellProcess->pid()));
-    if(Cwd.isSymLink())
-      return Cwd.readLink();
-  }
-#endif /* HAVE_PROC_CWD */
-  return _cwd;
+  Q_ASSERT(false);
+
+  return QString();
 }
 
 bool Session::isMonitorActivity() const { return monitorActivity; }
@@ -888,23 +879,6 @@ void Session::onReceiveBlock( const char* buf, int len )
 {
     _emulation->onReceiveBlock( buf, len );
     emit receivedData( QString::fromLatin1( buf, len ) );
-}
-
-ColorSchema* Session::schema()
-{
-    return _colorScheme;
-}
-
-void Session::setSchema(ColorSchema* schema)
-{
-    _colorScheme = schema;
-
-    //update color scheme for attached views
-    QListIterator<TerminalDisplay*> viewIter(_views);
-    while (viewIter.hasNext())
-    {
-        viewIter.next()->setColorTable(schema->table());
-    }
 }
 
 QString Session::encoding()

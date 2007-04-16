@@ -34,9 +34,12 @@
 // Konsole
 #include "KeyboardTranslator.h"
 
+using namespace Konsole;
+
+KeyboardTranslatorManager* KeyboardTranslatorManager::_instance = 0;
+
 KeyboardTranslatorManager::KeyboardTranslatorManager()
 {
-    findTranslators();
 }
 
 void KeyboardTranslatorManager::findTranslators()
@@ -217,4 +220,13 @@ KeyboardTranslator::Entry* KeyboardTranslator::findEntry(int keyCode, Qt::Keyboa
     {
         return 0;
     }
+}
+
+void KeyboardTranslatorManager::setInstance(KeyboardTranslatorManager* instance)
+{
+    _instance = instance;
+}
+KeyboardTranslatorManager* KeyboardTranslatorManager::instance()
+{
+    return _instance;
 }

@@ -32,7 +32,7 @@ class KActionCollection;
 namespace Konsole
 {
 
-class SessionController;
+class ViewProperties;
 
 /**
  * This class handles the communication between the bookmark menu and the active session,
@@ -58,7 +58,7 @@ public:
      * @param menu The menu which the bookmark actions should be added to
      * @param toplevel TODO: Document me
      */
-    BookmarkHandler( KActionCollection* collection , KMenu* menu, bool toplevel );
+    BookmarkHandler( KActionCollection* collection , KMenu* menu, bool toplevel , QObject* parent );
     ~BookmarkHandler();
 
     QMenu * popupMenu();
@@ -67,24 +67,28 @@ public:
     virtual QString currentTitle() const;
     virtual bool addBookmarkEntry() const;
     virtual bool editBookmarkEntry() const;
+    virtual bool supportsTabs() const;
+    virtual QList<QPair<QString,QString> > currentBookmarkList() const;
 
     /** 
      * Returns the menu which this bookmark handler inserts its actions into.
      */
     KMenu *menu() const { return m_menu; }
 
-    /**
-     * Sets the controller used to retrieve the current session URL when
-     * the "Add Bookmark" menu item is selected.
-     */
-    void setController( SessionController* controller );
-    /**
-     * Returns the controller used to retrieve the current session URL when
-     * the "Add Bookmark" menu item is selected.
-     */
-    SessionController* controller() const;
 
-Q_SIGNALS:
+    
+    QList<ViewProperties*> views() const;
+    ViewProperties* activeView() const;
+
+public slots:
+    /**
+     *
+     */
+    void setViews( const QList<ViewProperties*>& views );
+
+    void setActiveView( ViewProperties* view );
+
+signals:
     /**
      * Emitted when the user selects a bookmark from the bookmark menu.
      *
@@ -93,15 +97,20 @@ Q_SIGNALS:
      */
     void openUrl( const KUrl& url ); 
 
+
 private Q_SLOTS:
     void openBookmark( const KBookmark & bm, Qt::MouseButtons, Qt::KeyboardModifiers );
 
 private:
+    QString titleForView( ViewProperties* view ) const;
+    QString urlForView( ViewProperties* view ) const;
+
     KMenu* m_menu;
     KBookmarkMenu* m_bookmarkMenu;
     QString m_file;
     bool m_toplevel;
-    SessionController* m_controller;
+    ViewProperties* m_activeView;
+    QList<ViewProperties*> m_views;
 };
 
 };

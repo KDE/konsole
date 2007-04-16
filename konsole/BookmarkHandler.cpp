@@ -36,32 +36,24 @@
 
 // Konsole
 #include "BookmarkHandler.h"
-#include "SessionController.h"
+#include "ViewProperties.h"
 
 using namespace Konsole;
 
-BookmarkHandler::BookmarkHandler( KActionCollection* collection, KMenu* menu, bool toplevel )
-    : QObject( collection ),
+BookmarkHandler::BookmarkHandler( KActionCollection* collection, 
+                                  KMenu* menu, 
+                                  bool toplevel , 
+                                  QObject* parent )
+    : QObject( parent ),
       KBookmarkOwner(),
       m_toplevel(toplevel),
-      m_controller( 0 )
+      m_activeView(0)
 {
     setObjectName( "BookmarkHandler" );
 
     m_menu = menu;
 
-    // KDE3.5 - Konsole's bookmarks are now in konsole/bookmarks.xml
-    // TODO: Consider removing for KDE4
     QString new_bm_file = KStandardDirs::locateLocal( "data", "konsole/bookmarks.xml" );
-    if ( !QFile::exists( new_bm_file ) ) {
-        QString old_bm_file = KStandardDirs::locateLocal( "data", "kfile/bookmarks.xml" );
-        if ( QFile::exists( old_bm_file ) )
-            // We want sync here...
-            if ( !KIO::NetAccess::file_copy( KUrl( old_bm_file ),
-                                   KUrl ( new_bm_file ), 0 ) ) {
-                kWarning()<<KIO::NetAccess::lastErrorString()<<endl;
-            }
-    }
 
     m_file = KStandardDirs::locate( "data", "konsole/bookmarks.xml" );
     if ( m_file.isEmpty() )
@@ -102,9 +94,14 @@ bool BookmarkHandler::editBookmarkEntry() const
 
 QString BookmarkHandler::currentUrl() const
 {
-    if ( m_controller )
+    return urlForView(m_activeView);
+}
+
+QString BookmarkHandler::urlForView(ViewProperties* view) const
+{
+    if ( view )
     {
-        return m_controller->url().prettyUrl();
+        return view->url().prettyUrl();
     }
     else
     {
@@ -114,7 +111,12 @@ QString BookmarkHandler::currentUrl() const
 
 QString BookmarkHandler::currentTitle() const
 {
-    const KUrl &u = m_controller ? m_controller->url() : KUrl(); 
+    return titleForView(m_activeView);
+}
+
+QString BookmarkHandler::titleForView(ViewProperties* view) const
+{
+    const KUrl &u = view ? view->url() : KUrl(); 
     if (u.isLocalFile())
     {
        QString path = u.path();
@@ -124,13 +126,42 @@ QString BookmarkHandler::currentTitle() const
     return u.prettyUrl();
 }
 
-void BookmarkHandler::setController( SessionController* controller ) 
+bool BookmarkHandler::supportsTabs() const
 {
-    m_controller = controller;
+    return true;
 }
-SessionController* BookmarkHandler::controller() const
+
+QList<QPair<QString,QString> > BookmarkHandler::currentBookmarkList() const
 {
-    return m_controller;
+    QList<QPair<QString,QString> > list;
+
+    QListIterator<ViewProperties*> iter( m_views );
+    
+    while ( iter.hasNext() )
+    {
+        ViewProperties* next = iter.next();
+        list << QPair<QString,QString>(titleForView(next) , urlForView(next));
+    }
+
+    return list;
+}
+
+void BookmarkHandler::setViews(const QList<ViewProperties*>& views) 
+{
+    qDebug() << "BookmarkHandler - View list changed.";
+    m_views = views;
+}
+QList<ViewProperties*> BookmarkHandler::views() const
+{
+    return m_views;
+}
+void BookmarkHandler::setActiveView( ViewProperties* view )
+{
+    m_activeView = view;
+}
+ViewProperties* BookmarkHandler::activeView() const
+{
+    return m_activeView;
 }
 
 #include "BookmarkHandler.moc"
