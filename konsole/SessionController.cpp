@@ -105,8 +105,12 @@ KUrl SessionController::url() const
         int pid = info->foregroundPid(&ok);
         if ( ok )
         {
+            qDebug() << "reading session process = " << info->name(&ok);
+
             ProcessInfo* foregroundInfo = ProcessInfo::newInstance(pid);
             foregroundInfo->update();
+
+            qDebug() << "reading foreground process = " << foregroundInfo->name(&ok);
 
             // for remote connections, save the user and host
             // bright ideas to get the directory at the other end are welcome :)
@@ -115,11 +119,13 @@ KUrl SessionController::url() const
                 SSHProcessInfo sshInfo(*foregroundInfo);
                 path = "ssh://" + sshInfo.userName() + '@' + sshInfo.host();
             }
+            else
+            {
+                path = foregroundInfo->currentDir(&ok);
 
-            path = foregroundInfo->currentDir(&ok);
-
-            if (!ok)
-                path = QString::null;
+                if (!ok)
+                    path = QString::null;
+            }
 
             delete foregroundInfo;
         }
