@@ -229,6 +229,7 @@ IncrementalSearchBar* SessionController::searchBar() const
 void SessionController::setupActions()
 {
     QAction* action = 0;
+    KToggleAction* toggleAction = 0;
     KActionCollection* collection = actionCollection();
 
     // Close Session
@@ -251,6 +252,11 @@ void SessionController::setupActions()
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_V) );
     connect( action , SIGNAL(triggered()) , this , SLOT(paste()) );
 
+    // Send to All
+    toggleAction = new KToggleAction(i18n("Send Input to All"),this);
+    action = collection->addAction("send-input-to-all",toggleAction);
+    connect( action , SIGNAL(triggered()) , this , SLOT(sendInputToAll()) );
+
     // Clear and Clear+Reset
     action = collection->addAction("clear");
     action->setText( i18n("C&lear Display") );
@@ -262,7 +268,6 @@ void SessionController::setupActions()
     connect( action , SIGNAL(triggered()) , this , SLOT(clearAndReset()) );
 
     // Monitor
-    KToggleAction* toggleAction = 0;
     toggleAction = new KToggleAction(i18n("Monitor for &Activity"),this);  
     toggleAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_A) );
     action = collection->addAction("monitor-activity",toggleAction);
@@ -272,6 +277,19 @@ void SessionController::setupActions()
     toggleAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_I) );
     action = collection->addAction("monitor-silence",toggleAction);
     connect( action , SIGNAL(toggled(bool)) , this , SLOT(monitorSilence(bool)) );
+
+    // Text Size
+    action = collection->addAction("increase-text-size");
+    action->setText( i18n("Increase Text Size") );
+    action->setIcon( KIcon("zoom-in") );
+    action->setShortcut( QKeySequence(Qt::CTRL+Qt::Key_Plus) );
+    connect( action , SIGNAL(triggered()) , this , SLOT(increaseTextSize()) );
+
+    action = collection->addAction("decrease-text-size");
+    action->setText( i18n("Decrease Text Size") );
+    action->setIcon( KIcon("zoom-out") );
+    action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Minus) );
+    connect( action , SIGNAL(triggered()) , this , SLOT(decreaseTextSize()) );
 
     // History
     _searchToggleAction = new KAction(i18n("Search History"),this);
@@ -535,6 +553,28 @@ void SessionController::clearHistoryAndReset()
 {
     clearAndReset();
     clearHistory();
+}
+void SessionController::increaseTextSize()
+{
+    QFont font = _view->getVTFont();
+    font.setPointSize(font.pointSize()+1);
+    _view->setVTFont(font);
+
+    //TODO - Save this setting as a session default
+}
+void SessionController::decreaseTextSize()
+{
+    const int MinimumFontSize = 6;
+
+    QFont font = _view->getVTFont();
+    font.setPointSize( qMax(font.pointSize()-1,MinimumFontSize) );
+    _view->setVTFont(font);
+
+    //TODO - Save this setting as a session default
+}
+void SessionController::sendInputToAll()
+{
+    Q_ASSERT(0); // Not implemented yet
 }
 void SessionController::monitorActivity(bool monitor)
 {

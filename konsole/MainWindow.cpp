@@ -52,7 +52,7 @@
 using namespace Konsole;
 
 MainWindow::MainWindow()
- : KMainWindow() ,
+ : KXmlGuiWindow() ,
    _bookmarkHandler(0),
    _pluggedController(0)
 {
@@ -62,12 +62,13 @@ MainWindow::MainWindow()
     setContentsMargins(0,2,0,0);
    
     // create actions for menus
+    setXMLFile("konsole/konsoleui.rc");
     setupActions();
 
     // create view manager
     // the directory ('konsole') is included in the path here so that the XML
     // file can be found when this code is being used in the Konsole part.
-    setXMLFile("konsole/konsoleui.rc");
+    //setXMLFile("konsole/konsoleui.rc");
     _viewManager = new ViewManager(this,actionCollection());
     connect( _viewManager , SIGNAL(empty()) , this , SLOT(close()) );
     connect( _viewManager , SIGNAL(activeViewChanged(SessionController*)) , this ,

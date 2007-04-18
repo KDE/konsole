@@ -120,6 +120,9 @@ private slots:
     void closeSession();
     void monitorActivity(bool monitor);
     void monitorSilence(bool monitor);
+    void increaseTextSize();
+    void decreaseTextSize();
+    void sendInputToAll();
 
     // other
     void showDisplayContextMenu(TerminalDisplay* display , int state , int x , int y);

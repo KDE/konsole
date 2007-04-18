@@ -20,7 +20,7 @@
 #ifndef KONSOLEMAINWINDOW_H
 #define KONSOLEMAINWINDOW_H
 
-#include <KMainWindow>
+#include <KXmlGuiWindow>
 
 namespace Konsole
 {
@@ -43,7 +43,7 @@ class BookmarkHandler;
  *
  * Do not construct new main windows directly, use Application's newMainWindow() method.
  */
-class MainWindow : public KMainWindow
+class MainWindow : public KXmlGuiWindow
 {
     Q_OBJECT
 

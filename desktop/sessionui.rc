@@ -9,6 +9,8 @@
             <Action name="copy" group="session-edit-operations" />
             <Action name="paste" group="session-edit-operations" />
             <Separator group="session-edit-operations"/>
+            <Action name="send-input-to-all" group="session-edit-operations"/>
+            <Separator group="session-edit-operations"/>
             <Action name="clear" group="session-edit-operations" />
             <Action name="clear-and-reset" group="session-edit-operations" />
         </Menu>
@@ -26,6 +28,9 @@
         <Menu name="view"><text>View</text>
             <Action name="monitor-silence" group="session-view-operations" />
             <Action name="monitor-activity" group="session-view-operations" />
+            <Separator group="session-view-operations"/>
+            <Action name="increase-text-size"/>
+            <Action name="decrease-text-size"/>
         </Menu>
         <!--<Menu name="debug"><text>Debug</text>
             <Action name="debug-process"/>
