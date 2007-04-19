@@ -4,7 +4,7 @@ Comment=Konsole
 Comment[x-test]=xxKonsolexx
 
 [Event/BellVisible]
-Name=Bell in visible session
+Name=Bell in Visible Session
 Name[fr]=Cloche dans la session visible
 Name[x-test]=xxBell in visible sessionxx
 Comment=Bell emitted within a visible session
@@ -14,7 +14,7 @@ Sound=KDE_Beep.ogg
 Action=Sound
 
 [Event/BellInvisible]
-Name=Bell in non-visible session
+Name=Bell in Non-visible Session
 Name[fr]=Cloche dans une session invisible
 Name[x-test]=xxBell in non-visible sessionxx
 Comment=Bell emitted within a non-visible session
@@ -24,7 +24,7 @@ default_sound=KDE_Beep.ogg
 Action=PassivePopup
 
 [Event/Activity]
-Name=Activity in monitored session
+Name=Activity in Monitored Session
 Name[fr]=Activité dans la session surveillée
 Name[x-test]=xxActivity in monitored sessionxx
 Comment=Activity detected in a monitored session
@@ -34,7 +34,7 @@ Action=PassivePopup
 
 
 [Event/Silence]
-Name=Silence in monitored session
+Name=Silence in Monitored Session
 Name[fr]=Inactivité dans la session surveillée
 Name[x-test]=xxSilence in monitored sessionxx
 Comment=Silence detected in a monitored session
@@ -43,7 +43,7 @@ Comment[x-test]=xxSilence detected in a monitored sessionxx
 Action=PassivePopup
 
 [Event/Finished]
-Name=Session finished with non-zero status
+Name=Session Finished with Non-zero Status
 Name[fr]=La session s'est terminée anormalement
 Name[x-test]=xxSession finished with non-zero statusxx
 Comment=A session has exited with non-zero status
