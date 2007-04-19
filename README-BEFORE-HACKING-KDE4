@@ -24,5 +24,16 @@ with this line
 > add_subdirectory( konsole-split-view )
 
 
+or you can switch to this branch:
+
+cd kdebase/apps/konsole/
+$ svn info
+(prints the repository URL, for example https://svn.kde.org/home/kde/trunk/KDE/kdebase/apps/konsole)
+$ svn switch https://svn.kde.org/home/kde/branches/work/konsole-split-view
+(i.e. replace trunk/KDE/kdebase/apps/konsole with branches/work/konsole-split-view)
+$ make
+(i.e. build and use it as usually)
+
+
 Happy hacking :)
 Robert Knight < robertknight@gmail.com >
