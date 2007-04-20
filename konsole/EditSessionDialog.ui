@@ -28,7 +28,10 @@
    <item>
     <widget class="QTabWidget" name="tabWidget" >
      <property name="currentIndex" >
-      <number>0</number>
+      <number>3</number>
+     </property>
+     <property name="usesScrollButtons" >
+      <bool>false</bool>
      </property>
      <widget class="QWidget" name="tab" >
       <attribute name="title" >
@@ -386,54 +389,43 @@
       <attribute name="title" >
        <string>Keyboard Setup</string>
       </attribute>
-      <layout class="QVBoxLayout" >
-       <item>
-        <layout class="QHBoxLayout" >
-         <item>
-          <widget class="QLabel" name="label" >
-           <property name="text" >
-            <string>Keyboard Setup:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="keyboardSetupCombo" />
-         </item>
-        </layout>
+      <layout class="QGridLayout" >
+       <item rowspan="4" row="0" column="0" >
+        <widget class="QListView" name="keyBindingList" />
        </item>
-       <item>
-        <layout class="QGridLayout" >
-         <item rowspan="3" row="0" column="0" >
-          <widget class="QListView" name="keyBindingList" />
-         </item>
-         <item row="0" column="1" >
-          <widget class="QPushButton" name="addKeyBindingButton" >
-           <property name="text" >
-            <string>Add</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1" >
-          <widget class="QPushButton" name="removeKeyBindingButton" >
-           <property name="text" >
-            <string>Remove</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1" >
-          <spacer>
-           <property name="orientation" >
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeHint" >
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
+       <item row="0" column="1" >
+        <widget class="QPushButton" name="newKeyBindingsButton" >
+         <property name="text" >
+          <string>New...</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" >
+        <widget class="QPushButton" name="editKeyBindingsButton" >
+         <property name="text" >
+          <string>Edit...</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" >
+        <widget class="QPushButton" name="removeKeyBindingsButton" >
+         <property name="text" >
+          <string>Remove</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
@@ -600,7 +592,6 @@
    </item>
   </layout>
  </widget>
- <includes/>
  <resources/>
  <connections/>
 </ui>

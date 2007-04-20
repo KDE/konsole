@@ -26,6 +26,7 @@
 // KDE
 #include <KDialog>
 
+
 namespace Ui
 {
     class EditSessionDialog;

@@ -21,6 +21,7 @@
 #include <QLinearGradient>
 #include <QPainter>
 #include <QStandardItemModel>
+#include <QtDebug>
 
 // KDE
 #include <KFontDialog>
