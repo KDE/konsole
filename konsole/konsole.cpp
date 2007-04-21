@@ -61,7 +61,7 @@
 #include <QTime>
 #include <QTime>
 #include <QToolButton>
-#include <QToolTip>
+
 #include <QtDBus/QtDBus>
 
 // KDE
