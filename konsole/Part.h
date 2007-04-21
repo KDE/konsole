@@ -72,7 +72,9 @@ protected:
     virtual bool openFile();
 
 private slots:
-    void createSession(const QString& key);
+    // creates a new session using the specified key.
+    // call the run() method on the returned Session instance to begin the session
+    Session* createSession(const QString& key);
     void activeViewChanged(SessionController* controller);
 private:
     ViewManager* _viewManager;

@@ -82,25 +82,19 @@ bool Part::openFile()
 void Part::startProgram( const QString& program,
                            const QStringList& arguments )
 {
-    SessionManager* const manager = SessionManager::instance();
+    Session* session = createSession(QString::null);
 
-#warning "FIXME - Port this to MutableSessionInfo's replacement."
-    /*MutableSessionInfo* info = new MutableSessionInfo(QString());
-    info->setCommand(program);
-    info->setArguments(arguments);
-
-    QString key = manager->addSessionType(info);
-    Session* session = manager->createSession(key);
-    session->setListenToKeyPress(true);
-    _viewManager->createView(session);
-    session->run();*/
+    session->setProgram(program);
+    session->setArguments(arguments);
+   
+    session->run();
 }
 void Part::showShellInDir( const QString& dir )
 {
-    Session* session = SessionManager::instance()->createSession(QString());
+    Session* session = createSession(QString::null);
+
     session->setInitialWorkingDirectory(dir);
-    session->setListenToKeyPress(true);
-    _viewManager->createView(session);
+    
     session->run();
 }
 void Part::sendInput( const QString& text )
@@ -111,13 +105,14 @@ void Part::sendInput( const QString& text )
     while ( iter.hasNext() )
         iter.next()->emulation()->sendText(text);
 }
-void Part::createSession(const QString& key)
+Session* Part::createSession(const QString& key)
 {
     Session* session = SessionManager::instance()->createSession(key);
     session->setListenToKeyPress(true);
 
     _viewManager->createView(session);
-    session->run();
+
+    return session;
 }
 void Part::activeViewChanged(SessionController* controller)
 {
