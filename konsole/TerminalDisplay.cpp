@@ -1444,7 +1444,8 @@ void TerminalDisplay::paintContents(QPainter &paint, const QRect &rect)
   int rlx = qMin(_usedColumns-1, qMax(0,(rect.right()  - tLx - _bX ) / _fontWidth));
   int rly = qMin(_usedLines-1,  qMax(0,(rect.bottom() - tLy - _bY  ) / _fontHeight));
 
-  QChar *disstrU = new QChar[_usedColumns];
+  const int bufferSize = _usedColumns;
+  QChar *disstrU = new QChar[bufferSize];
   for (int y = luy; y <= rly; y++)
   {
     quint16 c = _image[loc(lux,y)].character;
@@ -1455,9 +1456,28 @@ void TerminalDisplay::paintContents(QPainter &paint, const QRect &rect)
     {
       int len = 1;
       int p = 0;
-      c = _image[loc(x,y)].character;
-      if (c)
-         disstrU[p++] = c; //fontMap(c);
+
+      if ( _image[loc(x,y)].rendition & RE_EXTENDED_CHAR )
+      {
+        ushort extendedCharLength;
+        ushort* chars = ExtendedCharTable::instance
+                            .lookupExtendedChar(_image[loc(x,y)].character,extendedCharLength);
+        for ( int index = 0 ; index < extendedCharLength ; index++ ) 
+        {
+            Q_ASSERT( p < bufferSize );
+            disstrU[p++] = chars[index];
+        }
+      }
+      else
+      {
+        c = _image[loc(x,y)].character;
+        if (c)
+        {
+             Q_ASSERT( p < bufferSize );
+             disstrU[p++] = c; //fontMap(c);
+        }
+      }
+
       bool lineDraw = isLineChar(c);
       bool doubleWidth = (_image[ qMin(loc(x,y)+1,_imageSize) ].character == 0);
       CharacterColor cf = _image[loc(x,y)].foregroundColor;
