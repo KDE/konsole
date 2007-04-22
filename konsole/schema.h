@@ -41,7 +41,7 @@
 #ifndef SCHEMA_include
 #define SCHEMA_include
 
-#include <QString>
+
 #include <Qt3Support/Q3PtrList>
 
 #include "TECommon.h"

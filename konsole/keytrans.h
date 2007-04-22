@@ -21,7 +21,7 @@
 #ifndef KEYTRANS_H
 #define KEYTRANS_H
 
-#include <QString>
+
 #include <Qt3Support/Q3PtrList>
 #include <QIODevice>
 

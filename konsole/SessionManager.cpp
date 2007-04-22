@@ -23,7 +23,7 @@
 #include <QFileInfo>
 #include <QFont>
 #include <QList>
-#include <QString>
+
 
 // KDE
 #include <klocale.h>
