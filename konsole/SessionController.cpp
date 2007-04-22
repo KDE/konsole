@@ -55,10 +55,6 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     
     view->installEventFilter(this);
 
-    // destroy session controller if either the view or the session are destroyed
-    connect( _session , SIGNAL(destroyed()) , this , SLOT(deleteLater()) );
-    connect( _view , SIGNAL(destroyed()) , this , SLOT(deleteLater()) );
-
     // listen for popup menu requests
     connect( _view , SIGNAL(configureRequest(TerminalDisplay*,int,int,int)) , this,
             SLOT(showDisplayContextMenu(TerminalDisplay*,int,int,int)) );

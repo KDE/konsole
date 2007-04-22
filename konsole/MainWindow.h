@@ -20,6 +20,10 @@
 #ifndef KONSOLEMAINWINDOW_H
 #define KONSOLEMAINWINDOW_H
 
+// Qt
+#include <QPointer>
+
+// KDE
 #include <KXmlGuiWindow>
 
 namespace Konsole
@@ -111,7 +115,7 @@ class MainWindow : public KXmlGuiWindow
         ViewManager*  _viewManager;
         BookmarkHandler* _bookmarkHandler;
         IncrementalSearchBar* _searchBar;
-        SessionController* _pluggedController;
+        QPointer<SessionController> _pluggedController;
 };
 
 };

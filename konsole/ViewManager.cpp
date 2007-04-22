@@ -313,8 +313,11 @@ void ViewManager::splitView(Qt::Orientation orientation)
 void ViewManager::closeActiveView()
 {
     ViewContainer* container = _viewSplitter->activeContainer();
-        
     delete container;
+
+    // focus next container so that user can continue typing 
+    // without having to manually focus it themselves
+    nextContainer();
 }
 void ViewManager::closeOtherViews()
 {
@@ -335,7 +338,9 @@ SessionController* ViewManager::createController(Session* session , TerminalDisp
     // is notified when the view gains the focus
     SessionController* controller = new SessionController(session,view,this);
     connect( controller , SIGNAL(focused(SessionController*)) , this , SIGNAL(activeViewChanged(SessionController*)) );
-
+    connect( session , SIGNAL(destroyed()) , controller , SLOT(deleteLater()) );
+    connect( view , SIGNAL(destroyed()) , controller , SLOT(deleteLater()) );
+    
     return controller;
 }
 
@@ -387,8 +392,8 @@ ViewContainer* ViewManager::createContainer()
            SLOT(map()) ); 
     _containerSignalMapper->setMapping(container,container);
 
+    connect( container , SIGNAL(viewRemoved(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)) );
     connect( container , SIGNAL(closeRequest(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)) );
-
     connect( container , SIGNAL(activeViewChanged(QWidget*)) , this , SLOT(viewActivated(QWidget*)));
     
     return container;
@@ -422,6 +427,9 @@ void ViewManager::viewCloseRequest(QWidget* view)
     {
         kDebug() << __FILE__ << __LINE__ << ": received close request from unknown view." << endl;
     }
+
+    qDebug() << "Closing view";
+    focusActiveView();
 }
 
 void ViewManager::merge(ViewManager* otherManager)

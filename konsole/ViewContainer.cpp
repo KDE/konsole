@@ -52,7 +52,6 @@ using namespace Konsole;
 ViewContainer::~ViewContainer()
 {
     emit destroyed(this);
-
 }
 void ViewContainer::addView(QWidget* view , ViewProperties* item)
 {
