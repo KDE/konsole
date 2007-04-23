@@ -126,6 +126,10 @@ signals:
      */
     void viewPropertiesChanged(const QList<ViewProperties*>& propertiesList);
 
+    // internal
+    // 'multipleViews' - true if the manager has multiple containers or false otherwise
+    void splitViewToggle(bool multipleViews);
+
 private slots:
     // called when the "Split View Left/Right" menu item is selected
     void splitLeftRight();
@@ -168,6 +172,7 @@ private:
     void focusActiveView();
     void registerView(TerminalDisplay* view);
     void unregisterView(TerminalDisplay* view);
+  
     // takes a view from a view container owned by a different manager and places it in 
     // newContainer owned by this manager
     void takeView(ViewManager* otherManager , ViewContainer* otherContainer, ViewContainer* newContainer, TerminalDisplay* view); 
@@ -175,6 +180,9 @@ private:
     
     // creates a new container which can hold terminal displays
     ViewContainer* createContainer();
+    // removes a container and emits appropriate signals
+    void removeContainer(ViewContainer* container);
+
     // creates a new terminal display
     TerminalDisplay* createTerminalDisplay();
     // applies the view-specific settings such as colour scheme associated

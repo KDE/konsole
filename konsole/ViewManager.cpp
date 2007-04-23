@@ -116,13 +116,17 @@ void ViewManager::setupActions()
 
         KAction* closeActiveAction = new KAction( i18n("Close Active") , this );
         closeActiveAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_S) );
+        closeActiveAction->setEnabled(false);
         collection->addAction("close-active-view",closeActiveAction);
         connect( closeActiveAction , SIGNAL(triggered()) , this , SLOT(closeActiveView()) );
-
+        connect( this , SIGNAL(splitViewToggle(bool)) , closeActiveAction , SLOT(setEnabled(bool)) );
+        
         KAction* closeOtherAction = new KAction( i18n("Close Others") , this );
         closeOtherAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_O) );
+        closeOtherAction->setEnabled(false);
         collection->addAction("close-other-views",closeOtherAction);
         connect( closeOtherAction , SIGNAL(triggered()) , this , SLOT(closeOtherViews()) );
+        connect( this , SIGNAL(splitViewToggle(bool)) , closeOtherAction , SLOT(setEnabled(bool)) );
 
         QAction* detachViewAction = collection->addAction("detach-view");
         detachViewAction->setIcon( KIcon("tab-breakoff") );
@@ -205,7 +209,7 @@ void ViewManager::detachActiveView()
     if ( _viewSplitter->containers().count() > 1 && 
          container->views().count() == 0 )
     {
-        delete container;
+        removeContainer(container);
 
         // this will need to be removed if Konsole is modified so the menu item to
         // split the view is no longer one toggle-able item
@@ -271,53 +275,52 @@ void ViewManager::splitTopBottom()
 
 void ViewManager::splitView(Qt::Orientation orientation)
 {
-    if ( true )
+    // iterate over each session which has a view in the current active
+    // container and create a new view for that session in a new container 
+    QListIterator<QWidget*> existingViewIter(_viewSplitter->activeContainer()->views());
+    
+    ViewContainer* container = createContainer(); 
+
+    while (existingViewIter.hasNext())
     {
-        // iterate over each session which has a view in the current active
-        // container and create a new view for that session in a new container 
-        QListIterator<QWidget*> existingViewIter(_viewSplitter->activeContainer()->views());
-        
-        ViewContainer* container = createContainer(); 
+        Session* session = _sessionMap[(TerminalDisplay*)existingViewIter.next()];
+        TerminalDisplay* display = createTerminalDisplay();
+        loadViewSettings(display,session); 
+        ViewProperties* properties = createController(session,display);
 
-        while (existingViewIter.hasNext())
-        {
-            Session* session = _sessionMap[(TerminalDisplay*)existingViewIter.next()];
-            TerminalDisplay* display = createTerminalDisplay();
-            loadViewSettings(display,session); 
-            ViewProperties* properties = createController(session,display);
+        _sessionMap[display] = session;
 
-            _sessionMap[display] = session;
-
-            container->addView(display,properties);
-            session->addView( display );
-        }
-
-        _viewSplitter->addContainer(container,orientation);
+        container->addView(display,properties);
+        session->addView( display );
     }
-    else
-    {
-        // delete the active container when unsplitting the view unless it is the last
-        // one
-        if ( _viewSplitter->containers().count() > 1 )
-        {
-            ViewContainer* container = _viewSplitter->activeContainer();
-        
-            delete container;
-        }
-    }
+
+    _viewSplitter->addContainer(container,orientation);
+    emit splitViewToggle(_viewSplitter->containers().count() > 0);
+
+    // focus the new container
+    container->containerWidget()->setFocus();
 
     // ensure that the active view is focused after the split / unsplit
     _viewSplitter->activeContainer()->activeView()->setFocus(Qt::OtherFocusReason);
 }
-
+void ViewManager::removeContainer(ViewContainer* container)
+{
+    delete container;
+    emit splitViewToggle(_viewSplitter->containers().count() > 1);
+}
 void ViewManager::closeActiveView()
 {
-    ViewContainer* container = _viewSplitter->activeContainer();
-    delete container;
+    // only do something if there is more than one container active
+    if ( _viewSplitter->containers().count() > 1 )
+    {
+        ViewContainer* container = _viewSplitter->activeContainer();
 
-    // focus next container so that user can continue typing 
-    // without having to manually focus it themselves
-    nextContainer();
+        removeContainer(container);
+
+        // focus next container so that user can continue typing 
+        // without having to manually focus it themselves
+        nextContainer();
+    }
 }
 void ViewManager::closeOtherViews()
 {
@@ -350,6 +353,7 @@ void ViewManager::createView(Session* session)
     if (_viewSplitter->containers().count() == 0)
     {
         _viewSplitter->addContainer( createContainer() , Qt::Vertical );
+        emit splitViewToggle(false);
     }
 
     // notify this view manager when the session finishes so that its view

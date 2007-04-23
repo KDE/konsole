@@ -3,6 +3,7 @@
 <kpartgui name="session">
     <MenuBar>
         <Menu name="file"><text>File</text>
+            <Action name="save-session" group="session-operations" />
             <Action name="close-session" group="session-operations"/>
         </Menu>
         <Menu name="edit"><text>Edit</text>
@@ -32,6 +33,9 @@
             <Action name="increase-text-size"/>
             <Action name="decrease-text-size"/>
         </Menu>
+        <Menu name="settings"><text>Settings</text>
+            <Action name="terminal-options"/>
+        </Menu>
         <!--<Menu name="debug"><text>Debug</text>
             <Action name="debug-process"/>
         </Menu>!-->
@@ -42,7 +46,7 @@
         <Action name="clear-history-and-reset"/>
         <Separator/>
         <Action name="show-menubar"/>
-        <Action name="edit-current-session" />
+        <Action name="terminal-options" />
         <Separator/>
         <Action name="close-session"/>
     </Menu>

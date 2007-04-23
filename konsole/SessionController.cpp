@@ -234,6 +234,12 @@ void SessionController::setupActions()
     KToggleAction* toggleAction = 0;
     KActionCollection* collection = actionCollection();
 
+    // Save Session
+    action = collection->addAction("save-session");
+    action->setIcon( KIcon("save") );
+    action->setText( i18n("&Save Session") );
+    connect( action , SIGNAL(triggered()) , this , SLOT(saveSession()) );
+
     // Close Session
     action = collection->addAction("close-session"); 
     action->setIcon( KIcon("window-close") ); // FIXME: Not the best icon for this
@@ -330,10 +336,10 @@ void SessionController::setupActions()
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_X) );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearHistoryAndReset()) );
 
-    // Edit Session
-    action = collection->addAction("edit-current-session");
-    action->setText( i18n("Edit Current Session...") );
-    connect( action , SIGNAL(triggered()) , this , SLOT(editCurrentSession()) );
+    // Terminal Options 
+    action = collection->addAction("terminal-options");
+    action->setText( i18n("Terminal Options...") );
+    connect( action , SIGNAL(triggered()) , this , SLOT(showTerminalOptions()) );
 
     // debugging tools
     //action = collection->addAction("debug-process");
@@ -380,13 +386,17 @@ void SessionController::debugProcess()
     delete sessionProcess;
 }
 
-void SessionController::editCurrentSession()
+void SessionController::showTerminalOptions()
 {
     EditSessionDialog dialog(_view);
     dialog.setSessionType(_session->type());
     int result = dialog.exec();
 }
-
+void SessionController::saveSession()
+{
+    //SaveSessionDialog dialog(_view);
+    //int result = dialog.exec();
+}
 void SessionController::closeSession()
 {
     _session->closeSession();

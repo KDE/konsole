@@ -30,6 +30,7 @@ class QStringList;
 
 namespace Konsole
 {
+class Session;
 class SessionController;
 class ViewManager;
 
@@ -72,10 +73,12 @@ protected:
     virtual bool openFile();
 
 private slots:
+    
     // creates a new session using the specified key.
     // call the run() method on the returned Session instance to begin the session
     Session* createSession(const QString& key);
     void activeViewChanged(SessionController* controller);
+
 private:
     ViewManager* _viewManager;
     SessionController* _pluggedController;

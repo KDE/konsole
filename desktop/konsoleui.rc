@@ -22,10 +22,12 @@
         <Menu name="view"><text>View</text>
             <DefineGroup name="session-view-operations"/> 
             <Separator/>
+            <Menu name="view-split"><text>Split View</text>
             <Action name="split-view-left-right"/>
             <Action name="split-view-top-bottom"/>
             <Action name="close-active-view"/>
             <Action name="close-other-views"/>
+            </Menu>
             <Separator/>
             <Action name="detach-view"/>
             <Action name="merge-windows"/>

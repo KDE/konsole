@@ -40,6 +40,68 @@ namespace Konsole
 
 class Session;
 
+/** Replacement for SessionInfo */
+class SessionSettings 
+{
+public:
+    enum Property
+    {
+        // General session options
+        Name,
+        Title,
+        Icon,
+        Command,
+        Arguments,
+        Environment,
+        Directory,
+
+        // Appearence
+        Font,
+        ColorScheme,
+
+        // Keyboard
+        KeyBindings,
+
+        // Terminal Features
+        SelectWordCharacters
+        
+    };
+
+    virtual ~SessionSettings() {}
+
+    /** Returns the current value of the specified @p property. */
+    virtual QVariant property(Property property);
+    /** Sets the value of the specified @p property to @p value. */
+    virtual void setProperty(Property property,const QVariant& value);
+
+
+    //
+    // Convenience methods for property() and setProperty() go here
+    //
+
+    /** 
+     * Returns the element from the Property enum associated with the 
+     * specified @p name.
+     */
+    static Property lookupByName(QString name);
+    /**
+     * Returns the string names associated with the specified @p property from
+     * the Property enum, in the order the associations were created using
+     * registerName()
+     */
+    static QList<QString> namesForProperty(Property property); 
+    /**
+     * Adds an association between a string @p name and a @p property.
+     * Subsequent calls to lookupByName() with @p name as the argument
+     * will return @p property.
+     */
+    static void registerName(Property property , const QString& name); 
+
+private:
+    static QHash<QString,Property> _propertyNames;
+    static QHash<Property,QVariant> _propertyValues;
+};
+
 /** 
  * Provides information about a type of 
  * session, including the title of the session

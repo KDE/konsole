@@ -108,7 +108,7 @@ private slots:
     void paste();
     void clear();
     void clearAndReset();
-    void editCurrentSession();
+    void showTerminalOptions();
     void searchHistory();
     void searchHistory(bool showSearchBar);
     void findNextInHistory();
@@ -122,6 +122,7 @@ private slots:
     void monitorSilence(bool monitor);
     void increaseTextSize();
     void decreaseTextSize();
+    void saveSession();
     void sendInputToAll();
 
     // other
