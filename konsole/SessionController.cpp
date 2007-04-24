@@ -15,6 +15,7 @@
 #include "Filter.h"
 #include "HistorySizeDialog.h"
 #include "IncrementalSearchBar.h"
+#include "ScreenWindow.h"
 #include "Session.h"
 #include "TerminalDisplay.h"
 #include "SessionController.h"
@@ -477,10 +478,10 @@ void SessionController::searchHistory(bool showSearchBar)
                 searchTextChanged(currentSearchText);
             }
 
-            //SessionTask* task = new SearchHistoryTask();
-            //task->setAutoDelete(true);
-            //task->addSession( _session );
-            //task->execute();
+            SessionTask* task = new SearchHistoryTask(_view->screenWindow());
+            task->setAutoDelete(true);
+            task->addSession( _session );
+            task->execute();
         }
         else
         {
@@ -495,6 +496,10 @@ void SessionController::searchHistory(bool showSearchBar)
 }
 void SessionController::searchTextChanged(const QString& text)
 {
+    beginSearch(text , SearchHistoryTask::Forwards);
+}
+void SessionController::beginSearch(const QString& text , int direction)
+{
     Q_ASSERT( _searchBar );
 
     Qt::CaseSensitivity caseHandling = _searchBar->matchCase() ? Qt::CaseSensitive : Qt::CaseInsensitive;
@@ -504,12 +509,12 @@ void SessionController::searchTextChanged(const QString& text)
 
     if ( !regExp.isEmpty() )
     {
-        SearchHistoryTask* task = new SearchHistoryTask(this); 
+        SearchHistoryTask* task = new SearchHistoryTask(_view->screenWindow(),this); 
        
         task->setRegExp(regExp);
         task->setMatchCase( _searchBar->matchCase() );
         task->setMatchRegExp( _searchBar->matchRegExp() );
-        task->setSearchDirection( SearchHistoryTask::Forwards ); 
+        task->setSearchDirection( (SearchHistoryTask::SearchDirection)direction ); 
         task->setAutoDelete(true);
         task->addSession( _session );   
         task->execute();
@@ -533,11 +538,11 @@ void SessionController::searchTextChanged(const QString& text)
 }
 void SessionController::findNextInHistory()
 {
-    qDebug() << "find next";
+    beginSearch(_searchBar->searchText(),SearchHistoryTask::Forwards);
 }
 void SessionController::findPreviousInHistory()
 {
-    qDebug() << "find previous";
+    beginSearch(_searchBar->searchText(),SearchHistoryTask::Backwards);
 }
 void SessionController::historyOptions()
 {
@@ -862,19 +867,122 @@ void SearchHistoryTask::execute()
     Q_ASSERT( sessions().first() );
 
     Emulation* emulation = sessions().first()->emulation();
-
+    
     if ( !_regExp.isEmpty() )
     {
-        emulation->findTextBegin();
-        emulation->findTextNext(_regExp.pattern() , true , false , false );
+        const int startLine = _screenWindow->currentLine();
+
+        int pos = -1;
+        int findPos = -1;
+        const bool forwards = ( _direction == Forwards );
+        const int lastLine = _screenWindow->lineCount() - 1;
+        QString string;
+
+        //text stream to read history into string for pattern or regular expression searching
+        QTextStream searchStream(&string);
+
+        PlainTextDecoder decoder;
+
+        //setup first and last lines depending on search direction
+        int line = startLine;
+
+        //read through and search history in blocks of 10K lines.
+        //this balances the need to retrieve lots of data from the history each time (for efficient searching)
+        //without using silly amounts of memory if the history is very large.    
+        const int maxDelta = qMin(_screenWindow->lineCount(),10000);
+        int delta = forwards ? maxDelta : -maxDelta;
+
+        //setup case sensitivity and regular expression if enabled
+        _regExp.setCaseSensitivity( _matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive );
+
+        if (_matchRegExp)
+            _regExp.setPatternSyntax(QRegExp::RegExp);
+        else
+            _regExp.setPatternSyntax(QRegExp::FixedString);
+
+        int endLine = -1;
+        bool hasWrapped = false;  // set to true when we reach the top/bottom
+                                  // of the output and continue from the other
+                                  // end
+
+        //loop through history in blocks of <delta> lines.
+        while ( endLine != startLine )
+        {
+            QApplication::processEvents();
+
+            // calculate lines to search in this iteration
+            if ( hasWrapped )
+            {
+                if ( endLine == lastLine )
+                    line = 0;
+                else if ( endLine == 0 )
+                    line = lastLine;
+
+                endLine += delta;
+
+                if ( forwards )
+                   endLine = qMin( startLine , endLine );
+                else 
+                   endLine = qMax( startLine , endLine );
+            }
+            else
+            {
+                endLine += delta;
+                
+                if ( endLine > lastLine )
+                {
+                    hasWrapped = true;
+                    endLine = lastLine;  
+                } else if ( endLine < 0 )
+                {
+                    hasWrapped = true;
+                    endLine = 0;
+                }
+            }
+
+            //qDebug() << "Searching lines " << qMin(endLine,line) << " to " << qMax(endLine,line);
+            emulation->writeToStream(&searchStream,&decoder, qMin(endLine,line) , qMax(endLine,line) );
+
+            //qDebug() << "Stream contents length: " << string;
+            pos = -1;
+            if (forwards)
+                pos = string.indexOf(_regExp);
+            else
+                pos = string.lastIndexOf(_regExp);
+
+            //if a match is found, position the cursor on that line and update the screen
+            if ( pos != -1 )
+            {
+                //work out how many lines into the current block of text the search result was found
+                //- looks a little painful, but it only has to be done once per search.
+                findPos = qMin(line,endLine) + string.left(pos + 1).count(QChar('\n'));
+                
+                qDebug() << "Found result at line " << findPos;
+
+                //update display to show area of history containing selection	
+                _screenWindow->scrollTo(findPos);
+
+                //qDebug() << "Current line " << _screenWindow->currentLine();
+                _screenWindow->setTrackOutput(false);
+                _screenWindow->notifyOutputChanged();
+                //qDebug() << "Post update current line " << _screenWindow->currentLine();
+
+                return;
+            }
+
+            //clear the current block of text and move to the next one
+            string.clear();	
+            line = endLine;
+        }
     }
 }
 
-SearchHistoryTask::SearchHistoryTask(QObject* parent)
+SearchHistoryTask::SearchHistoryTask(ScreenWindow* window , QObject* parent)
     : SessionTask(parent)
     , _matchRegExp(false)
     , _matchCase(false)
     , _direction(Forwards)
+    , _screenWindow(window)
 {
 
 }

@@ -30,6 +30,7 @@ namespace Konsole
 {
 
 class Session;
+class ScreenWindow;
 class TerminalDisplay;
 class IncrementalSearchBar;
 class UrlFilter;
@@ -142,6 +143,11 @@ private slots:
     void debugProcess();
 
 private:
+    // begins the search
+    // text - pattern to search for
+    // direction - value from SearchHistoryTask::SearchDirection enum to specify
+    //             the search direction
+    void beginSearch(const QString& text , int direction);
     void setupActions();
     void removeSearchFilter(); // remove and delete the current search filter if set
 
@@ -266,13 +272,6 @@ class SearchHistoryThread;
  * TODO - Implementation requirements:
  *          Must provide progress feedback to the user when searching very large output logs.
  *
- *          Multi-threading?
- *          - The search is performed asynchronously in another thread when execute() is called.
- *            *** Not done yet - currently we do everything in the main thread and rely on calling QApplication::processEvents() every so often
- *                inside Emulation::findTextNext() to prevent the interface from becoming unresponsive.
- *                The actual searching is currently done in the Emulation class and was not originally designed with multi-threading in mind.
- *
- *
  *          - Remember where the search got to when it reaches the end of the output in each session
  *            calling execute() subsequently should continue the search.
  *            This allows the class to be used for both the "Search history for text" 
@@ -291,7 +290,7 @@ public:
         Backwards  
     };
 
-    SearchHistoryTask(QObject* parent = 0);
+    SearchHistoryTask(ScreenWindow* window , QObject* parent = 0);
 
     /** Sets the regular expression which is searched for when execute() is called */
     void setRegExp(const QRegExp& regExp);
@@ -325,6 +324,8 @@ private:
     bool _matchRegExp;
     bool _matchCase;
     SearchDirection _direction;
+
+    ScreenWindow* _screenWindow;
 
     static QPointer<SearchHistoryThread> _thread;
 };

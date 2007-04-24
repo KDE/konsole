@@ -27,6 +27,7 @@ class QCheckBox;
 class QLabel;
 class QLineEdit;
 class QProgressBar;
+class QTimer;
 
 namespace Konsole
 {
@@ -173,6 +174,9 @@ signals:
 protected:
     virtual bool eventFilter( QObject* watched , QEvent* event );
 
+private slots:
+    void notifySearchChanged();
+
 private:
     bool _foundMatch;
     QCheckBox* _matchCaseBox;
@@ -183,6 +187,7 @@ private:
     QLabel* _continueLabel;
     QProgressBar* _progress;
 
+    QTimer* _searchTimer;
 };
 
 };

@@ -1678,7 +1678,7 @@ void TerminalDisplay::setScroll(int cursor, int slines)
   }
 
   disconnect(_scrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
-  _scrollBar->setRange(0,slines);
+  _scrollBar->setRange(0,slines - _lines);
   _scrollBar->setSingleStep(1);
   _scrollBar->setPageStep(_lines);
   _scrollBar->setValue(cursor);

@@ -24,6 +24,7 @@
 #include <QLineEdit>
 #include <QProgressBar>
 #include <QShowEvent>
+#include <QTimer>
 #include <QToolButton>
 
 // KDE
@@ -67,7 +68,11 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     _searchEdit->setMinimumWidth(maxWidth*6);
     _searchEdit->setMaximumWidth(maxWidth*10);
 
-    connect( _searchEdit , SIGNAL(textChanged(const QString&)) , this , SIGNAL(searchChanged(const QString&)));
+    _searchTimer = new QTimer(this);
+    _searchTimer->setInterval(250);
+    _searchTimer->setSingleShot(true);
+    connect( _searchTimer , SIGNAL(timeout()) , this , SLOT(notifySearchChanged()) );
+    connect( _searchEdit , SIGNAL(textChanged(const QString&)) , _searchTimer , SLOT(start()));
 
     QToolButton* findNext = new QToolButton(this);
     findNext->setObjectName("find-next-button");
@@ -141,7 +146,10 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
 
     setLayout(layout);
 }
-
+void IncrementalSearchBar::notifySearchChanged()
+{
+    emit searchChanged( searchText() );
+}
 QString IncrementalSearchBar::searchText()
 {
     return _searchEdit->text();

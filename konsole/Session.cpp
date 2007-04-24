@@ -621,7 +621,11 @@ const QString& Session::title() const
 
 void Session::setIconName(const QString& iconName)
 {
-  _iconName = iconName;
+    if ( iconName != _iconName )
+    {
+        _iconName = iconName;
+        emit updateTitle();
+    }
 }
 
 void Session::setIconText(const QString& iconText)

@@ -109,25 +109,6 @@ public:
   /** Sets the codec used to decode incoming characters.  */
   void setCodec(const QTextCodec *);
 
-  /** 
-   * Initiates a text-search of the output history.  This sets the current search position
-   * to the start of the output 
-   */
-  virtual void findTextBegin();
-  /** 
-   * Searches the output history for the next occurrence of a particular string or pattern and 
-   * scrolls the the screen to the first occurrence found.
-   *
-   * @param str The string or pattern to search for within the output history
-   * @param forward @c true to search forward or @c false to search backwards in the output history.
-   * @param caseSensitive @c true for a case-sensitive search or @c false for a case-insensitive search.
-   * @param regExp @c true to treat @p str as a regular expression or @c false to treat
-   * str as plain text.
-   *
-   * @returns true if a match is found or false otherwise.
-   */ 
-  virtual bool findTextNext( const QString &str, bool forward, bool caseSensitive, bool regExp );
-
 public Q_SLOTS: // signals incoming from TerminalDisplay
 
   /** Change the size of the emulation's image */
@@ -281,9 +262,6 @@ private:
   QTimer bulk_timer1;
   QTimer bulk_timer2;
   
-  int    m_findPos;
-
-
 };
 
 };

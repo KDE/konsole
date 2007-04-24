@@ -103,7 +103,7 @@ int ScreenWindow::windowColumns() const
 
 int ScreenWindow::lineCount() const
 {
-    return _screen->getHistLines();
+    return _screen->getHistLines() + _screen->getLines();
 }
 
 int ScreenWindow::columnCount() const
@@ -130,6 +130,9 @@ void ScreenWindow::scrollBy( RelativeScrollMode mode , int amount )
 
 void ScreenWindow::scrollTo( int line )
 {
+    if ( (lineCount() - windowLines()) < line )
+       line = qMax(0,lineCount() - windowLines()); 
+
     const int delta = line - _currentLine;
 
     _currentLine = line;

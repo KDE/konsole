@@ -108,8 +108,7 @@ Emulation::Emulation() :
   listenToKeyPress(false),
   m_codec(0),
   decoder(0),
-  keytrans(0),
-  m_findPos(-1)
+  keytrans(0)
 {
 
   //initialize screens with a default size
@@ -426,109 +425,6 @@ int Emulation::lines()
 {
     // sum number of lines currently on screen plus number of lines in history
     return currentScreen->getLines() + currentScreen->getHistLines();
-}
-
-void Emulation::findTextBegin()
-{
-  m_findPos = -1;
-}
-
-bool Emulation::findTextNext( const QString &str, bool forward, bool isCaseSensitive, bool isRegExp )
-{
-  int pos = -1;
-  QString string;
-
-  //text stream to read history into string for pattern or regular expression searching
-  QTextStream searchStream(&string);
-
-  PlainTextDecoder decoder;
- 
-  //setup first and last lines depending on search direction
-  int line = 0;
-  if (forward)
-  	line = (m_findPos == -1 ? 0 : m_findPos+1);
-  else
-	line = (m_findPos == -1? (currentScreen->getHistLines()+currentScreen->getLines() ):m_findPos-1);
-
-  int lastLine = 0;
-  if (forward)
-		  lastLine = currentScreen->getHistLines() + currentScreen->getLines();
-  else
-		  lastLine = 0;
-		
-  //read through and search history in blocks of 10K lines.
-  //this balances the need to retrieve lots of data from the history each time (for efficient searching)
-  //without using silly amounts of memory if the history is very large.    
-  int delta = forward ? 10000 : -10000;
-
-  //setup case sensitivity and regular expression if enabled
-  Qt::CaseSensitivity caseSensitivity = isCaseSensitive ? Qt::CaseSensitive : Qt::CaseInsensitive;
-  QRegExp regExp;
-
-  if (isRegExp)
-		  regExp = QRegExp(str,caseSensitivity);
-  
-  //loop through history in blocks of <delta> lines.
-  while ( line != lastLine )
-  {
-    QApplication::processEvents();
-
-	int endLine = 0;
-	if (forward)
-		endLine = qMin(line+delta,lastLine);
-	else
-		endLine = qMax(line+delta,lastLine);
-		  
-	currentScreen->writeToStream(&searchStream,&decoder, qMin(endLine,line) , qMax(endLine,line) );
-
-	pos = -1;
-		
-	if (forward)
-	{
-		if (isRegExp)
-				pos = string.indexOf(regExp);
-		else
-				pos = string.indexOf(str,0,caseSensitivity);
-	}
-	else
-	{
-		if (isRegExp)
-				pos = string.lastIndexOf(regExp);
-		else
-				pos = string.lastIndexOf(str, -1, caseSensitivity);
-	}
-
-	//if a match is found, position the cursor on that line and update the screen
-	if ( pos != -1 )
-	{
-		//work out how many lines into the current block of text the search result was found
-		//- looks a little painful, but it only has to be done once per search.
-		m_findPos = line + string.left(pos + 1).count(QChar('\n'));
-
-//TODO - Reimplement moving active view to focus on current match now that
-//       that multiple views can show different parts of the screen at the same
-//       time.
-//
-//		if ( m_findPos > currentScreen->getHistLines() )
-//				currentScreen->setHistCursor(currentScreen->getHistLines());
-//		else
-//				currentScreen->setHistCursor(m_findPos);
-
-		//cause target line to be selected
-		//currentScreen->getHistoryLine(m_findPos);
-	
-		//update display to show area of history containing selection	
-        showBulk();
-
-		return true;
-	}
-
-	//clear the current block of text and move to the next one
-	string.clear();	
-  	line = endLine;
-  }
-
-  return false;
 }
 
 // Refreshing -------------------------------------------------------------- --

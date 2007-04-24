@@ -23,6 +23,9 @@
 // Qt
 #include <QObject>
 
+// Konsole
+#include "TECommon.h"
+
 namespace Konsole
 {
 
