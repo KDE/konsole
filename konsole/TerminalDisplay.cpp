@@ -1391,9 +1391,17 @@ void TerminalDisplay::paintFilters(QPainter& painter)
         for ( int line = spot->startLine() ; line <= spot->endLine() ; line++ )
         {
             int startColumn = 0;
-            int endColumn = _columns; // TODO use number of _columns which are actually 
-                                     // occupied on this line rather than the width of the 
-                                     // display in _columns
+            int endColumn = _columns-1; // TODO use number of _columns which are actually 
+                                        // occupied on this line rather than the width of the 
+                                        // display in _columns
+
+            // ignore whitespace at the end of the lines
+            while ( QChar(_image[loc(endColumn,line)].character).isSpace() )
+                endColumn--;
+              
+            // increment here because the column which we want to set 'endColumn' to
+            // is the first whitespace character at the end of the line
+            endColumn++;
 
             if ( line == spot->startLine() )
                 startColumn = spot->startColumn();
@@ -1406,7 +1414,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
             // hotspots
             QRect r;
             r.setCoords( startColumn*_fontWidth , line*_fontHeight,
-                             endColumn*_fontWidth  - 1, (line+1)*_fontHeight - 1 ); 
+                             endColumn*_fontWidth - 1, (line+1)*_fontHeight - 1 ); 
                                                                            
             // Links need to be underlined
             if ( spot->type() == Filter::HotSpot::Link )
