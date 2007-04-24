@@ -980,6 +980,10 @@ void SearchHistoryTask::execute()
             line = endLine;
 
         } while ( startLine != endLine );
+
+        // if no match was found, clear selection to indicate this
+        _screenWindow->clearSelection();
+        _screenWindow->notifyOutputChanged();
     }
 }
 

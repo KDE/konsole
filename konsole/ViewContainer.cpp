@@ -369,6 +369,8 @@ TabbedViewContainerV2::TabbedViewContainerV2(QObject* parent) : ViewContainer(pa
     _stackWidget = new QStackedWidget();
     _tabBar = new ViewContainerTabBar();
     _tabBar->setDrawBase(true);
+   
+    connect( _tabBar , SIGNAL(currentChanged(int)) , this , SLOT(currentTabChanged(int)) );
 
     QVBoxLayout* layout = new QVBoxLayout;
     layout->setSpacing(0);
@@ -381,6 +383,11 @@ TabbedViewContainerV2::TabbedViewContainerV2(QObject* parent) : ViewContainer(pa
 TabbedViewContainerV2::~TabbedViewContainerV2()
 {
     _containerWidget->deleteLater();
+}
+void TabbedViewContainerV2::currentTabChanged(int index)
+{
+    _stackWidget->setCurrentIndex(index);
+    emit activeViewChanged(_stackWidget->widget(index));
 }
 QWidget* TabbedViewContainerV2::containerWidget() const
 {

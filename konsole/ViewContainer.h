@@ -239,6 +239,7 @@ protected:
 private slots:
     void updateTitle(ViewProperties* item);
     void updateIcon(ViewProperties* item);
+    void currentTabChanged(int index);
 
 private:
     ViewContainerTabBar* _tabBar;
