@@ -41,6 +41,34 @@
 using namespace Konsole;
 
 SessionManager* SessionManager::_instance = 0;
+QHash<QString,SessionSettings::Property> SessionSettings::_propertyNames;
+
+QVariant SessionSettings::property(Property property) const
+{
+    return _propertyValues[property];
+}
+void SessionSettings::setProperty(Property property , const QVariant& value)
+{
+    _propertyValues.insert(property,value);
+}
+bool SessionSettings::isNameRegistered(const QString& name) 
+{
+    return _propertyNames.contains(name);
+}
+
+SessionSettings::Property SessionSettings::lookupByName(const QString& name)
+{
+    return _propertyNames[name];
+}
+
+QList<QString> SessionSettings::namesForProperty(Property property)
+{
+    return _propertyNames.keys(property);
+}
+void SessionSettings::registerName(Property property , const QString& name)
+{
+    _propertyNames.insert(name,property);
+}
 
 SessionInfo::SessionInfo(const QString& path)
 {

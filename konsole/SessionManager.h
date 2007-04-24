@@ -70,7 +70,7 @@ public:
     virtual ~SessionSettings() {}
 
     /** Returns the current value of the specified @p property. */
-    virtual QVariant property(Property property);
+    virtual QVariant property(Property property) const;
     /** Sets the value of the specified @p property to @p value. */
     virtual void setProperty(Property property,const QVariant& value);
 
@@ -79,11 +79,17 @@ public:
     // Convenience methods for property() and setProperty() go here
     //
 
+    /**
+     * Returns true if @p name has been associated with an element
+     * from the Property enum or false otherwise.
+     */
+    static bool isNameRegistered(const QString& name);
+
     /** 
      * Returns the element from the Property enum associated with the 
      * specified @p name.
      */
-    static Property lookupByName(QString name);
+    static Property lookupByName(const QString& name);
     /**
      * Returns the string names associated with the specified @p property from
      * the Property enum, in the order the associations were created using
@@ -98,8 +104,9 @@ public:
     static void registerName(Property property , const QString& name); 
 
 private:
+    QHash<Property,QVariant> _propertyValues;
+    
     static QHash<QString,Property> _propertyNames;
-    static QHash<Property,QVariant> _propertyValues;
 };
 
 /** 

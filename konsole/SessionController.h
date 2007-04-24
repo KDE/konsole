@@ -122,6 +122,7 @@ private slots:
     void monitorSilence(bool monitor);
     void increaseTextSize();
     void decreaseTextSize();
+    void renameSession();
     void saveSession();
     void sendInputToAll();
 

@@ -607,8 +607,11 @@ void Session::setFontNo(int fn)
 
 void Session::setTitle(const QString& title)
 {
-  _title = title;
-  //kDebug(1211)<<"Session setTitle " <<  _title <<endl;
+    if ( title != _title )
+    {
+        _title = title;
+        emit updateTitle();
+    }
 }
 
 const QString& Session::title() const

@@ -2,6 +2,7 @@
 // KDE
 #include <KAction>
 #include <KIcon>
+#include <KInputDialog>
 #include <KLocale>
 #include <KRun>
 #include <KToggleAction>
@@ -236,7 +237,7 @@ void SessionController::setupActions()
 
     // Save Session
     action = collection->addAction("save-session");
-    action->setIcon( KIcon("save") );
+    action->setIcon( KIcon("document-save") );
     action->setText( i18n("&Save Session") );
     connect( action , SIGNAL(triggered()) , this , SLOT(saveSession()) );
 
@@ -259,6 +260,12 @@ void SessionController::setupActions()
     action->setText( i18n("&Paste") );
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_V) );
     connect( action , SIGNAL(triggered()) , this , SLOT(paste()) );
+
+    // Rename Session
+    action = collection->addAction("rename-session");
+    action->setText( i18n("&Rename Tab") );
+    action->setShortcut( QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_S) );
+    connect( action , SIGNAL(triggered()) , this , SLOT(renameSession()) );
 
     // Send to All
     toggleAction = new KToggleAction(i18n("Send Input to All"),this);
@@ -390,10 +397,22 @@ void SessionController::showTerminalOptions()
 {
     EditSessionDialog dialog(_view);
     dialog.setSessionType(_session->type());
-    int result = dialog.exec();
+    dialog.exec();
+}
+void SessionController::renameSession()
+{
+    bool ok = false;
+    const QString& text = KInputDialog::getText( i18n("Rename Tab") ,
+                                                 i18n("Enter new tab text:") ,
+                                                 _session->title() , 
+                                                 &ok );
+    if ( ok )
+        _session->setTitle(text);
 }
 void SessionController::saveSession()
 {
+    Q_ASSERT(0); // not implemented yet
+
     //SaveSessionDialog dialog(_view);
     //int result = dialog.exec();
 }
@@ -609,7 +628,7 @@ void SessionController::sessionTitleChanged()
        setTitle( _session->title() ); 
 }
 
-void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , int state, int x, int y)
+void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , int /*state*/, int x, int y)
 {
     if ( factory() )
     {
