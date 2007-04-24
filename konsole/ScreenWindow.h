@@ -112,6 +112,14 @@ public:
      */
     void setSelectionEnd( int column , int line ); 
     /**
+     * Retrieves the start of the selection within the window.
+     */
+    void getSelectionStart( int& column , int& line );
+    /**
+     * Retrieves the end of the selection within the window.
+     */
+    void getSelectionEnd( int& column , int& line );
+    /**
      * Returns true if the character at @p line , @p column is part of the selection.
      */
     bool isSelected( int column , int line );

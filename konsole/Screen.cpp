@@ -1243,6 +1243,32 @@ void Screen::clearSelection()
   sel_begin = -1;
 }
 
+void Screen::getSelectionStart(int& column , int& line)
+{
+    if ( sel_TL != -1 )
+    {
+        column = sel_TL % columns;
+        line = sel_TL / columns; 
+    }
+    else
+    {
+        column = cuX + getHistLines();
+        line = cuY + getHistLines();
+    }
+}
+void Screen::getSelectionEnd(int& column , int& line)
+{
+    if ( sel_BR != -1 )
+    {
+        column = sel_BR % columns;
+        line = sel_BR / columns;
+    }
+    else
+    {
+        column = cuX + getHistLines();
+        line = cuY + getHistLines();
+    } 
+}
 void Screen::setSelectionStart(/*const ScreenCursor& viewCursor ,*/ const int x, const int y, const bool mode)
 {
 //  kDebug(1211) << "setSelBeginXY(" << x << "," << y << ")" << endl;

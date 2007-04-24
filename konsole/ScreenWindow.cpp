@@ -62,6 +62,16 @@ QString ScreenWindow::selectedText( bool preserveLineBreaks ) const
     return _screen->selectedText( preserveLineBreaks );
 }
 
+void ScreenWindow::getSelectionStart( int& column , int& line )
+{
+    _screen->getSelectionStart(column,line);
+    line -= _currentLine;
+}
+void ScreenWindow::getSelectionEnd( int& column , int& line )
+{
+    _screen->getSelectionEnd(column,line);
+    line -= _currentLine;
+}
 void ScreenWindow::setSelectionStart( int column , int line , bool columnMode )
 {
     /* FIXME - I'm not sure what the columnmode parameter ( the last argument to setSelectionStart )

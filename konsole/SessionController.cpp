@@ -868,13 +868,17 @@ void SearchHistoryTask::execute()
 
     Emulation* emulation = sessions().first()->emulation();
     
+    int selectionColumn = 0;
+    int selectionLine = 0;
+
+    _screenWindow->getSelectionEnd(selectionColumn , selectionLine);
+
     if ( !_regExp.isEmpty() )
     {
-        const int startLine = _screenWindow->currentLine();
-
         int pos = -1;
         int findPos = -1;
         const bool forwards = ( _direction == Forwards );
+        const int startLine = selectionLine + _screenWindow->currentLine() + ( forwards ? 1 : -1 );
         const int lastLine = _screenWindow->lineCount() - 1;
         QString string;
 
@@ -900,13 +904,13 @@ void SearchHistoryTask::execute()
         else
             _regExp.setPatternSyntax(QRegExp::FixedString);
 
-        int endLine = -1;
+        int endLine = line;
         bool hasWrapped = false;  // set to true when we reach the top/bottom
                                   // of the output and continue from the other
                                   // end
 
         //loop through history in blocks of <delta> lines.
-        while ( endLine != startLine )
+        do
         {
             QApplication::processEvents();
 
@@ -961,7 +965,8 @@ void SearchHistoryTask::execute()
 
                 //update display to show area of history containing selection	
                 _screenWindow->scrollTo(findPos);
-
+                _screenWindow->setSelectionStart( 0 , findPos - _screenWindow->currentLine() , false );
+                _screenWindow->setSelectionEnd( _screenWindow->columnCount() , findPos - _screenWindow->currentLine() );
                 //qDebug() << "Current line " << _screenWindow->currentLine();
                 _screenWindow->setTrackOutput(false);
                 _screenWindow->notifyOutputChanged();
@@ -973,7 +978,8 @@ void SearchHistoryTask::execute()
             //clear the current block of text and move to the next one
             string.clear();	
             line = endLine;
-        }
+
+        } while ( startLine != endLine );
     }
 }
 

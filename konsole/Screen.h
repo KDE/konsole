@@ -233,7 +233,19 @@ public: // these are all `Screen' operations
      * @param line The line index of the last character in the selection. 
      */ 
     void setSelectionEnd(/*const ScreenCursor& cursor ,*/ const int column, const int line);
+   
+    /**
+     * Retrieves the start of the selection or the cursor position if there
+     * is no selection.
+     */
+    void getSelectionStart(int& column , int& line);
     
+    /**
+     * Retrieves the end of the selection or the cursor position if there
+     * is no selection.
+     */
+    void getSelectionEnd(int& column , int& line);
+
     /** Clears the current selection */
     void clearSelection();
 
