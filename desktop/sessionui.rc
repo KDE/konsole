@@ -9,6 +9,7 @@
         <Menu name="edit"><text>Edit</text>
             <Action name="copy" group="session-edit-operations" />
             <Action name="paste" group="session-edit-operations" />
+            <Action name="rename-session" group="session-edit-operations" />
             <Separator group="session-edit-operations"/>
             <Action name="send-input-to-all" group="session-edit-operations"/>
             <Separator group="session-edit-operations"/>

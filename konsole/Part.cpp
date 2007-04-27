@@ -21,6 +21,7 @@
 #include <QStringList>
 
 // KDE
+#include <KMenuBar>
 #include <KXMLGUIFactory>
 
 // Konsole
@@ -31,6 +32,7 @@
 #include "SessionController.h"
 #include "SessionManager.h"
 #include "ViewManager.h"
+#include "MainWindow.h"
 
 extern "C"
 {
@@ -66,6 +68,10 @@ Part::Part(QObject* parent)
 
     // create window and session for part
     _viewManager = new ViewManager(this,actionCollection());
+    //MainWindow* window = new MainWindow();
+    //window->menuBar()->setVisible(false);
+  //  _viewManager = window->viewManager();
+
     connect( _viewManager , SIGNAL(activeViewChanged(SessionController*)) , this ,
            SLOT(activeViewChanged(SessionController*)) ); 
     createSession( QString() );

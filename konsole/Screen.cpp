@@ -87,7 +87,7 @@ Screen::Screen(int l, int c)
   
   lineProperties.resize(lines+1);
   for (int i=0;i<lines+1;i++)
-          lineProperties[i]=0;
+          lineProperties[i]=LINE_DEFAULT;
 
   initTabStops();
   clearSelection();
@@ -432,7 +432,7 @@ void Screen::resizeImage(int new_lines, int new_columns)
    
   lineProperties.resize(new_lines+1);
   for (int i=lines;(i > 0) && (i<new_lines+1);i++)
-          lineProperties[i] = 0;
+          lineProperties[i] = LINE_DEFAULT;
 
   clearSelection();
  
@@ -627,7 +627,7 @@ QVector<LineProperty> Screen::getCookedLineProperties( int startLine )
   
 	  if (hist->isWrappedLine(y+viewHistoryCursor))
 	  {
-	  	result[y] = result[y] | LINE_WRAPPED;
+	  	result[y] = (LineProperty)(result[y] | LINE_WRAPPED);
 	  }
   }
   
@@ -773,7 +773,7 @@ void Screen::ShowCharacter(unsigned short c)
 
   if (cuX+w > columns) {
     if (getMode(MODE_Wrap)) {
-      lineProperties[cuY] |= LINE_WRAPPED;
+      lineProperties[cuY] = (LineProperty)(lineProperties[cuY] | LINE_WRAPPED);
       NextLine();
     }
     else
@@ -1471,7 +1471,7 @@ void Screen::copyLineToStream(int line , int start, int count,
 						break;
 		
 		//decode line and write to text stream	
-		decoder->decodeLine( (Character*) characterBuffer , count, 0 , stream);
+		decoder->decodeLine( (Character*) characterBuffer , count, LINE_DEFAULT , stream);
 }
 
 // Method below has been removed because of its reliance on 'histCursor'
@@ -1587,10 +1587,10 @@ void Screen::setLineProperty(LineProperty property , bool enable)
 {
 	if ( enable )
 	{
-		lineProperties[cuY] |= property;
+		lineProperties[cuY] = (LineProperty)(lineProperties[cuY] | property);
 	}
 	else
 	{
-		lineProperties[cuY] &= ~property;
+		lineProperties[cuY] = (LineProperty)(lineProperties[cuY] & ~property);
 	}
 }

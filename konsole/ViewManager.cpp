@@ -184,7 +184,6 @@ void ViewManager::previousView()
 
     container->activatePreviousView();
 }
-
 void ViewManager::detachActiveView()
 {
     // find the currently active view and remove it from its container 

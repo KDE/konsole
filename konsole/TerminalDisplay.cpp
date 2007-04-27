@@ -1465,11 +1465,13 @@ void TerminalDisplay::paintContents(QPainter &paint, const QRect &rect)
       int len = 1;
       int p = 0;
 
+      // is this a single character or a sequence of characters ?
       if ( _image[loc(x,y)].rendition & RE_EXTENDED_CHAR )
       {
-        ushort extendedCharLength;
+        // sequence of characters
+        ushort extendedCharLength = 0;
         ushort* chars = ExtendedCharTable::instance
-                            .lookupExtendedChar(_image[loc(x,y)].character,extendedCharLength);
+                            .lookupExtendedChar(_image[loc(x,y)].charSequence,extendedCharLength);
         for ( int index = 0 ; index < extendedCharLength ; index++ ) 
         {
             Q_ASSERT( p < bufferSize );
@@ -1478,6 +1480,7 @@ void TerminalDisplay::paintContents(QPainter &paint, const QRect &rect)
       }
       else
       {
+        // single character
         c = _image[loc(x,y)].character;
         if (c)
         {

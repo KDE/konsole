@@ -92,6 +92,12 @@ signals:
      */
     void focused( SessionController* controller );
 
+    /**
+     * Emitted when the user enables the "Send Input to All" menu
+     * item associated with this session.
+     */
+    void sendInputToAll(bool sendToAll);
+
 public slots:
     /**
      * Issues a command to the session to navigate to the specified URL.
@@ -125,7 +131,6 @@ private slots:
     void decreaseTextSize();
     void renameSession();
     void saveSession();
-    void sendInputToAll();
 
     // other
     void showDisplayContextMenu(TerminalDisplay* display , int state , int x , int y);

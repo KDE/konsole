@@ -281,7 +281,13 @@ public:
             UINT8  _r = DEFAULT_RENDITION)
        : character(_c), rendition(_r), foregroundColor(_f), backgroundColor(_b) {}
 public:
-  UINT16 character; // character
+
+  union
+  {
+    UINT16 character; // a single unicode character
+    UINT16 charSequence; // index into a table of unicode character sequences
+  };
+
   UINT8  rendition; // rendition
   CharacterColor  foregroundColor; // foreground color
   CharacterColor  backgroundColor; // background color

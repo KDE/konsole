@@ -271,7 +271,7 @@ void SessionController::setupActions()
     // Send to All
     toggleAction = new KToggleAction(i18n("Send Input to All"),this);
     action = collection->addAction("send-input-to-all",toggleAction);
-    connect( action , SIGNAL(triggered()) , this , SLOT(sendInputToAll()) );
+    connect( action , SIGNAL(toggled(bool)) , this , SIGNAL(sendInputToAll(bool)) );
 
     // Clear and Clear+Reset
     action = collection->addAction("clear");
@@ -607,10 +607,6 @@ void SessionController::decreaseTextSize()
     _view->setVTFont(font);
 
     //TODO - Save this setting as a session default
-}
-void SessionController::sendInputToAll()
-{
-    Q_ASSERT(0); // Not implemented yet
 }
 void SessionController::monitorActivity(bool monitor)
 {

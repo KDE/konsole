@@ -125,7 +125,7 @@ void TerminalImageFilterChain::addImage(const Character* const image , int lines
 
     for (int i=0 ; i < lines ; i++)
     {
-        decoder.decodeLine(image + i*columns,columns,0,&lineStream);
+        decoder.decodeLine(image + i*columns,columns,LINE_DEFAULT,&lineStream);
         addLine(line);
         line.clear();
     }
