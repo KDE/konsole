@@ -303,7 +303,7 @@ void ViewManager::splitView(Qt::Orientation orientation)
 }
 void ViewManager::removeContainer(ViewContainer* container)
 {
-    delete container;
+    container->deleteLater();
     emit splitViewToggle(_viewSplitter->containers().count() > 1);
 }
 void ViewManager::closeActiveView()
@@ -420,7 +420,7 @@ void ViewManager::viewCloseRequest(QWidget* view)
     Session* session = _sessionMap[ display ];
     if ( session )
     {
-        delete display;
+        display->deleteLater();
         
         if ( session->views().count() == 0 )
             session->closeSession();

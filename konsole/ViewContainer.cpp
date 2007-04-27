@@ -72,23 +72,26 @@ void ViewContainer::viewDestroyed(QObject* object)
     _navigation.remove(widget);
 
     removeViewWidget(widget);
+    
+    emit viewRemoved(widget);
 
     if (_views.count() == 0)
         emit empty(this);
-
-    emit viewRemoved(widget);
 }
 void ViewContainer::removeView(QWidget* view)
 {
     _views.removeAll(view);
     _navigation.remove(view);
 
+    disconnect( view , SIGNAL(destroyed(QObject*)) , this , SLOT( viewDestroyed(QObject*) ) );
+
     removeViewWidget(view);
+    
+    emit viewRemoved(view);
 
     if (_views.count() == 0)
         emit empty(this);
 
-    emit viewRemoved(view);
 }
 
 const QList<QWidget*> ViewContainer::views()
