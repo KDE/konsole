@@ -132,6 +132,7 @@ private slots:
     void renameSession();
     void saveSession();
 
+  
     // other
     void showDisplayContextMenu(TerminalDisplay* display , int state , int x , int y);
     void sessionStateChanged(Session* session,int state);
@@ -145,6 +146,7 @@ private slots:
                      // foreground process in the terminal
 
     void requireUrlFilterUpdate();
+    void highlightMatches(bool highlight);
 
     // debugging slots
     void debugProcess();

@@ -279,7 +279,8 @@ void SessionController::setSearchBar(IncrementalSearchBar* searchBar)
         connect( _searchBar , SIGNAL(closeClicked()) , this , SLOT(searchClosed()) );
         connect( _searchBar , SIGNAL(findNextClicked()) , this , SLOT(findNextInHistory()) );
         connect( _searchBar , SIGNAL(findPreviousClicked()) , this , SLOT(findPreviousInHistory()) ); 
-  
+        connect( _searchBar , SIGNAL(highlightMatchesToggled(bool)) , this , SLOT(highlightMatches(bool)) ); 
+
         // if the search bar was previously active 
         // then re-enter search mode 
         searchHistory( _searchToggleAction->isChecked() ); 
@@ -588,7 +589,6 @@ void SessionController::beginSearch(const QString& text , int direction)
     }
 
     _searchFilter->setRegExp(regExp);
-
     _view->processFilters();
 
     // color search bar to indicate whether a match was found    
@@ -601,6 +601,20 @@ void SessionController::beginSearch(const QString& text , int direction)
         _searchBar->setFoundMatch(false);
     }    
     // TODO - Optimise by only updating affected regions
+    _view->update();
+}
+void SessionController::highlightMatches(bool highlight)
+{
+    if ( highlight )
+    {
+        _view->filterChain()->addFilter(_searchFilter);
+        _view->processFilters();
+    }
+    else
+    {
+        _view->filterChain()->removeFilter(_searchFilter);
+    }
+        
     _view->update();
 }
 void SessionController::findNextInHistory()
