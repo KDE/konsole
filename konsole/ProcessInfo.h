@@ -153,6 +153,25 @@ public:
      */
     QString currentDir(bool* ok) const;
 
+    /**
+     * Parses an input string, looking for markers beginning with a '%' 
+     * character and returns a string with the markers replaced
+     * with information from this process description.
+     *
+     * The markers recognised are:
+     *
+     * %u - Name of the user which owns the process.
+     * %n - Replaced with the name of the process.
+     * %d - Replaced with the last part of the path name of the 
+     *      process' current working directory.
+     *      
+     *      (eg. if the current directory is '/home/bob' then
+     *      'bob' would be returned)
+     *
+     * %D - Replaced with the current working directory of the process.
+     */
+    QString format(const QString& text) const;
+
 protected:
     /** 
      * This is called on construction to read the process state 
@@ -198,6 +217,8 @@ protected:
      * @param value The value of the environment variable, eg. "/bin"
      */
     void addEnvironmentBinding(const QString& name , const QString& value);
+
+
 
 private:
     
@@ -301,6 +322,21 @@ public:
      * remote computer when starting the SSH process.
      */
     QString command() const;
+
+    /**
+     * Operates in the same way as ProcessInfo::format(), except
+     * that the set of markers understood is different:
+     *
+     * %u - Replaced with user name which the user initially logged
+     *      into on the remote computer.
+     * %h - Replaced with the first part of the host name which
+     *      is connected to.
+     * %H - Replaced with the full host name of the computer which
+     *      is connected to.
+     * %c - Replaced with the command which the user specified
+     *      to execute when starting the SSH process.
+     */
+    QString format(const QString& input) const;
 
 private:
     const ProcessInfo& _process;

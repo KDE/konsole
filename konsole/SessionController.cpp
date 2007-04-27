@@ -87,6 +87,39 @@ SessionController::~SessionController()
 void SessionController::snapshot()
 {
     qDebug() << "session" << _session->title() << "snapshot";
+    
+    bool ok = false;
+
+    ProcessInfo* process = 0;
+    ProcessInfo* snapshot = ProcessInfo::newInstance(_session->sessionPid());
+    snapshot->update();
+
+    // use foreground process information if available
+    // fallback to session process otherwise
+    int pid = snapshot->foregroundPid(&ok);
+    if ( ok )
+    {
+       process = ProcessInfo::newInstance(pid);
+       process->update(); 
+    }
+    else
+       process = snapshot;
+
+    if ( process->name(&ok) == "ssh" && ok )
+    {
+        SSHProcessInfo sshInfo(*process);
+        _session->setTitle( sshInfo.format("%H / %u") );
+    }
+    else
+        _session->setTitle( process->format("%d / %n") );
+
+    if ( snapshot != process )
+    {
+        delete snapshot;
+        delete process;
+    }
+    else
+        delete snapshot;
 }
 
 KUrl SessionController::url() const

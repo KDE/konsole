@@ -21,6 +21,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
+#include <QRegExp>
 #include <QTextStream>
 #include <QStringList>
 
@@ -47,6 +48,24 @@ ProcessInfo::ProcessInfo(int pid , bool enableEnvironmentRead)
 void ProcessInfo::update() 
 {
     readProcessInfo(_pid,_enableEnvironmentRead);
+}
+
+QString ProcessInfo::format(const QString& input) const
+{
+   bool ok = false;
+
+   QString output(input);
+
+   // search for and replace known markers
+   output.replace("%u","NOT IMPLEMENTED YET");
+   output.replace("%n",name(&ok));
+   output.replace("%D",currentDir(&ok));
+   output.replace("%d",QFileInfo(currentDir(&ok)).baseName());
+   
+   // remove any remaining %[LETTER] sequences
+   output.replace(QRegExp("%\\w"),QString::null);
+
+   return output;
 }
 
 QVector<QString> ProcessInfo::arguments(bool* ok) const
@@ -446,3 +465,22 @@ QString SSHProcessInfo::command() const
 {
     return _command;
 }
+QString SSHProcessInfo::format(const QString& input) const
+{
+    QString output(input);
+    
+    // search for and replace known markers
+    output.replace("%u",_user);
+    output.replace("%h",_host.left(_host.indexOf('.')));
+    output.replace("%H",_host);
+    output.replace("%c",_command);
+
+    // remove any remaining %[LETTER] character sequences
+    output.replace(QRegExp("%\\w"),QString::null);
+
+    return output;
+}
+
+
+
+
