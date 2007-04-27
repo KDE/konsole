@@ -225,8 +225,12 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
         // when a mouse move is received, create the URL filter and listen for output changes if
         // it has not already been created.  If it already exists, then update only if the output
         // has changed since the last update ( _urlFilterUpdateRequired == true )
+        //
+        // also check that no mouse buttons are pressed since the URL filter only applies when
+        // the mouse is hovering over the view
         if ( event->type() == QEvent::MouseMove &&    
-            (!_viewUrlFilter || _urlFilterUpdateRequired) )
+            (!_viewUrlFilter || _urlFilterUpdateRequired) &&
+            ((QMouseEvent*)event)->buttons() == Qt::NoButton )
         {
             if ( _view->screenWindow() && !_viewUrlFilter )
             {
