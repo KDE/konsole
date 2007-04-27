@@ -199,8 +199,7 @@ void ViewManager::detachActiveView()
 
     // remove the view from this window
     container->removeView(activeView);
-    delete activeView;
-
+    activeView->deleteLater();
 
     // if the container from which the view was removed is now empty then it can be deleted,
     // unless it is the only container in the window, in which case it is left empty

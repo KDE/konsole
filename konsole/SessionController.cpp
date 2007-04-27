@@ -560,7 +560,9 @@ void SessionController::searchTextChanged(const QString& text)
 
     if ( text.isEmpty() )
         _view->screenWindow()->clearSelection();
-        
+   
+    // update search.  this is called even when the text is
+    // empty to clear the view's filters    
     beginSearch(text , SearchHistoryTask::Forwards);
 }
 void SessionController::beginSearch(const QString& text , int direction)
