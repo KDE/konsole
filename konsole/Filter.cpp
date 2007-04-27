@@ -360,7 +360,12 @@ QString UrlFilter::HotSpot::tooltip() const
 {
     QString url = capturedTexts().first();
 
-    return i18n("Click to open '%1' in your browser.",url);
+    if ( QRegExp(FullUrlRegExp).exactMatch(url) )
+        return i18n("Click to open '%1' in your browser.",url);
+    else if ( QRegExp(EmailAddressRegExp).exactMatch(url) )
+        return i18n("Click to send an email to '%1'.",url);
+    else
+        return QString::null;
 }
 void UrlFilter::HotSpot::activate()
 {
@@ -379,11 +384,21 @@ void UrlFilter::HotSpot::activate()
         new KRun(url,QApplication::activeWindow());
     }
 }
+
+//regexp matches:
+// full url:  
+// protocolname:// or www. followed by numbers, letters dots and dashes 
+const QString UrlFilter::FullUrlRegExp("([a-z]+://|www\\.)[a-zA-Z0-9\\-\\./]+");
+// email address:
+// [word chars, dots or dashes]@[word chars, dots or dashes].[word chars]
+const QString UrlFilter::EmailAddressRegExp("(\\w|\\.|-)+@(\\w|\\.|-)+\\.\\w+");
+
 UrlFilter::UrlFilter()
 {
-    //regexp matches:
-    //  protocolname:// or www. followed by numbers, letters dots and dashes 
-    setRegExp(QRegExp("([a-z]+://|www\\.)[a-zA-Z0-9\\-\\./]+"));
+    //FIXME - There is a bug where URLs are not identified if they occur at the very
+    //end of the output ( the last characters before any trailing whitespace )
+
+    setRegExp( QRegExp('('+FullUrlRegExp+'|'+EmailAddressRegExp+')') );
 }
 UrlFilter::HotSpot::~HotSpot()
 {

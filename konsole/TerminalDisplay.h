@@ -139,6 +139,14 @@ public:
     /** 
      * Updates the filters in the display's filter chain.  This will cause
      * the hotspots to be updated to match the current image.
+     *
+     * The cost of this operation depends on the number of characters
+     * on screen and the number of filters in the filterChain(),
+     * it is potentially expensive so should only be called:
+     *
+     * 1)  When filters are added, removed or changed
+     * 2)  When the displayed image has changed and the user
+     *     wants to see the updated filters.
      */  
     void processFilters();
 

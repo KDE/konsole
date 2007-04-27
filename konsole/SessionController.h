@@ -144,6 +144,8 @@ private slots:
                      // to take a snapshot of the state of the
                      // foreground process in the terminal
 
+    void requireUrlFilterUpdate();
+
     // debugging slots
     void debugProcess();
 
@@ -170,6 +172,8 @@ private:
 
     static KIcon _activityIcon;
     static KIcon _silenceIcon;
+
+    bool _urlFilterUpdateRequired;
 
     QPointer<IncrementalSearchBar> _searchBar;
 };

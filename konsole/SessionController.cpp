@@ -47,6 +47,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _viewUrlFilter(0)
     , _searchFilter(0)
     , _searchToggleAction(0)
+    , _urlFilterUpdateRequired(false)
 {
     // handle user interface related to session (menus etc.)
     setXMLFile("konsole/sessionui.rc");
@@ -55,7 +56,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     setIdentifier(_session->sessionId());
     sessionTitleChanged();
     
-    view->installEventFilter(this);
+    view->installEventFilter(this); 
 
     // listen for popup menu requests
     connect( _view , SIGNAL(configureRequest(TerminalDisplay*,int,int,int)) , this,
@@ -67,9 +68,6 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 
     // listen to title and icon changes
     connect( _session , SIGNAL(updateTitle()) , this , SLOT(sessionTitleChanged()) );
-
-    // install filter on the view to highlight URLs
-    view->filterChain()->addFilter( new UrlFilter() );
 
     // take a snapshot of the session state every so often when
     // user activity occurs
@@ -83,7 +81,13 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 SessionController::~SessionController()
 { 
 }
-
+void SessionController::requireUrlFilterUpdate()
+{
+    // this method is called every time the screen window's output changes, so do not
+    // do anything expensive here.
+    
+    _urlFilterUpdateRequired = true;
+}
 void SessionController::snapshot()
 {
     qDebug() << "session" << _session->title() << "snapshot";
@@ -217,6 +221,29 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
             // second, connect the newly focused view to listen for the session's bell signal
             connect( _session , SIGNAL(bellRequest(const QString&)) ,
                     _view , SLOT(bell(const QString&)) );
+        }
+        // when a mouse move is received, create the URL filter and listen for output changes if
+        // it has not already been created.  If it already exists, then update only if the output
+        // has changed since the last update ( _urlFilterUpdateRequired == true )
+        if ( event->type() == QEvent::MouseMove &&    
+            (!_viewUrlFilter || _urlFilterUpdateRequired) )
+        {
+            if ( _view->screenWindow() && !_viewUrlFilter )
+            {
+                qDebug() << __FUNCTION__ << "Creating url filter";
+
+                connect( _view->screenWindow() , SIGNAL(outputChanged()) , this , 
+                         SLOT(requireUrlFilterUpdate()) ); 
+                
+                // install filter on the view to highlight URLs
+                _viewUrlFilter = new UrlFilter();
+                _view->filterChain()->addFilter( _viewUrlFilter );
+            }
+
+            qDebug() << __FUNCTION__ << "Updating url filter.";
+
+            _view->processFilters();
+            _urlFilterUpdateRequired = false;
         }
     }
 

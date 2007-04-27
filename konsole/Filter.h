@@ -246,6 +246,10 @@ public:
 
 protected:
     virtual RegExpFilter::HotSpot* newHotSpot(int,int,int,int);
+
+private:
+    static const QString FullUrlRegExp;
+    static const QString EmailAddressRegExp;
 };
 
 class FilterObject : public QObject
