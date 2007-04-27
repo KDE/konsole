@@ -556,6 +556,11 @@ void SessionController::searchHistory(bool showSearchBar)
 }
 void SessionController::searchTextChanged(const QString& text)
 {
+    Q_ASSERT( _view->screenWindow() );
+
+    if ( text.isEmpty() )
+        _view->screenWindow()->clearSelection();
+        
     beginSearch(text , SearchHistoryTask::Forwards);
 }
 void SessionController::beginSearch(const QString& text , int direction)
