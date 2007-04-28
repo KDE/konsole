@@ -334,6 +334,8 @@ inline bool Character::isBold(const ColorEntry* base) const
             base[backgroundColor.u+2+(backgroundColor.v?BASE_COLORS:0)].bold;
 }
 
+extern unsigned short vt100_graphics[32];
+
 };
 
 #endif // TECOMMON_H

@@ -12,14 +12,16 @@
 
 // Konsole
 #include "EditSessionDialog.h"
+#include "Emulation.h"
 #include "Filter.h"
 #include "HistorySizeDialog.h"
+#include "History.h"
 #include "IncrementalSearchBar.h"
 #include "ScreenWindow.h"
 #include "Session.h"
-#include "TerminalDisplay.h"
 #include "SessionController.h"
 #include "ProcessInfo.h"
+#include "TerminalDisplay.h"
 
 // for SaveHistoryTask
 #include <KUrl>

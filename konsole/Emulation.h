@@ -31,15 +31,15 @@
 #include <QTextStream>
 #include <QTimer>
 
-// Konsole
-#include "KeyTrans.h"
-#include "Screen.h"
-#include "TerminalDisplay.h"
+class KeyTrans;
 
 namespace Konsole
 {
 
+class HistoryType;
+class Screen;
 class ScreenWindow;
+class TerminalCharacterDecoder;
 
 enum { NOTIFYNORMAL=0, NOTIFYBELL=1, NOTIFYACTIVITY=2, NOTIFYSILENCE=3 };
 
@@ -105,7 +105,7 @@ public:
   int lines();
 
   /** Returns the codec used to decode incoming characters.  See setCodec() */
-  const QTextCodec *codec() { return m_codec; }
+  const QTextCodec *codec() { return _codec; }
   /** Sets the codec used to decode incoming characters.  */
   void setCodec(const QTextCodec *);
 
@@ -196,7 +196,7 @@ public:
   //virtual void setConnect(bool r);
   //bool isConnected() { return connected; }
   
-  bool utf8() { Q_ASSERT(m_codec); return m_codec->mibEnum() == 106; }
+  bool utf8() { Q_ASSERT(_codec); return _codec->mibEnum() == 106; }
 
   virtual char getErase();
 
@@ -209,18 +209,7 @@ public:
   virtual void reset() =0;
 
 protected:
-
-  QList<ScreenWindow*> _windows;
-  
-  Screen* currentScreen;  // pointer to the screen which is currently active, 
-                            // this is one of the elements in the screen[] array
-
-  Screen* screen[2];      // 0 = primary screen ( used by most programs, including the shell
-                            //                      scrollbars are enabled in this mode )
-                            // 1 = alternate      ( used by vi , emacs etc.
-                            //                      scrollbars are not enabled in this mode )
-                            
-  /** 
+ /** 
    * Sets the active screen
    *
    * @param index 0 to switch to the primary screen, or 1 to switch to the alternate screen
@@ -234,12 +223,24 @@ protected:
   };
   void setCodec(EmulationCodec codec); // codec number, 0 = locale, 1=utf8
 
+
+  QList<ScreenWindow*> _windows;
+  
+  Screen* _currentScreen;  // pointer to the screen which is currently active, 
+                            // this is one of the elements in the screen[] array
+
+  Screen* _screen[2];      // 0 = primary screen ( used by most programs, including the shell
+                            //                      scrollbars are enabled in this mode )
+                            // 1 = alternate      ( used by vi , emacs etc.
+                            //                      scrollbars are not enabled in this mode )
+                            
+  
   //decodes an incoming C-style character stream into a unicode QString using 
   //the current text codec.  (this allows for rendering of non-ASCII characters in text files etc.)
-  const QTextCodec* m_codec;
-  QTextDecoder* decoder;
+  const QTextCodec* _codec;
+  QTextDecoder* _decoder;
 
-  KeyTrans* keytrans; // the keyboard layout
+  KeyTrans* _keyTranslator; // the keyboard layout
 
 protected Q_SLOTS:
   /** 
@@ -259,8 +260,8 @@ private Q_SLOTS:
 
 private:
 
-  QTimer bulk_timer1;
-  QTimer bulk_timer2;
+  QTimer _bulkTimer1;
+  QTimer _bulkTimer2;
   
 };
 

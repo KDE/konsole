@@ -35,7 +35,7 @@
 
    \par A note on refreshing
 
-   Although the modifications to the current screen image could immediately
+   Although the modifications to the current _screen image could immediately
    be propagated via `TerminalDisplay' to the graphical surface, we have chosen
    another way here.
 
@@ -45,9 +45,9 @@
    in slowing down the overall performance of emulations. Displaying
    individual characters using X11 creates a lot of overhead.
 
-   Second, by using the following refreshing method, the screen operations
+   Second, by using the following refreshing method, the _screen operations
    can be completely separated from the displaying. This greatly simplifies
-   the programmer's task of coding and maintaining the screen operations,
+   the programmer's task of coding and maintaining the _screen operations,
    since one need not worry about differential modifications on the
    display affecting the operation of concern.
 
@@ -85,6 +85,7 @@
 #include <kdebug.h>
 
 // Konsole
+#include "KeyTrans.h"
 #include "Screen.h"
 #include "TerminalCharacterDecoder.h"
 #include "ScreenWindow.h"
@@ -104,19 +105,19 @@ using namespace Konsole;
 */
 
 Emulation::Emulation() :
-  currentScreen(0),
-  m_codec(0),
-  decoder(0),
-  keytrans(0)
+  _currentScreen(0),
+  _codec(0),
+  _decoder(0),
+  _keyTranslator(0)
 {
 
   //initialize screens with a default size
-  screen[0] = new Screen(40,80);
-  screen[1] = new Screen(40,80);
-  currentScreen = screen[0];
+  _screen[0] = new Screen(40,80);
+  _screen[1] = new Screen(40,80);
+  _currentScreen = _screen[0];
 
-  QObject::connect(&bulk_timer1, SIGNAL(timeout()), this, SLOT(showBulk()) );
-  QObject::connect(&bulk_timer2, SIGNAL(timeout()), this, SLOT(showBulk()) );
+  QObject::connect(&_bulkTimer1, SIGNAL(timeout()), this, SLOT(showBulk()) );
+  QObject::connect(&_bulkTimer2, SIGNAL(timeout()), this, SLOT(showBulk()) );
    
   setKeymap(0); // Default keymap
 }
@@ -124,7 +125,7 @@ Emulation::Emulation() :
 ScreenWindow* Emulation::createWindow()
 {
     ScreenWindow* window = new ScreenWindow();
-    window->setScreen(currentScreen);
+    window->setScreen(_currentScreen);
     _windows << window;
 
     //FIXME - Used delayed updates when the selection changes
@@ -148,50 +149,50 @@ Emulation::~Emulation()
     delete windowIter.next();
   }
 
-  delete screen[0];
-  delete screen[1];
-  delete decoder;
+  delete _screen[0];
+  delete _screen[1];
+  delete _decoder;
 }
 
-/*! change between primary and alternate screen
+/*! change between primary and alternate _screen
 */
 
 void Emulation::setScreen(int n)
 {
-  Screen *old = currentScreen;
-  currentScreen = screen[n&1];
-  if (currentScreen != old) 
+  Screen *old = _currentScreen;
+  _currentScreen = _screen[n&1];
+  if (_currentScreen != old) 
   {
      old->setBusySelecting(false);
 
-     // tell all windows onto this emulation to switch to the newly active screen
+     // tell all windows onto this emulation to switch to the newly active _screen
      QListIterator<ScreenWindow*> windowIter(_windows);
      while ( windowIter.hasNext() )
      {
-         windowIter.next()->setScreen(currentScreen);
+         windowIter.next()->setScreen(_currentScreen);
      }
   }
 }
 
 void Emulation::setHistory(const HistoryType& t)
 {
-  screen[0]->setScroll(t);
+  _screen[0]->setScroll(t);
 
   showBulk();
 }
 
 const HistoryType& Emulation::history()
 {
-  return screen[0]->getScroll();
+  return _screen[0]->getScroll();
 }
 
 void Emulation::setCodec(const QTextCodec * qtc)
 {
   Q_ASSERT( qtc );
 
-  m_codec = qtc;
-  delete decoder;
-  decoder = m_codec->makeDecoder();
+  _codec = qtc;
+  delete _decoder;
+  _decoder = _codec->makeDecoder();
 
   emit useUtf8(utf8());
 }
@@ -206,12 +207,12 @@ void Emulation::setCodec(EmulationCodec codec)
 
 void Emulation::setKeymap(const QString &id)
 {
-  keytrans = KeyTrans::find(id);
+  _keyTranslator = KeyTrans::find(id);
 }
 
 QString Emulation::keymap()
 {
-  return keytrans->id();
+  return _keyTranslator->id();
 }
 
 
@@ -234,13 +235,13 @@ void Emulation::onReceiveChar(int c)
   c &= 0xff;
   switch (c)
   {
-    case '\b'      : currentScreen->BackSpace();                 break;
-    case '\t'      : currentScreen->Tabulate();                  break;
-    case '\n'      : currentScreen->NewLine();                   break;
-    case '\r'      : currentScreen->Return();                    break;
+    case '\b'      : _currentScreen->BackSpace();                 break;
+    case '\t'      : _currentScreen->Tabulate();                  break;
+    case '\n'      : _currentScreen->NewLine();                   break;
+    case '\r'      : _currentScreen->Return();                    break;
     case 0x07      : emit notifySessionState(NOTIFYBELL);
                      break;
-    default        : currentScreen->ShowCharacter(c);            break;
+    default        : _currentScreen->ShowCharacter(c);            break;
   };
 }
 
@@ -290,7 +291,7 @@ void Emulation::onReceiveBlock(const char* text, int length)
 
 	bufferedUpdate();
     	
-    QString unicodeText = decoder->toUnicode(text,length);
+    QString unicodeText = _decoder->toUnicode(text,length);
 
 	//send characters to terminal emulator
 	for (int i=0;i<unicodeText.length();i++)
@@ -317,7 +318,7 @@ void Emulation::onReceiveBlock(const char* text, int length)
 //	b)  It messed up decoding of non-ASCII characters, with the result that (for example) chinese characters
 //	    were not printed properly.
 //
-//There is something about stopping the decoder if "we get a control code halfway a multi-byte sequence" (see below)
+//There is something about stopping the _decoder if "we get a control code halfway a multi-byte sequence" (see below)
 //which hasn't been ported into the newer function (above).  Hopefully someone who understands this better
 //can find an alternative way of handling the check.  
 
@@ -330,16 +331,16 @@ void Emulation::onReceiveBlock(const char* text, int length)
   for (int i = 0; i < len; i++)
   {
 
-    QString result = decoder->toUnicode(&s[i],1);
+    QString result = _decoder->toUnicode(&s[i],1);
     int reslen = result.length();
 
     // If we get a control code halfway a multi-byte sequence
-    // we flush the decoder and continue with the control code.
+    // we flush the _decoder and continue with the control code.
     if ((s[i] < 32) && (s[i] > 0))
     {
-       // Flush decoder
+       // Flush _decoder
        while(!result.length())
-          result = decoder->toUnicode(&s[i],1);
+          result = _decoder->toUnicode(&s[i],1);
        reslen = 1;
        result.resize(reslen);
        result[0] = QChar(s[i]);
@@ -348,7 +349,7 @@ void Emulation::onReceiveBlock(const char* text, int length)
     for (int j = 0; j < reslen; j++)
     {
       if (result[j].characterategory() == QChar::Mark_NonSpacing)
-         currentScreen->compose(result.mid(j,1));
+         _currentScreen->compose(result.mid(j,1));
       else
          onRcvChar(result[j].unicode());
     }
@@ -365,19 +366,19 @@ void Emulation::onReceiveBlock(const char* text, int length)
 #if 0
 void Emulation::onSelectionBegin(const int x, const int y, const bool columnmode) {
   if (!connected) return;
-  currentScreen->setSelectionStart( x,y,columnmode);
+  _currentScreen->setSelectionStart( x,y,columnmode);
   showBulk();
 }
 
 void Emulation::onSelectionExtend(const int x, const int y) {
   if (!connected) return;
-  currentScreen->setSelectionEnd(x,y);
+  _currentScreen->setSelectionEnd(x,y);
   showBulk();
 }
 
 void Emulation::setSelection(const bool preserve_line_breaks) {
   if (!connected) return;
-  QString t = currentScreen->selectedText(preserve_line_breaks);
+  QString t = _currentScreen->selectedText(preserve_line_breaks);
   if (!t.isNull()) 
   {
     QListIterator< TerminalDisplay* > viewIter(_views);
@@ -390,12 +391,12 @@ void Emulation::setSelection(const bool preserve_line_breaks) {
 void Emulation::testIsSelected(const int x, const int y, bool &selected)
 {
   if (!connected) return;
-  selected=currentScreen->isSelected(x,y);
+  selected=_currentScreen->isSelected(x,y);
 }
 
 void Emulation::clearSelection() {
   if (!connected) return;
-  currentScreen->clearSelection();
+  _currentScreen->clearSelection();
   showBulk();
 }
 
@@ -403,21 +404,21 @@ void Emulation::clearSelection() {
 
 void Emulation::isBusySelecting(bool busy)
 {
-  currentScreen->setBusySelecting(busy);
+  _currentScreen->setBusySelecting(busy);
 }
 
 void Emulation::writeToStream(QTextStream* stream , 
-                               TerminalCharacterDecoder* decoder , 
+                               TerminalCharacterDecoder* _decoder , 
                                int startLine ,
                                int endLine) 
 {
-  currentScreen->writeToStream(stream,decoder,startLine,endLine);
+  _currentScreen->writeToStream(stream,_decoder,startLine,endLine);
 }
 
 int Emulation::lines()
 {
-    // sum number of lines currently on screen plus number of lines in history
-    return currentScreen->getLines() + currentScreen->getHistLines();
+    // sum number of lines currently on _screen plus number of lines in history
+    return _currentScreen->getLines() + _currentScreen->getHistLines();
 }
 
 // Refreshing -------------------------------------------------------------- --
@@ -429,22 +430,22 @@ int Emulation::lines()
 */
 void Emulation::showBulk()
 {
-    bulk_timer1.stop();
-    bulk_timer2.stop();
+    _bulkTimer1.stop();
+    _bulkTimer2.stop();
 
     emit updateViews();
 
-    currentScreen->resetScrolledLines();
+    _currentScreen->resetScrolledLines();
 }
 
 void Emulation::bufferedUpdate()
 {
-   bulk_timer1.setSingleShot(true);
-   bulk_timer1.start(BULK_TIMEOUT1);
-   if (!bulk_timer2.isActive())
+   _bulkTimer1.setSingleShot(true);
+   _bulkTimer1.start(BULK_TIMEOUT1);
+   if (!_bulkTimer2.isActive())
    {
-      bulk_timer2.setSingleShot(true);
-      bulk_timer2.start(BULK_TIMEOUT2);
+      _bulkTimer2.setSingleShot(true);
+      _bulkTimer2.start(BULK_TIMEOUT2);
    }
 }
 
@@ -466,15 +467,15 @@ void Emulation::onImageSizeChange(int lines, int columns)
   Q_ASSERT( lines > 0 );
   Q_ASSERT( columns > 0 );
 
-  screen[0]->resizeImage(lines,columns);
-  screen[1]->resizeImage(lines,columns);
+  _screen[0]->resizeImage(lines,columns);
+  _screen[1]->resizeImage(lines,columns);
 
   bufferedUpdate();
 }
 
 QSize Emulation::imageSize()
 {
-  return QSize(currentScreen->getColumns(), currentScreen->getLines());
+  return QSize(_currentScreen->getColumns(), _currentScreen->getLines());
 }
 
 void Emulation::setColumns(int columns)

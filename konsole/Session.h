@@ -29,20 +29,18 @@
 #include <KApplication>
 #include <KMainWindow>
 
-// Konsole
-#include "Pty.h"
-#include "TerminalDisplay.h"
-#include "Vt102Emulation.h"
-
-
 class K3ProcIO;
 class K3Process;
 
 namespace Konsole
 {
 
-class ZModemDialog;
 class ColorScheme;
+class Emulation;
+class HistoryType;
+class Pty;
+class TerminalDisplay;
+class ZModemDialog;
 
 /**
  * Session represents a Konsole session.
@@ -166,13 +164,13 @@ public:
   void setProgram(const QString& program);
 
   /** Returns the session's current working directory. */
-  QString initialWorkingDirectory() { return _initial_cwd; }
+  QString initialWorkingDirectory() { return _initialWorkingDir; }
   
   /** 
    * Sets the initial working directory for the session when it is run 
    * This has no effect once the session has been started.
    */
-  void setInitialWorkingDirectory( const QString& dir ) { _initial_cwd = dir; }
+  void setInitialWorkingDirectory( const QString& dir ) { _initialWorkingDir = dir; }
  
   void setHistory(const HistoryType&);
   const HistoryType& history();
@@ -192,7 +190,7 @@ public:
   bool testAndSetStateIconName (const QString& newname);
   bool sendSignal(int signal);
 
-  void setAutoClose(bool b) { autoClose = b; }
+  void setAutoClose(bool b) { _autoClose = b; }
   void renameSession(const QString &name);
 
   
@@ -203,7 +201,7 @@ public:
    * Returns the process id of the terminal process. 
    * This is the id used by the system API to refer to the process.
    */
-  int sessionPid() { return _shellProcess->pid(); }
+  int sessionPid() const;
   void enableFullScripting(bool b);
 
   void startZModem(const QString &rz, const QString &dir, const QStringList &list);
@@ -288,14 +286,13 @@ private:
 
   QList<TerminalDisplay*> _views;
 
-  bool           connected;
-  bool           monitorActivity;
-  bool           monitorSilence;
-  bool           notifiedActivity;
-  bool           masterMode;
-  bool           autoClose;
-  bool           wantedClose;
-  QTimer*        monitorTimer;
+  bool           _monitorActivity;
+  bool           _monitorSilence;
+  bool           _notifiedActivity;
+  bool           _masterMode;
+  bool           _autoClose;
+  bool           _wantedClose;
+  QTimer*        _monitorTimer;
 
   int            _silenceSeconds;
 
@@ -316,8 +313,7 @@ private:
   ulong          _winId;
   int            _sessionId;
 
-  QString        _cwd;
-  QString        _initial_cwd;
+  QString        _initialWorkingDir;
 
   // ZModem
   bool           _zmodemBusy;

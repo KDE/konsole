@@ -53,8 +53,9 @@
 #include <klocale.h>
 
 // Konsole
-#include "Vt102Emulation.h"
+#include "KeyTrans.h"
 #include "Screen.h"
+#include "Vt102Emulation.h"
 
 #if defined(HAVE_XKB)
 void scrolllock_set_off();
@@ -95,9 +96,9 @@ using namespace Konsole;
 
 Vt102Emulation::Vt102Emulation() : Emulation()
 {
-  titleUpdateTimer.setSingleShot(true);
+  _titleUpdateTimer.setSingleShot(true);
 
-  QObject::connect(&titleUpdateTimer , SIGNAL(timeout()) , this , SLOT(updateTitle()));
+  QObject::connect(&_titleUpdateTimer , SIGNAL(timeout()) , this , SLOT(updateTitle()));
 
   initTokenizer();
   reset();
@@ -150,7 +151,7 @@ Vt102Emulation::~Vt102Emulation()
 
 void Vt102Emulation::clearEntireScreen()
 {
-  currentScreen->clearEntireScreen();
+  _currentScreen->clearEntireScreen();
 
   bufferedUpdate(); 
 }
@@ -164,11 +165,11 @@ void Vt102Emulation::reset()
   //kDebug(1211)<<"Vt102Emulation::reset() resetCharSet()"<<endl;
   resetCharset(0);
   //kDebug(1211)<<"Vt102Emulation::reset() reset screen0()"<<endl;
-  screen[0]->reset();
+  _screen[0]->reset();
   //kDebug(1211)<<"Vt102Emulation::reset() resetCharSet()"<<endl;
   resetCharset(1);
-  //kDebug(1211)<<"Vt102Emulation::reset() reset screen 1"<<endl;
-  screen[1]->reset();
+  //kDebug(1211)<<"Vt102Emulation::reset() reset _screen 1"<<endl;
+  _screen[1]->reset();
   //kDebug(1211)<<"Vt102Emulation::reset() setCodec()"<<endl;
   setCodec(LocaleCodec);
   //kDebug(1211)<<"Vt102Emulation::reset() done"<<endl;
@@ -419,21 +420,21 @@ void Vt102Emulation::XtermHack()
   // arg == 1 doesn't change the title. In XTerm it only changes the icon name
   // (btw: arg=0 changes title and icon, arg=1 only icon, arg=2 only title
 //  emit changeTitle(arg,unistr);
-  pendingTitleUpdates[arg] = unistr;
-  titleUpdateTimer.start(20);
+  _pendingTitleUpdates[arg] = unistr;
+  _titleUpdateTimer.start(20);
 
   delete [] str;
 }
 
 void Vt102Emulation::updateTitle()
 {
-	QListIterator<int> iter( pendingTitleUpdates.keys() );
+	QListIterator<int> iter( _pendingTitleUpdates.keys() );
 	while (iter.hasNext()) {
 		int arg = iter.next();
-		emit changeTitle( arg , pendingTitleUpdates[arg] );	
+		emit changeTitle( arg , _pendingTitleUpdates[arg] );	
 	}
 
-    pendingTitleUpdates.clear();	
+    _pendingTitleUpdates.clear();	
 }
 
 // Interpreting Codes ---------------------------------------------------------
@@ -441,7 +442,7 @@ void Vt102Emulation::updateTitle()
 /*
    Now that the incoming character stream is properly tokenized,
    meaning is assigned to them. These are either operations of
-   the current screen, or of the emulation class itself.
+   the current _screen, or of the emulation class itself.
 
    The token to be interpreteted comes in as a machine word
    possibly accompanied by two parameters.
@@ -491,7 +492,7 @@ switch( N )
   switch (token)
   {
 
-    case TY_CHR(         ) : currentScreen->ShowCharacter        (p         ); break; //UTF16
+    case TY_CHR(         ) : _currentScreen->ShowCharacter        (p         ); break; //UTF16
 
     //             127 DEL    : ignored on input
 
@@ -504,12 +505,12 @@ switch( N )
     case TY_CTL('F'      ) : /* ACK: ignored                      */ break;
     case TY_CTL('G'      ) : emit notifySessionState(NOTIFYBELL);
                                 break; //VT100
-    case TY_CTL('H'      ) : currentScreen->BackSpace            (          ); break; //VT100
-    case TY_CTL('I'      ) : currentScreen->Tabulate             (          ); break; //VT100
-    case TY_CTL('J'      ) : currentScreen->NewLine              (          ); break; //VT100
-    case TY_CTL('K'      ) : currentScreen->NewLine              (          ); break; //VT100
-    case TY_CTL('L'      ) : currentScreen->NewLine              (          ); break; //VT100
-    case TY_CTL('M'      ) : currentScreen->Return               (          ); break; //VT100
+    case TY_CTL('H'      ) : _currentScreen->BackSpace            (          ); break; //VT100
+    case TY_CTL('I'      ) : _currentScreen->Tabulate             (          ); break; //VT100
+    case TY_CTL('J'      ) : _currentScreen->NewLine              (          ); break; //VT100
+    case TY_CTL('K'      ) : _currentScreen->NewLine              (          ); break; //VT100
+    case TY_CTL('L'      ) : _currentScreen->NewLine              (          ); break; //VT100
+    case TY_CTL('M'      ) : _currentScreen->Return               (          ); break; //VT100
 
     case TY_CTL('N'      ) :      useCharset           (         1); break; //VT100
     case TY_CTL('O'      ) :      useCharset           (         0); break; //VT100
@@ -522,19 +523,19 @@ switch( N )
     case TY_CTL('U'      ) : /* NAK: ignored                      */ break;
     case TY_CTL('V'      ) : /* SYN: ignored                      */ break;
     case TY_CTL('W'      ) : /* ETB: ignored                      */ break;
-    case TY_CTL('X'      ) : currentScreen->ShowCharacter        (    0x2592); break; //VT100
+    case TY_CTL('X'      ) : _currentScreen->ShowCharacter        (    0x2592); break; //VT100
     case TY_CTL('Y'      ) : /* EM : ignored                      */ break;
-    case TY_CTL('Z'      ) : currentScreen->ShowCharacter        (    0x2592); break; //VT100
+    case TY_CTL('Z'      ) : _currentScreen->ShowCharacter        (    0x2592); break; //VT100
     case TY_CTL('['      ) : /* ESC: cannot be seen here.         */ break;
     case TY_CTL('\\'     ) : /* FS : ignored                      */ break;
     case TY_CTL(']'      ) : /* GS : ignored                      */ break;
     case TY_CTL('^'      ) : /* RS : ignored                      */ break;
     case TY_CTL('_'      ) : /* US : ignored                      */ break;
 
-    case TY_ESC('D'      ) : currentScreen->index                (          ); break; //VT100
-    case TY_ESC('E'      ) : currentScreen->NextLine             (          ); break; //VT100
-    case TY_ESC('H'      ) : currentScreen->changeTabStop        (true      ); break; //VT100
-    case TY_ESC('M'      ) : currentScreen->reverseIndex         (          ); break; //VT100
+    case TY_ESC('D'      ) : _currentScreen->index                (          ); break; //VT100
+    case TY_ESC('E'      ) : _currentScreen->NextLine             (          ); break; //VT100
+    case TY_ESC('H'      ) : _currentScreen->changeTabStop        (true      ); break; //VT100
+    case TY_ESC('M'      ) : _currentScreen->reverseIndex         (          ); break; //VT100
     case TY_ESC('Z'      ) :      reportTerminalType   (          ); break;
     case TY_ESC('c'      ) :      reset                (          ); break;
 
@@ -567,22 +568,22 @@ switch( N )
     case TY_ESC_CS('%', '@') :      setCodec             (LocaleCodec ); break; //LINUX
 
     case TY_ESC_DE('3'      ) : /* Double height line, top half    */ 
-								currentScreen->setLineProperty( LINE_DOUBLEWIDTH , true );
-								currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , true );
+								_currentScreen->setLineProperty( LINE_DOUBLEWIDTH , true );
+								_currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , true );
 									break;
     case TY_ESC_DE('4'      ) : /* Double height line, bottom half */ 
-								currentScreen->setLineProperty( LINE_DOUBLEWIDTH , true );
-								currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , true );
+								_currentScreen->setLineProperty( LINE_DOUBLEWIDTH , true );
+								_currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , true );
 									break;
     case TY_ESC_DE('5'      ) : /* Single width, single height line*/
-								currentScreen->setLineProperty( LINE_DOUBLEWIDTH , false);
-								currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , false);
+								_currentScreen->setLineProperty( LINE_DOUBLEWIDTH , false);
+								_currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , false);
 								break;
     case TY_ESC_DE('6'      ) : /* Double width, single height line*/ 
-							    currentScreen->setLineProperty( LINE_DOUBLEWIDTH , true);	
-								currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , false);
+							    _currentScreen->setLineProperty( LINE_DOUBLEWIDTH , true);	
+								_currentScreen->setLineProperty( LINE_DOUBLEHEIGHT , false);
 								break;
-    case TY_ESC_DE('8'      ) : currentScreen->helpAlign            (          ); break;
+    case TY_ESC_DE('8'      ) : _currentScreen->helpAlign            (          ); break;
 
 // resize = \e[8;<row>;<col>t
     case TY_CSI_PS('t',   8) : setScreenSize( q /* colums */, p /* lines */ );    break;
@@ -590,78 +591,78 @@ switch( N )
 // change tab text color : \e[28;<color>t  color: 0-16,777,215
     case TY_CSI_PS('t',   28) : emit changeTabTextColor   ( p        );          break;
 
-    case TY_CSI_PS('K',   0) : currentScreen->clearToEndOfLine     (          ); break;
-    case TY_CSI_PS('K',   1) : currentScreen->clearToBeginOfLine   (          ); break;
-    case TY_CSI_PS('K',   2) : currentScreen->clearEntireLine      (          ); break;
-    case TY_CSI_PS('J',   0) : currentScreen->clearToEndOfScreen   (          ); break;
-    case TY_CSI_PS('J',   1) : currentScreen->clearToBeginOfScreen (          ); break;
-    case TY_CSI_PS('J',   2) : currentScreen->clearEntireScreen    (          ); break;
-    case TY_CSI_PS('g',   0) : currentScreen->changeTabStop        (false     ); break; //VT100
-    case TY_CSI_PS('g',   3) : currentScreen->clearTabStops        (          ); break; //VT100
-    case TY_CSI_PS('h',   4) : currentScreen->    setMode      (MODE_Insert   ); break;
+    case TY_CSI_PS('K',   0) : _currentScreen->clearToEndOfLine     (          ); break;
+    case TY_CSI_PS('K',   1) : _currentScreen->clearToBeginOfLine   (          ); break;
+    case TY_CSI_PS('K',   2) : _currentScreen->clearEntireLine      (          ); break;
+    case TY_CSI_PS('J',   0) : _currentScreen->clearToEndOfScreen   (          ); break;
+    case TY_CSI_PS('J',   1) : _currentScreen->clearToBeginOfScreen (          ); break;
+    case TY_CSI_PS('J',   2) : _currentScreen->clearEntireScreen    (          ); break;
+    case TY_CSI_PS('g',   0) : _currentScreen->changeTabStop        (false     ); break; //VT100
+    case TY_CSI_PS('g',   3) : _currentScreen->clearTabStops        (          ); break; //VT100
+    case TY_CSI_PS('h',   4) : _currentScreen->    setMode      (MODE_Insert   ); break;
     case TY_CSI_PS('h',  20) :          setMode      (MODE_NewLine  ); break;
     case TY_CSI_PS('i',   0) : /* IGNORE: attached printer          */ break; //VT100
-    case TY_CSI_PS('l',   4) : currentScreen->  resetMode      (MODE_Insert   ); break;
+    case TY_CSI_PS('l',   4) : _currentScreen->  resetMode      (MODE_Insert   ); break;
     case TY_CSI_PS('l',  20) :        resetMode      (MODE_NewLine  ); break;
     case TY_CSI_PS('s',   0) :      saveCursor           (          ); break;
     case TY_CSI_PS('u',   0) :      restoreCursor        (          ); break;
 
-    case TY_CSI_PS('m',   0) : currentScreen->setDefaultRendition  (          ); break;
-    case TY_CSI_PS('m',   1) : currentScreen->  setRendition     (RE_BOLD     ); break; //VT100
-    case TY_CSI_PS('m',   4) : currentScreen->  setRendition     (RE_UNDERLINE); break; //VT100
-    case TY_CSI_PS('m',   5) : currentScreen->  setRendition     (RE_BLINK    ); break; //VT100
-    case TY_CSI_PS('m',   7) : currentScreen->  setRendition     (RE_REVERSE  ); break;
+    case TY_CSI_PS('m',   0) : _currentScreen->setDefaultRendition  (          ); break;
+    case TY_CSI_PS('m',   1) : _currentScreen->  setRendition     (RE_BOLD     ); break; //VT100
+    case TY_CSI_PS('m',   4) : _currentScreen->  setRendition     (RE_UNDERLINE); break; //VT100
+    case TY_CSI_PS('m',   5) : _currentScreen->  setRendition     (RE_BLINK    ); break; //VT100
+    case TY_CSI_PS('m',   7) : _currentScreen->  setRendition     (RE_REVERSE  ); break;
     case TY_CSI_PS('m',  10) : /* IGNORED: mapping related          */ break; //LINUX
     case TY_CSI_PS('m',  11) : /* IGNORED: mapping related          */ break; //LINUX
     case TY_CSI_PS('m',  12) : /* IGNORED: mapping related          */ break; //LINUX
-    case TY_CSI_PS('m',  22) : currentScreen->resetRendition     (RE_BOLD     ); break;
-    case TY_CSI_PS('m',  24) : currentScreen->resetRendition     (RE_UNDERLINE); break;
-    case TY_CSI_PS('m',  25) : currentScreen->resetRendition     (RE_BLINK    ); break;
-    case TY_CSI_PS('m',  27) : currentScreen->resetRendition     (RE_REVERSE  ); break;
+    case TY_CSI_PS('m',  22) : _currentScreen->resetRendition     (RE_BOLD     ); break;
+    case TY_CSI_PS('m',  24) : _currentScreen->resetRendition     (RE_UNDERLINE); break;
+    case TY_CSI_PS('m',  25) : _currentScreen->resetRendition     (RE_BLINK    ); break;
+    case TY_CSI_PS('m',  27) : _currentScreen->resetRendition     (RE_REVERSE  ); break;
 
-    case TY_CSI_PS('m',   30) : currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  0); break;
-    case TY_CSI_PS('m',   31) : currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  1); break;
-    case TY_CSI_PS('m',   32) : currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  2); break;
-    case TY_CSI_PS('m',   33) : currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  3); break;
-    case TY_CSI_PS('m',   34) : currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  4); break;
-    case TY_CSI_PS('m',   35) : currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  5); break;
-    case TY_CSI_PS('m',   36) : currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  6); break;
-    case TY_CSI_PS('m',   37) : currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  7); break;
+    case TY_CSI_PS('m',   30) : _currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  0); break;
+    case TY_CSI_PS('m',   31) : _currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  1); break;
+    case TY_CSI_PS('m',   32) : _currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  2); break;
+    case TY_CSI_PS('m',   33) : _currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  3); break;
+    case TY_CSI_PS('m',   34) : _currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  4); break;
+    case TY_CSI_PS('m',   35) : _currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  5); break;
+    case TY_CSI_PS('m',   36) : _currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  6); break;
+    case TY_CSI_PS('m',   37) : _currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  7); break;
 
-    case TY_CSI_PS('m',   38) : currentScreen->setForeColor         (p,       q); break;
+    case TY_CSI_PS('m',   38) : _currentScreen->setForeColor         (p,       q); break;
 
-    case TY_CSI_PS('m',   39) : currentScreen->setForeColor         (COLOR_SPACE_DEFAULT,  0); break;
+    case TY_CSI_PS('m',   39) : _currentScreen->setForeColor         (COLOR_SPACE_DEFAULT,  0); break;
 
-    case TY_CSI_PS('m',   40) : currentScreen->setBackColor         (COLOR_SPACE_SYSTEM,  0); break;
-    case TY_CSI_PS('m',   41) : currentScreen->setBackColor         (COLOR_SPACE_SYSTEM,  1); break;
-    case TY_CSI_PS('m',   42) : currentScreen->setBackColor         (COLOR_SPACE_SYSTEM,  2); break;
-    case TY_CSI_PS('m',   43) : currentScreen->setBackColor         (COLOR_SPACE_SYSTEM,  3); break;
-    case TY_CSI_PS('m',   44) : currentScreen->setBackColor         (COLOR_SPACE_SYSTEM,  4); break;
-    case TY_CSI_PS('m',   45) : currentScreen->setBackColor         (COLOR_SPACE_SYSTEM,  5); break;
-    case TY_CSI_PS('m',   46) : currentScreen->setBackColor         (COLOR_SPACE_SYSTEM,  6); break;
-    case TY_CSI_PS('m',   47) : currentScreen->setBackColor         (COLOR_SPACE_SYSTEM,  7); break;
+    case TY_CSI_PS('m',   40) : _currentScreen->setBackColor         (COLOR_SPACE_SYSTEM,  0); break;
+    case TY_CSI_PS('m',   41) : _currentScreen->setBackColor         (COLOR_SPACE_SYSTEM,  1); break;
+    case TY_CSI_PS('m',   42) : _currentScreen->setBackColor         (COLOR_SPACE_SYSTEM,  2); break;
+    case TY_CSI_PS('m',   43) : _currentScreen->setBackColor         (COLOR_SPACE_SYSTEM,  3); break;
+    case TY_CSI_PS('m',   44) : _currentScreen->setBackColor         (COLOR_SPACE_SYSTEM,  4); break;
+    case TY_CSI_PS('m',   45) : _currentScreen->setBackColor         (COLOR_SPACE_SYSTEM,  5); break;
+    case TY_CSI_PS('m',   46) : _currentScreen->setBackColor         (COLOR_SPACE_SYSTEM,  6); break;
+    case TY_CSI_PS('m',   47) : _currentScreen->setBackColor         (COLOR_SPACE_SYSTEM,  7); break;
 
-    case TY_CSI_PS('m',   48) : currentScreen->setBackColor         (p,       q); break;
+    case TY_CSI_PS('m',   48) : _currentScreen->setBackColor         (p,       q); break;
 
-    case TY_CSI_PS('m',   49) : currentScreen->setBackColor         (COLOR_SPACE_DEFAULT,  1); break;
+    case TY_CSI_PS('m',   49) : _currentScreen->setBackColor         (COLOR_SPACE_DEFAULT,  1); break;
 
-    case TY_CSI_PS('m',   90) : currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  8); break;
-    case TY_CSI_PS('m',   91) : currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  9); break;
-    case TY_CSI_PS('m',   92) : currentScreen->setForeColor         (COLOR_SPACE_SYSTEM, 10); break;
-    case TY_CSI_PS('m',   93) : currentScreen->setForeColor         (COLOR_SPACE_SYSTEM, 11); break;
-    case TY_CSI_PS('m',   94) : currentScreen->setForeColor         (COLOR_SPACE_SYSTEM, 12); break;
-    case TY_CSI_PS('m',   95) : currentScreen->setForeColor         (COLOR_SPACE_SYSTEM, 13); break;
-    case TY_CSI_PS('m',   96) : currentScreen->setForeColor         (COLOR_SPACE_SYSTEM, 14); break;
-    case TY_CSI_PS('m',   97) : currentScreen->setForeColor         (COLOR_SPACE_SYSTEM, 15); break;
+    case TY_CSI_PS('m',   90) : _currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  8); break;
+    case TY_CSI_PS('m',   91) : _currentScreen->setForeColor         (COLOR_SPACE_SYSTEM,  9); break;
+    case TY_CSI_PS('m',   92) : _currentScreen->setForeColor         (COLOR_SPACE_SYSTEM, 10); break;
+    case TY_CSI_PS('m',   93) : _currentScreen->setForeColor         (COLOR_SPACE_SYSTEM, 11); break;
+    case TY_CSI_PS('m',   94) : _currentScreen->setForeColor         (COLOR_SPACE_SYSTEM, 12); break;
+    case TY_CSI_PS('m',   95) : _currentScreen->setForeColor         (COLOR_SPACE_SYSTEM, 13); break;
+    case TY_CSI_PS('m',   96) : _currentScreen->setForeColor         (COLOR_SPACE_SYSTEM, 14); break;
+    case TY_CSI_PS('m',   97) : _currentScreen->setForeColor         (COLOR_SPACE_SYSTEM, 15); break;
 
-    case TY_CSI_PS('m',  100) : currentScreen->setBackColor         (COLOR_SPACE_SYSTEM,  8); break;
-    case TY_CSI_PS('m',  101) : currentScreen->setBackColor         (COLOR_SPACE_SYSTEM,  9); break;
-    case TY_CSI_PS('m',  102) : currentScreen->setBackColor         (COLOR_SPACE_SYSTEM, 10); break;
-    case TY_CSI_PS('m',  103) : currentScreen->setBackColor         (COLOR_SPACE_SYSTEM, 11); break;
-    case TY_CSI_PS('m',  104) : currentScreen->setBackColor         (COLOR_SPACE_SYSTEM, 12); break;
-    case TY_CSI_PS('m',  105) : currentScreen->setBackColor         (COLOR_SPACE_SYSTEM, 13); break;
-    case TY_CSI_PS('m',  106) : currentScreen->setBackColor         (COLOR_SPACE_SYSTEM, 14); break;
-    case TY_CSI_PS('m',  107) : currentScreen->setBackColor         (COLOR_SPACE_SYSTEM, 15); break;
+    case TY_CSI_PS('m',  100) : _currentScreen->setBackColor         (COLOR_SPACE_SYSTEM,  8); break;
+    case TY_CSI_PS('m',  101) : _currentScreen->setBackColor         (COLOR_SPACE_SYSTEM,  9); break;
+    case TY_CSI_PS('m',  102) : _currentScreen->setBackColor         (COLOR_SPACE_SYSTEM, 10); break;
+    case TY_CSI_PS('m',  103) : _currentScreen->setBackColor         (COLOR_SPACE_SYSTEM, 11); break;
+    case TY_CSI_PS('m',  104) : _currentScreen->setBackColor         (COLOR_SPACE_SYSTEM, 12); break;
+    case TY_CSI_PS('m',  105) : _currentScreen->setBackColor         (COLOR_SPACE_SYSTEM, 13); break;
+    case TY_CSI_PS('m',  106) : _currentScreen->setBackColor         (COLOR_SPACE_SYSTEM, 14); break;
+    case TY_CSI_PS('m',  107) : _currentScreen->setBackColor         (COLOR_SPACE_SYSTEM, 15); break;
 
     case TY_CSI_PS('n',   5) :      reportStatus         (          ); break;
     case TY_CSI_PS('n',   6) :      reportCursorPosition (          ); break;
@@ -673,24 +674,24 @@ switch( N )
     case TY_CSI_PS('x',   0) :      reportTerminalParms  (         2); break; //VT100
     case TY_CSI_PS('x',   1) :      reportTerminalParms  (         3); break; //VT100
 
-    case TY_CSI_PN('@'      ) : currentScreen->insertChars          (p         ); break;
-    case TY_CSI_PN('A'      ) : currentScreen->cursorUp             (p         ); break; //VT100
-    case TY_CSI_PN('B'      ) : currentScreen->cursorDown           (p         ); break; //VT100
-    case TY_CSI_PN('C'      ) : currentScreen->cursorRight          (p         ); break; //VT100
-    case TY_CSI_PN('D'      ) : currentScreen->cursorLeft           (p         ); break; //VT100
-    case TY_CSI_PN('G'      ) : currentScreen->setCursorX           (p         ); break; //LINUX
-    case TY_CSI_PN('H'      ) : currentScreen->setCursorYX          (p,      q); break; //VT100
-    case TY_CSI_PN('I'      ) : currentScreen->Tabulate             (p         ); break;
-    case TY_CSI_PN('L'      ) : currentScreen->insertLines          (p         ); break;
-    case TY_CSI_PN('M'      ) : currentScreen->deleteLines          (p         ); break;
-    case TY_CSI_PN('P'      ) : currentScreen->deleteChars          (p         ); break;
-    case TY_CSI_PN('S'      ) : currentScreen->scrollUp             (p         ); break;
-    case TY_CSI_PN('T'      ) : currentScreen->scrollDown           (p         ); break;
-    case TY_CSI_PN('X'      ) : currentScreen->eraseChars           (p         ); break;
-    case TY_CSI_PN('Z'      ) : currentScreen->backTabulate         (p         ); break;
+    case TY_CSI_PN('@'      ) : _currentScreen->insertChars          (p         ); break;
+    case TY_CSI_PN('A'      ) : _currentScreen->cursorUp             (p         ); break; //VT100
+    case TY_CSI_PN('B'      ) : _currentScreen->cursorDown           (p         ); break; //VT100
+    case TY_CSI_PN('C'      ) : _currentScreen->cursorRight          (p         ); break; //VT100
+    case TY_CSI_PN('D'      ) : _currentScreen->cursorLeft           (p         ); break; //VT100
+    case TY_CSI_PN('G'      ) : _currentScreen->setCursorX           (p         ); break; //LINUX
+    case TY_CSI_PN('H'      ) : _currentScreen->setCursorYX          (p,      q); break; //VT100
+    case TY_CSI_PN('I'      ) : _currentScreen->Tabulate             (p         ); break;
+    case TY_CSI_PN('L'      ) : _currentScreen->insertLines          (p         ); break;
+    case TY_CSI_PN('M'      ) : _currentScreen->deleteLines          (p         ); break;
+    case TY_CSI_PN('P'      ) : _currentScreen->deleteChars          (p         ); break;
+    case TY_CSI_PN('S'      ) : _currentScreen->scrollUp             (p         ); break;
+    case TY_CSI_PN('T'      ) : _currentScreen->scrollDown           (p         ); break;
+    case TY_CSI_PN('X'      ) : _currentScreen->eraseChars           (p         ); break;
+    case TY_CSI_PN('Z'      ) : _currentScreen->backTabulate         (p         ); break;
     case TY_CSI_PN('c'      ) :      reportTerminalType   (          ); break; //VT100
-    case TY_CSI_PN('d'      ) : currentScreen->setCursorY           (p         ); break; //LINUX
-    case TY_CSI_PN('f'      ) : currentScreen->setCursorYX          (p,      q); break; //VT100
+    case TY_CSI_PN('d'      ) : _currentScreen->setCursorY           (p         ); break; //LINUX
+    case TY_CSI_PN('f'      ) : _currentScreen->setCursorYX          (p,      q); break; //VT100
     case TY_CSI_PN('r'      ) :      setMargins           (p,      q); break; //VT100
     case TY_CSI_PN('y'      ) : /* IGNORED: Confidence test          */ break; //VT100
 
@@ -704,29 +705,29 @@ switch( N )
     case TY_CSI_PR('h',   3) : setColumns (132) ; 
 			       			   clearEntireScreen();
 			       			   setDefaultMargins(); 
-			       			   currentScreen->setCursorYX(0,0);
+			       			   _currentScreen->setCursorYX(0,0);
 			       					       break; 							  //VT100
     case TY_CSI_PR('l',   3) : setColumns (80)  ; 
 			       			   clearEntireScreen(); 	
 			       			   setDefaultMargins();
-							   currentScreen->setCursorYX(0,0);
+							   _currentScreen->setCursorYX(0,0);
 			       					       break; 							  //VT100
 
     case TY_CSI_PR('h',   4) : /* IGNORED: soft scrolling           */ break; //VT100
     case TY_CSI_PR('l',   4) : /* IGNORED: soft scrolling           */ break; //VT100
 
-    case TY_CSI_PR('h',   5) : currentScreen->    setMode      (MODE_Screen   ); break; //VT100
-    case TY_CSI_PR('l',   5) : currentScreen->  resetMode      (MODE_Screen   ); break; //VT100
+    case TY_CSI_PR('h',   5) : _currentScreen->    setMode      (MODE_Screen   ); break; //VT100
+    case TY_CSI_PR('l',   5) : _currentScreen->  resetMode      (MODE_Screen   ); break; //VT100
 
-    case TY_CSI_PR('h',   6) : currentScreen->    setMode      (MODE_Origin   ); break; //VT100
-    case TY_CSI_PR('l',   6) : currentScreen->  resetMode      (MODE_Origin   ); break; //VT100
-    case TY_CSI_PR('s',   6) : currentScreen->   saveMode      (MODE_Origin   ); break; //FIXME
-    case TY_CSI_PR('r',   6) : currentScreen->restoreMode      (MODE_Origin   ); break; //FIXME
+    case TY_CSI_PR('h',   6) : _currentScreen->    setMode      (MODE_Origin   ); break; //VT100
+    case TY_CSI_PR('l',   6) : _currentScreen->  resetMode      (MODE_Origin   ); break; //VT100
+    case TY_CSI_PR('s',   6) : _currentScreen->   saveMode      (MODE_Origin   ); break; //FIXME
+    case TY_CSI_PR('r',   6) : _currentScreen->restoreMode      (MODE_Origin   ); break; //FIXME
 
-    case TY_CSI_PR('h',   7) : currentScreen->    setMode      (MODE_Wrap     ); break; //VT100
-    case TY_CSI_PR('l',   7) : currentScreen->  resetMode      (MODE_Wrap     ); break; //VT100
-    case TY_CSI_PR('s',   7) : currentScreen->   saveMode      (MODE_Wrap     ); break; //FIXME
-    case TY_CSI_PR('r',   7) : currentScreen->restoreMode      (MODE_Wrap     ); break; //FIXME
+    case TY_CSI_PR('h',   7) : _currentScreen->    setMode      (MODE_Wrap     ); break; //VT100
+    case TY_CSI_PR('l',   7) : _currentScreen->  resetMode      (MODE_Wrap     ); break; //VT100
+    case TY_CSI_PR('s',   7) : _currentScreen->   saveMode      (MODE_Wrap     ); break; //FIXME
+    case TY_CSI_PR('r',   7) : _currentScreen->restoreMode      (MODE_Wrap     ); break; //FIXME
 
     case TY_CSI_PR('h',   8) : /* IGNORED: autorepeat on            */ break; //VT100
     case TY_CSI_PR('l',   8) : /* IGNORED: autorepeat off           */ break; //VT100
@@ -798,7 +799,7 @@ switch( N )
     case TY_CSI_PR('r', 1003) :      restoreMode      (MODE_Mouse1003); break; //XTERM
 
     case TY_CSI_PR('h', 1047) :          setMode      (MODE_AppScreen); break; //XTERM
-    case TY_CSI_PR('l', 1047) : screen[1]->clearEntireScreen(); resetMode(MODE_AppScreen); break; //XTERM
+    case TY_CSI_PR('l', 1047) : _screen[1]->clearEntireScreen(); resetMode(MODE_AppScreen); break; //XTERM
     case TY_CSI_PR('s', 1047) :         saveMode      (MODE_AppScreen); break; //XTERM
     case TY_CSI_PR('r', 1047) :      restoreMode      (MODE_AppScreen); break; //XTERM
 
@@ -810,26 +811,26 @@ switch( N )
 
     //FIXME: every once new sequences like this pop up in xterm.
     //       Here's a guess of what they could mean.
-    case TY_CSI_PR('h', 1049) : saveCursor(); screen[1]->clearEntireScreen(); setMode(MODE_AppScreen); break; //XTERM
+    case TY_CSI_PR('h', 1049) : saveCursor(); _screen[1]->clearEntireScreen(); setMode(MODE_AppScreen); break; //XTERM
     case TY_CSI_PR('l', 1049) : resetMode(MODE_AppScreen); restoreCursor(); break; //XTERM
 
     //FIXME: weird DEC reset sequence
     case TY_CSI_PE('p'      ) : /* IGNORED: reset         (        ) */ break;
 
     //FIXME: when changing between vt52 and ansi mode evtl do some resetting.
-    case TY_VT52('A'      ) : currentScreen->cursorUp             (         1); break; //VT52
-    case TY_VT52('B'      ) : currentScreen->cursorDown           (         1); break; //VT52
-    case TY_VT52('C'      ) : currentScreen->cursorRight          (         1); break; //VT52
-    case TY_VT52('D'      ) : currentScreen->cursorLeft           (         1); break; //VT52
+    case TY_VT52('A'      ) : _currentScreen->cursorUp             (         1); break; //VT52
+    case TY_VT52('B'      ) : _currentScreen->cursorDown           (         1); break; //VT52
+    case TY_VT52('C'      ) : _currentScreen->cursorRight          (         1); break; //VT52
+    case TY_VT52('D'      ) : _currentScreen->cursorLeft           (         1); break; //VT52
 
     case TY_VT52('F'      ) :      setAndUseCharset     (0,    '0'); break; //VT52
     case TY_VT52('G'      ) :      setAndUseCharset     (0,    'B'); break; //VT52
 
-    case TY_VT52('H'      ) : currentScreen->setCursorYX          (1,1       ); break; //VT52
-    case TY_VT52('I'      ) : currentScreen->reverseIndex         (          ); break; //VT52
-    case TY_VT52('J'      ) : currentScreen->clearToEndOfScreen   (          ); break; //VT52
-    case TY_VT52('K'      ) : currentScreen->clearToEndOfLine     (          ); break; //VT52
-    case TY_VT52('Y'      ) : currentScreen->setCursorYX          (p-31,q-31 ); break; //VT52
+    case TY_VT52('H'      ) : _currentScreen->setCursorYX          (1,1       ); break; //VT52
+    case TY_VT52('I'      ) : _currentScreen->reverseIndex         (          ); break; //VT52
+    case TY_VT52('J'      ) : _currentScreen->clearToEndOfScreen   (          ); break; //VT52
+    case TY_VT52('K'      ) : _currentScreen->clearToEndOfLine     (          ); break; //VT52
+    case TY_VT52('Y'      ) : _currentScreen->setCursorYX          (p-31,q-31 ); break; //VT52
     case TY_VT52('Z'      ) :      reportTerminalType   (           ); break; //VT52
     case TY_VT52('<'      ) :          setMode      (MODE_Ansi     ); break; //VT52
     case TY_VT52('='      ) :          setMode      (MODE_AppKeyPad); break; //VT52
@@ -872,7 +873,7 @@ void Vt102Emulation::sendString(const char* s)
 
 void Vt102Emulation::reportCursorPosition()
 { char tmp[20];
-  sprintf(tmp,"\033[%d;%dR",currentScreen->getCursorY()+1,currentScreen->getCursorX()+1);
+  sprintf(tmp,"\033[%d;%dR",_currentScreen->getCursorY()+1,_currentScreen->getCursorX()+1);
   sendString(tmp);
 }
 
@@ -972,16 +973,16 @@ void Vt102Emulation::scrollLock(const bool lock)
 {
   if (lock)
   {
-    holdScreen = true;
+    _holdScreen = true;
     emit lockPty(true);
   }
   else
   {
-    holdScreen = false;
+    _holdScreen = false;
     emit lockPty(false);
   }
 #if defined(HAVE_XKB)
-  if (holdScreen)
+  if (_holdScreen)
     scrolllock_set_on();
   else
     scrolllock_set_off();
@@ -990,7 +991,7 @@ void Vt102Emulation::scrollLock(const bool lock)
 
 void Vt102Emulation::onScrollLock()
 {
-  bool switchlock = !holdScreen;
+  bool switchlock = !_holdScreen;
   scrollLock(switchlock);
 }
 
@@ -1022,7 +1023,7 @@ void Vt102Emulation::onKeyPress( QKeyEvent* ev )
   int cmd = CMD_none; 
   QByteArray txt; 
   bool metaspecified;
-  if (keytrans->findEntry(ev->key(), encodeMode(MODE_NewLine  , BITS_NewLine   ) + // OLD,
+  if (_keyTranslator->findEntry(ev->key(), encodeMode(MODE_NewLine  , BITS_NewLine   ) + // OLD,
                                      encodeMode(MODE_Ansi     , BITS_Ansi      ) + // OBSOLETE,
                                      encodeMode(MODE_AppCuKeys, BITS_AppCuKeys ) + // VT100 stuff
                                      encodeMode(MODE_AppScreen, BITS_AppScreen ) + // VT100 stuff
@@ -1041,7 +1042,7 @@ void Vt102Emulation::onKeyPress( QKeyEvent* ev )
     //case CMD_scrollLineDown : scrollView(+1             ); return;
     case CMD_scrollLock     : onScrollLock(                ); return;
   }
-  if (holdScreen)
+  if (_holdScreen)
   {
     switch(ev->key())
     {
@@ -1062,7 +1063,7 @@ void Vt102Emulation::onKeyPress( QKeyEvent* ev )
   if (!ev->text().isEmpty())
   {
     if (ev->modifiers() & Qt::AltModifier) sendString("\033"); // ESC, this is the ALT prefix
-    QByteArray s = m_codec->fromUnicode(ev->text());     // encode for application
+    QByteArray s = _codec->fromUnicode(ev->text());     // encode for application
     // FIXME: In Qt 2, QKeyEvent::text() would return "\003" for Ctrl-C etc.
     //        while in Qt 3 it returns the actual key ("c" or "C") which caused
     //        the ControlButton to be ignored. This hack seems to work for
@@ -1098,7 +1099,7 @@ void Vt102Emulation::onKeyPress( QKeyEvent* ev )
    particular glyphs allocated in (0x00-0x1f) in their code page.
 */
 
-#define CHARSET charset[currentScreen==screen[1]]
+#define CHARSET _charset[_currentScreen==_screen[1]]
 
 // Apply current character map.
 
@@ -1111,20 +1112,20 @@ unsigned short Vt102Emulation::applyCharset(unsigned short c)
 
 /*
    "Charset" related part of the emulation state.
-   This configures the VT100 charset filter.
+   This configures the VT100 _charset filter.
 
-   While most operation work on the current screen,
+   While most operation work on the current _screen,
    the following two are different.
 */
 
 void Vt102Emulation::resetCharset(int scrno)
 {
-  charset[scrno].cu_cs   = 0;
-  strncpy(charset[scrno].charset,"BBBB",4);
-  charset[scrno].sa_graphic = false;
-  charset[scrno].sa_pound   = false;
-  charset[scrno].graphic = false;
-  charset[scrno].pound   = false;
+  _charset[scrno].cu_cs   = 0;
+  strncpy(_charset[scrno].charset,"BBBB",4);
+  _charset[scrno].sa_graphic = false;
+  _charset[scrno].sa_pound   = false;
+  _charset[scrno].graphic = false;
+  _charset[scrno].pound   = false;
 }
 
 /*!
@@ -1132,8 +1133,8 @@ void Vt102Emulation::resetCharset(int scrno)
 
 void Vt102Emulation::setCharset(int n, int cs) // on both screens.
 {
-  charset[0].charset[n&3] = cs; useCharset(charset[0].cu_cs);
-  charset[1].charset[n&3] = cs; useCharset(charset[1].cu_cs);
+  _charset[0].charset[n&3] = cs; useCharset(_charset[0].cu_cs);
+  _charset[1].charset[n&3] = cs; useCharset(_charset[1].cu_cs);
 }
 
 /*!
@@ -1157,14 +1158,14 @@ void Vt102Emulation::useCharset(int n)
 
 void Vt102Emulation::setDefaultMargins()
 {
-	screen[0]->setDefaultMargins();
-	screen[1]->setDefaultMargins();
+	_screen[0]->setDefaultMargins();
+	_screen[1]->setDefaultMargins();
 }
 
 void Vt102Emulation::setMargins(int t, int b)
 {
-  screen[0]->setMargins(t, b);
-  screen[1]->setMargins(t, b);
+  _screen[0]->setMargins(t, b);
+  _screen[1]->setMargins(t, b);
 }
 
 /*! Save the cursor position and the rendition attribute settings. */
@@ -1174,9 +1175,9 @@ void Vt102Emulation::saveCursor()
   CHARSET.sa_graphic = CHARSET.graphic;
   CHARSET.sa_pound   = CHARSET.pound; //This mode is obsolete
   // we are not clear about these
-  //sa_charset = charsets[cScreen->charset];
-  //sa_charset_num = cScreen->charset;
-  currentScreen->saveCursor();
+  //sa_charset = charsets[cScreen->_charset];
+  //sa_charset_num = cScreen->_charset;
+  _currentScreen->saveCursor();
 }
 
 /*! Restore the cursor position and the rendition attribute settings. */
@@ -1185,7 +1186,7 @@ void Vt102Emulation::restoreCursor()
 {
   CHARSET.graphic = CHARSET.sa_graphic;
   CHARSET.pound   = CHARSET.sa_pound; //This mode is obsolete
-  currentScreen->restoreCursor();
+  _currentScreen->restoreCursor();
 }
 
 /* ------------------------------------------------------------------------- */
@@ -1198,10 +1199,10 @@ void Vt102Emulation::restoreCursor()
    Some of the emulations state is either added to the state of the screens.
 
    This causes some scoping problems, since different emulations choose to
-   located the mode either to the current screen or to both.
+   located the mode either to the current _screen or to both.
 
    For strange reasons, the extend of the rendition attributes ranges over
-   all screens and not over the actual screen.
+   all screens and not over the actual _screen.
 
    We decided on the precise precise extend, somehow.
 */
@@ -1220,12 +1221,12 @@ void Vt102Emulation::resetModes()
   resetMode(MODE_AppCuKeys); saveMode(MODE_AppCuKeys);
   resetMode(MODE_NewLine  );
     setMode(MODE_Ansi     );
-  holdScreen = false;
+  _holdScreen = false;
 }
 
 void Vt102Emulation::setMode(int m)
 {
-  currParm.mode[m] = true;
+  _currParm.mode[m] = true;
   switch (m)
   {
     case MODE_Mouse1000:
@@ -1235,20 +1236,20 @@ void Vt102Emulation::setMode(int m)
  	    emit programUsesMouse(false); 
     break;
 
-    case MODE_AppScreen : screen[1]->clearSelection();
+    case MODE_AppScreen : _screen[1]->clearSelection();
                           setScreen(1);
     break;
   }
   if (m < MODES_SCREEN || m == MODE_NewLine)
   {
-    screen[0]->setMode(m);
-    screen[1]->setMode(m);
+    _screen[0]->setMode(m);
+    _screen[1]->setMode(m);
   }
 }
 
 void Vt102Emulation::resetMode(int m)
 {
-  currParm.mode[m] = false;
+  _currParm.mode[m] = false;
   switch (m)
   {
     case MODE_Mouse1000 : 
@@ -1258,30 +1259,30 @@ void Vt102Emulation::resetMode(int m)
 	    emit programUsesMouse(true); 
     break;
 
-    case MODE_AppScreen : screen[0]->clearSelection();
+    case MODE_AppScreen : _screen[0]->clearSelection();
                           setScreen(0);
     break;
   }
   if (m < MODES_SCREEN || m == MODE_NewLine)
   {
-    screen[0]->resetMode(m);
-    screen[1]->resetMode(m);
+    _screen[0]->resetMode(m);
+    _screen[1]->resetMode(m);
   }
 }
 
 void Vt102Emulation::saveMode(int m)
 {
-  saveParm.mode[m] = currParm.mode[m];
+  _saveParm.mode[m] = _currParm.mode[m];
 }
 
 void Vt102Emulation::restoreMode(int m)
 {
-  if(saveParm.mode[m]) setMode(m); else resetMode(m);
+  if(_saveParm.mode[m]) setMode(m); else resetMode(m);
 }
 
 bool Vt102Emulation::getMode(int m)
 {
-  return currParm.mode[m];
+  return _currParm.mode[m];
 }
 
 #warning "Code to handle signal/slot connections has already been moved elsewhere, but mouse mode refreshing part below has not yet been looked at.  Neither has the part inside the HAVE_XKB define which calls scrolllock_set_xyz."
@@ -1307,7 +1308,7 @@ bool Vt102Emulation::getMode(int m)
       		resetMode(mouseModes[mode]);
     }
 #if defined(HAVE_XKB)
-    if (holdScreen)
+    if (_holdScreen)
       scrolllock_set_on();
     else
       scrolllock_set_off();
@@ -1329,7 +1330,7 @@ char Vt102Emulation::getErase()
   QByteArray txt; 
   bool metaspecified;
   
-  if (keytrans->findEntry(Qt::Key_Backspace, 0, &cmd, txt,
+  if (_keyTranslator->findEntry(Qt::Key_Backspace, 0, &cmd, txt,
       &metaspecified) && (cmd==CMD_send) && (txt.length() == 1))
     return txt[0];
     

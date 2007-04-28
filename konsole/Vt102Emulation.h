@@ -30,11 +30,8 @@
 #include <QTimer>
 
 // Konsole
-#include "TerminalDisplay.h"
-#include "Screen.h"
 #include "Emulation.h"
-
-
+#include "Screen.h"
 
 #define MODE_AppScreen (MODES_SCREEN+0)
 #define MODE_AppCuKeys (MODES_SCREEN+1)
@@ -200,7 +197,13 @@ private:
 
   void onScrollLock();
   void scrollLock(const bool lock);
-  
+ 
+protected slots:
+		
+  //causes changeTitle() to be emitted for each (int,QString) pair in pendingTitleUpdates
+  //used to buffer multiple title updates
+  void updateTitle();
+ 
 protected:
 
   unsigned short applyCharset(unsigned short c);
@@ -215,23 +218,18 @@ protected:
   //set margins for all screens back to their defaults
   void setDefaultMargins();
 
-  CharCodes charset[2];
+  CharCodes _charset[2];
 
-  DECpar currParm;
-  DECpar saveParm;
-  bool holdScreen;
+  DECpar _currParm;
+  DECpar _saveParm;
+  bool _holdScreen;
 
   //hash table and timer for buffering calls to the session instance to update the name of the session
   //or window title.
   //these calls occur when certain escape sequences are seen in the output from the terminal
-  QHash<int,QString> pendingTitleUpdates;
-  QTimer titleUpdateTimer;
+  QHash<int,QString> _pendingTitleUpdates;
+  QTimer _titleUpdateTimer;
   
-protected slots:
-		
-  //causes changeTitle() to be emitted for each (int,QString) pair in pendingTitleUpdates
-  //used to buffer multiple title updates
-  void updateTitle();
 };
 
 };

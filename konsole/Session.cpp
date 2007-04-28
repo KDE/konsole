@@ -50,6 +50,9 @@
 //TODO - Re-add adaptors
 //#include "sessionadaptor.h"
 //#include "sessionscriptingadaptor.h"
+#include "Pty.h"
+#include "TerminalDisplay.h"
+#include "Vt102Emulation.h"
 #include "ZModemDialog.h"
 
 #include "Session.h"
@@ -61,13 +64,12 @@ int Session::lastSessionId = 0;
 Session::Session() : 
     _shellProcess(0)
    , _emulation(0)
-   , connected(true)
-   , monitorActivity(false)
-   , monitorSilence(false)
-   , notifiedActivity(false)
-   , masterMode(false)
-   , autoClose(true)
-   , wantedClose(false)
+   , _monitorActivity(false)
+   , _monitorSilence(false)
+   , _notifiedActivity(false)
+   , _masterMode(false)
+   , _autoClose(true)
+   , _wantedClose(false)
    , _silenceSeconds(10)
    , _addToUtmp(true)
    , _flowControl(true)
@@ -115,8 +117,8 @@ Session::Session() :
     connect( _shellProcess,SIGNAL(done(int)), this,SLOT(done(int)) );
  
     //setup timer for monitoring session activity
-    monitorTimer = new QTimer(this);
-    connect(monitorTimer, SIGNAL(timeout()), this, SLOT(monitorTimerDone()));
+    _monitorTimer = new QTimer(this);
+    connect(_monitorTimer, SIGNAL(timeout()), this, SLOT(monitorTimerDone()));
 
     //TODO: Investigate why a single-shot timer is used here 
     if (!_shellProcess->error().isEmpty())
@@ -242,8 +244,8 @@ void Session::run()
 
   QString dbusService = QDBusConnection::sessionBus().baseService();
   QString cwd_save = QDir::currentPath();
-  if (!_initial_cwd.isEmpty())
-     QDir::setCurrent(_initial_cwd);
+  if (!_initialWorkingDir.isEmpty())
+     QDir::setCurrent(_initialWorkingDir);
   _shellProcess->setXonXoff(_flowControl);
 
   int result = _shellProcess->run(QFile::encodeName(_program), 
@@ -261,10 +263,10 @@ void Session::run()
   }
   _shellProcess->setErase(_emulation->getErase());
 
-  if (!_initial_cwd.isEmpty())
+  if (!_initialWorkingDir.isEmpty())
      QDir::setCurrent(cwd_save);
   else
-     _initial_cwd=cwd_save;
+     _initialWorkingDir=cwd_save;
 
   _shellProcess->setWriteable(false);  // We are reachable via kwrited.
 
@@ -319,9 +321,9 @@ void Session::setUserTitle( int what, const QString &caption )
 	}
 	
     if (what == 31) {
-       _cwd=caption;
-       _cwd=_cwd.replace( QRegExp("^~"), QDir::homePath() );
-       emit openUrlRequest(_cwd);
+       QString cwd=caption;
+       cwd=cwd.replace( QRegExp("^~"), QDir::homePath() );
+       emit openUrlRequest(cwd);
 	}
 	
     if (what == 32) { // change icon via \033]32;Icon\007
@@ -359,7 +361,7 @@ void Session::monitorTimerDone()
   //
   //This breaks with the addition of multiple views of a session.  The popup should disappear
   //when any of the views of the session becomes active
-  if (monitorSilence) {
+  if (_monitorSilence) {
     KNotification::event("Silence", i18n("Silence in session '%1'", _title), QPixmap(), 
                     QApplication::activeWindow(), 
                     KNotification::CloseWhenWidgetActivated);
@@ -370,7 +372,7 @@ void Session::monitorTimerDone()
     emit notifySessionState(this,NOTIFYNORMAL);
   }
   
-  notifiedActivity=false;
+  _notifiedActivity=false;
 }
 
 void Session::notifySessionState(int state)
@@ -381,25 +383,25 @@ void Session::notifySessionState(int state)
   } 
   else if (state==NOTIFYACTIVITY) 
   {
-    if (monitorSilence) {
-      monitorTimer->setSingleShot(true);
-      monitorTimer->start(_silenceSeconds*1000);
+    if (_monitorSilence) {
+      _monitorTimer->setSingleShot(true);
+      _monitorTimer->start(_silenceSeconds*1000);
     }
     
     //FIXME:  See comments in Session::monitorTimerDone()
-    if (!notifiedActivity) {
+    if (!_notifiedActivity) {
       KNotification::event("Activity", i18n("Activity in session '%1'", _title), QPixmap(),
                       QApplication::activeWindow(), 
       KNotification::CloseWhenWidgetActivated);
-      notifiedActivity=true;
+      _notifiedActivity=true;
     }
-      monitorTimer->setSingleShot(true);
-      monitorTimer->start(_silenceSeconds*1000);
+      _monitorTimer->setSingleShot(true);
+      _monitorTimer->start(_silenceSeconds*1000);
   }
 
-  if ( state==NOTIFYACTIVITY && !monitorActivity )
+  if ( state==NOTIFYACTIVITY && !_monitorActivity )
           state = NOTIFYNORMAL;
-  if ( state==NOTIFYSILENCE && !monitorSilence )
+  if ( state==NOTIFYSILENCE && !_monitorSilence )
           state = NOTIFYNORMAL;
 
   emit notifySessionState(this, state);
@@ -443,8 +445,8 @@ bool Session::sendSignal(int signal)
 
 bool Session::closeSession()
 {
-  autoClose = true;
-  wantedClose = true;
+  _autoClose = true;
+  _wantedClose = true;
   if (!_shellProcess->isRunning() || !sendSignal(SIGHUP))
   {
      // Forced close.
@@ -487,13 +489,13 @@ void Session::done() {
 
 void Session::done(int exitStatus)
 {
-  if (!autoClose)
+  if (!_autoClose)
   {
     _userTitle = i18n("<Finished>");
     emit updateTitle();
     return;
   }
-  if (!wantedClose && (exitStatus || _shellProcess->signalled()))
+  if (!_wantedClose && (exitStatus || _shellProcess->signalled()))
   {
     QString message;
 
@@ -629,30 +631,31 @@ QString Session::program() const
   return _program;
 }
 
-bool Session::isMonitorActivity() const { return monitorActivity; }
-bool Session::isMonitorSilence()  const { return monitorSilence; }
-bool Session::isMasterMode()      const { return masterMode; }
+bool Session::isMonitorActivity() const { return _monitorActivity; }
+bool Session::isMonitorSilence()  const { return _monitorSilence; }
+bool Session::isMasterMode()      const { return _masterMode; }
 
 void Session::setMonitorActivity(bool _monitor)
 {
-  monitorActivity=_monitor;
-  notifiedActivity=false;
+  _monitorActivity=_monitor;
+  _notifiedActivity=false;
 
   notifySessionState(NOTIFYNORMAL);
 }
 
 void Session::setMonitorSilence(bool _monitor)
 {
-  if (monitorSilence==_monitor)
+  if (_monitorSilence==_monitor)
     return;
 
-  monitorSilence=_monitor;
-  if (monitorSilence) {
-    monitorTimer->setSingleShot(true);
-    monitorTimer->start(_silenceSeconds*1000);
+  _monitorSilence=_monitor;
+  if (_monitorSilence) 
+  {
+    _monitorTimer->setSingleShot(true);
+    _monitorTimer->start(_silenceSeconds*1000);
   }
   else
-    monitorTimer->stop();
+    _monitorTimer->stop();
 
   notifySessionState(NOTIFYNORMAL);
 }
@@ -660,15 +663,15 @@ void Session::setMonitorSilence(bool _monitor)
 void Session::setMonitorSilenceSeconds(int seconds)
 {
   _silenceSeconds=seconds;
-  if (monitorSilence) {
-    monitorTimer->setSingleShot(true);
-    monitorTimer->start(_silenceSeconds*1000);
+  if (_monitorSilence) {
+    _monitorTimer->setSingleShot(true);
+    _monitorTimer->start(_silenceSeconds*1000);
   }
 }
 
 void Session::setMasterMode(bool _master)
 {
-  masterMode=_master;
+  _masterMode=_master;
 }
 
 void Session::setAddToUtmp(bool set)
@@ -856,6 +859,11 @@ void Session::setSize(QSize size)
      return;
 
   emit resizeSession(this, size);
+}
+
+int Session::sessionPid() const
+{
+    return _shellProcess->pid();
 }
 
 #include "Session.moc"
