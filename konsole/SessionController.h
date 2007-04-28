@@ -67,9 +67,9 @@ public:
     virtual bool eventFilter(QObject* watched , QEvent* event);
 
     /** Returns the session associated with this controller */
-    Session* session() { return _session; }
+    QPointer<Session> session() { return _session; }
     /** Returns the view associated with this controller */
-    TerminalDisplay*  view()    { return _view;    }
+    QPointer<TerminalDisplay>  view()    { return _view;    }
 
     /** 
      * Sets the widget used for searches through the session's history. 
@@ -159,10 +159,11 @@ private:
     void beginSearch(const QString& text , int direction);
     void setupActions();
     void removeSearchFilter(); // remove and delete the current search filter if set
+    void setFindNextPrevEnabled(bool enabled);
 
 private:
-    Session*            _session;
-    TerminalDisplay*    _view;
+    QPointer<Session>         _session;
+    QPointer<TerminalDisplay> _view;
     KIcon      _sessionIcon;
     QString    _sessionIconName;
     int        _previousState;
@@ -171,7 +172,9 @@ private:
     RegExpFilter*   _searchFilter; 
 
     KAction* _searchToggleAction;
-
+    QAction* _findNextAction;
+    QAction* _findPreviousAction;
+    
     static KIcon _activityIcon;
     static KIcon _silenceIcon;
 

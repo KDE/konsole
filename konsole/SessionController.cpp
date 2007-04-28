@@ -47,8 +47,13 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _viewUrlFilter(0)
     , _searchFilter(0)
     , _searchToggleAction(0)
+    , _findNextAction(0)
+    , _findPreviousAction(0)
     , _urlFilterUpdateRequired(false)
 {
+    Q_ASSERT( session );
+    Q_ASSERT( view );
+
     // handle user interface related to session (menus etc.)
     setXMLFile("konsole/sessionui.rc");
     setupActions();
@@ -379,17 +384,19 @@ void SessionController::setupActions()
     action = collection->addAction("search-history" , _searchToggleAction);
     connect( action , SIGNAL(triggered()) , this , SLOT(searchHistory()) );
     
-    action = collection->addAction("find-next");
-    action->setIcon( KIcon("find-next") );
-    action->setText( i18n("Find Next") );
-    action->setShortcut( QKeySequence(Qt::Key_F3) );
-    connect( action , SIGNAL(triggered()) , this , SLOT(findNextInHistory()) );
-    
-    action = collection->addAction("find-previous");
-    action->setIcon( KIcon("find-previous") );
-    action->setText( i18n("Find Previous") );
-    action->setShortcut( QKeySequence(Qt::SHIFT + Qt::Key_F3) );
-    connect( action , SIGNAL(triggered()) , this , SLOT(findPreviousInHistory()) );
+    _findNextAction = collection->addAction("find-next");
+    _findNextAction->setIcon( KIcon("find-next") );
+    _findNextAction->setText( i18n("Find Next") );
+    _findNextAction->setShortcut( QKeySequence(Qt::Key_F3) );
+    _findNextAction->setEnabled(false);
+    connect( _findNextAction , SIGNAL(triggered()) , this , SLOT(findNextInHistory()) );
+
+    _findPreviousAction = collection->addAction("find-previous");
+    _findPreviousAction->setIcon( KIcon("find-previous") );
+    _findPreviousAction->setText( i18n("Find Previous") );
+    _findPreviousAction->setShortcut( QKeySequence(Qt::SHIFT + Qt::Key_F3) );
+    _findPreviousAction->setEnabled(false);
+    connect( _findPreviousAction , SIGNAL(triggered()) , this , SLOT(findPreviousInHistory()) );
     
     action = collection->addAction("save-history");
     action->setText( i18n("Save History") );
@@ -543,6 +550,8 @@ void SessionController::searchHistory(bool showSearchBar)
                 searchTextChanged(currentSearchText);
             }
 
+            setFindNextPrevEnabled(true);
+
             SessionTask* task = new SearchHistoryTask(_view->screenWindow());
             task->setAutoDelete(true);
             task->addSession( _session );
@@ -554,10 +563,16 @@ void SessionController::searchHistory(bool showSearchBar)
                     SLOT(searchTextChanged(const QString&)) );
 
             removeSearchFilter();
-            
+            setFindNextPrevEnabled(false);
+
             _view->setFocus( Qt::ActiveWindowFocusReason );
         }
     }
+}
+void SessionController::setFindNextPrevEnabled(bool enabled)
+{
+    _findNextAction->setEnabled(enabled);
+    _findPreviousAction->setEnabled(enabled);
 }
 void SessionController::searchTextChanged(const QString& text)
 {
@@ -573,6 +588,7 @@ void SessionController::searchTextChanged(const QString& text)
 void SessionController::beginSearch(const QString& text , int direction)
 {
     Q_ASSERT( _searchBar );
+    Q_ASSERT( _searchFilter );
 
     Qt::CaseSensitivity caseHandling = _searchBar->matchCase() ? Qt::CaseSensitive : Qt::CaseInsensitive;
     QRegExp::PatternSyntax syntax = _searchBar->matchRegExp() ? QRegExp::RegExp : QRegExp::FixedString;
@@ -623,10 +639,14 @@ void SessionController::highlightMatches(bool highlight)
 }
 void SessionController::findNextInHistory()
 {
+    Q_ASSERT( _searchBar );
+
     beginSearch(_searchBar->searchText(),SearchHistoryTask::Forwards);
 }
 void SessionController::findPreviousInHistory()
 {
+    Q_ASSERT( _searchBar );
+
     beginSearch(_searchBar->searchText(),SearchHistoryTask::Backwards);
 }
 void SessionController::historyOptions()
