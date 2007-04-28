@@ -147,8 +147,6 @@ void Application::detachView(Session* session)
 void Application::createSession(const QString& key , ViewManager* view)
 {
     Session* session = SessionManager::instance()->createSession(key);
-    session->setListenToKeyPress(true); 
-    //session->setConnect(true);
     
     // create view before starting the session process so that the session doesn't suffer
     // a change in terminal size right after the session starts.  some applications such as GNU Screen

@@ -170,7 +170,7 @@ void Vt102Emulation::reset()
   //kDebug(1211)<<"Vt102Emulation::reset() reset screen 1"<<endl;
   screen[1]->reset();
   //kDebug(1211)<<"Vt102Emulation::reset() setCodec()"<<endl;
-  setCodec(0);
+  setCodec(LocaleCodec);
   //kDebug(1211)<<"Vt102Emulation::reset() done"<<endl;
  
   bufferedUpdate();
@@ -563,8 +563,8 @@ switch( N )
     case TY_ESC_CS('+', 'A') :      setCharset           (3,    'A'); break; //VT100
     case TY_ESC_CS('+', 'B') :      setCharset           (3,    'B'); break; //VT100
 
-    case TY_ESC_CS('%', 'G') :      setCodec             (1         ); break; //LINUX
-    case TY_ESC_CS('%', '@') :      setCodec             (0         ); break; //LINUX
+    case TY_ESC_CS('%', 'G') :      setCodec             (Utf8Codec   ); break; //LINUX
+    case TY_ESC_CS('%', '@') :      setCodec             (LocaleCodec ); break; //LINUX
 
     case TY_ESC_DE('3'      ) : /* Double height line, top half    */ 
 								currentScreen->setLineProperty( LINE_DOUBLEWIDTH , true );
@@ -1016,8 +1016,6 @@ void Vt102Emulation::sendText( const QString& text )
 
 void Vt102Emulation::onKeyPress( QKeyEvent* ev )
 {
-  if (!listenToKeyPress) return; // someone else gets the keys
-
 //printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().length(),ev->text().length()?ev->text().ascii()[0]:0);
 
   // lookup in keyboard translation table ...

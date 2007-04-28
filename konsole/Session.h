@@ -57,10 +57,11 @@ class ColorScheme;
  * activity.
  */
 class Session : public QObject
-{ Q_OBJECT
+{ 
+Q_OBJECT
 
 public:
-  Q_PROPERTY(QString sessionName READ sessionName)
+  Q_PROPERTY(QString sessionName READ title)
   Q_PROPERTY(QString encoding READ encoding WRITE setEncoding)
   Q_PROPERTY(int sessionPid READ sessionPid)
   Q_PROPERTY(QString keytab READ keytab WRITE setKeytab)
@@ -91,8 +92,6 @@ public:
    * all views of a session will display the same number of lines and 
    * columns.
    *
-   * When the Session instance is destroyed, any views which are still 
-   * attached will also be deleted.
    */
   void addView(TerminalDisplay* widget);
   /** 
@@ -108,8 +107,6 @@ public:
    */
   QList<TerminalDisplay*> views() const;
 
-  void        setListenToKeyPress(bool l);
-
   /**
    * Returns the terminal emulation instance being used to encode / decode 
    * characters to / from the process.
@@ -119,8 +116,6 @@ public:
   bool        isMonitorActivity() const;
   bool        isMonitorSilence()  const;
   bool        isMasterMode()      const;
-  int         encodingNo()        const;
-  int         fontNo()            const;
 
   /** 
    * Returns the value of the TERM environment variable which will 
@@ -155,10 +150,12 @@ public:
    */
   QString displayTitle() const;
 
-  int keymapNo() const;
   QString keymap() const;
-  QStringList getArgs();
-  QString getPgm();
+
+  /** Returns the arguments passed to the shell process when run() is called. */
+  QStringList arguments() const;
+  /** Returns the program name of the shell process started when run() is called. */
+  QString program() const;
 
   /** 
    * Sets the command line arguments which the session's program will be passed when
@@ -169,7 +166,6 @@ public:
   void setProgram(const QString& program);
 
   /** Returns the session's current working directory. */
-  QString currentWorkingDirectory();
   QString initialWorkingDirectory() { return _initial_cwd; }
   
   /** 
@@ -180,19 +176,12 @@ public:
  
   void setHistory(const HistoryType&);
   const HistoryType& history();
+  void clearHistory();
 
   void setMonitorActivity(bool);
   void setMonitorSilence(bool);
   void setMonitorSilenceSeconds(int seconds);
   void setMasterMode(bool);
-  
-    //TODO - Remove these functions which use indicies to reference keyboard layouts,
-    //       encodings etc. and replace them either with methods that 
-    //       use pointers or references to the font object / keyboard 
-    //       layout object etc. or a QString key
-    void setEncodingNo(int index);
-    void setKeymapNo(int kn);
-    void setFontNo(int fn);
   
   void setKeymap(const QString& _id);
   void setTitle(const QString& _title);
@@ -206,11 +195,9 @@ public:
   void setAutoClose(bool b) { autoClose = b; }
   void renameSession(const QString &name);
 
-  bool closeSession();
-  void clearHistory();
+  
   void feedSession(const QString &text);
   void sendSession(const QString &text);
-  QString sessionName() { return _title; }
   
   /** 
    * Returns the process id of the terminal process. 
@@ -227,18 +214,29 @@ public:
   void setEncoding(const QString &encoding);
   QString keytab();
   void setKeytab(const QString &keytab);
+
+  /** Returns the terminal session's window size in lines and columns. */
   QSize size();
+  /** 
+   * Emits a request to resize the session to accomodate
+   * the specified window size.
+   *
+   * @param size The size in lines and columns to request.
+   */
   void setSize(QSize size);
   
-public Q_SLOTS:
+public slots:
 
   void run();
   void done();
   void done(int);
-  void terminate();
+  bool closeSession();
+  
   void setUserTitle( int, const QString &caption );
   void changeTabTextColor( int );
+  
   void ptyError();
+ 
   void slotZModemDetected();
   void emitZModemDetected();
 
@@ -248,7 +246,7 @@ public Q_SLOTS:
   void zmodemDone();
   void zmodemContinue();
 
-Q_SIGNALS:
+signals:
 
   void processExited();
   void receivedData( const QString& text );
@@ -266,15 +264,16 @@ Q_SIGNALS:
   void openUrlRequest(const QString &cwd);
 
   void zmodemDetected(Session *);
-  void updateSessionConfig(Session *);
+  void updateSessionConfig(Session*);
   void resizeSession(Session *session, QSize size);
   void setSessionEncoding(Session *session, const QString &encoding);
 
-private Q_SLOTS:
-  void onReceiveBlock( const char* buf, int len );
+private slots:
+  void onReceiveBlock( const char* buffer, int len );
   void monitorTimerDone();
   void notifySessionState(int state);
   void onContentSizeChange(int height, int width);
+
   //automatically detach views from sessions when view is destroyed
   void viewDestroyed(QObject* view);
 
@@ -284,7 +283,7 @@ private:
 
   int            _uniqueIdentifier;
 
-  Pty*         _shellProcess;
+  Pty*          _shellProcess;
   Emulation*    _emulation;
 
   QList<TerminalDisplay*> _views;
@@ -298,11 +297,6 @@ private:
   bool           wantedClose;
   QTimer*        monitorTimer;
 
-  //FIXME: using the indices here
-  // is propably very bad. We should
-  // use a persistent reference instead.
-  //
-  int            _fontNo;
   int            _silenceSeconds;
 
   QString        _title;
@@ -333,7 +327,6 @@ private:
   // Color/Font Changes by ESC Sequences
 
   QColor         _modifiedBackground; // as set by: echo -en '\033]11;Color\007
-  int            _encoding_no;
 
   QString        _type;
 

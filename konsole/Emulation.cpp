@@ -105,7 +105,6 @@ using namespace Konsole;
 
 Emulation::Emulation() :
   currentScreen(0),
-  listenToKeyPress(false),
   m_codec(0),
   decoder(0),
   keytrans(0)
@@ -188,6 +187,8 @@ const HistoryType& Emulation::history()
 
 void Emulation::setCodec(const QTextCodec * qtc)
 {
+  Q_ASSERT( qtc );
+
   m_codec = qtc;
   delete decoder;
   decoder = m_codec->makeDecoder();
@@ -195,15 +196,12 @@ void Emulation::setCodec(const QTextCodec * qtc)
   emit useUtf8(utf8());
 }
 
-void Emulation::setCodec(int c)
+void Emulation::setCodec(EmulationCodec codec)
 {
-  setCodec(c ? QTextCodec::codecForName("utf8")
-           : QTextCodec::codecForLocale());
-}
-
-void Emulation::setKeymap(int no)
-{
-  keytrans = KeyTrans::find(no);
+    if ( codec == Utf8Codec )
+        setCodec( QTextCodec::codecForName("utf8") );
+    else if ( codec == LocaleCodec )
+        setCodec( QTextCodec::codecForLocale() );
 }
 
 void Emulation::setKeymap(const QString &id)
@@ -216,10 +214,6 @@ QString Emulation::keymap()
   return keytrans->id();
 }
 
-int Emulation::keymapNo()
-{
-  return keytrans->numb();
-}
 
 // Interpreting Codes ---------------------------------------------------------
 
@@ -261,7 +255,6 @@ void Emulation::onReceiveChar(int c)
 
 void Emulation::onKeyPress( QKeyEvent* ev )
 {
-  if (!listenToKeyPress) return; // someone else gets the keys
   emit notifySessionState(NOTIFYNORMAL);
   
   if (!ev->text().isEmpty())
@@ -458,11 +451,6 @@ void Emulation::bufferedUpdate()
 char Emulation::getErase()
 {
   return '\b';
-}
-
-void Emulation::setListenToKeyPress(bool l)
-{
-  listenToKeyPress=l;
 }
 
 // ---------------------------------------------------------------------------

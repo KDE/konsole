@@ -114,7 +114,6 @@ void Part::sendInput( const QString& text )
 Session* Part::createSession(const QString& key)
 {
     Session* session = SessionManager::instance()->createSession(key);
-    session->setListenToKeyPress(true);
 
     _viewManager->createView(session);
 

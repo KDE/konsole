@@ -68,8 +68,6 @@ Session::Session() :
    , masterMode(false)
    , autoClose(true)
    , wantedClose(false)
-   //, schema_no(0)
-   , _fontNo(3)
    , _silenceSeconds(10)
    , _addToUtmp(true)
    , _flowControl(true)
@@ -79,7 +77,6 @@ Session::Session() :
    , _zmodemBusy(false)
    , _zmodemProc(0)
    , _zmodemProgress(0)
-   , _encoding_no(0)
 {
     //prepare DBus communication
     //TODO - Re-add Session adaptor
@@ -280,7 +277,8 @@ void Session::changeTabTextColor( int color )
 
 void Session::setUserTitle( int what, const QString &caption )
 {
-	bool modified = false; //set to true if anything is actually changed (eg. old _title != new _title )
+    //set to true if anything is actually changed (eg. old _title != new _title )
+	bool modified = false; 
 	
     // (btw: what=0 changes _title and icon, what=1 only icon, what=2 only _title
     if ((what == 0) || (what == 2)) {
@@ -458,9 +456,7 @@ bool Session::closeSession()
 void Session::feedSession(const QString &text)
 {
   emit disableMasterModeConnections();
-  setListenToKeyPress(true);
   _emulation->sendText(text);
-  setListenToKeyPress(false);
   emit enableMasterModeConnections();
 }
 
@@ -482,22 +478,6 @@ Session::~Session()
   delete _emulation;
   delete _shellProcess;
   delete _zmodemProc;
-
-  QListIterator<TerminalDisplay*> viewIter(_views);
-  while (viewIter.hasNext())
-      viewIter.next()->deleteLater();
-}
-
-/*void Session::setConnect(bool c)
-{
-  connected=c;
-  _emulation->setConnect(c);
-  setListenToKeyPress(c);
-}*/
-
-void Session::setListenToKeyPress(bool l)
-{
-  _emulation->setListenToKeyPress(l);
 }
 
 void Session::done() {
@@ -538,36 +518,14 @@ void Session::done(int exitStatus)
   emit done(this);
 }
 
-void Session::terminate()
-{
-  delete this;
-}
-
 Emulation* Session::emulation() const
 {
   return _emulation;
 }
 
-// following interfaces might be misplaced ///
-
-int Session::encodingNo() const
-{
-  return _encoding_no;
-}
-
-int Session::keymapNo() const
-{
-  return _emulation->keymapNo();
-}
-
 QString Session::keymap() const
 {
   return _emulation->keymap();
-}
-
-int Session::fontNo() const
-{
-  return _fontNo;
 }
 
 const QString& Session::terminalType() const
@@ -585,24 +543,9 @@ int Session::sessionId() const
   return _sessionId;
 }
 
-void Session::setEncodingNo(int index)
-{
-  _encoding_no = index;
-}
-
-void Session::setKeymapNo(int kn)
-{
-  _emulation->setKeymap(kn);
-}
-
 void Session::setKeymap(const QString &id)
 {
   _emulation->setKeymap(id);
-}
-
-void Session::setFontNo(int fn)
-{
-  _fontNo = fn;
 }
 
 void Session::setTitle(const QString& title)
@@ -676,21 +619,14 @@ void Session::clearHistory()
   }
 }
 
-QStringList Session::getArgs()
+QStringList Session::arguments() const
 {
   return _arguments;
 }
 
-QString Session::getPgm()
+QString Session::program() const
 {
   return _program;
-}
-
-QString Session::currentWorkingDirectory()
-{
-  Q_ASSERT(false);
-
-  return QString();
 }
 
 bool Session::isMonitorActivity() const { return monitorActivity; }

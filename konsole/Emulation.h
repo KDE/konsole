@@ -196,16 +196,13 @@ public:
   //virtual void setConnect(bool r);
   //bool isConnected() { return connected; }
   
-  bool utf8() { return m_codec->mibEnum() == 106; }
+  bool utf8() { Q_ASSERT(m_codec); return m_codec->mibEnum() == 106; }
 
   virtual char getErase();
 
-  virtual void setListenToKeyPress(bool l);
   void setColumns(int columns);
 
-  void setKeymap(int no);
   void setKeymap(const QString &id);
-  int keymapNo();
   QString keymap();
 
   virtual void clearEntireScreen() =0;
@@ -230,9 +227,12 @@ protected:
    */
   void setScreen(int index); 
 
-  bool   listenToKeyPress;  // listen to input
-
-  void setCodec(int c); // codec number, 0 = locale, 1=utf8
+  enum EmulationCodec
+  {
+      LocaleCodec = 0,
+      Utf8Codec   = 1
+  };
+  void setCodec(EmulationCodec codec); // codec number, 0 = locale, 1=utf8
 
   //decodes an incoming C-style character stream into a unicode QString using 
   //the current text codec.  (this allows for rendering of non-ASCII characters in text files etc.)
