@@ -69,17 +69,17 @@ void FilterChain::reset()
     while (iter.hasNext())
         iter.next()->reset();
 }
+void FilterChain::setBuffer(const QString* buffer , const QList<int>* linePositions)
+{
+    QListIterator<Filter*> iter(*this);
+    while (iter.hasNext())
+        iter.next()->setBuffer(buffer,linePositions);
+}
 void FilterChain::process()
 {
     QListIterator<Filter*> iter(*this);
     while (iter.hasNext())
         iter.next()->process();
-}
-void FilterChain::addLine(const QString& line)
-{
-    QListIterator<Filter*> iter(*this);
-    while (iter.hasNext())
-        iter.next()->addLine(line);
 }
 void FilterChain::clear()
 {
@@ -114,22 +114,53 @@ QList<Filter::HotSpot*> FilterChain::hotSpots() const
 }
 //QList<Filter::HotSpot*> FilterChain::hotSpotsAtLine(int line) const;
 
-void TerminalImageFilterChain::addImage(const Character* const image , int lines , int columns)
+TerminalImageFilterChain::TerminalImageFilterChain()
+: _buffer(0)
+, _linePositions(0)
+{
+}
+
+TerminalImageFilterChain::~TerminalImageFilterChain()
+{
+    delete _buffer;
+    delete _linePositions;
+}
+
+void TerminalImageFilterChain::setImage(const Character* const image , int lines , int columns)
 {
     if (empty())
         return;
 
+    // reset all filters and hotspots
+    reset();
+
     PlainTextDecoder decoder;
     decoder.setTrailingWhitespace(false);
-    QString line;
-    QTextStream lineStream(&line);
+    
+    // setup new shared buffers for the filters to process on
+    QString* newBuffer = new QString();
+    QList<int>* newLinePositions = new QList<int>();
+    setBuffer( newBuffer , newLinePositions );
 
+    // free the old buffers
+    delete _buffer;
+    delete _linePositions;
+
+    _buffer = newBuffer;
+    _linePositions = newLinePositions;
+
+    QTextStream lineStream(_buffer);
     for (int i=0 ; i < lines ; i++)
     {
+        _linePositions->append(_buffer->length());
         decoder.decodeLine(image + i*columns,columns,LINE_DEFAULT,&lineStream);
-        addLine(line);
-        line.clear();
     }
+}
+
+Filter::Filter() :
+_linePositions(0),
+_buffer(0)
+{
 }
 
 Filter::~Filter()
@@ -144,42 +175,50 @@ void Filter::reset()
 {
     _hotspots.clear();
     _hotspotList.clear();
-    _linePositions.clear();
-    _buffer.clear();
+}
+
+void Filter::setBuffer(const QString* buffer , const QList<int>* linePositions)
+{
+    _buffer = buffer;
+    _linePositions = linePositions;
 }
 
 void Filter::getLineColumn(int position , int& startLine , int& startColumn)
 {
-    for (int i = 0 ; i < _linePositions.count() ; i++)
+    Q_ASSERT( _linePositions );
+    Q_ASSERT( _buffer );
+
+    for (int i = 0 ; i < _linePositions->count() ; i++)
     {
         //qDebug() << "line position at " << i << " = " << _linePositions[i];
         int nextLine = 0;
 
-        if ( i == _linePositions.count()-1 )
+        if ( i == _linePositions->count()-1 )
         {
-            nextLine = _buffer.length();
+            nextLine = _buffer->length();
         }
         else
         {
-            nextLine = _linePositions[i+1];
+            nextLine = _linePositions->value(i+1);
         }
 
-        if ( _linePositions[i] <= position && position < nextLine ) 
+        if ( _linePositions->value(i) <= position && position < nextLine ) 
         {
             startLine = i;
-            startColumn = position - _linePositions[i];
+            startColumn = position - _linePositions->value(i);
             return;
         }
     }
 }
     
 
-void Filter::addLine(const QString& text)
+/*void Filter::addLine(const QString& text)
 {
     _linePositions << _buffer.length();
     _buffer.append(text);
-}
-QString& Filter::buffer()
+}*/
+
+const QString* Filter::buffer()
 {
     return _buffer;
 }
@@ -302,7 +341,9 @@ QRegExp RegExpFilter::regExp() const
 void RegExpFilter::process()
 {
     int pos = 0;
-    QString& text = buffer();
+    const QString* text = buffer();
+
+    Q_ASSERT( text );
 
     // empty regexp does not match
     if ( _searchText.isEmpty() )
@@ -310,7 +351,7 @@ void RegExpFilter::process()
 
     while(pos >= 0)
     {
-        pos = _searchText.indexIn(text,pos);
+        pos = _searchText.indexIn(*text,pos);
 
         if ( pos >= 0 )
         {

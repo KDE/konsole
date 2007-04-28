@@ -993,9 +993,16 @@ void TerminalDisplay::scrollImage(int _lines)
 
 void TerminalDisplay::processFilters() 
 {
-    _filterChain->reset();
-    _filterChain->addImage(_image,_lines,_columns);
+    QTime t;
+    t.start();
+
+    _filterChain->setImage(_image,_lines,_columns);
+
+    qDebug() << "Setup filters in" << t.elapsed() << "ms.";
+
     _filterChain->process();
+
+    qDebug() << "Processed filters in" << t.elapsed() << "ms.";
 }
 
 void TerminalDisplay::updateImage() 

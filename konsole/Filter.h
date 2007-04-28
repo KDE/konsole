@@ -134,6 +134,8 @@ public:
     
     };
 
+    /** Constructs a new filter. */
+    Filter();
     virtual ~Filter();
 
     /** Causes the filter to process the block of text currently in its internal buffer */
@@ -146,7 +148,7 @@ public:
     void reset();
 
     /** Adds a new line of text to the filter and increments the line count */
-    void addLine(const QString& string);
+    //void addLine(const QString& string);
 
     /** Returns the hotspot which covers the given @p line and @p column, or 0 if no hotspot covers that area */
     HotSpot* hotSpotAt(int line , int column) const;
@@ -157,19 +159,25 @@ public:
     /** Returns the list of hotspots identified by the filter which occur on a given line */
     QList<HotSpot*> hotSpotsAtLine(int line) const;
 
+    /** 
+     * TODO: Document me
+     */
+    void setBuffer(const QString* buffer , const QList<int>* linePositions);
+
 protected:
     /** Adds a new hotspot to the list */
     void addHotSpot(HotSpot*);
     /** Returns the internal buffer */
-    QString& buffer();
+    const QString* buffer();
     /** Converts a character position within buffer() to a line and column */
     void getLineColumn(int position , int& startLine , int& startColumn);
 
 private:
     QMultiHash<int,HotSpot*> _hotspots;
     QList<HotSpot*> _hotspotList;
-    QList<int> _linePositions;
-    QString _buffer;
+    
+    const QList<int>* _linePositions;
+    const QString* _buffer;
 };
 
 /** 
@@ -315,16 +323,13 @@ public:
 
     /** Resets each filter in the chain */
     void reset();
-    /** 
-     * Adds a new line of text to each filter in the chain 
-     * TODO:  This is inefficient memory-wise because a new line is added for each filter.
-     * Only one buffer should be used for the entire chain.
-     */
-    void addLine(const QString& line);
     /**
      * Processes each filter in the chain 
      */
     void process();
+
+    /** Sets the buffer for each filter in the chain to process. */
+    void setBuffer(const QString* buffer , const QList<int>* linePositions); 
 
     /** Returns the first hotspot which occurs at @p line, @p column or 0 if no hotspot was found */
     Filter::HotSpot* hotSpotAt(int line , int column) const;
@@ -339,6 +344,9 @@ public:
 class TerminalImageFilterChain : public FilterChain
 {
 public:
+    TerminalImageFilterChain();
+    virtual ~TerminalImageFilterChain();
+
     /**
      * Set the current terminal image to @p image.
      *
@@ -346,8 +354,12 @@ public:
      * @param lines The number of lines in the terminal image
      * @param columns The number of columns in the terminal image
      */
-    void addImage(const Character* const image , int lines , int columns);  
+    void setImage(const Character* const image , int lines , int columns);  
+
+private:
+    QString* _buffer;
+    QList<int>* _linePositions;
 };
 
-}
+};
 #endif //FILTER_H
