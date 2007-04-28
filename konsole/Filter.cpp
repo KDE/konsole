@@ -23,6 +23,7 @@
 // Qt
 #include <QAction>
 #include <QApplication>
+#include <QClipboard>
 #include <QString>
 #include <QtDebug>
 #include <QSharedData>
@@ -273,7 +274,7 @@ RegExpFilter::HotSpot::HotSpot(int startLine,int startColumn,int endLine,int end
     setType(Marker);
 }
 
-void RegExpFilter::HotSpot::activate()
+void RegExpFilter::HotSpot::activate(QObject*)
 {
 }
 
@@ -360,35 +361,67 @@ QString UrlFilter::HotSpot::tooltip() const
 {
     QString url = capturedTexts().first();
 
-    if ( QRegExp(FullUrlRegExp).exactMatch(url) )
+    const UrlType kind = urlType();
+
+    if ( kind == StandardUrl )
         return i18n("Click to open '%1' in your browser.",url);
-    else if ( QRegExp(EmailAddressRegExp).exactMatch(url) )
+    else if ( kind == Email )
         return i18n("Click to send an email to '%1'.",url);
     else
         return QString::null;
 }
-void UrlFilter::HotSpot::activate()
+UrlFilter::HotSpot::UrlType UrlFilter::HotSpot::urlType() const
 {
-    const QStringList& texts = capturedTexts();
+    QString url = capturedTexts().first();
+    
+    if ( QRegExp(FullUrlRegExp).exactMatch(url) )
+        return StandardUrl;
+    else if ( QRegExp(EmailAddressRegExp).exactMatch(url) )
+        return Email;
+    else
+        return Unknown;
+}
 
-    QString url = texts.first();
-    // if the URL path does not include the protocol ( eg. "www.kde.org" ) then
-    // prepend http:// ( eg. "www.kde.org" --> "http://www.kde.org" )
-    if (!url.contains("://"))
+void UrlFilter::HotSpot::activate(QObject* object)
+{
+    QString url = capturedTexts().first();
+
+    const UrlType kind = urlType();
+
+    const QString& actionName = object ? object->objectName() : QString::null;
+
+    if ( actionName == "copy-action" )
     {
-        url.prepend("http://");
+        qDebug() << "Copying url to clipboard:" << url;
+
+        QApplication::clipboard()->setText(url);
+        return;
     }
 
-    if ( texts.count() > 0 )
+    if ( !object || actionName == "open-action" )
     {
+        if ( kind == StandardUrl )
+        {
+            // if the URL path does not include the protocol ( eg. "www.kde.org" ) then
+            // prepend http:// ( eg. "www.kde.org" --> "http://www.kde.org" )
+            if (!url.contains("://"))
+            {
+                url.prepend("http://");
+            }
+        } 
+        else if ( kind == Email )
+        {
+            url.prepend("mailto:");
+        }
+    
         new KRun(url,QApplication::activeWindow());
     }
 }
 
 //regexp matches:
 // full url:  
-// protocolname:// or www. followed by numbers, letters dots and dashes 
-const QString UrlFilter::FullUrlRegExp("([a-z]+://|www\\.)[a-zA-Z0-9\\-\\./]+");
+// protocolname:// or www. followed by numbers, letters dots and dashes or the '@' character. 
+const QString UrlFilter::FullUrlRegExp("([a-z]+://|www\\.)[a-zA-Z0-9@\\-\\./]+");
 // email address:
 // [word chars, dots or dashes]@[word chars, dots or dashes].[word chars]
 const QString UrlFilter::EmailAddressRegExp("(\\w|\\.|-)+@(\\w|\\.|-)+\\.\\w+");
@@ -406,15 +439,41 @@ UrlFilter::HotSpot::~HotSpot()
 }
 void FilterObject::activated()
 {
-    _filter->activate();
+    _filter->activate(sender());
 }
 QList<QAction*> UrlFilter::HotSpot::actions()
 {
     QList<QAction*> list;
 
-    QAction* openAction = new QAction(i18n("Open Link"),_urlObject);
+    const UrlType kind = urlType();
+
+    QAction* openAction = new QAction(_urlObject);
+    QAction* copyAction = new QAction(_urlObject);;
+
+    Q_ASSERT( kind == StandardUrl || kind == Email );
+
+    if ( kind == StandardUrl )
+    {
+        openAction->setText(i18n("Open Link"));
+        copyAction->setText(i18n("Copy Link Address"));
+    }
+    else if ( kind == Email )
+    {
+        openAction->setText(i18n("Send Email To..."));
+        copyAction->setText(i18n("Copy Email Address"));
+    }
+
+    // object names are set here so that the hotspot performs the
+    // correct action when activated() is called with the triggered
+    // action passed as a parameter.
+    openAction->setObjectName("open-action");
+    copyAction->setObjectName("copy-action");
+
     QObject::connect( openAction , SIGNAL(triggered()) , _urlObject , SLOT(activated()) );
+    QObject::connect( copyAction , SIGNAL(triggered()) , _urlObject , SLOT(activated()) );
+
     list << openAction;
+    list << copyAction;
 
     return list; 
 }

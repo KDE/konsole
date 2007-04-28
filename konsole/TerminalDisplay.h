@@ -538,6 +538,9 @@ private:
     // current size in columns and lines
     void showResizeNotification();
 
+    // shows the popup menu associated with a hotspot
+    void showHotSpotMenu(Filter::HotSpot* spot , const QPoint& position);
+
     // scrolls the image by a number of lines.  'lines' may be positive ( to scroll the image down ) 
     // or negative ( to scroll the image up )
     void scrollImage(int lines);

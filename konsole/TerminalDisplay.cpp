@@ -1753,6 +1753,8 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
   characterPosition(ev->pos(),charLine,charColumn);
   QPoint pos = QPoint(charColumn,charLine);
 
+  Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine,charColumn);
+  
   //kDebug() << " mouse pressed at column = " << pos.x() << " , line = " << pos.y() << endl;
 
   if ( ev->button() == Qt::LeftButton)
@@ -1807,15 +1809,33 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
   }
   else if ( ev->button() == Qt::RightButton )
   {
-    if (_mouseMarks || (ev->modifiers() & Qt::ShiftModifier)) {
-      _configureRequestPoint = QPoint( ev->x(), ev->y() );
-      emit configureRequest( this, ev->modifiers()&(Qt::ShiftModifier|Qt::ControlModifier), ev->x(), ev->y() );
+    if (_mouseMarks || (ev->modifiers() & Qt::ShiftModifier)) 
+    {
+      if ( spot )
+      {
+        showHotSpotMenu(spot , mapToGlobal(QPoint(ev->x() , ev->y())) );
+      }
+      else
+      {
+        _configureRequestPoint = QPoint( ev->x(), ev->y() );
+        emit configureRequest( this, 
+                               ev->modifiers() & (Qt::ShiftModifier|Qt::ControlModifier), 
+                               ev->x(), 
+                               ev->y() 
+                             );
+      }
     }
     else
       emit mouseSignal( 2, charColumn +1, charLine +1 +_scrollBar->value() -_scrollBar->maximum() , 0);
   }
 }
 
+void TerminalDisplay::showHotSpotMenu(Filter::HotSpot* spot , const QPoint& position)
+{
+    QMenu* menu = new QMenu(this);
+    menu->addActions( spot->actions() );
+    menu->popup(position);
+}
 void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
 {
   int charLine = 0;
