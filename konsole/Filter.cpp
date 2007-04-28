@@ -345,7 +345,7 @@ QStringList RegExpFilter::HotSpot::capturedTexts() const
 
 void RegExpFilter::setRegExp(const QRegExp& regExp) 
 {
-    _searchText = QRegExp(regExp);
+    _searchText = regExp;
 }
 QRegExp RegExpFilter::regExp() const
 {
@@ -362,8 +362,10 @@ void RegExpFilter::process()
 
     Q_ASSERT( text );
 
-    // empty regexp does not match
-    if ( _searchText.isEmpty() )
+    // ignore any regular expressions which match an empty string.
+    // otherwise the while loop below will run indefinitely
+    static const QString emptyString("");
+    if ( _searchText.exactMatch(emptyString) )
         return;
 
     while(pos >= 0)
@@ -394,6 +396,8 @@ void RegExpFilter::process()
             addHotSpot( spot );  
             pos += _searchText.matchedLength();
 
+            // if matchedLength == 0, the program will get stuck in an infinite loop
+            Q_ASSERT( _searchText.matchedLength() > 0 );
         }
     }    
 }
@@ -433,9 +437,9 @@ UrlFilter::HotSpot::UrlType UrlFilter::HotSpot::urlType() const
 {
     QString url = capturedTexts().first();
     
-    if ( QRegExp(FullUrlRegExp).exactMatch(url) )
+    if ( FullUrlRegExp.exactMatch(url) )
         return StandardUrl;
-    else if ( QRegExp(EmailAddressRegExp).exactMatch(url) )
+    else if ( EmailAddressRegExp.exactMatch(url) )
         return Email;
     else
         return Unknown;
@@ -480,17 +484,18 @@ void UrlFilter::HotSpot::activate(QObject* object)
 //regexp matches:
 // full url:  
 // protocolname:// or www. followed by numbers, letters dots and dashes or the '@' character. 
-const QString UrlFilter::FullUrlRegExp("([a-z]+://|www\\.)[a-zA-Z0-9@\\-\\./]+");
+const QRegExp UrlFilter::FullUrlRegExp("([a-z]+://|www\\.)[a-zA-Z0-9@\\-\\./]+");
 // email address:
 // [word chars, dots or dashes]@[word chars, dots or dashes].[word chars]
-const QString UrlFilter::EmailAddressRegExp("(\\w|\\.|-)+@(\\w|\\.|-)+\\.\\w+");
+const QRegExp UrlFilter::EmailAddressRegExp("(\\w|\\.|-)+@(\\w|\\.|-)+\\.\\w+");
+
+// matches full url or email address
+const QRegExp UrlFilter::CompleteUrlRegExp('('+FullUrlRegExp.pattern()+'|'+
+                                            EmailAddressRegExp.pattern()+')');
 
 UrlFilter::UrlFilter()
 {
-    //FIXME - There is a bug where URLs are not identified if they occur at the very
-    //end of the output ( the last characters before any trailing whitespace )
-
-    setRegExp( QRegExp('('+FullUrlRegExp+'|'+EmailAddressRegExp+')') );
+    setRegExp( CompleteUrlRegExp );
 }
 UrlFilter::HotSpot::~HotSpot()
 {

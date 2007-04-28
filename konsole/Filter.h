@@ -211,12 +211,22 @@ public:
     /** Constructs a new regular expression filter */
     RegExpFilter();
 
-    /** Sets the regular expression which the filter searches for in blocks of text */
+    /** 
+     * Sets the regular expression which the filter searches for in blocks of text. 
+     *
+     * Regular expressions which match the empty string are treated as not matching
+     * anything. 
+     */
     void setRegExp(const QRegExp& text);
     /** Returns the regular expression which the filter searches for in blocks of text */
     QRegExp regExp() const;
 
-    /** Reimplemented to search the filter's text buffer for text matching regExp() */
+    /** 
+     * Reimplemented to search the filter's text buffer for text matching regExp() 
+     *
+     * If regexp matches the empty string, then process() will return immediately
+     * without finding results. 
+     */
     virtual void process();
 
 protected:
@@ -275,8 +285,11 @@ protected:
 
 private:
     
-    static const QString FullUrlRegExp;
-    static const QString EmailAddressRegExp;
+    static const QRegExp FullUrlRegExp;
+    static const QRegExp EmailAddressRegExp;
+
+    // combined OR of FullUrlRegExp and EmailAddressRegExp
+    static const QRegExp CompleteUrlRegExp; 
 };
 
 class FilterObject : public QObject
