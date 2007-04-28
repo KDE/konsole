@@ -154,7 +154,20 @@ void TerminalImageFilterChain::setImage(const Character* const image , int lines
     {
         _linePositions->append(_buffer->length());
         decoder.decodeLine(image + i*columns,columns,LINE_DEFAULT,&lineStream);
+
+        // pretend that each line ends with a newline character.
+        // this prevents a link that occurs at the end of one line
+        // being treated as part of a link that occurs at the start of the next line
+        //
+        // the downside is that links which are spread over more than one line are not
+        // highlighted.  
+        //
+        // TODO - Use the "line wrapped" attribute associated with lines in a
+        // terminal image to avoid adding this imaginary character for wrapped
+        // lines
+        lineStream << QChar('\n');
     }
+
 }
 
 Filter::Filter() :
@@ -188,6 +201,7 @@ void Filter::getLineColumn(int position , int& startLine , int& startColumn)
     Q_ASSERT( _linePositions );
     Q_ASSERT( _buffer );
 
+
     for (int i = 0 ; i < _linePositions->count() ; i++)
     {
         //qDebug() << "line position at " << i << " = " << _linePositions[i];
@@ -195,12 +209,15 @@ void Filter::getLineColumn(int position , int& startLine , int& startColumn)
 
         if ( i == _linePositions->count()-1 )
         {
-            nextLine = _buffer->length();
+            nextLine = _buffer->length() + 1;
         }
         else
         {
             nextLine = _linePositions->value(i+1);
         }
+
+       // qDebug() << "pos - " << position << " line pos(" << i<< ") " << _linePositions->value(i) << 
+       //     " next = " << nextLine << " buffer len = " << _buffer->length();
 
         if ( _linePositions->value(i) <= position && position < nextLine ) 
         {
@@ -361,6 +378,7 @@ void RegExpFilter::process()
             int startColumn = 0;
             int endColumn = 0;
 
+            
             //qDebug() << "pos from " << pos << " to " << pos + _searchText.matchedLength();
             
             getLineColumn(pos,startLine,startColumn);
