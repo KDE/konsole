@@ -34,7 +34,7 @@ class ViewSplitter;
 class ViewManager;
 class ViewProperties;
 class SessionController;
-class SessionList;
+class ProfileList;
 class BookmarkHandler;
 
 /**
@@ -71,7 +71,7 @@ class MainWindow : public KXmlGuiWindow
         IncrementalSearchBar* searchBar() const;
 
         /** Sets the list of sessions to be displayed in the File menu */
-        void setSessionList(SessionList* list);
+        void setSessionList(ProfileList* list);
 
         /**
          * Returns the bookmark handler associated with this window.
@@ -98,8 +98,7 @@ class MainWindow : public KXmlGuiWindow
     private slots:
         void newTab();
         void newWindow();
-        void showCustomSessionDialog();
-        void showPreferencesDialog();
+        void showManageProfilesDialog();
         void showRemoteConnectionDialog();
         void showShortcutsDialog();
         void sessionSelected(const QString&);

@@ -57,7 +57,7 @@ set(konsole_KDEINIT_SRCS
         ${sessionadaptors_SRCS}
         BlockArray.cpp
         ColorScheme.cpp
-        EditSessionDialog.cpp
+        EditProfileDialog.cpp
         Filter.cpp
         HistorySizeDialog.cpp
         IncrementalSearchBar.cpp
@@ -69,10 +69,10 @@ set(konsole_KDEINIT_SRCS
         ProcessInfo.cpp
         ScreenWindow.cpp
         SessionController.cpp
-        SessionList.cpp
-        SessionListWidget.cpp
+        ProfileList.cpp
+        ProfileListWidget.cpp
         SessionManager.cpp
-        SessionTypeDialog.cpp
+        ManageProfilesDialog.cpp
         History.cpp
         Pty.cpp
         Screen.cpp
@@ -94,8 +94,8 @@ set(konsole_KDEINIT_SRCS
 
 
 kde4_add_ui_files(konsole_KDEINIT_SRCS
-                  EditSessionDialog.ui
-                  SessionTypeDialog.ui
+                  EditProfileDialog.ui
+                  ManageProfilesDialog.ui
                   RemoteConnectionDialog.ui
                  )
 kde4_automoc(${konsole_KDEINIT_SRCS})
@@ -126,7 +126,7 @@ set(konsolepart_PART_SRCS
    BlockArray.cpp
    BookmarkHandler.cpp 
    ColorScheme.cpp
-   EditSessionDialog.cpp
+   EditProfileDialog.cpp
    Emulation.cpp 
    Filter.cpp 
    History.cpp
@@ -142,10 +142,10 @@ set(konsolepart_PART_SRCS
    ScreenWindow.cpp
    Session.cpp
    SessionController.cpp
-   SessionList.cpp
-   SessionListWidget.cpp 
+   ProfileList.cpp
+   ProfileListWidget.cpp 
    SessionManager.cpp
-   SessionTypeDialog.cpp
+   ManageProfilesDialog.cpp
    TerminalCharacterDecoder.cpp
    TerminalDisplay.cpp
    ViewContainer.cpp

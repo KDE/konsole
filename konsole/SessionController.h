@@ -115,7 +115,7 @@ private slots:
     void paste();
     void clear();
     void clearAndReset();
-    void showTerminalOptions();
+    void editCurrentProfile();
     void searchHistory();
     void searchHistory(bool showSearchBar);
     void findNextInHistory();

@@ -28,24 +28,24 @@
 #include <QStandardItemModel>
 
 // Konsole
-#include "EditSessionDialog.h"
+#include "EditProfileDialog.h"
 #include "SessionManager.h"
-#include "ui_SessionTypeDialog.h"
-#include "SessionTypeDialog.h"
+#include "ui_ManageProfilesDialog.h"
+#include "ManageProfilesDialog.h"
 
 using namespace Konsole;
 
-SessionTypeDialog::SessionTypeDialog(QWidget* parent)
+ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     : KDialog(parent)
 {
-    setCaption("Sessions");
+    setCaption("Manage Profiles");
 
-    _ui = new Ui::SessionTypeDialog();
+    _ui = new Ui::ManageProfilesDialog();
     _ui->setupUi(mainWidget());
 
     // hide vertical header
     _ui->sessionTable->verticalHeader()->hide();
-    _ui->sessionTable->setItemDelegateForColumn(1,new SessionViewDelegate(this));
+    _ui->sessionTable->setItemDelegateForColumn(1,new ProfileItemDelegate(this));
 
     // update table and listen for changes to the session types
     updateTableModel();
@@ -69,11 +69,11 @@ SessionTypeDialog::SessionTypeDialog(QWidget* parent)
     connect( _ui->setAsDefaultButton , SIGNAL(clicked()) , this , SLOT(setSelectedAsDefault()) );
 
 }
-SessionTypeDialog::~SessionTypeDialog()
+ManageProfilesDialog::~ManageProfilesDialog()
 {
     delete _ui;
 }
-void SessionTypeDialog::updateTableModel()
+void ManageProfilesDialog::updateTableModel()
 {
     // setup session table
     _sessionModel = new QStandardItemModel(this);
@@ -84,7 +84,7 @@ void SessionTypeDialog::updateTableModel()
     {
         const QString& key = keyIter.next();
 
-        SessionInfo* info = SessionManager::instance()->sessionType(key);
+        Profile* info = SessionManager::instance()->sessionType(key);
 
         QList<QStandardItem*> itemList;
         QStandardItem* item = new QStandardItem( info->name() );
@@ -123,7 +123,7 @@ void SessionTypeDialog::updateTableModel()
     tableSelectionChanged( _ui->sessionTable->selectionModel()->selection() );
 
 }
-void SessionTypeDialog::tableSelectionChanged(const QItemSelection& selection)
+void ManageProfilesDialog::tableSelectionChanged(const QItemSelection& selection)
 {
     bool enable = !selection.indexes().isEmpty();
     const SessionManager* manager = SessionManager::instance();
@@ -134,33 +134,33 @@ void SessionTypeDialog::tableSelectionChanged(const QItemSelection& selection)
     _ui->deleteSessionButton->setEnabled(isNotDefault);
     _ui->setAsDefaultButton->setEnabled(isNotDefault); 
 }
-void SessionTypeDialog::deleteSelected()
+void ManageProfilesDialog::deleteSelected()
 {
     Q_ASSERT( selectedKey() != SessionManager::instance()->defaultSessionKey() );
 
     SessionManager::instance()->deleteSessionType(selectedKey());
 }
-void SessionTypeDialog::setSelectedAsDefault()
+void ManageProfilesDialog::setSelectedAsDefault()
 {
     SessionManager::instance()->setDefaultSessionType(selectedKey());
     // do not allow the new default session type to be removed
     _ui->deleteSessionButton->setEnabled(false);
     _ui->setAsDefaultButton->setEnabled(false); 
 }
-void SessionTypeDialog::newType()
+void ManageProfilesDialog::newType()
 {
-    EditSessionDialog dialog(this);
+    EditProfileDialog dialog(this);
     // base new type off the default session type
     dialog.setSessionType(QString()); 
     dialog.exec(); 
 }
-void SessionTypeDialog::editSelected()
+void ManageProfilesDialog::editSelected()
 {
-    EditSessionDialog dialog(this);
+    EditProfileDialog dialog(this);
     dialog.setSessionType(selectedKey());
     dialog.exec();
 }
-QString SessionTypeDialog::selectedKey() const
+QString ManageProfilesDialog::selectedKey() const
 {
     Q_ASSERT( _ui->sessionTable->selectionModel() &&
               _ui->sessionTable->selectionModel()->selectedRows().count() == 1 );
@@ -171,11 +171,11 @@ QString SessionTypeDialog::selectedKey() const
             selectedIndexes().first().data( Qt::UserRole + 1 ).value<QString>();
 }
 
-SessionViewDelegate::SessionViewDelegate(QObject* parent)
+ProfileItemDelegate::ProfileItemDelegate(QObject* parent)
     : QItemDelegate(parent)
 {
 }
-bool SessionViewDelegate::editorEvent(QEvent* event,QAbstractItemModel* model,
+bool ProfileItemDelegate::editorEvent(QEvent* event,QAbstractItemModel* model,
                                     const QStyleOptionViewItem&,const QModelIndex& index)
 {
      if ( event->type() == QEvent::MouseButtonPress || event->type() == QEvent::KeyPress )
@@ -195,4 +195,4 @@ bool SessionViewDelegate::editorEvent(QEvent* event,QAbstractItemModel* model,
      return true; 
 }
 
-#include "SessionTypeDialog.moc"
+#include "ManageProfilesDialog.moc"

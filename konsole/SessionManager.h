@@ -40,7 +40,7 @@ namespace Konsole
 
 class Session;
 
-/** Replacement for SessionInfo */
+/** Replacement for Profile */
 class SessionSettings 
 {
 public:
@@ -120,7 +120,7 @@ private:
  * isAvailable() method is called.
  *
  */
-class SessionInfo
+class Profile
 {
 public:
 
@@ -146,20 +146,20 @@ public:
     };
 
     /**
-     * Construct a new SessionInfo
+     * Construct a new Profile
      * to provide information on a session type.
      *
      * @p path Path to the configuration file
      * for this type of session
      */
-    SessionInfo(const QString& path);
+    Profile(const QString& path);
     
-    virtual ~SessionInfo();
+    virtual ~Profile();
 
     /** Sets the parent session type. */
-    void setParent( SessionInfo* parent );
+    void setParent( Profile* parent );
     /** Returns the parent session type. */
-    SessionInfo* parent() const;
+    Profile* parent() const;
     /** Sets the value of a property. */
     virtual void setProperty( Property property , const QVariant& value );
     /** Retrieves the value of a property. */
@@ -248,7 +248,7 @@ public:
     QString newSessionText() const;
 
 private:
-    SessionInfo* _parent;
+    Profile* _parent;
     KDesktopFile* _desktopFile;
     KConfigGroup* _config;
     QString  _path;
@@ -313,7 +313,7 @@ public:
      *
      * If @p key is empty, a pointer to the default session type is returned.
      */
-    SessionInfo* sessionType(const QString& key) const;
+    Profile* sessionType(const QString& key) const;
 
     /**
      * Registers a new type of session and returns the key
@@ -322,13 +322,13 @@ public:
      * The favorite status of the session ( as returned by isFavorite() ) is set
      * to false by default.
      */
-    QString addSessionType(SessionInfo* type);
+    QString addSessionType(Profile* type);
 
     /**
-     * Returns a SessionInfo object describing the default type of session, which is used
+     * Returns a Profile object describing the default type of session, which is used
      * if createSession() is called with an empty configPath argument.
      */
-    SessionInfo* defaultSessionType() const;
+    Profile* defaultSessionType() const;
 
     /**
      * Returns the key for the default session type.
@@ -444,13 +444,13 @@ protected Q_SLOTS:
 
 private:
     //fills the settings store with the settings from the session config file
-    void pushSessionSettings( const SessionInfo*  info );
+    void pushSessionSettings( const Profile*  info );
     //loads the set of favorite sessions 
     void loadFavorites();
     //saves the set of favorite sessions
     void saveFavorites();
 
-    QHash<QString,SessionInfo*> _types;
+    QHash<QString,Profile*> _types;
     QList<Session*> _sessions;
 
     QString _defaultSessionType;

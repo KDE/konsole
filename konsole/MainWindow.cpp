@@ -44,8 +44,8 @@
 #include "MainWindow.h"
 #include "RemoteConnectionDialog.h"
 #include "SessionController.h"
-#include "SessionList.h"
-#include "SessionTypeDialog.h"
+#include "ProfileList.h"
+#include "ManageProfilesDialog.h"
 #include "ViewManager.h"
 #include "ViewSplitter.h"
 
@@ -148,16 +148,17 @@ void MainWindow::setupActions()
     newWindowAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_M) );
     connect( newWindowAction , SIGNAL(triggered()) , this , SLOT(newWindow()) );
 
+    QAction* newFromProfileAction = collection->addAction("new-from-profile");
+    newFromProfileAction->setText( i18n("New from Profile...") );
+    // TODO Implement "New from Profile"
+
     QAction* remoteConnectionAction = collection->addAction("remote-connection");
     remoteConnectionAction->setText( i18n("Remote Connection...") );
     remoteConnectionAction->setIcon( KIcon("network") );
     remoteConnectionAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_R) );
     connect( remoteConnectionAction , SIGNAL(triggered()) , this , SLOT(showRemoteConnectionDialog()) ); 
 
-    QAction* customSessionAction = collection->addAction("custom-session");
-    customSessionAction->setText( i18n("Custom Session...") );
-    connect( customSessionAction , SIGNAL(triggered()) , this , SLOT(showCustomSessionDialog()) );
-   
+       
 #ifndef KONSOLE_PART 
     KStandardAction::quit( Application::self() , SLOT(quit()) , collection );
 #endif
@@ -182,6 +183,11 @@ void MainWindow::setupActions()
     // Settings Menu
     KStandardAction::configureNotifications( 0 , 0 , collection  );
     KStandardAction::keyBindings( this , SLOT(showShortcutsDialog()) , collection  );
+
+    QAction* manageProfilesAction = collection->addAction("manage-profiles");
+    manageProfilesAction->setText( i18n("Manage Profiles...") );
+    connect( manageProfilesAction , SIGNAL(triggered()) , this , SLOT(showManageProfilesDialog()) );
+
 }
 
 BookmarkHandler* MainWindow::bookmarkHandler() const
@@ -189,7 +195,7 @@ BookmarkHandler* MainWindow::bookmarkHandler() const
     return _bookmarkHandler;
 }
 
-void MainWindow::setSessionList(SessionList* list)
+void MainWindow::setSessionList(ProfileList* list)
 {
     sessionListChanged(list->actions());
 
@@ -202,8 +208,8 @@ void MainWindow::setSessionList(SessionList* list)
 
 void MainWindow::sessionListChanged(const QList<QAction*>& actions)
 {
-    unplugActionList("new-session-types");
-    plugActionList("new-session-types",actions);
+    unplugActionList("favorite-profiles");
+    plugActionList("favorite-profiles",actions);
 }
 
 void MainWindow::newTab()
@@ -227,17 +233,10 @@ void MainWindow::sessionSelected(const QString& key)
 {
     emit requestSession(key,_viewManager);
 }
-void MainWindow::showCustomSessionDialog()
+void MainWindow::showManageProfilesDialog()
 {
-    SessionTypeDialog dialog(this);
+    ManageProfilesDialog dialog(this);
     dialog.exec();
-}
-void MainWindow::showPreferencesDialog()
-{
-    Q_ASSERT(0); // not implemented
-
-    // code to invoke the old preferences dialog
-    //KToolInvocation::startServiceByDesktopName("konsole",QString());
 }
 
 void MainWindow::showRemoteConnectionDialog()

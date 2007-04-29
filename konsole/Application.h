@@ -28,7 +28,7 @@ class KCmdLineArgs;
 namespace Konsole
 {
 class ColorSchemeManager;
-class SessionList;
+class ProfileList;
 class SessionManager;
 class ViewManager;
 class MainWindow;
@@ -79,7 +79,7 @@ private slots:
 
 private:
     KCmdLineArgs*   _arguments;
-    SessionList*    _sessionList;
+    ProfileList*    _sessionList;
     
     MainWindow* _backgroundInstance;
 };

@@ -7,12 +7,12 @@
 #include <KIcon>
 
 // Konsole
-#include "SessionList.h"
+#include "ProfileList.h"
 #include "SessionManager.h"
 
 using namespace Konsole;
 
-SessionList::SessionList(QObject* parent)
+ProfileList::ProfileList(QObject* parent)
     : QObject(parent)
 {
     SessionManager* manager = SessionManager::instance();
@@ -37,11 +37,11 @@ SessionList::SessionList(QObject* parent)
              SLOT(favoriteChanged(const QString&,bool)) );
 }
 
-void SessionList::favoriteChanged(const QString& key,bool isFavorite)
+void ProfileList::favoriteChanged(const QString& key,bool isFavorite)
 {
     if ( isFavorite )
     {
-        SessionInfo* info = SessionManager::instance()->sessionType(key);
+        Profile* info = SessionManager::instance()->sessionType(key);
 
         QAction* action = _group->addAction(info->name());
         action->setIcon( KIcon(info->icon()) );
@@ -63,7 +63,7 @@ void SessionList::favoriteChanged(const QString& key,bool isFavorite)
     }
 }
 
-void SessionList::triggered(QAction* action)
+void ProfileList::triggered(QAction* action)
 {
     // assert that session key is still valid
     Q_ASSERT( SessionManager::instance()->sessionType( action->data().toString() ) );
@@ -71,9 +71,9 @@ void SessionList::triggered(QAction* action)
     emit sessionSelected( action->data().toString() );
 }
 
-QList<QAction*> SessionList::actions()
+QList<QAction*> ProfileList::actions()
 {
     return _group->actions();
 }
 
-#include "SessionList.moc"
+#include "ProfileList.moc"

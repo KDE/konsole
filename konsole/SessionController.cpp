@@ -11,7 +11,7 @@
 #include <kdebug.h>
 
 // Konsole
-#include "EditSessionDialog.h"
+#include "EditProfileDialog.h"
 #include "Emulation.h"
 #include "Filter.h"
 #include "HistorySizeDialog.h"
@@ -308,12 +308,6 @@ void SessionController::setupActions()
     KToggleAction* toggleAction = 0;
     KActionCollection* collection = actionCollection();
 
-    // Save Session
-    action = collection->addAction("save-session");
-    action->setIcon( KIcon("document-save") );
-    action->setText( i18n("&Save Session") );
-    connect( action , SIGNAL(triggered()) , this , SLOT(saveSession()) );
-
     // Close Session
     action = collection->addAction("close-session"); 
     action->setIcon( KIcon("window-close") ); // FIXME: Not the best icon for this
@@ -419,9 +413,9 @@ void SessionController::setupActions()
     connect( action , SIGNAL(triggered()) , this , SLOT(clearHistoryAndReset()) );
 
     // Terminal Options 
-    action = collection->addAction("terminal-options");
-    action->setText( i18n("Terminal Options...") );
-    connect( action , SIGNAL(triggered()) , this , SLOT(showTerminalOptions()) );
+    action = collection->addAction("edit-current-profile");
+    action->setText( i18n("Edit Current Profile...") );
+    connect( action , SIGNAL(triggered()) , this , SLOT(editCurrentProfile()) );
 
     // debugging tools
     //action = collection->addAction("debug-process");
@@ -468,9 +462,9 @@ void SessionController::debugProcess()
     delete sessionProcess;
 }
 
-void SessionController::showTerminalOptions()
+void SessionController::editCurrentProfile()
 {
-    EditSessionDialog dialog(_view);
+    EditProfileDialog dialog(_view);
     dialog.setSessionType(_session->type());
     dialog.exec();
 }

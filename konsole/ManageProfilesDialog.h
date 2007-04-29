@@ -32,7 +32,7 @@ class QStandardItemModel;
 
 namespace Ui
 {
-    class SessionTypeDialog;
+    class ManageProfilesDialog;
 };
 
 namespace Konsole
@@ -43,14 +43,14 @@ namespace Konsole
  * the user to add new sessions, and remove or edit existing
  * session types.
  */
-class SessionTypeDialog : public KDialog
+class ManageProfilesDialog : public KDialog
 {
 Q_OBJECT
 
 public:
     /** Constructs a new session type with the specified parent. */
-    SessionTypeDialog(QWidget* parent = 0);
-    virtual ~SessionTypeDialog();
+    ManageProfilesDialog(QWidget* parent = 0);
+    virtual ~ManageProfilesDialog();
 
 private slots:
     void deleteSelected();
@@ -69,14 +69,14 @@ private slots:
 private:
     QString selectedKey() const; // return the key associated with the currently selected
                                  // item in the session table
-    Ui::SessionTypeDialog* _ui;
+    Ui::ManageProfilesDialog* _ui;
     QStandardItemModel* _sessionModel;
 };
 
-class SessionViewDelegate : public QItemDelegate
+class ProfileItemDelegate : public QItemDelegate
 {
 public:
-    SessionViewDelegate(QObject* parent = 0);
+    ProfileItemDelegate(QObject* parent = 0);
 
     virtual bool editorEvent(QEvent* event,QAbstractItemModel* model,
                              const QStyleOptionViewItem& option,const QModelIndex& index);

@@ -45,7 +45,7 @@
 #include "ViewProperties.h"
 
 // TODO Perhaps move everything which is Konsole-specific into different files
-#include "SessionListWidget.h"
+#include "ProfileListWidget.h"
 
 using namespace Konsole;
 
@@ -484,7 +484,7 @@ ListViewContainer::ListViewContainer(QObject* parent)
 {
     _splitter = new QSplitter;
     _stackWidget = new QStackedWidget(_splitter);
-    _listWidget = new SessionListWidget(_splitter);
+    _listWidget = new ProfileListWidget(_splitter);
 
     // elide left is used because the most informative part of the session name is often
     // the rightmost part

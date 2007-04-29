@@ -12,19 +12,19 @@ namespace Konsole
 {
 
 /** 
- * SessionList provides a list of actions which represent types of session that a SessionManager can 
+ * ProfileList provides a list of actions which represent types of session that a SessionManager can 
  * create.  These actions can be plugged into a GUI 
  *
  * The user-data associated with each session can be passed to the createSession() method of the 
  * SessionManager to create a new terminal session. 
  */
-class SessionList : public QObject
+class ProfileList : public QObject
 {
 Q_OBJECT
 
 public:
     /** Constructs a new session list which displays sessions that can be created by @p manager */
-    SessionList(QObject* parent);
+    ProfileList(QObject* parent);
 
     /** 
      * Returns a list of actions representing the types of sessions which can be created by

@@ -26,6 +26,7 @@
 
 // Konsole
 #include "ColorScheme.h"
+#include "Emulation.h"
 #include "KeyTrans.h"
 #include "Part.h"
 #include "Session.h"

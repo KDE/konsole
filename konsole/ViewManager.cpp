@@ -492,7 +492,7 @@ TerminalDisplay* ViewManager::createTerminalDisplay()
 
 void ViewManager::loadViewSettings(TerminalDisplay* view , Session* session)
 {
-    SessionInfo* info = SessionManager::instance()->sessionType(session->type());
+    Profile* info = SessionManager::instance()->sessionType(session->type());
     Q_ASSERT( info );
 
     const ColorScheme* colorScheme = ColorSchemeManager::instance()->

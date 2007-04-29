@@ -29,30 +29,30 @@
 
 // Konsole
 #include "ColorScheme.h"
-#include "ui_EditSessionDialog.h"
-#include "EditSessionDialog.h"
+#include "ui_EditProfileDialog.h"
+#include "EditProfileDialog.h"
 #include "SessionManager.h"
 
 using namespace Konsole;
 
-EditSessionDialog::EditSessionDialog(QWidget* parent)
+EditProfileDialog::EditProfileDialog(QWidget* parent)
     : KDialog(parent)
 {
-    setCaption("Edit Session");
+    setCaption("Edit Profile");
     setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply | KDialog::Default );
 
-    _ui = new Ui::EditSessionDialog();
+    _ui = new Ui::EditProfileDialog();
     _ui->setupUi(mainWidget());
 }
-EditSessionDialog::~EditSessionDialog()
+EditProfileDialog::~EditProfileDialog()
 {
     delete _ui;
 }
-void EditSessionDialog::setSessionType(const QString& key)
+void EditProfileDialog::setSessionType(const QString& key)
 {
     _sessionTypeKey = key;    
 
-    const SessionInfo* info = SessionManager::instance()->sessionType(key);
+    const Profile* info = SessionManager::instance()->sessionType(key);
 
     Q_ASSERT( info );
 
@@ -63,14 +63,14 @@ void EditSessionDialog::setSessionType(const QString& key)
     setupScrollingPage(info);
     setupAdvancedPage(info);
 }
-void EditSessionDialog::setupGeneralPage(const SessionInfo* info)
+void EditProfileDialog::setupGeneralPage(const Profile* info)
 {
     _ui->sessionNameEdit->setText( info->name() );
     _ui->commandEdit->setText( info->command(false,false) );
     _ui->initialDirEdit->setText( info->defaultWorkingDirectory() );
     _ui->iconSelectButton->setIcon( KIcon(info->icon()) );
 }
-void EditSessionDialog::setupAppearencePage(const SessionInfo* info)
+void EditProfileDialog::setupAppearencePage(const Profile* info)
 {
     // setup color list
     QStandardItemModel* model = new QStandardItemModel(this);
@@ -99,17 +99,17 @@ void EditSessionDialog::setupAppearencePage(const SessionInfo* info)
     connect( _ui->editFontButton , SIGNAL(clicked()) , this ,
              SLOT(showFontDialog()) );
 }
-void EditSessionDialog::setupKeyboardPage(const SessionInfo* )
+void EditProfileDialog::setupKeyboardPage(const Profile* )
 {
 }
-void EditSessionDialog::setupScrollingPage(const SessionInfo* )
+void EditProfileDialog::setupScrollingPage(const Profile* )
 {
 }
-void EditSessionDialog::setupAdvancedPage(const SessionInfo* )
+void EditProfileDialog::setupAdvancedPage(const Profile* )
 {
 }
 
-void EditSessionDialog::showFontDialog()
+void EditProfileDialog::showFontDialog()
 {
     //TODO Only permit selection of mono-spaced fonts.  
     // the KFontDialog API does not appear to have a means to do this
@@ -126,7 +126,7 @@ void EditSessionDialog::showFontDialog()
         _ui->fontPreviewLabel->setFont(currentFont);
     } 
 }
-void EditSessionDialog::setFontSize(int pointSize)
+void EditProfileDialog::setFontSize(int pointSize)
 {
     QFont newFont = _ui->fontPreviewLabel->font();
     newFont.setPointSize(pointSize);
@@ -213,4 +213,4 @@ QSize KeyBindingViewDelegate::sizeHint( const QStyleOptionViewItem& /*option*/,
 }
 
 
-#include "EditSessionDialog.moc"
+#include "EditProfileDialog.moc"

@@ -5,10 +5,10 @@
         <Menu name="file"><text>File</text>
             <Action name="new-tab" />
             <Action name="new-window" />
-            <Action name="remote-connection" />
-            <Action name="custom-session" />
+            <Action name="new-from-profile" />
+            <!-- <Action name="remote-connection" /> !-->
             <Separator/>
-            <ActionList name="new-session-types"/>
+            <ActionList name="favorite-profiles"/>
             <Separator/>
             <DefineGroup name="session-operations"/>
             <Action name="exit" />
@@ -37,6 +37,7 @@
         <Action name="bookmark"/>
         <Menu name="settings"><text>Settings</text>
             <DefineGroup name="session-settings"/>
+            <Action name="manage-profiles"/>
             <Separator/>
             <Action name="configure-notifications"/>
             <Action name="configure-shortcuts"/>

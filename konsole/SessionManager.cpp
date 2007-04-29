@@ -70,7 +70,7 @@ void SessionSettings::registerName(Property property , const QString& name)
     _propertyNames.insert(name,property);
 }
 
-SessionInfo::SessionInfo(const QString& path)
+Profile::Profile(const QString& path)
 {
     //QString fileName = QFileInfo(path).fileName();
 
@@ -83,25 +83,25 @@ SessionInfo::SessionInfo(const QString& path)
     _path = path;
 
 }
-SessionInfo::~SessionInfo()
+Profile::~Profile()
 {
     delete _config; _config = 0;
     delete _desktopFile; _desktopFile = 0;
 }
 
-void SessionInfo::setParent( SessionInfo* parent )
+void Profile::setParent( Profile* parent )
 {
     _parent = parent;
 }
-SessionInfo* SessionInfo::parent() const
+Profile* Profile::parent() const
 {
     return _parent;
 }
-void SessionInfo::setProperty( Property property , const QVariant& value )
+void Profile::setProperty( Property property , const QVariant& value )
 {
     _properties[property] = value;
 }
-QVariant SessionInfo::property( Property property ) const
+QVariant Profile::property( Property property ) const
 {
     if ( _properties.contains(property) )
     {
@@ -123,25 +123,25 @@ QVariant SessionInfo::property( Property property ) const
     }
 }
 
-QString SessionInfo::name() const
+QString Profile::name() const
 {
     return _config->readEntry("Name");
 }
 
-QString SessionInfo::icon() const
+QString Profile::icon() const
 {
     return _config->readEntry("Icon","konsole");
 }
 
 
-bool SessionInfo::isRootSession() const
+bool Profile::isRootSession() const
 {
     const QString& cmd = _config->readEntry("Exec");
 
     return ( cmd.startsWith("su") );
 }
 
-QString SessionInfo::command(bool stripRoot , bool stripArguments) const
+QString Profile::command(bool stripRoot , bool stripArguments) const
 {
     QString fullCommand = _config->readEntry("Exec");
 
@@ -166,7 +166,7 @@ QString SessionInfo::command(bool stripRoot , bool stripArguments) const
         return fullCommand;
 }
 
-QStringList SessionInfo::arguments() const
+QStringList Profile::arguments() const
 {
     QString commandString = command(false,false);
 
@@ -175,7 +175,7 @@ QStringList SessionInfo::arguments() const
     return commandString.split(QChar(' '));
 }
 
-bool SessionInfo::isAvailable() const
+bool Profile::isAvailable() const
 {
     //TODO:  Is it necessary to cache the result of the search?
 
@@ -190,13 +190,13 @@ bool SessionInfo::isAvailable() const
         return true;
 }
 
-QString SessionInfo::path() const
+QString Profile::path() const
 {
     return _path;
 }
 
 
-QString SessionInfo::newSessionText() const
+QString Profile::newSessionText() const
 {
     QString commentEntry = _config->readEntry("Comment");
 
@@ -206,20 +206,20 @@ QString SessionInfo::newSessionText() const
         return commentEntry;
 }
 
-QString SessionInfo::terminal() const
+QString Profile::terminal() const
 {
     return _config->readEntry("Term","xterm");
 }
-QString SessionInfo::keyboardSetup() const
+QString Profile::keyboardSetup() const
 {
     return _config->readEntry("KeyTab",QString());
 }
-QString SessionInfo::colorScheme() const
+QString Profile::colorScheme() const
 {
     //TODO Pick a default color scheme
     return _config->readEntry("Schema").replace(".schema",QString::null);
 }
-QFont SessionInfo::defaultFont() const
+QFont Profile::defaultFont() const
 {
     //TODO Use system default font here
     const QFont& font = QFont("Monospace");
@@ -238,13 +238,13 @@ QFont SessionInfo::defaultFont() const
     else
         return font;
 }
-QString SessionInfo::defaultWorkingDirectory() const
+QString Profile::defaultWorkingDirectory() const
 {
     return _config->readPathEntry("Cwd");
 }
 
 /*MutableSessionInfo::MutableSessionInfo(const QString& path)
- : SessionInfo(path) {}
+ : Profile(path) {}
 
 void MutableSessionInfo::setName(const QString& name) { _name = name; }
 
@@ -300,7 +300,7 @@ SessionManager::SessionManager()
     {
 
         QString configFile = fileIter.next();
-        SessionInfo* newType = new SessionInfo(configFile);
+        Profile* newType = new Profile(configFile);
 
         QString sessionKey = addSessionType( newType );
 
@@ -318,7 +318,7 @@ SessionManager::SessionManager()
 
 SessionManager::~SessionManager()
 {
-    QListIterator<SessionInfo*> infoIter(_types.values());
+    QListIterator<Profile*> infoIter(_types.values());
 
     while (infoIter.hasNext())
         delete infoIter.next();
@@ -337,7 +337,7 @@ const QList<Session*> SessionManager::sessions()
     return _sessions;
 }
 
-void SessionManager::pushSessionSettings( const SessionInfo* info )
+void SessionManager::pushSessionSettings( const Profile* info )
 {
     addSetting( InitialWorkingDirectory , SessionConfig , info->defaultWorkingDirectory() );
     addSetting( ColorScheme , SessionConfig , info->colorScheme() );
@@ -347,7 +347,7 @@ Session* SessionManager::createSession(QString key )
 {
     Session* session = 0;
     
-    const SessionInfo* info = 0;
+    const Profile* info = 0;
 
     if ( key.isEmpty() )
         info = defaultSessionType();
@@ -404,7 +404,7 @@ QList<QString> SessionManager::availableSessionTypes() const
     return _types.keys();
 }
 
-SessionInfo* SessionManager::sessionType(const QString& key) const
+Profile* SessionManager::sessionType(const QString& key) const
 {
     if ( key.isEmpty() )
         return defaultSessionType();
@@ -415,7 +415,7 @@ SessionInfo* SessionManager::sessionType(const QString& key) const
         return 0;
 }
 
-SessionInfo* SessionManager::defaultSessionType() const
+Profile* SessionManager::defaultSessionType() const
 {
     return _types[_defaultSessionType];
 }
@@ -452,7 +452,7 @@ QVariant SessionManager::activeSetting( Setting setting ) const
     return value;
 }
 
-QString SessionManager::addSessionType(SessionInfo* type)
+QString SessionManager::addSessionType(Profile* type)
 {
     QString key;
 
@@ -474,7 +474,7 @@ QString SessionManager::addSessionType(SessionInfo* type)
 
 void SessionManager::deleteSessionType(const QString& key)
 {
-    SessionInfo* type = sessionType(key);
+    Profile* type = sessionType(key);
 
     setFavorite(key,false);
 
@@ -495,7 +495,7 @@ void SessionManager::setDefaultSessionType(const QString& key)
 
    _defaultSessionType = key;
 
-   SessionInfo* info = sessionType(key);
+   Profile* info = sessionType(key);
   
    Q_ASSERT( QFile::exists(info->path()) );
    QFileInfo fileInfo(info->path());
@@ -550,7 +550,7 @@ void SessionManager::loadFavorites()
        while (lit.hasNext())
            qDebug() << "entry: " << lit.next();
 
-       QHashIterator<QString,SessionInfo*> iter(_types);
+       QHashIterator<QString,Profile*> iter(_types);
        while ( iter.hasNext() )
        {
             iter.next();

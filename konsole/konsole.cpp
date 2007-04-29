@@ -2827,11 +2827,11 @@ void Konsole::slotNewSessionAction(QAction* action)
     return;
   }
 
-  QListIterator<SessionInfo*> sessionIter(sessionManager()->availableSessionTypes());
+  QListIterator<Profile*> sessionIter(sessionManager()->availableSessionTypes());
 
   while (sessionIter.hasNext())
   {
-      SessionInfo* info = sessionIter.next();
+      Profile* info = sessionIter.next();
       if (info->name() == action->data().value<QString>())
       {
           newSession(info);
@@ -2846,10 +2846,10 @@ QString Konsole::newSession(const QString &type)
     return newSession();
   else
   {
-    QListIterator<SessionInfo*> sessionTypeIter(sessionManager()->availableSessionTypes());
+    QListIterator<Profile*> sessionTypeIter(sessionManager()->availableSessionTypes());
     while (sessionTypeIter.hasNext())
     {
-        SessionInfo* info = sessionTypeIter.next();
+        Profile* info = sessionTypeIter.next();
         if ( info->name() == type )
             return QLatin1String("/Sessions/") + newSession(info)->SessionId();
     }
@@ -2890,7 +2890,7 @@ void Konsole::createViews(Session* session)
     }
 }
 
-Session* Konsole::newSession(SessionInfo* type)
+Session* Konsole::newSession(Profile* type)
 {
     //create a session and attach the display to it
     Session* session = sessionManager()->createSession( type->path() );
@@ -3380,7 +3380,7 @@ void Konsole::buildSessionMenus()
   m_session->addAction( m_quit );
 }
 
-void Konsole::addSessionCommand( SessionInfo* info )
+void Konsole::addSessionCommand( Profile* info )
 {
   if ( !info->isAvailable() )
   {
@@ -3422,7 +3422,7 @@ void Konsole::loadSessionCommands()
   if (!KAuthorized::authorizeKAction("shell_access"))
      return;
 
-  QListIterator<SessionInfo*> sessionTypeIter(sessionManager()->availableSessionTypes());
+  QListIterator<Profile*> sessionTypeIter(sessionManager()->availableSessionTypes());
 
   while (sessionTypeIter.hasNext())
       addSessionCommand( sessionTypeIter.next() );
@@ -3434,14 +3434,14 @@ void Konsole::createSessionMenus()
 {
     //get info about available session types
     //and produce a sorted list
-    QListIterator<SessionInfo*> sessionTypeIter(sessionManager()->availableSessionTypes());
-    SessionInfo* defaultSession = sessionManager()->defaultSessionType();
+    QListIterator<Profile*> sessionTypeIter(sessionManager()->availableSessionTypes());
+    Profile* defaultSession = sessionManager()->defaultSessionType();
 
-    QMap<QString,SessionInfo*> sortedNames;
+    QMap<QString,Profile*> sortedNames;
 
     while ( sessionTypeIter.hasNext() )
     {
-        SessionInfo* info = sessionTypeIter.next();
+        Profile* info = sessionTypeIter.next();
 
         if ( info != defaultSession )
         {
@@ -3463,10 +3463,10 @@ void Konsole::createSessionMenus()
 
     //then add the others in alphabetical order
     //TODO case-sensitive.  not ideal?
-    QMapIterator<QString,SessionInfo*> nameIter( sortedNames );
+    QMapIterator<QString,Profile*> nameIter( sortedNames );
     while ( nameIter.hasNext() )
     {
-        SessionInfo* info = nameIter.next().value();
+        Profile* info = nameIter.next().value();
         QIcon icon = KIcon(info->icon());
 
         QAction* menuAction = m_session->addAction( icon  , info->newSessionText() );

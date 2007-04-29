@@ -7,11 +7,11 @@
 #include <QMimeData>
 
 // Konsole
-#include "SessionListWidget.h"
+#include "ProfileListWidget.h"
 
 static const char* konsoleSessionMimeFormat = "konsole/session";
 
-SessionListWidget::SessionListWidget(QWidget* parent)
+ProfileListWidget::ProfileListWidget(QWidget* parent)
     : QListWidget(parent)
 {
     // use large icons so that there is a big area for the user to click
@@ -26,7 +26,7 @@ SessionListWidget::SessionListWidget(QWidget* parent)
     setPalette(p);
 }
 
-void SessionListWidget::startDrag(Qt::DropActions /*supportedActions*/)
+void ProfileListWidget::startDrag(Qt::DropActions /*supportedActions*/)
 {
     qDebug() << "drag and drop started in session list widget";
 
@@ -47,7 +47,7 @@ void SessionListWidget::startDrag(Qt::DropActions /*supportedActions*/)
     }
 }
 
-void SessionListWidget::dragEnterEvent(QDragEnterEvent* event)
+void ProfileListWidget::dragEnterEvent(QDragEnterEvent* event)
 {
     if ( event->mimeData()->hasFormat(konsoleSessionMimeFormat) )
     {
@@ -55,7 +55,7 @@ void SessionListWidget::dragEnterEvent(QDragEnterEvent* event)
     }
 }
 
-void SessionListWidget::dragMoveEvent(QDragMoveEvent* event)
+void ProfileListWidget::dragMoveEvent(QDragMoveEvent* event)
 {
     if ( event->mimeData()->hasFormat(konsoleSessionMimeFormat) )
     {
@@ -64,7 +64,7 @@ void SessionListWidget::dragMoveEvent(QDragMoveEvent* event)
     }
 }
 
-void SessionListWidget::dropEvent(QDropEvent* event)
+void ProfileListWidget::dropEvent(QDropEvent* event)
 {
     if ( event->mimeData()->hasFormat(konsoleSessionMimeFormat) )
     {
@@ -76,4 +76,4 @@ void SessionListWidget::dropEvent(QDropEvent* event)
 }
 
 
-#include "SessionListWidget.moc"
+#include "ProfileListWidget.moc"

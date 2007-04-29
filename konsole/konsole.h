@@ -65,7 +65,7 @@ class KToggleAction;
 class KWinModule;
 
 class TerminalDisplay;
-class SessionInfo;
+class Profile;
 class SessionManager;
 class ViewSplitter;
 
@@ -111,7 +111,7 @@ public:
 
   QString currentSession();
   QString newSession(const QString &type);
-  Session* newSession(SessionInfo* type);
+  Session* newSession(Profile* type);
   QString sessionId(const int position);
 
   void activateSession(const QString& sessionId);
@@ -284,7 +284,7 @@ private:
   void setMasterMode(bool _state, Session* _se=0);
 
   void buildSessionMenus();
-  void addSessionCommand( SessionInfo* info );
+  void addSessionCommand( Profile* info );
   void loadSessionCommands();
   void createSessionMenus();
   void addScreenSession(const QString & path, const QString & socket);

@@ -29,13 +29,13 @@
 
 namespace Ui
 {
-    class EditSessionDialog;
+    class EditProfileDialog;
 };
 
 namespace Konsole
 {
 
-class SessionInfo;
+class Profile;
 class MutableSessionInfo;
 
 /**
@@ -43,14 +43,14 @@ class MutableSessionInfo;
  *
  * TODO: More documentation
  */
-class EditSessionDialog : public KDialog
+class EditProfileDialog : public KDialog
 {
 Q_OBJECT
 
 public:
     /** Constructs a new dialog with the specified parent. */
-    EditSessionDialog(QWidget* parent = 0);
-    virtual ~EditSessionDialog();
+    EditProfileDialog(QWidget* parent = 0);
+    virtual ~EditProfileDialog();
 
     /**
      * Initialises the dialog with the settings for the specified session
@@ -64,7 +64,7 @@ public:
      * Returns a session info object representing the new or modified session
      * type.
      */
-    SessionInfo* newSessionInfo();
+    Profile* newSessionInfo();
 
 private slots:
     // appearence page
@@ -73,11 +73,11 @@ private slots:
 
 private:
     // initialize various pages of the dialog
-    void setupGeneralPage(const SessionInfo* info);
-    void setupAppearencePage(const SessionInfo* info);
-    void setupKeyboardPage(const SessionInfo* info);
-    void setupScrollingPage(const SessionInfo* info);
-    void setupAdvancedPage(const SessionInfo* info);
+    void setupGeneralPage(const Profile* info);
+    void setupAppearencePage(const Profile* info);
+    void setupKeyboardPage(const Profile* info);
+    void setupScrollingPage(const Profile* info);
+    void setupAdvancedPage(const Profile* info);
 
     // apply changes from various pages of the dialog
     void applyGeneralPage(MutableSessionInfo* info);
@@ -86,7 +86,7 @@ private:
     void applyScrollingPage(MutableSessionInfo* info);
     void applyAdvancedPage(MutableSessionInfo* info);
 
-    Ui::EditSessionDialog* _ui;
+    Ui::EditProfileDialog* _ui;
     QString _sessionTypeKey;
 };
 

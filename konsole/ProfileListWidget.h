@@ -4,12 +4,12 @@
 // Qt
 #include <QListWidget>
 
-class SessionListWidget : public QListWidget
+class ProfileListWidget : public QListWidget
 {
 Q_OBJECT
 
 public:
-    SessionListWidget(QWidget* parent);
+    ProfileListWidget(QWidget* parent);
 
 signals:
     void takeSessionEvent(int itemIndex);

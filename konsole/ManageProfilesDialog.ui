@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>SessionTypeDialog</class>
- <widget class="QWidget" name="SessionTypeDialog" >
+ <class>ManageProfilesDialog</class>
+ <widget class="QWidget" name="ManageProfilesDialog" >
   <property name="geometry" >
    <rect>
     <x>0</x>

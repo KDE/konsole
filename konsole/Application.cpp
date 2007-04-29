@@ -26,7 +26,7 @@
 
 // Konsole
 #include "ColorScheme.h"
-#include "SessionList.h"
+#include "ProfileList.h"
 #include "SessionManager.h"
 #include "KeyTrans.h"
 #include "KeyboardTranslator.h"
@@ -66,7 +66,7 @@ Application* Application::self()
 MainWindow* Application::newMainWindow()
 {
     MainWindow* window = new MainWindow();
-    window->setSessionList( new SessionList(window) );
+    window->setSessionList( new ProfileList(window) );
 
     connect( window , SIGNAL(requestSession(const QString&,ViewManager*)), 
                       this , SLOT(createSession(const QString&,ViewManager*)));

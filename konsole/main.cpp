@@ -322,7 +322,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   }
   if(args->isSet("types")) {
 
-    QListIterator<SessionInfo*> infoIter(sessionManager->availableSessionTypes());
+    QListIterator<Profile*> infoIter(sessionManager->availableSessionTypes());
     while (infoIter.hasNext())
     {
         printf("%s\n",QFileInfo(infoIter.next()->path()).backgroundColoraseName().toAscii().data());
