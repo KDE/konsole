@@ -109,7 +109,7 @@ void TEPty::useUtf8(bool on)
 void TEPty::setErase(char erase)
 {
   struct termios tios;
-  int fd = pty()->slaveFd();
+  int fd = pty()->masterFd();
   
   if(tcgetattr(fd, &tios))
   {
