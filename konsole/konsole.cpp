@@ -109,7 +109,7 @@
 #include <kurlrequesterdialog.h>
 #include <netwm.h>
 #include <knotifyconfigwidget.h>
-#include <kwm.h>
+#include <kwindowsystem.h>
 
 // Konsole
 #include "SessionManager.h"
