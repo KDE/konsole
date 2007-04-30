@@ -11,6 +11,8 @@ class QActionGroup;
 namespace Konsole
 {
 
+class Profile;
+
 /** 
  * ProfileList provides a list of actions which represent session profiles that a SessionManager 
  * can create a session from.  These actions can be plugged into a GUI 
@@ -49,8 +51,12 @@ signals:
 private slots:
     void triggered(QAction* action);
     void favoriteChanged(const QString& key , bool isFavorite);
+    void profileChanged(const QString& key);
 
 private:
+    QAction* actionForKey(const QString& key) const;
+    void updateAction(QAction* action , Profile* profile);
+
     QActionGroup*   _group;
 }; 
 

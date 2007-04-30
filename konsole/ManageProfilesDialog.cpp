@@ -53,6 +53,8 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
              SLOT(updateTableModel()) );
     connect( SessionManager::instance() , SIGNAL(profileRemoved(const QString&)) , this,
              SLOT(updateTableModel()) );
+    connect( SessionManager::instance() , SIGNAL(profileChanged(const QString&)) , this,
+             SLOT(updateTableModel()) );
 
     // ensure that session names are fully visible
     _ui->sessionTable->resizeColumnToContents(0);
@@ -88,8 +90,10 @@ void ManageProfilesDialog::updateTableModel()
 
         QList<QStandardItem*> itemList;
         QStandardItem* item = new QStandardItem( info->name() );
-        item->setData(key);
 
+        if ( !info->icon().isEmpty() )
+            item->setIcon( KIcon(info->icon()) );
+        item->setData(key);
 
         const bool isFavorite = SessionManager::instance()->favorites().contains(key);
 

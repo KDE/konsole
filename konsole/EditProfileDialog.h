@@ -36,7 +36,6 @@ namespace Konsole
 {
 
 class Profile;
-class MutableSessionInfo;
 
 /**
  * A dialog which allows the user to edit a session type.
@@ -56,18 +55,26 @@ public:
      * Initialises the dialog with the settings for the specified session
      * type.
      *
+     * When the dialog closes, the profile will be updated in the SessionManager
+     * with the altered settings.
+     *
      * @param key The key for the session type provided by the SessionManager instance
      */
     void setProfile(const QString& key);
 
-    /**
-     * Returns a profile instance representing the new or modified profile.
-     */
-    Profile* newProfile();
+public slots:
+    virtual void accept();
 
 private slots:
     // general page
     void selectInitialDir();
+    void selectIcon();
+
+    void profileNameChanged(const QString& text);
+    void initialDirChanged(const QString& text);
+    void commandChanged(const QString& text);
+    void tabTitleFormatChanged(const QString& text);
+    void remoteTabTitleFormatChanged(const QString& text);
 
     // appearence page
     void setFontSize(int pointSize);
@@ -81,14 +88,8 @@ private:
     void setupScrollingPage(const Profile* info);
     void setupAdvancedPage(const Profile* info);
 
-    // apply changes from various pages of the dialog
-    void applyGeneralPage(MutableSessionInfo* info);
-    void applyAppearencePage(MutableSessionInfo* info);
-    void applyKeyboardPage(MutableSessionInfo* info);
-    void applyScrollingPage(MutableSessionInfo* info);
-    void applyAdvancedPage(MutableSessionInfo* info);
-
     Ui::EditProfileDialog* _ui;
+    Profile* _tempProfile;
     QString _profileKey;
 };
 

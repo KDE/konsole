@@ -103,6 +103,9 @@ public:
     /** Returns true if the specified property has been set in this Profile instance. */
     virtual bool isPropertySet(Property property) const;
 
+    /** Returns a map of the properties set in this Profile instance. */
+    virtual QHash<Property,QVariant> setProperties() const;
+
     //
     // Convenience methods for property() and setProperty() go here
     //
@@ -422,6 +425,15 @@ public:
     QString addProfile(Profile* type);
 
     /**
+     * Updates the profile associated with the specified @p key with
+     * the changes specified in @p propertyMap.
+     *
+     * @param key The profile's key
+     * @param propertyMap A map between profile properties and values describing the changes
+     */
+    void changeProfile(const QString& key , QHash<Profile::Property,QVariant> propertyMap);
+
+    /**
      * Returns a Profile object describing the default type of session, which is used
      * if createSession() is called with an empty configPath argument.
      */
@@ -524,6 +536,9 @@ signals:
     void profileAdded(const QString& key);
     /** Emitted when a profile is removed from the manager. */
     void profileRemoved(const QString& key);
+    /** Emitted when a profile's properties are modified. */
+    void profileChanged(const QString& key);
+
     /** 
      * Emitted when the favorite status of a profile changes. 
      * 
@@ -546,6 +561,17 @@ private:
     void loadFavorites();
     //saves the set of favorite sessions
     void saveFavorites();
+
+    // applies updates to the profile associated with @p key
+    // to all sessions currently using that profile
+    // if modifiedPropertiesOnly is true, only properties which
+    // are set in the profile @p key are updated
+    void applyProfile(const QString& key , bool modifiedPropertiesOnly);
+    // apples updates to the profile @p info to the session @p session
+    // if modifiedPropertiesOnly is true, only properties which
+    // are set in @p info are update ( ie. properties for which info->isPropertySet(<property>) 
+    // returns true )
+    void applyProfile(Session* session , Profile* info , bool modifiedPropertiesOnly); 
 
     QHash<QString,Profile*> _types;
     QList<Session*> _sessions;

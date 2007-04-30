@@ -46,7 +46,6 @@
 
 // Konsole
 #include <config-konsole.h>
-#include "ColorScheme.h"
 //TODO - Re-add adaptors
 //#include "sessionadaptor.h"
 //#include "sessionscriptingadaptor.h"

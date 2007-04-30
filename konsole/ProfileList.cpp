@@ -35,6 +35,36 @@ ProfileList::ProfileList(QObject* parent)
     // listen for future changes to the session list
     connect( manager , SIGNAL(favoriteStatusChanged(const QString&,bool)) , this ,
              SLOT(favoriteChanged(const QString&,bool)) );
+    connect( manager , SIGNAL(profileChanged(const QString&)) , this , 
+             SLOT(profileChanged(const QString&)) );
+}
+
+QAction* ProfileList::actionForKey(const QString& key) const
+{        
+    QListIterator<QAction*> iter(_group->actions());
+    while ( iter.hasNext() )
+    {
+        QAction* next = iter.next();
+        if ( next->data() == key )
+            return next;
+    }
+    return 0; // not found
+}
+
+void ProfileList::profileChanged(const QString& key)
+{
+    QAction* action = actionForKey(key);
+    if ( action )
+        updateAction(action,SessionManager::instance()->profile(key));
+}
+
+void ProfileList::updateAction(QAction* action , Profile* info)
+{
+    Q_ASSERT(action);
+    Q_ASSERT(info);
+
+    action->setText(info->name());
+    action->setIcon(KIcon(info->icon()));
 }
 
 void ProfileList::favoriteChanged(const QString& key,bool isFavorite)
@@ -43,23 +73,22 @@ void ProfileList::favoriteChanged(const QString& key,bool isFavorite)
     {
         Profile* info = SessionManager::instance()->profile(key);
 
-        QAction* action = _group->addAction(info->name());
-        action->setIcon( KIcon(info->icon()) );
+        QAction* action = new QAction(_group);
         action->setData( key );
+
+        updateAction(action,info);
 
         emit actionsChanged(_group->actions());
     }
     else
     {
-        QListIterator<QAction*> iter(_group->actions());
-        while ( iter.hasNext() )
-        {
-            QAction* next = iter.next();
-            if ( next->data() == key )
-                _group->removeAction(next);
-        }
+        QAction* action = actionForKey(key);
 
-        emit actionsChanged(_group->actions());
+        if ( action )
+        {
+            _group->removeAction(action);
+            emit actionsChanged(_group->actions());
+        }
     }
 }
 

@@ -37,6 +37,7 @@ namespace Konsole
 class MainWindow;
 class Session;
 class TerminalDisplay;
+class Profile;
 
 class SessionController;
 class ViewProperties;
@@ -167,6 +168,9 @@ private slots:
     // changes
     void containerViewsChanged(QObject* container);
 
+    // called when a profile changes
+    void profileChanged(const QString& key);
+
 private:
     void setupActions();
     void focusActiveView();
@@ -187,7 +191,7 @@ private:
     TerminalDisplay* createTerminalDisplay();
     // applies the view-specific settings such as colour scheme associated
     // with 'session' to 'view'
-    void loadViewSettings(TerminalDisplay* view , Session* session);
+    void loadViewSettings(TerminalDisplay* view , Profile* profile);
 
     // creates a new controller for a session/display pair which provides the menu
     // actions associated with that view, and exposes basic information

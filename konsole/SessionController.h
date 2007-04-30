@@ -131,7 +131,6 @@ private slots:
     void decreaseTextSize();
     void renameSession();
     void saveSession();
-
   
     // other
     void showDisplayContextMenu(TerminalDisplay* display , int state , int x , int y);

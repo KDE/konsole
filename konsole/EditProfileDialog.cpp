@@ -26,6 +26,7 @@
 // KDE
 #include <KFontDialog>
 #include <KIcon>
+#include <KIconDialog>
 #include <KDirSelectDialog>
 
 // Konsole
@@ -44,14 +45,25 @@ EditProfileDialog::EditProfileDialog(QWidget* parent)
 
     _ui = new Ui::EditProfileDialog();
     _ui->setupUi(mainWidget());
+
+    _tempProfile = new Profile;
 }
 EditProfileDialog::~EditProfileDialog()
 {
     delete _ui;
+    delete _tempProfile;
+}
+void EditProfileDialog::accept()
+{
+    qDebug() << "Edit profile dialog accepted.";
+
+    SessionManager::instance()->changeProfile(_profileKey,_tempProfile->setProperties());
+
+    KDialog::accept(); 
 }
 void EditProfileDialog::setProfile(const QString& key)
 {
-    _profileKey = key;    
+    _profileKey = key;
 
     const Profile* info = SessionManager::instance()->profile(key);
 
@@ -69,13 +81,57 @@ void EditProfileDialog::setProfile(const QString& key)
 }
 void EditProfileDialog::setupGeneralPage(const Profile* info)
 {
-    _ui->sessionNameEdit->setText( info->name() );
+    _ui->profileNameEdit->setText( info->name() );
     _ui->commandEdit->setText( info->command() );
     _ui->initialDirEdit->setText( info->defaultWorkingDirectory() );
     _ui->iconSelectButton->setIcon( KIcon(info->icon()) );
 
     // signals and slots
     connect( _ui->dirSelectButton , SIGNAL(clicked()) , this , SLOT(selectInitialDir()) );
+    connect( _ui->iconSelectButton , SIGNAL(clicked()) , this , SLOT(selectIcon()) );
+
+    connect( _ui->profileNameEdit , SIGNAL(textChanged(const QString&)) , this ,
+            SLOT(profileNameChanged(const QString&)) );
+    connect( _ui->initialDirEdit , SIGNAL(textChanged(const QString&)) , this , 
+            SLOT(initialDirChanged(const QString&)) );
+    connect(_ui->commandEdit , SIGNAL(textChanged(const QString&)) , this ,
+            SLOT(commandChanged(const QString&)) ); 
+    
+    connect(_ui->tabTitleEdit , SIGNAL(textChanged(const QString&)) , this ,
+            SLOT(tabTitleFormatChanged(const QString&)) );
+    connect(_ui->remoteTabTitleEdit , SIGNAL(textChanged(const QString&)) , this ,
+            SLOT(remoteTabTitleFormatChanged(const QString&)));
+}
+void EditProfileDialog::tabTitleFormatChanged(const QString& format)
+{
+    _tempProfile->setProperty(Profile::LocalTabTitleFormat,format);
+}
+void EditProfileDialog::remoteTabTitleFormatChanged(const QString& format)
+{
+    _tempProfile->setProperty(Profile::RemoteTabTitleFormat,format);
+}
+
+void EditProfileDialog::selectIcon()
+{
+    const QString& icon = KIconDialog::getIcon();
+    if (!icon.isEmpty())
+    {
+        _ui->iconSelectButton->setIcon( KIcon(icon) );
+        _tempProfile->setProperty(Profile::Icon,icon);
+    }
+}
+void EditProfileDialog::profileNameChanged(const QString& text)
+{
+    _tempProfile->setProperty(Profile::Name,text);
+}
+void EditProfileDialog::initialDirChanged(const QString& dir)
+{
+    _tempProfile->setProperty(Profile::Directory,dir);
+}
+void EditProfileDialog::commandChanged(const QString& command)
+{
+    //TODO Split into command and arguments
+    _tempProfile->setProperty(Profile::Command,command);
 }
 void EditProfileDialog::selectInitialDir()
 {
@@ -141,6 +197,8 @@ void EditProfileDialog::showFontDialog()
                                        qMax(slider->maximum(),currentFont.pointSize()) );
         _ui->fontSizeSlider->setValue(currentFont.pointSize());
         _ui->fontPreviewLabel->setFont(currentFont);
+
+        _tempProfile->setProperty(Profile::Font,currentFont);
     } 
 }
 void EditProfileDialog::setFontSize(int pointSize)
@@ -148,6 +206,8 @@ void EditProfileDialog::setFontSize(int pointSize)
     QFont newFont = _ui->fontPreviewLabel->font();
     newFont.setPointSize(pointSize);
     _ui->fontPreviewLabel->setFont( newFont );
+
+    _tempProfile->setProperty(Profile::Font,newFont);
 }
 ColorSchemeViewDelegate::ColorSchemeViewDelegate(QObject* parent)
  : QAbstractItemDelegate(parent)

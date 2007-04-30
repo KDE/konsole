@@ -68,6 +68,10 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
     // listen for addition or removal of views from associated containers
     connect( _containerSignalMapper , SIGNAL(mapped(QObject*)) , this , 
             SLOT(containerViewsChanged(QObject*)) ); 
+
+    // listen for profile changes
+    connect( SessionManager::instance() , SIGNAL(profileChanged(const QString&)) , this,
+            SLOT(profileChanged(const QString&)) );
 }
 
 ViewManager::~ViewManager()
@@ -283,7 +287,7 @@ void ViewManager::splitView(Qt::Orientation orientation)
     {
         Session* session = _sessionMap[(TerminalDisplay*)existingViewIter.next()];
         TerminalDisplay* display = createTerminalDisplay();
-        loadViewSettings(display,session); 
+        loadViewSettings(display,SessionManager::instance()->profile(session->type())); 
         ViewProperties* properties = createController(session,display);
 
         _sessionMap[display] = session;
@@ -368,7 +372,7 @@ void ViewManager::createView(Session* session)
     {
         ViewContainer* container = containerIter.next();
         TerminalDisplay* display = createTerminalDisplay();
-        loadViewSettings(display,session);
+        loadViewSettings(display,SessionManager::instance()->profile(session->type()));
         ViewProperties* properties = createController(session,display);
 
         _sessionMap[display] = session; 
@@ -487,12 +491,15 @@ TerminalDisplay* ViewManager::createTerminalDisplay()
    display->setTerminalSizeStartup(false);
    display->setScrollBarLocation(TerminalDisplay::SCROLLBAR_RIGHT);
 
+   // set initial size
+   // temporary default used for now
+   display->setSize(80,40);
+
    return display;
 }
 
-void ViewManager::loadViewSettings(TerminalDisplay* view , Session* session)
+void ViewManager::loadViewSettings(TerminalDisplay* view , Profile* info)
 {
-    Profile* info = SessionManager::instance()->profile(session->type());
     Q_ASSERT( info );
 
     const ColorScheme* colorScheme = ColorSchemeManager::instance()->
@@ -503,12 +510,26 @@ void ViewManager::loadViewSettings(TerminalDisplay* view , Session* session)
     // load colour scheme
     view->setColorTable(colorScheme->colorTable());
     
-    // load font, fall back to system monospace font if not specified
+    // load font 
     view->setVTFont(info->font());
-   
-    // set initial size
-    // temporary default used for now
-    view->setSize(80,40);
+}
+
+void ViewManager::profileChanged(const QString& key)
+{
+    Profile* info = SessionManager::instance()->profile(key);
+
+    QHashIterator<TerminalDisplay*,Session*> iter(_sessionMap);
+
+    while ( iter.hasNext() )
+    {
+        iter.next();
+
+        // if session uses this profile, update the display
+        if ( iter.value()->type() == key )
+        {
+            loadViewSettings(iter.key(),info);
+        }
+    }
 }
 
 QList<ViewProperties*> ViewManager::viewProperties() const

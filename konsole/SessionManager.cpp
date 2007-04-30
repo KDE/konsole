@@ -51,6 +51,11 @@ Profile::Profile(const Profile* parent)
     setProperty(Font,QFont("Monospace"));
 }
 
+QHash<Profile::Property,QVariant> Profile::setProperties() const
+{
+    return _propertyValues;
+}
+
 QVariant Profile::property(Property property) const
 {
     if ( _propertyValues.contains(property) )
@@ -474,6 +479,44 @@ QVariant SessionManager::activeSetting( Setting setting ) const
     }
 
     return value;
+}
+
+void SessionManager::changeProfile(const QString& key , 
+                                   QHash<Profile::Property,QVariant> propertyMap)
+{
+    Profile* info = profile(key);
+
+    qDebug() << "Profile changed: " << info->name();
+
+    QListIterator<Profile::Property> iter(propertyMap.keys());
+    while ( iter.hasNext() )
+    {
+        const Profile::Property property = iter.next();
+        info->setProperty(property,propertyMap[property]);
+    }
+
+    applyProfile(key,true);
+
+    emit profileChanged(key);
+}
+void SessionManager::applyProfile(const QString& key , bool modifiedPropertiesOnly)
+{
+    Profile* info = profile(key);
+
+    QListIterator<Session*> iter(_sessions);
+    while ( iter.hasNext() )
+    {
+        Session* next = iter.next();
+        if ( next->type() == key )
+            applyProfile(next,info,modifiedPropertiesOnly);        
+    }
+}
+void SessionManager::applyProfile(Session* session, Profile* info , bool modifiedPropertiesOnly)
+{
+    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Icon) )
+        session->setIconName(info->icon());
+    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::KeyBindings) )
+        session->setKeymap(info->property(Profile::KeyBindings).value<QString>());
 }
 
 QString SessionManager::addProfile(Profile* type)
