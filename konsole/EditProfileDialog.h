@@ -66,6 +66,9 @@ public slots:
     virtual void accept();
 
 private slots:
+    // saves changes to profile
+    void save();
+
     // general page
     void selectInitialDir();
     void selectIcon();

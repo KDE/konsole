@@ -29,6 +29,7 @@
 #include <QSet>
 #include <QStringList>
 #include <QPair>
+#include <QPointer>
 #include <QVariant>
 
 class KConfigGroup;
@@ -40,7 +41,7 @@ namespace Konsole
 
 class Session;
 
-class Profile 
+class Profile : public QObject 
 {
 public:
     enum Property
@@ -87,7 +88,7 @@ public:
     /**
      * Constructs a new profile
      */
-    Profile(const Profile* parent = 0);
+    Profile(Profile* parent = 0);
     virtual ~Profile() {}
 
     /** 
@@ -95,7 +96,7 @@ public:
      * if the specified property has not been set for this profile,
      * the parent's value for the property will be returned instead.
      */
-    void setParent(const Profile* parent);
+    void setParent(Profile* parent);
 
     /** Returns the parent profile. */
     const Profile* parent() const;
@@ -115,6 +116,18 @@ public:
 
     /** Returns a map of the properties set in this Profile instance. */
     virtual QHash<Property,QVariant> setProperties() const;
+
+    /** Returns true if no properties have been set in this Profile instance. */
+    bool isEmpty() const;
+
+    /** 
+     * Returns true if this is a 'hidden' profile which should not be displayed
+     * in menus.
+     */
+    bool isHidden() const;
+
+    /** Specifies whether this is a hidden profile.  See isHidden() */
+    void setHidden(bool hidden);
 
     //
     // Convenience methods for property() and setProperty() go here
@@ -180,9 +193,17 @@ public:
 
 private:
     QHash<Property,QVariant> _propertyValues;
-    const Profile* _parent;
+    QPointer<Profile> _parent;
+
+    bool _hidden;
 
     static QHash<QString,Property> _propertyNames;
+};
+
+class FallbackProfile : public Profile
+{
+public:
+    FallbackProfile();
 };
 
 /** Interface for all classes which can load profile settings from a file. */
@@ -190,17 +211,21 @@ class ProfileReader
 {
 public:
     virtual ~ProfileReader() {}
+    virtual QStringList findProfiles() { return QStringList(); }
     virtual bool readProfile(const QString& path , Profile* profile) = 0;
 };
 /** Reads a KDE 3 profile .desktop file. */
 class KDE3ProfileReader : public ProfileReader
 {
 public:
+    virtual QStringList findProfiles();
     virtual bool readProfile(const QString& path , Profile* profile);
 };
-/** Reads a KDE 4 profile .desktop file. */
+/** Reads a KDE 4 .profile file. */
 class KDE4ProfileReader : public ProfileReader
 {
+public:
+    virtual QStringList findProfiles();
     virtual bool readProfile(const QString& path , Profile* profile);
 };
 /** Interface for all classes which can write profile settings to a file. */
@@ -208,13 +233,15 @@ class ProfileWriter
 {
 public:
     virtual ~ProfileWriter() {}
+    virtual QString getPath(const Profile* profile) = 0;
     virtual bool writeProfile(const QString& path , const Profile* profile) = 0;
 };
-/** Writes a KDE 4 profile .desktop file. */
+/** Writes a KDE 4 .profile file. */
 class KDE4ProfileWriter : public ProfileWriter
 {
 public:
-    virtual bool writeProfile(const QString& path);
+    virtual QString getPath(const Profile* profile);
+    virtual bool writeProfile(const QString& path , const Profile* profile);
 };
 
 #if 0
@@ -389,30 +416,6 @@ public:
     SessionManager();
     virtual ~SessionManager();
 
-    /** document me */
-    enum Setting
-    {
-        Font                     = 0,
-        InitialWorkingDirectory  = 1,
-        ColorScheme              = 2,
-        HistoryEnabled           = 3,
-        HistorySize              = 4  // set to 0 for unlimited history ( stored in a file )
-    };
-
-    /** document me */
-
-    //The values of these settings are significant, higher priority sources
-    //have higher values
-    enum Source
-    {
-        ApplicationDefault  = 0,
-        GlobalConfig        = 1,
-        SessionConfig       = 2,
-        Commandline         = 3,
-        Action              = 4,
-        SingleShot          = 5
-    };
-
     /**
      * Returns a list of keys for registered profiles. 
      */
@@ -455,40 +458,6 @@ public:
     QString defaultProfileKey() const;
 
     /**
-     * Adds a setting which will be considered when creating new sessions.
-     * Each setting ( such as terminal font , initial working directory etc. )
-     * can be specified by multiple different sources.  The
-     *
-     * For example, the working directory in which a new session starts is specified
-     * in the configuration file for that profile, but can be overridden
-     * by creating a new session from a bookmark or specifying what to use on
-     * the command line.
-     *
-     * The active value for a setting (ie. the one which will actually be used when
-     * creating the session) can be found using activeSetting()
-     *
-     * @p setting The setting to change
-     * @p source Specifies where the setting came from.
-     * @p value The new value for this setting,source pair
-     */
-    void addSetting( Setting setting , Source source , const QVariant& value );
-
-
-    /**
-     * Returns the value for a particular setting which will be used
-     * when a new session is created.
-     *
-     * Values for settings come from different places, such as the command-line,
-     * config files and menu options.
-     *
-     * The active setting is the value for the setting which comes from the source
-     * with the highest priority.  For example, a setting specified on the command-line
-     * when Konsole is launched will take priority over a setting specified in a
-     * configuration file.
-     */
-    QVariant activeSetting( Setting setting ) const;
-
-    /**
      * Creates a new session from the specified profile, using the settings specified
      * using addSetting() and from profile associated with the specified key.
      * The profile must have been previously registered using addprofile()
@@ -524,13 +493,16 @@ public:
     /**
      * Returns the set of keys for the user's favorite profiles.
      */
-    QSet<QString> favorites() const;
+    QSet<QString> findFavorites() ;
 
     /**
      * Specifies whether a profile should be included in the user's
      * list of favorite sessions.
      */
     void setFavorite(const QString& key , bool favorite);
+
+    /** Loads all available profiles. */
+    void loadAllProfiles();
 
     /**
      * Sets the global session manager instance.
@@ -565,12 +537,14 @@ protected Q_SLOTS:
     void sessionTerminated( Session* session );
 
 private:
-    //fills the settings store with the settings from the session config file
-    void pushSessionSettings( const Profile*  info );
-    //loads the set of favorite sessions 
+    //loads the set of favorite sessions
     void loadFavorites();
     //saves the set of favorite sessions
     void saveFavorites();
+    //loads a profile from a file
+    QString loadProfile(const QString& path);
+        // saves a profile to a file
+    void saveProfile(const QString& path , Profile* profile);
 
     // applies updates to the profile associated with @p key
     // to all sessions currently using that profile
@@ -581,18 +555,16 @@ private:
     // if modifiedPropertiesOnly is true, only properties which
     // are set in @p info are update ( ie. properties for which info->isPropertySet(<property>) 
     // returns true )
-    void applyProfile(Session* session , Profile* info , bool modifiedPropertiesOnly); 
+    void applyProfile(Session* session , const Profile* info , bool modifiedPropertiesOnly); 
 
     QHash<QString,Profile*> _types;
     QList<Session*> _sessions;
 
     QString _defaultProfile;
     
-    typedef QPair<Source,QVariant> SourceVariant;
-
-    QHash< Setting , QList< SourceVariant > >  _settings;
-
     QSet<QString> _favorites;
+
+    bool _loadedAllProfiles;
 
     static SessionManager* _instance;
 };

@@ -116,13 +116,17 @@ void SessionController::snapshot()
     else
        process = snapshot;
 
+    QString title; 
     if ( process->name(&ok) == "ssh" && ok )
     {
         SSHProcessInfo sshInfo(*process);
-        _session->setTitle( sshInfo.format(_session->tabTitleFormat(Session::RemoteTabTitle)) );
+        title = sshInfo.format(_session->tabTitleFormat(Session::RemoteTabTitle));
     }
     else
-        _session->setTitle( process->format(_session->tabTitleFormat(Session::LocalTabTitle) ) );
+        title = process->format(_session->tabTitleFormat(Session::LocalTabTitle) ) ;
+
+    if ( !title.isEmpty() )
+        _session->setTitle(title);
 
     if ( snapshot != process )
     {
@@ -465,6 +469,7 @@ void SessionController::debugProcess()
 void SessionController::editCurrentProfile()
 {
     EditProfileDialog dialog(_view);
+
     dialog.setProfile(_session->type());
     dialog.exec();
 }

@@ -77,6 +77,9 @@ ManageProfilesDialog::~ManageProfilesDialog()
 }
 void ManageProfilesDialog::updateTableModel()
 {
+    // ensure profiles list is complete
+    SessionManager::instance()->loadAllProfiles();
+
     // setup session table
     _sessionModel = new QStandardItemModel(this);
     _sessionModel->setHorizontalHeaderLabels( QStringList() << "Name"
@@ -88,6 +91,9 @@ void ManageProfilesDialog::updateTableModel()
 
         Profile* info = SessionManager::instance()->profile(key);
 
+        if ( info->isHidden() )
+            continue;
+
         QList<QStandardItem*> itemList;
         QStandardItem* item = new QStandardItem( info->name() );
 
@@ -95,7 +101,7 @@ void ManageProfilesDialog::updateTableModel()
             item->setIcon( KIcon(info->icon()) );
         item->setData(key);
 
-        const bool isFavorite = SessionManager::instance()->favorites().contains(key);
+        const bool isFavorite = SessionManager::instance()->findFavorites().contains(key);
 
         QStandardItem* favoriteItem = new QStandardItem();
         if ( isFavorite )
@@ -182,9 +188,19 @@ void ManageProfilesDialog::setSelectedAsDefault()
 void ManageProfilesDialog::newType()
 {
     EditProfileDialog dialog(this);
-    // base new type off the default session type
-    dialog.setProfile(QString()); 
-    dialog.exec(); 
+ 
+    // setup a temporary profile, inheriting from the default profile
+    Profile* defaultProfile = SessionManager::instance()->defaultProfile();
+
+    Profile* newProfile = new Profile(defaultProfile);
+    newProfile->setProperty(Profile::Name,i18n("New Profile"));
+    const QString& key = SessionManager::instance()->addProfile(newProfile);
+    dialog.setProfile(key); 
+    
+    // if the user doesn't accept the dialog, remove the temporary profile
+    // if they do accept the dialog, it will become a permanent profile
+    if ( dialog.exec() != QDialog::Accepted )
+        SessionManager::instance()->deleteProfile(key);
 }
 void ManageProfilesDialog::editSelected()
 {
@@ -213,7 +229,7 @@ bool ProfileItemDelegate::editorEvent(QEvent* event,QAbstractItemModel* model,
      if ( event->type() == QEvent::MouseButtonPress || event->type() == QEvent::KeyPress )
      {
          const QString& key = index.data(Qt::UserRole + 1).value<QString>();
-         const bool isFavorite = !SessionManager::instance()->favorites().contains(key);
+         const bool isFavorite = !SessionManager::instance()->findFavorites().contains(key);
                                                 
         SessionManager::instance()->setFavorite(key,
                                             isFavorite);

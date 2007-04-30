@@ -37,23 +37,42 @@
 #include "Session.h"
 #include "History.h"
 #include "SessionManager.h"
+#include "ShellCommand.h"
 
 using namespace Konsole;
 
 SessionManager* SessionManager::_instance = 0;
 QHash<QString,Profile::Property> Profile::_propertyNames;
 
-Profile::Profile(const Profile* parent)
-    : _parent(parent)
+FallbackProfile::FallbackProfile()
+ : Profile(0)
 {
+    // Fallback settings
+    setProperty(Name,i18n("Shell"));
     setProperty(Command,getenv("SHELL"));
     setProperty(Arguments,QStringList() << getenv("SHELL"));
     setProperty(Font,QFont("Monospace"));
+
+    // Fallback should not be shown in menus
+    setHidden(true);
 }
 
-void Profile::setParent(const Profile* parent) { _parent = parent; }
+Profile::Profile(Profile* parent)
+    : _parent(parent)
+     ,_hidden(false)
+{
+}
+
+bool Profile::isHidden() const { return _hidden; }
+void Profile::setHidden(bool hidden) { _hidden = hidden; }
+
+void Profile::setParent(Profile* parent) { _parent = parent; }
 const Profile* Profile::parent() const { return _parent; }
 
+bool Profile::isEmpty() const
+{
+    return _propertyValues.isEmpty();
+}
 QHash<Profile::Property,QVariant> Profile::setProperties() const
 {
     return _propertyValues;
@@ -96,6 +115,113 @@ void Profile::registerName(Property property , const QString& name)
     _propertyNames.insert(name,property);
 }
 
+QString KDE4ProfileWriter::getPath(const Profile* info)
+{
+    QString newPath;
+    
+    if ( info->isPropertySet(Profile::Path) )
+        newPath=info->path();
+
+    // if the path is not specified, use the profile name + ".profile"
+    if ( newPath.isEmpty() )
+        newPath = info->name() + ".profile";    
+
+    QFileInfo fileInfo(newPath);
+    if (!fileInfo.isAbsolute())
+        newPath = KGlobal::dirs()->saveLocation("data","konsole/") + newPath;
+
+    qDebug() << "Saving profile under name: " << newPath;
+
+    return newPath;
+}
+
+bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile* profile)
+{
+    KConfig config(path,KConfig::NoGlobals);
+
+    KConfigGroup general = config.group("General");
+
+    if ( profile->isPropertySet(Profile::Name) )
+        general.writeEntry("Name",profile->name());
+
+    if (    profile->isPropertySet(Profile::Command) 
+         || profile->isPropertySet(Profile::Arguments) )
+        general.writeEntry("Command",
+                ShellCommand(profile->command(),profile->arguments()).fullCommand());
+
+    if ( profile->isPropertySet(Profile::Icon) )
+        general.writeEntry("Icon",profile->icon());
+
+    if ( profile->isPropertySet(Profile::LocalTabTitleFormat) )
+        general.writeEntry("LocalTabTitleFormat",
+                profile->property(Profile::LocalTabTitleFormat).value<QString>());
+
+    if ( profile->isPropertySet(Profile::RemoteTabTitleFormat) )
+        general.writeEntry("RemoteTabTitleFormat",
+                profile->property(Profile::RemoteTabTitleFormat).value<QString>());
+
+    KConfigGroup appearence = config.group("Appearence");
+
+    if ( profile->isPropertySet(Profile::ColorScheme) )
+        appearence.writeEntry("ColorScheme",profile->colorScheme());
+
+    if ( profile->isPropertySet(Profile::Font) )
+        appearence.writeEntry("Font",profile->font());
+    
+
+    return true;
+}
+
+QStringList KDE4ProfileReader::findProfiles()
+{
+    return KGlobal::dirs()->findAllResources("data","konsole/*.profile",
+            KStandardDirs::NoDuplicates);
+}
+bool KDE4ProfileReader::readProfile(const QString& path , Profile* profile)
+{
+    qDebug() << "KDE 4 Profile Reader:" << path;
+
+    KConfig config(path,KConfig::NoGlobals);
+
+    KConfigGroup general = config.group("General");
+
+    if ( general.hasKey("Name") )
+        profile->setProperty(Profile::Name,general.readEntry("Name"));
+    else
+        return false;
+
+    if ( general.hasKey("Command") )
+    {
+        ShellCommand shellCommand(general.readEntry("Command"));
+
+        profile->setProperty(Profile::Command,shellCommand.command());
+        profile->setProperty(Profile::Arguments,shellCommand.arguments());
+    }
+
+    if ( general.hasKey("Icon") )
+        profile->setProperty(Profile::Icon,general.readEntry("Icon"));
+    if ( general.hasKey("LocalTabTitleFormat") )
+        profile->setProperty(Profile::LocalTabTitleFormat,general.readEntry("LocalTabTitleFormat"));
+    if ( general.hasKey("RemoteTabTitleFormat") )
+        profile->setProperty(Profile::RemoteTabTitleFormat,
+                            general.readEntry("RemoteTabTitleFormat"));
+
+    qDebug() << "local tabs:" << general.readEntry("LocalTabTitleFormat");
+
+    KConfigGroup appearence = config.group("Appearence");
+
+    if ( appearence.hasKey("ColorScheme") )
+        profile->setProperty(Profile::ColorScheme,appearence.readEntry("Color Scheme"));
+    if ( appearence.hasKey("Font") )
+        profile->setProperty(Profile::Font,appearence.readEntry("Font"));
+
+    return true;
+}
+QStringList KDE3ProfileReader::findProfiles()
+{
+    return KGlobal::dirs()->findAllResources("data", "konsole/*.desktop", 
+            KStandardDirs::NoDuplicates);
+}
 bool KDE3ProfileReader::readProfile(const QString& path , Profile* profile)
 {
     if (!QFile::exists(path))
@@ -114,12 +240,36 @@ bool KDE3ProfileReader::readProfile(const QString& path , Profile* profile)
     if ( config->hasKey("Exec") )
     {
         const QString& fullCommand = config->readEntry("Exec");
+        ShellCommand shellCommand(fullCommand);
         qDebug() << "full command = " << fullCommand;
-        profile->setProperty(Profile::Command,fullCommand.section(QChar(' '),0,0));
-        profile->setProperty(Profile::Arguments,QStringList() << profile->command());//fullCommand.split(QChar(' ')));
     
+        profile->setProperty(Profile::Command,shellCommand.command());
+        profile->setProperty(Profile::Arguments,shellCommand.arguments());
+
         qDebug() << "command = " << profile->command();
         qDebug() << "argumetns = " << profile->arguments();
+    }
+    if ( config->hasKey("Schema") )
+    {
+        profile->setProperty(Profile::ColorScheme,config->readEntry("Schema").replace
+                                            (".schema",QString::null));        
+    }
+    if ( config->hasKey("defaultfont") )
+    {
+        profile->setProperty(Profile::Font,config->readEntry("defaultfont"));
+    }
+    if ( config->hasKey("KeyTab") )
+    {
+        profile->setProperty(Profile::KeyBindings,config->readEntry("KeyTab"));
+    }
+    if ( config->hasKey("Term") )
+    {
+        profile->setProperty(Profile::Environment,
+                QStringList() << "TERM="+config->readEntry("Term"));
+    }
+    if ( config->hasKey("Cwd") )
+    {
+        profile->setProperty(Profile::Directory,config->readEntry("Cwd"));
     }
 
     delete desktopFile;
@@ -129,110 +279,6 @@ bool KDE3ProfileReader::readProfile(const QString& path , Profile* profile)
 }
 
 #if 0
-Profile::Profile(const QString& path)
-{
-    //QString fileName = QFileInfo(path).fileName();
-
-    //QString fullPath = KStandardDirs::locate("data","konsole/"+fileName);
-    //Q_ASSERT( QFile::exists(fullPath) );
-
-    _desktopFile = new KDesktopFile(path);
-    _config = new KConfigGroup( _desktopFile->desktopGroup() );
-
-    _path = path;
-
-}
-Profile::~Profile()
-{
-    delete _config; _config = 0;
-    delete _desktopFile; _desktopFile = 0;
-}
-
-void Profile::setParent( Profile* parent )
-{
-    _parent = parent;
-}
-Profile* Profile::parent() const
-{
-    return _parent;
-}
-void Profile::setProperty( Property property , const QVariant& value )
-{
-    _properties[property] = value;
-}
-QVariant Profile::property( Property property ) const
-{
-    if ( _properties.contains(property) )
-    {
-        return _properties[property];
-    }
-    else
-    {
-        switch ( property )
-        {
-            case Name:
-                return name();
-                break;
-            case Icon:
-                return icon();
-                break;
-            default:
-                return QVariant();
-        }
-    }
-}
-
-QString Profile::name() const
-{
-    return _config->readEntry("Name");
-}
-
-QString Profile::icon() const
-{
-    return _config->readEntry("Icon","konsole");
-}
-
-
-bool Profile::isRootSession() const
-{
-    const QString& cmd = _config->readEntry("Exec");
-
-    return ( cmd.startsWith("su") );
-}
-
-QString Profile::command(bool stripRoot , bool stripArguments) const
-{
-    QString fullCommand = _config->readEntry("Exec");
-
-    //if the .desktop file for this session doesn't specify a binary to run
-    //(eg. No 'Exec' entry or empty 'Exec' entry) then use the user's standard SHELL
-    if ( fullCommand.isEmpty() )
-        fullCommand = getenv("SHELL");
-
-    if ( isRootSession() && stripRoot )
-    {
-        //command is of the form "su -flags 'commandname'"
-        //we need to strip out and return just the command name part.
-        fullCommand = fullCommand.section('\'',1,1);
-    }
-
-    if ( fullCommand.isEmpty() )
-        fullCommand = getenv("SHELL");
-
-    if ( stripArguments )
-        return fullCommand.section(QChar(' '),0,0);
-    else
-        return fullCommand;
-}
-
-QStringList Profile::arguments() const
-{
-    QString commandString = command(false,false);
-
-    //FIXME:  This wll fail where single arguments contain spaces (because slashes or quotation
-    //marks are used) - eg. vi My\ File\ Name
-    return commandString.split(QChar(' '));
-}
 
 bool Profile::isAvailable() const
 {
@@ -248,94 +294,26 @@ bool Profile::isAvailable() const
     else
         return true;
 }
-
-QString Profile::path() const
-{
-    return _path;
-}
-
-
-QString Profile::newSessionText() const
-{
-    QString commentEntry = _config->readEntry("Comment");
-
-    if ( commentEntry.isEmpty() )
-        return i18n("New %1",name());
-    else
-        return commentEntry;
-}
-
-QString Profile::terminal() const
-{
-    return _config->readEntry("Term","xterm");
-}
-QString Profile::keyboardSetup() const
-{
-    return _config->readEntry("KeyTab",QString());
-}
-QString Profile::colorScheme() const
-{
-    //TODO Pick a default color scheme
-    return _config->readEntry("Schema").replace(".schema",QString::null);
-}
-QFont Profile::defaultFont() const
-{
-    //TODO Use system default font here
-    const QFont& font = QFont("Monospace");
-
-    if (_config->hasKey("Font"))
-    {
-        // it is possible for the Font key to exist, but to be empty, in which
-        // case '_config->readEntry("Font")' will return the default application
-        // font, which will most likely not be suitable for use in the terminal
-        QString fontEntry = _config->readEntry("Font");
-        if (!fontEntry.isEmpty())
-            return QVariant(fontEntry).value<QFont>();
-        else
-            return font;
-    }
-    else
-        return font;
-}
-QString Profile::defaultWorkingDirectory() const
-{
-    return _config->readPathEntry("Cwd");
-}
 #endif
 
 SessionManager::SessionManager()
+    : _loadedAllProfiles(false)
 {
-    ProfileReader* kde3Reader = new KDE3ProfileReader;
+    //load fallback profile
+//    addProfile( new FallbackProfile );
+    addProfile( new FallbackProfile );
 
-    //locate default session
+    //locate and load default profile
     KSharedConfigPtr appConfig = KGlobal::config();
-    //KConfig* appConfig = new KConfig("konsolerc");
     const KConfigGroup group = appConfig->group( "Desktop Entry" );
+    QString defaultSessionFilename = group.readEntry("DefaultProfile","Shell.profile");
 
-   QString defaultSessionFilename = group.readEntry("DefaultSession","shell.desktop");
-
-    //locate config files and extract the most important properties of them from
-    //the config files.
-    //
-    //the sessions are only parsed completely when a session of this type
-    //is actually created
-    QList<QString> files = KGlobal::dirs()->findAllResources("data", "konsole/*.desktop", KStandardDirs::NoDuplicates);
-
-    QListIterator<QString> fileIter(files);
-
-    while (fileIter.hasNext())
+    QString path = KGlobal::dirs()->findResource("data","konsole/"+defaultSessionFilename);
+    if (!path.isEmpty())
     {
-
-        QString configFile = fileIter.next();
-        Profile* newType = new Profile();
-        newType->setProperty(Profile::Path,configFile);
-
-        kde3Reader->readProfile(configFile,newType);
-
-        QString sessionKey = addProfile( newType );
-
-        if ( QFileInfo(configFile).fileName() == defaultSessionFilename )
-            _defaultProfile = sessionKey;
+        const QString& key = loadProfile(path);
+        if ( !key.isEmpty() )
+            _defaultProfile = key;
     }
 
     Q_ASSERT( _types.count() > 0 );
@@ -343,11 +321,64 @@ SessionManager::SessionManager()
 
     // now that the session types have been loaded,
     // get the list of favorite sessions
-    loadFavorites();
-
-    delete kde3Reader;
+    //loadFavorites();
 }
+QString SessionManager::loadProfile(const QString& path)
+{
+    // check that we have not already loaded this profile
+    QHashIterator<QString,Profile*> iter(_types);
+    while ( iter.hasNext() )
+    {
+        iter.next();
+        if ( iter.value()->path() == path )
+            return QString::null;
+    }
 
+    // load the profile
+    ProfileReader* reader = 0;
+    if ( path.endsWith(".desktop") )
+        reader = 0; //new KDE3ProfileReader;
+    else
+        reader = new KDE4ProfileReader;
+
+    if (!reader)
+        return QString::null;
+
+    Profile* newProfile = new Profile(defaultProfile());
+    newProfile->setProperty(Profile::Path,path);
+
+    bool result = reader->readProfile(path,newProfile);
+
+    delete reader;
+
+    if (!result)
+    {
+        delete newProfile;
+        return QString::null;
+    }
+    else
+        return addProfile(newProfile);
+}
+void SessionManager::loadAllProfiles()
+{
+    if ( _loadedAllProfiles )
+        return;
+
+    qDebug() << "Loading all profiles";
+
+    KDE3ProfileReader kde3Reader;
+    KDE4ProfileReader kde4Reader;
+
+    QStringList profiles;
+    profiles += kde3Reader.findProfiles();
+    profiles += kde4Reader.findProfiles();
+    
+    QListIterator<QString> iter(profiles);
+    while (iter.hasNext())
+        loadProfile(iter.next());
+
+    _loadedAllProfiles = true;
+}
 SessionManager::~SessionManager()
 {
     QListIterator<Profile*> infoIter(_types.values());
@@ -369,12 +400,6 @@ const QList<Session*> SessionManager::sessions()
     return _sessions;
 }
 
-void SessionManager::pushSessionSettings( const Profile* info )
-{
-    addSetting( InitialWorkingDirectory , SessionConfig , info->defaultWorkingDirectory() );
-    addSetting( ColorScheme , SessionConfig , info->colorScheme() );
-}
-
 Session* SessionManager::createSession(QString key )
 {
     Session* session = 0;
@@ -386,39 +411,17 @@ Session* SessionManager::createSession(QString key )
     else
         info = _types[key];
 
-        if ( true )
-        {
-            //supply settings from session config
-            pushSessionSettings( info );
+    //configuration information found, create a new session based on this
+    session = new Session();
+    session->setType(key);
+    
+    applyProfile(session,info,false);
 
-            //configuration information found, create a new session based on this
-            session = new Session();
-            session->setType(key);
+    //ask for notification when session dies
+    connect( session , SIGNAL(done(Session*)) , SLOT(sessionTerminated(Session*)) );
 
-            QListIterator<QString> iter(info->arguments());
-            while (iter.hasNext())
-                kDebug() << "running " << info->command() << ": argument " << iter.next() << endl;
-           
-            session->setInitialWorkingDirectory( activeSetting(InitialWorkingDirectory).toString() ); 
-            session->setProgram( info->command() );
-            session->setArguments( info->arguments() );
-            session->setTitle( info->name() );
-            session->setIconName( info->icon() );
-
-            //session->setSchema( _colorSchemeList->find(activeSetting(ColorScheme).toString()) );
-            session->setTerminalType( info->terminal() );
-
-                //temporary
-                session->setHistory( HistoryTypeBuffer(200) );
-                //session->setHistory( HistoryTypeFile() );
-
-            //ask for notification when session dies
-            connect( session , SIGNAL(done(Session*)) , SLOT(sessionTerminated(Session*)) );
-
-            //add session to active list
-            _sessions << session;
-
-        }
+    //add session to active list
+    _sessions << session;
 
     Q_ASSERT( session );
 
@@ -457,31 +460,18 @@ QString SessionManager::defaultProfileKey() const
     return _defaultProfile;
 }
 
-void SessionManager::addSetting( Setting setting, Source source, const QVariant& value)
+void SessionManager::saveProfile(const QString& path , Profile* info)
 {
-    _settings[setting] << SourceVariant(source,value);
-}
+    ProfileWriter* writer = new KDE4ProfileWriter;
 
-QVariant SessionManager::activeSetting( Setting setting ) const
-{
-    QListIterator<SourceVariant>  sourceIter( _settings[setting] );
+    QString newPath = path;
 
+    if ( newPath.isEmpty() )
+        newPath = writer->getPath(info);
 
-    Source highestPrioritySource = ApplicationDefault;
-    QVariant value;
+    writer->writeProfile(newPath,info);
 
-    while (sourceIter.hasNext())
-    {
-        QPair<Source,QVariant> sourceSettingPair = sourceIter.next();
-
-        if ( sourceSettingPair.first >= highestPrioritySource )
-        {
-            value = sourceSettingPair.second;
-            highestPrioritySource = sourceSettingPair.first;
-        }
-    }
-
-    return value;
+    delete writer;
 }
 
 void SessionManager::changeProfile(const QString& key , 
@@ -489,18 +479,43 @@ void SessionManager::changeProfile(const QString& key ,
 {
     Profile* info = profile(key);
 
-    qDebug() << "Profile changed: " << info->name();
+    if (!info || key.isEmpty())
+    {
+        qWarning() << "Profile for key" << key << "not found.";
+        return;
+    }
 
+    qDebug() << "Profile about to change: " << info->name();
+    
+    // insert the changes into the existing Profile instance
     QListIterator<Profile::Property> iter(propertyMap.keys());
     while ( iter.hasNext() )
     {
         const Profile::Property property = iter.next();
         info->setProperty(property,propertyMap[property]);
     }
+    
+    qDebug() << "Profile changed: " << info->name();
 
+    // apply the changes to existing sessions
     applyProfile(key,true);
 
+    // notify the world about the change
     emit profileChanged(key);
+
+    // save the changes to disk
+    // the path may be empty here, in which case it is up
+    // to the profile writer to generate or request a path name
+    if ( info->isPropertySet(Profile::Path) )
+    {
+        qDebug() << "Profile saved to existing path: " << info->path();
+        saveProfile(info->path(),info);
+    }
+    else
+    {
+        qDebug() << "Profile saved to new path.";
+        saveProfile(QString::null,info);
+    }
 }
 void SessionManager::applyProfile(const QString& key , bool modifiedPropertiesOnly)
 {
@@ -514,8 +529,19 @@ void SessionManager::applyProfile(const QString& key , bool modifiedPropertiesOn
             applyProfile(next,info,modifiedPropertiesOnly);        
     }
 }
-void SessionManager::applyProfile(Session* session, Profile* info , bool modifiedPropertiesOnly)
+void SessionManager::applyProfile(Session* session, const Profile* info , bool modifiedPropertiesOnly)
 {
+    session->setType( _types.key((Profile*)info) );
+
+    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Command) )
+        session->setProgram(info->command());
+
+    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Arguments) )
+        session->setArguments(info->arguments());
+
+    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Directory) )
+        session->setInitialWorkingDirectory(info->defaultWorkingDirectory());
+
     if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Icon) )
         session->setIconName(info->icon());
 
@@ -543,6 +569,9 @@ QString SessionManager::addProfile(Profile* type)
         }
     }
     
+    if ( _types.isEmpty() )
+        _defaultProfile = key;
+
     _types.insert(key,type);
 
     emit profileAdded(key);
@@ -556,16 +585,33 @@ void SessionManager::deleteProfile(const QString& key)
 
     setFavorite(key,false);
 
+    bool wasDefault = ( type == defaultProfile() );
+
     if ( type )
     {
+        // try to delete the config file
+        if ( type->isPropertySet(Profile::Path) && QFile::exists(type->path()) )
+        {
+            if (!QFile::remove(type->path()))
+            {
+                qWarning() << "Could not delete config file: " << type->path()
+                    << "The file is most likely in a directory which is read-only.";
+                qWarning() << "TODO: Hide this file instead.";
+            }
+        }
+
         _types.remove(key);
         delete type;
     }
 
-    emit profileRemoved(key); 
+    // if we just deleted the default session type,
+    // replace it with the first type in the list
+    if ( wasDefault )
+    {
+        setDefaultProfile( _types.keys().first() );
+    }
 
-    qWarning() << __FUNCTION__ << "TODO: Make this change persistant.";
-    //TODO Store this information persistantly
+    emit profileRemoved(key); 
 }
 void SessionManager::setDefaultProfile(const QString& key)
 {
@@ -581,10 +627,13 @@ void SessionManager::setDefaultProfile(const QString& key)
    qDebug() << "setting default session type to " << fileInfo.fileName();
 
    KConfigGroup group = KGlobal::config()->group("Desktop Entry");
-   group.writeEntry("DefaultSession",fileInfo.fileName());
+   group.writeEntry("DefaultProfile",fileInfo.fileName());
 }
-QSet<QString> SessionManager::favorites() const
+QSet<QString> SessionManager::findFavorites() 
 {
+    if (_favorites.isEmpty())
+        loadFavorites();
+
     return _favorites;
 }
 void SessionManager::setFavorite(const QString& key , bool favorite)
@@ -624,17 +673,28 @@ void SessionManager::loadFavorites()
 
        qDebug() << "found " << list.count() << "entries";
 
-       QListIterator<QString> lit(list);
-       while (lit.hasNext())
-           qDebug() << "entry: " << lit.next();
+        QSet<QString> favoriteSet = QSet<QString>::fromList(list);
 
+       // look for favorites amongst those already loaded
        QHashIterator<QString,Profile*> iter(_types);
        while ( iter.hasNext() )
        {
             iter.next();
-            if ( list.contains( iter.value()->name() ) )
+            const QString& path = iter.value()->path();
+            if ( favoriteSet.contains( path ) )
+            {
                 _favorites.insert( iter.key() );
-       } 
+                favoriteSet.remove(path);
+            }
+       }
+      // load any remaining favorites
+      QSetIterator<QString> unloadedFavoriteIter(favoriteSet);
+      while ( unloadedFavoriteIter.hasNext() )
+      {
+            const QString& key = loadProfile(unloadedFavoriteIter.next());
+            if (!key.isEmpty())
+                _favorites.insert(key);
+      } 
     }
 }
 void SessionManager::saveFavorites()
@@ -642,7 +702,7 @@ void SessionManager::saveFavorites()
     KSharedConfigPtr appConfig = KGlobal::config();
     KConfigGroup favoriteGroup = appConfig->group("Favorite Profiles");
 
-    QStringList names;
+    QStringList paths;
     QSetIterator<QString> keyIter(_favorites);
     while ( keyIter.hasNext() )
     {
@@ -650,10 +710,10 @@ void SessionManager::saveFavorites()
 
         Q_ASSERT( _types.contains(key) && profile(key) != 0 );
 
-        names << profile(key)->name();
+        paths << profile(key)->path();
     }
 
-    favoriteGroup.writeEntry("Favorites",names);
+    favoriteGroup.writeEntry("Favorites",paths);
 }
 void SessionManager::setInstance(SessionManager* instance)
 {

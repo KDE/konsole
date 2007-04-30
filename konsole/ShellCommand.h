@@ -46,6 +46,9 @@ public:
     /** Returns the arguments. */
     QStringList arguments() const;
 
+    /** Returns the full command line. */
+    QString fullCommand() const;
+
     /** Returns true if this is a root command. */
     bool isRootCommand() const;
     /** Returns true if the program specified by @p command() exists. */

@@ -63,7 +63,7 @@ QString RemoteConnectionDialog::service() const
 
 QString RemoteConnectionDialog::sessionKey() const
 {
-    SessionManager* manager = SessionManager::instance();
+ //   SessionManager* manager = SessionManager::instance();
 
     /*MutableSessionInfo* customSession = 
         new MutableSessionInfo(manager->defaultSessionType()->path());

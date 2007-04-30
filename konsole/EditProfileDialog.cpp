@@ -45,6 +45,8 @@ EditProfileDialog::EditProfileDialog(QWidget* parent)
     setCaption("Edit Profile");
     setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply | KDialog::Default );
 
+    connect( this , SIGNAL(applyClicked()) , this , SLOT(save()) );
+
     _ui = new Ui::EditProfileDialog();
     _ui->setupUi(mainWidget());
 
@@ -55,12 +57,16 @@ EditProfileDialog::~EditProfileDialog()
     delete _ui;
     delete _tempProfile;
 }
-void EditProfileDialog::accept()
+void EditProfileDialog::save()
 {
-    qDebug() << "Edit profile dialog accepted.";
+    if ( _tempProfile->isEmpty() )
+        return;
 
     SessionManager::instance()->changeProfile(_profileKey,_tempProfile->setProperties());
-
+}
+void EditProfileDialog::accept()
+{
+    save();
     KDialog::accept(); 
 }
 void EditProfileDialog::setProfile(const QString& key)
@@ -80,6 +86,12 @@ void EditProfileDialog::setProfile(const QString& key)
     setupKeyboardPage(info);
     setupScrollingPage(info);
     setupAdvancedPage(info);
+
+    if ( _tempProfile )
+    {
+        delete _tempProfile;
+        _tempProfile = new Profile;
+    }
 }
 void EditProfileDialog::setupGeneralPage(const Profile* info)
 {
@@ -264,7 +276,7 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
     painter->fillRect( option.rect , brush );
     
     const ColorEntry* entries = scheme->colorTable();
-    const qreal colorRectWidth = option.rect.width() / TABLE_COLORS;
+    const qreal colorRectWidth = qMin(option.rect.width(),256) / TABLE_COLORS;
     const qreal colorRectHeight = colorRectWidth;
     qreal x = 0;
     qreal y = option.rect.bottom() - colorRectHeight;

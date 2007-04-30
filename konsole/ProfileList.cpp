@@ -20,7 +20,7 @@ ProfileList::ProfileList(QObject* parent)
     // construct the list of favorite session types
     _group = new QActionGroup(this);
 
-    QList<QString> list = manager->favorites().toList();
+    QList<QString> list = manager->findFavorites().toList();
     qSort(list);
     QListIterator<QString> iter(list);
 

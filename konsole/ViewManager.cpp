@@ -373,6 +373,12 @@ void ViewManager::createView(Session* session)
         ViewContainer* container = containerIter.next();
         TerminalDisplay* display = createTerminalDisplay();
         loadViewSettings(display,SessionManager::instance()->profile(session->type()));
+        
+        // set initial size
+        // temporary default used for now
+        display->setSize(80,40);
+
+        
         ViewProperties* properties = createController(session,display);
 
         _sessionMap[display] = session; 
@@ -491,10 +497,7 @@ TerminalDisplay* ViewManager::createTerminalDisplay()
    display->setTerminalSizeStartup(false);
    display->setScrollBarLocation(TerminalDisplay::SCROLLBAR_RIGHT);
 
-   // set initial size
-   // temporary default used for now
-   display->setSize(80,40);
-
+   
    return display;
 }
 
@@ -525,7 +528,7 @@ void ViewManager::profileChanged(const QString& key)
         iter.next();
 
         // if session uses this profile, update the display
-        if ( iter.value()->type() == key )
+        if ( iter.value() != 0 && iter.value()->type() == key )
         {
             loadViewSettings(iter.key(),info);
         }

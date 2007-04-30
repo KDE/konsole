@@ -58,7 +58,13 @@ ShellCommand::ShellCommand(const QString& fullCommand)
 ShellCommand::ShellCommand(const QString& command , const QStringList& arguments)
 {
     _arguments = arguments;
-    arguments[0] == command;
+    
+    if ( !_arguments.isEmpty() )
+        _arguments[0] == command;
+}
+QString ShellCommand::fullCommand() const
+{
+    return _arguments.join(QChar(' '));
 }
 QString ShellCommand::command() const
 {
