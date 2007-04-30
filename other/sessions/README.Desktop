@@ -1,6 +1,0 @@
-[README.Desktop]
-
-The session offered to be created in the File menu are
-taken from from configurations files with a *.desktop
-pattern either located in $KDEDIR/share/apps/konsole
-or ~/.kde/share/apps/konsole.
