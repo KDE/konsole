@@ -34,6 +34,7 @@
 #include "ui_EditProfileDialog.h"
 #include "EditProfileDialog.h"
 #include "SessionManager.h"
+#include "ShellCommand.h"
 
 using namespace Konsole;
 
@@ -134,8 +135,11 @@ void EditProfileDialog::initialDirChanged(const QString& dir)
 }
 void EditProfileDialog::commandChanged(const QString& command)
 {
+    ShellCommand shellCommand(command);
+
     //TODO Split into command and arguments
-    _tempProfile->setProperty(Profile::Command,command);
+    _tempProfile->setProperty(Profile::Command,shellCommand.command());
+    _tempProfile->setProperty(Profile::Arguments,shellCommand.arguments());
 }
 void EditProfileDialog::selectInitialDir()
 {

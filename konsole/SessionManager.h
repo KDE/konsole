@@ -91,6 +91,16 @@ public:
     virtual ~Profile() {}
 
     /** 
+     * Changes the parent profile.  When calling the property() method,
+     * if the specified property has not been set for this profile,
+     * the parent's value for the property will be returned instead.
+     */
+    void setParent(const Profile* parent);
+
+    /** Returns the parent profile. */
+    const Profile* parent() const;
+
+    /** 
      * Returns the current value of the specified @p property. 
      *
      * If the specified @p property has not been set in this profile,
@@ -170,7 +180,7 @@ public:
 
 private:
     QHash<Property,QVariant> _propertyValues;
-    const Profile* const _parent;
+    const Profile* _parent;
 
     static QHash<QString,Property> _propertyNames;
 };

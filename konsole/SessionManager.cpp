@@ -51,6 +51,9 @@ Profile::Profile(const Profile* parent)
     setProperty(Font,QFont("Monospace"));
 }
 
+void Profile::setParent(const Profile* parent) { _parent = parent; }
+const Profile* Profile::parent() const { return _parent; }
+
 QHash<Profile::Property,QVariant> Profile::setProperties() const
 {
     return _propertyValues;
