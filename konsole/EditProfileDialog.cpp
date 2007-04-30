@@ -70,7 +70,7 @@ void EditProfileDialog::setProfile(const QString& key)
 void EditProfileDialog::setupGeneralPage(const Profile* info)
 {
     _ui->sessionNameEdit->setText( info->name() );
-    _ui->commandEdit->setText( info->command(false,false) );
+    _ui->commandEdit->setText( info->command() );
     _ui->initialDirEdit->setText( info->defaultWorkingDirectory() );
     _ui->iconSelectButton->setIcon( KIcon(info->icon()) );
 
@@ -107,7 +107,7 @@ void EditProfileDialog::setupAppearencePage(const Profile* info)
     _ui->colorSchemeList->setItemDelegate(new ColorSchemeViewDelegate(this));
     
     // setup font preview
-    const QFont& font = info->defaultFont();
+    const QFont& font = info->font();
     _ui->fontPreviewLabel->setFont( font );
     _ui->fontSizeSlider->setValue( font.pointSize() );
 

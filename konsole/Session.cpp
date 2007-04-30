@@ -233,6 +233,16 @@ void Session::run()
   // Upon a KPty error, there is no description on what that error was...
   // Check to see if the given program is executable.
   QString exec = QFile::encodeName(_program);
+
+  // if 'exec' is not specified, fall back to shell
+  if ( exec.isEmpty() )
+      exec = getenv("SHELL");
+
+  // if no arguments are specified, fall back to shell
+  QStringList arguments =  _arguments.join(QChar(' ')).isEmpty() ? 
+                                    QStringList() << exec : _arguments;
+
+
   exec = KRun::binaryName(exec, false);
   exec = KShell::tildeExpand(exec);
   QString pexec = KGlobal::dirs()->findExe(exec);
@@ -249,7 +259,7 @@ void Session::run()
   _shellProcess->setXonXoff(_flowControl);
 
   int result = _shellProcess->run(QFile::encodeName(_program), 
-                                  _arguments, 
+                                  arguments, 
                                   _term.toLatin1(),
                                   _winId, 
                                   _addToUtmp,

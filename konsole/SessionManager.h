@@ -40,13 +40,15 @@ namespace Konsole
 
 class Session;
 
-/** Replacement for Profile */
-class SessionSettings 
+class Profile 
 {
 public:
     enum Property
     {
-        // General session options
+        // Path to profile's config file
+        Path,
+
+        // General profile options
         Name,
         Title,
         Icon,
@@ -55,6 +57,14 @@ public:
         Environment,
         Directory,
 
+        // Tab Title Formats
+        LocalTabTitleFormat,
+        RemoteTabTitleFormat,
+
+        // Window & Tab Bar 
+        ShowMenuBar,
+        TabBarMode,
+
         // Appearence
         Font,
         ColorScheme,
@@ -62,22 +72,74 @@ public:
         // Keyboard
         KeyBindings,
 
+        // Scrolling
+        ScrollingMode,
+        ScrollBarPosition,
+
         // Terminal Features
-        SelectWordCharacters
+        SelectWordCharacters,
+        BlinkingTextEnabled,
+        FlowControlEnabled,
+        AllowProgramsToResizeWindow
         
     };
 
-    virtual ~SessionSettings() {}
+    /**
+     * Constructs a new profile
+     */
+    Profile(const Profile* parent = 0);
+    virtual ~Profile() {}
 
-    /** Returns the current value of the specified @p property. */
+    /** 
+     * Returns the current value of the specified @p property. 
+     *
+     * If the specified @p property has not been set in this profile,
+     * and a non-null parent was specified in the Profile's constructor,
+     * the parent's value for @p property will be returned.
+     */
     virtual QVariant property(Property property) const;
     /** Sets the value of the specified @p property to @p value. */
     virtual void setProperty(Property property,const QVariant& value);
-
+    /** Returns true if the specified property has been set in this Profile instance. */
+    virtual bool isPropertySet(Property property) const;
 
     //
     // Convenience methods for property() and setProperty() go here
     //
+
+    /** Convenience method for property(Profile::Path) */
+    QString path() const { return property(Profile::Path).value<QString>(); }
+
+    /** Convenience method for property(Profile::Name) */
+    QString name() const { return property(Profile::Name).value<QString>(); }
+    
+    /** Convenience method for property(Profile::Directory) */
+    QString defaultWorkingDirectory() const 
+            { return property(Profile::Directory).value<QString>(); }
+
+    /** Convenience method for property(Profile::Icon) */
+    QString icon() const { return property(Profile::Icon).value<QString>(); }
+
+    /** Convenience method for property(Profile::Command) */
+    QString command() const { return property(Profile::Command).value<QString>(); }
+
+    /** Convenience method for property(Profile::Arguments) */
+    QStringList arguments() const { return property(Profile::Arguments).value<QStringList>(); }
+
+    /** Convenience method for property(Profile::Font) */
+    QFont font() const { return property(Profile::Font).value<QFont>(); }
+
+    /** Convenience method for property(Profile::ColorScheme) */
+    QString colorScheme() const { return property(Profile::ColorScheme).value<QString>(); }
+
+    /** Convenience method for property(Profile::Environment) */
+    QStringList environment() const { return property(Profile::Environment).value<QStringList>(); }
+
+    /** 
+     * Convenience method.
+     * Returns the value of the "TERM" value in the environment list.
+     */
+    QString terminal() const { return "xterm"; }
 
     /**
      * Returns true if @p name has been associated with an element
@@ -105,10 +167,44 @@ public:
 
 private:
     QHash<Property,QVariant> _propertyValues;
-    
+    const Profile* const _parent;
+
     static QHash<QString,Property> _propertyNames;
 };
 
+/** Interface for all classes which can load profile settings from a file. */
+class ProfileReader
+{
+public:
+    virtual ~ProfileReader() {}
+    virtual bool readProfile(const QString& path , Profile* profile) = 0;
+};
+/** Reads a KDE 3 profile .desktop file. */
+class KDE3ProfileReader : public ProfileReader
+{
+public:
+    virtual bool readProfile(const QString& path , Profile* profile);
+};
+/** Reads a KDE 4 profile .desktop file. */
+class KDE4ProfileReader : public ProfileReader
+{
+    virtual bool readProfile(const QString& path , Profile* profile);
+};
+/** Interface for all classes which can write profile settings to a file. */
+class ProfileWriter
+{
+public:
+    virtual ~ProfileWriter() {}
+    virtual bool writeProfile(const QString& path , const Profile* profile) = 0;
+};
+/** Writes a KDE 4 profile .desktop file. */
+class KDE4ProfileWriter : public ProfileWriter
+{
+public:
+    virtual bool writeProfile(const QString& path);
+};
+
+#if 0
 /** 
  * Provides information about a type of 
  * session, including the title of the session
@@ -255,6 +351,7 @@ private:
 
     QHash<Property,QVariant> _properties;
 };
+#endif
 
 /**
  * Creates new terminal sessions using information in configuration files.

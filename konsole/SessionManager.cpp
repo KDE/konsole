@@ -41,35 +41,86 @@
 using namespace Konsole;
 
 SessionManager* SessionManager::_instance = 0;
-QHash<QString,SessionSettings::Property> SessionSettings::_propertyNames;
+QHash<QString,Profile::Property> Profile::_propertyNames;
 
-QVariant SessionSettings::property(Property property) const
+Profile::Profile(const Profile* parent)
+    : _parent(parent)
 {
-    return _propertyValues[property];
+    setProperty(Command,getenv("SHELL"));
+    setProperty(Arguments,QStringList() << getenv("SHELL"));
+    setProperty(Font,QFont("Monospace"));
 }
-void SessionSettings::setProperty(Property property , const QVariant& value)
+
+QVariant Profile::property(Property property) const
+{
+    if ( _propertyValues.contains(property) )
+        return _propertyValues[property];
+    else if ( _parent )
+        return _parent->property(property);
+    else
+        return QVariant();
+}
+void Profile::setProperty(Property property , const QVariant& value)
 {
     _propertyValues.insert(property,value);
 }
-bool SessionSettings::isNameRegistered(const QString& name) 
+bool Profile::isPropertySet(Property property) const
+{
+    return _propertyValues.contains(property);
+}
+
+bool Profile::isNameRegistered(const QString& name) 
 {
     return _propertyNames.contains(name);
 }
 
-SessionSettings::Property SessionSettings::lookupByName(const QString& name)
+Profile::Property Profile::lookupByName(const QString& name)
 {
     return _propertyNames[name];
 }
 
-QList<QString> SessionSettings::namesForProperty(Property property)
+QList<QString> Profile::namesForProperty(Property property)
 {
     return _propertyNames.keys(property);
 }
-void SessionSettings::registerName(Property property , const QString& name)
+void Profile::registerName(Property property , const QString& name)
 {
     _propertyNames.insert(name,property);
 }
 
+bool KDE3ProfileReader::readProfile(const QString& path , Profile* profile)
+{
+    if (!QFile::exists(path))
+        return false;
+
+    KDesktopFile* desktopFile = new KDesktopFile(path);
+    KConfigGroup* config = new KConfigGroup( desktopFile->desktopGroup() );
+
+    if ( config->hasKey("Name") )
+        profile->setProperty(Profile::Name,config->readEntry("Name"));
+
+    qDebug() << "reading KDE 3 profile " << profile->name();
+
+    if ( config->hasKey("Icon") )
+        profile->setProperty(Profile::Icon,config->readEntry("Icon"));
+    if ( config->hasKey("Exec") )
+    {
+        const QString& fullCommand = config->readEntry("Exec");
+        qDebug() << "full command = " << fullCommand;
+        profile->setProperty(Profile::Command,fullCommand.section(QChar(' '),0,0));
+        profile->setProperty(Profile::Arguments,QStringList() << profile->command());//fullCommand.split(QChar(' ')));
+    
+        qDebug() << "command = " << profile->command();
+        qDebug() << "argumetns = " << profile->arguments();
+    }
+
+    delete desktopFile;
+    delete config;
+
+    return true;
+}
+
+#if 0
 Profile::Profile(const QString& path)
 {
     //QString fileName = QFileInfo(path).fileName();
@@ -242,9 +293,12 @@ QString Profile::defaultWorkingDirectory() const
 {
     return _config->readPathEntry("Cwd");
 }
+#endif
 
 SessionManager::SessionManager()
 {
+    ProfileReader* kde3Reader = new KDE3ProfileReader;
+
     //locate default session
     KSharedConfigPtr appConfig = KGlobal::config();
     //KConfig* appConfig = new KConfig("konsolerc");
@@ -265,7 +319,10 @@ SessionManager::SessionManager()
     {
 
         QString configFile = fileIter.next();
-        Profile* newType = new Profile(configFile);
+        Profile* newType = new Profile();
+        newType->setProperty(Profile::Path,configFile);
+
+        kde3Reader->readProfile(configFile,newType);
 
         QString sessionKey = addProfile( newType );
 
@@ -279,6 +336,8 @@ SessionManager::SessionManager()
     // now that the session types have been loaded,
     // get the list of favorite sessions
     loadFavorites();
+
+    delete kde3Reader;
 }
 
 SessionManager::~SessionManager()
@@ -330,10 +389,10 @@ Session* SessionManager::createSession(QString key )
 
             QListIterator<QString> iter(info->arguments());
             while (iter.hasNext())
-                kDebug() << "running " << info->command(false) << ": argument " << iter.next() << endl;
+                kDebug() << "running " << info->command() << ": argument " << iter.next() << endl;
            
             session->setInitialWorkingDirectory( activeSetting(InitialWorkingDirectory).toString() ); 
-            session->setProgram( info->command(false) );
+            session->setProgram( info->command() );
             session->setArguments( info->arguments() );
             session->setTitle( info->name() );
             session->setIconName( info->icon() );

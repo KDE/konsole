@@ -504,7 +504,7 @@ void ViewManager::loadViewSettings(TerminalDisplay* view , Session* session)
     view->setColorTable(colorScheme->colorTable());
     
     // load font, fall back to system monospace font if not specified
-    view->setVTFont(info->defaultFont());
+    view->setVTFont(info->font());
    
     // set initial size
     // temporary default used for now
