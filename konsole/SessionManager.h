@@ -116,7 +116,7 @@ private:
  * as root and whether or not the binary
  * for the session is available.
  *
- * The availability of the session type is not determined until the
+ * The availability of the profile is not determined until the
  * isAvailable() method is called.
  *
  */
@@ -147,7 +147,7 @@ public:
 
     /**
      * Construct a new Profile
-     * to provide information on a session type.
+     * to provide information on a profile.
      *
      * @p path Path to the configuration file
      * for this type of session
@@ -156,9 +156,9 @@ public:
     
     virtual ~Profile();
 
-    /** Sets the parent session type. */
+    /** Sets the parent profile. */
     void setParent( Profile* parent );
-    /** Returns the parent session type. */
+    /** Returns the parent profile. */
     Profile* parent() const;
     /** Sets the value of a property. */
     virtual void setProperty( Property property , const QVariant& value );
@@ -171,11 +171,11 @@ public:
      */
     QString path() const;
 
-    /** Returns the title of the session type */
+    /** Returns the title of the profile */
     QString name() const;
     /**
      * Returns the path of an icon associated
-     * with this session type
+     * with this profile
      */
     QString icon() const;
     /**
@@ -259,12 +259,12 @@ private:
 /**
  * Creates new terminal sessions using information in configuration files.
  * Information about the available session kinds can be obtained using
- * availableSessionTypes().  Call createSession() to create a new session.
+ * availableprofiles().  Call createSession() to create a new session.
  * The session will automatically notify the SessionManager when it finishes running.
  *
  * Session types in the manager have a concept of favorite status, which can be used
  * by widgets and dialogs in the application decide which sessions to list and
- * how to display them.  The favorite status of a session type can be altered using
+ * how to display them.  The favorite status of a profile can be altered using
  * setFavorite() and retrieved using isFavorite() 
  */
 class SessionManager : public QObject
@@ -274,7 +274,7 @@ Q_OBJECT
 public:
     /** 
      * Constructs a new session manager and loads information about the available 
-     * session types.
+     * profiles.
      */
     SessionManager();
     virtual ~SessionManager();
@@ -304,16 +304,16 @@ public:
     };
 
     /**
-     * Returns a list of keys for registered session types.      
+     * Returns a list of keys for registered profiles. 
      */
-    QList<QString> availableSessionTypes() const;
+    QList<QString> availableProfiles() const;
     /**
-     * Returns the session information object for the session type with the specified
-     * key or 0 if no session type with the specified key exists.
+     * Returns the session information object for the profile with the specified
+     * key or 0 if no profile with the specified key exists.
      *
-     * If @p key is empty, a pointer to the default session type is returned.
+     * If @p key is empty, a pointer to the default profile is returned.
      */
-    Profile* sessionType(const QString& key) const;
+    Profile* profile(const QString& key) const;
 
     /**
      * Registers a new type of session and returns the key
@@ -322,18 +322,18 @@ public:
      * The favorite status of the session ( as returned by isFavorite() ) is set
      * to false by default.
      */
-    QString addSessionType(Profile* type);
+    QString addProfile(Profile* type);
 
     /**
      * Returns a Profile object describing the default type of session, which is used
      * if createSession() is called with an empty configPath argument.
      */
-    Profile* defaultSessionType() const;
+    Profile* defaultProfile() const;
 
     /**
-     * Returns the key for the default session type.
+     * Returns the key for the default profile.
      */
-    QString defaultSessionKey() const;
+    QString defaultProfileKey() const;
 
     /**
      * Adds a setting which will be considered when creating new sessions.
@@ -341,7 +341,7 @@ public:
      * can be specified by multiple different sources.  The
      *
      * For example, the working directory in which a new session starts is specified
-     * in the configuration file for that session type, but can be overridden
+     * in the configuration file for that profile, but can be overridden
      * by creating a new session from a bookmark or specifying what to use on
      * the command line.
      *
@@ -370,9 +370,9 @@ public:
     QVariant activeSetting( Setting setting ) const;
 
     /**
-     * Creates a new session of the specified type, using the settings specified
-     * using addSetting() and from session type associated with the specified key.
-     * The session type must have been previously registered using addSessionType()
+     * Creates a new session from the specified profile, using the settings specified
+     * using addSetting() and from profile associated with the specified key.
+     * The profile must have been previously registered using addprofile()
      * or upon construction of the SessionManager. 
      *
      * The new session has no views associated with it.  A new TerminalDisplay view
@@ -390,25 +390,25 @@ public:
     const QList<Session*> sessions();
 
     /**
-     * Deletes the session type with the specified key.
-     * The configuration file associated with the session type is
+     * Deletes the profile with the specified key.
+     * The configuration file associated with the profile is
      * deleted if possible.
      */
-    void deleteSessionType(const QString& key);
+    void deleteProfile(const QString& key);
 
     /**
-     * Sets the session type with the specified key
+     * Sets the profile with the specified key
      * as the default type.
      */
-    void setDefaultSessionType(const QString& key);
+    void setDefaultProfile(const QString& key);
 
     /**
-     * Returns the set of keys for the user's favorite session types.
+     * Returns the set of keys for the user's favorite profiles.
      */
     QSet<QString> favorites() const;
 
     /**
-     * Specifies whether a session type should be included in the user's
+     * Specifies whether a profile should be included in the user's
      * list of favorite sessions.
      */
     void setFavorite(const QString& key , bool favorite);
@@ -423,14 +423,14 @@ public:
     static SessionManager* instance();
 
 signals:
-    /** Emitted when a session type is added to the manager. */
-    void sessionTypeAdded(const QString& key);
-    /** Emitted when a session type is removed from the manager. */
-    void sessionTypeRemoved(const QString& key);
+    /** Emitted when a profile is added to the manager. */
+    void profileAdded(const QString& key);
+    /** Emitted when a profile is removed from the manager. */
+    void profileRemoved(const QString& key);
     /** 
-     * Emitted when the favorite status of a session type changes. 
+     * Emitted when the favorite status of a profile changes. 
      * 
-     * @param key The key for the session type
+     * @param key The key for the profile
      * @param favorite Specifies whether the session is a favorite or not 
      */
     void favoriteStatusChanged(const QString& key , bool favorite);
@@ -453,7 +453,7 @@ private:
     QHash<QString,Profile*> _types;
     QList<Session*> _sessions;
 
-    QString _defaultSessionType;
+    QString _defaultProfile;
     
     typedef QPair<Source,QVariant> SourceVariant;
 

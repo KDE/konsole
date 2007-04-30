@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>630</width>
-    <height>477</height>
+    <width>505</width>
+    <height>524</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -28,7 +28,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget" >
      <property name="currentIndex" >
-      <number>3</number>
+      <number>0</number>
      </property>
      <property name="usesScrollButtons" >
       <bool>false</bool>
@@ -37,166 +37,195 @@
       <attribute name="title" >
        <string>General</string>
       </attribute>
-      <widget class="QLabel" name="label_9" >
-       <property name="geometry" >
-        <rect>
-         <x>10</x>
-         <y>69</y>
-         <width>96</width>
-         <height>26</height>
-        </rect>
-       </property>
-       <property name="text" >
-        <string>Initial Directory:</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_3" >
-       <property name="geometry" >
-        <rect>
-         <x>10</x>
-         <y>39</y>
-         <width>96</width>
-         <height>23</height>
-        </rect>
-       </property>
-       <property name="text" >
-        <string>Command:</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_2" >
-       <property name="geometry" >
-        <rect>
-         <x>10</x>
-         <y>10</y>
-         <width>101</width>
-         <height>23</height>
-        </rect>
-       </property>
-       <property name="text" >
-        <string>Session Name:</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_10" >
-       <property name="geometry" >
-        <rect>
-         <x>20</x>
-         <y>140</y>
-         <width>57</width>
-         <height>18</height>
-        </rect>
-       </property>
-       <property name="text" >
-        <string>Icon:</string>
-       </property>
-      </widget>
-      <widget class="QGroupBox" name="groupBox_5" >
-       <property name="geometry" >
-        <rect>
-         <x>10</x>
-         <y>200</y>
-         <width>590</width>
-         <height>126</height>
-        </rect>
-       </property>
-       <property name="title" >
-        <string>Default Tab Title</string>
-       </property>
-       <property name="flat" >
-        <bool>true</bool>
-       </property>
-       <layout class="QVBoxLayout" >
-        <item>
-         <widget class="QRadioButton" name="radioButton_4" >
-          <property name="text" >
-           <string>Program Name</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="radioButton_7" >
-          <property name="text" >
-           <string>Current Directory</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="radioButton_5" >
-          <property name="text" >
-           <string>Session Name</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="radioButton_6" >
-          <property name="text" >
-           <string>Custom Format</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QLineEdit" name="commandEdit" >
-       <property name="geometry" >
-        <rect>
-         <x>111</x>
-         <y>39</y>
-         <width>450</width>
-         <height>23</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QToolButton" name="dirSelectButton" >
-       <property name="geometry" >
-        <rect>
-         <x>568</x>
-         <y>69</y>
-         <width>30</width>
-         <height>26</height>
-        </rect>
-       </property>
-       <property name="text" >
-        <string>...</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="sessionNameEdit" >
-       <property name="geometry" >
-        <rect>
-         <x>111</x>
-         <y>10</y>
-         <width>450</width>
-         <height>23</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="initialDirEdit" >
-       <property name="geometry" >
-        <rect>
-         <x>111</x>
-         <y>70</y>
-         <width>450</width>
-         <height>23</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="iconSelectButton" >
-       <property name="geometry" >
-        <rect>
-         <x>110</x>
-         <y>110</y>
-         <width>83</width>
-         <height>71</height>
-        </rect>
-       </property>
-       <property name="text" >
-        <string/>
-       </property>
-       <property name="iconSize" >
-        <size>
-         <width>48</width>
-         <height>48</height>
-        </size>
-       </property>
-      </widget>
+      <layout class="QGridLayout" >
+       <item row="0" column="0" >
+        <widget class="QLabel" name="profileNameLabel" >
+         <property name="text" >
+          <string>Profile Name:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" colspan="2" >
+        <widget class="QLineEdit" name="sessionNameEdit" />
+       </item>
+       <item row="1" column="0" >
+        <widget class="QLabel" name="label_3" >
+         <property name="text" >
+          <string>Command:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" colspan="2" >
+        <widget class="QLineEdit" name="commandEdit" />
+       </item>
+       <item row="2" column="0" >
+        <widget class="QLabel" name="label_9" >
+         <property name="text" >
+          <string>Initial Directory:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" colspan="2" >
+        <widget class="QLineEdit" name="initialDirEdit" />
+       </item>
+       <item row="2" column="3" >
+        <widget class="QToolButton" name="dirSelectButton" >
+         <property name="text" >
+          <string>...</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" >
+        <widget class="QLabel" name="label_10" >
+         <property name="text" >
+          <string>Icon:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" >
+        <widget class="QPushButton" name="iconSelectButton" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize" >
+          <size>
+           <width>64</width>
+           <height>64</height>
+          </size>
+         </property>
+         <property name="baseSize" >
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string/>
+         </property>
+         <property name="iconSize" >
+          <size>
+           <width>48</width>
+           <height>48</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="5" column="0" colspan="4" >
+        <widget class="QGroupBox" name="groupBox_5" >
+         <property name="title" >
+          <string>Tab Titles</string>
+         </property>
+         <property name="flat" >
+          <bool>true</bool>
+         </property>
+         <layout class="QGridLayout" >
+          <item row="0" column="0" >
+           <widget class="QLabel" name="label" >
+            <property name="text" >
+             <string>Tab Title Format:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" >
+           <widget class="QLineEdit" name="lineEdit" />
+          </item>
+          <item row="0" column="2" >
+           <widget class="QPushButton" name="pushButton" >
+            <property name="text" >
+             <string>Edit...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" >
+           <widget class="QLabel" name="label_2" >
+            <property name="text" >
+             <string>Remote Tab Title Format:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" >
+           <widget class="QLineEdit" name="lineEdit_2" />
+          </item>
+          <item row="1" column="2" >
+           <widget class="QPushButton" name="pushButton_2" >
+            <property name="text" >
+             <string>Edit..</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="6" column="0" colspan="4" >
+        <widget class="QGroupBox" name="groupBox_2" >
+         <property name="title" >
+          <string>Window &amp;&amp; Tab Bar Options</string>
+         </property>
+         <property name="flat" >
+          <bool>true</bool>
+         </property>
+         <layout class="QVBoxLayout" >
+          <item>
+           <widget class="QCheckBox" name="showMenuBarButton" >
+            <property name="text" >
+             <string>Show Menu Bar</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="alwaysHideTabBarButton" >
+            <property name="text" >
+             <string>Always hide tab bar</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="autoShowTabBarButton" >
+            <property name="text" >
+             <string>Show tab bar when more than one tab is open</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="alwaysShowTabBarButton" >
+            <property name="text" >
+             <string>Always show tab bar</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="7" column="0" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="tab_2" >
       <attribute name="title" >
@@ -218,7 +247,7 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout" >
-          <item rowspan="4" row="0" column="0" >
+          <item rowspan="5" row="0" column="0" >
            <widget class="QListView" name="colorSchemeList" >
             <property name="verticalScrollMode" >
              <enum>QAbstractItemView::ScrollPerPixel</enum>
@@ -247,14 +276,21 @@
            </widget>
           </item>
           <item row="3" column="1" >
+           <widget class="QPushButton" name="selectColorSchemeButton" >
+            <property name="text" >
+             <string>Select</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1" >
            <spacer>
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeHint" >
              <size>
-              <width>20</width>
-              <height>40</height>
+              <width>75</width>
+              <height>201</height>
              </size>
             </property>
            </spacer>
@@ -343,46 +379,6 @@
          </layout>
         </widget>
        </item>
-       <item>
-        <widget class="QGroupBox" name="groupBox_2" >
-         <property name="title" >
-          <string>Window Options</string>
-         </property>
-         <property name="flat" >
-          <bool>true</bool>
-         </property>
-         <layout class="QVBoxLayout" >
-          <item>
-           <widget class="QCheckBox" name="showMenuBarButton" >
-            <property name="text" >
-             <string>Show Menu Bar</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="alwaysHideTabBarButton" >
-            <property name="text" >
-             <string>Always hide tab bar</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="autoShowTabBarButton" >
-            <property name="text" >
-             <string>Show tab bar when more than one tab is open</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="alwaysShowTabBarButton" >
-            <property name="text" >
-             <string>Always show tab bar</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_3" >
@@ -390,7 +386,7 @@
        <string>Keyboard Setup</string>
       </attribute>
       <layout class="QGridLayout" >
-       <item rowspan="4" row="0" column="0" >
+       <item rowspan="5" row="0" column="0" >
         <widget class="QListView" name="keyBindingList" />
        </item>
        <item row="0" column="1" >
@@ -415,14 +411,21 @@
         </widget>
        </item>
        <item row="3" column="1" >
+        <widget class="QPushButton" name="selectKeyBindingsButton" >
+         <property name="text" >
+          <string>Select</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1" >
         <spacer>
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
          <property name="sizeHint" >
           <size>
-           <width>20</width>
-           <height>40</height>
+           <width>75</width>
+           <height>331</height>
           </size>
          </property>
         </spacer>

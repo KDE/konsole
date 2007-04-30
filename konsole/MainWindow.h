@@ -101,7 +101,7 @@ class MainWindow : public KXmlGuiWindow
         void showManageProfilesDialog();
         void showRemoteConnectionDialog();
         void showShortcutsDialog();
-        void sessionSelected(const QString&);
+        void newFromProfile(const QString&);
         void activeViewChanged(SessionController* controller);
         void activeViewTitleChanged(ViewProperties*);
 

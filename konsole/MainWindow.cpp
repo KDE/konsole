@@ -199,8 +199,8 @@ void MainWindow::setSessionList(ProfileList* list)
 {
     sessionListChanged(list->actions());
 
-    connect( list , SIGNAL(sessionSelected(const QString&)) , this , 
-            SLOT(sessionSelected(const QString&)) );
+    connect( list , SIGNAL(profileSelected(const QString&)) , this , 
+            SLOT(newFromProfile(const QString&)) );
 
     connect( list , SIGNAL(actionsChanged(const QList<QAction*>&)) , this ,
             SLOT(sessionListChanged(const QList<QAction*>&)) );
@@ -229,7 +229,7 @@ void MainWindow::showShortcutsDialog()
     KShortcutsDialog::configure( actionCollection() );
 }
 
-void MainWindow::sessionSelected(const QString& key)
+void MainWindow::newFromProfile(const QString& key)
 {
     emit requestSession(key,_viewManager);
 }

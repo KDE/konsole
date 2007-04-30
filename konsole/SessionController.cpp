@@ -465,7 +465,7 @@ void SessionController::debugProcess()
 void SessionController::editCurrentProfile()
 {
     EditProfileDialog dialog(_view);
-    dialog.setSessionType(_session->type());
+    dialog.setProfile(_session->type());
     dialog.exec();
 }
 void SessionController::renameSession()

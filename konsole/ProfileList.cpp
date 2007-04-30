@@ -41,7 +41,7 @@ void ProfileList::favoriteChanged(const QString& key,bool isFavorite)
 {
     if ( isFavorite )
     {
-        Profile* info = SessionManager::instance()->sessionType(key);
+        Profile* info = SessionManager::instance()->profile(key);
 
         QAction* action = _group->addAction(info->name());
         action->setIcon( KIcon(info->icon()) );
@@ -66,9 +66,9 @@ void ProfileList::favoriteChanged(const QString& key,bool isFavorite)
 void ProfileList::triggered(QAction* action)
 {
     // assert that session key is still valid
-    Q_ASSERT( SessionManager::instance()->sessionType( action->data().toString() ) );
+    Q_ASSERT( SessionManager::instance()->profile( action->data().toString() ) );
 
-    emit sessionSelected( action->data().toString() );
+    emit profileSelected( action->data().toString() );
 }
 
 QList<QAction*> ProfileList::actions()

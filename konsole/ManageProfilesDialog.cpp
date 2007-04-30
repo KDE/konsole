@@ -49,9 +49,9 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
 
     // update table and listen for changes to the session types
     updateTableModel();
-    connect( SessionManager::instance() , SIGNAL(sessionTypeAdded(const QString&)) , this,
+    connect( SessionManager::instance() , SIGNAL(profileAdded(const QString&)) , this,
              SLOT(updateTableModel()) );
-    connect( SessionManager::instance() , SIGNAL(sessionTypeRemoved(const QString&)) , this,
+    connect( SessionManager::instance() , SIGNAL(profileRemoved(const QString&)) , this,
              SLOT(updateTableModel()) );
 
     // ensure that session names are fully visible
@@ -79,17 +79,18 @@ void ManageProfilesDialog::updateTableModel()
     _sessionModel = new QStandardItemModel(this);
     _sessionModel->setHorizontalHeaderLabels( QStringList() << "Name"
                                                             << "Show in Menu" );
-    QListIterator<QString> keyIter( SessionManager::instance()->availableSessionTypes() );
+    QListIterator<QString> keyIter( SessionManager::instance()->availableProfiles() );
     while ( keyIter.hasNext() )
     {
         const QString& key = keyIter.next();
 
-        Profile* info = SessionManager::instance()->sessionType(key);
+        Profile* info = SessionManager::instance()->profile(key);
 
         QList<QStandardItem*> itemList;
         QStandardItem* item = new QStandardItem( info->name() );
         item->setData(key);
-        
+
+
         const bool isFavorite = SessionManager::instance()->favorites().contains(key);
 
         QStandardItem* favoriteItem = new QStandardItem();
@@ -104,6 +105,7 @@ void ManageProfilesDialog::updateTableModel()
 
         _sessionModel->appendRow(itemList);
     }
+    updateDefaultItem();
     _ui->sessionTable->setModel(_sessionModel);
 
     // listen for changes in the table selection and update the state of the form's buttons
@@ -123,11 +125,34 @@ void ManageProfilesDialog::updateTableModel()
     tableSelectionChanged( _ui->sessionTable->selectionModel()->selection() );
 
 }
+void ManageProfilesDialog::updateDefaultItem()
+{
+    const QString& defaultKey = SessionManager::instance()->defaultProfileKey();
+
+    for ( int i = 0 ; i < _sessionModel->rowCount() ; i++ )
+    {
+        QStandardItem* item = _sessionModel->item(i);
+        QFont font = item->font();
+
+        bool isDefault = ( defaultKey == item->data().value<QString>() );
+
+        if ( isDefault && !font.bold() )
+        {
+            font.setBold(true);
+            item->setFont(font);
+        } 
+        else if ( !isDefault && font.bold() )
+        {
+            font.setBold(false);
+            item->setFont(font);
+        } 
+    }
+}
 void ManageProfilesDialog::tableSelectionChanged(const QItemSelection& selection)
 {
     bool enable = !selection.indexes().isEmpty();
     const SessionManager* manager = SessionManager::instance();
-    const bool isNotDefault = enable && selectedKey() != manager->defaultSessionKey();
+    const bool isNotDefault = enable && selectedKey() != manager->defaultProfileKey();
 
     _ui->editSessionButton->setEnabled(enable);
     // do not allow the default session type to be removed
@@ -136,28 +161,31 @@ void ManageProfilesDialog::tableSelectionChanged(const QItemSelection& selection
 }
 void ManageProfilesDialog::deleteSelected()
 {
-    Q_ASSERT( selectedKey() != SessionManager::instance()->defaultSessionKey() );
+    Q_ASSERT( selectedKey() != SessionManager::instance()->defaultProfileKey() );
 
-    SessionManager::instance()->deleteSessionType(selectedKey());
+    SessionManager::instance()->deleteProfile(selectedKey());
 }
 void ManageProfilesDialog::setSelectedAsDefault()
 {
-    SessionManager::instance()->setDefaultSessionType(selectedKey());
+    SessionManager::instance()->setDefaultProfile(selectedKey());
     // do not allow the new default session type to be removed
     _ui->deleteSessionButton->setEnabled(false);
-    _ui->setAsDefaultButton->setEnabled(false); 
+    _ui->setAsDefaultButton->setEnabled(false);
+
+    // update font of new default item
+    updateDefaultItem(); 
 }
 void ManageProfilesDialog::newType()
 {
     EditProfileDialog dialog(this);
     // base new type off the default session type
-    dialog.setSessionType(QString()); 
+    dialog.setProfile(QString()); 
     dialog.exec(); 
 }
 void ManageProfilesDialog::editSelected()
 {
     EditProfileDialog dialog(this);
-    dialog.setSessionType(selectedKey());
+    dialog.setProfile(selectedKey());
     dialog.exec();
 }
 QString ManageProfilesDialog::selectedKey() const

@@ -12,10 +12,10 @@ namespace Konsole
 {
 
 /** 
- * ProfileList provides a list of actions which represent types of session that a SessionManager can 
- * create.  These actions can be plugged into a GUI 
+ * ProfileList provides a list of actions which represent session profiles that a SessionManager 
+ * can create a session from.  These actions can be plugged into a GUI 
  *
- * The user-data associated with each session can be passed to the createSession() method of the 
+ * The user-data associated with each session can be passed to the createProfile() method of the 
  * SessionManager to create a new terminal session. 
  */
 class ProfileList : public QObject
@@ -38,9 +38,9 @@ signals:
    /** 
     * Emitted when the user selects an action from the list.
     * 
-    * @param key The session type key associated with the selected action.
+    * @param key The profile key associated with the selected action.
     */
-   void sessionSelected(const QString& key);
+   void profileSelected(const QString& key);
    /**
     * Emitted when the list of actions changes.
     */

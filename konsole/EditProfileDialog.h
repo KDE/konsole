@@ -58,15 +58,17 @@ public:
      *
      * @param key The key for the session type provided by the SessionManager instance
      */
-    void setSessionType(const QString& key);
+    void setProfile(const QString& key);
 
     /**
-     * Returns a session info object representing the new or modified session
-     * type.
+     * Returns a profile instance representing the new or modified profile.
      */
-    Profile* newSessionInfo();
+    Profile* newProfile();
 
 private slots:
+    // general page
+    void selectInitialDir();
+
     // appearence page
     void setFontSize(int pointSize);
     void showFontDialog();
@@ -87,7 +89,7 @@ private:
     void applyAdvancedPage(MutableSessionInfo* info);
 
     Ui::EditProfileDialog* _ui;
-    QString _sessionTypeKey;
+    QString _profileKey;
 };
 
 /**

@@ -26,6 +26,7 @@
 // KDE
 #include <KFontDialog>
 #include <KIcon>
+#include <KDirSelectDialog>
 
 // Konsole
 #include "ColorScheme.h"
@@ -48,13 +49,16 @@ EditProfileDialog::~EditProfileDialog()
 {
     delete _ui;
 }
-void EditProfileDialog::setSessionType(const QString& key)
+void EditProfileDialog::setProfile(const QString& key)
 {
-    _sessionTypeKey = key;    
+    _profileKey = key;    
 
-    const Profile* info = SessionManager::instance()->sessionType(key);
+    const Profile* info = SessionManager::instance()->profile(key);
 
     Q_ASSERT( info );
+
+    // update caption
+    setCaption( QString("Edit Profile \"%1\"").arg(info->name()) );
 
     // setup each page of the dialog
     setupGeneralPage(info);
@@ -69,6 +73,19 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
     _ui->commandEdit->setText( info->command(false,false) );
     _ui->initialDirEdit->setText( info->defaultWorkingDirectory() );
     _ui->iconSelectButton->setIcon( KIcon(info->icon()) );
+
+    // signals and slots
+    connect( _ui->dirSelectButton , SIGNAL(clicked()) , this , SLOT(selectInitialDir()) );
+}
+void EditProfileDialog::selectInitialDir()
+{
+    const KUrl& url = KDirSelectDialog::selectDirectory(_ui->initialDirEdit->text(),
+                                                        true,
+                                                        0L,
+                                                        i18n("Select Initial Directory"));
+
+    if ( !url.isEmpty() )
+        _ui->initialDirEdit->setText(url.path());
 }
 void EditProfileDialog::setupAppearencePage(const Profile* info)
 {

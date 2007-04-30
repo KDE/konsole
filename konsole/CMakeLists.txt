@@ -102,7 +102,7 @@ kde4_automoc(${konsole_KDEINIT_SRCS})
 
 kde4_add_kdeinit_executable( konsole ${konsole_KDEINIT_SRCS})
 
-target_link_libraries(kdeinit_konsole  ${KDE4_KDEPRINT_LIBS} ${QT_QTXML_LIBRARY} ${KDE4_KNOTIFYCONFIG_LIBS} )
+target_link_libraries(kdeinit_konsole  ${KDE4_KDEPRINT_LIBS} ${QT_QTXML_LIBRARY} ${KDE4_KNOTIFYCONFIG_LIBS} ${KDE4_KFILE_LIBS} )
 
 # XRender library for true transparency support    
 if(X11_Xrender_FOUND)
@@ -165,7 +165,7 @@ kde4_add_plugin(konsolepart WITH_PREFIX ${konsolepart_PART_SRCS})
 
 set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
 
-target_link_libraries(konsolepart ${KDE4_KDEUI_LIBS} ${KDE4_KPARTS_LIBS} )
+target_link_libraries(konsolepart ${KDE4_KDEUI_LIBS} ${KDE4_KPARTS_LIBS} ${KDE4_KFILE_LIBS} )
 if(X11_XTest_LIB)
   target_link_libraries(konsolepart  ${X11_XTest_LIB}  )
 endif(X11_XTest_LIB)

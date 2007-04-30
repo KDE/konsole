@@ -243,41 +243,6 @@ QString Profile::defaultWorkingDirectory() const
     return _config->readPathEntry("Cwd");
 }
 
-/*MutableSessionInfo::MutableSessionInfo(const QString& path)
- : Profile(path) {}
-
-void MutableSessionInfo::setName(const QString& name) { _name = name; }
-
-QString MutableSessionInfo::name() const { return _name; }
-
-void MutableSessionInfo::setCommand(const QString& command) { _command = command; }
-QString MutableSessionInfo::command(bool,bool) const { return _command; }
-
-void MutableSessionInfo::setArguments(const QStringList& arguments){  _arguments = arguments; }
-QStringList MutableSessionInfo::arguments() const { return _arguments; }
-
-void MutableSessionInfo::setTerminal(const QString& terminal) { _terminal = terminal; }
-QString MutableSessionInfo::terminal() const { return _terminal; }
-
-void MutableSessionInfo::setKeyboardSetup(const QString& keyboard) { _keyboardSetup = keyboard; }
-QString MutableSessionInfo::keyboardSetup() const { return _keyboardSetup; }
-
-void MutableSessionInfo::setColorScheme(const QString& colorScheme) { _colorScheme = colorScheme; }
-QString MutableSessionInfo::colorScheme() const { return _colorScheme; }
-
-void MutableSessionInfo::setDefaultWorkingDirectory(const QString& dir) { _defaultWorkingDirectory = dir; }
-QString MutableSessionInfo::defaultWorkingDirectory() const { return _defaultWorkingDirectory; }
-
-void MutableSessionInfo::setNewSessionText(const QString& text) { _newSessionText = text; }
-QString MutableSessionInfo::newSessionText() const { return _newSessionText; }
-
-void MutableSessionInfo::setDefaultFont(const QFont& font) { _defaultFont = font; }
-QFont MutableSessionInfo::defaultFont() const { return _defaultFont ; }
-
-void MutableSessionInfo::setIcon(const QString& icon) { _icon = icon; }
-QString MutableSessionInfo::icon() const { return _icon; }
-*/
-
 SessionManager::SessionManager()
 {
     //locate default session
@@ -302,14 +267,14 @@ SessionManager::SessionManager()
         QString configFile = fileIter.next();
         Profile* newType = new Profile(configFile);
 
-        QString sessionKey = addSessionType( newType );
+        QString sessionKey = addProfile( newType );
 
         if ( QFileInfo(configFile).fileName() == defaultSessionFilename )
-            _defaultSessionType = sessionKey;
+            _defaultProfile = sessionKey;
     }
 
     Q_ASSERT( _types.count() > 0 );
-    Q_ASSERT( !_defaultSessionType.isEmpty() );
+    Q_ASSERT( !_defaultProfile.isEmpty() );
 
     // now that the session types have been loaded,
     // get the list of favorite sessions
@@ -350,7 +315,7 @@ Session* SessionManager::createSession(QString key )
     const Profile* info = 0;
 
     if ( key.isEmpty() )
-        info = defaultSessionType();
+        info = defaultProfile();
     else
         info = _types[key];
 
@@ -399,15 +364,15 @@ void SessionManager::sessionTerminated(Session* session)
     session->deleteLater();
 }
 
-QList<QString> SessionManager::availableSessionTypes() const
+QList<QString> SessionManager::availableProfiles() const
 {
     return _types.keys();
 }
 
-Profile* SessionManager::sessionType(const QString& key) const
+Profile* SessionManager::profile(const QString& key) const
 {
     if ( key.isEmpty() )
-        return defaultSessionType();
+        return defaultProfile();
 
     if ( _types.contains(key) )
         return _types[key];
@@ -415,14 +380,14 @@ Profile* SessionManager::sessionType(const QString& key) const
         return 0;
 }
 
-Profile* SessionManager::defaultSessionType() const
+Profile* SessionManager::defaultProfile() const
 {
-    return _types[_defaultSessionType];
+    return _types[_defaultProfile];
 }
 
-QString SessionManager::defaultSessionKey() const
+QString SessionManager::defaultProfileKey() const
 {
-    return _defaultSessionType;
+    return _defaultProfile;
 }
 
 void SessionManager::addSetting( Setting setting, Source source, const QVariant& value)
@@ -452,7 +417,7 @@ QVariant SessionManager::activeSetting( Setting setting ) const
     return value;
 }
 
-QString SessionManager::addSessionType(Profile* type)
+QString SessionManager::addProfile(Profile* type)
 {
     QString key;
 
@@ -467,14 +432,14 @@ QString SessionManager::addSessionType(Profile* type)
     
     _types.insert(key,type);
 
-    emit sessionTypeAdded(key);
+    emit profileAdded(key);
 
     return key;
 }
 
-void SessionManager::deleteSessionType(const QString& key)
+void SessionManager::deleteProfile(const QString& key)
 {
-    Profile* type = sessionType(key);
+    Profile* type = profile(key);
 
     setFavorite(key,false);
 
@@ -484,18 +449,18 @@ void SessionManager::deleteSessionType(const QString& key)
         delete type;
     }
 
-    emit sessionTypeRemoved(key); 
+    emit profileRemoved(key); 
 
     qWarning() << __FUNCTION__ << "TODO: Make this change persistant.";
     //TODO Store this information persistantly
 }
-void SessionManager::setDefaultSessionType(const QString& key)
+void SessionManager::setDefaultProfile(const QString& key)
 {
    Q_ASSERT ( _types.contains(key) );
 
-   _defaultSessionType = key;
+   _defaultProfile = key;
 
-   Profile* info = sessionType(key);
+   Profile* info = profile(key);
   
    Q_ASSERT( QFile::exists(info->path()) );
    QFileInfo fileInfo(info->path());
@@ -535,7 +500,7 @@ void SessionManager::setFavorite(const QString& key , bool favorite)
 void SessionManager::loadFavorites()
 {
     KSharedConfigPtr appConfig = KGlobal::config();
-    KConfigGroup favoriteGroup = appConfig->group("Favorite Sessions");
+    KConfigGroup favoriteGroup = appConfig->group("Favorite Profiles");
 
     qDebug() << "loading favorites";
 
@@ -562,7 +527,7 @@ void SessionManager::loadFavorites()
 void SessionManager::saveFavorites()
 {
     KSharedConfigPtr appConfig = KGlobal::config();
-    KConfigGroup favoriteGroup = appConfig->group("Favorite Sessions");
+    KConfigGroup favoriteGroup = appConfig->group("Favorite Profiles");
 
     QStringList names;
     QSetIterator<QString> keyIter(_favorites);
@@ -570,9 +535,9 @@ void SessionManager::saveFavorites()
     {
         const QString& key = keyIter.next();
 
-        Q_ASSERT( _types.contains(key) && sessionType(key) != 0 );
+        Q_ASSERT( _types.contains(key) && profile(key) != 0 );
 
-        names << sessionType(key)->name();
+        names << profile(key)->name();
     }
 
     favoriteGroup.writeEntry("Favorites",names);

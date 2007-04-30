@@ -39,16 +39,16 @@ namespace Konsole
 {
 
 /**
- * A dialog which lists the available types of sessions and allows
- * the user to add new sessions, and remove or edit existing
- * session types.
+ * A dialog which lists the available types of profiles and allows
+ * the user to add new profiles, and remove or edit existing
+ * profile types.
  */
 class ManageProfilesDialog : public KDialog
 {
 Q_OBJECT
 
 public:
-    /** Constructs a new session type with the specified parent. */
+    /** Constructs a new profile type with the specified parent. */
     ManageProfilesDialog(QWidget* parent = 0);
     virtual ~ManageProfilesDialog();
 
@@ -62,13 +62,16 @@ private slots:
     // selection changes
     void tableSelectionChanged(const QItemSelection&);
 
-    // updates the session table to be in sync with the 
+    // updates the profile table to be in sync with the 
     // session manager
     void updateTableModel();
 
 private:
     QString selectedKey() const; // return the key associated with the currently selected
-                                 // item in the session table
+                                 // item in the profile table
+
+    void updateDefaultItem(); // updates the font of the items to match
+                              // their default / non-default profile status
     Ui::ManageProfilesDialog* _ui;
     QStandardItemModel* _sessionModel;
 };
