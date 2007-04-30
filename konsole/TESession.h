@@ -99,11 +99,13 @@ public:
    */
   TEWidget* primaryView();
 
+#if 0
   /**
    * Returns true if the session has created child processes which have not yet terminated
    * This call may be expensive if there are a large number of processes running.
    */
   bool        hasChildren();
+#endif
 
   void        setConnect(bool r);  // calls setListenToKeyPress(r)
   void        setListenToKeyPress(bool l);

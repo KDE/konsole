@@ -288,6 +288,7 @@ void TESession::changeTabTextColor( int color )
     emit changeTabTextColor( this, color );
 }
 
+#if 0
 // NOTE: TESession::hasChildren() was originally written so that the 'do you really want to close?'
 // prompt delivered when closing a session would only be shown if the session had running processes.
 // However, it was decided that stat-ing everything in /proc was very expensive, and others
@@ -354,6 +355,7 @@ bool TESession::hasChildren()
 
 	return false;
 }
+#endif
 
 void TESession::setUserTitle( int what, const QString &caption )
 {
