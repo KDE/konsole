@@ -86,6 +86,10 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
     _ui->initialDirEdit->setText( info->defaultWorkingDirectory() );
     _ui->iconSelectButton->setIcon( KIcon(info->icon()) );
 
+    _ui->tabTitleEdit->setText( info->property(Profile::LocalTabTitleFormat).value<QString>() );
+    _ui->remoteTabTitleEdit->setText( 
+            info->property(Profile::RemoteTabTitleFormat).value<QString>());
+
     // signals and slots
     connect( _ui->dirSelectButton , SIGNAL(clicked()) , this , SLOT(selectInitialDir()) );
     connect( _ui->iconSelectButton , SIGNAL(clicked()) , this , SLOT(selectIcon()) );

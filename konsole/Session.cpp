@@ -354,13 +354,21 @@ QString Session::userTitle() const
 {
     return _userTitle;
 }
-
-QString Session::displayTitle() const
+void Session::setTabTitleFormat(TabTitleContext context , const QString& format)
 {
-    if (!_userTitle.isEmpty())
-        return _userTitle;
-    else
-        return title();
+    if ( context == LocalTabTitle )
+        _localTabTitleFormat = format;
+    else if ( context == RemoteTabTitle )
+        _remoteTabTitleFormat = format;
+}
+QString Session::tabTitleFormat(TabTitleContext context) const
+{
+    if ( context == LocalTabTitle )
+        return _localTabTitleFormat;
+    else if ( context == RemoteTabTitle )
+        return _remoteTabTitleFormat;
+
+    return QString::null;
 }
 
 void Session::monitorTimerDone()

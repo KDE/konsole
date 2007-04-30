@@ -515,8 +515,16 @@ void SessionManager::applyProfile(Session* session, Profile* info , bool modifie
 {
     if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Icon) )
         session->setIconName(info->icon());
+
     if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::KeyBindings) )
         session->setKeymap(info->property(Profile::KeyBindings).value<QString>());
+
+    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::LocalTabTitleFormat) )
+        session->setTabTitleFormat( Session::LocalTabTitle ,
+                                    info->property(Profile::LocalTabTitleFormat).value<QString>());
+    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::RemoteTabTitleFormat) )
+        session->setTabTitleFormat( Session::RemoteTabTitle ,
+                                    info->property(Profile::RemoteTabTitleFormat).value<QString>());
 }
 
 QString SessionManager::addProfile(Profile* type)

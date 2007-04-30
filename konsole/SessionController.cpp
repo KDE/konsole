@@ -119,10 +119,10 @@ void SessionController::snapshot()
     if ( process->name(&ok) == "ssh" && ok )
     {
         SSHProcessInfo sshInfo(*process);
-        _session->setTitle( sshInfo.format("%H / %u") );
+        _session->setTitle( sshInfo.format(_session->tabTitleFormat(Session::RemoteTabTitle)) );
     }
     else
-        _session->setTitle( process->format("%d / %n") );
+        _session->setTitle( process->format(_session->tabTitleFormat(Session::LocalTabTitle) ) );
 
     if ( snapshot != process )
     {

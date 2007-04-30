@@ -142,11 +142,14 @@ public:
    * in the terminal), or an empty string if the user has not set a custom title
    */
   QString userTitle() const;
-  /** 
-   * Returns the title of the session for display in UI widgets 
-   * (eg. window captions)
-   */
-  QString displayTitle() const;
+ 
+  enum TabTitleContext
+  {
+    LocalTabTitle,
+    RemoteTabTitle
+  };
+  void setTabTitleFormat(TabTitleContext context , const QString& format);
+  QString tabTitleFormat(TabTitleContext context) const;
 
   QString keymap() const;
 
@@ -298,6 +301,10 @@ private:
 
   QString        _title;
   QString        _userTitle;
+
+  QString        _localTabTitleFormat;
+  QString        _remoteTabTitleFormat;
+
   QString        _iconName;
   QString        _iconText; // as set by: echo -en '\033]1;IconText\007
   bool           _addToUtmp;
