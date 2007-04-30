@@ -76,6 +76,9 @@ private slots:
     void tabTitleFormatChanged(const QString& text);
     void remoteTabTitleFormatChanged(const QString& text);
 
+    void editTabTitle();
+    void editRemoteTabTitle();
+
     // appearence page
     void setFontSize(int pointSize);
     void showFontDialog();

@@ -58,6 +58,7 @@ set(konsole_KDEINIT_SRCS
         BlockArray.cpp
         ColorScheme.cpp
         EditProfileDialog.cpp
+        EditTabTitleFormatDialog.cpp
         Filter.cpp
         HistorySizeDialog.cpp
         IncrementalSearchBar.cpp
@@ -96,6 +97,7 @@ set(konsole_KDEINIT_SRCS
 
 kde4_add_ui_files(konsole_KDEINIT_SRCS
                   EditProfileDialog.ui
+                  EditTabTitleFormatDialog.ui
                   ManageProfilesDialog.ui
                   RemoteConnectionDialog.ui
                  )
@@ -128,6 +130,7 @@ set(konsolepart_PART_SRCS
    BookmarkHandler.cpp 
    ColorScheme.cpp
    EditProfileDialog.cpp
+   EditTabTitleFormatDialog.cpp
    Emulation.cpp 
    Filter.cpp 
    History.cpp

@@ -33,6 +33,7 @@
 #include "ColorScheme.h"
 #include "ui_EditProfileDialog.h"
 #include "EditProfileDialog.h"
+#include "EditTabTitleFormatDialog.h"
 #include "SessionManager.h"
 #include "ShellCommand.h"
 
@@ -106,6 +107,32 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
             SLOT(tabTitleFormatChanged(const QString&)) );
     connect(_ui->remoteTabTitleEdit , SIGNAL(textChanged(const QString&)) , this ,
             SLOT(remoteTabTitleFormatChanged(const QString&)));
+    connect(_ui->tabTitleEditButton , SIGNAL(clicked()) , this , 
+            SLOT(editTabTitle()) );
+    connect(_ui->remoteTabTitleEditButton , SIGNAL(clicked()) , this ,
+            SLOT(editRemoteTabTitle()) );
+}
+void EditProfileDialog::editTabTitle()
+{
+    EditTabTitleFormatDialog dialog(this);
+    dialog.setContext(Session::LocalTabTitle);
+    dialog.setTabTitleFormat(_ui->tabTitleEdit->text());
+  
+    if ( dialog.exec() == QDialog::Accepted )
+    {
+        _ui->tabTitleEdit->setText(dialog.tabTitleFormat());
+    }
+}
+void EditProfileDialog::editRemoteTabTitle()
+{
+    EditTabTitleFormatDialog dialog(this);
+    dialog.setContext(Session::RemoteTabTitle);
+    dialog.setTabTitleFormat(_ui->remoteTabTitleEdit->text());
+    
+    if ( dialog.exec() == QDialog::Accepted )
+    {
+        _ui->remoteTabTitleEdit->setText(dialog.tabTitleFormat());
+    }
 }
 void EditProfileDialog::tabTitleFormatChanged(const QString& format)
 {
