@@ -22,7 +22,7 @@
 // KDE
 #include <KAction>
 #include <KCmdLineArgs>
-#include <KWM>
+#include <KWindowSystem>
 
 // Konsole
 #include "ColorScheme.h"
@@ -55,7 +55,7 @@ Application::Application()
     KeyTrans::loadAll();
 
     // check for compositing functionality
-    TerminalDisplay::setTransparencyEnabled( KWM::compositingActive() );
+    TerminalDisplay::setTransparencyEnabled( KWindowSystem::compositingActive() );
 };
 
 Application* Application::self()
