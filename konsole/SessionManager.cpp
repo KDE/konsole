@@ -50,6 +50,7 @@ FallbackProfile::FallbackProfile()
     // Fallback settings
     setProperty(Name,i18n("Shell"));
     setProperty(Command,getenv("SHELL"));
+    setProperty(Icon,"konsole");
     setProperty(Arguments,QStringList() << getenv("SHELL"));
     setProperty(LocalTabTitleFormat,"%d : %n");
     setProperty(RemoteTabTitleFormat,"%H : %u");
@@ -291,10 +292,8 @@ void KDE4ProfileReader::readStandardElement(const KConfigGroup& group ,
                                             Profile* info , 
                                             Profile::Property property)
 {
-    static T aDefault;
-
     if ( group.hasKey(name) )
-        info->setProperty(property,group.readEntry(name,aDefault));
+        info->setProperty(property,group.readEntry(name,T()));
 }
                                                     
 QStringList KDE3ProfileReader::findProfiles()
@@ -456,7 +455,11 @@ void SessionManager::loadAllProfiles()
     _loadedAllProfiles = true;
 }
 SessionManager::~SessionManager()
-{
+{    
+    // save default profile
+    setDefaultProfile( _defaultProfile );
+
+    // free profiles
     QListIterator<Profile*> infoIter(_types.values());
 
     while (infoIter.hasNext())
@@ -674,10 +677,10 @@ QString SessionManager::addProfile(Profile* type)
             break;
         }
     }
-    
+
     if ( _types.isEmpty() )
         _defaultProfile = key;
-
+ 
     _types.insert(key,type);
 
     emit profileAdded(key);
@@ -726,9 +729,13 @@ void SessionManager::setDefaultProfile(const QString& key)
    _defaultProfile = key;
 
    Profile* info = profile(key);
-  
-   Q_ASSERT( QFile::exists(info->path()) );
-   QFileInfo fileInfo(info->path());
+
+   QString path = info->path();  
+   
+   if ( path.isEmpty() )
+       path = KDE4ProfileWriter().getPath(info);
+
+   QFileInfo fileInfo(path);
 
    qDebug() << "setting default session type to " << fileInfo.fileName();
 

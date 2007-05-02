@@ -507,7 +507,8 @@ void ViewManager::loadViewSettings(TerminalDisplay* view , Profile* info)
 
     const ColorScheme* colorScheme = ColorSchemeManager::instance()->
                                             findColorScheme(info->colorScheme());
-    
+    if ( !colorScheme )
+       colorScheme = ColorSchemeManager::instance()->defaultColorScheme(); 
     Q_ASSERT( colorScheme );
 
     // load colour scheme

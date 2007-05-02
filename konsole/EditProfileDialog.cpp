@@ -237,7 +237,7 @@ void EditProfileDialog::setupAppearencePage(const Profile* info)
     while (schemeIter.hasNext())
     {
         ColorScheme* colors = schemeIter.next();
-        QStandardItem* item = new QStandardItem(colors->name());
+        QStandardItem* item = new QStandardItem(colors->description());
         item->setData( QVariant::fromValue(colors) ,  Qt::UserRole + 1);
 
         model->appendRow(item);
@@ -245,7 +245,12 @@ void EditProfileDialog::setupAppearencePage(const Profile* info)
 
     _ui->colorSchemeList->setModel(model);
     _ui->colorSchemeList->setItemDelegate(new ColorSchemeViewDelegate(this));
-    
+   
+    connect( _ui->colorSchemeList , SIGNAL(doubleClicked(const QModelIndex&)) , this ,
+            SLOT(colorSchemeSelected()) );
+    connect( _ui->selectColorSchemeButton , SIGNAL(clicked()) , this , 
+            SLOT(colorSchemeSelected()) );
+
     // setup font preview
     const QFont& font = info->font();
     _ui->fontPreviewLabel->setFont( font );
@@ -255,6 +260,20 @@ void EditProfileDialog::setupAppearencePage(const Profile* info)
              SLOT(setFontSize(int)) );
     connect( _ui->editFontButton , SIGNAL(clicked()) , this ,
              SLOT(showFontDialog()) );
+}
+void EditProfileDialog::colorSchemeSelected()
+{
+    QModelIndexList selected = _ui->colorSchemeList->selectionModel()->selectedIndexes();
+
+    if ( !selected.isEmpty() )
+    {
+        QAbstractItemModel* model = _ui->colorSchemeList->model();
+        ColorScheme* colors = model->data(selected.first(),Qt::UserRole+1).value<ColorScheme*>();
+
+        _tempProfile->setProperty(Profile::ColorScheme,colors->name());
+
+        qDebug() << "Color scheme selected: " << _tempProfile->colorScheme();
+    }
 }
 void EditProfileDialog::setupKeyboardPage(const Profile* )
 {
@@ -383,6 +402,9 @@ void EditProfileDialog::setupAdvancedPage(const Profile* profile)
 void EditProfileDialog::customCursorColorChanged(const QColor& color)
 {
     _tempProfile->setProperty(Profile::CustomCursorColor,color);
+
+    // ensure that custom cursor colors are enabled
+    _ui->customCursorColorButton->click();
 }
 void EditProfileDialog::wordCharactersChanged(const QString& text)
 {

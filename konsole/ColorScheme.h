@@ -53,6 +53,11 @@ public:
     ColorScheme();
     ~ColorScheme();
 
+    /** Sets the descriptive name of the color scheme. */
+    void setDescription(const QString& description);
+    /** Returns the descriptive name of the color scheme. */
+    QString description() const;
+
     /** Sets the name of the color scheme */
     void setName(const QString& name);
     /** Returns the name of the color scheme */
@@ -114,6 +119,7 @@ private:
     // writes a single colour entry to a KConfig source
     void writeColorEntry(KConfig& config , const QString& colorName, const ColorEntry& entry) const;
 
+    QString _description;
     QString _name;
     qreal _opacity;
     ColorEntry* _table; // pointer to custom color table or 0 if the default

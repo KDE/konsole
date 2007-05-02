@@ -92,6 +92,7 @@ private slots:
     // appearence page
     void setFontSize(int pointSize);
     void showFontDialog();
+    void colorSchemeSelected();
 
     // scrolling page
     void noScrollBack();

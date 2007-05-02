@@ -98,6 +98,9 @@ ColorScheme::~ColorScheme()
     delete[] _table;
 }
 
+void ColorScheme::setDescription(const QString& description) { _description = description; }
+QString ColorScheme::description() const { return _description; }
+
 void ColorScheme::setName(const QString& name) { _name = name; }
 QString ColorScheme::name() const { return _name; }
 
@@ -132,7 +135,7 @@ void ColorScheme::read(KConfig& config)
 {
     KConfigGroup configGroup = config.group("General");
     
-    _name = configGroup.readEntry("Name",i18n("Un-named Color Scheme"));
+    _description = configGroup.readEntry("Description",i18n("Un-named Color Scheme"));
     _opacity = configGroup.readEntry("Opacity",qreal(1.0));
 
     for (int i=0 ; i < TABLE_COLORS ; i++)
@@ -144,7 +147,7 @@ void ColorScheme::write(KConfig& config) const
 {
     KConfigGroup configGroup = config.group("General");
 
-    configGroup.writeEntry("Name",_name);
+    configGroup.writeEntry("Description",_description);
     configGroup.writeEntry("Opacity",_opacity);
     
     for (int i=0 ; i < TABLE_COLORS ; i++)
@@ -256,7 +259,7 @@ void KDE3ColorSchemeReader::readTitleLine(const QString& line,ColorScheme* schem
     int spacePos = line.indexOf(' ');
     Q_ASSERT( spacePos != -1 );
 
-    scheme->setName(line.mid(spacePos+1));
+    scheme->setDescription(line.mid(spacePos+1));
 }
 ColorSchemeManager::ColorSchemeManager()
     : _haveLoadedAll(false)
@@ -322,6 +325,7 @@ bool ColorSchemeManager::loadKDE3ColorScheme(const QString& filePath)
 
     KDE3ColorSchemeReader reader(&file);
     ColorScheme* scheme = reader.read();
+    scheme->setName(QFileInfo(file).baseName());
     file.close();
 
     Q_ASSERT( !scheme->name().isEmpty() );
@@ -333,8 +337,8 @@ bool ColorSchemeManager::loadKDE3ColorScheme(const QString& filePath)
     if ( !_colorSchemes.contains(info.baseName()) )
     {
         qDebug() << "added color scheme - " << info.baseName();
-
-        _colorSchemes.insert(info.baseName(),scheme);
+        
+        _colorSchemes.insert(scheme->name(),scheme);
     }
     else
     {
@@ -347,22 +351,24 @@ bool ColorSchemeManager::loadKDE3ColorScheme(const QString& filePath)
 }
 bool ColorSchemeManager::loadColorScheme(const QString& filePath)
 {
+    QFileInfo info(filePath);
+    
     qDebug() << "loading KDE 4 native color scheme from " << filePath;
     KConfig config(filePath , KConfig::NoGlobals);
     ColorScheme* scheme = new ColorScheme();
+    scheme->setName(info.baseName());
     scheme->read(config);
-   
+    
     Q_ASSERT( !scheme->name().isEmpty() );
 
     qDebug() << "found KDE 4 native color scheme - " << scheme->name();
 
-    QFileInfo info(filePath);
 
     if ( !_colorSchemes.contains(info.baseName()) )
     {
         qDebug() << "added color scheme - " << info.baseName();
 
-        _colorSchemes.insert(info.baseName(),scheme);
+        _colorSchemes.insert(scheme->name(),scheme);
     }
     else
     {
@@ -415,6 +421,8 @@ const ColorScheme* ColorSchemeManager::findColorScheme(const QString& name)
             if (!kde3path.isEmpty() && loadKDE3ColorScheme(kde3path))
                 return findColorScheme(name);
         }
+
+        qDebug() << "Could not find color scheme - " << name;
 
         return 0; 
     }
