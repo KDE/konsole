@@ -515,6 +515,16 @@ void ViewManager::loadViewSettings(TerminalDisplay* view , Profile* info)
     
     // load font 
     view->setVTFont(info->font());
+
+    // set scroll-bar position
+    int scrollBarPosition = info->property(Profile::ScrollBarPosition).value<int>();
+
+    if ( scrollBarPosition == Profile::ScrollBarHidden )
+       view->setScrollBarLocation(TerminalDisplay::SCROLLBAR_NONE);
+    else if ( scrollBarPosition == Profile::ScrollBarLeft )
+       view->setScrollBarLocation(TerminalDisplay::SCROLLBAR_LEFT);
+    else if ( scrollBarPosition == Profile::ScrollBarRight )
+       view->setScrollBarLocation(TerminalDisplay::SCROLLBAR_RIGHT);
 }
 
 void ViewManager::profileChanged(const QString& key)

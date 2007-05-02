@@ -123,6 +123,32 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
             SLOT(editTabTitle()) );
     connect(_ui->remoteTabTitleEditButton , SIGNAL(clicked()) , this ,
             SLOT(editRemoteTabTitle()) );
+
+    connect(_ui->showMenuBarButton , SIGNAL(toggled(bool)) , this , 
+            SLOT(showMenuBar(bool)) );
+
+    connect(_ui->alwaysHideTabBarButton , SIGNAL(clicked()) , this , 
+            SLOT(alwaysHideTabBar()) );
+    connect(_ui->autoShowTabBarButton , SIGNAL(clicked()) , this , 
+            SLOT(showTabBarAsNeeded()) );
+    connect(_ui->alwaysShowTabBarButton , SIGNAL(clicked()) , this ,
+            SLOT(alwaysShowTabBar()) );
+}
+void EditProfileDialog::showMenuBar(bool show)
+{
+    _tempProfile->setProperty(Profile::ShowMenuBar,show);
+}
+void EditProfileDialog::alwaysHideTabBar()
+{
+    _tempProfile->setProperty(Profile::TabBarMode,Profile::AlwaysHideTabBar);
+}
+void EditProfileDialog::alwaysShowTabBar()
+{
+    _tempProfile->setProperty(Profile::TabBarMode,Profile::AlwaysShowTabBar);
+}
+void EditProfileDialog::showTabBarAsNeeded()
+{
+    _tempProfile->setProperty(Profile::TabBarMode,Profile::ShowTabBarAsNeeded);
 }
 void EditProfileDialog::editTabTitle()
 {
@@ -222,13 +248,116 @@ void EditProfileDialog::setupAppearencePage(const Profile* info)
 void EditProfileDialog::setupKeyboardPage(const Profile* )
 {
 }
-void EditProfileDialog::setupScrollingPage(const Profile* )
+void EditProfileDialog::setupRadio( RadioInt* possible , int actual )
 {
-}
-void EditProfileDialog::setupAdvancedPage(const Profile* )
-{
+    while (possible->first != 0)
+    {
+        if ( possible->second == actual )
+            possible->first->setChecked(true);
+        else
+            possible->first->setChecked(false);
+    
+        ++possible;
+    }
 }
 
+void EditProfileDialog::setupScrollingPage(const Profile* profile)
+{
+    // setup scrollbar radio
+    int scrollBarPosition = profile->property(Profile::ScrollBarPosition).value<int>();
+   
+    RadioInt possibleScrollBarPositions[] = { RadioInt(_ui->scrollBarHiddenButton,Profile::ScrollBarHidden),
+                                              RadioInt(_ui->scrollBarLeftButton,Profile::ScrollBarLeft),
+                                              RadioInt(_ui->scrollBarRightButton,Profile::ScrollBarRight),
+                                              RadioInt(0,0) }; 
+
+    setupRadio( possibleScrollBarPositions , scrollBarPosition );
+   
+    // setup scrollback type radio
+    int scrollBackType = profile->property(Profile::HistoryMode).value<int>();
+    
+    RadioInt possibleScrollBackTypes[] = { RadioInt(_ui->disableScrollbackButton,Profile::DisableHistory),
+                                           RadioInt(_ui->fixedScrollbackButton,Profile::FixedSizeHistory),
+                                           RadioInt(_ui->unlimitedScrollbackButton,Profile::UnlimitedHistory),
+                                           RadioInt(0,0) };
+    setupRadio( possibleScrollBackTypes , scrollBackType ); 
+    
+    // setup scrollback line count spinner
+    _ui->scrollBackLinesSpinner->setValue( profile->property(Profile::HistorySize).value<int>() );
+
+    // signals and slots
+    connect( _ui->scrollBarHiddenButton , SIGNAL(clicked()) , this ,
+            SLOT(hideScrollBar()) );
+    connect( _ui->scrollBarLeftButton , SIGNAL(clicked()) , this ,
+            SLOT(showScrollBarLeft()) );
+    connect( _ui->scrollBarRightButton , SIGNAL(clicked()) , this , 
+            SLOT(showScrollBarRight()) );
+
+    connect( _ui->scrollBackLinesSpinner , SIGNAL(valueChanged(int)) , this , 
+            SLOT(scrollBackLinesChanged(int)) );
+
+    connect( _ui->disableScrollbackButton , SIGNAL(clicked()) , this ,
+            SLOT(noScrollBack()) );
+    connect(_ui->fixedScrollbackButton , SIGNAL(clicked()) , this ,
+            SLOT(fixedScrollBack()) );
+    connect(_ui->unlimitedScrollbackButton , SIGNAL(clicked()) , this ,
+            SLOT(unlimitedScrollBack()) );
+}
+
+void EditProfileDialog::scrollBackLinesChanged(int lineCount)
+{
+    _tempProfile->setProperty(Profile::HistorySize , lineCount);
+}
+void EditProfileDialog::noScrollBack()
+{
+    _tempProfile->setProperty(Profile::HistoryMode , Profile::DisableHistory);
+}
+void EditProfileDialog::fixedScrollBack()
+{
+    _tempProfile->setProperty(Profile::HistoryMode , Profile::FixedSizeHistory);
+}
+void EditProfileDialog::unlimitedScrollBack()
+{
+    _tempProfile->setProperty(Profile::HistoryMode , Profile::UnlimitedHistory );
+}
+void EditProfileDialog::hideScrollBar()
+{
+    _tempProfile->setProperty(Profile::ScrollBarPosition , Profile::ScrollBarHidden );
+}
+void EditProfileDialog::showScrollBarLeft()
+{
+    _tempProfile->setProperty(Profile::ScrollBarPosition , Profile::ScrollBarLeft );
+}
+void EditProfileDialog::showScrollBarRight()
+{
+    _tempProfile->setProperty(Profile::ScrollBarPosition , Profile::ScrollBarRight );
+}
+void EditProfileDialog::setupAdvancedPage(const Profile* profile)
+{
+    _ui->enableBlinkingTextButton->setChecked( profile->property(Profile::BlinkingTextEnabled).value<bool>() );
+    _ui->enableFlowControlButton->setChecked( profile->property(Profile::FlowControlEnabled).value<bool>() );
+    _ui->enableResizeWindowButton->setChecked( profile->property(Profile::AllowProgramsToResizeWindow)
+                                                .value<bool>() );
+    // signals and slots
+    connect( _ui->enableBlinkingTextButton , SIGNAL(toggled(bool)) , this ,
+            SLOT(toggleBlinkingText(bool)) );
+    connect( _ui->enableFlowControlButton , SIGNAL(toggled(bool)) , this , 
+            SLOT(toggleFlowControl(bool)) );
+    connect( _ui->enableResizeWindowButton , SIGNAL(toggled(bool)) , this ,
+            SLOT(toggleResizeWindow(bool)) );
+}
+void EditProfileDialog::toggleBlinkingText(bool enable)
+{
+    _tempProfile->setProperty(Profile::BlinkingTextEnabled,enable);
+}
+void EditProfileDialog::toggleFlowControl(bool enable)
+{
+    _tempProfile->setProperty(Profile::FlowControlEnabled,enable);
+}
+void EditProfileDialog::toggleResizeWindow(bool enable)
+{
+    _tempProfile->setProperty(Profile::AllowProgramsToResizeWindow,enable);
+}
 void EditProfileDialog::showFontDialog()
 {
     //TODO Only permit selection of mono-spaced fonts.  

@@ -47,42 +47,64 @@ public:
     enum Property
     {
         // Path to profile's config file
-        Path,
+        Path,   // QString
 
         // General profile options
-        Name,
-        Title,
-        Icon,
-        Command,
-        Arguments,
-        Environment,
-        Directory,
+        Name,   // QString
+        Title,  // QString
+        Icon,   // QString
+        Command,        // QString
+        Arguments,      // QStringList
+        Environment,    // QStringList
+        Directory,      // QString
 
         // Tab Title Formats
-        LocalTabTitleFormat,
-        RemoteTabTitleFormat,
+        LocalTabTitleFormat,    // QString
+        RemoteTabTitleFormat,   // QString
 
         // Window & Tab Bar 
-        ShowMenuBar,
-        TabBarMode,
+        ShowMenuBar,    // bool
+        TabBarMode,     // TabBarMode
 
         // Appearence
-        Font,
-        ColorScheme,
+        Font,           // QFont
+        ColorScheme,    // QString
 
         // Keyboard
-        KeyBindings,
+        KeyBindings,    // QString
 
         // Scrolling
-        ScrollingMode,
-        ScrollBarPosition,
+        HistoryMode,        // HistoryMode
+        HistorySize,        // int
+        ScrollBarPosition,  // ScrollBarPosition
 
         // Terminal Features
-        SelectWordCharacters,
-        BlinkingTextEnabled,
-        FlowControlEnabled,
-        AllowProgramsToResizeWindow
+        SelectWordCharacters,       // QString   
+        BlinkingTextEnabled,        // bool
+        FlowControlEnabled,         // bool
+        AllowProgramsToResizeWindow // bool
         
+    };
+
+    enum TabBarModeEnum
+    {
+        AlwaysHideTabBar,
+        ShowTabBarAsNeeded,
+        AlwaysShowTabBar
+    };
+
+    enum HistoryModeEnum
+    {
+        DisableHistory,
+        FixedSizeHistory,
+        UnlimitedHistory
+    };
+
+    enum ScrollBarPositionEnum
+    {
+        ScrollBarLeft,
+        ScrollBarRight,
+        ScrollBarHidden
     };
 
     /**
@@ -227,6 +249,11 @@ class KDE4ProfileReader : public ProfileReader
 public:
     virtual QStringList findProfiles();
     virtual bool readProfile(const QString& path , Profile* profile);
+private:
+    void readStandardElement(const KConfigGroup& group , 
+                             char* name , 
+                             Profile* info , 
+                             Profile::Property property);
 };
 /** Interface for all classes which can write profile settings to a file. */
 class ProfileWriter
@@ -242,6 +269,12 @@ class KDE4ProfileWriter : public ProfileWriter
 public:
     virtual QString getPath(const Profile* profile);
     virtual bool writeProfile(const QString& path , const Profile* profile);
+
+private:
+    void writeStandardElement(KConfigGroup& group,
+                              char* name,
+                              const Profile* profile,
+                              Profile::Property property);
 };
 
 #if 0

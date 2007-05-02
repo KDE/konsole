@@ -463,7 +463,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit_4" />
+             <widget class="QSpinBox" name="scrollBackLinesSpinner" >
+              <property name="minimum" >
+               <number>1</number>
+              </property>
+              <property name="maximum" >
+               <number>10000</number>
+              </property>
+             </widget>
             </item>
             <item>
              <spacer>
@@ -553,21 +560,21 @@
          </property>
          <layout class="QVBoxLayout" >
           <item>
-           <widget class="QCheckBox" name="checkBox_2" >
+           <widget class="QCheckBox" name="enableBlinkingTextButton" >
             <property name="text" >
              <string>Allow blinking text</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="checkBox_3" >
+           <widget class="QCheckBox" name="enableFlowControlButton" >
             <property name="text" >
              <string>Enable flow control using Ctrl+S , Ctrl+Q</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="checkBox_5" >
+           <widget class="QCheckBox" name="enableResizeWindowButton" >
             <property name="text" >
              <string>Allow programs to resize terminal window</string>
             </property>

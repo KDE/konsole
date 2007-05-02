@@ -134,7 +134,12 @@ QString KDE4ProfileWriter::getPath(const Profile* info)
 
     return newPath;
 }
-
+void KDE4ProfileWriter::writeStandardElement(KConfigGroup& group , char* name , const Profile* profile ,
+                                             Profile::Property attribute)
+{
+    if ( profile->isPropertySet(attribute) )
+        group.writeEntry(name,profile->property(attribute));
+}
 bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile* profile)
 {
     KConfig config(path,KConfig::NoGlobals);
@@ -143,31 +148,33 @@ bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile* profil
 
     if ( profile->isPropertySet(Profile::Name) )
         general.writeEntry("Name",profile->name());
-
+    
     if (    profile->isPropertySet(Profile::Command) 
          || profile->isPropertySet(Profile::Arguments) )
         general.writeEntry("Command",
                 ShellCommand(profile->command(),profile->arguments()).fullCommand());
 
-    if ( profile->isPropertySet(Profile::Icon) )
-        general.writeEntry("Icon",profile->icon());
+    writeStandardElement( general , "Icon" , profile , Profile::Icon );
+    writeStandardElement( general , "LocalTabTitleFormat" , profile , Profile::LocalTabTitleFormat );
+    writeStandardElement( general , "RemoteTabTitleFormat" , profile , Profile::RemoteTabTitleFormat );
 
-    if ( profile->isPropertySet(Profile::LocalTabTitleFormat) )
-        general.writeEntry("LocalTabTitleFormat",
-                profile->property(Profile::LocalTabTitleFormat).value<QString>());
-
-    if ( profile->isPropertySet(Profile::RemoteTabTitleFormat) )
-        general.writeEntry("RemoteTabTitleFormat",
-                profile->property(Profile::RemoteTabTitleFormat).value<QString>());
+    KConfigGroup keyboard = config.group("Keyboard");
+    writeStandardElement( keyboard , "KeyBindings" , profile , Profile::KeyBindings );
 
     KConfigGroup appearence = config.group("Appearence");
 
-    if ( profile->isPropertySet(Profile::ColorScheme) )
-        appearence.writeEntry("ColorScheme",profile->colorScheme());
+    writeStandardElement( appearence , "ColorScheme" , profile , Profile::ColorScheme );
+    writeStandardElement( appearence , "Font" , profile , Profile::Font );
+   
+    KConfigGroup scrolling = config.group("Scrolling");
 
-    if ( profile->isPropertySet(Profile::Font) )
-        appearence.writeEntry("Font",profile->font());
-    
+    writeStandardElement( scrolling , "HistoryMode" , profile , Profile::HistoryMode );
+    writeStandardElement( scrolling , "HistorySize" , profile , Profile::HistorySize );
+    writeStandardElement( scrolling , "ScrollBarPosition" , profile , Profile::ScrollBarPosition ); 
+
+    KConfigGroup terminalFeatures = config.group("TerminalFeatures");
+
+    writeStandardElement( terminalFeatures , "FlowControl" , profile , Profile::FlowControlEnabled );
 
     return true;
 }
@@ -198,25 +205,39 @@ bool KDE4ProfileReader::readProfile(const QString& path , Profile* profile)
         profile->setProperty(Profile::Arguments,shellCommand.arguments());
     }
 
-    if ( general.hasKey("Icon") )
-        profile->setProperty(Profile::Icon,general.readEntry("Icon"));
-    if ( general.hasKey("LocalTabTitleFormat") )
-        profile->setProperty(Profile::LocalTabTitleFormat,general.readEntry("LocalTabTitleFormat"));
-    if ( general.hasKey("RemoteTabTitleFormat") )
-        profile->setProperty(Profile::RemoteTabTitleFormat,
-                            general.readEntry("RemoteTabTitleFormat"));
-
-    qDebug() << "local tabs:" << general.readEntry("LocalTabTitleFormat");
+    readStandardElement(general,"Icon",profile,Profile::Icon);
+    readStandardElement(general,"LocalTabTitleFormat",profile,Profile::LocalTabTitleFormat); 
+    readStandardElement(general,"RemoteTabTitleFormat",profile,Profile::RemoteTabTitleFormat);
+   
+    KConfigGroup keyboard = config.group("Keyboard");
+    readStandardElement(keyboard,"KeyBindings",profile,Profile::KeyBindings);
 
     KConfigGroup appearence = config.group("Appearence");
 
-    if ( appearence.hasKey("ColorScheme") )
-        profile->setProperty(Profile::ColorScheme,appearence.readEntry("Color Scheme"));
-    if ( appearence.hasKey("Font") )
-        profile->setProperty(Profile::Font,appearence.readEntry("Font"));
+    readStandardElement(appearence,"ColorScheme",profile,Profile::ColorScheme);
+    readStandardElement(appearence,"Font",profile,Profile::Font);
+
+    KConfigGroup scrolling = config.group("Scrolling");
+
+    readStandardElement(scrolling,"HistoryMode",profile,Profile::HistoryMode);
+    readStandardElement(scrolling,"HistorySize",profile,Profile::HistorySize);
+    readStandardElement(scrolling,"ScrollBarPosition",profile,Profile::ScrollBarPosition);
+
+    KConfigGroup terminalFeatures = config.group("Terminal Features");
+
+    readStandardElement(terminalFeatures,"FlowControl",profile,Profile::FlowControlEnabled);
 
     return true;
 }
+void KDE4ProfileReader::readStandardElement(const KConfigGroup& group , 
+                                            char* name , 
+                                            Profile* info , 
+                                            Profile::Property property)
+{
+    if ( group.hasKey(name) )
+        info->setProperty(property,group.readEntry(name));
+}
+                                                    
 QStringList KDE3ProfileReader::findProfiles()
 {
     return KGlobal::dirs()->findAllResources("data", "konsole/*.desktop", 
@@ -533,6 +554,7 @@ void SessionManager::applyProfile(Session* session, const Profile* info , bool m
 {
     session->setType( _types.key((Profile*)info) );
 
+    // Basic session settings
     if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Command) )
         session->setProgram(info->command());
 
@@ -545,15 +567,44 @@ void SessionManager::applyProfile(Session* session, const Profile* info , bool m
     if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Icon) )
         session->setIconName(info->icon());
 
+    // Key bindings
     if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::KeyBindings) )
         session->setKeymap(info->property(Profile::KeyBindings).value<QString>());
 
+    // Tab formats
     if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::LocalTabTitleFormat) )
         session->setTabTitleFormat( Session::LocalTabTitle ,
                                     info->property(Profile::LocalTabTitleFormat).value<QString>());
     if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::RemoteTabTitleFormat) )
         session->setTabTitleFormat( Session::RemoteTabTitle ,
                                     info->property(Profile::RemoteTabTitleFormat).value<QString>());
+
+    // Scrollback / history
+    if ( !modifiedPropertiesOnly 
+         || info->isPropertySet(Profile::HistoryMode) 
+         || info->isPropertySet(Profile::HistorySize) )
+    {
+        int mode = info->property(Profile::HistoryMode).value<int>();
+        switch ((Profile::HistoryModeEnum)mode)
+        {
+            case Profile::DisableHistory:
+                    session->setHistory( HistoryTypeNone() );
+                break;
+            case Profile::FixedSizeHistory:
+                {
+                    int lines = info->property(Profile::HistorySize).value<int>();
+                    session->setHistory( HistoryTypeBuffer(lines) );
+                }
+                break;
+            case Profile::UnlimitedHistory:
+                    session->setHistory( HistoryTypeFile() );
+                break;
+        }
+    }
+
+    // Terminal features
+    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::FlowControlEnabled) )
+        session->setXonXoff( info->property(Profile::FlowControlEnabled).value<bool>() );
 }
 
 QString SessionManager::addProfile(Profile* type)

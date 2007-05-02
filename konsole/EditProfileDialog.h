@@ -22,10 +22,12 @@
 
 // Qt
 #include <QAbstractItemDelegate>
+#include <QPair>
 
 // KDE
 #include <KDialog>
 
+class QAbstractButton;
 
 namespace Ui
 {
@@ -82,9 +84,30 @@ private slots:
     void editTabTitle();
     void editRemoteTabTitle();
 
+    void showMenuBar(bool);
+    void alwaysHideTabBar();
+    void alwaysShowTabBar();
+    void showTabBarAsNeeded();
+
     // appearence page
     void setFontSize(int pointSize);
     void showFontDialog();
+
+    // scrolling page
+    void noScrollBack();
+    void fixedScrollBack();
+    void unlimitedScrollBack();
+   
+    void scrollBackLinesChanged(int);
+
+    void hideScrollBar();
+    void showScrollBarLeft();
+    void showScrollBarRight();
+
+    // advanced page
+    void toggleBlinkingText(bool);
+    void toggleFlowControl(bool);
+    void toggleResizeWindow(bool);
 
 private:
     // initialize various pages of the dialog
@@ -93,6 +116,9 @@ private:
     void setupKeyboardPage(const Profile* info);
     void setupScrollingPage(const Profile* info);
     void setupAdvancedPage(const Profile* info);
+
+    typedef QPair<QAbstractButton*,int> RadioInt;
+    void setupRadio(RadioInt* possible,int actual);
 
     Ui::EditProfileDialog* _ui;
     Profile* _tempProfile;
