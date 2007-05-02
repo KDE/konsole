@@ -30,6 +30,7 @@
             <Action name="monitor-silence" group="session-view-operations" />
             <Action name="monitor-activity" group="session-view-operations" />
             <Separator group="session-view-operations"/>
+            <Action name="character-encoding"/>
             <Action name="increase-text-size"/>
             <Action name="decrease-text-size"/>
         </Menu>

@@ -9,6 +9,7 @@
 #include <KUrl>
 #include <KXMLGUIFactory>
 #include <kdebug.h>
+#include <kcodecaction.h>
 
 // Konsole
 #include "EditProfileDialog.h"
@@ -52,6 +53,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _findNextAction(0)
     , _findPreviousAction(0)
     , _urlFilterUpdateRequired(false)
+    , _codecAction(0)
 {
     Q_ASSERT( session );
     Q_ASSERT( view );
@@ -364,6 +366,12 @@ void SessionController::setupActions()
     action = collection->addAction("monitor-silence",toggleAction);
     connect( action , SIGNAL(toggled(bool)) , this , SLOT(monitorSilence(bool)) );
 
+    // Character Encoding
+    _codecAction = new KCodecAction(i18n("Set Character Encoding"),this);
+    collection->addAction("character-encoding",_codecAction);
+    connect( _codecAction->menu() , SIGNAL(aboutToShow()) , this , SLOT(updateCodecAction()) );
+    connect( _codecAction , SIGNAL(triggered(QTextCodec*)) , this , SLOT(changeCodec(QTextCodec*)) );
+
     // Text Size
     action = collection->addAction("increase-text-size");
     action->setText( i18n("Increase Text Size") );
@@ -426,7 +434,14 @@ void SessionController::setupActions()
     //action->setText( "Get Foreground Process" );
     //connect( action , SIGNAL(triggered()) , this , SLOT(debugProcess()) );
 }
-
+void SessionController::updateCodecAction()
+{
+    _codecAction->setCurrentCodec( QString(_session->emulation()->codec()->name()) );
+}
+void SessionController::changeCodec(QTextCodec* codec)
+{
+    _session->emulation()->setCodec(codec);
+}
 void SessionController::debugProcess()
 {
     // testing facility to retrieve process information about 

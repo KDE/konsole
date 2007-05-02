@@ -22,6 +22,8 @@ namespace KIO
 };
 
 class QAction;
+class QTextCodec;
+class KCodecAction;
 class KToggleAction;
 class KUrl;
 class KJob;
@@ -116,6 +118,7 @@ private slots:
     void clear();
     void clearAndReset();
     void editCurrentProfile();
+    void changeCodec(QTextCodec* codec);
     void searchHistory();
     void searchHistory(bool showSearchBar);
     void findNextInHistory();
@@ -133,6 +136,7 @@ private slots:
     void saveSession();
   
     // other
+    void updateCodecAction();
     void showDisplayContextMenu(TerminalDisplay* display , int state , int x , int y);
     void sessionStateChanged(Session* session,int state);
     void sessionTitleChanged();
@@ -180,6 +184,8 @@ private:
     bool _urlFilterUpdateRequired;
 
     QPointer<IncrementalSearchBar> _searchBar;
+
+    KCodecAction* _codecAction;
 };
 
 /** 
