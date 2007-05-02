@@ -580,12 +580,105 @@
             </property>
            </widget>
           </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_9" >
+         <property name="title" >
+          <string>Interaction options:</string>
+         </property>
+         <property name="flat" >
+          <bool>true</bool>
+         </property>
+         <layout class="QVBoxLayout" >
+          <item>
+           <layout class="QHBoxLayout" >
+            <item>
+             <widget class="QLabel" name="label_11" >
+              <property name="text" >
+               <string>Word characters for double-click selection: </string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="wordCharacterEdit" />
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_8" >
+         <property name="title" >
+          <string>Cursor Options:</string>
+         </property>
+         <property name="flat" >
+          <bool>true</bool>
+         </property>
+         <layout class="QVBoxLayout" >
           <item>
            <widget class="QCheckBox" name="enableBlinkingCursorButton" >
             <property name="text" >
              <string>Blinking cursor</string>
             </property>
            </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" >
+            <item>
+             <widget class="QLabel" name="label_8" >
+              <property name="text" >
+               <string>Cursor shape:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="cursorShapeCombo" >
+              <item>
+               <property name="text" >
+                <string>Block</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>I-Beam</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>Underline</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="autoCursorColorButton" >
+            <property name="text" >
+             <string>Set cursor color to match current character</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" >
+            <item>
+             <widget class="QRadioButton" name="customCursorColorButton" >
+              <property name="text" >
+               <string>Custom cursor color:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="KColorButton" name="customColorSelectButton" >
+              <property name="text" >
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
@@ -614,6 +707,11 @@
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header location="global" >klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KColorButton</class>
+   <extends>QPushButton</extends>
+   <header location="global" >kcolorbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

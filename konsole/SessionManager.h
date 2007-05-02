@@ -83,8 +83,15 @@ public:
         BlinkingTextEnabled,        // bool
         FlowControlEnabled,         // bool
         AllowProgramsToResizeWindow,// bool
-        BlinkingCursorEnabled       // bool 
-        
+        BlinkingCursorEnabled,      // bool
+
+        // Cursor Options
+        UseCustomCursorColor,       // bool 
+        CursorShape,                // CursorShapeEnum
+        CustomCursorColor,          // QColor
+
+        // Interaction options
+        WordCharacters  // QString
     };
 
     enum TabBarModeEnum
@@ -106,6 +113,13 @@ public:
         ScrollBarLeft,
         ScrollBarRight,
         ScrollBarHidden
+    };
+
+    enum CursorShapeEnum
+    {
+        BlockCursor,
+        IBeamCursor,
+        UnderlineCursor
     };
 
     /**
@@ -251,6 +265,7 @@ public:
     virtual QStringList findProfiles();
     virtual bool readProfile(const QString& path , Profile* profile);
 private:
+    template <typename T>
     void readStandardElement(const KConfigGroup& group , 
                              char* name , 
                              Profile* info , 

@@ -355,6 +355,50 @@ void EditProfileDialog::setupAdvancedPage(const Profile* profile)
                                { 0 , 0 , 0 }
                              };
     setupCombo( options , profile );
+
+    // interaction options
+    _ui->wordCharacterEdit->setText( profile->property(Profile::WordCharacters).value<QString>() );
+
+    connect( _ui->wordCharacterEdit , SIGNAL(textChanged(const QString&)) , this , 
+            SLOT(wordCharactersChanged(const QString&)) );
+
+    // cursor options
+    if ( profile->property(Profile::UseCustomCursorColor).value<bool>() )
+        _ui->customCursorColorButton->setChecked(true);
+    else
+        _ui->autoCursorColorButton->setChecked(true);
+
+    _ui->customColorSelectButton->setColor( profile->property(Profile::CustomCursorColor).value<QColor>() );
+
+    connect( _ui->customCursorColorButton , SIGNAL(clicked()) , this , SLOT(customCursorColor()) );
+    connect( _ui->autoCursorColorButton , SIGNAL(clicked()) , this , SLOT(autoCursorColor()) );
+    connect( _ui->customColorSelectButton , SIGNAL(changed(const QColor&)) , 
+            SLOT(customCursorColorChanged(const QColor&)) );
+
+    int shape = profile->property(Profile::CursorShape).value<int>();
+    _ui->cursorShapeCombo->setCurrentIndex(shape);
+
+    connect( _ui->cursorShapeCombo , SIGNAL(activated(int)) , this , SLOT(setCursorShape(int)) ); 
+}
+void EditProfileDialog::customCursorColorChanged(const QColor& color)
+{
+    _tempProfile->setProperty(Profile::CustomCursorColor,color);
+}
+void EditProfileDialog::wordCharactersChanged(const QString& text)
+{
+    _tempProfile->setProperty(Profile::WordCharacters,text);
+}
+void EditProfileDialog::autoCursorColor()
+{
+    _tempProfile->setProperty(Profile::UseCustomCursorColor,false);
+}
+void EditProfileDialog::customCursorColor()
+{
+    _tempProfile->setProperty(Profile::UseCustomCursorColor,true);
+}
+void EditProfileDialog::setCursorShape(int index)
+{
+    _tempProfile->setProperty(Profile::CursorShape,index);
 }
 void EditProfileDialog::toggleBlinkingCursor(bool enable)
 {

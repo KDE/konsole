@@ -531,7 +531,26 @@ void ViewManager::loadViewSettings(TerminalDisplay* view , Profile* info)
     //TODO - Add a method in TerminalDisplay to allow this to be turned on or off 
 
     bool blinkingCursor = info->property(Profile::BlinkingCursorEnabled).value<bool>();
-    view->setBlinkingCursor(blinkingCursor);   
+    view->setBlinkingCursor(blinkingCursor);  
+
+    // cursor shape
+    int cursorShape = info->property(Profile::CursorShape).value<int>();
+
+    if ( cursorShape == Profile::BlockCursor )
+        view->setKeyboardCursorShape(TerminalDisplay::BlockCursor);  
+    else if ( cursorShape == Profile::IBeamCursor )
+        view->setKeyboardCursorShape(TerminalDisplay::IBeamCursor);
+    else if ( cursorShape == Profile::UnderlineCursor )
+        view->setKeyboardCursorShape(TerminalDisplay::UnderlineCursor);
+
+    // cursor color
+    bool useCustomColor = info->property(Profile::UseCustomCursorColor).value<bool>();
+    const QColor& cursorColor = info->property(Profile::CustomCursorColor).value<QColor>();
+        
+    view->setKeyboardCursorColor(!useCustomColor,cursorColor);
+
+    // word characters
+    view->setWordCharacters( info->property(Profile::WordCharacters).value<QString>() );
 }
 
 void ViewManager::profileChanged(const QString& key)

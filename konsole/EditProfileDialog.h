@@ -110,6 +110,12 @@ private slots:
     void toggleResizeWindow(bool);
     void toggleBlinkingCursor(bool);
 
+    void setCursorShape(int);
+    void autoCursorColor();
+    void customCursorColor();
+    void customCursorColorChanged(const QColor&);
+    void wordCharactersChanged(const QString&);
+
 private:
     // initialize various pages of the dialog
     void setupGeneralPage(const Profile* info);

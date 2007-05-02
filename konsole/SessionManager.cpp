@@ -51,7 +51,28 @@ FallbackProfile::FallbackProfile()
     setProperty(Name,i18n("Shell"));
     setProperty(Command,getenv("SHELL"));
     setProperty(Arguments,QStringList() << getenv("SHELL"));
+    setProperty(LocalTabTitleFormat,"%d : %n");
+    setProperty(RemoteTabTitleFormat,"%H : %u");
+    setProperty(TabBarMode,AlwaysShowTabBar);
+    setProperty(ShowMenuBar,true);
+
     setProperty(Font,QFont("Monospace"));
+
+    setProperty(HistoryMode,FixedSizeHistory);
+    setProperty(HistorySize,1000);
+    setProperty(ScrollBarPosition,ScrollBarRight);
+    
+    setProperty(FlowControlEnabled,true);
+    setProperty(AllowProgramsToResizeWindow,true);
+    setProperty(BlinkingTextEnabled,true);
+    
+    setProperty(BlinkingCursorEnabled,false);
+    setProperty(CursorShape,BlockCursor);
+    setProperty(UseCustomCursorColor,false);
+    setProperty(CustomCursorColor,Qt::black);
+
+    // default taken from KDE 3
+    setProperty(WordCharacters,":@-./_~?&=%+#");
 
     // Fallback should not be shown in menus
     setHidden(true);
@@ -180,6 +201,16 @@ bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile* profil
     writeStandardElement( terminalFeatures , "FlowControl" , profile , Profile::FlowControlEnabled );
     writeStandardElement( terminalFeatures , "BlinkingCursor" , profile , Profile::BlinkingCursorEnabled );
 
+    KConfigGroup cursorOptions = config.group("Cursor Options");
+
+    writeStandardElement( cursorOptions , "UseCustomCursorColor"  , profile , Profile::UseCustomCursorColor );
+    writeStandardElement( cursorOptions , "CustomCursorColor" , profile , Profile::CustomCursorColor );
+    writeStandardElement( cursorOptions , "CursorShape" , profile , Profile::CursorShape );
+
+    KConfigGroup interactionOptions = config.group("Interaction Options");
+
+    writeStandardElement( interactionOptions , "WordCharacters" , profile , Profile::WordCharacters );
+
     return true;
 }
 
@@ -210,43 +241,60 @@ bool KDE4ProfileReader::readProfile(const QString& path , Profile* profile)
         profile->setProperty(Profile::Arguments,shellCommand.arguments());
     }
 
-    readStandardElement(general,"Icon",profile,Profile::Icon);
-    readStandardElement(general,"LocalTabTitleFormat",profile,Profile::LocalTabTitleFormat); 
-    readStandardElement(general,"RemoteTabTitleFormat",profile,Profile::RemoteTabTitleFormat);
+    readStandardElement<QString>(general,"Icon",profile,Profile::Icon);
+    readStandardElement<QString>(general,"LocalTabTitleFormat",profile,Profile::LocalTabTitleFormat); 
+    readStandardElement<QString>(general,"RemoteTabTitleFormat",profile,Profile::RemoteTabTitleFormat);
    
-    readStandardElement(general,"TabBarMode",profile,Profile::TabBarMode);
-    readStandardElement(general,"ShowMenuBar",profile,Profile::ShowMenuBar);
+    readStandardElement<int>(general,"TabBarMode",profile,Profile::TabBarMode);
+    readStandardElement<bool>(general,"ShowMenuBar",profile,Profile::ShowMenuBar);
 
     // keyboard
     KConfigGroup keyboard = config.group("Keyboard");
-    readStandardElement(keyboard,"KeyBindings",profile,Profile::KeyBindings);
+    readStandardElement<QString>(keyboard,"KeyBindings",profile,Profile::KeyBindings);
 
     // appearence
     KConfigGroup appearence = config.group("Appearence");
 
-    readStandardElement(appearence,"ColorScheme",profile,Profile::ColorScheme);
-    readStandardElement(appearence,"Font",profile,Profile::Font);
+    readStandardElement<QString>(appearence,"ColorScheme",profile,Profile::ColorScheme);
+    readStandardElement<QFont>(appearence,"Font",profile,Profile::Font);
 
+    // scrolling
     KConfigGroup scrolling = config.group("Scrolling");
 
-    readStandardElement(scrolling,"HistoryMode",profile,Profile::HistoryMode);
-    readStandardElement(scrolling,"HistorySize",profile,Profile::HistorySize);
-    readStandardElement(scrolling,"ScrollBarPosition",profile,Profile::ScrollBarPosition);
+    readStandardElement<int>(scrolling,"HistoryMode",profile,Profile::HistoryMode);
+    readStandardElement<int>(scrolling,"HistorySize",profile,Profile::HistorySize);
+    readStandardElement<int>(scrolling,"ScrollBarPosition",profile,Profile::ScrollBarPosition);
 
+    // terminal features
     KConfigGroup terminalFeatures = config.group("Terminal Features");
 
-    readStandardElement(terminalFeatures,"FlowControl",profile,Profile::FlowControlEnabled);
-    readStandardElement(terminalFeatures,"BlinkingCursor",profile,Profile::BlinkingCursorEnabled);
+    readStandardElement<bool>(terminalFeatures,"FlowControl",profile,Profile::FlowControlEnabled);
+    readStandardElement<bool>(terminalFeatures,"BlinkingCursor",profile,Profile::BlinkingCursorEnabled);
+
+    // cursor settings
+    KConfigGroup cursorOptions = config.group("Cursor Options");
+
+    readStandardElement<bool>(cursorOptions,"UseCustomCursorColor",profile,Profile::UseCustomCursorColor);
+    readStandardElement<QColor>(cursorOptions,"CustomCursorColor",profile,Profile::CustomCursorColor);
+    readStandardElement<int>(cursorOptions,"CursorShape",profile,Profile::CursorShape);
+
+    // interaction options
+    KConfigGroup interactionOptions = config.group("Interaction Options");
+    
+    readStandardElement<QString>(interactionOptions,"WordCharacters",profile,Profile::WordCharacters);
 
     return true;
 }
+template <typename T>
 void KDE4ProfileReader::readStandardElement(const KConfigGroup& group , 
                                             char* name , 
                                             Profile* info , 
                                             Profile::Property property)
 {
+    static T aDefault;
+
     if ( group.hasKey(name) )
-        info->setProperty(property,group.readEntry(name));
+        info->setProperty(property,group.readEntry(name,aDefault));
 }
                                                     
 QStringList KDE3ProfileReader::findProfiles()
