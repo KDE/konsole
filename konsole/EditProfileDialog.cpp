@@ -28,6 +28,7 @@
 #include <KIcon>
 #include <KIconDialog>
 #include <KDirSelectDialog>
+#include <KUrlCompletion>
 
 // Konsole
 #include "ColorScheme.h"
@@ -97,7 +98,13 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
 {
     _ui->profileNameEdit->setText( info->name() );
     _ui->commandEdit->setText( info->command() );
+
+    KUrlCompletion* exeCompletion = new KUrlCompletion(KUrlCompletion::ExeCompletion);
+    exeCompletion->setDir(QString::null);
+    _ui->commandEdit->setCompletionObject( exeCompletion );
     _ui->initialDirEdit->setText( info->defaultWorkingDirectory() );
+    _ui->initialDirEdit->setCompletionObject( new KUrlCompletion(KUrlCompletion::DirCompletion) );
+    _ui->initialDirEdit->setClearButtonShown(true);
     _ui->iconSelectButton->setIcon( KIcon(info->icon()) );
 
     _ui->tabTitleEdit->setText( info->property(Profile::LocalTabTitleFormat).value<QString>() );

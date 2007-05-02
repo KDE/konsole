@@ -38,9 +38,10 @@ const EditTabTitleFormatDialog::Element EditTabTitleFormatDialog::_remoteElement
 {
     { "%p" , i18n("Profile Name") },
     { "%u" , i18n("User Name") },
-    { "%h" , i18n("Remote Host") }
+    { "%h" , i18n("Remote Host (Short)") },
+    { "%H" , i18n("Remote Host (Long)") }
 };
-const int EditTabTitleFormatDialog::_remoteElementCount = 3;
+const int EditTabTitleFormatDialog::_remoteElementCount = 4;
 
 EditTabTitleFormatDialog::EditTabTitleFormatDialog(QWidget* parent)
     : KDialog(parent)
@@ -50,6 +51,8 @@ EditTabTitleFormatDialog::EditTabTitleFormatDialog(QWidget* parent)
 
     _ui = new Ui::EditTabTitleFormatDialog();
     _ui->setupUi(mainWidget());
+
+    _ui->tabTitleFormatEdit->setClearButtonShown(true);
 
     connect( _ui->elementComboBox , SIGNAL(activated(int)) , this , SLOT(insertElement(int)) );
 }
@@ -67,6 +70,7 @@ void EditTabTitleFormatDialog::insertElement(int index)
 void EditTabTitleFormatDialog::setTabTitleFormat(const QString& format)
 {
     _ui->tabTitleFormatEdit->setText(format);
+    _ui->tabTitleFormatEdit->selectAll();
 }
 QString EditTabTitleFormatDialog::tabTitleFormat() const
 {
