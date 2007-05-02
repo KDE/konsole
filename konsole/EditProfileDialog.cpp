@@ -107,11 +107,11 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
     // tab mode
     int tabMode = info->property(Profile::TabBarMode).value<int>();
 
-    RadioInt possibleTabModes[] = { RadioInt(_ui->alwaysHideTabBarButton,Profile::AlwaysHideTabBar),
-                                    RadioInt(_ui->alwaysShowTabBarButton,Profile::AlwaysShowTabBar),
-                                    RadioInt(_ui->autoShowTabBarButton,Profile::ShowTabBarAsNeeded),
-                                    RadioInt(0,0) };
-    setupRadio( possibleTabModes , tabMode );
+    RadioOption tabModes[] = { {_ui->alwaysHideTabBarButton,Profile::AlwaysHideTabBar,SLOT(alwaysHideTabBar())},
+                            {_ui->alwaysShowTabBarButton,Profile::AlwaysShowTabBar,SLOT(showTabBarAsNeeded())},
+                            {_ui->autoShowTabBarButton,Profile::ShowTabBarAsNeeded,SLOT(alwaysShowTabBar())},
+                            {0,0,0} };
+    setupRadio( tabModes , tabMode );
 
     _ui->showMenuBarButton->setChecked( info->property(Profile::ShowMenuBar).value<bool>() );
 
@@ -137,13 +137,6 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
 
     connect(_ui->showMenuBarButton , SIGNAL(toggled(bool)) , this , 
             SLOT(showMenuBar(bool)) );
-
-    connect(_ui->alwaysHideTabBarButton , SIGNAL(clicked()) , this , 
-            SLOT(alwaysHideTabBar()) );
-    connect(_ui->autoShowTabBarButton , SIGNAL(clicked()) , this , 
-            SLOT(showTabBarAsNeeded()) );
-    connect(_ui->alwaysShowTabBarButton , SIGNAL(clicked()) , this ,
-            SLOT(alwaysShowTabBar()) );
 }
 void EditProfileDialog::showMenuBar(bool show)
 {
@@ -259,15 +252,27 @@ void EditProfileDialog::setupAppearencePage(const Profile* info)
 void EditProfileDialog::setupKeyboardPage(const Profile* )
 {
 }
-void EditProfileDialog::setupRadio( RadioInt* possible , int actual )
+void EditProfileDialog::setupCombo( ComboOption* options , const Profile* profile )
 {
-    while (possible->first != 0)
+    while ( options->button != 0 )
     {
-        if ( possible->second == actual )
-            possible->first->setChecked(true);
+        options->button->setChecked( profile->property((Profile::Property)options->property).value<bool>() );
+        connect( options->button , SIGNAL(toggled(bool)) , this , options->slot );
+
+        ++options;
+    }
+}
+void EditProfileDialog::setupRadio( RadioOption* possible , int actual )
+{
+    while (possible->button != 0)
+    {
+        if ( possible->property == actual )
+            possible->button->setChecked(true);
         else
-            possible->first->setChecked(false);
-    
+            possible->button->setChecked(false);
+   
+        connect( possible->button , SIGNAL(clicked()) , this , possible->slot );
+
         ++possible;
     }
 }
@@ -277,42 +282,29 @@ void EditProfileDialog::setupScrollingPage(const Profile* profile)
     // setup scrollbar radio
     int scrollBarPosition = profile->property(Profile::ScrollBarPosition).value<int>();
    
-    RadioInt possibleScrollBarPositions[] = { RadioInt(_ui->scrollBarHiddenButton,Profile::ScrollBarHidden),
-                                              RadioInt(_ui->scrollBarLeftButton,Profile::ScrollBarLeft),
-                                              RadioInt(_ui->scrollBarRightButton,Profile::ScrollBarRight),
-                                              RadioInt(0,0) }; 
+    RadioOption positions[] = { {_ui->scrollBarHiddenButton,Profile::ScrollBarHidden,SLOT(hideScrollBar())},
+                                {_ui->scrollBarLeftButton,Profile::ScrollBarLeft,SLOT(showScrollBarLeft())},
+                                {_ui->scrollBarRightButton,Profile::ScrollBarRight,SLOT(showScrollBarRight())},
+                                {0,0,0} 
+                              }; 
 
-    setupRadio( possibleScrollBarPositions , scrollBarPosition );
+    setupRadio( positions , scrollBarPosition );
    
     // setup scrollback type radio
     int scrollBackType = profile->property(Profile::HistoryMode).value<int>();
     
-    RadioInt possibleScrollBackTypes[] = { RadioInt(_ui->disableScrollbackButton,Profile::DisableHistory),
-                                           RadioInt(_ui->fixedScrollbackButton,Profile::FixedSizeHistory),
-                                           RadioInt(_ui->unlimitedScrollbackButton,Profile::UnlimitedHistory),
-                                           RadioInt(0,0) };
-    setupRadio( possibleScrollBackTypes , scrollBackType ); 
+    RadioOption types[] = { {_ui->disableScrollbackButton,Profile::DisableHistory,SLOT(noScrollBack())},
+                            {_ui->fixedScrollbackButton,Profile::FixedSizeHistory,SLOT(fixedScrollBack())},
+                            {_ui->unlimitedScrollbackButton,Profile::UnlimitedHistory,SLOT(unlimitedScrollBack())},
+                            {0,0,0} };
+    setupRadio( types , scrollBackType ); 
     
     // setup scrollback line count spinner
     _ui->scrollBackLinesSpinner->setValue( profile->property(Profile::HistorySize).value<int>() );
 
     // signals and slots
-    connect( _ui->scrollBarHiddenButton , SIGNAL(clicked()) , this ,
-            SLOT(hideScrollBar()) );
-    connect( _ui->scrollBarLeftButton , SIGNAL(clicked()) , this ,
-            SLOT(showScrollBarLeft()) );
-    connect( _ui->scrollBarRightButton , SIGNAL(clicked()) , this , 
-            SLOT(showScrollBarRight()) );
-
     connect( _ui->scrollBackLinesSpinner , SIGNAL(valueChanged(int)) , this , 
             SLOT(scrollBackLinesChanged(int)) );
-
-    connect( _ui->disableScrollbackButton , SIGNAL(clicked()) , this ,
-            SLOT(noScrollBack()) );
-    connect(_ui->fixedScrollbackButton , SIGNAL(clicked()) , this ,
-            SLOT(fixedScrollBack()) );
-    connect(_ui->unlimitedScrollbackButton , SIGNAL(clicked()) , this ,
-            SLOT(unlimitedScrollBack()) );
 }
 
 void EditProfileDialog::scrollBackLinesChanged(int lineCount)
@@ -345,22 +337,17 @@ void EditProfileDialog::showScrollBarRight()
 }
 void EditProfileDialog::setupAdvancedPage(const Profile* profile)
 {
-    _ui->enableBlinkingTextButton->setChecked( profile->property(Profile::BlinkingTextEnabled).value<bool>() );
-    _ui->enableFlowControlButton->setChecked( profile->property(Profile::FlowControlEnabled).value<bool>() );
-    _ui->enableResizeWindowButton->setChecked( profile->property(Profile::AllowProgramsToResizeWindow)
-                                                .value<bool>() );
-    _ui->enableBlinkingCursorButton->setChecked( profile->property(Profile::BlinkingCursorEnabled)
-                                                    .value<bool>() );
-
-    // signals and slots
-    connect( _ui->enableBlinkingTextButton , SIGNAL(toggled(bool)) , this ,
-            SLOT(toggleBlinkingText(bool)) );
-    connect( _ui->enableFlowControlButton , SIGNAL(toggled(bool)) , this , 
-            SLOT(toggleFlowControl(bool)) );
-    connect( _ui->enableResizeWindowButton , SIGNAL(toggled(bool)) , this ,
-            SLOT(toggleResizeWindow(bool)) );
-    connect( _ui->enableBlinkingCursorButton , SIGNAL(toggled(bool)) , this ,
-            SLOT(toggleBlinkingCursor(bool)) );
+    ComboOption  options[] = { { _ui->enableBlinkingTextButton , Profile::BlinkingTextEnabled , 
+                                 SLOT(toggleBlinkingText(bool)) },
+                               { _ui->enableFlowControlButton , Profile::FlowControlEnabled ,
+                                 SLOT(toggleFlowControl(bool)) },
+                               { _ui->enableResizeWindowButton , Profile::AllowProgramsToResizeWindow ,
+                                 SLOT(toggleResizeWindow(bool)) },
+                               { _ui->enableBlinkingCursorButton , Profile::BlinkingCursorEnabled ,
+                                 SLOT(toggleBlinkingCursor(bool)) },
+                               { 0 , 0 , 0 }
+                             };
+    setupCombo( options , profile );
 }
 void EditProfileDialog::toggleBlinkingCursor(bool enable)
 {

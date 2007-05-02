@@ -118,8 +118,20 @@ private:
     void setupScrollingPage(const Profile* info);
     void setupAdvancedPage(const Profile* info);
 
-    typedef QPair<QAbstractButton*,int> RadioInt;
-    void setupRadio(RadioInt* possible,int actual);
+    struct RadioOption
+    {
+       QAbstractButton* button;
+       int property;
+       char* slot; 
+    };
+    void setupRadio(RadioOption* possible,int actual);
+    struct ComboOption
+    {
+       QAbstractButton* button;
+       int property;
+       char* slot;
+    };
+    void setupCombo(ComboOption* options , const Profile* profile);
 
     Ui::EditProfileDialog* _ui;
     Profile* _tempProfile;
