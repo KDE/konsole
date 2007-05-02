@@ -82,7 +82,8 @@ public:
         SelectWordCharacters,       // QString   
         BlinkingTextEnabled,        // bool
         FlowControlEnabled,         // bool
-        AllowProgramsToResizeWindow // bool
+        AllowProgramsToResizeWindow,// bool
+        BlinkingCursorEnabled       // bool 
         
     };
 

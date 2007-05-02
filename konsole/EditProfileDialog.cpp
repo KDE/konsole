@@ -349,6 +349,9 @@ void EditProfileDialog::setupAdvancedPage(const Profile* profile)
     _ui->enableFlowControlButton->setChecked( profile->property(Profile::FlowControlEnabled).value<bool>() );
     _ui->enableResizeWindowButton->setChecked( profile->property(Profile::AllowProgramsToResizeWindow)
                                                 .value<bool>() );
+    _ui->enableBlinkingCursorButton->setChecked( profile->property(Profile::BlinkingCursorEnabled)
+                                                    .value<bool>() );
+
     // signals and slots
     connect( _ui->enableBlinkingTextButton , SIGNAL(toggled(bool)) , this ,
             SLOT(toggleBlinkingText(bool)) );
@@ -356,6 +359,12 @@ void EditProfileDialog::setupAdvancedPage(const Profile* profile)
             SLOT(toggleFlowControl(bool)) );
     connect( _ui->enableResizeWindowButton , SIGNAL(toggled(bool)) , this ,
             SLOT(toggleResizeWindow(bool)) );
+    connect( _ui->enableBlinkingCursorButton , SIGNAL(toggled(bool)) , this ,
+            SLOT(toggleBlinkingCursor(bool)) );
+}
+void EditProfileDialog::toggleBlinkingCursor(bool enable)
+{
+    _tempProfile->setProperty(Profile::BlinkingCursorEnabled,enable);
 }
 void EditProfileDialog::toggleBlinkingText(bool enable)
 {

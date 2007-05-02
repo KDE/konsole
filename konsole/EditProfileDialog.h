@@ -108,6 +108,7 @@ private slots:
     void toggleBlinkingText(bool);
     void toggleFlowControl(bool);
     void toggleResizeWindow(bool);
+    void toggleBlinkingCursor(bool);
 
 private:
     // initialize various pages of the dialog

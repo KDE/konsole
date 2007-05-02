@@ -580,6 +580,13 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="enableBlinkingCursorButton" >
+            <property name="text" >
+             <string>Blinking cursor</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>

@@ -175,9 +175,10 @@ bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile* profil
     writeStandardElement( scrolling , "HistorySize" , profile , Profile::HistorySize );
     writeStandardElement( scrolling , "ScrollBarPosition" , profile , Profile::ScrollBarPosition ); 
 
-    KConfigGroup terminalFeatures = config.group("TerminalFeatures");
+    KConfigGroup terminalFeatures = config.group("Terminal Features");
 
     writeStandardElement( terminalFeatures , "FlowControl" , profile , Profile::FlowControlEnabled );
+    writeStandardElement( terminalFeatures , "BlinkingCursor" , profile , Profile::BlinkingCursorEnabled );
 
     return true;
 }
@@ -235,6 +236,7 @@ bool KDE4ProfileReader::readProfile(const QString& path , Profile* profile)
     KConfigGroup terminalFeatures = config.group("Terminal Features");
 
     readStandardElement(terminalFeatures,"FlowControl",profile,Profile::FlowControlEnabled);
+    readStandardElement(terminalFeatures,"BlinkingCursor",profile,Profile::BlinkingCursorEnabled);
 
     return true;
 }
@@ -271,13 +273,9 @@ bool KDE3ProfileReader::readProfile(const QString& path , Profile* profile)
     {
         const QString& fullCommand = config->readEntry("Exec");
         ShellCommand shellCommand(fullCommand);
-        qDebug() << "full command = " << fullCommand;
     
         profile->setProperty(Profile::Command,shellCommand.command());
         profile->setProperty(Profile::Arguments,shellCommand.arguments());
-
-        qDebug() << "command = " << profile->command();
-        qDebug() << "argumetns = " << profile->arguments();
     }
     if ( config->hasKey("Schema") )
     {
