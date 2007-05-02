@@ -158,6 +158,9 @@ bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile* profil
     writeStandardElement( general , "LocalTabTitleFormat" , profile , Profile::LocalTabTitleFormat );
     writeStandardElement( general , "RemoteTabTitleFormat" , profile , Profile::RemoteTabTitleFormat );
 
+    writeStandardElement( general , "TabBarMode" , profile , Profile::TabBarMode );
+    writeStandardElement( general , "ShowMenuBar" , profile , Profile::ShowMenuBar );
+
     KConfigGroup keyboard = config.group("Keyboard");
     writeStandardElement( keyboard , "KeyBindings" , profile , Profile::KeyBindings );
 
@@ -190,6 +193,7 @@ bool KDE4ProfileReader::readProfile(const QString& path , Profile* profile)
 
     KConfig config(path,KConfig::NoGlobals);
 
+    // general
     KConfigGroup general = config.group("General");
 
     if ( general.hasKey("Name") )
@@ -209,9 +213,14 @@ bool KDE4ProfileReader::readProfile(const QString& path , Profile* profile)
     readStandardElement(general,"LocalTabTitleFormat",profile,Profile::LocalTabTitleFormat); 
     readStandardElement(general,"RemoteTabTitleFormat",profile,Profile::RemoteTabTitleFormat);
    
+    readStandardElement(general,"TabBarMode",profile,Profile::TabBarMode);
+    readStandardElement(general,"ShowMenuBar",profile,Profile::ShowMenuBar);
+
+    // keyboard
     KConfigGroup keyboard = config.group("Keyboard");
     readStandardElement(keyboard,"KeyBindings",profile,Profile::KeyBindings);
 
+    // appearence
     KConfigGroup appearence = config.group("Appearence");
 
     readStandardElement(appearence,"ColorScheme",profile,Profile::ColorScheme);

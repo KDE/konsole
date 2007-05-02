@@ -104,6 +104,17 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
     _ui->remoteTabTitleEdit->setText( 
             info->property(Profile::RemoteTabTitleFormat).value<QString>());
 
+    // tab mode
+    int tabMode = info->property(Profile::TabBarMode).value<int>();
+
+    RadioInt possibleTabModes[] = { RadioInt(_ui->alwaysHideTabBarButton,Profile::AlwaysHideTabBar),
+                                    RadioInt(_ui->alwaysShowTabBarButton,Profile::AlwaysShowTabBar),
+                                    RadioInt(_ui->autoShowTabBarButton,Profile::ShowTabBarAsNeeded),
+                                    RadioInt(0,0) };
+    setupRadio( possibleTabModes , tabMode );
+
+    _ui->showMenuBarButton->setChecked( info->property(Profile::ShowMenuBar).value<bool>() );
+
     // signals and slots
     connect( _ui->dirSelectButton , SIGNAL(clicked()) , this , SLOT(selectInitialDir()) );
     connect( _ui->iconSelectButton , SIGNAL(clicked()) , this , SLOT(selectIcon()) );
