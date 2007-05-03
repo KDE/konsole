@@ -71,6 +71,7 @@ Comment[tg]=Фармондиҳандаи намашаб
 Comment[tr]=Yeni Midnight Commander
 Comment[uk]=Новий Midnight Commander
 Comment[uz]=Янги Midnight Commander
+Comment[wa]=Novea Midnight Commander
 Comment[x-test]=xxNew Midnight Commanderxx
 Comment[zh_TW]=新增 Midnight Commander
 Exec=mc -c
