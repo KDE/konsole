@@ -23,6 +23,7 @@
 // Qt
 #include <QAbstractItemDelegate>
 #include <QPair>
+#include <QSet>
 
 // KDE
 #include <KDialog>
@@ -40,7 +41,7 @@ namespace Konsole
 class Profile;
 
 /**
- * A dialog which allows the user to edit a session type.
+ * A dialog which allows the user to edit a profile.
  *
  * TODO: More documentation
  */
@@ -92,6 +93,9 @@ private slots:
     // appearence page
     void setFontSize(int pointSize);
     void showFontDialog();
+    void newColorScheme();
+    void editColorScheme();
+    void removeColorScheme();
     void colorSchemeSelected();
 
     // scrolling page
@@ -124,6 +128,8 @@ private:
     void setupKeyboardPage(const Profile* info);
     void setupScrollingPage(const Profile* info);
     void setupAdvancedPage(const Profile* info);
+
+    void showColorSchemeEditor(bool newScheme);
 
     struct RadioOption
     {
@@ -159,8 +165,11 @@ public:
     virtual QSize sizeHint( const QStyleOptionViewItem& option,
                        const QModelIndex& index) const;
 
+   // virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, 
+   //                               const QModelIndex& index) const;
    // virtual bool editorEvent(QEvent* event,QAbstractItemModel* model,
    //                          const QStyleOptionViewItem& option, const QModelIndex& index);
+
 };
 
 /**

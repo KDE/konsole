@@ -27,6 +27,7 @@
 #include <QList>
 #include <QMetaType>
 #include <QIODevice>
+#include <QSet>
 
 // Konsole
 #include "TECommon.h"
@@ -51,6 +52,7 @@ public:
      * for Konsole.
      */
     ColorScheme();
+    ColorScheme(const ColorScheme& other);
     ~ColorScheme();
 
     /** Sets the descriptive name of the color scheme. */
@@ -113,6 +115,7 @@ public:
     //void setCursorShape(int shape);
     //int cursorShape() const;
 
+    static QString colorNameForIndex(int index);
 private:
     // reads a single colour entry from a KConfig source
     ColorEntry readColorEntry(KConfig& config , const QString& colorName);
@@ -125,7 +128,6 @@ private:
     ColorEntry* _table; // pointer to custom color table or 0 if the default
                         // color scheme is being used
 
-    static QString colorNameForIndex(int index);
     static const char* colorNames[TABLE_COLORS];
     static const ColorEntry defaultTable[]; // table of default color entries
 };
@@ -181,6 +183,9 @@ public:
      * requested via a call to findColorScheme()
      */
     ColorSchemeManager();
+    /**
+     * Destroys the ColorSchemeManager and saves any modified color schemes to disk.
+     */
     ~ColorSchemeManager();
 
     /**
@@ -197,6 +202,14 @@ public:
      * requested, the configuration information is loaded from disk.
      */
     const ColorScheme* findColorScheme(const QString& name);
+
+    /**
+     * Adds a new color scheme to the manager.  If @p scheme has the same name as
+     * an existing color scheme, it replaces the existing scheme.
+     *
+     * TODO - Ensure the old color scheme gets deleted
+     */
+    void addColorScheme(ColorScheme* scheme);
 
     /** 
      * Returns a list of the all the available color schemes. 
@@ -226,6 +239,7 @@ private:
     void loadAllColorSchemes();
 
     QHash<QString,ColorScheme*> _colorSchemes;
+    QSet<ColorScheme*> _modifiedSchemes;
 
     bool _haveLoadedAll;
 

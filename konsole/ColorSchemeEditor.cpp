@@ -1,0 +1,182 @@
+/*
+    Copyright (C) 2007 by Robert Knight <robertknight@gmail.com>
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+    02110-1301  USA.
+*/
+
+// Qt
+#include <QBrush>
+#include <QFontMetrics>
+#include <QHeaderView>
+#include <QItemDelegate>
+#include <QItemEditorCreatorBase>
+#include <QItemEditorFactory>
+
+// KDE
+#include <KColorDialog>
+
+// Konsole
+#include "ColorSchemeEditor.h"
+#include "ui_ColorSchemeEditor.h"
+#include "TECommon.h"
+
+using namespace Konsole;
+
+#if 0
+class ColorEditorCreator : public QItemEditorCreatorBase
+{
+    virtual QWidget* createWidget(QWidget* parent) const
+    {
+        return new KColorButton(parent);
+    }
+
+    virtual QByteArray valuePropertyName() const
+    {
+        return QByteArray("color");
+    }
+};
+#endif
+
+ColorSchemeEditor::ColorSchemeEditor(QWidget* parent)
+    : QWidget(parent)
+    , _colors(0)
+{
+    _ui = new Ui::ColorSchemeEditor();
+    _ui->setupUi(this);
+
+    // description edit
+    connect( _ui->descriptionEdit , SIGNAL(textChanged(const QString&)) , this , 
+            SLOT(setDescription(const QString&)) );
+
+    // transparency slider
+    QFontMetrics metrics(font());
+    _ui->transparencyPercentLabel->setMinimumWidth( metrics.width("100%") );
+
+    connect( _ui->transparencySlider , SIGNAL(valueChanged(int)) , this , SLOT(setTransparencyPercentLabel(int)) );
+
+    // color table
+    _ui->colorTable->setColumnCount(2);
+    _ui->colorTable->setRowCount(TABLE_COLORS);
+
+    QStringList labels;
+    labels << i18n("Name") << i18n("Color");
+    _ui->colorTable->setHorizontalHeaderLabels(labels);
+
+    _ui->colorTable->horizontalHeader()->setStretchLastSection(true);
+
+    QTableWidgetItem* item = new QTableWidgetItem("Test");
+    _ui->colorTable->setItem(0,0,item);
+
+    _ui->colorTable->verticalHeader()->hide();
+
+    connect( _ui->colorTable , SIGNAL(itemClicked(QTableWidgetItem*)) , this , 
+            SLOT(editColorItem(QTableWidgetItem*)) );
+
+#if 0   
+    //QItemDelegate* delegate = qobject_cast<QItemDelegate*>(_ui->colorTable->itemDelegateForColumn(1));
+
+    QItemDelegate* delegate = new QItemDelegate(this);
+    _ui->colorTable->setItemDelegateForColumn(1,delegate);
+
+    delegate->setItemEditorFactory( new QItemEditorFactory );
+
+    Q_ASSERT(delegate);
+    Q_ASSERT(delegate->itemEditorFactory());
+
+    delegate->itemEditorFactory()->registerEditor( QVariant::Color , new ColorEditorCreator );
+#endif
+
+}
+ColorSchemeEditor::~ColorSchemeEditor()
+{
+    delete _colors;
+    delete _ui;
+}
+void ColorSchemeEditor::editColorItem( QTableWidgetItem* item )
+{
+    // ignore if this is not a color column
+    if ( item->column() != 1 ) 
+        return;
+
+    KColorDialog* dialog = new KColorDialog(this);
+    dialog->setColor( item->background().color() );
+
+    dialog->exec();
+
+    item->setBackground( dialog->color() );
+
+    ColorEntry entry(_colors->colorTable()[item->row()]);
+    entry.color = dialog->color();
+    _colors->setColorTableEntry(item->row(),entry); 
+}
+void ColorSchemeEditor::setDescription(const QString& text)
+{
+    if ( _colors )
+        _colors->setDescription(text);
+
+    if ( _ui->descriptionEdit->text() != text )
+        _ui->descriptionEdit->setText(text);
+}
+void ColorSchemeEditor::setTransparencyPercentLabel(int percent)
+{
+    _ui->transparencyPercentLabel->setText( QString("%1\%").arg(percent) );
+    
+    qreal opacity = ( 100.0 - percent ) / 100.0;
+    _colors->setOpacity(opacity);
+
+    qDebug() << "set opacity to:" << opacity;
+}
+void ColorSchemeEditor::setup(const ColorScheme* scheme)
+{
+    if ( _colors )
+        delete _colors;
+
+    _colors = new ColorScheme(*scheme);
+
+    // setup description edit
+    _ui->descriptionEdit->setText(_colors->description());
+
+    // setup color table
+    setupColorTable(_colors);
+
+    // setup transparency slider
+    qDebug() << "read opacity: " << _colors->opacity();
+    const int transparencyPercent = (int) ( (1-_colors->opacity())*100 );
+    
+    _ui->transparencySlider->setValue(transparencyPercent);
+    setTransparencyPercentLabel(transparencyPercent);
+}
+void ColorSchemeEditor::setupColorTable(const ColorScheme* colors)
+{
+    const ColorEntry* table = colors->colorTable();
+
+    for ( int row = 0 ; row < TABLE_COLORS ; row++ )
+    {
+        QTableWidgetItem* nameItem = new QTableWidgetItem( colors->colorNameForIndex(row) );
+        QTableWidgetItem* colorItem = new QTableWidgetItem();
+        colorItem->setBackground( table[row].color );
+        colorItem->setFlags( colorItem->flags() & ~Qt::ItemIsEditable & ~Qt::ItemIsSelectable );
+
+        _ui->colorTable->setItem(row,0,nameItem);
+        _ui->colorTable->setItem(row,1,colorItem);
+    }
+}
+ColorScheme* ColorSchemeEditor::colorScheme() const
+{
+    return _colors;
+}
+
+#include "ColorSchemeEditor.moc"

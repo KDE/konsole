@@ -57,6 +57,7 @@ set(konsole_KDEINIT_SRCS
         ${sessionadaptors_SRCS}
         BlockArray.cpp
         ColorScheme.cpp
+        ColorSchemeEditor.cpp
         EditProfileDialog.cpp
         EditTabTitleFormatDialog.cpp
         Filter.cpp
@@ -96,6 +97,7 @@ set(konsole_KDEINIT_SRCS
 
 
 kde4_add_ui_files(konsole_KDEINIT_SRCS
+                  ColorSchemeEditor.ui
                   EditProfileDialog.ui
                   EditTabTitleFormatDialog.ui
                   ManageProfilesDialog.ui
@@ -129,6 +131,7 @@ set(konsolepart_PART_SRCS
    BlockArray.cpp
    BookmarkHandler.cpp 
    ColorScheme.cpp
+   ColorSchemeEditor.cpp
    EditProfileDialog.cpp
    EditTabTitleFormatDialog.cpp
    Emulation.cpp 

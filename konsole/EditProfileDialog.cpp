@@ -32,6 +32,7 @@
 
 // Konsole
 #include "ColorScheme.h"
+#include "ColorSchemeEditor.h"
 #include "ui_EditProfileDialog.h"
 #include "EditProfileDialog.h"
 #include "EditTabTitleFormatDialog.h"
@@ -239,7 +240,8 @@ void EditProfileDialog::setupAppearencePage(const Profile* info)
         ColorScheme* colors = schemeIter.next();
         QStandardItem* item = new QStandardItem(colors->description());
         item->setData( QVariant::fromValue(colors) ,  Qt::UserRole + 1);
-
+        //item->setFlags( item->flags() | Qt::ItemIsUserCheckable );
+        //item->setCheckState( Qt::Unchecked );
         model->appendRow(item);
     }
 
@@ -250,6 +252,12 @@ void EditProfileDialog::setupAppearencePage(const Profile* info)
             SLOT(colorSchemeSelected()) );
     connect( _ui->selectColorSchemeButton , SIGNAL(clicked()) , this , 
             SLOT(colorSchemeSelected()) );
+    connect( _ui->editColorSchemeButton , SIGNAL(clicked()) , this , 
+            SLOT(editColorScheme()) );
+    connect( _ui->removeColorSchemeButton , SIGNAL(clicked()) , this ,
+            SLOT(removeColorScheme()) );
+    connect( _ui->newColorSchemeButton , SIGNAL(clicked()) , this , 
+            SLOT(newColorScheme()) );
 
     // setup font preview
     const QFont& font = info->font();
@@ -260,6 +268,61 @@ void EditProfileDialog::setupAppearencePage(const Profile* info)
              SLOT(setFontSize(int)) );
     connect( _ui->editFontButton , SIGNAL(clicked()) , this ,
              SLOT(showFontDialog()) );
+}
+void EditProfileDialog::removeColorScheme()
+{
+    //ColorSchemeManager::instance()->deleteColorScheme(colors);
+}
+void EditProfileDialog::showColorSchemeEditor(bool newScheme)
+{    
+    QModelIndexList selected = _ui->colorSchemeList->selectionModel()->selectedIndexes();
+
+    if ( !selected.isEmpty() )
+    {
+        QAbstractItemModel* model = _ui->colorSchemeList->model();
+        QModelIndex index = selected.first();
+        ColorScheme* colors = model->data(index,Qt::UserRole+1).value<ColorScheme*>();
+
+        KDialog* dialog = new KDialog(this);
+
+        if ( newScheme )
+            dialog->setCaption(i18n("New Color Scheme"));
+        else
+            dialog->setCaption(i18n("Edit Color Scheme"));
+
+        ColorSchemeEditor* editor = new ColorSchemeEditor;
+        dialog->setMainWidget(editor);
+        editor->setup(colors);
+
+        if ( newScheme )
+            editor->setDescription(i18n("New Color Scheme"));
+        
+        if ( dialog->exec() == QDialog::Accepted )
+        {
+            ColorScheme* newScheme = new ColorScheme(*editor->colorScheme());
+            ColorSchemeManager::instance()->addColorScheme( newScheme );
+            model->setData(index, QVariant::fromValue(newScheme) , Qt::UserRole+1);
+            model->setData(index, newScheme->description() , Qt::DisplayRole);
+
+            const QString& currentScheme = SessionManager::instance()->profile(_profileKey)->colorScheme();
+
+            // the next couple of lines may seem slightly odd,
+            // but they force any open views based on the current profile
+            // to update their color schemes
+            if ( newScheme->name() == currentScheme )
+            {
+                _tempProfile->setProperty(Profile::ColorScheme,newScheme->name());
+            }
+        }
+    }
+}
+void EditProfileDialog::newColorScheme()
+{
+    showColorSchemeEditor(true);    
+}
+void EditProfileDialog::editColorScheme()
+{
+    showColorSchemeEditor(false);
 }
 void EditProfileDialog::colorSchemeSelected()
 {
@@ -470,6 +533,35 @@ ColorSchemeViewDelegate::ColorSchemeViewDelegate(QObject* parent)
 {
 
 }
+
+#if 0
+QWidget* ColorSchemeViewDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, 
+                                  const QModelIndex& index) const
+{
+    QWidget* holder = new QWidget(parent);
+    QVBoxLayout* layout = new QVBoxLayout;
+
+    QWidget* selectButton = new QPushButton(i18n("Use Color Scheme"));
+    QWidget* editButton = new QPushButton(i18n("Edit..."));
+
+    layout->setMargin(0);
+
+    layout->addWidget(selectButton);
+    layout->addWidget(editButton);
+
+    holder->setLayout(layout);
+
+    int width = holder->sizeHint().width();
+
+    int left = option.rect.right() - width - 10;
+    int top = option.rect.top();
+
+    holder->move( left , top );
+
+    return holder;
+}
+#endif
+
 void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
                        const QModelIndex& index) const
 {
@@ -477,14 +569,10 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
 
     Q_ASSERT(scheme);
 
-    QLinearGradient gradient(option.rect.topLeft(),option.rect.bottomRight());
-    gradient.setColorAt(0,scheme->foregroundColor());
-    gradient.setColorAt(1,scheme->backgroundColor());
     QBrush brush(scheme->backgroundColor());
-
     painter->fillRect( option.rect , brush );
     
-    const ColorEntry* entries = scheme->colorTable();
+   /* const ColorEntry* entries = scheme->colorTable();
     const qreal colorRectWidth = qMin(option.rect.width(),256) / TABLE_COLORS;
     const qreal colorRectHeight = colorRectWidth;
     qreal x = 0;
@@ -499,7 +587,7 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
         painter->fillRect( colorRect , QColor(entries[i].color));
 
         x += colorRectWidth;
-    }
+    }*/
 
     QPen pen(scheme->foregroundColor());
     painter->setPen(pen);

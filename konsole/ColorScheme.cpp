@@ -91,8 +91,21 @@ ColorSchemeManager* ColorSchemeManager::_instance = 0;
 ColorScheme::ColorScheme()
 {
     _table = 0;
+    _opacity = 1.0;
 }
+ColorScheme::ColorScheme(const ColorScheme& other)
+      : _opacity(other._opacity)
+       ,_table(0)
+{
+    setName(other.name());
+    setDescription(other.description());
 
+    if ( other._table != 0 )
+    {
+        for ( int i = 0 ; i < TABLE_COLORS ; i++ )
+            setColorTableEntry(i,other._table[i]);
+    }
+}
 ColorScheme::~ColorScheme()
 {
     delete[] _table;
@@ -349,6 +362,16 @@ bool ColorSchemeManager::loadKDE3ColorScheme(const QString& filePath)
 
     return true;
 }
+void ColorSchemeManager::addColorScheme(ColorScheme* scheme) 
+{
+    _colorSchemes.insert(scheme->name(),scheme);
+
+    // save changes to disk
+    QString path = KGlobal::dirs()->saveLocation("data","konsole/") + scheme->name() + ".colorscheme";
+    KConfig config(path , KConfig::NoGlobals);
+
+    scheme->write(config);
+}
 bool ColorSchemeManager::loadColorScheme(const QString& filePath)
 {
     QFileInfo info(filePath);
@@ -362,13 +385,13 @@ bool ColorSchemeManager::loadColorScheme(const QString& filePath)
     Q_ASSERT( !scheme->name().isEmpty() );
 
     qDebug() << "found KDE 4 native color scheme - " << scheme->name();
-
+    qDebug() << "opacity - " << scheme->opacity();
 
     if ( !_colorSchemes.contains(info.baseName()) )
     {
         qDebug() << "added color scheme - " << info.baseName();
 
-        _colorSchemes.insert(scheme->name(),scheme);
+        addColorScheme(scheme);
     }
     else
     {
