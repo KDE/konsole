@@ -64,6 +64,7 @@ set(konsole_KDEINIT_SRCS
         HistorySizeDialog.cpp
         IncrementalSearchBar.cpp
         KeyboardTranslator.cpp
+        KeyBindingEditor.cpp
         KeyTrans.cpp
         Application.cpp
         BookmarkHandler.cpp
@@ -100,6 +101,7 @@ kde4_add_ui_files(konsole_KDEINIT_SRCS
                   ColorSchemeEditor.ui
                   EditProfileDialog.ui
                   EditTabTitleFormatDialog.ui
+                  KeyBindingEditor.ui
                   ManageProfilesDialog.ui
                   RemoteConnectionDialog.ui
                  )
@@ -138,7 +140,8 @@ set(konsolepart_PART_SRCS
    Filter.cpp 
    History.cpp
    HistorySizeDialog.cpp
-   IncrementalSearchBar.cpp 
+   IncrementalSearchBar.cpp
+   KeyBindingEditor.cpp 
    KeyTrans.cpp 
    MainWindow.cpp
    Part.cpp

@@ -39,13 +39,16 @@ using namespace Konsole;
 KeyboardTranslatorManager* KeyboardTranslatorManager::_instance = 0;
 
 KeyboardTranslatorManager::KeyboardTranslatorManager()
+    : _haveLoadedAll(false)
 {
 }
 
+QString KeyboardTranslatorManager::findTranslatorPath(const QString& name)
+{
+    return KGlobal::dirs()->findResource("data","konsole/"+name+".keytab");
+}
 void KeyboardTranslatorManager::findTranslators()
 {
-    Q_ASSERT( _translators.count() == 0 );
-
     QStringList list = KGlobal::dirs()->findAllResources("data","konsole/*.keytab");
 
     qDebug() << __FUNCTION__ << ": found " << list.count() << " keyboard translators.";
@@ -59,46 +62,32 @@ void KeyboardTranslatorManager::findTranslators()
         QString translatorPath = listIter.next();
 
         QString name = QFileInfo(translatorPath).baseName();
-        
-        _paths.insert(name,translatorPath);
-        _translators.insert(name,0);
+       
+        if ( !_translators.contains(name) ) 
+            _translators.insert(name,0);
     }
+
+    _haveLoadedAll = true;
 }
 
 const KeyboardTranslator* KeyboardTranslatorManager::findTranslator(const QString& name)
 {
-    if ( _translators.contains(name) )
-    {
-        KeyboardTranslator* translator = _translators[name];
+    if ( _translators.contains(name) && _translators[name] != 0 )
+        return _translators[name];
 
-        // if the translator with this name has not yet been loaded, then load
-        // it first.
-        if ( translator == 0 )
-        {
-            translator = loadTranslator(name);
+    KeyboardTranslator* translator = loadTranslator(name);
+    _translators[name] = translator;
 
-            if ( translator )
-                _translators[name] = translator;
-            else
-                return 0; // an error occurred whilst loading the translator
-        }
-
-       return translator; 
-    }
-    else
-    {
-        return 0;
-    }
+    return translator;
 }
 
 KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(const QString& name)
 {
-    Q_ASSERT( _paths.contains(name) );
-    Q_ASSERT( _translators.contains(name) && _translators[name] == 0 );
-
     KeyboardTranslator* translator = new KeyboardTranslator(name);
 
-    QFile source(_paths[name]); // TODO get correct path here
+    const QString& path = findTranslatorPath(name);
+
+    QFile source(path); // TODO get correct path here
     source.open(QIODevice::ReadOnly);
 
     KeyboardTranslatorReader reader(&source);
@@ -140,8 +129,13 @@ KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(const QString& nam
 
 
 
-QList<QString> KeyboardTranslatorManager::availableTranslators() const
+QList<QString> KeyboardTranslatorManager::allTranslators() 
 {
+    if ( !_haveLoadedAll )
+    {
+        findTranslators();
+    }
+
     return _translators.keys();
 }
 
@@ -180,6 +174,43 @@ bool KeyboardTranslator::Entry::matches(int keyCode , Qt::KeyboardModifier modif
 KeyboardTranslator::KeyboardTranslator(const QString& name)
 : _name(name)
 {
+}
+KeyboardTranslator::KeyboardTranslator(const KeyboardTranslator& other)
+: _name(other._name)
+{
+    _description = other._description;
+
+    // TODO: Copy keyboard entries
+}
+void KeyboardTranslator::setDescription(const QString& description) 
+{
+    _description = description;
+}
+QString KeyboardTranslator::description() const
+{
+    return _description;
+}
+QString KeyboardTranslator::name() const
+{
+    return _name;
+}
+
+QList<const KeyboardTranslator::Entry*> KeyboardTranslator::entries() const
+{
+    QList<const Entry*> list;
+
+    QHashIterator<int,QVarLengthArray<Entry> > iter(_entries);
+    while ( iter.hasNext() )
+    {
+        iter.next();
+
+        const QVarLengthArray<Entry>& array = _entries[iter.key()];
+
+        for ( int i = 0 ; i < array.size() ; i++ )
+            list << &array[i];
+    }  
+   
+    return list; 
 }
 
 void KeyboardTranslator::addEntry(const Entry& entry)
@@ -221,7 +252,14 @@ KeyboardTranslator::Entry* KeyboardTranslator::findEntry(int keyCode, Qt::Keyboa
         return 0;
     }
 }
-
+void KeyboardTranslatorManager::addTranslator(KeyboardTranslator* translator)
+{
+    qWarning() << __FUNCTION__ << ": Not implemented";
+}
+void KeyboardTranslatorManager::deleteTranslator(const QString& name)
+{
+    qWarning() << __FUNCTION__ << ": Not implemented";
+}
 void KeyboardTranslatorManager::setInstance(KeyboardTranslatorManager* instance)
 {
     _instance = instance;

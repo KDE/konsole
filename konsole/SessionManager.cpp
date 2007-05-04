@@ -57,6 +57,8 @@ FallbackProfile::FallbackProfile()
     setProperty(TabBarMode,AlwaysShowTabBar);
     setProperty(ShowMenuBar,true);
 
+    setProperty(KeyBindings,"x11r5");
+
     setProperty(Font,QFont("Monospace"));
 
     setProperty(HistoryMode,FixedSizeHistory);

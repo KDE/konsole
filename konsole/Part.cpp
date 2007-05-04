@@ -65,6 +65,9 @@ Part::Part(QObject* parent)
         SessionManager::setInstance( new SessionManager() );
     if ( ColorSchemeManager::instance() == 0 )
         ColorSchemeManager::setInstance( new ColorSchemeManager() );
+    if ( KeyboardTranslatorManager::instance() == 0 )
+        KeyboardTranslatorManager::setInstance( new KeyboardTranslatorManager() );
+
     KeyTrans::loadAll();
 
     // create window and session for part

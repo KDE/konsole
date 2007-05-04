@@ -19,9 +19,13 @@
     02110-1301  USA.
 */
 
+#ifndef KEYBOARDTRANSLATOR_H
+#define KEYBOARDTRANSLATOR_H
+
 // Qt
 #include <QHash>
 #include <QList>
+#include <QMetaType>
 #include <QVarLengthArray>
 
 class QIODevice;
@@ -156,9 +160,17 @@ public:
 
     /** Constructs a new keyboard translator with the given @p name */
     KeyboardTranslator(const QString& name);
-    
+   
+    KeyboardTranslator(const KeyboardTranslator& other);
+
     /** Returns the name of this keyboard translator */
     QString name() const;
+
+    /** Returns the descriptive name of this keyboard translator */
+    QString description() const;
+
+    /** Sets the descriptive name of this keyboard translator */
+    void setDescription(const QString& description);
 
     /**
      * Looks for an entry in this keyboard translator which matches the given
@@ -179,11 +191,15 @@ public:
      */
     void addEntry(const Entry& entry);
 
+    /** Returns a list of all entries in the translator. */
+    QList<const Entry*> entries() const;
+
 private:
     QHash<int,QVarLengthArray<Entry> > _entries; // entries in this keyboard translation,
                                                  // entries are indexed according to
                                                  // their keycode
     const QString _name;
+    QString _description;
 };
 
 /** 
@@ -248,6 +264,20 @@ public:
      */
     KeyboardTranslatorManager();
 
+    /**
+     * Adds a new translator.  If a translator with the same name 
+     * already exists, it will be replaced by the new translator.
+     *
+     * TODO: More documentation.
+     */
+    void addTranslator(KeyboardTranslator* translator);
+
+    /**
+     * Deletes a translator.
+     * TODO: More documentation
+     */
+    void deleteTranslator(const QString& name);
+
     /** 
      * Returns the keyboard translator with the given name or 0 if no translator
      * with that name exists.
@@ -258,22 +288,29 @@ public:
     const KeyboardTranslator* findTranslator(const QString& name);
     /**
      * Returns a list of the names of available keyboard translators.
+     *
+     * The first time this is called, a search for available 
+     * translators is started.
      */
-    QList<QString> availableTranslators() const;
+    QList<QString> allTranslators();
 
     /** Sets the global KeyboardTranslatorManager instance. */
-    static void setInstance(KeyboardTranslatorManager* instance);
+   static void setInstance(KeyboardTranslatorManager* instance);
     /** Returns the global KeyboardTranslatorManager instance. */
-    KeyboardTranslatorManager* instance();
+   static KeyboardTranslatorManager* instance();
 
 private:
     void findTranslators(); // locate the available translators
     KeyboardTranslator* loadTranslator(const QString& name); // loads the translator 
                                                              // with the given name
     
+    QString findTranslatorPath(const QString& name);
+    
     QHash<QString,KeyboardTranslator*> _translators; // maps translator-name -> KeyboardTranslator
                                                      // instance
-    QHash<QString,QString> _paths; // maps translator-name -> .keytab file path
+
+
+    bool _haveLoadedAll;
 
     static KeyboardTranslatorManager* _instance;
 };
@@ -299,5 +336,9 @@ inline KeyboardTranslator::State KeyboardTranslator::Entry::state() const
     return _state;
 }
 
+};
 
-}
+Q_DECLARE_METATYPE(const Konsole::KeyboardTranslator*)
+
+#endif // KEYBOARDTRANSLATOR_H
+

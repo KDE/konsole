@@ -117,6 +117,12 @@ private slots:
     void showScrollBarLeft();
     void showScrollBarRight();
 
+    // keyboard page
+    void editKeyBinding();
+    void newKeyBinding();
+    void keyBindingSelected();
+    void removeKeyBinding();
+
     // advanced page
     void toggleBlinkingText(bool);
     void toggleFlowControl(bool);
@@ -138,6 +144,9 @@ private:
     void setupAdvancedPage(const Profile* info);
 
     void showColorSchemeEditor(bool newScheme);
+    void showKeyBindingEditor(bool newTranslator);
+
+    void changeCheckedItem( QAbstractItemModel* mode,  const QModelIndex& to );
 
     void preview(int property , QVariant value);
     void unpreview(int property);

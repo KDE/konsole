@@ -132,9 +132,11 @@ Application::~Application()
 {
     delete SessionManager::instance();
     delete ColorSchemeManager::instance();
+    delete KeyboardTranslatorManager::instance();
 
     SessionManager::setInstance(0);
     ColorSchemeManager::setInstance(0);
+    KeyboardTranslatorManager::setInstance(0);
 }
 
 void Application::detachView(Session* session)
