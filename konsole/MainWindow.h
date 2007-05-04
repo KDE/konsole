@@ -34,6 +34,7 @@ class ViewSplitter;
 class ViewManager;
 class ViewProperties;
 class SessionController;
+class Profile;
 class ProfileList;
 class BookmarkHandler;
 

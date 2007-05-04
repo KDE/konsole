@@ -49,9 +49,31 @@
 
 using namespace Konsole;
 
+ViewContainer::ViewContainer(QObject* parent)
+    : QObject(parent)
+    , _navigationDisplayMode(AlwaysShowNavigation)
+{
+}
 ViewContainer::~ViewContainer()
 {
     emit destroyed(this);
+}
+void ViewContainer::setNavigationDisplayMode(NavigationDisplayMode mode)
+{
+    _navigationDisplayMode = mode;
+
+    if ( mode == AlwaysShowNavigation )
+        qDebug() << "Always show nav";
+    else if ( mode == AlwaysHideNavigation )
+        qDebug() << "Always hide nav";
+    else if ( mode == ShowNavigationAsNeeded )
+        qDebug() << "Show nav as needed";
+
+    navigationDisplayModeChanged(mode);
+}
+ViewContainer::NavigationDisplayMode ViewContainer::navigationDisplayMode() const
+{
+    return _navigationDisplayMode;
 }
 void ViewContainer::addView(QWidget* view , ViewProperties* item)
 {
@@ -383,6 +405,28 @@ TabbedViewContainerV2::TabbedViewContainerV2(QObject* parent) : ViewContainer(pa
 
     _containerWidget->setLayout(layout);
 }
+void TabbedViewContainerV2::navigationDisplayModeChanged(NavigationDisplayMode mode)
+{
+    if ( mode == AlwaysShowNavigation && _tabBar->isHidden() )
+        _tabBar->setVisible(true);
+
+    if ( mode == AlwaysHideNavigation && !_tabBar->isHidden() )
+        _tabBar->setVisible(false);
+
+    if ( mode == ShowNavigationAsNeeded )
+        dynamicTabBarVisibility();
+}
+void TabbedViewContainerV2::dynamicTabBarVisibility()
+{
+    qDebug() << "tab bar count:" << _tabBar->count();
+    qDebug() << "tab var hidden:" << _tabBar->isHidden();
+
+    if ( _tabBar->count() > 1 && _tabBar->isHidden() )
+        _tabBar->show();
+
+    if ( _tabBar->count() < 2 && !_tabBar->isHidden() )
+        _tabBar->hide();
+}
 TabbedViewContainerV2::~TabbedViewContainerV2()
 {
     _containerWidget->deleteLater();
@@ -418,6 +462,9 @@ void TabbedViewContainerV2::addViewWidget( QWidget* view )
     connect( item , SIGNAL(titleChanged(ViewProperties*)) , this , SLOT(updateTitle(ViewProperties*))); 
     connect( item , SIGNAL(iconChanged(ViewProperties*) ) , this ,SLOT(updateIcon(ViewProperties*)));          
     _tabBar->addTab( item->icon() , item->title() );
+
+    if ( navigationDisplayMode() == ShowNavigationAsNeeded )
+        dynamicTabBarVisibility();
 }
 void TabbedViewContainerV2::removeViewWidget( QWidget* view )
 {
@@ -427,6 +474,9 @@ void TabbedViewContainerV2::removeViewWidget( QWidget* view )
 
     _stackWidget->removeWidget(view);
     _tabBar->removeTab(index);
+
+    if ( navigationDisplayMode() == ShowNavigationAsNeeded )
+        dynamicTabBarVisibility();
 }
 
 void TabbedViewContainerV2::updateTitle(ViewProperties* item)

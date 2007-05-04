@@ -76,6 +76,9 @@ MainWindow::MainWindow()
     connect( _viewManager , SIGNAL(viewPropertiesChanged(const QList<ViewProperties*>&)) ,
            bookmarkHandler() , SLOT(setViews(const QList<ViewProperties*>&)) ); 
 
+    connect( _viewManager , SIGNAL(setMenuBarVisible(bool)) , menuBar() ,
+            SLOT(setVisible(bool)) );
+
     // create main window widgets
     setupWidgets();
 

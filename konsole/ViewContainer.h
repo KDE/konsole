@@ -68,7 +68,8 @@ class ViewContainer : public QObject
 Q_OBJECT
     
 public:
-    ViewContainer(QObject* parent) : QObject(parent) {}
+    /** Constructs a new view container with the specified parent. */
+    ViewContainer(QObject* parent);
 
     /** 
      * Called when the ViewContainer is destroyed.  When reimplementing this in 
@@ -79,6 +80,22 @@ public:
 
     /** Returns the widget which contains the view widgets */
     virtual QWidget* containerWidget() const = 0;
+
+    /** 
+     * This enum describes the options for showing or hiding the
+     * container's navigation widget.
+     */
+    enum NavigationDisplayMode
+    {
+        AlwaysShowNavigation,
+        AlwaysHideNavigation,
+        ShowNavigationAsNeeded
+    };
+
+    /** TODO: Document me. */
+    void setNavigationDisplayMode(NavigationDisplayMode mode);
+    /** TODO: Document me. */
+    NavigationDisplayMode navigationDisplayMode() const;
 
     /** Adds a new view to the container widget */
     void addView(QWidget* view , ViewProperties* navigationItem);
@@ -145,7 +162,13 @@ protected:
      * from the container widget.
      */
     virtual void removeViewWidget(QWidget* view) = 0;
-    
+   
+    /** 
+     * Called when the navigation display mode changes.
+     * See setNavigationDisplayMode
+     */
+    virtual void navigationDisplayModeChanged(NavigationDisplayMode) {};
+
     /** Returns the widgets which are associated with a particular navigation item */
     QList<QWidget*> widgetsForItem( ViewProperties* item ) const;
 
@@ -153,6 +176,7 @@ private slots:
     void viewDestroyed(QObject* view);
 
 private:
+    NavigationDisplayMode _navigationDisplayMode;
     QList<QWidget*> _views;
     QHash<QWidget*,ViewProperties*> _navigation;
 };
@@ -235,6 +259,7 @@ public:
 protected:
     virtual void addViewWidget(QWidget* view);
     virtual void removeViewWidget(QWidget* view);
+    virtual void navigationDisplayModeChanged(NavigationDisplayMode mode);
 
 private slots:
     void updateTitle(ViewProperties* item);
@@ -242,6 +267,8 @@ private slots:
     void currentTabChanged(int index);
 
 private:
+    void dynamicTabBarVisibility();
+
     ViewContainerTabBar* _tabBar;
     QStackedWidget* _stackWidget;
     QWidget* _containerWidget;

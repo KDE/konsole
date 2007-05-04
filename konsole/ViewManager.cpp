@@ -511,6 +511,19 @@ void ViewManager::loadViewSettings(TerminalDisplay* view , Profile* info)
        colorScheme = ColorSchemeManager::instance()->defaultColorScheme(); 
     Q_ASSERT( colorScheme );
 
+    // menu bar visibility
+    emit setMenuBarVisible( info->property(Profile::ShowMenuBar).value<bool>() );
+
+    // tab bar visibility
+    ViewContainer* container = _viewSplitter->activeContainer();
+    int tabBarMode = info->property(Profile::TabBarMode).value<int>();
+    if ( tabBarMode == Profile::AlwaysHideTabBar )
+        container->setNavigationDisplayMode(ViewContainer::AlwaysHideNavigation);
+    else if ( tabBarMode == Profile::AlwaysShowTabBar )
+        container->setNavigationDisplayMode(ViewContainer::AlwaysShowNavigation);
+    else if ( tabBarMode == Profile::ShowTabBarAsNeeded )
+        container->setNavigationDisplayMode(ViewContainer::ShowNavigationAsNeeded);
+
     // load colour scheme
     view->setColorTable(colorScheme->colorTable());
     

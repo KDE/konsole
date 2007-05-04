@@ -117,8 +117,8 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
     int tabMode = info->property(Profile::TabBarMode).value<int>();
 
     RadioOption tabModes[] = { {_ui->alwaysHideTabBarButton,Profile::AlwaysHideTabBar,SLOT(alwaysHideTabBar())},
-                            {_ui->alwaysShowTabBarButton,Profile::AlwaysShowTabBar,SLOT(showTabBarAsNeeded())},
-                            {_ui->autoShowTabBarButton,Profile::ShowTabBarAsNeeded,SLOT(alwaysShowTabBar())},
+                            {_ui->alwaysShowTabBarButton,Profile::AlwaysShowTabBar,SLOT(alwaysShowTabBar())},
+                            {_ui->autoShowTabBarButton,Profile::ShowTabBarAsNeeded,SLOT(showTabBarAsNeeded())},
                             {0,0,0} };
     setupRadio( tabModes , tabMode );
 

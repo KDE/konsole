@@ -131,6 +131,9 @@ signals:
     // 'multipleViews' - true if the manager has multiple containers or false otherwise
     void splitViewToggle(bool multipleViews);
 
+    /** TODO: Document me. */
+    void setMenuBarVisible(bool);
+
 private slots:
     // called when the "Split View Left/Right" menu item is selected
     void splitLeftRight();
