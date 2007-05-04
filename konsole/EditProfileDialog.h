@@ -23,6 +23,7 @@
 // Qt
 #include <QAbstractItemDelegate>
 #include <QPair>
+#include <QHash>
 #include <QSet>
 
 // KDE
@@ -68,6 +69,10 @@ public:
 public slots:
     virtual void accept();
 
+protected:
+    virtual void hideEvent(QHideEvent* event);
+    virtual bool eventFilter(QObject* watched , QEvent* event);
+
 private slots:
     // saves changes to profile
     void save();
@@ -97,6 +102,8 @@ private slots:
     void editColorScheme();
     void removeColorScheme();
     void colorSchemeSelected();
+    void previewColorScheme(const QModelIndex& index);
+    //void previewFont(const QFont&);
 
     // scrolling page
     void noScrollBack();
@@ -131,6 +138,9 @@ private:
 
     void showColorSchemeEditor(bool newScheme);
 
+    void preview(int property , QVariant value);
+    void unpreview(int property);
+
     struct RadioOption
     {
        QAbstractButton* button;
@@ -149,6 +159,8 @@ private:
     Ui::EditProfileDialog* _ui;
     Profile* _tempProfile;
     QString _profileKey;
+
+    QHash<int,QVariant> _previewedProperties;
 };
 
 /**

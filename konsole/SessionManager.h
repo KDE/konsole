@@ -492,8 +492,10 @@ public:
      *
      * @param key The profile's key
      * @param propertyMap A map between profile properties and values describing the changes
+     * @param persistant If true, the changes are saved to the profile's configuration file
      */
-    void changeProfile(const QString& key , QHash<Profile::Property,QVariant> propertyMap);
+    void changeProfile(const QString& key , QHash<Profile::Property,QVariant> propertyMap, 
+            bool persistant = true);
 
     /**
      * Returns a Profile object describing the default type of session, which is used

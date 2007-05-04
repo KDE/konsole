@@ -554,7 +554,7 @@ void SessionManager::saveProfile(const QString& path , Profile* info)
 }
 
 void SessionManager::changeProfile(const QString& key , 
-                                   QHash<Profile::Property,QVariant> propertyMap)
+                                   QHash<Profile::Property,QVariant> propertyMap, bool persistant)
 {
     Profile* info = profile(key);
 
@@ -582,18 +582,21 @@ void SessionManager::changeProfile(const QString& key ,
     // notify the world about the change
     emit profileChanged(key);
 
-    // save the changes to disk
-    // the path may be empty here, in which case it is up
-    // to the profile writer to generate or request a path name
-    if ( info->isPropertySet(Profile::Path) )
+    if ( persistant )
     {
-        qDebug() << "Profile saved to existing path: " << info->path();
-        saveProfile(info->path(),info);
-    }
-    else
-    {
-        qDebug() << "Profile saved to new path.";
-        saveProfile(QString::null,info);
+        // save the changes to disk
+        // the path may be empty here, in which case it is up
+        // to the profile writer to generate or request a path name
+        if ( info->isPropertySet(Profile::Path) )
+        {
+            qDebug() << "Profile saved to existing path: " << info->path();
+            saveProfile(info->path(),info);
+        }
+        else
+        {
+            qDebug() << "Profile saved to new path.";
+            saveProfile(QString::null,info);
+        }
     }
 }
 void SessionManager::applyProfile(const QString& key , bool modifiedPropertiesOnly)

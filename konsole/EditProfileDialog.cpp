@@ -18,6 +18,7 @@
 */
 
 // Qt
+#include <QHideEvent>
 #include <QLinearGradient>
 #include <QPainter>
 #include <QStandardItemModel>
@@ -255,9 +256,14 @@ void EditProfileDialog::setupAppearencePage(const Profile* info)
 
     _ui->colorSchemeList->setModel(model);
     _ui->colorSchemeList->setItemDelegate(new ColorSchemeViewDelegate(this));
-   
+    _ui->colorSchemeList->setMouseTracking(true);
+    _ui->colorSchemeList->installEventFilter(this);
+
     connect( _ui->colorSchemeList , SIGNAL(doubleClicked(const QModelIndex&)) , this ,
             SLOT(colorSchemeSelected()) );
+    connect( _ui->colorSchemeList , SIGNAL(entered(const QModelIndex&)) , this , 
+            SLOT(previewColorScheme(const QModelIndex&)) );
+
     connect( _ui->selectColorSchemeButton , SIGNAL(clicked()) , this , 
             SLOT(colorSchemeSelected()) );
     connect( _ui->editColorSchemeButton , SIGNAL(clicked()) , this , 
@@ -276,6 +282,63 @@ void EditProfileDialog::setupAppearencePage(const Profile* info)
              SLOT(setFontSize(int)) );
     connect( _ui->editFontButton , SIGNAL(clicked()) , this ,
              SLOT(showFontDialog()) );
+}
+bool EditProfileDialog::eventFilter( QObject* watched , QEvent* event )
+{
+    if ( watched == _ui->colorSchemeList && event->type() == QEvent::Leave )
+    {
+        unpreview(Profile::ColorScheme);
+    }
+
+    return KDialog::eventFilter(watched,event);
+}
+void EditProfileDialog::hideEvent(QHideEvent* event) 
+{
+    qDebug() << "unpreviewing";
+
+    QHash<Profile::Property,QVariant> map;
+    QHashIterator<int,QVariant> iter(_previewedProperties);
+    while ( iter.hasNext() )
+    {
+        iter.next();
+        map.insert((Profile::Property)iter.key(),iter.value());
+    }
+
+    // undo any preview changes
+    if ( !_previewedProperties.isEmpty() )
+        SessionManager::instance()->changeProfile(_profileKey,map,false);
+
+    event->accept();
+}
+void EditProfileDialog::unpreview(int property)
+{
+    if (!_previewedProperties.contains(property))
+        return;
+
+    QHash<Profile::Property,QVariant> map;
+    map.insert((Profile::Property)property,_previewedProperties[property]);
+    SessionManager::instance()->changeProfile(_profileKey,map,false); 
+
+    _previewedProperties.remove(property);
+}
+void EditProfileDialog::preview(int property , QVariant value)
+{
+    QHash<Profile::Property,QVariant> map;
+    map.insert((Profile::Property)property,value);
+
+    const Profile* original = SessionManager::instance()->profile(_profileKey);
+
+    if (!_previewedProperties.contains(property))    
+        _previewedProperties.insert(property , original->property((Profile::Property)property) );
+
+    // temporary change to color scheme
+    SessionManager::instance()->changeProfile( _profileKey , map , false);
+}
+void EditProfileDialog::previewColorScheme(const QModelIndex& index)
+{
+    const QString& name = index.data(Qt::UserRole+1).value<const ColorScheme*>()->name();
+
+    preview( Profile::ColorScheme , name );
 }
 void EditProfileDialog::removeColorScheme()
 {
@@ -522,15 +585,24 @@ void EditProfileDialog::toggleResizeWindow(bool enable)
 {
     _tempProfile->setProperty(Profile::AllowProgramsToResizeWindow,enable);
 }
+#if 0
+void EditProfileDialog::previewFont(const QFont& font)
+{
+    preview(Profile::Font,font);
+}
+#endif
 void EditProfileDialog::showFontDialog()
 {
     //TODO Only permit selection of mono-spaced fonts.  
     // the KFontDialog API does not appear to have a means to do this
     // at present.
     QFont currentFont = _ui->fontPreviewLabel->font();
-    
-    if ( KFontDialog::getFont(currentFont) == KFontDialog::Accepted )
+   
+    KFontDialog dialog;
+    if ( dialog.exec() == KFontDialog::Accepted )
     {
+        QFont currentFont = dialog.font();
+
         QSlider* slider = _ui->fontSizeSlider;
 
         _ui->fontSizeSlider->setRange( qMin(slider->minimum(),currentFont.pointSize()) ,
@@ -539,6 +611,8 @@ void EditProfileDialog::showFontDialog()
         _ui->fontPreviewLabel->setFont(currentFont);
 
         _tempProfile->setProperty(Profile::Font,currentFont);
+
+        preview(Profile::Font,currentFont);
     } 
 }
 void EditProfileDialog::setFontSize(int pointSize)
@@ -548,6 +622,8 @@ void EditProfileDialog::setFontSize(int pointSize)
     _ui->fontPreviewLabel->setFont( newFont );
 
     _tempProfile->setProperty(Profile::Font,newFont);
+
+    preview(Profile::Font,newFont);
 }
 ColorSchemeViewDelegate::ColorSchemeViewDelegate(QObject* parent)
  : QAbstractItemDelegate(parent)
