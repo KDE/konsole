@@ -211,6 +211,11 @@ public:
      */
     void addColorScheme(ColorScheme* scheme);
 
+    /**
+     * Deletes a color scheme.  
+     */
+    void deleteColorScheme(const QString& name);
+
     /** 
      * Returns a list of the all the available color schemes. 
      * This may be slow when first called because all of the color
@@ -218,7 +223,7 @@ public:
      *
      * Subsequent calls will be inexpensive. 
      */
-    QList<ColorScheme*> allColorSchemes();    
+    QList<const ColorScheme*> allColorSchemes();    
 
     /** Sets the global color scheme manager instance. */
     static void setInstance(ColorSchemeManager* instance);
@@ -238,7 +243,7 @@ private:
     // loads all of the color schemes
     void loadAllColorSchemes();
 
-    QHash<QString,ColorScheme*> _colorSchemes;
+    QHash<QString,const ColorScheme*> _colorSchemes;
     QSet<ColorScheme*> _modifiedSchemes;
 
     bool _haveLoadedAll;
@@ -249,6 +254,6 @@ private:
 
 };
 
-Q_DECLARE_METATYPE(Konsole::ColorScheme*)
+Q_DECLARE_METATYPE(const Konsole::ColorScheme*)
 
 #endif //COLORSCHEME_H

@@ -280,7 +280,7 @@ ColorSchemeManager::ColorSchemeManager()
 }
 ColorSchemeManager::~ColorSchemeManager()
 {
-    QHashIterator<QString,ColorScheme*> iter(_colorSchemes);
+    QHashIterator<QString,const ColorScheme*> iter(_colorSchemes);
     while (iter.hasNext())
     {
         iter.next();
@@ -320,7 +320,7 @@ void ColorSchemeManager::loadAllColorSchemes()
 
     _haveLoadedAll = true;
 }
-QList<ColorScheme*> ColorSchemeManager::allColorSchemes()
+QList<const ColorScheme*> ColorSchemeManager::allColorSchemes()
 {
     if ( !_haveLoadedAll )
     {
@@ -420,6 +420,14 @@ const ColorScheme ColorSchemeManager::_defaultColorScheme;
 const ColorScheme* ColorSchemeManager::defaultColorScheme() const
 {
     return &_defaultColorScheme;
+}
+void ColorSchemeManager::deleteColorScheme(const QString& name)
+{
+    Q_ASSERT( _colorSchemes.contains(name) );
+
+    _colorSchemes.remove(name);
+
+    qWarning() << "Color scheme removed - make this change persistant.";
 }
 const ColorScheme* ColorSchemeManager::findColorScheme(const QString& name) 
 {

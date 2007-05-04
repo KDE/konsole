@@ -230,18 +230,26 @@ void EditProfileDialog::selectInitialDir()
 }
 void EditProfileDialog::setupAppearencePage(const Profile* info)
 {
+    const QString& name = SessionManager::instance()->profile(_profileKey)->colorScheme();
+    const ColorScheme* currentScheme = ColorSchemeManager::instance()->findColorScheme(name);
+
     // setup color list
     QStandardItemModel* model = new QStandardItemModel(this);
-    QList<ColorScheme*> schemeList = ColorSchemeManager::instance()->allColorSchemes();
-    QListIterator<ColorScheme*> schemeIter(schemeList);
+    QList<const ColorScheme*> schemeList = ColorSchemeManager::instance()->allColorSchemes();
+    QListIterator<const ColorScheme*> schemeIter(schemeList);
 
     while (schemeIter.hasNext())
     {
-        ColorScheme* colors = schemeIter.next();
+        const ColorScheme* colors = schemeIter.next();
         QStandardItem* item = new QStandardItem(colors->description());
         item->setData( QVariant::fromValue(colors) ,  Qt::UserRole + 1);
-        //item->setFlags( item->flags() | Qt::ItemIsUserCheckable );
-        //item->setCheckState( Qt::Unchecked );
+        item->setFlags( item->flags() | Qt::ItemIsUserCheckable );
+        
+        if ( colors == currentScheme )
+           item->setCheckState( Qt::Checked );
+        else 
+            item->setCheckState( Qt::Unchecked );
+
         model->appendRow(item);
     }
 
@@ -271,7 +279,14 @@ void EditProfileDialog::setupAppearencePage(const Profile* info)
 }
 void EditProfileDialog::removeColorScheme()
 {
-    //ColorSchemeManager::instance()->deleteColorScheme(colors);
+    QModelIndexList selected = _ui->colorSchemeList->selectionModel()->selectedIndexes();
+
+    if ( !selected.isEmpty() )
+    {
+        const QString& name = selected.first().data(Qt::UserRole+1).value<const ColorScheme*>()->name();
+        ColorSchemeManager::instance()->deleteColorScheme(name);
+        _ui->colorSchemeList->model()->removeRow(selected.first().row());
+    }
 }
 void EditProfileDialog::showColorSchemeEditor(bool newScheme)
 {    
@@ -281,7 +296,7 @@ void EditProfileDialog::showColorSchemeEditor(bool newScheme)
     {
         QAbstractItemModel* model = _ui->colorSchemeList->model();
         QModelIndex index = selected.first();
-        ColorScheme* colors = model->data(index,Qt::UserRole+1).value<ColorScheme*>();
+        const ColorScheme* colors = model->data(index,Qt::UserRole+1).value<const ColorScheme*>();
 
         KDialog* dialog = new KDialog(this);
 
@@ -301,7 +316,7 @@ void EditProfileDialog::showColorSchemeEditor(bool newScheme)
         {
             ColorScheme* newScheme = new ColorScheme(*editor->colorScheme());
             ColorSchemeManager::instance()->addColorScheme( newScheme );
-            model->setData(index, QVariant::fromValue(newScheme) , Qt::UserRole+1);
+            model->setData(index, QVariant::fromValue( (const ColorScheme*)newScheme ) , Qt::UserRole+1);
             model->setData(index, newScheme->description() , Qt::DisplayRole);
 
             const QString& currentScheme = SessionManager::instance()->profile(_profileKey)->colorScheme();
@@ -331,11 +346,17 @@ void EditProfileDialog::colorSchemeSelected()
     if ( !selected.isEmpty() )
     {
         QAbstractItemModel* model = _ui->colorSchemeList->model();
-        ColorScheme* colors = model->data(selected.first(),Qt::UserRole+1).value<ColorScheme*>();
+        const ColorScheme* colors = model->data(selected.first(),Qt::UserRole+1).value<const ColorScheme*>();
 
         _tempProfile->setProperty(Profile::ColorScheme,colors->name());
 
-        qDebug() << "Color scheme selected: " << _tempProfile->colorScheme();
+        // uncheck current active item
+        QModelIndexList list = model->match( model->index(0,0) , Qt::CheckStateRole , Qt::Checked );
+        Q_ASSERT( list.count() == 1 );
+        model->setData( list.first() , Qt::Unchecked , Qt::CheckStateRole ); 
+
+        // check new active item
+        model->setData( selected.first() , Qt::Checked , Qt::CheckStateRole );
     }
 }
 void EditProfileDialog::setupKeyboardPage(const Profile* )
@@ -565,13 +586,33 @@ QWidget* ColorSchemeViewDelegate::createEditor(QWidget* parent, const QStyleOpti
 void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
                        const QModelIndex& index) const
 {
-    ColorScheme* scheme = index.data(Qt::UserRole + 1).value<ColorScheme*>();
+    const ColorScheme* scheme = index.data(Qt::UserRole + 1).value<const ColorScheme*>();
 
     Q_ASSERT(scheme);
 
+    // draw background
     QBrush brush(scheme->backgroundColor());
     painter->fillRect( option.rect , brush );
-    
+   
+    // draw border on selected items
+    if ( option.state & QStyle::State_Selected )
+    {
+        static const int selectedBorderWidth = 6;
+
+
+        painter->setBrush( QBrush(Qt::NoBrush) );
+        QPen pen;
+        pen.setBrush(option.palette.highlight());
+        pen.setWidth(selectedBorderWidth);
+        pen.setJoinStyle(Qt::MiterJoin);
+        
+        painter->setPen(pen);
+        painter->drawRect( option.rect.adjusted(selectedBorderWidth/2,
+                                                selectedBorderWidth/2,
+                                                -selectedBorderWidth/2,
+                                                -selectedBorderWidth/2) );
+    }
+
    /* const ColorEntry* entries = scheme->colorTable();
     const qreal colorRectWidth = qMin(option.rect.width(),256) / TABLE_COLORS;
     const qreal colorRectHeight = colorRectWidth;
@@ -589,8 +630,18 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
         x += colorRectWidth;
     }*/
 
+    // draw color scheme name using scheme's foreground color
     QPen pen(scheme->foregroundColor());
     painter->setPen(pen);
+
+    // use bold text for active color scheme
+    QFont itemFont = painter->font();
+    if ( index.data(Qt::CheckStateRole) == Qt::Checked )
+        itemFont.setBold(true);
+    else
+        itemFont.setBold(false);
+
+    painter->setFont(itemFont);
 
     painter->drawText( option.rect , Qt::AlignCenter , 
                         index.data(Qt::DisplayRole).value<QString>() );
