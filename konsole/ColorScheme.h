@@ -242,6 +242,8 @@ private:
     QList<QString> listKDE3ColorSchemes();
     // loads all of the color schemes
     void loadAllColorSchemes();
+    // finds the path of a color scheme
+    QString findColorSchemePath(const QString& name) const;
 
     QHash<QString,const ColorScheme*> _colorSchemes;
     QSet<ColorScheme*> _modifiedSchemes;

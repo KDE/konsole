@@ -334,7 +334,8 @@ bool ColorSchemeManager::loadKDE3ColorScheme(const QString& filePath)
     qDebug() << "loading KDE 3 format color scheme from " << filePath;
 
     QFile file(filePath);
-    file.open(QIODevice::ReadOnly);
+    if (!filePath.endsWith(".schema") || !file.open(QIODevice::ReadOnly))
+        return false;
 
     KDE3ColorSchemeReader reader(&file);
     ColorScheme* scheme = reader.read();
@@ -374,6 +375,9 @@ void ColorSchemeManager::addColorScheme(ColorScheme* scheme)
 }
 bool ColorSchemeManager::loadColorScheme(const QString& filePath)
 {
+    if ( !filePath.endsWith(".colorscheme") || !QFile::exists(filePath) )
+        return false;
+
     QFileInfo info(filePath);
     
     qDebug() << "loading KDE 4 native color scheme from " << filePath;
@@ -427,7 +431,23 @@ void ColorSchemeManager::deleteColorScheme(const QString& name)
 
     _colorSchemes.remove(name);
 
-    qWarning() << "Color scheme removed - make this change persistant.";
+    // lookup the path and delete 
+    QString path = findColorSchemePath(name);
+    if ( QFile::remove(path) )
+        qDebug() << "Removed color scheme -" << path;
+    else
+        qDebug() << "Failed to remove color scheme -" << path;
+}
+QString ColorSchemeManager::findColorSchemePath(const QString& name) const
+{
+    QString path = KStandardDirs::locate("data","konsole/"+name+".colorscheme");
+
+    if ( !path.isEmpty() )
+       return path; 
+
+    path = KStandardDirs::locate("data","konsole/"+name+".schema");
+
+    return path;
 }
 const ColorScheme* ColorSchemeManager::findColorScheme(const QString& name) 
 {
@@ -441,15 +461,14 @@ const ColorScheme* ColorSchemeManager::findColorScheme(const QString& name)
     else
     {
         // look for this color scheme
-        QString path = KStandardDirs::locate("data","konsole/"+name+".colorscheme"); 
+        QString path = findColorSchemePath(name); 
         if ( !path.isEmpty() && loadColorScheme(path) )
         {
             return findColorScheme(name); 
         } 
-        else // look for a KDE 3 format color scheme by this name
+        else 
         {
-            QString kde3path = KStandardDirs::locate("data","konsole/"+name+".schema");
-            if (!kde3path.isEmpty() && loadKDE3ColorScheme(kde3path))
+            if (!path.isEmpty() && loadKDE3ColorScheme(path))
                 return findColorScheme(name);
         }
 
