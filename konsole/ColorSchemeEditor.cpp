@@ -121,6 +121,8 @@ void ColorSchemeEditor::editColorItem( QTableWidgetItem* item )
     ColorEntry entry(_colors->colorTable()[item->row()]);
     entry.color = dialog->color();
     _colors->setColorTableEntry(item->row(),entry); 
+
+    emit colorsChanged(_colors);
 }
 void ColorSchemeEditor::setDescription(const QString& text)
 {

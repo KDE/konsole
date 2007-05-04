@@ -103,6 +103,7 @@ private slots:
     void removeColorScheme();
     void colorSchemeSelected();
     void previewColorScheme(const QModelIndex& index);
+    void fontSelected(const QFont&);
     //void previewFont(const QFont&);
 
     // scrolling page

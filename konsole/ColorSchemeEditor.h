@@ -55,6 +55,10 @@ public:
    /** Returns the edited color scheme. */
    ColorScheme* colorScheme() const;
 
+signals:
+   /** Emitted when the colors in the color scheme change. */
+   void colorsChanged(ColorScheme* scheme);
+
 public slots:
     /** Sets the text displayed in the description edit field. */
    void setDescription(const QString& description);

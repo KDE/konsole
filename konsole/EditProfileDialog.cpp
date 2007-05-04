@@ -585,12 +585,19 @@ void EditProfileDialog::toggleResizeWindow(bool enable)
 {
     _tempProfile->setProperty(Profile::AllowProgramsToResizeWindow,enable);
 }
-#if 0
-void EditProfileDialog::previewFont(const QFont& font)
+void EditProfileDialog::fontSelected(const QFont& font)
 {
-    preview(Profile::Font,font);
+   qDebug() << "font selected";
+   QSlider* slider = _ui->fontSizeSlider;
+   
+   _ui->fontSizeSlider->setRange( qMin(slider->minimum(),font.pointSize()) ,
+                                  qMax(slider->maximum(),font.pointSize()) );
+   _ui->fontSizeSlider->setValue(font.pointSize());
+   _ui->fontPreviewLabel->setFont(font);
+
+   _tempProfile->setProperty(Profile::Font,font);
+   preview(Profile::Font,font);
 }
-#endif
 void EditProfileDialog::showFontDialog()
 {
     //TODO Only permit selection of mono-spaced fonts.  
@@ -598,22 +605,11 @@ void EditProfileDialog::showFontDialog()
     // at present.
     QFont currentFont = _ui->fontPreviewLabel->font();
    
-    KFontDialog dialog;
-    if ( dialog.exec() == KFontDialog::Accepted )
-    {
-        QFont currentFont = dialog.font();
+    KFontDialog* dialog = new KFontDialog(this);
+    dialog->setFont(currentFont);
 
-        QSlider* slider = _ui->fontSizeSlider;
-
-        _ui->fontSizeSlider->setRange( qMin(slider->minimum(),currentFont.pointSize()) ,
-                                       qMax(slider->maximum(),currentFont.pointSize()) );
-        _ui->fontSizeSlider->setValue(currentFont.pointSize());
-        _ui->fontPreviewLabel->setFont(currentFont);
-
-        _tempProfile->setProperty(Profile::Font,currentFont);
-
-        preview(Profile::Font,currentFont);
-    } 
+    connect( dialog , SIGNAL(fontSelected(const QFont&)) , this , SLOT(fontSelected(const QFont&)) );
+    dialog->show(); 
 }
 void EditProfileDialog::setFontSize(int pointSize)
 {
