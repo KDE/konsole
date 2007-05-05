@@ -178,6 +178,9 @@ bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile* profil
         general.writeEntry("Command",
                 ShellCommand(profile->command(),profile->arguments()).fullCommand());
 
+    if ( profile->isPropertySet(Profile::Directory) )
+        general.writeEntry("Directory",profile->defaultWorkingDirectory());
+
     writeStandardElement( general , "Icon" , profile , Profile::Icon );
     writeStandardElement( general , "LocalTabTitleFormat" , profile , Profile::LocalTabTitleFormat );
     writeStandardElement( general , "RemoteTabTitleFormat" , profile , Profile::RemoteTabTitleFormat );
@@ -243,6 +246,8 @@ bool KDE4ProfileReader::readProfile(const QString& path , Profile* profile)
         profile->setProperty(Profile::Command,shellCommand.command());
         profile->setProperty(Profile::Arguments,shellCommand.arguments());
     }
+
+    readStandardElement<QString>(general,"Directory",profile,Profile::Directory);
 
     readStandardElement<QString>(general,"Icon",profile,Profile::Icon);
     readStandardElement<QString>(general,"LocalTabTitleFormat",profile,Profile::LocalTabTitleFormat); 
