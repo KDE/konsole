@@ -101,7 +101,9 @@ void EditProfileDialog::setProfile(const QString& key)
 void EditProfileDialog::setupGeneralPage(const Profile* info)
 {
     _ui->profileNameEdit->setText( info->name() );
-    _ui->commandEdit->setText( info->command() );
+
+    ShellCommand command( info->command() , info->arguments() );
+    _ui->commandEdit->setText( command.fullCommand() );
 
     KUrlCompletion* exeCompletion = new KUrlCompletion(KUrlCompletion::ExeCompletion);
     exeCompletion->setDir(QString::null);
