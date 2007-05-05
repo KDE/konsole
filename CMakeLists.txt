@@ -1,8 +1,8 @@
 
 project(konsole)
 
-add_subdirectory( konsole ) 
-add_subdirectory( other ) 
+add_subdirectory( src ) 
+add_subdirectory( data ) 
 add_subdirectory( desktop )
 
 
