@@ -308,7 +308,8 @@ void EditProfileDialog::hideEvent(QHideEvent* event)
 
         // only reset preview changes for temporary changes 
         // ( changes saved in _tempProfile are considered permanent )
-        if ( !_tempProfile->isPropertySet( (Profile::Property)iter.key() ) )
+        if ( !_tempProfile->isPropertySet( (Profile::Property)iter.key() ) 
+             || result() != QDialog::Accepted )
             map.insert((Profile::Property)iter.key(),iter.value());
     }
 
