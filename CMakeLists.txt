@@ -3,7 +3,6 @@ project(konsole)
 
 add_subdirectory( konsole ) 
 add_subdirectory( other ) 
-add_subdirectory( settings ) 
 add_subdirectory( desktop )
 
 
