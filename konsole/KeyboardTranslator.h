@@ -23,8 +23,9 @@
 #define KEYBOARDTRANSLATOR_H
 
 // Qt
-#include <QHash>
+#include <QMultiHash>
 #include <QList>
+#include <QKeySequence>
 #include <QMetaType>
 #include <QVarLengthArray>
 
@@ -124,15 +125,14 @@ public:
         Entry( int keyCode , 
                Qt::KeyboardModifier modifiers , 
                State flags,
-               const char* text,
+               const QByteArray& text,
                Command command );
         Entry();
-        ~Entry();
 
         /** Returns the commands associated with this entry */
         Command command() const;
         /** Returns the character sequence associated with this entry */
-        const char* text() const;
+        QByteArray text() const;
 
         /** Returns the character code ( from the Qt::Key enum ) associated with this entry */
         int keyCode() const;
@@ -140,6 +140,12 @@ public:
         Qt::KeyboardModifier modifiers() const;
         /** Returns the state flags associated with this entry */
         State state() const;
+
+        /** 
+         * Returns the key code and modifiers associated with this entry 
+         * as a QKeySequence
+         */
+        QKeySequence keySequence() const;
 
         /** 
          * Returns true if this entry matches the given key sequence, specified
@@ -154,8 +160,7 @@ public:
         State _state;
 
         Command _command;
-        char*   _text;
-
+        QByteArray _text;
     };
 
     /** Constructs a new keyboard translator with the given @p name */
@@ -183,7 +188,7 @@ public:
      * @param modifiers A combination of modifiers
      * @param state Optional flags which specify the current state of the terminal
      */
-    Entry* findEntry(int keyCode , Qt::KeyboardModifier modifiers , State state = NoState) const;
+    Entry findEntry(int keyCode , Qt::KeyboardModifier modifiers , State state = NoState) const;
 
     /** 
      * Adds an entry to this keyboard translator's table.  Entries can be looked up according
@@ -192,10 +197,10 @@ public:
     void addEntry(const Entry& entry);
 
     /** Returns a list of all entries in the translator. */
-    QList<const Entry*> entries() const;
+    QList<Entry> entries() const;
 
 private:
-    QHash<int,QVarLengthArray<Entry> > _entries; // entries in this keyboard translation,
+    QMultiHash<int,Entry> _entries; // entries in this keyboard translation,
                                                  // entries are indexed according to
                                                  // their keycode
     const QString _name;
@@ -234,18 +239,48 @@ class KeyboardTranslatorReader
 {
 public:
     /** Constructs a new reader which parses the given @p source */
-    KeyboardTranslatorReader( QIODevice* source ) {};
+    KeyboardTranslatorReader( QIODevice* source );
+
+    /** 
+     * Returns the description text. 
+     * TODO: More documentation 
+     */
+    QString description() const;
 
     /** Returns true if there is another entry in the source stream */
-    bool hasNextEntry() { return false; };
+    bool hasNextEntry();
     /** Returns the next entry found in the source stream */
-    KeyboardTranslator::Entry nextEntry() { return KeyboardTranslator::Entry(Qt::Key_unknown,Qt::NoModifier,KeyboardTranslator::NoState,"",KeyboardTranslator::NoCommand); };
+    KeyboardTranslator::Entry nextEntry(); 
 
     /** 
      * Returns true if an error occurred whilst parsing the input or
      * false if no error occurred.
      */
-    bool parseError() { return false; };
+    bool parseError();
+
+private:
+    struct Token
+    {
+        enum Type
+        {
+            TitleKeyword,
+            TitleText,
+            KeyKeyword,
+            KeySequence,
+            Command,
+            OutputText
+        };
+        Type type;
+        QString text;
+    };
+    QList<Token> tokenize(const QString&);
+    void readNext();
+    QKeySequence decodeSequence(const QString& , KeyboardTranslator::State& stateFlags);
+
+    QIODevice* _source;
+    QString _description;
+    KeyboardTranslator::Entry _nextEntry;
+    bool _hasNext;
 };
 
 /**
@@ -327,7 +362,7 @@ inline KeyboardTranslator::Command KeyboardTranslator::Entry::command() const
 {
     return _command;
 }
-inline const char* KeyboardTranslator::Entry::text() const
+inline QByteArray KeyboardTranslator::Entry::text() const
 {
     return _text;
 }

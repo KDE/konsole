@@ -28,6 +28,7 @@
 #include "ColorScheme.h"
 #include "Emulation.h"
 #include "KeyTrans.h"
+#include "KeyboardTranslator.h"
 #include "Part.h"
 #include "Session.h"
 #include "SessionController.h"

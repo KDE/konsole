@@ -436,10 +436,11 @@ void EditProfileDialog::setupKeyboardPage(const Profile* info)
 
         const KeyboardTranslator* translator = KeyboardTranslatorManager::instance()->findTranslator(name);
 
-        qDebug() << "Translator:" << translator << ", name = " << translator->name();
+        qDebug() << "Translator:" << translator << ", name = " << translator->name() << "description = " << 
+            translator->description();
 
         // TODO Use translator->description() here
-        QStandardItem* item = new QStandardItem(translator->name());
+        QStandardItem* item = new QStandardItem(translator->description());
         item->setData(QVariant::fromValue(translator),Qt::UserRole+1);
         item->setFlags( item->flags() | Qt::ItemIsUserCheckable );
 

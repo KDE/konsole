@@ -25,6 +25,7 @@
 // Qt
 #include <QFile>
 #include <QFileInfo>
+#include <QKeySequence>
 #include <QTextStream>
 #include <QtDebug>
 
@@ -87,10 +88,11 @@ KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(const QString& nam
 
     const QString& path = findTranslatorPath(name);
 
-    QFile source(path); // TODO get correct path here
+    QFile source(path); 
     source.open(QIODevice::ReadOnly);
 
     KeyboardTranslatorReader reader(&source);
+    translator->setDescription( reader.description() );
     while ( reader.hasNextEntry() )
         translator->addEntry(reader.nextEntry());
 
@@ -127,7 +129,248 @@ KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(const QString& nam
 // already been removed)
 //
 
+KeyboardTranslatorReader::KeyboardTranslatorReader( QIODevice* source )
+    : _source(source)
+    , _hasNext(false)
+{
+   // read input until we find the description
+   while ( _description.isEmpty() && !source->atEnd() )
+   {
+        const QList<Token>& tokens = tokenize( QString(source->readLine()) );
+   
+        if ( !tokens.isEmpty() && tokens.first().type == Token::TitleKeyword )
+        {
+            qDebug() << "Found description: " << tokens[1].text;
+            _description = tokens[1].text;
+        }
+   }
 
+   readNext();
+}
+void KeyboardTranslatorReader::readNext() 
+{
+    // find next entry
+    while ( !_source->atEnd() )
+    {
+        const QList<Token>& tokens = tokenize( QString(_source->readLine()) );
+        if ( !tokens.isEmpty() && tokens.first().type == Token::KeyKeyword )
+        {
+            KeyboardTranslator::State flags = KeyboardTranslator::NoState;
+            QKeySequence sequence = decodeSequence(tokens[1].text,flags); 
+            qDebug() << sequence << ", count:" << sequence.count() << " text = " << tokens[1].text;
+
+            int keyCode = Qt::Key_unknown;
+            int modifiers = Qt::NoModifier;
+            QByteArray text;
+            KeyboardTranslator::Command command = KeyboardTranslator::NoCommand;
+
+            // get keycode and modifiers
+            if ( sequence.count() == 1 )
+            {
+                int code = sequence[0];
+
+                if ( code & Qt::SHIFT )
+                    modifiers |= Qt::ShiftModifier;
+                if ( code & Qt::CTRL )
+                    modifiers |= Qt::ControlModifier;
+                if ( code & Qt::ALT )
+                    modifiers |= Qt::AltModifier;
+                if ( code & Qt::META )
+                    modifiers |= Qt::MetaModifier;
+
+                keyCode = code & ~Qt::SHIFT & ~Qt::CTRL & ~Qt::ALT & ~Qt::META;
+            } 
+
+            // get text or command
+            if ( tokens[2].type == Token::OutputText )
+            {
+                qDebug() << "Setting text of length: " << tokens[2].text.length();
+                text = tokens[2].text.toLocal8Bit();
+            }
+            else if ( tokens[2].type == Token::Command )
+            {
+                // identify command
+                if ( tokens[2].text.compare("scrollpageup",Qt::CaseInsensitive) == 0 )
+                    command = KeyboardTranslator::ScrollPageUpCommand;
+                else if ( tokens[2].text.compare("scrollpagedown",Qt::CaseInsensitive) == 0 )
+                    command = KeyboardTranslator::ScrollPageDownCommand;
+                else if ( tokens[2].text.compare("scrolllineup",Qt::CaseInsensitive) == 0 )
+                    command = KeyboardTranslator::ScrollLineUpCommand;
+                else if ( tokens[2].text.compare("scrolllinedown",Qt::CaseInsensitive) == 0 )
+                    command = KeyboardTranslator::ScrollLineDownCommand;
+                else if ( tokens[2].text.compare("scrolllock",Qt::CaseInsensitive) == 0 )
+                    command = KeyboardTranslator::ScrollLockCommand;
+                else
+                    qDebug() << "Command not understood:" << tokens[2].text;
+
+                qDebug() << "No text";
+            }
+
+            qDebug() << "About to create entry";
+
+            _nextEntry = KeyboardTranslator::Entry(keyCode,(Qt::KeyboardModifier)modifiers,flags,text,command);
+
+            qDebug() << "Created new entry";
+
+            _hasNext = true;
+
+            return;
+        }
+    } 
+
+    _hasNext = false;
+}
+QKeySequence KeyboardTranslatorReader::decodeSequence(const QString& text , KeyboardTranslator::State& stateFlags )
+{
+    int state = KeyboardTranslator::NoState;
+    stateFlags = (KeyboardTranslator::State)state;
+
+    QKeySequence sequence = QKeySequence::fromString(text);
+
+    if ( sequence.count() > 0 )
+       return sequence;
+
+    // if the sequence is empty, it failed to decode properly
+    // this can happen if the file was produced by a KDE 3 version
+    // of Konsole
+    // 
+    // possible reasons:
+    //      - Key sequence includes names not known to Qt
+    //        ( eg "Ansi" , "NewLine" )
+    //      - Key sequence has modifiers at the end of the line ( eg "F10+Shift" )
+    //        instead of at the start, which QKeySequence requires
+    //      - Use of '-' in front of modifiers to indicate that they are 
+    //        not required
+
+    int modifiers = Qt::NoModifier;
+
+    // first pass
+    // rearrange modifers and try decoding again
+    if ( text.contains("+shift",Qt::CaseInsensitive) )
+        modifiers |= Qt::ShiftModifier;
+    if ( text.contains("+ctrl",Qt::CaseInsensitive) )
+        modifiers |= Qt::ControlModifier;
+    if ( text.contains("+control",Qt::CaseInsensitive) )
+        modifiers |= Qt::ControlModifier;
+    if ( text.contains("+alt",Qt::CaseInsensitive) )
+        modifiers |= Qt::AltModifier;
+    if ( text.contains("+meta",Qt::CaseInsensitive) )
+        modifiers |= Qt::MetaModifier;
+    if ( text.contains("+ansi",Qt::CaseInsensitive) )
+        state |= KeyboardTranslator::AnsiState;
+    if ( text.contains("+appcukeys",Qt::CaseInsensitive) )
+        state |= KeyboardTranslator::CursorKeysState;
+    if ( text.contains("+newline",Qt::CaseInsensitive) )
+        state |= KeyboardTranslator::NewLineState;
+
+    static QRegExp modifierRemover("((\\+|\\-)shift|"
+                                   "(\\+|\\-)ctrl|"
+                                   "(\\+|\\-)control|"
+                                   "(\\+|\\-)alt|"
+                                   "(\\+|\\-)ansi|"
+                                   "(\\+|\\-)appcukeys|"
+                                   "(\\+|\\-)newline|"
+                                   "(\\+|\\-)meta)",Qt::CaseInsensitive);
+    QString newText(text);
+    newText.replace(modifierRemover,QString::null);
+
+    if ( modifiers & Qt::ShiftModifier )
+        newText.prepend("shift+");
+    if ( modifiers & Qt::ControlModifier )
+        newText.prepend("ctrl+");
+    if ( modifiers & Qt::AltModifier )
+        newText.prepend("alt+");
+    if ( modifiers & Qt::MetaModifier )
+        newText.prepend("meta+");
+
+    qDebug() << "modifier: " << newText;
+    sequence = QKeySequence::fromString(newText);
+    qDebug() << "after: " << sequence;
+
+    stateFlags = (KeyboardTranslator::State)state;
+
+    return sequence;
+}
+QString KeyboardTranslatorReader::description() const
+{
+    return _description;
+}
+bool KeyboardTranslatorReader::hasNextEntry()
+{
+    return _hasNext;
+}
+KeyboardTranslator::Entry KeyboardTranslatorReader::nextEntry() 
+{
+    Q_ASSERT( _hasNext );
+
+    qDebug() << "About to return entry";
+
+    KeyboardTranslator::Entry entry = _nextEntry;
+
+    readNext();
+
+    return entry;
+}
+bool KeyboardTranslatorReader::parseError()
+{
+    return false;
+}
+QList<KeyboardTranslatorReader::Token> KeyboardTranslatorReader::tokenize(const QString& line)
+{
+    QString text = line.simplified();
+
+    // comment line: # comment
+    static QRegExp comment("\\#.*");
+    // title line: keyboard "title"
+    static QRegExp title("keyboard\\s+\"(.*)\"");
+    // key line: key KeySequence : "output"
+    // key line: key KeySequence : command
+    static QRegExp key("key\\s+([\\w\\+\\s\\-]+)\\s*:\\s*(\"(.*)\"|\\w+)");
+
+    QList<Token> list;
+
+   // qDebug() << "line: " << text;
+
+    if ( text.isEmpty() || comment.exactMatch(text) )
+    {
+     //   qDebug() << "This is a comment";
+        return list;
+    }
+
+    if ( title.exactMatch(text) )
+    {
+        Token titleToken = { Token::TitleKeyword , QString::null };
+        Token textToken = { Token::TitleText , title.capturedTexts()[1] };
+    
+        list << titleToken << textToken;
+    }
+    else if  ( key.exactMatch(text) )
+    {
+        Token keyToken = { Token::KeyKeyword , QString::null };
+        Token sequenceToken = { Token::KeySequence , key.capturedTexts()[1].remove(' ') };
+
+        list << keyToken << sequenceToken;
+
+        if ( key.capturedTexts()[3].isEmpty() )
+        {
+            // capturedTexts()[2] is a command
+            Token commandToken = { Token::Command , key.capturedTexts()[2] };
+            list << commandToken;    
+        }   
+        else
+        {
+            // capturedTexts()[3] is the output string
+           Token outputToken = { Token::OutputText , key.capturedTexts()[3] };
+           list << outputToken;
+        }     
+    }
+    else
+    {
+        qWarning() << "Line in keyboard translator file could not be understood:" << text;
+    }
+
+    return list;
+}
 
 QList<QString> KeyboardTranslatorManager::allTranslators() 
 {
@@ -142,28 +385,37 @@ QList<QString> KeyboardTranslatorManager::allTranslators()
 KeyboardTranslator::Entry::Entry( int keyCode,
                                   Qt::KeyboardModifier modifiers,
                                   State flags,
-                                  const char* text,
+                                  const QByteArray& text,
                                   Command command )
 : _keyCode(keyCode)
 , _modifiers(modifiers)
 , _state(flags)
 , _command(command)
-, _text(0)
+, _text(text)
 {
-    _text = new char[strlen(text)];
-    strcpy(_text,text); 
 }
 KeyboardTranslator::Entry::Entry()
 : _keyCode(0)
 , _modifiers(Qt::NoModifier)
 , _state(NoState)
 , _command(NoCommand)
-, _text(0)
 {
 }
-KeyboardTranslator::Entry::~Entry()
+
+QKeySequence KeyboardTranslator::Entry::keySequence() const
 {
-    delete[] _text;
+    int code = _keyCode;
+
+    if ( _modifiers & Qt::AltModifier )
+        code += Qt::ALT;
+    if ( _modifiers & Qt::ControlModifier )
+        code += Qt::CTRL;
+    if ( _modifiers & Qt::ShiftModifier )
+        code += Qt::SHIFT;
+    if ( _modifiers & Qt::MetaModifier )
+        code += Qt::META;
+
+    return QKeySequence(code);
 }
 
 bool KeyboardTranslator::Entry::matches(int keyCode , Qt::KeyboardModifier modifiers,
@@ -195,61 +447,35 @@ QString KeyboardTranslator::name() const
     return _name;
 }
 
-QList<const KeyboardTranslator::Entry*> KeyboardTranslator::entries() const
+QList<KeyboardTranslator::Entry> KeyboardTranslator::entries() const
 {
-    QList<const Entry*> list;
-
-    QHashIterator<int,QVarLengthArray<Entry> > iter(_entries);
-    while ( iter.hasNext() )
-    {
-        iter.next();
-
-        const QVarLengthArray<Entry>& array = _entries[iter.key()];
-
-        for ( int i = 0 ; i < array.size() ; i++ )
-            list << &array[i];
-    }  
-   
-    return list; 
+    return _entries.values();
 }
 
 void KeyboardTranslator::addEntry(const Entry& entry)
 {
-    QVarLengthArray<Entry>* array = 0;
     const int keyCode = entry.keyCode();
-
-    if ( _entries.contains(keyCode) )
-    {
-        array = &_entries[keyCode];
-    }
-    else
-    {
-        // create a new single-item array for entries with the given keycode
-        _entries.insert(keyCode,QVarLengthArray<Entry>(1));
-        array = &_entries[keyCode];
-    }
-
-    // insert the new entry
-    array->append(entry);
+    _entries.insert(keyCode,entry);
 }
 
-KeyboardTranslator::Entry* KeyboardTranslator::findEntry(int keyCode, Qt::KeyboardModifier modifiers, State state) const
+KeyboardTranslator::Entry KeyboardTranslator::findEntry(int keyCode, Qt::KeyboardModifier modifiers, State state) const
 {
     if ( _entries.contains(keyCode) )
     {
-        const QVarLengthArray<Entry>& array = _entries[keyCode];
+        QListIterator<Entry> iter(_entries.values(keyCode));
 
-        for (int i = 0 ; i < array.count() ; i++)
+        while (iter.hasNext())
         {
-            if ( array[i].matches(keyCode,modifiers,state) )
-                return const_cast<Entry*>(&array[i]);
+            const Entry& next = iter.next();
+            if ( next.matches(keyCode,modifiers,state) )
+                return next;
         }
 
-        return 0; // entry not found
+        return Entry(); // entry not found
     }
     else
     {
-        return 0;
+        return Entry();
     }
 }
 void KeyboardTranslatorManager::addTranslator(KeyboardTranslator* translator)

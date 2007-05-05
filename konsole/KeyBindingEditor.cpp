@@ -71,18 +71,21 @@ KeyboardTranslator* KeyBindingEditor::translator() const
 
 void KeyBindingEditor::setupKeyBindingTable(const KeyboardTranslator* translator)
 {
-    QList<const KeyboardTranslator::Entry*> entries = translator->entries();
+    QList<KeyboardTranslator::Entry> entries = translator->entries();
+    _ui->keyBindingTable->setRowCount(entries.count());
+    qDebug() << "Keyboard translator has" << entries.count() << "entries.";
 
     for ( int row = 0 ; row < entries.count() ; row++ )
     {
-        const KeyboardTranslator::Entry* entry = entries.at(row);
+        const KeyboardTranslator::Entry& entry = entries.at(row);
 
-        QTableWidgetItem* keyItem = new QTableWidgetItem(QString::number(entry->keyCode()));
-        QTableWidgetItem* textItem = new QTableWidgetItem(entry->text());
+        QTableWidgetItem* keyItem = new QTableWidgetItem(entry.keySequence().toString());
+        QTableWidgetItem* textItem = new QTableWidgetItem(QString(entry.text()));
 
         _ui->keyBindingTable->setItem(row,0,keyItem);
         _ui->keyBindingTable->setItem(row,1,textItem);
     }
+    _ui->keyBindingTable->sortItems(0);
 }
 
 #include "KeyBindingEditor.moc"

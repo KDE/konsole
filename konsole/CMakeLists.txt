@@ -143,6 +143,7 @@ set(konsolepart_PART_SRCS
    IncrementalSearchBar.cpp
    KeyBindingEditor.cpp 
    KeyTrans.cpp 
+   KeyboardTranslator.cpp
    MainWindow.cpp
    Part.cpp
    ProcessInfo.cpp

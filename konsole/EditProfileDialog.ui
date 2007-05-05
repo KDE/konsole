@@ -46,7 +46,11 @@
         </widget>
        </item>
        <item row="0" column="1" colspan="2" >
-        <widget class="QLineEdit" name="profileNameEdit" />
+        <widget class="QLineEdit" name="profileNameEdit" >
+         <property name="toolTip" >
+          <string>A descriptive name for the profile</string>
+         </property>
+        </widget>
        </item>
        <item row="1" column="0" >
         <widget class="QLabel" name="label_3" >
@@ -56,7 +60,11 @@
         </widget>
        </item>
        <item row="1" column="1" colspan="2" >
-        <widget class="KLineEdit" name="commandEdit" />
+        <widget class="KLineEdit" name="commandEdit" >
+         <property name="toolTip" >
+          <string>The command to execute when new terminal sessions are created using this profile</string>
+         </property>
+        </widget>
        </item>
        <item row="2" column="0" >
         <widget class="QLabel" name="label_9" >
@@ -66,10 +74,17 @@
         </widget>
        </item>
        <item row="2" column="1" colspan="2" >
-        <widget class="KLineEdit" name="initialDirEdit" />
+        <widget class="KLineEdit" name="initialDirEdit" >
+         <property name="toolTip" >
+          <string>The initial working directory for new terminal sessions using this profile</string>
+         </property>
+        </widget>
        </item>
        <item row="2" column="3" >
         <widget class="QToolButton" name="dirSelectButton" >
+         <property name="toolTip" >
+          <string>Browse for initial directory</string>
+         </property>
          <property name="text" >
           <string>...</string>
          </property>
@@ -101,6 +116,9 @@
            <width>0</width>
            <height>0</height>
           </size>
+         </property>
+         <property name="toolTip" >
+          <string>Select the icon displayed on tabs using this profile</string>
          </property>
          <property name="text" >
           <string/>
@@ -143,10 +161,17 @@
            </widget>
           </item>
           <item row="0" column="1" >
-           <widget class="QLineEdit" name="tabTitleEdit" />
+           <widget class="QLineEdit" name="tabTitleEdit" >
+            <property name="toolTip" >
+             <string>Normal tab title format </string>
+            </property>
+           </widget>
           </item>
           <item row="0" column="2" >
            <widget class="QPushButton" name="tabTitleEditButton" >
+            <property name="toolTip" >
+             <string>Edit normal tab title format</string>
+            </property>
             <property name="text" >
              <string>Edit...</string>
             </property>
@@ -160,10 +185,17 @@
            </widget>
           </item>
           <item row="1" column="1" >
-           <widget class="QLineEdit" name="remoteTabTitleEdit" />
+           <widget class="QLineEdit" name="remoteTabTitleEdit" >
+            <property name="toolTip" >
+             <string>Tab title format used when a remote command (eg. connection to another computer via SSH) is being executed</string>
+            </property>
+           </widget>
           </item>
           <item row="1" column="2" >
            <widget class="QPushButton" name="remoteTabTitleEditButton" >
+            <property name="toolTip" >
+             <string>Edit tab title format used when executing remote commands</string>
+            </property>
             <property name="text" >
              <string>Edit..</string>
             </property>
@@ -183,6 +215,9 @@
          <layout class="QVBoxLayout" >
           <item>
            <widget class="QCheckBox" name="showMenuBarButton" >
+            <property name="toolTip" >
+             <string>Show or hide the menu bar in terminal windows using this profile</string>
+            </property>
             <property name="text" >
              <string>Show Menu Bar</string>
             </property>
@@ -190,6 +225,9 @@
           </item>
           <item>
            <widget class="QRadioButton" name="alwaysHideTabBarButton" >
+            <property name="toolTip" >
+             <string>Never show the tab bar</string>
+            </property>
             <property name="text" >
              <string>Always hide tab bar</string>
             </property>
@@ -197,6 +235,9 @@
           </item>
           <item>
            <widget class="QRadioButton" name="autoShowTabBarButton" >
+            <property name="toolTip" >
+             <string>Hide or show the tab bar automatically depending on the number of tabs open</string>
+            </property>
             <property name="text" >
              <string>Show tab bar when more than one tab is open</string>
             </property>
@@ -204,6 +245,9 @@
           </item>
           <item>
            <widget class="QRadioButton" name="alwaysShowTabBarButton" >
+            <property name="toolTip" >
+             <string>Always show the tab bar</string>
+            </property>
             <property name="text" >
              <string>Always show tab bar</string>
             </property>
@@ -256,6 +300,9 @@
           </item>
           <item row="0" column="1" >
            <widget class="QPushButton" name="newColorSchemeButton" >
+            <property name="toolTip" >
+             <string>Create a new color scheme based upon the selected scheme</string>
+            </property>
             <property name="text" >
              <string>New...</string>
             </property>
@@ -263,6 +310,9 @@
           </item>
           <item row="1" column="1" >
            <widget class="QPushButton" name="editColorSchemeButton" >
+            <property name="toolTip" >
+             <string>Edit the selected color scheme</string>
+            </property>
             <property name="text" >
              <string>Edit...</string>
             </property>
@@ -270,6 +320,9 @@
           </item>
           <item row="2" column="1" >
            <widget class="QPushButton" name="removeColorSchemeButton" >
+            <property name="toolTip" >
+             <string>Delete the selected color scheme</string>
+            </property>
             <property name="text" >
              <string>Remove</string>
             </property>
@@ -277,6 +330,9 @@
           </item>
           <item row="3" column="1" >
            <widget class="QPushButton" name="selectColorSchemeButton" >
+            <property name="toolTip" >
+             <string>Use the selected color scheme for this profile</string>
+            </property>
             <property name="text" >
              <string>Select</string>
             </property>
@@ -349,6 +405,9 @@
             </item>
             <item>
              <widget class="QSlider" name="fontSizeSlider" >
+              <property name="toolTip" >
+               <string>Adjust the font size used in this profile</string>
+              </property>
               <property name="minimum" >
                <number>9</number>
               </property>
@@ -369,6 +428,9 @@
             </item>
             <item>
              <widget class="QPushButton" name="editFontButton" >
+              <property name="toolTip" >
+               <string>Change the font used in this profile</string>
+              </property>
               <property name="text" >
                <string>Edit Font...</string>
               </property>
@@ -391,6 +453,9 @@
        </item>
        <item row="0" column="1" >
         <widget class="QPushButton" name="newKeyBindingsButton" >
+         <property name="toolTip" >
+          <string>Create a new key bindings list based upon the selected bindings</string>
+         </property>
          <property name="text" >
           <string>New...</string>
          </property>
@@ -398,6 +463,9 @@
        </item>
        <item row="1" column="1" >
         <widget class="QPushButton" name="editKeyBindingsButton" >
+         <property name="toolTip" >
+          <string>Edit the selected key bindings list</string>
+         </property>
          <property name="text" >
           <string>Edit...</string>
          </property>
@@ -405,6 +473,9 @@
        </item>
        <item row="2" column="1" >
         <widget class="QPushButton" name="removeKeyBindingsButton" >
+         <property name="toolTip" >
+          <string>Delete the selected key bindings list</string>
+         </property>
          <property name="text" >
           <string>Remove</string>
          </property>
@@ -412,6 +483,9 @@
        </item>
        <item row="3" column="1" >
         <widget class="QPushButton" name="selectKeyBindingsButton" >
+         <property name="toolTip" >
+          <string>Use the selected key bindings list in this profile</string>
+         </property>
          <property name="text" >
           <string>Select</string>
          </property>
@@ -448,6 +522,9 @@
          <layout class="QVBoxLayout" >
           <item>
            <widget class="QRadioButton" name="disableScrollbackButton" >
+            <property name="toolTip" >
+             <string>Disable scroll bar and do not remember previous output</string>
+            </property>
             <property name="text" >
              <string>Disable scrollback</string>
             </property>
@@ -457,6 +534,9 @@
            <layout class="QHBoxLayout" >
             <item>
              <widget class="QRadioButton" name="fixedScrollbackButton" >
+              <property name="toolTip" >
+               <string>Limit the remembered output to a fixed number of lines</string>
+              </property>
               <property name="text" >
                <string>Fixed number of lines: </string>
               </property>
@@ -464,6 +544,9 @@
             </item>
             <item>
              <widget class="QSpinBox" name="scrollBackLinesSpinner" >
+              <property name="toolTip" >
+               <string>Number of lines of output to remember</string>
+              </property>
               <property name="minimum" >
                <number>1</number>
               </property>
@@ -489,6 +572,9 @@
           </item>
           <item>
            <widget class="QRadioButton" name="unlimitedScrollbackButton" >
+            <property name="toolTip" >
+             <string>Remember all output produced by the terminal</string>
+            </property>
             <property name="text" >
              <string>Unlimited scrollback</string>
             </property>
@@ -508,6 +594,9 @@
          <layout class="QVBoxLayout" >
           <item>
            <widget class="QRadioButton" name="scrollBarLeftButton" >
+            <property name="toolTip" >
+             <string>Show the scroll bar on the left side of the terminal window</string>
+            </property>
             <property name="text" >
              <string>Show on left side</string>
             </property>
@@ -515,6 +604,9 @@
           </item>
           <item>
            <widget class="QRadioButton" name="scrollBarRightButton" >
+            <property name="toolTip" >
+             <string>Show the scroll bar on the right side of the terminal window</string>
+            </property>
             <property name="text" >
              <string>Show on right side</string>
             </property>
@@ -522,6 +614,9 @@
           </item>
           <item>
            <widget class="QRadioButton" name="scrollBarHiddenButton" >
+            <property name="toolTip" >
+             <string>Hide the scroll bar</string>
+            </property>
             <property name="text" >
              <string>Hidden</string>
             </property>
@@ -561,6 +656,9 @@
          <layout class="QVBoxLayout" >
           <item>
            <widget class="QCheckBox" name="enableBlinkingTextButton" >
+            <property name="toolTip" >
+             <string>Allow terminal programs to create blinking sections of text</string>
+            </property>
             <property name="text" >
              <string>Allow blinking text</string>
             </property>
@@ -568,6 +666,9 @@
           </item>
           <item>
            <widget class="QCheckBox" name="enableFlowControlButton" >
+            <property name="toolTip" >
+             <string>Allow the output to be suspended by pressing Ctrl+S</string>
+            </property>
             <property name="text" >
              <string>Enable flow control using Ctrl+S , Ctrl+Q</string>
             </property>
@@ -575,6 +676,9 @@
           </item>
           <item>
            <widget class="QCheckBox" name="enableResizeWindowButton" >
+            <property name="toolTip" >
+             <string>Allow terminal programs to resize the window</string>
+            </property>
             <property name="text" >
              <string>Allow programs to resize terminal window</string>
             </property>
@@ -602,7 +706,11 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="wordCharacterEdit" />
+             <widget class="QLineEdit" name="wordCharacterEdit" >
+              <property name="toolTip" >
+               <string>Characters which are considered part of a word when double-clicking to select whole words in the terminal</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -620,6 +728,9 @@
          <layout class="QVBoxLayout" >
           <item>
            <widget class="QCheckBox" name="enableBlinkingCursorButton" >
+            <property name="toolTip" >
+             <string>Make the cursor blink regularly</string>
+            </property>
             <property name="text" >
              <string>Blinking cursor</string>
             </property>
@@ -636,6 +747,9 @@
             </item>
             <item>
              <widget class="QComboBox" name="cursorShapeCombo" >
+              <property name="toolTip" >
+               <string>Change the shape of the cursor</string>
+              </property>
               <item>
                <property name="text" >
                 <string>Block</string>
@@ -657,6 +771,9 @@
           </item>
           <item>
            <widget class="QRadioButton" name="autoCursorColorButton" >
+            <property name="toolTip" >
+             <string>Set the cursor to match the color of the character underneath it.</string>
+            </property>
             <property name="text" >
              <string>Set cursor color to match current character</string>
             </property>
@@ -666,6 +783,9 @@
            <layout class="QHBoxLayout" >
             <item>
              <widget class="QRadioButton" name="customCursorColorButton" >
+              <property name="toolTip" >
+               <string>Use a custom, fixed color for the cursor</string>
+              </property>
               <property name="text" >
                <string>Custom cursor color:</string>
               </property>
@@ -673,6 +793,9 @@
             </item>
             <item>
              <widget class="KColorButton" name="customColorSelectButton" >
+              <property name="toolTip" >
+               <string>Select the color used to draw the cursor</string>
+              </property>
               <property name="text" >
                <string/>
               </property>

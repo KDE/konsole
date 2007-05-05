@@ -27,8 +27,11 @@
    </property>
    <item row="0" column="1" >
     <widget class="QPushButton" name="newSessionButton" >
+     <property name="toolTip" >
+      <string>Create a new profile based upon the selected profile</string>
+     </property>
      <property name="text" >
-      <string>New Session...</string>
+      <string>New Profile...</string>
      </property>
     </widget>
    </item>
@@ -37,8 +40,11 @@
      <property name="enabled" >
       <bool>false</bool>
      </property>
+     <property name="toolTip" >
+      <string>Edit the selected profile</string>
+     </property>
      <property name="text" >
-      <string>Edit Session...</string>
+      <string>Edit Profile...</string>
      </property>
     </widget>
    </item>
@@ -47,8 +53,11 @@
      <property name="enabled" >
       <bool>false</bool>
      </property>
+     <property name="toolTip" >
+      <string>Delete the selected profile</string>
+     </property>
      <property name="text" >
-      <string>Delete Session...</string>
+      <string>Delete Profile</string>
      </property>
     </widget>
    </item>
@@ -56,6 +65,9 @@
     <widget class="QPushButton" name="setAsDefaultButton" >
      <property name="enabled" >
       <bool>false</bool>
+     </property>
+     <property name="toolTip" >
+      <string>Set the selected profile as the default for new terminal sessions</string>
      </property>
      <property name="text" >
       <string>Set as Default</string>
@@ -77,6 +89,9 @@
    </item>
    <item rowspan="5" row="0" column="0" >
     <widget class="QTableView" name="sessionTable" >
+     <property name="whatsThis" >
+      <string/>
+     </property>
      <property name="frameShadow" >
       <enum>QFrame::Plain</enum>
      </property>
@@ -102,7 +117,6 @@
    </item>
   </layout>
  </widget>
- <includes/>
  <resources/>
  <connections/>
 </ui>
