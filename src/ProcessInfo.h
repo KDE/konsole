@@ -345,5 +345,5 @@ private:
     QString _command;
 };
 
-};
+}
 #endif //PROCESSINFO_H

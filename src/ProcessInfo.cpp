@@ -254,7 +254,7 @@ bool UnixProcessInfo::readProcessInfo(int pid , bool enableEnvironmentRead)
     setParentPid(parentPid);
 
     return true;
-};
+}
 
 ProcessInfo* ProcessInfo::newInstance(int pid,bool enableEnvironmentRead)
 {

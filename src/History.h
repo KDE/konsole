@@ -334,6 +334,6 @@ protected:
 
 #endif
 
-};
+}
 
 #endif // TEHISTORY_H

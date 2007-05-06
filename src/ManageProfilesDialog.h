@@ -33,7 +33,7 @@ class QStandardItemModel;
 namespace Ui
 {
     class ManageProfilesDialog;
-};
+}
 
 namespace Konsole
 {
@@ -85,6 +85,6 @@ public:
                              const QStyleOptionViewItem& option,const QModelIndex& index);
 };
 
-};
+}
 #endif // SESSIONTYPEDIALOG_H
 

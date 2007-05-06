@@ -84,5 +84,5 @@ private:
     MainWindow* _backgroundInstance;
 };
 
-};
+}
 #endif //KONSOLEAPP_H

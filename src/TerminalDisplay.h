@@ -63,7 +63,7 @@ class TerminalImageFilterChain;
 namespace Filter
 {
     class HotSpot;
-};
+}
 class FilterChain;
 class ScreenWindow;
 
@@ -689,6 +689,6 @@ public:
     }
 };
 
-};
+}
 
 #endif // TERMINALDISPLAY_H

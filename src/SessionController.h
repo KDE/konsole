@@ -19,7 +19,7 @@
 namespace KIO
 {
     class Job;
-};
+}
 
 class QAction;
 class QTextCodec;
@@ -349,6 +349,6 @@ private:
     static QPointer<SearchHistoryThread> _thread;
 };
 
-};
+}
 
 #endif //SESSIONCONTROLLER_H

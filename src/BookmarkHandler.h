@@ -113,6 +113,6 @@ private:
     QList<ViewProperties*> m_views;
 };
 
-};
+}
 
 #endif // KONSOLEBOOKMARKHANDLER_H

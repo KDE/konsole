@@ -60,6 +60,6 @@ private:
     QActionGroup*   _group;
 }; 
 
-};
+}
 
 #endif

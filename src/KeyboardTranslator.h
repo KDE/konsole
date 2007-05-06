@@ -374,7 +374,7 @@ inline KeyboardTranslator::State KeyboardTranslator::Entry::state() const
     return _state;
 }
 
-};
+}
 
 Q_DECLARE_METATYPE(const Konsole::KeyboardTranslator*)
 

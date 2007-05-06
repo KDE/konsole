@@ -84,6 +84,6 @@ private:
     QSpinBox* _lineCountBox;    
 };
 
-};
+}
 
 #endif // HISTORYSIZEDIALOG_H

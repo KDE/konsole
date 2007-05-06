@@ -26,7 +26,7 @@
 namespace Ui
 {
     class RemoteConnectionDialog;
-};
+}
 
 namespace Konsole
 {
@@ -47,6 +47,6 @@ private:
     Ui::RemoteConnectionDialog* _ui;
 };
 
-};
+}
 
 #endif // REMOTECONNECTIONDIALOG_H

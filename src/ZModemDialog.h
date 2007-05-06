@@ -49,6 +49,6 @@ private:
   QTextEdit* _textEdit;
 };
 
-};
+}
 
 #endif

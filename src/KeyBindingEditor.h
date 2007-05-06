@@ -26,7 +26,7 @@
 namespace Ui
 {
     class KeyBindingEditor;
-};
+}
 
 namespace Konsole
 {
@@ -57,6 +57,6 @@ private:
     KeyboardTranslator* _translator;
 };
 
-};
+}
 
 #endif //KEYBINDINGEDITOR_H

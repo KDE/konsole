@@ -34,7 +34,7 @@ class QAbstractButton;
 namespace Ui
 {
     class EditProfileDialog;
-};
+}
 
 namespace Konsole
 {
@@ -215,6 +215,6 @@ public:
 
 };
 
-};
+}
 #endif // EDITSESSIONDIALOG_H
 

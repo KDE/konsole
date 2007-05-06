@@ -232,6 +232,6 @@ protected:
   
 };
 
-};
+}
 
 #endif // ifndef ANSIEMU_H

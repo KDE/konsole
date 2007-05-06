@@ -84,6 +84,6 @@ private:
     SessionController* _pluggedController;
 };
 
-};
+}
 
 #endif // PART_H

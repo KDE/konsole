@@ -29,7 +29,7 @@
 namespace Ui
 {
     class EditTabTitleFormatDialog;
-};
+}
 
 namespace Konsole
 {
@@ -65,6 +65,6 @@ private:
     static const int _remoteElementCount;
 };
 
-};
+}
 
 #endif // EDITTABTITLEFORMATDIALOG_H

@@ -93,6 +93,6 @@ private:
     int _id;
 };
 
-};
+}
 
 #endif //VIEWPROPERTIES_H

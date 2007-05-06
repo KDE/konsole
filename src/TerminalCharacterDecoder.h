@@ -115,6 +115,6 @@ private:
 	const ColorEntry* colorTable;
 };
 
-};
+}
 
 #endif

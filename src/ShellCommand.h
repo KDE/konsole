@@ -58,7 +58,7 @@ private:
     QStringList _arguments;    
 };
 
-};
+}
 
 #endif // SHELLCOMMAND_H
 

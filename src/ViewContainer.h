@@ -328,5 +328,5 @@ private:
     QListWidget* _listWidget;
 };
 
-};
+}
 #endif //VIEWCONTAINER_H

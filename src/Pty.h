@@ -120,6 +120,6 @@ Q_OBJECT
     bool m_bufferFull;
 };
 
-};
+}
 
 #endif

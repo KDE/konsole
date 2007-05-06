@@ -456,6 +456,6 @@ private: // helper
     static Character defaultChar;
 };
 
-};
+}
 
 #endif // TESCREEN_H

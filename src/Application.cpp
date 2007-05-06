@@ -56,7 +56,7 @@ Application::Application()
 
     // check for compositing functionality
     TerminalDisplay::setTransparencyEnabled( KWindowSystem::compositingActive() );
-};
+}
 
 Application* Application::self()
 {

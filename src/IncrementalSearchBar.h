@@ -190,5 +190,5 @@ private:
     QTimer* _searchTimer;
 };
 
-};
+}
 #endif // INCREMENTALSEARCHBAR_H

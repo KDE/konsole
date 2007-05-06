@@ -134,7 +134,7 @@ void ColorSchemeEditor::setDescription(const QString& text)
 }
 void ColorSchemeEditor::setTransparencyPercentLabel(int percent)
 {
-    _ui->transparencyPercentLabel->setText( QString("%1\%").arg(percent) );
+    _ui->transparencyPercentLabel->setText( QString("%1%").arg(percent) );
     
     qreal opacity = ( 100.0 - percent ) / 100.0;
     _colors->setOpacity(opacity);

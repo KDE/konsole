@@ -168,6 +168,6 @@ private:
     bool _recursiveSplitting;
 };
 
-};
+}
 #endif //VIEWSPLITTER_H
 

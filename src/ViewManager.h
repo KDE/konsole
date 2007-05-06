@@ -211,6 +211,6 @@ private:
     QSignalMapper* _containerSignalMapper;
 };
 
-};
+}
 
 #endif

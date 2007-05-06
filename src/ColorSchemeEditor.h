@@ -74,6 +74,6 @@ private:
    ColorScheme* _colors;    
 };
 
-};
+}
 
 #endif // COLORSCHEMEEDITOR_H 

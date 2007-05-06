@@ -210,5 +210,5 @@ private:
                        // the last call to resetScrollCount()
 };
 
-};
+}
 #endif // SCREENWINDOW_H

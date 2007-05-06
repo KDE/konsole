@@ -118,6 +118,6 @@ class MainWindow : public KXmlGuiWindow
         QPointer<SessionController> _pluggedController;
 };
 
-};
+}
 
 #endif // KONSOLEMAINWINDOW_H

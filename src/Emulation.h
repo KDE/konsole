@@ -265,6 +265,6 @@ private:
   
 };
 
-};
+}
 
 #endif // ifndef EMULATION_H

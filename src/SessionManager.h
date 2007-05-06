@@ -620,5 +620,5 @@ private:
     static SessionManager* _instance;
 };
 
-};
+}
 #endif //SESSIONMANAGER_H
