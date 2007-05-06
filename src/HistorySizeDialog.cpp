@@ -83,7 +83,7 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     _fixedHistoryButton->setFocusProxy(_lineCountBox);
 
     connect( _fixedHistoryButton , SIGNAL(clicked()) , _lineCountBox , SLOT(selectAll()) );
-
+    connect(this,SIGNAL(defaultClicked()),this,SLOT(slotDefault()));
     lineCountLayout->addWidget(_fixedHistoryButton);
     lineCountLayout->addWidget(_lineCountBox);
     lineCountLayout->addWidget(lineCountLabel);
@@ -95,6 +95,13 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     // select the fixed size mode by default
     _fixedHistoryButton->click();
     _fixedHistoryButton->setFocus( Qt::OtherFocusReason );
+
+}
+
+void HistorySizeDialog::slotDefault()
+{
+    _fixedHistoryButton->click();
+    _lineCountBox->setValue( 1000 );
 }
 
 void HistorySizeDialog::setMode( HistoryMode mode )

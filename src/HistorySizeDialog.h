@@ -77,6 +77,8 @@ public:
     /** Sets the number of lines for the fixed size history mode. */
     void setLineCount(int lines);
 
+protected slots:
+    void slotDefault();
 private:
     QAbstractButton* _noHistoryButton;
     QAbstractButton* _fixedHistoryButton;
