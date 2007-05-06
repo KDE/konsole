@@ -127,8 +127,10 @@ void SessionController::snapshot()
     else
         title = process->format(_session->tabTitleFormat(Session::LocalTabTitle) ) ;
 
-    if ( !title.isEmpty() )
-        _session->setTitle(title);
+    if ( !title.simplified().isEmpty() )
+        setTitle(title);
+    else
+        setTitle(_session->title());
 
     if ( snapshot != process )
     {
@@ -493,10 +495,10 @@ void SessionController::renameSession()
     bool ok = false;
     const QString& text = KInputDialog::getText( i18n("Rename Tab") ,
                                                  i18n("Enter new tab text:") ,
-                                                 _session->title() , 
+                                                 _session->tabTitleFormat(Session::LocalTabTitle) , 
                                                  &ok );
     if ( ok )
-        _session->setTitle(text);
+        _session->setTabTitleFormat(Session::LocalTabTitle,text);
 }
 void SessionController::saveSession()
 {

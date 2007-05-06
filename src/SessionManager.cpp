@@ -623,6 +623,9 @@ void SessionManager::applyProfile(Session* session, const Profile* info , bool m
     session->setType( _types.key((Profile*)info) );
 
     // Basic session settings
+    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Name) )
+        session->setTitle(info->name());
+
     if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Command) )
         session->setProgram(info->command());
 
