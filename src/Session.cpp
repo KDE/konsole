@@ -143,9 +143,9 @@ void Session::ptyError()
   if ( _shellProcess->error().isEmpty() )
   {
     KMessageBox::error( QApplication::activeWindow() ,
-       i18n("Konsole is unable to open a PTY (pseudo teletype)."  
-            "It is likely that this is due to an incorrect configuration" 
-            "of the PTY devices.  Konsole needs to have read/write access" 
+       i18n("Konsole is unable to open a PTY (pseudo teletype). "
+            "It is likely that this is due to an incorrect configuration "
+            "of the PTY devices.  Konsole needs to have read/write access "
             "to the PTY devices."),
        i18n("A Fatal Error Has Occurred") );
   }
