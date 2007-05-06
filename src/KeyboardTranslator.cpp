@@ -442,6 +442,10 @@ QString KeyboardTranslator::description() const
 {
     return _description;
 }
+void KeyboardTranslator::setName(const QString& name)
+{
+    _name = name;
+}
 QString KeyboardTranslator::name() const
 {
     return _name;

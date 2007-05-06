@@ -45,6 +45,11 @@ public:
 
     KeyboardTranslator* translator() const;
 
+    QString description() const;
+
+public slots:
+    void setDescription(const QString& description);
+    
 private:
     void setupKeyBindingTable(const KeyboardTranslator* translator);
 

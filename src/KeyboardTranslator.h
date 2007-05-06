@@ -171,6 +171,9 @@ public:
     /** Returns the name of this keyboard translator */
     QString name() const;
 
+    /** Sets the name of this keyboard translator */
+    void setName(const QString& name);
+
     /** Returns the descriptive name of this keyboard translator */
     QString description() const;
 
@@ -203,7 +206,7 @@ private:
     QMultiHash<int,Entry> _entries; // entries in this keyboard translation,
                                                  // entries are indexed according to
                                                  // their keycode
-    const QString _name;
+    QString _name;
     QString _description;
 };
 

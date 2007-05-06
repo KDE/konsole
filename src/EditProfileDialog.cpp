@@ -235,30 +235,9 @@ void EditProfileDialog::selectInitialDir()
 }
 void EditProfileDialog::setupAppearencePage(const Profile* info)
 {
-    const QString& name = SessionManager::instance()->profile(_profileKey)->colorScheme();
-    const ColorScheme* currentScheme = ColorSchemeManager::instance()->findColorScheme(name);
-
     // setup color list
-    QStandardItemModel* model = new QStandardItemModel(this);
-    QList<const ColorScheme*> schemeList = ColorSchemeManager::instance()->allColorSchemes();
-    QListIterator<const ColorScheme*> schemeIter(schemeList);
+    updateColorSchemeList();
 
-    while (schemeIter.hasNext())
-    {
-        const ColorScheme* colors = schemeIter.next();
-        QStandardItem* item = new QStandardItem(colors->description());
-        item->setData( QVariant::fromValue(colors) ,  Qt::UserRole + 1);
-        item->setFlags( item->flags() | Qt::ItemIsUserCheckable );
-        
-        if ( colors == currentScheme )
-           item->setCheckState( Qt::Checked );
-        else 
-            item->setCheckState( Qt::Unchecked );
-
-        model->appendRow(item);
-    }
-
-    _ui->colorSchemeList->setModel(model);
     _ui->colorSchemeList->setItemDelegate(new ColorSchemeViewDelegate(this));
     _ui->colorSchemeList->setMouseTracking(true);
     _ui->colorSchemeList->installEventFilter(this);
@@ -286,6 +265,74 @@ void EditProfileDialog::setupAppearencePage(const Profile* info)
              SLOT(setFontSize(int)) );
     connect( _ui->editFontButton , SIGNAL(clicked()) , this ,
              SLOT(showFontDialog()) );
+}
+void EditProfileDialog::updateColorSchemeList()
+{
+    delete _ui->colorSchemeList->model();
+
+    const QString& name = SessionManager::instance()->profile(_profileKey)->colorScheme();
+    const ColorScheme* currentScheme = ColorSchemeManager::instance()->findColorScheme(name);
+
+    QStandardItemModel* model = new QStandardItemModel(this);
+    QList<const ColorScheme*> schemeList = ColorSchemeManager::instance()->allColorSchemes();
+    QListIterator<const ColorScheme*> schemeIter(schemeList);
+
+    while (schemeIter.hasNext())
+    {
+        const ColorScheme* colors = schemeIter.next();
+        QStandardItem* item = new QStandardItem(colors->description());
+        item->setData( QVariant::fromValue(colors) ,  Qt::UserRole + 1);
+        item->setFlags( item->flags() | Qt::ItemIsUserCheckable );
+        
+        if ( colors == currentScheme )
+           item->setCheckState( Qt::Checked );
+        else 
+            item->setCheckState( Qt::Unchecked );
+
+        model->appendRow(item);
+    }
+
+    _ui->colorSchemeList->setModel(model);
+
+}
+void EditProfileDialog::updateKeyBindingsList()
+{
+    delete _ui->keyBindingList->model();
+
+    const QString& name = SessionManager::instance()->profile(_profileKey)->property(Profile::KeyBindings)
+                                .value<QString>();
+
+    const KeyboardTranslator* currentTranslator = KeyboardTranslatorManager::instance()->findTranslator(name);
+    
+    qDebug() << "Current translator = " << currentTranslator << ", name: " << name;
+
+    QStandardItemModel* model = new QStandardItemModel(this);
+
+    QList<QString> translatorNames = KeyboardTranslatorManager::instance()->allTranslators();
+    QListIterator<QString> iter(translatorNames);
+    while (iter.hasNext())
+    {
+        const QString& name = iter.next();
+
+        const KeyboardTranslator* translator = KeyboardTranslatorManager::instance()->findTranslator(name);
+
+        qDebug() << "Translator:" << translator << ", name = " << translator->name() << "description = " << 
+            translator->description();
+
+        // TODO Use translator->description() here
+        QStandardItem* item = new QStandardItem(translator->description());
+        item->setData(QVariant::fromValue(translator),Qt::UserRole+1);
+        item->setFlags( item->flags() | Qt::ItemIsUserCheckable );
+
+        if ( translator == currentTranslator )
+            item->setCheckState( Qt::Checked );
+        else
+            item->setCheckState( Qt::Unchecked );
+
+        model->appendRow(item);
+    }
+
+    _ui->keyBindingList->setModel(model);
 }
 bool EditProfileDialog::eventFilter( QObject* watched , QEvent* event )
 {
@@ -360,43 +407,53 @@ void EditProfileDialog::removeColorScheme()
         _ui->colorSchemeList->model()->removeRow(selected.first().row());
     }
 }
-void EditProfileDialog::showColorSchemeEditor(bool newScheme)
+void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
 {    
     QModelIndexList selected = _ui->colorSchemeList->selectionModel()->selectedIndexes();
 
+    QAbstractItemModel* model = _ui->colorSchemeList->model();
+    QModelIndex index;
     if ( !selected.isEmpty() )
+        index = selected.first();
+    else
+        index = model->index(0,0); // use the first item in the list
+
+    const ColorScheme* colors = model->data(index,Qt::UserRole+1).value<const ColorScheme*>();
+
+    KDialog* dialog = new KDialog(this);
+
+    if ( isNewScheme )
+        dialog->setCaption(i18n("New Color Scheme"));
+    else
+        dialog->setCaption(i18n("Edit Color Scheme"));
+
+    ColorSchemeEditor* editor = new ColorSchemeEditor;
+    dialog->setMainWidget(editor);
+    editor->setup(colors);
+
+    if ( isNewScheme )
+        editor->setDescription(i18n("New Color Scheme"));
+        
+    if ( dialog->exec() == QDialog::Accepted )
     {
-        QAbstractItemModel* model = _ui->colorSchemeList->model();
-        QModelIndex index = selected.first();
-        const ColorScheme* colors = model->data(index,Qt::UserRole+1).value<const ColorScheme*>();
+        ColorScheme* newScheme = new ColorScheme(*editor->colorScheme());
 
-        KDialog* dialog = new KDialog(this);
+        // if this is a new color scheme, pick a name based on the description
+        if ( isNewScheme )
+            newScheme->setName(newScheme->description());
 
-        if ( newScheme )
-            dialog->setCaption(i18n("New Color Scheme"));
-        else
-            dialog->setCaption(i18n("Edit Color Scheme"));
+        ColorSchemeManager::instance()->addColorScheme( newScheme );
+        
+        updateColorSchemeList();
 
-        ColorSchemeEditor* editor = new ColorSchemeEditor;
-        dialog->setMainWidget(editor);
-        editor->setup(colors);
+        const QString& currentScheme = SessionManager::instance()->profile(_profileKey)->colorScheme();
 
-        if ( dialog->exec() == QDialog::Accepted )
+        // the next couple of lines may seem slightly odd,
+        // but they force any open views based on the current profile
+        // to update their color schemes
+        if ( newScheme->name() == currentScheme )
         {
-            ColorScheme* newScheme = new ColorScheme(*editor->colorScheme());
-            ColorSchemeManager::instance()->addColorScheme( newScheme );
-            model->setData(index, QVariant::fromValue( (const ColorScheme*)newScheme ) , Qt::UserRole+1);
-            model->setData(index, newScheme->description() , Qt::DisplayRole);
-
-            const QString& currentScheme = SessionManager::instance()->profile(_profileKey)->colorScheme();
-
-            // the next couple of lines may seem slightly odd,
-            // but they force any open views based on the current profile
-            // to update their color schemes
-            if ( newScheme->name() == currentScheme )
-            {
-                _tempProfile->setProperty(Profile::ColorScheme,newScheme->name());
-            }
+            _tempProfile->setProperty(Profile::ColorScheme,newScheme->name());
         }
     }
 }
@@ -425,39 +482,8 @@ void EditProfileDialog::colorSchemeSelected()
 void EditProfileDialog::setupKeyboardPage(const Profile* info)
 {
     // setup translator list
-    const QString& name = SessionManager::instance()->profile(_profileKey)->property(Profile::KeyBindings)
-                                .value<QString>();
-
-
-    const KeyboardTranslator* currentTranslator = KeyboardTranslatorManager::instance()->findTranslator(name);
-    
-    qDebug() << "Current translator = " << currentTranslator << ", name: " << name;
-
-    QStandardItemModel* model = new QStandardItemModel(this);
-
-    QList<QString> translatorNames = KeyboardTranslatorManager::instance()->allTranslators();
-    QListIterator<QString> iter(translatorNames);
-    while (iter.hasNext())
-    {
-        const QString& name = iter.next();
-
-        const KeyboardTranslator* translator = KeyboardTranslatorManager::instance()->findTranslator(name);
-
-        qDebug() << "Translator:" << translator << ", name = " << translator->name() << "description = " << 
-            translator->description();
-
-        // TODO Use translator->description() here
-        QStandardItem* item = new QStandardItem(translator->description());
-        item->setData(QVariant::fromValue(translator),Qt::UserRole+1);
-        item->setFlags( item->flags() | Qt::ItemIsUserCheckable );
-
-        if ( translator == currentTranslator )
-            item->setCheckState( Qt::Checked );
-        else
-            item->setCheckState( Qt::Unchecked );
-
-        model->appendRow(item);
-    }  
+ 
+    updateKeyBindingsList(); 
 
     connect( _ui->keyBindingList , SIGNAL(doubleClicked(const QModelIndex&)) , this , 
             SLOT(keyBindingSelected()) );
@@ -469,8 +495,6 @@ void EditProfileDialog::setupKeyboardPage(const Profile* info)
           SLOT(editKeyBinding()) );  
     connect( _ui->removeKeyBindingsButton , SIGNAL(clicked()) , this ,
             SLOT(removeKeyBinding()) );
-   
-    _ui->keyBindingList->setModel(model); 
 }
 void EditProfileDialog::keyBindingSelected()
 {
@@ -507,44 +531,51 @@ void EditProfileDialog::removeKeyBinding()
         _ui->keyBindingList->model()->removeRow(selected.first().row());   
     }
 }
-void EditProfileDialog::showKeyBindingEditor(bool newTranslator)
+void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
 {
     QModelIndexList selected = _ui->keyBindingList->selectionModel()->selectedIndexes();
+    QAbstractItemModel* model = _ui->keyBindingList->model();
 
+    QModelIndex index;
     if ( !selected.isEmpty() )
+        index = selected.first();
+    else
+        index = model->index(0,0); // Use first item if there is no selection
+
+
+    const KeyboardTranslator* translator = model->data(index,
+                                            Qt::UserRole+1).value<const KeyboardTranslator*>();
+    KDialog* dialog = new KDialog(this);
+
+    if ( isNewTranslator )
+        dialog->setCaption(i18n("New Key Binding List"));
+    else
+        dialog->setCaption(i18n("Edit Key Binding List"));
+
+    KeyBindingEditor* editor = new KeyBindingEditor;
+    dialog->setMainWidget(editor);
+    editor->setup(translator);
+
+    if ( isNewTranslator )
+        editor->setDescription(i18n("New Key Binding List"));
+
+    if ( dialog->exec() == QDialog::Accepted )
     {
-        QAbstractItemModel* model = _ui->keyBindingList->model();
-        QModelIndex index = selected.first();
+        KeyboardTranslator* newTranslator = new KeyboardTranslator(*editor->translator());
 
-        const KeyboardTranslator* translator = model->data(index,
-                                                Qt::UserRole+1).value<const KeyboardTranslator*>();
-        KDialog* dialog = new KDialog(this);
+        if ( isNewTranslator )
+            newTranslator->setName(newTranslator->description());
 
-        if ( newTranslator )
-            dialog->setCaption(i18n("New Key Binding List"));
-        else
-            dialog->setCaption(i18n("Edit Key Binding List"));
+        KeyboardTranslatorManager::instance()->addTranslator( newTranslator );
 
-        KeyBindingEditor* editor = new KeyBindingEditor;
-        dialog->setMainWidget(editor);
-        editor->setup(translator);
+        updateKeyBindingsList();
+        
+        const QString& currentTranslator = SessionManager::instance()->profile(_profileKey)
+                                        ->property(Profile::KeyBindings).value<QString>();
 
-        if ( dialog->exec() == QDialog::Accepted )
+        if ( newTranslator->name() == currentTranslator )
         {
-            KeyboardTranslator* newTranslator = new KeyboardTranslator(*editor->translator());
-            KeyboardTranslatorManager::instance()->addTranslator( newTranslator );
-
-            model->setData(index,QVariant::fromValue((const KeyboardTranslator*)newTranslator) 
-                                                , Qt::UserRole+1);
-            model->setData(index,newTranslator->description(),Qt::DisplayRole);
-
-            const QString& currentTranslator = SessionManager::instance()->profile(_profileKey)
-                                            ->property(Profile::KeyBindings).value<QString>();
-
-            if ( newTranslator->name() == currentTranslator )
-            {
-                _tempProfile->setProperty(Profile::KeyBindings,newTranslator->name());
-            }
+            _tempProfile->setProperty(Profile::KeyBindings,newTranslator->name());
         }
     }
 }

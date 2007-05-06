@@ -143,6 +143,9 @@ private:
     void setupScrollingPage(const Profile* info);
     void setupAdvancedPage(const Profile* info);
 
+    void updateColorSchemeList();
+    void updateKeyBindingsList();
+
     void showColorSchemeEditor(bool newScheme);
     void showKeyBindingEditor(bool newTranslator);
 
