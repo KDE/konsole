@@ -463,13 +463,14 @@ void ViewManager::merge(ViewManager* otherManager)
         TerminalDisplay* view = dynamic_cast<TerminalDisplay*>(otherViewIter.next());
         
         assert(view);
+        assert( otherManager->_sessionMap[view] );
 
-        takeView(otherManager,otherContainer,activeContainer,view);
+        createView(otherManager->_sessionMap[view]);
     } 
 }
 
 
-void ViewManager::takeView(ViewManager* otherManager , ViewContainer* otherContainer, 
+/*void ViewManager::takeView(ViewManager* otherManager , ViewContainer* otherContainer, 
                            ViewContainer* newContainer, TerminalDisplay* view)
 {
     // FIXME - the controller associated with the display which is being moved
@@ -483,7 +484,7 @@ void ViewManager::takeView(ViewManager* otherManager , ViewContainer* otherConta
     // transfer the session map entries
     _sessionMap.insert(view,otherManager->_sessionMap[view]);
     otherManager->_sessionMap.remove(view);
-}
+}*/
 
 TerminalDisplay* ViewManager::createTerminalDisplay()
 {

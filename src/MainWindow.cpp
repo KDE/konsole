@@ -110,12 +110,14 @@ void MainWindow::activeViewChanged(SessionController* controller)
     {
         disconnect( _pluggedController , SIGNAL(titleChanged(ViewProperties*)) 
                      , this , SLOT(activeViewTitleChanged(ViewProperties*)) );
+        guiFactory()->removeClient(_pluggedController);
     }
+
+    Q_ASSERT( controller );
 
     connect( controller , SIGNAL(titleChanged(ViewProperties*)) , 
             this , SLOT(activeViewTitleChanged(ViewProperties*)) );
 
-    guiFactory()->removeClient(_pluggedController);
     guiFactory()->addClient(controller);
 
     // update session title to match newly activated session
@@ -179,9 +181,11 @@ void MainWindow::setupActions()
     hideMenuBarAction->setText( i18n("Hide MenuBar") );
     connect( hideMenuBarAction , SIGNAL(triggered()) , menuBar() , SLOT(hide()) );
 
-    QAction* mergeAction = collection->addAction("merge-windows");
-    mergeAction->setText( i18n("&Merge Windows") );
-    connect( mergeAction , SIGNAL(triggered()) , this , SLOT(mergeWindows()) );
+    //TODO - Implmement this correctly
+    //
+    //QAction* mergeAction = collection->addAction("merge-windows");
+    //mergeAction->setText( i18n("&Merge Windows") );
+    //connect( mergeAction , SIGNAL(triggered()) , this , SLOT(mergeWindows()) );
 
     // Settings Menu
     KStandardAction::configureNotifications( 0 , 0 , collection  );
@@ -259,11 +263,13 @@ void MainWindow::mergeWindows()
 
     while (topLevelIter.hasNext())
     {
-        MainWindow* window = qobject_cast<MainWindow*>(topLevelIter.next());
+        QWidget* w = topLevelIter.next();
+        qDebug() << "Top level widget: " << w->metaObject()->className();
+        MainWindow* window = qobject_cast<MainWindow*>(w);
         if ( window && window != this )
         {
             _viewManager->merge( window->_viewManager );
-            window->deleteLater();
+            //window->close();
         }
     }
 }
