@@ -471,14 +471,6 @@ SessionManager::~SessionManager()
 
     while (infoIter.hasNext())
         delete infoIter.next();
-
-    // failure to call KGlobal::config()->sync() here results in a crash on exit and
-    // configuraton information not being saved to disk.
-    // my understanding of the documentation is that KConfig is supposed to save
-    // the data automatically when the application exits.  need to discuss this
-    // with people who understand KConfig better.
-    qWarning() << "Manually syncing configuration information - this should be done automatically.";
-    KGlobal::config()->sync();
 }
 
 const QList<Session*> SessionManager::sessions()
