@@ -222,6 +222,8 @@ void ViewManager::detachActiveView()
 
 void ViewManager::sessionFinished( Session* session )
 {
+    previousView();
+
     QList<TerminalDisplay*> children = _viewSplitter->findChildren<TerminalDisplay*>();
 
     foreach ( TerminalDisplay* view , children )
@@ -229,11 +231,9 @@ void ViewManager::sessionFinished( Session* session )
         if ( _sessionMap[view] == session )
         {
             _sessionMap.remove(view);
-            delete view;
+            view->deleteLater();
         }
     }
-
-    focusActiveView(); 
 }
 
 void ViewManager::focusActiveView()
@@ -435,12 +435,7 @@ void ViewManager::viewCloseRequest(QWidget* view)
         if ( session->views().count() == 0 )
             session->closeSession();
     }
-    else
-    {
-        kDebug() << __FILE__ << __LINE__ << ": received close request from unknown view." << endl;
-    }
-
-    qDebug() << "Closing view";
+        
     focusActiveView();
 }
 
