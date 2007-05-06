@@ -59,7 +59,7 @@ MainWindow::MainWindow()
     // add a small amount of space between the top of the window and the main widget
     // to prevent the menu bar and main widget borders touching (which looks very ugly) in styles
     // where the menu bar has a lower border
-    setContentsMargins(0,2,0,0);
+    //setContentsMargins(0,2,0,0);
    
     // create actions for menus
     setXMLFile("konsole/konsoleui.rc");

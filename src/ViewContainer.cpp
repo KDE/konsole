@@ -400,18 +400,34 @@ TabbedViewContainerV2::TabbedViewContainerV2(QObject* parent) : ViewContainer(pa
     QVBoxLayout* layout = new QVBoxLayout;
     layout->setSpacing(0);
     layout->setMargin(0);
+   
+    _tabBarSpacer = new QSpacerItem(0,TabBarSpace);
+
+    layout->addItem(_tabBarSpacer);
     layout->addWidget(_tabBar);
     layout->addWidget(_stackWidget);
 
     _containerWidget->setLayout(layout);
 }
+void TabbedViewContainerV2::setTabBarVisible(bool visible)
+{
+    _tabBar->setVisible(visible);
+    if ( visible )
+    {
+        _tabBarSpacer->changeSize(0,TabBarSpace);
+    }
+    else
+    {
+        _tabBarSpacer->changeSize(0,0);
+    } 
+}
 void TabbedViewContainerV2::navigationDisplayModeChanged(NavigationDisplayMode mode)
 {
     if ( mode == AlwaysShowNavigation && _tabBar->isHidden() )
-        _tabBar->setVisible(true);
+        setTabBarVisible(true);
 
     if ( mode == AlwaysHideNavigation && !_tabBar->isHidden() )
-        _tabBar->setVisible(false);
+        setTabBarVisible(false);
 
     if ( mode == ShowNavigationAsNeeded )
         dynamicTabBarVisibility();
@@ -422,10 +438,10 @@ void TabbedViewContainerV2::dynamicTabBarVisibility()
     qDebug() << "tab var hidden:" << _tabBar->isHidden();
 
     if ( _tabBar->count() > 1 && _tabBar->isHidden() )
-        _tabBar->show();
+        setTabBarVisible(true);
 
     if ( _tabBar->count() < 2 && !_tabBar->isHidden() )
-        _tabBar->hide();
+        setTabBarVisible(false);    
 }
 TabbedViewContainerV2::~TabbedViewContainerV2()
 {

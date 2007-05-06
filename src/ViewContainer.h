@@ -28,6 +28,7 @@
 #include <QList>
 #include <QTabBar>
 
+class QSpacerItem;
 class QStackedWidget;
 class QWidget;
 
@@ -268,10 +269,14 @@ private slots:
 
 private:
     void dynamicTabBarVisibility();
+    void setTabBarVisible(bool visible);
 
     ViewContainerTabBar* _tabBar;
     QStackedWidget* _stackWidget;
     QWidget* _containerWidget;
+    QSpacerItem* _tabBarSpacer;
+
+    static const int TabBarSpace = 2;
 };
 
 /**

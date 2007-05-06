@@ -303,7 +303,11 @@ void ViewManager::splitView(Qt::Orientation orientation)
     container->containerWidget()->setFocus();
 
     // ensure that the active view is focused after the split / unsplit
-    _viewSplitter->activeContainer()->activeView()->setFocus(Qt::OtherFocusReason);
+    ViewContainer* activeContainer = _viewSplitter->activeContainer();
+    QWidget* activeView = activeContainer ? activeContainer->activeView() : 0;
+
+    if ( activeView )
+        activeView->setFocus(Qt::OtherFocusReason);
 }
 void ViewManager::removeContainer(ViewContainer* container)
 {
