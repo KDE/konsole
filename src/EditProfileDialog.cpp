@@ -307,6 +307,8 @@ void EditProfileDialog::updateColorSchemeList()
         model->appendRow(item);
     }
 
+    model->sort(0);
+
     _ui->colorSchemeList->setModel(model);
 
 }
@@ -346,6 +348,8 @@ void EditProfileDialog::updateKeyBindingsList()
 
         model->appendRow(item);
     }
+
+    model->sort(0);
 
     _ui->keyBindingList->setModel(model);
 }
