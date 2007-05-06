@@ -124,7 +124,7 @@ private slots:
     void findNextInHistory();
     void findPreviousInHistory();
     void saveHistory();
-    void historyOptions();
+    void showHistoryOptions();
     void clearHistory();
     void clearHistoryAndReset();
     void closeSession();

@@ -77,13 +77,37 @@ public:
     /** Sets the number of lines for the fixed size history mode. */
     void setLineCount(int lines);
 
-protected slots:
-    void slotDefault();
+    /** 
+     * Sets the default history mode.  When the user clicks on the "Defaults" button,
+     * this mode will be used.
+     */
+    void setDefaultMode( HistoryMode mode );
+
+    /** Returns the default mode, as set with setDefaultMode() */
+    HistoryMode defaultMode() const;
+
+    /** 
+     * Sets the default line count.  When the user clicks on the "Defaults" button,
+     * the line count will be set to this number.
+     */
+    void setDefaultLineCount( int count );
+
+    /** Returns the default line count, as set with setDefaultLineCount() */
+    int defaultLineCount() const;
+
+private slots:
+    // changes the mode and line count back to the defaults
+    // specified with setDefaultMode() and setDefaultLineCount()
+    void useDefaults();
+
 private:
     QAbstractButton* _noHistoryButton;
     QAbstractButton* _fixedHistoryButton;
     QAbstractButton* _unlimitedHistoryButton;
-    QSpinBox* _lineCountBox;    
+    QSpinBox* _lineCountBox;   
+
+    HistoryMode _defaultMode;
+    int _defaultLineCount; 
 };
 
 }

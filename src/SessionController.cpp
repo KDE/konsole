@@ -415,7 +415,7 @@ void SessionController::setupActions()
     action = collection->addAction("history-options");
     action->setText( i18n("History Options") );
     action->setIcon( KIcon("configure") );
-    connect( action , SIGNAL(triggered()) , this , SLOT(historyOptions()) );
+    connect( action , SIGNAL(triggered()) , this , SLOT(showHistoryOptions()) );
 
     action = collection->addAction("clear-history");
     action->setText( i18n("Clear History") );
@@ -667,7 +667,7 @@ void SessionController::findPreviousInHistory()
 
     beginSearch(_searchBar->searchText(),SearchHistoryTask::Backwards);
 }
-void SessionController::historyOptions()
+void SessionController::showHistoryOptions()
 {
     HistorySizeDialog* dialog = new HistorySizeDialog(_view);
     const HistoryType& currentHistory = _session->history();

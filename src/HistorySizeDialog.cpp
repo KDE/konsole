@@ -31,6 +31,7 @@
 
 // Konsole
 #include "HistorySizeDialog.h"
+#include "SessionManager.h"
 
 using namespace Konsole;
 
@@ -40,6 +41,8 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     ,  _fixedHistoryButton(0)
     ,  _unlimitedHistoryButton(0)
     ,  _lineCountBox(0)
+    ,  _defaultMode(FixedSizeHistory)
+    ,  _defaultLineCount(1000)
 {
     // basic dialog properties
     setPlainCaption( i18n("History Options") );
@@ -73,9 +76,9 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
 
     // 1000 lines was the default in the KDE 3 series
     // using that for now
-    _lineCountBox->setValue( 1000 );
+    _lineCountBox->setValue( _defaultLineCount );
 
-    _lineCountBox->setSingleStep( 100 );
+    _lineCountBox->setSingleStep( _defaultLineCount / 10 );
 
     QLabel* lineCountLabel = new QLabel(i18n("lines"),this);
     QHBoxLayout* lineCountLayout = new QHBoxLayout();
@@ -83,7 +86,6 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     _fixedHistoryButton->setFocusProxy(_lineCountBox);
 
     connect( _fixedHistoryButton , SIGNAL(clicked()) , _lineCountBox , SLOT(selectAll()) );
-    connect(this,SIGNAL(defaultClicked()),this,SLOT(slotDefault()));
     lineCountLayout->addWidget(_fixedHistoryButton);
     lineCountLayout->addWidget(_lineCountBox);
     lineCountLayout->addWidget(lineCountLabel);
@@ -96,12 +98,18 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     _fixedHistoryButton->click();
     _fixedHistoryButton->setFocus( Qt::OtherFocusReason );
 
+    connect(this,SIGNAL(defaultClicked()),this,SLOT(useDefaults()));
 }
 
-void HistorySizeDialog::slotDefault()
+void HistorySizeDialog::setDefaultMode( HistoryMode mode ) { _defaultMode = mode; }
+HistorySizeDialog::HistoryMode HistorySizeDialog::defaultMode() const { return _defaultMode; }
+void HistorySizeDialog::setDefaultLineCount( int count ) { _defaultLineCount = count; }
+int HistorySizeDialog::defaultLineCount() const { return _defaultLineCount; }
+
+void HistorySizeDialog::useDefaults()
 {
-    _fixedHistoryButton->click();
-    _lineCountBox->setValue( 1000 );
+    setMode( _defaultMode );
+    setLineCount( _defaultLineCount );
 }
 
 void HistorySizeDialog::setMode( HistoryMode mode )
