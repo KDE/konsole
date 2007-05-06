@@ -118,6 +118,6 @@ private:
 
 };
 
-};
+}
 
 #endif

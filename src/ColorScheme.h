@@ -254,7 +254,7 @@ private:
     static ColorSchemeManager* _instance;
 };
 
-};
+}
 
 Q_DECLARE_METATYPE(const Konsole::ColorScheme*)
 

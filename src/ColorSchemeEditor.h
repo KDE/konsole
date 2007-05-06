@@ -31,7 +31,7 @@ class QTableWidgetItem;
 namespace Ui
 {
     class ColorSchemeEditor;
-};
+}
 
 namespace Konsole
 {

@@ -336,6 +336,6 @@ inline bool Character::isBold(const ColorEntry* base) const
 
 extern unsigned short vt100_graphics[32];
 
-};
+}
 
 #endif // TECOMMON_H
