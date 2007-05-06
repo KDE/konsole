@@ -68,10 +68,25 @@ void EditProfileDialog::save()
         return;
 
     SessionManager::instance()->changeProfile(_profileKey,_tempProfile->setProperties());
+
+    // ensure that these settings are not undone by a call
+    // to unpreview()
+    QHashIterator<Profile::Property,QVariant> iter(_tempProfile->setProperties());
+    while ( iter.hasNext() )
+    {
+        iter.next();
+        _previewedProperties.remove(iter.key());
+    }
+}
+void EditProfileDialog::reject()
+{
+    unpreviewAll();
+    KDialog::reject();
 }
 void EditProfileDialog::accept()
 {
     save();
+    unpreviewAll();
     KDialog::accept(); 
 }
 void EditProfileDialog::setProfile(const QString& key)
@@ -343,7 +358,7 @@ bool EditProfileDialog::eventFilter( QObject* watched , QEvent* event )
 
     return KDialog::eventFilter(watched,event);
 }
-void EditProfileDialog::hideEvent(QHideEvent* event) 
+void EditProfileDialog::unpreviewAll()
 {
     qDebug() << "unpreviewing";
 
@@ -352,19 +367,12 @@ void EditProfileDialog::hideEvent(QHideEvent* event)
     while ( iter.hasNext() )
     {
         iter.next();
-
-        // only reset preview changes for temporary changes 
-        // ( changes saved in _tempProfile are considered permanent )
-        if ( !_tempProfile->isPropertySet( (Profile::Property)iter.key() ) 
-             || result() != QDialog::Accepted )
-            map.insert((Profile::Property)iter.key(),iter.value());
+        map.insert((Profile::Property)iter.key(),iter.value());
     }
 
     // undo any preview changes
-    if ( !_previewedProperties.isEmpty() )
+    if ( !map.isEmpty() )
         SessionManager::instance()->changeProfile(_profileKey,map,false);
-
-    event->accept();
 }
 void EditProfileDialog::unpreview(int property)
 {

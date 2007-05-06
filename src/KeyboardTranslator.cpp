@@ -140,7 +140,6 @@ KeyboardTranslatorReader::KeyboardTranslatorReader( QIODevice* source )
    
         if ( !tokens.isEmpty() && tokens.first().type == Token::TitleKeyword )
         {
-            qDebug() << "Found description: " << tokens[1].text;
             _description = tokens[1].text;
         }
    }
@@ -157,7 +156,6 @@ void KeyboardTranslatorReader::readNext()
         {
             KeyboardTranslator::State flags = KeyboardTranslator::NoState;
             QKeySequence sequence = decodeSequence(tokens[1].text,flags); 
-            qDebug() << sequence << ", count:" << sequence.count() << " text = " << tokens[1].text;
 
             int keyCode = Qt::Key_unknown;
             int modifiers = Qt::NoModifier;
@@ -184,7 +182,6 @@ void KeyboardTranslatorReader::readNext()
             // get text or command
             if ( tokens[2].type == Token::OutputText )
             {
-                qDebug() << "Setting text of length: " << tokens[2].text.length();
                 text = tokens[2].text.toLocal8Bit();
             }
             else if ( tokens[2].type == Token::Command )
@@ -203,14 +200,11 @@ void KeyboardTranslatorReader::readNext()
                 else
                     qDebug() << "Command not understood:" << tokens[2].text;
 
-                qDebug() << "No text";
             }
 
-            qDebug() << "About to create entry";
 
             _nextEntry = KeyboardTranslator::Entry(keyCode,(Qt::KeyboardModifier)modifiers,flags,text,command);
 
-            qDebug() << "Created new entry";
 
             _hasNext = true;
 
@@ -283,9 +277,9 @@ QKeySequence KeyboardTranslatorReader::decodeSequence(const QString& text , Keyb
     if ( modifiers & Qt::MetaModifier )
         newText.prepend("meta+");
 
-    qDebug() << "modifier: " << newText;
+    //qDebug() << "modifier: " << newText;
     sequence = QKeySequence::fromString(newText);
-    qDebug() << "after: " << sequence;
+    //qDebug() << "after: " << sequence;
 
     stateFlags = (KeyboardTranslator::State)state;
 
@@ -303,7 +297,6 @@ KeyboardTranslator::Entry KeyboardTranslatorReader::nextEntry()
 {
     Q_ASSERT( _hasNext );
 
-    qDebug() << "About to return entry";
 
     KeyboardTranslator::Entry entry = _nextEntry;
 

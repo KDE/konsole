@@ -68,9 +68,9 @@ public:
 
 public slots:
     virtual void accept();
+    virtual void reject();
 
 protected:
-    virtual void hideEvent(QHideEvent* event);
     virtual bool eventFilter(QObject* watched , QEvent* event);
 
 private slots:
@@ -135,6 +135,7 @@ private slots:
     void customCursorColorChanged(const QColor&);
     void wordCharactersChanged(const QString&);
 
+
 private:
     // initialize various pages of the dialog
     void setupGeneralPage(const Profile* info);
@@ -153,6 +154,7 @@ private:
 
     void preview(int property , QVariant value);
     void unpreview(int property);
+    void unpreviewAll();
 
     struct RadioOption
     {
