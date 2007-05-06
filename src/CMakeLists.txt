@@ -200,7 +200,3 @@ target_link_libraries(kded_kwrited  ${KDE4_KDE3SUPPORT_LIBS})
 install(TARGETS kded_kwrited  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 
-########### install files ###############
-
-install( FILES x-konsole.desktop  DESTINATION  ${MIME_INSTALL_DIR}/application )
-
