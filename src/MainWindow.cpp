@@ -242,8 +242,8 @@ void MainWindow::newFromProfile(const QString& key)
 }
 void MainWindow::showManageProfilesDialog()
 {
-    ManageProfilesDialog dialog(this);
-    dialog.exec();
+    ManageProfilesDialog* dialog = new ManageProfilesDialog(this);
+    dialog->show();
 }
 
 void MainWindow::showRemoteConnectionDialog()

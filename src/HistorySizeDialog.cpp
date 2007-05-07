@@ -48,7 +48,7 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     setPlainCaption( i18n("History Options") );
     setButtons(  Default | Ok | Cancel );
     setDefaultButton(Ok);
-    setModal( true );
+    setModal( false );
 
     // dialog widgets
     QWidget* dialogWidget = new QWidget(this);
@@ -99,6 +99,13 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     _fixedHistoryButton->setFocus( Qt::OtherFocusReason );
 
     connect(this,SIGNAL(defaultClicked()),this,SLOT(useDefaults()));
+
+    connect(this,SIGNAL(accepted()),this,SLOT(emitOptionsChanged()));
+}
+
+void HistorySizeDialog::emitOptionsChanged()
+{
+    emit optionsChanged( mode() , lineCount() );
 }
 
 void HistorySizeDialog::setDefaultMode( HistoryMode mode ) { _defaultMode = mode; }

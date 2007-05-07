@@ -95,10 +95,25 @@ public:
     /** Returns the default line count, as set with setDefaultLineCount() */
     int defaultLineCount() const;
 
+signals:
+    /**
+     * Emitted when the user changes the scroll-back mode or line count and
+     * accepts the change by pressing the OK button
+     *
+     * @param mode The current history mode.  This is a value from the HistoryMode enum.
+     * @param lineCount The current line count.  This is only applicable if mode is
+     * FixedSizeHistory
+     */
+    void optionsChanged(int mode , int lineCount);
+
 private slots:
     // changes the mode and line count back to the defaults
     // specified with setDefaultMode() and setDefaultLineCount()
     void useDefaults();
+
+    // fires the optionsChanged() signal with the current mode
+    // and line count as arguments
+    void emitOptionsChanged();
 
 private:
     QAbstractButton* _noHistoryButton;

@@ -56,6 +56,8 @@ EditProfileDialog::EditProfileDialog(QWidget* parent)
     _ui->setupUi(mainWidget());
 
     _tempProfile = new Profile;
+
+    qDebug() << "Is modal = " << isModal();
 }
 EditProfileDialog::~EditProfileDialog()
 {

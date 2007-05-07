@@ -15,7 +15,6 @@
 #include "EditProfileDialog.h"
 #include "Emulation.h"
 #include "Filter.h"
-#include "HistorySizeDialog.h"
 #include "History.h"
 #include "IncrementalSearchBar.h"
 #include "ScreenWindow.h"
@@ -485,10 +484,10 @@ void SessionController::debugProcess()
 
 void SessionController::editCurrentProfile()
 {
-    EditProfileDialog dialog(_view);
+    EditProfileDialog* dialog = new EditProfileDialog( QApplication::activeWindow() );
 
-    dialog.setProfile(_session->type());
-    dialog.exec();
+    dialog->setProfile(_session->type());
+    dialog->show();
 }
 void SessionController::renameSession()
 {
@@ -669,7 +668,7 @@ void SessionController::findPreviousInHistory()
 }
 void SessionController::showHistoryOptions()
 {
-    HistorySizeDialog* dialog = new HistorySizeDialog(_view);
+    HistorySizeDialog* dialog = new HistorySizeDialog( QApplication::activeWindow() );
     const HistoryType& currentHistory = _session->history();
 
     if ( currentHistory.isEnabled() )
@@ -685,18 +684,21 @@ void SessionController::showHistoryOptions()
     else
         dialog->setMode( HistorySizeDialog::NoHistory );
 
-    if ( dialog->exec() == QDialog::Accepted )
-    {
-        if ( dialog->mode() == HistorySizeDialog::NoHistory )
-            _session->setHistory( HistoryTypeNone() );
-        else if ( dialog->mode() == HistorySizeDialog::FixedSizeHistory )
-            _session->setHistory( HistoryTypeBuffer(dialog->lineCount()) );
-        else if ( dialog->mode() == HistorySizeDialog::UnlimitedHistory )
-            _session->setHistory( HistoryTypeFile() );       
-    }
+    connect( dialog , SIGNAL(optionsChanged(int,int)) , 
+             this , SLOT(scrollBackOptionsChanged(int,int)) );
 
-    delete dialog;
+    dialog->show();
 }
+void SessionController::scrollBackOptionsChanged( int mode , int lines )
+{
+      if ( mode == HistorySizeDialog::NoHistory )
+         _session->setHistory( HistoryTypeNone() );
+     else if ( mode == HistorySizeDialog::FixedSizeHistory )
+         _session->setHistory( HistoryTypeBuffer(lines) );
+     else if ( mode == HistorySizeDialog::UnlimitedHistory )
+         _session->setHistory( HistoryTypeFile() );       
+}
+
 void SessionController::saveHistory()
 {
     SessionTask* task = new SaveHistoryTask();

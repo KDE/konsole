@@ -14,6 +14,7 @@
 #include <KXMLGUIClient>
 
 // Konsole
+#include "HistorySizeDialog.h"
 #include "ViewProperties.h"
 
 namespace KIO
@@ -150,6 +151,8 @@ private slots:
 
     void requireUrlFilterUpdate();
     void highlightMatches(bool highlight);
+
+    void scrollBackOptionsChanged(int mode , int lines);
 
     // debugging slots
     void debugProcess();
