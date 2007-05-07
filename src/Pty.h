@@ -57,6 +57,8 @@ Q_OBJECT
     void setSize(int lines, int cols);
     void setErase(char erase);
 
+    int foregroundProcessGroup() const;
+
   public Q_SLOTS:
     void useUtf8(bool on);
     void lockPty(bool lock);

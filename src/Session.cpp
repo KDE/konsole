@@ -877,7 +877,10 @@ void Session::setSize(QSize size)
 
   emit resizeSession(this, size);
 }
-
+int Session::foregroundPid() const
+{
+    return _shellProcess->foregroundProcessGroup();
+}
 int Session::sessionPid() const
 {
     return _shellProcess->pid();

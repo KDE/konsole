@@ -258,4 +258,16 @@ void Pty::lockPty(bool lock)
     resume();
 }
 
+int Pty::foregroundProcessGroup() const
+{
+    int pid = tcgetpgrp(pty()->masterFd());
+
+    if ( pid != -1 )
+    {
+        return pid;
+    } 
+
+    return 0;
+}
+
 #include "Pty.moc"

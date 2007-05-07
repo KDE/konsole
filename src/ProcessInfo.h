@@ -121,6 +121,10 @@ public:
     /*** 
      * Returns the id of the current foreground process 
      *
+     * NOTE:  Using the foregroundProcessGroup() method of the Pty
+     * instance associated with the terminal of interest is preferred
+     * over using this method.
+     *
      * @param ok Set to true if the foreground process id was read successfully or false otherwise
      */
     int foregroundPid(bool* ok) const;

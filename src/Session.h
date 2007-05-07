@@ -205,6 +205,12 @@ public:
    * This is the id used by the system API to refer to the process.
    */
   int sessionPid() const;
+ 
+  /**
+   * Returns the process id of the terminal's foreground process.
+   */
+  int foregroundPid() const;
+
   void enableFullScripting(bool b);
 
   void startZModem(const QString &rz, const QString &dir, const QStringList &list);

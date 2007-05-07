@@ -101,7 +101,6 @@ void SessionController::snapshot()
 {
     qDebug() << "session" << _session->title() << "snapshot";
     
-    bool ok = false;
 
     ProcessInfo* process = 0;
     ProcessInfo* snapshot = ProcessInfo::newInstance(_session->sessionPid());
@@ -109,8 +108,8 @@ void SessionController::snapshot()
 
     // use foreground process information if available
     // fallback to session process otherwise
-    int pid = snapshot->foregroundPid(&ok);
-    if ( ok )
+    int pid = _session->foregroundPid(); //snapshot->foregroundPid(&ok);
+    if ( pid != 0 )
     {
        process = ProcessInfo::newInstance(pid);
        process->update(); 
@@ -118,6 +117,7 @@ void SessionController::snapshot()
     else
        process = snapshot;
 
+    bool ok = false;
     QString title; 
     if ( process->name(&ok) == "ssh" && ok )
     {
@@ -152,8 +152,8 @@ KUrl SessionController::url() const
         bool ok = false;
 
         // check if foreground process is bookmark-able
-        int pid = info->foregroundPid(&ok);
-        if ( ok )
+        int pid = _session->foregroundPid();
+        if ( pid != 0 )
         {
             qDebug() << "reading session process = " << info->name(&ok);
 
