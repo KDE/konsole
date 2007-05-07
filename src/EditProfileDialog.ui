@@ -43,6 +43,9 @@
          <property name="text" >
           <string>Profile Name:</string>
          </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
         </widget>
        </item>
        <item row="0" column="1" colspan="2" >
@@ -57,6 +60,9 @@
          <property name="text" >
           <string>Command:</string>
          </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
         </widget>
        </item>
        <item row="1" column="1" colspan="2" >
@@ -70,6 +76,9 @@
         <widget class="QLabel" name="label_9" >
          <property name="text" >
           <string>Initial Directory:</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>
@@ -94,6 +103,9 @@
         <widget class="QLabel" name="label_10" >
          <property name="text" >
           <string>Icon:</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>
@@ -158,10 +170,13 @@
             <property name="text" >
              <string>Tab Title Format:</string>
             </property>
+            <property name="alignment" >
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
            </widget>
           </item>
           <item row="0" column="1" >
-           <widget class="QLineEdit" name="tabTitleEdit" >
+           <widget class="KLineEdit" name="tabTitleEdit" >
             <property name="toolTip" >
              <string>Normal tab title format </string>
             </property>
@@ -182,10 +197,13 @@
             <property name="text" >
              <string>Remote Tab Title Format:</string>
             </property>
+            <property name="alignment" >
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
            </widget>
           </item>
           <item row="1" column="1" >
-           <widget class="QLineEdit" name="remoteTabTitleEdit" >
+           <widget class="KLineEdit" name="remoteTabTitleEdit" >
             <property name="toolTip" >
              <string>Tab title format used when a remote command (eg. connection to another computer via SSH) is being executed</string>
             </property>
@@ -393,6 +411,9 @@
              <widget class="QLabel" name="label_4" >
               <property name="text" >
                <string>Text Size:</string>
+              </property>
+              <property name="alignment" >
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
@@ -702,6 +723,9 @@
              <widget class="QLabel" name="label_11" >
               <property name="text" >
                <string>Word characters for double-click selection: </string>
+              </property>
+              <property name="alignment" >
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>

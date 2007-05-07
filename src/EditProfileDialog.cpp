@@ -128,6 +128,9 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
     _ui->initialDirEdit->setClearButtonShown(true);
     _ui->iconSelectButton->setIcon( KIcon(info->icon()) );
 
+    // tab title format
+    _ui->tabTitleEdit->setClearButtonShown(true);
+    _ui->remoteTabTitleEdit->setClearButtonShown(true);
     _ui->tabTitleEdit->setText( info->property(Profile::LocalTabTitleFormat).value<QString>() );
     _ui->remoteTabTitleEdit->setText( 
             info->property(Profile::RemoteTabTitleFormat).value<QString>());
@@ -135,10 +138,13 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
     // tab mode
     int tabMode = info->property(Profile::TabBarMode).value<int>();
 
-    RadioOption tabModes[] = { {_ui->alwaysHideTabBarButton,Profile::AlwaysHideTabBar,SLOT(alwaysHideTabBar())},
-                            {_ui->alwaysShowTabBarButton,Profile::AlwaysShowTabBar,SLOT(alwaysShowTabBar())},
-                            {_ui->autoShowTabBarButton,Profile::ShowTabBarAsNeeded,SLOT(showTabBarAsNeeded())},
-                            {0,0,0} };
+    RadioOption tabModes[] = {  {_ui->alwaysHideTabBarButton,Profile::AlwaysHideTabBar,
+                                 SLOT(alwaysHideTabBar())   },
+                                {_ui->alwaysShowTabBarButton,Profile::AlwaysShowTabBar,
+                                 SLOT(alwaysShowTabBar())   },
+                                {_ui->autoShowTabBarButton,Profile::ShowTabBarAsNeeded,
+                                 SLOT(showTabBarAsNeeded()) },
+                                {0,0,0} };
     setupRadio( tabModes , tabMode );
 
     _ui->showMenuBarButton->setChecked( info->property(Profile::ShowMenuBar).value<bool>() );

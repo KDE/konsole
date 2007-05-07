@@ -1,5 +1,0 @@
-
-konsole-split-view BRANCH
-
-This branch is for work on implementing the split view functionality into Konsole.
-This touches most of the Konsole front-end, mainly the Konsole class.

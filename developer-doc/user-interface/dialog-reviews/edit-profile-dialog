@@ -1,0 +1,56 @@
+Review of the Edit Profile Dialog based on the KDE 4 HIG
+
+Authors:        Robert Knight < robertknight@gmail.com >
+Last Updated:   07-05-2007
+Summary:        A basic review of the edit profile dialog 
+                checking conformance with the KDE 4 HIG
+
+=========================================
+
+Contents:
+    1.   Introduction  
+    2.   Visual vertical lines
+    3.   Inline editing
+    4.   Dialog depth
+
+=========================================
+
+1.  Introduction
+
+This is a basic review of the Edit Profile Dialog, checking compliance against the 
+KDE 4 HIG guidelines posted here and documenting problems found.
+
+http://wiki.openusability.org/guidelines/index.php/Design_and_Layout:Layout:Dialogs
+
+2.  Visual vertical lines
+
+The guidelines suggest that there should be "one or two major vertical axis" to guide the user's
+attention, that is there should be a vertical axis which widgets do not cross 
+( except for section titles ), but should be on one side or the other.
+
+The "General" and "Advanced" tabs do not comply with this.  In the General tab,
+each section ( main , Tab Titles , Window & Tab Bar Options ) has its own visual line.
+
+This is quite difficult to handle in Qt Designer at present and a problem for most
+KDE applications.  Particularly checkboxes and radio buttons since the label and 
+check/radio box are part of the same widget, but they may belong on
+different sides of the vertical line.
+
+2.1  Inline editing
+
+The tab title format section has a separate dialog to help editing these formats.
+The guidelines suggest the use of inline editing where possible. 
+
+2.2  Dialog depth
+
+The guidelines suggest not nesting dialogs more than two levels deep.
+If the user opens the dialog via Settings -> Edit Current Profile, then
+there are no dialogs more than two levels deep.
+
+If they go through the Manage Profiles dialog first ( Settings -> Manage Profiles )
+then the Color Scheme Editor / Key Bindings Editor dialogs are three levels deep.
+
+3.  Modality
+
+The "Manage Profiles" and "Edit Profile" dialogs are generally used in a modal
+fashion.  This is not necessary.

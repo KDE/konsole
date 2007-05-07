@@ -2,7 +2,7 @@
 Developer Documentation for Konsole
 
 Authors:        Robert Knight < robertknight@gmail.com >
-Last Updated:   14-02-2007
+Last Updated:   7th May 2007
 Summary:        Introduction to Konsole developer documentation
 ===============================================================
 
@@ -21,8 +21,8 @@ Contents:
 
 1.  Introduction
 
-The document explains the format used for Konsole documentation
-since KDE 4.  Any queries about 
+This document explains the layout of the developer documentation folder,
+and basic guidelines for contributors.
 
 2.  Documentation format
 
@@ -36,7 +36,7 @@ questions is encouraged:
     - What is it about?
     - Where can I find information about <subject> within this document?
 
-The current template can be found in kde4/developer-documentation-template
+The current template can be found in design/developer-documentation-template
 
 There is older documentation in the old-documents/ folder which does
 not follow this format.  This is kept as a reference.  Assistance
@@ -45,9 +45,15 @@ template would be appreciated.
 
 3.  Documentation layout
 
-    kde4/           - Documentation which is relevant to the KDE 4.0x release of Konsole
-    kde4/historic   - Documentation which was prepared during the KDE 4.0x development
-                      cycle but which is no longer relevant.
+    design/           - Documentation about the design of Konsole, and templates 
+                        for developer documentation.
+    design/historic   - Documentation which was prepared during the KDE 4.0x development
+                        cycle but which is no longer relevant.
+    
+    research/         - Results of research into user's experiences with Konsole
+
+    user-interface/   - Documentation concerning design and analysis of the user interface.
+
     old-documents/  - An assortment of documentation which was created during earlier
                       releases of Konsole.  There is useful inforamtion here, particularly
                       about the type of terminal which Konsole emulates, but it is not
@@ -96,8 +102,25 @@ Patches can be submitted for Konsole in a number of places:
 
 4.2.2   Code style guidelines
 
-    Generally speaking, the code follows the style of API used in Qt classes, and favours 
-    verbosity.  The naming of methods and classes follows the Qt style, roughly speaking.  
+    The API style roughly follows that used in the Qt and KDE classes.  
+
+    There are no strict guidelines on aspects of the code such as indentation, braces
+    or spacing, although following the style of the existing code is a good idea.
+    
+    Below is a list of the most important style considerations which have been developed
+    following experience working on earlier Konsole code:
+
+    - Variables and methods should have CLEAR, verbose names.  The use of abbreviations
+      should be avoided except for very common cases.
+
+    - The use of named constants is preferred over literals for clarity, and also to prevent
+      the need to edit each instance of a literal if the value needs to be changed.
+
+    - The use of macros ( #define ) should be avoided where possible.  enums, inline methods
+      templates, static constants etc. are strongly preferred. 
+    - Inside classes, private member fields have an underscore prefix ( eg. _myPrivateField )
+    - Private slots in classes DO NOT have a "slot" prefix before their name which is often
+      seen in other KDE applications.
 
     Earlier Konsole code had a proliferation of two-letter variable names, which made it hard
     to read and understand in some places, and let directly to bugs in others.  Descriptive naming
