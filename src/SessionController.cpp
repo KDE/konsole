@@ -337,7 +337,7 @@ void SessionController::setupActions()
 
     // Rename Session
     action = collection->addAction("rename-session");
-    action->setText( i18n("&Rename Tab") );
+    action->setText( i18n("&Rename Tab...") );
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_S) );
     connect( action , SIGNAL(triggered()) , this , SLOT(renameSession()) );
 
@@ -352,7 +352,7 @@ void SessionController::setupActions()
     connect( action , SIGNAL(triggered()) , this , SLOT(clear()) );
     
     action = collection->addAction("clear-and-reset");
-    action->setText( i18n("Clear and Reset") );
+    action->setText( i18n("Clear && Reset") );
     action->setIcon( KIcon("history-clear") );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearAndReset()) );
 
@@ -387,7 +387,7 @@ void SessionController::setupActions()
     connect( action , SIGNAL(triggered()) , this , SLOT(decreaseTextSize()) );
 
     // History
-    _searchToggleAction = new KAction(i18n("Search History"),this);
+    _searchToggleAction = new KAction(i18n("Search History..."),this);
     _searchToggleAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_F) );
     _searchToggleAction->setIcon( KIcon("edit-find") );
     action = collection->addAction("search-history" , _searchToggleAction);
@@ -408,7 +408,7 @@ void SessionController::setupActions()
     connect( _findPreviousAction , SIGNAL(triggered()) , this , SLOT(findPreviousInHistory()) );
     
     action = collection->addAction("save-history");
-    action->setText( i18n("Save History") );
+    action->setText( i18n("Save History...") );
     connect( action , SIGNAL(triggered()) , this , SLOT(saveHistory()) );
    
     action = collection->addAction("history-options");

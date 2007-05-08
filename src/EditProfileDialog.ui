@@ -41,7 +41,7 @@
        <item row="0" column="0" >
         <widget class="QLabel" name="profileNameLabel" >
          <property name="text" >
-          <string>Profile Name:</string>
+          <string>Profile name:</string>
          </property>
          <property name="alignment" >
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -75,7 +75,7 @@
        <item row="2" column="0" >
         <widget class="QLabel" name="label_9" >
          <property name="text" >
-          <string>Initial Directory:</string>
+          <string>Initial directory:</string>
          </property>
          <property name="alignment" >
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -168,7 +168,7 @@
           <item row="0" column="0" >
            <widget class="QLabel" name="label" >
             <property name="text" >
-             <string>Tab Title Format:</string>
+             <string>Tab title format:</string>
             </property>
             <property name="alignment" >
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -195,7 +195,7 @@
           <item row="1" column="0" >
            <widget class="QLabel" name="label_2" >
             <property name="text" >
-             <string>Remote Tab Title Format:</string>
+             <string>Remote tab title format:</string>
             </property>
             <property name="alignment" >
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -237,7 +237,7 @@
              <string>Show or hide the menu bar in terminal windows using this profile</string>
             </property>
             <property name="text" >
-             <string>Show Menu Bar</string>
+             <string>Show menu bar</string>
             </property>
            </widget>
           </item>
@@ -291,7 +291,7 @@
      </widget>
      <widget class="QWidget" name="tab_2" >
       <attribute name="title" >
-       <string>Appearence</string>
+       <string>Appearance</string>
       </attribute>
       <layout class="QVBoxLayout" >
        <item>
@@ -303,7 +303,7 @@
           </sizepolicy>
          </property>
          <property name="title" >
-          <string>Color Scheme and Background</string>
+          <string>Color Scheme &amp;&amp; Background</string>
          </property>
          <property name="flat" >
           <bool>true</bool>
@@ -410,7 +410,7 @@
             <item>
              <widget class="QLabel" name="label_4" >
               <property name="text" >
-               <string>Text Size:</string>
+               <string>Text size:</string>
               </property>
               <property name="alignment" >
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -669,7 +669,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox_4" >
          <property name="title" >
-          <string>Terminal Features:</string>
+          <string>Terminal Features</string>
          </property>
          <property name="flat" >
           <bool>true</bool>
@@ -711,7 +711,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox_9" >
          <property name="title" >
-          <string>Interaction options:</string>
+          <string>Interaction Options</string>
          </property>
          <property name="flat" >
           <bool>true</bool>
@@ -744,7 +744,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox_8" >
          <property name="title" >
-          <string>Cursor Options:</string>
+          <string>Cursor Options</string>
          </property>
          <property name="flat" >
           <bool>true</bool>

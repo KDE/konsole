@@ -54,7 +54,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     close->setIcon(KIcon("fileclose"));
     connect( close , SIGNAL(clicked()) , this , SIGNAL(closeClicked()) );
 
-    QLabel* findLabel = new QLabel(i18n("Find"),this);
+    QLabel* findLabel = new QLabel(i18n("Find:"),this);
     _searchEdit = new QLineEdit(this);
     _searchEdit->installEventFilter(this);
     _searchEdit->setObjectName("search-edit");
@@ -104,7 +104,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
 
     if ( features & MatchCase )
     {
-        _matchCaseBox = new QCheckBox( i18n("Match Case") , this );
+        _matchCaseBox = new QCheckBox( i18n("Match case") , this );
         _matchCaseBox->setObjectName("match-case-box");
         _matchCaseBox->setToolTip("Sets whether the searching is case sensitive");
         connect( _matchCaseBox , SIGNAL(toggled(bool)) , this , SIGNAL(matchCaseToggled(bool)) );
@@ -112,7 +112,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
 
     if ( features & RegExp )
     {
-        _matchRegExpBox = new QCheckBox( i18n("Match Regular Expression") , this );
+        _matchRegExpBox = new QCheckBox( i18n("Match regular expression") , this );
         _matchRegExpBox->setObjectName("match-regexp-box");
         _matchRegExpBox->setToolTip("Sets whether the search phrase is interpreted as normal text or"
                 " as a regular expression");

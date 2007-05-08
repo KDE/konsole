@@ -154,7 +154,7 @@ void MainWindow::setupActions()
     connect( newWindowAction , SIGNAL(triggered()) , this , SLOT(newWindow()) );
 
     QAction* newFromProfileAction = collection->addAction("new-from-profile");
-    newFromProfileAction->setText( i18n("New from Profile...") );
+    newFromProfileAction->setText( i18n("New From Profile...") );
     // TODO Implement "New from Profile"
 
     QAction* remoteConnectionAction = collection->addAction("remote-connection");

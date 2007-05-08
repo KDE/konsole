@@ -58,9 +58,9 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
 
     QButtonGroup* modeGroup = new QButtonGroup(this);
 
-    _noHistoryButton = new QRadioButton( i18n("No History") );
-    _fixedHistoryButton = new QRadioButton( i18n("Fixed Size History") );
-    _unlimitedHistoryButton = new QRadioButton( i18n("Unlimited History") );
+    _noHistoryButton = new QRadioButton( i18n("No history") );
+    _fixedHistoryButton = new QRadioButton( i18n("Fixed size history:") );
+    _unlimitedHistoryButton = new QRadioButton( i18n("Unlimited history") );
 
     modeGroup->addButton(_noHistoryButton);
     modeGroup->addButton(_fixedHistoryButton);

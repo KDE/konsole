@@ -38,7 +38,7 @@
      <item>
       <widget class="QLabel" name="label_2" >
        <property name="text" >
-        <string>Background Transparency:</string>
+        <string>Background transparency:</string>
        </property>
        <property name="alignment" >
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
