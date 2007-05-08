@@ -54,7 +54,7 @@ protected:
 class Part : public KParts::ReadOnlyPart , public TerminalInterface
 {
 Q_OBJECT
- 
+    Q_INTERFACES(TerminalInterface) 
 public:
     /** Constructs a new Konsole part with the specified parent. */
     Part(QObject* parent = 0);
