@@ -47,9 +47,9 @@
 #include <assert.h>
 
 // Qt
-#include <QEvent>
-#include <QKeyEvent>
-#include <QByteArray>
+#include <QtCore/QEvent>
+#include <QtGui/QKeyEvent>
+#include <QtCore/QByteRef>
 
 // KDE
 #include <kdebug.h>

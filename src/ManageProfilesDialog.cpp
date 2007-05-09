@@ -21,14 +21,13 @@
 #include "ManageProfilesDialog.h"
 
 // Qt
-#include <QCheckBox>
-#include <QHeaderView>
-#include <QItemDelegate>
-#include <QItemEditorFactory>
-#include <QMetaProperty>
-#include <QStandardItemEditorCreator>
-#include <QScrollBar>
-#include <QStandardItemModel>
+#include <QtGui/QCheckBox>
+#include <QtGui/QHeaderView>
+#include <QtGui/QItemDelegate>
+#include <QtGui/QItemEditorCreator>
+#include <QtCore/QMetaEnum>
+#include <QtGui/QScrollBar>
+#include <QtGui/QStandardItem>
 
 // Konsole
 #include "EditProfileDialog.h"

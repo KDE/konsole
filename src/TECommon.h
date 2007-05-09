@@ -26,8 +26,8 @@
 #define TECOMMON_H
 
 // Qt
-#include <QColor>
-#include <QHash>
+#include <QtGui/QColor>
+#include <QtCore/QHash>
 
 namespace Konsole
 {

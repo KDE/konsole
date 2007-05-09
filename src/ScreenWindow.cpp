@@ -21,7 +21,7 @@
 #include "ScreenWindow.h"
 
 // Qt
-#include <QtDebug>
+#include <QtCore/QDebug>
 
 // Konsole
 #include "Screen.h"

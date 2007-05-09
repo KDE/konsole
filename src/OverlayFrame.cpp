@@ -22,8 +22,8 @@
 #include "OverlayFrame.h"
 
 // Qt
-#include <QApplication>
-#include <QPainter>
+#include <QtGui/QApplication>
+#include <QtGui/QPainter>
 
 using namespace Konsole;
 

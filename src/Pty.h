@@ -22,10 +22,10 @@
 #define TE_PTY_H
 
 // Qt
-#include <QSocketNotifier>
-#include <QStringList>
-#include <QVector>
-#include <QList>
+#include <QtCore/QSocketNotifier>
+#include <QtCore/QStringList>
+#include <QtCore/QVector>
+#include <QtCore/QList>
 
 // KDE
 #include <K3Process>

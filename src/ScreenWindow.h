@@ -21,7 +21,7 @@
 #define SCREENWINDOW_H
 
 // Qt
-#include <QObject>
+#include <QtCore/QObject>
 
 // Konsole
 #include "TECommon.h"

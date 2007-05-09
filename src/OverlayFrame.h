@@ -21,8 +21,8 @@
 #ifndef OVERLAY_FRAME_H
 #define OVERLAY_FRAME_H
 
-#include <QFrame>
-#include <QTimer>
+#include <QtGui/QFrame>
+#include <QtCore/QTimer>
 
 namespace Konsole
 {

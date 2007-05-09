@@ -23,17 +23,17 @@
 #include "ViewContainer.h"
 
 // Qt
-#include <QHash>
-#include <QLineEdit>
-#include <QLinearGradient>
-#include <QListWidget>
-#include <QPushButton>
-#include <QSplitter>
-#include <QStackedWidget>
-#include <QTabBar>
-#include <QToolButton>
-#include <QVBoxLayout>
-#include <QWidgetAction>
+#include <QtCore/QHash>
+#include <QtGui/QLineEdit>
+#include <QtGui/QBrush>
+#include <QtGui/QListWidget>
+#include <QtGui/QPushButton>
+#include <QtGui/QSplitter>
+#include <QtGui/QStackedWidget>
+#include <QtGui/QTabBar>
+#include <QtGui/QToolButton>
+#include <QtGui/QBoxLayout>
+#include <QtGui/QWidgetAction>
 
 // KDE 
 #include <KColorDialog>

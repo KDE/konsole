@@ -21,7 +21,7 @@
 #define COLORSCHEMEEDITOR_H
 
 // Qt
-#include <QWidget>
+#include <QtGui/QWidget>
 
 // Konsole
 #include "ColorScheme.h"

@@ -21,9 +21,9 @@
 #define VIEWMANAGER_H
 
 // Qt
-#include <QHash>
-#include <QObject>
-#include <QPointer>
+#include <QtCore/QHash>
+#include <QtCore/QObject>
+#include <QtCore/QPointer>
 
 class QSignalMapper;
 

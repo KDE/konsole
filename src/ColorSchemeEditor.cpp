@@ -21,12 +21,11 @@
 #include "ColorSchemeEditor.h"
 
 // Qt
-#include <QBrush>
-#include <QFontMetrics>
-#include <QHeaderView>
-#include <QItemDelegate>
-#include <QItemEditorCreatorBase>
-#include <QItemEditorFactory>
+#include <QtGui/QBrush>
+#include <QtGui/QFontMetrics>
+#include <QtGui/QHeaderView>
+#include <QtGui/QItemDelegate>
+#include <QtGui/QItemEditorCreator>
 
 // KDE
 #include <KColorDialog>

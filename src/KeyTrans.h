@@ -21,9 +21,9 @@
 #ifndef KEYTRANS_H
 #define KEYTRANS_H
 
-#include <QList>
-#include <QString>
-#include <QIODevice>
+#include <QtCore/QList>
+#include <QtCore/QString>
+#include <QtCore/QIODevice>
 
 #define BITS_NewLine    0
 #define BITS_BsHack     1

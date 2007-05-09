@@ -21,7 +21,7 @@
 #define INCREMENTALSEARCHBAR_H
 
 // Qt
-#include <QWidget>
+#include <QtGui/QWidget>
 
 class QCheckBox;
 class QLabel;

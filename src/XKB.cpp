@@ -26,7 +26,7 @@ DEALINGS IN THE SOFTWARE.
 
 ****************************************************************************/
 
-#include <QX11Info>
+#include <QtGui/QX11Info>
 
 #include "config-konsole.h"
 

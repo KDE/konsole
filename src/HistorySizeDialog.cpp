@@ -21,13 +21,12 @@
 #include "HistorySizeDialog.h"
 
 // Qt
-#include <QButtonGroup>
-#include <QHBoxLayout>
-#include <QLabel>
-#include <QRadioButton>
-#include <QSpinBox>
-#include <QVBoxLayout>
-#include <QWidget>
+#include <QtGui/QButtonGroup>
+#include <QtGui/QBoxLayout>
+#include <QtGui/QLabel>
+#include <QtGui/QRadioButton>
+#include <QtGui/QSpinBox>
+#include <QtGui/QWidget>
 
 // KDE
 #include <KLocalizedString>

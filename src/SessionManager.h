@@ -23,14 +23,14 @@
 #define SESSIONMANAGER_H
 
 // Qt
-#include <QFont>
-#include <QHash>
-#include <QList>
-#include <QSet>
-#include <QStringList>
-#include <QPair>
-#include <QPointer>
-#include <QVariant>
+#include <QtGui/QFont>
+#include <QtCore/QHash>
+#include <QtCore/QList>
+#include <QtCore/QSet>
+#include <QtCore/QStringList>
+#include <QtCore/QPair>
+#include <QtCore/QPointer>
+#include <QtCore/QVariant>
 
 class KConfigGroup;
 class KDesktopFile;

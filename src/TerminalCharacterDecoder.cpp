@@ -23,7 +23,7 @@
 #include "TerminalCharacterDecoder.h"
 
 // Qt
-#include <QTextStream>
+#include <QtCore/QTextStream>
 
 // KDE
 #include <kdebug.h>

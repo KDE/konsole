@@ -21,11 +21,11 @@
 #include "EditProfileDialog.h"
 
 // Qt
-#include <QHideEvent>
-#include <QLinearGradient>
-#include <QPainter>
-#include <QStandardItemModel>
-#include <QtDebug>
+#include <QtGui/QKeyEvent>
+#include <QtGui/QBrush>
+#include <QtGui/QPainter>
+#include <QtGui/QStandardItem>
+#include <QtCore/QDebug>
 
 // KDE
 #include <KFontDialog>

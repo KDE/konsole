@@ -23,10 +23,10 @@
 #define VIEWCONTAINER_H
 
 // Qt
-#include <QObject>
-#include <QHash>
-#include <QList>
-#include <QTabBar>
+#include <QtCore/QObject>
+#include <QtCore/QHash>
+#include <QtCore/QList>
+#include <QtGui/QTabBar>
 
 class QSpacerItem;
 class QStackedWidget;
@@ -168,7 +168,7 @@ protected:
      * Called when the navigation display mode changes.
      * See setNavigationDisplayMode
      */
-    virtual void navigationDisplayModeChanged(NavigationDisplayMode) {};
+    virtual void navigationDisplayModeChanged(NavigationDisplayMode) {}
 
     /** Returns the widgets which are associated with a particular navigation item */
     QList<QWidget*> widgetsForItem( ViewProperties* item ) const;

@@ -21,14 +21,14 @@
 #include "IncrementalSearchBar.h"
 
 // Qt
-#include <QCheckBox>
-#include <QHBoxLayout>
-#include <QLabel>
-#include <QLineEdit>
-#include <QProgressBar>
-#include <QShowEvent>
-#include <QTimer>
-#include <QToolButton>
+#include <QtGui/QCheckBox>
+#include <QtGui/QBoxLayout>
+#include <QtGui/QLabel>
+#include <QtGui/QLineEdit>
+#include <QtGui/QProgressBar>
+#include <QtGui/QKeyEvent>
+#include <QtCore/QTimer>
+#include <QtGui/QToolButton>
 
 // KDE
 #include <KLocale>

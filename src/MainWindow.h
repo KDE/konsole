@@ -21,7 +21,7 @@
 #define KONSOLEMAINWINDOW_H
 
 // Qt
-#include <QPointer>
+#include <QtCore/QPointer>
 
 // KDE
 #include <KXmlGuiWindow>

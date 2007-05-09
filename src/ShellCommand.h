@@ -21,7 +21,7 @@
 #define SHELLCOMMAND_H
 
 // Qt
-#include <QStringList>
+#include <QtCore/QStringList>
 
 namespace Konsole
 {

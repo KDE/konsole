@@ -21,9 +21,9 @@
 #define PROCESSINFO_H
 
 // Qt
-#include <QMap>
-#include <QString>
-#include <QVector>
+#include <QtCore/QMap>
+#include <QtCore/QString>
+#include <QtCore/QVector>
 
 namespace Konsole
 {
@@ -98,7 +98,7 @@ public:
      * a suitable ProcessInfo instance for the current platform.
      */ 
     explicit ProcessInfo(int pid , bool readEnvironment = false);
-    virtual ~ProcessInfo() {};
+    virtual ~ProcessInfo() {}
 
     /** 
      * Updates the information about the process.  This must

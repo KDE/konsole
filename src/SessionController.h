@@ -21,11 +21,11 @@
 #define SESSIONCONTROLLER_H
 
 // Qt
-#include <QIcon>
-#include <QList>
-#include <QPointer>
-#include <QString>
-#include <QThread>
+#include <QtGui/QIcon>
+#include <QtCore/QList>
+#include <QtCore/QPointer>
+#include <QtCore/QString>
+#include <QtCore/QThread>
 
 // KDE
 #include <KActionCollection>

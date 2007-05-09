@@ -21,11 +21,10 @@
 #include "ProfileListWidget.h"
 
 // Qt
-#include <QtDebug>
-#include <QDrag>
-#include <QDragEnterEvent>
-#include <QDropEvent>
-#include <QMimeData>
+#include <QtCore/QDebug>
+#include <QtGui/QDrag>
+#include <QtGui/QKeyEvent>
+#include <QtCore/QMimeData>
 
 static const char* konsoleSessionMimeFormat = "konsole/session";
 

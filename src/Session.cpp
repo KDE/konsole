@@ -28,14 +28,14 @@
 #include <stdlib.h>
 
 // Qt
-#include <QApplication>
-#include <QByteArray>
-#include <QDir>
-#include <QFile>
-#include <QRegExp>
-#include <QStringList>
+#include <QtGui/QApplication>
+#include <QtCore/QByteRef>
+#include <QtCore/QDir>
+#include <QtCore/QFile>
+#include <QtCore/QRegExp>
+#include <QtCore/QStringList>
 #include <QtDBus/QtDBus>
-#include <QTime>
+#include <QtCore/QDate>
 
 // KDE
 #include <KDebug>

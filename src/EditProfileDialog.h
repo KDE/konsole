@@ -21,10 +21,10 @@
 #define EDITSESSIONDIALOG_H
 
 // Qt
-#include <QAbstractItemDelegate>
-#include <QPair>
-#include <QHash>
-#include <QSet>
+#include <QtGui/QAbstractItemDelegate>
+#include <QtCore/QPair>
+#include <QtCore/QHash>
+#include <QtCore/QSet>
 
 // KDE
 #include <KDialog>

@@ -22,9 +22,9 @@
 #include "PrintSettings.h"
 
 // Qt
-#include <QCheckBox>
-#include <QLayout>
-#include <QVBoxLayout>
+#include <QtGui/QCheckBox>
+#include <QtGui/QLayout>
+#include <QtGui/QBoxLayout>
 
 // KDE
 #include <klocale.h>

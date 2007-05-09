@@ -25,11 +25,11 @@
 #include <stdio.h>
 
 // Qt 
-#include <QKeyEvent>
+#include <QtGui/QKeyEvent>
 //#include <QPointer>
-#include <QTextCodec>
-#include <QTextStream>
-#include <QTimer>
+#include <QtCore/QTextCodec>
+#include <QtCore/QTextStream>
+#include <QtCore/QTimer>
 
 class KeyTrans;
 

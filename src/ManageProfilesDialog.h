@@ -21,7 +21,7 @@
 #define SESSIONTYPEDIALOG_H
 
 // Qt
-#include <QItemDelegate>
+#include <QtGui/QItemDelegate>
 
 // KDE
 #include <KDialog>

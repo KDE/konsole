@@ -22,24 +22,16 @@
 #define TERMINALDISPLAY_H
 
 // Qt
-#include <QBitArray>
-#include <QWidget>
-#include <QColor>
-#include <qnamespace.h>
-#include <qscrollbar.h>
-#include <QFrame>
-#include <QInputMethodEvent>
-#include <QWheelEvent>
-#include <QFocusEvent>
-#include <QPaintEvent>
-#include <QKeyEvent>
-#include <QEvent>
-#include <QDropEvent>
-#include <QLabel>
-#include <QResizeEvent>
-#include <QDragEnterEvent>
-#include <QMouseEvent>
-#include <QDrag>
+#include <QtCore/QBitRef>
+#include <QtGui/QWidget>
+#include <QtGui/QColor>
+#include <QtCore/QInternal>
+#include <QtGui/QScrollBar>
+#include <QtGui/QFrame>
+#include <QtGui/QKeyEvent>
+#include <QtCore/QEvent>
+#include <QtGui/QLabel>
+#include <QtGui/QDrag>
 
 // KDE
 #include <kmenu.h>

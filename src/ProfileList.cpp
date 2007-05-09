@@ -21,9 +21,9 @@
 #include "ProfileList.h"
 
 // Qt
-#include <QAction>
-#include <QActionGroup>
-#include <QtDebug>
+#include <QtGui/QAction>
+#include <QtGui/QActionGroup>
+#include <QtCore/QDebug>
 
 // KDE
 #include <KIcon>

@@ -21,8 +21,8 @@
 #include "MainWindow.h"
 
 // Qt
-#include <QApplication>
-#include <QVBoxLayout>
+#include <QtGui/QApplication>
+#include <QtGui/QBoxLayout>
 
 // KDE
 #include <KAction>

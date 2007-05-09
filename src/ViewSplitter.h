@@ -22,8 +22,8 @@
 #ifndef VIEWSPLITTER_H
 #define VIEWSPLITTER_H
 
-#include <QList>
-#include <QSplitter>
+#include <QtCore/QList>
+#include <QtGui/QSplitter>
 
 class QFocusEvent;
 

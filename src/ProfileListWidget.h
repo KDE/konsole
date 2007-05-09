@@ -21,7 +21,7 @@
 #define SESSIONLISTWIDGET_H
 
 // Qt
-#include <QListWidget>
+#include <QtGui/QListWidget>
 
 class ProfileListWidget : public QListWidget
 {

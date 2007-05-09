@@ -21,12 +21,12 @@
 #define FILTER_H
 
 // Qt
-#include <QAction>
-#include <QList>
-#include <QObject>
-#include <QStringList>
-#include <QMultiHash>
-#include <QRegExp>
+#include <QtGui/QAction>
+#include <QtCore/QList>
+#include <QtCore/QObject>
+#include <QtCore/QStringList>
+#include <QtCore/QHash>
+#include <QtCore/QRegExp>
 
 namespace Konsole
 {
@@ -297,7 +297,7 @@ class FilterObject : public QObject
 {
 Q_OBJECT
 public:
-    FilterObject(Filter::HotSpot* filter) : _filter(filter) {};
+    FilterObject(Filter::HotSpot* filter) : _filter(filter) {}
 private slots:
     void activated();
 private:

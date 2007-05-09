@@ -33,10 +33,10 @@
 #include <stddef.h>
 
 // Qt
-#include <QBuffer>
-#include <QHash>
-#include <QObject>
-#include <QFile>
+#include <QtCore/QBuffer>
+#include <QtCore/QHash>
+#include <QtCore/QObject>
+#include <QtCore/QFile>
 
 // KDE
 #include <kstandarddirs.h>
@@ -811,7 +811,6 @@ void test()
   // Opening sequence
 
   QCString txt =
-#include "default.keytab.h"
   ;
   QBuffer buf(txt);
   if (0) TestTokenizer(buf);

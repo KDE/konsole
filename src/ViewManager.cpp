@@ -24,7 +24,7 @@
 #include <assert.h>
 
 // Qt
-#include <QSignalMapper>
+#include <QtCore/QSignalMapper>
 
 // KDE
 #include <kdebug.h>

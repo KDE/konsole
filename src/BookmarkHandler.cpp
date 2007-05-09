@@ -25,7 +25,7 @@
 #include "BookmarkHandler.h"
 
 // Qt
-#include <QFile>
+#include <QtCore/QFile>
 
 // KDE
 #include <kshell.h>

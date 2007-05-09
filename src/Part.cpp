@@ -21,7 +21,7 @@
 #include "Part.h"
 
 // Qt
-#include <QStringList>
+#include <QtCore/QStringList>
 
 // KDE
 #include <KMenuBar>

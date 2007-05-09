@@ -23,11 +23,11 @@
 #define KEYBOARDTRANSLATOR_H
 
 // Qt
-#include <QMultiHash>
-#include <QList>
-#include <QKeySequence>
-#include <QMetaType>
-#include <QVarLengthArray>
+#include <QtCore/QHash>
+#include <QtCore/QList>
+#include <QtGui/QKeySequence>
+#include <QtCore/QMetaType>
+#include <QtCore/QVarLengthArray>
 
 class QIODevice;
 

@@ -21,12 +21,12 @@
 #include "ProcessInfo.h"
 
 // Qt
-#include <QDebug>
-#include <QFile>
-#include <QFileInfo>
-#include <QRegExp>
-#include <QTextStream>
-#include <QStringList>
+#include <QtCore/QDebug>
+#include <QtCore/QFile>
+#include <QtCore/QFileInfo>
+#include <QtCore/QRegExp>
+#include <QtCore/QTextStream>
+#include <QtCore/QStringList>
 
 using namespace Konsole;
 

@@ -21,8 +21,8 @@
 #define VIEWPROPERTIES_H
 
 // Qt
-#include <QIcon>
-#include <QObject>
+#include <QtGui/QIcon>
+#include <QtCore/QObject>
 
 // KDE
 #include <KUrl>

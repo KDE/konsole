@@ -22,8 +22,8 @@
 #define TESCREEN_H
 
 // Qt
-#include <QTextStream>
-#include <QVarLengthArray>
+#include <QtCore/QTextStream>
+#include <QtCore/QVarLengthArray>
 
 // Konsole
 #include "TECommon.h"

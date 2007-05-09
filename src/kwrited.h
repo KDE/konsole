@@ -22,8 +22,8 @@
 #define KWRITED_H
 
 #include <kdedmodule.h>
-#include <QTextEdit>
-#include <QMenu>
+#include <QtGui/QTextEdit>
+#include <QtGui/QMenu>
 
 class KPty;
 

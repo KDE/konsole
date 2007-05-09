@@ -23,11 +23,11 @@
 #define COLORSCHEME_H
 
 // Qt
-#include <QHash>
-#include <QList>
-#include <QMetaType>
-#include <QIODevice>
-#include <QSet>
+#include <QtCore/QHash>
+#include <QtCore/QList>
+#include <QtCore/QMetaType>
+#include <QtCore/QIODevice>
+#include <QtCore/QSet>
 
 // Konsole
 #include "TECommon.h"

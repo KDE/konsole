@@ -30,8 +30,8 @@
 #include <ctype.h>
 
 // Qt
-#include <QTextStream>
-#include <QTime>
+#include <QtCore/QTextStream>
+#include <QtCore/QDate>
 
 // KDE
 #include <kdebug.h>

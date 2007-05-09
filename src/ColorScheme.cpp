@@ -23,8 +23,8 @@
 #include "ColorScheme.h"
 
 // Qt
-#include <QFile>
-#include <QFileInfo>
+#include <QtCore/QFile>
+#include <QtCore/QFileInfo>
 
 // KDE
 #include <KConfig>

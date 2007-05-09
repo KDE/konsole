@@ -22,8 +22,8 @@
 #define SESSION_H
 
 // Qt
-#include <QStringList>
-#include <QByteArray>
+#include <QtCore/QStringList>
+#include <QtCore/QByteRef>
 
 // KDE
 #include <KApplication>

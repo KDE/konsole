@@ -21,7 +21,7 @@
 #define KEYBINDINGEDITOR_H
 
 // Qt
-#include <QWidget>
+#include <QtGui/QWidget>
 
 namespace Ui
 {

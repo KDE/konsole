@@ -23,7 +23,7 @@
 #define KONSOLEBOOKMARKHANDLER_H
 
 // Qt
-#include <QMenu>
+#include <QtGui/QMenu>
 
 // KDE
 #include <KBookmarkManager>

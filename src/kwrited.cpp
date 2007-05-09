@@ -21,8 +21,8 @@
 // Own
 #include "kwrited.h"
 
-#include <QSocketNotifier>
-#include <QContextMenuEvent>
+#include <QtCore/QSocketNotifier>
+#include <QtGui/QKeyEvent>
 
 #include <kuniqueapplication.h>
 #include <kcmdlineargs.h>

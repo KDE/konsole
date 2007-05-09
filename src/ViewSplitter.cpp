@@ -23,7 +23,7 @@
 #include "ViewSplitter.h"
 
 // Qt
-#include <QFocusEvent>
+#include <QtGui/QKeyEvent>
 
 // KDE
 #include "kdebug.h"

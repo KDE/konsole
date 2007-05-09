@@ -21,7 +21,7 @@
 #include "RemoteConnectionDialog.h"
 
 // Qt
-#include <QtDebug>
+#include <QtCore/QDebug>
 
 // KDE
 #include <KLocale>

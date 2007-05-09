@@ -20,7 +20,7 @@
 #include "ZModemDialog.h"
 
 // Qt
-#include <QTextEdit>
+#include <QtGui/QTextEdit>
 
 // KDE
 #include <KLocale>

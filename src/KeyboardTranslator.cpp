@@ -26,11 +26,11 @@
 #include <stdio.h>
 
 // Qt
-#include <QFile>
-#include <QFileInfo>
-#include <QKeySequence>
-#include <QTextStream>
-#include <QtDebug>
+#include <QtCore/QFile>
+#include <QtCore/QFileInfo>
+#include <QtGui/QKeySequence>
+#include <QtCore/QTextStream>
+#include <QtCore/QDebug>
 
 // KDE
 #include <KStandardDirs>

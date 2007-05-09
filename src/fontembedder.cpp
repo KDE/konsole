@@ -18,8 +18,8 @@
     02110-1301  USA.
 */
 
-#include <QFile>
-#include <QTextStream>
+#include <QtCore/QFile>
+#include <QtCore/QTextStream>
 #include <stdlib.h>
 #include <iostream>
 #include <iomanip>

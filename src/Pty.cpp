@@ -82,7 +82,7 @@
 #include <termios.h>
 
 // Qt
-#include <QStringList>
+#include <QtCore/QStringList>
 
 // KDE
 #include <KStandardDirs>
