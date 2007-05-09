@@ -21,6 +21,7 @@
 #define FILTER_H
 
 // Qt
+#include <QAction>
 #include <QList>
 #include <QObject>
 #include <QStringList>

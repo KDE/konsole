@@ -17,6 +17,9 @@
     02110-1301  USA.
 */
 
+// Own
+#include "Part.h"
+
 // Qt
 #include <QStringList>
 
@@ -29,7 +32,6 @@
 #include "Emulation.h"
 #include "KeyTrans.h"
 #include "KeyboardTranslator.h"
-#include "Part.h"
 #include "Session.h"
 #include "SessionController.h"
 #include "SessionManager.h"
@@ -93,7 +95,7 @@ bool Part::openFile()
 void Part::startProgram( const QString& program,
                            const QStringList& arguments )
 {
-    Session* session = createSession(QString::null);
+    Session* session = createSession(QString());
 
     session->setProgram(program);
     session->setArguments(arguments);
@@ -102,7 +104,7 @@ void Part::startProgram( const QString& program,
 }
 void Part::showShellInDir( const QString& dir )
 {
-    Session* session = createSession(QString::null);
+    Session* session = createSession(QString());
 
     session->setInitialWorkingDirectory(dir);
     

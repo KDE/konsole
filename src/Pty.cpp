@@ -71,6 +71,9 @@
     my prevent this.
 */
 
+// Own
+#include "Pty.h"
+
 // System
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -86,9 +89,6 @@
 #include <KLocale>
 #include <KDebug>
 #include <KPty>
-
-// Konsole
-#include "Pty.h"
 
 using namespace Konsole;
 

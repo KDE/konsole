@@ -225,7 +225,7 @@ public:
   /** Returns the terminal session's window size in lines and columns. */
   QSize size();
   /** 
-   * Emits a request to resize the session to accomodate
+   * Emits a request to resize the session to accommodate
    * the specified window size.
    *
    * @param size The size in lines and columns to request.

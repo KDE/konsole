@@ -19,6 +19,9 @@
     02110-1301  USA.
 */
 
+// Own
+#include "KeyboardTranslator.h"
+
 // System
 #include <stdio.h>
 
@@ -31,9 +34,6 @@
 
 // KDE
 #include <KStandardDirs>
-
-// Konsole
-#include "KeyboardTranslator.h"
 
 using namespace Konsole;
 
@@ -266,7 +266,7 @@ QKeySequence KeyboardTranslatorReader::decodeSequence(const QString& text , Keyb
                                    "(\\+|\\-)newline|"
                                    "(\\+|\\-)meta)",Qt::CaseInsensitive);
     QString newText(text);
-    newText.replace(modifierRemover,QString::null);
+    newText.replace(modifierRemover,QString());
 
     if ( modifiers & Qt::ShiftModifier )
         newText.prepend("shift+");

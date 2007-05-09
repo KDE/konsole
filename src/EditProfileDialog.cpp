@@ -17,6 +17,9 @@
     02110-1301  USA.
 */
 
+// Own
+#include "EditProfileDialog.h"
+
 // Qt
 #include <QHideEvent>
 #include <QLinearGradient>
@@ -35,7 +38,6 @@
 #include "ColorScheme.h"
 #include "ColorSchemeEditor.h"
 #include "ui_EditProfileDialog.h"
-#include "EditProfileDialog.h"
 #include "EditTabTitleFormatDialog.h"
 #include "KeyBindingEditor.h"
 #include "KeyboardTranslator.h"
@@ -104,7 +106,7 @@ void EditProfileDialog::setProfile(const QString& key)
 
     // setup each page of the dialog
     setupGeneralPage(info);
-    setupAppearencePage(info);
+    setupAppearancePage(info);
     setupKeyboardPage(info);
     setupScrollingPage(info);
     setupAdvancedPage(info);
@@ -123,7 +125,7 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
     _ui->commandEdit->setText( command.fullCommand() );
 
     KUrlCompletion* exeCompletion = new KUrlCompletion(KUrlCompletion::ExeCompletion);
-    exeCompletion->setDir(QString::null);
+    exeCompletion->setDir(QString());
     _ui->commandEdit->setCompletionObject( exeCompletion );
     _ui->initialDirEdit->setText( info->defaultWorkingDirectory() );
     _ui->initialDirEdit->setCompletionObject( new KUrlCompletion(KUrlCompletion::DirCompletion) );
@@ -256,7 +258,7 @@ void EditProfileDialog::selectInitialDir()
     if ( !url.isEmpty() )
         _ui->initialDirEdit->setText(url.path());
 }
-void EditProfileDialog::setupAppearencePage(const Profile* info)
+void EditProfileDialog::setupAppearancePage(const Profile* info)
 {
     // setup color list
     updateColorSchemeList();

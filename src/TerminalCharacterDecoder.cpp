@@ -19,14 +19,14 @@
     02110-1301  USA.
 */
 
+// Own
+#include "TerminalCharacterDecoder.h"
+
 // Qt
 #include <QTextStream>
 
 // KDE
 #include <kdebug.h>
-
-// Konsole
-#include "TerminalCharacterDecoder.h"
 
 using namespace Konsole;
 

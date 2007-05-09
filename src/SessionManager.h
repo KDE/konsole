@@ -521,7 +521,7 @@ public:
      * @param type Specifies the type of session to create.  Passing an empty
      *             string will create a session using the default configuration.
      */
-    Session* createSession(QString key = QString());
+    Session* createSession(const QString& key = QString());
 
     /**
      * Returns a list of active sessions.

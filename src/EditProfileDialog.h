@@ -95,7 +95,7 @@ private slots:
     void alwaysShowTabBar();
     void showTabBarAsNeeded();
 
-    // appearence page
+    // appearance page
     void setFontSize(int pointSize);
     void showFontDialog();
     void newColorScheme();
@@ -139,7 +139,7 @@ private slots:
 private:
     // initialize various pages of the dialog
     void setupGeneralPage(const Profile* info);
-    void setupAppearencePage(const Profile* info);
+    void setupAppearancePage(const Profile* info);
     void setupKeyboardPage(const Profile* info);
     void setupScrollingPage(const Profile* info);
     void setupAdvancedPage(const Profile* info);

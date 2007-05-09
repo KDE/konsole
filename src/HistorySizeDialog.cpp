@@ -17,6 +17,9 @@
     02110-1301  USA.
 */
 
+// Own
+#include "HistorySizeDialog.h"
+
 // Qt
 #include <QButtonGroup>
 #include <QHBoxLayout>
@@ -30,7 +33,6 @@
 #include <KLocalizedString>
 
 // Konsole
-#include "HistorySizeDialog.h"
 #include "SessionManager.h"
 
 using namespace Konsole;

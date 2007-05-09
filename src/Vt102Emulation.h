@@ -94,7 +94,7 @@ Q_SIGNALS:
 
   /**
    * Emitted when the program running in the terminal wishes to update the 
-   * session's title.  This also allows terminal programs to customise other
+   * session's title.  This also allows terminal programs to customize other
    * aspects of the terminal emulation display. 
    *
    * This signal is emitted when the escape sequence "\033]ARG;VALUE\007"

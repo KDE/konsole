@@ -17,6 +17,9 @@
     02110-1301  USA.
 */
 
+// Own
+#include "ProcessInfo.h"
+
 // Qt
 #include <QDebug>
 #include <QFile>
@@ -24,9 +27,6 @@
 #include <QRegExp>
 #include <QTextStream>
 #include <QStringList>
-
-// Konsole
-#include "ProcessInfo.h"
 
 using namespace Konsole;
 

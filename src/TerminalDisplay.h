@@ -45,6 +45,7 @@
 #include <kmenu.h>
 
 // Konsole
+#include "Filter.h"
 #include "TECommon.h"
 
 class QLabel;
@@ -59,12 +60,6 @@ namespace Konsole
 
 extern unsigned short vt100_graphics[32];
 
-class TerminalImageFilterChain;
-namespace Filter
-{
-    class HotSpot;
-}
-class FilterChain;
 class ScreenWindow;
 
 /**
@@ -268,7 +263,7 @@ public:
      * @param wc An array of characters which are to be considered parts
      * of a word ( in addition to letters and numbers ).
      */
-    void setWordCharacters(QString wc);
+    void setWordCharacters(const QString& wc);
     /** 
      * Returns the characters which are considered part of a word for the 
      * purpose of selecting words in the display with the mouse.

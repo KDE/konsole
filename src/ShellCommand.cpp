@@ -17,11 +17,11 @@
     02110-1301  USA.
 */
 
+// Own
+#include "ShellCommand.h"
+
 // Qt
 #include <QtDebug>
-
-// Konsole
-#include "ShellCommand.h"
 
 using namespace Konsole;
 
@@ -71,7 +71,7 @@ QString ShellCommand::command() const
     if ( !_arguments.isEmpty() )
         return _arguments[0];
     else
-        return QString::null;
+        return QString();
 }
 QStringList ShellCommand::arguments() const
 {

@@ -20,6 +20,9 @@
     02110-1301  USA.
 */
 
+// Own
+#include "Session.h"
+
 // Standard
 #include <assert.h>
 #include <stdlib.h>
@@ -54,7 +57,6 @@
 #include "Vt102Emulation.h"
 #include "ZModemDialog.h"
 
-#include "Session.h"
 
 using namespace Konsole;
 
@@ -368,7 +370,7 @@ QString Session::tabTitleFormat(TabTitleContext context) const
     else if ( context == RemoteTabTitle )
         return _remoteTabTitleFormat;
 
-    return QString::null;
+    return QString();
 }
 
 void Session::monitorTimerDone()

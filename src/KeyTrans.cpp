@@ -25,6 +25,9 @@
    FIXME: some bug crept in, disallowing '\0' to be emitted.
 */
 
+// Own
+#include "KeyTrans.h"
+
 // System
 #include <stdio.h>
 #include <stddef.h>
@@ -38,9 +41,6 @@
 // KDE
 #include <kstandarddirs.h>
 #include <klocale.h>
-
-// Konsole
-#include "KeyTrans.h"
 
 /* KeyEntry
 

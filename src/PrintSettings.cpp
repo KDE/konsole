@@ -18,6 +18,9 @@
  *  Boston, MA 02110-1301, USA.
  **/
 
+// Own    
+#include "PrintSettings.h"
+
 // Qt
 #include <QCheckBox>
 #include <QLayout>
@@ -25,9 +28,6 @@
 
 // KDE
 #include <klocale.h>
-
-// Konsole    
-#include "PrintSettings.h"
 
 using namespace Konsole;
 

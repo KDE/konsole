@@ -94,7 +94,7 @@ public:
    *
    * @param stream The text stream into which the output history will be written.
    * @param decoder A decoder which converts lines of terminal characters with 
-   * appearence attributes into output text.  PlainTextDecoder is the most commonly
+   * appearance attributes into output text.  PlainTextDecoder is the most commonly
    * used decoder.
    */
   virtual void writeToStream(QTextStream* stream,TerminalCharacterDecoder* decoder,int startLine,int endLine);

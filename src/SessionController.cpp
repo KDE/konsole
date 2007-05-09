@@ -1,3 +1,24 @@
+/*
+    Copyright (C) 2006-2007 by Robert Knight <robertknight@gmail.com>
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+    02110-1301  USA.
+*/
+
+// Own
+#include "SessionController.h"
 
 // KDE
 #include <KAction>
@@ -19,12 +40,10 @@
 #include "IncrementalSearchBar.h"
 #include "ScreenWindow.h"
 #include "Session.h"
-#include "SessionController.h"
 #include "ProcessInfo.h"
 #include "TerminalDisplay.h"
 
 // for SaveHistoryTask
-#include <KUrl>
 #include <KFileDialog>
 #include <KJob>
 #include <KMessageBox>
@@ -173,7 +192,7 @@ KUrl SessionController::url() const
                 path = foregroundInfo->currentDir(&ok);
 
                 if (!ok)
-                    path = QString::null;
+                    path.clear();
             }
 
             delete foregroundInfo;
@@ -182,7 +201,7 @@ KUrl SessionController::url() const
         {
             path = info->currentDir(&ok); 
             if (!ok)
-                path = QString::null;
+                path.clear();
         }
     }
 
@@ -880,7 +899,7 @@ void SaveHistoryTask::execute()
 
         if ( !url.isValid() )
         { // UI:  Can we make this friendlier?
-            KMessageBox::sorry( 0 , i18n("%1 is an invalid URL, the output could not be saved.") );
+            KMessageBox::sorry( 0 , i18n("%1 is an invalid URL, the output could not be saved.",url.url()) );
             continue;
         }
 

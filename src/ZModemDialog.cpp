@@ -16,14 +16,14 @@
  *  Boston, MA 02110-1301, USA.
  **/
 
+// Own 
+#include "ZModemDialog.h"
+
 // Qt
 #include <QTextEdit>
 
 // KDE
 #include <KLocale>
-
-// Konsole 
-#include "ZModemDialog.h"
 
 using namespace Konsole;
 

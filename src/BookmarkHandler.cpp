@@ -21,6 +21,9 @@
 
 // Born as kdelibs/kio/kfile/kfilebookmarkhandler.characterpp
 
+// Own
+#include "BookmarkHandler.h"
+
 // Qt
 #include <QFile>
 
@@ -35,7 +38,6 @@
 #include <KStandardDirs>
 
 // Konsole
-#include "BookmarkHandler.h"
 #include "ViewProperties.h"
 
 using namespace Konsole;

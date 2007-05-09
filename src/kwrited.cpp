@@ -18,6 +18,9 @@
     02110-1301  USA.
 */
 
+// Own
+#include "kwrited.h"
+
 #include <QSocketNotifier>
 #include <QContextMenuEvent>
 
@@ -31,7 +34,6 @@
 #include <kuser.h>
 #include <kglobal.h>
 
-#include "kwrited.h"
 
 #include <stdlib.h>
 #include <unistd.h>

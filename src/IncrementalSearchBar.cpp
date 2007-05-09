@@ -17,6 +17,9 @@
     02110-1301  USA.
 */
 
+// Own
+#include "IncrementalSearchBar.h"
+
 // Qt
 #include <QCheckBox>
 #include <QHBoxLayout>
@@ -30,9 +33,6 @@
 // KDE
 #include <KLocale>
 #include <KIcon>
-
-// Konsole
-#include "IncrementalSearchBar.h"
 
 using namespace Konsole;
 

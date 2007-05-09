@@ -18,8 +18,11 @@
     02110-1301  USA.
 */
 
-#include <iostream>
+// Own
 #include "History.h"
+
+// System
+#include <iostream>
 #include <stdlib.h>
 #include <assert.h>
 #include <stdio.h>
@@ -27,6 +30,8 @@
 #include <sys/mman.h>
 #include <unistd.h>
 #include <errno.h>
+
+// KDE
 #include <kdebug.h>
 
 // Reasonable line size

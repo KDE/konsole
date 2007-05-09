@@ -18,6 +18,9 @@
     02110-1301  USA.
 */
 
+// Own
+#include "BlockArray.h"
+
 // System
 #include <assert.h>
 #include <sys/mman.h>
@@ -27,9 +30,6 @@
 
 // KDE
 #include <kdebug.h>
-
-// Konsole
-#include "BlockArray.h"
 
 using namespace Konsole;
 

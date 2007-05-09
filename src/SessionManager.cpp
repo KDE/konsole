@@ -19,6 +19,9 @@
     02110-1301  USA.
 */
 
+// Own
+#include "SessionManager.h"
+
 // Qt
 #include <QFileInfo>
 #include <QList>
@@ -36,7 +39,6 @@
 #include "ColorScheme.h"
 #include "Session.h"
 #include "History.h"
-#include "SessionManager.h"
 #include "ShellCommand.h"
 
 using namespace Konsole;
@@ -191,10 +193,10 @@ bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile* profil
     KConfigGroup keyboard = config.group("Keyboard");
     writeStandardElement( keyboard , "KeyBindings" , profile , Profile::KeyBindings );
 
-    KConfigGroup appearence = config.group("Appearence");
+    KConfigGroup appearance = config.group("Appearance");
 
-    writeStandardElement( appearence , "ColorScheme" , profile , Profile::ColorScheme );
-    writeStandardElement( appearence , "Font" , profile , Profile::Font );
+    writeStandardElement( appearance , "ColorScheme" , profile , Profile::ColorScheme );
+    writeStandardElement( appearance , "Font" , profile , Profile::Font );
    
     KConfigGroup scrolling = config.group("Scrolling");
 
@@ -261,10 +263,10 @@ bool KDE4ProfileReader::readProfile(const QString& path , Profile* profile)
     readStandardElement<QString>(keyboard,"KeyBindings",profile,Profile::KeyBindings);
 
     // appearence
-    KConfigGroup appearence = config.group("Appearence");
+    KConfigGroup appearance = config.group("Appearance");
 
-    readStandardElement<QString>(appearence,"ColorScheme",profile,Profile::ColorScheme);
-    readStandardElement<QFont>(appearence,"Font",profile,Profile::Font);
+    readStandardElement<QString>(appearance,"ColorScheme",profile,Profile::ColorScheme);
+    readStandardElement<QFont>(appearance,"Font",profile,Profile::Font);
 
     // scrolling
     KConfigGroup scrolling = config.group("Scrolling");
@@ -334,7 +336,7 @@ bool KDE3ProfileReader::readProfile(const QString& path , Profile* profile)
     if ( config->hasKey("Schema") )
     {
         profile->setProperty(Profile::ColorScheme,config->readEntry("Schema").replace
-                                            (".schema",QString::null));        
+                                            (".schema",QString()));        
     }
     if ( config->hasKey("defaultfont") )
     {
@@ -413,7 +415,7 @@ QString SessionManager::loadProfile(const QString& path)
     {
         iter.next();
         if ( iter.value()->path() == path )
-            return QString::null;
+            return QString();
     }
 
     // load the profile
@@ -424,7 +426,7 @@ QString SessionManager::loadProfile(const QString& path)
         reader = new KDE4ProfileReader;
 
     if (!reader)
-        return QString::null;
+        return QString();
 
     Profile* newProfile = new Profile(defaultProfile());
     newProfile->setProperty(Profile::Path,path);
@@ -436,7 +438,7 @@ QString SessionManager::loadProfile(const QString& path)
     if (!result)
     {
         delete newProfile;
-        return QString::null;
+        return QString();
     }
     else
         return addProfile(newProfile);
@@ -478,7 +480,7 @@ const QList<Session*> SessionManager::sessions()
     return _sessions;
 }
 
-Session* SessionManager::createSession(QString key )
+Session* SessionManager::createSession(const QString& key )
 {
     Session* session = 0;
     
@@ -594,7 +596,7 @@ void SessionManager::changeProfile(const QString& key ,
         else
         {
             qDebug() << "Profile saved to new path.";
-            saveProfile(QString::null,info);
+            saveProfile(QString(),info);
         }
     }
 }

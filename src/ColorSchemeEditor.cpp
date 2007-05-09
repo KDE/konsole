@@ -17,6 +17,9 @@
     02110-1301  USA.
 */
 
+// Own
+#include "ColorSchemeEditor.h"
+
 // Qt
 #include <QBrush>
 #include <QFontMetrics>
@@ -29,7 +32,6 @@
 #include <KColorDialog>
 
 // Konsole
-#include "ColorSchemeEditor.h"
 #include "ui_ColorSchemeEditor.h"
 #include "TECommon.h"
 

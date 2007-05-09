@@ -17,12 +17,14 @@
     02110-1301  USA.
 */
 
+// Own
+#include "ScreenWindow.h"
+
 // Qt
 #include <QtDebug>
 
 // Konsole
 #include "Screen.h"
-#include "ScreenWindow.h"
 
 using namespace Konsole;
 

@@ -17,6 +17,9 @@
     02110-1301  USA.
 */
 
+// Own
+#include "Filter.h"
+
 // System
 #include <iostream>
 
@@ -34,7 +37,6 @@
 #include <KRun>
 
 // Konsole
-#include "Filter.h"
 #include "TerminalCharacterDecoder.h"
 
 using namespace Konsole;
@@ -431,7 +433,7 @@ QString UrlFilter::HotSpot::tooltip() const
     else if ( kind == Email )
         return i18n("Click to send an email to '%1'.",url);
     else
-        return QString::null;
+        return QString();
 }
 UrlFilter::HotSpot::UrlType UrlFilter::HotSpot::urlType() const
 {

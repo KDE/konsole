@@ -20,7 +20,9 @@
 #ifndef PROCESSINFO_H
 #define PROCESSINFO_H
 
+// Qt
 #include <QMap>
+#include <QString>
 #include <QVector>
 
 namespace Konsole
@@ -95,7 +97,7 @@ public:
      * static ProcessInfo::newInstance() method which will return
      * a suitable ProcessInfo instance for the current platform.
      */ 
-    ProcessInfo(int pid , bool readEnvironment = false);
+    explicit ProcessInfo(int pid , bool readEnvironment = false);
     virtual ~ProcessInfo() {};
 
     /** 
@@ -266,7 +268,7 @@ private:
 class NullProcessInfo : public ProcessInfo
 {
 public:
-    NullProcessInfo(int pid,bool readEnvironment = false);
+    explicit NullProcessInfo(int pid,bool readEnvironment = false);
 protected:
     virtual bool readProcessInfo(int pid,bool readEnvironment);
 };
@@ -278,7 +280,7 @@ protected:
 class UnixProcessInfo : public ProcessInfo
 {
 public:
-    UnixProcessInfo(int pid,bool readEnvironment = false);
+    explicit UnixProcessInfo(int pid,bool readEnvironment = false);
 
 protected:
     // reads the /proc/<pid>/stat file to get status information

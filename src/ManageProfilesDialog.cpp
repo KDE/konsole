@@ -17,6 +17,9 @@
     02110-1301  USA.
 */
 
+// Own
+#include "ManageProfilesDialog.h"
+
 // Qt
 #include <QCheckBox>
 #include <QHeaderView>
@@ -31,7 +34,6 @@
 #include "EditProfileDialog.h"
 #include "SessionManager.h"
 #include "ui_ManageProfilesDialog.h"
-#include "ManageProfilesDialog.h"
 
 using namespace Konsole;
 

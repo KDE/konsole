@@ -17,6 +17,9 @@
     02110-1301  USA.
 */
 
+// Own
+#include "RemoteConnectionDialog.h"
+
 // Qt
 #include <QtDebug>
 
@@ -27,7 +30,6 @@
 #include "SessionManager.h"
 
 #include "ui_RemoteConnectionDialog.h"
-#include "RemoteConnectionDialog.h"
 
 using namespace Konsole;
 

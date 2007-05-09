@@ -17,6 +17,9 @@
     02110-1301  USA.
 */
 
+// Own
+#include "ViewManager.h"
+
 // System
 #include <assert.h>
 
@@ -38,7 +41,6 @@
 #include "SessionManager.h"
 #include "ViewContainer.h"
 #include "ViewSplitter.h"
-#include "ViewManager.h"
 
 using namespace Konsole;
 

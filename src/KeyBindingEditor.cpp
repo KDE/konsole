@@ -17,11 +17,13 @@
     02110-1301  USA.
 */
 
+// Own
+#include "KeyBindingEditor.h"
+
 // Qt
 #include <QHeaderView>
 
 // Konsole
-#include "KeyBindingEditor.h"
 #include "ui_KeyBindingEditor.h"
 #include "KeyboardTranslator.h"
 

@@ -17,6 +17,9 @@
     02110-1301  USA.
 */
 
+// Own
+#include "Application.h"
+
 #include "kdebug.h"
 
 // KDE
@@ -30,7 +33,6 @@
 #include "SessionManager.h"
 #include "KeyTrans.h"
 #include "KeyboardTranslator.h"
-#include "Application.h"
 #include "MainWindow.h"
 #include "Session.h"
 #include "TerminalDisplay.h"

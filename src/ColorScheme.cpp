@@ -19,6 +19,9 @@
     02110-1301  USA.
 */
 
+// Own
+#include "ColorScheme.h"
+
 // Qt
 #include <QFile>
 #include <QFileInfo>
@@ -29,7 +32,6 @@
 #include <KStandardDirs>
 
 // Konsole
-#include "ColorScheme.h"
 #include "TECommon.h"
 
 using namespace Konsole;
@@ -212,7 +214,7 @@ ColorScheme* KDE3ColorSchemeReader::read()
     while ( !_device->atEnd() )
     {
         QString line(_device->readLine());
-        line.replace(comment,QString::null);
+        line.replace(comment,QString());
         line = line.simplified();
 
         if ( line.isEmpty() )

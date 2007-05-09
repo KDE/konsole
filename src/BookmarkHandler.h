@@ -22,6 +22,10 @@
 #ifndef KONSOLEBOOKMARKHANDLER_H
 #define KONSOLEBOOKMARKHANDLER_H
 
+// Qt
+#include <QMenu>
+
+// KDE
 #include <KBookmarkManager>
 
 class KMenu;

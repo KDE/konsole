@@ -58,7 +58,7 @@ public:
      *
      * You should not call this constructor directly, instead use the Emulation::createWindow() method
      * to create a window on the emulation which you wish to view.  This allows the emulation
-     * to notify the window when the associated screen has changed and synchronise selection updates
+     * to notify the window when the associated screen has changed and synchronize selection updates
      * between all views on a session.
      */
     ScreenWindow(QObject* parent = 0);

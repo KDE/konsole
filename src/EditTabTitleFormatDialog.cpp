@@ -17,11 +17,13 @@
     02110-1301  USA.
 */
 
+// Own
+#include "EditTabTitleFormatDialog.h"
+
 // KDE
 #include <KLocale>
 
 // Konsole
-#include "EditTabTitleFormatDialog.h"
 #include "ui_EditTabTitleFormatDialog.h"
 
 using namespace Konsole;

@@ -41,6 +41,9 @@
    \sa Screen \sa Emulation
 */
 
+// Own
+#include "TerminalDisplay.h"
+
 // System
 #include <assert.h>
 #include <ctype.h>
@@ -90,7 +93,6 @@
 // Konsole
 #include "config.h"
 #include "Filter.h"
-#include "TerminalDisplay.h"
 #include "konsole_wcwidth.h"
 #include "ScreenWindow.h"
 
@@ -1851,7 +1853,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
   characterPosition(ev->pos(),charLine,charColumn); 
 
   // handle filters
-  // change link hot-spot appearence on mouse-over
+  // change link hot-spot appearance on mouse-over
   Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine,charColumn);
   if ( spot && spot->type() == Filter::HotSpot::Link)
   {
@@ -2408,7 +2410,7 @@ int TerminalDisplay::charClass(UINT16 ch) const
     return 1;
 }
 
-void TerminalDisplay::setWordCharacters(QString wc)
+void TerminalDisplay::setWordCharacters(const QString& wc)
 {
 	_wordCharacters = wc;
 }
@@ -2428,7 +2430,7 @@ void TerminalDisplay::setUsesMouse(bool on)
 #undef KeyPress
 
 #if 0
-void TerminalDisplay::emitText(QString text)
+void TerminalDisplay::emitText(const QString& text)
 {
   if (!text.isEmpty()) {
     QKeyEvent e(QEvent::KeyPress, 0, Qt::NoModifier, text);

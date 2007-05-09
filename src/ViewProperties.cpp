@@ -17,6 +17,7 @@
     02110-1301  USA.
 */
 
+// Own
 #include "ViewProperties.h"
 
 using namespace Konsole;

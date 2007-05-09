@@ -17,6 +17,9 @@
     02110-1301  USA.
 */
 
+// Own
+#include "MainWindow.h"
+
 // Qt
 #include <QApplication>
 #include <QVBoxLayout>
@@ -41,7 +44,6 @@
 
 #include "BookmarkHandler.h"
 #include "IncrementalSearchBar.h"
-#include "MainWindow.h"
 #include "RemoteConnectionDialog.h"
 #include "SessionController.h"
 #include "ProfileList.h"

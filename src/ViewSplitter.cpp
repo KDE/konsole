@@ -19,6 +19,9 @@
     02110-1301  USA.
 */
 
+// Own
+#include "ViewSplitter.h"
+
 // Qt
 #include <QFocusEvent>
 
@@ -27,7 +30,6 @@
 
 // Konsole
 #include "ViewContainer.h"
-#include "ViewSplitter.h"
 
 using namespace Konsole;
 

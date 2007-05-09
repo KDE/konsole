@@ -18,12 +18,12 @@
     02110-1301  USA.
 */
 
+// Own
+#include "OverlayFrame.h"
+
 // Qt
 #include <QApplication>
 #include <QPainter>
-
-// Konsole
-#include "OverlayFrame.h"
 
 using namespace Konsole;
 

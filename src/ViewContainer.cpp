@@ -19,6 +19,9 @@
     02110-1301  USA.
 */
 
+// Own
+#include "ViewContainer.h"
+
 // Qt
 #include <QHash>
 #include <QLineEdit>
@@ -41,7 +44,6 @@
 #include <KTabWidget>
 
 // Konsole
-#include "ViewContainer.h"
 #include "ViewProperties.h"
 
 // TODO Perhaps move everything which is Konsole-specific into different files

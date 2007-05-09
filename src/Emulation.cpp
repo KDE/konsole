@@ -65,6 +65,9 @@
    a fixed rate.
 */
 
+// Own
+#include "Emulation.h"
+
 // System
 #include <assert.h>
 #include <stdio.h>
@@ -73,7 +76,6 @@
 
 // Qt
 #include <QApplication>
-#include <QClipboard>
 #include <QClipboard>
 #include <QHashIterator>
 #include <QKeyEvent>
@@ -89,7 +91,6 @@
 #include "Screen.h"
 #include "TerminalCharacterDecoder.h"
 #include "ScreenWindow.h"
-#include "Emulation.h"
 
 using namespace Konsole;
 

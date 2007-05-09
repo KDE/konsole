@@ -18,6 +18,8 @@
     02110-1301  USA.
 */
 
+// Own
+#include "Screen.h"
 
 // Standard
 #include <stdio.h>
@@ -36,7 +38,6 @@
 
 // Konsole
 #include "konsole_wcwidth.h"
-#include "Screen.h"
 #include "TerminalCharacterDecoder.h"
 
 using namespace Konsole;
@@ -830,7 +831,7 @@ void Screen::ShowCharacter(unsigned short c)
   }
 }
 
-void Screen::compose(QString /*compose*/)
+void Screen::compose(const QString& /*compose*/)
 {
    Q_ASSERT( 0 /*Not implemented yet*/ );
 

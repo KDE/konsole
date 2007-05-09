@@ -18,6 +18,9 @@
     02110-1301  USA.
 */
 
+// Own
+#include "Vt102Emulation.h"
+
 /*! \class Vt102Emulation
 
    \brief Actual Emulation for Konsole
@@ -55,7 +58,6 @@
 // Konsole
 #include "KeyTrans.h"
 #include "Screen.h"
-#include "Vt102Emulation.h"
 
 #if defined(HAVE_XKB)
 void scrolllock_set_off();
