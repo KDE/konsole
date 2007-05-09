@@ -39,6 +39,7 @@
 #include <krun.h>
 #include <kstdaction.h>
 #include <qlabel.h>
+#include <kprocctrl.h>
 
 #include <qcheckbox.h>
 #include <qspinbox.h>
@@ -256,6 +257,13 @@ konsolePart::~konsolePart()
 {
 //  kdDebug(1211) << "konsolePart::~konsolePart() this=" << this << endl;
   if ( se ) {
+    setAutoDestroy(false);
+    se->closeSession();
+
+    // Wait a bit for all childs to clean themselves up.
+    while(se && KProcessController::theKProcessController->waitForProcessExit(1))
+        ;
+
     disconnect( se, SIGNAL( destroyed() ), this, SLOT( sessionDestroyed() ) );
 //    kdDebug(1211) << "Deleting se session" << endl;
     delete se;
