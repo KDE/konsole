@@ -49,6 +49,38 @@ void ViewSplitter::childEmpty(ViewSplitter* splitter)
         emit empty(this);
 }
 
+void ViewSplitter::adjustContainerSize(ViewContainer* container , int percentage)
+{
+    int containerIndex = indexOf(container->containerWidget());
+
+    Q_ASSERT( containerIndex != -1 );
+
+    QList<int> containerSizes = sizes();
+
+    int oldSize = containerSizes[containerIndex];
+    int newSize = oldSize * ( 1.0 + percentage/100.0 );
+
+   // qDebug() << "Old container size:" << oldSize << ", new size:" << newSize;
+
+    int perContainerDelta = ( (newSize-oldSize) / (count()-1) ) * (-1);
+
+   //  qDebug() << "Changing sizes of other containers by " << perContainerDelta << "pixels.";
+
+    for ( int i = 0 ; i < containerSizes.count() ; i++ )
+    {
+        //qDebug() << "Container" << i << "old size =" << containerSizes[i];
+
+        if ( i == containerIndex )
+            containerSizes[i] = newSize;
+        else
+            containerSizes[i] = containerSizes[i] + perContainerDelta;
+        
+        //qDebug() << "Container" << i << "new size =" << containerSizes[i];
+    }
+
+    setSizes(containerSizes);
+}
+
 ViewSplitter* ViewSplitter::activeSplitter()
 {
    // qDebug() << "BEGIN activeSplitter" ;

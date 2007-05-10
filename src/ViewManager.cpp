@@ -142,7 +142,19 @@ void ViewManager::setupActions()
         detachViewAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_H) );
 
         connect( detachViewAction , SIGNAL(triggered()) , this , SLOT(detachActiveView()) );
-    
+   
+        // Expand & Shrink Active View
+        KAction* expandActiveAction = new KAction( i18n("Expand View") , this );
+        expandActiveAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_BracketRight) );
+        collection->addAction("expand-active-view",expandActiveAction);
+        connect( expandActiveAction , SIGNAL(triggered()) , this , SLOT(expandActiveView()) );
+
+        KAction* shrinkActiveAction = new KAction( i18n("Shrink View") , this );
+        shrinkActiveAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_BracketLeft) );
+        collection->addAction("shrink-active-view",shrinkActiveAction);
+        connect( shrinkActiveAction , SIGNAL(triggered()) , this , SLOT(shrinkActiveView()) );
+
+        // Next / Previous View , Next Container
         collection->addAction("next-view",nextViewAction);
         collection->addAction("previous-view",previousViewAction);
         collection->addAction("next-container",nextContainerAction);
@@ -315,6 +327,14 @@ void ViewManager::removeContainer(ViewContainer* container)
 {
     container->deleteLater();
     emit splitViewToggle(_viewSplitter->containers().count() > 1);
+}
+void ViewManager::expandActiveView()
+{
+    _viewSplitter->adjustContainerSize(_viewSplitter->activeContainer(),10);
+}
+void ViewManager::shrinkActiveView()
+{
+    _viewSplitter->adjustContainerSize(_viewSplitter->activeContainer(),-10);
 }
 void ViewManager::closeActiveView()
 {
@@ -498,7 +518,6 @@ TerminalDisplay* ViewManager::createTerminalDisplay()
    display->setCutToBeginningOfLine(true);
    display->setTerminalSizeStartup(false);
    display->setScrollBarLocation(TerminalDisplay::SCROLLBAR_RIGHT);
-
    
    return display;
 }

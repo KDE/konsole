@@ -140,6 +140,8 @@ private slots:
     void splitTopBottom();
     void closeActiveView();
     void closeOtherViews();
+    void expandActiveView();
+    void shrinkActiveView();
 
     // called when the "Detach View" menu item is selected
     void detachActiveView();

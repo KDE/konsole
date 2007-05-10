@@ -98,6 +98,17 @@ public:
      */
     void activateNextContainer();
 
+    /**
+     * Changes the size of the specified @p container by a given @p percentage.
+     * @p percentage may be positive ( in which case the size of the container 
+     * is increased ) or negative ( in which case the size of the container 
+     * is decreased ).  
+     *
+     * The sizes of the remaining containers are increased or decreased
+     * uniformly to maintain the width of the splitter.
+     */
+    void adjustContainerSize(ViewContainer* container , int percentage);
+
    /**
     * Gives the focus to the active view in the previous container
     */
