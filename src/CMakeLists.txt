@@ -59,7 +59,6 @@ set(konsole_KDEINIT_SRCS
         ColorScheme.cpp
         ColorSchemeEditor.cpp
         EditProfileDialog.cpp
-        EditTabTitleFormatDialog.cpp
         Filter.cpp
         HistorySizeDialog.cpp
         IncrementalSearchBar.cpp
@@ -81,6 +80,7 @@ set(konsole_KDEINIT_SRCS
         Pty.cpp
         Screen.cpp
         Session.cpp
+        TabTitleFormatAction.cpp
         TerminalDisplay.cpp
         Vt102Emulation.cpp
         Emulation.cpp
@@ -100,7 +100,6 @@ set(konsole_KDEINIT_SRCS
 kde4_add_ui_files(konsole_KDEINIT_SRCS
                   ColorSchemeEditor.ui
                   EditProfileDialog.ui
-                  EditTabTitleFormatDialog.ui
                   KeyBindingEditor.ui
                   ManageProfilesDialog.ui
                   RemoteConnectionDialog.ui
@@ -135,7 +134,6 @@ set(konsolepart_PART_SRCS
    ColorScheme.cpp
    ColorSchemeEditor.cpp
    EditProfileDialog.cpp
-   EditTabTitleFormatDialog.cpp
    Emulation.cpp 
    Filter.cpp 
    History.cpp
@@ -158,6 +156,7 @@ set(konsolepart_PART_SRCS
    ProfileListWidget.cpp 
    SessionManager.cpp
    ManageProfilesDialog.cpp
+   TabTitleFormatAction.cpp
    TerminalCharacterDecoder.cpp
    TerminalDisplay.cpp
    ViewContainer.cpp

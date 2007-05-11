@@ -38,11 +38,11 @@
 #include "ColorScheme.h"
 #include "ColorSchemeEditor.h"
 #include "ui_EditProfileDialog.h"
-#include "EditTabTitleFormatDialog.h"
 #include "KeyBindingEditor.h"
 #include "KeyboardTranslator.h"
 #include "SessionManager.h"
 #include "ShellCommand.h"
+#include "TabTitleFormatAction.h"
 
 using namespace Konsole;
 
@@ -168,13 +168,30 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
             SLOT(tabTitleFormatChanged(const QString&)) );
     connect(_ui->remoteTabTitleEdit , SIGNAL(textChanged(const QString&)) , this ,
             SLOT(remoteTabTitleFormatChanged(const QString&)));
-    connect(_ui->tabTitleEditButton , SIGNAL(clicked()) , this , 
-            SLOT(editTabTitle()) );
-    connect(_ui->remoteTabTitleEditButton , SIGNAL(clicked()) , this ,
-            SLOT(editRemoteTabTitle()) );
+    
+    // menus for local and remote tab title dynamic elements
+    TabTitleFormatAction* localTabTitleAction = new TabTitleFormatAction(this);
+    localTabTitleAction->setContext(Session::LocalTabTitle);
+    _ui->tabTitleEditButton->setMenu(localTabTitleAction->menu());
+    connect( localTabTitleAction , SIGNAL(dynamicElementSelected(const QString&)) , 
+            this , SLOT(insertTabTitleText(const QString&)) );
+
+    TabTitleFormatAction* remoteTabTitleAction = new TabTitleFormatAction(this);
+    remoteTabTitleAction->setContext(Session::RemoteTabTitle);
+    _ui->remoteTabTitleEditButton->setMenu(remoteTabTitleAction->menu());
+    connect( remoteTabTitleAction , SIGNAL(dynamicElementSelected(const QString&)) ,
+           this , SLOT(insertRemoteTabTitleText(const QString&)) ); 
 
     connect(_ui->showMenuBarButton , SIGNAL(toggled(bool)) , this , 
             SLOT(showMenuBar(bool)) );
+}
+void EditProfileDialog::insertTabTitleText(const QString& text)
+{
+    _ui->tabTitleEdit->insert(text);
+}
+void EditProfileDialog::insertRemoteTabTitleText(const QString& text)
+{
+    _ui->remoteTabTitleEdit->insert(text);
 }
 void EditProfileDialog::showMenuBar(bool show)
 {
@@ -191,28 +208,6 @@ void EditProfileDialog::alwaysShowTabBar()
 void EditProfileDialog::showTabBarAsNeeded()
 {
     _tempProfile->setProperty(Profile::TabBarMode,Profile::ShowTabBarAsNeeded);
-}
-void EditProfileDialog::editTabTitle()
-{
-    EditTabTitleFormatDialog dialog(this);
-    dialog.setContext(Session::LocalTabTitle);
-    dialog.setTabTitleFormat(_ui->tabTitleEdit->text());
-  
-    if ( dialog.exec() == QDialog::Accepted )
-    {
-        _ui->tabTitleEdit->setText(dialog.tabTitleFormat());
-    }
-}
-void EditProfileDialog::editRemoteTabTitle()
-{
-    EditTabTitleFormatDialog dialog(this);
-    dialog.setContext(Session::RemoteTabTitle);
-    dialog.setTabTitleFormat(_ui->remoteTabTitleEdit->text());
-    
-    if ( dialog.exec() == QDialog::Accepted )
-    {
-        _ui->remoteTabTitleEdit->setText(dialog.tabTitleFormat());
-    }
 }
 void EditProfileDialog::tabTitleFormatChanged(const QString& format)
 {

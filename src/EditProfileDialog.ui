@@ -188,7 +188,7 @@
              <string>Edit normal tab title format</string>
             </property>
             <property name="text" >
-             <string>Edit...</string>
+             <string>Insert</string>
             </property>
            </widget>
           </item>
@@ -215,7 +215,7 @@
              <string>Edit tab title format used when executing remote commands</string>
             </property>
             <property name="text" >
-             <string>Edit..</string>
+             <string>Insert</string>
             </property>
            </widget>
           </item>

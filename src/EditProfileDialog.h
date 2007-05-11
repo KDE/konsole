@@ -99,8 +99,8 @@ private slots:
     void tabTitleFormatChanged(const QString& text);
     void remoteTabTitleFormatChanged(const QString& text);
 
-    void editTabTitle();
-    void editRemoteTabTitle();
+    void insertTabTitleText(const QString& text);
+    void insertRemoteTabTitleText(const QString& text);
 
     void showMenuBar(bool);
     void alwaysHideTabBar();

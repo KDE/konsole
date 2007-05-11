@@ -17,43 +17,38 @@
     02110-1301  USA.
 */
 
-#ifndef EDITTABTITLEFORMATDIALOG_H
-#define EDITTABTITLEFORMATDIALOG_H
+#ifndef TABTITLEFORMATACTION_H
+#define TABTITLEFORMATACTION_H
 
-// KDE
-#include <KDialog>
+// Qt
+#include <QAction>
 
 // Konsole
 #include "Session.h"
 
-namespace Ui
-{
-    class EditTabTitleFormatDialog;
-}
-
 namespace Konsole
 {
 
-class EditTabTitleFormatDialog : public KDialog
+class TabTitleFormatAction : public QAction
 {
 Q_OBJECT
-   
+
 public:
-    EditTabTitleFormatDialog(QWidget* parent = 0);
-    virtual ~EditTabTitleFormatDialog();
+    TabTitleFormatAction(QObject* parent);
+    ~TabTitleFormatAction();
 
     void setContext(Session::TabTitleContext context);
+    Session::TabTitleContext context() const;
 
-    void setTabTitleFormat(const QString& format);
-    QString tabTitleFormat() const;
-
+signals:
+    void dynamicElementSelected(const QString&);
+  
 private slots:
-    void insertElement(int index);
+    void fireElementSelected(QAction*);
 
 private:
-    Ui::EditTabTitleFormatDialog* _ui;
     Session::TabTitleContext _context;
-
+    
     struct Element
     {
         QString element;
@@ -63,8 +58,9 @@ private:
     static const int _localElementCount;
     static const Element _remoteElements[];
     static const int _remoteElementCount;
+
 };
 
 }
 
-#endif // EDITTABTITLEFORMATDIALOG_H
+#endif // TABTITLEFORMATACTION_H
