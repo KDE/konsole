@@ -536,8 +536,10 @@ void EditProfileDialog::changeCheckedItem( QAbstractItemModel* model , const QMo
 {
         // uncheck current active item
         QModelIndexList list = model->match( model->index(0,0) , Qt::CheckStateRole , Qt::Checked );
-        Q_ASSERT( list.count() == 1 );
-        model->setData( list.first() , Qt::Unchecked , Qt::CheckStateRole ); 
+       
+        QListIterator<QModelIndex> iter(list);
+        while ( iter.hasNext() ) 
+            model->setData( iter.next() , Qt::Unchecked , Qt::CheckStateRole ); 
 
         // check new active item
         model->setData( to , Qt::Checked , Qt::CheckStateRole );

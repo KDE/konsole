@@ -170,6 +170,7 @@ bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile* profil
 {
     KConfig config(path,KConfig::NoGlobals);
 
+    // Basic Profile Settings
     KConfigGroup general = config.group("General");
 
     if ( profile->isPropertySet(Profile::Name) )
@@ -184,37 +185,46 @@ bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile* profil
         general.writeEntry("Directory",profile->defaultWorkingDirectory());
 
     writeStandardElement( general , "Icon" , profile , Profile::Icon );
+    
+    // Tab Titles
     writeStandardElement( general , "LocalTabTitleFormat" , profile , Profile::LocalTabTitleFormat );
     writeStandardElement( general , "RemoteTabTitleFormat" , profile , Profile::RemoteTabTitleFormat );
 
+    // Menu and Tab Bar
     writeStandardElement( general , "TabBarMode" , profile , Profile::TabBarMode );
     writeStandardElement( general , "ShowMenuBar" , profile , Profile::ShowMenuBar );
 
+    // Keyboard
     KConfigGroup keyboard = config.group("Keyboard");
     writeStandardElement( keyboard , "KeyBindings" , profile , Profile::KeyBindings );
 
+    // Appearance
     KConfigGroup appearance = config.group("Appearance");
 
     writeStandardElement( appearance , "ColorScheme" , profile , Profile::ColorScheme );
     writeStandardElement( appearance , "Font" , profile , Profile::Font );
    
+    // Scrolling
     KConfigGroup scrolling = config.group("Scrolling");
 
     writeStandardElement( scrolling , "HistoryMode" , profile , Profile::HistoryMode );
     writeStandardElement( scrolling , "HistorySize" , profile , Profile::HistorySize );
     writeStandardElement( scrolling , "ScrollBarPosition" , profile , Profile::ScrollBarPosition ); 
 
+    // Terminal Features
     KConfigGroup terminalFeatures = config.group("Terminal Features");
 
     writeStandardElement( terminalFeatures , "FlowControl" , profile , Profile::FlowControlEnabled );
     writeStandardElement( terminalFeatures , "BlinkingCursor" , profile , Profile::BlinkingCursorEnabled );
 
+    // Cursor 
     KConfigGroup cursorOptions = config.group("Cursor Options");
 
     writeStandardElement( cursorOptions , "UseCustomCursorColor"  , profile , Profile::UseCustomCursorColor );
     writeStandardElement( cursorOptions , "CustomCursorColor" , profile , Profile::CustomCursorColor );
     writeStandardElement( cursorOptions , "CursorShape" , profile , Profile::CursorShape );
 
+    // Interaction
     KConfigGroup interactionOptions = config.group("Interaction Options");
 
     writeStandardElement( interactionOptions , "WordCharacters" , profile , Profile::WordCharacters );

@@ -43,6 +43,16 @@ class Profile;
 
 /**
  * A dialog which allows the user to edit a profile.
+ * After the dialog is created, it can be initialised with the settings
+ * for a profile using setProfile().  When the user makes changes to the 
+ * dialog and accepts the changes, the dialog will update the
+ * profile in the SessionManager by calling the SessionManager's 
+ * changeProfile() method.
+ *
+ * Some changes made in the dialog are preview-only changes which cause
+ * the SessionManager's changeProfile() method to be called with
+ * the persistant argument set to false.  These changes are then
+ * un-done when the dialog is closed.
  *
  * TODO: More documentation
  */
@@ -67,7 +77,9 @@ public:
     void setProfile(const QString& key);
 
 public slots:
+    // reimplemented
     virtual void accept();
+    // reimplemented 
     virtual void reject();
 
 protected:

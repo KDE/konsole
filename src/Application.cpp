@@ -54,6 +54,7 @@ Application::Application()
     KeyboardTranslatorManager::setInstance( new KeyboardTranslatorManager() );
 
     // old keyboard translator manager
+    // (for use until the new one is completed)
     KeyTrans::loadAll();
 
     // check for compositing functionality

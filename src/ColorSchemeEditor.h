@@ -40,6 +40,15 @@ class ColorScheme;
 
 /**
  * A dialog for editing color schemes.
+ *
+ * After creation, the dialog can be initialised with the settings
+ * of a color scheme using the setup() method.
+ *
+ * The dialog creates a copy of the supplied color scheme to which
+ * any changes made are applied.  The modified color scheme
+ * can be retrieved using the colorScheme() method.  
+ *
+ * When changes are made the colorsChanged() signal is emitted.
  */
 class ColorSchemeEditor : public QWidget
 {
@@ -50,9 +59,9 @@ public:
    ColorSchemeEditor(QWidget* parent = 0);
    virtual ~ColorSchemeEditor();
 
-      /** Initialises the dialog with the properties of the specified color scheme. */
+   /** Initialises the dialog with the properties of the specified color scheme. */
    void setup(const ColorScheme* scheme);
-   /** Returns the edited color scheme. */
+   /** Returns the modified color scheme. */
    ColorScheme* colorScheme() const;
 
 signals:

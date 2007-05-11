@@ -33,18 +33,42 @@ namespace Konsole
 
 class KeyboardTranslator;
 
+/**
+ * A dialog which allows the user to edit a key bindings list,
+ * which maps between key combinations and text produced 
+ * in the shell when those combinations are pressed.
+ *
+ * The dialog can be initialised with the settings of an
+ * existing key bindings list using the setup() method.
+ *
+ * The dialog creates a copy of the supplied keyboard translator
+ * to which any changes are applied.  The modified translator 
+ * can be retrieved using the translator() method.
+ */
 class KeyBindingEditor : public QWidget
 {
 Q_OBJECT
 
 public:
+    /** Constructs a new key bindings editor with the specified parent. */
     KeyBindingEditor(QWidget* parent = 0);
     virtual ~KeyBindingEditor();
 
+    /** 
+     * Intialises the dialog with the bindings and other settings
+     * from the specified @p translator.
+     */
     void setup(const KeyboardTranslator* translator);
 
+    /**
+     * Returns the modified translator describing the changes to the bindings
+     * and other settings which the user made.
+     */
     KeyboardTranslator* translator() const;
 
+    /**
+     * Returns the text of the editor's description field.
+     */
     QString description() const;
 
 public slots:

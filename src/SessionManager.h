@@ -41,84 +41,177 @@ namespace Konsole
 
 class Session;
 
+/**
+ * Represents a terminal set-up which can be used to 
+ * set the initial state of new terminal sessions or applied
+ * to existing sessions.
+ *
+ * Profiles can be loaded from disk using ProfileReader instances
+ * and saved to disk using ProfileWriter instances.
+ */
 class Profile : public QObject 
 {
 public:
+    /**
+     * This enum describes the available properties
+     * which a Profile may consist of.
+     *
+     * Properties can be set using setProperty() and read
+     * using property()
+     */
     enum Property
     {
-        // Path to profile's config file
-        Path,   // QString
+        /** (QString) Path to the profile's configuration file on-disk. */
+        Path,   
 
-        // General profile options
-        Name,   // QString
-        Title,  // QString
-        Icon,   // QString
-        Command,        // QString
-        Arguments,      // QStringList
-        Environment,    // QStringList
+        /** (QString) The descriptive name of this profile. */
+        Name,   
+        /** (QString) TODO: Document me. */
+        Title, 
+        /** (QString) The name of the icon associated with this profile.  This 
+         * is used in menus and tabs to represent the profile. 
+         */
+        Icon, 
+        /** 
+         * (QString) The command to execute ( excluding arguments ) when creating a new terminal
+         * session using this profile.
+         */
+        Command,   
+        /**
+         * (QStringList) The arguments which are passed to the program specified by the Command property
+         * when creating a new terminal session using this profile.
+         */ 
+        Arguments,
+        /** 
+         * (QStringList) Additional environment variables ( in the form of NAME=VALUE pairs )
+         * which are passed to the program specified by the Command property
+         * when creating a new terminal session using this profile. 
+         */ 
+        Environment,
+        /** (QString) The initial working directory for sessions created using this profile. */ 
         Directory,      // QString
 
-        // Tab Title Formats
-        LocalTabTitleFormat,    // QString
-        RemoteTabTitleFormat,   // QString
+        /** (QString) The format used for tab titles when running normal commands. */
+        LocalTabTitleFormat,   
+        /** (QString) The format used for tab titles when the session is running a remote command (eg. SSH) */ 
+        RemoteTabTitleFormat,   
 
-        // Window & Tab Bar 
-        ShowMenuBar,    // bool
-        TabBarMode,     // TabBarMode
+        /** (bool) Specifies whether the menu bar should be shown in the main application window. */
+        ShowMenuBar,    
+        /** (TabBarModeEnum) Specifies when the tab bar should be shown in the main application window. */ 
+        TabBarMode,    
 
-        // Appearence
-        Font,           // QFont
-        ColorScheme,    // QString
+        /** (QFont) The font to use in terminal displays using this profile. */
+        Font,           
+        /** (QString) 
+         * The name of the color scheme to use in terminal displays using this profile. 
+         * Color schemes are managed by the ColorSchemeManager class. 
+         */
+        ColorScheme,   
 
-        // Keyboard
-        KeyBindings,    // QString
+        /** (QString) The name of the key bindings. 
+         * Key bindings are managed by the KeyboardTranslatorManager class. 
+         */
+        KeyBindings, 
 
-        // Scrolling
-        HistoryMode,        // HistoryMode
-        HistorySize,        // int
-        ScrollBarPosition,  // ScrollBarPosition
+        /** (HistoryModeEnum) Specifies the storage type used for keeping the output produced
+         * by terminal sessions using this profile.
+         */
+        HistoryMode,
+        /** (int) Specifies the number of lines of output to remember in terminal sessions
+         * using this profile.  Once the limit is reached, the oldest lines are lost.
+         * Only applicable if the HistoryMode property is FixedSizeHistory
+         */
+        HistorySize,
+        /**
+         * (ScrollBarPositionEnum) Specifies the position of the scroll bar in 
+         * terminal displays using this profile.
+         */
+        ScrollBarPosition,  
 
-        // Terminal Features
-        SelectWordCharacters,       // QString   
-        BlinkingTextEnabled,        // bool
-        FlowControlEnabled,         // bool
-        AllowProgramsToResizeWindow,// bool
+        /** TODO Document me*/
+        SelectWordCharacters,
+        /** (bool) Specifies whether text in terminal displays is allowed to blink. */
+        BlinkingTextEnabled,       
+        /** (bool) Specifies whether the flow control keys ( typically Ctrl+S , Ctrl+Q )
+         * have any effect.  Also known as Xon/Xoff
+         */ 
+        FlowControlEnabled,
+        /** (bool) Specifies whether programs running in the terminal are allowed to 
+         * resize the terminal display. 
+         */
+        AllowProgramsToResizeWindow,
+        /** (bool) Specifies whether the cursor blinks ( in a manner similar 
+         * to text editing applications )
+         */
         BlinkingCursorEnabled,      // bool
 
-        // Cursor Options
-        UseCustomCursorColor,       // bool 
-        CursorShape,                // CursorShapeEnum
-        CustomCursorColor,          // QColor
+        /** (bool) If true, terminal displays use a fixed color to draw the cursor,
+         * specified by the CustomCursorColor property.  Otherwise the cursor changes
+         * color to match the character underneath it.
+         */
+        UseCustomCursorColor,
+        /** (CursorShapeEnum) The shape used by terminal displays to represent the cursor. */ 
+        CursorShape,           
+        /** (QColor) The color used by terminal displays to draw the cursor.  Only applicable
+         * if the UseCustomCursorColor property is true. */ 
+        CustomCursorColor,        
 
-        // Interaction options
+        /** TODO Document me */
+        // FIXME - Is this a duplicate of SelectWordCharacters?
         WordCharacters  // QString
     };
 
+    /** This enum describes the available modes for showing or hiding the tab bar. */
     enum TabBarModeEnum
     {
+        /** The tab bar is never shown. */
         AlwaysHideTabBar,
+        /** The tab bar is shown if there are multiple tabs open or hidden otherwise. */
         ShowTabBarAsNeeded,
+        /** The tab bar is always shown. */
         AlwaysShowTabBar
     };
 
+    /** 
+     * This enum describes the modes available to remember lines of output produced 
+     * by the terminal. 
+     */
     enum HistoryModeEnum
     {
+        /** No output is remembered.  As soon as lines of text are scrolled off-screen they are lost. */
         DisableHistory,
+        /** A fixed number of lines of output are remembered.  Once the limit is reached, the oldest
+         * lines are lost. */
         FixedSizeHistory,
+        /** All output is remembered for the duration of the session.  
+         * Typically this means that lines are recorded to
+         * a file as they are scrolled off-screen.
+         */
         UnlimitedHistory
     };
 
+    /**
+     * This enum describes the positions where the terminal display's scroll bar may be placed.
+     */
     enum ScrollBarPositionEnum
     {
+        /** Show the scroll-bar on the left of the terminal display. */
         ScrollBarLeft,
+        /** Show the scroll-bar on the right of the terminal display. */
         ScrollBarRight,
+        /** Do not show the scroll-bar. */
         ScrollBarHidden
     };
 
+    /** This enum describes the shapes used to draw the cursor in terminal displays. */
     enum CursorShapeEnum
     {
+        /** Use a solid rectangular block to draw the cursor. */
         BlockCursor,
+        /** Use an 'I' shape, similar to that used in text editing applications, to draw the cursor. */
         IBeamCursor,
+        /** Draw a line underneath the cursor's position. */
         UnderlineCursor
     };
 
@@ -237,6 +330,11 @@ private:
     static QHash<QString,Property> _propertyNames;
 };
 
+/** 
+ * A profile which contains a number of default settings for various properties.
+ * This can be used as a parent for other profiles or a fallback in case
+ * a profile cannot be loaded from disk.
+ */
 class FallbackProfile : public Profile
 {
 public:
@@ -248,7 +346,14 @@ class ProfileReader
 {
 public:
     virtual ~ProfileReader() {}
+    /** Returns a list of paths to profiles which this reader can read. */
     virtual QStringList findProfiles() { return QStringList(); }
+    /** 
+     * Attempts to read a profile from @p path and 
+     * save the property values described into @p profile.
+     *
+     * Returns true if the profile was successfully read or false otherwise.
+     */
     virtual bool readProfile(const QString& path , Profile* profile) = 0;
 };
 /** Reads a KDE 3 profile .desktop file. */
@@ -276,7 +381,16 @@ class ProfileWriter
 {
 public:
     virtual ~ProfileWriter() {}
+    /** 
+     * Returns a suitable path-name for writing 
+     * @p profile to. The path-name should be accepted by
+     * the corresponding ProfileReader class.
+     */
     virtual QString getPath(const Profile* profile) = 0;
+    /**
+     * Writes the properties and values from @p profile to the file specified by
+     * @p path.  This profile should be readable by the corresponding ProfileReader class.
+     */
     virtual bool writeProfile(const QString& path , const Profile* profile) = 0;
 };
 /** Writes a KDE 4 .profile file. */
@@ -293,162 +407,13 @@ private:
                               Profile::Property property);
 };
 
-#if 0
-/** 
- * Provides information about a type of 
- * session, including the title of the session
- * type, whether or not the session will run
- * as root and whether or not the binary
- * for the session is available.
- *
- * The availability of the profile is not determined until the
- * isAvailable() method is called.
- *
- */
-class Profile
-{
-public:
-
-    enum Property
-    {
-        // General session options
-        Name,
-        Title,
-        Icon,
-        Command,
-        Arguments,
-        Environment,
-        Directory,
-
-        // Appearence
-        Font,
-        ColorScheme,
-
-        // Keyboard
-        KeyBindings,
-
-        // Terminal Features
-    };
-
-    /**
-     * Construct a new Profile
-     * to provide information on a profile.
-     *
-     * @p path Path to the configuration file
-     * for this type of session
-     */
-    Profile(const QString& path);
-    
-    virtual ~Profile();
-
-    /** Sets the parent profile. */
-    void setParent( Profile* parent );
-    /** Returns the parent profile. */
-    Profile* parent() const;
-    /** Sets the value of a property. */
-    virtual void setProperty( Property property , const QVariant& value );
-    /** Retrieves the value of a property. */
-    virtual QVariant property( Property property ) const;
-
-    /**
-     * Returns the path to the session's
-     * config file
-     */
-    QString path() const;
-
-    /** Returns the title of the profile */
-    QString name() const;
-    /**
-     * Returns the path of an icon associated
-     * with this profile
-     */
-    QString icon() const;
-    /**
-     * Returns the command that will be executed
-     * when the session is run
-     *
-     * @param stripSu For commands of the form
-     * "su -flags 'commandname'", specifies whether
-     * to return the whole command string or just
-     * the 'commandname' part
-     *
-     * eg.  If the command string is
-     * "su -c 'screen'", command(true) will
-     * just return "screen"
-     *
-     * @param stripArguments Specifies whether the arguments should be
-     * removed from the returned string.  Anything after the first space
-     * character in the command string is considered an argument
-     */
-    QString command(bool stripSu , bool stripArguments = true) const;
-
-    /**
-     * Extracts the arguments from the command string for this session.  The first
-     * argument is always the command name
-     */
-    QStringList arguments() const;
-
-    /**
-     * Returns true if the session will run as
-     * root
-     */
-    bool isRootSession() const;
-    /**
-     * Searches the user's PATH for the binary
-     * specified in the command string.
-     *
-     * TODO:  isAvailable() assumes and does not yet verify the
-     * existence of additional binaries(usually 'su' or 'sudo') required
-     * to run the command as root.
-     */
-    bool isAvailable() const;
-
-    /**
-     * Returns the terminal-type string which is made available to
-     * programs running in sessions of this type via the $TERM environment variable.
-     *
-     * This defaults to "xterm"
-     */
-    QString terminal() const;
-
-    /** Returns the path of the default keyboard setup file for sessions of this type */
-    QString keyboardSetup() const;
-
-    /** Returns the path of the default colour scheme for sessions of this type */
-    QString colorScheme() const;
-
-    /**
-     * Returns the default font for sessions of this type.
-     * If no font is specified in the session's configuration file, @p font will be returned.
-     */
-    QFont defaultFont() const;
-
-    /** Returns the default working directory for sessions of this type */
-    QString defaultWorkingDirectory() const;
-
-    /**
-     * Returns the text that should be displayed in menus or in other UI widgets
-     * which are used to create new instances of this type of session
-     */
-    QString newSessionText() const;
-
-private:
-    Profile* _parent;
-    KDesktopFile* _desktopFile;
-    KConfigGroup* _config;
-    QString  _path;
-
-    QHash<Property,QVariant> _properties;
-};
-#endif
-
 /**
- * Creates new terminal sessions using information in configuration files.
- * Information about the available session kinds can be obtained using
- * availableprofiles().  Call createSession() to create a new session.
- * The session will automatically notify the SessionManager when it finishes running.
+ * Manages running terminal sessions and the profiles which specify various
+ * settings for terminal sessions and their displays.
  *
- * Session types in the manager have a concept of favorite status, which can be used
+ *
+ *
+ * Profiles in the manager have a concept of favorite status, which can be used
  * by widgets and dialogs in the application decide which sessions to list and
  * how to display them.  The favorite status of a profile can be altered using
  * setFavorite() and retrieved using isFavorite() 
@@ -466,7 +431,14 @@ public:
     virtual ~SessionManager();
 
     /**
-     * Returns a list of keys for registered profiles. 
+     * Returns a list of keys for profiles which have been loaded.
+     * Initially only the profile currently set as the default is loaded.
+     *
+     * Favorite profiles are loaded automatically when findFavorites() is called.
+     *
+     * All other profiles can be loaded by calling loadAllProfiles().  This may
+     * involves opening, reading and parsing all profiles from disk, and
+     * should only be done when necessary.
      */
     QList<QString> availableProfiles() const;
     /**
@@ -490,9 +462,15 @@ public:
      * Updates the profile associated with the specified @p key with
      * the changes specified in @p propertyMap.
      *
+     * All sessions using the profile will be updated to reflect the new settings.
+     *
+     * After the profile is updated, the profileChanged() signal will be emitted.
+     *
      * @param key The profile's key
      * @param propertyMap A map between profile properties and values describing the changes
-     * @param persistant If true, the changes are saved to the profile's configuration file
+     * @param persistant If true, the changes are saved to the profile's configuration file,
+     * set this to false if you want to preview possible changes to a profile but do not
+     * wish to make them permanent.
      */
     void changeProfile(const QString& key , QHash<Profile::Property,QVariant> propertyMap, 
             bool persistant = true);
