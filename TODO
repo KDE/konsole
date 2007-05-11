@@ -1,0 +1,108 @@
+
+Konsole for KDE 4.0
+
+Contributing
+============
+
+If you would like to help with one of the 
+TODOs mentioned, and want help getting started, 
+please subscribe to the konsole-devel
+mailing list and send an email to it:
+
+https://mail.kde.org/mailman/listinfo/konsole-devel
+
+
+The KDE 4.0 TODO List:
+======================
+
+=== FEATURES ===
+
+- Proper transparency for Konsole windows
+
+    ( Konsole currently allows the user to specify
+      the amount of transparency for each color
+      scheme, and change it in the settings dialog -
+      what remains to be done is actually make use
+      of that setting when drawing the terminal
+      display )
+
+- Editing of key bindings
+  ( this is the list which maps key sequences pressed by
+    the user to the corresponding text sequences
+    which are send to the terminal )
+- Allow the window title set by the terminal program
+  to be used in the title bar of the Konsole window,
+  and/or the tab for the relevant terminal session.
+
+- Get the Konsole part working properly in other
+  major KDE programs, such as Dolphin,
+  KDevelop, Kate etc.
+
+  Make as much of the functionality from the main 
+  program available in the part as possible.  
+
+- Implement loading and saving of custom shortcuts.
+
+- Implement changing of the Konsole window size by
+  terminal applications.
+
+- Implement a DBus interface for Konsole.
+  Look for Konsole bug reports on bugs.kde.org containing
+  the term "DCOP" for ideas on what users would like
+  to be able to do using Konsole's scripting facilities.
+
+== USER INTERFACE ===
+
+- Check the various dialogs etc. against the KDE 4
+  HIG guidelines and identify problems.
+
+  User interface guidelines can be found here:
+
+  http://wiki.openusability.org/guidelines/index.php/Main_Page
+
+== "ARTWORK" ==
+
+- Design a small set of attractive color schemes to ship with Konsole
+  in KDE 4.  Look in the developer-doc/research/konsole-survey-findings
+  file for information on current Konsole user's preferred color schemes
+  and comments on those colors.
+
+  The color schemes need to be tested with popular terminal applications
+  such as Vi, Midnight Commander and so on.
+
+  They can be created using Konsole's built-in color scheme editor ( the 
+  new KDE 4 one ).
+
+=== KNOWN BUGS ===
+
+- Some of the menu items are not showing up in the correct order,
+  which produces menus that appear to have a strange layout to them.
+
+  Find a fix for this problem.  May require kdelibs fixes.
+
+- Launching of links when clicked on is not working properly.
+  This only consists of one very simple line of code in Konsole which
+  uses facilities from kdelibs - so the problem is likely
+  incorrect use of the kdelibs class or a bug in kdelibs
+
+=== TESTING ===
+
+- Test various terminal applications in Konsole, particularly
+  complex interactive ones and report problems encountered
+  with them.
+
+- Test the unicode support in Konsole, find text that
+  doesn't display properly and fix that if possible.
+
+- Test font support in Konsole, find fonts that do 
+  not look correct ( compared with other KDE applications )
+  or have other problems and fix them.
+
+- General Konsole testing.  Find inputs that cause it
+  to crash and burn and fix them.
+
+- Test Konsole's terminal features using the "vttest"
+  program produces by the Xterm authors.  Fix any
+  bugs which that testing finds.
+
+

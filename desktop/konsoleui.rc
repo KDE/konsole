@@ -27,6 +27,8 @@
             <Action name="split-view-top-bottom"/>
             <Action name="close-active-view"/>
             <Action name="close-other-views"/>
+            <Action name="expand-active-view"/>
+            <Action name="shrink-active-view"/>
             </Menu>
             <Separator/>
             <Action name="detach-view"/>
