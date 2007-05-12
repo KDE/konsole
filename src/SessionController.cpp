@@ -138,6 +138,8 @@ void SessionController::snapshot()
        process = snapshot;
 
     bool ok = false;
+
+    // format tab titles using process info
     QString title; 
     if ( process->name(&ok) == "ssh" && ok )
     {
@@ -147,11 +149,7 @@ void SessionController::snapshot()
     else
         title = process->format(_session->tabTitleFormat(Session::LocalTabTitle) ) ;
 
-    if ( !title.simplified().isEmpty() )
-        setTitle(title);
-    else
-        setTitle(_session->title());
-
+    
     if ( snapshot != process )
     {
         delete snapshot;
@@ -159,6 +157,15 @@ void SessionController::snapshot()
     }
     else
         delete snapshot;
+
+    // format tab titles using session title
+    title.replace("%w",_session->userTitle());
+
+    // apply new title
+    if ( !title.simplified().isEmpty() )
+        setTitle(title);
+    else
+        setTitle(_session->title());
 }
 
 KUrl SessionController::url() const

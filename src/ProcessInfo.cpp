@@ -63,7 +63,7 @@ QString ProcessInfo::format(const QString& input) const
    output.replace("%d",QFileInfo(currentDir(&ok)).baseName());
    
    // remove any remaining %[LETTER] sequences
-   output.replace(QRegExp("%\\w"),QString::null);
+   // output.replace(QRegExp("%\\w"),QString::null);
 
    return output;
 }
@@ -476,7 +476,7 @@ QString SSHProcessInfo::format(const QString& input) const
     output.replace("%c",_command);
 
     // remove any remaining %[LETTER] character sequences
-    output.replace(QRegExp("%\\w"),QString::null);
+    // output.replace(QRegExp("%\\w"),QString::null);
 
     return output;
 }

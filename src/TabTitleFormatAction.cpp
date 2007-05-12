@@ -31,18 +31,18 @@ using namespace Konsole;
 
 const TabTitleFormatAction::Element TabTitleFormatAction::_localElements[] = 
 {
-    { "%n" , i18n("Program Name") },
-    { "%p" , i18n("Profile Name") },
-    { "%d" , i18n("Current Directory (Short)") },
-    { "%D" , i18n("Current Directory (Long)") }
+    { "%n" , i18n("Program name") },
+    { "%d" , i18n("Current directory (Short)") },
+    { "%D" , i18n("Current directory (Long)") },
+    { "%w" , i18n("Window title set by shell") }
 };
 const int TabTitleFormatAction::_localElementCount = 4;
 const TabTitleFormatAction::Element TabTitleFormatAction::_remoteElements[] =
 {
-    { "%p" , i18n("Profile Name") },
-    { "%u" , i18n("User Name") },
-    { "%h" , i18n("Remote Host (Short)") },
-    { "%H" , i18n("Remote Host (Long)") }
+    { "%u" , i18n("User name") },
+    { "%h" , i18n("Remote host (Short)") },
+    { "%H" , i18n("Remote host (Long)") },
+    { "%w" , i18n("Window title set by shell") }
 };
 const int TabTitleFormatAction::_remoteElementCount = 4;
 

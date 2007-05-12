@@ -62,7 +62,7 @@ void ViewSplitter::adjustContainerSize(ViewContainer* container , int percentage
 
    // qDebug() << "Old container size:" << oldSize << ", new size:" << newSize;
 
-    int perContainerDelta = ( (newSize-oldSize) / (count()-1) ) * (-1);
+    int perContainerDelta = (count() == 1 ) ? 0 : ( (newSize-oldSize) / (count()-1) ) * (-1);
 
    //  qDebug() << "Changing sizes of other containers by " << perContainerDelta << "pixels.";
 
