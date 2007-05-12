@@ -29,6 +29,7 @@
 
 // KDE
 #include <KColorDialog>
+#include <KWindowSystem>
 
 // Konsole
 #include "ui_ColorSchemeEditor.h"
@@ -85,6 +86,16 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* parent)
 
     connect( _ui->colorTable , SIGNAL(itemClicked(QTableWidgetItem*)) , this , 
             SLOT(editColorItem(QTableWidgetItem*)) );
+
+    // warning label when transparency is not available
+    if ( KWindowSystem::compositingActive() )
+    {
+        _ui->transparencyWarningWidget->setVisible(false);
+    }
+    else
+    {
+        _ui->transparencyWarningIcon->setPixmap( KIcon("dialog-warning").pixmap(QSize(48,48)) );
+    }
 
 #if 0   
     //QItemDelegate* delegate = qobject_cast<QItemDelegate*>(_ui->colorTable->itemDelegateForColumn(1));

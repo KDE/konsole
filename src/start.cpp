@@ -27,7 +27,7 @@
 #include <KAboutData>
 #include <KCmdLineArgs>
 #include <KLocale>
-
+#include <KWindowSystem>
 
 // bump the version to 2.0 before the KDE 4 release
 #define KONSOLE_VERSION "1.9"
@@ -37,7 +37,8 @@ using namespace Konsole;
 // fills the KAboutData structure with information about contributors to 
 // Konsole
 void fillAboutData(KAboutData& aboutData);
-void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap);
+void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap,
+                           bool& transparencyAvailable);
 
 static KCmdLineOptions options[] =
 {
@@ -77,10 +78,12 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
     Display* display = 0;
     Visual* visual = 0;
     Colormap colormap = 0;
-    getDisplayInformation(display,visual,colormap);
+    bool transparencyAvailable = false;
+
+    getDisplayInformation(display,visual,colormap,transparencyAvailable);
 
     Application app(display,Qt::HANDLE(visual),Qt::HANDLE(colormap));
-    return app.exec();    
+    return app.exec();   
 }
 
 void fillAboutData(KAboutData& aboutData)
@@ -148,7 +151,9 @@ void fillAboutData(KAboutData& aboutData)
 
 }
 
-void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap)
+// code taken from the Qt 4 
+void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap,
+                           bool& transparencyAvailable)
 {
     display = XOpenDisplay(0); // open default display
     if (!display) {
@@ -176,6 +181,9 @@ void getDisplayInformation(Display*& display , Visual*& visual , Colormap& color
                 visual = xvi[i].visual;
                 colormap = XCreateColormap(display, RootWindow(display, screen),
                                            visual, AllocNone);
+
+                transparencyAvailable = true;
+
                 // found ARGB visual
                 break;
             }
