@@ -51,7 +51,7 @@ Q_OBJECT
 
 public:
     /** Constructs a new Konsole application. */
-    Application();
+    Application(Display* display , Qt::HANDLE visual, Qt::HANDLE colormap);
 
     virtual ~Application();
 

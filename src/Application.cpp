@@ -40,8 +40,9 @@
 
 using namespace Konsole;
 
-Application::Application()
-    : _sessionList(0)
+Application::Application(Display* display , Qt::HANDLE visual, Qt::HANDLE colormap)
+    : KUniqueApplication(display,visual,colormap) 
+    , _sessionList(0)
     , _backgroundInstance(0)
 {
     // create session manager

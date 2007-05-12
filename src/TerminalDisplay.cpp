@@ -434,7 +434,6 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
   //repainting.
   //the widget may then need to repaint over some of the area in a different colour
   //but because of the double buffering there won't be any flicker
-  setAutoFillBackground(true);
 
   _gridLayout = new QGridLayout(this);
   _gridLayout->setMargin(0);
@@ -683,6 +682,29 @@ QColor TerminalDisplay::keyboardCursorColor() const
     return _cursorColor;
 }
 
+void TerminalDisplay::setOpacity(qreal opacity)
+{
+    QColor color(_blendColor);
+    color.setAlphaF(opacity);
+    _blendColor = color.rgba();
+}
+
+void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const QColor& backgroundColor)
+{
+        if ( HAVE_TRANSPARENCY && qAlpha(_blendColor) < 0xff ) 
+        {
+            QColor color(backgroundColor);
+            color.setAlpha(qAlpha(_blendColor));
+
+            painter.save();
+            painter.setCompositionMode(QPainter::CompositionMode_Source);
+            painter.fillRect(rect, color);
+            painter.restore();
+        } 
+        else
+            painter.fillRect(rect, backgroundColor);
+}
+
 /*!
     attributed string draw primitive
 */
@@ -718,26 +740,9 @@ void TerminalDisplay::drawAttrStr(QPainter &paint, const QRect& rect,
     {
       if (pm || clear || (_blinking && (attr->rendition & RE_BLINK)) ||
           attr->backgroundColor == CharacterColor(COLOR_SPACE_DEFAULT, _colorsInverted ? DEFAULT_FORE_COLOR : DEFAULT_BACK_COLOR) )
-
-        // draw background colors with 75% opacity
-        if ( HAVE_TRANSPARENCY && qAlpha(_blendColor) < 0xff ) {
-          QRgb col = bColor.rgb();
-
-          quint8 salpha = 192;
-          quint8 dalpha = 255 - salpha;
-
-          int a, r, g, b;
-          a = qMin( (qAlpha (col) * salpha) / 255 + (qAlpha (_blendColor) * dalpha) / 255, 255 );
-          r = qMin( (qRed   (col) * salpha) / 255 + (qRed   (_blendColor) * dalpha) / 255, 255 );
-          g = qMin( (qGreen (col) * salpha) / 255 + (qGreen (_blendColor) * dalpha) / 255, 255 );
-          b = qMin( (qBlue  (col) * salpha) / 255 + (qBlue  (_blendColor) * dalpha) / 255, 255 );
-
-          col = a << 24 | r << 16 | g << 8 | b;
-          //int pixel = a << 24 | (r * a / 255) << 16 | (g * a / 255) << 8 | (b * a / 255);
-
-          paint.fillRect(rect, QColor(col));
-        } else
-          paint.fillRect(rect, bColor);
+      {
+        drawBackground(paint,rect,bColor);      
+      }
     }
 
     QString tmpStr = str.simplified();

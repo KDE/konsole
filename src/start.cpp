@@ -17,12 +17,17 @@
     02110-1301  USA.
 */
 
+// Own
+#include "Application.h"
+
+// X11
+#include <X11/extensions/Xrender.h>
+
 // KDE
 #include <KAboutData>
 #include <KCmdLineArgs>
 #include <KLocale>
 
-#include "Application.h"
 
 // bump the version to 2.0 before the KDE 4 release
 #define KONSOLE_VERSION "1.9"
@@ -32,6 +37,7 @@ using namespace Konsole;
 // fills the KAboutData structure with information about contributors to 
 // Konsole
 void fillAboutData(KAboutData& aboutData);
+void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap);
 
 static KCmdLineOptions options[] =
 {
@@ -68,7 +74,12 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
         exit(0);
     }
 
-    Application app;
+    Display* display = 0;
+    Visual* visual = 0;
+    Colormap colormap = 0;
+    getDisplayInformation(display,visual,colormap);
+
+    Application app(display,Qt::HANDLE(visual),Qt::HANDLE(colormap));
     return app.exec();    
 }
 
@@ -135,4 +146,39 @@ void fillAboutData(KAboutData& aboutData)
     "knoll@mpi-hd.mpg.de");
   aboutData.addCredit("",I18N_NOOP("Thanks to many others.\n"));
 
+}
+
+void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap)
+{
+    display = XOpenDisplay(0); // open default display
+    if (!display) {
+        qWarning("Cannot connect to the X server");
+        exit(1);
+    }
+
+    int screen = DefaultScreen(display);
+    int eventBase, errorBase;
+
+    if (XRenderQueryExtension(display, &eventBase, &errorBase)) {
+        int nvi;
+        XVisualInfo templ;
+        templ.screen  = screen;
+        templ.depth   = 32;
+        templ.c_class = TrueColor;
+        XVisualInfo *xvi = XGetVisualInfo(display, VisualScreenMask |
+                                          VisualDepthMask |
+                                          VisualClassMask, &templ, &nvi);
+    
+        for (int i = 0; i < nvi; ++i) {
+            XRenderPictFormat* format = XRenderFindVisualFormat(display,
+                                                                xvi[i].visual);
+            if (format->type == PictTypeDirect && format->direct.alphaMask) {
+                visual = xvi[i].visual;
+                colormap = XCreateColormap(display, RootWindow(display, screen),
+                                           visual, AllocNone);
+                // found ARGB visual
+                break;
+            }
+        }
+    }
 }

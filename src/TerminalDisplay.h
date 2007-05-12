@@ -84,6 +84,8 @@ public:
     const ColorEntry* colorTable() const;
     /** Sets the terminal color palette used by the display. */
     void setColorTable(const ColorEntry table[]);
+    /** Sets the opacity of the terminal display. */
+    void setOpacity(qreal opacity);
 
     /** 
      * This enum describes the location where the scroll bar is positioned in the display widget.
@@ -461,7 +463,9 @@ protected:
 
     void drawAttrStr(QPainter &paint, const QRect& rect,
                      QString& str, const Character *attr, bool pm, bool clear);
-    
+   
+    void drawBackground(QPainter& painter, const QRect& rect, const QColor& color);
+
     void paintEvent( QPaintEvent * );
 
     void paintContents(QPainter &paint, const QRect &rect);

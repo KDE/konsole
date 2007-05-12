@@ -553,6 +553,7 @@ void ViewManager::applyProfile(TerminalDisplay* view , const QString& profileKey
 
     // load colour scheme
     view->setColorTable(colorScheme->colorTable());
+    view->setOpacity(colorScheme->opacity());
     
     // load font 
     view->setVTFont(info->font());
