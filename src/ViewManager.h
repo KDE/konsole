@@ -147,7 +147,7 @@ private slots:
     void detachActiveView();
     // called when a session terminates - the view manager will delete any
     // views associated with the session
-    void sessionFinished( Session* session );
+    void sessionFinished();
     // called when the container requests to close a particular view
     void viewCloseRequest(QWidget* widget);
 

@@ -1568,10 +1568,18 @@ int Screen::getHistLines()
   return hist->getLines();
 }
 
-void Screen::setScroll(const HistoryType& t)
+void Screen::setScroll(const HistoryType& t , bool copyPreviousScroll)
 {
   clearSelection();
-  hist = t.scroll(hist);
+
+  if ( copyPreviousScroll )
+    hist = t.scroll(hist);
+  else
+  {
+      HistoryScroll* oldScroll = hist;
+      hist = t.scroll(0);
+      delete oldScroll;
+  }
 }
 
 bool Screen::hasScroll()

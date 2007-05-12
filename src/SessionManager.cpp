@@ -25,6 +25,7 @@
 // Qt
 #include <QtCore/QFileInfo>
 #include <QtCore/QList>
+#include <QtCore/QSignalMapper>
 #include <QtCore/QString>
 
 // KDE
@@ -393,8 +394,12 @@ bool Profile::isAvailable() const
 SessionManager::SessionManager()
     : _loadedAllProfiles(false)
 {
+    //map finished() signals from sessions
+    _sessionMapper = new QSignalMapper(this);
+    connect( _sessionMapper , SIGNAL(mapped(QObject*)) , this ,
+            SLOT(sessionTerminated(QObject*)) );
+
     //load fallback profile
-//    addProfile( new FallbackProfile );
     addProfile( new FallbackProfile );
 
     //locate and load default profile
@@ -508,7 +513,9 @@ Session* SessionManager::createSession(const QString& key )
     applyProfile(session,info,false);
 
     //ask for notification when session dies
-    connect( session , SIGNAL(done(Session*)) , SLOT(sessionTerminated(Session*)) );
+    _sessionMapper->setMapping(session,session);
+    connect( session , SIGNAL(finished()) , _sessionMapper , 
+             SLOT(map()) );
 
     //add session to active list
     _sessions << session;
@@ -518,8 +525,14 @@ Session* SessionManager::createSession(const QString& key )
     return session;
 }
 
-void SessionManager::sessionTerminated(Session* session)
+void SessionManager::sessionTerminated(QObject* sessionObject)
 {
+    Session* session = qobject_cast<Session*>(sessionObject);
+
+    qDebug() << "Session finished: " << session->title();
+
+    Q_ASSERT( session );
+
     _sessions.removeAll(session);
     session->deleteLater();
 }
@@ -644,7 +657,7 @@ void SessionManager::applyProfile(Session* session, const Profile* info , bool m
 
     // Key bindings
     if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::KeyBindings) )
-        session->setKeymap(info->property(Profile::KeyBindings).value<QString>());
+        session->setKeyBindings(info->property(Profile::KeyBindings).value<QString>());
 
     // Tab formats
     if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::LocalTabTitleFormat) )
@@ -663,23 +676,24 @@ void SessionManager::applyProfile(Session* session, const Profile* info , bool m
         switch ((Profile::HistoryModeEnum)mode)
         {
             case Profile::DisableHistory:
-                    session->setHistory( HistoryTypeNone() );
+                    session->setHistoryType( HistoryTypeNone() );
                 break;
             case Profile::FixedSizeHistory:
                 {
                     int lines = info->property(Profile::HistorySize).value<int>();
-                    session->setHistory( HistoryTypeBuffer(lines) );
+                    session->setHistoryType( HistoryTypeBuffer(lines) );
                 }
                 break;
             case Profile::UnlimitedHistory:
-                    session->setHistory( HistoryTypeFile() );
+                    session->setHistoryType( HistoryTypeFile() );
                 break;
         }
     }
 
     // Terminal features
     if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::FlowControlEnabled) )
-        session->setXonXoff( info->property(Profile::FlowControlEnabled).value<bool>() );
+        session->setFlowControlEnabled( info->property(Profile::FlowControlEnabled)
+                .value<bool>() );
 }
 
 QString SessionManager::addProfile(Profile* type)

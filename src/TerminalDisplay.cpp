@@ -141,9 +141,12 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
 
     _screenWindow = window;
 
+    if ( window )
+    {
 #warning "The order here is not specified - does it matter whether updateImage or updateLineProperties comes first?"
-    connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateLineProperties()) );
-    connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateImage()) );
+        connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateLineProperties()) );
+        connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateImage()) );
+    }
 }
 
 void TerminalDisplay::setDefaultBackColor(const QColor& color)
@@ -1001,6 +1004,9 @@ void TerminalDisplay::processFilters()
 
 void TerminalDisplay::updateImage() 
 {
+  if ( !_screenWindow )
+      return;
+
   // optimization - scroll the existing _image where possible and 
   // avoid expensive text drawing for parts of the _image that 
   // can simply be moved up or down
@@ -1663,6 +1669,9 @@ void TerminalDisplay::hideEvent(QHideEvent*)
 
 void TerminalDisplay::scrollChanged(int)
 {
+  if ( !_screenWindow ) 
+      return;
+
   _screenWindow->scrollTo( _scrollBar->value() );
 
   // if the thumb has been moved to the bottom of the _scrollBar then set
@@ -1748,6 +1757,8 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
   }
 
   if ( !contentsRect().contains(ev->pos()) ) return;
+  
+  if ( !_screenWindow ) return;
 
   int charLine;
   int charColumn;
@@ -1771,7 +1782,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
     // 'selected' accordingly.
     //emit testIsSelected(pos.x(), pos.y(), selected);
     
-    selected = _screenWindow->isSelected(pos.x(),pos.y());
+    selected =  _screenWindow->isSelected(pos.x(),pos.y());
 
     if ((!_ctrlDrag || ev->modifiers() & Qt::ControlModifier) && selected ) {
       // The user clicked inside selected text
@@ -1787,7 +1798,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
 
       if (_mouseMarks || (ev->modifiers() & Qt::ShiftModifier))
       {
-        _screenWindow->clearSelection();
+         _screenWindow->clearSelection();
 
         //emit clearSelectionSignal();
         pos.ry() += _scrollBar->value();
@@ -1911,7 +1922,8 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
         ev->y() > dragInfo.start.y() + distance || ev->y() < dragInfo.start.y() - distance) {
       // we've left the drag square, we can start a real drag operation now
       emit isBusySelecting(false); // Ok.. we can breath again.
-      _screenWindow->clearSelection();
+      
+       _screenWindow->clearSelection();
       //emit clearSelectionSignal();
       doDrag();
     }
@@ -1937,6 +1949,9 @@ void TerminalDisplay::setSelectionEnd()
 
 void TerminalDisplay::extendSelection( QPoint pos )
 {
+  if ( !_screenWindow )
+      return;
+
   //if ( !contentsRect().contains(ev->pos()) ) return;
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
@@ -2109,12 +2124,12 @@ void TerminalDisplay::extendSelection( QPoint pos )
   {
     if ( _columnSelectionMode && !_lineSelectionMode && !_wordSelectionMode )
     {
-       _screenWindow->setSelectionStart( ohere.x() , ohere.y() , true );
+        _screenWindow->setSelectionStart( ohere.x() , ohere.y() , true );
       //emit beginSelectionSignal( ohere.x(), ohere.y(), true );
     }
     else
     {
-       _screenWindow->setSelectionStart( ohere.x()-1-offset , ohere.y() , false );
+        _screenWindow->setSelectionStart( ohere.x()-1-offset , ohere.y() , false );
        //emit beginSelectionSignal( ohere.x()-1-offset, ohere.y(), false );
     }
 
@@ -2126,12 +2141,12 @@ void TerminalDisplay::extendSelection( QPoint pos )
 
   if ( _columnSelectionMode && !_lineSelectionMode && !_wordSelectionMode )
   {
-    _screenWindow->setSelectionEnd( here.x() , here.y() );
+     _screenWindow->setSelectionEnd( here.x() , here.y() );
     //emit extendSelectionSignal( here.x(), here.y() );
   }
   else
   {
-    _screenWindow->setSelectionEnd( here.x()+offset , here.y() );
+     _screenWindow->setSelectionEnd( here.x()+offset , here.y() );
     //emit extendSelectionSignal( here.x()+offset, here.y() );
   }
 
@@ -2139,6 +2154,9 @@ void TerminalDisplay::extendSelection( QPoint pos )
 
 void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
 {
+    if ( !_screenWindow )
+        return;
+
     int charLine;
     int charColumn;
     characterPosition(ev->pos(),charLine,charColumn);
@@ -2163,14 +2181,14 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
     if(dragInfo.state == diPending)
     {
       // We had a drag event pending but never confirmed.  Kill selection
-      _screenWindow->clearSelection();
+       _screenWindow->clearSelection();
       //emit clearSelectionSignal();
     }
     else
     {
       if ( _actSel > 1 )
       {
-          setSelection( _screenWindow->selectedText(_preserveLineBreaks) );
+          setSelection(  _screenWindow->selectedText(_preserveLineBreaks)  );
           //emit endSelectionSignal(_preserveLineBreaks);
       }
 
@@ -2218,13 +2236,17 @@ void TerminalDisplay::characterPosition(QPoint widgetPoint,int& line,int& column
 
 void TerminalDisplay::updateLineProperties()
 {
+    if ( !_screenWindow ) 
+        return;
+
     _lineProperties = _screenWindow->getLineProperties();    
 }
 
 void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
 {
   if ( ev->button() != Qt::LeftButton) return;
-  
+  if ( !_screenWindow ) return;
+
   int charLine = 0;
   int charColumn = 0;
 
@@ -2333,6 +2355,8 @@ void TerminalDisplay::tripleClickTimeout()
 
 void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
 {
+  if ( !_screenWindow ) return;
+
   int charLine;
   int charColumn;
   characterPosition(ev->pos(),charLine,charColumn);
@@ -2435,6 +2459,9 @@ void TerminalDisplay::emitText(const QString& text)
 void TerminalDisplay::emitSelection(bool useXselection,bool appendReturn)
 // Paste Clipboard by simulating keypress events
 {
+  if ( !_screenWindow ) 
+      return;
+
   QString text = QApplication::clipboard()->text(useXselection ? QClipboard::Selection :
                                                                  QClipboard::Clipboard);
   if(appendReturn)
@@ -2457,7 +2484,8 @@ void TerminalDisplay::setSelection(const QString& t)
 
 void TerminalDisplay::copyClipboard()
 {
-  Q_ASSERT( _screenWindow );
+  if ( !_screenWindow )
+      return;
 
   QString text = _screenWindow->selectedText(true);
   QApplication::clipboard()->setText(text);
@@ -2475,6 +2503,8 @@ void TerminalDisplay::pasteSelection()
 
 void TerminalDisplay::onClearSelection()
 {
+  if ( !_screenWindow ) return;
+
   _screenWindow->clearSelection();
   //emit clearSelectionSignal();
 }

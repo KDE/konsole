@@ -32,6 +32,8 @@
 #include <QtCore/QPointer>
 #include <QtCore/QVariant>
 
+class QSignalMapper;
+
 class KConfigGroup;
 class KDesktopFile;
 class KConfig;
@@ -561,9 +563,11 @@ signals:
 protected Q_SLOTS:
 
     /**
-     * Called to inform the manager that a session has finished executing
+     * Called to inform the manager that a session has finished executing.
+     *
+     * @param session The Session which has finished executing.
      */
-    void sessionTerminated( Session* session );
+    void sessionTerminated( QObject* session );
 
 private:
     //loads the set of favorite sessions
@@ -594,6 +598,8 @@ private:
     QSet<QString> _favorites;
 
     bool _loadedAllProfiles;
+
+    QSignalMapper* _sessionMapper;
 
     static SessionManager* _instance;
 };

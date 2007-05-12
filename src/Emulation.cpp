@@ -175,6 +175,10 @@ void Emulation::setScreen(int n)
   }
 }
 
+void Emulation::clearHistory()
+{
+    _screen[0]->setScroll( _screen[0]->getScroll() , false );
+}
 void Emulation::setHistory(const HistoryType& t)
 {
   _screen[0]->setScroll(t);

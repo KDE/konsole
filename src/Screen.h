@@ -208,7 +208,7 @@ public: // these are all `Screen' operations
     int  getColumns() { return columns; }
 
     int  getHistLines ();
-    void setScroll(const HistoryType&);
+    void setScroll(const HistoryType& , bool copyPreviousScroll = true);
     const HistoryType& getScroll();
     bool hasScroll();
 

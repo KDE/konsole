@@ -113,6 +113,11 @@ public:
 
   virtual void addLine(bool previousWrapped=false) = 0;
 
+  //
+  // FIXME:  Passing around constant references to HistoryType instances
+  // is very unsafe, because those references will no longer
+  // be valid if the history scroll is deleted.
+  //
   const HistoryType& getType() { return *m_histType; }
 
 protected:

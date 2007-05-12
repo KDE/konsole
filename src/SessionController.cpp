@@ -90,8 +90,8 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
             SLOT(showDisplayContextMenu(TerminalDisplay*,int,int,int)) );
 
     // listen to activity / silence notifications from session
-    connect( _session , SIGNAL(notifySessionState(Session*,int)) , this ,
-            SLOT(sessionStateChanged(Session*,int) ));
+    connect( _session , SIGNAL(notifySessionState(int)) , this ,
+            SLOT(sessionStateChanged(int) ));
 
     // listen to title and icon changes
     connect( _session , SIGNAL(updateTitle()) , this , SLOT(sessionTitleChanged()) );
@@ -106,7 +106,9 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 }
 
 SessionController::~SessionController()
-{ 
+{
+   if ( _view )
+      _view->setScreenWindow(0); 
 }
 void SessionController::requireUrlFilterUpdate()
 {
@@ -121,12 +123,12 @@ void SessionController::snapshot()
     
 
     ProcessInfo* process = 0;
-    ProcessInfo* snapshot = ProcessInfo::newInstance(_session->sessionPid());
+    ProcessInfo* snapshot = ProcessInfo::newInstance(_session->sessionProcessId());
     snapshot->update();
 
     // use foreground process information if available
     // fallback to session process otherwise
-    int pid = _session->foregroundPid(); //snapshot->foregroundPid(&ok);
+    int pid = _session->foregroundProcessId(); //snapshot->foregroundPid(&ok);
     if ( pid != 0 )
     {
        process = ProcessInfo::newInstance(pid);
@@ -161,7 +163,7 @@ void SessionController::snapshot()
 
 KUrl SessionController::url() const
 {
-    ProcessInfo* info = ProcessInfo::newInstance(_session->sessionPid());
+    ProcessInfo* info = ProcessInfo::newInstance(_session->sessionProcessId());
     info->update();
 
     QString path;
@@ -170,7 +172,7 @@ KUrl SessionController::url() const
         bool ok = false;
 
         // check if foreground process is bookmark-able
-        int pid = _session->foregroundPid();
+        int pid = _session->foregroundProcessId();
         if ( pid != 0 )
         {
             qDebug() << "reading session process = " << info->name(&ok);
@@ -466,7 +468,7 @@ void SessionController::debugProcess()
 {
     // testing facility to retrieve process information about 
     // currently active process in the shell
-    ProcessInfo* sessionProcess = ProcessInfo::newInstance(_session->sessionPid());
+    ProcessInfo* sessionProcess = ProcessInfo::newInstance(_session->sessionProcessId());
     sessionProcess->update();
 
     bool ok = false;
@@ -688,7 +690,7 @@ void SessionController::findPreviousInHistory()
 void SessionController::showHistoryOptions()
 {
     HistorySizeDialog* dialog = new HistorySizeDialog( QApplication::activeWindow() );
-    const HistoryType& currentHistory = _session->history();
+    const HistoryType& currentHistory = _session->historyType();
 
     if ( currentHistory.isEnabled() )
     {
@@ -711,11 +713,11 @@ void SessionController::showHistoryOptions()
 void SessionController::scrollBackOptionsChanged( int mode , int lines )
 {
       if ( mode == HistorySizeDialog::NoHistory )
-         _session->setHistory( HistoryTypeNone() );
+         _session->setHistoryType( HistoryTypeNone() );
      else if ( mode == HistorySizeDialog::FixedSizeHistory )
-         _session->setHistory( HistoryTypeBuffer(lines) );
+         _session->setHistoryType( HistoryTypeBuffer(lines) );
      else if ( mode == HistorySizeDialog::UnlimitedHistory )
-         _session->setHistory( HistoryTypeFile() );       
+         _session->setHistoryType( HistoryTypeFile() );       
 }
 
 void SessionController::saveHistory()
@@ -791,7 +793,7 @@ void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , in
     }
 }
 
-void SessionController::sessionStateChanged(Session* /*session*/ , int state)
+void SessionController::sessionStateChanged(int state)
 {
     //TODO - Share icons across sessions ( possible using a static QHash<QString,QIcon> variable 
     // to create a cache of icons mapped from icon names? )

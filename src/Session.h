@@ -29,6 +29,9 @@
 #include <KApplication>
 #include <KMainWindow>
 
+// Konsole
+#include "History.h"
+
 class K3ProcIO;
 class K3Process;
 
@@ -37,15 +40,14 @@ namespace Konsole
 
 class ColorScheme;
 class Emulation;
-class HistoryType;
 class Pty;
 class TerminalDisplay;
 class ZModemDialog;
 
 /**
- * Session represents a Konsole session.
- * This consists of a pseudo-teletype (or PTY) which handles I/O between the terminal
- * process and Konsole, and a terminal emulation ( Emulation and subclasses ) which
+ * Represents a terminal session consisting of a pseudo-teletype (or PTY) which 
+ * handles I/O between the terminal process and Konsole, and a terminal 
+ * emulation ( Emulation and subclasses ) which
  * processes the output stream from the PTY and produces a character image which
  * is then shown on displays which are connected to the session.
  *
@@ -60,13 +62,25 @@ Q_OBJECT
 
 public:
   Q_PROPERTY(QString sessionName READ title)
-  Q_PROPERTY(QString encoding READ encoding WRITE setEncoding)
-  Q_PROPERTY(int sessionPid READ sessionPid)
-  Q_PROPERTY(QString keytab READ keytab WRITE setKeytab)
+  Q_PROPERTY(int sessionProcessId READ sessionProcessId)
+  Q_PROPERTY(QString keytab READ keyBindings WRITE setKeyBindings)
   Q_PROPERTY(QSize size READ size WRITE setSize)
 
+  /** 
+   * Constructs a new session.
+   * 
+   * To start the terminal process, call the run() method,
+   * after specifying the program and arguments
+   * using setProgram() and setArguments()
+   */
   Session();
   ~Session();
+
+  /** 
+   * Returns true if the session is currently running.  This will be true
+   * after run() has been called.
+   */
+  bool running() const;
 
   /** 
    * Sets the type of this session. 
@@ -109,12 +123,8 @@ public:
    * Returns the terminal emulation instance being used to encode / decode 
    * characters to / from the process.
    */
-  Emulation*  emulation() const;      // to control emulation
-  bool        isSecure()  const;
-  bool        isMonitorActivity() const;
-  bool        isMonitorSilence()  const;
-  bool        isMasterMode()      const;
-
+  Emulation*  emulation() const;    
+  
   /** 
    * Returns the value of the TERM environment variable which will 
    * be used in the session's environment when it is started using 
@@ -132,26 +142,42 @@ public:
    */
   void setTerminalType(const QString& terminalType);
 
+  /** Returns the unique ID for this session. */
   int sessionId() const;
-  const QString& title() const;
-  const QString& iconName() const;
-  const QString& iconText() const;
-
+  
   /** 
    * Return the session title set by the user (ie. the program running 
    * in the terminal), or an empty string if the user has not set a custom title
    */
   QString userTitle() const;
  
+  /** 
+   * This enum describes the contexts for which separate
+   * tab title formats may be specified.
+   */
   enum TabTitleContext
   {
+    /** Default tab title format */
     LocalTabTitle,
+    /** 
+     * Tab title format used session currently contains
+     * a connection to a remote computer (via SSH)
+     */
     RemoteTabTitle
   };
+  /** 
+   * Sets the format used by this session for tab titles. 
+   * 
+   * @param context The context whoose format should be set.
+   * @param format The tab title format.  This may be a mixture
+   * of plain text and dynamic elements denoted by a '%' character
+   * followed by a letter.  (eg. %d for directory).  The dynamic
+   * elements available depend on the @p context 
+   */
   void setTabTitleFormat(TabTitleContext context , const QString& format);
+  /** Returns the format used by this session for tab titles. */
   QString tabTitleFormat(TabTitleContext context) const;
 
-  QString keymap() const;
 
   /** Returns the arguments passed to the shell process when run() is called. */
   QStringList arguments() const;
@@ -174,53 +200,115 @@ public:
    * This has no effect once the session has been started.
    */
   void setInitialWorkingDirectory( const QString& dir ) { _initialWorkingDir = dir; }
- 
-  void setHistory(const HistoryType&);
-  const HistoryType& history();
+
+  /**
+   * Sets the type of history store used by this session.
+   * Lines of output produced by the terminal are added
+   * to the history store.  The type of history store
+   * used affects the number of lines which can be
+   * remembered before they are lost and the storage
+   * (in memory, on-disk etc.) used. 
+   */ 
+  void setHistoryType(const HistoryType& type);
+  /**
+   * Returns the type of history store used by this session.
+   */
+  const HistoryType& historyType() const;
+  /**
+   * Clears the history store used by this session.
+   */ 
   void clearHistory();
 
+  /** 
+   * Enables monitoring for activity in the session.
+   * This will cause notifySessionState() to be emitted
+   * with the NOTIFYACTIVITY state flag when output is 
+   * received from the terminal. 
+   */
   void setMonitorActivity(bool);
-  void setMonitorSilence(bool);
-  void setMonitorSilenceSeconds(int seconds);
-  void setMasterMode(bool);
+  /** Returns true if monitoring for activity is enabled. */
+  bool isMonitorActivity() const;
   
-  void setKeymap(const QString& _id);
-  void setTitle(const QString& _title);
-  void setIconName(const QString& _iconName);
-  void setIconText(const QString& _iconText);
+  /**
+   * Enables monitoring for silence in the session.
+   * This will cause notifySessionState() to be emitted
+   * with the NOTIFYSILENCE state flag when output is not
+   * received from the terminal for a certain period of
+   * time, specified with setMonitorSilenceSeconds()
+   */
+  void setMonitorSilence(bool);
+  /** 
+   * Returns true if monitoring for inactivity (silence)
+   * in the session is enabled.
+   */
+  bool isMonitorSilence()  const;
+  /** See setMonitorSilence() */
+  void setMonitorSilenceSeconds(int seconds);
+ 
+  /**
+   * Sets the key bindings used by this session.  The bindings
+   * specify how input key sequences are translated into 
+   * the character stream which is sent to the terminal.
+   *
+   * @param id The name of the key bindings to use.  The
+   * names of available key bindings can be determined using the 
+   * KeyboardTranslatorManager class.
+   */ 
+  void setKeyBindings(const QString& id);
+  /** Returns the name of the key bindings used by this session. */
+  QString keyBindings() const;
+  
+  /** Sets the session's title to @p title. */
+  void setTitle(const QString& title);
+  /** Returns the session's title. */
+  QString title() const;
+
+  /** Sets the name of the icon associated with this session. */
+  void setIconName(const QString& iconName);
+  /** Returns the name of the icon associated with this session. */
+  QString iconName() const;
+ 
+  /** TODO: Document me */ 
+  void setIconText(const QString& iconText);
+  /** TODO: Document me */
+  QString iconText() const;
+
+  /** TODO: Document me */
   void setAddToUtmp(bool);
-  void setXonXoff(bool);
-  bool testAndSetStateIconName (const QString& newname);
+  
+  /** Sends the specified @p signal to the terminal process. */
   bool sendSignal(int signal);
 
+  /** TODO: Document me */
   void setAutoClose(bool b) { _autoClose = b; }
-  void renameSession(const QString &name);
+  
+  /**
+   * Sets whether flow control is enabled for this terminal
+   * session.
+   */
+  void setFlowControlEnabled(bool enabled);
+  
+  /** 
+   * Sends @p text to the current foreground terminal program.
+   */
+  void sendText(const QString& text) const;
 
-  
-  void feedSession(const QString &text);
-  void sendSession(const QString &text);
-  
   /** 
    * Returns the process id of the terminal process. 
    * This is the id used by the system API to refer to the process.
    */
-  int sessionPid() const;
+  int sessionProcessId() const;
  
   /**
    * Returns the process id of the terminal's foreground process.
+   * This is initially the same as sessionProcessId() but can change
+   * as the user starts other programs inside the terminal.
    */
-  int foregroundPid() const;
-
-  void enableFullScripting(bool b);
+  int foregroundProcessId() const;
 
   void startZModem(const QString &rz, const QString &dir, const QStringList &list);
   void cancelZModem();
-  bool zmodemIsBusy() { return _zmodemBusy; }
-
-  QString encoding();
-  void setEncoding(const QString &encoding);
-  QString keytab();
-  void setKeytab(const QString &keytab);
+  bool isZModemBusy() { return _zmodemBusy; }
 
   /** Returns the terminal session's window size in lines and columns. */
   QSize size();
@@ -234,55 +322,97 @@ public:
   
 public slots:
 
+  /** 
+   * Starts the terminal session. 
+   *
+   * This creates the terminal process and connects the teletype to it.
+   */
   void run();
-  void done();
-  void done(int);
+    
+  /**
+   * Closes the terminal session.  This sends a hangup signal
+   * (SIGHUP) to the terminal process and causes the done(Session*)
+   * signal to be emitted.
+   */   
   bool closeSession();
-  
+ 
+  /** TODO: Document me */ 
   void setUserTitle( int, const QString &caption );
-  void changeTabTextColor( int );
+  
+signals:
+  
+  /** 
+   * Emitted when the terminal process exits.
+   */
+  void finished();
+
+  /** 
+   * Emitted when output is received from the terminal process. 
+   */
+  void receivedData( const QString& text );
+  
+  /** Emitted when the session's title has changed. */
+  void updateTitle();
+ 
+  /** 
+   * Emitted when the activity state of this session changes.
+   *
+   * @param state The new state of the session.  This may be one
+   * of NOTIFYNORMAL, NOTIFYSILENCE or NOTIFYACTIVITY
+   */
+  void notifySessionState(int state);
+
+  /** Emitted when a bell event occurs in the session. */
+  void bellRequest( const QString& message );
+ 
+  /** 
+   * Requests that the color the text for any tabs associated with
+   * this session should be changed;
+   *
+   * TODO: Document what the parameter does
+   */
+  void changeTabTextColor(int);
+
+  /**
+   * Requests that the background color of views on this session
+   * should be changed.
+   */
+  void changeBackgroundColor(const QColor&);
+
+  void openUrlRequest(const QString& url);
+
+  /** TODO: Document me. */
+  void zmodemDetected();
+
+  /**
+   * Emitted when the terminal process requests a change
+   * in the size of the terminal window.  
+   *
+   * @param size The requested window size in terms of lines and columns.
+   */
+  void resizeSession(const QSize& size);
+
+private slots:
+  void done(int);
+    
+  void fireZModemDetected();
   
   void ptyError();
- 
-  void slotZModemDetected();
-  void emitZModemDetected();
+  
+  void onReceiveBlock( const char* buffer, int len );
+  void monitorTimerDone();
+  void onContentSizeChange(int height, int width);
+
+  void activityStateChanged(int);
+
+  //automatically detach views from sessions when view is destroyed
+  void viewDestroyed(QObject* view);
 
   void zmodemStatus(K3Process *, char *data, int len);
   void zmodemSendBlock(K3Process *, char *data, int len);
   void zmodemRcvBlock(const char *data, int len);
   void zmodemDone();
   void zmodemContinue();
-
-signals:
-
-  void processExited();
-  void receivedData( const QString& text );
-  void done(Session*);
-  void updateTitle();
-  void notifySessionState(Session* session, int state);
-  /** Emitted when a bell event occurs in the session. */
-  void bellRequest( const QString& message );
-  void changeTabTextColor( Session*, int );
-
-  void disableMasterModeConnections();
-  void enableMasterModeConnections();
-  void renameSession(Session* ses, const QString &name);
-
-  void openUrlRequest(const QString &cwd);
-
-  void zmodemDetected(Session *);
-  void updateSessionConfig(Session*);
-  void resizeSession(Session *session, QSize size);
-  void setSessionEncoding(Session *session, const QString &encoding);
-
-private slots:
-  void onReceiveBlock( const char* buffer, int len );
-  void monitorTimerDone();
-  void notifySessionState(int state);
-  void onContentSizeChange(int height, int width);
-
-  //automatically detach views from sessions when view is destroyed
-  void viewDestroyed(QObject* view);
 
 private:
 
@@ -316,8 +446,6 @@ private:
   bool           _addToUtmp;
   bool           _flowControl;
   bool           _fullScripting;
-
-  QString	     _stateIconName;
 
   QString        _program;
   QStringList    _arguments;

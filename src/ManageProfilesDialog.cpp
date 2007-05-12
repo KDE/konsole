@@ -84,7 +84,8 @@ void ManageProfilesDialog::updateTableModel()
     // setup session table
     _sessionModel = new QStandardItemModel(this);
     _sessionModel->setHorizontalHeaderLabels( QStringList() << "Name"
-                                                            << "Show in Menu" );
+                                                            << "Show in Menu" 
+                                                            << "Shortcut" );
     QListIterator<QString> keyIter( SessionManager::instance()->availableProfiles() );
     while ( keyIter.hasNext() )
     {

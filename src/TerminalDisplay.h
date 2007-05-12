@@ -26,6 +26,7 @@
 #include <QtGui/QWidget>
 #include <QtGui/QColor>
 #include <QtCore/QInternal>
+#include <QtCore/QPointer>
 #include <QtGui/QScrollBar>
 #include <QtGui/QFrame>
 #include <QtGui/QKeyEvent>
@@ -539,7 +540,7 @@ private:
     
     // the window onto the terminal screen which this display
     // is currently showing.  
-    ScreenWindow* _screenWindow;
+    QPointer<ScreenWindow> _screenWindow;
 
     bool _allowBell;
 

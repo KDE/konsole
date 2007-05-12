@@ -77,6 +77,9 @@ public:
   /** Returns the size of the screen image which the emulation produces */
   QSize imageSize();
 
+  /** Clears the history scroll. */
+  void clearHistory();
+
   /** 
    * Sets the history store used by this emulation.  When new lines
    * are added to the output, older lines at the top of the screen are transferred to a history

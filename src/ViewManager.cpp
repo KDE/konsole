@@ -234,9 +234,13 @@ void ViewManager::detachActiveView()
 
 }
 
-void ViewManager::sessionFinished( Session* session )
+void ViewManager::sessionFinished()
 {
     previousView();
+
+    Session* session = qobject_cast<Session*>(sender());
+
+    Q_ASSERT(session);
 
     QList<TerminalDisplay*> children = _viewSplitter->findChildren<TerminalDisplay*>();
 
@@ -386,7 +390,7 @@ void ViewManager::createView(Session* session)
 
     // notify this view manager when the session finishes so that its view
     // can be deleted
-    connect( session , SIGNAL(done(Session*)) , this , SLOT(sessionFinished(Session*)) );
+    connect( session , SIGNAL(finished()) , this , SLOT(sessionFinished()) );
    
     // iterate over the view containers owned by this view manager
     // and create a new terminal display for the session in each of them, along with

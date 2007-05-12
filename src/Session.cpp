@@ -68,7 +68,6 @@ Session::Session() :
    , _monitorActivity(false)
    , _monitorSilence(false)
    , _notifiedActivity(false)
-   , _masterMode(false)
    , _autoClose(true)
    , _wantedClose(false)
    , _silenceSeconds(10)
@@ -98,10 +97,11 @@ Session::Session() :
     connect( _emulation, SIGNAL( changeTitle( int, const QString & ) ),
            this, SLOT( setUserTitle( int, const QString & ) ) );
     connect( _emulation, SIGNAL( notifySessionState(int) ),
-           this, SLOT( notifySessionState(int) ) );
-    connect( _emulation, SIGNAL( zmodemDetected() ), this, SLOT(slotZModemDetected()));
+           this, SLOT( activityStateChanged(int) ) );
+    connect( _emulation, SIGNAL( zmodemDetected() ), this , 
+            SLOT( fireZModemDetected() ) );
     connect( _emulation, SIGNAL( changeTabTextColor( int ) ),
-           this, SLOT( changeTabTextColor( int ) ) );
+           this, SIGNAL( changeTabTextColor( int ) ) );
 
    
     //connect teletype to emulation backend 
@@ -124,6 +124,11 @@ Session::Session() :
     //TODO: Investigate why a single-shot timer is used here 
     if (!_shellProcess->error().isEmpty())
         QTimer::singleShot(0, this, SLOT(ptyError()));
+}
+
+bool Session::running() const
+{
+    return _shellProcess->isRunning();
 }
 
 void Session::setType(const QString& type) { _type = type; }
@@ -154,7 +159,7 @@ void Session::ptyError()
   else
     KMessageBox::error(QApplication::activeWindow(), _shellProcess->error());
   
-  emit done(this);
+  emit finished();
 }
 
 QList<TerminalDisplay*> Session::views() const
@@ -249,7 +254,7 @@ void Session::run()
   QString pexec = KGlobal::dirs()->findExe(exec);
   if ( pexec.isEmpty() ) {
     kError()<<"can not execute "<<exec<<endl;
-    QTimer::singleShot(1, this, SLOT(done()));
+    QTimer::singleShot(1, this, SIGNAL(finished()));
     return;
   }
 
@@ -283,11 +288,6 @@ void Session::run()
 
 }
 
-void Session::changeTabTextColor( int color )
-{
-    emit changeTabTextColor( this, color );
-}
-
 void Session::setUserTitle( int what, const QString &caption )
 {
     //set to true if anything is actually changed (eg. old _title != new _title )
@@ -314,19 +314,23 @@ void Session::setUserTitle( int what, const QString &caption )
       kDebug() << __FILE__ << __LINE__ << ": setting background colour to " << colorString << endl;
       QColor backColor = QColor(colorString);
       if (backColor.isValid()){// change color via \033]11;Color\007
-	if (backColor != _modifiedBackground) {
+	if (backColor != _modifiedBackground) 
+    {
 	    _modifiedBackground = backColor;
-	    
-        QListIterator<TerminalDisplay*> viewIter(_views);
-        while (viewIter.hasNext())
-            viewIter.next()->setDefaultBackColor(backColor);
+	   
+        // bail out here until the code to connect the terminal display
+        // to the changeBackgroundColor() signal has been written
+        // and tested - just so we don't forget to do this.
+        Q_ASSERT( 0 );
+
+        emit changeBackgroundColor(backColor);
 	}
       }
     }
     
 	if (what == 30) {
 		if ( _title != caption ) {
-       		renameSession(caption);
+       		setTitle(caption);
 			return;
 		}
 	}
@@ -341,9 +345,6 @@ void Session::setUserTitle( int what, const QString &caption )
     	if ( _iconName != caption ) {
 	   		_iconName = caption;
 
-            QListIterator< TerminalDisplay* > viewIter(_views);
-            while (viewIter.hasNext())
-       		    viewIter.next()->update();
 			modified = true;
 		}
     }
@@ -384,17 +385,17 @@ void Session::monitorTimerDone()
     KNotification::event("Silence", i18n("Silence in session '%1'", _title), QPixmap(), 
                     QApplication::activeWindow(), 
                     KNotification::CloseWhenWidgetActivated);
-    emit notifySessionState(this,NOTIFYSILENCE);
+    emit notifySessionState(NOTIFYSILENCE);
   }
   else
   {
-    emit notifySessionState(this,NOTIFYNORMAL);
+    emit notifySessionState(NOTIFYNORMAL);
   }
   
   _notifiedActivity=false;
 }
 
-void Session::notifySessionState(int state)
+void Session::activityStateChanged(int state)
 {
   if (state==NOTIFYBELL) 
   {
@@ -423,7 +424,7 @@ void Session::notifySessionState(int state)
   if ( state==NOTIFYSILENCE && !_monitorSilence )
           state = NOTIFYNORMAL;
 
-  emit notifySessionState(this, state);
+  emit notifySessionState(state);
 }
 
 void Session::onContentSizeChange(int /*height*/, int /*width*/)
@@ -469,29 +470,14 @@ bool Session::closeSession()
   if (!_shellProcess->isRunning() || !sendSignal(SIGHUP))
   {
      // Forced close.
-     QTimer::singleShot(1, this, SLOT(done()));
+     QTimer::singleShot(1, this, SIGNAL(finished()));
   }
   return true;
 }
 
-void Session::feedSession(const QString &text)
+void Session::sendText(const QString &text) const
 {
-  emit disableMasterModeConnections();
   _emulation->sendText(text);
-  emit enableMasterModeConnections();
-}
-
-void Session::sendSession(const QString &text)
-{
-  QString newtext=text;
-  newtext.append("\r");
-  feedSession(newtext);
-}
-
-void Session::renameSession(const QString &name)
-{
-  _title=name;
-  emit renameSession(this,name);
 }
 
 Session::~Session()
@@ -499,11 +485,6 @@ Session::~Session()
   delete _emulation;
   delete _shellProcess;
   delete _zmodemProc;
-}
-
-void Session::done() {
-  emit processExited();
-  emit done(this);
 }
 
 void Session::done(int exitStatus)
@@ -535,8 +516,7 @@ void Session::done(int exitStatus)
                          QApplication::activeWindow(), 
                          KNotification::CloseWhenWidgetActivated);
   }
-  emit processExited();
-  emit done(this);
+  emit finished();
 }
 
 Emulation* Session::emulation() const
@@ -544,7 +524,7 @@ Emulation* Session::emulation() const
   return _emulation;
 }
 
-QString Session::keymap() const
+QString Session::keyBindings() const
 {
   return _emulation->keymap();
 }
@@ -564,7 +544,7 @@ int Session::sessionId() const
   return _sessionId;
 }
 
-void Session::setKeymap(const QString &id)
+void Session::setKeyBindings(const QString &id)
 {
   _emulation->setKeymap(id);
 }
@@ -578,7 +558,7 @@ void Session::setTitle(const QString& title)
     }
 }
 
-const QString& Session::title() const
+QString Session::title() const
 {
   return _title;
 }
@@ -598,46 +578,29 @@ void Session::setIconText(const QString& iconText)
   //kDebug(1211)<<"Session setIconText " <<  _iconText <<endl;
 }
 
-const QString& Session::iconName() const
+QString Session::iconName() const
 {
   return _iconName;
 }
 
-const QString& Session::iconText() const
+QString Session::iconText() const
 {
   return _iconText;
 }
 
-bool Session::testAndSetStateIconName (const QString& newname)
-{
-  if (newname != _stateIconName)
-    {
-      _stateIconName = newname;
-      return true;
-    }
-  return false;
-}
-
-void Session::setHistory(const HistoryType &hType)
+void Session::setHistoryType(const HistoryType &hType)
 {
   _emulation->setHistory(hType);
 }
 
-const HistoryType& Session::history()
+const HistoryType& Session::historyType() const
 {
   return _emulation->history();
 }
 
 void Session::clearHistory()
 {
-  if (history().isEnabled()) {
-    int histSize = history().maximumLineCount();
-    setHistory(HistoryTypeNone());
-    if (histSize)
-      setHistory(HistoryTypeBuffer(histSize));
-    else
-      setHistory(HistoryTypeFile());
-  }
+    _emulation->clearHistory();    
 }
 
 QStringList Session::arguments() const
@@ -652,14 +615,13 @@ QString Session::program() const
 
 bool Session::isMonitorActivity() const { return _monitorActivity; }
 bool Session::isMonitorSilence()  const { return _monitorSilence; }
-bool Session::isMasterMode()      const { return _masterMode; }
 
 void Session::setMonitorActivity(bool _monitor)
 {
   _monitorActivity=_monitor;
   _notifiedActivity=false;
 
-  notifySessionState(NOTIFYNORMAL);
+  activityStateChanged(NOTIFYNORMAL);
 }
 
 void Session::setMonitorSilence(bool _monitor)
@@ -676,7 +638,7 @@ void Session::setMonitorSilence(bool _monitor)
   else
     _monitorTimer->stop();
 
-  notifySessionState(NOTIFYNORMAL);
+  activityStateChanged(NOTIFYNORMAL);
 }
 
 void Session::setMonitorSilenceSeconds(int seconds)
@@ -688,33 +650,23 @@ void Session::setMonitorSilenceSeconds(int seconds)
   }
 }
 
-void Session::setMasterMode(bool _master)
-{
-  _masterMode=_master;
-}
-
 void Session::setAddToUtmp(bool set)
 {
   _addToUtmp = set;
 }
 
-void Session::setXonXoff(bool set)
+void Session::setFlowControlEnabled(bool enabled)
 {
-  _flowControl = set;
+  _flowControl = enabled;
 }
 
-void Session::slotZModemDetected()
+void Session::fireZModemDetected()
 {
   if (!_zmodemBusy)
   {
-    QTimer::singleShot(10, this, SLOT(emitZModemDetected()));
+    QTimer::singleShot(10, this, SIGNAL(zmodemDetected()));
     _zmodemBusy = true;
   }
-}
-
-void Session::emitZModemDetected()
-{
-  emit zmodemDetected(this);
 }
 
 void Session::cancelZModem()
@@ -831,40 +783,10 @@ void Session::zmodemDone()
   }
 }
 
-void Session::enableFullScripting(bool b)
-{
-  assert( 0 );
-  // TODO Re-add adaptors
-  //  assert(!(_fullScripting && !b) && "_fullScripting can't be disabled");
-  //  if (!_fullScripting && b)
-  //      (void)new SessionScriptingAdaptor(this);
-}
-
 void Session::onReceiveBlock( const char* buf, int len )
 {
     _emulation->onReceiveBlock( buf, len );
     emit receivedData( QString::fromLatin1( buf, len ) );
-}
-
-QString Session::encoding()
-{
-  return _emulation->codec()->name();
-}
-
-void Session::setEncoding(const QString &encoding)
-{
-  emit setSessionEncoding(this, encoding);
-}
-
-QString Session::keytab()
-{
-   return keymap();
-}
-
-void Session::setKeytab(const QString &keytab)
-{
-   setKeymap(keytab);
-   emit updateSessionConfig(this);
 }
 
 QSize Session::size()
@@ -877,13 +799,13 @@ void Session::setSize(QSize size)
   if ((size.width() <= 1) || (size.height() <= 1))
      return;
 
-  emit resizeSession(this, size);
+  emit resizeSession(size);
 }
-int Session::foregroundPid() const
+int Session::foregroundProcessId() const
 {
     return _shellProcess->foregroundProcessGroup();
 }
-int Session::sessionPid() const
+int Session::sessionProcessId() const
 {
     return _shellProcess->pid();
 }

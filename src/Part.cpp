@@ -73,17 +73,16 @@ Part::Part(QObject* parent)
 
     KeyTrans::loadAll();
 
-    // create window and session for part
+    // create view widget
     _viewManager = new ViewManager(this,actionCollection());
-    //MainWindow* window = new MainWindow();
-    //window->menuBar()->setVisible(false);
-  //  _viewManager = window->viewManager();
 
     connect( _viewManager , SIGNAL(activeViewChanged(SessionController*)) , this ,
            SLOT(activeViewChanged(SessionController*)) ); 
-    createSession( QString() );
 
     setWidget(_viewManager->widget());
+    
+    // create basic session
+    createSession(QString());
 }
 Part::~Part()
 {
@@ -92,23 +91,37 @@ bool Part::openFile()
 {
     return false;
 }
+Session* Part::activeSession() const
+{
+    // for now, just return the first available session
+    QList<Session*> list = SessionManager::instance()->sessions();
+
+    Q_ASSERT( !list.isEmpty() );
+
+    return list.first();
+}
 void Part::startProgram( const QString& program,
                            const QStringList& arguments )
 {
-    Session* session = createSession(QString());
+    if ( !activeSession()->running() )
+    {
+        if ( !program.isEmpty() && !arguments.isEmpty() )
+        {
+            activeSession()->setProgram(program);
+            activeSession()->setArguments(arguments);
+        }
 
-    session->setProgram(program);
-    session->setArguments(arguments);
-   
-    session->run();
+        activeSession()->run();
+    }
 }
 void Part::showShellInDir( const QString& dir )
 {
-    Session* session = createSession(QString());
-
-    session->setInitialWorkingDirectory(dir);
-    
-    session->run();
+    if ( !activeSession()->running() )
+    {
+        if ( !dir.isEmpty() )
+            activeSession()->setInitialWorkingDirectory(dir);
+        activeSession()->run();
+    }
 }
 void Part::sendInput( const QString& text )
 {

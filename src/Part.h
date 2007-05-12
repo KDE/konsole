@@ -80,6 +80,8 @@ private slots:
     void activeViewChanged(SessionController* controller);
 
 private:
+    Session* activeSession() const;
+
     ViewManager* _viewManager;
     SessionController* _pluggedController;
 };

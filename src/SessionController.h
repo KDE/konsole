@@ -158,7 +158,7 @@ private slots:
     // other
     void updateCodecAction();
     void showDisplayContextMenu(TerminalDisplay* display , int state , int x , int y);
-    void sessionStateChanged(Session* session,int state);
+    void sessionStateChanged(int state);
     void sessionTitleChanged();
     void searchTextChanged(const QString& text);
     void searchClosed(); // called when the user clicks on the
