@@ -82,6 +82,12 @@ public:
     void createView(Session* session);
 
     /**
+     * Applies the view-specific settings associated with specified @p profile
+     * to the terminal display @p view.
+     */
+    void applyProfile(TerminalDisplay* view , const QString& profile);
+
+    /**
      * Merges views from another view manager into this manager.
      * Only views from the active container in the other manager are merged.
      */
@@ -194,23 +200,18 @@ private:
 
     // creates a new terminal display
     TerminalDisplay* createTerminalDisplay();
-    // applies the view-specific settings such as colour scheme associated
-    // with 'session' to 'view'
-    void loadViewSettings(TerminalDisplay* view , Profile* profile);
-
+    
     // creates a new controller for a session/display pair which provides the menu
     // actions associated with that view, and exposes basic information
     // about the session ( such as title and associated icon ) to the display.
     SessionController* createController(Session* session , TerminalDisplay* display);
 
 private:
-    MainWindow*          _mainWindow;
-//    KToggleAction*              _splitViewAction;
-    ViewSplitter*               _viewSplitter;
-    QPointer<SessionController> _pluggedController;
-    QHash<TerminalDisplay*,Session*> _sessionMap;
-    KActionCollection*  _actionCollection;
-    QSignalMapper* _containerSignalMapper;
+    ViewSplitter*                   _viewSplitter;
+    QPointer<SessionController>     _pluggedController;
+    QHash<TerminalDisplay*,Session*>    _sessionMap;
+    KActionCollection*                  _actionCollection;
+    QSignalMapper*                      _containerSignalMapper;
 };
 
 }

@@ -26,6 +26,7 @@
 
 // Qt
 #include <QtCore/QFile>
+#include <QtCore/QFileInfo>
 
 // KDE
 #include <kshell.h>
@@ -123,7 +124,17 @@ QString BookmarkHandler::titleForView(ViewProperties* view) const
     {
        QString path = u.path();
        path = KShell::tildeExpand(path);
+
+       path = QFileInfo(path).baseName();
+
        return path;
+    }
+    else if ( u.hasHost() )
+    {
+        if ( u.hasUser() )
+            return i18n("%1 on %2",u.user(),u.host());
+        else
+            return i18n("%1",u.host());
     }
     return u.prettyUrl();
 }

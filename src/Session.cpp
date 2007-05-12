@@ -529,7 +529,7 @@ QString Session::keyBindings() const
   return _emulation->keymap();
 }
 
-const QString& Session::terminalType() const
+QString Session::terminalType() const
 {
   return _term;
 }

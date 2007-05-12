@@ -305,7 +305,7 @@ void ViewManager::splitView(Qt::Orientation orientation)
     {
         Session* session = _sessionMap[(TerminalDisplay*)existingViewIter.next()];
         TerminalDisplay* display = createTerminalDisplay();
-        loadViewSettings(display,SessionManager::instance()->profile(session->type())); 
+        applyProfile(display,session->type()); 
         ViewProperties* properties = createController(session,display);
 
         _sessionMap[display] = session;
@@ -402,7 +402,7 @@ void ViewManager::createView(Session* session)
     {
         ViewContainer* container = containerIter.next();
         TerminalDisplay* display = createTerminalDisplay();
-        loadViewSettings(display,SessionManager::instance()->profile(session->type()));
+        applyProfile(display,session->type());
         
         // set initial size
         // temporary default used for now
@@ -526,8 +526,10 @@ TerminalDisplay* ViewManager::createTerminalDisplay()
    return display;
 }
 
-void ViewManager::loadViewSettings(TerminalDisplay* view , Profile* info)
+void ViewManager::applyProfile(TerminalDisplay* view , const QString& profileKey)
 {
+    Profile* info = SessionManager::instance()->profile(profileKey);
+
     Q_ASSERT( info );
 
     const ColorScheme* colorScheme = ColorSchemeManager::instance()->
@@ -594,8 +596,6 @@ void ViewManager::loadViewSettings(TerminalDisplay* view , Profile* info)
 
 void ViewManager::profileChanged(const QString& key)
 {
-    Profile* info = SessionManager::instance()->profile(key);
-
     QHashIterator<TerminalDisplay*,Session*> iter(_sessionMap);
 
     while ( iter.hasNext() )
@@ -605,7 +605,7 @@ void ViewManager::profileChanged(const QString& key)
         // if session uses this profile, update the display
         if ( iter.value() != 0 && iter.value()->type() == key )
         {
-            loadViewSettings(iter.key(),info);
+            applyProfile(iter.key(),key);
         }
     }
 }

@@ -88,9 +88,9 @@ public:
    * The number of lines which are kept and the storage location depend on the 
    * type of store.
    */
-  virtual void setHistory(const HistoryType&);
+  void setHistory(const HistoryType&);
   /** Returns the history store used by this emulation.  See setHistory() */
-  virtual const HistoryType& history();
+  const HistoryType& history();
   
   /** 
    * Copies the entire output history to a text stream.
@@ -141,19 +141,7 @@ public Q_SLOTS: // signals incoming from TerminalDisplay
    */
   virtual void sendString(const char *) = 0;
 
-  /** Clear the current selection */
-  //virtual void clearSelection();
-
-  /** Begin a new selection at column @p x, row @p y. TODO:  What does columnmode do? */
-  //virtual void onSelectionBegin(const int x, const int y, const bool columnmode);
-  /** Extend the current selection to column @p x, row @p y. */
-  //virtual void onSelectionExtend(const int x, const int y);
-  /** Calls the TerminalDisplay::setSelection() method of each associated view with the currently selected text */
-  //virtual void setSelection(const bool preserve_line_breaks);
-   
   virtual void isBusySelecting(bool busy);
-  //virtual void testIsSelected(const int x, const int y, bool &selected);
-
 
 public Q_SLOTS: // signals incoming from data source
 

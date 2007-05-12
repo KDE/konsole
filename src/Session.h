@@ -132,7 +132,7 @@ public:
    * 
    * Defaults to "xterm".
    */  
-  const QString& terminalType() const;
+  QString terminalType() const;
   /** 
    * Sets the value of the TERM variable which will be used in the 
    * session's environment when it is started using the run() method.  
