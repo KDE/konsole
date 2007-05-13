@@ -58,20 +58,14 @@ MainWindow::MainWindow()
    _bookmarkHandler(0),
    _pluggedController(0)
 {
-    // add a small amount of space between the top of the window and the main widget
-    // to prevent the menu bar and main widget borders touching (which looks very ugly) in styles
-    // where the menu bar has a lower border
-    //setContentsMargins(0,2,0,0);
-   
     // create actions for menus
+    // the directory ('konsole') is included in the path here so that the XML
+    // file can be found when this code is being used in the Konsole part.
     setXMLFile("konsole/konsoleui.rc");
     setupActions();
 
     // create view manager
-    // the directory ('konsole') is included in the path here so that the XML
-    // file can be found when this code is being used in the Konsole part.
-    //setXMLFile("konsole/konsoleui.rc");
-    _viewManager = new ViewManager(this,actionCollection());
+        _viewManager = new ViewManager(this,actionCollection());
     connect( _viewManager , SIGNAL(empty()) , this , SLOT(close()) );
     connect( _viewManager , SIGNAL(activeViewChanged(SessionController*)) , this ,
             SLOT(activeViewChanged(SessionController*)) );
@@ -254,27 +248,6 @@ void MainWindow::showRemoteConnectionDialog()
     RemoteConnectionDialog dialog(this);
     if ( dialog.exec() == QDialog::Accepted )
         emit requestSession(dialog.sessionKey(),_viewManager);
-}
-
-void MainWindow::mergeWindows()
-{
-    // merges all of the open Konsole windows into this window
-    // by merging the view manager associated with the other Konsole windows
-    // into this window's view manager
-
-    QListIterator<QWidget*> topLevelIter( QApplication::topLevelWidgets() );
-
-    while (topLevelIter.hasNext())
-    {
-        QWidget* w = topLevelIter.next();
-        qDebug() << "Top level widget: " << w->metaObject()->className();
-        MainWindow* window = qobject_cast<MainWindow*>(w);
-        if ( window && window != this )
-        {
-            _viewManager->merge( window->_viewManager );
-            //window->close();
-        }
-    }
 }
 
 void MainWindow::setupWidgets()

@@ -40,6 +40,7 @@
 #include "ui_EditProfileDialog.h"
 #include "KeyBindingEditor.h"
 #include "KeyboardTranslator.h"
+#include "Profile.h"
 #include "SessionManager.h"
 #include "ShellCommand.h"
 #include "TabTitleFormatAction.h"
@@ -49,7 +50,7 @@ using namespace Konsole;
 EditProfileDialog::EditProfileDialog(QWidget* parent)
     : KDialog(parent)
 {
-    setCaption("Edit Profile");
+    setCaption(i18n("Edit Profile"));
     setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply | KDialog::Default );
 
     connect( this , SIGNAL(applyClicked()) , this , SLOT(save()) );
@@ -102,7 +103,7 @@ void EditProfileDialog::setProfile(const QString& key)
     Q_ASSERT( info );
 
     // update caption
-    setCaption( QString("Edit Profile \"%1\"").arg(info->name()) );
+    setCaption( i18n("Edit Profile \"%1\"",info->name()) );
 
     // setup each page of the dialog
     setupGeneralPage(info);

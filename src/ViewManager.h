@@ -87,12 +87,6 @@ public:
      */
     void applyProfile(TerminalDisplay* view , const QString& profile);
 
-    /**
-     * Merges views from another view manager into this manager.
-     * Only views from the active container in the other manager are merged.
-     */
-    void merge(ViewManager* manager);
-
     /** 
      * Return the main widget for the view manager which
      * holds all of the views managed by this ViewManager instance.

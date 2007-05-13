@@ -36,7 +36,7 @@ using namespace Konsole;
 RemoteConnectionDialog::RemoteConnectionDialog(QWidget* parent)
     : KDialog(parent)
 {
-    setCaption("New Remote Connection");
+    setCaption(i18n("New Remote Connection"));
     setButtons( KDialog::Ok | KDialog::Cancel );
     setButtonText( KDialog::Ok , i18n("Connect") );
 

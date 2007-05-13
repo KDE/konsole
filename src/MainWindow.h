@@ -79,19 +79,11 @@ class MainWindow : public KXmlGuiWindow
          */
         BookmarkHandler* bookmarkHandler() const;
 
-    public slots:
-        /** 
-         * Merges all of the MainWindow widgets in the application into this window.
-         * Note:  Only the active container in other MainWindow widgets are considered,
-         * other containers are currently just deleted
-         */
-        void mergeWindows();
-
     signals:
         /** 
          * Emitted by the main window to request the creation of a new session.
          *
-         * @param key Specifies the type of session to create
+         * @param key The key for the profile to use to create the new session.
          * @param view The view manager owned by this main window 
          */
         void requestSession(const QString& key , ViewManager* view);

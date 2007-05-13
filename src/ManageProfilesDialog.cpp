@@ -39,7 +39,7 @@ using namespace Konsole;
 ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     : KDialog(parent)
 {
-    setCaption("Manage Profiles");
+    setCaption(i18n("Manage Profiles"));
 
     _ui = new Ui::ManageProfilesDialog();
     _ui->setupUi(mainWidget());
@@ -76,16 +76,32 @@ ManageProfilesDialog::~ManageProfilesDialog()
 {
     delete _ui;
 }
+void ManageProfilesDialog::itemDataChanged(QStandardItem* item)
+{
+   static const int ShortcutColumn = 2;
+
+   if ( item->column() == ShortcutColumn )
+   {
+        QKeySequence sequence = QKeySequence::fromString(item->text());
+
+        qDebug() << "New key sequence: " << item->text(); 
+
+        SessionManager::instance()->setShortcut(item->data(Qt::UserRole+1).value<QString>(),
+                                                sequence); 
+   } 
+}
 void ManageProfilesDialog::updateTableModel()
 {
     // ensure profiles list is complete
+    // this may be EXPENSIVE, but will only be done the first time
+    // that the dialog is shown. 
     SessionManager::instance()->loadAllProfiles();
 
     // setup session table
     _sessionModel = new QStandardItemModel(this);
-    _sessionModel->setHorizontalHeaderLabels( QStringList() << "Name"
-                                                            << "Show in Menu" 
-                                                            << "Shortcut" );
+    _sessionModel->setHorizontalHeaderLabels( QStringList() << i18n("Name")
+                                                            << i18n("Show in Menu") 
+                                                            << i18n("Shortcut") );
     QListIterator<QString> keyIter( SessionManager::instance()->availableProfiles() );
     while ( keyIter.hasNext() )
     {
@@ -105,6 +121,7 @@ void ManageProfilesDialog::updateTableModel()
 
         const bool isFavorite = SessionManager::instance()->findFavorites().contains(key);
 
+        // favorite column
         QStandardItem* favoriteItem = new QStandardItem();
         if ( isFavorite )
             favoriteItem->setData(KIcon("favorites"),Qt::DecorationRole);
@@ -113,11 +130,22 @@ void ManageProfilesDialog::updateTableModel()
 
         favoriteItem->setData(key,Qt::UserRole+1);
 
-        itemList << item << favoriteItem;
+        // shortcut column
+        QStandardItem* shortcutItem = new QStandardItem();
+        QString shortcut = SessionManager::instance()->shortcut(key).
+                                toString();
+        shortcutItem->setText(shortcut);
+        shortcutItem->setData(key,Qt::UserRole+1);
+
+        itemList << item << favoriteItem << shortcutItem;
 
         _sessionModel->appendRow(itemList);
     }
     updateDefaultItem();
+
+    connect( _sessionModel , SIGNAL(itemChanged(QStandardItem*)) , this , 
+            SLOT(itemDataChanged(QStandardItem*)) );
+
     _ui->sessionTable->setModel(_sessionModel);
 
     // listen for changes in the table selection and update the state of the form's buttons

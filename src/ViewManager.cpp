@@ -469,49 +469,6 @@ void ViewManager::viewCloseRequest(QWidget* view)
     focusActiveView();
 }
 
-void ViewManager::merge(ViewManager* otherManager)
-{
-    // iterate over the views in otherManager's active container and take them from that
-    // manager and put them in the active container in this manager
-    //
-    // TODO - This currently does not consider views in containers other than
-    //        the active one in the other manager
-    //
-    ViewSplitter* otherSplitter = otherManager->_viewSplitter;
-    ViewContainer* otherContainer = otherSplitter->activeContainer();
-
-    QListIterator<QWidget*> otherViewIter(otherContainer->views());
-
-    ViewContainer* activeContainer = _viewSplitter->activeContainer();
-
-    while ( otherViewIter.hasNext() )
-    {
-        TerminalDisplay* view = dynamic_cast<TerminalDisplay*>(otherViewIter.next());
-        
-        assert(view);
-        assert( otherManager->_sessionMap[view] );
-
-        createView(otherManager->_sessionMap[view]);
-    } 
-}
-
-
-/*void ViewManager::takeView(ViewManager* otherManager , ViewContainer* otherContainer, 
-                           ViewContainer* newContainer, TerminalDisplay* view)
-{
-    // FIXME - the controller associated with the display which is being moved
-    //         may have signals which are connected to otherManager.  they need
-    //         to be redirected to slots in this view manager
-    ViewProperties* properties = otherContainer->viewProperties(view);
-    otherContainer->removeView(view);
-
-    newContainer->addView(view,properties);
-
-    // transfer the session map entries
-    _sessionMap.insert(view,otherManager->_sessionMap[view]);
-    otherManager->_sessionMap.remove(view);
-}*/
-
 TerminalDisplay* ViewManager::createTerminalDisplay()
 {
    TerminalDisplay* display = new TerminalDisplay(0);

@@ -72,6 +72,7 @@ set(konsole_KDEINIT_SRCS
         ScreenWindow.cpp
         SessionController.cpp
         ShellCommand.cpp
+        Profile.cpp
         ProfileList.cpp
         ProfileListWidget.cpp
         SessionManager.cpp
@@ -145,6 +146,7 @@ set(konsolepart_PART_SRCS
    MainWindow.cpp
    Part.cpp
    ProcessInfo.cpp
+   Profile.cpp
    Pty.cpp 
    RemoteConnectionDialog.cpp
    Screen.cpp 

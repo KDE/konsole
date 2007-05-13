@@ -58,6 +58,8 @@ private slots:
     void newType();
     void editSelected();
 
+    void itemDataChanged(QStandardItem* item);
+
     // enables or disables Edit/Delete/Set as Default buttons when the 
     // selection changes
     void tableSelectionChanged(const QItemSelection&);

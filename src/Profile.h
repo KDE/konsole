@@ -1,0 +1,409 @@
+/*
+    This source file is part of Konsole, a terminal emulator.
+
+    Copyright (C) 2006-7 by Robert Knight <robertknight@gmail.com>
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+    02110-1301  USA.
+*/
+
+#ifndef PROFILE_H
+#define PROFILE_H
+
+// Qt
+#include <QtCore/QHash>
+#include <QtCore/QObject>
+#include <QtCore/QPointer>
+#include <QtCore/QStringList>
+#include <QtCore/QVariant>
+
+#include <QtGui/QFont>
+
+class KConfigGroup;
+
+namespace Konsole
+{
+
+/**
+ * Represents a terminal set-up which can be used to 
+ * set the initial state of new terminal sessions or applied
+ * to existing sessions.
+ *
+ * Profiles can be loaded from disk using ProfileReader instances
+ * and saved to disk using ProfileWriter instances.
+ */
+class Profile : public QObject 
+{
+Q_OBJECT
+
+public:
+    /**
+     * This enum describes the available properties
+     * which a Profile may consist of.
+     *
+     * Properties can be set using setProperty() and read
+     * using property()
+     */
+    enum Property
+    {
+        /** (QString) Path to the profile's configuration file on-disk. */
+        Path,   
+
+        /** (QString) The descriptive name of this profile. */
+        Name,   
+        /** (QString) TODO: Document me. */
+        Title, 
+        /** (QString) The name of the icon associated with this profile.  This 
+         * is used in menus and tabs to represent the profile. 
+         */
+        Icon, 
+        /** 
+         * (QString) The command to execute ( excluding arguments ) when creating a new terminal
+         * session using this profile.
+         */
+        Command,   
+        /**
+         * (QStringList) The arguments which are passed to the program specified by the Command property
+         * when creating a new terminal session using this profile.
+         */ 
+        Arguments,
+        /** 
+         * (QStringList) Additional environment variables ( in the form of NAME=VALUE pairs )
+         * which are passed to the program specified by the Command property
+         * when creating a new terminal session using this profile. 
+         */ 
+        Environment,
+        /** (QString) The initial working directory for sessions created using this profile. */ 
+        Directory,      // QString
+
+        /** (QString) The format used for tab titles when running normal commands. */
+        LocalTabTitleFormat,   
+        /** (QString) The format used for tab titles when the session is running a remote command (eg. SSH) */ 
+        RemoteTabTitleFormat,   
+
+        /** (bool) Specifies whether the menu bar should be shown in the main application window. */
+        ShowMenuBar,    
+        /** (TabBarModeEnum) Specifies when the tab bar should be shown in the main application window. */ 
+        TabBarMode,    
+
+        /** (QFont) The font to use in terminal displays using this profile. */
+        Font,           
+        /** (QString) 
+         * The name of the color scheme to use in terminal displays using this profile. 
+         * Color schemes are managed by the ColorSchemeManager class. 
+         */
+        ColorScheme,   
+
+        /** (QString) The name of the key bindings. 
+         * Key bindings are managed by the KeyboardTranslatorManager class. 
+         */
+        KeyBindings, 
+
+        /** (HistoryModeEnum) Specifies the storage type used for keeping the output produced
+         * by terminal sessions using this profile.
+         */
+        HistoryMode,
+        /** (int) Specifies the number of lines of output to remember in terminal sessions
+         * using this profile.  Once the limit is reached, the oldest lines are lost.
+         * Only applicable if the HistoryMode property is FixedSizeHistory
+         */
+        HistorySize,
+        /**
+         * (ScrollBarPositionEnum) Specifies the position of the scroll bar in 
+         * terminal displays using this profile.
+         */
+        ScrollBarPosition,  
+
+        /** TODO Document me*/
+        SelectWordCharacters,
+        /** (bool) Specifies whether text in terminal displays is allowed to blink. */
+        BlinkingTextEnabled,       
+        /** (bool) Specifies whether the flow control keys ( typically Ctrl+S , Ctrl+Q )
+         * have any effect.  Also known as Xon/Xoff
+         */ 
+        FlowControlEnabled,
+        /** (bool) Specifies whether programs running in the terminal are allowed to 
+         * resize the terminal display. 
+         */
+        AllowProgramsToResizeWindow,
+        /** (bool) Specifies whether the cursor blinks ( in a manner similar 
+         * to text editing applications )
+         */
+        BlinkingCursorEnabled,      // bool
+
+        /** (bool) If true, terminal displays use a fixed color to draw the cursor,
+         * specified by the CustomCursorColor property.  Otherwise the cursor changes
+         * color to match the character underneath it.
+         */
+        UseCustomCursorColor,
+        /** (CursorShapeEnum) The shape used by terminal displays to represent the cursor. */ 
+        CursorShape,           
+        /** (QColor) The color used by terminal displays to draw the cursor.  Only applicable
+         * if the UseCustomCursorColor property is true. */ 
+        CustomCursorColor,        
+
+        /** TODO Document me */
+        // FIXME - Is this a duplicate of SelectWordCharacters?
+        WordCharacters  // QString
+    };
+
+    /** This enum describes the available modes for showing or hiding the tab bar. */
+    enum TabBarModeEnum
+    {
+        /** The tab bar is never shown. */
+        AlwaysHideTabBar,
+        /** The tab bar is shown if there are multiple tabs open or hidden otherwise. */
+        ShowTabBarAsNeeded,
+        /** The tab bar is always shown. */
+        AlwaysShowTabBar
+    };
+
+    /** 
+     * This enum describes the modes available to remember lines of output produced 
+     * by the terminal. 
+     */
+    enum HistoryModeEnum
+    {
+        /** No output is remembered.  As soon as lines of text are scrolled off-screen they are lost. */
+        DisableHistory,
+        /** A fixed number of lines of output are remembered.  Once the limit is reached, the oldest
+         * lines are lost. */
+        FixedSizeHistory,
+        /** All output is remembered for the duration of the session.  
+         * Typically this means that lines are recorded to
+         * a file as they are scrolled off-screen.
+         */
+        UnlimitedHistory
+    };
+
+    /**
+     * This enum describes the positions where the terminal display's scroll bar may be placed.
+     */
+    enum ScrollBarPositionEnum
+    {
+        /** Show the scroll-bar on the left of the terminal display. */
+        ScrollBarLeft,
+        /** Show the scroll-bar on the right of the terminal display. */
+        ScrollBarRight,
+        /** Do not show the scroll-bar. */
+        ScrollBarHidden
+    };
+
+    /** This enum describes the shapes used to draw the cursor in terminal displays. */
+    enum CursorShapeEnum
+    {
+        /** Use a solid rectangular block to draw the cursor. */
+        BlockCursor,
+        /** Use an 'I' shape, similar to that used in text editing applications, to draw the cursor. */
+        IBeamCursor,
+        /** Draw a line underneath the cursor's position. */
+        UnderlineCursor
+    };
+
+    /**
+     * Constructs a new profile
+     */
+    Profile(Profile* parent = 0);
+    virtual ~Profile() {}
+
+    /** 
+     * Changes the parent profile.  When calling the property() method,
+     * if the specified property has not been set for this profile,
+     * the parent's value for the property will be returned instead.
+     */
+    void setParent(Profile* parent);
+
+    /** Returns the parent profile. */
+    const Profile* parent() const;
+
+    /** 
+     * Returns the current value of the specified @p property. 
+     *
+     * If the specified @p property has not been set in this profile,
+     * and a non-null parent was specified in the Profile's constructor,
+     * the parent's value for @p property will be returned.
+     */
+    virtual QVariant property(Property property) const;
+    /** Sets the value of the specified @p property to @p value. */
+    virtual void setProperty(Property property,const QVariant& value);
+    /** Returns true if the specified property has been set in this Profile instance. */
+    virtual bool isPropertySet(Property property) const;
+
+    /** Returns a map of the properties set in this Profile instance. */
+    virtual QHash<Property,QVariant> setProperties() const;
+
+    /** Returns true if no properties have been set in this Profile instance. */
+    bool isEmpty() const;
+
+    /** 
+     * Returns true if this is a 'hidden' profile which should not be displayed
+     * in menus.
+     */
+    bool isHidden() const;
+
+    /** Specifies whether this is a hidden profile.  See isHidden() */
+    void setHidden(bool hidden);
+
+    //
+    // Convenience methods for property() and setProperty() go here
+    //
+
+    /** Convenience method for property(Profile::Path) */
+    QString path() const { return property(Profile::Path).value<QString>(); }
+
+    /** Convenience method for property(Profile::Name) */
+    QString name() const { return property(Profile::Name).value<QString>(); }
+    
+    /** Convenience method for property(Profile::Directory) */
+    QString defaultWorkingDirectory() const 
+            { return property(Profile::Directory).value<QString>(); }
+
+    /** Convenience method for property(Profile::Icon) */
+    QString icon() const { return property(Profile::Icon).value<QString>(); }
+
+    /** Convenience method for property(Profile::Command) */
+    QString command() const { return property(Profile::Command).value<QString>(); }
+
+    /** Convenience method for property(Profile::Arguments) */
+    QStringList arguments() const { return property(Profile::Arguments).value<QStringList>(); }
+
+    /** Convenience method for property(Profile::Font) */
+    QFont font() const { return property(Profile::Font).value<QFont>(); }
+
+    /** Convenience method for property(Profile::ColorScheme) */
+    QString colorScheme() const { return property(Profile::ColorScheme).value<QString>(); }
+
+    /** Convenience method for property(Profile::Environment) */
+    QStringList environment() const { return property(Profile::Environment).value<QStringList>(); }
+
+    /** 
+     * Convenience method.
+     * Returns the value of the "TERM" value in the environment list.
+     */
+    QString terminal() const { return "xterm"; }
+
+    /**
+     * Returns true if @p name has been associated with an element
+     * from the Property enum or false otherwise.
+     */
+    static bool isNameRegistered(const QString& name);
+
+    /** 
+     * Returns the element from the Property enum associated with the 
+     * specified @p name.
+     */
+    static Property lookupByName(const QString& name);
+    /**
+     * Returns the string names associated with the specified @p property from
+     * the Property enum, in the order the associations were created using
+     * registerName()
+     */
+    static QList<QString> namesForProperty(Property property); 
+    /**
+     * Adds an association between a string @p name and a @p property.
+     * Subsequent calls to lookupByName() with @p name as the argument
+     * will return @p property.
+     */
+    static void registerName(Property property , const QString& name); 
+
+private:
+    QHash<Property,QVariant> _propertyValues;
+    QPointer<Profile> _parent;
+
+    bool _hidden;
+
+    static QHash<QString,Property> _propertyNames;
+};
+
+/** 
+ * A profile which contains a number of default settings for various properties.
+ * This can be used as a parent for other profiles or a fallback in case
+ * a profile cannot be loaded from disk.
+ */
+class FallbackProfile : public Profile
+{
+public:
+    FallbackProfile();
+};
+
+/** Interface for all classes which can load profile settings from a file. */
+class ProfileReader
+{
+public:
+    virtual ~ProfileReader() {}
+    /** Returns a list of paths to profiles which this reader can read. */
+    virtual QStringList findProfiles() { return QStringList(); }
+    /** 
+     * Attempts to read a profile from @p path and 
+     * save the property values described into @p profile.
+     *
+     * Returns true if the profile was successfully read or false otherwise.
+     */
+    virtual bool readProfile(const QString& path , Profile* profile) = 0;
+};
+/** Reads a KDE 3 profile .desktop file. */
+class KDE3ProfileReader : public ProfileReader
+{
+public:
+    virtual QStringList findProfiles();
+    virtual bool readProfile(const QString& path , Profile* profile);
+};
+/** Reads a KDE 4 .profile file. */
+class KDE4ProfileReader : public ProfileReader
+{
+public:
+    virtual QStringList findProfiles();
+    virtual bool readProfile(const QString& path , Profile* profile);
+private:
+    template <typename T>
+    void readStandardElement(const KConfigGroup& group , 
+                             char* name , 
+                             Profile* info , 
+                             Profile::Property property);
+};
+/** Interface for all classes which can write profile settings to a file. */
+class ProfileWriter
+{
+public:
+    virtual ~ProfileWriter() {}
+    /** 
+     * Returns a suitable path-name for writing 
+     * @p profile to. The path-name should be accepted by
+     * the corresponding ProfileReader class.
+     */
+    virtual QString getPath(const Profile* profile) = 0;
+    /**
+     * Writes the properties and values from @p profile to the file specified by
+     * @p path.  This profile should be readable by the corresponding ProfileReader class.
+     */
+    virtual bool writeProfile(const QString& path , const Profile* profile) = 0;
+};
+/** Writes a KDE 4 .profile file. */
+class KDE4ProfileWriter : public ProfileWriter
+{
+public:
+    virtual QString getPath(const Profile* profile);
+    virtual bool writeProfile(const QString& path , const Profile* profile);
+
+private:
+    void writeStandardElement(KConfigGroup& group,
+                              char* name,
+                              const Profile* profile,
+                              Profile::Property property);
+};
+
+}
+
+#endif // PROFILE_H
