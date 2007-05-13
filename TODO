@@ -15,7 +15,7 @@ https://mail.kde.org/mailman/listinfo/konsole-devel
 The KDE 4.0 TODO List:
 ======================
 
-=== FEATURES ===
+=== ESSENTIAL FEATURES ===
 
 - Proper transparency for Konsole windows
 
@@ -26,6 +26,11 @@ The KDE 4.0 TODO List:
       of that setting when drawing the terminal
       display )
 
+- Ability to define bold or transparent status for each
+  color in the color scheme.  Make the setting of 
+  boldness for characters more intuitive than in the KDE 3
+  series.
+ 
 - Editing of key bindings
   ( this is the list which maps key sequences pressed by
     the user to the corresponding text sequences
@@ -33,6 +38,8 @@ The KDE 4.0 TODO List:
 - Allow the window title set by the terminal program
   to be used in the title bar of the Konsole window,
   and/or the tab for the relevant terminal session.
+
+- Changing of profile used by current session
 
 - Get the Konsole part working properly in other
   major KDE programs, such as Dolphin,
@@ -50,6 +57,43 @@ The KDE 4.0 TODO List:
   Look for Konsole bug reports on bugs.kde.org containing
   the term "DCOP" for ideas on what users would like
   to be able to do using Konsole's scripting facilities.
+
+- Changing of profile settings, changing of profile using
+  a command-line tool 
+
+  ( because going to the GUI to change a profile setting
+    is slower for advanced users since it requires a switch from 
+    the keyboard to the mouse.  Advanced users may also
+    appreciate the ability to script profile changes )
+
+== NON-ESSENTIAL FEATURES ==
+
+- Automatic switching of profiles on 
+    - Change of directory
+    - Change of running program
+    - Change of connection
+    - Change of normal / root user command state
+
+  Out of the box, provide automatic profile switching for
+    - Normal / root command state
+    - Possibly local vs. remote commands
+
+  Again, for easier identification of what is going on in
+  a Konsole window at a glance.
+
+- Random background colors in color schemes, for easy
+  identification of Konsole windows when several are open
+  at once.
+
+  -> Suggested in survey:  Random colors which are specific
+  to the directory, program or host of the active session,
+  using a hash of the dir/program/host name etc.
+
+- Provide access to alternative navigation methods other than 
+  tabs.  For sys-admins who use Konsole to access tens of
+  different servers at once.
+
+  eg.  List view
 
 == USER INTERFACE ===
 
