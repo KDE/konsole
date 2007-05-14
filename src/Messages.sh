@@ -1,4 +1,5 @@
-#! /bin/sh
+#! /usr/bin/env bash
+$EXTRACTRC *.rc *.ui *.kcfg > rc.cpp
 rm -f schemas.cpp
 (cd ../desktop && $PREPARETIPS > ../konsole/tips.cpp)
 for i in ../other/*.schema; do
