@@ -152,7 +152,9 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
 void TerminalDisplay::setDefaultBackColor(const QColor& color)
 {
   _defaultBgColor = color;
-  
+
+  qDebug() << "Default background set";
+
   QPalette p = palette();
   p.setColor( backgroundRole(), defaultBackColor() );
   setPalette( p );
@@ -174,22 +176,10 @@ void TerminalDisplay::setColorTable(const ColorEntry table[])
 {
   for (int i = 0; i < TABLE_COLORS; i++) _colorTable[i] = table[i];
  
-  const QPixmap* pm = 0; 
-  if (!pm)
-  {
-    if (!HAVE_TRANSPARENCY || (qAlpha(_blendColor) == 0xff))
-    {
-        QPalette p = palette();
-        p.setColor( backgroundRole(), defaultBackColor() );
-        setPalette( p );
-    } else {
-
-        //### probably buggy
-        QPalette p = palette();
-        p.setColor( backgroundRole(), _blendColor );
-        setPalette( p );
-    }
-  }
+  QPalette p = palette();
+  p.setColor( backgroundRole(), defaultBackColor() );
+  setPalette( p );
+  
   update();
 }
 
@@ -430,10 +420,9 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
   // im
   setAttribute(Qt::WA_InputMethodEnabled, true);
 
-  //tell Qt to automatically fill the widget with the current background colour when
-  //repainting.
-  //the widget may then need to repaint over some of the area in a different colour
-  //but because of the double buffering there won't be any flicker
+  // this is an important optimisation, it tells Qt
+  // that TerminalDisplay will handle repainting its entire area.
+  setAttribute(Qt::WA_OpaquePaintEvent);
 
   _gridLayout = new QGridLayout(this);
   _gridLayout->setMargin(0);
@@ -609,6 +598,7 @@ void TerminalDisplay::drawLineCharString(	QPainter& painter, int x, int y, const
 // 
 // -- Robert Knight <robertknight@gmail.com>
 
+#if 0
 void TerminalDisplay::drawTextFixed(QPainter& painter, int x, int y, QString& str, const Character* /*attributes*/)
 {
 	if ( str.length() == 0 )
@@ -616,6 +606,7 @@ void TerminalDisplay::drawTextFixed(QPainter& painter, int x, int y, QString& st
 		
     painter.drawText( QRect( x, y, _fontWidth*str.length(), _fontHeight ),  Qt::TextDontClip , str );
 }
+#endif
 
 //OLD VERSION
 //
@@ -686,6 +677,18 @@ void TerminalDisplay::setOpacity(qreal opacity)
 {
     QColor color(_blendColor);
     color.setAlphaF(opacity);
+
+    // enable automatic background filling to prevent the display
+    // flickering if there is no transparency
+    /*if ( color.alpha() == 255 ) 
+    {
+        setAutoFillBackground(true);
+    }
+    else
+    {
+        setAutoFillBackground(false);
+    }*/
+
     _blendColor = color.rgba();
 }
 
@@ -705,6 +708,113 @@ void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const
             painter.fillRect(rect, backgroundColor);
 }
 
+void TerminalDisplay::drawCursor(QPainter& painter, 
+                                 const QRect& rect,
+                                 const QColor& foregroundColor,
+                                 const QColor& /*backgroundColor*/,
+                                 bool& invertCharacterColor)
+{
+    QRect cursorRect = rect;
+    cursorRect.setHeight(_fontHeight - _lineSpacing - 1);
+    
+    if (!_cursorBlinking)
+    {
+       if ( _cursorColor.isValid() )
+           painter.setPen(_cursorColor);
+
+       if ( _cursorShape == BlockCursor )
+       {
+            painter.drawRect(cursorRect);
+            if ( hasFocus() )
+            {
+                painter.fillRect(cursorRect, _cursorColor.isValid() ? _cursorColor : foregroundColor);
+            }
+
+            if ( !_cursorColor.isValid() )
+            {
+                // invert the colour used to draw the text to ensure that the character at
+                // the cursor position is readable
+                invertCharacterColor = true;
+            }
+       }
+       else if ( _cursorShape == UnderlineCursor )
+            painter.drawLine(cursorRect.left(),
+                             cursorRect.bottom(),
+                             cursorRect.right(),
+                             cursorRect.bottom());
+       else if ( _cursorShape == IBeamCursor )
+            painter.drawLine(cursorRect.left(),
+                             cursorRect.top(),
+                             cursorRect.left(),
+                             cursorRect.bottom());
+    
+    }
+}
+
+void TerminalDisplay::drawCharacters(QPainter& painter,
+                                     const QRect& rect,
+                                     const QString& text,
+                                     const Character* style,
+                                     bool invertCharacterColor)
+{
+    // don't draw text which is currently blinking
+    if ( _blinking && (style->rendition & RE_BLINK) )
+            return;
+   
+    // setup bold
+    bool useBold = style->rendition & RE_BOLD || style->isBold(_colorTable);
+    QFont font = painter.font();
+    if ( font.bold() != useBold )
+    {
+       font.setBold(useBold);
+       painter.setFont(font);
+    }
+
+    // setup pen
+    const CharacterColor& textColor = ( invertCharacterColor ? style->backgroundColor : style->foregroundColor );
+    const QColor color = textColor.color(_colorTable);
+    QPen pen = painter.pen();
+    if ( pen.color() != color )
+    {
+        pen.setColor(color);
+        painter.setPen(color);
+    }
+
+    // draw text
+    if ( isLineCharString(text) )
+	  	drawLineCharString(painter,rect.x(),rect.y(),text,style);
+    else
+        painter.drawText(rect,text);
+}
+
+void TerminalDisplay::drawTextFragment(QPainter& painter , 
+                                       const QRect& rect,
+                                       const QString& text, 
+                                       const Character* style)
+{
+    painter.save();
+
+    // setup painter 
+    const QColor foregroundColor = style->foregroundColor.color(_colorTable);
+    const QColor backgroundColor = style->backgroundColor.color(_colorTable);
+    
+    // draw background if different from the display's background color
+    if ( backgroundColor != defaultBackColor() )
+        drawBackground(painter,rect,backgroundColor);
+
+    // draw cursor shape if the current character is the cursor
+    // this may alter the foreground and background colors
+    bool invertCharacterColor = false;
+    if ( style->rendition & RE_CURSOR )
+        drawCursor(painter,rect,foregroundColor,backgroundColor,invertCharacterColor);
+
+    // draw text
+    drawCharacters(painter,rect,text,style,invertCharacterColor);
+
+    painter.restore();
+}
+
+#if 0
 /*!
     attributed string draw primitive
 */
@@ -914,6 +1024,7 @@ void TerminalDisplay::drawAttrStr(QPainter &paint, const QRect& rect,
   //restore painter to state prior to drawing text
   paint.restore();
 }
+#endif 
 
 /*!
     Set XIM Position
@@ -1180,7 +1291,7 @@ void TerminalDisplay::updateImage()
                                  _bY+tLy+_fontHeight*y , 
                                  _fontWidth * columnsToUpdate , 
                                  _fontHeight ); 	
-    
+
         dirtyRegion |= dirtyRect;
     }
 
@@ -1196,7 +1307,7 @@ void TerminalDisplay::updateImage()
 
   // debugging - display a count of the number of _lines that will need 
   // to be repainted
-  // qDebug() << "dirty line count = " << dirtyLineCount;
+  //qDebug() << "dirty line count = " << dirtyLineCount;
 
   // if the new _image is smaller than the previous _image, then ensure that the area
   // outside the new _image is cleared 
@@ -1217,6 +1328,8 @@ void TerminalDisplay::updateImage()
                             _fontHeight * this->_lines );
   }
   _usedColumns = columnsToUpdate;
+
+  //qDebug() << "Expecting to update: " << dirtyRegion.boundingRect();
 
   // update the parts of the display which have changed
   update(dirtyRegion);
@@ -1295,55 +1408,17 @@ void TerminalDisplay::paintEvent( QPaintEvent* pe )
 {
   QPainter paint;
   paint.begin( this );
-  paint.setBackgroundMode( Qt::TransparentMode );
 
   foreach (QRect rect, (pe->region() & contentsRect()).rects())
   {
+    drawBackground(paint,rect,defaultBackColor());
     paintContents(paint, rect);
   }
   paintFilters(paint);
 
-  drawFrame( &paint );
-
   // We have to make sure every single pixel is painted by the paint event.
   // To do this, we must figure out which pixels are left in the area
   // between the terminal _image and the frame border.
-
-  // Calculate the contents rect excluding scroll bar.
-  QRect innerRect = contentsRect();
-  if( _scrollbarLocation != SCROLLBAR_NONE )
-    innerRect.setWidth( innerRect.width() - _scrollBar->width() );
-
-  innerRect.setWidth( innerRect.width() + 3 );
-  innerRect.setHeight( innerRect.height() );
-
-  // Calculate the emulation rect (area needed for actual terminal contents)
-  QRect emurect( contentsRect().topLeft(), QSize( _columns * _fontWidth + 2 * _rimX, _lines * _fontHeight + 2 * _rimY ));
-
-  // Now erase the remaining pixels on all sides of the emulation
-
-  // Top
-  QRect er( innerRect );
-  er.setBottom( emurect.top() );
-  paint.eraseRect( er );
-
-  // Bottom
-  er.setBottom( innerRect.bottom() );
-  er.setTop( emurect.bottom() );
-  paint.eraseRect( er );
-
-  // Left
-  er.setTop( emurect.top() );
-  er.setBottom( emurect.bottom() - 1 );
-  er.setRight( emurect.left() );
-  paint.eraseRect( er );
-
-  // Right
-  er.setRight( innerRect.right() );
-  er.setTop( emurect.top() );
-  er.setBottom( emurect.bottom() - 1 );
-  er.setLeft( emurect.right() );
-  paint.eraseRect( er );
 
   paint.end();
 }
@@ -1503,14 +1578,14 @@ void TerminalDisplay::paintContents(QPainter &paint, const QRect &rect)
 
       bool lineDraw = isLineChar(c);
       bool doubleWidth = (_image[ qMin(loc(x,y)+1,_imageSize) ].character == 0);
-      CharacterColor cf = _image[loc(x,y)].foregroundColor;
-      CharacterColor _clipboard = _image[loc(x,y)].backgroundColor;
-      UINT8 cr = _image[loc(x,y)].rendition;
+      CharacterColor currentForeground = _image[loc(x,y)].foregroundColor;
+      CharacterColor currentBackground = _image[loc(x,y)].backgroundColor;
+      UINT8 currentRendition = _image[loc(x,y)].rendition;
 	  
       while (x+len <= rlx &&
-             _image[loc(x+len,y)].foregroundColor == cf &&
-             _image[loc(x+len,y)].backgroundColor == _clipboard &&
-             _image[loc(x+len,y)].rendition == cr &&
+             _image[loc(x+len,y)].foregroundColor == currentForeground &&
+             _image[loc(x+len,y)].backgroundColor == currentBackground &&
+             _image[loc(x+len,y)].rendition == currentRendition &&
              (_image[ qMin(loc(x+len,y)+1,_imageSize) ].character == 0) == doubleWidth &&
              isLineChar( c = _image[loc(x+len,y)].character) == lineDraw) // Assignment!
       {
@@ -1551,12 +1626,12 @@ void TerminalDisplay::paintContents(QPainter &paint, const QRect &rect)
 		 textArea.moveTopLeft( inverted.map(textArea.topLeft()) );
 		 
 		 //paint text fragment
-         drawAttrStr(	paint,
-                		textArea,
-                		unistr, 
-						&_image[loc(x,y)], 
-						0, 
-						!_isPrinting );
+         drawTextFragment(	paint,
+                		    textArea,
+                		    unistr, 
+					    	&_image[loc(x,y)] ); //, 
+						    //0, 
+						    //!_isPrinting );
          
 		 _fixedFont = save__fixedFont;
      

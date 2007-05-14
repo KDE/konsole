@@ -452,23 +452,10 @@ protected:
     bool eventFilter( QObject *, QEvent * );
     bool event( QEvent * );
 
-	//draws a string of normal text characters
-	//The painter's font and other attributes needed to draw the string
-	//should be set before drawTextFixed is called.
-    void drawTextFixed(QPainter &paint, int x, int y,
-                       QString& str, const Character *attr);
-
-	//draws a string of line-drawing characters
-	void drawLineCharString(QPainter& painter, int x, int y, const QString& str, const Character* attributes);
-
-    void drawAttrStr(QPainter &paint, const QRect& rect,
-                     QString& str, const Character *attr, bool pm, bool clear);
-   
-    void drawBackground(QPainter& painter, const QRect& rect, const QColor& color);
+	    
 
     void paintEvent( QPaintEvent * );
 
-    void paintContents(QPainter &paint, const QRect &rect);
     void paintFilters(QPainter& painter);
 
     void showEvent(QShowEvent*);
@@ -521,6 +508,30 @@ private Q_SLOTS:
     void tripleClickTimeout();  // resets possibleTripleClick
 
 private:
+
+    // -- Drawing helpers --
+
+    // divides the part of the display specified by 'rect' into
+    // fragments according to their colors and styles and calls
+    // drawTextFragment() to draw the fragments 
+    void paintContents(QPainter &paint, const QRect &rect);
+    // draws a section of text, all the text in this section
+    // has a common color and style
+    void drawTextFragment(QPainter& painter, const QRect& rect, 
+                          const QString& text, const Character* style); 
+    // draws the background for a text fragment
+    void drawBackground(QPainter& painter, const QRect& rect, const QColor& color);
+    // draws the cursor character
+    void drawCursor(QPainter& painter, const QRect& rect , const QColor& foregroundColor, 
+                                       const QColor& backgroundColor , bool& invertColors);
+    // draws the characters or line graphics in a text fragment
+    void drawCharacters(QPainter& painter, const QRect& rect,  const QString& text, 
+                                           const Character* style, bool invertCharacterColor);
+    // draws a string of line graphics
+	void drawLineCharString(QPainter& painter, int x, int y, 
+                            const QString& str, const Character* attributes);
+
+    // --
 
     // maps a point on the widget to the position ( ie. line and column ) of the character
     // at that point.

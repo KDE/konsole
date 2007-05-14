@@ -75,12 +75,15 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
         exit(0);
     }
 
-    Display* display = 0;
+    //Display* display = 0;
+    Display* display = XOpenDisplay(0);
     Visual* visual = 0;
     Colormap colormap = 0;
     bool transparencyAvailable = false;
 
-    getDisplayInformation(display,visual,colormap,transparencyAvailable);
+    //getDisplayInformation(display,visual,colormap,transparencyAvailable);
+
+    qDebug() << "Transparency available: " << transparencyAvailable;
 
     Application app(display,Qt::HANDLE(visual),Qt::HANDLE(colormap));
     return app.exec();   
@@ -151,7 +154,7 @@ void fillAboutData(KAboutData& aboutData)
 
 }
 
-// code taken from the Qt 4 
+// code taken from the Qt 4 graphics dojo examples 
 void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap,
                            bool& transparencyAvailable)
 {
@@ -168,7 +171,7 @@ void getDisplayInformation(Display*& display , Visual*& visual , Colormap& color
         int nvi;
         XVisualInfo templ;
         templ.screen  = screen;
-        templ.depth   = 32;
+        templ.depth = 32;
         templ.c_class = TrueColor;
         XVisualInfo *xvi = XGetVisualInfo(display, VisualScreenMask |
                                           VisualDepthMask |
