@@ -101,7 +101,7 @@ Session::Session() :
     connect( _emulation, SIGNAL( zmodemDetected() ), this , 
             SLOT( fireZModemDetected() ) );
     connect( _emulation, SIGNAL( changeTabTextColor( int ) ),
-           this, SIGNAL( changeTabTextColor( int ) ) );
+           this, SIGNAL( changeTabTextColorRequest( int ) ) );
 
    
     //connect teletype to emulation backend 
@@ -131,9 +131,6 @@ bool Session::running() const
     return _shellProcess->isRunning();
 }
 
-void Session::setType(const QString& type) { _type = type; }
-QString Session::type() const { return _type; }
-
 void Session::setProgram(const QString& program)
 {
     _program = program;
@@ -146,7 +143,13 @@ void Session::setArguments(const QStringList& arguments)
 
 void Session::ptyError()
 {
-  // FIXME:  _shellProcess->error() is always empty
+// Mysterious errors about PTYs used to be shown even when there was nothing wrong
+// with the PTY itself because the code which starts the session ( in ::run() ) assumes
+// that if starting the shell process fails then a PTY error is the problem, when
+// there are other things that can go wrong as well
+
+#if 0
+    // FIXME:  _shellProcess->error() is always empty
   if ( _shellProcess->error().isEmpty() )
   {
     KMessageBox::error( QApplication::activeWindow() ,
@@ -160,6 +163,7 @@ void Session::ptyError()
     KMessageBox::error(QApplication::activeWindow(), _shellProcess->error());
   
   emit finished();
+#endif
 }
 
 QList<TerminalDisplay*> Session::views() const
@@ -273,9 +277,10 @@ void Session::run()
                                   (QLatin1String("/Sessions/") + 
                                    QString::number(_sessionId)).toLatin1());
 
-  if (result < 0) {     // Error in opening pseudo teletype
-    kWarning()<<"Unable to open a pseudo teletype!"<<endl;
-    QTimer::singleShot(0, this, SLOT(ptyError()));
+  if (result < 0) 
+  {
+    return;
+    //QTimer::singleShot(0, this, SLOT(ptyError()));
   }
   _shellProcess->setErase(_emulation->getErase());
 
@@ -323,7 +328,7 @@ void Session::setUserTitle( int what, const QString &caption )
         // and tested - just so we don't forget to do this.
         Q_ASSERT( 0 );
 
-        emit changeBackgroundColor(backColor);
+        emit changeBackgroundColorRequest(backColor);
 	}
       }
     }
@@ -350,7 +355,7 @@ void Session::setUserTitle( int what, const QString &caption )
     }
 
 	if ( modified )
-    	emit updateTitle();
+    	emit titleChanged();
 }
 
 QString Session::userTitle() const
@@ -385,11 +390,11 @@ void Session::monitorTimerDone()
     KNotification::event("Silence", i18n("Silence in session '%1'", _title), QPixmap(), 
                     QApplication::activeWindow(), 
                     KNotification::CloseWhenWidgetActivated);
-    emit notifySessionState(NOTIFYSILENCE);
+    emit stateChanged(NOTIFYSILENCE);
   }
   else
   {
-    emit notifySessionState(NOTIFYNORMAL);
+    emit stateChanged(NOTIFYNORMAL);
   }
   
   _notifiedActivity=false;
@@ -424,7 +429,7 @@ void Session::activityStateChanged(int state)
   if ( state==NOTIFYSILENCE && !_monitorSilence )
           state = NOTIFYNORMAL;
 
-  emit notifySessionState(state);
+  emit stateChanged(state);
 }
 
 void Session::onContentSizeChange(int /*height*/, int /*width*/)
@@ -463,7 +468,7 @@ bool Session::sendSignal(int signal)
   return _shellProcess->kill(signal);
 }
 
-bool Session::closeSession()
+void Session::close()
 {
   _autoClose = true;
   _wantedClose = true;
@@ -472,7 +477,6 @@ bool Session::closeSession()
      // Forced close.
      QTimer::singleShot(1, this, SIGNAL(finished()));
   }
-  return true;
 }
 
 void Session::sendText(const QString &text) const
@@ -487,12 +491,15 @@ Session::~Session()
   delete _zmodemProc;
 }
 
+void Session::setProfileKey(const QString& key) { _profileKey = key; }
+QString Session::profileKey() const { return _profileKey; }
+
 void Session::done(int exitStatus)
 {
   if (!_autoClose)
   {
     _userTitle = i18n("<Finished>");
-    emit updateTitle();
+    emit titleChanged();
     return;
   }
   if (!_wantedClose && (exitStatus || _shellProcess->signalled()))
@@ -554,7 +561,7 @@ void Session::setTitle(const QString& title)
     if ( title != _title )
     {
         _title = title;
-        emit updateTitle();
+        emit titleChanged();
     }
 }
 
@@ -568,7 +575,7 @@ void Session::setIconName(const QString& iconName)
     if ( iconName != _iconName )
     {
         _iconName = iconName;
-        emit updateTitle();
+        emit titleChanged();
     }
 }
 
@@ -799,13 +806,13 @@ void Session::setSize(QSize size)
   if ((size.width() <= 1) || (size.height() <= 1))
      return;
 
-  emit resizeSession(size);
+  emit resizeRequest(size);
 }
 int Session::foregroundProcessId() const
 {
     return _shellProcess->foregroundProcessGroup();
 }
-int Session::sessionProcessId() const
+int Session::processId() const
 {
     return _shellProcess->pid();
 }

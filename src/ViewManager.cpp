@@ -305,7 +305,7 @@ void ViewManager::splitView(Qt::Orientation orientation)
     {
         Session* session = _sessionMap[(TerminalDisplay*)existingViewIter.next()];
         TerminalDisplay* display = createTerminalDisplay();
-        applyProfile(display,session->type()); 
+        applyProfile(display,session->profileKey()); 
         ViewProperties* properties = createController(session,display);
 
         _sessionMap[display] = session;
@@ -402,7 +402,7 @@ void ViewManager::createView(Session* session)
     {
         ViewContainer* container = containerIter.next();
         TerminalDisplay* display = createTerminalDisplay();
-        applyProfile(display,session->type());
+        applyProfile(display,session->profileKey());
         
         // set initial size
         // temporary default used for now
@@ -463,7 +463,7 @@ void ViewManager::viewCloseRequest(QWidget* view)
         display->deleteLater();
         
         if ( session->views().count() == 0 )
-            session->closeSession();
+            session->close();
     }
         
     focusActiveView();
@@ -561,7 +561,7 @@ void ViewManager::profileChanged(const QString& key)
         iter.next();
 
         // if session uses this profile, update the display
-        if ( iter.value() != 0 && iter.value()->type() == key )
+        if ( iter.value() != 0 && iter.value()->profileKey() == key )
         {
             applyProfile(iter.key(),key);
         }

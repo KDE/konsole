@@ -90,11 +90,11 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
             SLOT(showDisplayContextMenu(TerminalDisplay*,int,int,int)) );
 
     // listen to activity / silence notifications from session
-    connect( _session , SIGNAL(notifySessionState(int)) , this ,
+    connect( _session , SIGNAL(stateChanged(int)) , this ,
             SLOT(sessionStateChanged(int) ));
 
     // listen to title and icon changes
-    connect( _session , SIGNAL(updateTitle()) , this , SLOT(sessionTitleChanged()) );
+    connect( _session , SIGNAL(titleChanged()) , this , SLOT(sessionTitleChanged()) );
 
     // take a snapshot of the session state every so often when
     // user activity occurs
@@ -123,7 +123,7 @@ void SessionController::snapshot()
     
 
     ProcessInfo* process = 0;
-    ProcessInfo* snapshot = ProcessInfo::newInstance(_session->sessionProcessId());
+    ProcessInfo* snapshot = ProcessInfo::newInstance(_session->processId());
     snapshot->update();
 
     // use foreground process information if available
@@ -170,7 +170,7 @@ void SessionController::snapshot()
 
 KUrl SessionController::url() const
 {
-    ProcessInfo* info = ProcessInfo::newInstance(_session->sessionProcessId());
+    ProcessInfo* info = ProcessInfo::newInstance(_session->processId());
     info->update();
 
     QString path;
@@ -475,7 +475,7 @@ void SessionController::debugProcess()
 {
     // testing facility to retrieve process information about 
     // currently active process in the shell
-    ProcessInfo* sessionProcess = ProcessInfo::newInstance(_session->sessionProcessId());
+    ProcessInfo* sessionProcess = ProcessInfo::newInstance(_session->processId());
     sessionProcess->update();
 
     bool ok = false;
@@ -514,7 +514,7 @@ void SessionController::editCurrentProfile()
 {
     EditProfileDialog* dialog = new EditProfileDialog( QApplication::activeWindow() );
 
-    dialog->setProfile(_session->type());
+    dialog->setProfile(_session->profileKey());
     dialog->show();
 }
 void SessionController::renameSession()
@@ -536,7 +536,7 @@ void SessionController::saveSession()
 }
 void SessionController::closeSession()
 {
-    _session->closeSession();
+    _session->close();
 }
 
 void SessionController::copy()

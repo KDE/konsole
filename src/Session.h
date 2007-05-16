@@ -62,7 +62,7 @@ Q_OBJECT
 
 public:
   Q_PROPERTY(QString sessionName READ title)
-  Q_PROPERTY(int sessionProcessId READ sessionProcessId)
+  Q_PROPERTY(int processId READ processId)
   Q_PROPERTY(QString keytab READ keyBindings WRITE setKeyBindings)
   Q_PROPERTY(QSize size READ size WRITE setSize)
 
@@ -72,26 +72,33 @@ public:
    * To start the terminal process, call the run() method,
    * after specifying the program and arguments
    * using setProgram() and setArguments()
+   *
+   * If no program or arguments are specified explicitly, the Session
+   * falls back to using the program specified in the SHELL environment 
+   * variable.
    */
   Session();
   ~Session();
 
   /** 
    * Returns true if the session is currently running.  This will be true
-   * after run() has been called.
+   * after run() has been called successfully.
    */
   bool running() const;
 
   /** 
-   * Sets the type of this session. 
-   * TODO: More documentation
+   * Sets the profile associated with this session.
+   *
+   * @param profileKey A key which can be used to obtain the current 
+   * profile settings from the SessionManager 
    */
-  void setType(const QString& typeKey);
+  void setProfileKey(const QString& profileKey);
   /** 
-   * Returns the type of this session. 
-   * TODO: More documentation 
+   * Returns the profile key associated with this session.
+   * This can be passed to the SessionManager to obtain the current
+   * profile settings. 
    */
-  QString type() const;
+  QString profileKey() const;
 
   /** 
    * Adds a new view for this session.    
@@ -297,7 +304,7 @@ public:
    * Returns the process id of the terminal process. 
    * This is the id used by the system API to refer to the process.
    */
-  int sessionProcessId() const;
+  int processId() const;
  
   /**
    * Returns the process id of the terminal's foreground process.
@@ -334,7 +341,7 @@ public slots:
    * (SIGHUP) to the terminal process and causes the done(Session*)
    * signal to be emitted.
    */   
-  bool closeSession();
+  void close();
  
   /** TODO: Document me */ 
   void setUserTitle( int, const QString &caption );
@@ -352,7 +359,7 @@ signals:
   void receivedData( const QString& text );
   
   /** Emitted when the session's title has changed. */
-  void updateTitle();
+  void titleChanged();
  
   /** 
    * Emitted when the activity state of this session changes.
@@ -360,7 +367,7 @@ signals:
    * @param state The new state of the session.  This may be one
    * of NOTIFYNORMAL, NOTIFYSILENCE or NOTIFYACTIVITY
    */
-  void notifySessionState(int state);
+  void stateChanged(int state);
 
   /** Emitted when a bell event occurs in the session. */
   void bellRequest( const QString& message );
@@ -371,13 +378,13 @@ signals:
    *
    * TODO: Document what the parameter does
    */
-  void changeTabTextColor(int);
+  void changeTabTextColorRequest(int);
 
   /**
    * Requests that the background color of views on this session
    * should be changed.
    */
-  void changeBackgroundColor(const QColor&);
+  void changeBackgroundColorRequest(const QColor&);
 
   void openUrlRequest(const QString& url);
 
@@ -390,7 +397,7 @@ signals:
    *
    * @param size The requested window size in terms of lines and columns.
    */
-  void resizeSession(const QSize& size);
+  void resizeRequest(const QSize& size);
 
 private slots:
   void done(int);
@@ -465,7 +472,7 @@ private:
 
   QColor         _modifiedBackground; // as set by: echo -en '\033]11;Color\007
 
-  QString        _type;
+  QString        _profileKey;
 
   static int lastSessionId;
   

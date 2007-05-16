@@ -184,7 +184,7 @@ Session* SessionManager::createSession(const QString& key )
 
     //configuration information found, create a new session based on this
     session = new Session();
-    session->setType(key);
+    session->setProfileKey(key);
     
     applyProfile(session,info,false);
 
@@ -307,13 +307,13 @@ void SessionManager::applyProfile(const QString& key , bool modifiedPropertiesOn
     while ( iter.hasNext() )
     {
         Session* next = iter.next();
-        if ( next->type() == key )
+        if ( next->profileKey() == key )
             applyProfile(next,info,modifiedPropertiesOnly);        
     }
 }
 void SessionManager::applyProfile(Session* session, const Profile* info , bool modifiedPropertiesOnly)
 {
-    session->setType( _types.key((Profile*)info) );
+    session->setProfileKey( _types.key((Profile*)info) );
 
     // Basic session settings
     if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Name) )
