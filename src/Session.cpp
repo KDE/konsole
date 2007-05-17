@@ -191,9 +191,9 @@ void Session::addView(TerminalDisplay* widget)
         // indicates whether or not it is interested in mouse signals
         connect( _emulation , SIGNAL(programUsesMouse(bool)) , widget , 
                SLOT(setUsesMouse(bool)) );
+  
+        widget->setScreenWindow(_emulation->createWindow());
     }
-
-    widget->setScreenWindow(_emulation->createWindow());
 
     //connect view signals and slots
     QObject::connect( widget ,SIGNAL(changedContentSizeSignal(int,int)),this,
