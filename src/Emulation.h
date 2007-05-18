@@ -1,5 +1,7 @@
 /*
     This file is part of Konsole, an X terminal.
+    
+    Copyright (C) 2007 by Robert Knight <robertknight@gmail.com>
     Copyright (C) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
 
     This program is free software; you can redistribute it and/or modify
@@ -41,24 +43,83 @@ class Screen;
 class ScreenWindow;
 class TerminalCharacterDecoder;
 
-enum { NOTIFYNORMAL=0, NOTIFYBELL=1, NOTIFYACTIVITY=2, NOTIFYSILENCE=3 };
+/** 
+ * This enum describes the available states which 
+ * the terminal emulation may be set to.
+ *
+ * These are the values used by Emulation::stateChanged() 
+ */
+enum 
+{ 
+    /** The emulation is currently receiving user input. */
+    NOTIFYNORMAL=0, 
+    /** 
+     * The terminal program has triggered a bell event
+     * to get the user's attention.
+     */
+    NOTIFYBELL=1, 
+    /** 
+     * The emulation is currently receiving data from its 
+     * terminal input.
+     */
+    NOTIFYACTIVITY=2,
+
+    // unused here? 
+    NOTIFYSILENCE=3 
+};
 
 /**
  * Base class for terminal emulation back-ends.
  *
- * The back-end is responsible for decoding the incoming character stream from the terminal
- * program and producing an output image of characters which it then sends to connected
- * views by calling their TerminalDisplay::setImage() method.
+ * The back-end is responsible for decoding an incoming character stream and 
+ * producing an ouput image of characters.
+ *
+ * When input from the terminal is received, the receiveData() slot should be called with
+ * the data which has arrived.  The emulation will process the data and update the 
+ * screen image accordingly.  The codec used to decode the incoming character stream
+ * into the unicode characters used internally can be specified using setCodec() 
+ *
+ * The size of the screen image can be specified by calling setImageSize() with the 
+ * desired number of lines and columns.  When new lines are added, old content
+ * is moved into a history store, which can be set by calling setHistory(). 
+ *
+ * The screen image can be accessed by creating a ScreenWindow onto this emulation 
+ * by calling createWindow().  Screen windows provide access to a section of the 
+ * output.  Each screen window covers the same number of lines and columns as the 
+ * image size returned by imageSize().  The screen window can be moved up and down
+ * and provides transparent access to both the current on-screen image and the 
+ * previous output.  The screen windows emit and outputChanged signal
+ * when the section of the image they are looking at changes.
+ * Graphical views can then render the contents of a screen window, listening for notifications
+ * of output changes from the screen window which they are associated with and updating 
+ * accordingly. 
  *
  * The emulation also is also responsible for converting input from the connected views such
  * as keypresses and mouse activity into a character string which can be sent
- * to the terminal program.
+ * to the terminal program.  Key presses can be processed by calling the sendKeyEvent() slot,
+ * while mouse events can be processed using the sendMouseEvent() slot.  When the character
+ * stream has been produced, the emulation will emit a sendData() signal with a pointer
+ * to the character buffer.  This data should be fed to the standard input of the terminal
+ * process.  The translation of key presses into an output character stream is performed
+ * using a lookup in a set of key bindings which map key sequences to output
+ * character sequences.  The name of the key bindings set used can be specified using
+ * setKeyBindings()
  *
- * As new lines of text are added to the output, older lines are transferred to a history
- * store, which can be set using the setHistory() method.
+ * The emulation maintains certain state information which changes depending on the 
+ * input received.  The emulation can be reset back to its starting state by calling 
+ * reset().  
+ *
+ * The emulation also maintains an activity state, which specifies whether
+ * terminal is currently active ( when data is received ), normal
+ * ( when the terminal is idle or receiving user input ) or trying
+ * to alert the user ( also known as a "Bell" event ).  The stateSet() signal
+ * is emitted whenever the activity state is set.  This can be used to determine
+ * how long the emulation has been active/idle for and also respond to
+ * a 'bell' event in different ways.
  */
 class Emulation : public QObject
-{ Q_OBJECT
+{ 
+Q_OBJECT
 
 public:
  
@@ -73,13 +134,15 @@ public:
    */
   ScreenWindow* createWindow();
 
-public:
   /** Returns the size of the screen image which the emulation produces */
   QSize imageSize();
 
-  /** Clears the history scroll. */
-  void clearHistory();
+  /**
+   * Returns the total number of lines, including those stored in the history.
+   */ 
+  int lineCount();
 
+  
   /** 
    * Sets the history store used by this emulation.  When new lines
    * are added to the output, older lines at the top of the screen are transferred to a history
@@ -91,31 +154,63 @@ public:
   void setHistory(const HistoryType&);
   /** Returns the history store used by this emulation.  See setHistory() */
   const HistoryType& history();
-  
+  /** Clears the history scroll. */
+  void clearHistory();
+
   /** 
-   * Copies the entire output history to a text stream.
+   * Copies the output history from @p startLine to @p endLine 
+   * into @p stream, using @p decoder to convert the terminal
+   * characters into text. 
    *
    * @param stream The text stream into which the output history will be written.
    * @param decoder A decoder which converts lines of terminal characters with 
    * appearance attributes into output text.  PlainTextDecoder is the most commonly
    * used decoder.
+   * @param startLine The first
    */
   virtual void writeToStream(QTextStream* stream,TerminalCharacterDecoder* decoder,int startLine,int endLine);
   
-  /**
-   * Returns the total number of lines
-   */ 
-  int lines();
-
+  
   /** Returns the codec used to decode incoming characters.  See setCodec() */
-  const QTextCodec *codec() { return _codec; }
+  const QTextCodec* codec() { return _codec; }
   /** Sets the codec used to decode incoming characters.  */
-  void setCodec(const QTextCodec *);
+  void setCodec(const QTextCodec*);
 
-public Q_SLOTS: // signals incoming from TerminalDisplay
+  /** 
+   * Convenience method.  
+   * Returns true if the current codec used to decode incoming
+   * characters is UTF-8
+   */
+  bool utf8() { Q_ASSERT(_codec); return _codec->mibEnum() == 106; }
+  
+
+  /** TODO Document me */
+  virtual char getErase() const;
+
+  /** 
+   * Sets the key bindings used to key events
+   * ( received through sendKeyEvent() ) into character
+   * streams to send to the terminal.
+   */
+  void setKeyBindings(const QString &id);
+  /** 
+   * Returns the emulation's current key bindings.
+   * See setKeyBindings()
+   */
+  QString keyBindings();
+
+  /** 
+   * Copies the current image into the history and clears the screen.
+   */
+  virtual void clearEntireScreen() =0;
+
+  /** Resets the state of the terminal. */
+  virtual void reset() =0;
+
+public slots: 
 
   /** Change the size of the emulation's image */
-  virtual void onImageSizeChange(int lines, int columns);
+  virtual void setImageSize(int lines, int columns);
   
   /** 
    * Interprets a sequence of characters and sends the result to the terminal.
@@ -124,41 +219,78 @@ public Q_SLOTS: // signals incoming from TerminalDisplay
   virtual void sendText(const QString& text) = 0;
 
   /** 
-   * Interprets a key press event.  
-   * This should be reimplemented in sub-classes to emit an appropriate character
-   * sequence via sndBlock() 
+   * Interprets a key press event and emits the sendString() signal with
+   * the resulting character stream. 
    */
-  virtual void onKeyPress(QKeyEvent*);
+  virtual void sendKeyEvent(QKeyEvent*);
  
   /** 
    * Converts information about a mouse event into an xterm-compatible escape
    * sequence and emits the character sequence via sendString()
    */
-  virtual void onMouse(int buttons, int column, int line, int eventType);
+  virtual void sendMouseEvent(int buttons, int column, int line, int eventType);
   
   /**
    * Sends a string of characters to the foreground terminal process
    */
   virtual void sendString(const char *) = 0;
 
-  virtual void isBusySelecting(bool busy);
+  /** Processes an incoming block of text. */
+  void receiveData(const char* txt,int len);
 
-public Q_SLOTS: // signals incoming from data source
+signals:
 
-  /** Processes an incoming block of text, triggering an update of connected views if necessary. */
-  void onReceiveBlock(const char* txt,int len);
+  /** 
+   * Emitted when a buffer of data is ready to send to the 
+   * standard input of the terminal.
+   *
+   * @param data The buffer of data ready to be sent
+   * @paran len The length of @p data in bytes
+   */
+  void sendData(const char* data,int len);
 
-Q_SIGNALS:
+  /** 
+   * Requests that sending of input to the emulation
+   * from the terminal process be suspended or resumed.
+   *
+   * @param suspend If true, requests that sending of 
+   * input from the terminal process' stdout be 
+   * suspended.  Otherwise requests that sending of
+   * input be resumed. 
+   */
+  void lockPtyRequest(bool suspend);
 
-  void lockPty(bool);
-  void useUtf8(bool);
-  void sendBlock(const char* txt,int len);
-  void setColumnCount(int columns);
-  void setScreenSize(int columns, int lines);
-  void changeTitle(int arg, const char* str);
-  void notifySessionState(int state);
+  /**
+   * Requests that the pty used by the terminal process
+   * be set to UTF 8 mode.  
+   *
+   * See KPty::setUtf8Mode()
+   *
+   * TODO: More documentation
+   */
+  void useUtf8Request(bool);
+
+  /**
+   * Emitted when the activity state of the emulation is set.
+   *
+   * @param state The new activity state, one of NOTIFYNORMAL, NOTIFYACTIVITY
+   * or NOTIFYBELL
+   */
+  void stateSet(int state);
+
+  /** TODO Document me */
   void zmodemDetected();
-  void changeTabTextColor(int color);
+
+
+  /**
+   * Requests that the color of the text used
+   * to represent the tabs associated with this
+   * emulation be changed.  This is a Konsole-specific
+   * extension from pre-KDE 4 times.
+   *
+   * TODO: Document how the parameter works.
+   */
+  void changeTabTextColorRequest(int color);
 
   /** 
    * This is emitted when the program running in the shell indicates whether or
@@ -169,38 +301,62 @@ Q_SIGNALS:
    */
   void programUsesMouse(bool usesMouse);
 
-  /** Emitted to trigger an update of attached views */
-  void updateViews();
-
-
-public:
   /** 
+   * Emitted when the contents of the screen image change.
+   * The emulation buffers the updates from successive image changes,
+   * and only emits outputChanged() at sensible intervals when
+   * there is a lot of terminal activity.
+   *
+   * Normally there is no need for objects other than the screen windows
+   * created with createWindow() to listen for this signal.
+   *
+   * ScreenWindow objects created using createWindow() will emit their
+   * own outputChanged() signal in response to this signal. 
+   */
+  void outputChanged();
+
+  /**
+   * Emitted when the program running in the terminal wishes to update the 
+   * session's title.  This also allows terminal programs to customize other
+   * aspects of the terminal emulation display. 
+   *
+   * This signal is emitted when the escape sequence "\033]ARG;VALUE\007"
+   * is received in the input string, where ARG is a number specifying what
+   * should change and VALUE is a string specifying the new value.
+   *
+   * TODO:  The name of this method is not very accurate since this method
+   * is used to perform a whole range of tasks besides just setting
+   * the user-title of the session.    
+   *
+   * @param title Specifies what to change.
+   *    0 - Set window icon text and session title to @p newTitle
+   *    1 - Set window icon text to @p newTitle
+   *    2 - Set session title to @p newTitle
+   *    11 - Set the session's default background color to @p newTitle,
+   *         where @p newTitle can be an HTML-style string (#RRGGBB) or a named
+   *         color (eg 'red', 'blue').  
+   *         See http://doc.trolltech.com/4.2/qcolor.html#setNamedColor for more
+   *         details.
+   *    31 - Supposedly treats @p newTitle as a URL and opens it (NOT IMPLEMENTED)
+   *    32 - Sets the icon associated with the session.  @p newTitle is the name 
+   *    of the icon to use, which can be the name of any icon in the current KDE icon
+   *    theme (eg: 'konsole', 'kate', 'folder_home')
+   * @param newTitle Specifies the new title 
+   */
+
+  void titleChanged(int title,const QString& newTitle);
+
+protected:
+  virtual void setMode  (int mode) = 0;
+  virtual void resetMode(int mode) = 0;
+   
+ /** 
    * Processes an incoming character.  See onReceiveBlock()
    * @p ch A unicode character code. 
    */
-  virtual void onReceiveChar(int ch);
+  virtual void receiveChar(int ch);
 
-  virtual void setMode  (int) = 0;
-  virtual void resetMode(int) = 0;
-
-  //REMOVED
-  //virtual void setConnect(bool r);
-  //bool isConnected() { return connected; }
-  
-  bool utf8() { Q_ASSERT(_codec); return _codec->mibEnum() == 106; }
-
-  virtual char getErase();
-
-  void setColumns(int columns);
-
-  void setKeymap(const QString &id);
-  QString keymap();
-
-  virtual void clearEntireScreen() =0;
-  virtual void reset() =0;
-
-protected:
- /** 
+  /** 
    * Sets the active screen
    *
    * @param index 0 to switch to the primary screen, or 1 to switch to the alternate screen
@@ -233,7 +389,7 @@ protected:
 
   KeyTrans* _keyTranslator; // the keyboard layout
 
-protected Q_SLOTS:
+protected slots:
   /** 
    * Schedules an update of attached views.
    * Repeated calls to bufferedUpdate() in close succession will result in only a single update,
@@ -241,9 +397,7 @@ protected Q_SLOTS:
    */
   void bufferedUpdate();
 
-// refreshing related material.
-// this is localized in the class.
-private Q_SLOTS: 
+private slots: 
 
   // triggered by timer, causes the emulation to send an updated screen image to each
   // view

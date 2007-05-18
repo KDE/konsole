@@ -966,7 +966,7 @@ void SaveHistoryTask::jobDataRequested(KIO::Job* job , QByteArray& data)
         // note:  when retrieving lines from the emulation, 
         // the first line is at index 0.
         
-        int sessionLines = info.session->emulation()->lines();
+        int sessionLines = info.session->emulation()->lineCount();
 
         if ( sessionLines-1 == info.lastLineFetched )
             return; // if there is no more data to transfer then stop the job

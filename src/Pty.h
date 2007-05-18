@@ -54,7 +54,7 @@ Q_OBJECT
     void setWriteable(bool writeable);
     QString error() { return m_strError; }
     void setXonXoff(bool on);
-    void setSize(int lines, int cols);
+    void setWindowSize(int lines, int cols);
     void setErase(char erase);
 
     int foregroundProcessGroup() const;

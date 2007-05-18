@@ -94,13 +94,13 @@ Session::Session() :
     //create emulation backend
     _emulation = new Vt102Emulation();
 
-    connect( _emulation, SIGNAL( changeTitle( int, const QString & ) ),
+    connect( _emulation, SIGNAL( titleChanged( int, const QString & ) ),
            this, SLOT( setUserTitle( int, const QString & ) ) );
-    connect( _emulation, SIGNAL( notifySessionState(int) ),
-           this, SLOT( activityStateChanged(int) ) );
+    connect( _emulation, SIGNAL( stateSet(int) ),
+           this, SLOT( activityStateSet(int) ) );
     connect( _emulation, SIGNAL( zmodemDetected() ), this , 
             SLOT( fireZModemDetected() ) );
-    connect( _emulation, SIGNAL( changeTabTextColor( int ) ),
+    connect( _emulation, SIGNAL( changeTabTextColorRequest( int ) ),
            this, SIGNAL( changeTabTextColorRequest( int ) ) );
 
    
@@ -109,10 +109,10 @@ Session::Session() :
     
     connect( _shellProcess,SIGNAL(block_in(const char*,int)),this,
             SLOT(onReceiveBlock(const char*,int)) );
-    connect( _emulation,SIGNAL(sendBlock(const char*,int)),_shellProcess,
+    connect( _emulation,SIGNAL(sendData(const char*,int)),_shellProcess,
             SLOT(send_bytes(const char*,int)) );
-    connect( _emulation,SIGNAL(lockPty(bool)),_shellProcess,SLOT(lockPty(bool)) );
-    connect( _emulation,SIGNAL(useUtf8(bool)),_shellProcess,SLOT(useUtf8(bool)) );
+    connect( _emulation,SIGNAL(lockPtyRequest(bool)),_shellProcess,SLOT(lockPty(bool)) );
+    connect( _emulation,SIGNAL(useUtf8Request(bool)),_shellProcess,SLOT(useUtf8(bool)) );
 
     
     connect( _shellProcess,SIGNAL(done(int)), this,SLOT(done(int)) );
@@ -181,9 +181,9 @@ void Session::addView(TerminalDisplay* widget)
     {
         // connect emulation - view signals and slots
         connect( widget , SIGNAL(keyPressedSignal(QKeyEvent*)) , _emulation ,
-               SLOT(onKeyPress(QKeyEvent*)) );
+               SLOT(sendKeyEvent(QKeyEvent*)) );
         connect( widget , SIGNAL(mouseSignal(int,int,int,int)) , _emulation , 
-               SLOT(onMouse(int,int,int,int)) );
+               SLOT(sendMouseEvent(int,int,int,int)) );
         connect( widget , SIGNAL(sendStringToEmu(const char*)) , _emulation ,
                SLOT(sendString(const char*)) ); 
 
@@ -400,7 +400,7 @@ void Session::monitorTimerDone()
   _notifiedActivity=false;
 }
 
-void Session::activityStateChanged(int state)
+void Session::activityStateSet(int state)
 {
   if (state==NOTIFYBELL) 
   {
@@ -458,8 +458,8 @@ void Session::updateTerminalSize()
     // backend emulation must have a _terminal of at least 1 column x 1 line in size
     if ( minLines > 0 && minColumns > 0 )
     {
-        _emulation->onImageSizeChange( minLines , minColumns );
-        _shellProcess->setSize( minLines , minColumns );
+        _emulation->setImageSize( minLines , minColumns );
+        _shellProcess->setWindowSize( minLines , minColumns );
     }
 }
 
@@ -533,7 +533,7 @@ Emulation* Session::emulation() const
 
 QString Session::keyBindings() const
 {
-  return _emulation->keymap();
+  return _emulation->keyBindings();
 }
 
 QString Session::terminalType() const
@@ -553,7 +553,7 @@ int Session::sessionId() const
 
 void Session::setKeyBindings(const QString &id)
 {
-  _emulation->setKeymap(id);
+  _emulation->setKeyBindings(id);
 }
 
 void Session::setTitle(const QString& title)
@@ -628,7 +628,7 @@ void Session::setMonitorActivity(bool _monitor)
   _monitorActivity=_monitor;
   _notifiedActivity=false;
 
-  activityStateChanged(NOTIFYNORMAL);
+  activityStateSet(NOTIFYNORMAL);
 }
 
 void Session::setMonitorSilence(bool _monitor)
@@ -645,7 +645,7 @@ void Session::setMonitorSilence(bool _monitor)
   else
     _monitorTimer->stop();
 
-  activityStateChanged(NOTIFYNORMAL);
+  activityStateSet(NOTIFYNORMAL);
 }
 
 void Session::setMonitorSilenceSeconds(int seconds)
@@ -792,7 +792,7 @@ void Session::zmodemDone()
 
 void Session::onReceiveBlock( const char* buf, int len )
 {
-    _emulation->onReceiveBlock( buf, len );
+    _emulation->receiveData( buf, len );
     emit receivedData( QString::fromLatin1( buf, len ) );
 }
 

@@ -342,7 +342,7 @@ void Vt102Emulation::initTokenizer()
 
 // process an incoming unicode character
 
-void Vt102Emulation::onReceiveChar(int cc)
+void Vt102Emulation::receiveChar(int cc)
 { 
   int i;
   if (cc == 127) return; //VT100: ignore.
@@ -364,7 +364,7 @@ void Vt102Emulation::onReceiveChar(int cc)
   if (getMode(MODE_Ansi)) // decide on proper action
   {
     if (lec(1,0,ESC)) {                                                       return; }
-    if (lec(1,0,ESC+128)) { s[0] = ESC; onReceiveChar('[');                   return; }
+    if (lec(1,0,ESC+128)) { s[0] = ESC; receiveChar('[');                   return; }
     if (les(2,1,GRP)) {                                                       return; }
     if (Xte         ) { XtermHack();                            resetToken(); return; }
     if (Xpe         ) {                                                       return; }
@@ -433,7 +433,7 @@ void Vt102Emulation::updateTitle()
 	QListIterator<int> iter( _pendingTitleUpdates.keys() );
 	while (iter.hasNext()) {
 		int arg = iter.next();
-		emit changeTitle( arg , _pendingTitleUpdates[arg] );	
+		emit titleChanged( arg , _pendingTitleUpdates[arg] );	
 	}
 
     _pendingTitleUpdates.clear();	
@@ -505,7 +505,7 @@ switch( N )
     case TY_CTL('D'      ) : /* EOT: ignored                      */ break;
     case TY_CTL('E'      ) :      reportAnswerBack     (          ); break; //VT100
     case TY_CTL('F'      ) : /* ACK: ignored                      */ break;
-    case TY_CTL('G'      ) : emit notifySessionState(NOTIFYBELL);
+    case TY_CTL('G'      ) : emit stateSet(NOTIFYBELL);
                                 break; //VT100
     case TY_CTL('H'      ) : _currentScreen->BackSpace            (          ); break; //VT100
     case TY_CTL('I'      ) : _currentScreen->Tabulate             (          ); break; //VT100
@@ -588,10 +588,10 @@ switch( N )
     case TY_ESC_DE('8'      ) : _currentScreen->helpAlign            (          ); break;
 
 // resize = \e[8;<row>;<col>t
-    case TY_CSI_PS('t',   8) : setScreenSize( q /* colums */, p /* lines */ );    break;
+    case TY_CSI_PS('t',   8) : setImageSize( q /* colums */, p /* lines */ );    break;
 
 // change tab text color : \e[28;<color>t  color: 0-16,777,215
-    case TY_CSI_PS('t',   28) : emit changeTabTextColor   ( p        );          break;
+    case TY_CSI_PS('t',   28) : emit changeTabTextColorRequest      ( p        );          break;
 
     case TY_CSI_PS('K',   0) : _currentScreen->clearToEndOfLine     (          ); break;
     case TY_CSI_PS('K',   1) : _currentScreen->clearToBeginOfLine   (          ); break;
@@ -704,16 +704,8 @@ switch( N )
 
     case TY_CSI_PR('l',   2) :        resetMode      (MODE_Ansi     ); break; //VT100
 
-    case TY_CSI_PR('h',   3) : setColumns (132) ; 
-			       			   clearEntireScreen();
-			       			   setDefaultMargins(); 
-			       			   _currentScreen->setCursorYX(0,0);
-			       					       break; 							  //VT100
-    case TY_CSI_PR('l',   3) : setColumns (80)  ; 
-			       			   clearEntireScreen(); 	
-			       			   setDefaultMargins();
-							   _currentScreen->setCursorYX(0,0);
-			       					       break; 							  //VT100
+    case TY_CSI_PR('h',   3) : clearScreenAndSetColumns(132);          break; //VT100
+    case TY_CSI_PR('l',   3) : clearScreenAndSetColumns(80);           break; //VT100
 
     case TY_CSI_PR('h',   4) : /* IGNORED: soft scrolling           */ break; //VT100
     case TY_CSI_PR('l',   4) : /* IGNORED: soft scrolling           */ break; //VT100
@@ -844,6 +836,14 @@ switch( N )
   };
 }
 
+void Vt102Emulation::clearScreenAndSetColumns(int columnCount)
+{
+    setImageSize(_currentScreen->getLines(),columnCount); 
+    clearEntireScreen();
+    setDefaultMargins(); 
+    _currentScreen->setCursorYX(0,0);
+}
+
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /*                          Terminal to Host protocol                        */
@@ -863,7 +863,7 @@ switch( N )
 
 void Vt102Emulation::sendString(const char* s)
 {
-  emit sendBlock(s,strlen(s));
+  emit sendData(s,strlen(s));
 }
 
 // Replies ----------------------------------------------------------------- --
@@ -953,7 +953,7 @@ void Vt102Emulation::reportAnswerBack()
 	1 = Mouse drag
 */
 
-void Vt102Emulation::onMouse( int cb, int cx, int cy , int eventType )
+void Vt102Emulation::sendMouseEvent( int cb, int cx, int cy , int eventType )
 { char tmp[20];
   if (  cx<1 || cy<1 ) return;
   // normal buttons are passed as 0x20 + button,
@@ -976,12 +976,12 @@ void Vt102Emulation::scrollLock(const bool lock)
   if (lock)
   {
     _holdScreen = true;
-    emit lockPty(true);
+    emit lockPtyRequest(true);
   }
   else
   {
     _holdScreen = false;
-    emit lockPty(false);
+    emit lockPtyRequest(false);
   }
 #if defined(HAVE_XKB)
   if (_holdScreen)
@@ -1007,7 +1007,7 @@ void Vt102Emulation::sendText( const QString& text )
                     0, 
                     Qt::NoModifier, 
                     text);
-    onKeyPress(&event); // expose as a big fat keypress event
+    sendKeyEvent(&event); // expose as a big fat keypress event
   }
 
 }
@@ -1017,7 +1017,7 @@ void Vt102Emulation::sendText( const QString& text )
    the complications towards a configuration file [see KeyTrans class].
 */
 
-void Vt102Emulation::onKeyPress( QKeyEvent* ev )
+void Vt102Emulation::sendKeyEvent( QKeyEvent* ev )
 {
 //printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().length(),ev->text().length()?ev->text().ascii()[0]:0);
 
@@ -1057,7 +1057,7 @@ void Vt102Emulation::onKeyPress( QKeyEvent* ev )
   
   if (cmd==CMD_send) {
     if ((ev->modifiers() & Qt::AltModifier) && !metaspecified ) sendString("\033");
-    emit sendBlock(txt.constData(), txt.length());
+    emit sendData(txt.constData(), txt.length());
     return;
   }
 
@@ -1072,7 +1072,7 @@ void Vt102Emulation::onKeyPress( QKeyEvent* ev )
     //        latin1 locales at least. Please anyone find a clean solution (malte)
     if (ev->modifiers() & Qt::ControlModifier)
       s.fill(ev->text().toAscii()[0], 1);
-    emit sendBlock(s.data(),s.length());              // we may well have s.length() > 1 
+    emit sendData(s.data(),s.length());              // we may well have s.length() > 1 
     return;
   }
 }
@@ -1279,7 +1279,10 @@ void Vt102Emulation::saveMode(int m)
 
 void Vt102Emulation::restoreMode(int m)
 {
-  if(_saveParm.mode[m]) setMode(m); else resetMode(m);
+  if (_saveParm.mode[m]) 
+      setMode(m); 
+  else 
+      resetMode(m);
 }
 
 bool Vt102Emulation::getMode(int m)
@@ -1326,7 +1329,7 @@ bool Vt102Emulation::getMode(int m)
   }
 }*/
 
-char Vt102Emulation::getErase()
+char Vt102Emulation::getErase() const
 {
   int cmd = CMD_none; 
   QByteArray txt; 
@@ -1387,3 +1390,4 @@ void Vt102Emulation::ReportErrorToken()
 }
 
 #include "Vt102Emulation.moc"
+

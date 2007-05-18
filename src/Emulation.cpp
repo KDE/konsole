@@ -54,7 +54,7 @@
    We use a refreshing algorithm here that has been adoped from rxvt/kvt.
 
    By this, refreshing is driven by a timer, which is (re)started whenever
-   a new bunch of data to be interpreted by the emulation arives at `onReceiveBlock'.
+   a new bunch of data to be interpreted by the emulation arives at `receiveData'.
    As soon as no more data arrive for `BULK_TIMEOUT' milliseconds, we trigger
    refresh. This rule suits both bulk display operation as done by curses as
    well as individual characters typed.
@@ -120,7 +120,7 @@ Emulation::Emulation() :
   QObject::connect(&_bulkTimer1, SIGNAL(timeout()), this, SLOT(showBulk()) );
   QObject::connect(&_bulkTimer2, SIGNAL(timeout()), this, SLOT(showBulk()) );
    
-  setKeymap(0); // Default keymap
+  setKeyBindings(0); // Default keymap
 }
 
 ScreenWindow* Emulation::createWindow()
@@ -133,7 +133,7 @@ ScreenWindow* Emulation::createWindow()
     connect(window , SIGNAL(selectionChanged()),
             this , SLOT(bufferedUpdate()));
 
-    connect(this , SIGNAL(updateViews()),
+    connect(this , SIGNAL(outputChanged()),
             window , SLOT(notifyOutputChanged()) );
     return window;
 }
@@ -199,7 +199,7 @@ void Emulation::setCodec(const QTextCodec * qtc)
   delete _decoder;
   _decoder = _codec->makeDecoder();
 
-  emit useUtf8(utf8());
+  emit useUtf8Request(utf8());
 }
 
 void Emulation::setCodec(EmulationCodec codec)
@@ -210,12 +210,12 @@ void Emulation::setCodec(EmulationCodec codec)
         setCodec( QTextCodec::codecForLocale() );
 }
 
-void Emulation::setKeymap(const QString &id)
+void Emulation::setKeyBindings(const QString &id)
 {
   _keyTranslator = KeyTrans::find(id);
 }
 
-QString Emulation::keymap()
+QString Emulation::keyBindings()
 {
   return _keyTranslator->id();
 }
@@ -233,7 +233,7 @@ QString Emulation::keymap()
 /*!
 */
 
-void Emulation::onReceiveChar(int c)
+void Emulation::receiveChar(int c)
 // process application unicode input to terminal
 // this is a trivial scanner
 {
@@ -244,7 +244,7 @@ void Emulation::onReceiveChar(int c)
     case '\t'      : _currentScreen->Tabulate();                  break;
     case '\n'      : _currentScreen->NewLine();                   break;
     case '\r'      : _currentScreen->Return();                    break;
-    case 0x07      : emit notifySessionState(NOTIFYBELL);
+    case 0x07      : emit stateSet(NOTIFYBELL);
                      break;
     default        : _currentScreen->ShowCharacter(c);            break;
   };
@@ -259,9 +259,9 @@ void Emulation::onReceiveChar(int c)
 /*!
 */
 
-void Emulation::onKeyPress( QKeyEvent* ev )
+void Emulation::sendKeyEvent( QKeyEvent* ev )
 {
-  emit notifySessionState(NOTIFYNORMAL);
+  emit stateSet(NOTIFYNORMAL);
   
   if (!ev->text().isEmpty())
   { // A block of text
@@ -269,7 +269,7 @@ void Emulation::onKeyPress( QKeyEvent* ev )
     // We should do a conversion here, but since this
     // routine will never be used, we simply emit plain ascii.
     //emit sendBlock(ev->text().toAscii(),ev->text().length());
-    emit sendBlock(ev->text().toUtf8(),ev->text().length());
+    emit sendData(ev->text().toUtf8(),ev->text().length());
   }
 }
 
@@ -278,7 +278,7 @@ void Emulation::sendString(const char*)
     // default implementation does nothing
 }
 
-void Emulation::onMouse(int /*buttons*/, int /*column*/, int /*row*/, int /*eventType*/)
+void Emulation::sendMouseEvent(int /*buttons*/, int /*column*/, int /*row*/, int /*eventType*/)
 {
     // default implementation does nothing
 }
@@ -290,9 +290,9 @@ void Emulation::onMouse(int /*buttons*/, int /*column*/, int /*row*/, int /*even
 TODO: Character composition from the old code.  See #96536
 */
 
-void Emulation::onReceiveBlock(const char* text, int length)
+void Emulation::receiveData(const char* text, int length)
 {
-	emit notifySessionState(NOTIFYACTIVITY);
+	emit stateSet(NOTIFYACTIVITY);
 
 	bufferedUpdate();
     	
@@ -301,7 +301,7 @@ void Emulation::onReceiveBlock(const char* text, int length)
 	//send characters to terminal emulator
 	for (int i=0;i<unicodeText.length();i++)
 	{
-		onReceiveChar(unicodeText[i].unicode());
+		receiveChar(unicodeText[i].unicode());
 	}
 
 	//look for z-modem indicator
@@ -407,11 +407,6 @@ void Emulation::clearSelection() {
 
 #endif 
 
-void Emulation::isBusySelecting(bool busy)
-{
-  _currentScreen->setBusySelecting(busy);
-}
-
 void Emulation::writeToStream(QTextStream* stream , 
                                TerminalCharacterDecoder* _decoder , 
                                int startLine ,
@@ -420,7 +415,7 @@ void Emulation::writeToStream(QTextStream* stream ,
   _currentScreen->writeToStream(stream,_decoder,startLine,endLine);
 }
 
-int Emulation::lines()
+int Emulation::lineCount()
 {
     // sum number of lines currently on _screen plus number of lines in history
     return _currentScreen->getLines() + _currentScreen->getHistLines();
@@ -438,7 +433,7 @@ void Emulation::showBulk()
     _bulkTimer1.stop();
     _bulkTimer2.stop();
 
-    emit updateViews();
+    emit outputChanged();
 
     _currentScreen->resetScrolledLines();
 }
@@ -454,7 +449,7 @@ void Emulation::bufferedUpdate()
    }
 }
 
-char Emulation::getErase()
+char Emulation::getErase() const
 {
   return '\b';
 }
@@ -467,7 +462,7 @@ char Emulation::getErase()
     and to the related serial line.
 */
 
-void Emulation::onImageSizeChange(int lines, int columns)
+void Emulation::setImageSize(int lines, int columns)
 {
   Q_ASSERT( lines > 0 );
   Q_ASSERT( columns > 0 );
@@ -481,13 +476,6 @@ void Emulation::onImageSizeChange(int lines, int columns)
 QSize Emulation::imageSize()
 {
   return QSize(_currentScreen->getColumns(), _currentScreen->getLines());
-}
-
-void Emulation::setColumns(int columns)
-{
-  //FIXME: this goes strange ways.
-  //       Can we put this straight or explain it at least?
-  emit setColumnCount(columns);
 }
 
 ushort ExtendedCharTable::extendedCharHash(ushort* unicodePoints , ushort length) const
@@ -588,3 +576,4 @@ ExtendedCharTable ExtendedCharTable::instance;
 
 
 #include "Emulation.moc"
+

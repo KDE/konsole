@@ -1,5 +1,7 @@
 /*
     This file is part of Konsole, an X terminal.
+    
+    Copyright (C) 2007 by Robert Knight <robertknight@gmail.com>
     Copyright (C) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
 
     This program is free software; you can redistribute it and/or modify
@@ -45,11 +47,10 @@ class TerminalDisplay;
 class ZModemDialog;
 
 /**
- * Represents a terminal session consisting of a pseudo-teletype (or PTY) which 
- * handles I/O between the terminal process and Konsole, and a terminal 
- * emulation ( Emulation and subclasses ) which
- * processes the output stream from the PTY and produces a character image which
- * is then shown on displays which are connected to the session.
+ * Represents a terminal session consisting of a pseudo-teletype and a terminal emulation.
+ * The pseudo-teletype (or PTY) handles I/O between the terminal process and Konsole.
+ * The terminal emulation ( Emulation and subclasses ) processes the output stream from the 
+ * PTY and produces a character image which is then shown on views connected to the session. 
  *
  * Each Session can be connected to one or more views by using the addView() method.
  * The attached views can then display output from the program running in the terminal
@@ -410,7 +411,7 @@ private slots:
   void monitorTimerDone();
   void onContentSizeChange(int height, int width);
 
-  void activityStateChanged(int);
+  void activityStateSet(int);
 
   //automatically detach views from sessions when view is destroyed
   void viewDestroyed(QObject* view);

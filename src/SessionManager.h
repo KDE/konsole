@@ -126,10 +126,8 @@ public:
     QString defaultProfileKey() const;
 
     /**
-     * Creates a new session from the specified profile, using the settings specified
-     * using addSetting() and from profile associated with the specified key.
-     * The profile must have been previously registered using addprofile()
-     * or upon construction of the SessionManager. 
+     * Creates a new session using the settings specified by the specified
+     * profile key.
      *
      * The new session has no views associated with it.  A new TerminalDisplay view
      * must be created in order to display the output from the terminal session and
@@ -195,7 +193,11 @@ public:
      */
     void setFavorite(const QString& key , bool favorite);
 
-    /** Loads all available profiles. */
+    /** 
+     * Loads all available profiles.  This involves reading each
+     * profile configuration file from disk and parsing it.  
+     * Therefore it should only be done when necessary.
+     */
     void loadAllProfiles();
 
     /**

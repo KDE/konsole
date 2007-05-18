@@ -97,7 +97,7 @@ void Pty::donePty()
   emit done(exitStatus());
 }
 
-void Pty::setSize(int lines, int cols)
+void Pty::setWindowSize(int lines, int cols)
 {
   pty()->setWinSize(lines, cols);
 }
@@ -119,12 +119,12 @@ void Pty::setErase(char erase)
   
   if(tcgetattr(fd, &tios))
   {
-    qWarning("Uh oh.. can't get terminal attributes..");
+    qWarning("Unable to get terminal attributes.");
     return;
   }
   tios.c_cc[VERASE] = erase;
   if(tcsetattr(fd, TCSANOW, &tios))
-    qWarning("Uh oh.. can't set terminal attributes..");
+    qWarning("Unable to set terminal attributes.");
 }
 
 /*!
