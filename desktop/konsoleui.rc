@@ -16,7 +16,7 @@
         <Menu name="edit"><text>Edit</text>
             <DefineGroup name="session-edit-operations" />
         </Menu>
-        <Menu name="history"><text>History</text>
+        <Menu name="history"><text>Scrollback</text>
             <DefineGroup name="session-history-operations"/>            
         </Menu>
         <Menu name="view"><text>View</text>
@@ -35,6 +35,7 @@
             <Action name="merge-windows"/>
             <Separator/>
             <Action name="hide-menubar"/>
+            <Action name="view-full-screen"/>
         </Menu>
         <Action name="bookmark"/>
         <Menu name="settings"><text>Settings</text>

@@ -131,6 +131,7 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
     _ui->initialDirEdit->setText( info->defaultWorkingDirectory() );
     _ui->initialDirEdit->setCompletionObject( new KUrlCompletion(KUrlCompletion::DirCompletion) );
     _ui->initialDirEdit->setClearButtonShown(true);
+    _ui->dirSelectButton->setIcon( KIcon("folder-open") );
     _ui->iconSelectButton->setIcon( KIcon(info->icon()) );
 
     // tab title format
@@ -363,7 +364,10 @@ bool EditProfileDialog::eventFilter( QObject* watched , QEvent* event )
 {
     if ( watched == _ui->colorSchemeList && event->type() == QEvent::Leave )
     {
-        unpreview(Profile::ColorScheme);
+        if ( _tempProfile->isPropertySet(Profile::ColorScheme) )
+            preview(Profile::ColorScheme,_tempProfile->colorScheme());
+        else
+            unpreview(Profile::ColorScheme);
     }
 
     return KDialog::eventFilter(watched,event);
@@ -464,7 +468,8 @@ void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
         
         updateColorSchemeList();
 
-        const QString& currentScheme = SessionManager::instance()->profile(_profileKey)->colorScheme();
+        Profile* profile = SessionManager::instance()->profile(_profileKey);
+        const QString& currentScheme = profile->colorScheme();
 
         // the next couple of lines may seem slightly odd,
         // but they force any open views based on the current profile
@@ -472,6 +477,7 @@ void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
         if ( newScheme->name() == currentScheme )
         {
             _tempProfile->setProperty(Profile::ColorScheme,newScheme->name());
+            preview(Profile::ColorScheme,newScheme->name());
         }
     }
 }

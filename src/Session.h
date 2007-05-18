@@ -64,7 +64,7 @@ Q_OBJECT
 public:
   Q_PROPERTY(QString name READ nameTitle)
   Q_PROPERTY(int processId READ processId)
-  Q_PROPERTY(QString keytab READ keyBindings WRITE setKeyBindings)
+  Q_PROPERTY(QString keyBindings READ keyBindings WRITE setKeyBindings)
   Q_PROPERTY(QSize size READ size WRITE setSize)
 
   /** 

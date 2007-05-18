@@ -99,6 +99,8 @@ class MainWindow : public KXmlGuiWindow
         void activeViewTitleChanged(ViewProperties*);
 
         void sessionListChanged(const QList<QAction*>& actions);
+        void viewFullScreen(bool fullScreen);
+
     private:
         void setupActions();
         void setupWidgets();

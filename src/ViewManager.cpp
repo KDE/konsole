@@ -121,6 +121,7 @@ void ViewManager::setupActions()
         connect( splitTopBottomAction , SIGNAL(triggered()) , this , SLOT(splitTopBottom()));
 
         KAction* closeActiveAction = new KAction( i18n("Close Active") , this );
+        closeActiveAction->setIcon(KIcon("view-remove"));
         closeActiveAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_S) );
         closeActiveAction->setEnabled(false);
         collection->addAction("close-active-view",closeActiveAction);

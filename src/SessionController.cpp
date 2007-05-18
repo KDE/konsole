@@ -417,7 +417,7 @@ void SessionController::setupActions()
     connect( action , SIGNAL(triggered()) , this , SLOT(decreaseTextSize()) );
 
     // History
-    _searchToggleAction = new KAction(i18n("Search History..."),this);
+    _searchToggleAction = new KAction(i18n("Search Output..."),this);
     _searchToggleAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_F) );
     _searchToggleAction->setIcon( KIcon("edit-find") );
     action = collection->addAction("search-history" , _searchToggleAction);
@@ -438,20 +438,21 @@ void SessionController::setupActions()
     connect( _findPreviousAction , SIGNAL(triggered()) , this , SLOT(findPreviousInHistory()) );
     
     action = collection->addAction("save-history");
-    action->setText( i18n("Save History...") );
+    action->setText( i18n("Save Output...") );
+    action->setIcon( KIcon("document-save-as") );
     connect( action , SIGNAL(triggered()) , this , SLOT(saveHistory()) );
    
     action = collection->addAction("history-options");
-    action->setText( i18n("History Options") );
+    action->setText( i18n("Scrollback Options") );
     action->setIcon( KIcon("configure") );
     connect( action , SIGNAL(triggered()) , this , SLOT(showHistoryOptions()) );
 
     action = collection->addAction("clear-history");
-    action->setText( i18n("Clear History") );
+    action->setText( i18n("Clear Scrollback") );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearHistory()) );
 
     action = collection->addAction("clear-history-and-reset");
-    action->setText( i18n("Clear History && Reset") );
+    action->setText( i18n("Clear Scrollback && Reset") );
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_X) );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearHistoryAndReset()) );
 

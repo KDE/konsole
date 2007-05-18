@@ -46,7 +46,7 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     ,  _defaultLineCount(1000)
 {
     // basic dialog properties
-    setPlainCaption( i18n("History Options") );
+    setPlainCaption( i18n("Scrollback Options") );
     setButtons(  Default | Ok | Cancel );
     setDefaultButton(Ok);
     setModal( false );
@@ -59,9 +59,9 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
 
     QButtonGroup* modeGroup = new QButtonGroup(this);
 
-    _noHistoryButton = new QRadioButton( i18n("No history") );
-    _fixedHistoryButton = new QRadioButton( i18n("Fixed size history:") );
-    _unlimitedHistoryButton = new QRadioButton( i18n("Unlimited history") );
+    _noHistoryButton = new QRadioButton( i18n("No scrollback") );
+    _fixedHistoryButton = new QRadioButton( i18n("Fixed size scrollback: ") );
+    _unlimitedHistoryButton = new QRadioButton( i18n("Unlimited scrollback") );
 
     modeGroup->addButton(_noHistoryButton);
     modeGroup->addButton(_fixedHistoryButton);

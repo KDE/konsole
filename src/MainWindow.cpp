@@ -33,6 +33,7 @@
 #include <KMenu>
 #include <KMenuBar>
 #include <KService>
+#include <KToggleFullScreenAction>
 #include <KToolInvocation>
 #include <kstandardaction.h>
 #include <KXMLGUIFactory>
@@ -178,6 +179,10 @@ void MainWindow::setupActions()
     hideMenuBarAction->setText( i18n("Hide MenuBar") );
     connect( hideMenuBarAction , SIGNAL(triggered()) , menuBar() , SLOT(hide()) );
 
+    KToggleFullScreenAction* fullScreenAction = new KToggleFullScreenAction(this);
+    fullScreenAction->setWindow(this);
+    collection->addAction("view-full-screen",fullScreenAction);
+    connect( fullScreenAction , SIGNAL(toggled(bool)) , this , SLOT(viewFullScreen(bool)) ); 
     //TODO - Implmement this correctly
     //
     //QAction* mergeAction = collection->addAction("merge-windows");
@@ -190,10 +195,18 @@ void MainWindow::setupActions()
 
     QAction* manageProfilesAction = collection->addAction("manage-profiles");
     manageProfilesAction->setText( i18n("Manage Profiles...") );
+    manageProfilesAction->setIcon( KIcon("configure") );
     connect( manageProfilesAction , SIGNAL(triggered()) , this , SLOT(showManageProfilesDialog()) );
 
 }
 
+void MainWindow::viewFullScreen(bool fullScreen) 
+{
+    if ( fullScreen )
+        showFullScreen();
+    else
+        showNormal();
+}
 BookmarkHandler* MainWindow::bookmarkHandler() const
 {
     return _bookmarkHandler;
