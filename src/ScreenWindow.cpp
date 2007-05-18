@@ -152,6 +152,8 @@ void ScreenWindow::scrollTo( int line )
     // keep track of number of lines scrolled by,
     // this can be reset by calling resetScrollCount()
     _scrollCount += delta;
+
+    emit scrolled(_currentLine);
 }
 
 void ScreenWindow::setTrackOutput(bool trackOutput)

@@ -278,6 +278,8 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
             {
                 qDebug() << __FUNCTION__ << "Creating url filter";
 
+                connect( _view->screenWindow() , SIGNAL(scrolled(int)) , this ,
+                        SLOT(requireUrlFilterUpdate()) );
                 connect( _view->screenWindow() , SIGNAL(outputChanged()) , this , 
                          SLOT(requireUrlFilterUpdate()) ); 
                 

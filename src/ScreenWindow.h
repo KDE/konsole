@@ -197,6 +197,13 @@ signals:
     void outputChanged();
 
     /**
+     * Emitted when the screen window is scrolled to a different position.
+     * 
+     * @param line The line which is now at the top of the window.
+     */
+    void scrolled(int line);
+
+    /**
      * Emitted when the selection is changed.
      */
     void selectionChanged();

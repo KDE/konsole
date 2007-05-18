@@ -1499,8 +1499,13 @@ void TerminalDisplay::paintFilters(QPainter& painter)
             // the right and bottom so that
             // we do not overdraw adjacent
             // hotspots
+            //
+            // subtracting one pixel from all sides also prevents an edge case where
+            // moving the mouse outside a link could still leave it underlined 
+            // because the check below for the position of the cursor
+            // finds it on the border of the target area
             QRect r;
-            r.setCoords( startColumn*_fontWidth , line*_fontHeight,
+            r.setCoords( startColumn*_fontWidth + 1, line*_fontHeight + 1,
                              endColumn*_fontWidth - 1, (line+1)*_fontHeight - 1 ); 
                                                                            
             // Links need to be underlined

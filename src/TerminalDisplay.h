@@ -73,8 +73,6 @@ public:
     TerminalDisplay(QWidget *parent=0);
     virtual ~TerminalDisplay();
 
-    void setBlendColor(const QRgb color) { _blendColor = color; }
-
     /** Sets the default background color for the display. */
     void setDefaultBackColor(const QColor& color);
     /** Returns the default background color for the display */
@@ -245,6 +243,8 @@ public:
 
     void setSize(int cols, int lins);
     void setFixedSize(int cols, int lins);
+    
+    // reimplemented
     QSize sizeHint() const;
 
     /**
@@ -320,10 +320,18 @@ public:
      */
     void setVTFont(const QFont& font);
 
+    /**
+     * Specified whether anti-aliasing of text in the terminal display
+     * is enabled or not.  Defaults to enabled.
+     */
     static void setAntialias( bool enable ) { s_antialias = enable; }
+    /** 
+     * Returns true if anti-aliasing of text in the terminal is enabled.
+     */
     static bool antialias()                 { return s_antialias;   }
+    
     static void setStandalone( bool standalone ) { s_standalone = standalone; }
-    static bool standalone()                { return s_standalone;   }
+    static bool standalone() { return s_standalone; }
 
     /**
      * Sets whether or not the current height and width of the 
@@ -336,7 +344,7 @@ public:
      * the terminal in lines and columns is displayed whilst the widget
      * is being resized.
      */
-    bool isTerminalSizeHint() { return _terminalSizeHint; }
+    bool terminalSizeHint() { return _terminalSizeHint; }
     /** 
      * Sets whether the terminal size display is shown briefly
      * after the widget is first shown.
@@ -350,7 +358,11 @@ public:
 
     void print(QPainter &paint, bool friendly, bool exact);
 
-    void setRim(int rim) { _rimX=rim; _rimY=rim; }
+    /** 
+     * Sets the margin between the top-left edge of the terminal display 
+     * and the rendered text.
+     */
+    void setTopLeftContentsMargin(int rim) { _rimX=rim; _rimY=rim; }
 
     /**
      * Sets the terminal screen section which is displayed in this widget.
@@ -378,8 +390,18 @@ public Q_SLOTS:
     void updateLineProperties();
 
     void setSelectionEnd();
+
+    /** Copies the selected text to the clipboard. */
     void copyClipboard();
+    /** 
+     * Pastes the content of the clipboard into the 
+     * display.
+     */
     void pasteClipboard();
+    /**
+     * Pastes the content of the selection into the
+     * display.
+     */
     void pasteSelection();
     void onClearSelection();
 	/** 
