@@ -62,7 +62,7 @@ class Session : public QObject
 Q_OBJECT
 
 public:
-  Q_PROPERTY(QString sessionName READ title)
+  Q_PROPERTY(QString name READ nameTitle)
   Q_PROPERTY(int processId READ processId)
   Q_PROPERTY(QString keytab READ keyBindings WRITE setKeyBindings)
   Q_PROPERTY(QSize size READ size WRITE setSize)
@@ -265,11 +265,24 @@ public:
   void setKeyBindings(const QString& id);
   /** Returns the name of the key bindings used by this session. */
   QString keyBindings() const;
-  
-  /** Sets the session's title to @p title. */
-  void setTitle(const QString& title);
-  /** Returns the session's title. */
-  QString title() const;
+
+  /**
+   * This enum describes the available title roles.
+   */
+  enum TitleRole
+  {
+      /** The name of the session. */
+      NameRole,
+      /** The title of the session which is displayed in tabs etc. */
+      DisplayedTitleRole
+  };
+
+  /** Sets the session's title for the specified @p role to @p title. */
+  void setTitle(TitleRole role , const QString& title);
+  /** Returns the session's title for the specified @p role. */
+  QString title(TitleRole role) const;
+  /** Convenience method used to read the name property.  Returns title(Session::NameRole). */
+  QString nameTitle() const { return title(Session::NameRole); }
 
   /** Sets the name of the icon associated with this session. */
   void setIconName(const QString& iconName);
@@ -443,7 +456,8 @@ private:
 
   int            _silenceSeconds;
 
-  QString        _title;
+  QString        _nameTitle;
+  QString        _displayTitle;
   QString        _userTitle;
 
   QString        _localTabTitleFormat;

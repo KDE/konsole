@@ -119,7 +119,7 @@ void SessionController::requireUrlFilterUpdate()
 }
 void SessionController::snapshot()
 {
-    qDebug() << "session" << _session->title() << "snapshot";
+    qDebug() << "session" << _session->title(Session::NameRole) << "snapshot";
     
 
     ProcessInfo* process = 0;
@@ -163,9 +163,9 @@ void SessionController::snapshot()
 
     // apply new title
     if ( !title.simplified().isEmpty() )
-        setTitle(title);
+        _session->setTitle(Session::DisplayedTitleRole,title);
     else
-        setTitle(_session->title());
+        _session->setTitle(Session::DisplayedTitleRole,_session->title(Session::NameRole));
 }
 
 KUrl SessionController::url() const
@@ -492,7 +492,7 @@ void SessionController::debugProcess()
 
         if ( ok )
         {
-            _session->setTitle(name);
+            _session->setTitle(Session::DisplayedTitleRole,name);
             sessionTitleChanged();
         }
 
@@ -779,9 +779,12 @@ void SessionController::sessionTitleChanged()
             _sessionIcon = KIcon( _sessionIconName );
             setIcon( _sessionIcon );
         }
-         
-       //TODO - use _session->displayTitle() here. 
-       setTitle( _session->title() ); 
+        
+       QString title = _session->title(Session::DisplayedTitleRole);
+       if ( title.isEmpty() )
+          title = _session->title(Session::NameRole);
+
+       setTitle( title ); 
 }
 
 void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , int /*state*/, int x, int y)
@@ -797,7 +800,7 @@ void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , in
     else
     {
         qWarning() << "Unable to display popup menu for session" 
-                   << _session->title() 
+                   << _session->title(Session::NameRole) 
                    << ", no GUI factory available to build the popup.";
     }
 }
@@ -899,7 +902,7 @@ void SaveHistoryTask::execute()
     {
         SessionPtr session = iter.next();
 
-        dialog->setCaption( i18n("Save Output from %1",session->title()) );
+        dialog->setCaption( i18n("Save Output from %1",session->title(Session::NameRole)) );
             
         int result = dialog->exec();
 

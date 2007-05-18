@@ -205,7 +205,7 @@ void SessionManager::sessionTerminated(QObject* sessionObject)
 {
     Session* session = qobject_cast<Session*>(sessionObject);
 
-    qDebug() << "Session finished: " << session->title();
+    qDebug() << "Session finished: " << session->title(Session::NameRole);
 
     Q_ASSERT( session );
 
@@ -317,7 +317,7 @@ void SessionManager::applyProfile(Session* session, const Profile* info , bool m
 
     // Basic session settings
     if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Name) )
-        session->setTitle(info->name());
+        session->setTitle(Session::NameRole,info->name());
 
     if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Command) )
         session->setProgram(info->command());

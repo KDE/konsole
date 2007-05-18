@@ -295,10 +295,10 @@ void Session::run()
 
 void Session::setUserTitle( int what, const QString &caption )
 {
-    //set to true if anything is actually changed (eg. old _title != new _title )
+    //set to true if anything is actually changed (eg. old _nameTitle != new _nameTitle )
 	bool modified = false; 
 	
-    // (btw: what=0 changes _title and icon, what=1 only icon, what=2 only _title
+    // (btw: what=0 changes _nameTitle and icon, what=1 only icon, what=2 only _nameTitle
     if ((what == 0) || (what == 2)) {
        	if ( _userTitle != caption ) {
 			_userTitle = caption;
@@ -334,8 +334,8 @@ void Session::setUserTitle( int what, const QString &caption )
     }
     
 	if (what == 30) {
-		if ( _title != caption ) {
-       		setTitle(caption);
+		if ( _nameTitle != caption ) {
+       		setTitle(Session::NameRole,caption);
 			return;
 		}
 	}
@@ -387,7 +387,7 @@ void Session::monitorTimerDone()
   //This breaks with the addition of multiple views of a session.  The popup should disappear
   //when any of the views of the session becomes active
   if (_monitorSilence) {
-    KNotification::event("Silence", i18n("Silence in session '%1'", _title), QPixmap(), 
+    KNotification::event("Silence", i18n("Silence in session '%1'", _nameTitle), QPixmap(), 
                     QApplication::activeWindow(), 
                     KNotification::CloseWhenWidgetActivated);
     emit stateChanged(NOTIFYSILENCE);
@@ -404,7 +404,7 @@ void Session::activityStateSet(int state)
 {
   if (state==NOTIFYBELL) 
   {
-      emit bellRequest( i18n("Bell in session '%1'",_title) );
+      emit bellRequest( i18n("Bell in session '%1'",_nameTitle) );
   } 
   else if (state==NOTIFYACTIVITY) 
   {
@@ -415,7 +415,7 @@ void Session::activityStateSet(int state)
     
     //FIXME:  See comments in Session::monitorTimerDone()
     if (!_notifiedActivity) {
-      KNotification::event("Activity", i18n("Activity in session '%1'", _title), QPixmap(),
+      KNotification::event("Activity", i18n("Activity in session '%1'", _nameTitle), QPixmap(),
                       QApplication::activeWindow(), 
       KNotification::CloseWhenWidgetActivated);
       _notifiedActivity=true;
@@ -507,16 +507,16 @@ void Session::done(int exitStatus)
     QString message;
 
     if (_shellProcess->normalExit())
-      message = i18n("Session '%1' exited with status %2.", _title, exitStatus);
+      message = i18n("Session '%1' exited with status %2.", _nameTitle, exitStatus);
     else if (_shellProcess->signalled())
     {
       if (_shellProcess->coreDumped())
-        message = i18n("Session '%1' exited with signal %2 and dumped core.", _title, _shellProcess->exitSignal());
+        message = i18n("Session '%1' exited with signal %2 and dumped core.", _nameTitle, _shellProcess->exitSignal());
       else
-        message = i18n("Session '%1' exited with signal %2.", _title, _shellProcess->exitSignal());
+        message = i18n("Session '%1' exited with signal %2.", _nameTitle, _shellProcess->exitSignal());
     }
     else
-        message = i18n("Session '%1' exited unexpectedly.", _title);
+        message = i18n("Session '%1' exited unexpectedly.", _nameTitle);
 
     //FIXME: See comments in Session::monitorTimerDone()
     KNotification::event("Finished", message , QPixmap(),
@@ -556,18 +556,27 @@ void Session::setKeyBindings(const QString &id)
   _emulation->setKeyBindings(id);
 }
 
-void Session::setTitle(const QString& title)
+void Session::setTitle(TitleRole role , const QString& newTitle)
 {
-    if ( title != _title )
+    if ( title(role) != newTitle )
     {
-        _title = title;
+        if ( role == NameRole )
+            _nameTitle = newTitle;
+        else if ( role == DisplayedTitleRole )
+            _displayTitle = newTitle;
+
         emit titleChanged();
     }
 }
 
-QString Session::title() const
+QString Session::title(TitleRole role) const
 {
-  return _title;
+    if ( role == NameRole )
+        return _nameTitle;
+    else if ( role == DisplayedTitleRole )
+        return _displayTitle;
+    else
+        return QString();
 }
 
 void Session::setIconName(const QString& iconName)
