@@ -92,7 +92,8 @@ SessionManager::SessionManager()
     Q_ASSERT( !_defaultProfile.isEmpty() );
 
     // get shortcuts and paths of profiles associated with
-    // them
+    // them - this doesn't load the shortcuts themselves,
+    // that is done on-demand.
     loadShortcuts();
 }
 QString SessionManager::loadProfile(const QString& path)
@@ -169,6 +170,15 @@ SessionManager::~SessionManager()
 const QList<Session*> SessionManager::sessions()
 {
     return _sessions;
+}
+
+void SessionManager::updateSession(Session* session)
+{
+    Profile* info = profile(session->profileKey());
+
+    Q_ASSERT( info );
+
+    applyProfile(session,info,false);
 }
 
 Session* SessionManager::createSession(const QString& key )

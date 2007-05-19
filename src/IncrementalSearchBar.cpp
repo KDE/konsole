@@ -51,7 +51,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     close->setObjectName("close-button");
     close->setToolTip("Close the search bar");
     close->setAutoRaise(true);
-    close->setIcon(KIcon("fileclose"));
+    close->setIcon(KIcon("dialog-cancel"));
     connect( close , SIGNAL(clicked()) , this , SIGNAL(closeClicked()) );
 
     QLabel* findLabel = new QLabel(i18n("Find:"),this);

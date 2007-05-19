@@ -73,6 +73,7 @@ public:
 
 private slots:
     void createSession(const QString& key, ViewManager* view);
+    void createWindow(const QString& key);
     void detachView(Session* session);
 
     void toggleBackgroundInstance();

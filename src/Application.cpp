@@ -72,8 +72,10 @@ MainWindow* Application::newMainWindow()
     MainWindow* window = new MainWindow();
     window->setSessionList( new ProfileList(window) );
 
-    connect( window , SIGNAL(requestSession(const QString&,ViewManager*)), 
+    connect( window , SIGNAL(newSessionRequest(const QString&,ViewManager*)), 
                       this , SLOT(createSession(const QString&,ViewManager*)));
+    connect( window , SIGNAL(newWindowRequest(const QString&)),
+                      this , SLOT(createWindow(const QString&)) );
     connect( window->viewManager() , SIGNAL(viewDetached(Session*)) , this , SLOT(detachView(Session*)) );
 
     return window;
@@ -147,6 +149,13 @@ void Application::detachView(Session* session)
 {
     MainWindow* window = newMainWindow();
     window->viewManager()->createView(session);
+    window->show();
+}
+
+void Application::createWindow(const QString& key)
+{
+    MainWindow* window = newMainWindow();
+    createSession(key,window->viewManager());
     window->show();
 }
 

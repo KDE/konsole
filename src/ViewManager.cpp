@@ -163,8 +163,8 @@ void ViewManager::setupActions()
     }
 
     KShortcut nextViewShortcut = nextViewAction->shortcut();
-    nextViewShortcut.setAlternate( QKeySequence(Qt::SHIFT+Qt::Key_Right) );
-    nextViewShortcut.setPrimary( QKeySequence(Qt::CTRL+Qt::Key_PageUp) );
+    nextViewShortcut.setPrimary( QKeySequence(Qt::SHIFT+Qt::Key_Right) );
+    nextViewShortcut.setAlternate( QKeySequence(Qt::CTRL+Qt::Key_PageUp) );
     nextViewAction->setShortcut(nextViewShortcut); 
     connect( nextViewAction, SIGNAL(triggered()) , this , SLOT(nextView()) );
     _viewSplitter->addAction(nextViewAction);

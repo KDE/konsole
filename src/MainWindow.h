@@ -86,7 +86,16 @@ class MainWindow : public KXmlGuiWindow
          * @param key The key for the profile to use to create the new session.
          * @param view The view manager owned by this main window 
          */
-        void requestSession(const QString& key , ViewManager* view);
+        void newSessionRequest(const QString& key , ViewManager* view);
+
+        /**
+         * Emitted by the main window to request the creation of a 
+         * new session in a new window.
+         *
+         * @param key The key for the profile to use to create the 
+         * first session in the new window.
+         */
+        void newWindowRequest(const QString& key);
 
     private slots:
         void newTab();

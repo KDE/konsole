@@ -756,7 +756,7 @@ void SessionController::increaseTextSize()
 }
 void SessionController::decreaseTextSize()
 {
-    const int MinimumFontSize = 6;
+    static const int MinimumFontSize = 6;
 
     QFont font = _view->getVTFont();
     font.setPointSize( qMax(font.pointSize()-1,MinimumFontSize) );

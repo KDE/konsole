@@ -139,6 +139,11 @@ public:
     Session* createSession(const QString& key = QString());
 
     /**
+     * Updates a session's properties to match its current profile.
+     */
+    void updateSession(Session* session);
+
+    /**
      * Returns a list of active sessions.
      */
     const QList<Session*> sessions();
@@ -159,7 +164,7 @@ public:
     /**
      * Returns the set of keys for the user's favorite profiles.
      */
-    QSet<QString> findFavorites() ;
+    QSet<QString> findFavorites();
 
     /**
      * Returns the list of shortcut key sequences which
@@ -224,6 +229,14 @@ signals:
      * @param favorite Specifies whether the session is a favorite or not 
      */
     void favoriteStatusChanged(const QString& key , bool favorite);
+
+    /** 
+     * Emitted when the shortcut for a profile is changed. 
+     *
+     * @param key The key for the profile 
+     * @param newShortcut The new shortcut key sequence for the profile
+     */
+    void shortcutChanged(const QString& key , const QKeySequence& newShortcut);
 
 protected Q_SLOTS:
 

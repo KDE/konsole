@@ -21,7 +21,6 @@
 #include "MainWindow.h"
 
 // Qt
-#include <QtGui/QApplication>
 #include <QtGui/QBoxLayout>
 
 // KDE
@@ -39,10 +38,6 @@
 #include <KXMLGUIFactory>
 
 // Konsole
-#ifndef KONSOLE_PART
-    #include "Application.h"
-#endif
-
 #include "BookmarkHandler.h"
 #include "IncrementalSearchBar.h"
 #include "RemoteConnectionDialog.h"
@@ -163,7 +158,10 @@ void MainWindow::setupActions()
 
        
 #ifndef KONSOLE_PART 
-    KStandardAction::quit( Application::self() , SLOT(quit()) , collection );
+    QAction* quitAction = KStandardAction::quit( this , SLOT(close()) , collection );
+    // the default shortcut for quit is typically Ctrl+[Some Letter, usually Q] but that is reserved for 
+    // use by terminal applications
+    quitAction->setShortcut(Qt::CTRL+Qt::SHIFT+Qt::Key_Q);
 #endif
 
     // Bookmark Menu
@@ -231,14 +229,12 @@ void MainWindow::sessionListChanged(const QList<QAction*>& actions)
 
 void MainWindow::newTab()
 {
-    emit requestSession(QString(),_viewManager);
+    emit newSessionRequest(QString(),_viewManager);
 }
 
 void MainWindow::newWindow()
 {
-#ifndef KONSOLE_PART
-    Application::self()->newInstance();
-#endif
+    emit newWindowRequest(QString());
 }
 
 void MainWindow::showShortcutsDialog()
@@ -248,7 +244,7 @@ void MainWindow::showShortcutsDialog()
 
 void MainWindow::newFromProfile(const QString& key)
 {
-    emit requestSession(key,_viewManager);
+    emit newSessionRequest(key,_viewManager);
 }
 void MainWindow::showManageProfilesDialog()
 {
@@ -260,7 +256,7 @@ void MainWindow::showRemoteConnectionDialog()
 {
     RemoteConnectionDialog dialog(this);
     if ( dialog.exec() == QDialog::Accepted )
-        emit requestSession(dialog.sessionKey(),_viewManager);
+        emit newSessionRequest(dialog.sessionKey(),_viewManager);
 }
 
 void MainWindow::setupWidgets()
