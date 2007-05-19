@@ -33,6 +33,7 @@
 #include <KIconDialog>
 #include <KDirSelectDialog>
 #include <KUrlCompletion>
+#include <KWindowSystem>
 
 // Konsole
 #include "ColorScheme.h"
@@ -850,10 +851,24 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
 
     Q_ASSERT(scheme);
 
+    bool transparencyAvailable = KWindowSystem::compositingActive();
+
     // draw background
-    QBrush brush(scheme->backgroundColor());
-    painter->fillRect( option.rect , brush );
-   
+    QColor color = scheme->backgroundColor();
+    
+    if ( transparencyAvailable )
+    {
+        painter->save();
+        color.setAlphaF(scheme->opacity());
+        painter->setCompositionMode( QPainter::CompositionMode_Source );
+        painter->fillRect( option.rect , color );
+        painter->restore();
+    }
+    else
+    {
+        painter->fillRect( option.rect , color );
+    }
+
     // draw border on selected items
     if ( option.state & QStyle::State_Selected )
     {
