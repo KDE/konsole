@@ -27,11 +27,11 @@
 #include <QtCore/QHash>
 #include <QtCore/QList>
 #include <QtGui/QTabBar>
+#include <QtGui/QVBoxLayout>
 
 class QSpacerItem;
 class QStackedWidget;
 class QWidget;
-
 
 // TabbedViewContainer
     // Qt
@@ -69,8 +69,30 @@ class ViewContainer : public QObject
 Q_OBJECT
     
 public:
-    /** Constructs a new view container with the specified parent. */
-    ViewContainer(QObject* parent);
+
+    /**
+     * This enum describes the options for positioning the 
+     * container's navigation widget.
+     */
+    enum NavigationPosition
+    {
+        /** Position the navigation widget above the views. */
+        NavigationPositionTop,
+        /** Position the navigation widget below the views. */
+        NavigationPositionBottom,
+        /** Position the navigation widget to the left of the views. */
+        NavigationPositionLeft,
+        /** Position the navigation widget to the right of the views. */
+        NavigationPositionRight
+    };
+
+    /** 
+     * Constructs a new view container with the specified parent. 
+     * 
+     * @param position The initial position of the navigation widget
+     * @param parent The parent object of the container 
+     */
+    ViewContainer(NavigationPosition position , QObject* parent);
 
     /** 
      * Called when the ViewContainer is destroyed.  When reimplementing this in 
@@ -88,15 +110,62 @@ public:
      */
     enum NavigationDisplayMode
     {
+        /** Always show the navigation widget. */
         AlwaysShowNavigation,
+        /** Always hide the navigation widget. */
         AlwaysHideNavigation,
+        /** Show the navigation widget only when the container has more than one view. */
         ShowNavigationAsNeeded
     };
-
-    /** TODO: Document me. */
+    /*
+     * Sets the visibility of the view container's navigation widget.
+     *
+     * The ViewContainer sub-class is responsible for ensuring that this
+     * setting is respected as views are added or removed from the 
+     * container.
+     *
+     * ViewContainer sub-classes should reimplement the 
+     * navigationDisplayModeChanged() method to respond to changes 
+     * of this property.
+     */
     void setNavigationDisplayMode(NavigationDisplayMode mode);
-    /** TODO: Document me. */
+    /** 
+     * Returns the current mode for controlling the visibility of the 
+     * the view container's navigation widget. 
+     */
     NavigationDisplayMode navigationDisplayMode() const;
+
+    
+
+    /**
+     * Sets the position of the navigation widget with
+     * respect to the main content area.
+     *
+     * Depending on the ViewContainer subclass, not all
+     * positions from the NavigationPosition enum may be
+     * supported.  A list of supported positions can be 
+     * obtained by calling supportedNavigationPositions()
+     *
+     * ViewContainer sub-classes should re-implement the 
+     * navigationPositionChanged() method to respond
+     * to changes of this property.
+     */
+    void setNavigationPosition(NavigationPosition position);
+
+    /**
+     * Returns the position of the navigation widget with
+     * respect to the main content area.
+     */
+    NavigationPosition navigationPosition() const;
+
+    /**
+     * Returns the list of supported navigation positions.
+     * The supported positions will depend upon the type of the 
+     * navigation widget used by the ViewContainer subclass.
+     *
+     * The base implementation returns one item, NavigationPositionTop 
+     */
+    virtual QList<NavigationPosition> supportedNavigationPositions() const;
 
     /** Adds a new view to the container widget */
     void addView(QWidget* view , ViewProperties* navigationItem);
@@ -170,6 +239,13 @@ protected:
      */
     virtual void navigationDisplayModeChanged(NavigationDisplayMode) {}
 
+    /**
+     * Called when the navigation position changes to re-layout 
+     * the container and place the navigation widget in the 
+     * specified position.
+     */
+    virtual void navigationPositionChanged(NavigationPosition) {}
+
     /** Returns the widgets which are associated with a particular navigation item */
     QList<QWidget*> widgetsForItem( ViewProperties* item ) const;
 
@@ -178,6 +254,7 @@ private slots:
 
 private:
     NavigationDisplayMode _navigationDisplayMode;
+    NavigationPosition _navigationPosition;
     QList<QWidget*> _views;
     QHash<QWidget*,ViewProperties*> _navigation;
 };
@@ -191,7 +268,7 @@ class TabbedViewContainer : public ViewContainer
     Q_OBJECT
 
 public:
-    TabbedViewContainer(QObject* parent);
+    TabbedViewContainer(NavigationPosition position , QObject* parent);
     virtual ~TabbedViewContainer();
     
     virtual QWidget* containerWidget() const;
@@ -241,6 +318,22 @@ protected:
     virtual QSize tabSizeHint(int index) const;
 };
 
+// internal
+// this class provides a work-around for a problem in Qt 4.x
+// where the insertItem() method only has protected access - 
+// and the TabbedViewContainerV2 class needs to call it.
+//
+// and presumably for binary compatibility reasons will
+// not be fixed until Qt 5. 
+class TabbedViewContainerV2Layout : public QVBoxLayout
+{
+public:
+    void insertItemAt( int index , QLayoutItem* item )
+    {
+        insertItem(index,item);
+    }
+};
+
 /** 
  * An alternative tabbed view container which uses a QTabBar and QStackedWidget
  * combination for navigation instead of QTabWidget
@@ -250,17 +343,24 @@ class TabbedViewContainerV2 : public ViewContainer
     Q_OBJECT
 
 public:
-    TabbedViewContainerV2(QObject* parent);
+    /**
+     * Constructs a new tabbed view container.  Supported positions
+     * are NavigationPositionTop and NavigationPositionBottom.
+     */
+    TabbedViewContainerV2(NavigationPosition position , QObject* parent);
     virtual ~TabbedViewContainerV2();
 
     virtual QWidget* containerWidget() const;
     virtual QWidget* activeView() const;
     virtual void setActiveView(QWidget* view);
 
+    virtual QList<NavigationPosition> supportedNavigationPositions() const;
+
 protected:
     virtual void addViewWidget(QWidget* view);
     virtual void removeViewWidget(QWidget* view);
     virtual void navigationDisplayModeChanged(NavigationDisplayMode mode);
+    virtual void navigationPositionChanged(NavigationPosition position);
 
 private slots:
     void updateTitle(ViewProperties* item);
@@ -275,6 +375,7 @@ private:
     QStackedWidget* _stackWidget;
     QWidget* _containerWidget;
     QSpacerItem* _tabBarSpacer;
+    TabbedViewContainerV2Layout* _layout;
 
     static const int TabBarSpace = 2;
 };
@@ -285,7 +386,7 @@ private:
 class StackedViewContainer : public ViewContainer
 {
 public:
-    StackedViewContainer(QObject* parent);
+    StackedViewContainer(NavigationPosition position , QObject* parent);
     virtual ~StackedViewContainer();
 
     virtual QWidget* containerWidget() const;
@@ -309,7 +410,7 @@ class ListViewContainer : public ViewContainer
 Q_OBJECT
 
 public:
-    ListViewContainer(QObject* parent);
+    ListViewContainer(NavigationPosition position , QObject* parent);
     virtual ~ListViewContainer();
 
     virtual QWidget* containerWidget() const;

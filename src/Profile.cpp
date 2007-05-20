@@ -49,7 +49,7 @@ FallbackProfile::FallbackProfile()
     setProperty(Icon,"konsole");
     setProperty(Arguments,QStringList() << getenv("SHELL"));
     setProperty(LocalTabTitleFormat,"%d : %n");
-    setProperty(RemoteTabTitleFormat,"%H : %u");
+    setProperty(RemoteTabTitleFormat,"%H (%u)");
     setProperty(TabBarMode,AlwaysShowTabBar);
     setProperty(ShowMenuBar,true);
 

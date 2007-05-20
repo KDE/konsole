@@ -1644,7 +1644,6 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
       emit isBusySelecting(false); // Ok.. we can breath again.
       
        _screenWindow->clearSelection();
-      //emit clearSelectionSignal();
       doDrag();
     }
     return;
@@ -1862,12 +1861,10 @@ void TerminalDisplay::extendSelection( QPoint pos )
   if ( _columnSelectionMode && !_lineSelectionMode && !_wordSelectionMode )
   {
      _screenWindow->setSelectionEnd( here.x() , here.y() );
-    //emit extendSelectionSignal( here.x(), here.y() );
   }
   else
   {
      _screenWindow->setSelectionEnd( here.x()+offset , here.y() );
-    //emit extendSelectionSignal( here.x()+offset, here.y() );
   }
 
 }
@@ -2439,8 +2436,6 @@ void TerminalDisplay::clearImage()
     _image[i].rendition = DEFAULT_RENDITION;
   }
 }
-
-// Create Image ///////////////////////////////////////////////////////
 
 void TerminalDisplay::calcGeometry()
 {

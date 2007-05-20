@@ -32,7 +32,6 @@
 #include <QtGui/QStackedWidget>
 #include <QtGui/QTabBar>
 #include <QtGui/QToolButton>
-#include <QtGui/QBoxLayout>
 #include <QtGui/QWidgetAction>
 
 // KDE 
@@ -51,9 +50,10 @@
 
 using namespace Konsole;
 
-ViewContainer::ViewContainer(QObject* parent)
+ViewContainer::ViewContainer(NavigationPosition position , QObject* parent)
     : QObject(parent)
     , _navigationDisplayMode(AlwaysShowNavigation)
+    , _navigationPosition(position)
 {
 }
 ViewContainer::~ViewContainer()
@@ -72,6 +72,23 @@ void ViewContainer::setNavigationDisplayMode(NavigationDisplayMode mode)
         qDebug() << "Show nav as needed";
 
     navigationDisplayModeChanged(mode);
+}
+ViewContainer::NavigationPosition ViewContainer::navigationPosition() const
+{
+    return _navigationPosition;
+}
+void ViewContainer::setNavigationPosition(NavigationPosition position)
+{
+    // assert that this position is supported
+    Q_ASSERT( supportedNavigationPositions().contains(position) );
+
+    _navigationPosition = position;
+
+    navigationPositionChanged(position);
+}
+QList<ViewContainer::NavigationPosition> ViewContainer::supportedNavigationPositions() const
+{
+    return QList<NavigationPosition>() << NavigationPositionTop;
 }
 ViewContainer::NavigationDisplayMode ViewContainer::navigationDisplayMode() const
 {
@@ -169,8 +186,8 @@ QList<QWidget*> ViewContainer::widgetsForItem(ViewProperties* item) const
     return _navigation.keys(item);
 }
 
-TabbedViewContainer::TabbedViewContainer(QObject* parent) :
-    ViewContainer(parent)
+TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* parent) :
+    ViewContainer(position,parent)
    ,_newSessionButton(0) 
    ,_tabContextMenu(0) 
    ,_tabSelectColorMenu(0)
@@ -390,7 +407,8 @@ QSize ViewContainerTabBar::tabSizeHint(int index) const
      return QTabBar::tabSizeHint(index);
 }
 
-TabbedViewContainerV2::TabbedViewContainerV2(QObject* parent) : ViewContainer(parent)
+TabbedViewContainerV2::TabbedViewContainerV2(NavigationPosition position , QObject* parent) 
+: ViewContainer(position,parent)
 {
     _containerWidget = new QWidget;
     _stackWidget = new QStackedWidget();
@@ -399,17 +417,30 @@ TabbedViewContainerV2::TabbedViewContainerV2(QObject* parent) : ViewContainer(pa
    
     connect( _tabBar , SIGNAL(currentChanged(int)) , this , SLOT(currentTabChanged(int)) );
 
-    QVBoxLayout* layout = new QVBoxLayout;
-    layout->setSpacing(0);
-    layout->setMargin(0);
+    _layout = new TabbedViewContainerV2Layout;
+    _layout->setSpacing(0);
+    _layout->setMargin(0);
    
     _tabBarSpacer = new QSpacerItem(0,TabBarSpace);
 
-    layout->addItem(_tabBarSpacer);
-    layout->addWidget(_tabBar);
-    layout->addWidget(_stackWidget);
+    _layout->addWidget(_stackWidget);
+    
+    if ( position == NavigationPositionTop )
+    {
+        _layout->insertWidget(0,_tabBar);
+        _layout->insertItemAt(0,_tabBarSpacer);
+        _tabBar->setShape(QTabBar::RoundedNorth);
+    }
+    else if ( position == NavigationPositionBottom )
+    {
+        _layout->insertWidget(-1,_tabBar);
+        _layout->insertItemAt(-1,_tabBarSpacer);
+        _tabBar->setShape(QTabBar::RoundedSouth);
+    }
+    else
+        Q_ASSERT(false); // position not supported
 
-    _containerWidget->setLayout(layout);
+    _containerWidget->setLayout(_layout);
 }
 void TabbedViewContainerV2::setTabBarVisible(bool visible)
 {
@@ -422,6 +453,25 @@ void TabbedViewContainerV2::setTabBarVisible(bool visible)
     {
         _tabBarSpacer->changeSize(0,0);
     } 
+}
+QList<ViewContainer::NavigationPosition> TabbedViewContainerV2::supportedNavigationPositions() const
+{
+    return QList<NavigationPosition>() << NavigationPositionTop << NavigationPositionBottom;
+}
+void TabbedViewContainerV2::navigationPositionChanged(NavigationPosition position)
+{
+    if ( position == NavigationPositionTop && _layout->indexOf(_tabBar) != 0 )
+    {
+        _layout->insertWidget(0,_tabBar);
+        _layout->insertItemAt(0,_tabBarSpacer);
+        _tabBar->setShape(QTabBar::RoundedNorth);
+    }
+    else if ( position == NavigationPositionBottom && _layout->indexOf(_tabBar) == 0 )
+    {
+        _layout->insertWidget(-1,_tabBar);
+        _layout->insertItemAt(-1,_tabBarSpacer);
+        _tabBar->setShape(QTabBar::RoundedSouth);
+    }
 }
 void TabbedViewContainerV2::navigationDisplayModeChanged(NavigationDisplayMode mode)
 {
@@ -518,7 +568,8 @@ void TabbedViewContainerV2::updateIcon(ViewProperties* item)
     }
 }
 
-StackedViewContainer::StackedViewContainer(QObject* parent) : ViewContainer(parent)
+StackedViewContainer::StackedViewContainer(NavigationPosition position , QObject* parent) 
+: ViewContainer(position,parent)
 {
     _stackWidget = new QStackedWidget;
 }
@@ -547,8 +598,8 @@ void StackedViewContainer::removeViewWidget( QWidget* view )
     _stackWidget->removeWidget(view);
 }
 
-ListViewContainer::ListViewContainer(QObject* parent)
-    : ViewContainer(parent)
+ListViewContainer::ListViewContainer(NavigationPosition position,QObject* parent)
+    : ViewContainer(position,parent)
 {
     _splitter = new QSplitter;
     _stackWidget = new QStackedWidget(_splitter);

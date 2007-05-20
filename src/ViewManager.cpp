@@ -426,7 +426,7 @@ void ViewManager::createView(Session* session)
 
 ViewContainer* ViewManager::createContainer()
 {
-    ViewContainer* container = new TabbedViewContainerV2(_viewSplitter);
+    ViewContainer* container = new TabbedViewContainerV2(ViewContainer::NavigationPositionBottom,_viewSplitter);
 
     // connect signals and slots
     connect( container , SIGNAL(viewAdded(QWidget*,ViewProperties*)) , _containerSignalMapper ,
