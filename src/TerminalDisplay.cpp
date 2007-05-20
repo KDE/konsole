@@ -360,8 +360,7 @@ TerminalDisplay::~TerminalDisplay()
 {
   qApp->removeEventFilter( this );
   
-  if (_image) 
-      delete[] _image;
+  delete[] _image;
 
   delete _gridLayout;
   delete _outputSuspendedLabel;
@@ -1355,7 +1354,7 @@ void TerminalDisplay::updateImageSize()
     for (int lin = 0; lin < lins; lin++)
       memcpy((void*)&_image[_columns*lin],
              (void*)&oldimg[oldcol*lin],cols*sizeof(Character));
-    delete[] oldimg; //FIXME: try new,delete
+    delete[] oldimg;
   }
 
   _resizing = (oldlin!=_lines) || (oldcol!=_columns);
