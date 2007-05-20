@@ -361,7 +361,7 @@ TerminalDisplay::~TerminalDisplay()
   qApp->removeEventFilter( this );
   
   if (_image) 
-      free(_image);
+      delete[] _image;
 
   delete _gridLayout;
   delete _outputSuspendedLabel;
@@ -807,7 +807,7 @@ void TerminalDisplay::updateImage()
   const int columnsToUpdate = qMin(this->_columns,qMax(0,_columns));
 
   QChar *disstrU = new QChar[columnsToUpdate];
-  char *dirtyMask = (char *) malloc(columnsToUpdate+2);
+  char *dirtyMask = new char[columnsToUpdate+2]; 
   QRegion dirtyRegion;
 
   // debugging variable, this records the number of _lines that are found to
@@ -954,7 +954,7 @@ void TerminalDisplay::updateImage()
   }
 
   // free the image from the screen window
-  free(newimg);
+  delete[] newimg;
 
   // debugging - display a count of the number of _lines that will need 
   // to be repainted
@@ -987,8 +987,8 @@ void TerminalDisplay::updateImage()
 
   if ( _hasBlinker && !_blinkTimer->isActive()) _blinkTimer->start( BLINK_DELAY ); 
   if (!_hasBlinker && _blinkTimer->isActive()) { _blinkTimer->stop(); _blinking = false; }
-  free(dirtyMask);
-  delete [] disstrU;
+  delete[] dirtyMask;
+  delete[] disstrU;
 
   showResizeNotification();
 }
@@ -1355,7 +1355,7 @@ void TerminalDisplay::updateImageSize()
     for (int lin = 0; lin < lins; lin++)
       memcpy((void*)&_image[_columns*lin],
              (void*)&oldimg[oldcol*lin],cols*sizeof(Character));
-    free(oldimg); //FIXME: try new,delete
+    delete[] oldimg; //FIXME: try new,delete
   }
 
   _resizing = (oldlin!=_lines) || (oldcol!=_columns);
@@ -2501,9 +2501,9 @@ void TerminalDisplay::makeImage()
 
   _imageSize=_lines*_columns;
   
-  // We over-commit 1 character so that we can be more relaxed in dealing with
+  // We over-commit one character so that we can be more relaxed in dealing with
   // certain boundary conditions: _image[_imageSize] is a valid but unused position
-  _image = (Character*) malloc((_imageSize+1)*sizeof(Character));
+  _image = new Character[_imageSize+1]; 
   clearImage();
 }
 
@@ -2525,7 +2525,7 @@ void TerminalDisplay::setFixedSize(int cols, int lins)
 {
   _isFixedSize = true;
   
-  //ensure that display is at least 1 line by 1 column in size
+  //ensure that display is at least one line by one column in size
   _columns = qMax(1,cols);
   _lines = qMax(1,lins);
   _usedColumns = qMin(_usedColumns,_columns);
@@ -2533,7 +2533,7 @@ void TerminalDisplay::setFixedSize(int cols, int lins)
 
   if (_image)
   {
-     free(_image);
+     delete[] _image;
      makeImage();
   }
   setSize(cols, lins);

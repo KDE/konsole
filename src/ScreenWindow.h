@@ -75,12 +75,8 @@ public:
      * getImage() creates a new buffer consisting of lines() * columns() characters and
      * copies the characters from the appropriate part of the screen into the buffer.
      * It is the caller's responsibility to free the buffer when they have finished using
-     * it.
+     * it using delete[] 
      *
-     * TODO: Fix this and use new[] / delete[] to allocate/free this buffer.
-     *
-     * The buffer is allocated using malloc() and must therefore be freed using the free() 
-     * call as opposed to delete[]
      */
     Character* getImage();
     /**

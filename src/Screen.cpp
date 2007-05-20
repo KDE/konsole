@@ -545,15 +545,10 @@ void Screen::effectiveRendition()
 
 Character* Screen::getCookedImage( int startLine )
 {
-/*kDebug() << "sel_begin=" << sel_begin << "(" << sel_begin/columns << "," << sel_begin%columns << ")"
-  << "  sel_TL=" << sel_TL << "(" << sel_TL/columns << "," << sel_TL%columns << ")"
-  << "  sel_BR=" << sel_BR << "(" << sel_BR/columns << "," << sel_BR%columns << ")"
-  << "  histcursor=" << viewHistoryCursor << endl;*/
-
   int viewHistoryCursor = startLine;
 
   int x,y;
-  Character* merged = (Character*)malloc((lines*columns+1)*sizeof(Character));
+  Character* merged = new Character[lines*columns+1];
   merged[lines*columns] = defaultChar;
 
   for (y = 0; (y < lines) && (y < (hist->getLines()-viewHistoryCursor)); y++)
