@@ -60,6 +60,12 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     // ensure that session names are fully visible
     _ui->sessionTable->resizeColumnToContents(0);
     _ui->sessionTable->resizeColumnToContents(1);
+    _ui->sessionTable->resizeColumnToContents(2);
+
+    _ui->sessionTable->horizontalHeader()->updateGeometry();
+
+    qDebug() << "Table size hint: " << _ui->sessionTable->horizontalHeader()->sizeHint();
+    qDebug() << sizeHint();
 
     // resize the session table to the full width of the table
     _ui->sessionTable->horizontalHeader()->setStretchLastSection(true);

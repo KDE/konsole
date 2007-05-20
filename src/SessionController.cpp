@@ -20,6 +20,9 @@
 // Own
 #include "SessionController.h"
 
+// Qt
+#include <QMenu>
+
 // KDE
 #include <KAction>
 #include <KIcon>
@@ -461,6 +464,9 @@ void SessionController::setupActions()
     action->setText( i18n("Edit Current Profile...") );
     connect( action , SIGNAL(triggered()) , this , SLOT(editCurrentProfile()) );
 
+    action = collection->addAction("change-profile");
+    action->setText( i18n("Change Profile") );
+   
     // debugging tools
     //action = collection->addAction("debug-process");
     //action->setText( "Get Foreground Process" );

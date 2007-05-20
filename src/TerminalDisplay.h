@@ -22,31 +22,29 @@
 #define TERMINALDISPLAY_H
 
 // Qt
-#include <QtCore/QBitRef>
-#include <QtGui/QWidget>
 #include <QtGui/QColor>
-#include <QtCore/QInternal>
 #include <QtCore/QPointer>
-#include <QtGui/QScrollBar>
 #include <QtGui/QFrame>
-#include <QtGui/QKeyEvent>
-#include <QtCore/QEvent>
-#include <QtGui/QLabel>
-#include <QtGui/QDrag>
-
-// KDE
-#include <kmenu.h>
 
 // Konsole
 #include "Filter.h"
 #include "TECommon.h"
 
+class QDrag;
+class QDragEnterEvent;
+class QDropEvent;
 class QLabel;
 class QTimer;
+class QEvent;
 class QFrame;
 class QGridLayout;
+class QKeyEvent;
+class QScrollBar;
 class QShowEvent;
 class QHideEvent;
+class QWidget;
+
+class KMenu;
 
 namespace Konsole
 {
@@ -485,7 +483,6 @@ protected:
     void resizeEvent(QResizeEvent*);
 
     void fontChange(const QFont &font);
-    void frameChanged();
 
     void mouseDoubleClickEvent(QMouseEvent* ev);
     void mousePressEvent( QMouseEvent* );
