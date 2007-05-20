@@ -456,13 +456,17 @@ void ViewManager::viewCloseRequest(QWidget* view)
 {
     // 1. detach view from session
     // 2. if the session has no views left, close it
-    
+   
+    qDebug() << "Removing view.";
+
     TerminalDisplay* display = (TerminalDisplay*)view;
     Session* session = _sessionMap[ display ];
     if ( session )
     {
         display->deleteLater();
-        
+
+        _sessionMap.remove(display);
+
         if ( session->views().count() == 0 )
             session->close();
     }
@@ -555,14 +559,14 @@ void ViewManager::applyProfile(TerminalDisplay* view , const QString& profileKey
 
 void ViewManager::profileChanged(const QString& key)
 {
-    QHashIterator<TerminalDisplay*,Session*> iter(_sessionMap);
+    QHashIterator<QPointer<TerminalDisplay>,QPointer<Session> > iter(_sessionMap);
 
     while ( iter.hasNext() )
     {
         iter.next();
 
         // if session uses this profile, update the display
-        if ( iter.value() != 0 && iter.value()->profileKey() == key )
+        if ( iter.key() != 0 && iter.value() != 0 && iter.value()->profileKey() == key )
         {
             applyProfile(iter.key(),key);
         }
@@ -585,6 +589,11 @@ QList<ViewProperties*> ViewManager::viewProperties() const
     } 
 
     return list;
+}
+
+uint qHash(QPointer<TerminalDisplay> display)
+{
+    return qHash((TerminalDisplay*)display);
 }
 
 #include "ViewManager.moc"

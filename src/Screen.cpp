@@ -64,9 +64,6 @@ Character Screen::defaultChar = Character(' ',CharacterColor(COLOR_SPACE_DEFAULT
 
 //#define REVERSE_WRAPPED_LINES  // for wrapped line debug
 
-/*! creates a `Screen' of `lines' lines and `columns' columns.
-*/
-
 Screen::Screen(int l, int c)
   : lines(l),
     columns(c),
@@ -527,11 +524,6 @@ void Screen::effectiveRendition()
   if (cu_re & RE_BOLD)
     ef_fg.toggleIntensive();
 }
-
-/**Character* Screen::image()
-{
-
-}**/
 
 /*!
     returns the image.

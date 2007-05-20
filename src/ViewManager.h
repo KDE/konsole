@@ -203,7 +203,7 @@ private:
 private:
     ViewSplitter*                   _viewSplitter;
     QPointer<SessionController>     _pluggedController;
-    QHash<TerminalDisplay*,Session*>    _sessionMap;
+    QHash<QPointer<TerminalDisplay>,QPointer<Session> >    _sessionMap;
     KActionCollection*                  _actionCollection;
     QSignalMapper*                      _containerSignalMapper;
 };
