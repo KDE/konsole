@@ -469,13 +469,11 @@ protected:
 
     virtual void styleChange( QStyle& );
 
-    bool eventFilter( QObject *, QEvent * );
     bool event( QEvent * );
 
 	    
 
     void paintEvent( QPaintEvent * );
-
     void paintFilters(QPainter& painter);
 
     void showEvent(QShowEvent*);
@@ -484,6 +482,7 @@ protected:
 
     void fontChange(const QFont &font);
 
+    void keyPressEvent(QKeyEvent* event);
     void mouseDoubleClickEvent(QMouseEvent* ev);
     void mousePressEvent( QMouseEvent* );
     void mouseReleaseEvent( QMouseEvent* );

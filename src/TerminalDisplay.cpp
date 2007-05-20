@@ -329,7 +329,6 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
   setUsesMouse(true);
   setColorTable(base_color_table); 
 
-  qApp->installEventFilter( this ); //FIXME: see below
   KCursor::setAutoHideCursor( this, true );
 
   setMouseTracking(true);
@@ -1035,7 +1034,7 @@ void TerminalDisplay::showResizeNotification()
 void TerminalDisplay::setBlinkingCursor(bool blink)
 {
   _hasBlinkingCursor=blink;
-  if (blink && !_blinkCursorTimer->isActive()) _blinkCursorTimer->start(1000);
+  if (blink && !_blinkCursorTimer->isActive()) _blinkCursorTimer->start(BLINK_DELAY);
   if (!blink && _blinkCursorTimer->isActive()) 
   {
     _blinkCursorTimer->stop();
@@ -2215,46 +2214,51 @@ void TerminalDisplay::onClearSelection()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-//FIXME: an `eventFilter' has been installed instead of a `keyPressEvent'
-//       due to a bug in `QT' or the ignorance of the author to prevent
-//       repaint events being emitted to the screen whenever one leaves
-//       or reenters the screen to/from another application.
-//
-//   Troll says one needs to change focusInEvent() and focusOutEvent(),
-//   which would also let you have an in-focus cursor and an out-focus
-//   cursor like xterm does.
-
-// for the auto-hide cursor feature, I added empty focusInEvent() and
-// focusOutEvent() so that update() isn't called.
-// For auto-hide, we need to get keypress-events, but we only get them when
-// we have focus.
-
-bool TerminalDisplay::eventFilter( QObject *obj, QEvent *e )
+void TerminalDisplay::keyPressEvent( QKeyEvent* event )
 {
-  if ( e->type() == QEvent::Shortcut && qApp->focusWidget() == this )
-  {
-
-      static_cast<QKeyEvent *>( e )->ignore();
-      return false;
-  }
-  if ( obj != this /* when embedded */ && obj != parent() /* when standalone */ )
-      return false; // not us
-  if ( e->type() == QEvent::KeyPress )
-  {
-    QKeyEvent* ke = (QKeyEvent*)e;
-
-	if (ke->modifiers() & Qt::ControlModifier)
+    if (event->modifiers() & Qt::ControlModifier)
 	{
-		if ( ke->key() == Qt::Key_S )
+		if ( event->key() == Qt::Key_S )
 				emit flowControlKeyPressed(true /*output suspended*/);
-		if ( ke->key() == Qt::Key_Q )
+		if ( event->key() == Qt::Key_Q )
 				emit flowControlKeyPressed(false /*output enabled*/);
 	}
+
+    if ( event->modifiers() == Qt::ShiftModifier )
+    {
+        bool update = true;
+
+        if ( event->key() == Qt::Key_PageUp )
+        {
+            _screenWindow->scrollBy( ScreenWindow::ScrollPages , -1 );
+        }
+        else if ( event->key() == Qt::Key_PageDown )
+        {
+            _screenWindow->scrollBy( ScreenWindow::ScrollPages , 1 );
+        }
+        else if ( event->key() == Qt::Key_Up )
+        {
+            _screenWindow->scrollBy( ScreenWindow::ScrollLines , -1 );
+        }
+        else if ( event->key() == Qt::Key_Down )
+        {
+            _screenWindow->scrollBy( ScreenWindow::ScrollLines , 1 );
+        }
+        else
+            update = false;
+
+        if ( update )
+        {
+            updateLineProperties();
+            updateImage();
+        }
+    }
 	
     _actSel=0; // Key stroke implies a screen update, so TerminalDisplay won't
               // know where the current selection is.
 
-    if (_hasBlinkingCursor) {
+    if (_hasBlinkingCursor) 
+    {
       _blinkCursorTimer->start(BLINK_DELAY);
       if (_cursorBlinking)
         blinkCursorEvent();
@@ -2262,19 +2266,9 @@ bool TerminalDisplay::eventFilter( QObject *obj, QEvent *e )
         _cursorBlinking = false;
     }
 
-    emit keyPressedSignal(ke); // expose
+    emit keyPressedSignal(event);
 
-    // in Qt2 when key events were propagated up the tree
-    // (unhandled? -> parent widget) they passed the event filter only once at
-    // the beginning. in qt3 this has changed, that is, the event filter is
-    // called each time the event is sent (see loop in QApplication::notify,
-    // when internalNotify() is called for KeyPress, whereas internalNotify
-    // activates also the global event filter) . That's why we stop propagation
-    // here.
-    return true;
-  }
-  
-  return QFrame::eventFilter( obj, e );
+    event->accept();
 }
 
 void TerminalDisplay::inputMethodEvent ( QInputMethodEvent *  )

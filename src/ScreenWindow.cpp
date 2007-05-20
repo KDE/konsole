@@ -142,6 +142,9 @@ void ScreenWindow::scrollBy( RelativeScrollMode mode , int amount )
 
 void ScreenWindow::scrollTo( int line )
 {
+    if ( line < 0 )
+       line = 0;
+
     if ( (lineCount() - windowLines()) < line )
        line = qMax(0,lineCount() - windowLines()); 
 
