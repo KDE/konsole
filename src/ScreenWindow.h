@@ -137,6 +137,12 @@ public:
     /** Returns the index of the line which is currently at the top of this window */
     int currentLine() const;
 
+    /** 
+     * Convenience method. Returns true if the window is currently at the bottom
+     * of the screen.
+     */
+    bool atEndOfOutput() const;
+
     /** Scrolls the window so that @p line is at the top of the window */
     void scrollTo( int line );
 

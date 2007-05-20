@@ -140,6 +140,11 @@ void ScreenWindow::scrollBy( RelativeScrollMode mode , int amount )
     }
 }
 
+bool ScreenWindow::atEndOfOutput() const
+{
+    return _currentLine >= (lineCount()-windowLines());
+}
+
 void ScreenWindow::scrollTo( int line )
 {
     if ( line < 0 )

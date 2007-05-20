@@ -2246,6 +2246,8 @@ void TerminalDisplay::keyPressEvent( QKeyEvent* event )
 
         if ( update )
         {
+            _screenWindow->setTrackOutput( _screenWindow->atEndOfOutput() );
+
             updateLineProperties();
             updateImage();
         }
