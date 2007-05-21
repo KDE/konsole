@@ -105,14 +105,14 @@ Session::Session() :
 
    
     //connect teletype to emulation backend 
-    _shellProcess->useUtf8(_emulation->utf8());
+    _shellProcess->setUtf8Mode(_emulation->utf8());
     
-    connect( _shellProcess,SIGNAL(block_in(const char*,int)),this,
+    connect( _shellProcess,SIGNAL(receivedData(const char*,int)),this,
             SLOT(onReceiveBlock(const char*,int)) );
     connect( _emulation,SIGNAL(sendData(const char*,int)),_shellProcess,
-            SLOT(send_bytes(const char*,int)) );
+            SLOT(sendData(const char*,int)) );
     connect( _emulation,SIGNAL(lockPtyRequest(bool)),_shellProcess,SLOT(lockPty(bool)) );
-    connect( _emulation,SIGNAL(useUtf8Request(bool)),_shellProcess,SLOT(useUtf8(bool)) );
+    connect( _emulation,SIGNAL(useUtf8Request(bool)),_shellProcess,SLOT(setUtf8Mode(bool)) );
 
     
     connect( _shellProcess,SIGNAL(done(int)), this,SLOT(done(int)) );
@@ -120,10 +120,6 @@ Session::Session() :
     //setup timer for monitoring session activity
     _monitorTimer = new QTimer(this);
     connect(_monitorTimer, SIGNAL(timeout()), this, SLOT(monitorTimerDone()));
-
-    //TODO: Investigate why a single-shot timer is used here 
-    if (!_shellProcess->error().isEmpty())
-        QTimer::singleShot(0, this, SLOT(ptyError()));
 }
 
 bool Session::running() const
@@ -268,14 +264,14 @@ void Session::run()
      QDir::setCurrent(_initialWorkingDir);
   _shellProcess->setXonXoff(_flowControl);
 
-  int result = _shellProcess->run(QFile::encodeName(_program), 
+  int result = _shellProcess->start(QFile::encodeName(_program), 
                                   arguments, 
-                                  _term.toLatin1(),
+                                  _term,
                                   _winId, 
                                   _addToUtmp,
-                                  dbusService.toLatin1(),
+                                  dbusService,
                                   (QLatin1String("/Sessions/") + 
-                                   QString::number(_sessionId)).toLatin1());
+                                   QString::number(_sessionId)));
 
   if (result < 0) 
   {
@@ -687,7 +683,7 @@ void Session::fireZModemDetected()
 
 void Session::cancelZModem()
 {
-  _shellProcess->send_bytes("\030\030\030\030", 4); // Abort
+  _shellProcess->sendData("\030\030\030\030", 4); // Abort
   _zmodemBusy = false;
 }
 
@@ -732,9 +728,9 @@ void Session::startZModem(const QString &zmodem, const QString &dir, const QStri
 
 void Session::zmodemSendBlock(K3Process *, char *data, int len)
 {
-  _shellProcess->send_bytes(data, len);
+  _shellProcess->sendData(data, len);
 //  qWarning("<-- %d bytes", len);
-  if (_shellProcess->buffer_full())
+  if (_shellProcess->bufferFull())
   {
     _zmodemProc->suspend();
 //    qWarning("ZModem suspend");
@@ -793,8 +789,8 @@ void Session::zmodemDone()
     disconnect( _shellProcess,SIGNAL(buffer_empty()), this, SLOT(zmodemContinue()));
     connect( _shellProcess,SIGNAL(block_in(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)) );
 
-    _shellProcess->send_bytes("\030\030\030\030", 4); // Abort
-    _shellProcess->send_bytes("\001\013\n", 3); // Try to get prompt back
+    _shellProcess->sendData("\030\030\030\030", 4); // Abort
+    _shellProcess->sendData("\001\013\n", 3); // Try to get prompt back
     _zmodemProgress->done();
   }
 }

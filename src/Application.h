@@ -59,12 +59,9 @@ public:
     virtual int newInstance();
 
     /** 
-     * Creates a new, empty main window and returns a pointer to the created window 
-     * 
-     * DESIGN ISSUE:  This is the only way that new main windows should be created because
-     *                Application needs to connect up certain signals from the window to itself
-     *                perhaps it would be better if MainWindow hooked itself up to Application
-     *                rather than the other way round?  
+     * Creates a new, empty main window and connects to its newSessionRequest()
+     * and newWindowRequest() signals to trigger creation of new sessions or
+     * windows when then they are emitted.  
      */
     MainWindow* newMainWindow();
 

@@ -78,9 +78,9 @@ namespace Konsole
 class ProcessInfo
 {
 public:
-    /*
-     * Constructs a new ProcessInfo instance which provides information
-     * about a given process.
+    /**
+     * Constructs a new instance of a suitable ProcessInfo sub-class for 
+     * the current platform which provides information about a given process.
      *
      * @param pid The pid of the process to examine
      * @param readEnvironment Specifies whether environment bindings should
@@ -91,13 +91,6 @@ public:
      */
     static ProcessInfo* newInstance(int pid,bool readEnvironment = false);
 
-    /**
-     * Constructs a new process instance.  You should not call the constructor
-     * of ProcessInfo or its subclasses directly.  Instead use the 
-     * static ProcessInfo::newInstance() method which will return
-     * a suitable ProcessInfo instance for the current platform.
-     */ 
-    explicit ProcessInfo(int pid , bool readEnvironment = false);
     virtual ~ProcessInfo() {}
 
     /** 
@@ -106,7 +99,7 @@ public:
      */
     void update();
 
-    /** Returns true if the process state was read successfully */ 
+    /** Returns true if the process state was read successfully. */ 
     bool isValid() const;
     /** 
      * Returns the process id.  
@@ -120,7 +113,8 @@ public:
      * @param ok Set to true if the parent process id
      */
     int parentPid(bool* ok) const;
-    /*** 
+    
+    /** 
      * Returns the id of the current foreground process 
      *
      * NOTE:  Using the foregroundProcessGroup() method of the Pty
@@ -130,6 +124,7 @@ public:
      * @param ok Set to true if the foreground process id was read successfully or false otherwise
      */
     int foregroundPid(bool* ok) const;
+    
     /** Returns the name of the current process */
     QString name(bool* ok) const;
    
@@ -163,22 +158,32 @@ public:
      * Parses an input string, looking for markers beginning with a '%' 
      * character and returns a string with the markers replaced
      * with information from this process description.
-     *
+     * <br>
      * The markers recognised are:
-     *
-     * %u - Name of the user which owns the process.
-     * %n - Replaced with the name of the process.
-     * %d - Replaced with the last part of the path name of the 
+     * <ul>
+     * <li> %u - Name of the user which owns the process. </li>
+     * <li> %n - Replaced with the name of the process.   </li>
+     * <li> %d - Replaced with the last part of the path name of the 
      *      process' current working directory.
      *      
      *      (eg. if the current directory is '/home/bob' then
      *      'bob' would be returned)
-     *
-     * %D - Replaced with the current working directory of the process.
+     * </li>
+     * <li> %D - Replaced with the current working directory of the process. </li>
+     * </ul>
      */
     QString format(const QString& text) const;
 
 protected:
+    /**
+     * Constructs a new process instance.  You should not call the constructor
+     * of ProcessInfo or its subclasses directly.  Instead use the 
+     * static ProcessInfo::newInstance() method which will return
+     * a suitable ProcessInfo instance for the current platform.
+     */ 
+    explicit ProcessInfo(int pid , bool readEnvironment = false);
+
+
     /** 
      * This is called on construction to read the process state 
      * Subclasses should reimplement this function to provide
@@ -268,6 +273,10 @@ private:
 class NullProcessInfo : public ProcessInfo
 {
 public:
+    /** 
+     * Constructs a new NullProcessInfo instance.
+     * See ProcessInfo::newInstance()
+     */
     explicit NullProcessInfo(int pid,bool readEnvironment = false);
 protected:
     virtual bool readProcessInfo(int pid,bool readEnvironment);
@@ -280,8 +289,11 @@ protected:
 class UnixProcessInfo : public ProcessInfo
 {
 public:
+    /** 
+     * Constructs a new instance of UnixProcessInfo.
+     * See ProcessInfo::newInstance()
+     */
     explicit UnixProcessInfo(int pid,bool readEnvironment = false);
-
 protected:
     // reads the /proc/<pid>/stat file to get status information
     // about the process, also uses readEnvironment() and readArguments()
