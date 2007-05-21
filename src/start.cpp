@@ -21,6 +21,7 @@
 #include "Application.h"
 
 // X11
+#include <X11/Xlib.h>
 #include <X11/extensions/Xrender.h>
 
 // KDE
