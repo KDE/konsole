@@ -142,17 +142,28 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
     _ui->remoteTabTitleEdit->setText( 
             info->property(Profile::RemoteTabTitleFormat).value<QString>());
 
-    // tab mode
+    // tab options
     int tabMode = info->property(Profile::TabBarMode).value<int>();
+    int tabPosition = info->property(Profile::TabBarPosition).value<int>();
 
-    RadioOption tabModes[] = {  {_ui->alwaysHideTabBarButton,Profile::AlwaysHideTabBar,
-                                 SLOT(alwaysHideTabBar())   },
-                                {_ui->alwaysShowTabBarButton,Profile::AlwaysShowTabBar,
-                                 SLOT(alwaysShowTabBar())   },
-                                {_ui->autoShowTabBarButton,Profile::ShowTabBarAsNeeded,
-                                 SLOT(showTabBarAsNeeded()) },
-                                {0,0,0} };
-    setupRadio( tabModes , tabMode );
+    // note: Items should be in the same order as the 
+    // Profile::TabBarModeEnum enum
+    _ui->tabBarVisibilityCombo->addItems( QStringList() << i18n("Always hide tab bar")
+                                                        << i18n("Show tab bar when needed") 
+                                                        << i18n("Always show tab bar") );
+    _ui->tabBarVisibilityCombo->setCurrentIndex(tabMode);
+
+    // note: Items should be in the same order as the
+    // Profile::TabBarPositionEnum enum
+    _ui->tabBarPositionCombo->addItems( QStringList() << i18n("Below terminal displays")
+                                                      << i18n("Above terminal displays") );
+
+    _ui->tabBarPositionCombo->setCurrentIndex(tabPosition);
+
+    connect( _ui->tabBarVisibilityCombo , SIGNAL(activated(int)) , this , 
+             SLOT(tabBarVisibilityChanged(int)) );
+    connect( _ui->tabBarPositionCombo , SIGNAL(activated(int)) , this ,
+             SLOT(tabBarPositionChanged(int)) );
 
     _ui->showMenuBarButton->setChecked( info->property(Profile::ShowMenuBar).value<bool>() );
 
@@ -188,6 +199,14 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
     connect(_ui->showMenuBarButton , SIGNAL(toggled(bool)) , this , 
             SLOT(showMenuBar(bool)) );
 }
+void EditProfileDialog::tabBarVisibilityChanged(int newValue)
+{
+    _tempProfile->setProperty( Profile::TabBarMode , newValue );
+}
+void EditProfileDialog::tabBarPositionChanged(int newValue)
+{
+    _tempProfile->setProperty( Profile::TabBarPosition , newValue );
+}
 void EditProfileDialog::insertTabTitleText(const QString& text)
 {
     _ui->tabTitleEdit->insert(text);
@@ -199,18 +218,6 @@ void EditProfileDialog::insertRemoteTabTitleText(const QString& text)
 void EditProfileDialog::showMenuBar(bool show)
 {
     _tempProfile->setProperty(Profile::ShowMenuBar,show);
-}
-void EditProfileDialog::alwaysHideTabBar()
-{
-    _tempProfile->setProperty(Profile::TabBarMode,Profile::AlwaysHideTabBar);
-}
-void EditProfileDialog::alwaysShowTabBar()
-{
-    _tempProfile->setProperty(Profile::TabBarMode,Profile::AlwaysShowTabBar);
-}
-void EditProfileDialog::showTabBarAsNeeded()
-{
-    _tempProfile->setProperty(Profile::TabBarMode,Profile::ShowTabBarAsNeeded);
 }
 void EditProfileDialog::tabTitleFormatChanged(const QString& format)
 {

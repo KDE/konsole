@@ -460,14 +460,25 @@ QList<ViewContainer::NavigationPosition> TabbedViewContainerV2::supportedNavigat
 }
 void TabbedViewContainerV2::navigationPositionChanged(NavigationPosition position)
 {
-    if ( position == NavigationPositionTop && _layout->indexOf(_tabBar) != 0 )
+    // index of tab bar in layout when it is at the top
+    const int TabBarTopIndex = 1;
+
+    if ( position == NavigationPositionTop 
+            && _layout->indexOf(_tabBar) != TabBarTopIndex )
     {
+        _layout->removeWidget(_tabBar);
+        _layout->removeItem(_tabBarSpacer);
+
         _layout->insertWidget(0,_tabBar);
         _layout->insertItemAt(0,_tabBarSpacer);
         _tabBar->setShape(QTabBar::RoundedNorth);
     }
-    else if ( position == NavigationPositionBottom && _layout->indexOf(_tabBar) == 0 )
+    else if ( position == NavigationPositionBottom 
+            && _layout->indexOf(_tabBar) == TabBarTopIndex )
     {
+        _layout->removeWidget(_tabBar);
+        _layout->removeItem(_tabBarSpacer);
+
         _layout->insertWidget(-1,_tabBar);
         _layout->insertItemAt(-1,_tabBarSpacer);
         _tabBar->setShape(QTabBar::RoundedSouth);

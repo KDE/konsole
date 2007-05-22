@@ -51,6 +51,7 @@ FallbackProfile::FallbackProfile()
     setProperty(LocalTabTitleFormat,"%d : %n");
     setProperty(RemoteTabTitleFormat,"%H (%u)");
     setProperty(TabBarMode,AlwaysShowTabBar);
+    setProperty(TabBarPosition,TabBarBottom);
     setProperty(ShowMenuBar,true);
 
     setProperty(KeyBindings,"default");
@@ -186,6 +187,7 @@ bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile* profil
 
     // Menu and Tab Bar
     writeStandardElement( general , "TabBarMode" , profile , Profile::TabBarMode );
+    writeStandardElement( general , "TabBarPosition" , profile , Profile::TabBarPosition );
     writeStandardElement( general , "ShowMenuBar" , profile , Profile::ShowMenuBar );
 
     // Keyboard
@@ -260,6 +262,7 @@ bool KDE4ProfileReader::readProfile(const QString& path , Profile* profile)
     readStandardElement<QString>(general,"RemoteTabTitleFormat",profile,Profile::RemoteTabTitleFormat);
    
     readStandardElement<int>(general,"TabBarMode",profile,Profile::TabBarMode);
+    readStandardElement<int>(general,"TabBarPosition",profile,Profile::TabBarPosition);
     readStandardElement<bool>(general,"ShowMenuBar",profile,Profile::ShowMenuBar);
 
     // keyboard

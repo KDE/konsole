@@ -302,7 +302,7 @@ void ViewManager::splitView(Qt::Orientation orientation)
     // container and create a new view for that session in a new container 
     QListIterator<QWidget*> existingViewIter(_viewSplitter->activeContainer()->views());
     
-    ViewContainer* container = createContainer(); 
+    ViewContainer* container = 0; 
 
     while (existingViewIter.hasNext())
     {
@@ -312,6 +312,11 @@ void ViewManager::splitView(Qt::Orientation orientation)
         ViewProperties* properties = createController(session,display);
 
         _sessionMap[display] = session;
+
+        // create a container using settings from the first 
+        // session in the previous container
+        if ( !container )
+            container = createContainer(session->profileKey());
 
         container->addView(display,properties);
         session->addView( display );
@@ -387,7 +392,8 @@ void ViewManager::createView(Session* session)
     // create the default container
     if (_viewSplitter->containers().count() == 0)
     {
-        _viewSplitter->addContainer( createContainer() , Qt::Vertical );
+        _viewSplitter->addContainer( createContainer(session->profileKey()) , 
+                                     Qt::Vertical );
         emit splitViewToggle(false);
     }
 
@@ -426,9 +432,19 @@ void ViewManager::createView(Session* session)
     }
 }
 
-ViewContainer* ViewManager::createContainer()
+ViewContainer* ViewManager::createContainer(const QString& profileKey)
 {
-    ViewContainer* container = new TabbedViewContainerV2(ViewContainer::NavigationPositionBottom,_viewSplitter);
+    const Profile* info = SessionManager::instance()->profile(profileKey);
+
+    Q_ASSERT( info );
+
+    const int tabPosition = info->property(Profile::TabBarPosition).value<int>();
+
+    ViewContainer::NavigationPosition position = ( tabPosition == Profile::TabBarTop ) ?
+                                                   ViewContainer::NavigationPositionTop :
+                                                   ViewContainer::NavigationPositionBottom;
+
+    ViewContainer* container = new TabbedViewContainerV2(position,_viewSplitter);
 
     // connect signals and slots
     connect( container , SIGNAL(viewAdded(QWidget*,ViewProperties*)) , _containerSignalMapper ,
@@ -508,12 +524,19 @@ void ViewManager::applyProfile(TerminalDisplay* view , const QString& profileKey
     // tab bar visibility
     ViewContainer* container = _viewSplitter->activeContainer();
     int tabBarMode = info->property(Profile::TabBarMode).value<int>();
+    int tabBarPosition = info->property(Profile::TabBarPosition).value<int>();
+
     if ( tabBarMode == Profile::AlwaysHideTabBar )
         container->setNavigationDisplayMode(ViewContainer::AlwaysHideNavigation);
     else if ( tabBarMode == Profile::AlwaysShowTabBar )
         container->setNavigationDisplayMode(ViewContainer::AlwaysShowNavigation);
     else if ( tabBarMode == Profile::ShowTabBarAsNeeded )
         container->setNavigationDisplayMode(ViewContainer::ShowNavigationAsNeeded);
+
+    if ( tabBarPosition == Profile::TabBarTop )
+        container->setNavigationPosition(ViewContainer::NavigationPositionTop);
+    else if ( tabBarPosition == Profile::TabBarBottom )
+        container->setNavigationPosition(ViewContainer::NavigationPositionBottom);
 
     // load colour scheme
     view->setColorTable(colorScheme->colorTable());

@@ -156,18 +156,34 @@ public:
 
         /** TODO Document me */
         // FIXME - Is this a duplicate of SelectWordCharacters?
-        WordCharacters  // QString
+        WordCharacters,  // QString
+
+        /** (TabBarPositionEnum) Position of the tab-bar relative to the terminal displays. */
+        TabBarPosition
     };
 
-    /** This enum describes the available modes for showing or hiding the tab bar. */
+    /** 
+     * This enum describes the available modes for showing or hiding the tab bar. 
+     */
     enum TabBarModeEnum
     {
         /** The tab bar is never shown. */
-        AlwaysHideTabBar,
+        AlwaysHideTabBar   = 0,
         /** The tab bar is shown if there are multiple tabs open or hidden otherwise. */
-        ShowTabBarAsNeeded,
+        ShowTabBarAsNeeded = 1,
         /** The tab bar is always shown. */
-        AlwaysShowTabBar
+        AlwaysShowTabBar   = 2
+    };
+
+    /** 
+     * This enum describes the available tab bar positions. 
+     */
+    enum TabBarPositionEnum
+    {
+        /** Show tab bar below displays. */
+        TabBarBottom = 0,
+        /** Show tab bar above displays. */
+        TabBarTop    = 1
     };
 
     /** 
@@ -177,15 +193,15 @@ public:
     enum HistoryModeEnum
     {
         /** No output is remembered.  As soon as lines of text are scrolled off-screen they are lost. */
-        DisableHistory,
+        DisableHistory   = 0,
         /** A fixed number of lines of output are remembered.  Once the limit is reached, the oldest
          * lines are lost. */
-        FixedSizeHistory,
+        FixedSizeHistory = 1,
         /** All output is remembered for the duration of the session.  
          * Typically this means that lines are recorded to
          * a file as they are scrolled off-screen.
          */
-        UnlimitedHistory
+        UnlimitedHistory = 2
     };
 
     /**
@@ -194,22 +210,22 @@ public:
     enum ScrollBarPositionEnum
     {
         /** Show the scroll-bar on the left of the terminal display. */
-        ScrollBarLeft,
+        ScrollBarLeft   = 0,
         /** Show the scroll-bar on the right of the terminal display. */
-        ScrollBarRight,
+        ScrollBarRight  = 1,
         /** Do not show the scroll-bar. */
-        ScrollBarHidden
+        ScrollBarHidden = 2
     };
 
     /** This enum describes the shapes used to draw the cursor in terminal displays. */
     enum CursorShapeEnum
     {
         /** Use a solid rectangular block to draw the cursor. */
-        BlockCursor,
+        BlockCursor     = 0,
         /** Use an 'I' shape, similar to that used in text editing applications, to draw the cursor. */
-        IBeamCursor,
+        IBeamCursor     = 1,
         /** Draw a line underneath the cursor's position. */
-        UnderlineCursor
+        UnderlineCursor = 2
     };
 
     /**

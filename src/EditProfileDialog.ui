@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>505</width>
-    <height>524</height>
+    <width>581</width>
+    <height>679</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -37,126 +37,138 @@
       <attribute name="title" >
        <string>General</string>
       </attribute>
-      <layout class="QGridLayout" >
-       <item row="0" column="0" >
-        <widget class="QLabel" name="profileNameLabel" >
-         <property name="text" >
-          <string>Profile name:</string>
+      <layout class="QVBoxLayout" >
+       <item>
+        <widget class="QGroupBox" name="groupBox_10" >
+         <property name="title" >
+          <string>Basic Profile Options</string>
          </property>
-         <property name="alignment" >
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         <property name="flat" >
+          <bool>true</bool>
          </property>
+         <layout class="QGridLayout" >
+          <item row="0" column="0" >
+           <widget class="QLabel" name="profileNameLabel" >
+            <property name="text" >
+             <string>Profile name:</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" colspan="2" >
+           <widget class="QLineEdit" name="profileNameEdit" >
+            <property name="toolTip" >
+             <string>A descriptive name for the profile</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" >
+           <widget class="QLabel" name="label_3" >
+            <property name="text" >
+             <string>Command:</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="2" >
+           <widget class="KLineEdit" name="commandEdit" >
+            <property name="toolTip" >
+             <string>The command to execute when new terminal sessions are created using this profile</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" >
+           <widget class="QLabel" name="label_9" >
+            <property name="text" >
+             <string>Initial directory:</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1" colspan="2" >
+           <widget class="KLineEdit" name="initialDirEdit" >
+            <property name="toolTip" >
+             <string>The initial working directory for new terminal sessions using this profile</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3" >
+           <widget class="QToolButton" name="dirSelectButton" >
+            <property name="toolTip" >
+             <string>Browse for initial directory</string>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" >
+           <widget class="QLabel" name="label_10" >
+            <property name="text" >
+             <string>Icon:</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" >
+           <widget class="QPushButton" name="iconSelectButton" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize" >
+             <size>
+              <width>64</width>
+              <height>64</height>
+             </size>
+            </property>
+            <property name="baseSize" >
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="toolTip" >
+             <string>Select the icon displayed on tabs using this profile</string>
+            </property>
+            <property name="text" >
+             <string/>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>48</width>
+              <height>48</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2" >
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </widget>
        </item>
-       <item row="0" column="1" colspan="2" >
-        <widget class="QLineEdit" name="profileNameEdit" >
-         <property name="toolTip" >
-          <string>A descriptive name for the profile</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0" >
-        <widget class="QLabel" name="label_3" >
-         <property name="text" >
-          <string>Command:</string>
-         </property>
-         <property name="alignment" >
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1" colspan="2" >
-        <widget class="KLineEdit" name="commandEdit" >
-         <property name="toolTip" >
-          <string>The command to execute when new terminal sessions are created using this profile</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0" >
-        <widget class="QLabel" name="label_9" >
-         <property name="text" >
-          <string>Initial directory:</string>
-         </property>
-         <property name="alignment" >
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1" colspan="2" >
-        <widget class="KLineEdit" name="initialDirEdit" >
-         <property name="toolTip" >
-          <string>The initial working directory for new terminal sessions using this profile</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="3" >
-        <widget class="QToolButton" name="dirSelectButton" >
-         <property name="toolTip" >
-          <string>Browse for initial directory</string>
-         </property>
-         <property name="text" >
-          <string>...</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0" >
-        <widget class="QLabel" name="label_10" >
-         <property name="text" >
-          <string>Icon:</string>
-         </property>
-         <property name="alignment" >
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1" >
-        <widget class="QPushButton" name="iconSelectButton" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize" >
-          <size>
-           <width>64</width>
-           <height>64</height>
-          </size>
-         </property>
-         <property name="baseSize" >
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="toolTip" >
-          <string>Select the icon displayed on tabs using this profile</string>
-         </property>
-         <property name="text" >
-          <string/>
-         </property>
-         <property name="iconSize" >
-          <size>
-           <width>48</width>
-           <height>48</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="2" >
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" >
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="5" column="0" colspan="4" >
+       <item>
         <widget class="QGroupBox" name="groupBox_5" >
          <property name="title" >
           <string>Tab Titles</string>
@@ -222,7 +234,7 @@
          </layout>
         </widget>
        </item>
-       <item row="6" column="0" colspan="4" >
+       <item>
         <widget class="QGroupBox" name="groupBox_2" >
          <property name="title" >
           <string>Window &amp;&amp; Tab Bar Options</string>
@@ -230,8 +242,8 @@
          <property name="flat" >
           <bool>true</bool>
          </property>
-         <layout class="QVBoxLayout" >
-          <item>
+         <layout class="QGridLayout" >
+          <item row="0" column="0" >
            <widget class="QCheckBox" name="showMenuBarButton" >
             <property name="toolTip" >
              <string>Show or hide the menu bar in terminal windows using this profile</string>
@@ -241,48 +253,52 @@
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QRadioButton" name="alwaysHideTabBarButton" >
-            <property name="toolTip" >
-             <string>Never show the tab bar</string>
-            </property>
+          <item row="1" column="0" >
+           <widget class="QLabel" name="label_12" >
             <property name="text" >
-             <string>Always hide tab bar</string>
+             <string>Tab bar display:</string>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QRadioButton" name="autoShowTabBarButton" >
-            <property name="toolTip" >
-             <string>Hide or show the tab bar automatically depending on the number of tabs open</string>
-            </property>
-            <property name="text" >
-             <string>Show tab bar when more than one tab is open</string>
+          <item row="1" column="1" >
+           <widget class="QComboBox" name="tabBarVisibilityCombo" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>1</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QRadioButton" name="alwaysShowTabBarButton" >
-            <property name="toolTip" >
-             <string>Always show the tab bar</string>
-            </property>
+          <item row="2" column="0" >
+           <widget class="QLabel" name="label_13" >
             <property name="text" >
-             <string>Always show tab bar</string>
+             <string>Tab bar position:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1" >
+           <widget class="QComboBox" name="tabBarPositionCombo" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>1</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
            </widget>
           </item>
          </layout>
         </widget>
        </item>
-       <item row="7" column="0" >
+       <item>
         <spacer>
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
          <property name="sizeHint" >
           <size>
-           <width>20</width>
-           <height>40</height>
+           <width>95</width>
+           <height>61</height>
           </size>
          </property>
         </spacer>
@@ -468,62 +484,74 @@
       <attribute name="title" >
        <string>Keyboard Setup</string>
       </attribute>
-      <layout class="QGridLayout" >
-       <item rowspan="5" row="0" column="0" >
-        <widget class="QListView" name="keyBindingList" />
-       </item>
-       <item row="0" column="1" >
-        <widget class="QPushButton" name="newKeyBindingsButton" >
-         <property name="toolTip" >
-          <string>Create a new key bindings list based upon the selected bindings</string>
+      <layout class="QVBoxLayout" >
+       <item>
+        <widget class="QGroupBox" name="keyBindingsGroup" >
+         <property name="title" >
+          <string>Key Bindings</string>
          </property>
-         <property name="text" >
-          <string>New...</string>
+         <property name="flat" >
+          <bool>true</bool>
          </property>
+         <layout class="QGridLayout" >
+          <item rowspan="5" row="0" column="0" >
+           <widget class="QListView" name="keyBindingList" />
+          </item>
+          <item row="0" column="1" >
+           <widget class="QPushButton" name="newKeyBindingsButton" >
+            <property name="toolTip" >
+             <string>Create a new key bindings list based upon the selected bindings</string>
+            </property>
+            <property name="text" >
+             <string>New...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" >
+           <widget class="QPushButton" name="editKeyBindingsButton" >
+            <property name="toolTip" >
+             <string>Edit the selected key bindings list</string>
+            </property>
+            <property name="text" >
+             <string>Edit...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1" >
+           <widget class="QPushButton" name="removeKeyBindingsButton" >
+            <property name="toolTip" >
+             <string>Delete the selected key bindings list</string>
+            </property>
+            <property name="text" >
+             <string>Remove</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" >
+           <widget class="QPushButton" name="selectKeyBindingsButton" >
+            <property name="toolTip" >
+             <string>Use the selected key bindings list in this profile</string>
+            </property>
+            <property name="text" >
+             <string>Select</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1" >
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>71</width>
+              <height>101</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </widget>
-       </item>
-       <item row="1" column="1" >
-        <widget class="QPushButton" name="editKeyBindingsButton" >
-         <property name="toolTip" >
-          <string>Edit the selected key bindings list</string>
-         </property>
-         <property name="text" >
-          <string>Edit...</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1" >
-        <widget class="QPushButton" name="removeKeyBindingsButton" >
-         <property name="toolTip" >
-          <string>Delete the selected key bindings list</string>
-         </property>
-         <property name="text" >
-          <string>Remove</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1" >
-        <widget class="QPushButton" name="selectKeyBindingsButton" >
-         <property name="toolTip" >
-          <string>Use the selected key bindings list in this profile</string>
-         </property>
-         <property name="text" >
-          <string>Select</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="1" >
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" >
-          <size>
-           <width>75</width>
-           <height>331</height>
-          </size>
-         </property>
-        </spacer>
        </item>
       </layout>
      </widget>

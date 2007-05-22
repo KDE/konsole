@@ -103,9 +103,8 @@ private slots:
     void insertRemoteTabTitleText(const QString& text);
 
     void showMenuBar(bool);
-    void alwaysHideTabBar();
-    void alwaysShowTabBar();
-    void showTabBarAsNeeded();
+    void tabBarVisibilityChanged(int);
+    void tabBarPositionChanged(int);
 
     // appearance page
     void setFontSize(int pointSize);

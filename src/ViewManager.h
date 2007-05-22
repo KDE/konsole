@@ -190,7 +190,9 @@ private:
     void splitView(Qt::Orientation orientation);
     
     // creates a new container which can hold terminal displays
-    ViewContainer* createContainer();
+    // 'key' specifies the profile to use to get initial
+    // settings (eg. navigation position) for the container
+    ViewContainer* createContainer(const QString& profileKey);
     // removes a container and emits appropriate signals
     void removeContainer(ViewContainer* container);
 
