@@ -374,7 +374,10 @@ signals:
   
   /** Emitted when the session's title has changed. */
   void titleChanged();
- 
+
+  /** Emitted when the session's profile has changed. */
+  void profileChanged(const QString& profile);
+
   /** 
    * Emitted when the activity state of this session changes.
    *

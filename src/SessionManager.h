@@ -223,6 +223,12 @@ signals:
     void profileChanged(const QString& key);
 
     /** 
+     * Emitted when a session's settings are updated to match 
+     * its current profile. 
+     */
+    void sessionUpdated(Session* session);
+
+    /** 
      * Emitted when the favorite status of a profile changes. 
      * 
      * @param key The key for the profile
@@ -246,6 +252,9 @@ protected Q_SLOTS:
      * @param session The Session which has finished executing.
      */
     void sessionTerminated( QObject* session );
+
+private slots:
+    void sessionProfileChanged();
 
 private:
     // loads the mappings between shortcut key sequences and 

@@ -176,6 +176,8 @@ private slots:
     // called when a profile changes
     void profileChanged(const QString& key);
 
+    void updateViewsForSession(Session* session);
+
 private:
     void setupActions();
     void focusActiveView();

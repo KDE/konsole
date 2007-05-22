@@ -28,6 +28,7 @@
 #include <KIcon>
 #include <KInputDialog>
 #include <KLocale>
+#include <KMenu>
 #include <KRun>
 #include <KToggleAction>
 #include <KUrl>
@@ -44,6 +45,7 @@
 #include "ScreenWindow.h"
 #include "Session.h"
 #include "ProcessInfo.h"
+#include "ProfileList.h"
 #include "TerminalDisplay.h"
 
 // for SaveHistoryTask
@@ -75,6 +77,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _findPreviousAction(0)
     , _urlFilterUpdateRequired(false)
     , _codecAction(0)
+    , _changeProfileMenu(0)
 {
     Q_ASSERT( session );
     Q_ASSERT( view );
@@ -459,18 +462,32 @@ void SessionController::setupActions()
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_X) );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearHistoryAndReset()) );
 
-    // Terminal Options 
+    // Profile Options 
     action = collection->addAction("edit-current-profile");
     action->setText( i18n("Edit Current Profile...") );
     connect( action , SIGNAL(triggered()) , this , SLOT(editCurrentProfile()) );
 
-    action = collection->addAction("change-profile");
-    action->setText( i18n("Change Profile") );
-   
+    _changeProfileMenu = new KMenu(i18n("Change Profile"));
+    collection->addAction("change-profile",_changeProfileMenu->menuAction());
+    connect( _changeProfileMenu , SIGNAL(aboutToShow()) , this , SLOT(prepareChangeProfileMenu()) ); 
+    
     // debugging tools
     //action = collection->addAction("debug-process");
     //action->setText( "Get Foreground Process" );
     //connect( action , SIGNAL(triggered()) , this , SLOT(debugProcess()) );
+}
+void SessionController::changeProfile(const QString& key)
+{
+    _session->setProfileKey(key);
+}
+void SessionController::prepareChangeProfileMenu()
+{
+    if ( _changeProfileMenu->isEmpty() )
+    {
+        ProfileList* list = new ProfileList(this);
+        connect( list , SIGNAL(profileSelected(const QString&)) , this , SLOT(changeProfile(const QString&)) );
+        _changeProfileMenu->addActions(list->actions());
+    }
 }
 void SessionController::updateCodecAction()
 {
@@ -800,6 +817,7 @@ void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , in
     {
         QMenu* popup = dynamic_cast<QMenu*>(factory()->container("session-popup-menu",this));
     
+        
         Q_ASSERT( popup );
 
         popup->exec( _view->mapToGlobal(QPoint(x,y)) );

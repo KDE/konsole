@@ -26,6 +26,8 @@ The KDE 4.0 TODO List:
       of that setting when drawing the terminal
       display )
 
+- Input Method Event in terminal display widget
+
 - Ability to define bold or transparent status for each
   color in the color scheme.  Make the setting of 
   boldness for characters more intuitive than in the KDE 3

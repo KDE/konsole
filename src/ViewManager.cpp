@@ -74,6 +74,8 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
     // listen for profile changes
     connect( SessionManager::instance() , SIGNAL(profileChanged(const QString&)) , this,
             SLOT(profileChanged(const QString&)) );
+    connect( SessionManager::instance() , SIGNAL(sessionUpdated(Session*)) , this,
+            SLOT(updateViewsForSession(Session*)) );
 }
 
 ViewManager::~ViewManager()
@@ -555,6 +557,15 @@ void ViewManager::applyProfile(TerminalDisplay* view , const QString& profileKey
 
     // word characters
     view->setWordCharacters( info->property(Profile::WordCharacters).value<QString>() );
+}
+
+void ViewManager::updateViewsForSession(Session* session)
+{
+    QListIterator<QPointer<TerminalDisplay> > iter(_sessionMap.keys(session));
+    while ( iter.hasNext() )
+    {
+        applyProfile(iter.next(),session->profileKey());
+    }
 }
 
 void ViewManager::profileChanged(const QString& key)

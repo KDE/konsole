@@ -44,6 +44,7 @@ namespace KIO
 class QAction;
 class QTextCodec;
 class KCodecAction;
+class KMenu;
 class KToggleAction;
 class KUrl;
 class KJob;
@@ -154,8 +155,10 @@ private slots:
     void decreaseTextSize();
     void renameSession();
     void saveSession();
-  
+    void changeProfile(const QString& key);
+
     // other
+    void prepareChangeProfileMenu();
     void updateCodecAction();
     void showDisplayContextMenu(TerminalDisplay* display , int state , int x , int y);
     void sessionStateChanged(int state);
@@ -208,6 +211,8 @@ private:
     QPointer<IncrementalSearchBar> _searchBar;
 
     KCodecAction* _codecAction;
+
+    KMenu* _changeProfileMenu;
 };
 
 /** 

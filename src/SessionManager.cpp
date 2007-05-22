@@ -179,6 +179,10 @@ void SessionManager::updateSession(Session* session)
     Q_ASSERT( info );
 
     applyProfile(session,info,false);
+
+    // FIXME - This may update a lot more than just the session
+    // of interest. 
+    emit sessionUpdated(session);
 }
 
 Session* SessionManager::createSession(const QString& key )
@@ -195,8 +199,10 @@ Session* SessionManager::createSession(const QString& key )
     //configuration information found, create a new session based on this
     session = new Session();
     session->setProfileKey(key);
-    
     applyProfile(session,info,false);
+
+    connect( session , SIGNAL(profileChanged(const QString&)) , this , 
+            SLOT(sessionProfileChanged()) );
 
     //ask for notification when session dies
     _sessionMapper->setMapping(session,session);
@@ -323,7 +329,9 @@ void SessionManager::applyProfile(const QString& key , bool modifiedPropertiesOn
 }
 void SessionManager::applyProfile(Session* session, const Profile* info , bool modifiedPropertiesOnly)
 {
-    session->setProfileKey( _types.key((Profile*)info) );
+    QString key = _types.key((Profile*)info);
+    if ( session->profileKey() != key )
+        session->setProfileKey(key); 
 
     // Basic session settings
     if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Name) )
@@ -613,6 +621,15 @@ QString SessionManager::findByShortcut(const QKeySequence& shortcut)
     }
 
     return _shortcuts[shortcut].profileKey;
+}
+
+void SessionManager::sessionProfileChanged()
+{
+    Session* session = qobject_cast<Session*>(sender());
+
+    Q_ASSERT( session );
+
+    updateSession(session); 
 }
 
 QKeySequence SessionManager::shortcut(const QString& profileKey) const
