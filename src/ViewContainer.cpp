@@ -460,11 +460,15 @@ QList<ViewContainer::NavigationPosition> TabbedViewContainerV2::supportedNavigat
 }
 void TabbedViewContainerV2::navigationPositionChanged(NavigationPosition position)
 {
-    // index of tab bar in layout when it is at the top
-    const int TabBarTopIndex = 1;
+    // this method assumes that there are only three items 
+    // in the layout
+    Q_ASSERT( _layout->count() == 3 );
+
+    // index of stack widget in the layout when tab bar is at the bottom
+    const int StackIndexWithTabBottom = 0;
 
     if ( position == NavigationPositionTop 
-            && _layout->indexOf(_tabBar) != TabBarTopIndex )
+            && _layout->indexOf(_stackWidget) == StackIndexWithTabBottom )
     {
         _layout->removeWidget(_tabBar);
         _layout->removeItem(_tabBarSpacer);
@@ -474,7 +478,7 @@ void TabbedViewContainerV2::navigationPositionChanged(NavigationPosition positio
         _tabBar->setShape(QTabBar::RoundedNorth);
     }
     else if ( position == NavigationPositionBottom 
-            && _layout->indexOf(_tabBar) == TabBarTopIndex )
+            && _layout->indexOf(_stackWidget) != StackIndexWithTabBottom )
     {
         _layout->removeWidget(_tabBar);
         _layout->removeItem(_tabBarSpacer);
