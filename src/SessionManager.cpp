@@ -644,8 +644,8 @@ QKeySequence SessionManager::shortcut(const QString& profileKey) const
              || iter.value().profilePath == info->path() )
             return iter.key();
     }
-    // dummy
-    return QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_B);
+    
+    return QKeySequence();
 }
 
 void SessionManager::setInstance(SessionManager* instance)

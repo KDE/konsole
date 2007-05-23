@@ -70,7 +70,7 @@ Application* Application::self()
 MainWindow* Application::newMainWindow()
 {
     MainWindow* window = new MainWindow();
-    window->setSessionList( new ProfileList(window) );
+    window->setSessionList( new ProfileList(true,window) );
 
     connect( window , SIGNAL(newSessionRequest(const QString&,ViewManager*)), 
                       this , SLOT(createSession(const QString&,ViewManager*)));

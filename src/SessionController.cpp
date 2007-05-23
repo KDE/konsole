@@ -484,7 +484,7 @@ void SessionController::prepareChangeProfileMenu()
 {
     if ( _changeProfileMenu->isEmpty() )
     {
-        ProfileList* list = new ProfileList(this);
+        ProfileList* list = new ProfileList(false,this);
         connect( list , SIGNAL(profileSelected(const QString&)) , this , SLOT(changeProfile(const QString&)) );
         _changeProfileMenu->addActions(list->actions());
     }

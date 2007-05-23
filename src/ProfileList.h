@@ -32,8 +32,12 @@ namespace Konsole
 class Profile;
 
 /** 
- * ProfileList provides a list of actions which represent session profiles that a SessionManager 
- * can create a session from.  These actions can be plugged into a GUI 
+ * ProfileList provides a list of actions which represent session profiles 
+ * that a SessionManager can create a session from.  
+ *
+ * These actions can be plugged into a GUI.
+ *
+ * Currently only profiles marked as favorites in the SessionManager are included. 
  *
  * The user-data associated with each session can be passed to the createProfile() method of the 
  * SessionManager to create a new terminal session. 
@@ -43,8 +47,14 @@ class ProfileList : public QObject
 Q_OBJECT
 
 public:
-    /** Constructs a new session list which displays sessions that can be created by @p manager */
-    ProfileList(QObject* parent);
+    /** 
+     * Constructs a new session list which displays sessions 
+     * that can be created by @p manager 
+     *
+     * @param addShortcuts True if the shortcuts associated with profiles
+     * in the session manager should be added to the actions
+     */
+    ProfileList(bool addShortcuts , QObject* parent);
 
     /** 
      * Returns a list of actions representing the types of sessions which can be created by
@@ -76,6 +86,7 @@ private:
     void updateAction(QAction* action , Profile* profile);
 
     QActionGroup*   _group;
+    bool _addShortcuts;
 }; 
 
 }

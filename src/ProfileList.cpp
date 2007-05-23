@@ -33,8 +33,9 @@
 
 using namespace Konsole;
 
-ProfileList::ProfileList(QObject* parent)
+ProfileList::ProfileList(bool addShortcuts , QObject* parent)
     : QObject(parent)
+    , _addShortcuts(addShortcuts)
 {
     SessionManager* manager = SessionManager::instance();
 
@@ -90,12 +91,19 @@ void ProfileList::updateAction(QAction* action , Profile* info)
 
 void ProfileList::favoriteChanged(const QString& key,bool isFavorite)
 {
+    SessionManager* manager = SessionManager::instance();
+
     if ( isFavorite )
     {
-        Profile* info = SessionManager::instance()->profile(key);
+        Profile* info = manager->profile(key);
 
         QAction* action = new QAction(_group);
         action->setData( key );
+        
+        if ( _addShortcuts )
+        {
+            action->setShortcut(manager->shortcut(key));
+        }
 
         updateAction(action,info);
 
