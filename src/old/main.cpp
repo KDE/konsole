@@ -57,7 +57,7 @@
 #include <kconfig.h>
 
 // Konsole
-#include "config-konsole.h"
+#include <config-konsole.h>
 #include "konsole.h"
 #include "SessionManager.h"
 

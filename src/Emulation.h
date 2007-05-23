@@ -72,7 +72,7 @@ enum
  * Base class for terminal emulation back-ends.
  *
  * The back-end is responsible for decoding an incoming character stream and 
- * producing an ouput image of characters.
+ * producing an output image of characters.
  *
  * When input from the terminal is received, the receiveData() slot should be called with
  * the data which has arrived.  The emulation will process the data and update the 

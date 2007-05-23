@@ -29,6 +29,8 @@
     terminal sessions and applying settings.
 */
 
+#include "konsole.h"
+
 // System
 #include <assert.h>
 #include <dirent.h>
@@ -58,7 +60,6 @@
 #include <QSpinBox>
 #include <QStringList>
 #include <QTextStream>
-#include <QTime>
 #include <QTime>
 #include <QToolButton>
 #include <QToolTip>
@@ -122,7 +123,6 @@
 #include "ViewContainer.h"
 #include "NavigationItem.h"
 
-#include "konsole.h"
 
 #define KONSOLEDEBUG    kDebug(1211)
 
@@ -137,7 +137,7 @@ extern bool true_transparency; // declared in main.characterpp and konsole_part.
 // KonsoleFontSelectAction is now also used for selectSize!
 class KonsoleFontSelectAction : public KSelectAction {
 public:
-    KonsoleFontSelectAction(const QString &text, KActionCollection* parent, const QString &name  = QString::null )
+    KonsoleFontSelectAction(const QString &text, KActionCollection* parent, const QString &name  = QString() )
         : KSelectAction(text, parent, name) {}
 
 protected:

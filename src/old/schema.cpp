@@ -46,6 +46,8 @@
 ** a particular m_number, but remember that find may return NULL.
 */
 
+#include "schema.h"
+
 // System
 #include <stdio.h>
 #include <errno.h>
@@ -65,8 +67,6 @@
 #include <kconfiggroup.h>
 #include <kdebug.h>
 
-// Konsole
-#include "schema.h"
 
 using namespace Konsole;
 

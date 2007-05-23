@@ -163,7 +163,7 @@ private:
 
     void changeCheckedItem( QAbstractItemModel* mode,  const QModelIndex& to );
 
-    void preview(int property , QVariant value);
+    void preview(int property , const QVariant& value);
     void unpreview(int property);
     void unpreviewAll();
 

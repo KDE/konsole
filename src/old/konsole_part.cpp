@@ -19,6 +19,8 @@
 
  */
 
+#include "konsole_part.h"
+
 // System
 #include <assert.h>
 
@@ -57,7 +59,6 @@
 #include <kdebug.h>
 
 // Konsole
-#include "konsole_part.h"
 #include "KeyTrans.h"
 #include "schema.h"
 #include "Session.h"

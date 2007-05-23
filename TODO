@@ -50,7 +50,7 @@ The KDE 4.0 TODO List:
   Make as much of the functionality from the main 
   program available in the part as possible.  
 
-- Implement loading and saving of custom shortcuts.
+- Make custom shortcuts work to create new sessions. 
 
 - Implement changing of the Konsole window size by
   terminal applications.

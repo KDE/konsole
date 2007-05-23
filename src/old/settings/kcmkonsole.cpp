@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "kcmkonsole.h"
+
 #include <QCheckBox>
 #include <QLayout>
 #include <QStringList>
@@ -33,7 +35,6 @@
 
 #include "schemaeditor.h"
 #include "sessioneditor.h"
-#include "kcmkonsole.h"
 
 #ifdef Q_WS_X11
 #include <QDesktopWidget>

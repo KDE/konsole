@@ -487,7 +487,7 @@ protected:
     void mousePressEvent( QMouseEvent* );
     void mouseReleaseEvent( QMouseEvent* );
     void mouseMoveEvent( QMouseEvent* );
-    void extendSelection( QPoint pos );
+    void extendSelection( const QPoint& pos );
     void wheelEvent( QWheelEvent* );
 
     bool focusNextPrevChild( bool next );
@@ -553,7 +553,7 @@ private:
 
     // maps a point on the widget to the position ( ie. line and column ) of the character
     // at that point.
-    void characterPosition(QPoint widgetPoint,int& line,int& column);
+    void characterPosition(const QPoint& widgetPoint,int& line,int& column);
 
     // shows a notification window in the middle of the widget indicating the terminal's
     // current size in columns and lines

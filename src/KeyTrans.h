@@ -67,7 +67,7 @@ class KeyTrans
       class KeyEntry
       {
          public:
-            KeyEntry(int ref, int key, int bits, int mask, int cmd, QString txt);
+            KeyEntry(int ref, int key, int bits, int mask, int cmd, const QString& txt);
             ~KeyEntry();
             bool matches(int key, int bits, int mask);
             bool metaspecified(void);
@@ -84,7 +84,12 @@ class KeyTrans
       };
 
    private:
-      KeyEntry* addEntry(int ref, int key, int bits, int mask, int cmd, QString txt);
+      KeyEntry* addEntry(int ref, 
+                         int key, 
+                         int bits, 
+                         int mask, 
+                         int cmd, 
+                         const QString& txt);
       void addKeyTrans();
       //headerOnly - set to true to only read the header at the top of the file (which gives the name for display in menus and so on)
       //and not the rest of the file

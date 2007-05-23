@@ -269,7 +269,7 @@ bool KDE4ProfileReader::readProfile(const QString& path , Profile* profile)
     KConfigGroup keyboard = config.group("Keyboard");
     readStandardElement<QString>(keyboard,"KeyBindings",profile,Profile::KeyBindings);
 
-    // appearence
+    // appearance
     KConfigGroup appearance = config.group("Appearance");
 
     readStandardElement<QString>(appearance,"ColorScheme",profile,Profile::ColorScheme);

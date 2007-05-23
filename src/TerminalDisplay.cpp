@@ -62,7 +62,7 @@
 #include <KIO/NetAccess>
 
 // Konsole
-#include "config.h"
+#include <config.h>
 #include "Filter.h"
 #include "konsole_wcwidth.h"
 #include "ScreenWindow.h"
@@ -341,7 +341,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
   // im
   setAttribute(Qt::WA_InputMethodEnabled, true);
 
-  // this is an important optimisation, it tells Qt
+  // this is an important optimization, it tells Qt
   // that TerminalDisplay will handle repainting its entire area.
   setAttribute(Qt::WA_OpaquePaintEvent);
 
@@ -1668,8 +1668,10 @@ void TerminalDisplay::setSelectionEnd()
   extendSelection( _configureRequestPoint );
 }
 
-void TerminalDisplay::extendSelection( QPoint pos )
+void TerminalDisplay::extendSelection( const QPoint& position )
 {
+  QPoint pos = position;
+
   if ( !_screenWindow )
       return;
 
@@ -1934,7 +1936,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
   }
 }
 
-void TerminalDisplay::characterPosition(QPoint widgetPoint,int& line,int& column)
+void TerminalDisplay::characterPosition(const QPoint& widgetPoint,int& line,int& column)
 {
     column = (widgetPoint.x()-contentsRect().left()-_bX) / _fontWidth;
     line = (widgetPoint.y()-contentsRect().top()-_bY) / _fontHeight;

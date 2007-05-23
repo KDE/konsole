@@ -21,19 +21,13 @@
 // Own
 #include "Vt102Emulation.h"
 
-/*! \class Vt102Emulation
 
-   \brief Actual Emulation for Konsole
-
-   \sa TerminalDisplay \sa Screen
-*/
-#include "config-konsole.h"
+#include <config-konsole.h>
 
 
 #if defined(__osf__) || defined(__APPLE__)
 #define AVOID_XKB
 #endif
-
 
 // this allows konsole to be compiled without XKB and XTEST extensions
 // even though it might be available on a particular system.
@@ -89,12 +83,6 @@ using namespace Konsole;
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-/*
-   Nothing really intesting happens here.
-*/
-
-/*!
-*/
 
 Vt102Emulation::Vt102Emulation() : Emulation()
 {
@@ -106,50 +94,9 @@ Vt102Emulation::Vt102Emulation() : Emulation()
   reset();
 }
 
-#if 0
-void Vt102Emulation::setReceiveViewInput(TerminalDisplay* view , bool enable)
-{
-   if (enable)
-   {
-        QObject::connect(view,SIGNAL(mouseSignal(int,int,int,int)),
-                  this,SLOT(onMouse(int,int,int,int)));
-        QObject::connect(view, SIGNAL(sendStringToEmu(const char*)),
- 		   this, SLOT(sendString(const char*)));
-   }
-   else
-   {
-        QObject::disconnect(view,0,
-                  this,SLOT(onMouse(int,int,int,int)));
-        QObject::disconnect(view,0,
- 		   this, SLOT(sendString(const char*)));
-   }
-}
-#endif
-
-#if 0
-void Vt102Emulation::addView(TerminalDisplay* view)
-{
-    Emulation::addView(view);
-    setReceiveViewInput(view,true);
-}
-
-void Vt102Emulation::removeView(TerminalDisplay* view)
-{
-    Emulation::removeView(view);
-    setReceiveViewInput(view,false);
-}
-#endif 
-
-
-/*!
-*/
-
 Vt102Emulation::~Vt102Emulation()
 {
 }
-
-/*!
-*/
 
 void Vt102Emulation::clearEntireScreen()
 {
@@ -1130,26 +1077,17 @@ void Vt102Emulation::resetCharset(int scrno)
   _charset[scrno].pound   = false;
 }
 
-/*!
-*/
-
 void Vt102Emulation::setCharset(int n, int cs) // on both screens.
 {
   _charset[0].charset[n&3] = cs; useCharset(_charset[0].cu_cs);
   _charset[1].charset[n&3] = cs; useCharset(_charset[1].cu_cs);
 }
 
-/*!
-*/
-
 void Vt102Emulation::setAndUseCharset(int n, int cs)
 {
   CHARSET.charset[n&3] = cs;
   useCharset(n&3);
 }
-
-/*!
-*/
 
 void Vt102Emulation::useCharset(int n)
 {
@@ -1354,9 +1292,6 @@ char Vt102Emulation::getErase() const
     to inform about strings that cannot be decoded or handled by the emulation.
 
     \sa ReportErrorToken
-*/
-
-/*!
 */
 
 static void hexdump(int* s, int len)

@@ -411,7 +411,7 @@ void EditProfileDialog::unpreview(int property)
 
     _previewedProperties.remove(property);
 }
-void EditProfileDialog::preview(int property , QVariant value)
+void EditProfileDialog::preview(int property , const QVariant& value)
 {
     QHash<Profile::Property,QVariant> map;
     map.insert((Profile::Property)property,value);

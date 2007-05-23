@@ -339,7 +339,7 @@ public:
    *
    * @param size The size in lines and columns to request.
    */
-  void setSize(QSize size);
+  void setSize(const QSize& size);
   
 public slots:
 

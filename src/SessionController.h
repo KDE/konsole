@@ -336,7 +336,7 @@ public:
         Backwards  
     };
 
-    SearchHistoryTask(ScreenWindow* window , QObject* parent = 0);
+    explicit SearchHistoryTask(ScreenWindow* window , QObject* parent = 0);
 
     /** Sets the regular expression which is searched for when execute() is called */
     void setRegExp(const QRegExp& regExp);

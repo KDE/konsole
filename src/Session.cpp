@@ -810,7 +810,7 @@ QSize Session::size()
   return _emulation->imageSize();
 }
 
-void Session::setSize(QSize size)
+void Session::setSize(const QSize& size)
 {
   if ((size.width() <= 1) || (size.height() <= 1))
      return;

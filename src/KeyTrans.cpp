@@ -47,7 +47,12 @@
    instances represent the individual assignments
 */
 
-KeyTrans::KeyEntry::KeyEntry(int _ref, int _key, int _bits, int _mask, int _cmd, QString _txt)
+KeyTrans::KeyEntry::KeyEntry(int _ref, 
+                             int _key, 
+                             int _bits, 
+                             int _mask, 
+                             int _cmd, 
+                             const QString& _txt)
 : ref(_ref), key(_key), bits(_bits), mask(_mask), cmd(_cmd), txt(_txt)
 {
 }
@@ -118,7 +123,12 @@ KeyTrans::~KeyTrans()
         delete tableIter.next();    
 }
 
-KeyTrans::KeyEntry* KeyTrans::addEntry(int ref, int key, int bits, int mask, int cmd, QString txt)
+KeyTrans::KeyEntry* KeyTrans::addEntry(int ref, 
+                                       int key, 
+                                       int bits, 
+                                       int mask, 
+                                       int cmd, 
+                                       const QString& txt)
 // returns conflicting entry
 {
   QListIterator<KeyEntry*> tableIter(tableX);
@@ -207,7 +217,7 @@ bool KeyTrans::findEntry(int key, int bits, int* cmd, QByteArray &txt, bool* met
 class KeytabReader
 {
 public:
-  KeytabReader(QString p, QIODevice &d);
+  KeytabReader(const QString& p, QIODevice &d);
 public:
   void getCc();
   void getSymbol();
@@ -229,7 +239,7 @@ private:
 };
 
 
-KeytabReader::KeytabReader(QString p, QIODevice &d)
+KeytabReader::KeytabReader(const QString& p, QIODevice &d)
 {
   path = p;
   buf = &d;
