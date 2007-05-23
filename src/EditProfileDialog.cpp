@@ -329,31 +329,35 @@ void EditProfileDialog::updateColorSchemeList()
 }
 void EditProfileDialog::updateKeyBindingsList()
 {
+    KeyboardTranslatorManager* keyManager = KeyboardTranslatorManager::instance();
+
     delete _ui->keyBindingList->model();
 
-    const QString& name = SessionManager::instance()->profile(_profileKey)->property(Profile::KeyBindings)
-                                .value<QString>();
+    const QString& name = SessionManager::instance()->profile(_profileKey)
+                                    ->property(Profile::KeyBindings).value<QString>();
 
-    const KeyboardTranslator* currentTranslator = KeyboardTranslatorManager::instance()->findTranslator(name);
+    const KeyboardTranslator* currentTranslator = keyManager->findTranslator(name);
     
     qDebug() << "Current translator = " << currentTranslator << ", name: " << name;
 
     QStandardItemModel* model = new QStandardItemModel(this);
 
-    QList<QString> translatorNames = KeyboardTranslatorManager::instance()->allTranslators();
+    QList<QString> translatorNames = keyManager->allTranslators();
     QListIterator<QString> iter(translatorNames);
     while (iter.hasNext())
     {
         const QString& name = iter.next();
 
-        const KeyboardTranslator* translator = KeyboardTranslatorManager::instance()->findTranslator(name);
+        const KeyboardTranslator* translator = keyManager->findTranslator(name);
 
-        qDebug() << "Translator:" << translator << ", name = " << translator->name() << "description = " << 
+        qDebug() << "Translator:" << translator << ", name = " << 
+            translator->name() << "description = " << 
             translator->description();
 
         // TODO Use translator->description() here
         QStandardItem* item = new QStandardItem(translator->description());
         item->setData(QVariant::fromValue(translator),Qt::UserRole+1);
+        item->setIcon( KIcon("keyboard") );
         item->setFlags( item->flags() | Qt::ItemIsUserCheckable );
 
         if ( translator == currentTranslator )
