@@ -365,7 +365,11 @@ signals:
      * @param endLine The line in the output where the matched text ends
      * @param endColumn The column in the output where the matched text ends 
      */
-    void foundMatch(Session* session , int startLine , int startColumn , int endLine , int endColumn );
+    void foundMatch(Session* session , 
+                    int startLine , 
+                    int startColumn , 
+                    int endLine , 
+                    int endColumn );
    
 private:
     QRegExp _regExp;

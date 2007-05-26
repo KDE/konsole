@@ -102,9 +102,12 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     // listen to activity / silence notifications from session
     connect( _session , SIGNAL(stateChanged(int)) , this ,
             SLOT(sessionStateChanged(int) ));
-
     // listen to title and icon changes
     connect( _session , SIGNAL(titleChanged()) , this , SLOT(sessionTitleChanged()) );
+
+    // listen for output changes to set activity flag
+    connect( _session->emulation() , SIGNAL(outputChanged()) , this , 
+            SLOT(fireActivity()) );
 
     // take a snapshot of the session state every so often when
     // user activity occurs

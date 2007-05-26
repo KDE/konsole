@@ -22,9 +22,42 @@
 
 using namespace Konsole;
 
+ViewProperties::ViewProperties(QObject* parent)
+: QObject(parent)
+, _id(0)
+//, _flags(0)
+{
+}
+
+#if 0
+void ViewProperties::setFlag(ViewFlag flag , bool set)
+{
+    if ( set && !(_flags & flag) )
+    {
+        _flags |= flag;
+        emit flagsChanged(this);
+    }
+    else if ( !set && (_flags & flag) )
+    {
+        _flags &= ~flag;
+        emit flagsChanged(this);
+    }
+}
+
+ViewProperties::ViewFlag ViewProperties::flags() const
+{
+    return (ViewFlag)_flags;
+}
+#endif
+
 KUrl ViewProperties::url() const
 {
     return KUrl();
+}
+
+void ViewProperties::fireActivity()
+{
+    emit activity(this);
 }
 
 void ViewProperties::setTitle(const QString& title)

@@ -365,11 +365,13 @@ protected:
 private slots:
     void updateTitle(ViewProperties* item);
     void updateIcon(ViewProperties* item);
+    void updateActivity(ViewProperties* item);
     void currentTabChanged(int index);
-
+    
 private:
     void dynamicTabBarVisibility();
     void setTabBarVisible(bool visible);
+    void setTabActivity(int index,bool activity);
 
     ViewContainerTabBar* _tabBar;
     QStackedWidget* _stackWidget;

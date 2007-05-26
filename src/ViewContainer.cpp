@@ -269,6 +269,8 @@ void TabbedViewContainer::currentTabChanged(int tab)
     if ( tab >= 0 )
     {
         emit activeViewChanged( _tabWidget->widget(tab) );
+
+        
     }
 }
 
@@ -518,6 +520,9 @@ void TabbedViewContainerV2::currentTabChanged(int index)
 {
     _stackWidget->setCurrentIndex(index);
     emit activeViewChanged(_stackWidget->widget(index));
+
+    // clear activity indicators
+    setTabActivity(index,false);
 }
 QWidget* TabbedViewContainerV2::containerWidget() const
 {
@@ -542,8 +547,13 @@ void TabbedViewContainerV2::addViewWidget( QWidget* view )
     _stackWidget->updateGeometry();
 
     ViewProperties* item = viewProperties(view);
-    connect( item , SIGNAL(titleChanged(ViewProperties*)) , this , SLOT(updateTitle(ViewProperties*))); 
-    connect( item , SIGNAL(iconChanged(ViewProperties*) ) , this ,SLOT(updateIcon(ViewProperties*)));          
+    connect( item , SIGNAL(titleChanged(ViewProperties*)) , this , 
+                    SLOT(updateTitle(ViewProperties*))); 
+    connect( item , SIGNAL(iconChanged(ViewProperties*) ) , this , 
+                    SLOT(updateIcon(ViewProperties*)));
+    connect( item , SIGNAL(activity(ViewProperties*)) , this ,
+                    SLOT(updateActivity(ViewProperties*)));
+
     _tabBar->addTab( item->icon() , item->title() );
 
     if ( navigationDisplayMode() == ShowNavigationAsNeeded )
@@ -560,6 +570,31 @@ void TabbedViewContainerV2::removeViewWidget( QWidget* view )
 
     if ( navigationDisplayMode() == ShowNavigationAsNeeded )
         dynamicTabBarVisibility();
+}
+
+void TabbedViewContainerV2::setTabActivity(int index , bool activity)
+{
+    const QColor activityColor = _tabBar->palette().highlight().color();
+    const QColor normalColor = _tabBar->palette().text().color();
+
+    QColor color = activity ? activityColor : normalColor;
+
+    if ( color != _tabBar->tabTextColor(index) )
+        _tabBar->setTabTextColor(index,color);
+}
+
+void TabbedViewContainerV2::updateActivity(ViewProperties* item)
+{
+    QListIterator<QWidget*> iter(widgetsForItem(item));
+    while ( iter.hasNext() )
+    {
+        const int index = _stackWidget->indexOf(iter.next());
+
+        if ( index != _stackWidget->currentIndex() )
+        {
+            setTabActivity(index,true);
+        } 
+    }
 }
 
 void TabbedViewContainerV2::updateTitle(ViewProperties* item)
