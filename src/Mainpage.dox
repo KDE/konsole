@@ -1,0 +1,9 @@
+/** 
+ * @mainpage
+ *   Konsole API Documentation
+ *
+ * Konsole is KDE's terminal emulator.
+ */
+// DOXYGEN_VERSION=4.0
+// DOXYGEN_NAME=konsole
+// DOXYGEN_ENABLE=YES

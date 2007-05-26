@@ -17,14 +17,6 @@ The KDE 4.0 TODO List:
 
 === ESSENTIAL FEATURES ===
 
-- Proper transparency for Konsole windows
-
-    ( Konsole currently allows the user to specify
-      the amount of transparency for each color
-      scheme, and change it in the settings dialog -
-      what remains to be done is actually make use
-      of that setting when drawing the terminal
-      display )
 
 - Input Method Event in terminal display widget
 
@@ -41,8 +33,6 @@ The KDE 4.0 TODO List:
   to be used in the title bar of the Konsole window,
   and/or the tab for the relevant terminal session.
 
-- Changing of profile used by current session
-
 - Get the Konsole part working properly in other
   major KDE programs, such as Dolphin,
   KDevelop, Kate etc.
@@ -50,7 +40,6 @@ The KDE 4.0 TODO List:
   Make as much of the functionality from the main 
   program available in the part as possible.  
 
-- Make custom shortcuts work to create new sessions. 
 
 - Implement changing of the Konsole window size by
   terminal applications.
@@ -67,6 +56,25 @@ The KDE 4.0 TODO List:
     is slower for advanced users since it requires a switch from 
     the keyboard to the mouse.  Advanced users may also
     appreciate the ability to script profile changes )
+
+- Better documentation for shortcuts to move between views
+  (Shift+<Arrows> and Shift+Tab)
+
+== ESSENTIAL TWEAKS ==
+
+- When new output is added to a session, views should avoid
+  scrolling if possible unless they are tracking the output
+  or if the lines that the view was showing have been removed
+  ( because the history is only storing a fixed number of lines,
+    and that limit has been reached so lines are being removed )
+
+- When splitting the view, avoid scrolling existing views.
+ 
+- More intelligent tab title format which can adjust its output
+  to display more relevant information depending upon the 
+  command being run.  eg.  If the current command is "svn"
+  then the operation ( checkout, update, remove etc. ) 
+  could be included as well.
 
 == NON-ESSENTIAL FEATURES ==
 
@@ -131,6 +139,10 @@ The KDE 4.0 TODO List:
   uses facilities from kdelibs - so the problem is likely
   incorrect use of the kdelibs class or a bug in kdelibs
 
+=== KNOWN ISSUES ===
+
+- Profile shortcuts only work for favorite profiles.
+
 === TESTING ===
 
 - Test various terminal applications in Konsole, particularly
@@ -151,4 +163,25 @@ The KDE 4.0 TODO List:
   program produces by the Xterm authors.  Fix any
   bugs which that testing finds.
 
+
+=== DONE ===
+
+- Proper transparency for Konsole windows
+
+    ( Konsole currently allows the user to specify
+      the amount of transparency for each color
+      scheme, and change it in the settings dialog -
+      what remains to be done is actually make use
+      of that setting when drawing the terminal
+      display )
+
+- Changing of profile used by current session
+- Make custom shortcuts work to create new sessions. 
+
+- Detect availability of composite transparency on startup
+  ( before Konsole::Application constructor ) and start
+  the application using the appropriate visuals and
+  colormap.  If the visual/colormap needed for
+  transparency is used when compositing is not available,
+  lots of visual glitches with menus etc. occur
 
