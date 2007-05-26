@@ -1,5 +1,7 @@
 /*
-    This file is part of Konsole, an X terminal.
+    This file is part of Konsole, KDE's terminal.
+
+    Copyright (C) 2007 by Robert Knight <robertknight@gmail.com>
     Copyright (C) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
 
     This program is free software; you can redistribute it and/or modify
@@ -18,8 +20,8 @@
     02110-1301  USA.
 */
 
-#ifndef TESCREEN_H
-#define TESCREEN_H
+#ifndef SCREEN_H
+#define SCREEN_H
 
 // Qt
 #include <QtCore/QTextStream>
@@ -166,8 +168,8 @@ public: // these are all `Screen' operations
     //
     // only for report cursor position
     //
-    int  getCursorX();
-    int  getCursorY();
+    int  getCursorX() const;
+    int  getCursorY() const;
     //
     // -------------------------------------
     //
@@ -458,4 +460,4 @@ private: // helper
 
 }
 
-#endif // TESCREEN_H
+#endif // SCREEN_H

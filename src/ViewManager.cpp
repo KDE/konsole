@@ -556,9 +556,6 @@ void ViewManager::applyProfile(TerminalDisplay* view , const QString& profileKey
        view->setScrollBarLocation(TerminalDisplay::SCROLLBAR_RIGHT);
 
     // terminal features
-    //bool blinkingText = info->property(Profile::BlinkingTextEnabled).value<bool>();
-    //TODO - Add a method in TerminalDisplay to allow this to be turned on or off 
-
     bool blinkingCursor = info->property(Profile::BlinkingCursorEnabled).value<bool>();
     view->setBlinkingCursor(blinkingCursor);  
 

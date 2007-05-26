@@ -22,6 +22,7 @@
 
 // Qt
 #include <QtCore/QObject>
+#include <QtCore/QPoint>
 
 // Konsole
 #include "TECommon.h"
@@ -136,6 +137,12 @@ public:
 
     /** Returns the index of the line which is currently at the top of this window */
     int currentLine() const;
+
+    /** 
+     * Returns the position of the cursor 
+     * within the window.
+     */
+    QPoint cursorPosition() const;
 
     /** 
      * Convenience method. Returns true if the window is currently at the bottom

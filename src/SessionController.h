@@ -176,6 +176,8 @@ private slots:
 
     void scrollBackOptionsChanged(int mode , int lines);
 
+    void sessionResizeRequest(const QSize& size);
+
     // debugging slots
     void debugProcess();
 

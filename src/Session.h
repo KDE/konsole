@@ -425,7 +425,9 @@ private slots:
   
   void onReceiveBlock( const char* buffer, int len );
   void monitorTimerDone();
-  void onContentSizeChange(int height, int width);
+  
+  void onViewSizeChange(int height, int width);
+  void onEmulationSizeChange(int lines , int columns);
 
   void activityStateSet(int);
 

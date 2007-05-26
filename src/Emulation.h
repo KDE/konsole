@@ -346,6 +346,12 @@ signals:
 
   void titleChanged(int title,const QString& newTitle);
 
+  /**
+   * Emitted when the program running in the terminal changes the
+   * screen size.
+   */
+  void imageSizeChanged(int lineCount , int columnCount);
+
 protected:
   virtual void setMode  (int mode) = 0;
   virtual void resetMode(int mode) = 0;

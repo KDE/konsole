@@ -103,7 +103,10 @@ Session::Session() :
     connect( _emulation, SIGNAL( changeTabTextColorRequest( int ) ),
            this, SIGNAL( changeTabTextColorRequest( int ) ) );
 
-   
+    // TODO
+    // connect( _emulation,SIGNAL(imageSizeChanged(int,int)) , this ,
+    //        SLOT(onEmulationSizeChange(int,int)) );
+
     //connect teletype to emulation backend 
     _shellProcess->setUtf8Mode(_emulation->utf8());
     
@@ -193,7 +196,7 @@ void Session::addView(TerminalDisplay* widget)
 
     //connect view signals and slots
     QObject::connect( widget ,SIGNAL(changedContentSizeSignal(int,int)),this,
-                    SLOT(onContentSizeChange(int,int)));
+                    SLOT(onViewSizeChange(int,int)));
 
     QObject::connect( widget ,SIGNAL(destroyed(QObject*)) , this , 
                     SLOT(viewDestroyed(QObject*)) );
@@ -428,9 +431,13 @@ void Session::activityStateSet(int state)
   emit stateChanged(state);
 }
 
-void Session::onContentSizeChange(int /*height*/, int /*width*/)
+void Session::onViewSizeChange(int /*height*/, int /*width*/)
 {
   updateTerminalSize();
+}
+void Session::onEmulationSizeChange(int lines , int columns)
+{
+  setSize( QSize(lines,columns) );
 }
 
 void Session::updateTerminalSize()

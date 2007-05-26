@@ -551,8 +551,11 @@ private:
 
     // --
 
-    // maps a point on the widget to the position ( ie. line and column ) of the character
-    // at that point.
+    // maps an area in the character image to an area on the widget 
+    QRect imageToWidget(const QRect& imageArea);
+
+    // maps a point on the widget to the position ( ie. line and column ) 
+    // of the character at that point.
     void characterPosition(const QPoint& widgetPoint,int& line,int& column);
 
     // shows a notification window in the middle of the widget indicating the terminal's
@@ -662,8 +665,6 @@ private:
 	QLabel* _outputSuspendedLabel; 
     	
     uint _lineSpacing;
-
-    QRect       _cursorRect; //for quick changing of cursor
 
     QPoint _configureRequestPoint;  // remember right mouse button click position
     bool _colorsInverted; // true during visual bell

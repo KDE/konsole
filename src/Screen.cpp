@@ -940,7 +940,7 @@ void Screen::Return()
 /*! returns the current cursor columns.
 */
 
-int Screen::getCursorX()
+int Screen::getCursorX() const
 {
   return cuX;
 }
@@ -948,7 +948,7 @@ int Screen::getCursorX()
 /*! returns the current cursor line.
 */
 
-int Screen::getCursorY()
+int Screen::getCursorY() const
 {
   return cuY;
 }

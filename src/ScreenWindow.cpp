@@ -123,6 +123,16 @@ int ScreenWindow::columnCount() const
     return _screen->getColumns();
 }
 
+QPoint ScreenWindow::cursorPosition() const
+{
+    QPoint position;
+    
+    position.setX( _screen->getCursorX() );
+    position.setY( _screen->getCursorY() );
+
+    return position; 
+}
+
 int ScreenWindow::currentLine() const
 {
     return _currentLine;

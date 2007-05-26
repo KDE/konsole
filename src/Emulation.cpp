@@ -454,14 +454,6 @@ char Emulation::getErase() const
   return '\b';
 }
 
-// ---------------------------------------------------------------------------
-
-/*!  triggered by image size change of the TerminalDisplay `gui'.
-
-    This event is simply propagated to the attached screens
-    and to the related serial line.
-*/
-
 void Emulation::setImageSize(int lines, int columns)
 {
   Q_ASSERT( lines > 0 );
@@ -469,6 +461,8 @@ void Emulation::setImageSize(int lines, int columns)
 
   _screen[0]->resizeImage(lines,columns);
   _screen[1]->resizeImage(lines,columns);
+
+  emit imageSizeChanged(lines,columns);
 
   bufferedUpdate();
 }

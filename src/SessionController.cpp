@@ -91,6 +91,10 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     
     view->installEventFilter(this); 
 
+    // listen for session resize requests
+    connect( _session , SIGNAL(resizeRequest(const QSize&)) , this ,
+            SLOT(sessionResizeRequest(const QSize&)) );
+
     // listen for popup menu requests
     connect( _view , SIGNAL(configureRequest(TerminalDisplay*,int,int,int)) , this,
             SLOT(showDisplayContextMenu(TerminalDisplay*,int,int,int)) );
@@ -742,6 +746,12 @@ void SessionController::showHistoryOptions()
              this , SLOT(scrollBackOptionsChanged(int,int)) );
 
     dialog->show();
+}
+void SessionController::sessionResizeRequest(const QSize& size)
+{
+    qDebug() << "View resize requested to " << size;
+
+    _view->setSize(size.width(),size.height());
 }
 void SessionController::scrollBackOptionsChanged( int mode , int lines )
 {

@@ -80,9 +80,9 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
     Display* display = XOpenDisplay(0);
     Visual* visual = 0;
     Colormap colormap = 0;
-    bool transparencyAvailable = false;
+    bool transparencyAvailable = KWindowSystem::compositingActive();
 
-   // getDisplayInformation(display,visual,colormap,transparencyAvailable);
+    getDisplayInformation(display,visual,colormap,transparencyAvailable);
 
     qDebug() << "Transparency available: " << transparencyAvailable;
 
