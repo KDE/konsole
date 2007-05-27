@@ -693,64 +693,73 @@ void TerminalDisplay::setCursorPos(const int curx, const int cury)
     _cursorCol = curx;
 }
 
-// scrolls the _image by '_lines', down if _lines > 0 or up otherwise.
+// scrolls the image by 'lines', down if lines > 0 or up otherwise.
 //
 // the terminal emulation keeps track of the scrolling of the character 
-// _image as it receives input, and when the view is updated, it calls scrollImage() 
+// image as it receives input, and when the view is updated, it calls scrollImage() 
 // with the final scroll amount.  this improves performance because scrolling the 
-// display is much cheaper than re-rendering all the text for the part
-// of the _image which has moved up or down.  instead only new _lines have to be drawn
+// display is much cheaper than re-rendering all the text for the 
+// part of the image which has moved up or down.  
+// Instead only new lines have to be drawn
 //
-// note:  it is important that the area of the display which is scrolled aligns properly with
-// the character grid - which has a top left point at (_bX,_bY) , 
+// note:  it is important that the area of the display which is 
+// scrolled aligns properly with the character grid - 
+// which has a top left point at (_bX,_bY) , 
 // a cell width of _fontWidth and a cell height of _fontHeight).    
-void TerminalDisplay::scrollImage(int _lines)
+void TerminalDisplay::scrollImage(int lines , const QRect& region)
 {
-    if ( _lines == 0 || _image == 0 || abs(_lines) >= this->_usedLines ) return;
+    if ( lines == 0 || _image == 0 || abs(lines) >= region.height() ) return;
 
     QRect scrollRect;
 
+    //qDebug() << "Scrolled region: top =" << region.top() 
+    //         << ", bottom =" << region.bottom()
+    //         << ", height =" << region.height() << "lines.  Image height ="
+    //         << this->_usedLines << "lines"
+    //         << ", scroll =" << lines << "lines";
+
+    void* firstCharPos = &_image[ region.top() * this->_usedColumns ];
+    void* lastCharPos = &_image[ (region.top() + abs(lines)) * this->_usedColumns ];
+
+    int top = _bY + (region.top() * _fontHeight);
+    int linesToMove = region.height() - abs(lines);
+    int bytesToMove = linesToMove * 
+                      this->_usedColumns *
+                      sizeof(Character);
+
+    Q_ASSERT( linesToMove > 0 );
+    Q_ASSERT( bytesToMove > 0 );
+
     //scroll internal _image
-    if ( _lines > 0 )
+    if ( lines > 0 )
     {
-        assert( (_lines*this->_usedColumns) < _imageSize ); 
+        assert( (lines*this->_usedColumns) < _imageSize ); 
 
         //scroll internal _image down
-        memmove( _image , &_image[_lines*this->_usedColumns] , 
-                        ( this->_usedLines - _lines ) * 
-                          this->_usedColumns * 
-                          sizeof(Character) );
- 
+        memmove( firstCharPos , lastCharPos , bytesToMove ); 
+      
         //set region of display to scroll, making sure that
         //the region aligns correctly to the character grid 
-        scrollRect = QRect( _bX ,_bY, 
+        scrollRect = QRect( _bX , top, 
                             this->_usedColumns * _fontWidth , 
-                            (this->_usedLines - _lines) * _fontHeight );
-
-        //qDebug() << "scrolled down " << _lines << " _lines";
+                            linesToMove * _fontHeight );
     }
     else
     {
         //scroll internal _image up
-        memmove( &_image[ abs(_lines)*this->_usedColumns] , _image , 
-                        (this->_usedLines - abs(_lines) ) * 
-                         this->_usedColumns * 
-                         sizeof(Character) );
-
+        memmove( lastCharPos , firstCharPos , bytesToMove ); 
+     
         //set region of the display to scroll, making sure that
         //the region aligns correctly to the character grid
-        
-        QPoint topPoint( _bX , _bY + abs(_lines)*_fontHeight );
+        QPoint topPoint( _bX , top + abs(lines)*_fontHeight );
 
-        scrollRect = QRect( topPoint , 
+        scrollRect = QRect( topPoint ,
                      QSize( this->_usedColumns*_fontWidth , 
-                            (this->_usedLines - abs(_lines)) * _fontHeight ));
-        
-        //qDebug() << "scrolled up " << _lines << " _lines";
+                            linesToMove * _fontHeight ));
     }
 
     //scroll the display vertically to match internal _image
-    scroll( 0 , _fontHeight * (-_lines) , scrollRect );
+    scroll( 0 , _fontHeight * (-lines) , scrollRect );
 }
 
 void TerminalDisplay::processFilters() 
@@ -772,10 +781,11 @@ void TerminalDisplay::updateImage()
   if ( !_screenWindow )
       return;
 
-  // optimization - scroll the existing _image where possible and 
-  // avoid expensive text drawing for parts of the _image that 
+  // optimization - scroll the existing image where possible and 
+  // avoid expensive text drawing for parts of the image that 
   // can simply be moved up or down
-  scrollImage( _screenWindow->scrollCount() );
+  scrollImage( _screenWindow->scrollCount() ,
+               _screenWindow->scrollRegion() );
   _screenWindow->resetScrollCount();
 
   Character* const newimg = _screenWindow->getImage();
@@ -954,7 +964,7 @@ void TerminalDisplay::updateImage()
   // free the image from the screen window
   delete[] newimg;
 
-  // debugging - display a count of the number of _lines that will need 
+  // debugging - display a count of the number of lines that will need 
   // to be repainted
   //qDebug() << "dirty line count = " << dirtyLineCount;
 

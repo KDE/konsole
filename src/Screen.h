@@ -24,6 +24,7 @@
 #define SCREEN_H
 
 // Qt
+#include <QtCore/QRect>
 #include <QtCore/QTextStream>
 #include <QtCore/QVarLengthArray>
 
@@ -330,6 +331,15 @@ public: // these are all `Screen' operations
      * a negative return value indicates that the image has been scrolled down. 
      */
     int scrolledLines() const;
+
+    /**
+     * Returns the region of the image which was last scrolled.
+     *
+     * This is the area of the image from the top margin to the 
+     * bottom margin when the last scroll occurred.
+     */
+    QRect lastScrolledRegion() const;
+
     /** 
      * Resets the count of the number of lines that the image has been scrolled up or down by,
      * see scrolledLines()
@@ -388,6 +398,7 @@ private: // helper
     ImageLine*          screenLines;    // [lines]
 
     int _scrolledLines;
+    QRect _lastScrolledRegion;
 
     QVarLengthArray<LineProperty,64> lineProperties;    
 	

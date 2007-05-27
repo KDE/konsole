@@ -429,7 +429,7 @@ void SessionController::setupActions()
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Minus) );
     connect( action , SIGNAL(triggered()) , this , SLOT(decreaseTextSize()) );
 
-    // History
+    // Scrollback
     _searchToggleAction = new KAction(i18n("Search Output..."),this);
     _searchToggleAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_F) );
     _searchToggleAction->setIcon( KIcon("edit-find") );
@@ -468,6 +468,11 @@ void SessionController::setupActions()
     action->setText( i18n("Clear Scrollback && Reset") );
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_X) );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearHistoryAndReset()) );
+
+    // Menu
+    action = collection->addAction("show-menubar");
+    action->setText( i18n("Show Menubar") );
+    connect( action , SIGNAL(toggled(bool)) , this , SIGNAL(showMenuBarToggle(bool)) );
 
     // Profile Options 
     action = collection->addAction("edit-current-profile");

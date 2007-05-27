@@ -65,46 +65,11 @@ public:
      */
     int identifier() const;
 
-#if 0
-    /**
-     * This enum describes the flags which provide information
-     * about the current state of the view.
-     */
-    enum ViewFlag
-    {
-        /** 
-         * Specifies that activity (often this means additional output)
-         * has occurred in the view. 
-         */
-        ActivityFlag = 1
-    };
-
-    /** Returns view's current flags. */
-    ViewFlag flags() const;
-
-    /**
-     * Sets or clears the specified view flag.
-     * 
-     * @param flag The flag to set or clear.
-     * @param set True to set the flag or false to clear it.
-     */
-    void setFlag(ViewFlag flag , bool set = true);
-    
-    /** 
-     * Convenience method.  Unsets the specified flag.
-     * Equivalent to calling setFlag(@p flag,false); 
-     */
-    void clearFlag(ViewFlag flag) { setFlag(flag,false); }
-#endif
-
 signals:
     /** Emitted when the icon for a view changes */
     void iconChanged(ViewProperties* properties);
     /** Emitted when the title for a view changes */
     void titleChanged(ViewProperties* properties);
-    ///** Emitted when the flags associated with a view change. */
-    //void flagsChanged(ViewProperties* properties);
-
     /** Emitted when activity has occurred in this view. */
     void activity(ViewProperties* item);
 

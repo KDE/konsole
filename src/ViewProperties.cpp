@@ -29,27 +29,6 @@ ViewProperties::ViewProperties(QObject* parent)
 {
 }
 
-#if 0
-void ViewProperties::setFlag(ViewFlag flag , bool set)
-{
-    if ( set && !(_flags & flag) )
-    {
-        _flags |= flag;
-        emit flagsChanged(this);
-    }
-    else if ( !set && (_flags & flag) )
-    {
-        _flags &= ~flag;
-        emit flagsChanged(this);
-    }
-}
-
-ViewProperties::ViewFlag ViewProperties::flags() const
-{
-    return (ViewFlag)_flags;
-}
-#endif
-
 KUrl ViewProperties::url() const
 {
     return KUrl();

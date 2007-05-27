@@ -857,11 +857,17 @@ void Screen::scrollUp(int n)
     \sa setRegion \sa scrollDown
 */
 
+QRect Screen::lastScrolledRegion() const
+{
+    return _lastScrolledRegion;
+}
+
 void Screen::scrollUp(int from, int n)
 {
   if (n <= 0 || from + n > bmargin) return;
 
   _scrolledLines -= n;
+  _lastScrolledRegion = QRect(0,tmargin,columns-1,(bmargin-tmargin));
 
   //qDebug() << "Screen::scrollUp( from: " << from << " , n: " << n << ")";
 
@@ -1402,7 +1408,8 @@ void Screen::copyLineToStream(int line , int start, int count,
 								QTextStream* stream, TerminalCharacterDecoder* decoder)
 {
 		//buffer to hold characters for decoding
-		//the buffer is static to avoid initialising every element on each call to copyLineToStream
+		//the buffer is static to avoid initialising every 
+        //element on each call to copyLineToStream
 		//(which is unnecessary since all elements will be overwritten anyway)
 		static const int MAX_CHARS = 1024;
 		static Character characterBuffer[MAX_CHARS];

@@ -23,6 +23,7 @@
 // Qt
 #include <QtCore/QObject>
 #include <QtCore/QPoint>
+#include <QtCore/QRect>
 
 // Konsole
 #include "TECommon.h"
@@ -87,9 +88,15 @@ public:
     QVector<LineProperty> getLineProperties();
 
     /**
-     * Returns the number of lines which the window has been scrolled by since the last
-     * call to resetScrollCount().
-     * This allows views to optimise scrolling operations.     
+     * Returns the number of lines which the region of the window
+     * specified by scrollRegion() has been scrolled by since the last call 
+     * to resetScrollCount().  scrollRegion() is in most cases the 
+     * whole window, but will be a smaller area in, for example, applications
+     * which provide split-screen facilities.
+     *
+     * This is not guaranteed to be accurate, but allows views to optimise
+     * rendering by reducing the amount of costly text rendering that
+     * needs to be done when the output is scrolled. 
      */
     int scrollCount() const;
 
@@ -97,6 +104,15 @@ public:
      * Resets the count of scrolled lines returned by scrollCount()
      */
     void resetScrollCount();
+
+    /**
+     * Returns the area of the window which was last scrolled, this is 
+     * usually the whole window area.
+     *
+     * Like scrollCount(), this is not guaranteed to be accurate,
+     * but allows views to optimise rendering.
+     */
+    QRect scrollRegion() const;
 
     /** 
      * Sets the start of the selection to the given @p line and @p column within 

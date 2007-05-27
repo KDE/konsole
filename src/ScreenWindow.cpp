@@ -196,6 +196,11 @@ void ScreenWindow::resetScrollCount()
     _scrollCount = 0;
 }
 
+QRect ScreenWindow::scrollRegion() const
+{
+    return _screen->lastScrolledRegion();
+}
+
 void ScreenWindow::notifyOutputChanged()
 {
     // move window to the bottom of the screen and update scroll count

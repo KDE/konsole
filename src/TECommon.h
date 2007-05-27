@@ -1,5 +1,7 @@
 /*
     This file is part of Konsole, an X terminal.
+    
+    Copyright (C) 2007 by Robert Knight <robertknight@gmail.com>
     Copyright (C) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
 
     This program is free software; you can redistribute it and/or modify
@@ -44,18 +46,21 @@ typedef unsigned short UINT16;
 
 /*!
 */
-struct ColorEntry
+class ColorEntry
 {
+public:
   ColorEntry(QColor c, bool tr, bool b) : color(c), transparent(tr), bold(b) {}
   ColorEntry() : transparent(false), bold(false) {} // default constructors
-  void operator=(const ColorEntry& rhs) { 
+  
+  void operator=(const ColorEntry& rhs) 
+  { 
        color = rhs.color; 
        transparent = rhs.transparent; 
        bold = rhs.bold; 
   }
   QColor color;
-  bool   transparent; // if used on bg
-  bool   bold;        // if used on fg
+  bool   transparent; // applies if color is used in background
+  bool   bold;        // applies if color is used in foreground
 };
 
 
@@ -184,53 +189,67 @@ static const int LINE_DOUBLEHEIGHT	= (1 << 2);
 
 class CharacterColor
 {
+    friend class Character;
+
 public:
-  CharacterColor() : t(0), u(0), v(0), w(0) {}
-  CharacterColor(UINT8 ty, int co) : t(ty), u(0), v(0), w(0)
+  CharacterColor() 
+      : _colorSpace(COLOR_SPACE_UNDEFINED), 
+        _u(0), 
+        _v(0), 
+        _w(0) 
+  {}
+
+  CharacterColor(UINT8 colorSpace, int co) 
+      : _colorSpace(colorSpace), 
+        _u(0), 
+        _v(0), 
+        _w(0)
   {
-    if (COLOR_SPACE_DEFAULT == t) {
-      u = co & 1;
-    } else if (COLOR_SPACE_SYSTEM == t) {
-      u = co & 7;
-      v = (co >> 3) & 1;
-    } else if (COLOR_SPACE_256 == t) {
-      u = co & 255;
-    } else if (COLOR_SPACE_RGB == t) {
-      u = co >> 16;
-      v = co >> 8;
-      w = co;
-    }
-#if 0
-    // Doesn't work with gcc 3.3.4
-    switch (t)
+    switch (colorSpace)
     {
-      case COLOR_SPACE_UNDEFINED:                                break;
-      case COLOR_SPACE_DEFAULT: u = co&  1;                    break;
-      case COLOR_SPACE_SYSTEM: u = co&  7; v = (co>>3)&1;     break;
-      case COLOR_SPACE_256: u = co&255;                    break;
-      case COLOR_SPACE_RGB: u = co>>16; v = co>>8; w = co; break;
-      default    : t = 0;                         break;
+        case COLOR_SPACE_DEFAULT:
+            _u = co & 1;
+            break;
+        case COLOR_SPACE_SYSTEM:
+            _u = co & 7;
+            _v = (co >> 3) & 1;
+            break;
+        case COLOR_SPACE_256:  
+            _u = co & 255;
+            break;
+        case COLOR_SPACE_RGB:
+            _u = co >> 16;
+            _v = co >> 8;
+            _w = co;
+            break;
     }
-#endif
   }
-  UINT8 t; // color space indicator
-  UINT8 u; // various bytes representing the data in the respective ...
-  UINT8 v; // ... color space. C++ does not do unions, so we cannot ...
-  UINT8 w; // ... express ourselfs here, properly.
+    
   void toggleIntensive(); // Hack or helper?
   QColor color(const ColorEntry* base) const;
+  
   friend bool operator == (const CharacterColor& a, const CharacterColor& b);
   friend bool operator != (const CharacterColor& a, const CharacterColor& b);
+
+private:
+  UINT8 _colorSpace;
+
+  // bytes storing the character color 
+  UINT8 _u; 
+  UINT8 _v; 
+  UINT8 _w; 
 };
 
 inline bool operator == (const CharacterColor& a, const CharacterColor& b)
 { 
-  return *reinterpret_cast<const quint32*>(&a.t) == *reinterpret_cast<const quint32*>(&b.t);
+  return *reinterpret_cast<const quint32*>(&a._colorSpace) == 
+         *reinterpret_cast<const quint32*>(&b._colorSpace);
 }
 
 inline bool operator != (const CharacterColor& a, const CharacterColor& b)
 {
-  return *reinterpret_cast<const quint32*>(&a.t) != *reinterpret_cast<const quint32*>(&b.t);
+  return *reinterpret_cast<const quint32*>(&a._colorSpace) != 
+         *reinterpret_cast<const quint32*>(&b._colorSpace);
 }
 
 inline const QColor color256(UINT8 u, const ColorEntry* base)
@@ -250,21 +269,24 @@ inline const QColor color256(UINT8 u, const ColorEntry* base)
 
 inline QColor CharacterColor::color(const ColorEntry* base) const
 {
-  switch (t)
+  switch (_colorSpace)
   {
-    case COLOR_SPACE_DEFAULT: return base[u+0+(v?BASE_COLORS:0)].color;
-    case COLOR_SPACE_SYSTEM: return base[u+2+(v?BASE_COLORS:0)].color;
-    case COLOR_SPACE_256: return color256(u,base);
-    case COLOR_SPACE_RGB: return QColor(u,v,w);
-    default    : return QColor(255,0,0); // diagnostic catch all
+    case COLOR_SPACE_DEFAULT: return base[_u+0+(_v?BASE_COLORS:0)].color;
+    case COLOR_SPACE_SYSTEM: return base[_u+2+(_v?BASE_COLORS:0)].color;
+    case COLOR_SPACE_256: return color256(_u,base);
+    case COLOR_SPACE_RGB: return QColor(_u,_v,_w);
   }
+
+  Q_ASSERT(false); // invalid color space;
+
+  return QColor();
 }
 
 inline void CharacterColor::toggleIntensive()
 {
-  if (t == COLOR_SPACE_SYSTEM || t == COLOR_SPACE_DEFAULT)
+  if (_colorSpace == COLOR_SPACE_SYSTEM || _colorSpace == COLOR_SPACE_DEFAULT)
   {
-    v = !v;
+    _v = !_v;
   }
 }
 
@@ -320,18 +342,18 @@ inline bool operator != (const Character& a, const Character& b)
 
 inline bool Character::isTransparent(const ColorEntry* base) const
 {
-  return ((backgroundColor.t == COLOR_SPACE_DEFAULT) && 
-          base[backgroundColor.u+0+(backgroundColor.v?BASE_COLORS:0)].transparent)
-      || ((backgroundColor.t == COLOR_SPACE_SYSTEM) && 
-          base[backgroundColor.u+2+(backgroundColor.v?BASE_COLORS:0)].transparent);
+  return ((backgroundColor._colorSpace == COLOR_SPACE_DEFAULT) && 
+          base[backgroundColor._u+0+(backgroundColor._v?BASE_COLORS:0)].transparent)
+      || ((backgroundColor._colorSpace == COLOR_SPACE_SYSTEM) && 
+          base[backgroundColor._u+2+(backgroundColor._v?BASE_COLORS:0)].transparent);
 }
 
 inline bool Character::isBold(const ColorEntry* base) const
 {
-  return (backgroundColor.t == COLOR_SPACE_DEFAULT) && 
-            base[backgroundColor.u+0+(backgroundColor.v?BASE_COLORS:0)].bold
-      || (backgroundColor.t == COLOR_SPACE_SYSTEM) && 
-            base[backgroundColor.u+2+(backgroundColor.v?BASE_COLORS:0)].bold;
+  return (backgroundColor._colorSpace == COLOR_SPACE_DEFAULT) && 
+            base[backgroundColor._u+0+(backgroundColor._v?BASE_COLORS:0)].bold
+      || (backgroundColor._colorSpace == COLOR_SPACE_SYSTEM) && 
+            base[backgroundColor._u+2+(backgroundColor._v?BASE_COLORS:0)].bold;
 }
 
 extern unsigned short vt100_graphics[32];
