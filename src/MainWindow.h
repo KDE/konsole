@@ -26,6 +26,8 @@
 // KDE
 #include <KXmlGuiWindow>
 
+class KToggleAction;
+
 namespace Konsole
 {
 
@@ -118,6 +120,8 @@ class MainWindow : public KXmlGuiWindow
         ViewManager*  _viewManager;
         BookmarkHandler* _bookmarkHandler;
         IncrementalSearchBar* _searchBar;
+        KToggleAction* _toggleMenuBarAction;
+
         QPointer<SessionController> _pluggedController;
 };
 

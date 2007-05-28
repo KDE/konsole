@@ -32,6 +32,7 @@
 #include <KMenu>
 #include <KMenuBar>
 #include <KService>
+#include <KToggleAction>
 #include <KToggleFullScreenAction>
 #include <KToolInvocation>
 #include <kstandardaction.h>
@@ -96,6 +97,7 @@ void MainWindow::activeViewChanged(SessionController* controller)
 
     // set the current session's search bar
     controller->setSearchBar( searchBar() );
+    controller->setShowMenuAction( _toggleMenuBarAction );
 
     // listen for title changes from the current session
     if ( _pluggedController )
@@ -173,12 +175,17 @@ void MainWindow::setupActions()
     // default which cannot be overridden
 
     // View Menu
-    QAction* hideMenuBarAction = collection->addAction("hide-menubar");
-    hideMenuBarAction->setText( i18n("Hide MenuBar") );
-    connect( hideMenuBarAction , SIGNAL(triggered()) , menuBar() , SLOT(hide()) );
+    _toggleMenuBarAction = new KToggleAction(this);
+    _toggleMenuBarAction->setText( i18n("Show Menu Bar") );
+    _toggleMenuBarAction->setIcon( KIcon("show-menu") );
+    _toggleMenuBarAction->setCheckedState( KGuiItem("Hide Menu Bar","show-menu") ); 
+    _toggleMenuBarAction->setChecked( !menuBar()->isHidden() );
+    connect( _toggleMenuBarAction , SIGNAL(toggled(bool)) , menuBar() , SLOT(setVisible(bool)) );
+    collection->addAction("show-menubar",_toggleMenuBarAction);
 
     KToggleFullScreenAction* fullScreenAction = new KToggleFullScreenAction(this);
     fullScreenAction->setWindow(this);
+    fullScreenAction->setShortcut( Qt::CTRL + Qt::SHIFT + Qt::Key_F11 );
     collection->addAction("view-full-screen",fullScreenAction);
     connect( fullScreenAction , SIGNAL(toggled(bool)) , this , SLOT(viewFullScreen(bool)) ); 
     //TODO - Implmement this correctly

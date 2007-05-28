@@ -76,6 +76,9 @@ The KDE 4.0 TODO List:
   then the operation ( checkout, update, remove etc. ) 
   could be included as well.
 
+== BUGS ==
+
+
 == NON-ESSENTIAL FEATURES ==
 
 - Automatic switching of profiles on 

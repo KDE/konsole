@@ -56,6 +56,7 @@ class Session;
 class ScreenWindow;
 class TerminalDisplay;
 class IncrementalSearchBar;
+class ProfileList;
 class UrlFilter;
 class RegExpFilter;
 
@@ -86,9 +87,7 @@ public:
     SessionController(Session* session , TerminalDisplay* view, QObject* parent);
     ~SessionController();
 
-    /** Reimplemented to watch for events happening to the view */
-    virtual bool eventFilter(QObject* watched , QEvent* event);
-
+    
     /** Returns the session associated with this controller */
     QPointer<Session> session() { return _session; }
     /** Returns the view associated with this controller */
@@ -104,8 +103,17 @@ public:
      */
     IncrementalSearchBar* searchBar() const;
 
+    /**
+     * Sets the action displayed in the session's context menu to hide or
+     * show the menu bar. 
+     */
+    void setShowMenuAction(QAction* action);
+
     // reimplemented
     virtual KUrl url() const;
+
+    // Reimplemented to watch for events happening to the view
+    virtual bool eventFilter(QObject* watched , QEvent* event);
 
 signals:
     /**
@@ -194,6 +202,9 @@ private:
 private:
     QPointer<Session>         _session;
     QPointer<TerminalDisplay> _view;
+    
+    ProfileList* _profileList;
+
     KIcon      _sessionIcon;
     QString    _sessionIconName;
     int        _previousState;

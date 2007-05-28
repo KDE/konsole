@@ -69,6 +69,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , KXMLGUIClient()
     , _session(session)
     , _view(view)
+    , _profileList(0)
     , _previousState(-1)
     , _viewUrlFilter(0)
     , _searchFilter(0)
@@ -352,6 +353,11 @@ IncrementalSearchBar* SessionController::searchBar() const
     return _searchBar;
 }
 
+void SessionController::setShowMenuAction(QAction* action)
+{
+    actionCollection()->addAction("show-menubar",action);
+}
+
 void SessionController::setupActions()
 {
     QAction* action = 0;
@@ -469,11 +475,6 @@ void SessionController::setupActions()
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_X) );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearHistoryAndReset()) );
 
-    // Menu
-    action = collection->addAction("show-menubar");
-    action->setText( i18n("Show Menubar") );
-    connect( action , SIGNAL(toggled(bool)) , this , SIGNAL(showMenuBarToggle(bool)) );
-
     // Profile Options 
     action = collection->addAction("edit-current-profile");
     action->setText( i18n("Edit Current Profile...") );
@@ -496,10 +497,13 @@ void SessionController::prepareChangeProfileMenu()
 {
     if ( _changeProfileMenu->isEmpty() )
     {
-        ProfileList* list = new ProfileList(false,this);
-        connect( list , SIGNAL(profileSelected(const QString&)) , this , SLOT(changeProfile(const QString&)) );
-        _changeProfileMenu->addActions(list->actions());
+        _profileList = new ProfileList(false,this);
+        connect( _profileList , SIGNAL(profileSelected(const QString&)) , 
+                this , SLOT(changeProfile(const QString&)) );
     }
+
+    _changeProfileMenu->clear();
+    _changeProfileMenu->addActions(_profileList->actions());
 }
 void SessionController::updateCodecAction()
 {

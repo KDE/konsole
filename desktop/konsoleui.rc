@@ -34,7 +34,7 @@
             <Action name="detach-view"/>
             <Action name="merge-windows"/>
             <Separator/>
-            <Action name="hide-menubar"/>
+            <Action name="show-menubar"/>
             <Action name="view-full-screen"/>
         </Menu>
         <Action name="bookmark"/>
