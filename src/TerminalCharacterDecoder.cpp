@@ -31,7 +31,8 @@
 using namespace Konsole;
 
 PlainTextDecoder::PlainTextDecoder()
- : _includeTrailingWhitespace(true)
+ : _output(0)
+ , _includeTrailingWhitespace(true)
 {
 
 }
@@ -43,10 +44,19 @@ bool PlainTextDecoder::trailingWhitespace() const
 {
     return _includeTrailingWhitespace;
 }
-
-void PlainTextDecoder::decodeLine(const Character* const characters, int count, LineProperty /*properties*/,
-							 QTextStream* output)
+void PlainTextDecoder::begin(QTextStream* output)
 {
+   _output = output; 
+}
+void PlainTextDecoder::end()
+{
+    _output = 0;
+}
+void PlainTextDecoder::decodeLine(const Character* const characters, int count, LineProperty /*properties*/
+							 )
+{
+    Q_ASSERT( _output );
+
 	//TODO should we ignore or respect the LINE_WRAPPED line property?
 
 	//note:  we build up a QString and send it to the text stream rather writing into the text
@@ -75,71 +85,95 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
 		plainText.append( QChar(characters[i].character) );
 	}
 
-	*output << plainText;
+	*_output << plainText;
 }
 
 HTMLDecoder::HTMLDecoder() :
-		colorTable(base_color_table)
+        _output(0)
+	   ,_colorTable(base_color_table)
+       ,_innerSpanOpen(false)
+       ,_lastRendition(DEFAULT_RENDITION)
 {
 	
 }
 
-//TODO: Support for LineProperty (mainly double width , double height)
-void HTMLDecoder::decodeLine(const Character* const characters, int count, LineProperty /*properties*/,
-							QTextStream* output)
+void HTMLDecoder::begin(QTextStream* output)
 {
+    _output = output;
+
+    QString text;
+
+	//open monospace span
+    openSpan(text,"font-family:monospace");
+
+    *output << text;
+}
+
+void HTMLDecoder::end()
+{
+    Q_ASSERT( _output );
+
+    QString text;
+
+    closeSpan(text);
+
+    *_output << text;
+
+    _output = 0;
+
+}
+
+//TODO: Support for LineProperty (mainly double width , double height)
+void HTMLDecoder::decodeLine(const Character* const characters, int count, LineProperty /*properties*/
+							)
+{
+    Q_ASSERT( _output );
+
 	QString text;
 
-	bool innerSpanOpen = false;
 	int spaceCount = 0;
-	UINT8 lastRendition = DEFAULT_RENDITION;
-	CharacterColor lastForeColor;
-	CharacterColor lastBackColor;
-	
-	//open monospace span
-	openSpan(text,"font-family:monospace");
-	
+		
 	for (int i=0;i<count;i++)
 	{
 		QChar ch(characters[i].character);
 
 		//check if appearance of character is different from previous char
-		if ( characters[i].rendition != lastRendition  ||
-		     characters[i].foregroundColor != lastForeColor  ||
-			 characters[i].backgroundColor != lastBackColor )
+		if ( characters[i].rendition != _lastRendition  ||
+		     characters[i].foregroundColor != _lastForeColor  ||
+			 characters[i].backgroundColor != _lastBackColor )
 		{
-			if ( innerSpanOpen )
+			if ( _innerSpanOpen )
 					closeSpan(text);
 
-			lastRendition = characters[i].rendition;
-			lastForeColor = characters[i].foregroundColor;
-			lastBackColor = characters[i].backgroundColor;
+			_lastRendition = characters[i].rendition;
+			_lastForeColor = characters[i].foregroundColor;
+			_lastBackColor = characters[i].backgroundColor;
 			
 			//build up style string
 			QString style;
 
-			if ( lastRendition & RE_BOLD ||
-                             (colorTable && characters[i].isBold(colorTable)) )
+			if ( _lastRendition & RE_BOLD ||
+                             (_colorTable && characters[i].isBold(_colorTable)) )
 					style.append("font-weight:bold;");
 
 
-			if ( lastRendition & RE_UNDERLINE )
+			if ( _lastRendition & RE_UNDERLINE )
 					style.append("font-decoration:underline;");
 		
 			//colours - a colour table must have been defined first
-			if ( colorTable )	
+			if ( _colorTable )	
 			{
-				style.append( QString("color:%1;").arg(lastForeColor.color(colorTable).name() ) );
+				style.append( QString("color:%1;").arg(_lastForeColor.color(_colorTable).name() ) );
 
-				if (!characters[i].isTransparent(colorTable))
+				if (!characters[i].isTransparent(_colorTable))
 				{
-					style.append( QString("background-color:%1;").arg(lastBackColor.color(colorTable).name() ) );
+					style.append( QString("background-color:%1;").arg(_lastBackColor.color(_colorTable).name() ) );
 				}
 			}
 		
 			//open the span with the current style	
 			openSpan(text,style);
-			innerSpanOpen = true;
+			_innerSpanOpen = true;
 		}
 
 		//handle whitespace
@@ -168,16 +202,13 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
 	}
 
 	//close any remaining open inner spans
-	if ( innerSpanOpen )
+	if ( _innerSpanOpen )
 		closeSpan(text);
 
-	//close monospace span
-	closeSpan(text);
-	
 	//start new line
 	text.append("<br>");
 	
-	*output << text;
+	*_output << text;
 }
 
 void HTMLDecoder::openSpan(QString& text , const QString& style)
@@ -192,5 +223,5 @@ void HTMLDecoder::closeSpan(QString& text)
 
 void HTMLDecoder::setColorTable(const ColorEntry* table)
 {
-	colorTable = table;
+	_colorTable = table;
 }

@@ -152,10 +152,12 @@ void TerminalImageFilterChain::setImage(const Character* const image , int lines
     _linePositions = newLinePositions;
 
     QTextStream lineStream(_buffer);
+    decoder.begin(&lineStream);
+
     for (int i=0 ; i < lines ; i++)
     {
         _linePositions->append(_buffer->length());
-        decoder.decodeLine(image + i*columns,columns,LINE_DEFAULT,&lineStream);
+        decoder.decodeLine(image + i*columns,columns,LINE_DEFAULT);
 
         // pretend that each line ends with a newline character.
         // this prevents a link that occurs at the end of one line
@@ -169,7 +171,7 @@ void TerminalImageFilterChain::setImage(const Character* const image , int lines
         // lines
         lineStream << QChar('\n');
     }
-
+    decoder.end();
 }
 
 Filter::Filter() :

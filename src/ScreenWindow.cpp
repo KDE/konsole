@@ -50,7 +50,6 @@ Screen* ScreenWindow::screen() const
 
 Character* ScreenWindow::getImage()
 {
-
     return _screen->getCookedImage(_currentLine);
 }
 
@@ -198,7 +197,15 @@ void ScreenWindow::resetScrollCount()
 
 QRect ScreenWindow::scrollRegion() const
 {
-    return _screen->lastScrolledRegion();
+    QRect rect = _screen->lastScrolledRegion();
+
+    // bound scroll region size to size of window
+    //rect.setHeight( qMin(rect.height() , windowLines()+1) );
+   
+    //Q_ASSERT( rect.top() >= 0 && rect.left() >= 0 ); 
+    //Q_ASSERT( rect.height()-1 <= windowLines() );
+
+    return rect;
 }
 
 void ScreenWindow::notifyOutputChanged()

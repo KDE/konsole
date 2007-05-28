@@ -162,13 +162,12 @@ public:
    * into @p stream, using @p decoder to convert the terminal
    * characters into text. 
    *
-   * @param stream The text stream into which the output history will be written.
    * @param decoder A decoder which converts lines of terminal characters with 
    * appearance attributes into output text.  PlainTextDecoder is the most commonly
    * used decoder.
    * @param startLine The first
    */
-  virtual void writeToStream(QTextStream* stream,TerminalCharacterDecoder* decoder,int startLine,int endLine);
+  virtual void writeToStream(TerminalCharacterDecoder* decoder,int startLine,int endLine);
   
   
   /** Returns the codec used to decode incoming characters.  See setCodec() */

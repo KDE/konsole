@@ -708,15 +708,18 @@ void TerminalDisplay::setCursorPos(const int curx, const int cury)
 // a cell width of _fontWidth and a cell height of _fontHeight).    
 void TerminalDisplay::scrollImage(int lines , const QRect& region)
 {
-    if ( lines == 0 || _image == 0 || abs(lines) >= region.height() ) return;
+    if (    lines == 0 
+         || _image == 0 
+         || (region.top() + abs(lines)) >= region.height() 
+         || this->_usedLines <= region.height() ) return;
 
     QRect scrollRect;
 
-    //qDebug() << "Scrolled region: top =" << region.top() 
-    //         << ", bottom =" << region.bottom()
-    //         << ", height =" << region.height() << "lines.  Image height ="
-    //         << this->_usedLines << "lines"
-    //         << ", scroll =" << lines << "lines";
+   // qDebug() << "Scrolled region: top =" << region.top() 
+   //          << ", bottom =" << region.bottom()
+   //          << ", height =" << region.height() << "lines.  Image height ="
+   //          << this->_usedLines << "lines"
+   //          << ", scroll =" << lines << "lines";
 
     void* firstCharPos = &_image[ region.top() * this->_usedColumns ];
     void* lastCharPos = &_image[ (region.top() + abs(lines)) * this->_usedColumns ];
@@ -730,12 +733,16 @@ void TerminalDisplay::scrollImage(int lines , const QRect& region)
     Q_ASSERT( linesToMove > 0 );
     Q_ASSERT( bytesToMove > 0 );
 
-    //scroll internal _image
+    //scroll internal image
     if ( lines > 0 )
     {
+        // check that the memory areas that we are going to move are valid
+        Q_ASSERT( (char*)lastCharPos + bytesToMove < 
+                  (char*)(_image + (this->_usedLines * this->_usedColumns)) );
+        
         assert( (lines*this->_usedColumns) < _imageSize ); 
 
-        //scroll internal _image down
+        //scroll internal image down
         memmove( firstCharPos , lastCharPos , bytesToMove ); 
       
         //set region of display to scroll, making sure that
@@ -746,7 +753,11 @@ void TerminalDisplay::scrollImage(int lines , const QRect& region)
     }
     else
     {
-        //scroll internal _image up
+        // check that the memory areas that we are going to move are valid
+        Q_ASSERT( (char*)firstCharPos + bytesToMove < 
+                  (char*)(_image + (this->_usedLines * this->_usedColumns)) );
+
+        //scroll internal image up
         memmove( lastCharPos , firstCharPos , bytesToMove ); 
      
         //set region of the display to scroll, making sure that

@@ -1338,7 +1338,9 @@ QString Screen::selectedText(bool preserve_line_breaks)
   QTextStream stream(&result, QIODevice::ReadWrite);
   
   PlainTextDecoder decoder;
-  writeSelectionToStream(&stream,&decoder);
+  decoder.begin(&stream);
+  writeSelectionToStream(&decoder);
+  decoder.end();
   
   return result;
 }
@@ -1377,7 +1379,7 @@ static QString makeString(int *m, int d, bool stripTrailingSpaces)
 }*/
 
 
-void Screen::writeSelectionToStream(QTextStream* stream , TerminalCharacterDecoder* decoder)
+void Screen::writeSelectionToStream(TerminalCharacterDecoder* decoder)
 {
 	int top = sel_TL / columns;	
 	int left = sel_TL % columns;
@@ -1396,16 +1398,17 @@ void Screen::writeSelectionToStream(QTextStream* stream , TerminalCharacterDecod
 			int count = -1;
 			if ( y == bottom) count = right - start + 1;
 
-			copyLineToStream( y,start,count,stream,decoder );
-			
-			if (y != bottom)
-				*stream << '\n';
+            const bool appendNewLine = ( y != bottom );
+			copyLineToStream( y,start,count,decoder , appendNewLine );
 	}	
 }
 
 
-void Screen::copyLineToStream(int line , int start, int count, 
-								QTextStream* stream, TerminalCharacterDecoder* decoder)
+void Screen::copyLineToStream(int line , 
+                              int start, 
+                              int count,
+                              TerminalCharacterDecoder* decoder,
+                              bool appendNewLine)
 {
 		//buffer to hold characters for decoding
 		//the buffer is static to avoid initialising every 
@@ -1464,9 +1467,16 @@ void Screen::copyLineToStream(int line , int start, int count,
 						count--;
 				else
 						break;
-		
+
+        // add new line at end    
+        if ( appendNewLine && (count+1 < MAX_CHARS) )
+        {
+            characterBuffer[count] = '\n';
+            count++;
+        }
+
 		//decode line and write to text stream	
-		decoder->decodeLine( (Character*) characterBuffer , count, LINE_DEFAULT , stream);
+		decoder->decodeLine( (Character*) characterBuffer , count, LINE_DEFAULT );
 }
 
 // Method below has been removed because of its reliance on 'histCursor'
@@ -1484,12 +1494,12 @@ void Screen::copyLineToStream(int line , int start, int count,
   clearSelection();
 }*/
 
-void Screen::writeToStream(QTextStream* stream, TerminalCharacterDecoder* decoder, int from, int to)
+void Screen::writeToStream(TerminalCharacterDecoder* decoder, int from, int to)
 {
 	sel_begin = loc(0,from);
 	sel_TL = sel_begin;
 	sel_BR = loc(columns-1,to);
-	writeSelectionToStream(stream,decoder);
+	writeSelectionToStream(decoder);
 	clearSelection();
 }
 

@@ -284,25 +284,23 @@ public: // these are all `Screen' operations
 	/**
 	 * Copies part of the output to a stream.
 	 *
-	 * @param stream An output stream which receives the text
 	 * @param decoder A decoder which coverts terminal characters into text
 	 * @param from The first line in the history to retrieve
 	 * @param to The last line in the history to retrieve
 	 */
-	void writeToStream(QTextStream* stream , TerminalCharacterDecoder* decoder, int from, int to);
+	void writeToStream(TerminalCharacterDecoder* decoder, int from, int to);
 	
     QString getHistoryLine(int no);
 
 	/**
 	 * Copies the selected characters, set using @see setSelBeginXY and @see setSelExtentXY
-	 * into a stream using the specified character decoder.
+	 * into a stream.
 	 *
-	 * @param stream An output stream which receives the converted text
 	 * @param decoder A decoder which converts terminal characters into text.  PlainTextDecoder
 	 * 				  is the most commonly used decoder which coverts characters into plain
 	 * 				  text with no formatting.
 	 */
-	void writeSelectionToStream(QTextStream* stream , TerminalCharacterDecoder* decoder);
+	void writeSelectionToStream(TerminalCharacterDecoder* decoder);
 
     void checkSelection(int from, int to);
 
@@ -353,10 +351,13 @@ private: // helper
 	//		 hist->getLines() + lines - 1
 	//start - the first column on the line to copy
 	//count - the number of characters on the line to copy
-	//stream - the output stream to write the text into
 	//decoder - a decoder which coverts terminal characters (an Character array) into text
-	void copyLineToStream(int line, int start, int count, QTextStream* stream,
-						  TerminalCharacterDecoder* decoder);
+    //appendNewLine - if true a new line character (\n) is appended to the end of the line
+	void copyLineToStream(int line, 
+                          int start, 
+                          int count, 
+                          TerminalCharacterDecoder* decoder,
+                          bool appendNewLine);
 	
     //fills a section of the screen image with the character 'c'
     //the parameters are specified as offsets from the start of the screen image.

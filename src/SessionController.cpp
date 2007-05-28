@@ -1037,7 +1037,9 @@ void SaveHistoryTask::jobDataRequested(KIO::Job* job , QByteArray& data)
                                  sessionLines-1 );
 
         QTextStream stream(&data,QIODevice::ReadWrite);
-        info.session->emulation()->writeToStream( &stream , info.decoder , info.lastLineFetched+1 , copyUpToLine );
+        info.decoder->begin(&stream);
+        info.session->emulation()->writeToStream( info.decoder , info.lastLineFetched+1 , copyUpToLine );
+        info.decoder->end();
 
         // if there are still more lines to process after this request 
         // then insert a new line character
@@ -1087,7 +1089,6 @@ void SearchHistoryTask::execute()
     if ( !_regExp.isEmpty() )
     {
         int pos = -1;
-        int findPos = -1;
         const bool forwards = ( _direction == Forwards );
         const int startLine = selectionLine + _screenWindow->currentLine() + ( forwards ? 1 : -1 );
         const int lastLine = _screenWindow->lineCount() - 1;
@@ -1102,7 +1103,8 @@ void SearchHistoryTask::execute()
         int line = startLine;
 
         //read through and search history in blocks of 10K lines.
-        //this balances the need to retrieve lots of data from the history each time (for efficient searching)
+        //this balances the need to retrieve lots of data from the history each time 
+        //(for efficient searching)
         //without using silly amounts of memory if the history is very large.    
         const int maxDelta = qMin(_screenWindow->lineCount(),10000);
         int delta = forwards ? maxDelta : -maxDelta;
@@ -1155,10 +1157,13 @@ void SearchHistoryTask::execute()
                 }
             }
 
-            //qDebug() << "Searching lines " << qMin(endLine,line) << " to " << qMax(endLine,line);
-            emulation->writeToStream(&searchStream,&decoder, qMin(endLine,line) , qMax(endLine,line) );
+            qDebug() << "Searching lines " << qMin(endLine,line) << " to " << qMax(endLine,line);
+            
+            decoder.begin(&searchStream);
+            emulation->writeToStream(&decoder, qMin(endLine,line) , qMax(endLine,line) );
+            decoder.end();
 
-            //qDebug() << "Stream contents length: " << string;
+            qDebug() << "Stream contents: " << string;
             pos = -1;
             if (forwards)
                 pos = string.indexOf(_regExp);
@@ -1168,21 +1173,8 @@ void SearchHistoryTask::execute()
             //if a match is found, position the cursor on that line and update the screen
             if ( pos != -1 )
             {
-                //work out how many lines into the current block of text the search result was found
-                //- looks a little painful, but it only has to be done once per search.
-                findPos = qMin(line,endLine) + string.left(pos + 1).count(QChar('\n'));
-                
-                qDebug() << "Found result at line " << findPos;
-
-                //update display to show area of history containing selection	
-                _screenWindow->scrollTo(findPos);
-                _screenWindow->setSelectionStart( 0 , findPos - _screenWindow->currentLine() , false );
-                _screenWindow->setSelectionEnd( _screenWindow->columnCount() , findPos - _screenWindow->currentLine() );
-                //qDebug() << "Current line " << _screenWindow->currentLine();
-                _screenWindow->setTrackOutput(false);
-                _screenWindow->notifyOutputChanged();
-                //qDebug() << "Post update current line " << _screenWindow->currentLine();
-
+                int findPos = qMin(line,endLine) + string.left(pos + 1).count(QChar('\n'));
+                highlightResult(findPos);
                 return;
             }
 
@@ -1196,6 +1188,23 @@ void SearchHistoryTask::execute()
         _screenWindow->clearSelection();
         _screenWindow->notifyOutputChanged();
     }
+}
+
+void SearchHistoryTask::highlightResult(int findPos)
+{
+     //work out how many lines into the current block of text the search result was found
+     //- looks a little painful, but it only has to be done once per search.
+     
+     qDebug() << "Found result at line " << findPos;
+
+     //update display to show area of history containing selection	
+     _screenWindow->scrollTo(findPos);
+     _screenWindow->setSelectionStart( 0 , findPos - _screenWindow->currentLine() , false );
+     _screenWindow->setSelectionEnd( _screenWindow->columnCount() , findPos - _screenWindow->currentLine() );
+     //qDebug() << "Current line " << _screenWindow->currentLine();
+     _screenWindow->setTrackOutput(false);
+     _screenWindow->notifyOutputChanged();
+     //qDebug() << "Post update current line " << _screenWindow->currentLine();
 }
 
 SearchHistoryTask::SearchHistoryTask(ScreenWindow* window , QObject* parent)

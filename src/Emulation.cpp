@@ -407,12 +407,11 @@ void Emulation::clearSelection() {
 
 #endif 
 
-void Emulation::writeToStream(QTextStream* stream , 
-                               TerminalCharacterDecoder* _decoder , 
+void Emulation::writeToStream( TerminalCharacterDecoder* _decoder , 
                                int startLine ,
                                int endLine) 
 {
-  _currentScreen->writeToStream(stream,_decoder,startLine,endLine);
+  _currentScreen->writeToStream(_decoder,startLine,endLine);
 }
 
 int Emulation::lineCount()

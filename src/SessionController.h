@@ -385,6 +385,8 @@ signals:
                     int endColumn );
    
 private:
+    void highlightResult(int position);
+
     QRegExp _regExp;
     bool _matchRegExp;
     bool _matchCase;
