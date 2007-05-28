@@ -78,6 +78,17 @@ The KDE 4.0 TODO List:
 
 == BUGS ==
 
+- Allow the user to over-ride the "no Ctrl+[Key] shortcuts" limitation with shortcuts
+set in the configuration dialog, but warn the user if they try to do so.  This is the 
+behaviour in KDE 3.
+
+
+== NON-ESSENTIAL TWEAKS ==
+
+- Currently splitting the view creates a new terminal widget for each session
+  in the new view.  This will have a perceptible performance impact for 
+  users who have ten, twenty or more tabs open.  Add facilities to
+  delay creating the views until they are needed.
 
 == NON-ESSENTIAL FEATURES ==
 

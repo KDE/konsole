@@ -246,7 +246,8 @@ void MainWindow::newWindow()
 
 void MainWindow::showShortcutsDialog()
 {
-    KShortcutsDialog::configure( actionCollection() );
+    KShortcutsDialog::configure( actionCollection() ,
+                                 KShortcutsEditor::LetterShortcutsDisallowed );
 }
 
 void MainWindow::newFromProfile(const QString& key)

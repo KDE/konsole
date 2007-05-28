@@ -100,6 +100,10 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     connect( _view , SIGNAL(configureRequest(TerminalDisplay*,int,int,int)) , this,
             SLOT(showDisplayContextMenu(TerminalDisplay*,int,int,int)) );
 
+    // move view to newest output when keystrokes occur
+    connect( _view , SIGNAL(keyPressedSignal(QKeyEvent*)) , this , 
+            SLOT(trackOutput()) );
+
     // listen to activity / silence notifications from session
     connect( _session , SIGNAL(stateChanged(int)) , this ,
             SLOT(sessionStateChanged(int) ));
@@ -123,6 +127,12 @@ SessionController::~SessionController()
 {
    if ( _view )
       _view->setScreenWindow(0); 
+}
+void SessionController::trackOutput()
+{
+    Q_ASSERT( _view->screenWindow() );
+
+    _view->screenWindow()->setTrackOutput(true);
 }
 void SessionController::requireUrlFilterUpdate()
 {

@@ -186,6 +186,8 @@ private slots:
 
     void sessionResizeRequest(const QSize& size);
 
+    void trackOutput();  // move view to end of current output
+
     // debugging slots
     void debugProcess();
 
