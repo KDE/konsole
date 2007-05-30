@@ -1230,7 +1230,7 @@ bool Konsole::queryClose()
  */
 
 //Implementation note:  setColLin() works by intructing the terminal display widget
-//to resize itself to accomodate the specified number of lines and columns, and then resizes
+//to resize itself to accommodate the specified number of lines and columns, and then resizes
 //the Konsole window to its sizeHint().
 
 void Konsole::setColLin(int columns, int lines)
