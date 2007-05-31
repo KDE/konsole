@@ -5,7 +5,6 @@
         <Menu name="file"><text>File</text>
             <Action name="new-tab" />
             <Action name="new-window" />
-            <Action name="new-from-profile" />
             <!-- <Action name="remote-connection" /> !-->
             <Separator/>
             <ActionList name="favorite-profiles"/>

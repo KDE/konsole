@@ -25,6 +25,7 @@
 // Qt
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
+#include <QtCore/QTextCodec>
 
 // KDE
 #include <KConfigGroup>
@@ -70,6 +71,8 @@ FallbackProfile::FallbackProfile()
     setProperty(CursorShape,BlockCursor);
     setProperty(UseCustomCursorColor,false);
     setProperty(CustomCursorColor,Qt::black);
+
+    setProperty(DefaultEncoding,QString(QTextCodec::codecForLocale()->name()));
 
     // default taken from KDE 3
     setProperty(WordCharacters,":@-./_~?&=%+#");
@@ -225,6 +228,10 @@ bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile* profil
 
     writeStandardElement( interactionOptions , "WordCharacters" , profile , Profile::WordCharacters );
 
+    // Encoding
+    KConfigGroup encodingOptions = config.group("Encoding Options");
+    writeStandardElement( encodingOptions , "DefaultEncoding" , profile , Profile::DefaultEncoding );
+
     return true;
 }
 
@@ -299,6 +306,10 @@ bool KDE4ProfileReader::readProfile(const QString& path , Profile* profile)
     KConfigGroup interactionOptions = config.group("Interaction Options");
     
     readStandardElement<QString>(interactionOptions,"WordCharacters",profile,Profile::WordCharacters);
+
+    // encoding
+    KConfigGroup encodingOptions = config.group("Encoding Options");
+    readStandardElement<QString>(encodingOptions,"DefaultEncoding",profile,Profile::DefaultEncoding);
 
     return true;
 }

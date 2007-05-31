@@ -39,9 +39,7 @@
 
 class QSignalMapper;
 
-class KConfigGroup;
 class KDesktopFile;
-class KConfig;
 
 namespace Konsole
 {

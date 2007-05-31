@@ -30,6 +30,7 @@
 #include <KDialog>
 
 class QAbstractButton;
+class QTextCodec;
 
 namespace Ui
 {
@@ -145,7 +146,7 @@ private slots:
     void customCursorColor();
     void customCursorColorChanged(const QColor&);
     void wordCharactersChanged(const QString&);
-
+    void setDefaultCodec(QTextCodec*);
 
 private:
     // initialize various pages of the dialog

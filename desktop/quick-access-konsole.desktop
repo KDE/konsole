@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Exec=konsole --background-mode
+Icon=konsole
+DocPath=konsole/index.html
+MimeType=application/x-konsole
+Terminal=false
+X-KDE-StartupNotify=false
+
+Name=Quick Access Terminal

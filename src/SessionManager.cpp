@@ -27,6 +27,7 @@
 #include <QtCore/QList>
 #include <QtCore/QSignalMapper>
 #include <QtCore/QString>
+#include <QtCore/QTextCodec>
 
 // KDE
 #include <klocale.h>
@@ -388,6 +389,13 @@ void SessionManager::applyProfile(Session* session, const Profile* info , bool m
     if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::FlowControlEnabled) )
         session->setFlowControlEnabled( info->property(Profile::FlowControlEnabled)
                 .value<bool>() );
+
+    // Encoding
+    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::DefaultEncoding) )
+    {
+        QByteArray name = info->property(Profile::DefaultEncoding).value<QString>().toUtf8();
+        session->setCodec( QTextCodec::codecForName(name) );
+    } 
 }
 
 QString SessionManager::addProfile(Profile* type)

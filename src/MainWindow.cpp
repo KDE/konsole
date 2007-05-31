@@ -148,10 +148,6 @@ void MainWindow::setupActions()
     newWindowAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_M) );
     connect( newWindowAction , SIGNAL(triggered()) , this , SLOT(newWindow()) );
 
-    QAction* newFromProfileAction = collection->addAction("new-from-profile");
-    newFromProfileAction->setText( i18n("New From Profile...") );
-    // TODO Implement "New from Profile"
-
     QAction* remoteConnectionAction = collection->addAction("remote-connection");
     remoteConnectionAction->setText( i18n("Remote Connection...") );
     remoteConnectionAction->setIcon( KIcon("network") );

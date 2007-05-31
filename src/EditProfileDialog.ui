@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>581</width>
-    <height>679</height>
+    <height>590</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -243,13 +243,19 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout" >
-          <item row="0" column="0" >
+          <item row="0" column="0" colspan="2" >
            <widget class="QCheckBox" name="showMenuBarButton" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="toolTip" >
              <string>Show or hide the menu bar in terminal windows using this profile</string>
             </property>
             <property name="text" >
-             <string>Show menu bar</string>
+             <string>Show menu bar in new windows created from this profile</string>
             </property>
            </widget>
           </item>
@@ -578,6 +584,12 @@
          <layout class="QVBoxLayout" >
           <item>
            <widget class="QRadioButton" name="disableScrollbackButton" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="toolTip" >
              <string>Disable scroll bar and do not remember previous output</string>
             </property>
@@ -590,6 +602,12 @@
            <layout class="QHBoxLayout" >
             <item>
              <widget class="QRadioButton" name="fixedScrollbackButton" >
+              <property name="sizePolicy" >
+               <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="toolTip" >
                <string>Limit the remembered output to a fixed number of lines</string>
               </property>
@@ -628,6 +646,12 @@
           </item>
           <item>
            <widget class="QRadioButton" name="unlimitedScrollbackButton" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="toolTip" >
              <string>Remember all output produced by the terminal</string>
             </property>
@@ -650,6 +674,12 @@
          <layout class="QVBoxLayout" >
           <item>
            <widget class="QRadioButton" name="scrollBarLeftButton" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="toolTip" >
              <string>Show the scroll bar on the left side of the terminal window</string>
             </property>
@@ -660,6 +690,12 @@
           </item>
           <item>
            <widget class="QRadioButton" name="scrollBarRightButton" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="toolTip" >
              <string>Show the scroll bar on the right side of the terminal window</string>
             </property>
@@ -670,6 +706,12 @@
           </item>
           <item>
            <widget class="QRadioButton" name="scrollBarHiddenButton" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="toolTip" >
              <string>Hide the scroll bar</string>
             </property>
@@ -712,6 +754,12 @@
          <layout class="QVBoxLayout" >
           <item>
            <widget class="QCheckBox" name="enableBlinkingTextButton" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="toolTip" >
              <string>Allow terminal programs to create blinking sections of text</string>
             </property>
@@ -722,6 +770,12 @@
           </item>
           <item>
            <widget class="QCheckBox" name="enableFlowControlButton" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="toolTip" >
              <string>Allow the output to be suspended by pressing Ctrl+S</string>
             </property>
@@ -732,6 +786,12 @@
           </item>
           <item>
            <widget class="QCheckBox" name="enableResizeWindowButton" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="toolTip" >
              <string>Allow terminal programs to resize the window</string>
             </property>
@@ -787,6 +847,12 @@
          <layout class="QVBoxLayout" >
           <item>
            <widget class="QCheckBox" name="enableBlinkingCursorButton" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="toolTip" >
              <string>Make the cursor blink regularly</string>
             </property>
@@ -830,6 +896,12 @@
           </item>
           <item>
            <widget class="QRadioButton" name="autoCursorColorButton" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="toolTip" >
              <string>Set the cursor to match the color of the character underneath it.</string>
             </property>
@@ -842,6 +914,12 @@
            <layout class="QHBoxLayout" >
             <item>
              <widget class="QRadioButton" name="customCursorColorButton" >
+              <property name="sizePolicy" >
+               <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="toolTip" >
                <string>Use a custom, fixed color for the cursor</string>
               </property>
@@ -852,6 +930,12 @@
             </item>
             <item>
              <widget class="KColorButton" name="customColorSelectButton" >
+              <property name="sizePolicy" >
+               <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="toolTip" >
                <string>Select the color used to draw the cursor</string>
               </property>
@@ -866,14 +950,53 @@
         </widget>
        </item>
        <item>
+        <widget class="QGroupBox" name="groupBox_11" >
+         <property name="title" >
+          <string>Encoding</string>
+         </property>
+         <property name="flat" >
+          <bool>true</bool>
+         </property>
+         <layout class="QHBoxLayout" >
+          <item>
+           <widget class="QLabel" name="label_14" >
+            <property name="text" >
+             <string>Default character encoding:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="characterEncodingLabel" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text" >
+             <string>DEFAULTENCODING</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="selectEncodingButton" >
+            <property name="text" >
+             <string>Select</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <spacer>
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
          <property name="sizeHint" >
           <size>
-           <width>20</width>
-           <height>40</height>
+           <width>559</width>
+           <height>151</height>
           </size>
          </property>
         </spacer>

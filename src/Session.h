@@ -340,7 +340,10 @@ public:
    * @param size The size in lines and columns to request.
    */
   void setSize(const QSize& size);
-  
+ 
+  /** Sets the text codec used by this session's terminal emulation. */
+  void setCodec(QTextCodec* codec);
+
 public slots:
 
   /** 

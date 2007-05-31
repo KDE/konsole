@@ -130,6 +130,11 @@ bool Session::running() const
     return _shellProcess->isRunning();
 }
 
+void Session::setCodec(QTextCodec* codec)
+{
+    emulation()->setCodec(codec);
+}
+
 void Session::setProgram(const QString& program)
 {
     _program = program;

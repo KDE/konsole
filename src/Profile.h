@@ -159,7 +159,10 @@ public:
         WordCharacters,  // QString
 
         /** (TabBarPositionEnum) Position of the tab-bar relative to the terminal displays. */
-        TabBarPosition
+        TabBarPosition,
+
+        /** (String) Default text codec */
+        DefaultEncoding
     };
 
     /** 

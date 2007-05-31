@@ -26,8 +26,10 @@
 #include <QtGui/QPainter>
 #include <QtGui/QStandardItem>
 #include <QtCore/QDebug>
+#include <QtCore/QTextCodec>
 
 // KDE
+#include <kcodecaction.h>
 #include <KFontDialog>
 #include <KIcon>
 #include <KIconDialog>
@@ -745,6 +747,21 @@ void EditProfileDialog::setupAdvancedPage(const Profile* profile)
     _ui->cursorShapeCombo->setCurrentIndex(shape);
 
     connect( _ui->cursorShapeCombo , SIGNAL(activated(int)) , this , SLOT(setCursorShape(int)) ); 
+
+    // encoding options
+    QAction* codecAction = new KCodecAction(this);
+    _ui->selectEncodingButton->setMenu( codecAction->menu() );
+    connect( codecAction , SIGNAL(triggered(QTextCodec*)) , this , SLOT(setDefaultCodec(QTextCodec*)) );
+
+    _ui->characterEncodingLabel->setText( profile->property(Profile::DefaultEncoding).value<QString>() );
+
+}
+void EditProfileDialog::setDefaultCodec(QTextCodec* codec)
+{
+    QString name = QString(codec->name());
+
+    _tempProfile->setProperty(Profile::DefaultEncoding,name);
+    _ui->characterEncodingLabel->setText(codec->name());
 }
 void EditProfileDialog::customCursorColorChanged(const QColor& color)
 {

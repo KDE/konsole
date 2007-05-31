@@ -521,7 +521,7 @@ void SessionController::updateCodecAction()
 }
 void SessionController::changeCodec(QTextCodec* codec)
 {
-    _session->emulation()->setCodec(codec);
+    _session->setCodec(codec);
 }
 void SessionController::debugProcess()
 {
