@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>581</width>
-    <height>590</height>
+    <width>456</width>
+    <height>516</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -27,6 +27,12 @@
    </property>
    <item>
     <widget class="QTabWidget" name="tabWidget" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="currentIndex" >
       <number>0</number>
      </property>
@@ -246,7 +252,7 @@
           <item row="0" column="0" colspan="2" >
            <widget class="QCheckBox" name="showMenuBarButton" >
             <property name="sizePolicy" >
-             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -304,7 +310,7 @@
          <property name="sizeHint" >
           <size>
            <width>95</width>
-           <height>61</height>
+           <height>20</height>
           </size>
          </property>
         </spacer>
@@ -995,8 +1001,8 @@
          </property>
          <property name="sizeHint" >
           <size>
-           <width>559</width>
-           <height>151</height>
+           <width>20</width>
+           <height>20</height>
           </size>
          </property>
         </spacer>
