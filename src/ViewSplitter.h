@@ -66,7 +66,8 @@ public:
      *                    will be created, into which the container will
      *                    be inserted.   
      */
-    void addContainer( ViewContainer* container , Qt::Orientation orientation );   
+    void addContainer( ViewContainer* container , Qt::Orientation orientation );  
+
     /** Returns the child ViewSplitter widget which currently has the focus */
     ViewSplitter* activeSplitter() ;
  

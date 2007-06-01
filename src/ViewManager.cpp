@@ -106,7 +106,12 @@ void ViewManager::setupActions()
     KAction* nextViewAction = new KAction( i18n("Next View") , this );
     KAction* previousViewAction = new KAction( i18n("Previous View") , this );
     QAction* nextContainerAction = new QAction( i18n("Next View Container") , this);
-    
+   
+    // list of actions that should only be enabled when there are multiple view
+    // containers open
+    QList<QAction*> multiViewOnlyActions;
+    multiViewOnlyActions << nextContainerAction;
+
     if ( collection )
     {
         KAction* splitLeftRightAction = new KAction( KIcon("view-left-right"),
@@ -128,14 +133,16 @@ void ViewManager::setupActions()
         closeActiveAction->setEnabled(false);
         collection->addAction("close-active-view",closeActiveAction);
         connect( closeActiveAction , SIGNAL(triggered()) , this , SLOT(closeActiveView()) );
-        connect( this , SIGNAL(splitViewToggle(bool)) , closeActiveAction , SLOT(setEnabled(bool)) );
-        
+      
+        multiViewOnlyActions << closeActiveAction; 
+
         KAction* closeOtherAction = new KAction( i18n("Close Others") , this );
         closeOtherAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_O) );
         closeOtherAction->setEnabled(false);
         collection->addAction("close-other-views",closeOtherAction);
         connect( closeOtherAction , SIGNAL(triggered()) , this , SLOT(closeOtherViews()) );
-        connect( this , SIGNAL(splitViewToggle(bool)) , closeOtherAction , SLOT(setEnabled(bool)) );
+
+        multiViewOnlyActions << closeOtherAction;
 
         QAction* detachViewAction = collection->addAction("detach-view");
         detachViewAction->setIcon( KIcon("tab-breakoff") );
@@ -143,6 +150,8 @@ void ViewManager::setupActions()
         // Ctrl+Shift+D is not used as a shortcut by default because it is too close
         // to Ctrl+D - which will terminate the session in many cases
         detachViewAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_H) );
+        
+        multiViewOnlyActions << detachViewAction;
 
         connect( detachViewAction , SIGNAL(triggered()) , this , SLOT(detachActiveView()) );
    
@@ -152,16 +161,26 @@ void ViewManager::setupActions()
         collection->addAction("expand-active-view",expandActiveAction);
         connect( expandActiveAction , SIGNAL(triggered()) , this , SLOT(expandActiveView()) );
 
+        multiViewOnlyActions << expandActiveAction;
+
         KAction* shrinkActiveAction = new KAction( i18n("Shrink View") , this );
         shrinkActiveAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_BracketLeft) );
         collection->addAction("shrink-active-view",shrinkActiveAction);
         connect( shrinkActiveAction , SIGNAL(triggered()) , this , SLOT(shrinkActiveView()) );
+
+        multiViewOnlyActions << shrinkActiveAction;
 
         // Next / Previous View , Next Container
         collection->addAction("next-view",nextViewAction);
         collection->addAction("previous-view",previousViewAction);
         collection->addAction("next-container",nextContainerAction);
 
+    }
+
+    QListIterator<QAction*> iter(multiViewOnlyActions);
+    while ( iter.hasNext() )
+    {
+        connect( this , SIGNAL(splitViewToggle(bool)) , iter.next() , SLOT(setEnabled(bool)) );
     }
 
     KShortcut nextViewShortcut = nextViewAction->shortcut();
@@ -337,8 +356,13 @@ void ViewManager::splitView(Qt::Orientation orientation)
 }
 void ViewManager::removeContainer(ViewContainer* container)
 {
+    // note that the _viewSplitter->containers().count() will not be updated
+    // until the container is deleted when Qt returns to the main event loop,
+    // so we take the previous container count and work out what the new count
+    // would be.
+    int previousCount = _viewSplitter->containers().count();
     container->deleteLater();
-    emit splitViewToggle(_viewSplitter->containers().count() > 1);
+    emit splitViewToggle( (previousCount-1) > 1);
 }
 void ViewManager::expandActiveView()
 {
