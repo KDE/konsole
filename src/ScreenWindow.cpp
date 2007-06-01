@@ -217,6 +217,16 @@ void ScreenWindow::notifyOutputChanged()
         _scrollCount -= _screen->scrolledLines();
         _currentLine = _screen->getHistLines();
     }
+    else
+    {
+        // if the history is not unlimited then it may 
+        // have run out of space and dropped the oldest
+        // lines of output - in this case the screen
+        // window's current line number will need to 
+        // be adjusted - otherwise the output will scroll
+        _currentLine = qMax(0,_currentLine - 
+                              _screen->droppedLines());
+    }
 
     emit outputChanged(); 
 }

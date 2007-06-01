@@ -344,6 +344,23 @@ public: // these are all `Screen' operations
      */
     void resetScrolledLines();
 
+    /**
+     * Returns the number of lines of output which have been
+     * dropped from the history since the last call
+     * to resetDroppedLines()
+     *
+     * If the history is not unlimited then it will drop
+     * the oldest lines of output if new lines are added when
+     * it is full.  
+     */
+    int droppedLines() const;
+
+    /**
+     * Resets the count of the number of lines dropped from
+     * the history.
+     */
+    void resetDroppedLines();
+
 private: // helper
 
 	//copies a line of text from the screen or history into a stream using a specified character decoder
@@ -402,6 +419,8 @@ private: // helper
 
     int _scrolledLines;
     QRect _lastScrolledRegion;
+
+    int _droppedLines;
 
     QVarLengthArray<LineProperty,64> lineProperties;    
 	

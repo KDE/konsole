@@ -69,6 +69,7 @@ Screen::Screen(int l, int c)
     columns(c),
     screenLines(new ImageLine[lines+1] ),
     _scrolledLines(0),
+    _droppedLines(0),
     hist(new HistoryScrollNone()),
     cuX(0), cuY(0),
     cu_re(0),
@@ -835,7 +836,14 @@ int Screen::scrolledLines() const
 {
         return _scrolledLines;
 }
-
+int Screen::droppedLines() const
+{
+    return _droppedLines;
+}
+void Screen::resetDroppedLines()
+{
+    _droppedLines = 0;
+}
 void Screen::resetScrolledLines()
 {
     //qDebug() << "scrolled lines reset";
@@ -1524,7 +1532,7 @@ QString Screen::getHistoryLine(int no)
 
 void Screen::addHistLine()
 {
-  // add to hist buffer
+  // add line to history buffer
   // we have to take care about scrolling, too...
 
   if (hasScroll())
@@ -1537,6 +1545,11 @@ void Screen::addHistLine()
     int newHistLines = hist->getLines();
 
     bool beginIsTL = (sel_begin == sel_TL);
+
+    // If the history is full, increment the count
+    // of dropped lines
+    if ( newHistLines == oldHistLines )
+        _droppedLines++;
 
     // Adjust selection for the new point of reference
     if (newHistLines > oldHistLines)

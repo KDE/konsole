@@ -435,6 +435,7 @@ void Emulation::showBulk()
     emit outputChanged();
 
     _currentScreen->resetScrolledLines();
+    _currentScreen->resetDroppedLines();
 }
 
 void Emulation::bufferedUpdate()
