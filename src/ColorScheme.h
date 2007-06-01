@@ -82,13 +82,16 @@ public:
     const ColorEntry* colorTable() const;
 
     /** 
-     * Convenience method.  Returns the foreground color for this scheme, this
-     * is the primary color used to draw the text in this scheme.
+     * Convenience method.  Returns the 
+     * foreground color for this scheme, 
+     * this is the primary color used to draw the 
+     * text in this scheme.
      */
     QColor foregroundColor() const;
     /**
-     * Convenience method.  Returns the background color for this scheme, this
-     * is the primary color used to draw the terminal background in this scheme.
+     * Convenience method.  Returns the background color for 
+     * this scheme, this is the primary color used to 
+     * draw the terminal background in this scheme.
      */
     QColor backgroundColor() const;
 
@@ -108,7 +111,6 @@ public:
      */
     qreal opacity() const;
 
-    
     //void setCursorColor(const QColor& color);
     //QColor cursorColor() const;
 

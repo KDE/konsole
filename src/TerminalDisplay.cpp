@@ -706,28 +706,38 @@ void TerminalDisplay::setCursorPos(const int curx, const int cury)
 // scrolled aligns properly with the character grid - 
 // which has a top left point at (_bX,_bY) , 
 // a cell width of _fontWidth and a cell height of _fontHeight).    
-void TerminalDisplay::scrollImage(int lines , const QRect& region)
+void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
 {
+    // constrain the region to the display
+    // the bottom of the region is capped to the number of lines in the display's
+    // internal image - 2, so that the height of 'region' is strictly less
+    // than the height of the internal image.
+    QRect region = screenWindowRegion;
+    region.setBottom( qMin(region.bottom(),this->_lines-2) ); 
+
     if (    lines == 0 
-         || _image == 0 
-         || (region.top() + abs(lines)) >= region.height() 
-         || this->_usedLines <= region.height() ) return;
+         || _image == 0
+         || !region.isValid() 
+         || (region.top() + abs(lines)) >= region.bottom() 
+         || this->_lines <= region.height() ) return;
+
+   
 
     QRect scrollRect;
 
-   // qDebug() << "Scrolled region: top =" << region.top() 
-   //          << ", bottom =" << region.bottom()
-   //          << ", height =" << region.height() << "lines.  Image height ="
-   //          << this->_usedLines << "lines"
-   //          << ", scroll =" << lines << "lines";
+    //qDebug() << "Scrolled region: top =" << region.top() 
+    //         << ", bottom =" << region.bottom()
+    //         << ", height =" << region.height() << "lines.  Image height ="
+    //         << this->_usedLines << "lines"
+    //         << ", scroll =" << lines << "lines";
 
-    void* firstCharPos = &_image[ region.top() * this->_usedColumns ];
-    void* lastCharPos = &_image[ (region.top() + abs(lines)) * this->_usedColumns ];
+    void* firstCharPos = &_image[ region.top() * this->_columns ];
+    void* lastCharPos = &_image[ (region.top() + abs(lines)) * this->_columns ];
 
     int top = _bY + (region.top() * _fontHeight);
     int linesToMove = region.height() - abs(lines);
     int bytesToMove = linesToMove * 
-                      this->_usedColumns *
+                      this->_columns *
                       sizeof(Character);
 
     Q_ASSERT( linesToMove > 0 );
@@ -738,9 +748,9 @@ void TerminalDisplay::scrollImage(int lines , const QRect& region)
     {
         // check that the memory areas that we are going to move are valid
         Q_ASSERT( (char*)lastCharPos + bytesToMove < 
-                  (char*)(_image + (this->_usedLines * this->_usedColumns)) );
+                  (char*)(_image + (this->_lines * this->_columns)) );
         
-        assert( (lines*this->_usedColumns) < _imageSize ); 
+        assert( (lines*this->_columns) < _imageSize ); 
 
         //scroll internal image down
         memmove( firstCharPos , lastCharPos , bytesToMove ); 
@@ -755,7 +765,7 @@ void TerminalDisplay::scrollImage(int lines , const QRect& region)
     {
         // check that the memory areas that we are going to move are valid
         Q_ASSERT( (char*)firstCharPos + bytesToMove < 
-                  (char*)(_image + (this->_usedLines * this->_usedColumns)) );
+                  (char*)(_image + (this->_lines * this->_columns)) );
 
         //scroll internal image up
         memmove( lastCharPos , firstCharPos , bytesToMove ); 
@@ -800,8 +810,8 @@ void TerminalDisplay::updateImage()
   _screenWindow->resetScrollCount();
 
   Character* const newimg = _screenWindow->getImage();
-  int _lines = _screenWindow->windowLines();
-  int _columns = _screenWindow->windowColumns();
+  int lines = _screenWindow->windowLines();
+  int columns = _screenWindow->windowColumns();
 
   setScroll( _screenWindow->currentLine() , _screenWindow->lineCount() );
 
@@ -822,14 +832,14 @@ void TerminalDisplay::updateImage()
   CharacterColor _clipboard;       // undefined
   int cr  = -1;   // undefined
 
-  const int linesToUpdate = qMin(this->_lines, qMax(0,_lines  ));
-  const int columnsToUpdate = qMin(this->_columns,qMax(0,_columns));
+  const int linesToUpdate = qMin(this->_lines, qMax(0,lines  ));
+  const int columnsToUpdate = qMin(this->_columns,qMax(0,columns));
 
   QChar *disstrU = new QChar[columnsToUpdate];
   char *dirtyMask = new char[columnsToUpdate+2]; 
   QRegion dirtyRegion;
 
-  // debugging variable, this records the number of _lines that are found to
+  // debugging variable, this records the number of lines that are found to
   // be 'dirty' ( ie. have changed from the old _image to the new _image ) and
   // which therefore need to be repainted
   int dirtyLineCount = 0;

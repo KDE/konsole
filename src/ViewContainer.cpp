@@ -574,7 +574,8 @@ void TabbedViewContainerV2::removeViewWidget( QWidget* view )
 
 void TabbedViewContainerV2::setTabActivity(int index , bool activity)
 {
-    const QColor activityColor = _tabBar->palette().highlight().color();
+    const QColor activityColor = _tabBar->palette()
+                                    .highlight().color().dark(120);
     const QColor normalColor = _tabBar->palette().text().color();
 
     QColor color = activity ? activityColor : normalColor;
