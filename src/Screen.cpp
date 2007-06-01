@@ -1379,13 +1379,24 @@ static QString makeString(int *m, int d, bool stripTrailingSpaces)
 }*/
 
 
+bool Screen::isSelectionValid() const
+{
+    return ( sel_TL >= 0 && sel_BR >= 0 );
+}
+
 void Screen::writeSelectionToStream(TerminalCharacterDecoder* decoder)
 {
+    // do nothing if selection is invalid
+    if ( !isSelectionValid() )
+        return;
+
 	int top = sel_TL / columns;	
 	int left = sel_TL % columns;
 
 	int bottom = sel_BR / columns;
 	int right = sel_BR % columns;
+
+    Q_ASSERT( top >= 0 && left >= 0 && bottom >= 0 && right >= 0 );
 
     //qDebug() << "sel_TL = " << sel_TL;
     //qDebug() << "columns = " << columns;

@@ -222,6 +222,8 @@ public:
             _v = co >> 8;
             _w = co;
             break;
+        default:
+            Q_ASSERT(false);
     }
   }
     

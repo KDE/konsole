@@ -847,7 +847,7 @@ void TerminalDisplay::updateImage()
   for (y = 0; y < linesToUpdate; y++)
   {
     const Character*       currentLine = &_image[y*this->_columns];
-    const Character* const newLine = &newimg[y*_columns];
+    const Character* const newLine = &newimg[y*columns];
 
     bool updateLine = false;
     

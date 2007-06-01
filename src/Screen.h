@@ -379,6 +379,8 @@ private: // helper
     void effectiveRendition();
     void reverseRendition(Character* p);
 
+    bool isSelectionValid() const;
+
     /*
        The state of the screen is more complex as one would
        expect first. The screem does really do part of the
