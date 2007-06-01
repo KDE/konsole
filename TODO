@@ -62,11 +62,6 @@ The KDE 4.0 TODO List:
 
 == ESSENTIAL TWEAKS ==
 
-- When new output is added to a session, views should avoid
-  scrolling if possible unless they are tracking the output
-  or if the lines that the view was showing have been removed
-  ( because the history is only storing a fixed number of lines,
-    and that limit has been reached so lines are being removed )
 
 - When splitting the view, avoid scrolling existing views.
  
@@ -179,6 +174,12 @@ behaviour in KDE 3.
 
 
 === DONE ===
+
+- When new output is added to a session, views should avoid
+  scrolling if possible unless they are tracking the output
+  or if the lines that the view was showing have been removed
+  ( because the history is only storing a fixed number of lines,
+    and that limit has been reached so lines are being removed )
 
 - Proper transparency for Konsole windows
 
