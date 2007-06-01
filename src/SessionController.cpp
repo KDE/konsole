@@ -577,7 +577,12 @@ void SessionController::renameSession()
                                                  _session->tabTitleFormat(Session::LocalTabTitle) , 
                                                  &ok );
     if ( ok )
+    {
         _session->setTabTitleFormat(Session::LocalTabTitle,text);
+        
+        // trigger an update of the tab text
+        snapshot();
+    }
 }
 void SessionController::saveSession()
 {
