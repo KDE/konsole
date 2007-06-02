@@ -125,7 +125,13 @@ install(TARGETS kdeinit_konsole  DESTINATION ${LIB_INSTALL_DIR} )
     
 target_link_libraries( konsole kdeinit_konsole )
 install(TARGETS konsole DESTINATION ${BIN_INSTALL_DIR})
-
+install(FILES konsoleprofile PERMISSIONS OWNER_READ 
+                                         OWNER_WRITE 
+                                         OWNER_EXECUTE
+                                         GROUP_EXECUTE
+                                         GROUP_READ
+                                         WORLD_READ 
+                                         WORLD_EXECUTE DESTINATION ${BIN_INSTALL_DIR})
 ########### next target ###############
 
 set(konsolepart_PART_SRCS 

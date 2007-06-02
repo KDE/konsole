@@ -351,6 +351,14 @@ signals:
    */
   void imageSizeChanged(int lineCount , int columnCount);
 
+  /** 
+   * Emitted when the terminal program emits a profile change
+   * command sequence
+   *
+   * @param text The text of the command
+   */
+  void profileChangeCommandReceived(const QString& text);
+
 protected:
   virtual void setMode  (int mode) = 0;
   virtual void resetMode(int mode) = 0;

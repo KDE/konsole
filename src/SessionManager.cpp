@@ -229,6 +229,9 @@ Session* SessionManager::createSession(const QString& key )
     connect( session , SIGNAL(profileChanged(const QString&)) , this , 
             SLOT(sessionProfileChanged()) );
 
+    connect( session , SIGNAL(profileChangeCommandReceived(const QString&)) , this ,
+            SLOT(sessionProfileCommandReceived(const QString&)) );
+
     //ask for notification when session dies
     _sessionMapper->setMapping(session,session);
     connect( session , SIGNAL(finished()) , _sessionMapper , 
@@ -658,10 +661,20 @@ QString SessionManager::findByShortcut(const QKeySequence& shortcut)
 void SessionManager::sessionProfileChanged()
 {
     Session* session = qobject_cast<Session*>(sender());
-
     Q_ASSERT( session );
 
     updateSession(session); 
+}
+
+void SessionManager::sessionProfileCommandReceived(const QString& text)
+{
+    Session* session = qobject_cast<Session*>(sender());
+    Q_ASSERT( session );
+
+    ProfileCommandParser parser;
+    QHash<Profile::Property,QVariant> changes = parser.parse(text);
+
+    changeProfile(session->profileKey(),changes,false);
 }
 
 QKeySequence SessionManager::shortcut(const QString& profileKey) const

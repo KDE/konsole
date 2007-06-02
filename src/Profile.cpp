@@ -185,7 +185,7 @@ Profile::Property Profile::lookupByName(const QString& name)
     // insert default names into table the first time this is called
     fillTableWithDefaultNames();
 
-    return _propertyByName[name];
+    return _propertyByName[name.toLower()];
 }
 QString Profile::primaryNameForProperty(Property property)
 {
@@ -203,7 +203,7 @@ QList<QString> Profile::namesForProperty(Property property)
 }
 void Profile::registerName(Property property , const QString& name)
 {
-    _propertyByName.insert(name,property);
+    _propertyByName.insert(name.toLower(),property);
     _nameByProperty.insert(property,name);
 }
 
@@ -450,6 +450,37 @@ bool KDE3ProfileReader::readProfile(const QString& path , Profile* profile)
 
     return true;
 }
+
+QHash<Profile::Property,QVariant> ProfileCommandParser::parse(const QString& input)
+{
+    QHash<Profile::Property,QVariant> changes;
+
+    static QRegExp regExp("([a-z]+)=([^;]+)");
+
+    int offset = 0;
+    while ( regExp.indexIn(input,offset) != -1 )
+    {
+        //qDebug() << "Captured texts: " << regExp.capturedTexts();
+   
+        if ( regExp.capturedTexts().count() == 3 )
+        {
+            Profile::Property property = Profile::lookupByName(
+                                                regExp.capturedTexts()[1]);
+            const QString value = regExp.capturedTexts()[2];
+
+            qDebug() << "property:" << property << "value:" << value;
+
+            changes.insert(property,value);
+        }
+
+        offset = input.indexOf(';',offset) + 1;
+        if ( offset == 0 )
+            break;
+    }
+
+    return changes;
+}
+
 
 #include "Profile.moc"
 

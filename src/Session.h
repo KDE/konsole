@@ -419,6 +419,14 @@ signals:
    */
   void resizeRequest(const QSize& size);
 
+  /** 
+   * Emitted when a profile change command is received from the terminal. 
+   *
+   * @param text The text of the command.  This is a string of the form
+   * "PropertyName=Value;PropertyName=Value ..."
+   */
+  void profileChangeCommandReceived(const QString& text);
+
 private slots:
   void done(int);
     

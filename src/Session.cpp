@@ -102,7 +102,8 @@ Session::Session() :
             SLOT( fireZModemDetected() ) );
     connect( _emulation, SIGNAL( changeTabTextColorRequest( int ) ),
            this, SIGNAL( changeTabTextColorRequest( int ) ) );
-
+    connect( _emulation, SIGNAL(profileChangeCommandReceived(const QString&)),
+           this, SIGNAL( profileChangeCommandReceived(const QString&)) );
     // TODO
     // connect( _emulation,SIGNAL(imageSizeChanged(int,int)) , this ,
     //        SLOT(onEmulationSizeChange(int,int)) );
@@ -356,6 +357,14 @@ void Session::setUserTitle( int what, const QString &caption )
 
 			modified = true;
 		}
+    }
+
+    if (what == 50) {
+       
+        qDebug() << "Profile change command received"; 
+        emit profileChangeCommandReceived(caption);
+
+        return;
     }
 
 	if ( modified )

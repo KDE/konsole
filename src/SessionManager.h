@@ -275,6 +275,7 @@ protected Q_SLOTS:
 
 private slots:
     void sessionProfileChanged();
+    void sessionProfileCommandReceived(const QString& text);
 
 private:
     // loads the mappings between shortcut key sequences and 

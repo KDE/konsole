@@ -322,6 +322,8 @@ public:
     /** 
      * Returns the element from the Property enum associated with the 
      * specified @p name.
+     *
+     * @param The name of the property to look for, this is case insensitive.
      */
     static Property lookupByName(const QString& name);
     /**
@@ -438,6 +440,35 @@ private:
     void writeStandardElement(KConfigGroup& group,
                               const Profile* profile,
                               Profile::Property property);
+};
+
+/** 
+ * Parses an input string consisting of property names
+ * and assigned values and returns a table of properties
+ * and values.
+ *
+ * The input string will typically look like this:
+ *
+ * @code
+ *   PropertyName=Value;PropertyName=Value ...
+ * @endcode 
+ *
+ * For example:
+ *
+ * @code
+ *   Icon=konsole;Directory=/home/bob
+ * @endcode
+ */
+class ProfileCommandParser
+{
+public:
+    /**
+     * Parses an input string consisting of property names
+     * and assigned values and returns a table of 
+     * properties and values.
+     */
+    QHash<Profile::Property,QVariant> parse(const QString& input);
+
 };
 
 }
