@@ -20,6 +20,11 @@
 // Own
 #include "ProcessInfo.h"
 
+// Unix
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
 // Qt
 #include <QtCore/QDebug>
 #include <QtCore/QFile>
@@ -468,15 +473,29 @@ QString SSHProcessInfo::command() const
 QString SSHProcessInfo::format(const QString& input) const
 {
     QString output(input);
-    
+   
+    // test whether host is an ip address
+    // in which case 'short host' and 'full host'
+    // markers in the input string are replaced with
+    // the full address
+    bool isIpAddress = false;
+   
+    struct in_addr address;
+    if ( inet_aton(_host.toLocal8Bit().constData(),&address) != 0 )
+        isIpAddress = true;
+    else
+        isIpAddress = false;
+
     // search for and replace known markers
     output.replace("%u",_user);
-    output.replace("%h",_host.left(_host.indexOf('.')));
+
+    if ( isIpAddress )
+        output.replace("%h",_host);
+    else
+        output.replace("%h",_host.left(_host.indexOf('.')));
+    
     output.replace("%H",_host);
     output.replace("%c",_command);
-
-    // remove any remaining %[LETTER] character sequences
-    // output.replace(QRegExp("%\\w"),QString::null);
 
     return output;
 }
