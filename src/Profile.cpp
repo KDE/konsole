@@ -455,7 +455,7 @@ QHash<Profile::Property,QVariant> ProfileCommandParser::parse(const QString& inp
 {
     QHash<Profile::Property,QVariant> changes;
 
-    static QRegExp regExp("([a-z]+)=([^;]+)");
+    static QRegExp regExp("([a-zA-Z]+)=([^;]+)");
 
     int offset = 0;
     while ( regExp.indexIn(input,offset) != -1 )
