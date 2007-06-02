@@ -100,9 +100,13 @@ class MainWindow : public KXmlGuiWindow
          * Emitted by the main window to request the creation of a new session.
          *
          * @param key The key for the profile to use to create the new session.
+         * @param directory Initial working directory for the new session or empty 
+         * if the default working directory associated with the profile should be used.
          * @param view The view manager owned by this main window 
          */
-        void newSessionRequest(const QString& key , ViewManager* view);
+        void newSessionRequest(const QString& key , 
+                               const QString& directory,
+                               ViewManager* view);
 
         /**
          * Emitted by the main window to request the creation of a 
@@ -110,8 +114,12 @@ class MainWindow : public KXmlGuiWindow
          *
          * @param key The key for the profile to use to create the 
          * first session in the new window.
+         * @param directory Initial working directory for the new window or empty
+         * if the default working directory associated with the profile should
+         * be used.
          */
-        void newWindowRequest(const QString& key);
+        void newWindowRequest(const QString& key,
+                              const QString& directory);
 
     private slots:
         void newTab();
@@ -129,6 +137,7 @@ class MainWindow : public KXmlGuiWindow
     private:
         void setupActions();
         void setupWidgets();
+        QString activeSessionDir() const;
 
     private:
         ViewManager*  _viewManager;

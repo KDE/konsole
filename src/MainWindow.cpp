@@ -239,14 +239,22 @@ void MainWindow::sessionListChanged(const QList<QAction*>& actions)
     plugActionList("favorite-profiles",actions);
 }
 
+QString MainWindow::activeSessionDir() const
+{
+    if ( _pluggedController )
+        return _pluggedController->currentDir();
+    else
+        return QString();
+}
+
 void MainWindow::newTab()
 {
-    emit newSessionRequest( _defaultProfile , _viewManager);
+    emit newSessionRequest( _defaultProfile , activeSessionDir() , _viewManager);
 }
 
 void MainWindow::newWindow()
 {
-    emit newWindowRequest( _defaultProfile );
+    emit newWindowRequest( _defaultProfile , activeSessionDir() );
 }
 
 void MainWindow::showShortcutsDialog()
@@ -257,7 +265,7 @@ void MainWindow::showShortcutsDialog()
 
 void MainWindow::newFromProfile(const QString& key)
 {
-        emit newSessionRequest(key,_viewManager);
+        emit newSessionRequest(key,QString(),_viewManager);
 }
 void MainWindow::showManageProfilesDialog()
 {
@@ -269,7 +277,7 @@ void MainWindow::showRemoteConnectionDialog()
 {
     RemoteConnectionDialog dialog(this);
     if ( dialog.exec() == QDialog::Accepted )
-        emit newSessionRequest(dialog.sessionKey(),_viewManager);
+        emit newSessionRequest(dialog.sessionKey(),QString(),_viewManager);
 }
 
 void MainWindow::setupWidgets()

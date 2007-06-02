@@ -33,7 +33,10 @@ KUrl ViewProperties::url() const
 {
     return KUrl();
 }
-
+QString ViewProperties::currentDir() const
+{
+    return QString();
+}
 void ViewProperties::fireActivity()
 {
     emit activity(this);

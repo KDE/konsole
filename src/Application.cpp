@@ -78,10 +78,10 @@ MainWindow* Application::newMainWindow()
     MainWindow* window = new MainWindow();
     window->setSessionList( new ProfileList(true,window) );
 
-    connect( window , SIGNAL(newSessionRequest(const QString&,ViewManager*)), 
-                      this , SLOT(createSession(const QString&,ViewManager*)));
-    connect( window , SIGNAL(newWindowRequest(const QString&)),
-                      this , SLOT(createWindow(const QString&)) );
+    connect( window , SIGNAL(newSessionRequest(const QString&,const QString&,ViewManager*)), 
+                      this , SLOT(createSession(const QString&,const QString&,ViewManager*)));
+    connect( window , SIGNAL(newWindowRequest(const QString&,const QString&)),
+                      this , SLOT(createWindow(const QString&,const QString&)) );
     connect( window->viewManager() , SIGNAL(viewDetached(Session*)) , this , SLOT(detachView(Session*)) );
 
     return window;
@@ -118,7 +118,7 @@ int Application::newInstance()
         window->setDefaultProfile(key);
     }
 
-    createSession( window->defaultProfile() , window->viewManager() );
+    createSession( window->defaultProfile() , QString() , window->viewManager() );
 
     // if the background-mode argument is supplied, start the background session
     // ( or bring to the front if it already exists )
@@ -184,17 +184,20 @@ void Application::detachView(Session* session)
     window->show();
 }
 
-void Application::createWindow(const QString& key)
+void Application::createWindow(const QString& key , const QString& directory)
 {
     MainWindow* window = newMainWindow();
     window->setDefaultProfile(key);
-    createSession(key,window->viewManager());
+    createSession(key,directory,window->viewManager());
     window->show();
 }
 
-void Application::createSession(const QString& key , ViewManager* view)
+void Application::createSession(const QString& key , const QString& directory , ViewManager* view)
 {
     Session* session = SessionManager::instance()->createSession(key);
+
+    if (!directory.isEmpty())
+        session->setInitialWorkingDirectory(directory);
 
     // create view before starting the session process so that the session doesn't suffer
     // a change in terminal size right after the session starts.  some applications such as GNU Screen

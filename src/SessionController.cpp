@@ -192,6 +192,20 @@ void SessionController::snapshot()
         _session->setTitle(Session::DisplayedTitleRole,_session->title(Session::NameRole));
 }
 
+QString SessionController::currentDir() const
+{
+    ProcessInfo* info = ProcessInfo::newInstance(_session->processId());
+    info->update();
+
+    bool ok = false;
+    QString path = info->currentDir(&ok);
+
+    if ( ok )
+        return path;
+    else
+        return QString();
+}
+
 KUrl SessionController::url() const
 {
     ProcessInfo* info = ProcessInfo::newInstance(_session->processId());

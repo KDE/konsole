@@ -55,6 +55,14 @@ public:
      */
     virtual KUrl url() const;
 
+    /**
+     * Returns the current directory associated with a view.
+     * This may be the same as url()
+     *
+     * The default implementation returns an empty string.
+     */
+    virtual QString currentDir() const;
+
     /** 
      * A unique identifier representing the data displayed by the view associated with this
      * ViewProperties instance.
