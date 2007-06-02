@@ -39,6 +39,14 @@
 
 using namespace Konsole;
 
+// mappings between property enum values and names
+//
+// multiple names are defined for some property values,
+// in these cases, the "proper" string name comes first,
+// as that is used when reading/writing profiles from/to disk
+//
+// the other names are usually shorter versions for convenience
+// when parsing konsoleprofile commands
 const Profile::PropertyNamePair Profile::DefaultPropertyNames[] =
 {
       { Path , "Path" }
@@ -49,12 +57,18 @@ const Profile::PropertyNamePair Profile::DefaultPropertyNames[] =
     , { Arguments , "Arguments" }
     , { Environment , "Environment" }
     , { Directory , "Directory" }
+
     , { LocalTabTitleFormat , "LocalTabTitleFormat" }
+    , { LocalTabTitleFormat , "tabtitle"}
+    
     , { RemoteTabTitleFormat , "RemoteTabTitleFormat" }
     , { ShowMenuBar , "ShowMenuBar" }
     , { TabBarMode , "TabBarMode" }
     , { Font , "Font" }
+
     , { ColorScheme , "ColorScheme" }
+    , { ColorScheme , "colors" }
+    
     , { KeyBindings , "KeyBindings" }
     , { HistoryMode , "HistoryMode" }
     , { HistorySize , "HistorySize" } 
@@ -204,7 +218,11 @@ QList<QString> Profile::namesForProperty(Property property)
 void Profile::registerName(Property property , const QString& name)
 {
     _propertyByName.insert(name.toLower(),property);
-    _nameByProperty.insert(property,name);
+
+    // only allow one property -> name map
+    // (multiple name -> property mappings are allowed though)
+    if ( !_nameByProperty.contains(property) )
+        _nameByProperty.insert(property,name);
 }
 
 QString KDE4ProfileWriter::getPath(const Profile* info)
