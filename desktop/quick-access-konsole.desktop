@@ -9,3 +9,4 @@ Terminal=false
 X-KDE-StartupNotify=false
 
 Name=Quick Access Terminal
+Name[de]=Schnellzugrif auf Terminal
