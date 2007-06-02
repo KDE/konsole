@@ -329,7 +329,14 @@ public:
      * the Property enum, in the order the associations were created using
      * registerName()
      */
-    static QList<QString> namesForProperty(Property property); 
+    static QList<QString> namesForProperty(Property property);
+
+    /** 
+     * Returns the primary name for the specified @p property.
+     * TODO More documentation
+     */
+    static QString primaryNameForProperty(Property property);
+
     /**
      * Adds an association between a string @p name and a @p property.
      * Subsequent calls to lookupByName() with @p name as the argument
@@ -338,12 +345,24 @@ public:
     static void registerName(Property property , const QString& name); 
 
 private:
+    // fills the table with default names for profile properties
+    // the first time it is called.
+    // subsequent calls return immediately
+    static void fillTableWithDefaultNames();
+
     QHash<Property,QVariant> _propertyValues;
     QPointer<Profile> _parent;
 
     bool _hidden;
 
-    static QHash<QString,Property> _propertyNames;
+    static QHash<QString,Property> _propertyByName;
+    static QHash<Property,QString> _nameByProperty;
+    struct PropertyNamePair
+    {
+        Property property;
+        const char* name;
+    };
+    static const PropertyNamePair DefaultPropertyNames[];
 };
 
 /** 
@@ -388,7 +407,6 @@ public:
 private:
     template <typename T>
     void readStandardElement(const KConfigGroup& group , 
-                             char* name , 
                              Profile* info , 
                              Profile::Property property);
 };
@@ -418,7 +436,6 @@ public:
 
 private:
     void writeStandardElement(KConfigGroup& group,
-                              char* name,
                               const Profile* profile,
                               Profile::Property property);
 };
