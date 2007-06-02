@@ -27,6 +27,7 @@
 #include <QtGui/QItemEditorCreator>
 #include <QtCore/QMetaEnum>
 #include <QtGui/QScrollBar>
+#include <QtGui/QShowEvent>
 #include <QtGui/QStandardItem>
 
 // Konsole
@@ -60,12 +61,6 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     // ensure that session names are fully visible
     _ui->sessionTable->resizeColumnToContents(0);
     _ui->sessionTable->resizeColumnToContents(1);
-    _ui->sessionTable->resizeColumnToContents(2);
-
-    _ui->sessionTable->horizontalHeader()->updateGeometry();
-
-    qDebug() << "Table size hint: " << _ui->sessionTable->horizontalHeader()->sizeHint();
-    qDebug() << sizeHint();
 
     // resize the session table to the full width of the table
     _ui->sessionTable->horizontalHeader()->setStretchLastSection(true);
@@ -78,6 +73,13 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     connect( _ui->setAsDefaultButton , SIGNAL(clicked()) , this , SLOT(setSelectedAsDefault()) );
 
 }
+
+void ManageProfilesDialog::showEvent(QShowEvent* event)
+{
+    qDebug() << "Session table size: " << _ui->sessionTable->size();
+    qDebug() << "Session table size hint: " << _ui->sessionTable->sizeHint();
+}
+
 ManageProfilesDialog::~ManageProfilesDialog()
 {
     delete _ui;
@@ -108,7 +110,7 @@ void ManageProfilesDialog::updateTableModel()
     _sessionModel->setHorizontalHeaderLabels( QStringList() << i18n("Name")
                                                             << i18n("Show in Menu") 
                                                             << i18n("Shortcut") );
-    QListIterator<QString> keyIter( SessionManager::instance()->availableProfiles() );
+    QListIterator<QString> keyIter( SessionManager::instance()->loadedProfiles() );
     while ( keyIter.hasNext() )
     {
         const QString& key = keyIter.next();

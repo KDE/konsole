@@ -77,7 +77,14 @@ public:
      * involves opening, reading and parsing all profiles from disk, and
      * should only be done when necessary.
      */
-    QList<QString> availableProfiles() const;
+    QList<QString> loadedProfiles() const;
+
+    /**
+     * Searches for available profiles on-disk and returns a list
+     * of paths of profiles which can be loaded.
+     */
+    QList<QString> availableProfilePaths() const;
+
     /**
      * Returns the session information object for the profile with the specified
      * key or 0 if no profile with the specified key exists.
@@ -94,6 +101,21 @@ public:
      * to false by default.
      */
     QString addProfile(Profile* type);
+
+    /**
+     * Loads a profile from the specified path and registers 
+     * it with the SessionManager.
+     *
+     * @p path may be relative or absolute.  The path may just be the 
+     * base name of the profile to load (eg. if the profile's full path
+     * is "<konsole data dir>/My Profile.profile" then both
+     * "konsole/My Profile.profile" , "My Profile.profile" and 
+     * "My Profile" will be accepted)
+     *
+     * @return The profile key which can be used to create new sessions
+     * from this profile using createSession()
+     */
+    QString loadProfile(const QString& path);
 
     /**
      * Updates the profile associated with the specified @p key with
@@ -266,9 +288,7 @@ private:
     void loadFavorites();
     //saves the set of favorite sessions
     void saveFavorites();
-    //loads a profile from a file
-    QString loadProfile(const QString& path);
-        // saves a profile to a file
+            // saves a profile to a file
     void saveProfile(const QString& path , Profile* profile);
 
     // applies updates to the profile associated with @p key

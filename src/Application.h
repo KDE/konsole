@@ -17,8 +17,8 @@
     02110-1301  USA.
 */
 
-#ifndef KONSOLEAPP_H
-#define KONSOLEAPP_H
+#ifndef APPLICATION_H
+#define APPLICATION_H
 
 // KDE 
 #include <KUniqueApplication>
@@ -76,6 +76,9 @@ private slots:
     void toggleBackgroundInstance();
 
 private:
+    void listAvailableProfiles();
+    void startBackgroundMode(MainWindow* window);
+
     KCmdLineArgs*   _arguments;
     ProfileList*    _sessionList;
     
@@ -83,4 +86,4 @@ private:
 };
 
 }
-#endif //KONSOLEAPP_H
+#endif //APPLICATION_H

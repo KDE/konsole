@@ -20,7 +20,13 @@
 // Own
 #include "Application.h"
 
+// std
+#include <iostream>
+
 #include "kdebug.h"
+
+// Qt
+#include <QFileInfo>
 
 // KDE
 #include <KAction>
@@ -81,21 +87,54 @@ MainWindow* Application::newMainWindow()
     return window;
 }
 
+void Application::listAvailableProfiles()
+{
+    QList<QString> paths = SessionManager::instance()->availableProfilePaths();
+    QListIterator<QString> iter(paths);
+
+    while ( iter.hasNext() )
+    {
+        QFileInfo info(iter.next());
+        std::cout << info.baseName().toLocal8Bit().data() << std::endl;
+    }
+}
+
 int Application::newInstance()
 {
     KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
-   
+  
+    if ( args->isSet("list-profiles") )
+    {
+        listAvailableProfiles();
+        return 0;
+    }
+
     // create a new window and session to run in it 
     MainWindow* window = newMainWindow();
-    createSession( QString() , window->viewManager() );
+
+    if ( args->isSet("profile") )
+    {
+        QString key = SessionManager::instance()->loadProfile(args->getOption("profile"));
+        window->setDefaultProfile(key);
+    }
+
+    createSession( window->defaultProfile() , window->viewManager() );
 
     // if the background-mode argument is supplied, start the background session
     // ( or bring to the front if it already exists )
     if ( args->isSet("background-mode") )
-    {
+        startBackgroundMode(window);
+    else
+        window->show();
+
+    return 0;
+}
+
+void Application::startBackgroundMode(MainWindow* window)
+{
         if ( _backgroundInstance )
         {
-            return 0;
+            return;
         }
 
         KAction* action = new KAction(window);
@@ -107,13 +146,6 @@ int Application::newInstance()
         _backgroundInstance = window;
         
         connect( action , SIGNAL(triggered()) , this , SLOT(toggleBackgroundInstance()) );
-    }
-    else
-    {
-        window->show();
-    }
-
-    return 0;
 }
 
 void Application::toggleBackgroundInstance()
@@ -155,6 +187,7 @@ void Application::detachView(Session* session)
 void Application::createWindow(const QString& key)
 {
     MainWindow* window = newMainWindow();
+    window->setDefaultProfile(key);
     createSession(key,window->viewManager());
     window->show();
 }

@@ -43,7 +43,13 @@ void getDisplayInformation(Display*& display , Visual*& visual , Colormap& color
 
 static KCmdLineOptions options[] =
 {
-    { "background-mode" , I18N_NOOP("TODO: More documentation") , 0 }
+   /* { "command" , I18N_NOOP("Command to run in new Konsole instance") , 0 },*/
+    { "profile \\<file>" , I18N_NOOP("Name of profile to use for new Konsole instance") , 0},
+    { "list-profiles" , I18N_NOOP("List the available profiles") , 0},
+    // TODO - Update this when F12 is no longer hard coded
+    { "background-mode" , I18N_NOOP("Start Konsole in the background"
+                                    " and bring to the front when the F12"
+                                    " key is pressed") , 0 }
 };
 
 // ***

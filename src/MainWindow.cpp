@@ -79,6 +79,15 @@ MainWindow::MainWindow()
     createGUI();
 }
 
+void MainWindow::setDefaultProfile(const QString& key)
+{
+    _defaultProfile = key;
+}
+QString MainWindow::defaultProfile() const
+{
+    return _defaultProfile;
+}
+
 ViewManager* MainWindow::viewManager() const
 {
     return _viewManager;
@@ -232,12 +241,12 @@ void MainWindow::sessionListChanged(const QList<QAction*>& actions)
 
 void MainWindow::newTab()
 {
-    emit newSessionRequest(QString(),_viewManager);
+    emit newSessionRequest( _defaultProfile , _viewManager);
 }
 
 void MainWindow::newWindow()
 {
-    emit newWindowRequest(QString());
+    emit newWindowRequest( _defaultProfile );
 }
 
 void MainWindow::showShortcutsDialog()
@@ -248,7 +257,7 @@ void MainWindow::showShortcutsDialog()
 
 void MainWindow::newFromProfile(const QString& key)
 {
-    emit newSessionRequest(key,_viewManager);
+        emit newSessionRequest(key,_viewManager);
 }
 void MainWindow::showManageProfilesDialog()
 {

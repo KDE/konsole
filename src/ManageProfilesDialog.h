@@ -17,8 +17,8 @@
     02110-1301  USA.
 */
 
-#ifndef SESSIONTYPEDIALOG_H
-#define SESSIONTYPEDIALOG_H
+#ifndef MANAGEPROFILESDIALOG_H
+#define MANAGEPROFILESDIALOG_H
 
 // Qt
 #include <QtGui/QItemDelegate>
@@ -27,6 +27,7 @@
 #include <KDialog>
 
 class QItemSelection;
+class QShowEvent;
 class QStandardItem;
 class QStandardItemModel;
 
@@ -51,6 +52,9 @@ public:
     /** Constructs a new profile type with the specified parent. */
     ManageProfilesDialog(QWidget* parent = 0);
     virtual ~ManageProfilesDialog();
+
+protected:
+    virtual void showEvent(QShowEvent* event);
 
 private slots:
     void deleteSelected();
@@ -88,5 +92,5 @@ public:
 };
 
 }
-#endif // SESSIONTYPEDIALOG_H
+#endif // MANAGEPROFILESDIALOG_H
 

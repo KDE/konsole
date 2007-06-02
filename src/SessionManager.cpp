@@ -23,6 +23,7 @@
 #include "SessionManager.h"
 
 // Qt
+#include <QtCore/QDir>
 #include <QtCore/QFileInfo>
 #include <QtCore/QList>
 #include <QtCore/QSignalMapper>
@@ -97,8 +98,21 @@ SessionManager::SessionManager()
     // that is done on-demand.
     loadShortcuts();
 }
-QString SessionManager::loadProfile(const QString& path)
+QString SessionManager::loadProfile(const QString& shortPath)
 {
+    QString path = shortPath;
+
+    // add a suggested suffix and relative prefix if missing
+    QFileInfo fileInfo(path);
+    if ( fileInfo.suffix().isEmpty() )
+        path.append(".profile");
+    if ( fileInfo.path().isEmpty() || fileInfo.path() == "." )
+        path.prepend(QString("konsole")+QDir::separator());
+
+    // if the file is not an absolute path, look it up 
+    if ( !fileInfo.isAbsolute() )
+        path = KStandardDirs::locate("data",path);
+
     // check that we have not already loaded this profile
     QHashIterator<QString,Profile*> iter(_types);
     while ( iter.hasNext() )
@@ -133,6 +147,13 @@ QString SessionManager::loadProfile(const QString& path)
     else
         return addProfile(newProfile);
 }
+QList<QString> SessionManager::availableProfilePaths() const
+{
+    KDE4ProfileReader reader;
+
+    return reader.findProfiles();    
+}
+
 void SessionManager::loadAllProfiles()
 {
     if ( _loadedAllProfiles )
@@ -233,7 +254,7 @@ void SessionManager::sessionTerminated(QObject* sessionObject)
     session->deleteLater();
 }
 
-QList<QString> SessionManager::availableProfiles() const
+QList<QString> SessionManager::loadedProfiles() const
 {
     return _types.keys();
 }

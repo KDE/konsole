@@ -81,6 +81,20 @@ class MainWindow : public KXmlGuiWindow
          */
         BookmarkHandler* bookmarkHandler() const;
 
+        /**
+         * Sets the default profile key for this window.
+         * This is the default value for the key argument
+         * when the newSessionRequest() and newWindow() signals 
+         * are emitted.
+         */
+        void setDefaultProfile(const QString& key);
+
+        /**
+         * Returns the default profile key for this window.
+         * See setDefaultProfile()
+         */
+        QString defaultProfile() const;
+
     signals:
         /** 
          * Emitted by the main window to request the creation of a new session.
@@ -123,6 +137,8 @@ class MainWindow : public KXmlGuiWindow
         KToggleAction* _toggleMenuBarAction;
 
         QPointer<SessionController> _pluggedController;
+
+        QString _defaultProfile;
 };
 
 }
