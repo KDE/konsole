@@ -28,13 +28,10 @@
 class QSignalMapper;
 
 class KActionCollection;
-class KToggleAction;
-class KXMLGUIFactory;
 
 namespace Konsole
 {
 
-class MainWindow;
 class Session;
 class TerminalDisplay;
 class Profile;

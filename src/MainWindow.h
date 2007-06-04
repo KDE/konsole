@@ -32,7 +32,6 @@ namespace Konsole
 {
 
 class IncrementalSearchBar;
-class ViewSplitter;
 class ViewManager;
 class ViewProperties;
 class SessionController;

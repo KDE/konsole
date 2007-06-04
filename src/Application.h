@@ -27,9 +27,7 @@ class KCmdLineArgs;
 
 namespace Konsole
 {
-class ColorSchemeManager;
 class ProfileList;
-class SessionManager;
 class ViewManager;
 class MainWindow;
 class Session;

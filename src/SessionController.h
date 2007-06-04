@@ -45,7 +45,6 @@ class QAction;
 class QTextCodec;
 class KCodecAction;
 class KMenu;
-class KToggleAction;
 class KUrl;
 class KJob;
 

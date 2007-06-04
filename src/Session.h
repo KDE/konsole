@@ -40,7 +40,6 @@ class K3Process;
 namespace Konsole
 {
 
-class ColorScheme;
 class Emulation;
 class Pty;
 class TerminalDisplay;

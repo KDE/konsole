@@ -49,11 +49,9 @@ class QCheckBox;
 class QEvent;
 class QLabel;
 class QToolButton;
-class QWidgetAction;
 class QSignalMapper;
 
 class KAction;
-class KColorCells;
 class KFileDialog;
 class KFindDialog;
 class KMenu;
