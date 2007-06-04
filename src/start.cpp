@@ -21,8 +21,10 @@
 #include "Application.h"
 
 // X11
+#ifdef Q_WS_X11
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrender.h>
+#endif
 
 // KDE
 #include <KAboutData>
@@ -38,8 +40,10 @@ using namespace Konsole;
 // fills the KAboutData structure with information about contributors to 
 // Konsole
 void fillAboutData(KAboutData& aboutData);
+#ifdef Q_WS_X11
 void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap,
                            bool& transparencyAvailable);
+#endif
 
 static KCmdLineOptions options[] =
 {
@@ -82,6 +86,7 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
         exit(0);
     }
 
+#ifdef Q_WS_X11
     //Display* display = 0;
     Display* display = XOpenDisplay(0);
     Visual* visual = 0;
@@ -93,6 +98,10 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
     qDebug() << "Transparency available: " << transparencyAvailable;
 
     Application app(display,Qt::HANDLE(visual),Qt::HANDLE(colormap));
+#else
+    Application app;
+#endif
+
     return app.exec();   
 }
 
@@ -162,6 +171,7 @@ void fillAboutData(KAboutData& aboutData)
 }
 
 // code taken from the Qt 4 graphics dojo examples 
+#ifdef Q_WS_X11
 void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap,
                            bool& transparencyAvailable)
 {
@@ -200,3 +210,4 @@ void getDisplayInformation(Display*& display , Visual*& visual , Colormap& color
         }
     }
 }
+#endif
