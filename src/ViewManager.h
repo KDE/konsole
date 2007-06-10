@@ -202,7 +202,7 @@ private:
     SessionController* createController(Session* session , TerminalDisplay* display);
 
 private:
-    ViewSplitter*                   _viewSplitter;
+    QPointer<ViewSplitter>          _viewSplitter;
     QPointer<SessionController>     _pluggedController;
     QHash<QPointer<TerminalDisplay>,QPointer<Session> >    _sessionMap;
     KActionCollection*                  _actionCollection;

@@ -29,16 +29,17 @@ The KDE 4.0 TODO List:
   ( this is the list which maps key sequences pressed by
     the user to the corresponding text sequences
     which are send to the terminal )
-- Allow the window title set by the terminal program
-  to be used in the title bar of the Konsole window,
-  and/or the tab for the relevant terminal session.
 
 - Get the Konsole part working properly in other
   major KDE programs, such as Dolphin,
   KDevelop, Kate etc.
 
-  Make as much of the functionality from the main 
-  program available in the part as possible.  
+  Essential:    Make the part function and be stable in
+                Dolphin, KDevelop and Kate
+
+
+  Nice to have: Make as much of the functionality from the main 
+                program available in the part as possible.  
 
 
 - Implement changing of the Konsole window size by
@@ -49,19 +50,13 @@ The KDE 4.0 TODO List:
   the term "DCOP" for ideas on what users would like
   to be able to do using Konsole's scripting facilities.
 
-- Changing of profile settings, changing of profile using
+- Changing of profile using
   a command-line tool 
-
-  ( because going to the GUI to change a profile setting
-    is slower for advanced users since it requires a switch from 
-    the keyboard to the mouse.  Advanced users may also
-    appreciate the ability to script profile changes )
 
 - Better documentation for shortcuts to move between views
   (Shift+<Arrows> and Shift+Tab)
 
 == ESSENTIAL TWEAKS ==
-
 
 - When splitting the view, avoid scrolling existing views.
  
@@ -174,6 +169,13 @@ behaviour in KDE 3.
 
 
 === DONE ===
+
+- Changing of profile settings via a command-line tool
+  ( konsoleprofile )
+
+- Allow the window title set by the terminal program
+  to be used in the title bar of the Konsole window,
+  and/or the tab for the relevant terminal session.
 
 - When new output is added to a session, views should avoid
   scrolling if possible unless they are tracking the output

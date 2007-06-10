@@ -57,7 +57,7 @@ Q_OBJECT
     Q_INTERFACES(TerminalInterface) 
 public:
     /** Constructs a new Konsole part with the specified parent. */
-    Part(QObject* parent = 0);
+    Part(QWidget* parentWidget , QObject* parent = 0);
     virtual ~Part();
 
     /** Reimplemented from TerminalInterface. */
@@ -78,6 +78,8 @@ private slots:
     // call the run() method on the returned Session instance to begin the session
     Session* createSession(const QString& key);
     void activeViewChanged(SessionController* controller);
+
+    void debugFinished();
 
 private:
     Session* activeSession() const;

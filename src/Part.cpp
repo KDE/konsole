@@ -50,15 +50,15 @@ extern "C"
 
 using namespace Konsole;
 
-KParts::Part* PartFactory::createPartObject( QWidget* /*parentWidget*/,
+KParts::Part* PartFactory::createPartObject( QWidget* parentWidget,
                                              QObject* parent,
                                              const char* /*classname*/,
                                              const QStringList& /*args*/)
 {
-    return new Part(parent);
+    return new Part(parentWidget,parent);
 }
 
-Part::Part(QObject* parent)
+Part::Part(QWidget* parentWidget , QObject* parent)
  : KParts::ReadOnlyPart(parent)
   ,_viewManager(0)
   ,_pluggedController(0)
@@ -79,6 +79,10 @@ Part::Part(QObject* parent)
     connect( _viewManager , SIGNAL(activeViewChanged(SessionController*)) , this ,
            SLOT(activeViewChanged(SessionController*)) ); 
 
+    connect( _viewManager , SIGNAL(empty()) , this , SLOT(debugFinished()) );
+
+    _viewManager->widget()->setParent(parentWidget);
+
     setWidget(_viewManager->widget());
     
     // create basic session
@@ -91,14 +95,29 @@ bool Part::openFile()
 {
     return false;
 }
+void Part::debugFinished()
+{
+    qDebug() << __FUNCTION__;
+}
 Session* Part::activeSession() const
 {
-    // for now, just return the first available session
-    QList<Session*> list = SessionManager::instance()->sessions();
+    if ( _pluggedController )
+    {
+        qDebug() << __FUNCTION__ << " - have plugged controller";
 
-    Q_ASSERT( !list.isEmpty() );
+        return _pluggedController->session();
+    }
+    else
+    {
+        // for now, just return the first available session
+        QList<Session*> list = SessionManager::instance()->sessions();
 
-    return list.first();
+        qDebug() << __FUNCTION__ << " - no plugged controller, selectin first from" << list.count() << "sessions";
+        
+        Q_ASSERT( !list.isEmpty() );
+
+        return list.first();
+    }
 }
 void Part::startProgram( const QString& program,
                            const QStringList& arguments )

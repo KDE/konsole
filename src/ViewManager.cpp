@@ -248,16 +248,15 @@ void ViewManager::detachActiveView()
          container->views().count() == 0 )
     {
         removeContainer(container);
-
-        // this will need to be removed if Konsole is modified so the menu item to
-        // split the view is no longer one toggle-able item
-        //_splitViewAction->setChecked(false);
     }
 
 }
 
 void ViewManager::sessionFinished()
 {
+    // switch to the previous view before deleting the session views to prevent flicker 
+    // occurring as a result of an interval between removing the active view and switching
+    // to the previous view
     previousView();
 
     Session* session = qobject_cast<Session*>(sender());
@@ -440,7 +439,6 @@ void ViewManager::createView(Session* session)
         // set initial size
         // temporary default used for now
         display->setSize(80,40);
-
         
         ViewProperties* properties = createController(session,display);
 
