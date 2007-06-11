@@ -855,4 +855,119 @@ int Session::processId() const
     return _shellProcess->pid();
 }
 
+SessionGroup::SessionGroup()
+    : _masterMode(0)
+{
+}
+SessionGroup::~SessionGroup()
+{
+    // disconnect all 
+    connectAll(false);
+}
+int SessionGroup::masterMode() const { return _masterMode; }
+QList<Session*> SessionGroup::sessions() const { return _sessions.keys(); }
+bool SessionGroup::masterStatus(Session* session) const { return _sessions[session]; }
+
+void SessionGroup::addSession(Session* session)
+{
+    _sessions.insert(session,false);
+
+    QListIterator<Session*> masterIter(masters());
+    
+    while ( masterIter.hasNext() )
+        connectPair(masterIter.next(),session);
+}
+void SessionGroup::removeSession(Session* session)
+{
+    setMasterStatus(session,false);
+
+    QListIterator<Session*> masterIter(masters());
+
+    while ( masterIter.hasNext() )
+        disconnectPair(masterIter.next(),session);
+
+    _sessions.remove(session);
+}
+void SessionGroup::setMasterMode(int mode)
+{
+   _masterMode = mode;
+
+   connectAll(false);
+   connectAll(true);
+}
+QList<Session*> SessionGroup::masters() const
+{
+    return _sessions.keys(true);    
+}
+void SessionGroup::connectAll(bool connect)
+{
+    QListIterator<Session*> masterIter(masters());
+
+    while ( masterIter.hasNext() )
+    {
+        Session* master = masterIter.next();
+
+        QListIterator<Session*> otherIter(_sessions.keys());
+        while ( otherIter.hasNext() )
+        {
+            Session* other = otherIter.next();
+
+            if ( other != master )
+            {
+                if ( connect )
+                    connectPair(master,other);
+                else
+                    disconnectPair(master,other);
+            } 
+        }
+    }
+}
+void SessionGroup::setMasterStatus(Session* session , bool master)
+{
+    bool wasMaster = _sessions[session];
+    _sessions[session] = master;
+
+    if (    !wasMaster && !master
+         || wasMaster && master )
+      return;  
+
+    QListIterator<Session*> iter(_sessions.keys());
+    while ( iter.hasNext() )
+    {
+        Session* other = iter.next();
+       
+        if ( other != session )
+        {
+            if ( master )
+                connectPair(session,other);
+            else    
+                disconnectPair(session,other);
+        } 
+    }
+}
+void SessionGroup::connectPair(Session* master , Session* other)
+{
+    qDebug() << __FUNCTION__;
+
+    if ( _masterMode & CopyInputToAll )
+    {
+        qDebug() << "Connection session " << master->nameTitle() << "to" << other->nameTitle();
+
+        connect( master->emulation() , SIGNAL(sendData(const char*,int)) , other->emulation() ,
+                 SLOT(sendString(const char*,int)) );
+    }
+}
+void SessionGroup::disconnectPair(Session* master , Session* other)
+{
+    qDebug() << __FUNCTION__;
+
+    if ( _masterMode & CopyInputToAll )
+    {
+        qDebug() << "Disconnecting session " << master->nameTitle() << "from" << other->nameTitle();
+
+        disconnect( master->emulation() , SIGNAL(sendData(const char*,int)) , other->emulation() , 
+                SLOT(sendString(const char*,int)) );
+    }
+}
+
 #include "Session.moc"

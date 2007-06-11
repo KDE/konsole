@@ -175,6 +175,9 @@ private slots:
 
     void updateViewsForSession(Session* session);
 
+    // sends input from active view to all sessions
+    void sendInputToAll();
+
 private:
     void setupActions();
     void focusActiveView();

@@ -230,9 +230,13 @@ public slots:
   virtual void sendMouseEvent(int buttons, int column, int line, int eventType);
   
   /**
-   * Sends a string of characters to the foreground terminal process
+   * Sends a string of characters to the foreground terminal process. 
+   *
+   * @param string The characters to send.  
+   * @param length Length of @p string or if set to a negative value, @p string will
+   * be treated as a null-terminated string and its length will be determined automatically.
    */
-  virtual void sendString(const char *) = 0;
+  virtual void sendString(const char* string, int length = -1) = 0;
 
   /** Processes an incoming block of text. */
   void receiveData(const char* txt,int len);

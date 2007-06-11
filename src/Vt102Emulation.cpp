@@ -808,9 +808,12 @@ void Vt102Emulation::clearScreenAndSetColumns(int columnCount)
 /*!
 */
 
-void Vt102Emulation::sendString(const char* s)
+void Vt102Emulation::sendString(const char* s , int length)
 {
-  emit sendData(s,strlen(s));
+  if ( length >= 0 )
+    emit sendData(s,length);
+  else
+    emit sendData(s,strlen(s));
 }
 
 // Replies ----------------------------------------------------------------- --

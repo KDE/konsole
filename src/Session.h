@@ -508,6 +508,80 @@ private:
   
 };
 
+/**
+ * Provides a group of sessions which is divided into master and slave sessions.
+ * Activity in master sessions can be propagated to all sessions within the group.
+ * The type of activity which is propagated and method of propagation is controlled
+ * by the masterMode() flags. 
+ */
+class SessionGroup : public QObject
+{
+Q_OBJECT
+
+public:
+    /** Constructs an empty session group. */
+    SessionGroup();
+    /** Destroys the session group and removes all connections between master and slave sessions. */
+    ~SessionGroup();
+
+    /** Adds a session to the group. */
+    void addSession( Session* session );
+    /** Removes a session from the group. */
+    void removeSession( Session* session );
+
+    /** Returns the list of sessions currently in the group. */
+    QList<Session*> sessions() const;
+
+    /**
+     * Sets whether a particular session is a master within the group.
+     * Changes or activity in the group's master sessions may be propagated
+     * to all the sessions in the group, depending on the current masterMode()
+     *
+     * @param session The session whoose master status should be changed.
+     * @param master True to make this session a master or false otherwise
+     */
+    void setMasterStatus( Session* session , bool master );
+    /** Returns the master status of a session.  See setMasterStatus() */ 
+    bool masterStatus( Session* session ) const;
+
+    /** 
+     * This enum describes the options for propagating certain activity or 
+     * changes in the group's master sessions to all sessions in the group.
+     */
+    enum MasterMode
+    {
+        /** 
+         * Any input key presses in the master sessions are sent to all 
+         * sessions in the group.
+         */
+        CopyInputToAll = 1
+    };
+
+    /** 
+     * Specifies which activity in the group's master sessions is propagated
+     * to all sessions in the group.
+     *
+     * @param mode A bitwise OR of MasterMode flags.
+     */
+    void setMasterMode( int mode );
+    /**
+     * Returns a bitwise OR of the active MasterMode flags for this group. 
+     * See setMasterMode()
+     */
+    int masterMode() const;
+
+private:
+    void connectPair(Session* master , Session* other);
+    void disconnectPair(Session* master , Session* other);
+    void connectAll(bool connect);
+    QList<Session*> masters() const;
+
+    // maps sessions to their master status
+    QHash<Session*,bool> _sessions;
+
+    int _masterMode;
+};
+
 }
 
 #endif

@@ -94,7 +94,7 @@ public:
 public slots: 
 
   // reimplemented 
-  virtual void sendString(const char*);
+  virtual void sendString(const char*,int length = -1);
   virtual void sendText(const QString& text);
   virtual void sendKeyEvent(QKeyEvent*);
   virtual void sendMouseEvent( int buttons, int column, int line , int eventType );

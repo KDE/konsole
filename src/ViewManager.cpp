@@ -254,12 +254,15 @@ void ViewManager::detachActiveView()
 
 void ViewManager::sessionFinished()
 {
-    // switch to the previous view before deleting the session views to prevent flicker 
-    // occurring as a result of an interval between removing the active view and switching
-    // to the previous view
-    previousView();
-
     Session* session = qobject_cast<Session*>(sender());
+
+    if ( _sessionMap[qobject_cast<TerminalDisplay*>(activeView())] == session )
+    {
+        // switch to the previous view before deleting the session views to prevent flicker 
+        // occurring as a result of an interval between removing the active view and switching
+        // to the previous view
+        previousView();
+    }
 
     Q_ASSERT(session);
 
@@ -406,7 +409,8 @@ SessionController* ViewManager::createController(Session* session , TerminalDisp
     connect( controller , SIGNAL(focused(SessionController*)) , this , SIGNAL(activeViewChanged(SessionController*)) );
     connect( session , SIGNAL(destroyed()) , controller , SLOT(deleteLater()) );
     connect( view , SIGNAL(destroyed()) , controller , SLOT(deleteLater()) );
-    
+    connect( controller , SIGNAL(sendInputToAll(bool)) , this , SLOT(sendInputToAll()) );
+
     return controller;
 }
 
@@ -642,6 +646,22 @@ QList<ViewProperties*> ViewManager::viewProperties() const
     } 
 
     return list;
+}
+
+void ViewManager::sendInputToAll()
+{
+    SessionGroup* group = new SessionGroup();
+    group->setMasterMode( SessionGroup::CopyInputToAll );
+
+    Session* activeSession = _sessionMap[qobject_cast<TerminalDisplay*>(activeView())];
+    if ( activeSession != 0 )
+    {
+        QListIterator<Session*> iter( SessionManager::instance()->sessions() );
+        while ( iter.hasNext() )
+            group->addSession(iter.next());
+
+        group->setMasterStatus(activeSession,true);
+    }  
 }
 
 uint qHash(QPointer<TerminalDisplay> display)
