@@ -70,7 +70,7 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
     KAboutData about(   "konsole",
                         I18N_NOOP("Konsole"),
                         KONSOLE_VERSION,
-                        I18N_NOOP("Terminal emulator for KDE"),
+                        I18N_NOOP("Terminal emulator"),
                         KAboutData::License_GPL_V2
                     );
     fillAboutData(about);

@@ -1478,6 +1478,9 @@ void Screen::copyLineToStream(int line ,
 			{
 			    characterBuffer[i-start] = data[i];
             }
+
+            // count cannot be any greater than length
+            count = qMin(length,count);
 		}
 
 		//do not decode trailing whitespace characters

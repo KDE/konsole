@@ -1176,13 +1176,13 @@ void SearchHistoryTask::execute()
                 }
             }
 
-            qDebug() << "Searching lines " << qMin(endLine,line) << " to " << qMax(endLine,line);
+            //qDebug() << "Searching lines " << qMin(endLine,line) << " to " << qMax(endLine,line);
             
             decoder.begin(&searchStream);
             emulation->writeToStream(&decoder, qMin(endLine,line) , qMax(endLine,line) );
             decoder.end();
 
-            qDebug() << "Stream contents: " << string;
+            //qDebug() << "Stream contents: " << string;
             pos = -1;
             if (forwards)
                 pos = string.indexOf(_regExp);
