@@ -8,7 +8,7 @@
             <!-- <Action name="remote-connection" /> !-->
             <Separator/>
             <ActionList name="favorite-profiles"/>
-            <Separator/>
+            <Separator group="session-operations" />
             <DefineGroup name="session-operations"/>
             <Action name="exit" />
         </Menu>
@@ -19,8 +19,6 @@
             <DefineGroup name="session-history-operations"/>            
         </Menu>
         <Menu name="view"><text>View</text>
-            <DefineGroup name="session-view-operations"/> 
-            <Separator/>
             <Menu name="view-split"><text>Split View</text>
             <Action name="split-view-left-right"/>
             <Action name="split-view-top-bottom"/>
@@ -35,6 +33,8 @@
             <Separator/>
             <Action name="show-menubar"/>
             <Action name="view-full-screen"/>
+            <Separator/>
+            <DefineGroup name="session-view-operations"/> 
         </Menu>
         <Action name="bookmark"/>
         <Menu name="settings"><text>Settings</text>
