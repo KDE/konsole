@@ -57,8 +57,6 @@ The KDE 4.0 TODO List:
   (Shift+<Arrows> and Shift+Tab)
 
 == ESSENTIAL TWEAKS ==
-
-- When splitting the view, avoid scrolling existing views.
  
 - More intelligent tab title format which can adjust its output
   to display more relevant information depending upon the 
@@ -72,6 +70,10 @@ The KDE 4.0 TODO List:
 set in the configuration dialog, but warn the user if they try to do so.  This is the 
 behaviour in KDE 3.
 
+- Splitting the view currently triggers an image size update for each open view on the
+image.  A more efficient solution such as buffering successive image size changes would
+be better.  This would also help with applications such as Midnight Commander which
+do not always behave well with lots of successive image size changes.
 
 == NON-ESSENTIAL TWEAKS ==
 
@@ -169,6 +171,8 @@ behaviour in KDE 3.
 
 
 === DONE ===
+
+- When splitting the view, avoid scrolling existing views.
 
 - Changing of profile settings via a command-line tool
   ( konsoleprofile )
