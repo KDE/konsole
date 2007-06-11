@@ -156,6 +156,7 @@ bool ScreenWindow::atEndOfOutput() const
 
 void ScreenWindow::scrollTo( int line )
 {
+    //qDebug() << "ScreenWindow scrolled to " << line << ":" << this;
     if ( line < 0 )
        line = 0;
 

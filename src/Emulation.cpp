@@ -83,6 +83,8 @@
 #include <QtCore/QTextStream>
 #include <QtCore/QThread>
 
+#include <QtCore/QTime>
+
 // KDE
 #include <kdebug.h>
 
@@ -129,7 +131,6 @@ ScreenWindow* Emulation::createWindow()
     window->setScreen(_currentScreen);
     _windows << window;
 
-    //FIXME - Used delayed updates when the selection changes
     connect(window , SIGNAL(selectionChanged()),
             this , SLOT(bufferedUpdate()));
 
@@ -456,6 +457,7 @@ char Emulation::getErase() const
 
 void Emulation::setImageSize(int lines, int columns)
 {
+  //qDebug() << "Resizing image to: " << lines << "by" << columns << QTime::currentTime().msec();
   Q_ASSERT( lines > 0 );
   Q_ASSERT( columns > 0 );
 

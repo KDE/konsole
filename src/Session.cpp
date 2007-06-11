@@ -461,11 +461,19 @@ void Session::updateTerminalSize()
     int minLines = -1;
     int minColumns = -1;
 
+    // minimum number of lines and columns that views require for 
+    // their size to be taken into consideration ( to avoid problems
+    // with new view widgets which haven't yet been set to their correct size )
+    const int VIEW_LINES_THRESHOLD = 2;
+    const int VIEW_COLUMNS_THRESHOLD = 2;
+
     //select largest number of lines and columns that will fit in all visible views
     while ( viewIter.hasNext() )
     {
         TerminalDisplay* view = viewIter.next();
-        if ( view->isHidden() == false )
+        if ( view->isHidden() == false && 
+             view->lines() >= VIEW_LINES_THRESHOLD && 
+             view->columns() >= VIEW_COLUMNS_THRESHOLD )
         {
             minLines = (minLines == -1) ? view->lines() : qMin( minLines , view->lines() );
             minColumns = (minColumns == -1) ? view->columns() : qMin( minColumns , view->columns() );
