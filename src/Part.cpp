@@ -79,7 +79,7 @@ Part::Part(QWidget* parentWidget , QObject* parent)
     connect( _viewManager , SIGNAL(activeViewChanged(SessionController*)) , this ,
            SLOT(activeViewChanged(SessionController*)) ); 
 
-    connect( _viewManager , SIGNAL(empty()) , this , SLOT(debugFinished()) );
+    connect( _viewManager , SIGNAL(empty()) , this , SLOT(restart()) );
 
     _viewManager->widget()->setParent(parentWidget);
 
@@ -90,14 +90,17 @@ Part::Part(QWidget* parentWidget , QObject* parent)
 }
 Part::~Part()
 {
+    // disable creation of new sessions when the last one is closed
+    disconnect( _viewManager , SIGNAL(empty()) , this , SLOT(restart()) );
 }
 bool Part::openFile()
 {
     return false;
 }
-void Part::debugFinished()
+void Part::restart()
 {
-    qDebug() << __FUNCTION__;
+    createSession( QString() );
+    showShellInDir( QString() );
 }
 Session* Part::activeSession() const
 {

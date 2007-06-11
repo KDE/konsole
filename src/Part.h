@@ -79,7 +79,8 @@ private slots:
     Session* createSession(const QString& key);
     void activeViewChanged(SessionController* controller);
 
-    void debugFinished();
+    // called when the last session is closed to ensure there is always at least one active view
+    void restart();
 
 private:
     Session* activeSession() const;
