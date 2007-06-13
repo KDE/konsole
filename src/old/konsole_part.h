@@ -22,7 +22,6 @@
 #define KONSOLE_PART_H
 
 // Qt
-#include <QStringList>
 
 // KDE
 #include <kparts/browserextension.h>

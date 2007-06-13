@@ -23,7 +23,6 @@
 #define KONSOLE_H
 
 // Qt 
-#include <QStringList>
 #include <Q3PtrDict>
 #include <Q3PtrList>
 #include <QList>

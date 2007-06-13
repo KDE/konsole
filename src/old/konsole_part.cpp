@@ -35,7 +35,6 @@
 #include <QPixmap>
 #include <QPushButton>
 #include <QSpinBox>
-#include <QStringList>
 
 // KDE
 #include <KAboutData>

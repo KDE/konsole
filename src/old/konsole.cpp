@@ -58,7 +58,6 @@
 #include <QPushButton>
 #include <QSignalMapper>
 #include <QSpinBox>
-#include <QStringList>
 #include <QTextStream>
 #include <QTime>
 #include <QToolButton>

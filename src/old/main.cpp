@@ -31,7 +31,6 @@
 #include <QDir>
 #include <QSessionManager>
 #include <QWidget>
-#include <QStringList>
 
 // X11
 #if defined(Q_WS_X11) && defined(HAVE_XRENDER)
