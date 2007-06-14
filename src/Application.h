@@ -51,10 +51,10 @@ public:
     /** Constructs a new Konsole application. */
 #ifdef Q_WS_X11
     Application(Display* display , Qt::HANDLE visual, Qt::HANDLE colormap);
-#else
-    Application();
 #endif
 
+    Application();
+    
     virtual ~Application();
 
     /** Creates a new main window and opens a default terminal session */
@@ -78,6 +78,7 @@ private slots:
     void toggleBackgroundInstance();
 
 private:
+    void init();
     void listAvailableProfiles();
     void startBackgroundMode(MainWindow* window);
 

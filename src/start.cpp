@@ -97,7 +97,8 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
 
     qDebug() << "Transparency available: " << transparencyAvailable;
 
-    Application app(display,Qt::HANDLE(visual),Qt::HANDLE(colormap));
+    Application app;
+    //Application app(display,Qt::HANDLE(visual),Qt::HANDLE(colormap));
 #else
     Application app;
 #endif

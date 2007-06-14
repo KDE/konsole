@@ -49,12 +49,21 @@ using namespace Konsole;
 #ifdef Q_WS_X11
 Application::Application(Display* display , Qt::HANDLE visual, Qt::HANDLE colormap)
     : KUniqueApplication(display,visual,colormap) 
-#else
-Application::Application() : KUniqueApplication()
-#endif
-    , _sessionList(0)
-    , _backgroundInstance(0)
 {
+    init();
+}
+#endif
+      
+Application::Application() : KUniqueApplication()
+{
+    init();
+}
+
+void Application::init()
+{
+    _sessionList = 0;
+    _backgroundInstance = 0;
+
     // create session manager
     SessionManager::setInstance( new SessionManager() );
 
