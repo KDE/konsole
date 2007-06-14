@@ -9,6 +9,7 @@ Terminal=false
 X-KDE-StartupNotify=false
 
 Name=Quick Access Terminal
+Name[be]=Тэрмінал хуткага доступу
 Name[de]=Schnellzugrif auf Terminal
 Name[el]=Τερματικό γρήγορης πρόσβασης
 Name[nds]=Fixtogriep op Terminal
