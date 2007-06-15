@@ -20,6 +20,9 @@
 // Own
 #include "ViewProperties.h"
 
+// Qt
+#include <QtDebug>
+
 using namespace Konsole;
 
 ViewProperties::ViewProperties(QObject* parent)
@@ -52,8 +55,14 @@ void ViewProperties::setTitle(const QString& title)
 }
 void ViewProperties::setIcon(const QIcon& icon)
 {
-    _icon = icon;
-    emit iconChanged(this);
+    // the icon's cache key is used to determine whether this icon is the same
+    // as the old one.  if so no signal is emitted.
+    
+    if ( icon.cacheKey() != _icon.cacheKey() )
+    {
+        _icon = icon;
+        emit iconChanged(this);
+    }
 }
 void ViewProperties::setIdentifier(int id)
 {
