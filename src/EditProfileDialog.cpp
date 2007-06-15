@@ -61,6 +61,11 @@ EditProfileDialog::EditProfileDialog(QWidget* parent)
     _ui = new Ui::EditProfileDialog();
     _ui->setupUi(mainWidget());
 
+    _pageInvalidated.resize( _ui->tabWidget->count() );
+
+    connect( _ui->tabWidget , SIGNAL(currentChanged(int)) , this , 
+            SLOT(ensurePageLoaded(int)) );
+
     _tempProfile = new Profile;
 
     qDebug() << "Is modal = " << isModal();
@@ -109,16 +114,46 @@ void EditProfileDialog::setProfile(const QString& key)
     setCaption( i18n("Edit Profile \"%1\"",info->name()) );
 
     // setup each page of the dialog
-    setupGeneralPage(info);
-    setupAppearancePage(info);
-    setupKeyboardPage(info);
-    setupScrollingPage(info);
-    setupAdvancedPage(info);
+    _pageInvalidated.fill(true);
+    ensurePageLoaded( _ui->tabWidget->currentIndex() );
+
+  //  setupGeneralPage(info);
+  //  setupAppearancePage(info);
+  //  setupKeyboardPage(info);
+  //  setupScrollingPage(info);
+  //  setupAdvancedPage(info);
 
     if ( _tempProfile )
     {
         delete _tempProfile;
         _tempProfile = new Profile;
+    }
+}
+void EditProfileDialog::ensurePageLoaded(int page)
+{
+    const Profile* info = SessionManager::instance()->profile(_profileKey);
+
+    Q_ASSERT( _pageInvalidated.count() > page );
+    Q_ASSERT( info );
+
+    if ( _pageInvalidated[page] )
+    {
+       QWidget* pageWidget = _ui->tabWidget->widget(page);
+
+       if ( pageWidget == _ui->generalTab )
+            setupGeneralPage(info);
+       else if ( pageWidget == _ui->appearanceTab )
+            setupAppearancePage(info);
+       else if ( pageWidget == _ui->scrollingTab )
+            setupScrollingPage(info);
+       else if ( pageWidget == _ui->keyboardTab )
+            setupKeyboardPage(info);
+       else if ( pageWidget == _ui->advancedTab )
+            setupAdvancedPage(info);
+       else
+           Q_ASSERT(false);
+
+        _pageInvalidated[page] = false;
     }
 }
 void EditProfileDialog::setupGeneralPage(const Profile* info)

@@ -39,7 +39,7 @@
      <property name="usesScrollButtons" >
       <bool>false</bool>
      </property>
-     <widget class="QWidget" name="tab" >
+     <widget class="QWidget" name="generalTab" >
       <attribute name="title" >
        <string>General</string>
       </attribute>
@@ -317,7 +317,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_2" >
+     <widget class="QWidget" name="appearanceTab" >
       <attribute name="title" >
        <string>Appearance</string>
       </attribute>
@@ -492,7 +492,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_3" >
+     <widget class="QWidget" name="keyboardTab" >
       <attribute name="title" >
        <string>Keyboard Setup</string>
       </attribute>
@@ -574,7 +574,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_5" >
+     <widget class="QWidget" name="scrollingTab" >
       <attribute name="title" >
        <string>Scrolling</string>
       </attribute>
@@ -744,7 +744,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_4" >
+     <widget class="QWidget" name="advancedTab" >
       <attribute name="title" >
        <string>Advanced</string>
       </attribute>

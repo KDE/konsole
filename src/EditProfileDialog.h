@@ -87,6 +87,9 @@ protected:
     virtual bool eventFilter(QObject* watched , QEvent* event);
 
 private slots:
+    // sets up the specified tab page if necessary
+    void ensurePageLoaded(int);
+
     // saves changes to profile
     void save();
 
@@ -187,6 +190,7 @@ private:
     Profile* _tempProfile;
     QString _profileKey;
 
+    QVector<bool> _pageInvalidated;
     QHash<int,QVariant> _previewedProperties;
 };
 
