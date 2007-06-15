@@ -3,7 +3,7 @@
 # --------------------------------------------------------------
 
 # NOT TESTED, MAY NEED SOME CLEANUPS
-keyboard "linux console"
+keyboard "Linux console"
 
 # --------------------------------------------------------------
 #
