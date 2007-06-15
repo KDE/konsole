@@ -87,6 +87,8 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* parent)
     connect( _ui->colorTable , SIGNAL(itemClicked(QTableWidgetItem*)) , this , 
             SLOT(editColorItem(QTableWidgetItem*)) );
 
+    qDebug() << "Color scheme editor - have compositing = " << KWindowSystem::compositingActive();
+
     // warning label when transparency is not available
     if ( KWindowSystem::compositingActive() )
     {

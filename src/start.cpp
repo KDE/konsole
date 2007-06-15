@@ -41,8 +41,7 @@ using namespace Konsole;
 // Konsole
 void fillAboutData(KAboutData& aboutData);
 #ifdef Q_WS_X11
-void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap,
-                           bool& transparencyAvailable);
+void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap);
 #endif
 
 static KCmdLineOptions options[] =
@@ -93,12 +92,12 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
     Colormap colormap = 0;
     bool transparencyAvailable = KWindowSystem::compositingActive();
 
-    getDisplayInformation(display,visual,colormap,transparencyAvailable);
+    if ( transparencyAvailable )
+        getDisplayInformation(display,visual,colormap);
 
     qDebug() << "Transparency available: " << transparencyAvailable;
 
-    Application app;
-    //Application app(display,Qt::HANDLE(visual),Qt::HANDLE(colormap));
+    Application app(display,Qt::HANDLE(visual),Qt::HANDLE(colormap));
 #else
     Application app;
 #endif
@@ -173,8 +172,7 @@ void fillAboutData(KAboutData& aboutData)
 
 // code taken from the Qt 4 graphics dojo examples 
 #ifdef Q_WS_X11
-void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap,
-                           bool& transparencyAvailable)
+void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap)
 {
     display = XOpenDisplay(0); // open default display
     if (!display) {
@@ -202,8 +200,6 @@ void getDisplayInformation(Display*& display , Visual*& visual , Colormap& color
                 visual = xvi[i].visual;
                 colormap = XCreateColormap(display, RootWindow(display, screen),
                                            visual, AllocNone);
-
-                transparencyAvailable = true;
 
                 // found ARGB visual
                 break;
