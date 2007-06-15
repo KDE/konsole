@@ -161,6 +161,7 @@ private:
 
     void updateColorSchemeList();
     void updateKeyBindingsList();
+    void updateFontPreviewLabel(const QFont& font);
 
     void showColorSchemeEditor(bool newScheme);
     void showKeyBindingEditor(bool newTranslator);

@@ -325,13 +325,18 @@ void EditProfileDialog::setupAppearancePage(const Profile* info)
 
     // setup font preview
     const QFont& font = info->font();
-    _ui->fontPreviewLabel->setFont( font );
+    updateFontPreviewLabel(font);
     _ui->fontSizeSlider->setValue( font.pointSize() );
 
     connect( _ui->fontSizeSlider , SIGNAL(valueChanged(int)) , this ,
              SLOT(setFontSize(int)) );
     connect( _ui->editFontButton , SIGNAL(clicked()) , this ,
              SLOT(showFontDialog()) );
+}
+void EditProfileDialog::updateFontPreviewLabel(const QFont& font)
+{
+    _ui->fontPreviewLabel->setFont(font);
+    _ui->fontPreviewLabel->setText(i18n("%1, size %2",font.family(),font.pointSize()));
 }
 void EditProfileDialog::updateColorSchemeList()
 {
@@ -867,7 +872,7 @@ void EditProfileDialog::setFontSize(int pointSize)
 {
     QFont newFont = _ui->fontPreviewLabel->font();
     newFont.setPointSize(pointSize);
-    _ui->fontPreviewLabel->setFont( newFont );
+    updateFontPreviewLabel(newFont);
 
     _tempProfile->setProperty(Profile::Font,newFont);
 
