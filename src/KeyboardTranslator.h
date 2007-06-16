@@ -79,7 +79,9 @@ public:
          * Indicates that the alternate screen ( typically used by interactive programs
          * such as screen or vim ) is active 
          */
-        AlternateScreenState = 8
+        AlternateScreenState = 8,
+        /** Indicates that any of the modifier keys is active. */ 
+        AnyModifierState = 16
     };
 
     /**

@@ -312,6 +312,8 @@ bool KeyboardTranslatorReader::parseAsStateFlag(const QString& item , int& flag)
         flag = KeyboardTranslator::NewLineState;
     else if ( item == "appscreen" )
         flag = KeyboardTranslator::AlternateScreenState;
+    else if ( item == "anymod" )
+        flag = KeyboardTranslator::AnyModifierState;
     else
         return false;
 
@@ -536,11 +538,24 @@ bool KeyboardTranslator::Entry::matches(int keyCode , Qt::KeyboardModifier modif
     if ( _keyCode != keyCode )
         return false;
 
-    if ( modifiers != ( _modifiers & _modifierMask ) )
+    if ( (modifiers & _modifierMask) != (_modifiers & _modifierMask) ) 
         return false;
 
-    if ( state != ( _state & _stateMask ) )
+    if ( (state & _stateMask) != (_state & _stateMask) )
         return false;
+
+    // special handling for the 'Any Modifier' state, which checks for the presence of 
+    // any or no modifiers 
+    if ( _stateMask & KeyboardTranslator::AnyModifierState )
+    {
+        // test fails if any modifier is required but none are set
+        if ( (_state & KeyboardTranslator::AnyModifierState) && modifiers == 0 )
+           return false;
+
+        // test fails if no modifier is allowed but one or more are set
+        if ( !(_state & KeyboardTranslator::AnyModifierState) && modifiers != 0 )
+            return false;
+    }
 
     return true;
 }
@@ -581,7 +596,8 @@ void KeyboardTranslator::Entry::insertState( QString& item , int state ) const
         item += "ansi";
     else if ( state == KeyboardTranslator::CursorKeysState )
         item += "AppCuKeys";
-
+    else if ( state == KeyboardTranslator::AnyModifierState )
+        item += "AnyMod";
 }
 QString KeyboardTranslator::Entry::conditionToString() const
 {
@@ -598,6 +614,7 @@ QString KeyboardTranslator::Entry::conditionToString() const
     insertState( result , KeyboardTranslator::NewLineState );
     insertState( result , KeyboardTranslator::AnsiState );
     insertState( result , KeyboardTranslator::CursorKeysState );
+    insertState( result , KeyboardTranslator::AnyModifierState );
 
     return result;
 }
