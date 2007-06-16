@@ -533,14 +533,26 @@ QKeySequence KeyboardTranslator::Entry::keySequence() const
 bool KeyboardTranslator::Entry::matches(int keyCode , Qt::KeyboardModifier modifiers,
                                         State state) const
 {
+    //qDebug() << "Checking entry.  test key code = " << keyCode << " entry key code =" << _keyCode;
+
     if ( _keyCode != keyCode )
         return false;
+
+    //qDebug() << "Checking modifiers";
 
     if ( (modifiers & _modifierMask) != (_modifiers & _modifierMask) ) 
         return false;
 
+    //qDebug() << "Checking state";
+
+    // if modifiers is non-zero, the 'any modifier' state is implicit
+    if ( modifiers != 0 )
+        state = (State)(state | AnyModifierState);
+
     if ( (state & _stateMask) != (_state & _stateMask) )
         return false;
+
+    //qDebug() << "Checking any mod state";
 
     // special handling for the 'Any Modifier' state, which checks for the presence of 
     // any or no modifiers 
@@ -554,6 +566,8 @@ bool KeyboardTranslator::Entry::matches(int keyCode , Qt::KeyboardModifier modif
         if ( !(_state & KeyboardTranslator::AnyModifierState) && modifiers != 0 )
             return false;
     }
+
+    //qDebug() << "Entry matches";
 
     return true;
 }
@@ -638,6 +652,8 @@ KeyboardTranslator::KeyboardTranslator(const QString& name)
 : _name(name)
 {
 }
+
+#if 0
 KeyboardTranslator::KeyboardTranslator(const KeyboardTranslator& other)
 : _name(other._name)
 {
@@ -645,6 +661,8 @@ KeyboardTranslator::KeyboardTranslator(const KeyboardTranslator& other)
 
     // TODO: Copy keyboard entries
 }
+#endif
+
 void KeyboardTranslator::setDescription(const QString& description) 
 {
     _description = description;
@@ -675,15 +693,24 @@ void KeyboardTranslator::addEntry(const Entry& entry)
 
 KeyboardTranslator::Entry KeyboardTranslator::findEntry(int keyCode, Qt::KeyboardModifier modifiers, State state) const
 {
+    //qDebug() << "Searching for entry for key code =" << keyCode << ", modifiers =" << modifiers;
+    //qDebug() << "Translator keys, count: " << _entries.count() << _entries.keys();
+
     if ( _entries.contains(keyCode) )
     {
-        QListIterator<Entry> iter(_entries.values(keyCode));
+        QList<Entry> entriesForKey = _entries.values(keyCode);
+        
+        //qDebug() << "Found" << entriesForKey.count() << "matches for key code" << keyCode;
+
+        QListIterator<Entry> iter(entriesForKey);
 
         while (iter.hasNext())
         {
             const Entry& next = iter.next();
             if ( next.matches(keyCode,modifiers,state) )
                 return next;
+
+            //qDebug() << "Entry" << next.resultToString() << "did not match.";
         }
 
         return Entry(); // entry not found

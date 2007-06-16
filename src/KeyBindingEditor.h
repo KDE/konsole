@@ -72,14 +72,14 @@ public:
      */
     QString description() const;
 
+    // reimplemented to handle test area input
+    virtual bool eventFilter( QObject* watched , QEvent* event );
+
 public slots:
     /** 
      * Sets the text of the editor's description field.
      */
     void setDescription(const QString& description);
-   
-private slots:
-    void updateTestAreaOutput(const QString& input);
 
 private:
     void setupKeyBindingTable(const KeyboardTranslator* translator);

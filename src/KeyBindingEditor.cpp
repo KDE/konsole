@@ -22,6 +22,7 @@
 
 // Qt
 #include <QtGui/QHeaderView>
+#include <QtGui/QKeyEvent>
 
 // Konsole
 #include "ui_KeyBindingEditor.h"
@@ -49,9 +50,7 @@ KeyBindingEditor::KeyBindingEditor(QWidget* parent)
     _ui->keyBindingTable->horizontalHeader()->setStretchLastSection(true);
     _ui->keyBindingTable->verticalHeader()->hide();
 
-    // test area
-    connect( _ui->testAreaInputEdit , SIGNAL(textChanged(const QString&)) , this , 
-            SLOT(updateTestAreaOutput(const QString&)) );
+    _ui->testAreaInputEdit->installEventFilter(this);
 }
 
 KeyBindingEditor::~KeyBindingEditor()
@@ -59,11 +58,28 @@ KeyBindingEditor::~KeyBindingEditor()
     delete _ui;
 }
 
-void KeyBindingEditor::updateTestAreaOutput(const QString& input)
+bool KeyBindingEditor::eventFilter( QObject* watched , QEvent* event )
 {
-    // TODO : Run 'input' text through the keyboard translator
-   
+    if ( watched == _ui->testAreaInputEdit )
+    {
+       if ( event->type() == QEvent::KeyPress )
+       {
+            QKeyEvent* keyEvent = (QKeyEvent*)event;
 
+            int modifiers = keyEvent->modifiers();
+            KeyboardTranslator::Entry entry = _translator->findEntry( keyEvent->key() , 
+                                                                      (Qt::KeyboardModifier)modifiers );
+
+            _ui->testAreaInputEdit->setText(entry.conditionToString());
+            _ui->testAreaOutputEdit->setText(entry.resultToString());
+
+            //qDebug() << "Entry: " << entry.resultToString();
+
+            keyEvent->accept();
+            return true;
+       } 
+    }
+    return false;
 }
 
 void KeyBindingEditor::setDescription(const QString& newDescription)

@@ -211,7 +211,7 @@ public:
     /** Constructs a new keyboard translator with the given @p name */
     KeyboardTranslator(const QString& name);
    
-    KeyboardTranslator(const KeyboardTranslator& other);
+    //KeyboardTranslator(const KeyboardTranslator& other);
 
     /** Returns the name of this keyboard translator */
     QString name() const;
