@@ -397,7 +397,7 @@ bool ColorSchemeManager::loadColorScheme(const QString& filePath)
     {
         qDebug() << "added color scheme - " << info.baseName();
 
-        addColorScheme(scheme);
+        _colorSchemes.insert(scheme->name(),scheme);
     }
     else
     {

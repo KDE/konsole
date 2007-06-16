@@ -99,5 +99,5 @@ Color=255,255,255
 Transparency=false
 
 [General]
-Name=Linux Colors
+Description=Linux Colors
 Opacity=1.5120508857939e-314
