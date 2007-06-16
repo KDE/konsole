@@ -111,7 +111,7 @@ void KeyBindingEditor::setupKeyBindingTable(const KeyboardTranslator* translator
         const KeyboardTranslator::Entry& entry = entries.at(row);
 
         QTableWidgetItem* keyItem = new QTableWidgetItem(entry.conditionToString());
-        QTableWidgetItem* textItem = new QTableWidgetItem(QString(entry.text()));
+        QTableWidgetItem* textItem = new QTableWidgetItem(QString(entry.resultToString()));
 
         _ui->keyBindingTable->setItem(row,0,keyItem);
         _ui->keyBindingTable->setItem(row,1,textItem);

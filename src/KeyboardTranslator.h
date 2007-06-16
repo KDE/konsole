@@ -181,6 +181,12 @@ public:
          */
         QString conditionToString() const;
 
+        /**
+         * Returns this entry's result ( ie. its command or character sequence )
+         * as a string.
+         */
+        QString resultToString() const;
+
         /** 
          * Returns true if this entry matches the given key sequence, specified
          * as a combination of @p keyCode , @p modifiers and @p state.

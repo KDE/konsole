@@ -250,8 +250,6 @@ bool KeyboardTranslatorReader::decodeSequence(const QString& text,
 
         if ( (endOfItem || isLastLetter) && !buffer.isEmpty() )
         {
-            qDebug() << "Parsing item: " << buffer;
-
             int itemModifier = 0;
             int itemKeyCode = 0;
             int itemFlag = 0;
@@ -598,6 +596,23 @@ void KeyboardTranslator::Entry::insertState( QString& item , int state ) const
         item += "AppCuKeys";
     else if ( state == KeyboardTranslator::AnyModifierState )
         item += "AnyMod";
+}
+QString KeyboardTranslator::Entry::resultToString() const
+{
+    if ( !_text.isEmpty() )
+        return _text;
+    else if ( _command == ScrollPageUpCommand )
+        return "ScrollPageUp";
+    else if ( _command == ScrollPageDownCommand )
+        return "ScrollPageDown";
+    else if ( _command == ScrollLineUpCommand )
+        return "ScrollLineUp";
+    else if ( _command == ScrollLineDownCommand )
+        return "ScrollLineDown";
+    else if ( _command == ScrollLockCommand )
+        return "ScrollLock";
+
+    return QString();
 }
 QString KeyboardTranslator::Entry::conditionToString() const
 {
