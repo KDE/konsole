@@ -161,7 +161,7 @@ void KeyboardTranslatorReader::readNext()
 
             int keyCode = Qt::Key_unknown;
 
-            decodeSequence(tokens[1].text,
+            decodeSequence(tokens[1].text.toLower(),
                            keyCode,
                            modifiers,
                            modifierMask,
@@ -329,6 +329,11 @@ bool KeyboardTranslatorReader::parseAsKeyCode(const QString& item , int& keyCode
             qDebug() << "Unhandled key codes in sequence: " << item;
         }
     }
+    // additional cases implemented for backwards compatibility with KDE 3
+    else if ( item == "prior" )
+        keyCode = Qt::Key_PageUp;
+    else if ( item == "next" )
+        keyCode = Qt::Key_PageDown;
     else
         return false;
 
@@ -507,6 +512,7 @@ KeyboardTranslator::Entry::Entry()
 {
 }
 
+#if 0
 QKeySequence KeyboardTranslator::Entry::keySequence() const
 {
     int code = _keyCode;
@@ -522,6 +528,7 @@ QKeySequence KeyboardTranslator::Entry::keySequence() const
 
     return QKeySequence(code);
 }
+#endif 
 
 bool KeyboardTranslator::Entry::matches(int keyCode , Qt::KeyboardModifier modifiers,
                                         State state) const
@@ -537,6 +544,64 @@ bool KeyboardTranslator::Entry::matches(int keyCode , Qt::KeyboardModifier modif
 
     return true;
 }
+void KeyboardTranslator::Entry::insertModifier( QString& item , int modifier ) const
+{
+    if ( !(modifier & _modifierMask) )
+        return;
+
+    if ( modifier & _modifiers )
+        item += '+';
+    else
+        item += '-';
+
+    if ( modifier == Qt::ShiftModifier )
+        item += "Shift";
+    else if ( modifier == Qt::ControlModifier )
+        item += "Ctrl";
+    else if ( modifier == Qt::AltModifier )
+        item += "Alt";
+    else if ( modifier == Qt::MetaModifier )
+        item += "Meta";
+}
+void KeyboardTranslator::Entry::insertState( QString& item , int state ) const
+{
+    if ( !(state & _stateMask) )
+        return;
+
+    if ( state & _state )
+        item += '+' ;
+    else
+        item += '-' ;
+
+    if ( state == KeyboardTranslator::AlternateScreenState )
+        item += "AppScreen";
+    else if ( state == KeyboardTranslator::NewLineState )
+        item += "NewLine";
+    else if ( state == KeyboardTranslator::AnsiState )
+        item += "ansi";
+    else if ( state == KeyboardTranslator::CursorKeysState )
+        item += "AppCuKeys";
+
+}
+QString KeyboardTranslator::Entry::conditionToString() const
+{
+    QString result = QKeySequence(_keyCode).toString();
+
+    // add modifiers
+    insertModifier( result , Qt::ShiftModifier );
+    insertModifier( result , Qt::ControlModifier );
+    insertModifier( result , Qt::AltModifier );
+    insertModifier( result , Qt::MetaModifier ); 
+
+    // add states
+    insertState( result , KeyboardTranslator::AlternateScreenState );
+    insertState( result , KeyboardTranslator::NewLineState );
+    insertState( result , KeyboardTranslator::AnsiState );
+    insertState( result , KeyboardTranslator::CursorKeysState );
+
+    return result;
+}
+
 KeyboardTranslator::KeyboardTranslator(const QString& name)
 : _name(name)
 {

@@ -171,7 +171,13 @@ public:
          * Returns the key code and modifiers associated with this entry 
          * as a QKeySequence
          */
-        QKeySequence keySequence() const;
+        //QKeySequence keySequence() const;
+
+        /** 
+         * Returns this entry's conditions ( ie. its key code, modifier and state criteria )
+         * as a string.
+         */
+        QString conditionToString() const;
 
         /** 
          * Returns true if this entry matches the given key sequence, specified
@@ -181,6 +187,9 @@ public:
 
        
     private:
+        void insertModifier( QString& item , int modifier ) const;
+        void insertState( QString& item , int state ) const;
+
         int _keyCode;
         Qt::KeyboardModifier _modifiers;
         Qt::KeyboardModifier _modifierMask;
