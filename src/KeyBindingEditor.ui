@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>302</width>
+    <height>395</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -40,7 +40,63 @@
     </layout>
    </item>
    <item>
-    <widget class="QTableWidget" name="keyBindingTable" />
+    <widget class="QTableWidget" name="keyBindingTable" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+       <horstretch>0</horstretch>
+       <verstretch>1</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" >
+      <size>
+       <width>20</width>
+       <height>16</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox" >
+     <property name="title" >
+      <string>Test Area</string>
+     </property>
+     <property name="flat" >
+      <bool>true</bool>
+     </property>
+     <layout class="QGridLayout" >
+      <item row="0" column="0" >
+       <widget class="QLabel" name="label" >
+        <property name="text" >
+         <string>Input:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" >
+       <widget class="QLineEdit" name="testAreaInputEdit" />
+      </item>
+      <item row="1" column="0" >
+       <widget class="QLabel" name="label_2" >
+        <property name="text" >
+         <string>Output:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" >
+       <widget class="QLineEdit" name="testAreaOutputEdit" >
+        <property name="readOnly" >
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
   </layout>
  </widget>

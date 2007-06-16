@@ -61,8 +61,17 @@ EditProfileDialog::EditProfileDialog(QWidget* parent)
     _ui = new Ui::EditProfileDialog();
     _ui->setupUi(mainWidget());
 
-    _pageInvalidated.resize( _ui->tabWidget->count() );
-
+    // there are various setupXYZPage() methods to load the items
+    // for each page and update their states to match the profile
+    // being edited.
+    //
+    // these are only called when needed ( ie. when the user clicks
+    // the tab to move to that page ).
+    //
+    // the _pageNeedsUpdate vector keeps track of the pages that have
+    // not been updated since the last profile change and will need
+    // to be refreshed when the user switches to them
+    _pageNeedsUpdate.resize( _ui->tabWidget->count() );
     connect( _ui->tabWidget , SIGNAL(currentChanged(int)) , this , 
             SLOT(ensurePageLoaded(int)) );
 
@@ -113,15 +122,12 @@ void EditProfileDialog::setProfile(const QString& key)
     // update caption
     setCaption( i18n("Edit Profile \"%1\"",info->name()) );
 
-    // setup each page of the dialog
-    _pageInvalidated.fill(true);
+    // mark each page of the dialog as out of date
+    // and force an update of the currently visible page
+    //
+    // the other pages will be updated as necessary
+    _pageNeedsUpdate.fill(true);
     ensurePageLoaded( _ui->tabWidget->currentIndex() );
-
-  //  setupGeneralPage(info);
-  //  setupAppearancePage(info);
-  //  setupKeyboardPage(info);
-  //  setupScrollingPage(info);
-  //  setupAdvancedPage(info);
 
     if ( _tempProfile )
     {
@@ -133,10 +139,10 @@ void EditProfileDialog::ensurePageLoaded(int page)
 {
     const Profile* info = SessionManager::instance()->profile(_profileKey);
 
-    Q_ASSERT( _pageInvalidated.count() > page );
+    Q_ASSERT( _pageNeedsUpdate.count() > page );
     Q_ASSERT( info );
 
-    if ( _pageInvalidated[page] )
+    if ( _pageNeedsUpdate[page] )
     {
        QWidget* pageWidget = _ui->tabWidget->widget(page);
 
@@ -153,7 +159,7 @@ void EditProfileDialog::ensurePageLoaded(int page)
        else
            Q_ASSERT(false);
 
-        _pageInvalidated[page] = false;
+        _pageNeedsUpdate[page] = false;
     }
 }
 void EditProfileDialog::setupGeneralPage(const Profile* info)

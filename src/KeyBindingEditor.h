@@ -34,9 +34,10 @@ namespace Konsole
 class KeyboardTranslator;
 
 /**
- * A dialog which allows the user to edit a key bindings list,
- * which maps between key combinations and text produced 
- * in the shell when those combinations are pressed.
+ * A dialog which allows the user to edit a key bindings list 
+ * which maps between key combinations input by the user and 
+ * the character sequence sent to the terminal when those 
+ * combinations are pressed.
  *
  * The dialog can be initialised with the settings of an
  * existing key bindings list using the setup() method.
@@ -72,12 +73,23 @@ public:
     QString description() const;
 
 public slots:
+    /** 
+     * Sets the text of the editor's description field.
+     */
     void setDescription(const QString& description);
-    
+   
+private slots:
+    void updateTestAreaOutput(const QString& input);
+
 private:
     void setupKeyBindingTable(const KeyboardTranslator* translator);
 
     Ui::KeyBindingEditor* _ui;
+    
+    // translator to which modifications are made as the user makes
+    // changes in the UI.
+    // this is initialized as a copy of the translator specified
+    // when setup() is called
     KeyboardTranslator* _translator;
 };
 

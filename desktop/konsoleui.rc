@@ -8,7 +8,7 @@
             <!-- <Action name="remote-connection" /> !-->
             <Separator/>
             <ActionList name="favorite-profiles"/>
-            <Separator group="session-operations" />
+            <Separator/>
             <DefineGroup name="session-operations"/>
             <Action name="exit" />
         </Menu>

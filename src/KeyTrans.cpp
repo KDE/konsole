@@ -93,9 +93,9 @@ KeyTrans::KeyTrans(const QString& path)
 ,m_numb(0)
 ,m_fileRead(false)
 {
-  if (m_path=="[buildin]")
+  if (m_path=="[builtin]")
   {
-     m_id = "default";
+     m_id = "builtin";
   }
   else
   {
@@ -408,7 +408,7 @@ void KeyTrans::readConfig(bool headerOnly)
 
    QIODevice* buf(0);
    QByteArray* txt = 0;
-   if (m_path=="[buildin]")
+   if (m_path=="[builtin]")
    {
       txt = new QByteArray(
 #include "default.keytab.h"
@@ -785,7 +785,7 @@ void KeyTrans::loadAll()
     syms = new KeyTransSymbols;
 
   //defaultKeyTrans()->addKeyTrans();
-  KeyTrans* sc = new KeyTrans("[buildin]");
+  KeyTrans* sc = new KeyTrans("[builtin]");
   sc->addKeyTrans();
 
   QStringList lst = KGlobal::dirs()->findAllResources("data", "konsole/*.keytab");

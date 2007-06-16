@@ -48,11 +48,22 @@ KeyBindingEditor::KeyBindingEditor(QWidget* parent)
     _ui->keyBindingTable->setHorizontalHeaderLabels(labels);
     _ui->keyBindingTable->horizontalHeader()->setStretchLastSection(true);
     _ui->keyBindingTable->verticalHeader()->hide();
+
+    // test area
+    connect( _ui->testAreaInputEdit , SIGNAL(textChanged(const QString&)) , this , 
+            SLOT(updateTestAreaOutput(const QString&)) );
 }
 
 KeyBindingEditor::~KeyBindingEditor()
 {
     delete _ui;
+}
+
+void KeyBindingEditor::updateTestAreaOutput(const QString& input)
+{
+    // TODO : Run 'input' text through the keyboard translator
+   
+
 }
 
 void KeyBindingEditor::setDescription(const QString& newDescription)

@@ -191,7 +191,11 @@ private:
     Profile* _tempProfile;
     QString _profileKey;
 
-    QVector<bool> _pageInvalidated;
+    // keeps track of pages which need to be updated to match the current
+    // profile.  all elements in this vector are set to true when the 
+    // profile is changed and individual elements are set to false 
+    // after an update by a call to ensurePageLoaded()
+    QVector<bool> _pageNeedsUpdate;
     QHash<int,QVariant> _previewedProperties;
 };
 

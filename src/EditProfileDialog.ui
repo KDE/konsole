@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>456</width>
-    <height>516</height>
+    <width>521</width>
+    <height>596</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -492,88 +492,6 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="keyboardTab" >
-      <attribute name="title" >
-       <string>Keyboard Setup</string>
-      </attribute>
-      <layout class="QVBoxLayout" >
-       <item>
-        <widget class="QGroupBox" name="keyBindingsGroup" >
-         <property name="title" >
-          <string>Key Bindings</string>
-         </property>
-         <property name="flat" >
-          <bool>true</bool>
-         </property>
-         <layout class="QGridLayout" >
-          <item rowspan="5" row="0" column="0" >
-           <widget class="QListView" name="keyBindingList" >
-            <property name="iconSize" >
-             <size>
-              <width>32</width>
-              <height>32</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1" >
-           <widget class="QPushButton" name="newKeyBindingsButton" >
-            <property name="toolTip" >
-             <string>Create a new key bindings list based upon the selected bindings</string>
-            </property>
-            <property name="text" >
-             <string>New...</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1" >
-           <widget class="QPushButton" name="editKeyBindingsButton" >
-            <property name="toolTip" >
-             <string>Edit the selected key bindings list</string>
-            </property>
-            <property name="text" >
-             <string>Edit...</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1" >
-           <widget class="QPushButton" name="removeKeyBindingsButton" >
-            <property name="toolTip" >
-             <string>Delete the selected key bindings list</string>
-            </property>
-            <property name="text" >
-             <string>Remove</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1" >
-           <widget class="QPushButton" name="selectKeyBindingsButton" >
-            <property name="toolTip" >
-             <string>Use the selected key bindings list in this profile</string>
-            </property>
-            <property name="text" >
-             <string>Select</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1" >
-           <spacer>
-            <property name="orientation" >
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" >
-             <size>
-              <width>71</width>
-              <height>101</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
-     </widget>
      <widget class="QWidget" name="scrollingTab" >
       <attribute name="title" >
        <string>Scrolling</string>
@@ -741,6 +659,98 @@
           </size>
          </property>
         </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="keyboardTab" >
+      <attribute name="title" >
+       <string>Keyboard Setup</string>
+      </attribute>
+      <layout class="QVBoxLayout" >
+       <item>
+        <widget class="QGroupBox" name="keyBindingsGroup" >
+         <property name="title" >
+          <string>Key Bindings</string>
+         </property>
+         <property name="flat" >
+          <bool>true</bool>
+         </property>
+         <layout class="QGridLayout" >
+          <item row="0" column="0" colspan="2" >
+           <widget class="QLabel" name="label_15" >
+            <property name="text" >
+             <string>Key bindings control how combinations of key presses in the terminal window are converted into the stream of characters which is sent to the current terminal program.</string>
+            </property>
+            <property name="wordWrap" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item rowspan="5" row="1" column="0" >
+           <widget class="QListView" name="keyBindingList" >
+            <property name="iconSize" >
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" >
+           <widget class="QPushButton" name="newKeyBindingsButton" >
+            <property name="toolTip" >
+             <string>Create a new key bindings list based upon the selected bindings</string>
+            </property>
+            <property name="text" >
+             <string>New...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1" >
+           <widget class="QPushButton" name="editKeyBindingsButton" >
+            <property name="toolTip" >
+             <string>Edit the selected key bindings list</string>
+            </property>
+            <property name="text" >
+             <string>Edit...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" >
+           <widget class="QPushButton" name="removeKeyBindingsButton" >
+            <property name="toolTip" >
+             <string>Delete the selected key bindings list</string>
+            </property>
+            <property name="text" >
+             <string>Remove</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1" >
+           <widget class="QPushButton" name="selectKeyBindingsButton" >
+            <property name="toolTip" >
+             <string>Use the selected key bindings list in this profile</string>
+            </property>
+            <property name="text" >
+             <string>Select</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1" >
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>71</width>
+              <height>101</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
        </item>
       </layout>
      </widget>

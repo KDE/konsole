@@ -1,13 +1,4 @@
 # [README.default.Keytab] Buildin Keyboard Table
-
-# --------------------------------------------------------------
-#
-# This file is used to create the buildin keyboard table.
-# It is included for reference purpose with the *.keytab
-# files that are loaded dynamically.
-#
-# Modifying it does not have any effect (unless you
-# derive the default.keytab.h and recompile konsole).
 #
 # To customize your keyboard, copy this file to something
 # ending with .keytab and change it to meet you needs.
@@ -16,7 +7,7 @@
 #
 # --------------------------------------------------------------
 
-keyboard "XTerm (XFree 4.x.x)"
+keyboard "Default (XFree 4)"
 
 # --------------------------------------------------------------
 #
