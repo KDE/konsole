@@ -155,29 +155,21 @@ void KeyboardTranslatorReader::readNext()
         if ( !tokens.isEmpty() && tokens.first().type == Token::KeyKeyword )
         {
             KeyboardTranslator::State flags = KeyboardTranslator::NoState;
-            QKeySequence sequence = decodeSequence(tokens[1].text,flags); 
+            KeyboardTranslator::State flagMask = KeyboardTranslator::NoState;
+            Qt::KeyboardModifier modifiers = Qt::NoModifier;
+            Qt::KeyboardModifier modifierMask = Qt::NoModifier;
 
             int keyCode = Qt::Key_unknown;
-            int modifiers = Qt::NoModifier;
-            QByteArray text;
+
+            decodeSequence(tokens[1].text,
+                           keyCode,
+                           modifiers,
+                           modifierMask,
+                           flags,
+                           flagMask); 
+
             KeyboardTranslator::Command command = KeyboardTranslator::NoCommand;
-
-            // get keycode and modifiers
-            if ( sequence.count() == 1 )
-            {
-                int code = sequence[0];
-
-                if ( code & Qt::SHIFT )
-                    modifiers |= Qt::ShiftModifier;
-                if ( code & Qt::CTRL )
-                    modifiers |= Qt::ControlModifier;
-                if ( code & Qt::ALT )
-                    modifiers |= Qt::AltModifier;
-                if ( code & Qt::META )
-                    modifiers |= Qt::MetaModifier;
-
-                keyCode = code & ~Qt::SHIFT & ~Qt::CTRL & ~Qt::ALT & ~Qt::META;
-            } 
+            QByteArray text;
 
             // get text or command
             if ( tokens[2].type == Token::OutputText )
@@ -202,9 +194,16 @@ void KeyboardTranslatorReader::readNext()
 
             }
 
+            KeyboardTranslator::Entry newEntry;
+            newEntry.setKeyCode( keyCode );
+            newEntry.setState( flags );
+            newEntry.setStateMask( flagMask );
+            newEntry.setModifiers( modifiers );
+            newEntry.setModifierMask( modifierMask );
+            newEntry.setText( text );
+            newEntry.setCommand( command );
 
-            _nextEntry = KeyboardTranslator::Entry(keyCode,(Qt::KeyboardModifier)modifiers,flags,text,command);
-
+            _nextEntry = newEntry; 
 
             _hasNext = true;
 
@@ -214,6 +213,129 @@ void KeyboardTranslatorReader::readNext()
 
     _hasNext = false;
 }
+
+bool KeyboardTranslatorReader::decodeSequence(const QString& text,
+                                              int& keyCode,
+                                              Qt::KeyboardModifier& modifiers,
+                                              Qt::KeyboardModifier& modifierMask,
+                                              KeyboardTranslator::State& flags,
+                                              KeyboardTranslator::State& flagMask)
+{
+    bool isWanted = true; 
+    bool endOfItem = false;
+    QString buffer;
+
+    int tempModifiers = modifiers;
+    int tempModifierMask = modifierMask;
+    int tempFlags = flags;
+    int tempFlagMask = flagMask;
+
+    for ( int i = 0 ; i < text.count() ; i++ )
+    {
+        const QChar& ch = text[i];
+        bool isLastLetter = ( i == text.count()-1 );
+
+        endOfItem = true;
+
+        if ( ch.isLetterOrNumber() )
+        {
+            endOfItem = false;
+
+            buffer.append(ch);
+        }
+        else if ( ch == '+' )
+           isWanted = true;
+        else if ( ch == '-' )
+           isWanted = false; 
+
+        if ( (endOfItem || isLastLetter) && !buffer.isEmpty() )
+        {
+            qDebug() << "Parsing item: " << buffer;
+
+            int itemModifier = 0;
+            int itemKeyCode = 0;
+            int itemFlag = 0;
+
+            if ( parseAsModifier(buffer,itemModifier) )
+            {
+                tempModifierMask |= itemModifier;
+
+                if ( isWanted )
+                    tempModifiers |= itemModifier;
+            }
+            else if ( parseAsStateFlag(buffer,itemFlag) )
+            {
+                tempFlagMask |= itemFlag;
+
+                if ( isWanted )
+                    tempFlags |= itemFlag;
+            }
+            else if ( parseAsKeyCode(buffer,itemKeyCode) )
+                keyCode = itemKeyCode;
+            else
+                qDebug() << "Unable to parse key binding item:" << buffer;
+
+            buffer.clear();
+        }
+    } 
+
+    modifiers = (Qt::KeyboardModifier)tempModifiers;
+    modifierMask = (Qt::KeyboardModifier)tempModifierMask;
+    flags = (KeyboardTranslator::State)tempFlags;
+    flagMask = (KeyboardTranslator::State)tempFlagMask;
+
+    return true;
+}
+
+bool KeyboardTranslatorReader::parseAsModifier(const QString& item , int& modifier)
+{
+    if ( item == "shift" )
+        modifier = Qt::ShiftModifier;
+    else if ( item == "ctrl" || item == "control" )
+        modifier = Qt::ControlModifier;
+    else if ( item == "alt" )
+        modifier = Qt::AltModifier;
+    else if ( item == "meta" )
+        modifier = Qt::MetaModifier;
+    else
+        return false;
+
+    return true;
+}
+bool KeyboardTranslatorReader::parseAsStateFlag(const QString& item , int& flag)
+{
+    if ( item == "appcukeys" )
+        flag = KeyboardTranslator::CursorKeysState;
+    else if ( item == "ansi" )
+        flag = KeyboardTranslator::AnsiState;
+    else if ( item == "newline" )
+        flag = KeyboardTranslator::NewLineState;
+    else if ( item == "appscreen" )
+        flag = KeyboardTranslator::AlternateScreenState;
+    else
+        return false;
+
+    return true;
+}
+bool KeyboardTranslatorReader::parseAsKeyCode(const QString& item , int& keyCode)
+{
+    QKeySequence sequence = QKeySequence::fromString(item);
+    if ( !sequence.isEmpty() )
+    {
+        keyCode = sequence[0];
+
+        if ( sequence.count() > 1 )
+        {
+            qDebug() << "Unhandled key codes in sequence: " << item;
+        }
+    }
+    else
+        return false;
+
+    return true;
+}
+
+#if 0
 QKeySequence KeyboardTranslatorReader::decodeSequence(const QString& text , KeyboardTranslator::State& stateFlags )
 {
     int state = KeyboardTranslator::NoState;
@@ -285,6 +407,8 @@ QKeySequence KeyboardTranslatorReader::decodeSequence(const QString& text , Keyb
 
     return sequence;
 }
+#endif 
+
 QString KeyboardTranslatorReader::description() const
 {
     return _description;
@@ -375,18 +499,6 @@ QList<QString> KeyboardTranslatorManager::allTranslators()
     return _translators.keys();
 }
 
-KeyboardTranslator::Entry::Entry( int keyCode,
-                                  Qt::KeyboardModifier modifiers,
-                                  State flags,
-                                  const QByteArray& text,
-                                  Command command )
-: _keyCode(keyCode)
-, _modifiers(modifiers)
-, _state(flags)
-, _command(command)
-, _text(text)
-{
-}
 KeyboardTranslator::Entry::Entry()
 : _keyCode(0)
 , _modifiers(Qt::NoModifier)
@@ -414,7 +526,16 @@ QKeySequence KeyboardTranslator::Entry::keySequence() const
 bool KeyboardTranslator::Entry::matches(int keyCode , Qt::KeyboardModifier modifiers,
                                         State state) const
 {
-    return false;
+    if ( _keyCode != keyCode )
+        return false;
+
+    if ( modifiers != ( _modifiers & _modifierMask ) )
+        return false;
+
+    if ( state != ( _state & _stateMask ) )
+        return false;
+
+    return true;
 }
 KeyboardTranslator::KeyboardTranslator(const QString& name)
 : _name(name)

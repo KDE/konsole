@@ -113,33 +113,59 @@ public:
     public:
         /** 
          * Constructs a new entry for a keyboard translator.
-         *
-         * @param keyCode A key code from the Qt::Key enum
-         * @param modifiers The combination of keyboard modifiers
-         * @param flags The state flags associated with this entry
-         * @param text The character sequence which should be sent to the terminal when
-         * the key sequence described by the @p keyCode, @p modifiers and @p state is activated.
-         * @param command The commands which should be executed when the key sequence 
-         * described by the @p keyCode, @p modifiers and @p state is activated.
          */
-        Entry( int keyCode , 
-               Qt::KeyboardModifier modifiers , 
-               State flags,
-               const QByteArray& text,
-               Command command );
         Entry();
 
         /** Returns the commands associated with this entry */
         Command command() const;
+        /** Sets the command associated with this entry. */
+        void setCommand(Command command);
+
         /** Returns the character sequence associated with this entry */
         QByteArray text() const;
+        /** Sets the character sequence associated with this entry */
+        void setText(const QByteArray& text);
 
         /** Returns the character code ( from the Qt::Key enum ) associated with this entry */
         int keyCode() const;
-        /** Returns the keyboard modifiers associated with this entry */
+        /** Sets the character code associated with this entry */
+        void setKeyCode(int keyCode);
+
+        /** 
+         * Returns the a bitwise-OR of the enabled keyboard modifiers associated with this entry. 
+         * If a modifier is set in modifierMask() but not in modifiers(), this means that the entry
+         * only matches when that modifier is NOT pressed.
+         *
+         * If a modifier is not set in modifierMask() then the entry matches whether the modifier
+         * is pressed or not. 
+         */
         Qt::KeyboardModifier modifiers() const;
-        /** Returns the state flags associated with this entry */
+
+        /** Returns the keyboard modifiers which are valid in this entry.  See modifiers() */
+        Qt::KeyboardModifier modifierMask() const;
+
+        /** See modifiers() */
+        void setModifiers( Qt::KeyboardModifier modifiers );
+        /** See modifierMask() and modifiers() */
+        void setModifierMask( Qt::KeyboardModifier modifiers );
+
+        /** 
+         * Returns a bitwise-OR of the enabled state flags associated with this entry. 
+         * If flag is set in stateMask() but not in state(), this means that the entry only 
+         * matches when the terminal is NOT in that state.
+         *
+         * If a state is not set in stateMask() then the entry matches whether the terminal
+         * is in that state or not. 
+         */
         State state() const;
+
+        /** Returns the state flags which are valid in this entry.  See state() */
+        State stateMask() const;
+
+        /** See state() */
+        void setState( State state );
+        /** See stateMask() */
+        void setStateMask( State mask );
 
         /** 
          * Returns the key code and modifiers associated with this entry 
@@ -157,7 +183,9 @@ public:
     private:
         int _keyCode;
         Qt::KeyboardModifier _modifiers;
+        Qt::KeyboardModifier _modifierMask;
         State _state;
+        State _stateMask;
 
         Command _command;
         QByteArray _text;
@@ -278,8 +306,17 @@ private:
     };
     QList<Token> tokenize(const QString&);
     void readNext();
-    QKeySequence decodeSequence(const QString& , KeyboardTranslator::State& stateFlags);
+    bool decodeSequence(const QString& , 
+                                int& keyCode,
+                                Qt::KeyboardModifier& modifiers,
+                                Qt::KeyboardModifier& modifiers,
+                                KeyboardTranslator::State& state,
+                                KeyboardTranslator::State& stateFlags);
 
+    bool parseAsModifier(const QString& item , int& modifier);
+    bool parseAsStateFlag(const QString& item , int& modifier);
+    bool parseAsKeyCode(const QString& item , int& modifier);
+    
     QIODevice* _source;
     QString _description;
     KeyboardTranslator::Entry _nextEntry;
@@ -353,26 +390,44 @@ private:
     static KeyboardTranslatorManager* _instance;
 };
 
-inline int KeyboardTranslator::Entry::keyCode() const
-{
-    return _keyCode;
+inline int KeyboardTranslator::Entry::keyCode() const { return _keyCode; }
+inline void KeyboardTranslator::Entry::setKeyCode(int keyCode) { _keyCode = keyCode; }
+
+inline void KeyboardTranslator::Entry::setModifiers( Qt::KeyboardModifier modifier ) 
+{ 
+    _modifiers = modifier;
 }
-inline Qt::KeyboardModifier KeyboardTranslator::Entry::modifiers() const
-{
-    return _modifiers;
+inline Qt::KeyboardModifier KeyboardTranslator::Entry::modifiers() const { return _modifiers; }
+
+inline void  KeyboardTranslator::Entry::setModifierMask( Qt::KeyboardModifier mask ) 
+{ 
+   _modifierMask = mask; 
 }
-inline KeyboardTranslator::Command KeyboardTranslator::Entry::command() const
-{
-    return _command;
+inline Qt::KeyboardModifier KeyboardTranslator::Entry::modifierMask() const { return _modifierMask; }
+
+inline void KeyboardTranslator::Entry::setCommand( Command command )
+{ 
+    _command = command; 
 }
-inline QByteArray KeyboardTranslator::Entry::text() const
-{
-    return _text;
+inline KeyboardTranslator::Command KeyboardTranslator::Entry::command() const { return _command; }
+
+inline void KeyboardTranslator::Entry::setText( const QByteArray& text )
+{ 
+    _text = text;
 }
-inline KeyboardTranslator::State KeyboardTranslator::Entry::state() const
-{
-    return _state;
+inline QByteArray KeyboardTranslator::Entry::text() const { return _text; }
+
+inline void KeyboardTranslator::Entry::setState( State state )
+{ 
+    _state = state; 
 }
+inline KeyboardTranslator::State KeyboardTranslator::Entry::state() const { return _state; }
+
+inline void KeyboardTranslator::Entry::setStateMask( State stateMask )
+{ 
+    _stateMask = stateMask; 
+}
+inline KeyboardTranslator::State KeyboardTranslator::Entry::stateMask() const { return _stateMask; }
 
 }
 
