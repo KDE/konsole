@@ -4,7 +4,7 @@
 install( FILES 
          BlackOnLightYellow.schema 
          BlackOnWhite.schema  	
-         GreenOnBlack.schema 
+         GreenOnBlack.colorscheme 
          WhiteOnBlack.schema  	
          Linux.colorscheme 
          DESTINATION 
