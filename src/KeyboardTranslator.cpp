@@ -625,7 +625,7 @@ QByteArray KeyboardTranslator::Entry::escapedText() const
 {
     QByteArray result(_text);
 
-    for ( int i = 0 ; i < result.count()-1 ; i++ )
+    for ( int i = 0 ; i < result.count() ; i++ )
     {
         char ch = result[i];
         char replacement = 0;
@@ -643,11 +643,9 @@ QByteArray KeyboardTranslator::Entry::escapedText() const
                     replacement = 'x';
         }
 
-        qDebug() << "a" << ch << "b";
-
         if ( replacement == 'x' )
         {
-            result.replace(i,1,'\\'+QByteArray(ch,1).toHex()); 
+            result.replace(i,1,"\\x"+QByteArray(1,ch).toHex()); 
         } else if ( replacement != 0 )
         {
             result.remove(i,1);
