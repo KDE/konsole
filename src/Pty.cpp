@@ -46,20 +46,22 @@ void Pty::donePty()
 
 void Pty::setWindowSize(int lines, int cols)
 {
-  wsX = cols;
-  wsY = lines;
+  _windowColumns = cols;
+  _windowLines = lines;
+
   if (pty()->masterFd() >= 0)
     pty()->setWinSize(lines, cols);
 }
 
-void Pty::setXonXoff(bool on)
+void Pty::setXonXoff(bool enable)
 {
-  xonXoff = on;
+  _xonXoff = enable;
+
   if (pty()->masterFd() >= 0)
   {
     struct ::termios ttmode;
     pty()->tcGetAttr(&ttmode);
-    if (!on)
+    if (!enable)
       ttmode.c_iflag &= ~(IXOFF | IXON);
     else
       ttmode.c_iflag |= (IXOFF | IXON);
@@ -68,15 +70,16 @@ void Pty::setXonXoff(bool on)
   }
 }
 
-void Pty::setUtf8Mode(bool on)
+void Pty::setUtf8Mode(bool enable)
 {
 #ifdef IUTF8 // XXX not a reasonable place to check it.
-  utf8 = on;
+  _utf8 = enable;
+
   if (pty()->masterFd() >= 0)
   {
     struct ::termios ttmode;
     pty()->tcGetAttr(&ttmode);
-    if (!on)
+    if (!enable)
       ttmode.c_iflag &= ~IUTF8;
     else
       ttmode.c_iflag |= IUTF8;
@@ -88,7 +91,8 @@ void Pty::setUtf8Mode(bool on)
 
 void Pty::setErase(char erase)
 {
-  this->erase = erase;
+  _eraseChar = erase;
+  
   if (pty()->masterFd() >= 0)
   {
     struct ::termios ttmode;
@@ -127,22 +131,25 @@ int Pty::start(const QString& program,
   setUsePty(All, addToUtmp);
 
   pty()->open();
+  
   struct ::termios ttmode;
   pty()->tcGetAttr(&ttmode);
-  if (!xonXoff)
+  if (!_xonXoff)
     ttmode.c_iflag &= ~(IXOFF | IXON);
   else
     ttmode.c_iflag |= (IXOFF | IXON);
 #ifdef IUTF8 // XXX not a reasonable place to check it.
-  if (!utf8)
+  if (!_utf8)
     ttmode.c_iflag &= ~IUTF8;
   else
     ttmode.c_iflag |= IUTF8;
 #endif
-  ttmode.c_cc[VERASE] = erase;
+  ttmode.c_cc[VERASE] = _eraseChar;
+  
   if (!pty()->tcSetAttr(&ttmode))
     qWarning("Unable to set terminal attributes.");
-  pty()->setWinSize(wsY, wsX);
+  
+  pty()->setWinSize(_windowLines, _windowColumns);
 
   if ( K3Process::start(NotifyOnExit, (Communication) (Stdin | Stdout)) == false )
      return -1;

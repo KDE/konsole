@@ -120,12 +120,24 @@ KeyboardTranslator* KeyBindingEditor::translator() const
 
 void KeyBindingEditor::bindingTableItemChanged(QTableWidgetItem* item)
 {
-   QString condition = _ui->keyBindingTable->item( item->row() , 0 )->text();
+   QTableWidgetItem* key = _ui->keyBindingTable->item( item->row() , 0 );
+   KeyboardTranslator::Entry existing = key->data(Qt::UserRole).value<KeyboardTranslator::Entry>();
+
+   QString condition = key->text();
    QString result = _ui->keyBindingTable->item( item->row() , 1 )->text();
 
    KeyboardTranslator::Entry entry = KeyboardTranslatorReader::createEntry(condition,result);
 
    qDebug() << "Created entry: " << entry.conditionToString() << " , " << entry.resultToString();
+
+    _translator->replaceEntry(existing,entry);
+
+    // block signals to prevent this slot from being called repeatedly
+   _ui->keyBindingTable->blockSignals(true);
+
+   key->setData(Qt::UserRole,QVariant::fromValue(existing));
+
+   _ui->keyBindingTable->blockSignals(false);
 }
 
 void KeyBindingEditor::setupKeyBindingTable(const KeyboardTranslator* translator)
@@ -142,6 +154,8 @@ void KeyBindingEditor::setupKeyBindingTable(const KeyboardTranslator* translator
         const KeyboardTranslator::Entry& entry = entries.at(row);
 
         QTableWidgetItem* keyItem = new QTableWidgetItem(entry.conditionToString());
+        keyItem->setData( Qt::UserRole , QVariant::fromValue(entry) );
+
         QTableWidgetItem* textItem = new QTableWidgetItem(QString(entry.resultToString()));
 
         _ui->keyBindingTable->setItem(row,0,keyItem);

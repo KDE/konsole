@@ -30,6 +30,7 @@
 #include <QtCore/QVarLengthArray>
 
 class QIODevice;
+class QTextStream;
 
 namespace Konsole
 {
@@ -201,6 +202,7 @@ public:
          */
         bool matches( int keyCode , Qt::KeyboardModifier modifiers , State flags ) const;
 
+        bool operator==(const Entry& rhs);
        
     private:
         void insertModifier( QString& item , int modifier ) const;
@@ -252,6 +254,16 @@ public:
      * to their key sequence using findEntry()
      */
     void addEntry(const Entry& entry);
+
+    /**
+     * Replaces an entry in the translator.
+     */
+    void replaceEntry(const Entry& existing , const Entry& replacement);
+
+    /**
+     * Removes an entry from the table.
+     */
+    void removeEntry(const Entry& entry);
 
     /** Returns a list of all entries in the translator. */
     QList<Entry> entries() const;
@@ -357,6 +369,30 @@ private:
     bool _hasNext;
 };
 
+/** Writes a keyboard translation to disk. */
+class KeyboardTranslatorWriter
+{
+public:
+    /** 
+     * Constructs a new writer which saves data into @p destination.
+     * The caller is responsible for closing the device when writing is complete.
+     */
+    KeyboardTranslatorWriter(QIODevice* destination);
+    ~KeyboardTranslatorWriter();
+
+    /** 
+     * Writes the header for the keyboard translator. 
+     * @param description Description of the keyboard translator. 
+     */
+    void writeHeader( const QString& description );
+    /** Writes a translator entry. */
+    void writeEntry( const KeyboardTranslator::Entry& entry ); 
+
+private:
+    QIODevice* _destination;  
+    QTextStream* _writer;
+};
+
 /**
  * Manages the keyboard translations available for use by terminal sessions,
  * see KeyboardTranslator.
@@ -413,6 +449,7 @@ private:
     KeyboardTranslator* loadTranslator(const QString& name); // loads the translator 
                                                              // with the given name
     
+    bool saveTranslator(const KeyboardTranslator* translator);
     QString findTranslatorPath(const QString& name);
     
     QHash<QString,KeyboardTranslator*> _translators; // maps translator-name -> KeyboardTranslator
@@ -465,6 +502,7 @@ inline KeyboardTranslator::State KeyboardTranslator::Entry::stateMask() const { 
 
 }
 
+Q_DECLARE_METATYPE(Konsole::KeyboardTranslator::Entry);
 Q_DECLARE_METATYPE(const Konsole::KeyboardTranslator*)
 
 #endif // KEYBOARDTRANSLATOR_H

@@ -1137,6 +1137,16 @@ FilterChain* TerminalDisplay::filterChain() const
 
 void TerminalDisplay::paintFilters(QPainter& painter)
 {
+    // get color of character under mouse and use it to draw
+    // lines for filters
+    QPoint cursorPos = mapFromGlobal(QCursor::pos());
+    int cursorLine;
+    int cursorColumn;
+    characterPosition( cursorPos , cursorLine , cursorColumn );
+    Character cursorCharacter = _image[loc(cursorColumn,cursorLine)];
+
+    painter.setPen( QPen(cursorCharacter.foregroundColor.color(colorTable())) );
+
     // iterate over hotspots identified by the display's currently active filters 
     // and draw appropriate visuals to indicate the presence of the hotspot
 

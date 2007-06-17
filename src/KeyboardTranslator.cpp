@@ -84,6 +84,37 @@ const KeyboardTranslator* KeyboardTranslatorManager::findTranslator(const QStrin
     return translator;
 }
 
+bool KeyboardTranslatorManager::saveTranslator(const KeyboardTranslator* translator)
+{
+    const QString path = KGlobal::dirs()->saveLocation("data","konsole/")+translator->name()
+           +".keytab";
+
+    qDebug() << "Saving translator to" << path;
+
+    QFile destination(path);
+    
+    if (!destination.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        qWarning() << "Unable to save keyboard translation:" 
+                   << destination.errorString();
+
+        return false;
+    }
+
+    {
+        KeyboardTranslatorWriter writer(&destination);
+        writer.writeHeader(translator->description());
+    
+        QListIterator<KeyboardTranslator::Entry> iter(translator->entries());
+        while ( iter.hasNext() )
+            writer.writeEntry(iter.next());
+    }
+
+    destination.close();
+
+    return true;
+}
+
 KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(const QString& name)
 {
     KeyboardTranslator* translator = new KeyboardTranslator(name);
@@ -91,7 +122,7 @@ KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(const QString& nam
     const QString& path = findTranslatorPath(name);
 
     QFile source(path); 
-    source.open(QIODevice::ReadOnly);
+    source.open(QIODevice::ReadOnly | QIODevice::Text);
 
     KeyboardTranslatorReader reader(&source);
     translator->setDescription( reader.description() );
@@ -109,6 +140,33 @@ KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(const QString& nam
         delete translator;
         return 0;
     }
+}
+
+KeyboardTranslatorWriter::KeyboardTranslatorWriter(QIODevice* destination)
+: _destination(destination)
+{
+    Q_ASSERT( destination && destination->isWritable() );
+
+    _writer = new QTextStream(_destination);
+}
+KeyboardTranslatorWriter::~KeyboardTranslatorWriter()
+{
+    delete _writer;
+}
+void KeyboardTranslatorWriter::writeHeader( const QString& description )
+{
+    *_writer << "keyboard \"" << description << '\"' << '\n';
+}
+void KeyboardTranslatorWriter::writeEntry( const KeyboardTranslator::Entry& entry )
+{
+    QString result;
+
+    if ( entry.command() != KeyboardTranslator::NoCommand )
+        result = entry.resultToString();
+    else
+        result = '\"' + entry.resultToString() + '\"';
+
+    *_writer << "key " << entry.conditionToString() << " : " << result << '\n';
 }
 
 
@@ -578,6 +636,17 @@ QKeySequence KeyboardTranslator::Entry::keySequence() const
 }
 #endif 
 
+bool KeyboardTranslator::Entry::operator==(const Entry& rhs)
+{
+    return _keyCode == rhs._keyCode &&
+           _modifiers == rhs._modifiers &&
+           _modifierMask == rhs._modifierMask &&
+           _state == rhs._state &&
+           _stateMask == rhs._stateMask &&
+           _command == rhs._command &&
+           _text == rhs._text;
+}
+
 bool KeyboardTranslator::Entry::matches(int keyCode , Qt::KeyboardModifier modifiers,
                                         State state) const
 {
@@ -639,6 +708,8 @@ QByteArray KeyboardTranslator::Entry::escapedText() const
             case 13 : replacement = 'r'; break;
             case 10 : replacement = 'n'; break;
             default:
+                // any character which is not printable is replaced by an equivalent
+                // \xhh escape sequence (where 'hh' are the corresponding hex digits)
                 if ( !QChar(ch).isPrint() )
                     replacement = 'x';
         }
@@ -828,7 +899,15 @@ void KeyboardTranslator::addEntry(const Entry& entry)
     const int keyCode = entry.keyCode();
     _entries.insert(keyCode,entry);
 }
-
+void KeyboardTranslator::replaceEntry(const Entry& existing , const Entry& replacement)
+{
+    _entries.remove(existing.keyCode(),existing);
+    _entries.insert(replacement.keyCode(),replacement);
+}
+void KeyboardTranslator::removeEntry(const Entry& entry)
+{
+    _entries.remove(entry.keyCode(),entry);
+}
 KeyboardTranslator::Entry KeyboardTranslator::findEntry(int keyCode, Qt::KeyboardModifier modifiers, State state) const
 {
     //qDebug() << "Searching for entry for key code =" << keyCode << ", modifiers =" << modifiers;
@@ -860,11 +939,24 @@ KeyboardTranslator::Entry KeyboardTranslator::findEntry(int keyCode, Qt::Keyboar
 }
 void KeyboardTranslatorManager::addTranslator(KeyboardTranslator* translator)
 {
-    qWarning() << __FUNCTION__ << ": Not implemented";
+    _translators.insert(translator->name(),translator);
+
+    if ( !saveTranslator(translator) )
+        qWarning() << "Unable to save translator" << translator->name()
+                   << "to disk.";
 }
 void KeyboardTranslatorManager::deleteTranslator(const QString& name)
 {
-    qWarning() << __FUNCTION__ << ": Not implemented";
+    Q_ASSERT( _translators.contains(name) );
+
+    _translators.remove(name);
+
+    // locate and delete
+    QString path = findTranslatorPath(name);
+    if ( QFile::remove(path) )
+        qDebug() << "Removed translator - " << path;
+    else
+        qDebug() << "Failed to remove translator - " << path;
 }
 void KeyboardTranslatorManager::setInstance(KeyboardTranslatorManager* instance)
 {

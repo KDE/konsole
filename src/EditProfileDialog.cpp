@@ -652,6 +652,7 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
         if ( isNewTranslator )
             newTranslator->setName(newTranslator->description());
 
+        qDebug() << "Adding new or modified translator to manager";
         KeyboardTranslatorManager::instance()->addTranslator( newTranslator );
 
         updateKeyBindingsList();

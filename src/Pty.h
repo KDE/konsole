@@ -210,9 +210,11 @@ Q_OBJECT
     QList<SendJob> _pendingSendJobs;
     bool _bufferFull;
 
-    int wsX, wsY;
-    char erase;
-    bool xonXoff, utf8;
+    int  _windowColumns; 
+    int  _windowLines;
+    char _eraseChar;
+    bool _xonXoff;
+    bool _utf8;
 };
 
 }
