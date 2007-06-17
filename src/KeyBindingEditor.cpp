@@ -50,6 +50,8 @@ KeyBindingEditor::KeyBindingEditor(QWidget* parent)
     _ui->keyBindingTable->horizontalHeader()->setStretchLastSection(true);
     _ui->keyBindingTable->verticalHeader()->hide();
 
+    
+    // test area
     _ui->testAreaInputEdit->installEventFilter(this);
 }
 
@@ -116,8 +118,21 @@ KeyboardTranslator* KeyBindingEditor::translator() const
     return _translator;
 }
 
+void KeyBindingEditor::bindingTableItemChanged(QTableWidgetItem* item)
+{
+   QString condition = _ui->keyBindingTable->item( item->row() , 0 )->text();
+   QString result = _ui->keyBindingTable->item( item->row() , 1 )->text();
+
+   KeyboardTranslator::Entry entry = KeyboardTranslatorReader::createEntry(condition,result);
+
+   qDebug() << "Created entry: " << entry.conditionToString() << " , " << entry.resultToString();
+}
+
 void KeyBindingEditor::setupKeyBindingTable(const KeyboardTranslator* translator)
 {
+    disconnect( _ui->keyBindingTable , SIGNAL(itemChanged(QTableWidgetItem*)) , this , 
+            SLOT(bindingTableItemChanged(QTableWidgetItem*)) );
+
     QList<KeyboardTranslator::Entry> entries = translator->entries();
     _ui->keyBindingTable->setRowCount(entries.count());
     qDebug() << "Keyboard translator has" << entries.count() << "entries.";
@@ -133,6 +148,9 @@ void KeyBindingEditor::setupKeyBindingTable(const KeyboardTranslator* translator
         _ui->keyBindingTable->setItem(row,1,textItem);
     }
     _ui->keyBindingTable->sortItems(0);
+
+    connect( _ui->keyBindingTable , SIGNAL(itemChanged(QTableWidgetItem*)) , this , 
+            SLOT(bindingTableItemChanged(QTableWidgetItem*)) );
 }
 
 #include "KeyBindingEditor.moc"

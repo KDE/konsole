@@ -30,7 +30,6 @@
 // Konsole
 #include "ColorScheme.h"
 #include "Emulation.h"
-#include "KeyTrans.h"
 #include "KeyboardTranslator.h"
 #include "Session.h"
 #include "SessionController.h"
@@ -70,8 +69,6 @@ Part::Part(QWidget* parentWidget , QObject* parent)
         ColorSchemeManager::setInstance( new ColorSchemeManager() );
     if ( KeyboardTranslatorManager::instance() == 0 )
         KeyboardTranslatorManager::setInstance( new KeyboardTranslatorManager() );
-
-    KeyTrans::loadAll();
 
     // create view widget
     _viewManager = new ViewManager(this,actionCollection());

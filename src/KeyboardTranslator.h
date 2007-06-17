@@ -197,6 +197,7 @@ public:
     private:
         void insertModifier( QString& item , int modifier ) const;
         void insertState( QString& item , int state ) const;
+        QByteArray unescape(const QByteArray& text) const;
 
         int _keyCode;
         Qt::KeyboardModifier _modifiers;
@@ -306,6 +307,14 @@ public:
      */
     bool parseError();
 
+    /**
+     * Parses a condition and result string for a translator entry
+     * and produces a keyboard translator entry.
+     *
+     * The condition and result strings are in the same format as in  
+     */
+    static KeyboardTranslator::Entry createEntry( const QString& condition ,
+                                                  const QString& result );
 private:
     struct Token
     {
@@ -330,9 +339,9 @@ private:
                                 KeyboardTranslator::State& state,
                                 KeyboardTranslator::State& stateFlags);
 
-    bool parseAsModifier(const QString& item , int& modifier);
-    bool parseAsStateFlag(const QString& item , int& modifier);
-    bool parseAsKeyCode(const QString& item , int& modifier);
+    static bool parseAsModifier(const QString& item , int& modifier);
+    static bool parseAsStateFlag(const QString& item , int& modifier);
+    static bool parseAsKeyCode(const QString& item , int& modifier);
     
     QIODevice* _source;
     QString _description;
@@ -430,7 +439,7 @@ inline KeyboardTranslator::Command KeyboardTranslator::Entry::command() const { 
 
 inline void KeyboardTranslator::Entry::setText( const QByteArray& text )
 { 
-    _text = text;
+    _text = unescape(text);
 }
 inline QByteArray KeyboardTranslator::Entry::text() const { return _text; }
 

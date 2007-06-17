@@ -89,7 +89,7 @@
 #include <kdebug.h>
 
 // Konsole
-#include "KeyTrans.h"
+#include "KeyboardTranslator.h"
 #include "Screen.h"
 #include "TerminalCharacterDecoder.h"
 #include "ScreenWindow.h"
@@ -213,12 +213,12 @@ void Emulation::setCodec(EmulationCodec codec)
 
 void Emulation::setKeyBindings(const QString &id)
 {
-  _keyTranslator = KeyTrans::find(id);
+  _keyTranslator = KeyboardTranslatorManager::instance()->findTranslator(id);
 }
 
 QString Emulation::keyBindings()
 {
-  return _keyTranslator->id();
+  return _keyTranslator->name();
 }
 
 

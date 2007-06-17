@@ -33,11 +33,11 @@
 #include <QtCore/QTextStream>
 #include <QtCore/QTimer>
 
-class KeyTrans;
 
 namespace Konsole
 {
 
+class KeyboardTranslator;
 class HistoryType;
 class Screen;
 class ScreenWindow;
@@ -404,7 +404,7 @@ protected:
   const QTextCodec* _codec;
   QTextDecoder* _decoder;
 
-  KeyTrans* _keyTranslator; // the keyboard layout
+  const KeyboardTranslator* _keyTranslator; // the keyboard layout
 
 protected slots:
   /** 

@@ -64,7 +64,6 @@ set(konsole_KDEINIT_SRCS
         IncrementalSearchBar.cpp
         KeyboardTranslator.cpp
         KeyBindingEditor.cpp
-        KeyTrans.cpp
         Application.cpp
         BookmarkHandler.cpp
         MainWindow.cpp
@@ -147,7 +146,6 @@ set(konsolepart_PART_SRCS
    HistorySizeDialog.cpp
    IncrementalSearchBar.cpp
    KeyBindingEditor.cpp 
-   KeyTrans.cpp 
    KeyboardTranslator.cpp
    MainWindow.cpp
    Part.cpp

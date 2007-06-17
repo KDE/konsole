@@ -37,7 +37,6 @@
 #include "ColorScheme.h"
 #include "ProfileList.h"
 #include "SessionManager.h"
-#include "KeyTrans.h"
 #include "KeyboardTranslator.h"
 #include "MainWindow.h"
 #include "Session.h"
@@ -72,10 +71,6 @@ void Application::init()
 
     // new keyboard translator manager
     KeyboardTranslatorManager::setInstance( new KeyboardTranslatorManager() );
-
-    // old keyboard translator manager
-    // (for use until the new one is completed)
-    KeyTrans::loadAll();
 
     // check for compositing functionality
     TerminalDisplay::setTransparencyEnabled( KWindowSystem::compositingActive() );

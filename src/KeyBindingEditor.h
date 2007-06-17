@@ -23,6 +23,8 @@
 // Qt
 #include <QtGui/QWidget>
 
+class QTableWidgetItem;
+
 namespace Ui
 {
     class KeyBindingEditor;
@@ -80,6 +82,9 @@ public slots:
      * Sets the text of the editor's description field.
      */
     void setDescription(const QString& description);
+
+private slots:
+    void bindingTableItemChanged(QTableWidgetItem* item);
 
 private:
     void setupKeyBindingTable(const KeyboardTranslator* translator);

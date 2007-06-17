@@ -23,14 +23,16 @@
 #include "KeyboardTranslator.h"
 
 // System
+#include <ctype.h>
 #include <stdio.h>
 
 // Qt
+#include <QtCore/QBuffer>
+#include <QtCore/QDebug>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
-#include <QtGui/QKeySequence>
 #include <QtCore/QTextStream>
-#include <QtCore/QDebug>
+#include <QtGui/QKeySequence>
 
 // KDE
 #include <KStandardDirs>
@@ -203,7 +205,12 @@ void KeyboardTranslatorReader::readNext()
             newEntry.setText( text );
             newEntry.setCommand( command );
 
-            _nextEntry = newEntry; 
+            _nextEntry = newEntry;
+
+            //qDebug() << "Any modifier state: " << (int)(flags & KeyboardTranslator::AnyModifierState);
+            //qDebug() << "Any modifier mask: " << (int)(flagMask & KeyboardTranslator::AnyModifierState);
+
+           // qDebug() << "Parsed entry:" << _nextEntry.conditionToString(); 
 
             _hasNext = true;
 
@@ -230,23 +237,19 @@ bool KeyboardTranslatorReader::decodeSequence(const QString& text,
     int tempFlags = flags;
     int tempFlagMask = flagMask;
 
+  //  qDebug() << "Input text:" << text;
+
     for ( int i = 0 ; i < text.count() ; i++ )
     {
         const QChar& ch = text[i];
         bool isLastLetter = ( i == text.count()-1 );
 
         endOfItem = true;
-
         if ( ch.isLetterOrNumber() )
         {
             endOfItem = false;
-
             buffer.append(ch);
         }
-        else if ( ch == '+' )
-           isWanted = true;
-        else if ( ch == '-' )
-           isWanted = false; 
 
         if ( (endOfItem || isLastLetter) && !buffer.isEmpty() )
         {
@@ -263,6 +266,16 @@ bool KeyboardTranslatorReader::decodeSequence(const QString& text,
             }
             else if ( parseAsStateFlag(buffer,itemFlag) )
             {
+#if 0
+                if ( itemFlag == KeyboardTranslator::AnyModifierState )
+                {
+                    qDebug() << "Flag mask: " << (int)(tempFlagMask & KeyboardTranslator::AnyModifierState);
+                    qDebug() << "Flags: " << (int)(tempFlags & KeyboardTranslator::AnyModifierState);
+                
+                    qDebug() << "Wanted: " << isWanted;
+                }
+#endif
+
                 tempFlagMask |= itemFlag;
 
                 if ( isWanted )
@@ -275,6 +288,13 @@ bool KeyboardTranslatorReader::decodeSequence(const QString& text,
 
             buffer.clear();
         }
+
+        // check if this is a wanted / not-wanted flag and update the 
+        // state ready for the next item
+        if ( ch == '+' )
+           isWanted = true;
+        else if ( ch == '-' )
+           isWanted = false; 
     } 
 
     modifiers = (Qt::KeyboardModifier)tempModifiers;
@@ -422,6 +442,32 @@ bool KeyboardTranslatorReader::hasNextEntry()
 {
     return _hasNext;
 }
+KeyboardTranslator::Entry KeyboardTranslatorReader::createEntry( const QString& condition , 
+                                                                 const QString& result )
+{
+    // TODO - Handle case where the result is a command, eg "ScrollLineUp" or "ScrollPageDown" and 
+    // should therefore not be surrounded by quotes
+
+    QString entryString("keyboard \"temporary\"\nkey ");
+    entryString.append(condition);
+    entryString.append(" : \"");
+    entryString.append(result);
+    entryString.append('\"');
+
+    QByteArray array = entryString.toUtf8();
+
+    KeyboardTranslator::Entry entry;
+
+    QBuffer buffer(&array);
+    buffer.open(QIODevice::ReadOnly);
+    KeyboardTranslatorReader reader(&buffer);
+
+    if ( reader.hasNextEntry() )
+        entry = reader.nextEntry();
+
+    return entry;
+}
+
 KeyboardTranslator::Entry KeyboardTranslatorReader::nextEntry() 
 {
     Q_ASSERT( _hasNext );
@@ -507,7 +553,9 @@ QList<QString> KeyboardTranslatorManager::allTranslators()
 KeyboardTranslator::Entry::Entry()
 : _keyCode(0)
 , _modifiers(Qt::NoModifier)
+, _modifierMask(Qt::NoModifier)
 , _state(NoState)
+, _stateMask(NoState)
 , _command(NoCommand)
 {
 }
@@ -533,6 +581,8 @@ QKeySequence KeyboardTranslator::Entry::keySequence() const
 bool KeyboardTranslator::Entry::matches(int keyCode , Qt::KeyboardModifier modifiers,
                                         State state) const
 {
+
+    //qDebug() << "Checking for match" << conditionToString();
     //qDebug() << "Checking entry.  test key code = " << keyCode << " entry key code =" << _keyCode;
 
     if ( _keyCode != keyCode )
@@ -567,10 +617,63 @@ bool KeyboardTranslator::Entry::matches(int keyCode , Qt::KeyboardModifier modif
             return false;
     }
 
-    //qDebug() << "Entry matches";
+    //qDebug() << "Entry matches" << conditionToString();
 
     return true;
 }
+QByteArray KeyboardTranslator::Entry::unescape(const QByteArray& input) const
+{
+    QByteArray result(input);
+
+    for ( int i = 0 ; i < result.count()-1 ; i++ )
+    {
+
+        QByteRef ch = result[i];
+        if ( ch == '\\' )
+        {
+           char replacement[2] = {0,0};
+           int charsToRemove = 2;
+
+           switch ( result[i+1] )
+           {
+              case 'E' : replacement[0] = 27; break;
+              case 'b' : replacement[0] = 8 ; break;
+              case 'f' : replacement[0] = 12; break;
+              case 't' : replacement[0] = 9 ; break;
+              case 'r' : replacement[0] = 13; break;
+              case 'n' : replacement[0] = 10; break;
+              case 'x' :
+                    // format is \xh or \xhh where 'h' is a hexadecimal
+                    // digit from 0-9 or A-F which should be replaced
+                    // with the corresponding character value
+                    char hexDigits[3] = {0};
+
+                    if ( (i < result.count()-2) && isxdigit(result[i+2]) )
+                            hexDigits[0] = result[i+2];
+                    if ( (i < result.count()-3) && isxdigit(result[i+3]) )
+                            hexDigits[1] = result[i+3];
+
+                    int charValue = 0;
+                    sscanf(hexDigits,"%x",&charValue);
+                    
+                    replacement[0] = (char)charValue; 
+
+                    charsToRemove = 2 + strlen(hexDigits);
+              break;
+           }
+
+           if ( replacement[0] != '\0' )
+               result.replace(i,charsToRemove,replacement);
+        }
+    }
+
+    //qDebug() << "Unescaped" << input;
+    //for ( int i = 0 ; i < result.count() ; i++ )
+    //    qDebug() << (int)result[i] << ";" << result[i];
+
+    return result;
+}
+
 void KeyboardTranslator::Entry::insertModifier( QString& item , int modifier ) const
 {
     if ( !(modifier & _modifierMask) )

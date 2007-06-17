@@ -21,7 +21,6 @@
 // Own
 #include "Vt102Emulation.h"
 
-
 #include <config-konsole.h>
 
 
@@ -50,7 +49,7 @@
 #include <klocale.h>
 
 // Konsole
-#include "KeyTrans.h"
+#include "KeyboardTranslator.h"
 #include "Screen.h"
 
 #if defined(HAVE_XKB)
@@ -962,11 +961,40 @@ void Vt102Emulation::sendText( const QString& text )
 
 }
 
-/*
-   Keyboard event handling has been simplified somewhat by pushing
-   the complications towards a configuration file [see KeyTrans class].
-*/
+void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
+{
+    int modifiers = event->modifiers();
+    int states = KeyboardTranslator::NoState;
 
+    // get current states
+    if ( getMode(MODE_NewLine)  ) states |= KeyboardTranslator::NewLineState;
+    if ( getMode(MODE_Ansi)     ) states |= KeyboardTranslator::AnsiState;
+    if ( getMode(MODE_AppCuKeys)) states |= KeyboardTranslator::CursorKeysState;
+    if ( getMode(MODE_AppScreen)) states |= KeyboardTranslator::AlternateScreenState;
+
+    // lookup key binding
+    KeyboardTranslator::Entry entry = _keyTranslator->findEntry( event->key() , 
+                                                                (Qt::KeyboardModifier)modifiers,
+                                                                (KeyboardTranslator::State)states );
+
+    // send result to terminal
+    QByteArray textToSend;
+
+    if ( entry.command() != KeyboardTranslator::NoCommand )
+    {
+        // TODO command handling
+    }
+    else if ( !entry.text().isEmpty() ) 
+    {
+        textToSend = _codec->fromUnicode(entry.text());
+    }
+    else
+        textToSend = _codec->fromUnicode(event->text());
+
+    sendData( textToSend.constData() , textToSend.length() );
+}
+
+#if 0
 void Vt102Emulation::sendKeyEvent( QKeyEvent* ev )
 {
 //printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().length(),ev->text().length()?ev->text().ascii()[0]:0);
@@ -1026,6 +1054,7 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* ev )
     return;
   }
 }
+#endif
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
@@ -1272,14 +1301,18 @@ bool Vt102Emulation::getMode(int m)
 
 char Vt102Emulation::getErase() const
 {
-  int cmd = CMD_none; 
+  int cmd = KeyboardTranslator::NoCommand; //CMD_none; 
   QByteArray txt; 
   bool metaspecified;
-  
+ 
+#warning "Reimplement getErase() with new keyboard translator."
+
+#if 0 
   if (_keyTranslator->findEntry(Qt::Key_Backspace, 0, &cmd, txt,
       &metaspecified) && (cmd==CMD_send) && (txt.length() == 1))
     return txt[0];
-    
+#endif  
+
   return '\b';
 }
 
