@@ -98,8 +98,6 @@ Q_OBJECT
 
     /** 
      * Enables or disables Xon/Xoff flow control.
-     *
-     * See KPty::setXonXoff()
      */
     void setXonXoff(bool on);
 
@@ -129,8 +127,6 @@ Q_OBJECT
 
     /**
      * Put the pty into UTF-8 mode on systems which support it.
-     *
-     * See KPty::setUtf8Mode()
      */
     void setUtf8Mode(bool on);
 
@@ -213,6 +209,10 @@ Q_OBJECT
 
     QList<SendJob> _pendingSendJobs;
     bool _bufferFull;
+
+    int wsX, wsY;
+    char erase;
+    bool xonXoff, utf8;
 };
 
 }

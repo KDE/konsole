@@ -272,6 +272,7 @@ void Session::run()
   if (!_initialWorkingDir.isEmpty())
      QDir::setCurrent(_initialWorkingDir);
   _shellProcess->setXonXoff(_flowControl);
+  _shellProcess->setErase(_emulation->getErase());
 
   int result = _shellProcess->start(QFile::encodeName(_program), 
                                   arguments, 
@@ -287,7 +288,6 @@ void Session::run()
     return;
     //QTimer::singleShot(0, this, SLOT(ptyError()));
   }
-  _shellProcess->setErase(_emulation->getErase());
 
   if (!_initialWorkingDir.isEmpty())
      QDir::setCurrent(cwd_save);

@@ -46,32 +46,57 @@ void Pty::donePty()
 
 void Pty::setWindowSize(int lines, int cols)
 {
-  pty()->setWinSize(lines, cols);
+  wsX = cols;
+  wsY = lines;
+  if (pty()->masterFd() >= 0)
+    pty()->setWinSize(lines, cols);
 }
 
 void Pty::setXonXoff(bool on)
 {
-  pty()->setXonXoff(on);
+  xonXoff = on;
+  if (pty()->masterFd() >= 0)
+  {
+    struct ::termios ttmode;
+    pty()->tcGetAttr(&ttmode);
+    if (!on)
+      ttmode.c_iflag &= ~(IXOFF | IXON);
+    else
+      ttmode.c_iflag |= (IXOFF | IXON);
+    if (!pty()->tcSetAttr(&ttmode))
+      qWarning("Unable to set terminal attributes.");
+  }
 }
 
 void Pty::setUtf8Mode(bool on)
 {
-  pty()->setUtf8Mode(on);
+#ifdef IUTF8 // XXX not a reasonable place to check it.
+  utf8 = on;
+  if (pty()->masterFd() >= 0)
+  {
+    struct ::termios ttmode;
+    pty()->tcGetAttr(&ttmode);
+    if (!on)
+      ttmode.c_iflag &= ~IUTF8;
+    else
+      ttmode.c_iflag |= IUTF8;
+    if (!pty()->tcSetAttr(&ttmode))
+      qWarning("Unable to set terminal attributes.");
+  }
+#endif
 }
 
 void Pty::setErase(char erase)
 {
-  struct termios tios;
-  int fd = pty()->slaveFd();
-  
-  if(tcgetattr(fd, &tios))
+  this->erase = erase;
+  if (pty()->masterFd() >= 0)
   {
-    qWarning("Unable to get terminal attributes.");
-    return;
+    struct ::termios ttmode;
+    pty()->tcGetAttr(&ttmode);
+    ttmode.c_cc[VERASE] = erase;
+    if (!pty()->tcSetAttr(&ttmode))
+      qWarning("Unable to set terminal attributes.");
   }
-  tios.c_cc[VERASE] = erase;
-  if(tcsetattr(fd, TCSANOW, &tios))
-    qWarning("Unable to set terminal attributes.");
 }
 
 int Pty::start(const QString& program, 
@@ -100,6 +125,24 @@ int Pty::start(const QString& program,
   setEnvironment("WINDOWID", QString::number(winid));
 
   setUsePty(All, addToUtmp);
+
+  pty()->open();
+  struct ::termios ttmode;
+  pty()->tcGetAttr(&ttmode);
+  if (!xonXoff)
+    ttmode.c_iflag &= ~(IXOFF | IXON);
+  else
+    ttmode.c_iflag |= (IXOFF | IXON);
+#ifdef IUTF8 // XXX not a reasonable place to check it.
+  if (!utf8)
+    ttmode.c_iflag &= ~IUTF8;
+  else
+    ttmode.c_iflag |= IUTF8;
+#endif
+  ttmode.c_cc[VERASE] = erase;
+  if (!pty()->tcSetAttr(&ttmode))
+    qWarning("Unable to set terminal attributes.");
+  pty()->setWinSize(wsY, wsX);
 
   if ( K3Process::start(NotifyOnExit, (Communication) (Stdin | Stdout)) == false )
      return -1;

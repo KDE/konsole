@@ -267,8 +267,6 @@ signals:
    * Requests that the pty used by the terminal process
    * be set to UTF 8 mode.  
    *
-   * See KPty::setUtf8Mode()
-   *
    * TODO: More documentation
    */
   void useUtf8Request(bool);
