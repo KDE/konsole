@@ -128,7 +128,7 @@ Q_OBJECT
   public slots:
 
     /**
-     * Put the pty into utf8 mode on systems which support it.
+     * Put the pty into UTF-8 mode on systems which support it.
      *
      * See KPty::setUtf8Mode()
      */

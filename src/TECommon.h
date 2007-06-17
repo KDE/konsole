@@ -1,5 +1,5 @@
 /*
-    This file is part of Konsole, an X terminal.
+    This file is part of Konsole, KDE's terminal.
     
     Copyright (C) 2007 by Robert Knight <robertknight@gmail.com>
     Copyright (C) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
@@ -20,10 +20,6 @@
     02110-1301  USA.
 */
 
-/*! \file TECommon.h
-    \brief Definitions shared between Screen and TerminalDisplay.
-*/
-
 #ifndef TECOMMON_H
 #define TECOMMON_H
 
@@ -42,25 +38,60 @@ typedef unsigned char UINT8;
 typedef unsigned short UINT16;
 #endif
 
-// Color Table Elements ///////////////////////////////////////////////
-
-/*!
-*/
+/** 
+ * An entry in a terminal display's color palette. 
+ *
+ * A color palette is an array of 16 ColorEntry instances which map
+ * system color indexes (from 0 to 15) into actual colors.
+ *
+ * Each entry can be set as bold, in which case any text
+ * drawn using the color should be drawn in bold.  
+ *
+ * Each entry can also be transparent, in which case the terminal
+ * display should avoid drawing the background for any characters
+ * using the entry as a background.
+ */
 class ColorEntry
 {
 public:
+  /** 
+   * Constructs a new color palette entry.
+   *
+   * @param c The color value for this entry.
+   * @param tr Specifies that the color should be transparent when used as a background color.
+   * @param b Specifies that text drawn with this color should be bold.
+   */
   ColorEntry(QColor c, bool tr, bool b) : color(c), transparent(tr), bold(b) {}
-  ColorEntry() : transparent(false), bold(false) {} // default constructors
-  
+
+  /**
+   * Constructs a new color palette entry with an undefined color, and
+   * with the transparent and bold flags set to false.
+   */ 
+  ColorEntry() : transparent(false), bold(false) {} 
+ 
+  /**
+   * Sets the color, transparency and boldness of this color to those of @p rhs.
+   */ 
   void operator=(const ColorEntry& rhs) 
   { 
        color = rhs.color; 
        transparent = rhs.transparent; 
        bold = rhs.bold; 
   }
+
+  /** The color value of this entry for display. */
   QColor color;
-  bool   transparent; // applies if color is used in background
-  bool   bold;        // applies if color is used in foreground
+
+  /** 
+   * If true character backgrounds using this color should be transparent. 
+   * This is not applicable when the color is used to render text.
+   */
+  bool   transparent;
+  /**
+   * If true characters drawn using this color should be bold.
+   * This is not applicable when the color is used to draw a character's background.
+   */
+  bool   bold;        
 };
 
 
@@ -187,11 +218,15 @@ static const int LINE_DOUBLEHEIGHT	= (1 << 2);
 #define COLOR_SPACE_256         3
 #define COLOR_SPACE_RGB         4
 
+/**
+ * Describes the color of a single character in the terminal.
+ */
 class CharacterColor
 {
     friend class Character;
 
 public:
+  /** Constructs a new CharacterColor whoose color and color space are undefined. */
   CharacterColor() 
       : _colorSpace(COLOR_SPACE_UNDEFINED), 
         _u(0), 
@@ -199,6 +234,16 @@ public:
         _w(0) 
   {}
 
+  /** 
+   * Constructs a new CharacterColor using the specified @p colorSpace and with 
+   * color value @p co
+   *
+   * The meaning of @p co depends on the @p colorSpace used.
+   *
+   * TODO : Document how @p co relates to @p colorSpace
+   *
+   * TODO : Add documentation about available color spaces.
+   */
   CharacterColor(UINT8 colorSpace, int co) 
       : _colorSpace(colorSpace), 
         _u(0), 
@@ -227,10 +272,32 @@ public:
     }
   }
     
-  void toggleIntensive(); // Hack or helper?
-  QColor color(const ColorEntry* base) const;
-  
+  /** 
+   * Toggles the value of this color between a normal system color and the corresponding intensive
+   * system color.
+   * 
+   * This is only applicable if the color is using the COLOR_SPACE_DEFAULT or COLOR_SPACE_SYSTEM
+   * color spaces.
+   */
+  void toggleIntensive();
+
+  /** 
+   * Returns the color within the specified color @palette
+   *
+   * The @p palette is only used if this color is one of the 16 system colors, otherwise
+   * it is ignored.
+   */
+  QColor color(const ColorEntry* palette) const;
+ 
+  /** 
+   * Compares two colors and returns true if they represent the same color value and
+   * use the same color space.
+   */
   friend bool operator == (const CharacterColor& a, const CharacterColor& b);
+  /**
+   * Compares two colors and returns true if they represent different color values
+   * or use different color spaces.
+   */
   friend bool operator != (const CharacterColor& a, const CharacterColor& b);
 
 private:
@@ -293,37 +360,71 @@ inline void CharacterColor::toggleIntensive()
   }
 }
 
-/*! \class Character
- *  \brief a character with rendition attributes.
-*/
-
+/**
+ * A single character in the terminal which consists of a unicode character
+ * value, foreground and background colors and a set of rendition attributes
+ * which specify how it should be drawn.
+ */
 class Character
 {
 public:
+  /** 
+   * Constructs a new character.
+   *
+   * @param _c The unicode character value of this character.
+   * @param _f The foreground color used to draw the character.
+   * @param _b The color used to draw the character's background.
+   * @param _r A set of rendition flags which specify how this character is to be drawn.
+   */
   inline Character(UINT16 _c = ' ',
             CharacterColor  _f = CharacterColor(COLOR_SPACE_DEFAULT,DEFAULT_FORE_COLOR),
             CharacterColor  _b = CharacterColor(COLOR_SPACE_DEFAULT,DEFAULT_BACK_COLOR),
             UINT8  _r = DEFAULT_RENDITION)
        : character(_c), rendition(_r), foregroundColor(_f), backgroundColor(_b) {}
-public:
 
   union
   {
-    UINT16 character; // a single unicode character
-    UINT16 charSequence; // index into a table of unicode character sequences
+    /** The unicode character value for this character. */
+    UINT16 character;
+    /** 
+     * Experimental addition which allows a single Character instance to contain more than
+     * one unicode character.
+     *
+     * charSequence is a hash code which can be used to look up the unicode
+     * character sequence in the ExtendedCharTable used to create the sequence.
+     */
+    UINT16 charSequence; 
   };
 
-  UINT8  rendition; // rendition
-  CharacterColor  foregroundColor; // foreground color
-  CharacterColor  backgroundColor; // background color
-public:
-  //FIXME: following a hack to cope with various color spaces
-  // it brings the rendition pipeline further out of balance,
-  // which it was anyway as the result of various additions.
-  bool   isTransparent(const ColorEntry* base) const;
+  /** A combination of *_RENDITION flags which specify options for drawing the character. */
+  UINT8  rendition;
+
+  /** The foreground color used to draw this character. */
+  CharacterColor  foregroundColor; 
+  /** The color used to draw this character's background. */
+  CharacterColor  backgroundColor;
+
+  /** 
+   * Returns true if this character has a transparent background when
+   * it is drawn with the specified @p palette.
+   */
+  bool   isTransparent(const ColorEntry* palette) const;
+  /**
+   * Returns true if this character should always be drawn in bold when
+   * it is drawn with the specified @p palette, independant of whether
+   * or not the character has the RE_BOLD rendition flag. 
+   */
   bool   isBold(const ColorEntry* base) const;
-public:
+  
+  /** 
+   * Compares two characters and returns true if they have the same unicode character value,
+   * rendition and colors.
+   */
   friend bool operator == (const Character& a, const Character& b);
+  /**
+   * Compares two characters and returns true if they have different unicode character values,
+   * renditions or colors.
+   */
   friend bool operator != (const Character& a, const Character& b);
 };
 
