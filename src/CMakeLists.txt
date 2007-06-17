@@ -5,7 +5,7 @@ if (CMAKE_SYSTEM_NAME MATCHES Linux)
 endif (CMAKE_SYSTEM_NAME MATCHES Linux)
 configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsole.h )
 
-OPTION(KONSOLE_GENERATE_LINEFONT "Konsole: regenerate linefont file" OFF)
+OPTION(KONSOLE_GENERATE_LINEFONT "Konsole: regenerate LineFont file" OFF)
 
 ########### next target ###############
 
@@ -23,7 +23,7 @@ target_link_libraries(fontembedder  ${KDE4_KIO_LIBS} )
 #qt4_add_dbus_adaptor( sessionadaptors_SRCS org.kde.konsole.SessionScripting.xml Session.h Session )
 
 if(KONSOLE_GENERATE_LINEFONT)
-	add_custom_command(OUTPUT ${CMAKE_SOURCE_DIR}/linefont.h COMMAND ${CMAKE_CURRENT_BINARY_DIR}/fontembedder ARGS ${CMAKE_SOURCE_DIR}/linefont.src DEPENDS ${CMAKE_SOURCE_DIR}/linefont.src )
+	add_custom_command(OUTPUT ${CMAKE_SOURCE_DIR}/LineFont.h COMMAND ${CMAKE_CURRENT_BINARY_DIR}/fontembedder ARGS ${CMAKE_SOURCE_DIR}/LineFont.src DEPENDS ${CMAKE_SOURCE_DIR}/LineFont.src )
 endif(KONSOLE_GENERATE_LINEFONT)
 
 ########### next target ###############

@@ -621,6 +621,43 @@ bool KeyboardTranslator::Entry::matches(int keyCode , Qt::KeyboardModifier modif
 
     return true;
 }
+QByteArray KeyboardTranslator::Entry::escapedText() const
+{
+    QByteArray result(_text);
+
+    for ( int i = 0 ; i < result.count()-1 ; i++ )
+    {
+        char ch = result[i];
+        char replacement = 0;
+
+        switch ( ch )
+        {
+            case 27 : replacement = 'E'; break;
+            case 8  : replacement = 'b'; break;
+            case 12 : replacement = 'f'; break;
+            case 9  : replacement = 't'; break;
+            case 13 : replacement = 'r'; break;
+            case 10 : replacement = 'n'; break;
+            default:
+                if ( !QChar(ch).isPrint() )
+                    replacement = 'x';
+        }
+
+        qDebug() << "a" << ch << "b";
+
+        if ( replacement == 'x' )
+        {
+            result.replace(i,1,'\\'+QByteArray(ch,1).toHex()); 
+        } else if ( replacement != 0 )
+        {
+            result.remove(i,1);
+            result.insert(i,'\\');
+            result.insert(i+1,replacement);
+        }
+    }
+
+    return result;
+}
 QByteArray KeyboardTranslator::Entry::unescape(const QByteArray& input) const
 {
     QByteArray result(input);
@@ -717,7 +754,7 @@ void KeyboardTranslator::Entry::insertState( QString& item , int state ) const
 QString KeyboardTranslator::Entry::resultToString() const
 {
     if ( !_text.isEmpty() )
-        return _text;
+        return escapedText();
     else if ( _command == ScrollPageUpCommand )
         return "ScrollPageUp";
     else if ( _command == ScrollPageDownCommand )

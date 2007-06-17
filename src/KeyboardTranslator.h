@@ -128,6 +128,14 @@ public:
         /** Sets the character sequence associated with this entry */
         void setText(const QByteArray& text);
 
+        /** 
+         * Returns the character sequence associated with this entry,
+         * with any non-printable characters replaced with escape sequences.
+         *
+         * eg. \E for Escape, \t for tab, \n for new line.
+         */
+        QByteArray escapedText() const;
+
         /** Returns the character code ( from the Qt::Key enum ) associated with this entry */
         int keyCode() const;
         /** Sets the character code associated with this entry */

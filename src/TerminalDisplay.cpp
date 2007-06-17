@@ -420,7 +420,7 @@ enum LineEncode
     BotR  = (1<<23)
 };
 
-#include "linefont.h"
+#include "LineFont.h"
 
 static void drawLineChar(QPainter& paint, int x, int y, int w, int h, uchar code)
 {
