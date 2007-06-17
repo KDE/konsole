@@ -42,7 +42,7 @@
 #include <KLocale>
 #include <KMessageBox>
 #include <KNotification>
-#include <K3ProcIO>
+#include <KProcess>
 #include <KRun>
 #include <kshell.h>
 #include <KStandardDirs>
@@ -723,28 +723,28 @@ void Session::cancelZModem()
 void Session::startZModem(const QString &zmodem, const QString &dir, const QStringList &list)
 {
   _zmodemBusy = true;
-  _zmodemProc = new K3ProcIO;
+  _zmodemProc = new KProcess();
+  _zmodemProc->setOutputChannelMode( KProcess::SeparateChannels );
 
-  (*_zmodemProc) << zmodem << "-v";
+  *_zmodemProc << zmodem << "-v";
   for(QStringList::ConstIterator it = list.begin();
       it != list.end();
       ++it)
   {
-     (*_zmodemProc) << (*it);
+     *_zmodemProc << (*it);
   }
 
   if (!dir.isEmpty())
      _zmodemProc->setWorkingDirectory(dir);
-  _zmodemProc->start(K3ProcIO::NotifyOnExit, false);
+  
+  _zmodemProc->start();
 
-  // Override the read-processing of K3ProcIO
-  disconnect(_zmodemProc,SIGNAL (receivedStdout (K3Process *, char *, int)), 0, 0);
-  connect(_zmodemProc,SIGNAL (receivedStdout (K3Process *, char *, int)),
-          this, SLOT(zmodemSendBlock(K3Process *, char *, int)));
-  connect(_zmodemProc,SIGNAL (receivedStderr (K3Process *, char *, int)),
-          this, SLOT(zmodemStatus(K3Process *, char *, int)));
-  connect(_zmodemProc,SIGNAL (processExited(K3Process *)),
-          this, SLOT(zmodemDone()));
+  connect(_zmodemProc,SIGNAL (readyReadStandardOutput()),
+          this, SLOT(zmodemReadAndSendBlock()));
+  connect(_zmodemProc,SIGNAL (readyReadStandardError()),
+          this, SLOT(zmodemReadStatus()));
+  connect(_zmodemProc,SIGNAL (finished(int,QProcess::ExitStatus)),
+          this, SLOT(zmodemFinished()));
 
   disconnect( _shellProcess,SIGNAL(block_in(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)) );
   connect( _shellProcess,SIGNAL(block_in(const char*,int)), this, SLOT(zmodemRcvBlock(const char*,int)) );
@@ -759,26 +759,33 @@ void Session::startZModem(const QString &zmodem, const QString &dir, const QStri
   _zmodemProgress->show();
 }
 
-void Session::zmodemSendBlock(K3Process *, char *data, int len)
+void Session::zmodemReadAndSendBlock()
 {
-  _shellProcess->sendData(data, len);
-//  qWarning("<-- %d bytes", len);
+  _zmodemProc->setReadChannel( QProcess::StandardOutput );
+  QByteArray data = _zmodemProc->readAll();
+
+  _shellProcess->sendData(data.constData(),data.count());
+ 
+// TODO Port suspend() and resume() calls here and in zmodemContinue()
+#warning "Handle suspend and resume of ZModem when internal buffer is full."
+
+
   if (_shellProcess->bufferFull())
   {
-    _zmodemProc->suspend();
-//    qWarning("ZModem suspend");
+    //_zmodemProc->suspend();
   }
 }
 
 void Session::zmodemContinue()
 {
-  _zmodemProc->resume();
+  //_zmodemProc->resume();
 //  qWarning("ZModem resume");
 }
 
-void Session::zmodemStatus(K3Process *, char *data, int len)
+void Session::zmodemReadStatus()
 {
-  QByteArray msg(data, len+1);
+  _zmodemProc->setReadChannel( QProcess::StandardError );
+  QByteArray msg = _zmodemProc->readAll();
   while(!msg.isEmpty())
   {
      int i = msg.indexOf('\015');
@@ -806,11 +813,11 @@ void Session::zmodemStatus(K3Process *, char *data, int len)
 void Session::zmodemRcvBlock(const char *data, int len)
 {
   QByteArray ba( data, len );
-  _zmodemProc->writeStdin( ba );
-//  qWarning("--> %d bytes", len);
+
+  _zmodemProc->write( ba );
 }
 
-void Session::zmodemDone()
+void Session::zmodemFinished()
 {
   if (_zmodemProc)
   {

@@ -34,8 +34,7 @@
 // Konsole
 #include "History.h"
 
-class K3ProcIO;
-class K3Process;
+class KProcess;
 
 namespace Konsole
 {
@@ -444,10 +443,10 @@ private slots:
   //automatically detach views from sessions when view is destroyed
   void viewDestroyed(QObject* view);
 
-  void zmodemStatus(K3Process *, char *data, int len);
-  void zmodemSendBlock(K3Process *, char *data, int len);
+  void zmodemReadStatus();
+  void zmodemReadAndSendBlock();
   void zmodemRcvBlock(const char *data, int len);
-  void zmodemDone();
+  void zmodemFinished();
   void zmodemContinue();
 
 private:
@@ -495,7 +494,7 @@ private:
 
   // ZModem
   bool           _zmodemBusy;
-  K3ProcIO*       _zmodemProc;
+  KProcess*      _zmodemProc;
   ZModemDialog*  _zmodemProgress;
 
   // Color/Font Changes by ESC Sequences
