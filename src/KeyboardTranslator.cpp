@@ -52,7 +52,9 @@ QString KeyboardTranslatorManager::findTranslatorPath(const QString& name)
 }
 void KeyboardTranslatorManager::findTranslators()
 {
-    QStringList list = KGlobal::dirs()->findAllResources("data","konsole/*.keytab");
+    QStringList list = KGlobal::dirs()->findAllResources("data",
+                                                         "konsole/*.keytab",
+                                                         KStandardDirs::NoDuplicates);
 
     qDebug() << __FUNCTION__ << ": found " << list.count() << " keyboard translators.";
 
@@ -66,20 +68,30 @@ void KeyboardTranslatorManager::findTranslators()
 
         QString name = QFileInfo(translatorPath).baseName();
        
+        qDebug() << "Found translator: " << translatorPath << " with name = " << name;
+        
         if ( !_translators.contains(name) ) 
             _translators.insert(name,0);
     }
+
+    qDebug() << "Loaded translators: " << _translators.count();
 
     _haveLoadedAll = true;
 }
 
 const KeyboardTranslator* KeyboardTranslatorManager::findTranslator(const QString& name)
 {
+    qDebug() << "Finding translator: " << name;
+
     if ( _translators.contains(name) && _translators[name] != 0 )
         return _translators[name];
 
     KeyboardTranslator* translator = loadTranslator(name);
-    _translators[name] = translator;
+
+    if ( translator != 0 )
+        _translators[name] = translator;
+    else
+        qWarning() << "Unable to load translator" << name;
 
     return translator;
 }
@@ -117,13 +129,14 @@ bool KeyboardTranslatorManager::saveTranslator(const KeyboardTranslator* transla
 
 KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(const QString& name)
 {
-    KeyboardTranslator* translator = new KeyboardTranslator(name);
-
     const QString& path = findTranslatorPath(name);
 
     QFile source(path); 
-    source.open(QIODevice::ReadOnly | QIODevice::Text);
+    if (!source.open(QIODevice::ReadOnly | QIODevice::Text))
+        return 0;
 
+    KeyboardTranslator* translator = new KeyboardTranslator(name);
+    
     KeyboardTranslatorReader reader(&source);
     translator->setDescription( reader.description() );
     while ( reader.hasNextEntry() )
