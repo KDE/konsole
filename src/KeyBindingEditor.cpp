@@ -32,7 +32,7 @@ using namespace Konsole;
 
 KeyBindingEditor::KeyBindingEditor(QWidget* parent)
     : QWidget(parent)
-    , _translator(0)
+    , _translator(new KeyboardTranslator( QString() ))
 {
     _ui = new Ui::KeyBindingEditor();
     _ui->setupUi(this);
@@ -146,13 +146,10 @@ bool KeyBindingEditor::eventFilter( QObject* watched , QEvent* event )
 
 void KeyBindingEditor::setDescription(const QString& newDescription)
 {
-    if ( description() != newDescription )
-    {
-        _ui->descriptionEdit->setText(newDescription);
-        
-        if ( _translator )
-            _translator->setDescription(newDescription);
-    }
+     _ui->descriptionEdit->setText(newDescription);
+    
+     if ( _translator )
+         _translator->setDescription(newDescription);
 }
 QString KeyBindingEditor::description() const
 {

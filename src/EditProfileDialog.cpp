@@ -640,7 +640,9 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
 
     KeyBindingEditor* editor = new KeyBindingEditor;
     dialog->setMainWidget(editor);
-    editor->setup(translator);
+    
+    if ( translator )
+        editor->setup(translator);
 
     if ( isNewTranslator )
         editor->setDescription(i18n("New Key Binding List"));
@@ -652,7 +654,9 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
         if ( isNewTranslator )
             newTranslator->setName(newTranslator->description());
 
-        qDebug() << "Adding new or modified translator to manager";
+        qDebug() << "Adding new or modified translator to manager" << 
+            newTranslator->name() << ", " << newTranslator->description();
+
         KeyboardTranslatorManager::instance()->addTranslator( newTranslator );
 
         updateKeyBindingsList();
