@@ -973,25 +973,40 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
     if ( getMode(MODE_AppScreen)) states |= KeyboardTranslator::AlternateScreenState;
 
     // lookup key binding
+    if ( _keyTranslator )
+    {
     KeyboardTranslator::Entry entry = _keyTranslator->findEntry( event->key() , 
                                                                 (Qt::KeyboardModifier)modifiers,
                                                                 (KeyboardTranslator::State)states );
 
-    // send result to terminal
-    QByteArray textToSend;
+        // send result to terminal
+        QByteArray textToSend;
 
-    if ( entry.command() != KeyboardTranslator::NoCommand )
-    {
-        // TODO command handling
-    }
-    else if ( !entry.text().isEmpty() ) 
-    {
-        textToSend = _codec->fromUnicode(entry.text());
+        if ( entry.command() != KeyboardTranslator::NoCommand )
+        {
+            // TODO command handling
+        }
+        else if ( !entry.text().isEmpty() ) 
+        {
+            textToSend = _codec->fromUnicode(entry.text());
+        }
+        else
+            textToSend = _codec->fromUnicode(event->text());
+
+        sendData( textToSend.constData() , textToSend.length() );
     }
     else
-        textToSend = _codec->fromUnicode(event->text());
+    {
+        // print an error message to the terminal if no key translator has been
+        // set
+        QString translatorError =  i18n("No keyboard translator available.  "
+                                         "The information needed to convert key presses "
+                                         "into characters to send to the terminal " 
+                                         "is missing.");
 
-    sendData( textToSend.constData() , textToSend.length() );
+        reset();
+        receiveData( translatorError.toAscii().constData() , translatorError.count() );
+    }
 }
 
 #if 0
