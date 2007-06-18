@@ -502,7 +502,7 @@ inline KeyboardTranslator::State KeyboardTranslator::Entry::stateMask() const { 
 
 }
 
-Q_DECLARE_METATYPE(Konsole::KeyboardTranslator::Entry);
+Q_DECLARE_METATYPE(Konsole::KeyboardTranslator::Entry)
 Q_DECLARE_METATYPE(const Konsole::KeyboardTranslator*)
 
 #endif // KEYBOARDTRANSLATOR_H
