@@ -26,7 +26,7 @@
 #include <QtCore/QRect>
 
 // Konsole
-#include "TECommon.h"
+#include "Character.h"
 
 namespace Konsole
 {

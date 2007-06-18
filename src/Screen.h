@@ -29,7 +29,7 @@
 #include <QtCore/QVarLengthArray>
 
 // Konsole
-#include "TECommon.h"
+#include "Character.h"
 #include "History.h"
 
 #define MODE_Origin    0
@@ -437,7 +437,7 @@ private: // helper
 
     CharacterColor cu_fg;      // foreground
     CharacterColor cu_bg;      // background
-    UINT8 cu_re;      // rendition
+    quint8 cu_re;      // rendition
 
     // margins ----------------
 
@@ -464,7 +464,7 @@ private: // helper
 
     CharacterColor ef_fg;      // These are derived from
     CharacterColor ef_bg;      // the cu_* variables above
-    UINT8 ef_re;      // to speed up operation
+    quint8 ef_re;      // to speed up operation
 
     //
     // save cursor, rendition & states ------------
@@ -477,7 +477,7 @@ private: // helper
 
     // rendition info
 
-    UINT8 sa_cu_re;
+    quint8 sa_cu_re;
     CharacterColor sa_cu_fg;
     CharacterColor sa_cu_bg;
     

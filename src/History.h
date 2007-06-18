@@ -31,7 +31,7 @@
 
 // Konsole
 #include "BlockArray.h"
-#include "TECommon.h"
+#include "Character.h"
 
 namespace Konsole
 {

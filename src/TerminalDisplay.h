@@ -28,7 +28,7 @@
 
 // Konsole
 #include "Filter.h"
-#include "TECommon.h"
+#include "Character.h"
 
 class QDrag;
 class QDragEnterEvent;
@@ -503,7 +503,7 @@ protected:
       QDrag           *dragObject;
     } dragInfo;
 
-    virtual int charClass(UINT16) const;
+    virtual int charClass(quint16) const;
 
     void clearImage();
 

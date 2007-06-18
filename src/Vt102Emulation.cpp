@@ -242,16 +242,16 @@ void Vt102Emulation::pushToToken(int cc)
 #define CPS 64
 
 void Vt102Emulation::initTokenizer()
-{ int i; UINT8* s;
+{ int i; quint8* s;
   for(i =  0;                      i < 256; i++) tbl[ i]  = 0;
   for(i =  0;                      i <  32; i++) tbl[ i] |= CTL;
   for(i = 32;                      i < 256; i++) tbl[ i] |= CHR;
-  for(s = (UINT8*)"@ABCDGHILMPSTXZcdfry"; *s; s++) tbl[*s] |= CPN;
+  for(s = (quint8*)"@ABCDGHILMPSTXZcdfry"; *s; s++) tbl[*s] |= CPN;
 // resize = \e[8;<row>;<col>t
-  for(s = (UINT8*)"t"; *s; s++) tbl[*s] |= CPS;
-  for(s = (UINT8*)"0123456789"        ; *s; s++) tbl[*s] |= DIG;
-  for(s = (UINT8*)"()+*%"             ; *s; s++) tbl[*s] |= SCS;
-  for(s = (UINT8*)"()+*#[]%"          ; *s; s++) tbl[*s] |= GRP;
+  for(s = (quint8*)"t"; *s; s++) tbl[*s] |= CPS;
+  for(s = (quint8*)"0123456789"        ; *s; s++) tbl[*s] |= DIG;
+  for(s = (quint8*)"()+*%"             ; *s; s++) tbl[*s] |= SCS;
+  for(s = (quint8*)"()+*#[]%"          ; *s; s++) tbl[*s] |= GRP;
   resetToken();
 }
 

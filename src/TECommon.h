@@ -20,23 +20,14 @@
     02110-1301  USA.
 */
 
-#ifndef TECOMMON_H
-#define TECOMMON_H
+#ifndef CHARACTERCOLOR_H
+#define CHARACTERCOLOR_H
 
 // Qt
 #include <QtGui/QColor>
-#include <QtCore/QHash>
 
 namespace Konsole
 {
-
-#ifndef UINT8
-typedef unsigned char UINT8;
-#endif
-
-#ifndef UINT16
-typedef unsigned short UINT16;
-#endif
 
 /** 
  * An entry in a terminal display's color palette. 
@@ -129,72 +120,6 @@ static const ColorEntry base_color_table[TABLE_COLORS] =
   ColorEntry(QColor(0x54,0xFF,0xFF), 0, 0 ), ColorEntry( QColor(0xFF,0xFF,0xFF), 0, 0 )
 };
 
-#define DEFAULT_RENDITION  0
-#define RE_BOLD            (1 << 0)
-#define RE_BLINK           (1 << 1)
-#define RE_UNDERLINE       (1 << 2)
-#define RE_REVERSE         (1 << 3) // Screen only
-#define RE_INTENSIVE       (1 << 3) // Widget only
-#define RE_CURSOR          (1 << 4)
-#define RE_EXTENDED_CHAR   (1 << 5)
-
-/**
- * A table which stores sequences of unicode characters, referenced
- * by hash keys.  The hash key itself is the same size as a unicode
- * character ( ushort ) so that it can occupy the same space in
- * a structure.
- */
-class ExtendedCharTable
-{
-public:
-    /** Constructs a new character table. */
-    ExtendedCharTable();
-    ~ExtendedCharTable();
-
-    /**
-     * Adds a sequences of unicode characters to the table and returns
-     * a hash code which can be used later to look up the sequence
-     * using lookupExtendedChar()
-     *
-     * If the same sequence already exists in the table, the hash
-     * of the existing sequence will be returned.
-     *
-     * @param unicodePoints An array of unicode character points
-     * @param length Length of @p unicodePoints
-     */
-    ushort createExtendedChar(ushort* unicodePoints , ushort length);
-    /**
-     * Looks up and returns a pointer to a sequence of unicode characters
-     * which was added to the table using createExtendedChar().
-     *
-     * @param hash The hash key returned by createExtendedChar()
-     * @param length This variable is set to the length of the 
-     * character sequence.
-     *
-     * @return A unicode character sequence of size @p length.
-     */
-    ushort* lookupExtendedChar(ushort hash , ushort& length) const;
-
-    /** The global ExtendedCharTable instance. */
-    static ExtendedCharTable instance;
-private:
-    // calculates the hash key of a sequence of unicode points of size 'length'
-    ushort extendedCharHash(ushort* unicodePoints , ushort length) const;
-    // tests whether the entry in the table specified by 'hash' matches the 
-    // character sequence 'unicodePoints' of size 'length'
-    bool extendedCharMatch(ushort hash , ushort* unicodePoints , ushort length) const;
-    // internal, maps hash keys to character sequence buffers.  The first ushort
-    // in each value is the length of the buffer, followed by the ushorts in the buffer
-    // themselves.
-    QHash<ushort,ushort*> extendedCharTable;
-};
-
-typedef unsigned char LineProperty;
-
-static const int LINE_DEFAULT		= 0;
-static const int LINE_WRAPPED 	 	= (1 << 0);
-static const int LINE_DOUBLEWIDTH  	= (1 << 1);
-static const int LINE_DOUBLEHEIGHT	= (1 << 2);
 
 /* CharacterColor is a union of the various color spaces.
 
@@ -244,7 +169,7 @@ public:
    *
    * TODO : Add documentation about available color spaces.
    */
-  CharacterColor(UINT8 colorSpace, int co) 
+  CharacterColor(quint8 colorSpace, int co) 
       : _colorSpace(colorSpace), 
         _u(0), 
         _v(0), 
@@ -301,12 +226,12 @@ public:
   friend bool operator != (const CharacterColor& a, const CharacterColor& b);
 
 private:
-  UINT8 _colorSpace;
+  quint8 _colorSpace;
 
   // bytes storing the character color 
-  UINT8 _u; 
-  UINT8 _v; 
-  UINT8 _w; 
+  quint8 _u; 
+  quint8 _v; 
+  quint8 _w; 
 };
 
 inline bool operator == (const CharacterColor& a, const CharacterColor& b)
@@ -321,7 +246,7 @@ inline bool operator != (const CharacterColor& a, const CharacterColor& b)
          *reinterpret_cast<const quint32*>(&b._colorSpace);
 }
 
-inline const QColor color256(UINT8 u, const ColorEntry* base)
+inline const QColor color256(quint8 u, const ColorEntry* base)
 {
   //   0.. 16: system colors
   if (u <   8) return base[u+2            ].color; u -= 8;
@@ -360,108 +285,8 @@ inline void CharacterColor::toggleIntensive()
   }
 }
 
-/**
- * A single character in the terminal which consists of a unicode character
- * value, foreground and background colors and a set of rendition attributes
- * which specify how it should be drawn.
- */
-class Character
-{
-public:
-  /** 
-   * Constructs a new character.
-   *
-   * @param _c The unicode character value of this character.
-   * @param _f The foreground color used to draw the character.
-   * @param _b The color used to draw the character's background.
-   * @param _r A set of rendition flags which specify how this character is to be drawn.
-   */
-  inline Character(UINT16 _c = ' ',
-            CharacterColor  _f = CharacterColor(COLOR_SPACE_DEFAULT,DEFAULT_FORE_COLOR),
-            CharacterColor  _b = CharacterColor(COLOR_SPACE_DEFAULT,DEFAULT_BACK_COLOR),
-            UINT8  _r = DEFAULT_RENDITION)
-       : character(_c), rendition(_r), foregroundColor(_f), backgroundColor(_b) {}
-
-  union
-  {
-    /** The unicode character value for this character. */
-    UINT16 character;
-    /** 
-     * Experimental addition which allows a single Character instance to contain more than
-     * one unicode character.
-     *
-     * charSequence is a hash code which can be used to look up the unicode
-     * character sequence in the ExtendedCharTable used to create the sequence.
-     */
-    UINT16 charSequence; 
-  };
-
-  /** A combination of *_RENDITION flags which specify options for drawing the character. */
-  UINT8  rendition;
-
-  /** The foreground color used to draw this character. */
-  CharacterColor  foregroundColor; 
-  /** The color used to draw this character's background. */
-  CharacterColor  backgroundColor;
-
-  /** 
-   * Returns true if this character has a transparent background when
-   * it is drawn with the specified @p palette.
-   */
-  bool   isTransparent(const ColorEntry* palette) const;
-  /**
-   * Returns true if this character should always be drawn in bold when
-   * it is drawn with the specified @p palette, independant of whether
-   * or not the character has the RE_BOLD rendition flag. 
-   */
-  bool   isBold(const ColorEntry* base) const;
-  
-  /** 
-   * Compares two characters and returns true if they have the same unicode character value,
-   * rendition and colors.
-   */
-  friend bool operator == (const Character& a, const Character& b);
-  /**
-   * Compares two characters and returns true if they have different unicode character values,
-   * renditions or colors.
-   */
-  friend bool operator != (const Character& a, const Character& b);
-};
-
-inline bool operator == (const Character& a, const Character& b)
-{ 
-  return a.character == b.character && 
-         a.rendition == b.rendition && 
-         a.foregroundColor == b.foregroundColor && 
-         a.backgroundColor == b.backgroundColor;
-}
-
-inline bool operator != (const Character& a, const Character& b)
-{
-  return    a.character != b.character || 
-            a.rendition != b.rendition || 
-            a.foregroundColor != b.foregroundColor || 
-            a.backgroundColor != b.backgroundColor;
-}
-
-inline bool Character::isTransparent(const ColorEntry* base) const
-{
-  return ((backgroundColor._colorSpace == COLOR_SPACE_DEFAULT) && 
-          base[backgroundColor._u+0+(backgroundColor._v?BASE_COLORS:0)].transparent)
-      || ((backgroundColor._colorSpace == COLOR_SPACE_SYSTEM) && 
-          base[backgroundColor._u+2+(backgroundColor._v?BASE_COLORS:0)].transparent);
-}
-
-inline bool Character::isBold(const ColorEntry* base) const
-{
-  return (backgroundColor._colorSpace == COLOR_SPACE_DEFAULT) && 
-            base[backgroundColor._u+0+(backgroundColor._v?BASE_COLORS:0)].bold
-      || (backgroundColor._colorSpace == COLOR_SPACE_SYSTEM) && 
-            base[backgroundColor._u+2+(backgroundColor._v?BASE_COLORS:0)].bold;
-}
-
-extern unsigned short vt100_graphics[32];
 
 }
 
-#endif // TECOMMON_H
+#endif // CHARACTERCOLOR_H
+

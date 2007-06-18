@@ -1266,7 +1266,7 @@ void TerminalDisplay::paintContents(QPainter &paint, const QRect &rect)
       bool doubleWidth = (_image[ qMin(loc(x,y)+1,_imageSize) ].character == 0);
       CharacterColor currentForeground = _image[loc(x,y)].foregroundColor;
       CharacterColor currentBackground = _image[loc(x,y)].backgroundColor;
-      UINT8 currentRendition = _image[loc(x,y)].rendition;
+      quint8 currentRendition = _image[loc(x,y)].rendition;
 	  
       while (x+len <= rlx &&
              _image[loc(x+len,y)].foregroundColor == currentForeground &&
@@ -2172,7 +2172,7 @@ bool TerminalDisplay::focusNextPrevChild( bool next )
 }
 
 
-int TerminalDisplay::charClass(UINT16 ch) const
+int TerminalDisplay::charClass(quint16 ch) const
 {
     QChar qch=QChar(ch);
     if ( qch.isSpace() ) return ' ';

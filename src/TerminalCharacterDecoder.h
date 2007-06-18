@@ -22,7 +22,7 @@
 #ifndef TERMINAL_CHARACTER_DECODER_H
 #define TERMINAL_CHARACTER_DECODER_H
 
-#include "TECommon.h"
+#include "Character.h"
 
 class QTextStream;
 
@@ -126,7 +126,7 @@ private:
     QTextStream* _output;
 	const ColorEntry* _colorTable;
     bool _innerSpanOpen; 
-	UINT8 _lastRendition;
+	quint8 _lastRendition;
 	CharacterColor _lastForeColor;
 	CharacterColor _lastBackColor;
 

@@ -31,9 +31,6 @@
 #include <KLocale>
 #include <KStandardDirs>
 
-// Konsole
-#include "TECommon.h"
-
 using namespace Konsole;
 
 const ColorEntry ColorScheme::defaultTable[TABLE_COLORS] =
