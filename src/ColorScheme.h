@@ -30,7 +30,7 @@
 #include <QtCore/QSet>
 
 // Konsole
-#include "TECommon.h"
+#include "CharacterColor.h"
 
 class QIODevice;
 class KConfig;

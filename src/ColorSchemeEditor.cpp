@@ -33,7 +33,7 @@
 
 // Konsole
 #include "ui_ColorSchemeEditor.h"
-#include "TECommon.h"
+#include "CharacterColor.h"
 
 using namespace Konsole;
 

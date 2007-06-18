@@ -27,7 +27,7 @@
 #include <QtCore/QHash>
 
 // Local
-#include "TECommon.h"
+#include "CharacterColor.h"
 
 namespace Konsole
 {
