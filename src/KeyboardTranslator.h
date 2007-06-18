@@ -119,6 +119,12 @@ public:
          */
         Entry();
 
+        /** 
+         * Returns true if this entry is null.
+         * This is true for newly constructed entries which have no properties set. 
+         */
+        bool isNull() const;
+
         /** Returns the commands associated with this entry */
         Command command() const;
         /** Sets the command associated with this entry. */
@@ -202,7 +208,7 @@ public:
          */
         bool matches( int keyCode , Qt::KeyboardModifier modifiers , State flags ) const;
 
-        bool operator==(const Entry& rhs);
+        bool operator==(const Entry& rhs) const;
        
     private:
         void insertModifier( QString& item , int modifier ) const;
@@ -256,7 +262,8 @@ public:
     void addEntry(const Entry& entry);
 
     /**
-     * Replaces an entry in the translator.
+     * Replaces an entry in the translator.  If the @p existing entry is null,
+     * then this is equivalent to calling addEntry(@p replacement)
      */
     void replaceEntry(const Entry& existing , const Entry& replacement);
 
@@ -475,6 +482,11 @@ inline void  KeyboardTranslator::Entry::setModifierMask( Qt::KeyboardModifier ma
    _modifierMask = mask; 
 }
 inline Qt::KeyboardModifier KeyboardTranslator::Entry::modifierMask() const { return _modifierMask; }
+
+inline bool KeyboardTranslator::Entry::isNull() const
+{
+    return ( *this == Entry() );
+}
 
 inline void KeyboardTranslator::Entry::setCommand( Command command )
 { 

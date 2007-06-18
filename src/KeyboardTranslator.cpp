@@ -649,7 +649,7 @@ QKeySequence KeyboardTranslator::Entry::keySequence() const
 }
 #endif 
 
-bool KeyboardTranslator::Entry::operator==(const Entry& rhs)
+bool KeyboardTranslator::Entry::operator==(const Entry& rhs) const
 {
     return _keyCode == rhs._keyCode &&
            _modifiers == rhs._modifiers &&
@@ -827,7 +827,7 @@ void KeyboardTranslator::Entry::insertState( QString& item , int state ) const
     else if ( state == KeyboardTranslator::NewLineState )
         item += "NewLine";
     else if ( state == KeyboardTranslator::AnsiState )
-        item += "ansi";
+        item += "Ansi";
     else if ( state == KeyboardTranslator::CursorKeysState )
         item += "AppCuKeys";
     else if ( state == KeyboardTranslator::AnyModifierState )
@@ -914,7 +914,8 @@ void KeyboardTranslator::addEntry(const Entry& entry)
 }
 void KeyboardTranslator::replaceEntry(const Entry& existing , const Entry& replacement)
 {
-    _entries.remove(existing.keyCode(),existing);
+    if ( !existing.isNull() )
+        _entries.remove(existing.keyCode(),existing);
     _entries.insert(replacement.keyCode(),replacement);
 }
 void KeyboardTranslator::removeEntry(const Entry& entry)

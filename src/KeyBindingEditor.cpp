@@ -44,12 +44,18 @@ KeyBindingEditor::KeyBindingEditor(QWidget* parent)
     _ui->keyBindingTable->setColumnCount(2);
 
     QStringList labels;
-    labels << i18n("Key Combination") << i18n("Binding");
+    labels << i18n("Key Combination") << i18n("Output");
 
     _ui->keyBindingTable->setHorizontalHeaderLabels(labels);
     _ui->keyBindingTable->horizontalHeader()->setStretchLastSection(true);
     _ui->keyBindingTable->verticalHeader()->hide();
 
+    // add and remove buttons
+    _ui->addEntryButton->setIcon( KIcon("list-add") );
+    _ui->removeEntryButton->setIcon( KIcon("list-remove") );
+
+    connect( _ui->removeEntryButton , SIGNAL(clicked()) , this , SLOT(removeSelectedEntry()) );
+    connect( _ui->addEntryButton , SIGNAL(clicked()) , this , SLOT(addNewEntry()) );
     
     // test area
     _ui->testAreaInputEdit->installEventFilter(this);
@@ -60,6 +66,42 @@ KeyBindingEditor::~KeyBindingEditor()
     delete _ui;
 }
 
+void KeyBindingEditor::removeSelectedEntry()
+{
+    QListIterator<QTableWidgetItem*> iter( _ui->keyBindingTable->selectedItems() );
+
+    while ( iter.hasNext() )
+    {     
+        // get the first item in the row which has the entry
+        QTableWidgetItem* item = _ui->keyBindingTable->item(iter.next()->row(),0);
+
+        KeyboardTranslator::Entry existing = item->data(Qt::UserRole).
+                                                    value<KeyboardTranslator::Entry>();
+        
+        _translator->removeEntry(existing);
+    
+        _ui->keyBindingTable->removeRow( item->row() );
+    }
+}
+
+void KeyBindingEditor::addNewEntry()
+{
+   _ui->keyBindingTable->insertRow( _ui->keyBindingTable->rowCount() );
+
+   int newRowCount = _ui->keyBindingTable->rowCount();
+
+   // block signals here to avoid triggering bindingTableItemChanged() slot call
+   _ui->keyBindingTable->blockSignals(true);
+
+   _ui->keyBindingTable->setItem(newRowCount-1,0,new QTableWidgetItem() );
+   _ui->keyBindingTable->setItem(newRowCount-1,1,new QTableWidgetItem() );
+
+   _ui->keyBindingTable->blockSignals(false);
+
+   // make sure user can see new row
+   _ui->keyBindingTable->scrollToItem(_ui->keyBindingTable->item(newRowCount-1,0));
+}
+
 bool KeyBindingEditor::eventFilter( QObject* watched , QEvent* event )
 {
     if ( watched == _ui->testAreaInputEdit )
@@ -68,13 +110,31 @@ bool KeyBindingEditor::eventFilter( QObject* watched , QEvent* event )
        {
             QKeyEvent* keyEvent = (QKeyEvent*)event;
 
+            // The state here is currently set to the state that a newly started 
+            // terminal in Konsole will be in ( which is also the same as the 
+            // state just after a reset ), this has 'Ansi' turned on and all other
+            // states off.
+            //
+            // TODO: It may be useful to be able to specify the state in the 'test input' 
+            // area, but preferably not in a way which clutters the UI with lots of 
+            // checkboxes.
+            //
+            const KeyboardTranslator::State state = KeyboardTranslator::AnsiState;
+
             int modifiers = keyEvent->modifiers();
             KeyboardTranslator::Entry entry = _translator->findEntry( keyEvent->key() , 
-                                                                      (Qt::KeyboardModifier)modifiers );
+                                                                      (Qt::KeyboardModifier)modifiers, state );
 
-            _ui->testAreaInputEdit->setText(entry.conditionToString());
-            _ui->testAreaOutputEdit->setText(entry.resultToString());
-
+            if ( !entry.isNull() )
+            {
+                _ui->testAreaInputEdit->setText(entry.conditionToString());
+                _ui->testAreaOutputEdit->setText(entry.resultToString());
+            }
+            else
+            {
+                _ui->testAreaInputEdit->setText(keyEvent->text());
+                _ui->testAreaOutputEdit->setText(keyEvent->text());
+            }
             //qDebug() << "Entry: " << entry.resultToString();
 
             keyEvent->accept();
@@ -130,12 +190,12 @@ void KeyBindingEditor::bindingTableItemChanged(QTableWidgetItem* item)
 
    qDebug() << "Created entry: " << entry.conditionToString() << " , " << entry.resultToString();
 
-    _translator->replaceEntry(existing,entry);
+   _translator->replaceEntry(existing,entry);
 
     // block signals to prevent this slot from being called repeatedly
    _ui->keyBindingTable->blockSignals(true);
 
-   key->setData(Qt::UserRole,QVariant::fromValue(existing));
+   key->setData(Qt::UserRole,QVariant::fromValue(entry));
 
    _ui->keyBindingTable->blockSignals(false);
 }

@@ -85,6 +85,8 @@ public slots:
 
 private slots:
     void bindingTableItemChanged(QTableWidgetItem* item);
+    void removeSelectedEntry();
+    void addNewEntry();
 
 private:
     void setupKeyBindingTable(const KeyboardTranslator* translator);
