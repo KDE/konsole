@@ -726,13 +726,7 @@ void Session::startZModem(const QString &zmodem, const QString &dir, const QStri
   _zmodemProc = new KProcess();
   _zmodemProc->setOutputChannelMode( KProcess::SeparateChannels );
 
-  *_zmodemProc << zmodem << "-v";
-  for(QStringList::ConstIterator it = list.begin();
-      it != list.end();
-      ++it)
-  {
-     *_zmodemProc << (*it);
-  }
+  *_zmodemProc << zmodem << "-v" << list;
 
   if (!dir.isEmpty())
      _zmodemProc->setWorkingDirectory(dir);
@@ -748,7 +742,6 @@ void Session::startZModem(const QString &zmodem, const QString &dir, const QStri
 
   disconnect( _shellProcess,SIGNAL(block_in(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)) );
   connect( _shellProcess,SIGNAL(block_in(const char*,int)), this, SLOT(zmodemRcvBlock(const char*,int)) );
-  connect( _shellProcess,SIGNAL(buffer_empty()), this, SLOT(zmodemContinue()));
 
   _zmodemProgress = new ZModemDialog(QApplication::activeWindow(), false,
                                     i18n("ZModem Progress"));
@@ -764,22 +757,10 @@ void Session::zmodemReadAndSendBlock()
   _zmodemProc->setReadChannel( QProcess::StandardOutput );
   QByteArray data = _zmodemProc->readAll();
 
+  if ( data.count() == 0 )
+      return;
+
   _shellProcess->sendData(data.constData(),data.count());
- 
-// TODO Port suspend() and resume() calls here and in zmodemContinue()
-#warning "Handle suspend and resume of ZModem when internal buffer is full."
-
-
-  if (_shellProcess->bufferFull())
-  {
-    //_zmodemProc->suspend();
-  }
-}
-
-void Session::zmodemContinue()
-{
-  //_zmodemProc->resume();
-//  qWarning("ZModem resume");
 }
 
 void Session::zmodemReadStatus()
@@ -826,7 +807,6 @@ void Session::zmodemFinished()
     _zmodemBusy = false;
 
     disconnect( _shellProcess,SIGNAL(block_in(const char*,int)), this ,SLOT(zmodemRcvBlock(const char*,int)) );
-    disconnect( _shellProcess,SIGNAL(buffer_empty()), this, SLOT(zmodemContinue()));
     connect( _shellProcess,SIGNAL(block_in(const char*,int)), this, SLOT(onReceiveBlock(const char*,int)) );
 
     _shellProcess->sendData("\030\030\030\030", 4); // Abort

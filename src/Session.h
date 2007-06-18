@@ -447,7 +447,6 @@ private slots:
   void zmodemReadAndSendBlock();
   void zmodemRcvBlock(const char *data, int len);
   void zmodemFinished();
-  void zmodemContinue();
 
 private:
 
