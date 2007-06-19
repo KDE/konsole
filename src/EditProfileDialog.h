@@ -25,12 +25,14 @@
 #include <QtCore/QPair>
 #include <QtCore/QHash>
 #include <QtCore/QSet>
+#include <QtCore/QPointer>
 
 // KDE
 #include <KDialog>
 
 class QAbstractButton;
 class QTextCodec;
+class QTimeLine;
 
 namespace Ui
 {
@@ -121,6 +123,8 @@ private slots:
     void fontSelected(const QFont&);
     //void previewFont(const QFont&);
 
+    void colorSchemeAnimationUpdate();
+
     // scrolling page
     void noScrollBack();
     void fixedScrollBack();
@@ -204,6 +208,8 @@ private:
  */
 class ColorSchemeViewDelegate : public QAbstractItemDelegate
 {
+Q_OBJECT
+
 public:
     ColorSchemeViewDelegate(QObject* parent = 0);
 
@@ -212,6 +218,19 @@ public:
                        const QModelIndex& index) const;
     virtual QSize sizeHint( const QStyleOptionViewItem& option,
                        const QModelIndex& index) const;
+
+    /** 
+     * Sets the timeline used to control the entry animation
+     * for this delegate.
+     *
+     * During a call to paint(), the value of the timeLine is used to
+     * determine how to render the item ( with 0 being the beginning 
+     * of the animation and 1.0 being the end )
+     */
+    void setEntryTimeLine( QTimeLine* timeLine );
+
+private:
+    QPointer<QTimeLine> _entryTimeLine;
 
    // virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, 
    //                               const QModelIndex& index) const;

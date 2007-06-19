@@ -31,6 +31,8 @@
 #include <QtGui/QLinearGradient>
 #include <QtGui/QRadialGradient>
 
+#include <QtCore/QTimeLine>
+
 // KDE
 #include <kcodecaction.h>
 #include <KFontDialog>
@@ -314,7 +316,15 @@ void EditProfileDialog::setupAppearancePage(const Profile* info)
     // setup color list
     updateColorSchemeList();
 
-    _ui->colorSchemeList->setItemDelegate(new ColorSchemeViewDelegate(this));
+    ColorSchemeViewDelegate* delegate = new ColorSchemeViewDelegate(this);
+
+    QTimeLine* timeLine = new QTimeLine( 1000 , this );
+    delegate->setEntryTimeLine(timeLine);
+
+    connect( timeLine , SIGNAL(valueChanged(qreal)) , this ,
+             SLOT(colorSchemeAnimationUpdate()) );
+
+    _ui->colorSchemeList->setItemDelegate(delegate);
     _ui->colorSchemeList->setMouseTracking(true);
     _ui->colorSchemeList->installEventFilter(this);
 
@@ -341,6 +351,16 @@ void EditProfileDialog::setupAppearancePage(const Profile* info)
              SLOT(setFontSize(int)) );
     connect( _ui->editFontButton , SIGNAL(clicked()) , this ,
              SLOT(showFontDialog()) );
+
+    // start entry animation
+    timeLine->start();
+}
+void EditProfileDialog::colorSchemeAnimationUpdate()
+{
+    QAbstractItemModel* model = _ui->colorSchemeList->model();
+
+    for ( int i = model->rowCount() ; i >= 0 ; i-- )
+        _ui->colorSchemeList->update( model->index(i,0) );
 }
 void EditProfileDialog::updateFontPreviewLabel(const QFont& font)
 {
@@ -926,9 +946,30 @@ QWidget* ColorSchemeViewDelegate::createEditor(QWidget* parent, const QStyleOpti
 }
 #endif
 
+void ColorSchemeViewDelegate::setEntryTimeLine(QTimeLine* timeLine)
+{
+    _entryTimeLine = timeLine;
+}
+
 void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
                        const QModelIndex& index) const
 {
+    // entry animation
+    //
+    // note that the translation occurs for each item drawn, but the 
+    // painter is not reset between painting items.  this means that when
+    // the items are painted in order ( as occurs when the list is first
+    // shown ), there is a visually pleasing staggering of items as they
+    // enter.
+    if ( _entryTimeLine != 0 )
+    {
+        qreal value = 1.0-_entryTimeLine->currentValue();
+        painter->translate(  value * 
+                             option.rect.width() , 0 );
+
+        painter->setOpacity( _entryTimeLine->currentValue() );
+    }
+
     const ColorScheme* scheme = index.data(Qt::UserRole + 1).value<const ColorScheme*>();
 
     Q_ASSERT(scheme);
