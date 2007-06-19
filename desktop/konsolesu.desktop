@@ -4,7 +4,7 @@ Type=Application
 Exec=konsole --type su
 Icon=konsole
 DocPath=konsole/index.html
-MimeType=application/x-konsole
+MimeType=application/x-konsole;
 Terminal=false
 
 Name=Terminal Program - Super User Mode
