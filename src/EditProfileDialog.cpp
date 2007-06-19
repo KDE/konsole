@@ -938,7 +938,7 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
     painter->setRenderHint( QPainter::Antialiasing );
 
     // draw background
-    painter->setPen( QPen(Qt::NoPen) ); // QPen(scheme->foregroundColor() , 1) );
+    painter->setPen( QPen(scheme->foregroundColor() , 1) );
 
     // radial gradient for background
     // from a lightened version of the scheme's background color in the center to
@@ -950,6 +950,11 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
     backgroundGradient.setColorAt( 0 , color.lighter(105) );
     backgroundGradient.setColorAt( 1 , color.darker(115) );
    
+    const int backgroundRectXRoundness = 4;
+    const int backgroundRectYRoundness = 30;
+
+    QPainterPath backgroundRectPath(backgroundRect.topLeft());
+    backgroundRectPath.addRoundRect( backgroundRect , backgroundRectXRoundness , backgroundRectYRoundness );
 
     if ( transparencyAvailable )
     {
@@ -958,14 +963,23 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
         painter->setCompositionMode( QPainter::CompositionMode_Source );
         painter->setBrush(backgroundGradient);
 
-        painter->drawRoundRect( backgroundRect , 4 , 30 );
+        painter->drawPath(backgroundRectPath);
         painter->restore();
     }
     else
     {
         painter->setBrush(backgroundGradient);
-        painter->drawRoundRect( backgroundRect , 4 , 30 );
+        painter->drawPath(backgroundRectPath);
     }
+
+    // draw stripe at the side using scheme's foreground color
+    painter->setPen( QPen(Qt::NoPen) );
+    QPainterPath path( option.rect.topLeft() );
+    path.lineTo( option.rect.width() / 10.0 , option.rect.top() );
+    path.lineTo( option.rect.bottomLeft() );
+    path.lineTo( option.rect.topLeft() );
+    painter->setBrush( scheme->foregroundColor() );
+    painter->drawPath(path.intersected(backgroundRectPath));
 
     // draw highlight 
     // with a linear gradient going from translucent white to transparent
@@ -991,6 +1005,8 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
         pen.setJoinStyle(Qt::MiterJoin);
         
         painter->setPen(pen);
+
+
         painter->drawRect( option.rect.adjusted(selectedBorderWidth/2,
                                                 selectedBorderWidth/2,
                                                 -selectedBorderWidth/2,
