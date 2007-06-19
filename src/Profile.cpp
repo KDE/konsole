@@ -259,6 +259,11 @@ bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile* profil
     // Basic Profile Settings
     KConfigGroup general = config.group("General");
 
+    // Parent profile if set, when loading the profile in future, the parent
+    // must be loaded as well if it exists.
+    if ( profile->parent() != 0 )
+        general.writeEntry("Parent",profile->parent()->path());
+
     if ( profile->isPropertySet(Profile::Name) )
         general.writeEntry("Name",profile->name());
     

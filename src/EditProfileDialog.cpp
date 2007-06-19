@@ -28,6 +28,9 @@
 #include <QtCore/QDebug>
 #include <QtCore/QTextCodec>
 
+#include <QtGui/QLinearGradient>
+#include <QtGui/QRadialGradient>
+
 // KDE
 #include <kcodecaction.h>
 #include <KFontDialog>
@@ -932,21 +935,45 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
 
     bool transparencyAvailable = KWindowSystem::compositingActive();
 
+    painter->setRenderHint( QPainter::Antialiasing );
+
     // draw background
+    painter->setPen( QPen(Qt::NoPen) ); // QPen(scheme->foregroundColor() , 1) );
+
+    // radial gradient for background
+    // from a lightened version of the scheme's background color in the center to
+    // a darker version at the outer edge
     QColor color = scheme->backgroundColor();
-    
+    QRectF backgroundRect = QRectF(option.rect).adjusted(1.5,1.5,-1.5,-1.5);
+  
+    QRadialGradient backgroundGradient(backgroundRect.center() , backgroundRect.width() / 2);
+    backgroundGradient.setColorAt( 0 , color.lighter(105) );
+    backgroundGradient.setColorAt( 1 , color.darker(115) );
+   
+
     if ( transparencyAvailable )
     {
         painter->save();
         color.setAlphaF(scheme->opacity());
         painter->setCompositionMode( QPainter::CompositionMode_Source );
-        painter->fillRect( option.rect , color );
+        painter->setBrush(backgroundGradient);
+
+        painter->drawRoundRect( backgroundRect , 4 , 30 );
         painter->restore();
     }
     else
     {
-        painter->fillRect( option.rect , color );
+        painter->setBrush(backgroundGradient);
+        painter->drawRoundRect( backgroundRect , 4 , 30 );
     }
+
+    // draw highlight 
+    // with a linear gradient going from translucent white to transparent
+    QLinearGradient gradient( option.rect.topLeft() , option.rect.bottomLeft() );
+    gradient.setColorAt( 0 , QColor(255,255,255,90) );
+    gradient.setColorAt( 1 , Qt::transparent );
+    painter->setBrush(gradient);
+    painter->drawRoundRect( backgroundRect , 4 , 30 );
 
     // draw border on selected items
     if ( option.state & QStyle::State_Selected )
@@ -956,7 +983,10 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
 
         painter->setBrush( QBrush(Qt::NoBrush) );
         QPen pen;
-        pen.setBrush(option.palette.highlight());
+        
+        QColor highlightColor = option.palette.highlight().color();
+        highlightColor.setAlphaF(0.8);
+        pen.setBrush(highlightColor);
         pen.setWidth(selectedBorderWidth);
         pen.setJoinStyle(Qt::MiterJoin);
         
@@ -966,23 +996,6 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
                                                 -selectedBorderWidth/2,
                                                 -selectedBorderWidth/2) );
     }
-
-   /* const ColorEntry* entries = scheme->colorTable();
-    const qreal colorRectWidth = qMin(option.rect.width(),256) / TABLE_COLORS;
-    const qreal colorRectHeight = colorRectWidth;
-    qreal x = 0;
-    qreal y = option.rect.bottom() - colorRectHeight;
-
-    for ( int i = 0 ; i < TABLE_COLORS ; i++ )
-    {
-        QRectF colorRect;
-        colorRect.setLeft(x);
-        colorRect.setTop(y);
-        colorRect.setSize( QSizeF(colorRectWidth,colorRectHeight) );
-        painter->fillRect( colorRect , QColor(entries[i].color));
-
-        x += colorRectWidth;
-    }*/
 
     // draw color scheme name using scheme's foreground color
     QPen pen(scheme->foregroundColor());
