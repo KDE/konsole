@@ -983,15 +983,14 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
         // send result to terminal
         QByteArray textToSend;
 
-        // if the Alt modifier is pressed and no entry has been found 
-        // then the output is prefixed with an escape character  
-        if ( modifiers & Qt::AltModifier && entry.isNull() )
+        // special handling for the Alt (aka. Meta) modifier.  pressing
+        // Alt+[Character] results in Esc+[Character] being sent
+        // (unless there is an entry defined for this particular combination
+        //  in the keyboard modifier)
+        if ( modifiers & Qt::AltModifier && entry.isNull() 
+             && !event->text().isEmpty() )
         {
-            qDebug() << "Alt modifier pressed, prepending Escape";
             textToSend.prepend("\033");
-
-            //sendData("\033",1);
-            //return;
         }
 
         if ( entry.command() != KeyboardTranslator::NoCommand )
