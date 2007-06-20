@@ -135,7 +135,16 @@ QString SessionManager::loadProfile(const QString& shortPath)
     Profile* newProfile = new Profile(defaultProfile());
     newProfile->setProperty(Profile::Path,path);
 
-    bool result = reader->readProfile(path,newProfile);
+    QString parentProfile;
+    bool result = reader->readProfile(path,newProfile,parentProfile);
+
+    if ( !parentProfile.isEmpty() )
+    {
+        qDebug() << "Loading parent profile" << parentProfile;
+
+        QString parentKey = loadProfile(parentProfile);
+        newProfile->setParent(profile(parentKey));
+    }
 
     delete reader;
 

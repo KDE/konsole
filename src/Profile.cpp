@@ -333,7 +333,7 @@ QStringList KDE4ProfileReader::findProfiles()
     return KGlobal::dirs()->findAllResources("data","konsole/*.profile",
             KStandardDirs::NoDuplicates);
 }
-bool KDE4ProfileReader::readProfile(const QString& path , Profile* profile)
+bool KDE4ProfileReader::readProfile(const QString& path , Profile* profile , QString& parentProfile)
 {
     qDebug() << "KDE 4 Profile Reader:" << path;
 
@@ -341,6 +341,9 @@ bool KDE4ProfileReader::readProfile(const QString& path , Profile* profile)
 
     // general
     KConfigGroup general = config.group("General");
+
+    if ( general.hasKey("Parent") )
+        parentProfile = general.readEntry("Parent");
 
     if ( general.hasKey("Name") )
         profile->setProperty(Profile::Name,general.readEntry("Name"));
@@ -422,10 +425,13 @@ QStringList KDE3ProfileReader::findProfiles()
     return KGlobal::dirs()->findAllResources("data", "konsole/*.desktop", 
             KStandardDirs::NoDuplicates);
 }
-bool KDE3ProfileReader::readProfile(const QString& path , Profile* profile)
+bool KDE3ProfileReader::readProfile(const QString& path , Profile* profile , QString& parentProfile)
 {
     if (!QFile::exists(path))
         return false;
+
+    // KDE 3 profiles do not have parents
+    parentProfile = QString();
 
     KDesktopFile* desktopFile = new KDesktopFile(path);
     KConfigGroup* config = new KConfigGroup( desktopFile->desktopGroup() );

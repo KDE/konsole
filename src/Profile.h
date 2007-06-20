@@ -390,22 +390,27 @@ public:
      * save the property values described into @p profile.
      *
      * Returns true if the profile was successfully read or false otherwise.
+     *
+     * @param path Path to the profile to read
+     * @param profile TODO: Document me
+     * @param parentProfile Receives the name of the parent profile specified in
+     * @p path.  TODO: Document me
      */
-    virtual bool readProfile(const QString& path , Profile* profile) = 0;
+    virtual bool readProfile(const QString& path , Profile* profile , QString& parentProfile) = 0;
 };
 /** Reads a KDE 3 profile .desktop file. */
 class KDE3ProfileReader : public ProfileReader
 {
 public:
     virtual QStringList findProfiles();
-    virtual bool readProfile(const QString& path , Profile* profile);
+    virtual bool readProfile(const QString& path , Profile* profile, QString& parentProfile);
 };
 /** Reads a KDE 4 .profile file. */
 class KDE4ProfileReader : public ProfileReader
 {
 public:
     virtual QStringList findProfiles();
-    virtual bool readProfile(const QString& path , Profile* profile);
+    virtual bool readProfile(const QString& path , Profile* profile, QString& parentProfile);
 private:
     template <typename T>
     void readStandardElement(const KConfigGroup& group , 
