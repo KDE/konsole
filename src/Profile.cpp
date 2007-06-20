@@ -484,13 +484,18 @@ QHash<Profile::Property,QVariant> ProfileCommandParser::parse(const QString& inp
 {
     QHash<Profile::Property,QVariant> changes;
 
+    // regular expression to parse profile change requests.
+    //
+    // format: property=value;property=value ...
+    //
+    // where 'property' is a word consisting only of characters from A-Z
+    // where 'value' is any sequence of characters other than a semi-colon
+    //
     static QRegExp regExp("([a-zA-Z]+)=([^;]+)");
 
     int offset = 0;
     while ( regExp.indexIn(input,offset) != -1 )
     {
-        //qDebug() << "Captured texts: " << regExp.capturedTexts();
-   
         if ( regExp.capturedTexts().count() == 3 )
         {
             Profile::Property property = Profile::lookupByName(

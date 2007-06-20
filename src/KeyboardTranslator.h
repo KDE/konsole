@@ -246,8 +246,8 @@ public:
      * Looks for an entry in this keyboard translator which matches the given
      * key code, keyboard modifiers and state flags.
      * 
-     * Returns the matching entry if found or 0 if there is no matching entry
-     * in this keyboard translation.
+     * Returns the matching entry if found or a null Entry otherwise ( ie.
+     * entry.isNull() will return true )
      *
      * @param keyCode A key code from the Qt::Key enum
      * @param modifiers A combination of modifiers

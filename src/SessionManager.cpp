@@ -197,8 +197,8 @@ SessionManager::~SessionManager()
     while (infoIter.hasNext())
         delete infoIter.next();
 
-#warning "This prevents a crash to do with accessing a global static globalData() after destruction, but it is probably not the correct solution."  
-    KGlobal::config()->sync();
+//#warning "This prevents a crash to do with accessing a global static globalData() after destruction, but it is probably not the correct solution."  
+//    KGlobal::config()->sync();
 }
 
 const QList<Session*> SessionManager::sessions()
@@ -508,7 +508,8 @@ void SessionManager::setDefaultProfile(const QString& key)
 
    qDebug() << "setting default session type to " << fileInfo.fileName();
 
-   KConfigGroup group = KGlobal::config()->group("Desktop Entry");
+   KSharedConfigPtr config = KGlobal::config();
+   KConfigGroup group = config->group("Desktop Entry");
    group.writeEntry("DefaultProfile",fileInfo.fileName());
 }
 QSet<QString> SessionManager::findFavorites() 

@@ -17,6 +17,7 @@ The KDE 4.0 TODO List:
 
 === ESSENTIAL FEATURES ===
 
+- Changing of a single tab's settings using konsoleprofile
 
 - Input Method Event in terminal display widget
 
@@ -24,11 +25,6 @@ The KDE 4.0 TODO List:
   color in the color scheme.  Make the setting of 
   boldness for characters more intuitive than in the KDE 3
   series.
- 
-- Editing of key bindings
-  ( this is the list which maps key sequences pressed by
-    the user to the corresponding text sequences
-    which are send to the terminal )
 
 - Get the Konsole part working properly in other
   major KDE programs, such as Dolphin,
@@ -50,9 +46,6 @@ The KDE 4.0 TODO List:
   the term "DCOP" for ideas on what users would like
   to be able to do using Konsole's scripting facilities.
 
-- Changing of profile using
-  a command-line tool 
-
 - Better documentation for shortcuts to move between views
   (Shift+<Arrows> and Shift+Tab)
 
@@ -66,6 +59,8 @@ The KDE 4.0 TODO List:
 
 == BUGS ==
 
+- Shortcuts do not word when the menu bar is hidden.
+
 - Allow the user to over-ride the "no Ctrl+[Key] shortcuts" limitation with shortcuts
 set in the configuration dialog, but warn the user if they try to do so.  This is the 
 behaviour in KDE 3.
@@ -74,6 +69,14 @@ behaviour in KDE 3.
 image.  A more efficient solution such as buffering successive image size changes would
 be better.  This would also help with applications such as Midnight Commander which
 do not always behave well with lots of successive image size changes.
+
+- KEYBOARD:  Backspace key in Vim does not work.
+- KEYBOARD:  Pressing Alt+Number just prints the number instead of 
+             something else.
+
+== DOCUMENTATION ==
+
+- Re-write the handbook contents to be up to date with the new user interface
 
 == NON-ESSENTIAL TWEAKS ==
 
@@ -171,6 +174,15 @@ do not always behave well with lots of successive image size changes.
 
 
 === DONE ===
+
+- When loading a profile from disk, load the parent profile if necessary
+  and assign it to be the parent of the new profile.
+
+- Editing of key bindings
+  ( this is the list which maps key sequences pressed by
+    the user to the corresponding text sequences
+    which are send to the terminal )
+
 
 - When splitting the view, avoid scrolling existing views.
 

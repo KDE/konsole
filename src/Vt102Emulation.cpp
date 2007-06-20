@@ -975,12 +975,24 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
     // lookup key binding
     if ( _keyTranslator )
     {
-    KeyboardTranslator::Entry entry = _keyTranslator->findEntry( event->key() , 
-                                                                (Qt::KeyboardModifier)modifiers,
-                                                                (KeyboardTranslator::State)states );
+    KeyboardTranslator::Entry entry = _keyTranslator->findEntry( 
+                                                event->key() , 
+                                                (Qt::KeyboardModifier)modifiers,
+                                                (KeyboardTranslator::State)states );
 
         // send result to terminal
         QByteArray textToSend;
+
+        // if the Alt modifier is pressed and no entry has been found 
+        // then the output is prefixed with an escape character  
+        if ( modifiers & Qt::AltModifier && entry.isNull() )
+        {
+            qDebug() << "Alt modifier pressed, prepending Escape";
+            textToSend.prepend("\033");
+
+            //sendData("\033",1);
+            //return;
+        }
 
         if ( entry.command() != KeyboardTranslator::NoCommand )
         {
@@ -988,10 +1000,10 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
         }
         else if ( !entry.text().isEmpty() ) 
         {
-            textToSend = _codec->fromUnicode(entry.text());
+            textToSend += _codec->fromUnicode(entry.text());
         }
         else
-            textToSend = _codec->fromUnicode(event->text());
+            textToSend += _codec->fromUnicode(event->text());
 
         sendData( textToSend.constData() , textToSend.length() );
     }
@@ -1316,19 +1328,14 @@ bool Vt102Emulation::getMode(int m)
 
 char Vt102Emulation::getErase() const
 {
-  int cmd = KeyboardTranslator::NoCommand; //CMD_none; 
-  QByteArray txt; 
-  bool metaspecified;
- 
-#warning "Reimplement getErase() with new keyboard translator."
-
-#if 0 
-  if (_keyTranslator->findEntry(Qt::Key_Backspace, 0, &cmd, txt,
-      &metaspecified) && (cmd==CMD_send) && (txt.length() == 1))
-    return txt[0];
-#endif  
-
-  return '\b';
+  KeyboardTranslator::Entry entry = _keyTranslator->findEntry(
+                                            Qt::Key_Backspace,
+                                            (Qt::KeyboardModifier)0,
+                                            (KeyboardTranslator::State)0);
+  if ( entry.text().count() > 0 )
+      return entry.text()[0];
+  else
+      return '\b';
 }
 
 /* ------------------------------------------------------------------------- */

@@ -2302,7 +2302,7 @@ void TerminalDisplay::keyPressEvent( QKeyEvent* event )
             updateImage();
         }
     }
-	
+
     _actSel=0; // Key stroke implies a screen update, so TerminalDisplay won't
               // know where the current selection is.
 
@@ -2400,7 +2400,8 @@ bool TerminalDisplay::event( QEvent *e )
     int keyCode = keyEvent->key() | keyEvent->modifiers();
 
     if ( !standalone() && 
-         (keyEvent->modifiers() == Qt::ControlModifier) )
+         ( (keyEvent->modifiers() == Qt::ControlModifier) || 
+           (keyEvent->modifiers() == Qt::AltModifier) ) )
     {
       keyEvent->accept();
       return true;
