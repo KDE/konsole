@@ -318,7 +318,7 @@ void EditProfileDialog::setupAppearancePage(const Profile* info)
 
     ColorSchemeViewDelegate* delegate = new ColorSchemeViewDelegate(this);
 
-    QTimeLine* timeLine = new QTimeLine( 1000 , this );
+    QTimeLine* timeLine = new QTimeLine( 500 , this );
     delegate->setEntryTimeLine(timeLine);
 
     connect( timeLine , SIGNAL(valueChanged(qreal)) , this ,
