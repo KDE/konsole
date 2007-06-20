@@ -52,7 +52,8 @@ static KCmdLineOptions options[] =
     // TODO - Update this when F12 is no longer hard coded
     { "background-mode" , I18N_NOOP("Start Konsole in the background"
                                     " and bring to the front when the F12"
-                                    " key is pressed") , 0 }
+                                    " key is pressed") , 0 },
+    KCmdLineLastOption
 };
 
 // ***
