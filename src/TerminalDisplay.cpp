@@ -2665,7 +2665,7 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
         _lnAction->setEnabled( false );
       }
       if (urllist.count()>1)
-        KShell::quoteArg(tmp);
+        tmp = KShell::quoteArg(tmp);
       _dropText += tmp;
     }
 
@@ -2696,7 +2696,7 @@ void TerminalDisplay::drop_menu_activated(QAction* action)
   {
    case paste:
       if (_dndFileCount==1)
-        KShell::quoteArg(_dropText);
+        _dropText = KShell::quoteArg(_dropText);
       emit sendStringToEmu(_dropText.toLocal8Bit());
       activateWindow();
       break;
@@ -2712,7 +2712,7 @@ void TerminalDisplay::drop_menu_activated(QAction* action)
             _dropText = url.directory( KUrl::ObeyTrailingSlash ); // remove filename
          }
       }
-      KShell::quoteArg(_dropText);
+      _dropText = KShell::quoteArg(_dropText);
       emit sendStringToEmu(_dropText.toLocal8Bit());
       emit sendStringToEmu("\n");
       activateWindow();
@@ -2729,7 +2729,7 @@ void TerminalDisplay::drop_menu_activated(QAction* action)
    }
    if (item>cd && item<=mv) {
       if (_dndFileCount==1)
-        KShell::quoteArg(_dropText);
+        _dropText = KShell::quoteArg(_dropText);
       emit sendStringToEmu(_dropText.toLocal8Bit());
       emit sendStringToEmu(" .\n");
       activateWindow();
