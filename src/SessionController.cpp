@@ -29,7 +29,7 @@
 #include <KInputDialog>
 #include <KLocale>
 #include <KMenu>
-#include <KRun>
+#include <kshell.h>
 #include <KToggleAction>
 #include <KUrl>
 #include <KXMLGUIFactory>
@@ -262,7 +262,7 @@ void SessionController::openUrl( const KUrl& url )
     if ( url.isLocalFile() )
     {
         QString path = url.toLocalFile();
-        KRun::shellQuote(path);
+        KShell::quoteArg(path);
 
         _session->emulation()->sendText("cd " + path + '\r');
     }
