@@ -99,7 +99,7 @@ public:
   bool   isTransparent(const ColorEntry* palette) const;
   /**
    * Returns true if this character should always be drawn in bold when
-   * it is drawn with the specified @p palette, independant of whether
+   * it is drawn with the specified @p palette, independent of whether
    * or not the character has the RE_BOLD rendition flag. 
    */
   bool   isBold(const ColorEntry* base) const;
