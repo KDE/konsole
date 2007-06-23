@@ -2399,9 +2399,16 @@ bool TerminalDisplay::event( QEvent *e )
     QKeyEvent* keyEvent = static_cast<QKeyEvent *>( e );
     int keyCode = keyEvent->key() | keyEvent->modifiers();
 
+    // a check to see if keyEvent->text() is empty is used
+    // to avoid intercepting the press of the modifier key on its own.
+    //
+    // this is important as it allows a press and release of the Alt key
+    // on its own to focus the menu bar, making it possible to
+    // work with the menu without using the mouse
     if ( !standalone() && 
          ( (keyEvent->modifiers() == Qt::ControlModifier) || 
-           (keyEvent->modifiers() == Qt::AltModifier) ) )
+           (keyEvent->modifiers() == Qt::AltModifier) ) && 
+         !keyEvent->text().isEmpty() )
     {
       keyEvent->accept();
       return true;
