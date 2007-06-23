@@ -383,6 +383,9 @@ void SessionManager::applyProfile(Session* session, const Profile* info , bool m
     if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Directory) )
         session->setInitialWorkingDirectory(info->defaultWorkingDirectory());
 
+    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Environment) )
+        session->setEnvironment(info->property(Profile::Environment).value<QStringList>());
+
     if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Icon) )
         session->setIconName(info->icon());
 

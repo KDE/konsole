@@ -27,7 +27,7 @@
 #include <QtGui/QStandardItem>
 #include <QtCore/QDebug>
 #include <QtCore/QTextCodec>
-
+#include <QtGui/QTextEdit>
 #include <QtGui/QLinearGradient>
 #include <QtGui/QRadialGradient>
 
@@ -140,9 +140,13 @@ void EditProfileDialog::setProfile(const QString& key)
         _tempProfile = new Profile;
     }
 }
+const Profile* EditProfileDialog::lookupProfile() const
+{
+    return SessionManager::instance()->profile(_profileKey);
+}
 void EditProfileDialog::ensurePageLoaded(int page)
 {
-    const Profile* info = SessionManager::instance()->profile(_profileKey);
+    const Profile* info = lookupProfile();
 
     Q_ASSERT( _pageNeedsUpdate.count() > page );
     Q_ASSERT( info );
@@ -153,6 +157,8 @@ void EditProfileDialog::ensurePageLoaded(int page)
 
        if ( pageWidget == _ui->generalTab )
             setupGeneralPage(info);
+       else if ( pageWidget == _ui->tabsTab )
+            setupTabsPage(info);
        else if ( pageWidget == _ui->appearanceTab )
             setupAppearancePage(info);
        else if ( pageWidget == _ui->scrollingTab )
@@ -169,6 +175,8 @@ void EditProfileDialog::ensurePageLoaded(int page)
 }
 void EditProfileDialog::setupGeneralPage(const Profile* info)
 {
+
+    // basic profile options
     _ui->profileNameEdit->setText( info->name() );
 
     ShellCommand command( info->command() , info->arguments() );
@@ -183,6 +191,49 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
     _ui->dirSelectButton->setIcon( KIcon("folder-open") );
     _ui->iconSelectButton->setIcon( KIcon(info->icon()) );
 
+    // window options
+    _ui->showMenuBarButton->setChecked( info->property(Profile::ShowMenuBar).value<bool>() );
+
+    // signals and slots
+    connect( _ui->dirSelectButton , SIGNAL(clicked()) , this , SLOT(selectInitialDir()) );
+    connect( _ui->iconSelectButton , SIGNAL(clicked()) , this , SLOT(selectIcon()) );
+
+    connect( _ui->profileNameEdit , SIGNAL(textChanged(const QString&)) , this ,
+            SLOT(profileNameChanged(const QString&)) );
+    connect( _ui->initialDirEdit , SIGNAL(textChanged(const QString&)) , this , 
+            SLOT(initialDirChanged(const QString&)) );
+    connect(_ui->commandEdit , SIGNAL(textChanged(const QString&)) , this ,
+            SLOT(commandChanged(const QString&)) ); 
+    
+    connect(_ui->showMenuBarButton , SIGNAL(toggled(bool)) , this , 
+            SLOT(showMenuBar(bool)) );
+
+    connect(_ui->environmentEditButton , SIGNAL(clicked()) , this , 
+            SLOT(showEnvironmentEditor()) );
+}
+void EditProfileDialog::showEnvironmentEditor()
+{
+    const Profile* info = lookupProfile();
+
+    KDialog* dialog = new KDialog(this);
+    QTextEdit* edit = new QTextEdit(dialog);
+
+    QStringList currentEnvironment = info->property(Profile::Environment).value<QStringList>();
+
+    edit->setPlainText( currentEnvironment.join("\n") );
+    dialog->setPlainCaption(i18n("Edit Environment"));
+    dialog->setMainWidget(edit);
+
+    if ( dialog->exec() == QDialog::Accepted )
+    {
+        QStringList newEnvironment = edit->toPlainText().split('\n');
+        _tempProfile->setProperty(Profile::Environment,newEnvironment);
+    }
+
+    dialog->deleteLater();
+}
+void EditProfileDialog::setupTabsPage(const Profile* info)
+{
     // tab title format
     _ui->tabTitleEdit->setClearButtonShown(true);
     _ui->remoteTabTitleEdit->setClearButtonShown(true);
@@ -208,29 +259,17 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
 
     _ui->tabBarPositionCombo->setCurrentIndex(tabPosition);
 
+    // signals and slots
     connect( _ui->tabBarVisibilityCombo , SIGNAL(activated(int)) , this , 
              SLOT(tabBarVisibilityChanged(int)) );
     connect( _ui->tabBarPositionCombo , SIGNAL(activated(int)) , this ,
              SLOT(tabBarPositionChanged(int)) );
 
-    _ui->showMenuBarButton->setChecked( info->property(Profile::ShowMenuBar).value<bool>() );
-
-    // signals and slots
-    connect( _ui->dirSelectButton , SIGNAL(clicked()) , this , SLOT(selectInitialDir()) );
-    connect( _ui->iconSelectButton , SIGNAL(clicked()) , this , SLOT(selectIcon()) );
-
-    connect( _ui->profileNameEdit , SIGNAL(textChanged(const QString&)) , this ,
-            SLOT(profileNameChanged(const QString&)) );
-    connect( _ui->initialDirEdit , SIGNAL(textChanged(const QString&)) , this , 
-            SLOT(initialDirChanged(const QString&)) );
-    connect(_ui->commandEdit , SIGNAL(textChanged(const QString&)) , this ,
-            SLOT(commandChanged(const QString&)) ); 
-    
     connect(_ui->tabTitleEdit , SIGNAL(textChanged(const QString&)) , this ,
             SLOT(tabTitleFormatChanged(const QString&)) );
     connect(_ui->remoteTabTitleEdit , SIGNAL(textChanged(const QString&)) , this ,
             SLOT(remoteTabTitleFormatChanged(const QString&)));
-    
+
     // menus for local and remote tab title dynamic elements
     TabTitleFormatAction* localTabTitleAction = new TabTitleFormatAction(this);
     localTabTitleAction->setContext(Session::LocalTabTitle);
@@ -243,9 +282,6 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
     _ui->remoteTabTitleEditButton->setMenu(remoteTabTitleAction->menu());
     connect( remoteTabTitleAction , SIGNAL(dynamicElementSelected(const QString&)) ,
            this , SLOT(insertRemoteTabTitleText(const QString&)) ); 
-
-    connect(_ui->showMenuBarButton , SIGNAL(toggled(bool)) , this , 
-            SLOT(showMenuBar(bool)) );
 }
 void EditProfileDialog::tabBarVisibilityChanged(int newValue)
 {
@@ -314,7 +350,7 @@ void EditProfileDialog::selectInitialDir()
 void EditProfileDialog::setupAppearancePage(const Profile* info)
 {
     // setup color list
-    updateColorSchemeList();
+    updateColorSchemeList(true);
 
     ColorSchemeViewDelegate* delegate = new ColorSchemeViewDelegate(this);
 
@@ -367,16 +403,18 @@ void EditProfileDialog::updateFontPreviewLabel(const QFont& font)
     _ui->fontPreviewLabel->setFont(font);
     _ui->fontPreviewLabel->setText(i18n("%1, size %2",font.family(),font.pointSize()));
 }
-void EditProfileDialog::updateColorSchemeList()
+void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
 {
     delete _ui->colorSchemeList->model();
 
-    const QString& name = SessionManager::instance()->profile(_profileKey)->colorScheme();
+    const QString& name = lookupProfile()->colorScheme();
     const ColorScheme* currentScheme = ColorSchemeManager::instance()->findColorScheme(name);
 
     QStandardItemModel* model = new QStandardItemModel(this);
     QList<const ColorScheme*> schemeList = ColorSchemeManager::instance()->allColorSchemes();
     QListIterator<const ColorScheme*> schemeIter(schemeList);
+
+    QStandardItem* selectedItem = 0;
 
     while (schemeIter.hasNext())
     {
@@ -386,7 +424,10 @@ void EditProfileDialog::updateColorSchemeList()
         item->setFlags( item->flags() | Qt::ItemIsUserCheckable );
         
         if ( colors == currentScheme )
+        {
            item->setCheckState( Qt::Checked );
+           selectedItem = item;   
+        }
         else 
             item->setCheckState( Qt::Unchecked );
 
@@ -397,6 +438,11 @@ void EditProfileDialog::updateColorSchemeList()
 
     _ui->colorSchemeList->setModel(model);
 
+    /*if ( selectCurrentScheme )
+        _ui->colorSchemeList->selectionModel()->select(
+                       selectedItem->index() , QItemSelectionModel::Select
+                     );*/
+
 }
 void EditProfileDialog::updateKeyBindingsList()
 {
@@ -404,7 +450,7 @@ void EditProfileDialog::updateKeyBindingsList()
 
     delete _ui->keyBindingList->model();
 
-    const QString& name = SessionManager::instance()->profile(_profileKey)
+    const QString& name = lookupProfile()
                                     ->property(Profile::KeyBindings).value<QString>();
 
     const KeyboardTranslator* currentTranslator = keyManager->findTranslator(name);
@@ -487,7 +533,7 @@ void EditProfileDialog::preview(int property , const QVariant& value)
     QHash<Profile::Property,QVariant> map;
     map.insert((Profile::Property)property,value);
 
-    const Profile* original = SessionManager::instance()->profile(_profileKey);
+    const Profile* original = lookupProfile();
 
     if (!_previewedProperties.contains(property))    
         _previewedProperties.insert(property , original->property((Profile::Property)property) );
@@ -551,7 +597,7 @@ void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
         
         updateColorSchemeList();
 
-        Profile* profile = SessionManager::instance()->profile(_profileKey);
+        const Profile* profile = lookupProfile(); 
         const QString& currentScheme = profile->colorScheme();
 
         // the next couple of lines may seem slightly odd,
@@ -684,7 +730,7 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
 
         updateKeyBindingsList();
         
-        const QString& currentTranslator = SessionManager::instance()->profile(_profileKey)
+        const QString& currentTranslator = lookupProfile()
                                         ->property(Profile::KeyBindings).value<QString>();
 
         if ( newTranslator->name() == currentTranslator )

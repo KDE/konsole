@@ -103,9 +103,32 @@ void Pty::setErase(char erase)
   }
 }
 
+void Pty::addEnvironmentVariables(const QStringList& environment)
+{
+    QListIterator<QString> iter(environment);
+    while (iter.hasNext())
+    {
+        QString pair = iter.next();
+
+        // split on the first '=' character
+        int pos = pair.indexOf('=');
+        
+        if ( pos >= 0 )
+        {
+            QString variable = pair.left(pos);
+            QString value = pair.mid(pos+1);
+
+            qDebug() << "Setting environment pair" << variable <<
+                " set to " << value;
+
+            setEnvironment(variable,value);
+        }
+    }
+}
+
 int Pty::start(const QString& program, 
                const QStringList& programArguments, 
-               const QString& term, 
+               const QStringList& environment, 
                ulong winid, 
                bool addToUtmp,
                const QString& dbusService, 
@@ -115,12 +138,12 @@ int Pty::start(const QString& program,
 
   setBinaryExecutable(program.toLatin1());
 
+  addEnvironmentVariables(environment);
+
   QStringListIterator it( programArguments );
   while (it.hasNext())
     arguments.append( it.next().toUtf8() );
 
-  if ( !term.isEmpty() )
-     setEnvironment("TERM",term);
   if ( !dbusService.isEmpty() )
      setEnvironment("KONSOLE_DBUS_SERVICE",dbusService);
   if ( !dbusSession.isEmpty() )

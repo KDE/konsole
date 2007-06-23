@@ -5,12 +5,9 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>521</width>
-    <height>596</height>
+    <width>441</width>
+    <height>505</height>
    </rect>
-  </property>
-  <property name="windowTitle" >
-   <string>Form</string>
   </property>
   <layout class="QHBoxLayout" >
    <property name="leftMargin" >
@@ -165,15 +162,80 @@
             </property>
             <property name="sizeHint" >
              <size>
-              <width>40</width>
+              <width>20</width>
               <height>20</height>
              </size>
             </property>
            </spacer>
           </item>
+          <item row="4" column="0" >
+           <widget class="QLabel" name="environmentLabel" >
+            <property name="text" >
+             <string>Environment:</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1" >
+           <widget class="QPushButton" name="environmentEditButton" >
+            <property name="text" >
+             <string>Edit...</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_12" >
+         <property name="title" >
+          <string>Window Options</string>
+         </property>
+         <property name="flat" >
+          <bool>true</bool>
+         </property>
+         <layout class="QVBoxLayout" >
+          <item>
+           <widget class="QCheckBox" name="showMenuBarButton" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip" >
+             <string>Show or hide the menu bar in terminal windows using this profile</string>
+            </property>
+            <property name="text" >
+             <string>Show menu bar in new windows created from this profile</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabsTab" >
+      <attribute name="title" >
+       <string>Tabs</string>
+      </attribute>
+      <layout class="QVBoxLayout" >
        <item>
         <widget class="QGroupBox" name="groupBox_5" >
          <property name="title" >
@@ -243,28 +305,12 @@
        <item>
         <widget class="QGroupBox" name="groupBox_2" >
          <property name="title" >
-          <string>Window &amp;&amp; Tab Bar Options</string>
+          <string>Tab Bar Options</string>
          </property>
          <property name="flat" >
           <bool>true</bool>
          </property>
          <layout class="QGridLayout" >
-          <item row="0" column="0" colspan="2" >
-           <widget class="QCheckBox" name="showMenuBarButton" >
-            <property name="sizePolicy" >
-             <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="toolTip" >
-             <string>Show or hide the menu bar in terminal windows using this profile</string>
-            </property>
-            <property name="text" >
-             <string>Show menu bar in new windows created from this profile</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0" >
            <widget class="QLabel" name="label_12" >
             <property name="text" >
@@ -309,8 +355,8 @@
          </property>
          <property name="sizeHint" >
           <size>
-           <width>95</width>
-           <height>20</height>
+           <width>20</width>
+           <height>40</height>
           </size>
          </property>
         </spacer>
@@ -664,7 +710,7 @@
      </widget>
      <widget class="QWidget" name="keyboardTab" >
       <attribute name="title" >
-       <string>Keyboard Setup</string>
+       <string>Input</string>
       </attribute>
       <layout class="QVBoxLayout" >
        <item>

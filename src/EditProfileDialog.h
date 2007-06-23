@@ -109,6 +109,7 @@ private slots:
     void insertRemoteTabTitleText(const QString& text);
 
     void showMenuBar(bool);
+    void showEnvironmentEditor();
     void tabBarVisibilityChanged(int);
     void tabBarPositionChanged(int);
 
@@ -158,12 +159,13 @@ private slots:
 private:
     // initialize various pages of the dialog
     void setupGeneralPage(const Profile* info);
+    void setupTabsPage(const Profile* info);
     void setupAppearancePage(const Profile* info);
     void setupKeyboardPage(const Profile* info);
     void setupScrollingPage(const Profile* info);
     void setupAdvancedPage(const Profile* info);
 
-    void updateColorSchemeList();
+    void updateColorSchemeList(bool selectCurrentScheme = false);
     void updateKeyBindingsList();
     void updateFontPreviewLabel(const QFont& font);
 
@@ -190,6 +192,8 @@ private:
        char* slot;
     };
     void setupCombo(ComboOption* options , const Profile* profile);
+
+    const Profile* lookupProfile() const;
 
     Ui::EditProfileDialog* _ui;
     Profile* _tempProfile;

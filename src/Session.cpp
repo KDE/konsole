@@ -1,5 +1,5 @@
 /*
-    This file is part of Konsole, an X _terminal.
+    This file is part of Konsole
 
     Copyright (C) 2006-2007 by Robert Knight <robertknight@gmail.com>
     Copyright (C) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
@@ -276,7 +276,7 @@ void Session::run()
 
   int result = _shellProcess->start(QFile::encodeName(_program), 
                                   arguments, 
-                                  _term,
+                                  _environment,
                                   _winId, 
                                   _addToUtmp,
                                   dbusService,
@@ -565,14 +565,14 @@ QString Session::keyBindings() const
   return _emulation->keyBindings();
 }
 
-QString Session::terminalType() const
+QStringList Session::environment() const
 {
-  return _term;
+  return _environment;
 }
 
-void Session::setTerminalType(const QString& _terminalType)
+void Session::setEnvironment(const QStringList& environment)
 {
-    _term = _terminalType;
+    _environment = environment;
 }
 
 int Session::sessionId() const

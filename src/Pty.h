@@ -73,8 +73,9 @@ Q_OBJECT
      *
      * @param program Path to the program to start
      * @param arguments Arguments to pass to the program being started
-     * @param term Specifies the value of the TERM environment variable
-     * in the process's environment.
+     * @param environment A list of key=value pairs which will be added
+     * to the environemnt for the new process.  At the very least this
+     * should include an assignment for the TERM environment variable.
      * @param winid Specifies the value of the WINDOWID environment variable
      * in the process's environment.
      * @param addToUtmp Specifies whether a utmp entry should be created for
@@ -86,7 +87,7 @@ Q_OBJECT
      */
     int start( const QString& program, 
                const QStringList& arguments, 
-               const QString& term, 
+               const QStringList& environment, 
                ulong winid, 
                bool addToUtmp,
                const QString& dbusService,
@@ -187,6 +188,10 @@ Q_OBJECT
     void writeReady();
 
   private:
+    // takes a list of key=value pairs and adds them
+    // to the environment for the process
+    void addEnvironmentVariables(const QStringList& environment);
+
     // enqueues a buffer of data to be sent to the 
     // terminal process
     void appendSendJob(const char* buffer, int length);

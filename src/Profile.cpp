@@ -115,11 +115,13 @@ FallbackProfile::FallbackProfile()
     setProperty(Command,getenv("SHELL"));
     setProperty(Icon,"konsole");
     setProperty(Arguments,QStringList() << getenv("SHELL"));
+    setProperty(Environment,QStringList() << "TERM=xterm");
     setProperty(LocalTabTitleFormat,"%d : %n");
     setProperty(RemoteTabTitleFormat,"%H (%u)");
     setProperty(TabBarMode,AlwaysShowTabBar);
     setProperty(TabBarPosition,TabBarBottom);
     setProperty(ShowMenuBar,true);
+
 
     setProperty(KeyBindings,"default");
 
@@ -275,6 +277,7 @@ bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile* profil
     if ( profile->isPropertySet(Profile::Directory) )
         general.writeEntry("Directory",profile->defaultWorkingDirectory());
 
+    writeStandardElement( general ,  profile , Profile::Environment );
     writeStandardElement( general ,  profile , Profile::Icon );
     
     // Tab Titles
@@ -359,7 +362,7 @@ bool KDE4ProfileReader::readProfile(const QString& path , Profile* profile , QSt
     }
 
     readStandardElement<QString>(general,profile,Profile::Directory);
-
+    readStandardElement<QStringList>(general,profile,Profile::Environment);
     readStandardElement<QString>(general,profile,Profile::Icon);
     readStandardElement<QString>(general,profile,Profile::LocalTabTitleFormat); 
     readStandardElement<QString>(general,profile,Profile::RemoteTabTitleFormat);

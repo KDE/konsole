@@ -132,21 +132,13 @@ public:
   Emulation*  emulation() const;    
   
   /** 
-   * Returns the value of the TERM environment variable which will 
-   * be used in the session's environment when it is started using 
-   * the run() method.
-   * 
-   * Defaults to "xterm".
+   * TODO: Document me
    */  
-  QString terminalType() const;
+  QStringList environment() const;
   /** 
-   * Sets the value of the TERM variable which will be used in the 
-   * session's environment when it is started using the run() method.  
-   * Changing this once the session has been started using run() has no effect.
-   *
-   * Defaults to "xterm" if not set explicitly
+   * TODO: Document me
    */
-  void setTerminalType(const QString& terminalType);
+  void setEnvironment(const QStringList& environment);
 
   /** Returns the unique ID for this session. */
   int sessionId() const;
@@ -485,7 +477,7 @@ private:
   QString        _program;
   QStringList    _arguments;
 
-  QString        _term;
+  QStringList    _environment;
   ulong          _winId;
   int            _sessionId;
 
