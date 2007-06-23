@@ -402,8 +402,15 @@ void TabbedViewContainer::selectTabColor()
 }
 
 ViewContainerTabBar::ViewContainerTabBar(QWidget* parent)
-    : QTabBar(parent)
+    : KTabBar(parent)
 {
+    //TODO  Make tab re-ordering possible, but the QStackedWidget
+    // and tab widget will then have different indicies, in which
+    // case either the view widget stack needs to be re-ordered
+    // or mapping between the tab and stack widget indicies needs
+    // to be added
+    //
+    //setTabReorderingEnabled(true);
 }
 
 QSize ViewContainerTabBar::tabSizeHint(int index) const

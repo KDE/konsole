@@ -26,8 +26,10 @@
 #include <QtCore/QObject>
 #include <QtCore/QHash>
 #include <QtCore/QList>
-#include <QtGui/QTabBar>
 #include <QtGui/QVBoxLayout>
+
+// KDE
+#include <KTabBar>
 
 class QSpacerItem;
 class QStackedWidget;
@@ -309,7 +311,7 @@ private:
 // internal class,
 // to allow for tweaks to the tab bar required by TabbedViewContainerV2.
 // does not actually do anything currently
-class ViewContainerTabBar : public QTabBar
+class ViewContainerTabBar : public KTabBar
 {
 public:
     ViewContainerTabBar(QWidget* parent = 0);
