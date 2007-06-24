@@ -26,10 +26,11 @@ DEALINGS IN THE SOFTWARE.
 
 ****************************************************************************/
 
+#include <config-konsole.h>
+
 #if defined(HAVE_XKB)
     #include <QtGui/QX11Info>
 
-    #include <config-konsole.h>
 
     #include <X11/Xlib.h>
 
