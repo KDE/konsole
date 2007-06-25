@@ -963,8 +963,8 @@ void Vt102Emulation::sendText( const QString& text )
 
 void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
 {
-    int modifiers = event->modifiers();
-    int states = KeyboardTranslator::NoState;
+    Qt::KeyboardModifiers modifiers = event->modifiers();
+    KeyboardTranslator::States states = KeyboardTranslator::NoState;
 
     // get current states
     if ( getMode(MODE_NewLine)  ) states |= KeyboardTranslator::NewLineState;
@@ -977,8 +977,8 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
     {
     KeyboardTranslator::Entry entry = _keyTranslator->findEntry( 
                                                 event->key() , 
-                                                (Qt::KeyboardModifier)modifiers,
-                                                (KeyboardTranslator::State)states );
+                                                modifiers,
+                                                states );
 
         // send result to terminal
         QByteArray textToSend;
@@ -1329,8 +1329,8 @@ char Vt102Emulation::getErase() const
 {
   KeyboardTranslator::Entry entry = _keyTranslator->findEntry(
                                             Qt::Key_Backspace,
-                                            (Qt::KeyboardModifier)0,
-                                            (KeyboardTranslator::State)0);
+                                            0,
+                                            0);
   if ( entry.text().count() > 0 )
       return entry.text()[0];
   else

@@ -84,6 +84,7 @@ public:
         /** Indicates that any of the modifier keys is active. */ 
         AnyModifierState = 16
     };
+    Q_DECLARE_FLAGS(States,State)
 
     /**
      * This enum describes commands which are associated with particular key sequences.
@@ -105,6 +106,7 @@ public:
         /** Toggles scroll lock mode */
         ScrollLockCommand = 32
     };
+    Q_DECLARE_FLAGS(Commands,Command)
 
     /**
      * Represents an association between a key sequence pressed by the user
@@ -156,15 +158,15 @@ public:
          * If a modifier is not set in modifierMask() then the entry matches whether the modifier
          * is pressed or not. 
          */
-        Qt::KeyboardModifier modifiers() const;
+        Qt::KeyboardModifiers modifiers() const;
 
         /** Returns the keyboard modifiers which are valid in this entry.  See modifiers() */
-        Qt::KeyboardModifier modifierMask() const;
+        Qt::KeyboardModifiers modifierMask() const;
 
         /** See modifiers() */
-        void setModifiers( Qt::KeyboardModifier modifiers );
+        void setModifiers( Qt::KeyboardModifiers modifiers );
         /** See modifierMask() and modifiers() */
-        void setModifierMask( Qt::KeyboardModifier modifiers );
+        void setModifierMask( Qt::KeyboardModifiers modifiers );
 
         /** 
          * Returns a bitwise-OR of the enabled state flags associated with this entry. 
@@ -174,15 +176,15 @@ public:
          * If a state is not set in stateMask() then the entry matches whether the terminal
          * is in that state or not. 
          */
-        State state() const;
+        States state() const;
 
         /** Returns the state flags which are valid in this entry.  See state() */
-        State stateMask() const;
+        States stateMask() const;
 
         /** See state() */
-        void setState( State state );
+        void setState( States state );
         /** See stateMask() */
-        void setStateMask( State mask );
+        void setStateMask( States mask );
 
         /** 
          * Returns the key code and modifiers associated with this entry 
@@ -206,7 +208,9 @@ public:
          * Returns true if this entry matches the given key sequence, specified
          * as a combination of @p keyCode , @p modifiers and @p state.
          */
-        bool matches( int keyCode , Qt::KeyboardModifier modifiers , State flags ) const;
+        bool matches( int keyCode , 
+                      Qt::KeyboardModifiers modifiers , 
+                      States flags ) const;
 
         bool operator==(const Entry& rhs) const;
        
@@ -216,10 +220,10 @@ public:
         QByteArray unescape(const QByteArray& text) const;
 
         int _keyCode;
-        Qt::KeyboardModifier _modifiers;
-        Qt::KeyboardModifier _modifierMask;
-        State _state;
-        State _stateMask;
+        Qt::KeyboardModifiers _modifiers;
+        Qt::KeyboardModifiers _modifierMask;
+        States _state;
+        States _stateMask;
 
         Command _command;
         QByteArray _text;
@@ -253,7 +257,9 @@ public:
      * @param modifiers A combination of modifiers
      * @param state Optional flags which specify the current state of the terminal
      */
-    Entry findEntry(int keyCode , Qt::KeyboardModifier modifiers , State state = NoState) const;
+    Entry findEntry(int keyCode , 
+                    Qt::KeyboardModifiers modifiers , 
+                    States state = NoState) const;
 
     /** 
      * Adds an entry to this keyboard translator's table.  Entries can be looked up according
@@ -282,6 +288,8 @@ private:
     QString _name;
     QString _description;
 };
+Q_DECLARE_OPERATORS_FOR_FLAGS(KeyboardTranslator::States);
+Q_DECLARE_OPERATORS_FOR_FLAGS(KeyboardTranslator::Commands);
 
 /** 
  * Parses the contents of a Keyboard Translator (.keytab) file and 
@@ -361,14 +369,14 @@ private:
     void readNext();
     bool decodeSequence(const QString& , 
                                 int& keyCode,
-                                Qt::KeyboardModifier& modifiers,
-                                Qt::KeyboardModifier& modifierMask,
-                                KeyboardTranslator::State& state,
-                                KeyboardTranslator::State& stateFlags);
+                                Qt::KeyboardModifiers& modifiers,
+                                Qt::KeyboardModifiers& modifierMask,
+                                KeyboardTranslator::States& state,
+                                KeyboardTranslator::States& stateFlags);
 
-    static bool parseAsModifier(const QString& item , int& modifier);
-    static bool parseAsStateFlag(const QString& item , int& modifier);
-    static bool parseAsKeyCode(const QString& item , int& modifier);
+    static bool parseAsModifier(const QString& item , Qt::KeyboardModifier& modifier);
+    static bool parseAsStateFlag(const QString& item , KeyboardTranslator::State& state);
+    static bool parseAsKeyCode(const QString& item , int& keyCode);
     
     QIODevice* _source;
     QString _description;
@@ -471,17 +479,17 @@ private:
 inline int KeyboardTranslator::Entry::keyCode() const { return _keyCode; }
 inline void KeyboardTranslator::Entry::setKeyCode(int keyCode) { _keyCode = keyCode; }
 
-inline void KeyboardTranslator::Entry::setModifiers( Qt::KeyboardModifier modifier ) 
+inline void KeyboardTranslator::Entry::setModifiers( Qt::KeyboardModifiers modifier ) 
 { 
     _modifiers = modifier;
 }
-inline Qt::KeyboardModifier KeyboardTranslator::Entry::modifiers() const { return _modifiers; }
+inline Qt::KeyboardModifiers KeyboardTranslator::Entry::modifiers() const { return _modifiers; }
 
-inline void  KeyboardTranslator::Entry::setModifierMask( Qt::KeyboardModifier mask ) 
+inline void  KeyboardTranslator::Entry::setModifierMask( Qt::KeyboardModifiers mask ) 
 { 
    _modifierMask = mask; 
 }
-inline Qt::KeyboardModifier KeyboardTranslator::Entry::modifierMask() const { return _modifierMask; }
+inline Qt::KeyboardModifiers KeyboardTranslator::Entry::modifierMask() const { return _modifierMask; }
 
 inline bool KeyboardTranslator::Entry::isNull() const
 {
@@ -500,17 +508,17 @@ inline void KeyboardTranslator::Entry::setText( const QByteArray& text )
 }
 inline QByteArray KeyboardTranslator::Entry::text() const { return _text; }
 
-inline void KeyboardTranslator::Entry::setState( State state )
+inline void KeyboardTranslator::Entry::setState( States state )
 { 
     _state = state; 
 }
-inline KeyboardTranslator::State KeyboardTranslator::Entry::state() const { return _state; }
+inline KeyboardTranslator::States KeyboardTranslator::Entry::state() const { return _state; }
 
-inline void KeyboardTranslator::Entry::setStateMask( State stateMask )
+inline void KeyboardTranslator::Entry::setStateMask( States stateMask )
 { 
     _stateMask = stateMask; 
 }
-inline KeyboardTranslator::State KeyboardTranslator::Entry::stateMask() const { return _stateMask; }
+inline KeyboardTranslator::States KeyboardTranslator::Entry::stateMask() const { return _stateMask; }
 
 }
 

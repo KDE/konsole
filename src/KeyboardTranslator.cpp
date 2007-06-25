@@ -227,10 +227,10 @@ void KeyboardTranslatorReader::readNext()
         const QList<Token>& tokens = tokenize( QString(_source->readLine()) );
         if ( !tokens.isEmpty() && tokens.first().type == Token::KeyKeyword )
         {
-            KeyboardTranslator::State flags = KeyboardTranslator::NoState;
-            KeyboardTranslator::State flagMask = KeyboardTranslator::NoState;
-            Qt::KeyboardModifier modifiers = Qt::NoModifier;
-            Qt::KeyboardModifier modifierMask = Qt::NoModifier;
+            KeyboardTranslator::States flags = KeyboardTranslator::NoState;
+            KeyboardTranslator::States flagMask = KeyboardTranslator::NoState;
+            Qt::KeyboardModifiers modifiers = Qt::NoModifier;
+            Qt::KeyboardModifiers modifierMask = Qt::NoModifier;
 
             int keyCode = Qt::Key_unknown;
 
@@ -294,19 +294,19 @@ void KeyboardTranslatorReader::readNext()
 
 bool KeyboardTranslatorReader::decodeSequence(const QString& text,
                                               int& keyCode,
-                                              Qt::KeyboardModifier& modifiers,
-                                              Qt::KeyboardModifier& modifierMask,
-                                              KeyboardTranslator::State& flags,
-                                              KeyboardTranslator::State& flagMask)
+                                              Qt::KeyboardModifiers& modifiers,
+                                              Qt::KeyboardModifiers& modifierMask,
+                                              KeyboardTranslator::States& flags,
+                                              KeyboardTranslator::States& flagMask)
 {
     bool isWanted = true; 
     bool endOfItem = false;
     QString buffer;
 
-    int tempModifiers = modifiers;
-    int tempModifierMask = modifierMask;
-    int tempFlags = flags;
-    int tempFlagMask = flagMask;
+    Qt::KeyboardModifiers tempModifiers = modifiers;
+    Qt::KeyboardModifiers tempModifierMask = modifierMask;
+    KeyboardTranslator::States tempFlags = flags;
+    KeyboardTranslator::States tempFlagMask = flagMask;
 
   //  qDebug() << "Input text:" << text;
 
@@ -324,9 +324,9 @@ bool KeyboardTranslatorReader::decodeSequence(const QString& text,
 
         if ( (endOfItem || isLastLetter) && !buffer.isEmpty() )
         {
-            int itemModifier = 0;
+            Qt::KeyboardModifier itemModifier = Qt::NoModifier;
             int itemKeyCode = 0;
-            int itemFlag = 0;
+            KeyboardTranslator::State itemFlag = KeyboardTranslator::NoState;
 
             if ( parseAsModifier(buffer,itemModifier) )
             {
@@ -368,15 +368,15 @@ bool KeyboardTranslatorReader::decodeSequence(const QString& text,
            isWanted = false; 
     } 
 
-    modifiers = (Qt::KeyboardModifier)tempModifiers;
-    modifierMask = (Qt::KeyboardModifier)tempModifierMask;
-    flags = (KeyboardTranslator::State)tempFlags;
-    flagMask = (KeyboardTranslator::State)tempFlagMask;
+    modifiers = tempModifiers;
+    modifierMask = tempModifierMask;
+    flags = tempFlags;
+    flagMask = tempFlagMask;
 
     return true;
 }
 
-bool KeyboardTranslatorReader::parseAsModifier(const QString& item , int& modifier)
+bool KeyboardTranslatorReader::parseAsModifier(const QString& item , Qt::KeyboardModifier& modifier)
 {
     if ( item == "shift" )
         modifier = Qt::ShiftModifier;
@@ -391,7 +391,7 @@ bool KeyboardTranslatorReader::parseAsModifier(const QString& item , int& modifi
 
     return true;
 }
-bool KeyboardTranslatorReader::parseAsStateFlag(const QString& item , int& flag)
+bool KeyboardTranslatorReader::parseAsStateFlag(const QString& item , KeyboardTranslator::State& flag)
 {
     if ( item == "appcukeys" )
         flag = KeyboardTranslator::CursorKeysState;
@@ -660,8 +660,9 @@ bool KeyboardTranslator::Entry::operator==(const Entry& rhs) const
            _text == rhs._text;
 }
 
-bool KeyboardTranslator::Entry::matches(int keyCode , Qt::KeyboardModifier modifiers,
-                                        State state) const
+bool KeyboardTranslator::Entry::matches(int keyCode , 
+                                        Qt::KeyboardModifiers modifiers,
+                                        States state) const
 {
 
     //qDebug() << "Checking for match" << conditionToString();
@@ -679,7 +680,7 @@ bool KeyboardTranslator::Entry::matches(int keyCode , Qt::KeyboardModifier modif
 
     // if modifiers is non-zero, the 'any modifier' state is implicit
     if ( modifiers != 0 )
-        state = (State)(state | AnyModifierState);
+        state |= AnyModifierState;
 
     if ( (state & _stateMask) != (_state & _stateMask) )
         return false;
@@ -922,7 +923,7 @@ void KeyboardTranslator::removeEntry(const Entry& entry)
 {
     _entries.remove(entry.keyCode(),entry);
 }
-KeyboardTranslator::Entry KeyboardTranslator::findEntry(int keyCode, Qt::KeyboardModifier modifiers, State state) const
+KeyboardTranslator::Entry KeyboardTranslator::findEntry(int keyCode, Qt::KeyboardModifiers modifiers, States state) const
 {
     //qDebug() << "Searching for entry for key code =" << keyCode << ", modifiers =" << modifiers;
     //qDebug() << "Translator keys, count: " << _entries.count() << _entries.keys();
