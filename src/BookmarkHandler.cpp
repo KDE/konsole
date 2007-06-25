@@ -62,8 +62,8 @@ BookmarkHandler::BookmarkHandler( KActionCollection* collection,
     if ( m_file.isEmpty() )
         m_file = KStandardDirs::locateLocal( "data", "konsole/bookmarks.xml" );
 
-    KBookmarkManager *manager = KBookmarkManager::managerForFile( m_file, "konsole", false);
-    
+    KBookmarkManager *manager = KBookmarkManager::managerForFile( m_file, "konsole" );
+
     manager->setUpdate( true );
 
     if (toplevel) {
