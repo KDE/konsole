@@ -288,8 +288,8 @@ private:
     QString _name;
     QString _description;
 };
-Q_DECLARE_OPERATORS_FOR_FLAGS(KeyboardTranslator::States);
-Q_DECLARE_OPERATORS_FOR_FLAGS(KeyboardTranslator::Commands);
+Q_DECLARE_OPERATORS_FOR_FLAGS(KeyboardTranslator::States)
+Q_DECLARE_OPERATORS_FOR_FLAGS(KeyboardTranslator::Commands)
 
 /** 
  * Parses the contents of a Keyboard Translator (.keytab) file and 
