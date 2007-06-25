@@ -119,11 +119,11 @@ bool KeyBindingEditor::eventFilter( QObject* watched , QEvent* event )
             // area, but preferably not in a way which clutters the UI with lots of 
             // checkboxes.
             //
-            const KeyboardTranslator::State state = KeyboardTranslator::AnsiState;
+            const KeyboardTranslator::States states = KeyboardTranslator::AnsiState;
 
-            int modifiers = keyEvent->modifiers();
             KeyboardTranslator::Entry entry = _translator->findEntry( keyEvent->key() , 
-                                                                      (Qt::KeyboardModifier)modifiers, state );
+                                                                      keyEvent->modifiers(), 
+                                                                      states );
 
             if ( !entry.isNull() )
             {
