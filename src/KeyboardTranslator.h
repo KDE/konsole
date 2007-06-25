@@ -362,7 +362,7 @@ private:
     bool decodeSequence(const QString& , 
                                 int& keyCode,
                                 Qt::KeyboardModifier& modifiers,
-                                Qt::KeyboardModifier& modifiers,
+                                Qt::KeyboardModifier& modifierMask,
                                 KeyboardTranslator::State& state,
                                 KeyboardTranslator::State& stateFlags);
 
