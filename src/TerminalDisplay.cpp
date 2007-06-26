@@ -589,13 +589,13 @@ void TerminalDisplay::drawCursor(QPainter& painter,
             if ( hasFocus() )
             {
                 painter.fillRect(cursorRect, _cursorColor.isValid() ? _cursorColor : foregroundColor);
-            }
-
-            if ( !_cursorColor.isValid() )
-            {
-                // invert the colour used to draw the text to ensure that the character at
-                // the cursor position is readable
-                invertCharacterColor = true;
+            
+                if ( !_cursorColor.isValid() )
+                {
+                    // invert the colour used to draw the text to ensure that the character at
+                    // the cursor position is readable
+                    invertCharacterColor = true;
+                }
             }
        }
        else if ( _cursorShape == UnderlineCursor )
