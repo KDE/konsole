@@ -189,6 +189,9 @@ void ColorSchemeEditor::setupColorTable(const ColorScheme* colors)
         _ui->colorTable->setItem(row,0,nameItem);
         _ui->colorTable->setItem(row,1,colorItem);
     }
+
+    // ensure that color names are as fully visible as possible
+    _ui->colorTable->resizeColumnToContents(0);
 }
 ColorScheme* ColorSchemeEditor::colorScheme() const
 {

@@ -438,11 +438,12 @@ void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
 
     _ui->colorSchemeList->setModel(model);
 
-    /*if ( selectCurrentScheme )
+#if 0
+    if ( selectCurrentScheme )
         _ui->colorSchemeList->selectionModel()->select(
                        selectedItem->index() , QItemSelectionModel::Select
-                     );*/
-
+                     );
+#endif
 }
 void EditProfileDialog::updateKeyBindingsList()
 {
@@ -1076,8 +1077,11 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
     painter->setBrush(gradient);
     painter->drawRoundRect( backgroundRect , 4 , 30 );
 
+    const bool isChecked = index.data(Qt::CheckStateRole) == Qt::Checked;
+    const bool isSelected = option.state & QStyle::State_Selected;
+
     // draw border on selected items
-    if ( option.state & QStyle::State_Selected )
+    if ( isSelected || isChecked )
     {
         static const int selectedBorderWidth = 6;
 
@@ -1086,7 +1090,12 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
         QPen pen;
         
         QColor highlightColor = option.palette.highlight().color();
-        highlightColor.setAlphaF(0.8);
+
+        if ( isSelected )
+            highlightColor.setAlphaF(1.0);
+        else
+            highlightColor.setAlphaF(0.7);
+
         pen.setBrush(highlightColor);
         pen.setWidth(selectedBorderWidth);
         pen.setJoinStyle(Qt::MiterJoin);
@@ -1106,7 +1115,7 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
 
     // use bold text for active color scheme
     QFont itemFont = painter->font();
-    if ( index.data(Qt::CheckStateRole) == Qt::Checked )
+    if ( isChecked )
         itemFont.setBold(true);
     else
         itemFont.setBold(false);
