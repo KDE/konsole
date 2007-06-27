@@ -211,7 +211,10 @@ signals:
     /** Emitted when the container has no more children */
     void empty(ViewContainer* container);
 
-    /** Emitted when the user requests to close the a view */
+    /** Emitted when the user requests to duplicate a view */
+    void duplicateRequest( ViewProperties* properties );
+
+    /** Emitted when the user requests to close a view */
     void closeRequest(QWidget* activeView);
 
     /** Emitted when the active view changes */
@@ -369,7 +372,9 @@ private slots:
     void updateIcon(ViewProperties* item);
     void updateActivity(ViewProperties* item);
     void currentTabChanged(int index);
-    
+   
+    void tabDoubleClicked(int index);
+
 private:
     void dynamicTabBarVisibility();
     void setTabBarVisible(bool visible);

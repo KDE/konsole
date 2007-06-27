@@ -266,13 +266,13 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
                          SLOT(showContextMenu(QWidget*,const QPoint&))); 
 }
 
+
+
 void TabbedViewContainer::currentTabChanged(int tab)
 {
     if ( tab >= 0 )
     {
         emit activeViewChanged( _tabWidget->widget(tab) );
-
-        
     }
 }
 
@@ -427,6 +427,7 @@ TabbedViewContainerV2::TabbedViewContainerV2(NavigationPosition position , QObje
     _tabBar->setDrawBase(true);
    
     connect( _tabBar , SIGNAL(currentChanged(int)) , this , SLOT(currentTabChanged(int)) );
+    connect( _tabBar , SIGNAL(mouseDoubleClick(int)) , this , SLOT(tabDoubleClicked(int)) );
 
     _layout = new TabbedViewContainerV2Layout;
     _layout->setSpacing(0);
@@ -524,6 +525,15 @@ void TabbedViewContainerV2::dynamicTabBarVisibility()
 TabbedViewContainerV2::~TabbedViewContainerV2()
 {
     _containerWidget->deleteLater();
+}
+void TabbedViewContainerV2::tabDoubleClicked(int tab)
+{
+    qDebug() << __FUNCTION__ << ", tab index =" << tab;
+
+    if ( tab < 0 )
+    {
+        //emit duplicateRequest(); 
+    }
 }
 void TabbedViewContainerV2::currentTabChanged(int index)
 {

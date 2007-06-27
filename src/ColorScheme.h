@@ -118,6 +118,8 @@ public:
     //int cursorShape() const;
 
     static QString colorNameForIndex(int index);
+    static QString translatedColorNameForIndex(int index);
+
 private:
     // reads a single colour entry from a KConfig source
     ColorEntry readColorEntry(KConfig& config , const QString& colorName);
@@ -131,6 +133,8 @@ private:
                         // color scheme is being used
 
     static const char* colorNames[TABLE_COLORS];
+    static const QString translatedColorNames[TABLE_COLORS];
+
     static const ColorEntry defaultTable[]; // table of default color entries
 };
 

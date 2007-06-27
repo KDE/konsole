@@ -181,7 +181,7 @@ void ColorSchemeEditor::setupColorTable(const ColorScheme* colors)
 
     for ( int row = 0 ; row < TABLE_COLORS ; row++ )
     {
-        QTableWidgetItem* nameItem = new QTableWidgetItem( colors->colorNameForIndex(row) );
+        QTableWidgetItem* nameItem = new QTableWidgetItem( ColorScheme::translatedColorNameForIndex(row) );
         QTableWidgetItem* colorItem = new QTableWidgetItem();
         colorItem->setBackground( table[row].color );
         colorItem->setFlags( colorItem->flags() & ~Qt::ItemIsEditable & ~Qt::ItemIsSelectable );

@@ -84,6 +84,29 @@ const char* ColorScheme::colorNames[TABLE_COLORS] =
   "Color6Intense",
   "Color7Intense"
 };
+const QString ColorScheme::translatedColorNames[TABLE_COLORS] =
+{
+    i18n("Foreground"),
+    i18n("Background"),
+    i18n("Color 1"),
+    i18n("Color 2"),
+    i18n("Color 3"),
+    i18n("Color 4"),
+    i18n("Color 5"),
+    i18n("Color 6"),
+    i18n("Color 7"),
+    i18n("Color 8"),
+    i18n("Foreground (Intense)"),
+    i18n("Background (Intense)"),
+    i18n("Color 1 (Intense)"),
+    i18n("Color 2 (Intense)"),
+    i18n("Color 3 (Intense)"),
+    i18n("Color 4 (Intense)"),
+    i18n("Color 5 (Intense)"),
+    i18n("Color 6 (Intense)"),
+    i18n("Color 7 (Intense)"),
+    i18n("Color 8 (Intense)")
+};
 
 ColorSchemeManager* ColorSchemeManager::_instance = 0;
 
@@ -174,7 +197,12 @@ QString ColorScheme::colorNameForIndex(int index)
 
     return QString(colorNames[index]);
 }
+QString ColorScheme::translatedColorNameForIndex(int index) 
+{
+    Q_ASSERT( index >= 0 && index < TABLE_COLORS );
 
+    return QString(translatedColorNames[index]);
+}
 ColorEntry ColorScheme::readColorEntry(KConfig& config , const QString& colorName)
 {
     KConfigGroup configGroup(&config,colorName);

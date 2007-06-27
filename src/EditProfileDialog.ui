@@ -180,6 +180,9 @@
           </item>
           <item row="4" column="1" >
            <widget class="QPushButton" name="environmentEditButton" >
+            <property name="toolTip" >
+             <string>Edit the list of environment variables and associated values</string>
+            </property>
             <property name="text" >
              <string>Edit...</string>
             </property>
@@ -206,10 +209,10 @@
              </sizepolicy>
             </property>
             <property name="toolTip" >
-             <string>Show or hide the menu bar in terminal windows using this profile</string>
+             <string>Show or hide the menu bar in terminal windows</string>
             </property>
             <property name="text" >
-             <string>Show menu bar in new windows created from this profile</string>
+             <string>Show menu bar in new windows</string>
             </property>
            </widget>
           </item>
@@ -325,6 +328,9 @@
               <horstretch>1</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="toolTip" >
+             <string/>
             </property>
            </widget>
           </item>
