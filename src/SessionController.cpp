@@ -399,12 +399,18 @@ void SessionController::setupActions()
     action->setText( i18n("&Copy") );
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_C) );
     connect( action , SIGNAL(triggered()) , this , SLOT(copy()) );
-    
-    action = collection->addAction("paste");
-    action->setIcon( KIcon("edit-paste") );
-    action->setText( i18n("&Paste") );
-    action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_V) );
-    connect( action , SIGNAL(triggered()) , this , SLOT(paste()) );
+
+    KAction* pasteAction = new KAction( i18n("&Paste") , this );    
+    pasteAction->setIcon( KIcon("edit-paste") );
+
+    KShortcut pasteShortcut = pasteAction->shortcut();
+    pasteShortcut.setPrimary( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_V) );
+    pasteShortcut.setAlternate( QKeySequence(Qt::SHIFT+Qt::Key_Insert) );
+    pasteAction->setShortcut(pasteShortcut);
+
+    collection->addAction("paste",pasteAction);
+
+    connect( pasteAction , SIGNAL(triggered()) , this , SLOT(paste()) );
 
     // Rename Session
     action = collection->addAction("rename-session");
