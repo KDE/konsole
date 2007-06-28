@@ -27,6 +27,7 @@
 
 // Qt
 #include <QtCore/QDebug>
+#include <QtCore/QDir>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtCore/QRegExp>
@@ -65,12 +66,48 @@ QString ProcessInfo::format(const QString& input) const
    output.replace("%u","NOT IMPLEMENTED YET");
    output.replace("%n",name(&ok));
    output.replace("%D",currentDir(&ok));
-   output.replace("%d",QFileInfo(currentDir(&ok)).baseName());
+   output.replace("%d",formatShortDir(currentDir(&ok)));
    
    // remove any remaining %[LETTER] sequences
    // output.replace(QRegExp("%\\w"),QString::null);
 
    return output;
+}
+
+QString ProcessInfo::formatShortDir(const QString& input) const
+{
+    QString result;
+
+    QStringList parts = input.split( QDir::separator() );
+
+    // temporarily hard-coded
+    QSet<QString> commonDirNames;
+    commonDirNames << "src" << "build" << "bin"
+                   << "lib" << "tmp";
+
+    QListIterator<QString> iter(parts);
+    iter.toBack();
+
+    // go backwards through the list of the path's parts
+    // adding abbreviations of common directory names
+    // and stopping when we reach a dir name which is not
+    // in the commonDirNames set
+    while ( iter.hasPrevious() )
+    {
+        QString part = iter.previous();
+
+        if ( commonDirNames.contains(part) )
+        {
+            result.prepend(QDir::separator() + part[0]);
+        }
+        else
+        {
+            result.prepend(part);
+            break;
+        }
+    }
+
+    return result;
 }
 
 QVector<QString> ProcessInfo::arguments(bool* ok) const

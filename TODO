@@ -50,16 +50,40 @@ The KDE 4.0 TODO List:
   (Shift+<Arrows> and Shift+Tab)
 
 == ESSENTIAL TWEAKS ==
- 
+
 - More intelligent tab title format which can adjust its output
   to display more relevant information depending upon the 
   command being run.  eg.  If the current command is "svn"
   then the operation ( checkout, update, remove etc. ) 
   could be included as well.
 
+- When composing the short directory name for the tab title, 
+  add a means to strip or ignore common prefixes such 
+  as 'src','build','tmp','bin','lib' etc. to provide better
+  differentiated tab titles when tabs are open in multiple
+  different directories.
+
+  eg.
+
+  If tabs are open in:
+
+    /path/to/konsole/src/
+
+    and
+
+    /path/to/kate/src/
+
+  '%d' in tab titles would be replaced with 'konsole/s' and
+  'kate/s' instead of 'src' in both.
+
+  [ IN PROGRESS ]
+
 == BUGS ==
 
-- Shortcuts do not word when the menu bar is hidden.
+- Alt modifiers cannot be used to access menu items because they are 
+  used by the terminal.
+
+- Shortcuts do not work when the menu bar is hidden.
 
 - Allow the user to over-ride the "no Ctrl+[Key] shortcuts" limitation with shortcuts
 set in the configuration dialog, but warn the user if they try to do so.  This is the 

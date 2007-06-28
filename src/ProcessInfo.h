@@ -232,7 +232,11 @@ protected:
 
 
 private:
-    
+    // takes a full directory path and returns a
+    // shortened version suitable for display in 
+    // space-constrained UI elements (eg. tabs)
+    QString formatShortDir(const QString& dirPath) const;
+
     // valid bits for _fields variable, ensure that
     // _fields is changed to an int if more than 8 fields are added
     enum FIELD_BITS
