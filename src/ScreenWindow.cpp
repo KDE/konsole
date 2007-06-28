@@ -227,6 +227,10 @@ void ScreenWindow::notifyOutputChanged()
         // be adjusted - otherwise the output will scroll
         _currentLine = qMax(0,_currentLine - 
                               _screen->droppedLines());
+
+        // ensure that the screen window's current position does
+        // not go beyond the bottom of the screen
+        _currentLine = qMin( _currentLine , _screen->getHistLines() );
     }
 
     emit outputChanged(); 

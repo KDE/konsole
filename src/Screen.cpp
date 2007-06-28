@@ -538,38 +538,38 @@ void Screen::effectiveRendition()
 
 Character* Screen::getCookedImage( int startLine )
 {
-  int viewHistoryCursor = startLine;
+  Q_ASSERT( startLine <= hist->getLines() );
 
   int x,y;
   Character* merged = new Character[lines*columns+1];
   merged[lines*columns] = defaultChar;
 
-  for (y = 0; (y < lines) && (y < (hist->getLines()-viewHistoryCursor)); y++)
+  for (y = 0; (y < lines) && (y < (hist->getLines()-startLine)); y++)
   {
-    int len = qMin(columns,hist->getLineLen(y+viewHistoryCursor));
+    int len = qMin(columns,hist->getLineLen(y+startLine));
     int yp  = y*columns;
 
-    hist->getCells(y+viewHistoryCursor,0,len,merged+yp);
+    hist->getCells(y+startLine,0,len,merged+yp);
     for (x = len; x < columns; x++) merged[yp+x] = defaultChar;
     if (sel_begin !=-1)
     for (x = 0; x < columns; x++)
       {
 #ifdef REVERSE_WRAPPED_LINES
-        if (hist->isLINE_WRAPPED(y+viewHistoryCursor))
+        if (hist->isLINE_WRAPPED(y+startLine))
           reverseRendition(&merged[p]);
 #endif
-        if (isSelected(x,y+viewHistoryCursor)) {
+        if (isSelected(x,y+startLine)) {
           int p=x + yp;
           reverseRendition(&merged[p]); // for selection
     }
   }
   }
-  if (lines >= hist->getLines()-viewHistoryCursor)
+  if (lines >= hist->getLines()-startLine)
   {
-    for (y = (hist->getLines()-viewHistoryCursor); y < lines ; y++)
+    for (y = (hist->getLines()-startLine); y < lines ; y++)
     {
        int yp  = y*columns;
-       int yr =  (y-hist->getLines()+viewHistoryCursor)*columns;
+       int yr =  (y-hist->getLines()+startLine)*columns;
        for (x = 0; x < columns; x++)
        { int p = x + yp; int r = x + yr;
 
@@ -580,10 +580,10 @@ Character* Screen::getCookedImage( int startLine )
          merged[p] = screenLines[r/columns].value(r%columns,defaultChar);
 
 #ifdef REVERSE_WRAPPED_LINES
-         if (lineProperties[y- hist->getLines() +viewHistoryCursor] & LINE_WRAPPED)
+         if (lineProperties[y- hist->getLines() +startLine] & LINE_WRAPPED)
            reverseRendition(&merged[p]);
 #endif
-         if (sel_begin != -1 && isSelected(x,y+viewHistoryCursor))
+         if (sel_begin != -1 && isSelected(x,y+startLine))
            reverseRendition(&merged[p]); // for selection
        }
 
@@ -595,34 +595,38 @@ Character* Screen::getCookedImage( int startLine )
     for (int i = 0; i < lines*columns; i++)
       reverseRendition(&merged[i]); // for reverse display
   }
-//  if (getMode(MODE_Cursor) && (cuY+(hist->getLines()-viewHistoryCursor) < lines)) // cursor visible
+//  if (getMode(MODE_Cursor) && (cuY+(hist->getLines()-startLine) < lines)) // cursor visible
 
-  int loc_ = loc(cuX, cuY+hist->getLines()-viewHistoryCursor);
+  int loc_ = loc(cuX, cuY+hist->getLines()-startLine);
   if(getMode(MODE_Cursor) && loc_ < columns*lines)
-    merged[loc(cuX,cuY+(hist->getLines()-viewHistoryCursor))].rendition|=RE_CURSOR;
+    merged[loc(cuX,cuY+(hist->getLines()-startLine))].rendition|=RE_CURSOR;
   return merged;
 }
 
 QVector<LineProperty> Screen::getCookedLineProperties( int startLine )
 {
-  const int viewHistoryCursor = startLine;
+  Q_ASSERT( startLine <= hist->getLines() );
 
   QVector<LineProperty> result(lines);
 
-  for (int y = 0; (y < lines) && (y < (hist->getLines()-viewHistoryCursor)); y++)
+  // properties for lines in history
+  for (int y = 0; (y < lines) && (y < (hist->getLines()-startLine)); y++)
   {
 	//TODO Support for line properties other than wrapped lines
     //result[y]=hist->isLINE_WRAPPED(y+viewHistoryCursor);
   
-	  if (hist->isWrappedLine(y+viewHistoryCursor))
+	  if (hist->isWrappedLine(y+startLine))
 	  {
 	  	result[y] = (LineProperty)(result[y] | LINE_WRAPPED);
 	  }
   }
   
-  if (lines >= hist->getLines()-viewHistoryCursor)
-    for (int y = (hist->getLines()-viewHistoryCursor); y < lines ; y++)
-      result[y]=lineProperties[y- hist->getLines() +viewHistoryCursor];
+  // properties for lines in screen buffer
+  if (lines >= hist->getLines()-startLine)
+  {
+    for (int y = (hist->getLines()-startLine); y < lines ; y++)
+      result[y]=lineProperties[y - hist->getLines() + startLine];
+  }
 
   return result;
 }
