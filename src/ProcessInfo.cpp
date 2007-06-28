@@ -74,6 +74,12 @@ QString ProcessInfo::format(const QString& input) const
    return output;
 }
 
+const char* ProcessInfo::DefaultCommonDirNames[] = 
+{ "src" , "build" , "debug" , "release" ,
+  "bin" , "lib" , "tmp" , "doc" , "data" , 
+  "share" , "examples" , "icons" , 
+  "pics" , "plugins" , 0 };
+
 QString ProcessInfo::formatShortDir(const QString& input) const
 {
     QString result;
@@ -82,8 +88,13 @@ QString ProcessInfo::formatShortDir(const QString& input) const
 
     // temporarily hard-coded
     QSet<QString> commonDirNames;
-    commonDirNames << "src" << "build" << "bin"
-                   << "lib" << "tmp";
+   
+    const char** defaultCommonNames = DefaultCommonDirNames;
+    while ( *defaultCommonNames != 0 )
+    {
+        commonDirNames << *defaultCommonNames;
+        ++defaultCommonNames;
+    }
 
     QListIterator<QString> iter(parts);
     iter.toBack();
