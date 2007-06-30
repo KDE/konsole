@@ -6,7 +6,6 @@ Actions=openTerminalHere;
 X-KDE-AuthorizeAction=shell_access
 
 Name=Konsole
-Name[ar]=طرفية التحكم
 Name[ca]=Consola
 Name[csb]=Kònsola
 Name[el]=Κονσόλα
@@ -36,7 +35,6 @@ Name[x-test]=xxKonsolexx
 [Desktop Action openTerminalHere]
 Name=Open Terminal Here
 Name[af]=Maak Terminaal Hier Oop
-Name[ar]=إفتح مطراف سطر الأوامر هنا
 Name[be]=Адкрыць тэрмінал тут
 Name[br]=Digeriñ un termenell amañ
 Name[ca]=Obre un terminal aquí

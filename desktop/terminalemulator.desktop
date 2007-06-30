@@ -5,7 +5,6 @@ X-KDE-ServiceType=TerminalEmulator
 X-KDE-Derived=KParts/ReadOnlyPart
 Name=Terminal Emulator
 Name[af]=Terminaal Emulasie
-Name[ar]=مضاهِ مطراف
 Name[be]=Эмулятар тэрміналу
 Name[br]=Kendarvanerezh termenell
 Name[ca]=Emulador de terminal

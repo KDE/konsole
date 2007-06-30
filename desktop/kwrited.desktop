@@ -2,7 +2,6 @@
 Encoding=UTF-8
 Name=KDE Write Daemon
 Name[af]=KDE Skryf Bediener
-Name[ar]=مرقب الكتابة لِــ KDE
 Name[be]=Cервіс KDE Write
 Name[br]=Diaoul skrivañ KDE
 Name[ca]=Dimoni d'escriptura del KDE
@@ -58,7 +57,6 @@ Name[x-test]=xxKDE Write Daemonxx
 Name[zh_TW]=KDE Write 伺服程式
 Comment=Watch for messages from local users sent with write(1) or wall(1)
 Comment[af]=Kyk uit vir boodskappe vanaf plaaslike gebruikers wat met write(1) of wall(1) gestuur is
-Comment[ar]=راقب رسائل من المستخدمين المحلّيين المرسلة بواسطة write(1) أو wall(1)
 Comment[be]=Назірае за паведамленнямі ад мясцовых карыстальнікаў, дасланымі праз write(1) ці wall(1)
 Comment[ca]=Fes atenció als missatges dels usuaris locals enviats amb write(1) o wall(1)
 Comment[cs]=Sledování zpráv od místních uživatelů poslaných pomocí write(1) nebo wall(1)
