@@ -41,7 +41,7 @@
 #include <KIconLoader>
 #include <KLocale>
 #include <KMenu>
-#include <KPalette>
+#include <KColorCollection>
 #include <KTabWidget>
 
 // Konsole
@@ -217,23 +217,23 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
 
      //Create a colour selection palette and fill it with a range of suitable colours
      QString paletteName;
-     QStringList availablePalettes = KPalette::getPaletteList();
+     QStringList availablePalettes = KColorCollection::installedCollections();
 
      if (availablePalettes.contains("40.colors"))
         paletteName = "40.colors";
 
-    KPalette palette(paletteName);
+    KColorCollection palette(paletteName);
 
     //If the palette of colours was found, create a palette menu displaying those colors
     //which the user chooses from when they activate the "Select Tab Color" sub-menu.
     //
     //If the palette is empty, default back to the old behaviour where the user is shown
     //a color dialog when they click the "Select Tab Color" menu item.
-    if ( palette.nrColors() > 0 )
+    if ( palette.count() > 0 )
     {
-        _tabColorCells = new KColorCells(_tabWidget,palette.nrColors()/8,8);
+        _tabColorCells = new KColorCells(_tabWidget,palette.count()/8,8);
 
-        for (int i=0;i<palette.nrColors();i++)
+        for (int i=0;i<palette.count();i++)
             _tabColorCells->setColor(i,palette.color(i));
 
 
