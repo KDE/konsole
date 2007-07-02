@@ -116,7 +116,7 @@ const KComponentData& konsoleFactory::componentData()
 {
   if ( !s_instance )
     {
-      s_aboutData = new KAboutData("konsole", I18N_NOOP("Konsole"), "1.5");
+      s_aboutData = new KAboutData("konsole", 0, ki18n("Konsole"), "1.5");
       s_instance = new KComponentData( s_aboutData );
     }
   return *s_instance;

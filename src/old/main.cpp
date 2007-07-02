@@ -64,39 +64,6 @@
 static const char description[] =
   I18N_NOOP("The KDE Terminal");
 
-static KCmdLineOptions options[] =
-{
-   { "name <name>",    I18N_NOOP("Set window class"), 0 },
-   { "ls",             I18N_NOOP("Start login shell"), 0 },
-   { "T <title>",      I18N_NOOP("Set the window title"), 0 },
-   { "tn <terminal>",  I18N_NOOP("Specify terminal type as set in the TERM\nenvironment variable"), "xterm" },
-   { "noclose",        I18N_NOOP("Do not close Konsole when command exits"), 0 },
-   { "nohist",         I18N_NOOP("Do not save lines in history"), 0 },
-   { "nomenubar",      I18N_NOOP("Do not display menubar"), 0 },
-   { "notabbar",       0, 0 },
-   { "notoolbar",      I18N_NOOP("Do not display tab bar"), 0 },
-   { "noframe",        I18N_NOOP("Do not display frame"), 0 },
-   { "noscrollbar",    I18N_NOOP("Do not display scrollbar"), 0 },
-   { "noxft",          I18N_NOOP("Do not use Xft (anti-aliasing)"), 0 },
-   { "vt_sz CCxLL",    I18N_NOOP("Terminal size in columns x lines"), 0 },
-   { "noresize",       I18N_NOOP("Terminal size is fixed"), 0 },
-   { "type <type>",    I18N_NOOP("Start with given session type"), 0 },
-   { "types",          I18N_NOOP("List available session types"), 0 },
-   { "keytab <name>",  I18N_NOOP("Set keytab to 'name'"), 0 },
-   { "keytabs",        I18N_NOOP("List available keytabs"), 0 },
-   { "profile <name>", I18N_NOOP("Start with given session profile"), 0 },
-   { "profiles",       I18N_NOOP("List available session profiles"), 0 },
-   { "schema <name> | <file>",  I18N_NOOP("Set schema to 'name' or use 'file'"), 0 },
-   { "schemas",        0, 0 },
-   { "schemata",       I18N_NOOP("List available schemata"), 0 },
-//   { "script",         I18N_NOOP("Enable extended DCOP Qt functions"), 0 },
-   { "workdir <dir>",  I18N_NOOP("Change working directory to 'dir'"), 0 },
-   { "!e <command>",   I18N_NOOP("Execute 'command' instead of shell"), 0 },
-   // WABA: All options after -e are treated as arguments.
-   { "+[args]",        I18N_NOOP("Arguments for 'command'"), 0 },
-   KCmdLineLastOption
-};
-
 static bool has_noxft = false;
 static bool login_shell = false;
 //static bool full_script = false;
@@ -165,70 +132,101 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   QByteArray wname = PACKAGE;
 
 
-  KAboutData aboutData( "konsole" , I18N_NOOP("Konsole") , VERSION , description ,
-                        KAboutData::License_GPL , I18N_NOOP("(C) 1997-2006 , Konsole Developers") );
-  aboutData.addAuthor("Robert Knight",I18N_NOOP("Maintainer"), "robertknight@gmail.com");
-  aboutData.addAuthor("Lars Doelle",I18N_NOOP("Author"), "lars.doelle@on-line.de");
-  aboutData.addCredit("Kurt V. Hindenburg",
-    I18N_NOOP("Bug fixes and general improvements"),
+  KAboutData aboutData( "konsole" , 0, ki18n("Konsole") , VERSION , ki18n(description) ,
+                        KAboutData::License_GPL , ki18n("(C) 1997-2006 , Konsole Developers") );
+  aboutData.addAuthor(ki18n("Robert Knight"),ki18n("Maintainer"), "robertknight@gmail.com");
+  aboutData.addAuthor(ki18n("Lars Doelle"),ki18n("Author"), "lars.doelle@on-line.de");
+  aboutData.addCredit(ki18n("Kurt V. Hindenburg"),
+    ki18n("Bug fixes and general improvements"),
     "kurt.hindenburg@gmail.com");
-  aboutData.addCredit("Waldo Bastian",
-    I18N_NOOP("Bug fixes and general improvements"),
+  aboutData.addCredit(ki18n("Waldo Bastian"),
+    ki18n("Bug fixes and general improvements"),
     "bastian@kde.org");
-  aboutData.addCredit("Stephan Binner",
-    I18N_NOOP("Bug fixes and general improvements"),
+  aboutData.addCredit(ki18n("Stephan Binner"),
+    ki18n("Bug fixes and general improvements"),
     "binner@kde.org");
-  aboutData.addCredit("Chris Machemer",
-    I18N_NOOP("Bug fixes"),
+  aboutData.addCredit(ki18n("Chris Machemer"),
+    ki18n("Bug fixes"),
     "machey@ceinetworks.com");
-  aboutData.addCredit("Stephan Kulow",
-    I18N_NOOP("Solaris support and history"),
+  aboutData.addCredit(ki18n("Stephan Kulow"),
+    ki18n("Solaris support and history"),
     "coolo@kde.org");
-  aboutData.addCredit("Alexander Neundorf",
-    I18N_NOOP("Bug fixes and improved startup performance"),
+  aboutData.addCredit(ki18n("Alexander Neundorf"),
+    ki18n("Bug fixes and improved startup performance"),
     "neundorf@kde.org");
-  aboutData.addCredit("Peter Silva",
-    I18N_NOOP("Marking improvements"),
+  aboutData.addCredit(ki18n("Peter Silva"),
+    ki18n("Marking improvements"),
     "peter.silva@videotron.Character");
-  aboutData.addCredit("Lotzi Boloni",
-    I18N_NOOP("Embedded Konsole\n"
+  aboutData.addCredit(ki18n("Lotzi Boloni"),
+    ki18n("Embedded Konsole\n"
     "Toolbar and session names"),
     "boloni@cs.purdue.edu");
-  aboutData.addCredit("David Faure",
-    I18N_NOOP("Embedded Konsole\n"
+  aboutData.addCredit(ki18n("David Faure"),
+    ki18n("Embedded Konsole\n"
     "General improvements"),
     "David.Faure@insa-lyon.foregroundColorr");
-  aboutData.addCredit("Antonio Larrosa",
-    I18N_NOOP("Visual effects"),
+  aboutData.addCredit(ki18n("Antonio Larrosa"),
+    ki18n("Visual effects"),
     "larrosa@kde.org");
-  aboutData.addCredit("Matthias Ettrich",
-    I18N_NOOP("Code from the kvt project\n"
+  aboutData.addCredit(ki18n("Matthias Ettrich"),
+    ki18n("Code from the kvt project\n"
     "General improvements"),
     "ettrich@kde.org");
-  aboutData.addCredit("Warwick Allison",
-    I18N_NOOP("Schema and text selection improvements"),
+  aboutData.addCredit(ki18n("Warwick Allison"),
+    ki18n("Schema and text selection improvements"),
     "warwick@troll.no");
-  aboutData.addCredit("Dan Pilone",
-    I18N_NOOP("SGI port"),
+  aboutData.addCredit(ki18n("Dan Pilone"),
+    ki18n("SGI port"),
     "pilone@slac.com");
-  aboutData.addCredit("Kevin Street",
-    I18N_NOOP("FreeBSD port"),
+  aboutData.addCredit(ki18n("Kevin Street"),
+    ki18n("FreeBSD port"),
     "street@iname.com");
-  aboutData.addCredit("Sven Fischer",
-    I18N_NOOP("Bug fixes"),
+  aboutData.addCredit(ki18n("Sven Fischer"),
+    ki18n("Bug fixes"),
     "herpes@kawo2.renditionwth-aachen.de");
-  aboutData.addCredit("Dale M. Flaven",
-    I18N_NOOP("Bug fixes"),
+  aboutData.addCredit(ki18n("Dale M. Flaven"),
+    ki18n("Bug fixes"),
     "dflaven@netport.com");
-  aboutData.addCredit("Martin Jones",
-    I18N_NOOP("Bug fixes"),
+  aboutData.addCredit(ki18n("Martin Jones"),
+    ki18n("Bug fixes"),
     "mjones@powerup.com.au");
-  aboutData.addCredit("Lars Knoll",
-    I18N_NOOP("Bug fixes"),
+  aboutData.addCredit(ki18n("Lars Knoll"),
+    ki18n("Bug fixes"),
     "knoll@mpi-hd.mpg.de");
-  aboutData.addCredit("",I18N_NOOP("Thanks to many others.\n"));
+  aboutData.addCredit(KLocalizedString(),ki18n("Thanks to many others.\n"));
 
   KCmdLineArgs::init( argc, argv, &aboutData );
+
+  KCmdLineOptions options;
+  options.add("name <name>", ki18n("Set window class"));
+  options.add("ls", ki18n("Start login shell"));
+  options.add("T <title>", ki18n("Set the window title"));
+  options.add("tn <terminal>", ki18n("Specify terminal type as set in the TERM\nenvironment variable"), "xterm");
+  options.add("noclose", ki18n("Do not close Konsole when command exits"));
+  options.add("nohist", ki18n("Do not save lines in history"));
+  options.add("nomenubar", ki18n("Do not display menubar"));
+  options.add("notabbar");
+  options.add("notoolbar", ki18n("Do not display tab bar"));
+  options.add("noframe", ki18n("Do not display frame"));
+  options.add("noscrollbar", ki18n("Do not display scrollbar"));
+  options.add("noxft", ki18n("Do not use Xft (anti-aliasing)"));
+  options.add("vt_sz CCxLL", ki18n("Terminal size in columns x lines"));
+  options.add("noresize", ki18n("Terminal size is fixed"));
+  options.add("type <type>", ki18n("Start with given session type"));
+  options.add("types", ki18n("List available session types"));
+  options.add("keytab <name>", ki18n("Set keytab to 'name'"));
+  options.add("keytabs", ki18n("List available keytabs"));
+  options.add("profile <name>", ki18n("Start with given session profile"));
+  options.add("profiles", ki18n("List available session profiles"));
+  options.add("schema <name> | <file>", ki18n("Set schema to 'name' or use 'file'"));
+  options.add("schemas");
+  //options.add("script", ki18n("Enable extended DCOP Qt functions"));
+  options.add("schemata", ki18n("List available schemata"));
+  options.add("script", ki18n("Enable extended DCOP Qt functions"));
+  options.add("workdir <dir>", ki18n("Change working directory to 'dir'"));
+  options.add("!e <command>", ki18n("Execute 'command' instead of shell"));
+  // WABA: All options after -e are treated as arguments.
+  options.add("+[args]", ki18n("Arguments for 'command'"));
   KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
   KCmdLineArgs *qtargs = KCmdLineArgs::parsedArgs("qt");
@@ -264,15 +262,15 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
 
   QString title;
   if(args->isSet("T")) {
-    title = QFile::decodeName(args->getOption("T"));
+    title = args->getOption("T");
   }
   if(qtargs->isSet("title")) {
-    title = QFile::decodeName(qtargs->getOption("title"));
+    title = qtargs->getOption("title");
   }
 
   QString term = "";
   if(args->isSet("tn")) {
-    term=QLatin1String(args->getOption("tn"));
+    term=args->getOption("tn");
   }
   login_shell = args->isSet("ls");
 
@@ -282,7 +280,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   if (!args->getOption("e").isEmpty())
   {
      if (args->isSet("ls"))
-        KCmdLineArgs::usage(i18n("You can not use BOTH -ls and -e.\n"));
+        KCmdLineArgs::usageError(i18n("You can not use BOTH -ls and -e.\n"));
      shell = strdup(args->getOption("e"));
      eargs.append(shell);
      for(int i=0; i < args->count(); i++)
@@ -356,11 +354,11 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
     return 0;
   }
 
-  QString workDir = QFile::decodeName( args->getOption("workdir") );
+  QString workDir = args->getOption("workdir");
 
   QString keytab = "";
   if (args->isSet("keytab"))
-    keytab = QFile::decodeName(args->getOption("keytab"));
+    keytab = args->getOption("keytab");
 
   QString schema = "";
   if (args->isSet("schema"))
@@ -405,7 +403,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
     }
     else
     {
-       KCmdLineArgs::usage(i18n("expected --vt_sz <#columns>x<#lines> e.g. 80x40\n"));
+       KCmdLineArgs::usageError(i18n("expected --vt_sz <#columns>x<#lines> e.g. 80x40\n"));
     }
   }
 

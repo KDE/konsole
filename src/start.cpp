@@ -44,18 +44,6 @@ void fillAboutData(KAboutData& aboutData);
 void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap);
 #endif
 
-static KCmdLineOptions options[] =
-{
-   /* { "command" , I18N_NOOP("Command to run in new Konsole instance") , 0 },*/
-    { "profile \\<file>" , I18N_NOOP("Name of profile to use for new Konsole instance") , 0},
-    { "list-profiles" , I18N_NOOP("List the available profiles") , 0},
-    // TODO - Update this when F12 is no longer hard coded
-    { "background-mode" , I18N_NOOP("Start Konsole in the background"
-                                    " and bring to the front when the F12"
-                                    " key is pressed") , 0 },
-    KCmdLineLastOption
-};
-
 // ***
 // 
 // Entry point into the Konsole terminal application.  
@@ -67,15 +55,24 @@ static KCmdLineOptions options[] =
 // ***
 extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
 {
-    KAboutData about(   "konsole",
-                        I18N_NOOP("Konsole"),
+    KAboutData about(   "konsole", 0,
+                        ki18n("Konsole"),
                         KONSOLE_VERSION,
-                        I18N_NOOP("Terminal emulator"),
+                        ki18n("Terminal emulator"),
                         KAboutData::License_GPL_V2
                     );
     fillAboutData(about);
 
     KCmdLineArgs::init(argc,argv,&about);
+
+    KCmdLineOptions options;
+    /* { "command" , I18N_NOOP("Command to run in new Konsole instance") , 0 },*/
+    options.add("profile \\<file>", ki18n("Name of profile to use for new Konsole instance"));
+    options.add("list-profiles", ki18n("List the available profiles"));
+    // TODO - Update this when F12 is no longer hard coded
+    options.add("background-mode", ki18n("Start Konsole in the background"
+                                    " and bring to the front when the F12"
+                                    " key is pressed"));
     KCmdLineArgs::addCmdLineOptions(options);
     KUniqueApplication::addCmdLineOptions();
 
@@ -108,66 +105,66 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
 
 void fillAboutData(KAboutData& aboutData)
 {
-  aboutData.addAuthor("Robert Knight",I18N_NOOP("Maintainer"), "robertknight@gmail.com");
-  aboutData.addAuthor("Lars Doelle",I18N_NOOP("Author"), "lars.doelle@on-line.de");
-  aboutData.addCredit("Kurt V. Hindenburg",
-    I18N_NOOP("Bug fixes and general improvements"), 
+  aboutData.addAuthor(ki18n("Robert Knight"),ki18n("Maintainer"), "robertknight@gmail.com");
+  aboutData.addAuthor(ki18n("Lars Doelle"),ki18n("Author"), "lars.doelle@on-line.de");
+  aboutData.addCredit(ki18n("Kurt V. Hindenburg"),
+    ki18n("Bug fixes and general improvements"), 
     "kurt.hindenburg@gmail.com");
-  aboutData.addCredit("Waldo Bastian",
-    I18N_NOOP("Bug fixes and general improvements"),
+  aboutData.addCredit(ki18n("Waldo Bastian"),
+    ki18n("Bug fixes and general improvements"),
     "bastian@kde.org");
-  aboutData.addCredit("Stephan Binner",
-    I18N_NOOP("Bug fixes and general improvements"),
+  aboutData.addCredit(ki18n("Stephan Binner"),
+    ki18n("Bug fixes and general improvements"),
     "binner@kde.org");
-  aboutData.addCredit("Chris Machemer",
-    I18N_NOOP("Bug fixes"),
+  aboutData.addCredit(ki18n("Chris Machemer"),
+    ki18n("Bug fixes"),
     "machey@ceinetworks.com");
-  aboutData.addCredit("Stephan Kulow",
-    I18N_NOOP("Solaris support and history"),
+  aboutData.addCredit(ki18n("Stephan Kulow"),
+    ki18n("Solaris support and history"),
     "coolo@kde.org");
-  aboutData.addCredit("Alexander Neundorf",
-    I18N_NOOP("Bug fixes and improved startup performance"),
+  aboutData.addCredit(ki18n("Alexander Neundorf"),
+    ki18n("Bug fixes and improved startup performance"),
     "neundorf@kde.org");
-  aboutData.addCredit("Peter Silva",
-    I18N_NOOP("Marking improvements"),
+  aboutData.addCredit(ki18n("Peter Silva"),
+    ki18n("Marking improvements"),
     "peter.silva@videotron.Character");
-  aboutData.addCredit("Lotzi Boloni",
-    I18N_NOOP("Embedded Konsole\n"
+  aboutData.addCredit(ki18n("Lotzi Boloni"),
+    ki18n("Embedded Konsole\n"
     "Toolbar and session names"),
     "boloni@cs.purdue.edu");
-  aboutData.addCredit("David Faure",
-    I18N_NOOP("Embedded Konsole\n"
+  aboutData.addCredit(ki18n("David Faure"),
+    ki18n("Embedded Konsole\n"
     "General improvements"),
     "David.Faure@insa-lyon.foregroundColorr");
-  aboutData.addCredit("Antonio Larrosa",
-    I18N_NOOP("Visual effects"),
+  aboutData.addCredit(ki18n("Antonio Larrosa"),
+    ki18n("Visual effects"),
     "larrosa@kde.org");
-  aboutData.addCredit("Matthias Ettrich",
-    I18N_NOOP("Code from the kvt project\n"
+  aboutData.addCredit(ki18n("Matthias Ettrich"),
+    ki18n("Code from the kvt project\n"
     "General improvements"),
     "ettrich@kde.org");
-  aboutData.addCredit("Warwick Allison",
-    I18N_NOOP("Schema and text selection improvements"),
+  aboutData.addCredit(ki18n("Warwick Allison"),
+    ki18n("Schema and text selection improvements"),
     "warwick@troll.no");
-  aboutData.addCredit("Dan Pilone",
-    I18N_NOOP("SGI port"),
+  aboutData.addCredit(ki18n("Dan Pilone"),
+    ki18n("SGI port"),
     "pilone@slac.com");
-  aboutData.addCredit("Kevin Street",
-    I18N_NOOP("FreeBSD port"),
+  aboutData.addCredit(ki18n("Kevin Street"),
+    ki18n("FreeBSD port"),
     "street@iname.com");
-  aboutData.addCredit("Sven Fischer",
-    I18N_NOOP("Bug fixes"),
+  aboutData.addCredit(ki18n("Sven Fischer"),
+    ki18n("Bug fixes"),
     "herpes@kawo2.renditionwth-aachen.de");
-  aboutData.addCredit("Dale M. Flaven",
-    I18N_NOOP("Bug fixes"),
+  aboutData.addCredit(ki18n("Dale M. Flaven"),
+    ki18n("Bug fixes"),
     "dflaven@netport.com");
-  aboutData.addCredit("Martin Jones",
-    I18N_NOOP("Bug fixes"),
+  aboutData.addCredit(ki18n("Martin Jones"),
+    ki18n("Bug fixes"),
     "mjones@powerup.com.au");
-  aboutData.addCredit("Lars Knoll",
-    I18N_NOOP("Bug fixes"),
+  aboutData.addCredit(ki18n("Lars Knoll"),
+    ki18n("Bug fixes"),
     "knoll@mpi-hd.mpg.de");
-  aboutData.addCredit("",I18N_NOOP("Thanks to many others.\n"));
+  aboutData.addCredit(KLocalizedString(),ki18n("Thanks to many others.\n"));
 
 }
 
