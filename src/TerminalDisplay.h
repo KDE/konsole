@@ -71,15 +71,15 @@ public:
     TerminalDisplay(QWidget *parent=0);
     virtual ~TerminalDisplay();
 
-    /** Sets the default background color for the display. */
-    void setDefaultBackColor(const QColor& color);
-    /** Returns the default background color for the display */
-    QColor defaultBackColor();
-
     /** Returns the terminal color palette used by the display. */
     const ColorEntry* colorTable() const;
     /** Sets the terminal color palette used by the display. */
     void setColorTable(const ColorEntry table[]);
+    /** TODO: Document me */
+    void setRandomSeed(uint seed);
+    /** TODO: Document me */
+    uint randomSeed() const;
+
     /** Sets the opacity of the terminal display. */
     void setOpacity(qreal opacity);
 
@@ -614,7 +614,7 @@ private:
     QVector<LineProperty> _lineProperties;
 
     ColorEntry _colorTable[TABLE_COLORS];
-    QColor _defaultBgColor;
+    uint _randomSeed;
 
     bool _resizing;
     bool _terminalSizeHint;

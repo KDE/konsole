@@ -122,22 +122,6 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
     }
 }
 
-void TerminalDisplay::setDefaultBackColor(const QColor& color)
-{
-  _defaultBgColor = color;
-
-  QPalette p = palette();
-  p.setColor( backgroundRole(), defaultBackColor() );
-  setPalette( p );
-}
-
-QColor TerminalDisplay::defaultBackColor()
-{
-  if (_defaultBgColor.isValid())
-    return _defaultBgColor;
-  return _colorTable[DEFAULT_BACK_COLOR].color;
-}
-
 const ColorEntry* TerminalDisplay::colorTable() const
 {
   return _colorTable;
@@ -149,7 +133,7 @@ void TerminalDisplay::setColorTable(const ColorEntry table[])
       _colorTable[i] = table[i];
  
   QPalette p = palette();
-  p.setColor( backgroundRole(), defaultBackColor() );
+  p.setColor( backgroundRole(), _colorTable[DEFAULT_BACK_COLOR].color );
   setPalette( p );
   
   update();
@@ -264,6 +248,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_contentHeight(1)
 ,_contentWidth(1)
 ,_image(0)
+,_randomSeed(0)
 ,_resizing(false)
 ,_terminalSizeHint(false)
 ,_terminalSizeStartup(true)
@@ -665,7 +650,7 @@ void TerminalDisplay::drawTextFragment(QPainter& painter ,
     const QColor backgroundColor = style->backgroundColor.color(_colorTable);
     
     // draw background if different from the display's background color
-    if ( backgroundColor != defaultBackColor() )
+    if ( backgroundColor != palette().background().color() )
         drawBackground(painter,rect,backgroundColor);
 
     // draw cursor shape if the current character is the cursor
@@ -679,6 +664,9 @@ void TerminalDisplay::drawTextFragment(QPainter& painter ,
 
     painter.restore();
 }
+
+void TerminalDisplay::setRandomSeed(uint randomSeed) { _randomSeed = randomSeed; }
+uint TerminalDisplay::randomSeed() const { return _randomSeed; }
 
 /*!
     Set XIM Position
@@ -1091,7 +1079,7 @@ void TerminalDisplay::paintEvent( QPaintEvent* pe )
 
   foreach (QRect rect, (pe->region() & contentsRect()).rects())
   {
-    drawBackground(paint,rect,defaultBackColor());
+    drawBackground(paint,rect,palette().background().color());
     paintContents(paint, rect);
   }
   paintFilters(paint);

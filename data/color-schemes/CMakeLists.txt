@@ -2,7 +2,8 @@
 # at present
 
 install( FILES 
-         BlackOnLightYellow.schema 
+         BlackOnLightYellow.schema
+         BlackOnRandomLight.colorscheme 
          BlackOnWhite.schema  	
          GreenOnBlack.colorscheme 
          WhiteOnBlack.schema  	

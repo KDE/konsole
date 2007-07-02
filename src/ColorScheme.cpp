@@ -113,11 +113,13 @@ ColorSchemeManager* ColorSchemeManager::_instance = 0;
 ColorScheme::ColorScheme()
 {
     _table = 0;
+    _randomTable = 0;
     _opacity = 1.0;
 }
 ColorScheme::ColorScheme(const ColorScheme& other)
       : _opacity(other._opacity)
        ,_table(0)
+       ,_randomTable(0)
 {
     setName(other.name());
     setDescription(other.description());
@@ -127,10 +129,20 @@ ColorScheme::ColorScheme(const ColorScheme& other)
         for ( int i = 0 ; i < TABLE_COLORS ; i++ )
             setColorTableEntry(i,other._table[i]);
     }
+
+    if ( other._randomTable != 0 )
+    {
+        for ( int i = 0 ; i < TABLE_COLORS ; i++ )
+        {
+            const RandomizationRange& range = other._randomTable[i];
+            setRandomizationRange(i,range.hue,range.saturation,range.value);
+        }
+    }
 }
 ColorScheme::~ColorScheme()
 {
     delete[] _table;
+    delete[] _randomTable;
 }
 
 void ColorScheme::setDescription(const QString& description) { _description = description; }
@@ -148,6 +160,64 @@ void ColorScheme::setColorTableEntry(int index , const ColorEntry& entry)
     
     _table[index] = entry; 
 }
+ColorEntry ColorScheme::colorEntry(int index , uint randomSeed) const
+{
+    Q_ASSERT( index >= 0 && index < TABLE_COLORS );
+
+    if ( randomSeed != 0 )
+        qsrand(randomSeed);
+
+    ColorEntry entry = colorTable()[index];
+
+  //  qDebug() << "Old color: " << entry.color;
+
+   // qDebug() << "Random seed: " << randomSeed << "random table: " <<
+   //     _randomTable << "isnull: " << ((_randomTable) ? _randomTable[index].isNull() : true);
+
+    if ( randomSeed != 0 && 
+        _randomTable != 0 && 
+        !_randomTable[index].isNull() )
+    {
+        const RandomizationRange& range = _randomTable[index];
+       
+        int hueDifference = range.hue ? (qrand() % range.hue) - range.hue/2 : 0;
+        int saturationDifference = range.saturation ? (qrand() % range.saturation) - range.saturation/2 : 0;
+        int  valueDifference = range.value ? (qrand() % range.value) - range.value/2 : 0;
+
+        QColor& color = entry.color;
+
+        int newHue = qAbs( (color.hue() + hueDifference) % MAX_HUE );
+        int newValue = qAbs( color.value() + valueDifference );
+        int newSaturation = qAbs( color.saturation() + saturationDifference );
+
+    // qDebug() << "New hue: " << newHue << "New sat:" << newSaturation <<
+    //        "New value:" << newValue;
+        color.setHsv(newHue,newSaturation,newValue);
+    }
+
+  //  qDebug() << "New color: " << entry.color;
+
+    return entry;
+}
+void ColorScheme::getColorTable(ColorEntry* table , uint randomSeed) const
+{
+    for ( int i = 0 ; i < TABLE_COLORS ; i++ )
+        table[i] = colorEntry(i,randomSeed);
+}
+void ColorScheme::setRandomizationRange( int index , quint16 hue , quint8 saturation ,
+                                         quint8 value )
+{
+    Q_ASSERT( hue <= MAX_HUE );
+    Q_ASSERT( index >= 0 && index < TABLE_COLORS );
+
+    if ( _randomTable == 0 )
+        _randomTable = new RandomizationRange[TABLE_COLORS];
+
+    _randomTable[index].hue = hue;
+    _randomTable[index].value = value;
+    _randomTable[index].saturation = saturation;
+}
+
 const ColorEntry* ColorScheme::colorTable() const
 {
     if ( _table )
@@ -175,7 +245,7 @@ void ColorScheme::read(KConfig& config)
 
     for (int i=0 ; i < TABLE_COLORS ; i++)
     {
-        setColorTableEntry(i,readColorEntry(config,colorNameForIndex(i)));
+        readColorEntry(config,i);
     }
 }
 void ColorScheme::write(KConfig& config) const
@@ -203,9 +273,9 @@ QString ColorScheme::translatedColorNameForIndex(int index)
 
     return QString(translatedColorNames[index]);
 }
-ColorEntry ColorScheme::readColorEntry(KConfig& config , const QString& colorName)
+void ColorScheme::readColorEntry(KConfig& config , int index)
 {
-    KConfigGroup configGroup(&config,colorName);
+    KConfigGroup configGroup(&config,colorNameForIndex(index));
     
     ColorEntry entry;
 
@@ -213,7 +283,14 @@ ColorEntry ColorScheme::readColorEntry(KConfig& config , const QString& colorNam
     entry.transparent = configGroup.readEntry("Transparent",false);
     entry.bold = configGroup.readEntry("Bold",false);
 
-    return entry;
+    quint16 hue = configGroup.readEntry("MaxRandomHue",0);
+    quint8 value = configGroup.readEntry("MaxRandomValue",0);
+    quint8 saturation = configGroup.readEntry("MaxRandomSaturation",0);
+
+    setColorTableEntry( index , entry );
+
+    if ( hue != 0 || value != 0 || saturation != 0 )
+       setRandomizationRange( index , hue , saturation , value ); 
 }
 void ColorScheme::writeColorEntry(KConfig& config , const QString& colorName, const ColorEntry& entry) const
 {

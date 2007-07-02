@@ -24,6 +24,7 @@
 #include <assert.h>
 
 // Qt
+#include <QtCore/QDateTime>
 #include <QtCore/QSignalMapper>
 
 // KDE
@@ -328,7 +329,7 @@ void ViewManager::splitView(Qt::Orientation orientation)
     while (existingViewIter.hasNext())
     {
         Session* session = _sessionMap[(TerminalDisplay*)existingViewIter.next()];
-        TerminalDisplay* display = createTerminalDisplay();
+        TerminalDisplay* display = createTerminalDisplay(session);
         applyProfile(display,session->profileKey()); 
         ViewProperties* properties = createController(session,display);
 
@@ -437,7 +438,7 @@ void ViewManager::createView(Session* session)
     while ( containerIter.hasNext() )
     {
         ViewContainer* container = containerIter.next();
-        TerminalDisplay* display = createTerminalDisplay();
+        TerminalDisplay* display = createTerminalDisplay(session);
         applyProfile(display,session->profileKey());
         
         // set initial size
@@ -518,7 +519,7 @@ void ViewManager::viewCloseRequest(QWidget* view)
     focusActiveView();
 }
 
-TerminalDisplay* ViewManager::createTerminalDisplay()
+TerminalDisplay* ViewManager::createTerminalDisplay(Session* session)
 {
    TerminalDisplay* display = new TerminalDisplay(0);
 
@@ -528,7 +529,8 @@ TerminalDisplay* ViewManager::createTerminalDisplay()
    display->setCutToBeginningOfLine(true);
    display->setTerminalSizeStartup(false);
    display->setScrollBarLocation(TerminalDisplay::SCROLLBAR_RIGHT);
-   
+   display->setRandomSeed(session->sessionId() * 31);
+
    return display;
 }
 
@@ -564,8 +566,12 @@ void ViewManager::applyProfile(TerminalDisplay* view , const QString& profileKey
     else if ( tabBarPosition == Profile::TabBarBottom )
         container->setNavigationPosition(ViewContainer::NavigationPositionBottom);
 
+    qDebug() << __FUNCTION__ << "Using random seed:" << view->randomSeed();
     // load colour scheme
-    view->setColorTable(colorScheme->colorTable());
+    ColorEntry table[TABLE_COLORS];
+    
+    colorScheme->getColorTable(table , view->randomSeed() );
+    view->setColorTable(table);
     view->setOpacity(colorScheme->opacity());
     
     // load font 

@@ -198,7 +198,9 @@ private:
     void removeContainer(ViewContainer* container);
 
     // creates a new terminal display
-    TerminalDisplay* createTerminalDisplay();
+    // the 'session' is used so that the terminal display's random seed
+    // can be set to something which depends uniquely on that session
+    TerminalDisplay* createTerminalDisplay(Session* session = 0);
     
     // creates a new controller for a session/display pair which provides the menu
     // actions associated with that view, and exposes basic information

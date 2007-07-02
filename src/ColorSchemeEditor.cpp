@@ -132,7 +132,7 @@ void ColorSchemeEditor::editColorItem( QTableWidgetItem* item )
 
     item->setBackground( dialog->color() );
 
-    ColorEntry entry(_colors->colorTable()[item->row()]);
+    ColorEntry entry(_colors->colorEntry(item->row()));
     entry.color = dialog->color();
     _colors->setColorTableEntry(item->row(),entry); 
 
@@ -177,7 +177,8 @@ void ColorSchemeEditor::setup(const ColorScheme* scheme)
 }
 void ColorSchemeEditor::setupColorTable(const ColorScheme* colors)
 {
-    const ColorEntry* table = colors->colorTable();
+    ColorEntry table[TABLE_COLORS];
+    colors->getColorTable(table);
 
     for ( int row = 0 ; row < TABLE_COLORS ; row++ )
     {
