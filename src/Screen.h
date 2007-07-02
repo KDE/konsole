@@ -95,7 +95,7 @@ public: // these are all `Screen' operations
     void setCursorY  (int y);
     void setCursorX  (int x);
     void setCursorYX (int y, int x);
-    void setMargins  (int t, int b);
+    void setMargins  (int topLine , int bottomLine);
     int topMargin() const;
     int bottomMargin() const;
 
@@ -227,7 +227,7 @@ public: // these are all `Screen' operations
      * @param line The line index of the first character in the selection.
      * @param columnmode TODO: Document me
      */
-    void setSelectionStart(/*const ScreenCursor& cursor ,*/ const int column, const int line, const bool columnmode);
+    void setSelectionStart(const int column, const int line, const bool columnmode);
     
     /**
      * Sets the end of the current selection.
@@ -235,7 +235,7 @@ public: // these are all `Screen' operations
      * @param column The column index of the last character in the selection.
      * @param line The line index of the last character in the selection. 
      */ 
-    void setSelectionEnd(/*const ScreenCursor& cursor ,*/ const int column, const int line);
+    void setSelectionEnd(const int column, const int line);
    
     /**
      * Retrieves the start of the selection or the cursor position if there
@@ -261,7 +261,7 @@ public: // these are all `Screen' operations
      * @param column  TODO: Document me
      * @param line    TODO: Document me
      */ 
-    bool isSelected(/*const ScreenCursor& cursor ,*/ const int column,const int line);
+    bool isSelected(const int column,const int line);
 
     /** 
      * Convenience method.  Returns the currently selected text. 
@@ -270,17 +270,6 @@ public: // these are all `Screen' operations
      */
     QString selectedText(bool preserve_line_breaks);
 	    
-	/** 
-	 * Copies the entire output history, including the characters currently on screen
-	 * into a text stream.
-	 *
-	 * @param stream An output stream which receives the history text
-	 * @param decoder A decoder which converts terminal characters into text.  PlainTextDecoder
-	 * 				  is the most commonly used decoder which coverts characters into plain
-	 * 				  text with no formatting.
-	 */
-	//void writeToStream(QTextStream* stream , TerminalCharacterDecoder* decoder);
-
 	/**
 	 * Copies part of the output to a stream.
 	 *

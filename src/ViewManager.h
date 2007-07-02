@@ -49,15 +49,16 @@ class ViewSplitter;
  * one or more terminal displays and a navigation widget ( eg. tabs or a list )
  * to allow the user to navigate between the displays in that container.
  *
- * The view manager provides facilities to construct display widgets for a terminal
- * session and also to construct the SessionController which provides the menus and other
- * user interface elements specific to that display/session pair.
- *
- * The view manager provides a number of actions ( defined in the 'konsoleui.rc' XML file )
+ * The view manager provides menu actions ( defined in the 'konsoleui.rc' XML file )
  * to manipulate the views and view containers - for example, actions to split the view
  * left/right or top/bottom, detach a view from the current window and navigate between
  * views and containers.  These actions are added to the collection specified in the 
- * constructor.
+ * ViewManager's constructor.
+ *
+ * The view manager provides facilities to construct display widgets for a terminal
+ * session and also to construct the SessionController which provides the menus and other
+ * user interface elements specific to each display/session pair.
+ *
  */
 class ViewManager : public QObject
 {

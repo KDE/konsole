@@ -66,14 +66,17 @@ class TerminalCharacterDecoder;
 typedef QPointer<Session> SessionPtr;
 
 /**
- * Provides the actions associated with a session in the Konsole main menu
- * and exposes information such as the title and icon associated with the session to view containers.
+ * Provides the menu actions to manipulate a single terminal session and view pair.
+ * The actions provided by this class are defined in the sessionui.rc XML file.
  *
- * Each view should have one SessionController associated with it
+ * SessionController monitors the session and provides access to basic information
+ * about the session such as title(), icon() and currentDir().  SessionController 
+ * provides notifications of activity in the session via the activity() signal.
  *
- * The SessionController will delete itself if either the view or the session is destroyed, for 
- * this reason it is recommended that other classes which need a pointer to a SessionController
- * use QPointer<SessionController> rather than SessionController* 
+ * When the controlled view receives the focus, the focused() signal is emitted
+ * with a pointer to the controller.  This can be used by main application window
+ * which contains the view to plug the controller's actions into the menu when
+ * the view is focused.
  */
 class SessionController : public ViewProperties , public KXMLGUIClient
 {
@@ -93,8 +96,11 @@ public:
     QPointer<TerminalDisplay>  view()    { return _view;    }
 
     /** 
-     * Sets the widget used for searches through the session's history. 
-     * The widget will be shown when the user clicks on the "Search History" menu action.
+     * Sets the widget used for searches through the session's output.
+     *
+     * When the user clicks on the "Search Output" menu action the @p searchBar 's 
+     * show() method will be called.  The SessionController will then connect to the search 
+     * bar's signals to update the search when the widget's controls are pressed.
      */
     void setSearchBar( IncrementalSearchBar* searchBar );
     /** 
@@ -135,8 +141,9 @@ public slots:
      * This may not succeed if the foreground program does not understand 
      * the command sent to it ( 'cd path' for local URLs ) or is not 
      * responding to input.
-     * 
-     * TODO: Only handles URLs using the file:/// protocol at present.
+     *
+     * openUrl() currently supports urls for local paths and those
+     * using the 'ssh' protocol ( eg. ssh://joebloggs@hostname )
      */
     void openUrl( const KUrl& url ); 
 
@@ -172,6 +179,7 @@ private slots:
     void sessionStateChanged(int state);
     void sessionTitleChanged();
     void searchTextChanged(const QString& text);
+    void searchCompleted(bool success);
     void searchClosed(); // called when the user clicks on the
                          // history search bar's close button 
 
@@ -270,8 +278,10 @@ signals:
     * Emitted when the task has completed.  
     * Depending on the task this may occur just before execute() returns, or it
     * may occur later
+    *
+    * @param success Indicates whether the task completed successfully or not
     */
-   void completed();
+   void completed(bool success);
 
 protected:
 
@@ -329,70 +339,74 @@ private:
 class SearchHistoryThread;
 /**
  * A task which searches through the output of sessions for matches for a given regular expression.
- * 
+ * SearchHistoryTask operates on ScreenWindow instances rather than sessions added by addSession().
+ * A screen window can be added to the list to search using addScreenWindow()
+ *
+ * When execute() is called, the search begins in the direction specified by searchDirection(),
+ * starting at the position of the current selection.
+ *
+ * FIXME - This is not a proper implementation of SessionTask, in that it ignores sessions specified
+ * with addSession()
+ *
  * TODO - Implementation requirements:
- *          Must provide progress feedback to the user when searching very large output logs.
- *
- *          - Remember where the search got to when it reaches the end of the output in each session
- *            calling execute() subsequently should continue the search.
- *            This allows the class to be used for both the "Search history for text" 
- *            and new-in-KDE-4 "Monitor output for text" actions   
- *
- * TODO:  Implement this
+ *          May provide progress feedback to the user when searching very large output logs.
  */
 class SearchHistoryTask : public SessionTask
 {
 Q_OBJECT
 
 public:
+    /** 
+     * This enum describes the strategies available for searching through the 
+     * session's output.
+     */
     enum SearchDirection
     {
-        Forwards,
-        Backwards  
+        /** Searches forwards through the output, starting at the current selection. */
+        ForwardsSearch,
+        /** Searches backwars through the output, starting at the current selection. */
+        BackwardsSearch  
     };
 
-    explicit SearchHistoryTask(ScreenWindow* window , QObject* parent = 0);
+    /** 
+     * Constructs a new search task. 
+     */
+    explicit SearchHistoryTask(QObject* parent = 0);
+
+    /** Adds a screen window to the list to search when execute() is called. */
+    void addScreenWindow( Session* session , ScreenWindow* searchWindow); 
 
     /** Sets the regular expression which is searched for when execute() is called */
     void setRegExp(const QRegExp& regExp);
     /** Returns the regular expression which is searched for when execute() is called */
     QRegExp regExp() const;
-    
-    void setMatchCase(bool matchCase);
-    bool matchCase() const;
-    void setMatchRegExp(bool matchRegExp);
-    bool matchRegExp() const;
+   
+    /** Specifies the direction to search in when execute() is called. */ 
     void setSearchDirection( SearchDirection direction );
+    /** Returns the current search direction.  See setSearchDirection(). */
     SearchDirection searchDirection() const;
 
+    /** 
+     * Performs a search through the session's history, starting at the position
+     * of the current selection, in the direction specified by setSearchDirection().
+     *
+     * If it finds a match, the ScreenWindow specified in the constructor is 
+     * scrolled to the position where the match occurred and the selection 
+     * is set to the matching text.  execute() then returns immediately.
+     *
+     * To continue the search looking for further matches, call execute() again.
+     */
     virtual void execute();
 
-signals:
-    /** 
-     * Emitted when a match for the regular expression is found in a session's output.
-     * The line numbers are given as offsets from the start of the history
-     *
-     * @param session The session in which a match for regExp() was found.
-     * @param startLine The line in the output where the matched text starts
-     * @param startColumn The column in the output where the matched text starts
-     * @param endLine The line in the output where the matched text ends
-     * @param endColumn The column in the output where the matched text ends 
-     */
-    void foundMatch(Session* session , 
-                    int startLine , 
-                    int startColumn , 
-                    int endLine , 
-                    int endColumn );
-   
 private:
-    void highlightResult(int position);
+    typedef QPointer<ScreenWindow> ScreenWindowPtr;
+    
+    void executeOnScreenWindow( SessionPtr session , ScreenWindowPtr window );
+    void highlightResult( ScreenWindowPtr window , int position);
 
+    QMap< SessionPtr , ScreenWindowPtr > _windows;
     QRegExp _regExp;
-    bool _matchRegExp;
-    bool _matchCase;
     SearchDirection _direction;
-
-    ScreenWindow* _screenWindow;
 
     static QPointer<SearchHistoryThread> _thread;
 };

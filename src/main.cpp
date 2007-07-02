@@ -40,8 +40,11 @@ using namespace Konsole;
 // fills the KAboutData structure with information about contributors to 
 // Konsole
 void fillAboutData(KAboutData& aboutData);
+
+#if 0
 #ifdef Q_WS_X11
 void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap);
+#endif
 #endif
 
 // ***
@@ -83,6 +86,7 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
         exit(0);
     }
 
+#if 0
 #ifdef Q_WS_X11
     //Display* display = 0;
     Display* display = XOpenDisplay(0);
@@ -99,7 +103,9 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
 #else
     Application app;
 #endif
+#endif
 
+    Application app;
     return app.exec();   
 }
 
@@ -168,6 +174,7 @@ void fillAboutData(KAboutData& aboutData)
 
 }
 
+#if 0
 // code taken from the Qt 4 graphics dojo examples 
 #ifdef Q_WS_X11
 void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap)
@@ -206,3 +213,6 @@ void getDisplayInformation(Display*& display , Visual*& visual , Colormap& color
     }
 }
 #endif
+#endif
+
+

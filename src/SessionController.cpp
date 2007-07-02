@@ -671,11 +671,6 @@ void SessionController::searchHistory(bool showSearchBar)
             }
 
             setFindNextPrevEnabled(true);
-
-            SessionTask* task = new SearchHistoryTask(_view->screenWindow());
-            task->setAutoDelete(true);
-            task->addSession( _session );
-            task->execute();
         }
         else
         {
@@ -703,8 +698,14 @@ void SessionController::searchTextChanged(const QString& text)
    
     // update search.  this is called even when the text is
     // empty to clear the view's filters    
-    beginSearch(text , SearchHistoryTask::Forwards);
+    beginSearch(text , SearchHistoryTask::ForwardsSearch);
 }
+void SessionController::searchCompleted(bool success)
+{
+    if ( _searchBar )
+        _searchBar->setFoundMatch(success);
+}
+
 void SessionController::beginSearch(const QString& text , int direction)
 {
     Q_ASSERT( _searchBar );
@@ -717,30 +718,21 @@ void SessionController::beginSearch(const QString& text , int direction)
 
     if ( !regExp.isEmpty() )
     {
-        SearchHistoryTask* task = new SearchHistoryTask(_view->screenWindow(),this); 
-       
+        SearchHistoryTask* task = new SearchHistoryTask(this); 
+      
+        connect( task , SIGNAL(completed(bool)) , this , SLOT(searchCompleted(bool)) );
+        
         task->setRegExp(regExp);
-        task->setMatchCase( _searchBar->matchCase() );
-        task->setMatchRegExp( _searchBar->matchRegExp() );
         task->setSearchDirection( (SearchHistoryTask::SearchDirection)direction ); 
         task->setAutoDelete(true);
-        task->addSession( _session );   
+        task->addScreenWindow( _session , _view->screenWindow() ); 
         task->execute();
     }
 
     _searchFilter->setRegExp(regExp);
     _view->processFilters();
 
-    // color search bar to indicate whether a match was found    
-    if ( _searchFilter->hotSpots().count() > 0 )
-    {
-        _searchBar->setFoundMatch(true);
-    } 
-    else 
-    {
-        _searchBar->setFoundMatch(false);
-    }    
-    // TODO - Optimise by only updating affected regions
+      // TODO - Optimise by only updating affected regions
     _view->update();
 }
 void SessionController::highlightMatches(bool highlight)
@@ -761,13 +753,13 @@ void SessionController::findNextInHistory()
 {
     Q_ASSERT( _searchBar );
 
-    beginSearch(_searchBar->searchText(),SearchHistoryTask::Forwards);
+    beginSearch(_searchBar->searchText(),SearchHistoryTask::ForwardsSearch);
 }
 void SessionController::findPreviousInHistory()
 {
     Q_ASSERT( _searchBar );
 
-    beginSearch(_searchBar->searchText(),SearchHistoryTask::Backwards);
+    beginSearch(_searchBar->searchText(),SearchHistoryTask::BackwardsSearch);
 }
 void SessionController::showHistoryOptions()
 {
@@ -1092,29 +1084,44 @@ void SaveHistoryTask::jobResult(KJob* job)
     delete info.decoder;
   
     // notify the world that the task is done 
-    emit completed();
+    emit completed(true);
 
     if ( autoDelete() )
         deleteLater();
 }
-
+void SearchHistoryTask::addScreenWindow( Session* session , ScreenWindow* searchWindow )
+{
+   _windows.insert(session,searchWindow);
+}
 void SearchHistoryTask::execute()
 {
-    Q_ASSERT( sessions().first() );
+    QMapIterator< SessionPtr , ScreenWindowPtr > iter(_windows);
 
-    Emulation* emulation = sessions().first()->emulation();
+    while ( iter.hasNext() )
+    {
+        iter.next();
+        executeOnScreenWindow( iter.key() , iter.value() );
+    }
+}
+
+void SearchHistoryTask::executeOnScreenWindow( SessionPtr session , ScreenWindowPtr window )
+{
+    Q_ASSERT( session );
+    Q_ASSERT( window );
+
+    Emulation* emulation = session->emulation();
     
     int selectionColumn = 0;
     int selectionLine = 0;
 
-    _screenWindow->getSelectionEnd(selectionColumn , selectionLine);
+    window->getSelectionEnd(selectionColumn , selectionLine);
 
     if ( !_regExp.isEmpty() )
     {
         int pos = -1;
-        const bool forwards = ( _direction == Forwards );
-        const int startLine = selectionLine + _screenWindow->currentLine() + ( forwards ? 1 : -1 );
-        const int lastLine = _screenWindow->lineCount() - 1;
+        const bool forwards = ( _direction == ForwardsSearch );
+        const int startLine = selectionLine + window->currentLine() + ( forwards ? 1 : -1 );
+        const int lastLine = window->lineCount() - 1;
         QString string;
 
         //text stream to read history into string for pattern or regular expression searching
@@ -1129,16 +1136,8 @@ void SearchHistoryTask::execute()
         //this balances the need to retrieve lots of data from the history each time 
         //(for efficient searching)
         //without using silly amounts of memory if the history is very large.    
-        const int maxDelta = qMin(_screenWindow->lineCount(),10000);
+        const int maxDelta = qMin(window->lineCount(),10000);
         int delta = forwards ? maxDelta : -maxDelta;
-
-        //setup case sensitivity and regular expression if enabled
-        _regExp.setCaseSensitivity( _matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive );
-
-        if (_matchRegExp)
-            _regExp.setPatternSyntax(QRegExp::RegExp);
-        else
-            _regExp.setPatternSyntax(QRegExp::FixedString);
 
         int endLine = line;
         bool hasWrapped = false;  // set to true when we reach the top/bottom
@@ -1148,6 +1147,8 @@ void SearchHistoryTask::execute()
         //loop through history in blocks of <delta> lines.
         do
         {
+            // ensure that application does not appear to hang 
+            // if searching through a lengthy output
             QApplication::processEvents();
 
             // calculate lines to search in this iteration
@@ -1197,7 +1198,10 @@ void SearchHistoryTask::execute()
             if ( pos != -1 )
             {
                 int findPos = qMin(line,endLine) + string.left(pos + 1).count(QChar('\n'));
-                highlightResult(findPos);
+                highlightResult(window,findPos);
+                
+                emit completed(true);
+
                 return;
             }
 
@@ -1208,12 +1212,14 @@ void SearchHistoryTask::execute()
         } while ( startLine != endLine );
 
         // if no match was found, clear selection to indicate this
-        _screenWindow->clearSelection();
-        _screenWindow->notifyOutputChanged();
+        window->clearSelection();
+        window->notifyOutputChanged();
     }
+
+    emit completed(false);
 }
 
-void SearchHistoryTask::highlightResult(int findPos)
+void SearchHistoryTask::highlightResult(ScreenWindowPtr window , int findPos)
 {
      //work out how many lines into the current block of text the search result was found
      //- looks a little painful, but it only has to be done once per search.
@@ -1221,40 +1227,20 @@ void SearchHistoryTask::highlightResult(int findPos)
      qDebug() << "Found result at line " << findPos;
 
      //update display to show area of history containing selection	
-     _screenWindow->scrollTo(findPos);
-     _screenWindow->setSelectionStart( 0 , findPos - _screenWindow->currentLine() , false );
-     _screenWindow->setSelectionEnd( _screenWindow->columnCount() , findPos - _screenWindow->currentLine() );
-     //qDebug() << "Current line " << _screenWindow->currentLine();
-     _screenWindow->setTrackOutput(false);
-     _screenWindow->notifyOutputChanged();
-     //qDebug() << "Post update current line " << _screenWindow->currentLine();
+     window->scrollTo(findPos);
+     window->setSelectionStart( 0 , findPos - window->currentLine() , false );
+     window->setSelectionEnd( window->columnCount() , findPos - window->currentLine() );
+     //qDebug() << "Current line " << window->currentLine();
+     window->setTrackOutput(false);
+     window->notifyOutputChanged();
+     //qDebug() << "Post update current line " << window->currentLine();
 }
 
-SearchHistoryTask::SearchHistoryTask(ScreenWindow* window , QObject* parent)
+SearchHistoryTask::SearchHistoryTask(QObject* parent)
     : SessionTask(parent)
-    , _matchRegExp(false)
-    , _matchCase(false)
-    , _direction(Forwards)
-    , _screenWindow(window)
+    , _direction(ForwardsSearch)
 {
 
-}
-
-void SearchHistoryTask::setMatchCase( bool matchCase )
-{
-    _matchCase = matchCase;
-}
-bool SearchHistoryTask::matchCase() const
-{
-    return _matchCase;
-}
-void SearchHistoryTask::setMatchRegExp( bool matchRegExp )
-{
-    _matchRegExp = matchRegExp;
-}
-bool SearchHistoryTask::matchRegExp() const
-{
-    return _matchRegExp;
 }
 void SearchHistoryTask::setSearchDirection( SearchDirection direction )
 {

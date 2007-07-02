@@ -145,7 +145,8 @@ const ColorEntry* TerminalDisplay::colorTable() const
 
 void TerminalDisplay::setColorTable(const ColorEntry table[])
 {
-  for (int i = 0; i < TABLE_COLORS; i++) _colorTable[i] = table[i];
+  for (int i = 0; i < TABLE_COLORS; i++)
+      _colorTable[i] = table[i];
  
   QPalette p = palette();
   p.setColor( backgroundRole(), defaultBackColor() );
@@ -622,12 +623,16 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
     if ( _blinking && (style->rendition & RE_BLINK) )
             return;
    
-    // setup bold
+    // setup bold and underline
     bool useBold = style->rendition & RE_BOLD || style->isBold(_colorTable);
+    bool useUnderline = style->rendition & RE_UNDERLINE;
+
     QFont font = painter.font();
-    if ( font.bold() != useBold )
+    if (    font.bold() != useBold 
+         || font.underline() != useUnderline )
     {
        font.setBold(useBold);
+       font.setUnderline(useUnderline);
        painter.setFont(font);
     }
 

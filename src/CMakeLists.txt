@@ -55,45 +55,45 @@ endif(KONSOLE_GENERATE_LINEFONT)
 
 set(konsole_KDEINIT_SRCS
         ${sessionadaptors_SRCS}
+        Application.cpp
         BlockArray.cpp
+        BookmarkHandler.cpp
         ColorScheme.cpp
         ColorSchemeEditor.cpp
         EditProfileDialog.cpp
+        Emulation.cpp
         Filter.cpp
+        History.cpp
         HistorySizeDialog.cpp
         IncrementalSearchBar.cpp
-        KeyboardTranslator.cpp
         KeyBindingEditor.cpp
-        Application.cpp
-        BookmarkHandler.cpp
+        KeyboardTranslator.cpp
         MainWindow.cpp
+        ManageProfilesDialog.cpp
         ProcessInfo.cpp
-        ScreenWindow.cpp
-        SessionController.cpp
-        ShellCommand.cpp
         Profile.cpp
         ProfileList.cpp
         ProfileListWidget.cpp
-        SessionManager.cpp
-        ManageProfilesDialog.cpp
-        History.cpp
         Pty.cpp
-        Screen.cpp
-        Session.cpp
-        TabTitleFormatAction.cpp
-        TerminalDisplay.cpp
-        Vt102Emulation.cpp
-        Emulation.cpp
         RemoteConnectionDialog.cpp
+        Screen.cpp
+        ScreenWindow.cpp
+        Session.cpp
+        SessionController.cpp
+        SessionManager.cpp
+        ShellCommand.cpp
+        TabTitleFormatAction.cpp
         TerminalCharacterDecoder.cpp
+        TerminalDisplay.cpp
         ViewContainer.cpp
         ViewManager.cpp
         ViewProperties.cpp
         ViewSplitter.cpp
+        Vt102Emulation.cpp
+        XKB.cpp
         ZModemDialog.cpp
         konsole_wcwidth.cpp
-        start.cpp
-        XKB.cpp
+        main.cpp
    ) 
 
 

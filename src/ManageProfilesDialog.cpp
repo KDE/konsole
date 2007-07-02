@@ -58,14 +58,11 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     connect( SessionManager::instance() , SIGNAL(profileChanged(const QString&)) , this,
              SLOT(updateTableModel()) );
 
-    // ensure that session names are fully visible
-    _ui->sessionTable->resizeColumnToContents(0);
-    _ui->sessionTable->resizeColumnToContents(1);
-
     // resize the session table to the full width of the table
-    _ui->sessionTable->horizontalHeader()->setStretchLastSection(true);
     _ui->sessionTable->horizontalHeader()->setHighlightSections(false);
-    
+
+    _ui->sessionTable->resizeColumnsToContents();
+
     // setup buttons
     connect( _ui->newSessionButton , SIGNAL(clicked()) , this , SLOT(newType()) );
     connect( _ui->editSessionButton , SIGNAL(clicked()) , this , SLOT(editSelected()) );
@@ -76,8 +73,23 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
 
 void ManageProfilesDialog::showEvent(QShowEvent* event)
 {
-    qDebug() << "Session table size: " << _ui->sessionTable->size();
-    qDebug() << "Session table size hint: " << _ui->sessionTable->sizeHint();
+    Q_ASSERT( _ui->sessionTable->model() );
+
+    // try to ensure that all the text in all the columns is visible initially.
+    // FIXME:  this is not a good solution, look for a more correct way to do this
+
+    int totalWidth = 0;
+    int columnCount = _ui->sessionTable->model()->columnCount();
+
+    for ( int i = 0 ; i < columnCount ; i++ )
+        totalWidth += _ui->sessionTable->columnWidth(i);
+
+    // the margin is added to account for the space taken by the resize grips
+    // between the columns, this ensures that a horizontal scroll bar is not added 
+    // automatically
+    int margin = style()->pixelMetric( QStyle::PM_HeaderGripMargin ) * columnCount;
+    _ui->sessionTable->setMinimumWidth( totalWidth + margin );
+    _ui->sessionTable->horizontalHeader()->setStretchLastSection(true);
 }
 
 ManageProfilesDialog::~ManageProfilesDialog()

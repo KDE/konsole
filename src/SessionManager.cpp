@@ -681,13 +681,26 @@ void SessionManager::sessionProfileChanged()
 
 void SessionManager::sessionProfileCommandReceived(const QString& text)
 {
+    // FIXME: This is inefficient, it creates a new profile instance for
+    // each set of changes applied.  Instead a new profile should be created
+    // only the first time changes are applied to a session
+
     Session* session = qobject_cast<Session*>(sender());
     Q_ASSERT( session );
 
     ProfileCommandParser parser;
     QHash<Profile::Property,QVariant> changes = parser.parse(text);
 
-    changeProfile(session->profileKey(),changes,false);
+    Profile* newProfile = new Profile( profile(session->profileKey()) );
+    
+    QHashIterator<Profile::Property,QVariant> iter(changes);
+    while ( iter.hasNext() )
+    {
+        iter.next();
+        newProfile->setProperty(iter.key(),iter.value());
+    } 
+
+    session->setProfileKey( addProfile(newProfile) );
 }
 
 QKeySequence SessionManager::shortcut(const QString& profileKey) const

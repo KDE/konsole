@@ -1,8 +1,9 @@
 /*
     This file is part of Konsole, an X terminal.
-    Copyright (C) 1996 by Matthias Ettrich <ettrich@kde.org>
-    Copyright (C) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
+
     Copyright (C) 2007 Robert Knight <robertknight@gmail.com> 
+    Copyright (C) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
+    Copyright (C) 1996 by Matthias Ettrich <ettrich@kde.org>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,51 +19,6 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
     02110-1301  USA.
-*/
-
-/*! \class Emulation
-
-    \brief Mediator between TerminalDisplay and Screen.
-
-   This class is responsible to scan the escapes sequences of the terminal
-   emulation and to map it to their corresponding semantic complements.
-   Thus this module knows mainly about decoding escapes sequences and
-   is a stateless device w.rendition.t. the semantics.
-
-   It is also responsible to refresh the TerminalDisplay by certain rules.
-
-   \sa TerminalDisplay \sa Screen
-
-   \par A note on refreshing
-
-   Although the modifications to the current _screen image could immediately
-   be propagated via `TerminalDisplay' to the graphical surface, we have chosen
-   another way here.
-
-   The reason for doing so is twofold.
-
-   First, experiments show that directly displaying the operation results
-   in slowing down the overall performance of emulations. Displaying
-   individual characters using X11 creates a lot of overhead.
-
-   Second, by using the following refreshing method, the _screen operations
-   can be completely separated from the displaying. This greatly simplifies
-   the programmer's task of coding and maintaining the _screen operations,
-   since one need not worry about differential modifications on the
-   display affecting the operation of concern.
-
-   We use a refreshing algorithm here that has been adoped from rxvt/kvt.
-
-   By this, refreshing is driven by a timer, which is (re)started whenever
-   a new bunch of data to be interpreted by the emulation arives at `receiveData'.
-   As soon as no more data arrive for `BULK_TIMEOUT' milliseconds, we trigger
-   refresh. This rule suits both bulk display operation as done by curses as
-   well as individual characters typed.
-
-   We start also a second time which is never restarted. If repeatedly
-   restarting of the first timer could delay continuous output indefinitly,
-   the second timer guarantees that the output is refreshed with at least
-   a fixed rate.
 */
 
 // Own
@@ -102,7 +58,7 @@ using namespace Konsole;
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-#define CNTL(c) ((c)-'@')
+//#define CNTL(c) ((c)-'@')
 
 /*!
 */

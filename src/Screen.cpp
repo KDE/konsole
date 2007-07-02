@@ -458,9 +458,9 @@ void Screen::setDefaultMargins()
 
 
 /*
-   Clarifying rendition here and in TerminalDisplay.
+   Clarifying rendition here and in the display.
 
-   currently, TerminalDisplay's color table is
+   currently, the display's color table is
      0       1       2 .. 9    10 .. 17
      dft_fg, dft_bg, dim 0..7, intensive 0..7
 

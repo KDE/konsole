@@ -32,7 +32,7 @@ namespace Konsole
 
 /** 
  * Encapsulates user-visible information about the terminal session currently being displayed in a view,
- * such as the icon and title associated with that session.
+ * such as the associated title and icon.
  *
  * This can be used by navigation widgets in a ViewContainer sub-class to provide a tab, label or other
  * item for switching between views.

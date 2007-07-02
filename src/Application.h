@@ -48,11 +48,14 @@ class Application : public KUniqueApplication
 Q_OBJECT
 
 public:
+#if 0
     /** Constructs a new Konsole application. */
 #ifdef Q_WS_X11
     Application(Display* display , Qt::HANDLE visual, Qt::HANDLE colormap);
 #endif
+#endif
 
+    /** Constructs a new Konsole application. */
     Application();
     
     virtual ~Application();
