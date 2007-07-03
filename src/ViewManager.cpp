@@ -489,7 +489,7 @@ ViewContainer* ViewManager::createContainer(const QString& profileKey)
 
 void ViewManager::containerViewsChanged(QObject* container)
 {
-    qDebug() << "Container views changed";
+    //qDebug() << "Container views changed";
 
     if ( container == _viewSplitter->activeContainer() )
     {
@@ -566,7 +566,7 @@ void ViewManager::applyProfile(TerminalDisplay* view , const QString& profileKey
     else if ( tabBarPosition == Profile::TabBarBottom )
         container->setNavigationPosition(ViewContainer::NavigationPositionBottom);
 
-    qDebug() << __FUNCTION__ << "Using random seed:" << view->randomSeed();
+    //qDebug() << __FUNCTION__ << "Using random seed:" << view->randomSeed();
     // load colour scheme
     ColorEntry table[TABLE_COLORS];
     

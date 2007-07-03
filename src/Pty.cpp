@@ -118,8 +118,8 @@ void Pty::addEnvironmentVariables(const QStringList& environment)
             QString variable = pair.left(pos);
             QString value = pair.mid(pos+1);
 
-            qDebug() << "Setting environment pair" << variable <<
-                " set to " << value;
+            //qDebug() << "Setting environment pair" << variable <<
+            //    " set to " << value;
 
             setEnvironment(variable,value);
         }

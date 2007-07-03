@@ -143,7 +143,7 @@ void SessionController::requireUrlFilterUpdate()
 }
 void SessionController::snapshot()
 {
-    qDebug() << "session" << _session->title(Session::NameRole) << "snapshot";
+    //qDebug() << "session" << _session->title(Session::NameRole) << "snapshot";
     
 
     ProcessInfo* process = 0;

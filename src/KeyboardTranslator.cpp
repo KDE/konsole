@@ -56,7 +56,7 @@ void KeyboardTranslatorManager::findTranslators()
                                                          "konsole/*.keytab",
                                                          KStandardDirs::NoDuplicates);
 
-    qDebug() << __FUNCTION__ << ": found " << list.count() << " keyboard translators.";
+    //qDebug() << __FUNCTION__ << ": found " << list.count() << " keyboard translators.";
 
     // add the name of each translator to the list and associated
     // the name with a null pointer to indicate that the translator
@@ -68,20 +68,20 @@ void KeyboardTranslatorManager::findTranslators()
 
         QString name = QFileInfo(translatorPath).baseName();
        
-        qDebug() << "Found translator: " << translatorPath << " with name = " << name;
+        //qDebug() << "Found translator: " << translatorPath << " with name = " << name;
         
         if ( !_translators.contains(name) ) 
             _translators.insert(name,0);
     }
 
-    qDebug() << "Loaded translators: " << _translators.count();
+    //qDebug() << "Loaded translators: " << _translators.count();
 
     _haveLoadedAll = true;
 }
 
 const KeyboardTranslator* KeyboardTranslatorManager::findTranslator(const QString& name)
 {
-    qDebug() << "Finding translator: " << name;
+    //qDebug() << "Finding translator: " << name;
 
     if ( _translators.contains(name) && _translators[name] != 0 )
         return _translators[name];
@@ -90,7 +90,7 @@ const KeyboardTranslator* KeyboardTranslatorManager::findTranslator(const QStrin
 
     if ( translator != 0 )
         _translators[name] = translator;
-    else
+    else if ( !name.isEmpty() )
         qWarning() << "Unable to load translator" << name;
 
     return translator;
@@ -132,7 +132,7 @@ KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(const QString& nam
     const QString& path = findTranslatorPath(name);
 
     QFile source(path); 
-    if (!source.open(QIODevice::ReadOnly | QIODevice::Text))
+    if (name.isEmpty() || !source.open(QIODevice::ReadOnly | QIODevice::Text))
         return 0;
 
     KeyboardTranslator* translator = new KeyboardTranslator(name);

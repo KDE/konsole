@@ -216,7 +216,12 @@ void TerminalDisplay::setVTFont(const QFont& f)
   {
     if (!s_antialias)
         font.setStyleStrategy( QFont::NoAntialias );
-  
+ 
+    // experimental optimization.  Konsole assumes that the terminal is using a 
+    // mono-spaced font, in which case kerning information should have an effect.
+    // Disabling kerning saves some computation when rendering text. 
+    font.setKerning(false);
+
     QFrame::setFont(font);
     fontChange(font);
   }
@@ -783,11 +788,11 @@ void TerminalDisplay::processFilters()
 
     _filterChain->setImage(_image,_lines,_columns);
 
-    qDebug() << "Setup filters in" << t.elapsed() << "ms.";
+    //qDebug() << "Setup filters in" << t.elapsed() << "ms.";
 
     _filterChain->process();
 
-    qDebug() << "Processed filters in" << t.elapsed() << "ms.";
+    //qDebug() << "Processed filters in" << t.elapsed() << "ms.";
 }
 
 void TerminalDisplay::updateImage() 

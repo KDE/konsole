@@ -140,7 +140,7 @@ QString SessionManager::loadProfile(const QString& shortPath)
 
     if ( !parentProfile.isEmpty() )
     {
-        qDebug() << "Loading parent profile" << parentProfile;
+        //qDebug() << "Loading parent profile" << parentProfile;
 
         QString parentKey = loadProfile(parentProfile);
         newProfile->setParent(profile(parentKey));
@@ -258,7 +258,7 @@ void SessionManager::sessionTerminated(QObject* sessionObject)
 {
     Session* session = qobject_cast<Session*>(sessionObject);
 
-    qDebug() << "Session finished: " << session->title(Session::NameRole);
+    //qDebug() << "Session finished: " << session->title(Session::NameRole);
 
     Q_ASSERT( session );
 
@@ -601,14 +601,14 @@ void SessionManager::loadFavorites()
     KSharedConfigPtr appConfig = KGlobal::config();
     KConfigGroup favoriteGroup = appConfig->group("Favorite Profiles");
 
-    qDebug() << "loading favorites";
+    //qDebug() << "loading favorites";
 
     if ( favoriteGroup.hasKey("Favorites") )
     {
-        qDebug() << "found favorites key";
+       // qDebug() << "found favorites key";
        QStringList list = favoriteGroup.readEntry("Favorites",QStringList());
 
-       qDebug() << "found " << list.count() << "entries";
+       //qDebug() << "found " << list.count() << "entries";
 
         QSet<QString> favoriteSet = QSet<QString>::fromList(list);
 

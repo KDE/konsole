@@ -338,7 +338,7 @@ QStringList KDE4ProfileReader::findProfiles()
 }
 bool KDE4ProfileReader::readProfile(const QString& path , Profile* profile , QString& parentProfile)
 {
-    qDebug() << "KDE 4 Profile Reader:" << path;
+    //qDebug() << "KDE 4 Profile Reader:" << path;
 
     KConfig config(path,KConfig::NoGlobals);
 

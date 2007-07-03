@@ -204,7 +204,7 @@ void KeyBindingEditor::setupKeyBindingTable(const KeyboardTranslator* translator
 
     QList<KeyboardTranslator::Entry> entries = translator->entries();
     _ui->keyBindingTable->setRowCount(entries.count());
-    qDebug() << "Keyboard translator has" << entries.count() << "entries.";
+    //qDebug() << "Keyboard translator has" << entries.count() << "entries.";
 
     for ( int row = 0 ; row < entries.count() ; row++ )
     {

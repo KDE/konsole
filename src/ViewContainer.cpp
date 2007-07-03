@@ -66,12 +66,14 @@ void ViewContainer::setNavigationDisplayMode(NavigationDisplayMode mode)
 {
     _navigationDisplayMode = mode;
 
+#if 0
     if ( mode == AlwaysShowNavigation )
         qDebug() << "Always show nav";
     else if ( mode == AlwaysHideNavigation )
         qDebug() << "Always hide nav";
     else if ( mode == ShowNavigationAsNeeded )
         qDebug() << "Show nav as needed";
+#endif
 
     navigationDisplayModeChanged(mode);
 }

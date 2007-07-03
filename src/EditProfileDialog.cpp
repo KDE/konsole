@@ -504,7 +504,7 @@ bool EditProfileDialog::eventFilter( QObject* watched , QEvent* event )
 }
 void EditProfileDialog::unpreviewAll()
 {
-    qDebug() << "unpreviewing";
+    //qDebug() << "unpreviewing";
 
     QHash<Profile::Property,QVariant> map;
     QHashIterator<int,QVariant> iter(_previewedProperties);
@@ -925,7 +925,7 @@ void EditProfileDialog::toggleResizeWindow(bool enable)
 }
 void EditProfileDialog::fontSelected(const QFont& font)
 {
-   qDebug() << "font selected";
+   //qDebug() << "font selected";
    QSlider* slider = _ui->fontSizeSlider;
    
    _ui->fontSizeSlider->setRange( qMin(slider->minimum(),font.pointSize()) ,

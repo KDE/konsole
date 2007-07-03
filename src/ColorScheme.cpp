@@ -417,8 +417,8 @@ void ColorSchemeManager::loadAllColorSchemes()
             failed++;
     }
 
-    if ( success > 0 )
-        qDebug() << "succeeded to load " << success << " color schemes.";
+   // if ( success > 0 )
+   //     qDebug() << "succeeded to load " << success << " color schemes.";
     if ( failed > 0 )
         qDebug() << "failed to load " << failed << " color schemes.";
 
@@ -435,7 +435,7 @@ QList<const ColorScheme*> ColorSchemeManager::allColorSchemes()
 }
 bool ColorSchemeManager::loadKDE3ColorScheme(const QString& filePath)
 {
-    qDebug() << "loading KDE 3 format color scheme from " << filePath;
+    //qDebug() << "loading KDE 3 format color scheme from " << filePath;
 
     QFile file(filePath);
     if (!filePath.endsWith(".schema") || !file.open(QIODevice::ReadOnly))
@@ -448,13 +448,13 @@ bool ColorSchemeManager::loadKDE3ColorScheme(const QString& filePath)
 
     Q_ASSERT( !scheme->name().isEmpty() );
 
-    qDebug() << "found KDE 3 format color scheme - " << scheme->name();
+    //qDebug() << "found KDE 3 format color scheme - " << scheme->name();
     
     QFileInfo info(filePath);
 
     if ( !_colorSchemes.contains(info.baseName()) )
     {
-        qDebug() << "added color scheme - " << info.baseName();
+        //qDebug() << "added color scheme - " << info.baseName();
         
         _colorSchemes.insert(scheme->name(),scheme);
     }
@@ -484,7 +484,7 @@ bool ColorSchemeManager::loadColorScheme(const QString& filePath)
 
     QFileInfo info(filePath);
     
-    qDebug() << "loading KDE 4 native color scheme from " << filePath;
+    //qDebug() << "loading KDE 4 native color scheme from " << filePath;
     KConfig config(filePath , KConfig::NoGlobals);
     ColorScheme* scheme = new ColorScheme();
     scheme->setName(info.baseName());
@@ -492,12 +492,12 @@ bool ColorSchemeManager::loadColorScheme(const QString& filePath)
     
     Q_ASSERT( !scheme->name().isEmpty() );
 
-    qDebug() << "found KDE 4 native color scheme - " << scheme->name();
-    qDebug() << "opacity - " << scheme->opacity();
+    //qDebug() << "found KDE 4 native color scheme - " << scheme->name();
+    //qDebug() << "opacity - " << scheme->opacity();
 
     if ( !_colorSchemes.contains(info.baseName()) )
     {
-        qDebug() << "added color scheme - " << info.baseName();
+        //qDebug() << "added color scheme - " << info.baseName();
 
         _colorSchemes.insert(scheme->name(),scheme);
     }
@@ -555,7 +555,7 @@ QString ColorSchemeManager::findColorSchemePath(const QString& name) const
 }
 const ColorScheme* ColorSchemeManager::findColorScheme(const QString& name) 
 {
-    qDebug() << "looking for color scheme - " << name;
+    //qDebug() << "looking for color scheme - " << name;
 
     if ( name.isEmpty() )
         return defaultColorScheme();

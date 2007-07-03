@@ -459,7 +459,7 @@ void UrlFilter::HotSpot::activate(QObject* object)
 
     if ( actionName == "copy-action" )
     {
-        qDebug() << "Copying url to clipboard:" << url;
+        //qDebug() << "Copying url to clipboard:" << url;
 
         QApplication::clipboard()->setText(url);
         return;
