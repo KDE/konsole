@@ -62,6 +62,32 @@ ViewContainer::~ViewContainer()
 {
     emit destroyed(this);
 }
+void ViewContainer::moveViewWidget( int , int ) {}
+
+void ViewContainer::moveActiveView( MoveDirection direction )
+{
+    const int currentIndex = _views.indexOf( activeView() ) ;
+    int newIndex = -1; 
+
+    switch ( direction )
+    {
+        case MoveViewLeft:
+            newIndex = qMax( currentIndex-1 , 0 );
+            break;
+        case MoveViewRight:
+            newIndex = qMin( currentIndex+1 , _views.count() -1 );
+            break;
+    }
+
+    Q_ASSERT( newIndex != -1 );
+
+    moveViewWidget( currentIndex , newIndex );   
+
+    _views.swap(currentIndex,newIndex);
+
+    setActiveView( _views[newIndex] );
+}
+
 void ViewContainer::setNavigationDisplayMode(NavigationDisplayMode mode)
 {
     _navigationDisplayMode = mode;
@@ -536,6 +562,21 @@ void TabbedViewContainerV2::tabDoubleClicked(int tab)
     {
         //emit duplicateRequest(); 
     }
+}
+void TabbedViewContainerV2::moveViewWidget( int fromIndex , int toIndex )
+{
+    QString text = _tabBar->tabText(fromIndex);
+    QIcon icon = _tabBar->tabIcon(fromIndex);
+   
+    // FIXME - This will lose properties of the tab other than
+    // their text and icon when moving them
+    
+    _tabBar->removeTab(fromIndex);
+    _tabBar->insertTab(toIndex,icon,text);
+
+    QWidget* widget = _stackWidget->widget(fromIndex);
+    _stackWidget->removeWidget(widget);
+    _stackWidget->insertWidget(toIndex,widget);
 }
 void TabbedViewContainerV2::currentTabChanged(int index)
 {

@@ -179,6 +179,10 @@ private slots:
     // sends input from active view to all sessions
     void sendInputToAll();
 
+    // moves active view to the left
+    void moveActiveViewLeft();
+    // moves active view to the right
+    void moveActiveViewRight();
 private:
     void setupActions();
     void focusActiveView();

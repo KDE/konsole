@@ -58,7 +58,7 @@ void ViewSplitter::adjustContainerSize(ViewContainer* container , int percentage
     QList<int> containerSizes = sizes();
 
     int oldSize = containerSizes[containerIndex];
-    int newSize = oldSize * ( 1.0 + percentage/100.0 );
+    int newSize = (int)(oldSize * ( 1.0 + percentage/100.0 ));
 
    // qDebug() << "Old container size:" << oldSize << ", new size:" << newSize;
 

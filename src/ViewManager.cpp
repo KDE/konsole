@@ -107,7 +107,10 @@ void ViewManager::setupActions()
     KAction* nextViewAction = new KAction( i18n("Next View") , this );
     KAction* previousViewAction = new KAction( i18n("Previous View") , this );
     QAction* nextContainerAction = new QAction( i18n("Next View Container") , this);
-   
+  
+    QAction* moveViewLeftAction = new QAction( i18n("Move View Left") , this );
+    QAction* moveViewRightAction = new QAction( i18n("Move View Right") , this );
+
     // list of actions that should only be enabled when there are multiple view
     // containers open
     QList<QAction*> multiViewOnlyActions;
@@ -175,7 +178,8 @@ void ViewManager::setupActions()
         collection->addAction("next-view",nextViewAction);
         collection->addAction("previous-view",previousViewAction);
         collection->addAction("next-container",nextContainerAction);
-
+        collection->addAction("move-view-left",moveViewLeftAction);
+        collection->addAction("move-view-right",moveViewRightAction);
     }
 
     QListIterator<QAction*> iter(multiViewOnlyActions);
@@ -184,6 +188,7 @@ void ViewManager::setupActions()
         connect( this , SIGNAL(splitViewToggle(bool)) , iter.next() , SLOT(setEnabled(bool)) );
     }
 
+    // keyboard shortcut only actions
     KShortcut nextViewShortcut = nextViewAction->shortcut();
     nextViewShortcut.setPrimary( QKeySequence(Qt::SHIFT+Qt::Key_Right) );
     nextViewShortcut.setAlternate( QKeySequence(Qt::CTRL+Qt::Key_PageUp) );
@@ -201,8 +206,29 @@ void ViewManager::setupActions()
     nextContainerAction->setShortcut( QKeySequence(Qt::SHIFT+Qt::Key_Tab) );
     connect( nextContainerAction , SIGNAL(triggered()) , this , SLOT(nextContainer()) );
     _viewSplitter->addAction(nextContainerAction);
+
+    moveViewLeftAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Left) );
+    connect( moveViewLeftAction , SIGNAL(triggered()) , this , SLOT(moveActiveViewLeft()) );
+    _viewSplitter->addAction(moveViewLeftAction);
+    moveViewRightAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Right) );
+    connect( moveViewRightAction , SIGNAL(triggered()) , this , SLOT(moveActiveViewRight()) );
+    _viewSplitter->addAction(moveViewRightAction);
 }
 
+void ViewManager::moveActiveViewLeft()
+{
+    qDebug() << "Moving active view to the left";
+    ViewContainer* container = _viewSplitter->activeContainer();
+    Q_ASSERT( container );
+    container->moveActiveView( ViewContainer::MoveViewLeft );
+}
+void ViewManager::moveActiveViewRight()
+{
+    qDebug() << "Moving active view to the right";
+    ViewContainer* container = _viewSplitter->activeContainer();
+    Q_ASSERT( container );
+    container->moveActiveView( ViewContainer::MoveViewRight );
+}
 void ViewManager::nextContainer()
 {
     _viewSplitter->activateNextContainer();

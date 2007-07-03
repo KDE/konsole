@@ -204,6 +204,28 @@ public:
      */
     void activatePreviousView();
 
+    /** 
+     * This enum describes the directions 
+     * in which views can be re-arranged within the container
+     * using the moveActiveView() method.
+     */
+    enum MoveDirection
+    {
+        /** Moves the view to the left. */
+        MoveViewLeft,
+        /** Moves the view to the right. */
+        MoveViewRight
+    };
+
+    /** 
+     * Moves the active view within the container and 
+     * updates the order in which the views are shown
+     * in the container's navigation widget.
+     *
+     * The default implementation does nothing.
+     */
+    void moveActiveView( MoveDirection direction );
+
 signals:
     /** Emitted when the container is deleted */
     void destroyed(ViewContainer* container);
@@ -253,6 +275,14 @@ protected:
 
     /** Returns the widgets which are associated with a particular navigation item */
     QList<QWidget*> widgetsForItem( ViewProperties* item ) const;
+
+    /** 
+     * Rearranges the order of widgets in the container.
+     *
+     * @param fromIndex Current index of the widget to move
+     * @param toIndex New index for the widget
+     */
+    virtual void moveViewWidget( int fromIndex , int toIndex );
 
 private slots:
     void viewDestroyed(QObject* view);
@@ -361,11 +391,13 @@ public:
 
     virtual QList<NavigationPosition> supportedNavigationPositions() const;
 
+
 protected:
     virtual void addViewWidget(QWidget* view);
     virtual void removeViewWidget(QWidget* view);
     virtual void navigationDisplayModeChanged(NavigationDisplayMode mode);
     virtual void navigationPositionChanged(NavigationPosition position);
+    virtual void moveViewWidget( int fromIndex , int toIndex );
 
 private slots:
     void updateTitle(ViewProperties* item);
