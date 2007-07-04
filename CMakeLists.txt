@@ -1,5 +1,4 @@
 
-project(konsole)
 KDE4_NO_ENABLE_FINAL(konsole)
 
 add_subdirectory( src ) 
