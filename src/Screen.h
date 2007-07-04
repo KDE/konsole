@@ -288,8 +288,12 @@ public: // these are all `Screen' operations
 	 * @param decoder A decoder which converts terminal characters into text.  PlainTextDecoder
 	 * 				  is the most commonly used decoder which coverts characters into plain
 	 * 				  text with no formatting.
+     * @param preserveLineBreaks Specifies whether line breaks that have been added 
+     * to break up long lines of text should be preserved in the output ( in which case
+     * new line characters will be added after the end of each line). 
 	 */
-	void writeSelectionToStream(TerminalCharacterDecoder* decoder);
+	void writeSelectionToStream(TerminalCharacterDecoder* decoder , bool
+                                preserveLineBreaks = true);
 
     void checkSelection(int from, int to);
 
@@ -363,7 +367,8 @@ private: // helper
                           int start, 
                           int count, 
                           TerminalCharacterDecoder* decoder,
-                          bool appendNewLine);
+                          bool appendNewLine,
+                          bool preserveLineBreaks);
 	
     //fills a section of the screen image with the character 'c'
     //the parameters are specified as offsets from the start of the screen image.

@@ -2231,7 +2231,7 @@ void TerminalDisplay::copyClipboard()
   if ( !_screenWindow )
       return;
 
-  QString text = _screenWindow->selectedText(true);
+  QString text = _screenWindow->selectedText(false);
   QApplication::clipboard()->setText(text);
 }
 

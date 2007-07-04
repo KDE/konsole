@@ -1344,14 +1344,14 @@ bool Screen::isSelected( const int x,const int y)
 //        writeToStream() to be used if text needs to be retrieved as 
 //        it appears on screen.
 //        -- needs more thought on the issue first though.
-QString Screen::selectedText(bool preserve_line_breaks)
+QString Screen::selectedText(bool preserveLineBreaks)
 {
   QString result;
   QTextStream stream(&result, QIODevice::ReadWrite);
   
   PlainTextDecoder decoder;
   decoder.begin(&stream);
-  writeSelectionToStream(&decoder);
+  writeSelectionToStream(&decoder , preserveLineBreaks);
   decoder.end();
   
   return result;
@@ -1396,7 +1396,8 @@ bool Screen::isSelectionValid() const
     return ( sel_TL >= 0 && sel_BR >= 0 );
 }
 
-void Screen::writeSelectionToStream(TerminalCharacterDecoder* decoder)
+void Screen::writeSelectionToStream(TerminalCharacterDecoder* decoder , 
+                                    bool preserveLineBreaks)
 {
     // do nothing if selection is invalid
     if ( !isSelectionValid() )
@@ -1422,7 +1423,12 @@ void Screen::writeSelectionToStream(TerminalCharacterDecoder* decoder)
 			if ( y == bottom) count = right - start + 1;
 
             const bool appendNewLine = ( y != bottom );
-			copyLineToStream( y,start,count,decoder , appendNewLine );
+			copyLineToStream( y,
+                              start,
+                              count,
+                              decoder, 
+                              appendNewLine,
+                              preserveLineBreaks );
 	}	
 }
 
@@ -1431,7 +1437,8 @@ void Screen::copyLineToStream(int line ,
                               int start, 
                               int count,
                               TerminalCharacterDecoder* decoder,
-                              bool appendNewLine)
+                              bool appendNewLine,
+                              bool preserveLineBreaks)
 {
 		//buffer to hold characters for decoding
 		//the buffer is static to avoid initialising every 
@@ -1441,6 +1448,8 @@ void Screen::copyLineToStream(int line ,
 		static Character characterBuffer[MAX_CHARS];
 		
 		assert( count < MAX_CHARS );
+
+        LineProperty currentLineProperties = 0;
 
 		//determine if the line is in the history buffer or the screen image
 		if (line < hist->getLines())
@@ -1466,6 +1475,9 @@ void Screen::copyLineToStream(int line ,
             assert( (start+count) <= hist->getLineLen(line) );
 
 			hist->getCells(line,start,count,characterBuffer);
+
+            if ( hist->isWrappedLine(line) )
+                currentLineProperties |= LINE_WRAPPED;
 		}
 		else
 		{
@@ -1474,8 +1486,10 @@ void Screen::copyLineToStream(int line ,
 
             assert( count >= 0 );
 
-            Character* data = screenLines[line-hist->getLines()].data();
-            int length = screenLines[line-hist->getLines()].count();
+            const int screenLine = line-hist->getLines();
+
+            Character* data = screenLines[screenLine].data();
+            int length = screenLines[screenLine].count();
 
 			//retrieve line from screen image
 			for (int i=start;i < qMin(start+count,length);i++)
@@ -1485,6 +1499,9 @@ void Screen::copyLineToStream(int line ,
 
             // count cannot be any greater than length
             count = qMin(length,count);
+
+            Q_ASSERT( screenLine < lineProperties.count() );
+            currentLineProperties |= lineProperties[screenLine]; 
 		}
 
 		//do not decode trailing whitespace characters
@@ -1494,15 +1511,19 @@ void Screen::copyLineToStream(int line ,
 				else
 						break;
 
-        // add new line at end    
-        if ( appendNewLine && (count+1 < MAX_CHARS) )
+        // add new line character at end
+        const bool omitLineBreak = (currentLineProperties & LINE_WRAPPED) &&
+                                   !preserveLineBreaks;
+
+        if ( !omitLineBreak && appendNewLine && (count+1 < MAX_CHARS) )
         {
             characterBuffer[count] = '\n';
             count++;
         }
 
 		//decode line and write to text stream	
-		decoder->decodeLine( (Character*) characterBuffer , count, LINE_DEFAULT );
+		decoder->decodeLine( (Character*) characterBuffer , 
+                             count, currentLineProperties );
 }
 
 // Method below has been removed because of its reliance on 'histCursor'
