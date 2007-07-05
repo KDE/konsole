@@ -57,6 +57,7 @@ using namespace Konsole;
 
 EditProfileDialog::EditProfileDialog(QWidget* parent)
     : KDialog(parent)
+    , _colorSchemeAnimationTimeLine(0)
 {
     setCaption(i18n("Edit Profile"));
     setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply | KDialog::Default );
@@ -78,7 +79,7 @@ EditProfileDialog::EditProfileDialog(QWidget* parent)
     // to be refreshed when the user switches to them
     _pageNeedsUpdate.resize( _ui->tabWidget->count() );
     connect( _ui->tabWidget , SIGNAL(currentChanged(int)) , this , 
-            SLOT(ensurePageLoaded(int)) );
+            SLOT(preparePage(int)) );
 
     _tempProfile = new Profile;
 
@@ -116,6 +117,10 @@ void EditProfileDialog::accept()
     unpreviewAll();
     KDialog::accept(); 
 }
+void EditProfileDialog::updateCaption(const QString& profileName)
+{
+    setCaption( i18n("Edit Profile \"%1\"",profileName) );
+}
 void EditProfileDialog::setProfile(const QString& key)
 {
     _profileKey = key;
@@ -125,14 +130,14 @@ void EditProfileDialog::setProfile(const QString& key)
     Q_ASSERT( info );
 
     // update caption
-    setCaption( i18n("Edit Profile \"%1\"",info->name()) );
+    updateCaption(info->name());
 
     // mark each page of the dialog as out of date
     // and force an update of the currently visible page
     //
     // the other pages will be updated as necessary
     _pageNeedsUpdate.fill(true);
-    ensurePageLoaded( _ui->tabWidget->currentIndex() );
+    preparePage( _ui->tabWidget->currentIndex() );
 
     if ( _tempProfile )
     {
@@ -144,17 +149,17 @@ const Profile* EditProfileDialog::lookupProfile() const
 {
     return SessionManager::instance()->profile(_profileKey);
 }
-void EditProfileDialog::ensurePageLoaded(int page)
+void EditProfileDialog::preparePage(int page)
 {
     const Profile* info = lookupProfile();
 
     Q_ASSERT( _pageNeedsUpdate.count() > page );
     Q_ASSERT( info );
 
+    QWidget* pageWidget = _ui->tabWidget->widget(page);
+    
     if ( _pageNeedsUpdate[page] )
     {
-       QWidget* pageWidget = _ui->tabWidget->widget(page);
-
        if ( pageWidget == _ui->generalTab )
             setupGeneralPage(info);
        else if ( pageWidget == _ui->tabsTab )
@@ -172,6 +177,15 @@ void EditProfileDialog::ensurePageLoaded(int page)
 
         _pageNeedsUpdate[page] = false;
     }
+
+    // start page entry animation for color schemes
+    if ( pageWidget == _ui->appearanceTab )
+            _colorSchemeAnimationTimeLine->start();
+}
+void EditProfileDialog::selectProfileName()
+{
+    _ui->profileNameEdit->selectAll();
+    _ui->profileNameEdit->setFocus();
 }
 void EditProfileDialog::setupGeneralPage(const Profile* info)
 {
@@ -324,6 +338,7 @@ void EditProfileDialog::selectIcon()
 void EditProfileDialog::profileNameChanged(const QString& text)
 {
     _tempProfile->setProperty(Profile::Name,text);
+    updateCaption(_tempProfile->name());
 }
 void EditProfileDialog::initialDirChanged(const QString& dir)
 {
@@ -354,10 +369,10 @@ void EditProfileDialog::setupAppearancePage(const Profile* info)
 
     ColorSchemeViewDelegate* delegate = new ColorSchemeViewDelegate(this);
 
-    QTimeLine* timeLine = new QTimeLine( 500 , this );
-    delegate->setEntryTimeLine(timeLine);
+    _colorSchemeAnimationTimeLine = new QTimeLine( 500 , this );
+    delegate->setEntryTimeLine(_colorSchemeAnimationTimeLine);
 
-    connect( timeLine , SIGNAL(valueChanged(qreal)) , this ,
+    connect( _colorSchemeAnimationTimeLine , SIGNAL(valueChanged(qreal)) , this ,
              SLOT(colorSchemeAnimationUpdate()) );
 
     _ui->colorSchemeList->setItemDelegate(delegate);
@@ -387,9 +402,6 @@ void EditProfileDialog::setupAppearancePage(const Profile* info)
              SLOT(setFontSize(int)) );
     connect( _ui->editFontButton , SIGNAL(clicked()) , this ,
              SLOT(showFontDialog()) );
-
-    // start entry animation
-    timeLine->start();
 }
 void EditProfileDialog::colorSchemeAnimationUpdate()
 {

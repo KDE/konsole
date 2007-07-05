@@ -84,9 +84,13 @@ private slots:
 private:
     QAction* actionForKey(const QString& key) const;
     void updateAction(QAction* action , Profile* profile);
+    void updateEmptyAction();
 
     QActionGroup*   _group;
     bool _addShortcuts;
+    
+    // action to show when the list is empty
+    QAction* _emptyListAction;
 }; 
 
 }

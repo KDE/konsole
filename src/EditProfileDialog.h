@@ -79,6 +79,14 @@ public:
      */
     void setProfile(const QString& key);
 
+    /** 
+     * Selects the text in the profile name edit area. 
+     * When the dialog is being used to create a new profile,
+     * this can be used to draw the user's attention to the profile name
+     * and make it easy for them to change it.
+     */
+    void selectProfileName();
+
 public slots:
     // reimplemented
     virtual void accept();
@@ -90,7 +98,7 @@ protected:
 
 private slots:
     // sets up the specified tab page if necessary
-    void ensurePageLoaded(int);
+    void preparePage(int);
 
     // saves changes to profile
     void save();
@@ -178,6 +186,8 @@ private:
     void unpreview(int property);
     void unpreviewAll();
 
+    void updateCaption(const QString& profileName);
+
     struct RadioOption
     {
        QAbstractButton* button;
@@ -205,6 +215,8 @@ private:
     // after an update by a call to ensurePageLoaded()
     QVector<bool> _pageNeedsUpdate;
     QHash<int,QVariant> _previewedProperties;
+
+    QTimeLine* _colorSchemeAnimationTimeLine;
 };
 
 /**

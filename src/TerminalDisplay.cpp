@@ -1470,8 +1470,8 @@ void TerminalDisplay::setScroll(int cursor, int slines)
   //
   // setting the range or value of a _scrollBar will always trigger
   // a repaint, so it should be avoided if it is not necessary
-  if ( _scrollBar->minimum() == 0         &&
-       _scrollBar->maximum() == slines    &&
+  if ( _scrollBar->minimum() == 0                 &&
+       _scrollBar->maximum() == (slines - _lines) &&
        _scrollBar->value()   == cursor )
   {
         //qDebug() << "no change in _scrollBar - skipping update";

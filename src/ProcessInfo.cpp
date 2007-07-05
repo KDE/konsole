@@ -65,6 +65,8 @@ QString ProcessInfo::format(const QString& input) const
    // search for and replace known markers
    output.replace("%u","NOT IMPLEMENTED YET");
    output.replace("%n",name(&ok));
+   output.replace("%c",formatCommand(name(&ok),arguments(&ok),ShortCommandFormat));
+   output.replace("%C",formatCommand(name(&ok),arguments(&ok),LongCommandFormat));
    output.replace("%D",currentDir(&ok));
    output.replace("%d",formatShortDir(currentDir(&ok)));
    
@@ -80,6 +82,13 @@ const char* ProcessInfo::DefaultCommonDirNames[] =
   "share" , "examples" , "icons" , 
   "pics" , "plugins" , 0 };
 
+QString ProcessInfo::formatCommand(const QString& name, 
+                                   const QVector<QString>& arguments,
+                                   CommandFormat format) const
+{
+    // TODO Implement me
+    return QStringList(QList<QString>::fromVector(arguments)).join(" ");
+}
 QString ProcessInfo::formatShortDir(const QString& input) const
 {
     QString result;

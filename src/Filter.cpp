@@ -488,7 +488,7 @@ void UrlFilter::HotSpot::activate(QObject* object)
 //regexp matches:
 // full url:  
 // protocolname:// or www. followed by numbers, letters dots and dashes or the '@' character. 
-const QRegExp UrlFilter::FullUrlRegExp("([a-z]+://|www\\.)[a-zA-Z0-9@\\-\\./]+");
+const QRegExp UrlFilter::FullUrlRegExp("([a-z]+://|www\\.)[^\\s]+");
 // email address:
 // [word chars, dots or dashes]@[word chars, dots or dashes].[word chars]
 const QRegExp UrlFilter::EmailAddressRegExp("(\\w|\\.|-)+@(\\w|\\.|-)+\\.\\w+");

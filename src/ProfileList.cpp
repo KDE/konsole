@@ -27,6 +27,7 @@
 
 // KDE
 #include <KIcon>
+#include <KLocalizedString>
 
 // Konsole
 #include "SessionManager.h"
@@ -36,11 +37,17 @@ using namespace Konsole;
 ProfileList::ProfileList(bool addShortcuts , QObject* parent)
     : QObject(parent)
     , _addShortcuts(addShortcuts)
+    , _emptyListAction(0)
 {
     SessionManager* manager = SessionManager::instance();
 
     // construct the list of favorite session types
     _group = new QActionGroup(this);
+    
+    // disabled action to be shown only when the list is empty
+    _emptyListAction = new QAction(i18n("No profiles available"),_group);
+    _emptyListAction->setEnabled(false);
+    
 
     QList<QString> list = manager->findFavorites().toList();
     qSort(list);
@@ -54,13 +61,25 @@ ProfileList::ProfileList(bool addShortcuts , QObject* parent)
 
     connect( _group , SIGNAL(triggered(QAction*)) , this , SLOT(triggered(QAction*)) );
 
+
     // listen for future changes to the session list
     connect( manager , SIGNAL(favoriteStatusChanged(const QString&,bool)) , this ,
              SLOT(favoriteChanged(const QString&,bool)) );
     connect( manager , SIGNAL(profileChanged(const QString&)) , this , 
              SLOT(profileChanged(const QString&)) );
 }
+void ProfileList::updateEmptyAction() 
+{
+    Q_ASSERT( _group );
+    Q_ASSERT( _emptyListAction );
 
+    // show empty list action when it is the only action
+    // in the group
+    const bool showEmptyAction = _group->actions().count() == 1;
+
+    if ( showEmptyAction != _emptyListAction->isVisible() )
+        _emptyListAction->setVisible(showEmptyAction);
+}
 QAction* ProfileList::actionForKey(const QString& key) const
 {        
     QListIterator<QAction*> iter(_group->actions());
@@ -119,6 +138,8 @@ void ProfileList::favoriteChanged(const QString& key,bool isFavorite)
             emit actionsChanged(_group->actions());
         }
     }
+
+    updateEmptyAction();
 }
 
 void ProfileList::triggered(QAction* action)

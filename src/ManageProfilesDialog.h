@@ -48,10 +48,13 @@ class ManageProfilesDialog : public KDialog
 {
 Q_OBJECT
 
+friend class ProfileItemDelegate;
+
 public:
     /** Constructs a new profile type with the specified parent. */
     ManageProfilesDialog(QWidget* parent = 0);
     virtual ~ManageProfilesDialog();
+
 
 protected:
     virtual void showEvent(QShowEvent* event);
@@ -72,6 +75,8 @@ private slots:
     // session manager
     void updateTableModel();
 
+    void updateFavoriteStatus(const QString& key , bool favorite);
+
 private:
     QString selectedKey() const; // return the key associated with the currently selected
                                  // item in the profile table
@@ -80,6 +85,10 @@ private:
                               // their default / non-default profile status
     Ui::ManageProfilesDialog* _ui;
     QStandardItemModel* _sessionModel;
+
+    static const int FavoriteStatusColumn = 1;
+    static const int ProfileKeyRole = Qt::UserRole + 1;
+    static const int ShortcutRole = Qt::UserRole + 1;
 };
 
 class ProfileItemDelegate : public QItemDelegate

@@ -47,7 +47,7 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
 
     // hide vertical header
     _ui->sessionTable->verticalHeader()->hide();
-    _ui->sessionTable->setItemDelegateForColumn(1,new ProfileItemDelegate(this));
+    _ui->sessionTable->setItemDelegateForColumn(FavoriteStatusColumn,new ProfileItemDelegate(this));
 
     // update table and listen for changes to the session types
     updateTableModel();
@@ -57,6 +57,9 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
              SLOT(updateTableModel()) );
     connect( SessionManager::instance() , SIGNAL(profileChanged(const QString&)) , this,
              SLOT(updateTableModel()) );
+    connect( SessionManager::instance() , 
+                SIGNAL(favoriteStatusChanged(const QString&,bool)) , this ,
+                SLOT(updateFavoriteStatus(const QString&,bool)) );
 
     // resize the session table to the full width of the table
     _ui->sessionTable->horizontalHeader()->setHighlightSections(false);
@@ -106,7 +109,7 @@ void ManageProfilesDialog::itemDataChanged(QStandardItem* item)
 
         qDebug() << "New key sequence: " << item->text(); 
 
-        SessionManager::instance()->setShortcut(item->data(Qt::UserRole+1).value<QString>(),
+        SessionManager::instance()->setShortcut(item->data(ShortcutRole).value<QString>(),
                                                 sequence); 
    } 
 }
@@ -137,7 +140,7 @@ void ManageProfilesDialog::updateTableModel()
 
         if ( !info->icon().isEmpty() )
             item->setIcon( KIcon(info->icon()) );
-        item->setData(key);
+        item->setData(key,ProfileKeyRole);
 
         const bool isFavorite = SessionManager::instance()->findFavorites().contains(key);
 
@@ -148,14 +151,14 @@ void ManageProfilesDialog::updateTableModel()
         else
             favoriteItem->setData(KIcon(),Qt::DecorationRole);
 
-        favoriteItem->setData(key,Qt::UserRole+1);
+        favoriteItem->setData(key,ProfileKeyRole);
 
         // shortcut column
         QStandardItem* shortcutItem = new QStandardItem();
         QString shortcut = SessionManager::instance()->shortcut(key).
                                 toString();
         shortcutItem->setText(shortcut);
-        shortcutItem->setData(key,Qt::UserRole+1);
+        shortcutItem->setData(key,ShortcutRole);
 
         itemList << item << favoriteItem << shortcutItem;
 
@@ -246,11 +249,16 @@ void ManageProfilesDialog::newType()
     newProfile->setProperty(Profile::Name,i18n("New Profile"));
     const QString& key = SessionManager::instance()->addProfile(newProfile);
     dialog.setProfile(key); 
-    
+    dialog.selectProfileName();
+
     // if the user doesn't accept the dialog, remove the temporary profile
     // if they do accept the dialog, it will become a permanent profile
     if ( dialog.exec() != QDialog::Accepted )
         SessionManager::instance()->deleteProfile(key);
+    else
+    {
+        SessionManager::instance()->setFavorite(key,true);
+    }
 }
 void ManageProfilesDialog::editSelected()
 {
@@ -268,6 +276,21 @@ QString ManageProfilesDialog::selectedKey() const
             selectionModel()->
             selectedIndexes().first().data( Qt::UserRole + 1 ).value<QString>();
 }
+void ManageProfilesDialog::updateFavoriteStatus(const QString& key , bool favorite)
+{
+    Q_ASSERT( _sessionModel );
+
+    const QModelIndex topIndex = _sessionModel->index(0,FavoriteStatusColumn);
+
+    QModelIndexList list = _sessionModel->match( topIndex , ProfileKeyRole,
+                                                 key );
+
+    foreach( QModelIndex index , list )
+    {
+        const KIcon icon = favorite ? KIcon("favorites") : KIcon();
+        _sessionModel->setData(index,icon,Qt::DecorationRole);
+    }
+}
 
 ProfileItemDelegate::ProfileItemDelegate(QObject* parent)
     : QItemDelegate(parent)
@@ -278,16 +301,11 @@ bool ProfileItemDelegate::editorEvent(QEvent* event,QAbstractItemModel* model,
 {
      if ( event->type() == QEvent::MouseButtonPress || event->type() == QEvent::KeyPress )
      {
-         const QString& key = index.data(Qt::UserRole + 1).value<QString>();
+         const QString& key = index.data(ManageProfilesDialog::ProfileKeyRole).value<QString>();
          const bool isFavorite = !SessionManager::instance()->findFavorites().contains(key);
                                                 
         SessionManager::instance()->setFavorite(key,
                                             isFavorite);
-
-         if ( isFavorite )
-            model->setData(index,KIcon("favorites"),Qt::DecorationRole);
-         else
-            model->setData(index,KIcon(),Qt::DecorationRole);
      }
      
      return true; 
