@@ -131,11 +131,14 @@ void TerminalDisplay::setColorTable(const ColorEntry table[])
 {
   for (int i = 0; i < TABLE_COLORS; i++)
       _colorTable[i] = table[i];
- 
+
   QPalette p = palette();
   p.setColor( backgroundRole(), _colorTable[DEFAULT_BACK_COLOR].color );
   setPalette( p );
-  
+
+  // We don't want the palette change to propagate to the scrollbar
+  _scrollBar->setPalette( QApplication::palette() );  
+
   update();
 }
 
