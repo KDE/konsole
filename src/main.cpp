@@ -170,7 +170,7 @@ void fillAboutData(KAboutData& aboutData)
   aboutData.addCredit(ki18n("Lars Knoll"),
     ki18n("Bug fixes"),
     "knoll@mpi-hd.mpg.de");
-  aboutData.addCredit(KLocalizedString(),ki18n("Thanks to many others.\n"));
+  aboutData.addCredit(ki18n("Thanks to many others.\n"));
 
 }
 
