@@ -178,8 +178,6 @@ void Application::toggleBackgroundInstance()
 
 Application::~Application()
 {
-    SessionManager
-
     delete SessionManager::instance();
     delete ColorSchemeManager::instance();
     delete KeyboardTranslatorManager::instance();
