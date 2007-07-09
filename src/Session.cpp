@@ -194,7 +194,7 @@ void Session::addView(TerminalDisplay* widget)
 
         // allow emulation to notify view when the foreground process 
         // indicates whether or not it is interested in mouse signals
-        connect( _emulation , SIGNAL(programUsesMouse(bool)) , widget , 
+        connect( _emulation , SIGNAL(programUsesMouseChanged(bool)) , widget , 
                SLOT(setUsesMouse(bool)) );
   
         widget->setScreenWindow(_emulation->createWindow());

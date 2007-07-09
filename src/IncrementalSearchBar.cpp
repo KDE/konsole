@@ -49,7 +49,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
   
     QToolButton* close = new QToolButton(this);
     close->setObjectName("close-button");
-    close->setToolTip("Close the search bar");
+    close->setToolTip( i18n("Close the search bar") );
     close->setAutoRaise(true);
     close->setIcon(KIcon("dialog-cancel"));
     connect( close , SIGNAL(clicked()) , this , SIGNAL(closeClicked()) );
@@ -58,7 +58,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     _searchEdit = new QLineEdit(this);
     _searchEdit->installEventFilter(this);
     _searchEdit->setObjectName("search-edit");
-    _searchEdit->setToolTip("Enter the text to search for here");
+    _searchEdit->setToolTip( i18n("Enter the text to search for here") );
 
     // text box may be a minimum of 6 characters wide and a maximum of 10 characters wide
     // (since the maxWidth metric is used here, more characters probably will fit in than 6
@@ -80,7 +80,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     findNext->setAutoRaise(true);
     findNext->setIcon( KIcon("find-next") );
     findNext->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    findNext->setToolTip("Find the next match for the current search phrase");
+    findNext->setToolTip( i18n("Find the next match for the current search phrase") );
     connect( findNext , SIGNAL(clicked()) , this , SIGNAL(findNextClicked()) );
 
     QToolButton* findPrev = new QToolButton(this);
@@ -89,14 +89,14 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     findPrev->setAutoRaise(true);
     findPrev->setIcon( KIcon("find-previous") );
     findPrev->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    findPrev->setToolTip("Find the previous match for the current search phrase");
+    findPrev->setToolTip( i18n("Find the previous match for the current search phrase") );
     connect( findPrev , SIGNAL(clicked()) , this , SIGNAL(findPreviousClicked()) );
 
     if ( features & HighlightMatches )
     {
         _highlightBox = new QCheckBox( i18n("Highlight all") , this );
         _highlightBox->setObjectName("highlight-matches-box");
-        _highlightBox->setToolTip("Sets whether matching text should be highlighted");
+        _highlightBox->setToolTip( i18n("Sets whether matching text should be highlighted") );
         _highlightBox->setChecked(true);
         connect( _highlightBox , SIGNAL(toggled(bool)) , this , 
                  SIGNAL(highlightMatchesToggled(bool)) );
@@ -106,7 +106,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     {
         _matchCaseBox = new QCheckBox( i18n("Match case") , this );
         _matchCaseBox->setObjectName("match-case-box");
-        _matchCaseBox->setToolTip("Sets whether the searching is case sensitive");
+        _matchCaseBox->setToolTip( i18n("Sets whether the searching is case sensitive") );
         connect( _matchCaseBox , SIGNAL(toggled(bool)) , this , SIGNAL(matchCaseToggled(bool)) );
     }
 
@@ -114,8 +114,8 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     {
         _matchRegExpBox = new QCheckBox( i18n("Match regular expression") , this );
         _matchRegExpBox->setObjectName("match-regexp-box");
-        _matchRegExpBox->setToolTip("Sets whether the search phrase is interpreted as normal text or"
-                " as a regular expression");
+        _matchRegExpBox->setToolTip( i18n("Sets whether the search phrase is interpreted as normal text or"
+					  " as a regular expression") );
         connect( _matchRegExpBox , SIGNAL(toggled(bool)) , this , SIGNAL(matchRegExpToggled(bool)) );
     }
 

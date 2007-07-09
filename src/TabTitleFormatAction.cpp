@@ -31,18 +31,18 @@ using namespace Konsole;
 
 const TabTitleFormatAction::Element TabTitleFormatAction::_localElements[] = 
 {
-    { "%n" , i18n("Program name") },
-    { "%d" , i18n("Current directory (Short)") },
-    { "%D" , i18n("Current directory (Long)") },
-    { "%w" , i18n("Window title set by shell") }
+    { "%n" , I18N_NOOP("Program name") },
+    { "%d" , I18N_NOOP("Current directory (Short)") },
+    { "%D" , I18N_NOOP("Current directory (Long)") },
+    { "%w" , I18N_NOOP("Window title set by shell") }
 };
 const int TabTitleFormatAction::_localElementCount = 4;
 const TabTitleFormatAction::Element TabTitleFormatAction::_remoteElements[] =
 {
-    { "%u" , i18n("User name") },
-    { "%h" , i18n("Remote host (Short)") },
-    { "%H" , i18n("Remote host (Long)") },
-    { "%w" , i18n("Window title set by shell") }
+    { "%u" , I18N_NOOP("User name") },
+    { "%h" , I18N_NOOP("Remote host (Short)") },
+    { "%H" , I18N_NOOP("Remote host (Long)") },
+    { "%w" , I18N_NOOP("Window title set by shell") }
 };
 const int TabTitleFormatAction::_remoteElementCount = 4;
 
@@ -85,7 +85,7 @@ void TabTitleFormatAction::setContext(Session::TabTitleContext context)
      
     for ( int i = 0 ; i < count ; i++ )
     {
-        QAction* action = new QAction(array[i].description,this);
+        QAction* action = new QAction(i18n(array[i].description),this);
         action->setData(array[i].element);
         list << action;
     }

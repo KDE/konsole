@@ -84,28 +84,28 @@ const char* ColorScheme::colorNames[TABLE_COLORS] =
   "Color6Intense",
   "Color7Intense"
 };
-const QString ColorScheme::translatedColorNames[TABLE_COLORS] =
+const char* ColorScheme::translatedColorNames[TABLE_COLORS] =
 {
-    i18n("Foreground"),
-    i18n("Background"),
-    i18n("Color 1"),
-    i18n("Color 2"),
-    i18n("Color 3"),
-    i18n("Color 4"),
-    i18n("Color 5"),
-    i18n("Color 6"),
-    i18n("Color 7"),
-    i18n("Color 8"),
-    i18n("Foreground (Intense)"),
-    i18n("Background (Intense)"),
-    i18n("Color 1 (Intense)"),
-    i18n("Color 2 (Intense)"),
-    i18n("Color 3 (Intense)"),
-    i18n("Color 4 (Intense)"),
-    i18n("Color 5 (Intense)"),
-    i18n("Color 6 (Intense)"),
-    i18n("Color 7 (Intense)"),
-    i18n("Color 8 (Intense)")
+    I18N_NOOP("Foreground"),
+    I18N_NOOP("Background"),
+    I18N_NOOP("Color 1"),
+    I18N_NOOP("Color 2"),
+    I18N_NOOP("Color 3"),
+    I18N_NOOP("Color 4"),
+    I18N_NOOP("Color 5"),
+    I18N_NOOP("Color 6"),
+    I18N_NOOP("Color 7"),
+    I18N_NOOP("Color 8"),
+    I18N_NOOP("Foreground (Intense)"),
+    I18N_NOOP("Background (Intense)"),
+    I18N_NOOP("Color 1 (Intense)"),
+    I18N_NOOP("Color 2 (Intense)"),
+    I18N_NOOP("Color 3 (Intense)"),
+    I18N_NOOP("Color 4 (Intense)"),
+    I18N_NOOP("Color 5 (Intense)"),
+    I18N_NOOP("Color 6 (Intense)"),
+    I18N_NOOP("Color 7 (Intense)"),
+    I18N_NOOP("Color 8 (Intense)")
 };
 
 ColorSchemeManager* ColorSchemeManager::_instance = 0;
@@ -239,8 +239,10 @@ qreal ColorScheme::opacity() const { return _opacity; }
 void ColorScheme::read(KConfig& config)
 {
     KConfigGroup configGroup = config.group("General");
-    
-    _description = configGroup.readEntry("Description",i18n("Un-named Color Scheme"));
+
+    QString description = configGroup.readEntry("Description", I18N_NOOP("Un-named Color Scheme"));
+
+    _description = i18n(description.toUtf8());
     _opacity = configGroup.readEntry("Opacity",qreal(1.0));
 
     for (int i=0 ; i < TABLE_COLORS ; i++)
@@ -271,7 +273,7 @@ QString ColorScheme::translatedColorNameForIndex(int index)
 {
     Q_ASSERT( index >= 0 && index < TABLE_COLORS );
 
-    return QString(translatedColorNames[index]);
+    return i18n(translatedColorNames[index]);
 }
 void ColorScheme::readColorEntry(KConfig& config , int index)
 {
@@ -376,7 +378,9 @@ void KDE3ColorSchemeReader::readTitleLine(const QString& line,ColorScheme* schem
     int spacePos = line.indexOf(' ');
     Q_ASSERT( spacePos != -1 );
 
-    scheme->setDescription(line.mid(spacePos+1));
+    QString description = line.mid(spacePos+1);
+
+    scheme->setDescription(i18n(description.toUtf8()));
 }
 ColorSchemeManager::ColorSchemeManager()
     : _haveLoadedAll(false)

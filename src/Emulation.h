@@ -206,6 +206,15 @@ public:
   /** Resets the state of the terminal. */
   virtual void reset() =0;
 
+  /** 
+   * Returns true if the active terminal program wants
+   * mouse input events.
+   *
+   * The programUsesMouseChanged() signal is emitted when this
+   * changes.
+   */
+  bool programUsesMouse() const;
+
 public slots: 
 
   /** Change the size of the emulation's image */
@@ -300,7 +309,7 @@ signals:
    * @param usesMouse This will be true if the program wants to be informed about
    * mouse events or false otherwise.
    */
-  void programUsesMouse(bool usesMouse);
+  void programUsesMouseChanged(bool usesMouse);
 
   /** 
    * Emitted when the contents of the screen image change.

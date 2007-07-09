@@ -52,7 +52,7 @@ private:
     struct Element
     {
         QString element;
-        QString description;
+        char *description;
     };
     static const Element _localElements[];
     static const int _localElementCount;

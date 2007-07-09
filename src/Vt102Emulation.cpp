@@ -1231,7 +1231,7 @@ void Vt102Emulation::setMode(int m)
     case MODE_Mouse1001:
     case MODE_Mouse1002:
     case MODE_Mouse1003:
- 	    emit programUsesMouse(false); 
+ 	    emit programUsesMouseChanged(false); 
     break;
 
     case MODE_AppScreen : _screen[1]->clearSelection();
@@ -1254,7 +1254,7 @@ void Vt102Emulation::resetMode(int m)
     case MODE_Mouse1001 :
     case MODE_Mouse1002 :
     case MODE_Mouse1003 :
-	    emit programUsesMouse(true); 
+	    emit programUsesMouseChanged(true); 
     break;
 
     case MODE_AppScreen : _screen[0]->clearSelection();

@@ -35,6 +35,7 @@
 #include <QtGui/QKeySequence>
 
 // KDE
+#include <KLocale>
 #include <KStandardDirs>
 
 using namespace Konsole;
@@ -213,7 +214,7 @@ KeyboardTranslatorReader::KeyboardTranslatorReader( QIODevice* source )
    
         if ( !tokens.isEmpty() && tokens.first().type == Token::TitleKeyword )
         {
-            _description = tokens[1].text;
+            _description = i18n(tokens[1].text.toUtf8());
         }
    }
 
