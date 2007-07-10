@@ -11,7 +11,6 @@ OPTION(KONSOLE_GENERATE_LINEFONT "Konsole: regenerate LineFont file" OFF)
 
 set(fontembedder_SRCS fontembedder.cpp )
 
-kde4_automoc(${fontembedder_SRCS})
 
 kde4_add_executable(fontembedder ${fontembedder_SRCS})
 
@@ -104,7 +103,6 @@ kde4_add_ui_files(konsole_KDEINIT_SRCS
                   ManageProfilesDialog.ui
                   RemoteConnectionDialog.ui
                  )
-kde4_automoc(${konsole_KDEINIT_SRCS})
 
 kde4_add_kdeinit_executable( konsole ${konsole_KDEINIT_SRCS})
 
@@ -176,7 +174,6 @@ set(konsolepart_PART_SRCS
 ) 
 
 
-kde4_automoc(${konsolepart_PART_SRCS})
 
 kde4_add_plugin(konsolepart WITH_PREFIX ${konsolepart_PART_SRCS})
 
@@ -194,7 +191,6 @@ install(TARGETS konsolepart  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 set(kded_kwrited_PART_SRCS kwrited.cpp )
 
-kde4_automoc(${kded_kwrited_PART_SRCS})
 
 
 kde4_add_plugin(kded_kwrited ${kded_kwrited_PART_SRCS})
