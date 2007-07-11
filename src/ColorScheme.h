@@ -106,6 +106,13 @@ public:
     QColor backgroundColor() const;
 
     /** 
+     * Returns true if this color scheme has a dark background.
+     * The background color is said to be dark if it has a value of less than 127
+     * in the HSV color space.
+     */
+    bool hasDarkBackground() const;
+
+    /** 
      * Sets the opacity level of the display background.  A value of
      * 0 represents a completely transparent background, up to a value of 1
      * representing a completely opaque background.

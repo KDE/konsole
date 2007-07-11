@@ -32,6 +32,7 @@ class KActionCollection;
 namespace Konsole
 {
 
+class ColorScheme;
 class Session;
 class TerminalDisplay;
 class Profile;
@@ -184,6 +185,8 @@ private slots:
     // moves active view to the right
     void moveActiveViewRight();
 private:
+    const ColorScheme* colorSchemeForProfile(const QString& key) const;
+
     void setupActions();
     void focusActiveView();
     void registerView(TerminalDisplay* view);

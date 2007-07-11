@@ -334,6 +334,17 @@ public:
   /** Sets the text codec used by this session's terminal emulation. */
   void setCodec(QTextCodec* codec);
 
+  /** 
+   * Sets whether the session has a dark background or not.  The session
+   * uses this information to set the COLORFGBG variable in the process's
+   * environment, which allows the programs running in the terminal to determine
+   * whether the background is light or dark and use appropriate colors by default.
+   *
+   * This has no effect once the session is running. 
+   */
+  void setDarkBackground(bool darkBackground);
+  bool hasDarkBackground() const;
+
 public slots:
 
   /** 
@@ -493,6 +504,8 @@ private:
   QColor         _modifiedBackground; // as set by: echo -en '\033]11;Color\007
 
   QString        _profileKey;
+
+  bool _hasDarkBackground;
 
   static int lastSessionId;
   

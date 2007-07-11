@@ -477,6 +477,9 @@ void ViewManager::createView(Session* session)
         container->addView(display,properties);
         session->addView(display);
 
+        // tell the session whether it has a light or dark background
+        session->setDarkBackground( colorSchemeForProfile(session->profileKey())->hasDarkBackground() );
+
         if ( container == activeContainer ) 
         {
             container->setActiveView(display);
@@ -560,17 +563,26 @@ TerminalDisplay* ViewManager::createTerminalDisplay(Session* session)
    return display;
 }
 
-void ViewManager::applyProfile(TerminalDisplay* view , const QString& profileKey)
+const ColorScheme* ViewManager::colorSchemeForProfile(const QString& profileKey) const
 {
     Profile* info = SessionManager::instance()->profile(profileKey);
-
-    Q_ASSERT( info );
 
     const ColorScheme* colorScheme = ColorSchemeManager::instance()->
                                             findColorScheme(info->colorScheme());
     if ( !colorScheme )
        colorScheme = ColorSchemeManager::instance()->defaultColorScheme(); 
     Q_ASSERT( colorScheme );
+
+    return colorScheme;
+}
+
+void ViewManager::applyProfile(TerminalDisplay* view , const QString& profileKey)
+{
+    Profile* info = SessionManager::instance()->profile(profileKey);
+
+    Q_ASSERT( info );
+    
+    const ColorScheme* colorScheme = colorSchemeForProfile(profileKey);
 
     // menu bar visibility
     emit setMenuBarVisible( info->property(Profile::ShowMenuBar).value<bool>() );

@@ -233,6 +233,12 @@ QColor ColorScheme::backgroundColor() const
 {
     return colorTable()[1].color;
 }
+bool ColorScheme::hasDarkBackground() const
+{
+    // value can range from 0 - 255, with larger values indicating higher brightness.
+    // so 127 is in the middle, anything less is deemed 'dark'
+    return backgroundColor().value() < 127;
+}
 void ColorScheme::setOpacity(qreal opacity) { _opacity = opacity; }
 qreal ColorScheme::opacity() const { return _opacity; }
 

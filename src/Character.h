@@ -84,7 +84,7 @@ public:
     quint16 charSequence; 
   };
 
-  /** A combination of *_RENDITION flags which specify options for drawing the character. */
+  /** A combination of RENDITION flags which specify options for drawing the character. */
   quint8  rendition;
 
   /** The foreground color used to draw this character. */

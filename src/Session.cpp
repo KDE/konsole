@@ -79,6 +79,7 @@ Session::Session() :
    , _zmodemBusy(false)
    , _zmodemProc(0)
    , _zmodemProgress(0)
+   , _hasDarkBackground(false)
 {
     //prepare DBus communication
     //TODO - Re-add Session adaptor
@@ -126,6 +127,14 @@ Session::Session() :
     connect(_monitorTimer, SIGNAL(timeout()), this, SLOT(monitorTimerDone()));
 }
 
+void Session::setDarkBackground(bool darkBackground)
+{
+    _hasDarkBackground = darkBackground;
+}
+bool Session::hasDarkBackground() const
+{
+    return _hasDarkBackground;
+}
 bool Session::running() const
 {
     return _shellProcess->isRunning();
@@ -273,9 +282,15 @@ void Session::run()
   _shellProcess->setXonXoff(_flowControl);
   _shellProcess->setErase(_emulation->getErase());
 
+  // this is not strictly accurate use of the COLORFGBG variable.  This does not 
+  // tell the terminal exactly which colors are being used, but instead approximates
+  // the color scheme as "black on white" or "white on black" depending on whether
+  // the background color is deemed dark or not
+  QString backgroundColorHint = _hasDarkBackground ? "COLORFGBG=15;0" : "COLORFGBG=0;15";
+
   int result = _shellProcess->start(QFile::encodeName(_program), 
                                   arguments, 
-                                  _environment,
+                                  _environment << backgroundColorHint,
                                   _winId, 
                                   _addToUtmp,
                                   dbusService,

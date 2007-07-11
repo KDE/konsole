@@ -83,7 +83,6 @@ Screen::Screen(int l, int c)
     sa_cu_re(0),
     lastPos(-1)
 {
-  
   lineProperties.resize(lines+1);
   for (int i=0;i<lines+1;i++)
           lineProperties[i]=LINE_DEFAULT;
