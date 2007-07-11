@@ -926,7 +926,9 @@ void KeyboardTranslator::removeEntry(const Entry& entry)
 }
 KeyboardTranslator::Entry KeyboardTranslator::findEntry(int keyCode, Qt::KeyboardModifiers modifiers, States state) const
 {
-    //qDebug() << "Searching for entry for key code =" << keyCode << ", modifiers =" << modifiers;
+//    qDebug() << "Searching for entry for key code =" << keyCode << ", modifiers =" << modifiers;  
+//    printf("modifiers in hex %x\n",(int)modifiers);
+
     //qDebug() << "Translator keys, count: " << _entries.count() << _entries.keys();
 
     if ( _entries.contains(keyCode) )

@@ -174,7 +174,7 @@ private:
     void setupAdvancedPage(const Profile* info);
 
     void updateColorSchemeList(bool selectCurrentScheme = false);
-    void updateKeyBindingsList();
+    void updateKeyBindingsList(bool selectCurrentTranslator = false);
     void updateFontPreviewLabel(const QFont& font);
 
     void showColorSchemeEditor(bool newScheme);

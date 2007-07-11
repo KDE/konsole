@@ -364,23 +364,25 @@ void EditProfileDialog::selectInitialDir()
 }
 void EditProfileDialog::setupAppearancePage(const Profile* info)
 {
+    ColorSchemeViewDelegate* delegate = new ColorSchemeViewDelegate(this);
+    _ui->colorSchemeList->setItemDelegate(delegate);
+    
+    _colorSchemeAnimationTimeLine = new QTimeLine( 500 , this );
+    delegate->setEntryTimeLine(_colorSchemeAnimationTimeLine);
+    
+    connect( _colorSchemeAnimationTimeLine , SIGNAL(valueChanged(qreal)) , this ,
+             SLOT(colorSchemeAnimationUpdate()) );
+    
     // setup color list
     updateColorSchemeList(true);
 
-    ColorSchemeViewDelegate* delegate = new ColorSchemeViewDelegate(this);
 
-    _colorSchemeAnimationTimeLine = new QTimeLine( 500 , this );
-    delegate->setEntryTimeLine(_colorSchemeAnimationTimeLine);
-
-    connect( _colorSchemeAnimationTimeLine , SIGNAL(valueChanged(qreal)) , this ,
-             SLOT(colorSchemeAnimationUpdate()) );
-
-    _ui->colorSchemeList->setItemDelegate(delegate);
     _ui->colorSchemeList->setMouseTracking(true);
     _ui->colorSchemeList->installEventFilter(this);
 
-    connect( _ui->colorSchemeList , SIGNAL(doubleClicked(const QModelIndex&)) , this ,
-            SLOT(colorSchemeSelected()) );
+    connect( _ui->colorSchemeList->selectionModel() , 
+            SIGNAL(selectionChanged(const QItemSelection&,const QItemSelection&)) 
+            , this , SLOT(colorSchemeSelected()) );
     connect( _ui->colorSchemeList , SIGNAL(entered(const QModelIndex&)) , this , 
             SLOT(previewColorScheme(const QModelIndex&)) );
 
@@ -433,16 +435,10 @@ void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
         const ColorScheme* colors = schemeIter.next();
         QStandardItem* item = new QStandardItem(colors->description());
         item->setData( QVariant::fromValue(colors) ,  Qt::UserRole + 1);
-        item->setFlags( item->flags() | Qt::ItemIsUserCheckable );
+        item->setFlags( item->flags() );
         
-        if ( colors == currentScheme )
-        {
-           item->setCheckState( Qt::Checked );
-           selectedItem = item;   
-        }
-        else 
-            item->setCheckState( Qt::Unchecked );
-
+        selectedItem = item;   
+        
         model->appendRow(item);
     }
 
@@ -450,14 +446,16 @@ void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
 
     _ui->colorSchemeList->setModel(model);
 
-#if 0
     if ( selectCurrentScheme )
-        _ui->colorSchemeList->selectionModel()->select(
-                       selectedItem->index() , QItemSelectionModel::Select
-                     );
-#endif
+    {
+        Q_ASSERT( selectedItem );
+
+        _ui->colorSchemeList->updateGeometry();
+        _ui->colorSchemeList->selectionModel()->setCurrentIndex( selectedItem->index() , 
+                                                                 QItemSelectionModel::Select );
+    }
 }
-void EditProfileDialog::updateKeyBindingsList()
+void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
 {
     KeyboardTranslatorManager* keyManager = KeyboardTranslatorManager::instance();
 
@@ -471,6 +469,8 @@ void EditProfileDialog::updateKeyBindingsList()
     qDebug() << "Current translator = " << currentTranslator << ", name: " << name;
 
     QStandardItemModel* model = new QStandardItemModel(this);
+
+    QStandardItem* selectedItem = 0;
 
     QList<QString> translatorNames = keyManager->allTranslators();
     QListIterator<QString> iter(translatorNames);
@@ -488,19 +488,23 @@ void EditProfileDialog::updateKeyBindingsList()
         QStandardItem* item = new QStandardItem(translator->description());
         item->setData(QVariant::fromValue(translator),Qt::UserRole+1);
         item->setIcon( KIcon("keyboard") );
-        item->setFlags( item->flags() | Qt::ItemIsUserCheckable );
 
         if ( translator == currentTranslator )
-            item->setCheckState( Qt::Checked );
-        else
-            item->setCheckState( Qt::Unchecked );
+            selectedItem = item;
 
         model->appendRow(item);
     }
 
     model->sort(0);
-
     _ui->keyBindingList->setModel(model);
+    
+    if ( selectCurrentTranslator )
+    {
+        Q_ASSERT( selectedItem );
+
+        _ui->keyBindingList->selectionModel()->setCurrentIndex( selectedItem->index() , 
+                                                                  QItemSelectionModel::Select );
+    }
 }
 bool EditProfileDialog::eventFilter( QObject* watched , QEvent* event )
 {
@@ -641,18 +645,17 @@ void EditProfileDialog::colorSchemeSelected()
         const ColorScheme* colors = model->data(selected.first(),Qt::UserRole+1).value<const ColorScheme*>();
 
         _tempProfile->setProperty(Profile::ColorScheme,colors->name());
-
-        changeCheckedItem(model,selected.first());
     }
 }
 void EditProfileDialog::setupKeyboardPage(const Profile* info)
 {
     // setup translator list
  
-    updateKeyBindingsList(); 
+    updateKeyBindingsList(true); 
 
-    connect( _ui->keyBindingList , SIGNAL(doubleClicked(const QModelIndex&)) , this , 
-            SLOT(keyBindingSelected()) );
+    connect( _ui->keyBindingList->selectionModel() , 
+                SIGNAL(selectionChanged(const QItemSelection&,const QItemSelection&)),
+                SLOT(keyBindingSelected()) );
     connect( _ui->selectKeyBindingsButton , SIGNAL(clicked()) , this , 
             SLOT(keyBindingSelected()) );
     connect( _ui->newKeyBindingsButton , SIGNAL(clicked()) , this ,
@@ -672,21 +675,7 @@ void EditProfileDialog::keyBindingSelected()
         const KeyboardTranslator* translator = model->data(selected.first(),Qt::UserRole+1)
                                                 .value<const KeyboardTranslator*>();
         _tempProfile->setProperty(Profile::KeyBindings,translator->name());
-
-        changeCheckedItem(model,selected.first()); 
     }
-}
-void EditProfileDialog::changeCheckedItem( QAbstractItemModel* model , const QModelIndex& to )
-{
-        // uncheck current active item
-        QModelIndexList list = model->match( model->index(0,0) , Qt::CheckStateRole , Qt::Checked );
-       
-        QListIterator<QModelIndex> iter(list);
-        while ( iter.hasNext() ) 
-            model->setData( iter.next() , Qt::Unchecked , Qt::CheckStateRole ); 
-
-        // check new active item
-        model->setData( to , Qt::Checked , Qt::CheckStateRole );
 }
 void EditProfileDialog::removeKeyBinding()
 {
@@ -977,34 +966,6 @@ ColorSchemeViewDelegate::ColorSchemeViewDelegate(QObject* parent)
 
 }
 
-#if 0
-QWidget* ColorSchemeViewDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& option, 
-                                  const QModelIndex& index) const
-{
-    QWidget* holder = new QWidget(parent);
-    QVBoxLayout* layout = new QVBoxLayout;
-
-    QWidget* selectButton = new QPushButton(i18n("Use Color Scheme"));
-    QWidget* editButton = new QPushButton(i18n("Edit..."));
-
-    layout->setMargin(0);
-
-    layout->addWidget(selectButton);
-    layout->addWidget(editButton);
-
-    holder->setLayout(layout);
-
-    int width = holder->sizeHint().width();
-
-    int left = option.rect.right() - width - 10;
-    int top = option.rect.top();
-
-    holder->move( left , top );
-
-    return holder;
-}
-#endif
-
 void ColorSchemeViewDelegate::setEntryTimeLine(QTimeLine* timeLine)
 {
     _entryTimeLine = timeLine;
@@ -1089,11 +1050,11 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
     painter->setBrush(gradient);
     painter->drawRoundRect( backgroundRect , 4 , 30 );
 
-    const bool isChecked = index.data(Qt::CheckStateRole) == Qt::Checked;
+    //const bool isChecked = index.data(Qt::CheckStateRole) == Qt::Checked;
     const bool isSelected = option.state & QStyle::State_Selected;
 
     // draw border on selected items
-    if ( isSelected || isChecked )
+    if ( isSelected ) //|| isChecked )
     {
         static const int selectedBorderWidth = 6;
 
@@ -1124,15 +1085,6 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
     // draw color scheme name using scheme's foreground color
     QPen pen(scheme->foregroundColor());
     painter->setPen(pen);
-
-    // use bold text for active color scheme
-    QFont itemFont = painter->font();
-    if ( isChecked )
-        itemFont.setBold(true);
-    else
-        itemFont.setBold(false);
-
-    painter->setFont(itemFont);
 
     painter->drawText( option.rect , Qt::AlignCenter , 
                         index.data(Qt::DisplayRole).value<QString>() );
