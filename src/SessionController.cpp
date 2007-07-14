@@ -464,12 +464,13 @@ void SessionController::setupActions()
     connect( action , SIGNAL(triggered()) , this , SLOT(decreaseTextSize()) );
 
     // Scrollback
-    _searchToggleAction = new KAction(i18n("Search Output..."),this);
+    _searchToggleAction = new KAction(i18n("Search Output"),this);
     _searchToggleAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_F) );
     _searchToggleAction->setIcon( KIcon("edit-find") );
+    _searchToggleAction->setCheckable(true);
     action = collection->addAction("search-history" , _searchToggleAction);
-    connect( action , SIGNAL(triggered()) , this , SLOT(searchHistory()) );
-    
+    connect( action , SIGNAL(toggled(bool)) , this , SLOT(searchHistory(bool)) );
+
     _findNextAction = collection->addAction("find-next");
     _findNextAction->setIcon( KIcon("find-next") );
     _findNextAction->setText( i18n("Find Next") );
@@ -638,7 +639,7 @@ void SessionController::clearAndReset()
 }
 void SessionController::searchClosed()
 {
-    searchHistory(false); 
+    _searchToggleAction->toggle();
 }
 
 void SessionController::searchHistory()
