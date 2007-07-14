@@ -83,7 +83,7 @@ public:
    * Returns true if the session is currently running.  This will be true
    * after run() has been called successfully.
    */
-  bool running() const;
+  bool isRunning() const;
 
   /** 
    * Sets the profile associated with this session.
@@ -312,14 +312,10 @@ public:
  
   /**
    * Returns the process id of the terminal's foreground process.
-   * This is initially the same as sessionProcessId() but can change
+   * This is initially the same as processId() but can change
    * as the user starts other programs inside the terminal.
    */
   int foregroundProcessId() const;
-
-  void startZModem(const QString &rz, const QString &dir, const QStringList &list);
-  void cancelZModem();
-  bool isZModemBusy() { return _zmodemBusy; }
 
   /** Returns the terminal session's window size in lines and columns. */
   QSize size();
@@ -343,7 +339,15 @@ public:
    * This has no effect once the session is running. 
    */
   void setDarkBackground(bool darkBackground);
+  /**
+   * Returns true if the session has a dark background.
+   * See setDarkBackground()
+   */
   bool hasDarkBackground() const;
+
+  void startZModem(const QString &rz, const QString &dir, const QStringList &list);
+  void cancelZModem();
+  bool isZModemBusy() { return _zmodemBusy; }
 
 public slots:
 
@@ -432,8 +436,6 @@ private slots:
   void done(int);
     
   void fireZModemDetected();
-  
-  void ptyError();
   
   void onReceiveBlock( const char* buffer, int len );
   void monitorTimerDone();

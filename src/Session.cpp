@@ -120,7 +120,7 @@ Session::Session() :
     connect( _emulation,SIGNAL(useUtf8Request(bool)),_shellProcess,SLOT(setUtf8Mode(bool)) );
 
     
-    connect( _shellProcess,SIGNAL(done(int)), this,SLOT(done(int)) );
+    connect( _shellProcess,SIGNAL(done(int)), this, SLOT(done(int)) );
  
     //setup timer for monitoring session activity
     _monitorTimer = new QTimer(this);
@@ -135,7 +135,7 @@ bool Session::hasDarkBackground() const
 {
     return _hasDarkBackground;
 }
-bool Session::running() const
+bool Session::isRunning() const
 {
     return _shellProcess->isRunning();
 }
@@ -153,31 +153,6 @@ void Session::setProgram(const QString& program)
 void Session::setArguments(const QStringList& arguments)
 {
     _arguments = arguments;
-}
-
-void Session::ptyError()
-{
-// Mysterious errors about PTYs used to be shown even when there was nothing wrong
-// with the PTY itself because the code which starts the session ( in ::run() ) assumes
-// that if starting the shell process fails then a PTY error is the problem, when
-// there are other things that can go wrong as well
-
-#if 0
-    // FIXME:  _shellProcess->error() is always empty
-  if ( _shellProcess->error().isEmpty() )
-  {
-    KMessageBox::error( QApplication::activeWindow() ,
-       i18n("Konsole is unable to open a PTY (pseudo teletype). "
-            "It is likely that this is due to an incorrect configuration "
-            "of the PTY devices.  Konsole needs to have read/write access "
-            "to the PTY devices."),
-       i18n("A Fatal Error Has Occurred") );
-  }
-  else
-    KMessageBox::error(QApplication::activeWindow(), _shellProcess->error());
-  
-  emit finished();
-#endif
 }
 
 QList<TerminalDisplay*> Session::views() const
@@ -277,8 +252,10 @@ void Session::run()
 
   QString dbusService = QDBusConnection::sessionBus().baseService();
   QString cwd_save = QDir::currentPath();
+  
   if (!_initialWorkingDir.isEmpty())
-     QDir::setCurrent(_initialWorkingDir);
+    _shellProcess->setWorkingDirectory(_initialWorkingDir);
+
   _shellProcess->setXonXoff(_flowControl);
   _shellProcess->setErase(_emulation->getErase());
 
@@ -300,16 +277,9 @@ void Session::run()
   if (result < 0) 
   {
     return;
-    //QTimer::singleShot(0, this, SLOT(ptyError()));
   }
 
-  if (!_initialWorkingDir.isEmpty())
-     QDir::setCurrent(cwd_save);
-  else
-     _initialWorkingDir=cwd_save;
-
   _shellProcess->setWriteable(false);  // We are reachable via kwrited.
-
 }
 
 void Session::setUserTitle( int what, const QString &caption )

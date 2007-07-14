@@ -365,6 +365,7 @@ void Vt102Emulation::XtermHack()
   QChar *str = new QChar[ppos-i-2];
   for (int j = 0; j < ppos-i-2; j++) str[j] = pbuf[i+1+j];
   QString unistr(str,ppos-i-2);
+  
   // arg == 1 doesn't change the title. In XTerm it only changes the icon name
   // (btw: arg=0 changes title and icon, arg=1 only icon, arg=2 only title
 //  emit changeTitle(arg,unistr);

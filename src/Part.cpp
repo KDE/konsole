@@ -122,7 +122,7 @@ Session* Part::activeSession() const
 void Part::startProgram( const QString& program,
                            const QStringList& arguments )
 {
-    if ( !activeSession()->running() )
+    if ( !activeSession()->isRunning() )
     {
         if ( !program.isEmpty() && !arguments.isEmpty() )
         {
@@ -135,7 +135,7 @@ void Part::startProgram( const QString& program,
 }
 void Part::showShellInDir( const QString& dir )
 {
-    if ( !activeSession()->running() )
+    if ( !activeSession()->isRunning() )
     {
         if ( !dir.isEmpty() )
             activeSession()->setInitialWorkingDirectory(dir);
