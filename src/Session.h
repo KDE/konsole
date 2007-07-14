@@ -456,6 +456,7 @@ private slots:
 private:
 
   void updateTerminalSize();
+  WId windowId() const;
 
   int            _uniqueIdentifier;
 
@@ -491,7 +492,6 @@ private:
   QStringList    _arguments;
 
   QStringList    _environment;
-  ulong          _winId;
   int            _sessionId;
 
   QString        _initialWorkingDir;

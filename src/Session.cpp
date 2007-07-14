@@ -74,7 +74,6 @@ Session::Session() :
    , _addToUtmp(true)
    , _flowControl(true)
    , _fullScripting(false)
-   , _winId(0)
    , _sessionId(0)
    , _zmodemBusy(false)
    , _zmodemProc(0)
@@ -125,6 +124,35 @@ Session::Session() :
     //setup timer for monitoring session activity
     _monitorTimer = new QTimer(this);
     connect(_monitorTimer, SIGNAL(timeout()), this, SLOT(monitorTimerDone()));
+}
+
+WId Session::windowId() const
+{
+    // Returns a window ID for this session which is used
+    // to set the WINDOWID environment variable in the shell
+    // process.
+    //
+    // Sessions can have multiple views or no views, which means
+    // that a single ID is not always going to be accurate.
+    //
+    // If there are no views, the window ID is just 0.  If 
+    // there are multiple views, then the window ID for the 
+    // top-level window which contains the first view is
+    // returned
+
+    if ( _views.count() == 0 )
+       return 0;
+    else
+    {
+        QWidget* window = _views.first();
+        
+        Q_ASSERT( window );
+
+        while ( window->parentWidget() != 0 )
+            window = window->parentWidget();
+
+        return window->winId();
+    }
 }
 
 void Session::setDarkBackground(bool darkBackground)
@@ -268,7 +296,7 @@ void Session::run()
   int result = _shellProcess->start(QFile::encodeName(_program), 
                                   arguments, 
                                   _environment << backgroundColorHint,
-                                  _winId, 
+                                  windowId(), 
                                   _addToUtmp,
                                   dbusService,
                                   (QLatin1String("/Sessions/") + 
