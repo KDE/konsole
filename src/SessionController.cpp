@@ -490,7 +490,7 @@ void SessionController::setupActions()
     connect( action , SIGNAL(triggered()) , this , SLOT(saveHistory()) );
    
     action = collection->addAction("history-options");
-    action->setText( i18n("Scrollback Options") );
+    action->setText( i18n("Scrollback Options...") );
     action->setIcon( KIcon("configure") );
     connect( action , SIGNAL(triggered()) , this , SLOT(showHistoryOptions()) );
 
