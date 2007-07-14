@@ -17,14 +17,7 @@ The KDE 4.0 TODO List:
 
 === ESSENTIAL FEATURES ===
 
-- Changing of a single tab's settings using konsoleprofile
-
 - Input Method Event in terminal display widget
-
-- Ability to define bold or transparent status for each
-  color in the color scheme.  Make the setting of 
-  boldness for characters more intuitive than in the KDE 3
-  series.
 
 - Get the Konsole part working properly in other
   major KDE programs, such as Dolphin,
@@ -37,7 +30,6 @@ The KDE 4.0 TODO List:
   Nice to have: Make as much of the functionality from the main 
                 program available in the part as possible.  
 
-
 - Implement changing of the Konsole window size by
   terminal applications.
 
@@ -46,10 +38,22 @@ The KDE 4.0 TODO List:
   the term "DCOP" for ideas on what users would like
   to be able to do using Konsole's scripting facilities.
 
-- Better documentation for shortcuts to move between views
-  (Shift+<Arrows> and Shift+Tab)
+    In order of priority:
+        - Create new Konsole sessions
+        - Send text to existing Konsole sessions
+        - Read text printed to screen
+
+        ( from there konsoleprofile can be used to change other settings )
+
+- Ability to define bold or transparent status for each
+  color in the color scheme.  Make the setting of 
+  boldness for characters more intuitive than in the KDE 3
+  series.
 
 == ESSENTIAL TWEAKS ==
+
+- Better documentation for shortcuts to move between views
+  (Shift+<Arrows> and Shift+Tab)
 
 - More intelligent tab title format which can adjust its output
   to display more relevant information depending upon the 
@@ -80,8 +84,6 @@ The KDE 4.0 TODO List:
 
 == BUGS ==
 
-- Alt modifiers cannot be used to access menu items because they are 
-  used by the terminal.
 
 - Shortcuts do not work when the menu bar is hidden.
 
@@ -93,10 +95,6 @@ behaviour in KDE 3.
 image.  A more efficient solution such as buffering successive image size changes would
 be better.  This would also help with applications such as Midnight Commander which
 do not always behave well with lots of successive image size changes.
-
-- KEYBOARD:  Backspace key in Vim does not work.
-- KEYBOARD:  Pressing Alt+Number just prints the number instead of 
-             something else.
 
 == DOCUMENTATION ==
 
@@ -124,9 +122,6 @@ do not always behave well with lots of successive image size changes.
   Again, for easier identification of what is going on in
   a Konsole window at a glance.
 
-- Random background colors in color schemes, for easy
-  identification of Konsole windows when several are open
-  at once.
 
   -> Suggested in survey:  Random colors which are specific
   to the directory, program or host of the active session,
@@ -198,6 +193,19 @@ do not always behave well with lots of successive image size changes.
 
 
 === DONE ===
+
+- Random background colors in color schemes, for easy
+  identification of Konsole windows when several are open
+  at once.
+
+- KEYBOARD:  Backspace key in Vim does not work.
+- KEYBOARD:  Pressing Alt+Number just prints the number instead of 
+             something else.
+
+- Alt modifiers cannot be used to access menu items because they are 
+  used by the terminal.
+
+  FIX:  Press and release Alt key to focus menu
 
 - When loading a profile from disk, load the parent profile if necessary
   and assign it to be the parent of the new profile.
