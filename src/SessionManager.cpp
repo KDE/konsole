@@ -601,38 +601,40 @@ void SessionManager::loadFavorites()
     KSharedConfigPtr appConfig = KGlobal::config();
     KConfigGroup favoriteGroup = appConfig->group("Favorite Profiles");
 
-    //qDebug() << "loading favorites";
+    QSet<QString> favoriteSet;
 
     if ( favoriteGroup.hasKey("Favorites") )
     {
-       // qDebug() << "found favorites key";
-       QStringList list = favoriteGroup.readEntry("Favorites",QStringList());
-
-       //qDebug() << "found " << list.count() << "entries";
-
-        QSet<QString> favoriteSet = QSet<QString>::fromList(list);
-
-       // look for favorites amongst those already loaded
-       QHashIterator<QString,Profile*> iter(_types);
-       while ( iter.hasNext() )
-       {
-            iter.next();
-            const QString& path = iter.value()->path();
-            if ( favoriteSet.contains( path ) )
-            {
-                _favorites.insert( iter.key() );
-                favoriteSet.remove(path);
-            }
-       }
-      // load any remaining favorites
-      QSetIterator<QString> unloadedFavoriteIter(favoriteSet);
-      while ( unloadedFavoriteIter.hasNext() )
-      {
-            const QString& key = loadProfile(unloadedFavoriteIter.next());
-            if (!key.isEmpty())
-                _favorites.insert(key);
-      } 
+       QStringList list = favoriteGroup.readEntry("Favorites", QStringList());
+       favoriteSet = QSet<QString>::fromList(list);
     }
+    else
+    {
+       // if there is no favorites key at all, mark the 
+       // supplied 'Shell.profile' as the only favorite
+       favoriteSet << "Shell.profile";
+    }
+
+    // look for favorites amongst those already loaded
+    QHashIterator<QString,Profile*> iter(_types);
+    while ( iter.hasNext() )
+    {
+         iter.next();
+         const QString& path = iter.value()->path();
+         if ( favoriteSet.contains( path ) )
+         {
+             _favorites.insert( iter.key() );
+             favoriteSet.remove(path);
+         }
+    }
+    // load any remaining favorites
+    QSetIterator<QString> unloadedFavoriteIter(favoriteSet);
+    while ( unloadedFavoriteIter.hasNext() )
+    {
+          const QString& key = loadProfile(unloadedFavoriteIter.next());
+          if (!key.isEmpty())
+              _favorites.insert(key);
+    } 
 }
 void SessionManager::saveFavorites()
 {
