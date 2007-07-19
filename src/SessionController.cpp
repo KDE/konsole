@@ -716,7 +716,8 @@ void SessionController::beginSearch(const QString& text , int direction)
     QRegExp::PatternSyntax syntax = _searchBar->matchRegExp() ? QRegExp::RegExp : QRegExp::FixedString;
     
     QRegExp regExp( text.trimmed() ,  caseHandling , syntax );
-
+    _searchFilter->setRegExp(regExp);
+    
     if ( !regExp.isEmpty() )
     {
         SearchHistoryTask* task = new SearchHistoryTask(this); 
@@ -730,7 +731,6 @@ void SessionController::beginSearch(const QString& text , int direction)
         task->execute();
     }
 
-    _searchFilter->setRegExp(regExp);
     _view->processFilters();
 
       // TODO - Optimise by only updating affected regions
