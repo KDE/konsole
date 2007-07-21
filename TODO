@@ -84,7 +84,6 @@ The KDE 4.0 TODO List:
 
 == BUGS ==
 
-
 - Shortcuts do not work when the menu bar is hidden.
 
 - Allow the user to over-ride the "no Ctrl+[Key] shortcuts" limitation with shortcuts
@@ -95,6 +94,13 @@ behaviour in KDE 3.
 image.  A more efficient solution such as buffering successive image size changes would
 be better.  This would also help with applications such as Midnight Commander which
 do not always behave well with lots of successive image size changes.
+
+- Toggling the taglist in the Vim 7 taglist plugin causes the screen to resize to a smaller number of columns
+
+- Scrolling the display with filters active does not clear or update the filters. 
+ 
+- It is not clear to some users how the 'Show in Menu' (favorites) features works,
+  plus the default Shell profile is not marked as a favorite by default
 
 == DOCUMENTATION ==
 

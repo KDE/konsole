@@ -124,7 +124,7 @@ FallbackProfile::FallbackProfile()
 
 
     setProperty(KeyBindings,"default");
-
+    setProperty(ColorScheme,"Linux");
     setProperty(Font,QFont("Monospace"));
 
     setProperty(HistoryMode,FixedSizeHistory);

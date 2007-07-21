@@ -187,6 +187,18 @@ private:
     static const ColorEntry defaultTable[]; // table of default color entries
 };
 
+/** 
+ * A color scheme which uses colors from the standard KDE color palette.
+ *
+ * This is designed primarily for the benefit of users who are using specially
+ * designed colors.
+ */
+class AccessibleColorScheme : public ColorScheme
+{
+public:
+    AccessibleColorScheme();
+};
+
 /**
  * Reads a color scheme stored in the .schema format used in the KDE 3 incarnation
  * of Konsole
