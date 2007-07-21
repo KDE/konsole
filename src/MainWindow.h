@@ -134,10 +134,11 @@ class MainWindow : public KXmlGuiWindow
         void viewFullScreen(bool fullScreen);
 
     private:
+        void correctShortcuts();
         void setupActions();
         void setupWidgets();
         QString activeSessionDir() const;
-
+        
     private:
         ViewManager*  _viewManager;
         BookmarkHandler* _bookmarkHandler;

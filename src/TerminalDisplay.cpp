@@ -23,15 +23,6 @@
 // Own
 #include "TerminalDisplay.h"
 
-// System
-#include <assert.h>
-#include <ctype.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/stat.h>
-#include <unistd.h>
-
 // Qt
 #include <QtGui/QApplication>
 #include <QtGui/QBoxLayout>
@@ -44,7 +35,6 @@
 #include <QtGui/QLayout>
 #include <QtGui/QPainter>
 #include <QtGui/QPixmap>
-#include <QtGui/QLayoutItem>
 #include <QtGui/QScrollBar>
 #include <QtGui/QStyle>
 #include <QtCore/QTimer>
@@ -751,7 +741,7 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
         Q_ASSERT( (char*)lastCharPos + bytesToMove < 
                   (char*)(_image + (this->_lines * this->_columns)) );
         
-        assert( (lines*this->_columns) < _imageSize ); 
+        Q_ASSERT( (lines*this->_columns) < _imageSize ); 
 
         //scroll internal image down
         memmove( firstCharPos , lastCharPos , bytesToMove ); 
@@ -819,8 +809,8 @@ void TerminalDisplay::updateImage()
   if (!_image)
      updateImageSize(); // Create _image
 
-  assert( this->_usedLines <= this->_lines );
-  assert( this->_usedColumns <= this->_columns );
+  Q_ASSERT( this->_usedLines <= this->_lines );
+  Q_ASSERT( this->_usedColumns <= this->_columns );
 
   int y,x,len;
 
@@ -2417,9 +2407,9 @@ bool TerminalDisplay::event( QEvent *e )
 
     // Override any of the following shortcuts because
     // they are needed by the terminal
-    // (this list is taken from the QLineEdit::event() code)
     switch ( keyCode )
     {
+      // list is taken from the QLineEdit::event() code
       case Qt::Key_Tab:
       case Qt::Key_Delete:
       case Qt::Key_Home:
@@ -2544,8 +2534,8 @@ void TerminalDisplay::makeImage()
 
   // confirm that array will be of non-zero size, since the painting code 
   // assumes a non-zero array length
-  assert( _lines > 0 && _columns > 0 );
-  assert( _usedLines <= _lines && _usedColumns <= _columns );
+  Q_ASSERT( _lines > 0 && _columns > 0 );
+  Q_ASSERT( _usedLines <= _lines && _usedColumns <= _columns );
 
   _imageSize=_lines*_columns;
   

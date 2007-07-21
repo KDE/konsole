@@ -49,14 +49,12 @@
 
 // Konsole
 #include <config-konsole.h>
-//TODO - Re-add adaptors
-//#include "sessionadaptor.h"
-//#include "sessionscriptingadaptor.h"
+#include <sessionadaptor.h>
+
 #include "Pty.h"
 #include "TerminalDisplay.h"
 #include "Vt102Emulation.h"
 #include "ZModemDialog.h"
-
 
 using namespace Konsole;
 
@@ -81,12 +79,9 @@ Session::Session() :
    , _hasDarkBackground(false)
 {
     //prepare DBus communication
-    //TODO - Re-add Session adaptor
-
-    // TODO
-    // numeric session identifier exposed via DBus isn't very user-friendly, but is this an issue? 
+    new SessionAdaptor(this);
     _sessionId = ++lastSessionId; 
-    //QDBusConnection::sessionBus().registerObject(QLatin1String("/Sessions/session")+QString::number(_sessionId), this);
+    QDBusConnection::sessionBus().registerObject(QLatin1String("/Sessions/")+QString::number(_sessionId), this);
 
     //create teletype for I/O with shell process
     _shellProcess = new Pty();

@@ -2,22 +2,5 @@
 "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
 <node>
   <interface name="org.kde.konsole.Session">
-    <method name="closeSession">
-      <arg type="b" direction="out"/>
-    </method>
-    <method name="sendSignal">
-      <arg type="b" direction="out"/>
-      <arg name="signal" type="b" direction="in"/>
-    </method>
-    <method name="clearHistory"/>
-    <property name="sessionName" type="s" access="read"/>
-    <property name="sessionPid" type="i" access="read"/>
-    <property name="schema" type="s" access="readwrite"/>
-    <property name="encoding" type="s" access="readwrite"/>
-    <property name="keytab" type="s" access="readwrite"/>
-    <property name="font" type="s" access="readwrite"/>
-    <property name="size" type="(ii)" access="readwrite">
-      <annotation name="com.trolltech.QtDBus.QtTypeName" value="QSize"/>
-    </property>
   </interface>
 </node>

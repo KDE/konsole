@@ -77,6 +77,20 @@ MainWindow::MainWindow()
 
     // create menus
     createGUI();
+
+    // replace standard shortcuts which cannot be used in a terminal
+    // (as they are reserved for use by terminal programs)
+    correctShortcuts();
+}
+
+void MainWindow::correctShortcuts()
+{
+    // replace F1 shortcut for help contents
+    QAction* helpAction = actionCollection()->action("help_contents");
+    
+    Q_ASSERT( helpAction );
+
+    helpAction->setShortcut( QKeySequence() );
 }
 
 void MainWindow::setDefaultProfile(const QString& key)
@@ -98,7 +112,7 @@ void MainWindow::activeViewChanged(SessionController* controller)
     if ( _pluggedController == controller )
         return;
 
-    // associated bookmark menu with current session
+    // associate bookmark menu with current session
     bookmarkHandler()->setActiveView(controller);
     disconnect( bookmarkHandler() , SIGNAL(openUrl(const KUrl&)) , 0 , 0 );
     connect( bookmarkHandler() , SIGNAL(openUrl(const KUrl&)) , controller ,

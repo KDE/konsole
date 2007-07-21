@@ -1,56 +1,25 @@
 macro_optional_find_package(XKB)
 macro_bool_to_01(X11_Xrender_FOUND HAVE_XRENDER)
-if (CMAKE_SYSTEM_NAME MATCHES Linux)
-   set (HAVE_PROC_CWD 1)
-endif (CMAKE_SYSTEM_NAME MATCHES Linux)
+
 configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsole.h )
 
-OPTION(KONSOLE_GENERATE_LINEFONT "Konsole: regenerate LineFont file" OFF)
-
-########### next target ###############
+### Font Embedder
 
 set(fontembedder_SRCS fontembedder.cpp )
-
-
 kde4_add_executable(fontembedder ${fontembedder_SRCS})
-
 target_link_libraries(fontembedder  ${KDE4_KIO_LIBS} )
 
-#qt4_add_dbus_adaptor( konsoleadaptors_SRCS org.kde.konsole.Konsole.xml konsole.h Konsole )
-#qt4_add_dbus_adaptor( konsoleadaptors_SRCS org.kde.konsole.KonsoleScripting.xml konsole.h Konsole )
-#qt4_add_dbus_adaptor( sessionadaptors_SRCS org.kde.konsole.Session.xml Session.h Session )
-#qt4_add_dbus_adaptor( sessionadaptors_SRCS org.kde.konsole.SessionScripting.xml Session.h Session )
+### Line graphics font
+
+OPTION(KONSOLE_GENERATE_LINEFONT "Konsole: regenerate LineFont file" OFF)
 
 if(KONSOLE_GENERATE_LINEFONT)
 	add_custom_command(OUTPUT ${CMAKE_SOURCE_DIR}/LineFont.h COMMAND ${CMAKE_CURRENT_BINARY_DIR}/fontembedder ARGS ${CMAKE_SOURCE_DIR}/LineFont.src DEPENDS ${CMAKE_SOURCE_DIR}/LineFont.src )
 endif(KONSOLE_GENERATE_LINEFONT)
 
-########### next target ###############
+### Konsole Application 
 
-#set(konsole_KDEINIT_SRCS 
-#   ${konsoleadaptors_SRCS}
-#   ${sessionadaptors_SRCS}
-#   Pty.cpp 
-#   BlockArray.cpp 
-#   main.cpp 
-#   konsole.cpp 
-#   schema.cpp 
-#   Session.cpp 
-#   TerminalDisplay.cpp 
-#   Vt102Emulation.cpp 
-#   Screen.cpp 
-#   Emulation.cpp 
-#   History.cpp 
-#   keytrans.cpp 
-#   konsole_wcwidth.cpp 
-#   konsolebookmarkhandler.cpp 
-#   zmodem_dialog.cpp 
-#   printsettings.cpp 
-#   TerminalCharacterDecoder.cpp
-#   SessionManager.cpp
-#   ViewSplitter.cpp
-#   ViewContainer.cpp  
-#   NavigationItem.cpp )
+qt4_add_dbus_adaptor( sessionadaptors_SRCS org.kde.konsole.Session.xml Session.h Konsole::Session )
 
 set(konsole_KDEINIT_SRCS
         ${sessionadaptors_SRCS}
@@ -122,6 +91,9 @@ install(TARGETS kdeinit_konsole  DESTINATION ${LIB_INSTALL_DIR} )
     
 target_link_libraries( konsole kdeinit_konsole )
 install(TARGETS konsole DESTINATION ${BIN_INSTALL_DIR})
+
+### konsoleprofile command-line tool
+
 install(FILES konsoleprofile PERMISSIONS OWNER_READ 
                                          OWNER_WRITE 
                                          OWNER_EXECUTE
@@ -129,10 +101,12 @@ install(FILES konsoleprofile PERMISSIONS OWNER_READ
                                          GROUP_READ
                                          WORLD_READ 
                                          WORLD_EXECUTE DESTINATION ${BIN_INSTALL_DIR})
-########### next target ###############
+
+
+### Embedded Konsole KPart
 
 set(konsolepart_PART_SRCS 
-#${sessionadaptors_SRCS}
+   ${sessionadaptors_SRCS}
    BlockArray.cpp
    BookmarkHandler.cpp 
    ColorScheme.cpp
@@ -173,8 +147,6 @@ set(konsolepart_PART_SRCS
    konsole_wcwidth.cpp 
 ) 
 
-
-
 kde4_add_plugin(konsolepart WITH_PREFIX ${konsolepart_PART_SRCS})
 
 set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
@@ -187,14 +159,11 @@ endif(X11_XTest_LIB)
 install(TARGETS konsolepart  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 
-########### next target ###############
+### KWriteD Daemon
 
 set(kded_kwrited_PART_SRCS kwrited.cpp )
 
-
-
 kde4_add_plugin(kded_kwrited ${kded_kwrited_PART_SRCS})
-
 
 target_link_libraries(kded_kwrited  ${KDE4_KDE3SUPPORT_LIBS})
 
