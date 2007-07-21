@@ -436,8 +436,9 @@ void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
         QStandardItem* item = new QStandardItem(colors->description());
         item->setData( QVariant::fromValue(colors) ,  Qt::UserRole + 1);
         item->setFlags( item->flags() );
-        
-        selectedItem = item;   
+       
+        if ( currentScheme == colors ) 
+            selectedItem = item;   
         
         model->appendRow(item);
     }
