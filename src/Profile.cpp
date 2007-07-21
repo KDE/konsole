@@ -31,6 +31,7 @@
 #include <KConfigGroup>
 #include <KDesktopFile>
 #include <KGlobal>
+#include <KGlobalSettings>
 #include <KLocale>
 #include <KStandardDirs>
 
@@ -125,7 +126,7 @@ FallbackProfile::FallbackProfile()
 
     setProperty(KeyBindings,"default");
     setProperty(ColorScheme,"Linux");
-    setProperty(Font,QFont("Monospace"));
+    setProperty(Font,KGlobalSettings::fixedFont());
 
     setProperty(HistoryMode,FixedSizeHistory);
     setProperty(HistorySize,1000);

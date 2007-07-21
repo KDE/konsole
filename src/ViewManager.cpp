@@ -604,14 +604,13 @@ void ViewManager::applyProfile(TerminalDisplay* view , const QString& profileKey
     else if ( tabBarPosition == Profile::TabBarBottom )
         container->setNavigationPosition(ViewContainer::NavigationPositionBottom);
 
-    //qDebug() << __FUNCTION__ << "Using random seed:" << view->randomSeed();
     // load colour scheme
     ColorEntry table[TABLE_COLORS];
     
     colorScheme->getColorTable(table , view->randomSeed() );
     view->setColorTable(table);
     view->setOpacity(colorScheme->opacity());
-    
+  
     // load font 
     view->setVTFont(info->font());
 
