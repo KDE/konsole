@@ -1,5 +1,10 @@
-/**
-* @mainpage Konsole
-*
-* KDE Terminal Emulator
+/** @mainpage Konsole
+
+KDE Terminal Emulator
+
 */
+
+// DOXYGEN_EXCLUDE = data desktop developer-doc tests user-doc
+// DOXYGEN_SET_RECURSIVE = YES
+// DOXYGEN_SET_PROJECT_NAME = Konsole
+// vim:ts=4:sw=4:expandtab:filetype=doxygen
