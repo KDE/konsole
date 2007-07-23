@@ -675,11 +675,12 @@ void SessionController::searchHistory(bool showSearchBar)
         }
         else
         {
+            setFindNextPrevEnabled(false);
+            
             disconnect( _searchBar , SIGNAL(searchChanged(const QString&)) , this ,
                     SLOT(searchTextChanged(const QString&)) );
 
             removeSearchFilter();
-            setFindNextPrevEnabled(false);
 
             _view->setFocus( Qt::ActiveWindowFocusReason );
         }
@@ -753,12 +754,14 @@ void SessionController::highlightMatches(bool highlight)
 void SessionController::findNextInHistory()
 {
     Q_ASSERT( _searchBar );
+    Q_ASSERT( _searchFilter );
 
     beginSearch(_searchBar->searchText(),SearchHistoryTask::ForwardsSearch);
 }
 void SessionController::findPreviousInHistory()
 {
     Q_ASSERT( _searchBar );
+    Q_ASSERT( _searchFilter );
 
     beginSearch(_searchBar->searchText(),SearchHistoryTask::BackwardsSearch);
 }
