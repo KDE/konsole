@@ -72,8 +72,7 @@ using namespace Konsole;
 // scroll increment used when dragging selection at top/bottom of window.
 
 // static
-bool TerminalDisplay::s_antialias = true;
-bool TerminalDisplay::s_standalone = false;
+bool TerminalDisplay::_antialiasText = true;
 bool TerminalDisplay::HAVE_TRANSPARENCY = false;
 
 /* ------------------------------------------------------------------------- */
@@ -126,7 +125,7 @@ void TerminalDisplay::setColorTable(const ColorEntry table[])
   p.setColor( backgroundRole(), _colorTable[DEFAULT_BACK_COLOR].color );
   setPalette( p );
 
-  // We don't want the palette change to propagate to the scrollbar
+  // Avoid propagating the palette change to the scroll bar 
   _scrollBar->setPalette( QApplication::palette() );  
 
   update();
@@ -167,7 +166,7 @@ unsigned short Konsole::vt100_graphics[32] =
   0x252c, 0x2502, 0x2264, 0x2265, 0x03C0, 0x2260, 0x00A3, 0x00b7
 };
 
-void TerminalDisplay::fontChange(const QFont &)
+void TerminalDisplay::fontChange(const QFont&)
 {
   QFontMetrics fm(font());
   _fontHeight = fm.height() + _lineSpacing;
@@ -179,17 +178,18 @@ void TerminalDisplay::fontChange(const QFont &)
   _fontWidth = qRound((double)fm.width(REPCHAR)/(double)strlen(REPCHAR));
 
   _fixedFont = true;
+
   int fw = fm.width(REPCHAR[0]);
-  for(unsigned int i=1; i< strlen(REPCHAR); i++){
-    if (fw != fm.width(REPCHAR[i])){
+  for(unsigned int i=1; i< strlen(REPCHAR); i++)
+  {
+    if (fw != fm.width(REPCHAR[i]))
+    {
       _fixedFont = false;
       break;
-  }
+    }
   }
 
-  if (_fontWidth>200) // don't trust unrealistic value, fallback to QFontMetrics::maxWidth()
-    _fontWidth=fm.maxWidth();
-  if (_fontWidth<1)
+  if (_fontWidth < 1)
     _fontWidth=1;
 
   _fontAscent = fm.ascent();
@@ -207,7 +207,9 @@ void TerminalDisplay::setVTFont(const QFont& f)
 
   if ( metrics.height() < height() && metrics.maxWidth() < width() )
   {
-    if (!s_antialias)
+    // hint that text should be drawn without anti-aliasing.  
+    // depending on the user's font configuration, this may not be respected
+    if (!_antialiasText)
         font.setStyleStrategy( QFont::NoAntialias );
  
     // experimental optimization.  Konsole assumes that the terminal is using a 
@@ -256,7 +258,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_lineSelectionMode(false)
 ,_preserveLineBreaks(true)
 ,_columnSelectionMode(false)
-,_scrollbarLocation(SCROLLBAR_NONE)
+,_scrollbarLocation(NoScrollBar)
 ,_wordCharacters(":@-./_~")
 ,_bellMode(BELL_SYSTEM)
 ,_blinking(false)
@@ -303,7 +305,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
   _scrollBar = new QScrollBar(this);
   setScroll(0,0); 
   _scrollBar->setCursor( Qt::ArrowCursor );
-  connect(_scrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
+  connect(_scrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollBarPositionChanged(int)));
 
   _blinkTimer   = new QTimer(this);
   connect(_blinkTimer, SIGNAL(timeout()), this, SLOT(blinkEvent()));
@@ -1439,7 +1441,7 @@ void TerminalDisplay::hideEvent(QHideEvent*)
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TerminalDisplay::scrollChanged(int)
+void TerminalDisplay::scrollBarPositionChanged(int)
 {
   if ( !_screenWindow ) 
       return;
@@ -1471,19 +1473,22 @@ void TerminalDisplay::setScroll(int cursor, int slines)
         return;
   }
 
-  disconnect(_scrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
+  disconnect(_scrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollBarPositionChanged(int)));
   _scrollBar->setRange(0,slines - _lines);
   _scrollBar->setSingleStep(1);
   _scrollBar->setPageStep(_lines);
   _scrollBar->setValue(cursor);
-  connect(_scrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
+  connect(_scrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollBarPositionChanged(int)));
 }
 
-void TerminalDisplay::setScrollBarLocation(ScrollBarLocation loc)
+void TerminalDisplay::setScrollBarPosition(ScrollBarPosition position)
 {
-  if (_scrollbarLocation == loc) return; // quickly
+  if (_scrollbarLocation == position) 
+      return; 
+  
   _bY = _bX = 1;
-  _scrollbarLocation = loc;
+  _scrollbarLocation = position;
+  
   calcGeometry();
   propagateSize();
   update();
@@ -1567,11 +1572,9 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
       }
       else
       {
-        _configureRequestPoint = QPoint( ev->x(), ev->y() );
         emit configureRequest( this, 
                                ev->modifiers() & (Qt::ShiftModifier|Qt::ControlModifier), 
-                               ev->x(), 
-                               ev->y() 
+                               ev->pos()
                              );
       }
     }
@@ -1681,10 +1684,12 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
   extendSelection( ev->pos() );
 }
 
+#if 0
 void TerminalDisplay::setSelectionEnd()
 {
   extendSelection( _configureRequestPoint );
 }
+#endif
 
 void TerminalDisplay::extendSelection( const QPoint& position )
 {
@@ -2185,6 +2190,10 @@ void TerminalDisplay::setUsesMouse(bool on)
   _mouseMarks = on;
   setCursor( _mouseMarks ? Qt::IBeamCursor : Qt::ArrowCursor );
 }
+bool TerminalDisplay::usesMouse() const
+{
+    return _mouseMarks;
+}
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
@@ -2236,14 +2245,6 @@ void TerminalDisplay::pasteClipboard()
 void TerminalDisplay::pasteSelection()
 {
   emitSelection(true,false);
-}
-
-void TerminalDisplay::onClearSelection()
-{
-  if ( !_screenWindow ) return;
-
-  _screenWindow->clearSelection();
-  //emit clearSelectionSignal();
 }
 
 /* ------------------------------------------------------------------------- */
@@ -2396,8 +2397,7 @@ bool TerminalDisplay::event( QEvent *e )
     // this is important as it allows a press and release of the Alt key
     // on its own to focus the menu bar, making it possible to
     // work with the menu without using the mouse
-    if ( !standalone() && 
-         ( (keyEvent->modifiers() == Qt::ControlModifier) || 
+    if (  ( (keyEvent->modifiers() == Qt::ControlModifier) || 
            (keyEvent->modifiers() == Qt::AltModifier) ) && 
          !keyEvent->text().isEmpty() )
     {
@@ -2493,18 +2493,18 @@ void TerminalDisplay::calcGeometry()
                     contentsRect().height());
   switch(_scrollbarLocation)
   {
-    case SCROLLBAR_NONE :
+    case NoScrollBar :
      _bX = _rimX;
      _contentWidth = contentsRect().width() - 2 * _rimX;
      _scrollBar->hide();
      break;
-    case SCROLLBAR_LEFT :
+    case ScrollBarLeft :
      _bX = _rimX+_scrollBar->width();
      _contentWidth = contentsRect().width() - 2 * _rimX - _scrollBar->width();
      _scrollBar->move(contentsRect().topLeft());
      _scrollBar->show();
      break;
-    case SCROLLBAR_RIGHT:
+    case ScrollBarRight:
      _bX = _rimX;
      _contentWidth = contentsRect().width()  - 2 * _rimX - _scrollBar->width();
      _scrollBar->move(contentsRect().topRight() - QPoint(_scrollBar->width()-1,0));
@@ -2588,11 +2588,6 @@ void TerminalDisplay::setFixedSize(int cols, int lins)
 QSize TerminalDisplay::sizeHint() const
 {
   return _size;
-}
-
-void TerminalDisplay::styleChange(QStyle &)
-{
-    propagateSize();
 }
 
 

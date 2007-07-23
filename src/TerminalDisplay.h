@@ -86,20 +86,20 @@ public:
     /** 
      * This enum describes the location where the scroll bar is positioned in the display widget.
      */
-    enum ScrollBarLocation 
+    enum ScrollBarPosition 
     { 
         /** Do not show the scroll bar. */
-        SCROLLBAR_NONE=0, 
+        NoScrollBar=0, 
         /** Show the scroll bar on the left side of the display. */
-        SCROLLBAR_LEFT=1, 
+        ScrollBarLeft=1, 
         /** Show the scroll bar on the right side of the display. */
-        SCROLLBAR_RIGHT=2 
+        ScrollBarRight=2 
     };
     /** 
      * Specifies whether the terminal display has a vertical scroll bar, and if so whether it
      * is shown on the left or right side of the display.
      */
-    void setScrollBarLocation(ScrollBarLocation loc);
+    void setScrollBarPosition(ScrollBarPosition position);
 
     /** 
      * Sets the current position and range of the display's scroll bar.
@@ -322,15 +322,12 @@ public:
      * Specified whether anti-aliasing of text in the terminal display
      * is enabled or not.  Defaults to enabled.
      */
-    static void setAntialias( bool enable ) { s_antialias = enable; }
+    static void setAntialias( bool antialias ) { _antialiasText = antialias; }
     /** 
      * Returns true if anti-aliasing of text in the terminal is enabled.
      */
-    static bool antialias()                 { return s_antialias;   }
+    static bool antialias()                 { return _antialiasText;   }
     
-    static void setStandalone( bool standalone ) { s_standalone = standalone; }
-    static bool standalone() { return s_standalone; }
-
     /**
      * Sets whether or not the current height and width of the 
      * terminal in lines and columns is displayed whilst the widget
@@ -374,7 +371,7 @@ public:
     /** Returns the terminal screen section which is displayed in this widget.  See setScreenWindow() */
     ScreenWindow* screenWindow() const;
 
-public Q_SLOTS:
+public slots:
 
     /** 
      * Causes the terminal display to fetch the latest character image from the associated
@@ -386,8 +383,6 @@ public Q_SLOTS:
      * associated terminal screen ( see setScreenWindow() ).  
      */ 
     void updateLineProperties();
-
-    void setSelectionEnd();
 
     /** Copies the selected text to the clipboard. */
     void copyClipboard();
@@ -401,8 +396,8 @@ public Q_SLOTS:
      * display.
      */
     void pasteSelection();
-    void onClearSelection();
-	/** 
+	
+    /** 
 	 * Causes the widget to display or hide a message informing the user that terminal
 	 * output has been suspended (by using the flow control key combination Ctrl+S)
 	 *
@@ -427,14 +422,17 @@ public Q_SLOTS:
      * or false otherwise.
      */
     void setUsesMouse(bool usesMouse);
-    
+  
+    /** See setUsesMouse() */
+    bool usesMouse() const;
+
     /** 
      * Shows a notification that a bell event has occurred in the terminal.
      * TODO: More documentation here
      */
     void bell(const QString& message);
 
-Q_SIGNALS:
+signals:
 
     /**
      * Emitted when the user presses a key whilst the terminal widget has focus.
@@ -451,49 +449,50 @@ Q_SIGNALS:
     
     /** 
      * A mouse event occurred.
-     * @param cb The mouse button (0 for left button, 1 for middle button, 2 for right button, 3 for release)
-     * @param cx The character column where the event occurred
-     * @param cy The character row where the event occurred
+     * @param button The mouse button (0 for left button, 1 for middle button, 2 for right button, 3 for release)
+     * @param column The character column where the event occurred
+     * @param line The character row where the event occurred
      * @param eventType The type of event.  0 for a mouse press / release or 1 for mouse motion
      */
-    void mouseSignal(int cb, int cx, int cy, int eventType);
+    void mouseSignal(int button, int column, int line, int eventType);
     void changedFontMetricSignal(int height, int width);
     void changedContentSizeSignal(int height, int width);
-    void changedHistoryCursor( int value);
-    void configureRequest( TerminalDisplay*, int state, int x, int y );
+
+    /** 
+     * Emitted when the user right clicks on the display, or right-clicks with the Shift
+     * key held down if usesMouse() is true.
+     *
+     * This can be used to display a context menu.
+     */
+    void configureRequest( TerminalDisplay*, int state, const QPoint& position );
 
    void isBusySelecting(bool);
    void sendStringToEmu(const char*);
 
 protected:
+    virtual bool event( QEvent * );
 
-    virtual void styleChange( QStyle& );
+    virtual void paintEvent( QPaintEvent * );
 
-    bool event( QEvent * );
+    virtual void showEvent(QShowEvent*);
+    virtual void hideEvent(QHideEvent*);
+    virtual void resizeEvent(QResizeEvent*);
 
-	    
+    virtual void fontChange(const QFont &font);
 
-    void paintEvent( QPaintEvent * );
-    void paintFilters(QPainter& painter);
+    virtual void keyPressEvent(QKeyEvent* event);
+    virtual void mouseDoubleClickEvent(QMouseEvent* ev);
+    virtual void mousePressEvent( QMouseEvent* );
+    virtual void mouseReleaseEvent( QMouseEvent* );
+    virtual void mouseMoveEvent( QMouseEvent* );
+    virtual void extendSelection( const QPoint& pos );
+    virtual void wheelEvent( QWheelEvent* );
 
-    void showEvent(QShowEvent*);
-    void hideEvent(QHideEvent*);
-    void resizeEvent(QResizeEvent*);
-
-    void fontChange(const QFont &font);
-
-    void keyPressEvent(QKeyEvent* event);
-    void mouseDoubleClickEvent(QMouseEvent* ev);
-    void mousePressEvent( QMouseEvent* );
-    void mouseReleaseEvent( QMouseEvent* );
-    void mouseMoveEvent( QMouseEvent* );
-    void extendSelection( const QPoint& pos );
-    void wheelEvent( QWheelEvent* );
-
-    bool focusNextPrevChild( bool next );
-    // Dnd
-    void dragEnterEvent(QDragEnterEvent* event);
-    void dropEvent(QDropEvent* event);
+    virtual bool focusNextPrevChild( bool next );
+    
+    // drag and drop
+    virtual void dragEnterEvent(QDragEnterEvent* event);
+    virtual void dropEvent(QDropEvent* event);
     void doDrag();
     enum DragState { diNone, diPending, diDragging };
 
@@ -509,18 +508,20 @@ protected:
 
     void mouseTripleClickEvent(QMouseEvent* ev);
 
-    void inputMethodEvent ( QInputMethodEvent * e );
+    virtual void inputMethodEvent ( QInputMethodEvent * e );
 
-protected Q_SLOTS:
+protected slots:
 
-    void scrollChanged(int value);
+    void scrollBarPositionChanged(int value);
     void blinkEvent();
     void blinkCursorEvent();
+    
     //Renables bell noises and visuals.  Used to disable further bells for a short period of time
     //after emitting the first in a sequence of bell events.
     void enableBell();
 
-private Q_SLOTS:
+private slots:
+
     void drop_menu_activated(QAction*);
     void swapColorTable();
     void tripleClickTimeout();  // resets possibleTripleClick
@@ -578,6 +579,8 @@ private:
     void updateImageSize();
     void makeImage();
     
+    void paintFilters(QPainter& painter);
+    
     // the window onto the terminal screen which this display
     // is currently showing.  
     QPointer<ScreenWindow> _screenWindow;
@@ -633,7 +636,7 @@ private:
 
     QClipboard*  _clipboard;
     QScrollBar* _scrollBar;
-    ScrollBarLocation _scrollbarLocation;
+    ScrollBarPosition _scrollbarLocation;
     QString     _wordCharacters;
     int         _bellMode;
 
@@ -657,8 +660,6 @@ private:
     bool _possibleTripleClick;  // is set in mouseDoubleClickEvent and deleted
                                // after QApplication::doubleClickInterval() delay
 
-    static bool s_antialias;   // do we antialias or not
-    static bool s_standalone;  // are we part of a standalone konsole?
 
     QFrame* _resizeWidget;
     QLabel* _resizeLabel;
@@ -670,7 +671,6 @@ private:
     	
     uint _lineSpacing;
 
-    QPoint _configureRequestPoint;  // remember right mouse button click position
     bool _colorsInverted; // true during visual bell
 
     // the rim should normally be 1, 0 only when running in full screen mode.
@@ -707,6 +707,8 @@ private:
 	//the delay in milliseconds between redrawing blinking text
 	static const int BLINK_DELAY = 500;
     static bool HAVE_TRANSPARENCY;
+
+    static bool _antialiasText;   // do we antialias or not
 
 public:
     static void setTransparencyEnabled(bool enable)

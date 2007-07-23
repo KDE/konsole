@@ -97,8 +97,8 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
             SLOT(sessionResizeRequest(const QSize&)) );
 
     // listen for popup menu requests
-    connect( _view , SIGNAL(configureRequest(TerminalDisplay*,int,int,int)) , this,
-            SLOT(showDisplayContextMenu(TerminalDisplay*,int,int,int)) );
+    connect( _view , SIGNAL(configureRequest(TerminalDisplay*,int,const QPoint&)) , this,
+            SLOT(showDisplayContextMenu(TerminalDisplay*,int,const QPoint&)) );
 
     // move view to newest output when keystrokes occur
     connect( _view , SIGNAL(keyPressedSignal(QKeyEvent*)) , this , 
@@ -859,7 +859,7 @@ void SessionController::sessionTitleChanged()
        setTitle( title ); 
 }
 
-void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , int /*state*/, int x, int y)
+void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , int /*state*/, const QPoint& position)
 {
     if ( factory() )
     {
@@ -868,7 +868,7 @@ void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , in
         
         Q_ASSERT( popup );
 
-        popup->exec( _view->mapToGlobal(QPoint(x,y)) );
+        popup->exec( _view->mapToGlobal(position) );
     }
     else
     {

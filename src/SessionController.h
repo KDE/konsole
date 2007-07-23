@@ -175,7 +175,7 @@ private slots:
     // other
     void prepareChangeProfileMenu();
     void updateCodecAction();
-    void showDisplayContextMenu(TerminalDisplay* display , int state , int x , int y);
+    void showDisplayContextMenu(TerminalDisplay* display , int state , const QPoint& position);
     void sessionStateChanged(int state);
     void sessionTitleChanged();
     void searchTextChanged(const QString& text);
