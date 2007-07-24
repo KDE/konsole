@@ -81,6 +81,13 @@ MainWindow::MainWindow()
     // replace standard shortcuts which cannot be used in a terminal
     // (as they are reserved for use by terminal programs)
     correctShortcuts();
+
+    // add all actions to this window, so that the keyboard shortcuts can be
+    // used even when the menu is hidden
+    //
+    // See comments in SessionController constructor about Qt 4 behaviour with
+    // hidden menu bars and shortcuts
+    addActions(actionCollection()->actions());
 }
 
 void MainWindow::correctShortcuts()

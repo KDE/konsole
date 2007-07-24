@@ -84,8 +84,6 @@ The KDE 4.0 TODO List:
 
 == BUGS ==
 
-- Shortcuts do not work when the menu bar is hidden.
-
 - Allow the user to over-ride the "no Ctrl+[Key] shortcuts" limitation with shortcuts
 set in the configuration dialog, but warn the user if they try to do so.  This is the 
 behaviour in KDE 3.
