@@ -209,17 +209,17 @@ void MainWindow::setupActions()
     connect( _toggleMenuBarAction , SIGNAL(toggled(bool)) , menuBar() , SLOT(setVisible(bool)) );
     collection->addAction("show-menubar",_toggleMenuBarAction);
 
+    // Hide the Show/Hide menubar item if the menu bar is a MacOS-style menu bar
+    if ( menuBar()->isTopLevelMenu() )
+        _toggleMenuBarAction->setVisible(false);
+
+    // Full Screen
     KToggleFullScreenAction* fullScreenAction = new KToggleFullScreenAction(this);
     fullScreenAction->setWindow(this);
     fullScreenAction->setShortcut( Qt::CTRL + Qt::SHIFT + Qt::Key_F11 );
     collection->addAction("view-full-screen",fullScreenAction);
     connect( fullScreenAction , SIGNAL(toggled(bool)) , this , SLOT(viewFullScreen(bool)) ); 
-    //TODO - Implmement this correctly
-    //
-    //QAction* mergeAction = collection->addAction("merge-windows");
-    //mergeAction->setText( i18n("&Merge Windows") );
-    //connect( mergeAction , SIGNAL(triggered()) , this , SLOT(mergeWindows()) );
-
+  
     // Settings Menu
     KStandardAction::configureNotifications( 0 , 0 , collection  );
     KStandardAction::keyBindings( this , SLOT(showShortcutsDialog()) , collection  );
