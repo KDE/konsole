@@ -1,6 +1,25 @@
 /** @mainpage Konsole
 
-KDE Terminal Emulator
+%Konsole is a terminal emulator for KDE.
+<p>
+To use a %Konsole part in your application, see the
+<a href="http://api.kde.org/4.0-api/kdelibs-apidocs/interfaces/html/classTerminalInterface.html">Terminal
+interface documentation</a> in kdelibs.
+
+To learn more about %Konsole, visit the
+<a href="http://konsole.kde.org">Konsole home page</a>, or join the
+<a href="http://mail.kde.org/mailman/listinfo/konsole-devel">konsole-devel
+mailing list</a>.
+
+@authors
+Lars Doelle<br>
+Robert Knight
+
+@maintainers
+Robert Knight
+
+@licenses
+@gpl
 
 */
 
