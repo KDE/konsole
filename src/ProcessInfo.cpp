@@ -34,6 +34,11 @@
 #include <QtCore/QTextStream>
 #include <QtCore/QStringList>
 
+// KDE
+#include <KConfigGroup>
+#include <KGlobal>
+#include <KSharedConfig>
+
 using namespace Konsole;
 
 ProcessInfo::ProcessInfo(int pid , bool enableEnvironmentRead)
@@ -76,12 +81,6 @@ QString ProcessInfo::format(const QString& input) const
    return output;
 }
 
-const char* ProcessInfo::DefaultCommonDirNames[] = 
-{ "src" , "build" , "debug" , "release" ,
-  "bin" , "lib" , "tmp" , "doc" , "data" , 
-  "share" , "examples" , "icons" , 
-  "pics" , "plugins" , 0 };
-
 QString ProcessInfo::formatCommand(const QString& name, 
                                    const QVector<QString>& arguments,
                                    CommandFormat format) const
@@ -89,6 +88,29 @@ QString ProcessInfo::formatCommand(const QString& name,
     // TODO Implement me
     return QStringList(QList<QString>::fromVector(arguments)).join(" ");
 }
+
+QSet<QString> ProcessInfo::_commonDirNames;
+
+QSet<QString> ProcessInfo::commonDirNames() 
+{
+    if ( _commonDirNames.isEmpty() )
+    {
+        KSharedConfigPtr config = KGlobal::config();
+        KConfigGroup configGroup = config->group("ProcessInfo");
+
+        QStringList defaults = QStringList() 
+                             << "src" << "build" << "debug" << "release" 
+                             << "bin" << "lib"   << "libs"  << "tmp" 
+                             << "doc" << "docs"  << "data"  << "share"
+                             << "examples" << "icons" << "pics" << "plugins";
+
+        _commonDirNames = QSet<QString>::fromList(configGroup.readEntry("CommonDirNames",defaults));
+
+    }
+
+    return _commonDirNames;
+}
+
 QString ProcessInfo::formatShortDir(const QString& input) const
 {
     QString result;
@@ -96,14 +118,7 @@ QString ProcessInfo::formatShortDir(const QString& input) const
     QStringList parts = input.split( QDir::separator() );
 
     // temporarily hard-coded
-    QSet<QString> commonDirNames;
-   
-    const char** defaultCommonNames = DefaultCommonDirNames;
-    while ( *defaultCommonNames != 0 )
-    {
-        commonDirNames << *defaultCommonNames;
-        ++defaultCommonNames;
-    }
+    QSet<QString> dirNamesToShorten = commonDirNames();
 
     QListIterator<QString> iter(parts);
     iter.toBack();
@@ -116,7 +131,7 @@ QString ProcessInfo::formatShortDir(const QString& input) const
     {
         QString part = iter.previous();
 
-        if ( commonDirNames.contains(part) )
+        if ( dirNamesToShorten.contains(part) )
         {
             result.prepend(QDir::separator() + part[0]);
         }

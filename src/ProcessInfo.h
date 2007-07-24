@@ -275,7 +275,9 @@ private:
     QVector<QString> _arguments;
     QMap<QString,QString> _environment;
 
-    static const char* DefaultCommonDirNames[]; 
+
+    static QSet<QString> commonDirNames();
+    static QSet<QString> _commonDirNames;
 };
 
 /** 
