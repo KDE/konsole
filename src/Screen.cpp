@@ -280,7 +280,11 @@ void Screen::eraseChars(int n)
 void Screen::deleteChars(int n)
 {
   if (n == 0) n = 1; // Default
-  if (n > columns) n = columns - 1;
+  if ( cuX+n >= screenLines[cuY].count() ) 
+       n = screenLines[cuY].count() - 1 - cuX;
+
+  Q_ASSERT( n >= 0 );
+  Q_ASSERT( cuX+n < screenLines[cuY].count() );
 
   screenLines[cuY].remove(cuX,n);
 }
