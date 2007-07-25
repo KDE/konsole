@@ -568,6 +568,8 @@ void TerminalDisplay::drawCursor(QPainter& painter,
     {
        if ( _cursorColor.isValid() )
            painter.setPen(_cursorColor);
+       else
+           painter.setPen(foregroundColor);
 
        if ( _cursorShape == BlockCursor )
        {
