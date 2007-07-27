@@ -85,17 +85,8 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 
     // handle user interface related to session (menus etc.)
     setXMLFile("konsole/sessionui.rc");
+    actionCollection()->setAssociatedWidget(view);
     setupActions();
-
-    // add all actions to this window, so that the keyboard shortcuts can be
-    // used even when the main window's menu is hidden
-    //
-    // TODO: The Qt-4 behaviour of shortcuts not working when the menu bar is hidden
-    // affects other KDE applications as well.  A kdelibs fix might be possible.
-    //
-    // See discussion:  
-    // http://lists.kde.org/?l=konsole-devel&m=118529209602516&w=2
-    view->addActions(actionCollection()->actions());
 
     setIdentifier(_session->sessionId());
     sessionTitleChanged();
