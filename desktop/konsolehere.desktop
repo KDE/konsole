@@ -6,6 +6,7 @@ Actions=openTerminalHere;
 X-KDE-AuthorizeAction=shell_access
 
 Name=Konsole
+Name[bg]=Конзола
 Name[ca]=Consola
 Name[csb]=Kònsola
 Name[el]=Κονσόλα
@@ -36,6 +37,7 @@ Name[x-test]=xxKonsolexx
 Name=Open Terminal Here
 Name[af]=Maak Terminaal Hier Oop
 Name[be]=Адкрыць тэрмінал тут
+Name[bg]=Отваряне на конзола тук
 Name[br]=Digeriñ un termenell amañ
 Name[ca]=Obre un terminal aquí
 Name[cs]=Otevřít terminál zde

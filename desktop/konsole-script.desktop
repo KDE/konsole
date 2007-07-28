@@ -8,6 +8,7 @@ Terminal=false
 X-KDE-StartupNotify=true
 
 Name=Konsole
+Name[bg]=Конзола
 Name[ca]=Consola
 Name[csb]=Kònsola
 Name[el]=Κονσόλα
@@ -37,6 +38,7 @@ Name[x-test]=xxKonsolexx
 GenericName=Terminal Program
 GenericName[af]=Terminaal Program
 GenericName[be]=Тэрмінал
+GenericName[bg]=Терминална програма
 GenericName[br]=Goulev termenell
 GenericName[ca]=Programa de terminal
 GenericName[cs]=Terminálový program
