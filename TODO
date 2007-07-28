@@ -11,7 +11,6 @@ mailing list and send an email to it:
 
 https://mail.kde.org/mailman/listinfo/konsole-devel
 
-
 The KDE 4.0 TODO List:
 ======================
 
@@ -32,6 +31,8 @@ The KDE 4.0 TODO List:
 
 - Implement changing of the Konsole window size by
   terminal applications.
+    - Consider behaviour when there are multiple views open 
+      on a single session.
 
 - Implement a DBus interface for Konsole.
   Look for Konsole bug reports on bugs.kde.org containing
@@ -45,44 +46,19 @@ The KDE 4.0 TODO List:
 
         ( from there konsoleprofile can be used to change other settings )
 
-- Ability to define bold or transparent status for each
-  color in the color scheme.  Make the setting of 
-  boldness for characters more intuitive than in the KDE 3
-  series.
 
 == ESSENTIAL TWEAKS ==
 
 - Better documentation for shortcuts to move between views
   (Shift+<Arrows> and Shift+Tab)
 
-- More intelligent tab title format which can adjust its output
-  to display more relevant information depending upon the 
-  command being run.  eg.  If the current command is "svn"
-  then the operation ( checkout, update, remove etc. ) 
-  could be included as well.
-
-- When composing the short directory name for the tab title, 
-  add a means to strip or ignore common prefixes such 
-  as 'src','build','tmp','bin','lib' etc. to provide better
-  differentiated tab titles when tabs are open in multiple
-  different directories.
-
-  eg.
-
-  If tabs are open in:
-
-    /path/to/konsole/src/
-
-    and
-
-    /path/to/kate/src/
-
-  '%d' in tab titles would be replaced with 'konsole/s' and
-  'kate/s' instead of 'src' in both.
-
-  [ IN PROGRESS ]
+- Display a warning if, on an un-composited desktop, the user chooses a colour scheme which uses
+  transparency.
 
 == BUGS ==
+
+- Pressing and releasing the Alt key does not focus the menu as it should.  
+  This prevents keyboard navigation of the menu items.  MUSTFIX for KDE 4.
 
 - Allow the user to over-ride the "no Ctrl+[Key] shortcuts" limitation with shortcuts
 set in the configuration dialog, but warn the user if they try to do so.  This is the 
@@ -104,12 +80,28 @@ do not always behave well with lots of successive image size changes.
 
 - Re-write the handbook contents to be up to date with the new user interface
 
-== NON-ESSENTIAL TWEAKS ==
+== NON-ESSENTIAL TWEAKS (if spare time for 4.0, otherwise for post-4.0) ==
 
 - Currently splitting the view creates a new terminal widget for each session
   in the new view.  This will have a perceptible performance impact for 
   users who have ten, twenty or more tabs open.  Add facilities to
   delay creating the views until they are needed.
+
+  == > Note, Qt only actually creates the X11 window when it is shown and 
+       not before.
+
+- Ability to define bold or transparent status for each
+  color in the color scheme.  Make the setting of 
+  boldness for characters more intuitive than in the KDE 3
+  series.
+
+  (Can be done in the .colorscheme file, currently no GUI options)
+
+- More intelligent tab title format which can adjust its output
+  to display more relevant information depending upon the 
+  command being run.  eg.  If the current command is "svn"
+  then the operation ( checkout, update, remove etc. ) 
+  could be included as well.
 
 == NON-ESSENTIAL FEATURES ==
 
@@ -125,7 +117,6 @@ do not always behave well with lots of successive image size changes.
 
   Again, for easier identification of what is going on in
   a Konsole window at a glance.
-
 
   -> Suggested in survey:  Random colors which are specific
   to the directory, program or host of the active session,
@@ -197,6 +188,27 @@ do not always behave well with lots of successive image size changes.
 
 
 === DONE ===
+
+- When composing the short directory name for the tab title, 
+  add a means to strip or ignore common prefixes such 
+  as 'src','build','tmp','bin','lib' etc. to provide better
+  differentiated tab titles when tabs are open in multiple
+  different directories.
+
+  eg.
+
+  If tabs are open in:
+
+    /path/to/konsole/src/
+
+    and
+
+    /path/to/kate/src/
+
+  '%d' in tab titles would be replaced with 'konsole/s' and
+  'kate/s' instead of 'src' in both.
+
+  [ IN PROGRESS ]
 
 - Random background colors in color schemes, for easy
   identification of Konsole windows when several are open
