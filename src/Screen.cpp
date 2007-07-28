@@ -298,7 +298,10 @@ void Screen::insertChars(int n)
 {
   if (n == 0) n = 1; // Default
   
-  screenLines[cuY].insert(cuX,n);
+  screenLines[cuY].insert(cuX,n,' ');
+
+  if ( screenLines[cuY].count() > columns )
+      screenLines[cuY].resize(columns);
 }
 
 /*! delete `n' lines starting from (including) the cursor position.
