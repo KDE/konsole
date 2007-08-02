@@ -164,11 +164,9 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   bool frameon = true;
   bool scrollbaron = true;
   bool showtip = true;
-  QCString wname = PACKAGE;
 
-
-  KAboutData aboutData( PACKAGE, I18N_NOOP("Konsole"),
-    VERSION, description, KAboutData::License_GPL_V2,
+  KAboutData aboutData( "konsole", I18N_NOOP("Konsole"),
+    KONSOLE_VERSION, description, KAboutData::License_GPL_V2,
     "Copyright (c) 1997-2006, Lars Doelle");
   aboutData.addAuthor("Robert Knight",I18N_NOOP("Maintainer"), "robertknight@gmail.com");
   aboutData.addAuthor("Lars Doelle",I18N_NOOP("Author"), "lars.doelle@on-line.de");
@@ -357,7 +355,7 @@ extern "C" int KDE_EXPORT kdemain(int argc, char* argv[])
   tabbaron = args->isSet("tabbar") && args->isSet("toolbar");
   frameon = args->isSet("frame");
   scrollbaron = args->isSet("scrollbar");
-  wname = qtargs->getOption("name");
+  QCString wname = qtargs->getOption("name");
   full_script = args->isSet("script");
   auto_close = args->isSet("close");
   fixed_size = !args->isSet("resize");

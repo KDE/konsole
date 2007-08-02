@@ -48,10 +48,7 @@
 
 #include "konsoleiface.h"
 
-#undef PACKAGE
-#undef VERSION
-#define PACKAGE "konsole"
-#define VERSION "1.6.6"
+#define KONSOLE_VERSION "1.6.6"
 
 class KRootPixmap;
 class QLabel;
