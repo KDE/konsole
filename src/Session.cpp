@@ -247,9 +247,9 @@ void Session::run()
 {
   //check that everything is in place to run the session
   if (_program.isEmpty())
-      kDebug() << "Session::run() - program to run not set." << endl;
+      kDebug() << "Session::run() - program to run not set.";
   if (_arguments.isEmpty())
-      kDebug() << "Session::run() - no command line arguments specified." << endl;
+      kDebug() << "Session::run() - no command line arguments specified.";
   
   // Upon a KPty error, there is no description on what that error was...
   // Check to see if the given program is executable.
@@ -328,7 +328,7 @@ void Session::setUserTitle( int what, const QString &caption )
 	
     if (what == 11) {
       QString colorString = caption.section(';',0,0);
-      kDebug() << __FILE__ << __LINE__ << ": setting background colour to " << colorString << endl;
+      kDebug() << __FILE__ << __LINE__ << ": setting background colour to " << colorString;
       QColor backColor = QColor(colorString);
       if (backColor.isValid()){// change color via \033]11;Color\007
 	if (backColor != _modifiedBackground) 
@@ -627,7 +627,7 @@ void Session::setIconName(const QString& iconName)
 void Session::setIconText(const QString& iconText)
 {
   _iconText = iconText;
-  //kDebug(1211)<<"Session setIconText " <<  _iconText <<endl;
+  //kDebug(1211)<<"Session setIconText " <<  _iconText;
 }
 
 QString Session::iconName() const

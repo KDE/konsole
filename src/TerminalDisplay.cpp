@@ -2448,7 +2448,7 @@ void TerminalDisplay::bell(const QString& message)
     _allowBell = false;
     QTimer::singleShot(500,this,SLOT(enableBell()));
  
-    kDebug(1211) << __FUNCTION__ << endl;
+    kDebug(1211) << __FUNCTION__;
 
     if (_bellMode==BELL_SYSTEM) 
     {

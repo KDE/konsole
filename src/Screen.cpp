@@ -189,7 +189,7 @@ void Screen::setMargins(int top, int bot)
   top = top - 1;              // Adjust to internal lineno
   bot = bot - 1;              // Adjust to internal lineno
   if ( !( 0 <= top && top < bot && bot < lines ) )
-  { kDebug()<<" setRegion("<<top<<","<<bot<<") : bad range."<<endl;
+  { kDebug()<<" setRegion("<<top<<","<<bot<<") : bad range.";
     return;                   // Default error action: ignore
   }
   tmargin = top;
@@ -1283,7 +1283,7 @@ void Screen::getSelectionEnd(int& column , int& line)
 }
 void Screen::setSelectionStart(/*const ScreenCursor& viewCursor ,*/ const int x, const int y, const bool mode)
 {
-//  kDebug(1211) << "setSelBeginXY(" << x << "," << y << ")" << endl;
+//  kDebug(1211) << "setSelBeginXY(" << x << "," << y << ")";
   sel_begin = loc(x,y); //+histCursor) ;
 
   /* FIXME, HACK to correct for x too far to the right... */
@@ -1296,7 +1296,7 @@ void Screen::setSelectionStart(/*const ScreenCursor& viewCursor ,*/ const int x,
 
 void Screen::setSelectionEnd( const int x, const int y)
 {
-//  kDebug(1211) << "setSelExtentXY(" << x << "," << y << ")" << endl;
+//  kDebug(1211) << "setSelExtentXY(" << x << "," << y << ")";
   if (sel_begin == -1) return;
   int l =  loc(x,y); // + histCursor);
 

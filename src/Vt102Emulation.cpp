@@ -106,21 +106,21 @@ void Vt102Emulation::clearEntireScreen()
 
 void Vt102Emulation::reset()
 {
-  //kDebug(1211)<<"Vt102Emulation::reset() resetToken()"<<endl;
+  //kDebug(1211)<<"Vt102Emulation::reset() resetToken()";
   resetToken();
-  //kDebug(1211)<<"Vt102Emulation::reset() resetModes()"<<endl;
+  //kDebug(1211)<<"Vt102Emulation::reset() resetModes()";
   resetModes();
-  //kDebug(1211)<<"Vt102Emulation::reset() resetCharSet()"<<endl;
+  //kDebug(1211)<<"Vt102Emulation::reset() resetCharSet()";
   resetCharset(0);
-  //kDebug(1211)<<"Vt102Emulation::reset() reset screen0()"<<endl;
+  //kDebug(1211)<<"Vt102Emulation::reset() reset screen0()";
   _screen[0]->reset();
-  //kDebug(1211)<<"Vt102Emulation::reset() resetCharSet()"<<endl;
+  //kDebug(1211)<<"Vt102Emulation::reset() resetCharSet()";
   resetCharset(1);
-  //kDebug(1211)<<"Vt102Emulation::reset() reset _screen 1"<<endl;
+  //kDebug(1211)<<"Vt102Emulation::reset() reset _screen 1";
   _screen[1]->reset();
-  //kDebug(1211)<<"Vt102Emulation::reset() setCodec()"<<endl;
+  //kDebug(1211)<<"Vt102Emulation::reset() setCodec()";
   setCodec(LocaleCodec);
-  //kDebug(1211)<<"Vt102Emulation::reset() done"<<endl;
+  //kDebug(1211)<<"Vt102Emulation::reset() done";
  
   bufferedUpdate();
 }

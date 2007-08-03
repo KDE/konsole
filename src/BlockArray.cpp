@@ -154,7 +154,7 @@ bool BlockArray::setSize(size_t newsize)
 
 bool BlockArray::setHistorySize(size_t newsize)
 {
-//    kDebug(1211) << "setHistorySize " << size << " " << newsize << endl;
+//    kDebug(1211) << "setHistorySize " << size << " " << newsize;
 
     if (size == newsize)
         return false;
