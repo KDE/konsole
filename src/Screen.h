@@ -176,7 +176,7 @@ public: // these are all `Screen' operations
     //
     void clear();
     void home();
-    void reset();
+    void reset(bool clearScreen = true);
     // Show character
     void ShowCharacter(unsigned short c);
     

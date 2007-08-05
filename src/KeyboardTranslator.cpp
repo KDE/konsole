@@ -46,7 +46,10 @@ KeyboardTranslatorManager::KeyboardTranslatorManager()
     : _haveLoadedAll(false)
 {
 }
-
+KeyboardTranslatorManager::~KeyboardTranslatorManager()
+{
+    qDeleteAll(_translators.values());
+}
 QString KeyboardTranslatorManager::findTranslatorPath(const QString& name)
 {
     return KGlobal::dirs()->findResource("data","konsole/"+name+".keytab");

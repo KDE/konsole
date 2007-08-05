@@ -182,7 +182,7 @@ private:
   //these calls occur when certain escape sequences are seen in the 
   //output from the terminal
   QHash<int,QString> _pendingTitleUpdates;
-  QTimer _titleUpdateTimer;
+  QTimer* _titleUpdateTimer;
   
 };
 

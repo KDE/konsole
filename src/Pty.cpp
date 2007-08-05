@@ -193,8 +193,13 @@ void Pty::setWriteable(bool writeable)
 }
 
 Pty::Pty()
+    : _bufferFull(false),
+      _windowColumns(0),
+      _windowLines(0),
+      _eraseChar(0),
+      _xonXoff(true),
+      _utf8(true)
 {
-  _bufferFull = false;
   connect(this, SIGNAL(receivedStdout(K3Process *, char *, int )),
 	  this, SLOT(dataReceived(K3Process *,char *, int)));
   connect(this, SIGNAL(processExited(K3Process *)),

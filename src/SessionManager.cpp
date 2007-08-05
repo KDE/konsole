@@ -184,21 +184,21 @@ void SessionManager::loadAllProfiles()
     _loadedAllProfiles = true;
 }
 SessionManager::~SessionManager()
-{    
+{   
     // save default profile
     setDefaultProfile( _defaultProfile );
 
     // save shortcuts
     saveShortcuts();
 
+    // delete remaining sessions
+    qDeleteAll(_sessions); 
+    
     // free profiles
     QListIterator<Profile*> infoIter(_types.values());
 
     while (infoIter.hasNext())
         delete infoIter.next();
-
-//#warning "This prevents a crash to do with accessing a global static globalData() after destruction, but it is probably not the correct solution."  
-//    KGlobal::config()->sync();
 }
 
 const QList<Session*> SessionManager::sessions()

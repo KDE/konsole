@@ -83,11 +83,13 @@ using namespace Konsole;
 /* ------------------------------------------------------------------------- */
 
 
-Vt102Emulation::Vt102Emulation() : Emulation()
+Vt102Emulation::Vt102Emulation() 
+    : Emulation(),
+     _titleUpdateTimer(new QTimer(this))
 {
-  _titleUpdateTimer.setSingleShot(true);
+  _titleUpdateTimer->setSingleShot(true);
 
-  QObject::connect(&_titleUpdateTimer , SIGNAL(timeout()) , this , SLOT(updateTitle()));
+  QObject::connect(_titleUpdateTimer , SIGNAL(timeout()) , this , SLOT(updateTitle()));
 
   initTokenizer();
   reset();
@@ -370,7 +372,7 @@ void Vt102Emulation::XtermHack()
   // (btw: arg=0 changes title and icon, arg=1 only icon, arg=2 only title
 //  emit changeTitle(arg,unistr);
   _pendingTitleUpdates[arg] = unistr;
-  _titleUpdateTimer.start(20);
+  _titleUpdateTimer->start(20);
 
   delete [] str;
 }

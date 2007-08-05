@@ -201,6 +201,8 @@ QString SessionController::currentDir() const
     bool ok = false;
     QString path = info->currentDir(&ok);
 
+    delete info;
+
     if ( ok )
         return path;
     else
@@ -510,7 +512,7 @@ void SessionController::setupActions()
     action->setText( i18n("Edit Current Profile...") );
     connect( action , SIGNAL(triggered()) , this , SLOT(editCurrentProfile()) );
 
-    _changeProfileMenu = new KMenu(i18n("Change Profile"));
+    _changeProfileMenu = new KMenu(i18n("Change Profile"),_view);
     collection->addAction("change-profile",_changeProfileMenu->menuAction());
     connect( _changeProfileMenu , SIGNAL(aboutToShow()) , this , SLOT(prepareChangeProfileMenu()) ); 
     

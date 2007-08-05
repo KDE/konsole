@@ -423,6 +423,7 @@ public:
      * first requested via a call to findTranslator()
      */
     KeyboardTranslatorManager();
+    ~KeyboardTranslatorManager();
 
     /**
      * Adds a new translator.  If a translator with the same name 

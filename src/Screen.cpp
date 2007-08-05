@@ -640,7 +640,7 @@ QVector<LineProperty> Screen::getCookedLineProperties( int startLine )
 /*!
 */
 
-void Screen::reset()
+void Screen::reset(bool clearScreen)
 {
     setMode(MODE_Wrap  ); saveMode(MODE_Wrap  );  // wrap at end of margin
   resetMode(MODE_Origin); saveMode(MODE_Origin);  // position refere to [1,1]
@@ -655,7 +655,8 @@ void Screen::reset()
   setDefaultRendition();
   saveCursor();
 
-  clear();
+  if ( clearScreen )
+    clear();
 }
 
 /*! Clear the entire screen and home the cursor.

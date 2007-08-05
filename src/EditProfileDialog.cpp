@@ -197,10 +197,14 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
     _ui->commandEdit->setText( command.fullCommand() );
 
     KUrlCompletion* exeCompletion = new KUrlCompletion(KUrlCompletion::ExeCompletion);
+    exeCompletion->setParent(this);
     exeCompletion->setDir(QString());
     _ui->commandEdit->setCompletionObject( exeCompletion );
     _ui->initialDirEdit->setText( info->defaultWorkingDirectory() );
-    _ui->initialDirEdit->setCompletionObject( new KUrlCompletion(KUrlCompletion::DirCompletion) );
+
+    KUrlCompletion* dirCompletion = new KUrlCompletion(KUrlCompletion::DirCompletion);
+    dirCompletion->setParent(this);
+    _ui->initialDirEdit->setCompletionObject( dirCompletion );
     _ui->initialDirEdit->setClearButtonShown(true);
     _ui->dirSelectButton->setIcon( KIcon("folder-open") );
     _ui->iconSelectButton->setIcon( KIcon(info->icon()) );
