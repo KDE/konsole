@@ -279,7 +279,16 @@ void Screen::eraseChars(int n)
 
 void Screen::deleteChars(int n)
 {
-  if (n == 0) n = 1; // Default
+  Q_ASSERT( n >= 0 );
+
+  // always delete at least one char
+  if (n == 0) 
+      n = 1; 
+
+  // if cursor is beyond the end of the line there is nothing to do
+  if ( cuX >= screenLines[cuY].count() )
+      return;
+
   if ( cuX+n >= screenLines[cuY].count() ) 
        n = screenLines[cuY].count() - 1 - cuX;
 
