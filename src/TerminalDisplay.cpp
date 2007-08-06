@@ -2257,6 +2257,9 @@ void TerminalDisplay::pasteSelection()
 
 void TerminalDisplay::keyPressEvent( QKeyEvent* event )
 {
+    bool emitKeyPressSignal = true;
+
+    // XonXoff flow control
     if (event->modifiers() & Qt::ControlModifier)
 	{
 		if ( event->key() == Qt::Key_S )
@@ -2265,6 +2268,7 @@ void TerminalDisplay::keyPressEvent( QKeyEvent* event )
 				emit flowControlKeyPressed(false /*output enabled*/);
 	}
 
+    // Keyboard-based navigation
     if ( event->modifiers() == Qt::ShiftModifier )
     {
         bool update = true;
@@ -2291,9 +2295,12 @@ void TerminalDisplay::keyPressEvent( QKeyEvent* event )
         if ( update )
         {
             _screenWindow->setTrackOutput( _screenWindow->atEndOfOutput() );
-
+            
             updateLineProperties();
             updateImage();
+
+            // do not send key press to terminal
+            emitKeyPressSignal = false;
         }
     }
 
@@ -2309,7 +2316,8 @@ void TerminalDisplay::keyPressEvent( QKeyEvent* event )
         _cursorBlinking = false;
     }
 
-    emit keyPressedSignal(event);
+    if ( emitKeyPressSignal )
+        emit keyPressedSignal(event);
 
     event->accept();
 }
