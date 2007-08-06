@@ -29,6 +29,7 @@
 
 // KDE
 #include <kdebug.h>
+#include <KGlobal>
 #include <KLocale>
 #include <KToggleAction>
 #include <KXMLGUIFactory>
@@ -293,6 +294,11 @@ void ViewManager::sessionFinished()
 
     Q_ASSERT(session);
 
+    // record the size of the last session
+    qDebug() << "Recording session size: " << session->size();
+    setDefaultDisplaySize( session->size().height() , session->size().width() );
+
+    // close attached views
     QList<TerminalDisplay*> children = _viewSplitter->findChildren<TerminalDisplay*>();
 
     foreach ( TerminalDisplay* view , children )
@@ -303,6 +309,7 @@ void ViewManager::sessionFinished()
             view->deleteLater();
         }
     }
+
 }
 
 void ViewManager::focusActiveView()
@@ -468,8 +475,11 @@ void ViewManager::createView(Session* session)
         applyProfile(display,session->profileKey());
         
         // set initial size
-        // temporary default used for now
-        display->setSize(80,40);
+        int defaultLines = 0;
+        int defaultColumns = 0;
+        getDefaultDisplaySize(defaultLines,defaultColumns);
+        qDebug() << "Setting default display size to " << QSize(defaultColumns,defaultLines);
+        display->setSize(defaultColumns,defaultLines);
         
         ViewProperties* properties = createController(session,display);
 
@@ -486,6 +496,19 @@ void ViewManager::createView(Session* session)
             display->setFocus( Qt::OtherFocusReason );
         }
     }
+}
+
+void ViewManager::getDefaultDisplaySize(int& lines , int& columns) const
+{
+    const KConfigGroup group = KGlobal::config()->group("Last Session");
+    QSize size = group.readEntry("WindowSize",QSize(80,40));
+    lines = size.height();
+    columns = size.width();
+}
+void ViewManager::setDefaultDisplaySize(int lines , int columns)
+{
+    KConfigGroup group = KGlobal::config()->group("Last Session");
+    group.writeEntry("WindowSize",QSize(columns,lines));
 }
 
 ViewContainer* ViewManager::createContainer(const QString& profileKey)
@@ -528,12 +551,13 @@ void ViewManager::containerViewsChanged(QObject* container)
 
 void ViewManager::viewCloseRequest(QWidget* view)
 {
+    //FIXME Check that this cast is actually legal
+    TerminalDisplay* display = (TerminalDisplay*)view;
+  
+    Q_ASSERT(display);
+
     // 1. detach view from session
     // 2. if the session has no views left, close it
-   
-    qDebug() << "Removing view.";
-
-    TerminalDisplay* display = (TerminalDisplay*)view;
     Session* session = _sessionMap[ display ];
     if ( session )
     {
