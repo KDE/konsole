@@ -102,7 +102,9 @@ QSet<QString> ProcessInfo::commonDirNames()
                              << "src" << "build" << "debug" << "release" 
                              << "bin" << "lib"   << "libs"  << "tmp" 
                              << "doc" << "docs"  << "data"  << "share"
-                             << "examples" << "icons" << "pics" << "plugins";
+                             << "examples" << "icons" << "pics" << "plugins" 
+                             << "tests" << "media" << "l10n" << "include" 
+                             << "includes" << "locale" << "ui";
 
         _commonDirNames = QSet<QString>::fromList(configGroup.readEntry("CommonDirNames",defaults));
 
