@@ -197,7 +197,7 @@ public:
    * Sets the initial working directory for the session when it is run 
    * This has no effect once the session has been started.
    */
-  void setInitialWorkingDirectory( const QString& dir ) { _initialWorkingDir = dir; }
+  void setInitialWorkingDirectory( const QString& dir );
 
   /**
    * Sets the type of history store used by this session.

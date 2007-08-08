@@ -53,6 +53,7 @@
 
 #include "Pty.h"
 #include "TerminalDisplay.h"
+#include "ShellCommand.h"
 #include "Vt102Emulation.h"
 #include "ZModemDialog.h"
 
@@ -170,12 +171,15 @@ void Session::setCodec(QTextCodec* codec)
 
 void Session::setProgram(const QString& program)
 {
-    _program = program;
+    _program = ShellCommand::expand(program);
 }
-
+void Session::setInitialWorkingDirectory(const QString& dir)
+{
+    _initialWorkingDir = ShellCommand::expand(dir);
+}
 void Session::setArguments(const QStringList& arguments)
 {
-    _arguments = arguments;
+    _arguments = ShellCommand::expand(arguments);
 }
 
 QList<TerminalDisplay*> Session::views() const
