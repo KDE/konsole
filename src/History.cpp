@@ -690,7 +690,7 @@ HistoryScroll* HistoryTypeFile::scroll(HistoryScroll *old) const
   HistoryScroll *newScroll = new HistoryScrollFile(m_fileName);
 
   Character line[LINE_SIZE];
-  int lines = old->getLines();
+  int lines = (old != 0) ? old->getLines() : 0;
   for(int i = 0; i < lines; i++)
   {
      int size = old->getLineLen(i);
