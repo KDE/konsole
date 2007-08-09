@@ -192,7 +192,11 @@ SessionManager::~SessionManager()
     saveShortcuts();
 
     // delete remaining sessions
-    qDeleteAll(_sessions); 
+    foreach( Session* session , _sessions )
+    {
+        session->close();
+        delete session;
+    }
     
     // free profiles
     QListIterator<Profile*> infoIter(_types.values());
