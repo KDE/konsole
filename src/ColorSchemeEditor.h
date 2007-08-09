@@ -74,6 +74,7 @@ public slots:
 
 private slots:
    void setTransparencyPercentLabel(int percent);
+   void setRandomizedBackgroundColor(bool randomized); 
    void editColorItem(QTableWidgetItem* item);
 
 private:

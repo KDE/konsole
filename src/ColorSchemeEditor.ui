@@ -77,6 +77,13 @@
     </layout>
    </item>
    <item>
+    <widget class="QCheckBox" name="randomizedBackgroundCheck" >
+     <property name="text" >
+      <string>Vary the background color for each tab</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <spacer>
      <property name="orientation" >
       <enum>Qt::Vertical</enum>

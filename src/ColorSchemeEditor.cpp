@@ -69,6 +69,10 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* parent)
 
     connect( _ui->transparencySlider , SIGNAL(valueChanged(int)) , this , SLOT(setTransparencyPercentLabel(int)) );
 
+    // randomized background
+    connect( _ui->randomizedBackgroundCheck , SIGNAL(toggled(bool)) , this , 
+             SLOT(setRandomizedBackgroundColor(bool)) );
+
     // color table
     _ui->colorTable->setColumnCount(2);
     _ui->colorTable->setRowCount(TABLE_COLORS);
@@ -98,21 +102,10 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* parent)
     {
         _ui->transparencyWarningIcon->setPixmap( KIcon("dialog-warning").pixmap(QSize(48,48)) );
     }
-
-#if 0   
-    //QItemDelegate* delegate = qobject_cast<QItemDelegate*>(_ui->colorTable->itemDelegateForColumn(1));
-
-    QItemDelegate* delegate = new QItemDelegate(this);
-    _ui->colorTable->setItemDelegateForColumn(1,delegate);
-
-    delegate->setItemEditorFactory( new QItemEditorFactory );
-
-    Q_ASSERT(delegate);
-    Q_ASSERT(delegate->itemEditorFactory());
-
-    delegate->itemEditorFactory()->registerEditor( QVariant::Color , new ColorEditorCreator );
-#endif
-
+}
+void ColorSchemeEditor::setRandomizedBackgroundColor( bool randomize )
+{
+    _colors->setRandomizedBackgroundColor(randomize);
 }
 ColorSchemeEditor::~ColorSchemeEditor()
 {
@@ -174,6 +167,9 @@ void ColorSchemeEditor::setup(const ColorScheme* scheme)
     
     _ui->transparencySlider->setValue(transparencyPercent);
     setTransparencyPercentLabel(transparencyPercent);
+
+    // randomized background color checkbox
+    _ui->randomizedBackgroundCheck->setChecked( scheme->randomizedBackgroundColor() );
 }
 void ColorSchemeEditor::setupColorTable(const ColorScheme* colors)
 {

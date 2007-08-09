@@ -181,16 +181,18 @@ ColorEntry ColorScheme::colorEntry(int index , uint randomSeed) const
         !_randomTable[index].isNull() )
     {
         const RandomizationRange& range = _randomTable[index];
-       
+      
+
         int hueDifference = range.hue ? (qrand() % range.hue) - range.hue/2 : 0;
         int saturationDifference = range.saturation ? (qrand() % range.saturation) - range.saturation/2 : 0;
         int  valueDifference = range.value ? (qrand() % range.value) - range.value/2 : 0;
 
         QColor& color = entry.color;
+      //  qDebug() << "Standard hue" << color.hue() << "saturation" << color.saturation() << "value" << color.value();
 
         int newHue = qAbs( (color.hue() + hueDifference) % MAX_HUE );
-        int newValue = qAbs( color.value() + valueDifference );
-        int newSaturation = qAbs( color.saturation() + saturationDifference );
+        int newValue = qMin( qAbs(color.value() + valueDifference) , 255 );
+        int newSaturation = qMin( qAbs(color.saturation() + saturationDifference) , 255 );
 
     // qDebug() << "New hue: " << newHue << "New sat:" << newSaturation <<
     //        "New value:" << newValue;
@@ -206,6 +208,27 @@ void ColorScheme::getColorTable(ColorEntry* table , uint randomSeed) const
     for ( int i = 0 ; i < TABLE_COLORS ; i++ )
         table[i] = colorEntry(i,randomSeed);
 }
+bool ColorScheme::randomizedBackgroundColor() const
+{
+    return _randomTable == 0 ? false : !_randomTable[1].isNull();
+}
+void ColorScheme::setRandomizedBackgroundColor(bool randomize)
+{
+    // the hue of the background colour is allowed to be randomly 
+    // adjusted as much as possible.
+    //
+    // the value and saturation are left alone to maintain read-ability
+    if ( randomize )
+    {
+        setRandomizationRange( 1 /* background color index */ , MAX_HUE , 255 , 0 ); 
+    }
+    else
+    {
+        if ( _randomTable )
+            setRandomizationRange( 1 /* background color index */ , 0 , 0 , 0 );
+    }
+}
+
 void ColorScheme::setRandomizationRange( int index , quint16 hue , quint8 saturation ,
                                          quint8 value )
 {
@@ -267,7 +290,8 @@ void ColorScheme::write(KConfig& config) const
     
     for (int i=0 ; i < TABLE_COLORS ; i++)
     {
-        writeColorEntry(config,colorNameForIndex(i),colorTable()[i]);
+        RandomizationRange random = _randomTable != 0 ? _randomTable[i] : RandomizationRange();
+        writeColorEntry(config,colorNameForIndex(i),colorTable()[i],random);
     }
 }
 
@@ -302,13 +326,22 @@ void ColorScheme::readColorEntry(KConfig& config , int index)
     if ( hue != 0 || value != 0 || saturation != 0 )
        setRandomizationRange( index , hue , saturation , value ); 
 }
-void ColorScheme::writeColorEntry(KConfig& config , const QString& colorName, const ColorEntry& entry) const
+void ColorScheme::writeColorEntry(KConfig& config , const QString& colorName, const ColorEntry& entry , const RandomizationRange& random) const
 {
     KConfigGroup configGroup(&config,colorName);
 
     configGroup.writeEntry("Color",entry.color);
     configGroup.writeEntry("Transparency",(bool)entry.transparent);
     configGroup.writeEntry("Bold",(bool)entry.bold);
+
+    // record randomization if this color has randomization or 
+    // if one of the keys already exists 
+    if ( !random.isNull() || configGroup.hasKey("MaxRandomHue") )
+    {
+        configGroup.writeEntry("MaxRandomHue",(int)random.hue);
+        configGroup.writeEntry("MaxRandomValue",(int)random.value);
+        configGroup.writeEntry("MaxRandomSaturation",(int)random.saturation);
+    }
 }
 
 

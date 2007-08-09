@@ -128,37 +128,21 @@ public:
      */
     qreal opacity() const;
 
-    //void setCursorColor(const QColor& color);
-    //QColor cursorColor() const;
+    /** 
+     * Enables randomization of the background color.  This will cause
+     * the palette returned by getColorTable() and colorEntry() to
+     * be adjusted depending on the value of the random seed argument
+     * to them.
+     */ 
+    void setRandomizedBackgroundColor(bool randomize);
 
-    //void setCursorShape(int shape);
-    //int cursorShape() const;
+    /** Returns true if the background color is randomized. */
+    bool randomizedBackgroundColor() const;
 
     static QString colorNameForIndex(int index);
     static QString translatedColorNameForIndex(int index);
 
 private:
-    // returns the active color table.  if none has been set specifically,
-    // this is the default color table.
-    const ColorEntry* colorTable() const;
-
-    // reads a single colour entry from a KConfig source
-    // and sets the the palette entry at 'index' to the entry read.
-    void readColorEntry(KConfig& config , int index); 
-    // writes a single colour entry to a KConfig source
-    void writeColorEntry(KConfig& config , const QString& colorName, const ColorEntry& entry) const;
-
-    // sets the amount of randomization allowed for a particular color 
-    // in the palette.  creates the randomization table if 
-    // it does not already exist
-    void setRandomizationRange( int index , quint16 hue , quint8 saturation , quint8 value );
-
-    QString _description;
-    QString _name;
-    qreal _opacity;
-    ColorEntry* _table; // pointer to custom color table or 0 if the default
-                        // color scheme is being used
-
     // specifies how much a particular color can be randomized by
     class RandomizationRange
     {
@@ -174,6 +158,28 @@ private:
         quint8  saturation;
         quint8  value;
     };
+
+    // returns the active color table.  if none has been set specifically,
+    // this is the default color table.
+    const ColorEntry* colorTable() const;
+
+    // reads a single colour entry from a KConfig source
+    // and sets the the palette entry at 'index' to the entry read.
+    void readColorEntry(KConfig& config , int index); 
+    // writes a single colour entry to a KConfig source
+    void writeColorEntry(KConfig& config , const QString& colorName, const ColorEntry& entry,const RandomizationRange& range) const;
+
+    // sets the amount of randomization allowed for a particular color 
+    // in the palette.  creates the randomization table if 
+    // it does not already exist
+    void setRandomizationRange( int index , quint16 hue , quint8 saturation , quint8 value );
+
+    QString _description;
+    QString _name;
+    qreal _opacity;
+    ColorEntry* _table; // pointer to custom color table or 0 if the default
+                        // color scheme is being used
+
 
     static const quint16 MAX_HUE = 340;
 
@@ -192,6 +198,9 @@ private:
  *
  * This is designed primarily for the benefit of users who are using specially
  * designed colors.
+ *
+ * TODO Implement and make it the default on systems with specialized KDE
+ * color schemes.
  */
 class AccessibleColorScheme : public ColorScheme
 {
