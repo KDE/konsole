@@ -28,7 +28,6 @@
 // Qt
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
-#include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtCore/QRegExp>
 #include <QtCore/QTextStream>
@@ -53,8 +52,12 @@ ProcessInfo::ProcessInfo(int pid , bool enableEnvironmentRead)
     , _pid(pid)
     , _parentPid(0)
     , _foregroundPid(0)
+    , _lastError(NoError)
 {
 }
+
+ProcessInfo::Error ProcessInfo::error() const { return _lastError; }
+void ProcessInfo::setError(Error error) { _lastError = error; }
 
 void ProcessInfo::update() 
 {
@@ -67,13 +70,27 @@ QString ProcessInfo::format(const QString& input) const
 
    QString output(input);
 
-   // search for and replace known markers
+   // search for and replace known marker
    output.replace("%u","NOT IMPLEMENTED YET");
    output.replace("%n",name(&ok));
    output.replace("%c",formatCommand(name(&ok),arguments(&ok),ShortCommandFormat));
    output.replace("%C",formatCommand(name(&ok),arguments(&ok),LongCommandFormat));
-   output.replace("%D",currentDir(&ok));
-   output.replace("%d",formatShortDir(currentDir(&ok)));
+   
+   // read current dir, if an error occurs try the parent as the next
+   // best option
+   int currentPid = parentPid(&ok);
+   QString dir = currentDir(&ok);
+   while ( !ok && currentPid != 0 )
+   {
+       ProcessInfo* current = ProcessInfo::newInstance(currentPid);
+       current->update();
+       currentPid = current->parentPid(&ok); 
+       dir = current->currentDir(&ok);
+       delete current;
+   }
+        
+   output.replace("%D",dir);
+   output.replace("%d",formatShortDir(dir));
    
    // remove any remaining %[LETTER] sequences
    // output.replace(QRegExp("%\\w"),QString::null);
@@ -303,36 +320,50 @@ bool UnixProcessInfo::readProcessInfo(int pid , bool enableEnvironmentRead)
     }
     else
     {
-        qDebug() << __FUNCTION__ << "failed to open stat file";
+        setFileError( processInfo.error() ); 
         return false;
     }
     
     // check that data was read successfully
     bool ok = false;
     int foregroundPid = foregroundPidString.toInt(&ok);    
-    if (!ok) return false;
+    if (ok)
+        setForegroundPid(foregroundPid);
 
     int parentPid = parentPidString.toInt(&ok);
-    if (!ok) return false;
+    if (ok)
+        setParentPid(parentPid);
 
-    if (processNameString.isEmpty()) return false;
+    if (!processNameString.isEmpty()) 
+        setName(processNameString);
 
-    if (!readArguments(pid)) return false;
-   
-    if (!readCurrentDir(pid)) return false;
+    readArguments(pid);
+    readCurrentDir(pid); 
 
     if ( enableEnvironmentRead )
     {
-        if (!readEnvironment(pid)) return false;
+        readEnvironment(pid);
     }
 
     // update object state
     setPid(pid);
-    setName(processNameString);
-    setForegroundPid(foregroundPid);
-    setParentPid(parentPid);
 
     return true;
+}
+
+void ProcessInfo::setFileError( QFile::FileError error )
+{
+    switch ( error )
+    {
+        case PermissionsError:
+            setError( PermissionsError );
+            break;
+        case NoError:
+            setError( NoError );
+            break;
+        default:
+            setError( UnknownError );
+    }
 }
 
 ProcessInfo* ProcessInfo::newInstance(int pid,bool enableEnvironmentRead)
@@ -374,6 +405,10 @@ bool UnixProcessInfo::readArguments(int pid)
                 addArgument(entry);
         }    
     }
+    else
+    {
+        setFileError( argumentsFile.error() );
+    }
 
     return true;
 }
@@ -381,13 +416,21 @@ bool UnixProcessInfo::readArguments(int pid)
 bool UnixProcessInfo::readCurrentDir(int pid)
 {
     QFileInfo info( QString("/proc/%1/cwd").arg(pid) );
-    if ( info.isSymLink() )
+
+    const bool readable = info.isReadable();
+
+    if ( readable && info.isSymLink() )
     {
         setCurrentDir( info.symLinkTarget() );
         return true;
     }
     else
     {
+        if ( !readable )
+            setError( PermissionsError );
+        else
+            setError( UnknownError );
+        
         return false;
     }
 }
@@ -421,6 +464,10 @@ bool UnixProcessInfo::readEnvironment(int pid)
                 addEnvironmentBinding(name,value);  
             }  
         }
+    }
+    else
+    {
+        setFileError( environmentFile.error() );
     }
 
     return true;

@@ -21,6 +21,7 @@
 #define PROCESSINFO_H
 
 // Qt
+#include <QtCore/QFile>
 #include <QtCore/QMap>
 #include <QtCore/QString>
 #include <QtCore/QVector>
@@ -174,6 +175,25 @@ public:
      */
     QString format(const QString& text) const;
 
+    /** 
+     * This enum describes the errors which can occur when trying to read 
+     * a process's information.
+     */
+    enum Error
+    {
+        /** No error occurred. */
+        NoError,
+        /** The nature of the error is unknown. */
+        UnknownError,
+        /** Konsole does not have permission to obtain the process information. */
+        PermissionsError
+    };
+
+    /**
+     * Returns the last error which occurred.
+     */
+    Error error() const;
+
 protected:
     /**
      * Constructs a new process instance.  You should not call the constructor
@@ -214,6 +234,12 @@ protected:
     void setName(const QString& name);
     /** Sets the current working directory for the process */
     void setCurrentDir(const QString& dir);
+
+    /** Sets the error */
+    void setError( Error error );
+
+    /** Convenience method.  Sets the error based on a QFile error code. */ 
+    void setFileError( QFile::FileError error ); 
 
     /** 
      * Adds a commandline argument for the process, as returned
@@ -269,6 +295,9 @@ private:
     int _pid;  
     int _parentPid;
     int _foregroundPid;
+
+    Error _lastError;
+
     QString _name;
     QString _currentDir;
 
