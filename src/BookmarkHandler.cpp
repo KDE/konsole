@@ -85,14 +85,12 @@ void BookmarkHandler::openBookmark( const KBookmark & bm, Qt::MouseButtons, Qt::
     emit openUrl( bm.url() );
 }
 
-bool BookmarkHandler::addBookmarkEntry() const
+bool BookmarkHandler::enableOption(BookmarkOption option ) const
 {
-    return m_toplevel;
-}
-
-bool BookmarkHandler::editBookmarkEntry() const
-{
-    return m_toplevel;
+    if(option == ShowAddBookmark || option == ShowEditBookmark)
+        return m_toplevel;
+    else
+        return KBookmarkOwner::enableOption(option);
 }
 
 QString BookmarkHandler::currentUrl() const
