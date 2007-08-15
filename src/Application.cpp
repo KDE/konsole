@@ -26,6 +26,7 @@
 #include "kdebug.h"
 
 // Qt
+#include <QHashIterator>
 #include <QFileInfo>
 
 // KDE
@@ -128,6 +129,9 @@ int Application::newInstance()
         window->setDefaultProfile(key);
     }
 
+    processProfileChangeArgs(args);
+
+    // create new session
     createSession( window->defaultProfile() , QString() , window->viewManager() );
 
     // if the background-mode argument is supplied, start the background session
@@ -138,6 +142,37 @@ int Application::newInstance()
         window->show();
 
     return 0;
+}
+
+void Application::processProfileChangeArgs(KCmdLineArgs* args) 
+{
+    Profile* const defaultProfile = SessionManager::instance()->defaultProfile();
+
+    // run a custom command
+    if ( args->isSet("e") ) 
+    {
+        QStringList arguments;
+        arguments << args->getOption("e");
+        for ( int i = 0 ; i < args->count() ; i++ )
+           arguments << args->arg(i); 
+   
+        defaultProfile->setProperty(Profile::Command,args->getOption("e"));
+        defaultProfile->setProperty(Profile::Arguments,arguments);
+    }
+
+
+    // temporary changes to profile options specified on the command line
+    foreach( QString value , args->getOptionList("p") ) 
+    {
+        ProfileCommandParser parser;
+        
+        QHashIterator<Profile::Property,QVariant> iter(parser.parse(value));
+        while ( iter.hasNext() )
+        {
+            iter.next();
+            defaultProfile->setProperty(iter.key(),iter.value());
+        }        
+    }
 }
 
 void Application::startBackgroundMode(MainWindow* window)

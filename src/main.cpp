@@ -33,7 +33,7 @@
 #include <KWindowSystem>
 
 // bump the version to 2.0 before the KDE 4 release
-#define KONSOLE_VERSION "1.9"
+#define KONSOLE_VERSION "1.9.2"
 
 using namespace Konsole;
 
@@ -69,13 +69,17 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
     KCmdLineArgs::init(argc,argv,&about);
 
     KCmdLineOptions options;
-    /* { "command" , I18N_NOOP("Command to run in new Konsole instance") , 0 },*/
     options.add("profile \\<file>", ki18n("Name of profile to use for new Konsole instance"));
     options.add("list-profiles", ki18n("List the available profiles"));
     // TODO - Update this when F12 is no longer hard coded
     options.add("background-mode", ki18n("Start Konsole in the background"
                                     " and bring to the front when the F12"
                                     " key is pressed"));
+    // TODO - Document this option more clearly
+    options.add("p \\<property=value>",ki18n("Change the value of a profile property."));
+    options.add("!e \\<cmd>",ki18n("Command to execute"));
+    options.add("+[args]",ki18n("Arguments passed to command"));
+
     KCmdLineArgs::addCmdLineOptions(options);
     KUniqueApplication::addCmdLineOptions();
 
@@ -86,24 +90,7 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
         exit(0);
     }
 
-#if 0
-#ifdef Q_WS_X11
-    //Display* display = 0;
-    Display* display = XOpenDisplay(0);
-    Visual* visual = 0;
-    Colormap colormap = 0;
-    bool transparencyAvailable = KWindowSystem::compositingActive();
-
-    if ( transparencyAvailable )
-        getDisplayInformation(display,visual,colormap);
-
-    qDebug() << "Transparency available: " << transparencyAvailable;
-
-    Application app(display,Qt::HANDLE(visual),Qt::HANDLE(colormap));
-#else
-    Application app;
-#endif
-#endif
+    qDebug() << "Have compositing: " << KWindowSystem::compositingActive();
 
     Application app;
     return app.exec();   

@@ -36,12 +36,7 @@ The KDE 4.0 TODO List:
 
 - Support for common terminal command line options
 
-    Essential:
-        -e  : Execute command with arguments
-
     Nice to have:
-        - Ability to pass string for profile options on 
-          command line (same syntax as for konsoleprofile)
         -fg : Specify foreground color
         -bg : Specify background color 
 
@@ -211,6 +206,14 @@ do not always behave well with lots of successive image size changes.
 
 
 === DONE ===
+
+
+- Support for common terminal command line options
+    Essential:
+        -e  : Execute command with arguments
+    Nice To Have:
+        - Ability to pass string for profile options on 
+          command line (same syntax as for konsoleprofile)
 
 - Pressing a keyboard scroll key combination causes the view to scroll
   to the bottom of the output

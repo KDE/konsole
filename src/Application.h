@@ -84,6 +84,7 @@ private:
     void init();
     void listAvailableProfiles();
     void startBackgroundMode(MainWindow* window);
+    void processProfileChangeArgs(KCmdLineArgs* args);
 
     KCmdLineArgs*   _arguments;
     ProfileList*    _sessionList;
