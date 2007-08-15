@@ -215,8 +215,8 @@ private:
     SessionController* createController(Session* session , TerminalDisplay* display);
 
     // save and load default size for new displays
-    void setDefaultDisplaySize(int lines , int columns);
-    void getDefaultDisplaySize(int& lines , int& columns) const;
+    //void setDefaultDisplaySize(int lines , int columns);
+    //void getDefaultDisplaySize(int& lines , int& columns) const;
 
 private:
     QPointer<ViewSplitter>          _viewSplitter;

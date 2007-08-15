@@ -295,8 +295,8 @@ void ViewManager::sessionFinished()
     Q_ASSERT(session);
 
     // record the size of the last session
-    qDebug() << "Recording session size: " << session->size();
-    setDefaultDisplaySize( session->size().height() , session->size().width() );
+    //qDebug() << "Recording session size: " << session->size();
+    //setDefaultDisplaySize( session->size().height() , session->size().width() );
 
     // close attached views
     QList<TerminalDisplay*> children = _viewSplitter->findChildren<TerminalDisplay*>();
@@ -475,12 +475,15 @@ void ViewManager::createView(Session* session)
         applyProfile(display,session->profileKey());
         
         // set initial size
+#if 0
         int defaultLines = 0;
         int defaultColumns = 0;
         getDefaultDisplaySize(defaultLines,defaultColumns);
         qDebug() << "Setting default display size to " << QSize(defaultColumns,defaultLines);
         display->setSize(defaultColumns,defaultLines);
-        
+#endif
+        display->setSize(80,40);
+
         ViewProperties* properties = createController(session,display);
 
         _sessionMap[display] = session; 
@@ -498,6 +501,7 @@ void ViewManager::createView(Session* session)
     }
 }
 
+#if 0
 void ViewManager::getDefaultDisplaySize(int& lines , int& columns) const
 {
     const KConfigGroup group = KGlobal::config()->group("Last Session");
@@ -510,6 +514,7 @@ void ViewManager::setDefaultDisplaySize(int lines , int columns)
     KConfigGroup group = KGlobal::config()->group("Last Session");
     group.writeEntry("WindowSize",QSize(columns,lines));
 }
+#endif
 
 ViewContainer* ViewManager::createContainer(const QString& profileKey)
 {

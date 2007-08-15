@@ -83,6 +83,9 @@ MainWindow::MainWindow()
     // replace standard shortcuts which cannot be used in a terminal
     // (as they are reserved for use by terminal programs)
     correctShortcuts();
+
+    // enable save and restore of window size
+    setAutoSaveSettings("MainWindow",true);
 }
 
 void MainWindow::correctShortcuts()
