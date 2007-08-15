@@ -120,15 +120,17 @@ void MainWindow::activeViewChanged(SessionController* controller)
     connect( bookmarkHandler() , SIGNAL(openUrl(const KUrl&)) , controller ,
              SLOT(openUrl(const KUrl&)) );
 
- 
-    // listen for title changes from the current session
+    // disconnect existing controller's UI 
     if ( _pluggedController )
     {
         disconnect( _pluggedController , SIGNAL(titleChanged(ViewProperties*)) 
                      , this , SLOT(activeViewTitleChanged(ViewProperties*)) );
         guiFactory()->removeClient(_pluggedController);
+
+        _pluggedController->setSearchBar(0);
     }
 
+    // listen for title changes from the current session
     Q_ASSERT( controller );
 
     connect( controller , SIGNAL(titleChanged(ViewProperties*)) , 
