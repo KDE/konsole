@@ -120,10 +120,7 @@ void MainWindow::activeViewChanged(SessionController* controller)
     connect( bookmarkHandler() , SIGNAL(openUrl(const KUrl&)) , controller ,
              SLOT(openUrl(const KUrl&)) );
 
-    // set the current session's search bar
-    controller->setSearchBar( searchBar() );
-    controller->setShowMenuAction( _toggleMenuBarAction );
-
+ 
     // listen for title changes from the current session
     if ( _pluggedController )
     {
@@ -138,6 +135,10 @@ void MainWindow::activeViewChanged(SessionController* controller)
             this , SLOT(activeViewTitleChanged(ViewProperties*)) );
 
     guiFactory()->addClient(controller);
+
+    // set the current session's search bar
+    controller->setSearchBar( searchBar() );
+    controller->setShowMenuAction( _toggleMenuBarAction );
 
     // update session title to match newly activated session
     activeViewTitleChanged(controller);

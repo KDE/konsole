@@ -645,10 +645,12 @@ void SessionController::searchClosed()
     _searchToggleAction->toggle();
 }
 
+#if 0
 void SessionController::searchHistory()
 {
     searchHistory(true);
 }
+#endif
 
 // searchHistory() may be called either as a result of clicking a menu item or 
 // as a result of changing the search bar widget

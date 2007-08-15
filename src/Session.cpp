@@ -207,6 +207,8 @@ void Session::addView(TerminalDisplay* widget)
         // indicates whether or not it is interested in mouse signals
         connect( _emulation , SIGNAL(programUsesMouseChanged(bool)) , widget , 
                SLOT(setUsesMouse(bool)) );
+
+        widget->setUsesMouse( _emulation->programUsesMouse() );
   
         widget->setScreenWindow(_emulation->createWindow());
     }

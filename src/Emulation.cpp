@@ -67,10 +67,11 @@ Emulation::Emulation() :
   _currentScreen(0),
   _codec(0),
   _decoder(0),
-  _keyTranslator(0)
+  _keyTranslator(0),
+  _usesMouse(false)
 {
 
-  //initialize screens with a default size
+  // create screens with a default size
   _screen[0] = new Screen(40,80);
   _screen[1] = new Screen(40,80);
   _currentScreen = _screen[0];
@@ -78,7 +79,22 @@ Emulation::Emulation() :
   QObject::connect(&_bulkTimer1, SIGNAL(timeout()), this, SLOT(showBulk()) );
   QObject::connect(&_bulkTimer2, SIGNAL(timeout()), this, SLOT(showBulk()) );
    
-  setKeyBindings(0); // Default keymap
+  // default keymap
+  setKeyBindings(0); 
+
+  // listen for mouse status changes
+  connect( this , SIGNAL(programUsesMouseChanged(bool)) , 
+           SLOT(usesMouseChanged(bool)) );
+}
+
+bool Emulation::programUsesMouse() const
+{
+    return _usesMouse;
+}
+
+void Emulation::usesMouseChanged(bool usesMouse)
+{
+    _usesMouse = usesMouse;
 }
 
 ScreenWindow* Emulation::createWindow()

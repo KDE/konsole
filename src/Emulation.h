@@ -427,8 +427,11 @@ private slots:
   // view
   void showBulk(); 
 
+  void usesMouseChanged(bool usesMouse);
+
 private:
 
+  bool _usesMouse;
   QTimer _bulkTimer1;
   QTimer _bulkTimer2;
   
