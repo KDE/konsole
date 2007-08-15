@@ -155,7 +155,7 @@ private slots:
     void clearAndReset();
     void editCurrentProfile();
     void changeCodec(QTextCodec* codec);
-    void searchHistory();
+    //void searchHistory();
     void searchHistory(bool showSearchBar);
     void findNextInHistory();
     void findPreviousInHistory();
