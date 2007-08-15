@@ -34,6 +34,17 @@ The KDE 4.0 TODO List:
     - Consider behaviour when there are multiple views open 
       on a single session.
 
+- Support for common terminal command line options
+
+    Essential:
+        -e  : Execute command with arguments
+
+    Nice to have:
+        - Ability to pass string for profile options on 
+          command line (same syntax as for konsoleprofile)
+        -fg : Specify foreground color
+        -bg : Specify background color 
+
 - Implement a DBus interface for Konsole.
   Look for Konsole bug reports on bugs.kde.org containing
   the term "DCOP" for ideas on what users would like
@@ -55,10 +66,22 @@ The KDE 4.0 TODO List:
 - Display a warning if, on an un-composited desktop, the user chooses a colour scheme which uses
   transparency.
 
+- Double clicking on the tab bar should open a new tab 
+
+- Double clicking on a tab should prompt to rename it
+
+- Konsole window should remember its size when closed
+
+- Determining which view is focused in split view mode is currently difficult, the only
+  indication is the cursor's appearence (and then, only with a block cursor).
+
+  Draw a frame around the view to solve this problem?
+
 == BUGS ==
 
-- Pressing and releasing the Alt key does not focus the menu as it should.  
-  This prevents keyboard navigation of the menu items.  MUSTFIX for KDE 4.
+- Keyboard shortcuts for session-specific actions no longer work properly in split-view mode,
+  there is a warning about ambiguous shortcuts printed to the terminal.  Activating the 
+  items from the menu does work. 
 
 - Allow the user to over-ride the "no Ctrl+[Key] shortcuts" limitation with shortcuts
 set in the configuration dialog, but warn the user if they try to do so.  This is the 
@@ -189,6 +212,14 @@ do not always behave well with lots of successive image size changes.
 
 === DONE ===
 
+- Pressing a keyboard scroll key combination causes the view to scroll
+  to the bottom of the output
+
+- Pressing and releasing the Alt key does not focus the menu as it should.  
+  This prevents keyboard navigation of the menu items.  MUSTFIX for KDE 4.
+
+  >> Appears to be a style-dependant problem.  Works with supplied Qt styles.
+
 - When composing the short directory name for the tab title, 
   add a means to strip or ignore common prefixes such 
   as 'src','build','tmp','bin','lib' etc. to provide better
@@ -207,8 +238,6 @@ do not always behave well with lots of successive image size changes.
 
   '%d' in tab titles would be replaced with 'konsole/s' and
   'kate/s' instead of 'src' in both.
-
-  [ IN PROGRESS ]
 
 - Random background colors in color schemes, for easy
   identification of Konsole windows when several are open
