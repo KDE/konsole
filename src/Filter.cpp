@@ -357,7 +357,7 @@ QRegExp RegExpFilter::regExp() const
 }
 /*void RegExpFilter::reset(int)
 {
-    _buffer = QString::null;
+    _buffer = QString();
 }*/
 void RegExpFilter::process()
 {
@@ -455,7 +455,7 @@ void UrlFilter::HotSpot::activate(QObject* object)
 
     const UrlType kind = urlType();
 
-    const QString& actionName = object ? object->objectName() : QString::null;
+    const QString& actionName = object ? object->objectName() : QString::null;	//krazy:exclude=nullstrassign for old broken gzz
 
     if ( actionName == "copy-action" )
     {

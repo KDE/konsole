@@ -582,14 +582,14 @@ QList<KeyboardTranslatorReader::Token> KeyboardTranslatorReader::tokenize(const 
 
     if ( title.exactMatch(text) )
     {
-        Token titleToken = { Token::TitleKeyword , QString::null };
+        Token titleToken = { Token::TitleKeyword , QString::null };	//krazy:exclude=nullstrassign for old broken gcc
         Token textToken = { Token::TitleText , title.capturedTexts()[1] };
     
         list << titleToken << textToken;
     }
     else if  ( key.exactMatch(text) )
     {
-        Token keyToken = { Token::KeyKeyword , QString::null };
+        Token keyToken = { Token::KeyKeyword , QString::null };	//krazy:exclude=nullstrassign for old broken gcc
         Token sequenceToken = { Token::KeySequence , key.capturedTexts()[1].remove(' ') };
 
         list << keyToken << sequenceToken;
