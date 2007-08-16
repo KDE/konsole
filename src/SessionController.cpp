@@ -117,7 +117,10 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 
     // take a snapshot of the session state every so often when
     // user activity occurs
-    QTimer* activityTimer = new QTimer(this);
+    //
+    // the timer is owned by the session so that it will be destroyed along
+    // with the session
+    QTimer* activityTimer = new QTimer(_session);
     activityTimer->setSingleShot(true);
     activityTimer->setInterval(2000);
     connect( _view , SIGNAL(keyPressedSignal(QKeyEvent*)) , activityTimer , SLOT(start()) );
@@ -144,8 +147,7 @@ void SessionController::requireUrlFilterUpdate()
 }
 void SessionController::snapshot()
 {
-    //qDebug() << "session" << _session->title(Session::NameRole) << "snapshot";
-    
+    Q_ASSERT( _session != 0 );
 
     ProcessInfo* process = 0;
     ProcessInfo* snapshot = ProcessInfo::newInstance(_session->processId());
