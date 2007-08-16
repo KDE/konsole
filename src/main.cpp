@@ -40,12 +40,7 @@ using namespace Konsole;
 // fills the KAboutData structure with information about contributors to 
 // Konsole
 void fillAboutData(KAboutData& aboutData);
-
-#if 0
-#ifdef Q_WS_X11
-void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap);
-#endif
-#endif
+void fillCommandLineOptions(KCmdLineOptions& options);
 
 // ***
 // 
@@ -67,19 +62,8 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
     fillAboutData(about);
 
     KCmdLineArgs::init(argc,argv,&about);
-
     KCmdLineOptions options;
-    options.add("profile \\<file>", ki18n("Name of profile to use for new Konsole instance"));
-    options.add("list-profiles", ki18n("List the available profiles"));
-    // TODO - Update this when F12 is no longer hard coded
-    options.add("background-mode", ki18n("Start Konsole in the background"
-                                    " and bring to the front when the F12"
-                                    " key is pressed"));
-    // TODO - Document this option more clearly
-    options.add("p \\<property=value>",ki18n("Change the value of a profile property."));
-    options.add("!e \\<cmd>",ki18n("Command to execute"));
-    options.add("+[args]",ki18n("Arguments passed to command"));
-
+    fillCommandLineOptions(options);
     KCmdLineArgs::addCmdLineOptions(options);
     KUniqueApplication::addCmdLineOptions();
 
@@ -94,6 +78,22 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
 
     Application app;
     return app.exec();   
+}
+
+void fillCommandLineOptions(KCmdLineOptions& options)
+{
+    options.add("profile \\<file>", ki18n("Name of profile to use for new Konsole instance"));
+    options.add("list-profiles", ki18n("List the available profiles"));
+    // TODO - Update this when F12 is no longer hard coded
+    options.add("background-mode", ki18n("Start Konsole in the background"
+                                    " and bring to the front when the F12"
+                                    " key is pressed"));
+    options.add("new-tab",ki18n("Create a new tab in an existing window rather than creating a new window"));
+    // TODO - Document this option more clearly
+    options.add("p \\<property=value>",ki18n("Change the value of a profile property."));
+    options.add("!e \\<cmd>",ki18n("Command to execute"));
+    options.add("+[args]",ki18n("Arguments passed to command"));
+
 }
 
 void fillAboutData(KAboutData& aboutData)

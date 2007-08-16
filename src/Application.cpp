@@ -120,8 +120,25 @@ int Application::newInstance()
         return 0;
     }
 
-    // create a new window and session to run in it 
-    MainWindow* window = newMainWindow();
+    // create a new window or use an existing one 
+    MainWindow* window = 0;
+    
+    if ( args->isSet("new-tab") )
+    {
+        QListIterator<QWidget*> iter(topLevelWidgets());
+        iter.toBack();
+        while ( iter.hasPrevious() )
+        {
+            window = qobject_cast<MainWindow*>(iter.previous());
+            if ( window != 0 )
+                break;
+        } 
+    }
+    
+    if ( window == 0 )
+    {
+        window = newMainWindow();
+    }
 
     if ( args->isSet("profile") )
     {
