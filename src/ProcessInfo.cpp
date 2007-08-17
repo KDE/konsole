@@ -93,7 +93,7 @@ QString ProcessInfo::format(const QString& input) const
    output.replace("%d",formatShortDir(dir));
    
    // remove any remaining %[LETTER] sequences
-   // output.replace(QRegExp("%\\w"),QString::null);	//krazy:exclude=nullstrassign for old broken gcc
+   // output.replace(QRegExp("%\\w"), QString());
 
    return output;
 }

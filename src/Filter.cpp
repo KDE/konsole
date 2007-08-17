@@ -455,7 +455,7 @@ void UrlFilter::HotSpot::activate(QObject* object)
 
     const UrlType kind = urlType();
 
-    const QString& actionName = object ? object->objectName() : QString::null;	//krazy:exclude=nullstrassign for old broken gzz
+    const QString& actionName = object ? object->objectName() : QString();
 
     if ( actionName == "copy-action" )
     {
