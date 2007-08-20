@@ -317,7 +317,7 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
         {
             if ( _view->screenWindow() && !_viewUrlFilter )
             {
-                qDebug() << k_funcinfo << "Creating url filter";
+                qDebug() << "Creating url filter";
 
                 connect( _view->screenWindow() , SIGNAL(scrolled(int)) , this ,
                         SLOT(requireUrlFilterUpdate()) );
@@ -329,7 +329,7 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
                 _view->filterChain()->addFilter( _viewUrlFilter );
             }
 
-            //qDebug() << k_funcinfo << "Updating url filter.";
+            //qDebug() << "Updating url filter.";
 
             _view->processFilters();
             _urlFilterUpdateRequired = false;
