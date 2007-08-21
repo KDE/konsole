@@ -17,8 +17,8 @@
     02110-1301  USA.
 */
 
-#ifndef SESSIONLISTWIDGET_H
-#define SESSIONLISTWIDGET_H
+#ifndef PROFILELISTWIDGET_H
+#define PROFILELISTWIDGET_H
 
 // Qt
 #include <QtGui/QListWidget>
@@ -54,4 +54,4 @@ public:
                             const QModelIndex& index) const;
 };*/
 
-#endif // SESSIONLISTWIDGET_H
+#endif // PROFILELISTWIDGET_H

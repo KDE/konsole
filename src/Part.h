@@ -57,7 +57,7 @@ Q_OBJECT
     Q_INTERFACES(TerminalInterface) 
 public:
     /** Constructs a new Konsole part with the specified parent. */
-    Part(QWidget* parentWidget , QObject* parent = 0);
+    explicit Part(QWidget* parentWidget , QObject* parent = 0);
     virtual ~Part();
 
     /** Reimplemented from TerminalInterface. */

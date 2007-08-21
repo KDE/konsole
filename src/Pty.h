@@ -74,7 +74,7 @@ Q_OBJECT
      * @param program Path to the program to start
      * @param arguments Arguments to pass to the program being started
      * @param environment A list of key=value pairs which will be added
-     * to the environemnt for the new process.  At the very least this
+     * to the environment for the new process.  At the very least this
      * should include an assignment for the TERM environment variable.
      * @param winid Specifies the value of the WINDOWID environment variable
      * in the process's environment.

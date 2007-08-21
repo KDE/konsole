@@ -17,8 +17,8 @@
     02110-1301  USA.
 */
 
-#ifndef SESSIONLIST_H
-#define SESSIONLIST_H
+#ifndef PROFILELIST_H
+#define PROFILELIST_H
 
 #include <QtCore/QList>
 #include <QtCore/QObject>
@@ -95,4 +95,4 @@ private:
 
 }
 
-#endif
+#endif // PROFILELIST_H

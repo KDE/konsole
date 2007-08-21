@@ -17,8 +17,8 @@
     02110-1301  USA.
 */
 
-#ifndef EDITSESSIONDIALOG_H
-#define EDITSESSIONDIALOG_H
+#ifndef EDITPROFILEDIALOG_H
+#define EDITPROFILEDIALOG_H
 
 // Qt
 #include <QtGui/QAbstractItemDelegate>
@@ -272,5 +272,5 @@ public:
 };
 
 }
-#endif // EDITSESSIONDIALOG_H
 
+#endif // EDITPROFILEDIALOG_H
