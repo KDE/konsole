@@ -57,6 +57,8 @@ KParts::Part* PartFactory::createPartObject( QWidget* parentWidget,
     return new Part(parentWidget,parent);
 }
 
+K_EXPORT_PLUGIN(Konsole::PartFactory())
+
 Part::Part(QWidget* parentWidget , QObject* parent)
  : KParts::ReadOnlyPart(parent)
   ,_viewManager(0)
