@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Type=Application
 Exec=konsole --type su
-Icon=konsole
+Icon=utilities-terminal
 DocPath=konsole/index.html
 MimeType=application/x-konsole;
 Terminal=false

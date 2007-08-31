@@ -114,7 +114,7 @@ FallbackProfile::FallbackProfile()
     // Fallback settings
     setProperty(Name,i18n("Shell"));
     setProperty(Command,getenv("SHELL"));
-    setProperty(Icon,"konsole");
+    setProperty(Icon,"utilities-terminal");
     setProperty(Arguments,QStringList() << getenv("SHELL"));
     setProperty(Environment,QStringList() << "TERM=xterm");
     setProperty(LocalTabTitleFormat,"%d : %n");

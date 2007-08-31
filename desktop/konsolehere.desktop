@@ -96,5 +96,5 @@ Name[wa]=Drovi on terminå chal
 Name[x-test]=xxOpen Terminal Herexx
 Name[xh]=Vula Isiphelo Sendlela Apha
 Name[zh_TW]=在這裡開啟終端機
-Icon=konsole
+Icon=utilities-terminal
 Exec=konsole --workdir %f

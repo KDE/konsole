@@ -1,5 +1,5 @@
 [Global]
-IconName=konsole
+IconName=utilities-terminal
 Comment=Konsole
 Comment[x-test]=xxKonsolexx
 
