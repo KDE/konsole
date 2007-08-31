@@ -431,9 +431,9 @@ QString UrlFilter::HotSpot::tooltip() const
     const UrlType kind = urlType();
 
     if ( kind == StandardUrl )
-        return i18n("Click to open '%1' in your browser.",url);
+        return i18n("Click to open %1 in your browser.",url);
     else if ( kind == Email )
-        return i18n("Click to send an email to '%1'.",url);
+        return i18n("Click to send an email to %1.",url);
     else
         return QString();
 }

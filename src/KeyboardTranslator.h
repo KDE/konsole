@@ -141,7 +141,7 @@ public:
          * Returns the character sequence associated with this entry,
          * with any non-printable characters replaced with escape sequences.
          *
-         * eg. \E for Escape, \t for tab, \n for new line.
+         * eg. \\E for Escape, \\t for tab, \\n for new line.
          */
         QByteArray escapedText() const;
 
@@ -151,7 +151,7 @@ public:
         void setKeyCode(int keyCode);
 
         /** 
-         * Returns the a bitwise-OR of the enabled keyboard modifiers associated with this entry. 
+         * Returns a bitwise-OR of the enabled keyboard modifiers associated with this entry. 
          * If a modifier is set in modifierMask() but not in modifiers(), this means that the entry
          * only matches when that modifier is NOT pressed.
          *

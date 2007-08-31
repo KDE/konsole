@@ -282,11 +282,6 @@ void KeyboardTranslatorReader::readNext()
 
             _nextEntry = newEntry;
 
-            //qDebug() << "Any modifier state: " << (int)(flags & KeyboardTranslator::AnyModifierState);
-            //qDebug() << "Any modifier mask: " << (int)(flagMask & KeyboardTranslator::AnyModifierState);
-
-           // qDebug() << "Parsed entry:" << _nextEntry.conditionToString(); 
-
             _hasNext = true;
 
             return;
@@ -311,8 +306,6 @@ bool KeyboardTranslatorReader::decodeSequence(const QString& text,
     Qt::KeyboardModifiers tempModifierMask = modifierMask;
     KeyboardTranslator::States tempFlags = flags;
     KeyboardTranslator::States tempFlagMask = flagMask;
-
-  //  qDebug() << "Input text:" << text;
 
     for ( int i = 0 ; i < text.count() ; i++ )
     {
@@ -341,16 +334,6 @@ bool KeyboardTranslatorReader::decodeSequence(const QString& text,
             }
             else if ( parseAsStateFlag(buffer,itemFlag) )
             {
-#if 0
-                if ( itemFlag == KeyboardTranslator::AnyModifierState )
-                {
-                    qDebug() << "Flag mask: " << (int)(tempFlagMask & KeyboardTranslator::AnyModifierState);
-                    qDebug() << "Flags: " << (int)(tempFlags & KeyboardTranslator::AnyModifierState);
-                
-                    qDebug() << "Wanted: " << isWanted;
-                }
-#endif
-
                 tempFlagMask |= itemFlag;
 
                 if ( isWanted )
@@ -435,80 +418,6 @@ bool KeyboardTranslatorReader::parseAsKeyCode(const QString& item , int& keyCode
     return true;
 }
 
-#if 0
-QKeySequence KeyboardTranslatorReader::decodeSequence(const QString& text , KeyboardTranslator::State& stateFlags )
-{
-    int state = KeyboardTranslator::NoState;
-    stateFlags = (KeyboardTranslator::State)state;
-
-    QKeySequence sequence = QKeySequence::fromString(text);
-
-    if ( sequence.count() > 0 )
-       return sequence;
-
-    // if the sequence is empty, it failed to decode properly
-    // this can happen if the file was produced by a KDE 3 version
-    // of Konsole
-    // 
-    // possible reasons:
-    //      - Key sequence includes names not known to Qt
-    //        ( eg "Ansi" , "NewLine" )
-    //      - Key sequence has modifiers at the end of the line ( eg "F10+Shift" )
-    //        instead of at the start, which QKeySequence requires
-    //      - Use of '-' in front of modifiers to indicate that they are 
-    //        not required
-
-    int modifiers = Qt::NoModifier;
-
-    // first pass
-    // rearrange modifers and try decoding again
-    if ( text.contains("+shift",Qt::CaseInsensitive) )
-        modifiers |= Qt::ShiftModifier;
-    if ( text.contains("+ctrl",Qt::CaseInsensitive) )
-        modifiers |= Qt::ControlModifier;
-    if ( text.contains("+control",Qt::CaseInsensitive) )
-        modifiers |= Qt::ControlModifier;
-    if ( text.contains("+alt",Qt::CaseInsensitive) )
-        modifiers |= Qt::AltModifier;
-    if ( text.contains("+meta",Qt::CaseInsensitive) )
-        modifiers |= Qt::MetaModifier;
-    if ( text.contains("+ansi",Qt::CaseInsensitive) )
-        state |= KeyboardTranslator::AnsiState;
-    if ( text.contains("+appcukeys",Qt::CaseInsensitive) )
-        state |= KeyboardTranslator::CursorKeysState;
-    if ( text.contains("+newline",Qt::CaseInsensitive) )
-        state |= KeyboardTranslator::NewLineState;
-
-    static QRegExp modifierRemover("((\\+|\\-)shift|"
-                                   "(\\+|\\-)ctrl|"
-                                   "(\\+|\\-)control|"
-                                   "(\\+|\\-)alt|"
-                                   "(\\+|\\-)ansi|"
-                                   "(\\+|\\-)appcukeys|"
-                                   "(\\+|\\-)newline|"
-                                   "(\\+|\\-)meta)",Qt::CaseInsensitive);
-    QString newText(text);
-    newText.replace(modifierRemover,QString());
-
-    if ( modifiers & Qt::ShiftModifier )
-        newText.prepend("shift+");
-    if ( modifiers & Qt::ControlModifier )
-        newText.prepend("ctrl+");
-    if ( modifiers & Qt::AltModifier )
-        newText.prepend("alt+");
-    if ( modifiers & Qt::MetaModifier )
-        newText.prepend("meta+");
-
-    //qDebug() << "modifier: " << newText;
-    sequence = QKeySequence::fromString(newText);
-    //qDebug() << "after: " << sequence;
-
-    stateFlags = (KeyboardTranslator::State)state;
-
-    return sequence;
-}
-#endif 
-
 QString KeyboardTranslatorReader::description() const
 {
     return _description;
@@ -572,11 +481,8 @@ QList<KeyboardTranslatorReader::Token> KeyboardTranslatorReader::tokenize(const 
 
     QList<Token> list;
 
-   // qDebug() << "line: " << text;
-
     if ( text.isEmpty() || comment.exactMatch(text) )
     {
-     //   qDebug() << "This is a comment";
         return list;
     }
 
@@ -635,24 +541,6 @@ KeyboardTranslator::Entry::Entry()
 {
 }
 
-#if 0
-QKeySequence KeyboardTranslator::Entry::keySequence() const
-{
-    int code = _keyCode;
-
-    if ( _modifiers & Qt::AltModifier )
-        code += Qt::ALT;
-    if ( _modifiers & Qt::ControlModifier )
-        code += Qt::CTRL;
-    if ( _modifiers & Qt::ShiftModifier )
-        code += Qt::SHIFT;
-    if ( _modifiers & Qt::MetaModifier )
-        code += Qt::META;
-
-    return QKeySequence(code);
-}
-#endif 
-
 bool KeyboardTranslator::Entry::operator==(const Entry& rhs) const
 {
     return _keyCode == rhs._keyCode &&
@@ -668,19 +556,11 @@ bool KeyboardTranslator::Entry::matches(int keyCode ,
                                         Qt::KeyboardModifiers modifiers,
                                         States state) const
 {
-
-    //qDebug() << "Checking for match" << conditionToString();
-    //qDebug() << "Checking entry.  test key code = " << keyCode << " entry key code =" << _keyCode;
-
     if ( _keyCode != keyCode )
         return false;
 
-    //qDebug() << "Checking modifiers";
-
     if ( (modifiers & _modifierMask) != (_modifiers & _modifierMask) ) 
         return false;
-
-    //qDebug() << "Checking state";
 
     // if modifiers is non-zero, the 'any modifier' state is implicit
     if ( modifiers != 0 )
@@ -688,8 +568,6 @@ bool KeyboardTranslator::Entry::matches(int keyCode ,
 
     if ( (state & _stateMask) != (_state & _stateMask) )
         return false;
-
-    //qDebug() << "Checking any mod state";
 
     // special handling for the 'Any Modifier' state, which checks for the presence of 
     // any or no modifiers 
@@ -703,8 +581,6 @@ bool KeyboardTranslator::Entry::matches(int keyCode ,
         if ( !(_state & KeyboardTranslator::AnyModifierState) && modifiers != 0 )
             return false;
     }
-
-    //qDebug() << "Entry matches" << conditionToString();
 
     return true;
 }
@@ -790,11 +666,7 @@ QByteArray KeyboardTranslator::Entry::unescape(const QByteArray& input) const
                result.replace(i,charsToRemove,replacement);
         }
     }
-
-    //qDebug() << "Unescaped" << input;
-    //for ( int i = 0 ; i < result.count() ; i++ )
-    //    qDebug() << (int)result[i] << ";" << result[i];
-
+    
     return result;
 }
 
@@ -880,16 +752,6 @@ KeyboardTranslator::KeyboardTranslator(const QString& name)
 {
 }
 
-#if 0
-KeyboardTranslator::KeyboardTranslator(const KeyboardTranslator& other)
-: _name(other._name)
-{
-    _description = other._description;
-
-    // TODO: Copy keyboard entries
-}
-#endif
-
 void KeyboardTranslator::setDescription(const QString& description) 
 {
     _description = description;
@@ -929,17 +791,10 @@ void KeyboardTranslator::removeEntry(const Entry& entry)
 }
 KeyboardTranslator::Entry KeyboardTranslator::findEntry(int keyCode, Qt::KeyboardModifiers modifiers, States state) const
 {
-//    qDebug() << "Searching for entry for key code =" << keyCode << ", modifiers =" << modifiers;  
-//    printf("modifiers in hex %x\n",(int)modifiers);
-
-    //qDebug() << "Translator keys, count: " << _entries.count() << _entries.keys();
-
     if ( _entries.contains(keyCode) )
     {
         QList<Entry> entriesForKey = _entries.values(keyCode);
         
-        //qDebug() << "Found" << entriesForKey.count() << "matches for key code" << keyCode;
-
         QListIterator<Entry> iter(entriesForKey);
 
         while (iter.hasNext())
@@ -947,8 +802,6 @@ KeyboardTranslator::Entry KeyboardTranslator::findEntry(int keyCode, Qt::Keyboar
             const Entry& next = iter.next();
             if ( next.matches(keyCode,modifiers,state) )
                 return next;
-
-            //qDebug() << "Entry" << next.resultToString() << "did not match.";
         }
 
         return Entry(); // entry not found

@@ -188,6 +188,8 @@ private:
 
     void updateCaption(const QString& profileName);
 
+    void updateTransparencyWarning();
+
     struct RadioOption
     {
        QAbstractButton* button;
@@ -247,27 +249,6 @@ public:
 
 private:
     QPointer<QTimeLine> _entryTimeLine;
-
-   // virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, 
-   //                               const QModelIndex& index) const;
-   // virtual bool editorEvent(QEvent* event,QAbstractItemModel* model,
-   //                          const QStyleOptionViewItem& option, const QModelIndex& index);
-
-};
-
-/**
- * A delegate which can display and edit key bindings in a view.
- */
-class KeyBindingViewDelegate : public QAbstractItemDelegate
-{
-public:
-    KeyBindingViewDelegate(QObject* parent = 0);
-
-    // reimplemented
-    virtual void paint(QPainter* painter, const QStyleOptionViewItem& option,
-                       const QModelIndex& index) const;
-    virtual QSize sizeHint( const QStyleOptionViewItem& option,
-                       const QModelIndex& index) const;
 
 };
 

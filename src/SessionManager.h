@@ -288,8 +288,11 @@ private:
     void loadFavorites();
     //saves the set of favorite sessions
     void saveFavorites();
-            // saves a profile to a file
-    void saveProfile(const QString& path , Profile* profile);
+    // saves a profile to a file
+    // returns the path to which the profile was saved, which will
+    // be the same as the 'path' argument if valid or a newly generated path
+    // otherwise
+    QString saveProfile(const QString& path , Profile* profile);
 
     // applies updates to the profile associated with @p key
     // to all sessions currently using that profile

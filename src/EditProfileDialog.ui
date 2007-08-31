@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>441</width>
-    <height>505</height>
+    <height>485</height>
    </rect>
   </property>
   <layout class="QHBoxLayout" >
@@ -362,7 +362,7 @@
          <property name="sizeHint" >
           <size>
            <width>20</width>
-           <height>40</height>
+           <height>10</height>
           </size>
          </property>
         </spacer>
@@ -443,11 +443,58 @@
             </property>
             <property name="sizeHint" >
              <size>
-              <width>75</width>
-              <height>201</height>
+              <width>20</width>
+              <height>20</height>
              </size>
             </property>
            </spacer>
+          </item>
+          <item row="5" column="0" >
+           <widget class="QWidget" native="1" name="transparencyWarningWidget" >
+            <property name="autoFillBackground" >
+             <bool>false</bool>
+            </property>
+            <property name="styleSheet" >
+             <string>* { background-color: #FFCCCC ; border-radius: 3px }</string>
+            </property>
+            <layout class="QHBoxLayout" >
+             <property name="leftMargin" >
+              <number>4</number>
+             </property>
+             <property name="topMargin" >
+              <number>4</number>
+             </property>
+             <property name="rightMargin" >
+              <number>4</number>
+             </property>
+             <property name="bottomMargin" >
+              <number>4</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="transparencyWarningIcon" >
+               <property name="styleSheet" >
+                <string/>
+               </property>
+               <property name="text" >
+                <string>TextLabel</string>
+               </property>
+               <property name="alignment" >
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="transparencyWarningLabel" >
+               <property name="text" >
+                <string>This colour scheme has a transparent background which does not appear to be supported on your desktop.</string>
+               </property>
+               <property name="wordWrap" >
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -612,7 +659,7 @@
               </property>
               <property name="sizeHint" >
                <size>
-                <width>40</width>
+                <width>20</width>
                 <height>20</height>
                </size>
               </property>
@@ -707,7 +754,7 @@
          <property name="sizeHint" >
           <size>
            <width>20</width>
-           <height>40</height>
+           <height>20</height>
           </size>
          </property>
         </spacer>
@@ -795,8 +842,8 @@
             </property>
             <property name="sizeHint" >
              <size>
-              <width>71</width>
-              <height>101</height>
+              <width>20</width>
+              <height>20</height>
              </size>
             </property>
            </spacer>

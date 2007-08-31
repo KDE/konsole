@@ -56,8 +56,6 @@ ShellCommand::ShellCommand(const QString& fullCommand)
             }
         }
     }
-
-    //qDebug() << "Arguments:" << _arguments;
 }
 ShellCommand::ShellCommand(const QString& command , const QStringList& arguments)
 {
@@ -110,13 +108,11 @@ QString ShellCommand::expand(const QString& text)
 /*
  * expandEnv
  *
- * Expand environment variables in text. Escaped '$' are ignored.
- * Return true if expansion was made.
+ * Expand environment variables in text. Escaped '$' characters are ignored.
+ * Return true if any variables were expanded
  */
 static bool expandEnv( QString &text )
 {
-    qDebug() << "Expanding text: " << text;
-
 	// Find all environment variables beginning with '$'
 	//
 	int pos = 0;
@@ -164,8 +160,6 @@ static bool expandEnv( QString &text )
 			}
 		}
 	}
-
-    qDebug() << "Expanded to" << text;
 
 	return expanded;
 }

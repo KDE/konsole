@@ -191,6 +191,9 @@ SessionManager::~SessionManager()
     // save shortcuts
     saveShortcuts();
 
+    // save favorites
+    saveFavorites();
+
     // delete remaining sessions
     foreach( Session* session , _sessions )
     {
@@ -296,7 +299,7 @@ QString SessionManager::defaultProfileKey() const
     return _defaultProfile;
 }
 
-void SessionManager::saveProfile(const QString& path , Profile* info)
+QString SessionManager::saveProfile(const QString& path , Profile* info)
 {
     ProfileWriter* writer = new KDE4ProfileWriter;
 
@@ -308,6 +311,8 @@ void SessionManager::saveProfile(const QString& path , Profile* info)
     writer->writeProfile(newPath,info);
 
     delete writer;
+
+    return newPath;
 }
 
 void SessionManager::changeProfile(const QString& key , 
@@ -347,12 +352,12 @@ void SessionManager::changeProfile(const QString& key ,
         if ( info->isPropertySet(Profile::Path) )
         {
             qDebug() << "Profile saved to existing path: " << info->path();
-            saveProfile(info->path(),info);
+            info->setProperty(Profile::Path,saveProfile(info->path(),info));
         }
         else
         {
             qDebug() << "Profile saved to new path.";
-            saveProfile(QString(),info);
+            info->setProperty(Profile::Path,saveProfile(QString(),info));
         }
     }
 }
@@ -445,11 +450,14 @@ QString SessionManager::addProfile(Profile* type)
 {
     QString key;
 
+    // choose a key for the Profile
     for ( int counter = 0;;counter++ )
     {
-        if ( !_types.contains(type->path() + QString::number(counter)) )
+        //if ( !_types.contains(type->path() + QString::number(counter)) )
+        
+        if ( !_types.contains(type->name() + QString::number(counter)) )
         {
-            key = type->path() + QString::number(counter);
+            key = type->name() + QString::number(counter);
             break;
         }
     }
@@ -536,16 +544,12 @@ void SessionManager::setFavorite(const QString& key , bool favorite)
 
         _favorites.insert(key);
         emit favoriteStatusChanged(key,favorite);
-    
-        saveFavorites();
     }
     else if ( !favorite && _favorites.contains(key) )
     {
         qDebug() << "removing favorite - " << key;
         _favorites.remove(key);
         emit favoriteStatusChanged(key,favorite);
-    
-        saveFavorites();
     }
 
 }

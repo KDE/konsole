@@ -74,7 +74,7 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
 
 }
 
-void ManageProfilesDialog::showEvent(QShowEvent* event)
+void ManageProfilesDialog::showEvent(QShowEvent*)
 {
     Q_ASSERT( _ui->sessionTable->model() );
 
@@ -296,7 +296,7 @@ ProfileItemDelegate::ProfileItemDelegate(QObject* parent)
     : QItemDelegate(parent)
 {
 }
-bool ProfileItemDelegate::editorEvent(QEvent* event,QAbstractItemModel* model,
+bool ProfileItemDelegate::editorEvent(QEvent* event,QAbstractItemModel*,
                                     const QStyleOptionViewItem&,const QModelIndex& index)
 {
      if ( event->type() == QEvent::MouseButtonPress || event->type() == QEvent::KeyPress )

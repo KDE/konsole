@@ -82,8 +82,6 @@ EditProfileDialog::EditProfileDialog(QWidget* parent)
             SLOT(preparePage(int)) );
 
     _tempProfile = new Profile;
-
-    qDebug() << "Is modal = " << isModal();
 }
 EditProfileDialog::~EditProfileDialog()
 {
@@ -352,7 +350,6 @@ void EditProfileDialog::commandChanged(const QString& command)
 {
     ShellCommand shellCommand(command);
 
-    //TODO Split into command and arguments
     _tempProfile->setProperty(Profile::Command,shellCommand.command());
     _tempProfile->setProperty(Profile::Arguments,shellCommand.arguments());
 }
@@ -376,13 +373,15 @@ void EditProfileDialog::setupAppearancePage(const Profile* info)
     
     connect( _colorSchemeAnimationTimeLine , SIGNAL(valueChanged(qreal)) , this ,
              SLOT(colorSchemeAnimationUpdate()) );
+   
+    _ui->transparencyWarningWidget->setVisible(false);
     
     // setup color list
     updateColorSchemeList(true);
 
-
     _ui->colorSchemeList->setMouseTracking(true);
     _ui->colorSchemeList->installEventFilter(this);
+    _ui->colorSchemeList->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
 
     connect( _ui->colorSchemeList->selectionModel() , 
             SIGNAL(selectionChanged(const QItemSelection&,const QItemSelection&)) 
@@ -442,8 +441,8 @@ void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
         item->setFlags( item->flags() );
        
         if ( currentScheme == colors ) 
-            selectedItem = item;   
-        
+            selectedItem = item;  
+
         model->appendRow(item);
     }
 
@@ -458,6 +457,9 @@ void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
         _ui->colorSchemeList->updateGeometry();
         _ui->colorSchemeList->selectionModel()->setCurrentIndex( selectedItem->index() , 
                                                                  QItemSelectionModel::Select );
+
+        // update transparency warning label
+        updateTransparencyWarning();
     }
 }
 void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
@@ -471,8 +473,6 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
 
     const KeyboardTranslator* currentTranslator = keyManager->findTranslator(name);
     
-    qDebug() << "Current translator = " << currentTranslator << ", name: " << name;
-
     QStandardItemModel* model = new QStandardItemModel(this);
 
     QStandardItem* selectedItem = 0;
@@ -485,11 +485,6 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
 
         const KeyboardTranslator* translator = keyManager->findTranslator(name);
 
-        qDebug() << "Translator:" << translator << ", name = " << 
-            translator->name() << "description = " << 
-            translator->description();
-
-        // TODO Use translator->description() here
         QStandardItem* item = new QStandardItem(translator->description());
         item->setData(QVariant::fromValue(translator),Qt::UserRole+1);
         item->setIcon( KIcon("keyboard") );
@@ -525,8 +520,6 @@ bool EditProfileDialog::eventFilter( QObject* watched , QEvent* event )
 }
 void EditProfileDialog::unpreviewAll()
 {
-    //qDebug() << "unpreviewing";
-
     QHash<Profile::Property,QVariant> map;
     QHashIterator<int,QVariant> iter(_previewedProperties);
     while ( iter.hasNext() )
@@ -617,19 +610,9 @@ void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
 
         ColorSchemeManager::instance()->addColorScheme( newScheme );
         
-        updateColorSchemeList();
+        updateColorSchemeList(true);
 
-        const Profile* profile = lookupProfile(); 
-        const QString& currentScheme = profile->colorScheme();
-
-        // the next couple of lines may seem slightly odd,
-        // but they force any open views based on the current profile
-        // to update their color schemes
-        if ( newScheme->name() == currentScheme )
-        {
-            _tempProfile->setProperty(Profile::ColorScheme,newScheme->name());
-            preview(Profile::ColorScheme,newScheme->name());
-        }
+        preview(Profile::ColorScheme,newScheme->name());
     }
 }
 void EditProfileDialog::newColorScheme()
@@ -650,12 +633,24 @@ void EditProfileDialog::colorSchemeSelected()
         const ColorScheme* colors = model->data(selected.first(),Qt::UserRole+1).value<const ColorScheme*>();
 
         _tempProfile->setProperty(Profile::ColorScheme,colors->name());
+
+        updateTransparencyWarning();
     }
 }
-void EditProfileDialog::setupKeyboardPage(const Profile* info)
+void EditProfileDialog::updateTransparencyWarning() 
+{
+    // zero or one indexes can be selected
+    foreach( const QModelIndex& index , _ui->colorSchemeList->selectionModel()->selectedIndexes() ) 
+    {
+        bool hasTransparency = index.data(Qt::UserRole+1).value<const ColorScheme*>()->opacity() < 1.0;
+
+        _ui->transparencyWarningWidget->setHidden(KWindowSystem::compositingActive() || !hasTransparency);
+        _ui->transparencyWarningIcon->setPixmap( KIcon("dialog-warning").pixmap(QSize(48,48)) );
+    }
+}
+void EditProfileDialog::setupKeyboardPage(const Profile* /* info */)
 {
     // setup translator list
- 
     updateKeyBindingsList(true); 
 
     connect( _ui->keyBindingList->selectionModel() , 
@@ -729,9 +724,6 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
 
         if ( isNewTranslator )
             newTranslator->setName(newTranslator->description());
-
-        qDebug() << "Adding new or modified translator to manager" << 
-            newTranslator->name() << ", " << newTranslator->description();
 
         KeyboardTranslatorManager::instance()->addTranslator( newTranslator );
 
@@ -931,7 +923,6 @@ void EditProfileDialog::toggleResizeWindow(bool enable)
 }
 void EditProfileDialog::fontSelected(const QFont& font)
 {
-   //qDebug() << "font selected";
    QSlider* slider = _ui->fontSizeSlider;
    
    _ui->fontSizeSlider->setRange( qMin(slider->minimum(),font.pointSize()) ,
@@ -1107,30 +1098,5 @@ QSize ColorSchemeViewDelegate::sizeHint( const QStyleOptionViewItem& option,
     // temporary
     return QSize(width,(int)heightForWidth);
 }
-
-/*bool ColorSchemeViewDelegate::editorEvent(QEvent* event,QAbstractItemModel* model,
-                             const QStyleOptionViewItem& option, const QModelIndex& index)
-{
-    qDebug() << "event: " << event->type() << " at row " << index.row() << " column " << 
-        index.column();
-    return false;
-}*/
-
-KeyBindingViewDelegate::KeyBindingViewDelegate(QObject* parent)
-    : QAbstractItemDelegate(parent)
-{
-}
-void KeyBindingViewDelegate::paint(QPainter* /*painter*/, 
-                                   const QStyleOptionViewItem& /*option*/,
-                                   const QModelIndex& /*index*/) const
-{
-}
-QSize KeyBindingViewDelegate::sizeHint( const QStyleOptionViewItem& /*option*/,
-                                        const QModelIndex& /*index*/) const
-{
-    // temporary
-    return QSize(100,100);
-}
-
 
 #include "EditProfileDialog.moc"

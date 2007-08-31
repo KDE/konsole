@@ -88,7 +88,7 @@ enum
  * output.  Each screen window covers the same number of lines and columns as the 
  * image size returned by imageSize().  The screen window can be moved up and down
  * and provides transparent access to both the current on-screen image and the 
- * previous output.  The screen windows emit and outputChanged signal
+ * previous output.  The screen windows emit an outputChanged signal
  * when the section of the image they are looking at changes.
  * Graphical views can then render the contents of a screen window, listening for notifications
  * of output changes from the screen window which they are associated with and updating 
@@ -191,9 +191,9 @@ public:
    * ( received through sendKeyEvent() ) into character
    * streams to send to the terminal.
    */
-  void setKeyBindings(const QString &id);
+  void setKeyBindings(const QString& name);
   /** 
-   * Returns the emulation's current key bindings.
+   * Returns the name of the emulation's current key bindings.
    * See setKeyBindings()
    */
   QString keyBindings();
@@ -222,19 +222,19 @@ public slots:
   
   /** 
    * Interprets a sequence of characters and sends the result to the terminal.
-   * This is equivalent to calling onKeyPress for each character in @p text in succession.
+   * This is equivalent to calling sendKeyEvent() for each character in @p text in succession.
    */
   virtual void sendText(const QString& text) = 0;
 
   /** 
-   * Interprets a key press event and emits the sendString() signal with
+   * Interprets a key press event and emits the sendData() signal with
    * the resulting character stream. 
    */
   virtual void sendKeyEvent(QKeyEvent*);
  
   /** 
    * Converts information about a mouse event into an xterm-compatible escape
-   * sequence and emits the character sequence via sendString()
+   * sequence and emits the character sequence via sendData()
    */
   virtual void sendMouseEvent(int buttons, int column, int line, int eventType);
   
@@ -247,8 +247,19 @@ public slots:
    */
   virtual void sendString(const char* string, int length = -1) = 0;
 
-  /** Processes an incoming block of text. */
-  void receiveData(const char* txt,int len);
+  /** 
+   * Processes an incoming stream of characters.  receiveData() decodes the incoming
+   * character buffer using the current codec(), and then calls receiveChar() for
+   * each unicode character in the resulting buffer.  
+   *
+   * receiveData() also starts a timer which causes the outputChanged() signal
+   * to be emitted when it expires.  The timer allows multiple updates in quick
+   * succession to be buffered into a single outputChanged() signal emission.
+   *
+   * @param buffer A string of characters received from the terminal program.
+   * @param len The length of @p buffer
+   */
+  void receiveData(const char* buffer,int len);
 
 signals:
 
@@ -339,18 +350,21 @@ signals:
    * the user-title of the session.    
    *
    * @param title Specifies what to change.
-   *    0 - Set window icon text and session title to @p newTitle
-   *    1 - Set window icon text to @p newTitle
-   *    2 - Set session title to @p newTitle
-   *    11 - Set the session's default background color to @p newTitle,
+   * <ul>
+   * <li>0 - Set window icon text and session title to @p newTitle</li>
+   * <li>1 - Set window icon text to @p newTitle</li>
+   * <li>2 - Set session title to @p newTitle</li>
+   * <li>11 - Set the session's default background color to @p newTitle,
    *         where @p newTitle can be an HTML-style string (#RRGGBB) or a named
    *         color (eg 'red', 'blue').  
    *         See http://doc.trolltech.com/4.2/qcolor.html#setNamedColor for more
    *         details.
-   *    31 - Supposedly treats @p newTitle as a URL and opens it (NOT IMPLEMENTED)
-   *    32 - Sets the icon associated with the session.  @p newTitle is the name 
+   * </li>
+   * <li>31 - Supposedly treats @p newTitle as a URL and opens it (NOT IMPLEMENTED)</li>
+   * <li>32 - Sets the icon associated with the session.  @p newTitle is the name 
    *    of the icon to use, which can be the name of any icon in the current KDE icon
-   *    theme (eg: 'konsole', 'kate', 'folder_home')
+   *    theme (eg: 'konsole', 'kate', 'folder_home')</li>
+   * </ul>
    * @param newTitle Specifies the new title 
    */
 
@@ -363,10 +377,15 @@ signals:
   void imageSizeChanged(int lineCount , int columnCount);
 
   /** 
-   * Emitted when the terminal program emits a profile change
-   * command sequence
+   * Emitted when the terminal program requests to change various properties
+   * of the terminal display.  
    *
-   * @param text The text of the command
+   * A profile change command occurs when a special escape sequence, followed
+   * by a string containing a series of name and value pairs is received.
+   * This string can be parsed using a ProfileCommandParser instance.
+   *
+   * @param text A string expected to contain a series of key and value pairs in
+   * the form:  name=value;name2=value2 ...
    */
   void profileChangeCommandReceived(const QString& text);
 
@@ -375,13 +394,15 @@ protected:
   virtual void resetMode(int mode) = 0;
    
  /** 
-   * Processes an incoming character.  See onReceiveBlock()
+   * Processes an incoming character.  See receiveData()
    * @p ch A unicode character code. 
    */
   virtual void receiveChar(int ch);
 
   /** 
-   * Sets the active screen
+   * Sets the active screen.  The terminal has two screens, primary and alternate.
+   * The primary screen is used by default.  When certain interactive programs such
+   * as Vim are run, they trigger a switch to the alternate screen.
    *
    * @param index 0 to switch to the primary screen, or 1 to switch to the alternate screen
    */
