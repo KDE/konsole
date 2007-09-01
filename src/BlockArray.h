@@ -23,7 +23,7 @@
 
 #include <unistd.h>
 
-//#error Dont use in KDE 2.1
+//#error Do not use in KDE 2.1
 
 #define BlockSize (1 << 12)
 #define ENTRIES   ((BlockSize - sizeof(size_t) ) / sizeof(unsigned char))
@@ -58,7 +58,7 @@ public:
     *
     * The ownership on the block is transfered.
     * An unique index number is returned for accessing
-    * it later (if not yet droped then)
+    * it later (if not yet dropped then)
     *
     * Note, that the block may be dropped completely
     * if history is turned off.
