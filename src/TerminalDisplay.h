@@ -522,7 +522,6 @@ protected slots:
 
 private slots:
 
-    void drop_menu_activated(QAction*);
     void swapColorTable();
     void tripleClickTimeout();  // resets possibleTripleClick
 
@@ -692,12 +691,6 @@ private:
 
     QRgb _blendColor;
 
-    QAction* _pasteAction;
-    QAction* _cdAction;
-    QAction* _cpAction;
-    QAction* _mvAction;
-    QAction* _lnAction;
-
     // list of filters currently applied to the display.  used for links and
     // search highlight
     TerminalImageFilterChain* _filterChain;
@@ -708,9 +701,6 @@ private:
     // custom cursor color.  if this is invalid then the foreground
     // color of the character under the cursor is used
     QColor _cursorColor;  
-
-    // set to true when keyboard-based text selection is active
-    bool _keyboardTextSelectionActive;
 
 	//the delay in milliseconds between redrawing blinking text
 	static const int BLINK_DELAY = 500;

@@ -270,7 +270,6 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_printerFriendly(false)
 ,_printerBold(false)
 ,_isFixedSize(false)
-,_drop(0)
 ,_possibleTripleClick(false)
 ,_resizeWidget(0)
 ,_resizeLabel(0)
@@ -2613,71 +2612,41 @@ void TerminalDisplay::dragEnterEvent(QDragEnterEvent* event)
       event->acceptProposedAction();
 }
 
-enum dropPopupOptions { paste, cd, cp, ln, mv };
-
 void TerminalDisplay::dropEvent(QDropEvent* event)
 {
-   if (_drop==0)
-   {
-      _drop = new KMenu( this );
-      _pasteAction = _drop->addAction( i18n( "Paste" ) );
-      _drop->addSeparator();
-      _cdAction = _drop->addAction( i18n( "Change Directory" ) );
-      _mvAction = _drop->addAction( i18n( "Move Here" ) );
-      _cpAction = _drop->addAction( i18n( "Copy Here" ) );
-      _lnAction = _drop->addAction( i18n( "Link Here" ) );
-      _pasteAction->setData( QVariant( paste ) );
-      _cdAction->setData( QVariant( cd ) );
-      _mvAction->setData( QVariant( mv ) );
-      _cpAction->setData( QVariant( cp ) );
-      _lnAction->setData( QVariant( ln ) );
-      connect(_drop, SIGNAL(triggered(QAction*)), SLOT(drop_menu_activated(QAction*)));
-   };
-    // The current behaviour when url(s) are dropped is
-    // * if there is only ONE url and if it's a LOCAL one, ask for paste or cd/cp/ln/mv
-    // * if there are only LOCAL urls, ask for paste or cp/ln/mv
-    // * in all other cases, just paste
-    //   (for non-local ones, or for a list of URLs, 'cd' is nonsense)
-  _dndFileCount = 0;
-  _dropText = "";
-  bool justPaste = true;
+  KUrl::List urls = KUrl::List::fromMimeData(event->mimeData());
 
-  KUrl::List urllist = KUrl::List::fromMimeData(event->mimeData());
-  if (urllist.count()) {
-    justPaste =false;
-    KUrl::List::Iterator it;
+  QString dropText;
+  if (!urls.isEmpty()) 
+  {
+    for ( int i = 0 ; i < urls.count() ; i++ ) 
+    {
+        KUrl url = KIO::NetAccess::mostLocalUrl( urls[i] , 0 );
+        QString urlText;
 
-    _cdAction->setEnabled( true );
-    _lnAction->setEnabled( true );
+        if (url.isLocalFile())
+            urlText = url.path(); 
+        else
+            urlText = url.url();
+    
+        // in future it may be useful to be able to insert file names with drag-and-drop
+        // without quoting them (this only affects paths with spaces in) 
+        urlText = KShell::quoteArg(urlText);
+      
+        dropText += urlText;
 
-    for ( it = urllist.begin(); it != urllist.end(); ++it ) {
-      if(_dndFileCount++ > 0) {
-        _dropText += ' ';
-        _cdAction->setEnabled( false );
-      }
-      KUrl url = KIO::NetAccess::mostLocalUrl( *it, 0 );
-      QString tmp;
-      if (url.isLocalFile()) {
-        tmp = url.path(); // local URL : remove protocol. This helps "ln" & "cd" and doesn't harm the others
-      } else if ( url.protocol() == QLatin1String( "mailto" ) ) {
-        justPaste = true;
-        break;
-      } else {
-        tmp = url.url();
-        _cdAction->setEnabled( false );
-        _lnAction->setEnabled( false );
-      }
-      if (urllist.count()>1)
-        tmp = KShell::quoteArg(tmp);
-      _dropText += tmp;
+        if ( i != urls.count()-1 ) 
+            dropText += ' ';
     }
-
-    if (!justPaste) _drop->popup(mapToGlobal(event->pos()));
   }
-  if(justPaste && event->mimeData()->hasFormat("text/plain")) {
-    kDebug(1211) << "Drop:" << _dropText.toLocal8Bit() << "\n";
-    emit sendStringToEmu(_dropText.toLocal8Bit());
-    // Paste it
+  else 
+  {
+    dropText = event->mimeData()->text();
+  }
+
+  if(event->mimeData()->hasFormat("text/plain")) 
+  {
+    emit sendStringToEmu(dropText.toLocal8Bit());
   }
 }
 
@@ -2690,53 +2659,6 @@ void TerminalDisplay::doDrag()
   dragInfo.dragObject->setMimeData(mimeData);
   dragInfo.dragObject->start(Qt::CopyAction);
   // Don't delete the QTextDrag object.  Qt will delete it when it's done with it.
-}
-
-void TerminalDisplay::drop_menu_activated(QAction* action)
-{
-  int item = action->data().toInt();
-  switch (item)
-  {
-   case paste:
-      if (_dndFileCount==1)
-        _dropText = KShell::quoteArg(_dropText);
-      emit sendStringToEmu(_dropText.toLocal8Bit());
-      activateWindow();
-      break;
-   case cd:
-     emit sendStringToEmu("cd ");
-      struct stat statbuf;
-      if ( ::stat( QFile::encodeName( _dropText ), &statbuf ) == 0 )
-      {
-         if ( !S_ISDIR(statbuf.st_mode) )
-         {
-            KUrl url;
-            url.setPath( _dropText );
-            _dropText = url.directory( KUrl::ObeyTrailingSlash ); // remove filename
-         }
-      }
-      _dropText = KShell::quoteArg(_dropText);
-      emit sendStringToEmu(_dropText.toLocal8Bit());
-      emit sendStringToEmu("\n");
-      activateWindow();
-      break;
-   case cp:
-     emit sendStringToEmu("kfmclient copy " );
-     break;
-   case ln:
-     emit sendStringToEmu("ln -s ");
-     break;
-   case mv:
-     emit sendStringToEmu("kfmclient move " );
-     break;
-   }
-   if (item>cd && item<=mv) {
-      if (_dndFileCount==1)
-        _dropText = KShell::quoteArg(_dropText);
-      emit sendStringToEmu(_dropText.toLocal8Bit());
-      emit sendStringToEmu(" .\n");
-      activateWindow();
-   }
 }
 
 void TerminalDisplay::outputSuspended(bool suspended)
