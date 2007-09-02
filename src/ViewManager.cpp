@@ -294,10 +294,6 @@ void ViewManager::sessionFinished()
 
     Q_ASSERT(session);
 
-    // record the size of the last session
-    //qDebug() << "Recording session size: " << session->size();
-    //setDefaultDisplaySize( session->size().height() , session->size().width() );
-
     // close attached views
     QList<TerminalDisplay*> children = _viewSplitter->findChildren<TerminalDisplay*>();
 
@@ -397,6 +393,15 @@ void ViewManager::removeContainer(ViewContainer* container)
     // so we take the previous container count and work out what the new count
     // would be.
     int previousCount = _viewSplitter->containers().count();
+
+    // remove session map entries for views in this container
+    foreach( QWidget* view , container->views() )
+    {
+        TerminalDisplay* display = qobject_cast<TerminalDisplay*>(view);
+        Q_ASSERT(display);
+        _sessionMap.remove(display);
+    } 
+
     container->deleteLater();
     emit splitViewToggle( (previousCount-1) > 1);
 }
@@ -475,13 +480,6 @@ void ViewManager::createView(Session* session)
         applyProfile(display,session->profileKey());
         
         // set initial size
-#if 0
-        int defaultLines = 0;
-        int defaultColumns = 0;
-        getDefaultDisplaySize(defaultLines,defaultColumns);
-        qDebug() << "Setting default display size to " << QSize(defaultColumns,defaultLines);
-        display->setSize(defaultColumns,defaultLines);
-#endif
         display->setSize(80,40);
 
         ViewProperties* properties = createController(session,display);
@@ -500,21 +498,6 @@ void ViewManager::createView(Session* session)
         }
     }
 }
-
-#if 0
-void ViewManager::getDefaultDisplaySize(int& lines , int& columns) const
-{
-    const KConfigGroup group = KGlobal::config()->group("Last Session");
-    QSize size = group.readEntry("WindowSize",QSize(80,40));
-    lines = size.height();
-    columns = size.width();
-}
-void ViewManager::setDefaultDisplaySize(int lines , int columns)
-{
-    KConfigGroup group = KGlobal::config()->group("Last Session");
-    group.writeEntry("WindowSize",QSize(columns,lines));
-}
-#endif
 
 ViewContainer* ViewManager::createContainer(const QString& profileKey)
 {
