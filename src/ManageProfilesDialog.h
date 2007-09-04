@@ -98,6 +98,11 @@ public:
 
     virtual bool editorEvent(QEvent* event,QAbstractItemModel* model,
                              const QStyleOptionViewItem& option,const QModelIndex& index);
+
+protected:
+    virtual void drawDecoration(QPainter*,const QStyleOptionViewItem&,const QRect&,
+                                const QPixmap&) const;
+
 };
 
 }
