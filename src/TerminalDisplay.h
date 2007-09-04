@@ -154,7 +154,7 @@ public:
 
     void emitSelection(bool useXselection,bool appendReturn);
 
-    void setCursorPos(const int curx, const int cury);
+//    void setCursorPos(const int curx, const int cury);
 
     /**
      * This enum describes the available shapes for the keyboard cursor.
@@ -508,7 +508,9 @@ protected:
 
     void mouseTripleClickEvent(QMouseEvent* ev);
 
-    virtual void inputMethodEvent ( QInputMethodEvent * e );
+    // reimplemented
+    virtual void inputMethodEvent ( QInputMethodEvent* event );
+    virtual QVariant inputMethodQuery( Qt::InputMethodQuery query ) const;
 
 protected slots:
 
@@ -532,7 +534,7 @@ private:
     // divides the part of the display specified by 'rect' into
     // fragments according to their colors and styles and calls
     // drawTextFragment() to draw the fragments 
-    void paintContents(QPainter &paint, const QRect &rect);
+    void drawContents(QPainter &paint, const QRect &rect);
     // draws a section of text, all the text in this section
     // has a common color and style
     void drawTextFragment(QPainter& painter, const QRect& rect, 
@@ -549,14 +551,19 @@ private:
 	void drawLineCharString(QPainter& painter, int x, int y, 
                             const QString& str, const Character* attributes);
 
+    void drawInputMethodPreeditString(QPainter& painter , const QRect& rect);
+
     // --
 
     // maps an area in the character image to an area on the widget 
-    QRect imageToWidget(const QRect& imageArea);
+    QRect imageToWidget(const QRect& imageArea) const;
 
     // maps a point on the widget to the position ( ie. line and column ) 
     // of the character at that point.
-    void characterPosition(const QPoint& widgetPoint,int& line,int& column);
+    void characterPosition(const QPoint& widgetPoint,int& line,int& column) const;
+
+    // the area where the preedit string for input methods will be draw
+    QRect preeditRect() const;
 
     // shows a notification window in the middle of the widget indicating the terminal's
     // current size in columns and lines
@@ -677,18 +684,6 @@ private:
     int _rimY;      // top/bottom rim high
     QSize _size;
 	
-    QString _imPreeditText;
-    int _imPreeditLength;
-    int _imStart;
-    int _imStartLine;
-    int _imEnd;
-    int _imSelStart;
-    int _imSelEnd;
-    int _cursorLine;
-    int _cursorCol;
-    bool _isIMEdit;
-    bool _isIMSel;
-
     QRgb _blendColor;
 
     // list of filters currently applied to the display.  used for links and
@@ -701,6 +696,14 @@ private:
     // custom cursor color.  if this is invalid then the foreground
     // color of the character under the cursor is used
     QColor _cursorColor;  
+
+
+    struct InputMethodData
+    {
+        QString preeditString;
+        QRect previousPreeditRect;
+    };
+    InputMethodData _inputMethodData;
 
 	//the delay in milliseconds between redrawing blinking text
 	static const int BLINK_DELAY = 500;

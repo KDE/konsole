@@ -279,16 +279,6 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_colorsInverted(false)
 ,_rimX(1)
 ,_rimY(1)
-,_imPreeditText(QString())
-,_imPreeditLength(0)
-,_imStart(0)
-,_imStartLine(0)
-,_imEnd(0)
-,_imSelStart(0)
-,_imSelEnd(0)
-,_cursorLine(0)
-,_cursorCol(0)
-,_isIMEdit(false)
 ,_blendColor(qRgba(0,0,0,0xff))
 ,_filterChain(new TerminalImageFilterChain())
 ,_cursorShape(BlockCursor)
@@ -323,7 +313,8 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
   dragInfo.state = diNone;
 
   setFocusPolicy( Qt::WheelFocus );
-  // im
+
+  // enable input method support
   setAttribute(Qt::WA_InputMethodEnabled, true);
 
   // this is an important optimization, it tells Qt
@@ -572,7 +563,14 @@ void TerminalDisplay::drawCursor(QPainter& painter,
 
        if ( _cursorShape == BlockCursor )
        {
-            painter.drawRect(cursorRect);
+            // draw the cursor outline, adjusting the area so that
+            // it is draw entirely inside 'rect'
+            int penWidth = qMax(1,painter.pen().width());
+
+            painter.drawRect(cursorRect.adjusted(penWidth/2,
+                                                 penWidth/2,
+                                                 - penWidth/2 - penWidth%2,
+                                                 - penWidth/2 - penWidth%2));
             if ( hasFocus() )
             {
                 painter.fillRect(cursorRect, _cursorColor.isValid() ? _cursorColor : foregroundColor);
@@ -669,6 +667,7 @@ void TerminalDisplay::drawTextFragment(QPainter& painter ,
 void TerminalDisplay::setRandomSeed(uint randomSeed) { _randomSeed = randomSeed; }
 uint TerminalDisplay::randomSeed() const { return _randomSeed; }
 
+#if 0
 /*!
     Set XIM Position
 */
@@ -686,6 +685,7 @@ void TerminalDisplay::setCursorPos(const int curx, const int cury)
     _cursorLine = cury;
     _cursorCol = curx;
 }
+#endif
 
 // scrolls the image by 'lines', down if lines > 0 or up otherwise.
 //
@@ -849,20 +849,15 @@ void TerminalDisplay::updateImage()
     // mark surrounding neighbours dirty, in case the character exceeds
     // its cell boundaries
     memset(dirtyMask, 0, columnsToUpdate+2);
-    // Two extra so that we don't have to have to care about start and end conditions
-    for (x = 0; x < columnsToUpdate; x++)
+   
+    for( x = 0 ; x < columnsToUpdate ; x++)
     {
-	if ( ( (_imPreeditLength > 0) && 
-           ( ( _imStartLine == y ) && 
-             ( ( _imStart < _imEnd ) && 
-               ( ( x > _imStart ) ) && 
-               ( x < _imEnd ) )
-              || ( ( _imSelStart < _imSelEnd ) && ( ( x > _imSelStart ) ) ) ) )
-            || newLine[x] != currentLine[x])
-      {
-         dirtyMask[x] = dirtyMask[x+1] = dirtyMask[x+2] = 1;
-      }
+        if ( newLine[x] != currentLine[x] ) 
+        {
+            dirtyMask[x] = true;
+        }
     }
+
     dirtyMask++; // Position correctly
 
     if (!_resizing) // not while _resizing, we're expecting a paintEvent
@@ -905,32 +900,6 @@ void TerminalDisplay::updateImage()
         }
 
         QString unistr(disstrU, p);
-
-        // for XIM on the spot input style
-        _isIMEdit = _isIMSel = false;
-
-        if ( _imStartLine == y ) 
-        {
-          if (  ( _imStart < _imEnd ) && 
-                ( x >= _imStart-1 ) && 
-                ( x + int( unistr.length() ) <= _imEnd ) 
-             )
-                _isIMEdit = true;
-
-          if ( ( _imSelStart < _imSelEnd ) && 
-               ( x >= _imStart-1 ) && 
-               ( x + int( unistr.length() ) <= _imEnd ) 
-             )
-                _isIMSel = true;
-	    }
-        else if ( _imStartLine < y ) 
-        {  // for word warp
-          if ( _imStart < _imEnd )
-            _isIMEdit = true;
-
-          if (  _imSelStart < _imSelEnd )
-            _isIMSel = true;
-	    }
 
         bool save__fixedFont = _fixedFont;
         if (lineDraw)
@@ -1002,6 +971,8 @@ void TerminalDisplay::updateImage()
                             _fontHeight * this->_lines );
   }
   _usedColumns = columnsToUpdate;
+
+  dirtyRegion |= _inputMethodData.previousPreeditRect;
 
   //qDebug() << "Expecting to update: " << dirtyRegion.boundingRect();
 
@@ -1081,11 +1052,44 @@ void TerminalDisplay::paintEvent( QPaintEvent* pe )
   foreach (QRect rect, (pe->region() & contentsRect()).rects())
   {
     drawBackground(paint,rect,palette().background().color());
-    paintContents(paint, rect);
+    drawContents(paint, rect);
   }
+  drawInputMethodPreeditString(paint,preeditRect());
   paintFilters(paint);
 
   paint.end();
+}
+
+QRect TerminalDisplay::preeditRect() const
+{
+    const int preeditLength = _inputMethodData.preeditString.count();
+
+    if ( preeditLength == 0 )
+        return QRect();
+
+    return QRect(_bX + _fontWidth*_screenWindow->cursorPosition().x(),
+                 _bY + _fontHeight*_screenWindow->cursorPosition().y(),
+                 _fontWidth*preeditLength,
+                 _fontHeight);
+}   
+
+void TerminalDisplay::drawInputMethodPreeditString(QPainter& painter , const QRect& rect)
+{
+    if ( _inputMethodData.preeditString.isEmpty() )
+        return;
+
+    const QPoint cursorPos = _screenWindow->cursorPosition();
+
+    bool invertColors = false;
+    const QColor background = _colorTable[DEFAULT_BACK_COLOR].color;
+    const QColor foreground = _colorTable[DEFAULT_FORE_COLOR].color;
+    const Character* style = &_image[loc(cursorPos.x(),cursorPos.y())];
+
+    drawBackground(painter,rect,background);
+    drawCursor(painter,rect,foreground,background,invertColors);
+    drawCharacters(painter,rect,_inputMethodData.preeditString,style,invertColors);
+
+    _inputMethodData.previousPreeditRect = rect; 
 }
 
 void TerminalDisplay::print(QPainter &paint, bool friendly, bool exact)
@@ -1107,13 +1111,13 @@ void TerminalDisplay::print(QPainter &paint, bool friendly, bool exact)
 
      QPainter pm_paint;
      pm_paint.begin(&pm);
-     paintContents(pm_paint, contentsRect());
+     drawContents(pm_paint, contentsRect());
      pm_paint.end();
      paint.drawPixmap(0, 0, pm);
    }
    else
    {
-     paintContents(paint, contentsRect());
+     drawContents(paint, contentsRect());
    }
 
    _printerFriendly = false;
@@ -1208,7 +1212,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
         }
     }
 }
-void TerminalDisplay::paintContents(QPainter &paint, const QRect &rect)
+void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
 {
   QPoint tL  = contentsRect().topLeft();
   int    tLx = tL.x();
@@ -1346,7 +1350,7 @@ void TerminalDisplay::blinkEvent()
   update();
 }
 
-QRect TerminalDisplay::imageToWidget(const QRect& imageArea)
+QRect TerminalDisplay::imageToWidget(const QRect& imageArea) const
 {
     QRect result;
     result.setLeft( _bX + _fontWidth * imageArea.left() );
@@ -1960,7 +1964,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
   }
 }
 
-void TerminalDisplay::characterPosition(const QPoint& widgetPoint,int& line,int& column)
+void TerminalDisplay::characterPosition(const QPoint& widgetPoint,int& line,int& column) const
 {
     column = (widgetPoint.x()-contentsRect().left()-_bX) / _fontWidth;
     line = (widgetPoint.y()-contentsRect().top()-_bY) / _fontHeight;
@@ -2321,75 +2325,42 @@ void TerminalDisplay::keyPressEvent( QKeyEvent* event )
     event->accept();
 }
 
-void TerminalDisplay::inputMethodEvent ( QInputMethodEvent *  )
+void TerminalDisplay::inputMethodEvent( QInputMethodEvent* event )
 {
-#ifdef __GNUC__
-   #warning "TODO: Implement Input Method Event feature"
-#endif
-}
+    QKeyEvent keyEvent(QEvent::KeyPress,0,Qt::NoModifier,event->commitString());
+    emit keyPressedSignal(&keyEvent);
 
-#if 0
-void TerminalDisplay::imStartEvent( QIMEvent */*e*/ )
+    _inputMethodData.preeditString = event->preeditString();
+    update(preeditRect() | _inputMethodData.previousPreeditRect);
+    
+    event->accept();
+}
+QVariant TerminalDisplay::inputMethodQuery( Qt::InputMethodQuery query ) const
 {
-  _imStart = _cursorCol;
-  _imStartLine = _cursorLine;
-  _imPreeditLength = 0;
+    switch ( query ) 
+    {
+        case Qt::ImMicroFocus:
+            {
+                const QPoint cursorPos = _screenWindow->cursorPosition();
+                return imageToWidget(QRect(cursorPos.x(),cursorPos.y(),1,1));
+            }
+            break;
+        case Qt::ImFont:
+                return font();
+            break;
+        case Qt::ImCursorPosition:
+                return 0;
+            break;
+        case Qt::ImSurroundingText:
+                return QString();
+            break;
+        case Qt::ImCurrentSelection:
+                return QString();
+            break;
+    }
 
-  _imEnd = _imSelStart = _imSelEnd = 0;
-  _isIMEdit = _isIMSel = false;
+    return QVariant();
 }
-
-void TerminalDisplay::imComposeEvent( QIMEvent *e )
-{
-  QString text.characterlear();
-  if ( _imPreeditLength > 0 ) {
-    text.fill( '\010', _imPreeditLength );
-  }
-
-  _imEnd = _imStart + string_width( e->text() );
-
-  QString tmpStr = e->text().left( e->cursorPos() );
-  _imSelStart = _imStart + string_width( tmpStr );
-
-  tmpStr = e->text().mid( e->cursorPos(), e->selectionLength() );
-  _imSelEnd = _imSelStart + string_width( tmpStr );
-  _imPreeditLength = e->text().length();
-  _imPreeditText = e->text();
-  text += e->text();
-
-  if ( text.length() > 0 ) {
-    QKeyEvent ke( QEvent::KeyPress, 0, -1, 0, text );
-    emit keyPressedSignal( &ke );
-  }
-}
-
-void TerminalDisplay::imEndEvent( QIMEvent *e )
-{
-  QString text.characterlear();
-  if ( _imPreeditLength > 0 ) {
-      text.fill( '\010', _imPreeditLength );
-  }
-
-  _imEnd = _imSelStart = _imSelEnd = 0;
-  text += e->text();
-  if ( text.length() > 0 ) {
-    QKeyEvent ke( QEvent::KeyPress, 0, -1, 0, text );
-    emit keyPressedSignal( &ke );
-  }
-
-  QPoint tL  = contentsRect().topLeft();
-  int tLx = tL.x();
-  int tLy = tL.y();
-
-  QRect repaintRect = QRect( _bX+tLx, _bY+tLy+_fontHeight*_imStartLine,
-                             contentsRect().width(), contentsRect().height() );
-  _imStart = 0;
-  _imPreeditLength = 0;
-
-  _isIMEdit = _isIMSel = false;
-  repaint( repaintRect, true );
-}
-#endif
 
 // Override any Ctrl+<key> accelerator when pressed with the keyboard
 // focus in TerminalDisplay, so that the key will be passed to the terminal instead.
