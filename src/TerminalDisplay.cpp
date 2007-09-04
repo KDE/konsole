@@ -858,8 +858,6 @@ void TerminalDisplay::updateImage()
         }
     }
 
-    dirtyMask++; // Position correctly
-
     if (!_resizing) // not while _resizing, we're expecting a paintEvent
     for (x = 0; x < columnsToUpdate; x++)
     {
@@ -937,8 +935,6 @@ void TerminalDisplay::updateImage()
 
         dirtyRegion |= dirtyRect;
     }
-
-    dirtyMask--; // Set back
 
     // replace the line of characters in the old _image with the 
     // current line of the new _image 
