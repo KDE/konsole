@@ -106,6 +106,37 @@ public:
      */
     QList<ViewProperties*> viewProperties() const;
 
+    /** 
+     * This enum describes the available types of navigation widget 
+     * which newly created containers can provide to allow navigation
+     * between open sessions.
+     */
+    enum NavigationMethod
+    {
+        /** 
+         * Each container has a row of tabs (one per session) which the user
+         * can click on to navigate between open sessions.
+         */
+        TabbedNavigation,
+        /** The container has no navigation widget. */
+        NoNavigation
+    };
+
+    /** 
+     * Sets the type of widget provided to navigate between open sessions 
+     * in a container.  The changes will only apply to newly created containers.
+     *
+     * The default method is TabbedNavigation.  To disable navigation widgets, call
+     * setNavigationMethod(ViewManager::NoNavigation) before creating any sessions. 
+     */
+    void setNavigationMethod(NavigationMethod method);
+
+    /** 
+     * Returns the type of navigation widget created in new containers. 
+     * See setNavigationMethod() 
+     */
+    NavigationMethod navigationMethod() const;
+
 signals:
     /** Emitted when the last view is removed from the view manager */
     void empty();
@@ -224,6 +255,7 @@ private:
     QHash<QPointer<TerminalDisplay>,QPointer<Session> >    _sessionMap;
     KActionCollection*                  _actionCollection;
     QSignalMapper*                      _containerSignalMapper;
+    NavigationMethod                _navigationMethod;
 };
 
 }

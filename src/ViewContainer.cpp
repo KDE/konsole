@@ -142,6 +142,12 @@ void ViewContainer::viewDestroyed(QObject* object)
     _views.removeAll(widget);
     _navigation.remove(widget);
 
+    // FIXME This can result in ViewContainerSubClass::removeViewWidget() being 
+    // called after the ViewContainerSubClass instance's destructor has been called
+    //
+    // Currently deleteLater() is used to remove child widgets in the subclass 
+    // constructors to get around the problem, but this is a hack and needs
+    // to be fixed. 
     removeViewWidget(widget);
     
     emit viewRemoved(widget);
@@ -684,14 +690,14 @@ void TabbedViewContainerV2::updateIcon(ViewProperties* item)
     }
 }
 
-StackedViewContainer::StackedViewContainer(NavigationPosition position , QObject* parent) 
-: ViewContainer(position,parent)
+StackedViewContainer::StackedViewContainer(QObject* parent) 
+: ViewContainer(NavigationPositionTop,parent)
 {
     _stackWidget = new QStackedWidget;
 }
 StackedViewContainer::~StackedViewContainer()
 {
-    delete _stackWidget;
+    _stackWidget->deleteLater();
 }
 QWidget* StackedViewContainer::containerWidget() const
 {
@@ -711,6 +717,10 @@ void StackedViewContainer::addViewWidget( QWidget* view )
 }
 void StackedViewContainer::removeViewWidget( QWidget* view )
 {
+    const int index = _stackWidget->indexOf(view);
+
+    Q_ASSERT( index != -1);
+
     _stackWidget->removeWidget(view);
 }
 

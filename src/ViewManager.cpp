@@ -51,6 +51,7 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
     , _viewSplitter(0)
     , _actionCollection(collection)
     , _containerSignalMapper(new QSignalMapper(this))
+    , _navigationMethod(TabbedNavigation)
 {
     // create main view area
     _viewSplitter = new ViewSplitter(0);   
@@ -511,7 +512,17 @@ ViewContainer* ViewManager::createContainer(const QString& profileKey)
                                                    ViewContainer::NavigationPositionTop :
                                                    ViewContainer::NavigationPositionBottom;
 
-    ViewContainer* container = new TabbedViewContainerV2(position,_viewSplitter);
+    ViewContainer* container = 0;
+
+    switch ( _navigationMethod )
+    {
+        case TabbedNavigation:    
+            container = new TabbedViewContainerV2(position,_viewSplitter);
+            break;
+        case NoNavigation:
+        default:
+            container = new StackedViewContainer(_viewSplitter);
+    }
 
     // connect signals and slots
     connect( container , SIGNAL(viewAdded(QWidget*,ViewProperties*)) , _containerSignalMapper ,
@@ -526,6 +537,9 @@ ViewContainer* ViewManager::createContainer(const QString& profileKey)
     
     return container;
 }
+
+void ViewManager::setNavigationMethod(NavigationMethod method) { _navigationMethod = method; }
+ViewManager::NavigationMethod ViewManager::navigationMethod() const { return _navigationMethod; }
 
 void ViewManager::containerViewsChanged(QObject* container)
 {
@@ -611,10 +625,15 @@ void ViewManager::applyProfile(TerminalDisplay* view , const QString& profileKey
     else if ( tabBarMode == Profile::ShowTabBarAsNeeded )
         container->setNavigationDisplayMode(ViewContainer::ShowNavigationAsNeeded);
 
+    ViewContainer::NavigationPosition position = container->navigationPosition();
+
     if ( tabBarPosition == Profile::TabBarTop )
-        container->setNavigationPosition(ViewContainer::NavigationPositionTop);
+        position = ViewContainer::NavigationPositionTop;
     else if ( tabBarPosition == Profile::TabBarBottom )
-        container->setNavigationPosition(ViewContainer::NavigationPositionBottom);
+        position = ViewContainer::NavigationPositionBottom; 
+
+    if ( container->supportedNavigationPositions().contains(position) )
+        container->setNavigationPosition(position);
 
     // load colour scheme
     ColorEntry table[TABLE_COLORS];
