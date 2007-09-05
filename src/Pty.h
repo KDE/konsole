@@ -27,6 +27,7 @@
 #include <QtCore/QStringList>
 #include <QtCore/QVector>
 #include <QtCore/QList>
+#include <QtCore/QSize>
 
 // KDE
 #include <K3Process>
@@ -107,6 +108,9 @@ Q_OBJECT
      * used by this teletype.
      */
     void setWindowSize(int lines, int cols);
+    
+    /** Returns the size of the window used by this teletype.  See setWindowSize() */
+    QSize windowSize() const;
 
     /** TODO Document me */
     void setErase(char erase);

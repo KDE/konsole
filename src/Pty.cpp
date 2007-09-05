@@ -52,6 +52,10 @@ void Pty::setWindowSize(int lines, int cols)
   if (pty()->masterFd() >= 0)
     pty()->setWinSize(lines, cols);
 }
+QSize Pty::windowSize() const
+{
+    return QSize(_windowColumns,_windowLines);
+}
 
 void Pty::setXonXoff(bool enable)
 {

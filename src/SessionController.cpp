@@ -641,6 +641,7 @@ void SessionController::clearAndReset()
     Emulation* emulation = _session->emulation();
 
     emulation->reset();
+    _session->refresh();
 }
 void SessionController::searchClosed()
 {

@@ -345,6 +345,13 @@ public:
    */
   bool hasDarkBackground() const;
 
+  /** 
+   * Attempts to get the shell program to redraw the current display area. 
+   * This can be used after clearing the screen, for example, to get the 
+   * shell to redraw the prompt line.
+   */
+  void refresh();
+
   void startZModem(const QString &rz, const QString &dir, const QStringList &list);
   void cancelZModem();
   bool isZModemBusy() { return _zmodemBusy; }
