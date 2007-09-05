@@ -351,8 +351,6 @@ public:
     void setBidiEnabled(bool set) { _bidiEnabled=set; }
     bool isBidiEnabled() { return _bidiEnabled; }
 
-    void print(QPainter &paint, bool friendly, bool exact);
-
     /** 
      * Sets the margin between the top-left edge of the terminal display 
      * and the rendered text.
@@ -652,9 +650,6 @@ private:
     bool _hasBlinkingCursor;  // has blinking cursor enabled
     bool _ctrlDrag;           // require Ctrl key for drag
     bool _cutToBeginningOfLine; // triple click only selects forward
-    bool _isPrinting; // Paint job is intended for printer
-    bool _printerFriendly; // paint printer friendly, save ink
-    bool _printerBold; // Use a bold font instead of overstrike for bold
     bool _isFixedSize; //Columns / lines are locked.
     QTimer* _blinkTimer;  // active when hasBlinker
     QTimer* _blinkCursorTimer;  // active when hasBlinkingCursor

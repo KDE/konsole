@@ -266,9 +266,6 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_hasBlinkingCursor(false)
 ,_ctrlDrag(false)
 ,_cutToBeginningOfLine(false)
-,_isPrinting(false)
-,_printerFriendly(false)
-,_printerBold(false)
 ,_isFixedSize(false)
 ,_possibleTripleClick(false)
 ,_resizeWidget(0)
@@ -1086,42 +1083,6 @@ void TerminalDisplay::drawInputMethodPreeditString(QPainter& painter , const QRe
     drawCharacters(painter,rect,_inputMethodData.preeditString,style,invertColors);
 
     _inputMethodData.previousPreeditRect = rect; 
-}
-
-void TerminalDisplay::print(QPainter &paint, bool friendly, bool exact)
-{
-   bool saveFixedFont = _fixedFont;
-   bool saveBlinking = _blinking;
-   _fixedFont = false;
-   _blinking = false;
-   paint.setFont(font());
-
-   _isPrinting = true;
-   _printerFriendly = friendly;
-   _printerBold = !exact;
-
-   if (exact)
-   {
-     QPixmap pm(contentsRect().right(), contentsRect().bottom());
-     pm.fill();
-
-     QPainter pm_paint;
-     pm_paint.begin(&pm);
-     drawContents(pm_paint, contentsRect());
-     pm_paint.end();
-     paint.drawPixmap(0, 0, pm);
-   }
-   else
-   {
-     drawContents(paint, contentsRect());
-   }
-
-   _printerFriendly = false;
-   _isPrinting = false;
-   _printerBold = false;
-
-   _fixedFont = saveFixedFont;
-   _blinking = saveBlinking;
 }
 
 FilterChain* TerminalDisplay::filterChain() const
