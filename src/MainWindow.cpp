@@ -154,7 +154,6 @@ void MainWindow::activeViewChanged(SessionController* controller)
 void MainWindow::activeViewTitleChanged(ViewProperties* properties)
 {
     setPlainCaption(properties->title());
-    setWindowIcon(properties->icon());
 }
 
 IncrementalSearchBar* MainWindow::searchBar() const
