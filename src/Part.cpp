@@ -165,10 +165,22 @@ void Part::activeViewChanged(SessionController* controller)
     if ( controller == _pluggedController )
         return;
 
-    if ( factory() )
+    qDebug() << "Looking for factory";
+
+    // find client with the necessary factory
+    KXMLGUIClient* client = this;
+    qDebug() << "First parent" << client->parentClient();
+    while ( client->parentClient() ) 
     {
-        factory()->removeClient(_pluggedController);
-        factory()->addClient(controller);
+        qDebug() << "Next parent" << client->parentClient();
+        qDebug() << "Factory" << client->factory();
+        client = client->parentClient();
+    }
+
+    if ( client->factory() )
+    {
+        client->factory()->removeClient(_pluggedController);
+        client->factory()->addClient(controller);
     }
 
     _pluggedController = controller;

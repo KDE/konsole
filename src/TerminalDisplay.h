@@ -549,6 +549,7 @@ private:
 	void drawLineCharString(QPainter& painter, int x, int y, 
                             const QString& str, const Character* attributes);
 
+    // draws the preedit string for input methods
     void drawInputMethodPreeditString(QPainter& painter , const QRect& rect);
 
     // --
@@ -558,7 +559,7 @@ private:
 
     // maps a point on the widget to the position ( ie. line and column ) 
     // of the character at that point.
-    void characterPosition(const QPoint& widgetPoint,int& line,int& column) const;
+    void getCharacterPosition(const QPoint& widgetPoint,int& line,int& column) const;
 
     // the area where the preedit string for input methods will be draw
     QRect preeditRect() const;

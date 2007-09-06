@@ -317,8 +317,6 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
         {
             if ( _view->screenWindow() && !_viewUrlFilter )
             {
-                qDebug() << "Creating url filter";
-
                 connect( _view->screenWindow() , SIGNAL(scrolled(int)) , this ,
                         SLOT(requireUrlFilterUpdate()) );
                 connect( _view->screenWindow() , SIGNAL(outputChanged()) , this , 

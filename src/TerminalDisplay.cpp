@@ -56,6 +56,7 @@
 #include "Filter.h"
 #include "konsole_wcwidth.h"
 #include "ScreenWindow.h"
+#include "TerminalCharacterDecoder.h"
 
 using namespace Konsole;
 
@@ -1097,7 +1098,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
     QPoint cursorPos = mapFromGlobal(QCursor::pos());
     int cursorLine;
     int cursorColumn;
-    characterPosition( cursorPos , cursorLine , cursorColumn );
+    getCharacterPosition( cursorPos , cursorLine , cursorColumn );
     Character cursorCharacter = _image[loc(cursorColumn,cursorLine)];
 
     painter.setPen( QPen(cursorCharacter.foregroundColor.color(colorTable())) );
@@ -1469,7 +1470,7 @@ void TerminalDisplay::mousePressEvent(QMouseEvent* ev)
 
   int charLine;
   int charColumn;
-  characterPosition(ev->pos(),charLine,charColumn);
+  getCharacterPosition(ev->pos(),charLine,charColumn);
   QPoint pos = QPoint(charColumn,charLine);
 
   Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine,charColumn);
@@ -1556,13 +1557,14 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
   int charLine = 0;
   int charColumn = 0;
 
-  characterPosition(ev->pos(),charLine,charColumn); 
+  getCharacterPosition(ev->pos(),charLine,charColumn); 
 
   // handle filters
   // change link hot-spot appearance on mouse-over
   Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine,charColumn);
   if ( spot && spot->type() == Filter::HotSpot::Link)
   {
+    QRect previousHotspotArea = _mouseOverHotspotArea;
     _mouseOverHotspotArea.setCoords( qMin(spot->startColumn() , spot->endColumn()) * _fontWidth,
                                      spot->startLine() * _fontHeight,
                                      qMax(spot->startColumn() , spot->endColumn()) * _fontHeight,
@@ -1578,7 +1580,7 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
         QToolTip::showText( mapToGlobal(ev->pos()) , tooltip , this , _mouseOverHotspotArea );
     }
 
-    update( _mouseOverHotspotArea );
+    update( _mouseOverHotspotArea | previousHotspotArea );
   }
   else if ( _mouseOverHotspotArea.isValid() )
   {
@@ -1691,7 +1693,7 @@ void TerminalDisplay::extendSelection( const QPoint& position )
 
   int charColumn = 0;
   int charLine = 0;
-  characterPosition(pos,charLine,charColumn);
+  getCharacterPosition(pos,charLine,charColumn);
 
   QPoint here = QPoint(charColumn,charLine); //QPoint((pos.x()-tLx-_bX+(_fontWidth/2))/_fontWidth,(pos.y()-tLy-_bY)/_fontHeight);
   QPoint ohere;
@@ -1863,7 +1865,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
 
     int charLine;
     int charColumn;
-    characterPosition(ev->pos(),charLine,charColumn);
+    getCharacterPosition(ev->pos(),charLine,charColumn);
 
     // handle filters
     Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine,charColumn);
@@ -1921,7 +1923,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
   }
 }
 
-void TerminalDisplay::characterPosition(const QPoint& widgetPoint,int& line,int& column) const
+void TerminalDisplay::getCharacterPosition(const QPoint& widgetPoint,int& line,int& column) const
 {
     column = (widgetPoint.x()-contentsRect().left()-_bX) / _fontWidth;
     line = (widgetPoint.y()-contentsRect().top()-_bY) / _fontHeight;
@@ -1954,7 +1956,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
   int charLine = 0;
   int charColumn = 0;
 
-  characterPosition(ev->pos(),charLine,charColumn);
+  getCharacterPosition(ev->pos(),charLine,charColumn);
 
   QPoint pos(charColumn,charLine);
 
@@ -2047,7 +2049,7 @@ void TerminalDisplay::wheelEvent( QWheelEvent* ev )
   {
     int charLine;
     int charColumn;
-    characterPosition( ev->pos() , charLine , charColumn );
+    getCharacterPosition( ev->pos() , charLine , charColumn );
     
     emit mouseSignal( ev->delta() > 0 ? 4 : 5, 
                       charColumn + 1, 
@@ -2067,7 +2069,7 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
 
   int charLine;
   int charColumn;
-  characterPosition(ev->pos(),charLine,charColumn);
+  getCharacterPosition(ev->pos(),charLine,charColumn);
   _iPntSel = QPoint(charColumn,charLine);
 
   _screenWindow->clearSelection();
@@ -2294,22 +2296,30 @@ void TerminalDisplay::inputMethodEvent( QInputMethodEvent* event )
 }
 QVariant TerminalDisplay::inputMethodQuery( Qt::InputMethodQuery query ) const
 {
+    const QPoint cursorPos = _screenWindow->cursorPosition();
     switch ( query ) 
     {
         case Qt::ImMicroFocus:
-            {
-                const QPoint cursorPos = _screenWindow->cursorPosition();
                 return imageToWidget(QRect(cursorPos.x(),cursorPos.y(),1,1));
-            }
             break;
         case Qt::ImFont:
                 return font();
             break;
         case Qt::ImCursorPosition:
-                return 0;
+                // return the cursor position within the current line
+                return cursorPos.x();
             break;
         case Qt::ImSurroundingText:
-                return QString();
+            {
+                // return the text from the current line
+                QString lineText;
+                QTextStream stream(&lineText);
+                PlainTextDecoder decoder;
+                decoder.begin(&stream);
+                decoder.decodeLine(&_image[loc(0,cursorPos.y())],_usedColumns,_lineProperties[cursorPos.y()]);
+                decoder.end();
+                return lineText;
+            }
             break;
         case Qt::ImCurrentSelection:
                 return QString();
@@ -2383,8 +2393,6 @@ void TerminalDisplay::bell(const QString& message)
     _allowBell = false;
     QTimer::singleShot(500,this,SLOT(enableBell()));
  
-    kDebug(1211) << __FUNCTION__;
-
     if (_bellMode==BELL_SYSTEM) 
     {
         KNotification::beep();
