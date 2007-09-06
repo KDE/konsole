@@ -382,7 +382,7 @@ AccessibleColorScheme::AccessibleColorScheme()
     // setup colors
     const int ColorRoleCount = 8;
 
-    const KColorScheme colorScheme;
+    const KColorScheme colorScheme(QPalette::Active);
 
     QBrush colors[ColorRoleCount] =
     {

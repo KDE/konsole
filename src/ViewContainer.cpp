@@ -648,10 +648,11 @@ void TabbedViewContainerV2::removeViewWidget( QWidget* view )
 
 void TabbedViewContainerV2::setTabActivity(int index , bool activity)
 {
-    KColorScheme colorScheme;
+    const QPalette& palette = _tabBar->palette();
+    KColorScheme colorScheme(palette.currentColorGroup());
     const QColor colorSchemeActive = colorScheme.foreground(KColorScheme::ActiveText).color();    
     
-    const QColor normalColor = _tabBar->palette().text().color();
+    const QColor normalColor = palette.text().color();
     const QColor activityColor = KColorUtils::mix(normalColor,colorSchemeActive); 
 
 
