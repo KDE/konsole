@@ -3,7 +3,7 @@ Encoding=UTF-8
 Type=Application
 Exec=konsole
 Icon=utilities-terminal
-DocPath=konsole/index.html
+X-DocPath=konsole/index.html
 Terminal=false
 X-KDE-StartupNotify=true
 
