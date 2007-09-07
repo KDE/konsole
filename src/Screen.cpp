@@ -306,7 +306,7 @@ void Screen::deleteChars(int n)
 void Screen::insertChars(int n)
 {
   if (n == 0) n = 1; // Default
-  
+
   screenLines[cuY].insert(cuX,n,' ');
 
   if ( screenLines[cuY].count() > columns )
@@ -789,27 +789,28 @@ void Screen::ShowCharacter(unsigned short c)
       cuX = columns-w;
   }
 
-  if (getMode(MODE_Insert)) insertChars(w);
-
- // int i = loc(cuX,cuY);
-
-  lastPos = loc(cuX,cuY);
-
- // checkSelection(i, i); // check if selection is still valid.
-  checkSelection(cuX,cuY);
-
+  // ensure current line vector has enough elements
   int size = screenLines[cuY].size();
   if (size == 0 && cuY > 0)
   {
-          screenLines[cuY].resize( qMax(screenLines[cuY-1].size() , cuX+1) );
+          screenLines[cuY].resize( qMax(screenLines[cuY-1].size() , cuX+w) );
   }
   else
   {
-    if (size < cuX+1)
+    if (size < cuX+w)
     {
-          screenLines[cuY].resize(cuX+1);
+          screenLines[cuY].resize(cuX+w);
     }
   }
+
+  if (getMode(MODE_Insert)) insertChars(w);
+
+  lastPos = loc(cuX,cuY);
+
+  // // check if selection is still valid.
+  checkSelection(cuX,cuY);
+
+  
 
   Character& currentChar = screenLines[cuY][cuX];
 
