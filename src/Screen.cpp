@@ -307,6 +307,9 @@ void Screen::insertChars(int n)
 {
   if (n == 0) n = 1; // Default
 
+  if ( screenLines[cuY].size() < cuX )
+    screenLines[cuY].resize(cuX);
+
   screenLines[cuY].insert(cuX,n,' ');
 
   if ( screenLines[cuY].count() > columns )

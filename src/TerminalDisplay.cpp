@@ -1281,7 +1281,7 @@ void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
 		 //reset back to single-width, single-height _lines 
 		 paint.resetMatrix();
 
-		 if (y < _lineProperties.size())
+		 if (y < _lineProperties.size()-1)
 		 {
 			//double-height _lines are represented by two adjacent _lines 
             //containing the same characters
