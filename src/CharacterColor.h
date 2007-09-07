@@ -193,8 +193,16 @@ public:
             _w = co;
             break;
         default:
-            Q_ASSERT(false);
+            _colorSpace = COLOR_SPACE_UNDEFINED;
     }
+  }
+
+  /** 
+   * Returns true if this character color entry is valid.
+   */
+  bool isValid() 
+  {
+        return _colorSpace != COLOR_SPACE_UNDEFINED;
   }
     
   /** 

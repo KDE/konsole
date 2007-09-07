@@ -1241,7 +1241,11 @@ void Screen::setDefaultRendition()
 void Screen::setForeColor(int space, int color)
 {
   cu_fg = CharacterColor(space, color);
-  effectiveRendition();
+
+  if ( cu_fg.isValid() ) 
+    effectiveRendition();
+  else 
+    setForeColor(COLOR_SPACE_DEFAULT,DEFAULT_FORE_COLOR);
 }
 
 /*!
@@ -1249,7 +1253,11 @@ void Screen::setForeColor(int space, int color)
 void Screen::setBackColor(int space, int color)
 {
   cu_bg = CharacterColor(space, color);
-  effectiveRendition();
+
+  if ( cu_bg.isValid() ) 
+    effectiveRendition();
+  else
+    setBackColor(COLOR_SPACE_DEFAULT,DEFAULT_BACK_COLOR);
 }
 
 /* ------------------------------------------------------------------------- */
