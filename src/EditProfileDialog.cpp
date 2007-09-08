@@ -389,8 +389,6 @@ void EditProfileDialog::setupAppearancePage(const Profile* info)
     connect( _ui->colorSchemeList , SIGNAL(entered(const QModelIndex&)) , this , 
             SLOT(previewColorScheme(const QModelIndex&)) );
 
-    connect( _ui->selectColorSchemeButton , SIGNAL(clicked()) , this , 
-            SLOT(colorSchemeSelected()) );
     connect( _ui->editColorSchemeButton , SIGNAL(clicked()) , this , 
             SLOT(editColorScheme()) );
     connect( _ui->removeColorSchemeButton , SIGNAL(clicked()) , this ,
@@ -656,8 +654,6 @@ void EditProfileDialog::setupKeyboardPage(const Profile* /* info */)
     connect( _ui->keyBindingList->selectionModel() , 
                 SIGNAL(selectionChanged(const QItemSelection&,const QItemSelection&)),
                 SLOT(keyBindingSelected()) );
-    connect( _ui->selectKeyBindingsButton , SIGNAL(clicked()) , this , 
-            SLOT(keyBindingSelected()) );
     connect( _ui->newKeyBindingsButton , SIGNAL(clicked()) , this ,
             SLOT(newKeyBinding()) );
     connect( _ui->editKeyBindingsButton , SIGNAL(clicked()) , this , 
