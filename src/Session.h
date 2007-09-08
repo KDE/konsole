@@ -132,11 +132,14 @@ public:
   Emulation*  emulation() const;    
   
   /** 
-   * TODO: Document me
+   * Returns the environment of this session as a list of strings like
+   * VARIABLE=VALUE
    */  
   QStringList environment() const;
   /** 
-   * TODO: Document me
+   * Sets the environment for this session.
+   * @p environment should be a list of strings like
+   * VARIABLE=VALUE
    */
   void setEnvironment(const QStringList& environment);
 
@@ -279,18 +282,21 @@ public:
   /** Returns the name of the icon associated with this session. */
   QString iconName() const;
  
-  /** TODO: Document me */ 
+  /** Sets the text of the icon associated with this session. */
   void setIconText(const QString& iconText);
-  /** TODO: Document me */
+  /** Returns the text of the icon associated with this session. */
   QString iconText() const;
 
-  /** TODO: Document me */
+  /** Specifies whether a utmp entry should be created for the pty used by this session. */
   void setAddToUtmp(bool);
   
   /** Sends the specified @p signal to the terminal process. */
   bool sendSignal(int signal);
 
-  /** TODO: Document me */
+  /**
+   * Specifies whether to close the session automatically when the terminal
+   * process terminates.
+   */
   void setAutoClose(bool b) { _autoClose = b; }
   
   /**
@@ -372,7 +378,11 @@ public slots:
    */   
   void close();
  
-  /** TODO: Document me */ 
+  /**
+   * Changes the session title or other customizable aspects of the terminal
+   * emulation display. For a list of what may be changed see the
+   * Emulation::titleChanged() signal.
+   */
   void setUserTitle( int, const QString &caption );
   
 signals:

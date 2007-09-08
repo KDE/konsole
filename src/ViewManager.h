@@ -161,7 +161,10 @@ signals:
     // 'multipleViews' - true if the manager has multiple containers or false otherwise
     void splitViewToggle(bool multipleViews);
 
-    /** TODO: Document me. */
+    /**
+     * Emitted when menu bar visibility changes because a profile that requires so is
+     * activated.
+     */
     void setMenuBarVisible(bool);
 
 private slots:

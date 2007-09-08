@@ -222,10 +222,9 @@ public: // these are all `Screen' operations
     /** 
      * Sets the start of the selection.
      *
-     * @param cursor TODO: Document me
      * @param column The column index of the first character in the selection.
      * @param line The line index of the first character in the selection.
-     * @param columnmode TODO: Document me
+     * @param columnmode True if the selection is in column mode.
      */
     void setSelectionStart(const int column, const int line, const bool columnmode);
     
@@ -254,13 +253,7 @@ public: // these are all `Screen' operations
 
     void setBusySelecting(bool busy) { sel_busy = busy; }
 
-    /**
-     * Returns true if the character at (@p column, @p line) is part of the current selection.
-     *
-     * @param cursor  TODO: Document me
-     * @param column  TODO: Document me
-     * @param line    TODO: Document me
-     */ 
+    /** Returns true if the character at (@p column, @p line) is part of the current selection. */ 
     bool isSelected(const int column,const int line);
 
     /** 

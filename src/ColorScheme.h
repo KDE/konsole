@@ -113,9 +113,9 @@ public:
     bool hasDarkBackground() const;
 
     /** 
-     * Sets the opacity level of the display background.  A value of
-     * 0 represents a completely transparent background, up to a value of 1
-     * representing a completely opaque background.
+     * Sets the opacity level of the display background. @p opacity ranges
+     * between 0 (completely transparent background) and 1 (completely
+     * opaque background).
      *
      * Defaults to 1.
      *

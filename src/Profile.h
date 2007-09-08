@@ -86,7 +86,7 @@ public:
          */ 
         Environment,
         /** (QString) The initial working directory for sessions created using this profile. */ 
-        Directory,      // QString
+        Directory,
 
         /** (QString) The format used for tab titles when running normal commands. */
         LocalTabTitleFormat,   
@@ -127,6 +127,7 @@ public:
         ScrollBarPosition,  
 
         /** TODO Document me*/
+        // FIXME - Is this a duplicate of WordCharacters?
         SelectWordCharacters,
         /** (bool) Specifies whether text in terminal displays is allowed to blink. */
         BlinkingTextEnabled,       
@@ -141,7 +142,7 @@ public:
         /** (bool) Specifies whether the cursor blinks ( in a manner similar 
          * to text editing applications )
          */
-        BlinkingCursorEnabled,      // bool
+        BlinkingCursorEnabled,
 
         /** (bool) If true, terminal displays use a fixed color to draw the cursor,
          * specified by the CustomCursorColor property.  Otherwise the cursor changes
@@ -154,9 +155,11 @@ public:
          * if the UseCustomCursorColor property is true. */ 
         CustomCursorColor,        
 
-        /** TODO Document me */
+        /** (QString) A string consisting of the characters used to delimit words when
+         * selecting text in the terminal display.
+         */
         // FIXME - Is this a duplicate of SelectWordCharacters?
-        WordCharacters,  // QString
+        WordCharacters,
 
         /** (TabBarPositionEnum) Position of the tab-bar relative to the terminal displays. */
         TabBarPosition,
@@ -392,9 +395,8 @@ public:
      * Returns true if the profile was successfully read or false otherwise.
      *
      * @param path Path to the profile to read
-     * @param profile TODO: Document me
+     * @param profile Pointer to the Profile the settings will be read into
      * @param parentProfile Receives the name of the parent profile specified in
-     * @p path.  TODO: Document me
      */
     virtual bool readProfile(const QString& path , Profile* profile , QString& parentProfile) = 0;
 };

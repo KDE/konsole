@@ -125,7 +125,10 @@ Q_OBJECT
      */
     int foregroundProcessGroup() const;
    
-    /** TODO: Document me */ 
+    /**
+     * Returns whether the buffer used to send data to the
+     * terminal process is full.
+     */
     bool bufferFull() const { return _bufferFull; }
 
   public slots:
@@ -174,7 +177,8 @@ Q_OBJECT
     void receivedData(const char* buffer, int length);
     
     /**
-     * TODO: Document me  
+     * Emitted when the buffer used to send data to the terminal
+     * process becomes empty, i.e. all data has been sent.
      */
     void bufferEmpty();
 
