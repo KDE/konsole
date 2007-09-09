@@ -1359,6 +1359,7 @@ void TerminalDisplay::updateImageSize()
   Character* oldimg = _image;
   int oldlin = _lines;
   int oldcol = _columns;
+
   makeImage();
   
   // copy the old image to reduce flicker
@@ -1367,9 +1368,11 @@ void TerminalDisplay::updateImageSize()
 
   if (oldimg)
   {
-    for (int line = 0; line < lines; line++)
+    for (int line = 0; line < lines; line++) 
+    {
       memcpy((void*)&_image[_columns*line],
              (void*)&oldimg[oldcol*line],columns*sizeof(Character));
+    }
     delete[] oldimg;
   }
 
@@ -1448,11 +1451,15 @@ void TerminalDisplay::setScrollBarPosition(ScrollBarPosition position)
 {
   if (_scrollbarLocation == position) 
       return; 
-  
+ 
+  if ( position == NoScrollBar )
+     _scrollBar->hide();
+  else 
+     _scrollBar->show(); 
+
   _bY = _bX = 1;
   _scrollbarLocation = position;
   
-  calcGeometry();
   propagateSize();
   update();
 }
@@ -2441,19 +2448,16 @@ void TerminalDisplay::calcGeometry()
     case NoScrollBar :
      _bX = _rimX;
      _contentWidth = contentsRect().width() - 2 * _rimX;
-     _scrollBar->hide();
      break;
     case ScrollBarLeft :
      _bX = _rimX+_scrollBar->width();
      _contentWidth = contentsRect().width() - 2 * _rimX - _scrollBar->width();
      _scrollBar->move(contentsRect().topLeft());
-     _scrollBar->show();
      break;
     case ScrollBarRight:
      _bX = _rimX;
      _contentWidth = contentsRect().width()  - 2 * _rimX - _scrollBar->width();
      _scrollBar->move(contentsRect().topRight() - QPoint(_scrollBar->width()-1,0));
-     _scrollBar->show();
      break;
   }
 
@@ -2486,7 +2490,8 @@ void TerminalDisplay::makeImage()
   
   // We over-commit one character so that we can be more relaxed in dealing with
   // certain boundary conditions: _image[_imageSize] is a valid but unused position
-  _image = new Character[_imageSize+1]; 
+  _image = new Character[_imageSize+1];
+
   clearImage();
 }
 
