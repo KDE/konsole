@@ -45,6 +45,10 @@ void ViewProperties::fireActivity()
     emit activity(this);
 }
 
+void ViewProperties::rename()
+{
+}
+
 void ViewProperties::setTitle(const QString& title)
 {
     if ( title != _title )

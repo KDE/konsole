@@ -117,6 +117,7 @@ public:
     // reimplemented
     virtual KUrl url() const;
     virtual QString currentDir() const;
+    virtual void rename();
 
     // Reimplemented to watch for events happening to the view
     virtual bool eventFilter(QObject* watched , QEvent* event);

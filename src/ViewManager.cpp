@@ -35,7 +35,6 @@
 #include <KXMLGUIFactory>
 
 // Konsole
-#include "BookmarkHandler.h"
 #include "ColorScheme.h"
 #include "Session.h"
 #include "TerminalDisplay.h"
@@ -531,6 +530,7 @@ ViewContainer* ViewManager::createContainer(const QString& profileKey)
            SLOT(map()) ); 
     _containerSignalMapper->setMapping(container,container);
 
+    connect( container, SIGNAL(newViewRequest()), _actionCollection->action("new-tab"), SLOT(trigger()) );
     connect( container , SIGNAL(viewRemoved(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)) );
     connect( container , SIGNAL(closeRequest(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)) );
     connect( container , SIGNAL(activeViewChanged(QWidget*)) , this , SLOT(viewActivated(QWidget*)));

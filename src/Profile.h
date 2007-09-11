@@ -126,9 +126,6 @@ public:
          */
         ScrollBarPosition,  
 
-        /** TODO Document me*/
-        // FIXME - Is this a duplicate of WordCharacters?
-        SelectWordCharacters,
         /** (bool) Specifies whether text in terminal displays is allowed to blink. */
         BlinkingTextEnabled,       
         /** (bool) Specifies whether the flow control keys ( typically Ctrl+S , Ctrl+Q )
@@ -158,7 +155,6 @@ public:
         /** (QString) A string consisting of the characters used to delimit words when
          * selecting text in the terminal display.
          */
-        // FIXME - Is this a duplicate of SelectWordCharacters?
         WordCharacters,
 
         /** (TabBarPositionEnum) Position of the tab-bar relative to the terminal displays. */

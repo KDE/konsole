@@ -81,6 +81,14 @@ signals:
     /** Emitted when activity has occurred in this view. */
     void activity(ViewProperties* item);
 
+public slots:
+    /**
+     * Requests the renaming of this view.
+     * 
+     * The default implementation does nothing.
+     */
+     virtual void rename();
+
 protected slots:
     /**
      * Emits the activity() signal.

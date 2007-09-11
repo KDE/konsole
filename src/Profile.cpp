@@ -74,7 +74,6 @@ const Profile::PropertyNamePair Profile::DefaultPropertyNames[] =
     , { HistoryMode , "HistoryMode" }
     , { HistorySize , "HistorySize" } 
     , { ScrollBarPosition , "ScrollBarPosition" }
-    , { SelectWordCharacters , "SelectWordCharacters" }
     , { BlinkingTextEnabled , "BlinkingTextEnabled" }
     , { FlowControlEnabled , "FlowControlEnabled" }
     , { AllowProgramsToResizeWindow , "AllowProgramsToResizeWindow" }

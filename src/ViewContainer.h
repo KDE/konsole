@@ -239,6 +239,9 @@ signals:
     /** Emitted when the user requests to close a view */
     void closeRequest(QWidget* activeView);
 
+    /** Emitted when the user requests to open a new view */
+    void newViewRequest();
+
     /** Emitted when the active view changes */
     void activeViewChanged( QWidget* view );
 

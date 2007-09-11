@@ -261,6 +261,11 @@ KUrl SessionController::url() const
     return KUrl( path ); 
 }
 
+void SessionController::rename()
+{
+	renameSession();
+}
+
 void SessionController::openUrl( const KUrl& url ) 
 {
     // handle local paths

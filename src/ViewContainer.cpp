@@ -467,7 +467,8 @@ TabbedViewContainerV2::TabbedViewContainerV2(NavigationPosition position , QObje
     _tabBar->setDrawBase(true);
    
     connect( _tabBar , SIGNAL(currentChanged(int)) , this , SLOT(currentTabChanged(int)) );
-    connect( _tabBar , SIGNAL(mouseDoubleClick(int)) , this , SLOT(tabDoubleClicked(int)) );
+    connect( _tabBar , SIGNAL(tabDoubleClicked(int)) , this , SLOT(tabDoubleClicked(int)) );
+    connect( _tabBar , SIGNAL(newTabRequest()) , this , SIGNAL(newViewRequest()) );
 
     _layout = new TabbedViewContainerV2Layout;
     _layout->setSpacing(0);
@@ -568,12 +569,7 @@ TabbedViewContainerV2::~TabbedViewContainerV2()
 }
 void TabbedViewContainerV2::tabDoubleClicked(int tab)
 {
-    qDebug() << __FUNCTION__ << ", tab index =" << tab;
-
-    if ( tab < 0 )
-    {
-        //emit duplicateRequest(); 
-    }
+    viewProperties( views()[tab] )->rename();
 }
 void TabbedViewContainerV2::moveViewWidget( int fromIndex , int toIndex )
 {
