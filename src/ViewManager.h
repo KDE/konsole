@@ -157,15 +157,26 @@ signals:
      */
     void viewPropertiesChanged(const QList<ViewProperties*>& propertiesList);
 
-    // internal
-    // 'multipleViews' - true if the manager has multiple containers or false otherwise
+    /** 
+     * Emitted when the number of views containers changes.  This is used to disable or
+     * enable menu items which can only be used when there are one or multiple containers
+     * visible.
+     *
+     * @param multipleViews True if there are multiple view containers open or false if there is 
+     * just a single view.
+     */
     void splitViewToggle(bool multipleViews);
 
     /**
      * Emitted when menu bar visibility changes because a profile that requires so is
      * activated.
      */
-    void setMenuBarVisible(bool);
+    void setMenuBarVisibleRequest(bool);
+
+    /**
+     * Requests creation of a new view.  
+     */
+    void newViewRequest();
 
 private slots:
     // called when the "Split View Left/Right" menu item is selected

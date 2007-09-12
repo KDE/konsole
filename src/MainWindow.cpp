@@ -71,8 +71,9 @@ MainWindow::MainWindow()
     connect( _viewManager , SIGNAL(viewPropertiesChanged(const QList<ViewProperties*>&)) ,
            bookmarkHandler() , SLOT(setViews(const QList<ViewProperties*>&)) ); 
 
-    connect( _viewManager , SIGNAL(setMenuBarVisible(bool)) , menuBar() ,
+    connect( _viewManager , SIGNAL(setMenuBarVisibleRequest(bool)) , menuBar() ,
             SLOT(setVisible(bool)) );
+    connect( _viewManager , SIGNAL(newViewRequest()) , this , SLOT(newTab()) );
 
     // create main window widgets
     setupWidgets();

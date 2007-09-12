@@ -530,7 +530,7 @@ ViewContainer* ViewManager::createContainer(const QString& profileKey)
            SLOT(map()) ); 
     _containerSignalMapper->setMapping(container,container);
 
-    connect( container, SIGNAL(newViewRequest()), _actionCollection->action("new-tab"), SLOT(trigger()) );
+    connect( container, SIGNAL(newViewRequest()), this , SIGNAL(newViewRequest()) );
     connect( container , SIGNAL(viewRemoved(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)) );
     connect( container , SIGNAL(closeRequest(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)) );
     connect( container , SIGNAL(activeViewChanged(QWidget*)) , this , SLOT(viewActivated(QWidget*)));
@@ -611,7 +611,7 @@ void ViewManager::applyProfile(TerminalDisplay* view , const QString& profileKey
     const ColorScheme* colorScheme = colorSchemeForProfile(profileKey);
 
     // menu bar visibility
-    emit setMenuBarVisible( info->property(Profile::ShowMenuBar).value<bool>() );
+    emit setMenuBarVisibleRequest( info->property(Profile::ShowMenuBar).value<bool>() );
 
     // tab bar visibility
     ViewContainer* container = _viewSplitter->activeContainer();
