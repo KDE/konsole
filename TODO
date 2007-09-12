@@ -18,27 +18,14 @@ The KDE 4.0 TODO List:
 
 - Input Method Event in terminal display widget
 
-- Get the Konsole part working properly in other
-  major KDE programs, such as Dolphin,
-  KDevelop, Kate etc.
+    [ IN PROGRESS - NEEDS TESTING ]
 
-  Essential:    Make the part function and be stable in
-                Dolphin, KDevelop and Kate
-
-
-  Nice to have: Make as much of the functionality from the main 
-                program available in the part as possible.  
 
 - Implement changing of the Konsole window size by
   terminal applications.
     - Consider behaviour when there are multiple views open 
       on a single session.
 
-- Support for common terminal command line options
-
-    Nice to have:
-        -fg : Specify foreground color
-        -bg : Specify background color 
 
 - Implement a DBus interface for Konsole.
   Look for Konsole bug reports on bugs.kde.org containing
@@ -58,14 +45,9 @@ The KDE 4.0 TODO List:
 - Better documentation for shortcuts to move between views
   (Shift+<Arrows> and Shift+Tab)
 
-- Display a warning if, on an un-composited desktop, the user chooses a colour scheme which uses
-  transparency.
+- [BUGREPORT] Double clicking on the tab bar should open a new tab 
 
-- Double clicking on the tab bar should open a new tab 
-
-- Double clicking on a tab should prompt to rename it
-
-- Konsole window should remember its size when closed
+- [BUGREPORT] Double clicking on a tab should prompt to rename it
 
 - Determining which view is focused in split view mode is currently difficult, the only
   indication is the cursor's appearence (and then, only with a block cursor).
@@ -73,6 +55,9 @@ The KDE 4.0 TODO List:
   Draw a frame around the view to solve this problem?
 
 == BUGS ==
+
+- 'Show MenuBar' session context menu action not showing up in session context menu here,
+   apparently is showing up on at least one other person's build.
 
 - Keyboard shortcuts for session-specific actions no longer work properly in split-view mode,
   there is a warning about ambiguous shortcuts printed to the terminal.  Activating the 
@@ -100,6 +85,12 @@ do not always behave well with lots of successive image size changes.
 
 == NON-ESSENTIAL TWEAKS (if spare time for 4.0, otherwise for post-4.0) ==
 
+- Support for common terminal command line options
+
+    Nice to have:
+        -fg : Specify foreground color
+        -bg : Specify background color 
+
 - Currently splitting the view creates a new terminal widget for each session
   in the new view.  This will have a perceptible performance impact for 
   users who have ten, twenty or more tabs open.  Add facilities to
@@ -107,6 +98,9 @@ do not always behave well with lots of successive image size changes.
 
   == > Note, Qt only actually creates the X11 window when it is shown and 
        not before.
+
+  == > Note. Qt will do away with native X11 windows for non-toplevel widgets
+       in Qt 4.4, that might solve the problem for us.
 
 - Ability to define bold or transparent status for each
   color in the color scheme.  Make the setting of 
@@ -207,6 +201,15 @@ do not always behave well with lots of successive image size changes.
 
 === DONE ===
 
+- Display a warning if, on an un-composited desktop, the user chooses a colour scheme which uses
+  transparency.
+
+- Get the Konsole part working properly in other
+  major KDE programs, such as Dolphin,
+  KDevelop, Kate etc.
+
+  Essential:    Make the part function and be stable in
+                Dolphin, KDevelop and Kate
 
 - Support for common terminal command line options
     Essential:
