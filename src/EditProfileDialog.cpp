@@ -31,6 +31,7 @@
 #include <QtGui/QLinearGradient>
 #include <QtGui/QRadialGradient>
 
+#include <QtCore/QTimer>
 #include <QtCore/QTimeLine>
 
 // KDE
@@ -58,12 +59,13 @@ using namespace Konsole;
 EditProfileDialog::EditProfileDialog(QWidget* parent)
     : KDialog(parent)
     , _colorSchemeAnimationTimeLine(0)
+    , _delayedPreviewTimer(new QTimer(this))
 {
     setCaption(i18n("Edit Profile"));
     setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply | KDialog::Default );
 
     connect( this , SIGNAL(applyClicked()) , this , SLOT(save()) );
-
+    connect( _delayedPreviewTimer , SIGNAL(timeout()) , this , SLOT(delayedPreviewActivate()) );
     _ui = new Ui::EditProfileDialog();
     _ui->setupUi(mainWidget());
 
@@ -518,6 +520,9 @@ bool EditProfileDialog::eventFilter( QObject* watched , QEvent* event )
 }
 void EditProfileDialog::unpreviewAll()
 {
+    _delayedPreviewTimer->stop();
+    _delayedPreviewProperties.clear();
+
     QHash<Profile::Property,QVariant> map;
     QHashIterator<int,QVariant> iter(_previewedProperties);
     while ( iter.hasNext() )
@@ -532,19 +537,43 @@ void EditProfileDialog::unpreviewAll()
 }
 void EditProfileDialog::unpreview(int property)
 {
+    _delayedPreviewProperties.remove(property);
+    
     if (!_previewedProperties.contains(property))
         return;
-
+    
     QHash<Profile::Property,QVariant> map;
     map.insert((Profile::Property)property,_previewedProperties[property]);
     SessionManager::instance()->changeProfile(_profileKey,map,false); 
 
     _previewedProperties.remove(property);
 }
+void EditProfileDialog::delayedPreview(int property , const QVariant& value)
+{
+    _delayedPreviewProperties.insert(property,value); 
+    QTimer* timer = new QTimer(this);
+    timer->setSingleShot(true);
+
+    _delayedPreviewTimer->stop();
+    _delayedPreviewTimer->start(300);    
+}
+void EditProfileDialog::delayedPreviewActivate()
+{
+    Q_ASSERT( qobject_cast<QTimer*>(sender()) );
+
+    QMutableHashIterator<int,QVariant> iter(_delayedPreviewProperties);
+    if ( iter.hasNext() ) 
+    {
+        iter.next();
+        preview(iter.key(),iter.value());
+    }
+}
 void EditProfileDialog::preview(int property , const QVariant& value)
 {
     QHash<Profile::Property,QVariant> map;
     map.insert((Profile::Property)property,value);
+    
+    _delayedPreviewProperties.remove(property);
 
     const Profile* original = lookupProfile();
 
@@ -558,7 +587,7 @@ void EditProfileDialog::previewColorScheme(const QModelIndex& index)
 {
     const QString& name = index.data(Qt::UserRole+1).value<const ColorScheme*>()->name();
 
-    preview( Profile::ColorScheme , name );
+    delayedPreview( Profile::ColorScheme , name );
 }
 void EditProfileDialog::removeColorScheme()
 {

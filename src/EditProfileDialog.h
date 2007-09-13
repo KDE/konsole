@@ -164,6 +164,9 @@ private slots:
     void wordCharactersChanged(const QString&);
     void setDefaultCodec(QTextCodec*);
 
+    // apply the first previewed changes stored up by delayedPreview()
+    void delayedPreviewActivate();
+
 private:
     // initialize various pages of the dialog
     void setupGeneralPage(const Profile* info);
@@ -183,6 +186,7 @@ private:
     void changeCheckedItem( QAbstractItemModel* mode,  const QModelIndex& to );
 
     void preview(int property , const QVariant& value);
+    void delayedPreview(int property , const QVariant& value);
     void unpreview(int property);
     void unpreviewAll();
 
@@ -217,8 +221,11 @@ private:
     // after an update by a call to ensurePageLoaded()
     QVector<bool> _pageNeedsUpdate;
     QHash<int,QVariant> _previewedProperties;
-
+    
     QTimeLine* _colorSchemeAnimationTimeLine;
+
+    QHash<int,QVariant> _delayedPreviewProperties;
+    QTimer* _delayedPreviewTimer;
 };
 
 /**
