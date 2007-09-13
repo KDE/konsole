@@ -150,6 +150,7 @@ public slots:
 
 private slots:
     // menu item handlers
+    void openBrowser();
     void copy();
     void paste();
     void clear();

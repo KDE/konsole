@@ -21,6 +21,7 @@
 #include "SessionController.h"
 
 // Qt
+#include <QtGui/QApplication>
 #include <QMenu>
 
 // KDE
@@ -29,6 +30,7 @@
 #include <KInputDialog>
 #include <KLocale>
 #include <KMenu>
+#include <KRun>
 #include <kshell.h>
 #include <KToggleAction>
 #include <KUrl>
@@ -400,6 +402,12 @@ void SessionController::setupActions()
     action->setText( i18n("&Close Tab") );
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_W) );
     connect( action , SIGNAL(triggered()) , this , SLOT(closeSession()) );
+
+    // Open Browser
+    action = collection->addAction("open-browser");
+    action->setText( i18n("Open Browser Here") );
+    action->setIcon( KIcon("folder-open") );
+    connect( action, SIGNAL(triggered()), this, SLOT(openBrowser()) );
     
     // Copy and Paste
     action = collection->addAction("copy");
@@ -621,6 +629,12 @@ void SessionController::saveSession()
 void SessionController::closeSession()
 {
     _session->close();
+}
+
+void SessionController::openBrowser()
+{
+    kDebug() << "url is" << url();
+    new KRun(url(), QApplication::activeWindow());
 }
 
 void SessionController::copy()

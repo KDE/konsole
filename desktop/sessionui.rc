@@ -3,6 +3,7 @@
 <kpartgui name="session">
     <MenuBar>
         <Menu name="file">
+            <Action name="open-browser" group="session-operations"/>
             <Action name="close-session" group="session-operations"/>
         </Menu>
         <Menu name="edit">
@@ -46,6 +47,7 @@
         <Action name="copy"/>
         <Action name="paste"/>
         <Action name="clear-history-and-reset"/>
+        <Action name="open-browser"/>
         <Separator/>
         <Action name="show-menubar"/>
         <Action name="change-profile"/>    
