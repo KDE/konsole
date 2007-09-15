@@ -177,10 +177,6 @@ void Screen::cursorRight(int n)
   cuX = qMin(columns-1,cuX+n);
 }
 
-/*!
-    Set top and bottom margin.
-*/
-
 void Screen::setMargins(int top, int bot)
 //=STBM
 {
@@ -208,13 +204,6 @@ int Screen::bottomMargin() const
     return bmargin;
 }
 
-/*!
-    Move the cursor down one line.
-
-    If cursor is on bottom margin, the region between the
-    actual top and bottom margin is scrolled up instead.
-*/
-
 void Screen::index()
 //=IND
 {
@@ -225,13 +214,6 @@ void Screen::index()
   else if (cuY < lines-1)
     cuY += 1;
 }
-
-/*!
-    Move the cursor up one line.
-
-    If cursor is on the top margin, the region between the
-    actual top and bottom margin is scrolled down instead.
-*/
 
 void Screen::reverseIndex()
 //=RI
@@ -255,27 +237,12 @@ void Screen::NextLine()
   Return(); index();
 }
 
-// Line Editing ----------------------------------------------------------------
-
-/*! \section inserting / deleting characters
-*/
-
-/*! erase `n' characters starting from (including) the cursor position.
-
-    The line is filled in from the right with spaces.
-*/
-
 void Screen::eraseChars(int n)
 {
   if (n == 0) n = 1; // Default
   int p = qMax(0,qMin(cuX+n-1,columns-1));
   clearImage(loc(cuX,cuY),loc(p,cuY),' ');
 }
-
-/*! delete `n' characters starting from (including) the cursor position.
-
-    The line is filled in from the right with spaces.
-*/
 
 void Screen::deleteChars(int n)
 {
@@ -298,11 +265,6 @@ void Screen::deleteChars(int n)
   screenLines[cuY].remove(cuX,n);
 }
 
-/*! insert `n' spaces at the cursor position.
-
-    The cursor is not moved by the operation.
-*/
-
 void Screen::insertChars(int n)
 {
   if (n == 0) n = 1; // Default
@@ -315,11 +277,6 @@ void Screen::insertChars(int n)
   if ( screenLines[cuY].count() > columns )
       screenLines[cuY].resize(columns);
 }
-
-/*! delete `n' lines starting from (including) the cursor position.
-
-    The cursor is not moved by the operation.
-*/
 
 void Screen::deleteLines(int n)
 {
@@ -376,14 +333,10 @@ void Screen::restoreMode(int m)
   currParm.mode[m] = saveParm.mode[m];
 }
 
-//NOTE: this is a helper function
-/*! Return the setting  a specific mode. */
 bool Screen::getMode(int m)
 {
   return currParm.mode[m];
 }
-
-/*! Save the cursor position and the rendition attribute settings. */
 
 void Screen::saveCursor()
 {
@@ -393,8 +346,6 @@ void Screen::saveCursor()
   sa_cu_fg   = cu_fg;
   sa_cu_bg   = cu_bg;
 }
-
-/*! Restore the cursor position and the rendition attribute settings. */
 
 void Screen::restoreCursor()
 {
@@ -680,9 +631,6 @@ void Screen::clear()
   home();
 }
 
-/*! Moves the cursor left one column.
-*/
-
 void Screen::BackSpace()
 {
   cuX = qMin(columns-1,cuX); // nowrap!
@@ -694,9 +642,6 @@ void Screen::BackSpace()
 
   if (BS_CLEARS) screenLines[cuY][cuX].character = ' ';
 }
-
-/*!
-*/
 
 void Screen::Tabulate(int n)
 {
@@ -934,13 +879,10 @@ void Screen::scrollDown(int from, int n)
   clearImage(loc(0,from),loc(columns-1,from+n-1),' ');
 }
 
-/*! position the cursor to a specific line and column. */
 void Screen::setCursorYX(int y, int x)
 {
   setCursorY(y); setCursorX(x);
 }
-
-/*! Set the cursor to x-th line. */
 
 void Screen::setCursorX(int x)
 {
@@ -949,8 +891,6 @@ void Screen::setCursorX(int x)
   cuX = qMax(0,qMin(columns-1, x));
 }
 
-/*! Set the cursor to y-th line. */
-
 void Screen::setCursorY(int y)
 {
   if (y == 0) y = 1; // Default
@@ -958,33 +898,21 @@ void Screen::setCursorY(int y)
   cuY = qMax(0,qMin(lines  -1, y + (getMode(MODE_Origin) ? tmargin : 0) ));
 }
 
-/*! set cursor to the `left upper' corner of the screen (1,1).
-*/
-
 void Screen::home()
 {
   cuX = 0;
   cuY = 0;
 }
 
-/*! set cursor to the begin of the current line.
-*/
-
 void Screen::Return()
 {
   cuX = 0;
 }
 
-/*! returns the current cursor columns.
-*/
-
 int Screen::getCursorX() const
 {
   return cuX;
 }
-
-/*! returns the current cursor line.
-*/
 
 int Screen::getCursorY() const
 {
@@ -1144,24 +1072,15 @@ void Screen::moveImage(int dest, int sourceBegin, int sourceEnd)
   }
 }
 
-/*! clear from (including) current cursor position to end of screen.
-*/
-
 void Screen::clearToEndOfScreen()
 {
   clearImage(loc(cuX,cuY),loc(columns-1,lines-1),' ');
 }
 
-/*! clear from begin of screen to (including) current cursor position.
-*/
-
 void Screen::clearToBeginOfScreen()
 {
   clearImage(loc(0,0),loc(cuX,cuY),' ');
 }
-
-/*! clear the entire screen.
-*/
 
 void Screen::clearEntireScreen()
 {
@@ -1183,35 +1102,20 @@ void Screen::helpAlign()
   clearImage(loc(0,0),loc(columns-1,lines-1),'E');
 }
 
-/*! clear from (including) current cursor position to end of current cursor line.
-*/
-
 void Screen::clearToEndOfLine()
 {
   clearImage(loc(cuX,cuY),loc(columns-1,cuY),' ');
 }
-
-/*! clear from begin of current cursor line to (including) current cursor position.
-*/
 
 void Screen::clearToBeginOfLine()
 {
   clearImage(loc(0,cuY),loc(cuX,cuY),' ');
 }
 
-/*! clears entire current cursor line
-*/
-
 void Screen::clearEntireLine()
 {
   clearImage(loc(0,cuY),loc(columns-1,cuY),' ');
 }
-
-// Rendition ------------------------------------------------------------------
-
-/*!
-    set rendition mode
-*/
 
 void Screen::setRendition(int re)
 {
@@ -1219,18 +1123,11 @@ void Screen::setRendition(int re)
   effectiveRendition();
 }
 
-/*!
-    reset rendition mode
-*/
-
 void Screen::resetRendition(int re)
 {
   cu_re &= ~re;
   effectiveRendition();
 }
-
-/*!
-*/
 
 void Screen::setDefaultRendition()
 {
@@ -1240,8 +1137,6 @@ void Screen::setDefaultRendition()
   effectiveRendition();
 }
 
-/*!
-*/
 void Screen::setForeColor(int space, int color)
 {
   cu_fg = CharacterColor(space, color);
@@ -1252,8 +1147,6 @@ void Screen::setForeColor(int space, int color)
     setForeColor(COLOR_SPACE_DEFAULT,DEFAULT_FORE_COLOR);
 }
 
-/*!
-*/
 void Screen::setBackColor(int space, int color)
 {
   cu_bg = CharacterColor(space, color);

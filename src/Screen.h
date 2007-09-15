@@ -82,102 +82,264 @@ public:
     Screen(int lines, int columns);
     ~Screen();
 
-public: // these are all `Screen' operations
-    //
-    // VT100/2 Operations ------------------
-    //
+    // VT100/2 Operations 
     // Cursor Movement
-    //
+    
+    /** Move the cursor up by @p n lines. */
     void cursorUp    (int n);
+    /** Move the cursor down by @p n lines. */
     void cursorDown  (int n);
+    /** Move the cursor to the left by @p n columns. */
     void cursorLeft  (int n);
+    /** Move the cursor to the right by @p n columns. */
     void cursorRight (int n);
+    /** Position the cursor on line @p y. */
     void setCursorY  (int y);
+    /** Position the cursor at column @p x. */
     void setCursorX  (int x);
+    /** Position the cursor at line @p y, column @p x. */
     void setCursorYX (int y, int x);
+    /**
+     * Sets the margins for scrolling the screen.
+     *
+     * @param topLine The top line of the new scrolling margin. 
+     * @param bottomLine The bottom line of the new scrolling margin. 
+     */
     void setMargins  (int topLine , int bottomLine);
+    /** Returns the top line of the scrolling region. */ 
     int topMargin() const;
+    /** Returns the bottom line of the scrolling region. */
     int bottomMargin() const;
 
-    //sets the scrolling margins back to their default positions
+    /** 
+     * Resets the scrolling margins back to the top and bottom lines
+     * of the screen.
+     */
     void setDefaultMargins();
     
-    //
-    // Cursor Movement with Scrolling
-    //
+    /** 
+     * Moves the cursor down one line, if the MODE_NewLine mode 
+     * flag is enabled then the cursor is returned to the leftmost
+     * column first.
+     *
+     * Equivalent to NextLine() if the MODE_NewLine flag is set
+     * or index() otherwise. 
+     */
     void NewLine     ();
+    /**
+     * Moves the cursor down one line and positions it at the beginning
+     * of the line.
+     */
     void NextLine    ();
+
+    /** 
+     * Move the cursor down one line.  If the cursor is on the bottom
+     * line of the scrolling region (as returned by bottomMargin()) the
+     * scrolling region is scrolled up by one line instead.
+     */
     void index       ();
+    /**
+     * Move the cursor up one line.  If the cursor is on the top line
+     * of the scrolling region (as returned by topMargin()) the scrolling
+     * region is scrolled down by one line instead.
+     */
     void reverseIndex();
-    //
-    // Scrolling
-    //
+    
+    /** 
+     * Scroll the scrolling region of the screen up by @p n lines. 
+     * The scrolling region is initially the whole screen, but can be changed 
+     * using setMargins()
+     */ 
     void scrollUp(int n);
+    /**
+     * Scroll the scrolling region of the screen down by @p n lines.
+     * The scrolling region is initially the whole screen, but can be changed
+     * using setMargins()
+     */
     void scrollDown(int n);
-    //
+    
+    /** 
+     * Moves the cursor to the beginning of the current line. 
+     * Equivalent to setCursorX(0)
+     */
     void Return      ();
+    /** 
+     * Moves the cursor one column to the left and erases the character
+     * at the new cursor position.
+     */
     void BackSpace   ();
+    /** 
+     * Moves the cursor @p n tab-stops to the right.
+     */
     void Tabulate    (int n = 1);
+    /** 
+     * Moves the cursor @p n tab-stops to the left. 
+     */
     void backTabulate(int n);
-    //
+    
     // Editing
-    //
+    
+    /** 
+     * Erase @p n characters beginning from the current cursor position. 
+     * This is equivalent to over-writing @p n characters starting with the current
+     * cursor position with spaces.
+     * If @p n is 0 then one character is erased. 
+     */
     void eraseChars  (int n);
+    /** 
+     * Delete @p n characters beginning from the current cursor position. 
+     * If @p n is 0 then one character is deleted. 
+     */
     void deleteChars (int n);
+    /**
+     * Insert @p n blank characters beginning from the current cursor position.
+     * The position of the cursor is not altered.  
+     * If @p n is 0 then one character is inserted.
+     */
     void insertChars (int n);
-    void deleteLines (int n); 
+    /** 
+     * Removes @p n lines beginning from the current cursor position.
+     * The position of the cursor is not altered.
+     * If @p n is 0 then one line is removed.
+     */
+    void deleteLines (int n);
+    /**
+     * Inserts @p lines beginning from the current cursor position.
+     * The position of the cursor is not altered.
+     * If @p n is 0 then one line is inserted.
+     */
     void insertLines (int n);
-    //
-    // -------------------------------------
-    //
+    /** Clears all the tab stops. */
     void clearTabStops();
+    /**  Sets or removes a tab stop at the cursor's current column. */ 
     void changeTabStop(bool set);
-    //
-    void resetMode   (int n);
-    void setMode     (int n);
-    void saveMode    (int n);
-    void restoreMode (int n);
-    //
+   
+    /** Resets (clears) the specified screen @p mode. */
+    void resetMode   (int mode);
+    /** Sets (enables) the specified screen @p mode. */
+    void setMode     (int mode);
+    /** 
+     * Saves the state of the specified screen @p mode.  It can be restored
+     * using restoreMode()
+     */
+    void saveMode    (int mode);
+    /** Restores the state of a screen @p mode saved by calling saveMode() */
+    void restoreMode (int mode);
+    /** Returns whether the specified screen @p mode is enabled or not .*/
+    bool getMode     (int mode);
+   
+    /** 
+     * Saves the current position and appearence (text color and style) of the cursor. 
+     * It can be restored by calling restoreCursor() 
+     */ 
     void saveCursor  ();
+    /** Restores the position and appearence of the cursor.  See saveCursor() */
     void restoreCursor();
-    //
-    // -------------------------------------
-    //
+   
+    /** Clear the whole screen, moving the current screen contents into the history first. */ 
     void clearEntireScreen();
+    /** 
+     * Clear the area of the screen from the current cursor position to the end of 
+     * the screen.
+     */
     void clearToEndOfScreen();
+    /**
+     * Clear the area of the screen from the current cursor position to the start
+     * of the screen.
+     */
     void clearToBeginOfScreen();
-    //
+    /** Clears the whole of the line on which the cursor is currently positioned. */
     void clearEntireLine();
+    /** Clears from the current cursor position to the end of the line. */
     void clearToEndOfLine();
+    /** Clears from the current cursor position to the beginning of the line. */
     void clearToBeginOfLine();
-    //
+    
+    /** Fills the entire screen with the letter 'E' */
     void helpAlign   ();
-    //
-    // -------------------------------------
-    //
+       
+    /** 
+     * Enables the given @p rendition flag.  Rendition flags control the appearence 
+     * of characters on the screen.
+     *
+     * @see Character::rendition
+     */  
     void setRendition  (int rendition);
+    /**
+     * Disables the given @p rendition flag.  Rendition flags control the appearence
+     * of characters on the screen.
+     *
+     * @see Character::rendition
+     */
     void resetRendition(int rendition);
-    //
+    
+    /** 
+     * Sets the cursor's foreground color.
+     * @param space The color space used by the @p color argument
+     * @param color The new foreground color.  The meaning of this depends on
+     * the color @p space used.
+     *
+     * @see CharacterColor
+     */
     void setForeColor  (int space, int color);
+    /**
+     * Sets the cursor's background color.
+     * @param space The color space used by the @p color argumnet.
+     * @param color The new background color.  The meaning of this depends on
+     * the color @p space used.
+     *
+     * @see CharacterColor
+     */
     void setBackColor  (int space, int color);
-    //
+    /** 
+     * Resets the cursor's color back to the default and sets the 
+     * character's rendition flags back to the default settings.
+     */
     void setDefaultRendition();
-    //
-    // -------------------------------------
-    //
-    bool getMode     (int n);
-    //
-    // only for report cursor position
-    //
+    
+    /** Returns the column which the cursor is positioned at. */
     int  getCursorX() const;
+    /** Returns the line which the cursor is positioned on. */
     int  getCursorY() const;
     //
     // -------------------------------------
     //
     void clear();
+    /** 
+     * Sets the position of the cursor to the 'home' position at the top-left
+     * corner of the screen (0,0) 
+     */
     void home();
+    /**
+     * Resets the state of the screen.  This resets the various screen modes
+     * back to their default states.  The cursor style and colors are reset
+     * (as if setDefaultRendition() had been called)
+     *
+     * <ul>
+     * <li>Line wrapping is enabled.</li>
+     * <li>Origin mode is disabled.</li>
+     * <li>Insert mode is disabled.</li>
+     * <li>Cursor mode is enabled.  TODO Document me</li>
+     * <li>Screen mode is disabled. TODO Document me</li>
+     * <li>New line mode is disabled.  TODO Document me</li>
+     * </ul>
+     *
+     * If @p clearScreen is true then the screen contents are erased entirely, 
+     * otherwise they are unaltered.
+     */
     void reset(bool clearScreen = true);
-    // Show character
+   
+    /** 
+     * Displays a new character at the current cursor position. 
+     * 
+     * If the cursor is currently positioned at the right-edge of the screen and
+     * line wrapping is enabled then the character is added at the start of a new 
+     * line below the current one.
+     *
+     * If the MODE_Insert screen mode is currently enabled then the character 
+     * is inserted at the current cursor position, otherwise it will replace the 
+     * character already at the current cursor position.  
+     */ 
     void ShowCharacter(unsigned short c);
     
     // Do composition with last shown character FIXME: Not implemented yet for KDE 4
@@ -194,7 +356,11 @@ public: // these are all `Screen' operations
      */
     void resizeImage(int new_lines, int new_columns);
     
-    // Return current on screen image.  Result array is [getLines()][getColumns()]
+    /**
+     * Returns the current screen image.  
+     * The result is an array of Characters of size [getLines()][getColumns()] which
+     * must be freed by the caller after use.
+     */
     Character*  	  getCookedImage( int line );
 
     /** 
@@ -205,20 +371,26 @@ public: // these are all `Screen' operations
     QVector<LineProperty> getCookedLineProperties( int line );
 	
 
-    /*! return the number of lines. */
+    /** Return the number of lines. */
     int  getLines()   { return lines; }
-    /*! return the number of columns. */
+    /** Return the number of columns. */
     int  getColumns() { return columns; }
-
+    /** Return the number of lines in the history buffer. */
     int  getHistLines ();
+    /** 
+     * Sets the type of storage used to keep lines in the history. 
+     * If @p copyPreviousScroll is true then the contents of the previous 
+     * history buffer are copied into the new scroll.
+     */
     void setScroll(const HistoryType& , bool copyPreviousScroll = true);
+    /** Returns the type of storage used to keep lines in the history. */
     const HistoryType& getScroll();
+    /** 
+     * Returns true if this screen keeps lines that are scrolled off the screen
+     * in a history buffer.
+     */
     bool hasScroll();
 
-    //
-    // Selection
-    //
-    
     /** 
      * Sets the start of the selection.
      *
@@ -271,7 +443,11 @@ public: // these are all `Screen' operations
 	 * @param to The last line in the history to retrieve
 	 */
 	void writeToStream(TerminalCharacterDecoder* decoder, int from, int to);
-	
+
+    /** 
+     * Sets the selection to line @p no in the history and returns
+     * the text of that line from the history buffer.
+     */
     QString getHistoryLine(int no);
 
 	/**
@@ -288,6 +464,7 @@ public: // these are all `Screen' operations
 	void writeSelectionToStream(TerminalCharacterDecoder* decoder , bool
                                 preserveLineBreaks = true);
 
+    /** TODO Document me */
     void checkSelection(int from, int to);
 
 	/** 
@@ -347,7 +524,7 @@ public: // these are all `Screen' operations
      */
     void resetDroppedLines();
 
-private: // helper
+private: 
 
 	//copies a line of text from the screen or history into a stream using a specified character decoder
 	//line - the line number to copy, from 0 (the earliest line in the history) up to 

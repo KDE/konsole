@@ -39,7 +39,17 @@ namespace Konsole
 /**
  * Represents a terminal set-up which can be used to 
  * set the initial state of new terminal sessions or applied
- * to existing sessions.
+ * to existing sessions.  Profiles consist of a number of named
+ * properties, which can be retrieved using property() and
+ * set using setProperty().  isPropertySet() can be used to check
+ * whether a particular property has been set in a profile.
+ *
+ * Profiles support a simple form of inheritance.  When a new Profile
+ * is constructed, a pointer to a parent profile can be passed to
+ * the constructor.  When querying a particular property of a profile
+ * using property(), the profile will return its own value for that 
+ * property if one has been set or otherwise it will return the
+ * parent's value for that property.  
  *
  * Profiles can be loaded from disk using ProfileReader instances
  * and saved to disk using ProfileWriter instances.

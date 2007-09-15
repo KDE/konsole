@@ -56,8 +56,6 @@ class Profile;
  * the SessionManager's changeProfile() method to be called with
  * the persistant argument set to false.  These changes are then
  * un-done when the dialog is closed.
- *
- * TODO: More documentation
  */
 class EditProfileDialog : public KDialog
 {
