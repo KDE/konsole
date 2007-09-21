@@ -1056,7 +1056,7 @@ void TerminalDisplay::paintEvent( QPaintEvent* pe )
 
 QRect TerminalDisplay::preeditRect() const
 {
-    const int preeditLength = _inputMethodData.preeditString.count();
+    const int preeditLength = string_width(_inputMethodData.preeditString);
 
     if ( preeditLength == 0 )
         return QRect();
