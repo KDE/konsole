@@ -9,6 +9,7 @@ Terminal=false
 X-KDE-StartupNotify=false
 
 Name=Quick Access Terminal
+Name[ar]=طرفيّة الوصول السريع
 Name[be]=Тэрмінал хуткага доступу
 Name[cs]=Rychlý přístup k terminálu
 Name[csb]=Terminal chùtczegò przëstãpù
