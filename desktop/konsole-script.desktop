@@ -97,6 +97,7 @@ GenericName[vi]=Trình đầu cuối
 GenericName[wa]=Programe di terminå
 GenericName[x-test]=xxTerminal Programxx
 GenericName[xh]=Inkqubo Yesixhobo sangaphandle sekhompyutha
+GenericName[zh_CN]=终端程序
 GenericName[zh_TW]=終端機程式
 X-DBUS-StartupType=Multi
 X-KDE-AuthorizeAction=shell_access
