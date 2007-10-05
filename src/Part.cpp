@@ -162,6 +162,8 @@ Session* Part::createSession(const QString& key)
 }
 void Part::activeViewChanged(SessionController* controller)
 {
+    widget()->setFocusProxy( _viewManager->activeView() );
+
     if ( controller == _pluggedController )
         return;
 

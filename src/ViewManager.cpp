@@ -61,6 +61,7 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
     // the ViewManager class is not currently able to handle a ViewSplitter in recursive-splitting
     // mode 
     _viewSplitter->setRecursiveSplitting(false);
+    _viewSplitter->setFocusPolicy(Qt::NoFocus);
 
     // setup actions which relating to the view
     setupActions();
