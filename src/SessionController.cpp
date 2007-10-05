@@ -1020,11 +1020,11 @@ void SaveHistoryTask::execute()
 
         KIO::TransferJob* job = KIO::put( url, 
                                           -1,   // no special permissions
-                                          true, // overwrite existing files
-                                          false,// do not resume an existing transfer
-                                          !url.isLocalFile() // show progress information only for remote
-                                                             // URLs
-                                                             //
+                                          // overwrite existing files
+                                          // do not resume an existing transfer
+                                          // show progress information only for remote
+                                          // URLs
+                                          KIO::Overwrite | (url.isLocalFile() ? KIO::HideProgressInfo : KIO::DefaultFlags)
                                                              // a better solution would be to show progress
                                                              // information after a certain period of time
                                                              // instead, since the overall speed of transfer
