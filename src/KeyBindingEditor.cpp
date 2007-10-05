@@ -24,6 +24,8 @@
 #include <QtGui/QHeaderView>
 #include <QtGui/QKeyEvent>
 
+#include <KDebug>
+
 // Konsole
 #include "ui_KeyBindingEditor.h"
 #include "KeyboardTranslator.h"

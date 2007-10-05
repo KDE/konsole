@@ -35,6 +35,8 @@
 #include <krun.h>
 #include <kshell.h>
 #include <kconfig.h>
+#include <kdebug.h>
+#include <kconfiggroup.h>
 #include <kstandarddirs.h>
 #include <kdesktopfile.h>
 

@@ -25,6 +25,7 @@
 
 // KDE
 #include <KMenuBar>
+#include <KDebug>
 #include <KXMLGUIFactory>
 
 // Konsole

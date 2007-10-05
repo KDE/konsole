@@ -30,6 +30,8 @@
 #include <QtGui/QShowEvent>
 #include <QtGui/QStandardItem>
 
+#include <KDebug>
+
 // Konsole
 #include "EditProfileDialog.h"
 #include "SessionManager.h"

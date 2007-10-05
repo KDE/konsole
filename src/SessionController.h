@@ -26,6 +26,7 @@
 #include <QtCore/QPointer>
 #include <QtCore/QString>
 #include <QtCore/QThread>
+#include <QtCore/QHash>
 
 // KDE
 #include <KActionCollection>

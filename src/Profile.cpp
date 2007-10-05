@@ -33,6 +33,7 @@
 #include <KGlobal>
 #include <KGlobalSettings>
 #include <KLocale>
+#include <KDebug>
 #include <KStandardDirs>
 
 // Konsole

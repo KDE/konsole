@@ -19,6 +19,7 @@
 
 // Own
 #include "Application.h"
+#include <KDebug>
 
 // X11
 #ifdef Q_WS_X11

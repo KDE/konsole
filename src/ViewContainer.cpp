@@ -39,6 +39,8 @@
 #include <kcolorscheme.h>
 #include <kcolorutils.h>
 #include <KIconLoader>
+#include <kdebug.h>
+#include <kconfiggroup.h>
 #include <KLocale>
 #include <KMenu>
 #include <KColorCollection>

@@ -29,6 +29,7 @@
 
 // KDE
 #include <KColorDialog>
+#include <KDebug>
 #include <KWindowSystem>
 
 // Konsole

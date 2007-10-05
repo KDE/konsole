@@ -31,6 +31,8 @@
 #include <KColorScheme>
 #include <KConfig>
 #include <KLocale>
+#include <KDebug>
+#include <KConfigGroup>
 #include <KStandardDirs>
 
 using namespace Konsole;
