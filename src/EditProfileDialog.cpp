@@ -402,6 +402,7 @@ void EditProfileDialog::setupAppearancePage(const Profile* info)
     const QFont& font = info->font();
     updateFontPreviewLabel(font);
     _ui->fontSizeSlider->setValue( font.pointSize() );
+    _ui->fontSizeSlider->setMinimum( KGlobalSettings::smallestReadableFont().pointSize() );
 
     connect( _ui->fontSizeSlider , SIGNAL(valueChanged(int)) , this ,
              SLOT(setFontSize(int)) );
