@@ -1,36 +1,9 @@
 [Desktop Entry]
 Encoding=UTF-8
-Type=Application
+Type=Service
 ServiceTypes=inode/directory
 Actions=openTerminalHere;
 X-KDE-AuthorizeAction=shell_access
-
-Name=Konsole
-Name[bg]=Конзола
-Name[ca]=Consola
-Name[csb]=Kònsola
-Name[el]=Κονσόλα
-Name[eo]=Konzolo
-Name[et]=Konsool
-Name[eu]=Kontsola
-Name[hr]=Konzola
-Name[is]=Skjáhermir
-Name[ka]=კონსოლი
-Name[km]=កុងសូល
-Name[mk]=Конзола
-Name[nb]=Konsoll
-Name[ne]=कन्सोल
-Name[nn]=Konsoll
-Name[pa]=ਕੰਨਸੋਲ
-Name[pl]=Konsola
-Name[ro]=Consolă
-Name[ru]=Консоль
-Name[se]=Konsolla
-Name[sl]=Konzola
-Name[ta]=கான்சோல்
-Name[te]=కాన్సోల్
-Name[tg]=Консол
-Name[x-test]=xxKonsolexx
 
 [Desktop Action openTerminalHere]
 Name=Open Terminal Here
