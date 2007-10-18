@@ -121,19 +121,19 @@ void ViewManager::setupActions()
     if ( collection )
     {
         KAction* splitLeftRightAction = new KAction( KIcon("view-left-right"),
-                                                      i18n("Split View Left/Right"),
+                                                      i18nc("@action:inmenu", "Split View Left/Right"),
                                                       this );
         splitLeftRightAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_L) );
         collection->addAction("split-view-left-right",splitLeftRightAction);
         connect( splitLeftRightAction , SIGNAL(triggered()) , this , SLOT(splitLeftRight()) );
 
         KAction* splitTopBottomAction = new KAction( KIcon("view-top-bottom") , 
-                                             i18n("Split View Top/Bottom"),this);
+                                             i18nc("@action:inmenu", "Split View Top/Bottom"),this);
         splitTopBottomAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_T) );
         collection->addAction("split-view-top-bottom",splitTopBottomAction);
         connect( splitTopBottomAction , SIGNAL(triggered()) , this , SLOT(splitTopBottom()));
 
-        KAction* closeActiveAction = new KAction( i18n("Close Active") , this );
+        KAction* closeActiveAction = new KAction( i18nc("@action:inmenu Close Active View", "Close Active") , this );
         closeActiveAction->setIcon(KIcon("view-remove"));
         closeActiveAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_S) );
         closeActiveAction->setEnabled(false);
@@ -142,7 +142,7 @@ void ViewManager::setupActions()
       
         multiViewOnlyActions << closeActiveAction; 
 
-        KAction* closeOtherAction = new KAction( i18n("Close Others") , this );
+        KAction* closeOtherAction = new KAction( i18nc("@action:inmenu Close Other Views", "Close Others") , this );
         closeOtherAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_O) );
         closeOtherAction->setEnabled(false);
         collection->addAction("close-other-views",closeOtherAction);
@@ -162,14 +162,14 @@ void ViewManager::setupActions()
         connect( detachViewAction , SIGNAL(triggered()) , this , SLOT(detachActiveView()) );
    
         // Expand & Shrink Active View
-        KAction* expandActiveAction = new KAction( i18n("Expand View") , this );
+        KAction* expandActiveAction = new KAction( i18nc("@action:inmenu", "Expand View") , this );
         expandActiveAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_BracketRight) );
         collection->addAction("expand-active-view",expandActiveAction);
         connect( expandActiveAction , SIGNAL(triggered()) , this , SLOT(expandActiveView()) );
 
         multiViewOnlyActions << expandActiveAction;
 
-        KAction* shrinkActiveAction = new KAction( i18n("Shrink View") , this );
+        KAction* shrinkActiveAction = new KAction( i18nc("@action:inmenu", "Shrink View") , this );
         shrinkActiveAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_BracketLeft) );
         collection->addAction("shrink-active-view",shrinkActiveAction);
         connect( shrinkActiveAction , SIGNAL(triggered()) , this , SLOT(shrinkActiveView()) );
