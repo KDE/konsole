@@ -84,6 +84,7 @@ Part::Part(QWidget* parentWidget , QObject* parent)
     _viewManager->widget()->setParent(parentWidget);
 
     setWidget(_viewManager->widget());
+    actionCollection()->setAssociatedWidget(_viewManager->widget());
     
     // create basic session
     createSession(QString());
