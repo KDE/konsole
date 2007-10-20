@@ -889,15 +889,13 @@ void SessionController::sessionTitleChanged()
 
 void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , int /*state*/, const QPoint& position)
 {
-    if ( factory() )
-    {
-        QMenu* popup = dynamic_cast<QMenu*>(factory()->container("session-popup-menu",this));
-    
-        
-        Q_ASSERT( popup );
+    QMenu* popup = 0;
 
+    if ( factory() )
+        popup = qobject_cast<QMenu*>(factory()->container("session-popup-menu",this));
+
+    if (popup)
         popup->exec( _view->mapToGlobal(position) );
-    }
     else
     {
         qWarning() << "Unable to display popup menu for session" 
