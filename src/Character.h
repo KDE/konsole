@@ -142,10 +142,10 @@ inline bool Character::isTransparent(const ColorEntry* base) const
 
 inline bool Character::isBold(const ColorEntry* base) const
 {
-  return (backgroundColor._colorSpace == COLOR_SPACE_DEFAULT) && 
-            base[backgroundColor._u+0+(backgroundColor._v?BASE_COLORS:0)].bold
-      || (backgroundColor._colorSpace == COLOR_SPACE_SYSTEM) && 
-            base[backgroundColor._u+2+(backgroundColor._v?BASE_COLORS:0)].bold;
+  return ((backgroundColor._colorSpace == COLOR_SPACE_DEFAULT) &&
+            base[backgroundColor._u+0+(backgroundColor._v?BASE_COLORS:0)].bold)
+      || ((backgroundColor._colorSpace == COLOR_SPACE_SYSTEM) &&
+            base[backgroundColor._u+2+(backgroundColor._v?BASE_COLORS:0)].bold);
 }
 
 extern unsigned short vt100_graphics[32];
