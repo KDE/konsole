@@ -488,14 +488,14 @@ void SessionController::setupActions()
     connect( action , SIGNAL(toggled(bool)) , this , SLOT(searchHistory(bool)) );
 
     _findNextAction = collection->addAction("find-next");
-    _findNextAction->setIcon( KIcon("find-next") );
+    _findNextAction->setIcon( KIcon("edit-find-next") );
     _findNextAction->setText( i18n("Find Next") );
     _findNextAction->setShortcut( QKeySequence(Qt::Key_F3) );
     _findNextAction->setEnabled(false);
     connect( _findNextAction , SIGNAL(triggered()) , this , SLOT(findNextInHistory()) );
 
     _findPreviousAction = collection->addAction("find-previous");
-    _findPreviousAction->setIcon( KIcon("find-previous") );
+    _findPreviousAction->setIcon( KIcon("edit-find-previous") );
     _findPreviousAction->setText( i18n("Find Previous") );
     _findPreviousAction->setShortcut( QKeySequence(Qt::SHIFT + Qt::Key_F3) );
     _findPreviousAction->setEnabled(false);
