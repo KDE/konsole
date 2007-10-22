@@ -250,7 +250,7 @@ TabbedViewContainer::TabbedViewContainer(NavigationPosition position , QObject* 
     _newSessionButton->setPopupMode(QToolButton::MenuButtonPopup);
 
     QToolButton* closeButton = new QToolButton(_tabWidget);
-    closeButton->setIcon( KIcon("tab-remove") );
+    closeButton->setIcon( KIcon("tab-close") );
     closeButton->setAutoRaise(true);
     connect( closeButton , SIGNAL(clicked()) , this , SLOT(closeTabClicked()) );
 

@@ -151,7 +151,7 @@ void ViewManager::setupActions()
         multiViewOnlyActions << closeOtherAction;
 
         QAction* detachViewAction = collection->addAction("detach-view");
-        detachViewAction->setIcon( KIcon("tab-breakoff") );
+        detachViewAction->setIcon( KIcon("tab-detach") );
         detachViewAction->setText( i18n("&Detach View") );
         // Ctrl+Shift+D is not used as a shortcut by default because it is too close
         // to Ctrl+D - which will terminate the session in many cases
