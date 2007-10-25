@@ -129,7 +129,7 @@ void fillAboutData(KAboutData& aboutData)
   aboutData.addCredit(ki18n("David Faure"),
     ki18n("Embedded Konsole\n"
     "General improvements"),
-    "David.Faure@insa-lyon.fr");
+    "faure@kde.org");
   aboutData.addCredit(ki18n("Antonio Larrosa"),
     ki18n("Visual effects"),
     "larrosa@kde.org");
