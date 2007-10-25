@@ -121,7 +121,7 @@ void fillAboutData(KAboutData& aboutData)
     "neundorf@kde.org");
   aboutData.addCredit(ki18n("Peter Silva"),
     ki18n("Marking improvements"),
-    "peter.silva@videotron.Character");
+    "peter.silva@videotron.ca");
   aboutData.addCredit(ki18n("Lotzi Boloni"),
     ki18n("Embedded Konsole\n"
     "Toolbar and session names"),
@@ -129,7 +129,7 @@ void fillAboutData(KAboutData& aboutData)
   aboutData.addCredit(ki18n("David Faure"),
     ki18n("Embedded Konsole\n"
     "General improvements"),
-    "David.Faure@insa-lyon.foregroundColorr");
+    "David.Faure@insa-lyon.fr");
   aboutData.addCredit(ki18n("Antonio Larrosa"),
     ki18n("Visual effects"),
     "larrosa@kde.org");
