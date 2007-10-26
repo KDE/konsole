@@ -132,6 +132,7 @@ class MainWindow : public KXmlGuiWindow
 
         void sessionListChanged(const QList<QAction*>& actions);
         void viewFullScreen(bool fullScreen);
+        void configureNotifications();
 
     private:
         void correctShortcuts();

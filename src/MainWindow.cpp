@@ -37,6 +37,7 @@
 #include <KToolInvocation>
 #include <kstandardaction.h>
 #include <KXMLGUIFactory>
+#include <KNotifyConfigWidget>
 
 // Konsole
 #include "BookmarkHandler.h"
@@ -222,7 +223,7 @@ void MainWindow::setupActions()
     connect( fullScreenAction , SIGNAL(toggled(bool)) , this , SLOT(viewFullScreen(bool)) ); 
   
     // Settings Menu
-    KStandardAction::configureNotifications( 0 , 0 , collection  );
+    KStandardAction::configureNotifications( this , SLOT(configureNotifications()) , collection  );
     KStandardAction::keyBindings( this , SLOT(showShortcutsDialog()) , collection  );
 
     QAction* manageProfilesAction = collection->addAction("manage-profiles");
@@ -318,6 +319,11 @@ void MainWindow::setupWidgets()
     widget->setLayout(layout);
     
     setCentralWidget(widget);
+}
+
+void MainWindow::configureNotifications()
+{
+    KNotifyConfigWidget::configure( this );
 }
 
 #include "MainWindow.moc"
