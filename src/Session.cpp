@@ -431,23 +431,23 @@ void Session::activityStateSet(int state)
   if (state==NOTIFYBELL) 
   {
       emit bellRequest( i18n("Bell in session '%1'",_nameTitle) );
-  } 
-  else if (state==NOTIFYACTIVITY) 
+  }
+  else if (state==NOTIFYACTIVITY)
   {
     if (_monitorSilence) {
       _monitorTimer->setSingleShot(true);
       _monitorTimer->start(_silenceSeconds*1000);
     }
-    
-    //FIXME:  See comments in Session::monitorTimerDone()
-    if (!_notifiedActivity) {
-      KNotification::event("Activity", i18n("Activity in session '%1'", _nameTitle), QPixmap(),
-                      QApplication::activeWindow(), 
-      KNotification::CloseWhenWidgetActivated);
-      _notifiedActivity=true;
+
+    if ( _monitorActivity ) {
+      //FIXME:  See comments in Session::monitorTimerDone()
+      if (!_notifiedActivity) {
+        KNotification::event("Activity", i18n("Activity in session '%1'", _nameTitle), QPixmap(),
+                        QApplication::activeWindow(), 
+        KNotification::CloseWhenWidgetActivated);
+        _notifiedActivity=true;
+      }
     }
-      _monitorTimer->setSingleShot(true);
-      _monitorTimer->start(_silenceSeconds*1000);
   }
 
   if ( state==NOTIFYACTIVITY && !_monitorActivity )
@@ -692,7 +692,9 @@ QString Session::program() const
   return _program;
 }
 
+// unused currently
 bool Session::isMonitorActivity() const { return _monitorActivity; }
+// unused currently
 bool Session::isMonitorSilence()  const { return _monitorSilence; }
 
 void Session::setMonitorActivity(bool _monitor)
