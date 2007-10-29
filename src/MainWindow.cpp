@@ -61,8 +61,8 @@ MainWindow::MainWindow()
     // file can be found when this code is being used in the Konsole part.
     setXMLFile("konsole/konsoleui.rc");
 
-    actionCollection()->setAssociatedWidget(this);
     setupActions();
+    actionCollection()->associateWidget(this);
 
     // create view manager
         _viewManager = new ViewManager(this,actionCollection());
@@ -70,7 +70,7 @@ MainWindow::MainWindow()
     connect( _viewManager , SIGNAL(activeViewChanged(SessionController*)) , this ,
             SLOT(activeViewChanged(SessionController*)) );
     connect( _viewManager , SIGNAL(viewPropertiesChanged(const QList<ViewProperties*>&)) ,
-           bookmarkHandler() , SLOT(setViews(const QList<ViewProperties*>&)) ); 
+           bookmarkHandler() , SLOT(setViews(const QList<ViewProperties*>&)) );
 
     connect( _viewManager , SIGNAL(setMenuBarVisibleRequest(bool)) , menuBar() ,
             SLOT(setVisible(bool)) );
@@ -94,7 +94,7 @@ void MainWindow::correctShortcuts()
 {
     // replace F1 shortcut for help contents
     QAction* helpAction = actionCollection()->action("help_contents");
-    
+
     Q_ASSERT( helpAction );
 
     helpAction->setShortcut( QKeySequence() );
@@ -125,10 +125,10 @@ void MainWindow::activeViewChanged(SessionController* controller)
     connect( bookmarkHandler() , SIGNAL(openUrl(const KUrl&)) , controller ,
              SLOT(openUrl(const KUrl&)) );
 
-    // disconnect existing controller's UI 
+    // disconnect existing controller's UI
     if ( _pluggedController )
     {
-        disconnect( _pluggedController , SIGNAL(titleChanged(ViewProperties*)) 
+        disconnect( _pluggedController , SIGNAL(titleChanged(ViewProperties*))
                      , this , SLOT(activeViewTitleChanged(ViewProperties*)) );
         guiFactory()->removeClient(_pluggedController);
 
@@ -138,7 +138,7 @@ void MainWindow::activeViewChanged(SessionController* controller)
     // listen for title changes from the current session
     Q_ASSERT( controller );
 
-    connect( controller , SIGNAL(titleChanged(ViewProperties*)) , 
+    connect( controller , SIGNAL(titleChanged(ViewProperties*)) ,
             this , SLOT(activeViewTitleChanged(ViewProperties*)) );
 
     guiFactory()->addClient(controller);
@@ -168,13 +168,13 @@ void MainWindow::setupActions()
     KActionCollection* collection = actionCollection();
 
     // File Menu
-    QAction* newTabAction = collection->addAction("new-tab"); 
+    QAction* newTabAction = collection->addAction("new-tab");
     newTabAction->setIcon( KIcon("openterm") );
     newTabAction->setText( i18n("New &Tab") );
     newTabAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_N) );
     connect( newTabAction , SIGNAL(triggered()) , this , SLOT(newTab()) );
 
-    QAction* newWindowAction = collection->addAction("new-window"); 
+    QAction* newWindowAction = collection->addAction("new-window");
     newWindowAction->setIcon( KIcon("window-new") );
     newWindowAction->setText( i18n("New &Window") );
     newWindowAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_M) );
@@ -184,12 +184,12 @@ void MainWindow::setupActions()
     remoteConnectionAction->setText( i18n("Remote Connection...") );
     remoteConnectionAction->setIcon( KIcon("network") );
     remoteConnectionAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_R) );
-    connect( remoteConnectionAction , SIGNAL(triggered()) , this , SLOT(showRemoteConnectionDialog()) ); 
+    connect( remoteConnectionAction , SIGNAL(triggered()) , this , SLOT(showRemoteConnectionDialog()) );
 
-       
-#ifndef KONSOLE_PART 
+
+#ifndef KONSOLE_PART
     QAction* quitAction = KStandardAction::quit( this , SLOT(close()) , collection );
-    // the default shortcut for quit is typically Ctrl+[Some Letter, usually Q] but that is reserved for 
+    // the default shortcut for quit is typically Ctrl+[Some Letter, usually Q] but that is reserved for
     // use by terminal applications
     quitAction->setShortcut(Qt::CTRL+Qt::SHIFT+Qt::Key_Q);
 #endif
@@ -206,7 +206,7 @@ void MainWindow::setupActions()
     _toggleMenuBarAction = new KToggleAction(this);
     _toggleMenuBarAction->setText( i18n("Show Menu Bar") );
     _toggleMenuBarAction->setIcon( KIcon("show-menu") );
-    _toggleMenuBarAction->setCheckedState( KGuiItem( i18n("Hide Menu Bar") , "show-menu") ); 
+    _toggleMenuBarAction->setCheckedState( KGuiItem( i18n("Hide Menu Bar") , "show-menu") );
     _toggleMenuBarAction->setChecked( !menuBar()->isHidden() );
     connect( _toggleMenuBarAction , SIGNAL(toggled(bool)) , menuBar() , SLOT(setVisible(bool)) );
     collection->addAction("show-menubar",_toggleMenuBarAction);
@@ -220,8 +220,8 @@ void MainWindow::setupActions()
     fullScreenAction->setWindow(this);
     fullScreenAction->setShortcut( Qt::CTRL + Qt::SHIFT + Qt::Key_F11 );
     collection->addAction("view-full-screen",fullScreenAction);
-    connect( fullScreenAction , SIGNAL(toggled(bool)) , this , SLOT(viewFullScreen(bool)) ); 
-  
+    connect( fullScreenAction , SIGNAL(toggled(bool)) , this , SLOT(viewFullScreen(bool)) );
+
     // Settings Menu
     KStandardAction::configureNotifications( this , SLOT(configureNotifications()) , collection  );
     KStandardAction::keyBindings( this , SLOT(showShortcutsDialog()) , collection  );
@@ -233,7 +233,7 @@ void MainWindow::setupActions()
 
 }
 
-void MainWindow::viewFullScreen(bool fullScreen) 
+void MainWindow::viewFullScreen(bool fullScreen)
 {
     if ( fullScreen )
         showFullScreen();
@@ -249,7 +249,7 @@ void MainWindow::setSessionList(ProfileList* list)
 {
     sessionListChanged(list->actions());
 
-    connect( list , SIGNAL(profileSelected(const QString&)) , this , 
+    connect( list , SIGNAL(profileSelected(const QString&)) , this ,
             SLOT(newFromProfile(const QString&)) );
 
     connect( list , SIGNAL(actionsChanged(const QList<QAction*>&)) , this ,
@@ -317,7 +317,7 @@ void MainWindow::setupWidgets()
     layout->setSpacing(0);
 
     widget->setLayout(layout);
-    
+
     setCentralWidget(widget);
 }
 

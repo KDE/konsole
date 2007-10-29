@@ -78,14 +78,14 @@ Part::Part(QWidget* parentWidget , QObject* parent)
     _viewManager->setNavigationMethod( ViewManager::NoNavigation );
 
     connect( _viewManager , SIGNAL(activeViewChanged(SessionController*)) , this ,
-           SLOT(activeViewChanged(SessionController*)) ); 
+           SLOT(activeViewChanged(SessionController*)) );
     connect( _viewManager , SIGNAL(empty()) , this , SLOT(restart()) );
 
     _viewManager->widget()->setParent(parentWidget);
 
     setWidget(_viewManager->widget());
-    actionCollection()->setAssociatedWidget(_viewManager->widget());
-    
+    actionCollection()->associateWidget(_viewManager->widget());
+
     // create basic session
     createSession(QString());
 }
@@ -117,7 +117,7 @@ Session* Part::activeSession() const
         QList<Session*> list = SessionManager::instance()->sessions();
 
         qDebug() << __FUNCTION__ << " - no plugged controller, selectin first from" << list.count() << "sessions";
-        
+
         Q_ASSERT( !list.isEmpty() );
 
         return list.first();
@@ -174,7 +174,7 @@ void Part::activeViewChanged(SessionController* controller)
     // find client with the necessary factory
     KXMLGUIClient* client = this;
     qDebug() << "First parent" << client->parentClient();
-    while ( client->parentClient() ) 
+    while ( client->parentClient() )
     {
         qDebug() << "Next parent" << client->parentClient();
         qDebug() << "Factory" << client->factory();
