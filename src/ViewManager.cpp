@@ -150,7 +150,7 @@ void ViewManager::setupActions()
 
         multiViewOnlyActions << closeOtherAction;
 
-        QAction* detachViewAction = collection->addAction("detach-view");
+        KAction* detachViewAction = collection->addAction("detach-view");
         detachViewAction->setIcon( KIcon("tab-detach") );
         detachViewAction->setText( i18n("&Detach View") );
         // Ctrl+Shift+D is not used as a shortcut by default because it is too close

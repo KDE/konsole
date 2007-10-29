@@ -226,8 +226,8 @@ private:
     RegExpFilter*   _searchFilter; 
 
     KAction* _searchToggleAction;
-    QAction* _findNextAction;
-    QAction* _findPreviousAction;
+    KAction* _findNextAction;
+    KAction* _findPreviousAction;
     
     static KIcon _activityIcon;
     static KIcon _silenceIcon;

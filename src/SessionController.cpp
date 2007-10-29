@@ -392,7 +392,7 @@ void SessionController::setShowMenuAction(QAction* action)
 
 void SessionController::setupActions()
 {
-    QAction* action = 0;
+    KAction* action = 0;
     KToggleAction* toggleAction = 0;
     KActionCollection* collection = actionCollection();
 

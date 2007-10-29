@@ -62,7 +62,6 @@ MainWindow::MainWindow()
     setXMLFile("konsole/konsoleui.rc");
 
     setupActions();
-    actionCollection()->associateWidget(this);
 
     // create view manager
         _viewManager = new ViewManager(this,actionCollection());
@@ -168,19 +167,19 @@ void MainWindow::setupActions()
     KActionCollection* collection = actionCollection();
 
     // File Menu
-    QAction* newTabAction = collection->addAction("new-tab");
+    KAction* newTabAction = collection->addAction("new-tab");
     newTabAction->setIcon( KIcon("openterm") );
     newTabAction->setText( i18n("New &Tab") );
     newTabAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_N) );
     connect( newTabAction , SIGNAL(triggered()) , this , SLOT(newTab()) );
 
-    QAction* newWindowAction = collection->addAction("new-window");
+    KAction* newWindowAction = collection->addAction("new-window");
     newWindowAction->setIcon( KIcon("window-new") );
     newWindowAction->setText( i18n("New &Window") );
     newWindowAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_M) );
     connect( newWindowAction , SIGNAL(triggered()) , this , SLOT(newWindow()) );
 
-    QAction* remoteConnectionAction = collection->addAction("remote-connection");
+    KAction* remoteConnectionAction = collection->addAction("remote-connection");
     remoteConnectionAction->setText( i18n("Remote Connection...") );
     remoteConnectionAction->setIcon( KIcon("network") );
     remoteConnectionAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_R) );
@@ -188,7 +187,7 @@ void MainWindow::setupActions()
 
 
 #ifndef KONSOLE_PART
-    QAction* quitAction = KStandardAction::quit( this , SLOT(close()) , collection );
+    KAction* quitAction = KStandardAction::quit( this , SLOT(close()) , collection );
     // the default shortcut for quit is typically Ctrl+[Some Letter, usually Q] but that is reserved for
     // use by terminal applications
     quitAction->setShortcut(Qt::CTRL+Qt::SHIFT+Qt::Key_Q);
@@ -226,7 +225,7 @@ void MainWindow::setupActions()
     KStandardAction::configureNotifications( this , SLOT(configureNotifications()) , collection  );
     KStandardAction::keyBindings( this , SLOT(showShortcutsDialog()) , collection  );
 
-    QAction* manageProfilesAction = collection->addAction("manage-profiles");
+    KAction* manageProfilesAction = collection->addAction("manage-profiles");
     manageProfilesAction->setText( i18n("Manage Profiles...") );
     manageProfilesAction->setIcon( KIcon("configure") );
     connect( manageProfilesAction , SIGNAL(triggered()) , this , SLOT(showManageProfilesDialog()) );
