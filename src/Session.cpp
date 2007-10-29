@@ -119,6 +119,7 @@ Session::Session() :
 
     //setup timer for monitoring session activity
     _monitorTimer = new QTimer(this);
+    _monitorTimer->setSingleShot(true);
     connect(_monitorTimer, SIGNAL(timeout()), this, SLOT(monitorTimerDone()));
 }
 
@@ -435,7 +436,6 @@ void Session::activityStateSet(int state)
   else if (state==NOTIFYACTIVITY)
   {
     if (_monitorSilence) {
-      _monitorTimer->setSingleShot(true);
       _monitorTimer->start(_silenceSeconds*1000);
     }
 
@@ -713,7 +713,6 @@ void Session::setMonitorSilence(bool _monitor)
   _monitorSilence=_monitor;
   if (_monitorSilence)
   {
-    _monitorTimer->setSingleShot(true);
     _monitorTimer->start(_silenceSeconds*1000);
   }
   else
@@ -726,7 +725,6 @@ void Session::setMonitorSilenceSeconds(int seconds)
 {
   _silenceSeconds=seconds;
   if (_monitorSilence) {
-    _monitorTimer->setSingleShot(true);
     _monitorTimer->start(_silenceSeconds*1000);
   }
 }
