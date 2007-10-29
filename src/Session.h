@@ -1,6 +1,6 @@
 /*
     This file is part of Konsole, an X terminal.
-    
+
     Copyright (C) 2007 by Robert Knight <robertknight@gmail.com>
     Copyright (C) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
 
@@ -47,8 +47,8 @@ class ZModemDialog;
 /**
  * Represents a terminal session consisting of a pseudo-teletype and a terminal emulation.
  * The pseudo-teletype (or PTY) handles I/O between the terminal process and Konsole.
- * The terminal emulation ( Emulation and subclasses ) processes the output stream from the 
- * PTY and produces a character image which is then shown on views connected to the session. 
+ * The terminal emulation ( Emulation and subclasses ) processes the output stream from the
+ * PTY and produces a character image which is then shown on views connected to the session.
  *
  * Each Session can be connected to one or more views by using the addView() method.
  * The attached views can then display output from the program running in the terminal
@@ -56,7 +56,7 @@ class ZModemDialog;
  * activity.
  */
 class Session : public QObject
-{ 
+{
 Q_OBJECT
 
 public:
@@ -65,58 +65,58 @@ public:
   Q_PROPERTY(QString keyBindings READ keyBindings WRITE setKeyBindings)
   Q_PROPERTY(QSize size READ size WRITE setSize)
 
-  /** 
+  /**
    * Constructs a new session.
-   * 
+   *
    * To start the terminal process, call the run() method,
    * after specifying the program and arguments
    * using setProgram() and setArguments()
    *
    * If no program or arguments are specified explicitly, the Session
-   * falls back to using the program specified in the SHELL environment 
+   * falls back to using the program specified in the SHELL environment
    * variable.
    */
   Session();
   ~Session();
 
-  /** 
+  /**
    * Returns true if the session is currently running.  This will be true
    * after run() has been called successfully.
    */
   bool isRunning() const;
 
-  /** 
+  /**
    * Sets the profile associated with this session.
    *
-   * @param profileKey A key which can be used to obtain the current 
-   * profile settings from the SessionManager 
+   * @param profileKey A key which can be used to obtain the current
+   * profile settings from the SessionManager
    */
   void setProfileKey(const QString& profileKey);
-  /** 
+  /**
    * Returns the profile key associated with this session.
    * This can be passed to the SessionManager to obtain the current
-   * profile settings. 
+   * profile settings.
    */
   QString profileKey() const;
 
-  /** 
-   * Adds a new view for this session.    
-   * 
-   * The viewing widget will display the output from the terminal and 
-   * input from the viewing widget (key presses, mouse activity etc.) 
+  /**
+   * Adds a new view for this session.
+   *
+   * The viewing widget will display the output from the terminal and
+   * input from the viewing widget (key presses, mouse activity etc.)
    * will be sent to the terminal.
    *
-   * Since terminal applications assume a single terminal screen, 
-   * all views of a session will display the same number of lines and 
+   * Since terminal applications assume a single terminal screen,
+   * all views of a session will display the same number of lines and
    * columns.
    *
    */
   void addView(TerminalDisplay* widget);
-  /** 
-   * Removes a view from this session.  
+  /**
+   * Removes a view from this session.
    *
    * @p widget will no longer display output from or send input
-   * to the terminal 
+   * to the terminal
    */
   void removeView(TerminalDisplay* widget);
 
@@ -126,17 +126,17 @@ public:
   QList<TerminalDisplay*> views() const;
 
   /**
-   * Returns the terminal emulation instance being used to encode / decode 
+   * Returns the terminal emulation instance being used to encode / decode
    * characters to / from the process.
    */
-  Emulation*  emulation() const;    
-  
-  /** 
+  Emulation*  emulation() const;
+
+  /**
    * Returns the environment of this session as a list of strings like
    * VARIABLE=VALUE
-   */  
+   */
   QStringList environment() const;
-  /** 
+  /**
    * Sets the environment for this session.
    * @p environment should be a list of strings like
    * VARIABLE=VALUE
@@ -145,14 +145,14 @@ public:
 
   /** Returns the unique ID for this session. */
   int sessionId() const;
-  
-  /** 
-   * Return the session title set by the user (ie. the program running 
+
+  /**
+   * Return the session title set by the user (ie. the program running
    * in the terminal), or an empty string if the user has not set a custom title
    */
   QString userTitle() const;
- 
-  /** 
+
+  /**
    * This enum describes the contexts for which separate
    * tab title formats may be specified.
    */
@@ -160,20 +160,20 @@ public:
   {
     /** Default tab title format */
     LocalTabTitle,
-    /** 
+    /**
      * Tab title format used session currently contains
      * a connection to a remote computer (via SSH)
      */
     RemoteTabTitle
   };
-  /** 
-   * Sets the format used by this session for tab titles. 
-   * 
+  /**
+   * Sets the format used by this session for tab titles.
+   *
    * @param context The context whoose format should be set.
    * @param format The tab title format.  This may be a mixture
    * of plain text and dynamic elements denoted by a '%' character
    * followed by a letter.  (eg. %d for directory).  The dynamic
-   * elements available depend on the @p context 
+   * elements available depend on the @p context
    */
   void setTabTitleFormat(TabTitleContext context , const QString& format);
   /** Returns the format used by this session for tab titles. */
@@ -185,7 +185,7 @@ public:
   /** Returns the program name of the shell process started when run() is called. */
   QString program() const;
 
-  /** 
+  /**
    * Sets the command line arguments which the session's program will be passed when
    * run() is called.
    */
@@ -195,9 +195,9 @@ public:
 
   /** Returns the session's current working directory. */
   QString initialWorkingDirectory() { return _initialWorkingDir; }
-  
-  /** 
-   * Sets the initial working directory for the session when it is run 
+
+  /**
+   * Sets the initial working directory for the session when it is run
    * This has no effect once the session has been started.
    */
   void setInitialWorkingDirectory( const QString& dir );
@@ -208,8 +208,8 @@ public:
    * to the history store.  The type of history store
    * used affects the number of lines which can be
    * remembered before they are lost and the storage
-   * (in memory, on-disk etc.) used. 
-   */ 
+   * (in memory, on-disk etc.) used.
+   */
   void setHistoryType(const HistoryType& type);
   /**
    * Returns the type of history store used by this session.
@@ -217,19 +217,19 @@ public:
   const HistoryType& historyType() const;
   /**
    * Clears the history store used by this session.
-   */ 
+   */
   void clearHistory();
 
-  /** 
+  /**
    * Enables monitoring for activity in the session.
    * This will cause notifySessionState() to be emitted
-   * with the NOTIFYACTIVITY state flag when output is 
-   * received from the terminal. 
+   * with the NOTIFYACTIVITY state flag when output is
+   * received from the terminal.
    */
   void setMonitorActivity(bool);
   /** Returns true if monitoring for activity is enabled. */
   bool isMonitorActivity() const;
-  
+
   /**
    * Enables monitoring for silence in the session.
    * This will cause notifySessionState() to be emitted
@@ -238,23 +238,23 @@ public:
    * time, specified with setMonitorSilenceSeconds()
    */
   void setMonitorSilence(bool);
-  /** 
+  /**
    * Returns true if monitoring for inactivity (silence)
    * in the session is enabled.
    */
   bool isMonitorSilence()  const;
   /** See setMonitorSilence() */
   void setMonitorSilenceSeconds(int seconds);
- 
+
   /**
    * Sets the key bindings used by this session.  The bindings
-   * specify how input key sequences are translated into 
+   * specify how input key sequences are translated into
    * the character stream which is sent to the terminal.
    *
    * @param id The name of the key bindings to use.  The
-   * names of available key bindings can be determined using the 
+   * names of available key bindings can be determined using the
    * KeyboardTranslatorManager class.
-   */ 
+   */
   void setKeyBindings(const QString& id);
   /** Returns the name of the key bindings used by this session. */
   QString keyBindings() const;
@@ -281,7 +281,7 @@ public:
   void setIconName(const QString& iconName);
   /** Returns the name of the icon associated with this session. */
   QString iconName() const;
- 
+
   /** Sets the text of the icon associated with this session. */
   void setIconText(const QString& iconText);
   /** Returns the text of the icon associated with this session. */
@@ -289,7 +289,7 @@ public:
 
   /** Specifies whether a utmp entry should be created for the pty used by this session. */
   void setAddToUtmp(bool);
-  
+
   /** Sends the specified @p signal to the terminal process. */
   bool sendSignal(int signal);
 
@@ -298,24 +298,24 @@ public:
    * process terminates.
    */
   void setAutoClose(bool b) { _autoClose = b; }
-  
+
   /**
    * Sets whether flow control is enabled for this terminal
    * session.
    */
   void setFlowControlEnabled(bool enabled);
-  
-  /** 
+
+  /**
    * Sends @p text to the current foreground terminal program.
    */
   void sendText(const QString& text) const;
 
-  /** 
-   * Returns the process id of the terminal process. 
+  /**
+   * Returns the process id of the terminal process.
    * This is the id used by the system API to refer to the process.
    */
   int processId() const;
- 
+
   /**
    * Returns the process id of the terminal's foreground process.
    * This is initially the same as processId() but can change
@@ -325,24 +325,24 @@ public:
 
   /** Returns the terminal session's window size in lines and columns. */
   QSize size();
-  /** 
+  /**
    * Emits a request to resize the session to accommodate
    * the specified window size.
    *
    * @param size The size in lines and columns to request.
    */
   void setSize(const QSize& size);
- 
+
   /** Sets the text codec used by this session's terminal emulation. */
   void setCodec(QTextCodec* codec);
 
-  /** 
+  /**
    * Sets whether the session has a dark background or not.  The session
    * uses this information to set the COLORFGBG variable in the process's
    * environment, which allows the programs running in the terminal to determine
    * whether the background is light or dark and use appropriate colors by default.
    *
-   * This has no effect once the session is running. 
+   * This has no effect once the session is running.
    */
   void setDarkBackground(bool darkBackground);
   /**
@@ -351,9 +351,9 @@ public:
    */
   bool hasDarkBackground() const;
 
-  /** 
-   * Attempts to get the shell program to redraw the current display area. 
-   * This can be used after clearing the screen, for example, to get the 
+  /**
+   * Attempts to get the shell program to redraw the current display area.
+   * This can be used after clearing the screen, for example, to get the
    * shell to redraw the prompt line.
    */
   void refresh();
@@ -364,46 +364,46 @@ public:
 
 public slots:
 
-  /** 
-   * Starts the terminal session. 
+  /**
+   * Starts the terminal session.
    *
    * This creates the terminal process and connects the teletype to it.
    */
   void run();
-    
+
   /**
    * Closes the terminal session.  This sends a hangup signal
    * (SIGHUP) to the terminal process and causes the done(Session*)
    * signal to be emitted.
-   */   
+   */
   void close();
- 
+
   /**
    * Changes the session title or other customizable aspects of the terminal
    * emulation display. For a list of what may be changed see the
    * Emulation::titleChanged() signal.
    */
   void setUserTitle( int, const QString &caption );
-  
+
 signals:
-  
-  /** 
+
+  /**
    * Emitted when the terminal process exits.
    */
   void finished();
 
-  /** 
-   * Emitted when output is received from the terminal process. 
+  /**
+   * Emitted when output is received from the terminal process.
    */
   void receivedData( const QString& text );
-  
+
   /** Emitted when the session's title has changed. */
   void titleChanged();
 
   /** Emitted when the session's profile has changed. */
   void profileChanged(const QString& profile);
 
-  /** 
+  /**
    * Emitted when the activity state of this session changes.
    *
    * @param state The new state of the session.  This may be one
@@ -413,8 +413,8 @@ signals:
 
   /** Emitted when a bell event occurs in the session. */
   void bellRequest( const QString& message );
- 
-  /** 
+
+  /**
    * Requests that the color the text for any tabs associated with
    * this session should be changed;
    *
@@ -435,14 +435,14 @@ signals:
 
   /**
    * Emitted when the terminal process requests a change
-   * in the size of the terminal window.  
+   * in the size of the terminal window.
    *
    * @param size The requested window size in terms of lines and columns.
    */
   void resizeRequest(const QSize& size);
 
-  /** 
-   * Emitted when a profile change command is received from the terminal. 
+  /**
+   * Emitted when a profile change command is received from the terminal.
    *
    * @param text The text of the command.  This is a string of the form
    * "PropertyName=Value;PropertyName=Value ..."
@@ -451,12 +451,12 @@ signals:
 
 private slots:
   void done(int);
-    
+
   void fireZModemDetected();
-  
+
   void onReceiveBlock( const char* buffer, int len );
   void monitorTimerDone();
-  
+
   void onViewSizeChange(int height, int width);
   void onEmulationSizeChange(int lines , int columns);
 
@@ -527,14 +527,14 @@ private:
   bool _hasDarkBackground;
 
   static int lastSessionId;
-  
+
 };
 
 /**
  * Provides a group of sessions which is divided into master and slave sessions.
  * Activity in master sessions can be propagated to all sessions within the group.
  * The type of activity which is propagated and method of propagation is controlled
- * by the masterMode() flags. 
+ * by the masterMode() flags.
  */
 class SessionGroup : public QObject
 {
@@ -563,23 +563,23 @@ public:
      * @param master True to make this session a master or false otherwise
      */
     void setMasterStatus( Session* session , bool master );
-    /** Returns the master status of a session.  See setMasterStatus() */ 
+    /** Returns the master status of a session.  See setMasterStatus() */
     bool masterStatus( Session* session ) const;
 
-    /** 
-     * This enum describes the options for propagating certain activity or 
+    /**
+     * This enum describes the options for propagating certain activity or
      * changes in the group's master sessions to all sessions in the group.
      */
     enum MasterMode
     {
-        /** 
-         * Any input key presses in the master sessions are sent to all 
+        /**
+         * Any input key presses in the master sessions are sent to all
          * sessions in the group.
          */
         CopyInputToAll = 1
     };
 
-    /** 
+    /**
      * Specifies which activity in the group's master sessions is propagated
      * to all sessions in the group.
      *
@@ -587,7 +587,7 @@ public:
      */
     void setMasterMode( int mode );
     /**
-     * Returns a bitwise OR of the active MasterMode flags for this group. 
+     * Returns a bitwise OR of the active MasterMode flags for this group.
      * See setMasterMode()
      */
     int masterMode() const;
