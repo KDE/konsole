@@ -446,7 +446,7 @@ void SessionController::setupActions()
 
     action = collection->addAction("clear-and-reset");
     action->setText( i18n("Clear && Reset") );
-    action->setIcon( KIcon("history-clear") );
+    action->setIcon( KIcon("edit-clear-history") );
     connect( action , SIGNAL(triggered()) , this , SLOT(clearAndReset()) );
 
     // Monitor
