@@ -46,7 +46,7 @@ class KWritedModule : public KDEDModule
 {
   Q_OBJECT
 public:
-  KWritedModule();
+  KWritedModule(QObject* parent, const QList<QVariant>&);
  ~KWritedModule();
 private:
   KWrited* pro;

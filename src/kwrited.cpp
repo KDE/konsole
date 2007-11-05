@@ -45,6 +45,15 @@
 #include <fixx11h.h>
 #endif
 
+#include <kpluginfactory.h>
+#include <kpluginloader.h>
+
+K_PLUGIN_FACTORY(KWritedFactory,
+                 registerPlugin<KWritedModule>();
+    )
+K_EXPORT_PLUGIN(KWritedFactory("konsole"))
+
+
 /* TODO
    for anyone who likes to do improvements here, go ahead.
    - check FIXMEs below
@@ -53,7 +62,7 @@
      - pop up on incoming messages
      - clear messages
      - allow max. lines
-   - add CORBA interface?
+   - add DBus interface?
    - add session awareness.
    - add client complements.
    - kwrited is disabled by default if built without utempter,
@@ -117,23 +126,19 @@ void KWrited::contextMenuEvent(QContextMenuEvent * e)
    delete menu;
 }
 
-KWritedModule::KWritedModule()
-    : KDEDModule()
+KWritedModule::KWritedModule(QObject* parent, const QList<QVariant>&)
+    : KDEDModule(parent)
 {
-    KGlobal::locale()->insertCatalog("konsole");
+    // Done by the factory now
+    //KGlobal::locale()->insertCatalog("konsole");
     pro = new KWrited;
 }
 
 KWritedModule::~KWritedModule()
 {
     delete pro;
-    KGlobal::locale()->removeCatalog("konsole");
+    // Done by the factory now
+    //KGlobal::locale()->removeCatalog("konsole");
 }
-
-extern "C"
-KDE_EXPORT KDEDModule* create_kwrited()
-    {
-    return new KWritedModule();
-    }
 
 #include "kwrited.moc"
