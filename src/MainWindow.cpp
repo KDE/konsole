@@ -27,15 +27,18 @@
 #include <KAction>
 #include <KActionCollection>
 #include <KActionMenu>
+#include <KApplication>
 #include <KShortcutsDialog>
 #include <KLocale>
 #include <KMenu>
 #include <KMenuBar>
+#include <KMessageBox>
 #include <KService>
 #include <KToggleAction>
 #include <KToggleFullScreenAction>
 #include <KToolInvocation>
-#include <kstandardaction.h>
+#include <KStandardAction>
+#include <KStandardGuiItem>
 #include <KXMLGUIFactory>
 #include <KNotifyConfigWidget>
 
@@ -46,6 +49,7 @@
 #include "SessionController.h"
 #include "ProfileList.h"
 #include "ManageProfilesDialog.h"
+#include "Session.h"
 #include "ViewManager.h"
 #include "ViewSplitter.h"
 
@@ -277,6 +281,38 @@ void MainWindow::newTab()
 void MainWindow::newWindow()
 {
     emit newWindowRequest( _defaultProfile , activeSessionDir() );
+}
+
+bool MainWindow::queryClose()
+{
+    if (kapp->sessionSaving() ||
+        _viewManager->viewProperties().count() < 2)
+        return true;
+
+    int res = KMessageBox::warningYesNoCancel(this,
+              i18n("You have multiple terminal sessions open in this window, are you sure you want to quit?"),
+              i18n("Really Quit?"),
+              KStandardGuiItem::quit(),
+              KGuiItem(i18n("Close current sesion"), "tab-close"),
+              KStandardGuiItem::cancel(),
+              "CloseAllSessions");
+
+    switch (res) {
+        case KMessageBox::Yes:
+            return true;
+            break;
+        case KMessageBox::No:
+            if (_pluggedController && _pluggedController->session()) {
+                _pluggedController->session()->close();
+            }
+            return false;
+            break;
+        case KMessageBox::Cancel:
+            return false;
+            break;
+    }
+
+    return true;
 }
 
 void MainWindow::showShortcutsDialog()

@@ -120,6 +120,14 @@ class MainWindow : public KXmlGuiWindow
         void newWindowRequest(const QString& key,
                               const QString& directory);
 
+        /**
+         * Emitted by the main window to request the current session to close.
+         */
+        void closeActiveSessionRequest();
+
+    protected:
+        bool queryClose();
+
     private slots:
         void newTab();
         void newWindow();
