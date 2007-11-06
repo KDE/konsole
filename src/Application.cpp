@@ -145,11 +145,15 @@ int Application::newInstance()
         QString key = SessionManager::instance()->loadProfile(args->getOption("profile"));
         window->setDefaultProfile(key);
     }
-
+    QString workdir;
+    if( args->isSet("workdir") )
+    {
+        workdir = args->getOption("workdir");
+    }
     processProfileChangeArgs(args);
 
     // create new session
-    createSession( window->defaultProfile() , QString() , window->viewManager() );
+    createSession( window->defaultProfile() , workdir , window->viewManager() );
 
     // if the background-mode argument is supplied, start the background session
     // ( or bring to the front if it already exists )
@@ -257,7 +261,6 @@ void Application::createWindow(const QString& key , const QString& directory)
 void Application::createSession(const QString& key , const QString& directory , ViewManager* view)
 {
     Session* session = SessionManager::instance()->createSession(key);
-
     if (!directory.isEmpty())
         session->setInitialWorkingDirectory(directory);
 

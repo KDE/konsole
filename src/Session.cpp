@@ -282,7 +282,6 @@ void Session::run()
 
   QString dbusService = QDBusConnection::sessionBus().baseService();
   QString cwd_save = QDir::currentPath();
-
   if (!_initialWorkingDir.isEmpty())
     _shellProcess->setWorkingDirectory(_initialWorkingDir);
 
