@@ -229,6 +229,7 @@ private slots:
     void moveActiveViewLeft();
     // moves active view to the right
     void moveActiveViewRight();
+
 private:
     const ColorScheme* colorSchemeForProfile(const QString& key) const;
 
@@ -266,7 +267,9 @@ private:
 private:
     QPointer<ViewSplitter>          _viewSplitter;
     QPointer<SessionController>     _pluggedController;
-    QHash<QPointer<TerminalDisplay>,QPointer<Session> >    _sessionMap;
+    
+    QHash<TerminalDisplay*,Session*> _sessionMap;
+
     KActionCollection*                  _actionCollection;
     QSignalMapper*                      _containerSignalMapper;
     NavigationMethod                _navigationMethod;
