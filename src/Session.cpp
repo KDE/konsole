@@ -70,7 +70,7 @@ Session::Session() :
    , _autoClose(true)
    , _wantedClose(false)
    , _silenceSeconds(10)
-   , _addToUtmp(true)
+   , _addToUtmp(false)
    , _flowControl(true)
    , _fullScripting(false)
    , _sessionId(0)
