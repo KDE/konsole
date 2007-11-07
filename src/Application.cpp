@@ -113,16 +113,38 @@ void Application::listAvailableProfiles()
 int Application::newInstance()
 {
     KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
-  
-    if ( args->isSet("list-profiles") )
-    {
-        listAvailableProfiles();
+
+    // check for arguments to print help or other information to the terminal,
+    // quit if such an argument was found
+    if ( processHelpArgs(args) ) 
         return 0;
-    }
 
     // create a new window or use an existing one 
+    MainWindow* window = processWindowArgs(args);
+  
+    // select profile to use 
+    processProfileSelectArgs(args,window);
+   
+    // process various command-line options which cause a property of the 
+    // default profile to be changed 
+    processProfileChangeArgs(args);
+
+    // create new session
+    createSession( window->defaultProfile() , QString() , window->viewManager() );
+
+    // if the background-mode argument is supplied, start the background session
+    // ( or bring to the front if it already exists )
+    if ( args->isSet("background-mode") )
+        startBackgroundMode(window);
+    else
+        window->show();
+
+    return 0;
+}
+
+MainWindow* Application::processWindowArgs(KCmdLineArgs* args)
+{
     MainWindow* window = 0;
-    
     if ( args->isSet("new-tab") )
     {
         QListIterator<QWidget*> iter(topLevelWidgets());
@@ -139,32 +161,27 @@ int Application::newInstance()
     {
         window = newMainWindow();
     }
+    return window;
+}
 
+void Application::processProfileSelectArgs(KCmdLineArgs* args,MainWindow* window)
+{
     if ( args->isSet("profile") )
     {
         QString key = SessionManager::instance()->loadProfile(args->getOption("profile"));
         window->setDefaultProfile(key);
     }
-    QString workdir;
-    if( args->isSet("workdir") )
-    {
-        workdir = args->getOption("workdir");
-    }
-    processProfileChangeArgs(args);
-
-    // create new session
-    createSession( window->defaultProfile() , workdir , window->viewManager() );
-
-    // if the background-mode argument is supplied, start the background session
-    // ( or bring to the front if it already exists )
-    if ( args->isSet("background-mode") )
-        startBackgroundMode(window);
-    else
-        window->show();
-
-    return 0;
 }
 
+bool Application::processHelpArgs(KCmdLineArgs* args)
+{
+    if ( args->isSet("list-profiles") )
+    {
+        listAvailableProfiles();
+        return true;
+    }
+    return false;
+}
 void Application::processProfileChangeArgs(KCmdLineArgs* args) 
 {
     Profile* const defaultProfile = SessionManager::instance()->defaultProfile();
@@ -181,6 +198,11 @@ void Application::processProfileChangeArgs(KCmdLineArgs* args)
         defaultProfile->setProperty(Profile::Arguments,arguments);
     }
 
+    // change the initial working directory
+    if( args->isSet("workdir") )
+    {
+        defaultProfile->setProperty(Profile::Directory,args->getOption("workdir"));
+    }
 
     // temporary changes to profile options specified on the command line
     foreach( QString value , args->getOptionList("p") ) 

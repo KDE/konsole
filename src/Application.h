@@ -84,6 +84,9 @@ private:
     void init();
     void listAvailableProfiles();
     void startBackgroundMode(MainWindow* window);
+    bool processHelpArgs(KCmdLineArgs* args);
+    MainWindow* processWindowArgs(KCmdLineArgs* args);
+    void processProfileSelectArgs(KCmdLineArgs* args,MainWindow* window);
     void processProfileChangeArgs(KCmdLineArgs* args);
 
     KCmdLineArgs*   _arguments;
