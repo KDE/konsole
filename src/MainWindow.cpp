@@ -289,27 +289,25 @@ bool MainWindow::queryClose()
         _viewManager->viewProperties().count() < 2)
         return true;
 
-    int res = KMessageBox::warningYesNoCancel(this,
-              i18n("You have multiple terminal sessions open in this window, are you sure you want to quit?"),
-              i18n("Really Quit?"),
-              KStandardGuiItem::quit(),
-              KGuiItem(i18n("Close current sesion"), "tab-close"),
-              KStandardGuiItem::cancel(),
-              "CloseAllSessions");
+    int result = KMessageBox::warningYesNoCancel(this,
+                i18n("You have multiple tabs in this window, " 
+                     "are you sure you want to quit?"),
+                i18n("Really Quit?"),
+                KStandardGuiItem::quit(),
+                KGuiItem(i18n("Close current tab"), "tab-close"),
+                KStandardGuiItem::cancel(),
+                "CloseAllTabs");
 
-    switch (res) {
-        case KMessageBox::Yes:
-            return true;
-            break;
-        case KMessageBox::No:
-            if (_pluggedController && _pluggedController->session()) {
-                _pluggedController->session()->close();
-            }
-            return false;
-            break;
-        case KMessageBox::Cancel:
-            return false;
-            break;
+    switch (result) 
+    {
+    case KMessageBox::Yes:
+        return true;
+    case KMessageBox::No:
+        if (_pluggedController && _pluggedController->session()) 
+            _pluggedController->session()->close();
+        return false;
+    case KMessageBox::Cancel:
+        return false;
     }
 
     return true;

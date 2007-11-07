@@ -126,7 +126,8 @@ class MainWindow : public KXmlGuiWindow
         void closeActiveSessionRequest();
 
     protected:
-        bool queryClose();
+        // reimplemented from KMainWindow
+        virtual bool queryClose();
 
     private slots:
         void newTab();
