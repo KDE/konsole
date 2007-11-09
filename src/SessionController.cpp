@@ -610,7 +610,7 @@ void SessionController::renameSession()
     const QString& text = KInputDialog::getText( i18n("Rename Tab") ,
                                                  i18n("Enter new tab text:") ,
                                                  _session->tabTitleFormat(Session::LocalTabTitle) ,
-                                                 &ok );
+                                                 &ok, QApplication::activeWindow() );
     if ( ok )
     {
         _session->setTabTitleFormat(Session::LocalTabTitle,text);
@@ -831,7 +831,7 @@ void SessionController::scrollBackOptionsChanged( int mode , int lines )
 
 void SessionController::saveHistory()
 {
-    SessionTask* task = new SaveHistoryTask();
+    SessionTask* task = new SaveHistoryTask(this);
     task->setAutoDelete(true);
     task->addSession( _session );
     task->execute();
@@ -988,7 +988,7 @@ void SaveHistoryTask::execute()
     //
 
      KFileDialog* dialog = new KFileDialog( QString(":konsole") /* check this */,
-                                               QString() , 0 /* no parent widget */);
+                                               QString(), QApplication::activeWindow() );
      QStringList mimeTypes;
      mimeTypes << "text/plain";
      mimeTypes << "text/html";

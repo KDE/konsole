@@ -316,7 +316,7 @@ bool MainWindow::queryClose()
 void MainWindow::showShortcutsDialog()
 {
     KShortcutsDialog::configure( actionCollection() ,
-                                 KShortcutsEditor::LetterShortcutsDisallowed );
+                                 KShortcutsEditor::LetterShortcutsDisallowed, this );
 }
 
 void MainWindow::newFromProfile(const QString& key)

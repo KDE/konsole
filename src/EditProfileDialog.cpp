@@ -332,7 +332,8 @@ void EditProfileDialog::remoteTabTitleFormatChanged(const QString& format)
 
 void EditProfileDialog::selectIcon()
 {
-    const QString& icon = KIconDialog::getIcon();
+    const QString& icon = KIconDialog::getIcon(KIconLoader::Desktop, KIconLoader::Application,
+                                               false, 0, false, this);
     if (!icon.isEmpty())
     {
         _ui->iconSelectButton->setIcon( KIcon(icon) );
