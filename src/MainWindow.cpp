@@ -172,7 +172,7 @@ void MainWindow::setupActions()
 
     // File Menu
     KAction* newTabAction = collection->addAction("new-tab");
-    newTabAction->setIcon( KIcon("openterm") );
+    newTabAction->setIcon( KIcon("utilities-terminal") );
     newTabAction->setText( i18n("New &Tab") );
     newTabAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_N) );
     connect( newTabAction , SIGNAL(triggered()) , this , SLOT(newTab()) );
