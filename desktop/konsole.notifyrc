@@ -1,6 +1,7 @@
 [Global]
 IconName=utilities-terminal
 Comment=Konsole
+Comment[ca]=Consola
 Comment[da]=Konsol
 Comment[eo]=Konzolo
 Comment[et]=Konsool
@@ -15,6 +16,7 @@ Comment[ne]=कन्सोल
 Comment[nn]=Konsoll
 Comment[ro]=Consolă
 Comment[ru]=Консоль
+Comment[sl]=Konzola
 Comment[sr]=Конзола
 Comment[ta]=கான்சோல்
 Comment[te]=కాన్సొల్
