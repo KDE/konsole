@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=KDE Write Daemon
 Name[af]=KDE Skryf Bediener
 Name[ar]=رقيب الكتابة لِــ كدي
@@ -121,7 +120,7 @@ Comment[x-test]=xxWatch for messages from local users sent with write(1) or wall
 Comment[zh_CN]=监视本地用户发出的 write(1) 或 wall(1) 消息
 Comment[zh_TW]=監控本地使用者以 write(1) 或 wall(1) 傳送的訊息
 Type=Service
-ServiceTypes=KDEDModule
+X-KDE-ServiceTypes=KDEDModule
 X-KDE-Library=kwrited
 X-KDE-Kded-autoload=true
 X-KDE-Kded-load-on-demand=true

@@ -1,7 +1,6 @@
 [Desktop Entry]
-Encoding=UTF-8
 Type=Service
-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
 Actions=openTerminalHere;
 X-KDE-AuthorizeAction=shell_access
 
