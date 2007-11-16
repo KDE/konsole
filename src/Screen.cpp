@@ -846,8 +846,6 @@ void Screen::scrollUp(int from, int n)
   _scrolledLines -= n;
   _lastScrolledRegion = QRect(0,tmargin,columns-1,(bmargin-tmargin));
 
-  //qDebug() << "Screen::scrollUp( from: " << from << " , n: " << n << ")";
-
   //FIXME: make sure `tmargin', `bmargin', `from', `n' is in bounds.
   moveImage(loc(0,from),loc(0,from+n),loc(columns-1,bmargin));
   clearImage(loc(0,bmargin-n+1),loc(columns-1,bmargin),' ');
@@ -935,8 +933,6 @@ int Screen::getCursorY() const
     This is an internal helper functions. The parameter types are internal
     addresses of within the screen image and make use of the way how the
     screen matrix is mapped to the image vector.
-
-NOTE:  This only erases characters in the image, properties associated with individual lines are not affected.
 */
 
 void Screen::clearImage(int loca, int loce, char c)
@@ -961,6 +957,8 @@ void Screen::clearImage(int loca, int loce, char c)
 
   for (int y=topLine;y<=bottomLine;y++)
   {
+        lineProperties[y] = 0;
+
         int endCol = ( y == bottomLine) ? loce%columns : columns-1;
         int startCol = ( y == topLine ) ? loca%columns : 0;
 
