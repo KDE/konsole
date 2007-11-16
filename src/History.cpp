@@ -305,45 +305,19 @@ void HistoryScrollBuffer::addCells(const QVector<Character>& cells)
     }
 
     _historyBuffer[bufferIndex(_usedLines-1)] = cells;
-    //m_wrappedLine.clearBit(_head);
-
-  /*  ++m_arrayIndex;
-    if (m_arrayIndex >= m_maxNbLines) {
-     m_arrayIndex = 0;
-     m_buffFilled = true;
-    }
-
-  // FIXME: See BR96605
-  if (m_nbLines < m_maxNbLines - 1) ++m_nbLines;
-
-  m_histBuffer.insert(m_arrayIndex, newLine);
-  m_wrappedLine.clearBit(m_arrayIndex); */
+    _wrappedLine[bufferIndex(_usedLines-1)] = false;
 }
 void HistoryScrollBuffer::addCells(const Character a[], int count)
 {
-  //unsigned int nbLines = countLines(bytes, len);
-
   HistoryLine newLine(count);
   qCopy(a,a+count,newLine.begin());
 
   addCells(newLine);
-
-  /*++m_arrayIndex;
-  if (m_arrayIndex >= m_maxNbLines) {
-     m_arrayIndex = 0;
-     m_buffFilled = true;
-    }
-
-  // FIXME: See BR96605
-  if (m_nbLines < m_maxNbLines - 1) ++m_nbLines;
-
-  m_histBuffer.insert(m_arrayIndex, newLine);
-  m_wrappedLine.clearBit(m_arrayIndex);*/
 }
 
 void HistoryScrollBuffer::addLine(bool previousWrapped)
 {
-  //m_wrappedLine.setBit(m_arrayIndex,previousWrapped);
+    _wrappedLine[bufferIndex(_usedLines-1)] = previousWrapped;
 }
 
 int HistoryScrollBuffer::getLines()
@@ -367,12 +341,15 @@ int HistoryScrollBuffer::getLineLen(int lineNumber)
 
 bool HistoryScrollBuffer::isWrappedLine(int lineNumber)
 {
-    //FIXME : Implement this
+  Q_ASSERT( lineNumber >= 0 && lineNumber < _maxLineCount );
+    
+  if (lineNumber < _usedLines)
+  {
+    //qDebug() << "Line" << lineNumber << "wrapped is" << _wrappedLine[bufferIndex(lineNumber)];
+    return _wrappedLine[bufferIndex(lineNumber)];
+  }
+  else
     return false;
-//  if (lineno >= (int) m_maxNbLines)
-//    return 0;
-//
-//  return m_wrappedLine[adjustLineNb(lineno)];
 }
 
 void HistoryScrollBuffer::getCells(int lineNumber, int startColumn, int count, Character* buffer)
@@ -401,7 +378,6 @@ void HistoryScrollBuffer::getCells(int lineNumber, int startColumn, int count, C
 void HistoryScrollBuffer::setMaxNbLines(unsigned int lineCount)
 {
     HistoryLine* oldBuffer = _historyBuffer;
-
     HistoryLine* newBuffer = new HistoryLine[lineCount];
     
     for ( int i = 0 ; i < qMin(_usedLines,(int)lineCount) ; i++ )
@@ -415,6 +391,8 @@ void HistoryScrollBuffer::setMaxNbLines(unsigned int lineCount)
 
     _historyBuffer = newBuffer;
     delete[] oldBuffer;
+
+    _wrappedLine.resize(lineCount);
 }
 
 int HistoryScrollBuffer::bufferIndex(int lineNumber)

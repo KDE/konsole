@@ -183,6 +183,7 @@ private:
   int bufferIndex(int lineNumber);
 
   HistoryLine* _historyBuffer;
+  QBitArray _wrappedLine;
   int _maxLineCount;
   int _usedLines;  
   int _head;
