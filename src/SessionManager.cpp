@@ -301,14 +301,11 @@ QString SessionManager::defaultProfileKey() const
     return _defaultProfile;
 }
 
-QString SessionManager::saveProfile(const QString& path , Profile* info)
+QString SessionManager::saveProfile(Profile* info)
 {
     ProfileWriter* writer = new KDE4ProfileWriter;
 
-    QString newPath = path;
-
-    if ( newPath.isEmpty() )
-        newPath = writer->getPath(info);
+    QString newPath = writer->getPath(info);
 
     writer->writeProfile(newPath,info);
 
@@ -347,21 +344,7 @@ void SessionManager::changeProfile(const QString& key ,
     emit profileChanged(key);
 
     if ( persistant )
-    {
-        // save the changes to disk
-        // the path may be empty here, in which case it is up
-        // to the profile writer to generate or request a path name
-        if ( info->isPropertySet(Profile::Path) )
-        {
-            qDebug() << "Profile saved to existing path: " << info->path();
-            info->setProperty(Profile::Path,saveProfile(info->path(),info));
-        }
-        else
-        {
-            qDebug() << "Profile saved to new path.";
-            info->setProperty(Profile::Path,saveProfile(QString(),info));
-        }
-    }
+        info->setProperty(Profile::Path,saveProfile(info));
 }
 void SessionManager::applyProfile(const QString& key , bool modifiedPropertiesOnly)
 {

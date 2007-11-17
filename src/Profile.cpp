@@ -36,6 +36,9 @@
 #include <KDebug>
 #include <KStandardDirs>
 
+// System
+#include <unistd.h>
+
 // Konsole
 #include "ShellCommand.h"
 
@@ -235,13 +238,9 @@ QString KDE4ProfileWriter::getPath(const Profile* info)
     if ( info->isPropertySet(Profile::Path) )
         newPath=info->path();
 
-    // if the path is not specified, use the profile name + ".profile"
-    if ( newPath.isEmpty() )
-        newPath = info->name() + ".profile";    
-
-    QFileInfo fileInfo(newPath);
-    if (!fileInfo.isAbsolute())
-        newPath = KGlobal::dirs()->saveLocation("data","konsole/") + newPath;
+    // if the path is not specified, not absolute or not writable use the profile name + ".profile"
+    if ( newPath.isEmpty() || !QFileInfo(newPath).isAbsolute() || !KStandardDirs::checkAccess(newPath, W_OK) ) 
+        newPath = KGlobal::dirs()->saveLocation("data","konsole/") + info->name() + ".profile";
 
     qDebug() << "Saving profile under name: " << newPath;
 
@@ -251,7 +250,7 @@ void KDE4ProfileWriter::writeStandardElement(KConfigGroup& group ,  const Profil
                                              Profile::Property attribute)
 {
     QString name = Profile::primaryNameForProperty(attribute);
-
+    
     if ( profile->isPropertySet(attribute) )
         group.writeEntry(name,profile->property(attribute));
 }

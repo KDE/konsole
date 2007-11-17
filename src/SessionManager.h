@@ -290,9 +290,9 @@ private:
     void saveFavorites();
     // saves a profile to a file
     // returns the path to which the profile was saved, which will
-    // be the same as the 'path' argument if valid or a newly generated path
+    // be the same as the path property of profile if valid or a newly generated path
     // otherwise
-    QString saveProfile(const QString& path , Profile* profile);
+    QString saveProfile(Profile* profile);
 
     // applies updates to the profile associated with @p key
     // to all sessions currently using that profile
