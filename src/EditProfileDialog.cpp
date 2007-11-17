@@ -962,13 +962,10 @@ void EditProfileDialog::fontSelected(const QFont& font)
 }
 void EditProfileDialog::showFontDialog()
 {
-    //TODO Only permit selection of mono-spaced fonts.  
-    // the KFontDialog API does not appear to have a means to do this
-    // at present.
     QFont currentFont = _ui->fontPreviewLabel->font();
    
-    KFontDialog* dialog = new KFontDialog(this);
-    dialog->setFont(currentFont);
+    KFontDialog* dialog = new KFontDialog(this, KFontChooser::FixedFontsOnly);
+    dialog->setFont(currentFont, true);
 
     connect( dialog , SIGNAL(fontSelected(const QFont&)) , this , SLOT(fontSelected(const QFont&)) );
     dialog->show(); 
