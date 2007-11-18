@@ -144,11 +144,11 @@ void MainWindow::activeViewChanged(SessionController* controller)
     connect( controller , SIGNAL(titleChanged(ViewProperties*)) ,
             this , SLOT(activeViewTitleChanged(ViewProperties*)) );
 
+    controller->setShowMenuAction( _toggleMenuBarAction );
     guiFactory()->addClient(controller);
 
     // set the current session's search bar
     controller->setSearchBar( searchBar() );
-    controller->setShowMenuAction( _toggleMenuBarAction );
 
     // update session title to match newly activated session
     activeViewTitleChanged(controller);
