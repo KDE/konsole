@@ -26,6 +26,7 @@
 
 // KDE
 #include <KAction>
+#include <KDebug>
 #include <KIcon>
 #include <KInputDialog>
 #include <KLocale>
@@ -227,12 +228,12 @@ KUrl SessionController::url() const
         int pid = _session->foregroundProcessId();
         if ( pid != 0 )
         {
-            qDebug() << "reading session process = " << info->name(&ok);
+            kDebug(1211) << "reading session process = " << info->name(&ok);
 
             ProcessInfo* foregroundInfo = ProcessInfo::newInstance(pid);
             foregroundInfo->update();
 
-            qDebug() << "reading foreground process = " << foregroundInfo->name(&ok);
+            kDebug(1211) << "reading foreground process = " << foregroundInfo->name(&ok);
 
             // for remote connections, save the user and host
             // bright ideas to get the directory at the other end are welcome :)
@@ -288,7 +289,7 @@ void SessionController::openUrl( const KUrl& url )
     else
     {
         //TODO Implement handling for other Url types
-        qWarning() << "Unable to open bookmark at url" << url << ", I do not know"
+        kWarning(1211) << "Unable to open bookmark at url" << url << ", I do not know"
            << " how to handle the protocol " << url.protocol();
     }
 }
@@ -585,11 +586,11 @@ void SessionController::debugProcess()
 
         if ( ok )
         {
-            qDebug() << currentDir;
+            kDebug(1211) << currentDir;
         }
         else
         {
-            qDebug() << "could not read current dir of foreground process";
+            kDebug(1211) << "could not read current dir of foreground process";
         }
 
         delete fp;
@@ -815,7 +816,7 @@ void SessionController::showHistoryOptions()
 }
 void SessionController::sessionResizeRequest(const QSize& size)
 {
-    qDebug() << "View resize requested to " << size;
+    kDebug(1211) << "View resize requested to " << size;
 
     _view->setSize(size.width(),size.height());
 }
@@ -898,7 +899,7 @@ void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , in
         popup->exec( _view->mapToGlobal(position) );
     else
     {
-        qWarning() << "Unable to display popup menu for session"
+        kWarning(1211) << "Unable to display popup menu for session"
                    << _session->title(Session::NameRole)
                    << ", no GUI factory available to build the popup.";
     }
@@ -1251,7 +1252,7 @@ void SearchHistoryTask::highlightResult(ScreenWindowPtr window , int findPos)
      //work out how many lines into the current block of text the search result was found
      //- looks a little painful, but it only has to be done once per search.
 
-     qDebug() << "Found result at line " << findPos;
+     kDebug(1211) << "Found result at line " << findPos;
 
      //update display to show area of history containing selection
      window->scrollTo(findPos);
