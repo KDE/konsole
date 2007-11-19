@@ -234,15 +234,10 @@ void Profile::registerName(Property property , const QString& name)
 QString KDE4ProfileWriter::getPath(const Profile* info)
 {
     QString newPath;
-    
-    if ( info->isPropertySet(Profile::Path) )
-        newPath=info->path();
+    // use the profile name + ".profile" and save it in $KDEHOME
+    newPath = KGlobal::dirs()->saveLocation("data","konsole/") + info->name() + ".profile";
 
-    // if the path is not specified, not absolute or not writable use the profile name + ".profile"
-    if ( newPath.isEmpty() || !QFileInfo(newPath).isAbsolute() || !KStandardDirs::checkAccess(newPath, W_OK) ) 
-        newPath = KGlobal::dirs()->saveLocation("data","konsole/") + info->name() + ".profile";
-
-    qDebug() << "Saving profile under name: " << newPath;
+    kDebug(1211) << "Saving profile under name: " << newPath;
 
     return newPath;
 }
