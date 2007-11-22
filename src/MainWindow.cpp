@@ -209,7 +209,6 @@ void MainWindow::setupActions()
     _toggleMenuBarAction = new KToggleAction(this);
     _toggleMenuBarAction->setText( i18n("Show Menu Bar") );
     _toggleMenuBarAction->setIcon( KIcon("show-menu") );
-    _toggleMenuBarAction->setCheckedState( KGuiItem( i18n("Hide Menu Bar") , "show-menu") );
     _toggleMenuBarAction->setChecked( !menuBar()->isHidden() );
     connect( _toggleMenuBarAction , SIGNAL(toggled(bool)) , menuBar() , SLOT(setVisible(bool)) );
     collection->addAction("show-menubar",_toggleMenuBarAction);
