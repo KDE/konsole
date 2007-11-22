@@ -530,6 +530,18 @@ void TerminalDisplay::setOpacity(qreal opacity)
 
 void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const QColor& backgroundColor)
 {
+        // the area of the widget showing the contents of the terminal display is drawn
+        // using the background color from the color scheme set with setColorTable()
+        //
+        // the area of the widget behind the scroll-bar is drawn using the background
+        // brush from the scroll-bar's palette, to give the effect of the scroll-bar
+        // being outside of the terminal display and visual consistency with other KDE
+        // applications.  
+        //
+        QRect scrollBarArea = rect.intersected(_scrollBar->geometry());
+        QRegion contentsRegion = QRegion(rect).subtracted(scrollBarArea);
+        QRect contentsRect = contentsRegion.boundingRect();
+
         if ( HAVE_TRANSPARENCY && qAlpha(_blendColor) < 0xff ) 
         {
             QColor color(backgroundColor);
@@ -537,11 +549,13 @@ void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const
 
             painter.save();
             painter.setCompositionMode(QPainter::CompositionMode_Source);
-            painter.fillRect(rect, color);
+            painter.fillRect(contentsRect, color);
             painter.restore();
         } 
         else
-            painter.fillRect(rect, backgroundColor);
+            painter.fillRect(contentsRect, backgroundColor);
+
+        painter.fillRect(scrollBarArea,_scrollBar->palette().background());
 }
 
 void TerminalDisplay::drawCursor(QPainter& painter, 
