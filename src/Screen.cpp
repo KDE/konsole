@@ -1248,21 +1248,6 @@ bool Screen::isSelected( const int x,const int y)
   }
 }
 
-/*static bool isSpace(UINT16 c)
-{
-  if ((c > 32) && (c < 127))
-     return false;
-  if ((c == 32) || (c == 0))
-     return true;
-  QChar qc(c);
-  return qc.isSpace();
-}*/
-
-//FIXME:  preserve_line_breaks not handled yet.
-//        I considered removing this parameter altogether, requiring 
-//        writeToStream() to be used if text needs to be retrieved as 
-//        it appears on screen.
-//        -- needs more thought on the issue first though.
 QString Screen::selectedText(bool preserveLineBreaks)
 {
   QString result;
@@ -1275,40 +1260,6 @@ QString Screen::selectedText(bool preserveLineBreaks)
   
   return result;
 }
-
-/*
-static QString makeString(int *m, int d, bool stripTrailingSpaces)
-{
-  QChar* qc = new QChar[d];
-
-  int last_space = -1;
-  int j = 0;
-
-  for (int i = 0; i < d; i++, j++)
-    {
-      if (m[i] == ' ')
-        {
-          if (last_space == -1)
-            last_space = j;
-        }
-      else
-        {
-          last_space = -1;
-        }
-      qc[j] = m[i];
-    }
-
-  if ((last_space != -1) && stripTrailingSpaces)
-    {
-      // Strip trailing spaces
-      j = last_space;
-    }
-
-  QString res(qc, j);
-  delete [] qc;
-  return res;
-}*/
-
 
 bool Screen::isSelectionValid() const
 {
@@ -1431,7 +1382,7 @@ void Screen::copyLineToStream(int line ,
 						break;
 
         // add new line character at end
-        const bool omitLineBreak = (currentLineProperties & LINE_WRAPPED) &&
+        const bool omitLineBreak = (currentLineProperties & LINE_WRAPPED) ||
                                    !preserveLineBreaks;
 
         if ( !omitLineBreak && appendNewLine && (count+1 < MAX_CHARS) )

@@ -203,7 +203,7 @@ public:
     /**
      * Returns the text which is currently selected.
      *
-     * @param preserveLineBreaks TODO: Document me
+     * @param preserveLineBreaks See Screen::selectedText()
      */
     QString selectedText( bool preserveLineBreaks ) const;
 

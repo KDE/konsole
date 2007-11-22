@@ -430,10 +430,10 @@ public:
 
     /** 
      * Convenience method.  Returns the currently selected text. 
-     * @param preserve_line_breaks TODO: Not yet handled in KDE 4.  See comments near definition. 
-     * (Currently the resulting string always includes line-breaks) 
+     * @param preserveLineBreaks Specifies whether new line characters should be inserted into 
+     * the returned text at the end of each terminal line.
      */
-    QString selectedText(bool preserve_line_breaks);
+    QString selectedText(bool preserveLineBreaks);
 	    
 	/**
 	 * Copies part of the output to a stream.
@@ -457,9 +457,8 @@ public:
 	 * @param decoder A decoder which converts terminal characters into text.  PlainTextDecoder
 	 * 				  is the most commonly used decoder which coverts characters into plain
 	 * 				  text with no formatting.
-     * @param preserveLineBreaks Specifies whether line breaks that have been added 
-     * to break up long lines of text should be preserved in the output ( in which case
-     * new line characters will be added after the end of each line). 
+     * @param preserveLineBreaks Specifies whether new line characters should be inserted into
+     * the returned text at the end of each terminal line. 
 	 */
 	void writeSelectionToStream(TerminalCharacterDecoder* decoder , bool
                                 preserveLineBreaks = true);

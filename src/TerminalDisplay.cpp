@@ -258,7 +258,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_actSel(0)
 ,_wordSelectionMode(false)
 ,_lineSelectionMode(false)
-,_preserveLineBreaks(true)
+,_preserveLineBreaks(false)
 ,_columnSelectionMode(false)
 ,_scrollbarLocation(NoScrollBar)
 ,_wordCharacters(":@-./_~")
@@ -2219,7 +2219,7 @@ void TerminalDisplay::copyClipboard()
   if ( !_screenWindow )
       return;
 
-  QString text = _screenWindow->selectedText(false);
+  QString text = _screenWindow->selectedText(_preserveLineBreaks);
   QApplication::clipboard()->setText(text);
 }
 
