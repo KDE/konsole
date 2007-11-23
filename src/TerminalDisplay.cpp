@@ -732,12 +732,6 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
 
     QRect scrollRect;
 
-    //qDebug() << "Scrolled region: top =" << region.top() 
-    //         << ", bottom =" << region.bottom()
-    //         << ", height =" << region.height() << "lines.  Image height ="
-    //         << this->_usedLines << "lines"
-    //         << ", scroll =" << lines << "lines";
-
     void* firstCharPos = &_image[ region.top() * this->_columns ];
     void* lastCharPos = &_image[ (region.top() + abs(lines)) * this->_columns ];
 
@@ -796,12 +790,7 @@ void TerminalDisplay::processFilters()
     t.start();
 
     _filterChain->setImage(_image,_lines,_columns);
-
-    //qDebug() << "Setup filters in" << t.elapsed() << "ms.";
-
     _filterChain->process();
-
-    //qDebug() << "Processed filters in" << t.elapsed() << "ms.";
 }
 
 void TerminalDisplay::updateImage() 
@@ -957,10 +946,6 @@ void TerminalDisplay::updateImage()
   // free the image from the screen window
   delete[] newimg;
 
-  // debugging - display a count of the number of lines that will need 
-  // to be repainted
-  //qDebug() << "dirty line count = " << dirtyLineCount;
-
   // if the new _image is smaller than the previous _image, then ensure that the area
   // outside the new _image is cleared 
   if ( linesToUpdate < _usedLines )
@@ -982,8 +967,6 @@ void TerminalDisplay::updateImage()
   _usedColumns = columnsToUpdate;
 
   dirtyRegion |= _inputMethodData.previousPreeditRect;
-
-  //qDebug() << "Expecting to update: " << dirtyRegion.boundingRect();
 
   // update the parts of the display which have changed
   update(dirtyRegion);
@@ -1450,7 +1433,6 @@ void TerminalDisplay::setScroll(int cursor, int slines)
        _scrollBar->maximum() == (slines - _lines) &&
        _scrollBar->value()   == cursor )
   {
-        //qDebug() << "no change in _scrollBar - skipping update";
         return;
   }
 
@@ -1696,13 +1678,14 @@ void TerminalDisplay::extendSelection( const QPoint& position )
 
   // Adjust position within text area bounds. See FIXME above.
   QPoint oldpos = pos;
-  if ( pos.x() < tLx+_bX )                  pos.setX( tLx+_bX );
-  if ( pos.x() > tLx+_bX+_usedColumns*_fontWidth-1 ) pos.setX( tLx+_bX+_usedColumns*_fontWidth );
-  if ( pos.y() < tLy+_bY )                   pos.setY( tLy+_bY );
-  if ( pos.y() > tLy+_bY+_usedLines*_fontHeight-1 )    pos.setY( tLy+_bY+_usedLines*_fontHeight-1 );
-
-  // check if we produce a mouse move event by this
-  if ( pos != oldpos ) cursor().setPos(mapToGlobal(pos));
+  if ( pos.x() < tLx+_bX )                  
+      pos.setX( tLx+_bX );
+  if ( pos.x() > tLx+_bX+_usedColumns*_fontWidth-1 ) 
+      pos.setX( tLx+_bX+_usedColumns*_fontWidth );
+  if ( pos.y() < tLy+_bY )                   
+      pos.setY( tLy+_bY );
+  if ( pos.y() > tLy+_bY+_usedLines*_fontHeight-1 )    
+      pos.setY( tLy+_bY+_usedLines*_fontHeight-1 );
 
   if ( pos.y() == tLy+_bY+_usedLines*_fontHeight-1 )
   {
@@ -1947,7 +1930,7 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
 
 void TerminalDisplay::getCharacterPosition(const QPoint& widgetPoint,int& line,int& column) const
 {
-    column = (widgetPoint.x()-contentsRect().left()-_bX) / _fontWidth;
+    column = (widgetPoint.x() + _fontWidth/2 -contentsRect().left()-_bX) / _fontWidth;
     line = (widgetPoint.y()-contentsRect().top()-_bY) / _fontHeight;
 
     if ( line < 0 )
@@ -1958,8 +1941,13 @@ void TerminalDisplay::getCharacterPosition(const QPoint& widgetPoint,int& line,i
     if ( line >= _usedLines )
         line = _usedLines-1;
 
-    if ( column >= _usedColumns )
-        column = _usedColumns-1;
+    // the column value returned can be equal to _usedColumns, which
+    // is the position just after the last character displayed in a line.
+    //
+    // this is required so that the user can select characters in the right-most
+    // column (or left-most for right-to-left input)
+    if ( column > _usedColumns )
+        column = _usedColumns;
 }
 
 void TerminalDisplay::updateLineProperties()
@@ -2520,9 +2508,6 @@ void TerminalDisplay::setSize(int columns, int lines)
 
   QSize newSize = QSize( columns * _fontWidth  ,
 				 lines * _fontHeight   );
-
-  //qDebug() << __FUNCTION__ << ": Old size: " << size();
-  //qDebug() << __FUNCTION__ << ": New size: " << newSize;
 
   if ( newSize != size() )
   {
