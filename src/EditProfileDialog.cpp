@@ -39,7 +39,7 @@
 #include <KFontDialog>
 #include <KIcon>
 #include <KIconDialog>
-#include <KDirSelectDialog>
+#include <KFileDialog>
 #include <KUrlCompletion>
 #include <KWindowSystem>
 
@@ -358,10 +358,9 @@ void EditProfileDialog::commandChanged(const QString& command)
 }
 void EditProfileDialog::selectInitialDir()
 {
-    const KUrl& url = KDirSelectDialog::selectDirectory(_ui->initialDirEdit->text(),
-                                                        true,
-                                                        0L,
-                                                        i18n("Select Initial Directory"));
+    const KUrl url = KFileDialog::getExistingDirectoryUrl(_ui->initialDirEdit->text(),
+                                                          this,
+                                                          i18n("Select Initial Directory"));
 
     if ( !url.isEmpty() )
         _ui->initialDirEdit->setText(url.path());

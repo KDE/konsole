@@ -75,7 +75,7 @@ kde4_add_ui_files(konsole_KDEINIT_SRCS
 
 kde4_add_kdeinit_executable( konsole ${konsole_KDEINIT_SRCS})
 
-target_link_libraries(kdeinit_konsole ${KDE4_KPTY_LIBRARY} ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KFILE_LIBS} ${QT_QTXML_LIBRARY} ${KDE4_KNOTIFYCONFIG_LIBS} )
+target_link_libraries(kdeinit_konsole ${KDE4_KPTY_LIBRARY} ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KIO_LIBS} ${QT_QTXML_LIBRARY} ${KDE4_KNOTIFYCONFIG_LIBS} )
 
 # XRender library for true transparency support    
 if(X11_Xrender_FOUND)
@@ -151,7 +151,7 @@ kde4_add_plugin(konsolepart WITH_PREFIX ${konsolepart_PART_SRCS})
 
 set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
 
-target_link_libraries(konsolepart ${KDE4_KPARTS_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KNOTIFYCONFIG_LIBS} ${KDE4_KDE3SUPPORT_LIBS})
+target_link_libraries(konsolepart ${KDE4_KPARTS_LIBS} ${KDE4_KIO_LIBS} ${KDE4_KNOTIFYCONFIG_LIBS} ${KDE4_KDE3SUPPORT_LIBS})
 if(X11_XTest_LIB)
   target_link_libraries(konsolepart  ${X11_XTest_LIB}  )
 endif(X11_XTest_LIB)
