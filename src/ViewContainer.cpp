@@ -471,6 +471,7 @@ TabbedViewContainerV2::TabbedViewContainerV2(NavigationPosition position , QObje
     connect( _tabBar , SIGNAL(currentChanged(int)) , this , SLOT(currentTabChanged(int)) );
     connect( _tabBar , SIGNAL(tabDoubleClicked(int)) , this , SLOT(tabDoubleClicked(int)) );
     connect( _tabBar , SIGNAL(newTabRequest()) , this , SIGNAL(newViewRequest()) );
+    connect( _tabBar , SIGNAL(wheelDelta(int)) , this , SLOT(wheelScrolled(int)) );
 
     _layout = new TabbedViewContainerV2Layout;
     _layout->setSpacing(0);
@@ -596,6 +597,15 @@ void TabbedViewContainerV2::currentTabChanged(int index)
     // clear activity indicators
     setTabActivity(index,false);
 }
+
+void TabbedViewContainerV2::wheelScrolled(int delta)
+{
+    if ( delta < 0 )
+	activateNextView();
+    else
+	activatePreviousView();
+}
+
 QWidget* TabbedViewContainerV2::containerWidget() const
 {
     return _containerWidget;

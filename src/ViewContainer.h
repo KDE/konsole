@@ -407,6 +407,8 @@ private slots:
     void updateIcon(ViewProperties* item);
     void updateActivity(ViewProperties* item);
     void currentTabChanged(int index);
+
+    void wheelScrolled(int delta);
    
     void tabDoubleClicked(int index);
 
