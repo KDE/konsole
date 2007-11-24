@@ -234,8 +234,17 @@ void Profile::registerName(Property property , const QString& name)
 QString KDE4ProfileWriter::getPath(const Profile* info)
 {
     QString newPath;
-    // use the profile name + ".profile" and save it in $KDEHOME
-    newPath = KGlobal::dirs()->saveLocation("data","konsole/") + info->name() + ".profile";
+
+    if ( info->isPropertySet(Profile::Path) && 
+         info->path().startsWith(KGlobal::dirs()->saveLocation("data", "konsole/")) )
+    {
+        newPath = info->path();
+    }
+    else
+    {
+        // use the profile name + ".profile" and save it in $KDEHOME
+        newPath = KGlobal::dirs()->saveLocation("data","konsole/") + info->name() + ".profile";
+    }
 
     kDebug(1211) << "Saving profile under name: " << newPath;
 
