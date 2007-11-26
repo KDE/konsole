@@ -1586,8 +1586,6 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
   }
   else if ( _mouseOverHotspotArea.isValid() )
   {
-        unsetCursor();
-
         update( _mouseOverHotspotArea );
         // set hotspot area to an invalid rectangle
         _mouseOverHotspotArea = QRect();
