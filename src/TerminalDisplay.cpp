@@ -1574,8 +1574,6 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
                                      qMax(spot->startColumn() , spot->endColumn()) * _fontHeight,
                                      (spot->endLine()+1) * _fontHeight );
 
-    setCursor( Qt::PointingHandCursor );
-
     // display tooltips when mousing over links
     // TODO: Extend this to work with filter types other than links
     const QString& tooltip = spot->tooltip();
@@ -1871,20 +1869,6 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
     int charLine;
     int charColumn;
     getCharacterPosition(ev->pos(),charLine,charColumn);
-
-    // handle filters
-    Filter::HotSpot* spot = _filterChain->hotSpotAt(charLine,charColumn);
-    if ( spot )
-    {
-        if ( ev->button() == Qt::LeftButton )
-        {
-            spot->activate();
-        }
-        else if ( ev->button() == Qt::RightButton )
-        {
-            //TODO - Show context menu with appropriate actions for hotspot.
-        }
-    }
 
   if ( ev->button() == Qt::LeftButton)
   {
