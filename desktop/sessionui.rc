@@ -50,7 +50,7 @@
         <Action name="open-browser"/>
         <Separator/>
         <Action name="show-menubar"/>
-        <Action name="change-profile"/>    
+        <Action name="change-profile"/>
         <Action name="edit-current-profile" />
         <Separator/>
         <Action name="close-session"/>

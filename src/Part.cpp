@@ -24,8 +24,11 @@
 #include <QtCore/QStringList>
 
 // KDE
+#include <KAction>
+#include <KActionCollection>
 #include <KMenuBar>
 #include <KDebug>
+#include <KLocale>
 #include <KXMLGUIFactory>
 
 // Konsole
@@ -65,6 +68,10 @@ Part::Part(QWidget* parentWidget , QObject* parent)
   ,_viewManager(0)
   ,_pluggedController(0)
 {
+    setXMLFile("konsole/konsoleui.rc");
+
+    setupActions();
+
     // FIXME we need this for the context menu and KPart ctor doesn't call the
     // necessary KXMLGUIClient ctor
     if (KXMLGUIClient *parentClient = dynamic_cast<KXMLGUIClient*>(parent))
@@ -85,6 +92,7 @@ Part::Part(QWidget* parentWidget , QObject* parent)
     connect( _viewManager , SIGNAL(activeViewChanged(SessionController*)) , this ,
            SLOT(activeViewChanged(SessionController*)) );
     connect( _viewManager , SIGNAL(empty()) , this , SLOT(restart()) );
+    connect( _viewManager , SIGNAL(newViewRequest()) , this , SLOT(newTab()) );
 
     _viewManager->widget()->setParent(parentWidget);
 
@@ -107,6 +115,21 @@ void Part::restart()
 {
     createSession( QString() );
     showShellInDir( QString() );
+}
+void Part::newTab()
+{
+    createSession( QString() );
+    showShellInDir( QString() );
+}
+void Part::setupActions()
+{
+    KActionCollection* collection = actionCollection();
+
+    KAction* newTabAction = collection->addAction("new-tab");
+    newTabAction->setIcon( KIcon("utilities-terminal") );
+    newTabAction->setText( i18n("New &Tab") );
+    newTabAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_N) );
+    connect( newTabAction , SIGNAL(triggered()) , this , SLOT(newTab()) );
 }
 Session* Part::activeSession() const
 {

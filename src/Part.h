@@ -73,7 +73,6 @@ protected:
     virtual bool openFile();
 
 private slots:
-    
     // creates a new session using the specified key.
     // call the run() method on the returned Session instance to begin the session
     Session* createSession(const QString& key);
@@ -81,10 +80,13 @@ private slots:
 
     // called when the last session is closed to ensure there is always at least one active view
     void restart();
+    void newTab();
 
 private:
+    void setupActions();
     Session* activeSession() const;
 
+private:
     ViewManager* _viewManager;
     SessionController* _pluggedController;
 };
