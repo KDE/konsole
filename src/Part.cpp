@@ -65,6 +65,11 @@ Part::Part(QWidget* parentWidget , QObject* parent)
   ,_viewManager(0)
   ,_pluggedController(0)
 {
+    // FIXME we need this for the context menu and KPart ctor doesn't call the
+    // necessary KXMLGUIClient ctor
+    if (KXMLGUIClient *parentClient = dynamic_cast<KXMLGUIClient*>(parent))
+        parentClient->insertChildClient(this);
+
     // setup global managers
     if ( SessionManager::instance() == 0 )
         SessionManager::setInstance( new SessionManager() );
