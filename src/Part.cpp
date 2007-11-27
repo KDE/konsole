@@ -80,7 +80,7 @@ Part::Part(QWidget* parentWidget , QObject* parent)
 
     // create view widget
     _viewManager = new ViewManager(this,actionCollection());
-    _viewManager->setNavigationMethod( ViewManager::NoNavigation );
+    _viewManager->setNavigationMethod( ViewManager::TabbedNavigation );
 
     connect( _viewManager , SIGNAL(activeViewChanged(SessionController*)) , this ,
            SLOT(activeViewChanged(SessionController*)) );
