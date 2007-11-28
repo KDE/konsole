@@ -538,7 +538,9 @@ void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const
         // being outside of the terminal display and visual consistency with other KDE
         // applications.  
         //
-        QRect scrollBarArea = rect.intersected(_scrollBar->geometry());
+        QRect scrollBarArea = _scrollBar->isVisible() ? 
+                                    rect.intersected(_scrollBar->geometry()) :
+                                    QRect();
         QRegion contentsRegion = QRegion(rect).subtracted(scrollBarArea);
         QRect contentsRect = contentsRegion.boundingRect();
 
