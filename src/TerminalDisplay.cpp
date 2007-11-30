@@ -2290,7 +2290,7 @@ void TerminalDisplay::inputMethodEvent( QInputMethodEvent* event )
 }
 QVariant TerminalDisplay::inputMethodQuery( Qt::InputMethodQuery query ) const
 {
-    const QPoint cursorPos = _screenWindow->cursorPosition();
+    const QPoint cursorPos = _screenWindow ? _screenWindow->cursorPosition() : QPoint(0,0);
     switch ( query ) 
     {
         case Qt::ImMicroFocus:
