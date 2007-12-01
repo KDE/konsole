@@ -24,7 +24,7 @@
 // Qt
 #include <QtGui/QColor>
 #include <QtCore/QPointer>
-#include <QtGui/QFrame>
+#include <QtGui/QWidget>
 
 // Konsole
 #include "Filter.h"
@@ -62,7 +62,7 @@ class ScreenWindow;
  *
  * TODO More documentation
  */
-class TerminalDisplay : public QFrame
+class TerminalDisplay : public QWidget
 {
    Q_OBJECT
 

@@ -219,7 +219,7 @@ void TerminalDisplay::setVTFont(const QFont& f)
     // Disabling kerning saves some computation when rendering text. 
     font.setKerning(false);
 
-    QFrame::setFont(font);
+    QWidget::setFont(font);
     fontChange(font);
   }
 }
@@ -236,7 +236,7 @@ void TerminalDisplay::setFont(const QFont &)
 /* ------------------------------------------------------------------------- */
 
 TerminalDisplay::TerminalDisplay(QWidget *parent)
-:QFrame(parent)
+:QWidget(parent)
 ,_screenWindow(0)
 ,_allowBell(true)
 ,_gridLayout(0)
@@ -282,7 +282,6 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_filterChain(new TerminalImageFilterChain())
 ,_cursorShape(BlockCursor)
 {
-
   // The offsets are not yet calculated.
   // Do not calculate these too often to be more smoothly when resizing
   // konsole in opaque mode.
@@ -324,7 +323,6 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
   _gridLayout->setMargin(0);
 
   setLayout( _gridLayout ); 
-  setLineWidth(0);
 
   //set up a warning message when the user presses Ctrl+S to avoid confusion
   connect( this,SIGNAL(flowControlKeyPressed(bool)),this,SLOT(outputSuspended(bool)) );
@@ -1345,7 +1343,7 @@ void TerminalDisplay::propagateSize()
   if (_isFixedSize)
   {
      setSize(_columns, _lines);
-     QFrame::setFixedSize(sizeHint());
+     QWidget::setFixedSize(sizeHint());
      parentWidget()->adjustSize();
      parentWidget()->setFixedSize(parentWidget()->sizeHint());
      return;
@@ -2122,7 +2120,7 @@ bool TerminalDisplay::focusNextPrevChild( bool next )
   if (next)
     return false; // This disables changing the active part in konqueror
                   // when pressing Tab
-  return QFrame::focusNextPrevChild( next );
+  return QWidget::focusNextPrevChild( next );
 }
 
 
@@ -2362,7 +2360,7 @@ bool TerminalDisplay::event( QEvent *e )
         return true;
     }
   }
-  return QFrame::event( e );
+  return QWidget::event( e );
 }
 
 void TerminalDisplay::setBellMode(int mode)
@@ -2516,7 +2514,7 @@ void TerminalDisplay::setFixedSize(int cols, int lins)
      makeImage();
   }
   setSize(cols, lins);
-  QFrame::setFixedSize(_size);
+  QWidget::setFixedSize(_size);
 }
 
 QSize TerminalDisplay::sizeHint() const
