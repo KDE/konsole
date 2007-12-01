@@ -130,7 +130,7 @@ bool KeyBindingEditor::eventFilter( QObject* watched , QEvent* event )
             if ( !entry.isNull() )
             {
                 _ui->testAreaInputEdit->setText(entry.conditionToString());
-                _ui->testAreaOutputEdit->setText(entry.resultToString());
+                _ui->testAreaOutputEdit->setText(entry.resultToString(true,keyEvent->modifiers()));
             }
             else
             {

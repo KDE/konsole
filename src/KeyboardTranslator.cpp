@@ -584,9 +584,9 @@ bool KeyboardTranslator::Entry::matches(int keyCode ,
 
     return true;
 }
-QByteArray KeyboardTranslator::Entry::escapedText() const
+QByteArray KeyboardTranslator::Entry::escapedText(bool expandWildCards,Qt::KeyboardModifiers modifiers) const
 {
-    QByteArray result(_text);
+    QByteArray result(text(expandWildCards,modifiers));
 
     for ( int i = 0 ; i < result.count() ; i++ )
     {
@@ -710,10 +710,10 @@ void KeyboardTranslator::Entry::insertState( QString& item , int state ) const
     else if ( state == KeyboardTranslator::AnyModifierState )
         item += "AnyMod";
 }
-QString KeyboardTranslator::Entry::resultToString() const
+QString KeyboardTranslator::Entry::resultToString(bool expandWildCards,Qt::KeyboardModifiers modifiers) const
 {
     if ( !_text.isEmpty() )
-        return escapedText();
+        return escapedText(expandWildCards,modifiers);
     else if ( _command == ScrollPageUpCommand )
         return "ScrollPageUp";
     else if ( _command == ScrollPageDownCommand )

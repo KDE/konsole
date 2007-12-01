@@ -132,8 +132,21 @@ public:
         /** Sets the command associated with this entry. */
         void setCommand(Command command);
 
-        /** Returns the character sequence associated with this entry */
-        QByteArray text() const;
+        /** 
+         * Returns the character sequence associated with this entry, optionally replacing 
+         * wildcard '*' characters with numbers to indicate the keyboard modifiers being pressed.
+         *
+         * TODO: The numbers used to replace '*' characters are taken from the Konsole/KDE 3 code.
+         * Document them. 
+         *
+         * @param expandWildCards Specifies whether wild cards (occurrences of the '*' character) in
+         * the entry should be replaced with a number to indicate the modifier keys being pressed. 
+         *
+         * @param modifiers The keyboard modifiers being pressed.
+         */
+        QByteArray text(bool expandWildCards = false,
+                        Qt::KeyboardModifiers modifiers = Qt::NoModifier) const;
+
         /** Sets the character sequence associated with this entry */
         void setText(const QByteArray& text);
 
@@ -142,8 +155,12 @@ public:
          * with any non-printable characters replaced with escape sequences.
          *
          * eg. \\E for Escape, \\t for tab, \\n for new line.
+         *
+         * @param expandWildCards See text()
+         * @param modifiers See text()
          */
-        QByteArray escapedText() const;
+        QByteArray escapedText(bool expandWildCards = false,
+                               Qt::KeyboardModifiers modifiers = Qt::NoModifier) const;
 
         /** Returns the character code ( from the Qt::Key enum ) associated with this entry */
         int keyCode() const;
@@ -201,8 +218,12 @@ public:
         /**
          * Returns this entry's result ( ie. its command or character sequence )
          * as a string.
+         *
+         * @param expandWildCards See text()
+         * @param modifiers See text()
          */
-        QString resultToString() const;
+        QString resultToString(bool expandWildCards = false,
+                               Qt::KeyboardModifiers modifiers = Qt::NoModifier) const;
 
         /** 
          * Returns true if this entry matches the given key sequence, specified
@@ -507,7 +528,30 @@ inline void KeyboardTranslator::Entry::setText( const QByteArray& text )
 { 
     _text = unescape(text);
 }
-inline QByteArray KeyboardTranslator::Entry::text() const { return _text; }
+inline int oneOrZero(int value)
+{
+    return value ? 1 : 0;
+}
+inline QByteArray KeyboardTranslator::Entry::text(bool expandWildCards,Qt::KeyboardModifiers modifiers) const 
+{
+    QByteArray expandedText = _text;
+    
+    if (expandWildCards)
+    {
+        int modifierValue = 1;
+        modifierValue += oneOrZero(modifiers & Qt::ShiftModifier);
+        modifierValue += oneOrZero(modifiers & Qt::AltModifier)     << 1;
+        modifierValue += oneOrZero(modifiers & Qt::ControlModifier) << 2;
+
+        for (int i=0;i<_text.length();i++) 
+        {
+            if (expandedText[i] == '*')
+                expandedText[i] = '0' + modifierValue;
+        }
+    }
+
+    return expandedText; 
+}
 
 inline void KeyboardTranslator::Entry::setState( States state )
 { 
