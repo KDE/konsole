@@ -144,6 +144,12 @@ public:
      */  
     void processFilters();
 
+    /** 
+     * Returns a list of menu actions created by the filters for the content
+     * at the given @p position.
+     */
+    QList<QAction*> filterActions(const QPoint& position);
+
     /** Returns true if the cursor is set to blink or false otherwise. */
     bool blinkingCursor() { return _hasBlinkingCursor; }
     /** Specifies whether or not the cursor blinks. */
@@ -573,9 +579,6 @@ private:
     // shows a notification window in the middle of the widget indicating the terminal's
     // current size in columns and lines
     void showResizeNotification();
-
-    // shows the popup menu associated with a hotspot
-    void showHotSpotMenu(Filter::HotSpot* spot , const QPoint& position);
 
     // scrolls the image by a number of lines.  
     // 'lines' may be positive ( to scroll the image down ) 

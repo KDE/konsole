@@ -902,8 +902,22 @@ void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , in
     if ( factory() )
         popup = qobject_cast<QMenu*>(factory()->container("session-popup-menu",this));
 
-    if (popup)
+    if (popup) 
+    {
+        // prepend content-specific actions such as "Open Link", "Copy Email Address" etc.
+        QList<QAction*> contentActions = _view->filterActions(position);
+        QAction* contentSeparator = new QAction(popup);
+        contentSeparator->setSeparator(true);
+        contentActions << contentSeparator;
+
+        popup->insertActions(popup->actions().value(0,0),contentActions);
         popup->exec( _view->mapToGlobal(position) );
+
+        // remove content-specific actions
+        foreach(QAction* action,contentActions) 
+            popup->removeAction(action);
+        delete contentSeparator;
+    }
     else
     {
         kWarning(1211) << "Unable to display popup menu for session"
