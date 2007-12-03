@@ -38,6 +38,7 @@
 #include <KXMLGUIFactory>
 #include <kdebug.h>
 #include <kcodecaction.h>
+#include <kdeversion.h>
 
 // Konsole
 #include "EditProfileDialog.h"
@@ -89,7 +90,13 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     // handle user interface related to session (menus etc.)
     setXMLFile("konsole/sessionui.rc");
     setupActions();
-    actionCollection()->associateWidget(view);
+    actionCollection()->addAssociatedWidget(view);
+    foreach (QAction* action, actionCollection()->actions())
+#if QT_VERSION < KDE_MAKE_VERSION(4,4,0)
+        action->setShortcutContext(Qt::WidgetShortcut); // remove after Qt4.4 becomes mandatory
+#else
+        action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+#endif
 
     setIdentifier(_session->sessionId());
     sessionTitleChanged();

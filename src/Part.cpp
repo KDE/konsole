@@ -30,6 +30,7 @@
 #include <KDebug>
 #include <KLocale>
 #include <KXMLGUIFactory>
+#include <kdeversion.h>
 
 // Konsole
 #include "ColorScheme.h"
@@ -97,7 +98,13 @@ Part::Part(QWidget* parentWidget , QObject* parent)
     _viewManager->widget()->setParent(parentWidget);
 
     setWidget(_viewManager->widget());
-    actionCollection()->associateWidget(_viewManager->widget());
+    actionCollection()->addAssociatedWidget(_viewManager->widget());
+    foreach (QAction* action, actionCollection()->actions())
+#if QT_VERSION < KDE_MAKE_VERSION(4,4,0)
+        action->setShortcutContext(Qt::WidgetShortcut); // remove after Qt4.4 becomes mandatory
+#else
+        action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
+#endif
 
     // create basic session
     createSession(QString());
