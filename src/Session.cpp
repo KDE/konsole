@@ -320,8 +320,9 @@ void Session::setUserTitle( int what, const QString &caption )
     //set to true if anything is actually changed (eg. old _nameTitle != new _nameTitle )
 	bool modified = false;
 
-    // (btw: what=0 changes _nameTitle and icon, what=1 only icon, what=2 only _nameTitle
-    if ((what == 0) || (what == 2)) {
+    // (btw: what=0 changes _userTitle and icon, what=1 only icon, what=2 only _nameTitle
+    if ((what == 0) || (what == 2)) 
+    {
        	if ( _userTitle != caption ) {
 			_userTitle = caption;
 			modified = true;
@@ -336,39 +337,44 @@ void Session::setUserTitle( int what, const QString &caption )
 		}
 	}
 
-    if (what == 11) {
+    if (what == 11) 
+    {
       QString colorString = caption.section(';',0,0);
       kDebug() << __FILE__ << __LINE__ << ": setting background colour to " << colorString;
       QColor backColor = QColor(colorString);
       if (backColor.isValid()){// change color via \033]11;Color\007
-	if (backColor != _modifiedBackground)
-    {
-	    _modifiedBackground = backColor;
+          if (backColor != _modifiedBackground)
+          {
+              _modifiedBackground = backColor;
 
-        // bail out here until the code to connect the terminal display
-        // to the changeBackgroundColor() signal has been written
-        // and tested - just so we don't forget to do this.
-        Q_ASSERT( 0 );
+              // bail out here until the code to connect the terminal display
+              // to the changeBackgroundColor() signal has been written
+              // and tested - just so we don't forget to do this.
+              Q_ASSERT( 0 );
 
-        emit changeBackgroundColorRequest(backColor);
-	}
+              emit changeBackgroundColorRequest(backColor);
+          }
       }
     }
 
-	if (what == 30) {
+	if (what == 30) 
+    {
 		if ( _nameTitle != caption ) {
        		setTitle(Session::NameRole,caption);
 			return;
 		}
 	}
 
-    if (what == 31) {
+    if (what == 31) 
+    {
        QString cwd=caption;
        cwd=cwd.replace( QRegExp("^~"), QDir::homePath() );
        emit openUrlRequest(cwd);
 	}
 
-    if (what == 32) { // change icon via \033]32;Icon\007
+    // change icon via \033]32;Icon\007
+    if (what == 32) 
+    { 
     	if ( _iconName != caption ) {
 	   		_iconName = caption;
 
@@ -376,11 +382,9 @@ void Session::setUserTitle( int what, const QString &caption )
 		}
     }
 
-    if (what == 50) {
-
-        qDebug() << "Profile change command received";
+    if (what == 50) 
+    {
         emit profileChangeCommandReceived(caption);
-
         return;
     }
 

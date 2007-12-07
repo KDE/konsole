@@ -832,6 +832,11 @@ void KeyboardTranslatorManager::deleteTranslator(const QString& name)
     else
         qDebug() << "Failed to remove translator - " << path;
 }
+const KeyboardTranslator* KeyboardTranslatorManager::defaultTranslator() const
+{
+#warning "FIXME: Implement a default translator to fall back to in case there are no .keytab files available to load." 
+    return 0;
+}
 void KeyboardTranslatorManager::setInstance(KeyboardTranslatorManager* instance)
 {
     _instance = instance;

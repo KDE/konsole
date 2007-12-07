@@ -377,10 +377,12 @@ void EditProfileDialog::setupAppearancePage(const Profile* info)
              SLOT(colorSchemeAnimationUpdate()) );
    
     _ui->transparencyWarningWidget->setVisible(false);
-    
+    _ui->editColorSchemeButton->setEnabled(false);
+    _ui->removeColorSchemeButton->setEnabled(false);
+
     // setup color list
     updateColorSchemeList(true);
-
+    
     _ui->colorSchemeList->setMouseTracking(true);
     _ui->colorSchemeList->installEventFilter(this);
     _ui->colorSchemeList->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
@@ -390,6 +392,8 @@ void EditProfileDialog::setupAppearancePage(const Profile* info)
             , this , SLOT(colorSchemeSelected()) );
     connect( _ui->colorSchemeList , SIGNAL(entered(const QModelIndex&)) , this , 
             SLOT(previewColorScheme(const QModelIndex&)) );
+    
+    updateColorSchemeButtons();
 
     connect( _ui->editColorSchemeButton , SIGNAL(clicked()) , this , 
             SLOT(editColorScheme()) );
@@ -423,12 +427,18 @@ void EditProfileDialog::updateFontPreviewLabel(const QFont& font)
 }
 void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
 {
-    delete _ui->colorSchemeList->model();
+    if (!_ui->colorSchemeList->model())
+        _ui->colorSchemeList->setModel(new QStandardItemModel(this));
 
     const QString& name = lookupProfile()->colorScheme();
     const ColorScheme* currentScheme = ColorSchemeManager::instance()->findColorScheme(name);
 
-    QStandardItemModel* model = new QStandardItemModel(this);
+    QStandardItemModel* model = qobject_cast<QStandardItemModel*>(_ui->colorSchemeList->model());
+
+    Q_ASSERT(model);
+    
+    model->clear();
+
     QList<const ColorScheme*> schemeList = ColorSchemeManager::instance()->allColorSchemes();
     QListIterator<const ColorScheme*> schemeIter(schemeList);
 
@@ -449,12 +459,8 @@ void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
 
     model->sort(0);
 
-    _ui->colorSchemeList->setModel(model);
-
-    if ( selectCurrentScheme )
+    if ( selectCurrentScheme && selectedItem )
     {
-        Q_ASSERT( selectedItem );
-
         _ui->colorSchemeList->updateGeometry();
         _ui->colorSchemeList->selectionModel()->setCurrentIndex( selectedItem->index() , 
                                                                  QItemSelectionModel::Select );
@@ -465,16 +471,21 @@ void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
 }
 void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
 {
-    KeyboardTranslatorManager* keyManager = KeyboardTranslatorManager::instance();
+    if (!_ui->keyBindingList->model())
+        _ui->keyBindingList->setModel(new QStandardItemModel(this));
 
-    delete _ui->keyBindingList->model();
+    KeyboardTranslatorManager* keyManager = KeyboardTranslatorManager::instance();
 
     const QString& name = lookupProfile()
                                     ->property(Profile::KeyBindings).value<QString>();
 
     const KeyboardTranslator* currentTranslator = keyManager->findTranslator(name);
     
-    QStandardItemModel* model = new QStandardItemModel(this);
+    QStandardItemModel* model = qobject_cast<QStandardItemModel*>(_ui->keyBindingList->model());
+
+    Q_ASSERT(model);
+
+    model->clear();
 
     QStandardItem* selectedItem = 0;
 
@@ -497,12 +508,9 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
     }
 
     model->sort(0);
-    _ui->keyBindingList->setModel(model);
     
-    if ( selectCurrentTranslator )
+    if ( selectCurrentTranslator && selectedItem )
     {
-        Q_ASSERT( selectedItem );
-
         _ui->keyBindingList->selectionModel()->setCurrentIndex( selectedItem->index() , 
                                                                   QItemSelectionModel::Select );
     }
@@ -597,8 +605,8 @@ void EditProfileDialog::removeColorScheme()
     if ( !selected.isEmpty() )
     {
         const QString& name = selected.first().data(Qt::UserRole+1).value<const ColorScheme*>()->name();
-        ColorSchemeManager::instance()->deleteColorScheme(name);
         _ui->colorSchemeList->model()->removeRow(selected.first().row());
+        ColorSchemeManager::instance()->deleteColorScheme(name);
     }
 }
 void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
@@ -606,13 +614,13 @@ void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
     QModelIndexList selected = _ui->colorSchemeList->selectionModel()->selectedIndexes();
 
     QAbstractItemModel* model = _ui->colorSchemeList->model();
-    QModelIndex index;
+    const ColorScheme* colors = 0;
     if ( !selected.isEmpty() )
-        index = selected.first();
+        colors = model->data(selected.first(),Qt::UserRole+1).value<const ColorScheme*>();
     else
-        index = model->index(0,0); // use the first item in the list
+        colors = ColorSchemeManager::instance()->defaultColorScheme();
 
-    const ColorScheme* colors = model->data(index,Qt::UserRole+1).value<const ColorScheme*>();
+    Q_ASSERT(colors);
 
     KDialog* dialog = new KDialog(this);
 
@@ -660,10 +668,27 @@ void EditProfileDialog::colorSchemeSelected()
         QAbstractItemModel* model = _ui->colorSchemeList->model();
         const ColorScheme* colors = model->data(selected.first(),Qt::UserRole+1).value<const ColorScheme*>();
 
+        qDebug() << "Setting temp profile color to" << colors->name();
         _tempProfile->setProperty(Profile::ColorScheme,colors->name());
 
         updateTransparencyWarning();
     }
+
+    updateColorSchemeButtons();
+}
+void EditProfileDialog::updateColorSchemeButtons()
+{
+    enableIfNonEmptySelection(_ui->editColorSchemeButton,_ui->colorSchemeList->selectionModel());
+    enableIfNonEmptySelection(_ui->removeColorSchemeButton,_ui->colorSchemeList->selectionModel());
+}
+void EditProfileDialog::updateKeyBindingsButtons()
+{    
+    enableIfNonEmptySelection(_ui->editKeyBindingsButton,_ui->keyBindingList->selectionModel());
+    enableIfNonEmptySelection(_ui->removeKeyBindingsButton,_ui->keyBindingList->selectionModel());
+}
+void EditProfileDialog::enableIfNonEmptySelection(QWidget* widget,QItemSelectionModel* selectionModel)
+{
+    widget->setEnabled(selectionModel->hasSelection());
 }
 void EditProfileDialog::updateTransparencyWarning() 
 {
@@ -686,6 +711,9 @@ void EditProfileDialog::setupKeyboardPage(const Profile* /* info */)
                 SLOT(keyBindingSelected()) );
     connect( _ui->newKeyBindingsButton , SIGNAL(clicked()) , this ,
             SLOT(newKeyBinding()) );
+
+    updateKeyBindingsButtons();
+
     connect( _ui->editKeyBindingsButton , SIGNAL(clicked()) , this , 
           SLOT(editKeyBinding()) );  
     connect( _ui->removeKeyBindingsButton , SIGNAL(clicked()) , this ,
@@ -702,6 +730,8 @@ void EditProfileDialog::keyBindingSelected()
                                                 .value<const KeyboardTranslator*>();
         _tempProfile->setProperty(Profile::KeyBindings,translator->name());
     }
+
+    updateKeyBindingsButtons();
 }
 void EditProfileDialog::removeKeyBinding()
 {
@@ -719,15 +749,14 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
     QModelIndexList selected = _ui->keyBindingList->selectionModel()->selectedIndexes();
     QAbstractItemModel* model = _ui->keyBindingList->model();
 
-    QModelIndex index;
+    const KeyboardTranslator* translator = 0;
     if ( !selected.isEmpty() )
-        index = selected.first();
+        translator = model->data(selected.first(),Qt::UserRole+1).value<const KeyboardTranslator*>();
     else
-        index = model->index(0,0); // Use first item if there is no selection
+        translator = KeyboardTranslatorManager::instance()->defaultTranslator();
 
+    Q_ASSERT(translator);
 
-    const KeyboardTranslator* translator = model->data(index,
-                                            Qt::UserRole+1).value<const KeyboardTranslator*>();
     KDialog* dialog = new KDialog(this);
 
     if ( isNewTranslator )

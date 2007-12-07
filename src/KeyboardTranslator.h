@@ -460,6 +460,9 @@ public:
      */
     void deleteTranslator(const QString& name);
 
+    /** Returns the default translator for Konsole. */
+    const KeyboardTranslator* defaultTranslator() const;
+
     /** 
      * Returns the keyboard translator with the given name or 0 if no translator
      * with that name exists.

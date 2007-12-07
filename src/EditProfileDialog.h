@@ -31,6 +31,7 @@
 #include <KDialog>
 
 class QAbstractButton;
+class QItemSelectionModel;
 class QTextCodec;
 class QTimeLine;
 
@@ -175,7 +176,9 @@ private:
     void setupAdvancedPage(const Profile* info);
 
     void updateColorSchemeList(bool selectCurrentScheme = false);
+    void updateColorSchemeButtons();
     void updateKeyBindingsList(bool selectCurrentTranslator = false);
+    void updateKeyBindingsButtons();
     void updateFontPreviewLabel(const QFont& font);
 
     void showColorSchemeEditor(bool newScheme);
@@ -187,9 +190,9 @@ private:
     void delayedPreview(int property , const QVariant& value);
     void unpreview(int property);
     void unpreviewAll();
+    void enableIfNonEmptySelection(QWidget* widget,QItemSelectionModel* selectionModel);
 
     void updateCaption(const QString& profileName);
-
     void updateTransparencyWarning();
 
     struct RadioOption

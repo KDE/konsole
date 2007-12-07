@@ -159,8 +159,13 @@ void ColorScheme::setColorTableEntry(int index , const ColorEntry& entry)
 {
     Q_ASSERT( index >= 0 && index < TABLE_COLORS );
 
-    if ( !_table )
+    if ( !_table ) 
+    {
         _table = new ColorEntry[TABLE_COLORS];
+
+        for (int i=0;i<TABLE_COLORS;i++)
+            _table[i] = defaultTable[i];
+    }
     
     _table[index] = entry; 
 }
@@ -593,21 +598,20 @@ bool ColorSchemeManager::loadColorScheme(const QString& filePath)
 
     QFileInfo info(filePath);
     
-    //qDebug() << "loading KDE 4 native color scheme from " << filePath;
     KConfig config(filePath , KConfig::NoGlobals);
     ColorScheme* scheme = new ColorScheme();
     scheme->setName(info.baseName());
     scheme->read(config);
-    
-    Q_ASSERT( !scheme->name().isEmpty() );
 
-    //qDebug() << "found KDE 4 native color scheme - " << scheme->name();
-    //qDebug() << "opacity - " << scheme->opacity();
+    if (scheme->name().isEmpty()) 
+    {
+        qWarning() << "Color scheme in" << filePath << "does not have a valid name and was not loaded.";
+        delete scheme;
+        return false;
+    }    
 
     if ( !_colorSchemes.contains(info.baseName()) )
     {
-        //qDebug() << "added color scheme - " << info.baseName();
-
         _colorSchemes.insert(scheme->name(),scheme);
     }
     else
@@ -649,7 +653,7 @@ void ColorSchemeManager::deleteColorScheme(const QString& name)
     if ( QFile::remove(path) )
         qDebug() << "Removed color scheme -" << path;
     else
-        qDebug() << "Failed to remove color scheme -" << path;
+        qWarning() << "Failed to remove color scheme -" << path;
 }
 QString ColorSchemeManager::findColorSchemePath(const QString& name) const
 {

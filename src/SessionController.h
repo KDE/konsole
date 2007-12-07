@@ -213,6 +213,9 @@ private:
     void setFindNextPrevEnabled(bool enabled);
 
 private:
+    static KIcon _activityIcon;
+    static KIcon _silenceIcon;
+
     QPointer<Session>         _session;
     QPointer<TerminalDisplay> _view;
     
@@ -229,9 +232,7 @@ private:
     KAction* _findNextAction;
     KAction* _findPreviousAction;
     
-    static KIcon _activityIcon;
-    static KIcon _silenceIcon;
-
+    
     bool _urlFilterUpdateRequired;
 
     QPointer<IncrementalSearchBar> _searchBar;
