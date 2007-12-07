@@ -1118,7 +1118,7 @@ void TerminalDisplay::paintFilters(QPainter& painter)
                                         // display in _columns
 
             // ignore whitespace at the end of the lines
-            while ( QChar(_image[loc(endColumn,line)].character).isSpace() )
+            while ( QChar(_image[loc(endColumn,line)].character).isSpace() && endColumn > 0 )
                 endColumn--;
               
             // increment here because the column which we want to set 'endColumn' to
