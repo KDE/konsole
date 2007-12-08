@@ -288,9 +288,9 @@ public:
     void addColorScheme(ColorScheme* scheme);
 
     /**
-     * Deletes a color scheme.  
+     * Deletes a color scheme.  Returns true on successful deletion or false otherwise. 
      */
-    void deleteColorScheme(const QString& name);
+    bool deleteColorScheme(const QString& name);
 
     /** 
      * Returns a list of the all the available color schemes. 

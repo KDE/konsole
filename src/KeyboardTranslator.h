@@ -455,10 +455,11 @@ public:
     void addTranslator(KeyboardTranslator* translator);
 
     /**
-     * Deletes a translator.
+     * Deletes a translator.  Returns true on successful deletion or false otherwise.
+     *
      * TODO: More documentation
      */
-    void deleteTranslator(const QString& name);
+    bool deleteTranslator(const QString& name);
 
     /** Returns the default translator for Konsole. */
     const KeyboardTranslator* defaultTranslator() const;

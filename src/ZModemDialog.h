@@ -40,7 +40,7 @@ public:
   /**
    * To indicate the process is finished.
    */
-  void done();
+  void transferDone();
 
 public Q_SLOTS:
   void slotClose();

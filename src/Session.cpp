@@ -852,7 +852,7 @@ void Session::zmodemFinished()
 
     _shellProcess->sendData("\030\030\030\030", 4); // Abort
     _shellProcess->sendData("\001\013\n", 3); // Try to get prompt back
-    _zmodemProgress->done();
+    _zmodemProgress->transferDone();
   }
 }
 

@@ -605,8 +605,9 @@ void EditProfileDialog::removeColorScheme()
     if ( !selected.isEmpty() )
     {
         const QString& name = selected.first().data(Qt::UserRole+1).value<const ColorScheme*>()->name();
-        _ui->colorSchemeList->model()->removeRow(selected.first().row());
-        ColorSchemeManager::instance()->deleteColorScheme(name);
+        
+        if (ColorSchemeManager::instance()->deleteColorScheme(name))    
+            _ui->colorSchemeList->model()->removeRow(selected.first().row());
     }
 }
 void EditProfileDialog::showColorSchemeEditor(bool isNewScheme)
@@ -740,8 +741,8 @@ void EditProfileDialog::removeKeyBinding()
     if ( !selected.isEmpty() )
     {
         const QString& name = selected.first().data(Qt::UserRole+1).value<const KeyboardTranslator*>()->name();
-        KeyboardTranslatorManager::instance()->deleteTranslator(name);
-        _ui->keyBindingList->model()->removeRow(selected.first().row());   
+        if (KeyboardTranslatorManager::instance()->deleteTranslator(name))
+            _ui->keyBindingList->model()->removeRow(selected.first().row());   
     }
 }
 void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)

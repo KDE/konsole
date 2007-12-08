@@ -293,7 +293,7 @@ HistoryScrollBuffer::~HistoryScrollBuffer()
     delete[] _historyBuffer;
 }
 
-void HistoryScrollBuffer::addCells(const QVector<Character>& cells)
+void HistoryScrollBuffer::addCellsVector(const QVector<Character>& cells)
 {
     _head++;
     if ( _usedLines < _maxLineCount )
@@ -312,7 +312,7 @@ void HistoryScrollBuffer::addCells(const Character a[], int count)
   HistoryLine newLine(count);
   qCopy(a,a+count,newLine.begin());
 
-  addCells(newLine);
+  addCellsVector(newLine);
 }
 
 void HistoryScrollBuffer::addLine(bool previousWrapped)

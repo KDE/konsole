@@ -819,18 +819,22 @@ void KeyboardTranslatorManager::addTranslator(KeyboardTranslator* translator)
         qWarning() << "Unable to save translator" << translator->name()
                    << "to disk.";
 }
-void KeyboardTranslatorManager::deleteTranslator(const QString& name)
+bool KeyboardTranslatorManager::deleteTranslator(const QString& name)
 {
     Q_ASSERT( _translators.contains(name) );
-
-    _translators.remove(name);
 
     // locate and delete
     QString path = findTranslatorPath(name);
     if ( QFile::remove(path) )
-        qDebug() << "Removed translator - " << path;
+    {
+        _translators.remove(name);
+        return true; 
+    }
     else
-        qDebug() << "Failed to remove translator - " << path;
+    {
+        qWarning() << "Failed to remove translator - " << path;
+        return false;
+    }
 }
 const KeyboardTranslator* KeyboardTranslatorManager::defaultTranslator() const
 {

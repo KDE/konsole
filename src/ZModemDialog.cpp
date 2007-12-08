@@ -57,7 +57,7 @@ void ZModemDialog::addProgressText(const QString &txt)
   cursor.insertText(txt);
 }
 
-void ZModemDialog::done()
+void ZModemDialog::transferDone()
 {
   enableButton(Close, true);
   enableButton(User1, false);

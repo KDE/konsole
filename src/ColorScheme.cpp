@@ -642,18 +642,22 @@ const ColorScheme* ColorSchemeManager::defaultColorScheme() const
 {
     return &_defaultColorScheme;
 }
-void ColorSchemeManager::deleteColorScheme(const QString& name)
+bool ColorSchemeManager::deleteColorScheme(const QString& name)
 {
     Q_ASSERT( _colorSchemes.contains(name) );
-
-    _colorSchemes.remove(name);
 
     // lookup the path and delete 
     QString path = findColorSchemePath(name);
     if ( QFile::remove(path) )
-        qDebug() << "Removed color scheme -" << path;
+    {
+        _colorSchemes.remove(name);
+        return true;
+    }
     else
+    {
         qWarning() << "Failed to remove color scheme -" << path;
+        return false;
+    }
 }
 QString ColorSchemeManager::findColorSchemePath(const QString& name) const
 {

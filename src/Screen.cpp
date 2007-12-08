@@ -1437,7 +1437,7 @@ void Screen::addHistLine()
   {
     int oldHistLines = hist->getLines();
 
-    hist->addCells(screenLines[0]);
+    hist->addCellsVector(screenLines[0]);
     hist->addLine( lineProperties[0] & LINE_WRAPPED );
 
     int newHistLines = hist->getLines();

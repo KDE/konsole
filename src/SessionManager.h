@@ -171,8 +171,10 @@ public:
      * Deletes the profile with the specified key.
      * The configuration file associated with the profile is
      * deleted if possible.
+     *
+     * Returns true if the profile was successfully deleted or false otherwise.
      */
-    void deleteProfile(const QString& key);
+    bool deleteProfile(const QString& key);
 
     /**
      * Sets the profile with the specified key

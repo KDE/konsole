@@ -457,11 +457,9 @@ QString SessionManager::addProfile(Profile* type)
     return key;
 }
 
-void SessionManager::deleteProfile(const QString& key)
+bool SessionManager::deleteProfile(const QString& key)
 {
     Profile* type = profile(key);
-
-    setFavorite(key,false);
 
     bool wasDefault = ( type == defaultProfile() );
 
@@ -472,12 +470,14 @@ void SessionManager::deleteProfile(const QString& key)
         {
             if (!QFile::remove(type->path()))
             {
-                qWarning() << "Could not delete config file: " << type->path()
+                qWarning() << "Could not delete profile: " << type->path()
                     << "The file is most likely in a directory which is read-only.";
-                qWarning() << "TODO: Hide this file instead.";
+
+                return false;
             }
         }
 
+        setFavorite(key,false);
         _types.remove(key);
         delete type;
     }
@@ -489,7 +489,9 @@ void SessionManager::deleteProfile(const QString& key)
         setDefaultProfile( _types.keys().first() );
     }
 
-    emit profileRemoved(key); 
+    emit profileRemoved(key);
+
+    return true; 
 }
 void SessionManager::setDefaultProfile(const QString& key)
 {
