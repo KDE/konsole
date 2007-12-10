@@ -7,6 +7,7 @@ MimeType=application/x-konsole;
 Terminal=false
 
 Name=Konsole (Super User Mode)
+Name[be]=Konsole (рэжым адміністратара)
 Name[ca]=Konsole (mode superusuari)
 Name[csb]=Kònsola (Trib sprôwnika)
 Name[de]=Konsole (Systemverwaltung)
@@ -39,6 +40,7 @@ Name[x-test]=xxKonsole (Super User Mode)xx
 Name[zh_CN]=Konsole (超级用户模式)
 Name[zh_TW]=Konsole（超級使用者模式）
 GenericName=Terminal Program (Super User Mode)
+GenericName[be]=Тэрмінал (рэжым адміністратара)
 GenericName[ca]=Programa de terminal (mode superusuari)
 GenericName[csb]=Terminal (Trib sprôwnika)
 GenericName[de]=Terminal (Systemverwaltung)
