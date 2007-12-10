@@ -36,6 +36,7 @@
 #include <KToggleAction>
 #include <KUrl>
 #include <KXMLGUIFactory>
+#include <KXMLGUIBuilder>
 #include <kdebug.h>
 #include <kcodecaction.h>
 #include <kdeversion.h>
@@ -898,6 +899,16 @@ void SessionController::sessionTitleChanged()
 void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , int /*state*/, const QPoint& position)
 {
     QMenu* popup = 0;
+
+    // needed to make sure the popup menu is available, even if a hosting
+    // application did not merge our GUI.
+    if (!factory()) {
+        if (!clientBuilder()) {
+            setClientBuilder(new KXMLGUIBuilder(_view));
+        }
+        KXMLGUIFactory* f = new KXMLGUIFactory(clientBuilder(), this);
+        f->addClient(this);
+    }
 
     if ( factory() )
         popup = qobject_cast<QMenu*>(factory()->container("session-popup-menu",this));

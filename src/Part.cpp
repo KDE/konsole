@@ -73,11 +73,6 @@ Part::Part(QWidget* parentWidget , QObject* parent)
 
     setupActions();
 
-    // FIXME we need this for the context menu and KPart ctor doesn't call the
-    // necessary KXMLGUIClient ctor
-    if (KXMLGUIClient *parentClient = dynamic_cast<KXMLGUIClient*>(parent))
-        parentClient->insertChildClient(this);
-
     // setup global managers
     if ( SessionManager::instance() == 0 )
         SessionManager::setInstance( new SessionManager() );
@@ -204,23 +199,8 @@ void Part::activeViewChanged(SessionController* controller)
     if ( controller == _pluggedController )
         return;
 
-    qDebug() << "Looking for factory";
-
-    // find client with the necessary factory
-    KXMLGUIClient* client = this;
-    qDebug() << "First parent" << client->parentClient();
-    while ( client->parentClient() )
-    {
-        qDebug() << "Next parent" << client->parentClient();
-        qDebug() << "Factory" << client->factory();
-        client = client->parentClient();
-    }
-
-    if ( client->factory() )
-    {
-        client->factory()->removeClient(_pluggedController);
-        client->factory()->addClient(controller);
-    }
+    if (_pluggedController) removeChildClient (_pluggedController);
+    insertChildClient (controller);
 
     _pluggedController = controller;
 }
