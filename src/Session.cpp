@@ -975,7 +975,7 @@ void SessionGroup::setMasterStatus(Session* session , bool master)
 }
 void SessionGroup::connectPair(Session* master , Session* other)
 {
-    qDebug() << __FUNCTION__;
+    qDebug() << k_funcinfo;
 
     if ( _masterMode & CopyInputToAll )
     {
@@ -987,7 +987,7 @@ void SessionGroup::connectPair(Session* master , Session* other)
 }
 void SessionGroup::disconnectPair(Session* master , Session* other)
 {
-    qDebug() << __FUNCTION__;
+    qDebug() << k_funcinfo;
 
     if ( _masterMode & CopyInputToAll )
     {

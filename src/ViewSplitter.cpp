@@ -41,7 +41,7 @@ ViewSplitter::ViewSplitter(QWidget* parent)
 
 void ViewSplitter::childEmpty(ViewSplitter* splitter)
 {
- //   qDebug() << __FUNCTION__ << ": deleting child splitter " ;
+ //   qDebug() << k_funcinfo << ": deleting child splitter " ;
 
     delete splitter;
 
@@ -107,7 +107,7 @@ void ViewSplitter::registerContainer( ViewContainer* container )
 {
     _containers << container;
 
-    //qDebug() << __FUNCTION__ << ": adding container " << ((QTabWidget*)container->containerWidget())->tabText(0);
+    //qDebug() << k_funcinfo << ": adding container " << ((QTabWidget*)container->containerWidget())->tabText(0);
     
     connect( container , SIGNAL(destroyed(ViewContainer*)) , this , SLOT( containerDestroyed(ViewContainer*) ) );
     connect( container , SIGNAL(empty(ViewContainer*)) , this , SLOT( containerEmpty(ViewContainer*) ) );
@@ -117,7 +117,7 @@ void ViewSplitter::unregisterContainer( ViewContainer* container )
 {
     _containers.removeAll(container);
 
-    //qDebug() << __FUNCTION__ << ": removing container " << ((QTabWidget*)container->containerWidget())->tabText(0);
+    //qDebug() << k_funcinfo << ": removing container " << ((QTabWidget*)container->containerWidget())->tabText(0);
     
     disconnect( container , 0 , this , 0 );
 }
@@ -262,10 +262,10 @@ ViewContainer* ViewSplitter::activeContainer() const
 {
    if ( QWidget* focusW = focusWidget() )
    {
-      // qDebug() << __FUNCTION__ << ": focus-widget = " << focusW ;
+      // qDebug() << k_funcinfo << ": focus-widget = " << focusW ;
       // if ( dynamic_cast<QLineEdit*>(focusW) )
-       //    qDebug() << __FUNCTION__ << ": focus-widget-text = " << ((QLineEdit*)focusW)->text();
-      // qDebug() << __FUNCTION__ << ": container count = " << _containers.count();
+       //    qDebug() << k_funcinfo << ": focus-widget-text = " << ((QLineEdit*)focusW)->text();
+      // qDebug() << k_funcinfo << ": container count = " << _containers.count();
 
         ViewContainer* focusContainer = 0;
         

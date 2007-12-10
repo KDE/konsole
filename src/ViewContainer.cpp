@@ -375,7 +375,7 @@ void TabbedViewContainer::removeViewWidget( QWidget* view )
 
 void TabbedViewContainer::updateIcon(ViewProperties* item)
 {
-    kDebug() << __FUNCTION__ << ": icon changed.";
+    kDebug() << k_funcinfo << ": icon changed.";
 
     QList<QWidget*> items = widgetsForItem(item);
     QListIterator<QWidget*> itemIter(items);
@@ -388,7 +388,7 @@ void TabbedViewContainer::updateIcon(ViewProperties* item)
 }
 void TabbedViewContainer::updateTitle(ViewProperties* item) 
 {
-    kDebug() << __FUNCTION__ << ": title changed.";
+    kDebug() << k_funcinfo << ": title changed.";
 
     QList<QWidget*> items = widgetsForItem(item);
     QListIterator<QWidget*> itemIter(items);

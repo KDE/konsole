@@ -60,7 +60,7 @@ void KeyboardTranslatorManager::findTranslators()
                                                          "konsole/*.keytab",
                                                          KStandardDirs::NoDuplicates);
 
-    //qDebug() << __FUNCTION__ << ": found " << list.count() << " keyboard translators.";
+    //qDebug() << k_funcinfo << ": found " << list.count() << " keyboard translators.";
 
     // add the name of each translator to the list and associated
     // the name with a null pointer to indicate that the translator

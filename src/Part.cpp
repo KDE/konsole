@@ -142,7 +142,7 @@ Session* Part::activeSession() const
 {
     if ( _pluggedController )
     {
-        qDebug() << __FUNCTION__ << " - have plugged controller";
+        qDebug() << k_funcinfo << " - have plugged controller";
 
         return _pluggedController->session();
     }
@@ -151,7 +151,7 @@ Session* Part::activeSession() const
         // for now, just return the first available session
         QList<Session*> list = SessionManager::instance()->sessions();
 
-        qDebug() << __FUNCTION__ << " - no plugged controller, selectin first from" << list.count() << "sessions";
+        qDebug() << k_funcinfo << " - no plugged controller, selectin first from" << list.count() << "sessions";
 
         Q_ASSERT( !list.isEmpty() );
 
