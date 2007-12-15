@@ -154,6 +154,7 @@ private slots:
     void openBrowser();
     void copy();
     void paste();
+	void pasteSelection(); // shortcut only
     void clear();
     void clearAndReset();
     void editCurrentProfile();

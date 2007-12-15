@@ -442,6 +442,11 @@ void SessionController::setupActions()
 
     connect( pasteAction , SIGNAL(triggered()) , this , SLOT(paste()) );
 
+	action = collection->addAction("paste-selection"); 
+	action->setText( i18n("Paste Selection") );
+	action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Insert) );
+	connect( action , SIGNAL(triggered()) , this , SLOT(pasteSelection()) );
+
     // Rename Session
     action = collection->addAction("rename-session");
     action->setText( i18n("&Rename Tab...") );
@@ -660,7 +665,10 @@ void SessionController::paste()
 {
     _view->pasteClipboard();
 }
-
+void SessionController::pasteSelection()
+{
+	_view->pasteSelection();
+}
 void SessionController::clear()
 {
     Emulation* emulation = _session->emulation();
