@@ -46,14 +46,12 @@
 
 using namespace Konsole;
 
-#if 0
 #ifdef Q_WS_X11
 Application::Application(Display* display , Qt::HANDLE visual, Qt::HANDLE colormap)
     : KUniqueApplication(display,visual,colormap) 
 {
     init();
 }
-#endif
 #endif
 
 Application::Application() : KUniqueApplication()

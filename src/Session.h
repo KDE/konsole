@@ -305,6 +305,9 @@ public:
    */
   void setFlowControlEnabled(bool enabled);
 
+  /** Returns whether flow control is enabled for this terminal session. */
+  bool flowControlEnabled() const;
+
   /**
    * Sends @p text to the current foreground terminal program.
    */
@@ -428,6 +431,7 @@ signals:
    */
   void changeBackgroundColorRequest(const QColor&);
 
+  /** TODO: Document me. */
   void openUrlRequest(const QString& url);
 
   /** TODO: Document me. */
@@ -448,6 +452,13 @@ signals:
    * "PropertyName=Value;PropertyName=Value ..."
    */
   void profileChangeCommandReceived(const QString& text);
+
+ /**
+  * Emitted when the flow control state changes.
+  *
+  * @param enabled True if flow control is enabled or false otherwise.
+  */
+  void flowControlEnabledChanged(bool enabled);
 
 private slots:
   void done(int);

@@ -38,6 +38,8 @@
 
 using namespace Konsole;
 
+void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap);
+
 // fills the KAboutData structure with information about contributors to 
 // Konsole
 void fillAboutData(KAboutData& aboutData);
@@ -75,10 +77,23 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
         exit(0);
     }
 
-    qDebug() << "Have compositing: " << KWindowSystem::compositingActive();
+	if ( KWindowSystem::compositingActive() && 
+		 KCmdLineArgs::parsedArgs()->isSet("enable-transparency") ) 
+	{
+		Display* display = 0;
+		Visual* visual = 0;
+		Colormap colormap = 0;
 
-    Application app;
-    return app.exec();   
+		getDisplayInformation(display,visual,colormap);
+
+		Application app(display,(Qt::HANDLE)visual,(Qt::HANDLE)colormap);
+		return app.exec();
+	}
+	else 
+	{
+    	Application app;
+    	return app.exec();
+	}   
 }
 
 void fillCommandLineOptions(KCmdLineOptions& options)
@@ -92,6 +107,7 @@ void fillCommandLineOptions(KCmdLineOptions& options)
     options.add("new-tab",ki18n("Create a new tab in an existing window rather than creating a new window"));
     options.add("workdir \\<dir>",   ki18n("Set the initial working directory of the new tab "
                                            "or window to 'dir'"));
+	options.add("enable-transparency",ki18n("Enable transparent backgrounds"));
     // TODO - Document this option more clearly
     options.add("p \\<property=value>",ki18n("Change the value of a profile property."));
     options.add("!e \\<cmd>",ki18n("Command to execute"));
@@ -164,8 +180,8 @@ void fillAboutData(KAboutData& aboutData)
 
 }
 
-#if 0
-// code taken from the Qt 4 graphics dojo examples 
+// code taken from the Qt 4 graphics dojo examples
+// at http://labs.trolltech.com 
 #ifdef Q_WS_X11
 void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap)
 {
@@ -202,7 +218,6 @@ void getDisplayInformation(Display*& display , Visual*& visual , Colormap& color
         }
     }
 }
-#endif
 #endif
 
 

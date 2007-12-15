@@ -128,7 +128,7 @@ TerminalImageFilterChain::~TerminalImageFilterChain()
     delete _linePositions;
 }
 
-void TerminalImageFilterChain::setImage(const Character* const image , int lines , int columns)
+void TerminalImageFilterChain::setImage(const Character* const image , int lines , int columns, const QVector<LineProperty>& lineProperties)
 {
     if (empty())
         return;
@@ -169,7 +169,8 @@ void TerminalImageFilterChain::setImage(const Character* const image , int lines
         // TODO - Use the "line wrapped" attribute associated with lines in a
         // terminal image to avoid adding this imaginary character for wrapped
         // lines
-        lineStream << QChar('\n');
+        if ( !(lineProperties.value(i,LINE_DEFAULT) & LINE_WRAPPED) )
+        	lineStream << QChar('\n');
     }
     decoder.end();
 }

@@ -166,8 +166,6 @@ public:
 
     void emitSelection(bool useXselection,bool appendReturn);
 
-//    void setCursorPos(const int curx, const int cury);
-
     /**
      * This enum describes the available shapes for the keyboard cursor.
      * See setKeyboardCursorShape()
@@ -301,16 +299,16 @@ public:
     enum BellMode
     { 
         /** A system beep. */
-        BELL_SYSTEM=0, 
+        SystemBeepBell=0, 
         /** 
          * KDE notification.  This may play a sound, show a passive popup
          * or perform some other action depending on the user's settings.
          */
-        BELL_NOTIFY=1, 
+        NotifyBell=1, 
         /** A silent, visual bell (eg. inverting the display's colors briefly) */
-        BELL_VISUAL=2, 
+        VisualBell=2, 
         /** No bell effects */
-        BELL_NONE=3 
+        NoBell=3 
     };
 
     void setSelection(const QString &t);
@@ -363,12 +361,6 @@ public:
     void setBidiEnabled(bool set) { _bidiEnabled=set; }
     bool isBidiEnabled() { return _bidiEnabled; }
 
-    /** 
-     * Sets the margin between the top-left edge of the terminal display 
-     * and the rendered text.
-     */
-    void setTopLeftContentsMargin(int rim) { _rimX=rim; _rimY=rim; }
-
     /**
      * Sets the terminal screen section which is displayed in this widget.
      * When updateImage() is called, the display fetches the latest character image from the
@@ -406,6 +398,12 @@ public slots:
      * display.
      */
     void pasteSelection();
+
+	/** 
+ 	  * Changes whether the flow control warning box should be shown when the flow control
+ 	  * stop key (Ctrl+S) are pressed.
+ 	  */
+	void setFlowControlWarningEnabled(bool enabled);
 	
     /** 
 	 * Causes the widget to display or hide a message informing the user that terminal
@@ -550,7 +548,11 @@ private:
     void drawTextFragment(QPainter& painter, const QRect& rect, 
                           const QString& text, const Character* style); 
     // draws the background for a text fragment
-    void drawBackground(QPainter& painter, const QRect& rect, const QColor& color);
+    // if useOpacitySetting is true then the color's alpha value will be set to
+    // the display's transparency (set with setOpacity()), otherwise the background
+    // will be drawn fully opaque
+    void drawBackground(QPainter& painter, const QRect& rect, const QColor& color,
+						bool useOpacitySetting);
     // draws the cursor character
     void drawCursor(QPainter& painter, const QRect& rect , const QColor& foregroundColor, 
                                        const QColor& backgroundColor , bool& invertColors);
@@ -608,8 +610,8 @@ private:
     int  _fontWidth;     // width
     int  _fontAscent;     // ascend
 
-    int _bX;    // offset
-    int _bY;    // offset
+    int _leftMargin;    // offset
+    int _topMargin;    // offset
 
     int _lines;      // the number of lines that can be displayed in the widget
     int _columns;    // the number of columns that can be displayed in the widget
@@ -676,17 +678,16 @@ private:
     QLabel* _resizeLabel;
     QTimer* _resizeTimer;
 
-	//widgets related to the warning message that appears when the user presses Ctrl+S to suspend
-	//terminal output - informing them what has happened and how to resume output
-	QLabel* _outputSuspendedLabel; 
+	bool _flowControlWarningEnabled;
+
+    //widgets related to the warning message that appears when the user presses Ctrl+S to suspend
+    //terminal output - informing them what has happened and how to resume output
+    QLabel* _outputSuspendedLabel; 
     	
     uint _lineSpacing;
 
     bool _colorsInverted; // true during visual bell
 
-    // the rim should normally be 1, 0 only when running in full screen mode.
-    int _rimX;      // left/right rim width
-    int _rimY;      // top/bottom rim high
     QSize _size;
 	
     QRgb _blendColor;
@@ -710,11 +711,13 @@ private:
     };
     InputMethodData _inputMethodData;
 
-	//the delay in milliseconds between redrawing blinking text
-	static const int BLINK_DELAY = 500;
     static bool HAVE_TRANSPARENCY;
-
     static bool _antialiasText;   // do we antialias or not
+
+    //the delay in milliseconds between redrawing blinking text
+    static const int BLINK_DELAY = 500;
+	static const int DEFAULT_LEFT_MARGIN = 1;
+	static const int DEFAULT_TOP_MARGIN = 1;
 
 public:
     static void setTransparencyEnabled(bool enable)

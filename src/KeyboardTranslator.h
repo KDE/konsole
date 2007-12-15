@@ -303,6 +303,7 @@ public:
     QList<Entry> entries() const;
 
 private:
+
     QMultiHash<int,Entry> _entries; // entries in this keyboard translation,
                                                  // entries are indexed according to
                                                  // their keycode
@@ -462,7 +463,7 @@ public:
     bool deleteTranslator(const QString& name);
 
     /** Returns the default translator for Konsole. */
-    const KeyboardTranslator* defaultTranslator() const;
+    const KeyboardTranslator* defaultTranslator();
 
     /** 
      * Returns the keyboard translator with the given name or 0 if no translator
@@ -480,16 +481,20 @@ public:
      */
     QList<QString> allTranslators();
 
+
     /** Sets the global KeyboardTranslatorManager instance. */
    static void setInstance(KeyboardTranslatorManager* instance);
     /** Returns the global KeyboardTranslatorManager instance. */
    static KeyboardTranslatorManager* instance();
 
 private:
+    static const char* defaultTranslatorText;
+    
     void findTranslators(); // locate the available translators
     KeyboardTranslator* loadTranslator(const QString& name); // loads the translator 
                                                              // with the given name
-    
+    KeyboardTranslator* loadTranslator(QIODevice* device,const QString& name);
+
     bool saveTranslator(const KeyboardTranslator* translator);
     QString findTranslatorPath(const QString& name);
     

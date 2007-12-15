@@ -28,10 +28,11 @@
 #include <QtCore/QHash>
 #include <QtCore/QRegExp>
 
+// Local
+#include "Character.h"
+
 namespace Konsole
 {
-
-class Character;
 
 /**
  * A filter processes blocks of text looking for certain patterns (such as URLs or keywords from a list)
@@ -368,7 +369,8 @@ public:
      * @param lines The number of lines in the terminal image
      * @param columns The number of columns in the terminal image
      */
-    void setImage(const Character* const image , int lines , int columns);  
+    void setImage(const Character* const image , int lines , int columns,
+				  const QVector<LineProperty>& lineProperties);  
 
 private:
     QString* _buffer;

@@ -126,6 +126,11 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     connect( _session->emulation() , SIGNAL(outputChanged()) , this ,
             SLOT(fireActivity()) );
 
+    // listen for flow control status changes
+    connect( _session , SIGNAL(flowControlEnabledChanged(bool)) , _view , 
+		SLOT(setFlowControlWarningEnabled(bool)) );
+	_view->setFlowControlWarningEnabled(_session->flowControlEnabled());
+
     // take a snapshot of the session state every so often when
     // user activity occurs
     //

@@ -53,6 +53,10 @@ namespace Konsole
  *
  * Profiles can be loaded from disk using ProfileReader instances
  * and saved to disk using ProfileWriter instances.
+ *
+ * TODO: Profile inherits from QObject so that it can store a guarded 
+ * pointer to the parent profile using QPointer<Profile>.  Try to find
+ * a more light-weight solution to this.  
  */
 class Profile : public QObject 
 {

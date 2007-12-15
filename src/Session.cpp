@@ -743,9 +743,20 @@ void Session::setAddToUtmp(bool set)
 
 void Session::setFlowControlEnabled(bool enabled)
 {
-  _flowControl = enabled;
-}
+  if (_flowControl == enabled)
+  	return;
 
+  _flowControl = enabled;
+
+  if (_shellProcess)  
+	_shellProcess->setXonXoff(_flowControl);
+  
+  emit flowControlEnabledChanged(enabled);
+}
+bool Session::flowControlEnabled() const
+{
+	return _flowControl;
+}
 void Session::fireZModemDetected()
 {
   if (!_zmodemBusy)

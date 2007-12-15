@@ -31,6 +31,7 @@
 #include <QtGui/QToolButton>
 
 // KDE
+#include <KColorScheme>
 #include <KLocale>
 #include <KIcon>
 
@@ -221,11 +222,16 @@ void IncrementalSearchBar::setVisible(bool visible)
 
 void IncrementalSearchBar::setFoundMatch( bool match )
 {
-    //FIXME - Hard coded colour used here - is there a better alternative?
-
     if ( !match && !_searchEdit->text().isEmpty() )
     {
-        _searchEdit->setStyleSheet( "QLineEdit{ background-color: #FF7777 }" );
+		KStatefulBrush foregroundBrush(KColorScheme::View,KColorScheme::NegativeText);
+		KStatefulBrush backgroundBrush(KColorScheme::View,KColorScheme::NegativeBackground);
+
+		QString styleSheet = QString("QLineEdit{ color:%1 ; background-color:%2 }")
+							 .arg(foregroundBrush.brush(_searchEdit).color().name())
+							 .arg(backgroundBrush.brush(_searchEdit).color().name());
+
+        _searchEdit->setStyleSheet( styleSheet );
     }
     else
     {

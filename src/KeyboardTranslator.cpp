@@ -40,6 +40,11 @@
 
 using namespace Konsole;
 
+
+const char* KeyboardTranslatorManager::defaultTranslatorText = 
+#include <DefaultTranslatorText.h>
+;
+
 KeyboardTranslatorManager* KeyboardTranslatorManager::_instance = 0;
 
 KeyboardTranslatorManager::KeyboardTranslatorManager()
@@ -60,8 +65,6 @@ void KeyboardTranslatorManager::findTranslators()
                                                          "konsole/*.keytab",
                                                          KStandardDirs::NoDuplicates);
 
-    //qDebug() << k_funcinfo << ": found " << list.count() << " keyboard translators.";
-
     // add the name of each translator to the list and associated
     // the name with a null pointer to indicate that the translator
     // has not yet been loaded from disk
@@ -72,20 +75,17 @@ void KeyboardTranslatorManager::findTranslators()
 
         QString name = QFileInfo(translatorPath).baseName();
        
-        //qDebug() << "Found translator: " << translatorPath << " with name = " << name;
-        
         if ( !_translators.contains(name) ) 
             _translators.insert(name,0);
     }
-
-    //qDebug() << "Loaded translators: " << _translators.count();
 
     _haveLoadedAll = true;
 }
 
 const KeyboardTranslator* KeyboardTranslatorManager::findTranslator(const QString& name)
 {
-    //qDebug() << "Finding translator: " << name;
+    if ( name.isEmpty() )
+        return defaultTranslator();
 
     if ( _translators.contains(name) && _translators[name] != 0 )
         return _translators[name];
@@ -139,14 +139,26 @@ KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(const QString& nam
     if (name.isEmpty() || !source.open(QIODevice::ReadOnly | QIODevice::Text))
         return 0;
 
+    return loadTranslator(&source,name);
+}
+
+const KeyboardTranslator* KeyboardTranslatorManager::defaultTranslator()
+{
+    qDebug() << "Loading default translator from text" << defaultTranslatorText;
+    QBuffer textBuffer;
+    textBuffer.setData(defaultTranslatorText,strlen(defaultTranslatorText));
+    return loadTranslator(&textBuffer,"fallback");
+}
+
+KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(QIODevice* source,const QString& name)
+{
     KeyboardTranslator* translator = new KeyboardTranslator(name);
-    
-    KeyboardTranslatorReader reader(&source);
+    KeyboardTranslatorReader reader(source);
     translator->setDescription( reader.description() );
     while ( reader.hasNextEntry() )
         translator->addEntry(reader.nextEntry());
 
-    source.close();
+    source->close();
 
     if ( !reader.parseError() )
     {
@@ -835,11 +847,6 @@ bool KeyboardTranslatorManager::deleteTranslator(const QString& name)
         qWarning() << "Failed to remove translator - " << path;
         return false;
     }
-}
-const KeyboardTranslator* KeyboardTranslatorManager::defaultTranslator() const
-{
-#warning "FIXME: Implement a default translator to fall back to in case there are no .keytab files available to load." 
-    return 0;
 }
 void KeyboardTranslatorManager::setInstance(KeyboardTranslatorManager* instance)
 {

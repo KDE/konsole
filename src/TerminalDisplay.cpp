@@ -43,6 +43,7 @@
 
 // KDE
 #include <kshell.h>
+#include <KColorScheme>
 #include <KCursor>
 #include <kdebug.h>
 #include <KLocale>
@@ -262,7 +263,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_columnSelectionMode(false)
 ,_scrollbarLocation(NoScrollBar)
 ,_wordCharacters(":@-./_~")
-,_bellMode(BELL_SYSTEM)
+,_bellMode(SystemBeepBell)
 ,_blinking(false)
 ,_cursorBlinking(false)
 ,_hasBlinkingCursor(false)
@@ -273,11 +274,10 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_resizeWidget(0)
 ,_resizeLabel(0)
 ,_resizeTimer(0)
+,_flowControlWarningEnabled(false)
 ,_outputSuspendedLabel(0)
 ,_lineSpacing(0)
 ,_colorsInverted(false)
-,_rimX(1)
-,_rimY(1)
 ,_blendColor(qRgba(0,0,0,0xff))
 ,_filterChain(new TerminalImageFilterChain())
 ,_cursorShape(BlockCursor)
@@ -285,7 +285,8 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
   // The offsets are not yet calculated.
   // Do not calculate these too often to be more smoothly when resizing
   // konsole in opaque mode.
-  _bY = _bX = 1;
+  _topMargin = DEFAULT_TOP_MARGIN;
+  _leftMargin = DEFAULT_LEFT_MARGIN;
 
   // create scroll bar for scrolling output up and down
   // set the scroll bar's slider to occupy the whole area of the scroll bar initially
@@ -526,7 +527,7 @@ void TerminalDisplay::setOpacity(qreal opacity)
     _blendColor = color.rgba();
 }
 
-void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const QColor& backgroundColor)
+void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const QColor& backgroundColor, bool useOpacitySetting )
 {
         // the area of the widget showing the contents of the terminal display is drawn
         // using the background color from the color scheme set with setColorTable()
@@ -542,7 +543,7 @@ void TerminalDisplay::drawBackground(QPainter& painter, const QRect& rect, const
         QRegion contentsRegion = QRegion(rect).subtracted(scrollBarArea);
         QRect contentsRect = contentsRegion.boundingRect();
 
-        if ( HAVE_TRANSPARENCY && qAlpha(_blendColor) < 0xff ) 
+        if ( HAVE_TRANSPARENCY && qAlpha(_blendColor) < 0xff && useOpacitySetting ) 
         {
             QColor color(backgroundColor);
             color.setAlpha(qAlpha(_blendColor));
@@ -663,7 +664,8 @@ void TerminalDisplay::drawTextFragment(QPainter& painter ,
     
     // draw background if different from the display's background color
     if ( backgroundColor != palette().background().color() )
-        drawBackground(painter,rect,backgroundColor);
+        drawBackground(painter,rect,backgroundColor,
+					   false /* do not use transparency */);
 
     // draw cursor shape if the current character is the cursor
     // this may alter the foreground and background colors
@@ -691,8 +693,8 @@ void TerminalDisplay::setCursorPos(const int curx, const int cury)
     int    tLy = tL.y();
 
     int xpos, ypos;
-    ypos = _bY + tLy + _fontHeight*(cury-1) + _fontAscent;
-    xpos = _bX + tLx + _fontWidth*curx;
+    ypos = _topMargin + tLy + _fontHeight*(cury-1) + _fontAscent;
+    xpos = _leftMargin + tLx + _fontWidth*curx;
     //setMicroFocusHint(xpos, ypos, 0, _fontHeight); //### ???
     // fprintf(stderr, "x/y = %d/%d\txpos/ypos = %d/%d\n", curx, cury, xpos, ypos);
     _cursorLine = cury;
@@ -711,10 +713,16 @@ void TerminalDisplay::setCursorPos(const int curx, const int cury)
 //
 // note:  it is important that the area of the display which is 
 // scrolled aligns properly with the character grid - 
-// which has a top left point at (_bX,_bY) , 
+// which has a top left point at (_leftMargin,_topMargin) , 
 // a cell width of _fontWidth and a cell height of _fontHeight).    
 void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
 {
+	// if the flow control warning is enabled this will interfere with the 
+	// scrolling optimisations and cause artifacts.  the simple solution here
+	// is to just disable the optimisation whilst it is visible
+	if ( _outputSuspendedLabel && _outputSuspendedLabel->isVisible() )
+		return;
+
     // constrain the region to the display
     // the bottom of the region is capped to the number of lines in the display's
     // internal image - 2, so that the height of 'region' is strictly less
@@ -735,7 +743,7 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
     void* firstCharPos = &_image[ region.top() * this->_columns ];
     void* lastCharPos = &_image[ (region.top() + abs(lines)) * this->_columns ];
 
-    int top = _bY + (region.top() * _fontHeight);
+    int top = _topMargin + (region.top() * _fontHeight);
     int linesToMove = region.height() - abs(lines);
     int bytesToMove = linesToMove * 
                       this->_columns *
@@ -758,7 +766,7 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
       
         //set region of display to scroll, making sure that
         //the region aligns correctly to the character grid 
-        scrollRect = QRect( _bX , top, 
+        scrollRect = QRect( _leftMargin , top, 
                             this->_usedColumns * _fontWidth , 
                             linesToMove * _fontHeight );
     }
@@ -773,7 +781,7 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
      
         //set region of the display to scroll, making sure that
         //the region aligns correctly to the character grid
-        QPoint topPoint( _bX , top + abs(lines)*_fontHeight );
+        QPoint topPoint( _leftMargin , top + abs(lines)*_fontHeight );
 
         scrollRect = QRect( topPoint ,
                      QSize( this->_usedColumns*_fontWidth , 
@@ -789,7 +797,7 @@ void TerminalDisplay::processFilters()
     QTime t;
     t.start();
 
-    _filterChain->setImage(_image,_lines,_columns);
+    _filterChain->setImage(_image,_lines,_columns,_lineProperties);
     _filterChain->process();
 }
 
@@ -901,7 +909,7 @@ void TerminalDisplay::updateImage()
 
         QString unistr(disstrU, p);
 
-        bool save__fixedFont = _fixedFont;
+        bool saveFixedFont = _fixedFont;
         if (lineDraw)
            _fixedFont = false;
         if (doubleWidth)
@@ -909,7 +917,7 @@ void TerminalDisplay::updateImage()
 
 		updateLine = true;
 
-		_fixedFont = save__fixedFont;
+		_fixedFont = saveFixedFont;
         x += len - 1;
       }
       
@@ -930,8 +938,8 @@ void TerminalDisplay::updateImage()
 
         // add the area occupied by this line to the region which needs to be
         // repainted
-        QRect dirtyRect = QRect( _bX+tLx , 
-                                 _bY+tLy+_fontHeight*y , 
+        QRect dirtyRect = QRect( _leftMargin+tLx , 
+                                 _topMargin+tLy+_fontHeight*y , 
                                  _fontWidth * columnsToUpdate , 
                                  _fontHeight ); 	
 
@@ -950,8 +958,8 @@ void TerminalDisplay::updateImage()
   // outside the new _image is cleared 
   if ( linesToUpdate < _usedLines )
   {
-    dirtyRegion |= QRect(   _bX+tLx , 
-                            _bY+tLy+_fontHeight*linesToUpdate , 
+    dirtyRegion |= QRect(   _leftMargin+tLx , 
+                            _topMargin+tLy+_fontHeight*linesToUpdate , 
                             _fontWidth * this->_columns , 
                             _fontHeight * (_usedLines-linesToUpdate) );
   }
@@ -959,8 +967,8 @@ void TerminalDisplay::updateImage()
   
   if ( columnsToUpdate < _usedColumns )
   {
-    dirtyRegion |= QRect(   _bX+tLx+columnsToUpdate*_fontWidth , 
-                            _bY+tLy , 
+    dirtyRegion |= QRect(   _leftMargin+tLx+columnsToUpdate*_fontWidth , 
+                            _topMargin+tLy , 
                             _fontWidth * (_usedColumns-columnsToUpdate) , 
                             _fontHeight * this->_lines );
   }
@@ -1043,7 +1051,8 @@ void TerminalDisplay::paintEvent( QPaintEvent* pe )
 
   foreach (QRect rect, (pe->region() & contentsRect()).rects())
   {
-    drawBackground(paint,rect,palette().background().color());
+    drawBackground(paint,rect,palette().background().color(),
+					true /* use opacity setting */);
     drawContents(paint, rect);
   }
   drawInputMethodPreeditString(paint,preeditRect());
@@ -1059,8 +1068,8 @@ QRect TerminalDisplay::preeditRect() const
     if ( preeditLength == 0 )
         return QRect();
 
-    return QRect(_bX + _fontWidth*_screenWindow->cursorPosition().x(),
-                 _bY + _fontHeight*_screenWindow->cursorPosition().y(),
+    return QRect(_leftMargin + _fontWidth*_screenWindow->cursorPosition().x(),
+                 _topMargin + _fontHeight*_screenWindow->cursorPosition().y(),
                  _fontWidth*preeditLength,
                  _fontHeight);
 }   
@@ -1077,7 +1086,7 @@ void TerminalDisplay::drawInputMethodPreeditString(QPainter& painter , const QRe
     const QColor foreground = _colorTable[DEFAULT_FORE_COLOR].color;
     const Character* style = &_image[loc(cursorPos.x(),cursorPos.y())];
 
-    drawBackground(painter,rect,background);
+    drawBackground(painter,rect,background,true);
     drawCursor(painter,rect,foreground,background,invertColors);
     drawCharacters(painter,rect,_inputMethodData.preeditString,style,invertColors);
 
@@ -1174,10 +1183,10 @@ void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
   int    tLx = tL.x();
   int    tLy = tL.y();
 
-  int lux = qMin(_usedColumns-1, qMax(0,(rect.left()   - tLx - _bX ) / _fontWidth));
-  int luy = qMin(_usedLines-1,  qMax(0,(rect.top()    - tLy - _bY  ) / _fontHeight));
-  int rlx = qMin(_usedColumns-1, qMax(0,(rect.right()  - tLx - _bX ) / _fontWidth));
-  int rly = qMin(_usedLines-1,  qMax(0,(rect.bottom() - tLy - _bY  ) / _fontHeight));
+  int lux = qMin(_usedColumns-1, qMax(0,(rect.left()   - tLx - _leftMargin ) / _fontWidth));
+  int luy = qMin(_usedLines-1,  qMax(0,(rect.top()    - tLy - _topMargin  ) / _fontHeight));
+  int rlx = qMin(_usedColumns-1, qMax(0,(rect.right()  - tLx - _leftMargin ) / _fontWidth));
+  int rly = qMin(_usedLines-1,  qMax(0,(rect.bottom() - tLy - _topMargin  ) / _fontHeight));
 
   const int bufferSize = _usedColumns;
   QChar *disstrU = new QChar[bufferSize];
@@ -1255,7 +1264,7 @@ void TerminalDisplay::drawContents(QPainter &paint, const QRect &rect)
 		 }
 
 		 //calculate the area in which the text will be drawn
-		 QRect textArea = QRect( _bX+tLx+_fontWidth*x , _bY+tLy+_fontHeight*y , _fontWidth*len , _fontHeight);
+		 QRect textArea = QRect( _leftMargin+tLx+_fontWidth*x , _topMargin+tLy+_fontHeight*y , _fontWidth*len , _fontHeight);
 		
 		 //move the calculated area to take account of scaling applied to the painter.
 		 //the position of the area from the origin (0,0) is scaled 
@@ -1309,8 +1318,8 @@ void TerminalDisplay::blinkEvent()
 QRect TerminalDisplay::imageToWidget(const QRect& imageArea) const
 {
     QRect result;
-    result.setLeft( _bX + _fontWidth * imageArea.left() );
-    result.setTop( _bY + _fontHeight * imageArea.top() );
+    result.setLeft( _leftMargin + _fontWidth * imageArea.left() );
+    result.setTop( _topMargin + _fontHeight * imageArea.top() );
     result.setWidth( _fontWidth * imageArea.width() );
     result.setHeight( _fontHeight * imageArea.height() );
 
@@ -1454,7 +1463,7 @@ void TerminalDisplay::setScrollBarPosition(ScrollBarPosition position)
   else 
      _scrollBar->show(); 
 
-  _bY = _bX = 1;
+  _topMargin = _leftMargin = 1;
   _scrollbarLocation = position;
   
   propagateSize();
@@ -1669,20 +1678,20 @@ void TerminalDisplay::extendSelection( const QPoint& position )
 
   // Adjust position within text area bounds. See FIXME above.
   QPoint oldpos = pos;
-  if ( pos.x() < tLx+_bX )                  
-      pos.setX( tLx+_bX );
-  if ( pos.x() > tLx+_bX+_usedColumns*_fontWidth-1 ) 
-      pos.setX( tLx+_bX+_usedColumns*_fontWidth );
-  if ( pos.y() < tLy+_bY )                   
-      pos.setY( tLy+_bY );
-  if ( pos.y() > tLy+_bY+_usedLines*_fontHeight-1 )    
-      pos.setY( tLy+_bY+_usedLines*_fontHeight-1 );
+  if ( pos.x() < tLx+_leftMargin )                  
+      pos.setX( tLx+_leftMargin );
+  if ( pos.x() > tLx+_leftMargin+_usedColumns*_fontWidth-1 ) 
+      pos.setX( tLx+_leftMargin+_usedColumns*_fontWidth );
+  if ( pos.y() < tLy+_topMargin )                   
+      pos.setY( tLy+_topMargin );
+  if ( pos.y() > tLy+_topMargin+_usedLines*_fontHeight-1 )    
+      pos.setY( tLy+_topMargin+_usedLines*_fontHeight-1 );
 
-  if ( pos.y() == tLy+_bY+_usedLines*_fontHeight-1 )
+  if ( pos.y() == tLy+_topMargin+_usedLines*_fontHeight-1 )
   {
     _scrollBar->setValue(_scrollBar->value()+yMouseScroll); // scrollforward
   }
-  if ( pos.y() == tLy+_bY )
+  if ( pos.y() == tLy+_topMargin )
   {
     _scrollBar->setValue(_scrollBar->value()-yMouseScroll); // scrollback
   }
@@ -1691,7 +1700,7 @@ void TerminalDisplay::extendSelection( const QPoint& position )
   int charLine = 0;
   getCharacterPosition(pos,charLine,charColumn);
 
-  QPoint here = QPoint(charColumn,charLine); //QPoint((pos.x()-tLx-_bX+(_fontWidth/2))/_fontWidth,(pos.y()-tLy-_bY)/_fontHeight);
+  QPoint here = QPoint(charColumn,charLine); //QPoint((pos.x()-tLx-_leftMargin+(_fontWidth/2))/_fontWidth,(pos.y()-tLy-_topMargin)/_fontHeight);
   QPoint ohere;
   QPoint _iPntSelCorr = _iPntSel;
   _iPntSelCorr.ry() -= _scrollBar->value();
@@ -1907,8 +1916,8 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
 
 void TerminalDisplay::getCharacterPosition(const QPoint& widgetPoint,int& line,int& column) const
 {
-    column = (widgetPoint.x() + _fontWidth/2 -contentsRect().left()-_bX) / _fontWidth;
-    line = (widgetPoint.y()-contentsRect().top()-_bY) / _fontHeight;
+    column = (widgetPoint.x() + _fontWidth/2 -contentsRect().left()-_leftMargin) / _fontWidth;
+    line = (widgetPoint.y()-contentsRect().top()-_topMargin) / _fontHeight;
 
     if ( line < 0 )
         line = 0;
@@ -2204,16 +2213,26 @@ void TerminalDisplay::pasteSelection()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
+void TerminalDisplay::setFlowControlWarningEnabled( bool enable )
+{
+	_flowControlWarningEnabled = enable;
+	
+	// if the dialog is currently visible and the flow control warning has 
+	// been disabled then hide the dialog
+	if (!enable)
+		outputSuspended(false);
+}
+
 void TerminalDisplay::keyPressEvent( QKeyEvent* event )
 {
     bool emitKeyPressSignal = true;
 
     // XonXoff flow control
-    if (event->modifiers() & Qt::ControlModifier)
+    if (event->modifiers() & Qt::ControlModifier && _flowControlWarningEnabled)
 	{
 		if ( event->key() == Qt::Key_S )
 				emit flowControlKeyPressed(true /*output suspended*/);
-		if ( event->key() == Qt::Key_Q )
+		else if ( event->key() == Qt::Key_Q )
 				emit flowControlKeyPressed(false /*output enabled*/);
 	}
 
@@ -2370,7 +2389,7 @@ void TerminalDisplay::enableBell()
 
 void TerminalDisplay::bell(const QString& message)
 {
-  if (_bellMode==BELL_NONE) return;
+  if (_bellMode==NoBell) return;
 
   //limit the rate at which bells can occur 
   //...mainly for sound effects where rapid bells in sequence 
@@ -2380,15 +2399,15 @@ void TerminalDisplay::bell(const QString& message)
     _allowBell = false;
     QTimer::singleShot(500,this,SLOT(enableBell()));
  
-    if (_bellMode==BELL_SYSTEM) 
+    if (_bellMode==SystemBeepBell) 
     {
         KNotification::beep();
     } 
-    else if (_bellMode==BELL_NOTIFY) 
+    else if (_bellMode==NotifyBell) 
     {
         KNotification::event("BellVisible", message,QPixmap(),this);
     } 
-    else if (_bellMode==BELL_VISUAL) 
+    else if (_bellMode==VisualBell) 
     {
         swapColorTable();
         QTimer::singleShot(200,this,SLOT(swapColorTable()));
@@ -2426,24 +2445,23 @@ void TerminalDisplay::calcGeometry()
   switch(_scrollbarLocation)
   {
     case NoScrollBar :
-     _bX = _rimX;
-     _contentWidth = contentsRect().width() - 2 * _rimX;
+     _leftMargin = DEFAULT_LEFT_MARGIN;
+     _contentWidth = contentsRect().width() - 2 * DEFAULT_LEFT_MARGIN;
      break;
     case ScrollBarLeft :
-     _bX = _rimX+_scrollBar->width();
-     _contentWidth = contentsRect().width() - 2 * _rimX - _scrollBar->width();
+     _leftMargin = DEFAULT_LEFT_MARGIN + _scrollBar->width();
+     _contentWidth = contentsRect().width() - 2 * DEFAULT_LEFT_MARGIN - _scrollBar->width();
      _scrollBar->move(contentsRect().topLeft());
      break;
     case ScrollBarRight:
-     _bX = _rimX;
-     _contentWidth = contentsRect().width()  - 2 * _rimX - _scrollBar->width();
+     _leftMargin = DEFAULT_LEFT_MARGIN;
+     _contentWidth = contentsRect().width()  - 2 * DEFAULT_LEFT_MARGIN - _scrollBar->width();
      _scrollBar->move(contentsRect().topRight() - QPoint(_scrollBar->width()-1,0));
      break;
   }
 
-  //FIXME: support 'rounding' styles
-  _bY = _rimY;
-  _contentHeight = contentsRect().height() - 2 * _rimY + /* mysterious */ 1;
+  _topMargin = DEFAULT_TOP_MARGIN;
+  _contentHeight = contentsRect().height() - 2 * DEFAULT_TOP_MARGIN + /* mysterious */ 1;
 
   if (!_isFixedSize)
   {
@@ -2595,25 +2613,19 @@ void TerminalDisplay::outputSuspended(bool suspended)
 											   "  Press <b>Ctrl+Q</b> to resume.</qt>"),
 											   this );
 
-             //fill label with a light yellow 'warning' colour
-            //FIXME - It would be better if there was a way of getting a suitable colour based
-            //on the current theme.  Last I looked however, the set of colours 
-            //provided by the theme
-            //did not include anything suitable (most being varying shades of grey)
-
             QPalette palette(_outputSuspendedLabel->palette());
-            palette.setColor(QPalette::Base, QColor(255,250,150) );
-            _outputSuspendedLabel->setPalette(palette);
+            KColorScheme::adjustForeground(palette,KColorScheme::NeutralText);
+			KColorScheme::adjustBackground(palette,KColorScheme::NeutralBackground);
+			_outputSuspendedLabel->setPalette(palette);
 			_outputSuspendedLabel->setAutoFillBackground(true);
 			_outputSuspendedLabel->setBackgroundRole(QPalette::Base);
-
+			_outputSuspendedLabel->setFont(QApplication::font());
             _outputSuspendedLabel->setMargin(5);
 
             //enable activation of "Xon/Xoff" link in label
             _outputSuspendedLabel->setTextInteractionFlags(Qt::LinksAccessibleByMouse | 
                                                           Qt::LinksAccessibleByKeyboard);
             _outputSuspendedLabel->setOpenExternalLinks(true);
-
             _outputSuspendedLabel->setVisible(false);
 
             _gridLayout->addWidget(_outputSuspendedLabel);       
