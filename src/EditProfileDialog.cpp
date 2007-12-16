@@ -62,7 +62,7 @@ EditProfileDialog::EditProfileDialog(QWidget* parent)
     , _delayedPreviewTimer(new QTimer(this))
 {
     setCaption(i18n("Edit Profile"));
-    setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply | KDialog::Default );
+    setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
 
     connect( this , SIGNAL(applyClicked()) , this , SLOT(save()) );
     connect( _delayedPreviewTimer , SIGNAL(timeout()) , this , SLOT(delayedPreviewActivate()) );
