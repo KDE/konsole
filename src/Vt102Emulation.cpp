@@ -990,7 +990,10 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
         // Alt+[Character] results in Esc+[Character] being sent
         // (unless there is an entry defined for this particular combination
         //  in the keyboard modifier)
-        if ( modifiers & Qt::AltModifier && entry.isNull() 
+        bool wantsAltModifier = entry.modifiers() & entry.modifierMask() & Qt::AltModifier;
+		bool wantsAnyModifier = entry.state() & entry.stateMask() & KeyboardTranslator::AnyModifierState;
+
+        if ( modifiers & Qt::AltModifier && !(wantsAltModifier || wantsAnyModifier) 
              && !event->text().isEmpty() )
         {
             textToSend.prepend("\033");
