@@ -385,6 +385,8 @@ bool KeyboardTranslatorReader::parseAsModifier(const QString& item , Qt::Keyboar
         modifier = Qt::AltModifier;
     else if ( item == "meta" )
         modifier = Qt::MetaModifier;
+	else if ( item == "keypad" )
+		modifier = Qt::KeypadModifier;
     else
         return false;
 
@@ -705,6 +707,8 @@ void KeyboardTranslator::Entry::insertModifier( QString& item , int modifier ) c
         item += "Alt";
     else if ( modifier == Qt::MetaModifier )
         item += "Meta";
+	else if ( modifier == Qt::KeypadModifier )
+		item += "KeyPad";
 }
 void KeyboardTranslator::Entry::insertState( QString& item , int state ) const
 {
