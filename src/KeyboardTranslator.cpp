@@ -584,15 +584,16 @@ bool KeyboardTranslator::Entry::matches(int keyCode ,
         return false;
 
     // special handling for the 'Any Modifier' state, which checks for the presence of 
-    // any or no modifiers 
+    // any or no modifiers.  In this context, the 'keypad' modifier does not count.
+    bool anyModifiersSet = modifiers != 0 && modifiers != Qt::KeypadModifier;
     if ( _stateMask & KeyboardTranslator::AnyModifierState )
     {
         // test fails if any modifier is required but none are set
-        if ( (_state & KeyboardTranslator::AnyModifierState) && modifiers == 0 )
+        if ( (_state & KeyboardTranslator::AnyModifierState) && !anyModifiersSet )
            return false;
 
         // test fails if no modifier is allowed but one or more are set
-        if ( !(_state & KeyboardTranslator::AnyModifierState) && modifiers != 0 )
+        if ( !(_state & KeyboardTranslator::AnyModifierState) && anyModifiersSet )
             return false;
     }
 
