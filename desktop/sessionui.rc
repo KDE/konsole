@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="session">
+<kpartgui name="session" version="1">
     <MenuBar>
         <Menu name="file">
             <Action name="open-browser" group="session-operations"/>
