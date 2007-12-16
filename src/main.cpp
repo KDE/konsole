@@ -38,7 +38,9 @@
 
 using namespace Konsole;
 
+#ifdef Q_WS_X11
 void getDisplayInformation(Display*& display , Visual*& visual , Colormap& colormap);
+#endif
 
 // fills the KAboutData structure with information about contributors to 
 // Konsole
@@ -76,7 +78,7 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
     {
         exit(0);
     }
-
+#ifdef Q_WS_X11
 	if ( KWindowSystem::compositingActive() && 
 		 KCmdLineArgs::parsedArgs()->isSet("enable-transparency") ) 
 	{
@@ -89,7 +91,8 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
 		Application app(display,(Qt::HANDLE)visual,(Qt::HANDLE)colormap);
 		return app.exec();
 	}
-	else 
+	else
+#endif 
 	{
     	Application app;
     	return app.exec();
