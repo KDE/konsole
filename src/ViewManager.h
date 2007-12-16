@@ -189,6 +189,8 @@ private slots:
 
     // called when the "Detach View" menu item is selected
     void detachActiveView();
+	void updateDetachViewState();
+
     // called when a session terminates - the view manager will delete any
     // views associated with the session
     void sessionFinished();

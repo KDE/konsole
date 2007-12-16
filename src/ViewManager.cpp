@@ -156,9 +156,8 @@ void ViewManager::setupActions()
         // Ctrl+Shift+D is not used as a shortcut by default because it is too close
         // to Ctrl+D - which will terminate the session in many cases
         detachViewAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_H) );
-        
-        multiViewOnlyActions << detachViewAction;
-
+       
+  		connect( this , SIGNAL(splitViewToggle(bool)) , this , SLOT(updateDetachViewState()) ); 
         connect( detachViewAction , SIGNAL(triggered()) , this , SLOT(detachActiveView()) );
    
         // Expand & Shrink Active View
@@ -217,6 +216,19 @@ void ViewManager::setupActions()
     _viewSplitter->addAction(moveViewRightAction);
 }
 
+void ViewManager::updateDetachViewState()
+{
+	if (!_actionCollection)
+		return;
+
+	bool splitView = _viewSplitter->containers().count() >= 2;
+	bool shouldEnable = splitView || _viewSplitter->activeContainer()->views().count() >= 2;
+
+	QAction* detachAction = _actionCollection->action("detach-view");
+
+	if ( detachAction && shouldEnable != detachAction->isEnabled() )
+		detachAction->setEnabled(shouldEnable);
+}
 void ViewManager::moveActiveViewLeft()
 {
     qDebug() << "Moving active view to the left";
@@ -498,6 +510,8 @@ void ViewManager::createView(Session* session)
             display->setFocus( Qt::OtherFocusReason );
         }
     }
+
+	updateDetachViewState();
 }
 
 ViewContainer* ViewManager::createContainer(const QString& profileKey)
@@ -572,6 +586,7 @@ void ViewManager::viewCloseRequest(QWidget* view)
     }
         
     focusActiveView();
+	updateDetachViewState();
 }
 
 TerminalDisplay* ViewManager::createTerminalDisplay(Session* session)
