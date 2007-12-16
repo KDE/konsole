@@ -79,9 +79,6 @@ Emulation::Emulation() :
   QObject::connect(&_bulkTimer1, SIGNAL(timeout()), this, SLOT(showBulk()) );
   QObject::connect(&_bulkTimer2, SIGNAL(timeout()), this, SLOT(showBulk()) );
    
-  // default keymap
-  setKeyBindings(0); 
-
   // listen for mouse status changes
   connect( this , SIGNAL(programUsesMouseChanged(bool)) , 
            SLOT(usesMouseChanged(bool)) );
