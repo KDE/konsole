@@ -2335,14 +2335,11 @@ QVariant TerminalDisplay::inputMethodQuery( Qt::InputMethodQuery query ) const
     return QVariant();
 }
 
-// Override any Ctrl+<key> accelerator when pressed with the keyboard
-// focus in TerminalDisplay, so that the key will be passed to the terminal instead.
 bool TerminalDisplay::event( QEvent *e )
 {
   if ( e->type() == QEvent::ShortcutOverride )
   {
     QKeyEvent* keyEvent = static_cast<QKeyEvent *>( e );
-    int keyCode = keyEvent->key() | keyEvent->modifiers();
 
     // a check to see if keyEvent->text() is empty is used
     // to avoid intercepting the press of the modifier key on its own.
@@ -2350,16 +2347,16 @@ bool TerminalDisplay::event( QEvent *e )
     // this is important as it allows a press and release of the Alt key
     // on its own to focus the menu bar, making it possible to
     // work with the menu without using the mouse
-    if (  ( (keyEvent->modifiers() == Qt::ControlModifier) || 
-           (keyEvent->modifiers() == Qt::AltModifier) ) && 
+    if ( (keyEvent->modifiers() == Qt::AltModifier) && 
          !keyEvent->text().isEmpty() )
     {
-      keyEvent->accept();
-      return true;
+    	keyEvent->accept();
+      	return true;
     }
 
     // Override any of the following shortcuts because
     // they are needed by the terminal
+    int keyCode = keyEvent->key() | keyEvent->modifiers();
     switch ( keyCode )
     {
       // list is taken from the QLineEdit::event() code

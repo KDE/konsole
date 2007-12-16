@@ -495,7 +495,7 @@ void SessionController::setupActions()
     action = collection->addAction("decrease-text-size");
     action->setText( i18n("Decrease Text Size") );
     action->setIcon( KIcon("zoom-out") );
-    action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Minus) );
+    action->setShortcut( QKeySequence(Qt::CTRL+Qt::Key_Minus) );
     connect( action , SIGNAL(triggered()) , this , SLOT(decreaseTextSize()) );
 
     // Scrollback
