@@ -581,7 +581,7 @@ TerminalDisplay* ViewManager::createTerminalDisplay(Session* session)
    //TODO Temporary settings used here
    display->setBellMode(0);
    display->setTerminalSizeHint(false);
-   display->setCutToBeginningOfLine(true);
+   display->setTripleClickMode(TerminalDisplay::SelectWholeLine);
    display->setTerminalSizeStartup(false);
    display->setScrollBarPosition(TerminalDisplay::ScrollBarRight);
    display->setRandomSeed(session->sessionId() * 31);

@@ -158,8 +158,21 @@ public:
     void setCtrlDrag(bool enable) { _ctrlDrag=enable; }
     bool ctrlDrag() { return _ctrlDrag; }
 
-    void setCutToBeginningOfLine(bool enable) { _cutToBeginningOfLine=enable; }
-    bool cutToBeginningOfLine() { return _cutToBeginningOfLine; }
+	/** 
+     *  This enum describes the methods for selecting text when
+ 	 *  the user triple-clicks within the display. 
+ 	 */
+	enum TripleClickMode
+	{
+		/** Select the whole line underneath the cursor. */
+		SelectWholeLine,
+		/** Select from the current cursor position to the end of the line. */
+		SelectForwardsFromCursor
+	};
+    /** Sets how the text is selected when the user triple clicks within the display. */	
+    void setTripleClickMode(TripleClickMode mode) { _tripleClickMode = mode; }
+	/** See setTripleClickSelectionMode() */
+    TripleClickMode tripleClickMode() { return _tripleClickMode; }
 
     void setLineSpacing(uint);
     uint lineSpacing() const;
@@ -661,7 +674,7 @@ private:
     bool _cursorBlinking;     // hide cursor in paintEvent
     bool _hasBlinkingCursor;  // has blinking cursor enabled
     bool _ctrlDrag;           // require Ctrl key for drag
-    bool _cutToBeginningOfLine; // triple click only selects forward
+    TripleClickMode _tripleClickMode;
     bool _isFixedSize; //Columns / lines are locked.
     QTimer* _blinkTimer;  // active when hasBlinker
     QTimer* _blinkCursorTimer;  // active when hasBlinkingCursor

@@ -268,7 +268,7 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_cursorBlinking(false)
 ,_hasBlinkingCursor(false)
 ,_ctrlDrag(false)
-,_cutToBeginningOfLine(false)
+,_tripleClickMode(SelectWholeLine)
 ,_isFixedSize(false)
 ,_possibleTripleClick(false)
 ,_resizeWidget(0)
@@ -2079,7 +2079,7 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
   while (_iPntSel.y()>0 && (_lineProperties[_iPntSel.y()-1] & LINE_WRAPPED) )
     _iPntSel.ry()--;
   
-  if (_cutToBeginningOfLine) {
+  if (_tripleClickMode == SelectForwardsFromCursor) {
     // find word boundary start
     int i = loc(_iPntSel.x(),_iPntSel.y());
     int selClass = charClass(_image[i].character);
@@ -2103,7 +2103,7 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
     _screenWindow->setSelectionStart( x , _iPntSel.y() , false );
     _tripleSelBegin = QPoint( x, _iPntSel.y() );
   }
-  else {
+  else if (_tripleClickMode == SelectWholeLine) {
     _screenWindow->setSelectionStart( 0 , _iPntSel.y() , false );
     _tripleSelBegin = QPoint( 0, _iPntSel.y() );
   }
