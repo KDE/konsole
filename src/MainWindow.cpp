@@ -320,7 +320,7 @@ void MainWindow::showShortcutsDialog()
 
 void MainWindow::newFromProfile(const QString& key)
 {
-        emit newSessionRequest(key,QString(),_viewManager);
+    emit newSessionRequest(key, activeSessionDir(), _viewManager);
 }
 void MainWindow::showManageProfilesDialog()
 {

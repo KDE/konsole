@@ -281,7 +281,7 @@ void Application::createWindow(const QString& key , const QString& directory)
 void Application::createSession(const QString& key , const QString& directory , ViewManager* view)
 {
     Session* session = SessionManager::instance()->createSession(key);
-    if (!directory.isEmpty())
+    if (!directory.isEmpty() && session->initialWorkingDirectory().isEmpty())
         session->setInitialWorkingDirectory(directory);
 
     // create view before starting the session process so that the session doesn't suffer

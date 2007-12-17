@@ -288,6 +288,8 @@ void Session::run()
   QString cwd_save = QDir::currentPath();
   if (!_initialWorkingDir.isEmpty())
     _shellProcess->setWorkingDirectory(_initialWorkingDir);
+  else
+    _shellProcess->setWorkingDirectory(QDir::homePath());
 
   _shellProcess->setXonXoff(_flowControl);
   _shellProcess->setErase(_emulation->getErase());
