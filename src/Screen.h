@@ -301,10 +301,9 @@ public:
     int  getCursorX() const;
     /** Returns the line which the cursor is positioned on. */
     int  getCursorY() const;
-    //
-    // -------------------------------------
-    //
-    void clear();
+   
+	/** TODO Document me */ 
+	void clear();
     /** 
      * Sets the position of the cursor to the 'home' position at the top-left
      * corner of the screen (0,0) 
@@ -370,7 +369,8 @@ public:
 
     /** 
      * Returns the additional attributes associated with lines in the image.
-     * The most important attribute is LINE_WRAPPED which specifies that the line is wrapped,
+     * The most important attribute is LINE_WRAPPED which specifies that the 
+     * line is wrapped,
      * other attributes control the size of characters in the line.
      */
     QVector<LineProperty> getLineProperties( int startLine , int endLine ) const;
@@ -430,13 +430,16 @@ public:
 
     void setBusySelecting(bool busy) { sel_busy = busy; }
 
-    /** Returns true if the character at (@p column, @p line) is part of the current selection. */ 
+    /** 
+ 	 * 	Returns true if the character at (@p column, @p line) is part of the
+ 	 *  current selection. 
+ 	 */ 
     bool isSelected(const int column,const int line) const;
 
     /** 
      * Convenience method.  Returns the currently selected text. 
-     * @param preserveLineBreaks Specifies whether new line characters should be inserted into 
-     * the returned text at the end of each terminal line.
+     * @param preserveLineBreaks Specifies whether new line characters should 
+     * be inserted into the returned text at the end of each terminal line.
      */
     QString selectedText(bool preserveLineBreaks);
 	    
@@ -459,11 +462,11 @@ public:
 	 * Copies the selected characters, set using @see setSelBeginXY and @see setSelExtentXY
 	 * into a stream.
 	 *
-	 * @param decoder A decoder which converts terminal characters into text.  PlainTextDecoder
-	 * 				  is the most commonly used decoder which coverts characters into plain
-	 * 				  text with no formatting.
-     * @param preserveLineBreaks Specifies whether new line characters should be inserted into
-     * the returned text at the end of each terminal line. 
+	 * @param decoder A decoder which converts terminal characters into text.  
+	 * PlainTextDecoder is the most commonly used decoder which coverts characters 
+	 * into plain text with no formatting.
+     * @param preserveLineBreaks Specifies whether new line characters should 
+     * be inserted into the returned text at the end of each terminal line. 
 	 */
 	void writeSelectionToStream(TerminalCharacterDecoder* decoder , bool
                                 preserveLineBreaks = true);
@@ -528,9 +531,16 @@ public:
      */
     void resetDroppedLines();
 
+	/** 
+ 	 * Fills the buffer @p dest with @p count instances of the default (ie. blank)
+ 	 * Character style.
+ 	 */
+	static void fillWithDefaultChar(Character* dest, int count);
+
 private: 
 
-	//copies a line of text from the screen or history into a stream using a specified character decoder
+	//copies a line of text from the screen or history into a stream using a 
+	//specified character decoder
 	//line - the line number to copy, from 0 (the earliest line in the history) up to 
 	//		 hist->getLines() + lines - 1
 	//start - the first column on the line to copy
@@ -573,21 +583,10 @@ private:
 	// starting from 'startLine', where 0 is the first line in the history
 	void copyFromHistory(Character* dest, int startLine, int count) const;
 
-    /*
-       The state of the screen is more complex as one would
-       expect first. The screem does really do part of the
-       emulation providing state information in form of modes,
-       margins, tabulators, cursor etc.
-
-       Even more unexpected are variables to save and restore
-       parts of the state.
-    */
 
     // screen image ----------------
-
     int lines;
     int columns;
-
 
     typedef QVector<Character> ImageLine;      // [0..columns]
     ImageLine*          screenLines;    // [lines]
@@ -600,27 +599,22 @@ private:
     QVarLengthArray<LineProperty,64> lineProperties;    
 	
     // history buffer ---------------
-
     HistoryScroll *hist;
     
     // cursor location
-
     int cuX;
     int cuY;
 
     // cursor color and rendition info
-
     CharacterColor cu_fg;      // foreground
     CharacterColor cu_bg;      // background
     quint8 cu_re;      // rendition
 
     // margins ----------------
-
     int tmargin;      // top margin
     int bmargin;      // bottom margin
 
     // states ----------------
-
     ScreenParm currParm;
 
     // ----------------------------
@@ -628,7 +622,6 @@ private:
     bool* tabstops;
 
     // selection -------------------
-
     int sel_begin; // The first location selected.
     int sel_TL;    // TopLeft Location.
     int sel_BR;    // Bottom Right Location.
@@ -636,7 +629,6 @@ private:
     bool columnmode;  // Column selection mode
 
     // effective colors and rendition ------------
-
     CharacterColor ef_fg;      // These are derived from
     CharacterColor ef_bg;      // the cu_* variables above
     quint8 ef_re;      // to speed up operation
@@ -646,12 +638,10 @@ private:
     // 
 
     // cursor location
-
     int sa_cuX;
     int sa_cuY;
 
     // rendition info
-
     quint8 sa_cu_re;
     CharacterColor sa_cu_fg;
     CharacterColor sa_cu_bg;
@@ -660,7 +650,6 @@ private:
     int lastPos;
 
     // modes
-
     ScreenParm saveParm;
 
     static Character defaultChar;

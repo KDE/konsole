@@ -236,6 +236,7 @@ signals:
 
 private:
 	int endWindowLine() const;
+	void fillUnusedArea();
 
     Screen* _screen; // see setScreen() , screen()
 	Character* _windowBuffer;

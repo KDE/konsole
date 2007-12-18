@@ -72,17 +72,39 @@ Character* ScreenWindow::getImage()
  
 	_screen->getImage(_windowBuffer,size,
 					  _currentLine,endWindowLine());
-	_bufferNeedsUpdate = false;
 
+	// this window may look beyond the end of the screen, in which 
+	// case there will be an unused area which needs to be filled
+	// with blank characters
+	fillUnusedArea();
+
+	_bufferNeedsUpdate = false;
 	return _windowBuffer;
 }
 
+void ScreenWindow::fillUnusedArea()
+{
+	int screenEndLine = _screen->getHistLines() + _screen->getLines() - 1;
+	int windowEndLine = _currentLine + windowLines() - 1;
+
+	int unusedLines = windowEndLine - screenEndLine;
+	int charsToFill = unusedLines * windowColumns();
+
+	Screen::fillWithDefaultChar(_windowBuffer + _windowBufferSize - charsToFill,charsToFill); 
+}
+
+// return the index of the line at the end of this window, or if this window 
+// goes beyond the end of the screen, the index of the line at the end
+// of the screen.
+//
+// when passing a line number to a Screen method, the line number should
+// never be more than endWindowLine()
+//
 int ScreenWindow::endWindowLine() const
 {
 	return qMin(_currentLine + windowLines() - 1,
 				_screen->getHistLines() + _screen->getLines() - 1);
 }
-
 QVector<LineProperty> ScreenWindow::getLineProperties()
 {
     QVector<LineProperty> result = _screen->getLineProperties(_currentLine,endWindowLine());
@@ -112,7 +134,7 @@ void ScreenWindow::setSelectionStart( int column , int line , bool columnMode )
 {
 	#warning "FIXME: The columnMode parameter is handled correctly when visually selecting an area, but copy/select and paste produces the wrong results."
 
-    _screen->setSelectionStart( column , line + _currentLine  , columnMode);
+    _screen->setSelectionStart( column , qMin(line + _currentLine,endWindowLine())  , columnMode);
 	
 	_bufferNeedsUpdate = true;
     emit selectionChanged();
@@ -120,7 +142,7 @@ void ScreenWindow::setSelectionStart( int column , int line , bool columnMode )
 
 void ScreenWindow::setSelectionEnd( int column , int line )
 {
-    _screen->setSelectionEnd( column , line + _currentLine );
+    _screen->setSelectionEnd( column , qMin(line + _currentLine,endWindowLine()) );
 
 	_bufferNeedsUpdate = true;
     emit selectionChanged();
@@ -128,7 +150,7 @@ void ScreenWindow::setSelectionEnd( int column , int line )
 
 bool ScreenWindow::isSelected( int column , int line )
 {
-    return _screen->isSelected( column , line + _currentLine );
+    return _screen->isSelected( column , qMin(line + _currentLine,endWindowLine()) );
 }
 
 void ScreenWindow::clearSelection()
@@ -259,7 +281,7 @@ void ScreenWindow::notifyOutputChanged()
     if ( _trackOutput )
     { 
         _scrollCount -= _screen->scrolledLines();
-        _currentLine = _screen->getHistLines();
+        _currentLine = _screen->getHistLines() - (windowLines()-_screen->getLines());
     }
     else
     {

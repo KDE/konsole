@@ -1559,3 +1559,8 @@ void Screen::setLineProperty(LineProperty property , bool enable)
 		lineProperties[cuY] = (LineProperty)(lineProperties[cuY] & ~property);
 	}
 }
+void Screen::fillWithDefaultChar(Character* dest, int count)
+{
+	for (int i=0;i<count;i++)
+		dest[i] = defaultChar;
+}
