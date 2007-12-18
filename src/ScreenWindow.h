@@ -64,6 +64,7 @@ public:
      * between all views on a session.
      */
     ScreenWindow(QObject* parent = 0);
+	virtual ~ScreenWindow();
 
     /** Sets the screen which this window looks onto */
     void setScreen(Screen* screen);
@@ -74,13 +75,11 @@ public:
      * Returns the image of characters which are currently visible through this window
      * onto the screen.
      *
-     * getImage() creates a new buffer consisting of lines() * columns() characters and
-     * copies the characters from the appropriate part of the screen into the buffer.
-     * It is the caller's responsibility to free the buffer when they have finished using
-     * it using delete[] 
-     *
+     * The buffer is managed by the ScreenWindow instance and does not need to be
+     * deleted by the caller.
      */
     Character* getImage();
+
     /**
      * Returns the line attributes associated with the lines of characters which
      * are currently visible through this window
@@ -235,6 +234,9 @@ signals:
 
 private:
     Screen* _screen; // see setScreen() , screen()
+	Character* _windowBuffer;
+	int _windowBufferSize;
+	bool _bufferNeedsUpdate;
 
     int  _currentLine; // see scrollTo() , currentLine()
     bool _trackOutput; // see setTrackOutput() , trackOutput() 

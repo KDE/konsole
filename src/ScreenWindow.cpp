@@ -30,12 +30,18 @@ using namespace Konsole;
 
 ScreenWindow::ScreenWindow(QObject* parent)
     : QObject(parent)
+	, _windowBuffer(0)
+	, _windowBufferSize(0)
+	, _bufferNeedsUpdate(true)
     , _currentLine(0)
     , _trackOutput(true)
     , _scrollCount(0)
 {
 }
-
+ScreenWindow::~ScreenWindow()
+{
+	delete[] _windowBuffer;
+}
 void ScreenWindow::setScreen(Screen* screen)
 {
     Q_ASSERT( screen );
@@ -50,7 +56,24 @@ Screen* ScreenWindow::screen() const
 
 Character* ScreenWindow::getImage()
 {
-    return _screen->getCookedImage(_currentLine);
+	// reallocate internal buffer if the window size has changed
+	int size = windowLines() * windowColumns();
+	if (_windowBuffer == 0 || _windowBufferSize != size) 
+	{
+		delete[] _windowBuffer;
+		_windowBufferSize = size;
+		_windowBuffer = new Character[size];
+		_bufferNeedsUpdate = true;
+	}
+
+	 if (!_bufferNeedsUpdate)
+		return _windowBuffer;
+ 
+	_screen->getImage(_windowBuffer,size,
+					  _currentLine,_currentLine + windowLines() - 1);
+	_bufferNeedsUpdate = false;
+
+	return _windowBuffer;
 }
 
 QVector<LineProperty> ScreenWindow::getLineProperties()
@@ -75,11 +98,11 @@ void ScreenWindow::getSelectionEnd( int& column , int& line )
 }
 void ScreenWindow::setSelectionStart( int column , int line , bool columnMode )
 {
-    /* FIXME - I'm not sure what the columnmode parameter ( the last argument to setSelectionStart )
-     does, check it out and fix */
+	#warning "FIXME: The columnMode parameter is handled correctly when visually selecting an area, but copy/select and paste produces the wrong results."
 
     _screen->setSelectionStart( column , line + _currentLine  , columnMode);
-
+	
+	_bufferNeedsUpdate = true;
     emit selectionChanged();
 }
 
@@ -87,6 +110,7 @@ void ScreenWindow::setSelectionEnd( int column , int line )
 {
     _screen->setSelectionEnd( column , line + _currentLine );
 
+	_bufferNeedsUpdate = true;
     emit selectionChanged();
 }
 
@@ -171,6 +195,8 @@ void ScreenWindow::scrollTo( int line )
     // this can be reset by calling resetScrollCount()
     _scrollCount += delta;
 
+	_bufferNeedsUpdate = true;
+
     emit scrolled(_currentLine);
 }
 
@@ -232,6 +258,8 @@ void ScreenWindow::notifyOutputChanged()
         // not go beyond the bottom of the screen
         _currentLine = qMin( _currentLine , _screen->getHistLines() );
     }
+
+	_bufferNeedsUpdate = true;
 
     emit outputChanged(); 
 }

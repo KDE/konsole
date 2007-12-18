@@ -333,7 +333,7 @@ void Screen::restoreMode(int m)
   currParm.mode[m] = saveParm.mode[m];
 }
 
-bool Screen::getMode(int m)
+bool Screen::getMode(int m) const
 {
   return currParm.mode[m];
 }
@@ -460,9 +460,13 @@ void Screen::setDefaultMargins()
    into RE_BOLD and RE_INTENSIVE.
 */
 
-void Screen::reverseRendition(Character* p)
-{ CharacterColor f = p->foregroundColor; CharacterColor b = p->backgroundColor;
-  p->foregroundColor = b; p->backgroundColor = f; //p->r &= ~RE_TRANSPARENT;
+void Screen::reverseRendition(Character& p) const
+{ 
+	CharacterColor f = p.foregroundColor; 
+	CharacterColor b = p.backgroundColor;
+  	
+	p.foregroundColor = b; 
+	p.backgroundColor = f; //p->r &= ~RE_TRANSPARENT;
 }
 
 void Screen::effectiveRendition()
@@ -505,71 +509,91 @@ void Screen::effectiveRendition()
 
 */
 
-Character* Screen::getCookedImage( int startLine )
+void Screen::copyFromHistory(Character* dest, int startLine, int count) const
 {
-  Q_ASSERT( startLine <= hist->getLines() );
+  Q_ASSERT( startLine >= 0 && count > 0 && startLine + count <= hist->getLines() );
 
-  int x,y;
-  Character* merged = new Character[lines*columns+1];
-  merged[lines*columns] = defaultChar;
-
-  for (y = 0; (y < lines) && (y < (hist->getLines()-startLine)); y++)
+  for (int line = startLine; line < startLine + count; line++) 
   {
-    int len = qMin(columns,hist->getLineLen(y+startLine));
-    int yp  = y*columns;
+    const int length = qMin(columns,hist->getLineLen(line));
+    const int destLineOffset  = (line-startLine)*columns;
 
-    hist->getCells(y+startLine,0,len,merged+yp);
-    for (x = len; x < columns; x++) merged[yp+x] = defaultChar;
-    if (sel_begin !=-1)
-    for (x = 0; x < columns; x++)
-      {
-#ifdef REVERSE_WRAPPED_LINES
-        if (hist->isLINE_WRAPPED(y+startLine))
-          reverseRendition(&merged[p]);
-#endif
-        if (isSelected(x,y+startLine)) {
-          int p=x + yp;
-          reverseRendition(&merged[p]); // for selection
-    }
+    hist->getCells(line,0,length,dest + destLineOffset);
+
+    for (int column = length; column < columns; column++) 
+		dest[destLineOffset+column] = defaultChar;
+    
+	// invert selected text
+	if (sel_begin !=-1)
+	{
+    	for (int column = 0; column < columns; column++)
+    	{
+        	if (isSelected(column,line)) 
+			{
+          		reverseRendition(dest[destLineOffset + column]); 
+    		}
+  		}
+	}
   }
-  }
-  if (lines >= hist->getLines()-startLine)
-  {
-    for (y = (hist->getLines()-startLine); y < lines ; y++)
+}
+
+void Screen::copyFromScreen(Character* dest , int startLine , int count) const
+{
+	Q_ASSERT( startLine >= 0 && count > 0 && startLine + count <= lines );
+
+    for (int line = startLine; line < (startLine+count) ; line++)
     {
-       int yp  = y*columns;
-       int yr =  (y-hist->getLines()+startLine)*columns;
-       for (x = 0; x < columns; x++)
-       { int p = x + yp; int r = x + yr;
+       int srcLineStartIndex  = line*columns;
+	   int destLineStartIndex = (line-startLine)*columns;
 
-         // sanity checks
-         assert( p >= 0 );
-         assert( p < (lines*columns+1) );
+       for (int column = 0; column < columns; column++)
+       { 
+		 int srcIndex = srcLineStartIndex + column; 
+		 int destIndex = destLineStartIndex + column;
 
-         merged[p] = screenLines[r/columns].value(r%columns,defaultChar);
+         dest[destIndex] = screenLines[srcIndex/columns].value(srcIndex%columns,defaultChar);
 
-#ifdef REVERSE_WRAPPED_LINES
-         if (lineProperties[y- hist->getLines() +startLine] & LINE_WRAPPED)
-           reverseRendition(&merged[p]);
-#endif
-         if (sel_begin != -1 && isSelected(x,y+startLine))
-           reverseRendition(&merged[p]); // for selection
+	     // invert selected text
+         if (sel_begin != -1 && isSelected(column,line + hist->getLines()))
+           reverseRendition(dest[destIndex]); 
        }
 
     }
-  }
-  // evtl. inverse display
+}
+
+void Screen::getImage( Character* dest, int size, int startLine, int endLine ) const
+{
+  Q_ASSERT( startLine >= 0 ); 
+  Q_ASSERT( endLine >= startLine && endLine < hist->getLines() + lines );
+
+  const int mergedLines = endLine - startLine + 1;
+
+  Q_ASSERT( size >= mergedLines * columns ); 
+
+  const int linesInHistoryBuffer = qBound(0,hist->getLines()-startLine,mergedLines);
+  const int linesInScreenBuffer = mergedLines - linesInHistoryBuffer;
+
+  // copy lines from history buffer
+  if (linesInHistoryBuffer > 0)
+  	copyFromHistory(dest,startLine,linesInHistoryBuffer); 
+
+  // copy lines from screen buffer
+  if (linesInScreenBuffer > 0)
+  	copyFromScreen(dest + linesInHistoryBuffer*columns,
+				   startLine + linesInHistoryBuffer - hist->getLines(),
+				   linesInScreenBuffer);
+ 
+  // invert display when in screen mode
   if (getMode(MODE_Screen))
   {
-    for (int i = 0; i < lines*columns; i++)
-      reverseRendition(&merged[i]); // for reverse display
+    for (int i = 0; i < mergedLines*columns; i++)
+      reverseRendition(dest[i]); // for reverse display
   }
-//  if (getMode(MODE_Cursor) && (cuY+(hist->getLines()-startLine) < lines)) // cursor visible
 
-  int loc_ = loc(cuX, cuY+hist->getLines()-startLine);
-  if(getMode(MODE_Cursor) && loc_ < columns*lines)
-    merged[loc(cuX,cuY+(hist->getLines()-startLine))].rendition|=RE_CURSOR;
-  return merged;
+  // mark the character at the current cursor position
+  int cursorIndex = loc(cuX, cuY + linesInHistoryBuffer);
+  if(getMode(MODE_Cursor) && cursorIndex < columns*mergedLines)
+    dest[cursorIndex].rendition |= RE_CURSOR;
 }
 
 QVector<LineProperty> Screen::getCookedLineProperties( int startLine )
@@ -1228,7 +1252,7 @@ void Screen::setSelectionEnd( const int x, const int y)
   }
 }
 
-bool Screen::isSelected( const int x,const int y)
+bool Screen::isSelected( const int x,const int y) const
 {
   if (columnmode) {
     int sel_Left,sel_Right;

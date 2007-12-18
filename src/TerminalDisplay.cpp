@@ -951,9 +951,6 @@ void TerminalDisplay::updateImage()
     memcpy((void*)currentLine,(const void*)newLine,columnsToUpdate*sizeof(Character));
   }
 
-  // free the image from the screen window
-  delete[] newimg;
-
   // if the new _image is smaller than the previous _image, then ensure that the area
   // outside the new _image is cleared 
   if ( linesToUpdate < _usedLines )

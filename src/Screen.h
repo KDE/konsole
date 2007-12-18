@@ -61,7 +61,7 @@ class TerminalCharacterDecoder;
     rendered by the display widget ( TerminalDisplay ).  Some types of emulation
     may have more than one screen image. 
 
-    getCookedImage() is used to retrieve the currently visible image
+    getImage() is used to retrieve the currently visible image
     which is then used by the display widget to draw the output from the
     terminal. 
 
@@ -72,7 +72,7 @@ class TerminalCharacterDecoder;
 
     The screen image has a selection associated with it, specified using 
     setSelectionStart() and setSelectionEnd().  The selected text can be retrieved
-    using selectedText().  When getCookedImage() is used to retrieve the the visible image,
+    using selectedText().  When getImage() is used to retrieve the the visible image,
     characters which are part of the selection have their colours inverted.   
 */
 class Screen
@@ -226,7 +226,7 @@ public:
     /** Restores the state of a screen @p mode saved by calling saveMode() */
     void restoreMode (int mode);
     /** Returns whether the specified screen @p mode is enabled or not .*/
-    bool getMode     (int mode);
+    bool getMode     (int mode) const;
    
     /** 
      * Saves the current position and appearence (text color and style) of the cursor. 
@@ -360,8 +360,13 @@ public:
      * Returns the current screen image.  
      * The result is an array of Characters of size [getLines()][getColumns()] which
      * must be freed by the caller after use.
+     *
+     * @param dest Buffer to copy the characters into
+     * @param size Size of @p dest in Characters
+     * @param startLine Index of first line to copy
+     * @param endLine Index of last line to copy
      */
-    Character*  	  getCookedImage( int line );
+    void getImage( Character* dest , int size , int startLine , int endLine ) const;
 
     /** 
      * Returns the additional attributes associated with lines in the image.
@@ -426,7 +431,7 @@ public:
     void setBusySelecting(bool busy) { sel_busy = busy; }
 
     /** Returns true if the character at (@p column, @p line) is part of the current selection. */ 
-    bool isSelected(const int column,const int line);
+    bool isSelected(const int column,const int line) const;
 
     /** 
      * Convenience method.  Returns the currently selected text. 
@@ -557,9 +562,16 @@ private:
     void initTabStops();
 
     void effectiveRendition();
-    void reverseRendition(Character* p);
+    void reverseRendition(Character& p) const;
 
     bool isSelectionValid() const;
+
+	// copies 'count' lines from the screen buffer into 'dest',
+	// starting from 'startLine', where 0 is the first line in the screen buffer
+	void copyFromScreen(Character* dest, int startLine, int count) const;
+	// copies 'count' lines from the history buffer into 'dest',
+	// starting from 'startLine', where 0 is the first line in the history
+	void copyFromHistory(Character* dest, int startLine, int count) const;
 
     /*
        The state of the screen is more complex as one would
