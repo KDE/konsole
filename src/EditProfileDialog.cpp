@@ -670,7 +670,9 @@ void EditProfileDialog::colorSchemeSelected()
         const ColorScheme* colors = model->data(selected.first(),Qt::UserRole+1).value<const ColorScheme*>();
 
         qDebug() << "Setting temp profile color to" << colors->name();
-        _tempProfile->setProperty(Profile::ColorScheme,colors->name());
+        
+		previewColorScheme(selected.first());
+		_tempProfile->setProperty(Profile::ColorScheme,colors->name());
 
         updateTransparencyWarning();
     }
