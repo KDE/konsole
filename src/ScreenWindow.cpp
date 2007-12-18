@@ -33,6 +33,7 @@ ScreenWindow::ScreenWindow(QObject* parent)
 	, _windowBuffer(0)
 	, _windowBufferSize(0)
 	, _bufferNeedsUpdate(true)
+	, _windowLines(1)
     , _currentLine(0)
     , _trackOutput(true)
     , _scrollCount(0)
@@ -70,15 +71,26 @@ Character* ScreenWindow::getImage()
 		return _windowBuffer;
  
 	_screen->getImage(_windowBuffer,size,
-					  _currentLine,_currentLine + windowLines() - 1);
+					  _currentLine,endWindowLine());
 	_bufferNeedsUpdate = false;
 
 	return _windowBuffer;
 }
 
+int ScreenWindow::endWindowLine() const
+{
+	return qMin(_currentLine + windowLines() - 1,
+				_screen->getHistLines() + _screen->getLines() - 1);
+}
+
 QVector<LineProperty> ScreenWindow::getLineProperties()
 {
-    return _screen->getLineProperties(_currentLine,_currentLine+windowLines()-1);
+    QVector<LineProperty> result = _screen->getLineProperties(_currentLine,endWindowLine());
+	
+	if (result.count() != windowLines())
+		result.resize(windowLines());
+
+	return result;
 }
 
 QString ScreenWindow::selectedText( bool preserveLineBreaks ) const
@@ -126,9 +138,14 @@ void ScreenWindow::clearSelection()
     emit selectionChanged();
 }
 
+void ScreenWindow::setWindowLines(int lines)
+{
+	Q_ASSERT(lines > 0);
+	_windowLines = lines;
+}
 int ScreenWindow::windowLines() const
 {
-    return _screen->getLines();
+	return _windowLines;		
 }
 
 int ScreenWindow::windowColumns() const

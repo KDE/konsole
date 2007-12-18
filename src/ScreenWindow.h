@@ -140,6 +140,8 @@ public:
      */
     void clearSelection();
 
+	/** Sets the number of lines in the window */
+	void setWindowLines(int lines);
     /** Returns the number of lines in the window */
     int windowLines() const;
     /** Returns the number of columns in the window */
@@ -233,11 +235,14 @@ signals:
     void selectionChanged();
 
 private:
+	int endWindowLine() const;
+
     Screen* _screen; // see setScreen() , screen()
 	Character* _windowBuffer;
 	int _windowBufferSize;
 	bool _bufferNeedsUpdate;
 
+	int  _windowLines;
     int  _currentLine; // see scrollTo() , currentLine()
     bool _trackOutput; // see setTrackOutput() , trackOutput() 
     int  _scrollCount; // count of lines which the window has been scrolled by since

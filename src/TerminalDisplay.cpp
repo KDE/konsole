@@ -111,6 +111,7 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
 #warning "The order here is not specified - does it matter whether updateImage or updateLineProperties comes first?"
         connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateLineProperties()) );
         connect( _screenWindow , SIGNAL(outputChanged()) , this , SLOT(updateImage()) );
+		window->setWindowLines(_lines);
     }
 }
 
@@ -1379,6 +1380,9 @@ void TerminalDisplay::updateImageSize()
     }
     delete[] oldimg;
   }
+
+  if (_screenWindow)
+  	_screenWindow->setWindowLines(_lines);
 
   _resizing = (oldlin!=_lines) || (oldcol!=_columns);
 
