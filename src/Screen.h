@@ -373,7 +373,7 @@ public:
      * The most important attribute is LINE_WRAPPED which specifies that the line is wrapped,
      * other attributes control the size of characters in the line.
      */
-    QVector<LineProperty> getCookedLineProperties( int line );
+    QVector<LineProperty> getLineProperties( int startLine , int endLine ) const;
 	
 
     /** Return the number of lines. */

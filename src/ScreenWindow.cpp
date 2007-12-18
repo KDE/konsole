@@ -78,7 +78,7 @@ Character* ScreenWindow::getImage()
 
 QVector<LineProperty> ScreenWindow::getLineProperties()
 {
-    return _screen->getCookedLineProperties(_currentLine);
+    return _screen->getLineProperties(_currentLine,_currentLine+windowLines()-1);
 }
 
 QString ScreenWindow::selectedText( bool preserveLineBreaks ) const

@@ -596,30 +596,36 @@ void Screen::getImage( Character* dest, int size, int startLine, int endLine ) c
     dest[cursorIndex].rendition |= RE_CURSOR;
 }
 
-QVector<LineProperty> Screen::getCookedLineProperties( int startLine )
+QVector<LineProperty> Screen::getLineProperties( int startLine , int endLine ) const
 {
-  Q_ASSERT( startLine <= hist->getLines() );
+  Q_ASSERT( startLine >= 0 ); 
+  Q_ASSERT( endLine >= startLine && endLine < hist->getLines() + lines );
 
-  QVector<LineProperty> result(lines);
+	const int mergedLines = endLine-startLine+1;
+	const int linesInHistory = qBound(0,hist->getLines()-startLine,mergedLines);
+  const int linesInScreen = mergedLines - linesInHistory;
 
-  // properties for lines in history
-  for (int y = 0; (y < lines) && (y < (hist->getLines()-startLine)); y++)
+  QVector<LineProperty> result(mergedLines);
+  int index = 0;
+
+  // copy properties for lines in history
+  for (int line = startLine; line < startLine + linesInHistory; line++) 
   {
-	//TODO Support for line properties other than wrapped lines
-    //result[y]=hist->isLINE_WRAPPED(y+viewHistoryCursor);
-  
-	  if (hist->isWrappedLine(y+startLine))
+		//TODO Support for line properties other than wrapped lines
+	  if (hist->isWrappedLine(line))
 	  {
-	  	result[y] = (LineProperty)(result[y] | LINE_WRAPPED);
+	  	result[index] = (LineProperty)(result[index] | LINE_WRAPPED);
 	  }
+    index++;
   }
   
-  // properties for lines in screen buffer
-  if (lines >= hist->getLines()-startLine)
-  {
-    for (int y = (hist->getLines()-startLine); y < lines ; y++)
-      result[y]=lineProperties[y - hist->getLines() + startLine];
-  }
+  // copy properties for lines in screen buffer
+  const int firstScreenLine = startLine + linesInHistory - hist->getLines();
+  for (int line = firstScreenLine; line < firstScreenLine+linesInScreen; line++)
+	{
+    result[index]=lineProperties[line];
+  	index++;
+	}
 
   return result;
 }
