@@ -1001,6 +1001,9 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
 
         if ( entry.command() != KeyboardTranslator::NoCommand )
         {
+			if (entry.command() & KeyboardTranslator::EraseCommand)
+				textToSend += getErase();
+
             // TODO command handling
         }
         else if ( !entry.text().isEmpty() ) 
