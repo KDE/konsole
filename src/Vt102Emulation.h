@@ -174,7 +174,6 @@ private:
 
   DECpar _currParm;
   DECpar _saveParm;
-  bool _holdScreen;
 
   //hash table and timer for buffering calls to the session instance 
   //to update the name of the session

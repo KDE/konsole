@@ -922,33 +922,6 @@ void Vt102Emulation::sendMouseEvent( int cb, int cx, int cy , int eventType )
 
 // Keyboard Handling ------------------------------------------------------- --
 
-
-void Vt102Emulation::scrollLock(const bool lock)
-{
-  if (lock)
-  {
-    _holdScreen = true;
-    emit lockPtyRequest(true);
-  }
-  else
-  {
-    _holdScreen = false;
-    emit lockPtyRequest(false);
-  }
-#if defined(HAVE_XKB)
-  if (_holdScreen)
-    scrolllock_set_on();
-  else
-    scrolllock_set_off();
-#endif
-}
-
-void Vt102Emulation::onScrollLock()
-{
-  bool switchlock = !_holdScreen;
-  scrollLock(switchlock);
-}
-
 #define encodeMode(M,B) BITS(B,getMode(M))
 #define encodeStat(M,B) BITS(B,((ev->modifiers() & (M)) == (M)))
 
@@ -1028,68 +1001,6 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
         receiveData( translatorError.toAscii().constData() , translatorError.count() );
     }
 }
-
-#if 0
-void Vt102Emulation::sendKeyEvent( QKeyEvent* ev )
-{
-//printf("State/Key: 0x%04x 0x%04x (%d,%d)\n",ev->state(),ev->key(),ev->text().length(),ev->text().length()?ev->text().ascii()[0]:0);
-
-  // lookup in keyboard translation table ...
-  int cmd = CMD_none; 
-  QByteArray txt; 
-  bool metaspecified;
-  if (_keyTranslator->findEntry(ev->key(), encodeMode(MODE_NewLine  , BITS_NewLine   ) + // OLD,
-                                     encodeMode(MODE_Ansi     , BITS_Ansi      ) + // OBSOLETE,
-                                     encodeMode(MODE_AppCuKeys, BITS_AppCuKeys ) + // VT100 stuff
-                                     encodeMode(MODE_AppScreen, BITS_AppScreen ) + // VT100 stuff
-                                     encodeStat(Qt::ControlModifier , BITS_Control   ) +
-                                     encodeStat(Qt::ShiftModifier   , BITS_Shift     ) +
-                                     encodeStat(Qt::AltModifier     , BITS_Alt       ),
-                          &cmd, txt, &metaspecified ))
-//printf("cmd: %d, %s, %d\n",cmd,txt,len);
-  
-  switch(cmd) // ... and execute if found.
-  {
-    #warning "Add functionality elsewhere to handle scrolling of views when up/down/page-up/page-down keys are pressed."
-    //case CMD_scrollPageUp   : scrollViewPages(-1); return;
-    //case CMD_scrollPageDown : scrollViewPages(+1); return;
-    //case CMD_scrollLineUp   : scrollView(-1             ); return;
-    //case CMD_scrollLineDown : scrollView(+1             ); return;
-    case CMD_scrollLock     : onScrollLock(                ); return;
-  }
-  if (_holdScreen)
-  {
-    switch(ev->key())
-    {
-    //case Qt::Key_Down : scrollView(+1); return;
-    //case Qt::Key_Up : scrollView(-1); return;
-    //case Qt::Key_PageUp : scrollViewPages(-1); return;
-    //case Qt::Key_PageDown : scrollViewPages(+1); return;
-    }
-  }
-  
-  if (cmd==CMD_send) {
-    if ((ev->modifiers() & Qt::AltModifier) && !metaspecified ) sendString("\033");
-    emit sendData(txt.constData(), txt.length());
-    return;
-  }
-
-  // fall back handling
-  if (!ev->text().isEmpty())
-  {
-    if (ev->modifiers() & Qt::AltModifier) sendString("\033"); // ESC, this is the ALT prefix
-    QByteArray s = _codec->fromUnicode(ev->text());     // encode for application
-    // FIXME: In Qt 2, QKeyEvent::text() would return "\003" for Ctrl-C etc.
-    //        while in Qt 3 it returns the actual key ("c" or "C") which caused
-    //        the ControlButton to be ignored. This hack seems to work for
-    //        latin1 locales at least. Please anyone find a clean solution (malte)
-    if (ev->modifiers() & Qt::ControlModifier)
-      s.fill(ev->text().toAscii()[0], 1);
-    emit sendData(s.data(),s.length());              // we may well have s.length() > 1 
-    return;
-  }
-}
-#endif
 
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
@@ -1228,7 +1139,6 @@ void Vt102Emulation::resetModes()
   resetMode(MODE_AppCuKeys); saveMode(MODE_AppCuKeys);
   resetMode(MODE_NewLine  );
     setMode(MODE_Ansi     );
-  _holdScreen = false;
 }
 
 void Vt102Emulation::setMode(int m)
@@ -1294,45 +1204,6 @@ bool Vt102Emulation::getMode(int m)
 {
   return _currParm.mode[m];
 }
-
-#warning "Code to handle signal/slot connections has already been moved elsewhere, but mouse mode refreshing part below has not yet been looked at.  Neither has the part inside the HAVE_XKB define which calls scrolllock_set_xyz."
-/*void Vt102Emulation::setConnect(bool c)
-{
-  Emulation::setConnect(c);
-
-  QListIterator< TerminalDisplay* > viewIter(_views);
-  
-  while (viewIter.hasNext())
-  {
-    QObject::disconnect(viewIter.next(), SIGNAL(sendStringToEmu(const char*)),
-                        this, SLOT(sendString(const char*)));
-  }
-  if (c)
-  { // refresh mouse mode
-    int mouseModes[4] = {MODE_Mouse1000,MODE_Mouse1001,MODE_Mouse1002,MODE_Mouse1003};
-    for (int mode = 0 ; mode < 4 ; mode++)
-    {
-    	if (getMode(mouseModes[mode]))
-      		setMode(mouseModes[mode]);
-    	else
-      		resetMode(mouseModes[mode]);
-    }
-#if defined(HAVE_XKB)
-    if (_holdScreen)
-      scrolllock_set_on();
-    else
-      scrolllock_set_off();
-#endif
-
-    QListIterator< TerminalDisplay* > viewIter2(_views);
-
-    while (viewIter2.hasNext())
-    {
-        QObject::connect(viewIter2.next(), SIGNAL(sendStringToEmu(const char*)),
-                         this, SLOT(sendString(const char*)));
-    }
-  }
-}*/
 
 char Vt102Emulation::getErase() const
 {
