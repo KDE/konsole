@@ -106,8 +106,6 @@ Part::Part(QWidget* parentWidget , QObject* parent)
 }
 Part::~Part()
 {
-    // disable creation of new sessions when the last one is closed
-    disconnect( _viewManager , SIGNAL(empty()) , this , SLOT(restart()) );
 }
 bool Part::openFile()
 {
