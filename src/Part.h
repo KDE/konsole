@@ -78,8 +78,7 @@ private slots:
     Session* createSession(const QString& key);
     void activeViewChanged(SessionController* controller);
 
-    // called when the last session is closed to ensure there is always at least one active view
-    void restart();
+    void terminalExited();
     void newTab();
 
 private:

@@ -87,7 +87,7 @@ Part::Part(QWidget* parentWidget , QObject* parent)
 
     connect( _viewManager , SIGNAL(activeViewChanged(SessionController*)) , this ,
            SLOT(activeViewChanged(SessionController*)) );
-    connect( _viewManager , SIGNAL(empty()) , this , SLOT(restart()) );
+    connect( _viewManager , SIGNAL(empty()) , this , SLOT(terminalExited()) );
     connect( _viewManager , SIGNAL(newViewRequest()) , this , SLOT(newTab()) );
 
     _viewManager->widget()->setParent(parentWidget);
@@ -113,10 +113,9 @@ bool Part::openFile()
 {
     return false;
 }
-void Part::restart()
+void Part::terminalExited()
 {
-    createSession( QString() );
-    showShellInDir( QString() );
+    deleteLater();
 }
 void Part::newTab()
 {
