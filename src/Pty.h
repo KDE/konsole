@@ -115,6 +115,9 @@ Q_OBJECT
     /** TODO Document me */
     void setErase(char erase);
 
+	/** */
+	char erase() const;
+
     /**
      * Returns the process id of the teletype's current foreground
      * process.  This is the process which is currently reading

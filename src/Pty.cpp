@@ -107,6 +107,19 @@ void Pty::setErase(char erase)
   }
 }
 
+char Pty::erase() const
+{
+	if (pty()->masterFd() >= 0)
+	{
+		qDebug() << "Getting erase char";
+		struct ::termios ttyAttributes;
+		pty()->tcGetAttr(&ttyAttributes);
+		return ttyAttributes.c_cc[VERASE];
+	}
+
+	return _eraseChar;
+}
+
 void Pty::addEnvironmentVariables(const QStringList& environment)
 {
     QListIterator<QString> iter(environment);
@@ -185,7 +198,9 @@ int Pty::start(const QString& program,
   else
     ttmode.c_iflag |= IUTF8;
 #endif
-  ttmode.c_cc[VERASE] = _eraseChar;
+
+  if (_eraseChar != 0)
+  	ttmode.c_cc[VERASE] = _eraseChar;
   
   if (!pty()->tcSetAttr(&ttmode))
     qWarning("Unable to set terminal attributes.");
