@@ -268,19 +268,8 @@ void KeyboardTranslatorReader::readNext()
             else if ( tokens[2].type == Token::Command )
             {
                 // identify command
-                if ( tokens[2].text.compare("scrollpageup",Qt::CaseInsensitive) == 0 )
-                    command = KeyboardTranslator::ScrollPageUpCommand;
-                else if ( tokens[2].text.compare("scrollpagedown",Qt::CaseInsensitive) == 0 )
-                    command = KeyboardTranslator::ScrollPageDownCommand;
-                else if ( tokens[2].text.compare("scrolllineup",Qt::CaseInsensitive) == 0 )
-                    command = KeyboardTranslator::ScrollLineUpCommand;
-                else if ( tokens[2].text.compare("scrolllinedown",Qt::CaseInsensitive) == 0 )
-                    command = KeyboardTranslator::ScrollLineDownCommand;
-                else if ( tokens[2].text.compare("scrolllock",Qt::CaseInsensitive) == 0 )
-                    command = KeyboardTranslator::ScrollLockCommand;
-                else
-                    qDebug() << "Command not understood:" << tokens[2].text;
-
+				if (!parseAsCommand(tokens[2].text,command))
+					qWarning() << "Command" << tokens[2].text << "not understood.";
             }
 
             KeyboardTranslator::Entry newEntry;
@@ -301,6 +290,26 @@ void KeyboardTranslatorReader::readNext()
     } 
 
     _hasNext = false;
+}
+
+bool KeyboardTranslatorReader::parseAsCommand(const QString& text,KeyboardTranslator::Command& command) 
+{
+	if ( text.compare("erase",Qt::CaseInsensitive) == 0 )
+		command = KeyboardTranslator::EraseCommand;
+    else if ( text.compare("scrollpageup",Qt::CaseInsensitive) == 0 )
+        command = KeyboardTranslator::ScrollPageUpCommand;
+    else if ( text.compare("scrollpagedown",Qt::CaseInsensitive) == 0 )
+        command = KeyboardTranslator::ScrollPageDownCommand;
+    else if ( text.compare("scrolllineup",Qt::CaseInsensitive) == 0 )
+        command = KeyboardTranslator::ScrollLineUpCommand;
+    else if ( text.compare("scrolllinedown",Qt::CaseInsensitive) == 0 )
+        command = KeyboardTranslator::ScrollLineDownCommand;
+    else if ( text.compare("scrolllock",Qt::CaseInsensitive) == 0 )
+        command = KeyboardTranslator::ScrollLockCommand;
+    else
+    	return false;
+
+	return true;
 }
 
 bool KeyboardTranslatorReader::decodeSequence(const QString& text,
@@ -443,14 +452,18 @@ bool KeyboardTranslatorReader::hasNextEntry()
 KeyboardTranslator::Entry KeyboardTranslatorReader::createEntry( const QString& condition , 
                                                                  const QString& result )
 {
-    // TODO - Handle case where the result is a command, eg "ScrollLineUp" or "ScrollPageDown" and 
-    // should therefore not be surrounded by quotes
-
     QString entryString("keyboard \"temporary\"\nkey ");
     entryString.append(condition);
-    entryString.append(" : \"");
-    entryString.append(result);
-    entryString.append('\"');
+    entryString.append(" : ");
+
+	// if 'result' is the name of a command then the entry result will be that command,
+	// otherwise the result will be treated as a string to echo when the key sequence
+	// specified by 'condition' is pressed
+	KeyboardTranslator::Command command;
+	if (parseAsCommand(result,command))
+    	entryString.append(result);
+	else
+		entryString.append('\"' + result + '\"');
 
     QByteArray array = entryString.toUtf8();
 
@@ -736,6 +749,8 @@ QString KeyboardTranslator::Entry::resultToString(bool expandWildCards,Qt::Keybo
 {
     if ( !_text.isEmpty() )
         return escapedText(expandWildCards,modifiers);
+	else if ( _command == EraseCommand )
+		return "Erase";
     else if ( _command == ScrollPageUpCommand )
         return "ScrollPageUp";
     else if ( _command == ScrollPageDownCommand )
