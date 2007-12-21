@@ -82,6 +82,7 @@ Comment[fa]=منتظر پیامهای کاربران محلی ارسال‌شد�
 Comment[fi]=Seuraa viestejä, joita paikalliset käyttäjät lähettävät write(1) tai wall(1) -komennoilla
 Comment[fr]=Afficher les messages écrits par les autres utilisateurs locaux à l'aide de la commande « write(1) » ou « wall(1) »
 Comment[fy]=Berjochten fan lokale brûkers ferstjoerd mei write(1) of wall(1) observearje
+Comment[ga]=Éist le teachtaireachtaí ó úsáideoirí logánta a seoladh chugat le write(1) nó wall(1)
 Comment[gl]=Buscar mensaxes de usuarios locais enviadas con write(1) ou wall(1)
 Comment[he]=מעקב אחר הודעות ממשתמשים מקומיים שנשלחו באמצעות write(1)‎ או wall(1)‎
 Comment[hi]=स्थानीय उपयोक्ताओं द्वारा राइट(1) या वाल(1) के जरिए भेजे गए संदेशों के लिए देखें
