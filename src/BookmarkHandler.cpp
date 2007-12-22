@@ -33,8 +33,6 @@
 
 #include <KBookmarkMenu>
 #include <KDebug>
-#include <KIO/Job>
-#include <KIO/NetAccess>
 #include <KMenu>
 #include <KStandardDirs>
 

@@ -21,7 +21,6 @@
 #include "ViewProperties.h"
 
 // Qt
-#include <QtDebug>
 
 using namespace Konsole;
 

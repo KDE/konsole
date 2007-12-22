@@ -26,10 +26,8 @@
 // KDE
 #include <KAction>
 #include <KActionCollection>
-#include <KMenuBar>
 #include <KDebug>
 #include <KLocale>
-#include <KXMLGUIFactory>
 #include <kdeversion.h>
 
 // Konsole
