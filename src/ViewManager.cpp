@@ -658,6 +658,7 @@ void ViewManager::applyProfile(TerminalDisplay* view , const QString& profileKey
     view->setOpacity(colorScheme->opacity());
   
     // load font 
+    view->setAntialias(info->property(Profile::AntiAliasFonts).value<bool>());
     view->setVTFont(info->font());
 
     // set scroll-bar position

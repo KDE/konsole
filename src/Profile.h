@@ -175,7 +175,10 @@ public:
         TabBarPosition,
 
         /** (String) Default text codec */
-        DefaultEncoding
+        DefaultEncoding,
+
+        /** (bool) Whether fonts should be aliased or not */
+        AntiAliasFonts
     };
 
     /** 

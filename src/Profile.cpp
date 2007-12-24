@@ -88,6 +88,7 @@ const Profile::PropertyNamePair Profile::DefaultPropertyNames[] =
     , { WordCharacters , "WordCharacters" }
     , { TabBarPosition , "TabBarPosition" }
     , { DefaultEncoding , "DefaultEncoding" }
+    , { AntiAliasFonts, "AntiAliasFonts" }
     , { (Property)0 , 0 }
 };
 
@@ -145,6 +146,7 @@ FallbackProfile::FallbackProfile()
     setProperty(CustomCursorColor,Qt::black);
 
     setProperty(DefaultEncoding,QString(QTextCodec::codecForLocale()->name()));
+    setProperty(AntiAliasFonts,true);
 
     // default taken from KDE 3
     setProperty(WordCharacters,":@-./_~?&=%+#");
@@ -302,6 +304,7 @@ bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile* profil
 
     writeStandardElement( appearance , profile , Profile::ColorScheme );
     writeStandardElement( appearance , profile , Profile::Font );
+    writeStandardElement( appearance , profile , Profile::AntiAliasFonts );
    
     // Scrolling
     KConfigGroup scrolling = config.group("Scrolling");
@@ -384,6 +387,7 @@ bool KDE4ProfileReader::readProfile(const QString& path , Profile* profile , QSt
 
     readStandardElement<QString>(appearance,profile,Profile::ColorScheme);
     readStandardElement<QFont>(appearance,profile,Profile::Font);
+    readStandardElement<bool>(appearance,profile,Profile::AntiAliasFonts);
 
     // scrolling
     KConfigGroup scrolling = config.group("Scrolling");
