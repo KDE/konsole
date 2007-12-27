@@ -281,7 +281,7 @@ void ScreenWindow::notifyOutputChanged()
     if ( _trackOutput )
     { 
         _scrollCount -= _screen->scrolledLines();
-        _currentLine = _screen->getHistLines() - (windowLines()-_screen->getLines());
+        _currentLine = qMax(0,_screen->getHistLines() - (windowLines()-_screen->getLines()));
     }
     else
     {
