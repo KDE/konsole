@@ -454,9 +454,13 @@ void SessionController::setupActions()
     connect( action , SIGNAL(triggered()) , this , SLOT(renameSession()) );
 
     // Send to All
-    toggleAction = new KToggleAction(i18n("Send Input to All"),this);
-    action = collection->addAction("send-input-to-all",toggleAction);
-    connect( action , SIGNAL(toggled(bool)) , this , SIGNAL(sendInputToAll(bool)) );
+    
+    //TODO - Complete the implementation of 'Send Input to All' for 
+    //	     a future KDE 4 release
+    //
+    //toggleAction = new KToggleAction(i18n("Send Input to All"),this);
+    //action = collection->addAction("send-input-to-all",toggleAction);
+    //connect( action , SIGNAL(toggled(bool)) , this , SIGNAL(sendInputToAll(bool)) );
 
     // Clear and Clear+Reset
     action = collection->addAction("clear");
