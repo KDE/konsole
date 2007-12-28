@@ -284,7 +284,11 @@ public:
 
     /** 
      * Returns true if this is a 'hidden' profile which should not be displayed
-     * in menus.
+     * in menus or saved to disk.
+     *
+     * This is used for the fallback profile, in case there are no profiles on 
+     * disk which can be loaded, or for overlay profiles created to handle
+     * command-line arguments which change profile properties.
      */
     bool isHidden() const;
 

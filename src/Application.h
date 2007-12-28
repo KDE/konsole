@@ -85,7 +85,7 @@ private:
     bool processHelpArgs(KCmdLineArgs* args);
     MainWindow* processWindowArgs(KCmdLineArgs* args);
     void processProfileSelectArgs(KCmdLineArgs* args,MainWindow* window);
-    void processProfileChangeArgs(KCmdLineArgs* args);
+    void processProfileChangeArgs(KCmdLineArgs* args,MainWindow* window);
 
     KCmdLineArgs*   _arguments;
     ProfileList*    _sessionList;

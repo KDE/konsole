@@ -125,7 +125,7 @@ int Application::newInstance()
    
     // process various command-line options which cause a property of the 
     // default profile to be changed 
-    processProfileChangeArgs(args);
+    processProfileChangeArgs(args,window);
 
     // create new session
     createSession( window->defaultProfile() , QString() , window->viewManager() );
@@ -180,9 +180,13 @@ bool Application::processHelpArgs(KCmdLineArgs* args)
     }
     return false;
 }
-void Application::processProfileChangeArgs(KCmdLineArgs* args) 
+void Application::processProfileChangeArgs(KCmdLineArgs* args,MainWindow* window) 
 {
-    Profile* const defaultProfile = SessionManager::instance()->defaultProfile();
+	SessionManager* const manager = SessionManager::instance();
+
+	Profile* defaultProfile = manager->profile(window->defaultProfile());
+    Profile* const newProfile = new Profile(defaultProfile);
+	newProfile->setHidden(true);
 
     // run a custom command
     if ( args->isSet("e") ) 
@@ -192,14 +196,14 @@ void Application::processProfileChangeArgs(KCmdLineArgs* args)
         for ( int i = 0 ; i < args->count() ; i++ )
            arguments << args->arg(i); 
    
-        defaultProfile->setProperty(Profile::Command,args->getOption("e"));
-        defaultProfile->setProperty(Profile::Arguments,arguments);
+        newProfile->setProperty(Profile::Command,args->getOption("e"));
+        newProfile->setProperty(Profile::Arguments,arguments);
     }
 
     // change the initial working directory
     if( args->isSet("workdir") )
     {
-        defaultProfile->setProperty(Profile::Directory,args->getOption("workdir"));
+        newProfile->setProperty(Profile::Directory,args->getOption("workdir"));
     }
 
     // temporary changes to profile options specified on the command line
@@ -211,9 +215,18 @@ void Application::processProfileChangeArgs(KCmdLineArgs* args)
         while ( iter.hasNext() )
         {
             iter.next();
-            defaultProfile->setProperty(iter.key(),iter.value());
+            newProfile->setProperty(iter.key(),iter.value());
         }        
     }
+
+    if (newProfile->isEmpty())
+	{
+		delete newProfile;
+	}
+	else
+	{
+		window->setDefaultProfile(SessionManager::instance()->addProfile(newProfile));
+	}	
 }
 
 void Application::startBackgroundMode(MainWindow* window)

@@ -343,8 +343,12 @@ void SessionManager::changeProfile(const QString& key ,
     // notify the world about the change
     emit profileChanged(key);
 
-    if ( persistant )
+	// save changes to disk, unless the profile is hidden, in which case
+	// it has no file on disk 
+    if ( persistant && !info->isHidden() )
+	{
         info->setProperty(Profile::Path,saveProfile(info));
+	}
 }
 void SessionManager::applyProfile(const QString& key , bool modifiedPropertiesOnly)
 {
