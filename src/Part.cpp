@@ -69,8 +69,6 @@ Part::Part(QWidget* parentWidget , QObject* parent)
 {
     setXMLFile("konsole/konsoleui.rc");
 
-    setupActions();
-
     // setup global managers
     if ( SessionManager::instance() == 0 )
         SessionManager::setInstance( new SessionManager() );
@@ -81,7 +79,7 @@ Part::Part(QWidget* parentWidget , QObject* parent)
 
     // create view widget
     _viewManager = new ViewManager(this,actionCollection());
-    _viewManager->setNavigationMethod( ViewManager::TabbedNavigation );
+    _viewManager->setNavigationMethod( ViewManager::NoNavigation );
 
     connect( _viewManager , SIGNAL(activeViewChanged(SessionController*)) , this ,
            SLOT(activeViewChanged(SessionController*)) );
@@ -117,16 +115,6 @@ void Part::newTab()
 {
     createSession( QString() );
     showShellInDir( QString() );
-}
-void Part::setupActions()
-{
-    KActionCollection* collection = actionCollection();
-
-    KAction* newTabAction = collection->addAction("new-tab");
-    newTabAction->setIcon( KIcon("utilities-terminal") );
-    newTabAction->setText( i18n("New &Tab") );
-    newTabAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_N) );
-    connect( newTabAction , SIGNAL(triggered()) , this , SLOT(newTab()) );
 }
 Session* Part::activeSession() const
 {

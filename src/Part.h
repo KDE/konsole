@@ -82,7 +82,6 @@ private slots:
     void newTab();
 
 private:
-    void setupActions();
     Session* activeSession() const;
 
 private:
