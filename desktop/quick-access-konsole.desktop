@@ -6,6 +6,7 @@ X-DocPath=konsole/index.html
 MimeType=application/x-konsole;
 Terminal=false
 X-KDE-StartupNotify=false
+Categories=Qt;KDE;System;TerminalEmulator;
 
 Name=Quick Access Terminal
 Name[ar]=طرفيّة الوصول السريع
