@@ -52,7 +52,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     close->setObjectName("close-button");
     close->setToolTip( i18n("Close the search bar") );
     close->setAutoRaise(true);
-    close->setIcon(KIcon("dialog-cancel"));
+    close->setIcon(KIcon("dialog-close"));
     connect( close , SIGNAL(clicked()) , this , SIGNAL(closeClicked()) );
 
     QLabel* findLabel = new QLabel(i18n("Find:"),this);
@@ -79,7 +79,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     findNext->setObjectName("find-next-button");
     findNext->setText(i18n("Next"));
     findNext->setAutoRaise(true);
-    findNext->setIcon( KIcon("edit-find-next") );
+    findNext->setIcon( KIcon("go-down-search") );
     findNext->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     findNext->setToolTip( i18n("Find the next match for the current search phrase") );
     connect( findNext , SIGNAL(clicked()) , this , SIGNAL(findNextClicked()) );
@@ -88,7 +88,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     findPrev->setObjectName("find-previous-button");
     findPrev->setText(i18n("Previous"));
     findPrev->setAutoRaise(true);
-    findPrev->setIcon( KIcon("edit-find-previous") );
+    findPrev->setIcon( KIcon("go-up-search") );
     findPrev->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     findPrev->setToolTip( i18n("Find the previous match for the current search phrase") );
     connect( findPrev , SIGNAL(clicked()) , this , SIGNAL(findPreviousClicked()) );

@@ -412,7 +412,7 @@ void SessionController::setupActions()
 
     // Close Session
     action = collection->addAction("close-session");
-    action->setIcon( KIcon("window-close") ); // FIXME: Not the best icon for this
+    action->setIcon( KIcon("tab-close") );
     action->setText( i18n("&Close Tab") );
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_W) );
     connect( action , SIGNAL(triggered()) , this , SLOT(closeSession()) );
@@ -420,7 +420,7 @@ void SessionController::setupActions()
     // Open Browser
     action = collection->addAction("open-browser");
     action->setText( i18n("Open Browser Here") );
-    action->setIcon( KIcon("folder-open") );
+    action->setIcon( KIcon("system-file-manager") );
     connect( action, SIGNAL(triggered()), this, SLOT(openBrowser()) );
 
     // Copy and Paste
@@ -461,6 +461,7 @@ void SessionController::setupActions()
     // Clear and Clear+Reset
     action = collection->addAction("clear");
     action->setText( i18n("C&lear Display") );
+    action->setIcon( KIcon("edit-clear") );
     connect( action , SIGNAL(triggered()) , this , SLOT(clear()) );
 
     action = collection->addAction("clear-and-reset");
@@ -507,14 +508,14 @@ void SessionController::setupActions()
     connect( action , SIGNAL(toggled(bool)) , this , SLOT(searchHistory(bool)) );
 
     _findNextAction = collection->addAction("find-next");
-    _findNextAction->setIcon( KIcon("edit-find-next") );
+    _findNextAction->setIcon( KIcon("go-down-search") );
     _findNextAction->setText( i18n("Find Next") );
     _findNextAction->setShortcut( QKeySequence(Qt::Key_F3) );
     _findNextAction->setEnabled(false);
     connect( _findNextAction , SIGNAL(triggered()) , this , SLOT(findNextInHistory()) );
 
     _findPreviousAction = collection->addAction("find-previous");
-    _findPreviousAction->setIcon( KIcon("edit-find-previous") );
+    _findPreviousAction->setIcon( KIcon("go-up-search") );
     _findPreviousAction->setText( i18n("Find Previous") );
     _findPreviousAction->setShortcut( QKeySequence(Qt::SHIFT + Qt::Key_F3) );
     _findPreviousAction->setEnabled(false);
@@ -542,6 +543,7 @@ void SessionController::setupActions()
     // Profile Options
     action = collection->addAction("edit-current-profile");
     action->setText( i18n("Edit Current Profile...") );
+    action->setIcon( KIcon("document-properties") );
     connect( action , SIGNAL(triggered()) , this , SLOT(editCurrentProfile()) );
 
     _changeProfileMenu = new KMenu(i18n("Change Profile"),_view);
