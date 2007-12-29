@@ -89,7 +89,13 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     Q_ASSERT( view );
 
     // handle user interface related to session (menus etc.)
-    setXMLFile("konsole/sessionui.rc");
+
+#ifdef KONSOLE_PART	
+    setXMLFile("konsole/partui.rc");
+#else
+	setXMLFile("konsole/sessionui.rc");
+#endif
+
     setupActions();
     actionCollection()->addAssociatedWidget(view);
     foreach (QAction* action, actionCollection()->actions())

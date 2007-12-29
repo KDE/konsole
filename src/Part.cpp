@@ -68,16 +68,18 @@ Part::Part(QWidget* parentWidget , QObject* parent)
  : KParts::ReadOnlyPart(parent)
   ,_viewManager(0)
   ,_pluggedController(0)
+  ,_manageProfilesAction(0)
 {
-    setXMLFile("konsole/konsoleui.rc");
-
-    // setup global managers
+	// setup global managers
     if ( SessionManager::instance() == 0 )
         SessionManager::setInstance( new SessionManager() );
     if ( ColorSchemeManager::instance() == 0 )
         ColorSchemeManager::setInstance( new ColorSchemeManager() );
     if ( KeyboardTranslatorManager::instance() == 0 )
         KeyboardTranslatorManager::setInstance( new KeyboardTranslatorManager() );
+
+	// setup global actions
+	createGlobalActions();
 
     // create view widget
     _viewManager = new ViewManager(this,actionCollection());
@@ -104,6 +106,16 @@ Part::Part(QWidget* parentWidget , QObject* parent)
 }
 Part::~Part()
 {
+}
+void Part::createGlobalActions()
+{
+	_manageProfilesAction = new QAction(i18n("Manage Profiles..."),this);
+	connect(_manageProfilesAction,SIGNAL(triggered()),this,SLOT(showManageProfilesDialog()));
+}
+void Part::setupActionsForSession(SessionController* session)
+{
+	KActionCollection* collection = session->actionCollection();
+	collection->addAction("manage-profiles",_manageProfilesAction);
 }
 bool Part::openFile()
 {
@@ -167,7 +179,6 @@ void Part::sendInput( const QString& text )
 Session* Part::createSession(const QString& key)
 {
     Session* session = SessionManager::instance()->createSession(key);
-
     _viewManager->createView(session);
 
     return session;
@@ -190,7 +201,8 @@ void Part::activeViewChanged(SessionController* controller)
 	}
 
 	// insert new controller
-    insertChildClient (controller);
+	setupActionsForSession(controller);
+    insertChildClient(controller);
 	connect(controller,SIGNAL(titleChanged(ViewProperties*)),this,
 			SLOT(activeViewTitleChanged(ViewProperties*)));
 	activeViewTitleChanged(controller);
@@ -200,6 +212,10 @@ void Part::activeViewChanged(SessionController* controller)
 void Part::activeViewTitleChanged(ViewProperties* properties)
 {
 	emit setWindowCaption(properties->title());
+}
+void Part::showManageProfilesDialog()
+{
+	showManageProfilesDialog(_viewManager->widget());
 }
 void Part::showManageProfilesDialog(QWidget* parent)
 {

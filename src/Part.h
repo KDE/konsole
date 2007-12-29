@@ -25,7 +25,7 @@
 #include <KParts/Part>
 #include <kde_terminal_interface.h>
 
-
+class QAction;
 class QStringList;
 
 namespace Konsole
@@ -111,16 +111,19 @@ private slots:
     Session* createSession(const QString& key);
     void activeViewChanged(SessionController* controller);
 	void activeViewTitleChanged(ViewProperties* properties);
-
+	void showManageProfilesDialog();
     void terminalExited();
     void newTab();
 
 private:
     Session* activeSession() const;
+	void setupActionsForSession(SessionController* session);
+	void createGlobalActions();
 
 private:
     ViewManager* _viewManager;
     SessionController* _pluggedController;
+	QAction* _manageProfilesAction;
 };
 
 }
