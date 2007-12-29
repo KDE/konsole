@@ -118,7 +118,16 @@ void Part::newTab()
 }
 Session* Part::activeSession() const
 {
-	return _viewManager->activeViewController()->session();	
+	if ( _viewManager->activeViewController() )
+	{
+		Q_ASSERT( _viewManager->activeViewController()->session());
+
+		return _viewManager->activeViewController()->session();	
+	}
+	else
+	{
+		return 0;
+	}
 }
 void Part::startProgram( const QString& program,
                            const QStringList& arguments )

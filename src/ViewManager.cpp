@@ -463,6 +463,10 @@ SessionController* ViewManager::createController(Session* session , TerminalDisp
     connect( view , SIGNAL(destroyed()) , controller , SLOT(deleteLater()) );
     connect( controller , SIGNAL(sendInputToAll(bool)) , this , SLOT(sendInputToAll()) );
 
+	// if this is the first controller created then set it as the active controller
+	if (!_pluggedController)
+		_pluggedController = controller;
+
     return controller;
 }
 
