@@ -69,6 +69,28 @@ public:
     /** Reimplemented from TerminalInterface. */
     virtual void sendInput( const QString& text );
 
+public slots:
+	/** 
+	 * Shows the dialog used to manage profiles in Konsole.  The dialog
+	 * will be non-modal and will delete itself when it is closed.
+	 *
+	 * This is experimental API and not guaranteed to be present in later
+	 * KDE 4 releases. 
+	 *
+	 * @param parent The parent widget of the new dialog.
+	 */
+	void showManageProfilesDialog(QWidget* parent);
+	/**
+	 * Shows the dialog used to edit the profile used by the current session.  The
+	 * dialog will be non-modal and will delete itself when it is closed.
+	 *
+	 * This is experimental API and not guaranteed to be present in later KDE 4
+	 * releases.  
+	 *
+	 * @param parent The parent widget of the new dialog.
+	 */
+	void showEditCurrentProfileDialog(QWidget* parent);
+
 protected:
     /** Reimplemented from KParts::PartBase. */
     virtual bool openFile();

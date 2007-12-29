@@ -32,8 +32,10 @@
 
 // Konsole
 #include "ColorScheme.h"
+#include "EditProfileDialog.h"
 #include "Emulation.h"
 #include "KeyboardTranslator.h"
+#include "ManageProfilesDialog.h"
 #include "Session.h"
 #include "SessionController.h"
 #include "SessionManager.h"
@@ -198,6 +200,21 @@ void Part::activeViewChanged(SessionController* controller)
 void Part::activeViewTitleChanged(ViewProperties* properties)
 {
 	emit setWindowCaption(properties->title());
+}
+void Part::showManageProfilesDialog(QWidget* parent)
+{
+	ManageProfilesDialog* dialog = new ManageProfilesDialog(parent);
+	dialog->setAttribute(Qt::WA_DeleteOnClose);
+	dialog->show();
+}
+void Part::showEditCurrentProfileDialog(QWidget* parent)
+{
+	Q_ASSERT( activeSession() );
+
+	EditProfileDialog* dialog = new EditProfileDialog(parent);
+	dialog->setAttribute(Qt::WA_DeleteOnClose);
+	dialog->setProfile( activeSession()->profileKey() );
+	dialog->show();	
 }
 
 #include "Part.moc"
