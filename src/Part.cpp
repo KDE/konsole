@@ -158,12 +158,10 @@ void Part::showShellInDir( const QString& dir )
 }
 void Part::sendInput( const QString& text )
 {
-    // currently sends input to every running session,
-    // the alternative would be to send only to the active session
-    QListIterator<Session*> iter( SessionManager::instance()->sessions() );
-    while ( iter.hasNext() )
-        iter.next()->emulation()->sendText(text);
+	Q_ASSERT( activeSession() );
+	activeSession()->emulation()->sendText(text);
 }
+
 Session* Part::createSession(const QString& key)
 {
     Session* session = SessionManager::instance()->createSession(key);
