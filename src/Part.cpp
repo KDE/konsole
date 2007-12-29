@@ -172,15 +172,32 @@ Session* Part::createSession(const QString& key)
 }
 void Part::activeViewChanged(SessionController* controller)
 {
+	Q_ASSERT( controller );
+
     widget()->setFocusProxy( _viewManager->activeView() );
 
     if ( controller == _pluggedController )
         return;
 
-    if (_pluggedController) removeChildClient (_pluggedController);
+	// remove existing controller
+    if (_pluggedController) 
+	{
+		removeChildClient (_pluggedController);
+		disconnect(_pluggedController,SIGNAL(titleChanged(ViewProperties*)),this,
+					SLOT(activeViewTitleChanged(ViewProperties*)));
+	}
+
+	// insert new controller
     insertChildClient (controller);
+	connect(controller,SIGNAL(titleChanged(ViewProperties*)),this,
+			SLOT(activeViewTitleChanged(ViewProperties*)));
+	activeViewTitleChanged(controller);
 
     _pluggedController = controller;
+}
+void Part::activeViewTitleChanged(ViewProperties* properties)
+{
+	emit setWindowCaption(properties->title());
 }
 
 #include "Part.moc"

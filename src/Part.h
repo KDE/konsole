@@ -33,6 +33,7 @@ namespace Konsole
 class Session;
 class SessionController;
 class ViewManager;
+class ViewProperties;
 
 /**
  * A factory which creates Konsole parts.
@@ -77,6 +78,7 @@ private slots:
     // call the run() method on the returned Session instance to begin the session
     Session* createSession(const QString& key);
     void activeViewChanged(SessionController* controller);
+	void activeViewTitleChanged(ViewProperties* properties);
 
     void terminalExited();
     void newTab();
