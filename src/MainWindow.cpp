@@ -172,7 +172,7 @@ void MainWindow::setupActions()
 
     // File Menu
     KAction* newTabAction = collection->addAction("new-tab");
-    newTabAction->setIcon( KIcon("utilities-terminal") );
+    newTabAction->setIcon( KIcon("tab-new") );
     newTabAction->setText( i18n("New &Tab") );
     newTabAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_N) );
     connect( newTabAction , SIGNAL(triggered()) , this , SLOT(newTab()) );
@@ -185,7 +185,7 @@ void MainWindow::setupActions()
 
     KAction* remoteConnectionAction = collection->addAction("remote-connection");
     remoteConnectionAction->setText( i18n("Remote Connection...") );
-    remoteConnectionAction->setIcon( KIcon("network") );
+    remoteConnectionAction->setIcon( KIcon("network-connect") );
     remoteConnectionAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_R) );
     connect( remoteConnectionAction , SIGNAL(triggered()) , this , SLOT(showRemoteConnectionDialog()) );
 
