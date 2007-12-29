@@ -216,5 +216,16 @@ void Part::showEditCurrentProfileDialog(QWidget* parent)
 	dialog->setProfile( activeSession()->profileKey() );
 	dialog->show();	
 }
+void Part::changeSessionSettings(const QString& text)
+{
+	// send a profile change command, the escape code format 
+	// is the same as the normal X-Term commands used to change the window title or icon,
+	// but with a magic value of '50' for the parameter which specifies what to change
+	Q_ASSERT( activeSession() );
+	QByteArray buffer;
+	buffer.append("\033]50;").append(text.toUtf8()).append('\a');
+	
+	activeSession()->emulation()->receiveData(buffer.constData(),buffer.length());  
+}
 
 #include "Part.moc"

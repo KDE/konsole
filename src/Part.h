@@ -81,7 +81,7 @@ public slots:
 	 */
 	void showManageProfilesDialog(QWidget* parent);
 	/**
-	 * Shows the dialog used to edit the profile used by the current session.  The
+	 * Shows the dialog used to edit the profile used by the active session.  The
 	 * dialog will be non-modal and will delete itself when it is closed.
 	 *
 	 * This is experimental API and not guaranteed to be present in later KDE 4
@@ -90,6 +90,16 @@ public slots:
 	 * @param parent The parent widget of the new dialog.
 	 */
 	void showEditCurrentProfileDialog(QWidget* parent);
+	/** 
+	 * Sends a profile change command to the active session.  This is equivalent to using 
+	 * the konsoleprofile tool within the session to change its settings.  The @p text string
+	 * is a semi-colon separated list of property=value pairs, eg. "colors=Linux Colors"
+	 *
+	 * See the documentation for konsoleprofile for information on the format of @p text
+	 *
+	 * This is experimental API and not guaranteed to be present in later KDE 4 releases.
+	 */
+	void changeSessionSettings(const QString& text);
 
 protected:
     /** Reimplemented from KParts::PartBase. */
