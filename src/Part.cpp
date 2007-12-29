@@ -118,27 +118,13 @@ void Part::newTab()
 }
 Session* Part::activeSession() const
 {
-    if ( _pluggedController )
-    {
-        qDebug() << k_funcinfo << " - have plugged controller";
-
-        return _pluggedController->session();
-    }
-    else
-    {
-        // for now, just return the first available session
-        QList<Session*> list = SessionManager::instance()->sessions();
-
-        qDebug() << k_funcinfo << " - no plugged controller, selectin first from" << list.count() << "sessions";
-
-        Q_ASSERT( !list.isEmpty() );
-
-        return list.first();
-    }
+	return _viewManager->activeViewController()->session();	
 }
 void Part::startProgram( const QString& program,
                            const QStringList& arguments )
 {
+	Q_ASSERT( activeSession() );
+
     if ( !activeSession()->isRunning() )
     {
         if ( !program.isEmpty() && !arguments.isEmpty() )
@@ -152,6 +138,8 @@ void Part::startProgram( const QString& program,
 }
 void Part::showShellInDir( const QString& dir )
 {
+	Q_ASSERT( activeSession() );
+
     if ( !activeSession()->isRunning() )
     {
         if ( !dir.isEmpty() )

@@ -137,6 +137,12 @@ public:
      */
     NavigationMethod navigationMethod() const;
 
+	/** 
+ 	 * Returns the controller for the active view.  activeViewChanged() is 
+ 	 * emitted when this changes.
+	 */
+	SessionController* activeViewController() const;
+
 signals:
     /** Emitted when the last view is removed from the view manager */
     void empty();
@@ -231,6 +237,9 @@ private slots:
     void moveActiveViewLeft();
     // moves active view to the right
     void moveActiveViewRight();
+
+	// called when a SessionController gains focus
+	void controllerChanged(SessionController* controller);
 
 private:
     const ColorScheme* colorSchemeForProfile(const QString& key) const;

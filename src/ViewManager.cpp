@@ -458,12 +458,23 @@ SessionController* ViewManager::createController(Session* session , TerminalDisp
     // create a new controller for the session, and ensure that this view manager
     // is notified when the view gains the focus
     SessionController* controller = new SessionController(session,view,this);
-    connect( controller , SIGNAL(focused(SessionController*)) , this , SIGNAL(activeViewChanged(SessionController*)) );
+    connect( controller , SIGNAL(focused(SessionController*)) , this , SLOT(controllerChanged(SessionController*)) );
     connect( session , SIGNAL(destroyed()) , controller , SLOT(deleteLater()) );
     connect( view , SIGNAL(destroyed()) , controller , SLOT(deleteLater()) );
     connect( controller , SIGNAL(sendInputToAll(bool)) , this , SLOT(sendInputToAll()) );
 
     return controller;
+}
+
+void ViewManager::controllerChanged(SessionController* controller)
+{
+	_pluggedController = controller;
+	emit activeViewChanged(controller);
+}
+
+SessionController* ViewManager::activeViewController() const
+{
+	return _pluggedController;
 }
 
 void ViewManager::createView(Session* session)
