@@ -484,9 +484,6 @@ public:
      */
     QList<QString> allTranslators();
 
-
-    /** Sets the global KeyboardTranslatorManager instance. */
-   static void setInstance(KeyboardTranslatorManager* instance);
     /** Returns the global KeyboardTranslatorManager instance. */
    static KeyboardTranslatorManager* instance();
 
@@ -503,11 +500,7 @@ private:
     
     QHash<QString,KeyboardTranslator*> _translators; // maps translator-name -> KeyboardTranslator
                                                      // instance
-
-
     bool _haveLoadedAll;
-
-    static KeyboardTranslatorManager* _instance;
 };
 
 inline int KeyboardTranslator::Entry::keyCode() const { return _keyCode; }

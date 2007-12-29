@@ -112,8 +112,6 @@ const char* ColorScheme::translatedColorNames[TABLE_COLORS] =
     I18N_NOOP("Color 8 (Intense)")
 };
 
-ColorSchemeManager* ColorSchemeManager::_instance = 0;
-
 ColorScheme::ColorScheme()
 {
     _table = 0;
@@ -178,9 +176,9 @@ ColorEntry ColorScheme::colorEntry(int index , uint randomSeed) const
 
     ColorEntry entry = colorTable()[index];
 
-  //  qDebug() << "Old color: " << entry.color;
+  //  kDebug() << "Old color: " << entry.color;
 
-   // qDebug() << "Random seed: " << randomSeed << "random table: " <<
+   // kDebug() << "Random seed: " << randomSeed << "random table: " <<
    //     _randomTable << "isnull: " << ((_randomTable) ? _randomTable[index].isNull() : true);
 
     if ( randomSeed != 0 && 
@@ -195,18 +193,18 @@ ColorEntry ColorScheme::colorEntry(int index , uint randomSeed) const
         int  valueDifference = range.value ? (qrand() % range.value) - range.value/2 : 0;
 
         QColor& color = entry.color;
-      //  qDebug() << "Standard hue" << color.hue() << "saturation" << color.saturation() << "value" << color.value();
+      //  kDebug() << "Standard hue" << color.hue() << "saturation" << color.saturation() << "value" << color.value();
 
         int newHue = qAbs( (color.hue() + hueDifference) % MAX_HUE );
         int newValue = qMin( qAbs(color.value() + valueDifference) , 255 );
         int newSaturation = qMin( qAbs(color.saturation() + saturationDifference) , 255 );
 
-    // qDebug() << "New hue: " << newHue << "New sat:" << newSaturation <<
+    // kDebug() << "New hue: " << newHue << "New sat:" << newSaturation <<
     //        "New value:" << newValue;
         color.setHsv(newHue,newSaturation,newValue);
     }
 
-  //  qDebug() << "New color: " << entry.color;
+  //  kDebug() << "New color: " << entry.color;
 
     return entry;
 }
@@ -532,9 +530,9 @@ void ColorSchemeManager::loadAllColorSchemes()
     }
 
    // if ( success > 0 )
-   //     qDebug() << "succeeded to load " << success << " color schemes.";
+   //     kDebug() << "succeeded to load " << success << " color schemes.";
     if ( failed > 0 )
-        qDebug() << "failed to load " << failed << " color schemes.";
+        kDebug() << "failed to load " << failed << " color schemes.";
 
     _haveLoadedAll = true;
 }
@@ -549,7 +547,7 @@ QList<const ColorScheme*> ColorSchemeManager::allColorSchemes()
 }
 bool ColorSchemeManager::loadKDE3ColorScheme(const QString& filePath)
 {
-    //qDebug() << "loading KDE 3 format color scheme from " << filePath;
+    //kDebug() << "loading KDE 3 format color scheme from " << filePath;
 
     QFile file(filePath);
     if (!filePath.endsWith(".schema") || !file.open(QIODevice::ReadOnly))
@@ -562,19 +560,19 @@ bool ColorSchemeManager::loadKDE3ColorScheme(const QString& filePath)
 
     Q_ASSERT( !scheme->name().isEmpty() );
 
-    //qDebug() << "found KDE 3 format color scheme - " << scheme->name();
+    //kDebug() << "found KDE 3 format color scheme - " << scheme->name();
     
     QFileInfo info(filePath);
 
     if ( !_colorSchemes.contains(info.baseName()) )
     {
-        //qDebug() << "added color scheme - " << info.baseName();
+        //kDebug() << "added color scheme - " << info.baseName();
         
         _colorSchemes.insert(scheme->name(),scheme);
     }
     else
     {
-        qDebug() << "color scheme with name" << scheme->name() << "has already been" <<
+        kDebug() << "color scheme with name" << scheme->name() << "has already been" <<
             "found, ignoring.";
         delete scheme;
     }
@@ -616,7 +614,7 @@ bool ColorSchemeManager::loadColorScheme(const QString& filePath)
     }
     else
     {
-        qDebug() << "color scheme with name" << scheme->name() << "has already been" <<
+        kDebug() << "color scheme with name" << scheme->name() << "has already been" <<
             "found, ignoring.";
         
         delete scheme;
@@ -672,7 +670,7 @@ QString ColorSchemeManager::findColorSchemePath(const QString& name) const
 }
 const ColorScheme* ColorSchemeManager::findColorScheme(const QString& name) 
 {
-    //qDebug() << "looking for color scheme - " << name;
+    //kDebug() << "looking for color scheme - " << name;
 
     if ( name.isEmpty() )
         return defaultColorScheme();
@@ -693,16 +691,13 @@ const ColorScheme* ColorSchemeManager::findColorScheme(const QString& name)
                 return findColorScheme(name);
         }
 
-        qDebug() << "Could not find color scheme - " << name;
+        kDebug() << "Could not find color scheme - " << name;
 
         return 0; 
     }
 }
+K_GLOBAL_STATIC( ColorSchemeManager , theColorSchemeManager )
 ColorSchemeManager* ColorSchemeManager::instance()
 {
-    return _instance;
-}
-void ColorSchemeManager::setInstance(ColorSchemeManager* instance)
-{
-    _instance = instance;
+    return theColorSchemeManager;
 }

@@ -137,7 +137,7 @@ bool KeyBindingEditor::eventFilter( QObject* watched , QEvent* event )
                 _ui->testAreaInputEdit->setText(keyEvent->text());
                 _ui->testAreaOutputEdit->setText(keyEvent->text());
             }
-            //qDebug() << "Entry: " << entry.resultToString();
+            //kDebug() << "Entry: " << entry.resultToString();
 
             keyEvent->accept();
             return true;
@@ -187,7 +187,7 @@ void KeyBindingEditor::bindingTableItemChanged(QTableWidgetItem* item)
 
    KeyboardTranslator::Entry entry = KeyboardTranslatorReader::createEntry(condition,result);
 
-   qDebug() << "Created entry: " << entry.conditionToString() << " , " << entry.resultToString();
+   kDebug() << "Created entry: " << entry.conditionToString() << " , " << entry.resultToString();
 
    _translator->replaceEntry(existing,entry);
 
@@ -206,7 +206,7 @@ void KeyBindingEditor::setupKeyBindingTable(const KeyboardTranslator* translator
 
     QList<KeyboardTranslator::Entry> entries = translator->entries();
     _ui->keyBindingTable->setRowCount(entries.count());
-    //qDebug() << "Keyboard translator has" << entries.count() << "entries.";
+    //kDebug() << "Keyboard translator has" << entries.count() << "entries.";
 
     for ( int row = 0 ; row < entries.count() ; row++ )
     {

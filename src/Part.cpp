@@ -70,14 +70,6 @@ Part::Part(QWidget* parentWidget , QObject* parent)
   ,_pluggedController(0)
   ,_manageProfilesAction(0)
 {
-	// setup global managers
-    if ( SessionManager::instance() == 0 )
-        SessionManager::setInstance( new SessionManager() );
-    if ( ColorSchemeManager::instance() == 0 )
-        ColorSchemeManager::setInstance( new ColorSchemeManager() );
-    if ( KeyboardTranslatorManager::instance() == 0 )
-        KeyboardTranslatorManager::setInstance( new KeyboardTranslatorManager() );
-
 	// setup global actions
 	createGlobalActions();
 

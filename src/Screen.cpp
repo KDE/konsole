@@ -845,7 +845,7 @@ void Screen::resetDroppedLines()
 }
 void Screen::resetScrolledLines()
 {
-    //qDebug() << "scrolled lines reset";
+    //kDebug() << "scrolled lines reset";
 
     _scrolledLines = 0;
 }
@@ -895,7 +895,7 @@ void Screen::scrollDown(int n)
 void Screen::scrollDown(int from, int n)
 {
 
-  //qDebug() << "Screen::scrollDown( from: " << from << " , n: " << n << ")";
+  //kDebug() << "Screen::scrollDown( from: " << from << " , n: " << n << ")";
   
   _scrolledLines += n;
 
@@ -1024,7 +1024,7 @@ NOTE:  moveImage() can only move whole lines.
 
 void Screen::moveImage(int dest, int sourceBegin, int sourceEnd)
 {
-  //qDebug() << "moving image from (" << (sourceBegin/columns) 
+  //kDebug() << "moving image from (" << (sourceBegin/columns) 
   //    << "," << (sourceEnd/columns) << ") to " <<
   //    (dest/columns);
 
@@ -1311,8 +1311,8 @@ void Screen::writeSelectionToStream(TerminalCharacterDecoder* decoder ,
 
     Q_ASSERT( top >= 0 && left >= 0 && bottom >= 0 && right >= 0 );
 
-    //qDebug() << "sel_TL = " << sel_TL;
-    //qDebug() << "columns = " << columns;
+    //kDebug() << "sel_TL = " << sel_TL;
+    //kDebug() << "columns = " << columns;
 
 	for (int y=top;y<=bottom;y++)
 	{

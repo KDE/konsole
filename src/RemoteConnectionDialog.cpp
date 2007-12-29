@@ -21,7 +21,7 @@
 #include "RemoteConnectionDialog.h"
 
 // Qt
-#include <QtCore/QDebug>
+#include <KDebug>
 
 // KDE
 #include <KLocale>
@@ -76,7 +76,7 @@ QString RemoteConnectionDialog::sessionKey() const
 */
    //QString key = manager->addSessionType( customSession ); 
 
-    //qDebug() << "session key = " << key;
+    //kDebug() << "session key = " << key;
 
     return QString();
     //return key;

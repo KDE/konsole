@@ -345,7 +345,7 @@ QStringList KDE4ProfileReader::findProfiles()
 }
 bool KDE4ProfileReader::readProfile(const QString& path , Profile* profile , QString& parentProfile)
 {
-    //qDebug() << "KDE 4 Profile Reader:" << path;
+    //kDebug() << "KDE 4 Profile Reader:" << path;
 
     KConfig config(path,KConfig::NoGlobals);
 
@@ -450,7 +450,7 @@ bool KDE3ProfileReader::readProfile(const QString& path , Profile* profile , QSt
     if ( config->hasKey("Name") )
         profile->setProperty(Profile::Name,config->readEntry("Name"));
 
-    qDebug() << "reading KDE 3 profile " << profile->name();
+    kDebug() << "reading KDE 3 profile " << profile->name();
 
     if ( config->hasKey("Icon") )
         profile->setProperty(Profile::Icon,config->readEntry("Icon"));
@@ -513,7 +513,7 @@ QHash<Profile::Property,QVariant> ProfileCommandParser::parse(const QString& inp
                                                 regExp.capturedTexts()[1]);
             const QString value = regExp.capturedTexts()[2];
 
-            qDebug() << "property:" << property << "value:" << value;
+            kDebug() << "property:" << property << "value:" << value;
 
             changes.insert(property,value);
         }

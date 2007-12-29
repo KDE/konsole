@@ -21,7 +21,7 @@
 #include "ShellCommand.h"
 
 // Qt
-#include <QtCore/QDebug>
+#include <KDebug>
 
 using namespace Konsole;
 

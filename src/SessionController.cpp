@@ -354,7 +354,7 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
                 _view->filterChain()->addFilter( _viewUrlFilter );
             }
 
-            //qDebug() << "Updating url filter.";
+            //kDebug() << "Updating url filter.";
 
             _view->processFilters();
             _urlFilterUpdateRequired = false;
@@ -1266,13 +1266,13 @@ void SearchHistoryTask::executeOnScreenWindow( SessionPtr session , ScreenWindow
                 }
             }
 
-            //qDebug() << "Searching lines " << qMin(endLine,line) << " to " << qMax(endLine,line);
+            //kDebug() << "Searching lines " << qMin(endLine,line) << " to " << qMax(endLine,line);
 
             decoder.begin(&searchStream);
             emulation->writeToStream(&decoder, qMin(endLine,line) , qMax(endLine,line) );
             decoder.end();
 
-            //qDebug() << "Stream contents: " << string;
+            //kDebug() << "Stream contents: " << string;
             pos = -1;
             if (forwards)
                 pos = string.indexOf(_regExp);
@@ -1315,10 +1315,10 @@ void SearchHistoryTask::highlightResult(ScreenWindowPtr window , int findPos)
      window->scrollTo(findPos);
      window->setSelectionStart( 0 , findPos - window->currentLine() , false );
      window->setSelectionEnd( window->columnCount() , findPos - window->currentLine() );
-     //qDebug() << "Current line " << window->currentLine();
+     //kDebug() << "Current line " << window->currentLine();
      window->setTrackOutput(false);
      window->notifyOutputChanged();
-     //qDebug() << "Post update current line " << window->currentLine();
+     //kDebug() << "Post update current line " << window->currentLine();
 }
 
 SearchHistoryTask::SearchHistoryTask(QObject* parent)

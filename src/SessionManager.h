@@ -325,8 +325,6 @@ private:
     bool _loadedAllProfiles; // set to true after loadAllProfiles has been called
 
     QSignalMapper* _sessionMapper;
-
-    static SessionManager* _instance;
 };
 
 }

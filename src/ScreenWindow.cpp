@@ -21,7 +21,7 @@
 #include "ScreenWindow.h"
 
 // Qt
-#include <QtCore/QDebug>
+#include <KDebug>
 
 // Konsole
 #include "Screen.h"
@@ -219,7 +219,7 @@ bool ScreenWindow::atEndOfOutput() const
 
 void ScreenWindow::scrollTo( int line )
 {
-    //qDebug() << "ScreenWindow scrolled to " << line << ":" << this;
+    //kDebug() << "ScreenWindow scrolled to " << line << ":" << this;
     if ( line < 0 )
        line = 0;
 
@@ -251,7 +251,7 @@ bool ScreenWindow::trackOutput() const
 
 int ScreenWindow::scrollCount() const
 {
-   // qDebug() << "window returning scroll count of " << _scrollCount;
+   // kDebug() << "window returning scroll count of " << _scrollCount;
 
     return _scrollCount;
 }

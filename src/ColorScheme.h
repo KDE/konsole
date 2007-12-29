@@ -301,8 +301,6 @@ public:
      */
     QList<const ColorScheme*> allColorSchemes();    
 
-    /** Sets the global color scheme manager instance. */
-    static void setInstance(ColorSchemeManager* instance);
     /** Returns the global color scheme manager instance. */
     static ColorSchemeManager* instance();
 
@@ -327,7 +325,6 @@ private:
     bool _haveLoadedAll;
 
     static const ColorScheme _defaultColorScheme;
-    static ColorSchemeManager* _instance;
 };
 
 }

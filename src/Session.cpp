@@ -988,11 +988,11 @@ void SessionGroup::setMasterStatus(Session* session , bool master)
 }
 void SessionGroup::connectPair(Session* master , Session* other)
 {
-    qDebug() << k_funcinfo;
+    kDebug() << k_funcinfo;
 
     if ( _masterMode & CopyInputToAll )
     {
-        qDebug() << "Connection session " << master->nameTitle() << "to" << other->nameTitle();
+        kDebug() << "Connection session " << master->nameTitle() << "to" << other->nameTitle();
 
         connect( master->emulation() , SIGNAL(sendData(const char*,int)) , other->emulation() ,
                  SLOT(sendString(const char*,int)) );
@@ -1000,11 +1000,11 @@ void SessionGroup::connectPair(Session* master , Session* other)
 }
 void SessionGroup::disconnectPair(Session* master , Session* other)
 {
-    qDebug() << k_funcinfo;
+    kDebug() << k_funcinfo;
 
     if ( _masterMode & CopyInputToAll )
     {
-        qDebug() << "Disconnecting session " << master->nameTitle() << "from" << other->nameTitle();
+        kDebug() << "Disconnecting session " << master->nameTitle() << "from" << other->nameTitle();
 
         disconnect( master->emulation() , SIGNAL(sendData(const char*,int)) , other->emulation() ,
                 SLOT(sendString(const char*,int)) );

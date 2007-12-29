@@ -109,7 +109,7 @@ void ManageProfilesDialog::itemDataChanged(QStandardItem* item)
    {
         QKeySequence sequence = QKeySequence::fromString(item->text());
 
-        qDebug() << "New key sequence: " << item->text(); 
+        kDebug() << "New key sequence: " << item->text(); 
 
         SessionManager::instance()->setShortcut(item->data(ShortcutRole).value<QString>(),
                                                 sequence); 

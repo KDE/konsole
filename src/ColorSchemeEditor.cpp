@@ -92,7 +92,7 @@ ColorSchemeEditor::ColorSchemeEditor(QWidget* parent)
     connect( _ui->colorTable , SIGNAL(itemClicked(QTableWidgetItem*)) , this , 
             SLOT(editColorItem(QTableWidgetItem*)) );
 
-    qDebug() << "Color scheme editor - have compositing = " << KWindowSystem::compositingActive();
+    kDebug() << "Color scheme editor - have compositing = " << KWindowSystem::compositingActive();
 
     // warning label when transparency is not available
     if ( KWindowSystem::compositingActive() )
@@ -147,7 +147,7 @@ void ColorSchemeEditor::setTransparencyPercentLabel(int percent)
     qreal opacity = ( 100.0 - percent ) / 100.0;
     _colors->setOpacity(opacity);
 
-    //qDebug() << "set opacity to:" << opacity;
+    //kDebug() << "set opacity to:" << opacity;
 }
 void ColorSchemeEditor::setup(const ColorScheme* scheme)
 {
@@ -163,7 +163,7 @@ void ColorSchemeEditor::setup(const ColorScheme* scheme)
     setupColorTable(_colors);
 
     // setup transparency slider
-    //qDebug() << "read opacity: " << _colors->opacity();
+    //kDebug() << "read opacity: " << _colors->opacity();
     const int transparencyPercent = (int) ( (1-_colors->opacity())*100 );
     
     _ui->transparencySlider->setValue(transparencyPercent);

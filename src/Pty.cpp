@@ -111,7 +111,7 @@ char Pty::erase() const
 {
 	if (pty()->masterFd() >= 0)
 	{
-		qDebug() << "Getting erase char";
+		kDebug() << "Getting erase char";
 		struct ::termios ttyAttributes;
 		pty()->tcGetAttr(&ttyAttributes);
 		return ttyAttributes.c_cc[VERASE];
@@ -135,7 +135,7 @@ void Pty::addEnvironmentVariables(const QStringList& environment)
             QString variable = pair.left(pos);
             QString value = pair.mid(pos+1);
 
-            //qDebug() << "Setting environment pair" << variable <<
+            //kDebug() << "Setting environment pair" << variable <<
             //    " set to " << value;
 
             setEnvironment(variable,value);

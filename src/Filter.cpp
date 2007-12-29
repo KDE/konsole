@@ -28,7 +28,7 @@
 #include <QtGui/QApplication>
 #include <QtGui/QClipboard>
 #include <QtCore/QString>
-#include <QtCore/QDebug>
+#include <KDebug>
 #include <QtCore/QSharedData>
 #include <QtCore/QFile>
 
@@ -209,7 +209,7 @@ void Filter::getLineColumn(int position , int& startLine , int& startColumn)
 
     for (int i = 0 ; i < _linePositions->count() ; i++)
     {
-        //qDebug() << "line position at " << i << " = " << _linePositions[i];
+        //kDebug() << "line position at " << i << " = " << _linePositions[i];
         int nextLine = 0;
 
         if ( i == _linePositions->count()-1 )
@@ -221,7 +221,7 @@ void Filter::getLineColumn(int position , int& startLine , int& startColumn)
             nextLine = _linePositions->value(i+1);
         }
 
-       // qDebug() << "pos - " << position << " line pos(" << i<< ") " << _linePositions->value(i) << 
+       // kDebug() << "pos - " << position << " line pos(" << i<< ") " << _linePositions->value(i) << 
        //     " next = " << nextLine << " buffer len = " << _buffer->length();
 
         if ( _linePositions->value(i) <= position && position < nextLine ) 
@@ -386,13 +386,13 @@ void RegExpFilter::process()
             int endColumn = 0;
 
             
-            //qDebug() << "pos from " << pos << " to " << pos + _searchText.matchedLength();
+            //kDebug() << "pos from " << pos << " to " << pos + _searchText.matchedLength();
             
             getLineColumn(pos,startLine,startColumn);
             getLineColumn(pos + _searchText.matchedLength(),endLine,endColumn);
 
-            //qDebug() << "start " << startLine << " / " << startColumn;
-            //qDebug() << "end " << endLine << " / " << endColumn;
+            //kDebug() << "start " << startLine << " / " << startColumn;
+            //kDebug() << "end " << endLine << " / " << endColumn;
 
             RegExpFilter::HotSpot* spot = newHotSpot(startLine,startColumn,
                                            endLine,endColumn);
@@ -460,7 +460,7 @@ void UrlFilter::HotSpot::activate(QObject* object)
 
     if ( actionName == "copy-action" )
     {
-        //qDebug() << "Copying url to clipboard:" << url;
+        //kDebug() << "Copying url to clipboard:" << url;
 
         QApplication::clipboard()->setText(url);
         return;

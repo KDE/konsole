@@ -345,7 +345,7 @@ bool HistoryScrollBuffer::isWrappedLine(int lineNumber)
     
   if (lineNumber < _usedLines)
   {
-    //qDebug() << "Line" << lineNumber << "wrapped is" << _wrappedLine[bufferIndex(lineNumber)];
+    //kDebug() << "Line" << lineNumber << "wrapped is" << _wrappedLine[bufferIndex(lineNumber)];
     return _wrappedLine[bufferIndex(lineNumber)];
   }
   else
@@ -366,9 +366,9 @@ void HistoryScrollBuffer::getCells(int lineNumber, int startColumn, int count, C
   
   const HistoryLine& line = _historyBuffer[bufferIndex(lineNumber)];
 
-  //qDebug() << "startCol " << startColumn;
-  //qDebug() << "line.size() " << line.size();
-  //qDebug() << "count " << count;
+  //kDebug() << "startCol " << startColumn;
+  //kDebug() << "line.size() " << line.size();
+  //kDebug() << "count " << count;
 
   Q_ASSERT( startColumn <= line.size() - count );
     

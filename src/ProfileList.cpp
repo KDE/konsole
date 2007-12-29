@@ -23,7 +23,7 @@
 // Qt
 #include <QtGui/QAction>
 #include <QtGui/QActionGroup>
-#include <QtCore/QDebug>
+#include <KDebug>
 
 // KDE
 #include <KIcon>

@@ -64,15 +64,15 @@ namespace Konsole
  *      bool ok;
  *      QString value = info->name(&ok);
  *
- *      if ( ok ) qDebug() << "process name - " << name;
+ *      if ( ok ) kDebug() << "process name - " << name;
  *
  *      int parentPid = info->parentPid(&ok);
  *
- *      if ( ok ) qDebug() << "parent process - " << parentPid;
+ *      if ( ok ) kDebug() << "parent process - " << parentPid;
  *
  *      int foregroundPid = info->foregroundColororegroundPid(&ok);
  *
- *      if ( ok ) qDebug() << "foreground process - " << foregroundPid;
+ *      if ( ok ) kDebug() << "foreground process - " << foregroundPid;
  *   }
  * @endcode
  */

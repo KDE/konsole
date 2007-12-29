@@ -28,13 +28,14 @@
 
 // Qt
 #include <QtCore/QBuffer>
-#include <QtCore/QDebug>
+#include <KDebug>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtCore/QTextStream>
 #include <QtGui/QKeySequence>
 
 // KDE
+#include <KDebug>
 #include <KLocale>
 #include <KStandardDirs>
 
@@ -44,8 +45,6 @@ using namespace Konsole;
 const char* KeyboardTranslatorManager::defaultTranslatorText = 
 #include <DefaultTranslatorText.h>
 ;
-
-KeyboardTranslatorManager* KeyboardTranslatorManager::_instance = 0;
 
 KeyboardTranslatorManager::KeyboardTranslatorManager()
     : _haveLoadedAll(false)
@@ -105,7 +104,7 @@ bool KeyboardTranslatorManager::saveTranslator(const KeyboardTranslator* transla
     const QString path = KGlobal::dirs()->saveLocation("data","konsole/")+translator->name()
            +".keytab";
 
-    qDebug() << "Saving translator to" << path;
+    kDebug() << "Saving translator to" << path;
 
     QFile destination(path);
     
@@ -144,7 +143,7 @@ KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(const QString& nam
 
 const KeyboardTranslator* KeyboardTranslatorManager::defaultTranslator()
 {
-    qDebug() << "Loading default translator from text" << defaultTranslatorText;
+    kDebug() << "Loading default translator from text" << defaultTranslatorText;
     QBuffer textBuffer;
     textBuffer.setData(defaultTranslatorText,strlen(defaultTranslatorText));
     return loadTranslator(&textBuffer,"fallback");
@@ -363,7 +362,7 @@ bool KeyboardTranslatorReader::decodeSequence(const QString& text,
             else if ( parseAsKeyCode(buffer,itemKeyCode) )
                 keyCode = itemKeyCode;
             else
-                qDebug() << "Unable to parse key binding item:" << buffer;
+                kDebug() << "Unable to parse key binding item:" << buffer;
 
             buffer.clear();
         }
@@ -427,7 +426,7 @@ bool KeyboardTranslatorReader::parseAsKeyCode(const QString& item , int& keyCode
 
         if ( sequence.count() > 1 )
         {
-            qDebug() << "Unhandled key codes in sequence: " << item;
+            kDebug() << "Unhandled key codes in sequence: " << item;
         }
     }
     // additional cases implemented for backwards compatibility with KDE 3
@@ -873,11 +872,8 @@ bool KeyboardTranslatorManager::deleteTranslator(const QString& name)
         return false;
     }
 }
-void KeyboardTranslatorManager::setInstance(KeyboardTranslatorManager* instance)
-{
-    _instance = instance;
-}
+K_GLOBAL_STATIC( KeyboardTranslatorManager , theKeyboardTranslatorManager )
 KeyboardTranslatorManager* KeyboardTranslatorManager::instance()
 {
-    return _instance;
+    return theKeyboardTranslatorManager;
 }

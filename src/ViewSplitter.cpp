@@ -41,7 +41,7 @@ ViewSplitter::ViewSplitter(QWidget* parent)
 
 void ViewSplitter::childEmpty(ViewSplitter* splitter)
 {
- //   qDebug() << k_funcinfo << ": deleting child splitter " ;
+ //   kDebug() << k_funcinfo << ": deleting child splitter " ;
 
     delete splitter;
 
@@ -60,22 +60,22 @@ void ViewSplitter::adjustContainerSize(ViewContainer* container , int percentage
     int oldSize = containerSizes[containerIndex];
     int newSize = (int)(oldSize * ( 1.0 + percentage/100.0 ));
 
-   // qDebug() << "Old container size:" << oldSize << ", new size:" << newSize;
+   // kDebug() << "Old container size:" << oldSize << ", new size:" << newSize;
 
     int perContainerDelta = (count() == 1 ) ? 0 : ( (newSize-oldSize) / (count()-1) ) * (-1);
 
-   //  qDebug() << "Changing sizes of other containers by " << perContainerDelta << "pixels.";
+   //  kDebug() << "Changing sizes of other containers by " << perContainerDelta << "pixels.";
 
     for ( int i = 0 ; i < containerSizes.count() ; i++ )
     {
-        //qDebug() << "Container" << i << "old size =" << containerSizes[i];
+        //kDebug() << "Container" << i << "old size =" << containerSizes[i];
 
         if ( i == containerIndex )
             containerSizes[i] = newSize;
         else
             containerSizes[i] = containerSizes[i] + perContainerDelta;
         
-        //qDebug() << "Container" << i << "new size =" << containerSizes[i];
+        //kDebug() << "Container" << i << "new size =" << containerSizes[i];
     }
 
     setSizes(containerSizes);
@@ -83,7 +83,7 @@ void ViewSplitter::adjustContainerSize(ViewContainer* container , int percentage
 
 ViewSplitter* ViewSplitter::activeSplitter()
 {
-   // qDebug() << "BEGIN activeSplitter" ;
+   // kDebug() << "BEGIN activeSplitter" ;
     
     QWidget* widget = focusWidget() ? focusWidget() : this;
     
@@ -91,14 +91,14 @@ ViewSplitter* ViewSplitter::activeSplitter()
 
     while ( !splitter && widget )
     {
-       // qDebug() << widget ;
+       // kDebug() << widget ;
         splitter = dynamic_cast<ViewSplitter*>(widget);
         widget = widget->parentWidget();
     }
 
     Q_ASSERT( splitter );
 
-    //qDebug() << "END activeSplitter";
+    //kDebug() << "END activeSplitter";
     
     return splitter;
 }
@@ -107,7 +107,7 @@ void ViewSplitter::registerContainer( ViewContainer* container )
 {
     _containers << container;
 
-    //qDebug() << k_funcinfo << ": adding container " << ((QTabWidget*)container->containerWidget())->tabText(0);
+    //kDebug() << k_funcinfo << ": adding container " << ((QTabWidget*)container->containerWidget())->tabText(0);
     
     connect( container , SIGNAL(destroyed(ViewContainer*)) , this , SLOT( containerDestroyed(ViewContainer*) ) );
     connect( container , SIGNAL(empty(ViewContainer*)) , this , SLOT( containerEmpty(ViewContainer*) ) );
@@ -117,7 +117,7 @@ void ViewSplitter::unregisterContainer( ViewContainer* container )
 {
     _containers.removeAll(container);
 
-    //qDebug() << k_funcinfo << ": removing container " << ((QTabWidget*)container->containerWidget())->tabText(0);
+    //kDebug() << k_funcinfo << ": removing container " << ((QTabWidget*)container->containerWidget())->tabText(0);
     
     disconnect( container , 0 , this , 0 );
 }
@@ -262,10 +262,10 @@ ViewContainer* ViewSplitter::activeContainer() const
 {
    if ( QWidget* focusW = focusWidget() )
    {
-      // qDebug() << k_funcinfo << ": focus-widget = " << focusW ;
+      // kDebug() << k_funcinfo << ": focus-widget = " << focusW ;
       // if ( dynamic_cast<QLineEdit*>(focusW) )
-       //    qDebug() << k_funcinfo << ": focus-widget-text = " << ((QLineEdit*)focusW)->text();
-      // qDebug() << k_funcinfo << ": container count = " << _containers.count();
+       //    kDebug() << k_funcinfo << ": focus-widget-text = " << ((QLineEdit*)focusW)->text();
+      // kDebug() << k_funcinfo << ": container count = " << _containers.count();
 
         ViewContainer* focusContainer = 0;
         

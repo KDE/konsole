@@ -64,15 +64,6 @@ void Application::init()
     _sessionList = 0;
     _backgroundInstance = 0;
 
-    // create session manager
-    SessionManager::setInstance( new SessionManager() );
-
-    // create color scheme manager
-    ColorSchemeManager::setInstance( new ColorSchemeManager() );
-
-    // new keyboard translator manager
-    KeyboardTranslatorManager::setInstance( new KeyboardTranslatorManager() );
-
     // check for compositing functionality
     TerminalDisplay::setTransparencyEnabled( KWindowSystem::compositingActive() );
 }
@@ -267,13 +258,6 @@ void Application::toggleBackgroundInstance()
 
 Application::~Application()
 {
-    delete SessionManager::instance();
-    delete ColorSchemeManager::instance();
-    delete KeyboardTranslatorManager::instance();
-
-    SessionManager::setInstance(0);
-    ColorSchemeManager::setInstance(0);
-    KeyboardTranslatorManager::setInstance(0);
 }
 
 void Application::detachView(Session* session)

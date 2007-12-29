@@ -426,7 +426,7 @@ char Emulation::getErase() const
 
 void Emulation::setImageSize(int lines, int columns)
 {
-  //qDebug() << "Resizing image to: " << lines << "by" << columns << QTime::currentTime().msec();
+  //kDebug() << "Resizing image to: " << lines << "by" << columns << QTime::currentTime().msec();
   Q_ASSERT( lines > 0 );
   Q_ASSERT( columns > 0 );
 

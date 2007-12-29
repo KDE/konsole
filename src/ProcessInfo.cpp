@@ -26,7 +26,7 @@
 #include <arpa/inet.h>
 
 // Qt
-#include <QtCore/QDebug>
+#include <KDebug>
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
 #include <QtCore/QRegExp>
@@ -484,9 +484,9 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
     if ( !ok || name != "ssh" )
     {
         if ( !ok )
-            qDebug() << "Could not read process info";
+            kDebug() << "Could not read process info";
         else
-            qDebug() << "Process is not a SSH process";
+            kDebug() << "Process is not a SSH process";
 
         return;
     }
@@ -538,7 +538,7 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
             if ( _host.isEmpty() )
             {
                 // found username and host argument
-                qDebug() << "[username] and host: " << args[i];
+                kDebug() << "[username] and host: " << args[i];
 
                 // check to see if only a hostname is specified, or whether
                 // both a username and host are specified ( in which case they
@@ -551,14 +551,14 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
                     _user = args[i].left(separatorPosition);
                     _host = args[i].mid(separatorPosition+1);
 
-                    qDebug() << "found user: " << _user;
-                    qDebug() << "found host: " << _host;
+                    kDebug() << "found user: " << _user;
+                    kDebug() << "found host: " << _host;
                 }
                 else
                 {
                     // just the host specified
                     _host = args[i];
-                    qDebug() << "found only host: " << _host;
+                    kDebug() << "found only host: " << _host;
                 }
             }
             else
@@ -566,14 +566,14 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
                 // host has already been found, this must be the command argument
                 _command = args[i];
 
-                qDebug() << "found command: " << _command;
+                kDebug() << "found command: " << _command;
             }
 
          }
     }
     else
     {
-        qDebug() << "Could not read arguments";
+        kDebug() << "Could not read arguments";
         
         return;
     }

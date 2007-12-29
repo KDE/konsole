@@ -35,6 +35,7 @@
 #include <krun.h>
 #include <kshell.h>
 #include <kconfig.h>
+#include <kglobal.h>
 #include <kdebug.h>
 #include <kconfiggroup.h>
 #include <kstandarddirs.h>
@@ -47,8 +48,6 @@
 #include "ShellCommand.h"
 
 using namespace Konsole;
-
-SessionManager* SessionManager::_instance = 0;
 
 #if 0
 
@@ -142,7 +141,7 @@ QString SessionManager::loadProfile(const QString& shortPath)
 
     if ( !parentProfile.isEmpty() )
     {
-        //qDebug() << "Loading parent profile" << parentProfile;
+        //kDebug() << "Loading parent profile" << parentProfile;
 
         QString parentKey = loadProfile(parentProfile);
         newProfile->setParent(profile(parentKey));
@@ -170,7 +169,7 @@ void SessionManager::loadAllProfiles()
     if ( _loadedAllProfiles )
         return;
 
-    qDebug() << "Loading all profiles";
+    kDebug() << "Loading all profiles";
 
     KDE3ProfileReader kde3Reader;
     KDE4ProfileReader kde4Reader;
@@ -267,7 +266,7 @@ void SessionManager::sessionTerminated(QObject* sessionObject)
 {
     Session* session = qobject_cast<Session*>(sessionObject);
 
-    //qDebug() << "Session finished: " << session->title(Session::NameRole);
+    //kDebug() << "Session finished: " << session->title(Session::NameRole);
 
     Q_ASSERT( session );
 
@@ -325,7 +324,7 @@ void SessionManager::changeProfile(const QString& key ,
         return;
     }
 
-    qDebug() << "Profile about to change: " << info->name();
+    kDebug() << "Profile about to change: " << info->name();
     
     // insert the changes into the existing Profile instance
     QListIterator<Profile::Property> iter(propertyMap.keys());
@@ -335,7 +334,7 @@ void SessionManager::changeProfile(const QString& key ,
         info->setProperty(property,propertyMap[property]);
     }
     
-    qDebug() << "Profile changed: " << info->name();
+    kDebug() << "Profile changed: " << info->name();
 
     // apply the changes to existing sessions
     applyProfile(key,true);
@@ -512,7 +511,7 @@ void SessionManager::setDefaultProfile(const QString& key)
 
    QFileInfo fileInfo(path);
 
-   qDebug() << "setting default session type to " << fileInfo.fileName();
+   kDebug() << "setting default session type to " << fileInfo.fileName();
 
    KSharedConfigPtr config = KGlobal::config();
    KConfigGroup group = config->group("Desktop Entry");
@@ -531,14 +530,14 @@ void SessionManager::setFavorite(const QString& key , bool favorite)
 
     if ( favorite && !_favorites.contains(key) )
     {
-        qDebug() << "adding favorite - " << key;
+        kDebug() << "adding favorite - " << key;
 
         _favorites.insert(key);
         emit favoriteStatusChanged(key,favorite);
     }
     else if ( !favorite && _favorites.contains(key) )
     {
-        qDebug() << "removing favorite - " << key;
+        kDebug() << "removing favorite - " << key;
         _favorites.remove(key);
         emit favoriteStatusChanged(key,favorite);
     }
@@ -720,13 +719,11 @@ QKeySequence SessionManager::shortcut(const QString& profileKey) const
     return QKeySequence();
 }
 
-void SessionManager::setInstance(SessionManager* instance)
-{
-    _instance = instance;
-}
+
+K_GLOBAL_STATIC( SessionManager , theSessionManager )
 SessionManager* SessionManager::instance()
 {
-    return _instance;
+	return theSessionManager;
 }
 
 

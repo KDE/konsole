@@ -25,7 +25,7 @@
 #include <QtGui/QBrush>
 #include <QtGui/QPainter>
 #include <QtGui/QStandardItem>
-#include <QtCore/QDebug>
+#include <KDebug>
 #include <QtCore/QTextCodec>
 #include <QtGui/QTextEdit>
 #include <QtGui/QLinearGradient>
@@ -36,6 +36,7 @@
 
 // KDE
 #include <kcodecaction.h>
+#include <KDebug>
 #include <KFontDialog>
 #include <KIcon>
 #include <KIconDialog>
@@ -673,7 +674,7 @@ void EditProfileDialog::colorSchemeSelected()
         QAbstractItemModel* model = _ui->colorSchemeList->model();
         const ColorScheme* colors = model->data(selected.first(),Qt::UserRole+1).value<const ColorScheme*>();
 
-        qDebug() << "Setting temp profile color to" << colors->name();
+        kDebug() << "Setting temp profile color to" << colors->name();
         
 		previewColorScheme(selected.first());
 		_tempProfile->setProperty(Profile::ColorScheme,colors->name());
