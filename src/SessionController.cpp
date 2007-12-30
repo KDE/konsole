@@ -964,19 +964,18 @@ void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , in
 
 void SessionController::sessionStateChanged(int state)
 {
-    //TODO - Share icons across sessions ( possible using a static QHash<QString,QIcon> variable
-    // to create a cache of icons mapped from icon names? )
-
     if ( state == _previousState )
         return;
 
     _previousState = state;
 
+    // TODO - Replace the icon choices below when suitable icons for silence and activity
+    // are available
     if ( state == NOTIFYACTIVITY )
     {
         if (_activityIcon.isNull())
         {
-            _activityIcon = KIcon("activity");
+            _activityIcon = KIcon("dialog-information");
         }
 
         setIcon(_activityIcon);
@@ -985,7 +984,7 @@ void SessionController::sessionStateChanged(int state)
     {
         if (_silenceIcon.isNull())
         {
-            _silenceIcon = KIcon("silence");
+            _silenceIcon = KIcon("dialog-information");
         }
 
         setIcon(_silenceIcon);

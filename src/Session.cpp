@@ -418,10 +418,13 @@ QString Session::tabTitleFormat(TabTitleContext context) const
 void Session::monitorTimerDone()
 {
   //FIXME: The idea here is that the notification popup will appear to tell the user than output from
-  //the _terminal has stopped and the popup will disappear when the user activates the session.
+  //the terminal has stopped and the popup will disappear when the user activates the session.
   //
   //This breaks with the addition of multiple views of a session.  The popup should disappear
   //when any of the views of the session becomes active
+  
+
+  //FIXME: Make message text for this notification and the activity notification more descriptive.	
   if (_monitorSilence) {
     KNotification::event("Silence", i18n("Silence in session '%1'", _nameTitle), QPixmap(),
                     QApplication::activeWindow(),
