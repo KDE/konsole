@@ -442,7 +442,7 @@ ColorScheme* KDE3ColorSchemeReader::read()
         }
         else
         {
-            qWarning() << "KDE 3 color scheme contains an unsupported feature, '" <<
+            kWarning() << "KDE 3 color scheme contains an unsupported feature, '" <<
                 line << "'";
         } 
     }
@@ -603,7 +603,7 @@ bool ColorSchemeManager::loadColorScheme(const QString& filePath)
 
     if (scheme->name().isEmpty()) 
     {
-        qWarning() << "Color scheme in" << filePath << "does not have a valid name and was not loaded.";
+        kWarning() << "Color scheme in" << filePath << "does not have a valid name and was not loaded.";
         delete scheme;
         return false;
     }    
@@ -653,7 +653,7 @@ bool ColorSchemeManager::deleteColorScheme(const QString& name)
     }
     else
     {
-        qWarning() << "Failed to remove color scheme -" << path;
+        kWarning() << "Failed to remove color scheme -" << path;
         return false;
     }
 }

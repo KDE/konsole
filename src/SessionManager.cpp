@@ -320,7 +320,7 @@ void SessionManager::changeProfile(const QString& key ,
 
     if (!info || key.isEmpty())
     {
-        qWarning() << "Profile for key" << key << "not found.";
+        kWarning() << "Profile for key" << key << "not found.";
         return;
     }
 
@@ -473,7 +473,7 @@ bool SessionManager::deleteProfile(const QString& key)
         {
             if (!QFile::remove(type->path()))
             {
-                qWarning() << "Could not delete profile: " << type->path()
+                kWarning() << "Could not delete profile: " << type->path()
                     << "The file is most likely in a directory which is read-only.";
 
                 return false;

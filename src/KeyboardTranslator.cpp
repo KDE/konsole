@@ -94,7 +94,7 @@ const KeyboardTranslator* KeyboardTranslatorManager::findTranslator(const QStrin
     if ( translator != 0 )
         _translators[name] = translator;
     else if ( !name.isEmpty() )
-        qWarning() << "Unable to load translator" << name;
+        kWarning() << "Unable to load translator" << name;
 
     return translator;
 }
@@ -110,7 +110,7 @@ bool KeyboardTranslatorManager::saveTranslator(const KeyboardTranslator* transla
     
     if (!destination.open(QIODevice::WriteOnly | QIODevice::Text))
     {
-        qWarning() << "Unable to save keyboard translation:" 
+        kWarning() << "Unable to save keyboard translation:" 
                    << destination.errorString();
 
         return false;
@@ -268,7 +268,7 @@ void KeyboardTranslatorReader::readNext()
             {
                 // identify command
 				if (!parseAsCommand(tokens[2].text,command))
-					qWarning() << "Command" << tokens[2].text << "not understood.";
+					kWarning() << "Command" << tokens[2].text << "not understood.";
             }
 
             KeyboardTranslator::Entry newEntry;
@@ -541,7 +541,7 @@ QList<KeyboardTranslatorReader::Token> KeyboardTranslatorReader::tokenize(const 
     }
     else
     {
-        qWarning() << "Line in keyboard translator file could not be understood:" << text;
+        kWarning() << "Line in keyboard translator file could not be understood:" << text;
     }
 
     return list;
@@ -852,7 +852,7 @@ void KeyboardTranslatorManager::addTranslator(KeyboardTranslator* translator)
     _translators.insert(translator->name(),translator);
 
     if ( !saveTranslator(translator) )
-        qWarning() << "Unable to save translator" << translator->name()
+        kWarning() << "Unable to save translator" << translator->name()
                    << "to disk.";
 }
 bool KeyboardTranslatorManager::deleteTranslator(const QString& name)
@@ -868,7 +868,7 @@ bool KeyboardTranslatorManager::deleteTranslator(const QString& name)
     }
     else
     {
-        qWarning() << "Failed to remove translator - " << path;
+        kWarning() << "Failed to remove translator - " << path;
         return false;
     }
 }
