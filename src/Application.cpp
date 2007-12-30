@@ -32,6 +32,7 @@
 // KDE
 #include <KAction>
 #include <KCmdLineArgs>
+#include <KIcon>
 #include <KWindowSystem>
 
 // Konsole
@@ -66,6 +67,8 @@ void Application::init()
 
     // check for compositing functionality
     TerminalDisplay::setTransparencyEnabled( KWindowSystem::compositingActive() );
+
+    setWindowIcon(KIcon("utilities-terminal"));
 }
 
 Application* Application::self()

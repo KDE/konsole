@@ -30,7 +30,6 @@
 // KDE
 #include <KAboutData>
 #include <KCmdLineArgs>
-#include <KIcon>
 #include <KLocale>
 #include <KWindowSystem>
 
@@ -90,14 +89,12 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
 		getDisplayInformation(display,visual,colormap);
 
 		Application app(display,(Qt::HANDLE)visual,(Qt::HANDLE)colormap);
-		QApplication::setWindowIcon(KIcon("utilities-terminal"));
 		return app.exec();
 	}
 	else
 #endif 
 	{
     	Application app;
-    	QApplication::setWindowIcon(KIcon("utilities-terminal"));
     	return app.exec();
 	}   
 }
@@ -193,7 +190,7 @@ void getDisplayInformation(Display*& display , Visual*& visual , Colormap& color
 {
     display = XOpenDisplay(0); // open default display
     if (!display) {
-        qWarning("Cannot connect to the X server");
+        kWarning("Cannot connect to the X server");
         exit(1);
     }
 
