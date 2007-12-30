@@ -66,7 +66,7 @@ Comment[wa]=Prémetou profil pol Konsole
 Comment[x-test]=xxKonsole default profilexx
 Comment[zh_CN]=Konsole 默认配置文件
 Comment[zh_TW]=Konsole 預設設定檔
-Icon=konsole
+Icon=utilities-terminal
 LocalTabTitleFormat=%d : %n
 RemoteTabTitleFormat=%h : %u
 

@@ -30,6 +30,7 @@
 // KDE
 #include <KAboutData>
 #include <KCmdLineArgs>
+#include <KIcon>
 #include <KLocale>
 #include <KWindowSystem>
 
@@ -89,12 +90,14 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
 		getDisplayInformation(display,visual,colormap);
 
 		Application app(display,(Qt::HANDLE)visual,(Qt::HANDLE)colormap);
+		QApplication::setWindowIcon(KIcon("utilities-terminal"));
 		return app.exec();
 	}
 	else
 #endif 
 	{
     	Application app;
+    	QApplication::setWindowIcon(KIcon("utilities-terminal"));
     	return app.exec();
 	}   
 }
