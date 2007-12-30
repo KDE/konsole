@@ -58,7 +58,8 @@ using namespace Konsole;
 MainWindow::MainWindow()
  : KXmlGuiWindow() ,
    _bookmarkHandler(0),
-   _pluggedController(0)
+   _pluggedController(0),
+   _menuBarVisibilitySet(false)
 {
     // create actions for menus
     // the directory ('konsole') is included in the path here so that the XML
@@ -75,8 +76,8 @@ MainWindow::MainWindow()
     connect( _viewManager , SIGNAL(viewPropertiesChanged(const QList<ViewProperties*>&)) ,
            bookmarkHandler() , SLOT(setViews(const QList<ViewProperties*>&)) );
 
-    connect( _viewManager , SIGNAL(setMenuBarVisibleRequest(bool)) , menuBar() ,
-            SLOT(setVisible(bool)) );
+    connect( _viewManager , SIGNAL(setMenuBarVisibleRequest(bool)) , this ,
+            SLOT(setMenuBarVisibleOnce(bool)) );
     connect( _viewManager , SIGNAL(newViewRequest()) , this , SLOT(newTab()) );
 
     // create main window widgets
@@ -91,6 +92,16 @@ MainWindow::MainWindow()
 
     // enable save and restore of window size
     setAutoSaveSettings("MainWindow",true);
+}
+
+void MainWindow::setMenuBarVisibleOnce(bool visible)
+{
+	if (_menuBarVisibilitySet)
+		return;
+
+	menuBar()->setVisible(visible);
+
+	_menuBarVisibilitySet = true;	
 }
 
 void MainWindow::correctShortcuts()

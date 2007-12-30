@@ -94,6 +94,7 @@ class MainWindow : public KXmlGuiWindow
          */
         QString defaultProfile() const;
 
+		
     signals:
         /** 
          * Emitted by the main window to request the creation of a new session.
@@ -142,6 +143,7 @@ class MainWindow : public KXmlGuiWindow
         void sessionListChanged(const QList<QAction*>& actions);
         void viewFullScreen(bool fullScreen);
         void configureNotifications();
+		void setMenuBarVisibleOnce(bool visible);
 
     private:
         void correctShortcuts();
@@ -158,6 +160,7 @@ class MainWindow : public KXmlGuiWindow
         QPointer<SessionController> _pluggedController;
 
         QString _defaultProfile;
+		bool _menuBarVisibilitySet;
 };
 
 }
