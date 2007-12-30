@@ -96,10 +96,11 @@ MainWindow::MainWindow()
 
 void MainWindow::setMenuBarVisibleOnce(bool visible)
 {
-	if (_menuBarVisibilitySet)
+	if (_menuBarVisibilitySet || menuBar()->isTopLevelMenu() )
 		return;
 
 	menuBar()->setVisible(visible);
+	_toggleMenuBarAction->setChecked(visible);
 
 	_menuBarVisibilitySet = true;	
 }
