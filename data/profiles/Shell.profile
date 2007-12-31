@@ -1,12 +1,14 @@
 [General]
 Name=Shell
 Name[af]=Tolk
+Name[bg]=Шел
 Name[bn]=শেল
 Name[ca]=Intèrpret d'ordres
 Name[cy]=Plisgyn
 Name[da]=Skal
 Name[el]=Κέλυφος
 Name[eo]=Ŝelo
+Name[es]=Intérprete de comandos
 Name[fr]=Terminal
 Name[ga]=Blaosc
 Name[hr]=Ljuska
@@ -37,10 +39,12 @@ Name[uz]=Терминал
 Name[x-test]=xxShellxx
 Name[xh]=Iqokobhe
 Comment=Konsole default profile
+Comment[bg]=Профил по подразбиране на конзолата
 Comment[ca]=Perfil per omissió del Konsole
 Comment[de]=Konsole-Standardprofil
 Comment[el]=Προκαθορισμένο προφίλ του Konsole
 Comment[eo]=Defaŭlta profilo por Konzolo
+Comment[es]=Perfil predeterminado de Konsole
 Comment[et]=Konsooli vaikimisi profiil
 Comment[ga]=Próifíl réamhshocraithe Konsole
 Comment[hu]=Alapértelmezett Konsole-profil

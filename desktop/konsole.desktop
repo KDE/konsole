@@ -7,7 +7,6 @@ Terminal=false
 X-KDE-StartupNotify=true
 
 Name=Konsole
-Name[bg]=Конзола
 Name[bn]=কনসোল
 Name[csb]=Kònsola
 Name[el]=Κονσόλα

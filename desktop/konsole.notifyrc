@@ -1,6 +1,7 @@
 [Global]
 IconName=utilities-terminal
 Comment=Konsole
+Comment[bg]=Конзола
 Comment[bn]=কনসোল
 Comment[ca]=Consola
 Comment[csb]=Kònsola
