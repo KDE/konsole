@@ -131,9 +131,6 @@ ViewManager* MainWindow::viewManager() const
 
 void MainWindow::activeViewChanged(SessionController* controller)
 {
-    if ( _pluggedController == controller )
-        return;
-
     // associate bookmark menu with current session
     bookmarkHandler()->setActiveView(controller);
     disconnect( bookmarkHandler() , SIGNAL(openUrl(const KUrl&)) , 0 , 0 );

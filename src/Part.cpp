@@ -181,9 +181,6 @@ void Part::activeViewChanged(SessionController* controller)
 
     widget()->setFocusProxy( _viewManager->activeView() );
 
-    if ( controller == _pluggedController )
-        return;
-
 	// remove existing controller
     if (_pluggedController) 
 	{

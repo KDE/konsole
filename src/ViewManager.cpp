@@ -465,13 +465,16 @@ SessionController* ViewManager::createController(Session* session , TerminalDisp
 
 	// if this is the first controller created then set it as the active controller
 	if (!_pluggedController)
-		_pluggedController = controller;
+		controllerChanged(controller);
 
     return controller;
 }
 
 void ViewManager::controllerChanged(SessionController* controller)
 {
+	if ( controller == _pluggedController )
+		return;
+
 	_pluggedController = controller;
 	emit activeViewChanged(controller);
 }
