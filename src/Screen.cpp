@@ -785,10 +785,8 @@ void Screen::ShowCharacter(unsigned short c)
 
   lastPos = loc(cuX,cuY);
 
-  // // check if selection is still valid.
+  // check if selection is still valid.
   checkSelection(cuX,cuY);
-
-  
 
   Character& currentChar = screenLines[cuY][cuX];
 
@@ -798,9 +796,7 @@ void Screen::ShowCharacter(unsigned short c)
   currentChar.rendition = ef_re;
 
   int i = 0;
-
-  cuX += w--;
-
+  int newCursorX = cuX + w--;
   while(w)
   {
      i++;
@@ -816,6 +812,7 @@ void Screen::ShowCharacter(unsigned short c)
 
      w--;
   }
+  cuX = newCursorX;
 }
 
 void Screen::compose(const QString& /*compose*/)
