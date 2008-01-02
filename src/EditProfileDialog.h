@@ -129,7 +129,6 @@ private slots:
     void colorSchemeSelected();
     void previewColorScheme(const QModelIndex& index);
     void fontSelected(const QFont&);
-    //void previewFont(const QFont&);
 
     void colorSchemeAnimationUpdate();
 
@@ -179,7 +178,6 @@ private:
     void updateColorSchemeButtons();
     void updateKeyBindingsList(bool selectCurrentTranslator = false);
     void updateKeyBindingsButtons();
-    void updateFontPreviewLabel(const QFont& font);
 
     void showColorSchemeEditor(bool newScheme);
     void showKeyBindingEditor(bool newTranslator);

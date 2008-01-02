@@ -409,7 +409,8 @@ void EditProfileDialog::setupAppearancePage(const Profile* info)
 
     // setup font preview
     const QFont& font = info->font();
-    updateFontPreviewLabel(font);
+	_ui->fontPreviewLabel->installEventFilter(this);
+	_ui->fontPreviewLabel->setFont(font);
     _ui->fontSizeSlider->setValue( font.pointSize() );
     _ui->fontSizeSlider->setMinimum( KGlobalSettings::smallestReadableFont().pointSize() );
 
@@ -424,11 +425,6 @@ void EditProfileDialog::colorSchemeAnimationUpdate()
 
     for ( int i = model->rowCount() ; i >= 0 ; i-- )
         _ui->colorSchemeList->update( model->index(i,0) );
-}
-void EditProfileDialog::updateFontPreviewLabel(const QFont& font)
-{
-    _ui->fontPreviewLabel->setFont(font);
-    _ui->fontPreviewLabel->setText(i18n("%1, size %2",font.family(),font.pointSize()));
 }
 void EditProfileDialog::updateColorSchemeList(bool selectCurrentScheme)
 {
@@ -529,6 +525,11 @@ bool EditProfileDialog::eventFilter( QObject* watched , QEvent* event )
         else
             unpreview(Profile::ColorScheme);
     }
+	if ( watched == _ui->fontPreviewLabel && event->type() == QEvent::FontChange )
+	{
+		const QFont& labelFont = _ui->fontPreviewLabel->font();
+		_ui->fontPreviewLabel->setText(i18n("%1, size %2",labelFont.family(),labelFont.pointSize()));
+	}
 
     return KDialog::eventFilter(watched,event);
 }
@@ -992,8 +993,9 @@ void EditProfileDialog::fontSelected(const QFont& font)
                                   qMax(slider->maximum(),font.pointSize()) );
    _ui->fontSizeSlider->setValue(font.pointSize());
    _ui->fontPreviewLabel->setFont(font);
-
+   
    _tempProfile->setProperty(Profile::Font,font);
+
    preview(Profile::Font,font);
 }
 void EditProfileDialog::showFontDialog()
@@ -1004,13 +1006,15 @@ void EditProfileDialog::showFontDialog()
     dialog->setFont(currentFont, true);
 
     connect( dialog , SIGNAL(fontSelected(const QFont&)) , this , SLOT(fontSelected(const QFont&)) );
-    dialog->show(); 
+
+    if (dialog->exec() == QDialog::Rejected)
+		fontSelected(currentFont);
 }
 void EditProfileDialog::setFontSize(int pointSize)
 {
     QFont newFont = _ui->fontPreviewLabel->font();
     newFont.setPointSize(pointSize);
-    updateFontPreviewLabel(newFont);
+	_ui->fontPreviewLabel->setFont(newFont);
 
     _tempProfile->setProperty(Profile::Font,newFont);
 
