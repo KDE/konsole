@@ -623,8 +623,8 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
             return;
    
     // setup bold and underline
-    bool useBold = style->rendition & RE_BOLD || style->isBold(_colorTable);
-    bool useUnderline = style->rendition & RE_UNDERLINE;
+    bool useBold = style->rendition & RE_BOLD || style->isBold(_colorTable) || font().bold();
+    bool useUnderline = style->rendition & RE_UNDERLINE || font().underline();
 
     QFont font = painter.font();
     if (    font.bold() != useBold 
