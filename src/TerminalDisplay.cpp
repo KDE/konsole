@@ -798,11 +798,15 @@ void TerminalDisplay::processFilters()
     QTime t;
     t.start();
 
+	// use _screenWindow->getImage() here rather than _image because
+	// other classes may call processFilters() when this display's
+	// ScreenWindow emits a scrolled() signal - which will happen before
+	// updateImage() is called on the display and therefore _image is 
+	// out of date at this point
 	_filterChain->setImage( _screenWindow->getImage(),
 							_screenWindow->windowLines(),
 							_screenWindow->windowColumns(),
 							_screenWindow->getLineProperties() );
-    //_filterChain->setImage( /*_image*/,_lines,_columns,_lineProperties);
     _filterChain->process();
 }
 

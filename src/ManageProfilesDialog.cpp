@@ -226,6 +226,10 @@ void ManageProfilesDialog::tableSelectionChanged(const QItemSelection& selection
 }
 void ManageProfilesDialog::deleteSelected()
 {
+	// TODO - Possibly add a warning here if the selected profile is the parent of 
+	// one or more other profiles since deleting a profile will change the settings
+	// of the profiles which inherit from it.
+	
 	Q_ASSERT( !selectedKey().isEmpty()  );
     Q_ASSERT( selectedKey() != SessionManager::instance()->defaultProfileKey() );
 
@@ -260,6 +264,9 @@ void ManageProfilesDialog::newType()
     Profile* newProfile = new Profile(parentProfile);
     newProfile->setProperty(Profile::Name,i18n("New Profile"));
     const QString& key = SessionManager::instance()->addProfile(newProfile);
+
+	kDebug() << "Key for new profile" << key;
+
     dialog.setProfile(key); 
     dialog.selectProfileName();
 
