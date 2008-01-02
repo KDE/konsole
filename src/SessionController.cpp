@@ -84,6 +84,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _urlFilterUpdateRequired(false)
     , _codecAction(0)
     , _changeProfileMenu(0)
+	, _listenForScreenWindowUpdates(false)
 {
     Q_ASSERT( session );
     Q_ASSERT( view );
@@ -132,6 +133,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     connect( _session->emulation() , SIGNAL(outputChanged()) , this ,
             SLOT(fireActivity()) );
 
+	
     // listen for flow control status changes
     connect( _session , SIGNAL(flowControlEnabledChanged(bool)) , _view , 
 		SLOT(setFlowControlWarningEnabled(bool)) );
@@ -147,6 +149,18 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     activityTimer->setInterval(2000);
     connect( _view , SIGNAL(keyPressedSignal(QKeyEvent*)) , activityTimer , SLOT(start()) );
     connect( activityTimer , SIGNAL(timeout()) , this , SLOT(snapshot()) );
+}
+
+void SessionController::updateSearchFilter()
+{
+	if ( _searchFilter ) 
+	{
+		Q_ASSERT( searchBar() && searchBar()->isVisible() );
+
+		_view->processFilters();
+		// TODO - Optimize by only repainting the affected regions
+		_view->update();
+	}
 }
 
 SessionController::~SessionController()
@@ -706,6 +720,19 @@ void SessionController::searchHistory()
 }
 #endif
 
+void SessionController::listenForScreenWindowUpdates()
+{
+	if (_listenForScreenWindowUpdates)
+		return;
+
+	connect( _view->screenWindow() , SIGNAL(outputChanged()) , this , 
+			SLOT(updateSearchFilter()) );
+	connect( _view->screenWindow() , SIGNAL(scrolled(int)) , this , 
+			SLOT(updateSearchFilter()) );
+
+	_listenForScreenWindowUpdates = true;
+}
+
 // searchHistory() may be called either as a result of clicking a menu item or
 // as a result of changing the search bar widget
 void SessionController::searchHistory(bool showSearchBar)
@@ -718,6 +745,8 @@ void SessionController::searchHistory(bool showSearchBar)
         {
             removeSearchFilter();
 
+			listenForScreenWindowUpdates();
+			
             _searchFilter = new RegExpFilter();
             _view->filterChain()->addFilter(_searchFilter);
             connect( _searchBar , SIGNAL(searchChanged(const QString&)) , this ,

@@ -798,7 +798,11 @@ void TerminalDisplay::processFilters()
     QTime t;
     t.start();
 
-    _filterChain->setImage(_image,_lines,_columns,_lineProperties);
+	_filterChain->setImage( _screenWindow->getImage(),
+							_screenWindow->windowLines(),
+							_screenWindow->windowColumns(),
+							_screenWindow->getLineProperties() );
+    //_filterChain->setImage( /*_image*/,_lines,_columns,_lineProperties);
     _filterChain->process();
 }
 

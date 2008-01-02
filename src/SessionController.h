@@ -200,6 +200,8 @@ private slots:
 
     void trackOutput();  // move view to end of current output
 
+	void updateSearchFilter();
+
     // debugging slots
     void debugProcess();
 
@@ -212,6 +214,7 @@ private:
     void setupActions();
     void removeSearchFilter(); // remove and delete the current search filter if set
     void setFindNextPrevEnabled(bool enabled);
+	void listenForScreenWindowUpdates();
 
 private:
     static KIcon _activityIcon;
@@ -241,6 +244,8 @@ private:
     KCodecAction* _codecAction;
 
     KMenu* _changeProfileMenu;
+
+	bool _listenForScreenWindowUpdates;
 };
 
 /** 
