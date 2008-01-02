@@ -226,6 +226,7 @@ void ManageProfilesDialog::tableSelectionChanged(const QItemSelection& selection
 }
 void ManageProfilesDialog::deleteSelected()
 {
+	Q_ASSERT( !selectedKey().isEmpty()  );
     Q_ASSERT( selectedKey() != SessionManager::instance()->defaultProfileKey() );
 
     SessionManager::instance()->deleteProfile(selectedKey());
@@ -244,10 +245,19 @@ void ManageProfilesDialog::newType()
 {
     EditProfileDialog dialog(this);
  
-    // setup a temporary profile, inheriting from the default profile
-    Profile* defaultProfile = SessionManager::instance()->defaultProfile();
+    // setup a temporary profile, inheriting from the selected profile
+	// or the default if no profile is selected
+    Profile* parentProfile = 0;
 
-    Profile* newProfile = new Profile(defaultProfile);
+	QString selectedProfileKey = selectedKey();
+	if ( selectedProfileKey.isEmpty() ) 
+		parentProfile = SessionManager::instance()->defaultProfile();
+	else
+		parentProfile = SessionManager::instance()->profile(selectedProfileKey);
+
+	Q_ASSERT( parentProfile );
+
+    Profile* newProfile = new Profile(parentProfile);
     newProfile->setProperty(Profile::Name,i18n("New Profile"));
     const QString& key = SessionManager::instance()->addProfile(newProfile);
     dialog.setProfile(key); 
@@ -264,18 +274,22 @@ void ManageProfilesDialog::newType()
 }
 void ManageProfilesDialog::editSelected()
 {
+	Q_ASSERT( !selectedKey().isEmpty() );
+
     EditProfileDialog dialog(this);
     dialog.setProfile(selectedKey());
     dialog.exec();
 }
 QString ManageProfilesDialog::selectedKey() const
 {
-    Q_ASSERT( _ui->sessionTable->selectionModel() &&
-              _ui->sessionTable->selectionModel()->selectedRows().count() == 1 );
+	QItemSelectionModel* selection = _ui->sessionTable->selectionModel();
+
+	if ( !selection || selection->selectedRows().count() != 1 )
+		return QString();
+
     // TODO There has to be an easier way of getting the data
     // associated with the currently selected item
-    return _ui->sessionTable->
-            selectionModel()->
+    return  selection->
             selectedIndexes().first().data( Qt::UserRole + 1 ).value<QString>();
 }
 void ManageProfilesDialog::updateFavoriteStatus(const QString& key , bool favorite)
