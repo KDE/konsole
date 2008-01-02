@@ -178,9 +178,11 @@ QHash<Profile::Property,QVariant> Profile::setProperties() const
 
 QVariant Profile::property(Property property) const
 {
+	bool canInheritProperty = property != Path;
+
     if ( _propertyValues.contains(property) )
         return _propertyValues[property];
-    else if ( _parent )
+    else if ( _parent && canInheritProperty )
         return _parent->property(property);
     else
         return QVariant();
