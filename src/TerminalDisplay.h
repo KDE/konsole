@@ -609,7 +609,11 @@ private:
     void makeImage();
     
     void paintFilters(QPainter& painter);
-    
+
+	// returns a region covering all of the areas of the widget which contain
+	// a hotspot
+	QRegion hotSpotRegion() const;
+
     // the window onto the terminal screen which this display
     // is currently showing.  
     QPointer<ScreenWindow> _screenWindow;

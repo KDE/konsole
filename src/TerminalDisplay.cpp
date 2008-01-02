@@ -793,10 +793,25 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
     scroll( 0 , _fontHeight * (-lines) , scrollRect );
 }
 
+QRegion TerminalDisplay::hotSpotRegion() const 
+{
+	QRegion region;
+	foreach( Filter::HotSpot* hotSpot , _filterChain->hotSpots() )
+	{
+		QRect rect;
+		rect.setLeft(hotSpot->startColumn());
+		rect.setTop(hotSpot->startLine());
+		rect.setRight(hotSpot->endColumn());
+		rect.setBottom(hotSpot->endLine());
+
+		region |= imageToWidget(rect); 
+	}
+	return region;
+}
+
 void TerminalDisplay::processFilters() 
 {
-    QTime t;
-    t.start();
+	QRegion preUpdateHotSpots = hotSpotRegion();
 
 	// use _screenWindow->getImage() here rather than _image because
 	// other classes may call processFilters() when this display's
@@ -808,6 +823,10 @@ void TerminalDisplay::processFilters()
 							_screenWindow->windowColumns(),
 							_screenWindow->getLineProperties() );
     _filterChain->process();
+
+	QRegion postUpdateHotSpots = hotSpotRegion();
+
+	update( preUpdateHotSpots | postUpdateHotSpots );
 }
 
 void TerminalDisplay::updateImage() 

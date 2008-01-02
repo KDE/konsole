@@ -158,8 +158,6 @@ void SessionController::updateSearchFilter()
 		Q_ASSERT( searchBar() && searchBar()->isVisible() );
 
 		_view->processFilters();
-		// TODO - Optimize by only repainting the affected regions
-		_view->update();
 	}
 }
 
@@ -367,8 +365,6 @@ bool SessionController::eventFilter(QObject* watched , QEvent* event)
                 _viewUrlFilter = new UrlFilter();
                 _view->filterChain()->addFilter( _viewUrlFilter );
             }
-
-            //kDebug() << "Updating url filter.";
 
             _view->processFilters();
             _urlFilterUpdateRequired = false;
@@ -821,9 +817,6 @@ void SessionController::beginSearch(const QString& text , int direction)
     }
 
     _view->processFilters();
-
-      // TODO - Optimise by only updating affected regions
-    _view->update();
 }
 void SessionController::highlightMatches(bool highlight)
 {
