@@ -43,6 +43,7 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     : KDialog(parent)
 {
     setCaption(i18n("Manage Profiles"));
+    setButtons( KDialog::Close ); 
 
     _ui = new Ui::ManageProfilesDialog();
     _ui->setupUi(mainWidget());
