@@ -106,10 +106,8 @@ public:
    * input from the viewing widget (key presses, mouse activity etc.)
    * will be sent to the terminal.
    *
-   * Since terminal applications assume a single terminal screen,
-   * all views of a session will display the same number of lines and
-   * columns.
-   *
+   * Views can be removed using removeView().  The session is automatically
+   * closed when the last view is removed.
    */
   void addView(TerminalDisplay* widget);
   /**
