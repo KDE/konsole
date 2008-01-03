@@ -285,6 +285,7 @@ QString MainWindow::activeSessionDir() const
 
 void MainWindow::openUrls(const QList<KUrl>& urls)
 {
+	// TODO Implement support for SSH bookmarks here
 	foreach( const KUrl& url , urls )
 	{
 		if ( url.isLocalFile() )
