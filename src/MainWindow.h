@@ -25,6 +25,7 @@
 
 // KDE
 #include <KXmlGuiWindow>
+#include <KUrl>
 
 class KToggleAction;
 
@@ -147,6 +148,8 @@ class MainWindow : public KXmlGuiWindow
 		// single shot call to set the visibility of the menu bar.  Has no 
 		// effect if the menu bar is a MacOS-style top-level menu
 		void setMenuBarVisibleOnce(bool visible);
+
+		void openUrls(const QList<KUrl>& urls);
 
     private:
         void correctShortcuts();

@@ -72,14 +72,13 @@ public:
     virtual bool enableOption(BookmarkOption option) const;
     virtual bool supportsTabs() const;
     virtual QList<QPair<QString,QString> > currentBookmarkList() const;
+	virtual void openFolderinTabs(const KBookmarkGroup& group);
 
     /** 
      * Returns the menu which this bookmark handler inserts its actions into.
      */
     KMenu *menu() const { return m_menu; }
 
-
-    
     QList<ViewProperties*> views() const;
     ViewProperties* activeView() const;
 
@@ -100,6 +99,14 @@ signals:
      */
     void openUrl( const KUrl& url ); 
 
+	/**
+	 * Emitted when the user selects 'Open Folder in Tabs' 
+	 * from the bookmark menu.
+	 *
+	 * @param urls The urls of the bookmarks in the folder whoose
+	 * 'Open Folder in Tabs' action was triggered
+	 */
+	void openUrls( const QList<KUrl>& urls );
 
 private Q_SLOTS:
     void openBookmark( const KBookmark & bm, Qt::MouseButtons, Qt::KeyboardModifiers );

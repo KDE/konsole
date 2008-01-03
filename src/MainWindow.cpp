@@ -211,6 +211,8 @@ void MainWindow::setupActions()
     _bookmarkHandler = new BookmarkHandler( collection , bookmarkMenu->menu() , true , this );
     collection->addAction("bookmark" , bookmarkMenu);
 
+	connect( _bookmarkHandler , SIGNAL(openUrls(QList<KUrl>)) , this , SLOT(openUrls(QList<KUrl>)) );
+
     //TODO - The 'Add Bookmark' menu action currently has a Ctrl+B shortcut by
     // default which cannot be overridden
 
@@ -279,6 +281,15 @@ QString MainWindow::activeSessionDir() const
         return _pluggedController->currentDir();
     else
         return QString();
+}
+
+void MainWindow::openUrls(const QList<KUrl>& urls)
+{
+	foreach( const KUrl& url , urls )
+	{
+		if ( url.isLocalFile() )
+			emit newSessionRequest( _defaultProfile , url.path() , _viewManager );
+	}
 }
 
 void MainWindow::newTab()

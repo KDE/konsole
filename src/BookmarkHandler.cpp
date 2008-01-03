@@ -82,7 +82,10 @@ void BookmarkHandler::openBookmark( const KBookmark & bm, Qt::MouseButtons, Qt::
 {
     emit openUrl( bm.url() );
 }
-
+void BookmarkHandler::openFolderinTabs( const KBookmarkGroup& group )
+{
+	emit openUrls(group.groupUrlList());
+}
 bool BookmarkHandler::enableOption(BookmarkOption option ) const
 {
     if(option == ShowAddBookmark || option == ShowEditBookmark)
