@@ -25,6 +25,7 @@
 
 class QAction;
 class QActionGroup;
+class QKeySequence;
 
 namespace Konsole
 {
@@ -79,7 +80,8 @@ signals:
 private slots:
     void triggered(QAction* action);
     void favoriteChanged(const QString& key , bool isFavorite);
-    void profileChanged(const QString& key);
+	void profileChanged(const QString& key);
+	void shortcutChanged(const QString& key, const QKeySequence& sequence);
 
 private:
     QAction* actionForKey(const QString& key) const;

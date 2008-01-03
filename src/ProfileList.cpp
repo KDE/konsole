@@ -65,6 +65,8 @@ ProfileList::ProfileList(bool addShortcuts , QObject* parent)
     // listen for future changes to the session list
     connect( manager , SIGNAL(favoriteStatusChanged(const QString&,bool)) , this ,
              SLOT(favoriteChanged(const QString&,bool)) );
+	connect( manager , SIGNAL(shortcutChanged(QString,QKeySequence)) , this , 
+			 SLOT(shortcutChanged(QString,QKeySequence)) );
     connect( manager , SIGNAL(profileChanged(const QString&)) , this , 
              SLOT(profileChanged(const QString&)) );
 }
@@ -107,7 +109,18 @@ void ProfileList::updateAction(QAction* action , Profile* info)
     action->setText(info->name());
     action->setIcon(KIcon(info->icon()));
 }
+void ProfileList::shortcutChanged(const QString& key,const QKeySequence& sequence)
+{
+	if ( !_addShortcuts )
+		return;
 
+	QAction* action = actionForKey(key);
+
+	if ( action )
+	{
+		action->setShortcut(sequence);
+	}
+}
 void ProfileList::favoriteChanged(const QString& key,bool isFavorite)
 {
     SessionManager* manager = SessionManager::instance();

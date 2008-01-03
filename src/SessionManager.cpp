@@ -593,6 +593,8 @@ void SessionManager::setShortcut(const QString& profileKey ,
     // TODO - This won't work if the profile doesn't 
     // have a path yet
     _shortcuts.insert(keySequence,data);
+
+	emit shortcutChanged(profileKey,keySequence);
 }
 void SessionManager::loadFavorites()
 {
