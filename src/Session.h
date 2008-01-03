@@ -113,7 +113,8 @@ public:
    */
   void addView(TerminalDisplay* widget);
   /**
-   * Removes a view from this session.
+   * Removes a view from this session.  When the last view is removed,
+   * the session will be closed automatically.
    *
    * @p widget will no longer display output from or send input
    * to the terminal

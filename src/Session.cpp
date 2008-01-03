@@ -239,6 +239,8 @@ void Session::removeView(TerminalDisplay* widget)
 {
     _views.removeAll(widget);
 
+	disconnect(widget,0,this,0);
+
     if ( _emulation != 0 )
     {
         // disconnect
@@ -252,6 +254,12 @@ void Session::removeView(TerminalDisplay* widget)
         // disconnect state change signals emitted by emulation
         disconnect( _emulation , 0 , widget , 0);
     }
+
+	// close the session automatically when the last view is removed
+	if ( _views.count() == 0 )
+	{
+		close();
+	}
 }
 
 void Session::run()
