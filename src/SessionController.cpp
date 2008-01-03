@@ -219,9 +219,6 @@ void SessionController::snapshot()
     else
         delete snapshot;
 
-    // format tab titles using session title
-    title.replace("%w",_session->userTitle());
-
     // apply new title
     if ( !title.simplified().isEmpty() )
         _session->setTitle(Session::DisplayedTitleRole,title);
@@ -936,7 +933,12 @@ void SessionController::sessionTitleChanged()
             setIcon( _sessionIcon );
         }
 
-       QString title = _session->title(Session::DisplayedTitleRole);
+        QString title = _session->title(Session::DisplayedTitleRole);
+
+		// special handling for the "%w" marker which is replaced with the
+		// window title set by the shell
+    	title.replace("%w",_session->userTitle());
+
        if ( title.isEmpty() )
           title = _session->title(Session::NameRole);
 
