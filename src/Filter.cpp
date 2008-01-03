@@ -486,13 +486,18 @@ void UrlFilter::HotSpot::activate(QObject* object)
     }
 }
 
+// Note:  Altering these regular expressions can have a major effect on the performance of the filters 
+// used for finding URLs in the text, especially if they are very general and could match very long
+// pieces of text.
+// Please be careful when altering them.
+
 //regexp matches:
 // full url:  
 // protocolname:// or www. followed by anything other than whitespaces, <, >, ' or ", and ends before whitespaces, <, >, ', ", ], !, comma and dot
 const QRegExp UrlFilter::FullUrlRegExp("(www\\.(?!\\.)|[a-z][a-z0-9+.-]*://)[^\\s<>'\"]+[^!,\\.\\s<>'\"\\]]");
 // email address:
 // [word chars, dots or dashes]@[word chars, dots or dashes].[word chars]
-const QRegExp UrlFilter::EmailAddressRegExp("(\\w|\\.|-)+@(\\w|\\.|-)+\\.\\w+");
+const QRegExp UrlFilter::EmailAddressRegExp("\\b(\\w|\\.|-)+@(\\w|\\.|-)+\\.\\w+\\b");
 
 // matches full url or email address
 const QRegExp UrlFilter::CompleteUrlRegExp('('+FullUrlRegExp.pattern()+'|'+
