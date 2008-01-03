@@ -46,6 +46,7 @@ Comment[el]=Προκαθορισμένο προφίλ του Konsole
 Comment[eo]=Defaŭlta profilo por Konzolo
 Comment[es]=Perfil predeterminado de Konsole
 Comment[et]=Konsooli vaikimisi profiil
+Comment[fr]=Profile par défaut de Konsole
 Comment[ga]=Próifíl réamhshocraithe Konsole
 Comment[hu]=Alapértelmezett Konsole-profil
 Comment[is]=Sjálfgefið sniðmát Konsole
