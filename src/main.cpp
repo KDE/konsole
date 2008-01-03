@@ -33,8 +33,7 @@
 #include <KLocale>
 #include <KWindowSystem>
 
-// bump the version to 2.0 before the KDE 4 release
-#define KONSOLE_VERSION "1.9.2"
+#define KONSOLE_VERSION "2.0"
 
 using namespace Konsole;
 
