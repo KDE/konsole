@@ -91,7 +91,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 
     // handle user interface related to session (menus etc.)
 
-#ifdef KONSOLE_PART	
+#ifdef KONSOLE_PART
     setXMLFile("konsole/partui.rc");
 #else
 	setXMLFile("konsole/sessionui.rc");
@@ -135,7 +135,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 
 	
     // listen for flow control status changes
-    connect( _session , SIGNAL(flowControlEnabledChanged(bool)) , _view , 
+    connect( _session , SIGNAL(flowControlEnabledChanged(bool)) , _view ,
 		SLOT(setFlowControlWarningEnabled(bool)) );
 	_view->setFlowControlWarningEnabled(_session->flowControlEnabled());
 
@@ -455,7 +455,7 @@ void SessionController::setupActions()
 
     connect( pasteAction , SIGNAL(triggered()) , this , SLOT(paste()) );
 
-	action = collection->addAction("paste-selection"); 
+	action = collection->addAction("paste-selection");
 	action->setText( i18n("Paste Selection") );
 	action->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_Insert) );
 	connect( action , SIGNAL(triggered()) , this , SLOT(pasteSelection()) );
@@ -467,8 +467,8 @@ void SessionController::setupActions()
     connect( action , SIGNAL(triggered()) , this , SLOT(renameSession()) );
 
     // Send to All
-    
-    //TODO - Complete the implementation of 'Send Input to All' for 
+
+    //TODO - Complete the implementation of 'Send Input to All' for
     //	     a future KDE 4 release
     //
     //toggleAction = new KToggleAction(i18n("Send Input to All"),this);
@@ -517,7 +517,7 @@ void SessionController::setupActions()
     connect( action , SIGNAL(triggered()) , this , SLOT(decreaseTextSize()) );
 
     // Scrollback
-    _searchToggleAction = new KAction(i18n("Search Output"),this);
+    _searchToggleAction = new KAction(i18n("Search Output..."),this);
     _searchToggleAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_F) );
     _searchToggleAction->setIcon( KIcon("edit-find") );
     _searchToggleAction->setCheckable(true);
@@ -544,7 +544,7 @@ void SessionController::setupActions()
     connect( action , SIGNAL(triggered()) , this , SLOT(saveHistory()) );
 
     action = collection->addAction("history-options");
-    action->setText( i18n("Scrollback Options...") );
+    action->setText( i18n("Scrollback Options") );
     action->setIcon( KIcon("configure") );
     connect( action , SIGNAL(triggered()) , this , SLOT(showHistoryOptions()) );
 
@@ -962,7 +962,7 @@ void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , in
     if ( factory() )
         popup = qobject_cast<QMenu*>(factory()->container("session-popup-menu",this));
 
-    if (popup) 
+    if (popup)
     {
         // prepend content-specific actions such as "Open Link", "Copy Email Address" etc.
         QList<QAction*> contentActions = _view->filterActions(position);
@@ -974,7 +974,7 @@ void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , in
         popup->exec( _view->mapToGlobal(position) );
 
         // remove content-specific actions
-        foreach(QAction* action,contentActions) 
+        foreach(QAction* action,contentActions)
             popup->removeAction(action);
         delete contentSeparator;
     }

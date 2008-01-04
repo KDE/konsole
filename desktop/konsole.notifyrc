@@ -29,7 +29,7 @@ Comment[uz]=Терминал
 Comment[x-test]=xxKonsolexx
 
 [Event/BellVisible]
-Name=Bell in visible session
+Name=Bell in Visible Session
 Name[af]=Klokkie in die sigbare sessie
 Name[bn]=প্রদর্শিত সেশন-এ ঘণ্টা
 Name[ca]=Timbre en una sessió visible
@@ -144,7 +144,7 @@ Sound=KDE-Sys-App-Message.ogg
 Action=Sound
 
 [Event/BellInvisible]
-Name=Bell in non-visible session
+Name=Bell in Non-visible session
 Name[af]=Klokkie in nie-sigbare sessie
 Name[bn]=আবৃত সেশন-এ ঘণ্টা
 Name[ca]=Timbre en una sessió no visible
@@ -259,7 +259,7 @@ Sound=KDE-Sys-App-Message.ogg
 Action=Popup
 
 [Event/Activity]
-Name=Activity in monitored session
+Name=Activity in Monitored Session
 Name[af]=Aktiveer in gemonitorde sessie
 Name[bn]=মনিটর করা সেশন-এ কিছু ঘটেছে
 Name[ca]=Activitat en una sessió controlada
@@ -373,7 +373,7 @@ Action=Popup
 
 
 [Event/Silence]
-Name=Silence in monitored session
+Name=Silence in Monitored Session
 Name[af]=Stilte in gemonitorde sessie
 Name[bn]=মনিটর করা সেশন-এ কিছু ঘটছে না
 Name[ca]=Silenci en una sessió controlada
@@ -486,7 +486,7 @@ Comment[zh_TW]=監控工作階段中偵測到靜默時的行為
 Action=Popup
 
 [Event/Finished]
-Name=Session finished with non-zero status
+Name=Session Finished With Non-zero Status
 Name[af]=Sessie het geëindig met nie-zero status
 Name[bn]=সেশন নন-জিরো স্ট্যাটাস সমেত সমাপ্ত
 Name[ca]=Sessió finalitzada amb un estat diferent de zero
