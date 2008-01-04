@@ -151,6 +151,13 @@ bool ViewSplitter::recursiveSplitting() const
     return _recursiveSplitting;
 }
 
+void ViewSplitter::removeContainer( ViewContainer* container )
+{
+	Q_ASSERT( containers().contains(container) );
+
+	unregisterContainer(container);
+}
+
 void ViewSplitter::addContainer( ViewContainer* container , 
                                  Qt::Orientation containerOrientation )
 {

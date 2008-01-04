@@ -221,6 +221,7 @@ void ViewManager::updateDetachViewState()
 	if (!_actionCollection)
 		return;
 
+
 	bool splitView = _viewSplitter->containers().count() >= 2;
 	bool shouldEnable = splitView || _viewSplitter->activeContainer()->views().count() >= 2;
 
@@ -401,12 +402,6 @@ void ViewManager::splitView(Qt::Orientation orientation)
 }
 void ViewManager::removeContainer(ViewContainer* container)
 {
-    // note that the _viewSplitter->containers().count() will not be updated
-    // until the container is deleted when Qt returns to the main event loop,
-    // so we take the previous container count and work out what the new count
-    // would be.
-    int previousCount = _viewSplitter->containers().count();
-
     // remove session map entries for views in this container
     foreach( QWidget* view , container->views() )
     {
@@ -415,8 +410,10 @@ void ViewManager::removeContainer(ViewContainer* container)
         _sessionMap.remove(display);
     } 
 
+	_viewSplitter->removeContainer(container);
     container->deleteLater();
-    emit splitViewToggle( (previousCount-1) > 1);
+
+    emit splitViewToggle( _viewSplitter->containers().count() > 1 );
 }
 void ViewManager::expandActiveView()
 {
