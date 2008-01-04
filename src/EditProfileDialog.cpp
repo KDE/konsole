@@ -270,15 +270,15 @@ void EditProfileDialog::setupTabsPage(const Profile* info)
 
     // note: Items should be in the same order as the 
     // Profile::TabBarModeEnum enum
-    _ui->tabBarVisibilityCombo->addItems( QStringList() << i18n("Always hide tab bar")
-                                                        << i18n("Show tab bar when needed") 
-                                                        << i18n("Always show tab bar") );
+    _ui->tabBarVisibilityCombo->addItems( QStringList() << i18n("Always Hide Tab Bar")
+                                                        << i18n("Show Tab Bar When Needed") 
+                                                        << i18n("Always Show Tab Bar") );
     _ui->tabBarVisibilityCombo->setCurrentIndex(tabMode);
 
     // note: Items should be in the same order as the
     // Profile::TabBarPositionEnum enum
-    _ui->tabBarPositionCombo->addItems( QStringList() << i18n("Below terminal displays")
-                                                      << i18n("Above terminal displays") );
+    _ui->tabBarPositionCombo->addItems( QStringList() << i18n("Below Terminal Displays")
+                                                      << i18n("Above Terminal Displays") );
 
     _ui->tabBarPositionCombo->setCurrentIndex(tabPosition);
 

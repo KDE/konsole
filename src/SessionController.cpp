@@ -1082,7 +1082,7 @@ void SaveHistoryTask::execute()
     {
         SessionPtr session = iter.next();
 
-        dialog->setCaption( i18n("Save Output from %1",session->title(Session::NameRole)) );
+        dialog->setCaption( i18n("Save Output From %1",session->title(Session::NameRole)) );
 
         int result = dialog->exec();
 
