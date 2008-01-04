@@ -128,11 +128,13 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
             SLOT(sessionStateChanged(int) ));
     // listen to title and icon changes
     connect( _session , SIGNAL(titleChanged()) , this , SLOT(sessionTitleChanged()) );
+	
+	// update the title when the session starts
+	connect( _session , SIGNAL(started()) , this , SLOT(snapshot()) ); 
 
     // listen for output changes to set activity flag
     connect( _session->emulation() , SIGNAL(outputChanged()) , this ,
             SLOT(fireActivity()) );
-
 	
     // listen for flow control status changes
     connect( _session , SIGNAL(flowControlEnabledChanged(bool)) , _view ,

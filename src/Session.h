@@ -389,6 +389,9 @@ public slots:
 
 signals:
 
+  /** Emitted when the terminal process starts. */
+  void started();
+
   /**
    * Emitted when the terminal process exits.
    */
