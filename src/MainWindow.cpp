@@ -198,13 +198,10 @@ void MainWindow::setupActions()
     remoteConnectionAction->setShortcut( QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_R) );
     connect( remoteConnectionAction , SIGNAL(triggered()) , this , SLOT(showRemoteConnectionDialog()) );
 
-
-#ifndef KONSOLE_PART
     KAction* quitAction = KStandardAction::quit( this , SLOT(close()) , collection );
     // the default shortcut for quit is typically Ctrl+[Some Letter, usually Q] but that is reserved for
     // use by terminal applications
     quitAction->setShortcut(Qt::CTRL+Qt::SHIFT+Qt::Key_Q);
-#endif
 
     // Bookmark Menu
     KActionMenu* bookmarkMenu = new KActionMenu(i18n("&Bookmarks") , collection );

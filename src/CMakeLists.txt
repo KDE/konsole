@@ -120,12 +120,10 @@ set(konsolepart_PART_SRCS
    IncrementalSearchBar.cpp
    KeyBindingEditor.cpp 
    KeyboardTranslator.cpp
-   MainWindow.cpp
    Part.cpp
    ProcessInfo.cpp
    Profile.cpp
    Pty.cpp 
-   RemoteConnectionDialog.cpp
    Screen.cpp 
    ScreenWindow.cpp
    Session.cpp
