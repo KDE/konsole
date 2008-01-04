@@ -49,9 +49,11 @@
         <Action name="clear-history-and-reset"/>
         <Action name="open-browser"/>
         <Separator/>
-        <Action name="show-menubar"/>
         <Action name="change-profile"/>
         <Action name="edit-current-profile" />
+		<Separator/>
+        <Action name="show-menubar"/>
+        <Action name="character-encoding"/>
         <Separator/>
         <Action name="close-session"/>
     </Menu>
