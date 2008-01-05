@@ -1395,7 +1395,7 @@ void Screen::copyLineToStream(int line ,
             }
 
             // count cannot be any greater than length
-            count = qMin(length,count);
+            count = qMin(length-start,count);
 
             Q_ASSERT( screenLine < lineProperties.count() );
             currentLineProperties |= lineProperties[screenLine]; 
