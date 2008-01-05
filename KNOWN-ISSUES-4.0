@@ -34,6 +34,13 @@ Known issues in KDE 4.0.0
 
 - 'Open Folder in Tabs' does not create terminal sessions for SSH bookmarks.
 
+- 'Open Folder in Tabs' will not create terminal sessions in the bookmarked
+  directories if the default profile specifies a home folder.  Instead the 
+  default profile's home folder will be used for all sessions.
+
 - Rename tab only changes the local tab title format.  This means that the changes
   will not have an effect whilst running an ssh session inside a terminal.
+
+- Automatic tab titles are not updated when a new terminal session is started, the
+  update occurs after the first user input.
 
