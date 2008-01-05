@@ -68,6 +68,9 @@ public:
      */
     void addContainer( ViewContainer* container , Qt::Orientation orientation );  
 
+	/** Removes a container from the splitter.  The container is not deleted. */
+	void removeContainer( ViewContainer* container );
+
     /** Returns the child ViewSplitter widget which currently has the focus */
     ViewSplitter* activeSplitter() ;
  
