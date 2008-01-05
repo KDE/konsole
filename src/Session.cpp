@@ -323,6 +323,8 @@ void Session::run()
   }
 
   _shellProcess->setWriteable(false);  // We are reachable via kwrited.
+
+  emit started();
 }
 
 void Session::setUserTitle( int what, const QString &caption )
