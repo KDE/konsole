@@ -1,0 +1,39 @@
+
+Known issues in KDE 4.0.0
+
+- The Konsole handbook has not been updated to match the new user interface 
+  in KDE 4.0.0
+
+- The --enable-transparency commandline argument must be passed to the first
+  instance of Konsole started to enable transparency on desktops which support
+  it (eg. those using Compiz Fusion or KWin 4 with Desktop Effects)
+
+  This is due to problems with windows using ARGB visuals 
+  (ie. windows which support transparency) on composited desktops with certain graphics
+  cards (eg. NVidia) at the time of the release.  
+
+- Transparency does not work in embedded terminals when the host application
+  supports it.
+
+- When starting a new Konsole instance from within an existing Konsole window
+  (eg. by typing 'konsole' at a shell prompt and pressing enter) any output
+  (eg. help information, debugging output) is sent to the terminal from which
+  the original Konsole instance was started, not the terminal from which the 
+  new Konsole instance was started.
+
+- There is no session management support.  Konsole does not remember open tabs 
+  or more than one open window between logging off and then back in again.
+
+- There is no 'Send Input To All' feature
+
+- There is no support for terminal programs resizing the Konsole window, although
+  they may change the screen size.  If the new screen size does not fit within the
+  existing window then the user must manually make the Konsole window larger.
+
+- 'Detach View' is irreversible since tabs cannot be dragged between windows
+
+- 'Open Folder in Tabs' does not create terminal sessions for SSH bookmarks.
+
+- Rename tab only changes the local tab title format.  This means that the changes
+  will not have an effect whilst running an ssh session inside a terminal.
+

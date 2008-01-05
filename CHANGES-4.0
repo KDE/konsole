@@ -1,0 +1,72 @@
+
+New features in Konsole in KDE 4.0:
+
+- New terminal setup.  The terminal setup dialogs from KDE 3
+  have been replaced with a new set which are much easier to use.
+  Settings are saved in groups as 'profiles', which can be used
+  as the basis for a new tab or applied to an existing tab.
+
+- The new terminal setup dialogs are shared with the embedded 
+  terminal for better consistency.  The users' profiles, including
+  their default terminal settings are shared between the Konsole application 
+  and the embedded terminal.
+
+- Cleaner user interface.  The menus have been reorganised to make
+  them less cluttered.  Many keyboard shortcuts have been added to 
+  reduce the need to go to the menu for common tasks.
+
+- Split view.  A Konsole window can be divided horizontally or
+  vertically into multiple areas.  Each area contains a tab bar
+  with one tab for each terminal session running in that window.
+  This makes it possible to display two or more views on different
+  parts of the same session.  For example, it is possible to scan
+  past output in one view whilst entering new commands to the same
+  terminal session in another view.
+
+- Automatic tab titles.  Tab titles are automatically set to
+  make terminal sessions within a window easily identifiable.  
+  Tab titles by default include a shortened version of the 
+  terminal's current directory and the last program run.
+  Separate tab title formats can be defined for local and 
+  remote (eg. ssh sessions) activities.
+
+- Incremental search.  A new incremental search bar has been added
+  for easier searching of terminal output.  Matches are highlighted
+  automatically in the output window.  Performance when searching
+  through large volumes of output has been improved.
+
+- Key bindings editor.  Key bindings specify how sequences of key
+  presses in the terminal window map to the characters actually
+  sent to the terminal.  The profile editor features a new dialog
+  for editing key bindings from within Konsole. 
+
+- Better performance.  Scrolling large terminal displays is now much
+  quicker.  Handling of large volumes of output to the terminal is 
+  now much quicker.  Better resource sharing between Konsole 
+  instances.
+
+- Link and email address highlighting.  Email addresses and links in output
+  text are now identified automatically and can be opened by right clicking
+  on the link or email address and selecting the 'Open' action.
+
+- 'Open Browser Here'.  Opens Dolphin (or the users preferred file browser)
+  at the terminal program's current directory.
+
+- 'Bookmark Tabs as Folder'.  Bookmarks the current group of tabs in a
+  new bookmark folder.
+
+- Easier bookmarking of SSH sessions.  Clicking 'Add Bookmark' creates a new
+  bookmark to a user and host which starts an SSH session when selected.
+
+- Cursor shape choice.  The cursor style can be chosen from three options:
+  Block (default), I-Beam or Underline
+
+- Cusor color choice.  The cursor color can now be specified or set to match
+  the current character (default)
+
+- Transparent terminal windows.  Color schemes have adjustable transparency 
+  which will be used when running Konsole on a desktop which supports it.
+
+  (Important Note:  The --enable-transparency commandline argument must be 
+   passed to the first Konsole instance started to enable transparency.
+   This is a temporary requirement.)
