@@ -7,7 +7,7 @@
 
 install( FILES konsole.desktop DESTINATION  ${XDG_APPS_INSTALL_DIR} )
 install( FILES terminalemulator.desktop  DESTINATION  ${SERVICETYPES_INSTALL_DIR} )
-install( FILES konsolepart.desktop konsole-script.desktop  DESTINATION  ${SERVICES_INSTALL_DIR} )
+install( FILES konsolepart.desktop DESTINATION  ${SERVICES_INSTALL_DIR} )
 install( FILES konsolehere.desktop  DESTINATION
 ${SERVICES_INSTALL_DIR}/ServiceMenus )
 install( FILES kwrited.desktop  DESTINATION  ${SERVICES_INSTALL_DIR}/kded )
