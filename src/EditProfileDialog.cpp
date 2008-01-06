@@ -500,7 +500,7 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
 
         QStandardItem* item = new QStandardItem(translator->description());
         item->setData(QVariant::fromValue(translator),Qt::UserRole+1);
-        item->setIcon( KIcon("keyboard") );
+        item->setIcon( KIcon("preferences-desktop-keyboard") );
 
         if ( translator == currentTranslator )
             selectedItem = item;
