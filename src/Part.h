@@ -119,6 +119,7 @@ private:
     Session* activeSession() const;
 	void setupActionsForSession(SessionController* session);
 	void createGlobalActions();
+    bool transparencyAvailable();
 
 private:
     ViewManager* _viewManager;
