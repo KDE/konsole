@@ -386,6 +386,8 @@ public:
     /** Returns the terminal screen section which is displayed in this widget.  See setScreenWindow() */
     ScreenWindow* screenWindow() const;
 
+    static bool HAVE_TRANSPARENCY;
+
 public slots:
 
     /** 
@@ -728,7 +730,6 @@ private:
     };
     InputMethodData _inputMethodData;
 
-    static bool HAVE_TRANSPARENCY;
     static bool _antialiasText;   // do we antialias or not
 
     //the delay in milliseconds between redrawing blinking text

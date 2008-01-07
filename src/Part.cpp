@@ -23,11 +23,13 @@
 // Qt
 #include <QtCore/QStringList>
 
+
 // KDE
 #include <KAction>
 #include <KActionCollection>
 #include <KDebug>
 #include <KLocale>
+#include <KWindowSystem>
 #include <kdeversion.h>
 
 // Konsole
@@ -39,8 +41,15 @@
 #include "Session.h"
 #include "SessionController.h"
 #include "SessionManager.h"
+#include "TerminalDisplay.h"
 #include "ViewManager.h"
 #include "MainWindow.h"
+
+// X
+#ifdef Q_WS_X11
+#include <X11/Xlib.h>
+#include <X11/extensions/Xrender.h>
+#endif
 
 extern "C"
 {
@@ -70,6 +79,8 @@ Part::Part(QWidget* parentWidget , QObject* parent)
   ,_pluggedController(0)
   ,_manageProfilesAction(0)
 {
+    TerminalDisplay::HAVE_TRANSPARENCY = transparencyAvailable();
+
 	// setup global actions
 	createGlobalActions();
 
@@ -109,6 +120,35 @@ void Part::setupActionsForSession(SessionController* session)
 	KActionCollection* collection = session->actionCollection();
 	collection->addAction("manage-profiles",_manageProfilesAction);
 }
+bool Part::transparencyAvailable()
+{
+#ifdef Q_WS_X11
+    bool ARGB = false;
+
+    int screen = QX11Info::appScreen();
+    bool depth = (QX11Info::appDepth() == 32);
+
+    Display* display = QX11Info::display();
+    Visual* visual = static_cast<Visual*>(QX11Info::appVisual(screen));
+
+    XRenderPictFormat* format = XRenderFindVisualFormat(display, visual);
+
+    if (depth && format->type == PictTypeDirect && format->direct.alphaMask)
+    {
+        ARGB = true;
+    }
+
+    if (ARGB)
+    {
+        return KWindowSystem::compositingActive();
+    }
+    else
+#endif
+    {
+        return false;
+    }
+}
+
 bool Part::openFile()
 {
     return false;
