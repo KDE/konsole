@@ -616,6 +616,9 @@ private:
 	// a hotspot
 	QRegion hotSpotRegion() const;
 
+	// returns the position of the cursor in columns and lines
+	QPoint cursorPosition() const;
+
     // the window onto the terminal screen which this display
     // is currently showing.  
     QPointer<ScreenWindow> _screenWindow;
