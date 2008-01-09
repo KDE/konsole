@@ -56,6 +56,7 @@ Comment[is]=Sjálfgefið sniðmát Konsole
 Comment[it]=Profilo predefinito di Konsole
 Comment[ja]=Konsole の標準プロファイル
 Comment[km]=ទម្រង់​លំនាំដើម​របស់​កុងសូល
+Comment[ku]=Profîla standard a Konsolê
 Comment[lv]=Konsole noklusējuma profils
 Comment[nb]=Konsoles standardprofil
 Comment[nds]=Standard-Konsoletörn
