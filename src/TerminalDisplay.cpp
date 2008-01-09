@@ -811,6 +811,9 @@ QRegion TerminalDisplay::hotSpotRegion() const
 
 void TerminalDisplay::processFilters() 
 {
+	if (!_screenWindow)
+		return;
+
 	QRegion preUpdateHotSpots = hotSpotRegion();
 
 	// use _screenWindow->getImage() here rather than _image because
@@ -1086,6 +1089,14 @@ void TerminalDisplay::paintEvent( QPaintEvent* pe )
   paint.end();
 }
 
+QPoint TerminalDisplay::cursorPosition() const
+{
+	if (_screenWindow)
+		return _screenWindow->cursorPosition();
+	else
+		return QPoint(0,0);
+}
+
 QRect TerminalDisplay::preeditRect() const
 {
     const int preeditLength = string_width(_inputMethodData.preeditString);
@@ -1093,8 +1104,8 @@ QRect TerminalDisplay::preeditRect() const
     if ( preeditLength == 0 )
         return QRect();
 
-    return QRect(_leftMargin + _fontWidth*_screenWindow->cursorPosition().x(),
-                 _topMargin + _fontHeight*_screenWindow->cursorPosition().y(),
+    return QRect(_leftMargin + _fontWidth*cursorPosition().x(),
+                 _topMargin + _fontHeight*cursorPosition().y(),
                  _fontWidth*preeditLength,
                  _fontHeight);
 }   
@@ -1104,7 +1115,7 @@ void TerminalDisplay::drawInputMethodPreeditString(QPainter& painter , const QRe
     if ( _inputMethodData.preeditString.isEmpty() )
         return;
 
-    const QPoint cursorPos = _screenWindow->cursorPosition();
+    const QPoint cursorPos = cursorPosition(); 
 
     bool invertColors = false;
     const QColor background = _colorTable[DEFAULT_BACK_COLOR].color;
@@ -1355,8 +1366,7 @@ void TerminalDisplay::blinkCursorEvent()
 {
   _cursorBlinking = !_cursorBlinking;
 
-  QPoint cursorPosition =_screenWindow->cursorPosition();
-  QRect cursorRect = imageToWidget( QRect(cursorPosition,QSize(1,1)) ); 
+  QRect cursorRect = imageToWidget( QRect(cursorPosition(),QSize(1,1)) ); 
 
   update(cursorRect);
 }
