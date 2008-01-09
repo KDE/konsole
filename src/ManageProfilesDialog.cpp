@@ -104,8 +104,6 @@ ManageProfilesDialog::~ManageProfilesDialog()
 }
 void ManageProfilesDialog::itemDataChanged(QStandardItem* item)
 {
-   static const int ShortcutColumn = 2;
-
    if ( item->column() == ShortcutColumn )
    {
         QKeySequence sequence = QKeySequence::fromString(item->text());
@@ -315,7 +313,10 @@ void ManageProfilesDialog::updateFavoriteStatus(const QString& key , bool favori
         _sessionModel->setData(index,icon,Qt::DecorationRole);
     }
 }
-
+void ManageProfilesDialog::setShortcutEditorVisible(bool visible)
+{
+	_ui->sessionTable->setColumnHidden(ShortcutColumn,!visible);	
+}
 ProfileItemDelegate::ProfileItemDelegate(QObject* parent)
     : QItemDelegate(parent)
 {
