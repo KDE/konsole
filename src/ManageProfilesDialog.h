@@ -55,6 +55,16 @@ public:
     ManageProfilesDialog(QWidget* parent = 0);
     virtual ~ManageProfilesDialog();
 
+	/** 
+	 * Specifies whether the shorcut editor should be show.
+	 * The shortcut editor allows shortcuts to be associated with 
+	 * profiles.  When a shortcut is changed, the dialog will call
+	 * SessionManager::instance()->setShortcut() to update the shortcut
+	 * associated with the profile.
+	 *
+	 * By default the editor is visible.
+	 */
+	void setShortcutEditorVisible(bool visible);
 
 protected:
     virtual void showEvent(QShowEvent* event);
@@ -87,6 +97,7 @@ private:
     QStandardItemModel* _sessionModel;
 
     static const int FavoriteStatusColumn = 1;
+    static const int ShortcutColumn = 2;
     static const int ProfileKeyRole = Qt::UserRole + 1;
     static const int ShortcutRole = Qt::UserRole + 1;
 };

@@ -250,6 +250,7 @@ void Part::showManageProfilesDialog(QWidget* parent)
 {
 	ManageProfilesDialog* dialog = new ManageProfilesDialog(parent);
 	dialog->setAttribute(Qt::WA_DeleteOnClose);
+	dialog->setShortcutEditorVisible(false);
 	dialog->show();
 }
 void Part::showEditCurrentProfileDialog(QWidget* parent)
