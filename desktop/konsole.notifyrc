@@ -31,6 +31,9 @@ Comment[x-test]=xxKonsolexx
 
 [Event/BellVisible]
 Name=Bell in Visible Session
+Name[ga]=Cloigín i Seisiún Infheicthe
+Name[km]=កណ្ដឹង​នៅ​​ក្នុង​សម័យ​មើល​ឃើញ
+Name[zh_CN]=可见会话中的响铃
 Comment=Bell emitted within a visible session
 Comment[af]=Klokkie word gelui in die sigbare sessie
 Comment[bn]=একটি দৃশ্যমান সেশন-এ ঘণ্টা বেজেছে
@@ -91,6 +94,9 @@ Action=Sound
 
 [Event/BellInvisible]
 Name=Bell in Non-visible session
+Name[ga]=Cloigín i Seisiún Dofheicthe
+Name[km]=កណ្ដឹង​ក្នុង​សម័យ​​មើល​មិន​ឃើញ
+Name[zh_CN]=不可见会话中的响铃
 Comment=Bell emitted within a non-visible session
 Comment[af]=Klokkie word gelui in die nie-sigbare sessie
 Comment[bn]=একটি অদৃশ্য সেশন-এ ঘণ্টা বেজেছে
@@ -151,6 +157,9 @@ Action=Popup
 
 [Event/Activity]
 Name=Activity in Monitored Session
+Name[ga]=Gníomhaíocht i Seisiún Monatóirithe
+Name[km]=សកម្មភាព​ក្នុង​សម័យ​ដែល​បាន​ត្រួត​ពិនិត្យ
+Name[zh_CN]=被监视会话中的活动
 Comment=Activity detected in a monitored session
 Comment[af]=Aktiwiteit bespeur in 'n sessie wat gemonitor word
 Comment[bn]=মনিটর করা একটি সেশন-এ কিছু ঘটেছে
@@ -211,6 +220,9 @@ Action=Popup
 
 [Event/Silence]
 Name=Silence in Monitored Session
+Name[ga]=Ciúnas i Seisiún Monatóirithe
+Name[km]=ភាព​ស្ងាត់​ក្នុង​សម័យ​ដែល​បាន​ត្រួត​ពិនិត្យ
+Name[zh_CN]=被监视会话中的缄默
 Comment=Silence detected in a monitored session
 Comment[af]=Stilte bespeur in 'n sessie wat gemonitor word
 Comment[bn]=মনিটর করা একটি সেশন-এ কিছু ঘটছে না
@@ -270,6 +282,9 @@ Action=Popup
 
 [Event/Finished]
 Name=Session Finished With Non-zero Status
+Name[ga]=Chríochnaigh an Seisiún le Stádas nach bhfuil 0
+Name[km]=សម័យ​ដែល​បាន​បញ្ចប់​ដោយ​ស្ថានភាព​មិន​សូន្យ
+Name[zh_CN]=非零状态完成的会话
 Comment=A session has exited with non-zero status
 Comment[af]='n Sessie het met 'n nie-zero status geëindig
 Comment[bn]=একটি সেশন নন-জিরো স্ট্যাটাস সমেত সমাপ্ত হয়েছে
