@@ -44,7 +44,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox_10" >
          <property name="title" >
-          <string>Basic Profile Options</string>
+          <string>General</string>
          </property>
          <property name="flat" >
           <bool>true</bool>
@@ -194,7 +194,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox_12" >
          <property name="title" >
-          <string>Window Options</string>
+          <string>Window</string>
          </property>
          <property name="flat" >
           <bool>true</bool>
@@ -308,7 +308,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox_2" >
          <property name="title" >
-          <string>Tab Bar Options</string>
+          <string>Tab Bar</string>
          </property>
          <property name="flat" >
           <bool>true</bool>
@@ -901,7 +901,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox_9" >
          <property name="title" >
-          <string>Interaction Options</string>
+          <string>Mouse Interaction</string>
          </property>
          <property name="flat" >
           <bool>true</bool>
@@ -934,7 +934,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox_8" >
          <property name="title" >
-          <string>Cursor Options</string>
+          <string>Cursor</string>
          </property>
          <property name="flat" >
           <bool>true</bool>
