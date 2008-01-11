@@ -17,6 +17,7 @@ Name[hu]=Parancsértelmező
 Name[is]=Skél
 Name[ja]=シェル
 Name[km]=សែល
+Name[lt]=Apvalkalas
 Name[lv]=Čaula
 Name[mk]=Школка
 Name[nb]=Skall
