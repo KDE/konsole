@@ -915,7 +915,7 @@ void TerminalDisplay::updateImage()
         int p = 0;
         disstrU[p++] = c; //fontMap(c);
         bool lineDraw = isLineChar(c);
-        bool doubleWidth = (newLine[x+1].character == 0);
+        bool doubleWidth = (x+1 == columnsToUpdate) ? false : (newLine[x+1].character == 0);
         cr = newLine[x].rendition;
         _clipboard = newLine[x].backgroundColor;
         if (newLine[x].foregroundColor != cf) cf = newLine[x].foregroundColor;
@@ -927,12 +927,14 @@ void TerminalDisplay::updateImage()
             if (!ch.character)
                 continue; // Skip trailing part of multi-col chars.
 
+			bool nextIsDoubleWidth = (x+len+1 == columnsToUpdate) ? false : (newLine[x+len+1].character == 0);
+
             if (  ch.foregroundColor != cf || 
                   ch.backgroundColor != _clipboard || 
                   ch.rendition != cr ||
                   !dirtyMask[x+len] || 
                   isLineChar(c) != lineDraw || 
-                  (newLine[x+len+1].character == 0) != doubleWidth )
+                  nextIsDoubleWidth != doubleWidth )
             break;
 
           disstrU[p++] = c; //fontMap(c);
