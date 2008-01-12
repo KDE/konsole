@@ -2645,7 +2645,7 @@ void TerminalDisplay::outputSuspended(bool suspended)
             //If there isn't a suitable article available in the target language the link
             //can simply be removed.
 			_outputSuspendedLabel = new QLabel( i18n("<qt>Output has been "
-                                                "<a href=\"http://en.wikipedia.org/wiki/XON\">suspended</a>"
+                                                "<a href=\"http://en.wikipedia.org/wiki/Flow_control\">suspended</a>"
                                                 " by pressing Ctrl+S."
 											   "  Press <b>Ctrl+Q</b> to resume.</qt>"),
 											   this );
