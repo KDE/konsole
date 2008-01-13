@@ -26,6 +26,7 @@
 // Standard
 #include <assert.h>
 #include <stdlib.h>
+#include <signal.h>
 
 // Qt
 #include <QtGui/QApplication>
@@ -166,7 +167,7 @@ bool Session::hasDarkBackground() const
 }
 bool Session::isRunning() const
 {
-    return _shellProcess->isRunning();
+    return _shellProcess->state() == QProcess::Running;
 }
 
 void Session::setCodec(QTextCodec* codec)
@@ -279,8 +280,8 @@ void Session::run()
       exec = getenv("SHELL");
 
   // if no arguments are specified, fall back to shell
-  QStringList arguments =  _arguments.join(QChar(' ')).isEmpty() ?
-                                    QStringList() << exec : _arguments;
+  QStringList arguments = _arguments.join(QChar(' ')).isEmpty() ?
+                           			            QStringList() << exec : _arguments;
 
 
   exec = KRun::binaryName(exec, false);
@@ -308,7 +309,7 @@ void Session::run()
   // the background color is deemed dark or not
   QString backgroundColorHint = _hasDarkBackground ? "COLORFGBG=15;0" : "COLORFGBG=0;15";
 
-  int result = _shellProcess->start(QFile::encodeName(_program),
+  int result = _shellProcess->start(exec,
                                   arguments,
                                   _environment << backgroundColorHint,
                                   windowId(),
@@ -546,14 +547,18 @@ void Session::refresh()
 
 bool Session::sendSignal(int signal)
 {
-  return _shellProcess->kill(signal);
+#warning "TODO: Send the right signal here, QProcess::kill() always sends SIGKILL"
+	_shellProcess->kill();
+	_shellProcess->waitForFinished();
+	return true;
+  //return _shellProcess->kill(signal);
 }
 
 void Session::close()
 {
   _autoClose = true;
   _wantedClose = true;
-  if (!_shellProcess->isRunning() || !sendSignal(SIGHUP))
+  if (!isRunning() || !sendSignal(SIGHUP))
   {
      // Forced close.
      QTimer::singleShot(1, this, SIGNAL(finished()));
@@ -583,31 +588,26 @@ void Session::done(int exitStatus)
 {
   if (!_autoClose)
   {
-    _userTitle = i18n("<Finished>");
+    _userTitle = i18n("Finished");
     emit titleChanged();
     return;
   }
-  if (!_wantedClose && (exitStatus || _shellProcess->signalled()))
+
+  if (!_wantedClose || exitStatus != 0)
   {
     QString message;
 
-    if (_shellProcess->normalExit())
-      message = i18n("Session '%1' exited with status %2.", _nameTitle, exitStatus);
-    else if (_shellProcess->signalled())
-    {
-      if (_shellProcess->coreDumped())
-        message = i18n("Session '%1' exited with signal %2 and dumped core.", _nameTitle, _shellProcess->exitSignal());
-      else
-        message = i18n("Session '%1' exited with signal %2.", _nameTitle, _shellProcess->exitSignal());
-    }
+    if (_shellProcess->exitStatus() == QProcess::NormalExit)
+        message = i18n("Program '%1' exited with status %2.", _shellProcess->program().first(), exitStatus);
     else
-        message = i18n("Session '%1' exited unexpectedly.", _nameTitle);
+        message = i18n("Program '%1' exited unexpectedly.", _shellProcess->program().first());
 
     //FIXME: See comments in Session::monitorTimerDone()
     KNotification::event("Finished", message , QPixmap(),
                          QApplication::activeWindow(),
                          KNotification::CloseWhenWidgetActivated);
   }
+  	
   emit finished();
 }
 

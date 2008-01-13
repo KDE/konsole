@@ -33,7 +33,7 @@
 #include <KLocale>
 #include <KWindowSystem>
 
-#define KONSOLE_VERSION "2.0"
+#define KONSOLE_VERSION "2.1"
 
 using namespace Konsole;
 

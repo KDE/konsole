@@ -36,14 +36,14 @@
 #include <KLocale>
 #include <KDebug>
 #include <KPty>
+#include <KPtyDevice>
 
 using namespace Konsole;
 
-void Pty::donePty()
+void Pty::donePty(int code)
 {
-  emit done(exitStatus());
+  emit done(code);
 }
-
 void Pty::setWindowSize(int lines, int cols)
 {
   _windowColumns = cols;
@@ -138,7 +138,7 @@ void Pty::addEnvironmentVariables(const QStringList& environment)
             //kDebug() << "Setting environment pair" << variable <<
             //    " set to " << value;
 
-            setEnvironment(variable,value);
+            setEnv(variable,value);
         }
     }
 }
@@ -151,22 +151,26 @@ int Pty::start(const QString& program,
                const QString& dbusService, 
                const QString& dbusSession)
 {
-  clearArguments();
+  clearProgram();
 
-  setBinaryExecutable(program.toLatin1());
+  // For historical reasons, the first argument in programArguments is the 
+  // name of the program to execute, so create a list consisting of all
+  // but the first argument to pass to setProgram()
+  Q_ASSERT(programArguments.count() >= 1);
+  setProgram(program.toLatin1(),programArguments.mid(1));
 
   addEnvironmentVariables(environment);
 
-  QStringListIterator it( programArguments );
-  while (it.hasNext())
-    arguments.append( it.next().toUtf8() );
+  //QStringListIterator it( programArguments );
+  //while (it.hasNext())
+  //  operator<<(it.next().toUtf8());
 
   if ( !dbusService.isEmpty() )
-     setEnvironment("KONSOLE_DBUS_SERVICE",dbusService);
+     setEnv("KONSOLE_DBUS_SERVICE",dbusService);
   if ( !dbusSession.isEmpty() )
-     setEnvironment("KONSOLE_DBUS_SESSION", dbusSession);
+     setEnv("KONSOLE_DBUS_SESSION", dbusSession);
 
-  setEnvironment("WINDOWID", QString::number(winid));
+  setEnv("WINDOWID", QString::number(winid));
 
   // unless the LANGUAGE environment variable has been set explicitly
   // set it to a null string
@@ -179,12 +183,12 @@ int Pty::start(const QString& program,
   // does not have a translation for
   //
   // BR:149300
-  if (!environment.contains("LANGUAGE"))
-      setEnvironment("LANGUAGE",QString());
+  setEnv("LANGUAGE",QString(),false /* do not overwrite existing value if any */);
 
-  setUsePty(All, addToUtmp);
+  //TODO: utmp support
+  //setUsePty(All, addToUtmp);
 
-  pty()->open();
+  //pty()->open();
   
   struct ::termios ttmode;
   pty()->tcGetAttr(&ttmode);
@@ -207,10 +211,11 @@ int Pty::start(const QString& program,
   
   pty()->setWinSize(_windowLines, _windowColumns);
 
-  if ( K3Process::start(NotifyOnExit, (Communication) (Stdin | Stdout)) == false )
-     return -1;
+  KProcess::start();
+  //if ( K3Process::start(NotifyOnExit, (Communication) (Stdin | Stdout)) == false )
+  //   return -1;
 
-  resume(); // Start...
+  //resume(); // Start...
   return 0;
 
 }
@@ -233,14 +238,13 @@ Pty::Pty()
       _xonXoff(true),
       _utf8(true)
 {
-  connect(this, SIGNAL(receivedStdout(K3Process *, char *, int )),
-	  this, SLOT(dataReceived(K3Process *,char *, int)));
-  connect(this, SIGNAL(processExited(K3Process *)),
-          this, SLOT(donePty()));
-  connect(this, SIGNAL(wroteStdin(K3Process *)),
+  connect(pty(), SIGNAL(readyRead()) , this , SLOT(dataReceived()));
+  connect(this, SIGNAL(finished(int,QProcess::ExitStatus)),
+          this, SLOT(donePty(int)));
+  connect(pty(), SIGNAL(bytesWritten(qint64)),
           this, SLOT(writeReady()));
 
-  setUsePty(All, false); // utmp will be overridden later
+  setPtyChannels(KPtyProcess::AllChannels);
 }
 
 Pty::~Pty()
@@ -249,6 +253,7 @@ Pty::~Pty()
 
 void Pty::writeReady()
 {
+#warning "TODO: This is called when bytesWritten(size) is emitted.  Check that 'size' is equal to the data volume sent to the device."
   _pendingSendJobs.erase(_pendingSendJobs.begin());
   _bufferFull = false;
   doSendJobs();
@@ -263,8 +268,9 @@ void Pty::doSendJobs() {
   
   SendJob& job = _pendingSendJobs.first();
 
-  
-  if (!writeStdin( job.data(), job.length() ))
+  Q_ASSERT(job.length() > 0);
+
+  if (!pty()->write( job.data(), job.length() ))
   {
     qWarning("Pty::doSendJobs - Could not send input data to terminal process.");
     return;
@@ -279,22 +285,27 @@ void Pty::appendSendJob(const char* s, int len)
 
 void Pty::sendData(const char* s, int len)
 {
+  if (!len)
+  	return;
+
   appendSendJob(s,len);
   if (!_bufferFull)
      doSendJobs();
 }
 
-void Pty::dataReceived(K3Process *,char *buf, int len)
+void Pty::dataReceived() //K3Process *,char *buf, int len)
 {
-  emit receivedData(buf,len);
+ 	QByteArray data = pty()->readAll();
+	emit receivedData(data.constData(),data.count());
 }
 
 void Pty::lockPty(bool lock)
 {
-  if (lock)
-    suspend();
-  else
-    resume();
+#warning "TODO: Support for locking the Pty"
+  //if (lock)
+    //suspend();
+  //else
+    //resume();
 }
 
 int Pty::foregroundProcessGroup() const

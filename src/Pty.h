@@ -30,7 +30,7 @@
 #include <QtCore/QSize>
 
 // KDE
-#include <K3Process>
+#include <KPtyProcess>
 
 namespace Konsole
 {
@@ -48,7 +48,7 @@ namespace Konsole
  * To start the terminal process, call the start() method
  * with the program name and appropriate arguments. 
  */
-class Pty: public K3Process
+class Pty: public KPtyProcess
 {
 Q_OBJECT
 
@@ -188,16 +188,16 @@ Q_OBJECT
   private slots:
     
     // called when terminal process exits
-    void donePty();
+    void donePty(int returnCode);
     // called when data is received from the terminal process 
-    void dataReceived(K3Process*, char* buffer, int length);
+    void dataReceived(); //K3Process*, char* buffer, int length);
     // sends the first enqueued buffer of data to the
     // terminal process
     void doSendJobs();
     // called when the terminal process is ready to
     // receive more data
     void writeReady();
-
+	
   private:
     // takes a list of key=value pairs and adds them
     // to the environment for the process
