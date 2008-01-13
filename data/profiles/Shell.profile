@@ -80,7 +80,7 @@ Icon=utilities-terminal
 LocalTabTitleFormat=%d : %n
 RemoteTabTitleFormat=%h : %u
 
-[Appearence]
+[Appearance]
 ColorScheme=Linux
 
 [Scrolling]
