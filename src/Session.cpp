@@ -545,7 +545,7 @@ void Session::refresh()
     _shellProcess->setWindowSize(existingSize.height(),existingSize.width());
 }
 
-bool Session::sendSignal(int signal)
+bool Session::kill(int signal)
 {
 	int result = ::kill(_shellProcess->pid(),signal);	
 	
@@ -562,7 +562,7 @@ void Session::close()
 {
   _autoClose = true;
   _wantedClose = true;
-  if (!isRunning() || !sendSignal(SIGHUP))
+  if (!isRunning() || !kill(SIGHUP))
   {
      // Forced close.
      QTimer::singleShot(1, this, SIGNAL(finished()));

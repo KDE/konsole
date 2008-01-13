@@ -289,8 +289,6 @@ public:
   /** Specifies whether a utmp entry should be created for the pty used by this session. */
   void setAddToUtmp(bool);
 
-  /** Sends the specified @p signal to the terminal process. */
-  bool sendSignal(int signal);
 
   /**
    * Specifies whether to close the session automatically when the terminal
@@ -487,6 +485,7 @@ private:
 
   void updateTerminalSize();
   WId windowId() const;
+  bool kill(int signal);
 
   int            _uniqueIdentifier;
 
