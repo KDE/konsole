@@ -2651,8 +2651,7 @@ void TerminalDisplay::outputSuspended(bool suspended)
 											   this );
 
             QPalette palette(_outputSuspendedLabel->palette());
-            KColorScheme::adjustForeground(palette,KColorScheme::NeutralText);
-			KColorScheme::adjustBackground(palette,KColorScheme::NeutralBackground);
+            KColorScheme::adjustBackground(palette,KColorScheme::NeutralBackground);
 			_outputSuspendedLabel->setPalette(palette);
 			_outputSuspendedLabel->setAutoFillBackground(true);
 			_outputSuspendedLabel->setBackgroundRole(QPalette::Base);
