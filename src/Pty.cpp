@@ -70,7 +70,7 @@ void Pty::setXonXoff(bool enable)
     else
       ttmode.c_iflag |= (IXOFF | IXON);
     if (!pty()->tcSetAttr(&ttmode))
-      qWarning("Unable to set terminal attributes.");
+      kWarning("Unable to set terminal attributes.");
   }
 }
 
@@ -88,7 +88,7 @@ void Pty::setUtf8Mode(bool enable)
     else
       ttmode.c_iflag |= IUTF8;
     if (!pty()->tcSetAttr(&ttmode))
-      qWarning("Unable to set terminal attributes.");
+      kWarning("Unable to set terminal attributes.");
   }
 #endif
 }
@@ -103,7 +103,7 @@ void Pty::setErase(char erase)
     pty()->tcGetAttr(&ttmode);
     ttmode.c_cc[VERASE] = erase;
     if (!pty()->tcSetAttr(&ttmode))
-      qWarning("Unable to set terminal attributes.");
+      kWarning("Unable to set terminal attributes.");
   }
 }
 
@@ -135,9 +135,6 @@ void Pty::addEnvironmentVariables(const QStringList& environment)
             QString variable = pair.left(pos);
             QString value = pair.mid(pos+1);
 
-            //kDebug() << "Setting environment pair" << variable <<
-            //    " set to " << value;
-
             setEnv(variable,value);
         }
     }
@@ -161,10 +158,6 @@ int Pty::start(const QString& program,
 
   addEnvironmentVariables(environment);
 
-  //QStringListIterator it( programArguments );
-  //while (it.hasNext())
-  //  operator<<(it.next().toUtf8());
-
   if ( !dbusService.isEmpty() )
      setEnv("KONSOLE_DBUS_SERVICE",dbusService);
   if ( !dbusSession.isEmpty() )
@@ -185,11 +178,8 @@ int Pty::start(const QString& program,
   // BR:149300
   setEnv("LANGUAGE",QString(),false /* do not overwrite existing value if any */);
 
-  //TODO: utmp support
-  //setUsePty(All, addToUtmp);
+  setUseUtmp(addToUtmp);
 
-  //pty()->open();
-  
   struct ::termios ttmode;
   pty()->tcGetAttr(&ttmode);
   if (!_xonXoff)
@@ -207,17 +197,16 @@ int Pty::start(const QString& program,
   	ttmode.c_cc[VERASE] = _eraseChar;
   
   if (!pty()->tcSetAttr(&ttmode))
-    qWarning("Unable to set terminal attributes.");
+    kWarning("Unable to set terminal attributes.");
   
   pty()->setWinSize(_windowLines, _windowColumns);
 
   KProcess::start();
-  //if ( K3Process::start(NotifyOnExit, (Communication) (Stdin | Stdout)) == false )
-  //   return -1;
 
-  //resume(); // Start...
+  if (!waitForStarted())
+  	return -1;
+
   return 0;
-
 }
 
 void Pty::setWriteable(bool writeable)
@@ -231,8 +220,7 @@ void Pty::setWriteable(bool writeable)
 }
 
 Pty::Pty()
-    : _bufferFull(false),
-      _windowColumns(0),
+    : _windowColumns(0),
       _windowLines(0),
       _eraseChar(0),
       _xonXoff(true),
@@ -241,9 +229,7 @@ Pty::Pty()
   connect(pty(), SIGNAL(readyRead()) , this , SLOT(dataReceived()));
   connect(this, SIGNAL(finished(int,QProcess::ExitStatus)),
           this, SLOT(donePty(int)));
-  connect(pty(), SIGNAL(bytesWritten(qint64)),
-          this, SLOT(writeReady()));
-
+  
   setPtyChannels(KPtyProcess::AllChannels);
 }
 
@@ -251,49 +237,19 @@ Pty::~Pty()
 {
 }
 
-void Pty::writeReady()
+void Pty::sendData(const char* data, int length)
 {
-#warning "TODO: This is called when bytesWritten(size) is emitted.  Check that 'size' is equal to the data volume sent to the device."
-  _pendingSendJobs.erase(_pendingSendJobs.begin());
-  _bufferFull = false;
-  doSendJobs();
-}
-
-void Pty::doSendJobs() {
-  if(_pendingSendJobs.isEmpty())
-  {
-     emit bufferEmpty(); 
-     return;
-  }
+  if (!length)
+  	return;
   
-  SendJob& job = _pendingSendJobs.first();
-
-  Q_ASSERT(job.length() > 0);
-
-  if (!pty()->write( job.data(), job.length() ))
+  if (!pty()->write(data,length)) 
   {
-    qWarning("Pty::doSendJobs - Could not send input data to terminal process.");
+    kWarning("Pty::doSendJobs - Could not send input data to terminal process.");
     return;
   }
-  _bufferFull = true;
 }
 
-void Pty::appendSendJob(const char* s, int len)
-{
-  _pendingSendJobs.append(SendJob(s,len));
-}
-
-void Pty::sendData(const char* s, int len)
-{
-  if (!len)
-  	return;
-
-  appendSendJob(s,len);
-  if (!_bufferFull)
-     doSendJobs();
-}
-
-void Pty::dataReceived() //K3Process *,char *buf, int len)
+void Pty::dataReceived() 
 {
  	QByteArray data = pty()->readAll();
 	emit receivedData(data.constData(),data.count());

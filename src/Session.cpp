@@ -547,11 +547,15 @@ void Session::refresh()
 
 bool Session::sendSignal(int signal)
 {
-#warning "TODO: Send the right signal here, QProcess::kill() always sends SIGKILL"
-	_shellProcess->kill();
-	_shellProcess->waitForFinished();
-	return true;
-  //return _shellProcess->kill(signal);
+	int result = ::kill(_shellProcess->pid(),signal);	
+	
+	if ( result == 0 )
+	{
+		_shellProcess->waitForFinished();
+		return true;
+	}
+	else
+		return false;
 }
 
 void Session::close()

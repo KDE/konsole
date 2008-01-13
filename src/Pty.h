@@ -128,12 +128,6 @@ Q_OBJECT
      */
     int foregroundProcessGroup() const;
    
-    /**
-     * Returns whether the buffer used to send data to the
-     * terminal process is full.
-     */
-    bool bufferFull() const { return _bufferFull; }
-
   public slots:
 
     /**
@@ -179,52 +173,17 @@ Q_OBJECT
      */
     void receivedData(const char* buffer, int length);
     
-    /**
-     * Emitted when the buffer used to send data to the terminal
-     * process becomes empty, i.e. all data has been sent.
-     */
-    void bufferEmpty();
-
   private slots:
     
     // called when terminal process exits
     void donePty(int returnCode);
     // called when data is received from the terminal process 
     void dataReceived(); //K3Process*, char* buffer, int length);
-    // sends the first enqueued buffer of data to the
-    // terminal process
-    void doSendJobs();
-    // called when the terminal process is ready to
-    // receive more data
-    void writeReady();
 	
   private:
     // takes a list of key=value pairs and adds them
     // to the environment for the process
     void addEnvironmentVariables(const QStringList& environment);
-
-    // enqueues a buffer of data to be sent to the 
-    // terminal process
-    void appendSendJob(const char* buffer, int length);
-   
-    // a buffer of data in the queue to be sent to the 
-    // terminal process 
-    class SendJob {
-	public:
-      		SendJob() {}
-      		SendJob(const char* b, int len) : buffer(len)
-		{
-			memcpy( buffer.data() , b , len );
-        }
-	
-		const char* data() const { return buffer.constData(); }
-		int length() const { return buffer.size(); }	
-	private:
-      		QVector<char> buffer;
-    };
-
-    QList<SendJob> _pendingSendJobs;
-    bool _bufferFull;
 
     int  _windowColumns; 
     int  _windowLines;
