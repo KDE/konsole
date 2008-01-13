@@ -696,8 +696,7 @@ private:
                                // after QApplication::doubleClickInterval() delay
 
 
-    QFrame* _resizeWidget;
-    QLabel* _resizeLabel;
+    QLabel* _resizeWidget;
     QTimer* _resizeTimer;
 
 	bool _flowControlWarningEnabled;
