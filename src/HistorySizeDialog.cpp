@@ -23,6 +23,7 @@
 // Qt
 #include <QtGui/QButtonGroup>
 #include <QtGui/QBoxLayout>
+#include <QtGui/QCheckBox>
 #include <QtGui/QLabel>
 #include <QtGui/QRadioButton>
 #include <QtGui/QSpinBox>
@@ -99,8 +100,11 @@ HistorySizeDialog::HistorySizeDialog( QWidget* parent )
     _fixedHistoryButton->click();
     _fixedHistoryButton->setFocus( Qt::OtherFocusReason );
 
-    connect(this,SIGNAL(defaultClicked()),this,SLOT(useDefaults()));
+	_useInNewTerminalsCheck = new QCheckBox(i18n("Use this setting in new terminals"),this);
+	dialogLayout->addSpacing(20);
+	dialogLayout->addWidget(_useInNewTerminalsCheck);
 
+    connect(this,SIGNAL(defaultClicked()),this,SLOT(useDefaults()));
     connect(this,SIGNAL(accepted()),this,SLOT(emitOptionsChanged()));
 }
 
@@ -109,6 +113,10 @@ void HistorySizeDialog::emitOptionsChanged()
     emit optionsChanged( mode() , lineCount() );
 }
 
+bool HistorySizeDialog::useInNewTerminals() const
+{
+	return _useInNewTerminalsCheck->isChecked();
+}
 void HistorySizeDialog::setDefaultMode( HistoryMode mode ) { _defaultMode = mode; }
 HistorySizeDialog::HistoryMode HistorySizeDialog::defaultMode() const { return _defaultMode; }
 void HistorySizeDialog::setDefaultLineCount( int count ) { _defaultLineCount = count; }

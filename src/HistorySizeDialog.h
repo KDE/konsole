@@ -95,6 +95,9 @@ public:
     /** Returns the default line count, as set with setDefaultLineCount() */
     int defaultLineCount() const;
 
+	/** Returns true if the "Use this setting in new terminals" check box is checked. */
+	bool useInNewTerminals() const;
+
 signals:
     /**
      * Emitted when the user changes the scroll-back mode or line count and
@@ -119,7 +122,9 @@ private:
     QAbstractButton* _noHistoryButton;
     QAbstractButton* _fixedHistoryButton;
     QAbstractButton* _unlimitedHistoryButton;
-    QSpinBox* _lineCountBox;   
+	QAbstractButton* _useInNewTerminalsCheck;
+
+	QSpinBox* _lineCountBox;   
 
     HistoryMode _defaultMode;
     int _defaultLineCount; 

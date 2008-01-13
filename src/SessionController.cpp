@@ -55,13 +55,11 @@
 
 // for SaveHistoryTask
 #include <KFileDialog>
+#include <KIO/Job>
 #include <KJob>
 #include <KMessageBox>
 #include "TerminalCharacterDecoder.h"
 
-// used an old-style include below because #include <KIO/Job> does not work
-// at the time of writing
-#include <kio/job.h>
 
 using namespace Konsole;
 
@@ -876,12 +874,18 @@ void SessionController::sessionResizeRequest(const QSize& size)
 }
 void SessionController::scrollBackOptionsChanged( int mode , int lines )
 {
-      if ( mode == HistorySizeDialog::NoHistory )
-         _session->setHistoryType( HistoryTypeNone() );
-     else if ( mode == HistorySizeDialog::FixedSizeHistory )
-         _session->setHistoryType( HistoryTypeBuffer(lines) );
-     else if ( mode == HistorySizeDialog::UnlimitedHistory )
-         _session->setHistoryType( HistoryTypeFile() );
+	switch (mode)
+    {
+		case HistorySizeDialog::NoHistory:
+        	_session->setHistoryType( HistoryTypeNone() );
+			break;
+     	case HistorySizeDialog::FixedSizeHistory:
+        	_session->setHistoryType( HistoryTypeBuffer(lines) );
+			break;
+     	case HistorySizeDialog::UnlimitedHistory:
+         	_session->setHistoryType( HistoryTypeFile() );
+			break;
+	}
 }
 
 void SessionController::saveHistory()
