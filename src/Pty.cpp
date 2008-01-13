@@ -40,10 +40,6 @@
 
 using namespace Konsole;
 
-void Pty::donePty(int code)
-{
-  emit done(code);
-}
 void Pty::setWindowSize(int lines, int cols)
 {
   _windowColumns = cols;
@@ -227,9 +223,6 @@ Pty::Pty()
       _utf8(true)
 {
   connect(pty(), SIGNAL(readyRead()) , this , SLOT(dataReceived()));
-  connect(this, SIGNAL(finished(int,QProcess::ExitStatus)),
-          this, SLOT(donePty(int)));
-  
   setPtyChannels(KPtyProcess::AllChannels);
 }
 

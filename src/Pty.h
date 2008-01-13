@@ -158,13 +158,6 @@ Q_OBJECT
   signals:
 
     /**
-     * Emitted when the terminal process terminates.
-     *
-     * @param exitCode The status code which the process exited with.
-     */
-    void done(int exitCode);
-
-    /**
      * Emitted when a new block of data is received from
      * the teletype.
      *
@@ -174,11 +167,8 @@ Q_OBJECT
     void receivedData(const char* buffer, int length);
     
   private slots:
-    
-    // called when terminal process exits
-    void donePty(int returnCode);
     // called when data is received from the terminal process 
-    void dataReceived(); //K3Process*, char* buffer, int length);
+    void dataReceived(); 
 	
   private:
     // takes a list of key=value pairs and adds them
