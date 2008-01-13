@@ -309,7 +309,7 @@ bool MainWindow::queryClose()
     int result = KMessageBox::warningYesNoCancel(this,
                 i18n("You have multiple tabs in this window, " 
                      "are you sure you want to quit?"),
-                i18n("Really Quit?"),
+                i18n("Confirm close"),
                 KStandardGuiItem::quit(),
                 KGuiItem(i18n("Close current tab"), "tab-close"),
                 KStandardGuiItem::cancel(),
