@@ -273,7 +273,6 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_isFixedSize(false)
 ,_possibleTripleClick(false)
 ,_resizeWidget(0)
-,_resizeLabel(0)
 ,_resizeTimer(0)
 ,_flowControlWarningEnabled(false)
 ,_outputSuspendedLabel(0)
@@ -1014,46 +1013,36 @@ void TerminalDisplay::updateImage()
   delete[] dirtyMask;
   delete[] disstrU;
 
-  showResizeNotification();
 }
 
 void TerminalDisplay::showResizeNotification()
 {
-  if (_resizing && _terminalSizeHint)
+  if (_terminalSizeHint)
   {
      if (_terminalSizeStartup) {
-       _terminalSizeStartup=false;
+	   if (isVisible())
+       		_terminalSizeStartup=false;
        return;
      }
      if (!_resizeWidget)
      {
-        _resizeWidget = new QFrame(this);
+        _resizeWidget = new QLabel(i18n("Size: XXX x XXX"), this);
+        _resizeWidget->setMinimumWidth(_resizeWidget->fontMetrics().width(i18n("Size: XXX x XXX")));
+        _resizeWidget->setMinimumHeight(_resizeWidget->sizeHint().height());
+		_resizeWidget->setAlignment(Qt::AlignCenter);
 
-        QFont f = KGlobalSettings::generalFont();
-        int fs = f.pointSize();
-        if (fs == -1)
-           fs = QFontInfo(f).pointSize();
-        f.setPointSize((fs*3)/2);
-        f.setBold(true);
-        _resizeWidget->setFont(f);
-        _resizeWidget->setFrameShape((QFrame::Shape) (QFrame::Box|QFrame::Raised));
-        _resizeWidget->setMidLineWidth(2);
-        QBoxLayout *l = new QVBoxLayout(_resizeWidget);
-	    l->setMargin(10);
-        _resizeLabel = new QLabel(i18n("Size: XXX x XXX"), _resizeWidget);
-        l->addWidget(_resizeLabel, 1, Qt::AlignCenter);
-        _resizeWidget->setMinimumWidth(_resizeLabel->fontMetrics().width(i18n("Size: XXX x XXX"))+20);
-        _resizeWidget->setMinimumHeight(_resizeLabel->sizeHint().height()+20);
-        _resizeTimer = new QTimer(this);
-	_resizeTimer->setSingleShot(true);
+        _resizeWidget->setStyleSheet("background-color:palette(window);border-style:solid;border-width:1px;border-color:palette(dark)");
+
+		_resizeTimer = new QTimer(this);
+		_resizeTimer->setSingleShot(true);
         connect(_resizeTimer, SIGNAL(timeout()), _resizeWidget, SLOT(hide()));
      }
      QString sizeStr = i18n("Size: %1 x %2", _columns, _lines);
-     _resizeLabel->setText(sizeStr);
+     _resizeWidget->setText(sizeStr);
      _resizeWidget->move((width()-_resizeWidget->width())/2,
                          (height()-_resizeWidget->height())/2+20);
      _resizeWidget->show();
-     _resizeTimer->start(3000);
+     _resizeTimer->start(1000);
   }
 }
 
@@ -1427,6 +1416,7 @@ void TerminalDisplay::updateImageSize()
 
   if ( _resizing )
   {
+  	showResizeNotification();
     emit changedContentSizeSignal(_contentHeight, _contentWidth); // expose resizeEvent
   }
   

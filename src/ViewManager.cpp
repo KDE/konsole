@@ -609,10 +609,10 @@ TerminalDisplay* ViewManager::createTerminalDisplay(Session* session)
    TerminalDisplay* display = new TerminalDisplay(0);
 
    //TODO Temporary settings used here
-   display->setBellMode(0);
-   display->setTerminalSizeHint(false);
+   display->setBellMode(TerminalDisplay::NotifyBell);
+   display->setTerminalSizeHint(true);
    display->setTripleClickMode(TerminalDisplay::SelectWholeLine);
-   display->setTerminalSizeStartup(false);
+   display->setTerminalSizeStartup(true);
    display->setScrollBarPosition(TerminalDisplay::ScrollBarRight);
    display->setRandomSeed(session->sessionId() * 31);
 
