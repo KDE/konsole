@@ -1017,10 +1017,9 @@ void TerminalDisplay::updateImage()
 
 void TerminalDisplay::showResizeNotification()
 {
-  if (_terminalSizeHint)
+  if (_terminalSizeHint && isVisible())
   {
      if (_terminalSizeStartup) {
-	   if (isVisible())
        		_terminalSizeStartup=false;
        return;
      }
