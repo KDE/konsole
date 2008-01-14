@@ -31,6 +31,7 @@ Comment[x-test]=xxKonsolexx
 
 [Event/BellVisible]
 Name=Bell in Visible Session
+Name[el]=Ηχητική σήμανση στην ορατή συνεδρία
 Name[eo]=Pepo en videbla seanco
 Name[ga]=Cloigín i Seisiún Infheicthe
 Name[km]=កណ្ដឹង​នៅ​​ក្នុង​សម័យ​មើល​ឃើញ
@@ -98,6 +99,7 @@ Action=Sound
 
 [Event/BellInvisible]
 Name=Bell in Non-visible session
+Name[el]=Ηχητική σήμανση σε μη ορατή συνεδρία
 Name[eo]=Pepo en nevidebla seanco
 Name[ga]=Cloigín i Seisiún Dofheicthe
 Name[km]=កណ្ដឹង​ក្នុង​សម័យ​​មើល​មិន​ឃើញ
@@ -165,6 +167,7 @@ Action=Popup
 
 [Event/Activity]
 Name=Activity in Monitored Session
+Name[el]=Δραστηριότητα σε συνεδρία υπό εποπτεία
 Name[eo]=Aktiveco en rigardata seanco
 Name[ga]=Gníomhaíocht i Seisiún Monatóirithe
 Name[km]=សកម្មភាព​ក្នុង​សម័យ​ដែល​បាន​ត្រួត​ពិនិត្យ
@@ -232,6 +235,7 @@ Action=Popup
 
 [Event/Silence]
 Name=Silence in Monitored Session
+Name[el]=Ησυχία σε συνεδρία υπό εποπτεία
 Name[eo]=Trankvilo en rigardata seanco
 Name[ga]=Ciúnas i Seisiún Monatóirithe
 Name[km]=ភាព​ស្ងាត់​ក្នុង​សម័យ​ដែល​បាន​ត្រួត​ពិនិត្យ
@@ -298,6 +302,7 @@ Action=Popup
 
 [Event/Finished]
 Name=Session Finished With Non-zero Status
+Name[el]=Η συνεδρία τερμάτισε με μη μηδενική κατάσταση
 Name[eo]=Seanco finiĝis kun eraro
 Name[ga]=Chríochnaigh an Seisiún le Stádas nach bhfuil 0
 Name[km]=សម័យ​ដែល​បាន​បញ្ចប់​ដោយ​ស្ថានភាព​មិន​សូន្យ
