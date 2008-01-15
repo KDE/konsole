@@ -70,9 +70,11 @@ EditProfileDialog::EditProfileDialog(QWidget* parent)
     _ui = new Ui::EditProfileDialog();
     _ui->setupUi(mainWidget());
 
-    // TODO - Renable in a later KDE 4.x release when this feature works again
+    // - Renable in a later KDE 4.x release when this feature works again
     _ui->enableResizeWindowButton->setVisible(false);
-
+	
+#warning "Re-enable when flow control is working again - bug in KDE 4.1"
+	_ui->enableFlowControlButton->setEnabled(false);
 
     // there are various setupXYZPage() methods to load the items
     // for each page and update their states to match the profile
