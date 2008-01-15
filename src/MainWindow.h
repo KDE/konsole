@@ -156,7 +156,8 @@ class MainWindow : public KXmlGuiWindow
         void setupActions();
         void setupWidgets();
         QString activeSessionDir() const;
-        
+		void disconnectController(SessionController* controller);
+
     private:
         ViewManager*  _viewManager;
         BookmarkHandler* _bookmarkHandler;
