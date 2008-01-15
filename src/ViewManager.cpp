@@ -296,6 +296,11 @@ void ViewManager::detachActiveView()
 
 void ViewManager::sessionFinished()
 {
+	// if this slot is called after the view manager's main widget
+	// has been destroyed, do nothing
+	if (!_viewSplitter)
+		return;
+
     Session* session = qobject_cast<Session*>(sender());
 
     if ( _sessionMap[qobject_cast<TerminalDisplay*>(activeView())] == session )
