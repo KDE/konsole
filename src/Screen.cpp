@@ -1314,10 +1314,10 @@ void Screen::writeSelectionToStream(TerminalCharacterDecoder* decoder ,
 	for (int y=top;y<=bottom;y++)
 	{
 			int start = 0;
-			if ( y == top ) start = left;
+			if ( y == top || columnmode ) start = left;
 		
 			int count = -1;
-			if ( y == bottom) count = right - start + 1;
+			if ( y == bottom || columnmode ) count = right - start + 1;
 
             const bool appendNewLine = ( y != bottom );
 			copyLineToStream( y,
