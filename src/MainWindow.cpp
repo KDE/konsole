@@ -129,6 +129,14 @@ ViewManager* MainWindow::viewManager() const
     return _viewManager;
 }
 
+void MainWindow::disconnectController(SessionController* controller)
+{
+	disconnect( controller , SIGNAL(titleChanged(ViewProperties*))
+                     , this , SLOT(activeViewTitleChanged(ViewProperties*)) );
+    guiFactory()->removeClient(controller);
+    controller->setSearchBar(0);
+}
+
 void MainWindow::activeViewChanged(SessionController* controller)
 {
     // associate bookmark menu with current session
@@ -137,15 +145,8 @@ void MainWindow::activeViewChanged(SessionController* controller)
     connect( bookmarkHandler() , SIGNAL(openUrl(const KUrl&)) , controller ,
              SLOT(openUrl(const KUrl&)) );
 
-    // disconnect existing controller's UI
     if ( _pluggedController )
-    {
-        disconnect( _pluggedController , SIGNAL(titleChanged(ViewProperties*))
-                     , this , SLOT(activeViewTitleChanged(ViewProperties*)) );
-        guiFactory()->removeClient(_pluggedController);
-
-        _pluggedController->setSearchBar(0);
-    }
+		disconnectController(_pluggedController);
 
     // listen for title changes from the current session
     Q_ASSERT( controller );
@@ -320,8 +321,11 @@ bool MainWindow::queryClose()
     case KMessageBox::Yes:
         return true;
     case KMessageBox::No:
-        if (_pluggedController && _pluggedController->session()) 
-            _pluggedController->session()->close();
+        if (_pluggedController && _pluggedController->session())
+		{
+			disconnectController(_pluggedController);
+			_pluggedController->session()->close();
+		}
         return false;
     case KMessageBox::Cancel:
         return false;
