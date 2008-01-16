@@ -119,7 +119,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
 
     // move view to newest output when keystrokes occur
     connect( _view , SIGNAL(keyPressedSignal(QKeyEvent*)) , this ,
-            SLOT(trackOutput()) );
+            SLOT(trackOutput(QKeyEvent*)) );
 
     // listen to activity / silence notifications from session
     connect( _session , SIGNAL(stateChanged(int)) , this ,
@@ -166,11 +166,22 @@ SessionController::~SessionController()
    if ( _view )
       _view->setScreenWindow(0);
 }
-void SessionController::trackOutput()
+void SessionController::trackOutput(QKeyEvent* event)
 {
     Q_ASSERT( _view->screenWindow() );
 
-    _view->screenWindow()->setTrackOutput(true);
+	// jump to the end of the scrollback buffer unless the key pressed
+	// is one of the three main modifiers, as these are used to select
+	// the selection mode (eg. Ctrl+Alt+<Left Click> for column/block selection)
+	switch (event->key())
+	{
+		case Qt::Key_Shift:
+		case Qt::Key_Control:
+		case Qt::Key_Alt:
+			break;
+		default:
+    		_view->screenWindow()->setTrackOutput(true);
+	}
 }
 void SessionController::requireUrlFilterUpdate()
 {

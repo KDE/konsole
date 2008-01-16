@@ -198,7 +198,9 @@ private slots:
 
     void sessionResizeRequest(const QSize& size);
 
-    void trackOutput();  // move view to end of current output
+    void trackOutput(QKeyEvent* event);  // move view to end of current output
+										 // when a key press occurs in the 
+										 // display area
 
 	void updateSearchFilter();
 
