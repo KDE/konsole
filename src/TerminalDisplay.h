@@ -42,6 +42,7 @@ class QKeyEvent;
 class QScrollBar;
 class QShowEvent;
 class QHideEvent;
+class QTimerEvent;
 class QWidget;
 
 class KMenu;
@@ -502,7 +503,8 @@ protected:
     virtual void resizeEvent(QResizeEvent*);
 
     virtual void fontChange(const QFont &font);
-
+	virtual void focusInEvent(QFocusEvent* event);
+	virtual void focusOutEvent(QFocusEvent* event);
     virtual void keyPressEvent(QKeyEvent* event);
     virtual void mouseDoubleClickEvent(QMouseEvent* ev);
     virtual void mousePressEvent( QMouseEvent* );
@@ -744,6 +746,18 @@ public:
     {
         HAVE_TRANSPARENCY = enable;
     }
+};
+
+class AutoScrollHandler : public QObject
+{
+public:
+	AutoScrollHandler(QWidget* parent);
+protected:
+	virtual void timerEvent(QTimerEvent* event);
+	virtual bool eventFilter(QObject* watched,QEvent* event);
+private:
+	QWidget* widget() const { return static_cast<QWidget*>(parent()); }
+	int _timerId;
 };
 
 }

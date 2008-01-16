@@ -327,6 +327,8 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 
   //set up a warning message when the user presses Ctrl+S to avoid confusion
   connect( this,SIGNAL(flowControlKeyPressed(bool)),this,SLOT(outputSuspended(bool)) );
+
+  new AutoScrollHandler(this);
 }
 
 TerminalDisplay::~TerminalDisplay()
@@ -1062,6 +1064,31 @@ void TerminalDisplay::setBlinkingCursor(bool blink)
   }
 }
 
+void TerminalDisplay::focusOutEvent(QFocusEvent*)
+{
+	// trigger a repaint of the cursor so that it is both visible (in case
+	// it was hidden during blinking)
+	// and drawn in a focused out state
+	_cursorBlinking = true;
+	blinkCursorEvent();
+	_blinkCursorTimer->stop();
+
+	if (_blinking)
+		blinkEvent();
+
+	_blinkTimer->stop();
+}
+void TerminalDisplay::focusInEvent(QFocusEvent*)
+{
+	if (_hasBlinkingCursor)
+	{
+		_blinkCursorTimer->start();
+		blinkCursorEvent();
+	}
+	if (_hasBlinker)
+		_blinkTimer->start();
+}
+
 void TerminalDisplay::paintEvent( QPaintEvent* pe )
 {
   QPainter paint;
@@ -1681,13 +1708,6 @@ void TerminalDisplay::mouseMoveEvent(QMouseEvent* ev)
   extendSelection( ev->pos() );
 }
 
-#if 0
-void TerminalDisplay::setSelectionEnd()
-{
-  extendSelection( _configureRequestPoint );
-}
-#endif
-
 void TerminalDisplay::extendSelection( const QPoint& position )
 {
   QPoint pos = position;
@@ -1705,24 +1725,28 @@ void TerminalDisplay::extendSelection( const QPoint& position )
   // the mouse cursor will kept caught within the bounds of the text in
   // this widget.
 
-  // Adjust position within text area bounds. See FIXME above.
-  QPoint oldpos = pos;
-  if ( pos.x() < tLx+_leftMargin )                  
-      pos.setX( tLx+_leftMargin );
-  if ( pos.x() > tLx+_leftMargin+_usedColumns*_fontWidth-1 ) 
-      pos.setX( tLx+_leftMargin+_usedColumns*_fontWidth );
-  if ( pos.y() < tLy+_topMargin )                   
-      pos.setY( tLy+_topMargin );
-  if ( pos.y() > tLy+_topMargin+_usedLines*_fontHeight-1 )    
-      pos.setY( tLy+_topMargin+_usedLines*_fontHeight-1 );
+  int linesBeyondWidget = 0;
 
-  if ( pos.y() == tLy+_topMargin+_usedLines*_fontHeight-1 )
+  QRect textBounds(tLx + _leftMargin,
+  				   tLy + _topMargin,
+				   _usedColumns*_fontWidth-1,
+				   _usedLines*_fontHeight-1);
+
+  // Adjust position within text area bounds.
+  QPoint oldpos = pos;
+ 
+  pos.setX( qBound(textBounds.left(),pos.x(),textBounds.right()) );
+  pos.setY( qBound(textBounds.top(),pos.y(),textBounds.bottom()) );
+
+  if ( oldpos.y() > textBounds.bottom() ) 
   {
-    _scrollBar->setValue(_scrollBar->value()+yMouseScroll); // scrollforward
+  	linesBeyondWidget = (oldpos.y()-textBounds.bottom()) / _fontHeight;
+    _scrollBar->setValue(_scrollBar->value()+linesBeyondWidget+1); // scrollforward
   }
-  if ( pos.y() == tLy+_topMargin )
+  if ( oldpos.y() < textBounds.top() )
   {
-    _scrollBar->setValue(_scrollBar->value()-yMouseScroll); // scrollback
+  	linesBeyondWidget = (textBounds.top()-oldpos.y()) / _fontHeight;
+    _scrollBar->setValue(_scrollBar->value()-linesBeyondWidget-1); // scrollback
   }
 
   int charColumn = 0;
@@ -2672,6 +2696,62 @@ void TerminalDisplay::setLineSpacing(uint i)
 {
   _lineSpacing = i;
   setVTFont(font()); // Trigger an update.
+}
+
+AutoScrollHandler::AutoScrollHandler(QWidget* parent)
+: QObject(parent)
+, _timerId(0)
+{
+	parent->installEventFilter(this);
+}
+void AutoScrollHandler::timerEvent(QTimerEvent* event)
+{
+	if (event->timerId() != _timerId)
+		return;
+
+	QMouseEvent mouseEvent(	QEvent::MouseMove,
+					  		widget()->mapFromGlobal(QCursor::pos()),
+					  		Qt::NoButton,
+					  		Qt::LeftButton,
+					  		Qt::NoModifier);
+
+	QApplication::sendEvent(widget(),&mouseEvent);	
+}
+bool AutoScrollHandler::eventFilter(QObject* watched,QEvent* event)
+{
+	Q_ASSERT( watched == parent() );
+
+	QMouseEvent* mouseEvent = (QMouseEvent*)event;
+	switch (event->type())
+	{
+		case QEvent::MouseMove:
+		{
+			bool mouseInWidget = widget()->rect().contains(mouseEvent->pos());
+
+			if (mouseInWidget)
+			{
+				if (_timerId)
+					killTimer(_timerId);
+				_timerId = 0;
+			}
+			else
+			{
+				if (!_timerId && (mouseEvent->buttons() & Qt::LeftButton))
+					_timerId = startTimer(100);
+			}
+		}
+		case QEvent::MouseButtonRelease:
+			if (_timerId && (mouseEvent->buttons() & ~Qt::LeftButton))
+			{
+				killTimer(_timerId);
+				_timerId = 0;
+			}
+		break;
+		default:
+		break;
+	};
+
+	return false;
 }
 
 #include "TerminalDisplay.moc"
