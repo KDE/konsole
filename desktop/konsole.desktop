@@ -39,6 +39,7 @@ GenericName=Terminal
 GenericName[el]=Τερματικό
 GenericName[ga]=Teirminéal
 GenericName[km]=ស្ថានីយ
+GenericName[nds]=Konsool
 GenericName[zh_TW]=終端機
 X-DBUS-StartupType=Unique
 X-KDE-AuthorizeAction=shell_access
