@@ -274,9 +274,12 @@ void Session::run()
   // Check to see if the given program is executable.
   QString exec = QFile::encodeName(_program);
 
-  // if 'exec' is not specified, fall back to shell
+  // if 'exec' is not specified, fall back to default shell.  if that 
+  // is not set then fall back to /bin/sh
   if ( exec.isEmpty() )
       exec = getenv("SHELL");
+  if ( exec.isEmpty() )
+  	  exec = "/bin/sh";
 
   // if no arguments are specified, fall back to shell
   QStringList arguments =  _arguments.join(QChar(' ')).isEmpty() ?
