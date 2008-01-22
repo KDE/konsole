@@ -2739,6 +2739,7 @@ bool AutoScrollHandler::eventFilter(QObject* watched,QEvent* event)
 				if (!_timerId && (mouseEvent->buttons() & Qt::LeftButton))
 					_timerId = startTimer(100);
 			}
+                break;
 		}
 		case QEvent::MouseButtonRelease:
 			if (_timerId && (mouseEvent->buttons() & ~Qt::LeftButton))
