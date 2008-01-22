@@ -66,7 +66,7 @@ void Pty::setXonXoff(bool enable)
     else
       ttmode.c_iflag |= (IXOFF | IXON);
     if (!pty()->tcSetAttr(&ttmode))
-      kWarning("Unable to set terminal attributes.");
+      kWarning() << "Unable to set terminal attributes.";
   }
 }
 
@@ -84,7 +84,7 @@ void Pty::setUtf8Mode(bool enable)
     else
       ttmode.c_iflag |= IUTF8;
     if (!pty()->tcSetAttr(&ttmode))
-      kWarning("Unable to set terminal attributes.");
+      kWarning() << "Unable to set terminal attributes.";
   }
 #endif
 }
@@ -99,7 +99,7 @@ void Pty::setErase(char erase)
     pty()->tcGetAttr(&ttmode);
     ttmode.c_cc[VERASE] = erase;
     if (!pty()->tcSetAttr(&ttmode))
-      kWarning("Unable to set terminal attributes.");
+      kWarning() << "Unable to set terminal attributes.";
   }
 }
 
@@ -193,7 +193,7 @@ int Pty::start(const QString& program,
   	ttmode.c_cc[VERASE] = _eraseChar;
   
   if (!pty()->tcSetAttr(&ttmode))
-    kWarning("Unable to set terminal attributes.");
+    kWarning() << "Unable to set terminal attributes.";
   
   pty()->setWinSize(_windowLines, _windowColumns);
 
@@ -237,7 +237,7 @@ void Pty::sendData(const char* data, int length)
   
   if (!pty()->write(data,length)) 
   {
-    kWarning("Pty::doSendJobs - Could not send input data to terminal process.");
+    kWarning() << "Pty::doSendJobs - Could not send input data to terminal process.";
     return;
   }
 }
