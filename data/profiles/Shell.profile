@@ -43,6 +43,7 @@ Comment=Konsole default profile
 Comment[bg]=Профил по подразбиране на конзолата
 Comment[ca]=Perfil per omissió del Konsole
 Comment[cs]=Výchozí profil Konsole
+Comment[da]=Standardprofil for Konsole
 Comment[de]=Konsole-Standardprofil
 Comment[el]=Προκαθορισμένο προφίλ του Konsole
 Comment[eo]=Defaŭlta profilo por Konzolo
