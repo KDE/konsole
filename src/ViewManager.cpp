@@ -29,6 +29,7 @@
 
 // KDE
 #include <kdebug.h>
+#include <KAcceleratorManager>
 #include <KGlobal>
 #include <KLocale>
 #include <KToggleAction>
@@ -53,7 +54,9 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
     , _navigationMethod(TabbedNavigation)
 {
     // create main view area
-    _viewSplitter = new ViewSplitter(0);   
+    _viewSplitter = new ViewSplitter(0);  
+	KAcceleratorManager::setNoAccel(_viewSplitter);
+
     // the ViewSplitter class supports both recursive and non-recursive splitting,
     // in non-recursive mode, all containers are inserted into the same top-level splitter
     // widget, and all the divider lines between the containers have the same orientation
