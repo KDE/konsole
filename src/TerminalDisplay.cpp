@@ -1069,10 +1069,10 @@ void TerminalDisplay::focusOutEvent(QFocusEvent*)
 	// trigger a repaint of the cursor so that it is both visible (in case
 	// it was hidden during blinking)
 	// and drawn in a focused out state
-	_cursorBlinking = true;
-	blinkCursorEvent();
-	_blinkCursorTimer->stop();
+	_cursorBlinking = false;
+	updateCursor();
 
+	_blinkCursorTimer->stop();
 	if (_blinking)
 		blinkEvent();
 
@@ -1083,8 +1083,9 @@ void TerminalDisplay::focusInEvent(QFocusEvent*)
 	if (_hasBlinkingCursor)
 	{
 		_blinkCursorTimer->start();
-		blinkCursorEvent();
 	}
+	updateCursor();
+
 	if (_hasBlinker)
 		_blinkTimer->start();
 }
@@ -1379,13 +1380,16 @@ QRect TerminalDisplay::imageToWidget(const QRect& imageArea) const
     return result;
 }
 
+void TerminalDisplay::updateCursor()
+{
+  QRect cursorRect = imageToWidget( QRect(cursorPosition(),QSize(1,1)) ); 
+  update(cursorRect);
+}
+
 void TerminalDisplay::blinkCursorEvent()
 {
   _cursorBlinking = !_cursorBlinking;
-
-  QRect cursorRect = imageToWidget( QRect(cursorPosition(),QSize(1,1)) ); 
-
-  update(cursorRect);
+  updateCursor();
 }
 
 /* ------------------------------------------------------------------------- */

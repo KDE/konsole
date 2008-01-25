@@ -621,6 +621,9 @@ private:
 	// returns the position of the cursor in columns and lines
 	QPoint cursorPosition() const;
 
+	// redraws the cursor
+	void updateCursor();
+
     // the window onto the terminal screen which this display
     // is currently showing.  
     QPointer<ScreenWindow> _screenWindow;
