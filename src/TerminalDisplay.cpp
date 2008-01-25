@@ -282,6 +282,10 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 ,_filterChain(new TerminalImageFilterChain())
 ,_cursorShape(BlockCursor)
 {
+  // terminal applications are not designed with Right-To-Left in mind,
+  // so the layout is forced to Left-To-Right
+  setLayoutDirection(Qt::LeftToRight);
+
   // The offsets are not yet calculated.
   // Do not calculate these too often to be more smoothly when resizing
   // konsole in opaque mode.
@@ -293,21 +297,22 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
   _scrollBar = new QScrollBar(this);
   setScroll(0,0); 
   _scrollBar->setCursor( Qt::ArrowCursor );
-  connect(_scrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollBarPositionChanged(int)));
+  connect(_scrollBar, SIGNAL(valueChanged(int)), this, 
+  					  SLOT(scrollBarPositionChanged(int)));
 
+  // setup timers for blinking cursor and text
   _blinkTimer   = new QTimer(this);
   connect(_blinkTimer, SIGNAL(timeout()), this, SLOT(blinkEvent()));
   _blinkCursorTimer   = new QTimer(this);
   connect(_blinkCursorTimer, SIGNAL(timeout()), this, SLOT(blinkCursorEvent()));
 
+  KCursor::setAutoHideCursor( this, true );
+  
   setUsesMouse(true);
   setColorTable(base_color_table); 
-
-  KCursor::setAutoHideCursor( this, true );
-
   setMouseTracking(true);
 
-  // Init DnD 
+  // Enable drag and drop 
   setAcceptDrops(true); // attempt
   dragInfo.state = diNone;
 
@@ -648,7 +653,14 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
     if ( isLineCharString(text) )
 	  	drawLineCharString(painter,rect.x(),rect.y(),text,style);
     else
-        painter.drawText(rect,text);
+	{
+		// the drawText(rect,flags,string) overload is used here with null flags
+		// instead of drawText(rect,string) because the (rect,string) overload causes 
+		// the application's default layout direction to be used instead of 
+		// the widget-specific layout direction, which should always be
+		// Qt::LeftToRight for this widget
+        painter.drawText(rect,0,text);
+	}
 }
 
 void TerminalDisplay::drawTextFragment(QPainter& painter , 
@@ -1064,8 +1076,7 @@ void TerminalDisplay::setBlinkingCursor(bool blink)
 
 void TerminalDisplay::paintEvent( QPaintEvent* pe )
 {
-  QPainter paint;
-  paint.begin( this );
+  QPainter paint(this);
 
   foreach (QRect rect, (pe->region() & contentsRect()).rects())
   {
