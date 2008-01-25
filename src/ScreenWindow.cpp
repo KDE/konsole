@@ -71,7 +71,7 @@ Character* ScreenWindow::getImage()
 		return _windowBuffer;
  
 	_screen->getImage(_windowBuffer,size,
-					  _currentLine,endWindowLine());
+					  currentLine(),endWindowLine());
 
 	// this window may look beyond the end of the screen, in which 
 	// case there will be an unused area which needs to be filled
@@ -85,7 +85,7 @@ Character* ScreenWindow::getImage()
 void ScreenWindow::fillUnusedArea()
 {
 	int screenEndLine = _screen->getHistLines() + _screen->getLines() - 1;
-	int windowEndLine = _currentLine + windowLines() - 1;
+	int windowEndLine = currentLine() + windowLines() - 1;
 
 	int unusedLines = windowEndLine - screenEndLine;
 	int charsToFill = unusedLines * windowColumns();
@@ -102,12 +102,12 @@ void ScreenWindow::fillUnusedArea()
 //
 int ScreenWindow::endWindowLine() const
 {
-	return qMin(_currentLine + windowLines() - 1,
-				_screen->getHistLines() + _screen->getLines() - 1);
+	return qMin(currentLine() + windowLines() - 1,
+				lineCount() - 1);
 }
 QVector<LineProperty> ScreenWindow::getLineProperties()
 {
-    QVector<LineProperty> result = _screen->getLineProperties(_currentLine,endWindowLine());
+    QVector<LineProperty> result = _screen->getLineProperties(currentLine(),endWindowLine());
 	
 	if (result.count() != windowLines())
 		result.resize(windowLines());
@@ -123,18 +123,16 @@ QString ScreenWindow::selectedText( bool preserveLineBreaks ) const
 void ScreenWindow::getSelectionStart( int& column , int& line )
 {
     _screen->getSelectionStart(column,line);
-    line -= _currentLine;
+    line -= currentLine();
 }
 void ScreenWindow::getSelectionEnd( int& column , int& line )
 {
     _screen->getSelectionEnd(column,line);
-    line -= _currentLine;
+    line -= currentLine();
 }
 void ScreenWindow::setSelectionStart( int column , int line , bool columnMode )
 {
-	#warning "FIXME: The columnMode parameter is handled correctly when visually selecting an area, but copy/select and paste produces the wrong results."
-
-    _screen->setSelectionStart( column , qMin(line + _currentLine,endWindowLine())  , columnMode);
+    _screen->setSelectionStart( column , qMin(line + currentLine(),endWindowLine())  , columnMode);
 	
 	_bufferNeedsUpdate = true;
     emit selectionChanged();
@@ -142,7 +140,7 @@ void ScreenWindow::setSelectionStart( int column , int line , bool columnMode )
 
 void ScreenWindow::setSelectionEnd( int column , int line )
 {
-    _screen->setSelectionEnd( column , qMin(line + _currentLine,endWindowLine()) );
+    _screen->setSelectionEnd( column , qMin(line + currentLine(),endWindowLine()) );
 
 	_bufferNeedsUpdate = true;
     emit selectionChanged();
@@ -150,7 +148,7 @@ void ScreenWindow::setSelectionEnd( int column , int line )
 
 bool ScreenWindow::isSelected( int column , int line )
 {
-    return _screen->isSelected( column , qMin(line + _currentLine,endWindowLine()) );
+    return _screen->isSelected( column , qMin(line + currentLine(),endWindowLine()) );
 }
 
 void ScreenWindow::clearSelection()
@@ -197,7 +195,7 @@ QPoint ScreenWindow::cursorPosition() const
 
 int ScreenWindow::currentLine() const
 {
-    return _currentLine;
+    return qBound(0,_currentLine,lineCount()-windowLines());
 }
 
 void ScreenWindow::scrollBy( RelativeScrollMode mode , int amount )
@@ -214,20 +212,15 @@ void ScreenWindow::scrollBy( RelativeScrollMode mode , int amount )
 
 bool ScreenWindow::atEndOfOutput() const
 {
-    return _currentLine >= (lineCount()-windowLines());
+    return currentLine() == (lineCount()-windowLines());
 }
 
 void ScreenWindow::scrollTo( int line )
 {
-    //kDebug() << "ScreenWindow scrolled to " << line << ":" << this;
-    if ( line < 0 )
-       line = 0;
-
-    if ( (lineCount() - windowLines()) < line )
-       line = qMax(0,lineCount() - windowLines()); 
+	int maxCurrentLineNumber = lineCount() - windowLines();
+	line = qBound(0,line,maxCurrentLineNumber);
 
     const int delta = line - _currentLine;
-
     _currentLine = line;
 
     // keep track of number of lines scrolled by,
@@ -251,8 +244,6 @@ bool ScreenWindow::trackOutput() const
 
 int ScreenWindow::scrollCount() const
 {
-   // kDebug() << "window returning scroll count of " << _scrollCount;
-
     return _scrollCount;
 }
 
@@ -263,15 +254,12 @@ void ScreenWindow::resetScrollCount()
 
 QRect ScreenWindow::scrollRegion() const
 {
-    QRect rect = _screen->lastScrolledRegion();
+	bool equalToScreenSize = windowLines() == _screen->getLines();
 
-    // bound scroll region size to size of window
-    //rect.setHeight( qMin(rect.height() , windowLines()+1) );
-   
-    //Q_ASSERT( rect.top() >= 0 && rect.left() >= 0 ); 
-    //Q_ASSERT( rect.height()-1 <= windowLines() );
-
-    return rect;
+	if ( atEndOfOutput() && equalToScreenSize )
+    	return _screen->lastScrolledRegion();
+	else
+		return QRect(0,0,windowColumns(),windowLines());
 }
 
 void ScreenWindow::notifyOutputChanged()
