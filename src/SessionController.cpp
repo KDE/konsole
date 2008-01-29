@@ -85,6 +85,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , _codecAction(0)
     , _changeProfileMenu(0)
 	, _listenForScreenWindowUpdates(false)
+	, _preventClose(false)
 {
     Q_ASSERT( session );
     Q_ASSERT( view );
@@ -668,6 +669,9 @@ void SessionController::saveSession()
 }
 void SessionController::closeSession()
 {
+	if (_preventClose)
+		return;
+
     _session->close();
 }
 
@@ -972,13 +976,20 @@ void SessionController::showDisplayContextMenu(TerminalDisplay* /*display*/ , in
         contentSeparator->setSeparator(true);
         contentActions << contentSeparator;
 
+		_preventClose = true;
+
         popup->insertActions(popup->actions().value(0,0),contentActions);
-        popup->exec( _view->mapToGlobal(position) );
+        QAction* chosen = popup->exec( _view->mapToGlobal(position) );
+
+		_preventClose = false;
 
         // remove content-specific actions
         foreach(QAction* action,contentActions) 
             popup->removeAction(action);
         delete contentSeparator;
+
+		if (chosen && chosen->objectName() == "close-session")
+			chosen->trigger();
     }
     else
     {

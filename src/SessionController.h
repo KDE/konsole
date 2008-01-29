@@ -246,6 +246,7 @@ private:
     KMenu* _changeProfileMenu;
 
 	bool _listenForScreenWindowUpdates;
+	bool _preventClose;
 };
 
 /** 
