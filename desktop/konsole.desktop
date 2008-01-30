@@ -44,6 +44,7 @@ GenericName[km]=ស្ថានីយ
 GenericName[ko]=터미널
 GenericName[nds]=Konsool
 GenericName[tr]=Uçbirim
+GenericName[zh_CN]=终端
 GenericName[zh_TW]=終端機
 X-DBUS-StartupType=Unique
 X-KDE-AuthorizeAction=shell_access
