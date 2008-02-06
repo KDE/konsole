@@ -27,6 +27,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <termios.h>
+#include <signal.h>
 
 // Qt
 #include <QtCore/QStringList>
@@ -268,5 +269,22 @@ int Pty::foregroundProcessGroup() const
 
     return 0;
 }
+
+void Pty::setupChildProcess()
+{
+	KPtyProcess::setupChildProcess();
+	
+	// reset all signal handlers
+	// this ensures that terminal applications respond to 
+	// signals generated via key sequences such as Ctrl+C
+	// (which sends SIGINT)
+	struct sigaction action;
+	sigemptyset(&action.sa_mask);
+	action.sa_handler = SIG_DFL;
+	action.sa_flags = 0;
+	for (int signal=1;signal < NSIG; signal++)
+		sigaction(signal,&action,0L);
+}
+
 
 #include "Pty.moc"

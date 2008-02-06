@@ -165,7 +165,10 @@ Q_OBJECT
      * @param length Length of @p buffer
      */
     void receivedData(const char* buffer, int length);
-    
+   
+  protected:
+  	void setupChildProcess();
+
   private slots:
     // called when data is received from the terminal process 
     void dataReceived(); 
