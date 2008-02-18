@@ -87,7 +87,7 @@ if(X11_XTest_FOUND)
   target_link_libraries(kdeinit_konsole ${X11_XTest_LIB} )
 endif(X11_XTest_FOUND)
 
-install(TARGETS kdeinit_konsole  DESTINATION ${LIB_INSTALL_DIR} )
+install(TARGETS kdeinit_konsole  DESTINATION ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
     
 target_link_libraries( konsole kdeinit_konsole )
