@@ -197,14 +197,14 @@ private:
     {
        QAbstractButton* button;
        int property;
-       char* slot; 
+       const char* slot; 
     };
     void setupRadio(RadioOption* possible,int actual);
     struct ComboOption
     {
        QAbstractButton* button;
        int property;
-       char* slot;
+       const char* slot;
     };
     void setupCombo(ComboOption* options , const Profile* profile);
 
