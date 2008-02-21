@@ -95,6 +95,14 @@ public:
     QPointer<Session> session() { return _session; }
     /** Returns the view associated with this controller */
     QPointer<TerminalDisplay>  view()    { return _view;    }
+	
+	/** 
+	 * Returns true if the controller is valid.
+	 * A valid controller is one which has a non-null session() and view().
+	 *
+	 * Equivalent to "!session().isNull() && !view().isNull()"
+	 */
+	bool isValid() const;
 
     /** 
      * Sets the widget used for searches through the session's output.
@@ -248,6 +256,10 @@ private:
 	bool _listenForScreenWindowUpdates;
 	bool _preventClose;
 };
+inline bool SessionController::isValid() const
+{
+	return !_session.isNull() && !_view.isNull();
+}
 
 /** 
  * Abstract class representing a task which can be performed on a group of sessions.

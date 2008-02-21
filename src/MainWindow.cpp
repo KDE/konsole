@@ -133,7 +133,14 @@ void MainWindow::disconnectController(SessionController* controller)
 {
 	disconnect( controller , SIGNAL(titleChanged(ViewProperties*))
                      , this , SLOT(activeViewTitleChanged(ViewProperties*)) );
-    guiFactory()->removeClient(controller);
+
+	// KXmlGuiFactory::removeClient() will try to access actions associated
+	// with the controller internally, which may not be valid after the controller
+	// itself is no longer valid (after the associated session and or view have
+	// been destroyed)
+	if (controller->isValid())
+    	guiFactory()->removeClient(controller);
+
     controller->setSearchBar(0);
 }
 
