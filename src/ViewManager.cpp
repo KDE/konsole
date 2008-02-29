@@ -568,7 +568,24 @@ ViewContainer* ViewManager::createContainer(const QString& profileKey)
     return container;
 }
 
-void ViewManager::setNavigationMethod(NavigationMethod method) { _navigationMethod = method; }
+void ViewManager::setNavigationMethod(NavigationMethod method)
+{
+    _navigationMethod = method;
+
+    KActionCollection* collection = _actionCollection;
+
+    if ( collection )
+    {
+        QAction* action;
+
+        action = collection->action( "next-view" );
+        if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
+
+        action = collection->action( "previous-view" );
+        if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
+    }
+}
+
 ViewManager::NavigationMethod ViewManager::navigationMethod() const { return _navigationMethod; }
 
 void ViewManager::containerViewsChanged(QObject* container)
