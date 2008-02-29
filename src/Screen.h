@@ -540,14 +540,17 @@ public:
 private: 
 
 	//copies a line of text from the screen or history into a stream using a 
-	//specified character decoder
+	//specified character decoder.  Returns the number of lines actually copied,
+	//which may be less than 'count' if (start+count) is more than the number of characters on
+	//the line 
+	//
 	//line - the line number to copy, from 0 (the earliest line in the history) up to 
 	//		 hist->getLines() + lines - 1
 	//start - the first column on the line to copy
 	//count - the number of characters on the line to copy
 	//decoder - a decoder which coverts terminal characters (an Character array) into text
     //appendNewLine - if true a new line character (\n) is appended to the end of the line
-	void copyLineToStream(int line, 
+	int  copyLineToStream(int line, 
                           int start, 
                           int count, 
                           TerminalCharacterDecoder* decoder,

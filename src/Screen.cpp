@@ -1320,17 +1320,29 @@ void Screen::writeSelectionToStream(TerminalCharacterDecoder* decoder ,
 			if ( y == bottom || columnmode ) count = right - start + 1;
 
             const bool appendNewLine = ( y != bottom );
-			copyLineToStream( y,
-                              start,
-                              count,
-                              decoder, 
-                              appendNewLine,
-                              preserveLineBreaks );
+			int copied = copyLineToStream( y,
+                              			   start,
+                              			   count,
+                              			   decoder, 
+                              			   appendNewLine,
+                              			   preserveLineBreaks );
+
+			// if the selection goes beyond the end of the last line then
+			// append a new line character.
+			//
+			// this makes it possible to 'select' a trailing new line character after
+			// the text on a line.  
+			if ( y == bottom && 
+				 copied < count	)
+			{
+				Character newLineChar('\n');
+				decoder->decodeLine(&newLineChar,1,0);
+			}
 	}	
 }
 
 
-void Screen::copyLineToStream(int line , 
+int Screen::copyLineToStream(int line , 
                               int start, 
                               int count,
                               TerminalCharacterDecoder* decoder,
@@ -1421,6 +1433,8 @@ void Screen::copyLineToStream(int line ,
 		//decode line and write to text stream	
 		decoder->decodeLine( (Character*) characterBuffer , 
                              count, currentLineProperties );
+
+		return count;
 }
 
 // Method below has been removed because of its reliance on 'histCursor'
