@@ -27,6 +27,7 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QList>
 #include <QtCore/QSignalMapper>
+#include <QtCore/QStack>
 #include <QtCore/QString>
 #include <QtCore/QTextCodec>
 
@@ -114,6 +115,16 @@ QString SessionManager::loadProfile(const QString& shortPath)
     if ( !fileInfo.isAbsolute() )
         path = KStandardDirs::locate("data",path);
 
+	// guard to prevent problems if a profile specifies itself as its parent
+	// or if there is recursion in the "inheritance" chain
+	// (eg. two profiles, A and B, specifying each other as their parents)
+	static QStack<QString> recursionGuard;
+	if (recursionGuard.contains(path))
+		return QString();
+	else
+		recursionGuard.push(path);
+
+
     // check that we have not already loaded this profile
     QHashIterator<QString,Profile*> iter(_types);
     while ( iter.hasNext() )
@@ -131,7 +142,10 @@ QString SessionManager::loadProfile(const QString& shortPath)
         reader = new KDE4ProfileReader;
 
     if (!reader)
+	{
+		recursionGuard.pop();
         return QString();
+	}
 
     Profile* newProfile = new Profile(defaultProfile());
     newProfile->setProperty(Profile::Path,path);
@@ -141,13 +155,12 @@ QString SessionManager::loadProfile(const QString& shortPath)
 
     if ( !parentProfile.isEmpty() )
     {
-        //kDebug() << "Loading parent profile" << parentProfile;
-
         QString parentKey = loadProfile(parentProfile);
         newProfile->setParent(profile(parentKey));
     }
 
     delete reader;
+	recursionGuard.pop();
 
     if (!result)
     {
