@@ -327,5 +327,20 @@ private:
     QSignalMapper* _sessionMapper;
 };
 
+class ShouldApplyProperty 
+{
+public:
+	ShouldApplyProperty(const Profile* profile , bool modifiedOnly) : 
+	_profile(profile) , _modifiedPropertiesOnly(modifiedOnly) {}
+
+	bool shouldApply(Profile::Property property) const
+	{
+		return !_modifiedPropertiesOnly || _profile->isPropertySet(property); 
+	}
+private:
+	const Profile* _profile;
+	bool _modifiedPropertiesOnly;
+};
+
 }
 #endif //SESSIONMANAGER_H

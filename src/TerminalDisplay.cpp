@@ -802,6 +802,8 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
                             linesToMove * _fontHeight ));
     }
 
+	Q_ASSERT(scrollRect.isValid() && !scrollRect.isEmpty());
+
     //scroll the display vertically to match internal _image
     scroll( 0 , _fontHeight * (-lines) , scrollRect );
 }
@@ -853,8 +855,8 @@ void TerminalDisplay::updateImage()
   // optimization - scroll the existing image where possible and 
   // avoid expensive text drawing for parts of the image that 
   // can simply be moved up or down
-  //scrollImage( _screenWindow->scrollCount() ,
-  //             _screenWindow->scrollRegion() );
+  scrollImage( _screenWindow->scrollCount() ,
+               _screenWindow->scrollRegion() );
   _screenWindow->resetScrollCount();
 
   Character* const newimg = _screenWindow->getImage();
@@ -1105,6 +1107,8 @@ void TerminalDisplay::focusInEvent(QFocusEvent*)
 void TerminalDisplay::paintEvent( QPaintEvent* pe )
 {
   QPainter paint(this);
+
+  qDebug() << "Actually repainting" << pe->region();
 
   foreach (QRect rect, (pe->region() & contentsRect()).rects())
   {
@@ -1875,7 +1879,7 @@ void TerminalDisplay::extendSelection( const QPoint& position )
       i = loc(right.x(),right.y());
       if (i>=0 && i<=_imageSize) {
         selClass = charClass(_image[i-1].character);
-        if (selClass == ' ')
+       /* if (selClass == ' ')
         {
           while ( right.x() < _usedColumns-1 && charClass(_image[i+1].character) == selClass && (right.y()<_usedLines-1) && 
 						  !(_lineProperties[right.y()] & LINE_WRAPPED))
@@ -1884,7 +1888,7 @@ void TerminalDisplay::extendSelection( const QPoint& position )
             right = left_not_right ? _iPntSelCorr : here;
           else
             right.rx()++;  // will be balanced later because of offset=-1;
-        }
+        }*/
       }
     }
 

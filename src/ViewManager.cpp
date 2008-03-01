@@ -543,7 +543,7 @@ ViewContainer* ViewManager::createContainer(const QString& profileKey)
 
     Q_ASSERT( info );
 
-    const int tabPosition = info->property(Profile::TabBarPosition).value<int>();
+    const int tabPosition = info->property<int>(Profile::TabBarPosition);
 
     ViewContainer::NavigationPosition position = ( tabPosition == Profile::TabBarTop ) ?
                                                    ViewContainer::NavigationPositionTop :
@@ -666,19 +666,28 @@ void ViewManager::applyProfile(TerminalDisplay* view , const QString& profileKey
     const ColorScheme* colorScheme = colorSchemeForProfile(profileKey);
 
     // menu bar visibility
-    emit setMenuBarVisibleRequest( info->property(Profile::ShowMenuBar).value<bool>() );
+    emit setMenuBarVisibleRequest( info->property<bool>(Profile::ShowMenuBar) );
 
     // tab bar visibility
     ViewContainer* container = _viewSplitter->activeContainer();
-    int tabBarMode = info->property(Profile::TabBarMode).value<int>();
-    int tabBarPosition = info->property(Profile::TabBarPosition).value<int>();
+    int tabBarMode = info->property<int>(Profile::TabBarMode);
+    int tabBarPosition = info->property<int>(Profile::TabBarPosition);
 
     if ( tabBarMode == Profile::AlwaysHideTabBar )
+	{
+		qDebug() << "Always hide tab bar";
         container->setNavigationDisplayMode(ViewContainer::AlwaysHideNavigation);
+	}
     else if ( tabBarMode == Profile::AlwaysShowTabBar )
+	{
+		qDebug() << "Always show tab bar";
         container->setNavigationDisplayMode(ViewContainer::AlwaysShowNavigation);
+	}
     else if ( tabBarMode == Profile::ShowTabBarAsNeeded )
+	{
+		qDebug() << "Show as needed";
         container->setNavigationDisplayMode(ViewContainer::ShowNavigationAsNeeded);
+	}
 
     ViewContainer::NavigationPosition position = container->navigationPosition();
 
@@ -698,11 +707,11 @@ void ViewManager::applyProfile(TerminalDisplay* view , const QString& profileKey
     view->setOpacity(colorScheme->opacity());
   
     // load font 
-    view->setAntialias(info->property(Profile::AntiAliasFonts).value<bool>());
+    view->setAntialias(info->property<bool>(Profile::AntiAliasFonts));
     view->setVTFont(info->font());
 
     // set scroll-bar position
-    int scrollBarPosition = info->property(Profile::ScrollBarPosition).value<int>();
+    int scrollBarPosition = info->property<int>(Profile::ScrollBarPosition);
 
     if ( scrollBarPosition == Profile::ScrollBarHidden )
        view->setScrollBarPosition(TerminalDisplay::NoScrollBar);
@@ -712,11 +721,11 @@ void ViewManager::applyProfile(TerminalDisplay* view , const QString& profileKey
        view->setScrollBarPosition(TerminalDisplay::ScrollBarRight);
 
     // terminal features
-    bool blinkingCursor = info->property(Profile::BlinkingCursorEnabled).value<bool>();
+    bool blinkingCursor = info->property<bool>(Profile::BlinkingCursorEnabled);
     view->setBlinkingCursor(blinkingCursor);  
 
     // cursor shape
-    int cursorShape = info->property(Profile::CursorShape).value<int>();
+    int cursorShape = info->property<int>(Profile::CursorShape);
 
     if ( cursorShape == Profile::BlockCursor )
         view->setKeyboardCursorShape(TerminalDisplay::BlockCursor);  
@@ -726,13 +735,13 @@ void ViewManager::applyProfile(TerminalDisplay* view , const QString& profileKey
         view->setKeyboardCursorShape(TerminalDisplay::UnderlineCursor);
 
     // cursor color
-    bool useCustomColor = info->property(Profile::UseCustomCursorColor).value<bool>();
-    const QColor& cursorColor = info->property(Profile::CustomCursorColor).value<QColor>();
+    bool useCustomColor = info->property<bool>(Profile::UseCustomCursorColor);
+    const QColor& cursorColor = info->property<QColor>(Profile::CustomCursorColor);
         
     view->setKeyboardCursorColor(!useCustomColor,cursorColor);
 
     // word characters
-    view->setWordCharacters( info->property(Profile::WordCharacters).value<QString>() );
+    view->setWordCharacters( info->property<QString>(Profile::WordCharacters) );
 }
 
 void ViewManager::updateViewsForSession(Session* session)

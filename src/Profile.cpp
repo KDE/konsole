@@ -175,18 +175,6 @@ QHash<Profile::Property,QVariant> Profile::setProperties() const
 {
     return _propertyValues;
 }
-
-QVariant Profile::property(Property property) const
-{
-	bool canInheritProperty = property != Path;
-
-    if ( _propertyValues.contains(property) )
-        return _propertyValues[property];
-    else if ( _parent && canInheritProperty )
-        return _parent->property(property);
-    else
-        return QVariant();
-}
 void Profile::setProperty(Property property , const QVariant& value)
 {
     _propertyValues.insert(property,value);
@@ -260,7 +248,7 @@ void KDE4ProfileWriter::writeStandardElement(KConfigGroup& group ,  const Profil
     QString name = Profile::primaryNameForProperty(attribute);
     
     if ( profile->isPropertySet(attribute) )
-        group.writeEntry(name,profile->property(attribute));
+        group.writeEntry(name,profile->property<QVariant>(attribute));
 }
 bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile* profile)
 {

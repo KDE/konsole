@@ -264,13 +264,17 @@ public:
     const Profile* parent() const;
 
     /** 
-     * Returns the current value of the specified @p property. 
+     * Returns the current value of the specified @p property, cast to type T.
+	 * Internally properties are stored using the QVariant type and cast to T
+	 * using QVariant::value<T>();
      *
      * If the specified @p property has not been set in this profile,
      * and a non-null parent was specified in the Profile's constructor,
      * the parent's value for @p property will be returned.
      */
-    virtual QVariant property(Property property) const;
+    template <class T>
+	T property(Property property) const;
+	
     /** Sets the value of the specified @p property to @p value. */
     virtual void setProperty(Property property,const QVariant& value);
     /** Returns true if the specified property has been set in this Profile instance. */
@@ -300,32 +304,32 @@ public:
     //
 
     /** Convenience method for property(Profile::Path) */
-    QString path() const { return property(Profile::Path).value<QString>(); }
+    QString path() const { return property<QString>(Profile::Path); }
 
     /** Convenience method for property(Profile::Name) */
-    QString name() const { return property(Profile::Name).value<QString>(); }
+    QString name() const { return property<QString>(Profile::Name); }
     
     /** Convenience method for property(Profile::Directory) */
     QString defaultWorkingDirectory() const 
-            { return property(Profile::Directory).value<QString>(); }
+            { return property<QString>(Profile::Directory); }
 
     /** Convenience method for property(Profile::Icon) */
-    QString icon() const { return property(Profile::Icon).value<QString>(); }
+    QString icon() const { return property<QString>(Profile::Icon); }
 
     /** Convenience method for property(Profile::Command) */
-    QString command() const { return property(Profile::Command).value<QString>(); }
+    QString command() const { return property<QString>(Profile::Command); }
 
     /** Convenience method for property(Profile::Arguments) */
-    QStringList arguments() const { return property(Profile::Arguments).value<QStringList>(); }
+    QStringList arguments() const { return property<QStringList>(Profile::Arguments); }
 
     /** Convenience method for property(Profile::Font) */
-    QFont font() const { return property(Profile::Font).value<QFont>(); }
+    QFont font() const { return property<QFont>(Profile::Font); }
 
     /** Convenience method for property(Profile::ColorScheme) */
-    QString colorScheme() const { return property(Profile::ColorScheme).value<QString>(); }
+    QString colorScheme() const { return property<QString>(Profile::ColorScheme); }
 
     /** Convenience method for property(Profile::Environment) */
-    QStringList environment() const { return property(Profile::Environment).value<QStringList>(); }
+    QStringList environment() const { return property<QStringList>(Profile::Environment); }
 
     /** 
      * Convenience method.
@@ -386,6 +390,24 @@ private:
     };
     static const PropertyNamePair DefaultPropertyNames[];
 };
+
+template <class T>
+inline T Profile::property(Property theProperty) const
+{
+	return property<QVariant>(theProperty).value<T>();
+}
+template <>
+inline QVariant Profile::property(Property property) const
+{
+	bool canInheritProperty = property != Path;
+
+    if ( _propertyValues.contains(property) )
+        return _propertyValues[property];
+    else if ( _parent && canInheritProperty )
+        return _parent->property<QVariant>(property);
+    else
+        return QVariant();
+}
 
 /** 
  * A profile which contains a number of default settings for various properties.

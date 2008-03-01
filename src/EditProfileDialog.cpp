@@ -217,7 +217,7 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
     _ui->iconSelectButton->setIcon( KIcon(info->icon()) );
 
     // window options
-    _ui->showMenuBarButton->setChecked( info->property(Profile::ShowMenuBar).value<bool>() );
+    _ui->showMenuBarButton->setChecked( info->property<bool>(Profile::ShowMenuBar) );
 
     // signals and slots
     connect( _ui->dirSelectButton , SIGNAL(clicked()) , this , SLOT(selectInitialDir()) );
@@ -243,7 +243,7 @@ void EditProfileDialog::showEnvironmentEditor()
     KDialog* dialog = new KDialog(this);
     QTextEdit* edit = new QTextEdit(dialog);
 
-    QStringList currentEnvironment = info->property(Profile::Environment).value<QStringList>();
+    QStringList currentEnvironment = info->property<QStringList>(Profile::Environment);
 
     edit->setPlainText( currentEnvironment.join("\n") );
     dialog->setPlainCaption(i18n("Edit Environment"));
@@ -262,13 +262,13 @@ void EditProfileDialog::setupTabsPage(const Profile* info)
     // tab title format
     _ui->tabTitleEdit->setClearButtonShown(true);
     _ui->remoteTabTitleEdit->setClearButtonShown(true);
-    _ui->tabTitleEdit->setText( info->property(Profile::LocalTabTitleFormat).value<QString>() );
+    _ui->tabTitleEdit->setText( info->property<QString>(Profile::LocalTabTitleFormat) );
     _ui->remoteTabTitleEdit->setText( 
-            info->property(Profile::RemoteTabTitleFormat).value<QString>());
+            info->property<QString>(Profile::RemoteTabTitleFormat));
 
     // tab options
-    int tabMode = info->property(Profile::TabBarMode).value<int>();
-    int tabPosition = info->property(Profile::TabBarPosition).value<int>();
+    int tabMode = info->property<int>(Profile::TabBarMode);
+    int tabPosition = info->property<int>(Profile::TabBarPosition);
 
     // note: Items should be in the same order as the 
     // Profile::TabBarModeEnum enum
@@ -480,7 +480,7 @@ void EditProfileDialog::updateKeyBindingsList(bool selectCurrentTranslator)
     KeyboardTranslatorManager* keyManager = KeyboardTranslatorManager::instance();
 
     const QString& name = lookupProfile()
-                                    ->property(Profile::KeyBindings).value<QString>();
+                                    ->property<QString>(Profile::KeyBindings);
 
     const KeyboardTranslator* currentTranslator = keyManager->findTranslator(name);
     
@@ -595,7 +595,7 @@ void EditProfileDialog::preview(int property , const QVariant& value)
     const Profile* original = lookupProfile();
 
     if (!_previewedProperties.contains(property))    
-        _previewedProperties.insert(property , original->property((Profile::Property)property) );
+        _previewedProperties.insert(property , original->property<QVariant>((Profile::Property)property) );
 
     // temporary change to color scheme
     SessionManager::instance()->changeProfile( _profileKey , map , false);
@@ -796,7 +796,7 @@ void EditProfileDialog::showKeyBindingEditor(bool isNewTranslator)
         updateKeyBindingsList();
         
         const QString& currentTranslator = lookupProfile()
-                                        ->property(Profile::KeyBindings).value<QString>();
+                                        ->property<QString>(Profile::KeyBindings);
 
         if ( newTranslator->name() == currentTranslator )
         {
@@ -816,7 +816,7 @@ void EditProfileDialog::setupCombo( ComboOption* options , const Profile* profil
 {
     while ( options->button != 0 )
     {
-        options->button->setChecked( profile->property((Profile::Property)options->property).value<bool>() );
+        options->button->setChecked(profile->property<bool>((Profile::Property)options->property));
         connect( options->button , SIGNAL(toggled(bool)) , this , options->slot );
 
         ++options;
@@ -840,7 +840,7 @@ void EditProfileDialog::setupRadio( RadioOption* possible , int actual )
 void EditProfileDialog::setupScrollingPage(const Profile* profile)
 {
     // setup scrollbar radio
-    int scrollBarPosition = profile->property(Profile::ScrollBarPosition).value<int>();
+    int scrollBarPosition = profile->property<int>(Profile::ScrollBarPosition);
    
     RadioOption positions[] = { {_ui->scrollBarHiddenButton,Profile::ScrollBarHidden,SLOT(hideScrollBar())},
                                 {_ui->scrollBarLeftButton,Profile::ScrollBarLeft,SLOT(showScrollBarLeft())},
@@ -851,7 +851,7 @@ void EditProfileDialog::setupScrollingPage(const Profile* profile)
     setupRadio( positions , scrollBarPosition );
    
     // setup scrollback type radio
-    int scrollBackType = profile->property(Profile::HistoryMode).value<int>();
+    int scrollBackType = profile->property<int>(Profile::HistoryMode);
     
     RadioOption types[] = { {_ui->disableScrollbackButton,Profile::DisableHistory,SLOT(noScrollBack())},
                             {_ui->fixedScrollbackButton,Profile::FixedSizeHistory,SLOT(fixedScrollBack())},
@@ -860,7 +860,7 @@ void EditProfileDialog::setupScrollingPage(const Profile* profile)
     setupRadio( types , scrollBackType ); 
     
     // setup scrollback line count spinner
-    _ui->scrollBackLinesSpinner->setValue( profile->property(Profile::HistorySize).value<int>() );
+    _ui->scrollBackLinesSpinner->setValue( profile->property<int>(Profile::HistorySize) );
 
     // signals and slots
     connect( _ui->scrollBackLinesSpinner , SIGNAL(valueChanged(int)) , this , 
@@ -910,25 +910,25 @@ void EditProfileDialog::setupAdvancedPage(const Profile* profile)
     setupCombo( options , profile );
 
     // interaction options
-    _ui->wordCharacterEdit->setText( profile->property(Profile::WordCharacters).value<QString>() );
+    _ui->wordCharacterEdit->setText( profile->property<QString>(Profile::WordCharacters) );
 
     connect( _ui->wordCharacterEdit , SIGNAL(textChanged(const QString&)) , this , 
             SLOT(wordCharactersChanged(const QString&)) );
 
     // cursor options
-    if ( profile->property(Profile::UseCustomCursorColor).value<bool>() )
+    if ( profile->property<bool>(Profile::UseCustomCursorColor) )
         _ui->customCursorColorButton->setChecked(true);
     else
         _ui->autoCursorColorButton->setChecked(true);
 
-    _ui->customColorSelectButton->setColor( profile->property(Profile::CustomCursorColor).value<QColor>() );
+    _ui->customColorSelectButton->setColor( profile->property<QColor>(Profile::CustomCursorColor) );
 
     connect( _ui->customCursorColorButton , SIGNAL(clicked()) , this , SLOT(customCursorColor()) );
     connect( _ui->autoCursorColorButton , SIGNAL(clicked()) , this , SLOT(autoCursorColor()) );
     connect( _ui->customColorSelectButton , SIGNAL(changed(const QColor&)) , 
             SLOT(customCursorColorChanged(const QColor&)) );
 
-    int shape = profile->property(Profile::CursorShape).value<int>();
+    int shape = profile->property<int>(Profile::CursorShape);
     _ui->cursorShapeCombo->setCurrentIndex(shape);
 
     connect( _ui->cursorShapeCombo , SIGNAL(activated(int)) , this , SLOT(setCursorShape(int)) ); 
@@ -938,7 +938,7 @@ void EditProfileDialog::setupAdvancedPage(const Profile* profile)
     _ui->selectEncodingButton->setMenu( codecAction->menu() );
     connect( codecAction , SIGNAL(triggered(QTextCodec*)) , this , SLOT(setDefaultCodec(QTextCodec*)) );
 
-    _ui->characterEncodingLabel->setText( profile->property(Profile::DefaultEncoding).value<QString>() );
+    _ui->characterEncodingLabel->setText( profile->property<QString>(Profile::DefaultEncoding) );
 
 }
 void EditProfileDialog::setDefaultCodec(QTextCodec* codec)

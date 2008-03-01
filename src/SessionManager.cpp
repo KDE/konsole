@@ -380,43 +380,43 @@ void SessionManager::applyProfile(Session* session, const Profile* info , bool m
     if ( session->profileKey() != key )
         session->setProfileKey(key); 
 
-    // Basic session settings
-    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Name) )
-        session->setTitle(Session::NameRole,info->name());
+	ShouldApplyProperty apply(info,modifiedPropertiesOnly);
 
-    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Command) )
+    // Basic session settings
+	if ( apply.shouldApply(Profile::Name) )
+		session->setTitle(Session::NameRole,info->name());
+
+    if ( apply.shouldApply(Profile::Command) )
         session->setProgram(info->command());
 
-    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Arguments) )
+    if ( apply.shouldApply(Profile::Arguments) )
         session->setArguments(info->arguments());
 
-    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Directory) )
+    if ( apply.shouldApply(Profile::Directory) )
         session->setInitialWorkingDirectory(info->defaultWorkingDirectory());
 
-    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Environment) )
-        session->setEnvironment(info->property(Profile::Environment).value<QStringList>());
+    if ( apply.shouldApply(Profile::Environment) )
+        session->setEnvironment(info->property<QStringList>(Profile::Environment));
 
-    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::Icon) )
+    if ( apply.shouldApply(Profile::Icon) )
         session->setIconName(info->icon());
 
     // Key bindings
-    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::KeyBindings) )
-        session->setKeyBindings(info->property(Profile::KeyBindings).value<QString>());
+    if ( apply.shouldApply(Profile::KeyBindings) )
+        session->setKeyBindings(info->property<QString>(Profile::KeyBindings));
 
     // Tab formats
-    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::LocalTabTitleFormat) )
+    if ( apply.shouldApply(Profile::LocalTabTitleFormat) )
         session->setTabTitleFormat( Session::LocalTabTitle ,
-                                    info->property(Profile::LocalTabTitleFormat).value<QString>());
-    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::RemoteTabTitleFormat) )
+                                    info->property<QString>(Profile::LocalTabTitleFormat));
+    if ( apply.shouldApply(Profile::RemoteTabTitleFormat) )
         session->setTabTitleFormat( Session::RemoteTabTitle ,
-                                    info->property(Profile::RemoteTabTitleFormat).value<QString>());
+                                    info->property<QString>(Profile::RemoteTabTitleFormat));
 
     // Scrollback / history
-    if ( !modifiedPropertiesOnly 
-         || info->isPropertySet(Profile::HistoryMode) 
-         || info->isPropertySet(Profile::HistorySize) )
+    if ( apply.shouldApply(Profile::HistoryMode) || apply.shouldApply(Profile::HistorySize) ) 
     {
-        int mode = info->property(Profile::HistoryMode).value<int>();
+        int mode = info->property<int>(Profile::HistoryMode);
         switch ((Profile::HistoryModeEnum)mode)
         {
             case Profile::DisableHistory:
@@ -424,7 +424,7 @@ void SessionManager::applyProfile(Session* session, const Profile* info , bool m
                 break;
             case Profile::FixedSizeHistory:
                 {
-                    int lines = info->property(Profile::HistorySize).value<int>();
+                    int lines = info->property<int>(Profile::HistorySize);
                     session->setHistoryType( HistoryTypeBuffer(lines) );
                 }
                 break;
@@ -435,14 +435,13 @@ void SessionManager::applyProfile(Session* session, const Profile* info , bool m
     }
 
     // Terminal features
-    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::FlowControlEnabled) )
-        session->setFlowControlEnabled( info->property(Profile::FlowControlEnabled)
-                .value<bool>() );
+    if ( apply.shouldApply(Profile::FlowControlEnabled) )
+        session->setFlowControlEnabled( info->property<bool>(Profile::FlowControlEnabled) );
 
     // Encoding
-    if ( !modifiedPropertiesOnly || info->isPropertySet(Profile::DefaultEncoding) )
+    if ( apply.shouldApply(Profile::DefaultEncoding) )
     {
-        QByteArray name = info->property(Profile::DefaultEncoding).value<QString>().toUtf8();
+        QByteArray name = info->property<QString>(Profile::DefaultEncoding).toUtf8();
         session->setCodec( QTextCodec::codecForName(name) );
     } 
 }
