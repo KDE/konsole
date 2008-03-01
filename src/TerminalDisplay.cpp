@@ -855,8 +855,8 @@ void TerminalDisplay::updateImage()
   // optimization - scroll the existing image where possible and 
   // avoid expensive text drawing for parts of the image that 
   // can simply be moved up or down
-  scrollImage( _screenWindow->scrollCount() ,
-               _screenWindow->scrollRegion() );
+  //scrollImage( _screenWindow->scrollCount() ,
+  //             _screenWindow->scrollRegion() );
   _screenWindow->resetScrollCount();
 
   Character* const newimg = _screenWindow->getImage();
@@ -1108,7 +1108,7 @@ void TerminalDisplay::paintEvent( QPaintEvent* pe )
 {
   QPainter paint(this);
 
-  qDebug() << "Actually repainting" << pe->region();
+  //qDebug() << "Actually repainting" << pe->region();
 
   foreach (QRect rect, (pe->region() & contentsRect()).rects())
   {
