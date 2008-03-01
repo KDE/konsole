@@ -363,15 +363,17 @@ public:
      */
     static QString primaryNameForProperty(Property property);
 
+
+private:
+	struct PropertyInfo;
     /**
      * Adds an association between a string @p name and a @p property.
      * Subsequent calls to lookupByName() with @p name as the argument
      * will return @p property.
      */
-    static void registerName(Property property , const QString& name); 
+    static void registerProperty(const PropertyInfo& info); 
 
-private:
-    // fills the table with default names for profile properties
+	// fills the table with default names for profile properties
     // the first time it is called.
     // subsequent calls return immediately
     static void fillTableWithDefaultNames();
@@ -381,14 +383,15 @@ private:
 
     bool _hidden;
 
-    static QHash<QString,Property> _propertyByName;
-    static QHash<Property,QString> _nameByProperty;
-    struct PropertyNamePair
+    static QHash<QString,PropertyInfo> _propertyInfoByName;
+    static QHash<Property,PropertyInfo> _infoByProperty;
+    struct PropertyInfo
     {
         Property property;
         const char* name;
+		const char* group;
     };
-    static const PropertyNamePair DefaultPropertyNames[];
+    static const PropertyInfo DefaultPropertyNames[];
 };
 
 template <class T>
