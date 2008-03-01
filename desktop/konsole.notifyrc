@@ -32,6 +32,7 @@ Comment[x-test]=xxKonsolexx
 
 [Event/BellVisible]
 Name=Bell in Visible Session
+Name[ca]=Timbre en una sessió visible
 Name[el]=Ηχητική σήμανση στην ορατή συνεδρία
 Name[eo]=Pepo en videbla seanco
 Name[es]=Campana en sesión visible
@@ -112,6 +113,7 @@ Action=Sound
 
 [Event/BellInvisible]
 Name=Bell in Non-visible session
+Name[ca]=Timbre en una sessió no visible
 Name[el]=Ηχητική σήμανση σε μη ορατή συνεδρία
 Name[eo]=Pepo en nevidebla seanco
 Name[es]=Campana en sesión no visible
@@ -192,6 +194,7 @@ Action=Popup
 
 [Event/Activity]
 Name=Activity in Monitored Session
+Name[ca]=Activitat en una sessió controlada
 Name[el]=Δραστηριότητα σε συνεδρία υπό εποπτεία
 Name[eo]=Aktiveco en rigardata seanco
 Name[es]=Actividad en sesión monitorizada
@@ -272,6 +275,7 @@ Action=Popup
 
 [Event/Silence]
 Name=Silence in Monitored Session
+Name[ca]=Silenci en una sessió controlada
 Name[el]=Ησυχία σε συνεδρία υπό εποπτεία
 Name[eo]=Trankvilo en rigardata seanco
 Name[es]=Silencio en sesión monitorizada
@@ -351,6 +355,7 @@ Action=Popup
 
 [Event/Finished]
 Name=Session Finished With Non-zero Status
+Name[ca]=Sessió finalitzada amb un estat diferent de zero
 Name[el]=Η συνεδρία τερμάτισε με μη μηδενική κατάσταση
 Name[eo]=Seanco finiĝis kun eraro
 Name[es]=La sesión terminó con un estado distinto de cero
