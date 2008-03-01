@@ -64,53 +64,53 @@ static const char* ENCODING_GROUP = "Encoding Options";
 const Profile::PropertyInfo Profile::DefaultPropertyNames[] =
 {
 	// General
-      { Path , "Path" , 0}
-    , { Name , "Name" , GENERAL_GROUP }
-    , { Title , "Title" , 0 }
-    , { Icon , "Icon" , GENERAL_GROUP }
-    , { Command , "Command" , GENERAL_GROUP }
-    , { Arguments , "Arguments" , 0 }
-    , { Environment , "Environment" , GENERAL_GROUP }
-    , { Directory , "Directory" , GENERAL_GROUP }
-    , { LocalTabTitleFormat , "LocalTabTitleFormat" , GENERAL_GROUP }
-    , { LocalTabTitleFormat , "tabtitle" , 0 }
-    , { RemoteTabTitleFormat , "RemoteTabTitleFormat" , GENERAL_GROUP }
-    , { ShowMenuBar , "ShowMenuBar" , GENERAL_GROUP }
-    , { TabBarMode , "TabBarMode" , GENERAL_GROUP }
-    , { TabBarPosition , "TabBarPosition" , GENERAL_GROUP }
+      { Path , "Path" , 0 , QVariant::String }
+    , { Name , "Name" , GENERAL_GROUP , QVariant::String }
+    , { Title , "Title" , 0 , QVariant::String }
+    , { Icon , "Icon" , GENERAL_GROUP , QVariant::String }
+    , { Command , "Command" , 0 , QVariant::String }
+    , { Arguments , "Arguments" , 0 , QVariant::StringList }
+    , { Environment , "Environment" , GENERAL_GROUP , QVariant::StringList }
+    , { Directory , "Directory" , GENERAL_GROUP , QVariant::String }
+    , { LocalTabTitleFormat , "LocalTabTitleFormat" , GENERAL_GROUP , QVariant::String }
+    , { LocalTabTitleFormat , "tabtitle" , 0 , QVariant::String }
+    , { RemoteTabTitleFormat , "RemoteTabTitleFormat" , GENERAL_GROUP , QVariant::String }
+    , { ShowMenuBar , "ShowMenuBar" , GENERAL_GROUP , QVariant::Bool }
+    , { TabBarMode , "TabBarMode" , GENERAL_GROUP , QVariant::Int }
+    , { TabBarPosition , "TabBarPosition" , GENERAL_GROUP , QVariant::Int }
     
 	// Appearance
-	, { Font , "Font" , APPEARANCE_GROUP }
-    , { ColorScheme , "ColorScheme" , APPEARANCE_GROUP }
-    , { ColorScheme , "colors" , 0 }
-    , { AntiAliasFonts, "AntiAliasFonts" , APPEARANCE_GROUP }
+	, { Font , "Font" , APPEARANCE_GROUP , QVariant::Font }
+    , { ColorScheme , "ColorScheme" , APPEARANCE_GROUP , QVariant::String }
+    , { ColorScheme , "colors" , 0 , QVariant::String }
+    , { AntiAliasFonts, "AntiAliasFonts" , APPEARANCE_GROUP , QVariant::Bool }
     
 	// Keyboard
-    , { KeyBindings , "KeyBindings" , KEYBOARD_GROUP }
+    , { KeyBindings , "KeyBindings" , KEYBOARD_GROUP , QVariant::String }
     
 	// Scrolling
-	, { HistoryMode , "HistoryMode" , SCROLLING_GROUP }
-    , { HistorySize , "HistorySize" , SCROLLING_GROUP } 
-    , { ScrollBarPosition , "ScrollBarPosition" , SCROLLING_GROUP }
+	, { HistoryMode , "HistoryMode" , SCROLLING_GROUP , QVariant::Int }
+    , { HistorySize , "HistorySize" , SCROLLING_GROUP , QVariant::Int } 
+    , { ScrollBarPosition , "ScrollBarPosition" , SCROLLING_GROUP , QVariant::Int }
    
    	// Terminal Features
-	, { BlinkingTextEnabled , "BlinkingTextEnabled" , TERMINAL_GROUP }
-    , { FlowControlEnabled , "FlowControlEnabled" , TERMINAL_GROUP }
-    , { AllowProgramsToResizeWindow , "AllowProgramsToResizeWindow" , TERMINAL_GROUP }
-    , { BlinkingCursorEnabled , "BlinkingCursorEnabled" , TERMINAL_GROUP }
+	, { BlinkingTextEnabled , "BlinkingTextEnabled" , TERMINAL_GROUP , QVariant::Bool }
+    , { FlowControlEnabled , "FlowControlEnabled" , TERMINAL_GROUP , QVariant::Bool }
+    , { AllowProgramsToResizeWindow , "AllowProgramsToResizeWindow" , TERMINAL_GROUP , QVariant::Bool }
+    , { BlinkingCursorEnabled , "BlinkingCursorEnabled" , TERMINAL_GROUP , QVariant::Bool }
     
 	// Cursor 
-	, { UseCustomCursorColor , "UseCustomCursorColor" , CURSOR_GROUP }
-    , { CursorShape , "CursorShape" , CURSOR_GROUP }
-    , { CustomCursorColor , "CustomCursorColor" , CURSOR_GROUP }
+	, { UseCustomCursorColor , "UseCustomCursorColor" , CURSOR_GROUP , QVariant::Bool}
+    , { CursorShape , "CursorShape" , CURSOR_GROUP , QVariant::Int}
+    , { CustomCursorColor , "CustomCursorColor" , CURSOR_GROUP , QVariant::Color }
 
 	// Interaction
-    , { WordCharacters , "WordCharacters" , INTERACTION_GROUP }
+    , { WordCharacters , "WordCharacters" , INTERACTION_GROUP , QVariant::String }
 
 	// Encoding
-    , { DefaultEncoding , "DefaultEncoding" , ENCODING_GROUP }
+    , { DefaultEncoding , "DefaultEncoding" , ENCODING_GROUP , QVariant::String }
 
-    , { (Property)0 , 0 , 0}
+    , { (Property)0 , 0 , 0, QVariant::Invalid }
 };
 
 QHash<QString,Profile::PropertyInfo> Profile::_propertyInfoByName;
@@ -263,90 +263,51 @@ QString KDE4ProfileWriter::getPath(const Profile* info)
 
     return newPath;
 }
-void KDE4ProfileWriter::writeStandardElement(KConfigGroup& group ,  const Profile* profile ,
-                                             Profile::Property attribute)
+void KDE4ProfileWriter::writeProperties(KConfig& config,
+										const Profile* profile,
+										const Profile::PropertyInfo* properties) 
 {
-    QString name = Profile::primaryNameForProperty(attribute);
-    
-    if ( profile->isPropertySet(attribute) )
-        group.writeEntry(name,profile->property<QVariant>(attribute));
+	const char* groupName = 0;
+	KConfigGroup group;
+	
+	while (properties->name != 0)	
+	{
+		if (properties->group != 0)
+		{
+			if (groupName == 0 || strcmp(groupName,properties->group) != 0)
+			{
+				group = config.group(properties->group);
+				groupName = properties->group;
+			}
+
+			if ( profile->isPropertySet(properties->property) )
+        		group.writeEntry(QString(properties->name),
+							profile->property<QVariant>(properties->property));
+		}
+
+		properties++;
+	}
 }
 bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile* profile)
 {
     KConfig config(path,KConfig::NoGlobals);
 
-    // Basic Profile Settings
-    KConfigGroup general = config.group(GENERAL_GROUP);
+	KConfigGroup general = config.group(GENERAL_GROUP);
 
-    // Parent profile if set, when loading the profile in future, the parent
+	// Parent profile if set, when loading the profile in future, the parent
     // must be loaded as well if it exists.
     if ( profile->parent() != 0 )
         general.writeEntry("Parent",profile->parent()->path());
 
-    if ( profile->isPropertySet(Profile::Name) )
-        general.writeEntry("Name",profile->name());
-    
-    if (    profile->isPropertySet(Profile::Command) 
+	if (    profile->isPropertySet(Profile::Command) 
          || profile->isPropertySet(Profile::Arguments) )
         general.writeEntry("Command",
                 ShellCommand(profile->command(),profile->arguments()).fullCommand());
 
-    if ( profile->isPropertySet(Profile::Directory) )
-        general.writeEntry("Directory",profile->defaultWorkingDirectory());
+	// Write remaining properties
+	writeProperties(config,profile,Profile::DefaultPropertyNames);
 
-    writeStandardElement( general ,  profile , Profile::Environment );
-    writeStandardElement( general ,  profile , Profile::Icon );
-    
-    // Tab Titles
-    writeStandardElement( general ,  profile , Profile::LocalTabTitleFormat );
-    writeStandardElement( general ,  profile , Profile::RemoteTabTitleFormat );
-
-    // Menu and Tab Bar
-    writeStandardElement( general ,  profile , Profile::TabBarMode );
-    writeStandardElement( general ,  profile , Profile::TabBarPosition );
-    writeStandardElement( general ,  profile , Profile::ShowMenuBar );
-
-    // Keyboard
-    KConfigGroup keyboard = config.group(KEYBOARD_GROUP);
-    writeStandardElement( keyboard , profile , Profile::KeyBindings );
-
-    // Appearance
-    KConfigGroup appearance = config.group(APPEARANCE_GROUP);
-
-    writeStandardElement( appearance , profile , Profile::ColorScheme );
-    writeStandardElement( appearance , profile , Profile::Font );
-    writeStandardElement( appearance , profile , Profile::AntiAliasFonts );
-   
-    // Scrolling
-    KConfigGroup scrolling = config.group(SCROLLING_GROUP);
-
-    writeStandardElement( scrolling ,  profile , Profile::HistoryMode );
-    writeStandardElement( scrolling ,  profile , Profile::HistorySize );
-    writeStandardElement( scrolling ,  profile , Profile::ScrollBarPosition ); 
-
-    // Terminal Features
-    KConfigGroup terminalFeatures = config.group(TERMINAL_GROUP);
-
-    writeStandardElement( terminalFeatures ,  profile , Profile::FlowControlEnabled );
-    writeStandardElement( terminalFeatures ,  profile , Profile::BlinkingCursorEnabled );
-
-    // Cursor 
-    KConfigGroup cursorOptions = config.group(CURSOR_GROUP);
-
-    writeStandardElement( cursorOptions ,  profile , Profile::UseCustomCursorColor );
-    writeStandardElement( cursorOptions ,  profile , Profile::CustomCursorColor );
-    writeStandardElement( cursorOptions ,  profile , Profile::CursorShape );
-
-    // Interaction
-    KConfigGroup interactionOptions = config.group(INTERACTION_GROUP);
-
-    writeStandardElement( interactionOptions ,  profile , Profile::WordCharacters );
-
-    // Encoding
-    KConfigGroup encodingOptions = config.group(ENCODING_GROUP);
-    writeStandardElement( encodingOptions ,  profile , Profile::DefaultEncoding );
-
-    return true;
+	return true;
 }
 
 QStringList KDE4ProfileReader::findProfiles()
@@ -354,24 +315,43 @@ QStringList KDE4ProfileReader::findProfiles()
     return KGlobal::dirs()->findAllResources("data","konsole/*.profile",
             KStandardDirs::NoDuplicates);
 }
+void KDE4ProfileReader::readProperties(const KConfig& config, Profile* profile,
+									   const Profile::PropertyInfo* properties)
+{
+	const char* groupName = 0;
+	KConfigGroup group;
+
+	while (properties->name != 0)
+	{
+		if (properties->group != 0)
+		{
+			if (groupName == 0 || strcmp(groupName,properties->group) != 0)
+			{
+				group = config.group(properties->group);
+				groupName = properties->group;
+			}
+		
+			QString name(properties->name);
+
+			if (group.hasKey(name))
+				profile->setProperty(properties->property,
+								 	group.readEntry(name,QVariant(properties->type)));
+
+		}
+		
+		properties++;
+	}
+}
+
 bool KDE4ProfileReader::readProfile(const QString& path , Profile* profile , QString& parentProfile)
 {
-    //kDebug() << "KDE 4 Profile Reader:" << path;
-
     KConfig config(path,KConfig::NoGlobals);
 
-    // general
     KConfigGroup general = config.group(GENERAL_GROUP);
+	if (general.hasKey("Parent"))
+		parentProfile = general.readEntry("Parent");
 
-    if ( general.hasKey("Parent") )
-        parentProfile = general.readEntry("Parent");
-
-    if ( general.hasKey("Name") )
-        profile->setProperty(Profile::Name,general.readEntry("Name"));
-    else
-        return false;
-
-    if ( general.hasKey("Command") )
+	if ( general.hasKey("Command") )
     {
         ShellCommand shellCommand(general.readEntry("Command"));
 
@@ -379,69 +359,11 @@ bool KDE4ProfileReader::readProfile(const QString& path , Profile* profile , QSt
         profile->setProperty(Profile::Arguments,shellCommand.arguments());
     }
 
-    readStandardElement<QString>(general,profile,Profile::Directory);
-    readStandardElement<QStringList>(general,profile,Profile::Environment);
-    readStandardElement<QString>(general,profile,Profile::Icon);
-    readStandardElement<QString>(general,profile,Profile::LocalTabTitleFormat); 
-    readStandardElement<QString>(general,profile,Profile::RemoteTabTitleFormat);
-   
-    readStandardElement<int>(general,profile,Profile::TabBarMode);
-    readStandardElement<int>(general,profile,Profile::TabBarPosition);
-    readStandardElement<bool>(general,profile,Profile::ShowMenuBar);
+	// Read remaining properties
+	readProperties(config,profile,Profile::DefaultPropertyNames);
 
-    // keyboard
-    KConfigGroup keyboard = config.group(KEYBOARD_GROUP);
-    readStandardElement<QString>(keyboard,profile,Profile::KeyBindings);
-
-    // appearance
-    KConfigGroup appearance = config.group(APPEARANCE_GROUP);
-
-    readStandardElement<QString>(appearance,profile,Profile::ColorScheme);
-    readStandardElement<QFont>(appearance,profile,Profile::Font);
-    readStandardElement<bool>(appearance,profile,Profile::AntiAliasFonts);
-
-    // scrolling
-    KConfigGroup scrolling = config.group(SCROLLING_GROUP);
-
-    readStandardElement<int>(scrolling,profile,Profile::HistoryMode);
-    readStandardElement<int>(scrolling,profile,Profile::HistorySize);
-    readStandardElement<int>(scrolling,profile,Profile::ScrollBarPosition);
-
-    // terminal features
-    KConfigGroup terminalFeatures = config.group(TERMINAL_GROUP);
-
-    readStandardElement<bool>(terminalFeatures,profile,Profile::FlowControlEnabled);
-    readStandardElement<bool>(terminalFeatures,profile,Profile::BlinkingCursorEnabled);
-
-    // cursor settings
-    KConfigGroup cursorOptions = config.group(CURSOR_GROUP);
-
-    readStandardElement<bool>(cursorOptions,profile,Profile::UseCustomCursorColor);
-    readStandardElement<QColor>(cursorOptions,profile,Profile::CustomCursorColor);
-    readStandardElement<int>(cursorOptions,profile,Profile::CursorShape);
-
-    // interaction options
-    KConfigGroup interactionOptions = config.group(INTERACTION_GROUP);
-    
-    readStandardElement<QString>(interactionOptions,profile,Profile::WordCharacters);
-
-    // encoding
-    KConfigGroup encodingOptions = config.group(ENCODING_GROUP);
-    readStandardElement<QString>(encodingOptions,profile,Profile::DefaultEncoding);
-
-    return true;
+	return true;
 }
-template <typename T>
-void KDE4ProfileReader::readStandardElement(const KConfigGroup& group , 
-                                            Profile* info , 
-                                            Profile::Property property)
-{
-    QString name = Profile::primaryNameForProperty(property);
-
-    if ( group.hasKey(name) )
-        info->setProperty(property,group.readEntry(name,T()));
-}
-                                                    
 QStringList KDE3ProfileReader::findProfiles()
 {
     return KGlobal::dirs()->findAllResources("data", "konsole/*.desktop", 

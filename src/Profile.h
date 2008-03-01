@@ -31,6 +31,7 @@
 
 #include <QtGui/QFont>
 
+class KConfig;
 class KConfigGroup;
 
 namespace Konsole
@@ -61,6 +62,9 @@ namespace Konsole
 class Profile : public QObject 
 {
 Q_OBJECT
+
+friend class KDE4ProfileReader;
+friend class KDE4ProfileWriter;
 
 public:
     /**
@@ -363,10 +367,9 @@ public:
      */
     static QString primaryNameForProperty(Property property);
 
-
 private:
-	struct PropertyInfo;
-    /**
+    struct PropertyInfo;
+	/**
      * Adds an association between a string @p name and a @p property.
      * Subsequent calls to lookupByName() with @p name as the argument
      * will return @p property.
@@ -385,11 +388,13 @@ private:
 
     static QHash<QString,PropertyInfo> _propertyInfoByName;
     static QHash<Property,PropertyInfo> _infoByProperty;
-    struct PropertyInfo
+    
+	struct PropertyInfo
     {
         Property property;
         const char* name;
 		const char* group;
+		QVariant::Type type;
     };
     static const PropertyInfo DefaultPropertyNames[];
 };
@@ -456,10 +461,8 @@ public:
     virtual QStringList findProfiles();
     virtual bool readProfile(const QString& path , Profile* profile, QString& parentProfile);
 private:
-    template <typename T>
-    void readStandardElement(const KConfigGroup& group , 
-                             Profile* info , 
-                             Profile::Property property);
+	void readProperties(const KConfig& config, Profile* profile, 
+						const Profile::PropertyInfo* properties);
 };
 /** Interface for all classes which can write profile settings to a file. */
 class ProfileWriter
@@ -486,9 +489,8 @@ public:
     virtual bool writeProfile(const QString& path , const Profile* profile);
 
 private:
-    void writeStandardElement(KConfigGroup& group,
-                              const Profile* profile,
-                              Profile::Property property);
+	void writeProperties(KConfig& config, const Profile* profile, 
+						 const Profile::PropertyInfo* properties);
 };
 
 /** 
