@@ -674,20 +674,11 @@ void ViewManager::applyProfile(TerminalDisplay* view , const QString& profileKey
     int tabBarPosition = info->property<int>(Profile::TabBarPosition);
 
     if ( tabBarMode == Profile::AlwaysHideTabBar )
-	{
-		qDebug() << "Always hide tab bar";
         container->setNavigationDisplayMode(ViewContainer::AlwaysHideNavigation);
-	}
     else if ( tabBarMode == Profile::AlwaysShowTabBar )
-	{
-		qDebug() << "Always show tab bar";
         container->setNavigationDisplayMode(ViewContainer::AlwaysShowNavigation);
-	}
     else if ( tabBarMode == Profile::ShowTabBarAsNeeded )
-	{
-		qDebug() << "Show as needed";
         container->setNavigationDisplayMode(ViewContainer::ShowNavigationAsNeeded);
-	}
 
     ViewContainer::NavigationPosition position = container->navigationPosition();
 
