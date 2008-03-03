@@ -410,7 +410,12 @@ void EditProfileDialog::setupAppearancePage(const Profile* info)
             SLOT(newColorScheme()) );
 
     // setup font preview
-    const QFont& font = info->font();
+	bool antialias = info->property<bool>(Profile::AntiAliasFonts);
+
+    QFont font = info->font();
+	if (!antialias)
+		font.setStyleStrategy(QFont::NoAntialias);
+
 	_ui->fontPreviewLabel->installEventFilter(this);
 	_ui->fontPreviewLabel->setFont(font);
     _ui->fontSizeSlider->setValue( font.pointSize() );
@@ -422,14 +427,16 @@ void EditProfileDialog::setupAppearancePage(const Profile* info)
              SLOT(showFontDialog()) );
 
 	// setup font smoothing 
-	_ui->antialiasTextButton->setChecked(info->property<bool>(Profile::AntiAliasFonts));
+	_ui->antialiasTextButton->setChecked(antialias);
 	connect( _ui->antialiasTextButton , SIGNAL(toggled(bool)) , this , 
 			 SLOT(setAntialiasText(bool)) );
 }
 void EditProfileDialog::setAntialiasText(bool enable)
 {
 	_tempProfile->setProperty(Profile::AntiAliasFonts,enable);
-	preview(Profile::AntiAliasFonts,enable);
+
+	// update preview to reflect text smoothing state
+	fontSelected(_ui->fontPreviewLabel->font());
 }
 void EditProfileDialog::colorSchemeAnimationUpdate()
 {
@@ -999,12 +1006,23 @@ void EditProfileDialog::toggleResizeWindow(bool enable)
 }
 void EditProfileDialog::fontSelected(const QFont& font)
 {
+	QFont previewFont = font;
+
    QSlider* slider = _ui->fontSizeSlider;
-   
    _ui->fontSizeSlider->setRange( qMin(slider->minimum(),font.pointSize()) ,
                                   qMax(slider->maximum(),font.pointSize()) );
    _ui->fontSizeSlider->setValue(font.pointSize());
-   _ui->fontPreviewLabel->setFont(font);
+
+	
+   QFont::StyleStrategy strategy;
+   if (_tempProfile->property<bool>(Profile::AntiAliasFonts))
+   		strategy = QFont::PreferAntialias;
+   else
+   		strategy = QFont::NoAntialias;
+
+   previewFont.setStyleStrategy(strategy);
+
+   _ui->fontPreviewLabel->setFont(previewFont);
    
    _tempProfile->setProperty(Profile::Font,font);
 
