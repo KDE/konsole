@@ -420,6 +420,16 @@ void EditProfileDialog::setupAppearancePage(const Profile* info)
              SLOT(setFontSize(int)) );
     connect( _ui->editFontButton , SIGNAL(clicked()) , this ,
              SLOT(showFontDialog()) );
+
+	// setup font smoothing 
+	_ui->antialiasTextButton->setChecked(info->property<bool>(Profile::AntiAliasFonts));
+	connect( _ui->antialiasTextButton , SIGNAL(toggled(bool)) , this , 
+			 SLOT(setAntialiasText(bool)) );
+}
+void EditProfileDialog::setAntialiasText(bool enable)
+{
+	_tempProfile->setProperty(Profile::AntiAliasFonts,enable);
+	preview(Profile::AntiAliasFonts,enable);
 }
 void EditProfileDialog::colorSchemeAnimationUpdate()
 {

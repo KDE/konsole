@@ -6,20 +6,11 @@
     <x>0</x>
     <y>0</y>
     <width>441</width>
-    <height>485</height>
+    <height>499</height>
    </rect>
   </property>
   <layout class="QHBoxLayout" >
-   <property name="leftMargin" >
-    <number>0</number>
-   </property>
-   <property name="topMargin" >
-    <number>0</number>
-   </property>
-   <property name="rightMargin" >
-    <number>0</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>0</number>
    </property>
    <item>
@@ -34,9 +25,17 @@
       <number>0</number>
      </property>
      <property name="usesScrollButtons" >
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <widget class="QWidget" name="generalTab" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>437</width>
+        <height>472</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>General</string>
       </attribute>
@@ -160,7 +159,7 @@
             <property name="orientation" >
              <enum>Qt::Horizontal</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>20</width>
               <height>20</height>
@@ -224,7 +223,7 @@
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
            <height>20</height>
@@ -235,6 +234,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="tabsTab" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>437</width>
+        <height>472</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>Tabs</string>
       </attribute>
@@ -359,7 +366,7 @@
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
            <height>10</height>
@@ -370,6 +377,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="appearanceTab" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>437</width>
+        <height>472</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>Appearance</string>
       </attribute>
@@ -431,7 +446,7 @@
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>20</width>
               <height>20</height>
@@ -445,25 +460,16 @@
              <bool>false</bool>
             </property>
             <property name="styleSheet" >
-             <string>* { background-color: #FFCCCC ; border-radius: 3px }</string>
+             <string notr="true" >* { background-color: #FFCCCC ; border-radius: 3px }</string>
             </property>
             <layout class="QHBoxLayout" >
-             <property name="leftMargin" >
-              <number>4</number>
-             </property>
-             <property name="topMargin" >
-              <number>4</number>
-             </property>
-             <property name="rightMargin" >
-              <number>4</number>
-             </property>
-             <property name="bottomMargin" >
+             <property name="margin" >
               <number>4</number>
              </property>
              <item>
               <widget class="QLabel" name="transparencyWarningIcon" >
                <property name="styleSheet" >
-                <string/>
+                <string notr="true" />
                </property>
                <property name="text" >
                 <string>TextLabel</string>
@@ -576,12 +582,27 @@
             </item>
            </layout>
           </item>
+          <item>
+           <widget class="QCheckBox" name="antialiasTextButton" >
+            <property name="text" >
+             <string>Smooth fonts</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
       </layout>
      </widget>
      <widget class="QWidget" name="scrollingTab" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>437</width>
+        <height>472</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>Scrolling</string>
       </attribute>
@@ -647,7 +668,7 @@
               <property name="orientation" >
                <enum>Qt::Horizontal</enum>
               </property>
-              <property name="sizeHint" >
+              <property name="sizeHint" stdset="0" >
                <size>
                 <width>20</width>
                 <height>20</height>
@@ -741,7 +762,7 @@
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
            <height>20</height>
@@ -752,6 +773,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="keyboardTab" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>437</width>
+        <height>472</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>Input</string>
       </attribute>
@@ -820,7 +849,7 @@
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>20</width>
               <height>20</height>
@@ -834,6 +863,14 @@
       </layout>
      </widget>
      <widget class="QWidget" name="advancedTab" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>437</width>
+        <height>472</height>
+       </rect>
+      </property>
       <attribute name="title" >
        <string>Advanced</string>
       </attribute>
@@ -1088,7 +1125,7 @@
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
            <height>20</height>
@@ -1104,14 +1141,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header location="global" >klineedit.h</header>
-  </customwidget>
-  <customwidget>
    <class>KColorButton</class>
    <extends>QPushButton</extends>
-   <header location="global" >kcolorbutton.h</header>
+   <header>kcolorbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

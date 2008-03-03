@@ -122,6 +122,7 @@ private slots:
 
     // appearance page
     void setFontSize(int pointSize);
+	void setAntialiasText(bool enable);
     void showFontDialog();
     void newColorScheme();
     void editColorScheme();
