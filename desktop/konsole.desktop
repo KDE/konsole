@@ -38,6 +38,7 @@ Name[x-test]=xxKonsolexx
 
 GenericName=Terminal
 GenericName[el]=Τερματικό
+GenericName[eo]=Terminalo
 GenericName[ga]=Teirminéal
 GenericName[gu]=ટર્મિનલ
 GenericName[hu]=Terminál
@@ -46,6 +47,7 @@ GenericName[km]=ស្ថានីយ
 GenericName[ko]=터미널
 GenericName[nds]=Konsool
 GenericName[ru]=Терминал
+GenericName[sr]=Терминал
 GenericName[tr]=Uçbirim
 GenericName[zh_CN]=终端
 GenericName[zh_TW]=終端機
