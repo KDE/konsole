@@ -132,5 +132,6 @@ Comment[zh_TW]=監控本地使用者以 write(1) 或 wall(1) 傳送的訊息
 Type=Service
 X-KDE-ServiceTypes=KDEDModule
 X-KDE-Library=kwrited
+X-KDE-DBus-ModuleName=kwrited
 X-KDE-Kded-autoload=true
 X-KDE-Kded-load-on-demand=true
