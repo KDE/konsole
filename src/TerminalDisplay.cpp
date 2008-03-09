@@ -724,11 +724,6 @@ void TerminalDisplay::setCursorPos(const int curx, const int cury)
 // display is much cheaper than re-rendering all the text for the 
 // part of the image which has moved up or down.  
 // Instead only new lines have to be drawn
-//
-// note:  it is important that the area of the display which is 
-// scrolled aligns properly with the character grid - 
-// which has a top left point at (_leftMargin,_topMargin) , 
-// a cell width of _fontWidth and a cell height of _fontHeight).    
 void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
 {
 	// if the flow control warning is enabled this will interfere with the 
@@ -750,9 +745,20 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
          || (region.top() + abs(lines)) >= region.bottom() 
          || this->_lines <= region.height() ) return;
 
-   
 
+	// Note:  With Qt 4.4 the left edge of the scrolled area must be at 0
+	// to get the correct (newly exposed) part of the widget repainted.
+	//
+	// The right edge must be before the the left edge of the scroll bar to 
+	// avoid triggering a repaint of the entire widget.  
+	//
+	// Set the QT_FLUSH_PAINT environment variable to '1' before starting the
+	// application to monitor repainting.
+	//
+	int scrollBarWidth = _scrollBar->isHidden() ? 0 : _scrollBar->width();
     QRect scrollRect;
+	scrollRect.setLeft(0);
+	scrollRect.setRight(width() - scrollBarWidth - 1);
 
     void* firstCharPos = &_image[ region.top() * this->_columns ];
     void* lastCharPos = &_image[ (region.top() + abs(lines)) * this->_columns ];
@@ -778,11 +784,8 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
         //scroll internal image down
         memmove( firstCharPos , lastCharPos , bytesToMove ); 
       
-        //set region of display to scroll, making sure that
-        //the region aligns correctly to the character grid 
-        scrollRect = QRect( _leftMargin , top, 
-                            this->_usedColumns * _fontWidth , 
-                            linesToMove * _fontHeight );
+        //set region of display to scroll
+        scrollRect.setTop(top);
     }
     else
     {
@@ -793,14 +796,10 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
         //scroll internal image up
         memmove( lastCharPos , firstCharPos , bytesToMove ); 
      
-        //set region of the display to scroll, making sure that
-        //the region aligns correctly to the character grid
-        QPoint topPoint( _leftMargin , top + abs(lines)*_fontHeight );
-
-        scrollRect = QRect( topPoint ,
-                     QSize( this->_usedColumns*_fontWidth , 
-                            linesToMove * _fontHeight ));
+        //set region of the display to scroll
+        scrollRect.setTop(top + abs(lines) * _fontHeight); 
     }
+    scrollRect.setHeight(linesToMove * _fontHeight );
 
 	Q_ASSERT(scrollRect.isValid() && !scrollRect.isEmpty());
 
@@ -855,8 +854,8 @@ void TerminalDisplay::updateImage()
   // optimization - scroll the existing image where possible and 
   // avoid expensive text drawing for parts of the image that 
   // can simply be moved up or down
-  //scrollImage( _screenWindow->scrollCount() ,
-  //             _screenWindow->scrollRegion() );
+  scrollImage( _screenWindow->scrollCount() ,
+               _screenWindow->scrollRegion() );
   _screenWindow->resetScrollCount();
 
   Character* const newimg = _screenWindow->getImage();
@@ -1108,8 +1107,6 @@ void TerminalDisplay::paintEvent( QPaintEvent* pe )
 {
   QPainter paint(this);
 
-  //qDebug() << "Actually repainting" << pe->region();
-
   foreach (QRect rect, (pe->region() & contentsRect()).rects())
   {
     drawBackground(paint,rect,palette().background().color(),
@@ -1118,8 +1115,6 @@ void TerminalDisplay::paintEvent( QPaintEvent* pe )
   }
   drawInputMethodPreeditString(paint,preeditRect());
   paintFilters(paint);
-
-  paint.end();
 }
 
 QPoint TerminalDisplay::cursorPosition() const
