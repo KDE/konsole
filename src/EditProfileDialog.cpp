@@ -1138,7 +1138,7 @@ void ColorSchemeViewDelegate::paint(QPainter* painter, const QStyleOptionViewIte
     gradient.setColorAt( 0 , QColor(255,255,255,90) );
     gradient.setColorAt( 1 , Qt::transparent );
     painter->setBrush(gradient);
-    painter->drawRoundRect( backgroundRect , 4.0 , 30.0 );
+    painter->drawRoundRect( backgroundRect , 4 , 30 );
 
     //const bool isChecked = index.data(Qt::CheckStateRole) == Qt::Checked;
     const bool isSelected = option.state & QStyle::State_Selected;
