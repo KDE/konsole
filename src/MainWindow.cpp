@@ -254,10 +254,11 @@ void MainWindow::setupActions()
 void MainWindow::viewFullScreen(bool fullScreen)
 {
     if ( fullScreen )
-        showFullScreen();
+        setWindowState( windowState() | Qt::WindowFullScreen );
     else
-        showNormal();
+        setWindowState( windowState() & ~Qt::WindowFullScreen );
 }
+
 BookmarkHandler* MainWindow::bookmarkHandler() const
 {
     return _bookmarkHandler;
