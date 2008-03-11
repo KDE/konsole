@@ -102,7 +102,7 @@ void MainWindow::setMenuBarVisibleOnce(bool visible)
 	menuBar()->setVisible(visible);
 	_toggleMenuBarAction->setChecked(visible);
 
-	_menuBarVisibilitySet = true;	
+	_menuBarVisibilitySet = true;
 }
 
 void MainWindow::correctShortcuts()
@@ -316,15 +316,15 @@ bool MainWindow::queryClose()
         return true;
 
     int result = KMessageBox::warningYesNoCancel(this,
-                i18n("You have multiple tabs in this window, " 
+                i18n("You have multiple tabs in this window, "
                      "are you sure you want to quit?"),
-                i18n("Confirm close"),
+                i18n("Confirm Close"),
                 KStandardGuiItem::quit(),
-                KGuiItem(i18n("Close current tab"), "tab-close"),
+                KGuiItem(i18n("Close Current Tab"), "tab-close"),
                 KStandardGuiItem::cancel(),
                 "CloseAllTabs");
 
-    switch (result) 
+    switch (result)
     {
     case KMessageBox::Yes:
         return true;
