@@ -216,8 +216,6 @@ void Part::activeViewChanged(SessionController* controller)
 	Q_ASSERT( controller );
 	Q_ASSERT( controller->view() );
 
-    widget()->setFocusProxy( controller->view() );
-
 	// remove existing controller
     if (_pluggedController) 
 	{

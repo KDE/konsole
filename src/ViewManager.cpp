@@ -480,6 +480,8 @@ void ViewManager::controllerChanged(SessionController* controller)
 	if ( controller == _pluggedController )
 		return;
 
+	_viewSplitter->setFocusProxy(controller->view());
+
 	_pluggedController = controller;
 	emit activeViewChanged(controller);
 }
