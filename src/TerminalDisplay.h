@@ -624,6 +624,9 @@ private:
 	// redraws the cursor
 	void updateCursor();
 
+	// returns true if the scroll bar thumb could be moved
+	bool canScroll() const;
+
     // the window onto the terminal screen which this display
     // is currently showing.  
     QPointer<ScreenWindow> _screenWindow;
