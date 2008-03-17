@@ -79,7 +79,7 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
     }
 #ifdef Q_WS_X11
 	if ( KWindowSystem::compositingActive() && 
-		 !KCmdLineArgs::parsedArgs()->isSet("disable-transparency") ) 
+		 KCmdLineArgs::parsedArgs()->isSet("enable-transparency") ) 
 	{
 		Display* display = 0;
 		Visual* visual = 0;
@@ -109,7 +109,7 @@ void fillCommandLineOptions(KCmdLineOptions& options)
     options.add("new-tab",ki18n("Create a new tab in an existing window rather than creating a new window"));
     options.add("workdir \\<dir>",   ki18n("Set the initial working directory of the new tab "
                                            "or window to 'dir'"));
-	options.add("disable-transparency",ki18n("Disable transparent backgrounds, even if compositing is available"));
+	options.add("enable-transparency",ki18n("Enable transparent backgrounds"));
     // TODO - Document this option more clearly
     options.add("p \\<property=value>",ki18n("Change the value of a profile property."));
     options.add("!e \\<cmd>",ki18n("Command to execute"));
