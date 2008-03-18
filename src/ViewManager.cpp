@@ -593,6 +593,12 @@ void ViewManager::setNavigationMethod(NavigationMethod method)
 
         action = collection->action( "previous-view" );
         if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
+
+        action = collection->action( "split-view-left-right" );
+        if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
+
+        action = collection->action( "split-view-top-bottom" );
+        if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
     }
 }
 
