@@ -747,7 +747,7 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
          || this->_lines <= region.height() ) return;
 
 	// hide terminal size label to prevent it being scrolled
-	if (_resizeWidget->isVisible())
+	if (_resizeWidget && _resizeWidget->isVisible())
 		_resizeWidget->hide();
 
 	// Note:  With Qt 4.4 the left edge of the scrolled area must be at 0
