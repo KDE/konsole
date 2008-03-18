@@ -659,7 +659,14 @@ void SessionController::renameSession()
                                                  &ok, QApplication::activeWindow() );
     if ( ok )
     {
+		// renaming changes both the local and remote tab title formats, to save confusion over
+		// the tab title not changing if renaming the tab whilst the remote tab title format is 
+		// being displayed
+		//
+		// The downside of this approach is that after renaming a tab manually, the ability to 
+		// have separate formats for local and remote activities is lost
         _session->setTabTitleFormat(Session::LocalTabTitle,text);
+		_session->setTabTitleFormat(Session::RemoteTabTitle,text);
 
         // trigger an update of the tab text
         snapshot();
