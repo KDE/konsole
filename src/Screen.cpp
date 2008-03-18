@@ -1308,9 +1308,6 @@ void Screen::writeSelectionToStream(TerminalCharacterDecoder* decoder ,
 
     Q_ASSERT( top >= 0 && left >= 0 && bottom >= 0 && right >= 0 );
 
-    //kDebug() << "sel_TL = " << sel_TL;
-    //kDebug() << "columns = " << columns;
-
 	for (int y=top;y<=bottom;y++)
 	{
 			int start = 0;
@@ -1368,7 +1365,9 @@ int Screen::copyLineToStream(int line ,
             // ensure that start position is before end of line
             start = qMin(start,qMax(0,lineLength-1));
 
-			//retrieve line from history buffer
+			// retrieve line from history buffer.  It is assumed
+			// that the history buffer does not store trailing white space
+			// at the end of the line, so it does not need to be trimmed here 
 			if (count == -1)
             {
 					count = lineLength-start;
@@ -1400,6 +1399,13 @@ int Screen::copyLineToStream(int line ,
             Character* data = screenLines[screenLine].data();
             int length = screenLines[screenLine].count();
 
+			// ignore trailing white space at the end of the line
+			for (int i = length-1; i >= 0; i--)
+				if (data[i].character == ' ')
+					length--;
+				else
+					break;
+
 			//retrieve line from screen image
 			for (int i=start;i < qMin(start+count,length);i++)
 			{
@@ -1412,13 +1418,6 @@ int Screen::copyLineToStream(int line ,
             Q_ASSERT( screenLine < lineProperties.count() );
             currentLineProperties |= lineProperties[screenLine]; 
 		}
-
-		//do not decode trailing whitespace characters
-		for (int i=count-1 ; i >= 0; i--)
-				if (QChar(characterBuffer[i].character).isSpace())
-						count--;
-				else
-						break;
 
         // add new line character at end
         const bool omitLineBreak = (currentLineProperties & LINE_WRAPPED) ||
