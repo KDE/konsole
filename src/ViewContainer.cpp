@@ -685,11 +685,24 @@ void TabbedViewContainerV2::updateActivity(ViewProperties* item)
 
 void TabbedViewContainerV2::updateTitle(ViewProperties* item)
 {
+	// prevent tab titles from becoming overly-long as this limits the number
+	// of tabs which can fit in the tab bar.  
+	//
+	// if the view's title is overly long then trim it and select the 
+	// right-most 20 characters (assuming they contain the most useful
+	// information) and insert an elide at the front
+	const int MAX_TAB_TEXT_LENGTH = 20;
+
     QListIterator<QWidget*> iter(widgetsForItem(item));
     while ( iter.hasNext() )
     {
         const int index = _stackWidget->indexOf( iter.next() );
-        _tabBar->setTabText( index , item->title() );
+
+		QString tabText = item->title();
+		if (tabText.count() > MAX_TAB_TEXT_LENGTH)
+			tabText = tabText.right(MAX_TAB_TEXT_LENGTH).prepend("...");
+
+        _tabBar->setTabText( index , tabText );
     }
 }
 void TabbedViewContainerV2::updateIcon(ViewProperties* item)
