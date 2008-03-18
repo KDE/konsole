@@ -209,6 +209,11 @@ void TerminalDisplay::setVTFont(const QFont& f)
 
   QFontMetrics metrics(font);
 
+  if ( !QFontInfo(font).fixedPitch() )
+  {
+	  kWarning() << "Using an unsupported variable-width font in the terminal.  This may produce display errors.";
+  }
+
   if ( metrics.height() < height() && metrics.maxWidth() < width() )
   {
     // hint that text should be drawn without anti-aliasing.  
