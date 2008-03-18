@@ -548,6 +548,7 @@ switch( N )
     case TY_CSI_PS('J',   0) : _currentScreen->clearToEndOfScreen   (          ); break;
     case TY_CSI_PS('J',   1) : _currentScreen->clearToBeginOfScreen (          ); break;
     case TY_CSI_PS('J',   2) : _currentScreen->clearEntireScreen    (          ); break;
+	case TY_CSI_PS('J',	  3) : clearHistory(); 						   break;
     case TY_CSI_PS('g',   0) : _currentScreen->changeTabStop        (false     ); break; //VT100
     case TY_CSI_PS('g',   3) : _currentScreen->clearTabStops        (          ); break; //VT100
     case TY_CSI_PS('h',   4) : _currentScreen->    setMode      (MODE_Insert   ); break;
