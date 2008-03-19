@@ -296,7 +296,7 @@ void Session::terminalWarning(const QString& message)
 	static const QByteArray warningText = i18n("Warning: ").toLocal8Bit(); 
 	QByteArray messageText = message.toLocal8Bit();
 
-    static const char* redPenOn = "\033[1m\E[31m";
+    static const char* redPenOn = "\033[1m\033[31m";
 	static const char* redPenOff = "\033[0m";
 
     _emulation->receiveData(redPenOn,strlen(redPenOn));
