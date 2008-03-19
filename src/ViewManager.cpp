@@ -599,6 +599,9 @@ void ViewManager::setNavigationMethod(NavigationMethod method)
 
         action = collection->action( "split-view-top-bottom" );
         if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
+
+        action = collection->action( "rename-session" );
+        if ( action ) action->setEnabled( _navigationMethod != NoNavigation );
     }
 }
 
