@@ -362,6 +362,21 @@ public:
   void cancelZModem();
   bool isZModemBusy() { return _zmodemBusy; }
 
+ /** 
+   * Possible values of the @p what parameter for setUserTitle()
+   * See "Operating System Controls" section on http://rtfm.etla.org/xterm/ctlseq.html
+   */
+  enum UserTitleChange
+  {
+  	IconNameAndWindowTitle 	= 0,
+	IconName 				= 1,
+	WindowTitle				= 2,
+	TextColor				= 10,
+	BackgroundColor			= 11,
+	SessionName				= 30,
+	ProfileChange			= 50 	// this clashes with Xterm's font change command
+  };
+
 public slots:
 
   /**
@@ -382,8 +397,11 @@ public slots:
    * Changes the session title or other customizable aspects of the terminal
    * emulation display. For a list of what may be changed see the
    * Emulation::titleChanged() signal.
+   *
+   * @param what The feature being changed.  Value is one of UserTitleChange
+   * @param caption The text part of the terminal command
    */
-  void setUserTitle( int, const QString &caption );
+  void setUserTitle( int what , const QString &caption );
 
 signals:
 
@@ -430,6 +448,11 @@ signals:
    * should be changed.
    */
   void changeBackgroundColorRequest(const QColor&);
+  /** 
+   * Requests that the text color of views on this session should
+   * be changed to @p color.
+   */
+  void changeForegroundColorRequest(const QColor&);
 
   /** TODO: Document me. */
   void openUrlRequest(const QString& url);

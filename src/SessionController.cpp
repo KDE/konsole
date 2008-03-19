@@ -123,7 +123,11 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
             SLOT(sessionStateChanged(int) ));
     // listen to title and icon changes
     connect( _session , SIGNAL(titleChanged()) , this , SLOT(sessionTitleChanged()) );
-	
+
+	// listen for color changes
+	connect( _session , SIGNAL(changeBackgroundColorRequest(QColor)) , _view , SLOT(setBackgroundColor(QColor)) );
+	connect( _session , SIGNAL(changeForegroundColorRequest(QColor)) , _view , SLOT(setForegroundColor(QColor)) );
+
 	// update the title when the session starts
 	connect( _session , SIGNAL(started()) , this , SLOT(snapshot()) ); 
 

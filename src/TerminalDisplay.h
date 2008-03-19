@@ -456,6 +456,18 @@ public slots:
      */
     void bell(const QString& message);
 
+	/** 
+	 * Sets the background of the display to the specified color. 
+	 * @see setColorTable(), setForegroundColor() 
+	 */
+	void setBackgroundColor(const QColor& color);
+
+	/** 
+	 * Sets the text of the display to the specified color. 
+	 * @see setColorTable(), setBackgroundColor()
+	 */
+	void setForegroundColor(const QColor& color);
+
 signals:
 
     /**

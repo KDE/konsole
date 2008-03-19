@@ -336,8 +336,7 @@ void Session::setUserTitle( int what, const QString &caption )
     //set to true if anything is actually changed (eg. old _nameTitle != new _nameTitle )
 	bool modified = false;
 
-    // (btw: what=0 changes _userTitle and icon, what=1 only icon, what=2 only _nameTitle
-    if ((what == 0) || (what == 2)) 
+    if ((what == IconNameAndWindowTitle) || (what == WindowTitle)) 
     {
        	if ( _userTitle != caption ) {
 			_userTitle = caption;
@@ -345,7 +344,7 @@ void Session::setUserTitle( int what, const QString &caption )
 		}
     }
 
-    if ((what == 0) || (what == 1))
+    if ((what == IconNameAndWindowTitle) || (what == IconName))
 	{
 		if ( _iconText != caption ) {
        		_iconText = caption;
@@ -353,27 +352,20 @@ void Session::setUserTitle( int what, const QString &caption )
 		}
 	}
 
-    if (what == 11) 
+    if (what == TextColor || what == BackgroundColor) 
     {
       QString colorString = caption.section(';',0,0);
-      kDebug() << __FILE__ << __LINE__ << ": setting background colour to " << colorString;
-      QColor backColor = QColor(colorString);
-      if (backColor.isValid()){// change color via \033]11;Color\007
-          if (backColor != _modifiedBackground)
-          {
-              _modifiedBackground = backColor;
-
-              // bail out here until the code to connect the terminal display
-              // to the changeBackgroundColor() signal has been written
-              // and tested - just so we don't forget to do this.
-              Q_ASSERT( 0 );
-
-              emit changeBackgroundColorRequest(backColor);
-          }
+      QColor color = QColor(colorString);
+      if (color.isValid())
+	  {
+		  if (what == TextColor)
+			  	emit changeForegroundColorRequest(color);
+		  else
+      			emit changeBackgroundColorRequest(color);
       }
     }
 
-	if (what == 30) 
+	if (what == SessionName) 
     {
 		if ( _nameTitle != caption ) {
        		setTitle(Session::NameRole,caption);
@@ -398,7 +390,7 @@ void Session::setUserTitle( int what, const QString &caption )
 		}
     }
 
-    if (what == 50) 
+    if (what == ProfileChange) 
     {
         emit profileChangeCommandReceived(caption);
         return;
