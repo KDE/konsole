@@ -327,10 +327,12 @@ void Session::run()
 		break;
   }
 
+  // if a program was specified via setProgram(), but it couldn't be found, print a warning
   if (choice != 0 && choice < CHOICE_COUNT && !_program.isEmpty())
   {
 	  terminalWarning(i18n("Could not find '%1', starting '%2' instead.  Please check your profile settings.",_program,exec)); 
   }
+  // if none of the choices are available, print a warning
   else if (choice == CHOICE_COUNT)
   {
 	  terminalWarning(i18n("Could not find an interactive shell to start."));
