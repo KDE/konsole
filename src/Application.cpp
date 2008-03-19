@@ -122,7 +122,9 @@ int Application::newInstance()
     processProfileChangeArgs(args,window);
 
     // create new session
-    createSession( window->defaultProfile() , QString() , window->viewManager() );
+    Session* session = createSession( window->defaultProfile() , QString() , window->viewManager() );
+	if ( !args->isSet("close") )
+		session->setAutoClose(false);
 
     // if the background-mode argument is supplied, start the background session
     // ( or bring to the front if it already exists )
@@ -278,7 +280,7 @@ void Application::createWindow(const QString& key , const QString& directory)
     window->show();
 }
 
-void Application::createSession(const QString& key , const QString& directory , ViewManager* view)
+Session* Application::createSession(const QString& key , const QString& directory , ViewManager* view)
 {
     Session* session = SessionManager::instance()->createSession(key);
     if (!directory.isEmpty() && session->initialWorkingDirectory().isEmpty())
@@ -289,6 +291,8 @@ void Application::createSession(const QString& key , const QString& directory , 
     // and Midnight Commander don't like this happening
     view->createView(session);
     session->run();
+
+	return session;
 }
 
 #include "Application.moc"

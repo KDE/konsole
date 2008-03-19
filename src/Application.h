@@ -72,7 +72,7 @@ public:
     static Application* self();
 
 private slots:
-    void createSession(const QString& key, const QString& directory , ViewManager* view);
+    Session* createSession(const QString& key, const QString& directory , ViewManager* view);
     void createWindow(const QString& key , const QString& directory);
     void detachView(Session* session);
 
