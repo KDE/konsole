@@ -509,6 +509,13 @@ private:
   void updateTerminalSize();
   WId windowId() const;
   bool kill(int signal);
+  // print a warning message in the terminal.  This is used
+  // if the program fails to start, or if the shell exits in 
+  // an unsuccessful manner
+  void terminalWarning(const QString& message);
+  // checks that the binary 'program' is available and can be executed
+  // returns the binary name if available or an empty string otherwise
+  QString checkProgram(const QString& program) const;
 
   int            _uniqueIdentifier;
 

@@ -263,17 +263,14 @@ void Session::removeView(TerminalDisplay* widget)
 	}
 }
 
-void Session::run()
+QString Session::checkProgram(const QString& program) const
 {
-  //check that everything is in place to run the session
-  if (_program.isEmpty())
-      kDebug() << "Session::run() - program to run not set.";
-  if (_arguments.isEmpty())
-      kDebug() << "Session::run() - no command line arguments specified.";
-
   // Upon a KPty error, there is no description on what that error was...
   // Check to see if the given program is executable.
-  QString exec = QFile::encodeName(_program);
+  QString exec = QFile::encodeName(program);
+
+  if (exec.isEmpty())
+	  return QString();
 
   // if 'exec' is not specified, fall back to default shell.  if that 
   // is not set then fall back to /bin/sh
@@ -282,19 +279,67 @@ void Session::run()
   if ( exec.isEmpty() )
   	  exec = "/bin/sh";
 
-  // if no arguments are specified, fall back to shell
-  QStringList arguments = _arguments.join(QChar(' ')).isEmpty() ?
-                           			            QStringList() << exec : _arguments;
-
-
   exec = KRun::binaryName(exec, false);
   exec = KShell::tildeExpand(exec);
   QString pexec = KGlobal::dirs()->findExe(exec);
-  if ( pexec.isEmpty() ) {
-    kError()<<"can not execute "<<exec<<endl;
-    QTimer::singleShot(1, this, SIGNAL(finished()));
-    return;
+  if ( pexec.isEmpty() ) 
+  {
+  	kError() << i18n("Could not find binary: ") << exec;
+    return QString();
   }
+
+  return exec;
+}
+
+void Session::terminalWarning(const QString& message)
+{
+	static const QByteArray warningText = i18n("Warning: ").toLocal8Bit(); 
+	QByteArray messageText = message.toLocal8Bit();
+
+    static const char* redPenOn = "\E[1m\E[31m";
+	static const char* redPenOff = "\E[0m";
+
+    _emulation->receiveData(redPenOn,strlen(redPenOn));
+    _emulation->receiveData("\n\r\n\r",4);
+    _emulation->receiveData(warningText.constData(),strlen(warningText.constData()));
+	_emulation->receiveData(messageText.constData(),strlen(messageText.constData()));
+	_emulation->receiveData("\n\r\n\r",4);
+	_emulation->receiveData(redPenOff,strlen(redPenOff));
+}
+void Session::run()
+{
+  //check that everything is in place to run the session
+  if (_program.isEmpty())
+      kDebug() << "Session::run() - program to run not set.";
+  if (_arguments.isEmpty())
+      kDebug() << "Session::run() - no command line arguments specified.";
+
+  const int CHOICE_COUNT = 3;
+  QString programs[CHOICE_COUNT] = {_program,getenv("SHELL"),"/bin/sh"};
+  QString exec;
+  int choice = 0;
+  while (choice < CHOICE_COUNT)
+  {
+	exec = checkProgram(programs[choice]);
+	if (exec.isEmpty())
+		choice++;
+	else
+		break;
+  }
+
+  if (choice != 0 && choice < CHOICE_COUNT && !_program.isEmpty())
+  {
+	  terminalWarning(i18n("Could not find '%1', starting '%2' instead.  Please check your profile settings.",_program,exec)); 
+  }
+  else if (choice == CHOICE_COUNT)
+  {
+	  terminalWarning(i18n("Could not find an interactive shell to start."));
+	  return;
+  }
+  
+  // if no arguments are specified, fall back to program name
+  QStringList arguments = _arguments.join(QChar(' ')).isEmpty() ?
+                           			            QStringList() << exec : _arguments;
 
   QString dbusService = QDBusConnection::sessionBus().baseService();
   QString cwd_save = QDir::currentPath();
@@ -323,6 +368,7 @@ void Session::run()
 
   if (result < 0)
   {
+	  terminalWarning(i18n("Could not start program '%1' with arguments '%2'."));
     return;
   }
 
@@ -592,22 +638,24 @@ void Session::done(int exitStatus)
     return;
   }
 
+  QString message;
   if (!_wantedClose || exitStatus != 0)
   {
-    QString message;
-
     if (_shellProcess->exitStatus() == QProcess::NormalExit)
         message = i18n("Program '%1' exited with status %2.", _shellProcess->program().first(), exitStatus);
     else
-        message = i18n("Program '%1' exited unexpectedly.", _shellProcess->program().first());
+        message = i18n("Program '%1' crashed.", _shellProcess->program().first());
 
     //FIXME: See comments in Session::monitorTimerDone()
     KNotification::event("Finished", message , QPixmap(),
                          QApplication::activeWindow(),
                          KNotification::CloseWhenWidgetActivated);
   }
-  	
-  emit finished();
+
+  if ( exitStatus != 0 || _shellProcess->exitStatus() != QProcess::NormalExit )
+	  terminalWarning(message);
+  else
+  	  emit finished();
 }
 
 Emulation* Session::emulation() const
