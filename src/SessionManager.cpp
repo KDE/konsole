@@ -182,8 +182,6 @@ void SessionManager::loadAllProfiles()
     if ( _loadedAllProfiles )
         return;
 
-    kDebug() << "Loading all profiles";
-
     KDE3ProfileReader kde3Reader;
     KDE4ProfileReader kde4Reader;
 
@@ -279,8 +277,6 @@ void SessionManager::sessionTerminated(QObject* sessionObject)
 {
     Session* session = qobject_cast<Session*>(sessionObject);
 
-    //kDebug() << "Session finished: " << session->title(Session::NameRole);
-
     Q_ASSERT( session );
 
     _sessions.removeAll(session);
@@ -337,8 +333,6 @@ void SessionManager::changeProfile(const QString& key ,
         return;
     }
 
-    kDebug() << "Profile about to change: " << info->name();
-    
     // insert the changes into the existing Profile instance
     QListIterator<Profile::Property> iter(propertyMap.keys());
     while ( iter.hasNext() )
@@ -347,8 +341,6 @@ void SessionManager::changeProfile(const QString& key ,
         info->setProperty(property,propertyMap[property]);
     }
     
-    kDebug() << "Profile changed: " << info->name();
-
     // apply the changes to existing sessions
     applyProfile(key,true);
 
@@ -523,7 +515,7 @@ void SessionManager::setDefaultProfile(const QString& key)
 
    QFileInfo fileInfo(path);
 
-   kDebug() << "setting default session type to " << fileInfo.fileName();
+   //kDebug() << "setting default session type to " << fileInfo.fileName();
 
    KSharedConfigPtr config = KGlobal::config();
    KConfigGroup group = config->group("Desktop Entry");
@@ -542,14 +534,11 @@ void SessionManager::setFavorite(const QString& key , bool favorite)
 
     if ( favorite && !_favorites.contains(key) )
     {
-        kDebug() << "adding favorite - " << key;
-
         _favorites.insert(key);
         emit favoriteStatusChanged(key,favorite);
     }
     else if ( !favorite && _favorites.contains(key) )
     {
-        kDebug() << "removing favorite - " << key;
         _favorites.remove(key);
         emit favoriteStatusChanged(key,favorite);
     }
