@@ -49,6 +49,7 @@ GenericName[nds]=Konsool
 GenericName[ru]=Терминал
 GenericName[sr]=Терминал
 GenericName[tr]=Uçbirim
+GenericName[uk]=Термінал
 GenericName[zh_CN]=终端
 GenericName[zh_TW]=終端機
 X-DBUS-StartupType=Unique
