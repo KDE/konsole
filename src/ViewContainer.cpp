@@ -471,6 +471,7 @@ TabbedViewContainerV2::TabbedViewContainerV2(NavigationPosition position , QObje
     connect( _tabBar , SIGNAL(tabDoubleClicked(int)) , this , SLOT(tabDoubleClicked(int)) );
     connect( _tabBar , SIGNAL(newTabRequest()) , this , SIGNAL(newViewRequest()) );
     connect( _tabBar , SIGNAL(wheelDelta(int)) , this , SLOT(wheelScrolled(int)) );
+	connect( _tabBar , SIGNAL(mouseMiddleClick(int)) , this , SLOT(closeTab(int)) );
 
     _layout = new TabbedViewContainerV2Layout;
     _layout->setSpacing(0);
@@ -496,6 +497,11 @@ TabbedViewContainerV2::TabbedViewContainerV2(NavigationPosition position , QObje
         Q_ASSERT(false); // position not supported
 
     _containerWidget->setLayout(_layout);
+}
+void TabbedViewContainerV2::closeTab(int tab)
+{
+	Q_ASSERT(tab >= 0 && tab < _stackWidget->count());
+	removeView(_stackWidget->widget(tab));
 }
 void TabbedViewContainerV2::setTabBarVisible(bool visible)
 {
