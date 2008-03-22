@@ -654,7 +654,7 @@ void Session::done(int exitStatus)
                          KNotification::CloseWhenWidgetActivated);
   }
 
-  if ( exitStatus != 0 || _shellProcess->exitStatus() != QProcess::NormalExit )
+  if ( _shellProcess->exitStatus() != QProcess::NormalExit )
 	  terminalWarning(message);
   else
   	  emit finished();
