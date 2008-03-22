@@ -33,6 +33,7 @@
 #include <QtCore/QPair>
 #include <QtCore/QPointer>
 #include <QtCore/QVariant>
+#include <QtCore/QStack>
 
 // Konsole
 #include "Profile.h"
@@ -67,7 +68,7 @@ public:
     virtual ~SessionManager();
 
     /**
-     * Returns a list of keys for profiles which have been loaded.
+     * Returns a list of profiles which have been loaded.
      * Initially only the profile currently set as the default is loaded.
      *
      * Favorite profiles are loaded automatically when findFavorites() is called.
@@ -76,7 +77,7 @@ public:
      * involves opening, reading and parsing all profiles from disk, and
      * should only be done when necessary.
      */
-    QList<QString> loadedProfiles() const;
+    QList<Profile::Ptr> loadedProfiles() const;
 
     /**
      * Searches for available profiles on-disk and returns a list
@@ -84,23 +85,7 @@ public:
      */
     QList<QString> availableProfilePaths() const;
 
-    /**
-     * Returns the session information object for the profile with the specified
-     * key or 0 if no profile with the specified key exists.
-     *
-     * If @p key is empty, a pointer to the default profile is returned.
-     */
-    Profile* profile(const QString& key) const;
-
-    /**
-     * Registers a new type of session and returns the key
-     * which can be passed to createSession() to create new instances of the session.
-     *
-     * The favorite status of the session ( as returned by isFavorite() ) is set
-     * to false by default.
-     */
-    QString addProfile(Profile* type);
-
+    
     /**
      * Loads a profile from the specified path and registers 
      * it with the SessionManager.
@@ -111,51 +96,50 @@ public:
      * "konsole/My Profile.profile" , "My Profile.profile" and 
      * "My Profile" will be accepted)
      *
-     * @return The profile key which can be used to create new sessions
-     * from this profile using createSession()
+     * @return Pointer to a profile which can be passed to createSession()
+	 * to create a new session using this profile.
      */
-    QString loadProfile(const QString& path);
+    Profile::Ptr loadProfile(const QString& path);
 
     /**
-     * Updates the profile associated with the specified @p key with
-     * the changes specified in @p propertyMap.
+     * Updates a @p profile with the changes specified in @p propertyMap.
      *
-     * All sessions using the profile will be updated to reflect the new settings.
+     * All sessions currently using the profile will be updated to reflect the new settings.
      *
      * After the profile is updated, the profileChanged() signal will be emitted.
      *
-     * @param key The profile's key
+     * @param profile The profile to change
      * @param propertyMap A map between profile properties and values describing the changes
      * @param persistant If true, the changes are saved to the profile's configuration file,
      * set this to false if you want to preview possible changes to a profile but do not
      * wish to make them permanent.
      */
-    void changeProfile(const QString& key , QHash<Profile::Property,QVariant> propertyMap, 
+    void changeProfile(Profile::Ptr profile , QHash<Profile::Property,QVariant> propertyMap, 
             bool persistant = true);
 
     /**
      * Returns a Profile object describing the default type of session, which is used
      * if createSession() is called with an empty configPath argument.
      */
-    Profile* defaultProfile() const;
-
-    /**
-     * Returns the key for the default profile.
-     */
-    QString defaultProfileKey() const;
+    Profile::Ptr defaultProfile() const;
 
     /**
      * Creates a new session using the settings specified by the specified
-     * profile key.
+     * profile.
      *
      * The new session has no views associated with it.  A new TerminalDisplay view
      * must be created in order to display the output from the terminal session and
      * send keyboard or mouse input to it.
      *
-     * @param type Specifies the type of session to create.  Passing an empty
-     *             string will create a session using the default configuration.
+     * @param profile A profile containing the settings for the new session.  If @p profile 
+	 * is null the defaul profile (see defaultProfile()) will be used.
      */
-    Session* createSession(const QString& key = QString());
+    Session* createSession(Profile::Ptr profile = Profile::Ptr());
+
+	/** Returns the profile associated with a session. */
+	Profile::Ptr sessionProfile(Session* session) const;
+	/** Sets the profile associated with a session. */
+	void setSessionProfile(Session* session, Profile::Ptr profile);
 
     /**
      * Updates a session's properties to match its current profile.
@@ -168,24 +152,25 @@ public:
     const QList<Session*> sessions();
 
     /**
-     * Deletes the profile with the specified key.
-     * The configuration file associated with the profile is
-     * deleted if possible.
-     *
+     * Deletes the configuration file used to store a profile.
+	 * The profile will continue to exist while sessions are still using it.  The profile
+	 * will be marked as hidden (see Profile::setHidden() ) so that it does not show
+	 * up in profile lists and future changes to the profile are not stored to disk.
+	 *
      * Returns true if the profile was successfully deleted or false otherwise.
      */
-    bool deleteProfile(const QString& key);
+    bool deleteProfile(Profile::Ptr profile);
 
     /**
-     * Sets the profile with the specified key
-     * as the default type.
+     * Sets the @p profile as the default profile for new sessions created
+	 * with createSession()
      */
-    void setDefaultProfile(const QString& key);
+    void setDefaultProfile(Profile::Ptr profile);
 
     /**
-     * Returns the set of keys for the user's favorite profiles.
+     * Returns the set of the user's favorite profiles.
      */
-    QSet<QString> findFavorites();
+    QSet<Profile::Ptr> findFavorites();
 
     /**
      * Returns the list of shortcut key sequences which
@@ -194,30 +179,35 @@ public:
      *
      * When one of the shortcuts is activated, 
      * use findByShortcut() to load the profile associated
-     * with the shortcut and obtain its key.
+     * with the shortcut. 
      */
     QList<QKeySequence> shortcuts();
 
     /**
      * Finds and loads the profile associated with 
-     * the specified @p shortcut key sequence and returns
-     * its string key.
+     * the specified @p shortcut key sequence and returns a pointer to it.
      */
-    QString findByShortcut(const QKeySequence& shortcut);
+    Profile::Ptr findByShortcut(const QKeySequence& shortcut);
 
     /**
      * Associates a shortcut with a particular profile.
      */
-    void setShortcut(const QString& key , const QKeySequence& shortcut);
+    void setShortcut(Profile::Ptr profile , const QKeySequence& shortcut);
 
     /** Returns the shortcut associated with a particular profile. */
-    QKeySequence shortcut(const QString& profileKey) const;
+    QKeySequence shortcut(Profile::Ptr profile) const;
+
+	/** 
+	 * Registers a new type of session. 
+     * The favorite status of the session ( as returned by isFavorite() ) is set to false by default.
+	 */
+    void addProfile(Profile::Ptr type);
 
     /**
      * Specifies whether a profile should be included in the user's
      * list of favorite sessions.
      */
-    void setFavorite(const QString& key , bool favorite);
+    void setFavorite(Profile::Ptr profile , bool favorite);
 
     /** 
      * Loads all available profiles.  This involves reading each
@@ -237,11 +227,11 @@ public:
 
 signals:
     /** Emitted when a profile is added to the manager. */
-    void profileAdded(const QString& key);
+    void profileAdded(Profile::Ptr ptr);
     /** Emitted when a profile is removed from the manager. */
-    void profileRemoved(const QString& key);
+    void profileRemoved(Profile::Ptr ptr);
     /** Emitted when a profile's properties are modified. */
-    void profileChanged(const QString& key);
+    void profileChanged(Profile::Ptr ptr);
 
     /** 
      * Emitted when a session's settings are updated to match 
@@ -252,18 +242,18 @@ signals:
     /** 
      * Emitted when the favorite status of a profile changes. 
      * 
-     * @param key The key for the profile
+     * @param profile The profile to change 
      * @param favorite Specifies whether the session is a favorite or not 
      */
-    void favoriteStatusChanged(const QString& key , bool favorite);
+    void favoriteStatusChanged(Profile::Ptr profile , bool favorite);
 
     /** 
      * Emitted when the shortcut for a profile is changed. 
      *
-     * @param key The key for the profile 
+     * @param profile The profile whoose status was changed
      * @param newShortcut The new shortcut key sequence for the profile
      */
-    void shortcutChanged(const QString& key , const QKeySequence& newShortcut);
+    void shortcutChanged(Profile::Ptr profile , const QKeySequence& newShortcut);
 
 protected Q_SLOTS:
 
@@ -275,10 +265,11 @@ protected Q_SLOTS:
     void sessionTerminated( QObject* session );
 
 private slots:
-    void sessionProfileChanged();
     void sessionProfileCommandReceived(const QString& text);
 
 private:
+	
+    
     // loads the mappings between shortcut key sequences and 
     // profile paths
     void loadShortcuts();
@@ -294,33 +285,34 @@ private:
     // returns the path to which the profile was saved, which will
     // be the same as the path property of profile if valid or a newly generated path
     // otherwise
-    QString saveProfile(Profile* profile);
+    QString saveProfile(Profile::Ptr profile);
 
-    // applies updates to the profile associated with @p key
+    // applies updates to a profile
     // to all sessions currently using that profile
     // if modifiedPropertiesOnly is true, only properties which
     // are set in the profile @p key are updated
-    void applyProfile(const QString& key , bool modifiedPropertiesOnly);
+    void applyProfile(Profile::Ptr ptr , bool modifiedPropertiesOnly);
     // apples updates to the profile @p info to the session @p session
     // if modifiedPropertiesOnly is true, only properties which
     // are set in @p info are update ( ie. properties for which info->isPropertySet(<property>) 
     // returns true )
-    void applyProfile(Session* session , const Profile* info , bool modifiedPropertiesOnly); 
+    void applyProfile(Session* session , const Profile::Ptr info , bool modifiedPropertiesOnly); 
 
-    QHash<QString,Profile*> _types;             // profile key -> Profile instance
-    
+	QSet<Profile::Ptr> _types;
+    QHash<Session*,Profile::Ptr> _sessionProfiles;
+
     struct ShortcutData
     {
-        QString profileKey;
+        Profile::Ptr profileKey;
         QString profilePath;
     };
     QMap<QKeySequence,ShortcutData> _shortcuts; // shortcut keys -> profile path
 
     QList<Session*> _sessions; // list of running sessions
 
-    QString _defaultProfile; // profile key of default profile
+    Profile::Ptr _defaultProfile; 
     
-    QSet<QString> _favorites; // list of profile keys for favorite profiles
+    QSet<Profile::Ptr> _favorites; // list of favorite profiles
 
     bool _loadedAllProfiles; // set to true after loadAllProfiles has been called
 
@@ -330,7 +322,7 @@ private:
 class ShouldApplyProperty 
 {
 public:
-	ShouldApplyProperty(const Profile* profile , bool modifiedOnly) : 
+	ShouldApplyProperty(const Profile::Ptr profile , bool modifiedOnly) : 
 	_profile(profile) , _modifiedPropertiesOnly(modifiedOnly) {}
 
 	bool shouldApply(Profile::Property property) const
@@ -338,8 +330,30 @@ public:
 		return !_modifiedPropertiesOnly || _profile->isPropertySet(property); 
 	}
 private:
-	const Profile* _profile;
+	const Profile::Ptr _profile;
 	bool _modifiedPropertiesOnly;
+};
+
+/**
+ * PopStackOnExit is a utility to remove all values from a stack which are added during
+ * the lifetime of a PopStackOnExit instance.
+ *
+ * When a PopStackOnExit instance is destroyed, elements are removed from the stack
+ * until the stack count is reduced the value when the PopStackOnExit instance was created.
+ */
+template <class T>
+class PopStackOnExit
+{
+public:
+	PopStackOnExit(QStack<T>& stack) : _stack(stack) , _count(stack.count()) {} 
+	~PopStackOnExit() 
+	{ 
+		while (_stack.count() > _count) 
+			_stack.pop(); 
+	}
+private:
+	QStack<T>& _stack;
+	int _count;
 };
 
 }

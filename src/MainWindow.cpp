@@ -115,11 +115,11 @@ void MainWindow::correctShortcuts()
     helpAction->setShortcut( QKeySequence() );
 }
 
-void MainWindow::setDefaultProfile(const QString& key)
+void MainWindow::setDefaultProfile(Profile::Ptr profile)
 {
-    _defaultProfile = key;
+    _defaultProfile = profile;
 }
-QString MainWindow::defaultProfile() const
+Profile::Ptr MainWindow::defaultProfile() const
 {
     return _defaultProfile;
 }
@@ -268,8 +268,8 @@ void MainWindow::setSessionList(ProfileList* list)
 {
     sessionListChanged(list->actions());
 
-    connect( list , SIGNAL(profileSelected(const QString&)) , this ,
-            SLOT(newFromProfile(const QString&)) );
+    connect( list , SIGNAL(profileSelected(Profile::Ptr)) , this ,
+            SLOT(newFromProfile(Profile::Ptr)) );
 
     connect( list , SIGNAL(actionsChanged(const QList<QAction*>&)) , this ,
             SLOT(sessionListChanged(const QList<QAction*>&)) );
@@ -348,9 +348,9 @@ void MainWindow::showShortcutsDialog()
                                  KShortcutsEditor::LetterShortcutsDisallowed, this );
 }
 
-void MainWindow::newFromProfile(const QString& key)
+void MainWindow::newFromProfile(Profile::Ptr profile)
 {
-    emit newSessionRequest(key, activeSessionDir(), _viewManager);
+    emit newSessionRequest(profile, activeSessionDir(), _viewManager);
 }
 void MainWindow::showManageProfilesDialog()
 {
@@ -360,9 +360,9 @@ void MainWindow::showManageProfilesDialog()
 
 void MainWindow::showRemoteConnectionDialog()
 {
-    RemoteConnectionDialog dialog(this);
-    if ( dialog.exec() == QDialog::Accepted )
-        emit newSessionRequest(dialog.sessionKey(),QString(),_viewManager);
+//    RemoteConnectionDialog dialog(this);
+//    if ( dialog.exec() == QDialog::Accepted )
+//        emit newSessionRequest(dialog.sessionKey(),QString(),_viewManager);
 }
 
 void MainWindow::setupWidgets()

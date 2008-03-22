@@ -86,20 +86,6 @@ public:
   bool isRunning() const;
 
   /**
-   * Sets the profile associated with this session.
-   *
-   * @param profileKey A key which can be used to obtain the current
-   * profile settings from the SessionManager
-   */
-  void setProfileKey(const QString& profileKey);
-  /**
-   * Returns the profile key associated with this session.
-   * This can be passed to the SessionManager to obtain the current
-   * profile settings.
-   */
-  QString profileKey() const;
-
-  /**
    * Adds a new view for this session.
    *
    * The viewing widget will display the output from the terminal and
@@ -420,9 +406,6 @@ signals:
 
   /** Emitted when the session's title has changed. */
   void titleChanged();
-
-  /** Emitted when the session's profile has changed. */
-  void profileChanged(const QString& profile);
 
   /**
    * Emitted when the activity state of this session changes.

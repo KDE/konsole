@@ -624,13 +624,6 @@ Session::~Session()
   delete _zmodemProc;
 }
 
-void Session::setProfileKey(const QString& key)
-{
-    _profileKey = key;
-    emit profileChanged(key);
-}
-QString Session::profileKey() const { return _profileKey; }
-
 void Session::done(int exitStatus)
 {
   if (!_autoClose)

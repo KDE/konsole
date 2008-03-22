@@ -31,6 +31,9 @@
 
 #include <QtGui/QFont>
 
+// KDE
+#include <KSharedPtr>
+
 class KConfig;
 class KConfigGroup;
 
@@ -59,14 +62,15 @@ namespace Konsole
  * pointer to the parent profile using QPointer<Profile>.  Try to find
  * a more light-weight solution to this.  
  */
-class Profile : public QObject 
+class Profile : public QSharedData 
 {
-Q_OBJECT
 
 friend class KDE4ProfileReader;
 friend class KDE4ProfileWriter;
 
 public:
+	typedef KSharedPtr<Profile> Ptr;
+
     /**
      * This enum describes the available properties
      * which a Profile may consist of.
@@ -254,18 +258,18 @@ public:
     /**
      * Constructs a new profile
      */
-    Profile(Profile* parent = 0);
-    virtual ~Profile() {}
+    explicit Profile(Ptr parent = Ptr());
+    virtual ~Profile(); 
 
     /** 
      * Changes the parent profile.  When calling the property() method,
      * if the specified property has not been set for this profile,
      * the parent's value for the property will be returned instead.
      */
-    void setParent(Profile* parent);
+    void setParent(Ptr parent);
 
     /** Returns the parent profile. */
-    const Profile* parent() const;
+    const Ptr parent() const;
 
     /** 
      * Returns the current value of the specified @p property, cast to type T.
@@ -382,7 +386,7 @@ private:
     static void fillTableWithDefaultNames();
 
     QHash<Property,QVariant> _propertyValues;
-    QPointer<Profile> _parent;
+    Ptr _parent;
 
     bool _hidden;
 
@@ -445,23 +449,23 @@ public:
      * @param profile Pointer to the Profile the settings will be read into
      * @param parentProfile Receives the name of the parent profile specified in
      */
-    virtual bool readProfile(const QString& path , Profile* profile , QString& parentProfile) = 0;
+    virtual bool readProfile(const QString& path , Profile::Ptr profile , QString& parentProfile) = 0;
 };
 /** Reads a KDE 3 profile .desktop file. */
 class KDE3ProfileReader : public ProfileReader
 {
 public:
     virtual QStringList findProfiles();
-    virtual bool readProfile(const QString& path , Profile* profile, QString& parentProfile);
+    virtual bool readProfile(const QString& path , Profile::Ptr profile, QString& parentProfile);
 };
 /** Reads a KDE 4 .profile file. */
 class KDE4ProfileReader : public ProfileReader
 {
 public:
     virtual QStringList findProfiles();
-    virtual bool readProfile(const QString& path , Profile* profile, QString& parentProfile);
+    virtual bool readProfile(const QString& path , Profile::Ptr profile, QString& parentProfile);
 private:
-	void readProperties(const KConfig& config, Profile* profile, 
+	void readProperties(const KConfig& config, Profile::Ptr profile, 
 						const Profile::PropertyInfo* properties);
 };
 /** Interface for all classes which can write profile settings to a file. */
@@ -474,22 +478,22 @@ public:
      * @p profile to. The path-name should be accepted by
      * the corresponding ProfileReader class.
      */
-    virtual QString getPath(const Profile* profile) = 0;
+    virtual QString getPath(const Profile::Ptr profile) = 0;
     /**
      * Writes the properties and values from @p profile to the file specified by
      * @p path.  This profile should be readable by the corresponding ProfileReader class.
      */
-    virtual bool writeProfile(const QString& path , const Profile* profile) = 0;
+    virtual bool writeProfile(const QString& path , const Profile::Ptr profile) = 0;
 };
 /** Writes a KDE 4 .profile file. */
 class KDE4ProfileWriter : public ProfileWriter
 {
 public:
-    virtual QString getPath(const Profile* profile);
-    virtual bool writeProfile(const QString& path , const Profile* profile);
+    virtual QString getPath(const Profile::Ptr profile);
+    virtual bool writeProfile(const QString& path , const Profile::Ptr profile);
 
 private:
-	void writeProperties(KConfig& config, const Profile* profile, 
+	void writeProperties(KConfig& config, const Profile::Ptr profile, 
 						 const Profile::PropertyInfo* properties);
 };
 
@@ -523,5 +527,6 @@ public:
 };
 
 }
+Q_DECLARE_METATYPE(Konsole::Profile::Ptr)
 
 #endif // PROFILE_H

@@ -78,8 +78,8 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
             SLOT(containerViewsChanged(QObject*)) ); 
 
     // listen for profile changes
-    connect( SessionManager::instance() , SIGNAL(profileChanged(const QString&)) , this,
-            SLOT(profileChanged(const QString&)) );
+    connect( SessionManager::instance() , SIGNAL(profileChanged(Profile::Ptr)) , this,
+            SLOT(profileChanged(Profile::Ptr)) );
     connect( SessionManager::instance() , SIGNAL(sessionUpdated(Session*)) , this,
             SLOT(updateViewsForSession(Session*)) );
 }
@@ -381,7 +381,7 @@ void ViewManager::splitView(Qt::Orientation orientation)
     {
         Session* session = _sessionMap[(TerminalDisplay*)existingViewIter.next()];
         TerminalDisplay* display = createTerminalDisplay(session);
-        applyProfile(display,session->profileKey()); 
+        applyProfile(display,SessionManager::instance()->sessionProfile(session));
         ViewProperties* properties = createController(session,display);
 
         _sessionMap[display] = session;
@@ -389,7 +389,7 @@ void ViewManager::splitView(Qt::Orientation orientation)
         // create a container using settings from the first 
         // session in the previous container
         if ( !container )
-            container = createContainer(session->profileKey());
+            container = createContainer(SessionManager::instance()->sessionProfile(session));
 
         container->addView(display,properties);
         session->addView( display );
@@ -496,7 +496,7 @@ void ViewManager::createView(Session* session)
     // create the default container
     if (_viewSplitter->containers().count() == 0)
     {
-        _viewSplitter->addContainer( createContainer(session->profileKey()) , 
+        _viewSplitter->addContainer( createContainer(SessionManager::instance()->sessionProfile(session)) , 
                                      Qt::Vertical );
         emit splitViewToggle(false);
     }
@@ -515,7 +515,7 @@ void ViewManager::createView(Session* session)
     {
         ViewContainer* container = containerIter.next();
         TerminalDisplay* display = createTerminalDisplay(session);
-        applyProfile(display,session->profileKey());
+        applyProfile(display,SessionManager::instance()->sessionProfile(session));
         
         // set initial size
         display->setSize(80,40);
@@ -527,7 +527,8 @@ void ViewManager::createView(Session* session)
         session->addView(display);
 
         // tell the session whether it has a light or dark background
-        session->setDarkBackground( colorSchemeForProfile(session->profileKey())->hasDarkBackground() );
+		const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
+        session->setDarkBackground( colorSchemeForProfile(profile)->hasDarkBackground() );
 
         if ( container == activeContainer ) 
         {
@@ -539,10 +540,8 @@ void ViewManager::createView(Session* session)
 	updateDetachViewState();
 }
 
-ViewContainer* ViewManager::createContainer(const QString& profileKey)
+ViewContainer* ViewManager::createContainer(const Profile::Ptr info)
 {
-    const Profile* info = SessionManager::instance()->profile(profileKey);
-
     Q_ASSERT( info );
 
     const int tabPosition = info->property<int>(Profile::TabBarPosition);
@@ -655,10 +654,8 @@ TerminalDisplay* ViewManager::createTerminalDisplay(Session* session)
    return display;
 }
 
-const ColorScheme* ViewManager::colorSchemeForProfile(const QString& profileKey) const
+const ColorScheme* ViewManager::colorSchemeForProfile(const Profile::Ptr info) const
 {
-    Profile* info = SessionManager::instance()->profile(profileKey);
-
     const ColorScheme* colorScheme = ColorSchemeManager::instance()->
                                             findColorScheme(info->colorScheme());
     if ( !colorScheme )
@@ -668,13 +665,11 @@ const ColorScheme* ViewManager::colorSchemeForProfile(const QString& profileKey)
     return colorScheme;
 }
 
-void ViewManager::applyProfile(TerminalDisplay* view , const QString& profileKey)
+void ViewManager::applyProfile(TerminalDisplay* view , const Profile::Ptr info ) 
 {
-    Profile* info = SessionManager::instance()->profile(profileKey);
-
     Q_ASSERT( info );
     
-    const ColorScheme* colorScheme = colorSchemeForProfile(profileKey);
+    const ColorScheme* colorScheme = colorSchemeForProfile(info);
 
     // menu bar visibility
     emit setMenuBarVisibleRequest( info->property<bool>(Profile::ShowMenuBar) );
@@ -751,11 +746,11 @@ void ViewManager::updateViewsForSession(Session* session)
     QListIterator<TerminalDisplay*> iter(_sessionMap.keys(session));
     while ( iter.hasNext() )
     {
-        applyProfile(iter.next(),session->profileKey());
+        applyProfile(iter.next(),SessionManager::instance()->sessionProfile(session));
     }
 }
 
-void ViewManager::profileChanged(const QString& key)
+void ViewManager::profileChanged(Profile::Ptr profile)
 {
     QHashIterator<TerminalDisplay*,Session*> iter(_sessionMap);
 
@@ -764,9 +759,11 @@ void ViewManager::profileChanged(const QString& key)
         iter.next();
 
         // if session uses this profile, update the display
-        if ( iter.key() != 0 && iter.value() != 0 && iter.value()->profileKey() == key )
+        if ( iter.key() != 0 && 
+			 iter.value() != 0 && 
+			 SessionManager::instance()->sessionProfile(iter.value()) == profile ) 
         {
-            applyProfile(iter.key(),key);
+            applyProfile(iter.key(),profile);
         }
     }
 }

@@ -27,7 +27,6 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QList>
 #include <QtCore/QSignalMapper>
-#include <QtCore/QStack>
 #include <QtCore/QString>
 #include <QtCore/QTextCodec>
 
@@ -77,7 +76,7 @@ SessionManager::SessionManager()
             SLOT(sessionTerminated(QObject*)) );
 
     //load fallback profile
-    addProfile( new FallbackProfile );
+    addProfile( Profile::Ptr(new FallbackProfile) );
 
     //locate and load default profile
     KSharedConfigPtr appConfig = KGlobal::config();
@@ -87,20 +86,20 @@ SessionManager::SessionManager()
     QString path = KGlobal::dirs()->findResource("data","konsole/"+defaultSessionFilename);
     if (!path.isEmpty())
     {
-        const QString& key = loadProfile(path);
-        if ( !key.isEmpty() )
-            _defaultProfile = key;
+        Profile::Ptr profile = loadProfile(path);
+        if ( profile )
+            _defaultProfile = profile;
     }
 
     Q_ASSERT( _types.count() > 0 );
-    Q_ASSERT( !_defaultProfile.isEmpty() );
+    Q_ASSERT( _defaultProfile );
 
     // get shortcuts and paths of profiles associated with
     // them - this doesn't load the shortcuts themselves,
     // that is done on-demand.
     loadShortcuts();
 }
-QString SessionManager::loadProfile(const QString& shortPath)
+Profile::Ptr SessionManager::loadProfile(const QString& shortPath)
 {
     QString path = shortPath;
 
@@ -115,24 +114,28 @@ QString SessionManager::loadProfile(const QString& shortPath)
     if ( !fileInfo.isAbsolute() )
         path = KStandardDirs::locate("data",path);
 
+    // check that we have not already loaded this profile
+    QSetIterator<Profile::Ptr> iter(_types);
+    while ( iter.hasNext() )
+    {
+        Profile::Ptr profile = iter.next();
+        if ( profile->path() == path )
+            return profile;
+    }
+
 	// guard to prevent problems if a profile specifies itself as its parent
 	// or if there is recursion in the "inheritance" chain
 	// (eg. two profiles, A and B, specifying each other as their parents)
 	static QStack<QString> recursionGuard;
+	PopStackOnExit<QString> popGuardOnExit(recursionGuard);
+
 	if (recursionGuard.contains(path))
-		return QString();
+	{
+		kWarning() << "Ignoring attempt to load profile recursively from" << path;
+		return Profile::Ptr();
+	}
 	else
 		recursionGuard.push(path);
-
-
-    // check that we have not already loaded this profile
-    QHashIterator<QString,Profile*> iter(_types);
-    while ( iter.hasNext() )
-    {
-        iter.next();
-        if ( iter.value()->path() == path )
-            return iter.key();
-    }
 
     // load the profile
     ProfileReader* reader = 0;
@@ -143,32 +146,34 @@ QString SessionManager::loadProfile(const QString& shortPath)
 
     if (!reader)
 	{
-		recursionGuard.pop();
-        return QString();
+		kWarning() << "Could not create loader to read profile from" << path;
+        return Profile::Ptr();
 	}
 
-    Profile* newProfile = new Profile(defaultProfile());
+    Profile::Ptr newProfile = Profile::Ptr(new Profile(defaultProfile()));
     newProfile->setProperty(Profile::Path,path);
 
-    QString parentProfile;
-    bool result = reader->readProfile(path,newProfile,parentProfile);
+    QString parentProfilePath;
+    bool result = reader->readProfile(path,newProfile,parentProfilePath);
 
-    if ( !parentProfile.isEmpty() )
+    if ( !parentProfilePath.isEmpty() )
     {
-        QString parentKey = loadProfile(parentProfile);
-        newProfile->setParent(profile(parentKey));
+        Profile::Ptr parentProfile = loadProfile(parentProfilePath);
+        newProfile->setParent(parentProfile);
     }
 
     delete reader;
-	recursionGuard.pop();
 
     if (!result)
     {
-        delete newProfile;
-        return QString();
+		kWarning() << "Could not load profile from " << path;
+        return Profile::Ptr();
     }
     else
-        return addProfile(newProfile);
+	{
+        addProfile(newProfile);
+		return newProfile;
+	}
 }
 QList<QString> SessionManager::availableProfilePaths() const
 {
@@ -212,12 +217,6 @@ SessionManager::~SessionManager()
         session->close();
         delete session;
     }
-    
-    // free profiles
-    QListIterator<Profile*> infoIter(_types.values());
-
-    while (infoIter.hasNext())
-        delete infoIter.next();
 }
 
 const QList<Session*> SessionManager::sessions()
@@ -227,7 +226,7 @@ const QList<Session*> SessionManager::sessions()
 
 void SessionManager::updateSession(Session* session)
 {
-    Profile* info = profile(session->profileKey());
+    Profile::Ptr info = _sessionProfiles[session]; 
 
     Q_ASSERT( info );
 
@@ -238,27 +237,22 @@ void SessionManager::updateSession(Session* session)
     emit sessionUpdated(session);
 }
 
-Session* SessionManager::createSession(const QString& key )
+Session* SessionManager::createSession(Profile::Ptr info)
 {
     Session* session = 0;
     
-    const Profile* info = 0;
-
-    if ( key.isEmpty() )
-        info = defaultProfile();
-    else
-        info = _types[key];
+	if (!info)
+		info = defaultProfile();
+   
+    if (!_types.contains(info))
+		addProfile(info);
 
     //configuration information found, create a new session based on this
     session = new Session();
-    session->setProfileKey(key);
     applyProfile(session,info,false);
 
-    connect( session , SIGNAL(profileChanged(const QString&)) , this , 
-            SLOT(sessionProfileChanged()) );
-
-    connect( session , SIGNAL(profileChangeCommandReceived(const QString&)) , this ,
-            SLOT(sessionProfileCommandReceived(const QString&)) );
+    connect( session , SIGNAL(profileChangeCommandReceived(QString)) , this ,
+            SLOT(sessionProfileCommandReceived(QString)) );
 
     //ask for notification when session dies
     _sessionMapper->setMapping(session,session);
@@ -267,6 +261,7 @@ Session* SessionManager::createSession(const QString& key )
 
     //add session to active list
     _sessions << session;
+	_sessionProfiles.insert(session,info);
 
     Q_ASSERT( session );
 
@@ -283,33 +278,17 @@ void SessionManager::sessionTerminated(QObject* sessionObject)
     session->deleteLater();
 }
 
-QList<QString> SessionManager::loadedProfiles() const
+QList<Profile::Ptr> SessionManager::loadedProfiles() const
 {
-    return _types.keys();
+    return _types.toList();
 }
 
-Profile* SessionManager::profile(const QString& key) const
-{
-    if ( key.isEmpty() )
-        return defaultProfile();
-
-    if ( _types.contains(key) )
-        return _types[key];
-    else
-        return 0;
-}
-
-Profile* SessionManager::defaultProfile() const
-{
-    return _types[_defaultProfile];
-}
-
-QString SessionManager::defaultProfileKey() const
+Profile::Ptr SessionManager::defaultProfile() const
 {
     return _defaultProfile;
 }
 
-QString SessionManager::saveProfile(Profile* info)
+QString SessionManager::saveProfile(Profile::Ptr info)
 {
     ProfileWriter* writer = new KDE4ProfileWriter;
 
@@ -322,16 +301,10 @@ QString SessionManager::saveProfile(Profile* info)
     return newPath;
 }
 
-void SessionManager::changeProfile(const QString& key , 
+void SessionManager::changeProfile(Profile::Ptr info , 
                                    QHash<Profile::Property,QVariant> propertyMap, bool persistant)
 {
-    Profile* info = profile(key);
-
-    if (!info || key.isEmpty())
-    {
-        kWarning() << "Profile for key" << key << "not found.";
-        return;
-    }
+    Q_ASSERT(info); 
 
     // insert the changes into the existing Profile instance
     QListIterator<Profile::Property> iter(propertyMap.keys());
@@ -342,10 +315,10 @@ void SessionManager::changeProfile(const QString& key ,
     }
     
     // apply the changes to existing sessions
-    applyProfile(key,true);
+    applyProfile(info,true);
 
     // notify the world about the change
-    emit profileChanged(key);
+    emit profileChanged(info);
 
 	// save changes to disk, unless the profile is hidden, in which case
 	// it has no file on disk 
@@ -354,23 +327,30 @@ void SessionManager::changeProfile(const QString& key ,
         info->setProperty(Profile::Path,saveProfile(info));
 	}
 }
-void SessionManager::applyProfile(const QString& key , bool modifiedPropertiesOnly)
+void SessionManager::applyProfile(Profile::Ptr info , bool modifiedPropertiesOnly)
 {
-    Profile* info = profile(key);
-
     QListIterator<Session*> iter(_sessions);
     while ( iter.hasNext() )
     {
         Session* next = iter.next();
-        if ( next->profileKey() == key )
+        if ( _sessionProfiles[next] == info )
             applyProfile(next,info,modifiedPropertiesOnly);        
     }
 }
-void SessionManager::applyProfile(Session* session, const Profile* info , bool modifiedPropertiesOnly)
+Profile::Ptr SessionManager::sessionProfile(Session* session) const
 {
-    QString key = _types.key((Profile*)info);
-    if ( session->profileKey() != key )
-        session->setProfileKey(key); 
+	return _sessionProfiles[session];
+}
+void SessionManager::setSessionProfile(Session* session, Profile::Ptr profile)
+{
+	_sessionProfiles[session] = profile;
+	updateSession(session);
+}
+void SessionManager::applyProfile(Session* session, const Profile::Ptr info , bool modifiedPropertiesOnly)
+{
+	Q_ASSERT(info);
+
+    _sessionProfiles[session] = info;
 
 	ShouldApplyProperty apply(info,modifiedPropertiesOnly);
 
@@ -438,36 +418,18 @@ void SessionManager::applyProfile(Session* session, const Profile* info , bool m
     } 
 }
 
-QString SessionManager::addProfile(Profile* type)
+void SessionManager::addProfile(Profile::Ptr type)
 {
-    QString key;
-
-    // choose a key for the Profile
-    for ( int counter = 0;;counter++ )
-    {
-        //if ( !_types.contains(type->path() + QString::number(counter)) )
-        
-        if ( !_types.contains(type->name() + QString::number(counter)) )
-        {
-            key = type->name() + QString::number(counter);
-            break;
-        }
-    }
-
     if ( _types.isEmpty() )
-        _defaultProfile = key;
+        _defaultProfile = type;
  
-    _types.insert(key,type);
+    _types.insert(type);
 
-    emit profileAdded(key);
-
-    return key;
+    emit profileAdded(type);
 }
 
-bool SessionManager::deleteProfile(const QString& key)
+bool SessionManager::deleteProfile(Profile::Ptr type)
 {
-    Profile* type = profile(key);
-
     bool wasDefault = ( type == defaultProfile() );
 
     if ( type )
@@ -484,29 +446,30 @@ bool SessionManager::deleteProfile(const QString& key)
             }
         }
 
-        setFavorite(key,false);
-        _types.remove(key);
-        delete type;
+        setFavorite(type,false);
+        _types.remove(type);
+
+		// mark the profile as hidden so that it does not show up in the 
+		// Manage Profiles dialog and is not saved to disk
+		type->setHidden(true);
     }
 
     // if we just deleted the default session type,
-    // replace it with the first type in the list
+    // replace it with a random type from the list
     if ( wasDefault )
     {
-        setDefaultProfile( _types.keys().first() );
+        setDefaultProfile( _types.toList().first() );
     }
 
-    emit profileRemoved(key);
+    emit profileRemoved(type);
 
     return true; 
 }
-void SessionManager::setDefaultProfile(const QString& key)
+void SessionManager::setDefaultProfile(Profile::Ptr info)
 {
-   Q_ASSERT ( _types.contains(key) );
+   Q_ASSERT ( _types.contains(info) );
 
-   _defaultProfile = key;
-
-   Profile* info = profile(key);
+   _defaultProfile = info;
 
    QString path = info->path();  
    
@@ -515,34 +478,32 @@ void SessionManager::setDefaultProfile(const QString& key)
 
    QFileInfo fileInfo(path);
 
-   //kDebug() << "setting default session type to " << fileInfo.fileName();
-
    KSharedConfigPtr config = KGlobal::config();
    KConfigGroup group = config->group("Desktop Entry");
    group.writeEntry("DefaultProfile",fileInfo.fileName());
 }
-QSet<QString> SessionManager::findFavorites() 
+QSet<Profile::Ptr> SessionManager::findFavorites() 
 {
     if (_favorites.isEmpty())
         loadFavorites();
 
     return _favorites;
 }
-void SessionManager::setFavorite(const QString& key , bool favorite)
+void SessionManager::setFavorite(Profile::Ptr info , bool favorite)
 {
-    Q_ASSERT( _types.contains(key) );
+	if (!_types.contains(info))
+		addProfile(info);
 
-    if ( favorite && !_favorites.contains(key) )
+    if ( favorite && !_favorites.contains(info) )
     {
-        _favorites.insert(key);
-        emit favoriteStatusChanged(key,favorite);
+        _favorites.insert(info);
+        emit favoriteStatusChanged(info,favorite);
     }
-    else if ( !favorite && _favorites.contains(key) )
+    else if ( !favorite && _favorites.contains(info) )
     {
-        _favorites.remove(key);
-        emit favoriteStatusChanged(key,favorite);
+        _favorites.remove(info);
+        emit favoriteStatusChanged(info,favorite);
     }
-
 }
 void SessionManager::loadShortcuts()
 {
@@ -582,20 +543,20 @@ void SessionManager::saveShortcuts()
                 iter.value().profilePath);
     }    
 }
-void SessionManager::setShortcut(const QString& profileKey , 
+void SessionManager::setShortcut(const Profile::Ptr info , 
                                  const QKeySequence& keySequence )
 {
-    QKeySequence existingShortcut = shortcut(profileKey);
+    QKeySequence existingShortcut = shortcut(info);
     _shortcuts.remove(existingShortcut);
 
     ShortcutData data;
-    data.profileKey = profileKey;
-    data.profilePath = profile(profileKey)->path();
+    data.profileKey = info;
+    data.profilePath = info->path();
     // TODO - This won't work if the profile doesn't 
     // have a path yet
     _shortcuts.insert(keySequence,data);
 
-	emit shortcutChanged(profileKey,keySequence);
+	emit shortcutChanged(info,keySequence);
 }
 void SessionManager::loadFavorites()
 {
@@ -617,14 +578,14 @@ void SessionManager::loadFavorites()
     }
 
     // look for favorites amongst those already loaded
-    QHashIterator<QString,Profile*> iter(_types);
+    QSetIterator<Profile::Ptr> iter(_types);
     while ( iter.hasNext() )
     {
-         iter.next();
-         const QString& path = iter.value()->path();
+         Profile::Ptr profile = iter.next();
+         const QString& path = profile->path();
          if ( favoriteSet.contains( path ) )
          {
-             _favorites.insert( iter.key() );
+             _favorites.insert( profile );
              favoriteSet.remove(path);
          }
     }
@@ -632,9 +593,9 @@ void SessionManager::loadFavorites()
     QSetIterator<QString> unloadedFavoriteIter(favoriteSet);
     while ( unloadedFavoriteIter.hasNext() )
     {
-          const QString& key = loadProfile(unloadedFavoriteIter.next());
-          if (!key.isEmpty())
-              _favorites.insert(key);
+          Profile::Ptr profile = loadProfile(unloadedFavoriteIter.next());
+          if (profile)
+              _favorites.insert(profile);
     } 
 }
 void SessionManager::saveFavorites()
@@ -643,14 +604,14 @@ void SessionManager::saveFavorites()
     KConfigGroup favoriteGroup = appConfig->group("Favorite Profiles");
 
     QStringList paths;
-    QSetIterator<QString> keyIter(_favorites);
+    QSetIterator<Profile::Ptr> keyIter(_favorites);
     while ( keyIter.hasNext() )
     {
-        const QString& key = keyIter.next();
+        Profile::Ptr profile = keyIter.next();
 
-        Q_ASSERT( _types.contains(key) && profile(key) != 0 );
+        Q_ASSERT( _types.contains(profile) && profile );
 
-        paths << profile(key)->path();
+        paths << profile->path();
     }
 
     favoriteGroup.writeEntry("Favorites",paths);
@@ -661,25 +622,17 @@ QList<QKeySequence> SessionManager::shortcuts()
     return _shortcuts.keys();
 }
 
-QString SessionManager::findByShortcut(const QKeySequence& shortcut)
+Profile::Ptr SessionManager::findByShortcut(const QKeySequence& shortcut)
 {
     Q_ASSERT( _shortcuts.contains(shortcut) );
 
-    if ( _shortcuts[shortcut].profileKey.isEmpty() )
+    if ( !_shortcuts[shortcut].profileKey )
     {
-        QString key = loadProfile(_shortcuts[shortcut].profilePath);
+        Profile::Ptr key = loadProfile(_shortcuts[shortcut].profilePath);
         _shortcuts[shortcut].profileKey = key;
     }
 
     return _shortcuts[shortcut].profileKey;
-}
-
-void SessionManager::sessionProfileChanged()
-{
-    Session* session = qobject_cast<Session*>(sender());
-    Q_ASSERT( session );
-
-    updateSession(session); 
 }
 
 void SessionManager::sessionProfileCommandReceived(const QString& text)
@@ -694,7 +647,7 @@ void SessionManager::sessionProfileCommandReceived(const QString& text)
     ProfileCommandParser parser;
     QHash<Profile::Property,QVariant> changes = parser.parse(text);
 
-    Profile* newProfile = new Profile( profile(session->profileKey()) );
+    Profile::Ptr newProfile = Profile::Ptr(new Profile(_sessionProfiles[session]));
     
     QHashIterator<Profile::Property,QVariant> iter(changes);
     while ( iter.hasNext() )
@@ -703,18 +656,16 @@ void SessionManager::sessionProfileCommandReceived(const QString& text)
         newProfile->setProperty(iter.key(),iter.value());
     } 
 
-    session->setProfileKey( addProfile(newProfile) );
+	_sessionProfiles[session] = newProfile;
 }
 
-QKeySequence SessionManager::shortcut(const QString& profileKey) const
+QKeySequence SessionManager::shortcut(Profile::Ptr info) const
 {
-    Profile* info = profile(profileKey);
-
     QMapIterator<QKeySequence,ShortcutData> iter(_shortcuts);
     while (iter.hasNext())
     {
         iter.next();
-        if ( iter.value().profileKey == profileKey 
+        if ( iter.value().profileKey == info 
              || iter.value().profilePath == info->path() )
             return iter.key();
     }

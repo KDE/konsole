@@ -25,6 +25,9 @@
 #include <KParts/Part>
 #include <kde_terminal_interface.h>
 
+// Konsole
+#include "Profile.h"
+
 class QAction;
 class QStringList;
 
@@ -106,9 +109,9 @@ protected:
     virtual bool openFile();
 
 private slots:
-    // creates a new session using the specified key.
+    // creates a new session using the specified profile.
     // call the run() method on the returned Session instance to begin the session
-    Session* createSession(const QString& key);
+    Session* createSession(const Profile::Ptr profile = Profile::Ptr());
     void activeViewChanged(SessionController* controller);
 	void activeViewTitleChanged(ViewProperties* properties);
 	void showManageProfilesDialog();

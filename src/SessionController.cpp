@@ -52,6 +52,7 @@
 #include "ProcessInfo.h"
 #include "ProfileList.h"
 #include "TerminalDisplay.h"
+#include "SessionManager.h"
 
 // for SaveHistoryTask
 #include <KFileDialog>
@@ -584,17 +585,17 @@ void SessionController::setupActions()
     //action->setText( "Get Foreground Process" );
     //connect( action , SIGNAL(triggered()) , this , SLOT(debugProcess()) );
 }
-void SessionController::changeProfile(const QString& key)
+void SessionController::changeProfile(Profile::Ptr profile)
 {
-    _session->setProfileKey(key);
+	SessionManager::instance()->setSessionProfile(_session,profile);	
 }
 void SessionController::prepareChangeProfileMenu()
 {
     if ( _changeProfileMenu->isEmpty() )
     {
         _profileList = new ProfileList(false,this);
-        connect( _profileList , SIGNAL(profileSelected(const QString&)) ,
-                this , SLOT(changeProfile(const QString&)) );
+        connect( _profileList , SIGNAL(profileSelected(Profile::Ptr)) ,
+                this , SLOT(changeProfile(Profile::Ptr)) );
     }
 
     _changeProfileMenu->clear();
@@ -651,7 +652,7 @@ void SessionController::editCurrentProfile()
 {
     EditProfileDialog* dialog = new EditProfileDialog( QApplication::activeWindow() );
 
-    dialog->setProfile(_session->profileKey());
+    dialog->setProfile(SessionManager::instance()->sessionProfile(_session));
     dialog->show();
 }
 void SessionController::renameSession()

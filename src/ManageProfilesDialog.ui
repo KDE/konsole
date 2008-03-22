@@ -89,9 +89,6 @@
      <property name="whatsThis" >
       <string/>
      </property>
-     <property name="frameShadow" >
-      <enum>QFrame::Plain</enum>
-     </property>
      <property name="alternatingRowColors" >
       <bool>true</bool>
      </property>

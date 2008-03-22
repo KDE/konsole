@@ -30,6 +30,9 @@
 // KDE
 #include <KDialog>
 
+// Local
+#include "Profile.h"
+
 class QAbstractButton;
 class QItemSelectionModel;
 class QTextCodec;
@@ -76,7 +79,7 @@ public:
      *
      * @param key The key for the session type provided by the SessionManager instance
      */
-    void setProfile(const QString& key);
+    void setProfile(Profile::Ptr profile);
 
     /** 
      * Selects the text in the profile name edit area. 
@@ -168,12 +171,12 @@ private slots:
 
 private:
     // initialize various pages of the dialog
-    void setupGeneralPage(const Profile* info);
-    void setupTabsPage(const Profile* info);
-    void setupAppearancePage(const Profile* info);
-    void setupKeyboardPage(const Profile* info);
-    void setupScrollingPage(const Profile* info);
-    void setupAdvancedPage(const Profile* info);
+    void setupGeneralPage(const Profile::Ptr info);
+    void setupTabsPage(const Profile::Ptr info);
+    void setupAppearancePage(const Profile::Ptr info);
+    void setupKeyboardPage(const Profile::Ptr info);
+    void setupScrollingPage(const Profile::Ptr info);
+    void setupAdvancedPage(const Profile::Ptr info);
 
     void updateColorSchemeList(bool selectCurrentScheme = false);
     void updateColorSchemeButtons();
@@ -207,13 +210,13 @@ private:
        int property;
        const char* slot;
     };
-    void setupCombo(ComboOption* options , const Profile* profile);
+    void setupCombo(ComboOption* options , const Profile::Ptr profile);
 
-    const Profile* lookupProfile() const;
+    const Profile::Ptr lookupProfile() const;
 
     Ui::EditProfileDialog* _ui;
-    Profile* _tempProfile;
-    QString _profileKey;
+    Profile::Ptr _tempProfile;
+    Profile::Ptr _profileKey;
 
     // keeps track of pages which need to be updated to match the current
     // profile.  all elements in this vector are set to true when the 

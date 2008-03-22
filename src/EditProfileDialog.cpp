@@ -50,7 +50,6 @@
 #include "ui_EditProfileDialog.h"
 #include "KeyBindingEditor.h"
 #include "KeyboardTranslator.h"
-#include "Profile.h"
 #include "SessionManager.h"
 #include "ShellCommand.h"
 #include "TabTitleFormatAction.h"
@@ -91,11 +90,11 @@ EditProfileDialog::EditProfileDialog(QWidget* parent)
             SLOT(preparePage(int)) );
 
     _tempProfile = new Profile;
+	_tempProfile->setHidden(true);
 }
 EditProfileDialog::~EditProfileDialog()
 {
     delete _ui;
-    delete _tempProfile;
 }
 void EditProfileDialog::save()
 {
@@ -128,16 +127,14 @@ void EditProfileDialog::updateCaption(const QString& profileName)
 {
     setCaption( i18n("Edit Profile \"%1\"",profileName) );
 }
-void EditProfileDialog::setProfile(const QString& key)
+void EditProfileDialog::setProfile(Profile::Ptr profile)
 {
-    _profileKey = key;
+    _profileKey = profile;
 
-    const Profile* info = SessionManager::instance()->profile(key);
-
-    Q_ASSERT( info );
+    Q_ASSERT( profile );
 
     // update caption
-    updateCaption(info->name());
+    updateCaption(profile->name());
 
     // mark each page of the dialog as out of date
     // and force an update of the currently visible page
@@ -148,17 +145,16 @@ void EditProfileDialog::setProfile(const QString& key)
 
     if ( _tempProfile )
     {
-        delete _tempProfile;
         _tempProfile = new Profile;
     }
 }
-const Profile* EditProfileDialog::lookupProfile() const
+const Profile::Ptr EditProfileDialog::lookupProfile() const
 {
-    return SessionManager::instance()->profile(_profileKey);
+    return _profileKey; 
 }
 void EditProfileDialog::preparePage(int page)
 {
-    const Profile* info = lookupProfile();
+    const Profile::Ptr info = lookupProfile();
 
     Q_ASSERT( _pageNeedsUpdate.count() > page );
     Q_ASSERT( info );
@@ -194,7 +190,7 @@ void EditProfileDialog::selectProfileName()
     _ui->profileNameEdit->selectAll();
     _ui->profileNameEdit->setFocus();
 }
-void EditProfileDialog::setupGeneralPage(const Profile* info)
+void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
 {
 
     // basic profile options
@@ -238,7 +234,7 @@ void EditProfileDialog::setupGeneralPage(const Profile* info)
 }
 void EditProfileDialog::showEnvironmentEditor()
 {
-    const Profile* info = lookupProfile();
+    const Profile::Ptr info = lookupProfile();
 
     KDialog* dialog = new KDialog(this);
     QTextEdit* edit = new QTextEdit(dialog);
@@ -257,7 +253,7 @@ void EditProfileDialog::showEnvironmentEditor()
 
     dialog->deleteLater();
 }
-void EditProfileDialog::setupTabsPage(const Profile* info)
+void EditProfileDialog::setupTabsPage(const Profile::Ptr info)
 {
     // tab title format
     _ui->tabTitleEdit->setClearButtonShown(true);
@@ -372,7 +368,7 @@ void EditProfileDialog::selectInitialDir()
     if ( !url.isEmpty() )
         _ui->initialDirEdit->setText(url.path());
 }
-void EditProfileDialog::setupAppearancePage(const Profile* info)
+void EditProfileDialog::setupAppearancePage(const Profile::Ptr info)
 {
     ColorSchemeViewDelegate* delegate = new ColorSchemeViewDelegate(this);
     _ui->colorSchemeList->setItemDelegate(delegate);
@@ -609,7 +605,7 @@ void EditProfileDialog::preview(int property , const QVariant& value)
     
     _delayedPreviewProperties.remove(property);
 
-    const Profile* original = lookupProfile();
+    const Profile::Ptr original = lookupProfile();
 
     if (!_previewedProperties.contains(property))    
         _previewedProperties.insert(property , original->property<QVariant>((Profile::Property)property) );
@@ -729,7 +725,7 @@ void EditProfileDialog::updateTransparencyWarning()
         _ui->transparencyWarningIcon->setPixmap( KIcon("dialog-warning").pixmap(QSize(48,48)) );
     }
 }
-void EditProfileDialog::setupKeyboardPage(const Profile* /* info */)
+void EditProfileDialog::setupKeyboardPage(const Profile::Ptr /* info */)
 {
     // setup translator list
     updateKeyBindingsList(true); 
@@ -829,7 +825,7 @@ void EditProfileDialog::editKeyBinding()
 {
     showKeyBindingEditor(false);
 }
-void EditProfileDialog::setupCombo( ComboOption* options , const Profile* profile )
+void EditProfileDialog::setupCombo( ComboOption* options , const Profile::Ptr profile )
 {
     while ( options->button != 0 )
     {
@@ -854,7 +850,7 @@ void EditProfileDialog::setupRadio( RadioOption* possible , int actual )
     }
 }
 
-void EditProfileDialog::setupScrollingPage(const Profile* profile)
+void EditProfileDialog::setupScrollingPage(const Profile::Ptr profile)
 {
     // setup scrollbar radio
     int scrollBarPosition = profile->property<int>(Profile::ScrollBarPosition);
@@ -912,7 +908,7 @@ void EditProfileDialog::showScrollBarRight()
 {
     _tempProfile->setProperty(Profile::ScrollBarPosition , Profile::ScrollBarRight );
 }
-void EditProfileDialog::setupAdvancedPage(const Profile* profile)
+void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
 {
     ComboOption  options[] = { { _ui->enableBlinkingTextButton , Profile::BlinkingTextEnabled , 
                                  SLOT(toggleBlinkingText(bool)) },

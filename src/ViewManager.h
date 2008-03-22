@@ -25,6 +25,9 @@
 #include <QtCore/QObject>
 #include <QtCore/QPointer>
 
+// Konsole
+#include "Profile.h"
+
 class QSignalMapper;
 
 class KActionCollection;
@@ -84,7 +87,7 @@ public:
      * Applies the view-specific settings associated with specified @p profile
      * to the terminal display @p view.
      */
-    void applyProfile(TerminalDisplay* view , const QString& profile);
+    void applyProfile(TerminalDisplay* view , const Profile::Ptr profile);
 
     /** 
      * Return the main widget for the view manager which
@@ -226,7 +229,7 @@ private slots:
     void containerViewsChanged(QObject* container);
 
     // called when a profile changes
-    void profileChanged(const QString& key);
+    void profileChanged(Profile::Ptr profile);
 
     void updateViewsForSession(Session* session);
 
@@ -242,7 +245,7 @@ private slots:
 	void controllerChanged(SessionController* controller);
 
 private:
-    const ColorScheme* colorSchemeForProfile(const QString& key) const;
+    const ColorScheme* colorSchemeForProfile(const Profile::Ptr profile) const;
 
     void setupActions();
     void focusActiveView();
@@ -255,9 +258,9 @@ private:
     void splitView(Qt::Orientation orientation);
     
     // creates a new container which can hold terminal displays
-    // 'key' specifies the profile to use to get initial
+    // 'profile' specifies the profile to use to get initial
     // settings (eg. navigation position) for the container
-    ViewContainer* createContainer(const QString& profileKey);
+    ViewContainer* createContainer(const Profile::Ptr profile);
     // removes a container and emits appropriate signals
     void removeContainer(ViewContainer* container);
 

@@ -23,6 +23,9 @@
 // KDE 
 #include <KUniqueApplication>
 
+// Konsole
+#include "Profile.h"
+
 class KCmdLineArgs;
 
 namespace Konsole
@@ -72,8 +75,8 @@ public:
     static Application* self();
 
 private slots:
-    Session* createSession(const QString& key, const QString& directory , ViewManager* view);
-    void createWindow(const QString& key , const QString& directory);
+    Session* createSession(Profile::Ptr profile, const QString& directory , ViewManager* view);
+    void createWindow(Profile::Ptr profile , const QString& directory);
     void detachView(Session* session);
 
     void toggleBackgroundInstance();

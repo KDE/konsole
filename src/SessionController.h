@@ -36,6 +36,7 @@
 // Konsole
 #include "HistorySizeDialog.h"
 #include "ViewProperties.h"
+#include "Profile.h"
 
 namespace KIO
 {
@@ -182,7 +183,7 @@ private slots:
     void decreaseTextSize();
     void renameSession();
     void saveSession();
-    void changeProfile(const QString& key);
+    void changeProfile(Profile::Ptr profile);
 
     // other
     void prepareChangeProfileMenu();

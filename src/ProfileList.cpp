@@ -48,27 +48,25 @@ ProfileList::ProfileList(bool addShortcuts , QObject* parent)
     _emptyListAction = new QAction(i18n("No profiles available"),_group);
     _emptyListAction->setEnabled(false);
     
-
-    QList<QString> list = manager->findFavorites().toList();
-    qSort(list);
-    QListIterator<QString> iter(list);
+	// TODO Sort list in alphabetical order
+    QList<Profile::Ptr> list = manager->findFavorites().toList();
+    QListIterator<Profile::Ptr> iter(list);
 
     while (iter.hasNext())
     {
-        const QString& key = iter.next();
-        favoriteChanged(key,true);        
+        favoriteChanged(iter.next(),true);        
     }
 
     connect( _group , SIGNAL(triggered(QAction*)) , this , SLOT(triggered(QAction*)) );
 
 
     // listen for future changes to the session list
-    connect( manager , SIGNAL(favoriteStatusChanged(const QString&,bool)) , this ,
-             SLOT(favoriteChanged(const QString&,bool)) );
-	connect( manager , SIGNAL(shortcutChanged(QString,QKeySequence)) , this , 
-			 SLOT(shortcutChanged(QString,QKeySequence)) );
-    connect( manager , SIGNAL(profileChanged(const QString&)) , this , 
-             SLOT(profileChanged(const QString&)) );
+    connect( manager , SIGNAL(favoriteStatusChanged(Profile::Ptr,bool)) , this ,
+             SLOT(favoriteChanged(Profile::Ptr,bool)) );
+	connect( manager , SIGNAL(shortcutChanged(Profile::Ptr,QKeySequence)) , this , 
+			 SLOT(shortcutChanged(Profile::Ptr,QKeySequence)) );
+    connect( manager , SIGNAL(profileChanged(Profile::Ptr)) , this , 
+             SLOT(profileChanged(Profile::Ptr)) );
 }
 void ProfileList::updateEmptyAction() 
 {
@@ -82,26 +80,26 @@ void ProfileList::updateEmptyAction()
     if ( showEmptyAction != _emptyListAction->isVisible() )
         _emptyListAction->setVisible(showEmptyAction);
 }
-QAction* ProfileList::actionForKey(const QString& key) const
+QAction* ProfileList::actionForKey(Profile::Ptr key) const
 {        
     QListIterator<QAction*> iter(_group->actions());
     while ( iter.hasNext() )
     {
         QAction* next = iter.next();
-        if ( next->data() == key )
+        if ( next->data().value<Profile::Ptr>() == key )
             return next;
     }
     return 0; // not found
 }
 
-void ProfileList::profileChanged(const QString& key)
+void ProfileList::profileChanged(Profile::Ptr key)
 {
     QAction* action = actionForKey(key);
     if ( action )
-        updateAction(action,SessionManager::instance()->profile(key));
+        updateAction(action,key);
 }
 
-void ProfileList::updateAction(QAction* action , Profile* info)
+void ProfileList::updateAction(QAction* action , Profile::Ptr info)
 {
     Q_ASSERT(action);
     Q_ASSERT(info);
@@ -109,32 +107,30 @@ void ProfileList::updateAction(QAction* action , Profile* info)
     action->setText(info->name());
     action->setIcon(KIcon(info->icon()));
 }
-void ProfileList::shortcutChanged(const QString& key,const QKeySequence& sequence)
+void ProfileList::shortcutChanged(Profile::Ptr info,const QKeySequence& sequence)
 {
 	if ( !_addShortcuts )
 		return;
 
-	QAction* action = actionForKey(key);
+	QAction* action = actionForKey(info);
 
 	if ( action )
 	{
 		action->setShortcut(sequence);
 	}
 }
-void ProfileList::favoriteChanged(const QString& key,bool isFavorite)
+void ProfileList::favoriteChanged(Profile::Ptr info,bool isFavorite)
 {
     SessionManager* manager = SessionManager::instance();
 
     if ( isFavorite )
     {
-        Profile* info = manager->profile(key);
-
         QAction* action = new QAction(_group);
-        action->setData( key );
+        action->setData( QVariant::fromValue(info) );
         
         if ( _addShortcuts )
         {
-            action->setShortcut(manager->shortcut(key));
+            action->setShortcut(manager->shortcut(info));
         }
 
         updateAction(action,info);
@@ -143,7 +139,7 @@ void ProfileList::favoriteChanged(const QString& key,bool isFavorite)
     }
     else
     {
-        QAction* action = actionForKey(key);
+        QAction* action = actionForKey(info);
 
         if ( action )
         {
@@ -157,10 +153,7 @@ void ProfileList::favoriteChanged(const QString& key,bool isFavorite)
 
 void ProfileList::triggered(QAction* action)
 {
-    // assert that session key is still valid
-    Q_ASSERT( SessionManager::instance()->profile( action->data().toString() ) );
-
-    emit profileSelected( action->data().toString() );
+    emit profileSelected( action->data().value<Profile::Ptr>() );
 }
 
 QList<QAction*> ProfileList::actions()

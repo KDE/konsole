@@ -27,6 +27,9 @@
 #include <KXmlGuiWindow>
 #include <KUrl>
 
+// Local
+#include "Profile.h"
+
 class KToggleAction;
 
 namespace Konsole
@@ -36,7 +39,6 @@ class IncrementalSearchBar;
 class ViewManager;
 class ViewProperties;
 class SessionController;
-class Profile;
 class ProfileList;
 class BookmarkHandler;
 
@@ -82,30 +84,30 @@ class MainWindow : public KXmlGuiWindow
         BookmarkHandler* bookmarkHandler() const;
 
         /**
-         * Sets the default profile key for this window.
-         * This is the default value for the key argument
+         * Sets the default profile for this window.
+         * This is the default value for the profile argument
          * when the newSessionRequest() and newWindow() signals 
          * are emitted.
          */
-        void setDefaultProfile(const QString& key);
+        void setDefaultProfile(Profile::Ptr profile);
 
         /**
-         * Returns the default profile key for this window.
+         * Returns the default profile for this window.
          * See setDefaultProfile()
          */
-        QString defaultProfile() const;
+        Profile::Ptr defaultProfile() const;
 
 		
     signals:
         /** 
          * Emitted by the main window to request the creation of a new session.
          *
-         * @param key The key for the profile to use to create the new session.
+         * @param profile The profile to use to create the new session.
          * @param directory Initial working directory for the new session or empty 
          * if the default working directory associated with the profile should be used.
          * @param view The view manager owned by this main window 
          */
-        void newSessionRequest(const QString& key , 
+        void newSessionRequest(Profile::Ptr profile,
                                const QString& directory,
                                ViewManager* view);
 
@@ -113,13 +115,13 @@ class MainWindow : public KXmlGuiWindow
          * Emitted by the main window to request the creation of a 
          * new session in a new window.
          *
-         * @param key The key for the profile to use to create the 
+         * @param profile The profile to use to create the 
          * first session in the new window.
          * @param directory Initial working directory for the new window or empty
          * if the default working directory associated with the profile should
          * be used.
          */
-        void newWindowRequest(const QString& key,
+        void newWindowRequest(Profile::Ptr profile,
                               const QString& directory);
 
         /**
@@ -137,7 +139,7 @@ class MainWindow : public KXmlGuiWindow
         void showManageProfilesDialog();
         void showRemoteConnectionDialog();
         void showShortcutsDialog();
-        void newFromProfile(const QString&);
+        void newFromProfile(Profile::Ptr profile);
         void activeViewChanged(SessionController* controller);
         void activeViewTitleChanged(ViewProperties*);
 
@@ -166,7 +168,7 @@ class MainWindow : public KXmlGuiWindow
 
         QPointer<SessionController> _pluggedController;
 
-        QString _defaultProfile;
+        Profile::Ptr _defaultProfile;
 		bool _menuBarVisibilitySet;
 };
 

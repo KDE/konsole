@@ -21,10 +21,13 @@
 #define MANAGEPROFILESDIALOG_H
 
 // Qt
-#include <QtGui/QItemDelegate>
+#include <QtGui/QStyledItemDelegate>
 
 // KDE
 #include <KDialog>
+
+// Konsole
+#include "Profile.h"
 
 class QItemSelection;
 class QShowEvent;
@@ -85,10 +88,10 @@ private slots:
     // session manager
     void updateTableModel();
 
-    void updateFavoriteStatus(const QString& key , bool favorite);
+    void updateFavoriteStatus(Profile::Ptr profile, bool favorite);
 
 private:
-    QString selectedKey() const; // return the key associated with the currently selected
+    Profile::Ptr selectedKey() const; // return the profile associated with the currently selected
                                  // item in the profile table
 
     void updateDefaultItem(); // updates the font of the items to match
@@ -102,7 +105,7 @@ private:
     static const int ShortcutRole = Qt::UserRole + 1;
 };
 
-class ProfileItemDelegate : public QItemDelegate
+class ProfileItemDelegate : public QStyledItemDelegate
 {
 public:
     ProfileItemDelegate(QObject* parent = 0);

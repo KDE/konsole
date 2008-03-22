@@ -23,6 +23,8 @@
 #include <QtCore/QList>
 #include <QtCore/QObject>
 
+#include "Profile.h"
+
 class QAction;
 class QActionGroup;
 class QKeySequence;
@@ -71,7 +73,7 @@ signals:
     * 
     * @param key The profile key associated with the selected action.
     */
-   void profileSelected(const QString& key);
+   void profileSelected(Profile::Ptr profile);
    /**
     * Emitted when the list of actions changes.
     */
@@ -79,13 +81,13 @@ signals:
 
 private slots:
     void triggered(QAction* action);
-    void favoriteChanged(const QString& key , bool isFavorite);
-	void profileChanged(const QString& key);
-	void shortcutChanged(const QString& key, const QKeySequence& sequence);
+    void favoriteChanged(Profile::Ptr profile, bool isFavorite);
+	void profileChanged(Profile::Ptr profile);
+	void shortcutChanged(Profile::Ptr profile, const QKeySequence& sequence);
 
 private:
-    QAction* actionForKey(const QString& key) const;
-    void updateAction(QAction* action , Profile* profile);
+    QAction* actionForKey(Profile::Ptr profile) const;
+    void updateAction(QAction* action , Profile::Ptr profile);
     void updateEmptyAction();
 
     QActionGroup*   _group;

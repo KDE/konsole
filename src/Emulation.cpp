@@ -163,9 +163,11 @@ const HistoryType& Emulation::history()
 
 void Emulation::setCodec(const QTextCodec * qtc)
 {
-  Q_ASSERT( qtc );
+  if (qtc)
+  	_codec = qtc;
+  else
+	 setCodec(LocaleCodec);
 
-  _codec = qtc;
   delete _decoder;
   _decoder = _codec->makeDecoder();
 

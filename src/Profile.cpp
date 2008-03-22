@@ -134,7 +134,7 @@ void Profile::fillTableWithDefaultNames()
 }
 
 FallbackProfile::FallbackProfile()
- : Profile(0)
+ : Profile()
 {
     // Fallback settings
     setProperty(Name,i18n("Shell"));
@@ -176,17 +176,21 @@ FallbackProfile::FallbackProfile()
     setHidden(true);
 }
 
-Profile::Profile(Profile* parent)
+Profile::Profile(Profile::Ptr parent)
     : _parent(parent)
      ,_hidden(false)
 {
 }
-
+Profile::~Profile()
+{
+	if (!name().isEmpty() && !isHidden())
+		kDebug() << "Destroying profile " << name();
+}
 bool Profile::isHidden() const { return _hidden; }
 void Profile::setHidden(bool hidden) { _hidden = hidden; }
 
-void Profile::setParent(Profile* parent) { _parent = parent; }
-const Profile* Profile::parent() const { return _parent; }
+void Profile::setParent(Profile::Ptr parent) { _parent = parent; }
+const Profile::Ptr Profile::parent() const { return _parent; }
 
 bool Profile::isEmpty() const
 {
@@ -244,7 +248,7 @@ void Profile::registerProperty(const PropertyInfo& info)
         _infoByProperty.insert(info.property,info);
 }
 
-QString KDE4ProfileWriter::getPath(const Profile* info)
+QString KDE4ProfileWriter::getPath(const Profile::Ptr info)
 {
     QString newPath;
 
@@ -264,7 +268,7 @@ QString KDE4ProfileWriter::getPath(const Profile* info)
     return newPath;
 }
 void KDE4ProfileWriter::writeProperties(KConfig& config,
-										const Profile* profile,
+										const Profile::Ptr profile,
 										const Profile::PropertyInfo* properties) 
 {
 	const char* groupName = 0;
@@ -288,7 +292,7 @@ void KDE4ProfileWriter::writeProperties(KConfig& config,
 		properties++;
 	}
 }
-bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile* profile)
+bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile::Ptr profile)
 {
     KConfig config(path,KConfig::NoGlobals);
 
@@ -296,7 +300,7 @@ bool KDE4ProfileWriter::writeProfile(const QString& path , const Profile* profil
 
 	// Parent profile if set, when loading the profile in future, the parent
     // must be loaded as well if it exists.
-    if ( profile->parent() != 0 )
+    if ( profile->parent() )
         general.writeEntry("Parent",profile->parent()->path());
 
 	if (    profile->isPropertySet(Profile::Command) 
@@ -315,7 +319,7 @@ QStringList KDE4ProfileReader::findProfiles()
     return KGlobal::dirs()->findAllResources("data","konsole/*.profile",
             KStandardDirs::NoDuplicates);
 }
-void KDE4ProfileReader::readProperties(const KConfig& config, Profile* profile,
+void KDE4ProfileReader::readProperties(const KConfig& config, Profile::Ptr profile,
 									   const Profile::PropertyInfo* properties)
 {
 	const char* groupName = 0;
@@ -343,7 +347,7 @@ void KDE4ProfileReader::readProperties(const KConfig& config, Profile* profile,
 	}
 }
 
-bool KDE4ProfileReader::readProfile(const QString& path , Profile* profile , QString& parentProfile)
+bool KDE4ProfileReader::readProfile(const QString& path , Profile::Ptr profile , QString& parentProfile)
 {
     KConfig config(path,KConfig::NoGlobals);
 
@@ -369,7 +373,7 @@ QStringList KDE3ProfileReader::findProfiles()
     return KGlobal::dirs()->findAllResources("data", "konsole/*.desktop", 
             KStandardDirs::NoDuplicates);
 }
-bool KDE3ProfileReader::readProfile(const QString& path , Profile* profile , QString& parentProfile)
+bool KDE3ProfileReader::readProfile(const QString& path , Profile::Ptr profile , QString& parentProfile)
 {
     if (!QFile::exists(path))
         return false;

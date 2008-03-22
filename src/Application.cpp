@@ -81,10 +81,10 @@ MainWindow* Application::newMainWindow()
     MainWindow* window = new MainWindow();
     window->setSessionList( new ProfileList(true,window) );
 
-    connect( window , SIGNAL(newSessionRequest(const QString&,const QString&,ViewManager*)), 
-                      this , SLOT(createSession(const QString&,const QString&,ViewManager*)));
-    connect( window , SIGNAL(newWindowRequest(const QString&,const QString&)),
-                      this , SLOT(createWindow(const QString&,const QString&)) );
+    connect( window , SIGNAL(newSessionRequest(Profile::Ptr,const QString&,ViewManager*)), 
+                      this , SLOT(createSession(Profile::Ptr,const QString&,ViewManager*)));
+    connect( window , SIGNAL(newWindowRequest(Profile::Ptr,const QString&)),
+                      this , SLOT(createWindow(Profile::Ptr,const QString&)) );
     connect( window->viewManager() , SIGNAL(viewDetached(Session*)) , this , SLOT(detachView(Session*)) );
 
     return window;
@@ -162,8 +162,8 @@ void Application::processProfileSelectArgs(KCmdLineArgs* args,MainWindow* window
 {
     if ( args->isSet("profile") )
     {
-        QString key = SessionManager::instance()->loadProfile(args->getOption("profile"));
-        window->setDefaultProfile(key);
+        Profile::Ptr profile = SessionManager::instance()->loadProfile(args->getOption("profile"));
+        window->setDefaultProfile(profile);
     }
 }
 
@@ -178,10 +178,8 @@ bool Application::processHelpArgs(KCmdLineArgs* args)
 }
 void Application::processProfileChangeArgs(KCmdLineArgs* args,MainWindow* window) 
 {
-	SessionManager* const manager = SessionManager::instance();
-
-	Profile* defaultProfile = manager->profile(window->defaultProfile());
-    Profile* const newProfile = new Profile(defaultProfile);
+	Profile::Ptr defaultProfile = window->defaultProfile();
+    Profile::Ptr newProfile = Profile::Ptr(new Profile(defaultProfile));
 	newProfile->setHidden(true);
 
     // run a custom command
@@ -215,13 +213,9 @@ void Application::processProfileChangeArgs(KCmdLineArgs* args,MainWindow* window
         }        
     }
 
-    if (newProfile->isEmpty())
+	if (!newProfile->isEmpty())
 	{
-		delete newProfile;
-	}
-	else
-	{
-		window->setDefaultProfile(SessionManager::instance()->addProfile(newProfile));
+		window->setDefaultProfile(newProfile); 
 	}	
 }
 
@@ -272,17 +266,17 @@ void Application::detachView(Session* session)
     window->show();
 }
 
-void Application::createWindow(const QString& key , const QString& directory)
+void Application::createWindow(Profile::Ptr profile , const QString& directory)
 {
     MainWindow* window = newMainWindow();
-    window->setDefaultProfile(key);
-    createSession(key,directory,window->viewManager());
+    window->setDefaultProfile(profile);
+    createSession(profile,directory,window->viewManager());
     window->show();
 }
 
-Session* Application::createSession(const QString& key , const QString& directory , ViewManager* view)
+Session* Application::createSession(Profile::Ptr profile, const QString& directory , ViewManager* view)
 {
-    Session* session = SessionManager::instance()->createSession(key);
+    Session* session = SessionManager::instance()->createSession(profile);
     if (!directory.isEmpty() && session->initialWorkingDirectory().isEmpty())
         session->setInitialWorkingDirectory(directory);
 

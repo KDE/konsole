@@ -101,7 +101,7 @@ Part::Part(QWidget* parentWidget , QObject* parent)
         action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
 
     // create basic session
-    createSession(QString());
+    createSession();
 }
 Part::~Part()
 {
@@ -155,7 +155,7 @@ void Part::terminalExited()
 }
 void Part::newTab()
 {
-    createSession( QString() );
+    createSession();
     showShellInDir( QString() );
 }
 Session* Part::activeSession() const
@@ -204,9 +204,9 @@ void Part::sendInput( const QString& text )
 	activeSession()->emulation()->sendText(text);
 }
 
-Session* Part::createSession(const QString& key)
+Session* Part::createSession(const Profile::Ptr profile)
 {
-    Session* session = SessionManager::instance()->createSession(key);
+    Session* session = SessionManager::instance()->createSession(profile);
     _viewManager->createView(session);
 
     return session;
@@ -254,7 +254,7 @@ void Part::showEditCurrentProfileDialog(QWidget* parent)
 
 	EditProfileDialog* dialog = new EditProfileDialog(parent);
 	dialog->setAttribute(Qt::WA_DeleteOnClose);
-	dialog->setProfile( activeSession()->profileKey() );
+	dialog->setProfile( SessionManager::instance()->sessionProfile(activeSession()) );
 	dialog->show();	
 }
 void Part::changeSessionSettings(const QString& text)
