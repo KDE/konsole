@@ -34,17 +34,19 @@ const TabTitleFormatAction::Element TabTitleFormatAction::_localElements[] =
     { "%n" , I18N_NOOP("Program Name") },
     { "%d" , I18N_NOOP("Current Directory (Short)") },
     { "%D" , I18N_NOOP("Current Directory (Long)") },
-    { "%w" , I18N_NOOP("Window Title Set by Shell") }
+    { "%w" , I18N_NOOP("Window Title Set by Shell") },
+	{ "%#" , I18N_NOOP("Session number") }
 };
-const int TabTitleFormatAction::_localElementCount = 4;
+const int TabTitleFormatAction::_localElementCount = 5;
 const TabTitleFormatAction::Element TabTitleFormatAction::_remoteElements[] =
 {
     { "%u" , I18N_NOOP("User Name") },
     { "%h" , I18N_NOOP("Remote Host (Short)") },
     { "%H" , I18N_NOOP("Remote Host (Long)") },
-    { "%w" , I18N_NOOP("Window Title Set by Shell") }
+    { "%w" , I18N_NOOP("Window Title Set by Shell") },
+	{ "%#" , I18N_NOOP("Session number") }
 };
-const int TabTitleFormatAction::_remoteElementCount = 4;
+const int TabTitleFormatAction::_remoteElementCount = 5;
 
 TabTitleFormatAction::TabTitleFormatAction(QObject* parent)
     : QAction(parent)

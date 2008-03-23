@@ -967,6 +967,9 @@ void SessionController::sessionTitleChanged()
 		// special handling for the "%w" marker which is replaced with the
 		// window title set by the shell
     	title.replace("%w",_session->userTitle());
+		// special handling for the "%#" marker which is replaced with the 
+		// number of the shell
+		title.replace("%#",QString::number(_session->sessionId()));
 
        if ( title.isEmpty() )
           title = _session->title(Session::NameRole);
