@@ -605,9 +605,10 @@ void Session::close()
 {
   _autoClose = true;
   _wantedClose = true;
+
   if (!isRunning() || !kill(SIGHUP))
   {
-     // Forced close.
+   // Forced close.
      QTimer::singleShot(1, this, SIGNAL(finished()));
   }
 }
@@ -647,7 +648,7 @@ void Session::done(int exitStatus)
                          KNotification::CloseWhenWidgetActivated);
   }
 
-  if ( _shellProcess->exitStatus() != QProcess::NormalExit )
+  if ( !_wantedClose && _shellProcess->exitStatus() != QProcess::NormalExit )
 	  terminalWarning(message);
   else
   	  emit finished();
