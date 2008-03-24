@@ -105,6 +105,7 @@ Part::Part(QWidget* parentWidget , QObject* parent)
 }
 Part::~Part()
 {
+	SessionManager::instance()->saveState();
 }
 void Part::createGlobalActions()
 {

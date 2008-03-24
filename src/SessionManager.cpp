@@ -200,9 +200,9 @@ void SessionManager::loadAllProfiles()
 
     _loadedAllProfiles = true;
 }
-SessionManager::~SessionManager()
-{   
-    // save default profile
+void SessionManager::saveState()
+{
+	// save default profile
     setDefaultProfile( _defaultProfile );
 
     // save shortcuts
@@ -210,13 +210,16 @@ SessionManager::~SessionManager()
 
     // save favorites
     saveFavorites();
-
-    // delete remaining sessions
+}
+void SessionManager::closeAll()
+{
+    // close remaining sessions
     foreach( Session* session , _sessions )
-    {
         session->close();
-        delete session;
-    }
+}
+SessionManager::~SessionManager()
+{
+	Q_ASSERT(_sessions.count() == 0);
 }
 
 const QList<Session*> SessionManager::sessions()

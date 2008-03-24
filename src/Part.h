@@ -62,7 +62,7 @@ Q_OBJECT
 public:
     /** Constructs a new Konsole part with the specified parent. */
     explicit Part(QWidget* parentWidget , QObject* parent = 0);
-    virtual ~Part();
+	virtual ~Part();
 
     /** Reimplemented from TerminalInterface. */
     virtual void startProgram( const QString& program,

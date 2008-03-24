@@ -65,7 +65,18 @@ public:
      * profiles.
      */
     SessionManager();
-    virtual ~SessionManager();
+    
+	/** 
+	 * Destroys the SessionManager.  All running sessions should be closed (via closeAll()) and the 
+	 * SessionManager's state should be saved via saveState() before the SessionManager is destroyed.
+	 */
+	virtual ~SessionManager();
+
+	/** Kill all running sessions. */
+	void closeAll();
+
+	/** Saves state information (favorites, shortcuts, default profile etc.) to disk. */
+	void saveState();
 
     /**
      * Returns a list of profiles which have been loaded.
