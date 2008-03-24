@@ -315,19 +315,13 @@ ProfileItemDelegate::ProfileItemDelegate(QObject* parent)
     : QStyledItemDelegate(parent)
 {
 }
-// Is there a simpler way of centering the decoration than re-implementing
-// drawDecoration?
-void ProfileItemDelegate::drawDecoration(QPainter* painter,
-                                         const QStyleOptionViewItem& option,
-                                         const QRect& rect,const QPixmap& pixmap) const
+void ProfileItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-    //QStyleOptionViewItem centeredOption(option);
-    //centeredOption.decorationAlignment = Qt::AlignCenter;
-    //QStyledItemDelegate::drawDecoration(painter,
-    //                              centeredOption,
-    //                              QStyle::alignedRect(Qt::LeftToRight,Qt::AlignCenter,rect.size(),option.rect),
-    //                              pixmap);
+	QStyleOptionViewItemV4 centeredOption(option);
+	centeredOption.decorationAlignment = Qt::AlignCenter;
+	QStyledItemDelegate::paint(painter,centeredOption,index);
 }
+
 bool ProfileItemDelegate::editorEvent(QEvent* event,QAbstractItemModel*,
                                     const QStyleOptionViewItem&,const QModelIndex& index)
 {
