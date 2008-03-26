@@ -557,7 +557,7 @@ void SessionManager::saveShortcuts()
                 iter.value().profilePath);
     }    
 }
-void SessionManager::setShortcut(const Profile::Ptr info , 
+void SessionManager::setShortcut(Profile::Ptr info , 
                                  const QKeySequence& keySequence )
 {
     QKeySequence existingShortcut = shortcut(info);
