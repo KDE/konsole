@@ -34,6 +34,7 @@ Name[sr]=Конзола
 Name[ta]=கான்சோல்
 Name[te]=కాన్సోల్
 Name[tg]=Консол
+Name[th]=คอนโซล K
 Name[x-test]=xxKonsolexx
 
 GenericName=Terminal
@@ -48,6 +49,7 @@ GenericName[ko]=터미널
 GenericName[nds]=Konsool
 GenericName[ru]=Терминал
 GenericName[sr]=Терминал
+GenericName[th]=เทอร์มินัล
 GenericName[tr]=Uçbirim
 GenericName[uk]=Термінал
 GenericName[x-test]=xxTerminalxx
