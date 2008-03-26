@@ -32,6 +32,7 @@ Comment[x-test]=xxKonsolexx
 [Event/BellVisible]
 Name=Bell in visible session
 Name[af]=Klokkie in die sigbare sessie
+Name[bg]=Звънец във видима сесия
 Name[bn]=প্রদর্শিত সেশন-এ ঘণ্টা
 Name[ca]=Timbre en una sessió visible
 Name[cs]=Zvonek ve viditelné relaci
@@ -256,6 +257,7 @@ Action=Popup
 [Event/Activity]
 Name=Activity in monitored session
 Name[af]=Aktiveer in gemonitorde sessie
+Name[bg]=Активност в наблюдаваната сесия
 Name[bn]=মনিটর করা সেশন-এ কিছু ঘটেছে
 Name[ca]=Activitat en una sessió controlada
 Name[csb]=Aktiwnota w mònitorowóny sesëji
