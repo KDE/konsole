@@ -73,6 +73,7 @@ Comment[pa]=ਕਨਸੋਲ ਡਿਫਾਲਟ ਪਰੋਫਾਇਲ
 Comment[pl]=Domyślny profil Konsoli
 Comment[pt]=Perfil predefinido do Konsole
 Comment[pt_BR]=Perfil padrão do Konsole
+Comment[ro]=Profil consolă implicit
 Comment[ru]=Стандартный профиль Konsole
 Comment[se]=Konsolla standárdprofiila
 Comment[sl]=Privzeti profil za Konzolo
