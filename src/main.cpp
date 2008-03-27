@@ -110,6 +110,7 @@ void fillCommandLineOptions(KCmdLineOptions& options)
     options.add("workdir \\<dir>",   ki18n("Set the initial working directory of the new tab "
                                            "or window to 'dir'"));
 	options.add("enable-transparency",ki18n("Enable transparent backgrounds"));
+	options.add("hold");
 	options.add("noclose",ki18n("Do not close the initial session automatically when it ends."));
     // TODO - Document this option more clearly
     options.add("p \\<property=value>",ki18n("Change the value of a profile property."));
