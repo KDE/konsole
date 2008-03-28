@@ -278,8 +278,12 @@ void Application::createWindow(Profile::Ptr profile , const QString& directory)
 
 Session* Application::createSession(Profile::Ptr profile, const QString& directory , ViewManager* view)
 {
+	if (!profile)
+		profile = SessionManager::instance()->defaultProfile();
+
     Session* session = SessionManager::instance()->createSession(profile);
-    if (!directory.isEmpty() && session->initialWorkingDirectory().isEmpty())
+
+    if (!directory.isEmpty() && profile->property<bool>(Profile::StartInCurrentSessionDir))
         session->setInitialWorkingDirectory(directory);
 
     // create view before starting the session process so that the session doesn't suffer

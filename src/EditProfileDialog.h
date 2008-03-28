@@ -111,6 +111,7 @@ private slots:
 
     void profileNameChanged(const QString& text);
     void initialDirChanged(const QString& text);
+	void startInSameDir(bool);
     void commandChanged(const QString& text);
     void tabTitleFormatChanged(const QString& text);
     void remoteTabTitleFormatChanged(const QString& text);

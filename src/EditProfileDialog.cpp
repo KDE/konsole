@@ -211,6 +211,7 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
     _ui->initialDirEdit->setClearButtonShown(true);
     _ui->dirSelectButton->setIcon( KIcon("folder-open") );
     _ui->iconSelectButton->setIcon( KIcon(info->icon()) );
+	_ui->startInSameDirButton->setChecked(info->property<bool>(Profile::StartInCurrentSessionDir));
 
     // window options
     _ui->showMenuBarButton->setChecked( info->property<bool>(Profile::ShowMenuBar) );
@@ -218,7 +219,8 @@ void EditProfileDialog::setupGeneralPage(const Profile::Ptr info)
     // signals and slots
     connect( _ui->dirSelectButton , SIGNAL(clicked()) , this , SLOT(selectInitialDir()) );
     connect( _ui->iconSelectButton , SIGNAL(clicked()) , this , SLOT(selectIcon()) );
-
+	connect( _ui->startInSameDirButton , SIGNAL(toggled(bool)) , this , 
+			SLOT(startInSameDir(bool)));
     connect( _ui->profileNameEdit , SIGNAL(textChanged(const QString&)) , this ,
             SLOT(profileNameChanged(const QString&)) );
     connect( _ui->initialDirEdit , SIGNAL(textChanged(const QString&)) , this , 
@@ -347,6 +349,10 @@ void EditProfileDialog::profileNameChanged(const QString& text)
 {
     _tempProfile->setProperty(Profile::Name,text);
     updateCaption(_tempProfile->name());
+}
+void EditProfileDialog::startInSameDir(bool sameDir)
+{
+	_tempProfile->setProperty(Profile::StartInCurrentSessionDir,sameDir);
 }
 void EditProfileDialog::initialDirChanged(const QString& dir)
 {

@@ -186,7 +186,11 @@ public:
         DefaultEncoding,
 
         /** (bool) Whether fonts should be aliased or not */
-        AntiAliasFonts
+        AntiAliasFonts,
+
+		/** (bool) Whether new sessions should be started in the same directory as the 
+		 * currently active session. */
+		StartInCurrentSessionDir
     };
 
     /** 

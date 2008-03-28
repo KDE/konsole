@@ -32,8 +32,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>437</width>
-        <height>472</height>
+        <width>429</width>
+        <height>461</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -110,7 +110,7 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="0" >
+          <item row="4" column="0" >
            <widget class="QLabel" name="label_10" >
             <property name="text" >
              <string>Icon:</string>
@@ -120,7 +120,7 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="1" >
+          <item row="4" column="1" >
            <widget class="QPushButton" name="iconSelectButton" >
             <property name="sizePolicy" >
              <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
@@ -154,7 +154,7 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="2" >
+          <item row="4" column="2" >
            <spacer>
             <property name="orientation" >
              <enum>Qt::Horizontal</enum>
@@ -167,7 +167,7 @@
             </property>
            </spacer>
           </item>
-          <item row="4" column="0" >
+          <item row="5" column="0" >
            <widget class="QLabel" name="environmentLabel" >
             <property name="text" >
              <string>Environment:</string>
@@ -177,13 +177,20 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="1" >
+          <item row="5" column="1" >
            <widget class="QPushButton" name="environmentEditButton" >
             <property name="toolTip" >
              <string>Edit the list of environment variables and associated values</string>
             </property>
             <property name="text" >
              <string>Edit...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" colspan="2" >
+           <widget class="QCheckBox" name="startInSameDirButton" >
+            <property name="text" >
+             <string>Start in same directory as current tab</string>
             </property>
            </widget>
           </item>
@@ -238,8 +245,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>437</width>
-        <height>472</height>
+        <width>429</width>
+        <height>461</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -381,8 +388,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>437</width>
-        <height>472</height>
+        <width>429</width>
+        <height>461</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -599,8 +606,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>437</width>
-        <height>472</height>
+        <width>429</width>
+        <height>461</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -777,8 +784,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>437</width>
-        <height>472</height>
+        <width>429</width>
+        <height>461</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -867,8 +874,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>437</width>
-        <height>472</height>
+        <width>429</width>
+        <height>461</height>
        </rect>
       </property>
       <attribute name="title" >
