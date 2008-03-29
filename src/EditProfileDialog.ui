@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>441</width>
-    <height>499</height>
+    <height>529</height>
    </rect>
   </property>
   <layout class="QHBoxLayout" >
@@ -33,7 +33,7 @@
         <x>0</x>
         <y>0</y>
         <width>429</width>
-        <height>461</height>
+        <height>489</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -246,7 +246,7 @@
         <x>0</x>
         <y>0</y>
         <width>429</width>
-        <height>461</height>
+        <height>489</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -389,7 +389,7 @@
         <x>0</x>
         <y>0</y>
         <width>429</width>
-        <height>461</height>
+        <height>489</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -607,7 +607,7 @@
         <x>0</x>
         <y>0</y>
         <width>429</width>
-        <height>461</height>
+        <height>489</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -785,7 +785,7 @@
         <x>0</x>
         <y>0</y>
         <width>429</width>
-        <height>461</height>
+        <height>489</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -875,7 +875,7 @@
         <x>0</x>
         <y>0</y>
         <width>429</width>
-        <height>461</height>
+        <height>489</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -936,6 +936,22 @@
             </property>
             <property name="text" >
              <string>Allow programs to resize terminal window</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="enableBidiRenderingButton" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip" >
+             <string>Enable BiDirectional display on terminals (valid for Arabic, Farsi or Hebrew only)</string>
+            </property>
+            <property name="text" >
+             <string>Enable BiDi rendering </string>
             </property>
            </widget>
           </item>

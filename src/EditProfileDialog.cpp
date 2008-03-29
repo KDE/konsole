@@ -924,6 +924,8 @@ void EditProfileDialog::setupAdvancedPage(const Profile::Ptr profile)
                                  SLOT(toggleResizeWindow(bool)) },
                                { _ui->enableBlinkingCursorButton , Profile::BlinkingCursorEnabled ,
                                  SLOT(toggleBlinkingCursor(bool)) },
+                               { _ui->enableBidiRenderingButton , Profile::BidiRenderingEnabled ,
+                                 SLOT(togglebidiRendering(bool)) },
                                { 0 , 0 , 0 }
                              };
     setupCombo( options , profile );
@@ -989,6 +991,10 @@ void EditProfileDialog::customCursorColor()
 void EditProfileDialog::setCursorShape(int index)
 {
     _tempProfile->setProperty(Profile::CursorShape,index);
+}
+void EditProfileDialog::togglebidiRendering(bool enable)
+{
+    _tempProfile->setProperty(Profile::BidiRenderingEnabled,enable);
 }
 void EditProfileDialog::toggleBlinkingCursor(bool enable)
 {

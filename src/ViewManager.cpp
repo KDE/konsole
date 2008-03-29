@@ -721,6 +721,9 @@ void ViewManager::applyProfile(TerminalDisplay* view , const Profile::Ptr info )
     bool blinkingCursor = info->property<bool>(Profile::BlinkingCursorEnabled);
     view->setBlinkingCursor(blinkingCursor);  
 
+    bool bidiEnabled = info->property<bool>(Profile::BidiRenderingEnabled);
+    view->setBidiEnabled(bidiEnabled);
+
     // cursor shape
     int cursorShape = info->property<int>(Profile::CursorShape);
 

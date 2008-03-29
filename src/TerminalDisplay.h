@@ -372,7 +372,14 @@ public:
      */
     void setTerminalSizeStartup(bool on) { _terminalSizeStartup=on; }
 
+    /**
+     * Sets the status of the BiDi rendering inside the terminal display.
+     * Defaults to disabled.
+     */
     void setBidiEnabled(bool set) { _bidiEnabled=set; }
+    /**
+     * Returns the status of the BiDi rendering in this widget.
+     */
     bool isBidiEnabled() { return _bidiEnabled; }
 
     /**
