@@ -1276,6 +1276,7 @@ void SearchHistoryTask::executeOnScreenWindow( SessionPtr session , ScreenWindow
         QTextStream searchStream(&string);
 
         PlainTextDecoder decoder;
+		decoder.setRecordLinePositions(true);
 
         //setup first and last lines depending on search direction
         int line = startLine;
@@ -1329,13 +1330,13 @@ void SearchHistoryTask::executeOnScreenWindow( SessionPtr session , ScreenWindow
                 }
             }
 
-            //kDebug() << "Searching lines " << qMin(endLine,line) << " to " << qMax(endLine,line);
-
             decoder.begin(&searchStream);
             emulation->writeToStream(&decoder, qMin(endLine,line) , qMax(endLine,line) );
             decoder.end();
 
-            //kDebug() << "Stream contents: " << string;
+			// line number search below assumes that the buffer ends with a new-line 
+			string.append('\n');
+
             pos = -1;
             if (forwards)
                 pos = string.indexOf(_regExp);
@@ -1345,7 +1346,16 @@ void SearchHistoryTask::executeOnScreenWindow( SessionPtr session , ScreenWindow
             //if a match is found, position the cursor on that line and update the screen
             if ( pos != -1 )
             {
-                int findPos = qMin(line,endLine) + string.left(pos + 1).count(QChar('\n'));
+				int newLines = 0;
+				QList<int> linePositions = decoder.linePositions();
+				while (newLines < linePositions.count() && linePositions[newLines] <= pos)
+					newLines++;
+
+				// ignore the new line at the start of the buffer
+				newLines--;
+
+				int findPos = qMin(line,endLine) + newLines;
+
                 highlightResult(window,findPos);
 
                 emit completed(true);
@@ -1366,7 +1376,6 @@ void SearchHistoryTask::executeOnScreenWindow( SessionPtr session , ScreenWindow
 
     emit completed(false);
 }
-
 void SearchHistoryTask::highlightResult(ScreenWindowPtr window , int findPos)
 {
      //work out how many lines into the current block of text the search result was found

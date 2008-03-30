@@ -24,6 +24,8 @@
 
 #include "Character.h"
 
+#include <QList>
+
 class QTextStream;
 
 namespace Konsole
@@ -81,6 +83,14 @@ public:
      * in the output.
      */
     bool trailingWhitespace() const;
+	/** 
+	 * Returns of character positions in the output stream
+	 * at which new lines where added.  Returns an empty if setTrackLinePositions() is false or if 
+	 * the output device is not a string.
+	 */
+	QList<int> linePositions() const;
+	/** Enables recording of character positions at which new lines are added.  See linePositions() */
+	void setRecordLinePositions(bool record);
 
     virtual void begin(QTextStream* output);
     virtual void end();
@@ -93,6 +103,9 @@ public:
 private:
     QTextStream* _output;
     bool _includeTrailingWhitespace;
+
+	bool _recordLinePositions;
+	QList<int> _linePositions;
 };
 
 /**

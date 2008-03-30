@@ -46,16 +46,33 @@ bool PlainTextDecoder::trailingWhitespace() const
 }
 void PlainTextDecoder::begin(QTextStream* output)
 {
-   _output = output; 
+   _output = output;
+   if (!_linePositions.isEmpty())
+	   _linePositions.clear();
 }
 void PlainTextDecoder::end()
 {
     _output = 0;
 }
+
+void PlainTextDecoder::setRecordLinePositions(bool record)
+{
+	_recordLinePositions = record;
+}
+QList<int> PlainTextDecoder::linePositions() const
+{
+	return _linePositions;
+}
 void PlainTextDecoder::decodeLine(const Character* const characters, int count, LineProperty /*properties*/
 							 )
 {
     Q_ASSERT( _output );
+
+	if (_recordLinePositions && _output->string())
+	{
+		int pos = _output->string()->count();
+		_linePositions << pos;
+	}
 
 	//TODO should we ignore or respect the LINE_WRAPPED line property?
 
@@ -210,7 +227,6 @@ void HTMLDecoder::decodeLine(const Character* const characters, int count, LineP
 	
 	*_output << text;
 }
-
 void HTMLDecoder::openSpan(QString& text , const QString& style)
 {
 	text.append( QString("<span style=\"%1\">").arg(style) );
