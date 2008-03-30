@@ -14,6 +14,8 @@ New Features:
 
 Minor changes:
 	- Limit tab name length to prevent a single tab from taking up the entire tab bar.
+	- Scroll the terminal continually when the mouse is held down and moved outside the display
+	(like a text document)
 
 Fixes:
 	- Fix embedded terminal not gaining focus when shown in Dolphin
@@ -31,4 +33,10 @@ Fixes:
 					to Qt 4.4
 	- BUG 159096 -  'Find Next'/'Find Previous' jumped to the wrong line number if the output
 					contained wrapped lines.
+	- BUG 156654 - 	Force Left-To-Right text layout in the terminal display otherwise it 
+					becomes unusable on RTL desktops
+	- BUG 157667 - 	Disabled several actions in the KPart which are unused to prevent
+					clashes with shortcuts in Yakuake etc.
+	- Allow selection of trailing new-line character at end of selection for consistency with
+	KDE 3.5
 
