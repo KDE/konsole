@@ -244,14 +244,11 @@ private:
 
 inline bool operator == (const CharacterColor& a, const CharacterColor& b)
 { 
-  return *reinterpret_cast<const quint32*>(&a._colorSpace) == 
-         *reinterpret_cast<const quint32*>(&b._colorSpace);
+	return !memcmp(&a,&b,sizeof(CharacterColor));
 }
-
 inline bool operator != (const CharacterColor& a, const CharacterColor& b)
 {
-  return *reinterpret_cast<const quint32*>(&a._colorSpace) != 
-         *reinterpret_cast<const quint32*>(&b._colorSpace);
+	return !operator==(a,b);
 }
 
 inline const QColor color256(quint8 u, const ColorEntry* base)
