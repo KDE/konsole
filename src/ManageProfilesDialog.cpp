@@ -317,9 +317,26 @@ ProfileItemDelegate::ProfileItemDelegate(QObject* parent)
 }
 void ProfileItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-	QStyleOptionViewItemV4 centeredOption(option);
-	centeredOption.decorationAlignment = Qt::AlignCenter;
-	QStyledItemDelegate::paint(painter,centeredOption,index);
+	// See implementation of QStyledItemDelegate::paint()
+	
+	QStyleOptionViewItemV4 opt = option;
+	initStyleOption(&opt,index);
+
+	const QStyleOptionViewItemV3* v3option = qstyleoption_cast<const QStyleOptionViewItemV3*>(&option);
+	const QWidget* widget = v3option ? v3option->widget : 0;
+
+	QStyle* style = widget ? widget->style() : QApplication::style();
+	
+	style->drawPrimitive(QStyle::PE_PanelItemViewItem,&opt,painter,widget);
+
+	int margin = (opt.rect.height()-opt.decorationSize.height())/2;
+	margin++;
+
+	opt.rect.setTop(opt.rect.top()+margin);
+	opt.rect.setBottom(opt.rect.bottom()-margin);
+
+	QIcon icon = index.data(Qt::DecorationRole).value<QIcon>();
+	icon.paint(painter,opt.rect,Qt::AlignCenter);
 }
 
 bool ProfileItemDelegate::editorEvent(QEvent* event,QAbstractItemModel*,
