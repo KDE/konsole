@@ -244,7 +244,10 @@ private:
 
 inline bool operator == (const CharacterColor& a, const CharacterColor& b)
 { 
-	return !memcmp(&a,&b,sizeof(CharacterColor));
+	return 	a._colorSpace == b._colorSpace &&
+			a._u == b._u &&
+			a._v == b._v &&
+			a._w == b._w;
 }
 inline bool operator != (const CharacterColor& a, const CharacterColor& b)
 {
