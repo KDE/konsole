@@ -1801,7 +1801,7 @@ void TerminalDisplay::extendSelection( const QPoint& position )
   {
     // Extend to word boundaries
     int i;
-    int selClass;
+    QChar selClass;
 
     bool left_not_right = ( here.y() < _iPntSelCorr.y() ||
 	   here.y() == _iPntSelCorr.y() && here.x() < _iPntSelCorr.x() );
@@ -1878,7 +1878,7 @@ void TerminalDisplay::extendSelection( const QPoint& position )
   if ( !_wordSelectionMode && !_lineSelectionMode )
   {
     int i;
-    int selClass;
+    QChar selClass;
 
     bool left_not_right = ( here.y() < _iPntSelCorr.y() ||
 	   here.y() == _iPntSelCorr.y() && here.x() < _iPntSelCorr.x() );
@@ -2067,7 +2067,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
   _wordSelectionMode = true;
 
   // find word boundaries...
-  int selClass = charClass(_image[i].character);
+  QChar selClass = charClass(_image[i].character);
   {
      // find the start of the word
      int x = bgnSel.x();
@@ -2206,7 +2206,7 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
   if (_tripleClickMode == SelectForwardsFromCursor) {
     // find word boundary start
     int i = loc(_iPntSel.x(),_iPntSel.y());
-    int selClass = charClass(_image[i].character);
+    QChar selClass = charClass(_image[i].character);
     int x = _iPntSel.x();
     
     while ( ((x>0) || 
@@ -2252,16 +2252,14 @@ bool TerminalDisplay::focusNextPrevChild( bool next )
 }
 
 
-int TerminalDisplay::charClass(quint16 ch) const
+QChar TerminalDisplay::charClass(QChar qch) const
 {
-    QChar qch=QChar(ch);
     if ( qch.isSpace() ) return ' ';
 
     if ( qch.isLetterOrNumber() || _wordCharacters.contains(qch, Qt::CaseInsensitive ) )
     return 'a';
 
-    // Everything else is weird
-    return 1;
+    return qch;
 }
 
 void TerminalDisplay::setWordCharacters(const QString& wc)

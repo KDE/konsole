@@ -546,7 +546,13 @@ protected:
       QDrag           *dragObject;
     } dragInfo;
 
-    virtual int charClass(quint16) const;
+	// classifies the 'ch' into one of three categories
+	// and returns a character to indicate which category it is in
+	//
+	// 	- A space (returns ' ') 
+	// 	- Part of a word (returns 'a')
+	// 	- Other characters (returns the input character)
+    QChar charClass(QChar ch) const;
 
     void clearImage();
 
