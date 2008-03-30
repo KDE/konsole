@@ -382,7 +382,14 @@ void SessionManager::applyProfile(Session* session, const Profile::Ptr info , bo
         session->setInitialWorkingDirectory(info->defaultWorkingDirectory());
 
     if ( apply.shouldApply(Profile::Environment) )
-        session->setEnvironment(info->property<QStringList>(Profile::Environment));
+	{
+		// add environment variable containing home directory of current profile
+		// (if specified)
+		QStringList environment = info->property<QStringList>(Profile::Environment);
+		environment << QString("PROFILEHOME=%1").arg(info->defaultWorkingDirectory());
+
+        session->setEnvironment(environment);
+	}
 
     if ( apply.shouldApply(Profile::Icon) )
         session->setIconName(info->icon());
