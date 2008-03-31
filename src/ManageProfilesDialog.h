@@ -22,6 +22,7 @@
 
 // Qt
 #include <QtGui/QStyledItemDelegate>
+#include <QtCore/QSet>
 
 // KDE
 #include <KDialog>
@@ -51,7 +52,8 @@ class ManageProfilesDialog : public KDialog
 {
 Q_OBJECT
 
-friend class ProfileItemDelegate;
+friend class FavoriteItemDelegate;
+friend class ShortcutItemDelegate;
 
 public:
     /** Constructs a new profile type with the specified parent. */
@@ -105,15 +107,43 @@ private:
     static const int ShortcutRole = Qt::UserRole + 1;
 };
 
-class ProfileItemDelegate : public QStyledItemDelegate
+class StyledBackgroundPainter 
 {
 public:
-    ProfileItemDelegate(QObject* parent = 0);
+	static void drawBackground(QPainter* painter, const QStyleOptionViewItem& option,
+				const QModelIndex& index);
+};
+
+class FavoriteItemDelegate : public QStyledItemDelegate
+{
+public:
+    FavoriteItemDelegate(QObject* parent = 0);
 
     virtual bool editorEvent(QEvent* event,QAbstractItemModel* model,
                              const QStyleOptionViewItem& option,const QModelIndex& index);
 	virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, 
 						const QModelIndex& index) const;
+};
+
+class ShortcutItemDelegate : public QStyledItemDelegate
+{
+Q_OBJECT
+
+public:
+	ShortcutItemDelegate(QObject* parent = 0);
+
+	virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
+	virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, 
+									const QModelIndex& index) const;
+	virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, 
+						const QModelIndex& index) const;
+
+private slots:
+	void editorModified(const QKeySequence& keys);
+
+private:
+	mutable QSet<QWidget*> _modifiedEditors;
+	mutable QSet<QModelIndex> _itemsBeingEdited;
 };
 
 }

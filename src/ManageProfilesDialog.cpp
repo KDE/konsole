@@ -30,6 +30,8 @@
 #include <QtGui/QShowEvent>
 #include <QtGui/QStandardItem>
 
+// KDE
+#include <KKeySequenceWidget>
 #include <KDebug>
 
 // Konsole
@@ -50,7 +52,9 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
 
     // hide vertical header
     _ui->sessionTable->verticalHeader()->hide();
-    _ui->sessionTable->setItemDelegateForColumn(FavoriteStatusColumn,new ProfileItemDelegate(this));
+    _ui->sessionTable->setItemDelegateForColumn(FavoriteStatusColumn,new FavoriteItemDelegate(this));
+	_ui->sessionTable->setItemDelegateForColumn(ShortcutColumn,new ShortcutItemDelegate(this));
+	_ui->sessionTable->setEditTriggers(_ui->sessionTable->editTriggers() | QAbstractItemView::SelectedClicked);
 
     // update table and listen for changes to the session types
     updateTableModel();
@@ -68,6 +72,11 @@ ManageProfilesDialog::ManageProfilesDialog(QWidget* parent)
     _ui->sessionTable->horizontalHeader()->setHighlightSections(false);
 
     _ui->sessionTable->resizeColumnsToContents();
+	// allow a larger width for the shortcut column to account for the 
+	// increased with needed by the shortcut editor compared with just
+	// displaying the text of the shortcut
+	_ui->sessionTable->setColumnWidth(ShortcutColumn,
+				_ui->sessionTable->columnWidth(ShortcutColumn)+100);
 
     // setup buttons
     connect( _ui->newSessionButton , SIGNAL(clicked()) , this , SLOT(newType()) );
@@ -311,23 +320,28 @@ void ManageProfilesDialog::setShortcutEditorVisible(bool visible)
 {
 	_ui->sessionTable->setColumnHidden(ShortcutColumn,!visible);	
 }
-ProfileItemDelegate::ProfileItemDelegate(QObject* parent)
-    : QStyledItemDelegate(parent)
+void StyledBackgroundPainter::drawBackground(QPainter* painter, const QStyleOptionViewItem& option,
+		const QModelIndex&)
 {
-}
-void ProfileItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
-{
-	// See implementation of QStyledItemDelegate::paint()
-	
-	QStyleOptionViewItemV4 opt = option;
-	initStyleOption(&opt,index);
-
 	const QStyleOptionViewItemV3* v3option = qstyleoption_cast<const QStyleOptionViewItemV3*>(&option);
 	const QWidget* widget = v3option ? v3option->widget : 0;
 
 	QStyle* style = widget ? widget->style() : QApplication::style();
 	
-	style->drawPrimitive(QStyle::PE_PanelItemViewItem,&opt,painter,widget);
+	style->drawPrimitive(QStyle::PE_PanelItemViewItem,&option,painter,widget);
+}
+
+FavoriteItemDelegate::FavoriteItemDelegate(QObject* parent)
+    : QStyledItemDelegate(parent)
+{
+}
+void FavoriteItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
+{
+	// See implementation of QStyledItemDelegate::paint()
+	QStyleOptionViewItemV4 opt = option;
+	initStyleOption(&opt,index);
+
+	StyledBackgroundPainter::drawBackground(painter,opt,index);
 
 	int margin = (opt.rect.height()-opt.decorationSize.height())/2;
 	margin++;
@@ -339,10 +353,11 @@ void ProfileItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& o
 	icon.paint(painter,opt.rect,Qt::AlignCenter);
 }
 
-bool ProfileItemDelegate::editorEvent(QEvent* event,QAbstractItemModel*,
+bool FavoriteItemDelegate::editorEvent(QEvent* event,QAbstractItemModel*,
                                     const QStyleOptionViewItem&,const QModelIndex& index)
 {
-     if ( event->type() == QEvent::MouseButtonPress || event->type() == QEvent::KeyPress )
+     if ( event->type() == QEvent::MouseButtonPress || event->type() == QEvent::KeyPress 
+		 || event->type() == QEvent::MouseButtonDblClick )
      {
          Profile::Ptr profile = index.data(ManageProfilesDialog::ProfileKeyRole).value<Profile::Ptr>();
          const bool isFavorite = !SessionManager::instance()->findFavorites().contains(profile);
@@ -353,5 +368,55 @@ bool ProfileItemDelegate::editorEvent(QEvent* event,QAbstractItemModel*,
      
      return true; 
 }
+ShortcutItemDelegate::ShortcutItemDelegate(QObject* parent)
+	: QStyledItemDelegate(parent)
+{
+}
+void ShortcutItemDelegate::editorModified(const QKeySequence& keys)
+{
+	kDebug() << keys.toString();
+
+	KKeySequenceWidget* editor = qobject_cast<KKeySequenceWidget*>(sender());
+	Q_ASSERT(editor);
+	_modifiedEditors.insert(editor);
+}
+void ShortcutItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* model,
+									const QModelIndex& index) const
+{
+	_itemsBeingEdited.remove(index);
+	
+	if (!_modifiedEditors.contains(editor))
+		return;
+
+	QString shortcut = qobject_cast<KKeySequenceWidget*>(editor)->keySequence().toString();
+	model->setData(index,shortcut,Qt::DisplayRole);
+
+	_modifiedEditors.remove(editor);
+}
+
+QWidget* ShortcutItemDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem&, const QModelIndex& index) const
+{
+	_itemsBeingEdited.insert(index);
+
+	KKeySequenceWidget* editor = new KKeySequenceWidget(parent);
+	editor->setFocusPolicy(Qt::StrongFocus);
+	editor->setModifierlessAllowed(false);
+	QString shortcutString = index.data(Qt::DisplayRole).toString();
+	editor->setKeySequence(QKeySequence::fromString(shortcutString));
+	connect(editor,SIGNAL(keySequenceChanged(QKeySequence)),this,SLOT(editorModified(QKeySequence)));
+	editor->captureKeySequence();
+	return editor;
+}
+void ShortcutItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, 
+						const QModelIndex& index) const
+{
+	if (_itemsBeingEdited.contains(index))
+		StyledBackgroundPainter::drawBackground(painter,option,index);
+	else
+		QStyledItemDelegate::paint(painter,option,index);
+}
+
+
+
 
 #include "ManageProfilesDialog.moc"
