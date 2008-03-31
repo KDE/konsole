@@ -2123,13 +2123,6 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
                      SLOT(tripleClickTimeout()));
 }
 
-bool TerminalDisplay::canScroll() const
-{
-	bool sliderAtTop = _scrollBar->value() == 0;
-	bool sliderAtBottom = _scrollBar->value() + _scrollBar->pageStep() >= _scrollBar->maximum();
-
-	return !(sliderAtTop && sliderAtBottom);
-}
 void TerminalDisplay::wheelEvent( QWheelEvent* ev )
 {
   if (ev->orientation() != Qt::Vertical)
@@ -2141,7 +2134,8 @@ void TerminalDisplay::wheelEvent( QWheelEvent* ev )
   // for the benefit of programs such as 'less'
   if ( _mouseMarks )
   {
-  	if (canScroll())
+	bool canScroll = _scrollBar->maximum() > 0;
+  	if (canScroll)
     	_scrollBar->event(ev);
 	else
 	{
