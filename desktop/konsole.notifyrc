@@ -118,7 +118,7 @@ Sound=KDE-Sys-App-Message.ogg
 Action=Sound
 
 [Event/BellInvisible]
-Name=Bell in Non-visible session
+Name=Bell in Non-Visible Session
 Name[ca]=Timbre en una sessió no visible
 Name[de]=Signalton in nicht-sichtbarer Sitzung
 Name[el]=Ηχητική σήμανση σε μη ορατή συνεδρία
@@ -375,7 +375,7 @@ Comment[zh_TW]=監控工作階段中偵測到靜默時的行為
 Action=Popup
 
 [Event/Finished]
-Name=Session Finished With Non-zero Status
+Name=Session Finished With Non-Zero Status
 Name[ca]=Sessió finalitzada amb un estat diferent de zero
 Name[de]=Sitzung mit Nicht-Null-Status beendet
 Name[el]=Η συνεδρία τερμάτισε με μη μηδενική κατάσταση
