@@ -597,7 +597,8 @@ void TabbedViewContainerV2::moveViewWidget( int fromIndex , int toIndex )
 void TabbedViewContainerV2::currentTabChanged(int index)
 {
     _stackWidget->setCurrentIndex(index);
-    emit activeViewChanged(_stackWidget->widget(index));
+    if (_stackWidget->widget(index))
+        emit activeViewChanged(_stackWidget->widget(index));
 
     // clear activity indicators
     setTabActivity(index,false);
