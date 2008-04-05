@@ -2575,7 +2575,7 @@ void TerminalDisplay::calcGeometry()
 
   _topMargin = DEFAULT_TOP_MARGIN;
   _contentHeight = contentsRect().height() - 2 * DEFAULT_TOP_MARGIN + /* mysterious */ 1;
-
+   
   if (!_isFixedSize)
   {
      // ensure that display is always at least one column wide
@@ -2606,16 +2606,16 @@ void TerminalDisplay::makeImage()
   clearImage();
 }
 
-// calculate the needed size
+// calculate the needed size, this must be synced with calcGeometry()
 void TerminalDisplay::setSize(int columns, int lines)
 {
-  //FIXME - Not quite correct, a small amount of additional space
-  // will be used for margins, the scrollbar etc.
-  // we need to allow for this so that '_size' does allow
-  // enough room for the specified number of columns and lines to fit
+  int scrollBarWidth = _scrollBar->isHidden() ? 0 :  
+						style()->pixelMetric(QStyle::PM_ScrollBarExtent);
+  int horizontalMargin = 2 * DEFAULT_LEFT_MARGIN;
+  int verticalMargin = 2 * DEFAULT_TOP_MARGIN;
 
-  QSize newSize = QSize( columns * _fontWidth  ,
-				 lines * _fontHeight   );
+  QSize newSize = QSize( horizontalMargin + scrollBarWidth + (columns * _fontWidth)  ,
+				 verticalMargin + (lines * _fontHeight)   );
 
   if ( newSize != size() )
   {
