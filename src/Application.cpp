@@ -131,7 +131,22 @@ int Application::newInstance()
     if ( args->isSet("background-mode") )
         startBackgroundMode(window);
     else
-        window->show();
+	{
+		// Qt constrains top-level windows which have not been manually resized
+		// (via QWidget::resize()) to a maximum of 2/3rds of the screen size.
+		//
+		// This means that the terminal display might not get the width/height
+		// it asks for.  To work around this, the widget must be manually resized
+		// to its sizeHint().
+		//
+		// This problem only affects the first time the application is run.  After
+		// that KMainWindow will have manually resized the window to its saved size
+		// at this point (so the Qt::WA_Resized attribute will be set)
+		if (!window->testAttribute(Qt::WA_Resized))
+			window->resize(window->sizeHint());
+
+		window->show();
+	}
 
     return 0;
 }
