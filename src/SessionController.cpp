@@ -511,7 +511,7 @@ void SessionController::setupActions()
     connect( action , SIGNAL(toggled(bool)) , this , SLOT(monitorSilence(bool)) );
 
     // Character Encoding
-    _codecAction = new KCodecAction(i18n("Set Character Encoding"),this);
+    _codecAction = new KCodecAction(i18n("Character Encoding"),this);
     collection->addAction("character-encoding",_codecAction);
     connect( _codecAction->menu() , SIGNAL(aboutToShow()) , this , SLOT(updateCodecAction()) );
     connect( _codecAction , SIGNAL(triggered(QTextCodec*)) , this , SLOT(changeCodec(QTextCodec*)) );
