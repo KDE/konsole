@@ -222,8 +222,7 @@ void SessionManager::closeAll()
 }
 SessionManager::~SessionManager()
 {
-	// TODO This test sometimes fails when using KDevelop.  Look into and fix it.
-	if (_sessions.count() == 0)
+	if (_sessions.count() > 0)
 	{
 		kWarning() << "Konsole SessionManager destroyed with sessions still alive";
 		// ensure that the Session doesn't later try to call back and do things to the 
