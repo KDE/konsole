@@ -38,6 +38,7 @@ Name[de]=Signalton in sichtbarer Sitzung
 Name[el]=Ηχητική σήμανση στην ορατή συνεδρία
 Name[eo]=Pepo en videbla seanco
 Name[es]=Campana en sesión visible
+Name[fi]=Äänimerkki näkyvässä istunnossa
 Name[ga]=Cloigín i Seisiún Infheicthe
 Name[gu]=દ્રશ્ય સત્રમાં ઘંટડી
 Name[hu]=Csengetés egy látható munkafolyamatban
@@ -119,6 +120,8 @@ Action=Sound
 
 [Event/BellInvisible]
 Name=Bell in Non-Visible Session
+Name[fi]=Äänimerkki näkymättömässä istunnossa
+Name[ga]=Cloigín i Seisiún Dofheicthe
 Comment=Bell emitted within a non-visible session
 Comment[af]=Klokkie word gelui in die nie-sigbare sessie
 Comment[bn]=একটি অদৃশ্য সেশন-এ ঘণ্টা বেজেছে
@@ -185,6 +188,7 @@ Name[de]=Aktivität in überwachter Sitzung
 Name[el]=Δραστηριότητα σε συνεδρία υπό εποπτεία
 Name[eo]=Aktiveco en rigardata seanco
 Name[es]=Actividad en sesión monitorizada
+Name[fi]=Aktiivisuutta tarkkailtavassa istunnossa
 Name[ga]=Gníomhaíocht i Seisiún Monatóirithe
 Name[gu]=દેખરેખ રાખેલ સત્રમાં ક્રિયા
 Name[hu]=Aktivitás egy monitorozott munkafolyamatban
@@ -271,6 +275,7 @@ Name[de]=Keine Aktivität in überwachter Sitzung
 Name[el]=Ησυχία σε συνεδρία υπό εποπτεία
 Name[eo]=Trankvilo en rigardata seanco
 Name[es]=Silencio en sesión monitorizada
+Name[fi]=Hiljaisuus valvotussa istunnossa
 Name[ga]=Ciúnas i Seisiún Monatóirithe
 Name[gu]=દેખરેખ રાખેલ સત્રમાં શાંતિ
 Name[hu]=Üresjárat egy monitorozott munkafolyamatban
@@ -351,6 +356,8 @@ Action=Popup
 
 [Event/Finished]
 Name=Session Finished With Non-Zero Status
+Name[fi]=Istunto lopetettiin paluuarvolla, joka oli eri kuin nolla
+Name[ga]=Chríochnaigh an Seisiún le Stádas nach bhfuil 0
 Comment=A session has exited with non-zero status
 Comment[af]='n Sessie het met 'n nie-zero status geëindig
 Comment[bn]=একটি সেশন নন-জিরো স্ট্যাটাস সমেত সমাপ্ত হয়েছে
