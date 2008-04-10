@@ -138,6 +138,7 @@ void Profile::fillTableWithDefaultNames()
 FallbackProfile::FallbackProfile()
  : Profile()
 {
+    kDebug() << "using fallback profile";
     // Fallback settings
     setProperty(Name,i18n("Shell"));
     setProperty(Command,getenv("SHELL"));
@@ -149,7 +150,7 @@ FallbackProfile::FallbackProfile()
     setProperty(TabBarMode,AlwaysShowTabBar);
     setProperty(TabBarPosition,TabBarBottom);
     setProperty(ShowMenuBar,true);
-	setProperty(StartInCurrentSessionDir,true);
+    setProperty(StartInCurrentSessionDir,true);
 
     setProperty(KeyBindings,"default");
     setProperty(ColorScheme,"Linux");
@@ -182,11 +183,12 @@ Profile::Profile(Profile::Ptr parent)
     : _parent(parent)
      ,_hidden(false)
 {
+  //kDebug() << "creating new profile" << parent.count();
 }
 Profile::~Profile()
 {
-	if (!name().isEmpty() && !isHidden())
-		kDebug() << "Destroying profile " << name();
+    if (!name().isEmpty() && !isHidden())
+        kDebug() << "Destroying profile " << name();
 }
 bool Profile::isHidden() const { return _hidden; }
 void Profile::setHidden(bool hidden) { _hidden = hidden; }

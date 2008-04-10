@@ -33,6 +33,7 @@
 #include <KAction>
 #include <KCmdLineArgs>
 #include <KIcon>
+#include <KDebug>
 #include <KWindowSystem>
 
 // Konsole
@@ -178,7 +179,10 @@ void Application::processProfileSelectArgs(KCmdLineArgs* args,MainWindow* window
     if ( args->isSet("profile") )
     {
         Profile::Ptr profile = SessionManager::instance()->loadProfile(args->getOption("profile"));
-        window->setDefaultProfile(profile);
+        if (!profile)
+            profile = SessionManager::instance()->defaultProfile();
+
+         window->setDefaultProfile(profile);
     }
 }
 
@@ -193,10 +197,11 @@ bool Application::processHelpArgs(KCmdLineArgs* args)
 }
 void Application::processProfileChangeArgs(KCmdLineArgs* args,MainWindow* window) 
 {
-	Profile::Ptr defaultProfile = window->defaultProfile();
+    Profile::Ptr defaultProfile = window->defaultProfile();
+    if (!defaultProfile)
+        defaultProfile = SessionManager::instance()->defaultProfile();
     Profile::Ptr newProfile = Profile::Ptr(new Profile(defaultProfile));
-	newProfile->setHidden(true);
-
+    newProfile->setHidden(true);
     // run a custom command
     if ( args->isSet("e") ) 
     {
@@ -228,10 +233,10 @@ void Application::processProfileChangeArgs(KCmdLineArgs* args,MainWindow* window
         }        
     }
 
-	if (!newProfile->isEmpty())
-	{
-		window->setDefaultProfile(newProfile); 
-	}	
+    if (!newProfile->isEmpty())
+    {
+        window->setDefaultProfile(newProfile); 
+    }	
 }
 
 void Application::startBackgroundMode(MainWindow* window)
@@ -293,8 +298,8 @@ void Application::createWindow(Profile::Ptr profile , const QString& directory)
 
 Session* Application::createSession(Profile::Ptr profile, const QString& directory , ViewManager* view)
 {
-	if (!profile)
-		profile = SessionManager::instance()->defaultProfile();
+    if (!profile)
+        profile = SessionManager::instance()->defaultProfile();
 
     Session* session = SessionManager::instance()->createSession(profile);
 
@@ -307,7 +312,7 @@ Session* Application::createSession(Profile::Ptr profile, const QString& directo
     view->createView(session);
     session->run();
 
-	return session;
+    return session;
 }
 
 #include "Application.moc"

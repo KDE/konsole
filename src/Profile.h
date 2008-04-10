@@ -33,6 +33,7 @@
 
 // KDE
 #include <KSharedPtr>
+#include <KDebug>
 
 class KConfig;
 class KConfigGroup;
@@ -191,7 +192,7 @@ public:
 
 		/** (bool) Whether new sessions should be started in the same directory as the 
 		 * currently active session. */
-		StartInCurrentSessionDir
+        StartInCurrentSessionDir
     };
 
     /** 
@@ -398,12 +399,12 @@ private:
     static QHash<QString,PropertyInfo> _propertyInfoByName;
     static QHash<Property,PropertyInfo> _infoByProperty;
     
-	struct PropertyInfo
+    struct PropertyInfo
     {
         Property property;
         const char* name;
-		const char* group;
-		QVariant::Type type;
+        const char* group;
+        QVariant::Type type;
     };
     static const PropertyInfo DefaultPropertyNames[];
 };
@@ -416,14 +417,19 @@ inline T Profile::property(Property theProperty) const
 template <>
 inline QVariant Profile::property(Property property) const
 {
-	bool canInheritProperty = property != Path;
-
-    if ( _propertyValues.contains(property) )
+    bool canInheritProperty = property != Path;
+    if ( _propertyValues.contains(property) ) {
+        //kDebug() << "accessing property " << property;
         return _propertyValues[property];
-    else if ( _parent && canInheritProperty )
+    }
+    else if ( _parent && canInheritProperty ) {
+        //kDebug() << "accessing parent property " << property;
         return _parent->property<QVariant>(property);
-    else
+    }
+    else {
+        //kDebug() << "return empty property" << property;
         return QVariant();
+    }
 }
 
 /** 
