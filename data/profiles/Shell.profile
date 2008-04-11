@@ -37,6 +37,7 @@ Name[sr]=Шкољка
 Name[sr@latin]=Školjka
 Name[sv]=Skal
 Name[ta]=ஓடு
+Name[te]=షెల్
 Name[th]=เชลล์
 Name[tr]=Kabuk
 Name[uk]=Оболонка
