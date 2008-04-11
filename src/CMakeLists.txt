@@ -82,16 +82,13 @@ target_link_libraries(kdeinit_konsole ${KDE4_KPTY_LIBRARY} ${KDE4_KIO_LIBS} ${QT
 if(X11_Xrender_FOUND)
     target_link_libraries(kdeinit_konsole ${X11_Xrender_LIB} )
 endif(X11_Xrender_FOUND)
-    
+
 if(X11_XTest_FOUND)
   target_link_libraries(kdeinit_konsole ${X11_XTest_LIB} )
 endif(X11_XTest_FOUND)
 
-install(TARGETS kdeinit_konsole  DESTINATION ${INSTALL_TARGETS_DEFAULT_ARGS} )
-
-    
-target_link_libraries( konsole kdeinit_konsole )
-install(TARGETS konsole DESTINATION ${BIN_INSTALL_DIR})
+install(TARGETS kdeinit_konsole  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS konsole          ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ### konsoleprofile command-line tool
 
