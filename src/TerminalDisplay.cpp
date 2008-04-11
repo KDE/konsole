@@ -78,6 +78,10 @@ using namespace Konsole;
 bool TerminalDisplay::_antialiasText = true;
 bool TerminalDisplay::HAVE_TRANSPARENCY = false;
 
+// we use this to force QPainter to display text in LTR mode
+// more information can be found in: http://unicode.org/reports/tr9/ 
+const QChar LTR_OVERRIDE_CHAR( 0x202D );
+
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /*                                Colors                                     */
@@ -676,10 +680,11 @@ void TerminalDisplay::drawCharacters(QPainter& painter,
         // the application's default layout direction to be used instead of 
         // the widget-specific layout direction, which should always be
         // Qt::LeftToRight for this widget
+	// This was discussed in: http://lists.kde.org/?t=120552223600002&r=1&w=2
         if (_bidiEnabled)
             painter.drawText(rect,0,text);
         else
-            painter.drawText(rect,0,QChar(0x202D)+text);
+            painter.drawText(rect,0,LTR_OVERRIDE_CHAR+text);
     }
 }
 

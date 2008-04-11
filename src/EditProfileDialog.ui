@@ -951,7 +951,7 @@
              <string>Enable BiDirectional display on terminals (valid for Arabic, Farsi or Hebrew only)</string>
             </property>
             <property name="text" >
-             <string>Enable BiDi rendering </string>
+             <string>Enable Bi-Directional rendering </string>
             </property>
            </widget>
           </item>

@@ -165,6 +165,7 @@ FallbackProfile::FallbackProfile()
     setProperty(BlinkingTextEnabled,true);
     
     setProperty(BlinkingCursorEnabled,false);
+    setProperty(BidiRenderingEnabled,false);
     setProperty(CursorShape,BlockCursor);
     setProperty(UseCustomCursorColor,false);
     setProperty(CustomCursorColor,Qt::black);
