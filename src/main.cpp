@@ -21,6 +21,9 @@
 #include "Application.h"
 #include <KDebug>
 
+// Unix
+#include <unistd.h>
+
 // X11
 #ifdef Q_WS_X11
 #include <X11/Xlib.h>
@@ -71,9 +74,17 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
     KCmdLineArgs::addCmdLineOptions(options);
     KUniqueApplication::addCmdLineOptions();
 
+	// when starting Konsole from a terminal, a new process must be used 
+	// so that the current environment is propagated into the shells of the new
+	// Konsole and any debug output or warnings from Konsole are written to
+	// the current terminal
+	KUniqueApplication::StartFlags startFlags;
+	if (isatty(1))
+		startFlags = KUniqueApplication::NonUniqueInstance;
+
     // create a new application instance if there are no running Konsole instances,
     // otherwise inform the existing Konsole instance and exit
-    if ( !KUniqueApplication::start() )
+    if ( !KUniqueApplication::start(startFlags) )
     {
         exit(0);
     }
