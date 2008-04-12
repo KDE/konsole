@@ -386,6 +386,9 @@ void EditProfileDialog::setupAppearancePage(const Profile::Ptr info)
              SLOT(colorSchemeAnimationUpdate()) );
    
     _ui->transparencyWarningWidget->setVisible(false);
+	_ui->transparencyWarningWidget->setText(i18n("This color scheme uses a transparent background"
+												 " which does not appear to be supported on your"
+												 " desktop"));
     _ui->editColorSchemeButton->setEnabled(false);
     _ui->removeColorSchemeButton->setEnabled(false);
 
@@ -726,9 +729,7 @@ void EditProfileDialog::updateTransparencyWarning()
     foreach( const QModelIndex& index , _ui->colorSchemeList->selectionModel()->selectedIndexes() ) 
     {
         bool hasTransparency = index.data(Qt::UserRole+1).value<const ColorScheme*>()->opacity() < 1.0;
-
         _ui->transparencyWarningWidget->setHidden(KWindowSystem::compositingActive() || !hasTransparency);
-        _ui->transparencyWarningIcon->setPixmap( KIcon("dialog-warning").pixmap(QSize(48,48)) );
     }
 }
 void EditProfileDialog::setupKeyboardPage(const Profile::Ptr /* info */)

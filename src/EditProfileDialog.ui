@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>441</width>
-    <height>529</height>
+    <height>514</height>
    </rect>
   </property>
   <layout class="QHBoxLayout" >
@@ -33,7 +33,7 @@
         <x>0</x>
         <y>0</y>
         <width>429</width>
-        <height>489</height>
+        <height>476</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -246,7 +246,7 @@
         <x>0</x>
         <y>0</y>
         <width>429</width>
-        <height>489</height>
+        <height>491</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -389,7 +389,7 @@
         <x>0</x>
         <y>0</y>
         <width>429</width>
-        <height>489</height>
+        <height>476</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -462,41 +462,7 @@
            </spacer>
           </item>
           <item row="5" column="0" >
-           <widget class="QWidget" native="1" name="transparencyWarningWidget" >
-            <property name="autoFillBackground" >
-             <bool>false</bool>
-            </property>
-            <property name="styleSheet" >
-             <string notr="true" >* { background-color: #FFCCCC ; border-radius: 3px }</string>
-            </property>
-            <layout class="QHBoxLayout" >
-             <property name="margin" >
-              <number>4</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="transparencyWarningIcon" >
-               <property name="styleSheet" >
-                <string notr="true" />
-               </property>
-               <property name="text" >
-                <string>TextLabel</string>
-               </property>
-               <property name="alignment" >
-                <set>Qt::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="transparencyWarningLabel" >
-               <property name="text" >
-                <string>This colour scheme has a transparent background which does not appear to be supported on your desktop.</string>
-               </property>
-               <property name="wordWrap" >
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-            </layout>
+           <widget class="Konsole::WarningBox" native="1" name="transparencyWarningWidget" >
            </widget>
           </item>
          </layout>
@@ -607,7 +573,7 @@
         <x>0</x>
         <y>0</y>
         <width>429</width>
-        <height>489</height>
+        <height>491</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -785,7 +751,7 @@
         <x>0</x>
         <y>0</y>
         <width>429</width>
-        <height>489</height>
+        <height>491</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -875,7 +841,7 @@
         <x>0</x>
         <y>0</y>
         <width>429</width>
-        <height>489</height>
+        <height>491</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -1172,6 +1138,12 @@
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Konsole::WarningBox</class>
+   <extends>QWidget</extends>
+   <header>WarningBox.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

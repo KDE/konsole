@@ -59,6 +59,7 @@ set(konsole_KDEINIT_SRCS
         ViewProperties.cpp
         ViewSplitter.cpp
         Vt102Emulation.cpp
+		WarningBox.cpp
         XKB.cpp
         ZModemDialog.cpp
         konsole_wcwidth.cpp
@@ -137,7 +138,8 @@ set(konsolepart_PART_SRCS
    ViewManager.cpp
    ViewProperties.cpp 
    ViewSplitter.cpp
-   Vt102Emulation.cpp 
+   Vt102Emulation.cpp
+   WarningBox.cpp
    XKB.cpp   
    ZModemDialog.cpp 
    konsole_wcwidth.cpp 

@@ -5,21 +5,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>357</width>
+    <width>364</width>
     <height>475</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" >
-   <property name="leftMargin" >
-    <number>0</number>
-   </property>
-   <property name="topMargin" >
-    <number>0</number>
-   </property>
-   <property name="rightMargin" >
-    <number>0</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>0</number>
    </property>
    <item>
@@ -91,7 +82,7 @@
      <property name="sizeType" >
       <enum>QSizePolicy::Fixed</enum>
      </property>
-     <property name="sizeHint" >
+     <property name="sizeHint" stdset="0" >
       <size>
        <width>364</width>
        <height>5</height>
@@ -100,54 +91,19 @@
     </spacer>
    </item>
    <item>
-    <widget class="QWidget" native="1" name="transparencyWarningWidget" >
-     <property name="autoFillBackground" >
-      <bool>false</bool>
-     </property>
-     <property name="styleSheet" >
-      <string>* { background-color: #FFCCCC ; border-radius: 3px }</string>
-     </property>
-     <layout class="QHBoxLayout" >
-      <property name="leftMargin" >
-       <number>4</number>
-      </property>
-      <property name="topMargin" >
-       <number>4</number>
-      </property>
-      <property name="rightMargin" >
-       <number>4</number>
-      </property>
-      <property name="bottomMargin" >
-       <number>4</number>
-      </property>
-      <item>
-       <widget class="QLabel" name="transparencyWarningIcon" >
-        <property name="styleSheet" >
-         <string/>
-        </property>
-        <property name="text" >
-         <string>TextLabel</string>
-        </property>
-        <property name="alignment" >
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="transparencyWarningLabel" >
-        <property name="text" >
-         <string>The background transparency setting will not be used because your desktop does not appear to support transparent windows.</string>
-        </property>
-        <property name="wordWrap" >
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
+    <widget class="Konsole::WarningBox" native="1" name="transparencyWarningWidget" >
     </widget>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Konsole::WarningBox</class>
+   <extends>QWidget</extends>
+   <header>WarningBox.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
