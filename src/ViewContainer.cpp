@@ -668,9 +668,8 @@ void TabbedViewContainerV2::setTabActivity(int index , bool activity)
     
     const QColor normalColor = palette.text().color();
     const QColor activityColor = KColorUtils::mix(normalColor,colorSchemeActive); 
-
-
-    QColor color = activity ? activityColor : normalColor;
+    
+	QColor color = activity ? activityColor : QColor();
 
     if ( color != _tabBar->tabTextColor(index) )
         _tabBar->setTabTextColor(index,color);
