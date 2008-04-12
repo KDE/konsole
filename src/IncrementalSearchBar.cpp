@@ -224,11 +224,9 @@ void IncrementalSearchBar::setFoundMatch( bool match )
 {
     if ( !match && !_searchEdit->text().isEmpty() )
     {
-		KStatefulBrush foregroundBrush(KColorScheme::View,KColorScheme::NegativeText);
 		KStatefulBrush backgroundBrush(KColorScheme::View,KColorScheme::NegativeBackground);
 
-		QString styleSheet = QString("QLineEdit{ color:%1 ; background-color:%2 }")
-							 .arg(foregroundBrush.brush(_searchEdit).color().name())
+		QString styleSheet = QString("QLineEdit{ background-color:%1 }")
 							 .arg(backgroundBrush.brush(_searchEdit).color().name());
 
         _searchEdit->setStyleSheet( styleSheet );
