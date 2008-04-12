@@ -90,7 +90,7 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
     }
 #ifdef Q_WS_X11
 	if ( KWindowSystem::compositingActive() && 
-		 KCmdLineArgs::parsedArgs()->isSet("enable-transparency") ) 
+		 KCmdLineArgs::parsedArgs()->isSet("transparency") ) 
 	{
 		Display* display = 0;
 		Visual* visual = 0;
@@ -120,7 +120,7 @@ void fillCommandLineOptions(KCmdLineOptions& options)
     options.add("new-tab",ki18n("Create a new tab in an existing window rather than creating a new window"));
     options.add("workdir \\<dir>",   ki18n("Set the initial working directory of the new tab "
                                            "or window to 'dir'"));
-	options.add("enable-transparency",ki18n("Enable transparent backgrounds"));
+	options.add("notransparency",ki18n("Disable transparent backgrounds, even if the system supports them."));
 	options.add("hold");
 	options.add("noclose",ki18n("Do not close the initial session automatically when it ends."));
     // TODO - Document this option more clearly
