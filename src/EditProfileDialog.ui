@@ -948,10 +948,10 @@
              </sizepolicy>
             </property>
             <property name="toolTip" >
-             <string>Enable BiDirectional display on terminals (valid for Arabic, Farsi or Hebrew only)</string>
+             <string>Enable Bi-Directional display on terminals (valid for Arabic, Farsi or Hebrew only)</string>
             </property>
             <property name="text" >
-             <string>Enable Bi-Directional rendering </string>
+             <string>Enable Bi-Directional text rendering</string>
             </property>
            </widget>
           </item>
