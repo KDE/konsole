@@ -25,7 +25,6 @@
 #include <QtGui/QBrush>
 #include <QtGui/QPainter>
 #include <QtGui/QStandardItem>
-#include <KDebug>
 #include <QtCore/QTextCodec>
 #include <QtGui/QTextEdit>
 #include <QtGui/QLinearGradient>
