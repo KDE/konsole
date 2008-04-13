@@ -234,8 +234,14 @@ void SessionController::snapshot()
     else
         delete snapshot;
 
+	title = title.simplified();
+
+	// crude indicator when the session is broadcasting to others
+	if (_copyToGroup && _copyToGroup->sessions().count() > 1)
+		title.append('*');
+
     // apply new title
-    if ( !title.simplified().isEmpty() )
+    if ( !title.isEmpty() )
         _session->setTitle(Session::DisplayedTitleRole,title);
     else
         _session->setTitle(Session::DisplayedTitleRole,_session->title(Session::NameRole));
@@ -749,6 +755,8 @@ void SessionController::copyInputTo()
 			else if (!newGroup.contains(session) && currentGroup.contains(session))
 				_copyToGroup->removeSession(session);
 		}
+
+		snapshot();
 	}
 
 	delete dialog;
