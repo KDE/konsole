@@ -106,7 +106,7 @@ void CopyInputDialog::setSelectionChecked(bool checked)
 void CopyInputDialog::setRowChecked(int row, bool checked)
 {
 	QAbstractItemModel* model = _ui->sessionList->model();
-	QModelIndex index = model->index(row,0);
+	QModelIndex index = model->index(row,_model->checkColumn());
 	if (checked)
 		model->setData(index,(int)Qt::Checked,Qt::CheckStateRole);
 	else

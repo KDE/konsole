@@ -73,6 +73,7 @@ public:
 	CheckableSessionModel(QObject* parent); 
 
 	void setCheckColumn(int column);
+	int checkColumn() const;
 
 	void setCheckable(Session* session, bool checkable);
 	
@@ -91,6 +92,8 @@ private:
 	QSet<Session*> _fixedSessions;
 	int _checkColumn;
 };
+inline int CheckableSessionModel::checkColumn() const
+{ return _checkColumn; }
 
 }
 
