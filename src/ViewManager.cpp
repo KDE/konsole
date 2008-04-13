@@ -466,7 +466,6 @@ SessionController* ViewManager::createController(Session* session , TerminalDisp
     connect( controller , SIGNAL(focused(SessionController*)) , this , SLOT(controllerChanged(SessionController*)) );
     connect( session , SIGNAL(destroyed()) , controller , SLOT(deleteLater()) );
     connect( view , SIGNAL(destroyed()) , controller , SLOT(deleteLater()) );
-    connect( controller , SIGNAL(sendInputToAll(bool)) , this , SLOT(sendInputToAll()) );
 
 	// if this is the first controller created then set it as the active controller
 	if (!_pluggedController)
@@ -787,22 +786,6 @@ QList<ViewProperties*> ViewManager::viewProperties() const
     } 
 
     return list;
-}
-
-void ViewManager::sendInputToAll()
-{
-    SessionGroup* group = new SessionGroup();
-    group->setMasterMode( SessionGroup::CopyInputToAll );
-
-    Session* activeSession = _sessionMap[qobject_cast<TerminalDisplay*>(activeView())];
-    if ( activeSession != 0 )
-    {
-        QListIterator<Session*> iter( SessionManager::instance()->sessions() );
-        while ( iter.hasNext() )
-            group->addSession(iter.next());
-
-        group->setMasterStatus(activeSession,true);
-    }  
 }
 
 uint qHash(QPointer<TerminalDisplay> display)

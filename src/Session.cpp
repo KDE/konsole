@@ -952,8 +952,8 @@ int Session::processId() const
     return _shellProcess->pid();
 }
 
-SessionGroup::SessionGroup()
-    : _masterMode(0)
+SessionGroup::SessionGroup(QObject* parent)
+    : QObject(parent), _masterMode(0)
 {
 }
 SessionGroup::~SessionGroup()
@@ -967,6 +967,8 @@ bool SessionGroup::masterStatus(Session* session) const { return _sessions[sessi
 
 void SessionGroup::addSession(Session* session)
 {
+	connect(session,SIGNAL(finished()),this,SLOT(sessionFinished()));
+
     _sessions.insert(session,false);
 
     QListIterator<Session*> masterIter(masters());
@@ -976,6 +978,8 @@ void SessionGroup::addSession(Session* session)
 }
 void SessionGroup::removeSession(Session* session)
 {
+	disconnect(session,SIGNAL(finished()),this,SLOT(sessionFinished()));
+
     setMasterStatus(session,false);
 
     QListIterator<Session*> masterIter(masters());
@@ -984,6 +988,12 @@ void SessionGroup::removeSession(Session* session)
         disconnectPair(masterIter.next(),session);
 
     _sessions.remove(session);
+}
+void SessionGroup::sessionFinished()
+{
+	Session* session = qobject_cast<Session*>(sender());
+	Q_ASSERT(session);
+	removeSession(session);
 }
 void SessionGroup::setMasterMode(int mode)
 {
@@ -1044,11 +1054,9 @@ void SessionGroup::setMasterStatus(Session* session , bool master)
 }
 void SessionGroup::connectPair(Session* master , Session* other)
 {
-    kDebug() << k_funcinfo;
-
     if ( _masterMode & CopyInputToAll )
     {
-        kDebug() << "Connection session " << master->nameTitle() << "to" << other->nameTitle();
+//        kDebug() << "Connection session " << master->nameTitle() << "to" << other->nameTitle();
 
         connect( master->emulation() , SIGNAL(sendData(const char*,int)) , other->emulation() ,
                  SLOT(sendString(const char*,int)) );
@@ -1056,11 +1064,9 @@ void SessionGroup::connectPair(Session* master , Session* other)
 }
 void SessionGroup::disconnectPair(Session* master , Session* other)
 {
-    kDebug() << k_funcinfo;
-
     if ( _masterMode & CopyInputToAll )
     {
-        kDebug() << "Disconnecting session " << master->nameTitle() << "from" << other->nameTitle();
+//        kDebug() << "Disconnecting session " << master->nameTitle() << "from" << other->nameTitle();
 
         disconnect( master->emulation() , SIGNAL(sendData(const char*,int)) , other->emulation() ,
                 SLOT(sendString(const char*,int)) );

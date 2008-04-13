@@ -567,7 +567,7 @@ Q_OBJECT
 
 public:
     /** Constructs an empty session group. */
-    SessionGroup();
+    SessionGroup(QObject* parent);
     /** Destroys the session group and removes all connections between master and slave sessions. */
     ~SessionGroup();
 
@@ -616,6 +616,9 @@ public:
      * See setMasterMode()
      */
     int masterMode() const;
+
+private slots:
+	void sessionFinished();
 
 private:
     void connectPair(Session* master , Session* other);

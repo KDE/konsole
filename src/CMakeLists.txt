@@ -29,6 +29,7 @@ set(konsole_KDEINIT_SRCS
         BookmarkHandler.cpp
         ColorScheme.cpp
         ColorSchemeEditor.cpp
+		CopyInputDialog.cpp
         EditProfileDialog.cpp
         Emulation.cpp
         Filter.cpp
@@ -69,6 +70,7 @@ set(konsole_KDEINIT_SRCS
 
 kde4_add_ui_files(konsole_KDEINIT_SRCS
                   ColorSchemeEditor.ui
+				  CopyInputDialog.ui
                   EditProfileDialog.ui
                   KeyBindingEditor.ui
                   ManageProfilesDialog.ui
@@ -110,6 +112,7 @@ set(konsolepart_PART_SRCS
    BookmarkHandler.cpp 
    ColorScheme.cpp
    ColorSchemeEditor.cpp
+   CopyInputDialog.cpp
    EditProfileDialog.cpp
    Emulation.cpp 
    Filter.cpp 

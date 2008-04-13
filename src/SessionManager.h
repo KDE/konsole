@@ -26,6 +26,7 @@
 #include <QtGui/QFont>
 #include <QtGui/QKeySequence>
 
+#include <QtCore/QAbstractListModel>
 #include <QtCore/QHash>
 #include <QtCore/QList>
 #include <QtCore/QSet>
@@ -367,5 +368,33 @@ private:
 	int _count;
 };
 
+class SessionListModel : public QAbstractListModel
+{
+Q_OBJECT
+
+public:
+	SessionListModel(QObject* parent = 0);
+
+	void setSessions(const QList<Session*>& sessions);
+
+	virtual QModelIndex index(int row, int column, const QModelIndex& parent) const;
+	virtual QVariant data(const QModelIndex& index, int role) const;
+	virtual QVariant headerData(int section, Qt::Orientation orientation, 
+						int role) const;
+	virtual int columnCount(const QModelIndex& parent) const;
+	virtual int rowCount(const QModelIndex& parent) const;
+	virtual QModelIndex parent(const QModelIndex& index) const;
+
+protected:
+	virtual void sessionRemoved(Session*) {}
+
+private slots:
+	void sessionFinished();
+
+private:
+	QList<Session*> _sessions;	
+};
+
 }
 #endif //SESSIONMANAGER_H
+

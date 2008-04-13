@@ -54,6 +54,7 @@ namespace Konsole
 {
 
 class Session;
+class SessionGroup;
 class ScreenWindow;
 class TerminalDisplay;
 class IncrementalSearchBar;
@@ -140,12 +141,6 @@ signals:
      */
     void focused( SessionController* controller );
 
-    /**
-     * Emitted when the user enables the "Send Input to All" menu
-     * item associated with this session.
-     */
-    void sendInputToAll(bool sendToAll);
-
 public slots:
     /**
      * Issues a command to the session to navigate to the specified URL.
@@ -166,6 +161,7 @@ private slots:
 	void pasteSelection(); // shortcut only
     void clear();
     void clearAndReset();
+	void copyInputTo();
     void editCurrentProfile();
     void changeCodec(QTextCodec* codec);
     //void searchHistory();
@@ -233,6 +229,7 @@ private:
 
     QPointer<Session>         _session;
     QPointer<TerminalDisplay> _view;
+	SessionGroup* 			  _copyToGroup;
     
     ProfileList* _profileList;
 

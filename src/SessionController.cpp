@@ -43,6 +43,7 @@
 
 // Konsole
 #include "EditProfileDialog.h"
+#include "CopyInputDialog.h"
 #include "Emulation.h"
 #include "Filter.h"
 #include "History.h"
@@ -73,6 +74,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     , KXMLGUIClient()
     , _session(session)
     , _view(view)
+	, _copyToGroup(0)
     , _profileList(0)
     , _previousState(-1)
     , _viewUrlFilter(0)
@@ -479,14 +481,10 @@ void SessionController::setupActions()
     action->setShortcut( QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_S) );
     connect( action , SIGNAL(triggered()) , this , SLOT(renameSession()) );
 
-    // Send to All
-
-    //TODO - Complete the implementation of 'Send Input to All' for
-    //	     a future KDE 4 release
-    //
-    //toggleAction = new KToggleAction(i18n("Send Input to All"),this);
-    //action = collection->addAction("send-input-to-all",toggleAction);
-    //connect( action , SIGNAL(toggled(bool)) , this , SIGNAL(sendInputToAll(bool)) );
+    // Copy Input To
+    action = collection->addAction("copy-input-to");
+    action->setText(i18n("Copy Input To..."));
+    connect( action , SIGNAL(triggered()) , this , SLOT(copyInputTo()) );
 
     // Clear and Clear+Reset
     action = collection->addAction("clear");
@@ -657,12 +655,16 @@ void SessionController::editCurrentProfile()
 }
 void SessionController::renameSession()
 {
+	QPointer<Session> guard(_session);
     bool ok = false;
     const QString& text = KInputDialog::getText( i18n("Rename Tab") ,
                                                  i18n("Enter new tab text:") ,
                                                  _session->tabTitleFormat(Session::LocalTabTitle) ,
                                                  &ok, QApplication::activeWindow() );
-    if ( ok )
+    if (!guard)
+		return;
+
+	if ( ok )
     {
 		// renaming changes both the local and remote tab title formats, to save confusion over
 		// the tab title not changing if renaming the tab whilst the remote tab title format is 
@@ -710,6 +712,46 @@ void SessionController::paste()
 void SessionController::pasteSelection()
 {
 	_view->pasteSelection();
+}
+void SessionController::copyInputTo()
+{
+	if (!_copyToGroup)
+	{
+		_copyToGroup = new SessionGroup(this);
+		_copyToGroup->addSession(_session);
+		_copyToGroup->setMasterStatus(_session,true);
+		_copyToGroup->setMasterMode(SessionGroup::CopyInputToAll);
+	}
+
+	CopyInputDialog* dialog = new CopyInputDialog(_view);
+	dialog->setMasterSession(_session);
+	
+	QSet<Session*> currentGroup = QSet<Session*>::fromList(_copyToGroup->sessions());
+	currentGroup.remove(_session);
+	
+	dialog->setChosenSessions(currentGroup);
+
+	QPointer<Session> guard(_session);
+	int result = dialog->exec();
+	if (!guard)
+		return;
+
+	if (result)
+	{
+		QSet<Session*> newGroup = dialog->chosenSessions();
+		newGroup.remove(_session);
+	
+		QSet<Session*> completeGroup = newGroup | currentGroup;
+		foreach(Session* session, completeGroup)
+		{
+			if (newGroup.contains(session) && !currentGroup.contains(session))
+				_copyToGroup->addSession(session);
+			else if (!newGroup.contains(session) && currentGroup.contains(session))
+				_copyToGroup->removeSession(session);
+		}
+	}
+
+	delete dialog;
 }
 void SessionController::clear()
 {

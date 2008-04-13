@@ -11,7 +11,7 @@
             <Action name="paste" group="session-edit-operations" />
             <Action name="rename-session" group="session-edit-operations" />
             <Separator group="session-edit-operations"/>
-            <Action name="send-input-to-all" group="session-edit-operations"/>
+            <Action name="copy-input-to" group="session-edit-operations"/>
             <Separator group="session-edit-operations"/>
             <Action name="clear" group="session-edit-operations" />
             <Action name="clear-and-reset" group="session-edit-operations" />
