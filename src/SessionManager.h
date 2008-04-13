@@ -143,7 +143,7 @@ public:
      * send keyboard or mouse input to it.
      *
      * @param profile A profile containing the settings for the new session.  If @p profile 
-	 * is null the defaul profile (see defaultProfile()) will be used.
+	 * is null the default profile (see defaultProfile()) will be used.
      */
     Session* createSession(Profile::Ptr profile = Profile::Ptr());
 

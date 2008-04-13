@@ -167,7 +167,7 @@ int Pty::start(const QString& program,
   // this fixes the problem where KCatalog sets the LANGUAGE environment
   // variable during the application's startup to something which
   // differs from LANG,LC_* etc. and causes programs run from
-  // the terminal to display mesages in the wrong language
+  // the terminal to display messages in the wrong language
   //
   // this can happen if LANG contains a language which KDE
   // does not have a translation for
