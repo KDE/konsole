@@ -370,7 +370,7 @@ void Session::run()
 
   if (result < 0)
   {
-	  terminalWarning(i18n("Could not start program '%1' with arguments '%2'."));
+	  terminalWarning(i18n("Could not start program '%1' with arguments '%2'.", exec, arguments.join(" ")));
     return;
   }
 
