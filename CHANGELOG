@@ -1,21 +1,24 @@
 
-
 KDE 4.1
 ==========================
 
 New Features:
+	- BUG 152072 - Add 'Copy Input To...' feature which allows the output of the current 
+	  session to be copied to all of or a subset of the running sessions.
 	- Text anti-aliasing can be turned off via the 'Smooth Fonts' option in the profile editor
 	- Make mouse-wheel scrolling work in "less" and other terminal applications which don't
 	understand mouse commands.
-	- BUG 158235 - Support Xterm's clear history escape sequence 
 	- BUG 157256 - The session number can be displayed in tab titles using the %# marker
 	- Added option to specify whether new sessions start in the same directory as the current
 	session.
+	- Option to enable bi-directional text rendering in a profile
+	- BUG 158235 - Support Xterm's clear history escape sequence 
 
 Minor changes:
 	- Limit tab name length to prevent a single tab from taking up the entire tab bar.
 	- Scroll the terminal continually when the mouse is held down and moved outside the display
 	(like a text document)
+	- Use KDE's shortcut editor to input profile shortcuts
 
 Fixes:
 	- Fix embedded terminal not gaining focus when shown in Dolphin
@@ -39,4 +42,8 @@ Fixes:
 					clashes with shortcuts in Yakuake etc.
 	- Allow selection of trailing new-line character at end of selection for consistency with
 	KDE 3.5
-
+	- Respect KDE color scheme in transparency warning box 
+	- Update tab colors when color scheme is changed
+	- BUG 160422 - Fix calculation of initial size of window.  Default to 80 characters width.
+	- Do not re-use an existing Konsole process when started from a terminal.  This ensures that
+	  the environment from the terminal is inherited by the new terminal window.
