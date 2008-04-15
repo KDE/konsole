@@ -378,6 +378,7 @@ protected:
 
 private:
 	void setDropIndicator(int index);
+	int dropIndex(const QPoint& pos) const;
 
 	TabbedViewContainerV2* _container;
 	QLabel* _dropIndicator;

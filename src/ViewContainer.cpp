@@ -514,7 +514,7 @@ void ViewContainerTabBar::dragMoveEvent(QDragMoveEvent* event)
 {
 	if (event->mimeData()->hasFormat(ViewProperties::mimeType()))
 	{
-		int index = tabAt(event->pos());
+		int index = dropIndex(event->pos());
 		if (index == -1)
 			index = count();
 
@@ -523,6 +523,22 @@ void ViewContainerTabBar::dragMoveEvent(QDragMoveEvent* event)
 		event->acceptProposedAction();
 	}
 }
+int ViewContainerTabBar::dropIndex(const QPoint& pos) const
+{
+	int tab = tabAt(pos);
+	if (tab < 0)
+		return tab;
+
+	// pick the closest tab boundary 
+	QRect rect = tabRect(tab);
+	if ( (pos.x()-rect.left()) > (rect.width()/2) )
+		tab++;
+
+	if (tab == count())
+		return -1;
+
+	return tab;
+}	
 void ViewContainerTabBar::dropEvent(QDropEvent* event)
 {
 	setDropIndicator(-1);
@@ -530,7 +546,7 @@ void ViewContainerTabBar::dropEvent(QDropEvent* event)
 	if (!event->mimeData()->hasFormat(ViewProperties::mimeType()))
 		event->ignore();
 
-	int index = tabAt(event->pos());
+	int index = dropIndex(event->pos());
 	int droppedId = *(int*)(event->mimeData()->data(ViewProperties::mimeType()).constData());
 	bool sameTabBar = event->source() == this;
 
