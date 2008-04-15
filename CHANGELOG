@@ -5,6 +5,7 @@ KDE 4.1
 New Features:
 	- BUG 152072 - Add 'Copy Input To...' feature which allows the output of the current 
 	  session to be copied to all of or a subset of the running sessions.
+	- BUG 75653 - Tabs may be dragged and dropped between windows and containers.
 	- Text anti-aliasing can be turned off via the 'Smooth Fonts' option in the profile editor
 	- Make mouse-wheel scrolling work in "less" and other terminal applications which don't
 	understand mouse commands.
