@@ -24,6 +24,7 @@
 
 // Qt
 #include <QtCore/QHash>
+#include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
 #include <QtGui/QBrush>
 #include <QtGui/QListWidget>
@@ -33,6 +34,10 @@
 #include <QtGui/QTabBar>
 #include <QtGui/QToolButton>
 #include <QtGui/QWidgetAction>
+
+#include <QtGui/QDrag>
+#include <QtGui/QDragMoveEvent>
+#include <QMimeData>
 
 // KDE 
 #include <KColorDialog>
@@ -130,14 +135,18 @@ ViewContainer::NavigationDisplayMode ViewContainer::navigationDisplayMode() cons
 {
     return _navigationDisplayMode;
 }
-void ViewContainer::addView(QWidget* view , ViewProperties* item)
+void ViewContainer::addView(QWidget* view , ViewProperties* item, int index)
 {
-    _views << view;
+	if (index == -1)
+		_views.append(view);
+	else
+		_views.insert(index,view);
+
     _navigation[view] = item;
 
     connect( view , SIGNAL(destroyed(QObject*)) , this , SLOT( viewDestroyed(QObject*) ) );
 
-    addViewWidget(view);
+    addViewWidget(view,index);
 
     emit viewAdded(view,item);
 }
@@ -357,7 +366,7 @@ void TabbedViewContainer::prepareColorCells()
         } 
 }
 
-void TabbedViewContainer::addViewWidget( QWidget* view )
+void TabbedViewContainer::addViewWidget( QWidget* view , int )
 {
     ViewProperties* item = viewProperties(view);
     connect( item , SIGNAL(titleChanged(ViewProperties*)) , this , SLOT(updateTitle(ViewProperties*))); 
@@ -442,36 +451,147 @@ void TabbedViewContainer::selectTabColor()
   _tabWidget->setTabTextColor( _contextMenuTab , color );
 }
 
-ViewContainerTabBar::ViewContainerTabBar(QWidget* parent)
+ViewContainerTabBar::ViewContainerTabBar(QWidget* parent,TabbedViewContainerV2* container)
     : KTabBar(parent)
+	, _container(container)
+    , _dropIndicator(0)
+	, _dropIndicatorIndex(-1)
 {
-    //TODO  Make tab re-ordering possible, but the QStackedWidget
-    // and tab widget will then have different indicies, in which
-    // case either the view widget stack needs to be re-ordered
-    // or mapping between the tab and stack widget indicies needs
-    // to be added
-    //
-    //setTabReorderingEnabled(true);
+}
+void ViewContainerTabBar::setDropIndicator(int index)
+{
+	if (!parentWidget() || _dropIndicatorIndex == index)
+		return;
+
+	_dropIndicatorIndex = index;
+	const int ARROW_SIZE = 22;
+	bool north = shape() == QTabBar::RoundedNorth || shape() == QTabBar::TriangularNorth;
+
+	if (!_dropIndicator)
+	{
+		_dropIndicator = new QLabel(parentWidget());
+
+		const QString iconName = north ? "arrow-up" : "arrow-down";
+		_dropIndicator->setPixmap(KIcon(iconName).pixmap(ARROW_SIZE,ARROW_SIZE));
+		_dropIndicator->resize(ARROW_SIZE,ARROW_SIZE);
+	}
+
+	if (index < 0)
+	{
+		_dropIndicator->hide();
+		return;
+	}
+
+	const QRect rect = tabRect(index < count() ? index : index-1);
+
+	QPoint pos;
+	if (index < count())
+		pos = rect.topLeft();
+	else
+		pos = rect.topRight();
+
+	if (north)
+		pos.ry() += ARROW_SIZE;
+	else
+		pos.ry() -= ARROW_SIZE; 
+
+	pos.rx() -= ARROW_SIZE/2; 
+
+	_dropIndicator->move(mapTo(parentWidget(),pos));
+	_dropIndicator->show();
+
+}
+void ViewContainerTabBar::dragLeaveEvent(QDragLeaveEvent*)
+{
+	setDropIndicator(-1);
+}
+void ViewContainerTabBar::dragEnterEvent(QDragEnterEvent* event)
+{
+	if (event->mimeData()->hasFormat(ViewProperties::mimeType()))
+		event->acceptProposedAction();	
+}
+void ViewContainerTabBar::dragMoveEvent(QDragMoveEvent* event)
+{
+	if (event->mimeData()->hasFormat(ViewProperties::mimeType()))
+	{
+		int index = tabAt(event->pos());
+		if (index == -1)
+			index = count();
+
+		setDropIndicator(index);
+
+		event->acceptProposedAction();
+	}
+}
+void ViewContainerTabBar::dropEvent(QDropEvent* event)
+{
+	setDropIndicator(-1);
+
+	if (!event->mimeData()->hasFormat(ViewProperties::mimeType()))
+		event->ignore();
+
+	int index = tabAt(event->pos());
+	int droppedId = *(int*)(event->mimeData()->data(ViewProperties::mimeType()).constData());
+	bool sameTabBar = event->source() == this;
+
+	int currentId = -1;
+	if (sameTabBar && index >= 0 && index < count())
+		currentId = _container->viewProperties(_container->views()[index])->identifier();
+
+	if (currentId == droppedId)
+	{
+		event->ignore();
+		return;
+	}
+
+	bool result = false;
+	emit _container->moveViewRequest(index,droppedId,result);
+	
+	if (result)
+		event->accept();
+	else
+		event->ignore();
 }
 
 QSize ViewContainerTabBar::tabSizeHint(int index) const
 {
      return QTabBar::tabSizeHint(index);
 }
+QPixmap ViewContainerTabBar::dragDropPixmap(int tab) 
+{
+	Q_ASSERT(tab >= 0 && tab < count());
 
+	QPixmap tabPixmap = QPixmap::grabWidget(this,tabRect(tab));
+
+	// TODO - grabWidget() works except that it includes part
+	// of the tab bar outside the tab itself if the tab has 
+	// curved corners
+
+#if 0
+	QStyleOptionTabV2 tabStyle;
+	initStyleOption(&tabStyle,tab);
+	tabStyle.state |= QStyle::State_Selected; 
+	QPixmap tabPixmap(tabStyle.rect.width(),tabStyle.rect.height());
+	QPainter painter(&tabPixmap);
+	painter.translate(-tabStyle.rect.left(),0);
+	style()->drawControl(QStyle::CE_TabBarTab,&tabStyle,&painter,this);
+#endif
+
+	return tabPixmap;
+}
 TabbedViewContainerV2::TabbedViewContainerV2(NavigationPosition position , QObject* parent) 
 : ViewContainer(position,parent)
 {
     _containerWidget = new QWidget;
     _stackWidget = new QStackedWidget();
-    _tabBar = new ViewContainerTabBar();
+    _tabBar = new ViewContainerTabBar(_containerWidget,this);
     _tabBar->setDrawBase(true);
    
     connect( _tabBar , SIGNAL(currentChanged(int)) , this , SLOT(currentTabChanged(int)) );
     connect( _tabBar , SIGNAL(tabDoubleClicked(int)) , this , SLOT(tabDoubleClicked(int)) );
-    connect( _tabBar , SIGNAL(newTabRequest()) , this , SIGNAL(newViewRequest()) );
     connect( _tabBar , SIGNAL(wheelDelta(int)) , this , SLOT(wheelScrolled(int)) );
 	connect( _tabBar , SIGNAL(mouseMiddleClick(int)) , this , SLOT(closeTab(int)) );
+	connect( _tabBar , SIGNAL(initiateDrag(int)) , this , SLOT(startTabDrag(int)) );
 
     _layout = new TabbedViewContainerV2Layout;
     _layout->setSpacing(0);
@@ -575,6 +695,46 @@ TabbedViewContainerV2::~TabbedViewContainerV2()
 {
     _containerWidget->deleteLater();
 }
+
+void TabbedViewContainerV2::startTabDrag(int tab)
+{
+	QDrag* drag = new QDrag(_tabBar);
+
+	QMimeData* mimeData = new QMimeData;
+
+	const QRect tabRect = _tabBar->tabRect(tab);
+	QPixmap tabPixmap = _tabBar->dragDropPixmap(tab); 
+
+	drag->setPixmap(tabPixmap);
+	
+	int id = viewProperties(views()[tab])->identifier();
+	QByteArray data((char*)&id,sizeof(int));
+	mimeData->setData(ViewProperties::mimeType(),data);
+
+	QWidget* view = views()[tab];
+
+	drag->setMimeData(mimeData);
+
+	// start drag, if drag-and-drop is successful the view at 'tab' will be
+	// deleted
+	//
+	// if the tab was dragged onto another application
+	// which blindly accepted the drop then ignore it
+	if (drag->exec() == Qt::MoveAction && drag->target() != 0)
+	{
+		// Deleting the view may cause the view container to be deleted, which
+		// will also delete the QDrag object.
+		// This can cause a crash if Qt's internal drag-and-drop handling
+		// tries to delete it later.  
+		//
+		// For now set the QDrag's parent to 0 so that it won't be deleted if 
+		// this view container is destroyed.
+		//
+		// FIXME: Resolve this properly
+		drag->setParent(0);
+		removeView(view);
+	}
+}
 void TabbedViewContainerV2::tabDoubleClicked(int tab)
 {
     viewProperties( views()[tab] )->rename();
@@ -629,9 +789,9 @@ void TabbedViewContainerV2::setActiveView(QWidget* view)
    _stackWidget->setCurrentWidget(view);
    _tabBar->setCurrentIndex(index); 
 }
-void TabbedViewContainerV2::addViewWidget( QWidget* view )
+void TabbedViewContainerV2::addViewWidget( QWidget* view , int index)
 {
-    _stackWidget->addWidget(view);
+    _stackWidget->insertWidget(index,view);
     _stackWidget->updateGeometry();
 
     ViewProperties* item = viewProperties(view);
@@ -642,7 +802,7 @@ void TabbedViewContainerV2::addViewWidget( QWidget* view )
     connect( item , SIGNAL(activity(ViewProperties*)) , this ,
                     SLOT(updateActivity(ViewProperties*)));
 
-    _tabBar->addTab( item->icon() , item->title() );
+    _tabBar->insertTab( index , item->icon() , item->title() );
 
     if ( navigationDisplayMode() == ShowNavigationAsNeeded )
         dynamicTabBarVisibility();
@@ -744,7 +904,7 @@ void StackedViewContainer::setActiveView(QWidget* view)
 {
    _stackWidget->setCurrentWidget(view); 
 }
-void StackedViewContainer::addViewWidget( QWidget* view )
+void StackedViewContainer::addViewWidget( QWidget* view , int )
 {
     _stackWidget->addWidget(view);
 }
@@ -820,7 +980,7 @@ QBrush ListViewContainer::randomItemBackground(int r)
     return QBrush(gradient);
 }
 
-void ListViewContainer::addViewWidget( QWidget* view )
+void ListViewContainer::addViewWidget( QWidget* view , int )
 {
     _stackWidget->addWidget(view);
 

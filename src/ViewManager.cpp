@@ -489,6 +489,39 @@ SessionController* ViewManager::activeViewController() const
 {
 	return _pluggedController;
 }
+void ViewManager::createView(Session* session, ViewContainer* container, int index)
+{
+	// notify this view manager when the session finishes so that its view
+    // can be deleted
+	//
+	// TODO - Find a more efficient a way to avoid multiple connections
+	disconnect( session , SIGNAL(finished()) , this , SLOT(sessionFinished()) );
+    connect( session , SIGNAL(finished()) , this , SLOT(sessionFinished()) );
+
+     TerminalDisplay* display = createTerminalDisplay(session);
+     applyProfile(display,SessionManager::instance()->sessionProfile(session));
+     
+     // set initial size
+     display->setSize(80,40);
+
+     ViewProperties* properties = createController(session,display);
+
+     _sessionMap[display] = session; 
+     container->addView(display,properties,index);
+     session->addView(display);
+
+     // tell the session whether it has a light or dark background
+ 	const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
+     session->setDarkBackground( colorSchemeForProfile(profile)->hasDarkBackground() );
+
+     if ( container == _viewSplitter->activeContainer() ) 
+     {
+         container->setActiveView(display);
+         display->setFocus( Qt::OtherFocusReason );
+     }
+	
+	 updateDetachViewState();
+}
 
 void ViewManager::createView(Session* session)
 {
@@ -500,43 +533,18 @@ void ViewManager::createView(Session* session)
         emit splitViewToggle(false);
     }
 
-    // notify this view manager when the session finishes so that its view
-    // can be deleted
-    connect( session , SIGNAL(finished()) , this , SLOT(sessionFinished()) );
-   
+       
     // iterate over the view containers owned by this view manager
     // and create a new terminal display for the session in each of them, along with
     // a controller for the session/display pair 
-    ViewContainer* const activeContainer = _viewSplitter->activeContainer();
     QListIterator<ViewContainer*> containerIter(_viewSplitter->containers());
 
     while ( containerIter.hasNext() )
     {
         ViewContainer* container = containerIter.next();
-        TerminalDisplay* display = createTerminalDisplay(session);
-        applyProfile(display,SessionManager::instance()->sessionProfile(session));
-        
-        // set initial size
-        display->setSize(80,40);
-
-        ViewProperties* properties = createController(session,display);
-
-        _sessionMap[display] = session; 
-        container->addView(display,properties);
-        session->addView(display);
-
-        // tell the session whether it has a light or dark background
-		const Profile::Ptr profile = SessionManager::instance()->sessionProfile(session);
-        session->setDarkBackground( colorSchemeForProfile(profile)->hasDarkBackground() );
-
-        if ( container == activeContainer ) 
-        {
-            container->setActiveView(display);
-            display->setFocus( Qt::OtherFocusReason );
-        }
+		createView(session,container,-1);
     }
 
-	updateDetachViewState();
 }
 
 ViewContainer* ViewManager::createContainer(const Profile::Ptr info)
@@ -568,14 +576,25 @@ ViewContainer* ViewManager::createContainer(const Profile::Ptr info)
            SLOT(map()) ); 
     _containerSignalMapper->setMapping(container,container);
 
-    connect( container, SIGNAL(newViewRequest()), this , SIGNAL(newViewRequest()) );
+    connect( container, SIGNAL(moveViewRequest(int,int,bool&)), 
+	this , SLOT(containerMoveViewRequest(int,int,bool&)) );
     connect( container , SIGNAL(viewRemoved(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)) );
     connect( container , SIGNAL(closeRequest(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)) );
     connect( container , SIGNAL(activeViewChanged(QWidget*)) , this , SLOT(viewActivated(QWidget*)));
     
     return container;
 }
+void ViewManager::containerMoveViewRequest(int index, int id, bool& moved)
+{
+	ViewContainer* container = qobject_cast<ViewContainer*>(sender());
+	SessionController* controller = qobject_cast<SessionController*>(ViewProperties::propertiesById(id));
 
+	if (!controller)
+		return;
+
+	createView(controller->session(),container,index);
+	moved = true;
+}
 void ViewManager::setNavigationMethod(NavigationMethod method)
 {
     _navigationMethod = method;

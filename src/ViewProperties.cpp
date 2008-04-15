@@ -24,13 +24,23 @@
 
 using namespace Konsole;
 
+QHash<int,ViewProperties*> ViewProperties::_viewProperties;
+QString ViewProperties::_mimeType = "application/x-konsole-view-id";
+
 ViewProperties::ViewProperties(QObject* parent)
 : QObject(parent)
 , _id(0)
 //, _flags(0)
 {
 }
-
+ViewProperties::~ViewProperties()
+{
+	_viewProperties.remove(_id);
+}
+ViewProperties* ViewProperties::propertiesById(int id)
+{
+	return _viewProperties[id];
+}
 KUrl ViewProperties::url() const
 {
     return KUrl();
@@ -69,7 +79,12 @@ void ViewProperties::setIcon(const QIcon& icon)
 }
 void ViewProperties::setIdentifier(int id)
 {
+	if (_viewProperties.contains(_id))
+		_viewProperties.remove(_id);
+
     _id = id;
+
+	_viewProperties.insert(id,this);
 }
 QString ViewProperties::title() const
 {

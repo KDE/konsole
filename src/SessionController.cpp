@@ -68,6 +68,7 @@ using namespace Konsole;
 KIcon SessionController::_activityIcon;
 KIcon SessionController::_silenceIcon;
 QPointer<SearchHistoryThread> SearchHistoryTask::_thread;
+int SessionController::_lastControllerId;
 
 SessionController::SessionController(Session* session , TerminalDisplay* view, QObject* parent)
     : ViewProperties(parent)
@@ -104,7 +105,7 @@ SessionController::SessionController(Session* session , TerminalDisplay* view, Q
     foreach (QAction* action, actionCollection()->actions())
         action->setShortcutContext(Qt::WidgetWithChildrenShortcut);
 
-    setIdentifier(_session->sessionId());
+    setIdentifier(++_lastControllerId);
     sessionTitleChanged();
 
     view->installEventFilter(this);

@@ -241,8 +241,13 @@ private slots:
 	// called when a SessionController gains focus
 	void controllerChanged(SessionController* controller);
 
+	// called when a ViewContainer requests a view be 
+	// moved 
+	void containerMoveViewRequest(int index, int id, bool& success);
+
 private:
-    const ColorScheme* colorSchemeForProfile(const Profile::Ptr profile) const;
+	void createView(Session* session, ViewContainer* container, int index);
+	const ColorScheme* colorSchemeForProfile(const Profile::Ptr profile) const;
 
     void setupActions();
     void focusActiveView();

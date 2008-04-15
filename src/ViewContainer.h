@@ -34,6 +34,7 @@
 class QSpacerItem;
 class QStackedWidget;
 class QWidget;
+class QLabel;
 
 // TabbedViewContainer
     // Qt
@@ -170,7 +171,7 @@ public:
     virtual QList<NavigationPosition> supportedNavigationPositions() const;
 
     /** Adds a new view to the container widget */
-    void addView(QWidget* view , ViewProperties* navigationItem);
+    void addView(QWidget* view , ViewProperties* navigationItem, int index = -1);
  
     /** Removes a view from the container */
     void removeView(QWidget* view);
@@ -239,8 +240,19 @@ signals:
     /** Emitted when the user requests to close a view */
     void closeRequest(QWidget* activeView);
 
-    /** Emitted when the user requests to open a new view */
-    void newViewRequest();
+    /** 
+	 * Emitted when the user requests to move a view from another container
+	 * into this container.  If 'success' is set to true by a connected slot
+	 * then the original view will be removed.
+	 *
+	 * @param index Index at which to insert the new view in the container or -1
+	 * to append it.  This index should be passed to addView() when the new view
+	 * has been created.
+	 * @param id The identifier of the view.
+	 * @param success The slot handling this signal should set this to true if the 
+	 * new view was successfully created.  
+	 */
+    void moveViewRequest(int index,int id,bool& success);
 
     /** Emitted when the active view changes */
     void activeViewChanged( QWidget* view );
@@ -256,7 +268,7 @@ protected:
      * Performs the task of adding the view widget
      * to the container widget.
      */
-    virtual void addViewWidget(QWidget* view) = 0;
+    virtual void addViewWidget(QWidget* view,int index) = 0;
     /**
      * Performs the task of removing the view widget
      * from the container widget.
@@ -316,7 +328,7 @@ public:
     void setNewSessionMenu(QMenu* menu);
      
 protected:
-    virtual void addViewWidget( QWidget* view );
+    virtual void addViewWidget( QWidget* view , int index);
     virtual void removeViewWidget( QWidget* view ); 
 
 private slots:
@@ -344,16 +356,32 @@ private:
     int _contextMenuTab;
 };
 
+class TabbedViewContainerV2;
+
 // internal class,
 // to allow for tweaks to the tab bar required by TabbedViewContainerV2.
-// does not actually do anything currently
 class ViewContainerTabBar : public KTabBar
 {
+Q_OBJECT
+
 public:
-    ViewContainerTabBar(QWidget* parent = 0);
+    ViewContainerTabBar(QWidget* parent,TabbedViewContainerV2* container);
+
+	QPixmap dragDropPixmap(int tab);
 
 protected:
     virtual QSize tabSizeHint(int index) const;
+	virtual void dragEnterEvent(QDragEnterEvent* event);
+	virtual void dragLeaveEvent(QDragLeaveEvent* event);
+	virtual void dragMoveEvent(QDragMoveEvent* event);
+	virtual void dropEvent(QDropEvent* event);
+
+private:
+	void setDropIndicator(int index);
+
+	TabbedViewContainerV2* _container;
+	QLabel* _dropIndicator;
+	int _dropIndicatorIndex;
 };
 
 // internal
@@ -380,6 +408,8 @@ class TabbedViewContainerV2 : public ViewContainer
 {
     Q_OBJECT
 
+friend class ViewContainerTabBar;
+
 public:
     /**
      * Constructs a new tabbed view container.  Supported positions
@@ -396,7 +426,7 @@ public:
 
 
 protected:
-    virtual void addViewWidget(QWidget* view);
+    virtual void addViewWidget(QWidget* view , int index);
     virtual void removeViewWidget(QWidget* view);
     virtual void navigationDisplayModeChanged(NavigationDisplayMode mode);
     virtual void navigationPositionChanged(NavigationPosition position);
@@ -412,6 +442,7 @@ private slots:
    
     void tabDoubleClicked(int index);
 
+	void startTabDrag(int index);
 private:
     void dynamicTabBarVisibility();
     void setTabBarVisible(bool visible);
@@ -440,7 +471,7 @@ public:
     virtual void setActiveView(QWidget* view);
 
 protected:
-    virtual void addViewWidget( QWidget* view );
+    virtual void addViewWidget( QWidget* view , int index);
     virtual void removeViewWidget( QWidget* view );
 
 private:
@@ -464,7 +495,7 @@ public:
     virtual void setActiveView(QWidget* view);
 
 protected:
-    virtual void addViewWidget( QWidget* view );
+    virtual void addViewWidget( QWidget* view , int index);
     virtual void removeViewWidget( QWidget* view );
 
 private slots:

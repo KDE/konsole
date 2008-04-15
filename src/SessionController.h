@@ -255,6 +255,8 @@ private:
 
 	bool _listenForScreenWindowUpdates;
 	bool _preventClose;
+
+	static int _lastControllerId;
 };
 inline bool SessionController::isValid() const
 {

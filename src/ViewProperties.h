@@ -23,6 +23,7 @@
 // Qt
 #include <QtGui/QIcon>
 #include <QtCore/QObject>
+#include <QtCore/QHash>
 
 // KDE
 #include <KUrl>
@@ -43,6 +44,7 @@ Q_OBJECT
 
 public:
     ViewProperties(QObject* parent); 
+	virtual ~ViewProperties();
 
     /** Returns the icon associated with a view */
     QIcon icon() const;
@@ -64,14 +66,17 @@ public:
     virtual QString currentDir() const;
 
     /** 
-     * A unique identifier representing the data displayed by the view associated with this
+     * A unique identifier associated with this
      * ViewProperties instance.
-     *
-     * TODO: Finish implementation and documentation 
-     *
-     * This can be used when dragging and dropping views between windows so that [ FINISH ME ]
      */
     int identifier() const;
+
+	/** Finds a ViewProperties instance given its numeric identifier. */
+	static ViewProperties* propertiesById(int id);
+
+	/** Name of mime format to use in drag-and-drop operations. */
+	static QString mimeType() 
+	{ return _mimeType; }
 
 signals:
     /** Emitted when the icon for a view changes */
@@ -116,6 +121,9 @@ private:
     QIcon _icon;
     QString _title;
     int _id;
+
+	static QHash<int,ViewProperties*> _viewProperties;
+	static QString _mimeType;
 };
 
 }
