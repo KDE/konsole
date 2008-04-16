@@ -302,7 +302,7 @@
           <item row="1" column="1" >
            <widget class="KLineEdit" name="remoteTabTitleEdit" >
             <property name="toolTip" >
-             <string>Tab title format used when a remote command (eg. connection to another computer via SSH) is being executed</string>
+             <string>Tab title format used when a remote command (e.g. connection to another computer via SSH) is being executed</string>
             </property>
            </widget>
           </item>

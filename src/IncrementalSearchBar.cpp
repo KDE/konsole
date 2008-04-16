@@ -107,7 +107,7 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     {
         _matchCaseBox = new QCheckBox( i18n("Match case") , this );
         _matchCaseBox->setObjectName("match-case-box");
-        _matchCaseBox->setToolTip( i18n("Sets whether the searching is case sensitive") );
+        _matchCaseBox->setToolTip( i18n("Sets whether the search is case sensitive") );
         connect( _matchCaseBox , SIGNAL(toggled(bool)) , this , SIGNAL(matchCaseToggled(bool)) );
     }
 
