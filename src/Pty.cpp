@@ -108,7 +108,6 @@ char Pty::erase() const
 {
 	if (pty()->masterFd() >= 0)
 	{
-		kDebug() << "Getting erase char";
 		struct ::termios ttyAttributes;
 		pty()->tcGetAttr(&ttyAttributes);
 		return ttyAttributes.c_cc[VERASE];
@@ -216,13 +215,24 @@ void Pty::setWriteable(bool writeable)
     chmod(pty()->ttyName(), sbuf.st_mode & ~(S_IWGRP|S_IWOTH));
 }
 
-Pty::Pty()
-    : _windowColumns(0),
-      _windowLines(0),
-      _eraseChar(0),
-      _xonXoff(true),
-      _utf8(true)
+Pty::Pty(int masterFd, QObject* parent)
+	: KPtyProcess(masterFd,parent)
 {
+	init();
+}
+Pty::Pty(QObject* parent)
+    : KPtyProcess(parent)
+{
+	init();
+}
+void Pty::init()
+{
+  _windowColumns = 0;
+  _windowLines = 0;
+  _eraseChar = 0;
+  _xonXoff = true;
+  _utf8 =true;
+
   connect(pty(), SIGNAL(readyRead()) , this , SLOT(dataReceived()));
   setPtyChannels(KPtyProcess::AllChannels);
 }

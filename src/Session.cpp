@@ -62,8 +62,9 @@ using namespace Konsole;
 
 int Session::lastSessionId = 0;
 
-Session::Session() :
-    _shellProcess(0)
+Session::Session(QObject* parent) :
+   QObject(parent)
+   , _shellProcess(0)
    , _emulation(0)
    , _monitorActivity(false)
    , _monitorSilence(false)
@@ -89,9 +90,6 @@ Session::Session() :
     _sessionId = ++lastSessionId;
     QDBusConnection::sessionBus().registerObject(QLatin1String("/Sessions/")+QString::number(_sessionId), this);
 
-    //create teletype for I/O with shell process
-    _shellProcess = new Pty();
-
     //create emulation backend
     _emulation = new Vt102Emulation();
 
@@ -105,27 +103,43 @@ Session::Session() :
            this, SIGNAL( changeTabTextColorRequest( int ) ) );
     connect( _emulation, SIGNAL(profileChangeCommandReceived(const QString&)),
            this, SIGNAL( profileChangeCommandReceived(const QString&)) );
-    // TODO
-    // connect( _emulation,SIGNAL(imageSizeChanged(int,int)) , this ,
-    //        SLOT(onEmulationSizeChange(int,int)) );
+    
+    //create new teletype for I/O with shell process
+    openTeletype(-1);
+
+    //setup timer for monitoring session activity
+    _monitorTimer = new QTimer(this);
+    _monitorTimer->setSingleShot(true);
+    connect(_monitorTimer, SIGNAL(timeout()), this, SLOT(monitorTimerDone()));
+}
+
+void Session::openTeletype(int fd)
+{
+	if (_shellProcess && isRunning())
+	{
+		kWarning() << "Attempted to open teletype in a running session.";
+		return;
+	}
+
+	delete _shellProcess;
+
+	kDebug() << "Creating new Pty process for fd" << fd;
+
+	if (fd < 0)
+		_shellProcess = new Pty();
+	else
+		_shellProcess = new Pty(fd);
+
+	_shellProcess->setUtf8Mode(_emulation->utf8());
 
     //connect teletype to emulation backend
-    _shellProcess->setUtf8Mode(_emulation->utf8());
-
     connect( _shellProcess,SIGNAL(receivedData(const char*,int)),this,
             SLOT(onReceiveBlock(const char*,int)) );
     connect( _emulation,SIGNAL(sendData(const char*,int)),_shellProcess,
             SLOT(sendData(const char*,int)) );
     connect( _emulation,SIGNAL(lockPtyRequest(bool)),_shellProcess,SLOT(lockPty(bool)) );
     connect( _emulation,SIGNAL(useUtf8Request(bool)),_shellProcess,SLOT(setUtf8Mode(bool)) );
-
-
     connect( _shellProcess,SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(done(int)) );
-
-    //setup timer for monitoring session activity
-    _monitorTimer = new QTimer(this);
-    _monitorTimer->setSingleShot(true);
-    connect(_monitorTimer, SIGNAL(timeout()), this, SLOT(monitorTimerDone()));
 }
 
 WId Session::windowId() const

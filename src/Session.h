@@ -30,6 +30,7 @@
 // KDE
 #include <KApplication>
 #include <KMainWindow>
+#include <kdemacros.h>
 
 // Konsole
 #include "History.h"
@@ -55,7 +56,7 @@ class ZModemDialog;
  * or send input to the program in the terminal in the form of keypresses and mouse
  * activity.
  */
-class Session : public QObject
+class KDE_EXPORT Session : public QObject
 {
 Q_OBJECT
 
@@ -76,8 +77,20 @@ public:
    * falls back to using the program specified in the SHELL environment
    * variable.
    */
-  Session();
+  explicit Session(QObject* parent = 0);
   ~Session();
+
+  /** 
+   * Connect to an existing terminal.  When a new Session() is constructed it 
+   * automatically searches for an opens a new teletype.  If you want to 
+   * use an existing teletype (given its file descriptor) call this after
+   * constructing the session.
+   *
+   * Calling openTeletype() while a session is running has no effect.
+   *
+   * @param The file descriptor of the pseudo-teletype master (See KPtyProcess::KPtyProcess())
+   */
+  void openTeletype(int fd);
 
   /**
    * Returns true if the session is currently running.  This will be true

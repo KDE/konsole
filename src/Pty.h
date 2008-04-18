@@ -31,6 +31,7 @@
 
 // KDE
 #include <KPtyProcess>
+#include <kdemacros.h>
 
 namespace Konsole
 {
@@ -48,7 +49,7 @@ namespace Konsole
  * To start the terminal process, call the start() method
  * with the program name and appropriate arguments. 
  */
-class Pty: public KPtyProcess
+class KDE_EXPORT Pty: public KPtyProcess
 {
 Q_OBJECT
 
@@ -63,7 +64,14 @@ Q_OBJECT
      * To start the terminal process, call the run() method with the 
      * name of the program to start and appropriate arguments.
      */
-    Pty();
+    explicit Pty(QObject* parent = 0);
+
+	/** 
+	 * Construct a process using an open pty master.
+	 * See KPtyProcess::KPtyProcess()
+	 */
+	Pty(int ptyMasterFd, QObject* parent = 0);
+
     ~Pty();
 
     /**
@@ -174,6 +182,8 @@ Q_OBJECT
     void dataReceived(); 
 	
   private:
+  	void init();
+
     // takes a list of key=value pairs and adds them
     // to the environment for the process
     void addEnvironmentVariables(const QStringList& environment);

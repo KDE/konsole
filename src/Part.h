@@ -63,7 +63,7 @@ public:
     /** Constructs a new Konsole part with the specified parent. */
     explicit Part(QWidget* parentWidget , QObject* parent = 0);
 	virtual ~Part();
-
+	
     /** Reimplemented from TerminalInterface. */
     virtual void startProgram( const QString& program,
                                const QStringList& arguments );
@@ -103,6 +103,13 @@ public slots:
 	 * This is experimental API and not guaranteed to be present in later KDE 4 releases.
 	 */
 	void changeSessionSettings(const QString& text);
+
+	/** 
+	 * Connects to an existing pseudo-teletype. See Session::openTeletype().
+	 * This must be called before the session is started by startProgram(),
+	 * or showShellInDir()
+	 */
+	void openTeletype(int fd);
 
 protected:
     /** Reimplemented from KParts::PartBase. */

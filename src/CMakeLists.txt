@@ -4,6 +4,9 @@ macro_log_feature(XKB_FOUND "XKB" "X keyboard extension" "http://www.x.org" FALS
 
 configure_file (config-konsole.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-konsole.h )
 
+### Tests
+add_subdirectory(tests)
+
 ### Font Embedder
 
 set(fontembedder_SRCS fontembedder.cpp )

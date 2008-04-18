@@ -188,6 +188,12 @@ void Part::startProgram( const QString& program,
         activeSession()->run();
     }
 }
+void Part::openTeletype(int fd)
+{
+	Q_ASSERT( activeSession() );
+
+	activeSession()->openTeletype(fd);
+}
 void Part::showShellInDir( const QString& dir )
 {
 	Q_ASSERT( activeSession() );
