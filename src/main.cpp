@@ -111,21 +111,21 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
 
 void fillCommandLineOptions(KCmdLineOptions& options)
 {
-    options.add("profile \\<file>", ki18n("Name of profile to use for new Konsole instance"));
+    options.add("profile <file>", ki18n("Name of profile to use for new Konsole instance"));
     options.add("list-profiles", ki18n("List the available profiles"));
     // TODO - Update this when F12 is no longer hard coded
     options.add("background-mode", ki18n("Start Konsole in the background"
                                     " and bring to the front when the F12"
                                     " key is pressed"));
     options.add("new-tab",ki18n("Create a new tab in an existing window rather than creating a new window"));
-    options.add("workdir \\<dir>",   ki18n("Set the initial working directory of the new tab "
+    options.add("workdir <dir>",   ki18n("Set the initial working directory of the new tab "
                                            "or window to 'dir'"));
 	options.add("notransparency",ki18n("Disable transparent backgrounds, even if the system supports them."));
 	options.add("hold");
 	options.add("noclose",ki18n("Do not close the initial session automatically when it ends."));
     // TODO - Document this option more clearly
-    options.add("p \\<property=value>",ki18n("Change the value of a profile property."));
-    options.add("!e \\<cmd>",ki18n("Command to execute"));
+    options.add("p <property=value>",ki18n("Change the value of a profile property."));
+    options.add("!e <cmd>",ki18n("Command to execute"));
     options.add("+[args]",ki18n("Arguments passed to command"));
 }
 
