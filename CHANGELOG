@@ -14,12 +14,16 @@ New Features:
 	session.
 	- Option to enable bi-directional text rendering in a profile
 	- BUG 158235 - Support Xterm's clear history escape sequence 
+	- New color scheme, 'Dark Pastels' is a softer alternative to Linux colors or Black on white.
 
 Minor changes:
 	- Limit tab name length to prevent a single tab from taking up the entire tab bar.
 	- Scroll the terminal continually when the mouse is held down and moved outside the display
 	(like a text document)
 	- Use KDE's shortcut editor to input profile shortcuts
+	- Transparency is enabled by default and does not require the '--enable-transparency' flag
+	to be passed to Konsole on startup.  A new '--notransparency' option is available to turn
+	transparency off.
 
 Fixes:
 	- Fix embedded terminal not gaining focus when shown in Dolphin
