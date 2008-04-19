@@ -7,6 +7,7 @@ install( FILES
          BlackOnWhite.schema  	
          GreenOnBlack.colorscheme 
          WhiteOnBlack.schema  	
-         Linux.colorscheme 
+         Linux.colorscheme
+		 "Dark Pastels.colorscheme"
          DESTINATION 
          ${DATA_INSTALL_DIR}/konsole )
