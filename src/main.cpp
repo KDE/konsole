@@ -191,7 +191,7 @@ void fillAboutData(KAboutData& aboutData)
     ki18n("Bug fixes"),
     "knoll@mpi-hd.mpg.de");
   aboutData.addCredit(ki18n("Thanks to many others.\n"));
-
+  aboutData.setProgramIconName("utilities-terminal");
 }
 
 // code taken from the Qt 4 graphics dojo examples
