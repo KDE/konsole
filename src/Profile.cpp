@@ -469,5 +469,3 @@ QHash<Profile::Property,QVariant> ProfileCommandParser::parse(const QString& inp
 }
 
 
-#include "Profile.moc"
-
