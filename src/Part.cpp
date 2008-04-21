@@ -238,8 +238,20 @@ void Part::activeViewChanged(SessionController* controller)
 			SLOT(activeViewTitleChanged(ViewProperties*)));
 	activeViewTitleChanged(controller);
 
+	const char* displaySignal = SIGNAL(overrideShortcutCheck(QKeyEvent*,bool&));
+	const char* partSlot = SLOT(overrideTerminalShortcut(QKeyEvent*,bool&));
+
+	disconnect(controller->view(),displaySignal,this,partSlot);
+	connect(controller->view(),displaySignal,this,partSlot);
+
     _pluggedController = controller;
 }
+void Part::overrideTerminalShortcut(QKeyEvent* event, bool& override)
+{
+	// override all shortcuts in the embedded terminal by default
+	override = true;
+	emit overrideShortcut(event,override);
+}	
 void Part::activeViewTitleChanged(ViewProperties* properties)
 {
 	emit setWindowCaption(properties->title());

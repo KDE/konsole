@@ -2462,6 +2462,7 @@ bool TerminalDisplay::event( QEvent *e )
   if ( e->type() == QEvent::ShortcutOverride )
   {
     QKeyEvent* keyEvent = static_cast<QKeyEvent *>( e );
+	int modifiers = keyEvent->modifiers();
 
     // a check to see if keyEvent->text() is empty is used
     // to avoid intercepting the press of the modifier key on its own.
@@ -2469,16 +2470,42 @@ bool TerminalDisplay::event( QEvent *e )
     // this is important as it allows a press and release of the Alt key
     // on its own to focus the menu bar, making it possible to
     // work with the menu without using the mouse
-    if ( (keyEvent->modifiers() == Qt::AltModifier) && 
+    if ( (modifiers == Qt::AltModifier) && 
          !keyEvent->text().isEmpty() )
     {
     	keyEvent->accept();
       	return true;
     }
 
+	//  When a possible shortcut combination is pressed, 
+	//  emit the overrideShortcutCheck() signal to allow the host
+	//  to decide whether the terminal should override it or not.
+	if (modifiers != Qt::NoModifier) 
+	{
+		int modifierCount = 0;
+		unsigned int currentModifier = Qt::ShiftModifier;
+
+		while (currentModifier <= Qt::KeypadModifier)
+		{
+			if (modifiers & currentModifier)
+				modifierCount++;
+			currentModifier <<= 1;
+		}
+		if (modifierCount < 2) 
+		{
+			bool override = false;
+			emit overrideShortcutCheck(keyEvent,override);
+			if (override)
+			{
+				keyEvent->accept();
+				return true;
+			}
+		}
+	}
+
     // Override any of the following shortcuts because
     // they are needed by the terminal
-    int keyCode = keyEvent->key() | keyEvent->modifiers();
+    int keyCode = keyEvent->key() | modifiers;
     switch ( keyCode )
     {
       // list is taken from the QLineEdit::event() code

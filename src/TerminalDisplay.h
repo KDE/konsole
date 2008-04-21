@@ -509,6 +509,17 @@ signals:
      */
     void configureRequest( TerminalDisplay*, int state, const QPoint& position );
 
+	/**
+	 * When a shortcut which is also a valid terminal key sequence is pressed while 
+	 * the terminal widget  has focus, this signal is emitted to allow the host to decide 
+	 * whether the shortcut should be overridden.  
+	 * When the shortcut is overridden, the key sequence will be sent to the terminal emulation instead
+	 * and the action associated with the shortcut will not be triggered.
+	 *
+	 * @p override is set to false by default and the shortcut will be triggered as normal.
+	 */
+	void overrideShortcutCheck(QKeyEvent* keyEvent,bool& override);
+
    void isBusySelecting(bool);
    void sendStringToEmu(const char*);
 

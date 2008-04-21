@@ -30,6 +30,7 @@
 
 class QAction;
 class QStringList;
+class QKeyEvent;
 
 namespace Konsole
 {
@@ -111,6 +112,25 @@ public slots:
 	 */
 	void openTeletype(int fd);
 
+signals:
+	/** 
+	 * When the key sequence for a shortcut, which is also a valid terminal key sequence
+	 * is pressed while the terminal has focus, this signal is emitted to check whether 
+	 * the terminal display should override the shortcut and send the key sequence to the
+	 * terminal application instead.
+	 *
+	 * In the embedded terminal, shortcuts are overridden and sent to the terminal by default.
+	 * Set @p override to false to prevent this happening and allow the shortcut to be triggered
+	 * normally.
+	 *
+	 * overrideShortcut() is not called for shortcuts which are not valid terminal key sequences,
+	 * eg. shortcuts with two or more modifiers.
+	 *
+	 * @param event Describes the keys that were pressed.
+	 * @param override Set this to false to prevent the terminal display from overriding the shortcut
+	 */
+	void overrideShortcut(QKeyEvent* event, bool& override);
+
 protected:
     /** Reimplemented from KParts::PartBase. */
     virtual bool openFile();
@@ -124,6 +144,7 @@ private slots:
 	void showManageProfilesDialog();
     void terminalExited();
     void newTab();
+	void overrideTerminalShortcut(QKeyEvent*,bool& override);
 
 private:
     Session* activeSession() const;
