@@ -82,15 +82,15 @@ public:
 
   /** 
    * Connect to an existing terminal.  When a new Session() is constructed it 
-   * automatically searches for an opens a new teletype.  If you want to 
+   * automatically searches for and opens a new teletype.  If you want to 
    * use an existing teletype (given its file descriptor) call this after
    * constructing the session.
    *
    * Calling openTeletype() while a session is running has no effect.
    *
-   * @param The file descriptor of the pseudo-teletype master (See KPtyProcess::KPtyProcess())
+   * @param masterFd The file descriptor of the pseudo-teletype master (See KPtyProcess::KPtyProcess())
    */
-  void openTeletype(int fd);
+  void openTeletype(int masterFd);
 
   /**
    * Returns true if the session is currently running.  This will be true
@@ -363,7 +363,7 @@ public:
 
  /** 
    * Possible values of the @p what parameter for setUserTitle()
-   * See "Operating System Controls" section on http://rtfm.etla.org/xterm/ctlseq.html
+   * See "Operating System Controls" section on http://rtfm.etla.org/xterm/ctlseq.html 
    */
   enum UserTitleChange
   {

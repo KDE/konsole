@@ -28,6 +28,11 @@ class QLabel;
 namespace Konsole
 {
 
+/** 
+ * A label which displays a warning message, 
+ * using the appropriate icon from the current icon theme
+ * and background color from KColorScheme
+ */
 class WarningBox : public QFrame
 {
 Q_OBJECT
@@ -35,7 +40,9 @@ Q_OBJECT
 public:
 	WarningBox(QWidget* parent = 0);
 
+	/** Sets the text displayed in the warning label. */
 	void setText(const QString& text);
+	/** Returns the text displayed in the warning label. */
 	QString text() const;
 
 private:

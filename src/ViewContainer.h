@@ -370,6 +370,7 @@ Q_OBJECT
 public:
     ViewContainerTabBar(QWidget* parent,TabbedViewContainerV2* container);
 
+	// returns a pixmap image of a tab for use with QDrag 
 	QPixmap dragDropPixmap(int tab);
 
 protected:
@@ -380,7 +381,11 @@ protected:
 	virtual void dropEvent(QDropEvent* event);
 
 private:
+	// show the indicator arrow which shows where a dropped tab will
+	// be inserted at 'index'
 	void setDropIndicator(int index);
+	// returns the index at which a tab will be inserted if the mouse
+	// in a drag-drop operation is released at 'pos'
 	int dropIndex(const QPoint& pos) const;
 
 	TabbedViewContainerV2* _container;
@@ -425,9 +430,7 @@ public:
     virtual QWidget* containerWidget() const;
     virtual QWidget* activeView() const;
     virtual void setActiveView(QWidget* view);
-
     virtual QList<NavigationPosition> supportedNavigationPositions() const;
-
 
 protected:
     virtual void addViewWidget(QWidget* view , int index);
