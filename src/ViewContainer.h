@@ -240,6 +240,9 @@ signals:
     /** Emitted when the user requests to close a view */
     void closeRequest(QWidget* activeView);
 
+    /** Emitted when the user requests to open a new view */
+    void newViewRequest();
+
     /** 
 	 * Emitted when the user requests to move a view from another container
 	 * into this container.  If 'success' is set to true by a connected slot

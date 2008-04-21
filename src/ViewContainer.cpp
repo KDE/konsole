@@ -605,6 +605,7 @@ TabbedViewContainerV2::TabbedViewContainerV2(NavigationPosition position , QObje
    
     connect( _tabBar , SIGNAL(currentChanged(int)) , this , SLOT(currentTabChanged(int)) );
     connect( _tabBar , SIGNAL(tabDoubleClicked(int)) , this , SLOT(tabDoubleClicked(int)) );
+    connect( _tabBar , SIGNAL(newTabRequest()) , this , SIGNAL(newViewRequest()) );
     connect( _tabBar , SIGNAL(wheelDelta(int)) , this , SLOT(wheelScrolled(int)) );
 	connect( _tabBar , SIGNAL(mouseMiddleClick(int)) , this , SLOT(closeTab(int)) );
 	connect( _tabBar , SIGNAL(initiateDrag(int)) , this , SLOT(startTabDrag(int)) );

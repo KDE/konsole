@@ -576,6 +576,7 @@ ViewContainer* ViewManager::createContainer(const Profile::Ptr info)
            SLOT(map()) ); 
     _containerSignalMapper->setMapping(container,container);
 
+    connect( container, SIGNAL(newViewRequest()), this, SIGNAL(newViewRequest()) );
     connect( container, SIGNAL(moveViewRequest(int,int,bool&)), 
 	this , SLOT(containerMoveViewRequest(int,int,bool&)) );
     connect( container , SIGNAL(viewRemoved(QWidget*)) , this , SLOT(viewCloseRequest(QWidget*)) );
