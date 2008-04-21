@@ -678,6 +678,8 @@ void SessionManager::sessionProfileCommandReceived(const QString& text)
     } 
 
 	_sessionProfiles[session] = newProfile;
+	applyProfile(newProfile,true);
+	emit sessionUpdated(session);
 }
 
 QKeySequence SessionManager::shortcut(Profile::Ptr info) const
