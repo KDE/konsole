@@ -20,10 +20,14 @@
 #ifndef PARTTEST_H
 #define PARTTEST_H
 
+#include <QtCore/QEventLoop>
 #include <QtTest>
 
 #include <kde_terminal_interface.h>
 #include <KParts/Part>
+
+class QKeyEvent;
+class QEvent;
 
 namespace Konsole
 {
@@ -33,10 +37,22 @@ class PartTest : public QObject
 Q_OBJECT
 
 private slots:
+	void testShortcutOverride();
 	void testFd();
+
+// marked as protected so they are not treated as test cases
+protected slots:
+	void overrideShortcut(QKeyEvent* event, bool& override);
+	void shortcutTriggered();
 
 private:
 	KParts::Part* createPart();
+
+	// variables for testShortcutOverride() 
+	bool _shortcutTriggered;
+	bool _overrideCalled;
+	bool _override;
+	QEventLoop* _shortcutEventLoop;
 };
 
 }
