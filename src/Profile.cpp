@@ -138,7 +138,6 @@ void Profile::fillTableWithDefaultNames()
 FallbackProfile::FallbackProfile()
  : Profile()
 {
-    kDebug() << "using fallback profile";
     // Fallback settings
     setProperty(Name,i18n("Shell"));
     setProperty(Command,getenv("SHELL"));

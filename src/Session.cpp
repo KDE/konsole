@@ -123,8 +123,6 @@ void Session::openTeletype(int fd)
 
 	delete _shellProcess;
 
-	kDebug() << "Creating new Pty process for fd" << fd;
-
 	if (fd < 0)
 		_shellProcess = new Pty();
 	else
