@@ -493,12 +493,14 @@ void ViewContainerTabBar::dragLeaveEvent(QDragLeaveEvent*)
 }
 void ViewContainerTabBar::dragEnterEvent(QDragEnterEvent* event)
 {
-	if (event->mimeData()->hasFormat(ViewProperties::mimeType()))
+	if (event->mimeData()->hasFormat(ViewProperties::mimeType()) &&
+		event->source() != 0)
 		event->acceptProposedAction();	
 }
 void ViewContainerTabBar::dragMoveEvent(QDragMoveEvent* event)
 {
-	if (event->mimeData()->hasFormat(ViewProperties::mimeType()))
+	if (event->mimeData()->hasFormat(ViewProperties::mimeType())
+		&& event->source() != 0)
 	{
 		int index = dropIndex(event->pos());
 		if (index == -1)
