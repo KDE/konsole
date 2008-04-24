@@ -218,7 +218,7 @@ void Application::processProfileChangeArgs(KCmdLineArgs* args,MainWindow* window
     }
 
     // temporary changes to profile options specified on the command line
-    foreach( QString value , args->getOptionList("p") ) 
+    foreach( const QString &value , args->getOptionList("p") ) 
     {
         ProfileCommandParser parser;
         

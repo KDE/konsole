@@ -399,7 +399,7 @@ bool UnixProcessInfo::readArguments(int pid)
 
         QStringList argList = data.split( QChar('\0') );
         
-        foreach ( QString entry , argList )
+        foreach ( const QString &entry , argList )
         {
             if (!entry.isEmpty())
                 addArgument(entry);
@@ -449,7 +449,7 @@ bool UnixProcessInfo::readEnvironment(int pid)
 
         QStringList bindingList = data.split( QChar('\0') );
    
-        foreach( QString entry , bindingList )
+        foreach( const QString &entry , bindingList )
         {
             QString name;
             QString value;
