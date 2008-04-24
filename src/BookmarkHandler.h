@@ -1,5 +1,7 @@
-/* This file wass part of the KDE libraries
-    Copyright (C) 2002 Carsten Pfeiffer <pfeiffer@kde.org>
+/* This file was part of the KDE libraries
+    
+	Copyright 2002 Carsten Pfeiffer <pfeiffer@kde.org>
+	Copyright 2007-2008 Robert Knight <robertknight@gmail.com>
 
     library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public

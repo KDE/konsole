@@ -3,8 +3,8 @@
 
  NumLockX
  
- Copyright (C) 2000-2001 Lubos Lunak        <l.lunak@kde.org>
- Copyright (C) 2001      Oswald Buddenhagen <ossi@kde.org>
+ Copyright 2000-2001 Lubos Lunak        <l.lunak@kde.org>
+ Copyright 2001      Oswald Buddenhagen <ossi@kde.org>
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the "Software"),

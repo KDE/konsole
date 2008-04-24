@@ -1,6 +1,6 @@
 /*
     kwrited is a write(1) receiver for KDE.
-    Copyright (C) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
+    Copyright 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

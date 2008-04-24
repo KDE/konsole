@@ -1,7 +1,7 @@
 /*
     This source file is part of Konsole, a terminal emulator.
 
-    Copyright (C) 2007 by Robert Knight <robertknight@gmail.com>
+    Copyright 2007-2008 by Robert Knight <robertknight@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

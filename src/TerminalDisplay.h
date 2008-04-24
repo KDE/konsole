@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2007 by Robert Knight <robertknight@gmail.com>
-    Copyright (C) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
+    Copyright 2007-2008 by Robert Knight <robertknight@gmail.com>
+    Copyright 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

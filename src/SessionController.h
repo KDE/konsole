@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2006-2007 by Robert Knight <robertknight@gmail.com>
+    Copyright 2006-2008 by Robert Knight <robertknight@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

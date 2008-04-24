@@ -1,6 +1,8 @@
 /*
     This file is part of Konsole, an X terminal.
-    Copyright (C) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
+
+	Copyright 2007-2008 by Robert Knight <robert.knight@gmail.com>
+    Copyright 1997,1998 by Lars Doelle <lars.doelle@on-line.de>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
