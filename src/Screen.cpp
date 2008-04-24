@@ -842,8 +842,6 @@ void Screen::resetDroppedLines()
 }
 void Screen::resetScrolledLines()
 {
-    //kDebug() << "scrolled lines reset";
-
     _scrolledLines = 0;
 }
 
@@ -891,9 +889,6 @@ void Screen::scrollDown(int n)
 
 void Screen::scrollDown(int from, int n)
 {
-
-  //kDebug() << "Screen::scrollDown( from: " << from << " , n: " << n << ")";
-  
   _scrolledLines += n;
 
 //FIXME: make sure `tmargin', `bmargin', `from', `n' is in bounds.
@@ -1021,10 +1016,6 @@ NOTE:  moveImage() can only move whole lines.
 
 void Screen::moveImage(int dest, int sourceBegin, int sourceEnd)
 {
-  //kDebug() << "moving image from (" << (sourceBegin/columns) 
-  //    << "," << (sourceEnd/columns) << ") to " <<
-  //    (dest/columns);
-
   Q_ASSERT( sourceBegin <= sourceEnd );
  
   int lines=(sourceEnd-sourceBegin)/columns;
@@ -1223,7 +1214,6 @@ void Screen::getSelectionEnd(int& column , int& line)
 }
 void Screen::setSelectionStart(/*const ScreenCursor& viewCursor ,*/ const int x, const int y, const bool mode)
 {
-//  kDebug(1211) << "setSelBeginXY(" << x << "," << y << ")";
   sel_begin = loc(x,y); //+histCursor) ;
 
   /* FIXME, HACK to correct for x too far to the right... */
@@ -1236,7 +1226,6 @@ void Screen::setSelectionStart(/*const ScreenCursor& viewCursor ,*/ const int x,
 
 void Screen::setSelectionEnd( const int x, const int y)
 {
-//  kDebug(1211) << "setSelExtentXY(" << x << "," << y << ")";
   if (sel_begin == -1) return;
   int l =  loc(x,y); // + histCursor);
 

@@ -160,7 +160,6 @@ QList<QPair<QString,QString> > BookmarkHandler::currentBookmarkList() const
 
 void BookmarkHandler::setViews(const QList<ViewProperties*>& views) 
 {
-    //kDebug() << "BookmarkHandler - View list changed.";
     m_views = views;
 }
 QList<ViewProperties*> BookmarkHandler::views() const

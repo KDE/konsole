@@ -731,7 +731,6 @@ void Session::setIconName(const QString& iconName)
 void Session::setIconText(const QString& iconText)
 {
   _iconText = iconText;
-  //kDebug(1211)<<"Session setIconText " <<  _iconText;
 }
 
 QString Session::iconName() const
@@ -1068,8 +1067,6 @@ void SessionGroup::connectPair(Session* master , Session* other)
 {
     if ( _masterMode & CopyInputToAll )
     {
-//        kDebug() << "Connection session " << master->nameTitle() << "to" << other->nameTitle();
-
         connect( master->emulation() , SIGNAL(sendData(const char*,int)) , other->emulation() ,
                  SLOT(sendString(const char*,int)) );
     }
@@ -1078,8 +1075,6 @@ void SessionGroup::disconnectPair(Session* master , Session* other)
 {
     if ( _masterMode & CopyInputToAll )
     {
-//        kDebug() << "Disconnecting session " << master->nameTitle() << "from" << other->nameTitle();
-
         disconnect( master->emulation() , SIGNAL(sendData(const char*,int)) , other->emulation() ,
                 SLOT(sendString(const char*,int)) );
     }

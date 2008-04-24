@@ -537,9 +537,6 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
             // if not, this must be the username/host argument 
             if ( _host.isEmpty() )
             {
-                // found username and host argument
-                kDebug() << "[username] and host: " << args[i];
-
                 // check to see if only a hostname is specified, or whether
                 // both a username and host are specified ( in which case they
                 // are separated by an '@' character:  username@host )
@@ -550,23 +547,17 @@ SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
                     // username and host specified
                     _user = args[i].left(separatorPosition);
                     _host = args[i].mid(separatorPosition+1);
-
-                    kDebug() << "found user: " << _user;
-                    kDebug() << "found host: " << _host;
                 }
                 else
                 {
                     // just the host specified
                     _host = args[i];
-                    kDebug() << "found only host: " << _host;
                 }
             }
             else
             {
                 // host has already been found, this must be the command argument
                 _command = args[i];
-
-                kDebug() << "found command: " << _command;
             }
 
          }

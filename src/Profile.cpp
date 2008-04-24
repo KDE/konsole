@@ -183,12 +183,9 @@ Profile::Profile(Profile::Ptr parent)
     : _parent(parent)
      ,_hidden(false)
 {
-  //kDebug() << "creating new profile" << parent.count();
 }
 Profile::~Profile()
 {
-    if (!name().isEmpty() && !isHidden())
-        kDebug() << "Destroying profile " << name();
 }
 bool Profile::isHidden() const { return _hidden; }
 void Profile::setHidden(bool hidden) { _hidden = hidden; }
@@ -453,9 +450,6 @@ QHash<Profile::Property,QVariant> ProfileCommandParser::parse(const QString& inp
             Profile::Property property = Profile::lookupByName(
                                                 regExp.capturedTexts()[1]);
             const QString value = regExp.capturedTexts()[2];
-
-            kDebug() << "property:" << property << "value:" << value;
-
             changes.insert(property,value);
         }
 

@@ -209,20 +209,12 @@ void Filter::getLineColumn(int position , int& startLine , int& startColumn)
 
     for (int i = 0 ; i < _linePositions->count() ; i++)
     {
-        //kDebug() << "line position at " << i << " = " << _linePositions[i];
         int nextLine = 0;
 
         if ( i == _linePositions->count()-1 )
-        {
             nextLine = _buffer->length() + 1;
-        }
         else
-        {
             nextLine = _linePositions->value(i+1);
-        }
-
-       // kDebug() << "pos - " << position << " line pos(" << i<< ") " << _linePositions->value(i) << 
-       //     " next = " << nextLine << " buffer len = " << _buffer->length();
 
         if ( _linePositions->value(i) <= position && position < nextLine ) 
         {
@@ -385,14 +377,8 @@ void RegExpFilter::process()
             int startColumn = 0;
             int endColumn = 0;
 
-            
-            //kDebug() << "pos from " << pos << " to " << pos + _searchText.matchedLength();
-            
             getLineColumn(pos,startLine,startColumn);
             getLineColumn(pos + _searchText.matchedLength(),endLine,endColumn);
-
-            //kDebug() << "start " << startLine << " / " << startColumn;
-            //kDebug() << "end " << endLine << " / " << endColumn;
 
             RegExpFilter::HotSpot* spot = newHotSpot(startLine,startColumn,
                                            endLine,endColumn);
@@ -460,8 +446,6 @@ void UrlFilter::HotSpot::activate(QObject* object)
 
     if ( actionName == "copy-action" )
     {
-        //kDebug() << "Copying url to clipboard:" << url;
-
         QApplication::clipboard()->setText(url);
         return;
     }

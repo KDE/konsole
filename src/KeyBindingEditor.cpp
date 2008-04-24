@@ -137,7 +137,6 @@ bool KeyBindingEditor::eventFilter( QObject* watched , QEvent* event )
                 _ui->testAreaInputEdit->setText(keyEvent->text());
                 _ui->testAreaOutputEdit->setText(keyEvent->text());
             }
-            //kDebug() << "Entry: " << entry.resultToString();
 
             keyEvent->accept();
             return true;
@@ -186,9 +185,6 @@ void KeyBindingEditor::bindingTableItemChanged(QTableWidgetItem* item)
    QString result = _ui->keyBindingTable->item( item->row() , 1 )->text();
 
    KeyboardTranslator::Entry entry = KeyboardTranslatorReader::createEntry(condition,result);
-
-   kDebug() << "Created entry: " << entry.conditionToString() << " , " << entry.resultToString();
-
    _translator->replaceEntry(existing,entry);
 
     // block signals to prevent this slot from being called repeatedly
@@ -206,7 +202,6 @@ void KeyBindingEditor::setupKeyBindingTable(const KeyboardTranslator* translator
 
     QList<KeyboardTranslator::Entry> entries = translator->entries();
     _ui->keyBindingTable->setRowCount(entries.count());
-    //kDebug() << "Keyboard translator has" << entries.count() << "entries.";
 
     for ( int row = 0 ; row < entries.count() ; row++ )
     {

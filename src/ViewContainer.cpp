@@ -102,16 +102,6 @@ void ViewContainer::moveActiveView( MoveDirection direction )
 void ViewContainer::setNavigationDisplayMode(NavigationDisplayMode mode)
 {
     _navigationDisplayMode = mode;
-
-#if 0
-    if ( mode == AlwaysShowNavigation )
-        kDebug() << "Always show nav";
-    else if ( mode == AlwaysHideNavigation )
-        kDebug() << "Always hide nav";
-    else if ( mode == ShowNavigationAsNeeded )
-        kDebug() << "Show nav as needed";
-#endif
-
     navigationDisplayModeChanged(mode);
 }
 ViewContainer::NavigationPosition ViewContainer::navigationPosition() const
@@ -383,8 +373,6 @@ void TabbedViewContainer::removeViewWidget( QWidget* view )
 
 void TabbedViewContainer::updateIcon(ViewProperties* item)
 {
-    kDebug() << k_funcinfo << ": icon changed.";
-
     QList<QWidget*> items = widgetsForItem(item);
     QListIterator<QWidget*> itemIter(items);
     
@@ -396,8 +384,6 @@ void TabbedViewContainer::updateIcon(ViewProperties* item)
 }
 void TabbedViewContainer::updateTitle(ViewProperties* item) 
 {
-    kDebug() << k_funcinfo << ": title changed.";
-
     QList<QWidget*> items = widgetsForItem(item);
     QListIterator<QWidget*> itemIter(items);
 
@@ -699,9 +685,6 @@ void TabbedViewContainerV2::navigationDisplayModeChanged(NavigationDisplayMode m
 }
 void TabbedViewContainerV2::dynamicTabBarVisibility()
 {
-    kDebug() << "tab bar count:" << _tabBar->count();
-    kDebug() << "tab var hidden:" << _tabBar->isHidden();
-
     if ( _tabBar->count() > 1 && _tabBar->isHidden() )
         setTabBarVisible(true);
 
@@ -890,8 +873,6 @@ void TabbedViewContainerV2::updateTitle(ViewProperties* item)
 }
 void TabbedViewContainerV2::updateIcon(ViewProperties* item)
 {
-    kDebug() << "Tab icon changed.";
-
     QListIterator<QWidget*> iter(widgetsForItem(item));
     while ( iter.hasNext() )
     {

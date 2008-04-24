@@ -235,14 +235,12 @@ void ViewManager::updateDetachViewState()
 }
 void ViewManager::moveActiveViewLeft()
 {
-    kDebug() << "Moving active view to the left";
     ViewContainer* container = _viewSplitter->activeContainer();
     Q_ASSERT( container );
     container->moveActiveView( ViewContainer::MoveViewLeft );
 }
 void ViewManager::moveActiveViewRight()
 {
-    kDebug() << "Moving active view to the right";
     ViewContainer* container = _viewSplitter->activeContainer();
     Q_ASSERT( container );
     container->moveActiveView( ViewContainer::MoveViewRight );
@@ -627,8 +625,6 @@ ViewManager::NavigationMethod ViewManager::navigationMethod() const { return _na
 
 void ViewManager::containerViewsChanged(QObject* container)
 {
-    //kDebug() << "Container views changed";
-
     if ( container == _viewSplitter->activeContainer() )
     {
         emit viewPropertiesChanged( viewProperties() );

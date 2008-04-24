@@ -278,12 +278,8 @@ KUrl SessionController::url() const
         int pid = _session->foregroundProcessId();
         if ( pid != 0 )
         {
-            kDebug(1211) << "reading session process = " << info->name(&ok);
-
             ProcessInfo* foregroundInfo = ProcessInfo::newInstance(pid);
             foregroundInfo->update();
-
-            kDebug(1211) << "reading foreground process = " << foregroundInfo->name(&ok);
 
             // for remote connections, save the user and host
             // bright ideas to get the directory at the other end are welcome :)
@@ -640,13 +636,9 @@ void SessionController::debugProcess()
         QString currentDir = fp->currentDir(&ok);
 
         if ( ok )
-        {
             kDebug(1211) << currentDir;
-        }
         else
-        {
             kDebug(1211) << "could not read current dir of foreground process";
-        }
 
         delete fp;
     }
@@ -703,7 +695,6 @@ void SessionController::closeSession()
 
 void SessionController::openBrowser()
 {
-    kDebug() << "url is" << url();
     new KRun(url(), QApplication::activeWindow());
 }
 
@@ -943,7 +934,6 @@ void SessionController::showHistoryOptions()
 void SessionController::sessionResizeRequest(const QSize& size)
 {
     kDebug(1211) << "View resize requested to " << size;
-
     _view->setSize(size.width(),size.height());
 }
 void SessionController::scrollBackOptionsChanged( int mode , int lines )
@@ -1438,10 +1428,8 @@ void SearchHistoryTask::highlightResult(ScreenWindowPtr window , int findPos)
      window->scrollTo(findPos);
      window->setSelectionStart( 0 , findPos - window->currentLine() , false );
      window->setSelectionEnd( window->columnCount() , findPos - window->currentLine() );
-     //kDebug() << "Current line " << window->currentLine();
      window->setTrackOutput(false);
      window->notifyOutputChanged();
-     //kDebug() << "Post update current line " << window->currentLine();
 }
 
 SearchHistoryTask::SearchHistoryTask(QObject* parent)

@@ -176,11 +176,6 @@ ColorEntry ColorScheme::colorEntry(int index , uint randomSeed) const
 
     ColorEntry entry = colorTable()[index];
 
-  //  kDebug() << "Old color: " << entry.color;
-
-   // kDebug() << "Random seed: " << randomSeed << "random table: " <<
-   //     _randomTable << "isnull: " << ((_randomTable) ? _randomTable[index].isNull() : true);
-
     if ( randomSeed != 0 && 
         _randomTable != 0 && 
         !_randomTable[index].isNull() )
@@ -193,18 +188,13 @@ ColorEntry ColorScheme::colorEntry(int index , uint randomSeed) const
         int  valueDifference = range.value ? (qrand() % range.value) - range.value/2 : 0;
 
         QColor& color = entry.color;
-      //  kDebug() << "Standard hue" << color.hue() << "saturation" << color.saturation() << "value" << color.value();
-
+      
         int newHue = qAbs( (color.hue() + hueDifference) % MAX_HUE );
         int newValue = qMin( qAbs(color.value() + valueDifference) , 255 );
         int newSaturation = qMin( qAbs(color.saturation() + saturationDifference) , 255 );
 
-    // kDebug() << "New hue: " << newHue << "New sat:" << newSaturation <<
-    //        "New value:" << newValue;
         color.setHsv(newHue,newSaturation,newValue);
     }
-
-  //  kDebug() << "New color: " << entry.color;
 
     return entry;
 }
@@ -529,10 +519,8 @@ void ColorSchemeManager::loadAllColorSchemes()
             failed++;
     }
 
-   // if ( success > 0 )
-   //     kDebug() << "succeeded to load " << success << " color schemes.";
     if ( failed > 0 )
-        kDebug() << "failed to load " << failed << " color schemes.";
+        kWarning() << "failed to load " << failed << " color schemes.";
 
     _haveLoadedAll = true;
 }
@@ -547,8 +535,6 @@ QList<const ColorScheme*> ColorSchemeManager::allColorSchemes()
 }
 bool ColorSchemeManager::loadKDE3ColorScheme(const QString& filePath)
 {
-    //kDebug() << "loading KDE 3 format color scheme from " << filePath;
-
     QFile file(filePath);
     if (!filePath.endsWith(".schema") || !file.open(QIODevice::ReadOnly))
         return false;
@@ -559,17 +545,11 @@ bool ColorSchemeManager::loadKDE3ColorScheme(const QString& filePath)
     file.close();
 
     Q_ASSERT( !scheme->name().isEmpty() );
-
-    //kDebug() << "found KDE 3 format color scheme - " << scheme->name();
     
     QFileInfo info(filePath);
 
     if ( !_colorSchemes.contains(info.baseName()) )
-    {
-        //kDebug() << "added color scheme - " << info.baseName();
-        
         _colorSchemes.insert(scheme->name(),scheme);
-    }
     else
     {
         kDebug() << "color scheme with name" << scheme->name() << "has already been" <<
@@ -670,8 +650,6 @@ QString ColorSchemeManager::findColorSchemePath(const QString& name) const
 }
 const ColorScheme* ColorSchemeManager::findColorScheme(const QString& name) 
 {
-    //kDebug() << "looking for color scheme - " << name;
-
     if ( name.isEmpty() )
         return defaultColorScheme();
 
@@ -691,7 +669,7 @@ const ColorScheme* ColorSchemeManager::findColorScheme(const QString& name)
                 return findColorScheme(name);
         }
 
-        kDebug() << "Could not find color scheme - " << name;
+        kWarning() << "Could not find color scheme - " << name;
 
         return 0; 
     }
