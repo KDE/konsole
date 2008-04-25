@@ -565,21 +565,22 @@ QPixmap ViewContainerTabBar::dragDropPixmap(int tab)
 {
 	Q_ASSERT(tab >= 0 && tab < count());
 
-	QPixmap tabPixmap = QPixmap::grabWidget(this,tabRect(tab));
-
-	// TODO - grabWidget() works except that it includes part
+    // TODO - grabWidget() works except that it includes part
 	// of the tab bar outside the tab itself if the tab has 
 	// curved corners
+    const QRect rect = tabRect(tab);
+    const int borderWidth = 1;
 
-#if 0
-	QStyleOptionTabV2 tabStyle;
-	initStyleOption(&tabStyle,tab);
-	tabStyle.state |= QStyle::State_Selected; 
-	QPixmap tabPixmap(tabStyle.rect.width(),tabStyle.rect.height());
-	QPainter painter(&tabPixmap);
-	painter.translate(-tabStyle.rect.left(),0);
-	style()->drawControl(QStyle::CE_TabBarTab,&tabStyle,&painter,this);
-#endif
+	QPixmap tabPixmap(rect.width()+borderWidth,
+                      rect.height()+borderWidth);
+    QPainter painter(&tabPixmap);
+    painter.drawPixmap(rect,QPixmap::grabWidget(this,rect));
+    QPen borderPen;
+    borderPen.setBrush(palette().dark());
+    borderPen.setWidth(borderWidth);
+    painter.setPen(borderPen);
+    painter.drawRect(rect);
+    painter.end();
 
 	return tabPixmap;
 }
