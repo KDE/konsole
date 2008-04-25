@@ -765,15 +765,15 @@ QVariant SessionListModel::headerData(int section, Qt::Orientation orientation,
 	}
 }
 
-int SessionListModel::columnCount(const QModelIndex& parent) const
+int SessionListModel::columnCount(const QModelIndex&) const
 {
 	return 2;
 }
-int SessionListModel::rowCount(const QModelIndex& parent) const
+int SessionListModel::rowCount(const QModelIndex&) const
 {
 	return _sessions.count();
 }
-QModelIndex SessionListModel::parent(const QModelIndex& index) const
+QModelIndex SessionListModel::parent(const QModelIndex&) const
 {
 	return QModelIndex();
 }
