@@ -24,6 +24,7 @@
 #include <QtGui/QIcon>
 #include <QtCore/QObject>
 #include <QtCore/QHash>
+#include <QtCore/QMimeData>
 
 // KDE
 #include <KUrl>
@@ -77,6 +78,18 @@ public:
 	/** Name of mime format to use in drag-and-drop operations. */
 	static QString mimeType() 
 	{ return _mimeType; }
+    
+    static QMimeData* createMimeData(int id)
+    {
+        QMimeData* mimeData = new QMimeData;
+        QByteArray data((char*)&id,sizeof(int));
+        mimeData->setData(mimeType(),data);
+        return mimeData;
+    }
+    static int decodeMimeData(const QMimeData* mimeData)
+    {
+        return *(int*)(mimeData->data(ViewProperties::mimeType()).constData());
+    }
 
 signals:
     /** Emitted when the icon for a view changes */

@@ -383,14 +383,18 @@ protected:
 private:
 	// show the indicator arrow which shows where a dropped tab will
 	// be inserted at 'index'
-	void setDropIndicator(int index);
+	void setDropIndicator(int index, bool drawDisabled = false);
 	// returns the index at which a tab will be inserted if the mouse
 	// in a drag-drop operation is released at 'pos'
 	int dropIndex(const QPoint& pos) const;
+    // returns true if the tab to be dropped in a drag-drop operation
+    // is the same as the tab at the drop location
+    bool proposedDropIsSameTab(const QDropEvent* event) const;
 
 	TabbedViewContainerV2* _container;
 	QLabel* _dropIndicator;
 	int _dropIndicatorIndex;
+    bool _drawIndicatorDisabled;
 };
 
 // internal

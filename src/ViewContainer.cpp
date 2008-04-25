@@ -442,9 +442,10 @@ ViewContainerTabBar::ViewContainerTabBar(QWidget* parent,TabbedViewContainerV2* 
 	, _container(container)
     , _dropIndicator(0)
 	, _dropIndicatorIndex(-1)
+    , _drawIndicatorDisabled(false)
 {
 }
-void ViewContainerTabBar::setDropIndicator(int index)
+void ViewContainerTabBar::setDropIndicator(int index, bool drawDisabled)
 {
 	if (!parentWidget() || _dropIndicatorIndex == index)
 		return;
@@ -453,13 +454,18 @@ void ViewContainerTabBar::setDropIndicator(int index)
 	const int ARROW_SIZE = 22;
 	bool north = shape() == QTabBar::RoundedNorth || shape() == QTabBar::TriangularNorth;
 
-	if (!_dropIndicator)
+	if (!_dropIndicator || _drawIndicatorDisabled != drawDisabled)
 	{
-		_dropIndicator = new QLabel(parentWidget());
+        if (!_dropIndicator)
+        {
+		    _dropIndicator = new QLabel(parentWidget());
+            _dropIndicator->resize(ARROW_SIZE,ARROW_SIZE);
+        }
 
+        QIcon::Mode drawMode = drawDisabled ? QIcon::Disabled : QIcon::Normal;
 		const QString iconName = north ? "arrow-up" : "arrow-down";
-		_dropIndicator->setPixmap(KIcon(iconName).pixmap(ARROW_SIZE,ARROW_SIZE));
-		_dropIndicator->resize(ARROW_SIZE,ARROW_SIZE);
+		_dropIndicator->setPixmap(KIcon(iconName).pixmap(ARROW_SIZE,ARROW_SIZE,drawMode));
+        _drawIndicatorDisabled = drawDisabled;
 	}
 
 	if (index < 0)
@@ -506,7 +512,7 @@ void ViewContainerTabBar::dragMoveEvent(QDragMoveEvent* event)
 		if (index == -1)
 			index = count();
 
-		setDropIndicator(index);
+		setDropIndicator(index,proposedDropIsSameTab(event));
 
 		event->acceptProposedAction();
 	}
@@ -526,7 +532,31 @@ int ViewContainerTabBar::dropIndex(const QPoint& pos) const
 		return -1;
 
 	return tab;
-}	
+}
+bool ViewContainerTabBar::proposedDropIsSameTab(const QDropEvent* event) const
+{
+    int index = dropIndex(event->pos());
+	int droppedId = ViewProperties::decodeMimeData(event->mimeData());
+    bool sameTabBar = event->source() == this;
+
+    if (!sameTabBar)
+        return false;
+
+    const QList<QWidget*> viewList = _container->views();
+    int sourceIndex = -1;
+    for (int i=0;i<count();i++)
+    {
+        int idAtIndex = _container->viewProperties(viewList[i])->identifier();
+        if (idAtIndex == droppedId)
+            sourceIndex = i;
+    }
+
+    bool sourceAndDropAreLast = sourceIndex == count()-1 && index == -1;
+	if (sourceIndex == index || sourceIndex == index-1 || sourceAndDropAreLast)
+		return true;
+	else
+        return false;
+}
 void ViewContainerTabBar::dropEvent(QDropEvent* event)
 {
 	setDropIndicator(-1);
@@ -534,20 +564,11 @@ void ViewContainerTabBar::dropEvent(QDropEvent* event)
 	if (!event->mimeData()->hasFormat(ViewProperties::mimeType()))
 		event->ignore();
 
-	int index = dropIndex(event->pos());
-	int droppedId = *(int*)(event->mimeData()->data(ViewProperties::mimeType()).constData());
-	bool sameTabBar = event->source() == this;
+	if (proposedDropIsSameTab(event))
+        event->ignore();
 
-	int currentId = -1;
-	if (sameTabBar && index >= 0 && index < count())
-		currentId = _container->viewProperties(_container->views()[index])->identifier();
-
-	if (currentId == droppedId)
-	{
-		event->ignore();
-		return;
-	}
-
+    int index = dropIndex(event->pos());
+    int droppedId = ViewProperties::decodeMimeData(event->mimeData());
 	bool result = false;
 	emit _container->moveViewRequest(index,droppedId,result);
 	
@@ -574,12 +595,12 @@ QPixmap ViewContainerTabBar::dragDropPixmap(int tab)
 	QPixmap tabPixmap(rect.width()+borderWidth,
                       rect.height()+borderWidth);
     QPainter painter(&tabPixmap);
-    painter.drawPixmap(rect,QPixmap::grabWidget(this,rect));
+    painter.drawPixmap(0,0,QPixmap::grabWidget(this,rect));
     QPen borderPen;
     borderPen.setBrush(palette().dark());
     borderPen.setWidth(borderWidth);
     painter.setPen(borderPen);
-    painter.drawRect(rect);
+    painter.drawRect(0,0,rect.width(),rect.height());
     painter.end();
 
 	return tabPixmap;
@@ -702,21 +723,14 @@ TabbedViewContainerV2::~TabbedViewContainerV2()
 void TabbedViewContainerV2::startTabDrag(int tab)
 {
 	QDrag* drag = new QDrag(_tabBar);
-
-	QMimeData* mimeData = new QMimeData;
-
 	const QRect tabRect = _tabBar->tabRect(tab);
 	QPixmap tabPixmap = _tabBar->dragDropPixmap(tab); 
 
 	drag->setPixmap(tabPixmap);
 	
 	int id = viewProperties(views()[tab])->identifier();
-	QByteArray data((char*)&id,sizeof(int));
-	mimeData->setData(ViewProperties::mimeType(),data);
-
-	QWidget* view = views()[tab];
-
-	drag->setMimeData(mimeData);
+    QWidget* view = views()[tab];
+	drag->setMimeData(ViewProperties::createMimeData(id));
 
 	// start drag, if drag-and-drop is successful the view at 'tab' will be
 	// deleted
