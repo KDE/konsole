@@ -32,7 +32,7 @@ set(konsole_KDEINIT_SRCS
         BookmarkHandler.cpp
         ColorScheme.cpp
         ColorSchemeEditor.cpp
-		CopyInputDialog.cpp
+        CopyInputDialog.cpp
         EditProfileDialog.cpp
         Emulation.cpp
         Filter.cpp
@@ -63,7 +63,7 @@ set(konsole_KDEINIT_SRCS
         ViewProperties.cpp
         ViewSplitter.cpp
         Vt102Emulation.cpp
-		WarningBox.cpp
+        WarningBox.cpp
         XKB.cpp
         ZModemDialog.cpp
         konsole_wcwidth.cpp
@@ -73,7 +73,7 @@ set(konsole_KDEINIT_SRCS
 
 kde4_add_ui_files(konsole_KDEINIT_SRCS
                   ColorSchemeEditor.ui
-				  CopyInputDialog.ui
+                  CopyInputDialog.ui
                   EditProfileDialog.ui
                   KeyBindingEditor.ui
                   ManageProfilesDialog.ui
