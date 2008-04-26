@@ -156,8 +156,11 @@ kde4_add_plugin(konsolepart WITH_PREFIX ${konsolepart_PART_SRCS})
 set_target_properties(konsolepart PROPERTIES DEFINE_SYMBOL KONSOLE_PART)
 
 target_link_libraries(konsolepart ${KDE4_KPARTS_LIBS} ${KDE4_KPTY_LIBRARY} ${KDE4_KIO_LIBS} ${KDE4_KNOTIFYCONFIG_LIBS})
+if(X11_Xrender_FOUND)
+  target_link_libraries(konsolepart ${X11_Xrender_LIB})
+endif(X11_Xrender_FOUND)
 if(X11_XTest_LIB)
-  target_link_libraries(konsolepart  ${X11_XTest_LIB}  )
+  target_link_libraries(konsolepart  ${X11_XTest_LIB})
 endif(X11_XTest_LIB)
 
 install(TARGETS konsolepart  DESTINATION ${PLUGIN_INSTALL_DIR} )
