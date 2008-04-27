@@ -138,13 +138,19 @@ QString SessionManager::loadProfile(const QString& shortPath)
 
     QString parentProfile;
     bool result = reader->readProfile(path,newProfile,parentProfile);
+    QString profileKey;
+    if (result) {
+        // Must add the new profile before loading the parent profile;
+        // this avoid looping forever when a profile points to itself as parent.
+        profileKey = addProfile(newProfile);
+    }
 
     if ( !parentProfile.isEmpty() )
     {
         //kDebug() << "Loading parent profile" << parentProfile;
-
         QString parentKey = loadProfile(parentProfile);
-        newProfile->setParent(profile(parentKey));
+        if (parentKey != profileKey)
+            newProfile->setParent(profile(parentKey));
     }
 
     delete reader;
@@ -155,13 +161,13 @@ QString SessionManager::loadProfile(const QString& shortPath)
         return QString();
     }
     else
-        return addProfile(newProfile);
+        return profileKey;
 }
 QList<QString> SessionManager::availableProfilePaths() const
 {
     KDE4ProfileReader reader;
 
-    return reader.findProfiles();    
+    return reader.findProfiles();
 }
 
 void SessionManager::loadAllProfiles()
