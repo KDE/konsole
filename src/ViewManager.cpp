@@ -379,7 +379,7 @@ void ViewManager::splitView(Qt::Orientation orientation)
     {
         Session* session = _sessionMap[(TerminalDisplay*)existingViewIter.next()];
         TerminalDisplay* display = createTerminalDisplay(session);
-        applyProfile(display,SessionManager::instance()->sessionProfile(session));
+        applyProfile(display,SessionManager::instance()->sessionProfile(session),false);
         ViewProperties* properties = createController(session,display);
 
         _sessionMap[display] = session;
@@ -496,8 +496,9 @@ void ViewManager::createView(Session* session, ViewContainer* container, int ind
 	disconnect( session , SIGNAL(finished()) , this , SLOT(sessionFinished()) );
     connect( session , SIGNAL(finished()) , this , SLOT(sessionFinished()) );
 
+     bool isFirst = _sessionMap.isEmpty();
      TerminalDisplay* display = createTerminalDisplay(session);
-     applyProfile(display,SessionManager::instance()->sessionProfile(session));
+     applyProfile(display,SessionManager::instance()->sessionProfile(session),isFirst);
      
      // set initial size
      display->setSize(80,40);
@@ -680,7 +681,8 @@ const ColorScheme* ViewManager::colorSchemeForProfile(const Profile::Ptr info) c
     return colorScheme;
 }
 
-void ViewManager::applyProfile(TerminalDisplay* view , const Profile::Ptr info ) 
+void ViewManager::applyProfile(TerminalDisplay* view , const Profile::Ptr info, 
+                               bool applyContainerSettings) 
 {
     Q_ASSERT( info );
     
@@ -690,26 +692,29 @@ void ViewManager::applyProfile(TerminalDisplay* view , const Profile::Ptr info )
     emit setMenuBarVisibleRequest( info->property<bool>(Profile::ShowMenuBar) );
 
     // tab bar visibility
-    ViewContainer* container = _viewSplitter->activeContainer();
-    int tabBarMode = info->property<int>(Profile::TabBarMode);
-    int tabBarPosition = info->property<int>(Profile::TabBarPosition);
+    if (applyContainerSettings)
+    {
+        ViewContainer* container = _viewSplitter->activeContainer();
+        int tabBarMode = info->property<int>(Profile::TabBarMode);
+        int tabBarPosition = info->property<int>(Profile::TabBarPosition);
 
-    if ( tabBarMode == Profile::AlwaysHideTabBar )
-        container->setNavigationDisplayMode(ViewContainer::AlwaysHideNavigation);
-    else if ( tabBarMode == Profile::AlwaysShowTabBar )
-        container->setNavigationDisplayMode(ViewContainer::AlwaysShowNavigation);
-    else if ( tabBarMode == Profile::ShowTabBarAsNeeded )
-        container->setNavigationDisplayMode(ViewContainer::ShowNavigationAsNeeded);
+        if ( tabBarMode == Profile::AlwaysHideTabBar )
+            container->setNavigationDisplayMode(ViewContainer::AlwaysHideNavigation);
+        else if ( tabBarMode == Profile::AlwaysShowTabBar )
+            container->setNavigationDisplayMode(ViewContainer::AlwaysShowNavigation);
+        else if ( tabBarMode == Profile::ShowTabBarAsNeeded )
+            container->setNavigationDisplayMode(ViewContainer::ShowNavigationAsNeeded);
 
-    ViewContainer::NavigationPosition position = container->navigationPosition();
+        ViewContainer::NavigationPosition position = container->navigationPosition();
 
-    if ( tabBarPosition == Profile::TabBarTop )
-        position = ViewContainer::NavigationPositionTop;
-    else if ( tabBarPosition == Profile::TabBarBottom )
-        position = ViewContainer::NavigationPositionBottom; 
+        if ( tabBarPosition == Profile::TabBarTop )
+            position = ViewContainer::NavigationPositionTop;
+        else if ( tabBarPosition == Profile::TabBarBottom )
+            position = ViewContainer::NavigationPositionBottom; 
 
-    if ( container->supportedNavigationPositions().contains(position) )
-        container->setNavigationPosition(position);
+        if ( container->supportedNavigationPositions().contains(position) )
+            container->setNavigationPosition(position);
+    }
 
     // load colour scheme
     ColorEntry table[TABLE_COLORS];
@@ -764,7 +769,7 @@ void ViewManager::updateViewsForSession(Session* session)
     QListIterator<TerminalDisplay*> iter(_sessionMap.keys(session));
     while ( iter.hasNext() )
     {
-        applyProfile(iter.next(),SessionManager::instance()->sessionProfile(session));
+        applyProfile(iter.next(),SessionManager::instance()->sessionProfile(session),false);
     }
 }
 
@@ -781,7 +786,7 @@ void ViewManager::profileChanged(Profile::Ptr profile)
 			 iter.value() != 0 && 
 			 SessionManager::instance()->sessionProfile(iter.value()) == profile ) 
         {
-            applyProfile(iter.key(),profile);
+            applyProfile(iter.key(),profile,true);
         }
     }
 }
