@@ -285,9 +285,11 @@ public:
   /** Returns the text of the icon associated with this session. */
   QString iconText() const;
 
-  /** Specifies whether a utmp entry should be created for the pty used by this session. */
+  /** 
+   * Specifies whether a utmp entry should be created for the pty used by this session.
+   * If true, KPty::login() is called when the session is started.
+   */
   void setAddToUtmp(bool);
-
 
   /**
    * Specifies whether to close the session automatically when the terminal
