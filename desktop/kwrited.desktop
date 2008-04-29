@@ -102,6 +102,7 @@ Comment[ko]=write(1)이나 wall(1)을 통해 사용자가 보낸 메시지 감�
 Comment[lt]=Stebėti vietinių naudotojų išsiųstus laiškus su write(1) arba wall(1)
 Comment[lv]=Novēro ziņojumus no lokālajiem lietotājiem, kuri sūtīti izmantojot write(1) vai wall(1)
 Comment[mk]=Следи за пораки од локалните корисници пратени со write(1) или wall(1)
+Comment[ml]=പ്രാദേശികോപയോക്താക്കളില്‍നിന്നുള്ള write(1) അല്ലെങ്കില്‍ wall(1) ഉപയോഗിച്ചയച്ച സന്ദേശങ്ങള്‍ക്കായി ശ്രദ്ധിയ്ക്കുക
 Comment[ms]=Perhatikan mesej dari pengguna setempat yang dihantar dengan arahan write(1) atau wall(1)
 Comment[nb]=Se etter meldinger fra lokale brukere sendt med write(1) eller wall(1)
 Comment[nds]=Kiekt na Narichten vun lokale Brukers, sendt mit write(1) oder wall(1)

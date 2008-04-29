@@ -22,6 +22,7 @@ Name[ko]=셸
 Name[lt]=Apvalkalas
 Name[lv]=Čaula
 Name[mk]=Школка
+Name[ml]=ഷെല്‍
 Name[nb]=Skall
 Name[nds]=Befehlsfinster
 Name[nn]=Skal
