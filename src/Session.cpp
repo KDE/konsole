@@ -1041,8 +1041,8 @@ void SessionGroup::setMasterStatus(Session* session , bool master)
     bool wasMaster = _sessions[session];
     _sessions[session] = master;
 
-    if (    !wasMaster && !master
-         || wasMaster && master )
+    if (    ( !wasMaster && !master )
+         || ( wasMaster && master ) )
       return;
 
     QListIterator<Session*> iter(_sessions.keys());
