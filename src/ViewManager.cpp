@@ -802,7 +802,8 @@ QList<ViewProperties*> ViewManager::viewProperties() const
     QListIterator<QWidget*> viewIter(container->views());
     while ( viewIter.hasNext() )
     {
-        ViewProperties* properties = container->viewProperties(viewIter.next());        Q_ASSERT( properties );
+        ViewProperties* properties = container->viewProperties(viewIter.next()); 
+        Q_ASSERT( properties );
         list << properties; 
     } 
 
