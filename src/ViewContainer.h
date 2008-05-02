@@ -230,7 +230,7 @@ public:
         /** Provides a button or buttons which can be clicked to close views quickly. */
         QuickCloseView = 2
     };
-    Q_DECLARE_FLAGS(Features,Feature);
+    Q_DECLARE_FLAGS(Features,Feature)
     /** 
      * Sets which additional features are enabled in this container. 
      * The default implementation does thing.  Sub-classes should re-implement this
@@ -333,7 +333,7 @@ private:
     QHash<QWidget*,ViewProperties*> _navigation;
     Features _features;
 };
-Q_DECLARE_OPERATORS_FOR_FLAGS(ViewContainer::Features);
+Q_DECLARE_OPERATORS_FOR_FLAGS(ViewContainer::Features)
 
 /** 
  * A view container which uses a QTabWidget to display the views and 
