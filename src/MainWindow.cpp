@@ -78,7 +78,10 @@ MainWindow::MainWindow()
 
     connect( _viewManager , SIGNAL(setMenuBarVisibleRequest(bool)) , this ,
             SLOT(setMenuBarVisibleOnce(bool)) );
-    connect( _viewManager , SIGNAL(newViewRequest()) , this , SLOT(newTab()) );
+    connect( _viewManager , SIGNAL(newViewRequest(Profile::Ptr)) , 
+        this , SLOT(newFromProfile(Profile::Ptr)) );
+    connect( _viewManager , SIGNAL(newViewRequest()) , 
+        this , SLOT(newTab()));
 
     // create main window widgets
     setupWidgets();

@@ -79,7 +79,8 @@ const Profile::PropertyInfo Profile::DefaultPropertyNames[] =
     , { TabBarMode , "TabBarMode" , GENERAL_GROUP , QVariant::Int }
     , { TabBarPosition , "TabBarPosition" , GENERAL_GROUP , QVariant::Int }
 	, { StartInCurrentSessionDir , "StartInCurrentSessionDir" , GENERAL_GROUP , QVariant::Bool }
-    
+    , { ShowNewTabButton, "ShowNewTabButton" , GENERAL_GROUP , QVariant::Bool }
+
 	// Appearance
 	, { Font , "Font" , APPEARANCE_GROUP , QVariant::Font }
     , { ColorScheme , "ColorScheme" , APPEARANCE_GROUP , QVariant::String }
@@ -150,6 +151,7 @@ FallbackProfile::FallbackProfile()
     setProperty(TabBarPosition,TabBarBottom);
     setProperty(ShowMenuBar,true);
     setProperty(StartInCurrentSessionDir,true);
+    setProperty(ShowNewTabButton,false);
 
     setProperty(KeyBindings,"default");
     setProperty(ColorScheme,"Linux");

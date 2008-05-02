@@ -29,7 +29,7 @@
 #include "Profile.h"
 
 class QSignalMapper;
-
+class QMenu;
 class KActionCollection;
 
 namespace Konsole
@@ -184,10 +184,10 @@ signals:
      */
     void setMenuBarVisibleRequest(bool);
 
-    /**
-     * Requests creation of a new view.  
-     */
+    /** Requests creation of a new view with the default profile. */
     void newViewRequest();
+    /** Requests creation of a new view, with the selected profile. */
+    void newViewRequest(Profile::Ptr);
 
 private slots:
     // called when the "Split View Left/Right" menu item is selected
@@ -278,10 +278,8 @@ private:
     // about the session ( such as title and associated icon ) to the display.
     SessionController* createController(Session* session , TerminalDisplay* display);
 
-    // save and load default size for new displays
-    //void setDefaultDisplaySize(int lines , int columns);
-    //void getDefaultDisplaySize(int& lines , int& columns) const;
-
+    // create menu for 'new tab' button
+    QMenu* createNewViewMenu();
 private:
     QPointer<ViewSplitter>          _viewSplitter;
     QPointer<SessionController>     _pluggedController;
@@ -291,6 +289,8 @@ private:
     KActionCollection*                  _actionCollection;
     QSignalMapper*                      _containerSignalMapper;
     NavigationMethod                _navigationMethod;
+
+    QMenu* _newViewMenu;
 };
 
 }

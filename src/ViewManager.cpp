@@ -26,6 +26,7 @@
 // Qt
 #include <QtCore/QDateTime>
 #include <QtCore/QSignalMapper>
+#include <QtGui/QMenu>
 
 // KDE
 #include <kdebug.h>
@@ -37,6 +38,7 @@
 
 // Konsole
 #include "ColorScheme.h"
+#include "ProfileList.h"
 #include "Session.h"
 #include "TerminalDisplay.h"
 #include "SessionController.h"
@@ -52,6 +54,7 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
     , _actionCollection(collection)
     , _containerSignalMapper(new QSignalMapper(this))
     , _navigationMethod(TabbedNavigation)
+    , _newViewMenu(0)
 {
     // create main view area
     _viewSplitter = new ViewSplitter(0);  
@@ -86,6 +89,20 @@ ViewManager::ViewManager(QObject* parent , KActionCollection* collection)
 
 ViewManager::~ViewManager()
 {
+    delete _newViewMenu;
+}
+QMenu* ViewManager::createNewViewMenu() 
+{
+    if (_newViewMenu)
+        return _newViewMenu;
+
+    _newViewMenu = new QMenu(0);
+    ProfileList* newViewProfiles = new ProfileList(false,_newViewMenu);
+    newViewProfiles->syncWidgetActions(_newViewMenu,true);
+    connect(newViewProfiles,SIGNAL(profileSelected(Profile::Ptr)),this,
+        SIGNAL(newViewRequest(Profile::Ptr)));
+
+    return _newViewMenu;
 }
 QWidget* ViewManager::activeView() const
 {
@@ -567,6 +584,7 @@ ViewContainer* ViewManager::createContainer(const Profile::Ptr info)
         default:
             container = new StackedViewContainer(_viewSplitter);
     }
+    container->setFeatures(ViewContainer::QuickCloseView);
 
     // connect signals and slots
     connect( container , SIGNAL(viewAdded(QWidget*,ViewProperties*)) , _containerSignalMapper ,
@@ -697,6 +715,7 @@ void ViewManager::applyProfile(TerminalDisplay* view , const Profile::Ptr info,
         ViewContainer* container = _viewSplitter->activeContainer();
         int tabBarMode = info->property<int>(Profile::TabBarMode);
         int tabBarPosition = info->property<int>(Profile::TabBarPosition);
+        bool showNewTabButton = info->property<int>(Profile::ShowNewTabButton);
 
         if ( tabBarMode == Profile::AlwaysHideTabBar )
             container->setNavigationDisplayMode(ViewContainer::AlwaysHideNavigation);
@@ -714,6 +733,15 @@ void ViewManager::applyProfile(TerminalDisplay* view , const Profile::Ptr info,
 
         if ( container->supportedNavigationPositions().contains(position) )
             container->setNavigationPosition(position);
+       
+        if (showNewTabButton && 
+            (container->supportedFeatures() & ViewContainer::QuickNewView))
+        {
+            container->setFeatures(container->features() | ViewContainer::QuickNewView);
+            container->setNewViewMenu(createNewViewMenu());
+        }
+        else
+            container->setFeatures(container->features() & ~ViewContainer::QuickNewView);
     }
 
     // load colour scheme

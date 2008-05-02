@@ -119,6 +119,22 @@ void ProfileList::shortcutChanged(Profile::Ptr info,const QKeySequence& sequence
 		action->setShortcut(sequence);
 	}
 }
+void ProfileList::syncWidgetActions(QWidget* widget, bool sync)
+{
+    if (!sync)
+    {
+        _registeredWidgets.remove(widget);
+        return;
+    }
+
+    _registeredWidgets.insert(widget);
+
+    const QList<QAction*> currentActions = widget->actions();
+    foreach(QAction* currentAction, currentActions)
+        widget->removeAction(currentAction);
+
+    widget->addActions(_group->actions());
+}
 void ProfileList::favoriteChanged(Profile::Ptr info,bool isFavorite)
 {
     SessionManager* manager = SessionManager::instance();
@@ -134,7 +150,9 @@ void ProfileList::favoriteChanged(Profile::Ptr info,bool isFavorite)
         }
 
         updateAction(action,info);
-
+        
+        foreach(QWidget* widget,_registeredWidgets)
+            widget->addAction(action);
         emit actionsChanged(_group->actions());
     }
     else
@@ -144,13 +162,14 @@ void ProfileList::favoriteChanged(Profile::Ptr info,bool isFavorite)
         if ( action )
         {
             _group->removeAction(action);
+            foreach(QWidget* widget,_registeredWidgets)
+                widget->removeAction(action);
             emit actionsChanged(_group->actions());
         }
     }
 
     updateEmptyAction();
 }
-
 void ProfileList::triggered(QAction* action)
 {
     emit profileSelected( action->data().value<Profile::Ptr>() );

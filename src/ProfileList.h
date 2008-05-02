@@ -21,6 +21,7 @@
 #define PROFILELIST_H
 
 #include <QtCore/QList>
+#include <QtCore/QSet>
 #include <QtCore/QObject>
 
 #include "Profile.h"
@@ -67,6 +68,8 @@ public:
      */
     QList<QAction*> actions();
 
+    /** TODO: Document me */ 
+    void syncWidgetActions(QWidget* widget,bool sync);
 signals:
    /** 
     * Emitted when the user selects an action from the list.
@@ -95,6 +98,7 @@ private:
     
     // action to show when the list is empty
     QAction* _emptyListAction;
+    QSet<QWidget*> _registeredWidgets;
 }; 
 
 }

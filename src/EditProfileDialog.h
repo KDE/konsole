@@ -123,6 +123,7 @@ private slots:
     void showEnvironmentEditor();
     void tabBarVisibilityChanged(int);
     void tabBarPositionChanged(int);
+    void showNewTabButton(bool);
 
     // appearance page
     void setFontSize(int pointSize);

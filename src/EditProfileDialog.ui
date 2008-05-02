@@ -246,7 +246,7 @@
         <x>0</x>
         <y>0</y>
         <width>429</width>
-        <height>491</height>
+        <height>476</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -333,6 +333,9 @@
             <property name="text" >
              <string>Tab bar display:</string>
             </property>
+            <property name="alignment" >
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
            </widget>
           </item>
           <item row="1" column="1" >
@@ -353,6 +356,9 @@
             <property name="text" >
              <string>Tab bar position:</string>
             </property>
+            <property name="alignment" >
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
            </widget>
           </item>
           <item row="2" column="1" >
@@ -362,6 +368,13 @@
               <horstretch>1</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="2" >
+           <widget class="QCheckBox" name="newTabButton" >
+            <property name="text" >
+             <string>Show 'New Tab' button in tab bar</string>
             </property>
            </widget>
           </item>
@@ -462,8 +475,7 @@
            </spacer>
           </item>
           <item row="5" column="0" >
-           <widget class="Konsole::WarningBox" native="1" name="transparencyWarningWidget" >
-           </widget>
+           <widget class="Konsole::WarningBox" native="1" name="transparencyWarningWidget" />
           </item>
          </layout>
         </widget>
@@ -573,7 +585,7 @@
         <x>0</x>
         <y>0</y>
         <width>429</width>
-        <height>491</height>
+        <height>476</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -751,7 +763,7 @@
         <x>0</x>
         <y>0</y>
         <width>429</width>
-        <height>491</height>
+        <height>476</height>
        </rect>
       </property>
       <attribute name="title" >
@@ -841,7 +853,7 @@
         <x>0</x>
         <y>0</y>
         <width>429</width>
-        <height>491</height>
+        <height>476</height>
        </rect>
       </property>
       <attribute name="title" >

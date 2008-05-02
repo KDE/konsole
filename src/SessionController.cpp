@@ -685,6 +685,36 @@ void SessionController::saveSession()
     //SaveSessionDialog dialog(_view);
     //int result = dialog.exec();
 }
+bool SessionController::confirmClose() const
+{
+    if (_session->foregroundProcessId() != _session->processId())
+    {
+        ProcessInfo* foregroundInfo = ProcessInfo::newInstance(_session->foregroundProcessId());
+        foregroundInfo->update();
+        bool ok = false;
+        QString title = foregroundInfo->name(&ok);
+        delete foregroundInfo;
+      
+        // hard coded for now.  In future make it possible for the user to specify which programs
+        // are ignored when considering whether to display a confirmation
+        QStringList ignoreList; 
+        ignoreList << QString(getenv("SHELL")).section('/',-1);
+        if (ignoreList.contains(title))
+            return true;
+
+        QString question;
+        if (ok)
+            question = i18n("The program '%1' is currently running in this session."  
+                            "  Are you sure you want to close it?",title);
+        else
+            question = i18n("A program is currently running in this session."
+                            "  Are you sure you want to close it?");
+
+        int result = KMessageBox::warningYesNo(_view->window(),question,i18n("Confirm Close"));
+        return (result == KMessageBox::Yes) ? true : false; 
+    }
+    return true;
+}
 void SessionController::closeSession()
 {
 	if (_preventClose)

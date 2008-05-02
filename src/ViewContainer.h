@@ -26,10 +26,11 @@
 #include <QtCore/QObject>
 #include <QtCore/QHash>
 #include <QtCore/QList>
-#include <QtGui/QVBoxLayout>
+#include <QtGui/QBoxLayout>
 
 // KDE
 #include <KTabBar>
+#include <KPushButton>
 
 class QSpacerItem;
 class QStackedWidget;
@@ -65,7 +66,6 @@ namespace Konsole
  * Subclasses should reimplement the addViewWidget() and removeViewWidget() functions
  * to actually add or remove view widgets from the container widget, as well
  * as updating any navigation aids.
- * 
  */
 class ViewContainer : public QObject
 {
@@ -137,9 +137,7 @@ public:
      * the view container's navigation widget. 
      */
     NavigationDisplayMode navigationDisplayMode() const;
-
     
-
     /**
      * Sets the position of the navigation widget with
      * respect to the main content area.
@@ -194,15 +192,10 @@ public:
      */
     virtual void setActiveView(QWidget* widget) = 0;
 
-
-    /**
-     * Changes the active view to the next view 
-     */
+    /** Changes the active view to the next view */
     void activateNextView();
 
-    /**
-     * Changes the active view to the previous view
-     */
+    /** Changes the active view to the previous view */
     void activatePreviousView();
 
     /** 
@@ -226,6 +219,34 @@ public:
      * The default implementation does nothing.
      */
     void moveActiveView( MoveDirection direction );
+
+    /** Enum describing extra UI features which can be 
+     * provided by the container. */
+    enum Feature
+    {
+        /** Provides a button which can be clicked to create new views quickly.
+         * When the button is clicked, a newViewRequest() signal is emitted. */
+        QuickNewView = 1,
+        /** Provides a button or buttons which can be clicked to close views quickly. */
+        QuickCloseView = 2
+    };
+    Q_DECLARE_FLAGS(Features,Feature);
+    /** 
+     * Sets which additional features are enabled in this container. 
+     * The default implementation does thing.  Sub-classes should re-implement this
+     * to hide or show the relevant parts of their UI
+     */
+    virtual void setFeatures(Features features);
+    /** Returns a bitwise-OR of enabled extra UI features.  See setFeatures() */
+    Features features() const;
+    /** Returns a bitwise-OR of supported extra UI features.  The default
+     * implementation returns 0 (no extra features) */
+    virtual Features supportedFeatures() const
+    { return 0; }
+    /** Sets the menu to be shown when the new view button is clicked.  
+     * Only valid if the QuickNewView feature is enabled.
+     * The default implementation does nothing. */
+    virtual void setNewViewMenu(QMenu* menu) { Q_UNUSED(menu); }
 
 signals:
     /** Emitted when the container is deleted */
@@ -310,7 +331,9 @@ private:
     NavigationPosition _navigationPosition;
     QList<QWidget*> _views;
     QHash<QWidget*,ViewProperties*> _navigation;
+    Features _features;
 };
+Q_DECLARE_OPERATORS_FOR_FLAGS(ViewContainer::Features);
 
 /** 
  * A view container which uses a QTabWidget to display the views and 
@@ -342,7 +365,6 @@ private slots:
     void prepareColorCells();
     void showContextMenu(QWidget* widget , const QPoint& position);
     void currentTabChanged(int index);
-
 
 private:
     KTabWidget* _tabWidget; 
@@ -435,7 +457,9 @@ public:
     virtual QWidget* activeView() const;
     virtual void setActiveView(QWidget* view);
     virtual QList<NavigationPosition> supportedNavigationPositions() const;
-
+    virtual void setFeatures(Features features);
+    virtual Features supportedFeatures() const;
+    virtual void setNewViewMenu(QMenu* menu);
 protected:
     virtual void addViewWidget(QWidget* view , int index);
     virtual void removeViewWidget(QWidget* view);
@@ -464,13 +488,13 @@ private:
     QWidget* _containerWidget;
     QSpacerItem* _tabBarSpacer;
     TabbedViewContainerV2Layout* _layout;
+    QHBoxLayout* _tabBarLayout;
+    KPushButton* _newTabButton;
 
     static const int TabBarSpace = 2;
 };
 
-/**
- * A plain view container with no navigation display
- */
+/** A plain view container with no navigation display */
 class StackedViewContainer : public ViewContainer
 {
 public:

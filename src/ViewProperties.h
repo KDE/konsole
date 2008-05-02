@@ -61,7 +61,6 @@ public:
     /**
      * Returns the current directory associated with a view.
      * This may be the same as url()
-     *
      * The default implementation returns an empty string.
      */
     virtual QString currentDir() const;
@@ -72,13 +71,24 @@ public:
      */
     int identifier() const;
 
+    /**
+     * Sub-classes may re-implement this method to display a message to the user 
+     * to allow them to confirm whether to close a view.
+     * The default implementation always returns true
+     */
+    virtual bool confirmClose() const
+    { return true; }
+
 	/** Finds a ViewProperties instance given its numeric identifier. */
 	static ViewProperties* propertiesById(int id);
 
 	/** Name of mime format to use in drag-and-drop operations. */
 	static QString mimeType() 
 	{ return _mimeType; }
-    
+   
+    /** Returns a new QMimeData instance which represents the view with the given @p id 
+     * (See identifier()).  The QMimeData instance returned must be deleted by the caller.
+     */
     static QMimeData* createMimeData(int id)
     {
         QMimeData* mimeData = new QMimeData;
@@ -86,6 +96,12 @@ public:
         mimeData->setData(mimeType(),data);
         return mimeData;
     }
+    /** Decodes a QMimeData instance created with createMimeData() and returns the identifier 
+     * of the associated view.  The associated ViewProperties instance can then be retrieved by
+     * calling propertiesById() 
+     *
+     * The QMimeData instance must support the mime format returned by mimeType()
+     */
     static int decodeMimeData(const QMimeData* mimeData)
     {
         return *(int*)(mimeData->data(ViewProperties::mimeType()).constData());
@@ -102,15 +118,12 @@ signals:
 public slots:
     /**
      * Requests the renaming of this view.
-     * 
      * The default implementation does nothing.
      */
      virtual void rename();
 
 protected slots:
-    /**
-     * Emits the activity() signal.
-     */
+    /** Emits the activity() signal. */
     void fireActivity();
 
 protected:
@@ -124,12 +137,8 @@ protected:
      * an iconChanged() signal to be emitted
      */
     void setIcon(const QIcon& icon);
-    /**
-     * Subclasses may call this method to change the identifier.  
-     */
+    /** Subclasses may call this method to change the identifier. */
     void setIdentifier(int id);
-
-    
 private:
     QIcon _icon;
     QString _title;

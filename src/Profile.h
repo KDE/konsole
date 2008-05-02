@@ -188,7 +188,10 @@ public:
 
 		/** (bool) Whether new sessions should be started in the same directory as the 
 		 * currently active session. */
-        StartInCurrentSessionDir
+        StartInCurrentSessionDir,
+
+        /** (bool) Whether a 'New Tab' button should be shown on the tab bar */
+        ShowNewTabButton
     };
 
     /** 

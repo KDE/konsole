@@ -28,7 +28,6 @@
 #include <QtGui/QLineEdit>
 #include <QtGui/QBrush>
 #include <QtGui/QListWidget>
-#include <QtGui/QPushButton>
 #include <QtGui/QSplitter>
 #include <QtGui/QStackedWidget>
 #include <QtGui/QTabBar>
@@ -74,7 +73,10 @@ ViewContainer::~ViewContainer()
     emit destroyed(this);
 }
 void ViewContainer::moveViewWidget( int , int ) {}
-
+void ViewContainer::setFeatures(Features features)
+{ _features = features; }
+ViewContainer::Features ViewContainer::features() const
+{ return _features; }
 void ViewContainer::moveActiveView( MoveDirection direction )
 {
     const int currentIndex = _views.indexOf( activeView() ) ;
@@ -613,17 +615,33 @@ TabbedViewContainerV2::TabbedViewContainerV2(NavigationPosition position , QObje
     _stackWidget = new QStackedWidget();
     _tabBar = new ViewContainerTabBar(_containerWidget,this);
     _tabBar->setDrawBase(true);
+    _newTabButton = new KPushButton(KIcon("tab-new"),QString(),_containerWidget);
+    // The button width here is hard coded, it would be better to use the value from
+    // the current style (see QTabWidget::setUpLayout())
+    _newTabButton->setFixedWidth(50);
+    _newTabButton->setFlat(true);
+    // new tab button is initially hidden, it will be shown when setFeatures() is called
+    // with the QuickNewView flag enabled
+    _newTabButton->setHidden(true);
    
     connect( _tabBar , SIGNAL(currentChanged(int)) , this , SLOT(currentTabChanged(int)) );
     connect( _tabBar , SIGNAL(tabDoubleClicked(int)) , this , SLOT(tabDoubleClicked(int)) );
     connect( _tabBar , SIGNAL(newTabRequest()) , this , SIGNAL(newViewRequest()) );
     connect( _tabBar , SIGNAL(wheelDelta(int)) , this , SLOT(wheelScrolled(int)) );
 	connect( _tabBar , SIGNAL(mouseMiddleClick(int)) , this , SLOT(closeTab(int)) );
+    connect( _tabBar , SIGNAL(closeRequest(int)) , this , SLOT(closeTab(int)) );
 	connect( _tabBar , SIGNAL(initiateDrag(int)) , this , SLOT(startTabDrag(int)) );
+
+    connect( _newTabButton , SIGNAL(clicked()) , this , SIGNAL(newViewRequest()) );
 
     _layout = new TabbedViewContainerV2Layout;
     _layout->setSpacing(0);
     _layout->setMargin(0);
+    _tabBarLayout = new QHBoxLayout;
+    _tabBarLayout->setSpacing(0);
+    _tabBarLayout->setMargin(0);
+    _tabBarLayout->addWidget(_newTabButton);
+    _tabBarLayout->addWidget(_tabBar);
    
     _tabBarSpacer = new QSpacerItem(0,TabBarSpace);
 
@@ -631,13 +649,13 @@ TabbedViewContainerV2::TabbedViewContainerV2(NavigationPosition position , QObje
     
     if ( position == NavigationPositionTop )
     {
-        _layout->insertWidget(0,_tabBar);
+        _layout->insertLayout(0,_tabBarLayout);
         _layout->insertItemAt(0,_tabBarSpacer);
         _tabBar->setShape(QTabBar::RoundedNorth);
     }
     else if ( position == NavigationPositionBottom )
     {
-        _layout->insertWidget(-1,_tabBar);
+        _layout->insertLayout(-1,_tabBarLayout);
         _layout->insertItemAt(-1,_tabBarSpacer);
         _tabBar->setShape(QTabBar::RoundedSouth);
     }
@@ -646,14 +664,38 @@ TabbedViewContainerV2::TabbedViewContainerV2(NavigationPosition position , QObje
 
     _containerWidget->setLayout(_layout);
 }
+void TabbedViewContainerV2::setNewViewMenu(QMenu* menu)
+{ _newTabButton->setDelayedMenu(menu); }
+ViewContainer::Features TabbedViewContainerV2::supportedFeatures() const
+{ return QuickNewView; }
+void TabbedViewContainerV2::setFeatures(Features features)
+{
+    ViewContainer::setFeatures(features);
+
+    if (features & QuickNewView) 
+    {
+        _newTabButton->setHidden(false);
+        _newTabButton->show();
+    }
+    else
+        _newTabButton->setHidden(true);
+
+    if (features & QuickCloseView)
+        _tabBar->setCloseButtonEnabled(true);
+    else
+        _tabBar->setCloseButtonEnabled(false);
+}
 void TabbedViewContainerV2::closeTab(int tab)
 {
 	Q_ASSERT(tab >= 0 && tab < _stackWidget->count());
-	removeView(_stackWidget->widget(tab));
+    
+    if (viewProperties(_stackWidget->widget(tab))->confirmClose())
+	    removeView(_stackWidget->widget(tab));
 }
 void TabbedViewContainerV2::setTabBarVisible(bool visible)
 {
     _tabBar->setVisible(visible);
+    _newTabButton->setVisible(visible);
     if ( visible )
     {
         _tabBarSpacer->changeSize(0,TabBarSpace);
@@ -679,20 +721,20 @@ void TabbedViewContainerV2::navigationPositionChanged(NavigationPosition positio
     if ( position == NavigationPositionTop 
             && _layout->indexOf(_stackWidget) == StackIndexWithTabBottom )
     {
-        _layout->removeWidget(_tabBar);
+        _layout->removeItem(_tabBarLayout);
         _layout->removeItem(_tabBarSpacer);
 
-        _layout->insertWidget(0,_tabBar);
+        _layout->insertLayout(0,_tabBarLayout);
         _layout->insertItemAt(0,_tabBarSpacer);
         _tabBar->setShape(QTabBar::RoundedNorth);
     }
     else if ( position == NavigationPositionBottom 
             && _layout->indexOf(_stackWidget) != StackIndexWithTabBottom )
     {
-        _layout->removeWidget(_tabBar);
+        _layout->removeItem(_tabBarLayout);
         _layout->removeItem(_tabBarSpacer);
 
-        _layout->insertWidget(-1,_tabBar);
+        _layout->insertLayout(-1,_tabBarLayout);
         _layout->insertItemAt(-1,_tabBarSpacer);
         _tabBar->setShape(QTabBar::RoundedSouth);
     }
