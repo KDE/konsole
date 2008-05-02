@@ -561,11 +561,12 @@ void ViewContainerTabBar::dropEvent(QDropEvent* event)
 {
 	setDropIndicator(-1);
 
-	if (!event->mimeData()->hasFormat(ViewProperties::mimeType()))
+	if (    !event->mimeData()->hasFormat(ViewProperties::mimeType())
+        ||  proposedDropIsSameTab(event) )
+    {
 		event->ignore();
-
-	if (proposedDropIsSameTab(event))
-        event->ignore();
+        return;
+    }
 
     int index = dropIndex(event->pos());
     int droppedId = ViewProperties::decodeMimeData(event->mimeData());
