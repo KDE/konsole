@@ -132,9 +132,9 @@ void Screen::cursorUp(int n)
 //=CUU
 {
   if (n == 0) n = 1; // Default
-  int stop = cuY < tmargin ? 0 : tmargin;
+  unsigned stop = cuY < tmargin ? 0 : tmargin;
   cuX = qMin(columns-1,cuX); // nowrap!
-  cuY = qMax(stop,cuY-n);
+  cuY = qBound(stop,(unsigned)cuY-n,(unsigned)cuY);
 }
 
 /*!
@@ -147,9 +147,9 @@ void Screen::cursorDown(int n)
 //=CUD
 {
   if (n == 0) n = 1; // Default
-  int stop = cuY > bmargin ? lines-1 : bmargin;
+  unsigned stop = cuY > bmargin ? lines-1 : bmargin;
   cuX = qMin(columns-1,cuX); // nowrap!
-  cuY = qMin(stop,cuY+n);
+  cuY = qBound((unsigned)cuY,(unsigned)cuY+n, (unsigned)stop);
 }
 
 /*!
@@ -194,7 +194,6 @@ void Screen::setMargins(int top, int bot)
   bmargin = bot;
   cuX = 0;
   cuY = getMode(MODE_Origin) ? top : 0;
-
 }
 
 int Screen::topMargin() const
@@ -242,17 +241,13 @@ void Screen::NextLine()
 void Screen::eraseChars(int n)
 {
   if (n == 0) n = 1; // Default
-  int p = qMax(0,qMin(cuX+n-1,columns-1));
+  int p = qBound(0u, (unsigned)cuX+n-1, (unsigned)columns-1);
   clearImage(loc(cuX,cuY),loc(p,cuY),' ');
 }
 
 void Screen::deleteChars(int n)
 {
-  Q_ASSERT( n >= 0 );
-
-  // always delete at least one char
-  if (n == 0) 
-      n = 1; 
+  n = qBound(1u, (unsigned) n, (unsigned)columns-1);
 
   // if cursor is beyond the end of the line there is nothing to do
   if ( cuX >= screenLines[cuY].count() )
@@ -269,7 +264,7 @@ void Screen::deleteChars(int n)
 
 void Screen::insertChars(int n)
 {
-  if (n == 0) n = 1; // Default
+  n = qBound(1, n, columns-1);
 
   if ( screenLines[cuY].size() < cuX )
     screenLines[cuY].resize(cuX);
@@ -382,6 +377,10 @@ void Screen::restoreCursor()
 void Screen::resizeImage(int new_lines, int new_columns)
 {
   if ((new_lines==lines) && (new_columns==columns)) return;
+
+  if (new_lines <= 0 || new_lines > (1<<12) ||
+      new_columns <= 0 || new_columns > (1<<12))
+      return;
 
   if (cuY > new_lines-1)
   { // attempt to preserve focus and lines
@@ -910,14 +909,14 @@ void Screen::setCursorX(int x)
 {
   if (x == 0) x = 1; // Default
   x -= 1; // Adjust
-  cuX = qMax(0,qMin(columns-1, x));
+  cuX = qBound(0u,(unsigned)x, (unsigned)columns-1);
 }
 
 void Screen::setCursorY(int y)
 {
   if (y == 0) y = 1; // Default
   y -= 1; // Adjust
-  cuY = qMax(0,qMin(lines  -1, y + (getMode(MODE_Origin) ? tmargin : 0) ));
+  cuY = qBound(0u, (unsigned)(y + (getMode(MODE_Origin) ? tmargin : 0u)), (unsigned)lines-1);
 }
 
 void Screen::home()
@@ -1226,7 +1225,7 @@ void Screen::setSelectionStart(/*const ScreenCursor& viewCursor ,*/ const int x,
   columnmode = mode;
 }
 
-void Screen::setSelectionEnd( const int x, const int y)
+void Screen::setSelectionEnd(const int x, const int y)
 {
   if (sel_begin == -1) return;
   int l =  loc(x,y); // + histCursor);
