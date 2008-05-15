@@ -196,6 +196,8 @@ void Vt102Emulation::reset()
 
 #define TY_CSI_PE(A  )  TY_CONSTR(10,A,0)
 
+#define MAX_ARGUMENT    4096
+
 // Tokenizer --------------------------------------------------------------- --
 
 /* The tokenizers state
@@ -212,7 +214,8 @@ void Vt102Emulation::resetToken()
 
 void Vt102Emulation::addDigit(int dig)
 {
-  argv[argc] = 10*argv[argc] + dig;
+  if (argv[argc] < MAX_ARGUMENT)
+      argv[argc] = 10*argv[argc] + dig;
 }
 
 void Vt102Emulation::addArgument()
