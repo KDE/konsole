@@ -659,7 +659,7 @@ QByteArray KeyboardTranslator::Entry::unescape(const QByteArray& input) const
         {
            char replacement[2] = {0,0};
            int charsToRemove = 2;
-		   bool escapedChar = true;
+           bool escapedChar = true;
 
            switch ( result[i+1] )
            {
@@ -670,7 +670,7 @@ QByteArray KeyboardTranslator::Entry::unescape(const QByteArray& input) const
               case 'r' : replacement[0] = 13; break;
               case 'n' : replacement[0] = 10; break;
               case 'x' :
-			  {
+                 {
                     // format is \xh or \xhh where 'h' is a hexadecimal
                     // digit from 0-9 or A-F which should be replaced
                     // with the corresponding character value
@@ -681,23 +681,22 @@ QByteArray KeyboardTranslator::Entry::unescape(const QByteArray& input) const
                     if ( (i < result.count()-3) && isxdigit(result[i+3]) )
                             hexDigits[1] = result[i+3];
 
-                    int charValue = 0;
+                    unsigned charValue = 0;
                     sscanf(hexDigits,"%x",&charValue);
-                    
-                    replacement[0] = (char)charValue; 
 
+                    replacement[0] = (char)charValue; 
                     charsToRemove = 2 + strlen(hexDigits);
-			  }
+                  }
               break;
-			  default:
-			  		escapedChar = false;
+              default:
+                  escapedChar = false;
            }
 
            if ( escapedChar )
                result.replace(i,charsToRemove,replacement);
         }
     }
-    
+
     return result;
 }
 
