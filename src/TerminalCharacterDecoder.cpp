@@ -29,7 +29,6 @@
 #include <kdebug.h>
 
 using namespace Konsole;
-
 PlainTextDecoder::PlainTextDecoder()
  : _output(0)
  , _includeTrailingWhitespace(true)
@@ -108,7 +107,7 @@ void PlainTextDecoder::decodeLine(const Character* const characters, int count, 
 
 HTMLDecoder::HTMLDecoder() :
         _output(0)
-	   ,_colorTable(base_color_table)
+    ,_colorTable(base_color_table)
        ,_innerSpanOpen(false)
        ,_lastRendition(DEFAULT_RENDITION)
 {
