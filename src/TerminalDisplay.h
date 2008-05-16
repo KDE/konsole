@@ -427,7 +427,13 @@ public slots:
  	  * stop key (Ctrl+S) are pressed.
  	  */
 	void setFlowControlWarningEnabled(bool enabled);
-	
+    /** 
+     * Returns true if the flow control warning box is enabled. 
+     * See outputSuspended() and setFlowControlWarningEnabled()
+     */
+    bool flowControlWarningEnabled() const
+    { return _flowControlWarningEnabled; }
+
     /** 
 	 * Causes the widget to display or hide a message informing the user that terminal
 	 * output has been suspended (by using the flow control key combination Ctrl+S)
@@ -482,14 +488,6 @@ signals:
      */
     void keyPressedSignal(QKeyEvent *e);
 
-    /**
-     * Emitted when the user presses the suspend or resume flow control key combinations 
-     * 
-     * @param suspend true if the user pressed Ctrl+S (the suspend output key combination) or
-     * false if the user pressed Ctrl+Q (the resume output key combination)
-     */
-    void flowControlKeyPressed(bool suspend);
-    
     /** 
      * A mouse event occurred.
      * @param button The mouse button (0 for left button, 1 for middle button, 2 for right button, 3 for release)

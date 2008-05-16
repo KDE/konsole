@@ -502,6 +502,7 @@ private slots:
   void zmodemRcvBlock(const char *data, int len);
   void zmodemFinished();
 
+  void updateFlowControlState(bool suspended);
 private:
 
   void updateTerminalSize();

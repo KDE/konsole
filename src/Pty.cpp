@@ -54,7 +54,7 @@ QSize Pty::windowSize() const
     return QSize(_windowColumns,_windowLines);
 }
 
-void Pty::setXonXoff(bool enable)
+void Pty::setFlowControlEnabled(bool enable)
 {
   _xonXoff = enable;
 
@@ -69,6 +69,18 @@ void Pty::setXonXoff(bool enable)
     if (!pty()->tcSetAttr(&ttmode))
       kWarning() << "Unable to set terminal attributes.";
   }
+}
+bool Pty::flowControlEnabled() const
+{
+    if (pty()->masterFd() >= 0)
+    {
+        struct ::termios ttmode;
+        pty()->tcGetAttr(&ttmode);
+        return ttmode.c_iflag & IXOFF &&
+               ttmode.c_iflag & IXON;
+    }  
+    kWarning() << "Unable to get flow control status, terminal not connected.";
+    return false;
 }
 
 void Pty::setUtf8Mode(bool enable)

@@ -934,7 +934,6 @@ void Vt102Emulation::sendText( const QString& text )
   }
 
 }
-
 void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
 {
     Qt::KeyboardModifiers modifiers = event->modifiers();
@@ -945,6 +944,15 @@ void Vt102Emulation::sendKeyEvent( QKeyEvent* event )
     if ( getMode(MODE_Ansi)     ) states |= KeyboardTranslator::AnsiState;
     if ( getMode(MODE_AppCuKeys)) states |= KeyboardTranslator::CursorKeysState;
     if ( getMode(MODE_AppScreen)) states |= KeyboardTranslator::AlternateScreenState;
+
+    // check flow control state
+    if (modifiers & Qt::ControlModifier)
+    {
+        if (event->key() == Qt::Key_S)
+            emit flowControlKeyPressed(true);
+        else if (event->key() == Qt::Key_Q)
+            emit flowControlKeyPressed(false);
+    }
 
     // lookup key binding
     if ( _keyTranslator )

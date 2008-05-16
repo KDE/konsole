@@ -107,9 +107,14 @@ Q_OBJECT
     void setWriteable(bool writeable);
 
     /** 
-     * Enables or disables Xon/Xoff flow control.
+     * Enables or disables Xon/Xoff flow control.  The flow control setting
+     * may be changed later by a terminal application, so flowControlEnabled()
+     * may not equal the value of @p on in the previous call to setFlowControlEnabled()
      */
-    void setXonXoff(bool on);
+    void setFlowControlEnabled(bool on);
+
+    /** Queries the terminal state and returns true if Xon/Xoff flow control is enabled. */
+    bool flowControlEnabled() const;
 
     /** 
      * Sets the size of the window (in lines and columns of characters) 

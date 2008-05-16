@@ -370,9 +370,6 @@ TerminalDisplay::TerminalDisplay(QWidget *parent)
 
   setLayout( _gridLayout ); 
 
-  //set up a warning message when the user presses Ctrl+S to avoid confusion
-  connect( this,SIGNAL(flowControlKeyPressed(bool)),this,SLOT(outputSuspended(bool)) );
-
   new AutoScrollHandler(this);
 }
 
@@ -2368,15 +2365,6 @@ void TerminalDisplay::setFlowControlWarningEnabled( bool enable )
 void TerminalDisplay::keyPressEvent( QKeyEvent* event )
 {
     bool emitKeyPressSignal = true;
-
-    // XonXoff flow control
-    if (event->modifiers() & Qt::ControlModifier && _flowControlWarningEnabled)
-	{
-		if ( event->key() == Qt::Key_S )
-				emit flowControlKeyPressed(true /*output suspended*/);
-		else if ( event->key() == Qt::Key_Q )
-				emit flowControlKeyPressed(false /*output enabled*/);
-	}
 
     // Keyboard-based navigation
     if ( event->modifiers() == Qt::ShiftModifier )

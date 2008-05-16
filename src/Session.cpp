@@ -99,7 +99,9 @@ Session::Session(QObject* parent) :
            this, SIGNAL( changeTabTextColorRequest( int ) ) );
     connect( _emulation, SIGNAL(profileChangeCommandReceived(const QString&)),
            this, SIGNAL( profileChangeCommandReceived(const QString&)) );
-    
+    connect( _emulation, SIGNAL(flowControlKeyPressed(bool)) , this, 
+             SLOT(updateFlowControlState(bool)) );
+
     //create new teletype for I/O with shell process
     openTeletype(-1);
 
@@ -358,7 +360,7 @@ void Session::run()
   else
     _shellProcess->setWorkingDirectory(QDir::homePath());
 
-  _shellProcess->setXonXoff(_flowControl);
+  _shellProcess->setFlowControlEnabled(_flowControl);
   _shellProcess->setErase(_emulation->getErase());
 
   // this is not strictly accurate use of the COLORFGBG variable.  This does not
@@ -500,7 +502,25 @@ void Session::monitorTimerDone()
 
   _notifiedActivity=false;
 }
-
+void Session::updateFlowControlState(bool suspended)
+{
+    if (suspended)
+    {
+        if (flowControlEnabled())
+        {
+            foreach(TerminalDisplay* display,_views)
+            {
+                if (display->flowControlWarningEnabled())
+                    display->outputSuspended(true);
+            }
+        }
+    } 
+    else
+    {
+        foreach(TerminalDisplay* display,_views)
+            display->outputSuspended(false);
+    }   
+}
 void Session::activityStateSet(int state)
 {
   if (state==NOTIFYBELL)
@@ -808,19 +828,19 @@ void Session::setAddToUtmp(bool set)
 
 void Session::setFlowControlEnabled(bool enabled)
 {
-  if (_flowControl == enabled)
-  	return;
-
   _flowControl = enabled;
 
   if (_shellProcess)  
-	_shellProcess->setXonXoff(_flowControl);
+	_shellProcess->setFlowControlEnabled(_flowControl);
   
   emit flowControlEnabledChanged(enabled);
 }
 bool Session::flowControlEnabled() const
 {
-	return _flowControl;
+    if (_shellProcess)
+            return _shellProcess->flowControlEnabled();
+    else
+            return _flowControl;
 }
 void Session::fireZModemDetected()
 {
