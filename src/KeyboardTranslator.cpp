@@ -494,10 +494,24 @@ bool KeyboardTranslatorReader::parseError()
 }
 QList<KeyboardTranslatorReader::Token> KeyboardTranslatorReader::tokenize(const QString& line)
 {
-    QString text = line.simplified();
+    QString text = line;
 
-    // comment line: # comment
-    static QRegExp comment("\\#.*");
+    // remove comments 
+    bool inQuotes = false;
+    int commentPos = -1;
+    for (int i=text.length()-1;i>=0;i--)
+    {
+        QChar ch = text[i];
+        if (ch == '\"')
+            inQuotes = !inQuotes;
+        else if (ch == '#' && !inQuotes)
+            commentPos = i;
+    }
+    if (commentPos != -1)
+        text.remove(commentPos,text.length());
+
+    text = text.simplified();
+   
     // title line: keyboard "title"
     static QRegExp title("keyboard\\s+\"(.*)\"");
     // key line: key KeySequence : "output"
@@ -505,8 +519,7 @@ QList<KeyboardTranslatorReader::Token> KeyboardTranslatorReader::tokenize(const 
     static QRegExp key("key\\s+([\\w\\+\\s\\-]+)\\s*:\\s*(\"(.*)\"|\\w+)");
 
     QList<Token> list;
-
-    if ( text.isEmpty() || comment.exactMatch(text) )
+    if ( text.isEmpty() ) 
     {
         return list;
     }
