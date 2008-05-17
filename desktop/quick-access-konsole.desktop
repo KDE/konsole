@@ -9,6 +9,7 @@ X-KDE-StartupNotify=false
 Categories=Qt;KDE;System;TerminalEmulator;
 
 Name=Quick Access Terminal
+Name[af]=Vinnige-toegang terminaal
 Name[ar]=طرفيّة الوصول السريع
 Name[be]=Тэрмінал хуткага доступу
 Name[ca]=Terminal d'accés ràpid

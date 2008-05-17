@@ -29,11 +29,13 @@ Comment[sr]=Конзола
 Comment[ta]=கான்சோல்
 Comment[te]=కాన్సొల్
 Comment[th]=คอนโซล K
-Comment[uz]=Терминал
+Comment[uz]=Terminal
+Comment[uz@cyrillic]=Терминал
 Comment[x-test]=xxKonsolexx
 
 [Event/BellVisible]
 Name=Bell in Visible Session
+Name[af]=Klokkie in die sigbare sessie 
 Name[ca]=Timbre en una sessió visible
 Name[de]=Signalton in sichtbarer Sitzung
 Name[el]=Ηχητική σήμανση στην ορατή συνεδρία
@@ -41,9 +43,9 @@ Name[eo]=Pepo en videbla seanco
 Name[es]=Campana en sesión visible
 Name[et]=Heli nähtavas seansis
 Name[fi]=Äänimerkki näkyvässä istunnossa
+Name[fr]=Cloche dans la session visible
 Name[ga]=Cloigín i Seisiún Infheicthe
 Name[gu]=દ્રશ્ય સત્રમાં ઘંટડી
-Name[hu]=Csengetés egy látható munkafolyamatban
 Name[ja]=可視セッションのベル
 Name[km]=កណ្ដឹង​នៅ​​ក្នុង​សម័យ​មើល​ឃើញ
 Name[ko]=보이는 세션에서 알림 발생
@@ -124,10 +126,12 @@ Action=Sound
 
 [Event/BellInvisible]
 Name=Bell in Non-Visible Session
+Name[af]=Klokkie in nie-sigbare sessie 
 Name[ca]=Timbre en una sessió no visible
 Name[el]=Ηχητική σήμανση σε μη ορατή συνεδρία
 Name[et]=Heli nähtamatus seansis
 Name[fi]=Äänimerkki näkymättömässä istunnossa
+Name[fr]=Cloche dans une session invisible
 Name[ga]=Cloigín i Seisiún Dofheicthe
 Name[gu]=અદ્રશ્ય સત્રમાં ઘંટડી
 Name[ja]=不可視セッションのベル
@@ -207,6 +211,7 @@ Action=Popup
 
 [Event/Activity]
 Name=Activity in Monitored Session
+Name[af]=Aktiwiteit in gemonitorde sessie
 Name[ca]=Activitat en una sessió controlada
 Name[de]=Aktivität in überwachter Sitzung
 Name[el]=Δραστηριότητα σε συνεδρία υπό εποπτεία
@@ -214,9 +219,9 @@ Name[eo]=Aktiveco en rigardata seanco
 Name[es]=Actividad en sesión monitorizada
 Name[et]=Aktiivsus jälgitavas seansis
 Name[fi]=Aktiivisuutta tarkkailtavassa istunnossa
+Name[fr]=Activité dans la session surveillée
 Name[ga]=Gníomhaíocht i Seisiún Monatóirithe
 Name[gu]=દેખરેખ રાખેલ સત્રમાં ક્રિયા
-Name[hu]=Aktivitás egy monitorozott munkafolyamatban
 Name[ja]=監視中のセッションの活動
 Name[km]=សកម្មភាព​ក្នុង​សម័យ​ដែល​បាន​ត្រួត​ពិនិត្យ
 Name[ko]=보이는 세션에서 활동 발생
@@ -298,6 +303,7 @@ Action=Popup
 
 [Event/Silence]
 Name=Silence in Monitored Session
+Name[af]=Stilte in gemonitorde sessie 
 Name[ca]=Silenci en una sessió controlada
 Name[de]=Keine Aktivität in überwachter Sitzung
 Name[el]=Ησυχία σε συνεδρία υπό εποπτεία
@@ -305,9 +311,9 @@ Name[eo]=Trankvilo en rigardata seanco
 Name[es]=Silencio en sesión monitorizada
 Name[et]=Vaikus jälgitavas seansis
 Name[fi]=Hiljaisuus valvotussa istunnossa
+Name[fr]=Inactivité dans la session surveillée
 Name[ga]=Ciúnas i Seisiún Monatóirithe
 Name[gu]=દેખરેખ રાખેલ સત્રમાં શાંતિ
-Name[hu]=Üresjárat egy monitorozott munkafolyamatban
 Name[ja]=監視中のセッションの休止
 Name[km]=ភាព​ស្ងាត់​ក្នុង​សម័យ​ដែល​បាន​ត្រួត​ពិនិត្យ
 Name[ko]=관찰하는 세션에서 침묵 감지됨
@@ -388,10 +394,12 @@ Action=Popup
 
 [Event/Finished]
 Name=Session Finished With Non-Zero Status
+Name[af]=Sessie het geëindig met nie-zero status 
 Name[ca]=Sessió finalitzada amb un estat diferent de zero
 Name[el]=Η συνεδρία τερμάτισε με μη μηδενική κατάσταση
 Name[et]=Seanss lõpetas nullist erineva staatusega
 Name[fi]=Istunto lopetettiin paluuarvolla, joka oli eri kuin nolla
+Name[fr]=La session s'est terminée anormalement
 Name[ga]=Chríochnaigh an Seisiún le Stádas nach bhfuil 0
 Name[gu]=સત્ર અ-શૂન્ય સ્થિતિ સાથે પૂર્ણ થયું
 Name[ja]=ゼロでないステータスでセッションが終了
@@ -463,7 +471,8 @@ Comment[ta]=ஒரு கூட்டம் ஒன்றுமில்லாம
 Comment[th]=เกิดการออกจากเซสชั่นด้วยสถานะที่ไม่ใช่ศูนย์
 Comment[tr]=Bir oturum hata vererek çıktı
 Comment[uk]=Сеанс завершився з не нульовим станом
-Comment[uz]=Сеанс нолга тенг бўлмаган ҳолат билан тугади
+Comment[uz]=Seans nolga teng boʻlmagan holat bilan tugadi
+Comment[uz@cyrillic]=Сеанс нолга тенг бўлмаган ҳолат билан тугади
 Comment[wa]=Ene session a moussî foû avou on statut nén zero
 Comment[x-test]=xxA session has exited with non-zero statusxx
 Comment[zh_CN]=会话以非零状态退出
