@@ -553,7 +553,12 @@ bool ColorSchemeManager::loadKDE3ColorScheme(const QString& filePath)
     scheme->setName(QFileInfo(file).baseName());
     file.close();
 
-    Q_ASSERT( !scheme->name().isEmpty() );
+    if (scheme->name().isEmpty())
+    {
+        kWarning() << "color scheme name is not valid.";
+        delete scheme;
+        return false;
+    }
     
     QFileInfo info(filePath);
 
