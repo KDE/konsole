@@ -424,11 +424,13 @@ ColorScheme* KDE3ColorSchemeReader::read()
 
         if ( line.startsWith("color") )
         {
-            readColorLine(line,scheme);
+            if (!readColorLine(line,scheme))
+                kWarning() << "Failed to read KDE 3 color scheme line" << line;
         }
         else if ( line.startsWith("title") )
         {
-            readTitleLine(line,scheme);
+            if (!readTitleLine(line,scheme))
+                kWarning() << "Failed to read KDE 3 color scheme title line" << line;
         }
         else
         {
@@ -439,12 +441,14 @@ ColorScheme* KDE3ColorSchemeReader::read()
 
     return scheme;
 }
-void KDE3ColorSchemeReader::readColorLine(const QString& line,ColorScheme* scheme)
+bool KDE3ColorSchemeReader::readColorLine(const QString& line,ColorScheme* scheme)
 {
     QStringList list = line.split(QChar(' '));
 
-    Q_ASSERT(list.count() == 7);
-    Q_ASSERT(list.first() == "color");
+    if (list.count() != 7)
+        return false;
+    if (list.first() != "color")
+        return false;
     
     int index = list[1].toInt();
     int red = list[2].toInt();
@@ -455,12 +459,13 @@ void KDE3ColorSchemeReader::readColorLine(const QString& line,ColorScheme* schem
 
     const int MAX_COLOR_VALUE = 255;
 
-    Q_ASSERT( index >= 0 && index < TABLE_COLORS );
-    Q_ASSERT( red >= 0 && red <= MAX_COLOR_VALUE );
-    Q_ASSERT( blue >= 0 && blue <= MAX_COLOR_VALUE );
-    Q_ASSERT( green >= 0 && green <= MAX_COLOR_VALUE );
-    Q_ASSERT( transparent == 0 || transparent == 1 );
-    Q_ASSERT( bold == 0 || bold == 1 );
+    if(     (index < 0 || index >= TABLE_COLORS )
+        ||  (red < 0 || red > MAX_COLOR_VALUE )
+        ||  (blue < 0 || blue > MAX_COLOR_VALUE )
+        ||  (green < 0 || green > MAX_COLOR_VALUE )
+        ||  (transparent != 0 && transparent != 1 )
+        ||  (bold != 0 && bold != 1)    )
+        return false;
 
     ColorEntry entry;
     entry.color = QColor(red,green,blue);
@@ -468,17 +473,21 @@ void KDE3ColorSchemeReader::readColorLine(const QString& line,ColorScheme* schem
     entry.bold = ( bold != 0 );
 
     scheme->setColorTableEntry(index,entry);
+    return true;
 }
-void KDE3ColorSchemeReader::readTitleLine(const QString& line,ColorScheme* scheme)
+bool KDE3ColorSchemeReader::readTitleLine(const QString& line,ColorScheme* scheme)
 {
-    Q_ASSERT( line.startsWith("title") );
+    if( !line.startsWith("title") )
+        return false;
 
     int spacePos = line.indexOf(' ');
-    Q_ASSERT( spacePos != -1 );
+    if( spacePos == -1 )
+        return false;
 
     QString description = line.mid(spacePos+1);
 
     scheme->setDescription(i18n(description.toUtf8()));
+    return true;
 }
 ColorSchemeManager::ColorSchemeManager()
     : _haveLoadedAll(false)

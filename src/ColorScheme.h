@@ -237,8 +237,8 @@ public:
 private:
     // reads a line from the file specifying a colour palette entry
     // format is: color [index] [red] [green] [blue] [transparent] [bold]
-    void readColorLine(const QString& line , ColorScheme* scheme);
-    void readTitleLine(const QString& line , ColorScheme* scheme);
+    bool readColorLine(const QString& line , ColorScheme* scheme);
+    bool readTitleLine(const QString& line , ColorScheme* scheme);
 
     QIODevice* _device;
 };
