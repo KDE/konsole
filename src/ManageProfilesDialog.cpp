@@ -361,7 +361,7 @@ bool FavoriteItemDelegate::editorEvent(QEvent* event,QAbstractItemModel*,
      {
          Profile::Ptr profile = index.data(ManageProfilesDialog::ProfileKeyRole).value<Profile::Ptr>();
          const bool isFavorite = !SessionManager::instance()->findFavorites().contains(profile);
-                                                
+                                             
         SessionManager::instance()->setFavorite(profile,
                                             isFavorite);
      }

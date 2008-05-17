@@ -70,6 +70,7 @@ bool Profile::isAvailable() const
 
 SessionManager::SessionManager()
     : _loadedAllProfiles(false)
+    , _loadedFavorites(false)
 {
     //map finished() signals from sessions
     _sessionMapper = new QSignalMapper(this);
@@ -505,7 +506,7 @@ void SessionManager::setDefaultProfile(Profile::Ptr info)
 }
 QSet<Profile::Ptr> SessionManager::findFavorites() 
 {
-    if (_favorites.isEmpty())
+    if (!_loadedFavorites)
         loadFavorites();
 
     return _favorites;
@@ -617,7 +618,9 @@ void SessionManager::loadFavorites()
           Profile::Ptr profile = loadProfile(unloadedFavoriteIter.next());
           if (profile)
               _favorites.insert(profile);
-    } 
+    }
+
+    _loadedFavorites = true;
 }
 void SessionManager::saveFavorites()
 {

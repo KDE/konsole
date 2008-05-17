@@ -327,7 +327,7 @@ private:
     QSet<Profile::Ptr> _favorites; // list of favorite profiles
 
     bool _loadedAllProfiles; // set to true after loadAllProfiles has been called
-
+    bool _loadedFavorites; // set to true after loadFavorites has been called
     QSignalMapper* _sessionMapper;
 };
 
