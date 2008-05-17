@@ -24,7 +24,6 @@
 #include <QtGui/QCheckBox>
 #include <QtGui/QBoxLayout>
 #include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
 #include <QtGui/QProgressBar>
 #include <QtGui/QKeyEvent>
 #include <QtCore/QTimer>
@@ -32,6 +31,7 @@
 
 // KDE
 #include <KColorScheme>
+#include <KLineEdit>
 #include <KLocale>
 #include <KIcon>
 
@@ -56,7 +56,8 @@ IncrementalSearchBar::IncrementalSearchBar(Features features , QWidget* parent)
     connect( close , SIGNAL(clicked()) , this , SIGNAL(closeClicked()) );
 
     QLabel* findLabel = new QLabel(i18n("Find:"),this);
-    _searchEdit = new QLineEdit(this);
+    _searchEdit = new KLineEdit(this);
+    _searchEdit->setClearButtonShown(true);
     _searchEdit->installEventFilter(this);
     _searchEdit->setObjectName("search-edit");
     _searchEdit->setToolTip( i18n("Enter the text to search for here") );

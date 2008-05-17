@@ -25,9 +25,9 @@
 
 class QCheckBox;
 class QLabel;
-class QLineEdit;
 class QProgressBar;
 class QTimer;
+class KLineEdit;
 
 namespace Konsole
 {
@@ -183,7 +183,7 @@ private:
     QCheckBox* _matchRegExpBox;
     QCheckBox* _highlightBox;
 
-    QLineEdit* _searchEdit;
+    KLineEdit* _searchEdit;
     QLabel* _continueLabel;
     QProgressBar* _progress;
 
