@@ -190,8 +190,8 @@ public:
 		 * currently active session. */
         StartInCurrentSessionDir,
 
-        /** (bool) Whether a 'New Tab' button should be shown on the tab bar */
-        ShowNewTabButton
+        /** (bool) Whether a 'New Tab' and 'Close Tab' buttons should be shown on the tab bar */
+        ShowNewAndCloseTabButtons
     };
 
     /** 

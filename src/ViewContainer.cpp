@@ -615,15 +615,22 @@ TabbedViewContainerV2::TabbedViewContainerV2(NavigationPosition position , QObje
     _stackWidget = new QStackedWidget();
     _tabBar = new ViewContainerTabBar(_containerWidget,this);
     _tabBar->setDrawBase(true);
+
+    const int cornerButtonWidth = 50;
     _newTabButton = new KPushButton(KIcon("tab-new"),QString(),_containerWidget);
     // The button width here is hard coded, it would be better to use the value from
     // the current style (see QTabWidget::setUpLayout())
-    _newTabButton->setFixedWidth(50);
+    _newTabButton->setFixedWidth(cornerButtonWidth);
     _newTabButton->setFlat(true);
     // new tab button is initially hidden, it will be shown when setFeatures() is called
     // with the QuickNewView flag enabled
     _newTabButton->setHidden(true);
    
+    _closeTabButton = new KPushButton(KIcon("tab-close"),QString(),_containerWidget);
+    _closeTabButton->setFixedWidth(cornerButtonWidth);
+    _closeTabButton->setFlat(true);
+    _closeTabButton->setHidden(true);
+
     connect( _tabBar , SIGNAL(currentChanged(int)) , this , SLOT(currentTabChanged(int)) );
     connect( _tabBar , SIGNAL(tabDoubleClicked(int)) , this , SLOT(tabDoubleClicked(int)) );
     connect( _tabBar , SIGNAL(newTabRequest()) , this , SIGNAL(newViewRequest()) );
@@ -633,6 +640,7 @@ TabbedViewContainerV2::TabbedViewContainerV2(NavigationPosition position , QObje
 	connect( _tabBar , SIGNAL(initiateDrag(int)) , this , SLOT(startTabDrag(int)) );
 
     connect( _newTabButton , SIGNAL(clicked()) , this , SIGNAL(newViewRequest()) );
+    connect( _closeTabButton , SIGNAL(clicked()) , this , SLOT(closeCurrentTab()) );
 
     _layout = new TabbedViewContainerV2Layout;
     _layout->setSpacing(0);
@@ -642,7 +650,7 @@ TabbedViewContainerV2::TabbedViewContainerV2(NavigationPosition position , QObje
     _tabBarLayout->setMargin(0);
     _tabBarLayout->addWidget(_newTabButton);
     _tabBarLayout->addWidget(_tabBar);
-   
+    _tabBarLayout->addWidget(_closeTabButton); 
     _tabBarSpacer = new QSpacerItem(0,TabBarSpace);
 
     _layout->addWidget(_stackWidget);
@@ -667,11 +675,15 @@ TabbedViewContainerV2::TabbedViewContainerV2(NavigationPosition position , QObje
 void TabbedViewContainerV2::setNewViewMenu(QMenu* menu)
 { _newTabButton->setDelayedMenu(menu); }
 ViewContainer::Features TabbedViewContainerV2::supportedFeatures() const
-{ return QuickNewView; }
+{ return QuickNewView|QuickCloseView; }
 void TabbedViewContainerV2::setFeatures(Features features)
 {
     ViewContainer::setFeatures(features);
 
+    const bool tabBarVisible = _tabBar->isVisible();
+    _newTabButton->setVisible(tabBarVisible && (features & QuickNewView));
+    _closeTabButton->setVisible(tabBarVisible && (features & QuickCloseView));
+#if 0
     if (features & QuickNewView) 
     {
         _newTabButton->setHidden(false);
@@ -681,9 +693,27 @@ void TabbedViewContainerV2::setFeatures(Features features)
         _newTabButton->setHidden(true);
 
     if (features & QuickCloseView)
+    {
+        _closeTabButton->setHidden(false);
+        _closeTabButton->show();
+    }
+    else
+        _closeTabButton->setHidden(true);
+#endif
+#if 0
+    if (features & QuickCloseView)
         _tabBar->setCloseButtonEnabled(true);
     else
         _tabBar->setCloseButtonEnabled(false);
+#endif
+
+}
+void TabbedViewContainerV2::closeCurrentTab()
+{
+    if (_stackWidget->currentIndex() != -1)
+    {
+        closeTab(_stackWidget->currentIndex());
+    }
 }
 void TabbedViewContainerV2::closeTab(int tab)
 {
@@ -695,7 +725,8 @@ void TabbedViewContainerV2::closeTab(int tab)
 void TabbedViewContainerV2::setTabBarVisible(bool visible)
 {
     _tabBar->setVisible(visible);
-    _newTabButton->setVisible(visible);
+    _newTabButton->setVisible(visible && (features() & QuickNewView));
+    _closeTabButton->setVisible(visible && (features() & QuickCloseView));
     if ( visible )
     {
         _tabBarSpacer->changeSize(0,TabBarSpace);

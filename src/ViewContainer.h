@@ -227,7 +227,7 @@ public:
         /** Provides a button which can be clicked to create new views quickly.
          * When the button is clicked, a newViewRequest() signal is emitted. */
         QuickNewView = 1,
-        /** Provides a button or buttons which can be clicked to close views quickly. */
+        /** Provides a button which can be clicked to close views quickly. */
         QuickCloseView = 2
     };
     Q_DECLARE_FLAGS(Features,Feature)
@@ -473,6 +473,7 @@ private slots:
     void updateActivity(ViewProperties* item);
     void currentTabChanged(int index);
 	void closeTab(int index);
+    void closeCurrentTab();
     void wheelScrolled(int delta);
    
     void tabDoubleClicked(int index);
@@ -490,6 +491,7 @@ private:
     TabbedViewContainerV2Layout* _layout;
     QHBoxLayout* _tabBarLayout;
     KPushButton* _newTabButton;
+    KPushButton* _closeTabButton;
 
     static const int TabBarSpace = 2;
 };

@@ -374,7 +374,7 @@
           <item row="3" column="0" colspan="2" >
            <widget class="QCheckBox" name="newTabButton" >
             <property name="text" >
-             <string>Show 'New Tab' button in tab bar</string>
+             <string>Show 'New Tab' and 'Close Tab' buttons in tab bar</string>
             </property>
            </widget>
           </item>

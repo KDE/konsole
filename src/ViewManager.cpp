@@ -584,7 +584,6 @@ ViewContainer* ViewManager::createContainer(const Profile::Ptr info)
         default:
             container = new StackedViewContainer(_viewSplitter);
     }
-    container->setFeatures(ViewContainer::QuickCloseView);
 
     // connect signals and slots
     connect( container , SIGNAL(viewAdded(QWidget*,ViewProperties*)) , _containerSignalMapper ,
@@ -715,7 +714,7 @@ void ViewManager::applyProfile(TerminalDisplay* view , const Profile::Ptr info,
         ViewContainer* container = _viewSplitter->activeContainer();
         int tabBarMode = info->property<int>(Profile::TabBarMode);
         int tabBarPosition = info->property<int>(Profile::TabBarPosition);
-        bool showNewTabButton = info->property<int>(Profile::ShowNewTabButton);
+        bool showNewCloseButtons = info->property<int>(Profile::ShowNewAndCloseTabButtons);
 
         if ( tabBarMode == Profile::AlwaysHideTabBar )
             container->setNavigationDisplayMode(ViewContainer::AlwaysHideNavigation);
@@ -734,14 +733,15 @@ void ViewManager::applyProfile(TerminalDisplay* view , const Profile::Ptr info,
         if ( container->supportedNavigationPositions().contains(position) )
             container->setNavigationPosition(position);
        
-        if (showNewTabButton && 
-            (container->supportedFeatures() & ViewContainer::QuickNewView))
+        if (showNewCloseButtons)
         {
-            container->setFeatures(container->features() | ViewContainer::QuickNewView);
+            container->setFeatures(container->features() 
+                               | ViewContainer::QuickNewView | ViewContainer::QuickCloseView);
             container->setNewViewMenu(createNewViewMenu());
         }
         else
-            container->setFeatures(container->features() & ~ViewContainer::QuickNewView);
+            container->setFeatures(container->features() 
+                            & ~ViewContainer::QuickNewView & ~ViewContainer::QuickCloseView);
     }
 
     // load colour scheme

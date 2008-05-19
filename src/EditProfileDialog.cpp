@@ -280,7 +280,7 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr info)
                                                       << i18n("Above Terminal Displays") );
 
     _ui->tabBarPositionCombo->setCurrentIndex(tabPosition);
-    _ui->newTabButton->setChecked(info->property<bool>(Profile::ShowNewTabButton));
+    _ui->newTabButton->setChecked(info->property<bool>(Profile::ShowNewAndCloseTabButtons));
 
     // signals and slots
     connect( _ui->tabBarVisibilityCombo , SIGNAL(activated(int)) , this , 
@@ -309,7 +309,7 @@ void EditProfileDialog::setupTabsPage(const Profile::Ptr info)
            this , SLOT(insertRemoteTabTitleText(const QString&)) ); 
 }
 void EditProfileDialog::showNewTabButton(bool show)
-{ _tempProfile->setProperty(Profile::ShowNewTabButton,show); }
+{ _tempProfile->setProperty(Profile::ShowNewAndCloseTabButtons,show); }
 void EditProfileDialog::tabBarVisibilityChanged(int newValue)
 {
     _tempProfile->setProperty( Profile::TabBarMode , newValue );
