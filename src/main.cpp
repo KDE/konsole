@@ -48,6 +48,7 @@ void getDisplayInformation(Display*& display , Visual*& visual , Colormap& color
 // Konsole
 void fillAboutData(KAboutData& aboutData);
 void fillCommandLineOptions(KCmdLineOptions& options);
+bool useTransparency();
 
 // ***
 // 
@@ -88,9 +89,8 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
     {
         exit(0);
     }
-#ifdef Q_WS_X11
-	if ( KWindowSystem::compositingActive() && 
-		 KCmdLineArgs::parsedArgs()->isSet("transparency") ) 
+#ifdef Q_WS_X11 
+	if ( useTransparency() ) 
 	{
 		Display* display = 0;
 		Visual* visual = 0;
@@ -108,7 +108,13 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
     	return app.exec();
 	}   
 }
-
+bool useTransparency()
+{
+    KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
+    bool compositingAvailable = KWindowSystem::compositingActive() ||
+                                args->isSet("force-transparency");
+    return compositingAvailable && args->isSet("transparency");
+}
 void fillCommandLineOptions(KCmdLineOptions& options)
 {
     options.add("profile <file>", ki18n("Name of profile to use for new Konsole instance"));
@@ -121,6 +127,7 @@ void fillCommandLineOptions(KCmdLineOptions& options)
     options.add("workdir <dir>",   ki18n("Set the initial working directory of the new tab "
                                            "or window to 'dir'"));
 	options.add("notransparency",ki18n("Disable transparent backgrounds, even if the system supports them."));
+    options.add("force-transparency",ki18n("Try to enable transparency, even if the system does not appear to support it."));
 	options.add("hold");
 	options.add("noclose",ki18n("Do not close the initial session automatically when it ends."));
     // TODO - Document this option more clearly
