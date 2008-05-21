@@ -714,7 +714,7 @@ void ViewManager::applyProfile(TerminalDisplay* view , const Profile::Ptr info,
         ViewContainer* container = _viewSplitter->activeContainer();
         int tabBarMode = info->property<int>(Profile::TabBarMode);
         int tabBarPosition = info->property<int>(Profile::TabBarPosition);
-        bool showNewCloseButtons = info->property<int>(Profile::ShowNewAndCloseTabButtons);
+        bool showNewCloseButtons = info->property<bool>(Profile::ShowNewAndCloseTabButtons);
 
         if ( tabBarMode == Profile::AlwaysHideTabBar )
             container->setNavigationDisplayMode(ViewContainer::AlwaysHideNavigation);

@@ -680,33 +680,9 @@ void TabbedViewContainerV2::setFeatures(Features features)
 {
     ViewContainer::setFeatures(features);
 
-    const bool tabBarVisible = _tabBar->isVisible();
-    _newTabButton->setVisible(tabBarVisible && (features & QuickNewView));
-    _closeTabButton->setVisible(tabBarVisible && (features & QuickCloseView));
-#if 0
-    if (features & QuickNewView) 
-    {
-        _newTabButton->setHidden(false);
-        _newTabButton->show();
-    }
-    else
-        _newTabButton->setHidden(true);
-
-    if (features & QuickCloseView)
-    {
-        _closeTabButton->setHidden(false);
-        _closeTabButton->show();
-    }
-    else
-        _closeTabButton->setHidden(true);
-#endif
-#if 0
-    if (features & QuickCloseView)
-        _tabBar->setCloseButtonEnabled(true);
-    else
-        _tabBar->setCloseButtonEnabled(false);
-#endif
-
+    const bool tabBarHidden = _tabBar->isHidden();
+    _newTabButton->setVisible(!tabBarHidden && (features & QuickNewView));
+    _closeTabButton->setVisible(!tabBarHidden && (features & QuickCloseView));
 }
 void TabbedViewContainerV2::closeCurrentTab()
 {
