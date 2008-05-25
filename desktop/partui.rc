@@ -1,11 +1,11 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="konsolepart" version="1">
+<kpartgui name="konsolepart" version="2">
     <Menu name="session-popup-menu">
         <Action name="copy"/>
         <Action name="paste"/>
     	<Menu name="history">
-		<text>Scrollback</text>	
+		<text>S&amp;crollback</text>	
         	<Action name="save-history" group="session-history-operations"/>
         	<Separator group="session-history-operations"/>
         	<Action name="history-options" group="session-history-operations"/>
@@ -23,7 +23,7 @@
         <Action name="close-session"/>
     </Menu>
     <Menu name="change-profile">
-        <text>Change Profile</text>
+        <text>&amp;Change Profile</text>
         <ActionList name="profile-list" />
     </Menu>
     

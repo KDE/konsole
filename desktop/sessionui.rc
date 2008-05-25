@@ -1,6 +1,6 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="session" version="1">
+<kpartgui name="session" version="2">
     <MenuBar>
         <Menu name="file">
             <Action name="open-browser" group="session-operations"/>
@@ -58,7 +58,7 @@
         <Action name="close-session"/>
     </Menu>
     <Menu name="change-profile">
-        <text>Change Profile</text>
+        <text>&amp;Change Profile</text>
         <ActionList name="profile-list" />
     </Menu>
 </kpartgui>
