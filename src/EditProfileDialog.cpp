@@ -594,11 +594,9 @@ void EditProfileDialog::unpreview(int property)
 void EditProfileDialog::delayedPreview(int property , const QVariant& value)
 {
     _delayedPreviewProperties.insert(property,value); 
-    QTimer* timer = new QTimer(this);
-    timer->setSingleShot(true);
 
     _delayedPreviewTimer->stop();
-    _delayedPreviewTimer->start(300);    
+    _delayedPreviewTimer->start(300);
 }
 void EditProfileDialog::delayedPreviewActivate()
 {
@@ -615,7 +613,7 @@ void EditProfileDialog::preview(int property , const QVariant& value)
 {
     QHash<Profile::Property,QVariant> map;
     map.insert((Profile::Property)property,value);
-    
+
     _delayedPreviewProperties.remove(property);
 
     const Profile::Ptr original = lookupProfile();
