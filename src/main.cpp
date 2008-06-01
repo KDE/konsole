@@ -48,16 +48,12 @@ void getDisplayInformation(Display*& display , Visual*& visual , Colormap& color
 // Konsole
 void fillAboutData(KAboutData& aboutData);
 void fillCommandLineOptions(KCmdLineOptions& options);
-bool useTransparency();
+bool useTransparency();     // returns true if transparency should be enabled
+bool forceNewProcess();     // returns true if new instance should use a new
+                            // process (instead of re-using an existing one)
 
 // ***
-// 
 // Entry point into the Konsole terminal application.  
-//
-// If another Konsole instance
-// is already executing then the existing instance is asked to create a new main
-// window and the current process returns immediately.
-//
 // ***
 extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
 {
@@ -75,16 +71,12 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
     KCmdLineArgs::addCmdLineOptions(options);
     KUniqueApplication::addCmdLineOptions();
 
-	// when starting Konsole from a terminal, a new process must be used 
-	// so that the current environment is propagated into the shells of the new
-	// Konsole and any debug output or warnings from Konsole are written to
-	// the current terminal
-	KUniqueApplication::StartFlags startFlags;
-	if (isatty(1))
+    KUniqueApplication::StartFlags startFlags;
+	if (forceNewProcess())
 		startFlags = KUniqueApplication::NonUniqueInstance;
 
     // create a new application instance if there are no running Konsole instances,
-    // otherwise inform the existing Konsole instance and exit
+    // otherwise inform the existing Konsole process and exit
     if ( !KUniqueApplication::start(startFlags) )
     {
         exit(0);
@@ -107,6 +99,15 @@ extern "C" int KDE_EXPORT kdemain(int argc,char** argv)
     	Application app;
     	return app.exec();
 	}   
+}
+bool forceNewProcess()
+{
+    // when starting Konsole from a terminal, a new process must be used 
+	// so that the current environment is propagated into the shells of the new
+	// Konsole and any debug output or warnings from Konsole are written to
+	// the current terminal
+    KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
+    return isatty(1) && !args->isSet("new-tab");
 }
 bool useTransparency()
 {
