@@ -897,6 +897,7 @@
              <string>Allow the output to be suspended by pressing Ctrl+S</string>
             </property>
             <property name="text" >
+             <!-- STRINGFREEZE - Remove extra space after 'Ctrl+S' !-->
              <string>Enable flow control using Ctrl+S , Ctrl+Q</string>
             </property>
            </widget>
