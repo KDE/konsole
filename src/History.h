@@ -326,12 +326,14 @@ protected:
 
 class HistoryTypeBuffer : public HistoryType
 {
+    friend class HistoryScrollBuffer;
+
 public:
   HistoryTypeBuffer(unsigned int nbLines);
-  
+   
   virtual bool isEnabled() const;
   virtual int maximumLineCount() const;
-
+  
   virtual HistoryScroll* scroll(HistoryScroll *) const;
 
 protected:

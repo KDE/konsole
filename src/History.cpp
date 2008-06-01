@@ -393,6 +393,7 @@ void HistoryScrollBuffer::setMaxNbLines(unsigned int lineCount)
     delete[] oldBuffer;
 
     _wrappedLine.resize(lineCount);
+    dynamic_cast<HistoryTypeBuffer*>(m_histType)->m_nbLines = lineCount;
 }
 
 int HistoryScrollBuffer::bufferIndex(int lineNumber)
