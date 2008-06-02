@@ -795,16 +795,25 @@ void TerminalDisplay::scrollImage(int lines , const QRect& screenWindowRegion)
 	// to get the correct (newly exposed) part of the widget repainted.
 	//
 	// The right edge must be before the the left edge of the scroll bar to 
-	// avoid triggering a repaint of the entire widget.  
+	// avoid triggering a repaint of the entire widget, the distance is 
+    // given by SCROLLBAR_CONTENT_GAP
 	//
 	// Set the QT_FLUSH_PAINT environment variable to '1' before starting the
 	// application to monitor repainting.
 	//
 	int scrollBarWidth = _scrollBar->isHidden() ? 0 : _scrollBar->width();
+    const int SCROLLBAR_CONTENT_GAP = 1;
     QRect scrollRect;
-	scrollRect.setLeft(0);
-	scrollRect.setRight(width() - scrollBarWidth - 1);
-
+    if ( _scrollbarLocation == ScrollBarLeft )
+    {
+        scrollRect.setLeft(scrollBarWidth+SCROLLBAR_CONTENT_GAP);
+        scrollRect.setRight(width());
+    }
+    else
+    {
+	    scrollRect.setLeft(0);
+	    scrollRect.setRight(width() - scrollBarWidth - SCROLLBAR_CONTENT_GAP);
+    }
     void* firstCharPos = &_image[ region.top() * this->_columns ];
     void* lastCharPos = &_image[ (region.top() + abs(lines)) * this->_columns ];
 
