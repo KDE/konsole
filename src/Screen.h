@@ -85,13 +85,25 @@ public:
     // VT100/2 Operations 
     // Cursor Movement
     
-    /** Move the cursor up by @p n lines. */
+    /** 
+     * Move the cursor up by @p n lines.  The cursor will stop at the 
+     * top margin.
+     */
     void cursorUp    (int n);
-    /** Move the cursor down by @p n lines. */
+    /** 
+     * Move the cursor down by @p n lines.  The cursor will stop at the
+     * bottom margin.
+     */
     void cursorDown  (int n);
-    /** Move the cursor to the left by @p n columns. */
+    /** 
+     * Move the cursor to the left by @p n columns.
+     * The cursor will stop at the first column.
+     */
     void cursorLeft  (int n);
-    /** Move the cursor to the right by @p n columns. */
+    /** 
+     * Move the cursor to the right by @p n columns.
+     * The cursor will stop at the right-most column.
+     */
     void cursorRight (int n);
     /** Position the cursor on line @p y. */
     void setCursorY  (int y);
@@ -128,7 +140,7 @@ public:
     void NewLine     ();
     /**
      * Moves the cursor down one line and positions it at the beginning
-     * of the line.
+     * of the line.  Equivalent to calling Return() followed by index()
      */
     void NextLine    ();
 
@@ -302,7 +314,9 @@ public:
     /** Returns the line which the cursor is positioned on. */
     int  getCursorY() const;
    
-	/** TODO Document me */ 
+	/** Clear the entire screen and move the cursor to the home position.
+     * Equivalent to calling clearEntireScreen() followed by home().
+     */
 	void clear();
     /** 
      * Sets the position of the cursor to the 'home' position at the top-left
@@ -350,8 +364,9 @@ public:
      * existing lines are not truncated.  This prevents characters from being lost
      * if the terminal display is resized smaller and then larger again.
      *
-     * (note that in versions of Konsole prior to KDE 4, existing lines were
-     *  truncated when making the screen image smaller)
+     * The top and bottom margins are reset to the top and bottom of the new 
+     * screen size.  Tab stops are also reset and the current selection is
+     * cleared.
      */
     void resizeImage(int new_lines, int new_columns);
     
@@ -565,9 +580,12 @@ private:
     //move screen image between 'sourceBegin' and 'sourceEnd' to 'dest'.
     //the parameters are specified as offsets from the start of the screen image.
     //the loc(x,y) macro can be used to generate these values from a column,line pair.
+    //
+    //NOTE: moveImage() can only move whole lines
     void moveImage(int dest, int sourceBegin, int sourceEnd);
-    
+    // scroll up 'i' lines in current region, clearing the bottom 'i' lines 
     void scrollUp(int from, int i);
+    // scroll down 'i' lines in current region, clearing the top 'i' lines
     void scrollDown(int from, int i);
 
     void addHistLine();

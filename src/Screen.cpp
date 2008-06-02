@@ -122,12 +122,6 @@ Screen::~Screen()
     `columns-1' and `lines-1'.
 */
 
-/*!
-    Move the cursor up.
-
-    The cursor will not be moved beyond the top margin.
-*/
-
 void Screen::cursorUp(int n)
 //=CUU
 {
@@ -136,12 +130,6 @@ void Screen::cursorUp(int n)
   cuX = qMin(columns-1,cuX); // nowrap!
   cuY = qMax(stop,cuY-n);
 }
-
-/*!
-    Move the cursor down.
-
-    The cursor will not be moved beyond the bottom margin.
-*/
 
 void Screen::cursorDown(int n)
 //=CUD
@@ -152,12 +140,6 @@ void Screen::cursorDown(int n)
   cuY = qMin(stop,cuY+n);
 }
 
-/*!
-    Move the cursor left.
-
-    The cursor will not move beyond the first column.
-*/
-
 void Screen::cursorLeft(int n)
 //=CUB
 {
@@ -165,12 +147,6 @@ void Screen::cursorLeft(int n)
   cuX = qMin(columns-1,cuX); // nowrap!
   cuX = qMax(0,cuX-n);
 }
-
-/*!
-    Move the cursor left.
-
-    The cursor will not move beyond the rightmost column.
-*/
 
 void Screen::cursorRight(int n)
 //=CUF
@@ -226,13 +202,6 @@ void Screen::reverseIndex()
     cuY -= 1;
 }
 
-/*!
-    Move the cursor to the begin of the next line.
-
-    If cursor is on bottom margin, the region between the
-    actual top and bottom margin is scrolled up.
-*/
-
 void Screen::NextLine()
 //=NEL
 {
@@ -286,11 +255,6 @@ void Screen::deleteLines(int n)
   scrollUp(cuY,n);
 }
 
-/*! insert `n' lines at the cursor position.
-
-    The cursor is not moved by the operation.
-*/
-
 void Screen::insertLines(int n)
 {
   if (n == 0) n = 1; // Default
@@ -298,8 +262,6 @@ void Screen::insertLines(int n)
 }
 
 // Mode Operations -----------------------------------------------------------
-
-/*! Set a specific mode. */
 
 void Screen::setMode(int m)
 {
@@ -310,8 +272,6 @@ void Screen::setMode(int m)
   }
 }
 
-/*! Reset a specific mode. */
-
 void Screen::resetMode(int m)
 {
   currParm.mode[m] = false;
@@ -321,14 +281,10 @@ void Screen::resetMode(int m)
   }
 }
 
-/*! Save a specific mode. */
-
 void Screen::saveMode(int m)
 {
   saveParm.mode[m] = currParm.mode[m];
 }
-
-/*! Restore a specific mode. */
 
 void Screen::restoreMode(int m)
 {
@@ -364,20 +320,6 @@ void Screen::restoreCursor()
 /*                             Screen Operations                             */
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
-
-/*! Resize the screen image
-
-    The topmost left position is maintained, while lower lines
-    or right hand side columns might be removed or filled with
-    spaces to fit the new size.
-
-    The region setting is reset to the whole screen and the
-    tab positions reinitialized.
-
-    If the new image is narrower than the old image then text on lines
-    which extends past the end of the new image is preserved so that it becomes
-    visible again if the screen is later resized to make it larger.
-*/
 
 void Screen::resizeImage(int new_lines, int new_columns)
 {
@@ -501,16 +443,6 @@ void Screen::effectiveRendition()
     ef_fg.toggleIntensive();
 }
 
-/*!
-    returns the image.
-
-    Get the size of the image by \sa getLines and \sa getColumns.
-
-    NOTE that the image returned by this function must later be
-    freed.
-
-*/
-
 void Screen::copyFromHistory(Character* dest, int startLine, int count) const
 {
   Q_ASSERT( startLine >= 0 && count > 0 && startLine + count <= hist->getLines() );
@@ -632,9 +564,6 @@ QVector<LineProperty> Screen::getLineProperties( int startLine , int endLine ) c
   return result;
 }
 
-/*!
-*/
-
 void Screen::reset(bool clearScreen)
 {
     setMode(MODE_Wrap  ); saveMode(MODE_Wrap  );  // wrap at end of margin
@@ -653,9 +582,6 @@ void Screen::reset(bool clearScreen)
   if ( clearScreen )
     clear();
 }
-
-/*! Clear the entire screen and home the cursor.
-*/
 
 void Screen::clear()
 {
@@ -719,23 +645,11 @@ void Screen::initTabStops()
   for (int i = 0; i < columns; i++) tabstops[i] = (i%8 == 0 && i != 0);
 }
 
-/*!
-   This behaves either as IND (Screen::Index) or as NEL (Screen::NextLine)
-   depending on the NewLine Mode (LNM). This mode also
-   affects the key sequence returned for newline ([CR]LF).
-*/
-
 void Screen::NewLine()
 {
   if (getMode(MODE_NewLine)) Return();
   index();
 }
-
-/*! put `c' literally onto the screen at the current cursor position.
-
-    VT100 uses the convention to produce an automatic newline (am)
-    with the *first* character that would fall onto the next line (xenl).
-*/
 
 void Screen::checkSelection(int from, int to)
 {
@@ -856,11 +770,6 @@ void Screen::scrollUp(int n)
    scrollUp(tmargin, n);
 }
 
-/*! scroll up `n' lines within current region.
-    The `n' new lines are cleared.
-    \sa setRegion \sa scrollDown
-*/
-
 QRect Screen::lastScrolledRegion() const
 {
     return _lastScrolledRegion;
@@ -883,11 +792,6 @@ void Screen::scrollDown(int n)
    if (n == 0) n = 1; // Default
    scrollDown(tmargin, n);
 }
-
-/*! scroll down `n' lines within current region.
-    The `n' new lines are cleared.
-    \sa setRegion \sa scrollUp
-*/
 
 void Screen::scrollDown(int from, int n)
 {
@@ -943,22 +847,6 @@ int Screen::getCursorY() const
 
 // Erasing ---------------------------------------------------------------------
 
-/*! \section Erasing
-
-    This group of operations erase parts of the screen contents by filling
-    it with spaces colored due to the current rendition settings.
-
-    Althought the cursor position is involved in most of these operations,
-    it is never modified by them.
-*/
-
-/*! fill screen between (including) `loca' (start) and `loce' (end) with spaces.
-
-    This is an internal helper functions. The parameter types are internal
-    addresses of within the screen image and make use of the way how the
-    screen matrix is mapped to the image vector.
-*/
-
 void Screen::clearImage(int loca, int loce, char c)
 { 
   int scr_TL=loc(0,hist->getLines());
@@ -1003,18 +891,6 @@ void Screen::clearImage(int loca, int loce, char c)
         }
   }
 }
-
-/*! move image between (including) `sourceBegin' and `sourceEnd' to 'dest'.
-    
-    The 'dest', 'sourceBegin' and 'sourceEnd' parameters can be generated using
-    the loc(column,line) macro.
-
-NOTE:  moveImage() can only move whole lines.
-
-    This is an internal helper functions. The parameter types are internal
-    addresses of within the screen image and make use of the way how the
-    screen matrix is mapped to the image vector.
-*/
 
 void Screen::moveImage(int dest, int sourceBegin, int sourceEnd)
 {
@@ -1214,10 +1090,9 @@ void Screen::getSelectionEnd(int& column , int& line)
         line = cuY + getHistLines();
     } 
 }
-void Screen::setSelectionStart(/*const ScreenCursor& viewCursor ,*/ const int x, const int y, const bool mode)
+void Screen::setSelectionStart(const int x, const int y, const bool mode)
 {
-  sel_begin = loc(x,y); //+histCursor) ;
-
+  sel_begin = loc(x,y); 
   /* FIXME, HACK to correct for x too far to the right... */
   if (x == columns) sel_begin--;
 
@@ -1229,7 +1104,7 @@ void Screen::setSelectionStart(/*const ScreenCursor& viewCursor ,*/ const int x,
 void Screen::setSelectionEnd( const int x, const int y)
 {
   if (sel_begin == -1) return;
-  int l =  loc(x,y); // + histCursor);
+  int l =  loc(x,y); 
 
   if (l < sel_begin)
   {
@@ -1257,10 +1132,8 @@ bool Screen::isSelected( const int x,const int y) const
     }
     return ( x >= sel_Left % columns ) && ( x <= sel_Right % columns ) &&
            ( y >= sel_TL / columns ) && ( y <= sel_BR / columns );
-            //( y+histCursor >= sel_TL / columns ) && ( y+histCursor <= sel_BR / columns );
   }
   else {
-  //int pos = loc(x,y+histCursor);
   int pos = loc(x,y);
   return ( pos >= sel_TL && pos <= sel_BR );
   }
@@ -1328,7 +1201,6 @@ void Screen::writeSelectionToStream(TerminalCharacterDecoder* decoder ,
 			}
 	}	
 }
-
 
 int Screen::copyLineToStream(int line , 
                               int start, 
@@ -1426,21 +1298,6 @@ int Screen::copyLineToStream(int line ,
 
 		return count;
 }
-
-// Method below has been removed because of its reliance on 'histCursor'
-// and I want to restrict the methods which have knowledge of the scroll position
-// to just those which deal with selection and supplying final screen images.
-//
-/*void Screen::writeToStream(QTextStream* stream , TerminalCharacterDecoder* decoder) {
-  sel_begin = 0;
-  sel_BR = sel_begin;
-  sel_TL = sel_begin;
-  setSelectionEnd(columns-1,lines-1+hist->getLines()-histCursor);
-  
-  writeSelectionToStream(stream,decoder);
-  
-  clearSelection();
-}*/
 
 void Screen::writeToStream(TerminalCharacterDecoder* decoder, int from, int to)
 {
