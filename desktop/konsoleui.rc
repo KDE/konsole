@@ -1,8 +1,8 @@
 <!DOCTYPE kpartgui>
 
-<kpartgui name="konsole" version="2">
+<kpartgui name="konsole" version="1">
     <MenuBar>
-        <Menu name="file"><text>&amp;File</text>
+        <Menu name="file"><text>File</text>
             <Action name="new-tab" />
             <Action name="new-window" />
             <!-- <Action name="remote-connection" /> !-->
@@ -12,14 +12,14 @@
             <DefineGroup name="session-operations"/>
             <Action name="exit" />
         </Menu>
-        <Menu name="edit"><text>&amp;Edit</text>
+        <Menu name="edit"><text>Edit</text>
             <DefineGroup name="session-edit-operations" />
         </Menu>
-        <Menu name="history"><text>S&amp;crollback</text>
+        <Menu name="history"><text>Scrollback</text>
             <DefineGroup name="session-history-operations"/>            
         </Menu>
-        <Menu name="view"><text>&amp;View</text>
-            <Menu name="view-split"><text>Split &amp;View</text>
+        <Menu name="view"><text>View</text>
+            <Menu name="view-split"><text>Split View</text>
             <Action name="split-view-left-right"/>
             <Action name="split-view-top-bottom"/>
             <Action name="close-active-view"/>
@@ -37,14 +37,14 @@
             <DefineGroup name="session-view-operations"/> 
         </Menu>
         <Action name="bookmark"/>
-        <Menu name="settings"><text>&amp;Settings</text>
+        <Menu name="settings"><text>Settings</text>
             <DefineGroup name="session-settings"/>
             <Action name="manage-profiles"/>
             <Separator/>
             <Action name="configure-notifications"/>
             <Action name="configure-shortcuts"/>
         </Menu>
-        <Menu name="help"><text>&amp;Help</text>
+        <Menu name="help"><text>Help</text>
 
         </Menu>
     </MenuBar>
