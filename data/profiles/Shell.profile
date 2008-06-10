@@ -60,6 +60,7 @@ Comment[et]=Konsooli vaikimisi profiil
 Comment[fi]=Konsolen oletusprofiili
 Comment[fr]=Profile par défaut de Konsole
 Comment[ga]=Próifíl réamhshocraithe Konsole
+Comment[gl]=Perfil predeterminado de Konsole
 Comment[gu]=કોન્સોલ મૂળભૂત પ્રોફાઇલ
 Comment[hu]=Alapértelmezett Konsole-profil
 Comment[is]=Sjálfgefið sniðmát Konsole
