@@ -97,6 +97,11 @@ Vt102Emulation::Vt102Emulation()
   reset();
 }
 
+DECpar::DECpar()
+{
+    memset(&mode,false,MODE_total * sizeof(bool));
+}
+
 Vt102Emulation::~Vt102Emulation()
 {
 }
@@ -651,8 +656,8 @@ switch( N )
 
     case TY_CSI_PR('l',   2) :        resetMode      (MODE_Ansi     ); break; //VT100
 
-    case TY_CSI_PR('h',   3) : clearScreenAndSetColumns(132);          break; //VT100
-    case TY_CSI_PR('l',   3) : clearScreenAndSetColumns(80);           break; //VT100
+    case TY_CSI_PR('h',   3) :          setMode      (MODE_132Columns);break; //VT100
+    case TY_CSI_PR('l',   3) :        resetMode      (MODE_132Columns);break; //VT100
 
     case TY_CSI_PR('h',   4) : /* IGNORED: soft scrolling           */ break; //VT100
     case TY_CSI_PR('l',   4) : /* IGNORED: soft scrolling           */ break; //VT100
@@ -689,6 +694,9 @@ switch( N )
     case TY_CSI_PR('l',  25) :        resetMode      (MODE_Cursor   ); break; //VT100
     case TY_CSI_PR('s',  25) :         saveMode      (MODE_Cursor   ); break; //VT100
     case TY_CSI_PR('r',  25) :      restoreMode      (MODE_Cursor   ); break; //VT100
+
+    case TY_CSI_PR('h',  40) :         setMode(MODE_Allow132Columns ); break; // XTERM
+    case TY_CSI_PR('l',  40) :       resetMode(MODE_Allow132Columns ); break; // XTERM
 
     case TY_CSI_PR('h',  41) : /* IGNORED: obsolete more(1) fix     */ break; //XTERM
     case TY_CSI_PR('l',  41) : /* IGNORED: obsolete more(1) fix     */ break; //XTERM
@@ -1135,14 +1143,18 @@ void Vt102Emulation::restoreCursor()
 
 void Vt102Emulation::resetModes()
 {
-  resetMode(MODE_Mouse1000); saveMode(MODE_Mouse1000);
-  resetMode(MODE_Mouse1001); saveMode(MODE_Mouse1001);
-  resetMode(MODE_Mouse1002); saveMode(MODE_Mouse1002);
-  resetMode(MODE_Mouse1003); saveMode(MODE_Mouse1003);
+  // MODE_Allow132Columns is not reset here
+  // to match Xterm's behaviour (see Xterm's VTReset() function)
 
-  resetMode(MODE_AppScreen); saveMode(MODE_AppScreen);
+  resetMode(MODE_132Columns); saveMode(MODE_132Columns);
+  resetMode(MODE_Mouse1000);  saveMode(MODE_Mouse1000);
+  resetMode(MODE_Mouse1001);  saveMode(MODE_Mouse1001);
+  resetMode(MODE_Mouse1002);  saveMode(MODE_Mouse1002);
+  resetMode(MODE_Mouse1003);  saveMode(MODE_Mouse1003);
+
+  resetMode(MODE_AppScreen);  saveMode(MODE_AppScreen);
   // here come obsolete modes
-  resetMode(MODE_AppCuKeys); saveMode(MODE_AppCuKeys);
+  resetMode(MODE_AppCuKeys);  saveMode(MODE_AppCuKeys);
   resetMode(MODE_NewLine  );
     setMode(MODE_Ansi     );
 }
@@ -1152,6 +1164,12 @@ void Vt102Emulation::setMode(int m)
   _currParm.mode[m] = true;
   switch (m)
   {
+    case MODE_132Columns:
+        if (getMode(MODE_Allow132Columns))
+            clearScreenAndSetColumns(132);
+        else
+            _currParm.mode[m] = false;
+        break;
     case MODE_Mouse1000:
     case MODE_Mouse1001:
     case MODE_Mouse1002:
@@ -1175,6 +1193,10 @@ void Vt102Emulation::resetMode(int m)
   _currParm.mode[m] = false;
   switch (m)
   {
+    case MODE_132Columns:
+        if (getMode(MODE_Allow132Columns))
+            clearScreenAndSetColumns(80);
+        break;
     case MODE_Mouse1000 : 
     case MODE_Mouse1001 :
     case MODE_Mouse1002 :

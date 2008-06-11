@@ -35,21 +35,26 @@
 #include "Emulation.h"
 #include "Screen.h"
 
-#define MODE_AppScreen (MODES_SCREEN+0)
-#define MODE_AppCuKeys (MODES_SCREEN+1)
-#define MODE_AppKeyPad (MODES_SCREEN+2)
-#define MODE_Mouse1000 (MODES_SCREEN+3)
-#define MODE_Mouse1001 (MODES_SCREEN+4)
-#define MODE_Mouse1002 (MODES_SCREEN+5)
-#define MODE_Mouse1003 (MODES_SCREEN+6)
-#define MODE_Ansi      (MODES_SCREEN+7)
-#define MODE_total     (MODES_SCREEN+8)
+#define MODE_AppScreen       (MODES_SCREEN+0)   // Mode #1
+#define MODE_AppCuKeys       (MODES_SCREEN+1)   // Application cursor keys (DECCKM)
+#define MODE_AppKeyPad       (MODES_SCREEN+2)   // 
+#define MODE_Mouse1000       (MODES_SCREEN+3)   // Send mouse X,Y position on press and release
+#define MODE_Mouse1001       (MODES_SCREEN+4)   // Use Hilight mouse tracking
+#define MODE_Mouse1002       (MODES_SCREEN+5)   // Use cell motion mouse tracking
+#define MODE_Mouse1003       (MODES_SCREEN+6)   // Use all motion mouse tracking 
+#define MODE_Ansi            (MODES_SCREEN+7)   // Use US Ascii for character sets G0-G3 (DECANM) 
+#define MODE_132Columns      (MODES_SCREEN+8)   // 80 <-> 132 column mode switch (DECCOLM)
+#define MODE_Allow132Columns (MODES_SCREEN+9)   // Allow DECCOLM mode
+#define MODE_total           (MODES_SCREEN+10)
 
 namespace Konsole
 {
 
-struct DECpar
+class DECpar
 {
+public:
+  // Initializes all modes to false
+  DECpar();
   bool mode[MODE_total];
 };
 
@@ -135,6 +140,7 @@ private:
   // restores the boolean value of 'mode' 
   void restoreMode(int mode);
   // resets all modes
+  // (except MODE_Allow132Columns)
   void resetModes();
 
   void resetToken();
