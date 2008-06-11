@@ -136,6 +136,7 @@ void Session::openTeletype(int fd)
     connect( _emulation,SIGNAL(lockPtyRequest(bool)),_shellProcess,SLOT(lockPty(bool)) );
     connect( _emulation,SIGNAL(useUtf8Request(bool)),_shellProcess,SLOT(setUtf8Mode(bool)) );
     connect( _shellProcess,SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(done(int)) );
+    connect( _emulation,SIGNAL(imageSizeChanged(int,int)),this,SLOT(updateWindowSize(int,int)) );
 }
 
 WId Session::windowId() const
@@ -556,10 +557,6 @@ void Session::onViewSizeChange(int /*height*/, int /*width*/)
 {
   updateTerminalSize();
 }
-void Session::onEmulationSizeChange(int lines , int columns)
-{
-  setSize( QSize(lines,columns) );
-}
 
 void Session::updateTerminalSize()
 {
@@ -591,10 +588,13 @@ void Session::updateTerminalSize()
     if ( minLines > 0 && minColumns > 0 )
     {
         _emulation->setImageSize( minLines , minColumns );
-        _shellProcess->setWindowSize( minLines , minColumns );
     }
 }
-
+void Session::updateWindowSize(int lines, int columns)
+{
+    Q_ASSERT(lines > 0 && columns > 0);
+    _shellProcess->setWindowSize(lines,columns);
+}
 void Session::refresh()
 {
     // attempt to get the shell process to redraw the display
