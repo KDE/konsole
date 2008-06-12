@@ -212,13 +212,13 @@ void Emulation::receiveChar(int c)
   c &= 0xff;
   switch (c)
   {
-    case '\b'      : _currentScreen->BackSpace();                 break;
-    case '\t'      : _currentScreen->Tabulate();                  break;
-    case '\n'      : _currentScreen->NewLine();                   break;
-    case '\r'      : _currentScreen->Return();                    break;
+    case '\b'      : _currentScreen->backspace();                 break;
+    case '\t'      : _currentScreen->tab();                       break;
+    case '\n'      : _currentScreen->newLine();                   break;
+    case '\r'      : _currentScreen->toStartOfLine();             break;
     case 0x07      : emit stateSet(NOTIFYBELL);
                      break;
-    default        : _currentScreen->ShowCharacter(c);            break;
+    default        : _currentScreen->displayCharacter(c);         break;
   };
 }
 

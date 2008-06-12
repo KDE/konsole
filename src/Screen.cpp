@@ -202,10 +202,10 @@ void Screen::reverseIndex()
     cuY -= 1;
 }
 
-void Screen::NextLine()
+void Screen::nextLine()
 //=NEL
 {
-  Return(); index();
+  toStartOfLine(); index();
 }
 
 void Screen::eraseChars(int n)
@@ -589,7 +589,7 @@ void Screen::clear()
   home();
 }
 
-void Screen::BackSpace()
+void Screen::backspace()
 {
   cuX = qMin(columns-1,cuX); // nowrap!
   cuX = qMax(0,cuX-1);
@@ -601,7 +601,7 @@ void Screen::BackSpace()
   if (BS_CLEARS) screenLines[cuY][cuX].character = ' ';
 }
 
-void Screen::Tabulate(int n)
+void Screen::tab(int n)
 {
   // note that TAB is a format effector (does not write ' ');
   if (n == 0) n = 1;
@@ -612,7 +612,7 @@ void Screen::Tabulate(int n)
   }
 }
 
-void Screen::backTabulate(int n)
+void Screen::backtab(int n)
 {
   // note that TAB is a format effector (does not write ' ');
   if (n == 0) n = 1;
@@ -645,9 +645,9 @@ void Screen::initTabStops()
   for (int i = 0; i < columns; i++) tabstops[i] = (i%8 == 0 && i != 0);
 }
 
-void Screen::NewLine()
+void Screen::newLine()
 {
-  if (getMode(MODE_NewLine)) Return();
+  if (getMode(MODE_NewLine)) toStartOfLine();
   index();
 }
 
@@ -662,7 +662,7 @@ void Screen::checkSelection(int from, int to)
   }
 }
 
-void Screen::ShowCharacter(unsigned short c)
+void Screen::displayCharacter(unsigned short c)
 {
   // Note that VT100 does wrapping BEFORE putting the character.
   // This has impact on the assumption of valid cursor positions.
@@ -677,7 +677,7 @@ void Screen::ShowCharacter(unsigned short c)
   if (cuX+w > columns) {
     if (getMode(MODE_Wrap)) {
       lineProperties[cuY] = (LineProperty)(lineProperties[cuY] | LINE_WRAPPED);
-      NextLine();
+      nextLine();
     }
     else
       cuX = columns-w;
@@ -830,7 +830,7 @@ void Screen::home()
   cuY = 0;
 }
 
-void Screen::Return()
+void Screen::toStartOfLine()
 {
   cuX = 0;
 }

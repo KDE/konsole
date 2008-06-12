@@ -445,7 +445,7 @@ switch( N )
   switch (token)
   {
 
-    case TY_CHR(         ) : _currentScreen->ShowCharacter        (p         ); break; //UTF16
+    case TY_CHR(         ) : _currentScreen->displayCharacter     (p         ); break; //UTF16
 
     //             127 DEL    : ignored on input
 
@@ -458,12 +458,12 @@ switch( N )
     case TY_CTL('F'      ) : /* ACK: ignored                      */ break;
     case TY_CTL('G'      ) : emit stateSet(NOTIFYBELL);
                                 break; //VT100
-    case TY_CTL('H'      ) : _currentScreen->BackSpace            (          ); break; //VT100
-    case TY_CTL('I'      ) : _currentScreen->Tabulate             (          ); break; //VT100
-    case TY_CTL('J'      ) : _currentScreen->NewLine              (          ); break; //VT100
-    case TY_CTL('K'      ) : _currentScreen->NewLine              (          ); break; //VT100
-    case TY_CTL('L'      ) : _currentScreen->NewLine              (          ); break; //VT100
-    case TY_CTL('M'      ) : _currentScreen->Return               (          ); break; //VT100
+    case TY_CTL('H'      ) : _currentScreen->backspace            (          ); break; //VT100
+    case TY_CTL('I'      ) : _currentScreen->tab                  (          ); break; //VT100
+    case TY_CTL('J'      ) : _currentScreen->newLine              (          ); break; //VT100
+    case TY_CTL('K'      ) : _currentScreen->newLine              (          ); break; //VT100
+    case TY_CTL('L'      ) : _currentScreen->newLine              (          ); break; //VT100
+    case TY_CTL('M'      ) : _currentScreen->toStartOfLine        (          ); break; //VT100
 
     case TY_CTL('N'      ) :      useCharset           (         1); break; //VT100
     case TY_CTL('O'      ) :      useCharset           (         0); break; //VT100
@@ -476,9 +476,9 @@ switch( N )
     case TY_CTL('U'      ) : /* NAK: ignored                      */ break;
     case TY_CTL('V'      ) : /* SYN: ignored                      */ break;
     case TY_CTL('W'      ) : /* ETB: ignored                      */ break;
-    case TY_CTL('X'      ) : _currentScreen->ShowCharacter        (    0x2592); break; //VT100
+    case TY_CTL('X'      ) : _currentScreen->displayCharacter     (    0x2592); break; //VT100
     case TY_CTL('Y'      ) : /* EM : ignored                      */ break;
-    case TY_CTL('Z'      ) : _currentScreen->ShowCharacter        (    0x2592); break; //VT100
+    case TY_CTL('Z'      ) : _currentScreen->displayCharacter     (    0x2592); break; //VT100
     case TY_CTL('['      ) : /* ESC: cannot be seen here.         */ break;
     case TY_CTL('\\'     ) : /* FS : ignored                      */ break;
     case TY_CTL(']'      ) : /* GS : ignored                      */ break;
@@ -486,7 +486,7 @@ switch( N )
     case TY_CTL('_'      ) : /* US : ignored                      */ break;
 
     case TY_ESC('D'      ) : _currentScreen->index                (          ); break; //VT100
-    case TY_ESC('E'      ) : _currentScreen->NextLine             (          ); break; //VT100
+    case TY_ESC('E'      ) : _currentScreen->nextLine             (          ); break; //VT100
     case TY_ESC('H'      ) : _currentScreen->changeTabStop        (true      ); break; //VT100
     case TY_ESC('M'      ) : _currentScreen->reverseIndex         (          ); break; //VT100
     case TY_ESC('Z'      ) :      reportTerminalType   (          ); break;
@@ -635,14 +635,14 @@ switch( N )
     case TY_CSI_PN('D'      ) : _currentScreen->cursorLeft           (p         ); break; //VT100
     case TY_CSI_PN('G'      ) : _currentScreen->setCursorX           (p         ); break; //LINUX
     case TY_CSI_PN('H'      ) : _currentScreen->setCursorYX          (p,      q); break; //VT100
-    case TY_CSI_PN('I'      ) : _currentScreen->Tabulate             (p         ); break;
+    case TY_CSI_PN('I'      ) : _currentScreen->tab                  (p         ); break;
     case TY_CSI_PN('L'      ) : _currentScreen->insertLines          (p         ); break;
     case TY_CSI_PN('M'      ) : _currentScreen->deleteLines          (p         ); break;
     case TY_CSI_PN('P'      ) : _currentScreen->deleteChars          (p         ); break;
     case TY_CSI_PN('S'      ) : _currentScreen->scrollUp             (p         ); break;
     case TY_CSI_PN('T'      ) : _currentScreen->scrollDown           (p         ); break;
     case TY_CSI_PN('X'      ) : _currentScreen->eraseChars           (p         ); break;
-    case TY_CSI_PN('Z'      ) : _currentScreen->backTabulate         (p         ); break;
+    case TY_CSI_PN('Z'      ) : _currentScreen->backtab              (p         ); break;
     case TY_CSI_PN('c'      ) :      reportTerminalType   (          ); break; //VT100
     case TY_CSI_PN('d'      ) : _currentScreen->setCursorY           (p         ); break; //LINUX
     case TY_CSI_PN('f'      ) : _currentScreen->setCursorYX          (p,      q); break; //VT100

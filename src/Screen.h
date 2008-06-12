@@ -89,35 +89,35 @@ public:
      * Move the cursor up by @p n lines.  The cursor will stop at the 
      * top margin.
      */
-    void cursorUp    (int n);
+    void cursorUp(int n);
     /** 
      * Move the cursor down by @p n lines.  The cursor will stop at the
      * bottom margin.
      */
-    void cursorDown  (int n);
+    void cursorDown(int n);
     /** 
      * Move the cursor to the left by @p n columns.
      * The cursor will stop at the first column.
      */
-    void cursorLeft  (int n);
+    void cursorLeft(int n);
     /** 
      * Move the cursor to the right by @p n columns.
      * The cursor will stop at the right-most column.
      */
-    void cursorRight (int n);
+    void cursorRight(int n);
     /** Position the cursor on line @p y. */
-    void setCursorY  (int y);
+    void setCursorY(int y);
     /** Position the cursor at column @p x. */
-    void setCursorX  (int x);
+    void setCursorX(int x);
     /** Position the cursor at line @p y, column @p x. */
-    void setCursorYX (int y, int x);
+    void setCursorYX(int y, int x);
     /**
      * Sets the margins for scrolling the screen.
      *
      * @param topLine The top line of the new scrolling margin. 
      * @param bottomLine The bottom line of the new scrolling margin. 
      */
-    void setMargins  (int topLine , int bottomLine);
+    void setMargins(int topLine , int bottomLine);
     /** Returns the top line of the scrolling region. */ 
     int topMargin() const;
     /** Returns the bottom line of the scrolling region. */
@@ -137,19 +137,19 @@ public:
      * Equivalent to NextLine() if the MODE_NewLine flag is set
      * or index() otherwise. 
      */
-    void NewLine     ();
+    void newLine();
     /**
      * Moves the cursor down one line and positions it at the beginning
      * of the line.  Equivalent to calling Return() followed by index()
      */
-    void NextLine    ();
+    void nextLine();
 
     /** 
      * Move the cursor down one line.  If the cursor is on the bottom
      * line of the scrolling region (as returned by bottomMargin()) the
      * scrolling region is scrolled up by one line instead.
      */
-    void index       ();
+    void index();
     /**
      * Move the cursor up one line.  If the cursor is on the top line
      * of the scrolling region (as returned by topMargin()) the scrolling
@@ -169,25 +169,20 @@ public:
      * using setMargins()
      */
     void scrollDown(int n);
-    
     /** 
      * Moves the cursor to the beginning of the current line. 
      * Equivalent to setCursorX(0)
      */
-    void Return      ();
+    void toStartOfLine();
     /** 
      * Moves the cursor one column to the left and erases the character
      * at the new cursor position.
      */
-    void BackSpace   ();
-    /** 
-     * Moves the cursor @p n tab-stops to the right.
-     */
-    void Tabulate    (int n = 1);
-    /** 
-     * Moves the cursor @p n tab-stops to the left. 
-     */
-    void backTabulate(int n);
+    void backspace();
+    /** Moves the cursor @p n tab-stops to the right. */
+    void tab(int n = 1);
+    /** Moves the cursor @p n tab-stops to the left. */
+    void backtab(int n);
     
     // Editing
     
@@ -197,54 +192,54 @@ public:
      * cursor position with spaces.
      * If @p n is 0 then one character is erased. 
      */
-    void eraseChars  (int n);
+    void eraseChars(int n);
     /** 
      * Delete @p n characters beginning from the current cursor position. 
      * If @p n is 0 then one character is deleted. 
      */
-    void deleteChars (int n);
+    void deleteChars(int n);
     /**
      * Insert @p n blank characters beginning from the current cursor position.
      * The position of the cursor is not altered.  
      * If @p n is 0 then one character is inserted.
      */
-    void insertChars (int n);
+    void insertChars(int n);
     /** 
      * Removes @p n lines beginning from the current cursor position.
      * The position of the cursor is not altered.
      * If @p n is 0 then one line is removed.
      */
-    void deleteLines (int n);
+    void deleteLines(int n);
     /**
      * Inserts @p lines beginning from the current cursor position.
      * The position of the cursor is not altered.
      * If @p n is 0 then one line is inserted.
      */
-    void insertLines (int n);
+    void insertLines(int n);
     /** Clears all the tab stops. */
     void clearTabStops();
     /**  Sets or removes a tab stop at the cursor's current column. */ 
     void changeTabStop(bool set);
    
     /** Resets (clears) the specified screen @p mode. */
-    void resetMode   (int mode);
+    void resetMode(int mode);
     /** Sets (enables) the specified screen @p mode. */
-    void setMode     (int mode);
+    void setMode(int mode);
     /** 
      * Saves the state of the specified screen @p mode.  It can be restored
      * using restoreMode()
      */
-    void saveMode    (int mode);
+    void saveMode(int mode);
     /** Restores the state of a screen @p mode saved by calling saveMode() */
-    void restoreMode (int mode);
+    void restoreMode(int mode);
     /** Returns whether the specified screen @p mode is enabled or not .*/
-    bool getMode     (int mode) const;
+    bool getMode(int mode) const;
    
     /** 
      * Saves the current position and appearance (text color and style) of the cursor. 
      * It can be restored by calling restoreCursor() 
      */ 
-    void saveCursor  ();
+    void saveCursor();
     /** Restores the position and appearance of the cursor.  See saveCursor() */
     void restoreCursor();
    
@@ -268,7 +263,7 @@ public:
     void clearToBeginOfLine();
     
     /** Fills the entire screen with the letter 'E' */
-    void helpAlign   ();
+    void helpAlign();
        
     /** 
      * Enables the given @p rendition flag.  Rendition flags control the appearance 
@@ -276,7 +271,7 @@ public:
      *
      * @see Character::rendition
      */  
-    void setRendition  (int rendition);
+    void setRendition(int rendition);
     /**
      * Disables the given @p rendition flag.  Rendition flags control the appearance
      * of characters on the screen.
@@ -293,7 +288,7 @@ public:
      *
      * @see CharacterColor
      */
-    void setForeColor  (int space, int color);
+    void setForeColor(int space, int color);
     /**
      * Sets the cursor's background color.
      * @param space The color space used by the @p color argumnet.
@@ -302,7 +297,7 @@ public:
      *
      * @see CharacterColor
      */
-    void setBackColor  (int space, int color);
+    void setBackColor(int space, int color);
     /** 
      * Resets the cursor's color back to the default and sets the 
      * character's rendition flags back to the default settings.
@@ -353,7 +348,7 @@ public:
      * is inserted at the current cursor position, otherwise it will replace the 
      * character already at the current cursor position.  
      */ 
-    void ShowCharacter(unsigned short c);
+    void displayCharacter(unsigned short c);
     
     // Do composition with last shown character FIXME: Not implemented yet for KDE 4
     void compose(const QString& compose);
@@ -495,16 +490,18 @@ public:
 	 * @param property The attribute to set or clear
 	 * Possible properties are:
 	 * LINE_WRAPPED:	 Specifies that the line is wrapped.
-	 * LINE_DOUBLEWIDTH: Specifies that the characters in the current line should be double the normal width.
-	 * LINE_DOUBLEHEIGHT:Specifies that the characters in the current line should be double the normal height.
+	 * LINE_DOUBLEWIDTH: Specifies that the characters in the current line
+     *                   should be double the normal width.
+	 * LINE_DOUBLEHEIGHT:Specifies that the characters in the current line 
+     *                   should be double the normal height.
      *                   Double-height lines are formed of two lines containing the same characters,
-     *                   with both having the LINE_DOUBLEHEIGHT attribute.  This allows other parts of the 
-     *                   code to work on the assumption that all lines are the same height.
+     *                   with both having the LINE_DOUBLEHEIGHT attribute.
+     *                   This allows other parts of the code to work on the
+     *                   assumption that all lines are the same height.
 	 *
 	 * @param enable true to apply the attribute to the current line or false to remove it
 	 */
 	void setLineProperty(LineProperty property , bool enable);
-
 
     /** 
      * Returns the number of lines that the image has been scrolled up or down by,
