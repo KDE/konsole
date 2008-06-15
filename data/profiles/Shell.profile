@@ -85,6 +85,7 @@ Comment[sl]=Privzeti profil za Konzolo
 Comment[sr]=Подразумевани профил Конзоле
 Comment[sr@latin]=Podrazumevani profil Konsole
 Comment[sv]=Terminalens standardprofil
+Comment[tg]=Профили консоли стандартӣ
 Comment[th]=โพรไฟล์ปริยายของคอนโซล K
 Comment[tr]=Konsole öntanımlı profili
 Comment[uk]=Типовий профіль Konsole
