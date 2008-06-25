@@ -129,8 +129,7 @@ Comment[wa]=Cloke ki sone divins ene veyåve session
 Comment[x-test]=xxBell emitted within a visible sessionxx
 Comment[zh_CN]=可见会话中发生的响铃
 Comment[zh_TW]=可見工作階段中的響鈴行為
-Sound=KDE-Sys-App-Message.ogg
-Action=Sound
+Action=None
 
 [Event/BellInvisible]
 Name=Bell in Non-Visible Session
