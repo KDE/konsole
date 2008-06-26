@@ -65,13 +65,9 @@ namespace Konsole
  *      QString value = info->name(&ok);
  *
  *      if ( ok ) kDebug() << "process name - " << name;
- *
  *      int parentPid = info->parentPid(&ok);
- *
  *      if ( ok ) kDebug() << "parent process - " << parentPid;
- *
  *      int foregroundPid = info->foregroundColororegroundPid(&ok);
- *
  *      if ( ok ) kDebug() << "foreground process - " << foregroundPid;
  *   }
  * @endcode
@@ -203,7 +199,6 @@ protected:
      */ 
     explicit ProcessInfo(int pid , bool readEnvironment = false);
 
-
     /** 
      * This is called on construction to read the process state 
      * Subclasses should reimplement this function to provide
@@ -255,8 +250,6 @@ protected:
      */
     void addEnvironmentBinding(const QString& name , const QString& value);
 
-
-
 private:
     // takes a full directory path and returns a
     // shortened version suitable for display in 
@@ -285,7 +278,6 @@ private:
         CURRENT_DIR         = 64
     };
 
-
     char _fields; // a bitmap indicating which fields are valid
                   // used to set the "ok" parameters for the public
                   // accessor functions
@@ -303,7 +295,6 @@ private:
 
     QVector<QString> _arguments;
     QMap<QString,QString> _environment;
-
 
     static QSet<QString> commonDirNames();
     static QSet<QString> _commonDirNames;
@@ -340,20 +331,42 @@ public:
      * See ProcessInfo::newInstance()
      */
     explicit UnixProcessInfo(int pid,bool readEnvironment = false);
+
 protected:
-    // reads the /proc/<pid>/stat file to get status information
-    // about the process, also uses readEnvironment() and readArguments()
-    // to read other files in /proc/<pid>
+    /** 
+     * Implementation of ProcessInfo::readProcessInfo(); calls the
+     * four private methods below in turn.
+     */
     virtual bool readProcessInfo(int pid , bool readEnvironment);
 
 private:
-    bool readEnvironment(int pid);  // read the /proc/<pid/environ file
-                                    // to get environment bindings
-    bool readArguments(int pid);    // read the /proc/<pid>/cmdline file
-                                    // to get command-line arguments
+    /**
+     * Read the standard process information -- PID, parent PID, foreground PID.
+     * @param pid process ID to use
+     * @return true on success
+     */
+    virtual bool readProcInfo(int pid)=0;
 
-    bool readCurrentDir(int pid);   // read the /proc/<pid>/cwd symlink to
-                                    // get the current working directory of the process
+    /**
+     * Read the environment of the process. Sets _environment.
+     * @param pid process ID to use
+     * @return true on success
+     */
+    virtual bool readEnvironment(int pid)=0;
+
+    /**
+     * Determine what arguments were passed to the process. Sets _arguments.
+     * @param pid process ID to use
+     * @return true on success
+     */
+    virtual bool readArguments(int pid)=0;
+
+    /**
+     * Determine the current directory of the process.
+     * @param pid process ID to use
+     * @return true on success
+     */
+    virtual bool readCurrentDir(int pid)=0;
 };
 
 /** 

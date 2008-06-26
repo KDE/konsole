@@ -227,9 +227,11 @@ void ProcessInfo::setForegroundPid(int pid)
     _foregroundPid = pid;
     _fields |= FOREGROUND_PID;
 }
+
 QString ProcessInfo::currentDir(bool* ok) const
 {
-    *ok = _fields & CURRENT_DIR;
+    if (ok)
+        *ok = _fields & CURRENT_DIR;
 
     return _currentDir;
 }
@@ -254,103 +256,6 @@ void ProcessInfo::addEnvironmentBinding(const QString& name , const QString& val
     _environment.insert(name,value);
 }
 
-UnixProcessInfo::UnixProcessInfo(int pid,bool enableEnvironmentRead)
-    : ProcessInfo(pid,enableEnvironmentRead)
-{
-}
-
-bool UnixProcessInfo::readProcessInfo(int pid , bool enableEnvironmentRead)
-{
-    // indicies of various fields within the process status file which
-    // contain various information about the process
-    const int PARENT_PID_FIELD = 3;
-    const int PROCESS_NAME_FIELD = 1;
-    const int GROUP_PROCESS_FIELD = 7;
-    
-    QString parentPidString;
-    QString processNameString;
-    QString foregroundPidString;
-
-    // read process status file ( /proc/<pid/stat )
-    //
-    // the expected file format is a list of fields separated by spaces, using
-    // parenthesies to escape fields such as the process name which may itself contain
-    // spaces:
-    //
-    // FIELD FIELD (FIELD WITH SPACES) FIELD FIELD
-    //
-    QFile processInfo( QString("/proc/%1/stat").arg(pid) );
-    if ( processInfo.open(QIODevice::ReadOnly) )
-    {
-        QTextStream stream(&processInfo);
-        QString data = stream.readAll();
-
-        int stack = 0;
-        int field = 0;
-        int pos = 0;
-
-        while (pos < data.count())
-        {
-            QChar c = data[pos];
-
-            if ( c == '(' )
-                stack++;
-            else if ( c == ')' )
-                stack--;
-            else if ( stack == 0 && c == ' ' )
-                field++;
-            else
-            {
-                switch ( field )
-                {
-                    case PARENT_PID_FIELD:
-                        parentPidString.append(c);
-                        break;
-                    case PROCESS_NAME_FIELD:
-                        processNameString.append(c);
-                        break;
-                    case GROUP_PROCESS_FIELD:
-                        foregroundPidString.append(c);
-                        break;
-                }
-            }
-
-            pos++; 
-        }
-    }
-    else
-    {
-        setFileError( processInfo.error() ); 
-        return false;
-    }
-    
-    // check that data was read successfully
-    bool ok = false;
-    int foregroundPid = foregroundPidString.toInt(&ok);    
-    if (ok)
-        setForegroundPid(foregroundPid);
-
-    int parentPid = parentPidString.toInt(&ok);
-    if (ok)
-        setParentPid(parentPid);
-
-    if (!processNameString.isEmpty()) 
-        setName(processNameString);
-
-    readArguments(pid);
-    readCurrentDir(pid); 
-
-    if ( enableEnvironmentRead )
-    {
-        readEnvironment(pid);
-    }
-
-    // update object state
-    setPid(pid);
-
-    return true;
-}
-
 void ProcessInfo::setFileError( QFile::FileError error )
 {
     switch ( error )
@@ -366,14 +271,10 @@ void ProcessInfo::setFileError( QFile::FileError error )
     }
 }
 
-ProcessInfo* ProcessInfo::newInstance(int pid,bool enableEnvironmentRead)
-{
-#ifdef Q_OS_UNIX
-    return new UnixProcessInfo(pid,enableEnvironmentRead);
-#else
-    return new NullProcessInfo(pid,enableEnvironmentRead);
-#endif
-}
+//
+// ProcessInfo::newInstance() is way at the bottom so it can see all of the
+// implementations of the UnixProcessInfo abstract class.
+//
 
 NullProcessInfo::NullProcessInfo(int pid,bool enableEnvironmentRead)
     : ProcessInfo(pid,enableEnvironmentRead)
@@ -385,93 +286,300 @@ bool NullProcessInfo::readProcessInfo(int /*pid*/ , bool /*enableEnvironmentRead
     return false;
 }
 
-bool UnixProcessInfo::readArguments(int pid)
+UnixProcessInfo::UnixProcessInfo(int pid,bool enableEnvironmentRead)
+    : ProcessInfo(pid,enableEnvironmentRead)
 {
-    // read command-line arguments file found at /proc/<pid>/cmdline
-    // the expected format is a list of strings delimited by null characters,
-    // and ending in a double null character pair.
-
-    QFile argumentsFile( QString("/proc/%1/cmdline").arg(pid) );
-    if ( argumentsFile.open(QIODevice::ReadOnly) )
-    {
-        QTextStream stream(&argumentsFile);
-        QString data = stream.readAll();
-
-        QStringList argList = data.split( QChar('\0') );
-        
-        foreach ( const QString &entry , argList )
-        {
-            if (!entry.isEmpty())
-                addArgument(entry);
-        }    
-    }
-    else
-    {
-        setFileError( argumentsFile.error() );
-    }
-
-    return true;
 }
 
-bool UnixProcessInfo::readCurrentDir(int pid)
+bool UnixProcessInfo::readProcessInfo(int pid , bool enableEnvironmentRead)
 {
-    QFileInfo info( QString("/proc/%1/cwd").arg(pid) );
-
-    const bool readable = info.isReadable();
-
-    if ( readable && info.isSymLink() )
+    bool ok = readProcInfo(pid);
+    if (ok)
     {
-        setCurrentDir( info.symLinkTarget() );
-        return true;
-    }
-    else
-    {
-        if ( !readable )
-            setError( PermissionsError );
-        else
-            setError( UnknownError );
-        
-        return false;
-    }
-}
-
-bool UnixProcessInfo::readEnvironment(int pid)
-{
-    // read environment bindings file found at /proc/<pid>/environ
-    // the expected format is a list of KEY=VALUE strings delimited by null
-    // characters and ending in a double null character pair.
-
-    QFile environmentFile( QString("/proc/%1/environ").arg(pid) );
-    if ( environmentFile.open(QIODevice::ReadOnly) )
-    {
-        QTextStream stream(&environmentFile);
-        QString data = stream.readAll();
-
-        QStringList bindingList = data.split( QChar('\0') );
-   
-        foreach( const QString &entry , bindingList )
+        ok |= readArguments(pid);
+        ok |= readCurrentDir(pid);
+        if ( enableEnvironmentRead )
         {
-            QString name;
-            QString value;
-
-            int splitPos = entry.indexOf('=');
-
-            if ( splitPos != -1 )
-            {
-                name = entry.mid(0,splitPos);
-                value = entry.mid(splitPos+1,-1);
-
-                addEnvironmentBinding(name,value);  
-            }  
+            ok |= readEnvironment(pid);
         }
     }
-    else
+    return ok;
+}
+
+
+class LinuxProcessInfo : public UnixProcessInfo
+{
+public:
+    LinuxProcessInfo(int pid, bool env) :
+        UnixProcessInfo(pid,env)
     {
-        setFileError( environmentFile.error() );
     }
 
-    return true;
-}
+private:
+    virtual bool readProcInfo(int pid)
+    {
+        // indicies of various fields within the process status file which
+        // contain various information about the process
+        const int PARENT_PID_FIELD = 3;
+        const int PROCESS_NAME_FIELD = 1;
+        const int GROUP_PROCESS_FIELD = 7;
+
+        QString parentPidString;
+        QString processNameString;
+        QString foregroundPidString;
+
+        // read process status file ( /proc/<pid/stat )
+        //
+        // the expected file format is a list of fields separated by spaces, using
+        // parenthesies to escape fields such as the process name which may itself contain
+        // spaces:
+        //
+        // FIELD FIELD (FIELD WITH SPACES) FIELD FIELD
+        //
+        QFile processInfo( QString("/proc/%1/stat").arg(pid) );
+        if ( processInfo.open(QIODevice::ReadOnly) )
+        {
+            QTextStream stream(&processInfo);
+            QString data = stream.readAll();
+
+            int stack = 0;
+            int field = 0;
+            int pos = 0;
+
+            while (pos < data.count())
+            {
+                QChar c = data[pos];
+
+                if ( c == '(' )
+                    stack++;
+                else if ( c == ')' )
+                    stack--;
+                else if ( stack == 0 && c == ' ' )
+                    field++;
+                else
+                {
+                    switch ( field )
+                    {
+                        case PARENT_PID_FIELD:
+                            parentPidString.append(c);
+                            break;
+                        case PROCESS_NAME_FIELD:
+                            processNameString.append(c);
+                            break;
+                        case GROUP_PROCESS_FIELD:
+                            foregroundPidString.append(c);
+                            break;
+                    }
+                }
+
+                pos++;
+            }
+        }
+        else
+        {
+            setFileError( processInfo.error() );
+            return false;
+        }
+
+        // check that data was read successfully
+        bool ok = false;
+        int foregroundPid = foregroundPidString.toInt(&ok);
+        if (ok)
+            setForegroundPid(foregroundPid);
+
+        int parentPid = parentPidString.toInt(&ok);
+        if (ok)
+            setParentPid(parentPid);
+
+        if (!processNameString.isEmpty())
+            setName(processNameString);
+
+        // update object state
+        setPid(pid);
+
+        return ok;
+    }
+
+    virtual bool readArguments(int pid)
+    {
+        // read command-line arguments file found at /proc/<pid>/cmdline
+        // the expected format is a list of strings delimited by null characters,
+        // and ending in a double null character pair.
+
+        QFile argumentsFile( QString("/proc/%1/cmdline").arg(pid) );
+        if ( argumentsFile.open(QIODevice::ReadOnly) )
+        {
+            QTextStream stream(&argumentsFile);
+            QString data = stream.readAll();
+
+            QStringList argList = data.split( QChar('\0') );
+
+            foreach ( const QString &entry , argList )
+            {
+                if (!entry.isEmpty())
+                    addArgument(entry);
+            }
+        }
+        else
+        {
+            setFileError( argumentsFile.error() );
+        }
+
+        return true;
+    }
+
+    virtual bool readCurrentDir(int pid)
+    {
+        QFileInfo info( QString("/proc/%1/cwd").arg(pid) );
+
+        const bool readable = info.isReadable();
+
+        if ( readable && info.isSymLink() )
+        {
+            setCurrentDir( info.symLinkTarget() );
+            return true;
+        }
+        else
+        {
+            if ( !readable )
+                setError( PermissionsError );
+            else
+                setError( UnknownError );
+
+            return false;
+        }
+    }
+
+    virtual bool readEnvironment(int pid)
+    {
+        // read environment bindings file found at /proc/<pid>/environ
+        // the expected format is a list of KEY=VALUE strings delimited by null
+        // characters and ending in a double null character pair.
+
+        QFile environmentFile( QString("/proc/%1/environ").arg(pid) );
+        if ( environmentFile.open(QIODevice::ReadOnly) )
+        {
+            QTextStream stream(&environmentFile);
+            QString data = stream.readAll();
+
+            QStringList bindingList = data.split( QChar('\0') );
+
+            foreach( const QString &entry , bindingList )
+            {
+                QString name;
+                QString value;
+
+                int splitPos = entry.indexOf('=');
+
+                if ( splitPos != -1 )
+                {
+                    name = entry.mid(0,splitPos);
+                    value = entry.mid(splitPos+1,-1);
+
+                    addEnvironmentBinding(name,value);
+                }
+            }
+        }
+        else
+        {
+            setFileError( environmentFile.error() );
+        }
+
+        return true;
+    }
+} ;
+
+#ifdef Q_OS_SOLARIS
+    // The procfs structure definition requires off_t to be
+    // 32 bits, which only applies if FILE_OFFSET_BITS=32.
+    // Futz around here to get it to compile regardless,
+    // although some of the structure sizes might be wrong.
+    // Fortunately, the structures we actually use don't use
+    // off_t, and we're safe.
+    #if defined(_FILE_OFFSET_BITS) && (_FILE_OFFSET_BITS==64)
+        #undef _FILE_OFFSET_BITS
+        #include <procfs.h>
+    #endif
+#else
+    // On non-Solaris platforms, define a fake psinfo structure
+    // so that the SolarisProcessInfo class can be compiled
+    //
+    // That avoids the trap where you change the API and
+    // don't notice it in #ifdeffed platform-specific parts
+    // of the code.
+    struct psinfo {
+        int pr_ppid;
+        int pr_pgid;
+        char* pr_fname;
+        char* pr_psargs;
+    } ;
+    static const int PRARGSZ=1;
+#endif
+
+class SolarisProcessInfo : public UnixProcessInfo
+{
+public:
+    SolarisProcessInfo(int pid, bool readEnvironment) 
+    : UnixProcessInfo(pid,readEnvironment)
+    {
+    }
+private:
+    virtual bool readProcInfo(int pid)
+    {
+        QFile psinfo( QString("/proc/%1/psinfo").arg(pid) );
+        if ( psinfo.open( QIODevice::ReadOnly ) )
+        {
+            struct psinfo info;
+            if (psinfo.read((char *)&info,sizeof(info)) != sizeof(info))
+            {
+                return false;
+            }
+
+            setParentPid(info.pr_ppid);
+            setForegroundPid(info.pr_pgid);
+            setName(info.pr_fname);
+            setPid(pid);
+
+            // Bogus, because we're treating the arguments as one single string
+            info.pr_psargs[PRARGSZ-1]=0;
+            addArgument(info.pr_psargs);
+        }
+        return true;
+    }
+
+    virtual bool readArguments(int /*pid*/)
+    {
+        // Handled in readProcInfo()
+        return true;
+    }
+
+    virtual bool readEnvironment(int /*pid*/)
+    {
+        // Not supported in Solaris
+        return true;
+    }
+
+    virtual bool readCurrentDir(int pid)
+    {
+        QFileInfo info( QString("/proc/%1/path/cwd").arg(pid) );
+        const bool readable = info.isReadable();
+
+        if ( readable && info.isSymLink() )
+        {
+            setCurrentDir( info.symLinkTarget() );
+            return true;
+        }
+        else
+        {
+            if ( !readable )
+                setError( PermissionsError );
+            else
+                setError( UnknownError );
+
+            return false;
+        }
+    }
+} ;
 
 SSHProcessInfo::SSHProcessInfo(const ProcessInfo& process)
  : _process(process)
@@ -612,6 +720,14 @@ QString SSHProcessInfo::format(const QString& input) const
     return output;
 }
 
-
-
+ProcessInfo* ProcessInfo::newInstance(int pid,bool enableEnvironmentRead)
+{
+#ifdef Q_OS_LINUX
+    return new LinuxProcessInfo(pid,enableEnvironmentRead);
+#elif defined(Q_OS_SOLARIS)
+    return new SolarisProcessInfo(pid,enableEnvironmentRead);
+#else
+    return new NullProcessInfo(pid,enableEnvironmentRead);
+#endif
+}
 
